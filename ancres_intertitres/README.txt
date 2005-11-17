@@ -29,9 +29,12 @@ Utilisation : les intertitres seront calcules automatiquement. Pour afficher la 
 
 Note : si vous voulez afficher la table des matieres avant le #TEXTE, procedez de la facon suivante.
 
-[(#TEXTE|?{' ', ''})]
+[(#TEXTE|?{#NOTES,''}|is_array)]
 #TABLE_MATIERE
 #TEXTE
+#NOTES
+
+(l'appel de #TEXTE calcule la table et les notes. L'astuce permet aussi d'eviter l'affichage des notes en double)
 
 ChangeLog :
 
