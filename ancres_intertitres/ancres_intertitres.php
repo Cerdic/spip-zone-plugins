@@ -8,7 +8,7 @@
 // http://www.spip-contrib.net/spikini/VarianteContribAjouter-des-ID-aux-intertitres
 //
 function ancres_intertitres($texte) {
-	$regexp = "/{{{(.*?)}}}/";
+	$regexp = "/{{{[[:space:]]*(.+)[[:space:]]*}}}/";
 	$texte = preg_replace_callback($regexp, 'remplace_intertitre', $texte);
 	return $texte;
 }
@@ -46,12 +46,13 @@ function remplace_intertitre($matches) {
 //balise #TABLE_MATIERE
 //
 function balise_TABLE_MATIERE_dist($p) {
+	$p->code = "
+	compose_table_matiere(
+		'\t<li><a href=\"#@url@\">@titre@</a></li>\n',
+		'\n<ul>\n@texte@</ul>\n',
+		table_matiere(\"retour\")
+	)";
 	$p->statut = 'php';
-	$p->code = "compose_table_matiere(
-	'\t<li><a href=\"#@url@\">@titre@</a></li>\n',
-	'\n<ul>\n@texte@</ul>\n'," .
-	"table_matiere('retour')"
-	. ")";
 	return $p;
 }
 

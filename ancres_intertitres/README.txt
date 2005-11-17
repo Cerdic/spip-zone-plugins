@@ -27,6 +27,12 @@ $plugins[] = 'ancres'; //plugin d'exemple de la distribution de spip
 
 Utilisation : les intertitres seront calcules automatiquement. Pour afficher la table des matieres, ajouter la balise #TABLE_MATIERE dans votre squelette.
 
+Note : si vous voulez afficher la table des matieres avant le #TEXTE, procedez de la facon suivante.
+
+[(#TEXTE|?{' ', ''})]
+#TABLE_MATIERE
+#TEXTE
+
 ChangeLog :
 
 2005-11-17 : version initiale 0.1
