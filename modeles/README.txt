@@ -32,3 +32,12 @@ A quoi peut servir un modèle ?
 
 Voilà, ce n'est qu'un début ; on aurait aussi besoin de jolis CSS de "blocs flottants mais pas trop" pour donner envie :-)
 
+
+{{{Syntaxe ?}}}
+
+* La syntaxe wikipédia a l'air un peu compliquée, si j'en juge par l'exemple donné là :
+http://fr.wikipedia.org/wiki/Wikipédia:Modèles/Infobox#Fruit
+et le code "source" :
+http://fr.wikipedia.org/w/index.php?title=Wikipédia:Modèles/Infobox&action=edit&section=8
+
+* <breve1|squelette> ne devrait-il pas appeller modele_breve_squelette au lieu de modele_squelette ?
