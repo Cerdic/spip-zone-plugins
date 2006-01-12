@@ -1,10 +1,12 @@
 <?php
 
+include_ecrire("inc_boutons");
+
 function rien() {
 	global $truc;
 	include_ecrire('inc_presentation');
 
-	debut_page(_L("Le plugin rien, page officielle"), "documents", "rien");
+	debut_page_bis(_L("Le plugin rien, page officielle"), "documents", "rien");
 
 	debut_gauche();
 
