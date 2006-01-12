@@ -10,8 +10,6 @@
  *
  */
 
-error_log("version rien_poo !!");
-
 $nom = 'rien_poo';
 $version = 0.1;
 
