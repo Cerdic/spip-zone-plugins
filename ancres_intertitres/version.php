@@ -3,7 +3,7 @@
 /*
  * ancres_intertitres
  *
- * introduit une ancre translittérée pour les intertitres
+ * introduit une ancre translitteree pour les intertitres
  *
  * Auteur : collectif
  * © 2005 - Distribue sous licence GNU/GPL

@@ -6,7 +6,7 @@
  * introduit un raccourci [texte|lang->http://lien.externe.net] pour les liens externes
  * qui ajoute l'attribut hreflang
  *
- * Auteur : James aka Kliké
+ * Auteur : James aka Klike
  * © 2005 - Distribue sous licence GNU/GPL
  *
  */

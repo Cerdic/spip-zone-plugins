@@ -15,7 +15,7 @@ $nom = 'toutmulti';
 $version = 0.1;
 
 // s'inserer dans le pipeline 'avant_propre' @ ecrire/inc_texte.php3
-$GLOBALS['spip_pipeline']['pre_typo'][] = 'toutmulti';
+$GLOBALS['spip_pipeline']['pre_typo'] .= '|toutmulti';
 
 // la fonction est tres legere on la definit directement ici
 function toutmulti($texte) {

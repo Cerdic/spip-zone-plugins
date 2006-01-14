@@ -14,8 +14,8 @@ $nom = 'forms';
 $version = 0.1;
 
 // s'inserer dans les pipelines
-$GLOBALS['spip_pipeline']['pre_propre'][] = 'forms_avant_propre';
-$GLOBALS['spip_pipeline']['spip_style'][] = 'forms_style';
+$GLOBALS['spip_pipeline']['pre_propre'] .= '|forms_avant_propre';
+$GLOBALS['spip_pipeline']['spip_style'] .= '|forms_style';
 
 // la matrice des fonctions pipeline
 $GLOBALS['spip_matrice']['forms_avant_propre'] = dirname(__FILE__).'/forms_mes_options.php';
