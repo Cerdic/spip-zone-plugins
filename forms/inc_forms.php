@@ -707,6 +707,8 @@ function afficher_formulaire($id_form) {
 			$r .= "<div style='text-align:right'>";
 			$r .= "<a href='".htmlspecialchars($url_sondage)."' class='spip_in' ".
 				"target=\"spip_sondage\" onclick=\"javascript:window.open(this.href, 'spip_sondage', 'scrollbars=yes, ".
+			"	resizable=yes, width=450, height=300'); return false;\"".
+			" onkeypress=\"javascript:window.open(this.href, 'spip_sondage', 'scrollbars=yes, ".
 			"	resizable=yes, width=450, height=300'); return false;\">";
 			$r .= _L("Voir les r&eacute;sultats")."</a></div>";
 			$r .= "<br />\n";
