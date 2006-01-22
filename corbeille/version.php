@@ -31,21 +31,4 @@ $barre_menu['administration'][] = new menuItem(
 		"../"._DIR_PLUGIN_CORBEILLE."/trash-full-24.png",	// icone
 		'$GLOBALS["connect_statut"]=="0minirezo" AND $GLOBALS["connect_toutes_rubriques"]'); // condition
 
-//		icone_bandeau_principal (_T('Corbeille'), "corbeille.php3", "trash-empty.png", "supprimer", $sous_rubrique);
-
-/*$barre_menu['principal'][] = new menuItem(
-		_L("Formulaires et sondages"),  				// titre
-		generer_url_ecrire("forms_tous"), 			// url
-		'forms', 																// nom
-		"../"._DIR_PLUGIN_FORMS."/form-24.png",	// icone
-		'$GLOBALS["connect_statut"]=="0minirezo" AND $GLOBALS["connect_toutes_rubriques"] AND $GLOBALS["options"]=="avancees" AND lire_meta("activer_forms")!="non"'); // condition
-
-$barre_menu['redacteurs'][] = new menuItem(
-		_L("Suivi des Reponses"),  				// titre
-		generer_url_ecrire("forms_reponses"), 			// url
-		'forms_reponses',														// nom
-		"../"._DIR_PLUGIN_FORMS."/form-24.png",	// icone
-		'$GLOBALS["connect_statut"]=="0minirezo" AND $GLOBALS["connect_toutes_rubriques"] AND $GLOBALS["options"]=="avancees" AND lire_meta("activer_forms")!="non"'); // condition
-*/
-
 ?>
