@@ -473,3 +473,16 @@
  
  		// Charger un fichier
  		else if ($f = $spip_matrice[$fonc]) {
+--- ecrire/inc_version.php.SVN	2006-01-23 23:10:27.600368296 +0100
++++ ecrire/inc_version.php	2006-01-23 23:11:05.952537880 +0100
+@@ -184,7 +184,9 @@
+ 	'pre_propre' => '|extraire_multi',
+ 	'post_propre' => '',
+ 	'pre_indexation' => '',
+-	'post_syndication' => ''
++	'post_syndication' => '',
++	'ajouter_boutons' => '',
++	'ajouter_onglets' => ''
+ );
+ # la matrice standard (fichiers definissant les fonctions a inclure)
+ $spip_matrice = array ();
