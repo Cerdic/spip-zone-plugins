@@ -3,6 +3,11 @@
 // Syndication : ce plugin permet d'integrer les <enclosure>
 // des flux RSS sous la forme de documents distants dans la
 // table spip_documents
+//
+// Il renseigne aussi une table de jointure
+// spip_documents_syndic (id_document, id_syndic, id_syndic_article)
+// qui sera aussi prise en compte par le compilateur
+//
 // (par defaut, on se contente de conserver une trace de ces
 // documents dans le champ #TAGS de l'article syndique).
 
@@ -11,15 +16,37 @@
 // recupere les donnees du point d'entree 'post_syndication'
 //
 function podcast_client() {
+	verifier_table_documents_syndic();
+
 	list($le_lien, $id_syndic, $data) = func_get_arg(0);
 	traiter_les_enclosures_rss($data['enclosures'],$id_syndic,$le_lien);
 }
+
+function delete_podcast_client() {
+	spip_query("DROP TABLE spip_documents_syndic");
+}
+
+//
+// Verifie que la table spip_documents_syndic existe, sinon la creer
+//
+function verifier_table_documents_syndic() {
+	if (!spip_query("SELECT id_syndic, id_syndic_article, id_document FROM spip_documents_syndic")) {
+		spip_log('creation de la table spip_documents_syndic');
+		include_ecrire('inc_base');
+		spip_create_table('spip_documents_syndic',
+			$GLOBALS['tables_auxiliaires']['spip_documents_syndic']['field'],
+			$GLOBALS['tables_auxiliaires']['spip_documents_syndic']['key'],
+			false);
+	}
+}
+
 
 //
 // Inserer les references aux fichiers joints
 // presentes sous la forme microformat <a rel="enclosure">
 //
 function traiter_les_enclosures_rss($enclosures,$id_syndic,$le_lien) {
+spip_log('podcast_client');
 	if (!preg_match_all(
 	',<a([[:space:]][^>]*)?[[:space:]]rel=[\'"]enclosure[^>]*>,',
 	$enclosures, $regs, PREG_PATTERN_ORDER))
@@ -76,7 +103,6 @@ function traiter_les_enclosures_rss($enclosures,$id_syndic,$le_lien) {
 			spip_query("INSERT INTO spip_documents_syndic
 			(id_document, id_syndic, id_syndic_article)
 			VALUES ($id_document, $id_syndic, $id_syndic_article)");
-
 			$n++;
 		}
 	}
