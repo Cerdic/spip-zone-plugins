@@ -1,11 +1,35 @@
 <?php
 
-//
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_FORMS")) return;
-define("_ECRIRE_INC_FORMS", "1");
-
 define_once('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+class Forms {
+	/* static public */
+
+	/* public static */
+	function ajouterBoutons($boutons_admin) {
+		// si on est admin
+		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]
+		AND $GLOBALS["options"]=="avancees" AND lire_meta("activer_forms")!="non") {
+
+		  // on voit le bouton dans la barre "naviguer"
+			$boutons_admin['naviguer']->sousmenu["forms_tous"]= new Bouton(
+			"../"._DIR_PLUGIN_FORMS."/form-24.png",  // icone
+			_L("Formulaires et sondages") //titre
+			);
+
+		  // on voit le bouton dans la barre "forum_admin"
+			$boutons_admin['forum_admin']->sousmenu["forms_reponses"]= new Bouton(
+			"../"._DIR_PLUGIN_FORMS."/form-24.png",  // icone
+			_L("Suivi des Reponses") //titre
+			);
+		}
+		return $boutons_admin;
+	}
+
+	/* public static */
+	function ajouterOnglets($onglets, $rubrique) {
+		return $onglets;
+	}
+}
 
 // definition de la fonction clone pour PHP<5.0
 // a utiliser avec $link=clone($monautrelink)

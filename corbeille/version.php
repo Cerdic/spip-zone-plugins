@@ -19,16 +19,12 @@ $version = 0.1;
 define_once('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 
 // s'inserer dans les pipelines
+$GLOBALS['spip_pipeline']['ajouter_boutons'] .= '|Corbeille::ajouterBoutons';
+$GLOBALS['spip_pipeline']['ajouter_onglets'] .= '|Corbeille::ajouterOnglets';
 
 // la matrice des fonctions pipeline
-
-global $barre_menu;
-
-$barre_menu['administration'][] = new menuItem(
-		_T('Corbeille'),  // titre
-		generer_url_ecrire("corbeille"), 			// url
-		'corbeille', // nom
-		"../"._DIR_PLUGIN_CORBEILLE."/trash-full-24.png",	// icone
-		'$GLOBALS["connect_statut"]=="0minirezo" AND $GLOBALS["connect_toutes_rubriques"]'); // condition
+$GLOBALS['spip_matrice']['Corbeille::ajouterBoutons'] =
+$GLOBALS['spip_matrice']['Corbeille::ajouterOnglets'] =
+	dirname(__FILE__).'/inc_corbeille.php';
 
 ?>
