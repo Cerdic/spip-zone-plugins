@@ -14,8 +14,7 @@ class Corbeille {
 		  // on voit le bouton dans la barre "naviguer"
 		  $boutons_admin['configuration']->sousmenu['corbeille']= new Bouton(
 			"../"._DIR_PLUGIN_CORBEILLE."/trash-full-24.png",  // icone
-			_L('Corbeille'),	// titre
-			generer_url_ecrire("corbeille") // url
+			_L('Corbeille')	// titre
 			);
 		}
 		return $boutons_admin;
@@ -114,7 +113,7 @@ class Corbeille {
 		$ifond=0;
 	
 		$ifond = Corbeille::affiche_ligne(_L('P&eacute;titions'),generer_url_ecrire($page,"type_doc=signatures"),$total_signatures,$ifond);
-		$ifond = Corbeille::affiche_ligne(_L('Br&eagrave;ves'),generer_url_ecrire($page,"type_doc=breves"),$total_breves,$ifond);
+		$ifond = Corbeille::affiche_ligne(_L('Br&egrave;ves'),generer_url_ecrire($page,"type_doc=breves"),$total_breves,$ifond);
 		$ifond = Corbeille::affiche_ligne(_L('Articles'),generer_url_ecrire($page,"type_doc=articles"),$total_articles,$ifond);
 		$ifond = Corbeille::affiche_ligne(_L('Forums Publics'),generer_url_ecrire($page,"type_doc=forums_publics"),$total_forums_publics,$ifond);
 		$ifond = Corbeille::affiche_ligne(_L('Forums Priv&eacute;s'),generer_url_ecrire($page,"type_doc=forums_prives"),$total_forums_prives,$ifond);
