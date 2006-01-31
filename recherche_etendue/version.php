@@ -31,6 +31,7 @@ $GLOBALS['spip_matrice']['RechercheEtendue::ajouterOnglets'] =
 	dirname(__FILE__).'/recherche_etendue.php';
 
 include_once('boucle_indexation.php'); // la plomberie pour la boucle INDEX
+
 include_once('recherche_etendue.php'); // les filtres de presentation de la recherche
 
 ?>

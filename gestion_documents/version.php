@@ -20,7 +20,7 @@ $GLOBALS['spip_pipeline']['ajouter_boutons'] .= '|GestionDocuments::ajouterBouto
 
 // la matrice des fonctions pipeline
 $GLOBALS['spip_matrice']['GestionDocuments::ajouterBoutons'] =
-	dirname(__FILE__).'/inc_forms.php';
+	dirname(__FILE__).'/gestion_documents.php';
 
 include_once('gestion_documents.php');
 
