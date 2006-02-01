@@ -11,15 +11,18 @@
  *
  */
 
+class ToutMulti{
 
-// la fonction est tres legere on la definit directement ici
-function toutmulti($texte) {
-	$regexp = "|<:([^>]*):>|";
-	if (preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER))
-	foreach ($matches as $regs)
-		$texte = str_replace($regs[0],
-		_T('spip/ecrire/public:'.$regs[1]), $texte);
-	return $texte;
+	// la fonction est tres legere on la definit directement ici
+	function toutmulti($texte) {
+		$regexp = "|<:([^>]*):>|";
+		if (preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER))
+		foreach ($matches as $regs)
+			$texte = str_replace($regs[0],
+			_T('spip/ecrire/public:'.$regs[1]), $texte);
+		return $texte;
+	}
+  
 }
 
 ?>

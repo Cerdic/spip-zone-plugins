@@ -16,11 +16,13 @@ $nom = 'podcast_client';
 $version = 0.1;
 
 // s'inserer dans le pipeline 'post_syndication' @ ecrire/inc_sites.php3
-$GLOBALS['spip_pipeline']['post_syndication'] .= '|podcast_client';
-$GLOBALS['spip_pipeline']['delete_tables'] .= '|delete_podcast_client';
+$GLOBALS['spip_pipeline']['post_syndication'] .= '|PodcastClient::podcast_client';
+$GLOBALS['spip_pipeline']['delete_tables'] .= '|PodcastClient::delete_podcast_client';
 
 // signaler ou se trouve cette fonction
-$GLOBALS['spip_matrice']['podcast_client'] = dirname(__FILE__).'/podcast_client.php';
+$GLOBALS['spip_matrice']['PodcastClient::podcast_client'] =
+$GLOBALS['spip_matrice']['PodcastClient::delete_podcast_client'] =
+	dirname(__FILE__).'/podcast_client.php';
 
 // renseigner le compilateur sur la nouvelle table
 $GLOBALS['tables_auxiliaires']['spip_documents_syndic'] = array(

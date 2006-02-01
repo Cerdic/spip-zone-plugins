@@ -14,9 +14,9 @@ $nom = 'ancres';
 $version = 0.1;
 
 // s'inserer dans le pipeline 'avant_propre' @ ecrire/inc_texte.php3
-$GLOBALS['spip_pipeline']['post_propre'] .= '|ancres';
+$GLOBALS['spip_pipeline']['post_propre'] .= '|Ancres::ancres';
 
-$GLOBALS['spip_matrice']['ancres'] =
+$GLOBALS['spip_matrice']['Ancres::ancres'] =
 	dirname(__FILE__).'/ancres.php';
 
 ?>

@@ -15,8 +15,8 @@ $nom = 'toutmulti';
 $version = 0.1;
 
 // s'inserer dans le pipeline 'avant_propre' @ ecrire/inc_texte.php3
-$GLOBALS['spip_pipeline']['pre_typo'] .= '|toutmulti';
+$GLOBALS['spip_pipeline']['pre_typo'] .= '|ToutMulti::toutmulti';
 
-$GLOBALS['spip_matrice']['toutmulti'] = dirname(__FILE__).'/toutmulti.php';
+$GLOBALS['spip_matrice']['ToutMulti::toutmulti'] = dirname(__FILE__).'/toutmulti.php';
 
 ?>

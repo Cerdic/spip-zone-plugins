@@ -14,8 +14,8 @@ $nom = 'smallcaps';
 $version = 0.1;
 
 // s'inserer dans le pipeline 'apres_typo' @ ecrire/inc_texte.php3
-$GLOBALS['spip_pipeline']['post_typo'] .= '|smallcaps';
+$GLOBALS['spip_pipeline']['post_typo'] .= '|SmallCaps::smallcaps';
 
-$GLOBALS['spip_matrice']['smallcaps'] = dirname(__FILE__).'/smallcaps.php';
+$GLOBALS['spip_matrice']['SmallCaps::smallcaps'] = dirname(__FILE__).'/smallcaps.php';
 
 ?>
