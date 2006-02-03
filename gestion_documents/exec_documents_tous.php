@@ -267,7 +267,7 @@ function documents_tous(){
 				}
 				if (isset($tab_vignettes[$id_document])){
 					$s .= "<br /><span style='font-style: italic;'>";
-					$s .= _L('vignette du document n°') . $tab_vignettes[$id_document] . "</span>";
+					$s .= _L('vignette du document #') . $tab_vignettes[$id_document] . "</span>";
 				}
 				if (!$utile) {
 					/*$link = new Link ($image_url);
@@ -290,8 +290,8 @@ function documents_tous(){
 				$s = "";
 				if (!isset($tab_vignettes[$id_document])){
 					//$s .= "<input type='hidden' name='id_document' value='$id_document' />\n";
-					$s .= "<input type='text' name='titre[$id_document]' value='".htmlentities($titre,ENT_QUOTES)."' class='forml' style='width:150px' /><br/>\n";
-					$s .= "<input type='text' name='descriptif[$id_document]' value='".htmlentities($descriptif,ENT_QUOTES)."' class='forml' style='width:150px' /><br/>\n";
+					$s .= "<input type='text' name='titre[$id_document]' value=\"".entites_html($titre)."\" class='forml' style='width:150px' /><br/>\n";
+					$s .= "<input type='text' name='descriptif[$id_document]' value=\"".entites_html($descriptif)."\" class='forml' style='width:150px' /><br/>\n";
 				}
 				$s .= " &nbsp;&nbsp;";
 				$vals[] = $s;
