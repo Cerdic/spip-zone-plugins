@@ -10,6 +10,15 @@
  *
  */
 
+function generer_query_string($conteneur,$id_type,$nb_aff,$notitle){
+  $query = ($conteneur?"conteneur=$conteneur&":"")
+		.($id_type?"id_type=$id_type&":"")
+		.(($nb_aff)?"nb_aff=$nb_aff&":"")
+		.(($notitle)?"notitle=$notitle&":"");
+
+  return substr($query,0,strlen($query)?(strlen($query)-1):0);
+}	
+
 function documents_tous(){
 	global $updatetable;
 	global $connect_statut;
@@ -85,26 +94,55 @@ function documents_tous(){
 
 	if (isset($_REQUEST['id_type']))
 		$id_type=intval($_REQUEST['id_type']);
-	if (isset($_REQUEST['contenant']))
-		$contenant=addslashes($_REQUEST['contenant']);
+	if (isset($_REQUEST['conteneur']))
+		$conteneur=addslashes($_REQUEST['conteneur']);
 	else
-		$contenant="";
+		$conteneur="";
 	if (isset($_REQUEST['nb_aff']))
 		$nb_aff=intval($_REQUEST['nb_aff']);
+	if (isset($_REQUEST['notitle']))
+		$notitle=intval($_REQUEST['notitle']);
 
 	$titre_table=_L("Tous les Documents");
-	if (!$icone) $icone = "doc-24.gif";
+	if (!$icone) $icone = "../"._DIR_PLUGIN_GESTION_DOCUMENTS."/stock_broken_image.png";
 
-		if ($id_type)
-			if ($contenant)
-				$requete = "SELECT docs.* FROM spip_documents AS docs LEFT JOIN spip_documents_$contenant AS L on L.id_document=docs.id_document WHERE L.id_document!=0 AND docs.id_type='$id_type' ORDER BY docs.id_document DESC";
+	$table_type=array();
+	$s=spip_query('SELECT * FROM spip_types_documents');
+	while ($row=spip_fetch_array($s)){
+	  $table_type[$row['id_type']]=$row['titre'];
+	}
+
+
+	$join = "";
+	$where = "1=1";
+	$order = "docs.id_document DESC";
+
+	if ($conteneur){
+		$join = "spip_documents_$conteneur AS L on L.id_document=docs.id_document";
+		$where .= " AND L.id_document!=0";
+	}
+	if ($id_type){
+		$where .= " AND docs.id_type='$id_type'";
+	}
+	if ($notitle){
+		$where .= " AND docs.titre='' AND docs.descriptif=''";
+	}
+
+	$requete = "SELECT docs.* FROM spip_documents AS docs";
+	if (strlen($join)>0)
+		$requete .= " LEFT JOIN $join";
+	$requete .= " WHERE $where ORDER BY $order";
+
+	/*	if ($id_type)
+			if ($conteneur)
+				$requete = "SELECT docs.* FROM spip_documents AS docs LEFT JOIN spip_documents_$conteneur AS L on L.id_document=docs.id_document WHERE L.id_document!=0 AND docs.id_type='$id_type' ORDER BY docs.id_document DESC";
 			else
 				$requete = "SELECT docs.* FROM spip_documents AS docs WHERE docs.id_type='$id_type' ORDER BY docs.id_document DESC";
 		else
-			if ($contenant)
-				$requete = "SELECT docs.* FROM spip_documents AS docs LEFT JOIN spip_documents_$contenant AS L on L.id_document=docs.id_document WHERE L.id_document!=0 ORDER BY docs.id_document DESC";
+			if ($conteneur)
+				$requete = "SELECT docs.* FROM spip_documents AS docs LEFT JOIN spip_documents_$conteneur AS L on L.id_document=docs.id_document WHERE L.id_document!=0 ORDER BY docs.id_document DESC";
 			else
-				$requete = "SELECT docs.* FROM spip_documents AS docs ORDER BY docs.id_document DESC";
+				$requete = "SELECT docs.* FROM spip_documents AS docs ORDER BY docs.id_document DESC";*/
 
 		if ($nb_aff)
 			$tranches = afficher_tranches_requete($requete, 9,false,false,$nb_aff);
@@ -198,8 +236,10 @@ function documents_tous(){
 				$altgood = false;
 				if (preg_match("{alt=[\"]([^\"]*)[\"]}",$montexte)){
 					global $alt;
+					$t=$table_type[$row['id_type']];
 					$alt = preg_replace("{\\A(.*)alt=['\"]([^\"]*)['\"].*\\z}is","\\2",$montexte);
-					if (preg_match("{\\A\(.{1,4}\)\\z}i",$alt))
+					if ( (preg_match("{\\A\($t\)\\z}",$alt))
+						|| (preg_match("{\\A$t\s*-\s*[0-9\.]+\s*[ko]+\\z}",$alt)) )
 					  $altgood = false;
 					else
 					  $altgood = true;
@@ -335,18 +375,15 @@ function documents_tous(){
 		debut_raccourcis();
 
 		if ($table_need_update){
-			icone_horizontale (_L('Mettre les tailles a jour'), generer_url_ecrire('documents_tous',"updatetable=oui"), "administration-24.gif");
+			icone_horizontale (_L('Mettre les tailles a jour'), 
+				generer_url_ecrire('documents_tous',"updatetable=oui&".generer_query_string($conteneur,$id_type,$nb_aff,$notitle)),
+				"administration-24.gif");
 		}
 
-		// recupere les types
-		/*$res = spip_query("SELECT * FROM spip_types_documents");
-		while ($row = spip_fetch_array($res))
-			$types[$row['id_type']] = $row;*/
-		
-		echo "<form action='".generer_url_ecrire('documents_tous',(($contenant)?"contenant=$contenant&":"")).(($nb_aff)?"nb_aff=$nb_aff":"")."' method='post'><div>\n";
+		echo "<form action='".generer_url_ecrire('documents_tous',generer_query_string($conteneur,"",$nb_aff,$notitle))."' method='post'><div>\n";
 		echo _L('Type :') . "<br /><select name='id_type'";
 		echo "onchange=\"document.location.href='";
-		echo generer_url_ecrire('documents_tous',($contenant?"contenant=$contenant&":"").(($nb_aff)?"nb_aff=$nb_aff&":"").'id_type=')."'+this.options[this.selectedIndex].value\"";
+		echo generer_url_ecrire('documents_tous',generer_query_string($conteneur,"",$nb_aff,$notitle).'&id_type=')."'+this.options[this.selectedIndex].value\"";
 		echo ">" . "\n";
 		$s=spip_query('SELECT * FROM spip_types_documents');
 		echo "<option value=''>Tous</option>";
@@ -361,27 +398,40 @@ function documents_tous(){
 		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
 		echo "</div></noscript></div>\n";
 		echo "</form>\n";
-	
-		echo "<form action='".generer_url_ecrire('documents_tous',($id_type?"id_type=$id_type&":"")).(($nb_aff)?"nb_aff=$nb_aff":"")."' method='post'><div>\n";
-		echo _L('Contenant :') . "<br /><select name='contenant'";
+
+		echo "<form action='".generer_url_ecrire('documents_tous',generer_query_string("",$id_type,$nb_aff,$notitle))."' method='post'><div>\n";
+		echo _L('Conteneur :') . "<br /><select name='conteneur'";
 		echo "onchange=\"document.location.href='";
-		echo generer_url_ecrire('documents_tous',($id_type?"id_type=$id_type&":"").(($nb_aff)?"nb_aff=$nb_aff&":"").'contenant=')."'+this.options[this.selectedIndex].value\"";
+		echo generer_url_ecrire('documents_tous',generer_query_string("",$id_type,$nb_aff,$notitle).'&conteneur=')."'+this.options[this.selectedIndex].value\"";
 		echo ">" . "\n";
 		echo "<option value=''>Tous</option>";
-		echo "<option value='rubriques'".($contenant=='rubriques'?(" selected='selected'"):"").">Rubriques</option>";
-		echo "<option value='articles'".($contenant=='articles'?(" selected='selected'"):"").">Articles</option>";
-		echo "<option value='breves'".($contenant=='breves'?(" selected='selected'"):"").">Breves</option>";
-		echo "<option value='syndic'".($contenant=='syndic'?(" selected='selected'"):"").">Syndication</option>";
+		echo "<option value='rubriques'".($conteneur=='rubriques'?(" selected='selected'"):"").">Rubriques</option>";
+		echo "<option value='articles'".($conteneur=='articles'?(" selected='selected'"):"").">Articles</option>";
+		echo "<option value='breves'".($conteneur=='breves'?(" selected='selected'"):"").">Breves</option>";
+		echo "<option value='syndic'".($conteneur=='syndic'?(" selected='selected'"):"").">Syndication</option>";
+		echo "</select>";
+		echo "<noscript><div>";
+		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
+		echo "</div></noscript></div>\n";
+		echo "</form>\n";
+
+		echo "<form action='".generer_url_ecrire('documents_tous',generer_query_string($conteneur,$id_type,$nb_aff,""))."' method='post'><div>\n";
+		echo _L('Filtrer :') . "<br /><select name='notitle'";
+		echo "onchange=\"document.location.href='";
+		echo generer_url_ecrire('documents_tous',generer_query_string($conteneur,$id_type,$nb_aff,"").'&notitle=')."'+this.options[this.selectedIndex].value\"";
+		echo ">" . "\n";
+		echo "<option value='0'>Tous</option>";
+		echo "<option value='1'".($notitle?(" selected='selected'"):"").">Sans titre ni descriptif</option>";
 		echo "</select>";
 		echo "<noscript><div>";
 		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
 		echo "</div></noscript></div>\n";
 		echo "</form>\n";
 	
-		echo "<form action='".generer_url_ecrire('documents_tous',($id_type?"id_type=$id_type&":"").(($contenant)?"contenant=$contenant":""))."' method='post'><div>\n";
+		echo "<form action='".generer_url_ecrire('documents_tous',generer_query_string($conteneur,$id_type,"",$notitle))."' method='post'><div>\n";
 		echo _L('Affichage :') . "<br /><select name='nb_aff'";
 		echo "onchange=\"document.location.href='";
-		echo generer_url_ecrire('documents_tous',($id_type?"id_type=$id_type&":"").(($contenant)?"contenant=$contenant&":"").'nb_aff=')."'+this.options[this.selectedIndex].value\"";
+		echo generer_url_ecrire('documents_tous',generer_query_string($conteneur,$id_type,"",$notitle).'&nb_aff=')."'+this.options[this.selectedIndex].value\"";
 		echo ">" . "\n";
 		echo "<option value='10'>Par 10</option>";
 		echo "<option value='20'".($nb_aff=='20'?(" selected='selected'"):"").">Par 20</option>";
