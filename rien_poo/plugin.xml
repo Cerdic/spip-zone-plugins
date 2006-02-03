@@ -5,7 +5,10 @@
 	<auteur>	<!-- Auteur du plugin -->
 	_fil_
 	</auteur>
-	<descritpion>
+	<version>
+	0.1
+	</version>
+	<description>
 	Le seul plugin spip au monde qui ne fait rien, mais qui le fait bien !
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
