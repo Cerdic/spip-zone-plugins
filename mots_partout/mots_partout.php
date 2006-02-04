@@ -16,15 +16,14 @@ class MotsPartout {
 	/* public static */
 	function ajouterBoutons($boutons_admin) {
 
-	  spip_log('mots_partout');
 
 	  // on voit les bouton dans la barre "accueil"
 	  $boutons_admin['naviguer']->sousmenu["mots_partout"]= new Bouton(
-																		 "../"._DIR_PLUGIN_MOTS_PARTOUT."/tag.png",  // icone
-																		 'NOTS PARTOUT') //titre
-																		 );
-	  return $boutons_admin;
-	}
+																	   "../"._DIR_PLUGIN_MOTS_PARTOUT."/tag.png",  // icone
+																	   'NOTS PARTOUT' //titre
+		);
+	return $boutons_admin;
+}
 
 }
 

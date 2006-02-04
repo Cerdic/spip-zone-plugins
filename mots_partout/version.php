@@ -19,7 +19,8 @@ define_once('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS . basename(dirname(__FILE__
 $GLOBALS['spip_pipeline']['ajouter_boutons'] .= '|MotsPartout::ajouterBoutons';
 
 // la matrice des fonctions pipeline
-$GLOBALS['spip_matrice']['MotsParout::ajouterBoutons'] =
+$GLOBALS['spip_matrice']['MotsPartout::ajouterBoutons'] =
 	dirname(__FILE__).'/mots_partout.php';
+
 
 ?>
