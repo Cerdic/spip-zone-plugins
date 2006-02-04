@@ -1,0 +1,55 @@
+Voici les régles à suivre avant de commiter des modifications sur
+cette branche.
+
+A. Obligation de commenter:
+   Si vous envoyez des modifications, il faut toujours les commenter
+   des facon "déscriptive" et "complète" avec l'option -m ou -F du
+   commit SVN.
+
+B.2- Modification mineure:
+   Une modification mineure est:
+   	   o un changement dans la documentation d'une fonction ou d'une
+   	     variable ou dans les commentaires de description d'un
+   	     fichier,
+	   o un changement dans un message envoyé à l'utilisateur,
+	   o une localisation.
+   Tout le monde à le droit de faire une telle modification sans en
+référer à l'auteur principal du projet. Un commentaire succin
+suffit en général.
+
+B.3- Modification modérée:
+   Dans ce projet particulier, une modification
+modérée est:
+  	  	o l'ajout d'une fonctionnalité étant décrite dans la TODO
+officielle,
+  		o la correction d'un bug classé mineure,
+  Pour une modification modérée, il faut clairement décrire le but de
+la modification dans les commentaire du commit: la fonctionnalité
+ajoutée, le bug corrigé en donnant des exemples de ce que cela
+corrige/apporte. Il faut alors aussi commenter dans le fichier et
+écrire les chaînes de documentation nécessaires.
+	Tout le monde peut alors commiter une telle modification.
+
+B.4- Modification majeure:
+   Toute modification n'étant pas classifiées dans les deux catégories
+précédentes est dite majeure.
+   On ne peut pas commiter de telles modifications sans en référer à
+l'auteur principal du projet (mortimer.pa@free.fr). Il faut alors,
+dans le mail, envoyer un patch au format "diff -pu" et donner une
+description défendable des modifications/ajouts.
+   En particulier, il faut bien penser à:
+   	  o décrire le bug que l'on corrige, comment on a choisit de le
+  corriger,
+	  o décrire la modification que l'on a faite et pourquoi le
+  nouveau code est meilleur que l'ancien (qui n'est certainement pas
+  un code parfait de toute façon)
+  	  o décrire la nouvelle fonction, ce quelle apporte à
+  l'utilisateur, les dépendances qu'elle apporte.
+
+C. Clarté du code.
+   Il n'y a actuellement pas de règles précises d'écriture correct du
+code. Il faut juste garder du code indenter, en général,
+suivre la façon dont c'est fait dans les fichiers de bases.
+   Il faut toujours mettre une documentation quand c'est
+possible et quand on le peut documenter le processus/l'algorithme que
+l'on implémente.

@@ -1,0 +1,4 @@
+- "Le mode stricte marche mais le mode "non stricte" renvoie aussi les
+articles avec zero fois un mot si celui-ci a déjà été assigné à au
+moins un article selon mes tests. Au lieu de tout les articles avec au
+moins un des mots mais pas zero." par Noé de naama.
