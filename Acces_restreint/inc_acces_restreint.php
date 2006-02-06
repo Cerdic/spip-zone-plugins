@@ -690,7 +690,7 @@ Class AccesRestreint {
 		}
 		return $liste_documents_exclus;
 	}
-	function articles_documents_where($primary){
+	function documents_accessibles_where($primary){
 		$liste = AccesRestreint::liste_documents_exclus();
 		return calcul_mysql_in($primary, join(",",$liste),"NOT");
 	}

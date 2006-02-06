@@ -15,7 +15,7 @@ function boucle_ARTICLES($id_boucle, &$boucles) {
 	$boucle->hash = '
 	// ACCES RESTREINT
 	$acces_where = AccesRestreint::articles_accessibles_where("'.$t.'");
-	';
+	' . $boucle->hash ;
 
 	// et le filtrage d'acces filtre !
 	$boucle->where[] = '$acces_where';
@@ -37,7 +37,7 @@ function boucle_BREVES($id_boucle, &$boucles) {
 	$boucle->hash = '
 	// ACCES RESTREINT
 	$acces_where = AccesRestreint::breves_accessibles_where("'.$t.'");
-	';
+	' . $boucle->hash ;
 
 	// et le filtrage d'acces filtre !
 	$boucle->where[] = '$acces_where';
@@ -58,7 +58,7 @@ function boucle_FORUMS($id_boucle, &$boucles) {
 	$boucle->hash = '
 	// ACCES RESTREINT
 	$acces_where = AccesRestreint::forum_accessibles_where("'.$t.'");
-	';
+	' . $boucle->hash ;
 
 	// et le filtrage d'acces filtre !
 	$boucle->where[] = '$acces_where';
@@ -79,7 +79,7 @@ function boucle_SIGNATURES($id_boucle, &$boucles) {
 	$boucle->hash = '
 	// ACCES RESTREINT
 	$acces_where = AccesRestreint::signatures_accessibles_where("'.$t.'");
-	';
+	' . $boucle->hash ;
 
 	// et le filtrage d'acces filtre !
 	$boucle->where[] = '$acces_where';
@@ -100,7 +100,7 @@ function boucle_DOCUMENTS($id_boucle, &$boucles) {
 	$boucle->hash = '
 	// ACCES RESTREINT
 	$acces_where = AccesRestreint::documents_accessibles_where("'.$t.'");
-	';
+	' . $boucle->hash ;
 
 	// et le filtrage d'acces filtre !
 	$boucle->where[] = '$acces_where';
@@ -118,11 +118,10 @@ function boucle_RUBRIQUES($id_boucle, &$boucles) {
 	$t = $boucle->id_table . '.' . $boucle->primary;
 	if (!in_array($t, $boucles[$id_boucle]->select))
 	  $boucle->select[]= $t; # pour postgres, neuneu ici
-
 	$boucle->hash = '
 	// ACCES RESTREINT
 	$acces_where = AccesRestreint::rubriques_accessibles_where("'.$t.'");
-	';
+	' . $boucle->hash ;
 
 	// et le filtrage d'acces filtre !
 	$boucle->where[] = '$acces_where';
@@ -144,7 +143,7 @@ function boucle_HIERARCHIE($id_boucle, &$boucles) {
 	$boucle->hash = '
 	// ACCES RESTREINT
 	$acces_where = AccesRestreint::rubriques_accessibles_where("'.$t.'");
-	';
+	' . $boucle->hash ;
 
 	// et le filtrage d'acces filtre !
 	$boucle->where[] = '$acces_where';
@@ -165,7 +164,7 @@ function boucle_SYNDICATION($id_boucle, &$boucles) {
 	$boucle->hash = '
 	// ACCES RESTREINT
 	$acces_where = AccesRestreint::syndic_accessibles_where("'.$t.'");
-	';
+	' . $boucle->hash ;
 
 	// et le filtrage d'acces filtre !
 	$boucle->where[] = '$acces_where';
@@ -186,7 +185,7 @@ function boucle_SYNDIC_ARTICLES($id_boucle, &$boucles) {
 	$boucle->hash = '
 	// ACCES RESTREINT
 	$acces_where = AccesRestreint::syndic_articles_accessibles_where("'.$t.'");
-	';
+	' . $boucle->hash ;
 
 	// et le filtrage d'acces filtre !
 	$boucle->where[] = '$acces_where';
