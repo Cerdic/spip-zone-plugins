@@ -205,7 +205,7 @@ function import_objet_1_3($f, $gz=false, $tag_fermant='SPIP', $tables) {
 	ecrire_metas();
 
 	if (time() - $time_javascript > 3) {	// 3 secondes
-		affiche_progression_javascript($abs_pos);
+		affiche_progression_javascript($abs_pos,$table);
 		$time_javascript = time();
 	}
 
@@ -531,7 +531,7 @@ function import_tables($f, $tables, $gz=false) {
 	// Restauration des entrees du fichier
 	if (preg_match("{^phpmyadmin::}is",$version_archive)){
 	  #spip_log("restauration phpmyadmin : version $version_archive tag $tag_archive");
-		while (import_objet_1_3($f, $gz, $tag_archive));
+		while (import_objet_1_3($f, $gz, $tag_archive, $tables));
 	}
 	else{
 		switch ($version_archive) {
@@ -570,12 +570,14 @@ function import_tables($f, $tables, $gz=false) {
 
 function detruit_non_restaurees($mydate, $tables)
 {
+	$query = "DELETE FROM spip_auteurs WHERE id_auteur=0";
+	spip_query($query);
 	//foreach ($tables as $v) 
 	//  spip_query("DELETE FROM $v WHERE UNIX_TIMESTAMP(maj) < $my_date");
 }
 
 
-function affiche_progression_javascript($abs_pos) {
+function affiche_progression_javascript($abs_pos,$table="") {
 	global $affiche_progression_pourcent;
 	include_ecrire('inc_charsets');
 	ob_flush();flush();
@@ -592,6 +594,8 @@ function affiche_progression_javascript($abs_pos) {
 		echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".$_SERVER["PHP_SELF"]."\";',0);</script>\n");
 	}
 	else {
+		if ($table!="")
+			echo "document.progression.recharge.value='$table';\n";
 		if (! $affiche_progression_pourcent)
 			$taille = ereg_replace("&nbsp;", " ", taille_en_octets($abs_pos));
 		else
@@ -658,7 +662,7 @@ function import_all_continue($tables)
 	debut_boite_alerte();
 	echo "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
 	fin_boite_alerte();
-	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".$_SERVER["PHP_SELF"]."\";',7000);</script>\n");
+	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".$_SERVER["PHP_SELF"]."\";',15000);</script>\n");
 
 	fin_page();
 	ob_flush();flush();

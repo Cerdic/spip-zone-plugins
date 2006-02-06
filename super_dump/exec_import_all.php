@@ -13,6 +13,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire('inc_admin');
+include_ecrire('inc_serialbase');
+include_ecrire('inc_auxbase');
 
 function verifier_version_sauvegarde ($archive) {
 	global $spip_version;
@@ -75,6 +77,6 @@ function import_all_dist()
 	// puis commencer ou continuer
 	include(dirname(__FILE__).'/inc_import.php');
 
-	import_all_continue(array($liste_tables));		
+	import_all_continue($liste_tables);		
 }
 ?>
