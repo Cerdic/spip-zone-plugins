@@ -534,6 +534,7 @@ function afficher_liste_defaut($choses) {
 
 function mots_partout() {
 
+
   include_ecrire ("inc_documents");
   include_ecrire ("inc_abstract_sql");
   include_ecrire ("inc_objet");
@@ -625,7 +626,7 @@ function mots_partout() {
    * choses possibles
    ***********************************************************************/
 
-  if ($HTTP_GET_VARS['installation']=='oui'){
+  if ($_GET['installation']=='oui'){
 	spip_query("ALTER TABLE `".$table_pref."_groupes_mots` ADD `documents` CHAR( 3 ) NOT NULL DEFAULT 'non';");
 	spip_query("ALTER TABLE `".$table_pref."_groupes_mots` ADD `messages` CHAR( 3 ) NOT NULL DEFAULT 'non';");
 	spip_query("ALTER TABLE `".$table_pref."_groupes_mots` ADD `auteurs` CHAR( 3 ) NOT NULL DEFAULT 'non';");
@@ -641,7 +642,7 @@ function mots_partout() {
    * récuperation de la chose sur laquelle on travaille
    ***********************************************************************/
 
-  $nom_chose = $HTTP_POST_VARS['nom_chose'];
+  $nom_chose = $_POST['nom_chose'];
   if(!isset($choses_possibles[$nom_chose])) {
 	list($nom_chose,) = each($choses_possibles);
 	reset($choses_possibles);
@@ -654,15 +655,15 @@ function mots_partout() {
 /***********************************************************************
  * action
  ***********************************************************************/
-  $mots = $HTTP_POST_VARS['id_mots'];
-  $sans_mots = $HTTP_POST_VARS['sans_mots'];
-  $choses = $HTTP_POST_VARS['id_choses'];
-  $nom_tags = $HTTP_POST_VARS['nom_tags'];
-  $id_groupes = $HTTP_POST_VARS['id_groupes'];
-  $limit =  $HTTP_POST_VARS['limit'];
-  $id_limit =  $HTTP_POST_VARS['id_limit'];
+  $mots = $_POST['id_mots'];
+  $sans_mots = $_POST['sans_mots'];
+  $choses = $_POST['id_choses'];
+  $nom_tags = $_POST['nom_tags'];
+  $id_groupes = $_POST['id_groupes'];
+  $limit =  $_POST['limit'];
+  $id_limit =  $_POST['id_limit'];
   //echo "!!!".$nom_chose."!!!";
-  //echo "action :".$HTTP_POST_VARS['switch']."<br>";
+  //echo "action :".$_POST['switch']."<br>";
   //echo "choses :".serialize($choses)."<br>";
   //echo "mots :".serialize($mots)."<br>";
   //echo "sans_mots :".serialize($sans_mots)."<br>";
@@ -671,7 +672,7 @@ function mots_partout() {
   //echo "limit :".serialize($limit)."<br>";
   //echo "id_limit :".serialize($id_limit)."<br>";
 
-  if($HTTP_POST_VARS['switch'] == 'action' && (count($choses) || count($nom_tags))) {
+  if($_POST['switch'] == 'action' && (count($choses) || count($nom_tags))) {
 	if(count($mots)) {
 	  foreach($mots as $m) {	
 		$from = array('spip_mots');
@@ -730,9 +731,9 @@ function mots_partout() {
 		$tags = new ListeTags($listetags,'',$id_groupetags);
 		//		echo "!!!!!!!tag:".serialize($listetags)."!!!!!!!!!";
 		foreach($choses as $d) {
-		  if($HTTP_POST_VARS['bouton'] == 'ajouter')
+		  if($_POST['bouton'] == 'ajouter')
 			$tags->ajouter($d,$nom_chose,$id_chose);
-		  if($HTTP_POST_VARS['bouton'] == 'retirer')
+		  if($_POST['bouton'] == 'retirer')
 			$tags->retirer($d,$nom_chose,$id_chose);
 		}
 	  }
@@ -761,7 +762,7 @@ function mots_partout() {
 		$from[1] = "spip_mots_$nom_chose as table_temp";
 		$where[1] = "table_temp.$id_chose = main.$id_chose";
 		$where[] = "table_temp.id_mot IN (".calcul_in($mots).')';
-		if($HTTP_POST_VARS['strict']) {
+		if($_POST['strict']) {
 		  $select[] = 'count(id_mot) as tot';
 		  $group = "main.$id_chose";
 		  $order = array('tot DESC');
@@ -771,7 +772,7 @@ function mots_partout() {
 		$from[1] = "spip_mots_$nom_chose as table_temp";
 		$where[1] = "table_temp.$id_chose = main.$id_chose";
 		$where[] = "table_temp.id_mot not IN (".calcul_in($sans_mots).')';
-		if($HTTP_POST_VARS['strict']) {
+		if($_POST['strict']) {
 		  $select[] = 'count(id_mot) as tot';
 		  $group = "main.$id_chose";
 		  $order = array('tot DESC');
@@ -781,7 +782,7 @@ function mots_partout() {
 	  if(count($mots) > 0) {
 		$from[0] = "spip_mots_$nom_chose as main";
 		$where[] = "main.id_mot IN (".calcul_in($mots).')';
-		if($HTTP_POST_VARS['strict']) {
+		if($_POST['strict']) {
 		  $select[] = 'count(id_mot) as tot';
 		  $group = "main.$id_chose";
 		  $order = array('tot DESC');
@@ -790,7 +791,7 @@ function mots_partout() {
 	  if(count($sans_mots) > 0) {
 		$from[0] = "spip_mots_$nom_chose as main";
 		$where[] = "main.id_mot not IN (".calcul_in($sans_mots).')';
-		if($HTTP_POST_VARS['strict']) {
+		if($_POST['strict']) {
 		  $select[] = 'count(id_mot) as tot';
 		  $group = "main.$id_chose";
 		  $order = array('tot DESC');
@@ -826,7 +827,7 @@ function mots_partout() {
 		  }
 		  spip_abstract_free($test);
 		}
-		if(count($mots) > 0 && $HTTP_POST_VARS['strict']) {
+		if(count($mots) > 0 && $_POST['strict']) {
 		  if($row['tot'] >= count($mots)) {
 			$choses[] = $row[$id_chose];
 		  } else {
@@ -945,7 +946,7 @@ function mots_partout() {
 
 	// 	echo '<a name="action"></a><form action="mots_partout.php#voir">';
 
-	echo '<input type="hidden" name="nom_chose" value="'.$HTTP_POST_VARS['nom_chose'].'">';  
+	echo '<input type="hidden" name="nom_chose" value="'.$_POST['nom_chose'].'">';  
 	//  echo "<input type='hidden' name='id_limit' value='$id_limit'>";
 	//  echo "<input type='hidden' name='limit' value='$limit'>";
 	//  for($i=0; $i < count($choses); $i++) {
