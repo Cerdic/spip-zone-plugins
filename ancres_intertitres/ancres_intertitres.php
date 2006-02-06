@@ -10,7 +10,7 @@
 class AncresIntertitres{
 	function ancres_intertitres($texte) {
 		$regexp = "/{{{[[:space:]]*(.+)[[:space:]]*}}}/";
-		$texte = preg_replace_callback($regexp, 'remplace_intertitre', $texte);
+		$texte = preg_replace_callback($regexp, create_function('$matches','return AncresIntertitres::remplace_intertitre($matches);'), $texte);
 		return $texte;
 	}
 	
@@ -39,7 +39,7 @@ class AncresIntertitres{
 			$url = substr($url, 1);
 			if (strlen($url) < 2) $url = "ancre$cId";
 		}
-		table_matiere('', $url, $matches[1]);
+		AncresIntertitres::table_matiere('', $url, $matches[1]);
 		return '{{{ ['.$url.'<-] '.$matches[1].' }}}';
 	}
 	function table_matiere($mode = '', $url = '', $titre ='') {
@@ -67,7 +67,7 @@ function balise_TABLE_MATIERE_dist($p) {
 	AncresIntertitres::compose_table_matiere(
 		'\t<li><a href=\"#@url@\">@titre@</a></li>\n',
 		'\n<ul>\n@texte@</ul>\n',
-		table_matiere(\"retour\")
+		AncresIntertitres::table_matiere(\"retour\")
 	)";
 	$p->statut = 'php';
 	return $p;

@@ -8,9 +8,9 @@ Class hrefLang{
   
 	function href_lang($texte, $balise='texte') {
 		//le premier passage transforme le raccourci en lien
-		$texte = appliquer_hreflang($texte);
+		$texte = hrefLang::appliquer_hreflang($texte);
 		//le deuxieme passage retire le raccourci residuel (cas de l'intro)
-		$texte = retirer_hreflang($texte);
+		$texte = hrefLang::retirer_hreflang($texte);
 		return $texte;
 	}
 	
