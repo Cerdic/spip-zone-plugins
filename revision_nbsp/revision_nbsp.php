@@ -12,12 +12,13 @@
 
 
 class RevisionNbsp{
-
 	function revision_nbsp($letexte) {
-		return str_replace('&nbsp;',
-			'<span class="spip-nbsp">&nbsp;</span>', $letexte);
+		if (!_DIR_RESTREINT)
+			return str_replace('&nbsp;',
+				'<span class="spip-nbsp">&nbsp;</span>', $letexte);
+		else
+			return $letexte;
 	}
-
 }
 
 ?>

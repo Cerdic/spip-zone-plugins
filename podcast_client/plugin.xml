@@ -1,34 +1,38 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Corbeille
+	Podcast client
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	Copyright (C) 2002 ONFRAY MATTHIEU
-_ mail : silicium@japanim.net
-_ web amateur : http://www.japanim.net/
-_ web technique : http://spip.japanim.net/
-_ adaptation en plugin par cedric.morin@yterium.com
-_ © 2005-2006 - Distribue sous licence GNU/GPL
+ 	fil@rezo.net
+_ © 2005 - Distribue sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.1
 	</version>
 	<description>
-	Gestion des documents mis a la corbeille
+	Client de podcast pour SPIP
 	</description>
+	<options>
+	podcast_client_options.php
+	</options>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
 	<class> 
-	Corbeille
+	PodcastClient
 	</class>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouterBoutons</action>
-		<inclure>inc_corbeille.php</inclure>
+		<nom>post_syndication</nom>
+		<action>podcast_client</action>
+		<inclure>podcast_client.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>delete_tables</nom>
+		<action>delete_podcast_client</action>
+		<inclure>podcast_client.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>

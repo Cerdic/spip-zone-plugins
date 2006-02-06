@@ -11,7 +11,7 @@ _ © 2006 - Distribue sous licence GPL
 	</version>
 	<description>
 	Dump et restore XML complets
-_ des tables principales et tables auxiliaures
+_ des tables principales et tables auxiliares
 _ et restore des dumps xml phpMyAdmin
 	</description>
 	<options> <!-- fichier charge a chaque hit -->

@@ -1,20 +1,16 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Corbeille
+	href_lang
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	Copyright (C) 2002 ONFRAY MATTHIEU
-_ mail : silicium@japanim.net
-_ web amateur : http://www.japanim.net/
-_ web technique : http://spip.japanim.net/
-_ adaptation en plugin par cedric.morin@yterium.com
-_ © 2005-2006 - Distribue sous licence GNU/GPL
+ 	James aka Klike
+_ © 2005 - Distribue sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.1
 	</version>
 	<description>
-	Gestion des documents mis a la corbeille
+	introduit un raccourci <code>[texte|lang->http://lien.externe.net]</code> pour les liens externes qui ajoute l'attribut href lang
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
@@ -22,13 +18,13 @@ _ © 2005-2006 - Distribue sous licence GNU/GPL
 	ce parametre est obligatoire et doit etre non vide
 	-->
 	<class> 
-	Corbeille
+	hrefLang
 	</class>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouterBoutons</action>
-		<inclure>inc_corbeille.php</inclure>
+		<nom>post_propre</nom>
+		<action>href_lang</action>
+		<inclure>href_lang.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>
