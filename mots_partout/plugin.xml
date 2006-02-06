@@ -9,7 +9,7 @@
 	0.1
 	</version>
 	<description>
-	  Gestion des mots clefs sur tous les éléments SPIP.
+	  Gestion des mots clefs sur tous les &eacute;l&eacute;ments SPIP.
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
