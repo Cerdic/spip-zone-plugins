@@ -1,44 +1,35 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Rien
+	Super Dump
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	_fil_
+ 	cedric.morin@yterium.com
+_ © 2006 - Distribue sous licence GPL
 	</auteur>
 	<version>
 	0.1
 	</version>
 	<description>
-	Le seul plugin spip au monde qui ne fait rien, mais qui le fait bien !
+	Dump et restore XML complets
+_ des tables principales et tables auxiliaures
+_ et restore des dumps xml phpMyAdmin
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
-	mes_options.php
+	super_dump.php
 	</options>
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	mes_fonctions.php
-	</fonctions>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
 	<class> 
-	Rien
+	SuperDump
 	</class>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
-		<nom>post_propre</nom>
-		<action>leFiltre</action>
-	</pipeline>
-	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
-		<inclure>Rien.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>ajouter_onglets</nom>
-		<action>ajouterOnglets</action>
-		<inclure>Rien.php</inclure>
+		<inclure>super_dump.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>

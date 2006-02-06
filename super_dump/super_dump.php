@@ -9,6 +9,7 @@
  * © 2006 - Distribue sous licence GPL
  *
  */
+define_once('_DIR_PLUGIN_SUPER_DUMP',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 
 class SuperDump {
 	/* static public */
@@ -24,8 +25,9 @@ class SuperDump {
 	}
 
 	/* public static */
-	function ajouterOnglets($onglets, $rubrique) {
-		return $onglets;
+	function ajouterOnglets($flux) {
+		$rubrique = $flux['args'];
+		return $flux;
 	}
 }
 

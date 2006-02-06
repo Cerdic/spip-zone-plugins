@@ -1,21 +1,28 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Rien
+	Acces Restreint
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	_fil_
+ 	cedric.morin@yterium.com
+_ © 2006 - Distribue sous licence GPL
 	</auteur>
 	<version>
 	0.1
 	</version>
 	<description>
-	Le seul plugin spip au monde qui ne fait rien, mais qui le fait bien !
+	Gestion de zones d'acces restreint.
+_ Chaque zone contient des rubriques.
+_ Les auteurs peuvent etre associes a des zones pour avoir le droit d'y acceder.
+_ Toutes les boucles natives de SPIP sont surchargees pour en filtrer les resultats en fonction des droits du visiteur.
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
-	mes_options.php
+	inc_acces_restreint_base.php
 	</options>
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	mes_fonctions.php
+	<options> <!-- fichier charge a chaque hit -->
+	inc_acces_restreint.php
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	acces_restreint.php
 	</fonctions>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
@@ -23,22 +30,13 @@
 	ce parametre est obligatoire et doit etre non vide
 	-->
 	<class> 
-	Rien
+	AccesRestreint
 	</class>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
-		<nom>post_propre</nom>
-		<action>leFiltre</action>
-	</pipeline>
-	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
-		<inclure>Rien.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>ajouter_onglets</nom>
-		<action>ajouterOnglets</action>
-		<inclure>Rien.php</inclure>
+		<inclure>inc_acces_restreint.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>

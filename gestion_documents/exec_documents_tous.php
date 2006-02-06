@@ -9,6 +9,7 @@
  * © 2006 - Distribue sous licence GPL
  *
  */
+define_once('_DIR_PLUGIN_GESTION_DOCUMENTS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 
 function generer_query_string($conteneur,$id_type,$nb_aff,$notitle){
   $query = ($conteneur?"conteneur=$conteneur&":"")

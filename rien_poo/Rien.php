@@ -31,11 +31,12 @@ class Rien {
 	}
 
 	/* public static */
-	function ajouterOnglets($onglets, $rubrique) {
+	function ajouterOnglets($flux) {
+		$rubrique = $flux['args'];
 		if($rubrique=='configuration')
-		  $onglets['rien_config']= new Bouton(
+		  $flux['data']['rien_config']= new Bouton(
 			'../'._DIR_PLUGINS.'rien/ecrire/img_pack/rien-24.png', 'rien ...');
-		return $onglets;
+		return $flux;
 	}
 }
 ?>

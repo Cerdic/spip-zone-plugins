@@ -19,8 +19,9 @@ Class AccesRestreint {
 	}
 
 	/* public static */
-	function ajouterOnglets($onglets, $rubrique) {
-		return $onglets;
+	function ajouterOnglets($flux) {
+		$rubrique = $flux['args'];
+		return $flux;
 	}
 
   function cree_zone(){
@@ -539,6 +540,7 @@ Class AccesRestreint {
 	function liste_rubriques_exclues(){
 		static $liste_rub_exclues;
 		if (!is_array($liste_rub_exclues)){
+			$liste_rub_exclues = array();
 			global $auteur_session;
 			$liste_rub_exclues = AccesRestreint::liste_rubriques_acces_proteges();
 			if ($auteur_session['id_auteur']){
@@ -562,6 +564,7 @@ Class AccesRestreint {
 	function liste_articles_exclus(){
 		static $liste_art_exclus;
 		if (!is_array($liste_art_exclus)){
+			$liste_art_exclus = array();
 			$liste_rub = AccesRestreint::liste_rubriques_exclues();
 			$where = calcul_mysql_in('id_rubrique', join(",",$liste_rub));
 			$s = spip_query("SELECT id_article FROM spip_articles WHERE $where");
@@ -582,6 +585,7 @@ Class AccesRestreint {
 	function liste_breves_exclues(){
 		static $liste_breves_exclues;
 		if (!is_array($liste_breves_exclues)){
+			$liste_breves_exclues = array();
 			$liste_rub = AccesRestreint::liste_rubriques_exclues();
 			$where = calcul_mysql_in('id_rubrique', join(",",$liste_rub));
 			$s = spip_query("SELECT id_breve FROM spip_breves WHERE $where");
@@ -602,6 +606,7 @@ Class AccesRestreint {
 	function liste_forum_exclus(){
 		static $liste_forum_exclus;
 		if (!is_array($liste_forum_exclus)){
+			$liste_forum_exclus = array();
 			// rattaches aux rubriques
 			$liste_rub = AccesRestreint::liste_rubriques_exclues();
 			$where = calcul_mysql_in('id_rubrique', join(",",$liste_rub));
@@ -630,6 +635,7 @@ Class AccesRestreint {
 	function liste_signatures_exclues(){
 		static $liste_signatures_exclues;
 		if (!is_array($liste_signatures_exclues)){
+			$liste_signatures_exclues = array();
 			// rattaches aux articles
 			$liste_art = AccesRestreint::liste_articles_exclus();
 			$where = calcul_mysql_in('id_article', join(",",$liste_art));
@@ -651,6 +657,7 @@ Class AccesRestreint {
 	function liste_documents_exclus(){
 		static $liste_documents_exclus;
 		if (!is_array($liste_documents_exclus)){
+			$liste_documents_exclus = array();
 			// rattaches aux articles
 			$liste_art = AccesRestreint::liste_articles_exclus();
 			$where = calcul_mysql_in('id_article', join(",",$liste_art));
@@ -694,6 +701,7 @@ Class AccesRestreint {
 	function liste_syndic_exclus(){
 		static $liste_syndic_exclus;
 		if (!is_array($liste_syndic_exclus)){
+			$liste_syndic_exclus = array();
 			$liste_rub = AccesRestreint::liste_rubriques_exclues();
 			$where = calcul_mysql_in('id_rubrique', join(",",$liste_rub));
 			$s = spip_query("SELECT id_syndic FROM spip_syndic WHERE $where");
@@ -714,6 +722,7 @@ Class AccesRestreint {
 	function liste_syndic_articles_exclus(){
 		static $liste_syndic_articles_exclus;
 		if (!is_array($liste_syndic_articles_exclus)){
+			$liste_syndic_articles_exclus = array();
 			$liste_syn = AccesRestreint::liste_syndic_exclus();
 			$where = calcul_mysql_in('id_syndic', join(",",$liste_syn));
 			$s = spip_query("SELECT id_syndic_article FROM spip_syndic_articles WHERE $where");

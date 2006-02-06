@@ -4,6 +4,8 @@
  * definition du plugin "corbeille" version "classe statique"
  * utilisee comme espace de nommage
  */
+define_once('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+ 
 class Corbeille {
 	/* static public */
 
@@ -21,8 +23,9 @@ class Corbeille {
 	}
 
 	/* public static */
-	function ajouterOnglets($onglets, $rubrique) {
-		return $onglets;
+	function ajouterOnglets($flux) {
+		$rubrique = $flux['args'];
+		return $flux;
 	}
 
 	function effacement($table, $statut, $titre, $id) {

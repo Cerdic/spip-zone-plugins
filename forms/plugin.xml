@@ -1,21 +1,23 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Rien
+	Formulaires
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	_fil_
+	Cedric MORIN pour le plugin
+	sur une base initiale de X
 	</auteur>
 	<version>
 	0.1
 	</version>
 	<description>
-	Le seul plugin spip au monde qui ne fait rien, mais qui le fait bien !
+	Gestion et administration de formulaires editables.
+	Ce plugin permet egalement la publication de sondages et enquetes, la collecte des reponses dans la base de données et le telechargement au format csv
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
-	mes_options.php
+	forms_options.php
 	</options>
 	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	mes_fonctions.php
+	forms_fonctions.php
 	</fonctions>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
@@ -23,22 +25,23 @@
 	ce parametre est obligatoire et doit etre non vide
 	-->
 	<class> 
-	Rien
+	Forms
 	</class>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
-		<nom>post_propre</nom>
-		<action>leFiltre</action>
+		<nom>pre_propre</nom>
+		<action>forms_avant_propre</action>
+		<inclure>forms_filtres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>spip_style</nom>
+		<action>forms_style</action>
+		<inclure>forms_style.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
-		<inclure>Rien.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>ajouter_onglets</nom>
-		<action>ajouterOnglets</action>
-		<inclure>Rien.php</inclure>
+		<inclure>inc_forms.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>

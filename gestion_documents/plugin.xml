@@ -1,0 +1,25 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Gestion de documents
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Cedric MORIN
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<description>
+	Outils de gestion des documents : une page de recapitulatif de tous les documents.
+	</description>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction-->
+	<class>
+	GestionDocuments
+	</class>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>gestion_documents.php</inclure>
+	</pipeline>
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>

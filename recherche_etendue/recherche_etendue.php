@@ -39,8 +39,9 @@ class RechercheEtendue {
 	}
 
 	/* public static */
-	function ajouterOnglets($onglets, $rubrique) {
-		return $onglets;
+	function ajouterOnglets($flux) {
+		$rubrique = $flux['args'];
+		return $flux;
 	}
 
 	//*********************************************

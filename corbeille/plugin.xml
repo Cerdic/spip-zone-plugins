@@ -1,44 +1,34 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Rien
+	Corbeille
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	_fil_
+	Copyright (C) 2002 ONFRAY MATTHIEU
+_	mail : silicium@japanim.net
+_	web amateur : http://www.japanim.net/
+_	web technique : http://spip.japanim.net/
+_	adaptation en plugin par cedric.morin@yterium.com
+_	© 2005-2006 - Distribue sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.1
 	</version>
 	<description>
-	Le seul plugin spip au monde qui ne fait rien, mais qui le fait bien !
+	Gestion des documents mis a la corbeille
 	</description>
-	<options> <!-- fichier charge a chaque hit -->
-	mes_options.php
-	</options>
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	mes_fonctions.php
-	</fonctions>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
 	<class> 
-	Rien
+	Corbeille
 	</class>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
-		<nom>post_propre</nom>
-		<action>leFiltre</action>
-	</pipeline>
-	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
-		<inclure>Rien.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>ajouter_onglets</nom>
-		<action>ajouterOnglets</action>
-		<inclure>Rien.php</inclure>
+		<inclure>inc_corbeille.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>

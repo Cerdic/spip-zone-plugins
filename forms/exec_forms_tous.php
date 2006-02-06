@@ -5,7 +5,7 @@ include_once (dirname(__FILE__).'/inc_forms.php');
 function forms_tous(){
 	global $clean_link;
   include_ecrire("inc_presentation");
-	include_ecrire(inc_base);
+	include_ecrire('inc_base');
 	creer_base(); // au cas ou
 
 debut_page(_L("Tous les formulaires"), "documents", "forms");

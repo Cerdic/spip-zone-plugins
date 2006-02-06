@@ -13,7 +13,8 @@ function parse_plugin_xml($texte){
 		// $before doit etre vide ou des espaces uniquements!
 		$before = trim($chars[0][0]);
 	#echo "before:$before:<br/>";
-		if (strlen($before)>0) exit;
+		if (strlen($before)>0)
+			return $texte; // before non vide, donc on est dans du texte
 	
 		$tag = $chars[1][0];
 		$txt = $chars[2][0];
@@ -21,7 +22,10 @@ function parse_plugin_xml($texte){
 	
 		// tag fermant
 		$chars = preg_split("{(</$tag>)}s",$txt,2,PREG_SPLIT_OFFSET_CAPTURE|PREG_SPLIT_DELIM_CAPTURE);
-		if (!isset($chars[1])) {$out[$tag][]="erreur : tag fermant $tag manquant"; return $out;} // tag fermant manquant
+		if (!isset($chars[1])) { // tag fermant manquant
+			$out[$tag][]="erreur : tag fermant $tag manquant::$txt"; 
+			return $out;
+		}
 		$content = $chars[0][0];
 		$txt = trim($chars[2][0]);
 		$out[$tag][]=parse_plugin_xml($content);
@@ -37,11 +41,8 @@ function parse_plugin_xml($texte){
 }
 
 $texte = file_get_contents("plugin.xml");
-
 $arbre = parse_plugin_xml($texte);
 
-var_dump($arbre['plugin']);
-
-var_dump($arbre['plugin']);
+var_dump(array_pop($arbre['plugin']));
 
 ?>

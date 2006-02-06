@@ -10,8 +10,6 @@
  *
  */
 
-include_once('inc_forms_base.php');
-
 //
 // Afficher le diagramme de resultats d'un sondage
 //
