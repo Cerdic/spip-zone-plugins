@@ -4,8 +4,11 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Pierre Andrews (Mortimer)
+	</auteur>
+	<auteur>
 	Stephane Laurent (Bill)
 	</auteur>
+	<lien>http://www.spip-contrib.net/Des-mots-clefs-partout</lien>
 	<version>
 	0.1
 	</version>
