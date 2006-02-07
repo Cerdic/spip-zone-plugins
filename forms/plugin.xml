@@ -3,8 +3,8 @@
 	Formulaires
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	Cedric MORIN pour le plugin
-	sur une base initiale de X
+	Antoine Pitrou
+	portage sur 182e et adaptation en plugin par Cedric MORIN
 	</auteur>
 	<version>
 	0.1
