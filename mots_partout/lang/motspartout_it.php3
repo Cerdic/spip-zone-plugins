@@ -17,9 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'choses' => 'Aggiungere parole chiave sopra:',
 									   'dejamotgroupe' => 'Ce gia un parole chiave de questo gruppo (@groupe@) sul oggetto @chose@.',
 									   'ATTENTION' => 'ATTENZIONE',
-									   'ajouter_help' => 'Ajouter les mots coch&eacute;s {avec} et retirer les mots coch&eacute;s {sans}',
-									   'voir_help' => 'Voir les &eacute;l&eacute;ments selectionn&eacute;s.',
-									   'tagmachine' => 'liste des mots &agrave; ajouter'
+									   'ajouter_help' => 'Aggiungere le parole chiave <em>incluse</em> e cancella le parole exclude.',
+									   'voir_help' => 'Vedere i elementi selezionnati',
+									   'tagmachine' => 'Parole chiave da aggiungere'
 									   );
 
 ?>

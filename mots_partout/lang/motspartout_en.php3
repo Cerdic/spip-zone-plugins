@@ -17,9 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'choses' => 'Add keywords on:',
 									   'dejamotgroupe' => 'There is already a word from this group (@groupe@) on the object @chose@.',
 									   'ATTENTION' => 'WARNING',
-									   'ajouter_help' => 'Ajouter les mots coch&eacute;s {avec} et retirer les mots coch&eacute;s {sans}',
-									   'voir_help' => 'Voir les &eacute;l&eacute;ments selectionn&eacute;s.',
-									   'tagmachine' => 'liste des mots &agrave; ajouter'
+									   'ajouter_help' => 'Add the <em>included</em> elements and remove the <em>excluded</em> elements.',
+									   'voir_help' => 'See the elements selected.',
+									   'tagmachine' => 'Keywords to add'
 									   );
 
 ?>
