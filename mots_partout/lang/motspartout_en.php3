@@ -16,7 +16,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'pas_de_documents' => 'There is no such object',
 									   'choses' => 'Add keywords on:',
 									   'dejamotgroupe' => 'There is already a word from this group (@groupe@) on the object @chose@.',
-									   'ATTENTION' => 'WARNING'
+									   'ATTENTION' => 'WARNING',
+									   'ajouter_help' => 'Ajouter les mots coch&eacute;s {avec} et retirer les mots coch&eacute;s {sans}',
+									   'voir_help' => 'Voir les &eacute;l&eacute;ments selectionn&eacute;s.',
+									   'tagmachine' => 'liste des mots &agrave; ajouter'
 									   );
 
 ?>

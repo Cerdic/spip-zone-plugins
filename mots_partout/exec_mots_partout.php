@@ -924,8 +924,7 @@ function mots_partout() {
 		 <table border=0 cellspacing=0 cellpadding=3 width="100%">
 		 <tr class='tr_liste'>
 		 <td colspan=2>
-		 <!-- TODO traduire -->
-		 Voir les mots ou les photos selectionnés.
+		 <?php echo _T('motspartout:voir_help'); ?>
 		 </td>
 		 </tr>
 		 <tr class='tr_liste'>
@@ -972,8 +971,7 @@ function mots_partout() {
   ?>
 	   <tr class='tr_liste'>
 	   <td colspan=2>
-<!--TODO traduire-->
-		 Ajouter les mots cochés <em>avec</em> et retirer les mots cochés <em>sans</em>
+<?php echo _T('motspartout:ajouter_help'); ?>
 </td>
 		   </tr>
 	   <tr class='tr_liste'>
@@ -1018,7 +1016,9 @@ while ($row_groupes = spip_abstract_fetch($m_result_groupes)) {
 	  echo "<div class='liste'>";
 	  echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">
 	  	   <tr class='tr_liste'>
-											<td><label for=\"nom_tags_$id_groupe\">liste des mots à ajouter</label></td>
+											<td class=\"tr_liste\"><label for=\"nom_tags_$id_groupe\">".
+		_T('motspartout:tagmachine')
+."</label></td>
  	   <td colspan=2><div style=\"position:relative;overflow:visible; width: 10em;\">
         <input autocomplete=\"off\" type=\"texte\" id=\"nom_tags_$id_groupe\" name=\"nom_tags[]\" class='forml' cols='40' style=\"width: 100%;\">
         <div id=\"suggest_$id_groupe\" class=\"suggest_list\" style=\"width: 100%;\"></div>
