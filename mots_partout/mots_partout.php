@@ -22,7 +22,7 @@ class MotsPartout {
 	  // on voit les bouton dans la barre "accueil"
 	  $boutons_admin['naviguer']->sousmenu["mots_partout"]= new Bouton(
 																	   "../"._DIR_PLUGIN_MOTS_PARTOUT."/tag.png",  // icone
-																	   _L('mots_partout') //titre
+																	   _L('motspartout:mots_partout') //titre
 		);
 	return $boutons_admin;
 }

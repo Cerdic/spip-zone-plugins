@@ -1,6 +1,7 @@
 <?php
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+									   'mots_partout' => 'Keywords Everywhere',
 									   'titre_page' => 'Keywords assignation',
 									   'ajouter' => 'add',
 									   'enlever' => 'remove',
@@ -10,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'action' => 'Action',
 									   'stricte' => 'strict',
 									   'select' => 'select',
+									   'avec' => 'include',
 									   'sans' => 'exclude',
 									   'pas_de_documents' => 'There is no such object',
 									   'choses' => 'Add keywords on:',

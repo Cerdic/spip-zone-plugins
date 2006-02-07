@@ -1,6 +1,7 @@
 <?php
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+									   'mots_partout' => 'Mots Partout',
 									   'titre_page' => 'Assignation de mots clefs',
 									   'ajouter' => 'ajouter',
 									   'enlever' => 'enlever',
@@ -10,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'action' => 'Action',
 									   'stricte' => 'stricte',
 									   'select' => 'selection',
+									   'avec' => 'avec',
 									   'sans' => 'sans',
 									   'pas_de_documents' => 'Il n&#39;y a aucun objet avec ces charactéristiques',
 									   'choses' => 'Ajouter des mots clefs sur:',

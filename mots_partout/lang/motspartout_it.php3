@@ -1,6 +1,7 @@
 <?php
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+									   'mots_partout' => 'Parole Chiave per tutto',
 									   'titre_page' => 'Aggiungere parole chiave',
 									   'ajouter' => 'aggiungere',
 									   'enlever' => 'cancella',
@@ -10,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'action' => 'Azione',
 									   'stricte' => 'rigorosa',
 									   'select' => 'selezione',
+									   'avec' => 'includa',
 									   'sans' => 'escluda',
 									   'pas_de_documents' => 'Non ce niente con questi caratteristiche',
 									   'choses' => 'Aggiungere parole chiave sopra:',
