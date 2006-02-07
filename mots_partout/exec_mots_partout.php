@@ -534,7 +534,8 @@ function afficher_liste_defaut($choses) {
 
 function mots_partout() {
 
-
+  
+  include_ecrire ("inc_presentation");
   include_ecrire ("inc_documents");
   include_ecrire ("inc_abstract_sql");
   include_ecrire ("inc_objet");
