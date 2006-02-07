@@ -1016,10 +1016,10 @@ while ($row_groupes = spip_abstract_fetch($m_result_groupes)) {
 	  echo "<div class='liste'>";
 	  echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">
 	  	   <tr class='tr_liste'>
-											<td class=\"tr_liste\"><label for=\"nom_tags_$id_groupe\">".
+											<td><label for=\"nom_tags_$id_groupe\">".
 		_T('motspartout:tagmachine')
 ."</label></td>
- 	   <td colspan=2><div style=\"position:relative;overflow:visible; width: 10em;\">
+ 	   <td colspan=2><div style=\"position:relative;overflow:visible; width: 100%;\">
         <input autocomplete=\"off\" type=\"texte\" id=\"nom_tags_$id_groupe\" name=\"nom_tags[]\" class='forml' cols='40' style=\"width: 100%;\">
         <div id=\"suggest_$id_groupe\" class=\"suggest_list\" style=\"width: 100%;\"></div>
       </div>".http_img_pack("searching.gif", "*", "style='float:left; padding-right: 2em;display:none;' id = 'wait_$id_groupe'")."</td>
