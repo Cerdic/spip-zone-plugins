@@ -875,12 +875,12 @@ function mots_partout() {
   //Colonne de gauche
   debut_gauche();
 
-  echo '<form method="post" action="mots_partout.php">';
+  echo '<form method="post" action="'.generer_url_ecrire('mots_partout','').'">';
 
 
   // choix de la chose sur laquelle on veut ajouter des mots
   debut_cadre_enfonce('',false,'',_T('motspartout:choses'));
-  //echo  '<form action="mots_partout.php">';
+  //echo  '<form action="'.generer_url_ecrire('mots_partout','').'">';
   echo '<div class=\'liste\'>
 <table border=0 cellspacing=0 cellpadding=3 width=\"100%\">
 <tr class=\'tr_liste\'>
@@ -912,7 +912,7 @@ function mots_partout() {
 		   </table></div>
 		   <?php
 		   fin_cadre_enfonce();
-  echo "</form><form method='post' action='mots_partout.php'>
+  echo "</form><form method='post' action='".generer_url_ecrire('mots_partout','')."'>
 <input type='hidden' name='limit' value='$limit'>
 <input type='hidden' name='id_limit' value='$id_limit'>
 ";
@@ -945,7 +945,7 @@ function mots_partout() {
 
 	// echo '</form>';
 
-	// 	echo '<a name="action"></a><form action="mots_partout.php#voir">';
+	// 	echo '<a name="action"></a><form action="'.generer_url_ecrire('mots_partout','').'">';
 
 	echo '<input type="hidden" name="nom_chose" value="'.$_POST['nom_chose'].'">';  
 	//  echo "<input type='hidden' name='id_limit' value='$id_limit'>";
