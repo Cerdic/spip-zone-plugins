@@ -539,141 +539,39 @@ function mots_partout() {
   include_ecrire ("inc_documents");
   include_ecrire ("inc_abstract_sql");
   include_ecrire ("inc_objet");
-  include_ecrire('_libs_/tag-machine/inc_tag-machine.php');
+
   
   /***********************************************************************
-   * Définition des choses sur lesquels on peut vouloir mettre des mots clefs
-   ***********************************************************************/
-  
-  $choses_possibles['articles'] = array(
-										'titre_chose' => 'public:articles',
-										'id_chose' => 'id_article',
-										'table_principale' => 'spip_articles',
-										'table_auth' => 'spip_auteurs_articles',
-										'tables_limite' => array(
-																 'articles' => array(
-																					 'table' => 'spip_articles',
-																					 'nom_id' => 'id_article'),
-																 'rubriques' => array(
-																					  'table' => 'spip_articles',
-																					  'nom_id' =>  'id_rubrique'),
-																 'documents' => array(
-																					  'table' => 'spip_documents_articles',
-																					  'nom_id' =>  'id_document'),
-																 'auteurs' => array(
-																					'table' => 'spip_auteurs_articles',
-																					'nom_id' => 'id_auteur')
-																 )
-										);
+ * récuperation de la chose sur laquelle on travaille
+ ***********************************************************************/
 
-
-  $choses_possibles['documents'] = array(
-										 'titre_chose' => 'info_documents',
-										 'id_chose' => 'id_document',
-										 'table_principale' => 'spip_documents',
-										 'tables_limite' => array(
-																  'articles' => array(
-																					  'table' => 'spip_documents_articles',
-																					  'nom_id' => 'id_article'),
-																  'rubriques' => array(
-																					   'table' => 'spip_documents_rubriques',
-																					   'nom_id' =>  'id_rubrique'),
-																  'documents' => array(
-																					   'table' => 'spip_documents',
-																					   'nom_id' =>  'id_document')
-																  )
-										 );
-
-  $choses_possibles['auteurs'] = array(
-									   'titre_chose' => 'auteurs',
-									   'id_chose' => 'id_auteur',
-									   'table_principale' => 'spip_auteurs',
-									   'tables_limite' => array(
-																'auteurs' => array(
-																				   'table' => 'spip_auteurs',
-																				   'nom_id' => 'id_auteur'),
-																'articles' => array(
-																					'table' => 'spip_auteurs_articles',
-																					'nom_id' => 'id_auteur')
-																)
-									   );
-
-  $choses_possibles['messages'] = array(
-										'titre_chose' => 'Messages',
-										'id_chose' => 'id_message',
-										'table_principale' => 'spip_messages',
-										
-										'table_auth' => 'spip_auteurs_messages',
-										'tables_limite' => array(
-																 'messages' => array(
-																					 'table' => 'spip_messages',
-																					 'nom_id' => 'id_message'),
-																 'auteurs' => array(
-																					'table' => 'spip_auteurs_messages',
-																					'nom_id' => 'id_auteur')
-																 )
-										);
-
-  /***********************************************************************
-   * PREFIXE
-   ***********************************************************************/
-  $table_pref = 'spip';
-  if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
-
-
-  /***********************************************************************
-   * installation
-   * TODO ici on devrait avoir une abstraction et utilisé la table des 
-   * choses possibles
-   ***********************************************************************/
-
-  if ($_GET['installation']=='oui'){
-	spip_query("ALTER TABLE `".$table_pref."_groupes_mots` ADD `documents` CHAR( 3 ) NOT NULL DEFAULT 'non';");
-	spip_query("ALTER TABLE `".$table_pref."_groupes_mots` ADD `messages` CHAR( 3 ) NOT NULL DEFAULT 'non';");
-	spip_query("ALTER TABLE `".$table_pref."_groupes_mots` ADD `auteurs` CHAR( 3 ) NOT NULL DEFAULT 'non';");
-	spip_query("CREATE TABLE `".$table_pref."_mots_documents` (`id_mot` bigint(20) NOT NULL default '0',`id_document` bigint(1) NOT NULL default '0',
-  				KEY `id_document` (`id_document`),KEY `id_mot` (`id_mot`)) TYPE=MyISAM;;");
-	spip_query("CREATE TABLE `".$table_pref."_mots_messages` (`id_mot` bigint(20) NOT NULL default '0',`id_message` bigint(1) NOT NULL default '0',
-  				KEY `id_message` (`id_message`),KEY `id_mot` (`id_mot`)) TYPE=MyISAM;;");
-	spip_query("CREATE TABLE `".$table_pref."_mots_auteurs` (`id_mot` bigint(20) NOT NULL default '0',`id_auteur` bigint(1) NOT NULL default '0',
-  				KEY `id_auteur` (`id_auteur`),KEY `id_mot` (`id_mot`)) TYPE=MyISAM;;");
-  }
-  
-  /***********************************************************************
-   * récuperation de la chose sur laquelle on travaille
-   ***********************************************************************/
-
-  $nom_chose = $_POST['nom_chose'];
-  if(!isset($choses_possibles[$nom_chose])) {
-	list($nom_chose,) = each($choses_possibles);
-	reset($choses_possibles);
-  }
-  $id_chose = $choses_possibles[$nom_chose]['id_chose'];
-  $table_principale = $choses_possibles[$nom_chose]['table_principale'];
-  $table_auth = $choses_possibles[$nom_chose]['table_auth'];
-  $tables_limite = $choses_possibles[$nom_chose]['tables_limite'];
+$nom_chose = $_POST['nom_chose'];
+if(!isset($choses_possibles[$nom_chose])) {
+  list($nom_chose,) = each($choses_possibles);
+  reset($choses_possibles);
+}
+$id_chose = $choses_possibles[$nom_chose]['id_chose'];
+$table_principale = $choses_possibles[$nom_chose]['table_principale'];
+$table_auth = $choses_possibles[$nom_chose]['table_auth'];
+$tables_limite = $choses_possibles[$nom_chose]['tables_limite'];
 
 /***********************************************************************
  * action
  ***********************************************************************/
-  $mots = $_POST['id_mots'];
-  $sans_mots = $_POST['sans_mots'];
-  $choses = $_POST['id_choses'];
-  $nom_tags = $_POST['nom_tags'];
-  $id_groupes = $_POST['id_groupes'];
-  $limit =  $_POST['limit'];
-  $id_limit =  $_POST['id_limit'];
-  //echo "!!!".$nom_chose."!!!";
-  //echo "action :".$_POST['switch']."<br>";
-  //echo "choses :".serialize($choses)."<br>";
-  //echo "mots :".serialize($mots)."<br>";
-  //echo "sans_mots :".serialize($sans_mots)."<br>";
-  //echo "nom_tags :".serialize($nom_tags)."<br>";
-  //echo "id_groupes :".serialize($id_groupes)."<br>";
-  //echo "limit :".serialize($limit)."<br>";
-  //echo "id_limit :".serialize($id_limit)."<br>";
+$mots = $_POST['id_mots'];
+$sans_mots = $_POST['sans_mots'];
+$choses = $_POST['id_choses'];
+$limit =  $_POST['limit'];
+$id_limit =  $_POST['id_limit'];
+//echo "!!!".$nom_chose."!!!";
+//echo "action :".$_POST['switch']."<br>";
+//echo "choses :".serialize($choses)."<br>";
+//echo "mots :".serialize($mots)."<br>";
+//echo "sans_mots :".serialize($sans_mots)."<br>";
+//echo "limit :".serialize($limit)."<br>";
+//echo "id_limit :".serialize($id_limit)."<br>";
 
-  if($_POST['switch'] == 'action' && (count($choses) || count($nom_tags))) {
+if($_POST['switch'] == 'action' && count($choses)) {
 	if(count($mots)) {
 	  foreach($mots as $m) {	
 		$from = array('spip_mots');
@@ -711,256 +609,241 @@ function mots_partout() {
 			}
 			spip_abstract_free($res);
 		  }
-		  //		  echo "!!!!!!!action insert:"."$nom_chose(id_mot,$id_chose)($m,$d)"."!!!!!!!!!";
+//		  echo "!!!!!!!action insert:"."$nom_chose(id_mot,$id_chose)($m,$d)"."!!!!!!!!!";
 		  
 		  spip_abstract_insert("spip_mots_$nom_chose","(id_mot,$id_chose)","($m,$d)");
 		}
 	  }
 	}
 	if (count($sans_mots)) {
-	  foreach($sans_mots as $m) {
-		foreach($choses as $d) {
-		  //			echo "!!!!!!!action delete:"."$nom_chose(id_mot,$id_chose)($m,$d)"."!!!!!!!!!";
-		  spip_query("DELETE FROM ".$table_pref."_mots_$nom_chose WHERE id_mot=$m AND $id_chose=$d");
+	    foreach($sans_mots as $m) {
+		  foreach($choses as $d) {
+//			echo "!!!!!!!action delete:"."$nom_chose(id_mot,$id_chose)($m,$d)"."!!!!!!!!!";
+		  	spip_query("DELETE FROM ".$table_pref."_mots_$nom_chose WHERE id_mot=$m AND $id_chose=$d");
+		  }
 		}
-	  }
 	}
-	if (count($nom_tags)){
-	  for($iterTag = 0 ; $iterTag<count($nom_tags);$iterTag++) {
-		$listetags = $nom_tags[$iterTag];
-		$id_groupetags = $id_groupes[$iterTag];
-		$tags = new ListeTags($listetags,'',$id_groupetags);
-		//		echo "!!!!!!!tag:".serialize($listetags)."!!!!!!!!!";
-		foreach($choses as $d) {
-		  if($_POST['bouton'] == 'ajouter')
-			$tags->ajouter($d,$nom_chose,$id_chose);
-		  if($_POST['bouton'] == 'retirer')
-			$tags->retirer($d,$nom_chose,$id_chose);
-		}
-	  }
-	}
-  }
-  /**********************************************************************
+}
+/**********************************************************************
 * recherche des choses.
 ***********************************************************************/
 
-  if(count($choses) == 0) {
-	$select = array();
-	$select[] = "DISTINCT main.$id_chose";
+if(count($choses) == 0) {
+  $select = array();
+  $select[] = "DISTINCT main.$id_chose";
+  
+  $from = array();
+  $where = array();
+  $group = '';
+  $order = array();
+  
+  if(isset($limit) && $limit != 'rien') {
+	$table_lim = $tables_limite[$limit]['table'];
+	$nom_id_lim = $tables_limite[$limit]['nom_id'];
 	
-	$from = array();
-	$where = array();
-	$group = '';
-	$order = array();
-	
-	if(isset($limit) && $limit != 'rien') {
-	  $table_lim = $tables_limite[$limit]['table'];
-	  $nom_id_lim = $tables_limite[$limit]['nom_id'];
-	  
-	  $from[0] = "$table_lim as main";
-	  $where[0] = "main.$nom_id_lim IN ($id_limit)"; 
-	  if(count($mots) > 0) {
-		$from[1] = "spip_mots_$nom_chose as table_temp";
-		$where[1] = "table_temp.$id_chose = main.$id_chose";
-		$where[] = "table_temp.id_mot IN (".calcul_in($mots).')';
-		if($_POST['strict']) {
-		  $select[] = 'count(id_mot) as tot';
-		  $group = "main.$id_chose";
-		  $order = array('tot DESC');
-		}
-	  }
-	  if(count($sans_mots) > 0) {
-		$from[1] = "spip_mots_$nom_chose as table_temp";
-		$where[1] = "table_temp.$id_chose = main.$id_chose";
-		$where[] = "table_temp.id_mot not IN (".calcul_in($sans_mots).')';
-		if($_POST['strict']) {
-		  $select[] = 'count(id_mot) as tot';
-		  $group = "main.$id_chose";
-		  $order = array('tot DESC');
-		}
-	  }	
-	} else if((count($mots) > 0)||(count($sans_mots) > 0)){
-	  if(count($mots) > 0) {
-		$from[0] = "spip_mots_$nom_chose as main";
-		$where[] = "main.id_mot IN (".calcul_in($mots).')';
-		if($_POST['strict']) {
-		  $select[] = 'count(id_mot) as tot';
-		  $group = "main.$id_chose";
-		  $order = array('tot DESC');
-		}
-	  }
-	  if(count($sans_mots) > 0) {
-		$from[0] = "spip_mots_$nom_chose as main";
-		$where[] = "main.id_mot not IN (".calcul_in($sans_mots).')';
-		if($_POST['strict']) {
-		  $select[] = 'count(id_mot) as tot';
-		  $group = "main.$id_chose";
-		  $order = array('tot DESC');
-		}
-	  }
-	} else {
-	  $from[] = "$table_principale as main"; 
-	}
-
-	//  echo "select :".serialize($select);
-	//  echo "from :".serialize($from);
-	//  echo "where :".serialize($where);
-	//  echo "group :".serialize($group);
-	//  echo "order :".serialize($order);
-
-	$res=spip_abstract_select($select,$from,$where,$group,$order);
-	
-	$choses = array();
-	$avec_sans = (count($sans_mots) > 0);
-	if($avec_sans) $in_sans = calcul_in($sans_mots);
-	while ($row = spip_abstract_fetch($res)) {
-	  if(!isset($table_auth) ||
-		 (isset($table_auth) &&
-		  (verifier_admin() ||
-		   verifier_auteur($table_auth,$id_chose,$row[$id_chose])
-		   )
-		  )
-		 ) {
-		if($avec_sans) {
-		  $test = spip_abstract_select(array($id_chose),array("spip_mots_$nom_chose"),array("id_mot IN ($in_sans)","$id_chose = ".$row[$id_chose]));
-		  if(spip_abstract_count($test) > 0) {
-			continue;
-		  }
-		  spip_abstract_free($test);
-		}
-		if(count($mots) > 0 && $_POST['strict']) {
-		  if($row['tot'] >= count($mots)) {
-			$choses[] = $row[$id_chose];
-		  } else {
-			break;
-		  }
-		} else {
-		  $choses[] = $row[$id_chose];
-		}
+	$from[0] = "$table_lim as main";
+	$where[0] = "main.$nom_id_lim IN ($id_limit)"; 
+	if(count($mots) > 0) {
+	  $from[1] = "spip_mots_$nom_chose as table_temp";
+	  $where[1] = "table_temp.$id_chose = main.$id_chose";
+	  $where[] = "table_temp.id_mot IN (".calcul_in($mots).')';
+	  if($_POST['strict']) {
+		$select[] = 'count(id_mot) as tot';
+		$group = "main.$id_chose";
+		$order = array('tot DESC');
 	  }
 	}
-	spip_abstract_free($res);
+	if(count($sans_mots) > 0) {
+	  $from[1] = "spip_mots_$nom_chose as table_temp";
+	  $where[1] = "table_temp.$id_chose = main.$id_chose";
+	  $where[] = "table_temp.id_mot not IN (".calcul_in($sans_mots).')';
+	  if($_POST['strict']) {
+		$select[] = 'count(id_mot) as tot';
+		$group = "main.$id_chose";
+		$order = array('tot DESC');
+	  }
+	}	
+  } else if((count($mots) > 0)||(count($sans_mots) > 0)){
+  	if(count($mots) > 0) {
+	  $from[0] = "spip_mots_$nom_chose as main";
+	  $where[] = "main.id_mot IN (".calcul_in($mots).')';
+	  if($_POST['strict']) {
+		$select[] = 'count(id_mot) as tot';
+		$group = "main.$id_chose";
+		$order = array('tot DESC');
+	  }
+  	}
+  	if(count($sans_mots) > 0) {
+	  $from[0] = "spip_mots_$nom_chose as main";
+	  $where[] = "main.id_mot not IN (".calcul_in($sans_mots).')';
+	  if($_POST['strict']) {
+		$select[] = 'count(id_mot) as tot';
+		$group = "main.$id_chose";
+		$order = array('tot DESC');
+	  }
+  	}
+  } else {
+	$from[] = "$table_principale as main"; 
   }
 
-  if(count($choses) > 0) {
-	$select = array();
-	$from = array();
-	$where = array();
-	$show_mots = array();
-	$from[] = "spip_mots_$nom_chose";
-	$select[] = "spip_mots_$nom_chose.id_mot";
-	$where[] = "spip_mots_$nom_chose.$id_chose IN (".calcul_in($choses).')';
-	$res=spip_abstract_select($select,$from,$where);
-	while ($row = spip_abstract_fetch($res)) {
-	  $show_mots[] = $row['id_mot'];
+//  echo "select :".serialize($select);
+//  echo "from :".serialize($from);
+//  echo "where :".serialize($where);
+//  echo "group :".serialize($group);
+//  echo "order :".serialize($order);
+
+  $res=spip_abstract_select($select,$from,$where,$group,$order);
+  
+  $choses = array();
+  $avec_sans = (count($sans_mots) > 0);
+  if($avec_sans) $in_sans = calcul_in($sans_mots);
+  while ($row = spip_abstract_fetch($res)) {
+	if(!isset($table_auth) ||
+	   (isset($table_auth) &&
+		(verifier_admin() ||
+		 verifier_auteur($table_auth,$id_chose,$row[$id_chose])
+		 )
+		)
+	   ) {
+	  if($avec_sans) {
+		$test = spip_abstract_select(array($id_chose),array("spip_mots_$nom_chose"),array("id_mot IN ($in_sans)","$id_chose = ".$row[$id_chose]));
+		if(spip_abstract_count($test) > 0) {
+		  continue;
+		}
+		spip_abstract_free($test);
+	  }
+	  if(count($mots) > 0 && $_POST['strict']) {
+		if($row['tot'] >= count($mots)) {
+		  $choses[] = $row[$id_chose];
+		} else {
+		  break;
+		}
+	  } else {
+		$choses[] = $row[$id_chose];
+	  }
 	}
-	spip_abstract_free($res);
-  } 
+  }
+  spip_abstract_free($res);
+}
+
+if(count($choses) > 0) {
+  $select = array();
+  $from = array();
+  $where = array();
+  $show_mots = array();
+  $from[] = "spip_mots_$nom_chose";
+  $select[] = "spip_mots_$nom_chose.id_mot";
+  $where[] = "spip_mots_$nom_chose.$id_chose IN (".calcul_in($choses).')';
+  $res=spip_abstract_select($select,$from,$where);
+  while ($row = spip_abstract_fetch($res)) {
+	$show_mots[] = $row['id_mot'];
+  }
+  spip_abstract_free($res);
+} 
 
 /***********************************************************************
  * affichage
  ***********************************************************************/
 
-  debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots');
-  ?>
-	<link rel="stylesheet" type="text/css" href="./ajaxTagMachine.css">
-	   <script  type='text/javascript' src="./ajaxTagMachine.js">
-	   </script>
+debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots');
+?>
+</script>
 <?php
 
-	   echo '<br><br><center>';
-  gros_titre(_T('motspartout:titre_page'));
-  echo '</center>';
+echo '<br><br><center>';
+gros_titre(_T('motspartout:titre_page'));
+echo '</center>';
 
-  //Colonne de gauche
-  debut_gauche();
+//Colonne de gauche
+debut_gauche();
 
-  echo '<form method="post" action="'.generer_url_ecrire('mots_partout','').'">';
+echo '<form method="post" action="mots_partout.php">';
 
 
-  // choix de la chose sur laquelle on veut ajouter des mots
-  debut_cadre_enfonce('',false,'',_T('motspartout:choses'));
-  //echo  '<form action="'.generer_url_ecrire('mots_partout','').'">';
-  echo '<div class=\'liste\'>
+// choix de la chose sur laquelle on veut ajouter des mots
+debut_cadre_enfonce('',false,'',_T('motspartout:choses'));
+//echo  '<form action="mots_partout.php">';
+echo '<div class=\'liste\'>
 <table border=0 cellspacing=0 cellpadding=3 width=\"100%\">
 <tr class=\'tr_liste\'>
 <td colspan=2><select name="nom_chose">';
-  foreach($choses_possibles as $cho => $m) {
-	echo "<option value=\"$cho\"".(($cho == $nom_chose)?'selected':'').'>'._T($m['titre_chose']).'</option>';
-  }
-  echo '</select></td></tr>
+foreach($choses_possibles as $cho => $m) {
+  echo "<option value=\"$cho\"".(($cho == $nom_chose)?'selected':'').'>'._T($m['titre_chose']).'</option>';
+}
+echo '</select></td></tr>
 <tr class=\'tr_liste\'><td colspan=2>'.
-	_T('motspartout:limite').
-	':</td></tr>';
-  echo '<tr class=\'tr_liste\'><td><select name="limit">
+_T('motspartout:limite').
+':</td></tr>';
+echo '<tr class=\'tr_liste\'><td><select name="limit">
 <option value="rien" selected="true">'.
-	_T('motspartout:aucune').
-	'</option>';
+_T('motspartout:aucune').
+'</option>';
 
-  foreach($tables_limite as $t => $m) {
-	echo "<option value=\"$t\"".(($t == $limit)?'selected':'').">$t</option>";
-  }
+foreach($tables_limite as $t => $m) {
+  echo "<option value=\"$t\"".(($t == $limit)?'selected':'').">$t</option>";
+}
 
-  echo '</select></td>';
-  echo "<td><input type='text' size='3' name='id_limit' value='$id_limit'></td></tr>";
-  echo '<tr class=\'tr_liste\'>';
-  ?>
-	<td colspan=3><button type='submit' name='switch' value='chose'>
-	   <?php echo _T('motspartout:voir'); ?>
-	   </button>
-		   </td>
-		   </table></div>
-		   <?php
-		   fin_cadre_enfonce();
-  echo "</form><form method='post' action='".generer_url_ecrire('mots_partout','')."'>
+echo '</select></td>';
+echo "<td><input type='text' size='3' name='id_limit' value='$id_limit'></td></tr>";
+echo '<tr class=\'tr_liste\'>';
+?>
+<td colspan=3><button type='submit' name='switch' value='chose'>
+<?php echo _T('motspartout:voir'); ?>
+</button>
+</td>
+</table></div>
+<?php
+fin_cadre_enfonce();
+echo "</form><form method='post' action='mots_partout.php'>
 <input type='hidden' name='limit' value='$limit'>
 <input type='hidden' name='id_limit' value='$id_limit'>
 ";
 
-  if(count($choses)) {
-	debut_cadre_enfonce('',false,'',_T('motspartout:voir'));
-	?>
-	  <div class='liste'>
-		 <table border=0 cellspacing=0 cellpadding=3 width="100%">
-		 <tr class='tr_liste'>
-		 <td colspan=2>
-		 <?php echo _T('motspartout:voir_help'); ?>
-		 </td>
-		 </tr>
-		 <tr class='tr_liste'>
-		 <td><button type='submit' name='switch' value='voir'>
-		 <?php echo _T('motspartout:voir'); ?>
-		 </button>
-			 </td>
-			 <td colspan=2>
-			 <input type='checkbox' id='strict' name='strict'/><label for='strict'>
-			 <?php echo _T('motspartout:stricte'); ?>
-			 </label></td>
-				 </tr>
-				 </table></div>
-				 <?php
-				 fin_cadre_enfonce();
+if(count($choses)) {
+debut_cadre_enfonce('',false,'',_T('motspartout:voir'));
+?>
+<div class='liste'>
+<table border=0 cellspacing=0 cellpadding=3 width="100%">
+<tr class='tr_liste'>
+<td colspan=2>
+<!-- TODO traduire -->
+Voir les mots ou les photos selectionnés.
+</td>
+</tr>
+<tr class='tr_liste'>
+<td><button type='submit' name='switch' value='voir'>
+<?php echo _T('motspartout:voir'); ?>
+</button>
+</td>
+<td colspan=2>
+<input type='checkbox' id='strict' name='strict'/><label for='strict'>
+<?php echo _T('motspartout:stricte'); ?>
+</label></td>
+</tr>
+</table></div>
+<?php
+fin_cadre_enfonce();
 
 
-	// echo '</form>';
+ // echo '</form>';
 
-	// 	echo '<a name="action"></a><form action="'.generer_url_ecrire('mots_partout','').'">';
+// 	echo '<a name="action"></a><form action="mots_partout.php#voir">';
 
-	echo '<input type="hidden" name="nom_chose" value="'.$_POST['nom_chose'].'">';  
-	//  echo "<input type='hidden' name='id_limit' value='$id_limit'>";
-	//  echo "<input type='hidden' name='limit' value='$limit'>";
-	//  for($i=0; $i < count($choses); $i++) {
-	//	echo "<input type=\"hidden\" name=\"id_choses[]\" value=\"".$choses[$i].'">';
-	//  }
-	
-	// les actions et limitations possibles.
-	debut_cadre_enfonce('',false,'',_T('motspartout:action'));
-	
-	
-	echo '<div class=\'liste\'>
+  echo '<input type="hidden" name="nom_chose" value="'.$_POST['nom_chose'].'">';  
+//  echo "<input type='hidden' name='id_limit' value='$id_limit'>";
+//  echo "<input type='hidden' name='limit' value='$limit'>";
+//  for($i=0; $i < count($choses); $i++) {
+//	echo "<input type=\"hidden\" name=\"id_choses[]\" value=\"".$choses[$i].'">';
+//  }
+  
+  // les actions et limitations possibles.
+  debut_cadre_enfonce('',false,'',_T('motspartout:action'));
+  
+  
+  echo '<div class=\'liste\'>
 <table border=0 cellspacing=0 cellpadding=3 width=\"100%\">';
-	//ca ne sert à rien, on n'utilise jamais ces choix, on utilise directement avec/sans mais ça pourrait être utile pour gérer tag-machine 
-	/* echo '<tr class=\'tr_liste\'>
+//ca ne sert à rien, on n'utilise jamais ces choix, on utilise directement avec/sans mais ça pourrait être utile pour gérer tag-machine 
+/* echo '<tr class=\'tr_liste\'>
 <td><input type=\'radio\' value=\'ajouter\' name="bouton" id=\'ajouter\'><br><label for=\'ajouter\'>'.
 	_T('motspartout:ajouter').
 	'</label></td>
@@ -971,7 +854,8 @@ function mots_partout() {
   ?>
 	   <tr class='tr_liste'>
 	   <td colspan=2>
-<?php echo _T('motspartout:ajouter_help'); ?>
+<!--TODO traduire-->
+		 Ajouter les mots cochés <em>avec</em> et retirer les mots cochés <em>sans</em>
 </td>
 		   </tr>
 	   <tr class='tr_liste'>
@@ -1014,22 +898,7 @@ while ($row_groupes = spip_abstract_fetch($m_result_groupes)) {
 	
 	if (spip_abstract_count($result) > 0) {
 	  echo "<div class='liste'>";
-	  echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">
-	  	   <tr class='tr_liste'>
-											<td><label for=\"nom_tags_$id_groupe\">".
-		_T('motspartout:tagmachine')
-."</label></td>
- 	   <td colspan=2><div style=\"position:relative;overflow:visible; width: 100%;\">
-        <input autocomplete=\"off\" type=\"texte\" id=\"nom_tags_$id_groupe\" name=\"nom_tags[]\" class='forml' cols='40' style=\"width: 100%;\">
-        <div id=\"suggest_$id_groupe\" class=\"suggest_list\" style=\"width: 100%;\"></div>
-      </div>".http_img_pack("searching.gif", "*", "style='float:left; padding-right: 2em;display:none;' id = 'wait_$id_groupe'")."</td>
-		   </tr>
-<input type='hidden' name='id_groupes[]' value='$id_groupe'>
-  <script  type='text/javascript'> <!--
-groupe_$id_groupe = new AjaxSuggestMenu('ajax_mortimer.php', 'titre', 'nom_tags_$id_groupe','suggest_$id_groupe');
-groupe_$id_groupe.addVar('id_groupe','$id_groupe');
-groupe_$id_groupe.setWaiting('wait_$id_groupe');
-		--></script>";
+	  echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
 	  $i =0;
 	  $table[] = array(
 					   ' ' => 0,
@@ -1137,7 +1006,10 @@ function selectAll(formObj, isInverse)
 
 <?php
 
-	fin_page();
+fin_page();
+
 }
+
+
 ?>
 
