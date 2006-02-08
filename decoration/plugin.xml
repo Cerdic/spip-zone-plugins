@@ -29,7 +29,7 @@ Le filtre decoration permet aux redacteurs d'un site spip de d'appliquer les sty
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 			<nom>pre_typo</nom>
-		<action>decoration</action>
+		<action>pre_typo</action>
 		<inclure>decoration.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->

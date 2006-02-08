@@ -13,7 +13,7 @@
 class Ancres {
 
 	// la fonction est tres legere on la definit directement ici
-	function ancres($texte) {
+	function post_propre($texte) {
 		$regexp = "|\[#?([^][]*)<-\]|";
 		if (preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER))
 		foreach ($matches as $regs)

@@ -14,7 +14,7 @@
 class ToutMulti{
 
 	// la fonction est tres legere on la definit directement ici
-	function toutmulti($texte) {
+	function pre_typo($texte) {
 		$regexp = "|<:([^>]*):>|";
 		if (preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER))
 		foreach ($matches as $regs)

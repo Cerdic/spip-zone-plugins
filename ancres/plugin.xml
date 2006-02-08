@@ -23,7 +23,7 @@ _ © 2005 - Distribue sous licence BSD
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>post_propre</nom>
-		<action>ancres</action>
+		<action>post_propre</action>
 		<inclure>ancres.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->

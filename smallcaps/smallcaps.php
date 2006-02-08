@@ -13,7 +13,7 @@
 class SmallCaps{
 
 	// Raccourci typographique <sc></sc>
-	function smallcaps($texte) {
+	function post_typo($texte) {
 		$texte = str_replace("<sc>",
 			"<span style=\"font-variant: small-caps\">", $texte);
 		$texte = str_replace("</sc>", "</span>", $texte);

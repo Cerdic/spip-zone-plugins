@@ -6,7 +6,7 @@
 
 class decoration{
 
-	function decoration($texte) {
+	function pre_typo($texte) {
 		$texte = preg_replace("/(\[souligne\])(.*?)(\[\/souligne\])/", "<span style=\"text-decoration: underline;\">\\2</span>", $texte);
 		$texte = preg_replace("/(\[barre\])(.*?)(\[\/barre\])/", "<span style=\"text-decoration: line-through;\">\\2</span>", $texte);
 		$texte = preg_replace("/(\[over\])(.*?)(\[\/over\])/", "<span style=\"text-decoration: overline;\">\\2</span>", $texte);

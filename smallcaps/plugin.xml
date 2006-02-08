@@ -23,7 +23,7 @@ _ © 2005 - Distribue sous licence GNU/GPL
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>post_typo</nom>
-		<action>smallcaps</action>
+		<action>post_typo</action>
 		<inclure>smallcaps.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
