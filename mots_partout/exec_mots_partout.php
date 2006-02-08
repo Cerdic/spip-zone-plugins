@@ -131,7 +131,6 @@ function calcul_in($mots) {
 	if($i > 0) $to_ret .= ',';
 	$to_ret .= $mots[$i];
   }
-
   return $to_ret;
 }
 
@@ -633,15 +632,15 @@ $tables_limite = $choses_possibles[$nom_chose]['tables_limite'];
 /***********************************************************************
  * action
  ***********************************************************************/
-$mots = $_POST['id_mots'];
-$sans_mots = $_POST['sans_mots'];
-$choses = $_POST['id_choses'];
+$mots = $_REQUEST['id_mots'];
+$sans_mots = $_REQUEST['sans_mots'];
+$choses = $_REQUEST['id_choses'];
 $limit =  $_POST['limit'];
 $id_limit =  $_POST['id_limit'];
 //echo "!!!".$nom_chose."!!!";
-//echo "action :".$_POST['switch']."<br>";
+//echo "action :".$_REQUEST['switch']."<br>";
 //echo "choses :".serialize($choses)."<br>";
-//echo "mots :".serialize($mots)."<br>";
+//echo count($mots)." mots :".serialize($mots)."<br>";
 //echo "sans_mots :".serialize($sans_mots)."<br>";
 //echo "limit :".serialize($limit)."<br>";
 //echo "id_limit :".serialize($id_limit)."<br>";
@@ -694,7 +693,7 @@ if($_POST['switch'] == 'action' && count($choses)) {
 	    foreach($sans_mots as $m) {
 		  foreach($choses as $d) {
 //			echo "!!!!!!!action delete:"."$nom_chose(id_mot,$id_chose)($m,$d)"."!!!!!!!!!";
-		  	spip_query("DELETE FROM ".$table_pref."_mots_$nom_chose WHERE id_mot=$m AND $id_chose=$d");
+		  	spip_query("DELETE FROM spip_mots_$nom_chose WHERE id_mot=$m AND $id_chose=$d");
 		  }
 		}
 	}
@@ -874,7 +873,6 @@ echo "</form><form method='post' action='".generer_url_ecrire('mots_partout','')
 <input type='hidden' name='id_limit' value='$id_limit'>
 ";
 
-if(count($choses)) {
 debut_cadre_enfonce('',false,'',_T('motspartout:voir'));
 ?>
 <div class='liste'>
@@ -912,6 +910,7 @@ fin_cadre_enfonce();
 //  }
   
   // les actions et limitations possibles.
+if(count($choses)) {
   debut_cadre_enfonce('',false,'',_T('motspartout:action'));
   
   
@@ -944,6 +943,7 @@ fin_cadre_enfonce();
 <?php
 		   
   fin_cadre_enfonce();
+}
  creer_colonne_droite();
 // affichage de mots clefs.
 $select = array('*');
@@ -1022,8 +1022,6 @@ while ($row_groupes = spip_abstract_fetch($m_result_groupes)) {
 spip_abstract_free($m_result_groupes);
 
 
-
-}
 //Milieu
 
 debut_droite();
