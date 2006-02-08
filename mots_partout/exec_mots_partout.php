@@ -532,6 +532,80 @@ function afficher_liste_defaut($choses) {
   echo '</table>';
 }
 
+
+/***********************************************************************
+* Définition des choses sur lesquels on peut vouloir mettre des mots clefs
+***********************************************************************/
+
+$choses_possibles['articles'] = array(
+									  'titre_chose' => 'public:articles',
+										  'id_chose' => 'id_article',
+									  'table_principale' => 'spip_articles',
+									  'table_auth' => 'spip_auteurs_articles',
+									  'tables_limite' => array(
+															   'articles' => array(
+																				   'table' => 'spip_articles',
+																				   'nom_id' => 'id_article'),
+															   'rubriques' => array(
+																					'table' => 'spip_articles',
+																					'nom_id' =>  'id_rubrique'),
+															   'documents' => array(
+																					'table' => 'spip_documents_articles',
+																					'nom_id' =>  'id_document'),
+															   'auteurs' => array(
+																				  'table' => 'spip_auteurs_articles',
+																				  'nom_id' => 'id_auteur')
+															   )
+									  );
+
+
+$choses_possibles['documents'] = array(
+									   'titre_chose' => 'info_documents',
+												  'id_chose' => 'id_document',
+									   'table_principale' => 'spip_documents',
+									   'tables_limite' => array(
+																'articles' => array(
+																					'table' => 'spip_documents_articles',
+																					'nom_id' => 'id_article'),
+																'rubriques' => array(
+																					 'table' => 'spip_documents_rubriques',
+																					 'nom_id' =>  'id_rubrique'),
+																'documents' => array(
+																					 'table' => 'spip_documents',
+																					 'nom_id' =>  'id_document')
+																)
+									   );
+
+$choses_possibles['auteurs'] = array(
+									  'titre_chose' => 'auteurs',
+									  'id_chose' => 'id_auteur',
+									  'table_principale' => 'spip_auteurs',
+									  'tables_limite' => array(
+															   'auteurs' => array(
+																				   'table' => 'spip_auteurs',
+																				   'nom_id' => 'id_auteur'),
+															   'articles' => array(
+																				  'table' => 'spip_auteurs_articles',
+																				  'nom_id' => 'id_auteur')
+															   )
+									  );
+
+$choses_possibles['messages'] = array(
+									  'titre_chose' => 'Messages',
+									  'id_chose' => 'id_message',
+									  'table_principale' => 'spip_messages',
+									  
+									  'table_auth' => 'spip_auteurs_messages',
+									  'tables_limite' => array(
+															   'messages' => array(
+																				   'table' => 'spip_messages',
+																				   'nom_id' => 'id_message'),
+															   'auteurs' => array(
+																				  'table' => 'spip_auteurs_messages',
+																				  'nom_id' => 'id_auteur')
+															   )
+									  );
+
 function mots_partout() {
 
   
