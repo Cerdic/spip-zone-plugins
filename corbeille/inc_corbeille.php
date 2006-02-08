@@ -4,7 +4,7 @@
  * definition du plugin "corbeille" version "classe statique"
  * utilisee comme espace de nommage
  */
-define_once('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS . basename(dirname(__FILE__))));
  
 class Corbeille {
 	/* static public */

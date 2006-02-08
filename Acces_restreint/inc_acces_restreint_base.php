@@ -3,7 +3,7 @@
 // Les tables : 
 // 1 table descriptive des zones d'acces
 // 2 tables de liens zones<->auteurs et  zones<->rubriques
-define_once('_DIR_PLUGIN_ACCES_RESTREINT',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+define('_DIR_PLUGIN_ACCES_RESTREINT',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 
 global $tables_principales;
 global $tables_auxiliaires;

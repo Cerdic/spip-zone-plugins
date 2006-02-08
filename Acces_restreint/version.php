@@ -12,7 +12,7 @@
 
 $nom = 'Acces Restreint';
 $version = 0.1;
-define_once('_DIR_PLUGIN_ACCES_RESTREINT',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+define('_DIR_PLUGIN_ACCES_RESTREINT',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 
 // s'inserer dans les pipelines
 $GLOBALS['spip_pipeline']['ajouter_boutons'] .= '|AccesRestreint::ajouterBoutons';

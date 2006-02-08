@@ -11,7 +11,7 @@
  */
 
 include_once("inc_forms_base.php");
-define_once('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 
 //
 // Formulaires

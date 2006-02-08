@@ -9,7 +9,7 @@
  * © 2006 - Distribue sous licence GPL
  *
  */
-define_once('_DIR_PLUGIN_SUPER_DUMP',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+define('_DIR_PLUGIN_SUPER_DUMP',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 
 class SuperDump {
 	/* static public */
