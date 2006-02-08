@@ -1,0 +1,36 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Décoration
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	izo@aucuneid.net  www.aucuneid.com © 2006 - Distribue sous licence GNU/GPL
+	</auteur>
+		<lien>http://www.aucuneid.com/bones</lien>
+
+	<version>
+	0.1
+	</version>
+	<description>
+
+Le filtre decoration permet aux redacteurs d'un site spip de d'appliquer les styles souligné, barré, au dessus, blink et fluo à  une phrase , un mot, parapraphe.
+[souligne]Lorem ipsum dolor sit amet[/souligne]
+[barre]Lorem ipsum dolor sit amet[/barre]
+[blink]Lorem ipsum dolor sit amet[/blink]
+[fluo]Lorem ipsum dolor sit amet[/fluo]
+	</description>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<class> 
+	decoration
+	</class>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+			<nom>pre_typo</nom>
+		<action>decoration</action>
+		<inclure>decoration.php</inclure>
+	</pipeline>
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
