@@ -533,6 +533,9 @@ function afficher_liste_defaut($choses) {
 }
 
 
+function mots_partout() {
+
+
 /***********************************************************************
 * Définition des choses sur lesquels on peut vouloir mettre des mots clefs
 ***********************************************************************/
@@ -605,8 +608,6 @@ $choses_possibles['messages'] = array(
 																				  'nom_id' => 'id_auteur')
 															   )
 									  );
-
-function mots_partout() {
 
   
   include_ecrire ("inc_presentation");
