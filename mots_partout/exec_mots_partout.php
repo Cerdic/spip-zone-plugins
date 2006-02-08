@@ -3,8 +3,7 @@
 
 //	  exec_mots_partout.php
 //    Fichier créé pour SPIP avec un bout de code emprunté à celui ci.
-//    Distribué sans garantie sous licence GPL.
-//
+//    Distribué sans garantie sous licence GPL./
 //    Copyright (C) 2005  Pierre ANDREWS
 //
 //    This program is free software; you can redistribute it and/or modify
@@ -636,7 +635,9 @@ $mots = $_REQUEST['id_mots'];
 $sans_mots = $_REQUEST['sans_mots'];
 $choses = $_REQUEST['id_choses'];
 $limit =  $_POST['limit'];
+if(!isset($limit)) $limit = 'rien';
 $id_limit =  $_POST['id_limit'];
+if(!isset($id_limit)) $id_limit = 0;
 //echo "!!!".$nom_chose."!!!";
 //echo "action :".$_REQUEST['switch']."<br>";
 //echo "choses :".serialize($choses)."<br>";
