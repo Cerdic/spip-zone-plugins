@@ -832,12 +832,12 @@ echo '</center>';
 //Colonne de gauche
 debut_gauche();
 
-echo '<form method="post" action="'.genererer_url_ecrire('mots_partout','').'">';
+echo '<form method="post" action="'.generer_url_ecrire('mots_partout','').'">';
 
 
 // choix de la chose sur laquelle on veut ajouter des mots
 debut_cadre_enfonce('',false,'',_T('motspartout:choses'));
-//echo  '<form action="'.generere_url_ecrire('mots_partout','').'">';
+//echo  '<form action="'.generer_url_ecrire('mots_partout','').'">';
 echo '<div class=\'liste\'>
 <table border=0 cellspacing=0 cellpadding=3 width=\"100%\">
 <tr class=\'tr_liste\'>
@@ -869,7 +869,7 @@ echo '<tr class=\'tr_liste\'>';
 </table></div>
 <?php
 fin_cadre_enfonce();
-echo "</form><form method='post' action='".generere_url_ecrire('mots_partout','')."'>
+echo "</form><form method='post' action='".generer_url_ecrire('mots_partout','')."'>
 <input type='hidden' name='limit' value='$limit'>
 <input type='hidden' name='id_limit' value='$id_limit'>
 ";
@@ -902,7 +902,7 @@ fin_cadre_enfonce();
 
  // echo '</form>';
 
-// 	echo '<a name="action"></a><form action="'.generere_url_ecrire('mots_partout','').'#voir">';
+// 	echo '<a name="action"></a><form action="'.generer_url_ecrire('mots_partout','').'#voir">';
 
   echo '<input type="hidden" name="nom_chose" value="'.$_POST['nom_chose'].'">';  
 //  echo "<input type='hidden' name='id_limit' value='$id_limit'>";
