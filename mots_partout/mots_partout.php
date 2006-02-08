@@ -10,7 +10,7 @@
  *
  */
 
-define_once('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 
 class MotsPartout {
 	/* static public */

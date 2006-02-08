@@ -14,6 +14,6 @@
  * © 2005 - Distribue sous licence GNU/GPL
  *
  */
-define_once('_DIR_PLUGIN_ADVANCED_SEARCH',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+define('_DIR_PLUGIN_ADVANCED_SEARCH',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 
 ?>
