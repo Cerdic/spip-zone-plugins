@@ -134,10 +134,12 @@ function calcul_in($mots) {
 }
 
 function secureIntArray($array) {
-  $to_return = Array();
-  foreach($array as $id) {
-	$to_return[] = intval($id);
-  }
+  if(is_array($array)) {
+	$to_return = Array();
+	foreach($array as $id) {
+	  $to_return[] = intval($id);
+	}
+  } 
   return $to_return;
 }
 
