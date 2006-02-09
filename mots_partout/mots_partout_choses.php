@@ -33,8 +33,7 @@ function afficher_liste_articles($choses,$nb_aff=20) {
 
   $query = 'SELECT id_article, titre, id_rubrique, date, statut, lang, descriptif FROM spip_articles as articles WHERE articles.id_article'
 .((count($choses))?(' IN('.calcul_in($choses).')'):'');
-  
-  
+
   $tranches =  afficher_tranches_requete($query, 3,'debut',false,$nb_aff);
   if($tranches) {
 

@@ -609,9 +609,10 @@ debut_cadre_relief('',false,'document', _T('portfolio'));
 if(count($choses) > 0) {
   $function = "afficher_liste_$nom_chose";
   if(function_exists($function)) 
-	$function($choses);
-  else
+	$function($choses,$nb_aff);
+  else {
 	afficher_liste_defaut($choses,$nb_aff);
+	}	
 ?>
 <!--
 <input type="radio" name="selectall" id="all" onclick="selectAll(this.form, 'id_choses[]', 0);"><label for="all">Select All</label>
