@@ -19,7 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'ATTENTION' => 'WARNING',
 									   'ajouter_help' => 'Add the <em>included</em> elements and remove the <em>excluded</em> elements.',
 									   'voir_help' => 'See the elements selected.',
-									   'tagmachine' => 'Keywords to add'
+									   'tagmachine' => 'Keywords to add',
+									   'par' => 'by'
 									   );
 
 ?>

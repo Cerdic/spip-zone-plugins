@@ -403,7 +403,7 @@ foreach($choses_possibles as $cho => $m) {
 }
 echo '</select></td>';
 
-echo '<td>par: <select name="nb_aff">';
+echo '<td><label for="nb_aff">'._T('motspartout:par').':</label><select name="nb_aff">';
 
   for($nb = 10;$nb<count($choses);$nb=$nb+10)
 	echo "<option value=\"$nb\"".(($nb == $nb_aff)?'selected="true"':'').">$nb</option>";
