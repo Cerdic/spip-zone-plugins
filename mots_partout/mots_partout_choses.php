@@ -31,7 +31,8 @@ $choses_possibles['articles'] = array(
 
 function afficher_liste_articles($choses,$nb_aff=20) {
 
-  $query = 'SELECT id_article, titre, id_rubrique, date, statut, lang, descriptif FROM spip_articles as articles WHERE articles.id_article IN('.calcul_in($choses).')';
+  $query = 'SELECT id_article, titre, id_rubrique, date, statut, lang, descriptif FROM spip_articles as articles WHERE articles.id_article'
+.((count($choses))?(' IN('.calcul_in($choses).')'):'');
   
   
   $tranches =  afficher_tranches_requete($query, 3,'debut',false,$nb_aff);
@@ -250,7 +251,7 @@ function afficher_liste_documents($choses,$nb_aff=20) {
   echo "<table width='100%' cellspacing='0' cellpadding='3' style=\"border-top:1px solid black\">\n";
   $i=0;
   
-  $query = "SELECT * FROM spip_documents WHERE id_document IN (".calcul_in($choses).')';
+  $query = "SELECT * FROM spip_documents WHERE id_document".((count($choses))?(' IN('.calcul_in($choses).')'):'');
 
   $tranches =  afficher_tranches_requete($query, 3,'debut',false,$nb_aff);
   if($tranches) {
@@ -298,7 +299,7 @@ $choses_possibles['messages'] = array(
 
 function afficher_liste_messages($choses,$nb_aff=20) {
 
-  $query = 'SELECT id_message,titre,type,date_heure,statut FROM spip_messages as messages WHERE messages.id_message IN ('.calcul_in($choses).')';
+  $query = 'SELECT id_message,titre,type,date_heure,statut FROM spip_messages as messages WHERE messages.id_message'.((count($choses))?(' IN('.calcul_in($choses).')'):'');
   
   $tranches =  afficher_tranches_requete($query, 3,'debut',false,$nb_aff);
   
@@ -393,7 +394,7 @@ $choses_possibles['auteurs'] = array(
 
 function afficher_liste_auteurs($choses) {
   
-  $query = 'SELECT id_auteur, nom, login, email, extra, statut FROM spip_auteurs as auteurs WHERE auteurs.id_auteur IN ('.calcul_in($choses).')';
+  $query = 'SELECT id_auteur, nom, login, email, extra, statut FROM spip_auteurs as auteurs WHERE auteurs.id_auteur'.((count($choses))?(' IN('.calcul_in($choses).')'):'');
   
   $tranches =  afficher_tranches_requete($query, 3,'debut',false,$nb_aff);
 

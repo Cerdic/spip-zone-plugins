@@ -134,7 +134,7 @@ function calcul_in($mots) {
 }
 
 function secureIntArray($array) {
-  $to_return = '';
+  $to_return = Array();
   foreach($array as $id) {
 	$to_return[] = intval($id);
   }
@@ -185,13 +185,13 @@ $mots = secureIntArray($_REQUEST['id_mots']);
 $sans_mots = secureIntArray(addslashes($_REQUEST['sans_mots']));
 $choses = secureIntArray($_REQUEST['id_choses']);
 $limit =  addslashes($_POST['limit']);
-if(!isset($limit)) $limit = 'rien';
+if($limit == '') $limit = 'rien';
 $id_limit =  intval($_POST['id_limit']);
-if(!isset($id_limit)) $id_limit = 0;
+if($id_limit < 1) $id_limit = 0;
 $nb_aff = intval($_POST['nb_aff']);
-if(!$nb_aff) $nb_aff = 20;
+if($nb_aff < 1) $nb_aff = 20;
 $switch = addslashes($_POST['switch']);
-if(!$switch) $switch = 'voir';
+if($switch == '') $switch = 'voir';
 $strict = intval($_POST['strict']);
 
 //echo "!!!".$nom_chose."!!!";
@@ -358,7 +358,9 @@ if(count($choses) == 0) {
 }
 
 if(count($choses) > 0) {
-  $query = "SELECT spip_mots_$nom_chose.id_mot FROM spip_mots_$nom_chose WHERE spip_mots_$nom_chose.$id_chose IN (".calcul_in($choses).')';
+  $query = "SELECT spip_mots_$nom_chose.id_mot FROM spip_mots_$nom_chose WHERE spip_mots_$nom_chose.$id_chose".((count($choses))?(' IN('.calcul_in($choses).')'):'');
+
+	echo count($choses);
 
   afficher_tranches_requete($query, 3,'debut',false,$nb_aff);
   
