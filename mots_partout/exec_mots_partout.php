@@ -445,8 +445,9 @@ debut_cadre_enfonce('',false,'',_T('motspartout:voir'));
 <table border=0 cellspacing=0 cellpadding=3 width="100%">
 <tr class='tr_liste'>
 <td colspan=2>
-<!-- TODO traduire -->
-Voir les mots ou les photos selectionnés.
+?>
+echo _T('motspartout:voir_help');
+<?php
 </td>
 </tr>
 <tr class='tr_liste'>
@@ -495,8 +496,9 @@ if(count($choses)) {
   ?>
 	   <tr class='tr_liste'>
 	   <td colspan=2>
-		 <!--TODO traduire-->
-		 Ajouter les mots cochés <em>avec</em> et retirer les mots cochés <em>sans</em>
+?>
+echo _T('motspartout:ajouter_help');
+<?php
 </td>
 		   </tr>
 	   <tr class='tr_liste'>
