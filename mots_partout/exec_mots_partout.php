@@ -496,9 +496,9 @@ if(count($choses)) {
   ?>
 	   <tr class='tr_liste'>
 	   <td colspan=2>
-?>
-echo _T('motspartout:ajouter_help');
 <?php
+echo _T('motspartout:ajouter_help');
+?>
 </td>
 		   </tr>
 	   <tr class='tr_liste'>
