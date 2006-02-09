@@ -137,11 +137,15 @@ function portfolio(){
 		$nb_aff = 12;
 	
 	global $t_debut;
-	if (isset($_GET['show_docs'])){
-		$id = intval($_GET['show_docs']);
+	if (isset($_GET['show_docs']))
+		$show_docs = intval($_GET['show_docs']);
+	if (isset($_POST['show_docs']))
+		$show_docs = intval($_POST['show_docs']);
+	if ($show_docs)
+	{
 		$pos = 0;
 		$res = spip_query($requete);
-		while (($row = spip_fetch_array($res)) && (intval($row['id_document'])!=$id))
+		while (($row = spip_fetch_array($res)) && (intval($row['id_document'])!=$show_docs))
 			$pos++;
 		$t_debut = floor($pos/$nb_aff)*$nb_aff;
 	}
@@ -231,6 +235,19 @@ function portfolio(){
 				else
 				  $altgood = true;
 			}
+			// balise alt ?
+			$doc['info']="";
+			if ($alt == "")
+				$doc['info'] .= "Pas de balise alt ?? ".htmlentities($montexte);
+			else {
+				if ($altgood == true)
+					$doc['info'] .= "<span style='background : #00FF00;'>";
+				else{
+					$doc['info'] .= "<span style='background : #FF0000;'>";
+					$errors++;
+				}
+				$doc['info'] .= "$alt</span>";
+		 	}
 			
 			$documents[] = $doc;
 		}

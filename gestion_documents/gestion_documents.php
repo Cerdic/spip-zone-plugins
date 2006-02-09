@@ -21,7 +21,7 @@ class GestionDocuments {
 		AND $GLOBALS["options"]=="avancees" ) {
 
 		  // on voit les bouton dans la barre "accueil"
-			$boutons_admin['naviguer']->sousmenu["documents_tous"]= new Bouton(
+			$boutons_admin['naviguer']->sousmenu["portfolio"]= new Bouton(
 			"../"._DIR_PLUGIN_GESTION_DOCUMENTS."/stock_broken_image.png",  // icone
 			_L("Tous vos documents") //titre
 			);
