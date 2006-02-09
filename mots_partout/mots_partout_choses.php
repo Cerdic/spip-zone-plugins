@@ -296,81 +296,83 @@ $choses_possibles['messages'] = array(
 									  );
 
 
-function afficher_liste_messages($choses) {
-  echo "<div style='height: 12px;'></div>";
-  echo "<div class='liste'>";
-  bandeau_titre_boite2($titre_table, "stock_mail.gif");
+function afficher_liste_messages($choses,$nb_aff=20) {
+
+  $query = 'SELECT id_message,titre,type,date_heure,statut FROM spip_messages as messages WHERE messages.id_message IN ('.calcul_in($choses).')';
   
-  echo afficher_liste_debut_tableau();
+  $tranches =  afficher_tranches_requete($query, 3,'debut',false,$nb_aff);
   
-  $from = array('spip_messages as messages');
-  $select= array();
-  $select[] = 'id_message';
-  $select[] = 'titre';
-  $select[] = 'type';
-  $select[] = 'date_heure';
-  $select[] = 'statut';
-  $where = array('messages.id_message IN ('.calcul_in($choses).')');
-  
-  $result = spip_abstract_select($select,$from,$where);
-  $i = 0;
-  while ($row = spip_abstract_fetch($result)) {
-	$i++;
-	$vals = '';
+  if($tranches) {
+
+	echo "<div style='height: 12px;'></div>";
+	echo "<div class='liste'>";
+	bandeau_titre_boite2($titre_table, "stock_mail.gif");
 	
-	$id_message = $row['id_message'];
-	$tous_id[] = $id_message;
-	$titre = $row['titre'];
-	$date = $row['date_heure'];
-	$statut = $row['statut'];
+	echo afficher_liste_debut_tableau();
+
+	echo $tranches;
 	
-	$vals[] = "<input type='checkbox' name='id_choses[]' value='$id_message' id='id_chose$i'/>";
-	
-	// Le titre (et la langue)
-	$s = "<div>";
-	
-	$s .= "<a href=\"bloogletter"._EXTENSION_PHP."?mode=courrier&id_message=$id_message\" style=\"display:block;\">";
-	
-	$s .= typo($titre);
-	$s .= "</a>";
-	$s .= "</div>";
-	
-	$vals[] = $s;
-	
-	// La date
-	$s = affdate_jourcourt($date);
-	$vals[] = $s;
-	
-	// Le numero (moche)
-	if ($options == "avancees") {
-	  $vals[] = "<b>"._T('info_numero_abbreviation')."$id_message</b>";
+	$result = spip_query($query);
+	$i = 0;
+	while ($row = spip_fetch_array($result)) {
+	  $i++;
+	  $vals = '';
+	  
+	  $id_message = $row['id_message'];
+	  $tous_id[] = $id_message;
+	  $titre = $row['titre'];
+	  $date = $row['date_heure'];
+	  $statut = $row['statut'];
+	  
+	  $vals[] = "<input type='checkbox' name='id_choses[]' value='$id_message' id='id_chose$i'/>";
+	  
+	  // Le titre (et la langue)
+	  $s = "<div>";
+	  
+	  $s .= "<a href=\"bloogletter"._EXTENSION_PHP."?mode=courrier&id_message=$id_message\" style=\"display:block;\">";
+	  
+	  $s .= typo($titre);
+	  $s .= "</a>";
+	  $s .= "</div>";
+	  
+	  $vals[] = $s;
+	  
+	  // La date
+	  $s = affdate_jourcourt($date);
+	  $vals[] = $s;
+	  
+	  // Le numero (moche)
+	  if ($options == "avancees") {
+		$vals[] = "<b>"._T('info_numero_abbreviation')."$id_message</b>";
+	  }
+	  
+	  
+	  $table[] = $vals;
 	}
+	spip_free_result($result);
 	
-	
-	$table[] = $vals;
-  }
-  spip_free_result($result);
-  
-  if ($options == "avancees") { // Afficher le numero (JMB)
-	if ($afficher_auteurs) {
-	  $largeurs = array(11, '', 80, 100, 35);
-	  $styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
+	if ($options == "avancees") { // Afficher le numero (JMB)
+	  if ($afficher_auteurs) {
+		$largeurs = array(11, '', 80, 100, 35);
+		$styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
 	} else {
 	  $largeurs = array(11, '', 100, 35);
 	  $styles = array('', 'arial2', 'arial1', 'arial1');
 	}
-  } else {
-	if ($afficher_auteurs) {
-	  $largeurs = array(11, '', 100, 100);
-	  $styles = array('', 'arial2', 'arial1', 'arial1');
 	} else {
-	  $largeurs = array(11, '', 100);
-	  $styles = array('', 'arial2', 'arial1');
+	  if ($afficher_auteurs) {
+		$largeurs = array(11, '', 100, 100);
+		$styles = array('', 'arial2', 'arial1', 'arial1');
+	  } else {
+		$largeurs = array(11, '', 100);
+		$styles = array('', 'arial2', 'arial1');
+	  }
 	}
-  }
-  afficher_liste($largeurs, $table, $styles);
+	afficher_liste($largeurs, $table, $styles);
   
-  echo afficher_liste_fin_tableau();
+	echo afficher_liste_fin_tableau();
+  
+  }
 }
 
 //=============================AUTEURS=========================================
@@ -390,80 +392,97 @@ $choses_possibles['auteurs'] = array(
 									  );
 
 function afficher_liste_auteurs($choses) {
-  echo "<div style='height: 12px;'></div>";
-  echo "<div class='liste'>";
-  bandeau_titre_boite2($titre_table, "reply-to-all-24.gif");
   
-  echo afficher_liste_debut_tableau();
+  $query = 'SELECT id_auteur, nom, login, email, extra, statut FROM spip_auteurs as auteurs WHERE auteurs.id_auteur IN ('.calcul_in($choses).')';
   
-  $from = array('spip_auteurs as auteurs');
-  $select= array();
-  $select[] = 'id_auteur';
-  $select[] = 'nom';
-  $select[] = 'login';
-  $select[] = 'email';
-  $select[] = 'extra';
-  $select[] = 'statut';
-  $where = array('auteurs.id_auteur IN ('.calcul_in($choses).')');
-  
-  $result = spip_abstract_select($select,$from,$where);
-  $i = 0;
-  while ($row = spip_abstract_fetch($result)) {
-	$i++;
-	$vals = '';
-	
-	$id_auteur = $row['id_auteur'];
-	$tous_id[] = $id_auteur;
-	$nom = $row['nom'];
-	$login = $row['login'];
-	$email = $row['email'];
-	$extra = $row['extra'];
-	$statut = $row['statut'];
-	
-	$vals[] = "<input type='checkbox' name='id_choses[]' value='$id_auteur' id='id_chose$i'/>";
-	
-	// Le titre (et la langue)
-	$s = "<div>";
-	$s .= "<a href=\"auteur_edit"._EXTENSION_PHP."?id_auteur=$id_auteur\" style=\"display:block;\">";
-	$s .= typo($login);
-	$s .= "</a>";
-	$s .= "</div>";
-	$vals[] = $s;
+  $tranches =  afficher_tranches_requete($query, 3,'debut',false,$nb_aff);
 
-	$s = "<div>";
-	$s .= " (<a href=\"mailto:$email\">";
+  if($tranches) {
 	
-	$s .= typo($nom);
-	$s .= "</a>)";
-	$s .= "</div>";
+	echo "<div style='height: 12px;'></div>";
+	echo "<div class='liste'>";
+	bandeau_titre_boite2($titre_table, "reply-to-all-24.gif");
 	
-	$vals[] = $s;
+	echo afficher_liste_debut_tableau();
 	
-	// TODO : extra
-//	$s = affdate_jourcourt($date);
-//	$vals[] = $s;
-	
-	// Le numero (moche)
-	if ($options == "avancees") {
-	  $vals[] = "<b>"._T('info_numero_abbreviation')."$id_auteur</b>";
+	echo $tranches;
+
+	$result = spip_select($query);
+	$i = 0;
+	while ($row = spip_fetch_array($result)) {
+	  $i++;
+	  $vals = '';
+	  
+	  $id_auteur = $row['id_auteur'];
+	  $tous_id[] = $id_auteur;
+	  $nom = $row['nom'];
+	  $login = $row['login'];
+	  $email = $row['email'];
+	  $extra = $row['extra'];
+	  $statut = $row['statut'];
+	  
+	  $vals[] = "<input type='checkbox' name='id_choses[]' value='$id_auteur' id='id_chose$i'/>";
+	  
+	  // Le titre (et la langue)
+	  $s = "<div>";
+	  $s .= "<a href=\"auteur_edit"._EXTENSION_PHP."?id_auteur=$id_auteur\" style=\"display:block;\">";
+	  $s .= typo($login);
+	  $s .= "</a>";
+	  $s .= "</div>";
+	  $vals[] = $s;
+	  
+	  $s = "<div>";
+	  $s .= " (<a href=\"mailto:$email\">";
+	  
+	  $s .= typo($nom);
+	  $s .= "</a>)";
+	  $s .= "</div>";
+	  
+	  $vals[] = $s;
+	  
+	  // TODO : extra
+	  //	$s = affdate_jourcourt($date);
+	  //	$vals[] = $s;
+	  
+	  // Le numero (moche)
+	  if ($options == "avancees") {
+		$vals[] = "<b>"._T('info_numero_abbreviation')."$id_auteur</b>";
+	  }
+	  
+	  
+	  $table[] = $vals;
 	}
+	spip_free_result($result);
 	
-	
-	$table[] = $vals;
-  }
-  spip_free_result($result);
-  
-  if ($options == "avancees") { // Afficher le numero (JMB)
+	if ($options == "avancees") { // Afficher le numero (JMB)
 	  $largeurs = array(11, '', 100,35);
 	  $styles = array('', 'arial2', 'arial1', 'arial1');
-  } else {
+	} else {
 	  $largeurs = array(11, '', 100);
 	  $styles = array('', 'arial2', 'arial1');
+	}
+	afficher_liste($largeurs, $table, $styles);
+	
+	echo afficher_liste_fin_tableau();
   }
-  afficher_liste($largeurs, $table, $styles);
-  
-  echo afficher_liste_fin_tableau();
 }
+
+
+//=============================MOTS=========================================
+
+$choses_possibles['mots'] = array(
+									  'titre_chose' => 'mots',
+									  'id_chose' => 'id_mot',
+									  'table_principale' => 'spip_mots',
+									  'tables_limite' => array(
+															   'rubriques' => array(
+																				   'table' => 'spip_rubriques',
+																				   'nom_id' => 'id_rubrique'),
+															   'articles' => array(
+																				  'table' => 'spip_articles',
+																				  'nom_id' => 'id_article')
+															   )
+									  );
 
 
 ?>

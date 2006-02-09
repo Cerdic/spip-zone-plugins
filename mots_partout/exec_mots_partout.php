@@ -133,6 +133,14 @@ function calcul_in($mots) {
   return $to_ret;
 }
 
+function secureIntArray($array) {
+  $to_return = '';
+  foreach($array as $id) {
+	$to_return[] = intval($id);
+  }
+  return $to_return;
+}
+
 //======================================================================
 
 function afficher_liste_defaut($choses) {
@@ -145,6 +153,7 @@ function afficher_liste_defaut($choses) {
   echo '</table>';
 }
 
+//---------------------------------------------------------------------
 
 function mots_partout() {
 
@@ -159,7 +168,7 @@ function mots_partout() {
  * récuperation de la chose sur laquelle on travaille
  ***********************************************************************/
 
-$nom_chose = $_POST['nom_chose'];
+$nom_chose = addslashes($_POST['nom_chose']);
 if(!isset($choses_possibles[$nom_chose])) {
   list($nom_chose,) = each($choses_possibles);
   reset($choses_possibles);
@@ -172,15 +181,19 @@ $tables_limite = $choses_possibles[$nom_chose]['tables_limite'];
 /***********************************************************************
  * action
  ***********************************************************************/
-$mots = $_REQUEST['id_mots'];
-$sans_mots = $_REQUEST['sans_mots'];
-$choses = $_REQUEST['id_choses'];
-$limit =  $_POST['limit'];
+$mots = secureIntArray($_REQUEST['id_mots']);
+$sans_mots = secureIntArray(addslashes($_REQUEST['sans_mots']));
+$choses = secureIntArray($_REQUEST['id_choses']);
+$limit =  addslashes($_POST['limit']);
 if(!isset($limit)) $limit = 'rien';
-$id_limit =  $_POST['id_limit'];
+$id_limit =  intval($_POST['id_limit']);
 if(!isset($id_limit)) $id_limit = 0;
-$nb_aff = $_POST['nb_aff'];
+$nb_aff = intval($_POST['nb_aff']);
 if(!$nb_aff) $nb_aff = 20;
+$switch = addslashes($_POST['switch']);
+if(!$switch) $switch = 'voir';
+$strict = intval($_POST['strict']);
+
 //echo "!!!".$nom_chose."!!!";
 //echo "action :".$_REQUEST['switch']."<br>";
 //echo "choses :".serialize($choses)."<br>";
@@ -189,7 +202,7 @@ if(!$nb_aff) $nb_aff = 20;
 //echo "limit :".serialize($limit)."<br>";
 //echo "id_limit :".serialize($id_limit)."<br>";
 
-if($_POST['switch'] == 'action' && count($choses)) {
+if($switch == 'action' && count($choses)) {
 	if(count($mots)) {
 	  foreach($mots as $m) {	
 		$from = array('spip_mots');
@@ -265,7 +278,7 @@ if(count($choses) == 0) {
 	  $from[1] = "spip_mots_$nom_chose as table_temp";
 	  $where[1] = "table_temp.$id_chose = main.$id_chose";
 	  $where[] = "table_temp.id_mot IN (".calcul_in($mots).')';
-	  if($_POST['strict']) {
+	  if($strict) {
 		$select[] = 'count(id_mot) as tot';
 		$group = "main.$id_chose";
 		$order = array('tot DESC');
@@ -275,7 +288,7 @@ if(count($choses) == 0) {
 	  $from[1] = "spip_mots_$nom_chose as table_temp";
 	  $where[1] = "table_temp.$id_chose = main.$id_chose";
 	  $where[] = "table_temp.id_mot not IN (".calcul_in($sans_mots).')';
-	  if($_POST['strict']) {
+	  if($strict) {
 		$select[] = 'count(id_mot) as tot';
 		$group = "main.$id_chose";
 		$order = array('tot DESC');
@@ -285,7 +298,7 @@ if(count($choses) == 0) {
   	if(count($mots) > 0) {
 	  $from[0] = "spip_mots_$nom_chose as main";
 	  $where[] = "main.id_mot IN (".calcul_in($mots).')';
-	  if($_POST['strict']) {
+	  if($strict) {
 		$select[] = 'count(id_mot) as tot';
 		$group = "main.$id_chose";
 		$order = array('tot DESC');
@@ -294,7 +307,7 @@ if(count($choses) == 0) {
   	if(count($sans_mots) > 0) {
 	  $from[0] = "spip_mots_$nom_chose as main";
 	  $where[] = "main.id_mot not IN (".calcul_in($sans_mots).')';
-	  if($_POST['strict']) {
+	  if($strict) {
 		$select[] = 'count(id_mot) as tot';
 		$group = "main.$id_chose";
 		$order = array('tot DESC');
@@ -330,7 +343,7 @@ if(count($choses) == 0) {
 		}
 		spip_abstract_free($test);
 	  }
-	  if(count($mots) > 0 && $_POST['strict']) {
+	  if(count($mots) > 0 && $strict) {
 		if($row['tot'] >= count($mots)) {
 		  $choses[] = $row[$id_chose];
 		} else {
@@ -453,7 +466,7 @@ fin_cadre_enfonce();
 
 // 	echo '<a name="action"></a><form action="'.generer_url_ecrire('mots_partout','').'#voir">';
 
-  echo '<input type="hidden" name="nom_chose" value="'.$_POST['nom_chose'].'">';  
+  echo '<input type="hidden" name="nom_chose" value="'.$nom_chose.'">';  
   echo '<input type="hidden" name="nb_aff" value="'.$nb_aff.'">';  
 //  echo "<input type='hidden' name='id_limit' value='$id_limit'>";
 //  echo "<input type='hidden' name='limit' value='$limit'>";
