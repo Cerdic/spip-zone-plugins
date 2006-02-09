@@ -445,9 +445,9 @@ debut_cadre_enfonce('',false,'',_T('motspartout:voir'));
 <table border=0 cellspacing=0 cellpadding=3 width="100%">
 <tr class='tr_liste'>
 <td colspan=2>
-?>
-echo _T('motspartout:voir_help');
 <?php
+echo _T('motspartout:voir_help');
+?>
 </td>
 </tr>
 <tr class='tr_liste'>
