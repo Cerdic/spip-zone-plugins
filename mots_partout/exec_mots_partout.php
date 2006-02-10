@@ -57,6 +57,7 @@ function verifier_auteur($table, $id_objet, $id) {
 }
 
 
+//on calcul le style pour ce mot. I.E. on regarde si il est attache à tout ou seulement une partie
 function calcul_numeros($array, $search, $total) {
   if(is_array($array))
 	$tt = count(array_keys($array,$search));
@@ -68,6 +69,7 @@ function calcul_numeros($array, $search, $total) {
   return 2;
 }
 
+//liste des mots a droite
 function md_afficher_liste($largeurs, $table, $styles = '') {
   global $couleur_claire;
   global $browser_name;
@@ -115,6 +117,7 @@ function find_tables($nom, $tables) {
   return $toret;
 }
 
+//genere la liste de IN a partir d'un tableau
 function calcul_in($mots) {
   for($i=0; $i < count($mots); $i++) {
 	if($i > 0) $to_ret .= ',';
@@ -123,6 +126,7 @@ function calcul_in($mots) {
   return $to_ret;
 }
 
+//force a un tableau de int
 function secureIntArray($array) {
   $to_return = Array();
   if(is_array($array)) {
@@ -133,6 +137,7 @@ function secureIntArray($array) {
   return $to_return;
 }
 
+// transfert la variable POST d'un tableau (19 => 'avec', 20=>'voir') en 4 tableaux avec=(19) voir=(20)
 function splitArrayIds($array) {
   $voir = Array();
   $cacher = Array();
@@ -162,7 +167,7 @@ function splitArrayIds($array) {
   return array($voir, $cacher, $ajouter, $enlever);
 }
 
-//======================================================================
+//====================l'affichage par defaut======================================
 
 function afficher_liste_defaut($choses) {
   echo '<table>';
@@ -174,7 +179,7 @@ function afficher_liste_defaut($choses) {
   echo '</table>';
 }
 
-//---------------------------------------------------------------------
+//------------------------la fonction qui fait tout-----------------------------------
 
 function mots_partout() {
 
@@ -214,12 +219,6 @@ function mots_partout() {
   if($switch == '') $switch = 'voir';
   $strict = intval($_POST['strict']);
 
-  //echo "!!!".$nom_chose."!!!";
-  //echo "action :".$_REQUEST['switch']."<br>";
-  //echo "choses :".serialize($choses)."<br>";
-  //echo "limit :".serialize($limit)."<br>";
-  //echo "id_limit :".serialize($id_limit)."<br>";
-
   if(count($mots_ajouter) && count($choses)) {
 	if(count($mots_ajouter)) {
 	  foreach($mots_ajouter as $m) {	
@@ -258,8 +257,6 @@ function mots_partout() {
 			}
 			spip_abstract_free($res);
 		  }
-		  //		  echo "!!!!!!!action insert:"."$nom_chose(id_mot,$id_chose)($m,$d)"."!!!!!!!!!";
-		  
 		  spip_abstract_insert("spip_mots_$nom_chose","(id_mot,$id_chose)","($m,$d)");
 		}
 	  }
@@ -268,7 +265,6 @@ function mots_partout() {
   if (count($mots_enlever) && count($choses)) {
 	foreach($mots_enlever as $m) {
 	  foreach($choses as $d) {
-		//			echo "!!!!!!!action delete:"."$nom_chose(id_mot,$id_chose)($m,$d)"."!!!!!!!!!";
 		spip_query("DELETE FROM spip_mots_$nom_chose WHERE id_mot=$m AND $id_chose=$d");
 	  }
 	}
@@ -334,12 +330,6 @@ function mots_partout() {
 	} else {
 	  $from[] = "$table_principale as main"; 
 	}
-
-	//  echo "select :".serialize($select);
-	//  echo "from :".serialize($from);
-	//  echo "where :".serialize($where);
-	//  echo "group :".serialize($group);
-	//  echo "order :".serialize($order);
 
 	$res=spip_abstract_select($select,$from,$where,$group,$order);
 	
@@ -420,7 +410,6 @@ function mots_partout() {
 
   // choix de la chose sur laquelle on veut ajouter des mots
   debut_cadre_enfonce('',false,'',_T('motspartout:choses'));
-  //echo  '<form action="'.generer_url_ecrire('mots_partout','').'">';
   echo '<div class=\'liste\'>
 <table border=0 cellspacing=0 cellpadding=3 width=\"100%\">
 <tr class=\'tr_liste\'>
@@ -466,17 +455,8 @@ function mots_partout() {
 															 <input type='hidden' name='id_limit' value='$id_limit'>
 															 ";
   
-  // echo '</form>';
-  
-  // 	echo '<a name="action"></a><form action="'.generer_url_ecrire('mots_partout','').'#voir">';
-  
   echo '<input type="hidden" name="nom_chose" value="'.$nom_chose.'">';  
   echo '<input type="hidden" name="nb_aff" value="'.$nb_aff.'">';  
-  //  echo "<input type='hidden' name='id_limit' value='$id_limit'>";
-  //  echo "<input type='hidden' name='limit' value='$limit'>";
-  //  for($i=0; $i < count($choses); $i++) {
-  //	echo "<input type=\"hidden\" name=\"id_choses[]\" value=\"".$choses[$i].'">';
-  //  }
   
   // les actions et limitations possibles.
   if(count($choses)) {
@@ -493,7 +473,7 @@ function mots_partout() {
 	   <tr class='tr_liste'>
 	   <td><button type='submit' name='switch' value='action'>";
 	echo _T('bouton_valider');
-	echo"	   </button></td>
+	echo "	   </button></td>
 <td>
 (<input type='checkbox' id='strict' name='strict'/>
 <label for='strict'>selection".
