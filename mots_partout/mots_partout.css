@@ -1,7 +1,31 @@
-.avec { 
+.liste ul {
+	background-color: #eeeeee;
+   list-style-type: none;
+   margin: 0;
+   padding: 4px 0;
+}
+
+.liste ul li {
+  display: inline;
+  margin-left: 5px;
+}
+
+.liste ul {
+	border-bottom: 1px solid #cccccc;
+}
+
+.liste ul.avec { 
   background: #b8ffb8;
  }
 
-.partie { 
+.liste ul.partie { 
   background: #b8b8dd;
  }
+
+.liste ul li label._multistateradio {
+  border: 1px solid #c0c0ff;
+  border-right-width: 3px;
+  border-bottom-width: 3px;
+  background: #f0faff;
+  padding: 0 3px;
+}

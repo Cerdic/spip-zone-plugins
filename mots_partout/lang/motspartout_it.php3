@@ -11,14 +11,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'action' => 'Azione',
 									   'stricte' => 'rigorosa',
 									   'select' => 'selezione',
-									   'avec' => 'includa',
-									   'sans' => 'escluda',
 									   'pas_de_documents' => 'Non ce niente con questi caratteristiche',
 									   'choses' => 'Aggiungere parole chiave sopra:',
 									   'dejamotgroupe' => 'Ce gia un parole chiave de questo gruppo (@groupe@) sul oggetto @chose@.',
 									   'ATTENTION' => 'ATTENZIONE',
-									   'ajouter_help' => 'Aggiungere le parole chiave <em>incluse</em> e cancella le parole exclude.',
-									   'voir_help' => 'Vedere i elementi selezionnati',
+									   'action_help' => 'Compiere i actioni selectionati suli @chose@ selectionati',
 									   'tagmachine' => 'Parole chiave da aggiungere',
 									   'par' => 'nb. risultati'
 									   );

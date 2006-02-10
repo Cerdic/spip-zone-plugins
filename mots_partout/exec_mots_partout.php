@@ -77,45 +77,33 @@ function md_afficher_liste($largeurs, $table, $styles = '') {
 	if (!is_array($table)) return;
 	reset($table);
 	echo "\n";
-	if ($spip_display != 4) {
 		while (list(,$t) = each($table)) {
 			if (eregi("msie", $browser_name)) $msover = " onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\"";
-			echo "<tr class='tr_liste'$msover>";
 			reset($largeurs);
 			if ($styles) reset($styles);
-			while (list($texte, $sel) = each($t)) {
+	list($texte, $sel) = each($t);
 				$style = $largeur = "";
 				list(, $largeur) = each($largeurs);
 				if ($styles) list(,$style) = each($styles);
 				if (!trim($texte)) $texte .= "&nbsp;";
-				echo "<td";
+					echo "<ul class='".$style[$sel]."'$msover>";
+				echo "<li";
+				if ($style)  echo ' class="'.$style[$sel].'"';
+				echo ">$texte</li>";
+		
+		while (list($texte, $sel) = each($t)) {
+				$style = $largeur = "";
+				if ($styles) list(,$style) = each($styles);
+				if (!trim($texte)) $texte .= "&nbsp;";
+				echo "<li";
 				if ($largeur) echo " width=\"$largeur\"";
 				if ($style)  echo ' class="'.$style[$sel].'"';
-				echo ">$texte</td>";
+				echo ">$texte</li>";
 			}
-			echo "</tr>\n";
-		}
-	} else {
-		echo "<ul style='text-align: $spip_lang_left;'>";
-		while (list(, $t) = each($table)) {
-			echo "<li>";
-			reset($largeurs);
-			if ($styles) reset($styles);
-			while (list(, $texte) = each($t)) {
-				$style = $largeur = "";
-				list(, $largeur) = each($largeurs);
-				
-				if (!$largeur) {
-					echo $texte." ";
-				}
-			}
-			echo "</li>\n";
-		}
-		echo "</ul>";
-	}
+			echo "</ul>\n";
 	echo "\n";
 }
-
+}
 
 function find_tables($nom, $tables) {
   $toret = array();
@@ -136,13 +124,42 @@ function calcul_in($mots) {
 }
 
 function secureIntArray($array) {
+$to_return = Array();
   if(is_array($array)) {
-	$to_return = Array();
 	foreach($array as $id) {
 	  $to_return[] = intval($id);
 	}
   } 
   return $to_return;
+}
+
+function splitArrayIds($array) {
+  $voir = Array();
+  $cacher = Array();
+  $ajouter = Array();
+  $enlever = Array();
+  if(is_array($array)) {
+    foreach($array as $id_mot => $action) {
+      $id_mot = intval($id_mot);
+      if($id_mot > 0) {
+        switch(addslashes($action)) {
+        case 'avec': 
+             $ajouter[] = $id_mot;
+        case 'voir':
+             $voir[] = $id_mot;
+             break;
+        case 'sans':
+             $enlever[] = $id_mot;
+             break;
+        case 'cacher':
+             $cacher[] = $id_mot;
+            break; 
+
+        }
+      }
+    }
+  }
+  return array($voir, $cacher, $ajouter, $enlever);
 }
 
 //======================================================================
@@ -185,8 +202,7 @@ $tables_limite = $choses_possibles[$nom_chose]['tables_limite'];
 /***********************************************************************
  * action
  ***********************************************************************/
-$mots = secureIntArray($_REQUEST['id_mots']);
-$sans_mots = secureIntArray(addslashes($_REQUEST['sans_mots']));
+list($mots_voir, $mots_cacher, $mots_ajouter, $mots_enlever) = splitArrayIds($_REQUEST['id_mots']);
 $choses = secureIntArray($_REQUEST['id_choses']);
 $limit =  addslashes($_POST['limit']);
 if($limit == '') $limit = 'rien';
@@ -201,14 +217,12 @@ $strict = intval($_POST['strict']);
 //echo "!!!".$nom_chose."!!!";
 //echo "action :".$_REQUEST['switch']."<br>";
 //echo "choses :".serialize($choses)."<br>";
-//echo count($mots)." mots :".serialize($mots)."<br>";
-//echo "sans_mots :".serialize($sans_mots)."<br>";
 //echo "limit :".serialize($limit)."<br>";
 //echo "id_limit :".serialize($id_limit)."<br>";
 
-if($switch == 'action' && count($choses)) {
-	if(count($mots)) {
-	  foreach($mots as $m) {	
+if(count($mots_ajouter) && count($choses)) {
+	if(count($mots_ajouter)) {
+	  foreach($mots_ajouter as $m) {	
 		$from = array('spip_mots');
 		$select = array('id_groupe');
 		$where = array("id_mot = $m");
@@ -250,15 +264,15 @@ if($switch == 'action' && count($choses)) {
 		}
 	  }
 	}
-	if (count($sans_mots)) {
-	    foreach($sans_mots as $m) {
+}
+if (count($mots_enlever) && count($choses)) {
+	    foreach($mots_enlever as $m) {
 		  foreach($choses as $d) {
 //			echo "!!!!!!!action delete:"."$nom_chose(id_mot,$id_chose)($m,$d)"."!!!!!!!!!";
 		  	spip_query("DELETE FROM spip_mots_$nom_chose WHERE id_mot=$m AND $id_chose=$d");
 		  }
 		}
 	}
-}
 /**********************************************************************
 * recherche des choses.
 ***********************************************************************/
@@ -278,39 +292,39 @@ if(count($choses) == 0) {
 	
 	$from[0] = "$table_lim as main";
 	$where[0] = "main.$nom_id_lim IN ($id_limit)"; 
-	if(count($mots) > 0) {
+	if(count($mots_voir) > 0) {
 	  $from[1] = "spip_mots_$nom_chose as table_temp";
 	  $where[1] = "table_temp.$id_chose = main.$id_chose";
-	  $where[] = "table_temp.id_mot IN (".calcul_in($mots).')';
+	  $where[] = "table_temp.id_mot IN (".calcul_in($mots_voir).')';
 	  if($strict) {
 		$select[] = 'count(id_mot) as tot';
 		$group = "main.$id_chose";
 		$order = array('tot DESC');
 	  }
 	}
-	if(count($sans_mots) > 0) {
+	if(count($mots_cacher) > 0) {
 	  $from[1] = "spip_mots_$nom_chose as table_temp";
 	  $where[1] = "table_temp.$id_chose = main.$id_chose";
-	  $where[] = "table_temp.id_mot not IN (".calcul_in($sans_mots).')';
+	  $where[] = "table_temp.id_mot not IN (".calcul_in($mots_cacher).')';
 	  if($strict) {
 		$select[] = 'count(id_mot) as tot';
 		$group = "main.$id_chose";
 		$order = array('tot DESC');
 	  }
 	}	
-  } else if((count($mots) > 0)||(count($sans_mots) > 0)){
-  	if(count($mots) > 0) {
+  } else if((count($mots_voir) > 0)||(count($mots_cacher) > 0)){
+  	if(count($mots_voir) > 0) {
 	  $from[0] = "spip_mots_$nom_chose as main";
-	  $where[] = "main.id_mot IN (".calcul_in($mots).')';
+	  $where[] = "main.id_mot IN (".calcul_in($mots_voir).')';
 	  if($strict) {
 		$select[] = 'count(id_mot) as tot';
 		$group = "main.$id_chose";
 		$order = array('tot DESC');
 	  }
   	}
-  	if(count($sans_mots) > 0) {
+  	if(count($mots_cacher) > 0) {
 	  $from[0] = "spip_mots_$nom_chose as main";
-	  $where[] = "main.id_mot not IN (".calcul_in($sans_mots).')';
+	  $where[] = "main.id_mot not IN (".calcul_in($mots_cacher).')';
 	  if($strict) {
 		$select[] = 'count(id_mot) as tot';
 		$group = "main.$id_chose";
@@ -330,8 +344,8 @@ if(count($choses) == 0) {
   $res=spip_abstract_select($select,$from,$where,$group,$order);
   
   $choses = array();
-  $avec_sans = (count($sans_mots) > 0);
-  if($avec_sans) $in_sans = calcul_in($sans_mots);
+  $avec_sans = (count($mots_cacher) > 0);
+  if($avec_sans) $in_sans = calcul_in($mots_cacher);
   while ($row = spip_abstract_fetch($res)) {
 	if(!isset($table_auth) ||
 	   (isset($table_auth) &&
@@ -347,8 +361,8 @@ if(count($choses) == 0) {
 		}
 		spip_abstract_free($test);
 	  }
-	  if(count($mots) > 0 && $strict) {
-		if($row['tot'] >= count($mots)) {
+	  if(count($mots_voir) > 0 && $strict) {
+		if($row['tot'] >= count($mots_voir)) {
 		  $choses[] = $row[$id_chose];
 		} else {
 		  break;
@@ -381,6 +395,17 @@ if(count($choses) > 0) {
 debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots', '', "../"._DIR_PLUGIN_MOTS_PARTOUT."/mots_partout.css");
 ?>
 </script>
+
+	<script type="text/javascript" src="<?php echo _DIR_PLUGIN_MOTS_PARTOUT;?>/javascript/prototype.js"></script>
+	<script type="text/javascript" src="<?php echo _DIR_PLUGIN_MOTS_PARTOUT;?>/javascript/behaviour.js"></script>
+	<script type="text/javascript" src="<?php echo _DIR_PLUGIN_MOTS_PARTOUT;?>/javascript/effects.js"></script>
+	<script type="text/javascript" src="<?php echo _DIR_PLUGIN_MOTS_PARTOUT;?>/javascript/MultiStateRadio.js"></script>
+	<script type="text/javascript">
+
+MultiStateRadio.apply('.liste ul');
+
+</script>
+
 <?php
 
 echo '<br><br><center>';
@@ -441,32 +466,6 @@ echo "</form><form method='post' action='".generer_url_ecrire('mots_partout','')
 <input type='hidden' name='id_limit' value='$id_limit'>
 ";
 
-debut_cadre_enfonce('',false,'',_T('motspartout:voir'));
-?>
-<div class='liste'>
-<table border=0 cellspacing=0 cellpadding=3 width="100%">
-<tr class='tr_liste'>
-<td colspan=2>
-<?php
-echo _T('motspartout:voir_help');
-?>
-</td>
-</tr>
-<tr class='tr_liste'>
-<td><button type='submit' name='switch' value='voir'>
-<?php echo _T('motspartout:voir'); ?>
-</button>
-</td>
-<td colspan=2>
-<input type='checkbox' id='strict' name='strict'/><label for='strict'>
-<?php echo _T('motspartout:stricte'); ?>
-</label></td>
-</tr>
-</table></div>
-<?php
-fin_cadre_enfonce();
-
-
  // echo '</form>';
 
 // 	echo '<a name="action"></a><form action="'.generer_url_ecrire('mots_partout','').'#voir">';
@@ -499,14 +498,18 @@ if(count($choses)) {
 	   <tr class='tr_liste'>
 	   <td colspan=2>
 <?php
-echo _T('motspartout:ajouter_help');
+echo _T('motspartout:action_help',array('chose' => $nom_chose));
 ?>
 </td>
 		   </tr>
 	   <tr class='tr_liste'>
-	   <td colspan=2><button type='submit' name='switch' value='action'>
+	   <td><button type='submit' name='switch' value='action'>
 		   <?php  echo _T('bouton_valider'); ?>
 	   </button></td>
+<td>
+(<input type='checkbox' id='strict' name='strict'/><label for='strict'>
+selection <?php echo _T('motspartout:stricte'); ?>?)
+</label></td>
 		   </tr>
 		   </table>
 		   </div>
@@ -544,15 +547,8 @@ while ($row_groupes = spip_abstract_fetch($m_result_groupes)) {
 	
 	if (spip_abstract_count($result) > 0) {
 	  echo "<div class='liste'>";
-	  echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
 	  $i =0;
-	  $table[] = array(
-					   ' ' => 0,
-					   _T('motspartout:avec') => 0,
-					   _T('motspartout:sans') => 0
-					   );
 	  while ($row = spip_abstract_fetch($result)) {
-		$i++;
 		$vals = '';
 		
 		$id_mot = $row['id_mot'];
@@ -560,11 +556,17 @@ while ($row_groupes = spip_abstract_fetch($m_result_groupes)) {
 		
 		$s = typo($titre_mot);
 		
-		$vals["<label for='id_mot$i'>$s</label>"] = calcul_numeros($show_mots,$id_mot,count($choses));
+		$vals["$s"] = calcul_numeros($show_mots,$id_mot,count($choses));
 		
-		$vals["<input type='checkbox' name='id_mots[]' id='id_mot$i' value='$id_mot'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
+		$vals["<label for='id_mot".$id_mot."_vide'>"._T('motspartout:action')."?</label><input type='radio' id='id_mot".$id_mot."_vide' checked='true'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
+	
+		$vals["<label for='id_mot".$id_mot."_voir'>"._T('motspartout:voir')."</label><input type='radio' name='id_mots[$id_mot]' id='id_mot".$id_mot."_voir' value='voir'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
+	
+		$vals["<label for='id_mot".$id_mot."_cacher'>"._T('motspartout:cacher')."</label><input type='radio' name='id_mots[$id_mot]' id='id_mot".$id_mot."_cacher' value='cacher'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
 		
-		$vals["<input type='checkbox' name='sans_mots[]' id='sans_mot$i' value='$id_mot'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
+		$vals["<label for='id_mot".$id_mot."_avec'>"._T('motspartout:ajouter')."</label><input type='radio' name='id_mots[$id_mot]' id='id_mot".$id_mot."_avec' value='avec'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
+		
+		$vals["<label for='id_mot".$id_mot."_sans'>"._T('motspartout:enlever')."</label><input type='radio' name='id_mots[$id_mot]' id='id_mot".$id_mot."_sans' value='sans'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
 		$table[] = $vals;
 	  }
 	  
@@ -579,11 +581,18 @@ while ($row_groupes = spip_abstract_fetch($m_result_groupes)) {
 						  'avec arial1'),
 					array('arial1',
 						  'partie arial1',
+						  'avec arial1'),
+					array('arial1',
+						  'partie arial1',
+						  'avec arial1'),
+					array('arial1',
+						  'partie arial1',
+						  'avec arial1'),
+					array('arial1',
+						  'partie arial1',
 						  'avec arial1')
 					);
 	md_afficher_liste($largeurs, $table, $styles);
-	
-	echo "</table>";
 	echo "</div>";
 	spip_abstract_free($result);
 	
