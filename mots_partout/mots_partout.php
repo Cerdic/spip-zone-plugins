@@ -18,7 +18,6 @@ class MotsPartout {
   /* public static */
   function ajouterBoutons($boutons_admin) {
 
-
 	// on voit les bouton dans la barre "accueil"
 	$boutons_admin['naviguer']->sousmenu["mots_partout"]= new Bouton(
 																	 "../"._DIR_PLUGIN_MOTS_PARTOUT."/tag.png",  // icone
@@ -29,10 +28,10 @@ class MotsPartout {
 
   /* public static */
   function ajouterOnglets($flux) {
-	$rubrique = $flux['args'];
-	if($rubrique=='configuration')
-	  $flux['data']['config_mots_partout']= new Bouton(
-											   "../"._DIR_PLUGIN_MOTS_PARTOUT."/tag.png", 'Configurer Mots Partout');
+	if($flux['args']=='configuration')
+	  $flux['data']['mots_partout']= new Bouton(
+											   "../"._DIR_PLUGIN_MOTS_PARTOUT."/tag.png", 'Configurer Mots Partout',
+				generer_url_ecrire("config_mots_partout"));
 	return $flux;
   }
 
