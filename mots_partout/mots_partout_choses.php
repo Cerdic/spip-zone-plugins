@@ -1,15 +1,15 @@
 <?php
 
-/***********************************************************************
-* Définition des choses sur lesquels on peut vouloir mettre des mots clefs
-***********************************************************************/
+/***********************************************************************/
+/* Définition des choses sur lesquels on peut vouloir mettre des mots clefs*/
+/***********************************************************************/
 
 //==========================ARTICLES============================================
 
 
 $choses_possibles['articles'] = array(
 									  'titre_chose' => 'public:articles',
-										  'id_chose' => 'id_article',
+									  'id_chose' => 'id_article',
 									  'table_principale' => 'spip_articles',
 									  'table_auth' => 'spip_auteurs_articles',
 									  'tables_limite' => array(
@@ -27,18 +27,18 @@ $choses_possibles['articles'] = array(
 																				  'nom_id' => 'id_auteur')
 															   )
 									  );
-
-
+									  
+									  
 function afficher_liste_articles($choses,$nb_aff=20) {
-
+  
   $query = 'SELECT id_article, titre, id_rubrique, date, statut, lang, descriptif FROM spip_articles as articles WHERE articles.id_article'
-.((count($choses))?(' IN('.calcul_in($choses).')'):'');
-
+	.((count($choses))?(' IN('.calcul_in($choses).')'):'');
+  
   $tranches =  afficher_tranches_requete($query, 3,'debut',false,$nb_aff);
   if($tranches) {
 
 	$results = spip_query($query);
-		
+	
 	echo "<div class='liste'>";
 	bandeau_titre_boite2('Articles', "article-24.gif");
 	
@@ -65,7 +65,7 @@ function afficher_liste_articles($choses,$nb_aff=20) {
 	  // Le titre (et la langue)
 	  $s = "<div>";
 	  
-	  $s .= "<a href=\"articles"._EXTENSION_PHP."?id_article=$id_article\"$descriptif$dir_lang style=\"display:block;\">";
+	  $s .= '<a href="'.generer_url_ecrire('articles',"id_article=$id_article").'"$descriptif$dir_lang style="display:block;">';
 	  
 	  if ($spip_display != 1 AND $spip_display != 4 AND lire_meta('image_process') != "non") {
 		include_ecrire("inc_logos"._EXTENSION_PHP);
@@ -85,7 +85,7 @@ function afficher_liste_articles($choses,$nb_aff=20) {
 <img src='../spip_image_reduite"._EXTENSION_PHP."?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' alt='$fichier' width='$w' height='$h' border='0'></div>";
 		  
 		}
-	}
+	  }
 	  
 	  $s .= typo($titre);
 	  if ($afficher_langue AND $lang != $langue_defaut)
@@ -138,7 +138,7 @@ function afficher_liste_articles($choses,$nb_aff=20) {
 
 $choses_possibles['documents'] = array(
 									   'titre_chose' => 'info_documents',
-												  'id_chose' => 'id_document',
+									   'id_chose' => 'id_document',
 									   'table_principale' => 'spip_documents',
 									   'tables_limite' => array(
 																'articles' => array(
@@ -154,95 +154,95 @@ $choses_possibles['documents'] = array(
 									   );
 
 function afficher_horizontal_document_assoc($document,$with_check, $case) {
-	global $connect_id_auteur, $connect_statut;
-	global $spip_lang_left, $spip_lang_right;
+  global $connect_id_auteur, $connect_statut;
+  global $spip_lang_left, $spip_lang_right;
 
-	$bord_droit = 2;
+  $bord_droit = 2;
 
-	$id_document = $document['id_document'];
-	$id_vignette = $document['id_vignette'];
-	$id_type = $document['id_type'];
-	$titre = $document['titre'];
-	$descriptif = $document['descriptif'];
-	$url = generer_url_document($id_document);
-	$fichier = $document['fichier'];
-	$largeur = $document['largeur'];
-	$hauteur = $document['hauteur'];
-	$taille = $document['taille'];
-	$date = $document['date'];
-	$mode = $document['mode'];
+  $id_document = $document['id_document'];
+  $id_vignette = $document['id_vignette'];
+  $id_type = $document['id_type'];
+  $titre = $document['titre'];
+  $descriptif = $document['descriptif'];
+  $url = generer_url_document($id_document);
+  $fichier = $document['fichier'];
+  $largeur = $document['largeur'];
+  $hauteur = $document['hauteur'];
+  $taille = $document['taille'];
+  $date = $document['date'];
+  $mode = $document['mode'];
+  
+  if ($case == 0) {
+	echo "<tr style='border-top: 1px solid black;'>";
+  }
+  
+  $style = "border-$spip_lang_left: 1px solid $couleur; border-bottom: 1px solid $couleur;";
+  if ($case == $bord_droit) $style .= " border-$spip_lang_right: 1px solid $couleur;";
+  echo "<td width='33%' style='text-align: $spip_lang_left; $style' valign='top'>";
+  
+  echo "<label for='doc$case'>"._T('motspartout:voir').'</label>';
+  echo "<input type='checkbox' name='id_choses[]' id='doc$case' value='$id_document' />";
+  
+  // Signaler les documents distants par une icone de trombone
+  if ($document['distant'] == 'oui') {
+	echo "<img src='"._DIR_IMG_PACK.'attachment.gif'."' style='float: $spip_lang_right;' alt=\"".entites_html($document['fichier'])."\" title=\"" .
+	  entites_html($document['fichier'])."\" />\n";
+  }
+  
+  // bloc vignette + rotation
+  echo "<div style='text-align:center;'>";
+  
+  
+  // 'extension', a ajouter dans la base quand on supprimera spip_types_documents
+  switch ($id_type) {
+	case 1:
+	  $document['extension'] = "jpg";
+	  break;
+	case 2:
+	  $document['extension'] = "png";
+	  break;
+	case 3:
+	  $document['extension'] = "gif";
+	  break;
+  }
+  
+  //
+  // Recuperer la vignette et afficher le doc
+  //
+  echo document_et_vignette($document, $url, true); 
+  
+  echo "</div>"; // fin du bloc vignette + rotation
+  
+  
+  // bloc titre et descriptif
+  if (strlen($titre) > 0) {
+	echo '<div class=\'verdana2\' style=\'text-align:center;\'><b>'.typo($titre).'</b></div>';
+  } else {
+	$nom_fichier = basename($fichier);
 	
-	if ($case == 0) {
-	  echo "<tr style='border-top: 1px solid black;'>";
+	if (strlen($nom_fichier) > 20) {
+	  $nom_fichier = substr($nom_fichier, 0, 10)."...".substr($nom_fichier, strlen($nom_fichier)-10, strlen($nom_fichier));
 	}
-	
-	$style = "border-$spip_lang_left: 1px solid $couleur; border-bottom: 1px solid $couleur;";
-	if ($case == $bord_droit) $style .= " border-$spip_lang_right: 1px solid $couleur;";
-	echo "<td width='33%' style='text-align: $spip_lang_left; $style' valign='top'>";
-	
-	echo "<label for='doc$case'>"._T('motspartout:voir').'</label>';
-	echo "<input type='checkbox' name='id_choses[]' id='doc$case' value='$id_document' />";
-	
-	// Signaler les documents distants par une icone de trombone
-	if ($document['distant'] == 'oui') {
-	  echo "<img src='"._DIR_IMG_PACK.'attachment.gif'."' style='float: $spip_lang_right;' alt=\"".entites_html($document['fichier'])."\" title=\"" .
-		entites_html($document['fichier'])."\" />\n";
-	}
-	
-	// bloc vignette + rotation
-	echo "<div style='text-align:center;'>";
-	
-	
-	// 'extension', a ajouter dans la base quand on supprimera spip_types_documents
-	switch ($id_type) {
-	  case 1:
-		$document['extension'] = "jpg";
-		break;
-	  case 2:
-		$document['extension'] = "png";
-		break;
-	  case 3:
-		$document['extension'] = "gif";
-		break;
-	  }
-	
-	//
-	// Recuperer la vignette et afficher le doc
-	//
-	echo document_et_vignette($document, $url, true); 
-	
-	echo "</div>"; // fin du bloc vignette + rotation
-	
-	
-	// bloc titre et descriptif
-	if (strlen($titre) > 0) {
-	  echo '<div class=\'verdana2\' style=\'text-align:center;\'><b>'.typo($titre).'</b></div>';
-	} else {
-	  $nom_fichier = basename($fichier);
-	  
-	  if (strlen($nom_fichier) > 20) {
-		$nom_fichier = substr($nom_fichier, 0, 10)."...".substr($nom_fichier, strlen($nom_fichier)-10, strlen($nom_fichier));
-	  }
-	  echo "<div class='verdana1' style='text-align:center;'>$triangle$nom_fichier";
-	  echo '</div>';
-	}
-	
-	if (strlen($descriptif) > 0) {
-	  echo "<div class='verdana1'>".propre($descriptif)."</div>";
-	}
-	
-	// Taille de l'image ou poids du document
-	echo "<div class='verdana1' style='text-align: center;'>";
-	if ($largeur * $hauteur)
-	  echo _T('info_largeur_vignette',
-			  array('largeur_vignette' => $largeur,
-					'hauteur_vignette' => $hauteur));
-	  else
-		echo taille_en_octets($taille);
-	echo "</div>";
-	
-	
-	echo "</td>\n";
+	echo "<div class='verdana1' style='text-align:center;'>$triangle$nom_fichier";
+	echo '</div>';
+  }
+  
+  if (strlen($descriptif) > 0) {
+	echo "<div class='verdana1'>".propre($descriptif)."</div>";
+  }
+  
+  // Taille de l'image ou poids du document
+  echo "<div class='verdana1' style='text-align: center;'>";
+  if ($largeur * $hauteur)
+	echo _T('info_largeur_vignette',
+			array('largeur_vignette' => $largeur,
+				  'hauteur_vignette' => $hauteur));
+  else
+	echo taille_en_octets($taille);
+  echo "</div>";
+  
+  
+  echo "</td>\n";
 }
 
 function afficher_liste_documents($choses,$nb_aff=20) {
@@ -283,7 +283,6 @@ $choses_possibles['messages'] = array(
 									  'titre_chose' => 'Messages',
 									  'id_chose' => 'id_message',
 									  'table_principale' => 'spip_messages',
-									  
 									  'table_auth' => 'spip_auteurs_messages',
 									  'tables_limite' => array(
 															   'messages' => array(
@@ -329,7 +328,7 @@ function afficher_liste_messages($choses,$nb_aff=20) {
 	  // Le titre (et la langue)
 	  $s = "<div>";
 	  
-	  $s .= "<a href=\"bloogletter"._EXTENSION_PHP."?mode=courrier&id_message=$id_message\" style=\"display:block;\">";
+	  $s .= '<a href="'.generer_url_ecrire('bloogletter',"mode=courrier&id_message=$id_message").'" style="display:block;">';
 	  
 	  $s .= typo($titre);
 	  $s .= "</a>";
@@ -355,10 +354,10 @@ function afficher_liste_messages($choses,$nb_aff=20) {
 	  if ($afficher_auteurs) {
 		$largeurs = array(11, '', 80, 100, 35);
 		$styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
-	} else {
-	  $largeurs = array(11, '', 100, 35);
-	  $styles = array('', 'arial2', 'arial1', 'arial1');
-	}
+	  } else {
+		$largeurs = array(11, '', 100, 35);
+		$styles = array('', 'arial2', 'arial1', 'arial1');
+	  }
 	} else {
 	  if ($afficher_auteurs) {
 		$largeurs = array(11, '', 100, 100);
@@ -369,9 +368,9 @@ function afficher_liste_messages($choses,$nb_aff=20) {
 	  }
 	}
 	afficher_liste($largeurs, $table, $styles);
-  
+	
 	echo afficher_liste_fin_tableau();
-  
+	
   }
 }
 
@@ -391,7 +390,7 @@ $choses_possibles['auteurs'] = array(
 															   )
 									  );
 
-function afficher_liste_auteurs($choses) {
+function afficher_liste_auteurs($choses,$nb_aff=20) {
   
   $query = 'SELECT id_auteur, nom, login, email, extra, statut FROM spip_auteurs as auteurs WHERE auteurs.id_auteur'.((count($choses))?(' IN('.calcul_in($choses).')'):'');
   
@@ -425,7 +424,7 @@ function afficher_liste_auteurs($choses) {
 	  
 	  // Le titre (et la langue)
 	  $s = "<div>";
-	  $s .= "<a href=\"auteur_edit"._EXTENSION_PHP."?id_auteur=$id_auteur\" style=\"display:block;\">";
+	  $s .= '<a href="'.generer_url_ecrire('auteur_edit',"id_auteur=$id_auteur").'" style="display:block;">';
 	  $s .= typo($login);
 	  $s .= "</a>";
 	  $s .= "</div>";
@@ -483,6 +482,135 @@ $choses_possibles['mots'] = array(
 																				  'nom_id' => 'id_article')
 															   )
 									  );
+
+function md_afficher_groupe_mots($id_groupe,$nb_aff) {
+  global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques;
+  global $spip_lang_right, $couleur_claire;
+  
+  include_ecrire("inc_mot");
+  $query = "SELECT id_mot, titre, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_mots WHERE id_groupe = '$id_groupe' ORDER BY multi";
+  
+  $tranches = afficher_tranches_requete($query, 3, 'debut', false);
+  
+  $occurrences = calculer_liens_mots();
+  
+  $table = '';
+  
+  if (strlen($tranches)) {
+ 	
+	if (!$GLOBALS["t_$tmp_var"]) echo "<div id='$tmp_var' style='position: relative;'>";
+ 	
+	echo "<div class='liste'>";
+	echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
+ 	
+	echo $tranches;
+ 	
+	$result = spip_query($query);
+	while ($row = spip_fetch_array($result)) {
+	  
+	  $vals = '';
+	  
+	  $id_mot = $row['id_mot'];
+	  $titre_mot = $row['titre'];
+	  
+	  if ($connect_statut == "0minirezo")
+		$aff_articles="prepa,prop,publie,refuse";
+	  else
+		$aff_articles="prop,publie";
+	  
+	  if ($id_mot!=$conf_mot) {
+		$couleur = $ifond ? "#FFFFFF" : $couleur_claire;
+		$ifond = $ifond ^ 1;
+		
+		if ($connect_statut == "0minirezo" OR $occurrences['articles'][$id_mot] > 0)
+		  $s = "<a href='" .
+			generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . urlencode(generer_url_ecrire('mots_partout'))) .
+			"' class='liste-mot'>".typo($titre_mot)."</a>";
+		else
+		  $s = typo($titre_mot);
+		
+		$vals[] = $s;
+
+		$vals[] = "<input type='checkbox' name='id_choses[]' value='$id_auteur' id='id_chose$i'/>";
+		
+		$texte_lie = array();
+		
+		if ($occurrences['articles'][$id_mot] == 1)
+		  $texte_lie[] = _T('info_1_article');
+		else if ($occurrences['articles'][$id_mot] > 1)
+		  $texte_lie[] = $occurrences['articles'][$id_mot]." "._T('info_articles_02');
+		
+		if ($occurrences['breves'][$id_mot] == 1)
+		  $texte_lie[] = _T('info_1_breve');
+		else if ($occurrences['breves'][$id_mot] > 1)
+		  $texte_lie[] = $occurrences['breves'][$id_mot]." "._T('info_breves_03');
+		
+		if ($occurrences['sites'][$id_mot] == 1)
+		  $texte_lie[] = _T('info_1_site');
+		else if ($occurrences['sites'][$id_mot] > 1)
+		  $texte_lie[] = $occurrences['sites'][$id_mot]." "._T('info_sites');
+		
+		if ($occurrences['rubriques'][$id_mot] == 1)
+		  $texte_lie[] = _T('info_une_rubrique_02');
+		else if ($occurrences['rubriques'][$id_mot] > 1)
+		  $texte_lie[] = $occurrences['rubriques'][$id_mot]." "._T('info_rubriques_02');
+		
+		$texte_lie = join($texte_lie,", ");
+		
+		$vals[] = $texte_lie;
+		
+		
+		if ($connect_statut=="0minirezo"  AND $connect_toutes_rubriques) {
+		  $vals[] = "<div style='text-align:right;'><a href='" . generer_url_ecrire("mots_tous","conf_mot=$id_mot") . "'>"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' border='0' align='bottom' /></a></div>";
+		}
+		
+		$table[] = $vals;           
+	  }
+	}
+	if ($connect_statut=="0minirezo") {
+	  $largeurs = array('', 100, 130);
+	  $styles = array('arial11','arial11', 'arial1', 'arial1');
+	}
+	else {
+	  $largeurs = array('', 100);
+	  $styles = array('arial11','arial11', 'arial1');
+	}
+	afficher_liste($largeurs, $table, $styles);
+ 	
+	echo "</table>";
+ 	//        fin_cadre_relief();
+	echo "</div>";
+	
+	if (!$GLOBALS["t_$tmp_var"]) echo "</div>";
+ 	
+	$supprimer_groupe = false;
+  }
+  else
+	if ($connect_statut =="0minirezo")
+	  $supprimer_groupe = true;
+  
+  return $supprimer_groupe;
+}
+
+function afficher_liste_mots($choses,$nb_aff=20) {
+  
+  $query = 'SELECT id_groupe FROM spip_mots as mots WHERE mots.id_mots'.((count($choses))?(' IN('.calcul_in($choses).')'):'');
+  
+  $tranches =  afficher_tranches_requete($query, 3,'debut',false,$nb_aff);
+
+  if($tranches) {
+	
+	echo "<div style='height: 12px;'></div>";
+	
+	echo $tranches;
+
+	$result = spip_select($query);
+	$i = 0;
+	while ($row = spip_fetch_array($result)) {
+	  md_afficher_groupe_mots($row['id_groupe']);
+	}
+  }
+}
 
 
 ?>
