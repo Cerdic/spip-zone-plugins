@@ -416,17 +416,10 @@ function mots_partout() {
   echo '<div class=\'liste\'>
 <table border=0 cellspacing=0 cellpadding=3 width=\"100%\">
 <tr class=\'tr_liste\'>
-<td><select name="nom_chose">';
+<td colspan=2><select name="nom_chose">';
   foreach($choses_possibles as $cho => $m) {
 	echo "<option value=\"$cho\"".(($cho == $nom_chose)?'selected':'').'>'._T($m['titre_chose']).'</option>';
   }
-  echo '</select></td>';
-
-  echo '<td><label for="nb_aff">'._T('motspartout:par').':</label><select name="nb_aff">';
-
-  for($nb = 10;$nb<count($choses);$nb=$nb+10)
-	echo "<option value=\"$nb\"".(($nb == $nb_aff)?'selected="true"':'').">$nb</option>";
-
   echo '</select></td>';
 
   echo '</tr>
@@ -446,12 +439,20 @@ function mots_partout() {
   echo "<td><input type='text' size='3' name='id_limit' value='$id_limit'></td></tr>";
   echo '<tr class=\'tr_liste\'>';
   echo "
-	<td colspan=3>
+	<td>
 	<button type='submit' name='switch' value='chose'>";
   echo _T('motspartout:voir');
   echo"    </button>
-	</td>
-	</table></div>";
+	</td>";
+
+	echo '<td colspan=2><label for="nb_aff">'._T('motspartout:par').':</label><select name="nb_aff">';
+
+  for($nb = 10;$nb<count($choses);$nb=$nb+10)
+					 echo "<option value=\"$nb\"".(($nb == $nb_aff)?'selected="true"':'').">$nb</option>";
+
+  echo '</select></td>';
+
+					 echo "	</table></div>";
   fin_cadre_enfonce();
   echo "</form><form method='post' action='".generer_url_ecrire('mots_partout','')."'>
 															 <input type='hidden' name='limit' value='$limit'>
