@@ -496,7 +496,7 @@ function mots_partout() {
 	ehco"	   </button></td>
 <td>
 (<input type='checkbox' id='strict' name='strict'/><label for='strict'>
-selection".echo _T('motspartout:stricte')."?)
+selection"._T('motspartout:stricte')."?)
 </label></td>
 		   </tr>
 		   </table>
