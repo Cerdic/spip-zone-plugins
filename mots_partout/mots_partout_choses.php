@@ -468,10 +468,12 @@ function afficher_liste_auteurs($choses,$nb_aff=20) {
 
 
 //=============================MOTS=========================================
+/*
+on ne peut pas vraiment mettre de mots sur les mots comme c'est fait maintenant :(
 
 $choses_possibles['mots'] = array(
 									  'titre_chose' => 'mots',
-									  'id_chose' => 'id_mot',
+									  'id_chose' => 'id_mot2',
 									  'table_principale' => 'spip_mots',
 									  'tables_limite' => array(
 															   'rubriques' => array(
@@ -608,6 +610,6 @@ function afficher_liste_mots($choses,$nb_aff=20) {
 	}
   }
 }
-
+*/
 
 ?>
