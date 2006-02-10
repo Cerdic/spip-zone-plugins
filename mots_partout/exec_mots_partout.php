@@ -376,7 +376,7 @@ if(count($choses) > 0) {
  * affichage
  ***********************************************************************/
 
-debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots');
+debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots', "../"._DIR_PLUGIN_MOTS_PARTOUT."/mots_partout.css");
 ?>
 </script>
 <?php
@@ -570,14 +570,14 @@ while ($row_groupes = spip_abstract_fetch($m_result_groupes)) {
 	$largeurs = array(40, 10, 10);
 	$styles = array(
 					array('arial11',
-						  'diff-deplace',
-						  'diff-ajoute'),
+						  'avec',
+						  'partie'),
 					array('arial1',
-						  'diff-para-deplace',
-						  'diff-para-ajoute'),
+						  'avec',
+						  'partie'),
 					array('arial1',
-						  'diff-para-deplace',
-						  'diff-para-ajoute')
+						  'avec',
+						  'partie')
 					);
 	md_afficher_liste($largeurs, $table, $styles);
 	
