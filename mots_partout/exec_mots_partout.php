@@ -392,7 +392,7 @@ if(count($choses) > 0) {
  * affichage
  ***********************************************************************/
 
-debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots', '', "../"._DIR_PLUGIN_MOTS_PARTOUT."/mots_partout.css");
+debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_MOTS_PARTOUT."/mots_partout.css");
 ?>
 </script>
 
