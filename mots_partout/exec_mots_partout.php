@@ -391,10 +391,10 @@ function mots_partout() {
   debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_MOTS_PARTOUT."/mots_partout.css");
   echo'</script>
 
-		<script type="text/javascript" src="<?php echo _DIR_PLUGIN_MOTS_PARTOUT;?>/javascript/prototype.js"></script>
-		<script type="text/javascript" src="<?php echo _DIR_PLUGIN_MOTS_PARTOUT;?>/javascript/behaviour.js"></script>
-		<script type="text/javascript" src="<?php echo _DIR_PLUGIN_MOTS_PARTOUT;?>/javascript/effects.js"></script>
-		<script type="text/javascript" src="<?php echo _DIR_PLUGIN_MOTS_PARTOUT;?>/javascript/MultiStateRadio.js"></script>
+		<script type="text/javascript" src="'. _DIR_PLUGIN_MOTS_PARTOUT.'/javascript/prototype.js"></script>
+		<script type="text/javascript" src="'. _DIR_PLUGIN_MOTS_PARTOUT.'/javascript/behaviour.js"></script>
+		<script type="text/javascript" src="'. _DIR_PLUGIN_MOTS_PARTOUT.'/javascript/effects.js"></script>
+		<script type="text/javascript" src="'. _DIR_PLUGIN_MOTS_PARTOUT.'/javascript/MultiStateRadio.js"></script>
 		<script type="text/javascript">
 
 		MultiStateRadio.apply(\'.liste ul\');
