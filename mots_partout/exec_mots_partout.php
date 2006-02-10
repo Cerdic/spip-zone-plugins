@@ -493,11 +493,12 @@ function mots_partout() {
 	   <tr class='tr_liste'>
 	   <td><button type='submit' name='switch' value='action'>";
 	echo _T('bouton_valider');
-	ehco"	   </button></td>
+	echo"	   </button></td>
 <td>
-(<input type='checkbox' id='strict' name='strict'/><label for='strict'>
-selection"._T('motspartout:stricte')."?)
-</label></td>
+(<input type='checkbox' id='strict' name='strict'/>
+<label for='strict'>selection".
+_T('motspartout:stricte').
+"?)</label></td>
 		   </tr>
 		   </table>
 		   </div>";
