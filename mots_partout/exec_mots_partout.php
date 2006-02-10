@@ -572,14 +572,14 @@ while ($row_groupes = spip_abstract_fetch($m_result_groupes)) {
 	$largeurs = array(40, 10, 10);
 	$styles = array(
 					array('arial11',
-						  'avec arial11',
-						  'partie arial11'),
+						  'partie arial11',
+						  'avec arial11'),
 					array('arial1',
-						  'avec arial1',
-						  'partie arial1'),
+						  'partie arial1',
+						  'avec arial1'),
 					array('arial1',
-						  'avec arial1',
-						  'partie arial1')
+						  'partie arial1',
+						  'avec arial1')
 					);
 	md_afficher_liste($largeurs, $table, $styles);
 	
