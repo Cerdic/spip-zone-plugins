@@ -189,6 +189,12 @@ function mots_partout() {
   include_ecrire ("inc_abstract_sql");
   include_ecrire ("inc_objet");
 
+  /***********************************************************************/
+/* PREFIXE*/
+  /***********************************************************************/
+	  $table_pref = 'spip';
+	  if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
+
   
   /***********************************************************************/
   /* récuperation de la chose sur laquelle on travaille*/
@@ -265,7 +271,7 @@ function mots_partout() {
   if (count($mots_enlever) && count($choses)) {
 	foreach($mots_enlever as $m) {
 	  foreach($choses as $d) {
-		spip_query("DELETE FROM spip_mots_$nom_chose WHERE id_mot=$m AND $id_chose=$d");
+		spip_query("DELETE FROM $table_pref_mots_$nom_chose WHERE id_mot=$m AND $id_chose=$d");
 	  }
 	}
   }
@@ -383,8 +389,7 @@ function mots_partout() {
   /***********************************************************************/
 
   debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_MOTS_PARTOUT."/mots_partout.css");
-	?>
-	</script>
+  echo'</script>
 
 		<script type="text/javascript" src="<?php echo _DIR_PLUGIN_MOTS_PARTOUT;?>/javascript/prototype.js"></script>
 		<script type="text/javascript" src="<?php echo _DIR_PLUGIN_MOTS_PARTOUT;?>/javascript/behaviour.js"></script>
@@ -392,11 +397,9 @@ function mots_partout() {
 		<script type="text/javascript" src="<?php echo _DIR_PLUGIN_MOTS_PARTOUT;?>/javascript/MultiStateRadio.js"></script>
 		<script type="text/javascript">
 
-		MultiStateRadio.apply('.liste ul');
+		MultiStateRadio.apply(\'.liste ul\');
 
-  </script>
-
-	  <?php
+  </script>';
 
 	  echo '<br><br><center>';
   gros_titre(_T('motspartout:titre_page'));

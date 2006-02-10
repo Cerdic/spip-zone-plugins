@@ -13,19 +13,29 @@
 define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 
 class MotsPartout {
-	/* static public */
+  /* static public */
 
-	/* public static */
-	function ajouterBoutons($boutons_admin) {
+  /* public static */
+  function ajouterBoutons($boutons_admin) {
 
 
-	  // on voit les bouton dans la barre "accueil"
-	  $boutons_admin['naviguer']->sousmenu["mots_partout"]= new Bouton(
-																	   "../"._DIR_PLUGIN_MOTS_PARTOUT."/tag.png",  // icone
-																	   _L('motspartout:mots_partout') //titre
-		);
+	// on voit les bouton dans la barre "accueil"
+	$boutons_admin['naviguer']->sousmenu["mots_partout"]= new Bouton(
+																	 "../"._DIR_PLUGIN_MOTS_PARTOUT."/tag.png",  // icone
+																	 _L('motspartout:mots_partout') //titre
+																	 );
 	return $boutons_admin;
-}
+  }
+
+  /* public static */
+  function ajouterOnglets($flux) {
+	$rubrique = $flux['args'];
+	if($rubrique=='configuration')
+	  $flux['data']['config_mots_partout']= new Bouton(
+											   "../"._DIR_PLUGIN_MOTS_PARTOUT."/tag.png", 'Configurer Mots Partout');
+	return $flux;
+  }
+
 
 }
 
