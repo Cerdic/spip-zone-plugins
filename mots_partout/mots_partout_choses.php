@@ -406,7 +406,7 @@ function afficher_liste_auteurs($choses,$nb_aff=20) {
 	
 	echo $tranches;
 
-	$result = spip_select($query);
+	$result = spip_query($query);
 	$i = 0;
 	while ($row = spip_fetch_array($result)) {
 	  $i++;
@@ -483,11 +483,11 @@ $choses_possibles['mots'] = array(
 															   )
 									  );
 
-function md_afficher_groupe_mots($id_groupe,$nb_aff) {
+function md_afficher_groupe_mots($id_groupe,$nb_aff=20) {
   global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques;
   global $spip_lang_right, $couleur_claire;
   
-  include_ecrire("inc_mot");
+  include_ecrire("inc_mots");
   $query = "SELECT id_mot, titre, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_mots WHERE id_groupe = '$id_groupe' ORDER BY multi";
   
   $tranches = afficher_tranches_requete($query, 3, 'debut', false);
@@ -521,6 +521,8 @@ function md_afficher_groupe_mots($id_groupe,$nb_aff) {
 	  if ($id_mot!=$conf_mot) {
 		$couleur = $ifond ? "#FFFFFF" : $couleur_claire;
 		$ifond = $ifond ^ 1;
+
+		$vals[] = "<input type='checkbox' name='id_choses[]' value='$id_auteur' id='id_chose$i'/>";
 		
 		if ($connect_statut == "0minirezo" OR $occurrences['articles'][$id_mot] > 0)
 		  $s = "<a href='" .
@@ -531,8 +533,6 @@ function md_afficher_groupe_mots($id_groupe,$nb_aff) {
 		
 		$vals[] = $s;
 
-		$vals[] = "<input type='checkbox' name='id_choses[]' value='$id_auteur' id='id_chose$i'/>";
-		
 		$texte_lie = array();
 		
 		if ($occurrences['articles'][$id_mot] == 1)
@@ -559,22 +559,12 @@ function md_afficher_groupe_mots($id_groupe,$nb_aff) {
 		
 		$vals[] = $texte_lie;
 		
-		
-		if ($connect_statut=="0minirezo"  AND $connect_toutes_rubriques) {
-		  $vals[] = "<div style='text-align:right;'><a href='" . generer_url_ecrire("mots_tous","conf_mot=$id_mot") . "'>"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' border='0' align='bottom' /></a></div>";
-		}
-		
-		$table[] = $vals;           
+	        $table[] = $vals;           
 	  }
 	}
-	if ($connect_statut=="0minirezo") {
-	  $largeurs = array('', 100, 130);
-	  $styles = array('arial11','arial11', 'arial1', 'arial1');
-	}
-	else {
-	  $largeurs = array('', 100);
+  $largeurs = array('', 100);
 	  $styles = array('arial11','arial11', 'arial1');
-	}
+
 	afficher_liste($largeurs, $table, $styles);
  	
 	echo "</table>";
@@ -582,32 +572,39 @@ function md_afficher_groupe_mots($id_groupe,$nb_aff) {
 	echo "</div>";
 	
 	if (!$GLOBALS["t_$tmp_var"]) echo "</div>";
- 	
-	$supprimer_groupe = false;
   }
-  else
-	if ($connect_statut =="0minirezo")
-	  $supprimer_groupe = true;
-  
-  return $supprimer_groupe;
 }
 
 function afficher_liste_mots($choses,$nb_aff=20) {
   
-  $query = 'SELECT id_groupe FROM spip_mots as mots WHERE mots.id_mots'.((count($choses))?(' IN('.calcul_in($choses).')'):'');
+  $query = 'SELECT DISTINCT id_groupe, '.creer_objet_multi ("type", "$spip_lang").' FROM spip_mots as mots WHERE mots.id_mot'.((count($choses))?(' IN('.calcul_in($choses).')'):'')."ORDER BY multi";
   
   $tranches =  afficher_tranches_requete($query, 3,'debut',false,$nb_aff);
 
   if($tranches) {
-	
 	echo "<div style='height: 12px;'></div>";
-	
-	echo $tranches;
-
-	$result = spip_select($query);
+	$result = spip_query($query);
 	$i = 0;
 	while ($row = spip_fetch_array($result)) {
-	  md_afficher_groupe_mots($row['id_groupe']);
+          $id_groupe = $row['id_groupe'];
+	  $query_groupes = "SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots WHERE id_groupe=$id_groupe ORDER BY multi";
+ 	$result_groupes = spip_query($query_groupes);
+ 	
+ 	if ($row_groupes = spip_fetch_array($result_groupes)) {
+ 	    $id_groupe = $row_groupes['id_groupe'];
+ 	    $titre_groupe = typo($row_groupes['titre']);
+ 	  
+ 	    // Afficher le titre du groupe
+ 	    debut_cadre_enfonce("groupe-mot-24.gif", false, '', $titre_groupe);
+ 	  
+ 	    //
+ 	    // Afficher les mots-cles du groupe
+ 	    //
+ 	    md_afficher_groupe_mots($id_groupe,$nb_aff);
+ 	 	
+ 	    fin_cadre_enfonce();
+ 	
+ 	}	
 	}
   }
 }
