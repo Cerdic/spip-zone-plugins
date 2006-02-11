@@ -22,6 +22,8 @@ class PodcastClient{
 	
 		list($le_lien, $id_syndic, $data) = func_get_arg(0);
 		PodcastClient::traiter_les_enclosures_rss($data['enclosures'],$id_syndic,$le_lien);
+
+		return func_get_arg(0); # remettre les infos dans le pipeline
 	}
 	
 	function delete_podcast_client() {
