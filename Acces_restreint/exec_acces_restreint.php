@@ -30,9 +30,9 @@ function acces_restreint(){
 		exit;
 	}
 	if (isset($_POST['creer']))
-		AccesRestreint::cree_zone();
+		AccesRestreint_cree_zone();
 	if (isset($_GET['supp_zone']))
-		AccesRestreint::supprimer_zone();
+		AccesRestreint_supprimer_zone();
 
 	$requete = "SELECT zones.* FROM spip_zones AS zones";
 
@@ -52,8 +52,8 @@ function acces_restreint(){
 		while ($row = spip_fetch_array($result)){
 			$vals = array();
 			$id_zone = $row['id_zone'];
-			$nb_rub = count(AccesRestreint::liste_contenu_zone_rub($id_zone));
-			$nb_aut = count(AccesRestreint::liste_contenu_zone_auteur($id_zone));
+			$nb_rub = count(AccesRestreint_liste_contenu_zone_rub($id_zone));
+			$nb_aut = count(AccesRestreint_liste_contenu_zone_auteur($id_zone));
 			
 			$s = $row['id_zone'];
 			$vals[] = $s;

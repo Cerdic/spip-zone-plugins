@@ -49,7 +49,7 @@ function auteurs_edit()
 	$supp_zone = $_GET['supp_zone'];
 	// le formulaire qu'on ajoute
 	global $connect_statut;
-	AccesRestreint::formulaire_zones('auteurs', $id_auteur, $nouv_zone, $supp_zone, $connect_statut == '0minirezo', generer_url_ecrire('auteurs_edit',"id_auteur=$id_auteur"));
+	AccesRestreint_formulaire_zones('auteurs', $id_auteur, $nouv_zone, $supp_zone, $connect_statut == '0minirezo', generer_url_ecrire('auteurs_edit',"id_auteur=$id_auteur"));
 
 	fin_page();
 }

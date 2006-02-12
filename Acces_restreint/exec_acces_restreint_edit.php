@@ -15,7 +15,7 @@ function acces_restreint_edit(){
 	$id_zone = intval($_GET['id_zone']);
 
 	if (isset($_POST['Enregistrer']))
-		AccesRestreint::enregistrer_zone();
+		AccesRestreint_enregistrer_zone();
 	  
 	debut_page(_T('accesrestreint:page_zones_acces'));
 	
@@ -67,7 +67,7 @@ function acces_restreint_edit(){
 	echo _T('accesrestreint:rubriques_zones_acces');
 	echo "</div>";
 	echo "<div>\n";
-	echo AccesRestreint::selecteur_rubrique_html($id_zone);
+	echo AccesRestreint_selecteur_rubrique_html($id_zone);
 	echo "</div>\n";
 	echo "</form>\n";
 

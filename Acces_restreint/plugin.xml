@@ -32,9 +32,9 @@ _ Toutes les boucles natives de SPIP sont surchargees pour en filtrer les result
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
-	<class> 
+	<prefix> 
 	AccesRestreint
-	</class>
+	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_boutons</nom>
