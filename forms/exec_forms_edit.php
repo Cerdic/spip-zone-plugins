@@ -159,7 +159,7 @@ function forms_edit(){
 	//
 	// Modifications aux donnees de base du formulaire
 	//
-	if (Forms::form_administrable($id_form)) {
+	if (Forms_form_administrable($id_form)) {
 		if ($supp_form = intval($supp_form) AND $supp_confirme AND !$supp_rejet) {
 			$query = "DELETE FROM spip_forms WHERE id_form=$supp_form";
 			$result = spip_query($query);
@@ -170,7 +170,7 @@ function forms_edit(){
 		}
 	}
 
-	if (form_editable($id_form)) {
+	if (Forms_form_editable($id_form)) {
 		if ($new == 'oui' && $titre) {
 			$schema = array();
 			spip_query("INSERT INTO spip_forms (schema) VALUES ('".
@@ -233,11 +233,11 @@ function forms_edit(){
 	unset($champ_visible);
 	unset($nouveau_champ);
 
-	if ($id_form && form_editable($id_form)) {
+	if ($id_form && Forms_form_editable($id_form)) {
 		$modif_schema = false;
 
 		// Ajout d'un champ
-		if (($type = $ajout_champ) && Forms::types_champs_autorises($type)) {
+		if (($type = $ajout_champ) && Forms_types_champs_autorises($type)) {
 			$n = 1;
 			$code = $type.'_'.strval($n);
 			foreach ($schema as $t) {
@@ -355,7 +355,7 @@ function forms_edit(){
 
 	echo "<br /><br />\n";
 
-	if (Forms::form_administrable($id_form) && $nb_reponses) {
+	if (Forms_form_administrable($id_form) && $nb_reponses) {
 		debut_boite_info();
 
 		icone_horizontale(_L("Suivi des r&eacute;ponses")."<br />".$nb_reponses." "._L("r&eacute;ponses"),
@@ -439,7 +439,7 @@ function forms_edit(){
 			echo _L("Voici une pr&eacute;visualisation du formulaire tel qu'il ".
 				"appara&icirc;tra aux visiteurs du site public.")."<p>\n";
 			echo "<div style='margin: 10px; padding: 10px; border: 1px dashed $couleur_foncee;'>";
-			echo Forms::afficher_formulaire_schema($schema);
+			echo Forms_afficher_formulaire_schema($schema);
 			echo "</div>\n";
 			echo fin_block();
 
@@ -464,7 +464,7 @@ function forms_edit(){
 		icone(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."/form-24.png", "rien.gif");
 		echo "</div>\n";
 	}
-	if ($id_form && Forms::form_administrable($id_form)) {
+	if ($id_form && Forms_form_administrable($id_form)) {
 		echo "<br />\n";
 		echo "<div align='$spip_lang_right'>";
 		$link = new link();
@@ -484,7 +484,7 @@ function forms_edit(){
 	//
 	// Edition des donnees du formulaire
 	//
-	if (form_editable($id_form)) {
+	if (Forms_form_editable($id_form)) {
 		echo "<p>";
 		debut_cadre_formulaire();
 
@@ -619,7 +619,7 @@ function forms_edit(){
 				echo $visible ? bouton_block_visible("champ_$code") : bouton_block_invisible("champ_$code");
 				echo "<strong>".typo($t['nom'])."</strong>";
 				echo "<br /></div>";
-				echo "(".Forms::nom_type_champ($t['type']).")\n";
+				echo "(".Forms_nom_type_champ($t['type']).")\n";
 				echo $visible ? debut_block_visible("champ_$code") : debut_block_invisible("champ_$code");
 
 				// Modifier un champ
@@ -675,7 +675,7 @@ function forms_edit(){
 			$types = array('ligne', 'texte', 'email', 'url', 'select', 'multiple', 'fichier', 'mot');
 			echo "<select name='ajout_champ' value='' class='fondo'>\n";
 			foreach ($types as $type) {
-				echo "<option value='$type'>".Forms::nom_type_champ($type)."</option>\n";
+				echo "<option value='$type'>".Forms_nom_type_champ($type)."</option>\n";
 			}
 			echo "</select>\n";
 			echo " &nbsp; <input type='submit' name='valider' id='ajout_champ' VALUE='"._T('bouton_valider')."' class='fondo'>";

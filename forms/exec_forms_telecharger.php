@@ -62,7 +62,7 @@ function forms_telecharger(){
 		if ($row = spip_fetch_array($result)) {
 			$id_form = $row['id_form'];
 		}
-		if (!$id_form || !Forms::form_administrable($id_form)) {
+		if (!$id_form || !Forms_form_administrable($id_form)) {
 			acces_interdit();
 		}
 		$query = "SELECT schema FROM spip_forms WHERE id_form=$id_form";
@@ -122,7 +122,7 @@ function forms_telecharger(){
 	}
 	else $nb_reponses = 0;
 
-	if (!$id_form || !Forms::form_administrable($id_form)) {
+	if (!$id_form || !Forms_form_administrable($id_form)) {
 		acces_interdit();
 	}
 

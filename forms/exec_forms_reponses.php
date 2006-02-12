@@ -39,7 +39,7 @@ function forms_reponses(){
 
 		icone_horizontale(_L("Aller au formulaire"), "?exec=forms_edit&id_form=$id_form", "../"._DIR_PLUGIN_FORMS. "/form-24.png", "rien.gif");
 
-		if (Forms::form_administrable($id_form)) {
+		if (Forms_form_administrable($id_form)) {
 			icone_horizontale(_L("T&eacute;l&eacute;charger les r&eacute;ponses"),
 				"?exec=forms_telecharger&id_form=$id_form", "doc-24.gif", "rien.gif");
 		}
@@ -50,7 +50,7 @@ function forms_reponses(){
 	debut_droite();
 
 
-	if (!Forms::form_administrable($id_form)) {
+	if (!Forms_form_administrable($id_form)) {
 		echo "<strong>"._T('avis_acces_interdit')."</strong>";
 		fin_page();
 		exit;

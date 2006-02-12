@@ -26,7 +26,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 	//echo "forms_avant_propre::";
 		// Mecanisme de mise a jour des liens
 		$forms = array();
-		$maj_liens = ($GLOBALS['flag_ecrire'] AND $id_article = intval($_POST['id_article']));
+		$maj_liens = ($_GET['exec']=='articles' AND $id_article = intval($_GET['id_article']));
 		if ($maj_liens) {
 			if (!$reset) {
 				$query = "DELETE FROM spip_forms_articles WHERE id_article=$id_article";
