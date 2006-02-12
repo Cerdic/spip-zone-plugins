@@ -6,7 +6,7 @@ Index: exec_articles.php
  			  $message, $texte_petition,
  			  $changer_virtuel, $virtuel);
   
-+echo pipeline('ajouter_boite_gauche',array('date'=>'', 'args'=>'articles'));
++echo pipeline('ajouter_boite_gauche',array('date'=>'', 'args'=>array('exec'=>'articles','id_article'=>$id_article,'id_rubrique'=>$id_rubrique));
 +
  //
  // Affichage de la colonne de droite
