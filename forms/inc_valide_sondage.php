@@ -29,7 +29,7 @@ function valide_sondage()
 		if ($row = spip_fetch_array($result)) {
 			$id_form = $row['id_form'];
 			$cookie = $row['cookie'];
-			$nom_cookie = nom_cookie_form($id_form);
+			$nom_cookie = Forms::nom_cookie_form($id_form);
 			// D'abord verifier que l'URL est legitime, donc que la demande a bien
 			// ete generee par SPIP
 			if ($cookie && $cookie == $_COOKIE[$nom_cookie]
@@ -53,7 +53,7 @@ function valide_sondage()
 			// D'abord verifier que l'URL est legitime, donc que la demande a bien
 			// ete generee par SPIP
 			if (verifier_action_auteur("confirm $id_reponse", $hash)) {
-				generer_mail_reponse_formulaire($id_form, $id_reponse, $mailconfirm);
+				Forms::generer_mail_reponse_formulaire($id_form, $id_reponse, $mailconfirm);
 			}
 		}
 		$renvoyer_image = true;
