@@ -8,6 +8,9 @@
 	<version>
 	  0.1
 	</version>
+	<etat>
+	  experimental
+	</etat>
 	<description>
 	  pour trier les articles en fonction d'un mot.
 	</description>

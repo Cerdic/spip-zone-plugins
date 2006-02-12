@@ -12,6 +12,9 @@
 	<version>
 	0.1
 	</version>
+	<etat>
+	dev
+	</etat>
 	<description>
 	  Gestion des mots clefs sur tous les &eacute;l&eacute;ments SPIP.
 	</description>
