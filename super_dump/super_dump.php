@@ -11,11 +11,8 @@
  */
 define('_DIR_PLUGIN_SUPER_DUMP',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 
-class SuperDump {
-	/* static public */
 
-	/* public static */
-	function ajouterBoutons($boutons_admin) {
+	function SuperDump_ajouterBoutons($boutons_admin) {
 	  // remplacer l'icone si elle est la
 	  if (isset($boutons_admin['configuration']->sousmenu['admin_tech']))
 			$boutons_admin['configuration']->sousmenu['admin_tech']= 
@@ -25,10 +22,10 @@ class SuperDump {
 	}
 
 	/* public static */
-	function ajouterOnglets($flux) {
+	function SuperDump_ajouterOnglets($flux) {
 		$rubrique = $flux['args'];
 		return $flux;
 	}
-}
+
 
 ?>

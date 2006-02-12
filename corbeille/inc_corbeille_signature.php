@@ -1,5 +1,5 @@
 <?php
-function corbeille_signature(){
+function Corbeille_signature(){
   
 	echo "<body>";
 	echo "<head>";

@@ -1,6 +1,6 @@
 <?php
 
-function corbeille_forum(){
+function Corbeille_forum(){
 	echo "<body>";
 	echo "<head>";
 	echo "<title>Forum</title>";

@@ -43,7 +43,7 @@ function critere_recherche($idb, &$boucles, $crit) {
 		// Ne pas executer la requete en cas de hash vide
 		$boucle->hash = '
 	// RECHERCHE
-	list($rech_select, $rech_where) = prepare_index_recherche($GLOBALS["recherche"], "'.$crit->cond.'");
+	list($rech_select, $rech_where) = RechercheEtendue_prepare_index_recherche($GLOBALS["recherche"], "'.$crit->cond.'");
 		';
 		// Sauf si le critere est conditionnel {recherche ?}
 		if (!$crit->cond)

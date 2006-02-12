@@ -8,13 +8,16 @@
 	<version>
 	0.1
 	</version>
+	<etat>
+	experimental
+	</etat>
 	<description>
 	Outils de gestion des documents : une page de recapitulatif de tous les documents.
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction-->
-	<class>
+	<prefix>
 	GestionDocuments
-	</class>
+	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_boutons</nom>

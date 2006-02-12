@@ -15,11 +15,8 @@
  *
  */
 
-class RechercheEtendue {
-	/* static public */
 
-	/* public static */
-	function ajouterBoutons($boutons_admin) {
+	function RechercheEtendue_ajouterBoutons($boutons_admin) {
 		// si on est admin
 		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]
 		AND $GLOBALS["options"]=="avancees" ) {
@@ -39,7 +36,7 @@ class RechercheEtendue {
 	}
 
 	/* public static */
-	function ajouterOnglets($flux) {
+	function RechercheEtendue_ajouterOnglets($flux) {
 		$rubrique = $flux['args'];
 		return $flux;
 	}
@@ -47,7 +44,7 @@ class RechercheEtendue {
 	//*********************************************
 	// RECHERCHE
 	//*********************************************
-	function jauge($texte,$nom_barre,$gain=1){
+	function RechercheEtendue_jauge($texte,$nom_barre,$gain=1){
 		static $barfilename;
 		static $barheight;
 		$point = round($texte*$gain);
@@ -64,7 +61,7 @@ class RechercheEtendue {
 		return $texte;
 	}
 	
-	function star($texte,$starfilename = "") {
+	function RechercheEtendue_star($texte,$starfilename = "") {
 		if ($starfilename="")
 			$starfilename=_DIR_PLUGIN_ADVANCED_SEARCH."/star.gif";
 		$point = $texte;
@@ -93,7 +90,7 @@ class RechercheEtendue {
 		return $texte;
 	}
 	
-	function google_like_string($texte,$action='store'){
+	function RechercheEtendue_google_like_string($texte,$action='store'){
 	  static $string;
 	  switch ($action){
 		  case 'get':
@@ -111,11 +108,11 @@ class RechercheEtendue {
 		return "";
 	}
 	function google_like_string_raz($texte){
-	  return google_like_strong($texte,'raz');
+	  return RechercheEtendue_google_like_string($texte,'raz');
 	}
 	
-	function google_like($query){
-	  $string = google_like_string('','get');
+	function RechercheEtendue_google_like($query){
+	  $string = RechercheEtendue_google_like_string('','get');
 		$qt = explode(" ", $query);
 		$num = count ($qt);
 		$cc = ceil(200 / $num);
@@ -139,7 +136,7 @@ class RechercheEtendue {
 	//*********************************************
 	// fonction soundex pour la langue francaise
 	// je sais plus ou je l'ai trouvee
-	function soundex_fr( $sIn )
+	function RechercheEtendue_soundex_fr( $sIn )
 	{
 	   // Si il n'y a pas de mot, on sort immédiatement
 	   if ( $sIn === '' ) return '    ';
@@ -181,7 +178,7 @@ class RechercheEtendue {
 	   return substr( $sIn . '    ', 0, 4);
 	}
 	
-	function recherche_semblable($recherche) {
+	function RechercheEtendue_recherche_semblable($recherche) {
 		// recupere les mots de la recherche
 		$regs = separateurs_indexation(true)." ";
 		$recherche = strtr($recherche, $regs, ereg_replace('.', ' ', $regs));
@@ -191,7 +188,7 @@ class RechercheEtendue {
 	}
 	// infame salmigondi
 	// a remplacer par levensthein
-	function mot_err($mot1, $mot2, $beta = 10000){
+	function RechercheEtendue_mot_err($mot1, $mot2, $beta = 10000){
 		$len1 = strlen($mot1);
 		$len2 = strlen($mot2);
 		$minlen = min($len1,$len2);
@@ -203,27 +200,27 @@ class RechercheEtendue {
 		}
 		return $err;
 	}
-	function mot_match($mot1, $mot2, $beta = 10000){
+	function RechercheEtendue_mot_match($mot1, $mot2, $beta = 10000){
 		static $match_profondeur = 2;
 		$len1 = strlen($mot1);
 		$len2 = strlen($mot2);
 		if ($len1>$len2)
-			return mot_match($mot2,$mot1,$beta);
+			return RechercheEtendue_mot_match($mot2,$mot1,$beta);
 		else {
-			$err = mot_err($mot1,$mot2,$beta);
+			$err = RechercheEtendue_mot_err($mot1,$mot2,$beta);
 			if (($len1<$len2)&&($len1>=$len2-$match_profondeur)){
 				for($k=0;$k<$len1;$k++){
 					$test = "";
 					$test = substr($mot1,0,$k);
 					$test .= substr($mot2,$k,1);
 					$test .= substr($mot1,$k);
-					$err = min($err,mot_match($test, $mot2, $beta));
+					$err = min($err,RechercheEtendue_mot_match($test, $mot2, $beta));
 				}
 			}
 			return $err;
 		}
 	}
-	function mot_semblable($mot){
+	function RechercheEtendue_mot_semblable($mot){
 		$candidats = array();
 	
 		for ($k=0;$k<strlen($mot)-1;$k++){
@@ -276,7 +273,7 @@ class RechercheEtendue {
 			$translitteration_complexe = true;
 			$base = nettoyer_chaine_indexation($mot);
 			foreach(array_keys($confirmes) as $key){
-				$confirmes[$key] = $score = mot_match($base,$key,$best_match);
+				$confirmes[$key] = $score = RechercheEtendue_mot_match($base,$key,$best_match);
 				if ($score<$best_match){
 					$best_match = $score;
 					$best = $key;
@@ -287,6 +284,6 @@ class RechercheEtendue {
 	
 		return $best;
 	}
-}
+
 
 ?>

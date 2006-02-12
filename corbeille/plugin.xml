@@ -13,6 +13,9 @@ _ &copy; 2005-2006 - Distribue sous licence GNU/GPL
 	<version>
 	0.1
 	</version>
+	<etat>
+	experimental
+	</etat>
 	<description>
 	Gestion des documents mis a la corbeille
 	</description>
@@ -21,9 +24,9 @@ _ &copy; 2005-2006 - Distribue sous licence GNU/GPL
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
-	<class> 
+	<prefix> 
 	Corbeille
-	</class>
+	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_boutons</nom>

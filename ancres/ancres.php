@@ -10,10 +10,8 @@
  *
  */
 
-class Ancres {
-
 	// la fonction est tres legere on la definit directement ici
-	function post_propre($texte) {
+	function Ancres_post_propre($texte) {
 		$regexp = "|\[#?([^][]*)<-\]|";
 		if (preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER))
 		foreach ($matches as $regs)
@@ -21,5 +19,4 @@ class Ancres {
 			'<a name="'.entites_html($regs[1]).'"></a>', $texte);
 		return $texte;
 	}
-}
 ?>

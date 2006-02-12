@@ -10,6 +10,9 @@
 	<version>
 	0.1
 	</version>
+	<etat>
+	test
+	</etat>
 	<description>
 Le filtre decoration permet aux redacteurs d'un site spip de d'appliquer les styles soulign&eacute;, barr&eacute;, au dessus, blink et fluo &agrave; une phrase, un mot, parapraphe.
 -* <code><souligne></code>Lorem ipsum dolor sit amet<code></souligne></code>
@@ -22,9 +25,9 @@ Le filtre decoration permet aux redacteurs d'un site spip de d'appliquer les sty
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
-	<class> 
+	<prefix> 
 	decoration
-	</class>
+	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 			<nom>pre_typo</nom>

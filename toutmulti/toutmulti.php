@@ -11,10 +11,10 @@
  *
  */
 
-class ToutMulti{
+
 
 	// la fonction est tres legere on la definit directement ici
-	function pre_typo($texte) {
+	function ToutMulti_pre_typo($texte) {
 		$regexp = "|<:([^>]*):>|";
 		if (preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER))
 		foreach ($matches as $regs)
@@ -23,6 +23,6 @@ class ToutMulti{
 		return $texte;
 	}
   
-}
+
 
 ?>

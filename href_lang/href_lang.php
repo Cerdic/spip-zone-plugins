@@ -4,13 +4,12 @@
 // aucun moyen de trouver comment indiquer a un filtre
 // donc on applique les deux...
 //
-Class hrefLang{
-  
-	function href_lang($texte, $balise='texte') {
+
+	function hrefLang_href_lang($texte, $balise='texte') {
 		//le premier passage transforme le raccourci en lien
-		$texte = hrefLang::appliquer_hreflang($texte);
+		$texte = hrefLang_appliquer_hreflang($texte);
 		//le deuxieme passage retire le raccourci residuel (cas de l'intro)
-		$texte = hrefLang::retirer_hreflang($texte);
+		$texte = hrefLang_retirer_hreflang($texte);
 		return $texte;
 	}
 	
@@ -24,7 +23,7 @@ Class hrefLang{
 	* à appliquer à un #TEXTE => [(#TEXTE|appliquer_hreflang)]
 	***/
 	
-	function appliquer_hreflang($texte) {
+	function hrefLang_appliquer_hreflang($texte) {
 		$regexp = "|<a([^>]+)>([^<]+)(\|(([a-z]+)(-([a-z]+))?))+</a>|i";
 		$replace = "<a\\1 hreflang=\"\\4\">\\2</a>";
 		return preg_replace($regexp, $replace, $texte);
@@ -52,11 +51,11 @@ Class hrefLang{
 	* à appliquer à un #INTRODUCTION => [(#INTRODUCTION|retirer_hreflang)]
 	***/
 	
-	function retirer_hreflang($introduction) {
+	function hrefLang_retirer_hreflang($introduction) {
 		$regexp = "|\|(([a-z]+)(-([a-z]+))?)|i";
 		$replace = "";
 		return preg_replace($regexp, $replace, $introduction);
 	}
-}
+
 
 ?>

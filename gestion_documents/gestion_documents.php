@@ -11,11 +11,8 @@
  */
 define('_DIR_PLUGIN_GESTION_DOCUMENTS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 
-class GestionDocuments {
-	/* static public */
 
-	/* public static */
-	function ajouterBoutons($boutons_admin) {
+	function GestionDocuments_ajouterBoutons($boutons_admin) {
 		// si on est admin
 		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]
 		AND $GLOBALS["options"]=="avancees" ) {
@@ -29,11 +26,11 @@ class GestionDocuments {
 		return $boutons_admin;
 	}
 
-	/* public static */
-	function ajouterOnglets($flux) {
+
+	function GestionDocuments_ajouterOnglets($flux) {
 		$rubrique = $flux['args'];
 		return $flux;
 	}
-}
+
 
 ?>

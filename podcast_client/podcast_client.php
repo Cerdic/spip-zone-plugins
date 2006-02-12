@@ -15,25 +15,25 @@
 //
 // recupere les donnees du point d'entree 'post_syndication'
 //
-class PodcastClient{
+
   
-	function podcast_client() {
-		PodcastClient::verifier_table_documents_syndic();
+	function PodcastClient_podcast_client() {
+		PodcastClient_verifier_table_documents_syndic();
 	
 		list($le_lien, $id_syndic, $data) = func_get_arg(0);
-		PodcastClient::traiter_les_enclosures_rss($data['enclosures'],$id_syndic,$le_lien);
+		PodcastClient_traiter_les_enclosures_rss($data['enclosures'],$id_syndic,$le_lien);
 
 		return func_get_arg(0); # remettre les infos dans le pipeline
 	}
 	
-	function delete_podcast_client() {
+	function PodcastClient_delete_podcast_client() {
 		spip_query("DROP TABLE spip_documents_syndic");
 	}
 	
 	//
 	// Verifie que la table spip_documents_syndic existe, sinon la creer
 	//
-	function verifier_table_documents_syndic() {
+	function PodcastClient_verifier_table_documents_syndic() {
 		if (!spip_query("SELECT id_syndic, id_syndic_article, id_document FROM spip_documents_syndic")) {
 			spip_log('creation de la table spip_documents_syndic');
 			include_ecrire('inc_base');
@@ -49,7 +49,7 @@ class PodcastClient{
 	// Inserer les references aux fichiers joints
 	// presentes sous la forme microformat <a rel="enclosure">
 	//
-	function traiter_les_enclosures_rss($enclosures,$id_syndic,$le_lien) {
+	function PodcastClient_traiter_les_enclosures_rss($enclosures,$id_syndic,$le_lien) {
 	spip_log('podcast_client');
 		if (!preg_match_all(
 		',<a([[:space:]][^>]*)?[[:space:]]rel=[\'"]enclosure[^>]*>,',
@@ -113,6 +113,6 @@ class PodcastClient{
 	
 		return $n; #nombre d'enclosures integrees
 	}
-}
+
 
 ?>

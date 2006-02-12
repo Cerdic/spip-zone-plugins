@@ -9,6 +9,9 @@
 	<version>
 	0.1
 	</version>
+	<etat>
+	experimental
+	</etat>
 	<description>
 	Gestion et administration de formulaires editables.
 	Ce plugin permet egalement la publication de sondages et enquetes, la collecte des reponses dans la base de données et le telechargement au format csv

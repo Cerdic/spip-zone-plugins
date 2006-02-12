@@ -9,6 +9,9 @@ _ &copy; 2005 - Distribue sous licence GNU/GPL
 	<version>
 	0.1
 	</version>
+	<etat>
+	test
+	</etat>
 	<description>
 	Introduit le raccourci <code><sc>...</sc></code> pour les petites majuscules
 	</description>
@@ -17,9 +20,9 @@ _ &copy; 2005 - Distribue sous licence GNU/GPL
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
-	<class> 
+	<prefix> 
 	SmallCaps
-	</class>
+	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>post_typo</nom>

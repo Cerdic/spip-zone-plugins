@@ -6,11 +6,11 @@
  */
 define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS . basename(dirname(__FILE__))));
  
-class Corbeille {
+
 	/* static public */
 
 	/* public static */
-	function ajouterBoutons($boutons_admin) {
+	function Corbeille_ajouterBoutons($boutons_admin) {
 		// si on est admin
 		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
 		  // on voit le bouton dans la barre "naviguer"
@@ -23,12 +23,12 @@ class Corbeille {
 	}
 
 	/* public static */
-	function ajouterOnglets($flux) {
+	function Corbeille_ajouterOnglets($flux) {
 		$rubrique = $flux['args'];
 		return $flux;
 	}
 
-	function effacement($table, $statut, $titre, $id) {
+	function Corbeille_effacement($table, $statut, $titre, $id) {
 		$total=compte_elements_vider($table, $statut, $titre); 
 		if ($total == 0) {
 			echo "$table vide <br />";
@@ -47,7 +47,7 @@ class Corbeille {
 		return $total;
 	}
 
-	function icone_poubelle($total_table) {
+	function Corbeille_icone_poubelle($total_table) {
 		if (empty($total_table)) {
 			echo"<img src='"._DIR_PLUGIN_CORBEILLE."/trash-empty.png' height='30' width='30' style='border:0px' />"; 
 		} else { 
@@ -55,7 +55,7 @@ class Corbeille {
 		} 
 	}
 
-	function compte_elements_vider($table, $statut, $titre) {
+	function Corbeille_compte_elements_vider($table, $statut, $titre) {
 	                        $req_corbeille = "select COUNT(*) from $table WHERE statut like '$statut'";
 	                        $result_corbeille = spip_query($req_corbeille);
 	                        $total1 = 0;
@@ -64,7 +64,7 @@ class Corbeille {
 	}
 
 
-	function affiche_ligne($titre,$url,$total_table,$ifond){
+	function Corbeille_affiche_ligne($titre,$url,$total_table,$ifond){
 	  global $couleur_claire;
 		if ($ifond==0){
 			$ifond=1;
@@ -79,7 +79,7 @@ class Corbeille {
 		echo $titre;
 		echo "</span><td style='width:50;'>";
 		if ($total_table>0) echo "<a href='$url'>";
-		Corbeille::icone_poubelle($total_table);
+		Corbeille_icone_poubelle($total_table);
 		if ($total_table>0) echo "</a>";
 		echo "</td><td>";
 		echo "<span style='font:arial,helvetica,sans-serif;font-size:small;'>";
@@ -89,25 +89,25 @@ class Corbeille {
 		return $ifond;
 	}
 
-	function affiche($page){
+	function Corbeille_affiche($page){
 		//case "signatures" :
 		$statut = "poubelle"; $titre = "nom_email"; $table = "spip_signatures"; $id = "id_signature"; $temps = "date_time";
-		$total_signatures = Corbeille::compte_elements_vider($table, $statut, $titre);
+		$total_signatures = Corbeille_compte_elements_vider($table, $statut, $titre);
 		//case "breves" :
 		$statut = "refuse"; $table = "spip_breves"; $id = "id_breve"; $temps = "date_heure";
-		$total_breves = Corbeille::compte_elements_vider($table, $statut, $titre);
+		$total_breves = Corbeille_compte_elements_vider($table, $statut, $titre);
 		//case "articles" :
 		$statut = "poubelle"; $table = "spip_articles"; $id = "id_article"; $temps = "date";
-		$total_articles = Corbeille::compte_elements_vider($table, $statut, $titre);
+		$total_articles = Corbeille_compte_elements_vider($table, $statut, $titre);
 		//case "forums_publics" :
 		$statut = "off"; $table = "spip_forum"; $id = "id_forum"; $temps = "date_heure";
-		$total_forums_publics = Corbeille::compte_elements_vider($table, $statut, $titre);
+		$total_forums_publics = Corbeille_compte_elements_vider($table, $statut, $titre);
 		//case "forums_prives" :
 		$statut = "privoff"; $table = "spip_forum"; $id = "id_forum"; $temps = "date_heure";
-		$total_forums_prives = Corbeille::compte_elements_vider($table, $statut, $titre);
+		$total_forums_prives = Corbeille_compte_elements_vider($table, $statut, $titre);
 		//case "auteurs" :
 		$statut = "5poubelle"; $titre = "nom"; $table="spip_auteurs"; $id="id_auteur"; $temps = "maj";
-		$total_auteur = Corbeille::compte_elements_vider($table, $statut, $titre);
+		$total_auteur = Corbeille_compte_elements_vider($table, $statut, $titre);
 		$totaux = ($total_auteur + $total_forums_prives + $total_forums_publics + $total_articles + $total_breves + $total_signatures); 
 	
 		//types de documents geres par la corbeille
@@ -115,15 +115,15 @@ class Corbeille {
 		echo "<table style='width:100%'>";
 		$ifond=0;
 	
-		$ifond = Corbeille::affiche_ligne(_L('P&eacute;titions'),generer_url_ecrire($page,"type_doc=signatures"),$total_signatures,$ifond);
-		$ifond = Corbeille::affiche_ligne(_L('Br&egrave;ves'),generer_url_ecrire($page,"type_doc=breves"),$total_breves,$ifond);
-		$ifond = Corbeille::affiche_ligne(_L('Articles'),generer_url_ecrire($page,"type_doc=articles"),$total_articles,$ifond);
-		$ifond = Corbeille::affiche_ligne(_L('Forums Publics'),generer_url_ecrire($page,"type_doc=forums_publics"),$total_forums_publics,$ifond);
-		$ifond = Corbeille::affiche_ligne(_L('Forums Priv&eacute;s'),generer_url_ecrire($page,"type_doc=forums_prives"),$total_forums_prives,$ifond);
-		$ifond = Corbeille::affiche_ligne(_L('Auteurs'),generer_url_ecrire($page,"type_doc=auteurs"),$total_auteur,$ifond);
-		$ifond = Corbeille::affiche_ligne(_L('Tout'),generer_url_ecrire($page,"type_act=tout"),$totaux,$ifond);
+		$ifond = Corbeille_affiche_ligne(_L('P&eacute;titions'),generer_url_ecrire($page,"type_doc=signatures"),$total_signatures,$ifond);
+		$ifond = Corbeille_affiche_ligne(_L('Br&egrave;ves'),generer_url_ecrire($page,"type_doc=breves"),$total_breves,$ifond);
+		$ifond = Corbeille_affiche_ligne(_L('Articles'),generer_url_ecrire($page,"type_doc=articles"),$total_articles,$ifond);
+		$ifond = Corbeille_affiche_ligne(_L('Forums Publics'),generer_url_ecrire($page,"type_doc=forums_publics"),$total_forums_publics,$ifond);
+		$ifond = Corbeille_affiche_ligne(_L('Forums Priv&eacute;s'),generer_url_ecrire($page,"type_doc=forums_prives"),$total_forums_prives,$ifond);
+		$ifond = Corbeille_affiche_ligne(_L('Auteurs'),generer_url_ecrire($page,"type_doc=auteurs"),$total_auteur,$ifond);
+		$ifond = Corbeille_affiche_ligne(_L('Tout'),generer_url_ecrire($page,"type_act=tout"),$totaux,$ifond);
 		echo "</table><br/>";
 	}
-}
+
 
 ?>

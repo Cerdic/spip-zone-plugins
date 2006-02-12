@@ -11,11 +11,11 @@
  */
 define('_DIR_PLUGIN_GESTION_DOCUMENTS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 
-function generer_query_string($conteneur,$id_type,$nb_aff,$notitle){
+function generer_query_string($conteneur,$id_type,$nb_aff,$filtre){
   $query = ($conteneur?"conteneur=$conteneur&":"")
 		.($id_type?"id_type=$id_type&":"")
 		.(($nb_aff)?"nb_aff=$nb_aff&":"")
-		.(($notitle)?"notitle=$notitle&":"");
+		.(($filtre)?"filtre=$filtre&":"");
 
   return $query;
 }	
@@ -92,17 +92,30 @@ function portfolio(){
 		spip_query("UPDATE spip_documents SET titre='$titre',descriptif='$descriptif',date='$date_doc' WHERE id_document='$id_document'");
 	}
 
-	if (isset($_REQUEST['id_type']))
+	if (isset($_REQUEST['id_type'])){
 		$id_type=intval($_REQUEST['id_type']);
-	if (isset($_REQUEST['conteneur']))
+		if (!isset($_POST['id_type'])) $_POST['id_type']=$_REQUEST['id_type'];
+	}
+	if (isset($_REQUEST['conteneur'])){
 		$conteneur=addslashes($_REQUEST['conteneur']);
+		if (!isset($_POST['conteneur'])) $_POST['conteneur']=$_REQUEST['conteneur'];
+	}
 	else
 		$conteneur="";
-	if (isset($_REQUEST['nb_aff']))
+	if (isset($_REQUEST['nb_aff'])){
 		$nb_aff=intval($_REQUEST['nb_aff']);
-	if (isset($_REQUEST['notitle']))
-		$notitle=intval($_REQUEST['notitle']);
-
+		if (!isset($_POST['nb_aff'])) $_POST['nb_aff']=$_REQUEST['nb_aff'];
+	}
+	if (isset($_REQUEST['t_debut'])){
+		$t_debut=intval($_REQUEST['t_debut']);
+		if (!isset($_POST['t_debut'])) $_POST['t_debut']=$_REQUEST['t_debut'];
+	}
+	else
+		$t_debut=0;
+	if (isset($_REQUEST['filtre'])){
+		$filtre=addslashes($_REQUEST['filtre']);
+		if (!isset($_POST['filtre'])) $_POST['filtre']=$_REQUEST['filtre'];
+	}
 	$titre_table=_L("Tous les Documents");
 	if (!$icone) $icone = "../"._DIR_PLUGIN_GESTION_DOCUMENTS."/stock_broken_image.png";
 
@@ -111,6 +124,12 @@ function portfolio(){
 	while ($row=spip_fetch_array($s)){
 	  $table_type[$row['id_type']]=$row['titre'];
 	}
+
+	$res = spip_query("SELECT COUNT(*) FROM spip_documents");
+	if ($row = spip_fetch_array($res))
+		$nombre_documents = $row[0];
+	else
+		$nombre_documents = 0;
 
 
 	$join = "";
@@ -124,8 +143,46 @@ function portfolio(){
 	if ($id_type){
 		$where .= " AND docs.id_type='$id_type'";
 	}
-	if ($notitle){
+	if ($filtre=='notitle'){
 		$where .= " AND docs.titre='' AND docs.descriptif=''";
+	}
+	else if ($filtre=='nofile'){
+		$tab_doc_id=array();
+		$res = spip_query("SELECT id_document,fichier FROM spip_documents");
+		while($row = spip_fetch_array($res)){
+			//$url_fichier = generer_url_document($row['id_document']);
+			$url_fichier = _DIR_RACINE . $row['fichier'];
+			if (!file_exists($url_fichier))
+				$tab_doc_id[]=$row['id_document'];
+		}
+		$in = join(",",$tab_doc_id);
+		$where .= " AND " . calcul_mysql_in('id_document',$in);
+	}
+	else if ($filtre=='badsize'){
+		$tab_doc_id=array();
+		$res = spip_query("SELECT id_document,fichier,taille,largeur,hauteur FROM spip_documents");
+		while($row = spip_fetch_array($res)){
+			//$url_fichier = generer_url_document($row['id_document']);
+			$url_fichier = _DIR_RACINE . $row['fichier'];
+			if (file_exists($url_fichier)){
+				$size = @getimagesize($url_fichier);
+				$file_size = @filesize($url_fichier);
+				$ok = true;
+				if (($file_size != FALSE)&&($file_size!=$row['taille'])) {
+					$ok = false;
+				}
+				if (($size != FALSE)&&($size[0]!=$row['largeur'])){
+					$ok = false;
+				}
+				if (($size != FALSE)&&($size[1]!=$row['hauteur'])){
+					$ok = false;
+				}
+				if ($ok==false)
+					$tab_doc_id[]=$row['id_document'];
+			}
+		}
+		$in = join(",",$tab_doc_id);
+		$where .= " AND " . calcul_mysql_in('id_document',$in);
 	}
 
 	$requete = "SELECT docs.* FROM spip_documents AS docs";
@@ -150,7 +207,8 @@ function portfolio(){
 		$t_debut = floor($pos/$nb_aff)*$nb_aff;
 	}
 
-	$tranches = afficher_tranches_requete($requete, 3,'debut',false,$nb_aff);
+	$url = generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,$nb_aff,$filtre)."::deb::");
+	$tranches = afficher_tranches_requete($requete, 3,'debut',false,$nb_aff,$url);
 
 	$table_need_update = false;
 	if ($tranches) {
@@ -178,7 +236,8 @@ function portfolio(){
 			$doc = $row;
 
 			$fichier = $doc['fichier'];
-			$url_fichier = generer_url_document($id_document);
+			$url_fichier = generer_url_document($doc['id_document']);
+			$doc['url'] = $url_fichier;
 			$size = @getimagesize($url_fichier);
 			$file_size = @filesize($url_fichier);
 
@@ -192,6 +251,7 @@ function portfolio(){
 			$res2=spip_query($query2);
 			if ($row2 = spip_fetch_array($res2)){
 				$url = generer_url_ecrire("articles_edit","id_article=".$row2['id_article']);
+				$link_title = _T('ecrire:info_article')." ".$row2['id_article'];
 				$utile = true;
 		 	}
 		 	else {
@@ -199,6 +259,7 @@ function portfolio(){
 				$res2=spip_query($query2);
 				if ($row2 = spip_fetch_array($res2)){
 					$url = generer_url_ecrire("rubriques_edit","id_rubrique=".$row2['id_rubrique']);
+					$link_title = _L("Rubrique ")." ".$row2['id_rubrique'];
 					$utile = true;
 			 	}
 			 	else {
@@ -206,6 +267,7 @@ function portfolio(){
 					$res2=spip_query($query2);
 					if ($row2 = spip_fetch_array($res2)){
 						$url = generer_url_ecrire("breves_edit","id_breve=".$row2['id_breve']);
+						$link_title = _L("Breve ")." ".$row2['id_breve'];
 						$utile = true;
 					}
 				 	else {
@@ -213,12 +275,12 @@ function portfolio(){
 						$res2=spip_query($query2);
 						if ($row2 = spip_fetch_array($res2)){
 							$url = generer_url_ecrire("sites_edit","id_syndic=".$row2['id_syndic']);
+							$link_title = _L("Site ")." ".$row2['id_syndic'];
 							$utile = true;
 						}
 					}
 				}
 			}
-			$doc['url'] = $url;
 
 			// test de la balise alt
 			$montexte = "<img$id_search>";
@@ -237,8 +299,19 @@ function portfolio(){
 			}
 			// balise alt ?
 			$doc['info']="";
+			if ($utile) {
+				$puce = 'puce-verte.gif';
+				$doc['info'] .= "<a href='$url' title='$link_title'>";
+				$doc['info'] .= "<img src='"._DIR_IMG_PACK."$puce' width='7' height='7' border='0'>&nbsp;";
+				$doc['info'] .= "</a>";
+			}
+			else {
+				$puce = 'puce-orange.gif';
+				$doc['info'] .= "<img src='"._DIR_IMG_PACK."$puce' width='7' height='7' border='0'>&nbsp;";
+			}
+
 			if ($alt == "")
-				$doc['info'] .= "Pas de balise alt ?? ".htmlentities($montexte);
+				$doc['info'] .= _L("Pas de balise alt ?? ").htmlentities($montexte);
 			else {
 				if ($altgood == true)
 					$doc['info'] .= "<span style='background : #00FF00;'>";
@@ -248,6 +321,47 @@ function portfolio(){
 				}
 				$doc['info'] .= "$alt</span>";
 		 	}
+
+			// taille
+			$s = "";
+			$s .= 'taille : '.$row['taille'];
+			if ($file_size != FALSE){
+				if ($file_size!=$row['taille']) {
+					$table_need_update = true;
+					$s .= "(<span style='background : #FF0000;'>";
+					$s .= $file_size;
+					$s .= "</span>)";
+					$doc['info'] .= "<br/>$s";
+				}
+			}
+
+			// largeur
+			$s = "";
+			$s .= 'largeur : '.$row['largeur'];
+			if ($size != FALSE){
+				if ($size[0]!=$row['largeur']) {
+					$table_need_update = true;
+					$s .= "(<span style='background : #FF0000;'>";
+					$s .= $size[0];
+					$s .= "</span>)";
+					$doc['info'] .= "<br/>$s";
+				}
+			}
+
+			// hauteur
+			$s = "";
+			$s .= 'hauteur : '.$row['hauteur'];
+			if ($size != FALSE){
+				if ($size[1]!=$row['hauteur']) {
+					$table_need_update = true;
+					$s .= "(<span style='background : #FF0000;'>";
+					$s .= $size[1];
+					$s .= "</span>)";
+					$doc['info'] .= "<br/>$s";
+				}
+			}
+
+
 			
 			$documents[] = $doc;
 		}
@@ -259,14 +373,14 @@ function portfolio(){
 
 		if ($table_need_update){
 			icone_horizontale (_L('Mettre les tailles a jour'), 
-				generer_url_ecrire('portfolio',"updatetable=oui&".generer_query_string($conteneur,$id_type,$nb_aff,$notitle)),
+				generer_url_ecrire('portfolio',"updatetable=oui&".generer_query_string($conteneur,$id_type,$nb_aff,$filtre)),
 				"administration-24.gif");
 		}
 
-		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string($conteneur,"",$nb_aff,$notitle))."' method='post'><div>\n";
+		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string($conteneur,"",$nb_aff,$filtre))."' method='post'><div>\n";
 		echo _L('Type :') . "<br /><select name='id_type'";
 		echo "onchange=\"document.location.href='";
-		echo generer_url_ecrire('portfolio',generer_query_string($conteneur,"",$nb_aff,$notitle).'id_type=')."'+this.options[this.selectedIndex].value\"";
+		echo generer_url_ecrire('portfolio',generer_query_string($conteneur,"",$nb_aff,$filtre).'id_type=')."'+this.options[this.selectedIndex].value\"";
 		echo ">" . "\n";
 		$s=spip_query('SELECT * FROM spip_types_documents');
 		echo "<option value=''>Tous</option>";
@@ -282,10 +396,10 @@ function portfolio(){
 		echo "</div></noscript></div>\n";
 		echo "</form>\n";
 
-		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string("",$id_type,$nb_aff,$notitle))."' method='post'><div>\n";
+		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string("",$id_type,$nb_aff,$filtre))."' method='post'><div>\n";
 		echo _L('Conteneur :') . "<br /><select name='conteneur'";
 		echo "onchange=\"document.location.href='";
-		echo generer_url_ecrire('portfolio',generer_query_string("",$id_type,$nb_aff,$notitle).'conteneur=')."'+this.options[this.selectedIndex].value\"";
+		echo generer_url_ecrire('portfolio',generer_query_string("",$id_type,$nb_aff,$filtre).'conteneur=')."'+this.options[this.selectedIndex].value\"";
 		echo ">" . "\n";
 		echo "<option value=''>Tous</option>";
 		echo "<option value='rubriques'".($conteneur=='rubriques'?(" selected='selected'"):"").">Rubriques</option>";
@@ -299,22 +413,24 @@ function portfolio(){
 		echo "</form>\n";
 
 		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,$nb_aff,""))."' method='post'><div>\n";
-		echo _L('Filtrer :') . "<br /><select name='notitle'";
+		echo _L('Filtrer :') . "<br /><select name='filtre'";
 		echo "onchange=\"document.location.href='";
-		echo generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,$nb_aff,"").'notitle=')."'+this.options[this.selectedIndex].value\"";
+		echo generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,$nb_aff,"").'filtre=')."'+this.options[this.selectedIndex].value\"";
 		echo ">" . "\n";
-		echo "<option value='0'>Tous</option>";
-		echo "<option value='1'".($notitle?(" selected='selected'"):"").">Sans titre ni descriptif</option>";
+		echo "<option value=''>Tous</option>";
+		echo "<option value='notitle'".($filtre=='notitle'?(" selected='selected'"):"").">Sans titre ni descriptif</option>";
+		echo "<option value='nofile'".($filtre=='nofile'?(" selected='selected'"):"").">Fichier introuvable</option>";
+		echo "<option value='badsize'".($filtre=='badsize'?(" selected='selected'"):"").">Taille erron&eacute;e</option>";
 		echo "</select>";
 		echo "<noscript><div>";
 		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
 		echo "</div></noscript></div>\n";
 		echo "</form>\n";
 	
-		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,"",$notitle))."' method='post'><div>\n";
+		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,"",$filtre))."' method='post'><div>\n";
 		echo _L('Affichage :') . "<br /><select name='nb_aff'";
 		echo "onchange=\"document.location.href='";
-		echo generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,"",$notitle).'nb_aff=')."'+this.options[this.selectedIndex].value\"";
+		echo generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,"",$filtre).'nb_aff=')."'+this.options[this.selectedIndex].value\"";
 		echo ">" . "\n";
 		echo "<option value='12'>Par 12</option>";
 		echo "<option value='24'".($nb_aff=='24'?(" selected='selected'"):"").">Par 24</option>";
@@ -361,6 +477,32 @@ function portfolio(){
 			echo "<input type='submit' name='modif' value='"._T('bouton_valider')."' class='fondo' />";
 			echo "</form>";*/
 			echo "</table>";
+
+			echo "<a name='bas'>";
+			echo "<table width='100%' border='0'>";
+			
+			$debut_suivant = $t_debut + $nb_aff;
+			if ($debut_suivant < $nombre_documents OR $t_debut > 0) {
+				echo "<tr height='10'></tr>";
+				echo "<tr bgcolor='white'><td align='left'>";
+				if ($t_debut > 0) {
+					$debut_prec = max($t_debut - $nb_aff, 0);
+					echo generer_url_post_ecrire("portfolio",generer_query_string($conteneur,$id_type,$nb_aff,$filtre)."t_debut=$debut_prec"),
+						"\n<input type='submit' value='&lt;&lt;&lt;' class='fondo' />",
+						$visiteurs,
+						"\n</form>";
+				}
+				echo "</td><td style='text-align:right;'>";
+				if ($debut_suivant < $nombre_documents) {
+					echo generer_url_post_ecrire("portfolio",generer_query_string($conteneur,$id_type,$nb_aff,$filtre)."t_debut=$debut_suivant"),
+						"\n<input type='submit' value='&gt;&gt;&gt;' class='fondo' />",
+						$visiteurs,
+						"\n</form>";
+				}
+				echo "</td></tr>\n";
+			}
+			
+			echo "</table>\n";
 			echo "</div>\n";
 		}
 

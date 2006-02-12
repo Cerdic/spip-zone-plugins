@@ -11,6 +11,9 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	<version>
 	0.1
 	</version>
+	<etat>
+	experimental
+	</etat>
 	<description>
 	Recherche entendue
 _ plugin d'outils pour la recherche et l'indexation
@@ -32,9 +35,9 @@ _ filtre google_like
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
-	<class> 
+	<prefix> 
 	RechercheEtendue
-	</class>
+	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_boutons</nom>

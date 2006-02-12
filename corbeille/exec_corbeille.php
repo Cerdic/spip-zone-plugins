@@ -45,25 +45,25 @@ lescript;
 	 
 	if ($connect_statut == "0minirezo") {
 		$page = "corbeille";
-		$page3 = "corbeille_forum";
-		$page4 = "corbeille_signature";
+		$page3 = "Corbeille_forum";
+		$page4 = "Corbeille_signature";
 	
-		Corbeille::affiche($page);
+		Corbeille_affiche($page);
 		if (empty($debut)) $debut = 0;
 		$titre = "titre"; 
 		if (! empty($type_act)) {
 			$statut = "poubelle"; $table = "spip_signatures"; $id = "id_signature";
-			Corbeille::effacement( $table, $statut, $titre, $id);
+			Corbeille_effacement( $table, $statut, $titre, $id);
 			$statut = "refuse"; $table = "spip_breves"; $id = "id_breve";
-			Corbeille::effacement( $table, $statut, $titre, $id);
+			Corbeille_effacement( $table, $statut, $titre, $id);
 			$statut = "poubelle"; $table = "spip_articles"; $id = "id_article";
-			Corbeille::effacement( $table, $statut, $titre, $id);
+			Corbeille_effacement( $table, $statut, $titre, $id);
 			$statut = "off"; $table = "spip_forum"; $id = "id_forum";
-			Corbeille::effacement( $table, $statut, $titre, $id);
+			Corbeille_effacement( $table, $statut, $titre, $id);
 			$statut = "privoff"; $table = "spip_forum"; $id = "id_forum";
-			Corbeille::effacement( $table, $statut, $titre, $id);
+			Corbeille_effacement( $table, $statut, $titre, $id);
 			$statut = "5poubelle"; $titre = "nom"; $table="spip_auteurs"; $id="id_auteur";
-			Corbeille::effacement( $table, $statut, $titre, $id);
+			Corbeille_effacement( $table, $statut, $titre, $id);
 			echo "<meta http-equiv=\"refresh\" content=\"0; URL=".generer_url_ecrire($page)."\">"; 
 			$debut=0;$type_act=0;
 		}

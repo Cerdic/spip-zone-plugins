@@ -9,6 +9,9 @@ _ &copy; 2006 - Distribue sous licence GPL
 	<version>
 	0.1
 	</version>
+	<etat>
+	test
+	</etat>
 	<description>
 	Introduit une ancre translitteree pour les intertitres
 	</description>
@@ -17,9 +20,9 @@ _ &copy; 2006 - Distribue sous licence GPL
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
-	<class> 
+	<prefix> 
 	AncresIntertitres
-	</class>
+	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>pre_propre</nom>

@@ -9,6 +9,9 @@ _ &copy; 2006 - Distribue sous licence GPL
 	<version>
 	0.1
 	</version>
+	<etat>
+	test
+	</etat>
 	<description>
 	Gestion de zones d'acces restreint.
 _ Chaque zone contient des rubriques.

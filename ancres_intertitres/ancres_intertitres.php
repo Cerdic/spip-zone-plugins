@@ -7,14 +7,14 @@
 //
 // http://www.spip-contrib.net/spikini/VarianteContribAjouter-des-ID-aux-intertitres
 //
-class AncresIntertitres{
-	function ancres_intertitres($texte) {
+
+	function AncresIntertitres_ancres_intertitres($texte) {
 		$regexp = "/{{{[[:space:]]*(.+)[[:space:]]*}}}/";
-		$texte = preg_replace_callback($regexp, create_function('$matches','return AncresIntertitres::remplace_intertitre($matches);'), $texte);
+		$texte = preg_replace_callback($regexp, create_function('$matches','return AncresIntertitres_remplace_intertitre($matches);'), $texte);
 		return $texte;
 	}
 	
-	function remplace_intertitre($matches) {
+	function AncresIntertitres_remplace_intertitre($matches) {
 		static $cId = 0;
 		$cId++;
 		$url = translitteration(corriger_caracteres(
@@ -39,17 +39,17 @@ class AncresIntertitres{
 			$url = substr($url, 1);
 			if (strlen($url) < 2) $url = "ancre$cId";
 		}
-		AncresIntertitres::table_matiere('', $url, $matches[1]);
+		AncresIntertitres_table_matiere('', $url, $matches[1]);
 		return '{{{ ['.$url.'<-] '.$matches[1].' }}}';
 	}
-	function table_matiere($mode = '', $url = '', $titre ='') {
+	function AncresIntertitres_table_matiere($mode = '', $url = '', $titre ='') {
 		static $tableau = array();
 		if($mode == 'retour') return $tableau;
 		$tableau[$url] = $titre;
 		return '';
 	}
 	
-	function compose_table_matiere($cadre_lien,	$cadre_global, $table_matiere) {
+	function AncresIntertitres_compose_table_matiere($cadre_lien,	$cadre_global, $table_matiere) {
 		$texte = '';
 		if(!empty($table_matiere))
 			foreach($table_matiere as $url => $titre)
@@ -57,17 +57,17 @@ class AncresIntertitres{
 		return $texte ? preg_replace(',@texte@,', $texte, $cadre_global) : '';	
 	}
   
-}
+
 
 //
 //balise #TABLE_MATIERE
 //
 function balise_TABLE_MATIERE_dist($p) {
 	$p->code = "
-	AncresIntertitres::compose_table_matiere(
+	AncresIntertitres_compose_table_matiere(
 		'\t<li><a href=\"#@url@\">@titre@</a></li>\n',
 		'\n<ul>\n@texte@</ul>\n',
-		AncresIntertitres::table_matiere(\"retour\")
+		AncresIntertitres_table_matiere(\"retour\")
 	)";
 	$p->statut = 'php';
 	return $p;

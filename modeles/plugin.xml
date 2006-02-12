@@ -9,6 +9,9 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	<version>
 	0.1
 	</version>
+	<etat>
+	experimental
+	</etat>
 	<description>
 	introduit le raccourci <code><breve12|squelette></code> pour les modeles
 	</description>
@@ -17,9 +20,9 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
-	<class> 
+	<prefix> 
 	Modeles
-	</class>
+	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>pre_propre</nom>

@@ -253,7 +253,7 @@ function documents_tous(){
 				// puce et titre
 				$s = "";
 				if ($utile) {
-					$puce = 'puce-verte-breve.gif';
+					$puce = 'puce-verte.gif';
 					$s = "<a href='$url'>";
 					$s .= "<img src='img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
 					if ($titre=="") $s .= $fichier;
@@ -261,7 +261,7 @@ function documents_tous(){
 					$s .= "</a>";
 				}
 				else {
-					$puce = 'puce-orange-breve.gif';
+					$puce = 'puce-orange.gif';
 					$s .= "<img src='img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
 					if ($titre=="") $s .= $fichier;
 					else						$s .= typo($titre);

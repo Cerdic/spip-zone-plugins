@@ -3,15 +3,15 @@
 /**
  * definition du plugin "rien" version "classe statique"
  */
-class Rien {
+
 	/* static public */
-	function leFiltre($quelquechose) {
+	function Rien_leFiltre($quelquechose) {
 		// ne rien faire = retourner ce qu'on nous a envoye
 		return $quelquechose.'<!-- rien_poo -->';
 	}
 
 	/* public static */
-	function ajouterBoutons($boutons_admin) {
+	function Rien_ajouterBoutons($boutons_admin) {
 		// si on est admin
 		if ($GLOBALS['connect_statut'] == "0minirezo") {
 		  // on voit le bouton dans la barre "naviguer"
@@ -31,12 +31,12 @@ class Rien {
 	}
 
 	/* public static */
-	function ajouterOnglets($flux) {
+	function Rien_ajouterOnglets($flux) {
 		$rubrique = $flux['args'];
 		if($rubrique=='configuration')
 		  $flux['data']['rien_config']= new Bouton(
 			'../'._DIR_PLUGINS.'rien/ecrire/img_pack/rien-24.png', 'rien ...');
 		return $flux;
 	}
-}
+
 ?>
