@@ -103,7 +103,7 @@ function tri_mots() {
 
   fin_cadre_enfonce();
 
-  icone(_T('icone_retour'), addslashes($_REQUEST['retour']), "mot-cle-24.gif", "rien.gif");
+  if($_REQUEST['retour']) icone(_T('icone_retour'), addslashes($_REQUEST['retour']), "mot-cle-24.gif", "rien.gif");
 
   //Milieu
 
