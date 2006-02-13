@@ -59,44 +59,50 @@ function verifier_auteur($table, $id_objet, $id) {
 //------------------------la fonction qui fait tout-----------------------------------
 
 function tri_mots() {
-	global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques;
+  global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques;
 
   include_ecrire ("inc_presentation");
   include_ecrire ("inc_abstract_sql");
 
   /***********************************************************************/
-	/* PREFIXE*/
+  /* PREFIXE*/
   /***********************************************************************/
   $table_pref = 'spip';
   if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
 
   if(addslashes($_GET['installation'])) {
-	  spip_query("ALTER TABLE `".$table_pref."_mots_articles` ADD `rang` BIGINT NOT NULL DEFAULT 0;");
+	spip_query("ALTER TABLE `".$table_pref."_mots_articles` ADD `rang` BIGINT NOT NULL DEFAULT 0;");
   }
 
   $id_mot = intval($_REQUEST['id_mot']);
 
- /************************************************************************/
- /* insertion */
- /************************************************************************/
-//o[]=118&o=120&o[]=128
-if($_POST['order']) {
- $order = split('&',$_POST['order']);
- for($i=0;$i<count($order);$i++) {
-   spip_query("UPDATE ".$table_pref."_mots_articles SET rang = $i WHERE id_mot=$id_mot AND id_article=".intval(substr($order[$i],4)));
- }
-}
+  /************************************************************************/
+  /* insertion */
+  /************************************************************************/
+  //o[]=118&o=120&o[]=128
+  if($_POST['order']) {
+	$order = split('&',$_POST['order']);
+	for($i=0;$i<count($order);$i++) {
+	  spip_query("UPDATE ".$table_pref."_mots_articles SET rang = $i WHERE id_mot=$id_mot AND id_article=".intval(substr($order[$i],4)));
+	}
+  }
 
   /***********************************************************************/
   /* affichage*/
   /***********************************************************************/
 
   debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_MOTS_PARTOUT."/mots_partout.css");
-echo '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_MOTS.'/javascript/prototype.js"></script>';
-echo '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_MOTS.'/javascript/scriptaculous.js"></script>';
-echo '	<script type="text/javascript">';
-echo "Event.observe(window, 'load', function() {Sortable.create('liste_tri_articles');\$('submit_form').onsubmit = function() {\$('order').value=Sortable.serialize('liste_tri_articles',{name:'o'});}}, false);";
-echo ' </script>';
+  echo '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_MOTS.'/javascript/prototype.js"></script>';
+  echo '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_MOTS.'/javascript/scriptaculous.js"></script>';
+  echo '	<script type="text/javascript">';
+  echo 'function initialiseSort() {
+	Sortable.create(\'liste_tri_articles\');
+	$(\'submit_form\').onsubmit = function() {
+	  $(\'order\').value=Sortable.serialize(\'liste_tri_articles\',{name:\'o\'});
+	};
+  }'
+  echo "Event.observe(window, 'load', initialiseSort, false);";
+  echo ' </script>';
 
 
   //Colonne de gauche
@@ -109,36 +115,35 @@ echo ' </script>';
 
   $result_articles = "SELECT article.titre, article.id_article, lien.rang FROM spip_mots_articles AS lien, spip_articles AS article
  	    WHERE article.id_article=lien.id_article AND article.statut='publie' AND lien.id_mot=$id_mot ORDER BY lien.rang";
- 
-echo 'TEST';
-	    $tranches = afficher_tranches_requete($result_articles, 2);
+  
+  $tranches = afficher_tranches_requete($result_articles, 2);
 
   if($tranches) {
     echo "<div style='height: 12px;'></div>";
     echo "<div class='liste'>";
-bandeau_titre_boite2('ARTICLES', "article-24.gif");
+	bandeau_titre_boite2('ARTICLES', "article-24.gif");
 
-echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
+	echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 
-echo $tranches;
-echo "<ul id='liste_tri_articles'>";
+	echo $tranches;
+	echo "<ul id='liste_tri_articles'>";
     $result = spip_query($result_articles);
- 	        while ($row = spip_fetch_array($result)) {
-$id_article=$row['id_article'];
-$titre=$row['titre'];
-$rang=$row['rang'];
+	while ($row = spip_fetch_array($result)) {
+	  $id_article=$row['id_article'];
+	  $titre=$row['titre'];
+	  $rang=$row['rang'];
 
-echo "<li id='article_$id_article'><span>$rang</span><span><a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a></span></li>";
+	  echo "<li id='article_$id_article'><span>$rang</span><span><a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a></span></li>";
 
-}
-echo '</ul>';
+	}
+	echo '</ul>';
 
-echo '</table>';
+	echo '</table>';
 
 
-echo '<form id="submit_form" action="'.generer_url_ecrire('tri_mots',"id_mot=$id_mot").'" method="post"><input type="hidden" name="order" id="order"/><input type="hidden" name="id_mot" value="'.$id_mot.'"/><input type="submit" id="submit_button"></form>';
+	echo '<form id="submit_form" action="'.generer_url_ecrire('tri_mots',"id_mot=$id_mot").'" method="post"><input type="hidden" name="order" id="order"/><input type="hidden" name="id_mot" value="'.$id_mot.'"/><input type="submit" id="submit_button"></form>';
 
-}  
+  }  
 
   fin_page();
   
