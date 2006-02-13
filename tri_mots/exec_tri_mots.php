@@ -91,7 +91,7 @@ function tri_mots() {
   /* affichage*/
   /***********************************************************************/
 
-  debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_MOTS_PARTOUT."/mots_partout.css");
+  debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_TRI_MOTS."/tri_mots.css");
   echo '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_MOTS.'/javascript/prototype.js"></script>';
   echo '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_MOTS.'/javascript/scriptaculous.js"></script>';
   echo '	<script type="text/javascript">';
@@ -112,6 +112,8 @@ function tri_mots() {
   //Milieu
 
   debut_droite();
+
+	echo  "<h1>Ordonner les articles du mot $id_mot</h1>";
 
   $result_articles = "SELECT article.titre, article.id_article, lien.rang FROM spip_mots_articles AS lien, spip_articles AS article
  	    WHERE article.id_article=lien.id_article AND article.statut='publie' AND lien.id_mot=$id_mot ORDER BY lien.rang";

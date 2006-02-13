@@ -1,0 +1,9 @@
+#liste_tri_articles {
+  margin: 1em 1em;
+  padding: 0;
+  list-style-type: none;
+}
+
+#liste_tri_articles span {
+  margin-right: 1em;
+}
