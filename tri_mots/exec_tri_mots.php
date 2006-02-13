@@ -100,7 +100,7 @@ function tri_mots() {
 	$(\'submit_form\').onsubmit = function() {
 	  $(\'order\').value=Sortable.serialize(\'liste_tri_articles\',{name:\'o\'});
 	};
-  }'
+  }';
   echo "Event.observe(window, 'load', initialiseSort, false);";
   echo ' </script>';
 
