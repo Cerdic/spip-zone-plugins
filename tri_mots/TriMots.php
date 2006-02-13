@@ -4,6 +4,9 @@ function TriMots_ajouter_boite_gauche($arguments) {
   if($arguments['args']['exec'] == 'articles') {
 	return $arguments['data'] .= TriMots_boite_tri_mots($arguments['args']['id_article']);
   }
+  else if($arguments['args']['exec'] == 'mots_edit') {
+	return $arguments['data'] .= icone(_T('trimots:titre_page'),generer_url_ecrire('tri_mots','id_mot='.$arguments['args']['id_mot']), "mot-cle-24.gif", "rien.gif");
+  }
   return $arguments['data'];
 }
 

@@ -1,0 +1,14 @@
+Index: exec_mots_edit.php
+===================================================================
+--- exec_mots_edit.php	(revision 5673)
++++ exec_mots_edit.php	(working copy)
+@@ -168,7 +168,9 @@
+ 
+ fin_raccourcis();
+ 
++echo pipeline('ajouter_boite_gauche',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot)));
+ 
++
+ debut_droite();
+ 
+ debut_cadre_relief("mot-cle-24.gif");
