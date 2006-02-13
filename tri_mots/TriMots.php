@@ -1,5 +1,7 @@
 <?php
 
+define('_DIR_PLUGIN_TRI_MOTS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+
 function TriMots_ajouter_boite_gauche($arguments) {
   global $connect_statut, $connect_toutes_rubriques;
   if (($connect_statut == '0minirezo') AND $connect_toutes_rubriques) {
