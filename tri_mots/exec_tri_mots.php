@@ -114,7 +114,7 @@ function tri_mots() {
   
   echo "<div style='height: 12px;'></div>";
   echo "<div class='liste'>";
-  bandeau_titre_boite2(_T('articles'), "article-24.gif");
+  bandeau_titre_boite2(_T('articles'), _DIR_PLUGIN_TRI_MOTS."img/updown.png");
 
   echo "<ul id='liste_tri_articles'>";
   $result = spip_query($result_articles);

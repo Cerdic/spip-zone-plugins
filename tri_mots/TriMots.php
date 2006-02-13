@@ -7,7 +7,7 @@ function TriMots_ajouter_boite_gauche($arguments) {
 	  return $arguments['data'] .= TriMots_boite_tri_mots($arguments['args']['id_article']);
 	}
 	else if($arguments['args']['exec'] == 'mots_edit') {
-	  return $arguments['data'] .= icone(_T('trimots:titre_page'),generer_url_ecrire('tri_mots','id_mot='.$arguments['args']['id_mot']), "mot-cle-24.gif", "rien.gif");
+	  return $arguments['data'] .= icone(_T('trimots:titre_page'),generer_url_ecrire('tri_mots','id_mot='.$arguments['args']['id_mot'].'&retour='.urlencode(generer_url_ecrire('mots_edit',"id_mot=".$arguments['args']['id_mot'])), _DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
 	}
 	return $arguments['data'];
   }
@@ -17,7 +17,7 @@ function TriMots_boite_tri_mots($id_article) {
   include_ecrire('inc_abstract_sql');
   $to_ret = '<div>&nbsp;</div>';
   $to_ret .= '<div class="bandeau_rubriques" style="z-index: 1;">';
-  $to_ret .= bandeau_titre_boite2(_T('trimots:ordonner'),"article-24.gif","white","black", false);
+  $to_ret .= bandeau_titre_boite2(_T('trimots:ordonner'),_DIR_PLUGIN_TRI_MOTS.'/img/updown.png',"white","black", false);
   $to_ret .= '<div class="plan-articles">';
   $from = array('spip_mots_articles as lien','spip_mots as mots');
   $select = array('lien.rang','lien.id_mot','mots.titre');
