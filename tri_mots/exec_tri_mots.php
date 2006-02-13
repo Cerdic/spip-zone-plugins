@@ -113,7 +113,7 @@ function tri_mots() {
 
   debut_droite();
 
-	echo  "<h1>Ordonner les articles du mot $id_mot</h1>";
+  echo  "<h1>Ordonner les articles du mot $id_mot</h1>";
 
   $result_articles = "SELECT article.titre, article.id_article, lien.rang FROM spip_mots_articles AS lien, spip_articles AS article
  	    WHERE article.id_article=lien.id_article AND article.statut='publie' AND lien.id_mot=$id_mot ORDER BY lien.rang";
