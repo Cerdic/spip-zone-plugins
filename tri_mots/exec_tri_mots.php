@@ -91,7 +91,7 @@ function tri_mots() {
   /* affichage*/
   /***********************************************************************/
 
-  debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_TRI_MOTS."/tri_mots.css");
+  debut_page('&laquo; '._T('trimots:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_TRI_MOTS."/tri_mots.css");
   echo '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_MOTS.'/javascript/prototype.js"></script>';
   echo '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_MOTS.'/javascript/scriptaculous.js"></script>';
   echo '	<script type="text/javascript">';
@@ -104,30 +104,31 @@ function tri_mots() {
   echo "Event.observe(window, 'load', initialiseSort, false);";
   echo ' </script>';
 
+gros_titre(_T('trimots:titre_tri_mots',array('titre_mot'=>$id_mot)));
+
 
   //Colonne de gauche
   debut_gauche();
 
+debut_cadre_enfonce();
+
+echo _T('trimots:tri_mots_help',array('titre_mot'=>$id_mot));
+
+fin_cadre_enfonce();
+
+icone(_T('icone_retour'), addslashes($_REQUEST['retour']), "mot-cle-24.gif", "rien.gif");
 
   //Milieu
 
   debut_droite();
 
-  echo  "<h1>Ordonner les articles du mot $id_mot</h1>";
-
   $result_articles = "SELECT article.titre, article.id_article, lien.rang FROM spip_mots_articles AS lien, spip_articles AS article
  	    WHERE article.id_article=lien.id_article AND article.statut='publie' AND lien.id_mot=$id_mot ORDER BY lien.rang";
   
-  $tranches = afficher_tranches_requete($result_articles, 2);
-
-  if($tranches) {
     echo "<div style='height: 12px;'></div>";
     echo "<div class='liste'>";
-	bandeau_titre_boite2('ARTICLES', "article-24.gif");
+	bandeau_titre_boite2(_T('articles'), "article-24.gif");
 
-	echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
-
-	echo $tranches;
 	echo "<ul id='liste_tri_articles'>";
     $result = spip_query($result_articles);
 	while ($row = spip_fetch_array($result)) {
@@ -135,17 +136,12 @@ function tri_mots() {
 	  $titre=$row['titre'];
 	  $rang=$row['rang'];
 
-	  echo "<li id='article_$id_article'><span>$rang</span><span><a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a></span></li>";
+	  echo "<li id='article_$id_article'><span class=\"titre\">$titre</span><span class=\"lien\"><a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>"._T('trimots:voir')."</a></span><span class=\"rang\">$rang</span></li>";
 
 	}
 	echo '</ul>';
-
-	echo '</table>';
-
-
-	echo '<form id="submit_form" action="'.generer_url_ecrire('tri_mots',"id_mot=$id_mot").'" method="post"><input type="hidden" name="order" id="order"/><input type="hidden" name="id_mot" value="'.$id_mot.'"/><input type="submit" id="submit_button"></form>';
-
-  }  
+    echo '</div>';
+	echo '<form id="submit_form" action="'.generer_url_ecrire('tri_mots',"id_mot=$id_mot").'" method="post"><input type="hidden" name="order" id="order"/><input type="hidden" name="id_mot" value="'.$id_mot.'"/><input type="submit" id="submit_button" value="'._T('valider').'"></form>';
 
   fin_page();
   

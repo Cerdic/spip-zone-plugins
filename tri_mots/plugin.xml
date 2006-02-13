@@ -9,7 +9,7 @@
 	  0.1
 	</version>
 	<etat>
-	  dev
+	 experimental 
 	</etat>
 	<description>
 	  pour trier les articles en fonction d'un mot.

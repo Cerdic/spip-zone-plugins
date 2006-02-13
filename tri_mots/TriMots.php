@@ -11,7 +11,7 @@ function TriMots_boite_tri_mots($id_article) {
   include_ecrire('inc_abstract_sql');
   $to_ret = '<div>&nbsp;</div>';
   $to_ret .= '<div class="bandeau_rubriques" style="z-index: 1;">';
-  $to_ret .= bandeau_titre_boite2('Ordonner les articles selon:',"article-24.gif","white","black", false);
+  $to_ret .= bandeau_titre_boite2(_T('trimots:ordonner'),"article-24.gif","white","black", false);
   $to_ret .= '<div class="plan-articles">';
   $from = array('spip_mots_articles as lien','spip_mots as mots');
   $select = array('lien.rang','lien.id_mot','mots.titre');
@@ -20,9 +20,9 @@ function TriMots_boite_tri_mots($id_article) {
   $rez = spip_abstract_select($select,$from,$where);
   $to_ret .= '<div class="plan-articles">';
   while($row = spip_abstract_fetch($rez)) {
-    $to_ret .= '<a href="'.generer_url_ecrire('tri_mots','id_mot='.$row['id_mot']).'">
+    $to_ret .= '<a href="'.generer_url_ecrire('tri_mots','id_mot='.$row['id_mot'].'&retour='.urlencode(generer_url_ecrire('articles',"id_article=$id_article"))).'">
 <div class="arial1" style="float: right; color: black; padding-left: 4px;">
-<b> Rang&nbsp;'.$row['rang'].'</b>
+<b> '._T('trimots:rang').'&nbsp;'.$row['rang'].'</b>
 </div>';
   $to_ret .= $row['titre'].'</a>';
   }
