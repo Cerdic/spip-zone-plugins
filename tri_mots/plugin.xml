@@ -19,9 +19,9 @@
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
-	<class> 
+	<prefix> 
 	  TriMots
-	</class>
+	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_boite_gauche</nom>
