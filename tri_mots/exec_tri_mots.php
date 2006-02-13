@@ -37,32 +37,21 @@ function verifier_admin_restreint($id_rubrique) {
   global $connect_statut, $connect_toutes_rubriques;
 
 }
-
-function verifier_auteur($table, $id_objet, $id) {
-  global $connect_id_auteur;
-  $select = array('id_auteur');
-  
-  $from =  array($table);
-  
-  $where = array("id_auteur = $connect_id_auteur", "$id_objet = $id");
-  
-  $result = spip_abstract_select($select,$from,$where);
-  
-  if (spip_abstract_count($result) > 0) {
-	spip_abstract_free($result);
-	return true;
-  }
-  spip_abstract_free($result);
-  return false;
-}
-
 //------------------------la fonction qui fait tout-----------------------------------
 
 function tri_mots() {
-  global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques;
+ 
 
   include_ecrire ("inc_presentation");
   include_ecrire ("inc_abstract_sql");
+
+  debut_page('&laquo; '._T('trimots:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_TRI_MOTS."/tri_mots.css");
+  
+  if(!verifier_admin()) {
+		echo "<strong>"._T('avis_acces_interdit')."</strong>";
+		fin_page();
+		exit;
+	}
 
   /***********************************************************************/
   /* PREFIXE*/
@@ -90,8 +79,6 @@ function tri_mots() {
   /***********************************************************************/
   /* affichage*/
   /***********************************************************************/
-
-  debut_page('&laquo; '._T('trimots:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_TRI_MOTS."/tri_mots.css");
   echo '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_MOTS.'/javascript/prototype.js"></script>';
   echo '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_MOTS.'/javascript/scriptaculous.js"></script>';
   echo '	<script type="text/javascript">';
