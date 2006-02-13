@@ -6,7 +6,7 @@ function TriMots_ajouter_boite_gauche($arguments) {
   }
   return $arguments['data'];
 }
-  
+
 function TriMots_boite_tri_mots($id_article) {
   include_ecrire('inc_abstract_sql');
   $to_ret = '<div>&nbsp;</div>';
@@ -24,7 +24,7 @@ function TriMots_boite_tri_mots($id_article) {
 <div class="arial1" style="float: right; color: black; padding-left: 4px;">
 <b> '._T('trimots:rang').'&nbsp;'.$row['rang'].'</b>
 </div>';
-  $to_ret .= $row['titre'].'</a>';
+	$to_ret .= $row['titre'].'</a>';
   }
   $to_ret .= '</div>';
   $to_ret .= '</div></div>';
