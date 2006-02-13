@@ -76,18 +76,27 @@ function tri_mots() {
 
   $id_mot = intval($_REQUEST['id_mot']);
 
+ /************************************************************************/
+ /* insertion */
+ /************************************************************************/
+//o[]=118&o=120&o[]=128
+if($_POST['order']) {
+ $order = split('&',$_POST['order']);
+ for($i=0;$i<count($order);$i++) {
+   spip_query("UPDATE ".$table_pref."_mots_articles SET rang = $i WHERE id_mot=$id_mot AND id_article=".intval(substr($order[$i],4)));
+ }
+}
+
   /***********************************************************************/
   /* affichage*/
   /***********************************************************************/
 
   debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_MOTS_PARTOUT."/mots_partout.css");
-
-		<script type="text/javascript" src="'. _DIR_PLUGIN_MOTS_PARTOUT.'/javascript/MultiStateRadio.js"></script>
-	<script type="text/javascript">
-
-		MultiStateRadio.apply(\'.liste ul\');
-
-  </script>';
+echo '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_MOTS.'/javascript/prototype.js"></script>';
+echo '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_MOTS.'/javascript/scriptaculous.js"></script>';
+echo '	<script type="text/javascript">';
+echo "Event.observe(window, 'load', function() {Sortable.create('liste_tri_articles');\$('submit_form').onsubmit = function() {\$('order').value=Sortable.serialize('liste_tri_articles',{name:'o'});}}, false);";
+echo ' </script>';
 
 
   //Colonne de gauche
@@ -108,27 +117,26 @@ echo 'TEST';
     echo "<div style='height: 12px;'></div>";
     echo "<div class='liste'>";
 bandeau_titre_boite2('ARTICLES', "article-24.gif");
-echo afficher_liste_debut_tableau();
+
+echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
+
 echo $tranches;
+echo "<ul id='liste_tri_articles'>";
     $result = spip_query($result_articles);
  	        while ($row = spip_fetch_array($result)) {
-$id_artilce=$row['id_article'];
+$id_article=$row['id_article'];
 $titre=$row['titre'];
 $rang=$row['rang'];
 
-$vals = '';
-$vals[] = $rang;
-$vals[] = "<a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a>";
-
-$table[] = $vals;
+echo "<li id='article_$id_article'><span>$rang</span><span><a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a></span></li>";
 
 }
- $largeurs = array(11, 100);
- $styles = array('arial2', 'arial1');
+echo '</ul>';
 
-afficher_liste($largeurs, $table, $styles);
+echo '</table>';
 
-echo afficher_liste_fin_tableau();
+
+echo '<form id="submit_form" action="'.generer_url_ecrire('tri_mots',"id_mot=$id_mot").'" method="post"><input type="hidden" name="order" id="order"/><input type="hidden" name="id_mot" value="'.$id_mot.'"/><input type="submit" id="submit_button"></form>';
 
 }  
 
