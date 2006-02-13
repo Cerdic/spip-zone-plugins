@@ -14,10 +14,16 @@ function TriMots_ajouter_boite_gauche($arguments) {
 }
 
 function TriMots_boite_tri_mots($id_article) {
+  global $spip_lang_left;
   include_ecrire('inc_abstract_sql');
   $to_ret = '<div>&nbsp;</div>';
   $to_ret .= '<div class="bandeau_rubriques" style="z-index: 1;">';
-  $to_ret .= bandeau_titre_boite2(_T('trimots:ordonner'),_DIR_PLUGIN_TRI_MOTS.'/img/updown.png',"white","black", false);
+  $to_ret .= "<div style='position: relative;'>";
+  $to_ret .= "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>
+	<img src='"._DIR_PLUGIN_TRI_MOTS."/img/updown.png'/></div>";
+  $to_ret .= "<div style='background-color: white; color: black; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>"._T('trimots:ordonner')."</b></div>";
+  $to_ret .= "</div>";
+
   $to_ret .= '<div class="plan-articles">';
   $from = array('spip_mots_articles as lien','spip_mots as mots');
   $select = array('lien.rang','lien.id_mot','mots.titre');
