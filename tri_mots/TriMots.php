@@ -9,7 +9,7 @@ function TriMots_ajouter_boite_gauche($arguments) {
 	  return $arguments['data'] .= TriMots_boite_tri_mots($arguments['args']['id_article']);
 	}
 	else if($arguments['args']['exec'] == 'mots_edit') {
-	  return $arguments['data'] .= icone(_T('trimots:titre_page'),generer_url_ecrire('tri_mots','id_mot='.$arguments['args']['id_mot'].'&retour='.urlencode(generer_url_ecrire('mots_edit',"id_mot=".$arguments['args']['id_mot']))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
+	  return $arguments['data'] .= icone(_T('trimots:titre_page'),generer_url_ecrire('tri_mots','objet=articles&id_objet=id_article&id_mot='.$arguments['args']['id_mot'].'&retour='.urlencode(generer_url_ecrire('mots_edit',"id_mot=".$arguments['args']['id_mot']))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
 	}
 	return $arguments['data'];
   }
@@ -34,7 +34,7 @@ function TriMots_boite_tri_mots($id_article) {
   $rez = spip_abstract_select($select,$from,$where);
   $to_ret .= '<div class="plan-articles">';
   while($row = spip_abstract_fetch($rez)) {
-    $to_ret .= '<a href="'.generer_url_ecrire('tri_mots','id_mot='.$row['id_mot'].'&retour='.urlencode(generer_url_ecrire('articles',"id_article=$id_article"))).'">
+    $to_ret .= '<a href="'.generer_url_ecrire('tri_mots','objet=articles&id_objet=id_article&id_mot='.$row['id_mot'].'&retour='.urlencode(generer_url_ecrire('articles',"id_article=$id_article"))).'">
 <div class="arial1" style="float: right; color: black; padding-left: 4px;">
 <b> '._T('trimots:rang').'&nbsp;'.$row['rang'].'</b>
 </div>';

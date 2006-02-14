@@ -59,11 +59,31 @@ function tri_mots() {
   $table_pref = 'spip';
   if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
 
+  $id_mot = intval($_REQUEST['id_mot']);
+
+  $select = array("titre,type");
+  $from = array("spip_mots");
+  $where = array("id_mot=$id_mot");
+  $res = spip_abstract_select($select,$from,$where);
+  if($row = spip_abstract_fetch($res)) {
+	$titre = $row['titre'];
+	$type = $row['type'];
+  } else {
+	$titre = '';
+	$type ='';
+  }
+  spip_abstract_free($res);
+
+  $objet = addslashes($_REQUEST['objet']);
+  if(!$objet) $objet = 'articles';
+  $id_objet = addslashes($_REQUEST['id_objet']);
+  if(!$id_objet) $id_objet = 'id_article';
+
+
   if(addslashes($_GET['installation'])) {
-	spip_query("ALTER TABLE `".$table_pref."_mots_articles` ADD `rang` BIGINT NOT NULL DEFAULT 0;");
+	spip_query("ALTER TABLE `".$table_pref."_mots_$objet` ADD `rang` BIGINT NOT NULL DEFAULT 0;");
   }
 
-  $id_mot = intval($_REQUEST['id_mot']);
 
   /************************************************************************/
   /* insertion */
@@ -72,7 +92,7 @@ function tri_mots() {
   if($_POST['order']) {
 	$order = split('&',$_POST['order']);
 	for($i=0;$i<count($order);$i++) {
-	  spip_query("UPDATE ".$table_pref."_mots_articles SET rang = $i WHERE id_mot=$id_mot AND id_article=".intval(substr($order[$i],4)));
+	  spip_query("UPDATE ".$table_pref."_mots_$objet SET rang = $i WHERE id_mot=$id_mot AND $id_objet=".intval(substr($order[$i],4)));
 	}
   }
 
@@ -82,16 +102,16 @@ function tri_mots() {
   echo '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_MOTS.'/javascript/prototype.js"></script>';
   echo '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_MOTS.'/javascript/scriptaculous.js"></script>';
   echo '	<script type="text/javascript">';
-  echo 'function initialiseSort() {
-	Sortable.create(\'liste_tri_articles\');
-	$(\'submit_form\').onsubmit = function() {
-	  $(\'order\').value=Sortable.serialize(\'liste_tri_articles\',{name:\'o\'});
+  echo "function initialiseSort() {
+	Sortable.create('liste_tri');
+	$('submit_form').onsubmit = function() {
+	  $('order').value=Sortable.serialize('liste_tri',{name:'o'});
 	};
-  }';
+  }";
   echo "Event.observe(window, 'load', initialiseSort, false);";
   echo ' </script>';
 
-  gros_titre(_T('trimots:titre_tri_mots',array('titre_mot'=>$id_mot)));
+  gros_titre(_T('trimots:titre_tri_mots',array('titre_mot'=>$titre,'type_mot'=>$type)));
 
 
   //Colonne de gauche
@@ -99,8 +119,12 @@ function tri_mots() {
 
   debut_cadre_enfonce();
 
-  echo _T('trimots:tri_mots_help',array('titre_mot'=>$id_mot));
+  echo _T('trimots:tri_mots_help',array('titre_mot'=>$titre, 'type_mot'=>$type));
 
+  fin_cadre_enfonce();
+
+  debut_cadre_enfonce();
+  echo '<form id="submit_form" action="'.generer_url_ecrire('tri_mots',"objet=$objet&id_objet=$id_objet&id_mot=$id_mot").'" method="post"><input type="hidden" name="order" id="order"/><label for="submit_button">'._T('trimots:envoyer').'</label><input type="submit" id="submit_button" value="'._T('valider').'"></form>';
   fin_cadre_enfonce();
 
   if($_REQUEST['retour']) icone(_T('icone_retour'), addslashes($_REQUEST['retour']), "mot-cle-24.gif", "rien.gif");
@@ -109,8 +133,8 @@ function tri_mots() {
 
   debut_droite();
 
-  $result_articles = "SELECT article.titre, article.id_article, lien.rang FROM spip_mots_articles AS lien, spip_articles AS article
- 	    WHERE article.id_article=lien.id_article AND article.statut='publie' AND lien.id_mot=$id_mot ORDER BY lien.rang";
+  $result_articles = "SELECT $objet.titre, $objet.$id_objet, lien.rang FROM spip_mots_$objet AS lien, spip_$objet AS $objet
+ 	    WHERE $objet.$id_objet=lien.$id_objet AND $objet.statut='publie' AND lien.id_mot=$id_mot ORDER BY lien.rang";
 
 global $spip_lang_left;
   echo "<div style='height: 12px;'></div>";
@@ -118,25 +142,25 @@ global $spip_lang_left;
  echo "<div style='position: relative;'>";
   echo "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>
 	<img src='"._DIR_PLUGIN_TRI_MOTS."/img/updown.png'/></div>";
-  echo "<div style='background-color: white; color: black; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>"._T('articles')."</b></div>";
+  echo "<div style='background-color: white; color: black; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>"._T($objet)."</b></div>";
   echo "</div>";
 
-  echo "<ul id='liste_tri_articles'>";
+  echo "<ul id='liste_tri'>";
   $result = spip_query($result_articles);
   while ($row = spip_fetch_array($result)) {
-	$id_article=$row['id_article'];
+	$id=$row[$id_objet];
 	$titre=$row['titre'];
 	$rang=$row['rang'];
 
-	echo "<li id='article_$id_article'><span class=\"titre\">$titre</span><span class=\"lien\"><a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>"._T('trimots:voir')."</a></span><span class=\"rang\">$rang</span></li>";
+	echo "<li id='".$objet."_$id'><span class=\"titre\">$titre</span><span class=\"lien\"><a href='" . generer_url_ecrire("$objets","$id_objet=$id") . "'>"._T('trimots:voir')."</a></span><span class=\"rang\">$rang</span></li>";
 
   }
+
+  spip_free_result($result);
   echo '</ul>';
   echo '</div>';
-  echo '<form id="submit_form" action="'.generer_url_ecrire('tri_mots',"id_mot=$id_mot").'" method="post"><input type="hidden" name="order" id="order"/><input type="hidden" name="id_mot" value="'.$id_mot.'"/><input type="submit" id="submit_button" value="'._T('valider').'"></form>';
 
   fin_page();
   
 }
 ?>
-
