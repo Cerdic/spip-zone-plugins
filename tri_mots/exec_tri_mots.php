@@ -113,12 +113,12 @@ function tri_mots() {
  	    WHERE article.id_article=lien.id_article AND article.statut='publie' AND lien.id_mot=$id_mot ORDER BY lien.rang";
   
   echo "<div style='height: 12px;'></div>";
-  echo "<div class='liste'>";
  echo "<div style='position: relative;'>";
   echo "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>
 	<img src='"._DIR_PLUGIN_TRI_MOTS."/img/updown.png'/></div>";
   echo "<div style='background-color: white; color: black; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>"._T('articles')."</b></div>";
   echo "</div>";
+  echo "<div class='liste'>";
 
   echo "<ul id='liste_tri_articles'>";
   $result = spip_query($result_articles);
