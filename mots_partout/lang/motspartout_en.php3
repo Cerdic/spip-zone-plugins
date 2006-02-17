@@ -17,7 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'ATTENTION' => 'WARNING',
 									   'action_help' => 'Perfom the actions selected on the selected @chose@',
 									   'tagmachine' => 'Keywords to add',
-									   'par' => 'by'
+									   'par' => 'by',
+									   'installer' => 'Configure the database for keywords on:',
+									   'toutinstalle' => 'The database is already fully configured to have keywords everywhere.'
 									   );
 
 ?>

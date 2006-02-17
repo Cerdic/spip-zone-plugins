@@ -418,7 +418,12 @@ function mots_partout() {
 <tr class=\'tr_liste\'>
 <td colspan=2><select name="nom_chose">';
   foreach($choses_possibles as $cho => $m) {
-	echo "<option value=\"$cho\"".(($cho == $nom_chose)?'selected':'').'>'._T($m['titre_chose']).'</option>';
+	  $res = spip_query("SHOW TABLES LIKE '".$table_pref."_mots_".$cho."'");
+	  spip_log("M9: SHOW TABLES LIKE '".$table_pref."_mots_".$cho."'");
+	  if(spip_fetch_array($res)) {
+		echo "<option value=\"$cho\"".(($cho == $nom_chose)?'selected':'').'>'._T($m['titre_chose']).'</option>';
+	  }
+	  spip_free_result($res);
   }
   echo '</select></td>';
 

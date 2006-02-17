@@ -36,14 +36,26 @@ function config_mots_partout() {
 	/*Affichage*/
 
 	debut_droite();
-	echo "<form action=\"".generer_url_ecrire('config_mots_partout')."\" method=\"post\">";
-	echo "installer pour avoir des mots sur les: <select name=\"nom_chose\">";
+	$one = false;
+	$form = "<form action=\"".generer_url_ecrire('config_mots_partout')."\" method=\"post\">";
+	$form .= "<label for=\"nom_chose\">"._T("motspartout:installer").":</label><select name=\"nom_chose\">";
 	foreach($choses_possibles as $chose => $data) {
-	  echo "<option value=\"$chose\">$chose</option>";
+	  $res = spip_query("SHOW TABLES LIKE '".$table_pref."_mots_$chose'");
+	  spip_log("M8: SHOW TABLES LIKE '".$table_pref."_mots_$chose'");
+	  if(!spip_fetch_array($res)) {
+		$one = true;
+		   $form .= "<option value=\"$chose\">$chose</option>";
+		 }
+		 spip_free_result($res);
 	}
-	echo "</select>";
-	echo "<input type=\"submit\" value=\""._T('valider')."\"/>";
-
+	$form .= "</select>";
+	$form .= "<input type=\"submit\" value=\""._T('valider')."\"/>";
+	$form .= '</form>';
+	if($one) {
+	  echo $form;
+	} else {
+	  echo _T("motspartout:toutinstalle");
+	}
 
   } 
 

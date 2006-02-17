@@ -17,7 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'ATTENTION' => 'ATTENZIONE',
 									   'action_help' => 'Compiere i actioni selectionati suli @chose@ selectionati',
 									   'tagmachine' => 'Parole chiave da aggiungere',
-									   'par' => 'nb. risultati'
+									   'par' => 'nb. risultati',		
+									   'installer' => 'configurare la basa per i parole chiave su',
+									   'toutinstalle' => 'La basa &eacute; gia configurata.'
 									   );
 
 ?>
