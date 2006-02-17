@@ -1,0 +1,43 @@
+<!-- En date du 17 fevrier 2006, des explications sur les plugins se trouvent ici :  
+http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	TableExterneArticle
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Ben
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Ajouter les infos d'une table externe le lien etant id_article 
+	</description>
+	<options> <!-- fichier charge a chaque hit -->
+	mes_options.php
+	</options>
+	
+	<options> <!-- fichier charge a chaque hit -->
+	inc_table_externe.php
+	</options>
+	
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	mes_fonctions.php
+	</fonctions>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	TableExterneArticle
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines 
+	La liste des pipelines disponibles est dans ecrire/inc_version ($spip_pipeline = ... ) 
+	-->
+	
+	<!-- Le parametre action est facultatif : en son absence la fonction portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
