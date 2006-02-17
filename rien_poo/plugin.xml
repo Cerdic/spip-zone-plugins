@@ -1,3 +1,5 @@
+<!-- En date du 17 fevrier 2006, des explications sur les plugins se trouvent ici :  
+http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 <plugin>
 	<nom> <!-- Nom du plugin -->
 	Rien
@@ -28,7 +30,9 @@
 	<prefix> 
 	Rien
 	</prefix>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines 
+	La liste des pipelines disponibles est dans ecrire/inc_version ($spip_pipeline = ... ) 
+	-->
 	<pipeline>
 		<nom>post_propre</nom>
 		<action>leFiltre</action>
@@ -44,5 +48,5 @@
 		<action>ajouterOnglets</action>
 		<inclure>Rien.php</inclure>
 	</pipeline>
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+	<!-- Le parametre action est facultatif : en son absence la fonction portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>
