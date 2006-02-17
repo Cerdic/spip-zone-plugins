@@ -80,10 +80,11 @@ function tri_mots() {
   if(!$id_objet) $id_objet = 'id_article';
 
 
-  if(addslashes($_GET['installation'])) {
+  $res = spip_query("SHOW COLUMNS FROM `".$table_pref."_mots_$objet` LIKE 'rang'");
+  if(!spip_fetch_array($res)) {
 	spip_query("ALTER TABLE `".$table_pref."_mots_$objet` ADD `rang` BIGINT NOT NULL DEFAULT 0;");
   }
-
+  spip_free_result($res);
 
   /************************************************************************/
   /* insertion */
