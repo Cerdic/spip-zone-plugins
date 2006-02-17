@@ -20,7 +20,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 		.$action
 		."\" class='spip_barre' tabindex='1000'\ntitle=\""
 		.addslashes(attribut_html($help))
-		."\"" 
+		."\""
 		.(!_DIR_RESTREINT ? '' :  "\nonMouseOver=\"helpline('"
 		  .addslashes(attribut_html($help))
 		  ."',$champhelp)\"\nonMouseOut=\"helpline('"
@@ -31,7 +31,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 		."' border='0' height='16' width='16' align='middle' /></a>";
 }
 
-// construit un tableau de raccourcis pour un noeud de DOM 
+// construit un tableau de raccourcis pour un noeud de DOM
 
 function afficher_barre_enrichie($champ, $forum=false) {
 	static $num_barre = 0;

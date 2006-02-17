@@ -22,15 +22,15 @@
 	 *           	border-left: 1px solid #EEEEEE;
 	 *           	border-right: 2px solid #999999;
 	 *           	border-top: 1px solid #EEEEEE;
-	 *           	padding: .25em;	
+	 *           	padding: .25em;
 	 *           }
 	 *           .caractencadre-spip {
 	 *           	border: 1px solid #666;
 	 *           	padding: 0px .5em 0px .5em;
 	 *           }
-	 *           
+	 *
 	*/
-	
+
 function BarreTypoEnrichie_pre_propre($texte) {
 	$chercher_raccourcis = array(
 		/*  3 */ "/\{1\{/",
@@ -143,23 +143,23 @@ function BarreTypoEnrichie_post_propre($texte) {
 			/* 23 */ 	"<sup>",
 			/* 24 */	"</sup>",
 			/* 25 */	"<ul class=\"spip\">",
-			/* 26 */	"</ul>",			
+			/* 26 */	"</ul>",
 			/* 27 */	"<ol class=\"spip\">",
-			/* 28 */	"</ol>",			
+			/* 28 */	"</ol>",
 			/* 29 */	"<table class=\"spip\">",
-			/* 30 */	"</table>",			
+			/* 30 */	"</table>",
 			/* 31 */	"<div",
-			/* 32 */	"</div>",			
+			/* 32 */	"</div>",
 			/* 33 */	"<h$1>",
 			/* 34 */	"</h$1>",
 			/* 35 */	"<div class='spip_documents'>",
-			/* 36 */	"</div>",			
+			/* 36 */	"</div>",
 			/* 37 */	"<div",
 			/* 38 */	"<blockquote class=\"spip\"><p class=\"spip\">",
 			/* 39 */	"</p></blockquote>",
 			/* 40 */	"<acronym title='$2' class='spip_acronym'>$1</acronym>",
 			/* 41 */	"<a href=$1 title=\"$3\">$2</a>"
-			
+
 		);
 		$texte = preg_replace($cherche1, $remplace1, $texte);
 	return $texte;
@@ -183,4 +183,3 @@ function BarreTypoEnrichie_ajouter_styles($texte) {
 }
 
 ?>
-
