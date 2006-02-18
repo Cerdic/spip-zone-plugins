@@ -188,4 +188,3 @@ function balise_LOGO_EXIF($p) {
   return $p;
 }*/
 ?>
-		
