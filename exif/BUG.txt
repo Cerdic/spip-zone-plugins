@@ -1,0 +1,2 @@
+- la balise LOGO ne marchent plus à cause de la nouvelle API des balises.
+- il y a l'air d'y avoir des problèmes chez OVH
