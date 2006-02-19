@@ -22,7 +22,7 @@ function coloration_code_color($code, $language='php') {
 function coloration_code_echappe($texte) {
   $rempl ='';
   if (preg_match_all(
-					 ',<ccode\\((.*)\\)>(.*)</ccode>,Uims',
+					 ',<code[[:space:]]+class="(.*)"[[:space:]]*>(.*)</code>,Uims',
 					 $texte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
 	  $code = echappe_retour($regs[2]);
