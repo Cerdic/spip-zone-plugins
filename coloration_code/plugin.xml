@@ -14,9 +14,6 @@
 	<description>
 	  Coloration syntaxique du code source dans SPIP
 	</description>
-	<options> <!-- fichier charge a chaque hit -->
-	mes_options.php
-	</options>
 	<prefix> 
 	  coloration_code
 	</prefix>
