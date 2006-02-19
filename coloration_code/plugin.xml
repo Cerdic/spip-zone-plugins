@@ -1,0 +1,36 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	  Coloration Code
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	  Pierre Andrews (Mortimer)
+	</auteur>
+	<version>
+	  0.1
+	</version>
+	<etat>
+	  dev
+	</etat>
+	<description>
+	  Coloration syntaxique du code source dans SPIP
+	</description>
+	<options> <!-- fichier charge a chaque hit -->
+	mes_options.php
+	</options>
+	<prefix> 
+	  coloration_code
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines 
+	La liste des pipelines disponibles est dans ecrire/inc_version ($spip_pipeline = ... ) 
+	-->
+	<pipeline>
+		<nom>pre_typo</nom>
+		<action>echappe</action>
+		<inclure>coloration_code.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_typo</nom>
+		<action>echappe_retour</action>
+		<inclure>coloration_code.php</inclure>
+	</pipeline>
+</plugin>
