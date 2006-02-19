@@ -79,10 +79,21 @@ function tri_mots() {
   $id_objet = addslashes($_REQUEST['id_objet']);
   if(!$id_objet) $id_objet = 'id_article';
 
-
+  //Installation
   $res = spip_query("SHOW COLUMNS FROM `".$table_pref."_mots_$objet` LIKE 'rang'");
   if(!spip_fetch_array($res)) {
 	spip_query("ALTER TABLE `".$table_pref."_mots_$objet` ADD `rang` BIGINT NOT NULL DEFAULT 0;");
+	$from = array("spip_$objet");
+	$select = array($id_objet,'titre');
+	$where = array("titre REGEXP '^[0-9]+\\. '");
+	$results = spip_abstract_select($select,$from,$where);
+	while($row = spip_abstract_fetch($results)) {
+	  $rang = substr($row['titre'],0,strpos($row['titre'],'.'));
+	  if($rang > 0) {
+		spip_query("UPDATE ".$table_pref."_mots_$objet SET rang = $rang WHERE $id_objet=".intval($row[$id_objet]));
+	  }
+	}
+	spip_abstract_free($results);
   }
   spip_free_result($res);
 
