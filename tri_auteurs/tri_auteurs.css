@@ -1,0 +1,17 @@
+#liste_tri_auteurs li {
+     border-bottom: 1px solid rgb(204, 204, 204);
+     padding: 2px 2px 2px 18px;
+     background: rgb(224, 224, 224) none no-repeat scroll 1% 50%;
+     -moz-background-clip: -moz-initial;
+     -moz-background-origin: -moz-initial;
+     -moz-background-inline-policy: -moz-initial;
+     font-family: Verdana,Arial,Sans,sans-serif;
+     font-size: 11px;
+     text-decoration: none;
+     overflow: hidden;
+ }
+
+ol#liste_tri_auteurs {
+  padding: 0;
+  margin: 0;
+}

@@ -26,6 +26,10 @@
 	<pipeline>
 		<nom>ajouter_boite_gauche</nom>
 		<inclure>TriAuteurs.php</inclure>
+	</pipeline>	
+	<pipeline>
+	  <nom>ajouter_styles</nom>
+	  <inclure>TriAuteurs.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>
