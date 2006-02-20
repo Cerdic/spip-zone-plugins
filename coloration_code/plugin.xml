@@ -9,12 +9,12 @@
 	  0.1
 	</version>
 	<etat>
-	  test
+	  stable
 	</etat>
 	<description>
 	  Coloration syntaxique du code source dans SPIP
 
-	  il suffit de mettre le code entre <code><ccode(language)>...</ccode></code>.
+	  il suffit de mettre le code entre <code><code class="language">...</code></code>.
 	  Les langages supportés sont ceux fournis par [->geshi.sf.net].
 	</description>
 	<prefix> 
