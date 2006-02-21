@@ -12,10 +12,18 @@
 	  stable
 	</etat>
 	<description>
+	<multi>
+	[fr]
 	  Coloration syntaxique du code source dans SPIP
 
-	  il suffit de mettre le code entre {{&lt;code class="language">...&lt;/code>}}.
+	  il suffit de mettre le code entre {{&lt;code class="langage">...&lt;/code>}}.
 	  Les langages supportés sont ceux fournis par [->geshi.sf.net].
+	  [en]
+	  Syntax higlighting of code placed in SPIP articles.
+
+	  You just have to put it between the tags:{{&lt;code class="language">...&lt;/code>}}.
+	  The possible languages are the ones supported by [->geshi.sf.net].
+	  </multi>
 	</description>
 	<prefix> 
 	  coloration_code
