@@ -14,7 +14,7 @@
 	<description>
 	  Coloration syntaxique du code source dans SPIP
 
-	  il suffit de mettre le code entre <code><code class="language">...</code></code>.
+	  il suffit de mettre le code entre {{&lt;code class="language">...&lt;/code>}}.
 	  Les langages supportés sont ceux fournis par [->geshi.sf.net].
 	</description>
 	<prefix> 
