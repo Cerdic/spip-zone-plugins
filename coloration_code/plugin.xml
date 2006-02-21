@@ -12,6 +12,7 @@
 	  stable
 	</etat>
 	<description>
+	&nbsp;
 	<multi>
 	[fr]
 	  Coloration syntaxique du code source dans SPIP
@@ -24,6 +25,7 @@
 	  You just have to put it between the tags:{{&lt;code class="language">...&lt;/code>}}.
 	  The possible languages are the ones supported by [->geshi.sf.net].
 	  </multi>
+	&nbsp;
 	</description>
 	<prefix> 
 	  coloration_code

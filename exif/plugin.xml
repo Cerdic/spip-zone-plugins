@@ -12,10 +12,12 @@
 	  stable
 	</etat>
 	<description>
+	&nbsp;
 	  <multi>
-	  [fr]Balise pour afficher les informations EXIF d'un document.
-	  [en]New SPIP tag to display EXIF information from your documents.
+	  [fr]Balise pour afficher les informations [?EXIF] d'un document.
+	  [en]New SPIP tag to display [?EXIF] information from your documents.
 	  </multi>
+	&nbsp;
 	</description>
 	<lien>
 	  http://www.spip-contrib.net/Balise-EXIF-recuperer-les
