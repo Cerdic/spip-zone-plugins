@@ -23,4 +23,7 @@ $GLOBALS['tables_jointures']['spip_documents'][]= 'documents_syndic';
 $GLOBALS['tables_jointures']['spip_syndic'][]= 'documents_syndic';
 $GLOBALS['tables_jointures']['spip_syndic_articles'][]= 'documents_syndic';
 
+// et l'indexation des documents joints au site
+$GLOBALS['INDEX_objet_associes']['spip_syndic'] = array('spip_documents'=>1,'spip_mots'=>3);
+
 ?>
