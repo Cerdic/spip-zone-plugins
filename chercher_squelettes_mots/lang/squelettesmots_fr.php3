@@ -10,7 +10,7 @@ Une r&egrave;gle spécifie:
 -# le groupe de mot clef qui contient les mots pour specifier le squelette,
 -# le type de l\'&eacute;l&eacute;ment affiché par cette page.
 
-Les squelettes seront alors &eacute;crit: 
+Les squelettes seront alors nom&eacute;s: 
 -* {{fond==mot.html}} pour un squelette specifique &agrave; un &eacute;l&eacute;ment,
 -* {{fond-mot.html}} pour le squelette appliqu&eacute; aux &eacute;l&eacute;ment d\'une rubrique.
 
