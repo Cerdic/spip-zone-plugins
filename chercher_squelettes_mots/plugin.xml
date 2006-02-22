@@ -1,0 +1,29 @@
+<!-- En date du 17 fevrier 2006, des explications sur les plugins se trouvent ici :  
+http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	  Squelette par mot clef
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	  Pierre Andrews (Mortimer), d'aprés un code proposé par Déesse A.
+	</auteur>
+	<version>
+	  0.1
+	</version>
+	<etat>
+	  dev
+	</etat>
+	<description>
+	  Permet de choisir le squelette en fonction d'un mot clef.
+	</description>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	  chercher_squelette.php
+	</fonctions>
+	<prefix> 
+	  SquelettesMots
+	</prefix>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>SquelettesMots.php</inclure>
+	</pipeline>
+</plugin>
