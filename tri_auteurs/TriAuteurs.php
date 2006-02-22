@@ -11,12 +11,17 @@ function TriAuteurs_ajouter_boite_gauche($arguments) {
 	if(TriAuteurs_verifier_admin() OR TriAuteurs_verifier_admin_restreint($arguments['args']['id_rubrique']) 
 	   OR TriAuteurs_verifier_auteur($arguments['args']['id_article'])) {
 	  
-	  $res = spip_query("SHOW COLUMNS FROM `".$table_pref."_auteurs_articles` LIKE 'rang'");
-	  if(!spip_fetch_array($res)) {
-		spip_query("ALTER TABLE `".$table_pref."_auteurs_articles` ADD `rang` BIGINT NOT NULL DEFAULT 0;");
+	  //Installation
+	  if(!lire_meta('TriAuteurs:installe')) {
+		$res = spip_query("SHOW COLUMNS FROM `".$table_pref."_auteurs_articles` LIKE 'rang'");
+		if(!spip_fetch_array($res)) {
+		  spip_query("ALTER TABLE `".$table_pref."_auteurs_articles` ADD `rang` BIGINT NOT NULL DEFAULT 0;");
+		}
+		spip_free_result($res);
+		ecrire_meta('TriAuteurs:installe',true);
+		ecrire_metas();
 	  }
-	  spip_free_result($res);
-	  
+
 	  $arguments['data'] .= TriAuteurs_boite_tri_auteurs($arguments['args']['id_article'],$arguments['args']['id_rubrique']);
 	}
   }
