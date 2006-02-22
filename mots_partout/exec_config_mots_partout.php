@@ -28,13 +28,13 @@ function config_mots_partout() {
 	$id_chose = $choses_possibles[$type]['id_chose'];
 	$table_principale = $choses_possibles[$type]['table_principale'];
 
-	$tables_installees = lire_meta('MotsPartout:tables_installees');
+	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
 
 	if(($type != '') && (!$tables_installees[$type])) {
 	  spip_query("ALTER TABLE `".$table_pref."_groupes_mots` ADD `mots` CHAR( 3 ) NOT NULL DEFAULT 'non';");
 	  spip_query("CREATE TABLE IF NOT EXISTS `".str_replace('spip_',$table_pref.'_mots_',$table_principale)."` (`id_mot` bigint(20) NOT NULL default '0',`$id_chose` bigint(20) NOT NULL default '0', KEY `$id_chose` (`id_mot`),KEY `id_mot` (`id_mot`)) TYPE=MyISAM;;");
 	  $tables_installees[$type] = true;
-	  ecrire_meta('MotsPartout:tables_installees',$tables_installees);
+	  ecrire_meta('MotsPartout:tables_installees',serialize($tables_installees));
 	  ecrire_metas();
 	}
 	

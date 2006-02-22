@@ -417,7 +417,7 @@ function mots_partout() {
 <table border=0 cellspacing=0 cellpadding=3 width=\"100%\">
 <tr class=\'tr_liste\'>
 <td colspan=2><select name="nom_chose">';
-  $tables_installees = lire_meta('MotsPartout:tables_installees');
+  $tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
   foreach($choses_possibles as $cho => $m) {
 	  if($tables_installees[$cho]) {
 		echo "<option value=\"$cho\"".(($cho == $nom_chose)?'selected':'').'>'._T($m['titre_chose']).'</option>';
