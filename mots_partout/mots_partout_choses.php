@@ -69,22 +69,7 @@ function afficher_liste_articles($choses,$nb_aff=20) {
 	  
 	  if ($spip_display != 1 AND $spip_display != 4 AND lire_meta('image_process') != "non") {
 		include_ecrire("inc_logos"._EXTENSION_PHP);
-		$logo = decrire_logo("arton$id_article");
-		if ($logo) {
-		  $fichier = $logo[0];
-		  $taille = $logo[1];
-		  $taille_x = $logo[3];
-		  $taille_y = $logo[4];
-		  $taille = image_ratio($taille_x, $taille_y, 26, 20);
-		  $w = $taille[0];
-		  $h = $taille[1];
-		  $fid = $logo[2];
-		  $hash = calculer_action_auteur ("reduire $w $h");
-		  
-		  $s.= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>
-<img src='../spip_image_reduite"._EXTENSION_PHP."?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' alt='$fichier' width='$w' height='$h' border='0'></div>";
-		  
-		}
+		$s .= decrire_logo('art','on',$id_article,24,24);
 	  }
 	  
 	  $s .= typo($titre);
