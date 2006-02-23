@@ -19,6 +19,7 @@ Les auteurs n\'ont alors plus qu\'&agrave; associer un mot du groupe &agrave; l\
 									   'nouvelle_regle' => 'nouvelle r&egrave;gle',
 									   'fond' => 'Fond:',
 									   'groupe' => 'Groupe:',
-									   'type' => 'Type:'
+									   'type' => 'Type:',
+									   'possibilites' => '@total@ squelette(s).'
 );
 ?>

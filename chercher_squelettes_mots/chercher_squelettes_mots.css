@@ -1,0 +1,14 @@
+fieldset input.fond {
+	width: 5em;
+}
+
+fieldset.regle div.possible ul {
+  margin: 0;
+  list-style-type: none;
+}
+
+fieldset.regle div.possible ul li {
+  display: inline;
+  padding-left: 1em;
+  font-size: small;
+}

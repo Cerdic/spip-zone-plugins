@@ -19,6 +19,7 @@ The author then only have to add a keyword from the right group to select the te
 									   'nouvelle_regle' => 'new rule',
 									   'fond' => 'Fond:',
 									   'groupe' => 'Group:',
-									   'type' => 'Type:'
+									   'type' => 'Type:',
+									   'possibilites' => '@total@ template(s) availlable.'
 );
 ?>
