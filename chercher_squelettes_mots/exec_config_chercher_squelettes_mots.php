@@ -46,6 +46,8 @@ function config_chercher_squelettes_mots() {
 	
 
 	$fonds = unserialize(lire_meta('SquelettesMots:fond_pour_groupe'));
+	if (!is_array($fonds))
+		$fonds = array();
 
 	$field_fonds = $_REQUEST['fonds'];
 	$id_groupes = $_REQUEST['tid_groupe'];

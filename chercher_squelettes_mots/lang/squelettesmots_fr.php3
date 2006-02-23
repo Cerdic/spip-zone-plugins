@@ -5,10 +5,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'gros_titre' => 'Cr&eacute;er des r&egrave;gles pour choisir les squelettes en fonction des mots clef',
 									   'help' => 'Cette page n\'est accesible qu\'aux administrateur. Vous pouvez creer des r&egrave;gles pour choisir les squelettes de vos page avec des mots clef.
 
-Une r&egrave;gle spécifie:
+Une r&egrave;gle sp&eacute;cifie:
 -# un fond de base,
 -# le groupe de mot clef qui contient les mots pour specifier le squelette,
--# le type de l\'&eacute;l&eacute;ment affiché par cette page.
+-# le type de l\'&eacute;l&eacute;ment affich&eacute; par cette page.
 
 Les squelettes seront alors nom&eacute;s: 
 -* {{fond==mot.html}} pour un squelette specifique &agrave; un &eacute;l&eacute;ment,
