@@ -106,7 +106,7 @@ function modif_edition_champ($t) {
 			$ajout_choix = $code_choix;
 		}
 		foreach ($type_ext as $code_choix => $nom_choix) {
-			if ($GLOBALS[$code_choix])
+			if (isset($GLOBALS[$code_choix]))
 				$type_ext[$code_choix] = $GLOBALS[$code_choix];
 		}
 		/*if ($supp_choix) {
