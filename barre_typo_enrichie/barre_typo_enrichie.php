@@ -177,7 +177,7 @@ function BarreTypoEnrichie_post_typo($texte) {
 	$texte = str_replace("</sc>", "</span>", $texte);
 	return $texte;
 }
-function BarreTypoEnrichie_ajouter_styles($texte) {
+function BarreTypoEnrichie_header_prive($texte) {
 	$texte.= '<link rel="stylesheet" type="text/css" href="' . find_in_path('css/bartypenr.css').'" />' . "\n";
 	return $texte;
 }
