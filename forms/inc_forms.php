@@ -227,7 +227,9 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 				'select' => _L("choix unique"),
 				'multiple' => _L("choix multiple"),
 				'fichier' => _L("fichier &agrave; t&eacute;l&eacute;charger"),
-				'mot' => _L("mots-cl&eacute;s")
+				'mot' => _L("mots-cl&eacute;s"),
+				'separateur' => _L("Nouveau bloc de questions"),
+				'texte_statique' => _L("Message d'explication")
 			);
 		}
 		return ($s = $noms[$type]) ? $s : $type;
@@ -236,7 +238,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 	function Forms_types_champs_autorises($type = '') {
 		static $t;
 		if (!$t) {
-			$t = array_flip(array('ligne', 'texte', 'url', 'email', 'select', 'multiple', 'fichier', 'mot'));
+			$t = array_flip(array('ligne', 'texte', 'url', 'email', 'select', 'multiple', 'fichier', 'mot','separateur','texte_statique'));
 		}
 		return $type ? isset($t[$type]) : $t;
 	}
@@ -302,15 +304,20 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 		$type = $t['type'];
 		$type_ext = $t['type_ext'];
 		
-		$flag_label = ($type != 'select');
-		$r .= "<strong>";
-		if ($flag_label) $r .= "<label for='$id_champ'>";
+		$flag_label = (!in_array($type,array('select','texte_statique')));
+		$flag_champ = (!in_array($type,array('texte_statique')));
+		
+		if ($flag_strong) $r .= "<strong>";
+		if ($flag_champ) $r .= "<label for='$id_champ'>";
 		// Propre et pas typo, afin d'autoriser les notes (notamment)
 		$r .= propre($nom);
 		if ($flag_label) $r .= "</label>";
-		$r .= "</strong>";
-		if ($obligatoire) $r .= " "._T('forms:info_obligatoire_02');
-		$r .= " :<br />\n";
+		if ($flag_champ) 
+		{
+			$r .= "</strong>";
+			if ($obligatoire) $r .= " "._T('forms:info_obligatoire_02');
+			$r .= " :<br />\n";
+		}
 	
 		$class1 = $obligatoire ? "forml" : "formo";
 		$class2 = $obligatoire ? "fondl" : "fondo";
@@ -401,14 +408,25 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 		$readonly = $flag_ecrire ? " readonly='readonly'" : "";
 		$disabled = $flag_ecrire ? " disabled='disabled'" : "";
 		$r = "";
-		$r .= "\n<!-- debut formulaire -->\n";
 		$r .= $link->getForm('post', '#'.$ancre, 'multipart/form-data');
+		
+		$champs = "";
+		$fieldset = false;
 	
 		ksort($schema);
 		foreach ($schema as $index => $t) {
-			$r .= Forms_afficher_champ_formulaire($t, $readonly, $remplir);
+			if ($t['type']!='separateur')
+				$champs .= Forms_afficher_champ_formulaire($t, $readonly, $remplir);
+			else{
+				$champs .= "</fieldset><fieldset>\n";
+				$fieldset = true;
+			}
 		}
 	
+		if ($fieldset)
+			$champs = "<fieldset>\n" . $champs . "</fieldset>\n";
+
+		$r .= $champs;
 		$r .= "<div style='text-align:$spip_lang_right;'>";
 		$r .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' ".
 			"class='fondo spip_bouton'$disabled />";

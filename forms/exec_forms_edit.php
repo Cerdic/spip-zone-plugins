@@ -21,10 +21,12 @@ function bloc_edition_champ($t, $link) {
 	$type = $t['type'];
 	$type_ext = $t['type_ext'];
 
-	$checked = ($obligatoire == 'oui') ? " checked='checked'" : "";
-	echo "&nbsp; &nbsp; <input type='checkbox' name='champ_obligatoire' value='oui' id='obli_$code'$checked> ";
-	echo "<label for='obli_$code'>"._L("ce champ est obligatoire")."</label>";
-	echo "<br />\n";
+	if ($type != 'separateur'){
+		$checked = ($obligatoire == 'oui') ? " checked='checked'" : "";
+		echo "&nbsp; &nbsp; <input type='checkbox' name='champ_obligatoire' value='oui' id='obli_$code'$checked> ";
+		echo "<label for='obli_$code'>"._L("ce champ est obligatoire")."</label>";
+		echo "<br />\n";
+	}
 
 	if ($type == 'url') {
 		$checked = ($t['verif'] == 'oui') ? " checked='checked'" : "";
@@ -590,11 +592,16 @@ function forms_edit(){
 				$obligatoire = $t['obligatoire'];
 				$aff_min = $index > $index_min;
 				$aff_max = $index < $index_max;
+				$type = $t['type'];
 
 				if ($nouveau) echo "<a name='nouveau_champ'></a>";
 				else if ($visible) echo "<a name='champ_visible'></a>";
 				echo "<p>\n";
-				debut_cadre_relief();
+				if (!in_array($type,array('separateur','texte_statique')))
+					debut_cadre_relief();
+				else
+					debut_cadre_enfonce();
+				
 				echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
 				if ($aff_min || $aff_max) {
 					echo "<div class='verdana1' style='float: right; font-weight: bold;'>";
@@ -639,10 +646,22 @@ function forms_edit(){
 					$js = " onfocus=\"if(!antifocus_champ){this.value='';antifocus_champ=true;}\"";
 				}
 				else $js = "";
-				echo "<label for='nom_$code'>"._L("Nom du champ")."</label> :";
-				echo " &nbsp;<input type='text' name='nom_champ' id='nom_$code' value=\"".
-					entites_html($t['nom'])."\" class='fondo verdana2' size='30'$js><br />\n";
-				bloc_edition_champ($t, $form_link);
+				if ($type=='separateur'){
+					echo "<label for='nom_$code'>"._L("Nom du Bloc")."</label> :";
+					echo " &nbsp;<input type='text' name='nom_champ' id='nom_$code' value=\"".
+						entites_html($t['nom'])."\" class='fondo verdana2' size='30'$js><br />\n";
+				}
+				else if ($type=='texte_statique'){
+					echo "<label for='nom_$code'>"._L("Texte")."</label> :<br/>";
+					echo " &nbsp;<textarea name='nom_champ' id='nom_$code'  class='verdana2' style='width:100%;height:5em;' $js>".
+						entites_html($t['nom'])."</textarea><br />\n";
+				}
+				else{
+					echo "<label for='nom_$code'>"._L("Nom du champ")."</label> :";
+					echo " &nbsp;<input type='text' name='nom_champ' id='nom_$code' value=\"".
+						entites_html($t['nom'])."\" class='fondo verdana2' size='30'$js><br />\n";
+					bloc_edition_champ($t, $form_link);
+				}
 
 				echo "<div align='right'>";
 				echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo verdana2'></div>\n";
@@ -657,7 +676,10 @@ function forms_edit(){
 				echo "</div>\n";
 
 				echo fin_block();
-				fin_cadre_relief();
+				if (!in_array($t['type'],array('separateur','texte_statique')))
+					fin_cadre_relief();
+				else
+					fin_cadre_enfonce();
 			}
 
 			// Ajouter un champ
@@ -672,7 +694,7 @@ function forms_edit(){
 			echo "<strong>"._L("Ajouter un champ")."</strong><br />\n";
 			echo _L("Cr&eacute;er un champ de type&nbsp;:");
 			echo " \n";
-			$types = array('ligne', 'texte', 'email', 'url', 'select', 'multiple', 'fichier', 'mot');
+			$types = array('ligne', 'texte', 'email', 'url', 'select', 'multiple', 'fichier', 'mot','separateur','texte_statique');
 			echo "<select name='ajout_champ' value='' class='fondo'>\n";
 			foreach ($types as $type) {
 				echo "<option value='$type'>".Forms_nom_type_champ($type)."</option>\n";
