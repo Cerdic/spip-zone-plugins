@@ -26,9 +26,9 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	  Permet de choisir le squelette en fonction d'un mot clef.
 	  
       La page de configuration permet de cr&eacute;er des r&egave;gles liant:
-	  -* un type d'&eacute;l&eacute;ment, 
-	  -* un groupe de mot clef sp&eacute;cifiant le squelette 
-	  -* un fond.
+-* un type d'&eacute;l&eacute;ment, 
+-* un groupe de mot clef sp&eacute;cifiant le squelette 
+-* un fond.
 
 	  Ainsi, les auteurs n'ont plus qu'&agrave; associ&eacute; le bon mot clef &agrave;
 	   leur article (par exemple) pour selection sa mise en page.
@@ -36,9 +36,9 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	  This plugin provide the selection of template using keywords.
 
 	  You can create rules on the configuration page to link:
-	  -* an element type,
-	  -* a group of keyword specifying the template
-	  -* a template base name.
+-* an element type,
+-* a group of keyword specifying the template
+-* a template base name.
 	  
 	  Then, the authors only have to associate a keyword to their article (for example) to 
 	  set its layout.
