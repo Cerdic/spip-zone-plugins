@@ -7,6 +7,8 @@ function SquelettesMots_ajouter_onglets($flux) {
   return $flux;
 }
 
+/*
+pas de tel point d'entree.
 function SquelettesMots_ajouter_boite_gauche($arguments) {  
   global $connect_statut, $connect_toutes_rubriques, $spip_lang;
   if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
@@ -18,6 +20,6 @@ function SquelettesMots_ajouter_boite_gauche($arguments) {
 	}
   }
   return $arguments;
-}
+}*/
 
 ?>
