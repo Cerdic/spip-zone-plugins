@@ -120,27 +120,34 @@ function config_chercher_squelettes_mots() {
 	  $rez =spip_abstract_select($select1,$from1,$where1);
 	  $liste_squel = '<ul>';
 	  $ext = $GLOBALS['extension_squelette'];
-	  $cnt = 0;
+	  $cnt_actif = 0;
+          $cnt_inactif = 0;
 	  while ($r = spip_abstract_fetch($rez)) {
 		include_ecrire("inc_charsets");
-		$n = translitteration(ereg_replace('[0-9 ]', '', $r['titre']));
+		$n = extraire_multi(translitteration($r['titre']));
 		if ($squel = find_in_path("$fond==$n.$ext")) {
-		  $cnt++;
+		  $cnt_actif++;
 		  $liste_squel .= "<li><a href=\"$squel\">$fond==$n.$ext</a></li>";
-		}
+		} else {
+		    $cnt_inactif++;
+ 		  $liste_squel .= "<li>$fond==$n.$ext</li>";
+                }
 		if ($squel = find_in_path("$fond-$n.$ext")) {
-		  $cnt++;
+		  $cnt_actif++;
 		  $liste_squel .= "<li><a href=\"$squel\">$fond-$n.$ext</a></li>";
-		}
+		} else {
+		    $cnt_inactif++;
+ 		  $liste_squel .= "<li>$fond-$n.$ext</li>";
+                }
 	  }
 	  spip_abstract_free($rez);
 	  $liste_squel .= '</ul>';
 
 	  
 	  echo '<div class="possible">';
-	  if($cnt > 0) echo bouton_block_invisible("regle$index");
-	  echo _T('squelettesmots:possibilites',array('total' => $cnt));
-	  if ($cnt > 0) {
+	  if($cnt_actif+$cnt_inactif > 0) echo bouton_block_invisible("regle$index");
+	  echo _T('squelettesmots:possibilites',array('total_actif' => $cnt_actif, 'total_inactif'=>$cnt_inactif));
+	  if ($cnt_actif+$cnt_inactif > 0) {
 		echo debut_block_invisible("regle$index");
 		echo $liste_squel;
 		echo fin_block();

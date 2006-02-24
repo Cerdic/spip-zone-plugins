@@ -20,6 +20,6 @@ Les auteurs n\'ont alors plus qu\'&agrave; associer un mot du groupe &agrave; l\
 									   'fond' => 'Fond:',
 									   'groupe' => 'Groupe:',
 									   'type' => 'Type:',
-									   'possibilites' => '@total@ squelette(s).'
+									   'possibilites' => '@total_actif@ squelette(s).'
 );
 ?>
