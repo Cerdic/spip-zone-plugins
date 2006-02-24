@@ -35,7 +35,11 @@ function config_chercher_squelettes_mots() {
 
   if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques ) {
 
+	echo '<br><br><br>';
+
 	gros_titre(_T('squelettesmots:gros_titre'));
+
+	barre_onglets("configuration", "config_chercher_squelettes_mots");
 
 	/*Affichage*/
 	debut_gauche();	
@@ -45,7 +49,10 @@ function config_chercher_squelettes_mots() {
 	fin_boite_info();
 
 	debut_droite();
-	
+		
+	include_ecrire('inc_config');
+	avertissement_config();
+
 	echo '<form action="'.generer_url_ecrire('config_chercher_squelettes_mots').'" method="post">';
 
 	$groupes_mots = '';

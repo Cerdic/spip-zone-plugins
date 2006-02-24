@@ -40,10 +40,25 @@ function config_mots_partout() {
 	
 	/*Affichage*/
 
+	echo '<br><br><br>';
+	
+	gros_titre(_T('motspartout:titre_page'));
+
+	barre_onglets("configuration", "config_mots_partout");
+
+	debut_gauche();
+
 	debut_droite();
+	
+
+	include_ecrire('inc_config');
+	avertissement_config();
+
+	debut_cadre_enfonce();
+
 	$one = false;
 	$form = "<form action=\"".generer_url_ecrire('config_mots_partout')."\" method=\"post\">";
-	$form .= "<label for=\"nom_chose\">"._T("motspartout:installer").":</label><select name=\"nom_chose\">";
+	$form .= "<label for=\"nom_chose\">"._T("motspartout:installer").":</label><br><br><select name=\"nom_chose\">";
 	foreach($choses_possibles as $chose => $data) {
 	  if(!$tables_installees[$chose]) {
 		$one = true;
@@ -58,6 +73,8 @@ function config_mots_partout() {
 	} else {
 	  echo _T("motspartout:toutinstalle");
 	}
+
+	fin_cadre_enfonce();
 
   } 
 

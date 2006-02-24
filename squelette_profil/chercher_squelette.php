@@ -1,5 +1,4 @@
 <?php
-
 	function parser_dossier_squelettes() {
 		global $dossier_squelettes;
 		return split(':',$dossier_squelettes);
