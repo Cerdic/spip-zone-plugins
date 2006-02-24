@@ -49,7 +49,7 @@ function config_chercher_squelettes_mots() {
 	fin_boite_info();
 
 	debut_droite();
-		
+	
 	include_ecrire('inc_config');
 	avertissement_config();
 
@@ -59,7 +59,7 @@ function config_chercher_squelettes_mots() {
 	$select = array('id_groupe','titre');
 	$from = array('spip_groupes_mots');
 
-//	include_ecrire('inc_filtres');
+	//	include_ecrire('inc_filtres');
 	$rez = spip_abstract_select($select,$from);
 	while($row = spip_abstract_fetch($rez)) {
 	  $groupes_mots[$row['id_groupe']] = extraire_multi($row['titre']);
@@ -75,7 +75,7 @@ function config_chercher_squelettes_mots() {
 
 	$fonds = unserialize(lire_meta('SquelettesMots:fond_pour_groupe'));
 	if (!is_array($fonds))
-		$fonds = array();
+	  $fonds = array();
 
 	$field_fonds = $_REQUEST['fonds'];
 	$id_groupes = $_REQUEST['tid_groupe'];
@@ -128,7 +128,7 @@ function config_chercher_squelettes_mots() {
 	  $liste_squel = '<ul>';
 	  $ext = $GLOBALS['extension_squelette'];
 	  $cnt_actif = 0;
-          $cnt_inactif = 0;
+	  $cnt_inactif = 0;
 	  while ($r = spip_abstract_fetch($rez)) {
 		include_ecrire("inc_charsets");
 		$n = translitteration(preg_replace('["\'.] ','_',extraire_multi($r['titre'])));
@@ -136,16 +136,16 @@ function config_chercher_squelettes_mots() {
 		  $cnt_actif++;
 		  $liste_squel .= "<li><a href=\"$squel\">$fond==$n.$ext</a></li>";
 		} else {
-		    $cnt_inactif++;
+		  $cnt_inactif++;
  		  $liste_squel .= "<li>$fond==$n.$ext</li>";
-                }
+		}
 		if ($squel = find_in_path("$fond-$n.$ext")) {
 		  $cnt_actif++;
 		  $liste_squel .= "<li><a href=\"$squel\">$fond-$n.$ext</a></li>";
 		} else {
-		    $cnt_inactif++;
+		  $cnt_inactif++;
  		  $liste_squel .= "<li>$fond-$n.$ext</li>";
-                }
+		}
 	  }
 	  spip_abstract_free($rez);
 	  $liste_squel .= '</ul>';
