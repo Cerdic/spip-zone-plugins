@@ -14,7 +14,16 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	  dev
 	</etat>
 	<description>
-	utilise un rep de squelette en fonction du profil.
+	utilise un repertoire de squelette en fonction du profil. 
+
+	Si on a {dossier_squelettes=messquelettes}, alors on peu creer un dossier {messquelettes-minirezo}
+	 pour les squelettes des administrateurs, et ainsi de suite pour les autres...
+
+        Si on a {dossier_squelettes=messquelettes:walma3:forum}, on peu creer les dossiers 
+	{messquelettes-minirezo}, {walma3-minirezo}, {forum-minirezo} juste pour les administrateurs. 
+
+	Mais on n'est pas oblig&eacute; de tous les avoir. S'il n'y a pas de repertoire sp&eacute;cifique au statut, 
+	alors on prend le repertoire par defaut.
 	</description>
 	<options> <!-- fichier charge a chaque recalul de page -->
 	  chercher_squelette.php
