@@ -311,10 +311,10 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 		if ($flag_champ) $r .= "<label for='$id_champ'>";
 		// Propre et pas typo, afin d'autoriser les notes (notamment)
 		$r .= propre($nom);
-		if ($flag_label) $r .= "</label>";
+		if ($flag_champ) $r .= "</label>";
+		if ($flag_strong) $r .= "</strong>";
 		if ($flag_champ) 
 		{
-			$r .= "</strong>";
 			if ($obligatoire) $r .= " "._T('forms:info_obligatoire_02');
 			$r .= " :<br />\n";
 		}
