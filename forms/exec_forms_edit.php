@@ -597,7 +597,7 @@ function forms_edit(){
 				if ($nouveau) echo "<a name='nouveau_champ'></a>";
 				else if ($visible) echo "<a name='champ_visible'></a>";
 				echo "<p>\n";
-				if (!in_array($type,array('separateur','texte_statique')))
+				if (!in_array($type,array('separateur','textestatique')))
 					debut_cadre_relief();
 				else
 					debut_cadre_enfonce();
@@ -651,7 +651,7 @@ function forms_edit(){
 					echo " &nbsp;<input type='text' name='nom_champ' id='nom_$code' value=\"".
 						entites_html($t['nom'])."\" class='fondo verdana2' size='30'$js><br />\n";
 				}
-				else if ($type=='texte_statique'){
+				else if ($type=='textestatique'){
 					echo "<label for='nom_$code'>"._L("Texte")."</label> :<br/>";
 					echo " &nbsp;<textarea name='nom_champ' id='nom_$code'  class='verdana2' style='width:100%;height:5em;' $js>".
 						entites_html($t['nom'])."</textarea><br />\n";
@@ -676,7 +676,7 @@ function forms_edit(){
 				echo "</div>\n";
 
 				echo fin_block();
-				if (!in_array($t['type'],array('separateur','texte_statique')))
+				if (!in_array($t['type'],array('separateur','textestatique')))
 					fin_cadre_relief();
 				else
 					fin_cadre_enfonce();
@@ -694,7 +694,7 @@ function forms_edit(){
 			echo "<strong>"._L("Ajouter un champ")."</strong><br />\n";
 			echo _L("Cr&eacute;er un champ de type&nbsp;:");
 			echo " \n";
-			$types = array('ligne', 'texte', 'email', 'url', 'select', 'multiple', 'fichier', 'mot','separateur','texte_statique');
+			$types = array('ligne', 'texte', 'email', 'url', 'select', 'multiple', 'fichier', 'mot','separateur','textestatique');
 			echo "<select name='ajout_champ' value='' class='fondo'>\n";
 			foreach ($types as $type) {
 				echo "<option value='$type'>".Forms_nom_type_champ($type)."</option>\n";

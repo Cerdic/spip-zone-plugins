@@ -229,7 +229,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 				'fichier' => _L("fichier &agrave; t&eacute;l&eacute;charger"),
 				'mot' => _L("mots-cl&eacute;s"),
 				'separateur' => _L("Nouveau bloc de questions"),
-				'texte_statique' => _L("Message d'explication")
+				'textestatique' => _L("Message d'explication")
 			);
 		}
 		return ($s = $noms[$type]) ? $s : $type;
@@ -238,7 +238,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 	function Forms_types_champs_autorises($type = '') {
 		static $t;
 		if (!$t) {
-			$t = array_flip(array('ligne', 'texte', 'url', 'email', 'select', 'multiple', 'fichier', 'mot','separateur','texte_statique'));
+			$t = array_flip(array('ligne', 'texte', 'url', 'email', 'select', 'multiple', 'fichier', 'mot','separateur','textestatique'));
 		}
 		return $type ? isset($t[$type]) : $t;
 	}
@@ -309,8 +309,8 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 		$type = $t['type'];
 		$type_ext = $t['type_ext'];
 		
-		$flag_label = (!in_array($type,array('select','texte_statique')));
-		$flag_champ = (!in_array($type,array('texte_statique')));
+		$flag_label = (!in_array($type,array('select','textestatique')));
+		$flag_champ = (!in_array($type,array('textestatique')));
 		
 		if ($flag_strong) $r .= "<strong>";
 		if ($flag_champ) $r .= "<label for='$id_champ'>";
