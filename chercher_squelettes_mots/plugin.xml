@@ -54,4 +54,8 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 		<nom>ajouter_onglets</nom>
 		<inclure>SquelettesMots.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>ajouter_boite_gauche</nom>
+		<inclure>SquelettesMots.php</inclure>
+	</pipeline>	
 </plugin>

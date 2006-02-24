@@ -124,7 +124,7 @@ function config_chercher_squelettes_mots() {
           $cnt_inactif = 0;
 	  while ($r = spip_abstract_fetch($rez)) {
 		include_ecrire("inc_charsets");
-		$n = extraire_multi(translitteration($r['titre']));
+		$n = translitteration(preg_replace('["\'.] ','_',extraire_multi($r['titre'])));
 		if ($squel = find_in_path("$fond==$n.$ext")) {
 		  $cnt_actif++;
 		  $liste_squel .= "<li><a href=\"$squel\">$fond==$n.$ext</a></li>";

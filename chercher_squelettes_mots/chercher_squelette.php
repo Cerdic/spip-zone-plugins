@@ -20,16 +20,12 @@ function chercher_squelette($fond, $id_rubrique, $lang) {
 	if (is_array($fonds) && (list($id_groupe,$table,$id_table) = $fonds[$fond])) {
 		$trouve = false;
 		if (($id = $contexte[$id_table]) && ($n = sql_mot_squelette($id,$id_groupe,$table,$id_table))) {
-			include_ecrire("inc_charsets");
-			$n = translitteration($n);
 			if ($squel = find_in_path("$fond==$n.$ext")) {
 				$squelette = substr($squel, 0, - strlen(".$ext"));
 				$trouve = true;
 			}
 		} 
 		if((!$trouve) && ($n = sql_mot_squelette($id_rubrique,$id_groupe,'rubriques','id_rubrique',true))) {	
-			include_ecrire("inc_charsets");
-			$n = translitteration($n);
 			if ($squel = find_in_path("$fond-$n.$ext")) {
 				$squelette = substr($squel, 0, - strlen(".$ext"));
 			}
@@ -74,7 +70,11 @@ function sql_mot_squelette($id,$id_groupe,$table,$id_table,$recurse=false) {
 						'mots.id_mot=lien.id_mot',
 						"id_groupe=$id_groupe");
 		$r = spip_abstract_fetch(spip_abstract_select($select1,$from1,$where1));
-		if ($r) return extraire_multi($r['titre']);	
+		if ($r) {
+		  include_ecrire("inc_charsets");
+
+		  return transliteration(preg_replace('["\'.] ','_',extraire_multi($r['titre'])));	
+		}
 		if(!recurse) return '';
 		$id = sql_parent($id);
         }
