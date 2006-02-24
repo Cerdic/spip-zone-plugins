@@ -52,9 +52,10 @@ function config_chercher_squelettes_mots() {
 	$select = array('id_groupe','titre');
 	$from = array('spip_groupes_mots');
 
+//	include_ecrire('inc_filtres');
 	$rez = spip_abstract_select($select,$from);
 	while($row = spip_abstract_fetch($rez)) {
-	  $groupes_mots[$row['id_groupe']] = $row['titre'];
+	  $groupes_mots[$row['id_groupe']] = extraire_multi($row['titre']);
 	}
 	spip_abstract_free($rez);
 
