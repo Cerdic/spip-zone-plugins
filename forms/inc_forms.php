@@ -266,9 +266,11 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 				$r .= "<option value=\"$key\" $checked>".supprimer_tags($val)."</option>\n";
 			}
 			else {
+				$r .= "<span class='spip_form_choix_unique'>";
 				$r .= "&nbsp; <input type='radio' name='$code' id='$id' ".
 					"value=\"$key\"$attributs $checked />";
-				$r .= "<label for='$id'>$val</label><br />\n";
+				$r .= "<label for='$id'>$val</label>";
+				$r .= "</span> \n";
 			}
 		}
 		if ($flag_menu) {
@@ -279,15 +281,18 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 
 	function Forms_afficher_champ_multiple($code, $id_champ, $liste, $value, $attributs = '') {
 		$num_checkbox = 0;
+		$r = "";
 		foreach ($liste as $key => $val) {
 			$val = typo($val);
 			$id = $id_champ;
 			if (++$num_checkbox>1)
 				$id .= '_'.strval($num_checkbox);
 			$checked = isset($value[$key]) ? "checked='checked'" : "";
+			$r .= "<span class='spip_form_choix_multiple'>";
 			$r .= "&nbsp; <input type='checkbox' name='".$code."[]' id='$id' ".
 				"value=\"$key\"$attributs $checked />";
-			$r .= "<label for='$id'>$val</label><br />\n";
+			$r .= "<label for='$id'>$val</label>";
+			$r .= "</span> \n";
 		}
 		return $r;
 	}

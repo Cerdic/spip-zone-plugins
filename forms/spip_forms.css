@@ -14,6 +14,14 @@
 	margin-bottom:1em;
 }
 
+.spip_form_choix_unique{
+	/* display:block; *//* decommenter pour avoir des bouton radio verticaux*/
+}
+
+.spip_form_choix_multiple{
+	/* display:block; *//* decommenter pour avoir des bouton radio verticaux*/
+}
+
 .spip_sondage {
 	margin: auto;
 }
