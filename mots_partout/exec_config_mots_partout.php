@@ -1,5 +1,4 @@
 <?php
-
 function config_mots_partout() {
   global $connect_statut, $connect_toutes_rubriques;
 
