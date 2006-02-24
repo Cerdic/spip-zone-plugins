@@ -1,9 +1,11 @@
 <?php
+define('_DIR_PLUGIN_CHERCHER_SQUELETTES',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+
 function SquelettesMots_ajouter_onglets($flux) {
   if($flux['args']=='configuration')
 	$flux['data']['config_chercher_squelettes_mots']= new Bouton(
-											 '', 'Configurer Squelettes Mots',
-											  generer_url_ecrire("config_chercher_squelettes_mots"));
+																 _DIR_PLUGIN_CHERCHER_SQUELETTES.'/spip_death.png', 'Configurer Squelettes Mots',
+																 generer_url_ecrire("config_chercher_squelettes_mots"));
   return $flux;
 }
 
@@ -16,7 +18,7 @@ function SquelettesMots_ajouter_boite_gauche($arguments) {
 	  include('chercher_squelette.php');
 	  
 	$ext = $GLOBALS['extension_squelette'];
-	  $arguments['data'] .= '<div class="cadre-info verdana1">'._T('SquelettesMots:utiliserasquelette',array('squelette' =>substr(cherher_squelette('article',$arguments['args']['id_rubrique'],$spip_lang),strpos('/')))).".$ext</div>";
+	$arguments['data'] .= '<div class="cadre-info verdana1">'._T('SquelettesMots:utiliserasquelette',array('squelette' =>substr(cherher_squelette('article',$arguments['args']['id_rubrique'],$spip_lang),strpos('/')))).".$ext</div>";
 	}
   }
   return $arguments;
