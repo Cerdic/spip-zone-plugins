@@ -73,7 +73,7 @@ function sql_mot_squelette($id,$id_groupe,$table,$id_table,$recurse=false) {
 	if ($r) {
 	  include_ecrire("inc_charsets");
 
-	  return transliteration(preg_replace('["\'.] ','_',extraire_multi($r['titre'])));	
+	  return translitteration(preg_replace('["\'.] ','_',extraire_multi($r['titre'])));	
 	}
 	if(!recurse) return '';
 	$id = sql_parent($id);
