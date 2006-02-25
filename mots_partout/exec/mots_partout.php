@@ -20,7 +20,7 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS . 'mots_partout'));
 
 /***********************************************************************/
 /* function*/
@@ -183,7 +183,7 @@ function afficher_liste_defaut($choses) {
 
 function mots_partout() {
 
-  include("mots_partout_choses.php");
+  include(_DIR_PLUGIN_MOTS_PARTOUT."/mots_partout_choses.php");
   include_ecrire ("inc_presentation");
   include_ecrire ("inc_documents");
   include_ecrire ("inc_abstract_sql");
