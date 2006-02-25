@@ -40,7 +40,7 @@ function verifier_admin_restreint($id_rubrique) {
 //------------------------la fonction qui fait tout-----------------------------------
 
 function tri_mots() {
- 
+  global $connect_id_auteur;
 
   include_ecrire ("inc_presentation");
   include_ecrire ("inc_abstract_sql");
@@ -74,24 +74,24 @@ function tri_mots() {
   }
   spip_abstract_free($res);
 
-  $objet = addslashes($_REQUEST['objet']);
-  if(!$objet) $objet = 'articles';
-  $id_objet = addslashes($_REQUEST['id_objet']);
-  if(!$id_objet) $id_objet = 'id_article';
+  $table = addslashes($_REQUEST['table']);
+  if(!$table) $table = 'articles';
+  $id_table = addslashes($_REQUEST['id_table']);
+  if(!$id_table) $id_table = 'id_article';
 
   //Installation
   if(!lire_meta('TriMots:installe')) {
-	$res = spip_query("SHOW COLUMNS FROM `".$table_pref."_mots_$objet` LIKE 'rang'");
+	$res = spip_query("SHOW COLUMNS FROM `".$table_pref."_mots_$table` LIKE 'rang'");
 	if(!spip_fetch_array($res)) {
-	  spip_query("ALTER TABLE `".$table_pref."_mots_$objet` ADD `rang` BIGINT NOT NULL DEFAULT 0;");
-	  $from = array("spip_$objet");
-	  $select = array($id_objet,'titre');
+	  spip_query("ALTER TABLE `".$table_pref."_mots_$table` ADD `rang` BIGINT NOT NULL DEFAULT 0;");
+	  $from = array("spip_$table");
+	  $select = array($id_table,'titre');
 	  $where = array("titre REGEXP '^[0-9]+\\. '");
 	  $results = spip_abstract_select($select,$from,$where);
 	  while($row = spip_abstract_fetch($results)) {
 		$rang = substr($row['titre'],0,strpos($row['titre'],'.'));
 		if($rang > 0) {
-		  spip_query("UPDATE ".$table_pref."_mots_$objet SET rang = $rang WHERE $id_objet=".intval($row[$id_objet]));
+		  spip_query("UPDATE ".$table_pref."_mots_$table SET rang = $rang WHERE $id_table=".intval($row[$id_table]));
 		}
 	  }
 	  spip_abstract_free($results);
@@ -99,16 +99,6 @@ function tri_mots() {
 	  ecrire_metas();
 	}
 	spip_free_result($res);
-  }
-  /************************************************************************/
-  /* insertion */
-  /************************************************************************/
-  //o[]=118&o=120&o[]=128
-  if($_POST['order']) {
-	$order = split('&',$_POST['order']);
-	for($i=0;$i<count($order);$i++) {
-	  spip_query("UPDATE ".$table_pref."_mots_$objet SET rang = $i WHERE id_mot=$id_mot AND $id_objet=".intval(substr($order[$i],4)));
-	}
   }
 
   /***********************************************************************/
@@ -128,7 +118,6 @@ function tri_mots() {
 
   gros_titre(_T('trimots:titre_tri_mots',array('titre_mot'=>$titre,'type_mot'=>$type)));
 
-
   //Colonne de gauche
   debut_gauche();
 
@@ -139,7 +128,13 @@ function tri_mots() {
   fin_cadre_enfonce();
 
   debut_cadre_enfonce();
-  echo '<form id="submit_form" action="'.generer_url_ecrire('tri_mots',"objet=$objet&id_objet=$id_objet&id_mot=$id_mot").'" method="post"><input type="hidden" name="order" id="order"/><label for="submit_button">'._T('trimots:envoyer').'</label><input type="submit" id="submit_button" value="'._T('valider').'"></form>';
+			 $redirect = generer_url_ecrire('tri_mots',"table=$table&id_table=$id_table&id_mot=$id_mot");
+  var_dump("tri_mots $table $id_table $id_mot");
+  echo '<form id="submit_form" action="'.generer_url_action('tri_mots',"table=$table&id_table=$id_table&id_mot=$id_mot").'" method="post">
+<input type="hidden" name="redirect" value="'.$redirect.'"/>
+<input type="hidden" name="hash" value="'.calculer_action_auteur("tri_mots $table $id_table $id_mot").'"/>
+<input type="hidden" name="id_auteur" value="'.$connect_id_auteur.'" />
+<input type="hidden" name="order" id="order"/><label for="submit_button">'._T('trimots:envoyer').'</label><input type="submit" id="submit_button" value="'._T('valider').'"/></form>';
   fin_cadre_enfonce();
 
   if($_REQUEST['retour']) icone(_T('icone_retour'), addslashes($_REQUEST['retour']), "mot-cle-24.gif", "rien.gif");
@@ -148,8 +143,8 @@ function tri_mots() {
 
   debut_droite();
 
-  $result_articles = "SELECT $objet.titre, $objet.$id_objet, lien.rang FROM spip_mots_$objet AS lien, spip_$objet AS $objet
- 	    WHERE $objet.$id_objet=lien.$id_objet AND $objet.statut='publie' AND lien.id_mot=$id_mot ORDER BY lien.rang";
+  $result_articles = "SELECT $table.titre, $table.$id_table, lien.rang FROM spip_mots_$table AS lien, spip_$table AS $table
+ 	    WHERE $table.$id_table=lien.$id_table AND $table.statut='publie' AND lien.id_mot=$id_mot ORDER BY lien.rang";
 
 global $spip_lang_left;
   echo "<div style='height: 12px;'></div>";
@@ -157,17 +152,17 @@ global $spip_lang_left;
  echo "<div style='position: relative;'>";
   echo "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>
 	<img src='"._DIR_PLUGIN_TRI_MOTS."/img/updown.png'/></div>";
-  echo "<div style='background-color: white; color: black; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>"._T($objet)."</b></div>";
+  echo "<div style='background-color: white; color: black; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>"._T($table)."</b></div>";
   echo "</div>";
 
   echo "<ul id='liste_tri'>";
   $result = spip_query($result_articles);
   while ($row = spip_fetch_array($result)) {
-	$id=$row[$id_objet];
+	$id=$row[$id_table];
 	$titre=$row['titre'];
 	$rang=$row['rang'];
 
-	echo "<li id='".$objet."_$id'><span class=\"titre\">$titre</span><span class=\"lien\"><a href='" . generer_url_ecrire("$objets","$id_objet=$id") . "'>"._T('trimots:voir')."</a></span><span class=\"rang\">$rang</span></li>";
+	echo "<li id='".$table."_$id'><span class=\"titre\">$titre</span><span class=\"lien\"><a href='" . generer_url_ecrire("$tables","$id_table=$id") . "'>"._T('trimots:voir')."</a></span><span class=\"rang\">$rang</span></li>";
 
   }
 
