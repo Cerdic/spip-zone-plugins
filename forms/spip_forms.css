@@ -13,6 +13,19 @@
 .spip_form_champ {
 	margin-bottom:1em;
 }
+.spip_form_label {
+	display:block;
+	text-align:left;
+  font-weight: bold;
+}
+.spip_form_label_obligatoire{
+  font-weight: normal;
+}
+.spip_form_label_details{
+	display:block;
+	font-style:italic;
+	text-align:left;
+}
 
 .spip_form_choix_unique{
 	/* display:block; *//* decommenter pour avoir des bouton radio verticaux*/
@@ -45,6 +58,9 @@
 	padding-left:5px;
 	padding-bottom:2px;
 	padding-top:15px;
+}
+.spip_form_ok_confirmation{
+	display:block;
 }
 
 .spip_sondage .ligne_barre {

@@ -166,15 +166,12 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 		echo "<div style='padding: 2px; background-color: $couleur_claire; text-align: center; color: black;'>";
 		echo bouton_block_invisible("ajouter_form");
 		echo "<strong class='verdana3' style='text-transform: uppercase;'>"
-			._L("Ins&eacute;rer un formulaire")."</strong>";
+			._T("forms:article_inserer_un_formulaire")."</strong>";
 		echo "</div>\n";
 	
 		echo debut_block_invisible("ajouter_form");
 		echo "<div class='verdana2'>";
-		echo _L("Vous pouvez ins&eacute;rer des formulaires dans vos articles afin de ".
-			"permettre aux visiteurs d'entrer des informations. Choisissez un ".
-			"formulaire dans la liste ci-dessous et recopiez le raccourci dans le texte ".
-			"de l'article.");
+		echo _T("forms:article_inserer_un_formulaire_detail");
 		echo "</div>";
 	
 		$query = "SELECT id_form, titre FROM spip_forms ORDER BY titre";
@@ -192,10 +189,8 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 				$link->addVar("retour", $GLOBALS['clean_link']->getUrl());
 				echo "<a href='".$link->getUrl()."'>";
 				echo $titre."</a>\n";
-				echo "<div class='arial1' style='text-align:$spip_lang_right;color: black; padding-$spip_lang_left: 4px;' ".
-					"title=\""._L("Recopiez ce raccourci dans le texte de l'article pour ins&eacute;rer ce formulaire.").
-					"\">";
-				echo "<b>&lt;form".$id_form."&gt;</b>";
+				echo "<div class='arial1' style='text-align:$spip_lang_right;color: black; padding-$spip_lang_left: 4px;' "."title=\""._T("forms:article_recopier_raccourci")."\">";
+				echo "<strong>&lt;form".$id_form."&gt;</strong>";
 				echo "</div>";
 			}
 			echo "</div>";
@@ -207,7 +202,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 			echo "\n<br />";
 			$link = new Link("?exec=forms_edit&new=oui");
 			$link->addVar('retour', $GLOBALS['clean_link']->getUrl());
-			icone_horizontale(_L("Cr&eacute;er un nouveau formulaire"),
+			icone_horizontale(_T("forms:icone_creer_formulaire"),
 				$link->getUrl(), "../"._DIR_PLUGIN_FORMS."/form-24.png", "creer.gif");
 		}
 	
@@ -220,16 +215,16 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 		static $noms;
 		if (!$noms) {
 			$noms = array(
-				'ligne' => _L("ligne de texte"),
-				'texte' => _L("texte"),
-				'url' => _L("adresse de site Web"),
-				'email' => _L("adresse e-mail"),
-				'select' => _L("choix unique"),
-				'multiple' => _L("choix multiple"),
-				'fichier' => _L("fichier &agrave; t&eacute;l&eacute;charger"),
-				'mot' => _L("mots-cl&eacute;s"),
-				'separateur' => _L("Nouveau bloc de questions"),
-				'textestatique' => _L("Message d'explication")
+				'ligne' => _T("forms:champ_type_ligne"),
+				'texte' => _T("forms:champ_type_texte"),
+				'url' => _T("forms:champ_type_url"),
+				'email' => _T("forms:champ_type_email"),
+				'select' => _T("forms:champ_type_select"),
+				'multiple' => _T("forms:champ_type_multiple"),
+				'fichier' => _T("forms:champ_type_fichier"),
+				'mot' => _T("forms:champ_type_mot"),
+				'separateur' => _T("forms:champ_type_separateur"),
+				'textestatique' => _T("forms:champ_type_textestatique")
 			);
 		}
 		return ($s = $noms[$type]) ? $s : $type;
@@ -312,30 +307,35 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 		$flag_label = (!in_array($type,array('select','textestatique')));
 		$flag_champ = (!in_array($type,array('textestatique')));
 		
-		if ($flag_strong) $r .= "<strong>";
-		if ($flag_champ) $r .= "<label for='$id_champ'>";
+		if ($flag_champ) $r .= "<span class='spip_form_label'>";
+		if ($flag_label) $r .= "<label for='$id_champ'>";
 		// Propre et pas typo, afin d'autoriser les notes (notamment)
 		$r .= propre($nom);
-		if ($flag_champ) $r .= "</label>";
-		if ($flag_strong) $r .= "</strong>";
-		if ($flag_champ) 
+		if ($flag_label) $r .= "</label>"; 
+ 		if ($flag_champ)
 		{
-			if ($obligatoire) $r .= " "._T('forms:info_obligatoire_02');
-			$r .= " :<br />\n";
+			if ($obligatoire) 
+				$r .= "<span class='spip_form_label_obligatoire'>"
+							. _T('forms:info_obligatoire_02')
+							. "</span>";
+			$r .= " :";
+			$r .= "</span>\n";
 		}
 	
 		$class1 = $obligatoire ? "forml" : "formo";
 		$class2 = $obligatoire ? "fondl" : "fondo";
 	
+		$span = "<span class='spip_form_label_details'>";
+	
 		switch ($type) {
 		case 'email':
 			$value = $erreur ? entites_html($GLOBALS[$code]) : "";
-			$r .= "<em>"._L("Veuillez entrer une adresse e-mail valide (de type vous@fournisseur.com).")."</em>";
+			$r .= $span . _T("forms:champ_email_details")."</span>";
 			$r .= "<input type='text' name='$code' id='$id_champ' value=\"$value\" class='$class1' size='40'$attributs />";
 			break;
 		case 'url':
 			$value = $erreur ? entites_html($GLOBALS[$code]) : "";
-			$r .= "<em>"._L("Veuillez entrer une adresse Web valide (de type http://www.monsite.com/...).")."</em>";
+			$r .= $span . _T("forms:champ_url_details")."</span>";
 			$r .= "<input type='text' name='$code' id='$id_champ' value=\"$value\" class='$class1' size='40'$attributs />";
 			break;
 		case 'ligne':
@@ -390,7 +390,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 			break;
 		}
 		if ($msg = $erreur[$code]) {
-			$r = "<p class='spip_form_erreur'>"._L("Erreur&nbsp;:")." ".$msg."</p>" . $r;
+			$r = "<p class='spip_form_erreur'>"._T("forms:form_erreur")." ".$msg."</p>" . $r;
 		}
 		$r .= "</div>";
 		return $r;
@@ -438,7 +438,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 		$r .= "</div></form>\n";
 		if ($les_notes)
 			$r .= "<div class='spip_form_notes'>$les_notes</div>\n";
-		$r .= "\n<!-- fin formulaire -->\n";
+		//$r .= "\n<!-- fin formulaire -->\n";
 	
 		$les_notes = $notes_orig;
 		return $r;
@@ -509,8 +509,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 		$query = "SELECT * FROM spip_forms WHERE id_form=$id_form";
 		$result = spip_query($query);
 		if (!$row = spip_fetch_array($result)) {
-			$erreur['@'] = _L("Probl&agrave;me technique. Votre r&eacute;ponse ".
-				"n'a pas pu &ecirc;tre prise en compte.");
+			$erreur['@'] = _T("forms:probleme_technique");
 		}
 		// Extraction des donnees pour l'envoi des mails eventuels
 		//   accuse de reception et forward webmaster
@@ -527,32 +526,32 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 			$val = $GLOBALS[$code];
 			if (!$val || ($type == 'fichier' && !$_FILES[$code]['tmp_name'])) {
 				if ($t['obligatoire'] == 'oui')
-					$erreur[$code] = _L("Ce champ doit &ecirc;tre rempli.");
+					$erreur[$code] = _T("forms:champ_necessaire");
 				continue;
 			}
 			// Verifier la conformite des donnees entrees
 			if ($type == 'email') {
 				if (!strpos($val, '@') || !email_valide($val)) {
-					$erreur[$code] = _L("Cette adresse n'est pas valide.");
+					$erreur[$code] = _T("forms:adresse_invalide");
 				}
 			}
 			if ($type == 'url') {
 				if ($t['verif'] == 'oui') {
 					include_ecrire("inc_sites.php");
 					if (!recuperer_page($val)) {
-						$erreur[$code] = _L("Ce site n'a pas &eacute;t&eacute; trouv&eacute;.");
+						$erreur[$code] = _T("site_introuvable");
 					}
 				}
 			}
 			if ($type == 'fichier') {
 				if (!$taille = $_FILES[$code]['size']) {
-					$erreur[$code] = _L("Le transfert du fichier a &eacute;chou&eacute;.");
+					$erreur[$code] = _T("forms:echec_upload");
 				}
 				else if ($type_ext['taille'] && $taille > ($type_ext['taille'] * 1024)) {
-					$erreur[$code] = _L("Ce fichier est trop gros.");
+					$erreur[$code] = _T("forms:fichier_trop_gros");
 				}
 				else if (!Forms_type_fichier_autorise($_FILES[$code]['name'])) {
-					$erreur[$code] = _L("Ce type de fichier est interdit.");
+					$erreur[$code] = _T("fichier_type_interdit");
 				}
 				if ($erreur[$code]) {
 					Forms_detruire_fichier_form($_FILES[$code]['tmp_name']);
@@ -583,8 +582,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 				spip_query($query);
 				$id_reponse = spip_insert_id();
 				if (!$id_reponse) {
-					$erreur['@'] = _L("Probl&agrave;me technique. Votre r&eacute;ponse ".
-						"n'a pas pu &ecirc;tre prise en compte.");
+					$erreur['@'] = _T("forms:probleme_technique");
 					$ok = false;
 				}
 			}
@@ -603,8 +601,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 						$source = $val['tmp_name'];
 						$dest = $dir.Forms_nommer_fichier_form($val['name'], $dir);
 						if (!Forms_deplacer_fichier_form($source, $dest)) {
-							$erreur[$code] = _L("Probl&egrave;me technique. Le transfert ".
-								"du fichier a &eacute;chou&eacute;.");
+							$erreur[$code] = _T("forms:probleme_technique_upload");
 							$ok = false;
 						}
 						else {
@@ -629,7 +626,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 	
 				if (!count($inserts)) {
 					// Reponse vide => annuler
-					$erreur['@'] = _L("Veuillez remplir au moins un champ.");
+					$erreur['@'] = _T("forms:remplir_un_champ");
 					$query = "DELETE FROM spip_reponses WHERE id_reponse=$id_reponse";
 					spip_query($query);
 					$ok = false;
@@ -708,12 +705,15 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 			//print_r($_POST);
 			if (!$erreur) {
 				$r .= "<p class='spip_form_ok'>".
-					_L("Votre r&eacute;ponse a &eacute;t&eacute; enregistr&eacute;e.");
+					_T("forms:reponse_enregistree");
 				$link = new Link();
 				if ($sondage != 'non')
-					$r .= " <a href='".$link->getUrl()."#$ancre"."'>Valider</a>";
-				if ($reponse)
-				  $r .= _L("<br/>Un message de confirmation est envoy&eacute; &agrave; $reponse");
+					$r .= " <a href='".$link->getUrl()."#$ancre"."'>"._T("forms:valider")."</a>";
+				if ($reponse){
+					$r .= "<span class='spip_form_ok_confirmation'>";
+				  $r .= _T("forms:avis_message_confirmation",array('mail'=>$reponse));
+				  $r .= "</span>";
+				}
 				$r .= "</p>";
 			}
 			else {
@@ -737,7 +737,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 				"	resizable=yes, width=450, height=300'); return false;\"".
 				" onkeypress=\"javascript:window.open(this.href, 'spip_sondage', 'scrollbars=yes, ".
 				"	resizable=yes, width=450, height=300'); return false;\">";
-				$r .= _L("Voir les r&eacute;sultats")."</a></div>";
+				$r .= _T("forms:voir_resultats")."</a></div>";
 				$r .= "<br />\n";
 			}
 			$r .= Forms_afficher_formulaire_schema($schema, $form_link, $ancre, $erreur);
@@ -801,7 +801,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 	
 				$s = "";
 				if ($reponses) {
-					$s .= $reponses." "._L("r&eacute;ponses");
+					$s .= _T("forms:nombre_reponses",array('nombre'=>$reponses));
 				}
 				$vals[] = $s;
 				$table[] = $vals;
