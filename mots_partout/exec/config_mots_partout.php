@@ -1,4 +1,6 @@
 <?php
+define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS . 'mots_partout'));
+
 function config_mots_partout() {
   global $connect_statut, $connect_toutes_rubriques;
 
@@ -23,7 +25,7 @@ function config_mots_partout() {
 
 	$type = addslashes($_POST['nom_chose']);
 	
-	include("mots_partout_choses.php");
+	include(_DIR_PLUGIN_MOTS_PARTOUT."/mots_partout_choses.php");
 	$id_chose = $choses_possibles[$type]['id_chose'];
 	$table_principale = $choses_possibles[$type]['table_principale'];
 
