@@ -18,7 +18,7 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-define('_DIR_PLUGIN_CHERCHER_SQUELETTES',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+define('_DIR_PLUGIN_CHERCHER_SQUELETTES',(_DIR_PLUGINS . 'chercher_squelettes_mots'));
 
 function config_chercher_squelettes_mots() {
   global $connect_statut, $connect_toutes_rubriques;
