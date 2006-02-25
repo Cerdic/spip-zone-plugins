@@ -1,6 +1,6 @@
 <?php
 
-define('_DIR_PLUGIN_TRI_AUTEURS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+define('_DIR_PLUGIN_TRI_AUTEURS',(_DIR_PLUGINS . 'tri_auteurs'));
 
 
 function TriAuteurs_ajouter_boite_gauche($arguments) {  
@@ -47,7 +47,7 @@ function TriAuteurs_boite_tri_auteurs($id_article,$id_rubrique) {
 	Sortable.create('liste_tri_auteurs',{onUpdate:updateTriAuteur});
   }";
 	$to_ret .= "function updateTriAuteur() {
-           var url = '".generer_url_ecrire('tri_auteurs')."';
+           var url = '".generer_url_action('tri_auteurs')."';
            var pars = Sortable.serialize('liste_tri_auteurs',{name:'o'})+'&id_article=$id_article';
            new Ajax.Request(url,{method:'post',parameters:pars});
   }";
