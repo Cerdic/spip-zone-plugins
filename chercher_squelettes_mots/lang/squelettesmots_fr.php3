@@ -10,9 +10,7 @@ Une r&egrave;gle sp&eacute;cifie:
 -# le groupe de mot clef qui contient les mots pour specifier le squelette,
 -# le type de l\'&eacute;l&eacute;ment affich&eacute; par cette page.
 
-Les squelettes seront alors nom&eacute;s: 
--* {{fond==mot.html}} pour un squelette specifique &agrave; un &eacute;l&eacute;ment,
--* {{fond-mot.html}} pour le squelette appliqu&eacute; aux &eacute;l&eacute;ment d\'une rubrique.
+Les squelettes seront alors nom&eacute;s {{fond-mot.html}}. Le plugin va d\'abord chercher pour un squelette qui correspond &agrave; un mot clef attach&eacute; &agrave; l\'&eacute;l&eacute;ment et s\'il n\'en trouve pas, il cherchera un squelette qui correspond &agrave; un des mots clefs d\'une des rubriques parentes.
 
 Les auteurs n\'ont alors plus qu\'&agrave; associer un mot du groupe &agrave; l\'&eacute;l&eacute;ment.',
 									   'reglei' => 'r&egrave;gle @id@',

@@ -8,6 +8,8 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	  Squelette par mot clef
     [en]
 	  Template selection by keyword
+	[it]
+	  Scelta del modello mediante una parola chiave
 	</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
@@ -33,7 +35,7 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	  Ainsi, les auteurs n'ont plus qu'&agrave; associ&eacute; le bon mot clef &agrave;
 	   leur article (par exemple) pour selection sa mise en page.
 	[en]
-	  This plugin provide the selection of template using keywords.
+	  This plugin provides selection of template using keywords.
 
 	  You can create rules on the configuration page to link:
 -* an element type,
@@ -42,6 +44,15 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	  
 	  Then, the authors only have to associate a keyword to their article (for example) to 
 	  set its layout.
+	[it]
+	  Questo plugin permette di scegliere un modello mediante una parola chiave.
+
+	La pagina di configurazione permette di creare regole per legare:
+-* un tipo di elemento,
+-* un gruppo di parole chiave per scegliere il modello,
+-* un sfondo,
+
+	Cos&igrave;, gli autori devono solamente scegliere la parola chiave giusta per cambiare il modello de la pagina che visualizza l'elemento (l'articolo per esempio)
      </multi>
 	</description>
 	<fonctions> <!-- fichier charge a chaque recalul de page -->

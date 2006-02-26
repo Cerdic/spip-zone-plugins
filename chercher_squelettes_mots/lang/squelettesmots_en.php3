@@ -10,9 +10,7 @@ A rule specify:
 -# the keyword group that will contain keywords specifying the template to use,
 -# the type of element that this template displays.
 
-The templates will then be named:
--* {{fond==keyword.html}} for a template specific to an element,
--* {{fond-keyword.html}} for a template of all elements in that section.
+The templates will then be named {{fond-keyword.html}}. The plugin search first for a template that match a keyword associated to the element. If not found (and if applicable), the plugin then search for a template matching a keyword associated to one of the subsuming section.
 
 The author then only have to add a keyword from the right group to select the template used.',
 									   'reglei' => 'rule @id@',
