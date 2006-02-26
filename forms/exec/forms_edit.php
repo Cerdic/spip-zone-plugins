@@ -146,7 +146,7 @@ function code_nouveau_champ($schema,$type){
 	return $code;
 }
 
-function forms_edit(){
+function exec_forms_edit(){
 	global $id_form;
 	global $new;
 	global $supp_form;

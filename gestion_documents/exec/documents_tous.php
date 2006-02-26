@@ -20,7 +20,7 @@ function generer_query_string($conteneur,$id_type,$nb_aff,$notitle){
   return substr($query,0,strlen($query)?(strlen($query)-1):0);
 }	
 
-function documents_tous(){
+function exec_documents_tous(){
 	global $updatetable;
 	global $connect_statut;
 	global $modif;

@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_once(dirname(__FILE__).'/../inc_acces_restreint_base.php');
 include_once(dirname(__FILE__).'/../inc_acces_restreint.php');
 
-function acces_restreint(){
+function exec_acces_restreint(){
 	global $connect_statut;
 	global $connect_toutes_rubriques;
 	global $couleur_claire;

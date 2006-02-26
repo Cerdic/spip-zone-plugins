@@ -22,7 +22,7 @@ include_ecrire ("inc_index");
 include_ecrire ("inc_logos");
 include_ecrire ("inc_presentation");
 
-function index_tous_dist()
+function exec_index_tous_dist()
 {
 	global $connect_statut;
 	global $INDEX_elements_objet;

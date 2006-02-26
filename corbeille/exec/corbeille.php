@@ -2,7 +2,7 @@
 
 include('inc_corbeille.php');
 
-function corbeille(){
+function exec_corbeille(){
   global $type_doc;
   global $type_act;
   global $connect_statut;

@@ -21,7 +21,7 @@ function generer_query_string($conteneur,$id_type,$nb_aff,$filtre){
   return $query;
 }	
 
-function portfolio(){
+function exec_portfolio(){
 	global $updatetable;
 	global $connect_statut;
 	//global $modif;

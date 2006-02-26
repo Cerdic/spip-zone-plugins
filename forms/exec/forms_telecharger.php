@@ -52,7 +52,7 @@ function acces_interdit() {
 //
 // Telechargement d'un fichier particulier
 //
-function forms_telecharger(){
+function exec_forms_telecharger(){
 	global $id_reponse;
 	global $id_form;
 

@@ -12,7 +12,7 @@
 
 include_once (dirname(__FILE__).'/../inc_forms.php');
 
-function forms_reponses(){
+function exec_forms_reponses(){
 	global $id_form;
 	global $supp_reponse;
   include_ecrire("inc_presentation");

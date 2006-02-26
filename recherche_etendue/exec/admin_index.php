@@ -26,7 +26,7 @@ function jauge($couleur,$pixels) {
 	  echo http_img_pack("jauge-$couleur.gif", $couleur, "height='10' width='$pixels'");
 }
 
-function admin_index_dist()
+function exec_admin_index_dist()
 {
   global $connect_statut, $connect_toutes_rubriques, $couleur_claire, $forcer_indexation, $forcer_reindexation, $mise_a_jour, $purger,$INDEX_elements_objet;
 

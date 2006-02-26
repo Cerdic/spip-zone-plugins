@@ -18,7 +18,7 @@ include_ecrire("inc_logos");
 include_ecrire("inc_auteur_voir");
 
 // surcharge de la fonction d'edition
-function auteurs_edit()
+function exec_auteurs_edit()
 {
 	global $connect_id_auteur, $id_auteur;
 	$id_auteur = intval($id_auteur);
