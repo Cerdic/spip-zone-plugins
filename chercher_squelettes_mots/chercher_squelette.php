@@ -20,7 +20,7 @@ function chercher_squelette($fond, $id_rubrique, $lang) {
   if (is_array($fonds) && (list($id_groupe,$table,$id_table) = $fonds[$fond])) {
 	$trouve = false;
 	if (($id = $contexte[$id_table]) && ($n = sql_mot_squelette($id,$id_groupe,$table,$id_table))) {
-	  if ($squel = find_in_path("$fond==$n.$ext")) {
+	  if ($squel = find_in_path("$fond-$n.$ext")) {
 		$squelette = substr($squel, 0, - strlen(".$ext"));
 		$trouve = true;
 	  }
