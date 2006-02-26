@@ -204,11 +204,13 @@ function mots_partout() {
   $table_auth = $choses_possibles[$nom_chose]['table_auth'];
   $tables_limite = $choses_possibles[$nom_chose]['tables_limite'];
 
-  list($mots_voir, $mots_cacher, $mots_ajouter, $mots_enlever) = splitArrayIds($_REQUEST['id_mots']);
-  $choses = secureIntArray($_REQUEST['id_choses']);
+
+  list($mots_voir, $mots_cacher, $mots_ajouter, $mots_enlever) = splitArrayIds($_REQUEST['mots']);
+  $choses = secureIntArray($_REQUEST['choses']);
+
   $limit =  addslashes($_POST['limit']);
   if($limit == '') $limit = 'rien';
-  $id_limit =  intval($_POST['id_limit']);
+  $id_limit =  intval($_POST['identifiant_limit']);
   if($id_limit < 1) $id_limit = 0;
   $nb_aff = intval($_POST['nb_aff']);
   if($nb_aff < 1) $nb_aff = 20;
@@ -381,7 +383,7 @@ function mots_partout() {
   }
   
   echo '</select></td>';
-  echo "<td><input type='text' size='3' name='id_limit' value='$id_limit'></td></tr>";
+  echo "<td><input type='text' size='3' name='identifiant_limit' value='$id_limit'></td></tr>";
   echo '<tr class=\'tr_liste\'>';
   echo "
 	<td>
@@ -400,9 +402,9 @@ function mots_partout() {
 					 echo "	</table></div>";
   fin_cadre_enfonce();
 
-  $redirect = generer_url_ecrire('mots_partout',"limit=$limit&id_limite=$id_limit&nb_aff=$nb_aff");
+  $redirect = generer_url_ecrire('mots_partout',"limit=$limit&identifiant_limit=$id_limit&nb_aff=$nb_aff");
 
-  echo "</form><form method='post' action='".generer_url_action('mots_partout','redirect=$redirect')."'>";
+  echo "</form><form method='post' action='".generer_url_action('mots_partout',"redirect=$redirect")."'>";
   
   echo '<input type="hidden" name="nom_chose" value="'.$nom_chose.'">'; 
   

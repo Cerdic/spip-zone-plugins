@@ -156,12 +156,12 @@ function mots_partout() {
   
   if(count($choses)) {
 	foreach($choses as $c) 
-	  $redirect = parametre_url($redirect,'choses[]',$c);
+	  $redirect .= "&choses[]=$c";
   }
 
   if(count($mots)) {
-	foreach($mots as $m) 
-	  $redirect = parametre_url($redirect,'mots[]',$m);
+	foreach($mots as $id => $m) 
+	  $redirect.= "&mots[$id]=$m";
   }
 
   if(!$_REQUEST['ajax']) 	redirige_par_entete(urldecode($redirect));
