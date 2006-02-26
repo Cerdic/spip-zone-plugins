@@ -34,9 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'valider'=>"Valider",
 'avis_message_confirmation'=>"Un message de confirmation est envoy&eacute; &agrave; @mail@",
 'voir_resultats'=>"Voir les r&eacute;sultats",
-'nombre_reponses'=>"@nombre@ r&eacute;ponses",
-
-
+'nombre_reponses'=>"@nombre@ r&eacute;ponses"
 );
 
 
