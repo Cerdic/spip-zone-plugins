@@ -10,7 +10,7 @@
  *
  */
 
-define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 
 	function Forms_ajouterBoutons($boutons_admin) {
 		// si on est admin
@@ -24,7 +24,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 			);
 
 		  // on voit le bouton dans la barre "forum_admin"
-			$boutons_admin['forum_admin']->sousmenu["forms_reponses"]= new Bouton(
+			$boutons_admin['forum']->sousmenu["forms_reponses"]= new Bouton(
 			"../"._DIR_PLUGIN_FORMS."/form-24.png",  // icone
 			_L("Suivi des Reponses") //titre
 			);
