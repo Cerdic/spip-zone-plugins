@@ -62,6 +62,10 @@ function bloc_edition_champ($t, $link) {
 		echo "<br />[<a href='".$ajout_link->getUrl('champ_visible')."'>".
 			_L("Ajouter un choix")."</a>]";*/
 		echo "</div>";
+		if ($type=='select')
+			echo "<br /><input type='submit' name='switch_select_multi' value=\""._L("Changer en choix multiple")."\" class='fondo verdana2'>";
+		if ($type=='multiple')
+			echo "<br /><input type='submit' name='switch_select_multi' value=\""._L("Changer en choix unique")."\" class='fondo verdana2'>";
 		echo "<br />\n";
 	}
 	if ($type == 'mot') {
@@ -124,6 +128,22 @@ function modif_edition_champ($t) {
 	}
 	
 	return $t;
+}
+
+function code_nouveau_champ($schema,$type){
+	$n = 1;
+	$code = $type.'_'.strval($n);
+	foreach ($schema as $t) {
+		list($letype, $lenumero) = split('_', $t['code'] );
+		if ($type == $letype)
+		{
+			$lenumero = intval($lenumero);
+			if ($lenumero>= $n)
+				$n=$lenumero+1;
+			$code = $type.'_'.strval($n);
+		}
+	}
+	return $code;
 }
 
 function forms_edit(){
@@ -240,20 +260,9 @@ function forms_edit(){
 
 		// Ajout d'un champ
 		if (($type = $ajout_champ) && Forms_types_champs_autorises($type)) {
-			$n = 1;
-			$code = $type.'_'.strval($n);
-			foreach ($schema as $t) {
-				list($letype, $lenumero) = split('_', $t['code'] );
-				if ($type == $letype)
-				{
-					$lenumero = intval($lenumero);
-					if ($lenumero>= $n)
-						$n=$lenumero+1;
-					$code = $type.'_'.strval($n);
-				}
-			}
+			$code = code_nouveau_champ($schema,$type);
 			$nom = _L("Nouveau champ");
-			$schema[] = array('code' => $code, 'nom' => $nom, 'type' => $type, type_ext => array());
+			$schema[] = array('code' => $code, 'nom' => $nom, 'type' => $type, 'type_ext' => array());
 			$champ_visible = $nouveau_champ = $code;
 			$modif_schema = true;
 		}
@@ -264,6 +273,19 @@ function forms_edit(){
 				if ($code == $t['code']) break;
 			}
 			if (isset($index)) {
+				// switch select to multi ou inversement
+				if (isset($_POST['switch_select_multi'])){
+					if ($t['type']=='select') $newtype = 'multiple';
+					if ($t['type']=='multiple') $newtype = 'select';
+					
+					$newcode = code_nouveau_champ($schema,$newtype);
+					$t['type'] = $newtype;
+					$new_type_ext = array();
+					foreach($t['type_ext'] as $key=>$type_ext)
+						$new_type_ext[str_replace($t['code'],$newcode,$key)] = $type_ext;
+					$t['code'] = $newcode;
+					$t['type_ext'] = $new_type_ext;
+				}
 				$t['nom'] = $nom_champ;
 				$t['obligatoire'] = $champ_obligatoire;
 				$t = modif_edition_champ($t);

@@ -23,8 +23,7 @@ if (version_compare(phpversion(), '5.0') < 0){
   }
 }
 
-
-define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 
 	//
 	// Les deux fonctions "creer_repertoire" et "deplacer_fichier_upload" sont recopiees ici 

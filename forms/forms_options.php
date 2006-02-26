@@ -11,7 +11,7 @@
  *
  */
 
-define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 include_once('inc_forms_base.php');
 
 // Code a rapatrier dans inc-public et inc_forms
