@@ -10,7 +10,7 @@
  *
  */
 
-include_once (dirname(__FILE__).'/inc_forms.php');
+include_once (dirname(__FILE__).'/../inc_forms.php');
 
 
 function bloc_edition_champ($t, $link) {
@@ -148,7 +148,7 @@ function forms_edit(){
 	global $supp_champ;
 
   include_ecrire("inc_presentation");
-	include_ecrire("inc_config.php");
+	include_ecrire("inc_config");
 
 	$id_form = intval($id_form);
 	if ($id_form) {

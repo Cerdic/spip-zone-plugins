@@ -11,8 +11,8 @@
  */
 
 
-include_once (dirname(__FILE__).'/inc_forms.php');
-include_ecrire("inc_charsets.php");
+include_once (dirname(__FILE__).'/../inc_forms.php');
+include_ecrire("inc_charsets");
 include_ecrire("inc_presentation");
 
 function csv_champ($champ) {
@@ -222,8 +222,8 @@ function forms_telecharger(){
 	//
 	// S'il y a des fichiers joints, creer un ZIP
 	//
-	include_ecrire("pclzip.lib.php");
-	include_ecrire("inc_session.php");
+	include_ecrire("pclzip.lib");
+	include_ecrire("inc_session");
 
 	$zip = "data/form".$id_form."_".rand().".zip";
 	$csv = "data/$filename.csv";
