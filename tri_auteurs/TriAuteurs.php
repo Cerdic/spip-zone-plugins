@@ -29,7 +29,7 @@ function TriAuteurs_ajouter_boite_gauche($arguments) {
 }
 
 function TriAuteurs_boite_tri_auteurs($id_article,$id_rubrique) {
-  global $spip_lang_left;
+  global $spip_lang_left,$connect_id_auteur;
   
   $from = array('spip_auteurs_articles as lien','spip_auteurs as auteurs');
   $select = array('lien.rang','lien.id_auteur','auteurs.nom');
@@ -46,9 +46,10 @@ function TriAuteurs_boite_tri_auteurs($id_article,$id_rubrique) {
 	$to_ret .= "function TriAuteurs_initialiseSort() {
 	Sortable.create('liste_tri_auteurs',{onUpdate:updateTriAuteur});
   }";
+	$hash = calculer_action_auteur("tri_auteurs $id_article");
 	$to_ret .= "function updateTriAuteur() {
            var url = '".generer_url_action('tri_auteurs')."';
-           var pars = Sortable.serialize('liste_tri_auteurs',{name:'o'})+'&id_article=$id_article';
+           var pars = Sortable.serialize('liste_tri_auteurs',{name:'o'})+'&id_article=$id_article&id_auteur=$connect_id_auteur&hash=$hash';
            new Ajax.Request(url,{method:'post',parameters:pars});
   }";
 	$to_ret .= "Event.observe(window, 'load', TriAuteurs_initialiseSort, false);";
