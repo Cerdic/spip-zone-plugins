@@ -1,0 +1,171 @@
+<?php
+
+//	  action/mots_partout.php
+//    Fichier créé pour SPIP avec un bout de code emprunté à celui ci.
+//    Distribué sans garantie sous licence GPL./
+//    Copyright (C) 2006  Pierre ANDREWS
+//
+//    This program is free software; you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation; either version 2 of the License, or any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program; if not, write to the Free Software
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS . 'mots_partout'));
+
+//force a un tableau de int
+function secureIntArray($array) {
+  $to_return = Array();
+  if(is_array($array)) {
+	foreach($array as $id) {
+	  $to_return[] = intval($id);
+	}
+  } 
+  return $to_return;
+}
+
+// transfert la variable POST d'un tableau (19 => 'avec', 20=>'voir') en 4 tableaux avec=(19) voir=(20)
+function splitArrayIds($array) {
+  $voir = Array();
+  $cacher = Array();
+  $ajouter = Array();
+  $enlever = Array();
+  if(is_array($array)) {
+    foreach($array as $id_mot => $action) {
+      $id_mot = intval($id_mot);
+      if($id_mot > 0) {
+        switch(addslashes($action)) {
+		  case 'avec': 
+			$ajouter[] = $id_mot;
+		  case 'voir':
+			$voir[] = $id_mot;
+			break;
+		  case 'sans':
+			$enlever[] = $id_mot;
+			break;
+		  case 'cacher':
+			$cacher[] = $id_mot;
+            break; 
+
+        }
+      }
+    }
+  }
+  return array($voir, $cacher, $ajouter, $enlever);
+}
+
+
+function mots_partout() {
+  global $nom_chose, $redirect;
+  global $choses, $mots;
+  global $strict, $switch;
+  
+  /*
+  global $hash, $id_auteur;
+  include_ecrire("inc_session");
+  if (!verifier_action_auteur("mots_partout $nom_chose", $hash, $id_auteur)) {
+	include_ecrire('inc_minipres');
+	minipres(_T('info_acces_interdit'));
+  }
+  */   
+  
+  include(_DIR_PLUGIN_MOTS_PARTOUT."/mots_partout_choses.php");
+  /***********************************************************************/
+  /* PREFIXE*/
+  /***********************************************************************/
+  $table_pref = 'spip';
+  if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
+  
+  /***********************************************************************/
+  /* récuperation de la chose sur laquelle on travaille*/
+  /***********************************************************************/
+
+  $nom_chose = addslashes($nom_chose);
+  if(!isset($choses_possibles[$nom_chose])) {
+	list($nom_chose,) = each($choses_possibles);
+	reset($choses_possibles);
+  }
+  $id_chose = $choses_possibles[$nom_chose]['id_chose'];
+
+  /***********************************************************************/
+  /* action */
+  /***********************************************************************/
+  list($mots_voir, $mots_cacher, $mots_ajouter, $mots_enlever) = splitArrayIds($mots);
+  $choses = secureIntArray($choses);
+  $switch = addslashes($switch);
+  if($switch == '') $switch = 'voir';
+  $strict = intval($strict);
+
+  if(count($mots_ajouter) && count($choses)) {
+	if(count($mots_ajouter)) {
+	  foreach($mots_ajouter as $m) {	
+		$from = array('spip_mots');
+		$select = array('id_groupe');
+		$where = array("id_mot = $m");
+		$res = spip_abstract_select($select,$from,$where);
+		$unseul = false;
+		$id_groupe = 0;
+		$titre_groupe = '';
+		if($row = spip_abstract_fetch($res)) {
+		  spip_abstract_free($res);
+		  $from = array('spip_groupes_mots');
+		  $select = array('unseul','titre');
+		  $id_groupe = $row['id_groupe'];
+		  $where = array("id_groupe = $id_groupe");
+		  $res = spip_abstract_select($select,$from,$where);
+		  if($row = spip_abstract_fetch($res)) {
+			$unseul = ($row['unseul'] == 'oui');
+			$titre_groupe = $row['titre'];
+		  }
+		}
+		spip_abstract_free($res);
+		foreach($choses as $d) {
+		  if($unseul) {
+			$from = array("spip_mots_$nom_chose",'spip_mots');
+			$select = array("count('id_mot') as cnt");
+			$where = array("id_groupe = $id_groupe","spip_mots_$nom_chose.id_mot = spip_mots.id_mot","$id_chose = $d");
+			$group = $id_chose;
+			$res = spip_abstract_select($select,$from,$where,$group);
+			if($row = spip_abstract_fetch($res)) {	
+			  if($row['cnt'] > 0) {
+				$warnings[] = array(_T('motspartout:dejamotgroupe',array('groupe' => $titre_groupe, 'chose' => $d)));
+				continue; 
+			  }
+			}
+			spip_abstract_free($res);
+		  }
+		  spip_abstract_insert("spip_mots_$nom_chose","(id_mot,$id_chose)","($m,$d)");
+		}
+	  }
+	}
+  }
+  if (count($mots_enlever) && count($choses)) {
+	foreach($mots_enlever as $m) {
+	  foreach($choses as $d) {
+		spip_query("DELETE FROM $table_pref_mots_$nom_chose WHERE id_mot=$m AND $id_chose=$d");
+	  }
+	}
+  }
+  
+  if(count($choses)) {
+	foreach($choses as $c) 
+	  $redirect = parametre_url($redirect,'choses[]',$c);
+  }
+
+  if(count($mots)) {
+	foreach($mots as $m) 
+	  $redirect = parametre_url($redirect,'mots[]',$m);
+  }
+
+  if(!$_REQUEST['ajax']) 	redirige_par_entete(urldecode($redirect));
+
+}
+
+?>

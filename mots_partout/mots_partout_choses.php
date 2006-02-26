@@ -60,7 +60,7 @@ function afficher_liste_articles($choses,$nb_aff=20) {
 	  $descriptif = $row['descriptif'];
 	  if ($descriptif) $descriptif = ' title="'.attribut_html(typo($descriptif)).'"';
 	  
-	  $vals[] = "<input type='checkbox' name='id_choses[]' value='$id_article' id='id_chose$i'/>";
+	  $vals[] = "<input type='checkbox' name='choses[]' value='$id_article' id='id_chose$i'/>";
 	  
 	  // Le titre (et la langue)
 	  $s = "<div>";
@@ -166,7 +166,7 @@ function afficher_horizontal_document_assoc($document,$with_check, $case) {
   echo "<td width='33%' style='text-align: $spip_lang_left; $style' valign='top'>";
   
   echo "<label for='doc$case'>"._T('motspartout:voir').'</label>';
-  echo "<input type='checkbox' name='id_choses[]' id='doc$case' value='$id_document' />";
+  echo "<input type='checkbox' name='choses[]' id='doc$case' value='$id_document' />";
   
   // Signaler les documents distants par une icone de trombone
   if ($document['distant'] == 'oui') {
@@ -308,7 +308,7 @@ function afficher_liste_messages($choses,$nb_aff=20) {
 	  $date = $row['date_heure'];
 	  $statut = $row['statut'];
 	  
-	  $vals[] = "<input type='checkbox' name='id_choses[]' value='$id_message' id='id_chose$i'/>";
+	  $vals[] = "<input type='checkbox' name='choses[]' value='$id_message' id='id_chose$i'/>";
 	  
 	  // Le titre (et la langue)
 	  $s = "<div>";
@@ -405,7 +405,7 @@ function afficher_liste_auteurs($choses,$nb_aff=20) {
 	  $extra = $row['extra'];
 	  $statut = $row['statut'];
 	  
-	  $vals[] = "<input type='checkbox' name='id_choses[]' value='$id_auteur' id='id_chose$i'/>";
+	  $vals[] = "<input type='checkbox' name='choses[]' value='$id_auteur' id='id_chose$i'/>";
 	  
 	  // Le titre (et la langue)
 	  $s = "<div>";
@@ -509,7 +509,7 @@ function md_afficher_groupe_mots($id_groupe,$nb_aff=20) {
 		$couleur = $ifond ? "#FFFFFF" : $couleur_claire;
 		$ifond = $ifond ^ 1;
 
-		$vals[] = "<input type='checkbox' name='id_choses[]' value='$id_auteur' id='id_chose$i'/>";
+		$vals[] = "<input type='checkbox' name='choses[]' value='$id_auteur' id='id_chose$i'/>";
 		
 		if ($connect_statut == "0minirezo" OR $occurrences['articles'][$id_mot] > 0)
 		  $s = "<a href='" .

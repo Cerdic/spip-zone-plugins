@@ -1,10 +1,10 @@
 <?php 
 
 
-//	  exec_mots_partout.php
+//	  exec/mots_partout.php
 //    Fichier créé pour SPIP avec un bout de code emprunté à celui ci.
 //    Distribué sans garantie sous licence GPL./
-//    Copyright (C) 2005  Pierre ANDREWS
+//    Copyright (C) 2006  Pierre ANDREWS
 //
 //    This program is free software; you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -30,12 +30,6 @@ define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS . 'mots_partout'));
 function verifier_admin() {
   global $connect_statut, $connect_toutes_rubriques;
   return (($connect_statut == '0minirezo') AND $connect_toutes_rubriques);
-}
-
-function verifier_admin_restreint($id_rubrique) {
-  global $connect_id_auteur;
-  global $connect_statut, $connect_toutes_rubriques;
-
 }
 
 function verifier_auteur($table, $id_objet, $id) {
@@ -174,7 +168,7 @@ function afficher_liste_defaut($choses) {
   $i = 0;
   foreach($choses as $id_chose) {
 	$i++;
-	echo "<td><tr><input type='checkbox' name='id_choses[]' value='$id_chose' id='id_chose$i'/></tr><tr> <label for='id_chose$i'>$id_chose</label></tr></td>";
+	echo "<td><tr><input type='checkbox' name='choses[]' value='$id_chose' id='id_chose$i'/></tr><tr> <label for='id_chose$i'>$id_chose</label></tr></td>";
   }
   echo '</table>';
 }
@@ -210,71 +204,7 @@ function mots_partout() {
   $table_auth = $choses_possibles[$nom_chose]['table_auth'];
   $tables_limite = $choses_possibles[$nom_chose]['tables_limite'];
 
-  /***********************************************************************/
-  /* action */
-  /***********************************************************************/
-  list($mots_voir, $mots_cacher, $mots_ajouter, $mots_enlever) = splitArrayIds($_REQUEST['id_mots']);
-  $choses = secureIntArray($_REQUEST['id_choses']);
-  $limit =  addslashes($_POST['limit']);
-  if($limit == '') $limit = 'rien';
-  $id_limit =  intval($_POST['id_limit']);
-  if($id_limit < 1) $id_limit = 0;
-  $nb_aff = intval($_POST['nb_aff']);
-  if($nb_aff < 1) $nb_aff = 20;
-  $switch = addslashes($_POST['switch']);
-  if($switch == '') $switch = 'voir';
-  $strict = intval($_POST['strict']);
-
-  if(count($mots_ajouter) && count($choses)) {
-	if(count($mots_ajouter)) {
-	  foreach($mots_ajouter as $m) {	
-		$from = array('spip_mots');
-		$select = array('id_groupe');
-		$where = array("id_mot = $m");
-		$res = spip_abstract_select($select,$from,$where);
-		$unseul = false;
-		$id_groupe = 0;
-		$titre_groupe = '';
-		if($row = spip_abstract_fetch($res)) {
-		  spip_abstract_free($res);
-		  $from = array('spip_groupes_mots');
-		  $select = array('unseul','titre');
-		  $id_groupe = $row['id_groupe'];
-		  $where = array("id_groupe = $id_groupe");
-		  $res = spip_abstract_select($select,$from,$where);
-		  if($row = spip_abstract_fetch($res)) {
-			$unseul = ($row['unseul'] == 'oui');
-			$titre_groupe = $row['titre'];
-		  }
-		}
-		spip_abstract_free($res);
-		foreach($choses as $d) {
-		  if($unseul) {
-			$from = array("spip_mots_$nom_chose",'spip_mots');
-			$select = array("count('id_mot') as cnt");
-			$where = array("id_groupe = $id_groupe","spip_mots_$nom_chose.id_mot = spip_mots.id_mot","$id_chose = $d");
-			$group = $id_chose;
-			$res = spip_abstract_select($select,$from,$where,$group);
-			if($row = spip_abstract_fetch($res)) {	
-			  if($row['cnt'] > 0) {
-				$warnings[] = array(_T('motspartout:dejamotgroupe',array('groupe' => $titre_groupe, 'chose' => $d)));
-				continue; 
-			  }
-			}
-			spip_abstract_free($res);
-		  }
-		  spip_abstract_insert("spip_mots_$nom_chose","(id_mot,$id_chose)","($m,$d)");
-		}
-	  }
-	}
-  }
-  if (count($mots_enlever) && count($choses)) {
-	foreach($mots_enlever as $m) {
-	  foreach($choses as $d) {
-		spip_query("DELETE FROM $table_pref_mots_$nom_chose WHERE id_mot=$m AND $id_chose=$d");
-	  }
-	}
-  }
+  
   /**********************************************************************/
   /* recherche des choses.*/
   /***********************************************************************/
@@ -457,13 +387,12 @@ function mots_partout() {
 
 					 echo "	</table></div>";
   fin_cadre_enfonce();
-  echo "</form><form method='post' action='".generer_url_ecrire('mots_partout','')."'>
-															 <input type='hidden' name='limit' value='$limit'>
-															 <input type='hidden' name='id_limit' value='$id_limit'>
-															 ";
+
+  $redirect = generer_url_ecrire('mots_partout',"limit=$limit&id_limite=$id_limit&nb_aff=$nb_aff");
+
+  echo "</form><form method='post' action='".generer_url_action('mots_partout','redirect=$redirect')."'>";
   
-  echo '<input type="hidden" name="nom_chose" value="'.$nom_chose.'">';  
-  echo '<input type="hidden" name="nb_aff" value="'.$nb_aff.'">';  
+  echo '<input type="hidden" name="nom_chose" value="'.$nom_chose.'">'; 
   
   // les actions et limitations possibles.
   if(count($choses)) {
@@ -533,13 +462,13 @@ _T('motspartout:stricte').
 		  
 		  $vals["<label for='id_mot".$id_mot."_vide'>"._T('motspartout:action')."?</label><input type='radio' id='id_mot".$id_mot."_vide' checked='true'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
 		  
-		  $vals["<label for='id_mot".$id_mot."_voir'>"._T('motspartout:voir')."</label><input type='radio' name='id_mots[$id_mot]' id='id_mot".$id_mot."_voir' value='voir'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
+		  $vals["<label for='id_mot".$id_mot."_voir'>"._T('motspartout:voir')."</label><input type='radio' name='mots[$id_mot]' id='id_mot".$id_mot."_voir' value='voir'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
 		  
-		  $vals["<label for='id_mot".$id_mot."_cacher'>"._T('motspartout:cacher')."</label><input type='radio' name='id_mots[$id_mot]' id='id_mot".$id_mot."_cacher' value='cacher'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
+		  $vals["<label for='id_mot".$id_mot."_cacher'>"._T('motspartout:cacher')."</label><input type='radio' name='mots[$id_mot]' id='id_mot".$id_mot."_cacher' value='cacher'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
 		  
-		  $vals["<label for='id_mot".$id_mot."_avec'>"._T('motspartout:ajouter')."</label><input type='radio' name='id_mots[$id_mot]' id='id_mot".$id_mot."_avec' value='avec'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
+		  $vals["<label for='id_mot".$id_mot."_avec'>"._T('motspartout:ajouter')."</label><input type='radio' name='mots[$id_mot]' id='id_mot".$id_mot."_avec' value='avec'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
 		  
-		  $vals["<label for='id_mot".$id_mot."_sans'>"._T('motspartout:enlever')."</label><input type='radio' name='id_mots[$id_mot]' id='id_mot".$id_mot."_sans' value='sans'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
+		  $vals["<label for='id_mot".$id_mot."_sans'>"._T('motspartout:enlever')."</label><input type='radio' name='mots[$id_mot]' id='id_mot".$id_mot."_sans' value='sans'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
 		  $table[] = $vals;
 		}
 		
@@ -600,8 +529,8 @@ _T('motspartout:stricte').
 	  afficher_liste_defaut($choses,$nb_aff);
 	}	
 	echo "<!--
-<input type=\"radio\" name=\"selectall\" id=\"all\" onclick=\"selectAll(this.form, 'id_choses[]', 0);\"><label for=\"all\">Select All</label>
-<input  type=\"radio\" name=\"selectall\" id=\"inverse\"  onclick=\"selectAll(this.form, 'id_choses[]', 1);\"><label for=\"inverse\">Inverse All</label>
+<input type=\"radio\" name=\"selectall\" id=\"all\" onclick=\"selectAll(this.form, 'choses[]', 0);\"><label for=\"all\">Select All</label>
+<input  type=\"radio\" name=\"selectall\" id=\"inverse\"  onclick=\"selectAll(this.form, 'choses[]', 1);\"><label for=\"inverse\">Inverse All</label>
 -->";
   } else {
 	echo _T('motspartout:pas_de_documents').'.';
