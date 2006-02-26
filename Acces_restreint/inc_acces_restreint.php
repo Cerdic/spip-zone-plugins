@@ -3,6 +3,17 @@ include_ecrire('inc_db_mysql');
 include_ecrire('inc_abstract_sql');
 include_ecrire('inc_rubriques');
 
+$GLOBALS['surcharge']['exec/auteurs_edit']=dirname(__FILE__).'/exec/auteurs_edit.php';
+
+// ajouter un marqueur de cache pour permettre de differencier le cache en fonction des zones autorisees
+// potentiellement une version de cache differente par combinaison de zones habilitees + le cache de base sans autorisation
+if ($auteur_session['id_auteur']){
+	$zones = AccesRestreint_liste_zones_appartenance_auteur(intval($auteur_session['id_auteur']));
+	$zones = join("-",$zones);
+	global $contexte_inclus;
+	$contexte_inclus['zones_acces_autorises']=$zones;
+}
+
 	/* public static */
 	function AccesRestreint_ajouterBoutons($boutons_admin) {
 		// si on est admin
@@ -471,7 +482,7 @@ include_ecrire('inc_rubriques');
 	function AccesRestreint_liste_zones_appartenance_auteur($id_auteur){
 	  $liste_zones=array();
 	  $id_auteur = intval($id_auteur); // securite
-  	$s = spip_query("SELECT id_zone FROM spip_zones_auteurs WHERE id_auteur=$id_auteur");
+  	$s = spip_query("SELECT id_zone FROM spip_zones_auteurs WHERE id_auteur=$id_auteur ORDER BY id_zone");
   	while ($row = spip_fetch_array($s)){
 			$liste_zones[]=$row['id_zone'];
 		}
