@@ -13,7 +13,7 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	  Pierre Andrews (Mortimer), d'apr&eagrave;s un code propos&eacute; par D&eacute;esse A.
+	  Pierre Andrews (Mortimer), d'apr&egrave;s un code propos&eacute; par D&eacute;esse A.
 	</auteur>
 	<version>
 	  0.1
@@ -27,7 +27,7 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	[fr]
 	  Permet de choisir le squelette en fonction d'un mot clef.
 	  
-      La page de configuration permet de cr&eacute;er des r&egave;gles liant:
+      La page de configuration permet de cr&eacute;er des r&egrave;gles liant:
 -* un type d'&eacute;l&eacute;ment, 
 -* un groupe de mot clef sp&eacute;cifiant le squelette 
 -* un fond.
