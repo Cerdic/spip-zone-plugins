@@ -14,8 +14,9 @@
 	<description>
 	&nbsp;
 	  <multi>
-	  [fr]Balise pour afficher les informations [?EXIF] d'un document.
-	  [en]New SPIP tag to display [?EXIF] information from your documents.
+	  [fr]Balise pour afficher les informations [?EXIF] d'une image.
+	  [en]New SPIP tag to display [?EXIF] information from your image.
+	  [it]Un nuovo segnaposto SPIP per visualizzare le informazioni delle immagini.
 	  </multi>
 	&nbsp;
 	</description>
