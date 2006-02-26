@@ -10,7 +10,7 @@
  *
  */
 
-define('_DIR_PLUGIN_GESTION_DOCUMENTS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
+define('_DIR_PLUGIN_GESTION_DOCUMENTS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__).'/../'))))));
 
 function generer_query_string($conteneur,$id_type,$nb_aff,$filtre){
   $query = ($conteneur?"conteneur=$conteneur&":"")
