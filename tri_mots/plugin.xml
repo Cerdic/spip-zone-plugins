@@ -1,6 +1,11 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	  Tri Mots
+	  &nbsp;
+	  <multi>
+	  [fr]Tri par mots clefs
+	  [en]Sorting according to keywords
+	  [it]Ordine in funzione delle parole chiave
+	  </multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	  Pierre Andrews (Mortimer)
@@ -12,7 +17,27 @@
 	 experimental 
 	</etat>
 	<description>
-	  pour trier les articles en fonction d'un mot.
+	  &nbsp;
+	  <multi>
+		[fr]
+		Pour trier les articles en fonction d'un mot. 
+
+		Plus besoin d'utiliser le num&eacute;ros dans le titre, on peut associer un mots &agrave; plusieurs &eacute;l&eacute;ments. On peut alors ordonner tous les &eacute;l&eacute;ments associ&eacute;s au m&ecirc;me mot par simple glisser-d&eacute;poser.
+
+		Comme le tri est local au mot clef, on peut donner plusieurs ordres diff&eacute;rents au m&ecirc;me &eacute;l&eacute;ment.
+		[en]
+		This plugin provides a simple sorting by keywords.
+
+		No more need for numbers in the title. By associatint a keyword to multiple elements, you can then sort them with simple drag and drop operations.
+
+		As the sorting is local to a keyword, you can have different orders for the same element.		
+		[it]
+		Questo plugin permette di ordinare semplicemente mediante una parola chiave.
+
+		Non &egrave; necessario utilizzare numeri nel titolo. Adesso, associate una parola chiave a differenti elementi e potete ordinare quelli mediante un semplice trascinamento.
+
+		Poich&eacute; l'ordine &egrave; interno a una parola chiave, potete dare un ordine diverso allo stesso elemento.
+		</multi>
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
