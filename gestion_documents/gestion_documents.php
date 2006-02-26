@@ -9,7 +9,16 @@
  * © 2006 - Distribue sous licence GPL
  *
  */
-define('_DIR_PLUGIN_GESTION_DOCUMENTS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+
+function pluginpath($filepath){
+   $realpath = str_replace("\\","/",realpath($filepath));
+   $plugpath = str_replace("\\","/",realpath(_DIR_PLUGINS));
+   $htmlpath = str_replace($plugpath,_DIR_PLUGINS,$realpath);
+   $htmlpath = str_replace("//","/",$htmlpath);
+   return $htmlpath;
+}
+
+define('_DIR_PLUGIN_GESTION_DOCUMENTS',pluginpath(dirname(__FILE__)));
 
 
 	function GestionDocuments_ajouterBoutons($boutons_admin) {

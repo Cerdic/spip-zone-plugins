@@ -207,8 +207,8 @@ function portfolio(){
 		$t_debut = floor($pos/$nb_aff)*$nb_aff;
 	}
 
-	$url = generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,$nb_aff,$filtre)."::deb::");
-	$tranches = afficher_tranches_requete($requete, 3,'debut',false,$nb_aff,$url);
+	//$url = generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,$nb_aff,$filtre)."::deb::");
+	$tranches = afficher_tranches_requete($requete, 3,'debut',false,$nb_aff);
 
 	$table_need_update = false;
 	if ($tranches) {
@@ -238,6 +238,7 @@ function portfolio(){
 			$fichier = $doc['fichier'];
 			$url_fichier = generer_url_document($doc['id_document']);
 			$doc['url'] = $url_fichier;
+			$doc['script'] = 'portfolio'; # script de retour formulaires
 			$size = @getimagesize($url_fichier);
 			$file_size = @filesize($url_fichier);
 
@@ -463,8 +464,7 @@ function portfolio(){
 				"article",	# article ou rubrique ?
 				'portfolio',	# album d'images ou de documents ?
 				true,	# a-t-on le droit de modifier ?
-				$couleur_claire,		# couleur des cases du tableau
-				'portfolio' # script de retour formulaires
+				$couleur_claire		# couleur des cases du tableau
 			);
 
 			/*echo "<form action='".generer_url_ecrire("portfolio",$args)."' method='post'>";
