@@ -1,6 +1,10 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	  Coloration Code
+	  &nbsp;
+	  <multi>
+		[fr]Coloration Code
+		[en]Code higlighting
+		[it]Colorazione del codice
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	  Pierre Andrews (Mortimer)
@@ -24,6 +28,11 @@
 
 	  You just have to put it between the tags:{{&lt;code class="language">...&lt;/code>}}.
 	  The possible languages are the ones supported by [->geshi.sf.net].
+	[it]
+	Colorazione sintattica del codice utilizzato nel testo.
+
+	Dovete solo utilizzare il segnaposto:  {{&lt;code class="linguaggio">...&lt;/code>}}
+	&Egrave; compatibile con i linguaggi di [->geshi.sf.net].
 	  </multi>
 	&nbsp;
 	</description>
