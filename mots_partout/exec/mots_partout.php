@@ -186,9 +186,9 @@ function mots_partout() {
   /***********************************************************************/
 /* PREFIXE*/
   /***********************************************************************/
-	  $table_pref = 'spip';
-	  if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
-
+  $table_pref = 'spip';
+  if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
+  
   
   /***********************************************************************/
   /* récuperation de la chose sur laquelle on travaille*/
@@ -204,7 +204,19 @@ function mots_partout() {
   $table_auth = $choses_possibles[$nom_chose]['table_auth'];
   $tables_limite = $choses_possibles[$nom_chose]['tables_limite'];
 
+  list($mots_voir, $mots_cacher, $mots_ajouter, $mots_enlever) = splitArrayIds($_REQUEST['id_mots']);
+  $choses = secureIntArray($_REQUEST['id_choses']);
+  $limit =  addslashes($_POST['limit']);
+  if($limit == '') $limit = 'rien';
+  $id_limit =  intval($_POST['id_limit']);
+  if($id_limit < 1) $id_limit = 0;
+  $nb_aff = intval($_POST['nb_aff']);
+  if($nb_aff < 1) $nb_aff = 20;
+  $switch = addslashes($_POST['switch']);
+  if($switch == '') $switch = 'voir';
+  $strict = intval($_POST['strict']);
   
+
   /**********************************************************************/
   /* recherche des choses.*/
   /***********************************************************************/
