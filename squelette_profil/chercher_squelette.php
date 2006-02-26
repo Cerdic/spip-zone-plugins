@@ -17,7 +17,7 @@ function ajouter_profil() {
   $dossiers = parser_dossier_squelettes();
   $final = array();
   foreach($dossiers as $d) {
-	$final[] = "$d-$profil";
+	$final[] = "$d#$profil";
 	$final[] = $d;
   }
   creer_dossier_squelettes($final);
