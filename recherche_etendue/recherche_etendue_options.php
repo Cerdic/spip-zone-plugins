@@ -14,7 +14,7 @@
  * © 2005 - Distribue sous licence GNU/GPL
  *
  */
-define('_DIR_PLUGIN_ADVANCED_SEARCH',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+define('_DIR_PLUGIN_ADVANCED_SEARCH',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 
 function RechercheEtendue_prepare_index_recherche($recherche, $cond=false){
 	include_ecrire('inc_index');
