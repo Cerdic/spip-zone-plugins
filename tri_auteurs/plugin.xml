@@ -1,6 +1,10 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	  Tri Auteurs
+	  &nbsp;
+	  <multi>
+		[fr]Tri Auteurs
+		[en]Sort authors
+		[it]Ordine per autori
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	  Pierre Andrews (Mortimer)
@@ -12,7 +16,11 @@
 	  dev
 	</etat>
 	<description>
-	  pour trier les auteurs d'un article.
+	  &nbsp;
+	  <multi>
+		[fr]pour trier les auteurs d'un article.
+		[en]this plugin gives a way to sort authors of an article.
+		[it]questo plugin permette di ordinare gli autori di un articolo.
 	</description>
 	<lien>
 	http://www.spip-contrib.net/Ordonner-les-auteurs-d-un-article
