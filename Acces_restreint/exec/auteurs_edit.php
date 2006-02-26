@@ -11,9 +11,9 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
-include_once('inc_acces_restreint.php');
-include_ecrire("exec_auteurs_edit"); // la version native de spip
+die('toto');
+include_once(dirname(__FILE__).'/../inc_acces_restreint.php');
+include_ecrire("exec/auteurs_edit"); // la version native de spip
 include_ecrire("inc_logos");
 include_ecrire("inc_auteur_voir");
 
