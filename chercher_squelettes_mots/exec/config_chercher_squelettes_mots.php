@@ -20,7 +20,7 @@
 
 define('_DIR_PLUGIN_CHERCHER_SQUELETTES',(_DIR_PLUGINS . 'chercher_squelettes_mots'));
 
-function config_chercher_squelettes_mots() {
+function exec_config_chercher_squelettes_mots() {
   global $connect_statut, $connect_toutes_rubriques;
 
   include_ecrire ("inc_presentation");
