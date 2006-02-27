@@ -15,22 +15,24 @@ function extracteur_jpg($fichier, &$charset) {
 					   'COMMENT' => '');
 
   $sections = '';
-  foreach($interestring as $section => $f) $sections .= "$section,";
-  $sections = substr($sections,0,1);
+  foreach($interesting as $section => $f) 
+	$sections .= "$section,";
+
+  $sections = substr($sections,0,-1);
 
   $exif = @exif_read_data($fichier,$sections,true);
 
   $to_ret = '';
   if($exif) {
-	foreach($interestring as $section => $fields) {
-	  if(is_array($fields))
+	foreach($interesting as $section => $fields) 
+	  if(is_array($fields)) 
 		foreach($fields as $field)
 		  $to_ret .= $exif[$section][$field].' ';
-	  else
+	  else 
 		foreach($exif[$section] as $val)
 		  $to_ret .= $val.' ';
-		  
-	}
+          
+	
   }
   
   $c = ini_get('exif.encode_unicode');
