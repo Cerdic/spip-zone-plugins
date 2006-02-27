@@ -1,10 +1,11 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
+	 	&nbsp;
 	  <multi>
 		[fr]Coloration Code
 		[en]Code higlighting
 		[it]Colorazione del codice
-		</multi>	  &nbsp;
+		</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	  Pierre Andrews (Mortimer)
@@ -16,6 +17,7 @@
 	  stable
 	</etat>
 	<description>
+	&nbsp;
 	<multi>
 	[fr]
 	  Coloration syntaxique du code source dans SPIP
@@ -33,7 +35,6 @@
 	Dovete solo utilizzare il segnaposto:  {{&lt;code class="linguaggio">...&lt;/code>}}
 	&Egrave; compatibile con i linguaggi di [->geshi.sf.net].
 	  </multi>
-	&nbsp;
 	</description>
 	<prefix> 
 	  coloration_code
