@@ -402,7 +402,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 	function Forms_afficher_formulaire_schema($schema, $link = '', $ancre = '', $remplir = false) {
 		global $flag_ecrire, $les_notes, $spip_lang_left, $spip_lang_right;
 	
-		if (!$link) $link = new Link();
+		//if (!$link) $link = new Link();
 	
 		// Les formulaires ont leurs propres notes "de bas de page",
 		// afin d'annoter les champs
@@ -412,7 +412,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 		$readonly = $flag_ecrire ? " readonly='readonly'" : "";
 		$disabled = $flag_ecrire ? " disabled='disabled'" : "";
 		$r = "";
-		$r .= $link->getForm('post', '#'.$ancre, 'multipart/form-data');
+		//$r .= $link->getForm('post', '#'.$ancre, 'multipart/form-data');
 		
 		$champs = "";
 		$fieldset = false;
@@ -679,20 +679,30 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 		$schema = unserialize($row['schema']);
 	
 		$ancre = 'form'.(++$num_ancre);
+
 		if ($flag_ecrire) 
-			$link = new Link($GLOBALS['clean_link']->getUrl());
+			$link = $GLOBALS['clean_link']->getUrl();
 		else if ($GLOBALS['retour_form'])
-			$link = new Link($GLOBALS['retour_form']);
+			$link = $GLOBALS['retour_form'];
 		else 
-			$link = new Link();
-		$form_link = new link();
+			$link = self();
+		$retour = self();
+
+		$formhead = "";
+		$formhead = "<form method='post' action='$link#$ancre' enctype='multipart/form-data' style='border: 0px; margin: 0px;'>\n";
+		$formhead .= "<div><input type='hidden' name='ajout_reponse' value='oui' />";
+		$formhead .= "<input type='hidden' name='id_form' value='$id_form' />";
+		$formhead .= "<input type='hidden' name='retour_form' value='$retour' />";
+		/*$form_link = new link();
 		$form_link = clone($link); //PHP5--> il faut cloner explicitement
 		$form_link->addVar('ajout_reponse', 'oui');
 		$form_link->addVar('id_form', $id_form);
-		$form_link->addVar('retour_form', $link->getUrl());
+		$form_link->addVar('retour_form', $link->getUrl());*/
 		if ($sondage != 'non') {
-			$form_link->addVar('ajout_cookie_form', 'oui');
+			$formhead .= "<input type='hidden' name='ajout_cookie_form' value='oui' />";
+			//$form_link->addVar('ajout_cookie_form', 'oui');
 		}
+		$formhead .= "</div>";
 	
 		$r .= "<a name='$ancre'></a>";
 		$r .= "<div class='spip_forms'>\n";
@@ -739,6 +749,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 				$r .= _T("forms:voir_resultats")."</a></div>";
 				$r .= "<br />\n";
 			}
+			$r .= $formhead;
 			$r .= Forms_afficher_formulaire_schema($schema, $form_link, $ancre, $erreur);
 			$r .= "</div>\n";
 	 	}
