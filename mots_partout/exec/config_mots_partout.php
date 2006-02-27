@@ -1,7 +1,7 @@
 <?php
 define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS . 'mots_partout'));
 
-function config_mots_partout() {
+function exec_config_mots_partout() {
   global $connect_statut, $connect_toutes_rubriques;
 
   include_ecrire ("inc_presentation");

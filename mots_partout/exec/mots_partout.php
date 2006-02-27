@@ -175,7 +175,7 @@ function afficher_liste_defaut($choses) {
 
 //------------------------la fonction qui fait tout-----------------------------------
 
-function mots_partout() {
+function exec_mots_partout() {
 
   include(_DIR_PLUGIN_MOTS_PARTOUT."/mots_partout_choses.php");
   include_ecrire ("inc_presentation");

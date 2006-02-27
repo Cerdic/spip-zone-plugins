@@ -20,7 +20,7 @@
 
 define('_DIR_PLUGIN_TRI_AUTEURS',(_DIR_PLUGINS . 'tri_auteurs'));
 
-function tri_auteurs() {
+function action_tri_auteurs() {
   global $hash, $id_auteur, $id_article, $order;
 
   $id_article = intval($id_article);

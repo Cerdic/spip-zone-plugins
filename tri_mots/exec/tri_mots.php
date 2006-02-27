@@ -39,7 +39,7 @@ function verifier_admin_restreint($id_rubrique) {
 }
 //------------------------la fonction qui fait tout-----------------------------------
 
-function tri_mots() {
+function exec_tri_mots() {
   global $connect_id_auteur;
 
   include_ecrire ("inc_presentation");

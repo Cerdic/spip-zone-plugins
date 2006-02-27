@@ -62,7 +62,7 @@ function splitArrayIds($array) {
 }
 
 
-function mots_partout() {
+function action_mots_partout() {
   global $nom_chose, $redirect;
   global $choses, $mots;
   global $strict, $switch;
