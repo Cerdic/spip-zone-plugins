@@ -2,7 +2,7 @@
 http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	  &nbsp;<multi>[fr]squelette par profil[en]template directory by logging status[it]cartella del modello per status del visitatore</muli>
+	  &nbsp;<multi>[fr]squelette par profil[en]template directory by logging status[it]cartella del modello per status del visitatore</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	  Pierre Andrews (Mortimer)
