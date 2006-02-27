@@ -1,11 +1,10 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	  &nbsp;
 	  <multi>
 		[fr]Coloration Code
 		[en]Code higlighting
 		[it]Colorazione del codice
-		</multi>
+		</multi>	  &nbsp;
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	  Pierre Andrews (Mortimer)
@@ -17,7 +16,6 @@
 	  stable
 	</etat>
 	<description>
-	&nbsp;
 	<multi>
 	[fr]
 	  Coloration syntaxique du code source dans SPIP

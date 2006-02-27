@@ -2,7 +2,6 @@
 http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	&nbsp;
 	<multi>
 	[fr]
 	  Squelette par mot clef
@@ -11,6 +10,7 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	[it]
 	  Scelta del modello mediante una parola chiave
 	</multi>
+	&nbsp;
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	  Pierre Andrews (Mortimer), d'apr&egrave;s un code propos&eacute; par D&eacute;esse A.
@@ -22,7 +22,6 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	  test
 	</etat>
 	<description>
-	&nbsp;
 	<multi>
 	[fr]
 	  Permet de choisir le squelette en fonction d'un mot clef.
@@ -54,6 +53,7 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 
 	Cos&igrave;, gli autori devono solamente scegliere la parola chiave giusta per cambiare il modello de la pagina che visualizza l'elemento (l'articolo per esempio)
      </multi>
+	 	&nbsp;
 	</description>
 	<fonctions> <!-- fichier charge a chaque recalul de page -->
 	  chercher_squelette.php
