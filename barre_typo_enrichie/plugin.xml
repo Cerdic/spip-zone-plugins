@@ -23,12 +23,15 @@ Rajoute une barre typographique enrichie et les raccourcis typographiques corres
 -** {{Encadrer}} <code>[(</code>Paragraphe &agrave; encadrer<code>)]</code>
 -* Caract&egrave;res :
 -** {{Mise en &eacute;vidence}} <code>[*</code>texte en &eacute;vidence<code>*]</code>
+-** {{Mise en &eacute;vidence variante}} <code>[**</code>texte en &eacute;vidence (autre couleur)<code>*]</code>
 -** {{Mise en exposant}} <code><sup></code>texte en exposant<code></sup></code>
 -** {{Petites capitales}} <code><sc></code>texte en petite capitales<code></sc></code>
 -** {{Biff&eacute;}} <code><del></code>texte biff&eacute;<code></del></code>
 -** {{Bulle d'aide}} <code>[GPL|Gnu Public Licence]</code>
 -** {{Lien avec bulle d'aide}} <code>[texte du lien|Le site officiel de SPIP->http://www.spip.net/]</code>
 -** {{Ancre et retour &agrave; l'ancre}} <code>[definition_ancre<-]</code> et <code>[retour </code>&agrave;<code> l'ancre->#definition_ancre]</code>
+
+{{Attention}} : il {{faut}} incorporer dans {{votre}} feuille de style les nouveaux styles !
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
 	mes_options.php
@@ -44,19 +47,19 @@ Rajoute une barre typographique enrichie et les raccourcis typographiques corres
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 			<nom>pre_propre</nom>
-			<inclure>barre_typo_enrichie.php</inclure>
+			<inclure>typo_enrichie.php</inclure>
 	</pipeline>
 	<pipeline>
 			<nom>post_propre</nom>
-			<inclure>barre_typo_enrichie.php</inclure>
+			<inclure>typo_enrichie.php</inclure>
 	</pipeline>
 	<pipeline>
 			<nom>post_typo</nom>
-			<inclure>barre_typo_enrichie.php</inclure>
+			<inclure>typo_enrichie.php</inclure>
 	</pipeline>
 	<pipeline>
 			<nom>header_prive</nom>
-			<inclure>barre_typo_enrichie.php</inclure>
+			<inclure>typo_enrichie.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>
