@@ -1,6 +1,6 @@
 <?php
 
-include('inc_corbeille.php');
+include(dirname(__FILE__).'/../inc_corbeille.php');
 
 function exec_corbeille(){
   global $type_doc;
