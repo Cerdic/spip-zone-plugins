@@ -15,7 +15,7 @@
  *
  */
 
-include_ecrire('inc_index');
+include_spip('inc/indexation');
 global $table_des_tables;
 global $exceptions_des_tables;
 

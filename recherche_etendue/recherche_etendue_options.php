@@ -17,7 +17,7 @@
 define('_DIR_PLUGIN_ADVANCED_SEARCH',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 
 function RechercheEtendue_prepare_index_recherche($recherche, $cond=false){
-	include_ecrire('inc_index');
+	include_spip('inc/indexation');
 
 
 	static $cache = array();

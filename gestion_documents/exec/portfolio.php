@@ -28,7 +28,7 @@ function exec_portfolio(){
 	
 	include_ecrire ("inc_presentation");
 	include_ecrire ("inc_documents");
-	include_ecrire ("inc_index");
+	include_spip('inc/indexation');
 	include_ecrire ("inc_logos");
 	include_ecrire ("inc_session");
 

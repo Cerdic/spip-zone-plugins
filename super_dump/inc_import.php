@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire('inc_presentation');
 include_ecrire ("inc_acces");
-include_ecrire('inc_index'); // pour la fonction primary_index_table 
+include_spip('inc/indexation'); // pour la fonction primary_index_table 
 include_ecrire('inc_serialbase');
 include_ecrire('inc_auxbase');
 

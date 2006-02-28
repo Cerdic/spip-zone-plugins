@@ -18,7 +18,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_index");
+include_spip('inc/indexation');
 include_ecrire ("inc_presentation");
 
 function jauge($couleur,$pixels) {
@@ -62,7 +62,7 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	exit;
 }
 
-include_ecrire('inc_index');
+include_spip('inc/indexation');
 
 
 if ($forcer_indexation = intval($forcer_indexation))

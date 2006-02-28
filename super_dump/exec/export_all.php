@@ -18,7 +18,7 @@ include_once (dirname(__FILE__)."/exec_export.php"); // celui dans le meme reper
 include_ecrire('inc_admin');
 include_ecrire('inc_serialbase');
 include_ecrire('inc_auxbase');
-include_ecrire('inc_index'); // pour la fonction primary_index_table 
+include_spip('inc/indexation'); // pour la fonction primary_index_table 
 
 function rammasse_parties($archive, $gz, $partfile){
 	$_fputs = ($gz) ? gzputs : fputs;
