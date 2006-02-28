@@ -9,6 +9,7 @@
      font-size: 11px;
      text-decoration: none;
      overflow: hidden;
+     cursor:move;
  }
 
 ol#liste_tri_auteurs {
