@@ -10,6 +10,8 @@
  *
  */
 
+include_spip('inc/forms');
+
 function bloc_edition_champ($t, $link) {
 	global $couleur_claire;
 
