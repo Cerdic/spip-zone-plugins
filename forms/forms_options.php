@@ -12,7 +12,7 @@
  */
 
 define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
-include_ecrire('inc_forms_base.php');
+include_spip('inc/forms_base');
 
 // Code a rapatrier dans inc-public et inc_forms
 // (NB : le reglage du cookie doit se faire avant l'envoi de tout HTML au client)

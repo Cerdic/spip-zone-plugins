@@ -10,8 +10,8 @@
  *
  */
 
-include_ecrire("inc_forms_base");
-include_ecrire("inc_forms");
+include_spip("inc/forms_base");
+include_spip("inc/forms");
 
 //
 // Formulaires

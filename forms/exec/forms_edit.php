@@ -10,9 +10,6 @@
  *
  */
 
-
-include_ecrire('inc_forms');
-
 function bloc_edition_champ($t, $link) {
 	global $couleur_claire;
 
@@ -162,6 +159,9 @@ function exec_forms_edit(){
 	global $descendre;
 	global $supp_choix;
 	global $supp_champ;
+	
+	$id_form = intval($id_form);
+	$supp_form = intval($supp_form);
 
 	if ($retour)
 		$retour = urldecode($retour);
@@ -360,6 +360,14 @@ function exec_forms_edit(){
 				$champ_visible = $schema[$n]['code'];
 			}
 			$modif_schema = true;
+		}
+		if ($id_form && Forms_form_editable($id_form)) {
+			if ($modif_schema) {
+				ksort($schema);
+				$query = "UPDATE `spip_forms` SET `schema`='".addslashes(serialize($schema))."' ".
+					"WHERE `id_form`=$id_form";
+				spip_query($query);
+			}
 		}
 	}
 
@@ -730,20 +738,5 @@ function exec_forms_edit(){
 
 
 	fin_page();
-	if ($id_form && Forms_form_editable($id_form)) {
-		if ($modif_schema) {
-			ksort($schema);
-			$query = "UPDATE spip_forms SET schema='".addslashes(serialize($schema))."' ".
-				"WHERE id_form=$id_form";
-			spip_query($query);
-	
-			$query = "SELECT schema FROM spip_forms WHERE id_form=$id_form";
-			$res = spip_query($query);
-			$row = spip_fetch_array($res);
-			$schema = unserialize($row['schema']);
-			//var_dump($schema);
-		}
-	}
-
 }
 ?>
