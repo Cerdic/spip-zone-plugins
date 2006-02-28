@@ -163,6 +163,8 @@ function exec_forms_edit(){
 	global $supp_choix;
 	global $supp_champ;
 
+	if ($retour)
+		$retour = urldecode($retour);
   include_ecrire("inc_presentation");
 	include_ecrire("inc_config");
 
@@ -212,7 +214,8 @@ function exec_forms_edit(){
 
 	$form_link = generer_url_ecrire('forms_edit');
 	$form_link = parametre_url($form_link,"id_form",$id_form);
-	//$form_link = parametre_url($form_link,"new",$new);
+	if ($new)
+		$form_link = parametre_url($form_link,"new",$new);
 	if ($retour) 
 		$form_link = parametre_url($form_link,"retour",urlencode($retour));
 
@@ -368,20 +371,6 @@ function exec_forms_edit(){
 
 	debut_gauche();
 
-	if ($id_form && Forms_form_editable($id_form)) {
-		if ($modif_schema) {
-			ksort($schema);
-			$query = "UPDATE spip_forms SET schema='".addslashes(serialize($schema))."' ".
-				"WHERE id_form=$id_form";
-			spip_query($query);
-	
-			$query = "SELECT schema FROM spip_forms WHERE id_form=$id_form";
-			$res = spip_query($query);
-			$row = spip_fetch_array($res);
-			$schema = unserialize($row['schema']);
-			//var_dump($schema);
-		}
-	}
 
 	echo "<br /><br />\n";
 
@@ -741,5 +730,20 @@ function exec_forms_edit(){
 
 
 	fin_page();
+	if ($id_form && Forms_form_editable($id_form)) {
+		if ($modif_schema) {
+			ksort($schema);
+			$query = "UPDATE spip_forms SET schema='".addslashes(serialize($schema))."' ".
+				"WHERE id_form=$id_form";
+			spip_query($query);
+	
+			$query = "SELECT schema FROM spip_forms WHERE id_form=$id_form";
+			$res = spip_query($query);
+			$row = spip_fetch_array($res);
+			$schema = unserialize($row['schema']);
+			//var_dump($schema);
+		}
+	}
+
 }
 ?>
