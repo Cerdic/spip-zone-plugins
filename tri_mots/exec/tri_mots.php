@@ -129,7 +129,6 @@ function exec_tri_mots() {
 
   debut_cadre_enfonce();
 			 $redirect = generer_url_ecrire('tri_mots',"table=$table&id_table=$id_table&id_mot=$id_mot");
-  var_dump("tri_mots $table $id_table $id_mot");
   echo '<form id="submit_form" action="'.generer_url_action('tri_mots',"table=$table&id_table=$id_table&id_mot=$id_mot").'" method="post">
 <input type="hidden" name="redirect" value="'.$redirect.'"/>
 <input type="hidden" name="hash" value="'.calculer_action_auteur("tri_mots $table $id_table $id_mot").'"/>
