@@ -10,8 +10,7 @@
  *
  */
 
-include_once (dirname(__FILE__).'/../inc_forms.php');
-
+include_ecrire('inc_forms');
 
 function bloc_edition_champ($t, $link) {
 	global $couleur_claire;

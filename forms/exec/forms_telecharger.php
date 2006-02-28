@@ -11,7 +11,7 @@
  */
 
 
-include_once (dirname(__FILE__).'/../inc_forms.php');
+include_ecrire('inc_forms');
 include_ecrire("inc_charsets");
 include_ecrire("inc_presentation");
 

@@ -10,8 +10,8 @@
  *
  */
 
-include_once("inc_forms_base.php");
-include_once("inc_forms.php");
+include_ecrire("inc_forms_base.php");
+include_ecrire("inc_forms.php");
 
 define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 
@@ -57,7 +57,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 	}
 
 	function Forms_generer_url_sondage($id_form) {
-		return "plug.php?exec=sondage&id_form=$id_form";
+		return generer_url_public("sondage","id_form=$id_form");
 	}
 
 	// Hack crade a cause des limitations du compilateur

@@ -10,7 +10,7 @@
  *
  */
 
-include_once (dirname(__FILE__).'/../inc_forms.php');
+include_ecrire('inc_forms');
 
 function exec_forms_reponses(){
 	global $id_form;

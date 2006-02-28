@@ -183,10 +183,11 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 				$id_form = $row['id_form'];
 				$titre = typo($row['titre']);
 				
-				$link = new Link("?exec=forms_edit");
+				$link = generer_url_ecrire('forms_edit',"id_form=$id_form&retour=".self());
+				/*new Link("?exec=forms_edit");
 				$link->addVar("id_form", $id_form);
-				$link->addVar("retour", $GLOBALS['clean_link']->getUrl());
-				echo "<a href='".$link->getUrl()."'>";
+				$link->addVar("retour", $GLOBALS['clean_link']->getUrl());*/
+				echo "<a href='".$link."'>";
 				echo $titre."</a>\n";
 				echo "<div class='arial1' style='text-align:$spip_lang_right;color: black; padding-$spip_lang_left: 4px;' "."title=\""._T("forms:article_recopier_raccourci")."\">";
 				echo "<strong>&lt;form".$id_form."&gt;</strong>";
@@ -199,10 +200,11 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 		// Creer un formulaire
 		if (Forms_form_editable()) {
 			echo "\n<br />";
-			$link = new Link("?exec=forms_edit&new=oui");
-			$link->addVar('retour', $GLOBALS['clean_link']->getUrl());
+			$link = generer_url_ecrire('forms_edit',"new=oui&retour=".self());
+			/*$link = new Link("?exec=forms_edit&new=oui");
+			$link->addVar('retour', $GLOBALS['clean_link']->getUrl());*/
 			icone_horizontale(_T("forms:icone_creer_formulaire"),
-				$link->getUrl(), "../"._DIR_PLUGIN_FORMS."/form-24.png", "creer.gif");
+				$link, "../"._DIR_PLUGIN_FORMS."/form-24.png", "creer.gif");
 		}
 	
 		echo fin_block();
@@ -480,17 +482,18 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			}
 			if ($email != '') {
 				$head="From: formulaire_$id_form@".$_SERVER["HTTP_HOST"]."\n";
-				$link = new Link('',true);
-				$fullurl="http://".$_SERVER["HTTP_HOST"].$link->getUrl();
+				$link = self(true);
+				$fullurl="http://".$_SERVER["HTTP_HOST"].$link;
 				if ($v = strpos($fullurl,'?'))
 				  $v = strrpos(substr($fullurl, 0, $v), '/');
 				else $v = strrpos($fullurl, '/');
 				$fullurl = substr($fullurl, 0 ,$v + 1);
-				$fullurl .= _DIR_RESTREINT_ABS ."?exec=forms_reponses";
+				$fullurl .= _DIR_RESTREINT_ABS .generer_url_ecrire("forms_reponses");
 	
-				$link = new Link($fullurl);
-				$link->addVar('id_form', "$id_form");
-				$message = $link->getUrl() . "\n";
+				$link = parametre_url($fullurl,'id_form',$id_form);
+				//$link = new Link($fullurl);
+				//$link->addVar('id_form', "$id_form");
+				$message = $link . "\n";
 				$message .= $form_summary;
 				$sujet = $titre;
 				$dest = $email;
@@ -636,21 +639,24 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 					"VALUES ".join(',', $inserts);
 				spip_query($query);
 				if ($row['sondage'] != 'non') {
-					$hash = calculer_action_auteur("cookie $id_reponse");
+					$hash = calculer_action_auteur("confirm $id_reponse");
+					$url = generer_url_public("valide_sondage","verif_cookie=oui&id_reponse=$id_reponse&hash=$hash");
+					/*$hash = calculer_action_auteur("cookie $id_reponse");
 					$link = new Link('plug.php?exec=valide_sondage');
 					$link->addVar('verif_cookie', 'oui');
 					$link->addVar('id_reponse', $id_reponse);
-					$link->addVar('hash', $hash);
-					$r .= "<img src='".$link->getUrl()."' width='1' height='1' alt='' />";
+					$link->addVar('hash', $hash);*/
+					$r .= "<img src='".$url."' width='1' height='1' alt='' />";
 				}
 				else if (($email) || ($mailconfirm)) {
 					$hash = calculer_action_auteur("confirm $id_reponse");
-					$link = new Link('plug.php?exec=valide_sondage');
+					$url = generer_url_public("valide_sondage","mel_confirm=oui&id_reponse=$id_reponse&mailconfirm=$mailconfirm&hash=$hash");
+					/*$link = new Link('plug.php?exec=valide_sondage');
 					$link->addVar('mel_confirm', 'oui');
 					$link->addVar('id_reponse', $id_reponse);
 					$link->addVar('mailconfirm', $mailconfirm);
-					$link->addVar('hash', $hash);
-					$r .= "<img src='".$link->getUrl()."' width='1' height='1' alt='' />";
+					$link->addVar('hash', $hash);*/
+					$r .= "<img src='".$url."' width='1' height='1' alt='' />";
 	
 					$reponse = $mailconfirm;
 				}
@@ -715,9 +721,9 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			if (!$erreur) {
 				$r .= "<p class='spip_form_ok'>".
 					_T("forms:reponse_enregistree");
-				$link = new Link();
+				//$link = new Link();
 				if ($sondage != 'non')
-					$r .= " <a href='".$link->getUrl()."#$ancre"."'>"._T("forms:valider")."</a>";
+					$r .= " <a href='".self()."#$ancre"."'>"._T("forms:valider")."</a>";
 				if ($reponse){
 					$r .= "<span class='spip_form_ok_confirmation'>";
 				  $r .= _T("forms:avis_message_confirmation",array('mail'=>$reponse));
@@ -739,7 +745,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 				$r .= "<div class='spip_descriptif'>".propre($descriptif)."</div>";
 			}
 			if ($sondage == 'public' || ($sondage == 'prot' && $flag_ecrire)) {
-				$url_sondage = ($flag_ecrire ? "../" : "").generer_url_sondage($id_form);
+				$url_sondage = ($flag_ecrire ? "../" : "").Forms_generer_url_sondage($id_form);
 				$r .= "<div style='text-align:right'>";
 				$r .= "<a href='".htmlspecialchars($url_sondage)."' class='spip_in' ".
 					"target=\"spip_sondage\" onclick=\"javascript:window.open(this.href, 'spip_sondage', 'scrollbars=yes, ".
@@ -790,9 +796,10 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 				
 				$tous_id[] = $id_form;
 	
-				$link = new Link("?exec=forms_edit");
+				$link = generer_url_ecrire('forms_edit',"id_form=$id_form&retour=".self());
+				/*$link = new Link("?exec=forms_edit");
 				$link->addVar("id_form", $id_form);
-				$link->addVar("retour", $GLOBALS['clean_link']->getUrl());
+				$link->addVar("retour", $GLOBALS['clean_link']->getUrl());*/
 				if ($reponses) {
 					$puce = 'puce-verte-breve.gif';
 				}
@@ -800,7 +807,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 					$puce = 'puce-orange-breve.gif';
 				}
 	
-				$s = "<a href=\"".$link->getUrl()."\">";
+				$s = "<a href=\"".$link."\">";
 				$s .= "<img src='img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
 				$s .= typo($titre);
 				$s .= "</a> &nbsp;&nbsp;";

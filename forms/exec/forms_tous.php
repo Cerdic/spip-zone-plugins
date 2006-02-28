@@ -1,6 +1,6 @@
 <?php
 
-include_once (dirname(__FILE__).'/../inc_forms.php');
+include_ecrire('inc_forms');
 
 function exec_forms_tous(){
 	global $clean_link;
