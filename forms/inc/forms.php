@@ -183,7 +183,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 				$id_form = $row['id_form'];
 				$titre = typo($row['titre']);
 				
-				$link = generer_url_ecrire('forms_edit',"id_form=$id_form&retour=".self());
+				$link = generer_url_ecrire('forms_edit',"id_form=$id_form&retour=".urlencode(self()));
 				/*new Link("?exec=forms_edit");
 				$link->addVar("id_form", $id_form);
 				$link->addVar("retour", $GLOBALS['clean_link']->getUrl());*/
@@ -200,7 +200,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 		// Creer un formulaire
 		if (Forms_form_editable()) {
 			echo "\n<br />";
-			$link = generer_url_ecrire('forms_edit',"new=oui&retour=".self());
+			$link = generer_url_ecrire('forms_edit',"new=oui&retour=".urlencode(self()));
 			/*$link = new Link("?exec=forms_edit&new=oui");
 			$link->addVar('retour', $GLOBALS['clean_link']->getUrl());*/
 			icone_horizontale(_T("forms:icone_creer_formulaire"),
@@ -482,19 +482,20 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			}
 			if ($email != '') {
 				$head="From: formulaire_$id_form@".$_SERVER["HTTP_HOST"]."\n";
-				$link = self(true);
+				/*$link = self(true);
 				$fullurl="http://".$_SERVER["HTTP_HOST"].$link;
 				if ($v = strpos($fullurl,'?'))
 				  $v = strrpos(substr($fullurl, 0, $v), '/');
 				else $v = strrpos($fullurl, '/');
-				$fullurl = substr($fullurl, 0 ,$v + 1);
-				$fullurl .= _DIR_RESTREINT_ABS .generer_url_ecrire("forms_reponses");
+				$fullurl = substr($fullurl, 0 ,$v + 1);*/
+				$fullurl = _DIR_RESTREINT_ABS .generer_url_ecrire("forms_reponses");
 	
 				$link = parametre_url($fullurl,'id_form',$id_form);
 				//$link = new Link($fullurl);
 				//$link->addVar('id_form', "$id_form");
 				$message = $link . "\n";
 				$message .= $form_summary;
+				$message .= "mail confirmation :$mailconfirm:";
 				$sujet = $titre;
 				$dest = $email;
 	
@@ -796,7 +797,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 				
 				$tous_id[] = $id_form;
 	
-				$link = generer_url_ecrire('forms_edit',"id_form=$id_form&retour=".self());
+				$link = generer_url_ecrire('forms_edit',"id_form=$id_form&retour=".urlencode(self()));
 				/*$link = new Link("?exec=forms_edit");
 				$link->addVar("id_form", $id_form);
 				$link->addVar("retour", $GLOBALS['clean_link']->getUrl());*/

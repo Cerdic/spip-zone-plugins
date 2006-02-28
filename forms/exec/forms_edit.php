@@ -10,6 +10,7 @@
  *
  */
 
+
 include_ecrire('inc_forms');
 
 function bloc_edition_champ($t, $link) {
@@ -48,18 +49,14 @@ function bloc_edition_champ($t, $link) {
 				"class='fondl verdana2' size='20'$js>";
 			// 
 			echo " <input style='display: none;' type='submit' name='modif_choix' value=\""._T('bouton_modifier')."\" class='fondo verdana2'>";
-			$supp_link = new link();
-			$supp_link = clone($link); //PHP5--> il faut cloner explicitement
-			$supp_link->addVar('supp_choix', $code_choix);
-			echo " &nbsp; <span class='verdana1'>[<a href='".$supp_link->getUrl('champ_visible')."'>".
+			$supp_link = $link;
+			$supp_link = parametre_url($supp_link,'supp_choix', $code_choix);
+			echo " &nbsp; <span class='verdana1'>[<a href='".$supp_link."#champ_visible'>".
 				_L("supprimer ce choix")."</a>]</span>";
 			echo "<br />\n";
 		}
 		echo "<br /><input type='submit' name='ajout_choix' value=\""._L("Ajouter un choix")."\" class='fondo verdana2'>";
-		/*$ajout_link = $link;
-		$ajout_link->addVar('ajout_choix', $code);
-		echo "<br />[<a href='".$ajout_link->getUrl('champ_visible')."'>".
-			_L("Ajouter un choix")."</a>]";*/
+
 		echo "</div>";
 		if ($type=='select')
 			echo "<br /><input type='submit' name='switch_select_multi' value=\""._L("Changer en choix multiple")."\" class='fondo verdana2'>";
@@ -105,7 +102,7 @@ function modif_edition_champ($t) {
 		if ($ajout_choix) {
 			$n = 1;
 			$code_choix = $code.'_'.$n;
-			while ($type_ext[$code_choix])
+			while (isset($type_ext[$code_choix]))
 				$code_choix = $code.'_'.(++$n);
 			$type_ext[$code_choix] = _L("Nouveau choix");
 			$ajout_choix = $code_choix;
@@ -213,10 +210,11 @@ function exec_forms_edit(){
 		}
 	}
 
-	$form_link = new Link("?exec=forms_edit&id_form=$id_form&new=$new");
-	if ($retour) $form_link->addVar('retour', $retour);
-	$clean_link = new link();
-	$clean_link = clone($form_link); //PHP5--> il faut cloner explicitement
+	$form_link = generer_url_ecrire('forms_edit');
+	$form_link = parametre_url($form_link,"id_form",$id_form);
+	//$form_link = parametre_url($form_link,"new",$new);
+	if ($retour) 
+		$form_link = parametre_url($form_link,"retour",urlencode($retour));
 
 	//
 	// Recupere les donnees
@@ -337,9 +335,10 @@ function exec_forms_edit(){
 
 		// Monter / descendre un champ
 		if (isset($monter) && $monter > 0) {
+
 			$monter = intval($monter);
 			$n = $monter;
-			while (--$n) if ($schema[$n]) break;
+			while (--$n) if ($schema[$n]) break;			
 			if ($t = $schema[$n]) {
 				$schema[$n] = $schema[$monter];
 				$schema[$monter] = $t;
@@ -359,22 +358,30 @@ function exec_forms_edit(){
 			}
 			$modif_schema = true;
 		}
-
-		if ($modif_schema) {
-			ksort($schema);
-			$query = "UPDATE spip_forms SET schema='".addslashes(serialize($schema))."' ".
-				"WHERE id_form=$id_form";
-			spip_query($query);
-		}
 	}
-
 
 	//
 	// Affichage de la page
 	//
 
 	debut_page("&laquo; $titre &raquo;", "documents", "forms");
+
 	debut_gauche();
+
+	if ($id_form && Forms_form_editable($id_form)) {
+		if ($modif_schema) {
+			ksort($schema);
+			$query = "UPDATE spip_forms SET schema='".addslashes(serialize($schema))."' ".
+				"WHERE id_form=$id_form";
+			spip_query($query);
+	
+			$query = "SELECT schema FROM spip_forms WHERE id_form=$id_form";
+			$res = spip_query($query);
+			$row = spip_fetch_array($res);
+			$schema = unserialize($row['schema']);
+			//var_dump($schema);
+		}
+	}
 
 	echo "<br /><br />\n";
 
@@ -382,9 +389,9 @@ function exec_forms_edit(){
 		debut_boite_info();
 
 		icone_horizontale(_L("Suivi des r&eacute;ponses")."<br />".$nb_reponses." "._L("r&eacute;ponses"),
-			"?exec=forms_reponses&id_form=$id_form", "forum-public-24.gif", "rien.gif");
+			generer_url_ecrire('forms_reponses',"id_form=$id_form"), "forum-public-24.gif", "rien.gif");
 		icone_horizontale(_L("T&eacute;l&eacute;charger les r&eacute;ponses"),
-			"?exec=forms_telecharger&id_form=$id_form", "doc-24.gif", "rien.gif");
+			generer_url_ecrire('forms_telecharger',"id_form=$id_form"), "doc-24.gif", "rien.gif");
 
 		fin_boite_info();
 	}
@@ -397,11 +404,11 @@ function exec_forms_edit(){
 		echo "<p><strong>"._L("Attention :")."</strong> ";
 		echo _L("Des r&eacute;ponses ont &eacute;t&eacute; faites &agrave; ce formulaire. ".
 			"Voulez-vous vraiment le supprimer ?")."</p>\n";
-		$link = new Link();
-		$link->addVar('supp_form', $supp_form);
+		$link = parametre_url(self(),'supp_form', $supp_form);
+		//$link->addVar('supp_form', $supp_form);
 		//echo $link->getForm();
 		echo "<form method='POST' action='"
-			. $link->geturl()
+			. $link
 			. "' style='border: 0px; margin: 0px;'>";
 
 		echo "<input type='submit' name='supp_confirme' value=\""._T('item_oui')."\" class='fondl'>";
@@ -490,16 +497,16 @@ function exec_forms_edit(){
 	if ($id_form && Forms_form_administrable($id_form)) {
 		echo "<br />\n";
 		echo "<div align='$spip_lang_right'>";
-		$link = new link();
-		$link = clone($form_link); //PHP5--> il faut cloner explicitement
-		$link->addVar('supp_form', $id_form);
+		$link = parametre_url(self(),'supp_form', $id_form);
+		//$link = clone($form_link); //PHP5--> il faut cloner explicitement
+		//$link->addVar('supp_form', $id_form);
 		if (!$retour) {
-			$link->addVar('retour', 'forms_tous.php');
+			$link=parametre_url($link,'retour', urlencode(generer_url_ecrire('form_tous')));
 		}
 		if (!$nb_reponses) {
-			$link->addVar('supp_confirme', 'oui');
+			$link=parametre_url($link,'supp_confirme', 'oui');
 		}
-		icone(_L("Supprimer ce formulaire"), $link->getUrl(), "../"._DIR_PLUGIN_FORMS."/form-24.png", "supprimer.gif");
+		icone(_L("Supprimer ce formulaire"), $link, "../"._DIR_PLUGIN_FORMS."/form-24.png", "supprimer.gif");
 		echo "</div>\n";
 	}
 
@@ -516,7 +523,7 @@ function exec_forms_edit(){
 		//$link = clone($form_link); //PHP5--> il faut cloner explicitement
 		//echo $link->getForm('POST');
 		echo "<form method='POST' action='"
-			. $form_link->geturl()
+			. $form_link
 			. "' style='border: 0px; margin: 0px;'>";
 
 		$titre = entites_html($titre);
@@ -627,19 +634,19 @@ function exec_forms_edit(){
 				if ($aff_min || $aff_max) {
 					echo "<div class='verdana1' style='float: right; font-weight: bold;'>";
 					if ($aff_min) {
-						$link = new link();
-						$link = clone($form_link); //PHP5--> il faut cloner explicitement
-						$link->addVar('monter', $index);
-						echo "<a href='".$link->getUrl('champs')."'>"._L("monter")."</a>";
+						$link = parametre_url($form_link,'monter', $index);
+						//$link = clone($form_link); //PHP5--> il faut cloner explicitement
+						//$link->addVar('monter', $index);
+						echo "<a href='".$link."#champs'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0' alt='"._L("monter")."'></a>";
 					}
 					if ($aff_min && $aff_max) {
 						echo " | ";
 					}
 					if ($aff_max) {
-						$link = new link();
-						$link = clone($form_link); //PHP5--> il faut cloner explicitement
-						$link->addVar('descendre', $index);
-						echo "<a href='".$link->getUrl('champs')."'>"._L("descendre")."</a>";
+						$link = parametre_url($form_link,'descendre', $index);
+						//$link = clone($form_link); //PHP5--> il faut cloner explicitement
+						//$link->addVar('monter', $index);
+						echo "<a href='".$link."#champs'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0' alt='"._L("descendre")."'></a>";
 					}
 					echo "</div>\n";
 				}
@@ -656,7 +663,7 @@ function exec_forms_edit(){
 				$link->addVar('modif_champ', $code);
 				echo $link->getForm('POST', '#champ_visible');*/
 				echo "<form method='POST' action='"
-					. $form_link->geturl('champ_visible')
+					. $form_link . "#champ_visible"
 					. "' style='border: 0px; margin: 0px;'>";
 				echo "<input type='hidden' name='modif_champ' value='$code' />";
 
@@ -689,11 +696,12 @@ function exec_forms_edit(){
 				echo "</div>\n";
 				echo "</form>";
 				// Supprimer un champ
-				$link = new link();
+				/*$link = new link();
 				$link = clone($form_link); //PHP5--> il faut cloner explicitement
-				$link->addVar('supp_champ', $code);
+				$link->addVar('supp_champ', $code);*/
+				$link = parametre_url($form_link,'supp_champ', $code);
 				echo "<div style='float: left;'>";
-				icone_horizontale(_L("Supprimer ce champ"), $link->getUrl('champs'),"../"._DIR_PLUGIN_FORMS. "/form-24.png", "supprimer.gif");
+				icone_horizontale(_L("Supprimer ce champ"), $link."#champs","../"._DIR_PLUGIN_FORMS. "/form-24.png", "supprimer.gif");
 				echo "</div>\n";
 
 				echo fin_block();
@@ -710,7 +718,7 @@ function exec_forms_edit(){
 			$link = clone($form_link); //PHP5--> il faut cloner explicitement
 			echo $link->getForm('POST', '#nouveau_champ');*/
 			echo "<form method='POST' action='"
-				. $form_link->geturl('nouveau_champ')
+				. $form_link. "#nouveau_champ"
 				. "' style='border: 0px; margin: 0px;'>";
 			echo "<strong>"._L("Ajouter un champ")."</strong><br />\n";
 			echo _L("Cr&eacute;er un champ de type&nbsp;:");

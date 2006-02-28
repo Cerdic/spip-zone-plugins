@@ -10,10 +10,8 @@
  *
  */
 
-include_ecrire("inc_forms_base.php");
-include_ecrire("inc_forms.php");
-
-define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+include_ecrire("inc_forms_base");
+include_ecrire("inc_forms");
 
 //
 // Formulaires
@@ -38,7 +36,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS . basename(dirname(__FILE__))));
 		// Remplacer les raccourcis de type <formXXX>
 		if (is_int(strpos($texte, '<form')) &&
 			preg_match_all(',<form(\d+)>,', $texte, $regs, PREG_SET_ORDER)) {
-			include_once("inc_forms.php");
+			//include_once("inc_forms.php");
 			foreach ($regs as $r) {
 				$id_form = $r[1];
 				$forms[$id_form] = $id_form;
