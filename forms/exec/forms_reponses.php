@@ -83,7 +83,7 @@ function exec_forms_reponses(){
 	if ($id_form && $sondage != 'non') {
 		echo "<br />\n";
 		debut_cadre_enfonce("statistiques-24.gif");
-		echo afficher_reponses_sondage($id_form);
+		echo Forms_afficher_reponses_sondage($id_form);
 		fin_cadre_enfonce();
 	}
 

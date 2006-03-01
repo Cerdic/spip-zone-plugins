@@ -760,7 +760,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			}
 		}
 		if (($sondage == 'public')&&(Forms_verif_cookie_sondage_utilise($id_form)==true)){
-	  	$r .= afficher_reponses_sondage($id_form);
+	  	$r .= Forms_afficher_reponses_sondage($id_form);
 			$r .= "</div>\n";
 	 	}
 		else	{
