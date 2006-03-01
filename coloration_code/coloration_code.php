@@ -1,6 +1,6 @@
 <?php
 
-define('_DIR_PLUGIN_COLORATION_CODE',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+define('_DIR_PLUGIN_COLORATION_CODE',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 
 function coloration_code_color($code, $language='php') {
   
