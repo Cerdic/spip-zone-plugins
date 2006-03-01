@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+define('_DIR_PLUGIN_BARRE_TYPO',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__).'/..'))))));
 
 // construit un bouton (ancre) de raccourci avec icone et aide
 
@@ -54,19 +55,19 @@ function afficher_barre($champ, $forum=false) {
 	$ret .= bouton_barre_racc ("barre_raccourci('{','}',$champ)", _DIR_IMG_ICONES_BARRE."italique.png", _T('barre_italic'), $champhelp);
 	$ret .= bouton_barre_racc ("barre_raccourci('{{','}}',$champ)", _DIR_IMG_ICONES_BARRE."gras.png", _T('barre_gras'), $champhelp);
 	if ($options == "avancees") {
-		$ret .= bouton_barre_racc ("barre_raccourci('[*','*]',$champ)", _DIR_PLUGINS.'/barre_typo_enrichie/'._DIR_IMG_ICONES_BARRE.'miseenevidence.png', _T('bartypenr:barre_miseenevidence'), $formulaire, $texte);
-		$ret .= bouton_barre_racc ("barre_raccourci('&lt;sup&gt;','&lt;/sup&gt;',$champ)", _DIR_PLUGINS.'/barre_typo_enrichie/'._DIR_IMG_ICONES_BARRE."exposant.png", _T('bartypenr:barre_exposant'), $formulaire, $texte);
-		$ret .= bouton_barre_racc ("barre_raccourci('&lt;sc&gt;','&lt;/sc&gt;',$champ)", _DIR_PLUGINS.'/barre_typo_enrichie/'._DIR_IMG_ICONES_BARRE."petitescapitales.png", _T('bartypenr:barre_petitescapitales'), $formulaire, $texte);
+		$ret .= bouton_barre_racc ("barre_raccourci('[*','*]',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/'._DIR_IMG_ICONES_BARRE.'miseenevidence.png', _T('bartypenr:barre_miseenevidence'), $formulaire, $texte);
+		$ret .= bouton_barre_racc ("barre_raccourci('&lt;sup&gt;','&lt;/sup&gt;',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/'._DIR_IMG_ICONES_BARRE."exposant.png", _T('bartypenr:barre_exposant'), $formulaire, $texte);
+		$ret .= bouton_barre_racc ("barre_raccourci('&lt;sc&gt;','&lt;/sc&gt;',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/'._DIR_IMG_ICONES_BARRE."petitescapitales.png", _T('bartypenr:barre_petitescapitales'), $formulaire, $texte);
 	}
 	if (!$forum) {
 		$ret .= "&nbsp;";
 		$ret .= bouton_barre_racc ("barre_raccourci('\n\n{{{','}}}\n\n',$champ)", _DIR_IMG_ICONES_BARRE."intertitre.png", _T('barre_intertitre'), $champhelp);
 		if ($options == "avancees") {
-			$ret .= bouton_barre_racc ("barre_raccourci('\n\n{2{','}2}\n\n',$champ)", _DIR_PLUGINS.'/barre_typo_enrichie/'._DIR_IMG_ICONES_BARRE."intertitre2.png", _T('bartypenr:barre_intertitre2'), $formulaire, $texte);
-			$ret .= bouton_barre_racc ("barre_raccourci('\n\n{3{','}3}\n\n',$champ)", _DIR_PLUGINS.'/barre_typo_enrichie/'._DIR_IMG_ICONES_BARRE."intertitre3.png", _T('bartypenr:barre_intertitre3'), $formulaire, $texte);
-			$ret .= bouton_barre_racc ("barre_raccourci('[|','|]',$champ)", _DIR_PLUGINS.'/barre_typo_enrichie/'._DIR_IMG_ICONES_BARRE."center.png", _T('bartypenr:barre_centrer'), $formulaire, $texte);
-			$ret .= bouton_barre_racc ("barre_raccourci('[/','/]',$champ)", _DIR_PLUGINS.'/barre_typo_enrichie/'._DIR_IMG_ICONES_BARRE."right.png", _T('bartypenr:barre_alignerdroite'), $formulaire, $texte);
-			$ret .= bouton_barre_racc ("barre_raccourci('[(',')]',$champ)", _DIR_PLUGINS.'/barre_typo_enrichie/'._DIR_IMG_ICONES_BARRE."cadretexte.png", _T('bartypenr:barre_encadrer'), $formulaire, $texte);
+			$ret .= bouton_barre_racc ("barre_raccourci('\n\n{2{','}2}\n\n',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/'._DIR_IMG_ICONES_BARRE."intertitre2.png", _T('bartypenr:barre_intertitre2'), $formulaire, $texte);
+			$ret .= bouton_barre_racc ("barre_raccourci('\n\n{3{','}3}\n\n',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/'._DIR_IMG_ICONES_BARRE."intertitre3.png", _T('bartypenr:barre_intertitre3'), $formulaire, $texte);
+			$ret .= bouton_barre_racc ("barre_raccourci('[|','|]',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/'._DIR_IMG_ICONES_BARRE."center.png", _T('bartypenr:barre_centrer'), $formulaire, $texte);
+			$ret .= bouton_barre_racc ("barre_raccourci('[/','/]',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/'._DIR_IMG_ICONES_BARRE."right.png", _T('bartypenr:barre_alignerdroite'), $formulaire, $texte);
+			$ret .= bouton_barre_racc ("barre_raccourci('[(',')]',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/'._DIR_IMG_ICONES_BARRE."cadretexte.png", _T('bartypenr:barre_encadrer'), $formulaire, $texte);
 		}
 	}
 	$ret .= "&nbsp;</td>\n<td>";
@@ -84,8 +85,8 @@ function afficher_barre($champ, $forum=false) {
 		$ret .= bouton_barre_racc ("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);
 	}
 	if ($options == "avancees") {
-		$ret .= bouton_barre_racc ("barre_raccourci('[?',']',$champ)", _DIR_PLUGINS.'/barre_typo_enrichie/'._DIR_IMG_ICONES_BARRE."barre-wiki.png", "Entr&eacute;e du [?glossaire] (Wikipedia)", $formulaire, $texte);
-		$ret .= bouton_barre_racc ("barre_tableau($champ)", _DIR_PLUGINS.'/barre_typo_enrichie/'._DIR_IMG_ICONES_BARRE."barre-tableau.png", "Ins&eacute;rer un tableau", $formulaire, $texte);
+		$ret .= bouton_barre_racc ("barre_raccourci('[?',']',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/'._DIR_IMG_ICONES_BARRE."barre-wiki.png", "Entr&eacute;e du [?glossaire] (Wikipedia)", $formulaire, $texte);
+		$ret .= bouton_barre_racc ("barre_tableau($champ)", _DIR_PLUGIN_BARRE_TYPO.'/'._DIR_IMG_ICONES_BARRE."barre-tableau.png", "Ins&eacute;rer un tableau", $formulaire, $texte);
 	}
 
 	$ret .= "&nbsp;</td>";
