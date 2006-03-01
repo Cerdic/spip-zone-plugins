@@ -66,6 +66,7 @@ function action_mots_partout() {
   global $nom_chose, $redirect;
   global $choses, $mots;
   global $strict, $switch;
+  global $ajax;
   
   /*
   global $hash, $id_auteur;
@@ -77,11 +78,6 @@ function action_mots_partout() {
   */   
   
   include(_DIR_PLUGIN_MOTS_PARTOUT."/mots_partout_choses.php");
-  /***********************************************************************/
-  /* PREFIXE*/
-  /***********************************************************************/
-  $table_pref = 'spip';
-  if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
   
   /***********************************************************************/
   /* récuperation de la chose sur laquelle on travaille*/
@@ -154,17 +150,23 @@ function action_mots_partout() {
 	}
   }
   
+  $par_choses = '';
+
   if(count($choses)) {
 	foreach($choses as $c) 
-	  $redirect .= "&choses[]=$c";
+	  $par_choses .= "&choses[]=$c";
   }
+
+  $par_mots = '';
 
   if(count($mots)) {
 	foreach($mots as $id => $m) 
-	  $redirect.= "&mots[$id]=$m";
+	  $par_mots .= "&mots[$id]=$m";
   }
 
-  if(!$_REQUEST['ajax']) 	redirige_par_entete(urldecode($redirect));
+  $redirect = generer_url_action('mots_partout_cherche',"nom_chose=$nom_chose&stict=$strict&switch=$switch&ajax=$ajax&redirect=$redirect$par_chose$par_mots");
+
+  redirige_par_entete($redirect);
 
 }
 

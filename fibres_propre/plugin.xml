@@ -1,0 +1,28 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	  textile &agrave; la place de propre	
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	  Pierre Andrews (Mortimer) pour l'encapsulation en plugin et les &eacute;chapements.
+	  Fil pour la piste sur le code.
+	</auteur>
+	<version>
+	  0.1
+	</version>
+	<etat>
+	  dev
+	</etat>
+	<description>
+	utilise http://textism.com/article/683/textile (2.0 beta, attention) pour faire le rendu des textes dans SPIP.
+	</description>
+	<prefix> 
+	  fibres_propre
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines 
+	La liste des pipelines disponibles est dans ecrire/inc_version ($spip_pipeline = ... ) 
+	-->
+	<pipeline>
+		<nom>pre_propre</nom>
+		<inclure>fibres_propre.php</inclure>
+	</pipeline>
+</plugin>
