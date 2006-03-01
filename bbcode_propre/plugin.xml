@@ -1,0 +1,31 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	  BBCode en plus de propre
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	  Pierre Andrews (Mortimer) pour l'encapsulation en plugin et les &eacute;chapements.
+	  A partir de la contrib de NoPlay
+	</auteur>
+	<version>
+	  0.1
+	</version>
+	<etat>
+	  dev
+	</etat>
+	<description>
+	utilise [BBCode->http://fr.wikipedia.org/wiki/Bbcode] pour faire le rendu des textes dans SPIP.
+	</description>
+	<lien>
+http://www.spip-contrib.net/Du-BBcode-dans-SPIP
+	</lien>	
+	<prefix> 
+	  bbcode_propre
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines 
+	La liste des pipelines disponibles est dans ecrire/inc_version ($spip_pipeline = ... ) 
+	-->
+	<pipeline>
+		<nom>pre_propre</nom>
+		<inclure>bbcode_propre.php</inclure>
+	</pipeline>
+</plugin>
