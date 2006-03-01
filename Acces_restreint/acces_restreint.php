@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__).'/inc_acces_restreint.php');
+include_spip('inc/acces_restreint');
 
 //
 // <BOUCLE(ARTICLES)>

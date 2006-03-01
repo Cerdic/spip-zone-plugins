@@ -3,7 +3,7 @@ include_ecrire('inc_db_mysql');
 include_ecrire('inc_abstract_sql');
 include_ecrire('inc_rubriques');
 
-$GLOBALS['surcharge']['exec/auteurs_edit']=dirname(__FILE__).'/exec/auteurs_edit.php';
+//$GLOBALS['surcharge']['exec/auteurs_edit']=dirname(__FILE__).'/exec/auteurs_edit.php';
 
 // ajouter un marqueur de cache pour permettre de differencier le cache en fonction des zones autorisees
 // potentiellement une version de cache differente par combinaison de zones habilitees + le cache de base sans autorisation

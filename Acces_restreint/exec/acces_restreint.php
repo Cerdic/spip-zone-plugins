@@ -2,8 +2,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_once(dirname(__FILE__).'/../inc_acces_restreint_base.php');
-include_once(dirname(__FILE__).'/../inc_acces_restreint.php');
+include_spip('inc/acces_restreint_base');
+include_spip('inc/acces_restreint');
 
 function exec_acces_restreint(){
 	global $connect_statut;
