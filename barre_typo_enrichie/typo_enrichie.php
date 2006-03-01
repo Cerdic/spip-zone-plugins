@@ -180,7 +180,7 @@ function BarreTypoEnrichie_post_typo($texte) {
 	return $texte;
 }
 function BarreTypoEnrichie_header_prive($texte) {
-	$texte.= '<link rel="stylesheet" type="text/css" href="' . find_in_path('css/bartypenr.css').'" />' . "\n";
+	$texte.= '<link rel="stylesheet" type="text/css" href="' . _DIR_PLUGINS . '/barre_typo_enrichie/css/bartypenr.css" />' . "\n";
 	return $texte;
 }
 
