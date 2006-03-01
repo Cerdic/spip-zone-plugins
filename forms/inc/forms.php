@@ -445,6 +445,26 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 		return $r;
 	}
 
+
+	function Forms_traduit_reponse($type,$code, $liste, $value) {
+		$out = $value;
+		switch ($type){
+			case 'multiple':
+			case 'select':
+				if (isset($liste[$value])) $out = typo($liste[$value]);
+				break;
+			case 'mot':
+				$id_groupe = intval($liste['id_groupe']);
+				$id_mot = intval($value);
+				$query_mot = "SELECT id_mot, titre FROM spip_mots WHERE id_groupe=$id_groupe AND id_mot=$id_mot";
+				$result_mot = spip_query($query_mot);
+				if ($row = spip_fetch_array($result_mot)) {
+					$out = typo($row['titre']);
+				}
+		}
+		return $out;
+	}
+
 	function Forms_generer_mail_reponse_formulaire($id_form, $id_reponse, $mailconfirm){
 		$query = "SELECT * FROM spip_forms WHERE id_form=$id_form";
 		$result = spip_query($query);
@@ -453,6 +473,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			$texte = str_replace("\r\n","\n",$texte);
 			$titre = $row['titre'];
 			$email = $row['email'];
+			$type_ext = $t['type_ext'];
 			$form_summary = '';
 			$schema = unserialize($row['schema']);
 			// Ici on parcourt les valeurs entrees pour les champs demandes
@@ -466,6 +487,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 				$reponses = '';
 				while ($row2 = spip_fetch_array($result2)) {
 					$reponses .= $row2['valeur'].", ";
+					$reponses .= Forms_traduit_reponse($type, $code,$type_ext,$row2['valeur']).", ";
 				}
 				if (strlen($reponses) > 2)
 					$form_summary .= substr($reponses,0,strlen($reponses)-2);

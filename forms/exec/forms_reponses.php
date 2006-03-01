@@ -145,6 +145,7 @@ function exec_forms_reponses(){
 			foreach ($schema as $index => $t) {
 				$code = $t['code'];
 				$type = $t['type'];
+				$type_ext = $t['type_ext'];
 				$types[$id_form][$code] = $type;
 				$trans[$id_form][$code] = array();
 
@@ -174,8 +175,8 @@ function exec_forms_reponses(){
 				$valeurs[$champ][] = "<a href='?exec=forms_telecharger.php&id_reponse=$id_reponse&champ=$champ'>".
 					$row2['valeur']."</a>";
 			}
-			else if ($v = $trans[$id_form][$champ][$row2['valeur']])
-				$valeurs[$champ][] = $v;
+			else if (isset($trans[$id_form][$champ][$row2['valeur']]))
+				$valeurs[$champ][] = $trans[$id_form][$champ][$row2['valeur']];
 			else
 				$valeurs[$champ][] = propre($row2['valeur']);
 		}
