@@ -19,10 +19,7 @@ _ Les auteurs peuvent etre associes a des zones pour avoir le droit d'y acceder.
 _ Toutes les boucles natives de SPIP sont surchargees pour en filtrer les resultats en fonction des droits du visiteur.
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
-	inc_acces_restreint_base.php
-	</options>
-	<options> <!-- fichier charge a chaque hit -->
-	inc_acces_restreint.php
+	acces_restreint_options.php
 	</options>
 	<fonctions> <!-- fichier charge a chaque recalcul -->
 	acces_restreint.php
@@ -39,7 +36,7 @@ _ Toutes les boucles natives de SPIP sont surchargees pour en filtrer les result
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
-		<inclure>inc_acces_restreint.php</inclure>
+		<inclure>acces_restreint_pipelines.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>

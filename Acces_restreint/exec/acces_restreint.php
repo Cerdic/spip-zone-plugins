@@ -4,6 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/acces_restreint_base');
 include_spip('inc/acces_restreint');
+include_spip('inc/acces_restreint_gestion');
 
 function exec_acces_restreint(){
 	global $connect_statut;
