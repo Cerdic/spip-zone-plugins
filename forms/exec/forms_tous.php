@@ -4,8 +4,8 @@ include_ecrire('inc_forms');
 
 function exec_forms_tous(){
 	global $clean_link;
-  include_ecrire("inc_presentation");
-	include_ecrire('inc_base');
+  include_spip("inc/presentation");
+	include_spip('base/create');
 	creer_base(); // au cas ou
 
 	debut_page(_L("Tous les formulaires"), "documents", "forms");
