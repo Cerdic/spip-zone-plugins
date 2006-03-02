@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire('inc_admin');
-include_ecrire('inc_serialbase');
-include_ecrire('inc_auxbase');
+include_spip('inc/admin');
+include_spip('base/serial');
+include_spip('base/auxiliaires');
 
 function verifier_version_sauvegarde ($archive) {
 	global $spip_version;
