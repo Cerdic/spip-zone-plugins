@@ -35,6 +35,8 @@ function bbcode($chaine) {
   $chaine = str_replace("[/b]","</b></html>",$chaine);
   $chaine = str_replace("[i]","<html><i>",$chaine);
   $chaine = str_replace("[/i]","</i></html>",$chaine);
+  $chaine = str_replace("[u]","<html><span style='text-decoration:underline;'>",$chaine);
+  $chaine = str_replace("[/u]","</span></html>",$chaine);
   $chaine = str_replace("[center]","<html><center>",$chaine);
   $chaine = str_replace("[/center]","</center></html>",$chaine);
   $chaine = str_replace("[img]","<html><img src=\"",$chaine);	
