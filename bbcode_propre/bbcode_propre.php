@@ -1,6 +1,6 @@
 <?php
 
-/*
+/* Code modifié à partir de:
  *   +----------------------------------+
  *    Nom du Filtre :    BBcode                                               
  *   +----------------------------------+
@@ -18,28 +18,32 @@
 */
 
 function bbcode($chaine) {
-$chaine = stripslashes($chaine);
-$chaine = str_replace("[code]","<code>",$chaine);	
-$chaine = str_replace("[/code]","</code>",$chaine);
-$chaine = eregi_replace("\\[url]([^\\[]*)\\[/url\\]","<a href=\"\\1\" title=\"\\1\">\\1</a>",$chaine);
-$chaine = eregi_replace("\\[url=([^\\[]*)\\]([^\\[]*)\\[/url\\]","<a href=\"\\1\" title=\"\\2\">\\2</a>",$chaine);
-$chaine = eregi_replace("\\[email\\]([^\\[]*)\\[/email\\]","<a href=mailto:\"\\1\">\\1</a>",$chaine);
-$chaine = eregi_replace("\\[email=([^\\[]*)\\]([^\\[]*)\\[/email\\]","<a href=mailto:\"\\1\">\\2</a>",$chaine);
-$chaine = eregi_replace("\\[color=([^\\[]*)\\]([^\\[]*)\\[/color\\]","<span style=\"color:\\1\">\\2</span>",$chaine);
-$chaine = eregi_replace("\\[size=([^\\[]*)\\]([^\\[]*)\\[/size\\]","<span style=\"font-size:\\1px\">\\2</span>",$chaine);
-$chaine = preg_replace("!\[list\](.+)\[/list\]!Umi","<ul> $1 </ul>",$chaine);
-$chaine = preg_replace("!\[\*\](.+)(?=(\[\*\]|</ul>))!Umi","<li>$1</li>",$chaine);
-$chaine = str_replace("[b]","<b>",$chaine);
-$chaine = str_replace("[/b]","</b>",$chaine);
-$chaine = str_replace("[i]","<i>",$chaine);
-$chaine = str_replace("[/i]","</i>",$chaine);
-$chaine = str_replace("[center]","<center>",$chaine);
-$chaine = str_replace("[/center]","</center>",$chaine);
-$chaine = str_replace("[img]","<img src=\"",$chaine);	
-$chaine = str_replace("[/img]","\" alt=\"img\" />",$chaine);	
-$chaine = str_replace("[quote]","<quote>",$chaine);	
-$chaine = str_replace("[/quote]","</quote>",$chaine);
-return $chaine;
+  $chaine = stripslashes($chaine);
+  $chaine = str_replace("[code]","<html><code>",$chaine);	
+  $chaine = str_replace("[/code]","</code></html>",$chaine);
+  $chaine = eregi_replace("\\[url]([^\\[]*)\\[/url\\]","<html><a href=\"\\1\" title=\"\\1\">\\1</a></html>",$chaine);
+  $chaine = eregi_replace("\\[url=([^\\[]*)\\]([^\\[]*)\\[/url\\]","<html><a href=\"\\1\" title=\"\\2\">\\2</a></html>",$chaine);
+  $chaine = eregi_replace("\\[email\\]([^\\[]*)\\[/email\\]","<html><a href=mailto:\"\\1\">\\1</a></html>",$chaine);
+  $chaine = eregi_replace("\\[email=([^\\[]*)\\]([^\\[]*)\\[/email\\]","<html><a href=mailto:\"\\1\">\\2</a></html>",$chaine);
+  $chaine = eregi_replace("\\[color=([^\\[]*)\\]([^\\[]*)\\[/color\\]","<html><span style=\"color:\\1\">\\2</span></html>",$chaine);
+  $chaine = eregi_replace("\\[size=([^\\[]*)\\]([^\\[]*)\\[/size\\]","<html><span style=\"font-size:\\1px\">\\2</span></html>",$chaine);
+  $chaine = preg_replace("!\[list\](.+)\[/list\]!Umi","<html><ul> $1 </ul></html>",$chaine);
+  $chaine = preg_replace("!\[list=1\](.+)\[/list\]!Umi","<html><ol> $1 </ol></html>",$chaine);  
+  $chaine = preg_replace("!\[list=a\](.+)\[/list\]!Umi","<html><ol type='a'> $1 </ol></html>",$chaine);
+  $chaine = preg_replace("!\[\*\](.+)(?=(\[\*\]|</ul>))!Umi","<li>$1</li>",$chaine);
+  $chaine = str_replace("[b]","<html><b>",$chaine);
+  $chaine = str_replace("[/b]","</b></html>",$chaine);
+  $chaine = str_replace("[i]","<html><i>",$chaine);
+  $chaine = str_replace("[/i]","</i></html>",$chaine);
+  $chaine = str_replace("[center]","<html><center>",$chaine);
+  $chaine = str_replace("[/center]","</center></html>",$chaine);
+  $chaine = str_replace("[img]","<html><img src=\"",$chaine);	
+  $chaine = str_replace("[/img]","\" alt=\"img\" /></html>",$chaine);	
+  $chaine = str_replace("[quote]","<quote>",$chaine);	
+  $chaine = str_replace("[/quote]","</quote>",$chaine);
+  $chaine = str_replace("[scroll]","<cadre>",$chaine);	
+  $chaine = str_replace("[/scroll]","</cadre>",$chaine);
+  return echappe_html($chaine);
 }
 
 // FIN du Filtre BBcode
