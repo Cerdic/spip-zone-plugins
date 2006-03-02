@@ -17,10 +17,6 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-function date_EXIF2SPIP($date) {
-  return preg_replace('/^([0-9]*):([0-9]*):([0-9]*) /','\1-\2-\3 ',$date);
-}
-
 function action_update_date_exif() {
   global $hash, $id_auteur, $date_conb;
   
@@ -52,7 +48,7 @@ function action_update_date_exif() {
 
   spip_abstract_free($rez);
 
-  $selectDoc = array('id_document','fichier');
+  $selectDoc = array('id_document','fichier','date');
   $fromDoc = array('spip_documents');
   $whereDoc = array("id_type IN ($types)");
 
@@ -60,16 +56,16 @@ function action_update_date_exif() {
 
   $total_doc = 0;
 
+   include_spip('inc/exif');
+
   while($row = spip_abstract_fetch($rez)) {
 	$fichier= $row['fichier'];
 	$id_document = $row['id_document'];
-	$exifs = @exif_read_data($fichier,'EXIF',true);
-	if($exifs) {
-          $date =  date_EXIF2SPIP($exifs['EXIF']['DateTimeOriginal']);
-          if($date){      
-            spip_query("UPDATE ".$table_pref."_documents SET date = '$date' WHERE id_document=$id_document");
-		$total_doc++;
-}
+        $old_date = $row['date'];
+	$date_exif = date_exif($fichier);
+        if($date_exif && $date_exif != $old_date){      
+            spip_query("UPDATE ".$table_pref."_documents SET date = '$date_exif' WHERE id_document=$id_document");
+            $total_doc++;
        }
   }
   

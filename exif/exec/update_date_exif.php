@@ -37,9 +37,9 @@ function verifier_admin() {
 
 function exec_update_date_exif() {
   global $connect_id_auteur;
-  global $total_doc;
+  global $done;
 
-  $total_doc = intval($total_doc);
+  $done = intval($done);
 
   include_ecrire ("inc_presentation");
 
@@ -51,7 +51,7 @@ function exec_update_date_exif() {
 		exit;
 	}
 
-echo "<h3>Synchronis&eacute; $total_doc photos.";
+if($done) echo "<h3>Synchronis&eacute; $done photos.";
 
 
 echo '<form action="'.generer_url_action('update_date_exif').'" method="post">';
