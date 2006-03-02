@@ -10,7 +10,7 @@ _ &copy; 2006 - Distribue sous licence GPL
 	0.1
 	</version>
 	<etat>
-	experimental
+	dev
 	</etat>
 	<description>
 	Dump et restore XML complets
