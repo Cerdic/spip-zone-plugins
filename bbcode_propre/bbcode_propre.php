@@ -29,10 +29,10 @@ function bbcode($chaine) {
   $chaine = preg_replace("!\\[email=(.+)\\](.+)\\[/email\\]!Umi","<html><a href=mailto:\"\\1\">\\2</a></html>",$chaine);
   $chaine = preg_replace("!\\[color=(.+)\\](.+)\\[/color\\]!Umi","<html><span style=\"color:\\1\">\\2</span></html>",$chaine);
   $chaine = preg_replace("!\\[size=(.+)\\](.+)\\[/size\\]!Umi","<html><span style=\"font-size:\\1px\">\\2</span></html>",$chaine);
-  $chaine = preg_replace("!\[list\](.+)\[/list\]!Umi","<html><ul> $1 </ul></html>",$chaine);
-  $chaine = preg_replace("!\[list=1\](.+)\[/list\]!Umi","<html><ol> $1 </ol></html>",$chaine);  
-  $chaine = preg_replace("!\[list=a\](.+)\[/list\]!Umi","<html><ol type='a'> $1 </ol></html>",$chaine);
-  $chaine = preg_replace("!\[\*\](.+)(?=(\[\*\]|</ul>))!Umi","<li>$1</li>",$chaine);
+  $chaine = preg_replace("!\[list\](.+)\[/list\]!Umi","<html><ul> \\1 </ul></html>",$chaine);
+  $chaine = preg_replace("!\[list=1\](.+)\[/list\]!Umi","<html><ol> \\1 </ol></html>",$chaine);  
+  $chaine = preg_replace("!\[list=a\](.+)\[/list\]!Umi","<html><ol type='a'> \\1 </ol></html>",$chaine);
+  $chaine = preg_replace("!\[\*\](.+)(?=(\[\*\]|</ul>))!Umi","<li>\\1</li>",$chaine);
   $chaine = str_replace("[b]","<html><b>",$chaine);
   $chaine = str_replace("[/b]","</b></html>",$chaine);
   $chaine = str_replace("[i]","<html><i>",$chaine);
