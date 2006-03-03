@@ -33,6 +33,7 @@ function chercher_squelette($fond, $id_rubrique, $lang) {
   // supprimer le ".html" pour pouvoir affiner par id_rubrique ou par langue
   $squelette = substr($base, 0, - strlen(".$ext"));
   $trouve = false;
+  $id_rub_init = $id_rubrique;
 
   // On selectionne, dans l'ordre :
   // fond=10
@@ -65,7 +66,7 @@ function chercher_squelette($fond, $id_rubrique, $lang) {
 		  $trouve = true;
 		}
 	  } 
-	  if((!$trouve) && ($n = sql_mot_squelette($id_rubrique,$id_groupe,'rubriques','id_rubrique',true))) {	
+	  if((!$trouve) && ($n = sql_mot_squelette($id_rub_init,$id_groupe,'rubriques','id_rubrique',true))) {	
 		if ($squel = find_in_path("$fond-$n.$ext")) {
 		  $squelette = substr($squel, 0, - strlen(".$ext"));
 		}
