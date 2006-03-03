@@ -2,7 +2,6 @@
 http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 <plugin>
 	<nom> <!-- Nom du plugin -->
-		&nbsp;
 	<multi>
 	[fr]
 	  Squelette par mot clef
@@ -21,8 +20,10 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	<etat>
 	  test
 	</etat>
+	<lien>
+	  http://spip-epona.org/article.php3?id_article=23
+	</lien>
 	<description>
-	&nbsp;
 	<multi>
 	[fr]
 	  Permet de choisir le squelette en fonction d'un mot clef.
