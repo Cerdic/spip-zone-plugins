@@ -2,19 +2,20 @@
 http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Rien
+	En travaux
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	_fil_
+	[Arnaud Ventre->ventrea@gmail.com]
+	_ &copy; 2006 - Distribue sous licence GPL
 	</auteur>
 	<version>
-	0.1
+	1.0
 	</version>
 	<etat>
 	dev
 	</etat>
 	<description>
-	Le seul plugin spip au monde qui ne fait rien, mais qui le fait bien !
+	Permet d'afficher un message personalisable pendant une phase de maintenance sur tout le site public
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
 	mes_options.php
@@ -28,25 +29,15 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	ce parametre est obligatoire et doit etre non vide
 	-->
 	<prefix> 
-	Rien
+	EnTravaux
 	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines 
 	La liste des pipelines disponibles est dans ecrire/inc_version ($spip_pipeline = ... ) 
 	-->
 	<pipeline>
-		<nom>post_propre</nom>
-		<action>leFiltre</action>
-		<inclure>Rien.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
-		<inclure>Rien.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>ajouter_onglets</nom>
-		<action>ajouterOnglets</action>
-		<inclure>Rien.php</inclure>
+		<inclure>en_travaux.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la fonction portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>
