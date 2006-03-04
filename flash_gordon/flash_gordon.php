@@ -28,6 +28,6 @@ if($matches[1][0]) $playa_ = '
 		
 		return $quelquechose.$playa_.'<!-- flash_gordon -->';
 	}
-
+ 
 	
 ?>
