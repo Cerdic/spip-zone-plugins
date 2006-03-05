@@ -662,23 +662,13 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 					"VALUES ".join(',', $inserts);
 				spip_query($query);
 				if ($row['sondage'] != 'non') {
-					$hash = calculer_action_auteur("confirm $id_reponse");
+					$hash = calculer_action_auteur("forms valide reponse sondage $id_reponse");
 					$url = generer_url_public("valide_sondage","verif_cookie=oui&id_reponse=$id_reponse&hash=$hash");
-					/*$hash = calculer_action_auteur("cookie $id_reponse");
-					$link = new Link('plug.php?exec=valide_sondage');
-					$link->addVar('verif_cookie', 'oui');
-					$link->addVar('id_reponse', $id_reponse);
-					$link->addVar('hash', $hash);*/
 					$r .= "<img src='".$url."' width='1' height='1' alt='' />";
 				}
 				else if (($email) || ($mailconfirm)) {
-					$hash = calculer_action_auteur("confirm $id_reponse");
+					$hash = calculer_action_auteur("forms confirme reponse $id_reponse");
 					$url = generer_url_public("valide_sondage","mel_confirm=oui&id_reponse=$id_reponse&mailconfirm=$mailconfirm&hash=$hash");
-					/*$link = new Link('plug.php?exec=valide_sondage');
-					$link->addVar('mel_confirm', 'oui');
-					$link->addVar('id_reponse', $id_reponse);
-					$link->addVar('mailconfirm', $mailconfirm);
-					$link->addVar('hash', $hash);*/
 					$r .= "<img src='".$url."' width='1' height='1' alt='' />";
 	
 					$reponse = $mailconfirm;
@@ -759,8 +749,8 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 					$r .= "<p class='spip_form_erreur'>".$s."</p>";
 			}
 		}
-		if (($sondage == 'public')&&(Forms_verif_cookie_sondage_utilise($id_form)==true)){
-	  	$r .= Forms_afficher_reponses_sondage($id_form);
+		if (($sondage == 'public')&&(Forms_verif_cookie_sondage_utilise($id_form)==true)&&(_DIR_RESTREINT!="")){
+			$r .= Forms_afficher_reponses_sondage($id_form);
 			$r .= "</div>\n";
 	 	}
 		else	{

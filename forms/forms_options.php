@@ -30,7 +30,30 @@ function Forms_poser_cookie_sondage() {
 	}
 }
 
+function Forms_generer_url_sondage($id_form) {
+	return generer_url_public("sondage","id_form=$id_form",true);
+}
+
 if ($GLOBALS['ajout_reponse'] == 'oui' && $GLOBALS['ajout_cookie_form'] == 'oui')
 	Forms_poser_cookie_sondage();
 
+// test si un cookie sondage a ete pose
+foreach($_COOKIE as $cookie=>$value){
+	if (preg_match(",spip_cookie_form_([0-9]+),",$cookie)){
+		$idf = preg_replace(",spip_cookie_form_([0-9]+),","\\1",$cookie);
+		$res = spip_query("SELECT id_article FROM spip_forms_articles WHERE id_form=$idf");
+		while($row=spip_fetch_array($res)){
+			$ida = $row['id_article'];
+			if (
+						(isset($GLOBALS['article'])&&($GLOBALS['article']==$ida))
+					||(isset($GLOBALS['id_article'])&&($GLOBALS['id_article']==$ida))
+					||(isset($GLOBALS['contexte_inclus']['id_article'])&&($GLOBALS['contexte_inclus']['id_article']==$ida)) ){
+					// un article qui utilise le form va etre rendu
+					// il faut utiliser le marquer cache pour ne pas polluer la page commune
+					$GLOBALS['marqueur'].=":sondage $idf";
+					break;
+				}
+		}
+	}
+}
 ?>

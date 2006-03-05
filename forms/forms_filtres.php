@@ -32,7 +32,7 @@ include_spip("inc/forms");
 				$reset = true;
 			}
 		}
-	
+
 		// Remplacer les raccourcis de type <formXXX>
 		if (is_int(strpos($texte, '<form')) &&
 			preg_match_all(',<form(\d+)>,', $texte, $regs, PREG_SET_ORDER)) {
@@ -52,10 +52,6 @@ include_spip("inc/forms");
 		}
 	
 		return $texte;
-	}
-
-	function Forms_generer_url_sondage($id_form) {
-		return generer_url_public("sondage","id_form=$id_form");
 	}
 
 	// Hack crade a cause des limitations du compilateur

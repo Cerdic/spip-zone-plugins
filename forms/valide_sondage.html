@@ -18,11 +18,11 @@ include_ecrire("inc_session");
 
 function valide_sondage()
 {
-	global $verif_cookie;
-	global $id_reponse;
-	global $hash;
-	global $mel_confirm;
-	global $mailconfirm;
+	$verif_cookie = _request('verif_cookie');
+	$id_reponse = intval(_request('id_reponse'));
+	$hash = _request('hash');
+	$mel_confirm = _request('mel_confirm');
+	$mailconfirm = _request('mailconfirm');
 
 	$renvoyer_image = false;
 
@@ -36,7 +36,7 @@ function valide_sondage()
 			// D'abord verifier que l'URL est legitime, donc que la demande a bien
 			// ete generee par SPIP
 			if ($cookie && $cookie == $_COOKIE[$nom_cookie]
-				&& verifier_action_auteur("cookie $id_reponse", $hash)) {
+				&& verifier_action_auteur("forms valide reponse sondage $id_reponse", $hash)) {
 				// Ensuite verifier que le cookie n'a pas deja ete utilise pour le meme formulaire
 				$query = "SELECT id_reponse FROM spip_reponses ".
 					"WHERE id_form=$id_form AND id_reponse!=$id_reponse AND cookie='".addslashes($cookie)."'";
@@ -55,7 +55,7 @@ function valide_sondage()
 			$id_form = $row['id_form'];
 			// D'abord verifier que l'URL est legitime, donc que la demande a bien
 			// ete generee par SPIP
-			if (verifier_action_auteur("confirm $id_reponse", $hash)) {
+			if (verifier_action_auteur("forms confirme reponse $id_reponse", $hash)) {
 				Forms_generer_mail_reponse_formulaire($id_form, $id_reponse, $mailconfirm);
 			}
 		}
