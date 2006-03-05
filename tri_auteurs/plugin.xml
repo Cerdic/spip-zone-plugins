@@ -1,6 +1,5 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	&nbsp;
 	  <multi>
 		[fr]Tri Auteurs
 		[en]Sort authors
@@ -17,7 +16,6 @@
 	  dev
 	</etat>
 	<description>	  
-	&nbsp;
 	  <multi>
 		[fr]pour trier les auteurs d'un article.
 		[en]this plugin gives a way to sort authors of an article.
