@@ -23,8 +23,8 @@ define('_DIR_PLUGIN_CHERCHER_SQUELETTES',(_DIR_PLUGINS.end(explode(basename(_DIR
 function exec_config_chercher_squelettes_mots() {
   global $connect_statut, $connect_toutes_rubriques;
 
-  include_ecrire ("inc_presentation");
-  include_ecrire ("inc_abstract_sql");
+  include_spip("inc/presentation");
+  include_spip ("base/abstract_sql");
 
   debut_page('&laquo; '._T('squelettesmots:titre_page').' &raquo;', 'configurations', 'mots_partout','',_DIR_PLUGIN_CHERCHER_SQUELETTES.'/chercher_squelettes_mots.css');
 
