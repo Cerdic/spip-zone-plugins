@@ -1,6 +1,5 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	 	&nbsp;
 	  <multi>
 		[fr]Coloration Code
 		[en]Code higlighting
@@ -17,13 +16,12 @@
 	  stable
 	</etat>
 	<description>
-	&nbsp;
 	<multi>
 	[fr]
 	  Coloration syntaxique du code source dans SPIP
 
 	  il suffit de mettre le code entre {{&lt;code class="langage">...&lt;/code>}}.
-	  Les langages supportés sont ceux fournis par [->geshi.sf.net].
+	  Les langages support&eacute;s sont ceux fournis par [->geshi.sf.net].
 	  [en]
 	  Syntax higlighting of code placed in SPIP articles.
 
