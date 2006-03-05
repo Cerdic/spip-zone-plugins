@@ -1,6 +1,5 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	  &nbsp;
 	  <multi>
 	  [fr]Tri par mots clefs
 	  [en]Sorting according to keywords
@@ -17,7 +16,6 @@
 	 experimental 
 	</etat>
 	<description>
-	  &nbsp;
 	  <multi>
 		[fr]
 		Pour trier les articles en fonction d'un mot. 
