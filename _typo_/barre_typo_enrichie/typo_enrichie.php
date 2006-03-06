@@ -13,6 +13,7 @@
 	 *           [|texte|] : centrer le texte
 	 *           [(texte)] : encadrer le texte (occupe toute la largeur de la page, à mettre autour d'un paragraphe)
 	 *           [*texte*] : encadrer/surligner le texte (une partie à l'intérieur d'un paragraphe)
+	 *           [**texte*] : variante encadrer/surligner le texte (une partie à l'intérieur d'un paragraphe)
 	 *           <sup>texte</sup> : mettre en exposant le texte sélectionné
 	 *
 	 *     Styles pour les encadrements à rajouter dans votre feuille de style :
@@ -180,7 +181,7 @@ function BarreTypoEnrichie_post_typo($texte) {
 	return $texte;
 }
 function BarreTypoEnrichie_header_prive($texte) {
-	$texte.= '<link rel="stylesheet" type="text/css" href="' . _DIR_PLUGINS . '/barre_typo_enrichie/css/bartypenr.css" />' . "\n";
+	$texte.= '<link rel="stylesheet" type="text/css" href="' . (_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))) . '/css/bartypenr.css" />' . "\n";
 	return $texte;
 }
 

@@ -1,8 +1,5 @@
 <?php
 
-// Chemin de la barre typo enrichie
-#$surcharge['inc/barre'] = _DIR_PLUGINS.'/barre_typo_enrichie/inc/barre.php'; #obsolete
-
 // Definition des différents intertitres possibles
 $GLOBALS['debut_intertitre'] = "<h2>";
 $GLOBALS['fin_intertitre'] = "</h2>";
