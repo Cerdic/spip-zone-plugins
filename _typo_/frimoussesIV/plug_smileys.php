@@ -74,7 +74,7 @@ function smileys_pre_propre($chaine) {
   global $flag_ecrire;
 
   foreach(smileys_liste_smileys() as $smiley => $file) {
-	$alt = _T($smiley);
+	$alt = _T('smileys:'.$smiley);
 	if(!$alt) {
 	  $alt = htmlentities($smiley);
 	}
@@ -89,7 +89,7 @@ function balise_SMILEY_DISPO($p) {
 
   $p->code = '"<ul class=\"listes_smileys\">';
   foreach(smileys_liste_smileys() as $smiley => $file) {
-	$alt = _T($smiley);
+	$alt = _T(('smileys:'.$smiley);
 	if(!$alt) {
 	  $alt = htmlentities(texte_script($smiley),ENT_QUOTES);
 	}
