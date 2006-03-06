@@ -39,19 +39,17 @@ function coloration_code_color($code, $language='php') {
 
 function coloration_code_echappe($texte) {
   $rempl ='';
+
+  $texte = echappe_retour($texte); 
   if (preg_match_all(
 					 ',<code[[:space:]]+class="(.*)"[[:space:]]*>(.*)</code>,Uims',
 					 $texte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
 	  $code = echappe_retour($regs[2]);
 	  $rempl = coloration_code_color($code,$regs[1]);
-	  $texte = str_replace($regs[0],code_echappement($rempl,"COLCODE"),$texte);
+	  $texte = str_replace($regs[0],"<html>$rempl</html>",$texte);
 	}
-  return $texte;
-}
-
-function coloration_code_echappe_retour($texte) {
-  return echappe_retour($texte,"COLCODE");
+  return echappe_html($texte);
 }
 
 
