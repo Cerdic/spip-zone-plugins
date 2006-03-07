@@ -23,9 +23,9 @@ function action_tri_auteurs() {
 
   $id_article = intval($id_article);
   
-  include_ecrire("inc_session");
+  include_spip("inc/session");
   if (!verifier_action_auteur("tri_auteurs $id_article", $hash, $id_auteur)) {
-	include_ecrire('inc_minipres');
+	include_spip('inc/minipres');
 	minipres(_T('info_acces_interdit'));
   }
 

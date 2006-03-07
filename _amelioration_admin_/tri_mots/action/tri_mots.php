@@ -30,9 +30,9 @@ function action_tri_mots() {
   $id_table = addslashes($id_table);
   $table = addslashes($table);
 
-  include_ecrire("inc_session");
+  include_spip("inc/session");
   if (!verifier_action_auteur("tri_mots $table $id_table $id_mot", $hash, $id_auteur)) {
-	include_ecrire('inc_minipres');
+	include_spip('inc/minipres');
 	minipres(_T('info_acces_interdit'));
   }
   

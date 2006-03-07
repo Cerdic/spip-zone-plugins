@@ -20,7 +20,7 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-define('_DIR_PLUGIN_TRI_MOTS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
+define('_DIR_PLUGIN_TRI_MOTS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__).'/..'))))));
 
 /***********************************************************************/
 /* function*/
@@ -32,18 +32,13 @@ function verifier_admin() {
   return (($connect_statut == '0minirezo') AND $connect_toutes_rubriques);
 }
 
-function verifier_admin_restreint($id_rubrique) {
-  global $connect_id_auteur;
-  global $connect_statut, $connect_toutes_rubriques;
-
-}
 //------------------------la fonction qui fait tout-----------------------------------
 
 function exec_tri_mots() {
   global $connect_id_auteur;
 
-  include_ecrire ("inc_presentation");
-  include_ecrire ("inc_abstract_sql");
+  include_spip("inc/presentation");
+  include_spip("base/abstract_sql");
 
   debut_page('&laquo; '._T('trimots:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_TRI_MOTS."/tri_mots.css");
   

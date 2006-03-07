@@ -47,6 +47,8 @@ function TriAuteurs_ajouter_boite_gauche($arguments) {
 function TriAuteurs_boite_tri_auteurs($id_article,$id_rubrique) {
   global $spip_lang_left,$connect_id_auteur;
   
+  include_spip('base/abstract_sql');
+
   $from = array('spip_auteurs_articles as lien','spip_auteurs as auteurs');
   $select = array('lien.rang','lien.id_auteur','auteurs.nom');
   $where = array('lien.id_auteur=auteurs.id_auteur',"lien.id_article=$id_article");
