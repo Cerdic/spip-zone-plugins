@@ -1,33 +1,42 @@
-<?php
-
-/**
- * definition du plugin "flash_gordon" version "classe statique"
- */
-
-	/* static public */
-	function flash_gordon_flash_oo($quelquechose) {
-		// ne rien faire = retourner ce qu'on nous a envoye
-		
-		$reg_formats="mp3";
-		 
-	//trouver des liens complets
-	unset($matches) ;
-	preg_match_all("/<a href=['\"]?(http:\/\/[a-zA-Z0-9 ()\/\:\._%\?+'=~-]*\.($reg_formats))['\"]?[^>]*>(.*)<\/a>/iU", $quelquechose, $matches);
-	//print_r($matches);
-		
-if($matches[1][0]) $playa_ = '
-		<div style="margin-top:10px;clear:both"><br />
-<object  type="application/x-shockwave-flash" data="audio-player/player.swf" width="290" height="24" id="audioplayer1">
-<param name="movie" value="audio-player/player.swf" />
-<param name="FlashVars" value="playerID=1&amp;bg=0xf8f8f8&amp;leftbg=0xeeeeee&amp;lefticon=0x666666&amp;rightbg=0xcccccc&amp;rightbghover=0x999999&amp;righticon=0x666666&amp;righticonhover=0xFFFFFF&amp;text=0x666666&amp;slider=0x666666&amp;track=0xFFFFFF&amp;border=0x666666&amp;loader=0x9FFFB8&amp;soundFile='.$matches[1][0].'" />
-<param name="quality" value="high" />
-<param name="menu" value="false" />
-<param name="wmode" value="transparent" />
-</object>
-</div> ' ;
-		
-		return $quelquechose.$playa_.'<!-- flash_gordon -->';
-	}
- 
-	
-?>
+<!-- En date du 17 fevrier 2006, des explications sur les plugins se trouvent ici :  
+http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Flash Gordon
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	BoOz
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Fashons les url des mp3 pour etre a la mode
+	</description>
+	<options> <!-- fichier charge a chaque hit -->
+	mes_options.php
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	mes_fonctions.php
+	</fonctions>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	flash_gordon
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines 
+	La liste des pipelines disponibles est dans ecrire/inc_version ($spip_pipeline = ... ) 
+	-->
+	<pipeline>
+		<nom>post_propre</nom>
+		<action>flash_oo</action>
+		<inclure>flash_gordon.php</inclure>
+	</pipeline>
+		<!-- Le parametre action est facultatif : en son absence la fonction portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
