@@ -140,7 +140,7 @@
 	{
 	   // Si il n'y a pas de mot, on sort immédiatement
 	   if ( $sIn === '' ) return '    ';
-	   // On met tout en minuscule
+	   // On met tout en majuscule
 	   $sIn = strtoupper( $sIn );
 	   // On supprime les accents
 	   $sIn = strtr( $sIn, 'ÂÄÀÇÈÉÊËŒÎÏÔÖÙÛÜ', 'AAASEEEEEIIOOUUU' );
