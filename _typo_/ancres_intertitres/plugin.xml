@@ -13,7 +13,9 @@ _ &copy; 2006 - Distribue sous licence GPL
 	test
 	</etat>
 	<description>
-	Introduit une ancre translitteree pour les intertitres
+		Introduit une ancre translitteree pour les intertitres
+
+		N&eacute;cessite le plugin [ancres->http://zone.spip.org/trac/spip-zone/browser/_plugins_/_typo_/ancres] pour fonctionner
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
