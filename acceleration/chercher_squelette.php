@@ -39,10 +39,10 @@ function chercher_squelette($fond, $id_rubrique, $lang) {
   // On selectionne, dans l'ordre :
   // fond=10
   $f = "$fond=$id_rubrique";
-  if (($id_rubrique > 0) AND (isset($GLOBALS['declare-fonds']["$f.$ext"])){
+  if (($id_rubrique > 0) AND (isset($GLOBALS['declare-fonds']["$f.$ext"]))){
 		$squel = $GLOBALS['declare-fonds']["$f.$ext"];
 		if ($squel===NULL)
-			$squel=find_in_path("$f.$ext")))
+			$squel=find_in_path("$f.$ext");
 		if ($squel){
 			$squelette = substr($squel, 0, - strlen(".$ext"));
 			$trouve = true;
@@ -51,10 +51,10 @@ function chercher_squelette($fond, $id_rubrique, $lang) {
 	// fond-10 fond-<rubriques parentes>
 		while ($id_rubrique > 0) {
 		  $f = "$fond-$id_rubrique";
-		  if (isset($GLOBALS['declare-fonds']["$f.$ext"]){
+		  if (isset($GLOBALS['declare-fonds']["$f.$ext"])){
 				$squel = $GLOBALS['declare-fonds']["$f.$ext"];
 				if ($squel===NULL)
-					$squel=find_in_path("$f.$ext")))
+					$squel=find_in_path("$f.$ext");
 			  if ($squel) {
 					$squelette = substr($squel, 0, - strlen(".$ext"));
 					$trouve = true;
