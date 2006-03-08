@@ -1,0 +1,31 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Acceleration
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	  Cedric MORIN, a la suite de travaux communs avec _fil_ sur irc
+	</auteur>
+	<version>
+	  0.1
+	</version>
+	<etat>
+	  experimental
+	</etat>
+	<description>
+	<multi>
+	[fr]
+		ATTENTION : ce plugin n'est pas compatible avec le plugin Squelettes par mots-cles
+_ Ce plugin accelere le service de SPIP par quelques modifications fonctionelle simples :
+-* Pour economiser plusieurs find-in-path par requete de page, couteux sur hebergement mutualis&eacute;
+les chemins des fonds du type article-xx.html ou article=xx.html doivent etre declares de la facon suivante :
+-** soit $GLOBALS['declare-fonds']['article-23.html']=NULL, SPIP cherchera alors tout seul le chemin
+-** soit $GLOBALS['declare-fonds']['article-23.html']='squelettes/', ce qui est le plus optimise, SPIP sachant directement ou chercher le squelette
+     </multi>
+	</description>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	  chercher_squelette.php
+	</fonctions>
+	<prefix> 
+	  Acceleration
+	</prefix>
+</plugin>
