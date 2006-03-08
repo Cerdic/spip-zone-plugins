@@ -19,6 +19,7 @@
 
 function chercher_squelette($fond, $id_rubrique, $lang) {
   global $contexte;
+  static $sqlparent = array();
   $ext = $GLOBALS['extension_squelette'];
 
   // Accrocher un squelette de base dans le chemin
@@ -38,40 +39,34 @@ function chercher_squelette($fond, $id_rubrique, $lang) {
   // On selectionne, dans l'ordre :
   // fond=10
   $f = "$fond=$id_rubrique";
-  if (($id_rubrique > 0) AND ($squel=find_in_path("$f.$ext"))) {
-	$squelette = substr($squel, 0, - strlen(".$ext"));
-	$trouve = true;
+  if (($id_rubrique > 0) AND (isset($GLOBALS['declare-fonds']["$f.$ext"])){
+		$squel = $GLOBALS['declare-fonds']["$f.$ext"];
+		if ($squel===NULL)
+			$squel=find_in_path("$f.$ext")))
+		if ($squel){
+			$squelette = substr($squel, 0, - strlen(".$ext"));
+			$trouve = true;
+		}
   } else {
 	// fond-10 fond-<rubriques parentes>
-	while ($id_rubrique > 0) {
-	  $f = "$fond-$id_rubrique";
-	  if ($squel=find_in_path("$f.$ext")) {
-		$squelette = substr($squel, 0, - strlen(".$ext"));
-		$trouve = true;
-		break;
-	  }
-	  else {
-		$id_rubrique = sql_parent($id_rubrique);
-	  }
-	}
-  }
-
-  if(!$trouve) {
-	$fonds = unserialize(lire_meta('SquelettesMots:fond_pour_groupe'));
-	if (is_array($fonds) && (list($id_groupe,$table,$id_table) = $fonds[$fond])) {
-	  $trouve = false;
-	  if (($id = $contexte[$id_table]) && ($n = sql_mot_squelette($id,$id_groupe,$table,$id_table))) {
-		if ($squel = find_in_path("$fond-$n.$ext")) {
-		  $squelette = substr($squel, 0, - strlen(".$ext"));
-		  $trouve = true;
+		while ($id_rubrique > 0) {
+		  $f = "$fond-$id_rubrique";
+		  if (isset($GLOBALS['declare-fonds']["$f.$ext"]){
+				$squel = $GLOBALS['declare-fonds']["$f.$ext"];
+				if ($squel===NULL)
+					$squel=find_in_path("$f.$ext")))
+			  if ($squel) {
+					$squelette = substr($squel, 0, - strlen(".$ext"));
+					$trouve = true;
+					break;
+				}
+		  }
+		  else {
+		  	if (!isset($sqlparent[$id_rubrique]))
+		  		$sqlparent[$id_rubrique]=sql_parent($id_rubrique);
+				$id_rubrique = $sqlparent[$id_rubrique];
+		  }
 		}
-	  } 
-	  if((!$trouve) && ($n = sql_mot_squelette($id_rub_init,$id_groupe,'rubriques','id_rubrique',true))) {	
-		if ($squel = find_in_path("$fond-$n.$ext")) {
-		  $squelette = substr($squel, 0, - strlen(".$ext"));
-		}
-	  }
-	}
   }
 
   // Affiner par lang
@@ -83,26 +78,6 @@ function chercher_squelette($fond, $id_rubrique, $lang) {
   }
   
   return $squelette;
-}
-
-function sql_mot_squelette($id,$id_groupe,$table,$id_table,$recurse=false) {
-  $select1 = array('titre');
-  $from1 = array('spip_mots AS mots',
-				 "spip_mots_$table AS lien");
-  while($id > 0) {
-	$where1 = array("$id_table=$id",
-					'mots.id_mot=lien.id_mot',
-					"id_groupe=$id_groupe");
-	$r = spip_abstract_fetch(spip_abstract_select($select1,$from1,$where1));
-	if ($r) {
-	  include_ecrire("inc_charsets");
-
-	  return translitteration(preg_replace('["\'.] ','_',extraire_multi($r['titre'])));	
-	}
-	if(!recurse) return '';
-	$id = sql_parent($id);
-  }
-  return '';
 }
 
 ?>
