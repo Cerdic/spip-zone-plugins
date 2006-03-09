@@ -10,8 +10,9 @@ function exec_acces_restreint(){
 	global $connect_statut;
 	global $connect_toutes_rubriques;
 	global $couleur_claire;
-  include_ecrire('inc_presentation');
-	include_ecrire('inc_base');
+	global $spip_lang_right;
+  	include_spip('inc/presentation');
+	include_spip('base/create');
 	creer_base(); // au cas ou
 	  
 	debut_page(_T('accesrestreint:page_zones_acces'));
@@ -116,7 +117,7 @@ function exec_acces_restreint(){
 	echo "descriptif";
 	echo "</textarea>";
 	echo "</p>";
-	echo "<input type='submit' name='creer' value='"._T('accesrestreint:bouton_creer_la_zone')."' />";
+	echo "<div style='text-align:$spip_lang_right'><input type='submit' name='creer' value='"._T('accesrestreint:bouton_creer_la_zone')."' class='fondo'></div>";
 	echo "</div>";
 	echo "</form>";
 	fin_cadre_relief();

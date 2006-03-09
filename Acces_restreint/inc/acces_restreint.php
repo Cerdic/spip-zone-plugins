@@ -1,7 +1,7 @@
 <?php
-include_ecrire('inc_db_mysql');
-include_ecrire('inc_abstract_sql');
-include_ecrire('inc_rubriques');
+include_spip('base/db_mysql');
+include_spip('base/abstract_sql');
+include_spip('inc/rubriques');
 	
 
 	// ***********************************************************************************************

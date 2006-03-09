@@ -1,6 +1,6 @@
 <?php
 
-include_spip('inc/acces_restreint_base');
+include_spip('base/acces_restreint');
 include_spip('inc/acces_restreint');
 
 //$GLOBALS['surcharge']['exec/auteurs_edit']=dirname(__FILE__).'/exec/auteurs_edit.php';

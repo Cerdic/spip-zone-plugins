@@ -61,7 +61,6 @@ function exec_acces_restreint_edit(){
 	echo entites_html($descriptif);
 	echo "</textarea>";
 	echo "</p>";
-	echo "<input type='submit' name='Enregistrer' value='"._T('bouton_enregistrer')."' class='fondo' />";
 	echo "</div>";
 
 	echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
@@ -70,6 +69,7 @@ function exec_acces_restreint_edit(){
 	echo "<div>\n";
 	echo AccesRestreint_selecteur_rubrique_html($id_zone);
 	echo "</div>\n";
+	echo "<div style='text-align:$spip_lang_right'><input type='submit' name='Enregistrer' value='"._T('bouton_enregistrer')."' class='fondo'></div>";
 	echo "</form>\n";
 
 	fin_cadre_relief();
