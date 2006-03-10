@@ -16,8 +16,6 @@
 
 	Il a &eacute;t&eacute; d&eacute;velopp&eacute; pour servir de tableau de bord au projet de portail <a href="http://mouvements.be/">mouvements.be/</a>.
 	</description>
-	<options>mes_options.php</options>
-	<fonctions></fonctions>
 	<prefix>stats_pub</prefix>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
