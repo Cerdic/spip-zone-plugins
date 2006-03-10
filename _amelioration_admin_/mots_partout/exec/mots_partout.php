@@ -178,10 +178,10 @@ function afficher_liste_defaut($choses) {
 function exec_mots_partout() {
 
   include(_DIR_PLUGIN_MOTS_PARTOUT."/mots_partout_choses.php");
-  include_ecrire ("inc_presentation");
-  include_ecrire ("inc_documents");
-  include_ecrire ("inc_abstract_sql");
-  include_ecrire ("inc_objet");
+  include_spip ("inc/presentation");
+  include_spip ("inc/documents");
+  include_spip ("base/abstract_sql");
+  include_spip("inc/objet");
 
   /***********************************************************************/
 /* PREFIXE*/

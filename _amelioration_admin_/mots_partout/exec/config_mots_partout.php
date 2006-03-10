@@ -4,8 +4,8 @@ define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGIN
 function exec_config_mots_partout() {
   global $connect_statut, $connect_toutes_rubriques;
 
-  include_ecrire ("inc_presentation");
-  include_ecrire ("inc_abstract_sql");
+  include_spip ("inc/presentation");
+  include_spip ("base/abstract_sql");
 
   debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'configurations', 'mots_partout');
 
@@ -52,7 +52,7 @@ function exec_config_mots_partout() {
 	debut_droite();
 	
 
-	include_ecrire('inc_config');
+	include_spip('inc/config');
 	avertissement_config();
 
 	debut_cadre_enfonce();
