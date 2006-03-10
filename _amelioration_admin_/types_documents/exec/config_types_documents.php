@@ -56,7 +56,7 @@ function exec_config_types_documents() {
 	echo '<form action="'.generer_url_action('types_documents').'" method="post">';
 
 	echo "<div class='liste'>";
-	bandeau_titre_boite2('Types', "article-24.gif");
+	bandeau_titre_boite2(_T('typesdocuments:titre_page'), "article-24.gif");
 	
 	echo afficher_liste_debut_tableau();
 
@@ -67,7 +67,7 @@ function exec_config_types_documents() {
 	$f_count = array('spip_documents');
 	
 	$table = array();
-	$table[] = array('','<strong>Type</strong>','<strong>Extension</strong>','<strong>Description</strong>','<strong>Permis?</strong>','<strong>nbr doc</strong>');
+	$table[] = array('','<strong>'._T('typesdocuments:type').'</strong>','<strong>'._T('typesdocuments:extension').'</strong>','<strong>'._T('typesdocuments:description').'</strong>','<strong>'._T('typesdocuments:permission').'</strong>','<strong>'._T('typesdocuments:nombre_documents').'</strong>');
 	$rez = spip_abstract_select($select,$from);
 	while($row = spip_abstract_fetch($rez)) {
 	  $vals = '';	

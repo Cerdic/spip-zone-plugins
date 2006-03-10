@@ -1,0 +1,1 @@
+Plugin qui ajoute un onglet dans la page de configuration (seulement pour les admins) pour gerer les types de documents acceptes par SPIP.
