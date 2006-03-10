@@ -1,0 +1,27 @@
+<plugin>
+	<nom>Statistiques de publication</nom>
+	<auteur><a href="http://francois.schreuer.org/">franz</a>
+
+	&copy; 2006 - Distribu&eacute; sous licence GPL</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Ce plugin ajoute une page dans l'interface priv&eacute;e pr&eacute;sentant le nombre d'articles publi&eacute;s, propos&eacute;s et refus&eacute;s pour les trente derniers jours.
+
+	Attention, il est terriblement gourmand en l'&eacute;tat actuel des choses (90 requ&ecirc;tes mysql !). Il faudra lui mitonner un petit cache, probablement.
+
+	Il a &eacute;t&eacute; d&eacute;velopp&eacute; pour servir de tableau de bord au projet de portail <a href="http://mouvements.be/">mouvements.be/</a>.
+	</description>
+	<options>mes_options.php</options>
+	<fonctions></fonctions>
+	<prefix>stats_pub</prefix>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>pipelines.php</inclure>
+	</pipeline>
+</plugin>
