@@ -2,7 +2,7 @@
 http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	types de documents
+	<multi>[fr]types de documents[en]Document Types</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	  Pierre Andrews (Mortimer)
@@ -14,7 +14,9 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	dev
 	</etat>
 	<description>
-	gestion des types de documents accept&eacute;s par SPIP
+	<multi>
+	[fr] gestion des types de documents accept&eacute;s par SPIP.
+	[en] management of the documents types directly accepted for upload with SPIP.
 	</description>
 	<prefix> 
 	TypesDocuments
