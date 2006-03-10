@@ -1,0 +1,26 @@
+<!-- En date du 17 fevrier 2006, des explications sur les plugins se trouvent ici :  
+http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	types de documents
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	  Pierre Andrews (Mortimer)
+	</auteur>
+	<version>
+	  0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	gestion des types de documents accept&eacute;s par SPIP
+	</description>
+	<prefix> 
+	TypesDocuments
+	</prefix>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>TypesDocuments.php</inclure>
+	</pipeline>
+</plugin>
