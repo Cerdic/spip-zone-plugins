@@ -10,7 +10,7 @@
  *
  */
 
-define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS . basename(dirname(__FILE__))));
+define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 
 function MotsPartout_ajouterBoutons($boutons_admin) {
   

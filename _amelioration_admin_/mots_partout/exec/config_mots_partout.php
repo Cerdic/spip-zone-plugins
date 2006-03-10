@@ -1,5 +1,5 @@
 <?php
-define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS . 'mots_partout'));
+define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__).'/..'))))));
 
 function exec_config_mots_partout() {
   global $connect_statut, $connect_toutes_rubriques;
