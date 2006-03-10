@@ -1,9 +1,5 @@
 <?php
 
-//Quelques codes de langues
-//$GLOBALS['i18n_spip_fr']['table_matiere'] = 'Table des mati&egrave;res';
-//fausse des codes si place ici.
-
 //
 // http://www.spip-contrib.net/spikini/VarianteContribAjouter-des-ID-aux-intertitres
 //
