@@ -45,9 +45,4 @@
 		<action>echappe</action>
 		<inclure>coloration_code.php</inclure>
 	</pipeline>
-	<pipeline>
-		<nom>post_typo</nom>
-		<action>echappe_retour</action>
-		<inclure>coloration_code.php</inclure>
-	</pipeline>
 </plugin>
