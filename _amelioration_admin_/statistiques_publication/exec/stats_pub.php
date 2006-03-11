@@ -14,18 +14,17 @@ function exec_stats_pub(){
 	global $spip_lang_right;
   	include_spip('inc/presentation');
 	include_spip('base/create');
-	creer_base(); // au cas ou
-	  
+
 	debut_page(_T('statspub:titre_page'));
-	
+
 	echo "<br /><br /><br />";
 	gros_titre(_T('statspub:titre_page'));
 	debut_gauche();
-	
+
 	debut_boite_info();
-	echo propre(_T('statspub:info_page'));	
+	echo propre(_T('statspub:info_page'));
 	fin_boite_info();
-	
+
 	debut_droite();
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 		echo _T('avis_non_acces_page');
@@ -49,16 +48,19 @@ function exec_stats_pub(){
 	echo '</strong></td></tr>';
 	while($stats_pub_compteur != $stats_pub_nb_jours)
 	{
-		$date = date("Y-m-d",time()-($stats_pub_compteur*24*3600));
+		$date = time()-($stats_pub_compteur*24*3600);
+		$date_jour = date("Y-m-d",$date);
 		$requete = "SELECT
 			COUNT(*) AS nb
 			FROM spip_articles
-			WHERE DATE_FORMAT(date,'%Y-%m-%d') = '$date'";
+			WHERE DATE_FORMAT(date,'%Y-%m-%d') = '$date_jour'";
 		$r_publies = spip_fetch_array(spip_query("$requete AND statut='publie'"));
 		$r_proposes = spip_fetch_array(spip_query("$requete AND statut='prop'"));
 		$r_refuses = spip_fetch_array(spip_query("$requete AND statut='refuse'"));
-		echo '<tr>
-			<td>'.affdate_court($date).'</td>
+		if(date("w",$date) == '0') echo '<tr style="background-color: #ddd;">';
+		else echo '<tr>';
+		echo '
+			<td>'.affdate_court($date_jour).'</td>
 			<td>'.$r_publies['nb'].'</td>
 			<td>'.$r_proposes['nb'].'</td>
 			<td>'.$r_refuses['nb'].'</td>
