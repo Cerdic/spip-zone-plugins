@@ -38,6 +38,7 @@
 		AncresIntertitres_table_matiere('', $url, $matches[1]);
 		return '{{{ ['.$url.'<-] '.$matches[1].' }}}';
 	}
+	
 	function AncresIntertitres_table_matiere($mode = '', $url = '', $titre ='') {
 		static $tableau = array();
 		if($mode == 'retour') return $tableau;
@@ -45,12 +46,12 @@
 		return '';
 	}
 	
-	function AncresIntertitres_compose_table_matiere($cadre_lien,	$cadre_global, $table_matiere) {
+	function AncresIntertitres_compose_table_matiere($table_matiere, $avant, $apres) {
 		$texte = '';
 		if(!empty($table_matiere))
 			foreach($table_matiere as $url => $titre)
-				$texte .= preg_replace(array(',@url@,', ',@titre@,'), array($url, $titre), $cadre_lien);
-		return $texte ? preg_replace(',@texte@,', $texte, $cadre_global) : '';	
+				$texte .= $avant.'<a href="#'.$url.'">'.$titre.'</a>'.$apres."\n";
+		return $texte;	
 	}
   
 ?>

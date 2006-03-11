@@ -1,29 +1,19 @@
 Nom : ancres_intertitres
-Version : 0.1
-Version spip minimale requise : 1.9alpha
+Version : 0.2
+Version spip minimale requise : 1.9beta1
 
-Objectif : ajouter des ancres html calcul√©es en fonction du texte de l'intertitre. Fournir une balise pour afficher la "table des matieres" d'un article (contenu de #TEXTE)
+Objectif : ajouter des ancres html calculees en fonction du texte de l'intertitre. Fournir une balise pour afficher la "table des matieres" d'un article (contenu de #TEXTE)
 
 Fonctionnement : 
 
 - les intertitres ( notes {{{intertitre}}} ) seront transformes en <h3 class="spip"><a name="intertitre"></a>intertitre</h3>
-- le contenu de l'attribut name est calcule selon une methode approchant celle des urls propres de spip. Aussi un intertitre {{{ceci est un intertitre sp√©cial}}} sera transforme en <h3 class="spip"><a name="ceci-est-un-intertitre-special"></a>ceci est un intertitre sp√©cial</h3>
+- le contenu de l'attribut name est calcule selon une methode approchant celle des urls propres de spip. Aussi un intertitre {{{ceci est un intertitre spÈcial}}} sera transforme en <h3 class="spip"><a name="ceci-est-un-intertitre-special"></a>ceci est un intertitre spÈcial</h3>
 - chaque intertitre est memorise avec son ancre correspondante pour etre reproduite dans la balise #TABLE_MATIERE
 
 Installation :
 
 - copier le repertoire ancres_intertitres dans le repertoire plugins de votre site spip.
-- creer un fichier ecrire/mes_options.php3 s'il n'existe pas
-- ajouter dans ce fichier les lignes :
-
----rien avant les lignes ci-dessous---
-<?php
-
-$plugins[] = 'ancres_intertitres';
-$plugins[] = 'ancres'; //plugin d'exemple de la distribution de spip
-
-?>
----rien apres la ligne ci-dessus---
+- activer le plugin via l'interface
 
 Utilisation : les intertitres seront calcules automatiquement. Pour afficher la table des matieres, ajouter la balise #TABLE_MATIERE dans votre squelette.
 
@@ -36,10 +26,24 @@ Note : si vous voulez afficher la table des matieres avant le #TEXTE, procedez d
 
 (l'appel de #TEXTE calcule la table et les notes. L'astuce permet aussi d'eviter l'affichage des notes en double)
 
+#TABLE_MATIERE affichera les ancres de la maniere suivante par defaut :
+
+- <a href="lienA">intertitreA</a><br />
+- <a href="lienB">intertitreB</a><br />
+
+pour faire une belle noisettes
+on peut parametrer la balise comme suit :
+
+[<div id="table_matiere">
+	<h2><:table_matiere:></h2>
+	<ul>
+		(#TABLE_MATIERE{<li>,</li>})
+	</ul>
+</div>]
+
+ou <li> sera affiche avant chaque lien et </li> apres
+
 ChangeLog :
 
 2005-11-17 : version initiale 0.1
-
-Todo :
-
-- Trouver un moyen de remplir la table des matieres avant l'appel a la balise #TEXTE
+2006-03-11 : version 0.2, adaptation pour SPIP1.9b1 et parametrage du rendu
