@@ -1,0 +1,22 @@
+<plugin>
+	<nom>Syndiquer dans spip_articles</nom>
+	<auteur><a href="http://francois.schreuer.org/">franz</a>
+
+	&copy; 2006 - Distribu&eacute; sous licence GPL</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Ce plugin modifie le comportement du module de syndication : les articles syndiqu&eacute;s sont directement inject&eacute;s dans
+	la table <code>spip_articles</code> et non plus dans la table <code>spip_syndic_articles</code>. Avantage&nbsp;? On peut d&eacute;sormais g&eacute;rer des logos, auteurs,
+	mots-cl&eacute;s et autres statistiques de fr&eacute;quentation (entre autres) sur les articles syndiqu&eacute;s.
+
+	Attention : ce plugin affecte profond&eacute;ment le fonctionnement de SPIP, notamment en rempla&ccedil;ant plusieurs fichiers importants. &Agrave; utiliser avec grande prudence, donc.
+
+	Ce plugin a &eacute;t&eacute; d&eacute;velopp&eacute; dans le cadre du projet de portail <a href="http://mouvements.be/">mouvements.be/</a>.
+	</description>
+	<prefix>syndiquer_dans_spip_articles</prefix>
+</plugin>
