@@ -65,7 +65,7 @@ function exec_config_types_documents() {
 	$f_count = array('spip_documents');
 	
 	$table = array();
-	$table[] = array('','<strong>'._T('typesdocuments:type').'</strong>','<strong>'._T('typesdocuments:extension').'</strong>','<strong>'._T('typesdocuments:description').'</strong>','<strong>'._T('typesdocuments:permission').'</strong>','<strong>'._T('typesdocuments:nombre_documents').'</strong>');
+	$table[] = array('','<strong>'._T('typesdocuments:type').'</strong>','<strong>'._T('typesdocuments:extension').'</strong>','<strong>'._T('typesdocuments:description').'</strong>','<strong>'._T('typesdocuments:permission').'</strong>','<strong>'._T('typesdocuments:inclus').'</strong>','<strong>'._T('typesdocuments:nombre_documents').'</strong>');
 	$rez = spip_abstract_select($select,$from);
 	while($row = spip_abstract_fetch($rez)) {
 	  $vals = '';	
@@ -86,6 +86,7 @@ function exec_config_types_documents() {
 	  $vals[] = $ext;
 	  $vals[] = $desc;
 	  $vals[] = '<input type="checkbox" disabled="true" name="upload['.$id_type.']"'.(($upload=='oui')?' checked="true"':'').'/>';
+	  $vals[] = $inclus;
 	  
 	  list($count) = spip_abstract_fetsel($s_count,$f_count,array("id_type=$id_type"));
 	  $vals[] = $count;
@@ -94,8 +95,8 @@ function exec_config_types_documents() {
 	}
 	spip_abstract_free($rez);
 	
-	$largeurs = array(24,11,11,80,11,11);
-	$styles = array('','arial1','arial11','arial11','arial11','arial11');	
+	$largeurs = array(24,11,11,80,11,11,11);
+	$styles = array('','arial1','arial11','arial11','arial11','arial11','arial11');	
 	
 	afficher_liste($largeurs, $table, $styles);
 
@@ -108,13 +109,14 @@ function exec_config_types_documents() {
 	echo afficher_liste_debut_tableau();
 	
 	$v = array(
-			   '',
+			   vignette_par_defaut('defaut',false);,
 			   '<input type="text" name="titre"/>',
 			   '<input type="text" name="ext"/>',
 			   '<input type="text" name="desc"/>',
 			   '<input type="checkbox" name="upload" checked="true"/>',
 			   '<input type="text" name="mime"/>',
-			   '<select name="inclus"><option value="image"/><option value="embed"/></select>'
+			   '<select name="inclus"><option value="image"/><option value="embed"/></select>',
+			   ''
 			   );
 
 	afficher_liste($largeurs, array($v), $styles);
