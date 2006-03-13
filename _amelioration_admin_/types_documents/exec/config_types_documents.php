@@ -21,7 +21,7 @@
 define('_DIR_PLUGIN_TYPES_DOCUMENTS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__).'/..'))))));
 
 function exec_config_types_documents() {
-  global $connect_statut, $connect_toutes_rubriques;
+  global $connect_statut, $connect_toutes_rubriques,$connect_id_auteur;
   
   include_spip("inc/presentation");
   include_spip ("base/abstract_sql");
@@ -60,13 +60,22 @@ function exec_config_types_documents() {
 	
 	$select = array('*');
 	$from = array('spip_types_documents');
+	$order = array('titre');
 	
 	$s_count = array('count(*)');
 	$f_count = array('spip_documents');
 	
 	$table = array();
-	$table[] = array('','<strong>'._T('typesdocuments:type').'</strong>','<strong>'._T('typesdocuments:extension').'</strong>','<strong>'._T('typesdocuments:description').'</strong>','<strong>'._T('typesdocuments:permission').'</strong>','<strong>'._T('typesdocuments:inclus').'</strong>','<strong>'._T('typesdocuments:nombre_documents').'</strong>');
-	$rez = spip_abstract_select($select,$from);
+	$table[] = array('',
+	'<strong>'._T('typesdocuments:type').'</strong>',
+	'<strong>'._T('typesdocuments:extension').'</strong>',
+	//'<strong>'._T('typesdocuments:description').'</strong>',
+	'<strong>'._T('typesdocuments:permission').'</strong>',
+	'<strong>'._T('typesdocuments:mime').'</strong>',
+	'<strong>'._T('typesdocuments:inclus').'</strong>',
+	'<strong>'._T('typesdocuments:nombre_documents').'</strong>'
+	);
+	$rez = spip_abstract_select($select,$from,array(),'',$order);
 	while($row = spip_abstract_fetch($rez)) {
 	  $vals = '';	
 	  $id_type = intval($row['id_type']);
@@ -81,11 +90,12 @@ function exec_config_types_documents() {
 	  if($vignette) {
 	  $vals[] = '<img src="'.$vignette.'" alt="'.$titre.'"/>';
 	  } else
-		$vals[] = '';
+	$vals[] = '';
 	  $vals[] = $titre;    
 	  $vals[] = $ext;
-	  $vals[] = $desc;
+//	  $vals[] = $desc;
 	  $vals[] = '<input type="checkbox" disabled="true" name="upload['.$id_type.']"'.(($upload=='oui')?' checked="true"':'').'/>';
+	$vals[] = $mime;
 	  $vals[] = $inclus;
 	  
 	  list($count) = spip_abstract_fetsel($s_count,$f_count,array("id_type=$id_type"));
@@ -95,27 +105,42 @@ function exec_config_types_documents() {
 	}
 	spip_abstract_free($rez);
 	
-	$largeurs = array(24,11,11,80,11,11,11);
-	$styles = array('','arial1','arial11','arial11','arial11','arial11','arial11');	
+	$largeurs = array(24,
+	11,
+	11,
+	//80,
+	11,
+	11,
+	11,
+	11
+	);
+	$styles = array('',
+	'arial1',
+	'arial11',
+	//'arial11',
+	'arial11',
+	'arial11',
+	'arial11',
+	'arial11');	
 	
 	afficher_liste($largeurs, $table, $styles);
 
 	echo afficher_liste_fin_tableau();
 
-	$redirect = generer_url_ecrire('types_documents');
+	$redirect = generer_url_ecrire('config_types_documents');
 
-	echo '<form action="'.generer_url_action('types_documents_insert').'" method="post">';
+	echo '<form action="'.generer_url_action('types_documents_insert',"redirect=$redirect").'" method="post">';
 	
 	echo afficher_liste_debut_tableau();
 	
 	$v = array(
-			   vignette_par_defaut('defaut',false);,
-			   '<input type="text" name="titre"/>',
-			   '<input type="text" name="ext"/>',
-			   '<input type="text" name="desc"/>',
+			   '<img src="'.vignette_par_defaut('defaut',false).'"/>',
+			   '<input type="text" size="10" name="titre"/>',
+			   '<input type="text" size="3" name="ext"/>',
+		//	   '<input type="text" name="desc"/>',
 			   '<input type="checkbox" name="upload" checked="true"/>',
-			   '<input type="text" name="mime"/>',
-			   '<select name="inclus"><option value="image"/><option value="embed"/></select>',
+			   '<input type="text" size="10" name="mime"/>',
+			   '<select name="inclus"><option value="image">image</option><option value="embed">embed</option><option value="non">non</option></select>',
 			   ''
 			   );
 
@@ -124,8 +149,8 @@ function exec_config_types_documents() {
 	echo afficher_liste_fin_tableau();
 	
 	echo '<input type="hidden" name="id_auteur" value="'.$connect_id_auteur.'"/>';
-	echo '<input type="hidden" name="date_conb" value="'.date('Ymd').'">';
-	echo '<input type="hidden" name="hash" value="'.calculer_action_auteur("update_date_exif ".date('Ymd')).'"/>';	
+	echo '<input type="hidden" name="date_comp" value="'.date('Ymd').'">';
+	echo '<input type="hidden" name="hash" value="'.calculer_action_auteur("types_documents ".date('Ymd')).'"/>';	
 	echo '<input type="submit" value="'._T('valider').'"/>';
 	echo '</form>';
 	echo '</div>';

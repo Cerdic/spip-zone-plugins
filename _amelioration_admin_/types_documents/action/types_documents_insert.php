@@ -27,9 +27,9 @@ function action_types_documents_insert() {
   $ext = _request('ext');
   $titre = _request('titre');
   $desc = _request('desc');
-  $upload = _request('upload');
+  $upload = _request('upload')?'oui':'non';
   $mime_type = _request('mime');
-  $inclus = _request('inclus')?'oui':'non';
+  $inclus = _request('inclus');
 
   include_spip("inc/session");
   if (!verifier_action_auteur("types_documents $date_comp", $hash, $id_auteur)) {
@@ -40,8 +40,8 @@ function action_types_documents_insert() {
   /************************************************************************/
   /* insertion */
   /************************************************************************/
-  
-  spip_abstract_insert('spip_types_documents','(titre,descriptif,extension,mime_type,inclus,upload,maj)',"'$titre','$desc','$ext','$mime_type','$inclus','$upload',NOW()");
+  include_spip("base/abstract_sql");
+  spip_abstract_insert('spip_types_documents','(titre,descriptif,extension,mime_type,inclus,upload,maj)',"('$titre','$desc','$ext','$mime_type','$inclus','$upload',NOW())");
 
   if(!$_REQUEST['ajax']) 	redirige_par_entete(urldecode($redirect));
 }
