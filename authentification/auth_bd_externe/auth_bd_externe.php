@@ -6,9 +6,6 @@ $GLOBALS['ldap_present'] = TRUE; // Hack pour ne pas avoir à modifier /formulair
 require_once(dirname(__FILE__).'/inc/meta_auth_bd_externe.php');
 $bd_externe=lire_parametrage_auth_bd_externe ();
 
-// Inclusion des fonctions d'accès à la BD basées : mysql ou Pear DB
-if ($bd_externe['serveur']=="mysql") require_once(dirname(__FILE__).'/inc/mysql_query.php');
-else require_once(dirname(__FILE__).'/inc/pear_query.php');
 
 // Inclusion fonctions diverses
 require_once(dirname(__FILE__).'/inc/utils.php');
@@ -282,6 +279,10 @@ class Auth_bd_externe {
 		// Verifier la presence de bd_externe
 		if (!$GLOBALS['bd_externe_present']) return false;
 		
+		// Inclusion des fonctions d'accès à la BD basées : mysql ou Pear DB
+		if ($bd_externe['serveur']=="mysql") require_once(dirname(__FILE__).'/inc/mysql_query.php');
+		else require_once(dirname(__FILE__).'/inc/pear_query.php');
+
 		return (bd_externe_connect());
 	}
 
@@ -295,7 +296,7 @@ class Auth_bd_externe {
 
 		
 		$cond_supp = '';
-		var_dump($bd_externe);
+		
 		// Securite...
 		if (!$login || !$pass) return false;
 
@@ -306,8 +307,7 @@ class Auth_bd_externe {
 			case 'md5' : 
 				$local_pass = md5($pass);
 				break;
-			case 'challenge_md5' : 
-			var_dump($bd_externe);
+			case 'challenge_md5' : 			
 				$cond_supp = ', '.$bd_externe['champ_alea'].' AS alea'; //Select des alea.
 				break;
 			case 'crypt' : 
@@ -339,9 +339,8 @@ class Auth_bd_externe {
 				foreach($val_administrateur as $cle => $val) $cond_supp2=AjouteClauseCond($cond_supp2,$bd_externe['champ_statut']."='$val'","OR");			
 			}
 			$cond_supp2=AjouteClauseCond($cond_supp2,"");
+			$query.=$cond_supp2;
 		}
-		
-		$query.=$cond_supp2;	
 
 		$result = bd_externe_query($query);
 		
@@ -389,10 +388,11 @@ class Auth_bd_externe {
 			$query=AjouteClause($query,$bd_externe['table'].".".$bd_externe['champ_cle']."=".$bd_externe['table_jointure'].".".$bd_externe['champ_cle']);
 		}
 		$query=AjouteClause($query,$bd_externe['champ_login_ext']."='".addslashes($this->login)."'");
-				
+
+
 		$result = bd_externe_query($query);
 
-		if ($rows = $row = bd_externe_fetch($result) ) {
+		if ($rows = bd_externe_fetch($result) ) {
 			$this->nom="";
 			if ($bd_externe['champ_prenom']!="") $this->nom= ucwords(strtolower($rows[$bd_externe['champ_prenom']]))." ";
 			$this->nom .= strtoupper($rows[$bd_externe['champ_nom']]);

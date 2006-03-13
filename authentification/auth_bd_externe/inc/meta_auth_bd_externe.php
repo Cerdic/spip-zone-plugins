@@ -5,14 +5,11 @@ function lire_parametrage_auth_bd_externe () {
 	include_ecrire('inc_meta');
 	lire_metas();
 	
-	$bd_externe['serveur']=$GLOBALS['meta']['auth_bd_externe_serveur'];
+	if (!$bd_externe['serveur']=$GLOBALS['meta']['auth_bd_externe_serveur']) $bd_externe['serveur']="mysql";
 	if (!($bd_externe['hostname']=$GLOBALS['meta']['auth_bd_externe_hostname'])) $bd_externe['hostname']="localhost";
 	if (!$bd_externe['login']=$GLOBALS['meta']['auth_bd_externe_login']) $bd_externe['login']="";
 	if (!$bd_externe['password']=$GLOBALS['meta']['auth_bd_externe_password']) $bd_externe['password']="";
 	if (!$bd_externe['database']=$GLOBALS['meta']['auth_bd_externe_database']) $bd_externe['database']="";
-
-	$bd_externe['parametrage_serveur_ok']=FALSE;
-	if (($bd_externe['login']) AND ($bd_externe['password']) AND ($bd_externe['database'])) $bd_externe['parametrage_serveur_ok']=TRUE;
 
 	if (!($bd_externe['table']=$GLOBALS['meta']['auth_bd_externe_table'])) $bd_externe['table']="";
 	if (!($bd_externe['champ_cle']=$GLOBALS['meta']['auth_bd_externe_champ_cle'])) $bd_externe['champ_cle']="";

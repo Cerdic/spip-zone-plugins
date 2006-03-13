@@ -12,4 +12,21 @@ function AjouteClauseCond($requete,$clause,$operateur="OR") {
 		return($requete);
 	}	
 
+function afficheListeAvecLabel($label,$nom,$tableau,$valDefaut,$options="") {
+	echo "<p>$label : ";
+	afficheListe($nom,$tableau,$valDefaut,$options);
+	echo "</p>";
+}
+	
+function afficheListe($nom,$tableau,$valDefaut,$options="") {
+	
+	echo "\n<select name='$nom' class='fondl' align='middle' $options>\n";
+	echo "<option value='$valDefaut' selected>".$tableau[$valDefaut]."</option>\n";
+	reset ($tableau);
+	while (list($key,$val) = each ($tableau)) {
+		if ($key <> $valDefaut)
+			echo "<option value='$key'>$val</option>\n";
+	}
+	echo "</select>";
+}	
 ?>

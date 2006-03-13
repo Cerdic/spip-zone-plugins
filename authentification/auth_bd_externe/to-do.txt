@@ -1,8 +1,8 @@
 Interface de configuration du plugin (exec/auth_bd_externe.php) :
 
-- vérifier connexion serveur étape 1
-- vérifier la cohérence du paramétrage de l'étape 2 et afficher des messages d'erreurs parlants pour assister la configuration
-- remplacer les zones à saisir par des listes déroulantes contenant les différents champs possibles
+- vérifier connexion serveur étape 1 : ok effectué le 13/03/2006
+- vérifier la cohérence du paramétrage de l'étape 2 et afficher des messages d'erreurs parlants pour assister la configuration : ok effectué le 13/03/2006
+- remplacer les zones à saisir par des listes déroulantes contenant les différents champs possibles :  : ok effectué le 13/03/2006 mais vérifier que l'utilisation de la méthode tableInfo de Pear (pour retrouver la liste des champs d'une table) ne pose par de problème de compatibilité avec certains types de serveurs, auquel cas remettre des zones de saisies pour ces types de serveurs
 - cryptage de type unix : permettre un paramétrage plus précis. Actuellement cryptage unix = $1+salt 8 caractères+crypt(password)
 
 Authentification (auth_bd_externe.php) :
