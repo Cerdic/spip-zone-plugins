@@ -58,7 +58,7 @@ echo '<form action="'.generer_url_action('update_date_exif').'" method="post">';
 echo '<h3>Synchroniser les dates des documents</h3>';
 echo '<input type="hidden" name="id_auteur" value="'.$connect_id_auteur.'"/>';
 echo '<input type="hidden" name="date_conb" value="'.date('Ymd').'">';
-echo '<input type="hidden" name="hash" value="'.calculer_action_auteur("update_date_exif ".date(Ymd)).'"/>';
+echo '<input type="hidden" name="hash" value="'.calculer_action_auteur("update_date_exif ".date('Ymd')).'"/>';
 echo '<input type="submit" value="'._T('valider').'"/>';
 echo '</form>';
 
