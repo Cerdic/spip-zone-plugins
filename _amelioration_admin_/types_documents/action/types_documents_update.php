@@ -18,18 +18,11 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-function action_types_documents_insert() {
-  $redirect = _request('redirect');
+//celle la n'est appelee qu'avec de l'ajax...
+function action_types_documents_update() {
   $hash = _request('hash');
   $id_auteur = intval(_request('id_auteur'));
   $date_comp = _request('date_comp');
-
-  $ext = addslashes(_request('ext'));
-  $titre = addslashes(_request('titre'));
-  $desc = addslashes(_request('desc'));
-  $upload = _request('upload')?'oui':'non';
-  $mime_type = addslashes(_request('mime'));
-  $inclus = addslashes(_request('inclus'));
 
   include_spip("inc/session");
   if (!verifier_action_auteur("types_documents $date_comp", $hash, $id_auteur)) {
@@ -37,13 +30,45 @@ function action_types_documents_insert() {
 	minipres(_T('info_acces_interdit'));
   }
   
-  /************************************************************************/
-  /* insertion */
-  /************************************************************************/
-  include_spip("base/abstract_sql");
-  spip_abstract_insert('spip_types_documents','(titre,descriptif,extension,mime_type,inclus,upload,maj)',"('$titre','$desc','$ext','$mime_type','$inclus','$upload',NOW())");
+  $table_pref = 'spip';
+  if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
 
-  if(!$_REQUEST['ajax']) 	redirige_par_entete(urldecode($redirect));
+  $id_type = intval(_request('id_type'));
+
+  $fields = array('titre',
+				  'extension',
+				  'mime_type',
+				  'inclus',
+				  'description');
+
+  $setter = '';
+  $f = '';
+  $new_val = 'error...';
+
+  //on cherche le champ à mettre à jour (field) et sa valeur (value)
+  foreach($fields as $fi) {
+	$f = addslashes(_request('field'));
+	if($f == $fi) {
+	  $val = addslashes(_request('value'));
+	  $setter = "$fi='$val'";
+	  $new_val = $val;
+	  break;
+	}
+  }
+
+  /************************************************************************/
+  /* update */
+  /************************************************************************/
+  if($setter) {
+	$rez = spip_query("UPDATE ".$table_pref."_types_documents SET $setter WHERE id_type=$id_type");
+	if($row = spip_fetch_array()) {
+	  $new_val = $row[$f];
+	}
+	spip_free_result($rez);
+  }
+
+  //on retourne la nouvelle valeure
+  echo $new_val;
 }
 ?>
    
