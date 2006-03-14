@@ -10,6 +10,8 @@ Cette page permet d\'ajouter des types de documents permis, de changer leur logo
 	'extension' => 'Extension',
 	'description' => 'Description',
 	'permission' => 'Permis?',
-	'nombre_documents' => 'Nombre de Documents'
+	'mime' => 'Mime Type',
+	'nombre_documents' => 'Nombre de Documents',
+	'effacer' => 'Effacer'
 );
 ?>

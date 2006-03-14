@@ -73,7 +73,8 @@ function exec_config_types_documents() {
 	'<strong>'._T('typesdocuments:permission').'</strong>',
 	'<strong>'._T('typesdocuments:mime').'</strong>',
 	'<strong>'._T('typesdocuments:inclus').'</strong>',
-	'<strong>'._T('typesdocuments:nombre_documents').'</strong>'
+	'<strong>'._T('typesdocuments:nombre_documents').'</strong>',	
+	'<strong>'._T('typesdocuments:effacer').'</strong>'
 	);
 	$rez = spip_abstract_select($select,$from,array(),'',$order);
 
@@ -144,7 +145,7 @@ function exec_config_types_documents() {
 	echo afficher_liste_fin_tableau();
 	
 	
-	echo '<form action="'.generer_url_action('types_documents_insert',"redirect=$redirect").'" method="post">';
+	echo '<form id="ajout" action="'.generer_url_action('types_documents_insert',"redirect=$redirect").'" method="post">';
 	
 	echo afficher_liste_debut_tableau();
 	
@@ -157,7 +158,7 @@ function exec_config_types_documents() {
 			   '<input type="text" size="10" name="mime"/>',
 			   '<select name="inclus"><option value="image">image</option><option value="embed">embed</option><option value="non">non</option></select>',
 			   '',
-			   ''
+			   '<input type="submit" value="'._T('valider').'"/>'
 			   );
 	
 	afficher_liste($largeurs, array($v), $styles);
@@ -167,7 +168,6 @@ function exec_config_types_documents() {
 	echo '<input type="hidden" name="id_auteur" value="'.$connect_id_auteur.'"/>';
 	echo '<input type="hidden" name="date_comp" value="'.date('Ymd').'">';
 	echo '<input type="hidden" name="hash" value="'.calculer_action_auteur("types_documents ".date('Ymd')).'"/>';	
-	echo '<input type="submit" value="'._T('valider').'"/>';
 	echo '</form>';
 	echo '</div>';
   } 

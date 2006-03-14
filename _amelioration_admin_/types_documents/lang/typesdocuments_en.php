@@ -10,6 +10,8 @@ This plugin allows you to manage the allowed types.',
 	'extension' => 'Extension',
 	'description' => 'Description',
 	'permission' => 'Allowed?',
-	'nombre_documents' => 'Number of Documents'
+	'mime' => 'Mime Type',
+	'nombre_documents' => 'Number of Documents',
+	'effacer' => 'Remove'
 );
 ?>
