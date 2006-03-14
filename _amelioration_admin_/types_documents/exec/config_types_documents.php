@@ -76,6 +76,9 @@ function exec_config_types_documents() {
 	'<strong>'._T('typesdocuments:nombre_documents').'</strong>'
 	);
 	$rez = spip_abstract_select($select,$from,array(),'',$order);
+
+	
+	$redirect = generer_url_ecrire('config_types_documents');
 	while($row = spip_abstract_fetch($rez)) {
 	  $vals = '';	
 	  $id_type = intval($row['id_type']);
@@ -95,40 +98,49 @@ function exec_config_types_documents() {
 	  $vals[] = $ext;
 //	  $vals[] = $desc;
 	  $vals[] = '<input type="checkbox" disabled="true" name="upload['.$id_type.']"'.(($upload=='oui')?' checked="true"':'').'/>';
-	$vals[] = $mime;
+	  $vals[] = $mime;
 	  $vals[] = $inclus;
 	  
 	  list($count) = spip_abstract_fetsel($s_count,$f_count,array("id_type=$id_type"));
 	  $vals[] = $count;
-	  
+
+	  if($count == 0) {
+		$vals[] = '<form action="'.generer_url_action('types_documents_delete',"redirect=$redirect").'" method="post"><input type="hidden" name="id_auteur" value="'.$connect_id_auteur.'"/>
+                       <input type="hidden" name="date_comp" value="'.date('Ymd').'"> 
+                       <input type="hidden" name="hash" value="'.calculer_action_auteur("types_documents ".date('Ymd')).'"/>
+                        <input type="submit" name="delete" value="X"/></from>';	
+	  } else 
+		$vals[] = '';
+
 	  $table[] = $vals;
 	}
 	spip_abstract_free($rez);
 	
 	$largeurs = array(24,
-	11,
-	11,
-	//80,
-	11,
-	11,
-	11,
-	11
-	);
-	$styles = array('',
-	'arial1',
-	'arial11',
-	//'arial11',
-	'arial11',
-	'arial11',
-	'arial11',
-	'arial11');	
+					  11,
+					  11,
+					  //80,
+					  11,
+					  11,
+					  11,
+					  11,
+					  11
+					  );
+	$styles = array('vignette',
+					'arial1 titre',
+					'arial11 extension',
+					//'arial11 description',
+					'arial11 upload',
+					'arial11 mime_type',
+					'arial11 inclus',
+					'arial11 count',
+					'arial11 delete');	
 	
 	afficher_liste($largeurs, $table, $styles);
-
+	
 	echo afficher_liste_fin_tableau();
-
-	$redirect = generer_url_ecrire('config_types_documents');
-
+	
+	
 	echo '<form action="'.generer_url_action('types_documents_insert',"redirect=$redirect").'" method="post">';
 	
 	echo afficher_liste_debut_tableau();
@@ -137,15 +149,16 @@ function exec_config_types_documents() {
 			   '<img src="'.vignette_par_defaut('defaut',false).'"/>',
 			   '<input type="text" size="10" name="titre"/>',
 			   '<input type="text" size="3" name="ext"/>',
-		//	   '<input type="text" name="desc"/>',
+			   //	   '<input type="text" name="desc"/>',
 			   '<input type="checkbox" name="upload" checked="true"/>',
 			   '<input type="text" size="10" name="mime"/>',
 			   '<select name="inclus"><option value="image">image</option><option value="embed">embed</option><option value="non">non</option></select>',
+			   '',
 			   ''
 			   );
-
+	
 	afficher_liste($largeurs, array($v), $styles);
-
+	
 	echo afficher_liste_fin_tableau();
 	
 	echo '<input type="hidden" name="id_auteur" value="'.$connect_id_auteur.'"/>';
