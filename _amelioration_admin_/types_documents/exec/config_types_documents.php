@@ -105,11 +105,13 @@ function exec_config_types_documents() {
 	  $vals[] = $count;
 
 	  if($count == 0) {
-		$vals[] = '<form action="'.generer_url_action('types_documents_delete',"redirect=$redirect").'" method="post"><input type="hidden" name="id_auteur" value="'.$connect_id_auteur.'"/>
+		$vals[] = '<form id="form_'.$id_type.'" action="'.generer_url_action('types_documents_delete',"redirect=$redirect").'" method="post">
+	               <input type="hidden" name="id_auteur" value="'.$connect_id_auteur.'"/>
                        <input type="hidden" name="date_comp" value="'.date('Ymd').'"> 
                        <input type="hidden" name="hash" value="'.calculer_action_auteur("types_documents ".date('Ymd')).'"/>
                        <input type="hidden" name="id_type" value="'.$id_type.'"/>
-                        <input type="submit" name="delete" value="X"/></from>';	
+                        <input type="submit" name="delete" value="X"/>
+			</form>';	
 	  } else 
 		$vals[] = '';
 
