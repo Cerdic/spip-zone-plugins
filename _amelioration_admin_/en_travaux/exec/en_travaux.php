@@ -3,28 +3,62 @@
 
 function exec_en_travaux(){
 include_ecrire("inc_presentation");
-
- 
-	debut_page("En travaux");
+	$check_en_travaux=''; //gestion de l'etat de la case a cocher
+ 	if (isset($_POST['modifier'])){
+ 		if (isset($_POST['est_en_travaux'])){
+	 		if ($_POST['est_en_travaux'] == 'true')
+	 			ecrire_meta('en_travaux','true');
+	 			ecrire_meta('en_travaux_message',$_POST['en_travaux_message']);
+	 		}
+ 		else 
+ 			effacer_meta('en_travaux');
+	
+ 		ecrire_metas();
+ 		lire_metas();
+ 	}
+ 	if ($GLOBALS['meta']['en_travaux']=='true'){
+ 		$check_en_travaux='checked';
+ 		//debug echo "meta= ".$GLOBALS['meta']['en_travaux'];
+  	}
+	$en_travaux_texte=$GLOBALS['meta']['en_travaux_message'];
+ 	debut_page(_T('entravaux:en_travaux'));
 	
 	echo "<br /><br /><br />";
-	gros_titre("En travaux");
+	gros_titre(_T('entravaux:en_travaux'));
 	debut_gauche();
 	
 	debut_boite_info();
-	echo propre("Cette page permet de mettre un message temporaire sur toute les pages du site pendant une phase de maintenance.");	
+	echo propre(_T('entravaux:en_travaux_info_message'));	
 	fin_boite_info();
 	
 	debut_droite();
-	  
-	echo "<span style='font:Georgia,Garamond,Times,serif;font-size:medium'>";
-	 
+	
+	debut_cadre_trait_couleur("../"._DIR_PLUGIN_EN_TRAVAUX."/spip_mecano_24.png", false, "", _T('entravaux:parametrage_page_travaux'));
+
 	if ($GLOBALS['connect_statut'] == "0minirezo") {
-		echo "<strong>Paramétrage page travaux : </strong>";
+	echo generer_url_post_ecrire("en_travaux");
+	echo "<p>";
+	echo "<label for='est_en_travaux'>"._T("entravaux:en_travaux_actif")."</label> : ";
+	echo "<input type='checkbox' name='est_en_travaux' value='true' $check_en_travaux/>";
+	echo "</p>";
+	echo "<p>";
+	echo _T('entravaux:en_travaux_message')."<br/>";
+	echo "<textarea name='en_travaux_message' class='formo'>";
+	echo $en_travaux_texte;
+	echo "</textarea>";
+	echo "</p>";
+	echo "<input type='submit' name='modifier' value='"._T('bouton_valider')."' />";
+	echo "</div>";
+	echo "</form>";
+		
 	}
 	else 
 		echo "<strong>Vous n'avez pas acc&egrave;s &agrave; cette page.</strong>";
 	echo "</span>";
+	fin_cadre_trait_couleur();
+	fin_page();
+	
 }
+
 
 ?>
