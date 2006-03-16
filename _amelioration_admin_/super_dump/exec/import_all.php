@@ -75,7 +75,7 @@ function exec_import_all_dist()
 	$liste_tables = array_merge(array_keys($tables_principales),array_keys($tables_auxiliaires));
 
 	// puis commencer ou continuer
-	include(dirname(__FILE__).'/inc_import.php');
+	include_spip('inc/import');
 
 	import_all_continue($liste_tables);		
 }
