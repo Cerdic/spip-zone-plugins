@@ -14,14 +14,72 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
 
 
-include_once (dirname(__FILE__)."/export.php"); // celui dans le meme repertoire, pas celui de ecrire
+include_spip('exec/export'); // celui dans le meme repertoire, pas celui de ecrire
 include_spip('inc/admin');
 include_spip('base/serial');
 include_spip('base/auxiliaires');
 include_spip('inc/indexation'); // pour la fonction primary_index_table 
+include_spip('inc/flock');
+
+global $IMPORT_tables_noexport;
+$IMPORT_tables_noexport[]='spip_ajax_fonc';
+$IMPORT_tables_noexport[]='spip_caches';
+$IMPORT_tables_noexport[]='spip_meta';
+$IMPORT_tables_noexport[]='spip_index';
+$IMPORT_tables_noexport[]='spip_index_dico';
+$IMPORT_tables_noexport[]='spip_referers';
+$IMPORT_tables_noexport[]='spip_referers_articles';
+$IMPORT_tables_noexport[]='spip_visites';
+$IMPORT_tables_noexport[]='spip_visites_articles';
+
+
+//
+// Ecrire un fichier de maniere un peu sure
+//
+// zippe les fichiers .gz
+
+function ecrire_fichier_ajout ($fichier, $contenu, $ecrire_quand_meme = false) {
+
+	// Ne rien faire si on est en preview, debug, ou si une erreur
+	// grave s'est presentee (compilation du squelette, MySQL, etc)
+	if (($GLOBALS['var_preview'] OR ($GLOBALS['var_mode'] == 'debug')
+	OR defined('spip_interdire_cache'))
+	AND !$ecrire_quand_meme)
+		return;
+
+	$gzip = (substr($fichier, -3) == '.gz');
+
+	#spip_timer('ecrire_fichier');
+
+	// verrouiller le fichier destination
+	if ($fp = @fopen($fichier, 'a'))
+		@flock($fp, LOCK_EX);
+	else
+		return false;
+
+	// ecrire les donnees, compressees le cas echeant
+	// (on ouvre un nouveau pointeur sur le fichier, ce qui a l'avantage
+	// de le recreer si le locker qui nous precede l'avait supprime...)
+	if ($gzip) $contenu = gzencode($contenu);
+	#@ftruncate($fp,0); // pas de troncage : c'est un ajout
+	$s = @fputs($fp, $contenu, $a = strlen($contenu));
+
+	$ok = ($s == $a);
+
+	// liberer le verrou et fermer le fichier
+	@flock($fp, LOCK_UN);
+	@fclose($fp);
+
+	if (!$ok) {
+		spip_log("echec ecriture fichier $fichier");
+		@unlink($fichier);
+	}
+
+	return $ok;
+}
 
 function rammasse_parties($archive, $gz, $partfile){
-	$_fputs = ($gz) ? gzputs : fputs;
+	/*$_fputs = ($gz) ? gzputs : fputs;
 
 	$f = ($gz) ? gzopen($archive, "ab") : fopen($archive, "ab");
 	if (!$f) {
@@ -42,7 +100,19 @@ function rammasse_parties($archive, $gz, $partfile){
 	}
 	if ($gz) gzclose($f);
 	else fclose($f);
- 
+	*/
+	$cpt=0;
+	while(file_exists($f = $partfile.".$cpt")){
+		$contenu = "";
+		if (lire_fichier ($f, $contenu))
+			if (!ecrire_fichier_ajout($archive,$contenu))
+			{
+				echo _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
+				exit;
+			}
+		unlink($f);
+		$cpt++;
+	}
 }
 
 function exec_export_all_dist()
@@ -120,6 +190,7 @@ function exec_export_all_dist()
 	$tables_for_dump = array();
 	$tables_for_link = array();
 	$tables_pointees = array();
+	global $IMPORT_tables_noexport;
 	global $tables_principales;
 	global $tables_auxiliaires;
 	global $table_des_tables;
@@ -129,7 +200,7 @@ function exec_export_all_dist()
 	foreach($liste_tables as $table){
 		$name = preg_replace("{^spip_}","",$table);
 		$tables_for_link[$table] = array();
-	  if (!isset($tables_pointees[$table])){
+	  if (!isset($tables_pointees[$table]) && !in_array($table,$IMPORT_tables_noexport)){
 			$tables_for_dump[] = $table;
 			$tables_pointees[$table] = 1;
 			$relation = $tables_relations[$table];
@@ -172,10 +243,11 @@ function exec_export_all_dist()
 		echo "<p>"._T('info_sauvegarde_reussi_01')."</b><p>"._T('info_sauvegarde_reussi_02', array('archive' => $archive))." <a href='./'>"._T('info_sauvegarde_reussi_03')."</a> "._T('info_sauvegarde_reussi_04')."\n";
 	}
 	else{
-		$timeout = 6000;
-	  if ($start) $timeout = 3000;
+		$max_time = ini_get('max_execution_time')*1000;
+		$timeout = $max_time;
+	  if ($start) $timeout = round($timeout/2);
 		// script de rechargement auto sur timeout
-		echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".str_replace("&amp;","&",generer_url_ecrire("export_all","archive=$archive&gz=$gz"))."\";',$timeout);</script>\n");
+		echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".generer_url_ecrire("export_all","archive=$archive&gz=$gz",true)."\";',$timeout);</script>\n");
 		$cpt = 0;
 		$paquets = 400;
 		foreach($tables_for_dump as $i=>$table){
@@ -185,9 +257,12 @@ function exec_export_all_dist()
 				if ($cpt == 0)
 					rammasse_parties(_DIR_SESSIONS . $archive, $gz, _DIR_SESSIONS . $partfile);
 
-				$fpart = fopen(_DIR_SESSIONS .$partfile,'wb');
+				// on ecrit dans un fichier generique
+				ecrire_fichier (_DIR_SESSIONS .$partfile, $string);
+				/*$fpart = fopen(_DIR_SESSIONS .$partfile,'wb');
 				fputs($fpart, $string);
-				fclose($fpart);
+				fclose($fpart);*/
+				// on le renomme avec un numero -> operation atomique en linux
 				rename(_DIR_SESSIONS .$partfile,_DIR_SESSIONS .$partfile.".$cpt");
 				$cpt ++;
 				ecrire_meta("status_dump", implode("::",$status_dump));
@@ -201,13 +276,6 @@ function exec_export_all_dist()
 		echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".str_replace("&amp;","&",generer_url_ecrire("export_all","archive=$archive&gz=$gz"))."\";',0);</script>\n");
 	}
 
-	//fclose ($fpart);
-
-	/*else {
-		$etape_suivante = $etape + 1;
-		if ($debut_limit > 1) echo "<p align='right'> <a href='" . generer_url_ecrire("export_all","reinstall=non&etape=$etape&debut_limit=$debut_limit&gz=$gz") . "'>>>>> "._T('info_etape_suivante')."</a>";
-		else echo "<p align='right'> <a href='" . generer_url_ecrire("export_all","reinstall=non&etape=$etape_suivante&gz=$gz") . "'>>>>> "._T('info_etape_suivante')."</a>";
-	}*/
 	install_fin_html();
 
 }

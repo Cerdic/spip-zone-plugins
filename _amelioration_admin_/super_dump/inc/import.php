@@ -12,11 +12,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire('inc_presentation');
-include_ecrire ("inc_acces");
+include_spip('inc/presentation');
+include_spip ("inc/acces");
 include_spip('inc/indexation'); // pour la fonction primary_index_table 
-include_ecrire('inc_serialbase');
-include_ecrire('inc_auxbase');
+include_spip('inc/serialbase');
+include_spip('inc/auxbase');
 
 global $IMPORT_tables_noimport;
 $IMPORT_tables_noimport[]='spip_ajax_fonc';
@@ -662,7 +662,8 @@ function import_all_continue($tables)
 	debut_boite_alerte();
 	echo "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
 	fin_boite_alerte();
-	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".$_SERVER["PHP_SELF"]."\";',15000);</script>\n");
+	$max_time = ini_get('max_execution_time')*1000;
+	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".$_SERVER["PHP_SELF"]."\";',$max_time);</script>\n");
 
 	fin_page();
 	ob_flush();flush();
