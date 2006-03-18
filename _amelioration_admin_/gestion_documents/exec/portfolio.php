@@ -26,11 +26,11 @@ function exec_portfolio(){
 	global $connect_statut;
 	//global $modif;
 	
-	include_ecrire ("inc_presentation");
-	include_ecrire ("inc_documents");
+	include_spip ("inc/presentation");
+	include_spip ("inc/documents");
 	include_spip('inc/indexation');
-	include_ecrire ("inc_logos");
-	include_ecrire ("inc_session");
+	include_spip ("inc/logos");
+	include_spip ("inc/session");
 
 	//
 	// Recupere les donnees

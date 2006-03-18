@@ -10,15 +10,7 @@
  *
  */
 
-function pluginpath($filepath){
-   $realpath = str_replace("\\","/",realpath($filepath));
-   $plugpath = str_replace("\\","/",realpath(_DIR_PLUGINS));
-   $htmlpath = str_replace($plugpath,_DIR_PLUGINS,$realpath);
-   $htmlpath = str_replace("//","/",$htmlpath);
-   return $htmlpath;
-}
-
-define('_DIR_PLUGIN_GESTION_DOCUMENTS',pluginpath(dirname(__FILE__)));
+define('_DIR_PLUGIN_GESTION_DOCUMENTS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 
 
 	function GestionDocuments_ajouterBoutons($boutons_admin) {
