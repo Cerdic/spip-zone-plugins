@@ -56,9 +56,6 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	Cos&igrave;, gli autori devono solamente scegliere la parola chiave giusta per cambiare il modello de la pagina che visualizza l'elemento (l'articolo per esempio)
      </multi>
 	</description>
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	  chercher_squelette.php
-	</fonctions>
 	<prefix> 
 	  SquelettesMots
 	</prefix>
