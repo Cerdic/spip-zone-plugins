@@ -22,6 +22,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 
 function public_trouver_squelette_dist($fond, $id_rubrique, $lang) {
+  global $contexte;
 	$ext = $GLOBALS['extension_squelette'];
 
 	// Accrocher un squelette de base dans le chemin, sinon erreur
@@ -63,7 +64,7 @@ function public_trouver_squelette_dist($fond, $id_rubrique, $lang) {
 		}
 	}
   if(!$trouve) {
-		$fonds = unserialize(lire_meta('SquelettesMots:fond_pour_groupe'));
+		$fonds = unserialize($GLOBALS['meta']['SquelettesMots:fond_pour_groupe']);
 		if (is_array($fonds) && (list($id_groupe,$table,$id_table) = $fonds[$fond])) {
 		  $trouve = false;
 		  if (($id = $contexte[$id_table]) && ($n = sql_mot_squelette($id,$id_groupe,$table,$id_table))) {
