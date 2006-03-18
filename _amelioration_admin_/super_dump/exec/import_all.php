@@ -16,6 +16,12 @@ include_spip('inc/admin');
 include_spip('base/serial');
 include_spip('base/auxiliaires');
 
+global $IMPORT_tables_noimport;
+$IMPORT_tables_noimport[]='spip_ajax_fonc';
+$IMPORT_tables_noimport[]='spip_caches';
+$IMPORT_tables_noimport[]='spip_meta';
+
+
 function verifier_version_sauvegarde ($archive) {
 	global $spip_version;
 	global $flag_gz;
@@ -62,6 +68,7 @@ function import_all_check() {
 	ecrire_metas();
 	// se rappeler pour montrer illico ce qu'on fait 
 	header('Location: ./');
+	exit();
 }
 
 function exec_import_all_dist()
@@ -71,12 +78,65 @@ function exec_import_all_dist()
 		import_all_check();
 
 	// toutes les tables pour le moment
-	global $tables_principales,$tables_auxiliaires;
-	$liste_tables = array_merge(array_keys($tables_principales),array_keys($tables_auxiliaires));
+	#global $tables_principales,$tables_auxiliaires;
+	#$liste_tables = array_merge(array_keys($tables_principales),array_keys($tables_auxiliaires));
+	// construction de la liste des tables pour le dump :
+	// toutes les tables principales
+	// + toutes les tables auxiliaires hors relations
+	// + les tables relations dont les deux tables liees sont dans la liste
+	$tables_for_dump = array();
+	$tables_pointees = array();
+	global $IMPORT_tables_noimport;
+	global $tables_principales;
+	global $tables_auxiliaires;
+	global $table_des_tables;
+	global $tables_relations;
 
+	// on construit un index des tables de liens
+	// pour les ajouter SI les deux tables qu'ils connectent sont sauvegardees
+	$tables_for_link = array();
+	foreach($tables_relations as $table=>$relation)
+	{
+		$nom = $table;
+		if (!isset($tables_auxiliaires[$nom])&&!isset($tables_principales[$nom]))
+			$nom = "spip_$table";
+		if (isset($tables_auxiliaires[$nom])||isset($tables_principales[$nom])){
+			foreach($relation as $id=>$link_table){
+				if (isset($tables_auxiliaires[$link_table])||isset($tables_principales[$link_table])){
+					$tables_for_link[$link_table][] = $nom;
+				}
+				else if (isset($tables_auxiliaires["spip_$link_table"])||isset($tables_principales["spip_$link_table"])){
+					$tables_for_link["spip_$link_table"][] = $nom;
+				}
+			}
+		}
+	}
+	
+	$liste_tables = array_merge(array_keys($tables_principales),array_keys($tables_auxiliaires));
+	foreach($liste_tables as $table){
+		$name = preg_replace("{^spip_}","",$table);
+	  if (		!isset($tables_pointees[$table]) 
+	  		&&	!in_array($table,$IMPORT_tables_noimport)
+	  		&&	!isset($tables_for_link[$table])){
+			$tables_for_dump[] = $table;
+			$tables_pointees[$table] = 1;
+		}
+	}
+	foreach ($tables_for_link as $link_table =>$liste){
+		$connecte = true;
+		foreach($liste as $connect_table)
+			if (!in_array($connect_table,$tables_for_dump))
+				$connecte = false;
+		if ($connecte)
+			# on ajoute les liaisons en premier
+			# si une restauration est interrompue, cela se verra mieux si il manque des objets
+			# que des liens
+			array_unshift($tables_for_dump,$link_table);
+	}
+	
 	// puis commencer ou continuer
 	include_spip('inc/import');
 
-	import_all_continue($liste_tables);		
+	import_all_continue($tables_for_dump);
 }
 ?>

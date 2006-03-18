@@ -21,64 +21,21 @@ include_spip('base/auxiliaires');
 include_spip('inc/indexation'); // pour la fonction primary_index_table 
 include_spip('inc/flock');
 
-global $IMPORT_tables_noexport;
-$IMPORT_tables_noexport[]='spip_ajax_fonc';
-$IMPORT_tables_noexport[]='spip_caches';
-$IMPORT_tables_noexport[]='spip_meta';
-$IMPORT_tables_noexport[]='spip_index';
-$IMPORT_tables_noexport[]='spip_index_dico';
-$IMPORT_tables_noexport[]='spip_referers';
-$IMPORT_tables_noexport[]='spip_referers_articles';
-$IMPORT_tables_noexport[]='spip_visites';
-$IMPORT_tables_noexport[]='spip_visites_articles';
+global $EXPORT_tables_noexport;
+$EXPORT_tables_noexport[]='spip_ajax_fonc';
+$EXPORT_tables_noexport[]='spip_caches';
+$EXPORT_tables_noexport[]='spip_meta';
+$EXPORT_tables_noexport[]='spip_index';
+$EXPORT_tables_noexport[]='spip_index_dico';
+$EXPORT_tables_noexport[]='spip_referers';
+$EXPORT_tables_noexport[]='spip_referers_articles';
+$EXPORT_tables_noexport[]='spip_visites';
+$EXPORT_tables_noexport[]='spip_visites_articles';
+$EXPORT_tables_noexport[]='spip_ortho_cache';
+$EXPORT_tables_noexport[]='spip_ortho_dico';
 
 
-//
-// Ecrire un fichier de maniere un peu sure
-//
-// zippe les fichiers .gz
-
-function ecrire_fichier_ajout ($fichier, $contenu, $ecrire_quand_meme = false) {
-
-	// Ne rien faire si on est en preview, debug, ou si une erreur
-	// grave s'est presentee (compilation du squelette, MySQL, etc)
-	if (($GLOBALS['var_preview'] OR ($GLOBALS['var_mode'] == 'debug')
-	OR defined('spip_interdire_cache'))
-	AND !$ecrire_quand_meme)
-		return;
-
-	$gzip = (substr($fichier, -3) == '.gz');
-
-	#spip_timer('ecrire_fichier');
-
-	// verrouiller le fichier destination
-	if ($fp = @fopen($fichier, 'a'))
-		@flock($fp, LOCK_EX);
-	else
-		return false;
-
-	// ecrire les donnees, compressees le cas echeant
-	// (on ouvre un nouveau pointeur sur le fichier, ce qui a l'avantage
-	// de le recreer si le locker qui nous precede l'avait supprime...)
-	if ($gzip) $contenu = gzencode($contenu);
-	#@ftruncate($fp,0); // pas de troncage : c'est un ajout
-	$s = @fputs($fp, $contenu, $a = strlen($contenu));
-
-	$ok = ($s == $a);
-
-	// liberer le verrou et fermer le fichier
-	@flock($fp, LOCK_UN);
-	@fclose($fp);
-
-	if (!$ok) {
-		spip_log("echec ecriture fichier $fichier");
-		@unlink($fichier);
-	}
-
-	return $ok;
-}
-
-function rammasse_parties($archive, $gz, $partfile){
+function ramasse_parties($archive, $gz, $partfile){
 	/*$_fputs = ($gz) ? gzputs : fputs;
 
 	$f = ($gz) ? gzopen($archive, "ab") : fopen($archive, "ab");
@@ -105,7 +62,7 @@ function rammasse_parties($archive, $gz, $partfile){
 	while(file_exists($f = $partfile.".$cpt")){
 		$contenu = "";
 		if (lire_fichier ($f, $contenu))
-			if (!ecrire_fichier_ajout($archive,$contenu))
+			if (!ecrire_fichier($archive,$contenu,false,false))
 			{
 				echo _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
 				exit;
@@ -127,7 +84,7 @@ function exec_export_all_dist()
 	$partfile = $archive.".part";
 	
 	// utiliser une version fraiche des metas (ie pas le cache)
-	include_ecrire('inc_meta');
+	include_spip('inc/meta');
 	lire_metas();
 
 	$action = _T('info_exportation_base', array('archive' => $archive));
@@ -161,6 +118,14 @@ function exec_export_all_dist()
 		ecrire_meta("status_dump", "$status_dump");
 		$status_dump = explode("::",$status_dump);
 		ecrire_metas();
+		// un ramassage preventif au cas ou le dernier dump n'aurait pas ete acheve correctement
+		#ramasse_parties(_DIR_SESSIONS . $archive, $gz, _DIR_SESSIONS . $partfile);
+		// et au cas ou (le rammase_parties s'arrete si un fichier de la serie est absent)
+		// on ratisse large avec un preg_files
+		$liste = preg_files(_DIR_SESSIONS, "$archive\.part\.[0-9]*");
+		foreach($liste as $dummy)
+			@unlink($dummy);
+
 		echo _L("Debut du Sauvegarde")."<br/>";
 		$f = ($gz) ? gzopen(_DIR_SESSIONS . $archive, "wb") : fopen(_DIR_SESSIONS . $archive, "wb");
 		if (!$f) {
@@ -185,39 +150,56 @@ function exec_export_all_dist()
 
 	// construction de la liste des tables pour le dump :
 	// toutes les tables principales
-	// + toutes les tables auxiliaires
-	// - les tables relations (exportees en tant que liens avec chaque objet lie)
+	// + toutes les tables auxiliaires hors relations
+	// + les tables relations dont les deux tables liees sont dans la liste
 	$tables_for_dump = array();
-	$tables_for_link = array();
 	$tables_pointees = array();
-	global $IMPORT_tables_noexport;
+	global $EXPORT_tables_noexport;
 	global $tables_principales;
 	global $tables_auxiliaires;
 	global $table_des_tables;
 	global $tables_relations;
 
-	$liste_tables = array_merge(array_keys($tables_principales),array_keys($tables_auxiliaires));
-	foreach($liste_tables as $table){
-		$name = preg_replace("{^spip_}","",$table);
-		$tables_for_link[$table] = array();
-	  if (!isset($tables_pointees[$table]) && !in_array($table,$IMPORT_tables_noexport)){
-			$tables_for_dump[] = $table;
-			$tables_pointees[$table] = 1;
-			$relation = $tables_relations[$table];
-			if (!$relation) $relation = $tables_relations[$name];
-			if ($relation){
-				foreach($relation as $id=>$link_table){
-					if (isset($tables_auxiliaires["$link_table"])||isset($tables_principales["$link_table"])){
-						$tables_for_link[$table]["$link_table"]=$id;
-						$tables_pointees["$link_table"] = 1;
-					}
-					else if (isset($tables_auxiliaires["spip_$link_table"])||isset($tables_principales["spip_$link_table"])){
-						$tables_for_link[$table]["spip_$link_table"]=$id;
-						$tables_pointees["spip_$link_table"] = 1;
-					}
+	// on construit un index des tables de liens
+	// pour les ajouter SI les deux tables qu'ils connectent sont sauvegardees
+	$tables_for_link = array();
+	foreach($tables_relations as $table=>$relation)
+	{
+		$nom = $table;
+		if (!isset($tables_auxiliaires[$nom])&&!isset($tables_principales[$nom]))
+			$nom = "spip_$table";
+		if (isset($tables_auxiliaires[$nom])||isset($tables_principales[$nom])){
+			foreach($relation as $id=>$link_table){
+				if (isset($tables_auxiliaires[$link_table])||isset($tables_principales[$link_table])){
+					$tables_for_link[$link_table][] = $nom;
+				}
+				else if (isset($tables_auxiliaires["spip_$link_table"])||isset($tables_principales["spip_$link_table"])){
+					$tables_for_link["spip_$link_table"][] = $nom;
 				}
 			}
 		}
+	}
+	
+	$liste_tables = array_merge(array_keys($tables_principales),array_keys($tables_auxiliaires));
+	foreach($liste_tables as $table){
+		$name = preg_replace("{^spip_}","",$table);
+	  if (		!isset($tables_pointees[$table]) 
+	  		&&	!in_array($table,$EXPORT_tables_noexport) 
+	  		&&	!isset($tables_for_link[$table])){
+			$tables_for_dump[] = $table;
+			$tables_pointees[$table] = 1;
+		}
+	}
+	foreach ($tables_for_link as $link_table =>$liste){
+		$connecte = true;
+		foreach($liste as $connect_table)
+			if (!in_array($connect_table,$tables_for_dump))
+				$connecte = false;
+		if ($connecte)
+			# on ajoute les liaisons en premier
+			# si une restauration est interrompue, cela se verra mieux si il manque des objets
+			# que des liens
+			array_unshift($tables_for_dump,$link_table);
 	}
 
 	ob_flush();flush();
@@ -231,7 +213,7 @@ function exec_export_all_dist()
 		}
 
 		ob_flush();flush();
-		rammasse_parties(_DIR_SESSIONS . $archive, $gz, _DIR_SESSIONS . $partfile);
+		ramasse_parties(_DIR_SESSIONS . $archive, $gz, _DIR_SESSIONS . $partfile);
 
 		$f = ($gz) ? gzopen(_DIR_SESSIONS . $archive, "ab") : fopen(_DIR_SESSIONS . $archive, "ab");
 		$_fputs ($f, build_end_tag("SPIP")."\n");
@@ -243,8 +225,7 @@ function exec_export_all_dist()
 		echo "<p>"._T('info_sauvegarde_reussi_01')."</b><p>"._T('info_sauvegarde_reussi_02', array('archive' => $archive))." <a href='./'>"._T('info_sauvegarde_reussi_03')."</a> "._T('info_sauvegarde_reussi_04')."\n";
 	}
 	else{
-		$max_time = ini_get('max_execution_time')*1000;
-		$timeout = $max_time;
+		$timeout = ini_get('max_execution_time')*1000;
 	  if ($start) $timeout = round($timeout/2);
 		// script de rechargement auto sur timeout
 		echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".generer_url_ecrire("export_all","archive=$archive&gz=$gz",true)."\";',$timeout);</script>\n");
@@ -255,22 +236,19 @@ function exec_export_all_dist()
 			list($string,$status_dump)=export_objets($table, primary_index_table($table), $tables_for_link[$table],0, false, $i, _L("Sauvegarde de la table $table"),$paquets);
 		  while ($string!=''){
 				if ($cpt == 0)
-					rammasse_parties(_DIR_SESSIONS . $archive, $gz, _DIR_SESSIONS . $partfile);
+					ramasse_parties(_DIR_SESSIONS . $archive, $gz, _DIR_SESSIONS . $partfile);
 
 				// on ecrit dans un fichier generique
 				ecrire_fichier (_DIR_SESSIONS .$partfile, $string);
-				/*$fpart = fopen(_DIR_SESSIONS .$partfile,'wb');
-				fputs($fpart, $string);
-				fclose($fpart);*/
 				// on le renomme avec un numero -> operation atomique en linux
 				rename(_DIR_SESSIONS .$partfile,_DIR_SESSIONS .$partfile.".$cpt");
 				$cpt ++;
 				ecrire_meta("status_dump", implode("::",$status_dump));
-				ecrire_metas();
+				#lire_metas();
 				list($string,$status_dump)=export_objets($table, primary_index_table($table), $tables_for_link[$table],0, false, $i, _L("Sauvegarde de la table $table"),$paquets);
 			}
 			ecrire_meta("status_dump", implode("::",$status_dump));
-			ecrire_metas();
+			#lire_metas();
 		}
 		// pour recharger la page tout de suite en finir le ramassage
 		echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".str_replace("&amp;","&",generer_url_ecrire("export_all","archive=$archive&gz=$gz"))."\";',0);</script>\n");

@@ -18,11 +18,6 @@ include_spip('inc/indexation'); // pour la fonction primary_index_table
 include_spip('inc/serialbase');
 include_spip('inc/auxbase');
 
-global $IMPORT_tables_noimport;
-$IMPORT_tables_noimport[]='spip_ajax_fonc';
-$IMPORT_tables_noimport[]='spip_caches';
-$IMPORT_tables_noimport[]='spip_meta';
-
 global $IMPORT_tables_noerase;
 $IMPORT_tables_noerase[]='spip_ajax_fonc';
 $IMPORT_tables_noerase[]='spip_meta';
@@ -146,11 +141,12 @@ function import_objet_1_3($f, $gz=false, $tag_fermant='SPIP', $tables) {
 		$value = '';
 		if (!xml_fetch_tag($f, $value, $gz)) return false;
 
-		if (substr($col, 0, 5) == 'lien:') {
+		/*if (substr($col, 0, 5) == 'lien:') {
 			$table_lien = substr($col, 5);
 			$liens[$table_lien][] = array(0=>$id_objet,1=>$value);
 		}
-		else if ($col != 'maj') {
+		else */
+		if ($col != 'maj') {
 			$cols[] = $col;
 			$values[] = '"'.addslashes($value).'"';
 			if ($col == $primary) $id_objet = $value;
@@ -158,8 +154,7 @@ function import_objet_1_3($f, $gz=false, $tag_fermant='SPIP', $tables) {
 	}
 	
 	if (isset($tables_trans[$table])) $table = $tables_trans[$table];
-
-	if (in_array($table,$tables)&&(!in_array($table,$IMPORT_tables_noimport))){
+	if (in_array($table,$tables)/*&&(!in_array($table,$IMPORT_tables_noimport))*/){
 
 		$query = "REPLACE $table (" . join(',', $cols) . ') VALUES (' . join(',', $values) . ')';
 		#spip_log("import_objet_1_3 : query $query");
@@ -168,7 +163,7 @@ function import_objet_1_3($f, $gz=false, $tag_fermant='SPIP', $tables) {
 			$GLOBALS['erreur_restauration'] = true;
 		}
 	
-		if (!isset($relation_liste[$table])){
+		/*if (!isset($relation_liste[$table])){
 			$name = preg_replace("{^spip_}","",$table);
 			$relation = $tables_relations[$table];
 			if (!$relation) $relation = $tables_relations[$name];
@@ -197,12 +192,15 @@ function import_objet_1_3($f, $gz=false, $tag_fermant='SPIP', $tables) {
 						spip_query("INSERT INTO $link_table ($primary, $id) VALUES (".join(',', $values).")");
 					}
 				}
-			}
+			}*/
 	}
 
 	$p = $pos + $abs_pos;
+	// on se contente d'une ecriture en bdd car sinon le temps de backup
+	// est double. Il faut juste faire attention a bien lire_metas()
+	// au debut de la restauration
 	ecrire_meta("status_restauration", "$p");
-	ecrire_metas();
+	#ecrire_metas(); 
 
 	if (time() - $time_javascript > 3) {	// 3 secondes
 		affiche_progression_javascript($abs_pos,$table);
@@ -458,6 +456,10 @@ function import_fin() {
 	effacer_meta("status_restauration");
 	effacer_meta("debut_restauration");
 	effacer_meta("date_optimisation");
+	effacer_meta('request_restauration');
+	effacer_meta('fichier_restauration');
+	effacer_meta('version_archive_restauration');
+	effacer_meta('tag_archive_restauration');
 	ecrire_meta('calculer_rubriques', 'oui');
 	ecrire_metas();
 }
@@ -469,6 +471,10 @@ function import_abandon() {
 	effacer_meta("status_restauration");
 	effacer_meta("debut_restauration");
 	effacer_meta("date_optimisation");
+	effacer_meta('request_restauration');
+	effacer_meta('fichier_restauration');
+	effacer_meta('version_archive_restauration');
+	effacer_meta('tag_archive_restauration');
 	ecrire_metas();
 }
 
@@ -518,7 +524,7 @@ function import_tables($f, $tables, $gz=false) {
 		$version_archive = $r[1]['version_archive'];
 		ecrire_meta('version_archive_restauration', $version_archive);
 		ecrire_meta('tag_archive_restauration', $tag_archive);
-		ecrire_metas();
+		#ecrire_metas();
 
 	}
 	else {
@@ -591,7 +597,7 @@ function affiche_progression_javascript($abs_pos,$table="") {
 			echo "document.progression.recharge.value='".str_replace("'", "\\'", unicode_to_javascript(_T('info_fini')))."';\n";
 		echo "document.progression.taille.value='$taille';\n";
 		echo "//--></script>\n";
-		echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".$_SERVER["PHP_SELF"]."\";',0);</script>\n");
+		echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".self()."\";',0);</script>\n");
 	}
 	else {
 		if ($table!="")
@@ -618,13 +624,12 @@ function import_all_continue($tables)
   global $affiche_progression_pourcent;
 	ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
 	// utiliser une version fraiche des metas (ie pas le cache)
-	include_ecrire('inc_meta');
+	include_spip('inc/meta');
 	lire_metas();
 
 	@ignore_user_abort(1);
 
 	$request = unserialize($meta['request_restauration']);
-
 	$archive = _DIR_SESSIONS . $request['archive'];
 
 	debut_page(_T('titre_page_index'), "asuivre", "asuivre");
@@ -634,12 +639,24 @@ function import_all_continue($tables)
 
 	debut_droite();
 
-	if (!@is_readable($archive)) {
+	// attention : si $request['archive']=="", alors archive='data/' 
+	// le test is_readable n'est donc pas suffisant
+	if (!@is_readable($archive)||is_dir($archive)) {
 		$texte_boite = _T('info_erreur_restauration');
 		debut_boite_alerte();
 		echo "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
 		fin_boite_alerte();
 		fin_html();
+		// faut faire quelque chose, sinon le site est mort :-)
+		// a priori on reset les meta de restauration car rien n'a encore commence
+		effacer_meta('request_restauration');
+		effacer_meta('fichier_restauration');
+		effacer_meta('version_archive_restauration');
+		effacer_meta('tag_archive_restauration');
+		effacer_meta('status_restauration');
+		effacer_meta('debut_restauration');
+		effacer_meta('charset_restauration');
+		ecrire_metas();
 		exit;
 	}
 
@@ -663,7 +680,7 @@ function import_all_continue($tables)
 	echo "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
 	fin_boite_alerte();
 	$max_time = ini_get('max_execution_time')*1000;
-	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".$_SERVER["PHP_SELF"]."\";',$max_time);</script>\n");
+	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".self()."\";',$max_time);</script>\n");
 
 	fin_page();
 	ob_flush();flush();

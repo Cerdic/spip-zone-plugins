@@ -18,9 +18,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS['version_archive'] = '1.3';
 // par defaut tout est exporte
 // possibiliter de limiter les tables via mes_options
-global $EXPORT_tables_noexport;
-#$EXPORT_tables_noexport[]='spip_referers_articles';
-
 
 // Conversion timestamp MySQL (format ascii) en Unix (format integer)
 function mysql_timestamp_to_time($maj)
@@ -52,69 +49,75 @@ function build_end_tag($tag) {
 // Exportation generique d'objets (fichier ou retour de fonction)
 //
 function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_actuelle="", $nom_etape="",$limit=0) {
-	global $debut_limit;
-	global $EXPORT_tables_noexport;
 	static $etape_affichee=array();
+	static $table_fields=array();
 	$string='';
 
+	#lire_metas(); // un lire meta pour commencer car les ecrire_meta se font uniquement dans la table pour optimiser
 	$status_dump = explode("::",$GLOBALS['meta']["status_dump"]);
 	$etape_en_cours = $status_dump[2];
 	$pos_in_table = $status_dump[3];
 	
 	if ($etape_en_cours < 1 OR $etape_en_cours == $etape_actuelle){
 
-		if (isset($EXPORT_tables_noexport)&&(in_array($table,$EXPORT_tables_noexport))){
-			echo "<li>($etape_actuelle-$nom_etape)";
-			ob_flush();flush();
+		$result = spip_query("SELECT COUNT(*) FROM $table");
+		$row = spip_fetch_array($result,SPIP_NUM);
+		$total = $row[0];
+		$debut = $pos_in_table;
+	  if (!isset($etape_affichee[$etape_actuelle])){
+			echo "<li><strong>$etape_actuelle-$nom_etape</strong>";
+			echo " : $total";
+			$etape_affichee[$etape_actuelle] = 1;
+			if ($limit<$total) echo "<br/>";
 		}
-		else {
-			$query = "SELECT * FROM $table";
-			$result = spip_query($query);
-			$total = spip_num_rows($result);
-			$debut = $pos_in_table;
-		  if (!isset($etape_affichee[$etape_actuelle])){
-				echo "<li><strong>$etape_actuelle-$nom_etape</strong>";
-				echo " : $total";
-				$etape_affichee[$etape_actuelle] = 1;
-				if ($limit<$total) echo "<br/>";
-			}
-			if ($pos_in_table!=0)
-				echo "| $pos_in_table ";
-			ob_flush();flush();
-	
-			if ($limit == 0) $limit=$total;
-			$query = "SELECT * FROM $table LIMIT $debut,$limit";
-			$result = spip_query($query);
-			
-			$_fputs = ($gz) ? gzputs : fputs;
+		if ($pos_in_table!=0)
+			echo "| $pos_in_table ";
+		ob_flush();flush();
+
+		if ($limit == 0) $limit=$total;
+		$query = "SELECT * FROM $table LIMIT $debut,$limit";
+		$result = spip_query($query);
+		
+		if (!isset($table_fields[$table])){
 			$nfields = mysql_num_fields($result);
 			// Recuperer les noms des champs
-			for ($i = 0; $i < $nfields; ++$i) $fields[$i] = mysql_field_name($result, $i);
+			for ($i = 0; $i < $nfields; ++$i) $table_fields[$table][$i] = mysql_field_name($result, $i);
+		}
+		else
+			$nfields = count($table_fields[$table]);
+
+		if (!$file) {
+			while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
+				$string .= build_begin_tag($table) . "\n";
+				// Exporter les champs de la table
+				for ($i = 0; $i < $nfields; ++$i) {
+					$string .= '<'.$table_fields[$table][$i].'>' . text_to_xml($row[$table_fields[$table][$i]]) . '</'.$table_fields[$table][$i].'>' . "\n";
+				}
+					
+				$string .= build_end_tag($table) . "\n\n";
+				$status_dump[3] = $pos_in_table = $pos_in_table +1;
+			}
+		}
+		else {
+			$_fputs = ($gz) ? gzputs : fputs;
 			while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
 				$string .= build_begin_tag($table) . "\n";
 				// Exporter les champs de la table
 				for ($i = 0; $i < $nfields; ++$i) {
 					$string .= '<'.$fields[$i].'>' . text_to_xml($row[$fields[$i]]) . '</'.$fields[$i].'>' . "\n";
 				}
-				// Exporter les relations
-				foreach($liens as $link_table=>$col_id){
-					$query = "SELECT $col_id FROM $link_table WHERE $primary=".$row[$primary];
-					$res2 = spip_query($query);
-					while($row2 = spip_fetch_array($res2)) {
-						$string .= "<lien:$link_table>" . $row2[$col_id] . "</lien:$link_table>" . "\n";
-					}
-					spip_free_result($res2);
-				}
-	
+					
 				$string .= build_end_tag($table) . "\n\n";
 				$status_dump[3] = $pos_in_table = $pos_in_table +1;
-				if ($file) {
-					$_fputs($file, $string);
-					fflush($file);
-					ecrire_meta("status_dump", implode("::",$status_dump));
-					ecrire_metas();
-					$string = '';
-				}
+	
+				$_fputs($file, $string);
+				fflush($file);
+				// on se contente d'une ecriture en base pour aller plus vite
+				// a la relecture on en profitera pour mettre le cache a jour
+				ecrire_meta("status_dump", implode("::",$status_dump));
+				#lire_metas();
+				#ecrire_metas(); 
+				$string = '';
 			}
 		}
 		if ($pos_in_table>=$total){
@@ -124,8 +127,11 @@ function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_
 			$status_dump[3] = 0;
 		}
 		if ($file) {
+			// on se contente d'une ecriture en base pour aller plus vite
+			// a la relecture on en profitera pour mettre le cache a jour
 			ecrire_meta("status_dump", implode("::",$status_dump));
-			ecrire_metas();
+			#lire_metas();
+			#ecrire_metas();
 		}
 		spip_free_result($result);
 		return array($string,$status_dump);
