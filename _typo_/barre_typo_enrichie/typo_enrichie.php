@@ -75,6 +75,17 @@ function BarreTypoEnrichie_pre_propre($texte) {
 }
 
 function BarreTypoEnrichie_post_propre($texte) {
+	// Definition des différents intertitres possibles
+	tester_variable('debut_intertitre', '<h2>');
+	tester_variable('fin_intertitre', '</h2>');
+	tester_variable('debut_intertitre_2', '<h3>');
+	tester_variable('fin_intertitre_2', '</h3>');
+	tester_variable('debut_intertitre_3', '<h4>');
+	tester_variable('fin_intertitre_3', '</h4>');
+	tester_variable('debut_intertitre_4', '<h5>');
+	tester_variable('fin_intertitre_4', '</h5>');
+	tester_variable('debut_intertitre_5', '<h6>');
+	tester_variable('fin_intertitre_5', '</h6>');
 
 	// remplace les fausses listes à puce par de vraies
 	// (recherche en début de lignes - suivi d'un ou plusieurs caractères blancs, en mode multiligne)
