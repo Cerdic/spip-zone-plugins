@@ -71,6 +71,10 @@ function BarreTypoEnrichie_pre_propre($texte) {
 
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
 
+	// remplace les fausses listes à puce par de vraies
+	// (recherche en début de lignes - suivi d'un ou plusieurs caractères blancs, en mode multiligne)
+	$texte =  preg_replace('/^-\s+/m','-* ',$texte);
+
 	return $texte;
 }
 
