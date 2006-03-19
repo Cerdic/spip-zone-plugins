@@ -10,12 +10,15 @@ _ &copy; 2006 - Distribue sous licence GPL
 	0.1
 	</version>
 	<etat>
-	dev
+	test
 	</etat>
 	<description>
-	Dump et restore XML complets
-_ des tables principales et tables auxiliares
-_ et restore des dumps xml phpMyAdmin
+	Dump et restore XML complets des tables SPIP. La sauvegarde inclue les tables supplementaires ajout&eacute;es par les plugin lorsqu'elles sont explicitement declar&eacute;e par ceux-ci.
+_ Le plugin permet de restorer aussi les dump xml realis&eacute;s directement par phpMyAdmin
+_ Il semble assez robuste et rapide maintenant pour &ecirc;tre utilis&eacute; en conditions r&eacute;eles : Tous les retours sont les bienvenus !
+_ Attention quand m&ecirc;me : le format des fichiers sauvegard&eacute;s a &eacute;t&eacute; amelior&eacute;, et les dump produits avec le plugin ne sont pas restaurables nativement par SPIP.
+_ {{Pendant cette phase de test, ne faites pas une confiance absolue au plugin, et prevoyez une autre solution de sauvegarde ...}}
+_ N&eacute;c&eacute;ssite une version SPIP 1.9 svn release 6002 minimum
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
 	super_dump.php
