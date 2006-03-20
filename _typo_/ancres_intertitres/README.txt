@@ -1,5 +1,5 @@
 Nom : ancres_intertitres
-Version : 0.2
+Version : 0.3
 Version spip minimale requise : 1.9beta1
 
 Objectif : ajouter des ancres html calculees en fonction du texte de l'intertitre. Fournir une balise pour afficher la "table des matieres" d'un article (contenu de #TEXTE)
@@ -35,7 +35,7 @@ pour faire une belle noisettes
 on peut parametrer la balise comme suit :
 
 [<div id="table_matiere">
-	<h2><:table_matiere:></h2>
+	<h2><:tdm:table_matiere:></h2>
 	<ul>
 		(#TABLE_MATIERE{<li>,</li>})
 	</ul>
@@ -47,3 +47,4 @@ ChangeLog :
 
 2005-11-17 : version initiale 0.1
 2006-03-11 : version 0.2, adaptation pour SPIP1.9b1 et parametrage du rendu
+2006-03-20 : version 0.3, renommage des fichiers du plugin pour eviter les conflits

@@ -1,35 +1,21 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Ancres intertitres
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
- 	collectif
-_ &copy; 2006 - Distribue sous licence GPL
+	<nom>Ancres intertitres</nom>
+	<auteur>
+collectif
+_ &copy; 2006 - Distribu&eacute; sous licence GPL
 	</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	test
-	</etat>
+	<version>0.1</version>
+	<etat>test</etat>
 	<description>
-		Introduit une ancre translitteree pour les intertitres
+		Introduit une ancre translitter&eacute;e pour les intertitres
 
-		N&eacute;cessite le plugin [ancres->http://zone.spip.org/trac/spip-zone/browser/_plugins_/_typo_/ancres] pour fonctionner
+		N&eacute;cessite l'activation du plugin [ancres->http://zone.spip.org/trac/spip-zone/browser/_plugins_/_typo_/ancres] pour fonctionner
 	</description>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
-	<prefix> 
-	AncresIntertitres
-	</prefix>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<fonctions>balises_et_filtres.php</fonctions>
+	<prefix>AncresIntertitres</prefix>
 	<pipeline>
 		<nom>pre_propre</nom>
 		<action>ancres_intertitres</action>
 		<inclure>ancres_intertitres.php</inclure>
 	</pipeline>
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>
