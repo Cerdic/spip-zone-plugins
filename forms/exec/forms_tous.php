@@ -3,7 +3,7 @@
 include_ecrire('inc_forms');
 
 function exec_forms_tous(){
-	global $clean_link;
+	//global $clean_link;
   include_spip("inc/presentation");
 	include_spip('base/create');
 	creer_base(); // au cas ou
@@ -41,10 +41,13 @@ function exec_forms_tous(){
 	
 	if (Forms_form_editable()) {
 		echo "<div align='right'>";
-		$link = new Link('?exec=forms_edit');
-		$link->addVar('new', 'oui');
-		$link->addVar('retour', $clean_link->getUrl());
-		icone(_L("Cr&eacute;er un nouveau formulaire"), $link->getUrl(), "../"._DIR_PLUGIN_FORMS. "/form-24.png", "creer.gif");
+		//$link = new Link('?exec=forms_edit');
+		//$link->addVar('new', 'oui');
+		//$link->addVar('retour', $clean_link->getUrl());
+		//icone(_L("Cr&eacute;er un nouveau formulaire"), $link->getUrl(), "../"._DIR_PLUGIN_FORMS. "/form-24.png", "creer.gif");
+		$link=generer_url_ecrire('forms_edit', 'new=oui');
+		$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
+		icone(_L("Cr&eacute;er un nouveau formulaire"), $link, "../"._DIR_PLUGIN_FORMS. "/form-24.png", "creer.gif");
 		echo "</div>";
 	}
 	

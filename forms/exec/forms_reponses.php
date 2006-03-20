@@ -105,9 +105,13 @@ function exec_forms_reponses(){
 			if ($i == $debut)
 				echo "<strong>$i</strong>";
 			else {
-				$link = new Link();
-				$link->addVar('debut', strval($i));
-				echo "<a href='".$link->getUrl()."'>$i</a>";
+				//objet link supprime remplace par parametre_url()
+				//$link = new Link();
+				//$link->addVar('debut', strval($i));
+				//echo "<a href='".$link->getUrl()."'>$i</a>";
+				$link=parametre_url(self(),'debut', strval($i));
+				echo "<a href='".$link."'>$i</a>";
+				
 			}
 		}
 	}
@@ -185,9 +189,11 @@ function exec_forms_reponses(){
 
 		debut_cadre_relief("../"._DIR_PLUGIN_FORMS."/form-24.png");
 
-		$link = new Link();
-		$link->addVar('supp_reponse', $id_reponse);
-		icone(_L("Supprimer cette r&eacute;ponse"), $link->getUrl(),"../"._DIR_PLUGIN_FORMS."/form-24.png", "supprimer.gif", "right");
+		//$link = new Link();
+		//$link->addVar('supp_reponse', $id_reponse);
+		//icone(_L("Supprimer cette r&eacute;ponse"), $link->getUrl(),"../"._DIR_PLUGIN_FORMS."/form-24.png", "supprimer.gif", "right");
+		$link=parametre_url(self(),'supp_reponse', $id_reponse);
+		icone(_L("Supprimer cette r&eacute;ponse"), $link,"../"._DIR_PLUGIN_FORMS."/form-24.png", "supprimer.gif", "right");
 
 		echo _L("R&eacute;ponse envoy&eacute;e le ").affdate($date)."<br />\n";
 		if (!$form_unique) {

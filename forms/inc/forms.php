@@ -700,7 +700,8 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 		$ancre = 'form'.(++$num_ancre);
 
 		if ($flag_ecrire) 
-			$link = $GLOBALS['clean_link']->getUrl();
+			//$link = $GLOBALS['clean_link']->getUrl();
+			$link = str_replace('&amp;', '&', self());
 		else if ($GLOBALS['retour_form'])
 			$link = $GLOBALS['retour_form'];
 		else 
