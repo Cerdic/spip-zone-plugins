@@ -21,6 +21,12 @@ $IMPORT_tables_noimport[]='spip_ajax_fonc';
 $IMPORT_tables_noimport[]='spip_caches';
 $IMPORT_tables_noimport[]='spip_meta';
 
+// NB: Ce fichier peut initialiser $dossier_squelettes (old-style)
+// donc il faut l'inclure "en globals"
+if ($f = include_spip('mes_fonctions', false)) {
+	global $dossier_squelettes;
+	@include_once ($f); 
+}
 
 function verifier_version_sauvegarde ($archive) {
 	global $spip_version;

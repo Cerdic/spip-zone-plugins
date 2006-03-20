@@ -21,6 +21,13 @@ include_spip('base/auxiliaires');
 include_spip('inc/indexation'); // pour la fonction primary_index_table 
 include_spip('inc/flock');
 
+// NB: Ce fichier peut initialiser $dossier_squelettes (old-style)
+// donc il faut l'inclure "en globals"
+if ($f = include_spip('mes_fonctions', false)) {
+	global $dossier_squelettes;
+	@include_once ($f); 
+}
+
 global $EXPORT_tables_noexport;
 $EXPORT_tables_noexport[]='spip_ajax_fonc';
 $EXPORT_tables_noexport[]='spip_caches';
