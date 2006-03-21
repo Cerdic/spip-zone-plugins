@@ -1,0 +1,52 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Agenda
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Cedric MORIN
+ 	[notre-ville.net->http://www.notre-ville.net]
+_ © 2006 - Licence GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Agenda Evenementiel
+_ Avertissement : {{Ce plugin est a l'etat de developpement. Il est bugg&eacute; (c'est m&ecirc;me surement sa qualit&eacute; principale).
+Des modifications pourront etre apport&eacute;es sur la structure des tables, rendant incompatible les tables cr&eacute;&eacute;es avec cette version}}
+_ Ce plugin permet d'ajouter des occurences evenementielles horodat&eacute;es aux articles pour g&eacute;rer des agenda &eacute;v&eacute;nementiels.
+_ Il n'est pas d&eacute;stin&eacute; a la gestion d'un emploi du temps. Certaines fonctions ne sont donc pas adapt&eacute;es a ce besoin.
+_ Si malgr&eacute; tous ces avertissements vous trouvez le courage de le tester, les rapports de bugs et les propositions d'am&eacute;lioration sont les bienvenus.
+	</description>
+	<options> <!-- fichier charge a chaque hit -->
+	agenda_mes_options.php
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	inc/agenda_filtres.php
+	</fonctions>
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	agenda_mes_fonctions.php
+	</fonctions>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	Agenda
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>agenda.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>agenda.php</inclure>
+	</pipeline>
+
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
