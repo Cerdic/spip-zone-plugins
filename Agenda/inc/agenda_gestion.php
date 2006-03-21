@@ -21,7 +21,7 @@ function Agenda_verifier_base(){
 	if (   (!isset($GLOBALS['meta']['agenda_base_version']) )
 			|| (($current_version = $GLOBALS['meta']['agenda_base_version'])!=$version_base)){
 		include_spip('base/agenda_evenements');
-		if ($current_version=0.0){
+		if ($current_version==0.0){
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			creer_base();
