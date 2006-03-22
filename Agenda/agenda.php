@@ -46,8 +46,8 @@ function Agenda_rendu_evenement($flux) {
 	$evenement = $flux['args']['evenement'];
 
 	
-	/*$url = $evenement['URL']; 
-	$desc = propre($evenement['DESCRIPTION']);
+	$url = $evenement['URL']; 
+	/*$desc = propre($evenement['DESCRIPTION']);
 	$lieu = $evenement['LOCATION'];
 	$sum = typo($evenement['SUMMARY']);
 
