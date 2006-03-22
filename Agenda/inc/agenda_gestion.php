@@ -265,10 +265,10 @@ function Agenda_action_formulaire_article(){
 					"($id_evenement,$id_article)");
 			}
 	 	}
-		$titre = _request('evenement_titre');
-		$descriptif = _request('evenement_descriptif');
-		$lieu = _request('evenement_lieu');
-		$horaire = _request('evenement_horaire');
+		$titre = addslashes(_request('evenement_titre'));
+		$descriptif = addslashes(_request('evenement_descriptif'));
+		$lieu = addslashes(_request('evenement_lieu'));
+		$horaire = addslashes(_request('evenement_horaire'));
 		if ($horaire!='oui') $horaire='non';
 	
 		// pour les cas ou l'utilisateur a saisi 29-30-31 un mois ou ca n'existait pas
@@ -404,14 +404,14 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 	// TITRE
 	$out .=  "<div class='titre-titre'>"._T('agenda:evenement_titre')."</div>\n";
 	$out .=  "<div class='titre-visu'>";
-	$ftitre=entites_html($ftitre,ENT_QUOTES);
+	$ftitre=htmlentities($ftitre,ENT_QUOTES);
 	$out .=  "<input type='text' name='evenement_titre' value='$ftitre' style='width:100%;' />";
 	$out .=  "</div>\n";
 
 	// LIEU
 	$out .=  "<div class='lieu-titre'>"._T('agenda:evenement_lieu')."</div>";
 	$out .=  "<div class='lieu-visu'>";
-	$flieu=entites_html($flieu,ENT_QUOTES);
+	$flieu=htmlentities($flieu,ENT_QUOTES);
 	$out .=  "<input type='text' name='evenement_lieu' value='$flieu' style='width:100%;' />";
 	$out .=  "</div>\n";
 
@@ -447,7 +447,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 	$out .=  "<div class='descriptif-titre'>"._T('agenda:evenement_descriptif')."</div>";
 	$out .=  "<div class='descriptif-visu'>";
 	$out .=  "<textarea name='evenement_descriptif' style='width:100%;' rows='3'>";
-	$out .=  entites_html($fdescriptif,ENT_QUOTES);
+	$out .=  htmlentities($fdescriptif,ENT_QUOTES);
 	$out .=  "</textarea>\n";
 	$out .=  "</div>\n";
 

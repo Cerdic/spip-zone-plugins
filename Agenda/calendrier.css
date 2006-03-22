@@ -392,7 +392,9 @@ a.calendrier-annee:hover {
 		color: #F5EEE5
 }
 
-.calendrier-creneau {
+.calendrier-creneau,
+.calendrier-creneau-today,
+.calendrier-creneau-sunday {
 	position: absolute;
 	margin-left: 0px;
 	margin-right: 0px;
@@ -409,86 +411,38 @@ a.calendrier-annee:hover {
 .calendrier-creneau a {
 	color : #dddddd;
 	font-weight: bold;
- }
-
+}
 .calendrier-creneau a:hover {
-	position: absolute;
-	margin-left: 0px;
-	margin-right: 0px;
-	border-top: 0px ;
-	border-right: 0px ;
-	border-bottom: 0px ;
-	border-left: 0px ;
-	font-weight: bold;
 	background-color: #ccff99;
-	width: 100%;
- }
+}
 
 .calendrier-creneau-today {
-	position: absolute;
-	margin-left: 0px;
-	margin-right: 0px;
-	border-top: 0px ;
-	border-right: 0px ;
-	border-bottom: 0px ;
-	border-left: 0px ;
-	font-weight: bold;
 	background-color: #eeeeee;
 	color: #eeeeee;
-	width: 100%;
- }
-
+}
 .calendrier-creneau-today a {
 	color : #eeeeee;
 	font-weight: bold;
- }
-
+}
 .calendrier-creneau-today a:hover {
-	position: absolute;
-	margin-left: 0px;
-	margin-right: 0px;
-	border-top: 0px ;
-	border-right: 0px ;
-	border-bottom: 0px ;
-	border-left: 0px ;
-	font-weight: bold;
-	color : #dddddd;
 	background-color: #ccff99;
-	width: 100%;
- }
+}
 
 .calendrier-creneau-sunday {
-	position: absolute;
-	margin-left: 0px;
-	margin-right: 0px;
-	border-top: 0px ;
-	border-right: 0px ;
-	border-bottom: 0px ;
-	border-left: 0px ;
-	font-weight: bold;
-	background-color: #ccff99;
-	color: #ccff99;
-	width: 100%;
- }
+/*	background-color: #ccff99;
+	color: #ccff99;*/
+}
 
 .calendrier-creneau-sunday a {
-	color : #ccff99;
+	/*color : #ccff99;*/
+	color : #dddddd;
 	font-weight: bold;
  }
 
 .calendrier-creneau-sunday a:hover {
-	position: absolute;
-	margin-left: 0px;
-	margin-right: 0px;
-	border-top: 0px ;
-	border-right: 0px ;
-	border-bottom: 0px ;
-	border-left: 0px ;
-	font-weight: bold;
-	color : #ccff66;
-	background-color: #dddddd;
-	width: 100%;
- }
+	/*background-color: #dddddd;*/
+	background-color: #ccff99;
+}
 
 .calendrier-plage,.calendrier-plage-selection { 		/* Orange */
 		background-color: #FFF2EB;
@@ -505,13 +459,12 @@ a.calendrier-annee:hover {
 }
 
 .calendrier-evenement,.calendrier-evenement-selection { 		/* Vert pastel */
-		background-color: #E2FDEC;
-		border: 1px solid #009F3C;
-		color: #009F3C;
+		background-color: #eeeeee;
+		border: 0px solid #009F3C;
 }
 .calendrier-evenement-selection{
-		border: 3px solid #009F3C;
 }
+
 .calendrier-anniversaire { 		/* Jaune */
 		background-color: #ffffee;
 		border: 1px solid #ccaa00;

@@ -25,6 +25,47 @@ function Agenda_header_prive($flux) {
 	return $flux;
 }
 
+function Agenda_rendu_boite($titre,$descriptif,$lieu,$type='ics'){
+	$texte = "<span class='calendrier-verdana10'><span  style='font-weight: bold;'>";
+	$texte .= wordwrap($sum=typo($titre),15)."</span>";
+	$texte .= "<span class='survol'>";
+	$texte .= "<strong>$sum</strong><br />";
+	$texte .= $lieu ? "$lieu<br />":"";
+	$texte .= propre($descriptif);
+	$texte .= "</span>";
+	if ($type=='ics'){	
+		$texte .= (strlen($lieu.$descriptif)?"<hr/>":"").$lieu.(strlen($lieu)?"<br/>":"");
+		$texte .= $descriptif;
+	}
+	$texte .= "</span>";
+
+	return $texte;
+}
+function Agenda_rendu_evenement($flux) {
+	global $couleur_claire;
+	$evenement = $flux['args']['evenement'];
+
+	
+	/*$url = $evenement['URL']; 
+	$desc = propre($evenement['DESCRIPTION']);
+	$lieu = $evenement['LOCATION'];
+	$sum = typo($evenement['SUMMARY']);
+
+	$texte = "<span class='calendrier-verdana10'><span  style='font-weight: bold;'>";
+	$texte .= wordwrap($sum,15)."</span>";
+	$texte .= "<span class='survol'>";
+	$texte .= "<strong>$sum</strong><br />";
+	$texte .= $lieu ? "$lieu<br />":"";
+	$texte .= $desc;
+	$texte .= "</span>";
+	$texte .= "</span>";*/
+	$texte = Agenda_rendu_boite($evenement['SUMMARY'],$evenement['DESCRIPTION'],$evenement['LOCATION'],$flux['args']['type']);
+	$texte = http_href(quote_amp($url), $texte, '', '', '', '');
+	
+	$flux['data'] = $texte;
+	return $flux;
+}
+
 /* public static */
 /*function Agenda_ajouterBoutons($boutons_admin) {
 	// si on est admin

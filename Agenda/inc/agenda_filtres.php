@@ -1,6 +1,6 @@
 <?php
 
-function Agenda_memo_duree($date_deb=0, $date_fin=0 , $descriptif='', $titre='', $url='', $cal='')
+function Agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', $lieu='', $url='', $cal='')
 {
 	static $agenda = array();
 	if (!$date_deb) return $agenda;
@@ -13,7 +13,7 @@ function Agenda_memo_duree($date_deb=0, $date_fin=0 , $descriptif='', $titre='',
 	$startday1=$startday1['0'].' 00:00:00';
 	$ts_startday1=strtotime($startday1);
 	$ts_date_fin=strtotime($date_fin);
-	$maxdays=31;
+	$maxdays=365;
 	while (($ts_startday1<$ts_date_fin)&&($maxdays-->0))
 	{
 		$day=date('Y-m-d H:i:s',$ts_startday1);
@@ -21,8 +21,9 @@ function Agenda_memo_duree($date_deb=0, $date_fin=0 , $descriptif='', $titre='',
 			'CATEGORIES' => $cal,
 			'DTSTART' => $idatedeb,
 			'DTEND' => $idatefin,
-			'DESCRIPTION' => texte_script($descriptif),
-			'SUMMARY' => texte_script($titre),
+			'DESCRIPTION' => $descriptif,
+			'SUMMARY' => $titre,
+			'LOCATION' => $lieu,
 			'URL' => $url);
 		$ts_startday1 += 24*3600; // le jour suivant
 	}
@@ -31,20 +32,20 @@ function Agenda_memo_duree($date_deb=0, $date_fin=0 , $descriptif='', $titre='',
 	return "";
 }
 
-function Agenda_memo_evt_duree($date_deb=0, $date_fin=0 , $descriptif='', $titre='', $url='', $cal='')
+function Agenda_memo_evt_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', $lieu='', $url='', $cal='')
 {
 	static $evenements = array();
 	if (!$date_deb) return $evenements;
 	$url=str_replace("&amp;","&",$url);
 	
-	$idatedeb = date_ical($date_deb);
-	$idatefin = date_ical($date_fin);
+	$idatedeb = date_ical(reset(explode(" ",$date_deb))." 00:00:00");
+	$idatefin = date_ical(reset(explode(" ",$date_fin))." 00:00:00");
 	$cal = trim($cal); // func_get_args (filtre alterner) rajoute \n !!!!
 	$startday1=explode(' ',$date_deb);
 	$startday1=$startday1['0'].' 00:00:00';
 	$ts_startday1=strtotime($startday1);
 	$ts_date_fin=strtotime($date_fin);
-	$maxdays=31;
+	$maxdays=365;
 	while (($ts_startday1<$ts_date_fin)&&($maxdays-->0))
 	{
 		$day=date('Y-m-d H:i:s',$ts_startday1);
@@ -52,8 +53,9 @@ function Agenda_memo_evt_duree($date_deb=0, $date_fin=0 , $descriptif='', $titre
 			'CATEGORIES' => $cal,
 			'DTSTART' => $idatedeb,
 			'DTEND' => $idatefin,
-			'DESCRIPTION' => texte_script($descriptif),
-			'SUMMARY' => texte_script($titre),
+			'DESCRIPTION' => $descriptif,
+			'SUMMARY' => $titre,
+			'LOCATION' => $lieu,
 			'URL' => $url);
 		$ts_startday1 += 24*3600; // le jour suivant
 	}
@@ -62,14 +64,14 @@ function Agenda_memo_evt_duree($date_deb=0, $date_fin=0 , $descriptif='', $titre
 	return "";
 }
 
-function Agenda_affiche_duree($i)
+function Agenda_affiche_full($i)
 {
 	$args = func_get_args();
 	$nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
 	$sinon = array_shift($args);
 	if (!$nb) return $sinon;
 	$type = array_shift($args);
-	$agenda = agenda_memo_duree(0);
+	$agenda = agenda_memo_full(0);
 	$evt_avec = array();
 	foreach (($args ? $args : array_keys($agenda)) as $k) {
 		if (is_array($agenda[$k]))
@@ -78,7 +80,7 @@ function Agenda_affiche_duree($i)
 			}
 	}
 
-	$evenements = agenda_memo_evt_duree(0);
+	$evenements = agenda_memo_evt_full(0);
 	$evt_sans = array();
 	foreach (($args ? $args : array_keys($evenements)) as $k) {
 		if (is_array($evenements[$k]))

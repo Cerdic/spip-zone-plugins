@@ -216,6 +216,36 @@ width:100%;
 	font-weight: bold;
 	background-color: #99cc33;
  }
+a span.survol {
+	display: none;
+}
+
+a:hover span.survol {
+	display: block;
+	position: fixed;
+	top: auto;
+	left: auto;
+	width: auto;
+	padding: 5px;
+	z-index: 100;
+	text-decoration: none;
+  color: #333;
+	background: #ccff99;
+	border: solid 1px #99cc33;
+	font: 10px Verdana, sans-serif;
+	text-align: left;
+	-moz-border-radius-topright: 8px;
+	-moz-border-radius-bottomright: 8px;
+	-moz-border-radius-topleft: 8px;
+	-moz-border-radius-bottomleft: 8px;
+	border-radius-topright: 8px;
+	border-radius-bottomright: 8px;
+	border-radius-topleft: 8px;
+	border-radius-bottomleft: 8px;
+	filter:alpha(opacity=80);
+	opacity: 0.8;
+	-moz-opacity:0.8;
+}
 
 
 

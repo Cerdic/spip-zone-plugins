@@ -118,11 +118,11 @@ function affiche_evenements_agenda($flag_editable){
 				$url=parametre_url($urlbase,'ndate',urlencode(date('Y-m-d H:i',$j)));
 				$creneau=date('Y-m-d H:i:s',$j);
 				if (date('Y-m-d',$j)==$today)
-					Agenda_memo_duree($creneau,$creneau," ",date('H:i',$j).' ajouter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',$url,'calendrier-creneau-today');
+					Agenda_memo_full($creneau,$creneau,preg_replace(",\s+,","&nbsp;",date('H:i',$j)." "._T('agenda:ajouter_un_evenement')), " ", "", $url,'calendrier-creneau-today');
 				else if (date('w',$j)==0)
-					Agenda_memo_duree($creneau,$creneau," ",date('H:i',$j).' ajouter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',$url,'calendrier-creneau-sunday');
+					Agenda_memo_full($creneau,$creneau,preg_replace(",\s+,","&nbsp;",date('H:i',$j)." "._T('agenda:ajouter_un_evenement')), " ", "",$url,'calendrier-creneau-sunday');
 				else
-					Agenda_memo_duree($creneau,$creneau," ",date('H:i',$j).' ajouter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',$url,'calendrier-creneau');
+					Agenda_memo_full($creneau,$creneau,preg_replace(",\s+,","&nbsp;",date('H:i',$j)." "._T('agenda:ajouter_un_evenement')), " ", "",$url,'calendrier-creneau');
 			}
 		}
 	}
@@ -153,29 +153,37 @@ function affiche_evenements_agenda($flag_editable){
 
 		$url=parametre_url($urlbase,'id_evenement',$row['id_evenement']);
 		$url=parametre_url($url,'ajouter_id_article',$row['id_article']);
+		
+		$titre = $row['titre'];
+		$descriptif = $row['descriptif'];
+		$lieu = $row['lieu'];
+		
 		$texte=wordwrap(entites_html($row['titre'],ENT_QUOTES),15,"<br />\n");
-
 		if (($type!='mois')&&(!$is_evt))
 			$texte.="<hr />" . wordwrap(entites_html($row['descriptif'],ENT_QUOTES),15, "<br />\n");
 		if (strlen($texte)==0) $texte=_L("(sans objet)");
-		if ($concerne)
-			$categorie = $categorie_concerne;
-		else
-			$categorie = $categorie_info;
-		if ($is_evt) 	$categorie = $categorie['evenement'];
-		else 					$categorie = $categorie['plage'];
+
+		if ($concerne)	$categorie = $categorie_concerne;
+		else						$categorie = $categorie_info;
+		if ($is_evt) 		$categorie = $categorie['evenement'];
+		else 						$categorie = $categorie['plage'];
 		if ($id_evenement==$row['id_evenement'])
 			$categorie.='-selection';
+
 		if (!$is_evt)
-			Agenda_memo_duree($row['date_debut'],$row['date_fin'],$row['lieu'],$texte,$url,$categorie);
-		else
-			Agenda_memo_evt_duree($row['date_debut'],$row['date_fin'],$row['lieu'],$texte,$url,$categorie);
+			Agenda_memo_full($row['date_debut'], $row['date_fin'], $titre, $descriptif, $lieu, $url, $categorie);
+		else{
+			//if ($type!='mois')
+			//	Agenda_memo_evt_full($row['date_debut'], $row['date_debut'], Agenda_rendu_boite($titre,$descriptif,$lieu), "", "", $url, $categorie);
+			//else
+				Agenda_memo_evt_full($row['date_debut'], $row['date_debut'], $titre, $descriptif, $lieu, $url, $categorie);
+		}
 		$visu_evenements[$row['id_evenement']]=1;
 	}
 
 	$s = "<span class='agenda-calendrier'>\n";
 	// attention : bug car $type est modifie apres cet appel !
-	$s .= Agenda_affiche_duree(1,'', $type, 'calendrier-creneau','calendrier-creneau-today','calendrier-creneau-sunday','calendrier-plage','calendrier-evenement','calendrier-plage-info','calendrier-evenement-info','calendrier-plage-selection','calendrier-evenement-selection');
+	$s .= Agenda_affiche_full(1,'', $type, 'calendrier-creneau','calendrier-creneau-today','calendrier-creneau-sunday','calendrier-plage','calendrier-evenement','calendrier-plage-info','calendrier-evenement-info','calendrier-plage-selection','calendrier-evenement-selection');
 	$s .= "</span>";
 
 	return $s;
