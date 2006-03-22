@@ -112,9 +112,9 @@ return calculer_boucle($id_boucle, $boucles);
 }
 
 //-- Relations ----------------------------------------------------
-global $tables_relations;
-$tables_relations['articles']['id_form'] = 'forms_articles';
-$tables_relations['forms']['id_article'] = 'forms_articles';
+global $tables_jointures;
+$tables_jointures['spip_articles'][] = 'forms_articles';
+$tables_jointures['spip_forms'][] = 'forms_articles';
 
 global $table_des_tables;
 $table_des_tables['forms']='forms';

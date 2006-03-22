@@ -113,7 +113,6 @@ function import_objet_1_3($f, $gz=false, $tag_fermant='SPIP', $tables) {
 	static $relation_liste;
 	global $tables_principales;
 	global $tables_auxiliaires;
-	global $tables_relations;
 
 	$import_ok = false;
 	$b = '';
@@ -162,37 +161,6 @@ function import_objet_1_3($f, $gz=false, $tag_fermant='SPIP', $tables) {
 			echo "--><br><font color='red'><b>"._T('avis_erreur_mysql')."</b></font>\n<font color='black'><tt>".spip_sql_error()."</tt></font>\n<!--";
 			$GLOBALS['erreur_restauration'] = true;
 		}
-	
-		/*if (!isset($relation_liste[$table])){
-			$name = preg_replace("{^spip_}","",$table);
-			$relation = $tables_relations[$table];
-			if (!$relation) $relation = $tables_relations[$name];
-			if ($relation){
-				foreach($relation as $id=>$link_table){
-					if (isset($tables_auxiliaires["$link_table"])||isset($tables_principales["$link_table"])){
-						$relation_liste[$table]["$link_table"]=$id;
-						#spip_log("lien:$table:$link_table:$id");
-					}
-					else if (isset($tables_auxiliaires["spip_$link_table"])||isset($tables_principales["spip_$link_table"])){
-						$relation_liste[$table]["spip_$link_table"]=$id;
-						#spip_log("lien:$table:spip_$link_table:$id");
-					}
-				}
-			}
-			else
-				$relation_liste[$table] = array();
-		}
-		if (count($liens)>0)
-			foreach($relation_liste[$table] as $link_table=>$id){
-				foreach($liens[$link_table] as $values){
-					#spip_log("lien:SELECT:$link_table:".$values[0].":".$values[1]);
-					$s = spip_query("SELECT * FROM $link_table WHERE $primary=".$values[0]." AND $id=".$values[1]);
-					if (spip_fetch_array($s)==FALSE){
-						#spip_log("lien:"."INSERT INTO $link_table ($primary, $id) VALUES (".join(',', $values).")");
-						spip_query("INSERT INTO $link_table ($primary, $id) VALUES (".join(',', $values).")");
-					}
-				}
-			}*/
 	}
 
 	$p = $pos + $abs_pos;

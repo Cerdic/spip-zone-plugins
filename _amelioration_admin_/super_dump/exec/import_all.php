@@ -96,27 +96,28 @@ function exec_import_all_dist()
 	global $tables_principales;
 	global $tables_auxiliaires;
 	global $table_des_tables;
-	global $tables_relations;
+	global $tables_jointures;
 
 	// on construit un index des tables de liens
 	// pour les ajouter SI les deux tables qu'ils connectent sont sauvegardees
 	$tables_for_link = array();
-	foreach($tables_relations as $table=>$relation)
-	{
-		$nom = $table;
-		if (!isset($tables_auxiliaires[$nom])&&!isset($tables_principales[$nom]))
-			$nom = "spip_$table";
-		if (isset($tables_auxiliaires[$nom])||isset($tables_principales[$nom])){
-			foreach($relation as $id=>$link_table){
-				if (isset($tables_auxiliaires[$link_table])||isset($tables_principales[$link_table])){
-					$tables_for_link[$link_table][] = $nom;
-				}
-				else if (isset($tables_auxiliaires["spip_$link_table"])||isset($tables_principales["spip_$link_table"])){
-					$tables_for_link["spip_$link_table"][] = $nom;
+	foreach($tables_jointures as $table=>$liste_relations)
+		if (is_array($liste_relations))
+		{
+			$nom = $table;
+			if (!isset($tables_auxiliaires[$nom])&&!isset($tables_principales[$nom]))
+				$nom = "spip_$table";
+			if (isset($tables_auxiliaires[$nom])||isset($tables_principales[$nom])){
+				foreach($liste_relations as $link_table){
+					if (isset($tables_auxiliaires[$link_table])||isset($tables_principales[$link_table])){
+						$tables_for_link[$link_table][] = $nom;
+					}
+					else if (isset($tables_auxiliaires["spip_$link_table"])||isset($tables_principales["spip_$link_table"])){
+						$tables_for_link["spip_$link_table"][] = $nom;
+					}
 				}
 			}
 		}
-	}
 	
 	$liste_tables = array_merge(array_keys($tables_principales),array_keys($tables_auxiliaires));
 	foreach($liste_tables as $table){

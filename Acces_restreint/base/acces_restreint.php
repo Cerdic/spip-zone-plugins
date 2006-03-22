@@ -46,12 +46,12 @@ $tables_auxiliaires['spip_zones_rubriques'] = array(
 
 //-- Relations ----------------------------------------------------
 
-global $tables_relations;
-$tables_relations['auteurs']['id_zone'] = 'zones_auteurs';
-$tables_relations['zones']['id_auteur'] = 'zones_auteurs';
+global $tables_jointures;
+$tables_jointures['spip_auteurs'][] = 'zones_auteurs';
+$tables_jointures['spip_zones'][] = 'zones_auteurs';
 
-$tables_relations['rubriques']['id_zone'] = 'zones_rubriques';
-$tables_relations['zones']['id_rubrique'] = 'zones_rubriques';
+$tables_jointures['spip_rubriques'][] = 'zones_rubriques';
+$tables_jointures['spip_zones'][] = 'zones_rubriques';
 
 //-- Table des tables ----------------------------------------------------
 
