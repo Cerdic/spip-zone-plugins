@@ -36,7 +36,7 @@
 	function PodcastClient_verifier_table_documents_syndic() {
 		if (!spip_query("SELECT id_syndic, id_syndic_article, id_document FROM spip_documents_syndic")) {
 			spip_log('creation de la table spip_documents_syndic');
-			include_ecrire('inc_base');
+			include_spip('base/create');
 			spip_create_table('spip_documents_syndic',
 				$GLOBALS['tables_auxiliaires']['spip_documents_syndic']['field'],
 				$GLOBALS['tables_auxiliaires']['spip_documents_syndic']['key'],
@@ -56,7 +56,7 @@
 		$enclosures, $regs, PREG_PATTERN_ORDER))
 			return false;
 		$enclosures = $regs[0];
-		include_ecrire('inc_filtres'); # pour extraire_attribut
+		include_spip('inc/filtres'); # pour extraire_attribut
 	
 		list($id_syndic_article) = spip_fetch_array(spip_query(
 		"SELECT id_syndic_article FROM spip_syndic_articles
