@@ -7,6 +7,16 @@
 .agenda-visu-evenement-bouton-fermer{
 display:none;
 }
+#container_debut{
+left:0px;
+top:0px;
+z-index:100;
+}
+#container_fin{
+left:0px;
+top:0px;
+z-index:100;
+}
 .agenda_mot_cle_select{
 width:32%;
 }
@@ -60,7 +70,7 @@ position:relative;
 	top :0em;
 	left :0%;
 	width : 100%;
-	height : 4em;
+	height : 5em;
 	font-weight: bold;
 }
 .descriptif-titre {

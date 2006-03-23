@@ -364,17 +364,17 @@ a.calendrier-annee:hover {
 .calendrier-couleur12 {
 		background-color: #aaaaaa;
 		border: 1px solid black;
-		color black;
+		color:black;
 
 }
 .calendrier-couleur12i {
 		background-color: black;
 		border: 1px solid #aaaaaa;
 		color: #aaaaaa}
-.calendrier-couleur13 { 		/
+.calendrier-couleur13 { /* Caca d'oie */
 		background-color: #FFFFE0;
 		border: 1px solid #666500;
-		color: #666500; /* Caca d'oie */
+		color: #666500; 
 }
 .calendrier-couleur13i { 		/* Caca d'oie */
 		background-color: #666500;

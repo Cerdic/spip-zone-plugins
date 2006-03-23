@@ -372,7 +372,8 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 	$url=parametre_url($url,'edit','');
 	$url=parametre_url($url,'neweven','');
 	$url=parametre_url($url,'ndate','');
-	//$url=str_replace("&amp;","&",$url);
+	$url=parametre_url($url,'id_evenement','');
+
 	$out .= "<div class='agenda-visu-evenement'>";
 
 	$ajouter_id_article = _request('ajouter_id_article');
@@ -400,6 +401,9 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 	else {
 	  $out .=  "<input type='hidden' name='evenement_insert' value='1' />\n";
 	}
+	
+	$out.=  Agenda_date_insert_js_calendar_placeholder("_debut");
+	$out.=  Agenda_date_insert_js_calendar_placeholder("_fin");
 
 	// TITRE
 	$out .=  "<div class='titre-titre'>"._T('agenda:evenement_titre')."</div>\n";
@@ -428,6 +432,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 	// DATES
 	$out .=  "<div class='date-titre'>"._T('agenda:evenement_date')."</div>";
 	$out .=  "<div class='date-visu'>";
+	$out .= Agenda_date_insert_js_calendar("_debut");
 	$out .=  _T('agenda:evenement_date_de');
 	$out .= Agenda_date_selector(date('Y-m-d',$fstdatedeb),"_debut");
 	$out .= "<span class='agenda_".($fhoraire=='oui'?"":"in")."visible_au_chargement' id='afficher_horaire_debut_evenement'>";
@@ -435,6 +440,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 	$out .= Agenda_heure_selector(date('H',$fstdatedeb),date('i',$fstdatedeb),"_debut");
 	$out .=	"</span>";
 	$out .=  "<br/>";
+	$out .= Agenda_date_insert_js_calendar("_fin");
 	$out .=  _T('agenda:evenement_date_au');
 	$out .= Agenda_date_selector(date('Y-m-d',$fstdatefin),"_fin");
 	$out .= "<span class='agenda_".($fhoraire=='oui'?"":"in")."visible_au_chargement' id='afficher_horaire_fin_evenement'>";
@@ -473,10 +479,11 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 		while ($row2 = spip_fetch_array($res2,SPIP_ASSOC)){
 			$id_mot = $row2['id_mot'];
 			$titre = $row2['titre'];
-			$out .= "<option value='$id_mot'";
+			$out .= my_sel($id_mot, "&nbsp;&nbsp;&nbsp;$titre", $id_mot_select);
+			/*$out .= "<option value='$id_mot'";
 			if ($id_mot_select && $id_mot_select==$id_mot)
 				$out .= " selected='selected'";
-			$out .= ">&nbsp;&nbsp;&nbsp;$titre</option>\n";
+			$out .= ">&nbsp;&nbsp;&nbsp;$titre</option>\n";*/
 		}
 		$out .= "</select>\n";
 	}
@@ -501,65 +508,27 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 }
 
 // Pre traitements -----------------------------------------------------------------------
-
+function Agenda_date_insert_js_calendar_placeholder($suffixe){
+	return "<div id='container$suffixe' style='position:absolute;display:none'></div>";
+}
+function Agenda_date_insert_js_calendar($suffixe){
+	return "<script type='text/javascript'>window.onload = init;</script>
+	<a href='javascript:void(null)' onclick='showCalendar$suffixe()'>
+	<img id='dateLink$suffixe' src='"._DIR_IMG_PACK."/cal-jour.gif' border='0' style='vertical-align:middle;margin:5px'/></a>
+	";
+}
 function Agenda_date_selector($date,$suffixe){
 	include_spip('inc/date');
-  return 
-    afficher_jour(jour($date), "name='evenement_jour$suffixe' size='1' class='fondl verdana1'") .
-    afficher_mois(mois($date), "name='evenement_mois$suffixe' size='1' class='fondl verdana1'") .
-    afficher_annee(annee($date), "name='evenement_annee$suffixe' size='1' class='fondl verdana1'", date('Y')-1);
-/*	$out = ""; 
-	$out .=  "<select name='evenement_jour_$suffixe'>\n";
-	for($kk=1;$kk<=31;$kk++){
-		$j=substr('0'.$kk,-2);
-		$out .=  "<option value='$j'";
-		if ($jour==$j) $out .=  " selected='selected'";
-		$out .=  ">$kk</option>";
-	}
-	$out .=  "</select>\n/";
 
-	$out .=  "<select name='evenement_mois_$suffixe'>\n";
-	for($kk=1;$kk<=12;$kk++){
-		$m=substr('0'.$kk,-2);
-		$out .=  "<option value='$m'";
-		if ($mois==$m) $out .=  " selected='selected'";
-		$out .=  ">$kk</option>";
-	}
-	$out .=  "</select>\n/";
-
-	$out .=  "<select name='evenement_annee_$suffixe'>\n";
-	$y=date('Y');
-	for($kk=$y-3;$kk<$y+5;$kk++){
-		$out .=  "<option value='$kk'";
-		if ($annee==$kk) $out .=  " selected='selected'";
-		$out .=  ">$kk</option>";
-	}
-	$out .=  "</select>\n";
-	return $out;*/
+	return 
+    afficher_jour(jour($date), "id='evenement_jour$suffixe' name='evenement_jour$suffixe' size='1' class='fondl verdana1' onchange='changeDate$suffixe()'") .
+    afficher_mois(mois($date), "id='evenement_mois$suffixe' name='evenement_mois$suffixe' size='1' class='fondl verdana1' onchange='changeDate$suffixe()'") .
+    afficher_annee(annee($date), "id='evenement_annee$suffixe' name='evenement_annee$suffixe' size='1' class='fondl verdana1' onchange='changeDate$suffixe()'", date('Y')-1);
 }
 
 function Agenda_heure_selector($heure,$minute,$suffixe){
 	return
 		afficher_heure($heure, "name='evenement_heure$suffixe' size='1' class='fondl'") .
   	afficher_minute($minute, "name='evenement_minute$suffixe' size='1' class='fondl'");
-	/*$out = "";
-	$out .=  "<select name='evenement_heure_$suffixe'>\n";
-	for($kk=0;$kk<=23;$kk++){
-		$h=substr('0'.$kk,-2);
-		$out .=  "<option value='$h'";
-		if ($heure==$h) $out .=  " selected='selected'";
-			$out .=  ">$kk</option>";
-	}
-	$out .=  "</select>\nh";
-	
-	$out .=  "<select name='evenement_minute_$suffixe'>\n";
-	for($kk=0;$kk<=59;$kk++){
-		$m=substr('0'.$kk,-2);
-		$out .=  "<option value='$m'";
-		if ($minute==$m) $out .=  " selected='selected'";
-			$out .=  ">$m</option>";
-	}
-	$out .=  "</select>\n";
-	return $out;*/
 }
 ?>
