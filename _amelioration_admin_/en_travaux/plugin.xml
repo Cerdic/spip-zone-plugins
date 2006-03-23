@@ -18,10 +18,10 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	Permet d'afficher un message personalisable pendant une phase de maintenance sur tout le site public
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
-	mes_options.php
+	mes_options_en_travaux.php
 	</options>
 	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	mes_fonctions.php
+	mes_fonctions_en_travaux.php
 	</fonctions>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
