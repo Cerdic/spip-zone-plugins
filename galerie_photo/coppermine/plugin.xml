@@ -1,0 +1,30 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Coppermine
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	[Philippe DROUOT->mailto:phil@africacomputing.org]
+_ Utilisation de la galerie photo [Coppermine->http://coppermine.sourceforge.net]
+_ &copy; 2006 - Distribue sous licence GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	experimental
+	</etat>
+	<description>
+	Intégration de Coppermine avec Spip réalisée par :
+-* un "bridge" Coppermine pour partager la base des utilisateurs spip (un rédacteur peut publier des photos avec son login spip en ne s'identifiant qu'une fois, un administrateur spip est également administrateur de la galerie).
+-* une nouvelle balise spip <code>#COPPERMINE</code> pour spécifier dans un squelette l'emplacement de la galerie, ce qui permet d'intégrer visuellement la galerie avec le reste de votre site; ainsi que d'une balise <code>#COPPERMINE_RANDOM_IMG<code> pour afficher des vignettes aléatoires.
+
+	Installation : consultez le fichier {{documentation.txt}}
+_ [Démo->http://spiptest.africa-web.org/]
+	</description>
+	<prefix> 
+	coppermine
+	</prefix>
+	<options>
+	coppermine.php
+	</options>
+</plugin>
