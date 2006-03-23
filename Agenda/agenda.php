@@ -61,7 +61,8 @@ function Agenda_header_prive($flux) {
 	$img_arrow_right = _DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/calrt.gif";
 	$img_close = _DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/calx.gif";
 
-	
+
+	// le script JS d'init
 	$flux .= <<<initcalendriers
 <script language="javascript">
 		YAHOO.widget.Calendar2up_INT_Cal = function(id, containerId, monthyear, selected) {
@@ -159,12 +160,52 @@ function Agenda_header_prive($flux) {
 			cal2.outerContainer.style.display='block';
 		}
 
+		function verifie_date_fin(){
+			var Date1 = new Date;
+			Date1.setDate( this.selDay1.selectedIndex + 1);
+			Date1.setMonth(this.selMonth1.selectedIndex);
+			Date1.setFullYear(this.selYear1.selectedIndex+parseInt(selYear1.options[0].value));
+			var Date2 = new Date;
+			Date2.setDate( this.selDay2.selectedIndex + 1);
+			Date2.setMonth(this.selMonth2.selectedIndex);
+			Date2.setFullYear(this.selYear2.selectedIndex+parseInt(selYear2.options[0].value));
+			if (Date2<Date1){
+				selYear2.selectedIndex=selYear1.selectedIndex;
+				selMonth2.selectedIndex=selMonth1.selectedIndex;
+				selDay2.selectedIndex=selDay1.selectedIndex;
+				cal2.select((Date1.getMonth()+1) + "/" + (Date1.getDate()) + "/" + (Date1.getFullYear()));
+				cal2.setMonth(Date1.getMonth());
+				cal2.setYear(Date1.getFullYear());
+				cal2.render();
+			}
+		}
+		function verifie_date_debut(){
+			var Date1 = new Date;
+			Date1.setDate( this.selDay1.selectedIndex + 1);
+			Date1.setMonth(this.selMonth1.selectedIndex);
+			Date1.setFullYear(this.selYear1.selectedIndex+parseInt(selYear1.options[0].value));
+			var Date2 = new Date;
+			Date2.setDate( this.selDay2.selectedIndex + 1);
+			Date2.setMonth(this.selMonth2.selectedIndex);
+			Date2.setFullYear(this.selYear2.selectedIndex+parseInt(selYear2.options[0].value));
+			if (Date2<Date1){
+				selYear1.selectedIndex=selYear2.selectedIndex;
+				selMonth1.selectedIndex=selMonth2.selectedIndex;
+				selDay1.selectedIndex=selDay2.selectedIndex;
+				cal1.select((Date2.getMonth()+1) + "/" + (Date2.getDate()) + "/" + (Date2.getFullYear()));
+				cal1.setMonth(Date2.getMonth());
+				cal1.setYear(Date2.getFullYear());
+				cal1.render();
+			}
+		}
+		
 		function setDate_debut() {
 			var date1 = cal1.getSelectedDates()[0];
 			selYear1.selectedIndex=date1.getFullYear()-parseInt(selYear1.options[0].value);
 			selMonth1.selectedIndex=date1.getMonth();
 			selDay1.selectedIndex=date1.getDate()-1;
 			cal1.hide();
+			verifie_date_fin();
 		}
 
 		function setDate_fin() {
@@ -173,6 +214,7 @@ function Agenda_header_prive($flux) {
 			selMonth2.selectedIndex=date2.getMonth();
 			selDay2.selectedIndex=date2.getDate()-1;
 			cal2.hide();
+			verifie_date_debut();
 		}
 
 		function changeDate_debut() {
@@ -181,8 +223,9 @@ function Agenda_header_prive($flux) {
 			var year = this.selYear1.selectedIndex+parseInt(selYear1.options[0].value);
 			cal1.select((month+1) + "/" + day + "/" + year);
 			cal1.setMonth(month);
-			cal1.setYear(year);
+			cal1.setFullYear(year);
 			cal1.render();
+			verifie_date_fin();
 		}
 
 		function changeDate_fin() {
@@ -192,8 +235,9 @@ function Agenda_header_prive($flux) {
 
 			cal2.select((month+1) + "/" + day + "/" + year);
 			cal2.setMonth(month);
-			cal2.setYear(year);
+			cal2.setFullYear(year);
 			cal2.render();
+			verifie_date_debut();
 		}
 	</script>
 initcalendriers;

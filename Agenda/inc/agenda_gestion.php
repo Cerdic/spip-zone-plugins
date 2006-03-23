@@ -291,6 +291,7 @@ function Agenda_action_formulaire_article(){
 			$st_date_fin=_request('evenement_annee_fin')."-"._request('evenement_mois_fin')."-".($jour_fin--)." "._request('evenement_heure_fin').":"._request('evenement_minute_fin');
 			$st_date_fin=strtotime($st_date_fin);
 		}
+		$st_date_fin = max($st_date_deb,$st_date_fin);
 		$date_fin=format_mysql_date(date("Y",$st_date_fin),date("m",$st_date_fin),date("d",$st_date_fin),date("H",$st_date_fin),date("i",$st_date_fin), $s=0);
 	
 		// mettre a jour l'evenement
