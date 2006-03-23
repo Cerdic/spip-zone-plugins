@@ -17,15 +17,16 @@ define('_DIR_PLUGIN_BARRE_TYPO',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)
 
 function bouton_barre_racc($action, $img, $help, $champhelp) {
 
+	$a = attribut_html($help);
 	return "<a\nhref=\"javascript:"
 		.$action
 		."\" class='spip_barre' tabindex='1000'\ntitle=\""
-		.addslashes(attribut_html($help))
-		."\""
+		. $a
+		."\"" 
 		.(!_DIR_RESTREINT ? '' :  "\nonMouseOver=\"helpline('"
-		  .addslashes(attribut_html($help))
+		  .addslashes($a)
 		  ."',$champhelp)\"\nonMouseOut=\"helpline('"
-		  .addslashes(attribut_html(_T('barre_aide')))
+		  .attribut_html(_T('barre_aide'))
 		  ."', $champhelp)\"")
 		."><img\nsrc='"
 		.$img
@@ -34,15 +35,16 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 
 // construit un tableau de raccourcis pour un noeud de DOM
 
-function afficher_barre($champ, $forum=false) {
+function afficher_barre($champ, $forum=false, $lang='') {
+	global $spip_lang, $options, $spip_lang_right, $spip_lang_left, $spip_lang;
 	static $num_barre = 0;
-	include_ecrire ("inc_layer");
+	include_spip('inc/layer');
 	if (!$GLOBALS['browser_barre']) return '';
-
-	global $spip_lang, $options, $spip_lang_right, $spip_lang_left;
-
+	if (!$lang) $lang = $spip_lang;
 	$ret = ($num_barre > 0)  ? '' :
 	  '<script type="text/javascript" src="' . find_in_path('js/spip_barre.js').'"></script>';
+
+
 	$num_barre++;
 	$champhelp = "document.getElementById('barre_$num_barre')";
 
@@ -95,11 +97,11 @@ function afficher_barre($champ, $forum=false) {
 	// Insertion de caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...)
 	$ret .= "\n<td style='text-align:$spip_lang_left;' valign='middle'>";
 	$col++;
-	if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf" OR $spip_lang == "ar" OR $spip_lang == "es") {
+	if ($lang == "fr" OR $lang == "eo" OR $lang == "cpf" OR $lang == "ar" OR $lang == "es") {
 		$ret .= bouton_barre_racc ("barre_raccourci('&laquo;~','~&raquo;',$champ)", _DIR_IMG_ICONES_BARRE."guillemets.png", _T('barre_guillemets'), $champhelp);
 		$ret .= bouton_barre_racc ("barre_raccourci('&ldquo;','&rdquo;',$champ)", _DIR_IMG_ICONES_BARRE."guillemets-simples.png", _T('barre_guillemets_simples'), $champhelp);
 	}
-	else if ($spip_lang == "bg" OR $spip_lang == "de" OR $spip_lang == "pl" OR $spip_lang == "hr" OR $spip_lang == "src") {
+	else if ($lang == "bg" OR $lang == "de" OR $lang == "pl" OR $lang == "hr" OR $lang == "src") {
 		$ret .= bouton_barre_racc ("barre_raccourci('&bdquo;','&ldquo;',$champ)", _DIR_IMG_ICONES_BARRE."guillemets-de.png", _T('barre_guillemets'), $champhelp);
 		$ret .= bouton_barre_racc ("barre_raccourci('&sbquo;','&lsquo;',$champ)", _DIR_IMG_ICONES_BARRE."guillemets-uniques-de.png", _T('barre_guillemets_simples'), $champhelp);
 	}
@@ -107,10 +109,10 @@ function afficher_barre($champ, $forum=false) {
 		$ret .= bouton_barre_racc ("barre_raccourci('&ldquo;','&rdquo;',$champ)", _DIR_IMG_ICONES_BARRE."guillemets-simples.png", _T('barre_guillemets'), $champhelp);
 		$ret .= bouton_barre_racc ("barre_raccourci('&lsquo;','&rsquo;',$champ)", _DIR_IMG_ICONES_BARRE."guillemets-uniques.png", _T('barre_guillemets_simples'), $champhelp);
 	}
-	if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
+	if ($lang == "fr" OR $lang == "eo" OR $lang == "cpf") {
 		$ret .= bouton_barre_racc ("barre_inserer('&Agrave;',$champ)", _DIR_IMG_ICONES_BARRE."agrave-maj.png", _T('barre_a_accent_grave'), $champhelp);
 		$ret .= bouton_barre_racc ("barre_inserer('&Eacute;',$champ)", _DIR_IMG_ICONES_BARRE."eacute-maj.png", _T('barre_e_accent_aigu'), $champhelp);
-		if ($spip_lang == "fr") {
+		if ($lang == "fr") {
 			$ret .= bouton_barre_racc ("barre_inserer('&oelig;',$champ)", _DIR_IMG_ICONES_BARRE."oelig.png", _T('barre_eo'), $champhelp);
 			$ret .= bouton_barre_racc ("barre_inserer('&OElig;',$champ)", _DIR_IMG_ICONES_BARRE."oelig-maj.png", _T('barre_eo_maj'), $champhelp);
 		}
@@ -141,7 +143,7 @@ function afficher_barre($champ, $forum=false) {
 // pour compatibilite arriere. utiliser directement le corps a present.
 
 function afficher_claret() {
-	include_ecrire ("inc_layer");
+	include_spip('inc/layer');
 	return $GLOBALS['browser_caret'];
 }
 

@@ -8,10 +8,10 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	</auteur>
 	<lien>[Exemple d'utilisation->http://www.pyrat.net/Raccourcis-Typographiques-de-SPIP.html]</lien>
 	<version>
-	0.1
+	1.0
 	</version>
 	<etat>
-	test
+	stable
 	</etat>
 	<description>
 Rajoute une barre typographique enrichie et les raccourcis typographiques correspondants.
