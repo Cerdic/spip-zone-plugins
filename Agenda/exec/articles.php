@@ -83,6 +83,8 @@ if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date, $regs)
 
 
 debut_page("&laquo; $titre_article &raquo;", "documents", "articles");
+echo Agenda_date_insert_js_calendar_placeholder("_debut");
+echo Agenda_date_insert_js_calendar_placeholder("_fin");
 
 debut_grand_cadre();
 

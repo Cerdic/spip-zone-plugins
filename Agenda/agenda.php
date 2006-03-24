@@ -103,7 +103,39 @@ function Agenda_header_prive($flux) {
 			var cal = new YAHOO.widget.Calendar2up_INT_Cal(id,containerId,monthyear,selected);
 			return cal;
 		};
-		
+		function findPosX(obj)
+		{
+			var curleft = 0;
+			curleft += obj.offsetLeft;
+			if (obj.offsetParent)
+			{
+				while (obj.offsetParent)
+				{
+					obj = obj.offsetParent;
+					curleft += obj.offsetLeft;
+				}
+			}
+			else if (obj.x)
+				curleft += obj.x;
+			return curleft;
+		}
+
+		function findPosY(obj)
+		{
+			var curtop = 0;
+			curtop += obj.offsetTop;
+			if (obj.offsetParent)
+			{
+				while (obj.offsetParent)
+				{
+					obj = obj.offsetParent;
+					curtop += obj.offsetTop;
+				}
+			}
+			else if (obj.y)
+				curtop += obj.y;
+			return curtop;
+		}
 		/*************************************/
 
 		var cal1;
@@ -147,16 +179,22 @@ function Agenda_header_prive($flux) {
 		}
 
 		function showCalendar_debut() {
+			cal1.hide();
 			cal2.hide();
-			cal1.outerContainer.style.top = (link1.offsetTop+link1.offsetParent.offsetTop+link1.height-1) + "px";
-			cal1.outerContainer.style.left = (link1.offsetLeft+link1.offsetParent.offsetLeft) + "px";
+			//cal1.outerContainer.style.top = (link1.offsetTop+link1.offsetParent.offsetTop+link1.height-1+link1.offsetParent.offsetParent.offsetTop) + "px";
+			//cal1.outerContainer.style.left = (link1.offsetLeft+link1.offsetParent.offsetLeft+link1.offsetParent.offsetParent.offsetLeft) + "px";
+			cal1.outerContainer.style.top = (link1.height-1+findPosY(link1)) + "px";
+			cal1.outerContainer.style.left = (findPosX(link1)) + "px";
 			cal1.outerContainer.style.display='block';
 		}
 
 		function showCalendar_fin() {
 			cal1.hide();
-			cal2.outerContainer.style.top = (link2.offsetTop+link2.offsetParent.offsetTop+link2.height-1) + "px";
-			cal2.outerContainer.style.left = (link2.offsetLeft+link2.offsetParent.offsetLeft) + "px";
+			cal2.hide();
+			//cal2.outerContainer.style.top = (link2.offsetTop+link2.offsetParent.offsetTop+link2.offsetParent.offsetParent.offsetTop+link2.height-1) + "px";
+			//cal2.outerContainer.style.left = (link2.offsetLeft+link2.offsetParent.offsetLeft+link2.offsetParent.offsetParent.offsetLeft) + "px";
+			cal2.outerContainer.style.top = (link2.height-1+findPosY(link2)) + "px";
+			cal2.outerContainer.style.left = (findPosX(link2)) + "px";
 			cal2.outerContainer.style.display='block';
 		}
 

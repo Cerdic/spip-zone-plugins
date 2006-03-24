@@ -338,6 +338,8 @@ function exec_agenda_evenements_dist(){
 
   debut_page($titre, "redacteurs", "calendrier","",$css);
 	barre_onglets("calendrier", "evenements");
+	echo Agenda_date_insert_js_calendar_placeholder("_debut");
+	echo Agenda_date_insert_js_calendar_placeholder("_fin");
 
 	$out = "<div>";
 	if ($ajouter_id_article){

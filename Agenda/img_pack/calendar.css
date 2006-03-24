@@ -5,6 +5,8 @@
 .calcontainer:after {content:'.';clear:both;display:block;visibility:hidden;height:0;} /* others */
 
 .calbordered {
+	font-family: Verdana, Arial, Sans, sans-serif;
+	font-size:small;
 	float:left;
 	padding:5px;
 	background-color:#F7F9FB;

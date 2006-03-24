@@ -57,7 +57,7 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 	$result = spip_query($query);
 
 	if (spip_num_rows($result)) {
-		echo "<div class='liste'>";
+		echo "<div class='liste liste-evenements'>";
 		echo "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
 		$table = array();
 		while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
@@ -165,12 +165,14 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $id_rubrique, 
 	$edit = _request('edit');
 
 	$out = "";
+	$out .= "<div style='clear: both;'></div>";
 	if ($flag_editable){
 		if ((in_array($id_evenement,explode(",",$les_evenements)) && $edit==1)||_request('neweven'))
 			$out .=  debut_block_visible("evenementsarticle");
 		else
 			$out .=  debut_block_invisible("evenementsarticle");
 		
+		$out .=  "<div style='width:100%;'>";
 		$out .=  "<table width='100%'>";
 		$out .=  "<tr>";
 		$out .=  "<td>";
@@ -181,16 +183,20 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $id_rubrique, 
 
 		if (in_array($id_evenement,explode(",",$les_evenements)) && $edit==1){
 			$out .= Agenda_formulaire_edition_evenement($id_evenement, false);
+			$out .= "</div>";
+			$out .=  "</td></tr></table>";
 			$out .= "<div style='clear: both;'></div>";
 			$url = parametre_url(self(),'edit','');
 			$url = parametre_url($url,'neweven','1');
 			$url = parametre_url($url,'id_evenement','');
 			$out .= icone_horizontale(_T("agenda:icone_creer_evenement"),$url , "../"._DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/agenda-24.png", "creer.gif",false);
 		}
-		else
+		else{
 			$out .= Agenda_formulaire_edition_evenement(NULL, true);
+			$out .= "</div>";
+			$out .=  "</td></tr></table>";
+		}
 
-		$out .=  "</td></tr></table>";
 		$out .=  fin_block();
 	}
 	return $out;
@@ -216,15 +222,15 @@ function Agenda_formulaire_article($id_article, $id_rubrique, $flag_editable){
 	//
 	// Afficher les evenements
 	//
-	
-	$les_evenements = Agenda_formulaire_article_afficher_evenements($id_article, $flag_editable);
 
+	$les_evenements = Agenda_formulaire_article_afficher_evenements($id_article, $flag_editable);
 	//
 	// Ajouter un evenements
 	//
 
 	if ($flag_editable)
 		echo Agenda_formulaire_article_ajouter_evenement($id_article, $id_rubrique, $les_evenements, $flag_editable);
+
 
 	fin_cadre_enfonce(false);
 }
@@ -487,8 +493,6 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 		$out .= "</select>\n";
 	}
 	$out .=  "</div>";
-	$out.=  Agenda_date_insert_js_calendar_placeholder("_debut");
-	$out.=  Agenda_date_insert_js_calendar_placeholder("_fin");
 	
   $out .=  "<div class='edition-bouton'>";
   #echo "<input type='submit' name='submit' value='Annuler' />";
@@ -505,6 +509,8 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 
 	$out .=  "</form>";
 	$out .=  "</div>\n";
+	//$out.=  Agenda_date_insert_js_calendar_placeholder("_debut");
+	//$out.=  Agenda_date_insert_js_calendar_placeholder("_fin");
 	return $out;
 }
 
