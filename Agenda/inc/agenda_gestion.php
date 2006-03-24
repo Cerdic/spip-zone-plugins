@@ -181,6 +181,7 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $id_rubrique, 
 
 		if (in_array($id_evenement,explode(",",$les_evenements)) && $edit==1){
 			$out .= Agenda_formulaire_edition_evenement($id_evenement, false);
+			$out .= "<div style='clear: both;'></div>";
 			$url = parametre_url(self(),'edit','');
 			$url = parametre_url($url,'neweven','1');
 			$url = parametre_url($url,'id_evenement','');
@@ -403,9 +404,6 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 	  $out .=  "<input type='hidden' name='evenement_insert' value='1' />\n";
 	}
 	
-	$out.=  Agenda_date_insert_js_calendar_placeholder("_debut");
-	$out.=  Agenda_date_insert_js_calendar_placeholder("_fin");
-
 	// TITRE
 	$out .=  "<div class='titre-titre'>"._T('agenda:evenement_titre')."</div>\n";
 	$out .=  "<div class='titre-visu'>";
@@ -489,6 +487,8 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 		$out .= "</select>\n";
 	}
 	$out .=  "</div>";
+	$out.=  Agenda_date_insert_js_calendar_placeholder("_debut");
+	$out.=  Agenda_date_insert_js_calendar_placeholder("_fin");
 	
   $out .=  "<div class='edition-bouton'>";
   #echo "<input type='submit' name='submit' value='Annuler' />";

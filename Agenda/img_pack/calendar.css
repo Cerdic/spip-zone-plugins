@@ -9,6 +9,8 @@
 	padding:5px;
 	background-color:#F7F9FB;
 	border:1px solid #7B9EBD;
+width:26.5em;
+height:14em;
 }
 
 .calbordered .title {
@@ -29,7 +31,16 @@
 }
 
 .cal2up {
-	float:left;
+	/*float:left;*/
+	position:absolute;
+left:0.5em;
+width:13em;
+}
+.cal2up2 {
+	/*float:left;*/
+	position:absolute;
+left:14em;
+width:13em;
 }
 
 .calnavleft {

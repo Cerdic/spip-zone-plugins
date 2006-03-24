@@ -2735,6 +2735,10 @@ YAHOO.widget.Calendar2up.prototype.buildWrapper = function(containerId) {
 	var outerContainer = document.getElementById(containerId);
 
 	outerContainer.className = "calcontainer";
+	outerContainer.innerHTML="";
+	if (YAHOO.widget.Calendar_Core._getBrowser() == "ie") {
+		outerContainer.innerHTML="<iframe src='about:blank' scrolling='no' frameborder='0' style='position:absolute;left:0px;top:0px;z-index:0;' class='calbordered'></iframe>";
+	}
 
 	var innerContainer = document.createElement("DIV");
 	innerContainer.className = "calbordered";
@@ -2744,10 +2748,14 @@ YAHOO.widget.Calendar2up.prototype.buildWrapper = function(containerId) {
 	cal1Container.id = containerId + "_0";
 	cal1Container.className = "cal2up";
 	cal1Container.style.marginRight = "10px";
+	cal1Container.style.zIndex="99";
+	//cal1Container.style.cssFloat="left";
 
 	var cal2Container = document.createElement("DIV");
 	cal2Container.id = containerId + "_1";
-	cal2Container.className = "cal2up";
+	cal2Container.className = "cal2up2";
+	cal1Container.style.zIndex="99";
+	//cal2Container.style.cssFloat="left";
 
 	outerContainer.appendChild(innerContainer);
 	innerContainer.appendChild(cal1Container);
