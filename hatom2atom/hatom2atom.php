@@ -9,6 +9,9 @@
 
 function hAtom_to_Atom($rss) {
 
+	// exige php5
+	if (intval(preg_replace(',\..*,', '', phpversion())) < 5) return $rss;
+
 	if (preg_match(',<div\s[^>]*class=[^>]*\bhfeed\b,Uims', $rss)) {
 		ecrire_fichier(_DIR_CACHE.'atom.xml', charset2unicode($rss));
 		exec("tidy -asxhtml -numeric -o "
