@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2006 Yahoo! Inc. All rights reserved.
+Copyright (c) 2006 Spip! Inc. All rights reserved.
 version 0.9.0
 */
 
@@ -13,7 +13,7 @@ version 0.9.0
  *                 the window object.  The listener can override this.
  * @constructor
  */
-YAHOO.util.CustomEvent = function(type, oScope) {
+SPIP.util.CustomEvent = function(type, oScope) {
     /**
      * The type of event, returned to subscribers when the event fires
      * @type string
@@ -34,12 +34,12 @@ YAHOO.util.CustomEvent = function(type, oScope) {
 
     // Register with the event utility for automatic cleanup.  Made optional
     // so that CustomEvent can be used independently of pe.event
-    if (YAHOO.util["Event"]) {
-        YAHOO.util.Event.regCE(this);
+    if (SPIP.util["Event"]) {
+        SPIP.util.Event.regCE(this);
     }
 };
 
-YAHOO.util.CustomEvent.prototype = {
+SPIP.util.CustomEvent.prototype = {
     /**
      * Subscribes the caller to this event
      * @param {Function} fn       The function to execute
@@ -48,7 +48,7 @@ YAHOO.util.CustomEvent.prototype = {
      *                            scope of the listener
      */
     subscribe: function(fn, obj, bOverride) {
-        this.subscribers.push( new YAHOO.util.Subscriber(fn, obj, bOverride) );
+        this.subscribers.push( new SPIP.util.Subscriber(fn, obj, bOverride) );
     },
 
     /**
@@ -125,7 +125,7 @@ YAHOO.util.CustomEvent.prototype = {
  *                            scope of the listener
  * @constructor
  */
-YAHOO.util.Subscriber = function(fn, obj, bOverride) {
+SPIP.util.Subscriber = function(fn, obj, bOverride) {
     /**
      * The callback that will be execute when the event fires
      * @type function
@@ -158,15 +158,15 @@ YAHOO.util.Subscriber = function(fn, obj, bOverride) {
  * @return {boolean} true if the supplied arguments match this
  *                   subscriber's signature.
  */
-YAHOO.util.Subscriber.prototype.contains = function(fn, obj) {
+SPIP.util.Subscriber.prototype.contains = function(fn, obj) {
     return (this.fn == fn && this.obj == obj);
 };
 
-/* Copyright (c) 2006 Yahoo! Inc. All rights reserved. */
+/* Copyright (c) 2006 Spip! Inc. All rights reserved. */
 
 // Only load this library once.  If it is loaded a second time, existing
 // events cannot be detached.
-if (!YAHOO.util.Event) {
+if (!SPIP.util.Event) {
 
 /**
  * The event utility provides functions to add and remove event listeners,
@@ -175,7 +175,7 @@ if (!YAHOO.util.Event) {
  * @class
  * @constructor
  */
-    YAHOO.util.Event = function() {
+    SPIP.util.Event = function() {
 
         /**
          * True after the onload event has fired
@@ -357,7 +357,7 @@ if (!YAHOO.util.Event) {
                 // wrap the function so we can return the oScope object when
                 // the event fires;
                 var wrappedFn = function(e) {
-                        return fn.call(scope, YAHOO.util.Event.getEvent(e),
+                        return fn.call(scope, SPIP.util.Event.getEvent(e),
                                 oScope);
                     };
 
@@ -379,8 +379,8 @@ if (!YAHOO.util.Event) {
 
                         el["on" + sType] =
                             function(e) {
-                                YAHOO.util.Event.fireLegacyEvent(
-                                    YAHOO.util.Event.getEvent(e), legacyIndex);
+                                SPIP.util.Event.fireLegacyEvent(
+                                    SPIP.util.Event.getEvent(e), legacyIndex);
                             };
                     }
 
@@ -401,7 +401,7 @@ if (!YAHOO.util.Event) {
             },
 
             /**
-             * Shorthand for YAHOO.util.Event.addListener
+             * Shorthand for SPIP.util.Event.addListener
              * @type function
              */
             // on: this.addListener,
@@ -415,7 +415,7 @@ if (!YAHOO.util.Event) {
                 // alert("fireLegacyEvent " + legacyIndex);
                 var ok = true;
 
-                // var el = legacyEvents[YAHOO.util.Event.EL];
+                // var el = legacyEvents[SPIP.util.Event.EL];
 
                 /* this is not working because the property may get populated
                 // fire the event we replaced, if it exists
@@ -807,7 +807,7 @@ if (!YAHOO.util.Event) {
                 }
 
                 if (tryAgain) {
-                    setTimeout("YAHOO.util.Event._tryPreloadAttach()", 50);
+                    setTimeout("SPIP.util.Event._tryPreloadAttach()", 50);
                 }
             },
 
@@ -883,19 +883,19 @@ if (!YAHOO.util.Event) {
         };
     } ();
 
-    YAHOO.util.Event.on = YAHOO.util.Event.addListener;
+    SPIP.util.Event.on = SPIP.util.Event.addListener;
 
     if (document && document.body) {
-        YAHOO.util.Event._load();
+        SPIP.util.Event._load();
     } else {
-        YAHOO.util.Event.on(window, "load", YAHOO.util.Event._load,
-                YAHOO.util.Event, true);
+        SPIP.util.Event.on(window, "load", SPIP.util.Event._load,
+                SPIP.util.Event, true);
     }
 
-    YAHOO.util.Event.on(window, "unload", YAHOO.util.Event._unload,
-                YAHOO.util.Event, true);
+    SPIP.util.Event.on(window, "unload", SPIP.util.Event._unload,
+                SPIP.util.Event, true);
 
-    YAHOO.util.Event._tryPreloadAttach();
+    SPIP.util.Event._tryPreloadAttach();
 
 }
 

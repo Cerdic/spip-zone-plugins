@@ -24,7 +24,7 @@ function Agenda_header_prive($flux) {
 		$flux .= '<link rel="stylesheet" href="' ._DIR_PLUGIN_AGENDA_EVENEMENTS . '/img_pack/agenda_articles.css" type="text/css" />'. "\n";
 	}
 	// le JS
-	$flux .= "<script src = '"._DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/YAHOO.js' ></script>\n";
+	$flux .= "<script src = '"._DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/SPIP.js' ></script>\n";
 	$flux .= "<script src = '"._DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/dom.js' ></script>\n";
 	$flux .= "<script src = '"._DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/event.js' ></script>\n";
 	$flux .= "<script src = '"._DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/calendar.js' ></script>\n";
@@ -65,16 +65,16 @@ function Agenda_header_prive($flux) {
 	// le script JS d'init
 	$flux .= <<<initcalendriers
 <script language="javascript">
-		YAHOO.widget.Calendar2up_INT_Cal = function(id, containerId, monthyear, selected) {
+		SPIP.widget.Calendar2up_INT_Cal = function(id, containerId, monthyear, selected) {
 			if (arguments.length > 0)
 			{
 				this.init(id, containerId, monthyear, selected);
 			}
 		}
 		
-		YAHOO.widget.Calendar2up_INT_Cal.prototype = new YAHOO.widget.Calendar2up_Cal();
+		SPIP.widget.Calendar2up_INT_Cal.prototype = new SPIP.widget.Calendar2up_Cal();
 		
-		YAHOO.widget.Calendar2up_INT_Cal.prototype.customConfig = function() {
+		SPIP.widget.Calendar2up_INT_Cal.prototype.customConfig = function() {
 			this.Config.Locale.MONTHS_SHORT = [$months_short];
 			this.Config.Locale.MONTHS_LONG = [$months_long];
 			this.Config.Locale.WEEKDAYS_1CHAR = [$days_1char];
@@ -89,7 +89,7 @@ function Agenda_header_prive($flux) {
 			
 		}
 		
-		YAHOO.widget.Calendar2up_INT = function(id, containerId, monthyear, selected) {
+		SPIP.widget.Calendar2up_INT = function(id, containerId, monthyear, selected) {
 			if (arguments.length > 0)
 			{	
 				this.buildWrapper(containerId);
@@ -97,10 +97,10 @@ function Agenda_header_prive($flux) {
 			}
 		}
 		
-		YAHOO.widget.Calendar2up_INT.prototype = new YAHOO.widget.Calendar2up();
+		SPIP.widget.Calendar2up_INT.prototype = new SPIP.widget.Calendar2up();
 		
-		YAHOO.widget.Calendar2up_INT.prototype.constructChild = function(id,containerId,monthyear,selected) {
-			var cal = new YAHOO.widget.Calendar2up_INT_Cal(id,containerId,monthyear,selected);
+		SPIP.widget.Calendar2up_INT.prototype.constructChild = function(id,containerId,monthyear,selected) {
+			var cal = new SPIP.widget.Calendar2up_INT_Cal(id,containerId,monthyear,selected);
 			return cal;
 		};
 		function findPosX(obj)
@@ -167,12 +167,12 @@ function Agenda_header_prive($flux) {
 			thisMonth2 = this.selMonth2.selectedIndex;
 			thisDay2 = this.selDay2.selectedIndex +1;
 
-			cal1 = new YAHOO.widget.Calendar2up_INT("cal1","container_debut",(thisMonth1+1)+"/"+thisYear1,(thisMonth1+1)+"/"+thisDay1+"/"+thisYear1);
+			cal1 = new SPIP.widget.Calendar2up_INT("cal1","container_debut",(thisMonth1+1)+"/"+thisYear1,(thisMonth1+1)+"/"+thisDay1+"/"+thisYear1);
 			cal1.title = "Date de debut";
 			cal1.setChildFunction("onSelect",setDate_debut);
 			cal1.render();
 
-			cal2 = new YAHOO.widget.Calendar2up_INT("cal2","container_fin",(thisMonth2+1)+"/"+thisYear2,(thisMonth2+1)+"/"+thisDay2+"/"+thisYear2);
+			cal2 = new SPIP.widget.Calendar2up_INT("cal2","container_fin",(thisMonth2+1)+"/"+thisYear2,(thisMonth2+1)+"/"+thisDay2+"/"+thisYear2);
 			cal2.title = "Date de fin";
 			cal2.setChildFunction("onSelect",setDate_fin);
 			cal2.render();

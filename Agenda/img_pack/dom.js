@@ -1,12 +1,12 @@
 /*
-Copyright (c) 2006 Yahoo! Inc. All rights reserved.
+Copyright (c) 2006 Spip! Inc. All rights reserved.
 version 0.9.0
 */
 
 /**
  * @class Provides helper methods for DOM elements.
  */
-YAHOO.util.Dom = new function() {
+SPIP.util.Dom = new function() {
 
    /**
     * Returns an HTMLElement reference
@@ -187,7 +187,7 @@ YAHOO.util.Dom = new function() {
     */
    this.setXY = function(el, pos, noRetry) {
       el = this.get(el);
-      var pageXY = YAHOO.util.Dom.getXY(el);
+      var pageXY = SPIP.util.Dom.getXY(el);
       if (pageXY === false) { return false; } // has to be part of doc to have pageXY
 
       if (this.getStyle(el, 'position') == 'static') { // default to relative
@@ -195,8 +195,8 @@ YAHOO.util.Dom = new function() {
       }
 
       var delta = [
-         parseInt( YAHOO.util.Dom.getStyle(el, 'left'), 10 ),
-         parseInt( YAHOO.util.Dom.getStyle(el, 'top'), 10 )
+         parseInt( SPIP.util.Dom.getStyle(el, 'left'), 10 ),
+         parseInt( SPIP.util.Dom.getStyle(el, 'top'), 10 )
       ];
 
       if ( isNaN(delta[0]) ) { delta[0] = 0; } // defalts to 'auto'
@@ -243,7 +243,7 @@ YAHOO.util.Dom = new function() {
     */
    this.getRegion = function(el) {
       el = this.get(el);
-      return new YAHOO.util.Region.getRegion(el);
+      return new SPIP.util.Region.getRegion(el);
    };
 
    /**
@@ -281,7 +281,7 @@ YAHOO.util.Dom = new function() {
  * @param {int} l the left extent
  * @constructor
  */
-YAHOO.util.Region = function(t, r, b, l) {
+SPIP.util.Region = function(t, r, b, l) {
 
     /**
      * The region's top extent
@@ -315,7 +315,7 @@ YAHOO.util.Region = function(t, r, b, l) {
  * @return {boolean}        True if the region is contained with this region,
  *                          else false
  */
-YAHOO.util.Region.prototype.contains = function(region) {
+SPIP.util.Region.prototype.contains = function(region) {
     return ( region.left   >= this.left   &&
              region.right  <= this.right  &&
              region.top    >= this.top    &&
@@ -327,7 +327,7 @@ YAHOO.util.Region.prototype.contains = function(region) {
  *
  * @return {int} the region's area
  */
-YAHOO.util.Region.prototype.getArea = function() {
+SPIP.util.Region.prototype.getArea = function() {
     return ( (this.bottom - this.top) * (this.right - this.left) );
 };
 
@@ -337,14 +337,14 @@ YAHOO.util.Region.prototype.getArea = function() {
  * @param  {Region} region The region that intersects
  * @return {Region}        The overlap region, or null if there is no overlap
  */
-YAHOO.util.Region.prototype.intersect = function(region) {
+SPIP.util.Region.prototype.intersect = function(region) {
     var t = Math.max( this.top,    region.top    );
     var r = Math.min( this.right,  region.right  );
     var b = Math.min( this.bottom, region.bottom );
     var l = Math.max( this.left,   region.left   );
 
     if (b >= t && r >= l) {
-        return new YAHOO.util.Region(t, r, b, l);
+        return new SPIP.util.Region(t, r, b, l);
     } else {
         return null;
     }
@@ -357,20 +357,20 @@ YAHOO.util.Region.prototype.intersect = function(region) {
  * @param  {Region} region The region that to create the union with
  * @return {Region}        The union region
  */
-YAHOO.util.Region.prototype.union = function(region) {
+SPIP.util.Region.prototype.union = function(region) {
     var t = Math.min( this.top,    region.top    );
     var r = Math.max( this.right,  region.right  );
     var b = Math.max( this.bottom, region.bottom );
     var l = Math.min( this.left,   region.left   );
 
-    return new YAHOO.util.Region(t, r, b, l);
+    return new SPIP.util.Region(t, r, b, l);
 };
 
 /**
  * toString
  * @return string the region properties
  */
-YAHOO.util.Region.prototype.toString = function() {
+SPIP.util.Region.prototype.toString = function() {
     return ( "Region {" +
              "  t: "    + this.top    +
              ", r: "    + this.right  +
@@ -386,15 +386,15 @@ YAHOO.util.Region.prototype.toString = function() {
  * @return {Region}         The region that the element occupies
  * @static
  */
-YAHOO.util.Region.getRegion = function(el) {
-    var p = YAHOO.util.Dom.getXY(el);
+SPIP.util.Region.getRegion = function(el) {
+    var p = SPIP.util.Dom.getXY(el);
 
     var t = p[1];
     var r = p[0] + el.offsetWidth;
     var b = p[1] + el.offsetHeight;
     var l = p[0];
 
-    return new YAHOO.util.Region(t, r, b, l);
+    return new SPIP.util.Region(t, r, b, l);
 };
 
 /////////////////////////////////////////////////////////////////////////////
@@ -411,7 +411,7 @@ YAHOO.util.Region.getRegion = function(el) {
  * @constructor
  * @extends Region
  */
-YAHOO.util.Point = function(x, y) {
+SPIP.util.Point = function(x, y) {
     /**
      * The X position of the point
      * @type int
@@ -430,4 +430,4 @@ YAHOO.util.Point = function(x, y) {
     this.left   = x;
 };
 
-YAHOO.util.Point.prototype = new YAHOO.util.Region();
+SPIP.util.Point.prototype = new SPIP.util.Region();

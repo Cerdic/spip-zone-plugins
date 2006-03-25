@@ -1,16 +1,16 @@
 /*
-Copyright (c) 2006 Yahoo! Inc. All rights reserved.
+Copyright (c) 2006 Spip! Inc. All rights reserved.
 version 0.9.0
 */
 
-YAHOO.namespace("YAHOO.widget");
+SPIP.namespace("SPIP.widget");
 
 /**
 * @class
-* <p>YAHOO.widget.DateMath is used for simple date manipulation. The class is a static utility
+* <p>SPIP.widget.DateMath is used for simple date manipulation. The class is a static utility
 * used for adding, subtracting, and comparing dates.</p>
 */
-YAHOO.widget.DateMath = new function() {
+SPIP.widget.DateMath = new function() {
 
 	/**
 	* Constant field representing Day
@@ -258,7 +258,7 @@ YAHOO.widget.DateMath = new function() {
 	};
 }
 
-YAHOO.namespace("YAHOO.widget");
+SPIP.namespace("SPIP.widget");
 
 /**
 * @class
@@ -283,7 +283,7 @@ YAHOO.namespace("YAHOO.widget");
 								Any combination of these can be combined by delimiting the string with
 								commas. Example: "12/24/2005,12/25,1/18/2006-1/21/2006"
 */
-YAHOO.widget.Calendar_Core = function(id, containerId, monthyear, selected) {
+SPIP.widget.Calendar_Core = function(id, containerId, monthyear, selected) {
 	if (arguments.length > 0)
 	{
 		this.init(id, containerId, monthyear, selected);
@@ -295,35 +295,35 @@ YAHOO.widget.Calendar_Core = function(id, containerId, monthyear, selected) {
 * @final
 * @type String
 */
-YAHOO.widget.Calendar_Core.DATE = "D";
+SPIP.widget.Calendar_Core.DATE = "D";
 
 /**
 * Type constant used for renderers to represent an individual date across any year (M/D)
 * @final
 * @type String
 */
-YAHOO.widget.Calendar_Core.MONTH_DAY = "MD";
+SPIP.widget.Calendar_Core.MONTH_DAY = "MD";
 
 /**
 * Type constant used for renderers to represent a weekday
 * @final
 * @type String
 */
-YAHOO.widget.Calendar_Core.WEEKDAY = "WD";
+SPIP.widget.Calendar_Core.WEEKDAY = "WD";
 
 /**
 * Type constant used for renderers to represent a range of individual dates (M/D/Y-M/D/Y)
 * @final
 * @type String
 */
-YAHOO.widget.Calendar_Core.RANGE = "R";
+SPIP.widget.Calendar_Core.RANGE = "R";
 
 /**
 * Type constant used for renderers to represent a month across any year
 * @final
 * @type String
 */
-YAHOO.widget.Calendar_Core.MONTH = "M";
+SPIP.widget.Calendar_Core.MONTH = "M";
 
 /**
 * Constant that represents the total number of date cells that are displayed in a given month
@@ -331,16 +331,16 @@ YAHOO.widget.Calendar_Core.MONTH = "M";
 * @final
 * @type Integer
 */
-YAHOO.widget.Calendar_Core.DISPLAY_DAYS = 42;
+SPIP.widget.Calendar_Core.DISPLAY_DAYS = 42;
 
 /**
 * Constant used for halting the execution of the remainder of the render stack
 * @final
 * @type String
 */
-YAHOO.widget.Calendar_Core.STOP_RENDER = "S";
+SPIP.widget.Calendar_Core.STOP_RENDER = "S";
 
-YAHOO.widget.Calendar_Core.prototype = {
+SPIP.widget.Calendar_Core.prototype = {
 
 	/**
 	* The configuration object used to set up the calendars various locale and style options.
@@ -492,7 +492,7 @@ YAHOO.widget.Calendar_Core.prototype = {
 								Any combination of these can be combined by delimiting the string with
 								commas. Example: "12/24/2005,12/25,1/18/2006-1/21/2006"
 */
-YAHOO.widget.Calendar_Core.prototype.init = function(id, containerId, monthyear, selected) {
+SPIP.widget.Calendar_Core.prototype.init = function(id, containerId, monthyear, selected) {
 	this.setupConfig();
 
 	this.id = id;
@@ -507,7 +507,7 @@ YAHOO.widget.Calendar_Core.prototype.init = function(id, containerId, monthyear,
 	this.oDomContainer = document.getElementById(containerId);
 
 	this.today = new Date();
-	YAHOO.widget.DateMath.clearTime(this.today);
+	SPIP.widget.DateMath.clearTime(this.today);
 
 	var month;
 	var year;
@@ -543,7 +543,7 @@ YAHOO.widget.Calendar_Core.prototype.init = function(id, containerId, monthyear,
 * Wires the local DOM events for the Calendar, including cell selection, hover, and
 * default navigation that is used for moving back and forth between calendar pages.
 */
-YAHOO.widget.Calendar_Core.prototype.wireDefaultEvents = function() {
+SPIP.widget.Calendar_Core.prototype.wireDefaultEvents = function() {
 
 	/**
 	* The default event function that is attached to a date link within a calendar cell
@@ -584,7 +584,7 @@ YAHOO.widget.Calendar_Core.prototype.wireDefaultEvents = function() {
 	* @private
 	*/
 	this.doCellMouseOver = function(e, cal) {
-		YAHOO.widget.Calendar_Core.prependCssClass(this, cal.Style.CSS_CELL_HOVER);
+		SPIP.widget.Calendar_Core.prependCssClass(this, cal.Style.CSS_CELL_HOVER);
 	}
 
 	/**
@@ -594,7 +594,7 @@ YAHOO.widget.Calendar_Core.prototype.wireDefaultEvents = function() {
 	* @private
 	*/
 	this.doCellMouseOut = function(e, cal) {
-		YAHOO.widget.Calendar_Core.removeCssClass(this, cal.Style.CSS_CELL_HOVER);
+		SPIP.widget.Calendar_Core.removeCssClass(this, cal.Style.CSS_CELL_HOVER);
 	}
 
 	/**
@@ -622,7 +622,7 @@ YAHOO.widget.Calendar_Core.prototype.wireDefaultEvents = function() {
 * This function can be extended by subclasses to attach additional DOM events to
 * the calendar. By default, this method is unimplemented.
 */
-YAHOO.widget.Calendar_Core.prototype.wireCustomEvents = function() { }
+SPIP.widget.Calendar_Core.prototype.wireCustomEvents = function() { }
 
 /**
 This method is called to initialize the widget configuration variables, including
@@ -690,7 +690,7 @@ style, localization, and other display and behavioral options.
 	<div><em>NAV_ARROW_RIGHT</em> : String, the image path used for the right navigation arrow</div>
 </blockquote>
 */
-YAHOO.widget.Calendar_Core.prototype.setupConfig = function() {
+SPIP.widget.Calendar_Core.prototype.setupConfig = function() {
 	/**
 	* Container for the CSS style configuration variables.
 	*/
@@ -793,7 +793,7 @@ YAHOO.widget.Calendar_Core.prototype.setupConfig = function() {
 *	this.Config.Locale.MONTHS_SHORT = ["Jan", "Fév", "Mars", "Avr", "Mai", "Juin", "Juil", "Août", "Sept", "Oct", "Nov", "Déc"];
 * </code></blockquote>
 */
-YAHOO.widget.Calendar_Core.prototype.customConfig = function() { };
+SPIP.widget.Calendar_Core.prototype.customConfig = function() { };
 
 /**
 * Builds the date label that will be displayed in the calendar header or
@@ -801,7 +801,7 @@ YAHOO.widget.Calendar_Core.prototype.customConfig = function() { };
 * @return	The formatted calendar month label
 * @type String
 */
-YAHOO.widget.Calendar_Core.prototype.buildMonthLabel = function() {
+SPIP.widget.Calendar_Core.prototype.buildMonthLabel = function() {
 	var text = this.Options.LOCALE_MONTHS[this.pageDate.getMonth()] + " " + this.pageDate.getFullYear();
 	return text;
 };
@@ -811,7 +811,7 @@ YAHOO.widget.Calendar_Core.prototype.buildMonthLabel = function() {
 * @return	The formatted day label
 * @type	String
 */
-YAHOO.widget.Calendar_Core.prototype.buildDayLabel = function(workingDate) {
+SPIP.widget.Calendar_Core.prototype.buildDayLabel = function(workingDate) {
 	var day = workingDate.getDate();
 	return day;
 };
@@ -824,11 +824,11 @@ YAHOO.widget.Calendar_Core.prototype.buildDayLabel = function(workingDate) {
 * to construct the pieces of the calendar table. The construction of the shell should
 * only happen one time when the calendar is initialized.
 */
-YAHOO.widget.Calendar_Core.prototype.buildShell = function() {
+SPIP.widget.Calendar_Core.prototype.buildShell = function() {
 
 	this.table = document.createElement("TABLE");
 	this.table.cellSpacing = 0;
-	YAHOO.widget.Calendar_Core.setCssClasses(this.table, [this.Style.CSS_CALENDAR]);
+	SPIP.widget.Calendar_Core.setCssClasses(this.table, [this.Style.CSS_CALENDAR]);
 
 	this.table.id = this.id;
 
@@ -836,13 +836,13 @@ YAHOO.widget.Calendar_Core.prototype.buildShell = function() {
 	this.buildShellBody();
 	this.buildShellFooter();
 
-	YAHOO.util.Event.addListener(window, "unload", this._unload, this);
+	SPIP.util.Event.addListener(window, "unload", this._unload, this);
 };
 
 /**
 * Builds the calendar shell header by inserting a THEAD into the local calendar table.
 */
-YAHOO.widget.Calendar_Core.prototype.buildShellHeader = function() {
+SPIP.widget.Calendar_Core.prototype.buildShellHeader = function() {
 	var head = document.createElement("THEAD");
 	var headRow = document.createElement("TR");
 
@@ -860,7 +860,7 @@ YAHOO.widget.Calendar_Core.prototype.buildShellHeader = function() {
 
 	headerCell.colSpan = colSpan;
 
-	YAHOO.widget.Calendar_Core.setCssClasses(headerCell,[this.Style.CSS_HEADER_TEXT]);
+	SPIP.widget.Calendar_Core.setCssClasses(headerCell,[this.Style.CSS_HEADER_TEXT]);
 
 	this.headerCell = headerCell;
 
@@ -873,25 +873,25 @@ YAHOO.widget.Calendar_Core.prototype.buildShellHeader = function() {
 		var row = document.createElement("TR");
 		var fillerCell;
 
-		YAHOO.widget.Calendar_Core.setCssClasses(row,[this.Style.CSS_WEEKDAY_ROW]);
+		SPIP.widget.Calendar_Core.setCssClasses(row,[this.Style.CSS_WEEKDAY_ROW]);
 
 		if (this.Config.Options.SHOW_WEEK_HEADER) {
 			fillerCell = document.createElement("TH");
-			YAHOO.widget.Calendar_Core.setCssClasses(fillerCell,[this.Style.CSS_WEEKDAY_CELL]);
+			SPIP.widget.Calendar_Core.setCssClasses(fillerCell,[this.Style.CSS_WEEKDAY_CELL]);
 			row.appendChild(fillerCell);
 		}
 
 		for(var i=0;i<this.Options.LOCALE_WEEKDAYS.length;++i)
 		{
 			var cell = document.createElement("TH");
-			YAHOO.widget.Calendar_Core.setCssClasses(cell,[this.Style.CSS_WEEKDAY_CELL]);
+			SPIP.widget.Calendar_Core.setCssClasses(cell,[this.Style.CSS_WEEKDAY_CELL]);
 			cell.innerHTML=this.Options.LOCALE_WEEKDAYS[i];
 			row.appendChild(cell);
 		}
 
 		if (this.Config.Options.SHOW_WEEK_FOOTER) {
 			fillerCell = document.createElement("TH");
-			YAHOO.widget.Calendar_Core.setCssClasses(fillerCell,[this.Style.CSS_WEEKDAY_CELL]);
+			SPIP.widget.Calendar_Core.setCssClasses(fillerCell,[this.Style.CSS_WEEKDAY_CELL]);
 			row.appendChild(fillerCell);
 		}
 
@@ -904,7 +904,7 @@ YAHOO.widget.Calendar_Core.prototype.buildShellHeader = function() {
 /**
 * Builds the calendar shell body (6 weeks by 7 days)
 */
-YAHOO.widget.Calendar_Core.prototype.buildShellBody = function() {
+SPIP.widget.Calendar_Core.prototype.buildShellBody = function() {
 	// This should only get executed once
 	this.tbody = document.createElement("TBODY");
 
@@ -924,7 +924,7 @@ YAHOO.widget.Calendar_Core.prototype.buildShellBody = function() {
 			} else {
 				cell = document.createElement("TD");
 				this.cells[this.cells.length] = cell;
-				YAHOO.widget.Calendar_Core.setCssClasses(cell, [this.Style.CSS_CELL]);
+				SPIP.widget.Calendar_Core.setCssClasses(cell, [this.Style.CSS_CELL]);
 			}
 
 			row.appendChild(cell);
@@ -939,12 +939,12 @@ YAHOO.widget.Calendar_Core.prototype.buildShellBody = function() {
 * Builds the calendar shell footer. In the default implementation, there is
 * no footer.
 */
-YAHOO.widget.Calendar_Core.prototype.buildShellFooter = function() { };
+SPIP.widget.Calendar_Core.prototype.buildShellFooter = function() { };
 
 /**
 * Outputs the calendar shell to the DOM, inserting it into the placeholder element.
 */
-YAHOO.widget.Calendar_Core.prototype.renderShell = function() {
+SPIP.widget.Calendar_Core.prototype.renderShell = function() {
 	this.oDomContainer.appendChild(this.table);
 	this.shellRendered = true;
 };
@@ -955,7 +955,7 @@ YAHOO.widget.Calendar_Core.prototype.renderShell = function() {
 * Refer to the documentation for those methods for information on
 * individual render tasks.
 */
-YAHOO.widget.Calendar_Core.prototype.render = function() {
+SPIP.widget.Calendar_Core.prototype.render = function() {
 	if (! this.shellRendered)
 	{
 		this.buildShell();
@@ -967,7 +967,7 @@ YAHOO.widget.Calendar_Core.prototype.render = function() {
 	this.cellDates.length = 0;
 
 	// Find starting day of the current month
-	var workingDate = YAHOO.widget.DateMath.findMonthStart(this.pageDate);
+	var workingDate = SPIP.widget.DateMath.findMonthStart(this.pageDate);
 
 	this.renderHeader();
 	this.renderBody(workingDate);
@@ -981,7 +981,7 @@ YAHOO.widget.Calendar_Core.prototype.render = function() {
 /**
 * Appends the header contents into the widget header.
 */
-YAHOO.widget.Calendar_Core.prototype.renderHeader = function() {
+SPIP.widget.Calendar_Core.prototype.renderHeader = function() {
 	this.headerCell.innerHTML = "";
 
 	var headerContainer = document.createElement("DIV");
@@ -1003,7 +1003,7 @@ YAHOO.widget.Calendar_Core.prototype.renderHeader = function() {
 *
 * @param {Date}	workingDate	The current working Date object being used to generate the calendar
 */
-YAHOO.widget.Calendar_Core.prototype.renderBody = function(workingDate) {
+SPIP.widget.Calendar_Core.prototype.renderBody = function(workingDate) {
 
 	this.preMonthDays = workingDate.getDay();
 	if (this.Options.START_WEEKDAY > 0) {
@@ -1013,10 +1013,10 @@ YAHOO.widget.Calendar_Core.prototype.renderBody = function(workingDate) {
 		this.preMonthDays += 7;
 	}
 
-	this.monthDays = YAHOO.widget.DateMath.findMonthEnd(workingDate).getDate();
-	this.postMonthDays = YAHOO.widget.Calendar_Core.DISPLAY_DAYS-this.preMonthDays-this.monthDays;
+	this.monthDays = SPIP.widget.DateMath.findMonthEnd(workingDate).getDate();
+	this.postMonthDays = SPIP.widget.Calendar_Core.DISPLAY_DAYS-this.preMonthDays-this.monthDays;
 
-	workingDate = YAHOO.widget.DateMath.subtract(workingDate, YAHOO.widget.DateMath.DAY, this.preMonthDays);
+	workingDate = SPIP.widget.DateMath.subtract(workingDate, SPIP.widget.DateMath.DAY, this.preMonthDays);
 
 	this.table.style.visibility = "hidden"; // Hide while we render
 
@@ -1030,10 +1030,10 @@ YAHOO.widget.Calendar_Core.prototype.renderBody = function(workingDate) {
 
 		this.clearElement(cell);
 
-		YAHOO.util.Event.removeListener(cell, "click", this.doSelectCell);
-		if (YAHOO.widget.Calendar_Core._getBrowser() == "ie") {
-			YAHOO.util.Event.removeListener(cell, "mouseover", this.doCellMouseOver);
-			YAHOO.util.Event.removeListener(cell, "mouseout", this.doCellMouseOut);
+		SPIP.util.Event.removeListener(cell, "click", this.doSelectCell);
+		if (SPIP.widget.Calendar_Core._getBrowser() == "ie") {
+			SPIP.util.Event.removeListener(cell, "mouseover", this.doCellMouseOver);
+			SPIP.util.Event.removeListener(cell, "mouseout", this.doCellMouseOut);
 		}
 
 		cell.index = c;
@@ -1055,7 +1055,7 @@ YAHOO.widget.Calendar_Core.prototype.renderBody = function(workingDate) {
 				this.clearElement(rowFooterCell);
 			}
 
-			if (this.Options.HIDE_BLANK_WEEKS && this.isDateOOM(workingDate) && ! YAHOO.widget.DateMath.isMonthOverlapWeek(workingDate)) {
+			if (this.Options.HIDE_BLANK_WEEKS && this.isDateOOM(workingDate) && ! SPIP.widget.DateMath.isMonthOverlapWeek(workingDate)) {
 				// The first day of the week is not in this month, and it's not an overlap week
 				continue;
 			} else {
@@ -1093,7 +1093,7 @@ YAHOO.widget.Calendar_Core.prototype.renderBody = function(workingDate) {
 				var year;
 
 				switch (type) {
-					case YAHOO.widget.Calendar_Core.DATE:
+					case SPIP.widget.Calendar_Core.DATE:
 						month = rArray[1][1];
 						day = rArray[1][2];
 						year = rArray[1][0];
@@ -1104,7 +1104,7 @@ YAHOO.widget.Calendar_Core.prototype.renderBody = function(workingDate) {
 							this.renderStack.splice(r,1);
 						}
 						break;
-					case YAHOO.widget.Calendar_Core.MONTH_DAY:
+					case SPIP.widget.Calendar_Core.MONTH_DAY:
 						month = rArray[1][0];
 						day = rArray[1][1];
 
@@ -1114,7 +1114,7 @@ YAHOO.widget.Calendar_Core.prototype.renderBody = function(workingDate) {
 							this.renderStack.splice(r,1);
 						}
 						break;
-					case YAHOO.widget.Calendar_Core.RANGE:
+					case SPIP.widget.Calendar_Core.RANGE:
 						var date1 = rArray[1][0];
 						var date2 = rArray[1][1];
 
@@ -1139,7 +1139,7 @@ YAHOO.widget.Calendar_Core.prototype.renderBody = function(workingDate) {
 							}
 						}
 						break;
-					case YAHOO.widget.Calendar_Core.WEEKDAY:
+					case SPIP.widget.Calendar_Core.WEEKDAY:
 
 						var weekday = rArray[1][0];
 						if (workingDate.getDay()+1 == weekday)
@@ -1147,7 +1147,7 @@ YAHOO.widget.Calendar_Core.prototype.renderBody = function(workingDate) {
 							renderer = rArray[2];
 						}
 						break;
-					case YAHOO.widget.Calendar_Core.MONTH:
+					case SPIP.widget.Calendar_Core.MONTH:
 
 						month = rArray[1][0];
 						if (workingDate.getMonth()+1 == month)
@@ -1171,11 +1171,11 @@ YAHOO.widget.Calendar_Core.prototype.renderBody = function(workingDate) {
 
 		if (this.minDate)
 		{
-			this.minDate = YAHOO.widget.DateMath.clearTime(this.minDate);
+			this.minDate = SPIP.widget.DateMath.clearTime(this.minDate);
 		}
 		if (this.maxDate)
 		{
-			this.maxDate = YAHOO.widget.DateMath.clearTime(this.maxDate);
+			this.maxDate = SPIP.widget.DateMath.clearTime(this.maxDate);
 		}
 
 		if (
@@ -1190,25 +1190,25 @@ YAHOO.widget.Calendar_Core.prototype.renderBody = function(workingDate) {
 		for (var x=0;x<cellRenderers.length;++x)
 		{
 			var ren = cellRenderers[x];
-			if (ren.call(this,workingDate,cell) == YAHOO.widget.Calendar_Core.STOP_RENDER) {
+			if (ren.call(this,workingDate,cell) == SPIP.widget.Calendar_Core.STOP_RENDER) {
 				break;
 			}
 		}
 
-		workingDate = YAHOO.widget.DateMath.add(workingDate, YAHOO.widget.DateMath.DAY, 1); // Go to the next day
+		workingDate = SPIP.widget.DateMath.add(workingDate, SPIP.widget.DateMath.DAY, 1); // Go to the next day
 		if (workingDate.getDay() == this.Options.START_WEEKDAY) {
 			weekRowIndex += 1;
 		}
 
-		YAHOO.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL);
+		SPIP.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL);
 		if (c >= 0 && c <= 6) {
-			YAHOO.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_TOP);
+			SPIP.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_TOP);
 		}
 		if ((c % 7) == 0) {
-			YAHOO.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_LEFT);
+			SPIP.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_LEFT);
 		}
 		if (((c+1) % 7) == 0) {
-			YAHOO.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_RIGHT);
+			SPIP.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_RIGHT);
 		}
 
 		var postDays = this.postMonthDays;
@@ -1220,7 +1220,7 @@ YAHOO.widget.Calendar_Core.prototype.renderBody = function(workingDate) {
 		}
 
 		if (c >= ((this.preMonthDays+postDays+this.monthDays)-7)) {
-			YAHOO.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_BOTTOM);
+			SPIP.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_BOTTOM);
 		}
 	}
 
@@ -1233,12 +1233,12 @@ YAHOO.widget.Calendar_Core.prototype.renderBody = function(workingDate) {
 * the calendar does not contain a footer, and this method must be implemented by
 * subclassing the widget.
 */
-YAHOO.widget.Calendar_Core.prototype.renderFooter = function() { };
+SPIP.widget.Calendar_Core.prototype.renderFooter = function() { };
 
 /**
 * @private
 */
-YAHOO.widget.Calendar_Core.prototype._unload = function(e, cal) {
+SPIP.widget.Calendar_Core.prototype._unload = function(e, cal) {
 	for (var c in cal.cells) {
 		c = null;
 	}
@@ -1256,10 +1256,10 @@ YAHOO.widget.Calendar_Core.prototype._unload = function(e, cal) {
 
 /****************** BEGIN BUILT-IN TABLE CELL RENDERERS ************************************/
 
-YAHOO.widget.Calendar_Core.prototype.renderOutOfBoundsDate = function(workingDate, cell) {
-	YAHOO.widget.Calendar_Core.addCssClass(cell, "previous");
+SPIP.widget.Calendar_Core.prototype.renderOutOfBoundsDate = function(workingDate, cell) {
+	SPIP.widget.Calendar_Core.addCssClass(cell, "previous");
 	cell.innerHTML = workingDate.getDate();
-	return YAHOO.widget.Calendar_Core.STOP_RENDER;
+	return SPIP.widget.Calendar_Core.STOP_RENDER;
 }
 
 /**
@@ -1268,20 +1268,20 @@ YAHOO.widget.Calendar_Core.prototype.renderOutOfBoundsDate = function(workingDat
 * @param {Date}					workingDate		The current working Date object (beginning of the week) being used to generate the calendar
 * @param {HTMLTableCellElement}	cell			The current working cell in the calendar
 */
-YAHOO.widget.Calendar_Core.prototype.renderRowHeader = function(workingDate, cell) {
-	YAHOO.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_ROW_HEADER);
+SPIP.widget.Calendar_Core.prototype.renderRowHeader = function(workingDate, cell) {
+	SPIP.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_ROW_HEADER);
 
 	var useYear = this.pageDate.getFullYear();
 
-	if (! YAHOO.widget.DateMath.isYearOverlapWeek(workingDate)) {
+	if (! SPIP.widget.DateMath.isYearOverlapWeek(workingDate)) {
 		useYear = workingDate.getFullYear();
 	}
 
-	var weekNum = YAHOO.widget.DateMath.getWeekNumber(workingDate, useYear, this.Options.START_WEEKDAY);
+	var weekNum = SPIP.widget.DateMath.getWeekNumber(workingDate, useYear, this.Options.START_WEEKDAY);
 	cell.innerHTML = weekNum;
 
-	if (this.isDateOOM(workingDate) && ! YAHOO.widget.DateMath.isMonthOverlapWeek(workingDate)) {
-		YAHOO.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_OOM);
+	if (this.isDateOOM(workingDate) && ! SPIP.widget.DateMath.isMonthOverlapWeek(workingDate)) {
+		SPIP.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_OOM);
 	}
 };
 
@@ -1291,11 +1291,11 @@ YAHOO.widget.Calendar_Core.prototype.renderRowHeader = function(workingDate, cel
 * @param {Date}					workingDate		The current working Date object (beginning of the week) being used to generate the calendar
 * @param {HTMLTableCellElement}	cell			The current working cell in the calendar
 */
-YAHOO.widget.Calendar_Core.prototype.renderRowFooter = function(workingDate, cell) {
-	YAHOO.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_ROW_FOOTER);
+SPIP.widget.Calendar_Core.prototype.renderRowFooter = function(workingDate, cell) {
+	SPIP.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_ROW_FOOTER);
 
-	if (this.isDateOOM(workingDate) && ! YAHOO.widget.DateMath.isMonthOverlapWeek(workingDate)) {
-		YAHOO.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_OOM);
+	if (this.isDateOOM(workingDate) && ! SPIP.widget.DateMath.isMonthOverlapWeek(workingDate)) {
+		SPIP.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_OOM);
 	}
 };
 
@@ -1306,11 +1306,11 @@ YAHOO.widget.Calendar_Core.prototype.renderRowFooter = function(workingDate, cel
 * widget class.
 * @param {Date}					workingDate		The current working Date object being used to generate the calendar
 * @param {HTMLTableCellElement}	cell			The current working cell in the calendar
-* @return YAHOO.widget.Calendar_Core.STOP_RENDER if rendering should stop with this style, null or nothing if rendering
+* @return SPIP.widget.Calendar_Core.STOP_RENDER if rendering should stop with this style, null or nothing if rendering
 *			should not be terminated
 * @type String
 */
-YAHOO.widget.Calendar_Core.prototype.renderCellDefault = function(workingDate, cell) {
+SPIP.widget.Calendar_Core.prototype.renderCellDefault = function(workingDate, cell) {
 	cell.innerHTML = "";
 	var link = document.createElement("a");
 
@@ -1320,10 +1320,10 @@ YAHOO.widget.Calendar_Core.prototype.renderCellDefault = function(workingDate, c
 	//link.onclick = this._selectEventLink;
 	//cell.onclick = this.doSelectCell;
 
-	YAHOO.util.Event.addListener(cell, "click", this.doSelectCell, this);
-	if (YAHOO.widget.Calendar_Core._getBrowser() == "ie") {
-		YAHOO.util.Event.addListener(cell, "mouseover", this.doCellMouseOver, this);
-		YAHOO.util.Event.addListener(cell, "mouseout", this.doCellMouseOut, this);
+	SPIP.util.Event.addListener(cell, "click", this.doSelectCell, this);
+	if (SPIP.widget.Calendar_Core._getBrowser() == "ie") {
+		SPIP.util.Event.addListener(cell, "mouseover", this.doCellMouseOver, this);
+		SPIP.util.Event.addListener(cell, "mouseout", this.doCellMouseOut, this);
 	}
 	link.appendChild(document.createTextNode(this.buildDayLabel(workingDate)));
 	cell.appendChild(link);
@@ -1332,41 +1332,41 @@ YAHOO.widget.Calendar_Core.prototype.renderCellDefault = function(workingDate, c
 	//cell.onmouseout = this.doCellMouseOut;
 };
 
-YAHOO.widget.Calendar_Core.prototype.renderCellStyleHighlight1 = function(workingDate, cell) {
-	YAHOO.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_HIGHLIGHT1);
+SPIP.widget.Calendar_Core.prototype.renderCellStyleHighlight1 = function(workingDate, cell) {
+	SPIP.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_HIGHLIGHT1);
 };
-YAHOO.widget.Calendar_Core.prototype.renderCellStyleHighlight2 = function(workingDate, cell) {
-	YAHOO.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_HIGHLIGHT2);
+SPIP.widget.Calendar_Core.prototype.renderCellStyleHighlight2 = function(workingDate, cell) {
+	SPIP.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_HIGHLIGHT2);
 };
-YAHOO.widget.Calendar_Core.prototype.renderCellStyleHighlight3 = function(workingDate, cell) {
-	YAHOO.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_HIGHLIGHT3);
+SPIP.widget.Calendar_Core.prototype.renderCellStyleHighlight3 = function(workingDate, cell) {
+	SPIP.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_HIGHLIGHT3);
 };
-YAHOO.widget.Calendar_Core.prototype.renderCellStyleHighlight4 = function(workingDate, cell) {
-	YAHOO.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_HIGHLIGHT4);
+SPIP.widget.Calendar_Core.prototype.renderCellStyleHighlight4 = function(workingDate, cell) {
+	SPIP.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_HIGHLIGHT4);
 };
 
 /**
 * Applies the default style used for rendering today's date to the current calendar cell
 * @param {Date}					workingDate		The current working Date object being used to generate the calendar
 * @param {HTMLTableCellElement}	cell			The current working cell in the calendar
-* @return	YAHOO.widget.Calendar_Core.STOP_RENDER if rendering should stop with this style, null or nothing if rendering
+* @return	SPIP.widget.Calendar_Core.STOP_RENDER if rendering should stop with this style, null or nothing if rendering
 *			should not be terminated
 * @type String
 */
-YAHOO.widget.Calendar_Core.prototype.renderCellStyleToday = function(workingDate, cell) {
-	YAHOO.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_TODAY);
+SPIP.widget.Calendar_Core.prototype.renderCellStyleToday = function(workingDate, cell) {
+	SPIP.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_TODAY);
 };
 
 /**
 * Applies the default style used for rendering selected dates to the current calendar cell
 * @param {Date}					workingDate		The current working Date object being used to generate the calendar
 * @param {HTMLTableCellElement}	cell			The current working cell in the calendar
-* @return	YAHOO.widget.Calendar_Core.STOP_RENDER if rendering should stop with this style, null or nothing if rendering
+* @return	SPIP.widget.Calendar_Core.STOP_RENDER if rendering should stop with this style, null or nothing if rendering
 *			should not be terminated
 * @type String
 */
-YAHOO.widget.Calendar_Core.prototype.renderCellStyleSelected = function(workingDate, cell) {
-	YAHOO.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_SELECTED);
+SPIP.widget.Calendar_Core.prototype.renderCellStyleSelected = function(workingDate, cell) {
+	SPIP.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_SELECTED);
 };
 
 /**
@@ -1374,14 +1374,14 @@ YAHOO.widget.Calendar_Core.prototype.renderCellStyleSelected = function(workingD
 * month (preceding or trailing the cells for the current month)
 * @param {Date}					workingDate		The current working Date object being used to generate the calendar
 * @param {HTMLTableCellElement}	cell			The current working cell in the calendar
-* @return	YAHOO.widget.Calendar_Core.STOP_RENDER if rendering should stop with this style, null or nothing if rendering
+* @return	SPIP.widget.Calendar_Core.STOP_RENDER if rendering should stop with this style, null or nothing if rendering
 *			should not be terminated
 * @type String
 */
-YAHOO.widget.Calendar_Core.prototype.renderCellNotThisMonth = function(workingDate, cell) {
-	YAHOO.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_OOM);
+SPIP.widget.Calendar_Core.prototype.renderCellNotThisMonth = function(workingDate, cell) {
+	SPIP.widget.Calendar_Core.addCssClass(cell, this.Style.CSS_CELL_OOM);
 	cell.innerHTML=workingDate.getDate();
-	return YAHOO.widget.Calendar_Core.STOP_RENDER;
+	return SPIP.widget.Calendar_Core.STOP_RENDER;
 };
 
 /**
@@ -1389,14 +1389,14 @@ YAHOO.widget.Calendar_Core.prototype.renderCellNotThisMonth = function(workingDa
 * restricted style.
 * @param {Date}					workingDate		The current working Date object being used to generate the calendar
 * @param {HTMLTableCellElement}	cell			The current working cell in the calendar
-* @return	YAHOO.widget.Calendar_Core.STOP_RENDER if rendering should stop with this style, null or nothing if rendering
+* @return	SPIP.widget.Calendar_Core.STOP_RENDER if rendering should stop with this style, null or nothing if rendering
 *			should not be terminated
 * @type String
 */
-YAHOO.widget.Calendar_Core.prototype.renderBodyCellRestricted = function(workingDate, cell) {
-	YAHOO.widget.Calendar_Core.setCssClasses(cell, [this.Style.CSS_CELL,this.Style.CSS_CELL_RESTRICTED]);
+SPIP.widget.Calendar_Core.prototype.renderBodyCellRestricted = function(workingDate, cell) {
+	SPIP.widget.Calendar_Core.setCssClasses(cell, [this.Style.CSS_CELL,this.Style.CSS_CELL_RESTRICTED]);
 	cell.innerHTML=workingDate.getDate();
-	return YAHOO.widget.Calendar_Core.STOP_RENDER;
+	return SPIP.widget.Calendar_Core.STOP_RENDER;
 };
 /******************** END BUILT-IN TABLE CELL RENDERERS ************************************/
 
@@ -1406,8 +1406,8 @@ YAHOO.widget.Calendar_Core.prototype.renderBodyCellRestricted = function(working
 * calendar page date to the new month.
 * @param {Integer}	count	The number of months to add to the current calendar
 */
-YAHOO.widget.Calendar_Core.prototype.addMonths = function(count) {
-	this.pageDate = YAHOO.widget.DateMath.add(this.pageDate, YAHOO.widget.DateMath.MONTH, count);
+SPIP.widget.Calendar_Core.prototype.addMonths = function(count) {
+	this.pageDate = SPIP.widget.DateMath.add(this.pageDate, SPIP.widget.DateMath.MONTH, count);
 	this.resetRenderers();
 	this.onChangePage();
 };
@@ -1417,8 +1417,8 @@ YAHOO.widget.Calendar_Core.prototype.addMonths = function(count) {
 * calendar page date to the new month.
 * @param {Integer}	count	The number of months to subtract from the current calendar
 */
-YAHOO.widget.Calendar_Core.prototype.subtractMonths = function(count) {
-	this.pageDate = YAHOO.widget.DateMath.subtract(this.pageDate, YAHOO.widget.DateMath.MONTH, count);
+SPIP.widget.Calendar_Core.prototype.subtractMonths = function(count) {
+	this.pageDate = SPIP.widget.DateMath.subtract(this.pageDate, SPIP.widget.DateMath.MONTH, count);
 	this.resetRenderers();
 	this.onChangePage();
 };
@@ -1428,8 +1428,8 @@ YAHOO.widget.Calendar_Core.prototype.subtractMonths = function(count) {
 * calendar page date to the new month.
 * @param {Integer}	count	The number of years to add to the current calendar
 */
-YAHOO.widget.Calendar_Core.prototype.addYears = function(count) {
-	this.pageDate = YAHOO.widget.DateMath.add(this.pageDate, YAHOO.widget.DateMath.YEAR, count);
+SPIP.widget.Calendar_Core.prototype.addYears = function(count) {
+	this.pageDate = SPIP.widget.DateMath.add(this.pageDate, SPIP.widget.DateMath.YEAR, count);
 	this.resetRenderers();
 	this.onChangePage();
 };
@@ -1439,8 +1439,8 @@ YAHOO.widget.Calendar_Core.prototype.addYears = function(count) {
 * calendar page date to the new month.
 * @param {Integer}	count	The number of years to subtract from the current calendar
 */
-YAHOO.widget.Calendar_Core.prototype.subtractYears = function(count) {
-	this.pageDate = YAHOO.widget.DateMath.subtract(this.pageDate, YAHOO.widget.DateMath.YEAR, count);
+SPIP.widget.Calendar_Core.prototype.subtractYears = function(count) {
+	this.pageDate = SPIP.widget.DateMath.subtract(this.pageDate, SPIP.widget.DateMath.YEAR, count);
 	this.resetRenderers();
 	this.onChangePage();
 };
@@ -1448,28 +1448,28 @@ YAHOO.widget.Calendar_Core.prototype.subtractYears = function(count) {
 /**
 * Navigates to the next month page in the calendar widget.
 */
-YAHOO.widget.Calendar_Core.prototype.nextMonth = function() {
+SPIP.widget.Calendar_Core.prototype.nextMonth = function() {
 	this.addMonths(1);
 };
 
 /**
 * Navigates to the previous month page in the calendar widget.
 */
-YAHOO.widget.Calendar_Core.prototype.previousMonth = function() {
+SPIP.widget.Calendar_Core.prototype.previousMonth = function() {
 	this.subtractMonths(1);
 };
 
 /**
 * Navigates to the next year in the currently selected month in the calendar widget.
 */
-YAHOO.widget.Calendar_Core.prototype.nextYear = function() {
+SPIP.widget.Calendar_Core.prototype.nextYear = function() {
 	this.addYears(1);
 };
 
 /**
 * Navigates to the previous year in the currently selected month in the calendar widget.
 */
-YAHOO.widget.Calendar_Core.prototype.previousYear = function() {
+SPIP.widget.Calendar_Core.prototype.previousYear = function() {
 	this.subtractYears(1);
 };
 
@@ -1481,7 +1481,7 @@ YAHOO.widget.Calendar_Core.prototype.previousYear = function() {
 * Resets the calendar widget to the originally selected month and year, and
 * sets the calendar to the initial selection(s).
 */
-YAHOO.widget.Calendar_Core.prototype.reset = function() {
+SPIP.widget.Calendar_Core.prototype.reset = function() {
 	this.selectedDates.length = 0;
 	this.selectedDates = this._selectedDates.concat();
 
@@ -1493,7 +1493,7 @@ YAHOO.widget.Calendar_Core.prototype.reset = function() {
 * Clears the selected dates in the current calendar widget and sets the calendar
 * to the current month and year.
 */
-YAHOO.widget.Calendar_Core.prototype.clear = function() {
+SPIP.widget.Calendar_Core.prototype.clear = function() {
 	this.selectedDates.length = 0;
 	this.pageDate = new Date(this.today.getTime());
 	this.onClear();
@@ -1510,7 +1510,7 @@ YAHOO.widget.Calendar_Core.prototype.clear = function() {
 * @return						Array of JavaScript Date objects representing all individual dates that are currently selected.
 * @type Date[]
 */
-YAHOO.widget.Calendar_Core.prototype.select = function(date) {
+SPIP.widget.Calendar_Core.prototype.select = function(date) {
 	this.onBeforeSelect();
 
 	var aToBeSelected = this._toFieldArray(date);
@@ -1541,7 +1541,7 @@ YAHOO.widget.Calendar_Core.prototype.select = function(date) {
 * @return							Array of JavaScript Date objects representing all individual dates that are currently selected.
 * @type Date[]
 */
-YAHOO.widget.Calendar_Core.prototype.selectCell = function(cellIndex) {
+SPIP.widget.Calendar_Core.prototype.selectCell = function(cellIndex) {
 	this.onBeforeSelect();
 
 	this.cells = this.tbody.getElementsByTagName("TD");
@@ -1578,7 +1578,7 @@ YAHOO.widget.Calendar_Core.prototype.selectCell = function(cellIndex) {
 * @return						Array of JavaScript Date objects representing all individual dates that are currently selected.
 * @type Date[]
 */
-YAHOO.widget.Calendar_Core.prototype.deselect = function(date) {
+SPIP.widget.Calendar_Core.prototype.deselect = function(date) {
 	this.onBeforeDeselect();
 
 	var aToBeSelected = this._toFieldArray(date);
@@ -1610,7 +1610,7 @@ YAHOO.widget.Calendar_Core.prototype.deselect = function(date) {
 * @return							Array of JavaScript Date objects representing all individual dates that are currently selected.
 * @type Date[]
 */
-YAHOO.widget.Calendar_Core.prototype.deselectCell = function(i) {
+SPIP.widget.Calendar_Core.prototype.deselectCell = function(i) {
 	this.onBeforeDeselect();
 	this.cells = this.tbody.getElementsByTagName("TD");
 
@@ -1627,7 +1627,7 @@ YAHOO.widget.Calendar_Core.prototype.deselectCell = function(i) {
 		if (this.pageDate.getMonth() == dCellDate.getMonth() &&
 			this.pageDate.getFullYear() == dCellDate.getFullYear())
 		{
-			YAHOO.widget.Calendar_Core.removeCssClass(cell, this.Style.CSS_CELL_SELECTED);
+			SPIP.widget.Calendar_Core.removeCssClass(cell, this.Style.CSS_CELL_SELECTED);
 		}
 
 		this.selectedDates.splice(cellDateIndex, 1);
@@ -1650,7 +1650,7 @@ YAHOO.widget.Calendar_Core.prototype.deselectCell = function(i) {
 *						of the calendar.
 * @type Date[]
 */
-YAHOO.widget.Calendar_Core.prototype.deselectAll = function() {
+SPIP.widget.Calendar_Core.prototype.deselectAll = function() {
 	this.onBeforeDeselect();
 	var count = this.selectedDates.length;
 	this.selectedDates.length = 0;
@@ -1681,7 +1681,7 @@ YAHOO.widget.Calendar_Core.prototype.deselectAll = function() {
 * @return						Array of date field arrays
 * @type Array[](Integer[])
 */
-YAHOO.widget.Calendar_Core.prototype._toFieldArray = function(date) {
+SPIP.widget.Calendar_Core.prototype._toFieldArray = function(date) {
 	var returnDate = new Array();
 
 	if (date instanceof Date)
@@ -1711,7 +1711,7 @@ YAHOO.widget.Calendar_Core.prototype._toFieldArray = function(date) {
 * @return					JavaScript Date object representing the date field array
 * @type Date
 */
-YAHOO.widget.Calendar_Core.prototype._toDate = function(dateFieldArray) {
+SPIP.widget.Calendar_Core.prototype._toDate = function(dateFieldArray) {
 	if (dateFieldArray instanceof Date)
 	{
 		return dateFieldArray;
@@ -1732,7 +1732,7 @@ YAHOO.widget.Calendar_Core.prototype._toDate = function(dateFieldArray) {
 * @return						The boolean that represents the equality of the two arrays
 * @type Boolean
 */
-YAHOO.widget.Calendar_Core.prototype._fieldArraysAreEqual = function(array1, array2) {
+SPIP.widget.Calendar_Core.prototype._fieldArraysAreEqual = function(array1, array2) {
 	var match = false;
 
 	if (array1[0]==array2[0]&&array1[1]==array2[1]&&array1[2]==array2[2])
@@ -1751,7 +1751,7 @@ YAHOO.widget.Calendar_Core.prototype._fieldArraysAreEqual = function(array1, arr
 *								-1 will be returned if the date is not found.
 * @type Integer
 */
-YAHOO.widget.Calendar_Core.prototype._indexOfSelectedFieldArray = function(find) {
+SPIP.widget.Calendar_Core.prototype._indexOfSelectedFieldArray = function(find) {
 	var selected = -1;
 
 	for (var s=0;s<this.selectedDates.length;++s)
@@ -1772,7 +1772,7 @@ YAHOO.widget.Calendar_Core.prototype._indexOfSelectedFieldArray = function(find)
 * @param	{Date}	date	The JavaScript Date object for which to check the OOM status
 * @return	{Boolean}	true if the date is OOM
 */
-YAHOO.widget.Calendar_Core.prototype.isDateOOM = function(date) {
+SPIP.widget.Calendar_Core.prototype.isDateOOM = function(date) {
 	var isOOM = false;
 	if (date.getMonth() != this.pageDate.getMonth()) {
 		isOOM = true;
@@ -1787,7 +1787,7 @@ YAHOO.widget.Calendar_Core.prototype.isDateOOM = function(date) {
 /**
 * Event executed before a date is selected in the calendar widget.
 */
-YAHOO.widget.Calendar_Core.prototype.onBeforeSelect = function() {
+SPIP.widget.Calendar_Core.prototype.onBeforeSelect = function() {
 	if (! this.Options.MULTI_SELECT) {
 		this.clearAllBodyCellStyles(this.Style.CSS_CELL_SELECTED);
 		this.deselectAll();
@@ -1797,37 +1797,37 @@ YAHOO.widget.Calendar_Core.prototype.onBeforeSelect = function() {
 /**
 * Event executed when a date is selected in the calendar widget.
 */
-YAHOO.widget.Calendar_Core.prototype.onSelect = function() { };
+SPIP.widget.Calendar_Core.prototype.onSelect = function() { };
 
 /**
 * Event executed before a date is deselected in the calendar widget.
 */
-YAHOO.widget.Calendar_Core.prototype.onBeforeDeselect = function() { };
+SPIP.widget.Calendar_Core.prototype.onBeforeDeselect = function() { };
 
 /**
 * Event executed when a date is deselected in the calendar widget.
 */
-YAHOO.widget.Calendar_Core.prototype.onDeselect = function() { };
+SPIP.widget.Calendar_Core.prototype.onDeselect = function() { };
 
 /**
 * Event executed when the user navigates to a different calendar page.
 */
-YAHOO.widget.Calendar_Core.prototype.onChangePage = function() { this.render(); };
+SPIP.widget.Calendar_Core.prototype.onChangePage = function() { this.render(); };
 
 /**
 * Event executed when the calendar widget is rendered.
 */
-YAHOO.widget.Calendar_Core.prototype.onRender = function() { };
+SPIP.widget.Calendar_Core.prototype.onRender = function() { };
 
 /**
 * Event executed when the calendar widget is reset to its original state.
 */
-YAHOO.widget.Calendar_Core.prototype.onReset = function() { this.render(); };
+SPIP.widget.Calendar_Core.prototype.onReset = function() { this.render(); };
 
 /**
 * Event executed when the calendar widget is completely cleared to the current month with no selections.
 */
-YAHOO.widget.Calendar_Core.prototype.onClear = function() { this.render(); };
+SPIP.widget.Calendar_Core.prototype.onClear = function() { this.render(); };
 
 /**
 * Validates the calendar widget. This method has no default implementation
@@ -1836,7 +1836,7 @@ YAHOO.widget.Calendar_Core.prototype.onClear = function() { this.render(); };
 * it doesn't.
 * @type Boolean
 */
-YAHOO.widget.Calendar_Core.prototype.validate = function() { return true; };
+SPIP.widget.Calendar_Core.prototype.validate = function() { return true; };
 
 /************* END EVENT HANDLERS *********************************************************/
 
@@ -1851,17 +1851,17 @@ YAHOO.widget.Calendar_Core.prototype.validate = function() { return true; };
 * @return				A date field array representing the string passed to the method
 * @type Array[](Integer[])
 */
-YAHOO.widget.Calendar_Core.prototype._parseDate = function(sDate) {
+SPIP.widget.Calendar_Core.prototype._parseDate = function(sDate) {
 	var aDate = sDate.split(this.Locale.DATE_FIELD_DELIMITER);
 	var rArray;
 
 	if (aDate.length == 2)
 	{
 		rArray = [aDate[this.Locale.MD_MONTH_POSITION-1],aDate[this.Locale.MD_DAY_POSITION-1]];
-		rArray.type = YAHOO.widget.Calendar_Core.MONTH_DAY;
+		rArray.type = SPIP.widget.Calendar_Core.MONTH_DAY;
 	} else {
 		rArray = [aDate[this.Locale.MDY_YEAR_POSITION-1],aDate[this.Locale.MDY_MONTH_POSITION-1],aDate[this.Locale.MDY_DAY_POSITION-1]];
-		rArray.type = YAHOO.widget.Calendar_Core.DATE;
+		rArray.type = SPIP.widget.Calendar_Core.DATE;
 	}
 	return rArray;
 };
@@ -1873,7 +1873,7 @@ YAHOO.widget.Calendar_Core.prototype._parseDate = function(sDate) {
 * @return							An array of date field arrays
 * @type Array[](Integer[])
 */
-YAHOO.widget.Calendar_Core.prototype._parseDates = function(sDates) {
+SPIP.widget.Calendar_Core.prototype._parseDates = function(sDates) {
 	var aReturn = new Array();
 
 	var aDates = sDates.split(this.Locale.DATE_DELIMITER);
@@ -1908,9 +1908,9 @@ YAHOO.widget.Calendar_Core.prototype._parseDates = function(sDates) {
 * @return							An array of date field arrays
 * @type Array[](Integer[])
 */
-YAHOO.widget.Calendar_Core.prototype._parseRange = function(startDate, endDate) {
+SPIP.widget.Calendar_Core.prototype._parseRange = function(startDate, endDate) {
 	var dStart   = new Date(startDate[0],startDate[1]-1,startDate[2]);
-	var dCurrent = YAHOO.widget.DateMath.add(new Date(startDate[0],startDate[1]-1,startDate[2]),YAHOO.widget.DateMath.DAY,1);
+	var dCurrent = SPIP.widget.DateMath.add(new Date(startDate[0],startDate[1]-1,startDate[2]),SPIP.widget.DateMath.DAY,1);
 	var dEnd     = new Date(endDate[0],  endDate[1]-1,  endDate[2]);
 
 	var results = new Array();
@@ -1918,7 +1918,7 @@ YAHOO.widget.Calendar_Core.prototype._parseRange = function(startDate, endDate) 
 	while (dCurrent.getTime() <= dEnd.getTime())
 	{
 		results.push([dCurrent.getFullYear(),dCurrent.getMonth()+1,dCurrent.getDate()]);
-		dCurrent = YAHOO.widget.DateMath.add(dCurrent,YAHOO.widget.DateMath.DAY,1);
+		dCurrent = SPIP.widget.DateMath.add(dCurrent,SPIP.widget.DateMath.DAY,1);
 	}
 	return results;
 };
@@ -1930,7 +1930,7 @@ YAHOO.widget.Calendar_Core.prototype._parseRange = function(startDate, endDate) 
 /**
 * Resets the render stack of the current calendar to its original pre-render value.
 */
-YAHOO.widget.Calendar_Core.prototype.resetRenderers = function() {
+SPIP.widget.Calendar_Core.prototype.resetRenderers = function() {
 	this.renderStack = this._renderStack.concat();
 };
 
@@ -1938,7 +1938,7 @@ YAHOO.widget.Calendar_Core.prototype.resetRenderers = function() {
 * Clears the inner HTML, CSS class and style information from the specified cell.
 * @param	{HTMLTableCellElement}	The cell to clear
 */
-YAHOO.widget.Calendar_Core.prototype.clearElement = function(cell) {
+SPIP.widget.Calendar_Core.prototype.clearElement = function(cell) {
 	cell.innerHTML = "&nbsp;";
 	cell.className="";
 };
@@ -1950,7 +1950,7 @@ YAHOO.widget.Calendar_Core.prototype.clearElement = function(cell) {
 *									include date (12/24/2005), month/day (12/24), and range (12/1/2004-1/1/2005)
 * @param	{Function}	fnRender	The function executed to render cells that match the render rules for this renderer.
 */
-YAHOO.widget.Calendar_Core.prototype.addRenderer = function(sDates, fnRender) {
+SPIP.widget.Calendar_Core.prototype.addRenderer = function(sDates, fnRender) {
 	var aDates = this._parseDates(sDates);
 	for (var i=0;i<aDates.length;++i)
 	{
@@ -1960,13 +1960,13 @@ YAHOO.widget.Calendar_Core.prototype.addRenderer = function(sDates, fnRender) {
 		{
 			if (aDate[0] instanceof Array) // this is a range
 			{
-				this._addRenderer(YAHOO.widget.Calendar_Core.RANGE,aDate,fnRender);
+				this._addRenderer(SPIP.widget.Calendar_Core.RANGE,aDate,fnRender);
 			} else { // this is a month/day combo
-				this._addRenderer(YAHOO.widget.Calendar_Core.MONTH_DAY,aDate,fnRender);
+				this._addRenderer(SPIP.widget.Calendar_Core.MONTH_DAY,aDate,fnRender);
 			}
 		} else if (aDate.length == 3)
 		{
-			this._addRenderer(YAHOO.widget.Calendar_Core.DATE,aDate,fnRender);
+			this._addRenderer(SPIP.widget.Calendar_Core.DATE,aDate,fnRender);
 		}
 	}
 };
@@ -1976,13 +1976,13 @@ YAHOO.widget.Calendar_Core.prototype.addRenderer = function(sDates, fnRender) {
 * This method is called by other methods that set the renderer type prior to the method call.
 * @private
 * @param	{String}	type		The type string that indicates the type of date renderer being added.
-*									Values are YAHOO.widget.Calendar_Core.DATE, YAHOO.widget.Calendar_Core.MONTH_DAY, YAHOO.widget.Calendar_Core.WEEKDAY,
-*									YAHOO.widget.Calendar_Core.RANGE, YAHOO.widget.Calendar_Core.MONTH
+*									Values are SPIP.widget.Calendar_Core.DATE, SPIP.widget.Calendar_Core.MONTH_DAY, SPIP.widget.Calendar_Core.WEEKDAY,
+*									SPIP.widget.Calendar_Core.RANGE, SPIP.widget.Calendar_Core.MONTH
 * @param	{Array}		aDates		An array of dates used to construct the renderer. The format varies based
 *									on the renderer type
 * @param	{Function}	fnRender	The function executed to render cells that match the render rules for this renderer.
 */
-YAHOO.widget.Calendar_Core.prototype._addRenderer = function(type, aDates, fnRender) {
+SPIP.widget.Calendar_Core.prototype._addRenderer = function(type, aDates, fnRender) {
 	var add = [type,aDates,fnRender];
 	this.renderStack.unshift(add);
 
@@ -1995,8 +1995,8 @@ YAHOO.widget.Calendar_Core.prototype._addRenderer = function(type, aDates, fnRen
 * @param	{Integer}	month		The month (1-12) to associate with this renderer
 * @param	{Function}	fnRender	The function executed to render cells that match the render rules for this renderer.
 */
-YAHOO.widget.Calendar_Core.prototype.addMonthRenderer = function(month, fnRender) {
-	this._addRenderer(YAHOO.widget.Calendar_Core.MONTH,[month],fnRender);
+SPIP.widget.Calendar_Core.prototype.addMonthRenderer = function(month, fnRender) {
+	this._addRenderer(SPIP.widget.Calendar_Core.MONTH,[month],fnRender);
 };
 
 /**
@@ -2005,8 +2005,8 @@ YAHOO.widget.Calendar_Core.prototype.addMonthRenderer = function(month, fnRender
 * @param	{Integer}	weekay		The weekday (1-7) to associate with this renderer
 * @param	{Function}	fnRender	The function executed to render cells that match the render rules for this renderer.
 */
-YAHOO.widget.Calendar_Core.prototype.addWeekdayRenderer = function(weekday, fnRender) {
-	this._addRenderer(YAHOO.widget.Calendar_Core.WEEKDAY,[weekday],fnRender);
+SPIP.widget.Calendar_Core.prototype.addWeekdayRenderer = function(weekday, fnRender) {
+	this._addRenderer(SPIP.widget.Calendar_Core.WEEKDAY,[weekday],fnRender);
 };
 /************* END RENDERER METHODS *******************************************************/
 
@@ -2016,7 +2016,7 @@ YAHOO.widget.Calendar_Core.prototype.addWeekdayRenderer = function(weekday, fnRe
 * @param	{HTMLElement}	element		The element to which the CSS class should be applied
 * @param	{String}	style		The CSS class name to add to the referenced element
 */
-YAHOO.widget.Calendar_Core.addCssClass = function(element, style) {
+SPIP.widget.Calendar_Core.addCssClass = function(element, style) {
 	if (element.className.length === 0)
 	{
 		element.className += style;
@@ -2025,7 +2025,7 @@ YAHOO.widget.Calendar_Core.addCssClass = function(element, style) {
 	}
 };
 
-YAHOO.widget.Calendar_Core.prependCssClass = function(element, style) {
+SPIP.widget.Calendar_Core.prependCssClass = function(element, style) {
 	element.className = style + " " + element.className;
 }
 
@@ -2034,7 +2034,7 @@ YAHOO.widget.Calendar_Core.prependCssClass = function(element, style) {
 * @param	{HTMLElement}	element		The element from which the CSS class should be removed
 * @param	{String}	style		The CSS class name to remove from the referenced element
 */
-YAHOO.widget.Calendar_Core.removeCssClass = function(element, style) {
+SPIP.widget.Calendar_Core.removeCssClass = function(element, style) {
 	var aStyles = element.className.split(" ");
 	for (var s=0;s<aStyles.length;++s)
 	{
@@ -2044,7 +2044,7 @@ YAHOO.widget.Calendar_Core.removeCssClass = function(element, style) {
 			break;
 		}
 	}
-	YAHOO.widget.Calendar_Core.setCssClasses(element, aStyles);
+	SPIP.widget.Calendar_Core.setCssClasses(element, aStyles);
 };
 
 /**
@@ -2052,7 +2052,7 @@ YAHOO.widget.Calendar_Core.removeCssClass = function(element, style) {
 * @param	{HTMLElement}	element		The element to set the CSS classes into
 * @param	{String[]}		aStyles		An array of CSS class names
 */
-YAHOO.widget.Calendar_Core.setCssClasses = function(element, aStyles) {
+SPIP.widget.Calendar_Core.setCssClasses = function(element, aStyles) {
 	element.className = "";
 	var className = aStyles.join(" ");
 	element.className = className;
@@ -2062,10 +2062,10 @@ YAHOO.widget.Calendar_Core.setCssClasses = function(element, aStyles) {
 * Removes all styles from all body cells in the current calendar table.
 * @param	{style}		The CSS class name to remove from all calendar body cells
 */
-YAHOO.widget.Calendar_Core.prototype.clearAllBodyCellStyles = function(style) {
+SPIP.widget.Calendar_Core.prototype.clearAllBodyCellStyles = function(style) {
 	for (var c=0;c<this.cells.length;++c)
 	{
-		YAHOO.widget.Calendar_Core.removeCssClass(this.cells[c],style);
+		SPIP.widget.Calendar_Core.removeCssClass(this.cells[c],style);
 	}
 };
 
@@ -2076,7 +2076,7 @@ YAHOO.widget.Calendar_Core.prototype.clearAllBodyCellStyles = function(style) {
 * Sets the calendar's month explicitly.
 * @param {Integer}	month		The numeric month, from 1 (January) to 12 (December)
 */
-YAHOO.widget.Calendar_Core.prototype.setMonth = function(month) {
+SPIP.widget.Calendar_Core.prototype.setMonth = function(month) {
 	this.pageDate.setMonth(month);
 };
 
@@ -2084,7 +2084,7 @@ YAHOO.widget.Calendar_Core.prototype.setMonth = function(month) {
 * Sets the calendar's year explicitly.
 * @param {Integer}	year		The numeric 4-digit year
 */
-YAHOO.widget.Calendar_Core.prototype.setYear = function(year) {
+SPIP.widget.Calendar_Core.prototype.setYear = function(year) {
 	this.pageDate.setFullYear(year);
 };
 
@@ -2093,7 +2093,7 @@ YAHOO.widget.Calendar_Core.prototype.setYear = function(year) {
 * @return	An array of currently selected JavaScript Date objects.
 * @type Date[]
 */
-YAHOO.widget.Calendar_Core.prototype.getSelectedDates = function() {
+SPIP.widget.Calendar_Core.prototype.getSelectedDates = function() {
 	var returnDates = new Array();
 
 	for (var d=0;d<this.selectedDates.length;++d)
@@ -2110,7 +2110,7 @@ YAHOO.widget.Calendar_Core.prototype.getSelectedDates = function() {
 
 /***************** END GETTER/SETTER METHODS *********************************/
 
-YAHOO.widget.Calendar_Core._getBrowser = function()
+SPIP.widget.Calendar_Core._getBrowser = function()
 {
   /**
    * UserAgent
@@ -2132,13 +2132,13 @@ YAHOO.widget.Calendar_Core._getBrowser = function()
 }
 
 
-YAHOO.widget.Cal_Core = YAHOO.widget.Calendar_Core;
+SPIP.widget.Cal_Core = SPIP.widget.Calendar_Core;
 
-YAHOO.namespace("YAHOO.widget");
+SPIP.namespace("SPIP.widget");
 
 /**
 * @class
-* <p>YAHOO.widget.CalendarGroup is a special container class for YAHOO.widget.Calendar_Core. This class facilitates
+* <p>SPIP.widget.CalendarGroup is a special container class for SPIP.widget.Calendar_Core. This class facilitates
 * the ability to have multi-page calendar views that share a single dataset and are
 * dependent on each other.</p>
 *
@@ -2162,7 +2162,7 @@ YAHOO.namespace("YAHOO.widget");
 									Any combination of these can be combined by delimiting the string with
 									commas. Example: "12/24/2005,12/25,1/18/2006-1/21/2006"
 */
-YAHOO.widget.CalendarGroup = function(pageCount, id, containerId, monthyear, selected) {
+SPIP.widget.CalendarGroup = function(pageCount, id, containerId, monthyear, selected) {
 	if (arguments.length > 0)
 	{
 		this.init(pageCount, id, containerId, monthyear, selected);
@@ -2182,7 +2182,7 @@ YAHOO.widget.CalendarGroup = function(pageCount, id, containerId, monthyear, sel
 									Any combination of these can be combined by delimiting the string with
 									commas. Example: "12/24/2005,12/25,1/18/2006-1/21/2006"
 */
-YAHOO.widget.CalendarGroup.prototype.init = function(pageCount, id, containerId, monthyear, selected) {
+SPIP.widget.CalendarGroup.prototype.init = function(pageCount, id, containerId, monthyear, selected) {
 	//var self=this;
 
 	this.id = id;
@@ -2215,13 +2215,13 @@ YAHOO.widget.CalendarGroup.prototype.init = function(pageCount, id, containerId,
 	}
 };
 
-YAHOO.widget.CalendarGroup.prototype.setChildFunction = function(fnName, fn) {
+SPIP.widget.CalendarGroup.prototype.setChildFunction = function(fnName, fn) {
 	for (var p=0;p<this.pageCount;++p) {
 		this.pages[p][fnName] = fn;
 	}
 }
 
-YAHOO.widget.CalendarGroup.prototype.callChildFunction = function(fnName, args) {
+SPIP.widget.CalendarGroup.prototype.callChildFunction = function(fnName, args) {
 	for (var p=0;p<this.pageCount;++p) {
 		var page = this.pages[p];
 		if (page[fnName]) {
@@ -2242,11 +2242,11 @@ YAHOO.widget.CalendarGroup.prototype.callChildFunction = function(fnName, args) 
 									MM/DD/YYYY-MM/DD/YYYY. Month/day combinations are defined using MM/DD.
 									Any combination of these can be combined by delimiting the string with
 									commas. Example: "12/24/2005,12/25,1/18/2006-1/21/2006"
-* @return							The YAHOO.widget.Calendar_Core instance that is constructed
-* @type YAHOO.widget.Calendar_Core
+* @return							The SPIP.widget.Calendar_Core instance that is constructed
+* @type SPIP.widget.Calendar_Core
 */
-YAHOO.widget.CalendarGroup.prototype.constructChild = function(id,containerId,monthyear,selected) {
-	return new YAHOO.widget.Calendar_Core(id,containerId,monthyear,selected);
+SPIP.widget.CalendarGroup.prototype.constructChild = function(id,containerId,monthyear,selected) {
+	return new SPIP.widget.Calendar_Core(id,containerId,monthyear,selected);
 };
 
 
@@ -2255,7 +2255,7 @@ YAHOO.widget.CalendarGroup.prototype.constructChild = function(id,containerId,mo
 * page of the multi-page calendar, and all other months will be iterated appropriately.
 * @param {Integer}	month		The numeric month, from 1 (January) to 12 (December)
 */
-YAHOO.widget.CalendarGroup.prototype.setMonth = function(month) {
+SPIP.widget.CalendarGroup.prototype.setMonth = function(month) {
 	for (var p=0;p<this.pages.length;++p)
 	{
 		var cal = this.pages[p];
@@ -2268,7 +2268,7 @@ YAHOO.widget.CalendarGroup.prototype.setMonth = function(month) {
 * page of the multi-page calendar, and all other months will be iterated appropriately.
 * @param {Integer}	year		The numeric 4-digit year
 */
-YAHOO.widget.CalendarGroup.prototype.setYear = function(year) {
+SPIP.widget.CalendarGroup.prototype.setYear = function(year) {
 	for (var p=0;p<this.pages.length;++p)
 	{
 		var cal = this.pages[p];
@@ -2283,7 +2283,7 @@ YAHOO.widget.CalendarGroup.prototype.setYear = function(year) {
 /**
 * Calls the render function of all child calendars within the group.
 */
-YAHOO.widget.CalendarGroup.prototype.render = function() {
+SPIP.widget.CalendarGroup.prototype.render = function() {
 	for (var p=0;p<this.pages.length;++p)
 	{
 		var cal = this.pages[p];
@@ -2294,7 +2294,7 @@ YAHOO.widget.CalendarGroup.prototype.render = function() {
 /**
 * Calls the select function of all child calendars within the group.
 */
-YAHOO.widget.CalendarGroup.prototype.select = function(date) {
+SPIP.widget.CalendarGroup.prototype.select = function(date) {
 	var ret;
 	for (var p=0;p<this.pages.length;++p)
 	{
@@ -2307,7 +2307,7 @@ YAHOO.widget.CalendarGroup.prototype.select = function(date) {
 /**
 * Calls the selectCell function of all child calendars within the group.
 */
-YAHOO.widget.CalendarGroup.prototype.selectCell = function(cellIndex) {
+SPIP.widget.CalendarGroup.prototype.selectCell = function(cellIndex) {
 	var ret;
 	for (var p=0;p<this.pages.length;++p)
 	{
@@ -2320,7 +2320,7 @@ YAHOO.widget.CalendarGroup.prototype.selectCell = function(cellIndex) {
 /**
 * Calls the deselect function of all child calendars within the group.
 */
-YAHOO.widget.CalendarGroup.prototype.deselect = function(date) {
+SPIP.widget.CalendarGroup.prototype.deselect = function(date) {
 	var ret;
 	for (var p=0;p<this.pages.length;++p)
 	{
@@ -2333,7 +2333,7 @@ YAHOO.widget.CalendarGroup.prototype.deselect = function(date) {
 /**
 * Calls the deselectAll function of all child calendars within the group.
 */
-YAHOO.widget.CalendarGroup.prototype.deselectAll = function() {
+SPIP.widget.CalendarGroup.prototype.deselectAll = function() {
 	var ret;
 	for (var p=0;p<this.pages.length;++p)
 	{
@@ -2346,7 +2346,7 @@ YAHOO.widget.CalendarGroup.prototype.deselectAll = function() {
 /**
 * Calls the deselectAll function of all child calendars within the group.
 */
-YAHOO.widget.CalendarGroup.prototype.deselectCell = function(cellIndex) {
+SPIP.widget.CalendarGroup.prototype.deselectCell = function(cellIndex) {
 	for (var p=0;p<this.pages.length;++p)
 	{
 		var cal = this.pages[p];
@@ -2358,7 +2358,7 @@ YAHOO.widget.CalendarGroup.prototype.deselectCell = function(cellIndex) {
 /**
 * Calls the reset function of all child calendars within the group.
 */
-YAHOO.widget.CalendarGroup.prototype.reset = function() {
+SPIP.widget.CalendarGroup.prototype.reset = function() {
 	for (var p=0;p<this.pages.length;++p)
 	{
 		var cal = this.pages[p];
@@ -2369,7 +2369,7 @@ YAHOO.widget.CalendarGroup.prototype.reset = function() {
 /**
 * Calls the clear function of all child calendars within the group.
 */
-YAHOO.widget.CalendarGroup.prototype.clear = function() {
+SPIP.widget.CalendarGroup.prototype.clear = function() {
 	for (var p=0;p<this.pages.length;++p)
 	{
 		var cal = this.pages[p];
@@ -2380,7 +2380,7 @@ YAHOO.widget.CalendarGroup.prototype.clear = function() {
 /**
 * Calls the nextMonth function of all child calendars within the group.
 */
-YAHOO.widget.CalendarGroup.prototype.nextMonth = function() {
+SPIP.widget.CalendarGroup.prototype.nextMonth = function() {
 	for (var p=0;p<this.pages.length;++p)
 	{
 		var cal = this.pages[p];
@@ -2391,7 +2391,7 @@ YAHOO.widget.CalendarGroup.prototype.nextMonth = function() {
 /**
 * Calls the previousMonth function of all child calendars within the group.
 */
-YAHOO.widget.CalendarGroup.prototype.previousMonth = function() {
+SPIP.widget.CalendarGroup.prototype.previousMonth = function() {
 	for (var p=this.pages.length-1;p>=0;--p)
 	{
 		var cal = this.pages[p];
@@ -2402,7 +2402,7 @@ YAHOO.widget.CalendarGroup.prototype.previousMonth = function() {
 /**
 * Calls the nextYear function of all child calendars within the group.
 */
-YAHOO.widget.CalendarGroup.prototype.nextYear = function() {
+SPIP.widget.CalendarGroup.prototype.nextYear = function() {
 	for (var p=0;p<this.pages.length;++p)
 	{
 		var cal = this.pages[p];
@@ -2413,7 +2413,7 @@ YAHOO.widget.CalendarGroup.prototype.nextYear = function() {
 /**
 * Calls the previousYear function of all child calendars within the group.
 */
-YAHOO.widget.CalendarGroup.prototype.previousYear = function() {
+SPIP.widget.CalendarGroup.prototype.previousYear = function() {
 	for (var p=0;p<this.pages.length;++p)
 	{
 		var cal = this.pages[p];
@@ -2426,11 +2426,11 @@ YAHOO.widget.CalendarGroup.prototype.previousYear = function() {
 * method is called passing in the caller object, the values of all children will be set
 * to the values of the caller. If the argument is ommitted, the values from all children
 * will be combined into one distinct list and set into each child.
-* @param	{YAHOO.widget.Calendar_Core}	caller		The YAHOO.widget.Calendar_Core that is initiating the call to sync().
+* @param	{SPIP.widget.Calendar_Core}	caller		The SPIP.widget.Calendar_Core that is initiating the call to sync().
 * @return								Array of selected dates, in JavaScript Date object form.
 * @type Date[]
 */
-YAHOO.widget.CalendarGroup.prototype.sync = function(caller) {
+SPIP.widget.CalendarGroup.prototype.sync = function(caller) {
 	var calendar;
 
 	if (caller)
@@ -2480,7 +2480,7 @@ YAHOO.widget.CalendarGroup.prototype.sync = function(caller) {
 * @return			An array of currently selected JavaScript Date objects.
 * @type Date[]
 */
-YAHOO.widget.CalendarGroup.prototype.getSelectedDates = function() {
+SPIP.widget.CalendarGroup.prototype.getSelectedDates = function() {
 	var returnDates = new Array();
 
 	for (var d=0;d<this.selectedDates.length;++d)
@@ -2498,7 +2498,7 @@ YAHOO.widget.CalendarGroup.prototype.getSelectedDates = function() {
 /**
 * Calls the addRenderer function of all child calendars within the group.
 */
-YAHOO.widget.CalendarGroup.prototype.addRenderer = function(sDates, fnRender) {
+SPIP.widget.CalendarGroup.prototype.addRenderer = function(sDates, fnRender) {
 	for (var p=0;p<this.pages.length;++p)
 	{
 		var cal = this.pages[p];
@@ -2509,7 +2509,7 @@ YAHOO.widget.CalendarGroup.prototype.addRenderer = function(sDates, fnRender) {
 /**
 * Calls the addMonthRenderer function of all child calendars within the group.
 */
-YAHOO.widget.CalendarGroup.prototype.addMonthRenderer = function(month, fnRender) {
+SPIP.widget.CalendarGroup.prototype.addMonthRenderer = function(month, fnRender) {
 	for (var p=0;p<this.pages.length;++p)
 	{
 		var cal = this.pages[p];
@@ -2520,7 +2520,7 @@ YAHOO.widget.CalendarGroup.prototype.addMonthRenderer = function(month, fnRender
 /**
 * Calls the addWeekdayRenderer function of all child calendars within the group.
 */
-YAHOO.widget.CalendarGroup.prototype.addWeekdayRenderer = function(weekday, fnRender) {
+SPIP.widget.CalendarGroup.prototype.addWeekdayRenderer = function(weekday, fnRender) {
 	for (var p=0;p<this.pages.length;++p)
 	{
 		var cal = this.pages[p];
@@ -2537,7 +2537,7 @@ YAHOO.widget.CalendarGroup.prototype.addWeekdayRenderer = function(weekday, fnRe
 * @param	{String}	eventName	The name of the event to handler to set within all child calendars.
 * @param	{Function}	fn			The function to set into the specified event handler.
 */
-YAHOO.widget.CalendarGroup.prototype.wireEvent = function(eventName, fn) {
+SPIP.widget.CalendarGroup.prototype.wireEvent = function(eventName, fn) {
 	for (var p=0;p<this.pages.length;++p)
 	{
 		var cal = this.pages[p];
@@ -2545,15 +2545,15 @@ YAHOO.widget.CalendarGroup.prototype.wireEvent = function(eventName, fn) {
 	}
 };
 
-YAHOO.widget.CalGrp = YAHOO.widget.CalendarGroup;
+SPIP.widget.CalGrp = SPIP.widget.CalendarGroup;
 
-YAHOO.namespace("YAHOO.widget");
+SPIP.namespace("SPIP.widget");
 
 /**
 * @class
-* Calendar is the default implementation of the YAHOO.widget.Calendar_Core base class.
+* Calendar is the default implementation of the SPIP.widget.Calendar_Core base class.
 * This class is the UED-approved version of the calendar selector widget. For all documentation
-* on the implemented methods listed here, see the documentation for YAHOO.widget.Calendar_Core.
+* on the implemented methods listed here, see the documentation for SPIP.widget.Calendar_Core.
 * @constructor
 * @param {String}	id			The id of the table element that will represent the calendar widget
 * @param {String}	containerId	The id of the container element that will contain the calendar table
@@ -2564,23 +2564,23 @@ YAHOO.namespace("YAHOO.widget");
 								Any combination of these can be combined by delimiting the string with
 								commas. Example: "12/24/2005,12/25,1/18/2006-1/21/2006"
 */
-YAHOO.widget.Calendar = function(id, containerId, monthyear, selected) {
+SPIP.widget.Calendar = function(id, containerId, monthyear, selected) {
 	if (arguments.length > 0)
 	{
 		this.init(id, containerId, monthyear, selected);
 	}
 }
 
-YAHOO.widget.Calendar.prototype = new YAHOO.widget.Calendar_Core();
+SPIP.widget.Calendar.prototype = new SPIP.widget.Calendar_Core();
 
-YAHOO.widget.Calendar.prototype.buildShell = function() {
+SPIP.widget.Calendar.prototype.buildShell = function() {
 	this.border = document.createElement("DIV");
 	this.border.className =  this.Style.CSS_BORDER;
 
 	this.table = document.createElement("TABLE");
 	this.table.cellSpacing = 0;
 
-	YAHOO.widget.Calendar_Core.setCssClasses(this.table, [this.Style.CSS_CALENDAR]);
+	SPIP.widget.Calendar_Core.setCssClasses(this.table, [this.Style.CSS_CALENDAR]);
 
 	this.border.id = this.id;
 
@@ -2589,13 +2589,13 @@ YAHOO.widget.Calendar.prototype.buildShell = function() {
 	this.buildShellFooter();
 };
 
-YAHOO.widget.Calendar.prototype.renderShell = function() {
+SPIP.widget.Calendar.prototype.renderShell = function() {
 	this.border.appendChild(this.table);
 	this.oDomContainer.appendChild(this.border);
 	this.shellRendered = true;
 };
 
-YAHOO.widget.Calendar.prototype.renderHeader = function() {
+SPIP.widget.Calendar.prototype.renderHeader = function() {
 	this.headerCell.innerHTML = "";
 
 	var headerContainer = document.createElement("DIV");
@@ -2622,9 +2622,9 @@ YAHOO.widget.Calendar.prototype.renderHeader = function() {
 	this.headerCell.appendChild(headerContainer);
 };
 
-YAHOO.widget.Cal = YAHOO.widget.Calendar;
+SPIP.widget.Cal = SPIP.widget.Calendar;
 
-YAHOO.namespace("YAHOO.widget");
+SPIP.namespace("SPIP.widget");
 
 /**
 * @class
@@ -2643,21 +2643,21 @@ YAHOO.namespace("YAHOO.widget");
 								Any combination of these can be combined by delimiting the string with
 								commas. Example: "12/24/2005,12/25,1/18/2006-1/21/2006"
 */
-YAHOO.widget.Calendar2up_Cal = function(id, containerId, monthyear, selected) {
+SPIP.widget.Calendar2up_Cal = function(id, containerId, monthyear, selected) {
 	if (arguments.length > 0)
 	{
 		this.init(id, containerId, monthyear, selected);
 	}
 }
 
-YAHOO.widget.Calendar2up_Cal.prototype = new YAHOO.widget.Calendar_Core();
+SPIP.widget.Calendar2up_Cal.prototype = new SPIP.widget.Calendar_Core();
 
 /**
 * Renders the header for each individual calendar in the 2-up view. More
 * specifically, this method handles the placement of left and right arrows for
 * navigating between calendar pages.
 */
-YAHOO.widget.Calendar2up_Cal.prototype.renderHeader = function() {
+SPIP.widget.Calendar2up_Cal.prototype.renderHeader = function() {
 	this.headerCell.innerHTML = "";
 
 	var headerContainer = document.createElement("DIV");
@@ -2666,7 +2666,7 @@ YAHOO.widget.Calendar2up_Cal.prototype.renderHeader = function() {
 	if (this.index == 0) {
 		var linkLeft = document.createElement("A");
 		linkLeft.href = "javascript:void(null)";
-		YAHOO.util.Event.addListener(linkLeft, "click", this.parent.doPreviousMonth, this.parent);
+		SPIP.util.Event.addListener(linkLeft, "click", this.parent.doPreviousMonth, this.parent);
 		var imgLeft = document.createElement("IMG");
 		imgLeft.src = this.Options.NAV_ARROW_LEFT;
 		imgLeft.className = this.Style.CSS_NAV_LEFT;
@@ -2679,7 +2679,7 @@ YAHOO.widget.Calendar2up_Cal.prototype.renderHeader = function() {
 	if (this.index == 1) {
 		var linkRight = document.createElement("A");
 		linkRight.href = "javascript:void(null)";
-		YAHOO.util.Event.addListener(linkRight, "click", this.parent.doNextMonth, this.parent);
+		SPIP.util.Event.addListener(linkRight, "click", this.parent.doNextMonth, this.parent);
 		var imgRight = document.createElement("IMG");
 		imgRight.src = this.Options.NAV_ARROW_RIGHT;
 		imgRight.className = this.Style.CSS_NAV_RIGHT;
@@ -2708,7 +2708,7 @@ YAHOO.widget.Calendar2up_Cal.prototype.renderHeader = function() {
 								Any combination of these can be combined by delimiting the string with
 								commas. Example: "12/24/2005,12/25,1/18/2006-1/21/2006"
 */
-YAHOO.widget.Calendar2up = function(id, containerId, monthyear, selected) {
+SPIP.widget.Calendar2up = function(id, containerId, monthyear, selected) {
 	if (arguments.length > 0)
 	{
 		this.buildWrapper(containerId);
@@ -2716,14 +2716,14 @@ YAHOO.widget.Calendar2up = function(id, containerId, monthyear, selected) {
 	}
 }
 
-YAHOO.widget.Calendar2up.prototype = new YAHOO.widget.CalendarGroup();
+SPIP.widget.Calendar2up.prototype = new SPIP.widget.CalendarGroup();
 
 /**
 * Implementation of CalendarGroup.constructChild that ensures that child calendars of
 * Calendar2up will be of type Calendar2up_Cal.
 */
-YAHOO.widget.Calendar2up.prototype.constructChild = function(id,containerId,monthyear,selected) {
-	var cal = new YAHOO.widget.Calendar2up_Cal(id,containerId,monthyear,selected);
+SPIP.widget.Calendar2up.prototype.constructChild = function(id,containerId,monthyear,selected) {
+	var cal = new SPIP.widget.Calendar2up_Cal(id,containerId,monthyear,selected);
 	return cal;
 };
 
@@ -2731,12 +2731,12 @@ YAHOO.widget.Calendar2up.prototype.constructChild = function(id,containerId,mont
 * Builds the wrapper container for the 2-up calendar.
 * @param {String} containerId	The id of the outer container element.
 */
-YAHOO.widget.Calendar2up.prototype.buildWrapper = function(containerId) {
+SPIP.widget.Calendar2up.prototype.buildWrapper = function(containerId) {
 	var outerContainer = document.getElementById(containerId);
 
 	outerContainer.className = "calcontainer";
 	outerContainer.innerHTML="";
-	if (YAHOO.widget.Calendar_Core._getBrowser() == "ie") {
+	if (SPIP.widget.Calendar_Core._getBrowser() == "ie") {
 		outerContainer.innerHTML="<iframe src='about:blank' scrolling='no' frameborder='0' style='position:absolute;left:0px;top:0px;z-index:0;' class='calbordered'></iframe>";
 	}
 
@@ -2768,16 +2768,16 @@ YAHOO.widget.Calendar2up.prototype.buildWrapper = function(containerId) {
 /**
 * Renders the 2-up calendar.
 */
-YAHOO.widget.Calendar2up.prototype.render = function() {
+SPIP.widget.Calendar2up.prototype.render = function() {
 	this.renderHeader();
-	YAHOO.widget.CalendarGroup.prototype.render.call(this);
+	SPIP.widget.CalendarGroup.prototype.render.call(this);
 	this.renderFooter();
 };
 
 /**
 * Renders the header located at the top of the container for the 2-up calendar.
 */
-YAHOO.widget.Calendar2up.prototype.renderHeader = function() {
+SPIP.widget.Calendar2up.prototype.renderHeader = function() {
 	if (! this.title) {
 		this.title = "";
 	}
@@ -2797,7 +2797,7 @@ YAHOO.widget.Calendar2up.prototype.renderHeader = function() {
 	{
 		var linkClose = document.createElement("A");
 		linkClose.href = "javascript:void(null)";
-		YAHOO.util.Event.addListener(linkClose, "click", this.hide, this);
+		SPIP.util.Event.addListener(linkClose, "click", this.hide, this);
 
 		var imgClose = document.createElement("IMG");
 		imgClose.src = this.pages[0].Options.IMG_CLOSE;
@@ -2816,7 +2816,7 @@ YAHOO.widget.Calendar2up.prototype.renderHeader = function() {
 /**
 * Hides the 2-up calendar's outer container from view.
 */
-YAHOO.widget.Calendar2up.prototype.hide = function(e, cal) {
+SPIP.widget.Calendar2up.prototype.hide = function(e, cal) {
 	if (! cal)
 	{
 		cal = this;
@@ -2828,6 +2828,6 @@ YAHOO.widget.Calendar2up.prototype.hide = function(e, cal) {
 * Renders a footer for the 2-up calendar container. By default, this method is
 * unimplemented.
 */
-YAHOO.widget.Calendar2up.prototype.renderFooter = function() {}
+SPIP.widget.Calendar2up.prototype.renderFooter = function() {}
 
-YAHOO.widget.Cal2up = YAHOO.widget.Calendar2up;
+SPIP.widget.Cal2up = SPIP.widget.Calendar2up;

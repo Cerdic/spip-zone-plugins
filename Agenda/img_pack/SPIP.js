@@ -4,35 +4,35 @@ version 0.9.0
 */
 
 /**
- * @class The Yahoo global namespace
+ * @class The Spip global namespace
  */
-var YAHOO = function() {
+var SPIP = function() {
 
     return {
 
         /**
-         * Yahoo presentation platform utils namespace
+         * Spip presentation platform utils namespace
          */
         util: {},
 
         /**
-         * Yahoo presentation platform widgets namespace
+         * Spip presentation platform widgets namespace
          */
         widget: {},
 
         /**
-         * Yahoo presentation platform examples namespace
+         * Spip presentation platform examples namespace
          */
         example: {},
 
         /**
          * Returns the namespace specified and creates it if it doesn't exist
          *
-         * YAHOO.namespace("property.package");
-         * YAHOO.namespace("YAHOO.property.package");
+         * SPIP.namespace("property.package");
+         * SPIP.namespace("SPIP.property.package");
          *
-         * Either of the above would create YAHOO.property, then
-         * YAHOO.property.package
+         * Either of the above would create SPIP.property, then
+         * SPIP.property.package
          *
          * @param  {String} sNameSpace String representation of the desired
          *                             namespace
@@ -46,10 +46,10 @@ var YAHOO = function() {
 
             var levels = sNameSpace.split(".");
 
-            var currentNS = YAHOO;
+            var currentNS = SPIP;
 
-            // YAHOO is implied, so it is ignored if it is included
-            for (var i=(levels[0] == "YAHOO") ? 1 : 0; i<levels.length; ++i) {
+            // SPIP is implied, so it is ignored if it is included
+            for (var i=(levels[0] == "SPIP") ? 1 : 0; i<levels.length; ++i) {
                 currentNS[levels[i]] = currentNS[levels[i]] || {};
                 currentNS = currentNS[levels[i]];
             }
@@ -61,8 +61,8 @@ var YAHOO = function() {
 
 } ();
 
-// Yahoo presentation platform packages.  Hard-coding them into the object
+// Spip presentation platform packages.  Hard-coding them into the object
 // uses fewer chars than the namespace function does
-// YAHOO.namespace("util");
-// YAHOO.namespace("widget");
-// YAHOO.namespace("example");
+// SPIP.namespace("util");
+// SPIP.namespace("widget");
+// SPIP.namespace("example");

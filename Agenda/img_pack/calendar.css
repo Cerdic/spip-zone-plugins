@@ -11,12 +11,12 @@
 	padding:5px;
 	background-color:#F7F9FB;
 	border:1px solid #7B9EBD;
-width:26.5em;
-height:14em;
+width:24.5em;
+height:13em;
 }
 
 .calbordered .title {
-	font:100% Arial,Helvetica,sans-serif;
+	font:90% Arial,Helvetica,sans-serif;
 	color:#000;
 	font-weight:bold;
 	margin-bottom:5px;
@@ -36,13 +36,13 @@ height:14em;
 	/*float:left;*/
 	position:absolute;
 left:0.5em;
-width:13em;
+width:12.5em;
 }
 .cal2up2 {
 	/*float:left;*/
 	position:absolute;
-left:14em;
-width:13em;
+left:12.5em;
+width:12.5em;
 }
 
 .calnavleft {
@@ -64,7 +64,7 @@ width:13em;
 /* Calendar element styles */
 
 .calendar {
-	font:100% Arial,Helvetica,sans-serif;
+	font:90% Arial,Helvetica,sans-serif;
 	text-align:center;
 	border-spacing:0;
 }
@@ -74,6 +74,7 @@ width:13em;
 	height:1em;
 	border:1px solid #E0E0E0;
 	background-color:#FFF;
+text-align:center;
 }
 
 .calcell a {
@@ -96,6 +97,7 @@ width:13em;
 	color:#003DB8;
 	background-color:#FFF19F;
 	border:1px solid #FF9900;
+font-weight:bold;
 }
 
 .calcell:hover, .calcell.calcellhover {
