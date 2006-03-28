@@ -1,0 +1,17 @@
+<BOUCLE_a(ARTICLES){tout}{0,2}>
+	<br><br>article #ID_ARTICLE
+	<br>ID_ARTICLE > 1 ?
+    <BOUCLE_if1(IF){condition #ID_ARTICLE > 1}>OUI</BOUCLE_if1>NON<//B_if1>
+	<br>ID_ARTICLE = 2 ?
+	<BOUCLE_if2(IF){condition #ID_ARTICLE == 2}>oui</BOUCLE_if2>non<//B_if2>
+</BOUCLE_a>
+
+<br><br>nom_site = 'Mon site SPIP' ?
+<br>en filtre : [(#META{nom_site}|=={'Mon site SPIP'}|?{oui,non})]
+
+<br>en condition :
+<BOUCLE_if3(IF){condition (#META{nom_site}|=={Mon site SPIP})}>
+si oui
+</BOUCLE_if3>
+si non
+<//B_if3>

@@ -1,0 +1,39 @@
+<B_t>
+le tableau 'tables_principales' :
+<UL>
+<BOUCLE_t(TABLEAU){var=tables_principales}>
+	<LI> #CLE => #VALEUR
+	<B_tt>
+	<UL>
+	<BOUCLE_tt(TABLEAU){valeur}>
+		<LI> #CLE => #VALEUR
+		<B_ttt>
+		<UL>
+		<BOUCLE_ttt(TABLEAU){valeur}>
+			<LI> #CLE => #VALEUR
+		</BOUCLE_ttt>
+		</UL>
+		</B_ttt>
+	</BOUCLE_tt>
+	</UL>
+	</B_tt>
+</BOUCLE_t>
+</UL>
+</B_t>
+
+<br><br>le tableau 'toto' :
+<BOUCLE_t2(TABLEAU){var=toto}>
+oui
+</BOUCLE_t2>
+non
+<//B_t2>
+
+<br><br>l'entrée tables_principales['spip_tableau']['field'] :
+<BOUCLE_t3(TABLEAU){var=tables_principales}{cle=spip_tableau}{cle=field}>
+<br>- #CLE => #VALEUR
+</BOUCLE_t3>
+
+<br><br>le tableau retournée parla fonction 'toto' :
+<BOUCLE_t4(TABLEAU){fonction=toto()}>
+<br>- #CLE => #VALEUR
+</BOUCLE_t4>
