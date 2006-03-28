@@ -176,7 +176,7 @@ function affiche_evenements_agenda($flag_editable){
 			//if ($type!='mois')
 			//	Agenda_memo_evt_full($row['date_debut'], $row['date_debut'], Agenda_rendu_boite($titre,$descriptif,$lieu), "", "", $url, $categorie);
 			//else
-				Agenda_memo_evt_full($row['date_debut'], $row['date_debut'], $titre, $descriptif, $lieu, $url, $categorie);
+				Agenda_memo_evt_full($row['date_debut'], $row['date_fin'], $titre, $descriptif, $lieu, $url, $categorie);
 		}
 		$visu_evenements[$row['id_evenement']]=1;
 	}
