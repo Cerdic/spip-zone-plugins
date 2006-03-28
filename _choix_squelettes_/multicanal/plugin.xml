@@ -1,0 +1,20 @@
+<plugin>
+    <nom>MultiCanal</nom>
+    <auteur>(c)Christian Lefebvre, Atos Worldline, 2006</auteur>
+    <version>1.0</version>
+    <etat>dev</etat>
+    <description>choix des squelettes selon le user-agent afin de gerer
+l'acces par differents canaux (wap, imode ...) ou simplement selon
+le browser (texte only ou pas par exemple)
+
+- si on precise &LOOK=toto, on va chercher les squelettes dans
+squelettes/toto et on fixe un cookie "LOOK" pour garder ce look
+aux hits suivants
+- sinon, on regarde si le cookie existe
+- sinon, on teste le user-agent pour fixer un "toto"
+
+a faire : gerer une liste de user-agent/look
+    </description>
+    <options>multicanal.php</options>
+    <prefix>multicanal</prefix>
+</plugin>
