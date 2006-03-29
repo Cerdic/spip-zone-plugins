@@ -49,12 +49,11 @@ function exec_affiche_articles_edit($row, $lier_trad, $new, $champs_article) {
 	debut_droite();
 	debut_cadre_formulaire();
 
-?>
-<script language="javascript" type="text/javascript"
-	src="../plugins/tinymce/js/tiny_mce.js"></script>
+echo '<script language="javascript" type="text/javascript"
+	src="'.find_in_path('js/tiny_mce.js').'"></script>
 <script language="javascript" type="text/javascript">
 function beforeSaveCallBack(element_id, html, body) {
-	return '<!-- TINY_MCE -->'+html;
+	return "<!-- TINY_MCE -->"+html;
 }
 
 tinyMCE.init({
@@ -82,7 +81,7 @@ tinyMCE.init({
 ????? OU PLACER UNE OPTION tinyMCE / textarea ???
 -->
 
-<?php
+';
 
 	$texte= propre($texte);
 	$chapo= propre($chapo);
