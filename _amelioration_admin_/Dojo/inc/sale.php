@@ -14,13 +14,16 @@
 			",<(h[1-3])( [^>]*)?".">(.+)</\\1>,Uims" => "\r{{{ \\3 }}}\r", //Intertitre
 
 			//Liens, ancres & notes
-			",<a[ \t\n\r][^<>]*href=[^<>]*(http[^<>'\"]*)[^<>]*>(.*?)<\/a>,Uims" => "[\\2->\\1]", //Lien externe
+			",<a[ \t\n\r][^<>]*href=[^<>]*(http[^<>'\"]*?)[^<>]*>(.*?)<\/a>,Uims" => "[\\2->\\1]", //Lien externe
 
 			//Paragraphes
 			",<(p)( [^>]*)?".">(.+)</\\1>,Uims" => "\n\n\\3", //Paragr.
 			",<br( [^>]*)?".">,Uims" => "\n_ ", //Saut de ligne
 			",<hr( [^>]*)?".">,Uims" => "\r----\r", //Saut de page
 			",<(pre)( [^>]*)?".">(.+)</\\1>,Uims" => "<poesie>\n\\3\n</poesie>", //Poesie
+			
+			//typo
+			",&nbsp;:,i" => " :", 
 
 			//Images & Documents
 		);
@@ -80,13 +83,22 @@ function correspondances_a_bas_le_html() {
 	  $niveau = 0;
 	  $prefixe= "-$char$char$char$char$char$char$char$char$char$char";
 	  $texte = $textMatches [0];
-	  for ($i = 1; $i < count ($textMatches); $i ++) {
-	  	if (strtolower($tagMatches [$i-1][0])=="<$tag>") $niveau++;
-	  	if (strtolower($tagMatches [$i-1][0])=="</$tag>") $niveau--;
-	  	$pre = substr($prefixe,0,$niveau+1);
-	  	if ($niveau>0)
-	  		$textMatches [$i]=preg_replace(",\s*<li[^>]*>(.*)</li>\s*?,Uims","$pre \\1\r",$textMatches [$i]);
-			$texte .= $textMatches [$i];
+	  if (count($textMatches)>1){
+		  for ($i = 1; $i < count ($textMatches)-1; $i ++) {
+		  	if (preg_match(",<$tag"."[^>]*>,is",$tagMatches [$i-1][0])) $niveau++;
+		  	else if (strtolower($tagMatches [$i-1][0])=="</$tag>") $niveau--;
+		  	$pre = substr($prefixe,0,$niveau+1);
+		  	$lignes = preg_split(",<li[^>]*>,i",$textMatches [$i]);
+		  	foreach ($lignes as $key=>$item){
+		  		$lignes[$key] = trim(str_replace("</li>","",$item));
+		  		if (strlen($lignes[$key]))
+		  			$lignes[$key]="$pre " . $lignes[$key];
+		  		else 
+		  			unset($lignes[$key]);
+		  	}
+				$texte .= implode("\r",$lignes)."\r";
+		  }
+		  $texte .= end($textMatches);
 	  }
 	  return $texte;
 	}
@@ -112,9 +124,7 @@ function correspondances_a_bas_le_html() {
 
 		// POST TRAITEMENT
 		$contenu = str_replace("\r", "\n", $contenu);
-		
-		
-		
+		$contenu = preg_replace(",\n(?=\n\n),","",$contenu);
 		
 		return $contenu;
 	}
