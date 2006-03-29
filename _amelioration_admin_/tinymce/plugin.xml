@@ -1,0 +1,10 @@
+<plugin>
+	<nom>Edition article via tinyMCE</nom>
+	<auteur>(c)Christian Lefebvre, Atos Worldline, 2006</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>test d'edition d'article avec tinyMCE
+	</description>
+
+	<prefix>tinyMCE</prefix>
+</plugin>
