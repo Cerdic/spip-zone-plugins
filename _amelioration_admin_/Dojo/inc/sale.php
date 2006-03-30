@@ -5,6 +5,49 @@
 		(c)2005 James <klike@free.fr>
 		d'après le bouton memo et le script spip_unparse
 	*/
+	function tag2attributs($innerTag){
+	  $pattern1 = "([a-zA-Z_]*)\s*=\s*[']([^']*)[']";
+	  $pattern2 = '([a-zA-Z_]*)\s*=\s*["]([^"]*)["]';
+	  preg_match_all (",$pattern1,Uims", $innerTag, $attr1, PREG_SET_ORDER);
+	  preg_match_all (",$pattern2,Uims", $innerTag, $attr2, PREG_SET_ORDER);
+	  $attributs = array();
+	  foreach ($attr1 as $key => $value) {
+	  	$attributs[$value[1]]=$value[2];
+	  }
+	  foreach ($attr2 as $key => $value) {
+	  	$attributs[$value[1]]=$value[2];
+	  }
+	  ksort($attributs);
+	  return $attributs;
+	}
+	
+	function decode_entites($texte){
+		static $trans;
+		if (!isset($trans)) {
+			$trans = get_html_translation_table(HTML_ENTITIES, $quote_style);
+			$trans = array_flip($trans);
+			$trans["&euro;"]='€';
+			$trans["&oelig;"]='œ';
+			$trans["&OElig;"]='Œ';
+			foreach ($trans as $key => $value){
+			   $trans['&#'.ord($value).';'] = $value;
+			}
+			// ajout du caractere apostrophe SPIP : ’
+			$trans['&#8217;'] = "’";
+			$trans['&#039;'] = "'";
+			$trans['&#171;'] = "«";
+			$trans['&#187;'] = "»";
+			$trans['&#176;'] = "°";
+			// des caracteres non supportes
+			$trans["&nbsp;&euro;"]=' €';
+	  	if ($GLOBALS['meta']['charset'] == 'utf-8'){
+				foreach ($trans as $key=>$value)
+					$transutf[$key]=utf8_encode($value);
+				$trans = $transutf;
+			}
+		}
+		return strtr($texte, $trans);
+	}
 
 	function correspondances_standards() {
 		return array(
@@ -14,68 +57,71 @@
 			",<(h[1-3])( [^>]*)?".">(.+)</\\1>,Uims" => "\r{{{ \\3 }}}\r", //Intertitre
 
 			//Liens, ancres & notes
-			",<a[ \t\n\r][^<>]*href=[^<>]*(http[^<>'\"]*?)[^<>]*>(.*?)<\/a>,Uims" => "[\\2->\\1]", //Lien externe
+			",<a[\s][^<>]*href=\s*['\"]([^<>'\"]*)['\"][^<>]*>\s*?(.*)\s*<\/a>,Uims" => "[\\2->\\1]", //Lien externe
 
 			//Paragraphes
 			",<(p)( [^>]*)?".">(.+)</\\1>,Uims" => "\\3\r\r", //Paragr.
 			",(<no p[^>]*>)(\s*)(<\/no p>),Uims" => "", // spiperie
 			",(<\/no p>)(.*)(<no p[^>]*>),Uims" => "\\2", // spiperie
-			",<br( [^>]*)?".">,Uims" => "\n_ ", //Saut de ligne
+			",\s*?<br( [^>]*)?".">\r-&nbsp;,Ui" => "\r- ", 
+			",\s*?<br( [^>]*)?".">[[[:blank:]]*?,Ui" => "\r_ ", //Saut de ligne style suivi par du texte
 			",<hr( [^>]*)?".">,Uims" => "\r----\r", //Saut de page
 			",<(pre)( [^>]*)?".">(.+)</\\1>,Uims" => "<poesie>\n\\3\n</poesie>", //Poesie
+			",<(blockquote)( [^>]*)?".">\s*?(.+)\s*?</\\1>,Uims" => "<quote>\n\\3\n</quote>", //quote
 			
 			//typo
 			",&nbsp;:,i" => " :", 
-
+			",\r-&nbsp;,i" => "\r- ", 
 			//Images & Documents
 		);
 	}
 
-function correspondances_a_bas_le_html() {
-
-	return array(
+	function correspondances_a_bas_le_html() {
 	
-	// on ne veut pas des heads / html / body 
-	",<head>.*<\/head>,Uims" => "",
-	",<html>,Uims" => "",
-	",<\/html>,Uims" => "",
-	",<body.*>,Uims" => "",
-	",<\/body>,Uims" => "",
-
-	// on ne veux pas des tables
-	",<table.*>,Uims" => "",
-	",<\/table.*>,Uims" => "",
-	",<tr.*>,Uims" => "",
-	",<\/tr>,Uims" => "",
-	",<td.*>,Uims" => "",
-	",<\/td>,Uims" => "",
-
-
-	// on ne veux pas des div
-	",<div.*>,Uims" => "",
-	",<\/div.*>,Uims" => "",
+		return array(
+		
+		// on ne veut pas des heads / html / body 
+		",<head>.*<\/head>,Uims" => "",
+		",<html>,Uims" => "",
+		",<\/html>,Uims" => "",
+		",<body.*>,Uims" => "",
+		",<\/body>,Uims" => "",
 	
-	// divers et variés 
-	",<csobj.*>,Uims" => "",
-	",<\/csobj>,Uims" => "",
-	",<csscriptdict.*>,Uims" => "",
-	",<\/csscriptdict>,Uims" => "",
-	",<spacer.*>,Uims" => "",
+		// on ne veux pas des tables
+		",<table.*>,Uims" => "",
+		",<\/table.*>,Uims" => "",
+		",<tr.*>,Uims" => "",
+		",<\/tr>,Uims" => "",
+		",<td.*>,Uims" => "",
+		",<\/td>,Uims" => "",
 	
-	// javascript sur les liens 
-	",target=\".*\",Uims" => "",
-	",onmouseover=\".*\",Uims" => "",
-	",onmouseout=\".*\",Uims" => "",
-	",onclick=\".*\",Uims" => "",
 	
-
-	// c est pas du html mais je le met ici quand meme
-	",\t,Uims" => "",
+		// on ne veux pas des div
+		",<div.*>,Uims" => "",
+		",<\/div.*>,Uims" => "",
+		
+		// divers et variés 
+		",<csobj.*>,Uims" => "",
+		",<\/csobj>,Uims" => "",
+		",<csscriptdict.*>,Uims" => "",
+		",<\/csscriptdict>,Uims" => "",
+		",<spacer.*>,Uims" => "",
+		
+		// javascript sur les liens 
+		",target=\".*\",Uims" => "",
+		",onmouseover=\".*\",Uims" => "",
+		",onmouseout=\".*\",Uims" => "",
+		",onclick=\".*\",Uims" => "",
+		
 	
-
-		);
-}
-
+		// c est pas du html mais je le met ici quand meme
+		",\t,Uims" => "",
+		
+	
+			);
+	}
+	
+	// les listes numerotees ou non ---------------------------------------------------------------
 	function extraire_listes($texte,$tag,$char){
 	  $pattern = "(<$tag"."[^>]*>|</$tag>)";
 	
@@ -105,6 +151,7 @@ function correspondances_a_bas_le_html() {
 	  return $texte;
 	}
 	
+	// les tableaux standards ou personalises -----------------------------------------------------
 	function recompose_tableau($texte){
 		$table_class=array('spip'=>"|",'ville'=>"£");
 		$sep = $table_class['spip'];
@@ -151,6 +198,80 @@ function correspondances_a_bas_le_html() {
 		$texte = implode ("", $textMatches);
 		return $texte;
 	}
+	
+	// les balises img vers les <imgxx> (ou <docxx> ou <embxx>) -----------------------------------------------
+	function retrouve_document($type,$fulltag,$innerTag,$shorttag){
+		static $puce=false;
+		static $puce_attr=false;
+		if (!$puce){
+			$puce = definir_puce();
+			$puce_attr = tag2attributs($puce);
+		}
+		$attributs = tag2attributs($innerTag);
+		// est-ce la puce ?
+		$test = array_diff_assoc($puce_attr,$attributs);
+		if (count($test)==0 && count($puce_attr)==count($attributs))
+			return "\r-";
+		// sinon recherche dans spip_documents
+		$src = "";
+		if ($type=='img' && isset($attributs['src'])) // balise img
+			$src = $attributs['src'];
+		else if ($type=='object' && isset($attributs['data'])) // balise object
+			$src = $attributs['data'];
+
+		if (strlen($src)){
+			// si le chemin fait reference a IMG, le ramener a la racine
+			if (substr($src,0,strlen(_DIR_IMG))==_DIR_IMG)
+				$src = str_replace(_DIR_RACINE,"",$src);
+			$src = addslashes($src); // soyons prudent tout de meme ...
+			$query = "SELECT id_document FROM spip_documents WHERE fichier='$src'";
+			$res = spip_query($query);
+			if ($row=spip_fetch_array($res)){
+				$id_document = $row['id_document'];
+				$align="";
+				if (isset($attributs['class'])){
+		  		preg_match_all (",spip_documents_([a-zA-Z_]*),ims", $attributs['class'], $classMatches, PREG_SET_ORDER);
+		  		foreach($classMatches as $value)
+		  			$align.="|".$value[1];
+				}
+				$fulltag = "<$shorttag$id_document$align>";
+				return $fulltag;
+			}
+		}
+		
+		return $fulltag;
+	}
+	function extraire_images($texte){
+		static $liste_tests=array(
+			',<(img)\s([^<>]*)>,Uims'=>'img', // image
+			',<(object)\s([^<>]*)>.*</object>,Uims'=>'emb' // object
+			);
+		foreach($liste_tests as $pattern=>$shortcut){
+		  preg_match_all ($pattern, $texte, $tagMatches, PREG_SET_ORDER);
+		  $textMatches = preg_split ($pattern, $texte);
+	
+		  foreach ($tagMatches as $key => $value) {
+				$tagMatches [$key][0] = retrouve_document ($tagMatches[$key][1],$tagMatches[$key][0],$tagMatches[$key][2],$shortcut);
+		  }
+			for ($i = 0; $i < count ($textMatches); $i ++) {
+				$textMatches [$i] = $textMatches [$i] . $tagMatches [$i] [0];
+			}
+			$texte = implode ("", $textMatches);
+		}
+		// reconnaitre les |center sur img
+		$texte = preg_replace(",<div\s[^>]*class\s*=\s*['\"][^'\"]*spip_documents_([a-zA-Z_]*?)[^'\"]*['\"][^>]*>\s*<(img)([0-9]*)(|[^>]*)?>\s*</div>,Uims","<\\2\\3\\4|\\1>",$texte);
+		// reconnaitre les |center sur doc qui ont ete detectees comme des img
+		$texte = preg_replace(",<div\s[^>]*class\s*=\s*['\"][^'\"]*spip_documents_([a-zA-Z_]*?)[^'\"]*['\"][^>]*>\s*<(img)([0-9]*)(|[^>]*)?>\s*<div[^>]*class='spip_doc_titre'[^>]*>.*</div>\s*<div[^>]*class='spip_doc_descriptif'[^>]*>.*</div>\s*</div>,Uims","<doc\\3\\4|\\1>",$texte);
+		// reconnaitre les |center sur emb
+		$texte = preg_replace(",<div\s[^>]*class\s*=\s*['\"][^'\"]*spip_documents_([a-zA-Z_]*?)[^'\"]*['\"][^>]*>\s*<(emb)([0-9]*)(|[^>]*)?>\s*<div[^>]*class='spip_doc_titre'[^>]*>.*</div>\s*<div[^>]*class='spip_doc_descriptif'[^>]*>.*</div>\s*</div>,Uims","<\\2\\3\\4|\\1>",$texte);
+
+		// object
+		
+		
+		return $texte;
+	}
+	
+	
 
 	function spip_avant_sale($contenu) {
 		if(function_exists('avant_sale'))
@@ -164,6 +285,7 @@ function correspondances_a_bas_le_html() {
 		$contenu = preg_replace("/<!--.*-->/Uims", "", $contenu);
 
 		$contenu = preg_replace("/<(script|style)\b.+?<\/\\1>/i", "", $contenu);
+		
 		return $contenu;
 	}
 
@@ -174,6 +296,10 @@ function correspondances_a_bas_le_html() {
 		// POST TRAITEMENT
 		$contenu = str_replace("\r", "\n", $contenu);
 		$contenu = preg_replace(",\n(?=\n\n),","",$contenu);
+
+		// virer les entites a la fin seulement
+		// &nbsp; est utilise pour reperer des trucs genre "- " en debut de ligne ...
+		$contenu = decode_entites($contenu);
 		
 		return $contenu;
 	}
@@ -188,18 +314,24 @@ function correspondances_a_bas_le_html() {
 		if(empty($correspondances))
 			$correspondances = correspondances_standards();
 
+		$contenu_propre = extraire_images($contenu_propre);
 		foreach($correspondances as $motif => $remplacement)
 			$contenu_propre = preg_replace($motif, $remplacement, $contenu_propre);
 			
 		$contenu_propre = extraire_listes($contenu_propre,"ul","*");
 		$contenu_propre = extraire_listes($contenu_propre,"ol","#");
 		$contenu_propre = extraire_tableaux($contenu_propre);
+		
+		//reconnaitre les url d'articles, rubriques ...
+		$url_look = url_de_base()."spip.php";
+		$contenu_propre = preg_replace(",\[(.*)->\s*$url_look"."[^\]]*id_((art)icle|(rub)rique)=([0-9]*?)[^\]]*],Uims","[\\1->\\4\\5]",$contenu_propre);
 
 		//Post Traitement
 		$contenu_propre = spip_apres_sale($contenu_propre);
 
-		foreach(correspondances_a_bas_le_html() as $motif => $remplacement)
-			$contenu_propre = preg_replace($motif, $remplacement, $contenu_propre);
+		// a priori on garde ce qui est pas analysé
+		//foreach(correspondances_a_bas_le_html() as $motif => $remplacement)
+		//	$contenu_propre = preg_replace($motif, $remplacement, $contenu_propre);
 
 		return $contenu_propre;
 	}
