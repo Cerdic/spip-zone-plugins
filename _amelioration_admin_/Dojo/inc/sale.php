@@ -17,7 +17,9 @@
 			",<a[ \t\n\r][^<>]*href=[^<>]*(http[^<>'\"]*?)[^<>]*>(.*?)<\/a>,Uims" => "[\\2->\\1]", //Lien externe
 
 			//Paragraphes
-			",<(p)( [^>]*)?".">(.+)</\\1>,Uims" => "\n\n\\3", //Paragr.
+			",<(p)( [^>]*)?".">(.+)</\\1>,Uims" => "\\3\r\r", //Paragr.
+			",(<no p[^>]*>)(\s*)(<\/no p>),Uims" => "", // spiperie
+			",(<\/no p>)(.*)(<no p[^>]*>),Uims" => "\\2", // spiperie
 			",<br( [^>]*)?".">,Uims" => "\n_ ", //Saut de ligne
 			",<hr( [^>]*)?".">,Uims" => "\r----\r", //Saut de page
 			",<(pre)( [^>]*)?".">(.+)</\\1>,Uims" => "<poesie>\n\\3\n</poesie>", //Poesie
@@ -102,6 +104,53 @@ function correspondances_a_bas_le_html() {
 	  }
 	  return $texte;
 	}
+	
+	function recompose_tableau($texte){
+		$table_class=array('spip'=>"|",'ville'=>"£");
+		$sep = $table_class['spip'];
+		// detecter la classe
+		$class = preg_replace(",.*<table[^>]*class=['\"]([^'\"]*)['\"][^>]*>.*?,Uims","\\1",$texte);
+		if (isset($table_class[$class]))
+			$sep = $table_class[$class];
+		
+		
+		// d'abord transformer tous les | en leur entite pour pas se tromper
+		$texte = str_replace($sep,"&#".ord($sep).";",$texte);
+		
+		// les lignes
+		$texte = preg_replace(",<tr[^>]*>\s*?(.*)\s*</tr>,Uims","$sep\\1$sep\r",$texte);
+		
+		// les colonnes
+		$texte = preg_replace(",<(td|th)(\s[^>]*)?>(.*)</\\1>,Uims","\\3$sep",$texte);
+		// les doubles pipes induits en fin de ligne
+		$texte = str_replace("$sep$sep\r","$sep\r",$texte);
+		
+		// le thead
+		$texte = preg_replace(",<thead[^>]*>\s*?(.*)\s*</thead>,Uims","$sep\\1$sep\r",$texte);
+		// le tbody
+		$texte = preg_replace(",<tbody[^>]*>\s*?(.*)\s*</tbody>,Uims","\\1",$texte);
+		// le table
+		$texte = preg_replace(",<table[^>]*>\s*?(.*)\s*</table>,Uims","\\1\r\r",$texte);
+		// les lignes vides inter |
+		$texte = preg_replace(",\\$sep\r[\s\r]*\\$sep,Uims","$sep\r$sep",$texte);
+		
+		return $texte;
+	}	
+	function extraire_tableaux($texte){
+		// tableaux
+	  $pattern = '<table[^>]*>.*</table>';
+	  preg_match_all (",$pattern,Uims", $texte, $tableMatches, PREG_SET_ORDER);
+	  $textMatches = preg_split (",$pattern,Uims", $texte);
+	
+	  foreach ($tableMatches as $key => $value) {
+			$tableMatches [$key][0] = recompose_tableau ($tableMatches[$key][0]);
+	  }
+		for ($i = 0; $i < count ($textMatches); $i ++) {
+			$textMatches [$i] = $textMatches [$i] . $tableMatches [$i] [0];
+		}
+		$texte = implode ("", $textMatches);
+		return $texte;
+	}
 
 	function spip_avant_sale($contenu) {
 		if(function_exists('avant_sale'))
@@ -144,6 +193,7 @@ function correspondances_a_bas_le_html() {
 			
 		$contenu_propre = extraire_listes($contenu_propre,"ul","*");
 		$contenu_propre = extraire_listes($contenu_propre,"ol","#");
+		$contenu_propre = extraire_tableaux($contenu_propre);
 
 		//Post Traitement
 		$contenu_propre = spip_apres_sale($contenu_propre);
