@@ -58,10 +58,19 @@ function beforeSaveCallBack(element_id, html, body) {
 
 tinyMCE.init({
 	mode : "exact",
-	elements : "text_area,chapo",
+	elements : "titre,surtitre,soustitre,descriptif,chapo,text_area,ps",
 
-	theme : "advanced",
+	theme : "simple",
 	plugins : "table,save,advimage,advlink,iespell,searchreplace,contextmenu",
+
+	save_callback : "beforeSaveCallBack"
+});
+
+</script>
+
+<!--
+
+???? comment avoir 2 perso differentes dans la meme page ?????
 
 	theme_advanced_buttons2_add_before: "cut,copy,paste,separator,search,replace,separator",
 	theme_advanced_buttons3_add_before : "bold,italic,separator",
@@ -73,18 +82,19 @@ tinyMCE.init({
 
 	theme_advanced_disable : "bold,italic,underline,strikethrough,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,formatselect,fontselect,fontsizeselect,styleselect,sub,sup,forecolor,backcolor,newdocument",
 
-	save_callback : "beforeSaveCallBack"
-});
-</script>
-
-<!--
 ????? OU PLACER UNE OPTION tinyMCE / textarea ???
+voir http://tinymce.moxiecode.com/punbb/viewtopic.php?id=436
 -->
 
 ';
 
-	$texte= propre($texte);
+	$titre= propre($titre);
+	$surtitre= propre($surtitre);
+	$soustitre= propre($soustitre);
+	$descriptif= propre($descriptif);
 	$chapo= propre($chapo);
+	$texte= propre($texte);
+	$ps= propre($ps);
 
 	formulaire_articles_edit($id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $chapo, $texte, $ps, $new, $nom_site, $url_site, $extra, $id_secteur, $date, $onfocus, $lier_trad, $champs_article);
 	fin_cadre_formulaire();

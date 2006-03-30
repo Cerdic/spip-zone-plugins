@@ -13,11 +13,16 @@ function retourTinyMCE(&$str) {
 }
 
 function exec_articles() {
-	retourTinyMCE($GLOBALS['texte']);
+	retourTinyMCE($GLOBALS['surtitre']);
+	retourTinyMCE($GLOBALS['titre']);
+	retourTinyMCE($GLOBALS['soustitre']);
+	retourTinyMCE($GLOBALS['descriptif']);
 	retourTinyMCE($GLOBALS['chapo']);
+	retourTinyMCE($GLOBALS['texte']);
+	retourTinyMCE($GLOBALS['ps']);
 
 	include_once(_DIR_RESTREINT.'exec/articles.php');
-	exec_articles_dist();
+	return exec_articles_dist();
 }
 
 ?>
