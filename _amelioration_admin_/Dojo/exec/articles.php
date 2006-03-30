@@ -1550,7 +1550,7 @@ function insert_article($id_parent, $new)
 function exec_articles_dist()
 {
 global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $descriptif, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nom_site, $nouv_auteur, $nouv_mot, $ps, $row, $site_obli, $site_unique, $soustitre, $statut_nouv, $supp_auteur, $supp_mot, $surtitre, $texte, $texte_petition, $texte_plus, $titre, $titre_article, $url_site, $virtuel; 
-global $texte_propre;
+global $descriptif_propre,$chapo_propre,$texte_propre;
  $id_parent = intval($id_parent);
  if (!($id_article=intval($id_article))) {
    $id_article = insert_article($id_parent, $new);
@@ -1634,10 +1634,10 @@ if ($titre) {
 			'surtitre' => corriger_caracteres($surtitre),
 			'titre' => ($titre_article=corriger_caracteres($titre)),
 			'soustitre' => corriger_caracteres($soustitre),
-			'descriptif' => corriger_caracteres($descriptif),
+			'descriptif' => $descriptif_propre?corriger_caracteres(sale($descriptif_propre)):corriger_caracteres($descriptif),
 			'nom_site' => corriger_caracteres($nom_site),
 			'url_site' => corriger_caracteres($url_site),
-			'chapo' => corriger_caracteres($chapo),
+			'chapo' => $chapo_prore?corriger_caracteres(sale($chapo_prore)):corriger_caracteres($chapo),
 			'texte' => $texte_propre?corriger_caracteres(sale($texte_propre)) :corriger_caracteres(trop_longs_articles($texte_plus) . $texte),
 			'ps' => corriger_caracteres($ps))  ;
 

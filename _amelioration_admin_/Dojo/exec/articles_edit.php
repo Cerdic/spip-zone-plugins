@@ -52,6 +52,9 @@ function coupe_trop_long($texte){	// utile pour les textes > 32ko
 function chapo_articles_edit($chapo, $articles_chapeau)
 {
 	global $connect_statut, $spip_ecran;
+	$dojo_actif=1;
+	if (_request('nodojo')==1)
+		$dojo_actif=0;
 
 	if (substr($chapo, 0, 1) == '=') {
 		$virtuel = substr($chapo, 1);
@@ -88,9 +91,18 @@ function chapo_articles_edit($chapo, $articles_chapeau)
 			echo "<B>"._T('info_chapeau')."</B>";
 			echo aide ("artchap");
 			echo "<BR>"._T('texte_introductif_article')."<BR>";
-			echo "<TEXTAREA NAME='chapo' CLASS='forml' ROWS='$rows' COLS='40' wrap=soft>";
-			echo $chapo;
-			echo "</TEXTAREA><P>\n";
+			if ($dojo_actif){
+				echo "<div class='dojoedit'>";
+				echo "<TEXTAREA dojoType='Editor' items='textGroup;|;listGroup;|;blockGroup;|;justifyGroup;|;colorGroup;|;indentGroup;|;linkGroup' NAME='chapo_propre' CLASS='forml' ROWS='$rows' COLS='40' wrap=soft>";
+				echo propre($chapo);
+				echo "</TEXTAREA>\n";
+				echo "</div>";
+			}
+			else {
+				echo "<TEXTAREA NAME='chapo' CLASS='forml' ROWS='$rows' COLS='40' wrap=soft>";
+				echo entites_html($chapo);
+				echo "</TEXTAREA><P>\n";
+			}
 		}
 		else {
 			echo "<INPUT TYPE='hidden' NAME='chapo' VALUE=\"$chapo\">";
@@ -133,10 +145,10 @@ echo "<P><HR><P>";
 	$titre = entites_html($titre);
 	$soustitre = entites_html($soustitre);
 	$surtitre = entites_html($surtitre);
-	$descriptif = entites_html($descriptif);
+	//$descriptif = entites_html($descriptif);
 	$nom_site = entites_html($nom_site);
 	$url_site = entites_html($url_site);
-	$chapo = entites_html($chapo);
+	//$chapo = entites_html($chapo);
 	//$texte = entites_html($texte);
 	$ps = entites_html($ps);
 
@@ -199,9 +211,18 @@ echo "<P><HR><P>";
 		echo "<P><B>"._T('texte_descriptif_rapide')."</B>";
 		echo aide ("artdesc");
 		echo "<BR>"._T('texte_contenu_article')."<BR>";
-		echo "<TEXTAREA NAME='descriptif' CLASS='forml' ROWS='2' COLS='40' wrap=soft>";
-		echo $descriptif;
-		echo "</TEXTAREA><P>\n";
+		if ($dojo_actif){
+			echo "<div class='dojoedit'>";
+			echo "<TEXTAREA dojoType='Editor' items='textGroup;|;listGroup;|;blockGroup;|;justifyGroup;|;colorGroup;|;indentGroup;|;linkGroup' NAME='descriptif_propre' CLASS='forml' ROWS='2' COLS='40' wrap=soft>";
+			echo propre($descriptif);
+			echo "</TEXTAREA>\n";
+			echo "</div>";
+		}
+		else {
+			echo "<TEXTAREA NAME='descriptif' CLASS='forml' ROWS='2' COLS='40' wrap=soft>";
+			echo entites_html($descriptif);
+			echo "</TEXTAREA><P>\n";
+		}
 	}
 	else {
 		echo "<INPUT TYPE='hidden' NAME='descriptif' VALUE=\"$descriptif\">";
@@ -244,9 +265,11 @@ echo "<P><HR><P>";
 
 	//echo "<BR>";
 	if ($dojo_actif){
-		echo "<TEXTAREA dojoType='Editor' items='textGroup;|;listGroup;|;blockGroup;|;justifyGroup;|;colorGroup;|;indentGroup;|;linkGroup' id='text_area' NAME='texte_propre' ".$GLOBALS['browser_caret']." CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>";
+		echo "<div class='dojoedit'>";
+		echo "<TEXTAREA dojoType='Editor' items='textGroup;|;listGroup;|;blockGroup;|;justifyGroup;|;colorGroup;|;indentGroup;|;linkGroup' id='text_area' NAME='texte_propre' ".$GLOBALS['browser_caret']." CLASS='formo' ROWS='$rows' COLS='40' wrap='soft'>";
 		echo propre($texte);
 		echo "</TEXTAREA>\n";
+		echo "</div>";
 	}
 	else{
 		echo afficher_barre('document.formulaire.texte');

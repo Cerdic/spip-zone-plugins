@@ -6,6 +6,7 @@ function Dojo_header_prive($flux) {
 	if ($exec == 'articles_edit'){
 		$flux .= '<script src="' ._DIR_PLUGIN_DOJO . '/img_pack/dojo.js" type="text/javascript"></script>'. "\n";
 		$flux .= '<script type="text/javascript">dojo.require("dojo.widget.Editor");</script>'. "\n";
+		$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_DOJO.'/img_pack/dojoedit.css" />'."\n";
 	}
 	return $flux;
 }
