@@ -60,10 +60,11 @@
 			",<a[\s][^<>]*href=\s*['\"]([^<>'\"]*)['\"][^<>]*>\s*?(.*)\s*<\/a>,Uims" => "[\\2->\\1]", //Lien externe
 
 			//Paragraphes
+			",<(p)( [^>]*)?"."></\\1>,Uims" => "", //Faux Paragr.
 			",<(p)( [^>]*)?".">(.+)</\\1>,Uims" => "\\3\r\r", //Paragr.
-			",(<no p[^>]*>)(\s*)(<\/no p>),Uims" => "", // spiperie
+			",(<no p[^>]*>)(\s*)(<\/no>),Uims" => "", // spiperie
 			",(<\/no p>)(.*)(<no p[^>]*>),Uims" => "\\2", // spiperie
-			",\s*?<br( [^>]*)?".">\r-&nbsp;,Ui" => "\r- ", 
+			",\s*?<br( [^>]*)?".">\r-(&nbsp;|\s),Ui" => "\r- ", 
 			",\s*?<br( [^>]*)?".">[[[:blank:]]*?,Ui" => "\r_ ", //Saut de ligne style suivi par du texte
 			",<hr( [^>]*)?".">,Uims" => "\r----\r", //Saut de page
 			",<(pre)( [^>]*)?".">(.+)</\\1>,Uims" => "<poesie>\n\\3\n</poesie>", //Poesie
@@ -71,7 +72,7 @@
 			
 			//typo
 			",&nbsp;:,i" => " :", 
-			",\r-&nbsp;,i" => "\r- ", 
+			",\r-(&nbsp;|\s),i" => "\r- ", 
 			//Images & Documents
 		);
 	}
@@ -152,32 +153,53 @@
 	}
 	
 	// les tableaux standards ou personalises -----------------------------------------------------
-	function recompose_tableau($texte){
+	function recompose_tableau($innerTag,$texte){
 		$table_class=array('spip'=>"|",'ville'=>"£");
 		$sep = $table_class['spip'];
-		// detecter la classe
-		$class = preg_replace(",.*<table[^>]*class=['\"]([^'\"]*)['\"][^>]*>.*?,Uims","\\1",$texte);
+
+		$attributs = tag2attributs($innerTag);
+// detecter la classe
+		$class = "";
+		if (isset($attributs['class']))
+			$class = $attributs['class'];
 		if (isset($table_class[$class]))
 			$sep = $table_class[$class];
-		
-		
+
 		// d'abord transformer tous les | en leur entite pour pas se tromper
 		$texte = str_replace($sep,"&#".ord($sep).";",$texte);
+
+		$summary = "";
+		$caption = "";
+		if (isset($attributs['summary']))
+			$summary = trim($attributs['summary']);
+		if (preg_match(",<caption>(.*)</caption>,Uims",$texte))
+			$caption = trim(preg_replace(",.*?<caption>(.*)</caption>.*?,Uims","\\1",$texte));
+		if (strlen($caption) || strlen($summary))
+			$summary="$sep$sep $caption $sep $summary $sep$sep\r";
 		
 		// les lignes
-		$texte = preg_replace(",<tr[^>]*>\s*?(.*)\s*</tr>,Uims","$sep\\1$sep\r",$texte);
-		
+		$texte = preg_replace(",<tr[^>]*>\s*?(.*)\s*</tr>,Uims","\r$sep \\1$sep\r",$texte);
 		// les colonnes
-		$texte = preg_replace(",<(td|th)(\s[^>]*)?>(.*)</\\1>,Uims","\\3$sep",$texte);
-		// les doubles pipes induits en fin de ligne
+		$texte = preg_replace(",<(td)(\s[^>]*)?>[[:blank:]]*?(.*)\s*?</\\1>,Uims"," \\3 $sep",$texte);
+		$texte = preg_replace(",<(th)(\s[^>]*)?>[[:blank:]]*?({{)?(.*)(}})?\s*?</\\1>,Uims"," {{\\4}} $sep",$texte);
+		// attention un |\n correspond a une fin de ligne et ne doit pas etre autorise au milieu d'une ligne
+		$texte = preg_replace(",(\s$sep)\r,Uims","\\1 \r",$texte);
+		// les doubles pipes en fin de ligne doivent etre remis en simpes |
 		$texte = str_replace("$sep$sep\r","$sep\r",$texte);
 		
 		// le thead
-		$texte = preg_replace(",<thead[^>]*>\s*?(.*)\s*</thead>,Uims","$sep\\1$sep\r",$texte);
+		// verifier d'abors qu'il y a un vrai contenu dans le thead
+		$texte = preg_replace(",\r($sep\s*{{[\s\r_]*}}\s*)*$sep\r,Uims","",$texte);
+		$texte = preg_replace(",<thead[^>]*>\s*?(.*)\s*</thead>,Uims","\\1\r",$texte);
 		// le tbody
 		$texte = preg_replace(",<tbody[^>]*>\s*?(.*)\s*</tbody>,Uims","\\1",$texte);
 		// le table
-		$texte = preg_replace(",<table[^>]*>\s*?(.*)\s*</table>,Uims","\\1\r\r",$texte);
+		//$texte = preg_replace(",<table[^>]*>\s*?(.*)\s*</table>,Uims","\\1\r\r",$texte);
+		
+		// caption/head
+		$texte = preg_replace(",<caption>.*</caption>\s*?,Uims","\\1",$texte);
+		$texte = $summary . $texte;
+
 		// les lignes vides inter |
 		$texte = preg_replace(",\\$sep\r[\s\r]*\\$sep,Uims","$sep\r$sep",$texte);
 		
@@ -185,12 +207,12 @@
 	}	
 	function extraire_tableaux($texte){
 		// tableaux
-	  $pattern = '<table[^>]*>.*</table>';
+	  $pattern = '<table([^>]*)>(.*)</table>';
 	  preg_match_all (",$pattern,Uims", $texte, $tableMatches, PREG_SET_ORDER);
 	  $textMatches = preg_split (",$pattern,Uims", $texte);
 	
 	  foreach ($tableMatches as $key => $value) {
-			$tableMatches [$key][0] = recompose_tableau ($tableMatches[$key][0]);
+			$tableMatches [$key][0] = recompose_tableau ($value[1],$value[2]);
 	  }
 		for ($i = 0; $i < count ($textMatches); $i ++) {
 			$textMatches [$i] = $textMatches [$i] . $tableMatches [$i] [0];
@@ -279,6 +301,7 @@
 
 		// PRETRAITEMENTS
 		$contenu = str_replace("\n\r", "\r", $contenu); // echapper au greedyness de preg_replace
+		$contenu = str_replace("\r\n", "\r", $contenu); // dojo produit du \r\n
 		$contenu = str_replace("\n", "\r", $contenu);
 
 		// virer les commentaires html (qui cachent souvent css et jajascript)
