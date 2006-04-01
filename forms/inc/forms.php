@@ -10,45 +10,33 @@
  *
  */
 
-// definition de la fonction clone pour PHP<5.0
-// a utiliser avec $link=clone($monautrelink)
-// pour compatibilité PHP 4.0 et 5.0
-if (version_compare(phpversion(), '5.0') < 0){
-	if (eval('return !function_exists(clone);')==TRUE){
-    eval('
-    function clone($object) {
-      return $object;
-    }
-    ');
-  }
-}
-
 define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 
-	//
-	// Les deux fonctions "creer_repertoire" et "deplacer_fichier_upload" sont recopiees ici 
-	// a cause d'une mauvaise organisation des repertoires et inclusions...
-	//
+	function Form_install(){
+		Form_verifier_base();
+	}
 	
-	function Forms_creer_repertoire_form($base, $subdir) {
-		if (@file_exists("$base/.plat")) return '';
-		$path = $base.'/'.$subdir;
-		if (@file_exists($path)) return "$subdir/";
+	function Form_uninstall(){
+		include_spip('base/forms');
+		include_spip('base/abstract_sql');
+	}
 	
-		@mkdir($path, 0777);
-		@chmod($path, 0777);
-		$ok = false;
-		if ($f = @fopen("$path/.test", "w")) {
-			@fputs($f, '<'.'?php $ok = true; ?'.'>');
-			@fclose($f);
-			include("$path/.test");
+	function Form_verifier_base(){
+		$version_base = 0.1;
+		$current_version = 0.0;
+		if (   (!isset($GLOBALS['meta']['forms_base_version']) )
+				|| (($current_version = $GLOBALS['meta']['forms_base_version'])!=$version_base)){
+			include_spip('base/forms');
+			if ($current_version==0.0){
+				include_spip('base/create');
+				include_spip('base/abstract_sql');
+				creer_base();
+				$current_version = $version_base;
+			}
+			
+			ecrire_meta('forms_base_version',$version_base);
+			ecrire_metas();
 		}
-		if (!$ok) {
-			$f = @fopen("$base/.plat", "w");
-			if ($f)
-				fclose($f);
-		}
-		return ($ok? "$subdir/" : '');
 	}
 
 	function Forms_deplacer_fichier_form($source, $dest) {
@@ -57,23 +45,15 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			exit;
 		}
 	
-		$ok = @copy($source, $dest);
+		$ok = @rename($source, $dest);
 		if (!$ok) $ok = @move_uploaded_file($source, $dest);
 		if ($ok)
 			@chmod($dest, 0666);
 		else {
 			@unlink($source);
-			/*$f = fopen($dest,'w');
-			if ($f)
-				fclose ($f);
-			unlink($dest);*/
 		}
 	
 		return $ok;
-	}
-
-	function Forms_detruire_fichier_form($source) {
-		@unlink($source);
 	}
 
 	function Forms_nommer_fichier_form($orig, $dir) {
@@ -579,7 +559,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 					$erreur[$code] = _T("fichier_type_interdit");
 				}
 				if ($erreur[$code]) {
-					Forms_detruire_fichier_form($_FILES[$code]['tmp_name']);
+					supprimer_fichier($_FILES[$code]['tmp_name']);
 				}
 			}
 		}
@@ -621,8 +601,8 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 					if ($type == 'fichier') {
 						if (!$val = $_FILES[$code] OR !$val['tmp_name']) continue;
 						// Fichier telecharge : deplacer dans IMG, stocker le chemin dans la base
-						$dir = "IMG/".Forms_creer_repertoire_form("IMG", "protege");
-						$dir = $dir.Forms_creer_repertoire_form($dir, "form".$id_form);
+						$dir = sous_repertoire(_DIR_IMG, "protege");
+						$dir = sous_repertoire($dir, "form".$id_form);
 						$source = $val['tmp_name'];
 						$dest = $dir.Forms_nommer_fichier_form($val['name'], $dir);
 						if (!Forms_deplacer_fichier_form($source, $dest)) {
@@ -807,9 +787,9 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 				$id_form = $row['id_form'];
 				$reponses = $row['reponses'];
 				$titre = $row['titre'];
-				
+
 				$tous_id[] = $id_form;
-	
+
 				$link = generer_url_ecrire('forms_edit',"id_form=$id_form&retour=".urlencode(self()));
 				/*$link = new Link("?exec=forms_edit");
 				$link->addVar("id_form", $id_form);
