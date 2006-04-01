@@ -21,7 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 
-function public_trouver_squelette_dist($fond, $id_rubrique, $lang) {
+function public_styliser_dist($fond, $id_rubrique, $lang) {
   global $contexte;
 	
   // Actuellement tous les squelettes se terminent par .html
