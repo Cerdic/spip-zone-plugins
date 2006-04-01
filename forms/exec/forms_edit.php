@@ -195,7 +195,7 @@ function forms_update(){
 				"titre='".addslashes($titre)."', ".
 				"descriptif='".addslashes($descriptif)."', ".
 				"sondage='".addslashes($sondage)."', ".
-				"email='".addslashes($email)."', ".
+				"email='".addslashes(serialize($email))."', ".
 				"champconfirm='".addslashes($champconfirm)."', ".
 				"texte='".addslashes($texte)."' ".
 				"WHERE id_form=$id_form";
@@ -210,7 +210,7 @@ function forms_update(){
 			$descriptif = $row['descriptif'];
 			$sondage = $row['sondage'];
 			$schema = unserialize($row['schema']);
-			$email = $row['email'];
+			$email = unserialize($row['email']);
 			$champconfirm = $row['champconfirm'];
 			$texte = $row['texte'];
 		}
@@ -335,6 +335,24 @@ function forms_update(){
 	return array($id_form,$champ_visible,$nouveau_champ);
 }
 
+function debut_block_route($id,$visible){
+	$display = $visible?'block':'none';
+	return "<script type='text/javascript'><!--
+					document.write('<div id=\"$id\" style=\"display: $display; margin-top: 1;\">');
+					//--></script>
+					<noscript>
+					<div id='bock_email_route_$code' style='display: block;'>
+					</noscript>";	
+}
+function fin_block_route(){
+	return 	"<script type='text/javascript'><!--
+					document.write('<\/div>');
+					//--></script>
+					<noscript>
+						</div>
+					</noscript>";
+}
+
 function exec_forms_edit(){
 	global $spip_lang_right;
 	$id_form = intval(_request('id_form'));
@@ -358,7 +376,7 @@ function exec_forms_edit(){
 	$supp_confirme = _request('supp_confirme');
 	$supp_rejet = _request('supp_rejet');
 
-  Form_verifier_base();
+  Forms_verifier_base();
 
 	if ($retour)
 		$retour = urldecode($retour);
@@ -390,7 +408,7 @@ function exec_forms_edit(){
 		$descriptif = "";
 		$sondage = "non";
 		$schema = array();
-		$email = "";
+		$email = array();
 		$champconfirm = "";
 		$texte = "";
 		$js_titre = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
@@ -409,7 +427,7 @@ function exec_forms_edit(){
 			$descriptif = $row['descriptif'];
 			$sondage = $row['sondage'];
 			$schema = unserialize($row['schema']);
-			$email = $row['email'];
+			$email = unserialize($row['email']);
 			$champconfirm = $row['champconfirm'];
 			$texte = $row['texte'];
 		}
@@ -480,7 +498,7 @@ function exec_forms_edit(){
 		if ($email) {
 			echo "<p /><div align='left' border: 1px dashed #aaaaaa;'>";
 			echo "<strong class='verdana2'>"._T('email_2')."</strong> ";
-			echo $email;
+			echo $email['defaut'];
 			echo "</div>\n";
 		}
 		if ($champconfirm){
@@ -565,7 +583,6 @@ function exec_forms_edit(){
 
 		$titre = entites_html($titre);
 		$descriptif = entites_html($descriptif);
-		$email = entites_html($email);
 		$texte = entites_html($texte);
 
 		echo "<strong><label for='titre_form'>"._L("Titre du formulaire")."</label></strong> "._T('info_obligatoire_02');
@@ -579,10 +596,81 @@ function exec_forms_edit(){
 		echo entites_html($descriptif);
 		echo "</textarea><br />\n";
 
+
+		
+		// Routage facultatif des emails en fonction d'un champ select
+		$email_route_known = false;
+		$jshide = "";
+		$s = "";
+		$options = "";
+		foreach ($schema as $index => $t) {
+			if ($t['type'] == 'select'){
+				$visible = false;
+				$code = $t['code'];
+				$options .= "<option value='$code'";
+				if ($email['route'] == $code){
+					$options .= " selected='selected'";
+					$email_route_known = $visible = true;
+				}
+				$options .= ">" . $t['nom'] . "</option>\n";
+				$s .= debut_block_route("bock_email_route_$code",$visible);
+				$jshide .=  "cacher_email_route('bock_email_route_$code');\n";
+				
+				$s .= "<table id ='email_route_$code'>\n";
+				$s .= "<tr><th>".$t['nom']."</th><th>";
+				$s .= "<strong><label for='email_route_$code'>"._T('email_2')."</label></strong>";
+				$s .= "</th></tr>\n";
+				$js = "";
+				$type_ext = $t['type_ext'];
+				foreach ($type_ext as $code_choix => $nom_choix) {
+					$s .= "<tr><td>$nom_choix</td><td>";
+					$s .= "<input type='text' name='email[$code_choix]' value=\"";
+					$s .= isset($email[$code_choix])?entites_html($email[$code_choix]):"";
+					$s .= "\" class='fondl verdana2' size='20'$js>";
+					$s .= "</td></tr>";
+				}
+				$s .="</table>";
+				$s .= fin_block_route("bock_email_route_$code",$visible);
+			}
+		}
+		$jshide = "<script type='text/javascript'><!--
+		function montrer_email_route(obj) {
+			layer = findObj(obj);
+			if (layer)
+				layer.style.display = 'block';
+		}
+		function cacher_email_route(obj) {
+			layer = findObj(obj);
+			if (layer)
+				layer.style.display = 'none';
+		}
+		function update_email_route_visibility(obj){
+			$jshide
+			cacher_email_route('bock_email_route_');
+			montrer_email_route(obj);
+		}
+		//--></script>\n";
+		echo $jshide;
+
+		echo "<strong><label for='email_route_form'>"._L('Choisir l\'email en fonction de')."</label></strong> ";
+		echo "<br />";
+		echo "<select name='email[route]' id='email_route_form' class='forml'";
+		echo "onchange='update_email_route_visibility(\"bock_email_route_\"+options[selectedIndex].value)' ";
+		echo ">\n";
+		echo "<option value=''>"._L('Email independant de la reponse')."</option>\n";
+		echo $options;
+	 	echo "</select><br />\n";
+	 	
+		echo debut_block_route("bock_email_route_",$email_route_known==false);
 		echo "<strong><label for='email_form'>"._T('email_2')."</label></strong> ";
 		echo "<br />";
-		echo "<input type='text' name='email' id='email_form' class='forml' ".
-			"value=\"".entites_html($email)."\" size='40'$js_titre><br />\n";
+		echo "<input type='text' name=\"email[defaut]\" id='email_form' class='forml' ".
+			"value=\"".entites_html($email['defaut'])."\" size='40'$js_titre>\n";
+		echo fin_block_route();
+	 	echo $s;
+		echo "<br/>";
+	 	
+	 	//-----
 
 		echo "<strong><label for='confirm_form'>"._L('Confirmer la réponse par mail avec :')."</label></strong> ";
 		echo "<br />";

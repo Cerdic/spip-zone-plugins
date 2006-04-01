@@ -12,31 +12,48 @@
 
 define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 
-	function Form_install(){
+	function Forms_install(){
 		Form_verifier_base();
 	}
 	
-	function Form_uninstall(){
+	function Forms_uninstall(){
 		include_spip('base/forms');
 		include_spip('base/abstract_sql');
 	}
 	
-	function Form_verifier_base(){
-		$version_base = 0.1;
+	function Forms_verifier_base(){
+		$version_base = 0.11;
 		$current_version = 0.0;
-		if (   (!isset($GLOBALS['meta']['forms_base_version']) )
-				|| (($current_version = $GLOBALS['meta']['forms_base_version'])!=$version_base)){
-			include_spip('base/forms');
-			if ($current_version==0.0){
-				include_spip('base/create');
-				include_spip('base/abstract_sql');
-				creer_base();
-				$current_version = $version_base;
-			}
-			
-			ecrire_meta('forms_base_version',$version_base);
-			ecrire_metas();
+		if (   (isset($GLOBALS['meta']['forms_base_version']) )
+				&& (($current_version = $GLOBALS['meta']['forms_base_version'])==$version_base))
+			return;
+
+		include_spip('base/forms');
+		if ($current_version==0.0){
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			creer_base();
+			$current_version = 0.10;
 		}
+		if ($current_version<=0.11){
+			$query = "ALTER TABLE spip_forms CHANGE `email` `email` TEXT NOT NULL ";
+			$res = spip_query($query);
+			$query = "SELECT * FROM spip_forms";
+			$res = spip_query($query);
+			while ($row = spip_fetch_array($res)){
+				$email = $row['email'];
+				$id_form = $row['id_form'];
+				if (unserialize($email)==FALSE){
+					$email=addslashes(serialize(array('defaut'=>$email)));
+					$query = "UPDATE spip_forms SET email='$email' WHERE id_form=$id_form";
+					spip_query($query);
+				}
+			}
+			$current_version = 0.11;
+		}
+		
+		ecrire_meta('forms_base_version',$version_base);
+		ecrire_metas();
 	}
 
 	function Forms_deplacer_fichier_form($source, $dest) {
@@ -444,9 +461,14 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			$texte = $row['texte'];
 			$texte = str_replace("\r\n","\n",$texte);
 			$titre = $row['titre'];
-			$email = $row['email'];
+			$champconfirm = $row['champconfirm'];
+			$email = unserialize($row['email']);
 			$type_ext = $t['type_ext'];
+
 			$form_summary = '';
+			$email_dest = $email['defaut'];
+			$mailconfirm = "";
+			
 			$schema = unserialize($row['schema']);
 			// Ici on parcourt les valeurs entrees pour les champs demandes
 			foreach ($schema as $index => $t) {
@@ -458,6 +480,11 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 				$result2 = spip_query($query2);
 				$reponses = '';
 				while ($row2 = spip_fetch_array($result2)) {
+					if ($email['route']==$code && isset($email[$row2['valeur']]))
+						$email_dest = $email[$row2['valeur']];
+					if ($code == $champconfirm)
+						$mailconfirm = $row2['valeur'];
+						
 					$reponses .= $row2['valeur'].", ";
 					$reponses .= Forms_traduit_reponse($type, $code,$type_ext,$row2['valeur']).", ";
 				}
@@ -474,7 +501,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 	
 				mail($dest, $sujet, $message, $head);
 			}
-			if ($email != '') {
+			if ($email_dest != '') {
 				$head="From: formulaire_$id_form@".$_SERVER["HTTP_HOST"]."\n";
 				$fullurl = _DIR_RESTREINT_ABS .generer_url_ecrire("forms_reponses");
 	
@@ -483,7 +510,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 				$message .= $form_summary;
 				$message .= "mail confirmation :$mailconfirm:";
 				$sujet = $titre;
-				$dest = $email;
+				$dest = $email_dest;
 	
 				mail($dest, $sujet, $message, $head);
 		 	}
@@ -502,7 +529,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 		}
 		// Extraction des donnees pour l'envoi des mails eventuels
 		//   accuse de reception et forward webmaster
-		$email = $row['email'];
+		$email = unserialize($row['email']);
 		$champconfirm = $row['champconfirm'];
 		$mailconfirm = '';
 	
@@ -632,7 +659,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 				}
 				else if (($email) || ($mailconfirm)) {
 					$hash = calculer_action_auteur("forms confirme reponse $id_reponse");
-					$url = generer_url_public("valide_sondage","mel_confirm=oui&id_reponse=$id_reponse&mailconfirm=$mailconfirm&hash=$hash");
+					$url = generer_url_public("valide_sondage","mel_confirm=oui&id_reponse=$id_reponse&hash=$hash");
 					$r .= "<img src='".$url."' width='1' height='1' alt='' />";
 	
 					$reponse = $mailconfirm;

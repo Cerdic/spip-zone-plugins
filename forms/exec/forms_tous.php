@@ -39,7 +39,7 @@ function exec_forms_tous(){
 	//global $clean_link;
   include_spip("inc/presentation");
 
-  Form_verifier_base();
+  Forms_verifier_base();
 	Forms_duplique_form();
 	
 	debut_page(_L("Tous les formulaires"), "documents", "forms");
