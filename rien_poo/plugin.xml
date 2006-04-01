@@ -17,10 +17,10 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	Le seul plugin spip au monde qui ne fait rien, mais qui le fait bien !
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
-	mes_options.php
+	Rien_mes_options.php
 	</options>
 	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	mes_fonctions.php
+	Rien_mes_fonctions.php
 	</fonctions>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
