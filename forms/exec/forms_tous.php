@@ -2,20 +2,50 @@
 
 include_ecrire('inc_forms');
 
+function Forms_duplique_form(){
+	$duplique = intval(_request('duplique_form'));
+	if ($duplique && Forms_form_administrable($duplique)){
+		// creation
+			$schema = array();
+			spip_query("INSERT INTO spip_forms (schema) VALUES ('".
+				addslashes(serialize($schema))."')");
+			$id_form = spip_insert_id();
+		$query = "SELECT * FROM spip_forms WHERE id_form=$duplique";
+		$result = spip_query($query);
+		if ($row = spip_fetch_array($result)) {
+			$titre = $row['titre'];
+			$descriptif = $row['descriptif'];
+			$sondage = $row['sondage'];
+			$schema = $row['schema'];
+			$email = $row['email'];
+			$champconfirm = $row['champconfirm'];
+			$texte = $row['texte'];
+
+			$query = "UPDATE spip_forms SET ".
+				"titre='"._L('Copie de ').$titre."', ".
+				"descriptif='".$descriptif."', ".
+				"sondage='".$sondage."', ".
+				"schema='".$schema."', ".
+				"email='".$email."', ".
+				"champconfirm='".$champconfirm."', ".
+				"texte='".$texte."' ".
+				"WHERE id_form=$id_form";
+			$result = spip_query($query);
+		}
+	}	
+}
+
 function exec_forms_tous(){
 	//global $clean_link;
   include_spip("inc/presentation");
-	include_spip('base/create');
-	creer_base(); // au cas ou
 
+  Form_verifier_base();
+	Forms_duplique_form();
+	
 	debut_page(_L("Tous les formulaires"), "documents", "forms");
 	debut_gauche();
 	
-	
-	
 	debut_droite();
-	
-	
 	
 	Forms_afficher_forms(_L("Tous les formulaires"),
 		"SELECT forms.*, COUNT(id_reponse) AS reponses ".
@@ -41,13 +71,9 @@ function exec_forms_tous(){
 	
 	if (Forms_form_editable()) {
 		echo "<div align='right'>";
-		//$link = new Link('?exec=forms_edit');
-		//$link->addVar('new', 'oui');
-		//$link->addVar('retour', $clean_link->getUrl());
-		//icone(_L("Cr&eacute;er un nouveau formulaire"), $link->getUrl(), "../"._DIR_PLUGIN_FORMS. "/form-24.png", "creer.gif");
 		$link=generer_url_ecrire('forms_edit', 'new=oui');
 		$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
-		icone(_L("Cr&eacute;er un nouveau formulaire"), $link, "../"._DIR_PLUGIN_FORMS. "/form-24.png", "creer.gif");
+		icone(_L("Cr&eacute;er un nouveau formulaire"), $link, "../"._DIR_PLUGIN_FORMS. "/img_pack/form-24.png", "creer.gif");
 		echo "</div>";
 	}
 	

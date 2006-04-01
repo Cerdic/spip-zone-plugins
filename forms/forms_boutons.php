@@ -19,13 +19,13 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['naviguer']->sousmenu["forms_tous"]= new Bouton(
-			"../"._DIR_PLUGIN_FORMS."/form-24.png",  // icone
+			"../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png",  // icone
 			_L("Formulaires et sondages") //titre
 			);
 
 		  // on voit le bouton dans la barre "forum_admin"
 			$boutons_admin['forum']->sousmenu["forms_reponses"]= new Bouton(
-			"../"._DIR_PLUGIN_FORMS."/form-24.png",  // icone
+			"../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png",  // icone
 			_L("Suivi des Reponses") //titre
 			);
 		}

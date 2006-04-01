@@ -37,7 +37,7 @@ function exec_forms_reponses(){
 	if ($id_form) {
 		debut_boite_info();
 
-		icone_horizontale(_L("Aller au formulaire"), "?exec=forms_edit&id_form=$id_form", "../"._DIR_PLUGIN_FORMS. "/form-24.png", "rien.gif");
+		icone_horizontale(_L("Aller au formulaire"), "?exec=forms_edit&id_form=$id_form", "../"._DIR_PLUGIN_FORMS. "/img_pack/form-24.png", "rien.gif");
 
 		if (Forms_form_administrable($id_form)) {
 			icone_horizontale(_L("T&eacute;l&eacute;charger les r&eacute;ponses"),
@@ -187,13 +187,13 @@ function exec_forms_reponses(){
 
 		echo "<br />\n";
 
-		debut_cadre_relief("../"._DIR_PLUGIN_FORMS."/form-24.png");
+		debut_cadre_relief("../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png");
 
 		//$link = new Link();
 		//$link->addVar('supp_reponse', $id_reponse);
 		//icone(_L("Supprimer cette r&eacute;ponse"), $link->getUrl(),"../"._DIR_PLUGIN_FORMS."/form-24.png", "supprimer.gif", "right");
 		$link=parametre_url(self(),'supp_reponse', $id_reponse);
-		icone(_L("Supprimer cette r&eacute;ponse"), $link,"../"._DIR_PLUGIN_FORMS."/form-24.png", "supprimer.gif", "right");
+		icone(_L("Supprimer cette r&eacute;ponse"), $link,"../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "supprimer.gif", "right");
 
 		echo _L("R&eacute;ponse envoy&eacute;e le ").affdate($date)."<br />\n";
 		if (!$form_unique) {

@@ -58,9 +58,9 @@ function bloc_edition_champ($t, $link) {
 
 		echo "</div>";
 		if ($type=='select')
-			echo "<br /><input type='submit' name='switch_select_multi' value=\""._L("Changer en choix multiple")."\" class='fondo verdana2'>";
+			echo "<br /><input type='submit' name='switch_select_multi' value=\""._L("Changer en choix multiple")."\" class='fondl verdana2'>";
 		if ($type=='multiple')
-			echo "<br /><input type='submit' name='switch_select_multi' value=\""._L("Changer en choix unique")."\" class='fondo verdana2'>";
+			echo "<br /><input type='submit' name='switch_select_multi' value=\""._L("Changer en choix unique")."\" class='fondl verdana2'>";
 		echo "<br />\n";
 	}
 	if ($type == 'mot') {
@@ -141,45 +141,30 @@ function code_nouveau_champ($schema,$type){
 	return $code;
 }
 
-function exec_forms_edit(){
-	global $id_form;
-	global $new;
-	global $supp_form;
-	global $modif_champ;
-	global $ajout_champ;
-	global $retour;
-	global $titre;
-	global $descriptif;
-	global $email;
-	global $champconfirm;
-	global $texte;
-	global $sondage;
-	global $modif_champ;
-	global $nom_champ;
-	global $champ_obligatoire;
-	global $monter;
-	global $descendre;
-	global $supp_choix;
-	global $supp_champ;
-	
-	$id_form = intval($id_form);
-	$supp_form = intval($supp_form);
-
-	if ($retour)
-		$retour = urldecode($retour);
-  include_ecrire("inc_presentation");
-	include_ecrire("inc_config");
-
-	$id_form = intval($id_form);
-	if ($id_form) {
-		$query = "SELECT COUNT(*) FROM spip_reponses WHERE id_form=$id_form AND statut='valide'";
-		$result = spip_query($query);
-		list($nb_reponses) = spip_fetch_array($result);
-	}
-	else $nb_reponses = 0;
+function forms_update(){
+	$id_form = intval(_request('id_form'));
+	$new = _request('new');
+	$supp_form = intval(_request('supp_form'));
+	$modif_champ = _request('modif_champ');
+	$ajout_champ = _request('ajout_champ');
+	$retour = _request('retour');
+	$titre = _request('titre');
+	$descriptif = _request('descriptif');
+	$email = _request('email');
+	$champconfirm = _request('champconfirm');
+	$texte = _request('texte');
+	$sondage = _request('sondage');
+	$nom_champ = _request('nom_champ');
+	$champ_obligatoire = _request('champ_obligatoire');
+	$monter = _request('monter');
+	$descendre = _request('descendre');
+	$supp_choix = _request('supp_choix');
+	$supp_champ = _request('supp_champ');
+	$supp_confirme = _request('supp_confirme');
+	$supp_rejet = _request('supp_rejet');
 
 	//
-	// Modifications aux donnees de base du formulaire
+	// Modifications des donnees de base du formulaire
 	//
 	if (Forms_form_administrable($id_form)) {
 		if ($supp_form = intval($supp_form) AND $supp_confirme AND !$supp_rejet) {
@@ -191,8 +176,12 @@ function exec_forms_edit(){
 			}
 		}
 	}
+	
+	$nouveau_champ = $champ_visible = NULL;
 
+	$schema = array();
 	if (Forms_form_editable($id_form)) {
+		// creation
 		if ($new == 'oui' && $titre) {
 			$schema = array();
 			spip_query("INSERT INTO spip_forms (schema) VALUES ('".
@@ -200,7 +189,7 @@ function exec_forms_edit(){
 			$id_form = spip_insert_id();
 			unset($new);
 		}
-
+		// maj
 		if ($id_form && $titre) {
 			$query = "UPDATE spip_forms SET ".
 				"titre='".addslashes($titre)."', ".
@@ -212,29 +201,7 @@ function exec_forms_edit(){
 				"WHERE id_form=$id_form";
 			$result = spip_query($query);
 		}
-	}
-
-	$form_link = generer_url_ecrire('forms_edit');
-	$form_link = parametre_url($form_link,"id_form",$id_form);
-	if ($new)
-		$form_link = parametre_url($form_link,"new",$new);
-	if ($retour) 
-		$form_link = parametre_url($form_link,"retour",urlencode($retour));
-
-	//
-	// Recupere les donnees
-	//
-	if ($new == 'oui') {
-		$titre = _L("Nouveau formulaire");
-		$descriptif = "";
-		$sondage = "non";
-		$schema = array();
-		$email = "";
-		$champconfirm = "";
-		$texte = "";
-		$js_titre = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-	}
-	else {
+		// lecture
 		$query = "SELECT * FROM spip_forms WHERE id_form=$id_form";
 		$result = spip_query($query);
 		if ($row = spip_fetch_array($result)) {
@@ -247,19 +214,11 @@ function exec_forms_edit(){
 			$champconfirm = $row['champconfirm'];
 			$texte = $row['texte'];
 		}
-		$js_titre = "";
-	}
-
-	//
-	// Modifications au schema du formulaire
-	//
-
-	unset($champ_visible);
-	unset($nouveau_champ);
-
+	}	
+	
 	if ($id_form && Forms_form_editable($id_form)) {
 		$modif_schema = false;
-
+		$champ_visible = NULL;
 		// Ajout d'un champ
 		if (($type = $ajout_champ) && Forms_types_champs_autorises($type)) {
 			$code = code_nouveau_champ($schema,$type);
@@ -372,6 +331,90 @@ function exec_forms_edit(){
 			}
 		}
 	}
+	
+	return array($id_form,$champ_visible,$nouveau_champ);
+}
+
+function exec_forms_edit(){
+	global $spip_lang_right;
+	$id_form = intval(_request('id_form'));
+	$new = _request('new');
+	$supp_form = intval(_request('supp_form'));
+	$modif_champ = _request('modif_champ');
+	$ajout_champ = _request('ajout_champ');
+	$retour = _request('retour');
+	$titre = _request('titre');
+	$descriptif = _request('descriptif');
+	$email = _request('email');
+	$champconfirm = _request('champconfirm');
+	$texte = _request('texte');
+	$sondage = _request('sondage');
+	$nom_champ = _request('nom_champ');
+	$champ_obligatoire = _request('champ_obligatoire');
+	$monter = _request('monter');
+	$descendre = _request('descendre');
+	$supp_choix = _request('supp_choix');
+	$supp_champ = _request('supp_champ');
+	$supp_confirme = _request('supp_confirme');
+	$supp_rejet = _request('supp_rejet');
+
+  Form_verifier_base();
+
+	if ($retour)
+		$retour = urldecode($retour);
+  include_ecrire("inc_presentation");
+	include_ecrire("inc_config");
+
+	if ($id_form) {
+		$query = "SELECT COUNT(*) FROM spip_reponses WHERE id_form=$id_form AND statut='valide'";
+		$result = spip_query($query);
+		list($nb_reponses) = spip_fetch_array($result);
+	}
+	else $nb_reponses = 0;
+
+	$form_link = generer_url_ecrire('forms_edit');
+	$form_link = parametre_url($form_link,"id_form",$id_form);
+	if ($new)
+		$form_link = parametre_url($form_link,"new",$new);
+	if ($retour) 
+		$form_link = parametre_url($form_link,"retour",urlencode($retour));
+
+		
+	unset($champ_visible);
+	unset($nouveau_champ);
+	//
+	// Recupere les donnees
+	//
+	if ($new == 'oui' && !$titre) {
+		$titre = _L("Nouveau formulaire");
+		$descriptif = "";
+		$sondage = "non";
+		$schema = array();
+		$email = "";
+		$champconfirm = "";
+		$texte = "";
+		$js_titre = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+	}
+	else {
+		//
+		// Modifications au schema du formulaire
+		//
+		list($id_form,$champ_visible,$nouveau_champ) = forms_update();
+		
+		$query = "SELECT * FROM spip_forms WHERE id_form=$id_form";
+		$result = spip_query($query);
+		if ($row = spip_fetch_array($result)) {
+			$id_form = $row['id_form'];
+			$titre = $row['titre'];
+			$descriptif = $row['descriptif'];
+			$sondage = $row['sondage'];
+			$schema = unserialize($row['schema']);
+			$email = $row['email'];
+			$champconfirm = $row['champconfirm'];
+			$texte = $row['texte'];
+		}
+		$js_titre = "";
+	}
 
 	//
 	// Affichage de la page
@@ -399,26 +442,31 @@ function exec_forms_edit(){
 
 	debut_droite();
 
-	if ($supp_form && !$supp_confirme && !$supp_rejet) {
-		echo "<p><strong>"._L("Attention :")."</strong> ";
-		echo _L("Des r&eacute;ponses ont &eacute;t&eacute; faites &agrave; ce formulaire. ".
-			"Voulez-vous vraiment le supprimer ?")."</p>\n";
+	if ($supp_form && $supp_confirme==NULL && $supp_rejet==NULL) {
+		if ($nb_reponses){
+			echo "<p><strong>"._L("Attention :")."</strong> ";
+			echo _L("Des r&eacute;ponses ont &eacute;t&eacute; faites &agrave; ce formulaire. ".
+				"Voulez-vous vraiment le supprimer ?")."</p>\n";
+		}
+		else{
+			echo "<p>";
+			echo _L("Voulez-vous vraiment supprimer ce formulaire ?")."</p>\n";
+		}
 		$link = parametre_url(self(),'supp_form', $supp_form);
-		//$link->addVar('supp_form', $supp_form);
-		//echo $link->getForm();
 		echo "<form method='POST' action='"
 			. $link
 			. "' style='border: 0px; margin: 0px;'>";
-
-		echo "<input type='submit' name='supp_confirme' value=\""._T('item_oui')."\" class='fondl'>";
+		echo "<div style='text-align:$spip_lang_right'>";
+		echo "<input type='submit' name='supp_confirme' value=\""._T('item_oui')."\" class='fondo'>";
 		echo " &nbsp; ";
-		echo "<input type='submit' name='supp_rejet' value=\""._T('item_non')."\" class='fondl'>";
+		echo "<input type='submit' name='supp_rejet' value=\""._T('item_non')."\" class='fondo'>";
+		echo "</div>";
 		echo "</form><br />\n";
 	}
 
 
 	if ($id_form) {
-		debut_cadre_relief("../"._DIR_PLUGIN_FORMS."/form-24.png");
+		debut_cadre_relief("../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png");
 
 		gros_titre($titre);
 
@@ -487,27 +535,20 @@ function exec_forms_edit(){
 	//
 	// Icones retour et suppression
 	//
+	echo "<div style='text-align:$spip_lang_right'>";
 	if ($retour) {
-		echo "<br />\n";
-		echo "<div align='$spip_lang_right'>";
-		icone(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."/form-24.png", "rien.gif");
-		echo "</div>\n";
+		icone(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "rien.gif",'right');
 	}
 	if ($id_form && Forms_form_administrable($id_form)) {
-		echo "<br />\n";
-		echo "<div align='$spip_lang_right'>";
+		echo "<div style='float:$spip_lang_left'>";
 		$link = parametre_url(self(),'supp_form', $id_form);
-		//$link = clone($form_link); //PHP5--> il faut cloner explicitement
-		//$link->addVar('supp_form', $id_form);
 		if (!$retour) {
 			$link=parametre_url($link,'retour', urlencode(generer_url_ecrire('form_tous')));
 		}
-		if (!$nb_reponses) {
-			$link=parametre_url($link,'supp_confirme', 'oui');
-		}
-		icone(_L("Supprimer ce formulaire"), $link, "../"._DIR_PLUGIN_FORMS."/form-24.png", "supprimer.gif");
-		echo "</div>\n";
+		icone(_L("Supprimer ce formulaire"), $link, "../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "supprimer.gif");
+		echo "</div>";
 	}
+	echo "</div>";
 
 
 	//
@@ -518,9 +559,6 @@ function exec_forms_edit(){
 		debut_cadre_formulaire();
 
 		echo "<div class='verdana2'>";
-		//$link = new link();
-		//$link = clone($form_link); //PHP5--> il faut cloner explicitement
-		//echo $link->getForm('POST');
 		echo "<form method='POST' action='"
 			. $form_link
 			. "' style='border: 0px; margin: 0px;'>";
@@ -634,8 +672,6 @@ function exec_forms_edit(){
 					echo "<div class='verdana1' style='float: right; font-weight: bold;'>";
 					if ($aff_min) {
 						$link = parametre_url($form_link,'monter', $index);
-						//$link = clone($form_link); //PHP5--> il faut cloner explicitement
-						//$link->addVar('monter', $index);
 						echo "<a href='".$link."#champs'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0' alt='"._L("monter")."'></a>";
 					}
 					if ($aff_min && $aff_max) {
@@ -643,8 +679,6 @@ function exec_forms_edit(){
 					}
 					if ($aff_max) {
 						$link = parametre_url($form_link,'descendre', $index);
-						//$link = clone($form_link); //PHP5--> il faut cloner explicitement
-						//$link->addVar('monter', $index);
 						echo "<a href='".$link."#champs'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0' alt='"._L("descendre")."'></a>";
 					}
 					echo "</div>\n";
@@ -657,10 +691,6 @@ function exec_forms_edit(){
 				echo $visible ? debut_block_visible("champ_$code") : debut_block_invisible("champ_$code");
 
 				// Modifier un champ
-				/*$link = new link();
-				$link = clone($form_link); //PHP5--> il faut cloner explicitement
-				$link->addVar('modif_champ', $code);
-				echo $link->getForm('POST', '#champ_visible');*/
 				echo "<form method='POST' action='"
 					. $form_link . "#champ_visible"
 					. "' style='border: 0px; margin: 0px;'>";
@@ -695,12 +725,9 @@ function exec_forms_edit(){
 				echo "</div>\n";
 				echo "</form>";
 				// Supprimer un champ
-				/*$link = new link();
-				$link = clone($form_link); //PHP5--> il faut cloner explicitement
-				$link->addVar('supp_champ', $code);*/
 				$link = parametre_url($form_link,'supp_champ', $code);
 				echo "<div style='float: left;'>";
-				icone_horizontale(_L("Supprimer ce champ"), $link."#champs","../"._DIR_PLUGIN_FORMS. "/form-24.png", "supprimer.gif");
+				icone_horizontale(_L("Supprimer ce champ"), $link."#champs","../"._DIR_PLUGIN_FORMS. "/img_pack/form-24.png", "supprimer.gif");
 				echo "</div>\n";
 
 				echo fin_block();
@@ -713,9 +740,6 @@ function exec_forms_edit(){
 			// Ajouter un champ
 			echo "<p>";
 			debut_cadre_enfonce();
-			/*$link = new link();
-			$link = clone($form_link); //PHP5--> il faut cloner explicitement
-			echo $link->getForm('POST', '#nouveau_champ');*/
 			echo "<form method='POST' action='"
 				. $form_link. "#nouveau_champ"
 				. "' style='border: 0px; margin: 0px;'>";

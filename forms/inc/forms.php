@@ -164,9 +164,6 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 				$titre = typo($row['titre']);
 				
 				$link = generer_url_ecrire('forms_edit',"id_form=$id_form&retour=".urlencode(self()));
-				/*new Link("?exec=forms_edit");
-				$link->addVar("id_form", $id_form);
-				$link->addVar("retour", $GLOBALS['clean_link']->getUrl());*/
 				echo "<a href='".$link."'>";
 				echo $titre."</a>\n";
 				echo "<div class='arial1' style='text-align:$spip_lang_right;color: black; padding-$spip_lang_left: 4px;' "."title=\""._T("forms:article_recopier_raccourci")."\">";
@@ -181,8 +178,6 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 		if (Forms_form_editable()) {
 			echo "\n<br />";
 			$link = generer_url_ecrire('forms_edit',"new=oui&retour=".urlencode(self()));
-			/*$link = new Link("?exec=forms_edit&new=oui");
-			$link->addVar('retour', $GLOBALS['clean_link']->getUrl());*/
 			icone_horizontale(_T("forms:icone_creer_formulaire"),
 				$link, "../"._DIR_PLUGIN_FORMS."/form-24.png", "creer.gif");
 		}
@@ -383,9 +378,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 	
 	function Forms_afficher_formulaire_schema($schema, $link = '', $ancre = '', $remplir = false) {
 		global $flag_ecrire, $les_notes, $spip_lang_left, $spip_lang_right;
-	
-		//if (!$link) $link = new Link();
-	
+		
 		// Les formulaires ont leurs propres notes "de bas de page",
 		// afin d'annoter les champs
 		$notes_orig = $les_notes;
@@ -394,7 +387,6 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 		$readonly = $flag_ecrire ? " readonly='readonly'" : "";
 		$disabled = $flag_ecrire ? " disabled='disabled'" : "";
 		$r = "";
-		//$r .= $link->getForm('post', '#'.$ancre, 'multipart/form-data');
 		
 		$champs = "";
 		$fieldset = false;
@@ -484,17 +476,9 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			}
 			if ($email != '') {
 				$head="From: formulaire_$id_form@".$_SERVER["HTTP_HOST"]."\n";
-				/*$link = self(true);
-				$fullurl="http://".$_SERVER["HTTP_HOST"].$link;
-				if ($v = strpos($fullurl,'?'))
-				  $v = strrpos(substr($fullurl, 0, $v), '/');
-				else $v = strrpos($fullurl, '/');
-				$fullurl = substr($fullurl, 0 ,$v + 1);*/
 				$fullurl = _DIR_RESTREINT_ABS .generer_url_ecrire("forms_reponses");
 	
 				$link = parametre_url($fullurl,'id_form',$id_form);
-				//$link = new Link($fullurl);
-				//$link->addVar('id_form', "$id_form");
 				$message = $link . "\n";
 				$message .= $form_summary;
 				$message .= "mail confirmation :$mailconfirm:";
@@ -680,7 +664,6 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 		$ancre = 'form'.(++$num_ancre);
 
 		if ($flag_ecrire) 
-			//$link = $GLOBALS['clean_link']->getUrl();
 			$link = str_replace('&amp;', '&', self());
 		else if ($GLOBALS['retour_form'])
 			$link = $GLOBALS['retour_form'];
@@ -693,14 +676,8 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 		$formhead .= "<div><input type='hidden' name='ajout_reponse' value='oui' />";
 		$formhead .= "<input type='hidden' name='id_form' value='$id_form' />";
 		$formhead .= "<input type='hidden' name='retour_form' value='$retour' />";
-		/*$form_link = new link();
-		$form_link = clone($link); //PHP5--> il faut cloner explicitement
-		$form_link->addVar('ajout_reponse', 'oui');
-		$form_link->addVar('id_form', $id_form);
-		$form_link->addVar('retour_form', $link->getUrl());*/
 		if ($sondage != 'non') {
 			$formhead .= "<input type='hidden' name='ajout_cookie_form' value='oui' />";
-			//$form_link->addVar('ajout_cookie_form', 'oui');
 		}
 		$formhead .= "</div>";
 	
@@ -715,7 +692,6 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			if (!$erreur) {
 				$r .= "<p class='spip_form_ok'>".
 					_T("forms:reponse_enregistree");
-				//$link = new Link();
 				if ($sondage != 'non')
 					$r .= " <a href='".self()."#$ancre"."'>"._T("forms:valider")."</a>";
 				if ($reponse){
@@ -771,7 +747,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			if ($titre_table) echo "<div style='height: 12px;'></div>";
 			echo "<div class='liste'>";
 			bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black");
-			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
+			echo "<table width='100%' cellpadding='4' cellspacing='0' border='0'>";
 	
 			echo $tranches;
 	
@@ -790,10 +766,8 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 
 				$tous_id[] = $id_form;
 
-				$link = generer_url_ecrire('forms_edit',"id_form=$id_form&retour=".urlencode(self()));
-				/*$link = new Link("?exec=forms_edit");
-				$link->addVar("id_form", $id_form);
-				$link->addVar("retour", $GLOBALS['clean_link']->getUrl());*/
+				$retour = parametre_url(self(),'duplique_form','');
+				$link = generer_url_ecrire('forms_edit',"id_form=$id_form&retour=".urlencode($retour));
 				if ($reponses) {
 					$puce = 'puce-verte-breve.gif';
 				}
@@ -815,12 +789,20 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 					$s .= _T("forms:nombre_reponses",array('nombre'=>$reponses));
 				}
 				$vals[] = $s;
+				
+				$s = "";
+				if(Forms_form_administrable($id_form)){
+					$link = parametre_url(self(),'duplique_form',$id_form);
+					$vals[] = icone_horizontale(_L("Dupliquer ce formulaire"), $link,"../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "creer.gif",false);
+				}
+				$vals[] = $s;
+
 				$table[] = $vals;
 			}
 			spip_free_result($result);
 			
-			$largeurs = array('','','');
-			$styles = array('arial11', 'arial1', 'arial1');
+			$largeurs = array('','','','');
+			$styles = array('arial11', 'arial1', 'arial1','arial1');
 			afficher_liste($largeurs, $table, $styles);
 			echo "</table>";
 			echo "</div>\n";
