@@ -36,12 +36,13 @@ include_spip("inc/forms");
 		// Remplacer les raccourcis de type <formXXX>
 		if (is_int(strpos($texte, '<form')) &&
 			preg_match_all(',<form(\d+)>,', $texte, $regs, PREG_SET_ORDER)) {
-			//include_once("inc_forms.php");
 			foreach ($regs as $r) {
 				$id_form = $r[1];
 				$forms[$id_form] = $id_form;
 				$cherche = $r[0];
-				$remplace = "<html>".Forms_afficher_formulaire($id_form)."</html>";
+				$remplace = Forms_afficher_formulaire($id_form);
+				// passer en base64 pour echapper a la typo()
+				$remplace = code_echappement($remplace);
 				$texte = str_replace($cherche, $remplace, $texte);
 			}
 		}
