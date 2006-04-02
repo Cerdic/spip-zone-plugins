@@ -44,20 +44,26 @@
 	//*********************************************
 	// RECHERCHE
 	//*********************************************
-	function RechercheEtendue_jauge($texte,$nom_barre,$gain=1){
-		static $barfilename;
-		static $barheight;
-		$point = round($texte*$gain);
-		$barre_path = dirname(__FILE__)."/$nom_barre/";
-		if (!isset($barfilename)) $barfilename='';
-		if ($barre_path.'bar_middle.gif' != $barfilename){
-			$barfilename = $barre_path.'bar_middle.gif';
-			list($width, $barheight, $type, $attr) = getimagesize($barfilename);
+	function RechercheEtendue_jauge_init($maxi,$largeur){
+		global $gain_jauge;
+		$gain_jauge = $largeur/$maxi;
+	}
+	function RechercheEtendue_jauge($texte,$nom_barre){
+		global $gain_jauge;
+		static $barfilename='';
+		static $barre_path=array();
+		static $barheight=array();
+		$point = round($texte*$gain_jauge);
+		if (!isset($barre_path[$nom_barre])){
+			$p = $barre_path[$nom_barre] = find_in_path($nom_barre);	
+			list($width, $barheight[$nom_barre], $type, $attr) = getimagesize("$p/bar_middle.gif");
 		}
+		$p = $barre_path[$nom_barre];
+		$height = $barheight[$nom_barre];
 		$texte = "";
-		$texte = "<img src='"._DIR_PLUGIN_ADVANCED_SEARCH."/$nom_barre/bar_left.gif' alt='' />";
-		$texte .= "<img src='"._DIR_PLUGIN_ADVANCED_SEARCH."/$nom_barre/bar_middle.gif' width='$point' height='$barheight' alt='score $point' />";
-		$texte .= "<img src='"._DIR_PLUGIN_ADVANCED_SEARCH."/$nom_barre/bar_middle.gif' alt='' />";
+		$texte = "<img src='$p/bar_left.gif' alt='' />";
+		$texte .= "<img src='$p/bar_middle.gif' width='$point' height='$height' alt='score $point' />";
+		$texte .= "<img src='$p/bar_right.gif' alt='' />";
 		return $texte;
 	}
 	
@@ -102,7 +108,7 @@
 		  	break;
 		  case 'store':
 		  default:
-		  	$string .= $texte;
+		  	$string .= attribut_html($texte);
 		  	return "";
 		}
 		return "";
@@ -111,11 +117,12 @@
 	  return RechercheEtendue_google_like_string($texte,'raz');
 	}
 	
-	function RechercheEtendue_google_like($query){
+	function RechercheEtendue_google_like($query,$alternative = ""){
 	  $string = RechercheEtendue_google_like_string('','get');
 		$qt = explode(" ", $query);
 		$num = count ($qt);
 		$cc = ceil(200 / $num);
+		$string_re = "";
 		for ($i = 0; $i < $num; $i++) {
 			$tab[$i] = preg_split("/($qt[$i])/i",$string,2, PREG_SPLIT_DELIM_CAPTURE);
 			if(count($tab[$i])>1){
@@ -128,7 +135,10 @@
 				$string_re .= "<em>[...]</em> $avant[$i]<strong>".$tab[$i][1]."</strong>$apres[$i] <em>[...]</em> ";
 			}
 		}
-		return $string_re;
+		if (strlen($string_re))
+			return $string_re;
+		else
+			return $alternative;
 	}
 
 	//*********************************************
@@ -180,11 +190,15 @@
 	
 	function RechercheEtendue_recherche_semblable($recherche) {
 		// recupere les mots de la recherche
-		$regs = separateurs_indexation(true)." ";
-		$recherche = strtr($recherche, $regs, ereg_replace('.', ' ', $regs));
-		$table_mots = preg_split("/ +/", $recherche);
-	
-		return implode(" ",array_map('mot_semblable',$table_mots));
+		//$regs = separateurs_indexation(true)." ";
+		//$recherche = strtr($recherche, $regs, ereg_replace('.', ' ', $regs));
+		//$table_mots = preg_split("/ +/", $recherche);
+		$table_mots = mots_indexation($recherche);
+		$table_mots_semblables = array_map('RechercheEtendue_mot_semblable',$table_mots);
+		if (count(array_diff($table_mots_semblables,$table_mots)))
+			return implode(" ",$table_mots_semblables);
+		else 
+			return ""; // si pas mieux a proposer, le filtre ne retourne rien
 	}
 	// infame salmigondi
 	// a remplacer par levensthein
@@ -221,68 +235,72 @@
 		}
 	}
 	function RechercheEtendue_mot_semblable($mot){
-		$candidats = array();
+		static $mot_semblable_best = array();
 	
-		for ($k=0;$k<strlen($mot)-1;$k++){
-			$permut = "_";
-			// permutations de lettre : les meilleurs candidats
-			$test = substr($mot,0,$k);
-			$test .= $permut . $permut;
-			$test .= substr($mot,$k+2,strlen($mot)-$k-2);
-			$candidats[] = $test;
-	
-			// 1 lettre en trop
-			$test = substr($mot,0,$k);
-			$test .= substr($mot,$k+1,strlen($mot)-$k-1);
-			$candidats[] = $test;
-	
-			// 1 lettre manquante
-			$test = substr($mot,0,$k);
-			$test .= $permut;
-			$test .= substr($mot,$k,strlen($mot)-$k);
-			$candidats[] = $test;
-		}
-		// debuts identiques
-		for ($k=2;$k<strlen($mot)-1;$k++){
-			$test = substr($mot,0,$k);
-			if ($k<4) $test.= substr("___",0,4-$k);
-			$candidats[] = $test;
-		}
-	
-		if (isset($_GET['dump'])) var_dump($candidats);// pour le debugage
-		$confirmes = array();
-		foreach ($candidats as $test){
-			if (isset($_GET['dump'])) echo "::$test";// pour le debugage
-			$hash = requete_hash($test);
-		  $hashres = $hash[0]; // on peut prendre le non strict
-			if ($hashres){
-				$query = "SELECT * FROM spip_index_dico WHERE hash IN (".$hash[0].")";
-				$res = spip_query($query);
-				while ($row =spip_fetch_array($res)){
-					if (isset($_GET['dump'])) echo "::".$row['dico'];
-					$confirmes[$row['dico']]=0;
-				}
-			};
-			if (isset($_GET['dump'])) echo "<br/>";// pour le debugage
-		}
-	
-		$best = $mot;
-		$best_match = 10000;
-		if (count($confirmes)){
-			// calcul de l'erreur absolue
-			$translitteration_complexe = true;
-			$base = nettoyer_chaine_indexation($mot);
-			foreach(array_keys($confirmes) as $key){
-				$confirmes[$key] = $score = RechercheEtendue_mot_match($base,$key,$best_match);
-				if ($score<$best_match){
-					$best_match = $score;
-					$best = $key;
-				}
+		// eviter de recalculer deux fois pour le meme mot
+		// surtout si le filtre est appelle plusieurs fois pour la meme recherche
+		if (!isset($mot_semblable_best[$mot])){
+			$candidats = array();
+			for ($k=0;$k<strlen($mot)-1;$k++){
+				$permut = "_";
+				// permutations de lettre : les meilleurs candidats
+				$test = substr($mot,0,$k);
+				$test .= $permut . $permut;
+				$test .= substr($mot,$k+2,strlen($mot)-$k-2);
+				$candidats[] = $test;
+		
+				// 1 lettre en trop
+				$test = substr($mot,0,$k);
+				$test .= substr($mot,$k+1,strlen($mot)-$k-1);
+				$candidats[] = $test;
+		
+				// 1 lettre manquante
+				$test = substr($mot,0,$k);
+				$test .= $permut;
+				$test .= substr($mot,$k,strlen($mot)-$k);
+				$candidats[] = $test;
+			}
+			// debuts identiques
+			for ($k=2;$k<strlen($mot)-1;$k++){
+				$test = substr($mot,0,$k);
+				if ($k<4) $test.= substr("___",0,4-$k);
+				$candidats[] = $test;
+			}
+		
+			if (isset($_GET['dump'])) var_dump($candidats);// pour le debugage
+			$confirmes = array();
+			foreach ($candidats as $test){
+				if (isset($_GET['dump'])) echo "::$test";// pour le debugage
+				$hash = requete_hash($test);
+			  $hashres = $hash[0]; // on peut prendre le non strict
+				if ($hashres){
+					$query = "SELECT * FROM spip_index_dico WHERE hash IN (".$hash[0].")";
+					$res = spip_query($query);
+					while ($row =spip_fetch_array($res)){
+						if (isset($_GET['dump'])) echo "::".$row['dico'];
+						$confirmes[$row['dico']]=0;
+					}
+				};
+				if (isset($_GET['dump'])) echo "<br/>";// pour le debugage
+			}
+		
+			$best = $mot;
+			$best_match = 10000;
+			if (count($confirmes)){
+				// calcul de l'erreur absolue
+				foreach(array_keys($confirmes) as $key){
+					$confirmes[$key] = $score = RechercheEtendue_mot_match($mot,$key,$best_match);
+					if ($score<$best_match){
+						$best_match = $score;
+						$best = $key;
+					}
+			 	}
+				if (isset($_GET['dump'])) var_dump($confirmes);// pour le debugage
 		 	}
-			if (isset($_GET['dump'])) var_dump($confirmes);// pour le debugage
-	 	}
+		 	$mot_semblable_best[$mot]=$best;
+		}
 	
-		return $best;
+		return $mot_semblable_best[$mot];
 	}
 
 

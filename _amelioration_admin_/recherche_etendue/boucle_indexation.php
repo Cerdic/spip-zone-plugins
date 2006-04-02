@@ -29,7 +29,8 @@ foreach($liste_tables as $id=>$table){
 	if ($primary)
 		$exceptions_des_tables['index'][$primary] = 'id_objet*(id_table='. $id .')';
 }
-$exceptions_des_tables['index']['id_table'] = 'id_table';
+//$exceptions_des_tables['index']['id_table'] = 'id_table';
+$exceptions_des_tables['index']['table'] = 'id_table';
 
 
 // {recherche}
@@ -88,26 +89,29 @@ function boucle_INDEX_dist($id_boucle, &$boucles) {
 			$boucle->return = str_replace('$Pile[0][\''.$primary.'\']','$Pile[$SP][\''.$primary.'\']',$boucle->return);
 		}
 	}*/
-	// on regarde si y a des criteres nom_table=articles
-	// pour remplacer par nom_table=spip_articles
+
+	$boucle->group[] = 'CONCAT(' . $boucle->id_table . '.id_table,\':\','.$boucle->id_table . '.id_objet)';
+
 	foreach($boucle->where as $key=>$where){
-		if (strpos($where,'nom_table')!==FALSE){
+		if (strpos($where,'id_table')!==FALSE){
+			// on regarde si y a des criteres nom_table=articles
+			// pour remplacer par nom_table=spip_articles
 			$abr = array();
 			$full = array();
 			foreach($table_des_tables as $one=>$repl){
 				$abr[] = "'$one'";
 				$full[] = "'spip_$repl'";
 			}
+			$liste_tables = liste_index_tables();
 			$where = str_replace($abr, $full, $where);
-			$boucle->where[$key]=$where;
+			$where = str_replace(array_values($liste_tables),array_keys($liste_tables),$where);
+			$boucle->where[$key] = $where;
 		}
 	}
-
-	$boucle->group[] = 'CONCAT(' . $boucle->id_table . '.id_table,\':\','.$boucle->id_table . '.id_objet)';
-
-	//foreach($boucle->order as $key=>$order){
-	//	$boucle->order[$key]=str_replace($boucle->id_table . '.points','points',$order);
-	//}
+	
+	foreach($boucle->order as $key=>$order){
+		$boucle->order[$key]=str_replace($boucle->id_table . '.points','points',$order);
+	}
 	return calculer_boucle($id_boucle, $boucles);
 }
 
