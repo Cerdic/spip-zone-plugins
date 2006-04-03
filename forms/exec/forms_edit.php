@@ -376,6 +376,7 @@ function exec_forms_edit(){
 	$supp_confirme = _request('supp_confirme');
 	$supp_rejet = _request('supp_rejet');
 
+	
   Forms_verifier_base();
 
 	if ($retour)
@@ -390,9 +391,9 @@ function exec_forms_edit(){
 	}
 	else $nb_reponses = 0;
 
+	$clean_link = parametre_url(self(),'new','');
 	$form_link = generer_url_ecrire('forms_edit');
-	$form_link = parametre_url($form_link,"id_form",$id_form);
-	if ($new)
+	if ($new == 'oui' && !$titre)
 		$form_link = parametre_url($form_link,"new",$new);
 	if ($retour) 
 		$form_link = parametre_url($form_link,"retour",urlencode($retour));
@@ -433,6 +434,7 @@ function exec_forms_edit(){
 		}
 		$js_titre = "";
 	}
+	$form_link = parametre_url($form_link,"id_form",$id_form);
 
 	//
 	// Affichage de la page
@@ -470,7 +472,7 @@ function exec_forms_edit(){
 			echo "<p>";
 			echo _L("Voulez-vous vraiment supprimer ce formulaire ?")."</p>\n";
 		}
-		$link = parametre_url(self(),'supp_form', $supp_form);
+		$link = parametre_url($clean_link,'supp_form', $supp_form);
 		echo "<form method='POST' action='"
 			. $link
 			. "' style='border: 0px; margin: 0px;'>";
@@ -559,13 +561,14 @@ function exec_forms_edit(){
 	}
 	if ($id_form && Forms_form_administrable($id_form)) {
 		echo "<div style='float:$spip_lang_left'>";
-		$link = parametre_url(self(),'supp_form', $id_form);
+		$link = parametre_url($clean_link,'supp_form', $id_form);
 		if (!$retour) {
 			$link=parametre_url($link,'retour', urlencode(generer_url_ecrire('form_tous')));
 		}
 		icone(_L("Supprimer ce formulaire"), $link, "../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "supprimer.gif");
 		echo "</div>";
 	}
+	echo "<div style='clear:both;'></div>";
 	echo "</div>";
 
 
@@ -603,63 +606,65 @@ function exec_forms_edit(){
 		$jshide = "";
 		$s = "";
 		$options = "";
-		foreach ($schema as $index => $t) {
-			if ($t['type'] == 'select'){
-				$visible = false;
-				$code = $t['code'];
-				$options .= "<option value='$code'";
-				if ($email['route'] == $code){
-					$options .= " selected='selected'";
-					$email_route_known = $visible = true;
+		if (is_array($schema)){
+			foreach ($schema as $index => $t) {
+				if ($t['type'] == 'select'){
+					$visible = false;
+					$code = $t['code'];
+					$options .= "<option value='$code'";
+					if ($email['route'] == $code){
+						$options .= " selected='selected'";
+						$email_route_known = $visible = true;
+					}
+					$options .= ">" . $t['nom'] . "</option>\n";
+					$s .= debut_block_route("bock_email_route_$code",$visible);
+					$jshide .=  "cacher_email_route('bock_email_route_$code');\n";
+					
+					$s .= "<table id ='email_route_$code'>\n";
+					$s .= "<tr><th>".$t['nom']."</th><th>";
+					$s .= "<strong><label for='email_route_$code'>"._T('email_2')."</label></strong>";
+					$s .= "</th></tr>\n";
+					$js = "";
+					$type_ext = $t['type_ext'];
+					foreach ($type_ext as $code_choix => $nom_choix) {
+						$s .= "<tr><td>$nom_choix</td><td>";
+						$s .= "<input type='text' name='email[$code_choix]' value=\"";
+						$s .= isset($email[$code_choix])?entites_html($email[$code_choix]):"";
+						$s .= "\" class='fondl verdana2' size='20'$js>";
+						$s .= "</td></tr>";
+					}
+					$s .="</table>";
+					$s .= fin_block_route("bock_email_route_$code",$visible);
 				}
-				$options .= ">" . $t['nom'] . "</option>\n";
-				$s .= debut_block_route("bock_email_route_$code",$visible);
-				$jshide .=  "cacher_email_route('bock_email_route_$code');\n";
-				
-				$s .= "<table id ='email_route_$code'>\n";
-				$s .= "<tr><th>".$t['nom']."</th><th>";
-				$s .= "<strong><label for='email_route_$code'>"._T('email_2')."</label></strong>";
-				$s .= "</th></tr>\n";
-				$js = "";
-				$type_ext = $t['type_ext'];
-				foreach ($type_ext as $code_choix => $nom_choix) {
-					$s .= "<tr><td>$nom_choix</td><td>";
-					$s .= "<input type='text' name='email[$code_choix]' value=\"";
-					$s .= isset($email[$code_choix])?entites_html($email[$code_choix]):"";
-					$s .= "\" class='fondl verdana2' size='20'$js>";
-					$s .= "</td></tr>";
-				}
-				$s .="</table>";
-				$s .= fin_block_route("bock_email_route_$code",$visible);
 			}
-		}
-		$jshide = "<script type='text/javascript'><!--
-		function montrer_email_route(obj) {
-			layer = findObj(obj);
-			if (layer)
-				layer.style.display = 'block';
-		}
-		function cacher_email_route(obj) {
-			layer = findObj(obj);
-			if (layer)
-				layer.style.display = 'none';
-		}
-		function update_email_route_visibility(obj){
-			$jshide
-			cacher_email_route('bock_email_route_');
-			montrer_email_route(obj);
-		}
-		//--></script>\n";
-		echo $jshide;
+			$jshide = "<script type='text/javascript'><!--
+			function montrer_email_route(obj) {
+				layer = findObj(obj);
+				if (layer)
+					layer.style.display = 'block';
+			}
+			function cacher_email_route(obj) {
+				layer = findObj(obj);
+				if (layer)
+					layer.style.display = 'none';
+			}
+			function update_email_route_visibility(obj){
+				$jshide
+				cacher_email_route('bock_email_route_');
+				montrer_email_route(obj);
+			}
+			//--></script>\n";
+			echo $jshide;
 
-		echo "<strong><label for='email_route_form'>"._L('Choisir l\'email en fonction de')."</label></strong> ";
-		echo "<br />";
-		echo "<select name='email[route]' id='email_route_form' class='forml'";
-		echo "onchange='update_email_route_visibility(\"bock_email_route_\"+options[selectedIndex].value)' ";
-		echo ">\n";
-		echo "<option value=''>"._L('Email independant de la reponse')."</option>\n";
-		echo $options;
-	 	echo "</select><br />\n";
+			echo "<strong><label for='email_route_form'>"._L('Choisir l\'email en fonction de')."</label></strong> ";
+			echo "<br />";
+			echo "<select name='email[route]' id='email_route_form' class='forml'";
+			echo "onchange='update_email_route_visibility(\"bock_email_route_\"+options[selectedIndex].value)' ";
+			echo ">\n";
+			echo "<option value=''>"._L('Email independant de la reponse')."</option>\n";
+			echo $options;
+		 	echo "</select><br />\n";
+		}
 	 	
 		echo debut_block_route("bock_email_route_",$email_route_known==false);
 		echo "<strong><label for='email_form'>"._T('email_2')."</label></strong> ";

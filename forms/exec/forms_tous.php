@@ -44,6 +44,9 @@ function exec_forms_tous(){
 	
 	debut_page(_L("Tous les formulaires"), "documents", "forms");
 	debut_gauche();
+	debut_boite_info();
+	echo _L("Cliquez sur un formulaire pour le modifier ou le visualiser avant suppression.");
+	fin_boite_info();
 	
 	debut_droite();
 	

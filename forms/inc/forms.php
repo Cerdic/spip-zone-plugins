@@ -774,7 +774,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			if ($titre_table) echo "<div style='height: 12px;'></div>";
 			echo "<div class='liste'>";
 			bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black");
-			echo "<table width='100%' cellpadding='4' cellspacing='0' border='0'>";
+			echo "<table width='100%' cellpadding='5' cellspacing='0' border='0'>";
 	
 			echo $tranches;
 	
@@ -802,10 +802,11 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 					$puce = 'puce-orange-breve.gif';
 				}
 	
-				$s = "<a href=\"".$link."\">";
-				$s .= "<img src='img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
-				$s .= typo($titre);
-				$s .= "</a> &nbsp;&nbsp;";
+				$s = "<img src='img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
+				$vals[] = $s;
+				
+				//$s .= typo($titre);
+				$s = icone_horizontale(typo($titre), $link,"../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "",false);
 				$vals[] = $s;
 				
 				$s = "";
@@ -820,7 +821,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 				$s = "";
 				if(Forms_form_administrable($id_form)){
 					$link = parametre_url(self(),'duplique_form',$id_form);
-					$vals[] = icone_horizontale(_L("Dupliquer ce formulaire"), $link,"../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "creer.gif",false);
+					$vals[] = "<a href='$link'>"._L("Dupliquer")."</a>";
 				}
 				$vals[] = $s;
 
@@ -828,8 +829,8 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			}
 			spip_free_result($result);
 			
-			$largeurs = array('','','','');
-			$styles = array('arial11', 'arial1', 'arial1','arial1');
+			$largeurs = array('','','','','');
+			$styles = array('arial11', 'arial11', 'arial1', 'arial1','arial1');
 			afficher_liste($largeurs, $table, $styles);
 			echo "</table>";
 			echo "</div>\n";
