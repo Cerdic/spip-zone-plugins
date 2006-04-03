@@ -802,7 +802,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 					$puce = 'puce-orange-breve.gif';
 				}
 	
-				$s = "<img src='img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
+				$s = "<img src='"._DIR_IMG_PACK."$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
 				$vals[] = $s;
 				
 				//$s .= typo($titre);
