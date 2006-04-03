@@ -42,6 +42,7 @@ function article_editable($id_article){
 function affiche_evenements_agenda($flag_editable){
 	global $visu_evenements;
 	$type = _request('type');
+	$partie_cal = _request('partie_cal');
 	if (!$type) $type='semaine';
 	$id_evenement = intval(_request('id_evenement'));
 	$ajouter_id_article = intval(_request('ajouter_id_article'));
@@ -109,7 +110,7 @@ function affiche_evenements_agenda($flag_editable){
 
 	$today=date('Y-m-d');
 	// creneaux pour ajout uniquement si ajouter_id_article present
-	if (($type!='mois')&&($flag_editable))
+	if (($type!='mois')&&($partie_cal!='sansheure')&&($flag_editable))
 	{
 		$heuremin='08';$heuremax='20';
 		for ($j=$ts_start;$j<=$ts_fin;$j+=$freq_creneaux){
@@ -131,8 +132,8 @@ function affiche_evenements_agenda($flag_editable){
 	$categorie_concerne=array('plage'=>'calendrier-plage','evenement'=>'calendrier-evenement');
 	$categorie_info=array('plage'=>'calendrier-plage-info','evenement'=>'calendrier-evenement-info');
 
-	$datestart=date('Y-m-d H:i:s',$ts_start);
-	$datefin=date('Y-m-d H:i:s',$ts_fin);
+	$datestart=date('Y-m-d H:i:s',$ts_start-24*60*60);
+	$datefin=date('Y-m-d H:i:s',$ts_fin+24*60*60);
 
 	// tous les evenements
 	$query = "SELECT * 
@@ -140,7 +141,8 @@ function affiche_evenements_agenda($flag_editable){
 				 LEFT JOIN spip_evenements_articles AS J ON evenements.id_evenement=J.id_evenement
 						 WHERE ((evenements.date_debut>='$datestart' AND evenements.date_debut<='$datefin') 
 						 		OR (evenements.date_fin>='$datestart' AND evenements.date_fin<='$datefin')
-						 		OR (evenements.date_debut<'$datestart' AND evenements.date_fin>'$datefin'));";
+						 		OR (evenements.date_debut<'$datestart' AND evenements.date_fin>'$datefin'))
+						 ORDER BY evenements.date_debut;";
 	$res = spip_query($query);
  	$urlbase=parametre_url($urlbase,'neweven','');
 	$urlbase=parametre_url($urlbase,'annee',$annee);
@@ -376,4 +378,33 @@ function http_calendrier_ics_message($annee, $mois, $jour, $large)
 function http_calendrier_aide_mess()
 {
 	return "";
+}
+
+function http_calendrier_semainesh($annee, $mois, $jour, $echelle, $partie_cal, $script, $ancre, $evt)
+{
+	global $spip_ecran;
+	if (!isset($spip_ecran)) $spip_ecran = 'large';
+
+	$init = date("w",mktime(1,1,1,$mois,$jour,$annee));
+	$init = $jour+1-($init ? $init : 7);
+	$sd = '';
+
+	if (is_array($evt))
+	  {
+		  list($sansduree, $evenements, $premier_jour, $dernier_jour) = $evt;
+		  if ($sansduree)
+		    foreach($sansduree as $d => $r) 
+		      $evenements[$d] = !$evenements[$d] ? $r : array_merge($evenements[$d], $r);
+	    $finurl = "&amp;echelle=$echelle&amp;partie_cal=$partie_cal$ancre";
+	    $evt =
+	      http_calendrier_semaine_noms($annee, $mois, $init, $script, $finurl) .
+	      http_calendrier_mois_sept($annee, $mois, $init, $init+ 6, $evenements, $script);
+	  } else $evt = "<tr><td>$evt</td></tr>";
+
+	return 
+	  "\n<table class='calendrier-table-$spip_ecran' cellspacing='0' cellpadding='0'>" .
+	  http_calendrier_semaine_navigation($annee, $mois, $init, $echelle, $partie_cal, $script, $ancre) .
+	  $evt .
+	  "</table>" .
+	  (_DIR_RESTREINT ? "" : http_calendrier_aide_mess());
 }

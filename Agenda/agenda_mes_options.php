@@ -48,7 +48,7 @@ function exec_calendrier()
 	  fin_page();
 	}
 	else{
-		$var_f = include_fonction('agenda_evenements');
+		$var_f = charger_fonction('agenda_evenements');
 		$var_f();
 	}
 }

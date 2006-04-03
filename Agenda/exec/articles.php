@@ -31,8 +31,7 @@ function exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter
 {
   global $options, $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang;
 
-$query = "SELECT * FROM spip_articles WHERE id_article='$id_article'";
-$result = spip_query($query);
+$result = spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'");
 
 if ($row = spip_fetch_array($result)) {
 	$id_article = $row["id_article"];
@@ -55,42 +54,35 @@ if ($row = spip_fetch_array($result)) {
 	$extra = $row["extra"];
 	$id_trad = $row["id_trad"];
 	$id_version = $row["id_version"];
-}
 
-// pour l'affichage du virtuel
-unset($virtuel);
-if (substr($chapo, 0, 1) == '=') {
-	$virtuel = substr($chapo, 1);
-}
+	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date_redac, $regs)) {
+		$annee_redac = $regs[1];
+		$mois_redac = $regs[2];
+		$jour_redac = $regs[3];
+		$heure_redac = $regs[4];
+		$minute_redac = $regs[5];
+		if ($annee_redac > 4000) $annee_redac -= 9000;
+	}
 
-if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date_redac, $regs)) {
-	$annee_redac = $regs[1];
-	$mois_redac = $regs[2];
-	$jour_redac = $regs[3];
-	$heure_redac = $regs[4];
-	$minute_redac = $regs[5];
-	if ($annee_redac > 4000) $annee_redac -= 9000;
-}
-
-if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date, $regs)) {
-	$annee = $regs[1];
-	$mois = $regs[2];
-	$jour = $regs[3];
-	$heure = $regs[4];
-	$minute = $regs[5];
+	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date, $regs)) {
+		$annee = $regs[1];
+		$mois = $regs[2];
+		$jour = $regs[3];
+		$heure = $regs[4];
+		$minute = $regs[5];
+	}
  }
 
-
-
-debut_page("&laquo; $titre_article &raquo;", "documents", "articles");
+debut_page("&laquo; $titre_article &raquo;", "documents", "articles", "", "", $id_rubrique);
 echo Agenda_date_insert_js_calendar_placeholder("_debut");
 echo Agenda_date_insert_js_calendar_placeholder("_fin");
-
 debut_grand_cadre();
 
 afficher_hierarchie($id_rubrique);
 
 fin_grand_cadre();
+
+if (!$row) {echo _T('public:aucun_article'); exit;}
 
 //
 // Affichage de la colonne de gauche
@@ -104,7 +96,14 @@ boite_info_articles($id_article, $statut_article, $visites, $id_version);
 // Logos de l'article et Boites de configuration avancee
 //
 
- boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
+
+// pour l'affichage du virtuel
+unset($virtuel);
+if (substr($chapo, 0, 1) == '=') {
+	$virtuel = substr($chapo, 1);
+}
+
+boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 			  $change_accepter_forum, $change_petition,
 			  $email_unique, $site_obli, $site_unique,
 			  $message, $texte_petition,
@@ -130,12 +129,10 @@ debut_cadre_relief();
 echo "<div class='serif' align='$spip_lang_left'>";
 
  dates_articles($id_article, $id_rubrique, $flag_editable, $statut_article, $date,$annee, $mois, $jour, $heure, $minute, $date_redac, $annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac);
-
 //
 // Gestion de l'agenda
 //
 Agenda_formulaire_article($id_article, $id_rubrique, $flag_editable);
- 
  
 //
 // Liste des auteurs de l'article
@@ -165,7 +162,8 @@ $les_auteurs = afficher_auteurs_articles($id_article, $flag_editable);
 // Ajouter un auteur
 //
 
- ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag_editable, $rubrique_article, $supprimer_bouton_creer_auteur);
+if ($flag_editable AND $options == 'avancees') 
+	ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag_editable, $rubrique_article, $supprimer_bouton_creer_auteur);
 
 fin_cadre_enfonce(false);
 
@@ -174,7 +172,7 @@ fin_cadre_enfonce(false);
 //
 
 if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
-  formulaire_mots('articles', $id_article, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable, generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique"));
+  formulaire_mots('articles', $id_article, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable, generer_url_ecrire("articles","id_article=$id_article"));
 }
 
  langues_articles($id_article, $langue_article, $flag_editable, $id_rubrique, $id_trad, $dir_lang, $nom_select, $lier_trad);
@@ -202,14 +200,16 @@ if ($flag_editable) {
 // "Demander la publication"
 //
 
+
 if ($flag_auteur AND $statut_article == 'prepa') {
 	echo "<P>";
 	debut_cadre_relief();
 	echo	"<center>",
 		"<B>"._T('texte_proposer_publication')."</B>",
 		aide ("artprop"),
-		generer_url_post_ecrire("articles", "id_article=$id_article&id_rubrique=$id_rubrique"),
-		"<input type='hidden' name='statut_nouv' value='prop' />\n",
+		"\n<form method='post' action='",
+		generer_action_auteur("instituer", "article $id_article prop", generer_url_ecrire('articles', "id_article=$id_article", true)),
+      "'>",
 		"<input type='submit' class='fondo' value=\"", 
 		_T('bouton_demande_publication'),
 		"\" />\n",
@@ -289,16 +289,9 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	  debut_cadre_relief("forum-interne-24.gif");
 
 
-	list($nb_forums) = spip_fetch_array(spip_query(
-		"SELECT count(*) AS count FROM spip_forum
-		WHERE id_article=$id_article
-		AND statut IN ('publie', 'off', 'prop')"));
+	list($nb_forums) = spip_fetch_array(spip_query("SELECT count(*) AS count FROM spip_forum WHERE id_article=$id_article 	AND statut IN ('publie', 'off', 'prop')"));
 
-	list($nb_signatures) = spip_fetch_array(spip_query(
-		"SELECT COUNT(*) AS count FROM spip_signatures
-		WHERE id_article=$id_article
-		AND statut IN ('publie', 'poubelle')"));
-
+	list($nb_signatures) = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_signatures WHERE id_article=$id_article AND statut IN ('publie', 'poubelle')"));
 
 	$visible = $change_accepter_forum || $change_petition
 		|| $nb_forums || $nb_signatures;
@@ -323,7 +316,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 
 	if ($nb_forums) {
 		echo "<br />\n";
-		icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)), generer_url_ecrire("articles_forum","id_article=$id_article&id_rubrique=$id_rubrique"), "suivi-forum-24.gif", "");
+		icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)), generer_url_ecrire("articles_forum","id_article=$id_article"), "suivi-forum-24.gif", "");
 	}
 
 	// Reglage existant
@@ -337,7 +330,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	}
 
 	// Afficher le formulaire de modification du reglage
-	echo formulaire_modification_forums_publics($id_article, $forums_publics, generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique"));
+	echo formulaire_modification_forums_publics($id_article, $forums_publics, generer_url_ecrire("articles","id_article=$id_article"));
 
 
 	// Petitions
@@ -351,18 +344,14 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 
 			$texte_petition = addslashes($texte_petition);
 
-			$query_pet = "REPLACE spip_petitions (id_article, email_unique, site_obli, site_unique, message, texte) ".
-				"VALUES ($id_article, '$email_unique', '$site_obli', '$site_unique', '$message', '$texte_petition')";
-			$result_pet = spip_query($query_pet);
+			$result_pet = spip_query("REPLACE spip_petitions (id_article, email_unique, site_obli, site_unique, message, texte) VALUES ($id_article, '$email_unique', '$site_obli', '$site_unique', '$message', '$texte_petition')");
 		}
 		else if ($change_petition == "off") {
-			$query_pet = "DELETE FROM spip_petitions WHERE id_article=$id_article";
-			$result_pet = spip_query($query_pet);
+			$result_pet = spip_query("DELETE FROM spip_petitions WHERE id_article=$id_article");
 		}
 	}
 
-	$petition = spip_fetch_array(spip_query(
-		"SELECT * FROM spip_petitions WHERE id_article=$id_article"));
+	$petition = spip_fetch_array(spip_query("SELECT * FROM spip_petitions WHERE id_article=$id_article"));
 
 	$email_unique=$petition["email_unique"];
 	$site_obli=$petition["site_obli"];
@@ -370,7 +359,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	$message=$petition["message"];
 	$texte_petition=$petition["texte"];
 
-	echo generer_url_post_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique");
+	echo generer_url_post_ecrire("articles","id_article=$id_article");
 
 	echo "<select name='change_petition'
 		class='fondl' style='font-size:10px;'
@@ -464,7 +453,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	else
 		echo debut_block_invisible("redirection");
 
-	echo generer_url_post_ecrire("articles", "id_article=$id_article&id_rubrique=$id_rubrique");
+	echo generer_url_post_ecrire("articles", "id_article=$id_article");
 	echo "\n<INPUT TYPE='hidden' NAME='changer_virtuel' VALUE='oui'>";
 	$virtuelhttp = ($virtuel ? "" : "http://");
 
@@ -487,56 +476,6 @@ meme_rubrique_articles($id_rubrique, $id_article, $options);
 
 }
 
-function   comparer_statut_articles($id_article, $statut_nouv, $statut_article, $statut_rubrique, $flag_auteur)
-{
-	if ($statut_rubrique) $ok_nouveau_statut = true;
-	else if ($flag_auteur) {
-		if ($statut_nouv == 'prop' AND $statut_article == 'prepa')
-			$ok_nouveau_statut = true;
-		else if ($statut_nouv == 'prepa' AND $statut_article == 'poubelle')
-			$ok_nouveau_statut = true;
-	}
-	if ($ok_nouveau_statut) {
-		spip_query("UPDATE spip_articles SET statut='$statut_nouv' WHERE id_article=$id_article");
-
-		if ($statut_nouv == 'publie' AND $statut_nouv != $statut_article)
-			spip_query("UPDATE spip_articles SET date=NOW() WHERE id_article=$id_article");
-
-		$ok_nouveau_statut =  ($statut_nouv != $statut_article);
-
-		// 'depublie' => invalider les caches
-		if ($ok_nouveau_statut AND $statut_article == 'publie') {
-			include_spip('inc/invalideur');
-			suivre_invalideur("id='id_article/$id_article'");
-		}
-	}
-	return $ok_nouveau_statut ;
-}
-
-
-function cron_articles($id_article, $statut, $statut_ancien) {
-	calculer_rubriques();
-
-	if ($statut == 'publie') {
-		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-			include_spip("inc/indexation");
-			marquer_indexer('article', $id_article);
-		}
-		include_spip('inc/mail');
-		envoyer_mail_publication($id_article);
-	}
-
-	if ($statut_ancien == 'publie') {
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='id_article/$id_article'");
-	}
-
-	if ($statut == "prop" AND $statut_ancien != 'publie') {
-		include_spip('inc/mail');
-		envoyer_mail_proposition($id_article);
-	}
-}
-
 function meme_rubrique_articles($id_rubrique, $id_article, $options, $order='articles.date', $limit=30)
 {
 	global $spip_lang_right, $spip_lang_left;
@@ -555,7 +494,7 @@ function meme_rubrique_articles($id_rubrique, $id_article, $options, $order='art
 				if ($options == "avancees") {
 					$numero = "<div class='arial1' style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;'><b>"._T('info_numero_abbreviation')."$ze_article</b></div>";
 				}
-				echo "<a class='$ze_statut' style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$ze_article&id_rubrique=$id_rubrique") . "'>$numero$ze_titre</a>";
+				echo "<a class='$ze_statut' style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$ze_article") . "'>$numero$ze_titre</a>";
 			}
 			echo "</div>";
 			echo "</div>";
@@ -565,12 +504,12 @@ function meme_rubrique_articles($id_rubrique, $id_article, $options, $order='art
 function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode, $ip, $im)
 {
 	if ($flag_modif) {
-	  icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article&id_rubrique=$id_rubrique"), $ip, $im);
+	  icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), $ip, $im);
 		echo "<font face='arial,helvetica,sans-serif' size='2'>$mode</font>";
 		echo aide("artmodif");
 	}
 	else {
-		icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article&id_rubrique=$id_rubrique"), "article-24.gif", "edit.gif");
+		icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif");
 	}
 
 }
@@ -624,8 +563,8 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 	
 		// Recuperer les donnees de l'article
 		if ($GLOBALS['meta']['articles_modif'] != 'non') {
-			$query = "SELECT auteur_modif, UNIX_TIMESTAMP(date_modif) AS modification, UNIX_TIMESTAMP(NOW()) AS maintenant FROM spip_articles WHERE id_article='$id_article'";
-			$result = spip_query($query);
+			$result = spip_query("SELECT auteur_modif, UNIX_TIMESTAMP(date_modif) AS modification, UNIX_TIMESTAMP(NOW()) AS maintenant FROM spip_articles WHERE id_article='$id_article'");
+
 	
 			if ($row = spip_fetch_array($result)) {
 				$auteur_modif = $row["auteur_modif"];
@@ -635,8 +574,8 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 				$date_diff = floor(($maintenant - $modification)/60);
 	
 				if ($date_diff >= 0 AND $date_diff < 60 AND $auteur_modif > 0 AND $auteur_modif != $connect_id_auteur) {
-					$query_auteur = "SELECT nom FROM spip_auteurs WHERE id_auteur='$auteur_modif'";
-					$result_auteur = spip_query($query_auteur);
+					$result_auteur = spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur='$auteur_modif'");
+
 					if ($row_auteur = spip_fetch_array($result_auteur)) {
 						$nom_auteur_modif = typo($row_auteur["nom"]);
 					}
@@ -662,7 +601,7 @@ function dates_articles($id_article, $id_rubrique, $flag_editable, $statut_artic
   if ($flag_editable AND $options == 'avancees') {
 	debut_cadre_couleur();
 
-	echo generer_url_post_ecrire("articles", "id_article=$id_article&id_rubrique=$id_rubrique");
+	echo generer_url_post_ecrire("articles", "id_article=$id_article");
 
 	if ($statut_article == 'publie') {
 
@@ -800,15 +739,15 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
 	// Gerer les groupes de traductions
 	if ($GLOBALS['meta']['gerer_trad'] == 'oui') {
-		if ($flag_editable AND $supp_trad == 'oui') { // Ne plus lier a un groupe de trad
-			spip_query("UPDATE spip_articles SET id_trad = '0' WHERE id_article = $id_article");
+		if ($flag_editable AND _request('supp_trad') == 'oui') { // Ne plus lier a un groupe de trad
+			spip_query("UPDATE spip_articles SET id_trad=0, date_modif=NOW() WHERE id_article = $id_article");
 
 			// Verifier si l'ancien groupe ne comporte plus qu'un seul article. Alors mettre a zero.
 			$result_autres_trad= spip_query("SELECT COUNT(id_article) AS total FROM spip_articles WHERE id_trad = $id_trad");
 			if ($row = spip_fetch_array($result_autres_trad))
 				$nombre_autres_trad = $row["total"];
 			if ($nombre_autres_trad == 1)
-				spip_query("UPDATE spip_articles SET id_trad = '0' WHERE id_trad = $id_trad");
+				spip_query("UPDATE spip_articles SET id_trad = 0, date_modif=NOW() WHERE id_trad = $id_trad");
 
 			$id_trad = 0;
 		}
@@ -818,13 +757,13 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 		AND $id_trad_old = intval($id_trad_old)
 		AND $connect_statut=='0minirezo'
 		AND $connect_toutes_rubriques) { 
-			spip_query("UPDATE spip_articles SET id_trad = $id_trad_new WHERE id_trad = $id_trad_old");
+			spip_query("UPDATE spip_articles SET id_trad = $id_trad_new, date_modif=NOW() WHERE id_trad = $id_trad_old");
 			$id_trad = $id_trad_new;
 		}
 
 		if ($flag_editable AND $lier_trad > 0) { // Lier a un groupe de trad
-			$query_lier = "SELECT id_trad FROM spip_articles WHERE id_article=$lier_trad";
-			$result_lier = spip_query($query_lier);
+			$result_lier = spip_query("SELECT id_trad FROM spip_articles WHERE id_article=$lier_trad");
+
 			if ($row = spip_fetch_array($result_lier)) {
 				$id_lier = $row['id_trad'];
 
@@ -836,10 +775,10 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 					$nouveau_trad = $id_lier;
 				}
 
-				spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_article = $lier_trad");
-				if ($id_lier > 0) spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_trad = $id_lier");
-				spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_article = $id_article");
-				if ($id_trad > 0) spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_trad = $id_trad");
+				spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad, date_modif=NOW() WHERE id_article = $lier_trad");
+				if ($id_lier > 0) spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad, date_modif=NOW() WHERE id_trad = $id_lier");
+				spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad, date_modif=NOW() WHERE id_article = $id_article");
+				if ($id_trad > 0) spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad, date_modif=NOW() WHERE id_trad = $id_trad");
 
 				$id_trad = $nouveau_trad;
 			}
@@ -852,9 +791,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
 		// Afficher la liste des traductions
 		if ($id_trad != 0) {
-			$query_trad = "SELECT id_article, id_rubrique, titre, lang, statut FROM spip_articles WHERE id_trad = $id_trad";
-			$result_trad = spip_query($query_trad);
-			
+			$result_trad = spip_query("SELECT id_article, id_rubrique, titre, lang, statut FROM spip_articles WHERE id_trad = $id_trad");
 			
 			$table='';
 			while ($row = spip_fetch_array($result_trad)) {
@@ -932,7 +869,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 			// Formulaire pour lier a un article
 			echo "<td class='arial2' width='60%'>";
 
-			echo "<form action='" . generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique") . "' method='post' style='margin:0px; padding:0px;'>";
+			echo "<form action='" . generer_url_ecrire("articles","id_article=$id_article") . "' method='post' style='margin:0px; padding:0px;'>";
 			echo _T('trad_lier');
 			echo "<div align='$spip_lang_right'><input type='text' class='fondl' name='lier_trad' size='5'> <INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondl'></div>";
 			echo "</form>";
@@ -949,7 +886,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 			echo "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>";
 			echo "<td background='' width='10'> &nbsp; </td>";
 			echo "<td>";
-			icone_horizontale(_T('trad_delier'), generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique&supp_trad=oui"), "traductions-24.gif", "supprimer.gif");
+			icone_horizontale(_T('trad_delier'), generer_url_ecrire("articles","id_article=$id_article&supp_trad=oui"), "traductions-24.gif", "supprimer.gif");
 			echo "</td>\n";
 		}
 
@@ -964,10 +901,9 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
 function add_auteur_article($id_article, $nouv_auteur)
 {
-	$query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$nouv_auteur' AND id_article='$id_article'";
-		$result=spip_query($query);
-		$query="INSERT INTO spip_auteurs_articles (id_auteur,id_article) VALUES ('$nouv_auteur','$id_article')";
-		$result=spip_query($query);
+	$res = spip_query("SELECT id_article FROM spip_auteurs_articles WHERE id_auteur='$nouv_auteur' AND id_article='$id_article'");
+	if (!spip_num_rows($res))
+		spip_abstract_insert('spip_auteurs_articles', "(id_auteur,id_article)", "('$nouv_auteur','$id_article')");
 }
 
 function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique, $ajout_auteur, $flag_editable, $nouv_auteur, $supp_auteur)
@@ -978,8 +914,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique,
 
   if ($cherche_auteur) {
 	echo "<P ALIGN='$spip_lang_left'>";
-	$query = "SELECT id_auteur, nom FROM spip_auteurs";
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_auteur, nom FROM spip_auteurs");
 	$table_auteurs = array();
 	$table_ids = array();
 	while ($row = spip_fetch_array($result)) {
@@ -995,8 +930,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique,
 		$ajout_auteur = 'oui';
 		list(, $nouv_auteur) = each($resultat);
 		echo "<B>"._T('texte_ajout_auteur')."</B><BR>";
-		$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$nouv_auteur";
-		$result = spip_query($query);
+		$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$nouv_auteur");
 		echo "<UL>";
 		while ($row = spip_fetch_array($result)) {
 			$id_auteur = $row['id_auteur'];
@@ -1016,8 +950,8 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique,
 		if ($les_auteurs) {
 			$les_auteurs = join(',', $les_auteurs);
 			echo "<B>"._T('texte_plusieurs_articles', array('cherche_auteur' => $cherche_auteur))."</B><BR>";
-			$query = "SELECT * FROM spip_auteurs WHERE id_auteur IN ($les_auteurs) ORDER BY nom";
-			$result = spip_query($query);
+			$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur IN ($les_auteurs) ORDER BY nom");
+
 			echo "<UL class='verdana1'>";
 			while ($row = spip_fetch_array($result)) {
 				$id_auteur = $row['id_auteur'];
@@ -1028,7 +962,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique,
 				echo "<li><b>".typo($nom_auteur)."</b>";
 
 				if ($email_auteur) echo " ($email_auteur)";
-				echo " | <A href='", generer_url_ecrire('articles', "id_article=$id_article&id_rubrique=$id_rubrique&ajout_auteur=oui&nouv_auteur=$id_auteur#auteurs"),
+				echo " | <A href='", generer_url_ecrire('articles', "id_article=$id_article&ajout_auteur=oui&nouv_auteur=$id_auteur#auteurs"),
 				  "'>",_T('lien_ajouter_auteur'),"</A>";
 
 				if (trim($bio_auteur)) {
@@ -1043,11 +977,13 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique,
 		echo "<B>"._T('texte_trop_resultats_auteurs', array('cherche_auteur' => $cherche_auteur))."</B><BR>";
 	}
 
-	if ($GLOBALS['connect_statut'] == '0minirezo') {
+	if ($GLOBALS['connect_statut'] == '0minirezo' 
+	AND $GLOBALS['connect_toutes_rubriques']) {
+
 		echo "<div style='width: 200px;'>";
-		$retour = urlencode(generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique"));
-		$titre = urlencode($cherche_auteur);
-		icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","new=oui&ajouter_id_article=$id_article&titre=$titre&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
+		$retour = rawurlencode(generer_url_ecrire("articles","id_article=$id_article"));
+		$titre = rawurlencode($cherche_auteur);
+		icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&nom=$titre&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
 		echo "</div> ";
 
 		// message pour ne pas afficher le second bouton "creer un auteur"
@@ -1076,8 +1012,8 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique,
 
 
   if ($supp_auteur && $flag_editable) {
-	$query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$supp_auteur' AND id_article='$id_article'";
-	$result=spip_query($query);
+	spip_query("DELETE FROM spip_auteurs_articles WHERE id_auteur='$supp_auteur' AND id_article='$id_article'");
+
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 		include_spip("inc/indexation");
 		marquer_indexer('article', $id_article);
@@ -1093,10 +1029,7 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 
 	$les_auteurs = array();
 
-	$query = "SELECT * FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien ".
-	"WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=$id_article ".
-	"GROUP BY auteurs.id_auteur ORDER BY auteurs.nom";
-	$result = spip_query($query);
+	$result = spip_query("SELECT * FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=$id_article GROUP BY auteurs.id_auteur ORDER BY auteurs.nom");
 
 	if (spip_num_rows($result)) {
 		echo "<div class='liste'>";
@@ -1118,11 +1051,8 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 			if ($connect_statut == "0minirezo") $aff_articles = "('prepa', 'prop', 'publie', 'refuse')";
 			else $aff_articles = "('prop', 'publie')";
 
-			$query2 = "SELECT COUNT(articles.id_article) AS compteur ".
-			"FROM spip_auteurs_articles AS lien, spip_articles AS articles ".
-			"WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article ".
-			"AND articles.statut IN $aff_articles GROUP BY lien.id_auteur";
-			$result2 = spip_query($query2);
+			$result2 = spip_query("SELECT COUNT(articles.id_article) AS compteur FROM spip_auteurs_articles AS lien, spip_articles AS articles WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article AND articles.statut IN $aff_articles GROUP BY lien.id_auteur");
+
 			if ($result2) list($nombre_articles) = spip_fetch_array($result2);
 			else $nombre_articles = 0;
 
@@ -1145,7 +1075,7 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 		else $vals[] =  "&nbsp;";
 
 		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
-		  $vals[] =  "<A href='" . generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique&supp_auteur=$id_auteur#auteurs") . "'>"._T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</A>";
+		  $vals[] =  "<A href='" . generer_url_ecrire("articles","id_article=$id_article&supp_auteur=$id_auteur#auteurs") . "'>"._T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</A>";
 		} else {
 			$vals[] = "";
 		}
@@ -1169,41 +1099,34 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 
 function ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag_editable, $rubrique_article, $supprimer_bouton_creer_auteur)
 {
-
-	global $connect_statut, $options,$connect_id_auteur, $couleur_claire ;
-
-	if (!($flag_editable AND $options == 'avancees')) return;
+	global $connect_toutes_rubriques, $connect_statut, $couleur_claire ;
 
 	echo debut_block_invisible("auteursarticle");
-
-	$query = "SELECT * FROM spip_auteurs WHERE ";
-	if ($les_auteurs) $query .= "id_auteur NOT IN ($les_auteurs) AND ";
-	$query .= "statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY statut, nom";
-	$result = spip_query($query);
-	
-	echo "<table width='100%'>";
-	echo "<tr>";
+	echo "<table width='100%'><tr>";
 
 	if ($connect_statut == '0minirezo'
-	    AND acces_rubrique($rubrique_article)
-	    AND $options == "avancees"
+	    AND $connect_toutes_rubriques
 	    AND !$supprimer_bouton_creer_auteur) {
 	echo "<td width='200'>";
-	$retour = urlencode(generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique"));
-	icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","new=oui&ajouter_id_article=$id_article&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
+	$retour = rawurlencode(generer_url_ecrire("articles","id_article=$id_article"));
+	icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
 	echo "</td>";
 	echo "<td width='20'>&nbsp;</td>";
 	}
 
 	echo "<td>";
 
+	$result = spip_query("SELECT * FROM spip_auteurs WHERE " .
+			(!$les_auteurs ? '' : "id_auteur NOT IN ($les_auteurs) AND ") .
+			"statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY statut, nom");
 
-	if (spip_num_rows($result) > 0) {
-		echo generer_url_post_ecrire("articles", "id_article=$id_article&id_rubrique=$id_rubrique");;
+	$num = spip_num_rows($result);
+	if ($num) {
+		echo generer_url_post_ecrire("articles", "id_article=$id_article");;
 		echo "<span class='verdana1'><B>"._T('titre_cadre_ajouter_auteur')."&nbsp; </B></span>\n";
 		echo "<DIV><INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
 
-		if (spip_num_rows($result) > 200) {
+		if ($num > 200) {
 			echo "<INPUT TYPE='text' NAME='cherche_auteur' onClick=\"setvisibility('valider_ajouter_auteur','visible');\" CLASS='fondl' VALUE='' SIZE='20'>";
 			echo "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>";
 			echo " <INPUT TYPE='submit' NAME='Chercher' VALUE='"._T('bouton_chercher')."' CLASS='fondo'>";
@@ -1211,9 +1134,6 @@ function ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag
 		} else {
 			echo "<INPUT TYPE='Hidden' NAME='ajout_auteur' VALUE='oui'>";
 			echo "<SELECT NAME='nouv_auteur' SIZE='1' STYLE='width:150px;' CLASS='fondl' onChange=\"setvisibility('valider_ajouter_auteur','visible');\">";
-			$group = false;
-			$group2 = false;
-
 			while ($row = spip_fetch_array($result)) {
 				$id_auteur = $row["id_auteur"];
 				$nom = $row["nom"];
@@ -1241,16 +1161,16 @@ function ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag
 				  echo "\n<OPTION VALUE=\"x\">";
 				}
 
-				$texte_option = supprimer_tags(couper(typo("$nom$email"), 40));
-				echo "\n<OPTION VALUE=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;$texte_option";
+				
+				echo "\n<OPTION VALUE=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;", supprimer_tags(couper(typo("$nom$email"), 40));
 				$statut_old = $statut;
 				$premiere_old = $premiere;
 			}
 			
-			echo "</SELECT>";
-			echo "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>";
-			echo " <INPUT TYPE='submit' NAME='Ajouter' VALUE="._T('bouton_ajouter')." CLASS='fondo'>";
-			echo "</span>";
+			echo "</SELECT>",
+				"<span  class='visible_au_chargement' id='valider_ajouter_auteur'>",
+				" <input type='submit' value="._T('bouton_ajouter')." CLASS='fondo'>",
+				"</span>";
 		}
 		echo "</div></FORM>";
 	}
@@ -1315,12 +1235,12 @@ function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute
 
   echo "<BR><BR>";
 
-  $forum_retour = generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique", true);
+  $forum_retour = generer_url_ecrire("articles","id_article=$id_article", true);
   
   if (!$mute) {
-    $tm = urlencode($titre);
+    $tm = rawurlencode($titre);
     echo "\n<div align='center'>";
-    icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&adresse_retour=" . urlencode($forum_retour) . "&id_article=$id_article&titre_message=$tm"), "forum-interne-24.gif", "creer.gif");
+    icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&adresse_retour=" . rawurlencode($forum_retour) . "&id_article=$id_article&titre_message=$tm"), "forum-interne-24.gif", "creer.gif");
     echo "</div>";
   }
 
@@ -1340,7 +1260,7 @@ function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute
 		if ($i == $debut)
 			echo "<FONT SIZE=3><B>[$i-$y]</B></FONT> ";
 		else
-			echo "[<A href='" . generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique&debut=$i") . "'>$i-$y</A>] ";
+			echo "[<A href='" . generer_url_ecrire("articles","id_article=$id_article&debut=$i") . "'>$i-$y</A>] ";
 	}
 	echo "</div>";
 }
@@ -1361,7 +1281,7 @@ function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute
 		if ($i == $debut)
 			echo "<FONT SIZE=3><B>[$i-$y]</B></FONT> ";
 		else
-			echo "[<A href='" . generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique&debut=$i") . "'>$i-$y</A>] ";
+			echo "[<A href='" . generer_url_ecrire("articles","id_article=$id_article&debut=$i") . "'>$i-$y</A>] ";
 	  }
 	  echo "</div>";
 	}
@@ -1375,7 +1295,9 @@ function afficher_statut_articles($id_article, $rubrique_article, $statut_articl
 
   if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
   	
-    echo generer_url_post_ecrire("articles", "id_article=$id_article&id_rubrique=$rubrique_article"),
+    echo "\n<form method='post' action='",
+      generer_action_auteur("instituer", "article $id_article", generer_url_ecrire('articles', "id_article=$id_article", true)),
+      "'>",
 	  debut_cadre_relief("", true),
       "\n<center>", "<B>",_T('texte_article_statut'),"</B>",
 	  "\n<SELECT NAME='statut_nouv' SIZE='1' CLASS='fondl'\n",
@@ -1392,16 +1314,15 @@ function afficher_statut_articles($id_article, $rubrique_article, $statut_articl
 	  "</SELECT>",
 	  " &nbsp; ",
 	  http_img_pack("puce-".puce_statut($statut_article).'.gif', "", "border='0' NAME='statut'"),
-	  "  &nbsp; ";
+	  "  &nbsp;\n";
 
-	// echo "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></noscript>";
 	echo "<span class='visible_au_chargement' id='valider_statut'>";
 	echo "<INPUT TYPE='submit' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</span>";
-	echo aide ("artstatut");
+	echo aide("artstatut");
 	echo "</center>";
 	fin_cadre_relief();
-	echo "</form>";
+	echo "\n</form>";
  }
 }
 
@@ -1429,9 +1350,9 @@ function modif_langue_articles($id_article, $id_rubrique, $changer_lang)
 
 	if ($changer_lang) {
 		if ($changer_lang != "herit")
-			spip_query("UPDATE spip_articles SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_article=$id_article");
+			spip_query("UPDATE spip_articles SET lang='".addslashes($changer_lang)."', langue_choisie='oui', date_modif=NOW() WHERE id_article=$id_article");
 		else
-			spip_query("UPDATE spip_articles SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_article=$id_article");
+			spip_query("UPDATE spip_articles SET lang='".addslashes($langue_parent)."', langue_choisie='non', date_modif=NOW() WHERE id_article=$id_article");
 	}
  }
 }
@@ -1440,8 +1361,7 @@ function modif_langue_articles($id_article, $id_rubrique, $changer_lang)
 
 function inclus_non_articles($id_article)
 {
-$query = "SELECT docs.id_document FROM spip_documents AS docs, spip_documents_articles AS lien WHERE lien.id_article=$id_article AND lien.id_document=docs.id_document";
-$result = spip_query($query);
+  $result = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_articles AS lien WHERE lien.id_article=$id_article AND lien.id_document=docs.id_document");
 
 while($row=spip_fetch_array($result)){
 	$ze_doc[]=$row['id_document'];
@@ -1462,19 +1382,16 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
 		include_spip('inc/revisions');
 		if  ($new != 'oui') {
-			$query = "SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 1";
-			if (!spip_num_rows(spip_query($query))) {
-				spip_log("version initiale de l'article $id_article");
+			$query = spip_query("SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 1");
+			if (!spip_num_rows($query)) {
 				$select = join(", ", array_keys($champs));
-				$query = "SELECT $select FROM spip_articles WHERE id_article=$id_article";
-				$champs_originaux = spip_fetch_array(spip_query($query));
+				$query = spip_query("SELECT $select FROM spip_articles WHERE id_article=$id_article");
+				$champs_originaux = spip_fetch_array($query);
 				$id_version = ajouter_version($id_article, $champs_originaux, _T('version_initiale'), 0);
 
 				// Remettre une date un peu ancienne pour la version initiale 
 				if ($id_version == 1) // test inutile ?
-				spip_query("UPDATE spip_versions
-				SET date=DATE_SUB(NOW(), INTERVAL 2 HOUR)
-				WHERE id_article=$id_article AND id_version=1");
+				spip_query("UPDATE spip_versions SET date=DATE_SUB(NOW(), INTERVAL 2 HOUR) WHERE id_article=$id_article AND id_version=1");
 			}
 		}
 	}
@@ -1504,7 +1421,7 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
 		   addslashes($champs['url_site']) .
 		   "', nom_site='" .
 		   addslashes($champs['nom_site']) .
-		   "'$champs_extra WHERE id_article=$id_article");
+		   "', date_modif=NOW() $champs_extra WHERE id_article=$id_article");
 
 	// Stockage des versions
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
@@ -1521,7 +1438,7 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
 		if ($langue_choisie_old != "oui") {
 			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 			$langue_new = $row['lang'];
-			if ($langue_new != $langue_old) spip_query("UPDATE spip_articles SET lang = '$langue_new' WHERE id_article = $id_article");
+			if ($langue_new != $langue_old) spip_query("UPDATE spip_articles SET lang = '$langue_new', date_modif=NOW() WHERE id_article = $id_article");
 		}
 	}
 
@@ -1554,9 +1471,10 @@ function insert_article($id_parent, $new)
 
 function exec_articles_dist()
 {
-global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $descriptif, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nom_site, $nouv_auteur, $nouv_mot, $ps, $row, $site_obli, $site_unique, $soustitre, $statut_nouv, $supp_auteur, $supp_mot, $surtitre, $texte, $texte_petition, $texte_plus, $titre, $titre_article, $url_site, $virtuel; 
+global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $descriptif, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nom_site, $nouv_auteur, $nouv_mot, $ps, $row, $site_obli, $site_unique, $soustitre, $supp_auteur, $supp_mot, $surtitre, $texte, $texte_petition, $texte_plus, $titre, $titre_article, $url_site, $virtuel; 
 
  $id_parent = intval($id_parent);
+ $nouv_auteur = intval($nouv_auteur);
  if (!($id_article=intval($id_article))) {
    $id_article = insert_article($id_parent, $new);
    add_auteur_article($id_article, $connect_id_auteur);
@@ -1583,23 +1501,13 @@ else {
 
 $flag_auteur = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur LIMIT 1"));
 
-if (!$statut_nouv) {
-	$ok_nouveau_statut = false;
-	$flag_editable = ($statut_rubrique
-		OR ($flag_auteur
-			AND ($statut_article == 'prepa'
-				OR $statut_article == 'prop' 
-				OR $statut_article == 'poubelle')));
- } else {
-	$ok_nouveau_statut = comparer_statut_articles($id_article, $statut_nouv, $statut_article, $statut_rubrique, $flag_auteur);
-	$flag_editable = ($statut_rubrique OR ($flag_auteur AND ($statut_nouv == 'prepa' OR $statut_nouv == 'prop')));
-}
+ $flag_editable = ($statut_rubrique OR ($flag_auteur AND $flag_editable));
 
 if ($flag_editable) {
 
 if ($jour) {
 	$date = format_mysql_date($annee, $mois, $jour, $heure, $minute);
-	spip_query("UPDATE spip_articles SET date='$date'
+	spip_query("UPDATE spip_articles SET date='$date', date_modif=NOW()
 		WHERE id_article=$id_article");
 	calculer_rubriques();
 }
@@ -1614,8 +1522,7 @@ if ($jour_redac) {
 			$annee_redac, $mois_redac, $jour_redac,
 			$heure_redac, $minute_redac);
 
-	spip_query("UPDATE spip_articles SET date_redac='$date_redac'
-		WHERE id_article=$id_article");
+	spip_query("UPDATE spip_articles SET date_redac='$date_redac',  date_modif=NOW() WHERE id_article=$id_article");
 }
 
 
@@ -1627,7 +1534,7 @@ if ($changer_virtuel) {
 	$virtuel = eregi_replace("^http://$", "", trim($virtuel));
 	if ($virtuel) $chapo = addslashes(corriger_caracteres("=$virtuel"));
 	else $chapo = "";
-	spip_query("UPDATE spip_articles SET chapo='$chapo' WHERE id_article=$id_article");
+	spip_query("UPDATE spip_articles SET chapo='$chapo', date_modif=NOW() WHERE id_article=$id_article");
 }
 
 if ($titre) {
@@ -1657,11 +1564,5 @@ if ($titre) {
 
 exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $id_rubrique, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad);
 
-// Taches lentes
-
-
-if ($ok_nouveau_statut) {
-  cron_articles($id_article, $statut_nouv, $statut_article);
 }
-    }    
 ?>

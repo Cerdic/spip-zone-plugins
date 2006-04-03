@@ -344,11 +344,23 @@ function http_calendrier_semaine($annee, $mois, $jour, $echelle, $partie_cal, $s
 
 	if (is_array($evt))
 	  {
+	  	if($partie_cal!='sansheure'){
 	    $sd = http_calendrier_sans_date($annee, $mois,$evt[0]);
 	    $finurl = "&amp;echelle=$echelle&amp;partie_cal=$partie_cal$ancre";
 	    $evt =
 	      http_calendrier_semaine_noms($annee, $mois, $init, $script, $finurl) .
 	      http_calendrier_semaine_sept($annee, $mois, $init, $echelle, $partie_cal, $evt);
+	  	}
+	  	else {
+			  list($sansduree, $evenements, $premier_jour, $dernier_jour) = $evt;
+			  if ($sansduree)
+			    foreach($sansduree as $d => $r) 
+			      $evenements[$d] = !$evenements[$d] ? $r : array_merge($evenements[$d], $r);
+		    $finurl = "&amp;echelle=$echelle&amp;partie_cal=$partie_cal$ancre";
+		    $evt =
+		      http_calendrier_semaine_noms($annee, $mois, $init, $script, $finurl) .
+		      http_calendrier_mois_sept($annee, $mois, $init, $init+ 6, $evenements, $script);
+	  	}
 	  } else $evt = "<tr><td>$evt</td></tr>";
 
 	return 
@@ -488,22 +500,53 @@ function http_calendrier_jour_sept($annee, $mois, $jour, $echelle,  $partie_cal,
 	global $spip_ecran;
 
 	$gauche = (_DIR_RESTREINT  || ($spip_ecran != "large"));
-	return
-	  "<tr class='calendrier-verdana10'>" .
-		# afficher en reduction le tableau du jour precedent
-	  "\n<td class='calendrier-td-gauche'>" .
-	  ($gauche  ? '' :
-	   http_calendrier_ics($annee, $mois, $jour-1, $echelle, $partie_cal, 0, $evt)) .
-	  "</td><td colspan='5' class='calendrier-td-centre'>" .
-	   http_calendrier_ics($annee, $mois, $jour, $echelle, $partie_cal, 300, $evt) .
-	  '</td>' .
-		# afficher en reduction le tableau du jour suivant
-	  "\n<td class='calendrier-td-droit'>" .
-
-	  (_DIR_RESTREINT ? '' :
-	   http_calendrier_ics($annee, $mois, $jour+1, $echelle, $partie_cal, 0, $evt)) .
-	  '</td>' .
-	  "\n</tr>";
+	if ($partie_cal!="sansheure")
+		return
+		  "<tr class='calendrier-verdana10'>" .
+			# afficher en reduction le tableau du jour precedent
+		  "\n<td class='calendrier-td-gauche'>" .
+		  ($gauche  ? '' :
+		   http_calendrier_ics($annee, $mois, $jour-1, $echelle, $partie_cal, 0, $evt)) .
+		  "</td><td colspan='5' class='calendrier-td-centre'>" .
+		   http_calendrier_ics($annee, $mois, $jour, $echelle, $partie_cal, 300, $evt) .
+		  '</td>' .
+			# afficher en reduction le tableau du jour suivant
+		  "\n<td class='calendrier-td-droit'>" .
+	
+		  (_DIR_RESTREINT ? '' :
+		   http_calendrier_ics($annee, $mois, $jour+1, $echelle, $partie_cal, 0, $evt)) .
+		  '</td>' .
+		  "\n</tr>";
+	else {
+	  list($sansduree, $evenements, $premier_jour, $dernier_jour) = $evt;
+	  if ($sansduree)
+	    foreach($sansduree as $d => $r) 
+	      $evenements[$d] = !$evenements[$d] ? $r : array_merge($evenements[$d], $r);
+		return
+		  "<tr class='calendrier-verdana10'>" .
+			# afficher en reduction le tableau du jour precedent
+		  "\n<td class='calendrier-td-gauche'>" .
+		  ($gauche  ? '' :
+		  "<table width='100%'>".
+		   http_calendrier_mois_sept($annee, $mois, $jour-1, $jour-1,$evenements, $script, $ancre)
+		   ."</table>"
+		   ) .
+		  "</td><td colspan='5' class='calendrier-td-centre'>" .
+		  "<table width='100%'>".
+		   http_calendrier_mois_sept($annee, $mois, $jour, $jour,$evenements, $script, $ancre) .
+		   "</table>" .
+		  '</td>' .
+			# afficher en reduction le tableau du jour suivant
+		  "\n<td class='calendrier-td-droit'>" .
+		  (_DIR_RESTREINT ? '' :
+		  "<table width='100%'>".
+		   http_calendrier_mois_sept($annee, $mois, $jour+1, $jour+1,$evenements, $script, $ancre)
+		   ."</table>"
+		   ) .
+		  '</td>' .
+		  "\n</tr>";
+		
+	}
 }
 
 
@@ -847,7 +890,12 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 	  . "><div style='float: $spip_lang_right; padding-left: 5px; padding-right: 5px;'>"
 	  . (($type == "mois") ? '' :
 	     (
-		  http_href_img(calendrier_args_date($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=tout$ancre"),
+		  http_href_img(calendrier_args_date($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=sansheure$ancre"),
+				 "sans-heure.gif",
+				 "class='calendrier-png" .
+				 (($partie_cal == "sansheure") ? " calendrier-opacity'" : "'"),
+				 _T('sans_heure'))
+		  .http_href_img(calendrier_args_date($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=tout$ancre"),
 				 "heures-tout.png",
 				 "class='calendrier-png" .
 				 (($partie_cal == "tout") ? " calendrier-opacity'" : "'"),
