@@ -39,6 +39,62 @@ function article_editable($id_article){
 	return $flag_editable;
 }
 
+function date_debut_fin($annee,$mois,$jour,$type){
+	if ($type=='jour'){
+		$ts_start=strtotime("$annee-$mois-01 00:00:00");
+		$ts_start+=($jour-1)*24*60*60;
+		$ts_fin=$ts_start+24*60*60;
+	} else
+	if ($type=="semaine"){
+		$ts_start=strtotime("$annee-$mois-01 01:00:00");
+		$ts_start+=($jour-1)*24*60*60;
+		while (date('w',$ts_start)!=1) $ts_start-=24*60*60;
+		$ts_fin=$ts_start+7*24*60*60+60*60;
+		$ts_start-=2*60*60;
+	} else
+	if ($type=='mois'){
+		$ts_start=strtotime("$annee-$mois-01 00:00:00");
+		if ($mois<'12')
+			$ts_fin=strtotime("$annee-".($mois+1)."-01 00:00:00");
+		else
+			$ts_fin=strtotime(($annee+1)."-$mois-01 00:00:00");
+	}
+	return array($ts_start,$ts_fin);	
+}
+function ajoute_creneaux_horaires($urlbase,$ts_start,$ts_fin,$type,$partie_cal,$echelle){
+	if ($echelle<=120)
+		$freq_creneaux=30*60;
+	else
+		$freq_creneaux=60*60;
+
+	$today=date('Y-m-d');
+	// creneaux pour ajout uniquement si ajouter_id_article present
+	if (($type!='mois')&&($partie_cal!='sansheure'))
+	{
+		$heuremin='08';$heuremax='20';
+		if ($partie_cal=='matin'){
+			$heuremin='04';$heuremax='15';
+		}
+		if ($partie_cal=='soir'){
+			$heuremin='12';$heuremax='23';
+		}
+		for ($j=$ts_start;$j<=$ts_fin;$j+=$freq_creneaux){
+			$heure=date('H',$j);
+			if (($heure>=$heuremin)&&($heure<=$heuremax)){
+				$url=parametre_url($urlbase,'ndate',urlencode(date('Y-m-d H:i',$j)));
+				$creneau=date('Y-m-d H:i:s',$j);
+				if (date('Y-m-d',$j)==$today)
+					Agenda_memo_full($creneau,$creneau,preg_replace(",\s+,","&nbsp;",date('H:i',$j)." "._T('agenda:ajouter_un_evenement')), " ", "", $url,'calendrier-creneau-today');
+				else if (date('w',$j)==0)
+					Agenda_memo_full($creneau,$creneau,preg_replace(",\s+,","&nbsp;",date('H:i',$j)." "._T('agenda:ajouter_un_evenement')), " ", "",$url,'calendrier-creneau-sunday');
+				else
+					Agenda_memo_full($creneau,$creneau,preg_replace(",\s+,","&nbsp;",date('H:i',$j)." "._T('agenda:ajouter_un_evenement')), " ", "",$url,'calendrier-creneau');
+			}
+		}
+	}
+	
+}
+
 function affiche_evenements_agenda($flag_editable){
 	global $visu_evenements;
 	$type = _request('type');
@@ -84,49 +140,9 @@ function affiche_evenements_agenda($flag_editable){
 	//$urlbase=str_replace("&amp;","&",$urlbase);
 
 	// creation des boites creneaux horaires pour ajout rapide
-	if ($type=='jour'){
-		$ts_start=strtotime("$annee-$mois-01 00:00:00");
-		$ts_start+=($jour-1)*24*60*60;
-		$ts_fin=$ts_start+24*60*60;
-	} else
-	if ($type=="semaine"){
-		$ts_start=strtotime("$annee-$mois-01 01:00:00");
-		$ts_start+=($jour-1)*24*60*60;
-		while (date('w',$ts_start)!=1) $ts_start-=24*60*60;
-		$ts_fin=$ts_start+7*24*60*60+60*60;
-		$ts_start-=2*60*60;
-	} else
-	if ($type=='mois'){
-		$ts_start=strtotime("$annee-$mois-01 00:00:00");
-		if ($mois<'12')
-			$ts_fin=strtotime("$annee-".($mois+1)."-01 00:00:00");
-		else
-			$ts_fin=strtotime(($annee+1)."-$mois-01 00:00:00");
-	}
-	if ($echelle<=120)
-		$freq_creneaux=30*60;
-	else
-		$freq_creneaux=60*60;
-
-	$today=date('Y-m-d');
-	// creneaux pour ajout uniquement si ajouter_id_article present
-	if (($type!='mois')&&($partie_cal!='sansheure')&&($flag_editable))
-	{
-		$heuremin='08';$heuremax='20';
-		for ($j=$ts_start;$j<=$ts_fin;$j+=$freq_creneaux){
-			$heure=date('H',$j);
-			if (($heure>=$heuremin)&&($heure<=$heuremax)){
-				$url=parametre_url($urlbase,'ndate',urlencode(date('Y-m-d H:i',$j)));
-				$creneau=date('Y-m-d H:i:s',$j);
-				if (date('Y-m-d',$j)==$today)
-					Agenda_memo_full($creneau,$creneau,preg_replace(",\s+,","&nbsp;",date('H:i',$j)." "._T('agenda:ajouter_un_evenement')), " ", "", $url,'calendrier-creneau-today');
-				else if (date('w',$j)==0)
-					Agenda_memo_full($creneau,$creneau,preg_replace(",\s+,","&nbsp;",date('H:i',$j)." "._T('agenda:ajouter_un_evenement')), " ", "",$url,'calendrier-creneau-sunday');
-				else
-					Agenda_memo_full($creneau,$creneau,preg_replace(",\s+,","&nbsp;",date('H:i',$j)." "._T('agenda:ajouter_un_evenement')), " ", "",$url,'calendrier-creneau');
-			}
-		}
-	}
+	list($ts_start,$ts_fin) = date_debut_fin($annee,$mois,$jour,$type);
+	if ($flag_editable)
+		ajoute_creneaux_horaires($urlbase,$ts_start,$ts_fin,$type,$partie_cal,$echelle);
 
 
 	$categorie_concerne=array('plage'=>'calendrier-plage','evenement'=>'calendrier-evenement');

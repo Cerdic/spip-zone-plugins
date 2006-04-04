@@ -228,7 +228,7 @@ a span.survol {
 	display: none;
 }
 
-a:hover span.survol {
+a:hover .calendrier-verdana10 > span.survol {
 	display: block;
 	position: fixed;
 	top: auto;
