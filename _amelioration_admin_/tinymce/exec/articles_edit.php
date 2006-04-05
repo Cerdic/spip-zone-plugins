@@ -88,15 +88,16 @@ voir http://tinymce.moxiecode.com/punbb/viewtopic.php?id=436
 
 ';
 
-	$titre= propre($titre);
-	$surtitre= propre($surtitre);
-	$soustitre= propre($soustitre);
-	$descriptif= propre($descriptif);
-	$chapo= propre($chapo);
-	$texte= propre($texte);
-	$ps= propre($ps);
+	$row['titre']= propre($row['titre']);
+	$row['surtitre']= propre($row['surtitre']);
+	$row['soustitre']= propre($row['soustitre']);
+	$row['descriptif']= propre($row['descriptif']);
+	$row['chapo']= propre($row['chapo']);
+	$row['texte']= propre($row['texte']);
+	$row['ps']= propre($row['ps']);
 
-	formulaire_articles_edit($id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $chapo, $texte, $ps, $new, $nom_site, $url_site, $extra, $id_secteur, $date, $onfocus, $lier_trad, $champs_article);
+	formulaire_articles_edit($row, $lier_trad, $new, $GLOBALS['meta']);
+	
 	fin_cadre_formulaire();
 
 	fin_page();
@@ -105,11 +106,12 @@ voir http://tinymce.moxiecode.com/punbb/viewtopic.php?id=436
 
 function exec_articles_edit()
 {
-	$row = article_select(_request('id_article'), _request('id_rubrique'), _request('lier_trad'), _request('new'));
+	$new= _request('new');
+	$row = article_select(_request('id_article'), _request('id_rubrique'), _request('lier_trad'), $new);
 
 	if (!$row) die ("<h3>"._T('info_acces_interdit')."</h3>");
 
-	exec_affiche_articles_edit($row, $lier_trad, $new,$GLOBALS['meta']);
+	exec_affiche_articles_edit($row, $lier_trad, $new, $GLOBALS['meta']);
 }
 
 ?>
