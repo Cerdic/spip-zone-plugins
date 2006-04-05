@@ -22,6 +22,7 @@ include_spip('inc/date');
 include_spip('inc/documents');
 include_spip('inc/forum');
 include_spip('base/abstract_sql');
+include_spip('inc/calendar');
 
   // 28 paremetres, qui dit mieux ?
   // moi ! elle en avait 61 en premiere approche
@@ -71,6 +72,9 @@ if ($row = spip_fetch_array($result)) {
 		$minute = $regs[5];
 	}
  }
+// reserver les Widget Calendar avant de commencer l'affichage
+WCalendar_ajoute(_T('texte_date_publication_article'),'');
+WCalendar_ajoute(_T('texte_date_publication_anterieure'),'_redac');
 
 debut_page("&laquo; $titre_article &raquo;", "documents", "articles", "", "", $id_rubrique);
 
@@ -607,9 +611,10 @@ function dates_articles($id_article, $id_rubrique, $flag_editable, $statut_artic
 
 		echo debut_block_invisible("datepub"),
 		  "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>",
-		  afficher_jour($jour, "name='jour' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"", true),
+			WCalendar_controller($date,''),
+		  /*afficher_jour($jour, "name='jour' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"", true),
 		  afficher_mois($mois, "name='mois' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"", true),
-		  afficher_annee($annee, "name='annee' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\""),
+		  afficher_annee($annee, "name='annee' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\""),*/
 		  ' - ',
 		  afficher_heure($heure, "name='heure' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\""),
 		  afficher_minute($minute, "name='minute' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\""),
@@ -652,9 +657,10 @@ function dates_articles($id_article, $id_rubrique, $flag_editable, $statut_artic
 		if ($possedeDateRedac) echo ' checked="checked"';
 		echo " onClick=\"setvisibility('valider_date_prec', 'visible')\"";
 		echo ' /> <label for="avec_redac_off">'._T('bouton_radio_afficher').' :</label> ',
-		afficher_jour($jour_redac, "name='jour_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true),
+		WCalendar_controller($date_redac,'_redac');
+		/*afficher_jour($jour_redac, "name='jour_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true),
 		afficher_mois($mois_redac, "name='mois_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true);
-		echo "<input type='text' name='annee_redac' class='fondl' value='".$annee_redac."' size='5' maxlength='4' onClick=\"setvisibility('valider_date_prec', 'visible')\"/>";
+		echo "<input type='text' name='annee_redac' class='fondl' value='".$annee_redac."' size='5' maxlength='4' onClick=\"setvisibility('valider_date_prec', 'visible')\"/>";*/
 
 		echo '<div align="center">',
 		afficher_heure($heure_redac, "name='heure_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true),
