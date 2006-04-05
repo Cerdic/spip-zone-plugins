@@ -21,7 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 
-function public_styliser_dist($fond, $id_rubrique, $lang) {
+function public_styliser($fond, $id_rubrique, $lang) {
   global $contexte;
 	
   // Actuellement tous les squelettes se terminent par .html
@@ -105,8 +105,8 @@ function sql_mot_squelette($id,$id_groupe,$table,$id_table,$recurse=false) {
 					"id_groupe=$id_groupe");
 	$r = spip_abstract_fetch(spip_abstract_select($select1,$from1,$where1));
 	if ($r) {
-	  include_ecrire("inc_charsets");
-
+	  include_spip("inc/charsets");
+	   include_spip("inc/filtres");
 	  return translitteration(preg_replace('["\'.] ','_',extraire_multi($r['titre'])));	
 	}
 	if(!recurse) return '';
