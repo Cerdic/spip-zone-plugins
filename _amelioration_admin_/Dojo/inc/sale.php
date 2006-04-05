@@ -52,7 +52,10 @@
 	function correspondances_standards() {
 		return array(
 			//Mise en page
-			",<(i|em)( [^>\r]*)?".">(.+)</\\1>,Uims" => "{\\3}", //Italique
+			",<(i|em)( [^>\r]*)?".">,Uims" => "{", //Italique
+			",</(i|em)>,Uims" => "}", //Italique
+			",<(b|strong)( [^>]*)?".">,Uims" => "{{", //Gras
+			",</(b|strong)>,Uims" => "}}", //Gras
 			",<(b|h[4-6]|strong)( [^>]*)?".">(.+)</\\1>,Uims" => "{{\\3}}", //Gras
 			",<(h[1-3])( [^>]*)?".">(.+)</\\1>,Uims" => "\r{{{ \\3 }}}\r", //Intertitre
 
@@ -65,11 +68,17 @@
 			",(<no p[^>]*>)(\s*)(<\/no>),Uims" => "", // spiperie
 			",(<\/no p>)(.*)(<no p[^>]*>),Uims" => "\\2", // spiperie
 			",\s*?<br( [^>]*)?".">\r-(&nbsp;|\s),Ui" => "\r- ", 
-			",\s*?<br( [^>]*)?".">[[[:blank:]]*?,Ui" => "\r_ ", //Saut de ligne style suivi par du texte
+			",\s*?<br( [^>]*)?".">[[[:blank:]]*?(?=[^\s]),Ui" => "\r_ ", //Saut de ligne style suivi par du texte
+			",(\s*(<br( [^>]*)?".">)?)*\\z,i" => "", //Saut de ligne en fin de texte
 			",<hr( [^>]*)?".">,Uims" => "\r----\r", //Saut de page
-			",<(pre)( [^>]*)?".">(.+)</\\1>,Uims" => "<poesie>\n\\3\n</poesie>", //Poesie
-			",<(blockquote)( [^>]*)?".">\s*?(.+)\s*?</\\1>,Uims" => "<quote>\n\\3\n</quote>", //quote
 			
+			",<(pre)( [^>]*)?".">(.+)</\\1>,Uims" => "<poesie>\n\\3\n</poesie>", //Poesie
+
+			",<(blockquote)( [^>]*)?".">(\s*?),Uims" => "<quote>\n", //quote
+			",(\s*?)</blockquote>,Uims" => "\n</quote>", //quote
+
+			",<form [^>]*><div><textarea [^>]*spip_cadre[^>]*>(.*)</textarea></div></form>,Uims" => "<cadre>\\1</cadre>",
+
 			//typo
 			",&nbsp;:,i" => " :", 
 			",\r-(&nbsp;|\s),i" => "\r- ", 
@@ -123,29 +132,36 @@
 	}
 	
 	// les listes numerotees ou non ---------------------------------------------------------------
-	function extraire_listes($texte,$tag,$char){
-	  $pattern = "(<$tag"."[^>]*>|</$tag>)";
+	function extraire_listes($texte){
+	  $pattern = "(<ul[^>]*>|</ul>|<ol[^>]*>|</ol>)";
 	
 	  preg_match_all (",$pattern,Uims", $texte, $tagMatches, PREG_SET_ORDER);
 	  $textMatches = preg_split (",$pattern,Uims", $texte);
 	
 	  $niveau = 0;
-	  $prefixe= "-$char$char$char$char$char$char$char$char$char$char";
+	  $prefixe= "-**********";
+	  $prefixenum= "-##########";
+	  $niveaunum = 0;
 	  $texte = $textMatches [0];
 	  if (count($textMatches)>1){
 		  for ($i = 1; $i < count ($textMatches)-1; $i ++) {
-		  	if (preg_match(",<$tag"."[^>]*>,is",$tagMatches [$i-1][0])) $niveau++;
-		  	else if (strtolower($tagMatches [$i-1][0])=="</$tag>") $niveau--;
-		  	$pre = substr($prefixe,0,$niveau+1);
-		  	$lignes = preg_split(",<li[^>]*>,i",$textMatches [$i]);
-		  	foreach ($lignes as $key=>$item){
-		  		$lignes[$key] = trim(str_replace("</li>","",$item));
-		  		if (strlen($lignes[$key]))
-		  			$lignes[$key]="$pre " . $lignes[$key];
-		  		else 
-		  			unset($lignes[$key]);
+		  	if (preg_match(",<ul[^>]*>,is",$tagMatches [$i-1][0])) {$niveau++;$pref = $prefixe;}
+		  	else if (preg_match(",<ol[^>]*>,is",$tagMatches [$i-1][0])) {$niveau++;$pref = $prefixenum;}
+		  	else if (strtolower($tagMatches [$i-1][0])=="</ul>") $niveau--;
+		  	else if (strtolower($tagMatches [$i-1][0])=="</ol>") $niveau--;
+		  	$pre = "";
+		  	if ($niveau) $pre = substr($pref,0,$niveau+1);
+		  	if (strlen(trim($textMatches [$i]))){
+			  	$lignes = preg_split(",<li[^>]*>,i",$textMatches [$i]);
+			  	foreach ($lignes as $key=>$item){
+			  		$lignes[$key] = trim(str_replace("</li>","",$item));
+			  		if (strlen($lignes[$key]))
+			  			$lignes[$key]="$pre " . $lignes[$key];
+			  		else 
+			  			unset($lignes[$key]);
+			  	}
+					$texte .= implode("\r",$lignes)."\r";
 		  	}
-				$texte .= implode("\r",$lignes)."\r";
 		  }
 		  $texte .= end($textMatches);
 	  }
@@ -179,17 +195,18 @@
 		
 		// les lignes
 		$texte = preg_replace(",<tr[^>]*>\s*?(.*)\s*</tr>,Uims","\r$sep \\1$sep\r",$texte);
+		
 		// les colonnes
-		$texte = preg_replace(",<(td)(\s[^>]*)?>[[:blank:]]*?(.*)\s*?</\\1>,Uims"," \\3 $sep",$texte);
-		$texte = preg_replace(",<(th)(\s[^>]*)?>[[:blank:]]*?({{)?(.*)(}})?\s*?</\\1>,Uims"," {{\\4}} $sep",$texte);
+		$texte = preg_replace(",<(td)(\s[^>]*)?".">[[:blank:]]*(.*)\s*?</\\1>,Uims"," \\3 $sep",$texte);
+		$texte = preg_replace(",<(th)(\s[^>]*)?".">[[:blank:]]*({{)?(.*?)(}})?\s*?</\\1>,ims"," {{\\4}} $sep",$texte);
 		// attention un |\n correspond a une fin de ligne et ne doit pas etre autorise au milieu d'une ligne
-		$texte = preg_replace(",(\s$sep)\r,Uims","\\1 \r",$texte);
+		$texte = preg_replace(",(\s\\$sep)\r,Uims","\\1 \r",$texte);
 		// les doubles pipes en fin de ligne doivent etre remis en simpes |
 		$texte = str_replace("$sep$sep\r","$sep\r",$texte);
 		
 		// le thead
 		// verifier d'abors qu'il y a un vrai contenu dans le thead
-		$texte = preg_replace(",\r($sep\s*{{[\s\r_]*}}\s*)*$sep\r,Uims","",$texte);
+		$texte = preg_replace(",\r(\\$sep\s*{{[\s\r_]*}}\s*)*\\$sep\r,Uims","",$texte);
 		$texte = preg_replace(",<thead[^>]*>\s*?(.*)\s*</thead>,Uims","\\1\r",$texte);
 		// le tbody
 		$texte = preg_replace(",<tbody[^>]*>\s*?(.*)\s*</tbody>,Uims","\\1",$texte);
@@ -293,7 +310,37 @@
 		return $texte;
 	}
 	
-	
+
+	// extraire code
+	function extraire_code($contenu){
+		$pattern =",<(div|span) [^>]*spip_code[^>]*><code>(.*)</code></\\1>,Uims";
+		preg_match_all ($pattern, $contenu, $codeMatches, PREG_SET_ORDER);
+		$textMatches = preg_split ($pattern, $contenu);
+
+		foreach ($codeMatches as $key => $value) {
+			$codeMatches [$key][0] = "<code>" . preg_replace(",<br[^>]*>\s*,i","\r",$value[2]) . "</code>";
+		}
+		for ($i = 0; $i < count ($textMatches); $i ++) {
+			$textMatches [$i] = $textMatches [$i] . $codeMatches [$i] [0];
+		}
+		$contenu = implode ("", $textMatches);
+		return $contenu;
+	}
+	// extraire poesie
+	function extraire_poesie($contenu){
+		$pattern =",<div [^>]*spip_poesie[^>]*>((\s*<div>.*</div>)*\s*)</div>,Uims";
+		preg_match_all ($pattern, $contenu, $poesieMatches, PREG_SET_ORDER);
+		$textMatches = preg_split ($pattern, $contenu);
+
+		foreach ($poesieMatches as $key => $value) {
+			$poesieMatches [$key][0] = "<poesie>" . preg_replace(",\s*<div>(.*)</div>,Uim","\r\\1",$value[1]) . "</poesie>";
+		}
+		for ($i = 0; $i < count ($textMatches); $i ++) {
+			$textMatches [$i] = $textMatches [$i] . $poesieMatches [$i] [0];
+		}
+		$contenu = implode ("", $textMatches);
+		return $contenu;
+	}
 
 	function spip_avant_sale($contenu) {
 		if(function_exists('avant_sale'))
@@ -341,10 +388,11 @@
 		foreach($correspondances as $motif => $remplacement)
 			$contenu_propre = preg_replace($motif, $remplacement, $contenu_propre);
 			
-		$contenu_propre = extraire_listes($contenu_propre,"ul","*");
-		$contenu_propre = extraire_listes($contenu_propre,"ol","#");
+		$contenu_propre = extraire_listes($contenu_propre);
+
 		$contenu_propre = extraire_tableaux($contenu_propre);
-		
+		$contenu_propre = extraire_code($contenu_propre);
+		$contenu_propre = extraire_poesie($contenu_propre);
 		//reconnaitre les url d'articles, rubriques ...
 		$url_look = url_de_base()."spip.php";
 		$contenu_propre = preg_replace(",\[(.*)->\s*$url_look"."[^\]]*id_((art)icle|(rub)rique)=([0-9]*?)[^\]]*],Uims","[\\1->\\4\\5]",$contenu_propre);
