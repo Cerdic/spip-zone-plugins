@@ -987,8 +987,10 @@ SPIP.widget.Calendar_Core.prototype.renderHeader = function() {
 	var headerContainer = document.createElement("DIV");
 	headerContainer.className = this.Style.CSS_HEADER;
 
-	headerContainer.appendChild(document.createTextNode(this.buildMonthLabel()));
-
+	var labelMonth = document.createElement("span");
+	labelMonth.innerHTML = this.buildMonthLabel();
+	/*headerContainer.appendChild(document.createTextNode(this.buildMonthLabel()));*/
+	headerContainer.appendChild(labelMonth);
 	this.headerCell.appendChild(headerContainer);
 };
 
@@ -2616,7 +2618,9 @@ SPIP.widget.Calendar.prototype.renderHeader = function() {
 	linkRight.appendChild(imgRight);
 
 	headerContainer.appendChild(linkLeft);
-	headerContainer.appendChild(document.createTextNode(this.buildMonthLabel()));
+	var labelMonth = document.createElement("span");
+	labelMonth.innerHTML = this.buildMonthLabel();
+	headerContainer.appendChild(labelMonth);
 	headerContainer.appendChild(linkRight);
 
 	this.headerCell.appendChild(headerContainer);
@@ -2674,7 +2678,10 @@ SPIP.widget.Calendar2up_Cal.prototype.renderHeader = function() {
 		headerContainer.appendChild(linkLeft);
 	}
 
-	headerContainer.appendChild(document.createTextNode(this.buildMonthLabel()));
+	var labelMonth = document.createElement("span");
+	labelMonth.innerHTML = this.buildMonthLabel();
+	/*headerContainer.appendChild(document.createTextNode(this.buildMonthLabel()));*/
+	headerContainer.appendChild(labelMonth);
 
 	if (this.index == 1) {
 		var linkRight = document.createElement("A");
@@ -2737,7 +2744,7 @@ SPIP.widget.Calendar2up.prototype.buildWrapper = function(containerId) {
 	outerContainer.className = "calcontainer";
 	outerContainer.innerHTML="";
 	if (SPIP.widget.Calendar_Core._getBrowser() == "ie") {
-		outerContainer.innerHTML="<iframe src='about:blank' scrolling='no' frameborder='0' style='position:absolute;left:0px;top:0px;z-index:100;' class='calbordered'></iframe>";
+		outerContainer.innerHTML="<iframe src='about:blank' scrolling='no' frameborder='0' style='position:absolute;left:0px;top:0px;z-index:0;' class='calbordered'></iframe>";
 	}
 
 	var innerContainer = document.createElement("DIV");
