@@ -11,17 +11,17 @@
 	padding:5px;
 	background-color:#F7F9FB;
 	border:1px solid #7B9EBD;
-width:24.5em;
-height:13em;
+width:26em;
+height:14em;
 }
 
 .calbordered .title{
-	font:90% Arial,Helvetica,sans-serif;
+	font:small Arial,Helvetica,sans-serif;
 	color:#000;
 	font-weight:bold;
 	margin-bottom:5px;
 	height:auto;
-	width:304px;
+width:26em;
 	position:relative;
 }
 
@@ -41,13 +41,11 @@ left:0;
 	/*float:left;*/
 	position:absolute;
 left:0.5em;
-width:12.5em;
 }
 .cal2up2 {
 	/*float:left;*/
 	position:absolute;
-left:12.5em;
-width:12.5em;
+left:13.5em;
 }
 
 .calnavleft {
@@ -69,7 +67,7 @@ width:12.5em;
 /* Calendar element styles */
 
 .calendar {
-	font:90% Arial,Helvetica,sans-serif;
+	font:small Arial,Helvetica,sans-serif;
 	text-align:center;
 	border-spacing:0;
 }
