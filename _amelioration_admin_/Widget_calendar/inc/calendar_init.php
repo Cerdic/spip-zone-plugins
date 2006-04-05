@@ -112,6 +112,7 @@ function Wcalendar_js_set_change_date($s,$sdverif=NULL,$sfverif=NULL,$modif=""){
 }
 function WCalendar_header_prive($flux) {
 	global $WCalendar_independants,$WCalendar_lies;
+	global $spip_lang_right;
 	if (count($WCalendar_independants)+count($WCalendar_lies)){
 
 		// les includes JS statiques
@@ -171,6 +172,7 @@ function WCalendar_header_prive($flux) {
 			this.Config.Options.NAV_ARROW_LEFT = '$img_arrow_left';
 			this.Config.Options.NAV_ARROW_RIGHT = '$img_arrow_right';
 			this.Config.Options.IMG_CLOSE = '$img_close';
+			this.Config.Options.IMG_CLOSE_CLASS = 'close-icon-$spip_lang_right';
 		}
 		";
 

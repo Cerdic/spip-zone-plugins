@@ -760,7 +760,8 @@ SPIP.widget.Calendar_Core.prototype.setupConfig = function() {
 		HIDE_BLANK_WEEKS : false,
 		NAV_ARROW_LEFT : "img/callt.gif",
 		NAV_ARROW_RIGHT : "img/calrt.gif",
-		IMG_CLOSE : "img/calx.gif"
+		IMG_CLOSE : "img/calx.gif",
+		IMG_CLOSE_CLASS : "close-icon"
 	};
 
 	this.Options = this.Config.Options;
@@ -2808,7 +2809,7 @@ SPIP.widget.Calendar2up.prototype.renderHeader = function() {
 
 		var imgClose = document.createElement("IMG");
 		imgClose.src = this.pages[0].Options.IMG_CLOSE;
-		imgClose.className = "close-icon";
+		imgClose.className = this.pages[0].Options.IMG_CLOSE_CLASS;
 
 		linkClose.appendChild(imgClose);
 

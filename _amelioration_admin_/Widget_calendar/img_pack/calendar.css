@@ -15,7 +15,7 @@ width:24.5em;
 height:13em;
 }
 
-.calbordered .title {
+.calbordered .title{
 	font:90% Arial,Helvetica,sans-serif;
 	color:#000;
 	font-weight:bold;
@@ -25,11 +25,16 @@ height:13em;
 	position:relative;
 }
 
-.title .close-icon {
+.close-icon-right, .close-icon-left {
 	position:absolute;
-	right:0;
 	top:0;
 	border:none;
+}
+.close-icon-right {
+right:0;
+}
+.close-icon-left {
+left:0;
 }
 
 .cal2up {
