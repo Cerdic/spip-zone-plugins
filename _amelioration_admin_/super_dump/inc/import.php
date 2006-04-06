@@ -103,7 +103,7 @@ function import_debut($f, $gz=false) {
 $tables_trans = array(
 );
 
-function import_objet_1_3($f, $gz=false, $tag_fermant='SPIP', $tables) {
+function import_objet_1_3($f, $gz=false, $tag_fermant='SPIP', $tables, $phpmyadmin=false) {
 	global $IMPORT_tables_noimport;
 	global $import_ok, $pos, $abs_pos;
 	static $time_javascript;
@@ -146,8 +146,10 @@ function import_objet_1_3($f, $gz=false, $tag_fermant='SPIP', $tables) {
 		}
 		else */
 		if ($col != 'maj') {
+			if ($phpmyadmin)
+				$value = str_replace(array('&quot;','&gt;'),array('"','>'),$value);
 			$cols[] = $col;
-			$values[] = '"'.addslashes($value).'"';
+			$values[] = "'".addslashes($value)."'";
 			if ($col == $primary) $id_objet = $value;
 		}
 	}
@@ -505,7 +507,7 @@ function import_tables($f, $tables, $gz=false) {
 	// Restauration des entrees du fichier
 	if (preg_match("{^phpmyadmin::}is",$version_archive)){
 	  #spip_log("restauration phpmyadmin : version $version_archive tag $tag_archive");
-		while (import_objet_1_3($f, $gz, $tag_archive, $tables));
+		while (import_objet_1_3($f, $gz, $tag_archive, $tables, true));
 	}
 	else{
 		switch ($version_archive) {
