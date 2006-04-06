@@ -44,7 +44,15 @@ _ Si malgr&eacute; tous ces avertissements vous trouvez le courage de le tester,
 		<inclure>agenda.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>exec_init</nom>
+		<inclure>agenda.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>header_prive</nom>
+		<inclure>agenda.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
 		<inclure>agenda.php</inclure>
 	</pipeline>
 	<pipeline>

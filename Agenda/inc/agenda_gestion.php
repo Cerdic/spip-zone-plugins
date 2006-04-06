@@ -44,10 +44,43 @@ function Agenda_verifier_base(){
 	}
 }
 
+function article_editable($id_article){
+	$flag_editable = false;
+	global $connect_id_auteur, $id_secteur; 
+
+ 	$id_parent = intval($id_parent);
+ 	if (!($id_article=intval($id_article)))
+ 		return false;
+
+	if ($row = spip_fetch_array(spip_query("SELECT statut, titre, id_rubrique FROM spip_articles WHERE id_article=$id_article"))) {
+		$statut_article = $row['statut'];
+		$titre_article = $row['titre'];
+		$id_rubrique = $row['id_rubrique'];
+		$statut_rubrique = acces_rubrique($id_rubrique);
+		if ($titre_article=='') $titre_article = _T('info_sans_titre');
+	}
+	else {
+		$statut_article = '';
+		$statut_rubrique = false;
+		$id_rubrique = '0';
+		if ($titre=='') $titre = _T('info_sans_titre');
+	}
+
+	$flag_auteur = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur LIMIT 1"));
+
+	$ok_nouveau_statut = false;
+	$flag_editable = ($statut_rubrique
+		OR ($flag_auteur
+			AND ($statut_article == 'prepa'
+				OR $statut_article == 'prop' 
+				OR $statut_article == 'poubelle')));
+	return $flag_editable;
+}
 
 function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editable)
 {
 	global $connect_statut, $options,$connect_id_auteur;
+	$out = "";
 
 	$les_evenements = array();
 
@@ -57,8 +90,8 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 	$result = spip_query($query);
 
 	if (spip_num_rows($result)) {
-		echo "<div class='liste liste-evenements'>";
-		echo "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
+		$out .= "<div class='liste liste-evenements'>";
+		$out .= "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
 		$table = array();
 		while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
 			$vals = array();
@@ -122,7 +155,6 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 			if ($flag_editable) {
 				$url = self();
 				$url = parametre_url($url,'id_article',$id_article);
-				$url = parametre_url($url,'id_rubrique',$id_rubrique);
 				$url = parametre_url($url,'id_evenement',$id_evenement);
 				$url = parametre_url($url,'edit',1);
 				$s = "<a href='$url'>$titre</a>";
@@ -134,7 +166,7 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 			$vals[] = $descriptif;
 		
 			if ($flag_editable) {
-				$vals[] =  "<a href='" . generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique&supp_evenement=$id_evenement#agenda") . "'>"._T('agenda:lien_retirer_evenement')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</a>";
+				$vals[] =  "<a href='" . generer_url_ecrire("articles","id_article=$id_article&supp_evenement=$id_evenement#agenda") . "'>"._T('agenda:lien_retirer_evenement')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</a>";
 			} else {
 				$vals[] = "";
 			}
@@ -144,13 +176,13 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 	
 		$largeurs = array('', '', '', '', '');
 		$styles = array('arial11', 'arial11', 'arial2', 'arial11', 'arial11');
-		afficher_liste($largeurs, $table, $styles);
+		$out .= afficher_liste($largeurs, $table, $styles, false);
 	
-		echo "</table></div>\n";
+		$out .= "</table></div>\n";
 	
 		$les_evenements = join(',', $les_evenements);
 	}
-	return $les_evenements ;
+	return array($out,$les_evenements) ;
 }
 
 
@@ -158,7 +190,7 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 // Liste des evenements agenda de l'article
 //
 
-function Agenda_formulaire_article_ajouter_evenement($id_article, $id_rubrique, $les_evenements, $flag_editable){
+function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenements, $flag_editable){
   global $spip_lang_left, $spip_lang_right, $options;
 	global $connect_statut, $options,$connect_id_auteur, $couleur_claire ;
 	$id_evenement = intval(_request('id_evenement'));
@@ -177,7 +209,7 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $id_rubrique, 
 		$out .=  "<tr>";
 		$out .=  "<td>";
 	
-		$out .=  generer_url_post_ecrire("articles", "id_article=$id_article&id_rubrique=$id_rubrique");
+		$out .=  generer_url_post_ecrire("articles", "id_article=$id_article");
 		$out .=  "<span class='verdana1'><strong>"._T('agenda:titre_cadre_ajouter_evenement')."&nbsp; </strong></span>\n";
 		$out .=  "<div><input type='hidden' name='id_article' value=\"$id_article\">";
 
@@ -197,42 +229,46 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $id_rubrique, 
 			$out .=  "</td></tr></table>";
 		}
 
+		$out .= "</div>";
 		$out .=  fin_block();
 	}
 	return $out;
 }
 
-function Agenda_formulaire_article($id_article, $id_rubrique, $flag_editable){
+function Agenda_formulaire_article($id_article, $flag_editable){
 
   global $spip_lang_left, $spip_lang_right, $options;
 	global $connect_statut, $options,$connect_id_auteur, $couleur_claire ;
 	
-	echo "<a name='agenda'></a>";
+	$out = "";
+	$out .= "<a name='agenda'></a>";
 	if ($flag_editable) {
-		Agenda_action_formulaire_article();
+		$out .= Agenda_action_formulaire_article();
 		if (_request('edit')||_request('neweven'))
 			$bouton = bouton_block_visible("evenementsarticle");
 		else
 			$bouton = bouton_block_invisible("evenementsarticle");
 	}
 
-	debut_cadre_enfonce("../"._DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/agenda-24.png", false, "", $bouton._T('agenda:texte_agenda')
+	$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/agenda-24.png", true, "", $bouton._T('agenda:texte_agenda')
 	." <a href='".generer_url_ecrire('calendrier',"ajouter_id_article=$id_article")."'>"._T('icone_calendrier')."</a>");
 
 	//
 	// Afficher les evenements
 	//
 
-	$les_evenements = Agenda_formulaire_article_afficher_evenements($id_article, $flag_editable);
+	list($s,$les_evenements) = Agenda_formulaire_article_afficher_evenements($id_article, $flag_editable);
+	$out .= $s;
 	//
 	// Ajouter un evenements
 	//
 
 	if ($flag_editable)
-		echo Agenda_formulaire_article_ajouter_evenement($id_article, $id_rubrique, $les_evenements, $flag_editable);
+		$out .= Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenements, $flag_editable);
 
 
-	fin_cadre_enfonce(false);
+	$out .= fin_cadre_enfonce(true);
+	return $out;
 }
 
 function Agenda_action_formulaire_article(){
@@ -281,10 +317,10 @@ function Agenda_action_formulaire_article(){
 		// pour les cas ou l'utilisateur a saisi 29-30-31 un mois ou ca n'existait pas
 		$maxiter=4;
 		$st_date_deb=FALSE;
-		$jour_debut=_request('evenement_jour_debut');
+		$jour_debut=_request('jour_evenement_debut');
 		// test <= car retour strtotime retourne -1 ou FALSE en cas d'echec suivant les versions
 		while(($st_date_deb<=FALSE)&&($maxiter-->0)) {
-			$date_deb=_request('evenement_annee_debut')."-"._request('evenement_mois_debut')."-".($jour_debut--)." "._request('evenement_heure_debut').":"._request('evenement_minute_debut');
+			$date_deb=_request('annee_evenement_debut')."-"._request('mois_evenement_debut')."-".($jour_debut--)." "._request('heure_evenement_debut').":"._request('minute_evenement_debut');
 			$st_date_deb=strtotime($date_deb);
 		}
 		$date_deb=format_mysql_date(date("Y",$st_date_deb),date("m",$st_date_deb),date("d",$st_date_deb),date("H",$st_date_deb),date("i",$st_date_deb), $s=0);
@@ -292,10 +328,10 @@ function Agenda_action_formulaire_article(){
 		// pour les cas ou l'utilisateur a saisi 29-30-31 un mois ou ca n'existait pas
 		$maxiter=4;
 		$st_date_fin=FALSE;
-		$jour_fin=_request('evenement_jour_fin');
+		$jour_fin=_request('jour_evenement_fin');
 		// test <= car retour strtotime retourne -1 ou FALSE en cas d'echec suivant les versions
 		while(($st_date_fin<=FALSE)&&($maxiter-->0)) {
-			$st_date_fin=_request('evenement_annee_fin')."-"._request('evenement_mois_fin')."-".($jour_fin--)." "._request('evenement_heure_fin').":"._request('evenement_minute_fin');
+			$st_date_fin=_request('annee_evenement_fin')."-"._request('mois_evenement_fin')."-".($jour_fin--)." "._request('heure_evenement_fin').":"._request('minute_evenement_fin');
 			$st_date_fin=strtotime($st_date_fin);
 		}
 		$st_date_fin = max($st_date_deb,$st_date_fin);
@@ -338,7 +374,7 @@ function Agenda_action_formulaire_article(){
 			spip_query("DELETE FROM spip_evenements WHERE id_evenement=$supp_evenement");
 		}
 	}
-
+	return "";
 }
 
 
@@ -437,17 +473,15 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 	// DATES
 	$out .=  "<div class='date-titre'>"._T('agenda:evenement_date')."</div>";
 	$out .=  "<div class='date-visu'>";
-	$out .= Agenda_date_insert_js_calendar("_debut");
 	$out .=  _T('agenda:evenement_date_de');
-	$out .= Agenda_date_selector(date('Y-m-d',$fstdatedeb),"_debut");
+	$out .= WCalendar_controller(date('Y-m-d H:i:s',$fstdatedeb),"_evenement_debut");
 	$out .= "<span class='agenda_".($fhoraire=='oui'?"":"in")."visible_au_chargement' id='afficher_horaire_debut_evenement'>";
 	$out .=  _T('agenda:evenement_date_a');
 	$out .= Agenda_heure_selector(date('H',$fstdatedeb),date('i',$fstdatedeb),"_debut");
 	$out .=	"</span>";
 	$out .=  "<br/>";
-	$out .= Agenda_date_insert_js_calendar("_fin");
 	$out .=  _T('agenda:evenement_date_au');
-	$out .= Agenda_date_selector(date('Y-m-d',$fstdatefin),"_fin");
+	$out .= WCalendar_controller(date('Y-m-d H:i:s',$fstdatefin),"_evenement_fin");
 	$out .= "<span class='agenda_".($fhoraire=='oui'?"":"in")."visible_au_chargement' id='afficher_horaire_fin_evenement'>";
 	$out .=  _T('agenda:evenement_date_a');
 	$out .= Agenda_heure_selector(date('H',$fstdatefin),date('i',$fstdatefin),"_fin");
@@ -509,33 +543,14 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 
 	$out .=  "</form>";
 	$out .=  "</div>\n";
-	//$out.=  Agenda_date_insert_js_calendar_placeholder("_debut");
-	//$out.=  Agenda_date_insert_js_calendar_placeholder("_fin");
 	return $out;
 }
 
 // Pre traitements -----------------------------------------------------------------------
-function Agenda_date_insert_js_calendar_placeholder($suffixe){
-	return "<div id='container$suffixe' style='position:absolute;display:none'></div>";
-}
-function Agenda_date_insert_js_calendar($suffixe){
-	return "<script type='text/javascript'>window.onload = init;</script>
-	<a href='javascript:void(null)' onclick='showCalendar$suffixe()'>
-	<img id='dateLink$suffixe' src='"._DIR_IMG_PACK."/cal-jour.gif' border='0' style='vertical-align:middle;margin:5px'/></a>
-	";
-}
-function Agenda_date_selector($date,$suffixe){
-	include_spip('inc/date');
-
-	return 
-    afficher_jour(jour($date), "id='evenement_jour$suffixe' name='evenement_jour$suffixe' size='1' class='fondl verdana1' onchange='changeDate$suffixe()'") .
-    afficher_mois(mois($date), "id='evenement_mois$suffixe' name='evenement_mois$suffixe' size='1' class='fondl verdana1' onchange='changeDate$suffixe()'") .
-    afficher_annee(annee($date), "id='evenement_annee$suffixe' name='evenement_annee$suffixe' size='1' class='fondl verdana1' onchange='changeDate$suffixe()'", date('Y')-1);
-}
 
 function Agenda_heure_selector($heure,$minute,$suffixe){
 	return
-		afficher_heure($heure, "name='evenement_heure$suffixe' size='1' class='fondl'") .
-  	afficher_minute($minute, "name='evenement_minute$suffixe' size='1' class='fondl'");
+		afficher_heure($heure, "name='heure_evenement$suffixe' size='1' class='fondl'") .
+  	afficher_minute($minute, "name='minute_evenement$suffixe' size='1' class='fondl'");
 }
 ?>
