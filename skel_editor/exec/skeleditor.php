@@ -25,7 +25,7 @@ function show_skel_file($path) {
              $extension =  strtolower(substr($myfile, strrpos($myfile,".")+1));
              if (in_array($extension,$listed_extension)) {         
               $output .= "<img src='../plugins/skel_editor/img_pack/file.png' alt='file' /> ";
-              $output .= "<a href=\"?exec=skeleditor&amp;file=$entirePath\">$myfile $extension</a>";
+              $output .= "<a href=\"?exec=skeleditor&amp;file=$entirePath\">$myfile</a>";
              }
           }         
           $output .= "</div>\n";
@@ -51,8 +51,21 @@ function exec_skeleditor(){
 		exit;
 	}
 	
+	// Version de base, a supprimer donc...
 	// globals
-	global $dossier_squelettes;
+	// $GLOBALS['dossier_squelettes']);
+	
+	// Va chercher le repertoire des squelettes et seulement celui-ci
+	// NB: Ce fichier peut initialiser $dossier_squelettes (old-style)
+	// donc il faut l'inclure "en globals"
+	if ($f = include_spip('mes_fonctions', false)) {
+		global $dossier_squelettes;
+		@include ($f); 
+	}
+	if (@is_readable(_DIR_SESSIONS."charger_plugins_fonctions.php")){
+		// chargement optimise precompile
+		include_once(_DIR_SESSIONS."charger_plugins_fonctions.php");
+	}
 	
    
   // HTML output  
