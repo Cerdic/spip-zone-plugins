@@ -15,9 +15,11 @@ function show_skel_file($path) {
                                     else   $output .= "<div>";
           // directory of file ?         
           if (is_dir($entirePath)) {
-             $output .= "<img src='../plugins/skel_editor/img_pack/folder.png' alt='file' /> ";
-             $output .= "<a href=\"?exec=skeleditor&amp;f=".urlencode($entirePath)."\">$myfile</a>";
+             $output .= bouton_block_invisible(md5($myfile));
+             $output .= "<img src='../plugins/skel_editor/img_pack/folder.png' alt='file' /> $myfile";             
+             $output .= debut_block_invisible(md5($myfile));             
              $output .= show_skel_file(substr($path,3)."/".$myfile); // recursive !
+             $output .= fin_block();
           } else { 
              $extension =  strtolower(substr($myfile, strrpos($myfile,".")+1));
              if (in_array($extension,$listed_extension)) {         
@@ -68,6 +70,7 @@ function exec_skeleditor(){
 	$log = "";
 	if (isset($_POST['editor'])) {      // save file ?
 	     $editor = $_POST['editor'];
+	     $editor = str_replace("&lt;/textarea","</textarea",$editor); // exception: textarea closing tag	     
 	     if (isset($_GET['f'])) $file_name = $_GET['f'];
 	                       else $file_name = "";
 	     $file_name = "..".str_replace("..", "", $file_name);    // security	     
@@ -105,6 +108,7 @@ function exec_skeleditor(){
        echo "<div>Fichier &eacute;dit&eacute;: <strong>$file_name</strong> $log</div>\n"; // add extra infos on file:  size ? date ? ...
        if ($file_tmp = @file("$file_name")) {
           $file_str = implode ('',$file_tmp);
+          $file_str = str_replace("</textarea","&lt;/textarea",$file_str); // exception: textarea closing tag
           
           echo "<form method='post' action='?exec=skeleditor&amp;retour=skeleditor&amp;f=".urlencode($file_name)."'>\n";
           echo "<textarea name='editor' cols='80' rows='50'>$file_str</textarea>\n";               
