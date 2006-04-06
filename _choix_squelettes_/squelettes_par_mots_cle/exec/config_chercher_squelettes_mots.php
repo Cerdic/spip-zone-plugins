@@ -126,7 +126,7 @@ function exec_config_chercher_squelettes_mots() {
 	  $where1 = array("id_groupe=$id_groupe");
 	  $rez =spip_abstract_select($select1,$from1,$where1);
 	  $liste_squel = '<ul>';
-	  $ext = $GLOBALS['extension_squelette'];
+	  $ext = 'html'; //On force a html, c'est pas beau, mais je vois pas la solution actuellement.
 	  $cnt_actif = 0;
 	  $cnt_inactif = 0;
 	  while ($r = spip_abstract_fetch($rez)) {
