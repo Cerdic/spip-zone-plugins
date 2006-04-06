@@ -1,7 +1,4 @@
 <?php
-// TODO: 
-// .. show subdirectory content (show/hide)
-
 //  display all skel files and folders
 function show_skel_file($path) {  
   $listed_extension = array("htm","html","php","css","txt","js");
@@ -16,16 +13,16 @@ function show_skel_file($path) {
           // writable ?
           if (!is_writable($entirePath))   $output .= "<div style='background:#3ff'>";
                                     else   $output .= "<div>";
-          // directory of file ?
+          // directory of file ?         
           if (is_dir($entirePath)) {
              $output .= "<img src='../plugins/skel_editor/img_pack/folder.png' alt='file' /> ";
-             $output .= "<a href=\"?exec=skeleditor&amp;file=$entirePath\">$myfile</a>";
+             $output .= "<a href=\"?exec=skeleditor&amp;f=".urlencode($entirePath)."\">$myfile</a>";
              $output .= show_skel_file(substr($path,3)."/".$myfile); // recursive !
           } else { 
              $extension =  strtolower(substr($myfile, strrpos($myfile,".")+1));
              if (in_array($extension,$listed_extension)) {         
               $output .= "<img src='../plugins/skel_editor/img_pack/file.png' alt='file' /> ";
-              $output .= "<a href=\"?exec=skeleditor&amp;file=$entirePath\">$myfile</a>";
+              $output .= "<a href=\"?exec=skeleditor&amp;f=".urlencode($entirePath)."\">$myfile</a>";
              }
           }         
           $output .= "</div>\n";
@@ -64,10 +61,31 @@ function exec_skeleditor(){
 	}
 	if (@is_readable(_DIR_SESSIONS."charger_plugins_fonctions.php")){
 		// chargement optimise precompile
-		include_once(_DIR_SESSIONS."charger_plugins_fonctions.php");
+		include_once(_DIR_SESSIONS."charger_plugins_fonctions.php");     	
 	}
 	
-   
+	// Action ?
+	$log = "";
+	if (isset($_POST['editor'])) {      // save file ?
+	     $editor = $_POST['editor'];
+	     if (isset($_GET['f'])) $file_name = $_GET['f'];
+	                       else $file_name = "";
+	     $file_name = "..".str_replace("..", "", $file_name);    // security	     
+	     if (is_writable($file_name)) {
+             if (!$handle = fopen($file_name, 'w')) {
+                 $log = "<span style='color:red'>erreur: impossible d'ouvrir le fichier</span>";
+             } else if (fwrite($handle, $editor) === FALSE) {
+                 $log = "<span style='color:red'>erreur: impossible d'&ecute;crire dans le fichier</span>";           
+             } else {
+                 $log = "<span style='color:green'>fichier sauvegardé @ ".date('H:m')."</span>";
+                 fclose($handle);
+             }        
+	          
+       } else {
+            $log = "<span style='color:red'>erreur: fichier non éditable en écriture</span>";
+       }
+  }
+	   
   // HTML output  
 	debut_page("Editer le squelette", "naviguer", "plugin");
 	
@@ -79,11 +97,26 @@ function exec_skeleditor(){
 	fin_boite_info();
 	
 	debut_droite();
-	echo "<h2>Editer le squelette<h2>\n";
-	
-  echo "<form method='post' action='?exec=skeleditor&amp;retour=skeleditor''>\n";
-	echo "<input type='submit' name='action' value='Sauver' />";
-	echo "</form>\n";
+
+	// something to do ?	
+	if (isset($_GET['f'])) {
+	     $file_name = $_GET['f'];
+       $file_name = "..".str_replace("..", "", $file_name);    // security       
+       echo "<div>Fichier &eacute;dit&eacute;: <strong>$file_name</strong> $log</div>\n"; // add extra infos on file:  size ? date ? ...
+       if ($file_tmp = @file("$file_name")) {
+          $file_str = implode ('',$file_tmp);
+          
+          echo "<form method='post' action='?exec=skeleditor&amp;retour=skeleditor&amp;f=".urlencode($file_name)."'>\n";
+          echo "<textarea name='editor' cols='80' rows='50'>$file_str</textarea>\n";               
+	        echo "<input type='submit' name='action' value='Sauver' />";	        
+	        echo "</form>\n";
+       } else {       
+          echo "<p>Erreur: impossible d'ouvrir ou d'éditer ce fichier.</p>\n";
+       }      
+      
+  } else {
+      echo "<p>Choississez le fichier que vous voulez &eacute;diter.</p>\n";
+  }
   
   fin_page();
 }

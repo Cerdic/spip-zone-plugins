@@ -1,0 +1,27 @@
+---------------------------------------------
+TODO plugin skel_editor
+---------------------------------------------
+
+- internationaliser le plug-in
+- vérifier les droits en écriture
+- vérifier la sécurité: ne pas pouvoir éditer d'autres fichiers que ceux du squelettes
+- évaluer les conflits potentiels d'éditer des fichiers en live (lock ?)
+- vérifier l'encodage
+
+extras possibles:
+- avoir une fenêtre info (iframe ?) avec onglets
+... documentation des boucles
+... parse les BOUCLES du squelette
+... preview "livre"
+
+liens:
+- projet boneZai (URL ?)
+- http://romy.tetue.free.fr/article.php3?id_article=322
+- editeurs wysiwyg http://www.geniisoft.com/showcase.nsf/WebEditors)
+- http://www.eledo.com/article19.html
+
+
+
+
+
+---------------------------------------------
