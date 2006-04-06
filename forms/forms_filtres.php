@@ -60,6 +60,11 @@ include_spip("inc/forms");
 		return Forms_afficher_reponses_sondage($id_form);
 	}
 
-
+	function Forms_affiche_droite($flux){
+		if (_request('exec')=='articles_edit'){
+			$flux .= Forms_afficher_insertion_formulaire(_request('id_article'));
+		}
+		return $flux;
+	}
 
 ?>
