@@ -101,6 +101,8 @@ function Wcalendar_js_set_change_date($s,$sdverif=NULL,$sfverif=NULL,$modif=""){
 			var month = this.selMonth$s.selectedIndex;
 			var day = this.selDay$s.selectedIndex + 1;
 			var year = this.selYear$s.selectedIndex+parseInt(selYear$s.options[0].value);
+			cal$s.reset();
+			cal$s.clear();
 			cal$s.select((month+1) + '/' + day + '/' + year);
 			cal$s.setMonth(month);
 			cal$s.setYear(year);
@@ -189,7 +191,7 @@ function WCalendar_header_prive($flux) {
 			list($v,$a,$b,$c) = WCalendar_jsinit($t, $s);
 			$vars .= $v; $js_a .= $a; $js_b .= $b;$js_c .= $c;
 		}
-		foreach ($WCalendar_lies as  $suffixes){
+		foreach ($WCalendar_lies as  $infos){
 			$s = $infos['suffixe1'];
 			$t = $infos['titre1'];
 			list($v,$a,$b,$c) = WCalendar_jsinit($t, $s);
@@ -217,7 +219,7 @@ function WCalendar_header_prive($flux) {
 			$js .= Wcalendar_js_set_change_date($s);
 		}
 
-		foreach ($WCalendar_lies as  $suffixes){
+		foreach ($WCalendar_lies as  $infos){
 			$sd = $infos['suffixe1'];
 			$sf = $infos['suffixe2'];
 			$js .= WCalendar_js_verifie_lies($sd,$sf);
