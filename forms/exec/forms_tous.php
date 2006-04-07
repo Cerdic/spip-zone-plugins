@@ -22,13 +22,13 @@ function Forms_duplique_form(){
 			$texte = $row['texte'];
 
 			$query = "UPDATE spip_forms SET ".
-				"titre='"._L('Copie de ').$titre."', ".
-				"descriptif='".$descriptif."', ".
-				"sondage='".$sondage."', ".
-				"schema='".$schema."', ".
-				"email='".$email."', ".
-				"champconfirm='".$champconfirm."', ".
-				"texte='".$texte."' ".
+				"titre='"._L('Copie de ').addslashes($titre)."', ".
+				"descriptif='".addslashes($descriptif)."', ".
+				"sondage='".addslashes($sondage)."', ".
+				"schema='".addslashes($schema)."', ".
+				"email='".addslashes($email)."', ".
+				"champconfirm='".addslashes($champconfirm)."', ".
+				"texte='".addslashes($texte)."' ".
 				"WHERE id_form=$id_form";
 			$result = spip_query($query);
 		}

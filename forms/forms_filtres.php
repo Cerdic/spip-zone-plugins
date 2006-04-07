@@ -62,7 +62,7 @@ include_spip("inc/forms");
 
 	function Forms_affiche_droite($flux){
 		if (_request('exec')=='articles_edit'){
-			$flux .= Forms_afficher_insertion_formulaire(_request('id_article'));
+			$flux['data'] .= Forms_afficher_insertion_formulaire($flux['arg']['id_article']);
 		}
 		return $flux;
 	}
