@@ -1,7 +1,8 @@
 <?php
 //  display all skel files and folders
 function show_skel_file($path) {  
-  $listed_extension = array("htm","html","php","css","txt","js");
+  $listed_extension = array("htm","html","xml","svg","php","php3","php4","py","sh","sql","css","rdf","txt","nfo","log","js","as");
+  $img_extension = array("jpg","png","gif","ico","bmp");
 
   $path = "../$path";
   $output = "<div style='line-height: 12px;border:1px solid #ededed;padding:4px;margin:4px 0'>\n";
@@ -16,15 +17,21 @@ function show_skel_file($path) {
           // directory of file ?         
           if (is_dir($entirePath)) {
              $output .= bouton_block_invisible(md5($myfile));
-             $output .= "<img src='../plugins/skel_editor/img_pack/folder.png' alt='file' /> $myfile";             
+             $output .= "<img src='../plugins/skel_editor/img_pack/folder.png' alt='directory' /> $myfile";             
              $output .= debut_block_invisible(md5($myfile));             
              $output .= show_skel_file(substr($path,3)."/".$myfile); // recursive !
              $output .= fin_block();
           } else { 
-             $extension =  strtolower(substr($myfile, strrpos($myfile,".")+1));
-             if (in_array($extension,$listed_extension)) {         
-              $output .= "<img src='../plugins/skel_editor/img_pack/file.png' alt='file' /> ";
-              $output .= "<a href=\"?exec=skeleditor&amp;f=".urlencode($entirePath)."\">$myfile</a>";
+             $extension =  strtolower(substr($myfile, strrpos($myfile,".")+1));             
+             if (in_array($extension,$listed_extension)) {
+                $output .= "<img src='../plugins/skel_editor/img_pack/file.png' alt='file' /> ";
+                $output .= "<a href=\"?exec=skeleditor&amp;f=".urlencode($entirePath)."\">$myfile</a>";
+             } else if (in_array($extension,$img_extension)) {
+                $output .= "<img src='../plugins/skel_editor/img_pack/img.png' alt='file' /> ";
+                $output .= "<a href=\"?exec=skeleditor&amp;f=".urlencode($entirePath)."\">$myfile</a>";
+             } else {
+                $output .= "<img src='../plugins/skel_editor/img_pack/unknown.png' alt='unknown' /> ";
+                $output .= "<span style='color:#aaa'>$myfile</span>";
              }
           }         
           $output .= "</div>\n";
@@ -39,6 +46,7 @@ function show_skel_file($path) {
 // ------------------------------
 function exec_skeleditor(){
   include_spip("inc/presentation");
+  $img_extension = array("jpg","png","gif","ico","bmp");
 
   // check rights
   global $connect_statut;
@@ -105,21 +113,26 @@ function exec_skeleditor(){
 	if (isset($_GET['f'])) {
 	     $file_name = $_GET['f'];
        $file_name = "..".str_replace("..", "", $file_name);    // security       
-       echo "<div>Fichier &eacute;dit&eacute;: <strong>$file_name</strong> $log</div>\n"; // add extra infos on file:  size ? date ? ...
-       if ($file_tmp = @file("$file_name")) {
-          $file_str = implode ('',$file_tmp);
-          $file_str = str_replace("</textarea","&lt;/textarea",$file_str); // exception: textarea closing tag
-          
-          echo "<form method='post' action='?exec=skeleditor&amp;retour=skeleditor&amp;f=".urlencode($file_name)."'>\n";
-          echo "<textarea name='editor' cols='80' rows='50'>$file_str</textarea>\n";               
-	        echo "<input type='submit' name='action' value='Sauver' />";	        
-	        echo "</form>\n";
-       } else {       
-          echo "<p>Erreur: impossible d'ouvrir ou d'éditer ce fichier.</p>\n";
-       }      
+       echo "<div>Fichier: <strong>$file_name</strong> $log</div>\n"; // add extra infos on file:  size ? date ? ...
+       // img or text ?
+       $extension =  strtolower(substr($file_name, strrpos($file_name,".")+1)); 
+       if (in_array($extension,$img_extension)) {     // display file as img
+          echo "<div style='border:1px solid #333;padding:20px;background:#eee'><img src='$file_name' alt='picture' /></div>\n";
+       } else {  // edit file as text  
+          if ($file_tmp = @file("$file_name")) {
+              $file_str = implode ('',$file_tmp);
+              $file_str = str_replace("</textarea","&lt;/textarea",$file_str); // exception: textarea closing tag              
+              echo "<form method='post' action='?exec=skeleditor&amp;retour=skeleditor&amp;f=".urlencode($file_name)."'>\n";
+              echo "<textarea name='editor' cols='80' rows='50'>$file_str</textarea>\n";               
+    	        echo "<input type='submit' name='action' value='Sauver' />";	        
+    	        echo "</form>\n";
+          } else {       
+              echo "<p>Erreur: impossible d'ouvrir ou d'éditer ce fichier.</p>\n";
+          }   
+       }     
       
   } else {
-      echo "<p>Choississez le fichier que vous voulez &eacute;diter.</p>\n";
+      echo "<p>Choississez le fichier que vous voulez &eacute;diter ou visualiser.</p>\n";
   }
   
   fin_page();

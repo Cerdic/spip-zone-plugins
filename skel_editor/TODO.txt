@@ -12,16 +12,11 @@ extras possibles:
 - avoir une fenêtre info (iframe ?) avec onglets
 ... documentation des boucles
 ... parse les BOUCLES du squelette
-... preview "livre"
+... preview "live"
 
 liens:
 - projet boneZai (URL ?)
-- http://romy.tetue.free.fr/article.php3?id_article=322
-- editeurs wysiwyg http://www.geniisoft.com/showcase.nsf/WebEditors)
+- editeurs wysiwyg http://www.geniisoft.com/showcase.nsf/WebEditors
 - http://www.eledo.com/article19.html
-
-
-
-
 
 ---------------------------------------------

@@ -13,9 +13,9 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	test
 	</etat>
 	<description>
-	Dans l'espace prive, editer les fichiers squelettes
+	Dans l'espace priv&eacute;, permet d'&eacute;diter les fichiers squelettes
 	
-	{{attention: ne pas utiliser, il s'agit toujours d'un plugin en alpha-alpha !}}
+	{{attention:  toujours en test !}}
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
