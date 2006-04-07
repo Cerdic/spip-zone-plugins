@@ -33,9 +33,12 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			creer_base();
-			ecrire_meta('forms_base_version',$current_version=0.10);
+			ecrire_meta('forms_base_version',$current_version=$version_base);
 		}
 		if ($current_version<0.11){
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			creer_base();
 			$query = "ALTER TABLE spip_forms CHANGE `email` `email` TEXT NOT NULL ";
 			$res = spip_query($query);
 			$query = "SELECT * FROM spip_forms";
@@ -52,6 +55,9 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			ecrire_meta('forms_base_version',$current_version=0.11);
 		}
 		if ($current_version<0.12){
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			creer_base();
 			spip_query("ALTER TABLE `spip_forms` CHANGE `descriptif` `descriptif` TEXT");
 			spip_query("ALTER TABLE `spip_forms` CHANGE `schema` `schema` TEXT");
 			spip_query("ALTER TABLE `spip_forms` CHANGE `email` `email` TEXT");
