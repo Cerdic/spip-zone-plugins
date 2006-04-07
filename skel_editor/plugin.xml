@@ -1,6 +1,17 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Squelette editeur
+	<multi>
+	[fr]
+	  Squelette editeur
+    [en]
+	  Skeleton editor 
+	[it]
+	  Redattore di scheletro 
+	[es]
+	  Redactor esquel&eacute;tico
+	[de]
+	  Skeleton Herausgeber
+	</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	[erational->http://www.erational.org] et [karim belkacem->http://www.glums.com]
@@ -13,23 +24,28 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	test
 	</etat>
 	<description>
-	Dans l'espace priv&eacute;, permet d'&eacute;diter les fichiers squelettes
-	
-	{{attention:  toujours en test !}}
+	<multi>
+	[fr]
+	  Dans l'espace priv&eacute;, permet d'&eacute;diter les fichiers squelettes, {{attention: toujours en test !}}
+    [en]
+	  In private space, allows editor the files skeletons, {{caution: always in test!}} 
+	[it]
+	  Nello spazio riservato, concede a redattore gli scheletri delle lime, {{attenzione: sempre nella prova!}}
+	[es]
+	  En espacio privado, no prohibe a redactor los esqueletos de los archivos, {{precauci&oacute;n:  siempre en prueba!}}
+	[de]
+	  Im privaten Raum erlaubt Herausgeber die Aktenskelette, {{Vorsicht:  immer im Test!}} 
+	</multi>
 	</description>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction sur le mode Rien:: ainsi les fonctions hors espace de nommage ne peuvent etre appelees ce parametre est obligatoire et doit etre non vide -->
 	<prefix> 
 	SkelEditor
 	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
-         <pipeline>
-        		<nom>ajouter_boutons</nom>
-        		<action>ajouterBoutons</action>
-        		<inclure>inc_skeleditor.php</inclure>
-        	</pipeline>
+    <pipeline>
+       	<nom>ajouter_boutons</nom>
+       	<action>ajouterBoutons</action>
+       <inclure>inc_skeleditor.php</inclure>
+    </pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>
