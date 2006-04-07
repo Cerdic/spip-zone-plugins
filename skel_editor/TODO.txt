@@ -3,9 +3,7 @@ TODO plugin skel_editor
 ---------------------------------------------
 
 - internationaliser le plug-in
-- vérifier les droits en écriture
 - vérifier la sécurité: ne pas pouvoir éditer d'autres fichiers que ceux du squelettes
-- évaluer les conflits potentiels d'éditer des fichiers en live (lock ?)
 - vérifier l'encodage
 
 extras possibles:
@@ -14,9 +12,5 @@ extras possibles:
 ... parse les BOUCLES du squelette
 ... preview "live"
 
-liens:
-- projet boneZai (URL ?)
-- editeurs wysiwyg http://www.geniisoft.com/showcase.nsf/WebEditors
-- http://www.eledo.com/article19.html
 
 ---------------------------------------------
