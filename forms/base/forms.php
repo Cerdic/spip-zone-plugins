@@ -16,12 +16,12 @@
 $spip_forms = array(
 	"id_form" 	=> "bigint(21) NOT NULL",
 	"titre" 	=> "varchar(255) NOT NULL",
-	"descriptif" 	=> "text NOT NULL",
+	"descriptif" 	=> "text",
 	"sondage" 	=> "varchar(255) NOT NULL",
-	"schema" 	=> "text NOT NULL",
-	"email" => "text NOT NULL",
+	"schema" 	=> "text",
+	"email" => "text",
 	"champconfirm" => "varchar(255) NOT NULL",
-	"texte" 	=> "text NOT NULL",
+	"texte" 	=> "text",
 	"maj" 		=> "TIMESTAMP");
 
 $spip_forms_key = array(

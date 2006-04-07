@@ -22,7 +22,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 	}
 	
 	function Forms_verifier_base(){
-		$version_base = 0.11;
+		$version_base = 0.12;
 		$current_version = 0.0;
 		if (   (isset($GLOBALS['meta']['forms_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['forms_base_version'])==$version_base))
@@ -33,9 +33,9 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			creer_base();
-			$current_version = 0.10;
+			ecrire_meta('forms_base_version',$current_version=0.10);
 		}
-		if ($current_version<=0.11){
+		if ($current_version<0.11){
 			$query = "ALTER TABLE spip_forms CHANGE `email` `email` TEXT NOT NULL ";
 			$res = spip_query($query);
 			$query = "SELECT * FROM spip_forms";
@@ -49,10 +49,16 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 					spip_query($query);
 				}
 			}
-			$current_version = 0.11;
+			ecrire_meta('forms_base_version',$current_version=0.11);
+		}
+		if ($current_version<0.12){
+			spip_query("ALTER TABLE `spip_forms` CHANGE `descriptif` `descriptif` TEXT");
+			spip_query("ALTER TABLE `spip_forms` CHANGE `schema` `schema` TEXT");
+			spip_query("ALTER TABLE `spip_forms` CHANGE `email` `email` TEXT");
+			spip_query("ALTER TABLE `spip_forms` CHANGE `texte` `texte` TEXT");
+			ecrire_meta('forms_base_version',$current_version=0.12);
 		}
 		
-		ecrire_meta('forms_base_version',$version_base);
 		ecrire_metas();
 	}
 
