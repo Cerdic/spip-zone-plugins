@@ -7,7 +7,7 @@ function retourTinyMCE(&$str) {
 	static $tag='<!-- TINY_MCE -->';
 	$len=strlen($tag);
 	if(substr($str, 0, $len)==$tag) {
-		include_spip('sale');
+		include_spip('inc/sale');
 		$str= sale(substr($str, $len));
 	}
 }
