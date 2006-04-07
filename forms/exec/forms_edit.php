@@ -292,9 +292,11 @@ function forms_update(){
 			foreach ($schema as $index => $t) {
 				if ($code == $t['code']) break;
 			}
-			unset($schema[$index]);
-			if (!$schema) $schema = array();
-			$modif_schema = true;
+			if (isset($index)&&($schema[$index]['code']==$code)){
+				unset($schema[$index]);
+				if (!$schema) $schema = array();
+				$modif_schema = true;
+			}
 		}
 
 		// Monter / descendre un champ
@@ -845,7 +847,7 @@ function exec_forms_edit(){
 				echo "<option value='$type'>".Forms_nom_type_champ($type)."</option>\n";
 			}
 			echo "</select>\n";
-			echo " &nbsp; <input type='submit' name='valider' id='ajout_champ' VALUE='"._T('bouton_valider')."' class='fondo'>";
+			echo " &nbsp; <input type='submit' name='valider' id='ajout_champ' VALUE='"._T('bouton_ajouter')."' class='fondo'>";
 			echo "</form>\n";
 			fin_cadre_enfonce();
 		}
