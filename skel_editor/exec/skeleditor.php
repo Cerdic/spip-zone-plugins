@@ -1,6 +1,6 @@
 <?php
 //  display all skel files and folders
-function show_skel_file($path) {  
+function show_skel_file($path,$current_file) {  
   $listed_extension = array("htm","html","xml","svg","php","php3","php4","py","sh","sql","css","rdf","txt","nfo","log","js","as");
   $img_extension = array("jpg","png","gif","ico","bmp");
 
@@ -18,17 +18,19 @@ function show_skel_file($path) {
           if (is_dir($entirePath)) {
              $output .= bouton_block_invisible(md5($myfile));
              $output .= "<img src='../plugins/skel_editor/img_pack/folder.png' alt='directory' /> $myfile";             
-             $output .= debut_block_invisible(md5($myfile));             
-             $output .= show_skel_file(substr($path,3)."/".$myfile); // recursive !
-             $output .= fin_block();
+             if(!strstr($current_file,$entirePath)) $output .= debut_block_invisible(md5($myfile));             
+             $output .= show_skel_file(substr($path,3)."/".$myfile,$current_file); // recursive !
+             if(!strstr($current_file,$entirePath)) $output .= fin_block();
           } else { 
+             if ($entirePath==$current_file) $expose=" style='background:#ff6'";
+                                        else $expose="";
              $extension =  strtolower(substr($myfile, strrpos($myfile,".")+1));             
              if (in_array($extension,$listed_extension)) {
                 $output .= "<img src='../plugins/skel_editor/img_pack/file.png' alt='file' /> ";
-                $output .= "<a href=\"?exec=skeleditor&amp;f=".urlencode($entirePath)."\">$myfile</a>";
+                $output .= "<a href=\"?exec=skeleditor&amp;f=".urlencode($entirePath)."\"$expose>$myfile</a>";
              } else if (in_array($extension,$img_extension)) {
                 $output .= "<img src='../plugins/skel_editor/img_pack/img.png' alt='file' /> ";
-                $output .= "<a href=\"?exec=skeleditor&amp;f=".urlencode($entirePath)."\">$myfile</a>";
+                $output .= "<a href=\"?exec=skeleditor&amp;f=".urlencode($entirePath)."\"$expose>$myfile</a>";
              } else {
                 $output .= "<img src='../plugins/skel_editor/img_pack/unknown.png' alt='unknown' /> ";
                 $output .= "<span style='color:#aaa'>$myfile</span>";
@@ -95,24 +97,30 @@ function exec_skeleditor(){
        } else {
             $log = "<span style='color:red'>erreur: fichier non éditable en écriture</span>";
        }
+  }	 
+
+	// URL request ?
+	if (isset($_GET['f'])) {
+	    $file_name = $_GET['f'];
+      $file_name = "..".str_replace("..", "", $file_name);    // security  
+  } else {
+      $file_name = "";
   }
-	   
-  // HTML output  
-	debut_page("Editer le squelette", "naviguer", "plugin");
 	
+	//  
+  // HTML output  
+	debut_page("Editer le squelette", "naviguer", "plugin");	
   debut_gauche();
 	debut_boite_info();
 	echo ("<p>Permet d'&eacute;diter les fichiers du squelette en cours</p>");	
 	echo "dossier squelette: <strong>$dossier_squelettes</strong><br />";
-	echo show_skel_file($dossier_squelettes);
+	echo show_skel_file($dossier_squelettes,$file_name);
 	fin_boite_info();
 	
 	debut_droite();
 
 	// something to do ?	
-	if (isset($_GET['f'])) {
-	     $file_name = $_GET['f'];
-       $file_name = "..".str_replace("..", "", $file_name);    // security       
+	if ($file_name !="") {   
        echo "<div>Fichier: <strong>$file_name</strong> $log</div>\n"; // add extra infos on file:  size ? date ? ...
        // img or text ?
        $extension =  strtolower(substr($file_name, strrpos($file_name,".")+1)); 
