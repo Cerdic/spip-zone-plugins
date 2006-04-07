@@ -455,7 +455,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 		return $out;
 	}
 
-	function Forms_generer_mail_reponse_formulaire($id_form, $id_reponse, $mailconfirm){
+	function Forms_generer_mail_reponse_formulaire($id_form, $id_reponse){
 		$query = "SELECT * FROM spip_forms WHERE id_form=$id_form";
 		$result = spip_query($query);
 		if ($row = spip_fetch_array($result)) {
@@ -464,7 +464,6 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			$titre = $row['titre'];
 			$champconfirm = $row['champconfirm'];
 			$email = unserialize($row['email']);
-			$type_ext = $t['type_ext'];
 
 			$form_summary = '';
 			$email_dest = $email['defaut'];
@@ -475,6 +474,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			foreach ($schema as $index => $t) {
 				$type = $t['type'];
 				$code = $t['code'];
+				$type_ext = $t['type_ext'];
 				$form_summary .= $t['nom'] . " : ";
 	
 				$query2 = "SELECT * FROM spip_reponses_champs WHERE id_reponse='$id_reponse' AND champ='$code'";
@@ -486,7 +486,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 					if ($code == $champconfirm)
 						$mailconfirm = $row2['valeur'];
 						
-					$reponses .= $row2['valeur'].", ";
+					//$reponses .= $row2['valeur'].", ";
 					$reponses .= Forms_traduit_reponse($type, $code,$type_ext,$row2['valeur']).", ";
 				}
 				if (strlen($reponses) > 2)
