@@ -13,9 +13,9 @@ function generer_mail_ecard_formulaire($id_form, $id_reponse, $mailconfirm, $id_
 	$result = spip_query($query);
 	if ($row = spip_fetch_array($result)) {
 		$form_summary = '';
-		$schema = unserialize($row['schema']);
+		$structure = unserialize($row['structure']);
 		// Ici on parcourt les valeurs entrees pour les champs demandes
-		foreach ($schema as $index => $t) {
+		foreach ($structure as $index => $t) {
 			$type = $t['type'];
 			$code = $t['code'];
 			$form_summary .= $t['nom'] . " : ";

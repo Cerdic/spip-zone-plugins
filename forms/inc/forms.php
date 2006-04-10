@@ -22,7 +22,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 	}
 	
 	function Forms_verifier_base(){
-		$version_base = 0.12;
+		$version_base = 0.13;
 		$current_version = 0.0;
 		if (   (isset($GLOBALS['meta']['forms_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['forms_base_version'])==$version_base))
@@ -63,6 +63,10 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			spip_query("ALTER TABLE `spip_forms` CHANGE `email` `email` TEXT");
 			spip_query("ALTER TABLE `spip_forms` CHANGE `texte` `texte` TEXT");
 			ecrire_meta('forms_base_version',$current_version=0.12);
+		}
+		if ($current_version<0.13){
+			spip_query("ALTER TABLE `spip_forms` CHANGE `schema` `structure` TEXT");
+			ecrire_meta('forms_base_version',$current_version=0.13);
 		}
 		
 		ecrire_metas();
@@ -403,10 +407,10 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 	}
 
 	//
-	// Afficher les champs d'edition specifies par un schema
+	// Afficher les champs d'edition specifies par un structure
 	//
 	
-	function Forms_afficher_formulaire_schema($schema, $link = '', $ancre = '', $remplir = false) {
+	function Forms_afficher_formulaire_structure($structure, $link = '', $ancre = '', $remplir = false) {
 		global $flag_ecrire, $les_notes, $spip_lang_left, $spip_lang_right;
 		
 		// Les formulaires ont leurs propres notes "de bas de page",
@@ -421,8 +425,8 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 		$champs = "";
 		$fieldset = false;
 	
-		ksort($schema);
-		foreach ($schema as $index => $t) {
+		ksort($structure);
+		foreach ($structure as $index => $t) {
 			if ($t['type']!='separateur')
 				$champs .= Forms_afficher_champ_formulaire($t, $readonly, $remplir);
 			else{
@@ -481,9 +485,9 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			$email_dest = $email['defaut'];
 			$mailconfirm = "";
 			
-			$schema = unserialize($row['schema']);
+			$structure = unserialize($row['structure']);
 			// Ici on parcourt les valeurs entrees pour les champs demandes
-			foreach ($schema as $index => $t) {
+			foreach ($structure as $index => $t) {
 				$type = $t['type'];
 				$code = $t['code'];
 				$type_ext = $t['type_ext'];
@@ -546,9 +550,9 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 		$champconfirm = $row['champconfirm'];
 		$mailconfirm = '';
 	
-		$schema = unserialize($row['schema']);
+		$structure = unserialize($row['structure']);
 		// Ici on parcourt les valeurs entrees pour les champs demandes
-		foreach ($schema as $index => $t) {
+		foreach ($structure as $index => $t) {
 			$code = $t['code'];
 			$type = $t['type'];
 			$type_ext = $t['type_ext'];
@@ -618,7 +622,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			// Puis enregistrer les differents champs
 			if ($ok) {
 				$inserts = array();
-				foreach ($schema as $index => $t) {
+				foreach ($structure as $index => $t) {
 					$type = $t['type'];
 					$code = $t['code'];
 	
@@ -699,7 +703,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 		$titre = $row['titre'];
 		$descriptif = $row['descriptif'];
 		$sondage = $row['sondage'];
-		$schema = unserialize($row['schema']);
+		$structure = unserialize($row['structure']);
 	
 		$ancre = 'form'.(++$num_ancre);
 
@@ -766,7 +770,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 				$r .= "<br />\n";
 			}
 			$r .= $formhead;
-			$r .= Forms_afficher_formulaire_schema($schema, $form_link, $ancre, $erreur);
+			$r .= Forms_afficher_formulaire_structure($structure, $form_link, $ancre, $erreur);
 			$r .= "</div>\n";
 	 	}
 		return $r;

@@ -24,9 +24,9 @@
 		if (!$row = spip_fetch_array($result)) return '';
 	
 		$sondage = $row['sondage'];
-		$schema = unserialize($row['schema']);
+		$structure = unserialize($row['structure']);
 		$champs = array();
-		foreach ($schema as $index => $t) {
+		foreach ($structure as $index => $t) {
 			if ($t['type'] != 'select' && $t['type'] != 'multiple' && $t['type'] != 'mot')
 				continue;
 			$champs[] = $t;

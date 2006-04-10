@@ -25,7 +25,7 @@ function exec_forms_reponses(){
 		if ($row = spip_fetch_array($result)) {
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
-			$schema = unserialize($row['schema']);
+			$structure = unserialize($row['structure']);
 			$sondage = $row['sondage'];
 		}
 	}
@@ -124,7 +124,7 @@ function exec_forms_reponses(){
 	//
 	$trans = array();
 	$types = array();
-	$schemas = array();
+	$structures = array();
 	$form_unique = $id_form;
 
 	$query = "SELECT r.*, a.nom FROM spip_reponses AS r LEFT JOIN spip_auteurs AS a USING (id_auteur) ".
@@ -140,14 +140,14 @@ function exec_forms_reponses(){
 		$nom_auteur = $row['nom'];
 
 		// Preparer la table de traduction code->valeur
-		$query_form = "SELECT titre, schema FROM spip_forms WHERE id_form=$id_form";
+		$query_form = "SELECT titre, structure FROM spip_forms WHERE id_form=$id_form";
 		/*$row_form = spip_fetch_array(spip_query($query_form));
-		$schema = unserialize($row_form['schema']);
+		$structure = unserialize($row_form['structure']);
 		$titre_form = $row_form['titre'];*/
-		list($titre_form, $schema) = spip_fetch_array(spip_query($query_form));
-		$schema = unserialize($schema);
+		list($titre_form, $structure) = spip_fetch_array(spip_query($query_form));
+		$structure = unserialize($structure);
 		if (!$trans[$id_form]) {
-			foreach ($schema as $index => $t) {
+			foreach ($structure as $index => $t) {
 				$code = $t['code'];
 				$type = $t['type'];
 				$type_ext = $t['type_ext'];
@@ -213,7 +213,7 @@ function exec_forms_reponses(){
 		}
 		echo "<br />\n";
 
-		foreach ($schema as $index => $t) {
+		foreach ($structure as $index => $t) {
 			$nom = $t['nom'];
 			$code = $t['code'];
 			$type = $t['type'];

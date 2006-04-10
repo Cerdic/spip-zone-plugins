@@ -6,9 +6,9 @@ function Forms_duplique_form(){
 	$duplique = intval(_request('duplique_form'));
 	if ($duplique && Forms_form_administrable($duplique)){
 		// creation
-			$schema = array();
-			spip_query("INSERT INTO spip_forms (schema) VALUES ('".
-				addslashes(serialize($schema))."')");
+			$structure = array();
+			spip_query("INSERT INTO spip_forms (structure) VALUES ('".
+				addslashes(serialize($structure))."')");
 			$id_form = spip_insert_id();
 		$query = "SELECT * FROM spip_forms WHERE id_form=$duplique";
 		$result = spip_query($query);
@@ -16,7 +16,7 @@ function Forms_duplique_form(){
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
 			$sondage = $row['sondage'];
-			$schema = $row['schema'];
+			$structure = $row['structure'];
 			$email = $row['email'];
 			$champconfirm = $row['champconfirm'];
 			$texte = $row['texte'];
@@ -25,7 +25,7 @@ function Forms_duplique_form(){
 				"titre='"._L('Copie de ').addslashes($titre)."', ".
 				"descriptif='".addslashes($descriptif)."', ".
 				"sondage='".addslashes($sondage)."', ".
-				"schema='".addslashes($schema)."', ".
+				"structure='".addslashes($structure)."', ".
 				"email='".addslashes($email)."', ".
 				"champconfirm='".addslashes($champconfirm)."', ".
 				"texte='".addslashes($texte)."' ".

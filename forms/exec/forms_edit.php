@@ -125,10 +125,10 @@ function modif_edition_champ($t) {
 	return $t;
 }
 
-function code_nouveau_champ($schema,$type){
+function code_nouveau_champ($structure,$type){
 	$n = 1;
 	$code = $type.'_'.strval($n);
-	foreach ($schema as $t) {
+	foreach ($structure as $t) {
 		list($letype, $lenumero) = split('_', $t['code'] );
 		if ($type == $letype)
 		{
@@ -171,6 +171,7 @@ function forms_update(){
 			$query = "DELETE FROM spip_forms WHERE id_form=$supp_form";
 			$result = spip_query($query);
 			if ($retour) {
+				$retour = urldecode($retour);
 				Header("Location: $retour");
 				exit;
 			}
@@ -179,13 +180,13 @@ function forms_update(){
 	
 	$nouveau_champ = $champ_visible = NULL;
 
-	$schema = array();
+	$structure = array();
 	if (Forms_form_editable($id_form)) {
 		// creation
 		if ($new == 'oui' && $titre) {
-			$schema = array();
-			spip_query("INSERT INTO spip_forms (schema) VALUES ('".
-				addslashes(serialize($schema))."')");
+			$structure = array();
+			spip_query("INSERT INTO spip_forms (structure) VALUES ('".
+				addslashes(serialize($structure))."')");
 			$id_form = spip_insert_id();
 			unset($new);
 		}
@@ -209,7 +210,7 @@ function forms_update(){
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
 			$sondage = $row['sondage'];
-			$schema = unserialize($row['schema']);
+			$structure = unserialize($row['structure']);
 			$email = unserialize($row['email']);
 			$champconfirm = $row['champconfirm'];
 			$texte = $row['texte'];
@@ -217,20 +218,20 @@ function forms_update(){
 	}	
 	
 	if ($id_form && Forms_form_editable($id_form)) {
-		$modif_schema = false;
+		$modif_structure = false;
 		$champ_visible = NULL;
 		// Ajout d'un champ
 		if (($type = $ajout_champ) && Forms_types_champs_autorises($type)) {
-			$code = code_nouveau_champ($schema,$type);
+			$code = code_nouveau_champ($structure,$type);
 			$nom = _L("Nouveau champ");
-			$schema[] = array('code' => $code, 'nom' => $nom, 'type' => $type, 'type_ext' => array());
+			$structure[] = array('code' => $code, 'nom' => $nom, 'type' => $type, 'type_ext' => array());
 			$champ_visible = $nouveau_champ = $code;
-			$modif_schema = true;
+			$modif_structure = true;
 		}
 		// Modif d'un champ
 		if ($code = $modif_champ) {
 			unset($index);
-			foreach ($schema as $index => $t) {
+			foreach ($structure as $index => $t) {
 				if ($code == $t['code']) break;
 			}
 			if (isset($index)) {
@@ -239,7 +240,7 @@ function forms_update(){
 					if ($t['type']=='select') $newtype = 'multiple';
 					if ($t['type']=='multiple') $newtype = 'select';
 					
-					$newcode = code_nouveau_champ($schema,$newtype);
+					$newcode = code_nouveau_champ($structure,$newtype);
 					$t['type'] = $newtype;
 					$new_type_ext = array();
 					foreach($t['type_ext'] as $key=>$type_ext)
@@ -251,15 +252,15 @@ function forms_update(){
 				$t['obligatoire'] = $champ_obligatoire;
 				$t = modif_edition_champ($t);
 				if (!$t['type_ext']) $t['type_ext'] = array();
-				$schema[$index] = $t;
-				$modif_schema = true;
+				$structure[$index] = $t;
+				$modif_structure = true;
 			}
 			$champ_visible = $code;
 		}
 		// Cas particulier : ajout / suppression d'un choix
 		/*if ($code = $ajout_choix) {
 			unset($index);
-			foreach ($schema as $index => $t) {
+			foreach ($structure as $index => $t) {
 				if ($code == $t['code']) break;
 			}
 			if (isset($index)) {
@@ -269,33 +270,33 @@ function forms_update(){
 				while ($type_ext[$code_choix])
 					$code_choix = $code.'_'.(++$n);
 				$type_ext[$code_choix] = _L("Nouveau choix");
-				$schema[$index]['type_ext'] = $type_ext;
+				$structure[$index]['type_ext'] = $type_ext;
 				$champ_visible = $t['code'];
 				$ajout_choix = $code_choix;
 			}
-			$modif_schema = true;
+			$modif_structure = true;
 		}*/
 		if ($code_choix = $supp_choix) {
-			foreach ($schema as $index => $t) {
+			foreach ($structure as $index => $t) {
 				if (is_array($t['type_ext']) && isset($t['type_ext'][$supp_choix])) {
 					unset($t['type_ext'][$supp_choix]);
 					if (!$t['type_ext']) $t['type_ext'] = array();
 					$champ_visible = $t['code'];
-					$schema[$index] = $t;
+					$structure[$index] = $t;
 				}
 			}
-			$modif_schema = true;
+			$modif_structure = true;
 		}
 		// Suppression d'un champ
 		if ($code = $supp_champ) {
 			unset($index);
-			foreach ($schema as $index => $t) {
+			foreach ($structure as $index => $t) {
 				if ($code == $t['code']) break;
 			}
-			if (isset($index)&&($schema[$index]['code']==$code)){
-				unset($schema[$index]);
-				if (!$schema) $schema = array();
-				$modif_schema = true;
+			if (isset($index)&&($structure[$index]['code']==$code)){
+				unset($structure[$index]);
+				if (!$structure) $structure = array();
+				$modif_structure = true;
 			}
 		}
 
@@ -304,30 +305,30 @@ function forms_update(){
 
 			$monter = intval($monter);
 			$n = $monter;
-			while (--$n) if ($schema[$n]) break;			
-			if ($t = $schema[$n]) {
-				$schema[$n] = $schema[$monter];
-				$schema[$monter] = $t;
-				$champ_visible = $schema[$n]['code'];
+			while (--$n) if ($structure[$n]) break;			
+			if ($t = $structure[$n]) {
+				$structure[$n] = $structure[$monter];
+				$structure[$monter] = $t;
+				$champ_visible = $structure[$n]['code'];
 			}
-			$modif_schema = true;
+			$modif_structure = true;
 		}
 		if (isset($descendre)) {
 			$descendre = intval($descendre);
-			$max = max(array_keys($schema));
+			$max = max(array_keys($structure));
 			$n = $descendre;
-			while (++$n < $max) if ($schema[$n]) break;
-			if ($t = $schema[$n]) {
-				$schema[$n] = $schema[$descendre];
-				$schema[$descendre] = $t;
-				$champ_visible = $schema[$n]['code'];
+			while (++$n < $max) if ($structure[$n]) break;
+			if ($t = $structure[$n]) {
+				$structure[$n] = $structure[$descendre];
+				$structure[$descendre] = $t;
+				$champ_visible = $structure[$n]['code'];
 			}
-			$modif_schema = true;
+			$modif_structure = true;
 		}
 		if ($id_form && Forms_form_editable($id_form)) {
-			if ($modif_schema) {
-				ksort($schema);
-				$query = "UPDATE `spip_forms` SET `schema`='".addslashes(serialize($schema))."' ".
+			if ($modif_structure) {
+				ksort($structure);
+				$query = "UPDATE `spip_forms` SET `structure`='".addslashes(serialize($structure))."' ".
 					"WHERE `id_form`=$id_form";
 				spip_query($query);
 			}
@@ -410,7 +411,7 @@ function exec_forms_edit(){
 		$titre = _L("Nouveau formulaire");
 		$descriptif = "";
 		$sondage = "non";
-		$schema = array();
+		$structure = array();
 		$email = array();
 		$champconfirm = "";
 		$texte = "";
@@ -418,7 +419,7 @@ function exec_forms_edit(){
 	}
 	else {
 		//
-		// Modifications au schema du formulaire
+		// Modifications au structure du formulaire
 		//
 		list($id_form,$champ_visible,$nouveau_champ) = forms_update();
 		
@@ -429,7 +430,7 @@ function exec_forms_edit(){
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
 			$sondage = $row['sondage'];
-			$schema = unserialize($row['schema']);
+			$structure = unserialize($row['structure']);
 			$email = unserialize($row['email']);
 			$champconfirm = $row['champconfirm'];
 			$texte = $row['texte'];
@@ -437,6 +438,7 @@ function exec_forms_edit(){
 		$js_titre = "";
 	}
 	$form_link = parametre_url($form_link,"id_form",$id_form);
+	$clean_link = parametre_url($clean_link,"id_form",$id_form);
 
 	//
 	// Affichage de la page
@@ -509,7 +511,7 @@ function exec_forms_edit(){
 			$champconfirm_known = false;
 			echo "<div align='left' border: 1px dashed #aaaaaa;'>";
 			echo "<strong class='verdana2'>"._L('Confirmer la réponse par mail avec :')."</strong> ";
-			foreach ($schema as $index => $t) {
+			foreach ($structure as $index => $t) {
 				if (($t['type'] == 'email') && ($champconfirm == $t['code'])) {
 					echo $t['nom'] . " ";
 					$champconfirm_known = true;
@@ -524,7 +526,7 @@ function exec_forms_edit(){
 			}
 		}
 
-		if (count($schema)) {
+		if (count($structure)) {
 			echo "<br />";
 			debut_cadre_relief();
 
@@ -538,7 +540,7 @@ function exec_forms_edit(){
 			echo _L("Voici une pr&eacute;visualisation du formulaire tel qu'il ".
 				"appara&icirc;tra aux visiteurs du site public.")."<p>\n";
 			echo "<div style='margin: 10px; padding: 10px; border: 1px dashed $couleur_foncee;'>";
-			echo Forms_afficher_formulaire_schema($schema);
+			echo Forms_afficher_formulaire_structure($structure);
 			echo "</div>\n";
 			echo fin_block();
 
@@ -608,8 +610,8 @@ function exec_forms_edit(){
 		$jshide = "";
 		$s = "";
 		$options = "";
-		if (is_array($schema)){
-			foreach ($schema as $index => $t) {
+		if (is_array($structure)){
+			foreach ($structure as $index => $t) {
 				if ($t['type'] == 'select'){
 					$visible = false;
 					$code = $t['code'];
@@ -686,7 +688,7 @@ function exec_forms_edit(){
 		if ($champconfirm=='') echo " selected='selected'";
 		echo ">"._L('Pas de mail confirmation')."</option>\n";
 		$champconfirm_known = false;
-		foreach ($schema as $index => $t) {
+		foreach ($structure as $index => $t) {
 			if ($t['type'] == 'email'){
 				echo "<option value='" . $t['code'] . "'";
 				if ($champconfirm == $t['code']){
@@ -739,13 +741,13 @@ function exec_forms_edit(){
 				"pourront remplir.");
 			echo "</div>\n";
 
-			if (count($schema)) {
-				$keys = array_keys($schema);
+			if (count($structure)) {
+				$keys = array_keys($structure);
 				$index_min = min($keys);
 				$index_max = max($keys);
 			}
 
-			foreach ($schema as $index => $t) {
+			foreach ($structure as $index => $t) {
 				$code = $t['code'];
 				$visible = ($code == $champ_visible);
 				$nouveau = ($code == $nouveau_champ);

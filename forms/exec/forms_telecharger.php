@@ -25,11 +25,11 @@ function csv_ligne($ligne) {
 	return join(',', array_map('csv_champ', $ligne))."\r\n";
 }
 
-function formater_reponse($ligne, $schema, $valeurs) {
+function formater_reponse($ligne, $structure, $valeurs) {
 	static $groupes, $mots;
 
 	// Prendre les differents champs dans l'ordre
-	foreach ($schema as $index => $t) {
+	foreach ($structure as $index => $t) {
 		if (!$v = $valeurs[$t['code']]) {
 			$ligne[] = "";
 			continue;
@@ -65,13 +65,13 @@ function exec_forms_telecharger(){
 		if (!$id_form || !Forms_form_administrable($id_form)) {
 			acces_interdit();
 		}
-		$query = "SELECT schema FROM spip_forms WHERE id_form=$id_form";
+		$query = "SELECT structure FROM spip_forms WHERE id_form=$id_form";
 		$result = spip_query($query);
 		if ($row = spip_fetch_array($result)) {
-			$schema = unserialize($row['schema']);
+			$structure = unserialize($row['structure']);
 		}
 		$ok = false;
-		foreach ($schema as $index => $t) {
+		foreach ($structure as $index => $t) {
 			if ($t['code'] == $champ) {
 				$ok = ($t['type'] == 'fichier');
 				break;
@@ -133,7 +133,7 @@ function exec_forms_telecharger(){
 		$titre = $row['titre'];
 		$descriptif = $row['descriptif'];
 		$sondage = $row['sondage'];
-		$schema = unserialize($row['schema']);
+		$structure = unserialize($row['structure']);
 	}
 
 	$charset = lire_meta('charset');
@@ -144,7 +144,7 @@ function exec_forms_telecharger(){
 	// Preparer la table de traduction code->valeur
 	$trans = array();
 	$types = array();
-	foreach ($schema as $index => $t) {
+	foreach ($structure as $index => $t) {
 		$code = $t['code'];
 		$type = $t['type'];
 		$types[$code] = $type;
@@ -168,7 +168,7 @@ function exec_forms_telecharger(){
 	// Une premiere ligne avec les noms de champs
 	$ligne = array();
 	$ligne[] = _L("Date");
-	foreach ($schema as $index => $t) {
+	foreach ($structure as $index => $t) {
 		$ligne[] = textebrut(typo($t['nom']));
 	}
 	$s .= csv_ligne($ligne);
@@ -185,7 +185,7 @@ function exec_forms_telecharger(){
 	while ($row = spip_fetch_array($result)) {
 		if ($id_reponse != $row['id_reponse']) {
 			if ($id_reponse) {
-				$s .= formater_reponse($ligne, $schema, $valeurs);
+				$s .= formater_reponse($ligne, $structure, $valeurs);
 			}
 			$id_reponse = $row['id_reponse'];
 			$ligne = array();
@@ -207,7 +207,7 @@ function exec_forms_telecharger(){
 
 	// Ne pas oublier la derniere reponse
 	if ($id_reponse) {
-		$s .= formater_reponse($ligne, $schema, $valeurs);
+		$s .= formater_reponse($ligne, $structure, $valeurs);
 	}
 
 	if (!count($fichiers)) {
