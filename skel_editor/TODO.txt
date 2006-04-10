@@ -2,7 +2,6 @@
 TODO plugin skel_editor
 ---------------------------------------------
 
-- internationaliser le plug-in
 - vérifier la sécurité: ne pas pouvoir éditer d'autres fichiers que ceux du squelettes
 - vérifier l'encodage
 
@@ -11,6 +10,10 @@ extras possibles:
 ... documentation des boucles
 ... parse les BOUCLES du squelette
 ... preview "live"
+- formulaire d'upload (notamment pour les fichiers binaires)
+
+des commentaires ?
+http://www.spip-contrib.net/spikini/PagePrincipale?wiki=EditeurSquelette
 
 
 ---------------------------------------------

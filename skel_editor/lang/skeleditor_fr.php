@@ -1,18 +1,41 @@
 <?php
 
-// Fichier de langue [fr] plugins "Skeleditor"
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
+//$GLOBALS['i18n_skeleditor_fr'] = array( ??
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'repertoire' => 'r&eacute;pertoire',
-'fichier'=>"fichier",
-'fichier_image'=>"image",
-'inconnu'=>"inconnu",
-'erreur_ouverture_fichier'=>"erreur: impossible d\'ouvrir le fichier",
-'erreur_ecriture_fichier'=>"erreur: impossible d\'&ecute;crire dans le fichier",
-'fichier_sauvegarde_date'=>"fichier sauvegard&ecute; @ ",
-'erreur_edition_ecriture'=>"erreur: fichier non &ecute;ditable en &ecute;criture",
-'skeleditor_description'=>"Permet d'&eacute;diter les fichiers du squelette en cours",
-'skeleditor_dossier'=>"dossier squelette: "
+  // C
+  'creer'=>'Cr&eacute;er', 
+  
+  // E  
+  'editer_skel'=>'Editer le squelette',
+  'effacer'=>"effacer",
+  'effacer_confirme'=>'Voulez vous vraiment effacer ce fichier ?',
+  'erreur_ouverture_fichier'=>"erreur: impossible d\'ouvrir le fichier",
+  'erreur_ecriture_fichier'=>"erreur: impossible d\'&eacute;crire dans le fichier",
+  'erreur_edition_ecriture'=>"erreur: fichier non &eacute;ditable en &ecute;criture",
+  'erreur_ouvert_ecrit'=>"Erreur: impossible d'ouvrir ou d'éditer ce fichier.",
+  'erreur_droits'=>"erreur: impossible de cr&eacute;er le fichier. V&eacute;rifier les droits en &eacute;critutre de votre r&eacute;pertoire squelette",
+  'erreur_overwrite'=>"erreur: ce fichier existe d&eacute;j&agrave;",
+  
+  // F
+  'fichier'=>"fichier",
+  'fichier_sauvegarde_date'=>"fichier sauvegard&eacute; @ ",    
+  'fichier_efface_ok'=>'Fichier effac&eacute; avec succ&egrave;s!',
+  'fichier_choix'=>'Choississez le fichier que vous voulez &eacute;diter ou visualiser.',
+  'fichier_nouveau'=>'Nouveau fichier',
+  
+  // R 
+  'repertoire'=>'r&eacute;pertoire',
+  
+  // S
+  'sauver'=>'Sauver', 
+  'skeleditor_description'=>"Permet d'&eacute;diter les fichiers du squelette en cours",
+  'skeleditor_dossier'=>"dossier squelette: ",
+  
+  // T
+  'target'=>'position',
+  'telecharger'=>"t&eacute;l&eacute;charger",  
 );
 
 

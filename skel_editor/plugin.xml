@@ -3,7 +3,7 @@
 	<multi>
 	[fr]
 	  Squelette editeur
-    [en]
+  [en]
 	  Skeleton editor 
 	[it]
 	  Redattore di scheletro 
@@ -27,8 +27,8 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	<multi>
 	[fr]
 	  Dans l'espace priv&eacute;, permet d'&eacute;diter les fichiers squelettes, {{attention: toujours en test !}}
-    [en]
-	  In private space, allows editor the files skeletons, {{caution: always in test!}} 
+  [en]
+	  Edit the skeleton files in the backoffice
 	[it]
 	  Nello spazio riservato, concede a redattore gli scheletri delle lime, {{attenzione: sempre nella prova!}}
 	[es]
