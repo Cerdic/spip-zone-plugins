@@ -27,8 +27,14 @@ function coloration_code_color($code, $language='php') {
   // Create a GeSHi object
   //
   $geshi =& new GeSHi($code, $language);
-  $geshi->set_header_type(GESHI_HEADER_DIV);
-  $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
+
+  if(strpos($code, "\n")!==false) {
+	  $geshi->set_header_type(GESHI_HEADER_DIV);
+	  $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
+  } else {
+	  $geshi->set_header_type(GESHI_HEADER_PRE);
+	  $geshi->enable_line_numbers(GESHI_NO_LINE_NUMBERS);
+  }
 
   //
   // And echo the result!
