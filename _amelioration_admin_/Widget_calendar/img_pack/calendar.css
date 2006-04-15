@@ -11,8 +11,8 @@
 	padding:5px;
 	background-color:#F7F9FB;
 	border:1px solid #7B9EBD;
-width:26em;
-height:14em;
+min-width:28em;
+-height:14em;
 }
 
 .calbordered .title{
@@ -21,7 +21,7 @@ height:14em;
 	font-weight:bold;
 	margin-bottom:5px;
 	height:auto;
-width:26em;
+-width:27em;
 	position:relative;
 }
 
@@ -36,16 +36,22 @@ right:0;
 .close-icon-left {
 left:0;
 }
-
 .cal2up {
 	/*float:left;*/
-	position:absolute;
+	-position:absolute;
 left:0.5em;
 }
+.calbordered > .cal2up{
+	float:left;
+}
+
 .cal2up2 {
 	/*float:left;*/
-	position:absolute;
-left:13.5em;
+	-position:absolute;
+-left:14em;
+}
+.calbordered > .cal2up2{
+	float:left;
 }
 
 .calnavleft {
@@ -72,7 +78,7 @@ left:13.5em;
 	border-spacing:0;
 }
 
-.calcell {
+.calcell{
 	width:1.5em;
 	height:1em;
 	border:1px solid #E0E0E0;
@@ -96,14 +102,14 @@ text-align:center;
 	border:1px solid #E0E0E0;
 }
 
-.calcell.selected {
+.selected, .calcell.selected {
 	color:#003DB8;
 	background-color:#FFF19F;
 	border:1px solid #FF9900;
 font-weight:bold;
 }
 
-.calcell:hover, .calcell.calcellhover {
+.calcell:hover, .calcell.calcellhover, .calcell a:hover{
 	cursor:pointer;
 	color:#FFF;
 	background-color:#FF9900;
@@ -112,6 +118,8 @@ font-weight:bold;
 
 .calcell.calcellhover a, .calcell:hover a {
 	color:#FFF;
+	background-color:#FF9900;
+	border:1px solid #FF9900;
 }
 
 .calcell.restricted {
