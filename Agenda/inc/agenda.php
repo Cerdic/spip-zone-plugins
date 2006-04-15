@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/minipres'); 
 include_spip('inc/layer');
 include_spip('inc/texte'); // inclut inc_filtre
+include_spip('inc/calendar'); // inclut widget calendar
 
 charger_generer_url();
 

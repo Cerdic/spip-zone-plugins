@@ -32,14 +32,14 @@ function Agenda_verifier_base(){
 				$query = "ALTER TABLE `spip_groupes_mots` ADD `evenements` VARCHAR(3) NOT NULL AFTER `syndic`";
 				spip_query($query);
 			}
-			$current_version = $version_base;
+			ecrire_meta('agenda_base_version',$current_version=$version_base);
 		}
 		if ($current_version<0.11){
 			$query = "ALTER TABLE `spip_evenements` ADD `horaire` ENUM('oui','non') DEFAULT 'oui' NOT NULL AFTER `lieu`";
 			spip_query($query);
+			ecrire_meta('agenda_base_version',$current_version=0.11);
 		}
 		
-		ecrire_meta('agenda_base_version',$version_base);
 		ecrire_metas();
 	}
 }

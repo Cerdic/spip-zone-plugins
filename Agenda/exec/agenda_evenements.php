@@ -287,6 +287,9 @@ function visu_evenement_agenda($id_evenement,$flag_editable){
 function exec_agenda_evenements_dist(){
 	// s'assurer que les tables sont crees
 	Agenda_install();
+	include_spip('inc/calendar');
+	// Reserver les widgets agenda
+	WCalendar_ajoute_lies(_L("Date de d&eacute;but"),'_evenement_debut',_L("Date de fin"),'_evenement_fin');
 
 	$ajouter_id_article = intval(_request('ajouter_id_article'));
 	$flag_editable = article_editable($ajouter_id_article);
