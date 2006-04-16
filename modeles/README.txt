@@ -16,10 +16,7 @@ Ici on a défini un seul modèle, qui gère le raccourci <code><breveXXX></code>
 
 {{{Installation}}}
 
-Mettre le répertoire <code>modeles/</code> dans <code>plugins/</code> (à la racine du site), et, dans ecrire/mes_options.php3 ajouter :
-
-	<code>	$plugins[] = 'modeles';</code>
-
+Mettre le répertoire <code>modeles/</code> dans <code>plugins/</code> (à la racine du site), et activer le plugin dans le panneau d'administration des plugins de l'interface privee
 
 {{{A développer}}}
 
