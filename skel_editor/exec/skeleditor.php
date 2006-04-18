@@ -113,22 +113,25 @@ function skel_parser($skel_str) {
   
   $boucles = array(); 
   $b = public_phraser_html($skel_str, 0, $boucles, 'skel_editor'); 
+  $boucles = array_reverse($boucles,TRUE);
   foreach($boucles as $k=>$val) {
      /* version gentle */ 
      $output .= bouton_block_invisible("skel_parser_$k")." BOUCLE$k";
+     $output .= " <span style='color:#888'>(".strtoupper($val->type_requete).")</span>";
      $output .= debut_block_invisible("skel_parser_$k");
-     $output .= "<div style='background: #fff;padding:10px;'>";
-        $output .= "<strong>id_parent:</strong> BOUCLE$val->id_parent<br />";
-        $output .= "<strong>Contenu:</strong><br />"; 
+     $output .= "<div style='background: #fff;padding:10px;'>";  
+        if ($val->id_parent) $output .= "<strong>id_parent:</strong> BOUCLE$val->id_parent<br />";      
+        if ($val->param) $output .= "<strong>"._T('skeleditor:parseur_param')."</strong>".skel_parser_param($val->param)."<br />";       
+        $output .= "<strong>"._T('skeleditor:parseur_contenu')."</strong><br />"; 
         $output .= skel_parser_affiche( _T('skeleditor:parseur_avant'),$val->avant, '#cc9');       
         $output .= skel_parser_affiche( _T('skeleditor:parseur_milieu'),$val->milieu, '#fc6');
         $output .= skel_parser_affiche( _T('skeleditor:parseur_apres'),$val->apres, '#fcc');
         $output .= skel_parser_affiche( _T('skeleditor:parseur_altern'),$val->altern, '#cfc'); 
      $output .= "</div>\n";
      $output .= fin_block()."<br />";
-     
+      
      /* version brute */ 
-     /*           	           
+     /*     	           
      $output .= "<strong>BOUCLE$k</strong><br />\n";
      foreach (get_object_vars($val) as $prop => $val2) {
           $output .= "\t<br />$prop = $val2\n";
@@ -142,8 +145,8 @@ function skel_parser($skel_str) {
                   }
               }
         }
-    }
-    */
+    }*/
+    
  }       	         
                                    	        
   $output .= "</div>";
@@ -156,10 +159,27 @@ function skel_parser_affiche($titre, $content, $bgcolor = '#fc6') {
    $output .= "<div style='background:$bgcolor'>$titre</div>";
    foreach ($content as $k => $str) {
          if ($str->type == "champ") $output .= "<span style='color:#c30;background:#eee'>#".$str->nom_champ."</span>";
-         else if ($str->type == "texte") $output .="<pre style='background:#ddd;margin:0;display:inline;'>&nbsp;".htmlspecialchars($str->texte)."</pre>"; //$output .= "<span style='background:#ddd'>&nbsp;".htmlspecialchars($str->texte)."</span>\n"; // 
+         else if ($str->type == "texte") $output .="<pre style='background:#ddd;margin:0;display:inline;'>&nbsp;".htmlspecialchars($str->texte)."</pre>";
          else if ($str->type == "include") $output .= "<span style='color:#30c;background:#cff;'>(include)</span>"; 
     }
    return $output;
+}
+
+// parse param value
+function skel_parser_param($str,$output='') { 
+  $output = "";
+  if (is_array($str)) {
+      foreach($str as $k2=>$val2) {
+        //$output .= ".....$k2=>$val2 ($c)<br />";
+        $output .= skel_parser_param($val2,$output); // recursive
+      }  
+  } else if (is_object($str)) {
+        $output .= " {".$str->texte."} "; 
+        /*foreach (get_object_vars($str) as $prop4 => $val4) {
+             $output .= "\t\t<br>...........( $prop4 = $val4 )\n"; 
+        } */  
+  } 
+  return $output; 
 }
 
 

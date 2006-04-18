@@ -29,10 +29,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
   // P
   'parseur_titre' => 'Analyseur des boucles',
+  'parseur_contenu' => 'Contenu :',
   'parseur_avant' => 'Avant',
   'parseur_milieu' => 'Milieu',
   'parseur_apres' => 'Apres',
   'parseur_altern' => 'Alternative',
+  'parseur_param' => 'Param&egrave;tres:',
+ 
   
   // R 
   'repertoire'=>'r&eacute;pertoire',
