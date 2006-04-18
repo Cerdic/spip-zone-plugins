@@ -103,12 +103,12 @@ function editor_uploadfile() {
   return $output;        
 }
 
-// fonction parse le squelette en boucle (cf public/phrase_html)
+// skeleton parsing (more details:  public/phrase_html)
 function skel_parser($skel_str) {
   include("public/interfaces.php");
   include("public/phraser_html.php");  
 
-  $output .= _T('skeleditor:parseur_titre'); 
+  //$output .= _T('skeleditor:parseur_titre'); 
   $output .= "<div style='background: #eef; border:1px solid #eee;padding:10px;font-size:0.82em;font-family:Verdana'>";
   
   $boucles = array(); 
@@ -155,9 +155,9 @@ function skel_parser_affiche($titre, $content, $bgcolor = '#fc6') {
    $output = "";
    $output .= "<div style='background:$bgcolor'>$titre</div>";
    foreach ($content as $k => $str) {
-         if ($str->type == "champ") $output .="#".$str->nom_champ."<br />\n";
-         else if ($str->type == "texte") $output .="<span style='background:#ddd'>&nbsp;".htmlspecialchars($str->texte)."</span>\n";
-         else if ($str->type == "include") $output .="<span style='background:#f60'>(include)</span>\n"; 
+         if ($str->type == "champ") $output .= "<span style='color:#c30;background:#eee'>#".$str->nom_champ."</span>";
+         else if ($str->type == "texte") $output .="<pre style='background:#ddd;margin:0;display:inline;'>&nbsp;".htmlspecialchars($str->texte)."</pre>"; //$output .= "<span style='background:#ddd'>&nbsp;".htmlspecialchars($str->texte)."</span>\n"; // 
+         else if ($str->type == "include") $output .= "<span style='color:#30c;background:#cff;'>(include)</span>"; 
     }
    return $output;
 }
