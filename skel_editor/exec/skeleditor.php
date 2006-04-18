@@ -66,7 +66,7 @@ function editor_addfile() {
   global $dossier_squelettes;
   $output = bouton_block_invisible('editor_newfile');
   $output .= "<img src='../plugins/skel_editor/img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_nouveau");
-  $output .= debut_block_invisible('editor_newfile');
+  $output .= debut_block_invisible('editor_newfile');  
   $output .= "<form method='get'>\n"; 
   $output .= "<input type='hidden' name='exec' value='skeleditor' />"; 
   $output .= "<input type='hidden' name='action' value='new' />"; 
@@ -80,6 +80,88 @@ function editor_addfile() {
   $output .= fin_block();
   return $output;        
 }
+
+// upload file form
+function editor_uploadfile() {
+  global $dossier_squelettes;
+  $output = "<br />".bouton_block_invisible('editor_uploadfile');
+  $output .= "<img src='../plugins/skel_editor/img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_upload");
+  $output .= debut_block_invisible('editor_uploadfile');
+  
+  $output .= "<form method='post' enctype='multipart/form-data' >\n";  
+  $output .= "<input type='hidden' name='exec' value='skeleditor' />"; 
+  $output .= "<input type='hidden' name='action' value='upload' />";
+  $output .= "<input type='hidden' name='MAX_FILE_SIZE' value='200000' />"; 
+  $output .= "<input type='file' name='upf'/>"; 
+  $output .= _T("skeleditor:target")."<br />\n"; 
+  $output .= "<select name='target'><br />\n"; 
+  $output .= editor_form_directory($dossier_squelettes);      
+  $output .= "</select><br /><input type='submit' name='sub' value='"._T("skeleditor:upload")."' />";
+  $output .= "</form>\n";
+  
+  $output .= fin_block();
+  return $output;        
+}
+
+// fonction parse le squelette en boucle (cf public/phrase_html)
+function skel_parser($skel_str) {
+  include("public/interfaces.php");
+  include("public/phraser_html.php");  
+
+  $output .= _T('skeleditor:parseur_titre'); 
+  $output .= "<div style='background: #eef; border:1px solid #eee;padding:10px;font-size:0.82em;font-family:Verdana'>";
+  
+  $boucles = array(); 
+  $b = public_phraser_html($skel_str, 0, $boucles, 'skel_editor'); 
+  foreach($boucles as $k=>$val) {
+     /* version gentle */ 
+     $output .= bouton_block_invisible("skel_parser_$k")." BOUCLE$k";
+     $output .= debut_block_invisible("skel_parser_$k");
+     $output .= "<div style='background: #fff;padding:10px;'>";
+        $output .= "<strong>id_parent:</strong> BOUCLE$val->id_parent<br />";
+        $output .= "<strong>Contenu:</strong><br />"; 
+        $output .= skel_parser_affiche( _T('skeleditor:parseur_avant'),$val->avant, '#cc9');       
+        $output .= skel_parser_affiche( _T('skeleditor:parseur_milieu'),$val->milieu, '#fc6');
+        $output .= skel_parser_affiche( _T('skeleditor:parseur_apres'),$val->apres, '#fcc');
+        $output .= skel_parser_affiche( _T('skeleditor:parseur_altern'),$val->altern, '#cfc'); 
+     $output .= "</div>\n";
+     $output .= fin_block()."<br />";
+     
+     /* version brute */ 
+     /*           	           
+     $output .= "<strong>BOUCLE$k</strong><br />\n";
+     foreach (get_object_vars($val) as $prop => $val2) {
+          $output .= "\t<br />$prop = $val2\n";
+          if (is_array($val2)) {
+              foreach($val2 as $k3=>$val3) {
+                  $output .= "\t\t<br>........................$k3 = $val3\n";
+                  if (is_object($val3)) {
+                      foreach (get_object_vars($val3) as $prop4 => $val4) {
+                          $output .= "\t\t<br>.............................( $prop4 = $val4 )\n"; 
+                      }
+                  }
+              }
+        }
+    }
+    */
+ }       	         
+                                   	        
+  $output .= "</div>";
+  return $output;
+}
+
+// affiche le code pour le parseur
+function skel_parser_affiche($titre, $content, $bgcolor = '#fc6') {
+   $output = "";
+   $output .= "<div style='background:$bgcolor'>$titre</div>";
+   foreach ($content as $k => $str) {
+         if ($str->type == "champ") $output .="#".$str->nom_champ."<br />\n";
+         else if ($str->type == "texte") $output .="<span style='background:#ddd'>&nbsp;".htmlspecialchars($str->texte)."</span>\n";
+         else if ($str->type == "include") $output .="<span style='background:#f60'>(include)</span>\n"; 
+    }
+   return $output;
+}
+
 
 // -------------------------------
 // Main 
@@ -119,6 +201,7 @@ function exec_skeleditor(){
 	// Action ? 
 	// ---------------------------------------------------------------------------
 	$log = "";
+	// POST request ?
 	if (isset($_POST['editor'])) {      // save file ?
 	     $editor = $_POST['editor'];
 	     $editor = str_replace("&lt;/textarea","</textarea",$editor); // exception: textarea closing tag	     
@@ -138,8 +221,27 @@ function exec_skeleditor(){
        } else {
             $log = "<span style='color:red'>"._T("skeleditor:erreur_edition_ecriture")."</span>";
        }
-  }	 
+  }	
   
+  // FILES request ?
+  if (isset($_FILES['upf'])) {    // upload file ?
+      $tmp_name = $_FILES['upf']['tmp_name'];
+      if (isset($_POST['target'])) {      
+               $target = "..".str_replace("..", "", $_POST['target'])."/".$_FILES['upf']['name'];    // security
+               $_GET['f'] = $target;
+               $_GET['action'] = 'preview';
+               if (file_exists($target)) {
+                  $log = "<span style='color:red'>"._T('skeleditor:erreur_overwrite')."</span>";
+               } else {
+                  $ok = @copy($tmp_name, $target);                 
+                  if (!$ok) $ok = @move_uploaded_file($tmp_name, $target);
+                  if (!$ok) $log = "<span style='color:red'>"._T('skeleditor:erreur_droits')."</span>";
+                       else $log = "<span style='color:green'>"._T('skeleditor:fichier_upload_ok')."</span>";                         
+                       
+               } 
+      }     
+  } 
+   
   // GET request ?
   $action = "";
 	if (isset($_GET['f'])) {
@@ -203,6 +305,7 @@ function exec_skeleditor(){
 	echo "<br />";
 	debut_boite_info();
 	echo editor_addfile();
+	echo editor_uploadfile();
   fin_boite_info();
 	
 	debut_droite();
@@ -224,12 +327,14 @@ function exec_skeleditor(){
               echo "<div style='border:1px solid #333;padding:20px;background:#eee'><img src='$file_name' alt='picture' /></div>\n";
            } else {  // edit file as text  
               if ($file_tmp = @file("$file_name")) {
-                  $file_str = implode ('',$file_tmp);
-                  $file_str = str_replace("</textarea","&lt;/textarea",$file_str); // exception: textarea closing tag              
+                  $file_str = implode ('',$file_tmp);                  
+                  if ($extension=='html') echo  skel_parser($file_str); // experimental         	        
+                  $file_str = str_replace("</textarea","&lt;/textarea",$file_str); // exception: textarea closing tag                                
                   echo "<form method='post' action='?exec=skeleditor&amp;retour=skeleditor&amp;f=".urlencode($file_name)."'>\n";
                   echo "<textarea name='editor' cols='80' rows='50'>$file_str</textarea>\n";               
         	        echo "<input type='submit' name='action' value='"._T("skeleditor:sauver")."' />";	        
-        	        echo "</form>\n";
+        	        echo "</form>\n";       	        
+
               } else {
                   echo "<p>"._T("skeleditor:erreur_ouvert_ecrit")."</p>\n";
               }   

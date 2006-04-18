@@ -24,6 +24,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'fichier_efface_ok'=>'Fichier effac&eacute; avec succ&egrave;s!',
   'fichier_choix'=>'Choississez le fichier que vous voulez &eacute;diter ou visualiser.',
   'fichier_nouveau'=>'Nouveau fichier',
+  'fichier_upload'=>'Uploader un fichier',
+  'fichier_upload_ok'=>'Fichier upload&eacute; avec succ&egrave;s!',
+  
+  // P
+  'parseur_titre' => 'Analyseur des boucles',
+  'parseur_avant' => 'Avant',
+  'parseur_milieu' => 'Milieu',
+  'parseur_apres' => 'Apres',
+  'parseur_altern' => 'Alternative',
   
   // R 
   'repertoire'=>'r&eacute;pertoire',
@@ -35,7 +44,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
   // T
   'target'=>'position',
-  'telecharger'=>"t&eacute;l&eacute;charger",  
+  'telecharger'=>"t&eacute;l&eacute;charger",
+  
+  // U
+  'upload'=>'Uploader',  
 );
 
 

@@ -6,11 +6,8 @@ TODO plugin skel_editor
 - vérifier l'encodage
 
 extras possibles:
-- avoir une fenêtre info (iframe ?) avec onglets
 ... documentation des boucles
-... parse les BOUCLES du squelette
 ... preview "live"
-- formulaire d'upload (notamment pour les fichiers binaires)
 
 des commentaires ?
 http://www.spip-contrib.net/spikini/PagePrincipale?wiki=EditeurSquelette
