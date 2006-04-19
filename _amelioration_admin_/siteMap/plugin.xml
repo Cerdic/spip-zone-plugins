@@ -1,0 +1,28 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Google siteMap
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Cedric MORIN
+ 	[notre-ville.net->http://www.notre-ville.net]
+_ © 2006 - Licence GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Google siteMap
+_ ce plugin cree dynamiquement un sitemap Google
+_ Le contenu le plus proche de la racine est prioritaire
+_ La presence des squelettes article, breve, ... est testee pour chaque type d'objet
+	</description>
+	<prefix> 
+	siteMap
+	</prefix>
+	<fonctions>
+	sitemap_mes_fonctions.php
+	</fonctions>
+</plugin>
