@@ -35,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'parseur_apres' => 'Apres',
   'parseur_altern' => 'Alternative',
   'parseur_param' => 'Param&egrave;tres:',
+  'parseur_horsboucle' => 'HORS BOUCLE',
  
   
   // R 

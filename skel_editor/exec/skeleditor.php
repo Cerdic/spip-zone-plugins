@@ -114,6 +114,20 @@ function skel_parser($skel_str) {
   $boucles = array(); 
   $b = public_phraser_html($skel_str, 0, $boucles, 'skel_editor'); 
   $boucles = array_reverse($boucles,TRUE);
+  
+  /* parse outside boucles */
+  $output .= bouton_block_invisible("hors_boucle")._T("skeleditor:parseur_horsboucle");  
+  $output .= debut_block_invisible("hors_boucle");
+  $output .= "<div style='background: #fff;padding:10px;'>"; 
+  foreach($b as $k=>$val) { 
+     if ($val->type == "champ") $output .= "<span style='color:#c30;background:#eee'>#".$val->nom_champ."</span>";
+         else if ($val->type == "texte") $output .="<pre style='background:#ddd;margin:0;display:inline;'>&nbsp;".htmlspecialchars($val->texte)."</pre>";
+         else if ($val->type == "include") $output .= "<span style='color:#30c;background:#cff;'>(INCLUDE)</span>"; 
+  }
+  $output .= "</div>\n";
+  $output .= fin_block()."<br />";
+  
+  /* parse boucles */
   foreach($boucles as $k=>$val) {
      /* version gentle */ 
      $output .= bouton_block_invisible("skel_parser_$k")." BOUCLE$k";
@@ -131,7 +145,7 @@ function skel_parser($skel_str) {
      $output .= fin_block()."<br />";
       
      /* version brute */ 
-     /*     	           
+     /*    	           
      $output .= "<strong>BOUCLE$k</strong><br />\n";
      foreach (get_object_vars($val) as $prop => $val2) {
           $output .= "\t<br />$prop = $val2\n";
@@ -140,7 +154,15 @@ function skel_parser($skel_str) {
                   $output .= "\t\t<br>........................$k3 = $val3\n";
                   if (is_object($val3)) {
                       foreach (get_object_vars($val3) as $prop4 => $val4) {
-                          $output .= "\t\t<br>.............................( $prop4 = $val4 )\n"; 
+                          $output .= "\t\t<br>+++........................( $prop4 = $val4 )\n"; 
+                          if (is_array($val4 )) {
+                               foreach($val4 as $k5=>$val5) {
+                                  $output .= "\t\t<br>++++++...............$k5 = $val5 )\n";
+                                  foreach($val5 as $k6=>$val6) {
+                                    $output .= "\t\t<br>+++++++++++.........$k6 = $val6 )\n";
+                                  } 
+                               }
+                          }
                       }
                   }
               }
@@ -160,7 +182,7 @@ function skel_parser_affiche($titre, $content, $bgcolor = '#fc6') {
    foreach ($content as $k => $str) {
          if ($str->type == "champ") $output .= "<span style='color:#c30;background:#eee'>#".$str->nom_champ."</span>";
          else if ($str->type == "texte") $output .="<pre style='background:#ddd;margin:0;display:inline;'>&nbsp;".htmlspecialchars($str->texte)."</pre>";
-         else if ($str->type == "include") $output .= "<span style='color:#30c;background:#cff;'>(include)</span>"; 
+         else if ($str->type == "include") $output .= "<span style='color:#30c;background:#cff;'>(INCLUDE)</span>"; 
     }
    return $output;
 }
