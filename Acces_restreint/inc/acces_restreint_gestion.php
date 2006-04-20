@@ -268,7 +268,7 @@
 		
 			$largeurs = array('25', '', '', '');
 			$styles = array('arial11', 'arial2', 'arial2', 'arial1');
-			afficher_liste($largeurs, $tableau, $styles);
+			echo afficher_liste($largeurs, $tableau, $styles);
 		
 			echo "</table></div>";
 		}

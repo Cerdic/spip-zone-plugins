@@ -96,7 +96,7 @@ function exec_acces_restreint(){
 	echo $tranches;
 	$largeurs = array('','','','','');
 	$styles = array('arial11', 'arial1', 'arial1','arial1','arial1');
-	afficher_liste($largeurs, $table, $styles);
+	echo afficher_liste($largeurs, $table, $styles);
 	echo "</table>";
 	echo "</div>";
 
