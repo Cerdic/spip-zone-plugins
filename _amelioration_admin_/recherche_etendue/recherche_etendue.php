@@ -131,12 +131,12 @@
 			if(count($tab[$i])>1){
 				$avant[$i] = substr($tab[$i][0],-$cc,$cc);
 				$pos = strpos($avant[$i], " ");
-				$avant[$i]= substr($avant[$i],$pos);
+				$avant[$i]= entites_html(substr($avant[$i],$pos));
 				$apres[$i] = substr($tab[$i][2],0,$cc);
 				$pos = strrpos($apres[$i], " ");
-				$apres[$i] = substr($apres[$i],0,$pos);
+				$apres[$i] = entites_html(substr($apres[$i],0,$pos));
 				//$string_re .= "<em>[...]</em> $avant[$i]<strong>".$tab[$i][1]."</strong>$apres[$i] <em>[...]</em> ";
-				$string_re .= "<em>[...]</em> $avant[$i]".$tab[$i][1]."$apres[$i] <em>[...]</em> ";
+				$string_re .= "<em>[...]</em> $avant[$i]".entites_html($tab[$i][1])."$apres[$i] <em>[...]</em> ";
 			}
 		}
 		if (strlen($string_re))
