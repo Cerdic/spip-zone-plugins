@@ -2,7 +2,7 @@
 
 	<!--[if IE]><table><th></th><tr><td><![endif]-->
 	[(#REM) Affichage de l'entete : nombre de resultats trouves]
-	<BOUCLE_compte_marecherche(INDEX){recherche}{id_table IN (articles,documents)}></BOUCLE_compte_marecherche>
+	<BOUCLE_compte_marecherche(INDEX){recherche}{id_table==^(articles|documents)$}></BOUCLE_compte_marecherche>
 		[(#TOTAL_BOUCLE|?{' ',''})
 			<h1 class='recherche_chapo'>
 			#TOTAL_BOUCLE r&eacute;sultat[s(#TOTAL_BOUCLE|>{1}|?{' ',''})]
@@ -27,7 +27,7 @@
 		]
 	<//B_compte_marecherche>
 	
-	<BOUCLE_init_jauge(INDEX){recherche}{!par points}{id_table IN (articles,documents)} {0,1}>
+	<BOUCLE_init_jauge(INDEX){recherche}{!par points}{id_table==^(articles|documents)$} {0,1}>
 	[(#POINTS|RechercheEtendue_jauge_init{50})]
 	</BOUCLE_init_jauge>
 	
@@ -39,7 +39,7 @@
   </tr>
 
 	[(#REM) Resultats de la recherche pour la page concernee]
-	<BOUCLE_marecherche(INDEX){recherche}{!par points}{id_table IN (articles,documents)} {debut,10}>
+	<BOUCLE_marecherche(INDEX){recherche}{!par points}{id_table==^(articles|documents)$} {debut,10}>
 		<!-- Articles trouves -->
 		<BOUCLE_articles(ARTICLES) {id_article}>
 			<tr>

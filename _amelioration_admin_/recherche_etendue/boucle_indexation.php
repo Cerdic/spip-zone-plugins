@@ -92,20 +92,38 @@ function boucle_INDEX_dist($id_boucle, &$boucles) {
 
 	$boucle->group[] = 'CONCAT(' . $boucle->id_table . '.id_table,\':\','.$boucle->id_table . '.id_objet)';
 
-	foreach($boucle->where as $key=>$where){
-		if (strpos($where,'id_table')!==FALSE){
-			// on regarde si y a des criteres nom_table=articles
-			// pour remplacer par nom_table=spip_articles
-			$abr = array();
-			$full = array();
-			foreach($table_des_tables as $one=>$repl){
-				$abr[] = "'$one'";
-				$full[] = "'spip_$repl'";
+	
+	static $table_abr=array();
+	static $table_full=array();
+	static $liste_tables=array();
+	if (!count($table_abr)){
+		foreach($table_des_tables as $one=>$repl){
+			if ($one!='index'){
+				$table_abr[] = "$one";
+				$table_full[] = "spip_$repl";
 			}
-			$liste_tables = liste_index_tables();
-			$where = str_replace($abr, $full, $where);
-			$where = str_replace(array_values($liste_tables),array_keys($liste_tables),$where);
-			$boucle->where[$key] = $where;
+		}
+		$liste_tables = liste_index_tables();
+	}
+	
+	foreach($boucle->where as $key=>$where){
+		if (!is_array($where)){
+			if (strpos($where,'id_table')!==FALSE){
+				// on regarde si y a des criteres nom_table=articles
+				// pour remplacer par nom_table=spip_articles
+				$where = str_replace($table_abr, $table_full, $where);
+				$where = str_replace(array_values($liste_tables),array_keys($liste_tables),$where);
+				$boucle->where[$key] = $where;
+			}
+		}
+		else {
+			if (strpos($where[1],'id_table')!==FALSE){
+				for ($k=1;$k<count($where);$k++){
+					$where[$k] = str_replace($table_abr, $table_full, $where[$k]);
+					$where[$k] = str_replace(array_values($liste_tables),array_keys($liste_tables),$where[$k]);
+				}
+				$boucle->where[$key] = $where;
+			}
 		}
 	}
 	

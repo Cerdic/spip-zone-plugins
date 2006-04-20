@@ -95,7 +95,88 @@
 	
 		return $texte;
 	}
+
 	
+	function RechercheEtendue_surligner_sans_accents_recherche ($mot) {
+		$accents =
+			/* A */ chr(192).chr(193).chr(194).chr(195).chr(196).chr(197).
+			/* a */ chr(224).chr(225).chr(226).chr(227).chr(228).chr(229).
+			/* O */ chr(210).chr(211).chr(212).chr(213).chr(214).chr(216).
+			/* o */ chr(242).chr(243).chr(244).chr(245).chr(246).chr(248).
+			/* E */ chr(200).chr(201).chr(202).chr(203).
+			/* e */ chr(232).chr(233).chr(234).chr(235).
+			/* Cc */ chr(199).chr(231).
+			/* I */ chr(204).chr(205).chr(206).chr(207).
+			/* i */ chr(236).chr(237).chr(238).chr(239).
+			/* U */ chr(217).chr(218).chr(219).chr(220).
+			/* u */ chr(249).chr(250).chr(251).chr(252).
+			/* yNn */ chr(255).chr(209).chr(241);
+	
+		if ($GLOBALS['meta']['charset'] == 'utf-8') {
+			include_spip('inc/charsets');
+			$mot = unicode2charset(utf_8_to_unicode($mot), 'iso-8859-1');
+		}
+	
+		return strtr($mot, $accents, "AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn");
+	}
+	function RechercheEtendue_split_by_char_recherche($str) {
+			$len = strlen($str);
+			$streturn = array();
+			for ($i=0; $i<$len; $i++) {
+				$streturn[$i] = substr($str, $i, 1);
+			}
+		return $streturn;
+	}
+	function RechercheEtendue_surligner_regexp_accents_recherche ($mot) {
+		$accents_regexp = array(
+			"a" => "[a".chr(224).chr(225).chr(226).chr(227).chr(228).chr(229). chr(192).chr(193).chr(194).chr(195).chr(196).chr(197)."]",
+			"o" => "[o".chr(242).chr(243).chr(244).chr(245).chr(246).chr(248). chr(210).chr(211).chr(212).chr(213).chr(214).chr(216)."]",
+			"e" => "[e".chr(232).chr(233).chr(234).chr(235). chr(200).chr(201).chr(202).chr(203)."]",
+			"c" => "[c".chr(199).chr(231)."]",
+			"i" => "[i".chr(236).chr(237).chr(238).chr(239). chr(204).chr(205).chr(206).chr(207)."]",
+			"u" => "[u".chr(249).chr(250).chr(251).chr(252). chr(217).chr(218).chr(219).chr(220)."]",
+			"y" => "[y".chr(255)."]",
+			"n" => "[n".chr(209).chr(241)."]"
+		);
+	
+		$mot = RechercheEtendue_surligner_sans_accents_recherche ($mot);
+		if ($GLOBALS['meta']['charset'] == 'utf-8') {
+			while(list($k,$s) = each ($accents_regexp)) {
+				$accents_regexp_utf8[$k] = "(".join("|", RechercheEtendue_split_by_char_recherche(preg_replace(',[\]\[],','',$accents_regexp[$k]))).")";
+			}
+			$mot = strtr(strtolower($mot), $accents_regexp_utf8);
+			$mot = importer_charset($mot, 'iso-8859-1');
+		} else
+			$mot = strtr(strtolower($mot), $accents_regexp);
+	
+		return $mot;
+	}
+	function RechercheEtendue_surligner_mots_recherche($page, $mots) {
+		// Remplacer les caracteres potentiellement accentues dans la chaine
+		// de recherche par les choix correspondants en syntaxe regexp (!)
+		$mots = preg_split(',\s+,ms', $mots);
+	
+		foreach ($mots as $mot) {
+			if (strlen($mot) >= 2) {
+				$mot = RechercheEtendue_surligner_regexp_accents_recherche(preg_quote(str_replace('/', '', $mot)));
+				$mots_surligne[] = $mot;
+			}
+		}
+	
+		if (!$mots_surligne) return $page;
+	
+		$regexp = '/((^|>)([^<]*[^[:alnum:]_<\x80-\xFF])?)(('
+		. join('|', $mots_surligne)
+		. ')[[:alnum:]_\x80-\xFF]*?)/Uis';
+		return $debut . RechercheEtendue_surligne_recherche($page, $regexp);
+	}
+
+
+	function RechercheEtendue_surligne_recherche($page, $regexp) {
+		$page = preg_replace($regexp, '\1<span class="surligne">\4</span>', $page, 4);
+		return $page ;
+	}
+		
 	function RechercheEtendue_google_like_string($texte,$action='store'){
 	  static $string;
 	  switch ($action){
@@ -119,6 +200,7 @@
 	
 	function RechercheEtendue_google_like($query,$alternative = ""){
 	  $string = RechercheEtendue_google_like_string('','get');
+	  $string = html_entity_decode($string);
 		$qt = explode(" ", $query);
 		$num = count ($qt);
 		$cc = ceil(200 / $num);
@@ -132,11 +214,12 @@
 				$apres[$i] = substr($tab[$i][2],0,$cc);
 				$pos = strrpos($apres[$i], " ");
 				$apres[$i] = substr($apres[$i],0,$pos);
-				$string_re .= "<em>[...]</em> $avant[$i]<strong>".$tab[$i][1]."</strong>$apres[$i] <em>[...]</em> ";
+				//$string_re .= "<em>[...]</em> $avant[$i]<strong>".$tab[$i][1]."</strong>$apres[$i] <em>[...]</em> ";
+				$string_re .= "<em>[...]</em> $avant[$i]".$tab[$i][1]."$apres[$i] <em>[...]</em> ";
 			}
 		}
 		if (strlen($string_re))
-			return $string_re;
+			return RechercheEtendue_surligner_mots_recherche($string_re,$query);
 		else
 			return $alternative;
 	}
