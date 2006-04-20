@@ -9,15 +9,15 @@ include_spip('base/abstract_sql');
 function exec_install_mots_arbo() {
 
 	$requetes=array(
-	// ajouter les colonnes
-// 		"ALTER TABLE spip_groupes_mots
-// 		  ADD debut  MEDIUMINT NOT NULL DEFAULT '0',
-// 		  ADD fin    MEDIUMINT NOT NULL DEFAULT '0';",
+		// ajouter les colonnes
+		"ALTER TABLE spip_groupes_mots
+		  ADD debut  MEDIUMINT NOT NULL DEFAULT '0',
+		  ADD fin    MEDIUMINT NOT NULL DEFAULT '0';",
 
-// 		"ALTER TABLE spip_mots
-// 		  ADD debut  MEDIUMINT NOT NULL DEFAULT '0',
-// 		  ADD fin    MEDIUMINT NOT NULL DEFAULT '0',
-// 		  ADD niveau TINYINT   NOT NULL DEFAULT '1';",
+		"ALTER TABLE spip_mots
+		  ADD debut  MEDIUMINT NOT NULL DEFAULT '0',
+		  ADD fin    MEDIUMINT NOT NULL DEFAULT '0',
+		  ADD niveau TINYINT   NOT NULL DEFAULT '1';",
 
 		// ajouter des index sur debut et fin ?
 
