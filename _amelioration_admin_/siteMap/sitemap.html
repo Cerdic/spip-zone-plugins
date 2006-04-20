@@ -1,6 +1,8 @@
 #CACHE{0}
 [(#HTTP_HEADER{Content-type: text/xml; charset=#CHARSET})]
-<?php echo "<"."?xml version=\"1.0\" encoding=\"#CHARSET\"?".">\n";?>
+<?php 
+$flag_presever=true;
+echo "<"."?xml version=\"1.0\" encoding=\"#CHARSET\"?".">\n";?>
 <urlset xmlns="http://www.google.com/schemas/sitemap/0.84">
 	[(#REM|reduit_priorite)]
 	<BOUCLE_secteurs(RUBRIQUES) {racine}{id_secteur>1}>
