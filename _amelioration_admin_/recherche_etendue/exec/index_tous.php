@@ -218,7 +218,7 @@ function exec_index_tous_dist()
 			spip_free_result($result);
 			$largeurs = array('','','');
 			$styles = array('arial11', 'arial11', 'arial11');
-			afficher_liste($largeurs, $tableau, $styles);
+			echo afficher_liste($largeurs, $tableau, $styles);
 			echo "</table>";
 			echo "</div>\n";
 		}
