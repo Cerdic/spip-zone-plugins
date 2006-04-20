@@ -848,7 +848,7 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 			
 			$largeurs = array('','','','','');
 			$styles = array('arial11', 'arial11', 'arial1', 'arial1','arial1');
-			afficher_liste($largeurs, $table, $styles);
+			echo afficher_liste($largeurs, $table, $styles);
 			echo "</table>";
 			echo "</div>\n";
 		}
