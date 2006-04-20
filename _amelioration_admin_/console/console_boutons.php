@@ -15,7 +15,7 @@ define('_DIR_PLUGIN_CONSOLE',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/
 		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
 		  // on voit le bouton dans la barre "naviguer"
 		  $boutons_admin['configuration']->sousmenu['console']= new Bouton(
-			"../"._DIR_PLUGIN_CONSOLE."/console.png",  // icone
+			"../"._DIR_PLUGIN_CONSOLE."/img_pack/console.png",  // icone
 			_L('Console')	// titre
 			);
 		}
