@@ -1,0 +1,15 @@
+<plugin>
+	<nom>Mots cl&eacute;s arborescents</nom>
+	<auteur>Christian Lefebvre &copy; 2006 - Distribue sous licence GNU/GPL</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>tentative de mots cl&eacute;s arborescents</description>
+
+	<pipeline>
+        <nom>ajouter_boutons</nom>
+        <action>ajouterBoutons</action>
+        <inclure>mots_arbo_admin.php</inclure>
+	</pipeline>
+	
+	<prefix>motsArbo</prefix>
+</plugin>

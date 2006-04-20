@@ -395,7 +395,9 @@
 		$contenu_propre = extraire_poesie($contenu_propre);
 		//reconnaitre les url d'articles, rubriques ...
 		$url_look = url_de_base()."spip.php";
+		error_log("AVANT: $contenu_propre");
 		$contenu_propre = preg_replace(",\[(.*)->\s*$url_look"."[^\]]*id_((art)icle|(rub)rique)=([0-9]*?)[^\]]*],Uims","[\\1->\\4\\5]",$contenu_propre);
+		error_log("APRES: $contenu_propre");
 
 		//Post Traitement
 		$contenu_propre = spip_apres_sale($contenu_propre);
