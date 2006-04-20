@@ -462,7 +462,7 @@ function exec_documents_tous(){
 
 			$largeurs = array('','','','','','','','','','');
 			$styles = array('arial11', 'arial1', 'arial1','arial1','arial1','arial1','arial1','arial1','arial1','arial1');
-			afficher_liste($largeurs, $table, $styles);
+			echo afficher_liste($largeurs, $table, $styles);
 			echo "</table>";
 			echo "<input type='submit' name='modif' value='"._T('bouton_valider')."' class='fondo' />";
 			echo "</form>";

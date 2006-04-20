@@ -474,7 +474,7 @@ function exec_portfolio(){
 
 			$largeurs = array('','','','','','','','','','');
 			$styles = array('arial11', 'arial1', 'arial1','arial1','arial1','arial1','arial1','arial1','arial1','arial1');
-			afficher_liste($largeurs, $table, $styles);
+			echo afficher_liste($largeurs, $table, $styles);
 			echo "<input type='submit' name='modif' value='"._T('bouton_valider')."' class='fondo' />";
 			echo "</form>";*/
 			echo "</table>";
