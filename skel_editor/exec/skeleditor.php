@@ -122,7 +122,7 @@ function skel_parser($skel_str) {
   foreach($b as $k=>$val) { 
      if ($val->type == "champ") $output .= "<span style='color:#c30;background:#eee'>#".$val->nom_champ."</span>";
          else if ($val->type == "texte") $output .="<pre style='background:#ddd;margin:0;display:inline;'>&nbsp;".htmlspecialchars($val->texte)."</pre>";
-         else if ($val->type == "include") $output .= "<span style='color:#30c;background:#cff;'>(INCLUDE)</span>"; 
+         else if ($val->type == "include") $output .= "<span style='color:#30c;background:#cff;'>(INCLURE)</span>"; 
   }
   $output .= "</div>\n";
   $output .= fin_block()."<br />";
@@ -204,6 +204,16 @@ function skel_parser_param($str,$output='') {
   return $output; 
 }
 
+// security: avoid access to other directories
+function safe_path($str) {
+  global $dossier_squelettes;
+    
+  $str = str_replace("..", "", trim($str));
+  while (substr($str,0,1)=="/")  $str = substr($str,1);
+  if (substr($str,0,strlen($dossier_squelettes))!=$dossier_squelettes) return "";
+                                                                 else return $str;  
+}
+
 
 // -------------------------------
 // Main 
@@ -222,23 +232,16 @@ function exec_skeleditor(){
 		exit;
 	}
 	
-	// Version de base, a supprimer donc...
-	// globals
-	// $GLOBALS['dossier_squelettes']);
-;
-	// Va chercher le repertoire des squelettes et seulement celui-ci
-	// NB: Ce fichier peut initialiser $dossier_squelettes (old-style)
-	// donc il faut l'inclure "en globals"
-	if ($fpp = include_spip('mes_fonctions', false)) {
-		global $dossier_squelettes;
-		@include ($fpp); 
-	}
 	
-	if (@is_readable(_DIR_SESSIONS."charger_plugins_fonctions.php")){
+	// globals 
+  global $dossier_squelettes;
+  if ($dossier_squelettes=="") $dossier_squelettes="dist";
+	
+	if (@is_readable(_DIR_SESSIONS."charger_plugins_fonctions.php")){  // utile ?
 		// chargement optimise precompile
 		include_once(_DIR_SESSIONS."charger_plugins_fonctions.php");     	
 	}
-	
+
 	// --------------------------------------------------------------------------- 
 	// Action ? 
 	// ---------------------------------------------------------------------------
@@ -249,7 +252,7 @@ function exec_skeleditor(){
 	     $editor = str_replace("&lt;/textarea","</textarea",$editor); // exception: textarea closing tag	     
 	     if (isset($_GET['f'])) $file_name = $_GET['f'];
 	                       else $file_name = "";
-	     $file_name = "..".str_replace("..", "", $file_name);    // security	     
+	     $file_name = "../".safe_path($file_name);    // security	     
 	     if (is_writable($file_name)) {
              if (!$handle = fopen($file_name, 'w')) {
                  $log = "<span style='color:red'>"._T("skeleditor:erreur_ouverture_fichier")."</span>";
@@ -269,7 +272,7 @@ function exec_skeleditor(){
   if (isset($_FILES['upf'])) {    // upload file ?
       $tmp_name = $_FILES['upf']['tmp_name'];
       if (isset($_POST['target'])) {      
-               $target = "..".str_replace("..", "", $_POST['target'])."/".$_FILES['upf']['name'];    // security
+               $target = "../".safe_path($_POST['target'])."/".$_FILES['upf']['name'];    // security
                $_GET['f'] = $target;
                $_GET['action'] = 'preview';
                if (file_exists($target)) {
@@ -287,14 +290,18 @@ function exec_skeleditor(){
   // GET request ?
   $action = "";
 	if (isset($_GET['f'])) {
-	    $file_name = $_GET['f'];
-      $file_name = "..".str_replace("..", "", $file_name);    // security 
-            
+	    $file_name = $_GET['f']; 
+      if (isset($_GET['target'])) {
+          $target = "../".safe_path($_GET['target']);
+          $file_name =  $target."/".$file_name;
+      }                       	    
+      $file_name = "../".safe_path($file_name); 
+                  
       if (isset($_GET['action'])) {
           $action = $_GET['action'];          
-          if ($action=="delete") {                // delete the file
+          if ($action=="delete") {                // delete the file            
             @unlink($file_name);          
-          } else if ($action=="download") {       // download the file
+          } else if ($action=="download") {       // download the file              
               if ($file_tmp = @file("$file_name")) {
                 $file_name_nopath = substr($file_name, strrpos($file_name,"/")+1); 
                 $file_str = implode ('',$file_tmp);
@@ -304,11 +311,9 @@ function exec_skeleditor(){
                 exit; 
               }
           } else if ($action=="new") {            // add new file
-            if (isset($_GET['target'])) {
-               $target = "..".str_replace("..", "", $_GET['target']);    // security                         
+            if (isset($_GET['target'])) {               
                if (substr($target,3, strlen($dossier_squelettes))== $dossier_squelettes) { // security 2: right place ?                  
-                   // FIXME: check if extension available ?
-                   $file_name = $target."/".substr($file_name,2);
+                   // FIXME: check if extension available ?                   
                    if (is_file($file_name)) { // security 3: ovewrite ?
                     $log = "<span style='color:red'>"._T("skeleditor:erreur_overwrite")."</span>";
                    } else {
