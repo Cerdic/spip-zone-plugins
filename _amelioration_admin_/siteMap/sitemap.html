@@ -1,8 +1,6 @@
 #CACHE{0}
 [(#HTTP_HEADER{Content-type: text/xml; charset=#CHARSET})]
-<?php 
-$flag_presever=true;
-echo "<"."?xml version=\"1.0\" encoding=\"#CHARSET\"?".">\n";?>
+<?php echo "<"."?xml version=\"1.0\" encoding=\"#CHARSET\"?".">\n";?>
 <urlset xmlns="http://www.google.com/schemas/sitemap/0.84">
 	[(#REM|reduit_priorite)]
 	<BOUCLE_secteurs(RUBRIQUES) {racine}{id_secteur>1}>
@@ -18,7 +16,7 @@ echo "<"."?xml version=\"1.0\" encoding=\"#CHARSET\"?".">\n";?>
 			</BOUCLE_breves>
 		<?php } ?>
 		<?php if ('#CHEMIN{article.html}'){?>
-			<BOUCLE_articles(ARTICLES) {id_rubrique} {!par date}>
+			<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {!par date}>
 			[(#CHAPO*|redirection|?{'',' '})
 				<url>
 				  <loc>[(#URL_ARTICLE|entites_html|url_absolue)]</loc>
@@ -26,7 +24,7 @@ echo "<"."?xml version=\"1.0\" encoding=\"#CHARSET\"?".">\n";?>
 				  <priority>[(#REM|priorite)]</priority>
 				  [(#DATE_MODIF|affdate{"Y-m-d"}|update{[(#DATE|affdate{"Y-m-d"})]})]
 				</url>
-			]</BOUCLE_articles>
+			]</BOUCLE_articles_racine>
 		<?php } ?>
 		[(#REM|remonte_niveau)]
 		[(#REM|update{"2005-01-01",2})]
