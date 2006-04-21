@@ -121,7 +121,6 @@
 	function RechercheEtendue_google_like($query,$alternative = ""){
 		include_spip('inc/surligne');
 	  $string = RechercheEtendue_google_like_string('','get');
-	  $string = html_entity_decode($string);
 		$qt = explode(" ", $query);
 		$num = count ($qt);
 		$cc = ceil(200 / $num);
@@ -131,12 +130,12 @@
 			if(count($tab[$i])>1){
 				$avant[$i] = substr($tab[$i][0],-$cc,$cc);
 				$pos = strpos($avant[$i], " ");
-				$avant[$i]= entites_html(substr($avant[$i],$pos));
+				$avant[$i]= charset2unicode(substr($avant[$i],$pos));
 				$apres[$i] = substr($tab[$i][2],0,$cc);
 				$pos = strrpos($apres[$i], " ");
-				$apres[$i] = entites_html(substr($apres[$i],0,$pos));
+				$apres[$i] = charset2unicode(substr($apres[$i],0,$pos));
 				//$string_re .= "<em>[...]</em> $avant[$i]<strong>".$tab[$i][1]."</strong>$apres[$i] <em>[...]</em> ";
-				$string_re .= "<em>[...]</em> $avant[$i]".entites_html($tab[$i][1])."$apres[$i] <em>[...]</em> ";
+				$string_re .= "<em>[...]</em> $avant[$i]".charset2unicode($tab[$i][1])."$apres[$i] <em>[...]</em> ";
 			}
 		}
 		if (strlen($string_re))
