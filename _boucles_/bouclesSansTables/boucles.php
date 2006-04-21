@@ -1,9 +1,9 @@
 <?php
-include_once("boucleLangues.php");
-include_once("boucleFichiers.php");
-include_once("boucleFor.php");
-include_once("boucleIf.php");
-include_once("boucleTableau.php");
+include_once(find_in_path("boucleLangues.php"));
+include_once(find_in_path("boucleFichiers.php"));
+include_once(find_in_path("boucleFor.php"));
+include_once(find_in_path("boucleIf.php"));
+include_once(find_in_path("boucleTableau.php"));
 
 /**
  * retourne la valeur d'un meta
