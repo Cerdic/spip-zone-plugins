@@ -7,11 +7,17 @@ include_spip('inc/mots');
 include_spip('base/abstract_sql');
 
 function exec_mots_arbo_dist() {
-  global $acces_comite, $acces_forum, $acces_minirezo, $ancien_type, $articles, $breves, $change_type, $conf_mot, $connect_statut, $connect_toutes_rubriques, $descriptif, $id_groupe, $modifier_groupe, $obligatoire, $rubriques, $spip_lang, $spip_lang_right, $supp_group, $syndic, $texte, $unseul;
+	global $parentId;
+	if($parentId) {
+		afficher_sous_arbo($parentId);
+		return;
+	}
 
-  $id_groupe = intval($id_groupe);
+global $acces_comite, $acces_forum, $acces_minirezo, $ancien_type, $articles, $breves, $change_type, $conf_mot, $connect_statut, $connect_toutes_rubriques, $descriptif, $id_groupe, $modifier_groupe, $obligatoire, $rubriques, $spip_lang, $spip_lang_right, $supp_group, $syndic, $texte, $unseul;
 
-  if ($conf_mot = intval($conf_mot)) {
+$id_groupe = intval($id_groupe);
+
+if ($conf_mot = intval($conf_mot)) {
 	$result = spip_query("SELECT * FROM spip_mots WHERE id_mot=$conf_mot");
 	if ($row = spip_fetch_array($result)) {
 		$id_mot = $row['id_mot'];
@@ -127,108 +133,117 @@ if ($conf_mot>0) {
 }
 
 // A PARTIR D'ICI CA CHANGE PAR RAPPORT A L'ADMIN STANDARD
-//
-// On boucle d'abord sur les groupes de mots = le niveau 0
-//
 
-$result_groupes = spip_query("SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots ORDER BY multi");
+	$result_groupes = spip_query("SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots ORDER BY multi");
 
-//echo "\n<script type='text/javascript' src='".find_in_path('js/motsArbo.js')."'></script>\n";
-echo "\n<link rel='stylesheet' type='text/css' href='".find_in_path('mots_arbo.css')."' />";
-echo "\n<form action='../spip.php?action=bouger_mots' method='post'>";
-echo "\n<input type='hidden' name='redirect' value='ecrire?exec=mots_arbo'/>";
-echo "\n<div id='mots_cles'>";
-echo "\n<div id='racine'>Groupes de mots clés :";
+	echo "\n<link rel='stylesheet' href='"
+		.find_in_path('css/folder-tree-static.css')."' type='text/css'>";
+	echo "\n<script type='text/javascript' src='"
+		.find_in_path('js/ajax.js')."'></script>";
+	echo "\n<script type='text/javascript' src='"
+		.find_in_path('js/folder-tree-static.js')."'></script>";
+	echo "\n<script type='text/javascript'>
+	var idOfFolderTrees = ['arbre_mots_cles'];\n
+	var imageFolder = '".dirname(find_in_path('images/dhtmlgoodies_plus.gif'))."/';	// Path to images
+	var ajaxRequestFile = '?exec=mots_arbo&';
+</script>";
 
-while ($row_groupes = spip_fetch_array($result_groupes)) {
-	$id_groupe = $row_groupes['id_groupe'];
-	$titre_groupe = typo($row_groupes['titre']);
-	$descriptif = $row_groupes['descriptif'];
-	$texte = $row_groupes['texte'];
-	$unseul = $row_groupes['unseul'];
-	$obligatoire = $row_groupes['obligatoire'];
-	$articles = $row_groupes['articles'];
-	$breves = $row_groupes['breves'];
-	$rubriques = $row_groupes['rubriques'];
-	$syndic = $row_groupes['syndic'];
-	$acces_minirezo = $row_groupes['minirezo'];
-	$acces_comite = $row_groupes['comite'];
-	$acces_forum = $row_groupes['forum'];
+	echo "\n<form action='../spip.php?action=bouger_mots' method='post'>";
+	echo "\n<input type='hidden' name='redirect' value='ecrire?exec=mots_arbo'/>";
+	echo "\n<ul id='arbre_mots_cles' class='dhtmlgoodies_tree'>Groupes de mots clés :";
 
-	echo "\n\t<div class='groupe' id='li_G$id_groupe'>$titre_groupe\n";
+	while ($row_groupes = spip_fetch_array($result_groupes)) {
+		$id_groupe = $row_groupes['id_groupe'];
+		$titre_groupe = typo($row_groupes['titre']);
+		$descriptif = $row_groupes['descriptif'];
+		$texte = $row_groupes['texte'];
+		$unseul = $row_groupes['unseul'];
+		$obligatoire = $row_groupes['obligatoire'];
+		$articles = $row_groupes['articles'];
+		$breves = $row_groupes['breves'];
+		$rubriques = $row_groupes['rubriques'];
+		$syndic = $row_groupes['syndic'];
+		$acces_minirezo = $row_groupes['minirezo'];
+		$acces_comite = $row_groupes['comite'];
+		$acces_forum = $row_groupes['forum'];
 
-	$options=array(array(), array(), array());
-	if ($articles == "oui") $options[0][]= _T('info_articles_2');
-	if ($breves == "oui") $options[0][]= _T('info_breves_2');
-	if ($rubriques == "oui") $options[0][]= _T('info_rubriques');
-	if ($syndic == "oui") $options[0][]= _T('info_sites_references');
+		$options=array(array(), array(), array());
+		if ($articles == "oui") $options[0][]= _T('info_articles_2');
+		if ($breves == "oui") $options[0][]= _T('info_breves_2');
+		if ($rubriques == "oui") $options[0][]= _T('info_rubriques');
+		if ($syndic == "oui") $options[0][]= _T('info_sites_references');
 	
-	if ($unseul == "oui") $options[1][]= _T('info_un_mot');
-	if ($obligatoire == "oui") $options[1][]=_T('info_groupe_important');
+		if ($unseul == "oui") $options[1][]= _T('info_un_mot');
+		if ($obligatoire == "oui") $options[1][]=_T('info_groupe_important');
 
-	if ($acces_minirezo == "oui") $options[2][]= _T('info_administrateurs');
-	if ($acces_comite == "oui") $options[2][]= _T('info_redacteurs');
-	if ($acces_forum == "oui") $options[2][]= _T('info_visiteurs_02');
+		if ($acces_minirezo == "oui") $options[2][]= _T('info_administrateurs');
+		if ($acces_comite == "oui") $options[2][]= _T('info_redacteurs');
+		if ($acces_forum == "oui") $options[2][]= _T('info_visiteurs_02');
 
-	$options[0]= join(',&nbsp;', $options[0]);
-	$options[1]= join(',&nbsp;', $options[1]);
-	$options[2]= join(',&nbsp;', $options[2]);
-	$options= join('&nbsp;/&nbsp;', $options);
+		$options[0]= join(',&nbsp;', $options[0]);
+		$options[1]= join(',&nbsp;', $options[1]);
+		$options[2]= join(',&nbsp;', $options[2]);
+		$options= join('&nbsp;/&nbsp;', $options);
 
-	if($options) {
-		echo " <font face='Verdana,Arial,Sans,sans-serif' size=1>($options)</font>\n";
+		if($options) {
+			$options= " <font face='Verdana,Arial,Sans,sans-serif' size=1>($options)</font>\n";
+		}
+
+		echo "\n\t<li><a href='#'>$titre_groupe $options</a>\n";
+		echo "\n\t<ul>\n\t\t<li parentId='li_G$id_groupe'><a href='#'>Loading ...</a></li>\n\t</ul>";
+
+		echo "\n\t</li>";
 	}
-//	if ($descriptif) {
-//		echo "<p><div align='left' border: 1px dashed #aaaaaa;'>";
-//		echo "<font size=2 face='Verdana,Arial,Sans,sans-serif'>";
-//		echo "<b>"._T('info_descriptif')."</b> ";
-//		echo propre($descriptif);
-//		echo "&nbsp; ";
-//		echo "</font>";
-//		echo "</div>";
-//	}
-//
-//	if (strlen($texte)>0){
-//		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif'>";
-//		echo "<P>".propre($texte);
-//		echo "</FONT>";
-//	}
+	echo "\n</ul>";
 
-	//
-	// Afficher les mots-cles du groupe
-	//
-	$supprimer_groupe = afficher_arbo_groupe($id_groupe);
+	echo "\n<input type='submit'>\n</form>";
 
-//	if ($connect_statut =="0minirezo" AND $connect_toutes_rubriques AND !$conf_mot){
-//		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=100%>";
-//		echo "<tr>";
-//		echo "<td>";
-//		icone(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif");
-//		echo "</td>";
-//		if ($supprimer_groupe) {
-//			echo "<td>";
-//			icone(_T('icone_supprimer_groupe_mots'), generer_url_ecrire("mots_tous","supp_group=$id_groupe"), "groupe-mot-24.gif", "supprimer.gif");
-//			echo "</td>";
-//			echo "<td> &nbsp; </td>"; // Histoire de forcer "supprimer" un peu plus vers la gauche
-//		}
-//		echo "<td>";
-//		echo "<div align='$spip_lang_right'>";
-//		icone(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&redirect=" . rawurlencode(generer_url_ecrire('mots_tous'))), "mot-cle-24.gif", "creer.gif");
-//		echo "</div>";
-//		echo "</td></tr></table>";
-//	}	
-	echo "\n\t</div>";
-}
-echo "\n</div>\n</div>\n<input type='submit'>\n</form>";
+	if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques  AND !$conf_mot) {
+		echo "<p>&nbsp;</p><div align='right'>";
+		icone(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif");
+		echo "</div>";
+	}
 
-if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques  AND !$conf_mot){
-	echo "<p>&nbsp;</p><div align='right'>";
-	icone(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif");
-	echo "</div>";
+	fin_page();
 }
 
-fin_page();
+function afficher_sous_arbo($id) {
+	if(!preg_match('/li_([GM])(\d*)/', $id, $re)) {
+		echo "<li><a href='#'>Can't find node $id</a></li>";
+		return;
+	}
+	$type= $re[1]; $id= $re[2];
+	if($type=='G') {
+		$query = "SELECT id_mot, titre, debut, fin FROM spip_mots
+		 WHERE id_groupe=$id AND niveau=1
+		 ORDER BY debut";
+	} else {
+		$query = "SELECT m2.id_mot, m2.titre, m2.debut, m2.fin
+		  FROM spip_mots m1, spip_mots m2
+		 WHERE m1.id_mot=$id
+		   AND m2.niveau=m1.niveau+1
+		   AND m2.debut>m1.debut AND m2.fin<m1.fin ORDER BY debut";
+	}
+	error_log($query);
+	$mots= spip_query($query);
+
+	while($row= spip_fetch_array($mots)) {
+		error_log(var_export($row, 1));
+		$id= $row['id_mot'];
+		$titre= $row['titre'];
+
+		$actions= "<input type='radio' name='from' value='$id'>";
+		$actions.="<input type='radio' name='after' value='$id'>";
+		$actions.="<input type='radio' name='into' value='$id'>";
+		echo "\n\t<li><a href='#'>$titre</a> $actions";
+		if($row['debut']+1!=$row['fin']) {
+			echo "\n\t<ul>\n\t\t<li parentId='li_M$id'><a href='#'>Loading ...</a></li>\n\t</ul>";
+		}
+		echo "\n\t</li>";
+	}
 }
+
+
 
 function afficher_arbo_groupe($id_groupe) {
 	$query = "SELECT id_mot, titre, niveau FROM spip_mots WHERE id_groupe = '$id_groupe' AND niveau!=0 ORDER BY debut";
