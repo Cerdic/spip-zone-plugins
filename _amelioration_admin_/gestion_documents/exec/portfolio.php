@@ -209,7 +209,13 @@ function exec_portfolio(){
 	}
 
 	//$url = generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,$nb_aff,$filtre)."::deb::");
-	$tranches = afficher_tranches_requete($requete, 3,'debut',false,$nb_aff);
+	if (preg_match('/(\s+FROM\s+.*?)(ORDER\s+BY\s+.*)?$/', 
+			$requete,
+		       $r)) {
+	  $cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n$r[1]"));
+	  $cpt = $cpt['n'];
+	}
+	$tranches = afficher_tranches_requete($requete, $cpt, 3,'debut',false,$nb_aff);
 
 	$table_need_update = false;
 	if ($tranches) {

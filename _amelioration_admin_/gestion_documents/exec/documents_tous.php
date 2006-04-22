@@ -133,6 +133,12 @@ function exec_documents_tous(){
 	if (strlen($join)>0)
 		$requete .= " LEFT JOIN $join";
 	$requete .= " WHERE $where ORDER BY $order";
+	if (preg_match('/(\s+FROM\s+.*?)(ORDER\s+BY\s+.*)?$/', 
+			$requete,
+		       $r)) {
+	  $cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n$r[1]"));
+	  $cpt = $cpt['n'];
+	}
 
 	/*	if ($id_type)
 			if ($conteneur)
@@ -146,9 +152,9 @@ function exec_documents_tous(){
 				$requete = "SELECT docs.* FROM spip_documents AS docs ORDER BY docs.id_document DESC";*/
 
 		if ($nb_aff)
-			$tranches = afficher_tranches_requete($requete, 9,false,false,$nb_aff);
+			$tranches = afficher_tranches_requete($requete, $cpt, 9,false,false,$nb_aff);
 		else
-			$tranches = afficher_tranches_requete($requete, 9);
+			$tranches = afficher_tranches_requete($requete, $cpt, 9);
 
 		$table_need_update = false;
 		if ($tranches) {

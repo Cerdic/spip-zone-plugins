@@ -149,12 +149,14 @@ function exec_index_tous_dist()
 
 		if ($index_table=='')
 			$requete = "SELECT dic.dico,$select_hash,COUNT(objet.points) AS occurences,SUM(objet.points) AS total FROM spip_index_dico AS dic, spip_index AS objet WHERE dic.hash=objet.hash GROUP BY dic.hash $clause_filtre";
+		  $cpt = spip_num_rows(spip_query("SELECT COUNT(*) FROM spip_index_dico AS dic, spip_index AS objet WHERE dic.hash=objet.hash GROUP BY dic.hash $clause_filtre"));
 		else{
 			$id_table = $liste_tables[$index_table];
 			$requete = "SELECT dic.dico,$select_hash,COUNT(objet.points) AS occurences,SUM(objet.points) AS total FROM spip_index_dico AS dic, spip_index AS objet WHERE dic.hash=objet.hash AND objet.id_table=$id_table GROUP BY dic.hash $clause_filtre";
+		  $cpt = spip_num_rows(spip_query("SELECT COUNT(*) FROM spip_index_dico AS dic, spip_index AS objet WHERE dic.hash=objet.hash AND objet.id_table=$id_table GROUP BY dic.hash $clause_filtre"));
 	 	}
 
-		$tranches = afficher_tranches_requete($requete, 3,false, false, 60);
+		$tranches = afficher_tranches_requete($requete, $cpt, 3,false, false, 60);
 		if (preg_match('{LIMIT}',$requete)==FALSE){
 			// pas de limite ajoutee par afficher_tranche
 			// mais il nous en faut une car on va remplacer le HAVING par le ORDER
