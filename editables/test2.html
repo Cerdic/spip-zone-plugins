@@ -1,0 +1,29 @@
+<html>
+<body>
+#EDITABLE_DEBUT{test2.action}
+
+<BOUCLE_arts(ARTICLES){0,5}>
+#ID_ARTICLE : #TITRE =><br/>
+#EDITABLE{titreArt#ID_ARTICLE,Widget,#TITRE}<br/>
+#EDITABLE{surtitreArt#ID_ARTICLE,Widget,#SURTITRE}<br/>
+</BOUCLE_arts>
+
+<br><br>
+
+<BOUCLE_pipo(PIPO)>
+#ID : #STR =&gt;<br/>
+#EDITABLE{pipo#ID,MCEWidget,#STR}<br>
+</BOUCLE_pipo>
+<br>
+#EDITABLE{pipoNew1,Widget}<br/>
+#EDITABLE{pipoNew2,Widget}<br/>
+
+<br>
+Création d'un article :
+<br>titre: #EDITABLE{titreNewArt,Widget}<br/>
+surtitre: #EDITABLE{surtitreNewArt,Widget}<br/>
+texte<br>#EDITABLE{texteNewArt,MCEWidget}<br/>
+
+#EDITABLE_FIN
+</body>
+</html>
