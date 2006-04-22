@@ -39,8 +39,12 @@ function exec_acces_restreint(){
 	$requete = "SELECT zones.* FROM spip_zones AS zones";
 
 	$table = "";
-	$tranches = afficher_tranches_requete($requete, 5);
-	if ($tranches) {
+  $cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_zones"));
+  $cpt = $cpt['n'];
+
+  $tranches = afficher_tranches_requete($requete, $cpt, 5);
+
+  if ($tranches) {
 	 	$result = spip_query($requete);
 
 		$vals = '';
