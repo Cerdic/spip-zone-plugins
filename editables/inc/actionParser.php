@@ -2,15 +2,24 @@
 
 class actionParser  {
 	var $parser;
-	// les valeurs rÃ©cupÃ©rÃ©es par le contexte et Ã  utiliser dans les actions
+	// les valeurs récupérées par le contexte et à utiliser dans les actions
 	var $valeurs;
-	// les ordres sql qu'on en dÃ©duit
+	// les ordres sql qu'on en déduit
 	var $sql= array();
 
 	// on part d'un etat 'vide' et on empile des etats 'actions' puis
 	// 'update' ou 'insert' puis 'key' ou 'field' puis eventuellement 'get' 
 	var $state=array();
 
+	// la liste d'action qui en resulte
+	var $actions= array();
+	// l'action en cours d'interpretation
+	var $action;
+
+	// si on trouve des erreurs en court de route (valeurs obligatoires
+	// absentes principalement)
+	var $errors= array();
+	
 	function actionParser($valeurs) {
 		$this->valeurs= $valeurs;
 		$this->parser = xml_parser_create($GLOBALS['meta']['charset']);
@@ -26,11 +35,11 @@ class actionParser  {
 	}
 
 	function getSql() {
-		return $this->sql;
+		return "<xmp>".var_export($this->actions, 1)."</xmp>";
 	}
 
 	function startElement($parser, $name, $attrs) {
-		echo "START $name ".var_export($attrs, 1)."\n";
+		//echo "START $name ".var_export($attrs, 1)."\n";
 		$st= ($this->state==null)?null:$this->state[0];
 		switch($name) {
 		case 'actions':
@@ -48,7 +57,8 @@ class actionParser  {
 				die("update/insert inattendu");
 			}
 			array_unshift($this->state, $name);
-			echo "$name ...\n";
+			// init d'une nouvelle action
+			$this->action= array('type' => $name, 'aFaire' => false);
 			break;
 
 		case 'key':
@@ -57,7 +67,23 @@ class actionParser  {
 				die("key/field inattendu");
 			}
 			array_unshift($this->state, $name);
-			echo "$name ...\n";
+			$colonne= $attrs['name'];
+			if($attrs['value']) {
+				// attribut value => on prend la valeur sans chercher plus loin
+				$this->action[$name][$colonne]= $attrs['value'];
+			} elseif($vf=$attrs['valueFrom']) {
+				// attribut valueFrom => on cherche si on a une telle
+				// valeur dans le post, mais on teste également les conditions
+				if($v=$this->valeurs[$vf]) {
+					$this->action[$name][$colonne]= $v;
+					$this->action['aFaire']= true;
+				} elseif($attrs['cond']=='!') {
+					$this->errors[]="pas de valeur pour $vf";
+				}
+			} else {
+				// sinon on espere qu'un get va fournir une valeur
+				$this->action['aTrouver']= $colonne;
+			}
 			break;
 
 		case 'get':
@@ -86,7 +112,7 @@ class actionParser  {
 	}
 
 	function endElement($parser, $name) {
-		echo "END $name\n";
+		//echo "END $name\n";
 		$st= ($this->state==null)?null:$this->state[0];
 		switch($name) {
 		case 'actions' :
@@ -100,6 +126,9 @@ class actionParser  {
 				die("fin update/insert inattendu");
 			}
 			array_shift($this->state);
+			if($this->action['aFaire']) {
+				$this->actions[]= $this->action;
+			}
 			break;
 
 		case 'key':
@@ -129,12 +158,12 @@ class actionParser  {
 			break;
 
 		default:
-			die("LÃ  .. y'a comme un os ...");
+			die("Là .. y'a comme un os ...");
 		}
 	}
 
 	function text($parser, $text) {
-		echo "TEXT $text\n";
+		//echo "TEXT $text\n";
 	}
 }
 
