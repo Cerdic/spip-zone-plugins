@@ -26,6 +26,9 @@ function verif_install(){
 	if (!is_dir(_DIR_SESSIONS."phpmvconfig")){
 		sous_repertoire(_DIR_SESSIONS, "phpmvconfig");
 	}
+	if (!is_dir(_DIR_SESSIONS."phpmvdatas")){
+		sous_repertoire(_DIR_SESSIONS, "phpmvdatas");
+	}
 
 	if (@file_exists(_DIR_SESSIONS."phpmvconfig/config.php"))
 		return;
