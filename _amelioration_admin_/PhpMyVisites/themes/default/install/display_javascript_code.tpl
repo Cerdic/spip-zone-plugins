@@ -1,0 +1,1 @@
+{include file=admin/site_javascript_code.tpl}
