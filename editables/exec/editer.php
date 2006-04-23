@@ -98,7 +98,7 @@ function doActions($actions, $valeurs) {
 	include_spip('inc/actionParser');
 	$parser = new actionParser($valeurs);
 	$parser->parse($actions);
-	echo $parser->getSql();
+	echo "<xmp>".$parser->getSql()."</xmp>";
 }
 
 ?>
