@@ -147,9 +147,10 @@ function exec_index_tous_dist()
 		$clause_filtre = "HAVING total>=$filtre";
 		$clause_order = "ORDER BY total DESC";
 
-		if ($index_table=='')
+		if ($index_table==''){
 			$requete = "SELECT dic.dico,$select_hash,COUNT(objet.points) AS occurences,SUM(objet.points) AS total FROM spip_index_dico AS dic, spip_index AS objet WHERE dic.hash=objet.hash GROUP BY dic.hash $clause_filtre";
 		  $cpt = spip_num_rows(spip_query("SELECT COUNT(*) FROM spip_index_dico AS dic, spip_index AS objet WHERE dic.hash=objet.hash GROUP BY dic.hash $clause_filtre"));
+		}
 		else{
 			$id_table = $liste_tables[$index_table];
 			$requete = "SELECT dic.dico,$select_hash,COUNT(objet.points) AS occurences,SUM(objet.points) AS total FROM spip_index_dico AS dic, spip_index AS objet WHERE dic.hash=objet.hash AND objet.id_table=$id_table GROUP BY dic.hash $clause_filtre";
