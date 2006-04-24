@@ -95,7 +95,10 @@ function exec_index_tous_dist()
 	//echo $link->getForm('get');
 	echo generer_url_post_ecrire("index_tous",$index_table?"index_table=$index_table":"");
 
-	echo _L('Filtrer :') . "<br /><select name='filtre'>" . "\n";
+	echo _L('Filtrer :') . "<br /><select name='filtre'";
+	echo "onchange=\"document.location.href='";
+	echo generer_url_ecrire('index_tous',($index_table?"index_table=$index_table&":"").'filtre=')."'+this.options[this.selectedIndex].value\"";
+	echo ">" . "\n";
 	$filtres=array('1'=>'+ de 1 point','10'=>'+ de 10 points','100'=>'+ de 100 points');
 	foreach($filtres as $val=>$string){
 		echo "<option value='$val'";
@@ -104,7 +107,9 @@ function exec_index_tous_dist()
 		echo ">" . _L($string) ."</option>\n";
 	}
 	echo "</select>";
+	echo "<noscript><div>";
 	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
+	echo "</div></noscript></div>\n";
 	echo "</form></div>\n";
 
 	fin_raccourcis();
@@ -134,6 +139,7 @@ function exec_index_tous_dist()
 		$tableau = array();
 		$classement = array();
 
+		
 		$vers = spip_fetch_array(spip_query("SELECT VERSION()"));
 		if (substr($vers[0], 0, 1) >= 4
 		AND substr($vers[0], 2, 1) >= 1 ) {
@@ -143,31 +149,40 @@ function exec_index_tous_dist()
 			$hex_fmt = '0x';
 			$select_hash = 'HEX(dic.hash) AS h';
 		}
+		
+		$requete = array(
+			'SELECT' => "dic.dico,$select_hash,COUNT(objet.points) AS occurences,SUM(objet.points) AS total",
+			'FROM' => 'spip_index_dico AS dic, spip_index AS objet',
+			'JOIN' => "",
+			'WHERE' => "dic.hash=objet.hash",
+			'ORDER BY' => "total DESC",
+			'GROUP BY' => "dic.hash",
+			'HAVING' => "total>=$filtre");
 
-		$clause_filtre = "HAVING total>=$filtre";
-		$clause_order = "ORDER BY total DESC";
-
-		if ($index_table==''){
-			$requete = "SELECT dic.dico,$select_hash,COUNT(objet.points) AS occurences,SUM(objet.points) AS total FROM spip_index_dico AS dic, spip_index AS objet WHERE dic.hash=objet.hash GROUP BY dic.hash $clause_filtre";
-		  $cpt = spip_num_rows(spip_query("SELECT COUNT(*) FROM spip_index_dico AS dic, spip_index AS objet WHERE dic.hash=objet.hash GROUP BY dic.hash $clause_filtre"));
-		}
-		else{
+		if ($index_table!=''){
 			$id_table = $liste_tables[$index_table];
-			$requete = "SELECT dic.dico,$select_hash,COUNT(objet.points) AS occurences,SUM(objet.points) AS total FROM spip_index_dico AS dic, spip_index AS objet WHERE dic.hash=objet.hash AND objet.id_table=$id_table GROUP BY dic.hash $clause_filtre";
-		  $cpt = spip_num_rows(spip_query("SELECT COUNT(*) FROM spip_index_dico AS dic, spip_index AS objet WHERE dic.hash=objet.hash AND objet.id_table=$id_table GROUP BY dic.hash $clause_filtre"));
+			$requete['WHERE'] .= " AND objet.id_table=$id_table";
 	 	}
+		$select = $requete['SELECT'] ? $requete['SELECT'] : '*';
+		$from = $requete['FROM'];
+		$join = $requete['JOIN'] ? (' LEFT JOIN ' . $requete['JOIN']) : '';
+		$where = $requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '';
+		$order = $requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '';
+		$group = $requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '';
+		$limit = $requete['LIMIT'] ? (' LIMIT ' . $requete['LIMIT']) : '';
+		$having = $requete['HAVING'] ? (' HAVING ' . $requete['HAVING']) : '';
 
-		$tranches = afficher_tranches_requete($requete, $cpt, 3,false, false, 60);
-		if (preg_match('{LIMIT}',$requete)==FALSE){
-			// pas de limite ajoutee par afficher_tranche
-			// mais il nous en faut une car on va remplacer le HAVING par le ORDER
-			$res = spip_query($requete);
-			$num = spip_num_rows($res);
-			$requete .= " LIMIT 0,$num";
-	 	}
-		$requete = str_replace($clause_filtre,$clause_order,$requete);
-
-
+		$tmp_var = "debut";
+		$cpt = spip_num_rows(spip_query("SELECT SUM(objet.points) AS total FROM $from$join$where$group$having"));
+		if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
+	
+		$deb_aff = intval(_request('t_' .$tmp_var));
+		$nb_aff = 60;
+		if ($cpt > 1.5*$nb_aff) {
+			$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
+		}
+		$requete = "SELECT $select FROM $from$join$where$group$order LIMIT $deb_aff,$nb_aff";
+	 	
 		if ($tranches) {
 			if ($titre_table) echo "<div style='height: 12px;'></div>";
 			echo "<div class='liste'>";
