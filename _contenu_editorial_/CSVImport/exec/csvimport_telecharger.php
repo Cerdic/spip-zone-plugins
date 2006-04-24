@@ -101,14 +101,22 @@ function exec_csvimport_telecharger(){
 
 		$charset = lire_meta('charset');
 
-		# Excel n'accepte pas l'utf-8 ni les entites html... on fait comment ?
-		include_spip('inc/charsets');
-		$output = unicode2charset(charset2unicode($output), 'iso-8859-1');
-		$charset = 'iso-8859-1';
 
 		$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo($titre))));
+
+		// Excel ?
+		if ($delim == ',')
+			$extension = 'csv';
+		else {
+			$extension = 'xls';
+			# Excel n'accepte pas l'utf-8 ni les entites html... on fait quoi?
+			include_spip('inc/charsets');
+			$output = unicode2charset(charset2unicode($output), 'iso-8859-1');
+			$charset = 'iso-8859-1';
+		}
+
 		Header("Content-Type: text/comma-separated-values; charset=$charset");
-		Header("Content-Disposition: attachment; filename=$filename.csv");
+		Header("Content-Disposition: attachment; filename=$filename.$extension");
 		//Header("Content-Type: text/plain; charset=$charset");
 		Header("Content-Length: ".strlen($output));
 		echo $output;
