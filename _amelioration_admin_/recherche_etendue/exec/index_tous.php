@@ -181,16 +181,15 @@ function exec_index_tous_dist()
 		if ($cpt > 1.5*$nb_aff) {
 			$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
 		}
-		$requete = "SELECT $select FROM $from$join$where$group$order LIMIT $deb_aff,$nb_aff";
 	 	
-		if ($tranches) {
+		if ($cpt) {
 			if ($titre_table) echo "<div style='height: 12px;'></div>";
 			echo "<div class='liste'>";
 			bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black");
 			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
 			echo $tranches;
 
-		 	$result = spip_query($requete);
+		 	$result = spip_query("SELECT $select FROM $from$join$where$group$order LIMIT $deb_aff,$nb_aff");
 			$num_rows = spip_num_rows($result);
 
 			$ifond = 0;
