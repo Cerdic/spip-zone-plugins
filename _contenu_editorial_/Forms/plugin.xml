@@ -1,0 +1,50 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Formulaires
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Antoine Pitrou
+	portage sur 182e et adaptation en plugin par Cedric MORIN
+	</auteur>
+	<version>
+	0.11
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Gestion et administration de formulaires editables.
+	Ce plugin permet egalement la publication de sondages et enquetes, la collecte des reponses dans la base de données et le telechargement au format csv
+	</description>
+	<options> <!-- fichier charge a chaque hit -->
+	forms_options.php
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	forms_fonctions.php
+	</fonctions>
+	<prefix> 
+	Forms
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>pre_propre</nom>
+		<action>forms_avant_propre</action>
+		<inclure>forms_filtres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<action>affiche_droite</action>
+		<inclure>forms_filtres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>spip_style</nom>
+		<action>forms_style</action>
+		<inclure>forms_style.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>forms_boutons.php</inclure>
+	</pipeline>
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
