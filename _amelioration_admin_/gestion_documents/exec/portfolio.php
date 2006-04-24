@@ -133,19 +133,17 @@ function exec_portfolio(){
 		$nombre_documents = 0;
 
 
-	$join = "";
-	$where = "1=1";
-	$order = "docs.id_document DESC";
+	$requete = array('SELECT'=>'docs.*','FROM'=>'spip_documents AS docs','JOIN'=>"",'WHERE'=>"1=1",'ORDER'=>"docs.id_document DESC");
 
 	if ($conteneur){
-		$join = "spip_documents_$conteneur AS L on L.id_document=docs.id_document";
-		$where .= " AND L.id_document!=0";
+		$requete['JOIN'] = "spip_documents_$conteneur AS L on L.id_document=docs.id_document";
+		$requete['WHERE'] .= " AND L.id_document!=0";
 	}
 	if ($id_type){
-		$where .= " AND docs.id_type='$id_type'";
+		$requete['WHERE'] .= " AND docs.id_type='$id_type'";
 	}
 	if ($filtre=='notitle'){
-		$where .= " AND docs.titre='' AND docs.descriptif=''";
+		$requete['WHERE'] .= " AND docs.titre='' AND docs.descriptif=''";
 	}
 	else if ($filtre=='nofile'){
 		$tab_doc_id=array();
@@ -157,7 +155,7 @@ function exec_portfolio(){
 				$tab_doc_id[]=$row['id_document'];
 		}
 		$in = join(",",$tab_doc_id);
-		$where .= " AND " . calcul_mysql_in('id_document',$in);
+		$requete['WHERE'] .= " AND " . calcul_mysql_in('docs.id_document',$in);
 	}
 	else if ($filtre=='badsize'){
 		$tab_doc_id=array();
@@ -183,39 +181,49 @@ function exec_portfolio(){
 			}
 		}
 		$in = join(",",$tab_doc_id);
-		$where .= " AND " . calcul_mysql_in('id_document',$in);
+		$requete['WHERE'] .= " AND " . calcul_mysql_in('docs.id_document',$in);
 	}
 
-	$requete = "SELECT docs.* FROM spip_documents AS docs";
-	if (strlen($join)>0)
-		$requete .= " LEFT JOIN $join";
-	$requete .= " WHERE $where ORDER BY $order";
+
+	//if (strlen($join)>0)
+	//	$requete .= " LEFT JOIN $join";
+	//$requete .= " WHERE $where ORDER BY $order";
 
 	if (!$nb_aff)
 		$nb_aff = 12;
 	
-	global $t_debut;
-	if (isset($_GET['show_docs']))
-		$show_docs = intval($_GET['show_docs']);
-	if (isset($_POST['show_docs']))
-		$show_docs = intval($_POST['show_docs']);
+	$select = $requete['SELECT'] ? $requete['SELECT'] : '*';
+	$from = $requete['FROM'];
+	$join = $requete['JOIN'] ? (' LEFT JOIN ' . $requete['JOIN']) : '';
+	$where = $requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '';
+	$order = $requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '';
+	$group = $requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '';
+	$limit = $requete['LIMIT'] ? (' LIMIT ' . $requete['LIMIT']) : '';
+
+	$tmp_var = "debut";
+
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $from$join$where"));
+	//if (! ($cpt = $cpt['n'])) return $tous_id ;
+	$cpt = $cpt['n'];
+	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
+
+	if (_request('show_docs'))
+		$show_docs = intval(_request('show_docs'));
+	$deb_aff = intval(_request('t_' .$tmp_var));
 	if ($show_docs)
 	{
 		$pos = 0;
-		$res = spip_query($requete);
+		$res = spip_query("SELECT $select FROM $from$join$where$order$group$limit");
 		while (($row = spip_fetch_array($res)) && (intval($row['id_document'])!=$show_docs))
 			$pos++;
-		$t_debut = floor($pos/$nb_aff)*$nb_aff;
+		$deb_aff = floor($pos/$nb_aff)*$nb_aff;
+		$_GET['t_debut'] = $deb_aff; // pour que afficher_tranches_requete le retrouve ...
 	}
 
-	//$url = generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,$nb_aff,$filtre)."::deb::");
-	if (preg_match('/(\s+FROM\s+.*?)(ORDER\s+BY\s+.*)?$/', 
-			$requete,
-		       $r)) {
-	  $cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n$r[1]"));
-	  $cpt = $cpt['n'];
+	if ($cpt > 1.5*$nb_aff) {
+		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
 	}
-	$tranches = afficher_tranches_requete($requete, $cpt, 3,'debut',false,$nb_aff);
+	$requete = "SELECT $select FROM $from$join$where$order$group LIMIT $deb_aff,$nb_aff";
 
 	$table_need_update = false;
 	if ($tranches) {
