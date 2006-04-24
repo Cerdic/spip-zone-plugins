@@ -41,10 +41,10 @@ class actionParser  {
 	}
 
 	function getSql($liste=null) {
-		echo "<xmp>".var_export($this->liste, 1)."</xmp>";
 		if(!$liste) {
 			$liste= $this->liste;
 		}
+		echo "<xmp>getSql:".var_export($liste, 1)."</xmp>";
 		$res='';
 		foreach($liste as $action) {
 			if($action['type']=='insert') {
@@ -85,7 +85,7 @@ class actionParser  {
 	}
 
 	function startElement($parser, $name, $attrs) {
-		//echo "START $name ".var_export($attrs, 1)."\n";
+		echo "START $name ".var_export($attrs, 1)."\n";
 		//$st= ($this->state==null)?null:$this->state[0];
 		switch($name) {
 		case 'actions':
@@ -151,7 +151,7 @@ class actionParser  {
 					if($attrs['obligatoire']) {
 						$this->errors[]="pas de valeur pour $vf";
 						$this->actions[0]['aFaire']='non';
-					} else {
+					} elseif($this->actions[0]['aFaire']!='oui') {
 						$this->actions[0]['aFaire']='peutetre';
 					}
 				}
@@ -196,7 +196,8 @@ class actionParser  {
 			//	die("fin update/insert inattendu");
 			//}
 			$a= array_shift($this->actions);
-			if($a['aFaire']=='oui') {
+			echo "FERME ".var_export($a, 1);
+			if($a['aFaire']=='oui' && $a['field']!=array()) {
 				unset($a['aFaire']);
 				if(count($this->actions)) {
 					$this->actions[0]['sousActions'][]= $a;
@@ -206,7 +207,6 @@ class actionParser  {
 			}
 			break;
 
-		case 'key':
 		case 'field':
 			//if($st!=$name) {
 			//	die("fin key/field inattendu");
