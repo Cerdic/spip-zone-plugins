@@ -93,7 +93,8 @@ function BarreTypoEnrichie_post_propre($texte) {
 
 	// remplace les fausses listes à puce par de vraies
 	// (recherche en début de lignes - suivi d'un ou plusieurs caractères blancs, en mode multiligne)
-	$texte =  preg_replace('/^-\s+/m','-* ',$texte);
+	if (!isset($GLOBALS['barre_typo_preserve_puces']))
+		$texte =  preg_replace('/^-\s+/m','-* ',$texte);
 
 	# Le remplacement des intertitres de premier niveau a déjà été effectué dans inc_texte.php
 
