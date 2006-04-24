@@ -223,11 +223,10 @@ function exec_portfolio(){
 	if ($cpt > 1.5*$nb_aff) {
 		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
 	}
-	$requete = "SELECT $select FROM $from$join$where$order$group LIMIT $deb_aff,$nb_aff";
 
 	$table_need_update = false;
-	if ($tranches) {
-	 	$result = spip_query($requete);
+	if ($cpt) {
+	 	$result = spip_query("SELECT $select FROM $from$join$where$order$group LIMIT $deb_aff,$nb_aff");
 		$num_rows = spip_num_rows($result);
 
 		$ifond = 0;
@@ -235,8 +234,7 @@ function exec_portfolio(){
 
 		// d'abord reperer les vignettes
 		$tab_vignettes=array();
-		$query2 = "SELECT docs.* FROM spip_documents AS docs WHERE id_vignette<>0";
-		$res2 = spip_query($query2);
+		$res2 = spip_query("SELECT docs.* FROM spip_documents AS docs WHERE id_vignette<>0");
 		while ($row2 = spip_fetch_array($res2)) {
 			$tab_vignettes[$row2['id_vignette']] = $row2['id_document'];
 		}
