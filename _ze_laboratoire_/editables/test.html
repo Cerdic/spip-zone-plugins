@@ -1,0 +1,25 @@
+<html>
+<body>
+#EDITABLE_DEBUT
+<BOUCLE_arts(ARTICLES){0,5}>
+#ID_ARTICLE : #TITRE =><br/>
+#EDITABLE_UPDATE{titre,Widget}<br/>
+#EDITABLE_UPDATE{surtitre,Widget}<br/>
+</BOUCLE_arts>
+
+<br><br>
+
+<BOUCLE_pipo(PIPO)>
+#ID : #STR =&gt;<br/>
+#EDITABLE_UPDATE{str,MCEWidget}<br>
+</BOUCLE_pipo>
+<br>
+#EDITABLE_INSERT{pipo,id,1}<br>
+#EDITABLE_INSERT{pipo,str,1,MCEWidget}<br>
+<br>
+#EDITABLE_INSERT{pipo,id,2}<br>
+#EDITABLE_INSERT{pipo,str,2,MCEWidget}<br>
+
+#EDITABLE_FIN
+</body>
+</html>
