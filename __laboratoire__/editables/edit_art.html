@@ -1,0 +1,24 @@
+<html>
+<body>
+#EDITABLE_DEBUT{edit_art.action}
+<h2>Exemple d'edition d'articles :</h2>
+
+<BOUCLE_arts(ARTICLES){0,5}>
+<br/>
+modif de l'article numero #ID_ARTICLE :<br/>
+titre = #EDITABLE{titreArt#ID_ARTICLE,Widget,#TITRE}<br/>
+surtitre = #EDITABLE{surtitreArt#ID_ARTICLE,Widget,#SURTITRE}<br/>
+</BOUCLE_arts>
+
+<br><br>
+
+<br>
+Creation d'un nouvel article :<br>
+titre : #EDITABLE{titreNewArt,Widget}<br/>
+surtitre : #EDITABLE{surtitreNewArt,Widget}<br/>
+texte :<br>#EDITABLE{texteNewArt,MCEWidget}<br/>
+rubrique :<br>#EDITABLE{rubNewArt,Widget}<br/>
+
+#EDITABLE_FIN
+</body>
+</html>
