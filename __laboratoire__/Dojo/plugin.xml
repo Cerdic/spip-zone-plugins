@@ -1,0 +1,38 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Dojo Editeur
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Cedric MORIN
+ 	[notre-ville.net->http://www.notre-ville.net]
+_ &copy; 2006 - Droits reserv&eacute;s, Redistribution interdite
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Edition Wisywig des articles par DOJO editeur
+	</description>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	Dojo
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>dojo.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>body_prive</nom>
+		<inclure>dojo.php</inclure>
+	</pipeline>
+
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
