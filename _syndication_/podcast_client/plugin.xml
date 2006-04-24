@@ -1,0 +1,41 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Podcast client
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	fil@rezo.net
+_ &copy; 2005 - Distribue sous licence GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Client de podcast pour SPIP
+	</description>
+	<options>
+	podcast_client_options.php
+	</options>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	PodcastClient
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>post_syndication</nom>
+		<action>podcast_client</action>
+		<inclure>podcast_client.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>delete_tables</nom>
+		<action>delete_podcast_client</action>
+		<inclure>podcast_client.php</inclure>
+	</pipeline>
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
