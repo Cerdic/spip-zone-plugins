@@ -51,23 +51,32 @@ function exec_forms_tous(){
 	debut_droite();
 	
 	Forms_afficher_forms(_L("Tous les formulaires"),
-		"SELECT forms.*, COUNT(id_reponse) AS reponses ".
-		"FROM spip_forms AS forms LEFT JOIN spip_reponses AS reponses ".
-		"ON (forms.id_form=reponses.id_form AND reponses.statut='valide') ".
-		"WHERE sondage='non' GROUP BY forms.id_form ORDER BY titre");
+		array(
+		"SELECT"=>"forms.*, COUNT(id_reponse) AS reponses",
+		"FROM" => "spip_forms AS forms",
+		"JOIN" => "spip_reponses AS reponses ON (forms.id_form=reponses.id_form AND reponses.statut='valide')",
+		"WHERE" => "sondage='non'",
+		"GROUP BY" => "forms.id_form",
+		"ORDER BY" => "titre"));
 	
 	Forms_afficher_forms(_L("Tous les sondages publics"),
-		"SELECT forms.*, COUNT(id_reponse) AS reponses ".
-		"FROM spip_forms AS forms LEFT JOIN spip_reponses AS reponses ".
-		"ON (forms.id_form=reponses.id_form AND reponses.statut='valide') ".
-		"WHERE sondage='public' GROUP BY forms.id_form ORDER BY titre",
+		array(
+		"SELECT"=>"forms.*, COUNT(id_reponse) AS reponses",
+		"FROM" => "spip_forms AS forms",
+		"JOIN" => "spip_reponses AS reponses ON (forms.id_form=reponses.id_form AND reponses.statut='valide')",
+		"WHERE" => "sondage='public'",
+		"GROUP BY" => "forms.id_form",
+		"ORDER BY" => "titre"),
 		"statistiques-24.gif");
 	
 	Forms_afficher_forms(_L("Tous les sondages prot&eacute;g&eacute;s"),
-		"SELECT forms.*, COUNT(id_reponse) AS reponses ".
-		"FROM spip_forms AS forms LEFT JOIN spip_reponses AS reponses ".
-		"ON (forms.id_form=reponses.id_form AND reponses.statut='valide') ".
-		"WHERE sondage='prot' GROUP BY forms.id_form ORDER BY titre",
+		array(
+		"SELECT"=>"forms.*, COUNT(id_reponse) AS reponses",
+		"FROM" => "spip_forms AS forms",
+		"JOIN" => "spip_reponses AS reponses ON (forms.id_form=reponses.id_form AND reponses.statut='valide')",
+		"WHERE" => "sondage='prot'",
+		"GROUP BY" => "forms.id_form",
+		"ORDER BY" => "titre"),
 		"statistiques-24.gif");
 	
 	echo "<br />\n";

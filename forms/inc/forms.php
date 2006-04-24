@@ -783,84 +783,104 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",
 	function Forms_afficher_forms($titre_table, $requete, $icone = '') {
 		global $couleur_claire, $couleur_foncee;
 		global $connect_id_auteur;
+
+		$tous_id = array();
+		
+		$select = $requete['SELECT'] ? $requete['SELECT'] : '*';
+		$from = $requete['FROM'] ? $requete['FROM'] : 'spip_articles AS articles';
+		$join = $requete['JOIN'] ? (' LEFT JOIN ' . $requete['JOIN']) : '';
+		$where = $requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '';
+		$order = $requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '';
+		$group = $requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '';
+		$limit = $requete['LIMIT'] ? (' LIMIT ' . $requete['LIMIT']) : '';
 	
-		if (preg_match('/(\s+FROM\s+.*?)(ORDER\s+BY\s+.*)?$/', 
-				$requete,
-			       $r)) {
-		  $cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n$r[1]"));
-		  $cpt = $cpt['n'];
-	
-		  $tranches = afficher_tranches_requete($requete, $cpt, 3);
-			if (!$icone) $icone = "../"._DIR_PLUGIN_FORMS."/form-24.png";
-		
-			if ($tranches) {
-				if ($titre_table) echo "<div style='height: 12px;'></div>";
-				echo "<div class='liste'>";
-				bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black");
-				echo "<table width='100%' cellpadding='5' cellspacing='0' border='0'>";
-		
-				echo $tranches;
-		
-			 	$result = spip_query($requete);
-				$num_rows = spip_num_rows($result);
-		
-				$ifond = 0;
-				$premier = true;
-				
-				$compteur_liste = 0;
-				while ($row = spip_fetch_array($result)) {
-					$vals = '';
-					$id_form = $row['id_form'];
-					$reponses = $row['reponses'];
-					$titre = $row['titre'];
-	
-					$tous_id[] = $id_form;
-	
-					$retour = parametre_url(self(),'duplique_form','');
-					$link = generer_url_ecrire('forms_edit',"id_form=$id_form&retour=".urlencode($retour));
-					if ($reponses) {
-						$puce = 'puce-verte-breve.gif';
-					}
-					else {
-						$puce = 'puce-orange-breve.gif';
-					}
-		
-					$s = "<img src='"._DIR_IMG_PACK."$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
-					$vals[] = $s;
-					
-					//$s .= typo($titre);
-					$s = icone_horizontale(typo($titre), $link,"../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "",false);
-					$vals[] = $s;
-					
-					$s = "";
-					$vals[] = $s;
-		
-					$s = "";
-					if ($reponses) {
-						$s .= _T("forms:nombre_reponses",array('nombre'=>$reponses));
-					}
-					$vals[] = $s;
-					
-					$s = "";
-					if(Forms_form_administrable($id_form)){
-						$link = parametre_url(self(),'duplique_form',$id_form);
-						$vals[] = "<a href='$link'>"._L("Dupliquer")."</a>";
-					}
-					$vals[] = $s;
-	
-					$table[] = $vals;
-				}
-				spip_free_result($result);
-				
-				$largeurs = array('','','','','');
-				$styles = array('arial11', 'arial11', 'arial1', 'arial1','arial1');
-				echo afficher_liste($largeurs, $table, $styles);
-				echo "</table>";
-				echo "</div>\n";
-			}
-			return $tous_id;
+		$cpt = "$from$join$where$group";
+		$tmp_var = substr(md5($cpt), 0, 4);
+
+		if (!$group){
+			$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $cpt"));
+			if (! ($cpt = $cpt['n'])) return $tous_id ;
 		}
-		return false;
+		else
+			$cpt = spip_num_rows(spip_query("SELECT $select FROM $cpt"));
+		if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
+	
+		$nb_aff = 1.5 * _TRANCHES;
+		$deb_aff = intval(_request('t_' .$tmp_var));
+	
+		if ($cpt > $nb_aff) {
+			$nb_aff = (_TRANCHES); 
+			$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
+		}
+		
+		if (!$icone) $icone = "../"._DIR_PLUGIN_FORMS."/form-24.png";
+		
+		if ($cpt) {
+			if ($titre_table) echo "<div style='height: 12px;'></div>";
+			echo "<div class='liste'>";
+			bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black");
+			echo "<table width='100%' cellpadding='5' cellspacing='0' border='0'>";
+	
+			echo $tranches;
+	
+			$result = spip_query("SELECT $select FROM $from$join$where$group$order LIMIT $deb_aff, $nb_aff");
+			$num_rows = spip_num_rows($result);
+	
+			$ifond = 0;
+			$premier = true;
+			
+			$compteur_liste = 0;
+			while ($row = spip_fetch_array($result)) {
+				$vals = '';
+				$id_form = $row['id_form'];
+				$reponses = $row['reponses'];
+				$titre = $row['titre'];
+
+				$tous_id[] = $id_form;
+
+				$retour = parametre_url(self(),'duplique_form','');
+				$link = generer_url_ecrire('forms_edit',"id_form=$id_form&retour=".urlencode($retour));
+				if ($reponses) {
+					$puce = 'puce-verte-breve.gif';
+				}
+				else {
+					$puce = 'puce-orange-breve.gif';
+				}
+	
+				$s = "<img src='"._DIR_IMG_PACK."$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
+				$vals[] = $s;
+				
+				//$s .= typo($titre);
+				$s = icone_horizontale(typo($titre), $link,"../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "",false);
+				$vals[] = $s;
+				
+				$s = "";
+				$vals[] = $s;
+	
+				$s = "";
+				if ($reponses) {
+					$s .= _T("forms:nombre_reponses",array('nombre'=>$reponses));
+				}
+				$vals[] = $s;
+				
+				$s = "";
+				if(Forms_form_administrable($id_form)){
+					$link = parametre_url(self(),'duplique_form',$id_form);
+					$vals[] = "<a href='$link'>"._L("Dupliquer")."</a>";
+				}
+				$vals[] = $s;
+
+				$table[] = $vals;
+			}
+			spip_free_result($result);
+			
+			$largeurs = array('','','','','');
+			$styles = array('arial11', 'arial11', 'arial1', 'arial1','arial1');
+			echo afficher_liste($largeurs, $table, $styles);
+			echo "</table>";
+			echo "</div>\n";
+		}
+		return $tous_id;
 	}
 
 
