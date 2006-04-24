@@ -20,6 +20,7 @@ function phpmv_affichage_final($texte){
 	//$html= preg_match(',^\s*text/html,',$page['entetes']['Content-Type']);
 	global $html;
 	if ($html){
+		include_spip("inc/meta");
 		ecrire_meta('_PHPMV_DIR_CONFIG',realpath(_DIR_SESSIONS . "phpmvconfig"));
 		ecrire_meta('_PHPMV_DIR_DATA',realpath(_DIR_SESSIONS . "phpmvdatas"));
 		ecrire_meta('_DIR_PLUGIN_PHPMV',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
