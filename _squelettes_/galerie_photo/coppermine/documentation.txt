@@ -1,0 +1,143 @@
+
+
+
+1. PRESENTATION
+====
+
+La Galerie Photo Coppermine :
+----
+
+Coppermine (http://coppermine-gallery.net) est une application PHP/MySQL de gestion de galerie de photographies en ligne. les utilisateurs peuvent télécharger des images depuis leur navigateur Internet (les vignettes et les formats intermédiaires sont crées automatiquement), noter les images, ajouter des commentaires et envoyer des cartes électroniques. Les administrateurs peuvent gérer les galeries et ajouter par lot les images téléchargées sur le serveur par FTP.  Les images sont placées dans des albums, ces albums pouvant être regroupés dans des catégories. 
+
+Principe de l'intégration de Coppermine avec Spip :
+----
+
+L'intégration de Coppermine avec Spip est réalisée par :
+
+- un "bridge" Coppermine pour partager la base des utilisateurs spip (un rédacteur peut publier des photos avec son login spip en ne s'identifiant qu'une fois, un administrateur spip est également administrateur de la galerie).
+
+- une nouvelle balise spip #COPPERMINE pour spécifier dans un squelette l'emplacement de la galerie, ce qui permet d'intégrer visuellement la galerie avec le reste de votre site; ainsi que d'une balise #COPPERMINE_RANDOM_IMG pour afficher des vignettes aléatoires
+
+Démonstration :
+----
+
+Un exemple à des fins de test est disponible sur http://spiptest.africa-web.org
+Vous pouvez vous inscrire comme rédacteur pour tester l'upload d'images. 
+
+2. INSTALLATION DE COPPERMINE ET ACTIVATION DU BRIDGE SPIP 1.9
+====
+
+0) Spip 1.9 doit être préalablement installé. Attention l'authentification sous spip doit s'effectuer avec la méthode classique (cookie de session) et non pas l'authentification par .htaccess. En effet, le cookie de session de spip doit être accessible par coppermine pour que le bridge soit fonctionnel.
+
+1) Téléchargez Coppermine 1.4.4 sur http://coppermine-gallery.net et installez le dans un sous-répertoire de votre site spip (par exemple /coppermine/)
+
+2) Une fois l'installation effectuée, copiez le fichier bridge/spip.inc.php dans le répertoire bridge/ où est installé coppermine
+
+3) Editez le fichier bridgemgr.php à la racine de coppermine et ajoutez après le dernier bloc $default_bridge_data les lignes suivantes (vers la ligne 530 mais bon en fait on peut mettre cela n'importe où) :
+
+$default_bridge_data['spip'] = array(
+  'full_name' => 'SPIP 1.9',
+  'short_name' => 'SPIP',
+  'support_url' => 'http://www.spip.net/',
+  'full_forum_url_default' => 'http://www.votresite.tld',
+  'full_forum_url_used' => 'mandatory,not_empty,no_trailing_slash',
+  'relative_path_to_config_file_default' => '../ecrire/',
+  'relative_path_to_config_file_used' => 'lookfor,inc_connect.php',
+  'use_post_based_groups_default' => '0',
+  'use_post_based_groups_used' => '0',
+);
+
+4) Identifiez vous sur votre coppermine avec le login Administrateur spécifié lors de l'installation puis section "Utilitaires", bloc "Gestionnaire de Bridge" tout en bas de la page puis "Démarrer l'assistant". Le paramétrage a effectué est le suivant.
+
+- Choisissez une application à bridger avec Coopermine : SPIP 1.9
+- URL du forum : url permettant d'accéder au site spip, par exemple http://www.mondomain.tld
+- Chemin relatif à la page de configuration de votre forum : il s'agit ici en fait du chemin permettant d'accéder au fichier inc_connect.php à partir du répertoire où coppermine est installé. Par exemple, si coppermine est installé dans un sous-répertoire de spip, le chemin relatif est ../ecrire/
+- Active l'intégration/le bridge avec SPIP 1.9 : Activé.
+
+Et voilà l'intégration spip vers coppermine est terminée. L'authentification à coppermine est désormais identique à l'authentification à l'interface privée de spip. Chaque rédacteur spip peut gérer des albums photos et chaque administrateur spip, administrer également coppermine. Tant que le brige spip n'est pas désactivé, les utilisateurs autonomes de coppermine ne sont pas pris en compte.
+
+
+
+3. INTERFACER COPPERMINE DANS SPIP
+====
+
+Activation et paramétrage du plugin
+----
+
+Pour intégrer coppermine dans spip, il faut tout d'abord activer le plugin puis editer le fichier config.inc.php du plugin pour spécifier le répertoire où est installé Coppermine.
+
+<?
+// Spécifiez ici le répertoire où est installé Coppermine (répertoire relatif au nom du serveur)
+// Par exemple /coppermine/ si l'application est accessible par http://www.mondomain.tld/coppermine/
+// soit $coppermineDir="/coppermine/";
+
+$coppermineDir="/coppermine/";
+?>
+
+Insérer la galerie photo et une vignette aléatoire dans vos squelettes
+----
+
+L'intégration de la galerie photo est ensuite trés simple :
+
+- la balise #COPPERMINE permet d'insérer l'album photo;
+- la balise #COPPERMINE_RANDOM_IMG permet d'afficher une vignette tirée aléatoirement parmi les photos et si un paramètre est mentionné entre les accolades, spécifie qu'un lien doit être crée vers le squelette gérant la galerie. Un second paramètre permet de spécifier le nombre de vignettes aléatoires à afficher. A noter que les paramètres title et alt de la balises <img> sont de la forme "titre de l'album - titre de l'image".
+
+Exemples d'utilisation :
+
+#COPPERMINE_RANDOM_IMG : affiche une vignette aléatoire d'un album public
+#COPPERMINE_RANDOM_IMG{galerie} : affiche une vignette aléatoire d'un album public avec un lien vers spip.php?page=galerie
+#COPPERMINE_RANDOM_IMG{galerie,3} : affiche 3 vignettes aléatoires d'un album public avec un lien vers spip.php?page=galerie sur chaque image
+
+Personnaliser le look de la galerie
+----
+
+La personnalisation de l'apparence de la galerie s'effectue à partir de l'interface d'administration de Coppermine à partir d'un compte administrateur par le biais des thèmes Coppermine. Une fois sélectionné le template Coppermine, il est fortement conseillé d'éditer la feuille de style style.css du thème utilisé pour supprimer les styles redondants avec vos squelettes (les styles associées aux balises <a> par exemple) et adpater les styles à vos besoins. Pour une personnalisation plus poussée, on peut également éditer les fichiers template.html et theme.php du répertoire coppermine/themes/theme sélectionné/ - Intervenir sur le fichier template.html permet de préciser les entêtes et pied de page de la galerie : insertion ou non du logo coppermine, insertion ou non du menu d'administration, etc... Lors de l'utilisation de la balise #COPPERMINE, seule la section comprise entre <body> et </body> et prise en compte dans spip : il est donc inutile d'intervenir dans la section <head>. Toutefois, il est nécessaire de laisser la référence vers l'appel à la feuille de style du thème, car cette référence est récupérée lors du traitement de la balise spip.
+
+Interdire un accès direct à la galerie en dehors de spip 
+-----
+
+Si vous souhaitez que la galerie photo soit accessible uniquement via vos pages spip et non pas via un accès direct à la gallerie (par exemple, il faut passer par spip.php?page=galerie et bloquer les accès directs à /coppermine/), une solution consiste à utiliser un fichier .htaccess.
+
+Exemple de fichier .htaccess placé dans le répertoire de coppermine :
+
+RewriteEngine on
+RewriteCond %{HTTP_REFERER} !^http://spiptest.africa-web.org/spip.php
+RewriteCond %{HTTP_REFERER} !^http://www.spiptest.africa-web.org/spip.php
+RewriteRule ^(.*)\.php\??(.*) http://spiptest.africa-web.org/spip.php?page=galerie&file=$1&var_mode=recalcul$3 [QSA]
+RewriteRule ^$ http://spiptest.africa-web.org/spip.php?page=galerie&var_mode=recalcul [QSA]
+
+Cette exemple se base sur un site spip accessible par http://spiptest.africa-web.org, coppermine installé dans le répertoire /coppermine/ et galerie.html étant le squelette d'affichage de la galerie. Ces régles de ré-écritures redirigent tous les appels aux fichiers php de http://spiptest.africa-web.org/coppermine/ ne provenant pas de spip vers la page équivalente traitée par spip.php?page=galerie
+
+4. DEVELOPPEMENT DU PLUG-IN, TODO ET BUGS
+====
+
+Principe de l'interfaçage spip vers coppermine :
+----
+
+Afin de ne pas multiplier inutilement les comptes utilisateurs (auteurs spip et utilisateurs coppermine) ainsi que les authentifications, un "bridge" coppermine d'intégration spip a été développé. Ce bridge consiste à rediriger vers spip les pages de login et de logout, de récupérer le cookie de session de spip, de lire dans la session correspondante l'auteur spip et de créer un cookie de session coppermine. Un auteur spip identifié est affecté aux groupes utilisateurs de coppermine : groupe Administrator si l'auteur est un administrateur spip et groupe Register si l'auteur est un simple rédacteur.
+Des informations sur le développement de "bridge" spip sont fournies sur http://coppermine-gallery.net/demo/cpg14x/docs/index_fr.htm#integrating_bridge_start
+
+Principe de l'interfaçage coppermine vers spip :
+----
+
+L'objectif ici était de permettre une parfaite intégration de la galerie photo Coppermine dans ses propres squelettes, ceci sans avoir à modifier aux noyaux de spip et de coppermine, afin que le plugin reste fonctionnel avec les futures versions de spip et coppermine. Pour cela, la stratégie adoptée a consisté non pas à modifier les principaux fichiers de coppermine mais tout simplement à récupérer les url de coppermine, de supprimer l'entête <head> de la page html et d'effectuer quelques modifications (changement dans les liens) avant de renvoyer le code html vers spip.
+
+La récupération d'une page de coppermine est réalisée par le biais de la fonction fsockopen. On aurait pu faire la même chose avec la fonction fopen ou la librairie curl mais l'utilisation de fsockopen a été privilégié afin d'être indépendant de la configuration php de l'hébergeur (fopen sur une url nécessite allow_url_fopen activé et curl la librairie libcurl). 
+Pour que les informations d'identification spip et de paramétrages coppermine (langue par défaut par exemple) soit conservées, fsockopen passe dans l'entête les valeurs des cookies spip_session et cpg143_data
+En outre, lors de l'envoi de la requête par fsockopen, toutes les variables postées par les formulaires de coppermine ($_POST) sont renvoyées dans l'entête ainsi que les fichiers uploadés dans le cas de la page upload.php ($_FILES).
+Une fois récupérée une page, tous les liens de type page.php?parametres sont remplacés par des liens de type spip.php?page=monsquelette&parametres afin que chaque lien soit traité par le squelette concerné spip. Des modifications sont également apportées à la volée sur les adresses d'envoi des formulaires et sur certains javascripts par le biais d'expressions régulières. 
+
+TODO Liste :
+----
+
+- vérifier de manière exhaustive les appels javascripts et le traitement des formulaires de coppermine. Faire un peu le ménage dans les expressions régulières et ajouter des conditions sur les fichiers traitées (pas besoin par exemple de chercher à modifier à la volée le javascript de diaporama si on est pas sur la page concernée).
+- aller chercher dans la base coppermine le nom du cookie coppermine : actuellement son nom est codé en dur (cpg143_data) et si on a le mauvais gout de changer son nom via l'interface d'admin de coppermine, c'est pas bon.
+- proposer le bridge spip - une fois stabilisé - à la communauté des développeurs coppermine pour intégration dans les futurs versions de coppermine
+- intégrer dans l'interface privée de spip une page de configuration du plugin pour éviter d'avoir à modifier manuellement config.inc.php et paramétrer automatiquement le bridge spip dans la base de coppermine
+
+BUGS :
+----
+
+- ajout de &var_mode=recalcul dans tous les liens pour forcer le recalcul de la page : utilisation de #CACHE{0} et de fsockopen ne font pas bon ménage !?
+- problème dans la notation des images (sans doute le traitement de la redirection dans le fsockopen).
+
