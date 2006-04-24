@@ -36,16 +36,37 @@ function exec_acces_restreint(){
 	if (isset($_GET['supp_zone']))
 		AccesRestreint_supprimer_zone();
 
-	$requete = "SELECT zones.* FROM spip_zones AS zones";
+	$requete = array("SELECT"=>"zones.*","FROM"=>"spip_zones AS zones");
+	$select = $requete['SELECT'] ? $requete['SELECT'] : '*';
+	$from = $requete['FROM'] ? $requete['FROM'] : 'spip_articles AS articles';
+	$join = $requete['JOIN'] ? (' LEFT JOIN ' . $requete['JOIN']) : '';
+	$where = $requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '';
+	$order = $requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '';
+	$group = $requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '';
+	$limit = $requete['LIMIT'] ? (' LIMIT ' . $requete['LIMIT']) : '';
 
-	$table = "";
-  $cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_zones"));
-  $cpt = $cpt['n'];
+	$cpt = "$from$join$where$group";
+	$tmp_var = "debut";
 
-  $tranches = afficher_tranches_requete($requete, $cpt, 5);
+	if (!$group){
+		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $cpt"));
+		$cpt = $cpt['n'];
+	}
+	else
+		$cpt = spip_num_rows(spip_query("SELECT $select FROM $cpt"));
 
-  if ($tranches) {
-	 	$result = spip_query($requete);
+	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
+
+	$nb_aff = 1.5 * _TRANCHES;
+	$deb_aff = intval(_request('t_' .$tmp_var));
+
+	if ($cpt > $nb_aff) {
+		$nb_aff = (_TRANCHES); 
+		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
+	}
+
+  if ($cpt) {
+	 	$result = spip_query("SELECT $select FROM $from$join$where$group$order LIMIT $deb_aff, $nb_aff");
 
 		$vals = '';
 		$vals[] = _T('accesrestreint:colonne_id');
