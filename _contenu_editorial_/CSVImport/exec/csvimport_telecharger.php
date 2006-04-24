@@ -6,7 +6,7 @@
  * Auteur :
  * Cedric MORIN
  * notre-ville.net
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * (c) 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -15,16 +15,18 @@ include_spip("inc/presentation");
 
 function exec_csvimport_telecharger(){
 	global $spip_lang_right;
-	$table = _request('table');	
+	$table = _request('table');
 	$retour = _request('retour');
+
 	$delim = _request('delim');
+	if ($delim == 'TAB') $delim = "\t";
 
 	if (!$retour)
 		$retour = generer_url_ecrire('csvimport_tous');
 	
 	$operations = array();
 	
-	$titre = "";
+	$titre = "Export ".$table;
 	$is_importable = csvimport_table_importable($table,$titre,$operations);
 	if (in_array('export',$operations))
 	  $csvimport_export_actif = true;
@@ -42,16 +44,17 @@ function exec_csvimport_telecharger(){
 		debut_cadre_relief($icone);
 		gros_titre($titre);
 		echo "<br />\n";
-		echo _L("Format du fichier téléchargé :");
+		echo _L("Format du fichier&nbsp;:");
 		echo "<br />\n";
-		// Extrait de la table en commençant par les dernieres maj
+		// Extrait de la table en commencant par les dernieres maj
 		echo generer_url_post_ecrire('csvimport_telecharger',"table=$table&retour=$retour");
 		echo "<select name='delim'>\n";
-		echo "<option value=','>"._L("Format CSV")."</option>\n";
-		echo "<option value=';'>"._L("Format CSV pour Excel (séparateur ';')")."</option>\n";
+		echo "<option value=','>"._L("CSV classique (,)")."</option>\n";
+		echo "<option value=';'>"._L("CSV pour Excel (;)")."</option>\n";
+		echo "<option value='TAB'>"._L("CSV avec tabulations")."</option>\n";
 		echo "</select>";
 		echo "<br /><br />\n";
-		echo "<input type='submit' name='ok' value='Telecharger' />\n";
+		echo "<input type='submit' name='ok' value='T&eacute;l&eacute;charger' />\n";
 	
 		fin_cadre_relief();
 	
@@ -95,9 +98,15 @@ function exec_csvimport_telecharger(){
 				  $ligne[]="";
 			$output .= csvimport_csv_ligne($ligne,$delim);
 		}
-	
-		$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo($titre))));
+
 		$charset = lire_meta('charset');
+
+		# Excel n'accepte pas l'utf-8 ni les entites html... on fait comment ?
+		include_spip('inc/charsets');
+		$output = unicode2charset(charset2unicode($output), 'iso-8859-1');
+		$charset = 'iso-8859-1';
+
+		$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo($titre))));
 		Header("Content-Type: text/comma-separated-values; charset=$charset");
 		Header("Content-Disposition: attachment; filename=$filename.csv");
 		//Header("Content-Type: text/plain; charset=$charset");
