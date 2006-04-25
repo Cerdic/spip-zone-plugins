@@ -12,10 +12,9 @@
 
 define('_DIR_PLUGIN_CSVIMPORT',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__))))))));
 
-include_spip("inc/db_mysql");
-include_spip("inc/abstract_sql");
+include_spip("base/db_mysql");
+include_spip("base/abstract_sql");
 include_spip("inc/charsets");
-//include_once("csvimport_base.php");
 
 function acces_interdit() {
 	debut_page(_T('avis_acces_interdit'), "documents", "cvsimport");
@@ -435,8 +434,6 @@ function csvimport_ajoute_table_csv($data, $table, $assoc_field, &$erreur){
 	global $tables_principales;
 	$csvimport_tables_auth = csvimport_tables_auth();
 	$assoc = array_flip($assoc_field);
-	//$id_primary = mysql_query("INSERT INTO spip_articles (titre) VALUES ('toto')", $GLOBALS['spip_mysql_link']);
-	//$id_primary = mysql_query("INSERT INTO spip_artisans (raison) VALUES ('toto')", $GLOBALS['spip_mysql_link']);
 	$desc = spip_abstract_showtable($table);
 	if (!isset($desc['field']) || count($desc['field'])==0){
 		$erreur[0][] = "Description de la table introuvable";
@@ -483,9 +480,6 @@ function csvimport_ajoute_table_csv($data, $table, $assoc_field, &$erreur){
 				if ((strlen($what)>1)&&(strlen($with)>1)) {
 					$what = substr($what,0,strlen($what)-1) . ")";
 					$with = substr($with,0,strlen($with)-1) . ")";
-					//$what = "(raison_sociale)";
-					//$with = "('toto')";
-					
 					$id_primary = spip_abstract_insert($table, $what, $with);
 					if ($id_primary==0)
 					  $erreur[$count_lignes][] = "ajout impossible ::$what::$with::<br />";

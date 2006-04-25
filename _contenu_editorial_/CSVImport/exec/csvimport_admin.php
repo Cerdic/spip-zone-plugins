@@ -43,11 +43,10 @@ function csvimport_admin_action(){
 	}
 }
 
-function ligne_table_import($table){
+function ligne_table_import($table,$desc){
 	static $csvimport_tables_auth=NULL;
 	$liste_statuts = array('0minirezo'=>_T('item_administrateur_2'), '1comite'=>_T('intem_redacteur'));
 	$liste_operations = array('add' => _L('Ajouter des donn&eacute;es'),'replaceall' =>_L('Tout remplacer'),'export' =>_L('Exporter'));
-	$desc = spip_abstract_showtable($table);
 
 	if ($csvimport_tables_auth==NULL)
 		$csvimport_tables_auth = csvimport_tables_auth();
@@ -216,12 +215,18 @@ function exec_csvimport_admin(){
 	$compteur_liste = 0;
 	$tableau = array();
 	foreach($liste_des_tables_spip as $table) {
-			$ligne = ligne_table_import($table);
+		$desc = spip_abstract_showtable($table);
+		if (is_array($desc)){
+			$ligne = ligne_table_import($table,$desc);
 			$tableau[] = $ligne;
+		}
 	}
 	foreach($liste_des_tables_autres as $table) {
-			$ligne = ligne_table_import($table);
+		$desc = spip_abstract_showtable($table);
+		if (is_array($desc)){
+			$ligne = ligne_table_import($table,$desc);
 			$tableau[] = $ligne;
+		}
 	}
 
 	$largeurs = array('','','','','');
