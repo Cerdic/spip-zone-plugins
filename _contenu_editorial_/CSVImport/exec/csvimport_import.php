@@ -28,18 +28,19 @@ function exec_csvimport_import(){
 	$ajouter = _request('ajouter');
 	$remplacer = _request('remplacer');
 	$assoc_field = _request('assoc_field');
+	$apercu = _request('apercu');
 
 	if (!$step)
 		$step = 1;
 	if (!$retour)
-		$retour = 'csvimport_tous.php';
+		$retour = generer_url_ecrire('csvimport_tous');
 	
 	$titre = _L("Import CSV : ");
 	$icone = "../"._DIR_PLUGIN_CSVIMPORT."/img_pack/csvimport-24.png";
 	$operations = array();
 	
-	$import_link = generer_url_ecrire("csvimport_import","table=$table&retour=$retour");
-	$import_form_link = generer_url_post_ecrire("csvimport_import","table=$table&retour=$retour");
+	$import_link = generer_url_ecrire("csvimport_import","table=$table&retour=".urlencode($retour));
+	$import_form_link = generer_url_post_ecrire("csvimport_import","table=$table&retour".urlencode($retour));
 	$clean_link = $import_link;
 	
 	$is_importable = csvimport_table_importable($table,$titre,$operations);
@@ -71,7 +72,7 @@ function exec_csvimport_import(){
 			  $step--;
 			else if (($ajouter)&&(_request('annule_ajoute')))
 			  $step--;
-			else if ($apercu)
+			else if ($apercu!=NULL)
 			  	$step--;
 			else if (($remplacer)&&(!isset($csvimport_replace_actif)))
 			  	$step--;
@@ -80,7 +81,6 @@ function exec_csvimport_import(){
 	  }
 	
 		if ($step==3){
-			global $step;
 			if ( (!$file_name)||(!$tmp_name)||(!$size)||(!$type) )
 				 $erreur[$step][] = _L("Fichier absent");
 	
@@ -113,7 +113,7 @@ function exec_csvimport_import(){
 			$hidden['type'] = $type;
 			$hidden['step'] = 3;
 			foreach($assoc_field as $key=>$value)
-				$hidden["assoc_field[$key]"] = $value;
+				$hidden["assoc_field[".htmlentities($key,ENT_QUOTES)."]"] = $value;
 			$hidden["delim"] = $delim;
 			$hidden["head"] = $head;
 	
@@ -225,7 +225,6 @@ function exec_csvimport_import(){
 	
 		// --- STEP 2
 		if ($step==2){
-			global $step;
 			if (!isset($_FILES))
 				$erreur[$step][] = _L("Probl&egrave;me inextricable...");
 			if (
@@ -239,7 +238,6 @@ function exec_csvimport_import(){
 			if (isset($erreur[$step])) $step--;
 		}
 		if ($step==2){
-			global $step;
 			if (!$head) $head = false;
 	
 			if (isset($_FILES['csvfile'])){

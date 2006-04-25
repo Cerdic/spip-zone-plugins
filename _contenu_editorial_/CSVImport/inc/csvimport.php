@@ -125,7 +125,7 @@ function csvimport_afficher_tables($titre_table, $icone = '') {
 				$s = "";
 				if ($importable)
 					$s .= "<a href='$link'>";
-				$s .= "<img src='img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
+				$s .= "<img src='"._DIR_INCLUDE."img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
 				$s .= strlen($titre)?typo($titre):$latable;
 				if ($importable)
 					$s .= "</a>";
@@ -344,6 +344,7 @@ function csvimport_field_associate($data, $table, $assoc_field){
 	global $tables_principales;
 	$csvimport_tables_auth = csvimport_tables_auth();
 	$assoc=$assoc_field;
+	if (!is_array($assoc)) $assoc = array();
 	$csvfield=array_keys($data{1});
 	$csvfield=array_flip($csvfield);
 
@@ -410,7 +411,7 @@ function csvimport_field_configure($data, $table, $assoc){
 	foreach($csvfield as $csvkey){
 		$output .=  "<tr>";
 		$output .=  "<td>$csvkey</td>";
-		$output .= "<td><select name='assoc_field[$csvkey]'>\n";
+		$output .= "<td><select name='assoc_field[".htmlentities($csvkey,ENT_QUOTES)."]'>\n";
 		$output .= "<option value='-1'>"._L("Ne pas importer")."</option>\n";
 		foreach($tablefield as $tablekey){
 			$output .= "<option value='$tablekey'";
@@ -434,18 +435,28 @@ function csvimport_ajoute_table_csv($data, $table, $assoc_field, &$erreur){
 	global $tables_principales;
 	$csvimport_tables_auth = csvimport_tables_auth();
 	$assoc = array_flip($assoc_field);
+	//$id_primary = mysql_query("INSERT INTO spip_articles (titre) VALUES ('toto')", $GLOBALS['spip_mysql_link']);
+	//$id_primary = mysql_query("INSERT INTO spip_artisans (raison) VALUES ('toto')", $GLOBALS['spip_mysql_link']);
+	$desc = spip_abstract_showtable($table);
+	if (!isset($desc['field']) || count($desc['field'])==0){
+		$erreur[0][] = "Description de la table introuvable";
+		return;
+	}
+	if ($GLOBALS['mysql_rappel_nom_base'] AND $db = $GLOBALS['spip_mysql_db'])
+		$table = '`'.$db.'`.'.$table;
 
-	$tablefield=array_keys($tables_principales[$table]['field']);
+	
+	$tablefield=array_keys($desc['field']);
 	$output = "";
 	// y a-t-il une cle primaire ?
-	if (isset($tables_principales[$table]['key']["PRIMARY KEY"])){
-		$primaire = $tables_principales[$table]['key']["PRIMARY KEY"];
+	if (isset($desc['key']["PRIMARY KEY"])){
+		$primaire = $desc['key']["PRIMARY KEY"];
 		// la cle primaire est-elle importee ?
 		if (in_array($primaire,$assoc_field))
 		  unset($primaire);
  	}
 	// y a-t-il un champ TIMESTAMP ?
-	$test=array_flip($tables_principales[$table]['field']);
+	$test=array_flip($desc['field']);
 	if (isset($test['TIMESTAMP']))
 	  $stamp = $test['TIMESTAMP'];
 
@@ -472,6 +483,9 @@ function csvimport_ajoute_table_csv($data, $table, $assoc_field, &$erreur){
 				if ((strlen($what)>1)&&(strlen($with)>1)) {
 					$what = substr($what,0,strlen($what)-1) . ")";
 					$with = substr($with,0,strlen($with)-1) . ")";
+					//$what = "(raison_sociale)";
+					//$with = "('toto')";
+					
 					$id_primary = spip_abstract_insert($table, $what, $with);
 					if ($id_primary==0)
 					  $erreur[$count_lignes][] = "ajout impossible ::$what::$with::<br />";
