@@ -14,7 +14,8 @@ error_log("new_widget($id, $classe, $valeur, $callbacks)");
 }
 
 function doSpipInclude($fond) {
-	$contexte_inclus = array('fond' => $fond);
+	$contexte_inclus = $GLOBALS['contexte'];
+	$contexte_inclus['fond']= $fond;
 	ob_start();
 	include('ecrire/public.php');
 	$inclu= ob_get_clean();

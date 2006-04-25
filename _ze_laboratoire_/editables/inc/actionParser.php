@@ -1,5 +1,10 @@
 <?php
 
+include_spip('base/abstract_sql');
+include_spip('public/interfaces');
+include_spip('base/serial');
+include_spip('public/references');
+
 class actionParser  {
 	var $parser;
 	// les valeurs récupérées par le contexte et à utiliser dans les actions
@@ -40,26 +45,28 @@ class actionParser  {
 		xml_parse($this->parser, $data);
 	}
 
-	function getSql($liste=null) {
+	function getCode($liste=null) {
 		if(!$liste) {
-			$liste= $this->liste;
+			$l= $this->liste;
+		} else {
+			$l= $liste;
 		}
-		echo "<xmp>getSql:".var_export($liste, 1)."</xmp>";
+		echo "<xmp>getSql:".var_export($l, 1)."</xmp>";
 		$res='';
-		foreach($liste as $action) {
+		foreach($l as $action) {
 			if($action['type']=='insert') {
 				foreach($action['field'] as $k => &$v) {
 					$res.=$this->computeValue($v);
 				}
-				// A FAIRE : convertir type en table
-				$table= $action['table'];
+				$table= description_type_requete($action['table']);
+				$table= $table['table'];
 				$colonnes= '('.join(", ", array_keys($action['field'])).')';
 				$valeurs= '('.join(", ", array_values($action['field'])).')';
-				$appel= "spip_abstract_insert(\"$table\",\"$colonnes\",\"$valeurs\");";
+				$appel= "spip_abstract_insert(\"$table\",\"$colonnes\",\"$valeurs\")";
 				if($id=$action['id']) {
-					$res.="\$var_tmp_$id= $appel\n";
+					$res.="\n && (\$var_tmp_$id= $appel)";
 				} else {
-					$res.="$appel\n";
+					$res.="\n && $appel";
 				}
 			} else {
 				$set= array();
@@ -72,15 +79,21 @@ class actionParser  {
 					$res.=$this->computeValue($v);
 					$where[]="$k = $v";
 				}
-				$rq='UPDATE '.$action['table'].' SET '.join(', ', $set)
+				$table= description_type_requete($action['table']);
+				$table= $table['table'];
+				$rq='UPDATE '.$table.' SET '.join(', ', $set)
 					.' WHERE '.join(' AND ', $where);
-				$res.="spip_query(\"$rq\");\n";
+				$res.="\n && spip_query(\"$rq\")";
 			}
 			if($sa=$action['sousActions']) {
-				$res.=$this->getSql($sa);
+				$res.=$this->getCode($sa);
 			}
 		}
-		return $res;
+		if(!$liste) {
+			return "return true$res;";
+		} else {
+			return $res;
+		}
 		
 	}
 
@@ -258,10 +271,10 @@ class actionParser  {
 				$where= join(' AND ', $where);
 				$this->tmpVars++;
 				$var= '$tmp_var'.$this->tmpVars;
-				$res.="$var=spip_abstract_fetsel(\""
+				$res.="\n && (($var=spip_abstract_fetsel(\""
 					.$value['colonne']."\", \"".$value['table']
-					."\", \"$where\");\n$var= ${var}['"
-					.$value['colonne']."'];\n";
+					."\", \"$where\")) && ($var= ${var}['"
+					.$value['colonne']."']))";
 				$value= "\".$var.\"";
 			}
 		} else {

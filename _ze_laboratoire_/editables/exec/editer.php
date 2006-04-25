@@ -1,12 +1,6 @@
 <?php
 
-  //include_spip('inc/callbacks');
-
-include_spip('base/abstract_sql');
-include_spip('public/interfaces');
-include_spip('base/serial');
-include_spip('public/references');
-include_spip('inc/sax');
+//include_spip('inc/callbacks');
 
 function exec_editer() {
 	if (!isset($_POST['widgets']) OR !is_array($_POST['widgets'])) {
@@ -54,7 +48,10 @@ function exec_editer() {
 		}
 	}
 
-	doActions($actions, $valeurs);
+	$res= doActions($actions, $valeurs);
+	if(!$res) {
+		echo mysql_error();
+	}
 	//rediriger($_POST['retour']);
 }
 
@@ -74,7 +71,7 @@ function verif_secu($v1, $v2, $secu) {
 // appelle les callbacks d'une valeur pour valider qu'on peut la prendre
 // en compte
 function doCallBacks($callbacks, &$content) {
-	error_log("CALLBACKS $callbacks sur $content");
+	//error_log("CALLBACKS $callbacks sur $content");
 	foreach(explode(';', $callbacks) as $callback) {
 		if($callback=='') continue;
 		if(($i= strpos($callback, ':'))!==false) {
@@ -94,11 +91,13 @@ function doCallBacks($callbacks, &$content) {
 }
 
 function doActions($actions, $valeurs) {
-	echo "<xmp>doActions $actions\nsur ".var_export($valeurs, 1).'</xmp>';
+	//echo "<xmp>doActions $actions\nsur ".var_export($valeurs, 1).'</xmp>';
 	include_spip('inc/actionParser');
 	$parser = new actionParser($valeurs);
 	$parser->parse($actions);
-	echo "<xmp>".$parser->getSql()."</xmp>";
+	$code= $parser->getCode();
+	echo "<xmp>$code</xmp>\n";
+	return eval($code);
 }
 
 ?>
