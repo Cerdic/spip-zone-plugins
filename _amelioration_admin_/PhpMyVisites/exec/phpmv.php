@@ -120,13 +120,23 @@ $siteUrls = array ('."
 
 function exec_phpmv(){
 	global $connect_statut;
+	include_spip('inc/presentation');
+
 	if (_request('mod')!='view_graph'){
-		include_spip('inc/presentation');
-		debut_page(_L("PHPMyVisites"), "statistiques", "phpmv");
 		if ($connect_statut != '0minirezo') {
+			debut_page(_L("PHPMyVisites"), "statistiques", "phpmv");
 			echo "<strong>"._T('avis_acces_interdit')."</strong>";
 			fin_page();
 			exit;
+		}
+		else{
+			// TODO : si pas les tampons dispo, afficher l'en tete direct
+			// les redirect de phpmv s'afficheront avec un lien a cliquer
+			$GLOBALS['spip_debut_page']="";
+			ob_start();
+			debut_page(_L("PHPMyVisites"), "statistiques", "phpmv");
+			$GLOBALS['spip_debut_page']=ob_get_contents();
+			ob_end_clean();
 		}
 	}
 	else if ($connect_statut != '0minirezo') {

@@ -533,7 +533,8 @@ class Request
 				
 		if(Request::getCurrentCompleteUrl() != $url)
 		{
-			header("Location: $url");
+			@header("Location: $url");
+			echo "<a href='$url'>$url</a>";
 			exit;
 		}
 	}

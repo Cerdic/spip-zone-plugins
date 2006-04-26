@@ -303,6 +303,7 @@ class TemplateEngine extends Smarty
 		$this->assign("link_doc", array( HREF_DOC_OPEN, HREF_DOC_CLOSE));
 			
 		// phpmyvisites version to print in meta and footer
+		$this->assign("SPIP_DEBUT_PAGE", $GLOBALS['spip_debut_page']);
 		$this->assign("PHPMV_VERSION", PHPMV_VERSION);
 		$this->assign("DIR_PLUGIN_PHPMV", _DIR_PLUGIN_PHPMV);
 		$this->assign("PHP_VERSION_NEEDED", PHP_VERSION_NEEDED);
