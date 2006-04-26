@@ -1,5 +1,5 @@
 <!-- lang selection -->
-<div id="choixlangue">
+<!--<div id="choixlangue">
 <form action="{$url_lang}" method="post">
 
 <fieldset>
@@ -13,4 +13,4 @@
 		</select>
 </fieldset>
 </form>
-</div>
+</div>-->

@@ -1,10 +1,15 @@
 #CACHE{0*24*3600*35}
 <?php
-	define('_PHPMV_DIR_CONFIG','#CONFIG{_PHPMV_DIR_CONFIG}');
-	define('_PHPMV_DIR_DATA','#CONFIG{_PHPMV_DIR_DATA}');
-	define('_DIR_PLUGIN_PHPMV','#CONFIG{_DIR_PLUGIN_PHPMV}');
-	$d = getcwd();
-	chdir(_DIR_PLUGIN_PHPMV);
-	include "phpmyvisites.php";
-	chdir($d);
+	if (!isset($GLOBALS['meta']['PHPMyVisites_no_admin_stat'])
+			|| $GLOBALS['meta']['PHPMyVisites_no_admin_stat']!='oui'
+			|| !$auteur_session
+			|| $auteur_session["statut"]!="0minirezo") {
+		define('_PHPMV_DIR_CONFIG','#CONFIG{_PHPMV_DIR_CONFIG}');
+		define('_PHPMV_DIR_DATA','#CONFIG{_PHPMV_DIR_DATA}');
+		define('_DIR_PLUGIN_PHPMV','#CONFIG{_DIR_PLUGIN_PHPMV}');
+		$d = getcwd();
+		chdir(_DIR_PLUGIN_PHPMV);
+		include "phpmyvisites.php";
+		chdir($d);
+	}
 ?>

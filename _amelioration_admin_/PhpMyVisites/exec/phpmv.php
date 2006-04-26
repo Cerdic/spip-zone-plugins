@@ -139,6 +139,13 @@ function exec_phpmv(){
 	define('_PHPMV_DIR_CONFIG',realpath(_DIR_SESSIONS . "phpmvconfig"));
 	define('_PHPMV_DIR_DATA',realpath(_DIR_SESSIONS . "phpmvdatas"));
 	
+	if (!isset($GLOBALS['meta']['PHPMyVisites_no_admin_stat'])){
+		ecrire_meta('PHPMyVisites_no_admin_stat','non');
+		ecrire_metas();
+	}
+	$PHPMyVisites_no_admin_stat = $GLOBALS['meta']['PHPMyVisites_no_admin_stat'];
+	
+	$cwd = getcwd();
 	chdir(_DIR_PLUGIN_PHPMV);
 	
 	define('PROFILING', false );
@@ -160,6 +167,13 @@ function exec_phpmv(){
 		xdebug_dump_function_profile(1);
 
 	fin_page();
+	
+	if ($PHPMyVisites_no_admin_stat != $GLOBALS['meta']['PHPMyVisites_no_admin_stat']){
+		chdir($cwd);
+		ecrire_meta('PHPMyVisites_no_admin_stat',$GLOBALS['meta']['PHPMyVisites_no_admin_stat']);
+		ecrire_metas();
+	}
+	
 }
 
 ?>

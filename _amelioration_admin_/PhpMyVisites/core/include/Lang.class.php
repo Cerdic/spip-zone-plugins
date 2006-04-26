@@ -27,7 +27,7 @@ class Lang
 	
 	function Lang( )
 	{
-		$c = new Cookie(COOKIE_NAME_VIEW);
+		//$c = new Cookie(COOKIE_NAME_VIEW);
 		
 		// look if reload lang file
 		$this->fileAdress = _PHPMV_DIR_CONFIG . "/lang_available.php";
@@ -41,7 +41,7 @@ class Lang
 			$this->langAvailable = $langAvailable;
 		}
 		
-		$langRequest = Request::getLang();
+		/*$langRequest = Request::getLang();
 		if(!file_exists( LANGS_PATH . "/". $langRequest))
 		{
 			// cookie ?
@@ -52,6 +52,11 @@ class Lang
 			}
 		}
 		else
+		{
+			$this->file = $langRequest;
+		}*/
+		$langRequest = $GLOBALS['spip_lang']."-utf-8.php";
+		if(file_exists( LANGS_PATH . "/". $langRequest))
 		{
 			$this->file = $langRequest;
 		}
@@ -70,8 +75,8 @@ class Lang
 		
 		$GLOBALS['lang'] = $lang;
 		
-		$c->setVar('lang', $this->file);
-		$c->save();
+		//$c->setVar('lang', $this->file);
+		//$c->save();
 	}
 	
 	function getFileName()

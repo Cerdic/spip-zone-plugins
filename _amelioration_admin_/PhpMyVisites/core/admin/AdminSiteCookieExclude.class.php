@@ -33,7 +33,9 @@ class AdminSiteCookieExclude extends AdminModule
 			$cookieSet = false;
 			
 			// is the cookie already set or not?
-			if(isset($_COOKIE[COOKIE_NAME_NO_STAT.$siteAdmin]))
+			//if(isset($_COOKIE[COOKIE_NAME_NO_STAT.$siteAdmin]))
+			if (isset($GLOBALS['meta']['PHPMyVisites_no_admin_stat'])
+					&&$GLOBALS['meta']['PHPMyVisites_no_admin_stat']=='oui')
 			{
 				$cookieSet = true;
 			}
@@ -42,13 +44,15 @@ class AdminSiteCookieExclude extends AdminModule
 			{
 				if($cookieSet)
 				{
-					$ck = new Cookie(COOKIE_NAME_NO_STAT.$siteAdmin);
-					$ck->delete();
+					$GLOBALS['meta']['PHPMyVisites_no_admin_stat']='non';
+					//$ck = new Cookie(COOKIE_NAME_NO_STAT.$siteAdmin);
+					//$ck->delete();
 				}
 				else
 				{
-					$ck = new Cookie(COOKIE_NAME_NO_STAT.$siteAdmin);
-					$ck->save();
+					$GLOBALS['meta']['PHPMyVisites_no_admin_stat']='oui';
+					//$ck = new Cookie(COOKIE_NAME_NO_STAT.$siteAdmin);
+					//$ck->save();
 				}
 				$this->setMessage();
 			}

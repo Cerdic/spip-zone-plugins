@@ -29,17 +29,7 @@ function phpmv_affichage_final($texte){
 		//define(PHPMV_URL,'@@');
 		$i_site = 1;
 		
-		/*include_once dirname(__FILE__)."/core/include/functions.php";
-		$js = getJavascriptCode(1);
-		$js = preg_replace(",<b>(.*)</b>,Uis","\\1",$js);
-		$js = str_replace("<br />","",$js);
-		$js = str_replace("&lt;","<",$js);
-		$js = str_replace("&gt;",">",$js);
-
-		$js = str_replace("@@/phpmyvisites.php",url_de_base().find_in_path('phpmyvisites.php'),$js);
-		$js = str_replace("@@/phpmyvisites.js",url_de_base().find_in_path('phpmyvisites.js'),$js);*/
-
-		$js = '<!-- phpmyvisites -->
+		$code = '<!-- phpmyvisites -->
 				<div style="display:none;">
 				<script type="text/javascript">
 				<!--
@@ -56,9 +46,8 @@ function phpmv_affichage_final($texte){
 				</noscript>
 				</div>
 				<!-- /phpmyvisites -->';
-
-
-		$texte=str_replace("</body>","$js</body>",$texte);
+		
+		$texte=str_replace("</body>","$code\n</body>",$texte);
 	}
 	return $texte;
 	
