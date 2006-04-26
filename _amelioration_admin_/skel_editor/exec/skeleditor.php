@@ -3,70 +3,96 @@
 
 define('_DIR_PLUGIN_SKELEDITOR',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__))))))));
 
-function show_skel_file($path,$current_file) {  
-  $listed_extension = array("htm","html","xml","svg","php","php3","php4","py","sh","sql","css","rdf","txt","nfo","log","js","as");
-  $img_extension = array("jpg","png","gif","ico","bmp");
 
-  $path = "../$path";
+function tree_open_close_dir(&$current,$target,$current_file){
+	if ($current == $target) return "";
+	$tcur = explode("/",$current);
+	$ttarg = explode("/",$target);
+	$tcom = array();
+	$output = "";
+	// la partie commune
+	while (reset($tcur)==reset($ttarg)){
+		$tcom[] = array_shift($tcur);
+		array_shift($ttarg);
+	}
+	// fermer les repertoires courant jusqu'au point de fork
+	while($close = array_pop($tcur)){
+		$output .= "</div>\n";
+		$output .= fin_block();
+		$output .= "</div>\n";
+	}
+	$chemin = implode("/",$tcom)."/";
+	// ouvrir les repertoires jusqu'a la cible
+	while($open = array_shift($ttarg)){
+		$chemin .= $open . "/";
+		if(!strstr($current_file,$chemin)){
+			$output .= "<div>\n";
+			$output .= bouton_block_invisible(md5($chemin));
+			$output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/folder.png' alt='directory' /> $open";             
+			$output .= debut_block_invisible(md5($chemin));
+		}
+		else {
+			$output .= "<div>\n";
+			$output .= bouton_block_visible(md5($chemin));
+			$output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/folder.png' alt='directory' /> $open";             
+			$output .= debut_block_visible(md5($chemin));
+		}
+		$output .= "<div style='line-height: 12px;border:1px solid #ededed;padding:4px;margin:4px 0'>\n";
+	}
+	$current = $target;
+	return $output;
+}
+
+function show_skel_file($file_list,$current_file,$img_extension) {
+
   $output = "<div style='line-height: 12px;border:1px solid #ededed;padding:4px;margin:4px 0'>\n";
-  $folder = dir($path); 
-  while ($myfile = $folder->read()) {
-      $entirePath  = $path."/".$myfile;
-        
-      if (substr($myfile,0,1) !=".") {  // exclude hidden files and directories
-          // writable ?
-          if (!is_writable($entirePath))   $output .= "<div style='background:#3ff'>";
-                                    else   $output .= "<div>";
-          // directory of file ?         
-          if (is_dir($entirePath)) {
-             $output .= bouton_block_invisible(md5($myfile));
-             $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/folder.png' alt='directory' /> $myfile";             
-             if(!strstr($current_file,$entirePath)) $output .= debut_block_invisible(md5($myfile));             
-             $output .= show_skel_file(substr($path,3)."/".$myfile,$current_file); // recursive !
-             if(!strstr($current_file,$entirePath)) $output .= fin_block();
-          } else { 
-             if ($entirePath==$current_file) $expose=" style='background:#ff6'";
-                                        else $expose="";
-             $extension =  strtolower(substr($myfile, strrpos($myfile,".")+1));             
-             if (in_array($extension,$listed_extension)) {
-                $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/file.png' alt='file' /> ";
-                $output .= "<a href=\"?exec=skeleditor&amp;f=".urlencode($entirePath)."\"$expose>$myfile</a>";
-             } else if (in_array($extension,$img_extension)) {
-                $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/img.png' alt='file' /> ";
-                $output .= "<a href=\"?exec=skeleditor&amp;f=".urlencode($entirePath)."\"$expose>$myfile</a>";
-             } else {
-                $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/unknown.png' alt='unknown' /> ";
-                $output .= "<span style='color:#aaa'>$myfile</span>";
-             }
-          }         
-          $output .= "</div>\n";
-      }
-  } 
+	$init_dir = $current_dir = dirname(reset($file_list));
+	foreach($file_list as $file){
+		$dir = dirname($file);
+	
+		if ($dir != $current_dir)
+			$output .= tree_open_close_dir($current_dir,$dir,$current_file);
+		if (!is_writable($dir))
+			$output .= "<div style='background:#3ff'>";
+		else
+			$output .= "<div>";
+
+		if ($file==$current_file)
+			$expose=" style='background:#ff6'";
+		else 
+			$expose="";
+		$path_parts = pathinfo($file);
+		$extension =  $path_parts['extension'];
+		$base = $path_parts['basename'];
+		if (in_array($extension,$img_extension)) {
+			$output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/img.png' alt='image' /> ";
+			$output .= "<a href='".generer_url_ecrire('skeleditor','f='.urlencode($file))."'$expose>$base</a>";
+		} else {
+			$output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/file.png' alt='file' /> ";
+			$output .= "<a href='".generer_url_ecrire('skeleditor','f='.urlencode($file))."'$expose>$base</a>";
+		}
+		$output .= "</div>\n";
+	}
+	$output .= tree_open_close_dir($current_dir,$init_dir,$current_file);
   $output .= "</div>\n";
   return $output;
 }
 
 // build select menu to choose directory
-function editor_form_directory($path,$depth="") { 
-  $path = "../$path";
-  $folder = dir($path); 
-  if ($depth=="") $output .= "<option value='$path'>(racine)</option>\n"; 
-  $depth .= "&nbsp;&nbsp;&nbsp;&nbsp;";
-  while ($myfile = $folder->read()) {
-      $entirePath  = $path."/".$myfile;        
-      if (substr($myfile,0,1) !=".") {  // exclude hidden files and directories                 
-          if (is_dir($entirePath)) {
-              $output .= "<option value='$entirePath'>$depth$myfile</option>\n";              
-              $output .= editor_form_directory(substr($entirePath,3),$depth); // recursive !           
-          }
-      }      
-  }
+function editor_form_directory($path,$depth="") {
+	$output = "";
+	foreach($path as $dir){
+		$tdir = explode('/',$dir);
+		$myfile = array_pop($tdir);
+		$depth = "";
+		while(array_pop($tdir)) $depth.="&nbsp;&nbsp;";
+		$output .= "<option value='$dir'>$depth$myfile</option>\n";              
+	}
   return $output;  
 }
 
 // add file form
-function editor_addfile() {
-  global $dossier_squelettes;
+function editor_addfile($path_list) {
   $output = bouton_block_invisible('editor_newfile');
   $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_nouveau");
   $output .= debut_block_invisible('editor_newfile');  
@@ -77,7 +103,7 @@ function editor_addfile() {
   $output .= "<input type='text' name='f' value='untitled.html' onfocus=\"this.value=''\" />"; 
   $output .= _T("skeleditor:target")."<br />\n"; 
   $output .= "<select name='target'><br />\n"; 
-  $output .= editor_form_directory($dossier_squelettes);      
+  $output .= editor_form_directory($path_list);      
   $output .= "</select><br /><input type='submit' name='sub' value='"._T("skeleditor:creer")."' />";
   $output .= "</form>\n";
   $output .= fin_block();
@@ -85,8 +111,7 @@ function editor_addfile() {
 }
 
 // upload file form
-function editor_uploadfile() {
-  global $dossier_squelettes;
+function editor_uploadfile($path_list) {
   $output = "<br />".bouton_block_invisible('editor_uploadfile');
   $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_upload");
   $output .= debut_block_invisible('editor_uploadfile');
@@ -98,7 +123,7 @@ function editor_uploadfile() {
   $output .= "<input type='file' name='upf'/>"; 
   $output .= _T("skeleditor:target")."<br />\n"; 
   $output .= "<select name='target'><br />\n"; 
-  $output .= editor_form_directory($dossier_squelettes);      
+  $output .= editor_form_directory($path_list);      
   $output .= "</select><br /><input type='submit' name='sub' value='"._T("skeleditor:upload")."' />";
   $output .= "</form>\n";
   
@@ -108,8 +133,8 @@ function editor_uploadfile() {
 
 // skeleton parsing (more details:  public/phrase_html)
 function skel_parser($skel_str) {
-  include("public/interfaces.php");
-  include("public/phraser_html.php");  
+  include_spip("public/interfaces");
+  include_spip("public/phraser_html");  
 
   //$output .= _T('skeleditor:parseur_titre'); 
   $output .= "<div style='background: #eef; border:1px solid #eee;padding:10px;font-size:0.82em;font-family:Verdana'>";
@@ -208,22 +233,71 @@ function skel_parser_param($str,$output='') {
 }
 
 // security: avoid access to other directories
-function safe_path($str) {
-  global $dossier_squelettes;
-    
-  $str = str_replace("..", "", trim($str));
-  while (substr($str,0,1)=="/")  $str = substr($str,1);
-  if (substr($str,0,strlen($dossier_squelettes))!=$dossier_squelettes) return "";
-                                                                 else return $str;  
+function check_file_allowed($file,$files_editable,$new = false) {
+	if (in_array($file,$files_editable))
+		return true;
+	else if ($new){
+		if (in_array(dirname($file),array_map('dirname',$files_editable)))
+			return true;
+	}
+	return false;
 }
 
+function get_spip_path(){
+	static $path_a = array();
+	static $c = '';
+
+	// on calcule le chemin si le nombre de plugins a change
+	if ($c != count($GLOBALS['plugins']).$GLOBALS['dossier_squelettes']) {
+		$c = count($GLOBALS['plugins']).$GLOBALS['dossier_squelettes'];
+	
+		// Chemin standard depuis l'espace public
+		$path = defined('_SPIP_PATH') ? _SPIP_PATH : 
+			_DIR_RACINE.':'.
+			_DIR_RACINE.'dist/:'.
+			_DIR_RACINE.'formulaires/:'.
+			_DIR_RESTREINT;
+
+		// Ajouter les repertoires des plugins
+		if ($GLOBALS['plugins'])
+			$path = _DIR_PLUGINS
+				. join(':'._DIR_PLUGINS, $GLOBALS['plugins'])
+				. ':' . $path;
+
+		// Ajouter squelettes/
+		if (@is_dir(_DIR_RACINE.'squelettes'))
+			$path = _DIR_RACINE.'squelettes/:' . $path;
+			
+		// Et le(s) dossier(s) des squelettes nommes
+		if ($GLOBALS['dossier_squelettes'])
+			foreach (explode(':', $GLOBALS['dossier_squelettes']) as $d)
+				$path = 
+					($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/:' . $path;
+
+		// nettoyer les / du path
+		$path_a = array();
+		foreach (explode(':', $path) as $dir) {
+			if (strlen($dir) AND substr($dir,-1) != '/')
+				$dir .= "/";
+			$path_a[] = $dir;
+		}
+	}
+	return $path_a;
+}
+function parse_path($dir,$extensions){
+	$pattern = "\.(".implode("|",$extensions).")$";
+	$liste = preg_files($dir, $pattern);
+	return $liste;
+}
 
 // -------------------------------
 // Main 
 // ------------------------------
 function exec_skeleditor(){
   include_spip("inc/presentation");
+  global $spip_lang_right;
   $img_extension = array("jpg","png","gif","ico","bmp");
+  $listed_extension = array("htm","html","xml","svg","php","php3","php4","py","sh","sql","css","rdf","txt","nfo","log","js","as");
 
   // check rights
   global $connect_statut;
@@ -237,13 +311,15 @@ function exec_skeleditor(){
 	
 	
 	// globals 
-  global $dossier_squelettes;
-  if ($dossier_squelettes=="") $dossier_squelettes="dist";
+  $dossier_squelettes = reset(get_spip_path());
 	
 	if (@is_readable(_DIR_SESSIONS."charger_plugins_fonctions.php")){  // utile ?
 		// chargement optimise precompile
 		include_once(_DIR_SESSIONS."charger_plugins_fonctions.php");     	
 	}
+	
+	$files_editable = parse_path($dossier_squelettes,array_merge($listed_extension,$img_extension));
+	$path_list = array_keys(array_flip(array_map('dirname',$files_editable)));
 
 	// --------------------------------------------------------------------------- 
 	// Action ? 
@@ -253,9 +329,12 @@ function exec_skeleditor(){
 	if (isset($_POST['editor'])) {      // save file ?
 	     $editor = $_POST['editor'];
 	     $editor = str_replace("&lt;/textarea","</textarea",$editor); // exception: textarea closing tag	     
-	     if (isset($_GET['f'])) $file_name = $_GET['f'];
-	                       else $file_name = "";
-	     $file_name = "../".safe_path($file_name);    // security	     
+	     if (isset($_GET['f'])){
+	     	$file_name = $_GET['f'];
+		    if (!check_file_allowed($file_name,$files_editable))
+		     	die('faut pas se gener');    // security	     
+	     }
+	     else $file_name = "";
 	     if (is_writable($file_name)) {
              if (!$handle = fopen($file_name, 'w')) {
                  $log = "<span style='color:red'>"._T("skeleditor:erreur_ouverture_fichier")."</span>";
@@ -275,7 +354,9 @@ function exec_skeleditor(){
   if (isset($_FILES['upf'])) {    // upload file ?
       $tmp_name = $_FILES['upf']['tmp_name'];
       if (isset($_POST['target'])) {      
-               $target = "../".safe_path($_POST['target'])."/".$_FILES['upf']['name'];    // security
+               $target = ($_POST['target'])."/".$_FILES['upf']['name'];    // security
+					     if (!check_file_allowed($target,$files_editable,true))
+					     	die('faut pas se gener');    // security	     
                $_GET['f'] = $target;
                $_GET['action'] = 'preview';
                if (file_exists($target)) {
@@ -294,11 +375,14 @@ function exec_skeleditor(){
   $action = "";
 	if (isset($_GET['f'])) {
 	    $file_name = $_GET['f']; 
+	    if (!check_file_allowed($file_name,$files_editable))
+	     	die('faut pas se gener');    // security	     
       if (isset($_GET['target'])) {
-          $target = "../".safe_path($_GET['target']);
+          $target = $_GET['target'];
           $file_name =  $target."/".$file_name;
+			    if (!check_file_allowed($file_name,$files_editable,true))
+			     	die('faut pas se gener');    // security	     
       }                       	    
-      $file_name = "../".safe_path($file_name); 
                   
       if (isset($_GET['action'])) {
           $action = $_GET['action'];          
@@ -306,7 +390,7 @@ function exec_skeleditor(){
             @unlink($file_name);          
           } else if ($action=="download") {       // download the file              
               if ($file_tmp = @file("$file_name")) {
-                $file_name_nopath = substr($file_name, strrpos($file_name,"/")+1); 
+                $file_name_nopath = basename($file_name);
                 $file_str = implode ('',$file_tmp);
                 //header("Content-type: text/plain"); // text/plain or binary .... 
                 header("Content-Disposition: attachment; filename=\"$file_name_nopath\"");
@@ -315,21 +399,19 @@ function exec_skeleditor(){
               }
           } else if ($action=="new") {            // add new file
             if (isset($_GET['target'])) {               
-               if (substr($target,3, strlen($dossier_squelettes))== $dossier_squelettes) { // security 2: right place ?                  
-                   // FIXME: check if extension available ?                   
-                   if (is_file($file_name)) { // security 3: ovewrite ?
-                    $log = "<span style='color:red'>"._T("skeleditor:erreur_overwrite")."</span>";
-                   } else {
-                     if (!$handle = fopen($file_name, 'w')) {
-                         $log = "<span style='color:red'>"._T("skeleditor:erreur_droits")."</span>";
-                     } else if (fwrite($handle, "...") === FALSE) {
-                         $log = "<span style='color:red'>"._T("skeleditor:erreur_droits")."</span>";           
-                     } else {
-                         $log = "<span style='color:green'>"._T("skeleditor:fichier_sauvegarde_date").date('H:i')."</span>";
-                         fclose($handle);
-                     }
-                    }
-               }               	
+               // FIXME: check if extension available ?                   
+               if (is_file($file_name)) { // security 3: ovewrite ?
+                $log = "<span style='color:red'>"._T("skeleditor:erreur_overwrite")."</span>";
+               } else {
+                 if (!$handle = fopen($file_name, 'w')) {
+                     $log = "<span style='color:red'>"._T("skeleditor:erreur_droits")."</span>";
+                 } else if (fwrite($handle, "...") === FALSE) {
+                     $log = "<span style='color:red'>"._T("skeleditor:erreur_droits")."</span>";           
+                 } else {
+                     $log = "<span style='color:green'>"._T("skeleditor:fichier_sauvegarde_date").date('H:i')."</span>";
+                     fclose($handle);
+                 }
+                }
             }
            
              
@@ -350,12 +432,12 @@ function exec_skeleditor(){
 	debut_boite_info();
 	echo "<p>"._T("skeleditor:skeleditor_description")."</p>\n";	
 	echo _T("skeleditor:skeleditor_dossier")." <strong>$dossier_squelettes</strong><br />";
-	echo show_skel_file($dossier_squelettes,$file_name);
+	echo show_skel_file($files_editable,$file_name,$img_extension);
 	fin_boite_info();
 	echo "<br />";
 	debut_boite_info();
-	echo editor_addfile();
-	echo editor_uploadfile();
+	echo editor_addfile($path_list);
+	echo editor_uploadfile($path_list);
   fin_boite_info();
 	
 	debut_droite();
@@ -380,9 +462,10 @@ function exec_skeleditor(){
                   $file_str = implode ('',$file_tmp);                  
                   if ($extension=='html') echo  skel_parser($file_str); // experimental         	        
                   $file_str = str_replace("</textarea","&lt;/textarea",$file_str); // exception: textarea closing tag                                
-                  echo "<form method='post' action='?exec=skeleditor&amp;retour=skeleditor&amp;f=".urlencode($file_name)."'>\n";
+                  //echo "<form method='post' action='?exec=skeleditor&amp;retour=skeleditor&amp;f=".urlencode($file_name)."'>\n";
+									echo generer_url_post_ecrire('skeleditor',"retour=skeleditor&f=".urlencode($file_name));
                   echo "<textarea name='editor' cols='80' rows='50'>$file_str</textarea>\n";               
-        	        echo "<input type='submit' name='action' value='"._T("skeleditor:sauver")."' />";	        
+									echo "<div style='text-align:$spip_lang_right'><input type='submit' name='action' value='"._T("skeleditor:sauver")."' class='fondo'></div>";
         	        echo "</form>\n";       	        
 
               } else {
