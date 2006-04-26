@@ -510,7 +510,7 @@ function exec_forms_edit(){
 		if ($champconfirm){
 			$champconfirm_known = false;
 			echo "<div align='left' border: 1px dashed #aaaaaa;'>";
-			echo "<strong class='verdana2'>"._L('Confirmer la réponse par mail avec :')."</strong> ";
+			echo "<strong class='verdana2'>"._L('Confirmer la r&eacute;ponse par mail avec :')."</strong> ";
 			foreach ($structure as $index => $t) {
 				if (($t['type'] == 'email') && ($champconfirm == $t['code'])) {
 					echo $t['nom'] . " ";
@@ -681,7 +681,7 @@ function exec_forms_edit(){
 	 	
 	 	//-----
 
-		echo "<strong><label for='confirm_form'>"._L('Confirmer la réponse par mail avec :')."</label></strong> ";
+		echo "<strong><label for='confirm_form'>"._L('Confirmer la r&eacute;ponse par mail avec :')."</label></strong> ";
 		echo "<br />";
 		echo "<select name='champconfirm' id='confirm_form' class='forml'>\n";
 		echo "<option value=''";
