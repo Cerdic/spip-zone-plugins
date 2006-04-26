@@ -256,7 +256,8 @@ $language_data = array (
 			'apache_child_terminate','aggregation_info','aggregate_properties_by_regexp','aggregate_properties_by_list','aggregate_properties','aggregate_methods_by_regexp',
 			'aggregate_methods_by_list','aggregate_methods','aggregate','addslashes','addcslashes','acosh',
 			'acos','abs','_','echo', 'print', 'global', 'static', 'exit', 'array', 'empty',
-            'eval', 'isset', 'unset', 'die', 'list'
+            'eval', 'isset', 'unset', 'die', 'list', 
+            'imagecreatetruecolor', 'imagealphablending', 'imagesavealpha', 'ImageColorAllocateAlpha', 'imagefill', 'ImageColorAt', 'imagesetpixel'
 			)
 		),
 	'SYMBOLS' => array(
