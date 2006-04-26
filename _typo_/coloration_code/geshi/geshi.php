@@ -335,7 +335,7 @@ class GeSHi
      *  The style for the actual code
      * @var string
      */
-	var $code_style = 'font-family: \'Courier New\', Courier, monospace; font-weight: normal;';
+	var $code_style = 'font-family: verdana, arial, sans; font-weight: normal;';
     
     /**
      * The overall class for this code block
@@ -353,7 +353,7 @@ class GeSHi
      * Line number styles
      * @var string
      */
-	var $line_style1 = 'font-family: \'Courier New\', Courier, monospace; color: black; font-weight: normal; font-style: normal;';
+	var $line_style1 = 'font-family: verdana, arial, sans; color: black; font-weight: normal; font-style: normal;';
     
     /**
      * Line number styles for fancy lines
@@ -1872,7 +1872,7 @@ class GeSHi
                             //  2 => '&nbsp; ',
                             //  3 => '&nbsp; &nbsp;' etc etc
                             // to use instead of building a string every time
-                            $strs = array(0 => '&nbsp;', 1 => ' ');
+                            $strs = array(0 => '&nbsp;');
                             //echo "building (pos=$pos i=$i) (" . ($i - $pos) . ") " . ($tab_width - (($i - $pos) % $tab_width)) . " spaces\n";
                             for ($k = 0; $k < ($tab_width - (($i - $pos) % $tab_width)); $k++) $str .= $strs[$k % 2];
                             $result_line .= $str;
