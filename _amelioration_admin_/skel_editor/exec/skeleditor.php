@@ -1,5 +1,8 @@
 <?php
 //  display all skel files and folders
+
+define('_DIR_PLUGIN_SKELEDITOR',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__))))))));
+
 function show_skel_file($path,$current_file) {  
   $listed_extension = array("htm","html","xml","svg","php","php3","php4","py","sh","sql","css","rdf","txt","nfo","log","js","as");
   $img_extension = array("jpg","png","gif","ico","bmp");
@@ -17,7 +20,7 @@ function show_skel_file($path,$current_file) {
           // directory of file ?         
           if (is_dir($entirePath)) {
              $output .= bouton_block_invisible(md5($myfile));
-             $output .= "<img src='../plugins/skel_editor/img_pack/folder.png' alt='directory' /> $myfile";             
+             $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/folder.png' alt='directory' /> $myfile";             
              if(!strstr($current_file,$entirePath)) $output .= debut_block_invisible(md5($myfile));             
              $output .= show_skel_file(substr($path,3)."/".$myfile,$current_file); // recursive !
              if(!strstr($current_file,$entirePath)) $output .= fin_block();
@@ -26,13 +29,13 @@ function show_skel_file($path,$current_file) {
                                         else $expose="";
              $extension =  strtolower(substr($myfile, strrpos($myfile,".")+1));             
              if (in_array($extension,$listed_extension)) {
-                $output .= "<img src='../plugins/skel_editor/img_pack/file.png' alt='file' /> ";
+                $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/file.png' alt='file' /> ";
                 $output .= "<a href=\"?exec=skeleditor&amp;f=".urlencode($entirePath)."\"$expose>$myfile</a>";
              } else if (in_array($extension,$img_extension)) {
-                $output .= "<img src='../plugins/skel_editor/img_pack/img.png' alt='file' /> ";
+                $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/img.png' alt='file' /> ";
                 $output .= "<a href=\"?exec=skeleditor&amp;f=".urlencode($entirePath)."\"$expose>$myfile</a>";
              } else {
-                $output .= "<img src='../plugins/skel_editor/img_pack/unknown.png' alt='unknown' /> ";
+                $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/unknown.png' alt='unknown' /> ";
                 $output .= "<span style='color:#aaa'>$myfile</span>";
              }
           }         
@@ -65,7 +68,7 @@ function editor_form_directory($path,$depth="") {
 function editor_addfile() {
   global $dossier_squelettes;
   $output = bouton_block_invisible('editor_newfile');
-  $output .= "<img src='../plugins/skel_editor/img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_nouveau");
+  $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_nouveau");
   $output .= debut_block_invisible('editor_newfile');  
   $output .= "<form method='get'>\n"; 
   $output .= "<input type='hidden' name='exec' value='skeleditor' />"; 
@@ -85,7 +88,7 @@ function editor_addfile() {
 function editor_uploadfile() {
   global $dossier_squelettes;
   $output = "<br />".bouton_block_invisible('editor_uploadfile');
-  $output .= "<img src='../plugins/skel_editor/img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_upload");
+  $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_upload");
   $output .= debut_block_invisible('editor_uploadfile');
   
   $output .= "<form method='post' enctype='multipart/form-data' >\n";  
@@ -365,8 +368,8 @@ function exec_skeleditor(){
        } else { 
            // tools bar
            echo "<div id='skel_toolbar' style='width:100%;text-align:right;'>\n";
-           echo "<img src='../plugins/skel_editor/img_pack/action_dl.png' alt='download' /><a href=\"?exec=skeleditor&amp;f=".urlencode($file_name)."&amp;action=download\">"._T("skeleditor:telecharger")."</a>";
-           echo "<img src='../plugins/skel_editor/img_pack/action_del.png' alt='delete' /><a href=\"?exec=skeleditor&amp;f=".urlencode($file_name)."&amp;action=delete\" onclick=\"javascript:return confirm('"._T("skeleditor:effacer_confirme")."');\">"._T("skeleditor:effacer")."</a>";
+           echo "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_dl.png' alt='download' /><a href=\"?exec=skeleditor&amp;f=".urlencode($file_name)."&amp;action=download\">"._T("skeleditor:telecharger")."</a>";
+           echo "<img src='"._DIR_PLUGIN_SKELEDITOR."/img_pack/action_del.png' alt='delete' /><a href=\"?exec=skeleditor&amp;f=".urlencode($file_name)."&amp;action=delete\" onclick=\"javascript:return confirm('"._T("skeleditor:effacer_confirme")."');\">"._T("skeleditor:effacer")."</a>";
            echo "</div>\n";
            // img or text ?
            $extension =  strtolower(substr($file_name, strrpos($file_name,".")+1)); 
