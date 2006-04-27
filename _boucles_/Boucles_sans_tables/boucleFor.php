@@ -14,7 +14,7 @@ $GLOBALS['table_des_tables']['for'] = 'for';
 function critere_par($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	if($boucle->type_requete!='for') {
-		return critere_par_dist($idb, &boucles, $crit);
+		return critere_par_dist($idb, $boucles, $crit);
 	}
 	$tri= $crit->param[0];
 	if ($tri[0]->type != 'texte') {
