@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'erreur_ouvert_ecrit'=>"Erreur: impossible d'ouvrir ou d'éditer ce fichier.",
   'erreur_droits'=>"erreur: impossible de cr&eacute;er le fichier. V&eacute;rifier les droits en &eacute;critutre de votre r&eacute;pertoire squelette",
   'erreur_overwrite'=>"erreur: ce fichier existe d&eacute;j&agrave;",
+  'erreur_sansgene'=>'Erreur: action non autoris&eacute;e',
   
   // F
   'fichier'=>"fichier",
