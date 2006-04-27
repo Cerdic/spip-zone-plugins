@@ -1,9 +1,12 @@
 <?php
-include_once(find_in_path("boucleLangues.php"));
-include_once(find_in_path("boucleFichiers.php"));
-include_once(find_in_path("boucleFor.php"));
-include_once(find_in_path("boucleIf.php"));
-include_once(find_in_path("boucleTableau.php"));
+error_log("BST!");
+define('_DIR_PLUGIN_BOUCLESANSTABLES',
+	   dirname(find_in_path("boucleLangues.php")));
+include_once(_DIR_PLUGIN_BOUCLESANSTABLES."/boucleLangues.php");
+include_once(_DIR_PLUGIN_BOUCLESANSTABLES."/boucleFichiers.php");
+include_once(_DIR_PLUGIN_BOUCLESANSTABLES."/boucleFor.php");
+include_once(_DIR_PLUGIN_BOUCLESANSTABLES."/boucleIf.php");
+include_once(_DIR_PLUGIN_BOUCLESANSTABLES."/boucleTableau.php");
 
 /**
  * retourne la valeur d'un meta
