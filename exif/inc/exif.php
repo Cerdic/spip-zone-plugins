@@ -19,12 +19,12 @@
 
 
 function date_exif($fichier) {
-  $exifs =  @exif_read_data($fichier,'EXIF',true);
-  if($exifs && $exifs['EXIF']['DateTimeOriginal']) {
-	  return preg_replace('/^([0-9]*):([0-9]*):([0-9]*) /','\1-\2-\3 ',$exifs['EXIF']['DateTimeOriginal']);
-   } 
-   return '';
+	if (function_exists('exif_read_data'))
+		$exifs =  @exif_read_data($fichier,'EXIF',true);
+	if($exifs && $exifs['EXIF']['DateTimeOriginal']) {
+		return preg_replace('/^([0-9]*):([0-9]*):([0-9]*) /','\1-\2-\3 ',$exifs['EXIF']['DateTimeOriginal']);
+	} 
+	return '';
 }
-
 
 ?>
