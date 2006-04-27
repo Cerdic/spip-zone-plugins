@@ -1,5 +1,4 @@
 <?php
-error_log("BST!");
 define('_DIR_PLUGIN_BOUCLESANSTABLES',
 	   dirname(find_in_path("boucleLangues.php")));
 include_once(_DIR_PLUGIN_BOUCLESANSTABLES."/boucleLangues.php");
