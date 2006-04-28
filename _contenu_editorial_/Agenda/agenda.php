@@ -4,11 +4,11 @@ function Agenda_ajouter_onglets($flux) {
   if($flux['args']=='calendrier')
   {
 		$flux['data']['evenements']= new Bouton(
-																 '../'._DIR_PLUGIN_AGENDA_EVENEMENTS.'/img_pack/agenda-24.png', '&Eacute;v&eacute;nements',
+																 '../'._DIR_PLUGIN_AGENDA_EVENEMENTS.'/img_pack/agenda-24.png', _T('evenements'),
 																generer_url_ecrire("calendrier","type=semaine"));
 	
 		$flux['data']['editorial']= new Bouton(
-															 'cal-rv.png', 'Activit&eacute; &Eacute;ditoriale',
+															 'cal-rv.png', _T('activite_editoriale'),
 																 generer_url_ecrire("calendrier","mode=editorial&type=semaine"));
   }
 	return $flux;
@@ -33,7 +33,7 @@ function Agenda_exec_init($flux) {
 	if (($exec == 'calendrier')||($exec=='articles')){
 		include_spip('inc/calendar');
 		// Reserver les widgets agenda
-		WCalendar_ajoute_lies(_L("Date de d&eacute;but"),'_evenement_debut',_L("Date de fin"),'_evenement_fin');
+		WCalendar_ajoute_lies(_L("Date de d&eacute;but"),'_evenement_debut',_T('Date de fin'),'_evenement_fin');
 	}
 	return $flux;
 }
