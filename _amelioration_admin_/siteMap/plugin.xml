@@ -23,6 +23,6 @@ _ La presence des squelettes article, breve, ... est testee pour chaque type d'o
 	siteMap
 	</prefix>
 	<fonctions>
-	sitemap_mes_fonctions.php
+	sitemap_fonctions.php
 	</fonctions>
 </plugin>
