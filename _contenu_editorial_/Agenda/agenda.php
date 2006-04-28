@@ -8,7 +8,7 @@ function Agenda_ajouter_onglets($flux) {
 																generer_url_ecrire("calendrier","type=semaine"));
 	
 		$flux['data']['editorial']= new Bouton(
-															 'cal-rv.png', 'Activité Editoriale',
+															 'cal-rv.png', 'Activit&eacute; Editoriale',
 																 generer_url_ecrire("calendrier","mode=editorial&type=semaine"));
   }
 	return $flux;
