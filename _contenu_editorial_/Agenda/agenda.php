@@ -1,7 +1,6 @@
 <?php
 
 function Agenda_ajouter_onglets($flux) {
-  include_spip('inc/utils');
   if($flux['args']=='calendrier')
   {
 		$flux['data']['evenements']= new Bouton(
