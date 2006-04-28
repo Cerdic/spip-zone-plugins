@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/mots');
+include_spip('inc/agenda_gestion');
 
 function exec_mots_tous_dist()
 {
