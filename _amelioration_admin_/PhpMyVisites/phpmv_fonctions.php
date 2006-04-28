@@ -40,7 +40,7 @@ function phpmv_affichage_final($texte){
 				var phpmyvisitesURL = "'.generer_url_public('phpmyvisites','',true).'";
 				//-->
 				</script>
-				<script language=javascript src="'.url_de_base().find_in_path('spip_phpmyvisites.js').'" type="text/javascript"></script>
+				<script language="javascript" src="'.url_de_base().find_in_path('spip_phpmyvisites.js').'" type="text/javascript"></script>
 				<noscript>
 				<img src="'.generer_url_public('phpmyvisites','',true).'" alt="phpMyVisites" style="border:0" />
 				</noscript>
