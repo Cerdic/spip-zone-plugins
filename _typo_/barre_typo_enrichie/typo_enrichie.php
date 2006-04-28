@@ -64,12 +64,6 @@ function BarreTypoEnrichie_pre_propre($texte) {
 		/*  10 */ "/\}4\}/",
 		/*  9b */ "/\{5\{/",
 		/*  10b */ "/\}5\}/",
-		/* 15 */ 	"/\[\//",
-		/* 16 */	"/\/\]/",
-		/* 17 */ 	"/\[\|/",
-		/* 18 */	"/\|\]/",
-		/* 19 */ 	"/\[\(/",
-		/* 20 */	"/\)\]/",
 		/* 11 */ "/\{(ง|ยง)\{/", # ยง Pour g้rer l'unicode aussi !
 		/* 12 */ "/\}(ง|ยง)\}/",
 		/* 13 */ "/<-->/",
@@ -88,12 +82,6 @@ function BarreTypoEnrichie_pre_propre($texte) {
 		/*  10 */ $fin_intertitre_4,
 		/*  9b */ $debut_intertitre_5,
 		/*  10b */ $fin_intertitre_5,
-		/* 15 */ 	"<div style=\"text-align:right;\">",
-		/* 16 */	"</div>",
-		/* 17 */ 	"<div style=\"text-align:center;\">",
-		/* 18 */	"</div>",
-		/* 19 */ 	"<div class=\"texteencadre-spip\">",
-		/* 20 */	"</div>",
 		/* 11 */ "<span style=\"font-variant: small-caps\">",
 		/* 12 */ "</span>",
 		/* 13 */ "&harr;",
@@ -140,6 +128,12 @@ function BarreTypoEnrichie_post_propre($texte) {
 	$texte = ereg_replace('@@SPIP_fin_intertitre_5@@[[:space:]]*(</p>)?', $fin_intertitre_5, $texte);*/
 
 		$cherche1 = array(
+		/* 15 */ 	"/\[\//",
+		/* 16 */	"/\/\]/",
+		/* 17 */ 	"/\[\|/",
+		/* 18 */	"/\|\]/",
+		/* 19 */ 	"/\[\(/",
+		/* 20 */	"/\)\]/",
 			/* 21 */ 	"/\[\*\*/",
 			/* 21b */ 	"/\[\*/",
 			/* 22 */	"/\*\]/",
@@ -165,6 +159,12 @@ function BarreTypoEnrichie_post_propre($texte) {
 
 		);
 		$remplace1 = array(
+		/* 15 */ 	"<div style=\"text-align:right;\">",
+		/* 16 */	"</div>",
+		/* 17 */ 	"<div style=\"text-align:center;\">",
+		/* 18 */	"</div>",
+		/* 19 */ 	"<div class=\"texteencadre-spip\">",
+		/* 20 */	"</div>",
 			/* 21 */ 	"<strong class=\"caractencadre2-spip\">",
 			/* 21b */ 	"<strong class=\"caractencadre-spip\">",
 			/* 22 */	"</strong>",
@@ -190,6 +190,7 @@ function BarreTypoEnrichie_post_propre($texte) {
 
 		);
 		$texte = preg_replace($cherche1, $remplace1, $texte);
+		$texte = paragrapher($texte); // il faut reparagrapher a cause des raccourcis typo que l'on a ajoute (block div)
 	return $texte;
 }
 
