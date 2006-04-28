@@ -66,6 +66,7 @@ function exec_mots_tous_dist()
 
 
 if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques) {
+	Agenda_install();
 	if ($modifier_groupe == "oui") {
 		$change_type = addslashes(corriger_caracteres($change_type));
 		$ancien_type = addslashes(corriger_caracteres($ancien_type));
