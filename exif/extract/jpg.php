@@ -28,9 +28,10 @@ function extracteur_jpg($fichier, &$charset) {
 	  if(is_array($fields)) 
 		foreach($fields as $field)
 		  $to_ret .= $exif[$section][$field].' ';
-	  else 
-		foreach($exif[$section] as $val)
-		  $to_ret .= $val.' ';
+	  else
+		if(is_array($exif[$section])) 
+			foreach($exif[$section] as $val)
+		  	$to_ret .= $val.' ';
           
 	
   }
