@@ -273,7 +273,7 @@
 				if ($dump) echo "<br/>";// pour le debugage
 			}
 		
-			$best = $mot;
+			$best = array($mot=>0);
 			$best_match = 10000;
 			if (count($confirmes)){
 				//asort($confirmes);
