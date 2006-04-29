@@ -19,7 +19,6 @@ define('_DIR_PLUGIN_ADVANCED_SEARCH',(_DIR_PLUGINS.end(explode(basename(_DIR_PLU
 function RechercheEtendue_prepare_index_recherche($recherche, $cond=false){
 	include_spip('inc/indexation');
 
-
 	static $cache = array();
 	static $fcache = array();
 	// traiter le cas {recherche?}

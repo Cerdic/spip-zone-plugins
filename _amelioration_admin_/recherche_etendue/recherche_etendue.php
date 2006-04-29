@@ -197,52 +197,38 @@
 		//$recherche = strtr($recherche, $regs, ereg_replace('.', ' ', $regs));
 		//$table_mots = preg_split("/ +/", $recherche);
 		$table_mots = mots_indexation($recherche);
+		$table_mots = array_unique($table_mots);
 		$table_mots_semblables = array_map('RechercheEtendue_mot_semblable',$table_mots);
 		if (count(array_diff($table_mots_semblables,$table_mots)))
 			return implode(" ",$table_mots_semblables);
 		else 
 			return ""; // si pas mieux a proposer, le filtre ne retourne rien
 	}
-	// infame salmigondi
-	// a remplacer par levensthein
-	function RechercheEtendue_mot_err($mot1, $mot2, $beta = 10000){
-		$len1 = strlen($mot1);
-		$len2 = strlen($mot2);
-		$minlen = min($len1,$len2);
-		$err = 0;
-		$err += 1*($len1+$len2-2*$minlen); // idem max()-min()
-		for($k = 0;$k<$minlen;$k++){
-			$err ++;
-			if ($err>$beta) break;
-		}
-		return $err;
-	}
+
 	function RechercheEtendue_mot_match($mot1, $mot2, $beta = 10000){
-		static $match_profondeur = 2;
-		$len1 = strlen($mot1);
-		$len2 = strlen($mot2);
-		if ($len1>$len2)
-			return RechercheEtendue_mot_match($mot2,$mot1,$beta);
-		else {
-			$err = RechercheEtendue_mot_err($mot1,$mot2,$beta);
-			if (($len1<$len2)&&($len1>=$len2-$match_profondeur)){
-				for($k=0;$k<$len1;$k++){
-					$test = "";
-					$test = substr($mot1,0,$k);
-					$test .= substr($mot2,$k,1);
-					$test .= substr($mot1,$k);
-					$err = min($err,RechercheEtendue_mot_match($test, $mot2, $beta));
-				}
-			}
-			return $err;
-		}
+		if (($d = abs(strlen($mot1)-strlen($mot2)))>$beta)
+			return $d; // minorant de la distance
+		else
+			return levenshtein($mot1,$mot2);
 	}
 	function RechercheEtendue_mot_semblable($mot){
 		static $mot_semblable_best = array();
+		static $fcache = array();
+		// Premier passage : chercher eventuel un cache des donnees sur le disque
+		if (!$mot_semblable_best[$mot]) {
+			$dircache = _DIR_CACHE.creer_repertoire(_DIR_CACHE,'simi');
+			$fcache[$mot] =
+				$dircache.'simi_'.substr(md5($mot),0,10).'.txt';
+			if (lire_fichier($fcache[$mot], $contenu))
+				$mot_semblable_best[$mot] = @unserialize($contenu);
+		}
+
+		global $auteur_session;
+		$dump = (isset($_GET['dump'])&&$auteur_session['statut']=='0minirezo');
 	
 		// eviter de recalculer deux fois pour le meme mot
 		// surtout si le filtre est appelle plusieurs fois pour la meme recherche
-		if (!isset($mot_semblable_best[$mot])){
+		if (!isset($mot_semblable_best[$mot])||$dump){
 			$candidats = array();
 			for ($k=0;$k<strlen($mot)-1;$k++){
 				$permut = "_";
@@ -270,37 +256,53 @@
 				$candidats[] = $test;
 			}
 		
-			if (isset($_GET['dump'])) var_dump($candidats);// pour le debugage
+			if ($dump) var_dump($candidats);// pour le debugage
 			$confirmes = array();
 			foreach ($candidats as $test){
-				if (isset($_GET['dump'])) echo "::$test";// pour le debugage
+				if ($dump) echo "::$test";// pour le debugage
 				$hash = requete_hash($test);
 			  $hashres = $hash[0]; // on peut prendre le non strict
 				if ($hashres){
 					$query = "SELECT * FROM spip_index_dico WHERE hash IN (".$hash[0].")";
 					$res = spip_query($query);
 					while ($row =spip_fetch_array($res)){
-						if (isset($_GET['dump'])) echo "::".$row['dico'];
-						$confirmes[$row['dico']]=0;
+						if ($dump) echo "::".$row['dico'];
+						$confirmes[$row['dico']]=abs(strlen($row['dico'])-strlen($mot));
 					}
 				};
-				if (isset($_GET['dump'])) echo "<br/>";// pour le debugage
+				if ($dump) echo "<br/>";// pour le debugage
 			}
 		
 			$best = $mot;
 			$best_match = 10000;
 			if (count($confirmes)){
+				//asort($confirmes);
 				// calcul de l'erreur absolue
 				foreach(array_keys($confirmes) as $key){
 					$confirmes[$key] = $score = RechercheEtendue_mot_match($mot,$key,$best_match);
-					if ($score<$best_match){
+					if ($score==$best_match)
+						$best[$key] = 0;
+					else if ($score<$best_match){
 						$best_match = $score;
-						$best = $key;
+						$best = array($key=>0);
 					}
 			 	}
-				if (isset($_GET['dump'])) var_dump($confirmes);// pour le debugage
+				if ($dump) var_dump($confirmes);// pour le debugage
 		 	}
-		 	$mot_semblable_best[$mot]=$best;
+		 	// TODO : trouver le plus pertinent en cas d'exaequo
+		 	/*if (count($best)>1){
+		 		$soundex = RechercheEtendue_soundex_fr($mot);
+		 		if($dump) echo "$mot:$soundex"."<br/>";
+		 		foreach($best as $test=>$dummy)
+		 		{
+		 			if($dump) echo "$test:".RechercheEtendue_soundex_fr($test)."<br/>";
+		 		}
+		 	}*/
+		 	$mot_semblable_best[$mot]=reset(array_keys($best));
+			// ecrire le cache de la recherche sur le disque
+			ecrire_fichier($fcache[$mot], serialize($mot_semblable_best[$mot]));
+			// purger le petit cache
+			nettoyer_petit_cache('simi', 300);
 		}
 	
 		return $mot_semblable_best[$mot];
