@@ -80,6 +80,13 @@
 		<url>
 		  <loc>[(#URL_PAGE{sommaire})]</loc>
 		  <priority>1.0</priority>
+		  [(#REM|remonte_date_modif)]
+			<lastmod>[(#REM|date_modif{1})]</lastmod>
+		</url>
+		<url>
+		  <loc>[(#URL_SITE_SPIP)]</loc>
+		  <priority>1.0</priority>
+		  [(#REM|remonte_date_modif)]
 			<lastmod>[(#REM|date_modif{1})]</lastmod>
 		</url>
 	]
@@ -87,6 +94,7 @@
 		<url>
 		  <loc>[(#URL_PAGE{index})]</loc>
 		  <priority>1.0</priority>
+		  [(#REM|remonte_date_modif)]
 			<lastmod>[(#REM|date_modif{1})]</lastmod>
 		</url>
 	]
