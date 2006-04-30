@@ -98,7 +98,7 @@ class actionParser  {
 	}
 
 	function startElement($parser, $name, $attrs) {
-		echo "START $name ".var_export($attrs, 1)."\n";
+		//echo "START $name ".var_export($attrs, 1)."\n";
 		//$st= ($this->state==null)?null:$this->state[0];
 		switch($name) {
 		case 'actions':
@@ -148,16 +148,16 @@ class actionParser  {
 			}
 
 			$colonne= $attrs['name'];
-			if($attrs['value']) {
+			if(array_key_exists('value', $attrs)) {
 				// attribut value => on prend la valeur sans chercher plus loin
 				$this->actions[0][$name][$colonne]= $attrs['value'];
-			} elseif($r=$attrs['ref']) {
+			} elseif(array_key_exists('ref', $attrs)) {
 				$this->actions[0][$name][$colonne]=
-					array('type' => 'ref', 'ref' => $r);
-			} elseif($vf=$attrs['valueFrom']) {
+					array('type' => 'ref', 'ref' => $attrs['ref']);
+			} elseif(array_key_exists('valueFrom', $attrs)) {
 				// attribut valueFrom => on cherche si on a une telle
 				// valeur dans le post, mais on teste également les conditions
-				if($v=$this->valeurs[$vf]) {
+				if($v=$this->valeurs[$attrs['valueFrom']]) {
 					$this->actions[0][$name][$colonne]= $v;
 					$this->actions[0]['aFaire']= 'oui';
 				} else {
@@ -271,8 +271,10 @@ class actionParser  {
 				$where= join(' AND ', $where);
 				$this->tmpVars++;
 				$var= '$tmp_var'.$this->tmpVars;
+				$table= description_type_requete($value['table']);
+				$table= $table['table'];
 				$res.="\n && (($var=spip_abstract_fetsel(\""
-					.$value['colonne']."\", \"".$value['table']
+					.$value['colonne']."\", \"".$table
 					."\", \"$where\")) && ($var= ${var}['"
 					.$value['colonne']."']))";
 				$value= "\".$var.\"";

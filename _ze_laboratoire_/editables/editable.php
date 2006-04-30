@@ -80,7 +80,7 @@ error_log("callbacks $callbacks");
 		return $p;
 	}
 
-	$p->code = "new_widget($id, $classe, $valeur, $callbacks)";
+	$p->code = editable($editable, $id, $classe, $valeur, $callbacks);
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -98,14 +98,18 @@ error_log("EDITABLE_DEBUT");
 		$actions=  calculer_liste($p->param[0][1],
 			$p->descr, $p->boucles, $p->id_boucle);
 		$editable['actions']= $actions;
+
+		if ($p->param[0][2]) {
+			$editable['retour']=  calculer_liste($p->param[0][2],
+				$p->descr, $p->boucles, $p->id_boucle);
+		} else {
+			$editable['retour']= 'self()';
+		}
 	} else {
 		$editable['actions']='';
 	}
 
-	$p->code= '"<form method=\'post\' name=\'zonesEditables\' action=\'ecrire/index.php\'>
-	<input type=\'hidden\' name=\'exec\' value=\'editer\'>
-	<input type=\'hidden\' name=\'retour\' value=\'".self()."\'>
-"';
+	$p->code= editable_debut($editable);
 
 	return $p;
 }
@@ -113,13 +117,27 @@ error_log("EDITABLE_DEBUT");
 function balise_EDITABLE_FIN($p) {
 	global $editable;
 error_log("EDITABLE_FIN");
+	$p->code = editable_fin($editable);
+	return $p;
+}
 
-	$p->code = '"	<input type=\"submit\" value=\"ok\" />
+function editable_debut(&$editable) {
+	return '"<form method=\'post\' name=\'zonesEditables\' action=\'ecrire/index.php\'>
+	<input type=\'hidden\' name=\'exec\' value=\'editer\'>
+	<input type=\'hidden\' name=\'retour\' value=\'".'.$editable['retour'].'."\'>
+"';
+}
+
+function editable_fin(&$editable) {
+	return '"	<input type=\"submit\" value=\"ok\" />
 	<input type=\'hidden\' name=\'actions\' value=\'".(urlencode($actions=doSpipInclude('.$editable['actions'].')))."\'>
 	<input type=\'hidden\' name=\'callbacks\' value=\'".urlencode($callbacks=compactCallBacks())."\'>
 	<input type=\'hidden\' name=\'actions_secu\' value=\'".md5($actions.\' - \'.$GLOBALS[\'meta\'][\'alea_ephemere\'].\' - \'.$callbacks)."\'>
 </form>"';
-	return $p;
+}
+
+function editable(&$editable, $id, $classe, $valeur=null, $callbacks=null) {
+	return "new_widget($id, $classe, $valeur, $callbacks)";
 }
 
 ?>
