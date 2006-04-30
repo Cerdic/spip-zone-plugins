@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('editable');
 
 include_spip('inc/presentation');
 include_spip('inc/texte');
@@ -532,22 +533,26 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 	
 	echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 	echo "<tr width='100%'><td width='100%' valign='top'>";
-	
-	if ($surtitre) {
-		echo "<span id='surtitre' $dir_lang><font face='arial,helvetica' size=3><b>";
-		echo typo($surtitre);
-		echo "</b></font></span>\n";
-		echo "<a href='#' title='toggle TinyMCE' onclick='toggleEdit(\"surtitre\");'>Edit</a>";
-	}
+
+	echo "<div id='surtitre' class='editSurtitre'>".typo($surtitre)."</div>\n";
+	echo boutonEditer('surtitre');
+
+//	if ($surtitre) {
+//		echo "<span $dir_lang><font face='arial,helvetica' size=3><b>";
+//		echo typo($surtitre);
+//		echo "</b></font></span>\n";
+//	}
 
 	gros_titre($titre, $logo_statut);
 
-	if ($soustitre) {
-		echo "<span id='soustitre' $dir_lang><font face='arial,helvetica' size=3><b>";
-		echo typo($soustitre);
-		echo "</b></font></span>\n";
-		echo "<a href='#' title='toggle TinyMCE' onclick='toggleEdit(\"soustitre\");'>Edit</a>";
-	}
+//	if ($soustitre) {
+//		echo "<span $dir_lang><font face='arial,helvetica' size=3><b>";
+//		echo typo($soustitre);
+//		echo "</b></font></span>\n";
+//	}
+
+	echo "<div id='soustitre' class='editSurtitre'>".typo($soustitre)."</div>\n";
+	echo boutonEditer('soustitre');
 
 	if ($descriptif OR $url_site OR $nom_site) {
 		echo "<p><div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' id='descriptif' $dir_lang>";
@@ -1453,7 +1458,7 @@ function insert_article($id_parent, $new)
 }
 // Y a-t-il vraiment 56 variables determinant l'edition d'un article ?
 
-function exec_articles_dist()
+function exec_articles_new_dist()
 {
 global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $descriptif, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nom_site, $nouv_auteur, $nouv_mot, $ps, $row, $site_obli, $site_unique, $soustitre, $supp_auteur, $supp_mot, $surtitre, $texte, $texte_petition, $texte_plus, $titre, $titre_article, $url_site, $virtuel; 
 
@@ -1560,4 +1565,9 @@ if (isset($_POST['titre'])) {
 exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $id_rubrique, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad);
 
 }
+
+function boutonEditer($id) {
+	return "<a href='#' title='toggle TinyMCE' onclick='toggleEdit(\"$id\");'>Edit</a>";
+}
+
 ?>
