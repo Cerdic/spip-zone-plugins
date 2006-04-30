@@ -121,25 +121,40 @@
 	function RechercheEtendue_google_like($query,$alternative = ""){
 		include_spip('inc/surligne');
 	  $string = RechercheEtendue_google_like_string('','get');
-		$qt = explode(" ", $query);
+		$qt = preg_split(',\s+,ms', $query);
+		foreach($qt as $key=>$mot){
+			if (strlen($mot) >= 2) {
+				$qt[$key] = surligner_regexp_accents(preg_quote(str_replace('/', '', $mot)));
+			}
+		}
 		$num = count ($qt);
 		$cc = ceil(200 / $num);
 		$string_re = "";
 		for ($i = 0; $i < $num; $i++) {
 			$tab[$i] = preg_split("/($qt[$i])/i",$string,2, PREG_SPLIT_DELIM_CAPTURE);
 			if(count($tab[$i])>1){
-				$avant[$i] = substr($tab[$i][0],-$cc,$cc);
-				$pos = strpos($avant[$i], " ");
-				$avant[$i]= charset2unicode(substr($avant[$i],$pos));
-				$apres[$i] = substr($tab[$i][2],0,$cc);
-				$pos = strrpos($apres[$i], " ");
-				$apres[$i] = charset2unicode(substr($apres[$i],0,$pos));
-				//$string_re .= "<em>[...]</em> $avant[$i]<strong>".$tab[$i][1]."</strong>$apres[$i] <em>[...]</em> ";
-				$string_re .= "<em>[...]</em> $avant[$i]".charset2unicode($tab[$i][1])."$apres[$i] <em>[...]</em> ";
+				$avant[$i] = reset($tab[$i]);
+				if (strlen($avant[$i])>$cc){
+					$avant[$i] = substr($avant[$i],-$cc,$cc);
+					$pos = strpos($avant[$i], " ");
+					$avant[$i]= " <em>[...]</em> " . substr($avant[$i],$pos);
+				}
+				$apres[$i] = end($tab[$i]);
+				if (strlen($apres[$i])>$cc){
+					$apres[$i] = substr($apres[$i],0,$cc);
+					$pos = strrpos($apres[$i], " ");
+					$apres[$i] = substr($apres[$i],0,$pos) . " <em>[...]</em> ";
+				}
+				$string_re .= $avant[$i].$tab[$i][1].$apres[$i];
 			}
 		}
-		if (strlen($string_re))
-			return surligner_mots($string_re,$query);
+		if (strlen($string_re)){
+			$regexp = '/((^|>)([^<]*[^[:alnum:]_<\x80-\xFF])?)(('
+	. join('|', $qt)
+	. ')[[:alnum:]_\x80-\xFF]*?)/Uis';
+			$string_re = preg_replace($regexp, '\1<span class="spip_surligne">\4</span>', $string_re);
+			return charset2unicode($string_re);
+		}
 		else
 			return $alternative;
 	}
