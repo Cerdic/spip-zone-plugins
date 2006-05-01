@@ -136,21 +136,38 @@ if ($conf_mot>0) {
 
 	$result_groupes = spip_query("SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots ORDER BY multi");
 
+	echo "\n<script type='text/javascript'>
+	var idOfFolderTrees = ['arrangableNodes'];\n
+	var imageFolder = '".dirname(find_in_path('images/dhtmlgoodies_plus.gif'))."/';	// Path to images
+	var ajaxRequestFile = '?exec=mots_arbo&';
+
+	var onloads = 'alert(onloads);';
+
+	function doOnloads() {
+		eval(onloads);
+	}
+
+	window.onload= doOnloads;
+alert('onload='+onloads);
+</script>";
+
 	echo "\n<link rel='stylesheet' href='"
 		.find_in_path('css/folder-tree-static.css')."' type='text/css'>";
 	echo "\n<script type='text/javascript' src='"
 		.find_in_path('js/ajax.js')."'></script>";
 	echo "\n<script type='text/javascript' src='"
 		.find_in_path('js/folder-tree-static.js')."'></script>";
-	echo "\n<script type='text/javascript'>
-	var idOfFolderTrees = ['arbre_mots_cles'];\n
-	var imageFolder = '".dirname(find_in_path('images/dhtmlgoodies_plus.gif'))."/';	// Path to images
-	var ajaxRequestFile = '?exec=mots_arbo&';
-</script>";
 
+	echo "\n<link rel='stylesheet' href='"
+		.find_in_path('css/manip-tree.css')."' type='text/css'>";
+	echo "\n<script type='text/javascript' src='"
+		.find_in_path('js/manip-tree.js')."'></script>";
+
+	echo "\n<div id='movableNode'><ul></ul></div>";	
+	echo "\n<div id='arrDestIndicator'><img src='img_pack/deplierhaut.gif'></div>";
 	echo "\n<form action='../spip.php?action=bouger_mots' method='post'>";
 	echo "\n<input type='hidden' name='redirect' value='ecrire?exec=mots_arbo'/>";
-	echo "\n<ul id='arbre_mots_cles' class='dhtmlgoodies_tree'>Groupes de mots clés :";
+	echo "\n<ul id='arrangableNodes' class='dhtmlgoodies_tree'>Groupes de mots clés :";
 
 	while ($row_groupes = spip_fetch_array($result_groupes)) {
 		$id_groupe = $row_groupes['id_groupe'];

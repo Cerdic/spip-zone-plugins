@@ -206,5 +206,5 @@
 			}			
 		}	
 	}
-	
-	window.onload = initTree;	
+
+	onloads += 'initTree();';

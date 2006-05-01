@@ -1,0 +1,23 @@
+/* Don't change these options */
+#movableNode{
+	position:absolute;
+}
+
+#arrDestIndicator{
+	position:absolute;
+	display:none;
+	width:100px;
+}
+/* End options that shouldn't be changed */
+
+#arrangableNodes,#movableNode ul{
+	padding-left:0px;
+	margin-left:0px;
+	margin-top:0px;
+	padding-top:0px;
+}
+
+#arrangableNodes li,#movableNode li{
+	list-style-type:none;
+	cursor:default;
+}
