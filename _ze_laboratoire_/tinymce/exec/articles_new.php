@@ -531,40 +531,37 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 
 	$logo_statut = "puce-".puce_statut($statut_article).".gif";
 	
+	echo "\n<link rel='stylesheet' type='text/css' href='"
+		.find_in_path("css/articleEdit.css")."' />";
+	// A FAIRE : un peu caca => a ameliorer ...
+	echo "\n<script>var id_article=".$id_article.";</script>";
 	echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 	echo "<tr width='100%'><td width='100%' valign='top'>";
 
-	echo "<div id='surtitre' class='editSurtitre'>".typo($surtitre)."</div>\n";
-	echo boutonEditer('surtitre');
+	echo "<div id='surtitre' style='font-size:3; font:arial,helvetica; font-weight:bold; display:inline;'>".typo($surtitre)."</div>\n";
+	echo boutonEditer('surtitre', $surtitre?'':' le sur-titre');
 
-//	if ($surtitre) {
-//		echo "<span $dir_lang><font face='arial,helvetica' size=3><b>";
-//		echo typo($surtitre);
-//		echo "</b></font></span>\n";
-//	}
+	if (strlen($logo_statut) > 3) {
+		echo http_img_pack("$logo_statut", "", "border=0 align='middle'")
+			." &nbsp; ";
+	}
+	echo "<div id='titre' style='font-size: 18px; color: $couleur_foncee; font-weight: bold; display:inline;' class='verdana'>".typo($titre)."</div>\n";
+	echo boutonEditer('titre', $titre?'':' le titre');
 
-	gros_titre($titre, $logo_statut);
-
-//	if ($soustitre) {
-//		echo "<span $dir_lang><font face='arial,helvetica' size=3><b>";
-//		echo typo($soustitre);
-//		echo "</b></font></span>\n";
-//	}
-
-	echo "<div id='soustitre' class='editSurtitre'>".typo($soustitre)."</div>\n";
-	echo boutonEditer('soustitre');
+	echo "<div id='soustitre' style='font-size:3; font:arial,helvetica; font-weight:bold; display:inline;'>".typo($soustitre)."</div>\n";
+	echo boutonEditer('soustitre', $soustitre?'':' le sous-titre');
 
 	if ($descriptif OR $url_site OR $nom_site) {
 		echo "<p><div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' id='descriptif' $dir_lang>";
-		echo "<font size=2 face='Verdana,Arial,Sans,sans-serif'>";
+		echo "<div id='descriptif' style='font-size:2; font:Verdana,Arial,Sans,sans-serif; display:inline;'>";
 		$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
 		$texte_case .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
 		echo propre($texte_case);
-		echo "</font>";
 		echo "</div>";
-		echo "<a href='#' title='toggle TinyMCE' onclick='toggleEdit(\"descriptif\");'>Edit</a>";
+		echo boutonEditer('descriptif', $descriptif?'':' le descriptif');
+		echo "</div>";
 	}
-	
+
 	
 	if ($statut_article == 'prop') {
 		echo "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='red'><B>"._T('text_article_propose_publication')."</B></FONT></P>";
@@ -1566,8 +1563,8 @@ exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $
 
 }
 
-function boutonEditer($id) {
-	return "<a href='#' title='toggle TinyMCE' onclick='toggleEdit(\"$id\");'>Edit</a>";
+function boutonEditer($id, $titre='') {
+	return "<a href='#' title='editer$titre' onclick='toggleEdit(\"$id\");'><span id='${id}_open' style='display:inline;'>Editer$titre</span><span id='${id}_close' style='display:none;'>Sauver</span></a><br/>";
 }
 
 ?>

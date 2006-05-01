@@ -21,7 +21,26 @@ tinyMCE.init({
 });
 
 function beforeSaveCallBack(element_id, html, body) {
-	return "<!-- TINY_MCE -->"+html;
+
+alert('element_id='+element_id+'\nhtml='+html+'\nbody='+body);
+
+	if (!(xmlhttp[element_id] = createXmlHttp()))
+		return false;
+
+// A REVOIR : comment en faire du post pour poster des textes > 4Ko ?
+	xmlhttp[element_id].open("GET", '?exec=ajax_edit_article&champ='+element_id+'&id='+id_article+'&texte='+escape(html), true);
+	// traiter la reponse du serveur
+	xmlhttp[element_id].onreadystatechange = function() {
+		if (xmlhttp[element_id].readyState == 4) { 
+			// si elle est non vide, l'afficher
+			if (xmlhttp[element_id].responseText != '') {
+				body.innerHTML = xmlhttp[element_id].responseText;
+			}
+		}
+	}
+	xmlhttp[element_id].send(null);
+
+	return html;
 }
 
 var currentTinyMCE = false;
@@ -29,30 +48,37 @@ var currentTinyMCE = false;
 function toggleEdit(id) {
 	if(currentTinyMCE==false) {
 		setTinyMCE(id);
-		currentTinyMCE= id;
 	} else {
 		if(currentTinyMCE!=id) {
 			unsetTinyMCE(currentTinyMCE);
 			setTinyMCE(id);
-			currentTinyMCE= id;
 		} else {
 			unsetTinyMCE(id);			
-			currentTinyMCE= false;
 		}
 	}
 }
 
-function setTinyMCE(sEditorID) {
-	var oEditor = document.getElementById(sEditorID);
+function setTinyMCE(id) {
+	var open = document.getElementById(id+'_open');
+	open.style.display='none';
+	var close = document.getElementById(id+'_close');
+	close.style.display='inline';
+
+	var oEditor = document.getElementById(id);
 	if(oEditor) {
-		tinyMCE.execCommand('mceAddControl', true, sEditorID);
-		currentTinyMCE = sEditorID;
+		tinyMCE.execCommand('mceAddControl', true, id);
+		currentTinyMCE = id;
 	}
 	return;
 }
 
-function unsetTinyMCE() {
-	var oEditor = document.getElementById(currentTinyMCE);
+function unsetTinyMCE(id) {
+	var open = document.getElementById(id+'_open');
+	open.style.display='inline';
+	var close = document.getElementById(id+'_close');
+	close.style.display='none';
+
+	var oEditor = document.getElementById(id);
 	if(oEditor) {
 		tinyMCE.triggerSave();
 		tinyMCE.execCommand('mceRemoveControl', true, currentTinyMCE);
