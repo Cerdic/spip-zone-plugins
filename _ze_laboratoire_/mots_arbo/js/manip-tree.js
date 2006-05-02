@@ -27,7 +27,7 @@ if(!document.all) offsetYInsertDiv = offsetYInsertDiv - 7; 	// No IE
 
 // la partie dans laquelle on va pouvoir bricoler
 var arrParent = false;
-// la partie dans laquelle on va greffer les morceaux en cours de drag
+// le div dans lequel on va greffer les morceaux en cours de drag
 var arrMoveCont = false;
 // compteur pour determier quand on lache la souris ?
 var arrMoveCounter = -1;
@@ -110,9 +110,14 @@ function clearMovableDiv() {
 }
 
 function initMoveNode(e) {
-//alert("initMoveNode "+this.id);
+alert("initMoveNode "+this.id+arrTarget);
 	// pour ne pas reagir sur tous les parents d'un item
-	if(arrTarget) return;
+	if(arrTarget) {
+		// pour annuler le hack de folder-tree-static.js
+		//if(arrTarget==true) arrTarget=false;
+		e.cancelBubble();
+		return;
+	}
 
 	clearMovableDiv();
 	if(document.all) e= event;
@@ -266,7 +271,7 @@ function initArrangableNodes() {
 	
 	var subs = arrParent.getElementsByTagName('LI');
 	for(var no=0;no<subs.length;no++){
-		subs[no].onmousedown = initMoveNode;
+		subs[no].onclick /*mousedown*/ = initMoveNode;
 		subs[no].onselectstart = cancelEvent;	
 	}
 

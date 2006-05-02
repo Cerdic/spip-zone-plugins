@@ -10,14 +10,15 @@
 }
 /* End options that shouldn't be changed */
 
-#arrangableNodes,#movableNode ul{
+/*#arrangableNodes {
 	padding-left:0px;
 	margin-left:0px;
 	margin-top:0px;
 	padding-top:0px;
 }
+*/
 
-#arrangableNodes li,#movableNode li{
+#arrangableNodes li /*,#movableNode li*/ {
 	list-style-type:none;
 	cursor:default;
 }

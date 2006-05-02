@@ -141,14 +141,13 @@ if ($conf_mot>0) {
 	var imageFolder = '".dirname(find_in_path('images/dhtmlgoodies_plus.gif'))."/';	// Path to images
 	var ajaxRequestFile = '?exec=mots_arbo&';
 
-	var onloads = 'alert(onloads);';
+	var onloads = '';
 
 	function doOnloads() {
 		eval(onloads);
 	}
 
 	window.onload= doOnloads;
-alert('onload='+onloads);
 </script>";
 
 	echo "\n<link rel='stylesheet' href='"
