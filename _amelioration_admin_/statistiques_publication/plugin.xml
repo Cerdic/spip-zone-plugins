@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Statistiques de publication</nom>
-	<auteur><a href="http://francois.schreuer.org/">franz</a>
+	<auteur>[franz->http://francois.schreuer.org]
 
 	&copy; 2006 - Distribu&eacute; sous licence GPL</auteur>
 	<version>
@@ -14,7 +14,7 @@
 
 	Attention, il est terriblement gourmand en l'&eacute;tat actuel des choses (90 requ&ecirc;tes mysql !). Il faudra lui mitonner un petit cache, probablement.
 
-	Il a &eacute;t&eacute; d&eacute;velopp&eacute; pour servir de tableau de bord au projet de portail <a href="http://mouvements.be/">mouvements.be/</a>.
+	Il a &eacute;t&eacute; d&eacute;velopp&eacute; pour servir de tableau de bord au projet de portail [mouvements.be->http://mouvements.be].
 	</description>
 	<prefix>stats_pub</prefix>
 	<pipeline>
