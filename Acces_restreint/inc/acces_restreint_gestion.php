@@ -1,16 +1,21 @@
 <?php
 
   function AccesRestreint_cree_zone(){
-    $titre = addslashes($_POST['titre']);
-    $descriptif = addslashes($_POST['descriptif']);
+  	$titre = addslashes(_request('titre'));
+  	$descriptif = addslashes(_request('descriptif'));
 		if (strlen($titre)>0){
 			$id_zone = spip_abstract_insert('spip_zones', "(titre,descriptif,maj)", "('$titre','$descriptif',NOW())");
+			if ($id_zone && _request('auto_attribue_droits')=='oui'){
+				global $connect_id_auteur, $connect_statut;
+				if ($connect_statut == '0minirezo')
+					spip_abstract_insert('spip_zones_auteurs', "(id_zone,id_auteur)", "($id_zone,$connect_id_auteur)");
+			}
 			return $id_zone;
 		} 
 		return 0;
 	}
   function AccesRestreint_supprimer_zone(){
-  	$id_zone = intval($_GET['supp_zone']);
+  	$id_zone = intval(_request('supp_zone'));
   	if ($id_zone){
 			spip_query("DELETE FROM spip_zones WHERE id_zone='$id_zone'");
 			spip_query("DELETE FROM spip_zones_rubriques WHERE id_zone='$id_zone'");
@@ -20,9 +25,9 @@
 	}
 
   function AccesRestreint_enregistrer_zone(){
-    $titre = addslashes($_POST['titre']);
-    $descriptif = addslashes($_POST['descriptif']);
-    $id_zone = intval($_GET['id_zone']);
+    $titre = addslashes(_request('titre'));
+    $descriptif = addslashes(_request('descriptif'));
+    $id_zone = intval(_request('id_zone'));
 		if (strlen($titre)>0 && $id_zone){
 			spip_query("UPDATE spip_zones SET titre='$titre', descriptif='$descriptif' WHERE id_zone=$id_zone");
 			// suppression de tous les liens zone-rubriques
@@ -33,7 +38,7 @@
 					spip_abstract_insert('spip_zones_rubriques', "(id_zone,id_rubrique)", "('$id_zone','$id')");
 				}
 			}
-		} 
+		}
 		return 0;
 	}
 

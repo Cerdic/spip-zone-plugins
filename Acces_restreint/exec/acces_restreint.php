@@ -31,9 +31,9 @@ function exec_acces_restreint(){
 		fin_page();
 		exit;
 	}
-	if (isset($_POST['creer']))
+	if (_request('creer')!=NULL)
 		AccesRestreint_cree_zone();
-	if (isset($_GET['supp_zone']))
+	if (_request('supp_zone')!=NULL)
 		AccesRestreint_supprimer_zone();
 
 	$requete = array("SELECT"=>"zones.*","FROM"=>"spip_zones AS zones");
@@ -142,6 +142,10 @@ function exec_acces_restreint(){
 	echo "descriptif";
 	echo "</textarea>";
 	echo "</p>";
+
+	if ($connect_statut == "0minirezo" && $connect_toutes_rubriques)
+		echo "<input type='checkbox' name='auto_attribue_droits' value='oui' checked='checked' id='droits_admin'> <label for='droits_admin'>"._L("M'ajouter les droits d'acces a cette zone")."</label><br>";
+
 	echo "<div style='text-align:$spip_lang_right'><input type='submit' name='creer' value='"._T('accesrestreint:bouton_creer_la_zone')."' class='fondo'></div>";
 	echo "</div>";
 	echo "</form>";
