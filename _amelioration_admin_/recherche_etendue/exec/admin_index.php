@@ -19,7 +19,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/indexation');
-include_ecrire ("inc_presentation");
+include_spip('inc/presentation');
 
 function jauge($couleur,$pixels) {
 	if ($pixels)
@@ -169,7 +169,7 @@ function exec_admin_index_dist()
 	fin_cadre_relief();
 	
 	
-	echo "<BR>";
+	echo "<br/>";
 	
 	fin_page();
 }
