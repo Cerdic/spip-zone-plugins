@@ -28,6 +28,21 @@ $spip_types_tables_key = array(
 $tables_auxiliaires['spip_types_tables'] = array(
 	'field' => &$spip_types_tables,
 	'key' => &$spip_types_tables_key);
+	
+// definir la table de memo des recherches
+$spip_recherches = array(
+		"mot"	=> "varchar(25) NOT NULL",
+		"requete"	=> "varchar(100) NOT NULL",
+		"recherches"	=> "INT UNSIGNED NOT NULL",
+		"date"	=> "DATE NOT NULL",
+		"maj"	=> "TIMESTAMP");
+
+$spip_recherches_key = array(
+		"INDEX"	=> "mot");
+
+$tables_auxiliaires['spip_recherches'] = array(
+	'field' => &$spip_recherches,
+	'key' => &$spip_recherches_key);
 
 //-- Relations ----------------------------------------------------
 
