@@ -20,6 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/indexation');
 include_spip('inc/presentation');
+include_spip('inc/indexation_etendue');
 
 function jauge($couleur,$pixels) {
 	if ($pixels)
@@ -79,6 +80,7 @@ function exec_admin_index_dist()
 	$liste_tables = array();
 	$icone_type = array();
 	update_index_tables();
+	update_index_tables_sql_from_meta();
 	$liste_tables = liste_index_tables();
 	asort($liste_tables);
 	

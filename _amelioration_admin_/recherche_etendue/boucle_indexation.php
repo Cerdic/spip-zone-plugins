@@ -15,22 +15,18 @@
  *
  */
 
-include_spip('inc/indexation');
-global $table_des_tables;
-global $exceptions_des_tables;
+include_spip('base/indexation_etendue');
 
-
-$table_des_tables['index']='index';
-
-$liste_tables = liste_index_tables();
-// on ecrit les as pour chaque id
-foreach($liste_tables as $id=>$table){
-	$primary = primary_index_table($table);
-	if ($primary)
-		$exceptions_des_tables['index'][$primary] = 'id_objet*(id_table='. $id .')';
+if (!isset($GLOBALS['meta']['Recherche_etendue_exceptions'])){
+	include_spip('inc/indexation_etendue');
+	update_index_tables_sql_from_meta();
 }
-//$exceptions_des_tables['index']['id_table'] = 'id_table';
-$exceptions_des_tables['index']['table'] = 'id_table';
+if (isset($GLOBALS['meta']['Recherche_etendue_exceptions'])){
+	global $exceptions_des_tables;
+	$table_objet_vers_id = unserialize($GLOBALS['meta']['Recherche_etendue_exceptions']);
+	foreach($table_objet_vers_id as $key=>$value)
+		$exceptions_des_tables['index'][$key] = $value;
+}
 
 
 // {recherche}
@@ -72,28 +68,14 @@ function boucle_INDEX_dist($id_boucle, &$boucles) {
 	$id_table = $boucle->id_table;
 	$boucle->from[$id_table] =  "spip_index";
 
+	// rajouter l'id de la boucle devant le id_table contenu dans les champs calcules
 	foreach($boucle->select as $key=>$select)
 		$boucle->select[$key]=preg_replace('{\(id_table=}','('.$boucle->id_table.'.id_table=',$select);
-	$boucle->select[] = $boucle->id_table.'.id_table as id_table';
-
-	//$boucle->select[] = $boucle->id_table.'.id_objet as id_objet';
-	//$liste_tables = liste_index_tables();
-	// on ecrit les as pour chaque id
-	/*foreach($liste_tables as $id=>$table){
-		$primary = primary_index_table($table);
-		if ($primary){
-			$boucle->select[] = $boucle->id_table . '.id_objet*('
-					. $boucle->id_table . '.id_table='. $id .') as ' . $primary;
-
-			// on remplace les $Pile[0][$primary] par $Pile[$SP][$primary]
-			$boucle->return = str_replace('$Pile[0][\''.$primary.'\']','$Pile[$SP][\''.$primary.'\']',$boucle->return);
-		}
-	}*/
+	//$boucle->select[] = $boucle->id_table.'.id_table as id_table';
 
 	$boucle->group[] = 'CONCAT(' . $boucle->id_table . '.id_table,\':\','.$boucle->id_table . '.id_objet)';
-
 	
-	static $table_abr=array();
+	/*static $table_abr=array();
 	static $table_full=array();
 	static $liste_tables=array();
 	if (!count($table_abr)){
@@ -104,9 +86,9 @@ function boucle_INDEX_dist($id_boucle, &$boucles) {
 			}
 		}
 		$liste_tables = liste_index_tables();
-	}
+	}*/
 	
-	foreach($boucle->where as $key=>$where){
+	/*foreach($boucle->where as $key=>$where){
 		if (!is_array($where)){
 			if (strpos($where,'id_table')!==FALSE){
 				// on regarde si y a des criteres nom_table=articles
@@ -125,7 +107,7 @@ function boucle_INDEX_dist($id_boucle, &$boucles) {
 				$boucle->where[$key] = $where;
 			}
 		}
-	}
+	}*/
 	
 	foreach($boucle->order as $key=>$order){
 		$boucle->order[$key]=str_replace($boucle->id_table . '.points','points',$order);
