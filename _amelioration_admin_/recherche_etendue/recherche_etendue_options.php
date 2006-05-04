@@ -16,9 +16,22 @@
  */
 define('_DIR_PLUGIN_ADVANCED_SEARCH',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 
+// #SPIP_RECHERCHE_STAT
+// insere un <div> avec un lien background-image vers la tache de fond 
+// de collecte des requetes 'recherche'
+// Cette balise doit etre presente sur la/les pages d'affichage des resultats
+// de la recherche
+function balise_SPIP_RECHERCHE_STAT_dist ($p) {
+	$code = '<div style="background-image: url(\'' . generer_url_action('recherche_etendue_stats','recherche='._request('recherche').'&debut='._request('debut')) .
+	'\');"></div>';
+	$p->code = '"' . str_replace('"', '\"', $code) . '"';
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 function RechercheEtendue_prepare_index_recherche($recherche, $cond=false){
 	include_spip('inc/indexation');
-
+spip_log('RechercheEtendue_prepare_index_recherche '.date('H:i:s'));
 	static $cache = array();
 	static $fcache = array();
 	// traiter le cas {recherche?}
