@@ -139,8 +139,7 @@ function exec_config_types_documents() {
 					'arial11 inclus',
 					'arial11 count',
 					'arial11 delete');	
-	
-	afficher_liste($largeurs, $table, $styles);
+	echo afficher_liste($largeurs, $table, $styles);
 	
 	echo afficher_liste_fin_tableau();
 	
@@ -161,7 +160,7 @@ function exec_config_types_documents() {
 			   '<input type="submit" value="'._T('valider').'"/>'
 			   );
 	
-	afficher_liste($largeurs, array($v), $styles);
+	echo afficher_liste($largeurs, array($v), $styles);
 	
 	echo afficher_liste_fin_tableau();
 	
