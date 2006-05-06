@@ -24,10 +24,10 @@ function TriMots_affiche_droite($arguments) {
   global $connect_statut, $connect_toutes_rubriques;
   if (($connect_statut == '0minirezo') AND $connect_toutes_rubriques) {
 	if(_request('exec') == 'articles') {
-	  $arguments['data'] .= TriMots_boite_tri_mots($arguments['args']['id_article']);
+	  $arguments['data'] .= TriMots_boite_tri_mots($arguments['arg']['id_article']);
 	}
 	else if(_request('exec') == 'mots_edit') {
-	  $arguments['data'] .= icone(_T('trimots:titre_page'),generer_url_ecrire('tri_mots','objet=articles&id_objet=id_article&id_mot='.$arguments['args']['id_mot'].'&retour='.urlencode(generer_url_ecrire('mots_edit',"id_mot=".$arguments['args']['id_mot']))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
+	  $arguments['data'] .= icone(_T('trimots:titre_page'),generer_url_ecrire('tri_mots','objet=articles&id_objet=id_article&id_mot='.$arguments['arg']['id_mot'].'&retour='.urlencode(generer_url_ecrire('mots_edit',"id_mot=".$arguments['args']['id_mot']))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
 	}
   }
   return $arguments;
