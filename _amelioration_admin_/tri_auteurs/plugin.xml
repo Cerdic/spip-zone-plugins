@@ -35,11 +35,11 @@
 	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
-		<nom>ajouter_boite_gauche</nom>
+		<nom>affiche_droite</nom>
 		<inclure>TriAuteurs.php</inclure>
 	</pipeline>	
 	<pipeline>
-	  <nom>ajouter_styles</nom>
+	  <nom>header_prive</nom>
 	  <inclure>TriAuteurs.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->

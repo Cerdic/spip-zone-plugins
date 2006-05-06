@@ -19,7 +19,7 @@
 
 define('_DIR_PLUGIN_TRI_AUTEURS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 
-function TriAuteurs_ajouter_boite_gauche($arguments) {  
+function TriAuteurs_affiche_droite($arguments) {  
   if($arguments['args']['exec'] == 'articles') {
 	include('tri_auteurs_utils.php');
 	$table_pref = 'spip';
@@ -96,7 +96,7 @@ function TriAuteurs_boite_tri_auteurs($id_article,$id_rubrique) {
 }
 
 
-function TriAuteurs_ajouter_styles($texte) {
+function TriAuteurs_header_prive($texte) {
   $texte.= '<link rel="stylesheet" type="text/css" href="' ._DIR_PLUGIN_TRI_AUTEURS. '/tri_auteurs.css" />' . "\n";
   return $texte;
 }

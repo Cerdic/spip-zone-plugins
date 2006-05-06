@@ -24,10 +24,10 @@ function TriMots_affiche_droite($arguments) {
   global $connect_statut, $connect_toutes_rubriques;
   if (($connect_statut == '0minirezo') AND $connect_toutes_rubriques) {
 	if(_request('exec') == 'articles') {
-	  $arguments['data'] .= TriMots_boite_tri_mots($arguments['arg']['id_article']);
+	  $arguments['data'] .= TriMots_boite_tri_mots(_request('id_article'));
 	}
 	else if(_request('exec') == 'mots_edit') {
-	  $arguments['data'] .= icone(_T('trimots:titre_page'),generer_url_ecrire('tri_mots','objet=articles&id_objet=id_article&id_mot='.$arguments['arg']['id_mot'].'&retour='.urlencode(generer_url_ecrire('mots_edit',"id_mot=".$arguments['args']['id_mot']))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
+	  $arguments['data'] .= icone(_T('trimots:titre_page'),generer_url_ecrire('tri_mots','objet=articles&id_objet=id_article&id_mot='._request('id_mot').'&retour='.urlencode(generer_url_ecrire('mots_edit',"id_mot="._request('id_mot')))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
 	}
   }
   return $arguments;
@@ -48,6 +48,7 @@ function TriMots_boite_tri_mots($id_article) {
   $from = array('spip_mots_articles as lien','spip_mots as mots');
   $select = array('lien.rang','lien.id_mot','mots.titre');
   $where = array('lien.id_mot=mots.id_mot',"lien.id_article=$id_article");
+  $un_mot = false;
 
   $rez = spip_abstract_select($select,$from,$where);
   $to_ret .= '<div class="plan-articles">';
@@ -57,10 +58,14 @@ function TriMots_boite_tri_mots($id_article) {
 <b> '._T('trimots:rang').'&nbsp;'.$row['rang'].'</b>
 </div>';
 	$to_ret .= $row['titre'].'</a>';
+	$un_mot =true;
   }
   $to_ret .= '</div>';
   $to_ret .= '</div></div>';
-  return $to_ret;
+  if($un_mot)
+   return $to_ret;
+  else
+   return '';
 }
 
 ?>

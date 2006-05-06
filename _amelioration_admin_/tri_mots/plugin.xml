@@ -48,6 +48,7 @@
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>affiche_droite</nom>
+		<action>affiche_droite</action>
 		<inclure>TriMots.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
