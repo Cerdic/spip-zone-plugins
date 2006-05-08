@@ -3,7 +3,7 @@ function Corbeille_signature(){
   
 	echo "<body>";
 	echo "<head>";
-	echo "<title>Pétition</title>";
+	echo "<title>P&eacute;tition</title>";
 	echo "</head>";
 	echo "<body>";
 	
@@ -11,15 +11,15 @@ function Corbeille_signature(){
 	$result = spip_query($req);
 	$row=spip_fetch_array($result);
 	
-	echo "Le <b>" . affdate($row[1]) . "</b>,<br>";
+	echo "Le <b>" . affdate($row[1]) . "</b>,<br />";
 	if (! empty($row[5])) echo "<a href=\"mailto:" . $row[5] . $row[4] . "\">";
 	echo $row[4];
 	if (! empty($row[5])) echo "</a>";
-	echo " a signé via : <b>";
-	echo $row[2] . "</b><br>";
-	echo " la pétition : <b>";
+	echo " a sign&eacute; via : <strong>";
+	echo $row[2] . "</strong><br />";
+	echo " la p&eacute;tition : <strong>";
 	$row2=spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article=$row[0]"));
-	echo $row2[2] . "<b> : " . $row2[5] . "</b><br>";
+	echo $row2[2] . "<strong> : " . $row2[5] . "</strong><br />";
 
 	echo "</body>";
 	echo "</html>";

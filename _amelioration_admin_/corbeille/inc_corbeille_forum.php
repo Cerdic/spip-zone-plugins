@@ -15,8 +15,8 @@ function Corbeille_forum(){
 	if (! empty($row[5])) echo "<a href=\"mailto:" . $row[5] . "\">";
 	echo $row[4];
 	if (! empty($row[5])) echo "</a>";
-	echo " a écrit :<br><br><b>";
-	echo $row[2] . "</b><br><br><p align=justify>" . $row[3] . "</p>";
+	echo " a &eacute;crit :<br /><br /><strong>";
+	echo $row[2] . "</strong><br /><br /><p align=justify>" . $row[3] . "</p>";
 	
 	echo "</body>";
 	echo "</html>";

@@ -36,7 +36,7 @@ lescript;
 	debut_gauche();
 	
 	debut_boite_info();
-	echo propre("Cette page permet de {{supprimer définitivement}} tout document que vous avez jeté à la corbeille. Vous pouvez laisser un document dans la corbeille tant que vous le souhaitez. C'est {{à vous}} de faire le ménage.");	
+	echo propre("Cette page permet de {{supprimer d&eacute;finitivement}} tout document que vous avez jet&eacute; &agrave; la corbeille. Vous pouvez laisser un document dans la corbeille tant que vous le souhaitez. C'est {{&agrave; vous}} de faire le m&eacute;nage.");	
 	fin_boite_info();
 	
 	debut_droite();
@@ -79,7 +79,7 @@ lescript;
 					$id = "id_signature"; 
 					$temps = "date_time"; 
 					$page_voir = array($page4,'id_document');
-					$libelle = _L("Toutes les pétitions dans la corbeille :");
+					$libelle = _L("Toutes les p&eacute;titions dans la corbeille :");
 					break;
 				case "breves" : 
 					$statut = "refuse"; 
@@ -129,9 +129,9 @@ lescript;
 			if (empty($table) || empty($temps) || empty($id) || empty($statut) || empty($titre)) die("souci grave !");
 	                
       if ($operation == "effacer") {
-	      //suppresion des documents demandés
+	      //suppresion des documents demand&eacute;s
 	
-				echo "Documents effacés : ";
+				echo "Documents effac&eacute;s : ";
 				if (count($effacer) == 0) echo "aucun";
 				else {
 					echo "<ul>";

@@ -111,7 +111,7 @@ define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS).
 		$totaux = ($total_auteur + $total_forums_prives + $total_forums_publics + $total_articles + $total_breves + $total_signatures); 
 	
 		//types de documents geres par la corbeille
-		echo _L("Choisissez le type de documents à afficher :<br/>");
+		echo _L("Choisissez le type de documents &agrave; afficher :<br/>");
 		echo "<table style='width:100%'>";
 		$ifond=0;
 	
