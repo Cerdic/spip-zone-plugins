@@ -24,11 +24,17 @@ function beforeSaveCallBack(element_id, html, body) {
 
 alert('element_id='+element_id+'\nhtml='+html+'\nbody='+body);
 
+	// createXmlHttp viens de img_pack/mlayer.js
 	if (!(xmlhttp[element_id] = createXmlHttp()))
 		return false;
 
+	url= "?exec=ajax_edit_article&OK=ok";
+
 // A REVOIR : comment en faire du post pour poster des textes > 4Ko ?
-	xmlhttp[element_id].open("GET", '?exec=ajax_edit_article&champ='+element_id+'&id='+id_article+'&texte='+escape(html), true);
+	//xmlhttp[element_id].open("GET", '?exec=ajax_edit_article&champ='+element_id+'&id='+id_article+'&texte='+escape(html), true);
+	xmlhttp[element_id].open("POST", url);
+	xmlhttp[element_id].setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
 	// traiter la reponse du serveur
 	xmlhttp[element_id].onreadystatechange = function() {
 		if (xmlhttp[element_id].readyState == 4) { 
@@ -38,7 +44,7 @@ alert('element_id='+element_id+'\nhtml='+html+'\nbody='+body);
 			}
 		}
 	}
-	xmlhttp[element_id].send(null);
+    xmlhttp[element_id].send('exec=ajax_edit_article&champ='+element_id+'&id='+id_article+'&texte='+escape(html)); 
 
 	return html;
 }
@@ -85,9 +91,4 @@ function unsetTinyMCE(id) {
 		currentTinyMCE= false;
 	}
 	return;
-}
-
-function doAjaxSave() {
-	alert('save');
-	return false;
 }

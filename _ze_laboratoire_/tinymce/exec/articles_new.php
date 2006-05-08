@@ -129,7 +129,7 @@ debut_cadre_relief();
 // AJOUT POUR TINYMCE
 echo "<script language='javascript' type='text/javascript' src='".find_in_path('js/tiny_mce.js')."'></script>
 <script language='javascript' type='text/javascript' src='".find_in_path('js/mce_widget2.js')."'></script>
-<form name='editText' onSubmit='return doAjaxSave();'>";
+<form name='editText'>"; // onSubmit='return doAjaxSave
 
  $modif = titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique);
 
@@ -553,16 +553,18 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 
 	if ($descriptif OR $url_site OR $nom_site) {
 		echo "<p><div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' id='descriptif' $dir_lang>";
-		echo "<div id='descriptif' style='font-size:2; font:Verdana,Arial,Sans,sans-serif; display:inline;'>";
-		$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
-		$texte_case .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
+		echo "<div style='font-size:2; font:Verdana,Arial,Sans,sans-serif; display:inline;'>";
+		if($descriptif) {
+			echo "<b>"._T('info_descriptif')."</b>\n";
+		}
+		echo "<div id='descriptif'>".propre($descriptif)."</div>";
+		echo boutonEditer('descriptif', $descriptif?'':' le descriptif');
+		$texte_case = ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
 		echo propre($texte_case);
 		echo "</div>";
-		echo boutonEditer('descriptif', $descriptif?'':' le descriptif');
 		echo "</div>";
 	}
 
-	
 	if ($statut_article == 'prop') {
 		echo "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='red'><B>"._T('text_article_propose_publication')."</B></FONT></P>";
 	}
