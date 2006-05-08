@@ -29,14 +29,12 @@ function Agenda_verifier_base(){
 			// si pas deja existant
 			$desc = spip_abstract_showtable("spip_groupes_mots");
 			if (!isset($desc['field']['evenements'])){
-				$query = "ALTER TABLE `spip_groupes_mots` ADD `evenements` VARCHAR(3) NOT NULL AFTER `syndic`";
-				spip_query($query);
+				spip_query("ALTER TABLE spip_groupes_mots ADD `evenements` VARCHAR(3) NOT NULL AFTER `syndic`");
 			}
 			ecrire_meta('agenda_base_version',$current_version=$version_base);
 		}
 		if ($current_version<0.11){
-			$query = "ALTER TABLE `spip_evenements` ADD `horaire` ENUM('oui','non') DEFAULT 'oui' NOT NULL AFTER `lieu`";
-			spip_query($query);
+			spip_query("ALTER TABLE spip_evenements ADD `horaire` ENUM('oui','non') DEFAULT 'oui' NOT NULL AFTER `lieu`");
 			ecrire_meta('agenda_base_version',$current_version=0.11);
 		}
 		
@@ -338,7 +336,7 @@ function Agenda_action_formulaire_article(){
 		$date_fin=format_mysql_date(date("Y",$st_date_fin),date("m",$st_date_fin),date("d",$st_date_fin),date("H",$st_date_fin),date("i",$st_date_fin), $s=0);
 	
 		// mettre a jour l'evenement
-		$query="UPDATE `spip_evenements` SET `titre`='$titre',`descriptif`='$descriptif',`lieu`='$lieu',`horaire`='$horaire',`date_debut`='$date_deb',`date_fin`='$date_fin' WHERE `id_evenement` = '$id_evenement';";
+		$query="UPDATE spip_evenements SET `titre`='$titre',`descriptif`='$descriptif',`lieu`='$lieu',`horaire`='$horaire',`date_debut`='$date_deb',`date_fin`='$date_fin' WHERE `id_evenement` = '$id_evenement';";
 		$res=spip_query($query);
 
 		// les mots cles : 1 maxi par groupe uniquement
