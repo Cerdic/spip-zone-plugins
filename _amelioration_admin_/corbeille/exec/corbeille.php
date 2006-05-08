@@ -12,7 +12,17 @@ function exec_corbeille(){
   include_ecrire("inc_presentation");
 
 	$js=<<<lescript
-<SCRIPT LANGUAGE="JavaScript">
+<script type="text/javascript">
+
+function checkAll() {  // (un)check all checkboxes by erational.org 
+   var flag = document.corb.checkmaster.checked;       
+   var ElNum = document.corb.elements.length;   
+   for (var i=0;i<ElNum;i++){ // scan form elements to get checkbox
+       if (document.corb.elements[i].type=="checkbox")  
+                    document.corb.elements[i].checked = flag;
+   }                                         
+}  
+
 <!-- The JavaScript Source!! http://javascript.internet.com -->
 
 <!-- Begin
@@ -87,7 +97,7 @@ lescript;
 					$id = "id_breve"; 
 					$temps = "date_heure"; 
 					$page_voir = array("breves_voir",'id_breve');
-					$libelle = _L("Toutes les brèves dans la corbeille :");
+					$libelle = _L("Toutes les brÃ¨ves dans la corbeille :");
 					break;
 				case "articles" : 
 					$statut = "poubelle"; 
@@ -129,7 +139,7 @@ lescript;
 			if (empty($table) || empty($temps) || empty($id) || empty($statut) || empty($titre)) die("souci grave !");
 	                
       if ($operation == "effacer") {
-	      //suppresion des documents demand&eacute;s
+	      //suppression des documents demand&eacute;s
 	
 				echo "Documents effac&eacute;s : ";
 				if (count($effacer) == 0) echo "aucun";
@@ -181,14 +191,14 @@ lescript;
 				if (spip_num_rows($result) == 0) 
 					echo "aucun";
 				else {
-					echo "<form action='".generer_url_ecrire($page)."' method='post'>";
+					echo "<form action='".generer_url_ecrire($page)."' method='post' name='corb'>";
 					echo "<input type='hidden' name='operation' value='effacer' />";
 					echo "<input type='hidden' name='type_doc' value='$type_doc' />";
 					echo "<table style='text-align:center;border:0px;width:100%;background:none;' CELLPADDING=3 CELLSPACING=0 WIDTH=100%>";
 					echo "<tr>";
-					echo "<td style='text-align:left;padding-left:150px'>"._L("Titre")."</td>";
-					echo "<td style='text-align:left;padding-left:150px'>"._L("Parution")."</td>";
-					echo "<td style='text-align:left;'>"._L("Effacer")."</td>";
+					echo "<td style='text-align:left;'><input type='checkbox' value='0' name='checkmaster' onclick='checkAll();' /></td>";
+					echo "<td style='text-align:left;'>"._L("Titre")."</td>";
+					echo "<td style='text-align:left;'>"._L("Parution")."</td>";					
 					echo "</tr>\n\n";
 
 					//affichage des 10 documents supprimables
@@ -202,24 +212,19 @@ lescript;
 						else $couleur="#EEEEEE";
 						$compteur++;
 						
-						echo "<tr style='width:100%'>";
-						echo "<td style='background:$couleur;width:100%;'>";
-						echo "<span style='font:Verdana,Arial,Helvetica,sans-serif;font-size:medium'>";
-						if (! empty($page_voir)) 
-							echo "<a href='".generer_url_ecrire($page_voir[0],$page_voir[1]."=$id_document")."'$page_voir_fin>";
+						echo "<tr style='background:$couleur;'>";
+						echo "<td style='width:5%;'><input type='checkbox' name='effacer[]' value='$id_document'' /></td>";					
+						echo "<td class='verdana2' style='width:70%;'>";
+						if (! empty($page_voir))echo "<a href='".generer_url_ecrire($page_voir[0],$page_voir[1]."=$id_document")."'$page_voir_fin>";
 						echo typo($titre);
-						if (! empty($page_voir)) echo "</a>";
-						
-						echo "</span></td>";
-						echo "<td style='background:$couleur;text-align:right;'>";
-						echo "<span style='font:Arial,Helvetica;font-size:medium'>";
+						if (! empty($page_voir)) echo "</a>";						
+						echo "</td>";
+						echo "<td class='verdana2' style='width:25%;'>";						
 						echo affdate($date_heure);
-						echo "</span></td>";
-						echo "<td style='background:$couleur;text-align:center;'>";
-						echo "<input type='checkbox' name='effacer[]' value='$id_document'' /></td>";
+						echo "</td>";
 						echo "</tr>\n";
 					}
-					echo "</table><br /><input type='submit' value='Valider' /></form>\n\n";
+					echo "</table><br /><input type='submit' value='"._L("Effacer")."' /></form>\n\n";
 				}
 			}
 		}

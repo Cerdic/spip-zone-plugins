@@ -11,7 +11,7 @@ function Corbeille_signature(){
 	$result = spip_query($req);
 	$row=spip_fetch_array($result);
 	
-	echo "Le <b>" . affdate($row[1]) . "</b>,<br />";
+	echo "Le <strong>" . affdate($row[1]) . "</strong>,<br />";
 	if (! empty($row[5])) echo "<a href=\"mailto:" . $row[5] . $row[4] . "\">";
 	echo $row[4];
 	if (! empty($row[5])) echo "</a>";

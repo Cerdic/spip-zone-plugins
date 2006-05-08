@@ -15,7 +15,7 @@ define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS).
 		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
 		  // on voit le bouton dans la barre "naviguer"
 		  $boutons_admin['configuration']->sousmenu['corbeille']= new Bouton(
-			"../"._DIR_PLUGIN_CORBEILLE."/trash-full-24.png",  // icone
+			"../"._DIR_PLUGIN_CORBEILLE."/img_pack/trash-full-24.png",  // icone
 			_L('Corbeille')	// titre
 			);
 		}
@@ -47,14 +47,13 @@ define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS).
 		return $total;
 	}
 
+  // affiche l'icone poubelle (vide ou pleine)
 	function Corbeille_icone_poubelle($total_table) {
-		if (empty($total_table)) {
-			echo"<img src='"._DIR_PLUGIN_CORBEILLE."/trash-empty.png' height='30' width='30' style='border:0px' />"; 
-		} else { 
-			echo"<img src='"._DIR_PLUGIN_CORBEILLE."/trash-full.png' height='30' width='30' style='border:0px' />"; 
-		} 
+		if (empty($total_table)) 	return "<img src='"._DIR_PLUGIN_CORBEILLE."/img_pack/trash-empty-24.png' alt='trash empty' />"; 
+		                     else return "<img src='"._DIR_PLUGIN_CORBEILLE."/img_pack/trash-full-24.png'  alt='trash full'/>";
 	}
 
+  // compteur
 	function Corbeille_compte_elements_vider($table, $statut, $titre) {
 	                        $req_corbeille = "select COUNT(*) from $table WHERE statut like '$statut'";
 	                        $result_corbeille = spip_query($req_corbeille);
@@ -62,9 +61,9 @@ define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS).
 	                        if ($row = spip_fetch_array($result_corbeille)) $total = $row[0];
 		return ($total);
 	}
-
-
-	function Corbeille_affiche_ligne($titre,$url,$total_table,$ifond){
+  
+  // affiche ligne
+  function Corbeille_affiche_ligne($titre,$url,$total_table,$ifond){
 	  global $couleur_claire;
 		if ($ifond==0){
 			$ifond=1;
@@ -73,19 +72,14 @@ define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS).
 			$ifond=0;
 			$couleur="#FFFFFF";
 		}
-		echo "<tr style='background-color:$couleur;'>";
-		echo "<td >";
-		echo "<span style='font:arial,helvetica,sans-serif;font-size:small;'>";
-		echo $titre;
-		echo "</span><td style='width:50;'>";
-		if ($total_table>0) echo "<a href='$url'>";
-		Corbeille_icone_poubelle($total_table);
-		if ($total_table>0) echo "</a>";
-		echo "</td><td>";
-		echo "<span style='font:arial,helvetica,sans-serif;font-size:small;'>";
-		echo $total_table;
-		echo "</span>";
-		echo "</td></tr>\n";
+		echo "<tr style='background-color:$couleur;' class='verdana2'>\n";
+		echo "<td>$titre</td>\n";
+		echo "<td style='width:50px;'>";
+		if ($total_table>0)  echo "<a href='$url' class='corbeille'>".Corbeille_icone_poubelle($total_table)."</a>";
+                    else echo Corbeille_icone_poubelle($total_table);	
+		echo "</td>\n";
+		echo "<td>$total_table</td>\n";
+		echo "</tr>\n";
 		return $ifond;
 	}
 
@@ -112,16 +106,17 @@ define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS).
 	
 		//types de documents geres par la corbeille
 		echo _L("Choisissez le type de documents &agrave; afficher :<br/>");
+		echo "<style type='text/css'>a.corbeille {display:block;border:3px solid #f00;padding: 5px;width:28px;height:28px;} a.corbeille:hover {background: #fcc;border:3px solid #c00;} </style>";
+		
 		echo "<table style='width:100%'>";
-		$ifond=0;
-	
+		$ifond=0;	
 		$ifond = Corbeille_affiche_ligne(_L('P&eacute;titions'),generer_url_ecrire($page,"type_doc=signatures"),$total_signatures,$ifond);
 		$ifond = Corbeille_affiche_ligne(_L('Br&egrave;ves'),generer_url_ecrire($page,"type_doc=breves"),$total_breves,$ifond);
 		$ifond = Corbeille_affiche_ligne(_L('Articles'),generer_url_ecrire($page,"type_doc=articles"),$total_articles,$ifond);
 		$ifond = Corbeille_affiche_ligne(_L('Forums Publics'),generer_url_ecrire($page,"type_doc=forums_publics"),$total_forums_publics,$ifond);
 		$ifond = Corbeille_affiche_ligne(_L('Forums Priv&eacute;s'),generer_url_ecrire($page,"type_doc=forums_prives"),$total_forums_prives,$ifond);
 		$ifond = Corbeille_affiche_ligne(_L('Auteurs'),generer_url_ecrire($page,"type_doc=auteurs"),$total_auteur,$ifond);
-		$ifond = Corbeille_affiche_ligne(_L('Tout'),generer_url_ecrire($page,"type_act=tout"),$totaux,$ifond);
+		// $ifond = Corbeille_affiche_ligne(_L('Tout'),generer_url_ecrire($page,"type_act=tout"),$totaux,$ifond); FIXME: ne pas afficher la ligne "tout" car pas fonctionnel pour l'instant
 		echo "</table><br/>";
 	}
 

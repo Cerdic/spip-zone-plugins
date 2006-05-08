@@ -1,9 +1,6 @@
 CORBEILLE SPIP I
 _______________I
 
-copier les 3 fichiers ".php3" et "img_pack" dans le dossier ecrire/
-se connecter a la partie privée, ca donne une url du type : 
-
 vous pouvez supprimer les documents suivants :
 - brèves refusées
 - articles à la poubelle
