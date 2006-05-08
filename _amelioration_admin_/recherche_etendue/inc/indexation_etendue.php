@@ -33,7 +33,7 @@ include_spip('base/indexation_etendue');
 
 		// mettre a jour le contenu de spip_types_tables en fonction de la meta
 		$liste_tables = liste_index_tables();
-		spip_query("DELETE FROM spip_types_tables WHERE ".calcul_mysql_in($id_table,implode(",",array_keys($liste_tables)),'NOT'));
+		spip_query("DELETE FROM spip_types_tables WHERE ".calcul_mysql_in('id_table',implode(",",array_keys($liste_tables)),'NOT'));
 		foreach($liste_tables as $id=>$table){
 			spip_query("DELETE FROM spip_types_tables WHERE id_table=$id");
 			spip_query("INSERT INTO spip_types_tables (id_table,type) VALUES ($id,'$table')");
