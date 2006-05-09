@@ -1,0 +1,217 @@
+#CACHE{3600}
+<?php
+
+	// definitions des listes : a faire dans mes_options.php
+	global $mailman_data;
+	if (!$mailman_data)
+		$mailman_data = array(
+			'spip' => Array('pretty' => 'SPIP', listeon=>'spip-on@rezo.net',
+				responsable =>'spip-owner@rezo.net'),
+			'test' => Array('pretty' => 'test', listeon=>'test-on@rezo.net',
+				responsable =>'test-owner@rezo.net'),
+			'disko' => Array('pretty' => 'Disko',
+				'listeon' =>'disko-on@other_server.org',
+				'responsable' =>'disko-owner@other_server.org',
+				'langue' => 'eo')
+		);
+	
+	// config mailman
+	$mm_who = "~mailman/bin/list_members $liste";
+	$mm_ismember = "~mailman/bin/find_member -l $liste";
+	$mm_remove = "~mailman/bin/remove_members --nouserack $liste";
+	$mm_add = "~mailman/bin/add_members -w n -r - $liste";
+	$mm_invite = "~mailman/bin/invite_members -r - $liste";
+
+
+	// definitions speciales
+	$charsets = Array('fr'=>'iso-8859-1','fa'=>'utf-8', 'zh'=>'utf-8', 'pt'=>'iso-8859-1', es=>'iso-8859-1', 'eo'=>'utf-8');
+
+	// securite
+	if (!$liste = ereg_replace("[^a-z0-9_-]+", "", strtolower($liste))) die('x');
+	// chercher dans les listes de Mailman dont les archives sont publiques
+	if (!$mailman_data[$liste]) {
+		if (@file_exists("/var/local/mailman/archives/public/$liste")) {
+			$mailman_data[$liste] = Array (
+				listeon=>"$liste-on@rezo.net",
+				responsable=>"$liste-owner@rezo.net",
+				pretty=>"$liste"
+			);
+		}
+	}
+	if (!$mailman_data[$liste]) die('x');
+
+	// config liste
+	if (!$lang AND !$lang = $mailman_data[$liste]['langue']) $lang = 'fr';
+	if (!$charset = $charsets[$lang]) $charset = 'iso-8859-1';
+
+	// charger le fichier de langue
+	// (tricher sur ecrire/)
+	/*include ('inc_version.php3');
+	include ('inc_lang.php3');
+	include ('inc_charsets.php3');
+	include ('inc_filtres.php3');*/
+	$dir_ecrire='';
+	$flag_ecrire=true;
+	$meta['langues_proposees'] = $all_langs = 'fr,fa,cpf,oci_ni,bg,es,en,nl,ar,zh,pt,eo';
+	$meta['charset'] = $charset;
+	changer_langue($lang);
+
+
+echo "<html>
+<head>
+<title>";
+
+echo _T('listes:titrefenetre');
+
+echo "</title>
+<link rel='stylesheet' href='#CHEMIN{img_pack/mailman_popup.css}' type='text/css'>
+<meta http-equiv='Content-Type' content='text/html; charset=$charset'>
+</head>
+<body dir='".lang_dir($lang, 'ltr', 'rtl')."'>
+";
+
+echo "\n
+<style>
+<!--
+.hide { position:absolute; visibility:hidden; }
+.show { position:absolute; visibility:visible; }
+-->
+</style>
+<script type='text/javascript'><!--
+	function affiche_attente () {
+if (document.all) {// Internet Explorer
+progress.className = 'show';
+} else if (document.layers) {// Netscape
+document.progress.visibility = true;
+} else if (document.getElementById) {// Netscape 6+
+document.getElementById('progress').className = 'show';
+}
+	}
+// --></script>\n";
+
+
+	// recupere la liste de tous les abonnes :
+	// echo `$mm_who`;
+
+	// si une adresse est precisee, la tester contre la liste
+	$member = -1;
+
+	$s_mail = htmlspecialchars($var_email);
+	eregi("[-+_.'a-z0-9]+@[-.a-z0-9]+\.[a-z]+", $var_email, $regs);
+	$var_email = $regs[0];
+	if ($var_email AND $var_action)
+		$member = is_member($var_email);
+
+	switch ($var_action) {
+		case 'sub':
+			if ($member == 1) {
+				$retour = "<font class='txtgris'>"._T('listes:deja', Array('var_email'=>$var_email, 'liste'=>$liste))."</font>";
+			} else if ($var_email) {
+				// inscription
+				// `echo "$var_email" | $mm_add`;
+				$listeon = $mailman_data[$liste]['listeon'];
+
+				@mail ($listeon, ' ', ' ', "From: $var_email\n", "-f$var_email");
+
+				$retour = "<font class='txtgris'>"._T('listes:ajoutee', Array('var_email'=>$var_email, 'liste'=>$liste))."</font>";
+				$fin = true;
+			} else {
+				$retour = "<font class='txtgris'>"._T('listes:veuillez')."</font>";
+			}
+			break;
+
+		case 'unsub':
+			if ($member == 1) {
+				// desabonner
+				$listeoff = ereg_replace("-on@", "-off@", $mailman_data[$liste]['listeon']);
+				@mail($listeoff, "unsubscribe", "unsubscribe", "From: $var_email\r\n", "-f$var_email");
+# OLD STYLE #				`$mm_remove "$var_email"`;
+				$retour = "<span class='txtgris'>"._T('listes:desabo')."</span>";
+				$fin = true;
+				$responsable = $mailman_data[$liste]['responsable'];
+
+				$sujet = filtrer_entites(_T('listes:subject_removed', array('liste' => $liste)));
+				if ($charset == 'utf-8') {
+					@mb_internal_encoding($charset);
+					$sujet = @mb_encode_mimeheader(unicode_to_utf_8($sujet), 'utf-8', 'Q');
+				}
+				@mail ($var_email, $sujet, unicode_to_utf_8(filtrer_entites(_T('listes:mail_removed', array('var_email'=>$var_email, 'liste'=>$liste, 'responsable'=>$responsable)))),
+					"From: $responsable\n".
+					"MIME-Version: 1.0\n".
+					"Content-Type: text/plain; charset=$charset\n".
+					"Content-Transfer-Encoding: 8bit\n",
+				"-f$responsable");
+			} else if ($var_email) {
+				$erreur = "<font class='txtgris'>"._T('listes:pasabo', array('var_email'=>$var_email, 'liste'=>$liste))."</font>";
+			} else {
+				$retour = "<span class='txtgris'>"._T('listes:veuillez')."</span>";
+			}
+			break;
+
+		case '':
+		default:
+			break;
+	}
+
+
+
+
+	// affichage
+	echo "<table border='0' width='250' cellpadding='10'><tr><td>\n";
+	if ($erreur) echo "<font class='txtgris'><b>$erreur</b></font>\n";
+	if ($retour) echo "$retour\n";
+	else {
+		echo "<form method='post' action='".$_SERVER['SCRIPT_URL']."' onsubmit='affiche_attente ();'>\n";
+		echo "<input type='hidden' name='liste' value='$liste'>\n";
+		echo "<input type='hidden' name='lang' value='$lang'>\n";
+		echo "<br><span class='txtgris'>"._T('listes:votreemail')."</span><br>
+		 <input type='text' length='15' name='var_email' value='$s_mail'>\n";
+		//echo "&nbsp; &nbsp; &nbsp; <input type='submit' name='ok' value='ok'>";
+		echo "&nbsp;<input type='image' name='ok' src='#CHEMIN{img_pack/mailmanpopup_okbis.gif}' vspace='0' hspace='0' align='top'>";
+		
+		echo "<br><br><span class='txtgris'><input type='radio' name='var_action' value='sub' id='sub'".($var_action<>'unsub' ? " checked" : "")."><label for='sub'> "._T('listes:inscription', array('liste'=>$liste))."</label><br />\n</span>";
+		echo "<span class='txtgris'><input type='radio' name='var_action' value='unsub' id='unsub'".($var_action=='unsub' ? " checked" : "")."><label for='unsub'> "._T('listes:quitter')."</label>\n</span>";
+		echo "\n</form>\n";
+	}
+	echo " <tr>
+    <td>";
+?>
+<span id="progress" class="hide" style="font-family: Verdana,Arial,Sans,sans-serif;  border-style: solid ; border-width: 1; border-color: #E86519; font-size: 11px;">
+<script type='text/javascript'><!--
+	document.write("<?php echo _T('listes:patientez'); ?>");
+// --></script></span>
+<?php
+    echo "<div align='right'><a href='javascript:window.close();' class='txtgris'>"._T('listes:fermer')."</a></div>\n";
+    echo "<div align='right'><a href='javascript:window.close();' class='txtgris'><img src='#CHEMIN{img_pack/mailmanpopup_croix.gif}' border='0' /></a></div>";
+    echo "</td>\n</tr>\n</table>";
+
+	// chercher un membre
+	function is_member($email) {
+#		global $mm_ismember;
+		global $mm_who, $liste;
+		$email_regexp = preg_replace('/[.+?[\]]/', '\\\\\\0', $email);
+
+		$cache = _DIR_CACHE . 'popup_'.$liste.'.txt';
+		if (time() - @filemtime($cache) > 600) {
+			$tous = `$mm_who`;
+			if ($f = @fopen("$cache.tmp", "w")) {
+				@fwrite($f, $tous);
+				@fclose($f);
+				@rename ("$cache.tmp", $cache);
+			}
+		}
+		$result = `grep -l -E "$email_regexp" $cache`;
+		if ($result)
+			return true;
+		else
+			return false;
+
+		#	if (eregi("\n$email_regexp ", "\n".$result))
+		#		return true;
+	}
+
+// print_r($GLOBALS);
+
+?>
+</body>
+</html>

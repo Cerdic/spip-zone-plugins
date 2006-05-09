@@ -1,0 +1,22 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	MailMan Popup
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	collectif
+_ 2006 - Distribue sous licence GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Popup de gestion des abonements a une liste mailman
+_ s'utilise par une url spip.php?page=mailman_inscriptions&liste=test&lang=fr
+	</description>
+	<prefix> 
+	MailmanPopup
+	</prefix>
+</plugin>
