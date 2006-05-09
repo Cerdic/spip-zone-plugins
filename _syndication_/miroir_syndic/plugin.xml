@@ -1,0 +1,33 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Miroir de syndication
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	fil@rezo.net
+_ &copy; 2006 - Distribue sous licence GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+Ce plugin recopie les articles syndiques {et publi&eacute;s} de spip_syndic_articles vers spip_articles. Le code est suffisamment simple pour &ecirc;tre modifiable en fonction des besoins
+	</description>
+
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	MiroirSyndic
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<action>ajouter_cron</action>
+		<inclure>MiroirSyndic.php</inclure>
+	</pipeline>
+</plugin>
