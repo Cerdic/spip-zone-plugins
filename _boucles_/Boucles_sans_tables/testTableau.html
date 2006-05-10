@@ -3,6 +3,7 @@ le tableau 'tables_principales' :
 <UL>
 <BOUCLE_t(TABLEAU){var=tables_principales}>
 	<LI> #COMPTEUR_BOUCLE #CLE => #VALEUR
+[(#AFFECTER{+PAGE,tables})#CLE]
 	<B_tt>
 	<UL>
 	<BOUCLE_tt(TABLEAU){valeur}>
@@ -20,6 +21,10 @@ le tableau 'tables_principales' :
 </BOUCLE_t>
 </UL>
 </B_t>
+
+<BOUCLE_tables(TABLEAU){var=PAGE}{cle=tables}{2,5}{2/2}>
+<br>- #CLE => #VALEUR
+</BOUCLE_tables>
 
 <br><br>le tableau 'toto' :
 <BOUCLE_t2(TABLEAU){var=toto}>
@@ -54,4 +59,14 @@ non
 
 <br><br>et le résultat de cette affectation :
 #TABLEAU{PAGE,bidule}
+
+<br><br>une autre
+[à la place (#AFFECTER{+PAGE,machin})]
+<br><br>une dernière
+[en plus (#AFFECTER{+PAGE,machin})]
+
+<br><br>et son résultat :
+<BOUCLE_machin(TABLEAU){var=PAGE}{cle=machin}>
+<br>- #CLE : #VALEUR
+</BOUCLE_machin>
 <br>Fin.

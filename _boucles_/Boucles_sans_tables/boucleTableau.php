@@ -43,6 +43,20 @@ function boucle_TABLEAU($id_boucle, &$boucles) {
 	else
 	  $code_sep="''";
 
+	if($boucle->limit) {
+		error_log("LIMIT :  $boucle->limit");
+		list($start,$end)=explode(',', $boucle->limit);
+		$end= "$start+$end";
+	} else {
+		$start='0'; $end='count($__t)';
+	}
+
+	if($boucle->mode_partie) {
+		$start= $start."+$boucle->partie-1";
+		$incr=$boucle->total_parties;
+	} else {
+		$incr=1;
+	}
 	$var=null; $cle='';
 
 	foreach($boucle->criteres as $critere) {
@@ -66,7 +80,25 @@ function boucle_TABLEAU($id_boucle, &$boucles) {
 	  return;
 	}
 
-	$code=<<<CODE
+	// s'il y a des limites ou un increment, ça ne marche que pour un tableau
+	// séquentiel
+	if($boucle->limit || $boucle->mode_partie) {
+		$code=<<<CODE
+	\$__t= &${var}$cle;
+	\$SP++;
+	if(empty(\$__t)) { return ''; }
+	\$code=array();
+	\$Pile[\$SP]['var']=&\$__t;
+	for(\$i= $start; \$i<$end; \$i+=$incr) {
+		\$Numrows['$id_boucle']['compteur_boucle']= \$Pile[\$SP]['cle']= \$i;
+		\$Pile[\$SP]['valeur']=\$__t[\$i];
+		\$code[]=$boucle->return;
+	}
+	\$t0= join($code_sep, \$code);
+	return \$t0;
+CODE;
+	} else {
+		$code=<<<CODE
 	\$__t= ${var}$cle;
 	\$SP++;
 	if(empty(\$__t)) { return ''; }
@@ -82,7 +114,7 @@ function boucle_TABLEAU($id_boucle, &$boucles) {
 	\$t0= join($code_sep, \$code);
 	return \$t0;
 CODE;
-
+	}
 	return $code;
 }
 
@@ -116,7 +148,7 @@ function boucle_AFFECTER($id_boucle, &$boucles) {
 	$code=<<<CODE
 	\$__t= &${var}$cle;
 	\$SP++;
-	\$__t[]=$boucle->return;
+	\$__t=$boucle->return;
 	return '';
 CODE;
 
@@ -127,8 +159,7 @@ function balise_TABLEAU($p) {
 	$var=null; $cle='';
 
 	if ($p->param && !$p->param[0][0]) {
-		$var=  calculer_liste($p->param[0][1],
-			 $p->descr, $p->boucles, $p->id_boucle);
+		$var=  $p->param[0][1][0]->texte;
 
 		// les cles
 		array_shift($p->param[0]);
@@ -143,8 +174,8 @@ function balise_TABLEAU($p) {
 					   $boucle->id_boucle);
 	  return;
 	}
-	$p->code = "(\$GLOBALS[$var]$cle)";
-	$p->interdire_scripts = false;
+	$p->code = "(\$GLOBALS['$var']$cle)";
+	$p->interdire_scripts = true;
 	return $p;
 }
 
@@ -152,8 +183,7 @@ function balise_AFFECTER($p) {
 	$var=null; $cle='';
 
 	if ($p->param && !$p->param[0][0]) {
-		$var=  calculer_liste($p->param[0][1],
-			 $p->descr, $p->boucles, $p->id_boucle);
+		$var=  $p->param[0][1][0]->texte;
 
 		// les cles
 		array_shift($p->param[0]);
@@ -168,7 +198,17 @@ function balise_AFFECTER($p) {
 					   $boucle->id_boucle);
 	  return;
 	}
-	$p->code = "((\$GLOBALS[$var]$cle="
+
+	error_log("balise_AFFECTER : <<$var>>\n");
+
+	if($var{0}=='+') {
+		$var= substr($var, 1);
+		$complement= '[]';
+	} else {
+		$complement= '';
+	}
+
+	$p->code = "((\$GLOBALS['$var']$cle$complement="
 		.calculer_liste($p->avant, $p->descr, $p->boucles, $p->id_boucle).'.'
 		.calculer_liste($p->apres, $p->descr, $p->boucles, $p->id_boucle).")?'':'')";
 	$p->interdire_scripts = false;
