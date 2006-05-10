@@ -2,15 +2,15 @@
 le tableau 'tables_principales' :
 <UL>
 <BOUCLE_t(TABLEAU){var=tables_principales}>
-	<LI> #CLE => #VALEUR
+	<LI> #COMPTEUR_BOUCLE #CLE => #VALEUR
 	<B_tt>
 	<UL>
 	<BOUCLE_tt(TABLEAU){valeur}>
-		<LI> #CLE => #VALEUR
+		<LI> #COMPTEUR_BOUCLE #CLE => #VALEUR
 		<B_ttt>
 		<UL>
 		<BOUCLE_ttt(TABLEAU){valeur}>
-			<LI> #CLE => #VALEUR
+			<LI> #COMPTEUR_BOUCLE #CLE => #VALEUR
 		</BOUCLE_ttt>
 		</UL>
 		</B_ttt>
@@ -30,10 +30,28 @@ non
 
 <br><br>l'entrée tables_principales['spip_tableau']['field'] :
 <BOUCLE_t3(TABLEAU){var=tables_principales}{cle=spip_tableau}{cle=field}>
-<br>- #CLE => #VALEUR
+<br>- #COMPTEUR_BOUCLE #CLE => #VALEUR
 </BOUCLE_t3>
 
 <br><br>le tableau retournée parla fonction 'toto' :
 <BOUCLE_t4(TABLEAU){fonction=toto()}>
-<br>- #CLE => #VALEUR
+<br>- #COMPTEUR_BOUCLE #CLE => #VALEUR
 </BOUCLE_t4>
+
+<br><br>liste d'articles mise dans PAGE['articles']
+<br>la boucle interne n'affiche rien.
+<BOUCLE_a(ARTICLES){0,5}{","}>
+#ID_ARTICLE<BOUCLE_aff(AFFECTER){var=PAGE}{cle=articles}>#ID_ARTICLE</BOUCLE_aff>
+</BOUCLE_a>
+
+<br><br>afficher le contenu du tableau qu'on vient de générer :
+<BOUCLE_res(TABLEAU){var=PAGE}{cle=articles}{","}>
+<br> -> #VALEUR
+</BOUCLE_res>
+
+<br><br>une affectation unitaire, qui n'affiche rien :
+[des trucs avant #URL_SITE_SPIP (#AFFECTER{PAGE,bidule}) des trucs après]
+
+<br><br>et le résultat de cette affectation :
+#TABLEAU{PAGE,bidule}
+<br>Fin.
