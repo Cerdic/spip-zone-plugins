@@ -19,7 +19,7 @@ include_spip('base/indexation_etendue');
 			spip_query("ALTER IGNORE TABLE spip_index ADD PRIMARY KEY (id_table, id_objet)");
 			ecrire_meta('Recherche_etendue_base_version',$current_version=$version_base);
 		}
-		if ($current_version==0.0){
+		if ($current_version<0.11){
 			include_spip('base/abstract_sql');
 			creer_base();
 			ecrire_meta('Recherche_etendue_base_version',$current_version=0.11);

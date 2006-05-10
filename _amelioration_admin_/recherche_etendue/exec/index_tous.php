@@ -26,6 +26,7 @@ function exec_index_tous_dist()
 {
 	global $connect_statut;
 	global $INDEX_elements_objet;
+	Recherche_etendue_verifier_base();
 
 	$liste_tables = array();
 	$icone_table = array();

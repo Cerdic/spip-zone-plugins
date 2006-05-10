@@ -16,9 +16,14 @@
  */
 define('_DIR_PLUGIN_ADVANCED_SEARCH',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 
-if (_request('recherche'))
+if (_request('recherche')&&_DIR_RACINE=="")
 	RechercheEtendue_stats();
-	
+
+function RechercheEtendue_taches_generales_cron($taches_generales){
+	$taches_generales['recherche_etendue_stats'] = 60;
+	return $taches_generales;
+}
+
 // #SPIP_RECHERCHE_STAT
 // insere un <div> avec un lien background-image vers la tache de fond 
 // de collecte des requetes 'recherche'

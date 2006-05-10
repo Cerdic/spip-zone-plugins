@@ -23,7 +23,7 @@ function compte_recherches($fichier,&$recherches,&$recherche_a){
 	
 }
 
-function recherche_etendue_stats(){
+function cron_recherche_etendue_stats($t){
 	// Initialisations
 	$recherches = ' '; # visites du site
 	$recherche_a = array(); # visites du site
@@ -32,7 +32,7 @@ function recherche_etendue_stats(){
 	// et faire les calculs correspondants
 
 	// Traiter jusqu'a 100 sessions datant d'au moins 30 minutes
-	$sessions = preg_files(sous_repertoire(_DIR_SESSIONS, 'visites'));
+	$sessions = preg_files(sous_repertoire(_DIR_SESSIONS, 'recherches'));
 
 	$compteur = 100;
 	$date_init = time()-30*60;
@@ -40,7 +40,7 @@ function recherche_etendue_stats(){
 	foreach ($sessions as $item) {
 		if (@filemtime($item) < $date_init) {
 			spip_log("traite la session recherche $item");
-			compte_fichier_visite($item,$recherches,$recherche_a);
+			compte_recherches($item,$recherches,$recherche_a);
 			@unlink($item);
 			if (--$compteur <= 0)
 				break;
@@ -48,16 +48,26 @@ function recherche_etendue_stats(){
 	}
 
 	if (!$recherches) return;
-	spip_log("analyse $visites visites");	
+	spip_log("analyse $recherches recherches");	
+	// attention a affecter tout ca a la bonne
+	// date quand on est a cheval (entre minuit et 0h30)
+	$date = date("Y-m-d", time() - 1800);
 
 	// Agreger les recherches dans une table SQL
 	foreach($recherche_a as $mot => $item){
 		$mot = addslashes($mot);
 		foreach($item as $chaine => $nb){
 			$chaine = addslashes($chaine);
-			spip_query("INSERT INTO spip_recherche SET (mot,requete,recherches,date,maj) VALUES ('$mot','$chaine',$nb,'$date_init',NOW())");
+			spip_query("INSERT INTO spip_recherches (mot,requete,recherches,date,maj) VALUES ('$mot','$chaine',$nb,'$date',NOW())");
 		}
 	}
-	
+
+	// S'il reste des fichiers a manger, le signaler pour reexecution rapide
+	if ($compteur==0) {
+		spip_log("il reste des recherches a traiter...");
+		return (0 - $t);
+	}
+
+	return 1;
 }
 ?>

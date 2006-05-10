@@ -30,6 +30,7 @@ function jauge($couleur,$pixels) {
 function exec_admin_index_dist()
 {
 	global $connect_statut, $connect_toutes_rubriques, $couleur_claire, $forcer_indexation, $forcer_reindexation, $mise_a_jour, $purger,$INDEX_elements_objet;
+	Recherche_etendue_verifier_base();
 	
 	debut_page(_L('Moteur de recherche'), "administration", "cache");
 	
