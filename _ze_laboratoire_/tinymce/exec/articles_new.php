@@ -186,7 +186,7 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
 afficher_statut_articles($id_article, $rubrique_article, $statut_article);
 
 
- afficher_corps_articles($virtuel, $chapo, $texte, $ps, $extra);
+ afficher_corps_articles($virtuel, $chapo, $texte, $ps, $extra, $flag_editable);
 
 if ($flag_editable) {
 	echo "\n\n<div align='$spip_lang_right'><br />";
@@ -538,18 +538,21 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 	echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 	echo "<tr width='100%'><td width='100%' valign='top'>";
 
-	echo "<div id='surtitre' style='font-size:3; font:arial,helvetica; font-weight:bold; display:inline;'>".typo($surtitre)."</div>\n";
-	echo boutonEditer('surtitre', $surtitre?'':' le sur-titre');
+	echo "<div id='surtitre' anchor='surtitre' style='font-size:3; font:arial,helvetica; font-weight:bold; display:inline;'>".typo($surtitre)."</div>\n";
+	if($flag_editable)
+		echo boutonEditer('surtitre', $surtitre?'':' le sur-titre');
 
 	if (strlen($logo_statut) > 3) {
 		echo http_img_pack("$logo_statut", "", "border=0 align='middle'")
 			." &nbsp; ";
 	}
-	echo "<div id='titre' style='font-size: 18px; color: $couleur_foncee; font-weight: bold; display:inline;' class='verdana'>".typo($titre)."</div>\n";
-	echo boutonEditer('titre', $titre?'':' le titre');
+	echo "<div id='titre' anchor='titre' style='font-size: 18px; color: $couleur_foncee; font-weight: bold; display:inline;' class='verdana'>".typo($titre)."</div>\n";
+	if($flag_editable)
+		echo boutonEditer('titre', $titre?'':' le titre');
 
-	echo "<div id='soustitre' style='font-size:3; font:arial,helvetica; font-weight:bold; display:inline;'>".typo($soustitre)."</div>\n";
-	echo boutonEditer('soustitre', $soustitre?'':' le sous-titre');
+	echo "<div id='soustitre' anchor='soustitre'style='font-size:3; font:arial,helvetica; font-weight:bold; display:inline;'>".typo($soustitre)."</div>\n";
+	if($flag_editable)
+		echo boutonEditer('soustitre', $soustitre?'':' le sous-titre');
 
 	if ($descriptif OR $url_site OR $nom_site) {
 		echo "<p><div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' id='descriptif' $dir_lang>";
@@ -557,8 +560,9 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 		if($descriptif) {
 			echo "<b>"._T('info_descriptif')."</b>\n";
 		}
-		echo "<div id='descriptif'>".propre($descriptif)."</div>";
-		echo boutonEditer('descriptif', $descriptif?'':' le descriptif');
+		echo "<div id='descriptif' anchor='descriptif'>".propre($descriptif)."</div>";
+		if($flag_editable)
+			echo boutonEditer('descriptif', $descriptif?'':' le descriptif');
 		$texte_case = ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
 		echo propre($texte_case);
 		echo "</div>";
@@ -1186,7 +1190,7 @@ function ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag
 	echo fin_block();
 }
 
-function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
+function afficher_corps_articles($virtuel, $chapo, $texte, $ps, $extra, $flag_editable)
 {
   global $revision_nbsp, $activer_revision_nbsp, $champs_extra, $les_notes, $dir_lang;
 
@@ -1199,25 +1203,28 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 	} else {
 		$revision_nbsp = $activer_revision_nbsp;
 
-		if (strlen($chapo) > 0) {
-			echo "<div $dir_lang><b>";
-			echo propre($chapo);
-			echo "</b></div>\n\n";
-		}
+		echo "<div id='chapo' anchor='chapo' $dir_lang style='font-weight: bold;'>";
+		echo propre($chapo);
+		echo "</div>\n";
+		if($flag_editable)
+			echo boutonEditer('chapo', $chapo?'':' le chapo');
 
-		echo "<div id='texte' $dir_lang>";
+		echo "<div id='texte' anchor='texte' $dir_lang>";
 #	echo reduire_image(propre($texte), 500,10000);
 		echo propre($texte);
 		echo "<br clear='both' />";
 		echo "</div>";
-		echo "<a href='#' title='toggle TinyMCE' onclick='toggleEdit(\"texte\");'>Edit</a>";
+		if($flag_editable)
+			echo boutonEditer('texte', $texte?'':' le texte');
 
 		if ($ps) {
 			echo debut_cadre_enfonce();
-			echo "<div id='ps' $dir_lang><font style='font-family:Verdana,Arial,Sans,sans-serif; font-size: small;'>";
-			echo justifier("<b>"._T('info_ps')."</b> ".propre($ps));
+			echo "<div $dir_lang><font style='font-family:Verdana,Arial,Sans,sans-serif; font-size: small;'>";
+			echo "<b>"._T('info_ps')."</b> <div anchor='ps' id='ps'>"
+						   .propre($ps)."</div>";
+			if($flag_editable)
+				echo boutonEditer('ps', $ps?'':' le ps');
 			echo "</font></div>";
-			echo "<a href='#' title='toggle TinyMCE' onclick='toggleEdit(\"ps\");'>Edit</a>";
 			echo fin_cadre_enfonce();
 		}
 		$revision_nbsp = false;
@@ -1229,7 +1236,7 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 			echo "</div>";
 			echo fin_cadre_relief();
 		}
-		
+
 		if ($champs_extra AND $extra) {
 			include_spip('inc/extra');
 			extra_affichage($extra, "articles");
@@ -1566,7 +1573,7 @@ exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $
 }
 
 function boutonEditer($id, $titre='') {
-	return "<a href='#' title='editer$titre' onclick='toggleEdit(\"$id\");'><span id='${id}_open' style='display:inline;'>Editer$titre</span><span id='${id}_close' style='display:none;'>Sauver</span></a><br/>";
+	return "<a href='#$id' title='editer$titre' onclick='toggleEdit(\"$id\");'><span id='${id}_open' style='display:inline;'>Editer$titre</span><span id='${id}_close' style='display:none;'>Sauver</span></a><br/>";
 }
 
 ?>

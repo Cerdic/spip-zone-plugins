@@ -31,7 +31,7 @@ alert('element_id='+element_id+'\nhtml='+html+'\nbody='+body);
 	url= "?exec=ajax_edit_article&OK=ok";
 
 // A REVOIR : comment en faire du post pour poster des textes > 4Ko ?
-	//xmlhttp[element_id].open("GET", '?exec=ajax_edit_article&champ='+element_id+'&id='+id_article+'&texte='+escape(html), true);
+	//xmlhttp[element_id].open("GET", '?exec=ajax_edit_article&champ='+element_id+'&id_article='+id_article+'&valeur='+escape(html), true);
 	xmlhttp[element_id].open("POST", url);
 	xmlhttp[element_id].setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
@@ -44,7 +44,7 @@ alert('element_id='+element_id+'\nhtml='+html+'\nbody='+body);
 			}
 		}
 	}
-    xmlhttp[element_id].send('exec=ajax_edit_article&champ='+element_id+'&id='+id_article+'&texte='+escape(html)); 
+    xmlhttp[element_id].send('exec=ajax_edit_article&champ='+element_id+'&id_article='+id_article+'&valeur='+escape(html)); 
 
 	return html;
 }
