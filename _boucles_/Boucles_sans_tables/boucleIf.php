@@ -5,9 +5,9 @@
  * Distribué sous licence GPL
  */
 
-$GLOBALS['tables_principales']['spip_if'] =
+$GLOBALS['tables_des_serveurs_sql']['']['if'] =
 	array('field' => array(), 'key' => array());
-$GLOBALS['table_des_tables']['if'] = 'if';
+//$GLOBALS['table_des_tables']['if'] = 'if';
 
 function boucle_IF($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
