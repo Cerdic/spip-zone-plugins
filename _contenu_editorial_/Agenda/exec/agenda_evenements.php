@@ -121,7 +121,6 @@ function affiche_evenements_agenda($flag_editable){
 	// tous les evenements
 	$query = "SELECT * 
 							FROM spip_evenements AS evenements
-				 LEFT JOIN spip_evenements_articles AS J ON evenements.id_evenement=J.id_evenement
 						 WHERE ((evenements.date_debut>='$datestart' AND evenements.date_debut<='$datefin') 
 						 		OR (evenements.date_fin>='$datestart' AND evenements.date_fin<='$datefin')
 						 		OR (evenements.date_debut<'$datestart' AND evenements.date_fin>'$datefin'))
@@ -195,7 +194,7 @@ function visu_evenement_agenda($id_evenement,$flag_editable){
 			}
 	 	}
 		$out .= "<div class='agenda-visu-evenement'>";
-		$query = "SELECT * FROM spip_articles AS articles LEFT JOIN spip_evenements_articles AS J ON J.id_article=articles.id_article WHERE J.id_evenement=$id_evenement";
+		$query = "SELECT * FROM spip_articles AS articles LEFT JOIN spip_evenements AS J ON J.id_article=articles.id_article WHERE J.id_evenement=$id_evenement";
 		$res2 = spip_query($query);
 		if ($row2 = spip_fetch_array($res2)){
 			$out .= "<div class='article-evenement'>";

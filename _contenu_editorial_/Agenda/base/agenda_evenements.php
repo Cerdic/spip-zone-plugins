@@ -11,6 +11,7 @@ global $tables_auxiliaires;
 //-- Table EVENEMENTS ------------------------------------------
 $evenements = array(
 		"id_evenement"	=> "bigint(21) NOT NULL",
+		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"date_debut"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"date_fin"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"titre"	=> "text NOT NULL",
@@ -26,25 +27,12 @@ $evenements_key = array(
 		"PRIMARY KEY"	=> "id_evenement",
 		"KEY date_debut"	=> "date_debut",
 		"KEY date_fin"	=> "date_fin",
+		"KEY id_article"	=> "id_article"
 		);
 
 $tables_principales['spip_evenements'] =
 	array('field' => &$evenements, 'key' => &$evenements_key);
 
-	
-//-- Table de relations EVENEMENTS_ARTICLES----------------------
-$spip_evenements_articles = array(
-		"id_evenement"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_article"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
-
-$spip_evenements_articles_key = array(
-		"PRIMARY KEY"	=> "id_evenement, id_article",
-		"KEY id_evenement"	=> "id_evenement",
-		"KEY id_article"	=> "id_article");
-
-$tables_auxiliaires['spip_evenements_articles'] = array(
-	'field' => &$spip_evenements_articles,
-	'key' => &$spip_evenements_articles_key);
 
 //-- Table de relations MOTS_EVENEMENTS----------------------
 $spip_mots_evenements = array(
@@ -53,7 +41,6 @@ $spip_mots_evenements = array(
 
 $spip_mots_evenements_key = array(
 		"PRIMARY KEY"	=> "id_mot, id_evenement",
-		"KEY id_mot"	=> "id_mot",
 		"KEY id_evenement"	=> "id_evenement");
 
 $tables_auxiliaires['spip_mots_evenements'] = array(
@@ -62,10 +49,13 @@ $tables_auxiliaires['spip_mots_evenements'] = array(
 
 //-- Jointures ----------------------------------------------------
 global $tables_jointures;
-$tables_jointures['spip_articles'][]= 'evenements_articles';
-$tables_jointures['spip_evenements'][] = 'evenements_articles';
+$tables_jointures['spip_articles'][]= 'evenements';
+$tables_jointures['spip_evenements'][] = 'articles';
 $tables_jointures['spip_mots'][]= 'mots_evenements';
 $tables_jointures['spip_evenements'][] = 'mots_evenements';
+
+global $exceptions_des_tables;
+$exceptions_des_tables['evenements']['id_rubrique']=array('spip_articles', 'id_rubrique');
 
 global $table_primary;
 $table_primary['evenements']="id_evenement";
@@ -77,7 +67,6 @@ $table_date['evenements'] = 'date_debut';
 // 'spip_' dans l'index de $tables_principales
 global $table_des_tables;
 $table_des_tables['evenements']='evenements';
-$table_des_tables['evenements_articles']='evenements_articles';
 $table_des_tables['mots_evenements']='mots_evenements';
 
 

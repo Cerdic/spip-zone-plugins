@@ -16,7 +16,7 @@ function Agenda_uninstall(){
 }
 
 function Agenda_verifier_base(){
-	$version_base = 0.11;
+	$version_base = 0.12;
 	$current_version = 0.0;
 	if (   (!isset($GLOBALS['meta']['agenda_base_version']) )
 			|| (($current_version = $GLOBALS['meta']['agenda_base_version'])!=$version_base)){
@@ -36,6 +36,18 @@ function Agenda_verifier_base(){
 		if ($current_version<0.11){
 			spip_query("ALTER TABLE spip_evenements ADD `horaire` ENUM('oui','non') DEFAULT 'oui' NOT NULL AFTER `lieu`");
 			ecrire_meta('agenda_base_version',$current_version=0.11);
+		}
+		if ($current_version<0.12){
+			spip_query("ALTER TABLE spip_evenements ADD `id_article` bigint(21) DEFAULT '0' NOT NULL AFTER `id_evenement`");
+			spip_query("ALTER TABLE spip_evenements ADD INDEX ( `id_article` )");
+			$res = spip_query ("SELECT * FROM spip_evenements_articles");
+			while ($row = spip_fetch_array($res)){
+				$id_article = $row['id_article'];
+				$id_evenement = $row['id_evenement'];
+				spip_query("UPDATE spip_evenements SET id_article=$id_article WHERE id_evenement=$id_evenement");
+			}
+			spip_query("DROP TABLE spip_evenements_articles");
+			ecrire_meta('agenda_base_version',$current_version=0.12);
 		}
 		
 		ecrire_metas();
@@ -82,8 +94,8 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 
 	$les_evenements = array();
 
-	$query = "SELECT * FROM spip_evenements AS evenements, spip_evenements_articles AS lien ".
-	"WHERE evenements.id_evenement=lien.id_evenement AND lien.id_article=$id_article ".
+	$query = "SELECT * FROM spip_evenements AS evenements ".
+	"WHERE evenements.id_article=$id_article ".
 	"GROUP BY evenements.id_evenement ORDER BY evenements.date_debut";
 	$result = spip_query($query);
 
@@ -282,7 +294,7 @@ function Agenda_action_formulaire_article(){
 	if ($insert || $modif){
 		$id_article = intval(_request('id_article'));
 		if (!$id_article){
-			$id_article = _request('ajouter_id_article');
+			$id_article = intval(_request('ajouter_id_article'));
 		}
 	
 		if ( ($insert) && (!$id_evenement) ){
@@ -296,15 +308,7 @@ function Agenda_action_formulaire_article(){
 	 	}
 	 	if ($id_article){
 			// mettre a jour le lien evenement-article
-			$query="SELECT COUNT(*) FROM spip_evenements_articles WHERE id_article=$id_article AND id_evenement=$id_evenement";
-			$res=spip_query($query);
-			$row = spip_fetch_array($res,SPIP_NUM);
-			$nblink = $row['0'];
-			if ($nblink==0){
-				spip_abstract_insert("spip_evenements_articles",
-					"(id_evenement,id_article)",
-					"($id_evenement,$id_article)");
-			}
+			spip_query("UPDATE spip_evenements SET id_article=$id_article WHERE id_evenement=$id_evenement");
 	 	}
 		$titre = addslashes(_request('evenement_titre'));
 		$descriptif = addslashes(_request('evenement_descriptif'));
@@ -365,9 +369,8 @@ function Agenda_action_formulaire_article(){
 		$id_article = intval(_request('id_article'));
 		if (!$id_article)
 			$id_article = intval(_request('ajouter_id_article'));
-		$res = spip_query("SELECT * FROM spip_evenements_articles WHERE id_article=$id_article AND id_evenement=$supp_evenement");
+		$res = spip_query("SELECT * FROM spip_evenements WHERE id_article=$id_article AND id_evenement=$supp_evenement");
 		if ($row = spip_fetch_array($res)){
-			spip_query("DELETE FROM spip_evenements_articles WHERE id_article=$id_article AND id_evenement=$supp_evenement");
 			spip_query("DELETE FROM spip_mots_evenements WHERE id_evenement=$supp_evenement");
 			spip_query("DELETE FROM spip_evenements WHERE id_evenement=$supp_evenement");
 		}
