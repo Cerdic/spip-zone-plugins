@@ -33,7 +33,7 @@ function exec_admin_index_dist()
 
 	$INDEX_elements_objet = array();
 	if (isset($GLOBALS['meta']['INDEX_elements_objet']))
-		$INDEX_elements_objet = $GLOBALS['meta']['INDEX_elements_objet'];
+		$INDEX_elements_objet = unserialize($GLOBALS['meta']['INDEX_elements_objet']);
 
 	Recherche_etendue_verifier_base();
 	

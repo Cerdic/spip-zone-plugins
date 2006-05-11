@@ -19,14 +19,19 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/indexation');
-include_ecrire ("inc_logos");
-include_ecrire ("inc_presentation");
+include_spip("inc/logos");
+include_spip("inc/presentation");
+include_spip('inc/indexation_etendue');
 
 function exec_index_tous_dist()
 {
 	global $connect_statut;
-	global $INDEX_elements_objet;
 	Recherche_etendue_verifier_base();
+	$INDEX_elements_objet;
+
+	$INDEX_elements_objet = array();
+	if (isset($GLOBALS['meta']['INDEX_elements_objet']))
+		$INDEX_elements_objet = unserialize($GLOBALS['meta']['INDEX_elements_objet']);
 
 	$liste_tables = array();
 	$icone_table = array();
