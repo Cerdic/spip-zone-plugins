@@ -52,6 +52,31 @@ function Agenda_verifier_base(){
 		
 		ecrire_metas();
 	}
+	
+	if (isset($GLOBALS['meta']['INDEX_elements_objet'])){
+		$INDEX_elements_objet = unserialize($GLOBALS['meta']['INDEX_elements_objet']);
+		if (!isset($INDEX_elements_objet['spip_evenements'])){
+			$INDEX_elements_objet['spip_evenements'] = array('titre'=>8,'descriptif'=>4,'lieu'=>3);
+			ecrire_meta('INDEX_elements_objet',serialize($INDEX_elements_objet));
+			ecrire_metas();
+		}
+	}
+	if (isset($GLOBALS['meta']['INDEX_objet_associes'])){
+		$INDEX_objet_associes = unserialize($GLOBALS['meta']['INDEX_objet_associes']);
+		if (!isset($INDEX_objet_associes['spip_articles']['spip_evenements'])){
+			$INDEX_objet_associes['spip_articles']['spip_evenements'] = 1;
+			ecrire_meta('INDEX_objet_associes',serialize($INDEX_objet_associes));
+			ecrire_metas();
+		}
+	}
+	if (isset($GLOBALS['meta']['INDEX_elements_associes'])){
+		$INDEX_elements_associes = unserialize($GLOBALS['meta']['INDEX_elements_associes']);
+		if (!isset($INDEX_elements_associes['spip_evenements'])){
+			$INDEX_elements_associes['spip_evenements'] = array('titre'=>2,'descriptif'=>1);
+			ecrire_meta('INDEX_elements_associes',serialize($INDEX_elements_associes));
+			ecrire_metas();
+		}
+	}
 }
 
 function article_editable($id_article){

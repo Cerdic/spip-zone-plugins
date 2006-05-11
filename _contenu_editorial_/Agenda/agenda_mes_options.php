@@ -2,16 +2,6 @@
 define('_DIR_PLUGIN_AGENDA_EVENEMENTS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 include_spip('base/agenda_evenements');
 
-global $INDEX_elements_objet;
-$INDEX_elements_objet['spip_evenements'] = array('titre'=>8,'descriptif'=>4,'lieu'=>3);
-
-global $INDEX_objet_associes;
-$INDEX_objet_associes['spip_articles']['spip_evenements'] = 1;
-
-global $INDEX_elements_associes;
-$INDEX_elements_associes['spip_evenements'] = array('titre'=>2,'descriptif'=>1);
-
-
 function exec_calendrier()
 {
 	$mode = _request('mode');
