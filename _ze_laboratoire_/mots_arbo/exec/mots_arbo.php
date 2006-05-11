@@ -144,11 +144,17 @@ if ($conf_mot>0) {
 	var onloads = '';
 
 	function doOnloads() {
+//alert('onloads='+onloads);
 		eval(onloads);
 	}
 
 	window.onload= doOnloads;
 </script>";
+
+	echo "\n<link rel='stylesheet' href='"
+		.find_in_path('css/manip-tree.css')."' type='text/css'>";
+	echo "\n<script type='text/javascript' src='"
+		.find_in_path('js/manip-tree.js')."'></script>";
 
 	echo "\n<link rel='stylesheet' href='"
 		.find_in_path('css/folder-tree-static.css')."' type='text/css'>";
@@ -157,11 +163,7 @@ if ($conf_mot>0) {
 	echo "\n<script type='text/javascript' src='"
 		.find_in_path('js/folder-tree-static.js')."'></script>";
 
-	echo "\n<link rel='stylesheet' href='"
-		.find_in_path('css/manip-tree.css')."' type='text/css'>";
-	echo "\n<script type='text/javascript' src='"
-		.find_in_path('js/manip-tree.js')."'></script>";
-
+	echo "\n<div id='whereami'></div>";	
 	echo "\n<div id='movableNode'><ul></ul></div>";	
 	echo "\n<div id='arrDestIndicator'><img src='img_pack/deplierhaut.gif'></div>";
 	echo "\n<form action='../spip.php?action=bouger_mots' method='post'>";

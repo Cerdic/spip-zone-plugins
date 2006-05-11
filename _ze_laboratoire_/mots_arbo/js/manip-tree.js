@@ -57,7 +57,7 @@ var arrNodesDestination = false;
 
 
 // pour debugger ...
-//var whereAmI = false;
+var whereAmI = false;
 //var dump = false;
 
 function cancelEvent() {
@@ -110,12 +110,12 @@ function clearMovableDiv() {
 }
 
 function initMoveNode(e) {
-alert("initMoveNode "+this.id+arrTarget);
+//alert("initMoveNode "+this.id+arrTarget);
 	// pour ne pas reagir sur tous les parents d'un item
 	if(arrTarget) {
 		// pour annuler le hack de folder-tree-static.js
 		//if(arrTarget==true) arrTarget=false;
-		e.cancelBubble();
+		e.cancelBubble=true;
 		return;
 	}
 
@@ -178,7 +178,7 @@ function arrangeNodeMove(e) {
 			arrInsertDiv.style.display = 'block';				
 			arrNodesDestination = subs[no];	
 			insertAsFirstNode = true;
-			//whereAmI.innerHTML='DEBUT';
+			whereAmI.innerHTML='DEBUT';
 			return;
 		}
 
@@ -196,17 +196,18 @@ function arrangeNodeMove(e) {
 			if(tmpX<=(leftPos+20)) {
 				// = insertion apres ce noeud
 				arrInsertDiv.style.left= leftPos + 'px';
-				//whereAmI.innerHTML= 'APRES '+arrNodesDestination.id;
+				whereAmI.innerHTML= 'APRES '+arrNodesDestination.id;
 				afterTarget= true;
 			} else {
 				// sinon = insertion comme fils de ce noeud
 				arrInsertDiv.style.left= (leftPos+20) + 'px';
-				//whereAmI.innerHTML= 'SOUS '+arrNodesDestination.id;
+				whereAmI.innerHTML= 'SOUS '+arrNodesDestination.id;
 				afterTarget= false;
 			}
 			return;
 		}
 	}
+	whereAmI.innerHTML='???';
 }
 
 function arrangeNodeStopMove() {
@@ -258,11 +259,12 @@ function saveArrangableNodes() {
 }
 
 function initArrangableNodes() {
+//alert('initArrangableNodes');
 	arrParent = document.getElementById('arrangableNodes');
 	arrMoveCont = document.getElementById('movableNode').getElementsByTagName('UL')[0];
 	arrInsertDiv = document.getElementById('arrDestIndicator');
 
-	//whereAmI= document.getElementById('whereami');
+	whereAmI= document.getElementById('whereami');
 	//dump= document.getElementById('dump');
 
 	leftPosArrangableNodes = getLeftPos(arrParent);
