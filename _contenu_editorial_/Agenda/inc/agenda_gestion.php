@@ -368,16 +368,20 @@ function Agenda_action_formulaire_article(){
 		$query="UPDATE spip_evenements SET `titre`='$titre',`descriptif`='$descriptif',`lieu`='$lieu',`horaire`='$horaire',`date_debut`='$date_deb',`date_fin`='$date_fin' WHERE `id_evenement` = '$id_evenement';";
 		$res=spip_query($query);
 
-		// les mots cles : 1 maxi par groupe uniquement
+		// les mots cles : par groupes
 		$query = "SELECT * FROM spip_groupes_mots WHERE evenements='oui' ORDER BY titre";
 		$res = spip_query($query);
 		$liste_mots = array();
 		while ($row = spip_fetch_array($res,SPIP_ASSOC)){
 			$id_groupe = $row['id_groupe'];
-			$id_mot = intval(_request("evenement_groupe_mot_select_$id_groupe"));
-			if ($id_mot)
-				$liste_mots[] = $id_mot;
-				
+			$id_mot_a = _request("evenement_groupe_mot_select_$id_groupe"); // un array
+			if (is_array($id_mot_a) && count($id_mot_a)){
+				if ($row['unseul']=='oui')
+					$liste_mots[] = intval(reset($id_mot_a));
+				else 
+					foreach($id_mot_a as $id_mot)
+						$liste_mots[] = intval($id_mot);
+			}				
 		}
 		// suppression des mots obsoletes
 		$cond_in = "";
@@ -529,26 +533,25 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 	$res = spip_query($query);
 	while ($row = spip_fetch_array($res,SPIP_ASSOC)){
 		$id_groupe = $row['id_groupe'];
+		$multiple = ($row['unseul']=='oui')?"size='4'":"multiple='multiple' size='4'";
+		
 		$query = "SELECT mots_evenements.id_mot FROM spip_mots_evenements AS mots_evenements
 							LEFT JOIN spip_mots AS mots ON mots.id_mot=mots_evenements.id_mot 
 							WHERE mots.id_groupe=$id_groupe AND mots_evenements.id_evenement=$id_evenement";
-		$row2 = spip_fetch_array(spip_query($query));
-		$id_mot_select = 0;
-		if ($row2)
-			$id_mot_select = $row2['id_mot'];
+		$res2 = spip_query($query);
+		$id_mot_select = array();
+		while ($row2 = spip_fetch_array($res2))
+			$id_mot_select[] = $row2['id_mot'];
 
-		$out .= "<select name='evenement_groupe_mot_select_$id_groupe' class='fondl verdana1 agenda_mot_cle_select'>\n";
-		$out .= "\n<option value='x' style='font-variant: small-caps;'>".supprimer_numero($row['titre'])."</option>";
-		$query = "SELECT * FROM spip_mots WHERE id_groupe=$id_groupe ORDER BY titre";
-		$res2= spip_query($query);
+			
+		$out .= "<select name='evenement_groupe_mot_select_{$id_groupe}[]' class='fondl verdana1 agenda_mot_cle_select' $multiple>\n";
+		$out .= "\n<option value='x' style='font-variant: small-caps;' disabled='disabled'>".supprimer_numero($row['titre'])."</option>";
+
+		$res2= spip_query("SELECT * FROM spip_mots WHERE id_groupe=$id_groupe ORDER BY titre");
 		while ($row2 = spip_fetch_array($res2,SPIP_ASSOC)){
 			$id_mot = $row2['id_mot'];
 			$titre = $row2['titre'];
-			$out .= my_sel($id_mot, "&nbsp;&nbsp;&nbsp;$titre", $id_mot_select);
-			/*$out .= "<option value='$id_mot'";
-			if ($id_mot_select && $id_mot_select==$id_mot)
-				$out .= " selected='selected'";
-			$out .= ">&nbsp;&nbsp;&nbsp;$titre</option>\n";*/
+			$out .= my_sel($id_mot, "&nbsp;&nbsp;&nbsp;$titre", in_array($id_mot,$id_mot_select)?$id_mot:0);
 		}
 		$out .= "</select>\n";
 	}
@@ -564,6 +567,8 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 	}
 	$out .=  "</div>\n";
 
+	// feature desactivee pour le moment
+	// $out .= "<script type='text/javascript' src='"._DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/multiselect.js'></script>";
 
   $out .=  "</div>";
 

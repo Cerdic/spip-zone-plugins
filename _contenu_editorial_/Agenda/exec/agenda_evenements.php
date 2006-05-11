@@ -194,7 +194,7 @@ function visu_evenement_agenda($id_evenement,$flag_editable){
 			}
 	 	}
 		$out .= "<div class='agenda-visu-evenement'>";
-		$query = "SELECT * FROM spip_articles AS articles LEFT JOIN spip_evenements AS J ON J.id_article=articles.id_article WHERE J.id_evenement=$id_evenement";
+		$query = "SELECT articles.* FROM spip_articles AS articles LEFT JOIN spip_evenements AS J ON J.id_article=articles.id_article WHERE J.id_evenement=$id_evenement";
 		$res2 = spip_query($query);
 		if ($row2 = spip_fetch_array($res2)){
 			$out .= "<div class='article-evenement'>";

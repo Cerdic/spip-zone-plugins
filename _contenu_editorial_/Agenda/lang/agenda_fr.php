@@ -4,7 +4,7 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activite_editoriale' => 'Activit&eacute; &Eacute;ditoriale',
-'ajouter_un_evenement' => 'ajouter un &eacute;v&eacute;nement à cet article',
+'ajouter_un_evenement' => 'ajouter un &eacute;v&eacute;nement &agrave; cet article',
 'texte_agenda' => 'AGENDA',
 'titre_cadre_ajouter_evenement' => 'Ajouter un &eacute;v&eacute;nement',
 'item_mots_cles_association_evenements' => 'aux &eacute;v&eacute;nements de l\'agenda',
