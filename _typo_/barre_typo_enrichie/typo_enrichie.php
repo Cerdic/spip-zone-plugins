@@ -48,6 +48,7 @@ function BarreTypoEnrichie_pre_propre($texte) {
 	tester_variable('debut_intertitre_5', '<h6>');
 	tester_variable('fin_intertitre_5', '</h6>');
 
+	global $debut_intertitre, $fin_intertitre;
 	global $debut_intertitre_2, $fin_intertitre_2;
 	global $debut_intertitre_3, $fin_intertitre_3;
 	global $debut_intertitre_4, $fin_intertitre_4;
