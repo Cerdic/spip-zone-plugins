@@ -46,7 +46,7 @@ function boucle_TABLEAU($id_boucle, &$boucles) {
 	if($boucle->limit) {
 		error_log("LIMIT :  $boucle->limit");
 		list($start,$end)=explode(',', $boucle->limit);
-		$end= "$start+$end";
+		$end= "($start+$end>count(\$__t)?count(\$__t):$start+$end)";
 	} else {
 		$start='0'; $end='count($__t)';
 	}
