@@ -10,10 +10,9 @@ include_spip('base/auxiliaires'); // on va surcharger la def de index
 
 // ajouter une cle primaire sur spip_index
 $spip_index_key = array(
-		"PRIMARY KEY"	=> "id_table, id_objet",
+		"PRIMARY KEY"	=> "id_table, id_objet, hash",
  		"KEY `hash`"	=> "`hash`",
-		"KEY id_objet"	=> "id_objet",
-		"KEY id_table"	=> "id_table");
+		"KEY id_objet"	=> "id_objet");
 $tables_auxiliaires['spip_index']['key'] = &$spip_index_key;
 
 // definir spip_types_tables
@@ -48,6 +47,12 @@ $tables_auxiliaires['spip_recherches'] = array(
 
 global $tables_jointures;
 $tables_jointures['spip_index'][] = 'types_tables';
+
+global $exceptions_des_tables;
+$exceptions_des_tables['index']['type']=array('spip_types_tables', 'type');
+
+global $exceptions_des_jointures;
+$exceptions_des_jointures['type'] = array('spip_types_tables', 'type');
 
 //-- Table des tables ----------------------------------------------------
 

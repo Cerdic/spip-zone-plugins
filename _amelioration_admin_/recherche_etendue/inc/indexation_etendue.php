@@ -6,7 +6,7 @@ include_spip('base/indexation_etendue');
 
 
 	function Recherche_etendue_verifier_base(){
-		$version_base = 0.11;
+		$version_base = 0.12;
 		$current_version = 0.0;
 		if (   (isset($GLOBALS['meta']['Recherche_etendue_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['Recherche_etendue_base_version'])==$version_base))
@@ -16,13 +16,19 @@ include_spip('base/indexation_etendue');
 		if ($current_version==0.0){
 			include_spip('base/abstract_sql');
 			creer_base();
-			spip_query("ALTER IGNORE TABLE spip_index ADD PRIMARY KEY (id_table, id_objet)");
+			spip_query("ALTER IGNORE TABLE spip_index ADD PRIMARY KEY (id_table, id_objet, hash)");
 			ecrire_meta('Recherche_etendue_base_version',$current_version=$version_base);
 		}
 		if ($current_version<0.11){
 			include_spip('base/abstract_sql');
 			creer_base();
 			ecrire_meta('Recherche_etendue_base_version',$current_version=0.11);
+		}
+		if ($current_version<0.12){
+			spip_query("ALTER TABLE spip_index DROP PRIMARY KEY");
+			spip_query("ALTER IGNORE TABLE spip_index ADD PRIMARY KEY (id_table, id_objet, hash)");
+			spip_query("ALTER TABLE spip_index DROP INDEX id_table");
+			ecrire_meta('Recherche_etendue_base_version',$current_version=0.12);
 		}
 		ecrire_metas();
 	}
