@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Super Dump
+	/!\ DEPRECIE Super Dump
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	cedric.morin@yterium.com
@@ -10,9 +10,11 @@ _ &copy; 2006 - Distribue sous licence GPL
 	0.1
 	</version>
 	<etat>
-	test
+	experimental
 	</etat>
 	<description>
+	/!\ FONCTIONALITE INTEGREE DANS SPIP A PARTIR DE [6315->http://trac.rezo.net/trac/spip/changeset/6315]
+	
 	Dump et restore XML complets des tables SPIP. La sauvegarde inclue les tables supplementaires ajout&eacute;es par les plugin lorsqu'elles sont explicitement declar&eacute;e par ceux-ci.
 _ Le plugin permet de restorer aussi les dump xml realis&eacute;s directement par phpMyAdmin
 _ Il semble assez robuste et rapide maintenant pour &ecirc;tre utilis&eacute; en conditions r&eacute;eles : Tous les retours sont les bienvenus !
