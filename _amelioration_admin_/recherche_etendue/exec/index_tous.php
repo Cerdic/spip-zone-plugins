@@ -34,21 +34,14 @@ function exec_index_tous_dist()
 		$INDEX_elements_objet = unserialize($GLOBALS['meta']['INDEX_elements_objet']);
 
 	$liste_tables = array();
-	$icone_table = array();
-
-	$icone_spec=array('spip_forum'=>'forum-public-24.gif','spip_syndic'=>'site-24.gif','spip_documents'=>'doc-24.gif','spip_mots'=>'mot-cle-24.gif','spip_signatures'=>'suivi-petition-24.gif');
+	$icone_table=array('spip_articles'=>'article-24.gif','spip_auteurs'=>'auteur-24.gif','spip_breves'=>'breve-24.gif','spip_documents'=>'document-24.gif','spip_rubriques'=>'rubrique-24.gif','spip_forum'=>'forum-public-24.gif','spip_syndic'=>'site-24.gif','spip_documents'=>'doc-24.gif','spip_mots'=>'mot-cle-24.gif','spip_signatures'=>'suivi-petition-24.gif');
 
 	$liste_tables = liste_index_tables();
 	asort($liste_tables);
 
 	foreach($liste_tables as $table){
-		$typ = preg_replace("{^spip_}","",$table);
-		if (substr($typ,-1,1)=='s')
-		  $typ = substr($typ,0,strlen($typ)-1);
-		$icone = "$typ-24.gif";
-		if (isset($icone_spec[$table]))
-			$icone = $icone_spec[$table];
-		$icone_table[$table] = $icone;
+		if (!isset($icone_table[$table]))
+			$icone_table[$table] = "tout-site-24.gif";
  	}
 
 	if (isset($_REQUEST['index_table'])) $index_table = $_REQUEST['index_table'];
@@ -86,19 +79,12 @@ function exec_index_tous_dist()
 
 	icone_horizontale (_L('Tout'), generer_url_ecrire("index_tous"), "tout-site-24.gif");
 
-	//$link = new Link();
-	//$link->addVar('filtre',$filtre);
 	foreach($liste_tables as $t){
 		if (isset($INDEX_elements_objet[$t])){
-			//$link->addVar('index_table',$t);
 			icone_horizontale (_L('Index '.$t), generer_url_ecrire("index_tous","index_table=$t&filtre=$filtre"), $icone_table[$t]);
 		}
 	}
 
-	//$link = new Link();
-	//if ($index_table!='')
-	//	$link->addVar('index_table',$index_table);
-	//echo $link->getForm('get');
 	echo generer_url_post_ecrire("index_tous",$index_table?"index_table=$index_table":"");
 
 	echo _L('Filtrer :') . "<br /><select name='filtre'";
