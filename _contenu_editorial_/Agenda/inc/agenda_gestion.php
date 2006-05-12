@@ -479,15 +479,13 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 	// TITRE
 	$out .=  "<div class='titre-titre'>"._T('agenda:evenement_titre')."</div>\n";
 	$out .=  "<div class='titre-visu'>";
-	$ftitre=entites_html($ftitre,ENT_QUOTES);
-	$out .=  "<input type='text' name='evenement_titre' value='$ftitre' style='width:100%;' />";
+	$out .=  "<input type='text' name='evenement_titre' value=\"$ftitre\" style='width:100%;' />";
 	$out .=  "</div>\n";
 
 	// LIEU
 	$out .=  "<div class='lieu-titre'>"._T('agenda:evenement_lieu')."</div>";
 	$out .=  "<div class='lieu-visu'>";
-	$flieu=entites_html($flieu,ENT_QUOTES);
-	$out .=  "<input type='text' name='evenement_lieu' value='$flieu' style='width:100%;' />";
+	$out .=  "<input type='text' name='evenement_lieu' value=\"$flieu\" style='width:100%;' />";
 	$out .=  "</div>\n";
 
 	// Horaire
@@ -522,7 +520,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 	$out .=  "<div class='descriptif-titre'>"._T('agenda:evenement_descriptif')."</div>";
 	$out .=  "<div class='descriptif-visu'>";
 	$out .=  "<textarea name='evenement_descriptif' style='width:100%;' rows='3'>";
-	$out .=  entites_html($fdescriptif,ENT_QUOTES);
+	$out .=  $fdescriptif;
 	$out .=  "</textarea>\n";
 	$out .=  "</div>\n";
 
