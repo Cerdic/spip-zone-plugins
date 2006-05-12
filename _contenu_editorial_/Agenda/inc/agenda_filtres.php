@@ -3,7 +3,11 @@
 function Agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', $lieu='', $url='', $cal='')
 {
 	static $agenda = array();
-	if (!$date_deb) return $agenda;
+	if (!$date_deb) {
+		$res = $agenda;
+		$agenda=array();
+		return $res;
+	}
 	$url=str_replace("&amp;","&",$url);
 	
 	$idatedeb = date_ical($date_deb);
@@ -71,7 +75,7 @@ function Agenda_affiche_full($i)
 	$sinon = array_shift($args);
 	if (!$nb) return $sinon;
 	$type = array_shift($args);
-	$agenda = agenda_memo_full(0);
+	$agenda = Agenda_memo_full(0);
 	$evt_avec = array();
 	foreach (($args ? $args : array_keys($agenda)) as $k) {
 		if (is_array($agenda[$k]))
@@ -80,7 +84,7 @@ function Agenda_affiche_full($i)
 			}
 	}
 
-	$evenements = agenda_memo_evt_full(0);
+	$evenements = Agenda_memo_evt_full(0);
 	$evt_sans = array();
 	foreach (($args ? $args : array_keys($evenements)) as $k) {
 		if (is_array($evenements[$k]))
