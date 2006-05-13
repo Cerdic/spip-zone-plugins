@@ -40,7 +40,7 @@ function exec_ajax_edit_article_dist() {
 	$flag_editable = ($statut_rubrique OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
 
 	if ($flag_editable) {
-		spip_query("UPDATE spip_articles SET $champ='".addslashes($valeur)."', date_modif=NOW() WHERE id_article=$id_article");
+		spip_query("UPDATE spip_articles SET $champ='".addslashes($valeur)."', date_modif=NOW(), statut=if(statut='nouveau','prepa',statut) WHERE id_article=$id_article");
 
 		//echo $valeur;
 		echo propre($valeur);

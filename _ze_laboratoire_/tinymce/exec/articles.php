@@ -171,6 +171,19 @@ if ($flag_editable AND $options == 'avancees')
 
 fin_cadre_enfonce(false);
 
+
+//
+// Selecteur de rubrique
+//
+
+debut_cadre_couleur($logo, false, "", _T('titre_cadre_interieur_rubrique'). aide("artrub"));
+
+// A FAIRE : changer en boite permettant de valider la modif
+echo selecteur_rubrique($id_rubrique, 'article', ($GLOBALS['statut'] == 'publie'));
+
+fin_cadre_couleur();
+
+
 //
 // Liste des mots-cles de l'article
 //
@@ -288,6 +301,11 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	  afficher_boite_logo('art', 'id_article', $id_article,
 			      _T('logo_article').aide ("logoart"), _T('logo_survol'), 'articles');
 
+	# modifs de la description d'un des docs joints
+	maj_documents($id_article, 'article');
+
+	# affichage
+	afficher_documents_colonne($id_article, 'article', true);
 
 //
 // Boites de configuration avancee
@@ -296,7 +314,6 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 	  echo "<p>";
 	  debut_cadre_relief("forum-interne-24.gif");
-
 
 	  $nb_forums = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_forum WHERE id_article=$id_article 	AND statut IN ('publie', 'off', 'prop')"));
 
@@ -529,7 +546,7 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 {
 	global  $dir_lang, $spip_lang_left, $connect_id_auteur;
 
-	$logo_statut = "puce-".puce_statut($statut_article).".gif";
+	$logo_statut = "puce-".puce_statut($statut_article=='nouveau'?'prepa':$statut_article).".gif";
 	
 	echo "\n<link rel='stylesheet' type='text/css' href='"
 		.find_in_path("css/articleEdit.css")."' />";
@@ -1326,7 +1343,7 @@ function afficher_statut_articles($id_article, $rubrique_article, $statut_articl
 	 "<OPTION" , mySel("refuse", $statut_article) , " style='background-color: #FFA4A4'>",_T('texte_statut_refuse'),"</OPTION>\n",
 	  "</SELECT>",
 	  " &nbsp; ",
-	  http_img_pack("puce-".puce_statut($statut_article).'.gif', "", "border='0' NAME='statut'"),
+	  http_img_pack("puce-".puce_statut($statut_article=='nouveau'?'prepa':$statut_article).'.gif', "", "border='0' NAME='statut'"),
 	  "  &nbsp;\n";
 
 	echo "<span class='visible_au_chargement' id='valider_statut'>";
@@ -1464,7 +1481,7 @@ function insert_article($id_parent, $new)
 }
 // Y a-t-il vraiment 56 variables determinant l'edition d'un article ?
 
-function exec_articles_new_dist()
+function exec_articles_dist()
 {
 global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $descriptif, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nom_site, $nouv_auteur, $nouv_mot, $ps, $row, $site_obli, $site_unique, $soustitre, $supp_auteur, $supp_mot, $surtitre, $texte, $texte_petition, $texte_plus, $titre, $titre_article, $url_site, $virtuel; 
 
