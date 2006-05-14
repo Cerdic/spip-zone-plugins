@@ -27,7 +27,7 @@ function Agenda_verifier_base(){
 			creer_base();
 			// ajout du champ evenements a la table spip_groupe_mots
 			// si pas deja existant
-			$desc = spip_abstract_showtable("spip_groupes_mots");
+			$desc = spip_abstract_showtable("spip_groupes_mots", '', true);
 			if (!isset($desc['field']['evenements'])){
 				spip_query("ALTER TABLE spip_groupes_mots ADD `evenements` VARCHAR(3) NOT NULL AFTER `syndic`");
 			}
