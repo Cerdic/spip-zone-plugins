@@ -4,7 +4,7 @@
 	[fr]
 	  Squelette editeur
   [en]
-	  Skeleton editor 
+	  Template editor 
 	[it]
 	  Redattore di scheletro 
 	[es]
@@ -15,7 +15,7 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	[erational->http://www.erational.org] et [karim belkacem->http://www.glums.com]
-_ &copy; 2006 - Distribue sous licence GNU/GPL
+_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.1
@@ -26,15 +26,15 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	<description>
 	<multi>
 	[fr]
-	  Dans l'espace priv&eacute;, permet d'&eacute;diter les fichiers squelettes, {{attention: toujours en test !}}
+	  Dans l'espace priv&eacute;, permet d'&eacute;diter les fichiers squelettes
   [en]
-	  Edit the skeleton files in the backoffice
+	  Edit template files in the backoffice
 	[it]
-	  Nello spazio riservato, concede a redattore gli scheletri delle lime, {{attenzione: sempre nella prova!}}
+	  Nello spazio riservato, concede a redattore gli scheletri delle lime
 	[es]
-	  En espacio privado, no prohibe a redactor los esqueletos de los archivos, {{precauci&oacute;n:  siempre en prueba!}}
+	  En espacio privado, no prohibe a redactor los esqueletos de los archivos
 	[de]
-	  Im privaten Raum erlaubt Herausgeber die Aktenskelette, {{Vorsicht:  immer im Test!}} 
+	  Im privaten Raum erlaubt Herausgeber die Aktenskelette 
 	</multi>
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction sur le mode Rien:: ainsi les fonctions hors espace de nommage ne peuvent etre appelees ce parametre est obligatoire et doit etre non vide -->

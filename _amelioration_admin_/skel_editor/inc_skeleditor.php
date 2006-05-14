@@ -8,7 +8,7 @@ function SkelEditor_ajouterBoutons($boutons_admin) {
 		if ($GLOBALS['connect_statut'] == "0minirezo") {		  
 		  $boutons_admin['naviguer']->sousmenu['skeleditor']= new Bouton(
 			'../'._DIR_PLUGIN_SKELEDITOR.'/img_pack/icon.png', // icone
-       _L("Editer les squelettes") // titre
+       _T("skeleditor:editer_skel") // titre
        );
 		} 
 		return $boutons_admin;
