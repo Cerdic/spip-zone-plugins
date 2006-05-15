@@ -160,6 +160,11 @@ function balise_TABLEAU($p) {
 
 	if ($p->param && !$p->param[0][0]) {
 		$var=  $p->param[0][1][0]->texte;
+		if($var=='valeur') {
+			$var= '$Pile[$SP][\'valeur\']';
+		} else {
+			$var= "\$GLOBALS['$var']";
+		}
 
 		// les cles
 		array_shift($p->param[0]);
@@ -174,7 +179,7 @@ function balise_TABLEAU($p) {
 					   $boucle->id_boucle);
 	  return;
 	}
-	$p->code = "(\$GLOBALS['$var']$cle)";
+	$p->code = "(${var}$cle)";
 	$p->interdire_scripts = true;
 	return $p;
 }
