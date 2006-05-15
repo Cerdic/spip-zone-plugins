@@ -13,10 +13,13 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
+include_spip('base/agenda_evenements'); // si le plugin existe
+include_spip('base/pim_agenda'); // si le plugin existe
 
 function exec_mots_type_dist()
 {
   global $connect_statut, $descriptif, $id_groupe, $new, $options, $texte, $titre;
+  global $tables_principales;
 
   $id_groupe= intval($id_groupe);
 
@@ -32,12 +35,13 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 	$rubriques = 'non';
 	$syndic = 'oui';
 	$evenements = 'non';
+	$pim_agenda = 'non';
 	$acces_minirezo = 'oui';
 	$acces_comite = 'oui';
 	$acces_forum = 'non';
 } else {
-	$query_groupes = "SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe";
-	$result_groupes = spip_query($query_groupes);
+	$result_groupes = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe");
+
 	while($row = spip_fetch_array($result_groupes)) {
 		$id_groupe = $row['id_groupe'];
 		$type = $row['titre'];
@@ -51,7 +55,10 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 		$breves = $row['breves'];
 		$rubriques = $row['rubriques'];
 		$syndic = $row['syndic'];
-		$evenements = $row['evenements'];
+		if (isset($row['evenements']))
+			$evenements = $row['evenements'];
+		if (isset($row['pim_agenda']))
+			$pim_agenda = $row['pim_agenda'];
 		$acces_minirezo = $row['minirezo'];
 		$acces_comite = $row['comite'];
 		$acces_forum = $row['forum'];
@@ -85,7 +92,7 @@ gros_titre($titre);
 echo aide("motsgroupes");
 
 if ($connect_statut =="0minirezo"){
-	$type=entites_html(urldecode($type));
+	$type=entites_html(rawurldecode($type));
 	echo "<p><font face='Verdana,Arial,Sans,sans-serif'>";
 	echo generer_url_post_ecrire("mots_tous", "id_groupe=$id_groupe");
 	echo "<INPUT TYPE='Hidden' NAME='modifier_groupe' VALUE=\"oui\">\n";
@@ -147,11 +154,20 @@ if ($connect_statut =="0minirezo"){
 		echo "<input type='checkbox' name='rubriques' value='oui' $checked id='rubriques'> <label for='rubriques'>"._T('item_mots_cles_association_rubriques')."</label><br>";
 		if ($syndic == "oui") $checked = "checked";
 		else $checked = "";
-		echo "<input type='checkbox' name='syndic' value='oui' $checked id='syndic'> <label for='syndic'>"._T('item_mots_cles_association_sites')."</label><br>";
-
-		if ($evenements == "oui") $checked = "checked";
-		else $checked = "";
-		echo "<input type='checkbox' name='evenements' value='oui' $checked id='evenements'> <label for='evenements'>"._T('agenda:item_mots_cles_association_evenements')."</label>";
+		echo "<input type='checkbox' name='syndic' value='oui' $checked id='syndic'> <label for='syndic'>"._T('item_mots_cles_association_sites')."</label>";
+		
+		if (isset($tables_principales['spip_evenements'])){
+			echo "<br>";
+			if ($evenements == "oui") $checked = "checked";
+			else $checked = "";
+			echo "<input type='checkbox' name='evenements' value='oui' $checked id='evenements'> <label for='evenements'>"._T('agenda:item_mots_cles_association_evenements')."</label>";
+		}
+		if (isset($tables_principales['spip_pim_agenda'])){
+			echo "<br>";
+			if ($pim_agenda == "oui") $checked = "checked";
+			else $checked = "";
+			echo "<input type='checkbox' name='pim_agenda' value='oui' $checked id='pim_agenda'> <label for='pim_agenda'>"._T('pimagenda:item_mots_cles_association_evenements')."</label>";
+		}
 	
 		echo "</ul>";
 	echo "</div>";

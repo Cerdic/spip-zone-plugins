@@ -1,4 +1,8 @@
 <?php
+/**
+ * Fichier de filtres communs au plugin Agenda et PIM_agenda
+ *
+ */
 
 function Agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', $lieu='', $url='', $cal='')
 {
@@ -107,7 +111,7 @@ function Agenda_affiche_full($i)
 		$type = 'mois';
 	}
 
-	include_spip('inc/calendrier.php');
+	include_spip('inc/agenda');
 	$texte=http_calendrier_init('', $type, '', '', self(), $evt);
 
 	return $texte;
