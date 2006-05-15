@@ -50,7 +50,6 @@ function beforeSaveCallBack(element_id, html, body) {
 }
 
 function changeRubrique(objet) {
-alert(objet.value);
 	beforeSaveCallBack('id_rubrique', objet.value, '');
 }
 
