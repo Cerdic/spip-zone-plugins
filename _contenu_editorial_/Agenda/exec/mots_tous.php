@@ -204,7 +204,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	if (isset($tables_principales['spip_evenements']))
 		if ($evenements == "oui") echo "> "._T('agenda:info_evenements')." &nbsp;&nbsp;";
 	if (isset($tables_principales['spip_pim_agenda']))
-		if ($pim_agenda == "oui") echo "> "._T('pim_agenda:info_evenements')." &nbsp;&nbsp;";
+		if ($pim_agenda == "oui") echo "> "._T('pimagenda:info_evenements')." &nbsp;&nbsp;";
 
 	if ($unseul == "oui" OR $obligatoire == "oui") echo "<br>";
 	if ($unseul == "oui") echo "> "._T('info_un_mot')." &nbsp;&nbsp;";
