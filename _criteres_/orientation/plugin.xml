@@ -3,7 +3,7 @@
 Orientation	
 </nom>
 	<auteur>	<!-- Auteur du plugin -->
-	  Pierre Andrews (Mortimer) & IZO  	</auteur>
+	  Pierre Andrews (Mortimer) &amp; IZO  	</auteur>
 <lien>http://www.spip-contrib.net/Portrait-ou-Paysage</lien>
 
 	<version>
@@ -20,14 +20,12 @@ Le plugin orientation ajoute le critere {portrait} , {carre} ou {paysage} pour l
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
+	<fonctions>
+	orientation.php
+	</fonctions>
 	<prefix> 
 	orientation
 	</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
-	<pipeline>
-			<nom>pre_typo</nom>
-		<action>pre_typo</action>
-		<inclure>orientation.php</inclure>
-	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>
