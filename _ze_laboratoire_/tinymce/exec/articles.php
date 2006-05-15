@@ -129,7 +129,7 @@ debut_cadre_relief();
 // AJOUT POUR TINYMCE
 echo "<script language='javascript' type='text/javascript' src='".find_in_path('js/tiny_mce.js')."'></script>
 <script language='javascript' type='text/javascript' src='".find_in_path('js/mce_widget2.js')."'></script>
-<form name='editText'>"; // onSubmit='return doAjaxSave
+<form name='editText' id='editText'>"; // onSubmit='return doAjaxSave
 
  $modif = titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique);
 
@@ -179,7 +179,8 @@ fin_cadre_enfonce(false);
 debut_cadre_couleur($logo, false, "", _T('titre_cadre_interieur_rubrique'). aide("artrub"));
 
 // A FAIRE : changer en boite permettant de valider la modif
-echo selecteur_rubrique($id_rubrique, 'article', ($GLOBALS['statut'] == 'publie'));
+echo selecteur_rubrique($id_rubrique, 'article', ($GLOBALS['statut']=='publie'));
+	echo "<div id='idparent' style='position:relative;float:right;'><a href='#idparent' onclick=\"changeRubrique(document.getElementById('id_parent'));\">changer</a></div>";
 
 fin_cadre_couleur();
 

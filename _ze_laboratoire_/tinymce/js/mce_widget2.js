@@ -22,7 +22,7 @@ tinyMCE.init({
 
 function beforeSaveCallBack(element_id, html, body) {
 
-alert('element_id='+element_id+'\nhtml='+html+'\nbody='+body);
+//alert('element_id='+element_id+'\nhtml='+html+'\nbody='+body);
 
 	// createXmlHttp viens de img_pack/mlayer.js
 	if (!(xmlhttp[element_id] = createXmlHttp()))
@@ -47,6 +47,11 @@ alert('element_id='+element_id+'\nhtml='+html+'\nbody='+body);
     xmlhttp[element_id].send('exec=ajax_edit_article&champ='+element_id+'&id_article='+id_article+'&valeur='+escape(html)); 
 
 	return html;
+}
+
+function changeRubrique(objet) {
+alert(objet.value);
+	beforeSaveCallBack('id_rubrique', objet.value, '');
 }
 
 var currentTinyMCE = false;
