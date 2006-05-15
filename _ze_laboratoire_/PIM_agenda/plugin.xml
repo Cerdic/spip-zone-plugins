@@ -1,0 +1,36 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	PIM Agenda
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Cedric MORIN
+ 	[notre-ville.net->http://www.notre-ville.net]
+_ &copy; 2006 - Licence GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Gestion des Informations Personnelles : Agenda
+_	{{Ce plugin necessite le plugin Widget Calendar}}
+	</description>
+	<options> <!-- fichier charge a chaque hit -->
+	pim_agenda_mes_options.php
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	pim_agenda_mes_fonctions.php
+	</fonctions>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	PIMAgenda
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+
+</plugin>
