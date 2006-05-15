@@ -1,0 +1,78 @@
+<?php
+
+/** BOUCLE SESSION
+ * Christian Lefebvre, Atos Worldline © 2006
+ * Distribué sous licence GPL
+ */
+
+$GLOBALS['tables_principales']['spip_session']= array(
+	'field' => array(
+		'id_auteur' => 'bigint(21) NOT NULL',
+		'nom' => 'text NOT NULL',
+		'login' => 'VARCHAR(255) BINARY NOT NULL',
+		'email' => 'tinytext NOT NULL',
+		'statut' => 'VARCHAR(255) NOT NULL',
+	),
+	'key' => array('PRIMARY KEY' => 'id_auteur')
+);
+$GLOBALS['table_des_tables']['session'] = 'session';
+
+/* cette boucle fait toujours un tour de boucle unique */
+function boucle_SESSION($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+
+	$code='
+		error_log("session : ".var_export($GLOBALS[\'auteur_session\'], 1));
+';
+	foreach($boucle->where as $w) {
+		$code.="\n		if(!($w)) return '';";
+	}
+
+	$code.=<<<CODE
+		\$SP++;
+		if(\$GLOBALS['auteur_session']) {
+			\$Pile[\$SP]['id_auteur']= \$GLOBALS['auteur_session']['id_auteur'];
+			\$Pile[\$SP]['nom']= \$GLOBALS['auteur_session']['nom'];
+			\$Pile[\$SP]['login']= \$GLOBALS['auteur_session']['login'];
+			\$Pile[\$SP]['email']= \$GLOBALS['auteur_session']['email'];
+			\$Pile[\$SP]['statut']= \$GLOBALS['auteur_session']['statut'];
+		} else {
+			\$Pile[\$SP]['id_auteur']='';
+			\$Pile[\$SP]['nom']='';
+			\$Pile[\$SP]['login']='';
+			\$Pile[\$SP]['email']='';
+			\$Pile[\$SP]['statut']='anonymous';
+		}
+		return $boucle->return;
+CODE;
+
+	return $code;
+}
+
+function critere_anonymous($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	if($boucle->type_requete!='session') {
+		error_log("Heu ...");
+		return;
+	}
+	if($crit->not) {
+		$boucle->where[]= "\$GLOBALS['auteur_session']!=''";
+	} else {
+		$boucle->where[]= "\$GLOBALS['auteur_session']==''";
+	}
+}
+
+function critere_admin($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	if($boucle->type_requete!='session') {
+		error_log("Heu ...");
+		return;
+	}
+	if($crit->not) {
+		$boucle->where[]= "\$GLOBALS['auteur_session']['statut']!='0minirezo'";
+	} else {
+		$boucle->where[]= "\$GLOBALS['auteur_session']['statut']=='0minirezo'";
+	}
+}
+
+?>

@@ -1,0 +1,50 @@
+ANONYME :
+$auteur_session=''
+
+VISITEUR
+$auteur_session=array (
+  'id_auteur' => '2',
+  'nom' => 'visiteur',
+  'login' => 'visiteur',
+  'email' => '',
+  'statut' => '6forum',
+  'lang' => '',
+  'ip_change' => '',
+  'hash_env' => '8129dde465b2a2c781fae59c7d0e78f1',
+)
+
+REDACTEUR :
+$auteur_session=array (
+  'id_auteur' => '3',
+  'nom' => 'redacteur',
+  'login' => 'redacteur',
+  'email' => '',
+  'statut' => '1comite',
+  'lang' => '',
+  'ip_change' => '',
+  'hash_env' => '8129dde465b2a2c781fae59c7d0e78f1',
+)
+
+ADMIN :
+$auteur_session=array (
+  'id_auteur' => '1',
+  'nom' => 'Pif',
+  'login' => 'piif',
+  'email' => 'christian.lefebvre@atosorigin.com',
+  'statut' => '0minirezo',
+  'lang' => 'fr',
+  'ip_change' => '',
+  'hash_env' => '8129dde465b2a2c781fae59c7d0e78f1',
+)
+
+ADMIN RESTREINT :
+$auteur_session=array (
+  'id_auteur' => '4',
+  'nom' => 'restreint',
+  'login' => 'restreint',
+  'email' => '',
+  'statut' => '0minirezo',
+  'lang' => '',
+  'ip_change' => '',
+  'hash_env' => '8129dde465b2a2c781fae59c7d0e78f1',
+)
