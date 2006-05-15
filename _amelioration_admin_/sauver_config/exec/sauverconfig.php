@@ -24,9 +24,10 @@ function exec_sauverconfig(){
   $log .= "URL:\t".$GLOBALS['meta']['adresse_site']."\n";
   $log .= "Date:\t".date("Y-m-d")."\n";
   $log .= $str_separateur; 
-    
+  
+  // exclude some fields ?   
   foreach ($GLOBALS['meta'] as $k=>$val) {
-    if (!in_array($k, $hidden_fields)) 
+    if (!in_array($k, $hidden_fields) && substr($k,0,6)!="INDEX_") 
         $log .= "$k: $val\n";      
   };
   $log .= $str_separateur;
