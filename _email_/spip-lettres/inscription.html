@@ -1,0 +1,86 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[#NOM_SITE_SPIP] </title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" />
+
+<!-- Les feuilles de style specifiques aux presents squelettes -->
+<link rel="stylesheet" href="#CHEMIN{typographie.css}" type="text/css" />
+
+<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
+<link rel="stylesheet" href="#CHEMIN{habillage.css}" type="text/css" media="print, projection, screen, tv" />
+
+<!-- Lien vers le backend pour navigateurs eclaires -->
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}" />
+[	<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />
+]</head>
+
+<body>
+<div id="navigation">
+
+<h1 class="structure"><:navigation:></h1>
+
+<!-- Menu de navigation general -->
+
+<div class="menu">
+<ul class="general">
+	<li class="menu-titre">
+	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><b>#NOM_SITE_SPIP</b></a>]
+	</li>
+	<li class="menu-item">
+	<a href="#URL_PAGE{plan}"><:plan_site:></a>
+	</li>
+	<li class="menu-item">
+	<a href="#URL_PAGE{resume}" title="<:articles_populaires:>"><:en_resume:></a>
+	</li>
+	<li class="menu-item">
+	<a href="ecrire/"><:espace_prive:></a>
+	</li>
+</ul>
+</div>
+
+<!-- Formulaire de recherche -->
+
+[(#FORMULAIRE_RECHERCHE)]
+
+<!-- Menu de navigation rubriques -->
+
+<B_rubriques>
+<div class="menu">
+<ul class="rubriques">
+<BOUCLE_rubriques(RUBRIQUES) {racine} {par titre}>
+<li>
+<div class="menu-titre"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></div>
+<B_sous_rubriques>
+	<ul class="menu-liste">
+<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par titre}>
+	<li class="menu-item"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></li>
+</BOUCLE_sous_rubriques>
+	</ul>
+</B_sous_rubriques>
+</li>
+</BOUCLE_rubriques>
+</ul>
+</div>
+</B_rubriques>
+
+<!-- Logo SPIP -->
+
+<a href="http://www.spip.net"><img src="IMG/logo_spip.jpg" width="105" height="92" class="spip_logos" alt="<:site_realise_avec_spip:>" /></a>
+
+</div>
+
+
+<div id="principal" class="contenu">
+
+#FORMULAIRE_LETTRES
+
+</div>
+
+#SPIP_CRON
+</body>
+</html>

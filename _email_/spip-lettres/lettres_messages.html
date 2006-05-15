@@ -1,0 +1,47 @@
+[(#REM)
+
+      +++++++++++++++++++++++++
+		Validation d'un email
+      +++++++++++++++++++++++++
+
+][(#ENV*{validation_email}|?{' ',''})[(#REM)
+
+		* Succès
+
+][(#ENV*{resultat_action}|?{' ',''})
+[(#ENV{lettres_action}|=={'inscription'}|?{' ',''})<:lettres:validation_inscription_succes:>]
+[(#ENV{lettres_action}|=={'desinscription'}|?{' ',''})<:lettres:validation_desinscription_succes:>]
+[(#ENV{lettres_action}|=={'changement_format'}|?{' ',''})<:lettres:validation_changement_succes:>]][(#REM)
+
+		* Echec
+
+][(#ENV*{resultat_action}|?{'',' '})
+[(#ENV{lettres_action}|=={'inscription'}|?{' ',''})<:lettres:validation_inscription_erreur:>]
+[(#ENV{lettres_action}|=={'desinscription'}|?{' ',''})<:lettres:validation_desinscription_erreur:>]
+[(#ENV{lettres_action}|=={'changement_format'}|?{' ',''})<:lettres:validation_changement_erreur:>]
+[(#ENV{lettres_action}|=={'redirection'}|?{' ',''})<:lettres:redirection_erreur:>]
+[(#ENV{action_inconnue}|?{' ',''})<:lettres:action_inconnue:>]
+<br /><:lettres:contactez_webmaster:> #EMAIL_WEBMASTER]
+][(#REM)
+
+      ++++++++++++++++++++++++++++++++
+		Confirmation d'envoi d'email
+      ++++++++++++++++++++++++++++++++
+
+][(#ENV*{envoi}|?{' ',''})[(#REM)
+
+		* Succès
+
+][(#ENV*{resultat_envoi}|?{' ',''})
+[(#ENV{lettres_action}|=={'inscription'}|?{' ',''})<:lettres:envoi_inscription_succes:>]
+[(#ENV{lettres_action}|=={'desinscription'}|?{' ',''})<:lettres:envoi_desinscription_succes:>]
+[(#ENV{lettres_action}|=={'changement_format'}|?{' ',''})<:lettres:envoi_changement_format_succes:>]][(#REM)
+
+		* Echec
+
+][(#ENV*{resultat_envoi}|?{'',' '})
+[(#ENV{lettres_action}|=={'inscription'}|?{' ',''})<:lettres:envoi_inscription_erreur:>]
+[(#ENV{lettres_action}|=={'desinscription'}|?{' ',''})<:lettres:envoi_desinscription_erreur:>]
+[(#ENV{lettres_action}|=={'changement_format'}|?{' ',''})<:lettres:envoi_changement_format_erreur:>]
+<br /><:lettres:contactez_webmaster:> #EMAIL_WEBMASTER]
+]

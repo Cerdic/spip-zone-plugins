@@ -1,0 +1,44 @@
+<form name="formulaire_lettre_information" id="formulaire_lettre_information" action="#SELF" method="post">
+	<fieldset>
+		<legend><:lettres:abonnement_a_une_lettre:></legend>
+<B_lettres>		<ul id="liste_lettres">
+<BOUCLE_lettres(LETTRES) {par titre}>			<li><input type="checkbox" name="lettres[]" id="lettre_#ID_LETTRE" value="#ID_LETTRE" [(#ID_LETTRE|lettres_filtrer_parmi_lettres|?{' ',''})checked="checked" ]/> <label for="lettre_#ID_LETTRE">#TITRE
+[(#ID_LETTRE|lettres_filtrer_parmi_lettres|?{' ',''})[(#ID_LETTRE|lettres_verifier_action_possible{#ENV*{lettres_action},#ENV*{email}}|?{'',' '})
+[(#ENV{lettres_action}|=={'inscription'}|?{' ',''})<:lettres:deja_abonne:>]
+[(#ENV{lettres_action}|=={'desinscription'}|?{' ',''})<:lettres:pas_abonne:>]
+]]
+</label></li>
+</BOUCLE_lettres>		</ul>
+</B_lettres>
+		<dl[(#ENV*{email_ko}|?{' class="erreur"',''})]>
+			<dt><label for="email">[(#ENV*{email_ko}|?{<:lettres:email_non_valide:>,<:lettres:email:>})]</label></dt>
+			<dd><input type="text" name="email" id="email" value="#ENV{email}" maxlength="255" /></dd>
+		</dl>
+		<dl>
+			<dt><label for="format"><:lettres:format:></label></dt>
+			<dd>
+				<select name="format" id="format">
+					<option value="mixte"[(#ENV{format}|=={'mixte'}|?{' ',''}) selected="selected"]><:lettres:format_mixte:></option>
+					<option value="html"[(#ENV{format}|=={'html'}|?{' ',''}) selected="selected"]><:lettres:format_html:></option>
+					<option value="texte"[(#ENV{format}|=={'texte'}|?{' ',''}) selected="selected"]><:lettres:format_texte:></option>
+				</select>
+			</dd>
+			<dd><:lettres:changement_affecte_toutes_les_lettres:></dd>
+		</dl>
+		<dl>
+			<dt><label for="lettres_action"><:lettres:action:></label></dt>
+			<dd>
+				<select name="lettres_action" id="lettres_action">
+					<option value="inscription"[(#ENV{lettres_action}|=={'inscription'}|?{' ',''}) selected="selected"]><:lettres:action_inscription:></option>
+					<option value="desinscription"[(#ENV{lettres_action}|=={'desinscription'}|?{' ',''}) selected="selected"]><:lettres:action_desinscription:></option>
+					<option value="changement_format"[(#ENV{lettres_action}|=={'changement_format'}|?{' ',''}) selected="selected"]><:lettres:action_changement_format:></option>
+				</select>
+			</dd>
+		</dl>
+		<ul class="boutons">
+			<li><input type="submit" name="valider" value="<:lettres:valider:>" /></li>
+		</ul>
+		<p class="champs_caches">
+		</p>
+	</fiedset>
+</form>		

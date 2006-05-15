@@ -1,0 +1,33 @@
+#CACHE{0}
+
+<BOUCLE_lettre(LETTRES) {id_lettre=(#ENV{id_lettre})} {titre_mot=flash}>
+
+#LOGO_LETTRE
+
+<h1>FLASH #TITRE</h1>
+<p><em>#DESCRIPTIF</em></p>
+<p>#TEXTE</p>
+
+<ul>
+<BOUCLE_article(ARTICLES) {par date} {inverse} {0,5}>
+	<li><a href="[(#URL_ARTICLE|lettres_filtrer_url_pour_redirection)]">#TITRE</a></li>
+</BOUCLE_article>
+</ul>
+
+<br />
+
+<a href="[(#URL_VALIDATION_DESINSCRIPTION)]">désinscription</a>
+
+</BOUCLE_lettre>
+
+
+<BOUCLE_test(LETTRES) {id_lettre=(#ENV{id_lettre})}>
+
+<h1>#TITRE</h1>
+<p><em>#DESCRIPTIF</em></p>
+<p>#TEXTE</p>
+
+<a href="[(#URL_VALIDATION_DESINSCRIPTION|textebrut)]">désinscription</a>
+
+</BOUCLE_test>
+<//B_lettre>
