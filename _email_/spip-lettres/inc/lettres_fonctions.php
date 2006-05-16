@@ -556,6 +556,9 @@
 		$charset			= lire_meta('charset');
 		$email_webmaster	= lire_meta('email_webmaster');
 		$nom_site			= lire_meta('nom_site');
+		$url_site			= lire_meta('adresse_site');
+
+		$message_html	= ereg_replace('../IMG', "$url_site/IMG", $message_html);
 
 		$requete_auteurs = 'SELECT A.email
 							FROM spip_auteurs AS A
