@@ -213,6 +213,7 @@
 			lettres_afficher_raccourci_tester_envoi($id_lettre);
 		lettres_afficher_raccourci_import_csv($id_lettre);
 		lettres_afficher_raccourci_export_csv($id_lettre);
+		lettres_afficher_raccourci_formulaire_inscription();
 		fin_raccourcis();
 
 
