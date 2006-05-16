@@ -11,6 +11,9 @@
 		return calculer_balise_dynamique($p,'FORMULAIRE_LETTRES', array());
 	}
 
+	function balise_FORMULAIRE_LETTRES_stat($args, $filtres) {
+		return $args;
+	}
 
 	/**
 	 * balise_FORMULAIRE_LETTRES_dyn
