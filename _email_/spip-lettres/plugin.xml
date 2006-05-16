@@ -1,13 +1,13 @@
 <plugin>
         <nom>Plugin SPIP-Lettres</nom>
         <auteur>[Atypik Cr&eacute;ations->http://www.atypik-creations.fr]</auteur>
-        <version>pre0.1</version>
+        <version>SVN</version>
         <etat>dev</etat>
         <description>Gestion de lettres d'information</description>
         <options>lettres.php</options>
         <fonctions>lettres.php</fonctions>
         <prefix>lettres</prefix>
-		<lien>[Documentation->www.maiis.net/spip-lettres/wiki/DocumentationSpipLettres]</lien>
+		<lien>[Documentation->http://trac.rezo.net/trac/spip-zone/wiki/SpipLettres]</lien>
         <pipeline>
                 <nom>ajouter_boutons</nom>
                 <action>ajouter_boutons</action>
