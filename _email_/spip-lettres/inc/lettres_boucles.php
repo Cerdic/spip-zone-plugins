@@ -180,9 +180,8 @@ function boucle_LETTRES_dist($id_boucle, &$boucles) {
         $boucle->from[$id_table] =  "spip_lettres";  
 
 		if (!$GLOBALS['var_preview']) {
-			// Restreindre aux elements publies
 			if (!$boucle->statut) {
-				$boucle->where[] = "$id_table.statut IN ('publie','envoi_en_cours')";
+				$boucle->where[]= array("'IN'", "'$id_table.statut'", "'(\"publie\",\"envoi_en_cours\")'");
 			}
 		}
         return calculer_boucle($id_boucle, $boucles); 
