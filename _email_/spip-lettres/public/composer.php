@@ -149,7 +149,8 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $ff) {
 	'BREVE' =>  'breve',
 	'MOT' => 'mot',
 	'RUBRIQUE' => 'rub',
-	'SITE' => 'site'
+	'SITE' => 'site',
+	'LETTRE' => 'let'
 	);
 	$type = $table_logos[$type];
 	$nom = strtolower($onoff);
@@ -321,8 +322,7 @@ function lister_objets_avec_logos ($type) {
 	'breves' => 'breve',
 	'mots' => 'mot',
 	'sites' => 'site',
-	'auteurs' => 'aut',
-	'lettres' => 'let'
+	'auteurs' => 'aut'
 	);
 
 	$logos = array();
