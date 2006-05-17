@@ -20,7 +20,8 @@ $spip_abonnes = array(
 					"email"		=> "varchar(255) NOT NULL default ''",
 					"code"		=> "varchar(255) NOT NULL default ''",
 					"format"	=> "enum('html','texte','mixte') NOT NULL default 'mixte'",
-					"maj"		=> "datetime NOT NULL default '0000-00-00 00:00:00'"
+					"maj"		=> "datetime NOT NULL default '0000-00-00 00:00:00'",
+					"extra"		=> "longblob NULL"
 				);
 $spip_abonnes_key = array(
 					"PRIMARY KEY" 	=> "id_abonne",
