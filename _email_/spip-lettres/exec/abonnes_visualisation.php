@@ -4,16 +4,15 @@
 	include_spip('inc/lettres_admin');
 	include_spip('inc/presentation');
 	include_spip('inc/logos');
+	include_spip('inc/extra');
 
 
 	function exec_abonnes_visualisation()
 	{
-		global $connect_id_abonne, $id_abonne;
+		global $connect_id_abonne, $id_abonne, $champs_extra;
 	
 		lettres_verifier_droits();
 
-		//print_r($_POST);
-	
 		if (!empty($_POST['enregistrer'])) {
 			$id_abonne	= intval($_GET['id_abonne']);
 			$id_lettre	= intval($_POST['id_lettre']);
@@ -24,11 +23,14 @@
 				$url_edition = generer_url_ecrire('abonnes_edition', "&email=$email&format=$format&erreur=1", '&');
 				lettres_rediriger_javascript($url_edition);
 			}
+
+			if ($champs_extra)
+				$champs_extra = extra_recup_saisie("abonnes");
 			
 			if (!$id_abonne) {
 				list($existence, $id_abonne) = lettres_verifier_existence_abonne($email);
 				if (!$existence) {
-					$insertion = 'INSERT INTO spip_abonnes (email, code, format, maj) VALUES ("'.$email.'", "'.lettres_calculer_code().'", "'.$format.'", NOW())';
+					$insertion = 'INSERT INTO spip_abonnes (email, code, format, maj'.($champs_extra ? ", extra" : '').') VALUES ("'.$email.'", "'.lettres_calculer_code().'", "'.$format.'", NOW()'.($champs_extra ? (', "'.addslashes($champs_extra).'"') : '').')';
 					spip_query($insertion);
 					$id_abonne = spip_insert_id();
 				}
@@ -37,7 +39,7 @@
 					spip_query($requete_inscription);
 				}
 			} else {			
-				$modification = 'UPDATE spip_abonnes SET email="'.$email.'", format="'.$format.'", maj=NOW() WHERE id_abonne="'.$id_abonne.'"';
+				$modification = 'UPDATE spip_abonnes SET email="'.$email.'", format="'.$format.'", maj=NOW()'.($champs_extra ? (", extra = '".addslashes($champs_extra)."'") : '').' WHERE id_abonne="'.$id_abonne.'"';
 				spip_query($modification);
 			}
 			$url_abonne = generer_url_ecrire('abonnes_visualisation', 'id_abonne='.$id_abonne, '&');
@@ -108,12 +110,13 @@
 
 	function table_abonnes_edit($abonne)
 	{
-		global $connect_statut, $connect_id_abonne, $champs_extra,$options  ;
+		global $connect_statut, $connect_id_abonne, $champs_extra, $options;
 
 		$id_abonne	= $abonne['id_abonne'];
 		$email		= $abonne['email'];
 		$code		= $abonne['code'];
 		$format		= $abonne['format'];
+		$extra		= $abonne['extra'];
 #		$maj=date('d-m-Y',strtotime($abonne['maj'])) .  ' &agrave; ' . date('H:i:s',strtotime($abonne['maj']));
 		$maj = affdate($abonne['maj']);
 
@@ -137,7 +140,12 @@
 		echo _T('lettres:format')." : <B>$format</B><br />";
 		echo _T('lettres:code')." : <B>$code</B>";
 		echo "</font>";
-		echo "</div></td></tr>\n";
+		echo "</div>";
+		if ($champs_extra AND $extra) {
+			echo "<br />\n";
+			extra_affichage($extra, "articles");
+		}
+		echo "</td></tr>\n";
 		echo "</table>\n";
 
 		echo "<div>&nbsp;</div>";

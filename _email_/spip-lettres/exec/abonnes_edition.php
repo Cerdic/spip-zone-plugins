@@ -6,7 +6,7 @@
 
 
 	function exec_abonnes_edition() {
-		global $couleur_foncee, $tri, $debut;
+		global $champs_extra, $couleur_foncee, $tri, $debut;
 	 	
 		lettres_verifier_droits();
 
@@ -16,8 +16,9 @@
 		if (!empty($_GET['id_abonne'])) {
 			$result = spip_query("SELECT * FROM spip_abonnes WHERE id_abonne=" . $id_abonne);		
 			if (!$abonne = spip_fetch_array($result)) die('erreur');	
-			$email = $abonne['email'];
-			$format = $abonne['format'];
+			$email	= $abonne['email'];
+			$format	= $abonne['format'];
+			$extra	= $abonne['extra'];
 		} else if (!empty($_GET['email']) AND !empty($_GET['format']) AND !empty($_GET['erreur'])) {
 			$new		= true;
 			$email		= $_GET['email'];
@@ -71,6 +72,11 @@
 		echo '<option value="html" '; if ($format == 'html') echo 'selected'; echo '>'._T('lettres:format_html').'</option>';
 		echo '<option value="texte" '; if ($format == 'texte') echo 'selected'; echo '>'._T('lettres:format_texte').'</option>';
 		echo "</select></P>\n";
+
+		if ($champs_extra) {
+			include_spip('inc/extra');
+			extra_saisie($extra, 'abonnes');
+		}
 
 		echo "<DIV ALIGN='right'>";
 		echo "<INPUT CLASS='fondo' TYPE='submit' NAME='enregistrer' VALUE='"._T('lettres:enregistrer')."'>";
