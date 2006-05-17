@@ -33,7 +33,7 @@ function Agenda_exec_init($flux) {
 	if (($exec == 'calendrier')||($exec=='articles')){
 		include_spip('inc/calendar');
 		// Reserver les widgets agenda
-		WCalendar_ajoute_lies(_L("Date de d&eacute;but"),'_evenement_debut',_T('agenda:Date de fin'),'_evenement_fin');
+		WCalendar_ajoute_lies(_T('agenda:evenement_date_debut'),'_evenement_debut',_T('agenda:evenement_date_fin'),'_evenement_fin');
 	}
 	return $flux;
 }

@@ -3,7 +3,7 @@
 // Declaration des tables evenements
 // creation 11/03/2006 pour SPIP 1.9
 
-//include_spip('base/serial');
+include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
 
 global $tables_principales;
 global $tables_auxiliaires;
@@ -82,12 +82,17 @@ $spip_groupes_mots = array(
 		"articles"	=> "varchar(3) NOT NULL",
 		"breves"	=> "varchar(3) NOT NULL",
 		"rubriques"	=> "varchar(3) NOT NULL",
-		"syndic"	=> "varchar(3) NOT NULL",
-		"evenements"	=> "varchar(3) NOT NULL",
+		"syndic"	=> "varchar(3) NOT NULL");
+if (isset($GLOBALS['meta']['agenda_base_version']))
+	$spip_groupes_mots = array_merge($spip_groupes_mots,array("evenements"	=> "varchar(3) NOT NULL"));
+if (isset($GLOBALS['meta']['pim_agenda_base_version']))
+	$spip_groupes_mots = array_merge($spip_groupes_mots,array("pim_agenda"	=> "varchar(3) NOT NULL"));
+$spip_groupes_mots = array_merge($spip_groupes_mots,array(
 		"minirezo"	=> "varchar(3) NOT NULL",
 		"comite"	=> "varchar(3) NOT NULL",
 		"forum"	=> "varchar(3) NOT NULL",
-		"maj"	=> "TIMESTAMP");
+		"maj"	=> "TIMESTAMP"));
+
 
 $spip_groupes_mots_key = array(
 		"PRIMARY KEY"	=> "id_groupe");
