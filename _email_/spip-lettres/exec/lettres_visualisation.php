@@ -209,7 +209,7 @@
 		debut_raccourcis();
 		lettres_afficher_raccourci_liste_lettres(_T('lettres:raccourci_retour_liste_lettres'));
 		lettres_afficher_raccourci_ajouter_abonne($id_lettre);
-		if (@spip_num_rows(spip_query('SELECT * FROM spip_auteurs_lettres WHERE id_lettre="'.$id_lettre.'"')) > 0)
+		if (@spip_num_rows(spip_query('SELECT * FROM spip_auteurs_lettres WHERE id_lettre="'.$id_lettre.'"')) > 0 AND $statut != 'brouillon')
 			lettres_afficher_raccourci_tester_envoi($id_lettre);
 		lettres_afficher_raccourci_import_csv($id_lettre);
 		lettres_afficher_raccourci_export_csv($id_lettre);
