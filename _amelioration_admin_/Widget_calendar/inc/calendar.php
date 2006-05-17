@@ -16,6 +16,16 @@ function WCalendar_ajoute_lies($titre_debut,$suffixe_debut,$titre_fin,$suffixe_f
 														'titre2'=>$titre_fin,'suffixe2'=>$suffixe_fin);
 }
 
+
+function WCalendar_header($flux){
+	include_spip('inc/calendar_init');
+	return WCalendar_header_prive($flux);
+}
+function WCalendar_body($flux){
+	include_spip('inc/calendar_init');
+	return WCalendar_body_prive($flux);
+}
+
 function WCalendar_controller($date,$suffixe){
 	if (strcmp($date,format_mysql_date())==0)
 		$date=date("Y-m-d H:i:s");
