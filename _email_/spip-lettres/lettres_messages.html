@@ -1,3 +1,9 @@
+<div class="formulaire_spip">
+<a name="formulaire_lettres" id="formulaire_lettres"></a>
+<form method="post" action="#ENV{self}#formulaire_lettres">
+	<fieldset class="spip_encadrer">
+		<legend><:lettres:lettres_information:></legend>
+		<p>
 [(#REM)
 
       +++++++++++++++++++++++++
@@ -35,7 +41,8 @@
 ][(#ENV*{resultat_envoi}|?{' ',''})
 [(#ENV{lettres_action}|=={'inscription'}|?{' ',''})<:lettres:envoi_inscription_succes:>]
 [(#ENV{lettres_action}|=={'desinscription'}|?{' ',''})<:lettres:envoi_desinscription_succes:>]
-[(#ENV{lettres_action}|=={'changement_format'}|?{' ',''})<:lettres:envoi_changement_format_succes:>]][(#REM)
+[(#ENV{lettres_action}|=={'changement_format'}|?{' ',''})<:lettres:envoi_changement_format_succes:>]
+][(#REM)
 
 		* Echec
 
@@ -45,3 +52,9 @@
 [(#ENV{lettres_action}|=={'changement_format'}|?{' ',''})<:lettres:envoi_changement_format_erreur:>]
 <br /><:lettres:contactez_webmaster:> #EMAIL_WEBMASTER]
 ]
+		</p>
+		[<ul>
+			(#ENV{lettres_virgule}|lettres_filtrer_lettres_virgule{'<li>','</li>'})
+		</ul>]
+	</fieldset>
+</form>

@@ -153,7 +153,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // Formulaires
-'abonnement_a_une_lettre' => 'Abonnement à une lettre d\'information',
+'lettres_information' => 'Lettres d\'information',
 'email' => 'Email',
 'format' => 'Format',
 'format_html' => 'HTML',
@@ -173,9 +173,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'redirection_erreur' => 'Une erreur empêche la redirection.',
 'action_inconnue' => 'Action inconnue.',
 'contactez_webmaster' => 'Contactez le webmaster :',
-'envoi_inscription_succes' => 'Vous allez recevoir un email pour confimer votre inscription à la/aux liste(s) suivante(s) :',
+'envoi_inscription_succes' => 'Vous allez recevoir un email pour confimer votre inscription à la/aux lettre(s) suivante(s) :',
 'envoi_inscription_erreur' => 'L\'email pour confirmer votre inscription n\'a pas pu être envoyé.',
-'envoi_desinscription_succes' => 'Vous allez recevoir un email pour confimer votre désinscription à la/aux liste(s) suivante(s) :',
+'envoi_desinscription_succes' => 'Vous allez recevoir un email pour confimer votre désinscription à la/aux lettre(s) suivante(s) :',
 'envoi_desinscription_erreur' => 'L\'email pour confirmer votre désinscription n\'a pas pu être envoyé.',
 'envoi_changement_format_succes' => 'Vous allez recevoir un email pour confimer votre changement de format.',
 'envoi_changement_format_erreur' => 'L\'email pour confirmer votre changement de format n\'a pas pu être envoyé.',
@@ -198,7 +198,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'abonne' => 'abonné',
 'abonnes_a_valider' => 'Abonnés en attente de validation',
 'abonnes_valides' => 'Abonnés validés',
-'abonnes_non_inscrits' => 'Abonnés inscrits à aucune liste',
+'abonnes_non_inscrits' => 'Abonnés inscrits à aucune lettre',
 'nouvel_abonne' => 'email@abonne.com',
 'email' => 'Email',
 'format' => 'Format',
@@ -224,6 +224,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'statut_a_valider' => 'En attente',
 'inscription' => 'inscription',
 'inscriptions' => 'inscriptions',
+
+// Squelettes
+'se_desinscrire' => 'Se désinscrire de cette lettre',
+'titre_changement_format' => 'Validation de votre changement de format',
+'titre_desinscription' => 'Validation de votre(vos) désinscription(s)',
+'titre_inscription' => 'Validation de votre(vos) inscription(s)',
+'valider_changement_format' => 'Valider le changement de format',
+'valider_desinscription' => 'Valider votre(vos) désinscription(s)',
+'valider_inscription' => 'Valider votre(vos) inscription(s)',
+'texte_changement_format' => 'Vous avez demandé à changer le format des lettres auxquelles vous êtes abonnés sur '.lire_meta('nom_site'),
+'texte_desinscription' => 'Sur '.lire_meta('nom_site').', vous avez demandé à vous désinscrire des lettres d\'information suivantes :',
+'texte_inscription' => 'Sur '.lire_meta('nom_site').', vous avez demandé à vous inscrire aux lettres d\'information suivantes :',
+'retour' => 'Retour',
 
 
 'Z' => 'ZZzZZzzz'

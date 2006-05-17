@@ -392,8 +392,10 @@
 		$message_texte	= ereg_replace("%%EMAIL%%", $email, $message_texte);
 		// Remplacement de %%LETTRES%% dans $message_html et $message_texte par $chaine_lettres
 		$chaine_lettres = '';
-		foreach ($lettres as $id_lettre)
-			$chaine_lettres.= '&lettres[]='.$id_lettre; 
+		if (!empty($lettres)) {
+			foreach ($lettres as $id_lettre)
+				$chaine_lettres.= '&lettres[]='.$id_lettre;
+		}
 		$message_html	= ereg_replace("%%LETTRES%%", $chaine_lettres, $message_html);
 		$message_texte	= ereg_replace("%%LETTRES%%", $chaine_lettres, $message_texte);
 		// Remplacement de %%FORMAT%% dans $message_html et $message_texte par $format_force

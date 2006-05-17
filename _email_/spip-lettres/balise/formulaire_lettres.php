@@ -36,6 +36,9 @@
 
 		$valider		= _request('valider');
 
+		if (!empty($lettres))
+			$lettres_virgule = implode(',', $lettres);
+
 		if (($id_abonne = lettres_verifier_identification_couple_code_email($code, $email))) {
 			// L'abonné vient de cliquer sur un lien d'un email qu'on lui a envoyé
 			switch ($lettres_action) {
@@ -73,6 +76,7 @@
 								'resultat_envoi'	=> '',
 								'email'				=> $email,
 								'format'			=> $format,
+								'lettres_virgule'	=> $lettres_virgule,
 								'lettres_action'	=> $lettres_action
 							)
 						),
@@ -149,7 +153,6 @@
 				}
 			
 				$id_abonne = lettres_recuperer_id_abonne_depuis_email($email);
-				$lettres_virgule = implode(',', $lettres);
 			
 				switch ($lettres_action) {
 					case 'inscription':
@@ -188,6 +191,7 @@
 									'resultat_envoi'	=> $resultat_envoi ? ' ' : '',
 									'email'				=> $email,
 									'format'			=> $format,
+									'lettres_virgule'	=> $lettres_virgule,
 									'lettres_action'	=> $lettres_action
 								)
 							),

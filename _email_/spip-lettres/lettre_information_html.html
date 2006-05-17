@@ -1,33 +1,42 @@
 #CACHE{0}
+<BOUCLE_lettre(LETTRES) {id_lettre=(#ENV{id_lettre})}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	<link rel="stylesheet" href="#URL_SITE_SPIP/dist/spip_style.css" type="text/css" media="projection, screen, tv" />
+	<link rel="stylesheet" href="#URL_SITE_SPIP/dist/habillage.css" type="text/css" media="projection, screen, tv" />
+	<link rel="stylesheet" href="#URL_SITE_SPIP/dist/impression.css" type="text/css" media="print" />
+</head>
 
-<BOUCLE_lettre(LETTRES) {id_lettre=(#ENV{id_lettre})} {titre_mot=flash}>
+<body>
+<div id="page">
 
-#LOGO_LETTRE
+    <div id="entete">
+		<div id="nom_site_spip"><a rel="start" href="#URL_SITE_SPIP">#TITRE</a></div>
+	</div>
+    
+    <div id="hierarchie">
+		[(#DATE|affdate)]
+		[(#LOGO_LETTRE|right)]
+		<br class="nettoyeur" />
+	</div>
 
-<h1>FLASH #TITRE</h1>
-<p><em>#DESCRIPTIF</em></p>
-<p>#TEXTE</p>
+    <div id="conteneur">
+        <div id="contenu">
+			[<div class="chapo">(#DESCRIPTIF)</div>]
+            [<div class="texte">(#TEXTE)</div>]
+        </div><!-- fin contenu -->
+        <div id="navigation">
+			<div class="rubriques">
+				<h2 class="titre"><:lettres:action_desinscription:></h2>
+				<ul>	
+					<li><a href="[(#URL_VALIDATION_DESINSCRIPTION)]"><:lettres:se_desinscrire:></a></li>
+				</ul>
+			</div>
+        </div><!-- fin navigation -->
+    </div><!-- fin conteneur -->
 
-<ul>
-<BOUCLE_article(ARTICLES) {par date} {inverse} {0,5}>
-	<li><a href="[(#URL_ARTICLE|lettres_filtrer_url_pour_redirection)]">#TITRE</a></li>
-</BOUCLE_article>
-</ul>
-
-<br />
-
-<a href="[(#URL_VALIDATION_DESINSCRIPTION)]">désinscription</a>
-
-</BOUCLE_lettre>
-
-
-<BOUCLE_test(LETTRES) {id_lettre=(#ENV{id_lettre})}>
-
-<h1>#TITRE</h1>
-<p><em>#DESCRIPTIF</em></p>
-<p>#TEXTE</p>
-
-<a href="[(#URL_VALIDATION_DESINSCRIPTION|textebrut)]">désinscription</a>
-
-</BOUCLE_test>
-<//B_lettre>
+</div><!-- fin page -->
+</body>
+</html></BOUCLE_lettre>
