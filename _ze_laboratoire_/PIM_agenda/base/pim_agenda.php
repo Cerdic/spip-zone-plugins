@@ -3,7 +3,7 @@
 // Declaration des tables evenements
 // creation 11/03/2006 pour SPIP 1.9
 
-//include_spip('base/serial');
+include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
 
 global $tables_principales;
 global $tables_auxiliaires;
@@ -56,7 +56,7 @@ $tables_principales['spip_pim_agenda_auteurs']['field'] = array (
 );
 
 $tables_principales['spip_pim_agenda_auteurs']['key'] = array (
-"KEY id_agenda" => "id_evenement",
+"KEY id_agenda" => "id_agenda",
 "KEY id_auteur" => "id_auteur"
 );
 
@@ -87,8 +87,8 @@ $tables_principales['spip_pim_agenda_publies']['key'] = array (
 global $tables_jointures;
 $tables_jointures['spip_articles'][]= 'pim_agenda';
 $tables_jointures['spip_pim_agenda'][] = 'articles';
-$tables_jointures['spip_mots'][]= 'mots_evenements';
-$tables_jointures['spip_pim_agenda'][] = 'mots_evenements';
+$tables_jointures['spip_mots'][]= 'mots_pim_agenda';
+$tables_jointures['spip_pim_agenda'][] = 'mots_pim_agenda';
 
 global $exceptions_des_tables;
 $exceptions_des_tables['pim_agenda']['id_rubrique']=array('spip_articles', 'id_rubrique');
@@ -104,11 +104,13 @@ $table_date['pim_agenda'] = 'date_debut';
 global $table_des_tables;
 $table_des_tables['pim_agenda']='pim_agenda';
 $table_des_tables['mots_pim_agenda']='mots_pim_agenda';
+$table_des_tables['pim_agenda_auteurs']='pim_agenda_auteurs';
+$table_des_tables['pim_agenda_invites']='pim_agenda_invites';
 
 
 
 // Extension de la table des groupes de mots cles
-/*$spip_groupes_mots = array(
+$spip_groupes_mots = array(
 		"id_groupe"	=> "bigint(21) NOT NULL",
 		"titre"	=> "text NOT NULL",
 		"descriptif"	=> "text NOT NULL",
@@ -118,18 +120,22 @@ $table_des_tables['mots_pim_agenda']='mots_pim_agenda';
 		"articles"	=> "varchar(3) NOT NULL",
 		"breves"	=> "varchar(3) NOT NULL",
 		"rubriques"	=> "varchar(3) NOT NULL",
-		"syndic"	=> "varchar(3) NOT NULL",
-		"evenements"	=> "varchar(3) NOT NULL",
+		"syndic"	=> "varchar(3) NOT NULL");
+if (isset($GLOBALS['meta']['agenda_base_version']))
+	$spip_groupes_mots = array_merge($spip_groupes_mots,array("evenements"	=> "varchar(3) NOT NULL"));
+if (isset($GLOBALS['meta']['pim_agenda_base_version']))
+	$spip_groupes_mots = array_merge($spip_groupes_mots,array("pim_agenda"	=> "varchar(3) NOT NULL"));
+$spip_groupes_mots = array_merge($spip_groupes_mots,array(
 		"minirezo"	=> "varchar(3) NOT NULL",
 		"comite"	=> "varchar(3) NOT NULL",
 		"forum"	=> "varchar(3) NOT NULL",
-		"maj"	=> "TIMESTAMP");
+		"maj"	=> "TIMESTAMP"));
 
 $spip_groupes_mots_key = array(
 		"PRIMARY KEY"	=> "id_groupe");
 
 $tables_principales['spip_groupes_mots'] =
 	array('field' => &$spip_groupes_mots, 'key' => &$spip_groupes_mots_key);
-*/
+
 
 ?>

@@ -28,7 +28,7 @@ function PIMAgenda_verifier_base(){
 			// ajout du champ pim_agenda a la table spip_groupe_mots
 			// si pas deja existant
 			$desc = spip_abstract_showtable("spip_groupes_mots",'',true);
-			if (!isset($desc['field']['agenda'])){
+			if (!isset($desc['field']['pim_agenda'])){
 				spip_query("ALTER TABLE spip_groupes_mots ADD `pim_agenda` VARCHAR(3) NOT NULL AFTER `syndic`");
 			}
 			ecrire_meta('pim_agenda_base_version',$current_version=$version_base);
@@ -243,11 +243,5 @@ function PIMAgenda_formulaire_edition_evenement($id_agenda, $neweven, $ndate="")
 	return $out;
 }
 
-// Pre traitements -----------------------------------------------------------------------
 
-function PIMAgenda_heure_selector($heure,$minute,$suffixe){
-	return
-		afficher_heure($heure, "name='heure_evenement$suffixe' size='1' class='fondl'") .
-  	afficher_minute($minute, "name='minute_evenement$suffixe' size='1' class='fondl'");
-}
 ?>

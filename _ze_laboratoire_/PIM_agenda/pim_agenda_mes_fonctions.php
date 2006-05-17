@@ -210,6 +210,8 @@ function PIMAgenda_affiche_evenements($texte){
 		}
 	}
 	
+	global $spip_ecran;
+	$spip_ecran = 'etroit';
 	$s = "<span class='agenda-calendrier'>\n";
 	// attention : bug car $type est modifie apres cet appel !
 	$s .= Agenda_affiche_full(1,'', $type, 'calendrier-creneau','calendrier-creneau-today','calendrier-creneau-sunday','calendrier-reunions','calendrier-rdv','calendrier-evenement','calendrier-anniversaire','calendrier-rappel','calendrier-info');
@@ -217,5 +219,14 @@ function PIMAgenda_affiche_evenements($texte){
 
 	return $s;
 }
+// Pre traitements -----------------------------------------------------------------------
 
+function PIMAgenda_heure_selector($date,$suffixe){
+	$d = strtotime($date);
+	$heure = date('H',$d);
+	$minute = date('i',$d);
+	return
+		afficher_heure($heure, "name='heure_evenement$suffixe' size='1' class='fondl'") .
+  	afficher_minute($minute, "name='minute_evenement$suffixe' size='1' class='fondl'");
+}
 ?>
