@@ -13,4 +13,9 @@
                 <action>ajouter_boutons</action>
                 <inclure>lettres.php</inclure>
         </pipeline>
+        <pipeline>
+                <nom>header_prive</nom>
+                <action>modifier_chemin_presentation_js</action>
+                <inclure>lettres.php</inclure>
+        </pipeline>
 </plugin>

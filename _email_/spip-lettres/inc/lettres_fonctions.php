@@ -53,6 +53,20 @@
 	}
 
 	/**
+	 * lettres_modifier_chemin_presentation_js
+	 *
+	 * Modifie le chemin du javascript presentation.js pour prendre celui du plugin et masquer le menu du plugin
+	 *
+	 * @param string texte
+	 * @return string texte avec le chemin modifié
+	 * @author Pierre Basson
+	 **/
+	function lettres_modifier_chemin_presentation_js($texte) { 
+		$texte	= ereg_replace('img_pack/presentation.js', _DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/presentation.js', $texte);
+		return $texte;
+	}
+
+	/**
 	 * lettres_verifier_existence_tables
 	 *
 	 * @return boolean présence de la table spip_abonnes
