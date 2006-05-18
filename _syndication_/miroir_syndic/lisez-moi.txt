@@ -1,0 +1,83 @@
+
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2006                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
+############################################################################
+# SPIP 1.9 - Plugin Miroir de syndication - Version 0.1                    #
+# Auteur : fil@rezo.net                                                    #
+#                                                                          #
+# DOCUMENTATION                                                            #
+# N'hésitez pas à consulter le lexique en bas de ce document pour un terme #
+# ou une expression spécialement utilisée pour SPIP et/ou que vous ne      #
+# comprenez pas. Un astérisque est mis sur les mots ou les expressions qui #
+# au pire peuvent être spécifiques au jargon de SPIP, au mieux être dans   #
+# le lexique.                                                              #
+############################################################################
+
+
+############################################################################
+# FONCTION DU PLUGIN                                                       #
+############################################################################
+
+Ce plugin duplique les articles syndiqués (pour en faire des articles SPIP normaux) et les sites correspondant (pour en faire des rubriques normales).
+
+Exemple - Vous syndiquez le site "http://site-ami.org" : le plugin « Miroir de syndication » créera un article dans une rubrique qui se nommera automatiquement "Site ami" (le titre de "site-ami.org") pour chaque article de "site-ami.org" effectivement syndiqué (c'est-à-dire non bloqué).
+
+Vous aurez donc tous vos articles d'un même site syndiqué dupliqués en articles normaux dans une rubrique qui porte le nom dudit site syndiqué.
+
+
+############################################################################
+# UTILISATION OPTIMALE DU PLUGIN                                           #
+############################################################################
+
+Remarque générale : nous partons ici du principe que l'utilisation de ce plugin implique que vous n'utilisez pas dans vos squelettes les boucles SITES, SYNDICATION, ni SYNDIC_ARTICLES.
+
+Exemple - Vous syndiquez le site "http://site-ami.org", et celui-ci vous renvoie des articles sur le sujet A, mais aussi sur les sujets B, C, ou D. Le plugin créera des articles à partir des articles syndiqués (c'est-à-dire non bloqués) dans une rubrique intitulée "Site ami" (le titre de "site-ami.org"), qu'ils concernent les sujets A, B, C, ou D. Or, vous souhaitez avoir la liberté de mettre les articles créés par le plugin dans les rubriques dans lesquelles ils sont les plus pertinents (les articles parlant de A dans une rubrique A, les articles parlant de B dans une rubrique B, etc.). 
+
+L'avantage de vouloir faire ainsi est de regrouper les articles d'un même sujet provenant de plusieurs sites différents dans une même rubrique, alors que le plugin mets ces articles de sujets différents dans une rubrique qui porte le nom du site duquel ils proviennent.
+
+Les étapes à suivre pour classer vos articles créés à partir d'articles syndiqués dans des rubriques thématiques sont les suivantes :
+
+1°) Il faut déjà créer une rubrique dans votre site intitulée par exemple « Articles en cours de validation ».
+2°) Il faut "cacher" cette rubrique dans vos squelettes, par exemple avec le code suivant :
+<BOUCLE_exclure_rubrique(RUBRIQUES) {id_rubrique="1"} {doublons} {tout}>
+</BOUCLE_exclure_rubrique>
+NB : il s'agit ici de dire à SPIP de "chercher" la rubrique 1 (où « 1 » est le numéro de la rubrique « Articles en cours de validation ») et de ne rien afficher de cette rubrique. L'argument « {doublons} » indique que tout (argument « tout ») ce qui concerne cette rubrique sera ignoré dans la page.
+3°) Il faut annuler la création automatique de rubrique dans le plugin; pour ce faire, commentez les lignes 42, 43, 44, 45, 46 du fichier « plugins/_syndication_/miroir_syndic/MiroirSyndic.php ». 
+NB : voir à titre informatif l'astuce A avant de passer à l'étape suivante.
+4°) Il faut syndiquer tous les sites que vous voulez dans la rubrique « Articles en cours de validation ».
+5°) Tous les articles créés à partir d'articles syndiqués iront se mettre dans votre rubrique « Articles en cours de validation ». Il vous suffira donc de modifier la rubrique mère de ces articles pour les afficher dans les rubriques voulues.
+
+
+############################################################################
+# ASTUCES                                                                  #
+############################################################################
+
+A. Créer des articles sur manipulation humaine et non plus automatiquement
+Par défaut, quand vous validez la syndication dans SPIP, tous les articles sont acceptés. Ceci a pour effet, quand vous utilisez le plugin « Miroir de syndication », de créer automatiquement un article pour chaque article syndiqué. 
+Si vous souhaitez au contraire créer des articles normaux seulement à partir des articles syndiqués que vous choisissez afin de ne pas vous retrouver avec beaucoup d'articles normaux à effacer, choisissez de bloquer tous les articles lors de la syndication. Ainsi vous n'aurez pas de création automatique d'article normaux.
+
+B. Nettoyer la liste des articles syndiqués
+Si vous syndiquez beaucoup de sites, vous allez vite vous retrouver avec une liste d'articles syndiqués importante. Etant donné que les articles syndiqués validés créent les articles normaux correspondant, vous pouvez demander à SPIP qu'il enlève de la liste des articles syndiqués ceux qui sont supérieurs à 7 ou x jours (le délai par défaut est de deux mis, ce qui est bien trop long pour l'usage de ce plugin). En effet, nous partons du principe ici que vous mettrez au moins 7 jours pour valider vos articles syndiqués dans le cas d'une modération a priori des articles syndiqués (pour les articles non modérés ils sont immédiatement publiés), et que par conséquent en moins de 7 jours vous aurez créé un article normal correspondant à un article syndiqué. Etant donné que l'article normal existe, vous n'avez plus besoin de l'article syndiqué qui a servi à le créer et qui lui est identique. 
+Pour changer le délai de maintien des liens des articles syndiqués, modifiez la ligne 442 du fichier « ecrire/inc/syndic.php » :
+$time = date('U') - 61*24*3600; # deux mois
+Il faut remplacer « 61 » par le nombre de jours que vous voulez.
+
+
+
+############################################################################
+# LEXIQUE                                                                  #
+############################################################################
+
+Syndication : 
+
+Site/article syndiqué : 
+
+Site publié :
