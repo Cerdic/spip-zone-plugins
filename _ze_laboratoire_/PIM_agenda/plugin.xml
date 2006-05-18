@@ -31,6 +31,11 @@ _	{{Ce plugin necessite le plugin Widget Calendar}}
 	<prefix> 
 	PIMAgenda
 	</prefix>
+	<pipeline>
+	<nom>affiche_droite</nom>
+	<action>affiche_droite_auteurs_edit</action>
+	<inclure>inc/pim_agenda_gestion.php</inclure>
+	</pipeline>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 
 </plugin>

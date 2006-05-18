@@ -82,18 +82,18 @@ function Agenda_affiche_full($i)
 	$agenda = Agenda_memo_full(0);
 	$evt_avec = array();
 	foreach (($args ? $args : array_keys($agenda)) as $k) {
-		if (is_array($agenda[$k]))
+		if (isset($agenda[$k])&&is_array($agenda[$k]))
 			foreach($agenda[$k] as $d => $v) {
-				$evt_avec[$d] = $evt_avec[$d] ? (array_merge($evt_avec[$d], $v)) : $v;
+				$evt_avec[$d] = isset($evt_avec[$d]) ? (array_merge($evt_avec[$d], $v)) : $v;
 			}
 	}
 
 	$evenements = Agenda_memo_evt_full(0);
 	$evt_sans = array();
 	foreach (($args ? $args : array_keys($evenements)) as $k) {
-		if (is_array($evenements[$k]))
+		if (isset($evenements[$k])&&is_array($evenements[$k]))
 			foreach($evenements[$k] as $d => $v) {
-				$evt_sans[$d] = $evt_sans[$d] ? (array_merge($evt_sans[$d], $v)) : $v;
+				$evt_sans[$d] = isset($evt_sans[$d]) ? (array_merge($evt_sans[$d], $v)) : $v;
 			}
 	}
 

@@ -23,9 +23,9 @@
 .agenda-visu-evenement {
 	position: absolute;
 	right :0px;
-	top :100px;
-	width: 400px;
-	height: 28em;
+	top :200px;
+	width: 40em;
+	height: 38em;
 	border-bottom: 1px solid #cccccc;
 	font-weight: bold;
 	z-index:100;
@@ -35,7 +35,7 @@
 	border-radius-bottomleft: 8px;
 	font-family: Verdana, Arial, Sans, sans-serif;
 	font-size:small;
-  background-color: #F0FFC2;
+  background-color: #99CC99;
 	filter:alpha(opacity=80);
 	opacity: 0.8;
 	-moz-opacity:0.8;
@@ -84,7 +84,8 @@
 	border-bottom: 1px solid #cccccc;
 	border-left: 1px solid #cccccc;
 	font-weight: bold;
-	background-color: #ccff66;
+color:#fff;
+	background-color: #669966;
  }
 .titre-visu {
 	position: absolute;
@@ -96,7 +97,7 @@
 	border-bottom: 1px solid #cccccc;
 	border-right: 1px solid #cccccc;
 	font-weight: bold;
-	background-color: #ccff99;
+	background-color: #99CC99;
  }
 
 .lieu-titre {
@@ -111,7 +112,8 @@
 	-moz-border-radius-bottomleft: 8px;
 	border-radius-bottomleft: 8px;
 	font-weight: bold;
-	background-color: #ccff66;
+color:#fff;
+	background-color: #669966;
  }
 .lieu-visu {
 	position: absolute;
@@ -125,7 +127,7 @@
 	-moz-border-radius-bottomright: 8px;
 	border-radius-bottomright: 8px;
 	font-weight: bold;
-	background-color: #ccff99;
+	background-color: #99CC99;
  }
 .horaire-titre {
 	position: absolute;
@@ -138,7 +140,7 @@
 	-moz-border-radius-topright: 8px;
 	border-radius-topright: 8px;
 	font-weight: bold;
-	background-color: #ccff66;
+	background-color: #669966;
  }
 .date-titre {
 	position: absolute;
@@ -151,7 +153,8 @@
 	-moz-border-radius-topleft: 8px;
 	border-radius-topleft: 8px;
 	font-weight: bold;
-	background-color: #ccff66;
+color:#fff;
+	background-color: #669966;
  }
 .date-visu {
 	position: absolute;
@@ -167,7 +170,7 @@
 	-moz-border-radius-bottomleft: 8px;
 	border-radius-bottomleft: 8px;
 	font-weight: bold;
-	background-color: #ccff99;
+	background-color: #99CC99;
  }
 .descriptif-titre {
 	visibility: hidden;
@@ -177,7 +180,7 @@
 	top :14em;
 	left :0px;
 	width : 100%;
-	height: 8em;
+	height: 6em;
 	border-top: 1px solid #cccccc;
 	border-bottom: 1px solid #cccccc;
 	border-right: 1px solid #cccccc;
@@ -186,19 +189,87 @@
 	border-radius-topleft: 8px;
 	border-radius-bottomleft: 8px;
 	font-weight: bold;
-	background-color: #ccff99;
+	background-color: #99CC99;
  }
+.auteur-titre {
+	position: absolute;
+	top :20em;
+	left :0px;
+	width : 50%;
+	height : 2em;
+	border-top: 1px solid #cccccc;
+	border-left: 1px solid #cccccc;
+	-moz-border-radius-topleft: 8px;
+	border-radius-topleft: 8px;
+	-moz-border-radius-topright: 8px;
+	border-radius-topright: 8px;
+	font-weight: bold;
+color:#fff;
+	background-color: #669966;
+ }
+.auteur-visu {
+	position: absolute;
+	top :22em;
+	left :0%;
+	width : 50%;
+	height : 7em;
+	border-top: 1px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	border-right: 1px solid #cccccc;
+	-moz-border-radius-bottomright: 8px;
+	border-radius-bottomright: 8px;
+	-moz-border-radius-bottomleft: 8px;
+	border-radius-bottomleft: 8px;
+	font-weight: bold;
+	background-color: #99CC99;
+ }
+.invites-titre {
+	position: absolute;
+	top :20em;
+	right :0px;
+	width : 50%;
+	height : 2em;
+	border-top: 1px solid #cccccc;
+	border-left: 1px solid #cccccc;
+	-moz-border-radius-topleft: 8px;
+	border-radius-topleft: 8px;
+	-moz-border-radius-topright: 8px;
+	border-radius-topright: 8px;
+	font-weight: bold;
+color:#fff;
+	background-color: #669966;
+ }
+.invites-visu {
+	position: absolute;
+	top :22em;
+	right :0%;
+	width : 50%;
+	height : 7em;
+	border-top: 1px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	border-right: 1px solid #cccccc;
+	-moz-border-radius-bottomright: 8px;
+	border-radius-bottomright: 8px;
+	-moz-border-radius-bottomleft: 8px;
+	border-radius-bottomleft: 8px;
+	font-weight: bold;
+	background-color: #99CC99;
+ }
+.agenda_auteur_select{
+width:100%;
+}
+
 .agenda_mot_cle_select{
-width:49%;
+width:32%;
 }
 .agenda_mots_cles{
 	position: absolute;
 left:0px;
-top:22em;
+top:29.1em;
 height:4em;
 width:100%;
 	font-weight: bold;
-	background-color: #ccff99;
+	background-color: #99CC99;
 }
  
 .edition-bouton {
@@ -222,7 +293,7 @@ width:100%;
 	border-radius-topleft: 8px;
 	border-radius-bottomleft: 8px;
 	font-weight: bold;
-	background-color: #99cc33;
+	background-color: #339933;
  }
 a span.survol {
 	display: none;
@@ -238,8 +309,8 @@ a:hover .calendrier-verdana10 > span.survol {
 	z-index: 100;
 	text-decoration: none;
   color: #333;
-	background: #ccff99;
-	border: solid 1px #99cc33;
+	background: #99CC99;
+	border: solid 1px #339933;
 	font: 10px Verdana, sans-serif;
 	text-align: left;
 	-moz-border-radius-topright: 8px;

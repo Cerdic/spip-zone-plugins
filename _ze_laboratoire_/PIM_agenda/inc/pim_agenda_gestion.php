@@ -64,183 +64,46 @@ function PIMAgenda_verifier_base(){
 }
 
 
-//
-// Liste des evenements agenda de l'article
-//
-
-function PIMAgenda_formulaire_edition_evenement($id_agenda, $neweven, $ndate=""){
-	global $spip_lang_right;
-	$out = "";
-
-	// inits
-	$ftitre='';
-	$flieu='';
-	$fdescriptif='';
-	$ftype='reunion';
-	$fprive='non';
-	$fcrayon='non';
-	$fdescriptif='';
-	$fstdatedeb=time();
-
-	if (($neweven)&&($ndate)){
-		$newdate=urldecode($ndate);
-		$test=strtotime($newdate);
-		if ($test>0)
-			$fstdatedeb=$test;
-	}
-	$fstdatefin=$fstdatedeb+60*60;
-
-	if ($id_agenda!=NULL){
-		$query = "SELECT spip_pim_agenda.* FROM spip_pim_agenda WHERE spip_pim_agenda.id_agenda='$id_agenda';";
-		$res = spip_query($query);
-		if ($row = spip_fetch_array($res)){
-			if (!$neweven){
-				$fid_agenda=$row['id_agenda'];
-				$ftitre=attribut_html($row['titre']);
-				$ftype=$row['type'];
-				$fprive=$row['prive'];
-				$fcrayon=$row['crayon'];
-				$flieu=attribut_html($row['lieu']);
-				$fdescriptif=attribut_html($row['descriptif']);
-				$fstdatedeb=strtotime($row['date_debut']);
-				$fstdatefin=strtotime($row['date_fin']);
-			}
-	 	}
-	}
-
-	$url=self();
-	$url=parametre_url($url,'edit','');
-	$url=parametre_url($url,'neweven','');
-	$url=parametre_url($url,'ndate','');
-	$url=parametre_url($url,'id_agenda','');
-
-	$out .= "<div class='agenda-visu-evenement'>";
-
-	$ajouter_id_article = _request('ajouter_id_article');
-	if ($ajouter_id_article && !_request('id_article')){
-		$query = "SELECT * FROM spip_articles AS articles WHERE id_article=$ajouter_id_article";
-		$res2 = spip_query($query);
-		if ($row2 = spip_fetch_array($res2)){
-			$out .= "<div class='article-evenement'>";
-			$out .= "<a href='".generer_url_ecrire('articles',"id_article=".$row2['id_article'])."'>";
-			$out .= http_img_pack("article-24.gif", "", "width='24' height='24' border='0'");
-			$out .= entites_html($row2['titre'])."</a>";
-			$out .= "</div>\n";
+function PIMAgenda_affiche_droite_auteurs_edit($flux){
+	$exec = $flux['args']['exec'];
+	if ($exec=='auteurs_edit'){
+		$id_auteur = intval($flux['args']['id_auteur']);
+		global $spip_lang_right;
+		if (!isset($GLOBALS['meta']['pim_agenda_auteurs_actifs'])){
+			ecrire_meta('pim_agenda_auteurs_actifs',serialize(array()));
+			ecrire_metas();
 		}
-	}
-	
-	$out .= "<div class='agenda-visu-evenement-bouton-fermer'>";
-  $out .=	"<a href='$url'><img src='"._DIR_PLUGIN_PIM_AGENDA."/img_pack/croix.png' width='12' height='12' style='border:none;'></a>";
-  $out .= "</div>\n";
-  $out .=  "<form name='edition_evenement' action='$url' method='post'>";
-  #$out .=  "<input type='hidden' name='redirect' value='$url' />\n";
-	if (!$neweven){
-	  $out .=  "<input type='hidden' name='id_agenda' value='$fid_agenda' />\n";
-	  $out .=  "<input type='hidden' name='evenement_modif' value='1' />\n";
-	}
-	else {
-	  $out .=  "<input type='hidden' name='evenement_insert' value='1' />\n";
-	}
-	
-	// TITRE
-	$out .=  "<div class='titre-titre'>"._T('agenda:evenement_titre')."</div>\n";
-	$out .=  "<div class='titre-visu'>";
-	$ftitre = entites_html($ftitre);
-	$out .=  "<input type='text' name='evenement_titre' value=\"$ftitre\" style='width:100%;' />";
-	$out .=  "</div>\n";
-
-	// LIEU
-	$out .=  "<div class='lieu-titre'>"._T('agenda:evenement_lieu')."</div>";
-	$out .=  "<div class='lieu-visu'>";
-	$flieu = entites_html($flieu);
-	$out .=  "<input type='text' name='evenement_lieu' value=\"$flieu\" style='width:100%;' />";
-	$out .=  "</div>\n";
-
-	// Horaire
-	/*$out .=  "<div class='horaire-titre'>";
-	$out .=  "<input type='checkbox' name='evenement_horaire' value='oui' ";
-	$out .= ($fhoraire=='oui'?"checked='checked' ":"");
-	$out .= " onClick=\"var element =  findObj('evenement_horaire');var choix = element.checked;
-	if (choix==true){	setvisibility('afficher_horaire_debut_evenement', 'visible');setvisibility('afficher_horaire_fin_evenement', 'visible');}
-	else{setvisibility('afficher_horaire_debut_evenement', 'hidden');setvisibility('afficher_horaire_fin_evenement', 'hidden');}\"";
-	$out .= "/>";
-	$out .= _T('agenda:evenement_horaire')."</div>";*/
-
-	// DATES
-	$out .=  "<div class='date-titre'>"._T('agenda:evenement_date')."</div>";
-	$out .=  "<div class='date-visu'>";
-	$out .=  _T('agenda:evenement_date_de');
-	$out .= WCalendar_controller(date('Y-m-d H:i:s',$fstdatedeb),"_evenement_debut");
-	$out .= "<span class='agenda_".($fhoraire=='oui'?"":"in")."visible_au_chargement' id='afficher_horaire_debut_evenement'>";
-	$out .=  _T('agenda:evenement_date_a');
-	$out .= PIMAgenda_heure_selector(date('H',$fstdatedeb),date('i',$fstdatedeb),"_debut");
-	$out .=	"</span>";
-	$out .=  "<br/>";
-	$out .=  _T('agenda:evenement_date_au');
-	$out .= WCalendar_controller(date('Y-m-d H:i:s',$fstdatefin),"_evenement_fin");
-	$out .= "<span class='agenda_".($fhoraire=='oui'?"":"in")."visible_au_chargement' id='afficher_horaire_fin_evenement'>";
-	$out .=  _T('agenda:evenement_date_a');
-	$out .= PIMAgenda_heure_selector(date('H',$fstdatefin),date('i',$fstdatefin),"_fin");
-	$out .=	"</span>";
-	$out .=  "</div>\n";
-	
-	// DESCRIPTIF
-	$out .=  "<div class='descriptif-titre'>"._T('agenda:evenement_descriptif')."</div>";
-	$out .=  "<div class='descriptif-visu'>";
-	$out .=  "<textarea name='evenement_descriptif' style='width:100%;' rows='3'>";
-	$out .=  entites_html($fdescriptif);
-	$out .=  "</textarea>\n";
-	$out .=  "</div>\n";
-
-	// MOTS CLES : chaque groupe de mot cle attribuable a un evenement agenda
-	// donne un select
-	$out .=  "<div class='agenda_mots_cles'>";
-	$query = "SELECT * FROM spip_groupes_mots WHERE pim_agenda='oui' ORDER BY titre";
-	$res = spip_query($query);
-	while ($row = spip_fetch_array($res,SPIP_ASSOC)){
-		$id_groupe = $row['id_groupe'];
-		$multiple = ($row['unseul']=='oui')?"size='4'":"multiple='multiple' size='4'";
-		
-		$query = "SELECT mots_pim_agenda.id_mot FROM spip_mots_pim_agenda AS mots_pim_agenda
-							LEFT JOIN spip_mots AS mots ON mots.id_mot=mots_pim_agenda.id_mot 
-							WHERE mots.id_groupe=$id_groupe AND mots_pim_agenda.id_agenda=$id_agenda";
-		$res2 = spip_query($query);
-		$id_mot_select = array();
-		while ($row2 = spip_fetch_array($res2))
-			$id_mot_select[] = $row2['id_mot'];
-
-			
-		$out .= "<select name='evenement_groupe_mot_select_{$id_groupe}[]' class='fondl verdana1 agenda_mot_cle_select' $multiple>\n";
-		$out .= "\n<option value='x' style='font-variant: small-caps;' disabled='disabled'>".supprimer_numero($row['titre'])."</option>";
-
-		$res2= spip_query("SELECT * FROM spip_mots WHERE id_groupe=$id_groupe ORDER BY titre");
-		while ($row2 = spip_fetch_array($res2,SPIP_ASSOC)){
-			$id_mot = $row2['id_mot'];
-			$titre = $row2['titre'];
-			$out .= my_sel($id_mot, "&nbsp;&nbsp;&nbsp;$titre", in_array($id_mot,$id_mot_select)?$id_mot:0);
+		if (($id=_request('pim_agenda_active'))!=NULL){
+			$auteurs_agenda_actif = unserialize($GLOBALS['meta']['pim_agenda_auteurs_actifs']);
+			$auteurs_agenda_actif = array_merge($auteurs_agenda_actif,array($id));
+			ecrire_meta('pim_agenda_auteurs_actifs',serialize($auteurs_agenda_actif));
+			ecrire_metas();
 		}
-		$out .= "</select>\n";
-	}
-	$out .=  "</div>";
-	
-  $out .=  "<div class='edition-bouton'>";
-  #echo "<input type='submit' name='submit' value='Annuler' />";
-	if ($neweven==1){
-		$out .=	"<div style='text-align:$spip_lang_right'><input type='submit' name='ajouter' value='"._T('bouton_ajouter')."' class='fondo'></div>";
-	}
-	else{
-		$out .=	"<div style='text-align:$spip_lang_right'><input type='submit' name='ajouter' value='"._T('bouton_enregistrer')."' class='fondo'></div>";
-	}
-	$out .=  "</div>\n";
+		if (($id=_request('pim_agenda_desactive'))!=NULL){
+			$auteurs_agenda_actif = unserialize($GLOBALS['meta']['pim_agenda_auteurs_actifs']);
+			$auteurs_agenda_actif = array_diff($auteurs_agenda_actif,array($id));
+			ecrire_meta('pim_agenda_auteurs_actifs',serialize($auteurs_agenda_actif));
+			ecrire_metas();
+		}
+		$auteurs_agenda_actif = unserialize($GLOBALS['meta']['pim_agenda_auteurs_actifs']);
 
-	// feature desactivee pour le moment
-	// $out .= "<script type='text/javascript' src='"._DIR_PLUGIN_PIM_AGENDA."/img_pack/multiselect.js'></script>";
-
-  $out .=  "</div>";
-
-	$out .=  "</form>";
-	$out .=  "</div>\n";
-	return $out;
+		$out = "";
+		$out .= debut_cadre_relief('',true);
+		$out .= generer_url_post_ecrire('auteurs_edit', "id_auteur=$id_auteur");
+		if (!in_array($id_auteur,$auteurs_agenda_actif)){
+			$out .= "<input type='hidden' name='pim_agenda_active' value='$id_auteur' />\n";
+			$out .= "<div>"._T("pimagenda:info_activer_agenda")."\n";
+		}
+		else{
+			$out .= "<input type='hidden' name='pim_agenda_desactive' value='$id_auteur' />\n";
+			$out .= "<div>"._T("pimagenda:info_desactiver_agenda")."\n";
+		}
+		$out .= "<div align='$spip_lang_right'><input type='submit' name='Modifier' value='"._T('bouton_modifier')."' class='fondo'></div>\n";
+		$out .= "</div></form>";
+		$out .= fin_cadre_relief(true);
+		$flux['data'].= $out;
+	}
+	return $flux;
 }
 
 

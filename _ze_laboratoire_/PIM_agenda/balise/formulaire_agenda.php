@@ -56,11 +56,10 @@ function balise_FORMULAIRE_AGENDA_stat($args, $filtres) {
 	$ids = intval($ids);
 
 	return
-		array($script,$idr, $idagenda, $ida, $idb, $ids, $am, $ag, $af, $url);
+		array($idr, $idagenda, $ida, $idb, $ids, $am, $ag, $af, $url);
 }
 
 function balise_FORMULAIRE_AGENDA_dyn(
-$script,
 $id_rubrique, $id_agenda, $id_article, $id_breve, $id_syndic,
 $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 {
@@ -73,37 +72,34 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 
 	// ne pas mettre '', sinon le squelette n'affichera rien.
 	$previsu = ' ';
+	if ($retour_agenda = rawurldecode(_request('retour')))
+		$retour_agenda = str_replace('&var_mode=recalcul','',$retour_agenda);
+	else {
+		// par defaut, on veut prendre url_forum(), mais elle ne sera connue
+		// qu'en sortie, on inscrit donc une valeur absurde ("!")
+		$retour_agenda = parametre_url(self(),'neweven','');
+		$retour_agenda = parametre_url($retour_agenda,'ndate','');
+		$retour_agenda = parametre_url($retour_agenda,'var_mode','');
+		$retour_agenda = parametre_url($retour_agenda,'id_agenda','');
+		$retour_agenda = parametre_url($retour_agenda,'id_organisateur','');
+		$retour_agenda = parametre_url($retour_agenda,'id_invites','');
+		$retour_agenda = str_replace("&amp;","&",$retour_agenda);
+	}
 
 	// au premier appel (pas de Post-var nommee "retour_forum")
 	// memoriser evntuellement l'URL de retour pour y revenir apres
 	// envoi du message ; aux appels suivants, reconduire la valeur.
 	// Initialiser aussi l'auteur
-	if (!$retour_agenda = rawurldecode(_request('retour_agenda'))) {
-		if ($retour_agenda = rawurldecode(_request('retour')))
-			$retour_agenda = str_replace('&var_mode=recalcul','',$retour_agenda);
-		else {
-			// par defaut, on veut prendre url_forum(), mais elle ne sera connue
-			// qu'en sortie, on inscrit donc une valeur absurde ("!")
-			$retour_agenda = "!";
-			
-		}
+	$evenement_action = false;
+	$insert = _request('evenement_insert');
+	$modif = _request('evenement_modif');
+	if (!$insert && !$modif) {
+	
 		$auteur = $GLOBALS['auteur_session']['nom'];
 		$email_auteur = $GLOBALS['auteur_session']['email'];
+		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 		
-		$res = spip_query("SELECT * FROM spip_pim_agenda WHERE id_agenda=$id_agenda");
-		if ($row = spip_fetch_array($res)){
-			$type = $row['type'];
-			$prive = $row['prive'];
-			$crayon = $row['crayon'];
-			$id_article	= $row['id_article'];
-			$date_debut	= $row['date_debut'];
-			$date_fin	= $row['date_fin'];
-			$titre	= $row['titre'];
-			$descriptif	= $row['descriptif'];
-			$lieu	= $row['lieu'];
-			$id_agenda_source	= $row['id_agenda_source'];
-		}
-		else{
+		if (_request('neweven')){
 			$type = 'reunion';
 			$prive = 'non';
 			$crayon = 'non';
@@ -118,15 +114,31 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			$descriptif	= '';
 			$lieu	= '';
 			$id_agenda_source	= 0;
+			$evenement_action = 'evenement_insert';
+		}
+		else {
+			$res = spip_query("SELECT * FROM spip_pim_agenda WHERE id_agenda=$id_agenda");
+			if ($row = spip_fetch_array($res)){
+				$type = $row['type'];
+				$prive = $row['prive'];
+				$crayon = $row['crayon'];
+				$id_article	= $row['id_article'];
+				$date_debut	= $row['date_debut'];
+				$date_fin	= $row['date_fin'];
+				$titre	= $row['titre'];
+				$descriptif	= $row['descriptif'];
+				$lieu	= $row['lieu'];
+				$id_agenda_source	= $row['id_agenda_source'];
+				$evenement_action = 'evenement_modif';
+			}
 		}
 
 	} else { // appels ulterieurs
 		// gestion des requetes de mises à jour dans la base
 		$id_agenda = intval(_request('id_agenda'));
-		$insert = _request('evenement_insert');
-		$modif = _request('evenement_modif');
 		$supp_evenement = intval(_request('supp_evenement'));
-		if ($insert || $modif){
+		$cancel = _request('cancel');
+		if (($insert || $modif)&&(!$cancel)){
 			/*$id_article = intval(_request('id_article'));
 			if (!$id_article){
 				$id_article = intval(_request('ajouter_id_article'));
@@ -146,9 +158,11 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		 	}*/
 	
 			// Recuperer le message a previsualiser
-			$type = _request('titre');
-			$prive = _request('texte');
-			$crayon = _request('auteur');
+			$type = addslashes(_request('titre'));
+			$prive = addslashes(_request('prive'));
+			$crayon = addslashes(_request('crayon'));
+			$id_organisateur = intval(_request('organisateur'));
+			$id_invites = _request('invites');
 			$titre = addslashes(_request('evenement_titre'));
 			$descriptif = addslashes(_request('evenement_descriptif'));
 			$lieu = addslashes(_request('evenement_lieu'));
@@ -177,11 +191,11 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			$date_fin=format_mysql_date(date("Y",$st_date_fin),date("m",$st_date_fin),date("d",$st_date_fin),date("H",$st_date_fin),date("i",$st_date_fin), $s=0);
 
 			// mettre a jour l'evenement
-			$query="UPDATE spip_pim_agenda SET `titre`='$titre',`descriptif`='$descriptif',`lieu`='$lieu',`date_debut`='$date_deb',`date_fin`='$date_fin' WHERE `id_agenda` = '$id_agenda';";
+			$query="UPDATE spip_pim_agenda SET `titre`='$titre',`descriptif`='$descriptif',`lieu`='$lieu',`date_debut`='$date_deb',`date_fin`='$date_fin',`prive`='$prive',`crayon`='$crayon' WHERE `id_agenda` = '$id_agenda';";
 			$res=spip_query($query);
 	
 			// les mots cles : par groupes
-			$query = "SELECT * FROM spip_groupes_mots WHERE pimagenda='oui' ORDER BY titre";
+			$query = "SELECT * FROM spip_groupes_mots WHERE pim_agenda='oui' ORDER BY titre";
 			$res = spip_query($query);
 			$liste_mots = array();
 			while ($row = spip_fetch_array($res,SPIP_ASSOC)){
@@ -205,6 +219,23 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 				if (!spip_fetch_array(spip_query("SELECT FROM spip_mots_pim_agenda WHERE id_agenda=$id_agenda AND id_mot=$id_mot")))
 					spip_query("INSERT INTO spip_mots_pim_agenda (id_mot,id_agenda) VALUES ($id_mot,$id_agenda)");
 			}
+			
+			// l'organisateur
+			spip_query("DELETE FROM spip_pim_agenda_auteurs WHERE id_agenda=$id_agenda");
+			spip_query("INSERT INTO spip_pim_agenda_auteurs (id_agenda,id_auteur) VALUES ($id_agenda,$id_organisateur)");
+
+			// les invites
+			$cond_in = "";
+			if (count($id_invites))
+				$cond_in = "AND" . calcul_mysql_in('id_auteur', implode(",",$id_invites), 'NOT');
+			spip_query("DELETE FROM spip_pim_agenda_invites WHERE id_agenda=$id_agenda $cond_in");
+			// ajout/maj des nouveaux invites
+			if (is_array($id_invites))
+				foreach($id_invites as $id_invite){
+					if (!spip_fetch_array(spip_query("SELECT FROM spip_pim_agenda_invites WHERE id_agenda=$id_agenda AND id_auteur=$id_invite")))
+						spip_query("INSERT INTO spip_pim_agenda_invites (id_agenda,id_auteur) VALUES ($id_agenda,$id_invite)");
+				}
+			$evenement_action = 'evenement_modif';
 		}
 		else if ($supp_evenement){
 			/*$id_article = intval(_request('id_article'));
@@ -216,8 +247,15 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 				spip_query("DELETE FROM spip_pim_agenda WHERE id_agenda=$supp_evenement");
 			}
 		}
+		
 	}
 
+	$script = self();
+	$script = parametre_url($script,'neweven','');
+	$script = parametre_url($script,'edit','');
+	$script = parametre_url($script,'date','');
+	$script = str_replace("&amp;","&",$script);
+	
 	// sauf si on a passe un parametre en argument (exemple : {#SELF})
 	if ($url_param_retour) {
 			$script = $url_param_retour;
@@ -228,28 +266,34 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	/*foreach ($ids as $id => $v)
 		$script_hidden = parametre_url($script_hidden, $id, $v, '&');*/
 
-	return array('formulaires/formulaire_agenda', 0,
-	array(
-		'auteur' => $auteur,
-		'email_auteur' => $email_auteur,
-		'retour_forum' => $retour_agenda,
-		'url' => $script, # ce sur quoi on fait le action='...'
-		'url_post' => $script_hidden, # pour les variables hidden
-		'url_site' => ($url_site ? $url_site : "http://"),
-		'alea' => $alea,
-		'hash' => $hash,
-		'ajouter_groupe' => $ajouter_groupe,
-		'ajouter_mot' => (is_array($ajouter_mot) ? $ajouter_mot : array($ajouter_mot)),
-		'type' =>	$type,
-		'prive' => $prive,
-		'crayon' => $crayon,
-		'id_article' =>	$id_article,
-		'date_debut' =>	$date_debut,
-		'date_fin' =>	$date_fin,
-		'titre' => $titre,
-		'descriptif' =>	$descriptif,
-		'lieu' =>	$lieu
-		));
+	if ($evenement_action)
+		return array('formulaires/formulaire_agenda_edit', 0,
+		array(
+			'auteur' => $auteur,
+			'email_auteur' => $email_auteur,
+			'retour_agenda' => $retour_agenda,
+			'url' => $script, # ce sur quoi on fait le action='...'
+			'url_post' => $script_hidden, # pour les variables hidden
+			'url_site' => ($url_site ? $url_site : "http://"),
+			'alea' => $alea,
+			'hash' => $hash,
+			'ajouter_groupe' => $ajouter_groupe,
+			'ajouter_mot' => (is_array($ajouter_mot) ? $ajouter_mot : array($ajouter_mot)),
+			'type' =>	$type,
+			'prive' => $prive,
+			'crayon' => $crayon,
+			'id_article' =>	$id_article,
+			'date_debut' =>	$date_debut,
+			'date_fin' =>	$date_fin,
+			'titre' => $titre,
+			'descriptif' =>	$descriptif,
+			'lieu' =>	$lieu,
+			'id_auteur' => $id_auteur,
+			'id_agenda' => $id_agenda,
+			'evenement_action' => $evenement_action
+			));
+	else
+		return false;
 		
 }
 
