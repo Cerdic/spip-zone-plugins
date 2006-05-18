@@ -1,6 +1,7 @@
 <?php
 
 	define('_DIR_PLUGIN_LETTRE_INFORMATION', (_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
+	define('_NOM_PLUGIN_LETTRE_INFORMATION', (end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 
 	include_spip('inc/lettres_fonctions');
 

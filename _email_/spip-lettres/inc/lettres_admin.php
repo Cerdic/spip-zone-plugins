@@ -557,7 +557,7 @@
 	 * @author Pierre Basson
 	 **/
 	function lettres_afficher_statistiques_globales() {
-		$info_plugin_lettres = plugin_get_infos('lettres');
+		$info_plugin_lettres = plugin_get_infos(_NOM_PLUGIN_LETTRE_INFORMATION);
 
 		$requete_nb_inscrits = 'SELECT A.id_abonne 
 								FROM spip_abonnes AS A
