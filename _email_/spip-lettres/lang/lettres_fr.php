@@ -6,8 +6,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Installation
 'installation' => 'Installation du plugin "Lettres d\'information"',
-'installation_note' => 'L\'installation du plugin lettre d\'information consiste en la création des tables MySQL nécessaires à la création de lettres d\'informations.',
-'installation_texte' => 'Les tables nécessaires au fonctionnement du plugin lettre d\'information n\'ont pas été détectées. Cette étape permet d\'ajouter ces tables dans votre base de données MySQL.',
+'installation_note' => 'L\'installation du plugin lettres d\'information consiste en la création des tables MySQL nécessaires à la création de lettres d\'informations.',
+'installation_texte' => 'Les tables nécessaires au fonctionnement du plugin lettres d\'information n\'ont pas été détectées. Cette étape permet d\'ajouter ces tables dans votre base de données MySQL.',
 'creation_des_tables_mysql' => 'Création des tables MySQL',
 'creer_tables_mysql' => 'Créer les tables MySQL',
  

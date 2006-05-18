@@ -42,5 +42,20 @@
 	}
 
 
+	/**
+	 * balise_URL_FORMULAIRE_LETTRES
+	 *
+	 * @param p est un objet SPIP
+	 * @return string url du formulaire d'inscription aux lettres
+	 * @author Pierre Basson
+	 **/
+	function balise_URL_FORMULAIRE_LETTRES($p) {
+		$fond_formulaire_inscription = lire_meta('fond_formulaire_lettre');
+		$p->code = "generer_url_public($fond_formulaire_inscription)";
+		$p->statut = 'php';
+		return $p;
+	}
+
+
 
 ?>
