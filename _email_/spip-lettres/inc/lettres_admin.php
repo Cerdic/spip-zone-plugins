@@ -1068,7 +1068,7 @@
 	 **/
 	function lettres_afficher_langue($lang, $modif=false) {
 		$titre_barre = _T('lettres:langue_lettre')."&nbsp; (".traduire_nom_langue($lang).")";
-		$ret = liste_options_langues('var_lang', $lang);
+		$ret = liste_options_langues('changer_lang', $lang);
 		if ($modif)
 			debut_cadre_enfonce('langues-24.gif', false, "", bouton_block_invisible('langueslettre').$titre_barre);
 		else
