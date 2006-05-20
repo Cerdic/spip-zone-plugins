@@ -192,7 +192,7 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 				$url = parametre_url($url,'id_article',$id_article);
 				$url = parametre_url($url,'id_evenement',$id_evenement);
 				$url = parametre_url($url,'edit',1);
-				$s = "<a href='$url'>$titre</a>";
+				$s = "<a href='$url'>".($titre ? $titre : '<em>('._T('info_sans_titre').')</em>')."</a>";
 				$vals[] = $s;
 			}
 			else{

@@ -49,6 +49,7 @@ $tables_auxiliaires['spip_mots_evenements'] = array(
 
 //-- Jointures ----------------------------------------------------
 global $tables_jointures;
+$tables_jointures['spip_evenements'][]= 'mots'; // a placer avant la jointure sur articles
 $tables_jointures['spip_articles'][]= 'evenements';
 $tables_jointures['spip_evenements'][] = 'articles';
 $tables_jointures['spip_mots'][]= 'mots_evenements';
