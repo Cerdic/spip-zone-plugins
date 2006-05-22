@@ -337,7 +337,7 @@ function Agenda_action_formulaire_article(){
 	 	}
 		$titre = addslashes(_request('evenement_titre'));
 		$descriptif = addslashes(_request('evenement_descriptif'));
-		$f = addslashes(_request('evenement_lieu'));
+		$lieu = addslashes(_request('evenement_lieu'));
 		$horaire = addslashes(_request('evenement_horaire'));
 		if ($horaire!='oui') $horaire='non';
 	
