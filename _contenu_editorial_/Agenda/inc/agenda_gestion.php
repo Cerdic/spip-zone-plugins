@@ -198,7 +198,7 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 			else{
 				$vals[] = $titre;
 			}
-			$vals[] = $descriptif;
+			$vals[] = propre($descriptif);
 		
 			if ($flag_editable) {
 				$vals[] =  "<a href='" . generer_url_ecrire("articles","id_article=$id_article&supp_evenement=$id_evenement#agenda") . "'>"._T('agenda:lien_retirer_evenement')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</a>";
@@ -337,7 +337,7 @@ function Agenda_action_formulaire_article(){
 	 	}
 		$titre = addslashes(_request('evenement_titre'));
 		$descriptif = addslashes(_request('evenement_descriptif'));
-		$lieu = addslashes(_request('evenement_lieu'));
+		$f = addslashes(_request('evenement_lieu'));
 		$horaire = addslashes(_request('evenement_horaire'));
 		if ($horaire!='oui') $horaire='non';
 	

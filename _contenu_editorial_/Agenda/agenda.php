@@ -54,7 +54,7 @@ function Agenda_rendu_boite($titre,$descriptif,$lieu,$type='ics'){
 	$texte .= wordwrap($sum=typo($titre),15)."</span>";
 	$texte .= "<span class='survol'>";
 	$texte .= "<strong>$sum</strong><br />";
-	$texte .= $lieu ? "$lieu<br />":"";
+	$texte .= $lieu ? propre($lieu).'<br />':'';
 	$texte .= propre($descriptif);
 	$texte .= "</span>";
 	if ($type=='ics'){	
