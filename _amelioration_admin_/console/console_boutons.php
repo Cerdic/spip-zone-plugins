@@ -40,7 +40,7 @@ function Console_body_prive($flux){
 		<object type='application/x-shockwave-flash' 
 		id='console'
 		data='"._DIR_PLUGIN_CONSOLE."/console.swf?spiplog=$urlspiplog&sqllog=$urlsqllog' width='300' height='600' style='position:absolute;left:0;bottom:0;'>
-			<param name='movie' value='"._DIR_PLUGIN_CONSOLE."/console.swf?urllog=$urlconsole' />
+			<param name='movie' value='"._DIR_PLUGIN_CONSOLE."/console.swf?spiplog=$urlspiplog&sqllog=$urlsqllog' />
 			<param name='wmode' value='transparent' />
 		</object>	";
 	}
