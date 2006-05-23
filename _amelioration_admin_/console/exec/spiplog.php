@@ -16,6 +16,12 @@ function exec_spiplog(){
 	}
 	
 	$out = console_lit_log($logfile);
+
+	$format = _request('format');
+	if($format=='text') {
+		echo $out;
+		return;
+	}
 	header("Content-type: text/xml; charset=Unicode");
 	echo '<' . '?xml version="1.0" encoding="Unicode" ?'.'>';
 	echo "<log><$logfile>";
