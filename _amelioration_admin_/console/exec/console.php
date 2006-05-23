@@ -3,7 +3,23 @@
 function exec_console(){
 	global $connect_statut;
 	global $connect_toutes_rubriques;
-  
+	global $spip_lang_right;
+
+	if ($connect_statut == "0minirezo" && $connect_toutes_rubriques) {
+		if (_request("activer")){
+			include_spip('inc/metas');
+			ecrire_meta('console','active');
+			ecrire_metas();
+			redirige_par_entete(generer_url_ecrire('console'));
+		}
+		if (_request("desactiver")){
+			include_spip('inc/metas');
+			effacer_meta('console');
+			ecrire_metas();
+			redirige_par_entete(generer_url_ecrire('console'));
+		}
+	}
+	
 	include_ecrire("inc_presentation");
 
 	debut_page("Suivi des logs", "", "");
@@ -19,58 +35,18 @@ function exec_console(){
 		echo "<B>Vous n'avez pas acc&egrave;s &agrave; cette page.</B>";
 		exit;
 	}
-	
-	echo bouton_block_invisible("spiplog");
-	echo "spip.log <br />";
-	echo debut_block_invisible("spiplog");
-	echo "<span style='font-size:medium;font:Georgia,Garamond,Times,serif;'>";
-	//
-	// Lire et afficher les fichiers logs
-	//
-	
-	$files = preg_files(_DIR_SESSIONS,"spip\.log(\.[0-9])?");
-	krsort($files);
 
-	$log = "";
-	foreach($files as $nom){
-		if (lire_fichier($nom,$contenu))
-			$log.=$contenu;
+	echo generer_url_post_ecrire('console');
+	if (isset($GLOBALS['meta']['console'])){
+		echo "<div style='text-align:$spip_lang_right'>
+		<input type='submit' name='desactiver' value='"._L('Desactiver la console')."' class='fondo'></div>";
 	}
-	$contenu = explode("<br />",nl2br($contenu));
-	
-	$maxlines = 40;
-	while ($contenu && $maxlines--){
-		echo "<tt>".array_pop($contenu)."</tt><br />\n";
+	else {
+		echo "<div style='text-align:$spip_lang_right'>
+		<input type='submit' name='activer' value='"._L('Activer la console')."' class='fondo'></div>";
 	}
-	
-	echo "</span>";
-	echo fin_block();
+	echo "</form>";
 
-	echo bouton_block_invisible("mysqllog");
-	echo "mysql.log <br />";
-	echo debut_block_invisible("mysqllog");
-	echo "<span style='font-size:medium;font:Georgia,Garamond,Times,serif;'>";
-	//
-	// Lire et afficher les fichiers logs
-	//
-	
-	$files = preg_files(_DIR_SESSIONS,"mysql\.log(\.[0-9])?");
-	krsort($files);
-
-	$log = "";
-	foreach($files as $nom){
-		if (lire_fichier($nom,$contenu))
-			$log.=$contenu;
-	}
-	$contenu = explode("<br />",nl2br($contenu));
-	
-	$maxlines = 40;
-	while ($contenu && $maxlines--){
-		echo "<tt>".array_pop($contenu)."</tt><br />\n";
-	}
-	
-	echo "</span>";
-	echo fin_block();
 	
 	fin_page();
 
