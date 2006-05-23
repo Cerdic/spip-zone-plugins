@@ -53,6 +53,9 @@ _	{{Ce plugin necessite le plugin Widget Calendar}}
 		<action>rendu_evenement</action>
 		<inclure>agenda.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+	</pipeline>
 
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>

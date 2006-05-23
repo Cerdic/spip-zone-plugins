@@ -2,6 +2,38 @@
 define('_DIR_PLUGIN_AGENDA_EVENEMENTS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 include_spip('base/agenda_evenements');
 
+function cron_agenda_nettoyer_base($t){
+	# les evenements lies a un article inexistant
+	$res = spip_query("SELECT evenements.id_evenement,evenements.id_article
+		      FROM spip_evenements AS evenements
+		        LEFT JOIN spip_articles AS articles
+		          ON evenements.id_article=articles.id_article
+		       WHERE articles.id_article IS NULL");
+	while ($row = spip_fetch_array($res,SPIP_ASSOC))
+		spip_query("DELETE FROM spip_evenements
+		WHERE id_evenement=".$row['id_evenement']
+		." AND id_article=".$row['id_article']);
+
+	# les liens de mots affectes a des evenements effaces
+	$res = spip_query("SELECT mots_evenements.id_mot,mots_evenements.id_evenement 
+		        FROM spip_mots_evenements AS mots_evenements
+		        LEFT JOIN spip_evenements AS evenements
+		          ON mots_evenements.id_evenement=evenements.id_evenement
+		       WHERE evenements.id_evenement IS NULL");
+
+	while ($row = spip_fetch_array($res,SPIP_ASSOC))
+		spip_query("DELETE FROM spip_mots_evenements
+		WHERE id_mot=".$row['id_mot']
+		." AND id_evenement=".$row['id_evenement']);
+
+	return 1;
+}
+
+function Agenda_taches_generales_cron($taches_generales){
+	$taches_generales['agenda_nettoyer_base'] = 3600*48;
+	return $taches_generales;
+}
+
 function exec_calendrier()
 {
 	$mode = _request('mode');
