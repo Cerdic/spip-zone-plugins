@@ -53,10 +53,14 @@ function exec_console(){
 		<input type='submit' name='activer' value='"._L('Activer la console')."' class='fondo'></div>";
 	}
 	echo "</form>";
-
+	echo "<p>";
+	$urlpopup = generer_url_ecrire('console_popup');
+	echo "<a href='$urlpopup' onclick='window.open(this.href,\"console\",\"scrollbars=no, resize=yes, width=300,height=600\");return false;'>";
+	echo _L('Ouvrir la console dans une popup');
+	echo "</a>";
+	
 	
 	fin_page();
-
 }
 
 ?>
