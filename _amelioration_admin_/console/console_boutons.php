@@ -38,6 +38,7 @@ function Console_body_prive($flux){
 		$liste_auteur_console_active = unserialize($GLOBALS['meta']['console']);
 		$console_active = in_array($connect_id_auteur,$liste_auteur_console_active);
 		if ($console_active){
+			include_spip('inc/console');
 			$flux .= console_code_flash();
 		}	
 	}
