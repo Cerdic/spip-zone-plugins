@@ -1,11 +1,12 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Console
+	Console de supervision des fichiers log spip
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	Copyright (C) 2002 FIL
+	Fil, Booz et C&eacute;dric
 _ mail : fil@rezo.net
 _ adaptation en plugin par booz@rezo.net
+_ integration dans un flash/xml par cedric.morin@yterium.com
 _ &copy; 2005-2006 - Distribue sous licence GNU/GPL
 	</auteur>
 	<version>

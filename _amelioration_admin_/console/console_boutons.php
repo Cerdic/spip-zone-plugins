@@ -30,20 +30,26 @@ define('_DIR_PLUGIN_CONSOLE',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/
 
 function Console_body_prive($flux){
 	global $connect_statut;
+	global $connect_id_auteur;
 	global $connect_toutes_rubriques;
 	
 	if (isset($GLOBALS['meta']['console'])&& $connect_statut == "0minirezo" && $connect_toutes_rubriques) {
-		
-		$urlspiplog = urlencode(generer_url_ecrire('spiplog','logfile=spip',true));
-		$urlsqllog = urlencode(generer_url_ecrire('spiplog','logfile=mysql',true));
-		$flash = find_in_path('console.swf');
-		$flux.="
-		<object type='application/x-shockwave-flash' 
-		id='console'
-		data='$flash?spiplog=$urlspiplog&sqllog=$urlsqllog' width='300' height='600' style='position:absolute;left:0;bottom:0;'>
-			<param name='movie' value='$flash?spiplog=$urlspiplog&sqllog=$urlsqllog' />
-			<param name='wmode' value='transparent' />
-		</object>	";
+		$liste_auteur_console_active = array();
+		$liste_auteur_console_active = unserialize($GLOBALS['meta']['console']);
+		$console_active = in_array($connect_id_auteur,$liste_auteur_console_active);
+		if ($console_active){
+			
+			$urlspiplog = urlencode(generer_url_ecrire('spiplog','logfile=spip',true));
+			$urlsqllog = urlencode(generer_url_ecrire('spiplog','logfile=mysql',true));
+			$flash = find_in_path('console.swf');
+			$flux.="
+			<object type='application/x-shockwave-flash' 
+			id='console'
+			data='$flash?spiplog=$urlspiplog&sqllog=$urlsqllog' width='300' height='600' style='position:absolute;left:0;bottom:0;'>
+				<param name='movie' value='$flash?spiplog=$urlspiplog&sqllog=$urlsqllog' />
+				<param name='wmode' value='transparent' />
+			</object>	";
+		}	
 	}
 	return $flux;
 }

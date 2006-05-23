@@ -2,19 +2,26 @@
 
 function exec_console(){
 	global $connect_statut;
+	global $connect_id_auteur;
 	global $connect_toutes_rubriques;
 	global $spip_lang_right;
 
 	if ($connect_statut == "0minirezo" && $connect_toutes_rubriques) {
+		$liste_auteur_console_active = array();
+		if (isset($GLOBALS['meta']['console']))
+			$liste_auteur_console_active = unserialize($GLOBALS['meta']['console']);
+		$console_active = in_array($connect_id_auteur,$liste_auteur_console_active);
 		if (_request("activer")){
 			include_spip('inc/metas');
-			ecrire_meta('console','active');
+			$liste_auteur_console_active = array_merge($liste_auteur_console_active,array($connect_id_auteur));
+			ecrire_meta('console',serialize($liste_auteur_console_active));
 			ecrire_metas();
 			redirige_par_entete(generer_url_ecrire('console'));
 		}
 		if (_request("desactiver")){
 			include_spip('inc/metas');
-			effacer_meta('console');
+			$liste_auteur_console_active = array_diff($liste_auteur_console_active,array($connect_id_auteur));
+			ecrire_meta('console',serialize($liste_auteur_console_active));
 			ecrire_metas();
 			redirige_par_entete(generer_url_ecrire('console'));
 		}
@@ -37,7 +44,7 @@ function exec_console(){
 	}
 
 	echo generer_url_post_ecrire('console');
-	if (isset($GLOBALS['meta']['console'])){
+	if ($console_active){
 		echo "<div style='text-align:$spip_lang_right'>
 		<input type='submit' name='desactiver' value='"._L('Desactiver la console')."' class='fondo'></div>";
 	}
