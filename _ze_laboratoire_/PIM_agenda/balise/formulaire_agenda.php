@@ -136,9 +136,9 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	} else { // appels ulterieurs
 		// gestion des requetes de mises à jour dans la base
 		$id_agenda = intval(_request('id_agenda'));
-		$supp_evenement = intval(_request('supp_evenement'));
+		$supp_evenement = _request('supp_evenement');
 		$cancel = _request('cancel');
-		if (($insert || $modif)&&(!$cancel)){
+		if (($insert || $modif)&&(!$cancel)&&(!$supp_evenement)){
 			/*$id_article = intval(_request('id_article'));
 			if (!$id_article){
 				$id_article = intval(_request('ajouter_id_article'));
@@ -158,7 +158,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		 	}*/
 	
 			// Recuperer le message a previsualiser
-			$type = addslashes(_request('titre'));
+			$type = addslashes(_request('type_eve'));
 			$prive = addslashes(_request('prive'));
 			$crayon = addslashes(_request('crayon'));
 			$id_organisateur = intval(_request('organisateur'));
@@ -191,7 +191,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			$date_fin=format_mysql_date(date("Y",$st_date_fin),date("m",$st_date_fin),date("d",$st_date_fin),date("H",$st_date_fin),date("i",$st_date_fin), $s=0);
 
 			// mettre a jour l'evenement
-			$query="UPDATE spip_pim_agenda SET `titre`='$titre',`descriptif`='$descriptif',`lieu`='$lieu',`date_debut`='$date_deb',`date_fin`='$date_fin',`prive`='$prive',`crayon`='$crayon' WHERE `id_agenda` = '$id_agenda';";
+			$query="UPDATE spip_pim_agenda SET `type`='$type', `titre`='$titre',`descriptif`='$descriptif',`lieu`='$lieu',`date_debut`='$date_deb',`date_fin`='$date_fin',`prive`='$prive',`crayon`='$crayon', `idx`='1' WHERE `id_agenda` = '$id_agenda';";
 			$res=spip_query($query);
 	
 			// les mots cles : par groupes
@@ -216,7 +216,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			spip_query("DELETE FROM spip_mots_pim_agenda WHERE id_agenda=$id_agenda $cond_in");
 			// ajout/maj des nouveaux mots
 			foreach($liste_mots as $id_mot){
-				if (!spip_fetch_array(spip_query("SELECT FROM spip_mots_pim_agenda WHERE id_agenda=$id_agenda AND id_mot=$id_mot")))
+				if (!spip_fetch_array(spip_query("SELECT * FROM spip_mots_pim_agenda WHERE id_agenda=$id_agenda AND id_mot=$id_mot")))
 					spip_query("INSERT INTO spip_mots_pim_agenda (id_mot,id_agenda) VALUES ($id_mot,$id_agenda)");
 			}
 			
@@ -232,19 +232,34 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			// ajout/maj des nouveaux invites
 			if (is_array($id_invites))
 				foreach($id_invites as $id_invite){
-					if (!spip_fetch_array(spip_query("SELECT FROM spip_pim_agenda_invites WHERE id_agenda=$id_agenda AND id_auteur=$id_invite")))
+					if (!spip_fetch_array(spip_query("SELECT * FROM spip_pim_agenda_invites WHERE id_agenda=$id_agenda AND id_auteur=$id_invite")))
 						spip_query("INSERT INTO spip_pim_agenda_invites (id_agenda,id_auteur) VALUES ($id_agenda,$id_invite)");
 				}
 			$evenement_action = 'evenement_modif';
+			
+			// relecture de la base
+			$res = spip_query("SELECT * FROM spip_pim_agenda WHERE id_agenda=$id_agenda");
+			if ($row = spip_fetch_array($res)){
+				$type = $row['type'];
+				$prive = $row['prive'];
+				$crayon = $row['crayon'];
+				$id_article	= $row['id_article'];
+				$date_debut	= $row['date_debut'];
+				$date_fin	= $row['date_fin'];
+				$titre	= $row['titre'];
+				$descriptif	= $row['descriptif'];
+				$lieu	= $row['lieu'];
+				$id_agenda_source	= $row['id_agenda_source'];
+			}
 		}
 		else if ($supp_evenement){
 			/*$id_article = intval(_request('id_article'));
 			if (!$id_article)
 				$id_article = intval(_request('ajouter_id_article'));*/
-			$res = spip_query("SELECT * FROM spip_pim_agenda WHERE id_agenda=$supp_evenement");
+			$res = spip_query("SELECT * FROM spip_pim_agenda WHERE id_agenda=$id_agenda");
 			if ($row = spip_fetch_array($res)){
-				spip_query("DELETE FROM spip_mots_pim_agenda WHERE id_agenda=$supp_evenement");
-				spip_query("DELETE FROM spip_pim_agenda WHERE id_agenda=$supp_evenement");
+				spip_query("DELETE FROM spip_mots_pim_agenda WHERE id_agenda=$id_agenda");
+				spip_query("DELETE FROM spip_pim_agenda WHERE id_agenda=$id_agenda");
 			}
 		}
 		

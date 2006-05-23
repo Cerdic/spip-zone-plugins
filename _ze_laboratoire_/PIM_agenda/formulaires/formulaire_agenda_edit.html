@@ -120,6 +120,11 @@
 	<script type='text/javascript' src='#CHEMIN{img_pack/multiselect.js}'></script>
 	
   <div class='edition-bouton' style='text-align:#LANG_RIGHT'>
+  [(#ENV{evenement_action}|=={'evenement_modif'}|?{' ',''})
+  <div style='float:#LANG_LEFT'>
+  <input type='submit' name='supp_evenement' value='<:pimagenda:bouton_supprimer:>' class="fondl" />
+  </div>
+  ]
   <input type='submit' name='cancel' value='<:pimagenda:bouton_annuler:>' class="fondl" />
 	<input type='submit' name='ajouter' value='[(#ENV{evenement_action}|=={'evenement_modif'}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' class='fondo spip_boutons'>
   </div>

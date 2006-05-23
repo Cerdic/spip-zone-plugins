@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_activer_agenda' => "La gestion de l'agenda n'est pas active pour cet auteur. Cliquez pour activer la gestion de l'agenda",
 'info_desactiver_agenda' => '<strong>Agenda Activ&eacute;</strong><br/>Desactiver la gestion de l\'agenda pour cet auteur',
 'bouton_annuler' => 'Annuler',
+'bouton_supprimer' => 'Supprimer',
 'texte_agenda' => 'AGENDA',
 'titre_cadre_ajouter_evenement' => 'Ajouter un Rendez-vous',
 'item_mots_cles_association_evenements' => 'aux Rendez-vous',

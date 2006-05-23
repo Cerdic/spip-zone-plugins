@@ -127,7 +127,7 @@ function PIMAgenda_affiche_evenements($texte){
 	$visu_evenements=array();
 
 	if ((!$annee)||(!$mois)||(!$jour)){
-		if (!$id_evenement){ // pas d'id_evenement--> date du jour
+		if (!$id_agenda){ // pas d'id_evenement--> date du jour
 			$stamp=time();
 		}
 		else { // date de l'evenement
