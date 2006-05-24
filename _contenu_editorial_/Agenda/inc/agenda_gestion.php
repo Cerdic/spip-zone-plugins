@@ -390,7 +390,7 @@ function Agenda_action_formulaire_article(){
 		spip_query("DELETE FROM spip_mots_evenements WHERE id_evenement=$id_evenement $cond_in");
 		// ajout/maj des nouveaux mots
 		foreach($liste_mots as $id_mot){
-			if (!spip_fetch_array(spip_query("SELECT FROM spip_mots_evenements WHERE id_evenement=$id_evenement AND id_mot=$id_mot")))
+			if (!spip_fetch_array(spip_query("SELECT * FROM spip_mots_evenements WHERE id_evenement=$id_evenement AND id_mot=$id_mot")))
 				spip_query("INSERT INTO spip_mots_evenements (id_mot,id_evenement) VALUES ($id_mot,$id_evenement)");
 		}
 	}
