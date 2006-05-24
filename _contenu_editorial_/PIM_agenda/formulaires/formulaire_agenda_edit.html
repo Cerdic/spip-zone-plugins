@@ -93,7 +93,7 @@
 	<div class='auteur-titre'><:pimagenda:organisateur_descriptif:></div>
 	<div class='auteur-visu'>
 	<select name='organisateur' class='fondl verdana1 agenda_auteur_select' size='6'>
-		<BOUCLE_orga(AUTEURS SPIP_PIM_AGENDA_AUTEURS){pim_agenda_actif}{tout}{id_agenda=#ENV{id_agenda}}{doublons organisateur}>
+		<BOUCLE_orga(AUTEURS spip_pim_agenda_auteurs){pim_agenda_actif}{tout}{id_agenda=#ENV{id_agenda}}{doublons organisateur}>
 		<option value='#ID_AUTEUR' selected='selected'>#NOM</option>
 		</BOUCLE_orga>
 			<BOUCLE_orgabis(AUTEURS){pim_agenda_actif}{tout}{id_auteur=#ENV{id_auteur}}{doublons organisateur}>
@@ -109,7 +109,7 @@
 	<div class='invites-titre'><:pimagenda:invites_descriptif:></div>
 	<div class='invites-visu'>
 	<select name='invites[]' class='fondl verdana1 agenda_auteur_select' size='6' multiple='multiple'>
-		<BOUCLE_invit(AUTEURS SPIP_PIM_AGENDA_INVITES){pim_agenda_actif}{tout}{id_agenda=#ENV{id_agenda}}{doublons invites}>
+		<BOUCLE_invit(AUTEURS spip_pim_agenda_invites){pim_agenda_actif}{tout}{id_agenda=#ENV{id_agenda}}{doublons invites}>
 		<option value='#ID_AUTEUR' selected='selected'>#NOM</option>
 		</BOUCLE_invit>
 		<BOUCLE_invit2(AUTEURS){pim_agenda_actif}{tout}{doublons invites}>
