@@ -385,6 +385,7 @@
 	 * @author Pierre Basson, PHPcodeur
 	 **/
 	function lettres_envoyer_email_confirmation($id_abonne, $objet, $message_html, $message_texte, $lettres, $format_force='') {
+		global $lang;
 		if (empty($id_abonne)) return false;
 
 		$charset			= lire_meta('charset');
@@ -405,7 +406,7 @@
 		$message_html	= ereg_replace("%%EMAIL%%", $email, $message_html);
 		$message_texte	= ereg_replace("%%EMAIL%%", $email, $message_texte);
 		// Remplacement de %%LETTRES%% dans $message_html et $message_texte par $chaine_lettres
-		$chaine_lettres = '';
+		$chaine_lettres = '&lang='.$lang;
 		if (!empty($lettres)) {
 			foreach ($lettres as $id_lettre)
 				$chaine_lettres.= '&lettres[]='.$id_lettre;
@@ -473,6 +474,7 @@
 	 * @author Pierre Basson, PHPcodeur
 	 **/
 	function lettres_envoyer_lettre($id_abonne, $objet, $message_html, $message_texte, $id_lettre) {
+		global $lang;
 		if (empty($id_abonne)) return false;
 
 		$charset			= lire_meta('charset');
@@ -506,7 +508,7 @@
 		$message_html	= ereg_replace("%%EMAIL%%", $email, $message_html);
 		$message_texte	= ereg_replace("%%EMAIL%%", $email, $message_texte);
 		// Remplacement de %%LETTRES%% dans $message_html et $message_texte par $chaine_lettres
-		$chaine_lettres = '&lettres[]='.$id_lettre; 
+		$chaine_lettres = '&lettres[]='.$id_lettre.'&id_archive='.$id_archive.'&lang='.$lang;
 		$message_html	= ereg_replace("%%LETTRES%%", $chaine_lettres, $message_html);
 		$message_texte	= ereg_replace("%%LETTRES%%", $chaine_lettres, $message_texte);
 
