@@ -55,6 +55,10 @@ Rajoute une barre typographique enrichie et les raccourcis typographiques corres
 			<inclure>typo_enrichie.php</inclure>
 	</pipeline>
 	<pipeline>
+			<nom>nettoyer_raccourcis_typo</nom>
+			<inclure>typo_enrichie.php</inclure>
+	</pipeline>
+	<pipeline>
 			<nom>header_prive</nom>
 			<inclure>typo_enrichie.php</inclure>
 	</pipeline>

@@ -207,6 +207,13 @@ function BarreTypoEnrichie_post_typo($texte) {
 	$texte = str_replace("</sc>", "</span>", $texte);
 	return $texte;
 }
+
+function BarreTypoEnrichie_nettoyer_raccourcis_typo($texte){
+	$texte = preg_replace(',{[1-5]{,','',$texte);
+	$texte = preg_replace(',}[1-5]},','',$texte);
+	return $texte;
+}
+
 function BarreTypoEnrichie_header_prive($texte) {
 	$texte.= '<link rel="stylesheet" type="text/css" href="' . (_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))) . '/css/bartypenr.css" />' . "\n";
 	return $texte;
