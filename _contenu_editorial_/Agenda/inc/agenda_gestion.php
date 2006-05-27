@@ -533,11 +533,11 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 		$id_groupe = $row['id_groupe'];
 		$multiple = ($row['unseul']=='oui')?"size='4'":"multiple='multiple' size='4'";
 		
+		$id_mot_select = array();
 		if ($id_evenement){
 			$res2 = spip_query("SELECT mots_evenements.id_mot FROM spip_mots_evenements AS mots_evenements
 								LEFT JOIN spip_mots AS mots ON mots.id_mot=mots_evenements.id_mot 
 								WHERE mots.id_groupe=".spip_abstract_quote($id_groupe)." AND mots_evenements.id_evenement=".spip_abstract_quote($id_evenement));
-			$id_mot_select = array();
 			while ($row2 = spip_fetch_array($res2))
 				$id_mot_select[] = $row2['id_mot'];
 		}
