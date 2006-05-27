@@ -259,7 +259,13 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 			$out .= icone_horizontale(_T("agenda:icone_creer_evenement"),$url , "../"._DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/agenda-24.png", "creer.gif",false);
 		}
 		else{
-			$out .= Agenda_formulaire_edition_evenement(NULL, true);
+			// recuperer le titre de l'article pour le mettre par defaut sur l'evenement
+			$titre_defaut = "";
+			$res = spip_query("SELECT titre FROM spip_articles where id_article=".spip_abstract_quote($id_article));
+			if ($row = spip_fetch_array($res))
+				$titre_defaut = $row['titre'];
+			
+			$out .= Agenda_formulaire_edition_evenement(NULL, true, '', $titre_defaut);
 			$out .= "</div>";
 			$out .=  "</td></tr></table>";
 		}
@@ -408,12 +414,12 @@ function Agenda_action_formulaire_article(){
 }
 
 
-function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate=""){
+function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="", $titre_defaut=""){
 	global $spip_lang_right;
 	$out = "";
 
 	// inits
-	$ftitre='';
+	$ftitre=$titre_defaut;
 	$flieu='';
 	$fdescriptif='';
 	$fstdatedeb=time();
@@ -427,7 +433,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 	$fstdatefin=$fstdatedeb+60*60;
 
 	if ($id_evenement!=NULL){
-		$query = "SELECT spip_evenements.* FROM spip_evenements WHERE spip_evenements.id_evenement='$id_evenement';";
+		$query = "SELECT evenements.* FROM spip_evenements AS evenements WHERE evenements.id_evenement='$id_evenement';";
 		$res = spip_query($query);
 		if ($row = spip_fetch_array($res)){
 			if (!$neweven){
@@ -533,13 +539,15 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="")
 		$id_groupe = $row['id_groupe'];
 		$multiple = ($row['unseul']=='oui')?"size='4'":"multiple='multiple' size='4'";
 		
-		$query = "SELECT mots_evenements.id_mot FROM spip_mots_evenements AS mots_evenements
-							LEFT JOIN spip_mots AS mots ON mots.id_mot=mots_evenements.id_mot 
-							WHERE mots.id_groupe=$id_groupe AND mots_evenements.id_evenement=$id_evenement";
-		$res2 = spip_query($query);
-		$id_mot_select = array();
-		while ($row2 = spip_fetch_array($res2))
-			$id_mot_select[] = $row2['id_mot'];
+		if ($id_evenement){
+			$query = "SELECT mots_evenements.id_mot FROM spip_mots_evenements AS mots_evenements
+								LEFT JOIN spip_mots AS mots ON mots.id_mot=mots_evenements.id_mot 
+								WHERE mots.id_groupe=$id_groupe AND mots_evenements.id_evenement=$id_evenement";
+			$res2 = spip_query($query);
+			$id_mot_select = array();
+			while ($row2 = spip_fetch_array($res2))
+				$id_mot_select[] = $row2['id_mot'];
+		}
 
 			
 		$out .= "<select name='evenement_groupe_mot_select_{$id_groupe}[]' class='fondl verdana1 agenda_mot_cle_select' $multiple>\n";

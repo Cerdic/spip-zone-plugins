@@ -180,7 +180,7 @@ function visu_evenement_agenda($id_evenement,$flag_editable){
 	$del = _request('del');
 
 	if ($id_evenement!=NULL){
-		$query = "SELECT spip_evenements.* FROM spip_evenements WHERE spip_evenements.id_evenement='$id_evenement';";
+		$query = "SELECT evenements.* FROM spip_evenements AS evenements WHERE evenements.id_evenement='$id_evenement';";
 		$res = spip_query($query);
 		if ($row = spip_fetch_array($res)){
 			if (!isset($neweven)){
