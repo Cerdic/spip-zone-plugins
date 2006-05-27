@@ -1,0 +1,32 @@
+
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2006                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *                                                                         *
+ *  Plugin FORMS (SPIP 1.9) - DOCUMENTATION                                *
+ *  Si vous pensez que ce fichier n'est pas assez explicite et/ou que vous *
+ *  avez galéré pour enfin faire marcher ce plugin, n'hésitez pas à        *
+ *  participer à la rédaction de ce fichier en vous rendant à l'adresse    *
+ *  http://zone.spip.org/trac/spip-zone/wiki/LesProjets                    *
+\***************************************************************************/
+
+
+Utilisation basique du plugin Forms le sondage n'est pas explicité pour l'instant dans ce document).
+
+Une fois que vous avez choisis ce plugin dans l'interface de gestion des plugins :
+
+1) Passez la souris sur "Edition" puis cliquez sur l'icône "Formulaires et sondages";
+2) Cliquez sur "Créer un nouveau formulaire";
+3) Donnez un titre, éventuellement un descriptif, et indiquez une adresse email où sera envoyé le contenu du formulaire rempli par votre utilisateur ou utilisatrice;
+4) choisissez "Ce formulaire n'est pas un sondage" (c'est le seul exemple abordé dans ce document) puis validez;
+5) Vous allez arriver sur la même page, mais en bas vous trouverez les champs que vous souhaitez avoir dans votre formulaire (nous expliquerons ce qu'ils siginifient dans le détail dans une autre version de ce document) : choisissez les champs voulus puis cliquez sur "Ajouter" à chaque élément que vous souhaitez dans votre formulaire (testez les tous si vous êtes curieuse ou curieux);
+6) Lorsque que vous avez inséré tous les composants souhaités de votre formulaire, cliquez sur "Retour" en haut de la page.
+
+Vous insérez ensuite ce formulaire à la manière d'une insertion d'image dans un article : lorsque vous créez ou modifiez un article, vos formulaires se trouvent à gauche de votre article et vous n'avez qu'à coller le code du formulaire voulu (ex. "<form1>") dans le corps de votre article (comme une image).
+
+Vous pouvez consulter les formulaires que vos utilisatrices ou utilisateurs vous ont envoyé en passant votre souris sur "Forum", puis sur "Suivi des réponses" (les réponses sont sur le même mode que les signatures des pétitions). Si vous avez indiqué une adresse mail dans la configuration de votre formulaire (plus haut), vous recevrez *également* le contenu du formulaire par mail (pour autant que votre serveur vous autorise à envoyer des mails).
+
