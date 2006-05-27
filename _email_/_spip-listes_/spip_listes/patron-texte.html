@@ -1,0 +1,20 @@
+<?php
+
+$nomsite=lire_meta("nom_site");
+	$urlsite = lire_meta("adresse_site");
+  $url_patron = $urlsite."/patron.php3?patron=$patron" ;
+  if($date) $url_patron=$urlsite."/patron.php3?patron=$patron&date=$date" ;     
+	$titre_patron = "La lettre d'information du site ".$nomsite;
+	if(!function_exists('file_get_contents')) {
+   function file_get_contents($file) {
+       $file = file($file);
+       return !$file ? false : implode('', $file);
+   }
+  }
+	
+  $texte_patron = file_get_contents($url_patron);
+	  
+	echo "<pre>";
+	echo version_texte($texte_patron) ;
+	echo "</pre>";
+?>

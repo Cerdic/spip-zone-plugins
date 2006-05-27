@@ -1,0 +1,43 @@
+<?php
+/**********************************************************/
+/* Ce squelette tres specifique est utilise pour creer    */
+/* un patron pour la bloogletter : lettre d'information.  */
+/* voir aussi le patron nouveautes.html pour l'envoi      */
+/* automatique des nouveautés                             */
+/**********************************************************/
+
+//Parametrer le logo et le fond du titre (url des images)
+$url_logo = "[(#URL_SITE_SPIP)]/logo.gif";
+$url_fond = "[(#URL_SITE_SPIP)]/IMG/fondgauche.gif";
+$largeur_mail = "500px";
+
+/**********************************************************/
+/* Par défaut ce patron présente le logo en haut du       */
+/* message et le texte en dessous avec un titre de partie.*/
+/* Vous pouvez faire des modifications en HTML, mais      */
+/* attention de ne pas faire un gabarit de plus de 10Ko.  */                                              
+/* - ne mettez pas de balises <HTML>,<BODY> ou <HEAD>     */
+/**********************************************************/
+?>
+
+<table width='<?php echo $largeur_mail ?>' border='0' cellspacing='0' cellpadding='0' style='BORDER-BOTTOM: black 1px solid; BORDER-TOP: #333333 1px solid;'>
+  <tr>
+    <td background='<?php echo $url_fond ?>'>
+    <a href='[(#URL_SITE_SPIP)]'>
+    <img src='<?php echo $url_logo ?>' border='0'>
+    </a>
+    </td>
+  </tr>
+</table><br>
+<div style='width: <?php echo $largeur_mail ?>; background-color: #F5F5F5; text-align: left; PADDING: 1px; '>
+<b><:bonjour|texte_script:></b>,
+<br><:texte_lettre_information|texte_script:> '[(#NOM_SITE_SPIP|textebrut|texte_script)]' (#URL_SITE_SPIP).
+</div>
+<br><table width='<?php echo $largeur_mail ?>' border='0' cellspacing='0' cellpadding='5'>
+  <tr>
+    <td valign='top'>
+<div style='background: url(<?php echo $url_fond ?>) repeat-y left; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FF9900; FONT-SIZE: 12px; letter-spacing: 1px; font-weight: bold; text-align: left; width: <?php echo $largeur_mail ?>;'><span style="padding:5px">Actu</span></div>
+<H2> Modifier le texte </H2>
+</TD></TR></TABLE>
+
+
