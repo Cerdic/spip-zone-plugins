@@ -45,7 +45,6 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 	while($row = spip_fetch_array($result_groupes)) {
 		$id_groupe = $row['id_groupe'];
 		$type = $row['titre'];
-		$ancien_type = $type;
 		$titre = typo($type);
 		$descriptif = $row['descriptif'];
 		$texte = $row['texte'];
@@ -63,6 +62,7 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 		$acces_comite = $row['comite'];
 		$acces_forum = $row['forum'];
 		$onfocus ="";
+		$new = '';
 	}
 }
 
@@ -95,11 +95,11 @@ if ($connect_statut =="0minirezo"){
 	$type=entites_html(rawurldecode($type));
 	echo "<p><font face='Verdana,Arial,Sans,sans-serif'>";
 	echo generer_url_post_ecrire("mots_tous", "id_groupe=$id_groupe");
-	echo "<INPUT TYPE='Hidden' NAME='modifier_groupe' VALUE=\"oui\">\n";
-	echo "<INPUT TYPE='Hidden' NAME='ancien_type' VALUE=\"$ancien_type\">\n";
+	echo "<input type='hidden' name='modifier_groupe' value='oui' />\n";
+	echo "<input type='hidden' name='new' value='$new' />\n";
 	debut_cadre_formulaire();
 	echo "<b>"._T('info_changer_nom_groupe')."</b><br />\n";
-	echo "<INPUT TYPE='Text' SIZE=40 CLASS='formo' NAME='change_type' VALUE=\"$type\" $onfocus>\n";
+	echo "<INPUT TYPE='Text' SIZE=40 CLASS='formo' NAME='change_type' VALUE=\"$type\" $onfocus />\n";
 
 	if ($options == 'avancees' OR $descriptif) {
 		echo "<B>"._T('texte_descriptif_rapide')."</B><BR>";

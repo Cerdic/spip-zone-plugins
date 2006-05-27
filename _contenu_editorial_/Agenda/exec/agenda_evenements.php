@@ -84,8 +84,7 @@ function affiche_evenements_agenda($flag_editable){
 			$stamp=time();
 		}
 		else { // date de l'evenement
-			$query = "SELECT date_debut FROM spip_evenements WHERE id_evenement=$id_evenement";
-			$res = spip_query($query);
+			$res = spip_query("SELECT date_debut FROM spip_evenements WHERE id_evenement=".spip_abstract_quote($id_evenement));
 			if ($row = spip_fetch_array($res))
 				$stamp=strtotime($row['date_debut']);
 			else 
@@ -119,13 +118,12 @@ function affiche_evenements_agenda($flag_editable){
 	$datefin=date('Y-m-d H:i:s',$ts_fin+24*60*60);
 
 	// tous les evenements
-	$query = "SELECT * 
+	$res = spip_query("SELECT * 
 							FROM spip_evenements AS evenements
 						 WHERE ((evenements.date_debut>='$datestart' AND evenements.date_debut<='$datefin') 
 						 		OR (evenements.date_fin>='$datestart' AND evenements.date_fin<='$datefin')
 						 		OR (evenements.date_debut<'$datestart' AND evenements.date_fin>'$datefin'))
-						 ORDER BY evenements.date_debut;";
-	$res = spip_query($query);
+						 ORDER BY evenements.date_debut;");
  	$urlbase=parametre_url($urlbase,'neweven','');
 	$urlbase=parametre_url($urlbase,'annee',$annee);
 	$urlbase=parametre_url($urlbase,'mois',$mois);
@@ -180,8 +178,7 @@ function visu_evenement_agenda($id_evenement,$flag_editable){
 	$del = _request('del');
 
 	if ($id_evenement!=NULL){
-		$query = "SELECT evenements.* FROM spip_evenements AS evenements WHERE evenements.id_evenement='$id_evenement';";
-		$res = spip_query($query);
+		$res = spip_query("SELECT evenements.* FROM spip_evenements AS evenements WHERE evenements.id_evenement=".spip_abstract_quote($id_evenement));
 		if ($row = spip_fetch_array($res)){
 			if (!isset($neweven)){
 				$fid_evenement=$row['id_evenement'];
@@ -194,8 +191,7 @@ function visu_evenement_agenda($id_evenement,$flag_editable){
 			}
 	 	}
 		$out .= "<div class='agenda-visu-evenement'>";
-		$query = "SELECT articles.* FROM spip_articles AS articles LEFT JOIN spip_evenements AS J ON J.id_article=articles.id_article WHERE J.id_evenement=$id_evenement";
-		$res2 = spip_query($query);
+		$res2 = spip_query("SELECT articles.* FROM spip_articles AS articles LEFT JOIN spip_evenements AS J ON J.id_article=articles.id_article WHERE J.id_evenement=".spip_abstract_quote($id_evenement));
 		if ($row2 = spip_fetch_array($res2)){
 			$out .= "<div class='article-evenement'>";
 			$out .= "<a href='".generer_url_ecrire('articles',"id_article=".$row2['id_article'])."'>";
@@ -235,15 +231,15 @@ function visu_evenement_agenda($id_evenement,$flag_editable){
 		$out .= "<div class='descriptif-titre'>Description</div><div class='descriptif-visu'>$fdescriptif &nbsp;</div>\n";
 
 		$out .=  "<div class='agenda_mots_cles'>";
-		$query = "SELECT * FROM spip_groupes_mots WHERE evenements='oui' ORDER BY titre";
-		$res = spip_query($query);
+		$res = spip_query("SELECT * FROM spip_groupes_mots WHERE evenements='oui' ORDER BY titre");
 		$sep = "";
 		while ($row = spip_fetch_array($res,SPIP_ASSOC)){
 			$id_groupe = $row['id_groupe'];
-			$query = "SELECT mots.titre FROM spip_mots_evenements AS mots_evenements
+			$row2 = spip_fetch_array(
+						spip_query("SELECT mots.titre FROM spip_mots_evenements AS mots_evenements
 								LEFT JOIN spip_mots AS mots ON mots.id_mot=mots_evenements.id_mot 
-								WHERE mots.id_groupe=$id_groupe AND mots_evenements.id_evenement=$id_evenement";
-			$row2 = spip_fetch_array(spip_query($query));
+								WHERE mots.id_groupe=".spip_abstract_quote($id_groupe).
+								" AND mots_evenements.id_evenement=".spip_abstract_quote($id_evenement)));
 			if ($row2){
 				$out .= $sep . supprimer_numero($row['titre'])."&nbsp;:&nbsp;".supprimer_numero($row2['titre']);
 				$sep = "\n, ";
@@ -328,8 +324,7 @@ function exec_agenda_evenements_dist(){
 
 	$out = "<div>";
 	if ($ajouter_id_article){
-		$query = "SELECT * FROM spip_articles AS articles WHERE id_article=$ajouter_id_article";
-		$res2 = spip_query($query);
+		$res2 = spip_query("SELECT * FROM spip_articles AS articles WHERE id_article=".spip_abstract_quote($ajouter_id_article));
 		if ($row2 = spip_fetch_array($res2)){
 			$out .= "<div style=' width:750px; font-size: 18px; color: #9DBA00; font-weight: bold;text-align:left;'>";
 			$out .= "<a href='".generer_url_ecrire('articles',"id_article=".$row2['id_article'])."'>";
