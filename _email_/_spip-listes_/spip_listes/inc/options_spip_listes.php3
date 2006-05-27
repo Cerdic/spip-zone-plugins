@@ -211,7 +211,7 @@ $out = ereg_replace ('<li[^>]>', "\n".'-', $out);
 function calcul_MELEUSE_CRON() {
   global $include_ok;
    if(!$include_ok) {
-include("spip-listes/meleuse-cron.php3");
+include_spip("inc/meleuse-cron");
 $include_ok = true;
 }
    return '';

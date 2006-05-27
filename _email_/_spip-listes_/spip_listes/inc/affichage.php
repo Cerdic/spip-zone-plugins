@@ -93,7 +93,7 @@ if($mssage_pile > 0 ){
 		echo "<p align='center'><b>".round($extra_meta["debut"]/$nb_inscrits *100)." %</b></p>";
 	}
 	echo "<p>"._T('spiplistes:texte_boite_en_cours')."</p>" ;
-	echo "<p align='center'><a href='$url_site/spip-listes/spip-meleuse.php3'>["._T('spiplistes:suivi_envois')."]</a></p>";
+	echo "<p align='center'><a href='$url_site/spip.php?page=meleuse'>["._T('spiplistes:suivi_envois')."]</a></p>";
 	
 	echo "<p align='center'><a href='".$PHP_SELF."?envoi_lot=oui'><tt>["._T('spiplistes:lot_suivant')."]</tt></a></p>";
   echo "<p align='center'><a href='".$PHP_SELF."'><tt>["._T('spiplistes:actualiser')."]</tt></a></p>";
