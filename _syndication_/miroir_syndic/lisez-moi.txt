@@ -6,14 +6,15 @@
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+ *                                                                         *
+ *  Plugin MIROIR DE SYNDICATION (SPIP 1.9) - DOCUMENTATION                *
+ *  Si vous pensez que ce fichier n'est pas assez explicite et/ou que vous *
+ *  avez galéré pour enfin faire marcher ce plugin, n'hésitez pas à        *
+ *  participer à la rédaction de ce fichier en vous rendant à l'adresse    *
+ *  http://zone.spip.org/trac/spip-zone/wiki/LesProjets                    *
 \***************************************************************************/
 
 ############################################################################
-# SPIP 1.9 - Plugin Miroir de syndication - Version 0.1                    #
-# Auteur : fil@rezo.net                                                    #
-#                                                                          #
-# DOCUMENTATION                                                            #
 # N'hésitez pas à consulter le lexique en bas de ce document pour un terme #
 # ou une expression spécialement utilisée pour SPIP et/ou que vous ne      #
 # comprenez pas. Un astérisque est mis sur les mots ou les expressions qui #
@@ -23,7 +24,16 @@
 
 
 ############################################################################
-# FONCTION DU PLUGIN                                                       #
+# A QUOI CA SERT ?                                                         #
+############################################################################
+
+Grâce à ce plugin*, vous pouvez obtenir une liberté totale avec les articles syndiqués* :
+- les placer sous la rubrique que vous voulez (idéal pour un site thématique qui utilise beaucoup la syndication*)
+- leur attribuer tous les éléments d'un article normal* (un logo, une pièce jointe, des mots clés, un chapeau, un texte, un post scriptum, etc.)
+
+
+############################################################################
+# SOUS LE CAPOT                                                            #
 ############################################################################
 
 Ce plugin duplique les articles syndiqués (pour en faire des articles SPIP normaux) et les sites correspondant (pour en faire des rubriques normales).
@@ -37,7 +47,7 @@ Vous aurez donc tous vos articles d'un même site syndiqué dupliqués en articles 
 # UTILISATION OPTIMALE DU PLUGIN                                           #
 ############################################################################
 
-Remarque générale : nous partons ici du principe que l'utilisation de ce plugin implique que vous n'utilisez pas dans vos squelettes les boucles SITES, SYNDICATION, ni SYNDIC_ARTICLES.
+Remarque générale : nous partons ici du principe que l'utilisation de ce plugin implique que vous n'utilisez pas dans vos squelettes les boucles SITES, SYNDICATION, ni SYNDIC_ARTICLES (à cause des doublons articles syndiqués*/articles normaux*).
 
 Exemple - Vous syndiquez le site "http://site-ami.org", et celui-ci vous renvoie des articles sur le sujet A, mais aussi sur les sujets B, C, ou D. Le plugin créera des articles à partir des articles syndiqués (c'est-à-dire non bloqués) dans une rubrique intitulée "Site ami" (le titre de "site-ami.org"), qu'ils concernent les sujets A, B, C, ou D. Or, vous souhaitez avoir la liberté de mettre les articles créés par le plugin dans les rubriques dans lesquelles ils sont les plus pertinents (les articles parlant de A dans une rubrique A, les articles parlant de B dans une rubrique B, etc.). 
 
@@ -81,3 +91,5 @@ Syndication :
 Site/article syndiqué : 
 
 Site publié :
+
+Plugin : 
