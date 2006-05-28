@@ -3,7 +3,8 @@
 define('_DIR_PLUGIN_WIDGET_CALENDAR',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)."/.."))))));
 
 function WCalendar_point_entree($suffixe){
-	return "<div id='container$suffixe' style='position:absolute;display:none;z-index:5000;'></div>";
+	return "<div id='container$suffixe' style='position:absolute;display:none;z-index:5000;'></div>
+	";
 }
 
 function WCalendar_body_prive($flux){
@@ -18,6 +19,29 @@ function WCalendar_body_prive($flux){
 		}
 	}
 	return $flux;
+}
+
+function WCalendar_statique_jsinit($t, $s){
+	$vars = "
+			var cal$s;";
+	$js_a = "";
+	$js_b = "
+			var selected$s = '';
+			this.content$s = document.getElementById('selected_date$s');
+			if (this.content$s){
+				selected$s=this.content$s.innerHTML;
+			}
+			cal$s = new SPIP.widget.Calendar2up_INT_multi('cal$s','container$s','',selected$s);
+			cal$s.title = '$t';
+			cal$s.render();
+			";
+	$js_c = "
+		function getSelectedDate$s() {
+			var res = document.getElementById('selected_date$s');
+			res.innerHTML = cal$s.getSelectedDates();
+		}
+	";
+	return array($vars,$js_a,$js_b,$js_c);
 }
 
 function WCalendar_jsinit($t, $s){
@@ -113,7 +137,7 @@ function Wcalendar_js_set_change_date($s,$sdverif=NULL,$sfverif=NULL,$modif=""){
 		";
 }
 function WCalendar_header_prive($flux) {
-	global $WCalendar_independants,$WCalendar_lies;
+	global $WCalendar_independants,$WCalendar_lies,$WCalendar_statiques;
 	global $spip_lang_right;
 	if (count($WCalendar_independants)+count($WCalendar_lies)){
 
@@ -130,8 +154,8 @@ function WCalendar_header_prive($flux) {
 		$months_short = "";
 		for ($j=1;$j<=12;$j++){
 			$nom = entites_html(ucfirst(html_entity_decode(_T("spip:date_mois_$j"))));
-			$months_long .= ",'".$nom."'";
-			$months_short .= ",'".preg_replace("/^((&#x?[0-9]{2,5};|.){0,3}).*$/i","\\1",$nom)."'";
+			$months_long .= ",'".unicode2charset(charset2unicode($nom,''))."'";
+			$months_short .= ",'".unicode2charset(charset2unicode(preg_replace("/^((&#x?[0-9]{2,5};|.){0,3}).*$/i","\\1",$nom),''))."'";
 		}
 		$months_long = substr($months_long,1);
 		$months_short = substr($months_short,1);
@@ -161,7 +185,9 @@ function WCalendar_header_prive($flux) {
 	$flux .= "<script language='javascript'>";
 
 	// partie fonction de la langue
-	$js = "	
+	$js = "";
+
+	$js .= "	
 		SPIP.widget.Calendar2up_INT_Cal.prototype.customConfig = function() {
 			this.Config.Locale.MONTHS_SHORT = [$months_short];
 			this.Config.Locale.MONTHS_LONG = [$months_long];
@@ -178,6 +204,22 @@ function WCalendar_header_prive($flux) {
 		}
 		";
 
+	$js .= "	
+		SPIP.widget.Calendar2up_INT_Cal_multi.prototype.customConfig = function() {
+			this.Config.Locale.MONTHS_SHORT = [$months_short];
+			this.Config.Locale.MONTHS_LONG = [$months_long];
+			this.Config.Locale.WEEKDAYS_1CHAR = [$days_1char];
+			this.Config.Locale.WEEKDAYS_SHORT = [$days_short];
+			this.Config.Locale.WEEKDAYS_MEDIUM = [$days_medium];
+			this.Config.Locale.WEEKDAYS_LONG = [$days_long];
+		
+			this.Config.Options.START_WEEKDAY = $start_weekday;
+			this.Config.Options.NAV_ARROW_LEFT = '$img_arrow_left';
+			this.Config.Options.NAV_ARROW_RIGHT = '$img_arrow_right';
+			this.Config.Options.MULTI_SELECT = true;
+		}
+		";
+	
 		// construire les variables et fonctions de mise a jour
 
 		$vars = "";
@@ -185,6 +227,12 @@ function WCalendar_header_prive($flux) {
 		$js_b= "";	
 		$js_c= "";	
 		$liste_suffixes = array();
+		foreach ($WCalendar_statiques as  $infos){
+			$s = $infos['suffixe'];
+			$t = $infos['titre'];
+			list($v,$a,$b,$c) = WCalendar_statique_jsinit($t, $s);
+			$vars .= $v; $js_a .= $a; $js_b .= $b;$js_c .= $c;
+		}
 		foreach ($WCalendar_independants as  $infos){
 			$s = $infos['suffixe'];
 			$t = $infos['titre'];

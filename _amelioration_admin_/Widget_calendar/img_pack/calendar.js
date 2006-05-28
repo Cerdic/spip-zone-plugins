@@ -1487,8 +1487,8 @@ SPIP.widget.Calendar_Core.prototype.previousYear = function() {
 SPIP.widget.Calendar_Core.prototype.reset = function() {
 	this.selectedDates.length = 0;
 	this.selectedDates = this._selectedDates.concat();
-
-	this.pageDate = new Date(this._pageDate.getTime());
+	this.deselectAll();
+	/*this.pageDate = new Date(this._pageDate.getTime());*/
 	this.onReset();
 };
 
@@ -1498,7 +1498,7 @@ SPIP.widget.Calendar_Core.prototype.reset = function() {
 */
 SPIP.widget.Calendar_Core.prototype.clear = function() {
 	this.selectedDates.length = 0;
-	this.pageDate = new Date(this.today.getTime());
+	/*this.pageDate = new Date(this.today.getTime());*/
 	this.onClear();
 };
 
@@ -2743,10 +2743,10 @@ SPIP.widget.Calendar2up.prototype.buildWrapper = function(containerId) {
 	var outerContainer = document.getElementById(containerId);
 
 	outerContainer.className = "calcontainer";
-	outerContainer.innerHTML="";
+	/*outerContainer.innerHTML="";
 	if (SPIP.widget.Calendar_Core._getBrowser() == "ie") {
-		outerContainer.innerHTML="<iframe src='about:blank' scrolling='no' frameborder='0' style='position:absolute;left:0px;top:0px;z-index:0;' class='calbordered'></iframe>";
-	}
+		outerContainer.innerHTML="<iframe src='about:blank' scrolling='no' frameborder='0' style='position:absolute;left:0px;top:0px;z-index:0;' class='califrame'></iframe>";
+	}*/
 
 	var innerContainer = document.createElement("DIV");
 	innerContainer.className = "calbordered";

@@ -2,9 +2,10 @@
 
 define('_DIR_PLUGIN_WIDGET_CALENDAR',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)."/.."))))));
 
-global $WCalendar_independants,$WCalendar_lies;
+global $WCalendar_independants,$WCalendar_lies,$WCalendar_statiques;
 $WCalendar_independants=array();
 $WCalendar_lies=array();
+$WCalendar_statiques=array();
 
 function WCalendar_ajoute($titre,$suffixe){
 	global $WCalendar_independants;	
@@ -14,6 +15,17 @@ function WCalendar_ajoute_lies($titre_debut,$suffixe_debut,$titre_fin,$suffixe_f
 	global $WCalendar_lies;	
 	$WCalendar_lies[] = array('titre1'=>$titre_debut,'suffixe1'=>$suffixe_debut,
 														'titre2'=>$titre_fin,'suffixe2'=>$suffixe_fin);
+}
+function WCalendar_ajoute_statique($titre,$suffixe){
+	global $WCalendar_statiques;	
+	$WCalendar_statiques[] = array('titre'=>$titre,'suffixe'=>$suffixe);
+}
+function WCalendar_statique_point_entree($suffixe, $dates = ""){
+	return "<div><div id='container$suffixe' style='z-index:5000;'></div>
+	<div style='display:none;'><textarea id='selected_date$suffixe' name='selected_date$suffixe'>$dates</textarea></div>
+	<a href='javascript:cal$suffixe.reset()'>Reset</a>
+	</div>
+	";
 }
 
 
