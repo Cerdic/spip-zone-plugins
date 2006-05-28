@@ -28,7 +28,8 @@ include_ecrire('mes_options.php3');
 include_ecrire('inc_db_mysql.php3');
 }
 
-echo "inc mel man";
+include_spip('inc/distant');
+
 $nomsite=lire_meta("nom_site");
 $urlsite=lire_meta("adresse_site");
 
@@ -93,13 +94,8 @@ while($row = spip_fetch_array($list_bg)) {
 		
 		$date = date('Y/m/d',$maj) ;
 		
-		ob_start();
-		include('patron.php3');
-		// on recupère le buffer
-		$texte_patron_bg = ob_get_contents();
-		// on vide et ferme le buffer
-		ob_end_clean();  
 		
+	$texte_patron_bg = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;		
 		$titre_patron_bg = $titre_bg." de ".$nomsite;
 		$titre_bg = addslashes($titre_patron_bg);
 		
@@ -148,7 +144,7 @@ $message_pile = spip_num_rows($result_pile);
 			
 if (($message_pile > 0) AND ($locked == 'non') ) {
 //echo "<br>yeah";
-echo "<iframe src='spip-listes/spip-meleuse.php3' height='1' width='1' frameborder='0' >Désolé</iframe>";
+echo "<iframe src='".generer_url_public('meleuse')."' height='1' width='1' frameborder='0' >Désolé</iframe>";
 }
 
 
