@@ -33,6 +33,7 @@ function WCalendar_statique_jsinit($t, $s){
 			}
 			cal$s = new SPIP.widget.Calendar2up_INT_multi('cal$s','container$s','',selected$s);
 			cal$s.title = '$t';
+			cal$s.sync();
 			cal$s.render();
 			";
 	$js_c = "

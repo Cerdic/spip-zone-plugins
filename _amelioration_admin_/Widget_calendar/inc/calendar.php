@@ -23,8 +23,9 @@ function WCalendar_ajoute_statique($titre,$suffixe){
 function WCalendar_statique_point_entree($suffixe, $dates = ""){
 	return "<div><div id='container$suffixe' style='z-index:5000;'></div>
 	<div style='display:none;'><textarea id='selected_date$suffixe' name='selected_date$suffixe'>$dates</textarea></div>
-	<a href='javascript:cal$suffixe.reset()'>Reset</a>
-	</div>
+	<a href='javascript:cal$suffixe.reset()'>Reset</a>"
+	//. "<a href='javascript:alert(cal$suffixe.getSelectedDates())'>what's selected?</a>"
+	. "</div>
 	";
 }
 
