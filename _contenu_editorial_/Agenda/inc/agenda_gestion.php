@@ -414,6 +414,14 @@ function Agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 		}
 	}
 }
+function Agenda_action_supprime_repetitions($supp_evenement){
+	$res = spip_query("SELECT * FROM spip_evenements WHERE id_evenement_source=".spip_abstract_quote($supp_evenement));
+	while ($row = spip_fetch_array($res)){
+		$id_evenement = $row['id_evenement'];
+		spip_query("DELETE FROM spip_mots_evenements WHERE id_evenement=".spip_abstract_quote($id_evenement));
+		spip_query("DELETE FROM spip_evenements WHERE id_evenement=".spip_abstract_quote($id_evenement));
+	}
+}
 
 function Agenda_action_update_liste_mots($id_evenement,$liste_mots){
 	// suppression des mots obsoletes
@@ -513,14 +521,17 @@ function Agenda_action_formulaire_article(){
 		Agenda_action_update_liste_mots($id_evenement,$liste_mots);
 				
 		// gestion des repetitions
-		$repetitions = _request('selected_date_repetitions');
-		$repetitions = explode(',',$repetitions);
-		foreach($repetitions as $key=>$date){
-			$date = preg_replace(",[0-2][0-9]:[0-6][0-9]:[0-6][0-9]\s*(UTC|GMT)(\+|\-)[0-9]{4},","",$date);
-			$date = explode(' ',$date);
-			$date = strtotime($date[2]." ".$date[1]." ".$date[3]);
-			$repetitions[$key] = $date;
+		if ($repetitions = _request('selected_date_repetitions')!=NULL){
+			$repetitions = explode(',',$repetitions);
+			foreach($repetitions as $key=>$date){
+				$date = preg_replace(",[0-2][0-9]:[0-6][0-9]:[0-6][0-9]\s*(UTC|GMT)(\+|\-)[0-9]{4},","",$date);
+				$date = explode(' ',$date);
+				$date = strtotime($date[2]." ".$date[1]." ".$date[3]);
+				$repetitions[$key] = $date;
+			}
 		}
+		else 
+			$repetitions = array();
 		Agenda_action_update_repetitions($id_evenement, $repetitions, $liste_mots);
 	}
 	else if ($supp_evenement){
@@ -532,7 +543,7 @@ function Agenda_action_formulaire_article(){
 			spip_query("DELETE FROM spip_mots_evenements WHERE id_evenement=".spip_abstract_quote($supp_evenement));
 			spip_query("DELETE FROM spip_evenements WHERE id_evenement=".spip_abstract_quote($supp_evenement));
 		}
-		Agenda_action_supprime_repetitions($id_evenement);
+		Agenda_action_supprime_repetitions($supp_evenement);
 	}
 	return "";
 }
