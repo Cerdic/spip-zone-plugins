@@ -80,17 +80,6 @@ debut_droite("messagerie");
 
 
 
-if ($new == "oui") {
-	$statut = 'redac';
-	$type = 'nl';
-	$query = "INSERT INTO spip_messages (titre, date_heure, statut, type, id_auteur) VALUES ('".addslashes(filtrer_entites(_T('texte_nouveau_message')))."', NOW(), '$statut', '$type', $connect_id_auteur)";
-	$result = spip_query($query);
-	$id_message = spip_insert_id();
-  spip_query("INSERT INTO spip_auteurs_messages (id_auteur,id_message,vu) VALUES ('$connect_id_auteur','$id_message','oui')");
-}
-
-//echo "$new - ".addslashes(filtrer_entites(_T('texte_nouveau_message')))." - $type - $connect_id_auteur - $id_message" ;
-
 $query_message = "SELECT * FROM spip_messages WHERE id_message=$id_message";
 $result_message = spip_query($query_message);
         while($row = spip_fetch_array($result_message)) {

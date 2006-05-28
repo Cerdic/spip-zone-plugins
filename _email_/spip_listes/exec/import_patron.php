@@ -22,12 +22,16 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-
+include_spip('inc/distant');
 
 function exec_import_patron()
 {
 
 global $id_message;
+global $_POST ;
+
+$nomsite=lire_meta("nom_site"); 
+$urlsite=lire_meta("adresse_site");
 
  if (!isset($mode)) $mode = $_GET['mode'] ;
 if (!isset($inclure_patron)) $inclure_patron = $_POST['inclure_patron'] ; 
@@ -36,13 +40,10 @@ if (($inclure_patron == "oui") AND ($mode == "courrier")) {
 	if (!isset($patron)) $patron = $_POST['patron'] ;
 	if (!isset($date)) $date = $_POST['date'] ; 
   
-	echo " " ; // bug de fou
-	ob_start();
-	//include('spip.php?page=patron');
-	// on recupère le buffer
-	$texte_patron = ob_get_contents();
-	// on vide et ferme le buffer
-	ob_end_clean();  
+	//echo generer_url_public('patron_switch',"patron=$patron&date=$date") ; // bug de fou
+	
+	$texte_patron = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;
+
 	
 	$titre_patron = _T('spiplistes:lettre_info')." ".$nomsite;
 	
