@@ -248,8 +248,13 @@ fin_cadre_relief();
 	echo "</FORM>";
 	
 	// doit on visualiser un squelette ?
-	if (isset($_POST['patron'])) {
+if (isset($_POST['patron'])) {
 	   $patron = $_POST['patron'];
+	  
+	  if (isset($_POST['date'])) 
+	   $date = $_POST['date'];
+	
+	   	
 	   echo "<br /><strong>$patron</strong><br /><br />\n";
      echo _T('spiplistes:date_ref').": $date\n";
      echo "<h3>HTML</h3><a href=\"".generer_url_public('patron_switch',"patron=".$patron."&date=".$date)."\">(Plein écran)</a><br /><br />\n";
@@ -260,7 +265,7 @@ fin_cadre_relief();
 $texte_patron = recuperer_page(generer_url_public('patron_switch',"patron=$patron",true)) ;
 echo $texte_patron.version_texte($texte_patron) ;
            
-  }	
+    }
 	// doit on visualiser un squelette ? - fin
 
 	fin_cadre_relief();
