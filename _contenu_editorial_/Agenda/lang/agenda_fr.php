@@ -25,6 +25,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'evenement_horaire' => 'Horaire',
 'titre_sur_l_agenda' => "Sur l'agenda",
 'icone_creer_evenement' => 'Cr&eacute;er un nouvel &eacute;v&eacute;nement',
+'evenement_repetitions' => 'R&eacute;p&eacute;titions',
+'repetition_de' => "R&eacute;p&eacute;tition de",
+'sans_titre' => "(sans titre)",
+
 );
 
 

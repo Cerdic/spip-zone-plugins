@@ -188,6 +188,7 @@ function visu_evenement_agenda($id_evenement,$flag_editable){
 				$fdescriptif=attribut_html($row['descriptif']);
 				$fstdatedeb=strtotime($row['date_debut']);
 				$fstdatefin=strtotime($row['date_fin']);
+				$fid_evenement_source=$row['id_evenement_source'];
 			}
 	 	}
 		$out .= "<div class='agenda-visu-evenement'>";
@@ -246,8 +247,22 @@ function visu_evenement_agenda($id_evenement,$flag_editable){
 			}
 		}
 		$out .= "</div>\n";
-
-		if ($flag_editable){
+		
+		if ($fid_evenement_source!=0){
+			$res2 = spip_query("SELECT evenements.* FROM spip_evenements AS evenements WHERE evenements.id_evenement=".spip_abstract_quote($fid_evenement_source));
+			if ($row2 = spip_fetch_array($res2)){
+				$url = parametre_url(self(),'id_evenement',$row2['id_evenement']);
+				$url = parametre_url($url,'annee','');
+				$url = parametre_url($url,'mois','');
+				$url = parametre_url($url,'jour','');
+			  $out .= "<div class='edition-bouton'>";
+			  $out .= _T('agenda:repetition_de')." <a href='";
+			  $out .= $url;
+			  $out .= "'>".($row2['titre']?$row2['titre']:_T('agenda:sans_titre'))."</a>";
+			  $out .= "</div>";
+			}
+		}
+		else if ($flag_editable){
 			$url=self();
 			$url=parametre_url($url,'edit','');
 			$url=parametre_url($url,'neweven','');
