@@ -23,7 +23,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-
+include_spip('inc/distant');
 
 function exec_config()
 {
@@ -31,9 +31,10 @@ function exec_config()
 global $connect_statut;
 global $connect_toutes_rubriques;
 global $connect_id_auteur;
-global $type;
-global $new;
- 
+global $statut_abo,$reinitialiser_config, $Valider_reinit,$changer_config;
+global $_POST;
+
+
  include_ecrire ("inc_config.php3");
  
 $nomsite=lire_meta("nom_site"); 
@@ -116,7 +117,7 @@ $config = $extra['config'];
 
 
 
-echo "<form action='?exec=spiplistes&mode=config' method='post'>";
+echo "<form action='".generer_url_ecrire('config')."' method='post'>";
 echo "<input type='hidden' name='changer_config' value='oui'>";
  
   debut_cadre_relief("redacteurs-24.gif", false, "", _T('spiplistes:mode_inscription'));
@@ -155,7 +156,7 @@ $extra = get_extra(1,'auteur');
 	
 	debut_cadre_relief("redacteurs-24.gif", false, "", _T('spiplistes:tableau_bord'));
 //print_r($extra);
-echo "<form action='?exec=spiplistes&mode=config' method='post'>";
+echo "<form action='".generer_url_ecrire('config')."' method='post'>";
 echo "<input type='hidden' name='reinitialiser_config' value='oui'>";	
 
 	echo "<br />"._T('spiplistes:lock').$extra['locked'] ;
@@ -194,8 +195,8 @@ fin_cadre_relief();
     echo "<tr><td bgcolor='#FFFFFF' background='img_pack/rien.gif' >";
 
 
-        	echo "<form action='spip_listes.php3' METHOD='get'>"; 
-          echo "<input type='hidden' name='mode' value='config' />\n";
+        	echo "<form action='".generer_url_ecrire('config')."' METHOD='post'>"; 
+         
     echo "<div>";
 	  echo "<div style='float:right;width:200px'>";
 
@@ -247,14 +248,18 @@ fin_cadre_relief();
 	echo "</FORM>";
 	
 	// doit on visualiser un squelette ?
-	if (isset($_GET['patron'])) {
-	   $patron = $_GET['patron'];
+	if (isset($_POST['patron'])) {
+	   $patron = $_POST['patron'];
 	   echo "<br /><strong>$patron</strong><br /><br />\n";
      echo _T('spiplistes:date_ref').": $date\n";
-     echo "<h3>HTML</h3><a href=\"../patron.php3?patron=$patron&amp;date=$date\">(Plein écran)</a><br /><br />\n";
-     echo "<iframe width=\"100%\" height=\"500\" src=\"../patron.php3?patron=$patron&amp;date=$date\"></iframe>\n";
-     echo "<h3>"._T('spiplistes:val_texte')."</h3><a href=\"../patron.php3?patron=$patron&amp;date=$date&amp;format=texte\">(Plein écran)</a><br /><br />\n";  
-     echo "<iframe width=\"100%\" height=\"500\" src=\"../patron.php3?patron=$patron&amp;date=$date&amp;format=texte\"></iframe>\n";       
+     echo "<h3>HTML</h3><a href=\"".generer_url_public('patron_switch',"patron=".$patron."&date=".$date)."\">(Plein écran)</a><br /><br />\n";
+     echo "<iframe width=\"100%\" height=\"500\" src=\"".generer_url_public('patron_switch',"patron=".$patron."&date=".$date)."\"></iframe>\n";
+     echo "<h3>"._T('spiplistes:val_texte')."</h3><a href=\"".generer_url_public('patron_switch',"patron=".$patron."&date=".$date."&format=texte")."\">(Plein écran)</a><br /><br />\n";  
+    
+    echo generer_url_public('patron_switch',"patron=$patron&date=$date") ;
+$texte_patron = recuperer_page(generer_url_public('patron_switch',"patron=$patron",true)) ;
+echo $texte_patron.version_texte($texte_patron) ;
+           
   }	
 	// doit on visualiser un squelette ? - fin
 

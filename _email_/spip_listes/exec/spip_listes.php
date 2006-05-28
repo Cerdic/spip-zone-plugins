@@ -178,7 +178,7 @@ echo "<div  class='chapo' style='border-top:1px #cccccc;width:100%;font-weight:b
               	$date_dernier = $extra['majnouv'] ;
                 $date_dernier = date(_T('spiplistes:format_date'),$date_dernier) ;
 
-			echo "<td><a href='spip.php?patron=".$extra['squelette']."&date=".$date_dernier."'> ".$extra['squelette']."</a><br />"._T('spiplistes:Tous_les')." ".$extra['periode']." "._T('spiplistes:jours')."</td><td><a href='?exec=gerer_liste&id_article=$id_article'>$titre</a><br />" ;
+			echo "<td><a href='".generer_url_public('patron_switch',"patron=".$extra['squelette']."&date=".$date_dernier)."'> ".$extra['squelette']."</a><br />"._T('spiplistes:Tous_les')." ".$extra['periode']." "._T('spiplistes:jours')."</td><td><a href='?exec=gerer_liste&id_article=$id_article'>$titre</a><br />" ;
 			echo "</td>" ;
 					echo "<td>";
 			if($proch != 0) echo "dans <b>$proch</b> "._T('spiplistes:jours')."</td>";
