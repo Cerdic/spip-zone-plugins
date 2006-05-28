@@ -30,3 +30,12 @@ Vous insérez ensuite ce formulaire à la manière d'une insertion d'image dans un 
 
 Vous pouvez consulter les formulaires que vos utilisatrices ou utilisateurs vous ont envoyé en passant votre souris sur "Forum", puis sur "Suivi des réponses" (les réponses sont sur le même mode que les signatures des pétitions). Si vous avez indiqué une adresse mail dans la configuration de votre formulaire (plus haut), vous recevrez *également* le contenu du formulaire par mail (pour autant que votre serveur vous autorise à envoyer des mails).
 
+ASTUCE
+
+Vous pouvez récupérer les infos de vos formulaires en utilisant la boucle suivante :
+
+<BOUCLE_NomDeLaBoucle(SPIP_FORMS)>#TITRE</BOUCLE_NomDeLaBoucle>
+
+- Soit « NomDeLaBoucle » = le nom de la boucle (ce que vous voulez, pourvu qu'il n'y ait pas d'espace)
+- Soit « SPIP_FORMS » = le nom de la table (si vous avez choisis un préfixe de table pour votre site spip, vous devez remplacer « SPIP » par ce préfixe; ex. : « MON_PREFIXE_FORMS » ou « MONPREFIXE_FORMS »)
+- #TITRE = le titre du formulaire (il reste à tester les autres champs de la table « spip_forms », à savoir #DESCRIPTIF, #SONDAGE, STRUCTURE, EMAIL, CHAMPCONFIRM, TEXTE pour voir si ça marche, et regarder quels champs sont ajoutés dans la table « spip_forms » en fonction des formulaires que l'on crée et de leurs composants; en régle générale, il faut tester si #NOM_DU_CHAMPS marche et ce qu'il retourne comme résultat. Il y aura probablement un filtre à faire pour séparer les données de chaque champs qui sont visiblement séparées par un point-virgule.).
