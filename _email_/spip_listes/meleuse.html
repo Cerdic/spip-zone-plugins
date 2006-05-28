@@ -1,3 +1,5 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type :text/html}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG">
 <head>
@@ -81,15 +83,6 @@
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
 /******************************************************************************************/
 
-include("ecrire/inc_version.php");
-include_ecrire("inc_connect.php3");
-include_ecrire("inc_filtres.php3");
-include_ecrire("inc_config.php3");
-include_ecrire("inc_texte.php3");
-include_ecrire ("inc_session.php3");
-include_ecrire ("inc_meta.php3");
-//include("inc-urls-standard.php3");
-
 // Trouver un message à envoyer
 
 global $table_prefix;
@@ -105,81 +98,75 @@ if ($message_pile > 0){
 	$meta_liste["locked"] = "oui" ;
 	set_extra(1,$meta_liste,"auteur");
 
+	// Message
 	$row = spip_fetch_array($result_pile);
-  $texte = $row["texte"];
-  $texte_original = $texte ; // pour les envois de test
+  	$texte = $row["texte"];
+ 	$texte_original = $texte ; // pour les envois de test
 	
 	$texte = stripslashes($texte);
 	$titre = typo($row["titre"]);
-
 	
+	$type = $row["type"];
+	$id_message = $row["id_message"];
+
 	echo "<h4>"._T('spiplistes:envoi_en_cours')."</h4>\n";
-	echo "<img src='../ecrire/img_pack/mailer_casquette.gif' alt='envoi' /><br />\n";
+	echo "<img src='plugins/spip_listes/img_pack/mailer_casquette.gif' alt='envoi' /><br />\n";
 
 	// Determiner le destinataire ou la liste destinataire
 	eregi("^__bLg__[0-9@\.A-Z_-]+__bLg__", $texte, $res );
 	$destinataires = str_replace("__bLg__","",$res[0]);
-	//est-ce un mail de test ?
 	
-	if( eregi("^[_\.0-9a-z-]+@([0-9a-z-]+\.)+[a-z]{2,4}$",$destinataires) ){
+		//est-ce un mail de test ?
+		if( eregi("^[_\.0-9a-z-]+@([0-9a-z-]+\.)+[a-z]{2,4}$",$destinataires) ){
 		echo _T('spiplistes:email_test')." : ".$destinataires."<br />";
 		$test = 'oui';
 		$mail_collectif = 'non' ;
-	}	else {
-		if($destinataires == 'tous'){
+		} else {
+			//est-ce un mail collectif ?
+			if($destinataires == 'tous'){
 			$mail_collectif = 'oui' ;
 			echo _T('spiplistes:envoi_tous')."<BR />" ;
-		} 
-		else{
-		$mail_collectif = 'non' ;
-    
-		$query_d = "SELECT * FROM spip_articles WHERE id_article=$destinataires";
-		$result_d = spip_query($query_d);
+			} else {
+			//c'est un mail pour une liste alors ?
+			$mail_collectif = 'non' ;
+			$query_d = "SELECT * FROM spip_articles WHERE id_article=$destinataires";
+			$result_d = spip_query($query_d);
 		
-			if(spip_num_rows($result_d)>0){
-				while($ro = spip_fetch_array($result_d)) {
-				$titre_liste = $ro["titre"];
-				$id = $ro["id_article"];
-				$mail_envoi = get_extra($id,"article") ;
-				$email_liste = $mail_envoi['email_envoi'];
-				echo _T('spiplistes:envoi_listes').$titre_liste." <br />\n";
+				if(spip_num_rows($result_d)>0){
+					while($ro = spip_fetch_array($result_d)) {
+					$titre_liste = $ro["titre"];
+					$id = $ro["id_article"];
+					$mail_envoi = get_extra($id,"article") ;
+					$email_liste = $mail_envoi['email_envoi'];
+					echo _T('spiplistes:envoi_listes').$titre_liste." <br />\n";
+					}
+				}else{			//erreur
+				   echo "<h1>"._T('spiplistes:envoi_erreur')."</h1>\n";
 				}
-			}else{			//erreur
-			   echo "<h1>"._T('spiplistes:envoi_erreur')."</h1>\n";
 			}
 		}
-	}
-
-  // Expéditeur :
-	//trouver le mail d'envoi et de réponse pour les bounces.
-
+	
+	
 	$email_webmaster = lire_meta("email_webmaster");
 	$from = email_valide_bloog($email_liste) ? $email_liste : $email_webmaster;
 	echo  _T('spiplistes:email_reponse').$from ." <br />\n" ;
 
 	// virer les destinataires du texte du message
-
-    /*   echo "<h2>Original issu de la base</h2>";
-    echo "<TEXTAREA NAME='texte' ROWS='20' CLASS='formo' COLS='70' wrap=soft>";
-	echo $texte;
-	echo "</TEXTAREA><P>\n"; */
-
-    $texte = eregi_replace("__bLg__[0-9@\.A-Z_-]+__bLg__","",$texte);
+	$texte = eregi_replace("__bLg__[0-9@\.A-Z_-]+__bLg__","",$texte);
             
     // préparer le message pour l'envoi
 	
 	$temp_style = ereg("<style[^>]*>[^<]*</style>", $texte, $style_reg);
-  if (isset($style_reg[0])) $style_str = $style_reg[0]; 
+  	if (isset($style_reg[0])) $style_str = $style_reg[0]; 
                          else $style_str = "";
-  $texte = ereg_replace("<style[^>]*>[^<]*</style>", "__STYLE__", $texte);
+  	
+	
+	$texte = ereg_replace("<style[^>]*>[^<]*</style>", "__STYLE__", $texte);
 
 	$texte = propre($texte); // pb: enleve aussi <style>...  
 	$texte = propre_bloog($texte);
 
-  $texte = ereg_replace("__STYLE__", $style_str, $texte);
-
-	$type = $row["type"];
-	$id_message = $row["id_message"];
+ 	$texte = ereg_replace("__STYLE__", $style_str, $texte);
 
 	$nomsite=lire_meta("nom_site");
 	$urlsite=lire_meta("adresse_site");
@@ -187,7 +174,7 @@ if ($message_pile > 0){
 	$boundary = md5(uniqid(rand()));
 
 	$objet= filtrer_entites($titre);
-  if ($charset <> 'utf-8') {
+  	if ($charset <> 'utf-8') {
 	   $objet = str_replace("&#8217;", "'", $objet);
 	}
 
@@ -196,14 +183,16 @@ if ($message_pile > 0){
 	// on prépare la version texte
 	
 	if ($charset <> 'utf-8') $texte = str_replace("&#8217;", "'", $texte);
-   
-    $page = version_texte($texte);
+  
+  
+    $page_ = version_texte($texte);
 
-	$page.="\n\n________________________________________________________________________"  ;
-	$page.="\n\n"._T('spiplistes:editeur').$nomsite."\n"  ;
-	$page.=$urlsite."\n";
-	$page.="________________________________________________________________________"  ;
-
+	$page_.="\n\n________________________________________________________________________"  ;
+	$page_.="\n\n"._T('spiplistes:editeur').$nomsite."\n"  ;
+	$page_.=$urlsite."\n";
+	$page_.="________________________________________________________________________"  ;
+	
+	
 	// on prépare la version html
 
 	$pageh = "This is a multi-part message in MIME format\n";
@@ -263,7 +252,7 @@ if ($message_pile > 0){
 		}
 	 
 		echo "<h3>"._T('spiplistes:message'). $titre."</h3>\n";
-    echo "<img src='../ecrire/img_pack/48_import.gif' alt='sending mail ...' /><br />\n";
+    echo "<img src='plugins/spip_listes/img_pack/48_import.gif' alt='sending mail ...' /><br />\n";
 	
 		//Envoi par lots
 		$debut = $deb["debut"];
@@ -285,7 +274,7 @@ if ($message_pile > 0){
 		$liste_abonnes = spip_num_rows($result_inscrits);
 	
 		if($liste_abonnes > 0){
-	   	// on modifie le cran du compteur avant d'envoyer les mails pour éviter les doublons en cas d'erreur pendant l'envoi.
+	// on modifie le cran du compteur avant d'envoyer les mails pour éviter les doublons en cas d'erreur pendant l'envoi.
 		  $debut = $debut+$limit;
 	
 			if ($debut>=$nb_inscrits) {
@@ -345,7 +334,7 @@ if ($message_pile > 0){
 					$headers  .= "\n";
 		
 					// pied de page texte			
-					$pagem = $page."\n\n"  ;
+					$pagem = $page_."\n\n"  ;
 					$pagem.= _T('spiplistes:abonnement_mail')."\n" ;
 					$pagem.= $addresse_desabo."?d=".$cookie."\n\n"  ;
 		
@@ -413,33 +402,26 @@ if ($message_pile > 0){
 	set_extra(1,$deb,"auteur");
 	}
 	
+	
+
+
+	
 	//delocker
 	$meta_liste = get_extra(1,"auteur");
 	$meta_liste["locked"] = "non" ;
 	set_extra(1,$meta_liste,"auteur");
-	
-	echo "<div><a href='$PHP_SELF'>"._T('spiplistes:forcer_lot')."</a></div>\n";
-
-
-
+	echo "<div><a href='".generer_url_public('meleuse')."'>"._T('spiplistes:forcer_lot')."</a></div>\n";
 
 } else {
 
-echo "<h4>"._T('spiplistes:envoi_fini')."</h4>"   ;
-echo _T('spiplistes:non_courrier');
-//delocker
+	echo "<h4>"._T('spiplistes:envoi_fini')."</h4>"   ;
+	echo _T('spiplistes:non_courrier');
+	//delocker
 	$meta_liste = get_extra(1,"auteur");
 	$meta_liste["locked"] = "non" ;
 	set_extra(1,$meta_liste,"auteur");
 
-}/* flag pile*/
-
-
-
-          /////////////////////////////////////////
-
-
-
+}	/* flag pile*/
 ?>
 			
 			
