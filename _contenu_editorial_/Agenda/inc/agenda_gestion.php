@@ -521,7 +521,7 @@ function Agenda_action_formulaire_article(){
 		Agenda_action_update_liste_mots($id_evenement,$liste_mots);
 				
 		// gestion des repetitions
-		if ($repetitions = _request('selected_date_repetitions')!=NULL){
+		if (($repetitions = _request('selected_date_repetitions'))!=NULL){
 			$repetitions = explode(',',$repetitions);
 			foreach($repetitions as $key=>$date){
 				$date = preg_replace(",[0-2][0-9]:[0-6][0-9]:[0-6][0-9]\s*(UTC|GMT)(\+|\-)[0-9]{4},","",$date);
@@ -707,7 +707,9 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 		}
 		$dates = implode(",",$dates);
 	}
+	$out .= "<div class='repetitions-calendrier'>";
 	$out .= WCalendar_statique_point_entree('_repetitions',$dates);
+	$out .= "</div>";
 	
   $out .=  "<div class='edition-bouton'>";
   #echo "<input type='submit' name='submit' value='Annuler' />";

@@ -28,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'evenement_repetitions' => 'R&eacute;p&eacute;titions',
 'repetition_de' => "R&eacute;p&eacute;tition de",
 'sans_titre' => "(sans titre)",
+'evenement_autres_occurences' => "Autres occurences :",
 
 );
 

@@ -248,13 +248,29 @@ function visu_evenement_agenda($id_evenement,$flag_editable){
 		}
 		$out .= "</div>\n";
 		
+
+		$url = parametre_url(self(),'annee','');
+		$url = parametre_url($url,'mois','');
+		$url = parametre_url($url,'jour','');
+
+		$out .= "<div class='repetitions-calendrier'>";
+		$id_source = $fid_evenement_source?$fid_evenement_source:$id_evenement;
+		$res2 = spip_query("SELECT * FROM spip_evenements WHERE id_evenement=".spip_abstract_quote($id_source)." OR id_evenement_source=".spip_abstract_quote($id_source)." ORDER BY date_debut");
+		if (spip_num_rows($res2)>1){
+			$out .= _T('agenda:evenement_autres_occurences');
+			while($row2 = spip_fetch_array($res2)){
+				if ($row2['id_evenement']!=$fid_evenement){
+					$url = parametre_url(self(),'id_evenement',$row2['id_evenement']);
+					$out .= " <a href='$url'>" . affdate_jourcourt($row2['date_debut']) ."</a>";
+				}
+			}
+		}
+		$out .= "</div>";
+	
 		if ($fid_evenement_source!=0){
 			$res2 = spip_query("SELECT evenements.* FROM spip_evenements AS evenements WHERE evenements.id_evenement=".spip_abstract_quote($fid_evenement_source));
 			if ($row2 = spip_fetch_array($res2)){
-				$url = parametre_url(self(),'id_evenement',$row2['id_evenement']);
-				$url = parametre_url($url,'annee','');
-				$url = parametre_url($url,'mois','');
-				$url = parametre_url($url,'jour','');
+				$url = parametre_url($url,'id_evenement',$row2['id_evenement']);
 			  $out .= "<div class='edition-bouton'>";
 			  $out .= _T('agenda:repetition_de')." <a href='";
 			  $out .= $url;
@@ -299,7 +315,8 @@ function exec_agenda_evenements_dist(){
 	Agenda_install();
 	include_spip('inc/calendar');
 	// Reserver les widgets agenda
-	WCalendar_ajoute_lies(_L("Date de d&eacute;but"),'_evenement_debut',_L("Date de fin"),'_evenement_fin');
+	WCalendar_ajoute_lies(_T('agenda:evenement_date_debut'),'_evenement_debut',_T('agenda:evenement_date_fin'),'_evenement_fin');
+	WCalendar_ajoute_statique(_T('agenda:evenement_repetitions'),'_repetitions');
 
 	$ajouter_id_article = intval(_request('ajouter_id_article'));
 	$flag_editable = article_editable($ajouter_id_article);

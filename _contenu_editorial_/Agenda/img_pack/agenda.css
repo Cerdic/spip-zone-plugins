@@ -25,7 +25,7 @@
 	right :0px;
 	top :100px;
 	width: 400px;
-	height: 28em;
+	height: 47em;
 	border-bottom: 1px solid #cccccc;
 	font-weight: bold;
 	z-index:100;
@@ -177,7 +177,7 @@
 	top :14em;
 	left :0px;
 	width : 100%;
-	height: 8em;
+	height: 6em;
 	border-top: 1px solid #cccccc;
 	border-bottom: 1px solid #cccccc;
 	border-right: 1px solid #cccccc;
@@ -193,14 +193,20 @@ width:49%;
 }
 .agenda_mots_cles{
 	position: absolute;
-left:0px;
-top:22em;
-height:4em;
-width:100%;
+	left:0px;
+	top:20em;
+	height:8em;
+	width:100%;
 	font-weight: bold;
 	background-color: #ccff99;
 }
- 
+.repetitions-calendrier{
+	position: absolute;
+	left:0px;
+	top:28em;
+	height:17em;
+	width:100%;
+}
 .edition-bouton {
 	position: absolute;
 	bottom :0em;
