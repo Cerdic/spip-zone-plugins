@@ -759,8 +759,8 @@
 		echo "<div align='center'>\n";
 		echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('lettres:numero_lettre')."</b></font>\n";
 		echo "<br><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_lettre</b></font>\n";
-		$fond_message_html		= lettres_recuperer_meta('fond_message_html');
-		$fond_message_texte		= lettres_recuperer_meta('fond_message_texte');
+		$fond_message_html		= $GLOBALS['meta']['fond_message_html'];
+		$fond_message_texte		= $GLOBALS['meta']['fond_message_texte'];
 		if ($previsu) {
 			icone_horizontale(_T('lettres:previsualiser_html'), generer_url_public($fond_message_html, 'id_lettre='.$id_lettre.'&var_mode=preview'), $image, "racine-24.gif");
 			icone_horizontale(_T('lettres:previsualiser_texte'), generer_url_public($fond_message_texte, 'id_lettre='.$id_lettre.'&var_mode=preview'), $image, "racine-24.gif");
@@ -1286,7 +1286,7 @@
 	 * @author Pierre Basson
 	 **/
 	function lettres_afficher_raccourci_formulaire_inscription() {
-		$fond_formulaire_inscription = lettres_recuperer_meta('fond_formulaire_lettre');
+		$fond_formulaire_inscription = $GLOBALS['meta']['fond_formulaire_lettre'];
 		icone_horizontale(_T('lettres:raccourci_formulaire_inscription'), generer_url_public($fond_formulaire_inscription), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/formulaire.png');
 	}
 

@@ -4,6 +4,7 @@
 	include_spip('inc/lettres_admin');
  	include_spip('inc/presentation');
 	include_spip('inc/config');
+	include_spip('inc/meta');
 
 
 	function exec_lettres_configuration() {
@@ -14,50 +15,24 @@
 		if (!empty($_POST['valider'])) {
 			if (!empty($_POST['fond_formulaire_lettre'])) {
 				$fond_formulaire_lettre = addslashes($_POST['fond_formulaire_lettre']);
-				$verification = 'SELECT valeur FROM spip_meta WHERE nom="fond_formulaire_lettre" LIMIT 1';
-				$resultat_verification = spip_query($verification);
-				$nb_resultat = @spip_num_rows($resultat_verification);
-				if (!$nb_resultat) {
-					$insertion = 'INSERT INTO spip_meta (nom, valeur) VALUES ("fond_formulaire_lettre", "'.$fond_formulaire_lettre.'")';
-					spip_query($insertion);
-				} else {
-					$modification = 'UPDATE spip_meta SET valeur="'.$fond_formulaire_lettre.'" WHERE nom="fond_formulaire_lettre" LIMIT 1';
-					spip_query($modification);
-				}
+				ecrire_meta('fond_formulaire_lettre', $fond_formulaire_lettre);
 			}
 
 			if (!empty($_POST['fond_message_html'])) {
 				$fond_message_html = addslashes($_POST['fond_message_html']);
-				$verification = 'SELECT valeur FROM spip_meta WHERE nom="fond_message_html" LIMIT 1';
-				$resultat_verification = spip_query($verification);
-				$nb_resultat = @spip_num_rows($resultat_verification);
-				if (!$nb_resultat) {
-					$insertion = 'INSERT INTO spip_meta (nom, valeur) VALUES ("fond_message_html", "'.$fond_message_html.'")';
-					spip_query($insertion);
-				} else {
-					$modification = 'UPDATE spip_meta SET valeur="'.$fond_message_html.'" WHERE nom="fond_message_html" LIMIT 1';
-					spip_query($modification);
-				}
+				ecrire_meta('fond_message_html', $fond_message_html);
 			}
 
 			if (!empty($_POST['fond_message_texte'])) {
 				$fond_message_texte = addslashes($_POST['fond_message_texte']);
-				$verification = 'SELECT valeur FROM spip_meta WHERE nom="fond_message_texte" LIMIT 1';
-				$resultat_verification = spip_query($verification);
-				$nb_resultat = @spip_num_rows($resultat_verification);
-				if (!$nb_resultat) {
-					$insertion = 'INSERT INTO spip_meta (nom, valeur) VALUES ("fond_message_texte", "'.$fond_message_texte.'")';
-					spip_query($insertion);
-				} else {
-					$modification = 'UPDATE spip_meta SET valeur="'.$fond_message_texte.'" WHERE nom="fond_message_texte" LIMIT 1';
-					spip_query($modification);
-				}
+				ecrire_meta('fond_message_texte', $fond_message_texte);
 			}
+			ecrire_metas();
 		}
 
-		$fond_formulaire_lettre	= lettres_recuperer_meta('fond_formulaire_lettre');
-		$fond_message_html		= lettres_recuperer_meta('fond_message_html');
-		$fond_message_texte		= lettres_recuperer_meta('fond_message_texte');
+		$fond_formulaire_lettre	= $GLOBALS['meta']['fond_formulaire_lettre'];
+		$fond_message_html		= $GLOBALS['meta']['fond_message_html'];
+		$fond_message_texte		= $GLOBALS['meta']['fond_message_texte'];
 
 		debut_page(_T('lettres:configuration'), "administration", "lettres_configuration");
 		echo "<br><br>";

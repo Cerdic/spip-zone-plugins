@@ -27,8 +27,8 @@
 		list($titre) = spip_fetch_array(spip_query($requete_titre));
 		$titre = _T('lettres:email_test').' '.$titre;
 		
-		$fond_message_html	= lettres_recuperer_meta('fond_message_html');
-		$fond_message_texte	= lettres_recuperer_meta('fond_message_texte');
+		$fond_message_html	= $GLOBALS['meta']['fond_message_html'];
+		$fond_message_texte	= $GLOBALS['meta']['fond_message_texte'];
 		$f = charger_fonction('assembler', 'public');
 		$page_html	= $f($fond_message_html, array('id_lettre' => $id_lettre));
 		$page_texte	= $f($fond_message_texte, array('id_lettre' => $id_lettre));

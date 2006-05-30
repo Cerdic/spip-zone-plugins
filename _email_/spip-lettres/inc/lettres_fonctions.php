@@ -131,28 +131,6 @@
 
 
 	/**
-	 * lettres_recuperer_meta
-	 *
-	 * récupère la valeur d'une meta
-	 *
-	 * @param string nom meta
-	 * @return string valeur de la meta
-	 * @author Pierre Basson
-	 **/
-	function lettres_recuperer_meta($meta) {
-		$verification = 'SELECT valeur FROM spip_meta WHERE nom="'.$meta.'" LIMIT 1';
-		$resultat_verification = spip_query($verification);
-		$nb_resultat = @spip_num_rows($resultat_verification);
-		if (!$nb_resultat) {
-			$valeur = '';
-		} else {
-			list($valeur) = spip_fetch_array($resultat_verification);
-		}
-		return $valeur;
-	}
-
-
-	/**
 	 * lettres_verifier_action_possible
 	 *
 	 * Regarde si l'action demandée est possible

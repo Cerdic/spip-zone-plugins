@@ -6,8 +6,8 @@
 	include_spip('inc/lettres_fonctions');
 
 	global $page;
-	$fond_message_html		= lettres_recuperer_meta('fond_message_html');
-	$fond_message_texte		= lettres_recuperer_meta('fond_message_texte');
+	$fond_message_html		= $GLOBALS['meta']['fond_message_html'];
+	$fond_message_texte		= $GLOBALS['meta']['fond_message_texte'];
 
 	if ($page == $fond_message_html OR $page == $fond_message_texte)
 		$flag_preserver = true;

@@ -134,8 +134,8 @@
 					list($titre, $date) = spip_fetch_array($resultat_lettre);
 
 					// Création de l'archive
-					$fond_message_html	= lettres_recuperer_meta('fond_message_html');
-					$fond_message_texte	= lettres_recuperer_meta('fond_message_texte');
+					$fond_message_html	= $GLOBALS['meta']['fond_message_html'];
+					$fond_message_texte	= $GLOBALS['meta']['fond_message_texte'];
 					$f = charger_fonction('assembler', 'public');
 					$page_html	= $f($fond_message_html, array('id_lettre' => $id_lettre));
 					$page_texte	= $f($fond_message_texte, array('id_lettre' => $id_lettre));
