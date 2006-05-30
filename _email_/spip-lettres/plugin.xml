@@ -18,4 +18,9 @@
                 <action>modifier_chemin_presentation_js</action>
                 <inclure>lettres.php</inclure>
         </pipeline>
+        <pipeline>
+                <nom>taches_generales_cron</nom>
+                <action>taches_generales_cron</action>
+                <inclure>lettres.php</inclure>
+        </pipeline>
 </plugin>

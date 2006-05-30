@@ -68,6 +68,37 @@
 
 
 	/**
+	 * lettres_taches_generales_cron
+	 *
+	 * Ajout des tâches planifiées pour le plugin
+	 *
+	 * @param array taches_generales
+	 * @return true
+	 * @author Pierre Basson
+	 **/
+	function lettres_taches_generales_cron($taches_generales) {
+		$taches_generales['envoi_lettres'] = 60 * 10;
+		return $taches_generales;
+	}
+
+	/**
+	 * cron_envoi_lettres
+	 *
+	 * Tâche de fond pour l'envoi planifié
+	 *
+	 * @param array taches_generales
+	 * @return true
+	 * @author Pierre Basson
+	 **/
+	function cron_envoi_lettres($t) {
+
+		# ici le code pour lancer les envois
+
+#		return (0 - $t); # si pas terminé
+		return true;
+	}
+
+	/**
 	 * lettres_verifier_base
 	 *
 	 * @return true
