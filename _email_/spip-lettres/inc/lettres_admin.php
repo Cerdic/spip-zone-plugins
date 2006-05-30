@@ -14,6 +14,7 @@
 	 * @author Pierre Basson
 	 **/
 	function lettres_verifier_droits() {
+		lettres_verifier_base();
 		if ($GLOBALS['connect_statut'] != "0minirezo")
 			lettres_rediriger_javascript(generer_url_ecrire('accueil')); 
 	}

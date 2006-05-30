@@ -1,8 +1,12 @@
 <?php
 
+	include_spip('base/create');
+	include_spip('base/abstract_sql');
+	include_spip('base/lettres');
+	include_spip('inc/plugin');
 	include_spip('inc/lettres_balises');
-	include_spip('inc/lettres_boucles');
 	include_spip('inc/lettres_filtres');
+
 
 	/**
 	 * lettres_ajouter_boutons
@@ -15,17 +19,12 @@
 	 **/
 	function lettres_ajouter_boutons($boutons_admin) {
 		if ($GLOBALS['connect_statut'] == "0minirezo") {
-			if (!lettres_verifier_existence_tables()) {
-				$entree = new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/installation-plugin.png', _T('lettres:installation'));
-				lettres_ajouter_bouton_avant($boutons_admin, 'forum', 'lettres_installation', $entree);
-			} else {
-				$entree = new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/lettre.png', _T('lettres:lettres_information'));
-				lettres_ajouter_bouton_avant($boutons_admin, 'forum', 'lettres', $entree);
-				$boutons_admin['lettres']->sousmenu['abonnes']= new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/abonnes.png', _T('lettres:abonnes'));
-				$boutons_admin['lettres']->sousmenu['lettres']= new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/lettre-24.png', _T('lettres:lettres_information'));
-				$boutons_admin['lettres']->sousmenu['lettres_statistiques']= new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/statistiques.png', _T('lettres:statistiques'));
-				$boutons_admin['lettres']->sousmenu['lettres_configuration']= new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/configuration.png', _T('lettres:configuration'));
-			}
+			$entree = new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/lettre.png', _T('lettres:lettres_information'));
+			lettres_ajouter_bouton_avant($boutons_admin, 'forum', 'lettres', $entree);
+			$boutons_admin['lettres']->sousmenu['abonnes']= new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/abonnes.png', _T('lettres:abonnes'));
+			$boutons_admin['lettres']->sousmenu['lettres']= new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/lettre-24.png', _T('lettres:lettres_information'));
+			$boutons_admin['lettres']->sousmenu['lettres_statistiques']= new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/statistiques.png', _T('lettres:statistiques'));
+			$boutons_admin['lettres']->sousmenu['lettres_configuration']= new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/configuration.png', _T('lettres:configuration'));
 		}
 		return $boutons_admin;
 	}
@@ -52,6 +51,7 @@
 	    $t = array_merge(array_slice($t, 0, $pos), array($cle => $valeur), array_slice($t, $pos));
 	}
 
+
 	/**
 	 * lettres_modifier_chemin_presentation_js
 	 *
@@ -66,21 +66,36 @@
 		return $texte;
 	}
 
+
 	/**
-	 * lettres_verifier_existence_tables
+	 * lettres_verifier_base
 	 *
-	 * @return boolean présence de la table spip_abonnes
+	 * @return true
 	 * @author Pierre Basson
 	 **/
-	function lettres_verifier_existence_tables() {
-		$requete_test_existence_tables = 'SHOW TABLES LIKE "spip_abonnes"';
-		$resultat_existence = spip_query($requete_test_existence_tables);
-		$nb_lignes = @spip_num_rows($resultat_existence);
-
-		if ($nb_lignes > 0)
-			return true;
-		else
-			return false;
+	function lettres_verifier_base() {
+		$info_plugin_lettres = plugin_get_infos(_NOM_PLUGIN_LETTRE_INFORMATION);
+		$version_plugin = $info_plugin_lettres['version'];
+		if (!isset($GLOBALS['meta']['spip_lettres_version']) AND !isset($GLOBALS['meta']['fond_formulaire_lettre'])) {
+			creer_base();
+			ecrire_meta('spip_lettres_version', $version_plugin);
+			ecrire_metas();
+		} else {
+			$version_base = $GLOBALS['meta']['spip_lettres_version'];
+			if (!isset($GLOBALS['meta']['spip_lettres_version']) AND isset($GLOBALS['meta']['fond_formulaire_lettre'])) {
+				$version_base = 1.0;
+			}
+			if ($version_base < 1.1) {
+				creer_base();
+				spip_query("ALTER TABLE spip_archives ADD nb_emails_html BIGINT( 21 ) NOT NULL AFTER nb_emails_echec;");
+				spip_query("ALTER TABLE spip_archives ADD nb_emails_texte BIGINT( 21 ) NOT NULL AFTER nb_emails_html;");
+				spip_query("ALTER TABLE spip_archives ADD nb_emails_mixte BIGINT( 21 ) NOT NULL AFTER nb_emails_texte;");
+				spip_query("ALTER TABLE spip_archives_statistiques DROP PRIMARY KEY, ADD INDEX (id_archive);");
+				ecrire_meta('spip_lettres_version', $version_base = 1.1);
+				ecrire_metas();
+			}
+		}
+		return true;
 	}
 
 
