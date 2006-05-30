@@ -72,7 +72,7 @@
 			while ($arr = @spip_fetch_array($resultat_a_envoyer)) {
 				$id_abonne	= $arr['id_abonne'];
 				$format		= $arr['format'];
-		 		$resultat_envoi = lettres_envoyer_lettre($id_abonne, $titre, $message_html, $message_texte, $id_lettre);
+		 		$resultat_envoi = lettres_envoyer_lettre($id_abonne, $titre, $message_html, $message_texte, $id_lettre, $id_archive);
 				if ($resultat_envoi)
 					$statut = 'envoye';
 				else

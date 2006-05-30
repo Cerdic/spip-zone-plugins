@@ -18,12 +18,12 @@
 			if (!lettres_verifier_existence_tables()) {
 				$entree = new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/installation-plugin.png', _T('lettres:installation'));
 				lettres_ajouter_bouton_avant($boutons_admin, 'forum', 'lettres_installation', $entree);
-#				$boutons_admin['lettres']->sousmenu['lettres_installation']= new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/installation.gif', _T('lettres:installation'));
 			} else {
 				$entree = new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/lettre.png', _T('lettres:lettres_information'));
 				lettres_ajouter_bouton_avant($boutons_admin, 'forum', 'lettres', $entree);
 				$boutons_admin['lettres']->sousmenu['abonnes']= new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/abonnes.png', _T('lettres:abonnes'));
 				$boutons_admin['lettres']->sousmenu['lettres']= new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/lettre-24.png', _T('lettres:lettres_information'));
+				$boutons_admin['lettres']->sousmenu['lettres_statistiques']= new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/statistiques.png', _T('lettres:statistiques'));
 				$boutons_admin['lettres']->sousmenu['lettres_configuration']= new Bouton('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/configuration.png', _T('lettres:configuration'));
 			}
 		}
@@ -173,6 +173,7 @@
 					$requete_maj = 'UPDATE spip_abonnes_lettres SET statut="valide" WHERE id_abonne="'.$id_abonne.'" AND id_lettre="'.$id_lettre.'" LIMIT 1';
 					if (!spip_query($requete_maj))
 						return false;
+					spip_query('INSERT INTO spip_lettres_statistiques (id_lettre, date, type) VALUES ("'.$id_lettre.'", NOW(), "inscription")');
 				}
 			}
 			return true;
@@ -202,6 +203,7 @@
 					$resultat_desinscription = spip_query($requete_desinscription);
 					if (!$resultat_desinscription)
 						$resultat = false;
+					spip_query('INSERT INTO spip_lettres_statistiques (id_lettre, date, type) VALUES ("'.$id_lettre.'", NOW(), "desinscription")');
 				} else {
 					$resultat = false;
 				}
@@ -245,6 +247,7 @@
 	function lettres_valider_redirection($id_abonne, $id_archive, $url) {
 		$url = str_replace('&amp;', '&', $url);
 		$url = str_replace('&amp;', '&', $url);
+		spip_query('INSERT INTO spip_archives_statistiques (id_archive, url) VALUES ("'.$id_archive.'", "'.addslashes($url).'")');
 		return '<script language="javascript" type="text/javascript">window.location.replace("'.$url.'");</script>';
 	}
 	
@@ -470,10 +473,11 @@
 	 * @param string message_html version html de l'email
 	 * @param string message_texte version texte de l'email
 	 * @param int id_lettre
+	 * @param int id_archive
 	 * @return boolean le résultat de l'envoi
 	 * @author Pierre Basson, PHPcodeur
 	 **/
-	function lettres_envoyer_lettre($id_abonne, $objet, $message_html, $message_texte, $id_lettre) {
+	function lettres_envoyer_lettre($id_abonne, $objet, $message_html, $message_texte, $id_lettre, $id_archive) {
 		global $lang;
 		if (empty($id_abonne)) return false;
 

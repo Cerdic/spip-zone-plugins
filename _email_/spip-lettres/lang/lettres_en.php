@@ -205,7 +205,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'inscriptions' => 'Subscriptions',
 'archives' => 'Archives',
 'numero_abonne' => 'SUBSCRIBER\'S NUMBER',
-'abonne_edition' => 'Editi subscriber',
+'abonne_edition' => 'Edit subscriber',
 'code' => 'Code',
 'maj_le' => 'Updated',
 'modifier_abo' => 'Edit subscriber',
@@ -223,7 +223,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'inscriptions' => 'subscriptions',
 
 // Squelettes
-'se_desinscrire' => 'Unsuscribe newsletter',
+'se_desinscrire' => 'Unsubscribe newsletter',
 'titre_changement_format' => 'Confirm change of format',
 'titre_desinscription' => 'Confirm unsubscription(s)',
 'titre_inscription' => 'Confirm subscription(s)',

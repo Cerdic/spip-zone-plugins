@@ -12,6 +12,7 @@ $table_des_tables['abonnes'] = 'abonnes';
 $table_des_tables['archives'] = 'archives';
 $table_des_tables['archives_statistiques'] = 'archives_statistiques';
 $table_des_tables['lettres'] = 'lettres';
+$table_des_tables['lettres_statistiques'] = 'lettres_statistiques';
 
 
 
@@ -60,6 +61,9 @@ $spip_archives = array(
 					"nb_emails_envoyes"		=> "bigint(21) NOT NULL default '0'",
 					"nb_emails_non_envoyes"	=> "bigint(21) NOT NULL default '0'",
 					"nb_emails_echec"		=> "bigint(21) NOT NULL default '0'",
+					"nb_emails_html"		=> "bigint(21) NOT NULL default '0'",
+					"nb_emails_texte"		=> "bigint(21) NOT NULL default '0'",
+					"nb_emails_mixte"		=> "bigint(21) NOT NULL default '0'",
 					"date_debut_envoi"		=> "datetime NOT NULL default '0000-00-00 00:00:00'",
 					"date_fin_envoi"		=> "datetime NOT NULL default '0000-00-00 00:00:00'"
 				);
@@ -73,7 +77,7 @@ $spip_archives_statistiques = array(
 					"hits"			=> "bigint(21) NOT NULL default '0'"
 				);
 $spip_archives_statistiques_key = array(
-					"PRIMARY KEY" => "id_archive"
+					"KEY" => "id_archive"
 				);
 
 $spip_auteurs_lettres = array(
@@ -110,6 +114,15 @@ $spip_lettres_key = array(
 					"PRIMARY KEY" => "id_lettre"
 				);
 
+$spip_lettres_statistiques = array(
+					"id_lettre"		=> "bigint(21) NOT NULL",
+					"date"			=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+					"type"			=> "enum('inscription','desinscription','import') NOT NULL default 'inscription'"
+				);
+$spip_lettres_statistiques_key = array(
+					"KEY" => "id_lettre"
+				);
+
 $spip_mots_lettres = array(
 					"id_mot"		=> "bigint(21) NOT NULL",
 					"id_lettre"		=> "bigint(21) NOT NULL"
@@ -130,6 +143,8 @@ $tables_principales['spip_archives_statistiques'] =
 	array('field' => &$spip_archives_statistiques, 'key' => &$spip_archives_statistiques_key);
 $tables_principales['spip_lettres'] =
 	array('field' => &$spip_lettres, 'key' => &$spip_lettres_key);
+$tables_principales['spip_lettres_statistiques'] =
+	array('field' => &$spip_lettres_statistiques, 'key' => &$spip_lettres_statistiques_key);
 
 
 
@@ -146,23 +161,24 @@ $tables_auxiliaires['spip_mots_lettres'] =
 
 
 
-$tables_jointures['spip_abonnes'][]= 'abonnes_archives';
 $tables_jointures['spip_abonnes'][]= 'archives';
+$tables_jointures['spip_abonnes'][]= 'abonnes_archives';
 $tables_jointures['spip_abonnes'][]= 'abonnes_lettres';
 $tables_jointures['spip_abonnes'][]= 'lettres';
 
-$tables_jointures['spip_archives'][]= 'abonnes_archives';
 $tables_jointures['spip_archives'][]= 'abonnes';
+$tables_jointures['spip_archives'][]= 'abonnes_archives';
 $tables_jointures['spip_archives'][]= 'archives_statistiques';
 $tables_jointures['spip_archives'][]= 'lettres';
 
-$tables_jointures['spip_lettres'][]= 'abonnes_lettres';
 $tables_jointures['spip_lettres'][]= 'abonnes';
+$tables_jointures['spip_lettres'][]= 'abonnes_lettres';
 $tables_jointures['spip_lettres'][]= 'archives';
-$tables_jointures['spip_lettres'][]= 'mots_lettres';
-$tables_jointures['spip_lettres'][]= 'mots';
 $tables_jointures['spip_lettres'][]= 'auteurs_lettres';
 $tables_jointures['spip_lettres'][]= 'auteurs';
+$tables_jointures['spip_lettres'][]= 'lettres_statistiques';
+$tables_jointures['spip_lettres'][]= 'mots_lettres';
+$tables_jointures['spip_lettres'][]= 'mots';
 
 $tables_jointures['spip_mots'][]= 'mots_lettres';
 $tables_jointures['spip_mots'][]= 'lettres';

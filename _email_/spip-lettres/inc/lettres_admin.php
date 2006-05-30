@@ -1222,20 +1222,33 @@
 	 * @author Pierre Basson
 	 **/
 	function lettres_afficher_raccourci_statistiques() {
-		icone_horizontale(_T('lettres:raccourci_statistiques'), generer_url_ecrire("lettres"), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/statistiques.png');
+		icone_horizontale(_T('lettres:raccourci_statistiques'), generer_url_ecrire("lettres_statistiques"), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/statistiques.png');
 	}
 
 
 	/**
 	 * lettres_afficher_raccourci_statistiques_lettre
 	 *
-	 * affiche un raccourci vers les statistiques
+	 * affiche un raccourci vers les statistiques d'une lettre
 	 *
 	 * @param int id_lettre
 	 * @author Pierre Basson
 	 **/
 	function lettres_afficher_raccourci_statistiques_lettre($id_lettre) {
 		icone_horizontale(_T('lettres:raccourci_statistiques'), generer_url_ecrire("lettres_statistiques", "id_lettre=$id_lettre"), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/statistiques.png');
+	}
+
+
+	/**
+	 * lettres_afficher_raccourci_statistiques_archive
+	 *
+	 * affiche un raccourci vers les statistiques d'une archive
+	 *
+	 * @param int id_archive
+	 * @author Pierre Basson
+	 **/
+	function lettres_afficher_raccourci_statistiques_archive($id_archive) {
+		icone_horizontale(_T('lettres:raccourci_statistiques'), generer_url_ecrire("archives_statistiques", "id_archive=$id_archive"), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/statistiques.png');
 	}
 
 

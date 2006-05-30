@@ -37,6 +37,7 @@
 				if ($id_lettre AND lettres_verifier_action_possible($id_lettre, 'inscription', $email)) {
 					$requete_inscription = 'INSERT INTO spip_abonnes_lettres (id_abonne, id_lettre, date_inscription, statut) VALUES ("'.$id_abonne.'", "'.$id_lettre.'", NOW(), "valide")';
 					spip_query($requete_inscription);
+					spip_query('INSERT INTO spip_lettres_statistiques (id_lettre, date, type) VALUES ("'.$id_lettre.'", NOW(), "import")');
 				}
 			} else {			
 				$modification = 'UPDATE spip_abonnes SET email="'.$email.'", format="'.$format.'", maj=NOW()'.($champs_extra ? (", extra = '".addslashes($champs_extra)."'") : '').' WHERE id_abonne="'.$id_abonne.'"';
