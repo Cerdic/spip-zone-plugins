@@ -1,5 +1,6 @@
 <?php
 
+
 	/**
 	 * balise_URL_VALIDATION_INSCRIPTION
 	 *

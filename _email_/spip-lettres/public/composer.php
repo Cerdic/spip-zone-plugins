@@ -119,13 +119,13 @@ function affiche_logos($logos, $lien, $align) {
 	}
 
 	if ($artoff)
-		$mouseover = " onmouseover=\"this.src='$artoff'\" "
+		$artoff = " onmouseover=\"this.src='$artoff'\" "
 			."onmouseout=\"this.src='$arton'\"";
 
 	$milieu = "<img src=\"$arton\" alt=\"\""
 		. ($align ? " align=\"$align\"" : '') 
 		. $taille
-		. $mouseover
+		. $artoff
 		. ' style="border-width: 0px;" class="spip_logos" />';
 
 	return (!$lien ? $milieu :
@@ -512,7 +512,7 @@ function lang_parametres_forum($s) {
 function spip_optim_select ($select = array(), $from = array(), 
 			    $where = array(), $join=array(),
 			    $groupby = '', $orderby = array(), $limit = '',
-			    $sousrequete = '', $cpt = '',
+			    $sousrequete = '', $having = array(),
 			    $table = '', $id = '', $serveur='') {
 
 // retirer les criteres vides:
@@ -525,6 +525,12 @@ function spip_optim_select ($select = array(), $from = array(),
 		if ((!$v) OR ($v==1) OR ($v=='0=0')) {
 			unset($where[$k]);
 			$menage = true;
+		}
+	}
+
+	foreach($having as $k => $v) { 
+		if ((!$v) OR ($v==1) OR ($v=='0=0')) {
+			unset($having[$k]);
 		}
 	}
 
@@ -545,7 +551,7 @@ function spip_optim_select ($select = array(), $from = array(),
 
 	return spip_abstract_select($select, $from, $where,
 		  $groupby, array_filter($orderby), $limit,
-		  $sousrequete, $cpt,
+		  $sousrequete, $having,
 		  $table, $id, $serveur);
 
 }

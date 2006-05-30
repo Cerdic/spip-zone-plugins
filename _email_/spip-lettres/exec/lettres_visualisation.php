@@ -203,7 +203,19 @@
 		debut_gauche();
 
 		lettres_afficher_numero_lettre($id_lettre, true);
-	  	afficher_boite_logo('let', 'id_lettre', $id_lettre, _T('lettres:logo_lettre'), _T('logo_survol'), 'lettres_visualisation');
+
+		global $table_logos;
+
+		$table_logos = array( // cf public/composer.php
+				     'id_article' => 'art', 
+				     'id_auteur' => 'aut', 
+				     'id_breve' => 'breve', 
+				     'id_mot' => 'mot', 
+				     'id_syndic'=> 'site',
+				     'id_rubrique' => 'rub',
+				     'id_lettre' => 'let'
+				     );
+	  	afficher_boite_logo('id_lettre', $id_lettre, _T('lettres:logo_lettre'), _T('logo_survol'), 'lettres_visualisation');
 		lettres_afficher_statistiques_lettre_publiee($titre, $id_lettre);
 
 		debut_raccourcis();
