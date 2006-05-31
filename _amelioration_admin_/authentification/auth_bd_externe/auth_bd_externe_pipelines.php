@@ -1,5 +1,6 @@
 <?
-define('_DIR_PLUGIN_AUTH_BD_EXTERNE',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+define('_DIR_PLUGIN_AUTH_BD_EXTERNE',(_DIR_PLUGINS.end($p)));
 
 	/* public static */
 	function AuthBdExterne_ajouterBoutons($boutons_admin) {

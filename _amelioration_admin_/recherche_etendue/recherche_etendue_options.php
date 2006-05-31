@@ -14,7 +14,8 @@
  * © 2005 - Distribue sous licence GNU/GPL
  *
  */
-define('_DIR_PLUGIN_ADVANCED_SEARCH',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+define('_DIR_PLUGIN_ADVANCED_SEARCH',(_DIR_PLUGINS.end($p)));
 
 if (_request('recherche')&&_DIR_RACINE=="")
 	RechercheEtendue_stats();

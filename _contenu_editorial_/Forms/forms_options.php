@@ -11,7 +11,8 @@
  *
  */
 
-define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end($p)));
 include_spip('base/forms');
 
 // Code a rapatrier dans inc-public et inc_forms

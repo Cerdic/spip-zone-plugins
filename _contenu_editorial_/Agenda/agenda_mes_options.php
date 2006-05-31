@@ -1,5 +1,6 @@
 <?php
-define('_DIR_PLUGIN_AGENDA_EVENEMENTS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+define('_DIR_PLUGIN_AGENDA_EVENEMENTS',(_DIR_PLUGINS.end($p)));
 include_spip('base/agenda_evenements');
 
 function cron_agenda_nettoyer_base($t){

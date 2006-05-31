@@ -20,8 +20,8 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-//define('_DIR_PLUGIN_EXIF',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
+//$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+//define('_DIR_PLUGIN_EXIF',(_DIR_PLUGINS.end($p)));
 
 /***********************************************************************/
 /* function*/

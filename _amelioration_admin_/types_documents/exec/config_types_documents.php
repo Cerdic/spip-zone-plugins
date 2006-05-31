@@ -18,7 +18,8 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-define('_DIR_PLUGIN_TYPES_DOCUMENTS',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__).'/..'))))));
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
+define('_DIR_PLUGIN_TYPES_DOCUMENTS',(_DIR_PLUGINS.end($p)));
 
 function exec_config_types_documents() {
   global $connect_statut, $connect_toutes_rubriques,$connect_id_auteur;

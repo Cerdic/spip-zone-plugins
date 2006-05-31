@@ -10,7 +10,9 @@
  *
  */
 
-define('_DIR_PLUGIN_EN_TRAVAUX',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+define('_DIR_PLUGIN_EN_TRAVAUX',(_DIR_PLUGINS.end($p)));
+
 function EnTravaux_ajouterBoutons($boutons_admin) {
 	// remplacer l'icone si elle est la
 	if ($GLOBALS['connect_statut'] == "0minirezo") {

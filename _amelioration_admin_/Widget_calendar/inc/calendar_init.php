@@ -1,6 +1,7 @@
 <?php
 
-define('_DIR_PLUGIN_WIDGET_CALENDAR',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)."/.."))))));
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
+define('_DIR_PLUGIN_WIDGET_CALENDAR',(_DIR_PLUGINS.end($p)));
 
 function WCalendar_point_entree($suffixe){
 	return "<div id='container$suffixe' style='position:absolute;display:none;z-index:5000;'></div>

@@ -1,5 +1,6 @@
 <?php
-define('_DIR_PLUGIN_DOJO',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+define('_DIR_PLUGIN_DOJO',(_DIR_PLUGINS.end($p)));
 
 function Dojo_header_prive($flux) {
 	$exec = _request('exec');

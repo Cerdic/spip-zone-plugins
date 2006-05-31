@@ -19,7 +19,9 @@
  * @package phpmyvisites_v2
  * 
  */
-define('_DIR_PLUGIN_PHPMV',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__))))))));
+
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
+define('_DIR_PLUGIN_PHPMV',(_DIR_PLUGINS.end($p)));
 
 function verif_install(){
 	// gestion de l'install

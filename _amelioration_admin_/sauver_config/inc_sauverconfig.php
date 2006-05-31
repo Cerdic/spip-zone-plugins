@@ -1,6 +1,7 @@
 <?php
 
-define('_DIR_PLUGIN_SAUVERCONFIG',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+define('_DIR_PLUGIN_SAUVERCONFIG',(_DIR_PLUGINS.end($p)));
 
 // ajout bouton ds interface admin
 function Sauverconfig_ajouterBoutons($boutons_admin) {
