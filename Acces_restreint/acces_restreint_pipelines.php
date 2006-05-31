@@ -1,6 +1,6 @@
 <?php
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_ACCES_RESTREINT',(_DIR_PLUGINS.end()));
+define('_DIR_PLUGIN_ACCES_RESTREINT',(_DIR_PLUGINS.end($p)));
 
 	/* public static */
 	function AccesRestreint_ajouterBoutons($boutons_admin) {
