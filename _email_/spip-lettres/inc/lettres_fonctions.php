@@ -14,7 +14,7 @@
 	 * Ajoute les boutons pour la lettre d'information dans l'espace privé
 	 *
 	 * @param array boutons_admin
-	 * @return array boutons_admin le même tableau avec nos entrées en plus
+	 * @return array boutons_admin le même tableau avec des entrées en plus
 	 * @author Pierre Basson
 	 **/
 	function lettres_ajouter_boutons($boutons_admin) {
@@ -53,7 +53,7 @@
 
 
 	/**
-	 * lettres_modifier_chemin_presentation_js
+	 * lettres_header_prive
 	 *
 	 * Modifie le chemin du javascript presentation.js pour prendre celui du plugin et masquer le menu du plugin
 	 *
@@ -61,7 +61,7 @@
 	 * @return string texte avec le chemin modifié
 	 * @author Pierre Basson
 	 **/
-	function lettres_modifier_chemin_presentation_js($texte) { 
+	function lettres_header_prive($texte) { 
 		$texte	= ereg_replace('img_pack/presentation.js', _DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/presentation.js', $texte);
 		return $texte;
 	}
@@ -94,39 +94,20 @@
 
 		# ici le code pour lancer les envois
 
-#		return (0 - $t); # si pas terminé
+		# return (0 - $t); # si pas terminé
 		return true;
 	}
 
+
 	/**
-	 * lettres_verifier_base
+	 * lettres_exec_init
 	 *
-	 * @return true
+	 * @param flux
+	 * @return flux
 	 * @author Pierre Basson
 	 **/
-	function lettres_verifier_base() {
-		$info_plugin_lettres = plugin_get_infos(_NOM_PLUGIN_LETTRE_INFORMATION);
-		$version_plugin = $info_plugin_lettres['version'];
-		if (!isset($GLOBALS['meta']['spip_lettres_version']) AND !isset($GLOBALS['meta']['fond_formulaire_lettre'])) {
-			creer_base();
-			ecrire_meta('spip_lettres_version', $version_plugin);
-			ecrire_metas();
-		} else {
-			$version_base = $GLOBALS['meta']['spip_lettres_version'];
-			if (!isset($GLOBALS['meta']['spip_lettres_version']) AND isset($GLOBALS['meta']['fond_formulaire_lettre'])) {
-				$version_base = 1.0;
-			}
-			if ($version_base < 1.1) {
-				creer_base();
-				spip_query("ALTER TABLE spip_archives ADD nb_emails_html BIGINT( 21 ) NOT NULL AFTER nb_emails_echec;");
-				spip_query("ALTER TABLE spip_archives ADD nb_emails_texte BIGINT( 21 ) NOT NULL AFTER nb_emails_html;");
-				spip_query("ALTER TABLE spip_archives ADD nb_emails_mixte BIGINT( 21 ) NOT NULL AFTER nb_emails_texte;");
-				spip_query("ALTER TABLE spip_archives_statistiques DROP PRIMARY KEY, ADD INDEX (id_archive);");
-				ecrire_meta('spip_lettres_version', $version_base = 1.1);
-				ecrire_metas();
-			}
-		}
-		return true;
+	function lettres_exec_init($flux) {
+		return $flux;
 	}
 
 
@@ -335,7 +316,11 @@
 	 * @author Pierre Basson
 	 **/
 	function lettres_verifier_existence_lettre($id_lettre) {
-		return true;
+		$resultat = spip_query('SELECT id_lettre FROM spip_lettres WHERE id_lettre="'.$id_lettre.'"');
+		if (@spip_num_rows($resultat) > 0)
+			return true;
+		else
+			return false;
 	}
 	
 	

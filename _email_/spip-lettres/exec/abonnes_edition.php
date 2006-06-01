@@ -29,9 +29,9 @@
 			$email		= _T('lettres:nouvel_abonne');
 			$onfocus	= " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 		}
-	 	
+
 	 	debut_page(_T('lettres:abonnes'), "lettres", "abonnes");
-	 	
+
 	 	debut_gauche();
 
 	 	debut_droite();
@@ -45,7 +45,7 @@
 		else if ($new)
 			icone(_T('icone_retour'), generer_url_ecrire("abonnes"), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/abonnes.png', "rien.gif");
 		else
-			icone(_T('icone_retour'), generer_url_ecrire("abonnes", "id_abonne=$id_abonne"), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/abonnes.png', "rien.gif");
+			icone(_T('icone_retour'), generer_url_ecrire("abonnes_visualisation", "id_abonne=$id_abonne"), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/abonnes.png', "rien.gif");
 
 		echo "</td>";
 		echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";

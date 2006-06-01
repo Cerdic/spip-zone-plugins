@@ -10,17 +10,11 @@
 		<lien>[Documentation->http://trac.rezo.net/trac/spip-zone/wiki/SpipLettres]</lien>
         <pipeline>
                 <nom>ajouter_boutons</nom>
-                <action>ajouter_boutons</action>
-                <inclure>lettres.php</inclure>
         </pipeline>
         <pipeline>
                 <nom>header_prive</nom>
-                <action>modifier_chemin_presentation_js</action>
-                <inclure>lettres.php</inclure>
         </pipeline>
         <pipeline>
                 <nom>taches_generales_cron</nom>
-                <action>taches_generales_cron</action>
-                <inclure>lettres.php</inclure>
         </pipeline>
 </plugin>

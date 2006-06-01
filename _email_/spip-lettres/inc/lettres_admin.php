@@ -7,8 +7,41 @@
 
 
 	/**
+	 * lettres_verifier_base
+	 *
+	 * @return true
+	 * @author Pierre Basson
+	 **/
+	function lettres_verifier_base() {
+		$info_plugin_lettres = plugin_get_infos(_NOM_PLUGIN_LETTRE_INFORMATION);
+		$version_plugin = $info_plugin_lettres['version'];
+		if (!isset($GLOBALS['meta']['spip_lettres_version']) AND !isset($GLOBALS['meta']['fond_formulaire_lettre'])) {
+			creer_base();
+			ecrire_meta('spip_lettres_version', $version_plugin);
+			ecrire_metas();
+		} else {
+			$version_base = $GLOBALS['meta']['spip_lettres_version'];
+			if (!isset($GLOBALS['meta']['spip_lettres_version']) AND isset($GLOBALS['meta']['fond_formulaire_lettre'])) {
+				$version_base = 1.0;
+			}
+			if ($version_base < 1.1) {
+				creer_base();
+				spip_query("ALTER TABLE spip_archives ADD nb_emails_html BIGINT( 21 ) NOT NULL AFTER nb_emails_echec;");
+				spip_query("ALTER TABLE spip_archives ADD nb_emails_texte BIGINT( 21 ) NOT NULL AFTER nb_emails_html;");
+				spip_query("ALTER TABLE spip_archives ADD nb_emails_mixte BIGINT( 21 ) NOT NULL AFTER nb_emails_texte;");
+				spip_query("ALTER TABLE spip_archives_statistiques DROP PRIMARY KEY, ADD INDEX (id_archive);");
+				ecrire_meta('spip_lettres_version', $version_base = 1.1);
+				ecrire_metas();
+			}
+		}
+		return true;
+	}
+
+
+	/**
 	 * lettres_verifier_droits
 	 *
+	 * installe ou met à jour les tables du plugin
 	 * redirige vers l'accueil si l'auteur n'est pas un admin
 	 *
 	 * @author Pierre Basson
@@ -1092,6 +1125,40 @@
 		fin_cadre_enfonce();
 	}
 	
+	
+	/**
+	 * lettres_verifier_existence_abonnes
+	 *
+	 * @param int id_lettre
+	 * @return boolean vide ou non
+	 * @author Pierre Basson
+	 **/
+	function lettres_verifier_existence_abonnes($id_lettre) {
+		$resultat_nb_abonnes = spip_query('SELECT id_abonne FROM spip_abonnes_lettres WHERE id_lettre="'.$id_lettre.'" AND statut="valide"');
+		if (@spip_num_rows($resultat_nb_abonnes) > 0)
+			return true;
+		else
+			return false;
+	}
+
+
+	/**
+	 * lettres_verifier_existence_plusieurs_lettres
+	 *
+	 * retourne vrai si il existe au moins 2 lettres d'information
+	 *
+	 * @return boolean resultat
+	 * @author Pierre Basson
+	 **/
+	function lettres_verifier_existence_plusieurs_lettres() {
+		$resultat_nb_lettres = spip_query('SELECT id_lettre FROM spip_lettres');
+		if (@spip_num_rows($resultat_nb_lettres) > 1)
+			return true;
+		else
+			return false;
+	}
+
+
 	/**
 	 * lettres_afficher_raccourci_creer_lettre
 	 *
@@ -1266,6 +1333,15 @@
 		return $icone;
 	}
 
+
+	/**
+	 * lettres_afficher_raccourci_import_csv
+	 *
+	 * affiche un raccourci vers l'import CSV
+	 *
+	 * @param int id_lettre
+	 * @author Pierre Basson
+	 **/
 	function lettres_afficher_raccourci_import_csv($id_lettre=0) {
 		if ($id_lettre)
 			icone_horizontale(_T('lettres:import_csv'), generer_url_ecrire("abonnes_import", "id_lettre=$id_lettre"), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/import.png', '');
@@ -1273,9 +1349,32 @@
 			icone_horizontale(_T('lettres:import_csv'), generer_url_ecrire("abonnes_import"), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/import.png', '');
 	}
 
+
+	/**
+	 * lettres_afficher_raccourci_export_csv
+	 *
+	 * affiche un raccourci vers l'export CSV
+	 *
+	 * @param int id_lettre
+	 * @author Pierre Basson
+	 **/
 	function lettres_afficher_raccourci_export_csv($id_lettre) {
 		icone_horizontale(_T('lettres:export_csv'), generer_url_ecrire("abonnes_export", "id_lettre=$id_lettre"), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/export.png', '');
 	}
+
+
+	/**
+	 * lettres_afficher_raccourci_transfert
+	 *
+	 * affiche un raccourci vers le transfert d'abonnés
+	 *
+	 * @param int id_lettre
+	 * @author Pierre Basson
+	 **/
+	function lettres_afficher_raccourci_transfert($id_lettre) {
+		icone_horizontale(_T('lettres:transfert'), generer_url_ecrire("abonnes_transfert", "id_lettre=$id_lettre"), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/transfert.png', '');
+	}
+
 
 	/**
 	 * lettres_afficher_raccourci_formulaire_inscription
@@ -1377,6 +1476,7 @@
 	/**
 	 * lettres_afficher_recherche
 	 *
+	 * @param string fond
 	 * @author Pierre Basson
 	 **/
 	function lettres_afficher_recherche($fond) {
@@ -1395,6 +1495,13 @@
 	}
 
 
+	/**
+	 * lettres_afficher_etapes_import
+	 *
+	 * @return int etape
+	 * @return string cadre
+	 * @author Pierre Basson
+	 **/
 	function lettres_afficher_etapes_import($etape=1) {
 		$cadre.= debut_cadre_relief('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/import.png', true, "", _T('lettres:import_csv'));
 		$cadre.= "<div class='verdana1'>";
@@ -1428,6 +1535,13 @@
 	}
 
 
+	/**
+	 * lettres_afficher_etapes_export
+	 *
+	 * @return int etape
+	 * @return string cadre
+	 * @author Pierre Basson
+	 **/
 	function lettres_afficher_etapes_export($etape) {
 		$cadre.= debut_cadre_relief('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/export.png', true, "", _T('lettres:export_csv'));
 		$cadre.= "<div class='verdana1'>";
@@ -1441,6 +1555,38 @@
 			$cadre.= '<li style="font-weight: bold">'._T("lettres:export_etape_2").'</li>';
 		else
 			$cadre.= "<li>"._T("lettres:export_etape_2").'</li>';
+		$cadre.= "</ol>";
+		$cadre.= "<br />";
+		$cadre.= "</div>";
+		// 2 </div> suppélementaires
+		$cadre.= "</div>";
+		$cadre.= "</div>";
+		$cadre.= fin_cadre_relief();
+		$cadre.= '<br />';
+		echo $cadre;
+	}
+	
+	
+	/**
+	 * lettres_afficher_etapes_transfert
+	 *
+	 * @return int etape
+	 * @return string cadre
+	 * @author Pierre Basson
+	 **/
+	function lettres_afficher_etapes_transfert($etape) {
+		$cadre.= debut_cadre_relief('../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/transfert.png', true, "", _T('lettres:transfert'));
+		$cadre.= "<div class='verdana1'>";
+		$cadre.= "<b>"._T('lettres:transfert_etapes')."</b>";
+		$cadre.= "<ol style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
+		if ($etape == 1 )
+			$cadre.= '<li style="font-weight: bold">'._T("lettres:transfert_etape_1").'</li>';
+		else
+			$cadre.= "<li>"._T("lettres:transfert_etape_1").'</li>';
+		if ($etape == 2 )
+			$cadre.= '<li style="font-weight: bold">'._T("lettres:transfert_etape_2").'</li>';
+		else
+			$cadre.= "<li>"._T("lettres:transfert_etape_2").'</li>';
 		$cadre.= "</ol>";
 		$cadre.= "<br />";
 		$cadre.= "</div>";

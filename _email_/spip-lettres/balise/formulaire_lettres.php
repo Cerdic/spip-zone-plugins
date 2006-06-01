@@ -1,4 +1,4 @@
-<?
+<?php
 
 	/**
 	 * balise_FORMULAIRE_LETTRES
