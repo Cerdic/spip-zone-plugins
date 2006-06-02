@@ -11,7 +11,7 @@
  *  Si vous pensez que ce fichier n'est pas assez explicite et/ou que vous *
  *  avez galéré pour enfin faire marcher ce plugin, n'hésitez pas à        *
  *  participer à la rédaction de ce fichier en vous rendant à l'adresse    *
- *  http://zone.spip.org/trac/spip-zone/wiki/LesProjets                    *
+ *  http://zone.spip.org/trac/spip-zone/wiki/LesPlugins                    *
 \***************************************************************************/
 
 
