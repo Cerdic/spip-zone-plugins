@@ -43,12 +43,11 @@
 
 		debut_gauche();
 
-		lettres_afficher_numero_archive($id_archive);
+		lettres_afficher_numero_archive($id_archive, true, false);
 		lettres_afficher_statistiques_archive($titre, $id_archive);
 
 		debut_raccourcis();
 		lettres_afficher_raccourci_retourner_lettre($id_lettre);
-		lettres_afficher_raccourci_statistiques_archive($id_lettre);
 		fin_raccourcis();
 
     	debut_droite();

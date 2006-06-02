@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'recherche' => 'Recherche',
 'resultat_recherche' => 'R&eacute;sultat de la recherche :',
 'nb_inscrits' => 'nombre d\'abonn&eacute;s',
+'nb_inscriptions' => 'nombre d\'inscriptions',
 'nb_lettres_brouillon' => 'en cours de r&eacute;daction',
 'nb_lettres_publiees' => 'publi&eacute;es en ligne',
 'nb_lettres_envoi_en_cours' => '&agrave; envoyer',
@@ -45,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'raccourci_ajouter_abonne' => 'Ajouter un abonn&eacute;',
 'raccourci_envoyer_lettre' => 'Envoyer cette lettre',
 'raccourci_statistiques' => 'Statistiques',
+'raccourci_statistiques_generales' => 'Statistiques g&eacute;n&eacute;rales',
 'raccourci_archives' => 'Acc&eacute;der aux archives',
 'raccourci_creer_nouvelle_lettre' => 'Cr&eacute;er une nouvelle lettre d\'information',
 'raccourci_configurer_plugin' => 'Configuration du plugin',
@@ -157,7 +159,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'tester' => 'Tester',
 'email_test' => 'TEST',
 'logo_lettre' => 'LOGO DE LA LETTRE',
-
+'statistiques' => 'Statistiques',
+'statistiques_inscription' => 'Evolution des inscriptions',
+'statistiques_desinscription' => 'Evolution des d&eacute;sinscriptions',
+'statistiques_archives' => 'Evolution du nombre d\'envois (par archives)',
+'derniere_semaine' => 'Ces 7 derniers jours',
+'derniers_mois' => 'Ces 12 derniers mois',
+'au_fil_des_envois' => 'Au fil des envois',
+'statistiques_par_lettre' => 'Statistiques par lettre',
 
 
 // Formulaires

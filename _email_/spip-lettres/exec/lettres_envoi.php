@@ -39,11 +39,21 @@
 				$requete_nb_emails_echec = 'SELECT id_abonne FROM spip_abonnes_archives WHERE id_archive="'.$id_archive.'" AND statut="echec"';
 				$nb_emails_echec = intval(@spip_num_rows(spip_query($requete_nb_emails_echec)));
 
+				$requete_nb_emails_html = 'SELECT id_abonne FROM spip_abonnes_archives WHERE id_archive="'.$id_archive.'" AND format="html"';
+				$nb_emails_html = intval(@spip_num_rows(spip_query($requete_nb_emails_html)));
+				$requete_nb_emails_texte = 'SELECT id_abonne FROM spip_abonnes_archives WHERE id_archive="'.$id_archive.'" AND format="texte"';
+				$nb_emails_texte = intval(@spip_num_rows(spip_query($requete_nb_emails_texte)));
+				$requete_nb_emails_mixte = 'SELECT id_abonne FROM spip_abonnes_archives WHERE id_archive="'.$id_archive.'" AND format="mixte"';
+				$nb_emails_mixte = intval(@spip_num_rows(spip_query($requete_nb_emails_mixte)));
+
 				$modification_archives = 'UPDATE spip_archives 
 											SET date_fin_envoi=NOW(),
 											 	nb_emails_envoyes="'.$nb_emails_envoyes.'",
 											 	nb_emails_non_envoyes="'.$nb_emails_non_envoyes.'",
-												nb_emails_echec="'.$nb_emails_echec.'" 
+												nb_emails_echec="'.$nb_emails_echec.'",
+											 	nb_emails_html="'.$nb_emails_html.'",
+											 	nb_emails_texte="'.$nb_emails_texte.'",
+												nb_emails_mixte="'.$nb_emails_mixte.'" 
 											WHERE id_archive="'.$id_archive.'" LIMIT 1';
 				spip_query($modification_archives);
 

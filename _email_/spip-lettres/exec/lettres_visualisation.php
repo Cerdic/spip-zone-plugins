@@ -124,9 +124,30 @@
 				$logo_off = cherche_logo($id_lettre, 'let', 'off');
 				if (!empty($logo_off))
 					unlink($logo_off[0]);
+				// suppression documents et vignettes
+				$documents = spip_query('SELECT D.id_document, 
+												D.id_vignette, 
+												D.fichier
+											FROM spip_documents_lettres AS DL 
+											INNER JOIN spip_documents AS D ON D.id_document=DL.id_document 
+											WHERE id_lettre="'.$id_lettre.'"');
+				while ($arr = spip_fetch_array($documents)) {
+					if ($arr['id_vignette'] != 0) {
+						$vignette = spip_query('SELECT fichier FROM spip_documents WHERE id_document="'.$arr['id_vignette'].'"');
+						list($fichier_vignette) = spip_fetch_array($vignette);
+						unlink('../'.$fichier_vignette);
+						spip_query('DELETE FROM spip_documents WHERE id_document="'.$arr['id_vignette'].'"');
+					}
+					unlink('../'.$arr['fichier']);
+					spip_query('DELETE FROM spip_documents WHERE id_document="'.$arr['id_document'].'"');
+				}
 				$url = generer_url_ecrire('lettres');
 				lettres_rediriger_javascript($url);
 			} else if ($statut == 'purger') {
+				$abonnes = spip_query('SELECT id_abonne FROM spip_abonnes_lettres WHERE id_lettre="'.$id_lettre.'" AND statut="valide"');
+				while ($arr = spip_fetch_array($abonnes)) {
+					lettres_ajouter_statistique_suppression($id_lettre);
+				}
 				$suppression_abonnes = 'DELETE FROM spip_abonnes_lettres WHERE id_lettre="'.$id_lettre.'"';
 				spip_query($suppression_abonnes);
 				$requete_archives = 'SELECT id_archive FROM spip_archives WHERE id_lettre="'.$id_lettre.'"';
@@ -214,7 +235,10 @@
 
 		debut_gauche();
 
-		lettres_afficher_numero_lettre($id_lettre, true);
+		if ($statut != 'brouillon') 
+			lettres_afficher_numero_lettre($id_lettre, true, true);
+		else
+			lettres_afficher_numero_lettre($id_lettre, true, false);
 
 		global $table_logos;
 
@@ -232,19 +256,14 @@
 
 		debut_raccourcis();
 		lettres_afficher_raccourci_liste_lettres(_T('lettres:raccourci_retour_liste_lettres'));
-		lettres_afficher_raccourci_creer_lettre();
 		lettres_afficher_raccourci_ajouter_abonne($id_lettre);
 		if (@spip_num_rows(spip_query('SELECT * FROM spip_auteurs_lettres WHERE id_lettre="'.$id_lettre.'"')) > 0 AND $statut != 'brouillon')
 			lettres_afficher_raccourci_tester_envoi($id_lettre);
-		if ($statut != 'brouillon') 
-			lettres_afficher_raccourci_statistiques_lettre($id_lettre);
 		lettres_afficher_raccourci_import_csv($id_lettre);
 		if (lettres_verifier_existence_abonnes($id_lettre))
 			lettres_afficher_raccourci_export_csv($id_lettre);
 		if (lettres_verifier_existence_abonnes($id_lettre) AND lettres_verifier_existence_plusieurs_lettres())
 			lettres_afficher_raccourci_transfert($id_lettre);
-		if ($statut != 'brouillon') 
-			lettres_afficher_raccourci_formulaire_inscription();
 		fin_raccourcis();
 
 

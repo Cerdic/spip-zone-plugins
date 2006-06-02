@@ -37,7 +37,7 @@
 				if ($id_lettre AND lettres_verifier_action_possible($id_lettre, 'inscription', $email)) {
 					$requete_inscription = 'INSERT INTO spip_abonnes_lettres (id_abonne, id_lettre, date_inscription, statut) VALUES ("'.$id_abonne.'", "'.$id_lettre.'", NOW(), "valide")';
 					spip_query($requete_inscription);
-					spip_query('INSERT INTO spip_lettres_statistiques (id_lettre, date, type) VALUES ("'.$id_lettre.'", NOW(), "import")');
+					lettres_ajouter_statistique_import($id_lettre);
 				}
 			} else {			
 				$modification = 'UPDATE spip_abonnes SET email="'.$email.'", format="'.$format.'", maj=NOW()'.($champs_extra ? (", extra = '".addslashes($champs_extra)."'") : '').' WHERE id_abonne="'.$id_abonne.'"';
@@ -52,10 +52,12 @@
 			if ($action == 'poubelle') {
 				$suppression = 'DELETE FROM spip_abonnes WHERE id_abonne="'.$id_abonne.'" LIMIT 1';
 				spip_query($suppression);
-				$suppression = 'DELETE FROM spip_abonnes_lettres WHERE id_abonne="'.$id_abonne.'"';
-				spip_query($suppression);
-				$suppression = 'DELETE FROM spip_abonnes_archives WHERE id_abonne="'.$id_abonne.'"';
-				spip_query($suppression);
+				$abonnements = spip_query('SELECT id_lettre FROM spip_abonnes_lettres WHERE id_abonne="'.$id_abonne.'" AND statut="valide"');
+				while ($arr = spip_fetch_array($abonnements)) {
+					lettres_ajouter_statistique_suppression($arr['id_lettre']);
+				}
+				spip_query('DELETE FROM spip_abonnes_lettres WHERE id_abonne="'.$id_abonne.'"');
+				spip_query('DELETE FROM spip_abonnes_archives WHERE id_abonne="'.$id_abonne.'"');
 				$url = generer_url_ecrire('abonnes');
 				lettres_rediriger_javascript($url);
 			}
@@ -67,6 +69,7 @@
 			$insert = "INSERT INTO `spip_abonnes_lettres` ( `id_abonne` , `id_lettre` , `date_inscription` , `statut` )
 					   VALUES ('$id_abonne', '".$_POST['id_lettre_inscr']."', NOW(), 'valide');";		
 			spip_query($insert);
+			lettres_ajouter_statistique_import(intval($_POST['id_lettre_inscr']));
 			$url_lettre = generer_url_ecrire('abonnes_visualisation', 'id_abonne='.$id_abonne, '&');
 			lettres_rediriger_javascript($url_lettre);		
 		}
@@ -74,10 +77,11 @@
 		// Désinscription à une lettre
 		 if (!empty($_GET['id_desabo'])) {
 	 	
-			$del = "DELETE FROM `spip_abonnes_lettres` WHERE `id_abonne`  = ". (int) $id_abonne . " AND `id_lettre` = " . (int) $_GET['id_desabo'];		
+			$del = "DELETE FROM `spip_abonnes_lettres` WHERE `id_abonne`  = ". (int) $id_abonne . " AND `id_lettre` = " . (int) $_GET['id_desabo'];
 			spip_query($del);
+			lettres_ajouter_statistique_suppression(intval($_GET['id_desabo']));
 			$url_lettre = generer_url_ecrire('abonnes_visualisation', 'id_abonne='.$id_abonne, '&');
-			lettres_rediriger_javascript($url_lettre);		 	
+			lettres_rediriger_javascript($url_lettre);
 		 }
 	
 	

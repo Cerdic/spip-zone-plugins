@@ -30,7 +30,7 @@
 						if (lettres_verifier_action_possible($tableau_id_lettre, 'inscription', $email)) {
 							$id_abonne = lettres_recuperer_id_abonne_depuis_email($email);
 							spip_query('INSERT INTO spip_abonnes_lettres (id_abonne, id_lettre, date_inscription, statut) VALUES ("'.$id_abonne.'", "'.$tableau_id_lettre.'", NOW(), "valide")');
-							spip_query('INSERT INTO spip_lettres_statistiques (id_lettre, date, type) VALUES ("'.$id_lettre.'", NOW(), "import")');
+							lettres_ajouter_statistique_import($id_lettre);
 							$tableau_abonnes_ajoutes[$tableau_id_lettre][$id_abonne] = $email;
 						} else {
 							$id_abonne = lettres_recuperer_id_abonne_depuis_email($email);
@@ -51,7 +51,7 @@
 		
 		debut_raccourcis();	
 		lettres_afficher_raccourci_liste_abonnes(_T('lettres:aller_liste_abonnes'));
-		lettres_afficher_raccourci_liste_lettres(_T('lettres:aller_liste_lettres'));
+		lettres_afficher_raccourci_retourner_lettre($id_lettre);
 		fin_raccourcis();	
 	
 

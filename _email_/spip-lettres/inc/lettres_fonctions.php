@@ -178,7 +178,7 @@
 					$requete_maj = 'UPDATE spip_abonnes_lettres SET statut="valide" WHERE id_abonne="'.$id_abonne.'" AND id_lettre="'.$id_lettre.'" LIMIT 1';
 					if (!spip_query($requete_maj))
 						return false;
-					spip_query('INSERT INTO spip_lettres_statistiques (id_lettre, date, type) VALUES ("'.$id_lettre.'", NOW(), "inscription")');
+					lettres_ajouter_statistique_inscription($id_lettre);
 				}
 			}
 			return true;
@@ -208,7 +208,7 @@
 					$resultat_desinscription = spip_query($requete_desinscription);
 					if (!$resultat_desinscription)
 						$resultat = false;
-					spip_query('INSERT INTO spip_lettres_statistiques (id_lettre, date, type) VALUES ("'.$id_lettre.'", NOW(), "desinscription")');
+					lettres_ajouter_statistique_desinscription($id_lettre);
 				} else {
 					$resultat = false;
 				}
@@ -716,6 +716,50 @@
 		else
 			$format = '';
 		return lire_meta('adresse_site').'/spip.php?page='.lire_meta('fond_formulaire_lettre').'&lettres_action='.$action.'%%LETTRES%%&code=%%CODE%%&email=%%EMAIL%%'.$format;
+	}
+
+
+	/**
+	 * lettres_ajouter_statistique_inscription
+	 *
+	 * @param int id_lettre
+	 * @author Pierre Basson
+	 **/
+	function lettres_ajouter_statistique_inscription($id_lettre) {
+		spip_query('INSERT INTO spip_lettres_statistiques (id_lettre, date, type) VALUES ("'.$id_lettre.'", NOW(), "inscription")');
+	}
+
+
+	/**
+	 * lettres_ajouter_statistique_desinscription
+	 *
+	 * @param int id_lettre
+	 * @author Pierre Basson
+	 **/
+	function lettres_ajouter_statistique_desinscription($id_lettre) {
+		spip_query('INSERT INTO spip_lettres_statistiques (id_lettre, date, type) VALUES ("'.$id_lettre.'", NOW(), "desinscription")');
+	}
+
+
+	/**
+	 * lettres_ajouter_statistique_import
+	 *
+	 * @param int id_lettre
+	 * @author Pierre Basson
+	 **/
+	function lettres_ajouter_statistique_import($id_lettre) {
+		spip_query('INSERT INTO spip_lettres_statistiques (id_lettre, date, type) VALUES ("'.$id_lettre.'", NOW(), "import")');
+	}
+
+
+	/**
+	 * lettres_ajouter_statistique_suppression
+	 *
+	 * @param int id_lettre
+	 * @author Pierre Basson
+	 **/
+	function lettres_ajouter_statistique_suppression($id_lettre) {
+		spip_query('INSERT INTO spip_lettres_statistiques (id_lettre, date, type) VALUES ("'.$id_lettre.'", NOW(), "suppression")');
 	}
 
 

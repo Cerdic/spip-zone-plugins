@@ -30,7 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lettres' => 'Newsletters',
 'recherche' => 'Search',
 'resultat_recherche' => 'Results of your search :',
-'nb_inscrits' => 'Number of subscribers',
+'nb_inscrits' => 'number of subscribers',
+'nb_inscriptions' => 'number of subscriptions',
 'nb_lettres_brouillon' => 'draft',
 'nb_lettres_publiees' => 'online',
 'nb_lettres_envoi_en_cours' => 'delivery pending',
@@ -46,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'raccourci_ajouter_abonne' => 'Add subscriber',
 'raccourci_envoyer_lettre' => 'Deliver newsletter',
 'raccourci_statistiques' => 'Statistics',
+'raccourci_statistiques_generales' => 'Overall statistics',
 'raccourci_archives' => 'Go to archives',
 'raccourci_creer_nouvelle_lettre' => 'New newsletter',
 'raccourci_configurer_plugin' => 'Plugin\'s configuration',
@@ -158,6 +160,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'tester' => 'Test',
 'email_test' => 'TEST',
 'logo_lettre' => 'NEWSLETTER\'S LOGO',
+'statistiques' => 'Statistics',
+'statistiques_inscription' => 'Evolution of subscriptions',
+'statistiques_desinscription' => 'Evolution of unsubscriptions',
+'statistiques_archives' => 'Evolution of number of messages sent (by archives)',
+'derniere_semaine' => 'Last 7 days',
+'derniers_mois' => 'Last 12 months',
+'au_fil_des_envois' => 'By archives',
+'statistiques_par_lettre' => 'Statistics by newsletter',
 
 
 

@@ -3,9 +3,9 @@ var init_gauche = true;
 function changestyle(id_couche, element, style) {
 
 	if (admin) {
-		hide_obj("bandeaulettres");
 		hide_obj("bandeauaccueil");
 		hide_obj("bandeaunaviguer");
+		hide_obj("bandeaulettres");
 		hide_obj("bandeauforum");
 		hide_obj("bandeauauteurs");
 		if (stat) {  hide_obj("bandeaustatistiques_visites"); } 
@@ -268,4 +268,16 @@ function disable_other_forms(me) {
 			}
 		}
 	}
+}
+
+// Pour ne pas fermer le formulaire de recherche pendant qu'on l'edite	
+
+function recherche_desesperement()
+{
+	if (findObj('bandeaurecherche') && findObj('bandeaurecherche').style.visibility == 'visible') 
+		{ ouvrir_recherche = true; } 
+	else { ouvrir_recherche = false; } 
+	changestyle('bandeauvide', 'visibility', 'hidden'); 
+	if (ouvrir_recherche == true) 
+		{ changestyle('bandeaurecherche','visibility','visible'); }
 }

@@ -7,17 +7,20 @@
 
 
 	/**
-	 * lettres_verifier_base
+	 * lettres_installer_base
 	 *
 	 * @return true
 	 * @author Pierre Basson
 	 **/
-	function lettres_verifier_base() {
+	function lettres_installer_base() {
 		$info_plugin_lettres = plugin_get_infos(_NOM_PLUGIN_LETTRE_INFORMATION);
 		$version_plugin = $info_plugin_lettres['version'];
 		if (!isset($GLOBALS['meta']['spip_lettres_version']) AND !isset($GLOBALS['meta']['fond_formulaire_lettre'])) {
 			creer_base();
 			ecrire_meta('spip_lettres_version', $version_plugin);
+			ecrire_meta('fond_formulaire_lettre', 'inscription');
+			ecrire_meta('fond_message_html', 'lettre_information_html');
+			ecrire_meta('fond_message_texte', 'lettre_information_texte');
 			ecrire_metas();
 		} else {
 			$version_base = $GLOBALS['meta']['spip_lettres_version'];
@@ -31,6 +34,12 @@
 				spip_query("ALTER TABLE spip_archives ADD nb_emails_mixte BIGINT( 21 ) NOT NULL AFTER nb_emails_texte;");
 				spip_query("ALTER TABLE spip_archives_statistiques DROP PRIMARY KEY, ADD INDEX (id_archive);");
 				ecrire_meta('spip_lettres_version', $version_base = 1.1);
+				ecrire_metas();
+			}
+			if ($version_base < 1.2) {
+				creer_base();
+				spip_query("ALTER TABLE spip_lettres_statistiques CHANGE type type ENUM('inscription', 'desinscription', 'import', 'suppression') NOT NULL DEFAULT 'inscription';");
+				ecrire_meta('spip_lettres_version', $version_base = 1.2);
 				ecrire_metas();
 			}
 		}
@@ -47,7 +56,7 @@
 	 * @author Pierre Basson
 	 **/
 	function lettres_verifier_droits() {
-		lettres_verifier_base();
+		lettres_installer_base();
 		if ($GLOBALS['connect_statut'] != "0minirezo")
 			lettres_rediriger_javascript(generer_url_ecrire('accueil')); 
 	}
@@ -600,6 +609,11 @@
 								GROUP BY A.id_abonne';
 		$nb_inscrits = @spip_num_rows(spip_query($requete_nb_inscrits));
 		
+		$requete_nb_inscriptions = 'SELECT id_abonne 
+								FROM spip_abonnes_lettres
+								WHERE statut="valide"';
+		$nb_inscriptions = @spip_num_rows(spip_query($requete_nb_inscriptions));
+		
 		$requete_nb_lettres_brouillon = 'SELECT L.id_lettre
 										FROM spip_lettres AS L
 										WHERE L.statut="brouillon"';
@@ -627,6 +641,7 @@
 			$cadre.= afficher_plus(generer_url_ecrire("abonnes",""))."<b>"._T('lettres:abonnes')."</b>";
 			$cadre.= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
 			$cadre.= "<li>"._T("lettres:nb_inscrits")."&nbsp;: <b>".$nb_inscrits.'</b></li>';
+			$cadre.= "<li>"._T("lettres:nb_inscriptions")."&nbsp;: <b>".$nb_inscriptions.'</b></li>';
 			$cadre.= "</ul>";
 		}
 		if ($nb_lettres_brouillon OR $nb_lettres_publiees OR $nb_lettres_envoi_en_cours) {
@@ -809,16 +824,22 @@
 	 * lettres_afficher_numero_archive
 	 *
 	 * @param int id_archive
+	 * @param boolean prévisualisation
+	 * @param boolean statistiques
 	 * @author Pierre Basson
 	 **/
-	function lettres_afficher_numero_archive($id_archive) {
+	function lettres_afficher_numero_archive($id_archive, $previsu=false, $statistiques=false) {
 		echo "<br />";
 		debut_boite_info();
 		echo "<div align='center'>\n";
 		echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('lettres:numero_archive')."</b></font>\n";
 		echo "<br><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_archive</b></font>\n";
-		icone_horizontale(_T('lettres:voir_message_html'), generer_url_ecrire('archives_message', "id_archive=$id_archive&format=html", '&'), '', "racine-24.gif");
-		icone_horizontale(_T('lettres:voir_message_texte'), generer_url_ecrire('archives_message', "id_archive=$id_archive&format=texte", '&'), '', "racine-24.gif");
+		if ($previsu) {
+			icone_horizontale(_T('lettres:voir_message_html'), generer_url_ecrire('archives_message', "id_archive=$id_archive&format=html", '&'), '', "racine-24.gif");
+			icone_horizontale(_T('lettres:voir_message_texte'), generer_url_ecrire('archives_message', "id_archive=$id_archive&format=texte", '&'), '', "racine-24.gif");
+		}
+		if ($statistiques)
+			lettres_afficher_raccourci_statistiques_archive($id_lettre);
 		echo "</div>\n";
 		fin_boite_info();
 	}
@@ -1125,7 +1146,87 @@
 		fin_cadre_enfonce();
 	}
 	
-	
+
+	/**
+	 * lettres_afficher_histogramme
+	 *
+	 * @param string titre de l'histogramme
+	 * @param array tableau des donnees
+	 * @param boolean affichage_legende
+	 * @author Pierre Basson
+	 **/
+	function lettres_afficher_histogramme($titre, $donnees, $affichage_legende=false) {
+		global $couleur_claire;
+		$abcisses = sizeof($donnees);
+		$largeur_baton = round(360 / $abcisses);
+		$largeur_graphique = $abcisses * $largeur_baton;
+		$max = max($donnees);
+		$max = max(8, $max);
+		$p = pow(10, strlen($max) - 2);
+		$m = $max / $p;
+		foreach (array(80,72,64,56,48,40,32,24,16,8) as $l)
+			if ($m<=$l) $maxgraph = $l*$p;
+		$rapport = 200 / $maxgraph;
+		echo "<table cellpadding=0 cellspacing=0 border='0'>";
+		echo "<tr>";
+		echo '	<td width="55">&nbsp;</td>';
+		echo '	<td colspan="'.$abcisses.'" style="height: 201px; width: '.$largeur_graphique.'px; vertical-align: bottom; background: #fff url('._DIR_IMG_PACK.'fond-stats.gif) top repeat-x;">';
+		foreach ($donnees as $legende => $valeur) {
+			$hauteur = $rapport * $valeur;
+			echo http_img_pack('rien.gif', $legende.' - '.$valeur, 'width="'.$largeur_baton.'" height="'.$hauteur.'" style="background-color: '.$couleur_claire.';" title="'.$legende.' - '.$valeur.'"');
+		}
+		echo "	</td>";
+		echo "<td valign='top'><div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
+		echo "<table cellpadding=0 cellspacing=0 border=0>";
+		echo "<tr><td height=15 valign='top'>";		
+		echo "<font face='arial,helvetica,sans-serif' size=1><b>".round($maxgraph)."</b></font>";
+		echo "</td></tr>";
+		echo "<tr><td height=25 valign='middle'>";		
+		echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(7*($maxgraph/8))."</font>";
+		echo "</td></tr>";
+		echo "<tr><td height=25 valign='middle'>";		
+		echo "<font face='arial,helvetica,sans-serif' size=1>".round(3*($maxgraph/4))."</font>";
+		echo "</td></tr>";
+		echo "<tr><td height=25 valign='middle'>";		
+		echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(5*($maxgraph/8))."</font>";
+		echo "</td></tr>";
+		echo "<tr><td height=25 valign='middle'>";		
+		echo "<font face='arial,helvetica,sans-serif' size=1><b>".round($maxgraph/2)."</b></font>";
+		echo "</td></tr>";
+		echo "<tr><td height=25 valign='middle'>";		
+		echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(3*($maxgraph/8))."</font>";
+		echo "</td></tr>";
+		echo "<tr><td height=25 valign='middle'>";		
+		echo "<font face='arial,helvetica,sans-serif' size=1>".round($maxgraph/4)."</font>";
+		echo "</td></tr>";
+		echo "<tr><td height=25 valign='middle'>";		
+		echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(1*($maxgraph/8))."</font>";
+		echo "</td></tr>";
+		echo "<tr><td height=10 valign='bottom'>";		
+		echo "<font face='arial,helvetica,sans-serif' size=1><b>0</b></font>";
+		echo "</td>";
+		echo "</tr></table>";
+		echo "</div></td>";
+		echo '<td>&nbsp;</td>';
+		echo "</tr>";
+		if ($affichage_legende) {
+			echo "<tr>";
+				echo '<td>&nbsp;</td>';
+			foreach ($donnees as $legende => $valeur) {
+				echo '<td style="text-align: center; width: '.$largeur_baton.'px; padding: 0;">'.strtoupper(substr($legende, 0, 1)).'</td>';
+			}
+			echo '<td>&nbsp;</td>';
+			echo "</tr>";
+		}
+		echo "<tr>";
+		echo '<td>&nbsp;</td>';
+		echo '<td style="text-align: center; padding-bottom: 20px;" colspan="'.($abcisses + 1).'">'.$titre.'</td>';
+		echo '<td>&nbsp;</td>';
+		echo "</tr>";
+		echo "</table>";
+	}
+
+
 	/**
 	 * lettres_verifier_existence_abonnes
 	 *
@@ -1290,7 +1391,7 @@
 	 * @author Pierre Basson
 	 **/
 	function lettres_afficher_raccourci_statistiques() {
-		icone_horizontale(_T('lettres:raccourci_statistiques'), generer_url_ecrire("lettres_statistiques"), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/statistiques.png');
+		icone_horizontale(_T('lettres:raccourci_statistiques_generales'), generer_url_ecrire("lettres_statistiques"), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/statistiques.png');
 	}
 
 

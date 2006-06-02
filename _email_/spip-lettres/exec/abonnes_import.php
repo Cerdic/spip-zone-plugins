@@ -55,7 +55,7 @@
 						$id_abonne = lettres_recuperer_id_abonne_depuis_email($email);
 						spip_query('INSERT INTO spip_abonnes_lettres (id_abonne, id_lettre, date_inscription, statut) VALUES ("'.$id_abonne.'", "'.$id_lettre.'", NOW(), "valide")');
 						$tableau_abonnes_ajoutes[$id_lettre][$id_abonne] = $email;
-						spip_query('INSERT INTO spip_lettres_statistiques (id_lettre, date, type) VALUES ("'.$id_lettre.'", NOW(), "import")');
+						lettres_ajouter_statistique_import($id_lettre);
 					} else {
 						$id_abonne = lettres_recuperer_id_abonne_depuis_email($email);
 						if (!in_array($email, $tableau_abonnes_non_ajoutes[$id_lettre]))

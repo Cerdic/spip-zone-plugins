@@ -19,6 +19,7 @@
 
 		debut_gauche();
 		
+		lettres_afficher_statistiques_globales();
 		lettres_afficher_recherche('abonnes');
 		
 		debut_raccourcis();
@@ -28,6 +29,8 @@
 		lettres_afficher_raccourci_ajouter_abonne();
 		lettres_afficher_raccourci_import_csv();
 		lettres_afficher_raccourci_formulaire_inscription();
+		lettres_afficher_raccourci_statistiques();
+		lettres_afficher_raccourci_configurer_plugin();
 		fin_raccourcis();
 
 
