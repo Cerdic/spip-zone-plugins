@@ -54,6 +54,7 @@ function coloration_code_echappe($texte) {
 	foreach ($matches as $regs) {
 	  $code = echappe_retour($regs[2]);
 	  
+	  if(strpos($code, "\n")!==false) {
 	  // Gerer le fichier contenant le code au format texte
 		$nom_fichier = md5($code);
 		$dossier = sous_repertoire(_DIR_IMG, 'cache-code');
@@ -64,12 +65,14 @@ function coloration_code_echappe($texte) {
 			fwrite($handle, $code);
 			fclose($handle);
 		}
-	  
+	  }
 	  
 	  $rempl = coloration_code_color($code,$regs[1]);
-	  $rempl .= "<div class='".$regs[1]."_download' style='text-align: $spip_lang_right;'><a href='$fichier' style='font-family: verdana, arial, sans; font-weight: bold; font-style: normal;'>".
+	 if(strpos($code, "\n")!==false) {
+	 	$rempl .= "<div class='".$regs[1]."_download' style='text-align: $spip_lang_right;'><a href='$fichier' style='font-family: verdana, arial, sans; font-weight: bold; font-style: normal;'>".
 	  		propre("<multi>Download[fr]T&eacute;l&eacute;charger</multi>").
 	  		"</a></div>";
+	  }
 	  $texte = str_replace($regs[0],echappe_html("<html>$rempl</html>"),$texte);
 	}
   return $texte;
