@@ -13,5 +13,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_alignerdroite' => '[/Aligne &agrave; droite/] le paragraphe',
 'barre_encadrer' => '[(Encadrer)] le paragraphe',
 
+'barre_caracteres' => 'Caract&egrave;res sp&eacute;ciaux',
+'barre_adresse' => 'Adresse',
+'barre_lien_externe' => 'Lien externe',
+'barre_bulle' => 'Bulle d\'aide',
+'barre_gestion_colonne' => 'Nb colonnes',
+'barre_gestion_ligne' => 'Nb lignes',
+'barre_gestion_entete' => 'Entete',
+'barre_gestion_taille' => 'Taille fixe',
+'barre_gestion_cr_chercher' => 'Chercher',
+'barre_gestion_cr_remplacer' => 'Remplacer',
+'barre_gestion_cr_casse' => 'Respecter la casse',
+'barre_gestion_cr_tout' => 'Tout remplacer',
+'barre_gestion_cr_entier' => 'Mot entier',
 );
 ?>

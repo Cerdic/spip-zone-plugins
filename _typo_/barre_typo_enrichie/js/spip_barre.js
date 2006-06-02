@@ -71,6 +71,41 @@ function barre_demande(debut,milieu,fin,affich,champ) {
 	}
 }
 
+function barre_demande2(debut,milieu,fin,affich,bulle,champ) {
+	var inserer = affich;
+	var monhelp ="";
+	if (bulle != "") {monhelp = "|"+bulle; }
+
+	if (inserer != null) {
+		if (inserer == "") {inserer = "xxx"; }
+
+		barre_raccourci(debut, monhelp+milieu+inserer+fin, champ);
+	}
+}
+
+function barre_ancre(debut,milieu,fin,affich,champ) {
+	var inserer = prompt(affich);
+	
+	if (inserer != null) {
+		if (inserer == "") {inserer = "xxx"; }
+
+		barre_raccourci(debut+inserer+milieu+fin, '&nbsp;&nbsp;&nbsp;[ [haut de page->#hdp] ]', champ);
+	}
+}
+
+function barre_ancre2(debut,milieu,fin,affich,rhdp,champ) {
+	var inserer = affich;
+	var renvoi = '';
+	if (rhdp == true) {
+		renvoi='&nbsp;&nbsp;&nbsp;[ [haut de page->#hdp] ]';
+	}
+	if (inserer != null) {
+		if (inserer == "") {inserer = "xxx"; }
+		barre_raccourci(debut+inserer+milieu+fin, renvoi, champ);
+	}
+}
+
+
 function barre_inserer(text,champ) {
 	var txtarea = champ;
 	
@@ -86,36 +121,53 @@ function barre_inserer(text,champ) {
 	}
 }
 
+function barre_searchreplace(chercher,remplacer, rec_tout, rec_case, rec_entier, champ) {
+	
+	var condition = "";
+// les parametres (casse + global)
+	if (rec_tout == true) {
+ condition = condition + "g";
+	} 
+	if (rec_case == false) {
+ condition = condition + "i";
+	} 
+	if (rec_entier == true) {
+ chercher = chercher + " ";
+  remplacer = remplacer + " ";
+	} 
+	var re = new RegExp(chercher, condition);
+
+  champ.value = champ.value.replace(re, remplacer);
+/*   mozWrap(txtarea, debut, fin); */
+}
 
 // D'apres Nicolas Hoizey 
-function barre_tableau(toolbarfield)
+function barre_tableau(toolbarfield,cols,rows,tete,largeur)
 {
 	var txtarea = toolbarfield;
 	txtarea.focus();
-	var cols = prompt("Nombre de colonnes du tableau :", "");
-	var rows = prompt("Nombre de lignes du tableau :", "");
-	if (cols != null && rows != null) {
+//	var cols = 2;
+//	var rows = 2;
+//	var tete = 1;
+
+if (cols != null && rows != null) {
 		var tbl = '';
 		var ligne = '|';
-		var caption = '|| titre | resum\351 ||';
 		var entete = '|';
+		var marqueur =' |';
+		
+		if(largeur=true) {
+			marqueur = ',50 |';
+		}
 		for(i = 0; i < cols; i++) {
 			ligne = ligne + ' valeur |';
-			entete = entete + ' {{entete}} |';
+			entete = entete + ' {{entete}}' + marqueur;
 		}
 		for (i = 0; i < rows; i++) {
 			tbl = tbl + ligne + '\n';
 		}
-		if (confirm('Voulez vous ajouter une ligne d\'en-t\352te ?')) {
-			if (confirm('Voulez vous ajouter un titre et un summary au tableau ?')) {
-			tbl = caption + '\n' + entete + '\n' + tbl;
-			} else{
+		if (tete==true) {
 			tbl = entete + '\n' + tbl;
-			}
-		} else {
-			if (confirm('Voulez vous ajouter un titre et un resum\351 au tableau ?')) {
-			tbl = caption + '\n' + tbl;
-			}
 		}
 		if ((clientVer >= 4) && is_ie && is_win) {
 			var str = document.selection.createRange().text;
