@@ -121,12 +121,8 @@ $language_data = array (
 			GESHI_AFTER => ''
 			),
 		),
-	'STRICT_MODE_APPLIES' => GESHI_ALWAYS,
-	'SCRIPT_DELIMITERS' => array(
-		3 => array(
-			'<BOUCLE_' => '</BOUCLE[a-z0-9_]*>'
-			)
-	),
+	'STRICT_MODE_APPLIES' => GESHI_NEVER,
+	'SCRIPT_DELIMITERS' => array(	),
 	'HIGHLIGHT_STRICT_BLOCK' => array(
 		0 => true,
 		1 => true,
