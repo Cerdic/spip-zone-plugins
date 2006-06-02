@@ -45,6 +45,7 @@ function coloration_code_color($code, $language='php') {
 }
 
 function coloration_code_echappe($texte) {
+	global $spip_lang_right;
   $rempl ='';
 
   if (preg_match_all(
@@ -52,7 +53,23 @@ function coloration_code_echappe($texte) {
 		 $texte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
 	  $code = echappe_retour($regs[2]);
+	  
+	  // Gerer le fichier contenant le code au format texte
+		$nom_fichier = md5($code);
+		$dossier = sous_repertoire(_DIR_IMG, 'cache-code');
+		$fichier = "$dossier$nom_fichier.txt";
+
+		if (!file_exists($fichier)) {
+			$handle = fopen($fichier, 'w');
+			fwrite($handle, $code);
+			fclose($handle);
+		}
+	  
+	  
 	  $rempl = coloration_code_color($code,$regs[1]);
+	  $rempl .= "<div class='".$regs[1]."_download' style='text-align: $spip_lang_right;'><a href='$fichier' style='font-family: verdana, arial, sans; font-weight: bold; font-style: normal;'>".
+	  		propre("<multi>Download[fr]T&eacute;l&eacute;charger</multi>").
+	  		"</a></div>";
 	  $texte = str_replace($regs[0],echappe_html("<html>$rempl</html>"),$texte);
 	}
   return $texte;
