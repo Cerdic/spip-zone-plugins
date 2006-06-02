@@ -1,6 +1,6 @@
 <?php
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 define('_DIR_PLUGIN_SKELEDITOR',(_DIR_PLUGINS.end($p)));
 
 // ajout bouton ds interface admin
