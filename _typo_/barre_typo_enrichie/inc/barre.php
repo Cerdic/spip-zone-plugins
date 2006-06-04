@@ -58,15 +58,16 @@ $tableau_formulaire = '<table class="spip_barre" style="width: 100%; padding: 1p
 <tr><td>
 '._T('bartypenr:barre_gestion_colonne').': <input type="text" name="barre_nbcolones" style="width: 30px;" value="2" size="2" maxlength="2"   /></td><td>
 '._T('bartypenr:barre_gestion_ligne').': <input type="text" name="barre_nbrangs" style="width: 30px;" value="2" size="2" maxlength="2" /></td><td>
-<input type="checkbox" name="barre_doentete" value="yes" onclick="if
-(!(barre_doentete.checked) && barre_docolsize.checked){ barre_docolsize.checked = false;  }" /> '._T('bartypenr:barre_gestion_entete')
+<input type="checkbox" name="barre_doentete" value="-1" checked="checked" /> '._T('bartypenr:barre_gestion_entete')
+.'</td><td>
+<input type="checkbox" name="barre_docaption" value="-1" checked="checked" /> '._T('bartypenr:barre_gestion_caption')
 .'</td><td>
   <input type="button" value="OK" class="fondo" onclick="javascript:
     barre_nbcolones.value = Math.abs(barre_nbcolones.value); barre_nbrangs.value
     = Math.abs(barre_nbrangs.value);
     if (!(barre_nbcolones.value == 0 || barre_nbrangs.value == 0)) {
     barre_tableau('.$champ.', barre_nbcolones.value, barre_nbrangs.value,
-    barre_doentete.checked, barre_docolsize.checked); } "> 
+    barre_doentete.checked, barre_docaption.checked); } "> 
 </td></tr></table>
 ';  
   return produceWharf('tableau_gestion','',$tableau_formulaire); 
@@ -126,16 +127,16 @@ $tableau_formulaire = '
 <table class="spip_barre" style="width: 100%; padding: 1px!important; border-top: 0px;">
   <tr>
     <td width="10%" align="center"><strong>Gestion des ancres</strong></td>
-    <td width="45%"><strong>Transformer en ancre</strong><input type="checkbox" name="r_hdp" value="yes" />Avec renvoi hdp<br/>
-    <i>Nom de l\'ancre</i><br/>
-      <input type="text" name="ancre_nom">
+    <td width="45%"><strong>Transformer en ancre</strong><br/>
+    <lable for="ancre_nom"><i>Nom de l\'ancre</i></label> <br/>
+      <input type="text" name="ancre_nom" id="ancre_nom">
 	  
-	<input type="button" value="OK" class="fondo" onclick="javascript:barre_ancre2(\'[#\', \'<-\', \']\', ancre_nom.value, r_hdp.checked, '.$champ.');" > 
+	<input type="button" value="OK" class="fondo" onclick="javascript:barre_ancre(\'[#\', \'<-\', \']\', ancre_nom.value, '.$champ.');" > 
     </td>
 	<td width="45%"><strong>Pointer vers une ancre</strong><br/>
-    <i>Ancre cible</i><br/>
-      <input type="text" name="ancre_cible">
-	<input type="button" value="OK" class="fondo" onclick="javascript:barre_demande2(\'[\', \'->#\', \']\', ancre_cible.value, '.$champ.');" > 
+    <lable for="ancre_cible"><i>Ancre cible</i></label> <input type="text" name="ancre_cible" id="ancre_cible"><br/>
+	<lable for="ancre_bulle"><i>Bulle d\'aide ancre</i></label> <input type="text" name="ancre_bulle" id="ancre_bulle">
+	<input type="button" value="OK" class="fondo" onclick="javascript:barre_demande(\'[\', \'->#\', \']\', ancre_cible.value, ancre_bulle.value, '.$champ.');" > 
 </td>
   </tr> 
 </table>';

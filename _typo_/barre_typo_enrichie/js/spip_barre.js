@@ -61,17 +61,7 @@ function barre_raccourci(debut,fin,champ) {
 	}
 }
 
-function barre_demande(debut,milieu,fin,affich,champ) {
-	var inserer = prompt(affich);
-
-	if (inserer != null) {
-		if (inserer == "") {inserer = "xxx"; }
-
-		barre_raccourci(debut, milieu+inserer+fin, champ);
-	}
-}
-
-function barre_demande2(debut,milieu,fin,affich,bulle,champ) {
+function barre_demande(debut,milieu,fin,affich,bulle,champ) {
 	var inserer = affich;
 	var monhelp ="";
 	if (bulle != "") {monhelp = "|"+bulle; }
@@ -84,27 +74,13 @@ function barre_demande2(debut,milieu,fin,affich,bulle,champ) {
 }
 
 function barre_ancre(debut,milieu,fin,affich,champ) {
-	var inserer = prompt(affich);
-	
-	if (inserer != null) {
-		if (inserer == "") {inserer = "xxx"; }
-
-		barre_raccourci(debut+inserer+milieu+fin, '&nbsp;&nbsp;&nbsp;[ [haut de page->#hdp] ]', champ);
-	}
-}
-
-function barre_ancre2(debut,milieu,fin,affich,rhdp,champ) {
 	var inserer = affich;
 	var renvoi = '';
-	if (rhdp == true) {
-		renvoi='&nbsp;&nbsp;&nbsp;[ [haut de page->#hdp] ]';
-	}
 	if (inserer != null) {
 		if (inserer == "") {inserer = "xxx"; }
 		barre_raccourci(debut+inserer+milieu+fin, renvoi, champ);
 	}
 }
-
 
 function barre_inserer(text,champ) {
 	var txtarea = champ;
@@ -142,7 +118,7 @@ function barre_searchreplace(chercher,remplacer, rec_tout, rec_case, rec_entier,
 }
 
 // D'apres Nicolas Hoizey 
-function barre_tableau(toolbarfield,cols,rows,tete,largeur)
+function barre_tableau(toolbarfield,cols,rows,tete,caption)
 {
 	var txtarea = toolbarfield;
 	txtarea.focus();
@@ -153,12 +129,10 @@ function barre_tableau(toolbarfield,cols,rows,tete,largeur)
 if (cols != null && rows != null) {
 		var tbl = '';
 		var ligne = '|';
+		var captiontxt = '|| titre | resum\351 ||';
 		var entete = '|';
 		var marqueur =' |';
 		
-		if(largeur=true) {
-			marqueur = ',50 |';
-		}
 		for(i = 0; i < cols; i++) {
 			ligne = ligne + ' valeur |';
 			entete = entete + ' {{entete}}' + marqueur;
@@ -168,6 +142,9 @@ if (cols != null && rows != null) {
 		}
 		if (tete==true) {
 			tbl = entete + '\n' + tbl;
+		}
+		if (caption==true) {
+			tbl = captiontxt + '\n' + tbl;
 		}
 		if ((clientVer >= 4) && is_ie && is_win) {
 			var str = document.selection.createRange().text;
