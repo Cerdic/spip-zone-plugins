@@ -1,5 +1,18 @@
 <?php
 
+
+	/**
+	 * SPIP-Lettres : plugin de gestion de lettres d'information
+	 *
+	 * Copyright (c) 2006
+	 * Agence Atypik Créations
+	 *  
+	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	 * Pour plus de details voir le fichier COPYING.txt.
+	 *  
+	 **/
+
+
 	include_spip('inc/lettres_fonctions');
 	include_spip('inc/lettres_admin');
 	include_spip('inc/presentation');
@@ -40,7 +53,7 @@
 					lettres_ajouter_statistique_import($id_lettre);
 				}
 			} else {			
-				$modification = 'UPDATE spip_abonnes SET email="'.$email.'", format="'.$format.'", maj=NOW()'.($champs_extra ? (", extra = '".addslashes($champs_extra)."'") : '').' WHERE id_abonne="'.$id_abonne.'"';
+				$modification = 'UPDATE spip_abonnes SET email="'.$email.'", format="'.$format.'", maj=NOW()'.($champs_extra ? (", extra='".addslashes($champs_extra)."'") : '').' WHERE id_abonne="'.$id_abonne.'"';
 				spip_query($modification);
 			}
 			$url_abonne = generer_url_ecrire('abonnes_visualisation', 'id_abonne='.$id_abonne, '&');
@@ -148,7 +161,7 @@
 		echo "</div>";
 		if ($champs_extra AND $extra) {
 			echo "<br />\n";
-			extra_affichage($extra, "articles");
+			extra_affichage($extra, "abonnes");
 		}
 		echo "</td></tr>\n";
 		echo "</table>\n";

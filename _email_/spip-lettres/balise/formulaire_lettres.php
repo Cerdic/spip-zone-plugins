@@ -1,5 +1,18 @@
 <?php
 
+
+	/**
+	 * SPIP-Lettres : plugin de gestion de lettres d'information
+	 *
+	 * Copyright (c) 2006
+	 * Agence Atypik Créations
+	 *  
+	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	 * Pour plus de details voir le fichier COPYING.txt.
+	 *  
+	 **/
+
+
 	/**
 	 * balise_FORMULAIRE_LETTRES
 	 *

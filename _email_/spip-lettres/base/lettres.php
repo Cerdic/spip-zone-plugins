@@ -1,5 +1,18 @@
 <?php
 
+
+	/**
+	 * SPIP-Lettres : plugin de gestion de lettres d'information
+	 *
+	 * Copyright (c) 2006
+	 * Agence Atypik Créations
+	 *  
+	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	 * Pour plus de details voir le fichier COPYING.txt.
+	 *  
+	 **/
+
+
 	global $table_des_tables;
 	global $tables_principales;
 	global $tables_auxiliaires;
@@ -107,7 +120,8 @@
 						"date"			=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 						"lang"			=> "varchar(10) NOT NULL",
 						"maj"			=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-						"statut"		=> "enum('brouillon','publie','envoi_en_cours') NOT NULL default 'brouillon'"
+						"statut"		=> "enum('brouillon','publie','envoi_en_cours') NOT NULL default 'brouillon'",
+						"extra"			=> "longblob NULL"
 					);
 	$spip_lettres_key = array(
 						"PRIMARY KEY" => "id_lettre"
@@ -116,7 +130,7 @@
 	$spip_lettres_statistiques = array(
 						"id_lettre"		=> "bigint(21) NOT NULL",
 						"date"			=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-						"type"			=> "enum('inscription','desinscription','import') NOT NULL default 'inscription'"
+						"type"			=> "enum('inscription','desinscription','import','suppression') NOT NULL default 'inscription'"
 					);
 	$spip_lettres_statistiques_key = array(
 						"KEY" => "id_lettre"

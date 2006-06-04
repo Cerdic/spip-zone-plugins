@@ -1,10 +1,24 @@
 <?php
 
+
+	/**
+	 * SPIP-Lettres : plugin de gestion de lettres d'information
+	 *
+	 * Copyright (c) 2006
+	 * Agence Atypik Créations
+	 *  
+	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	 * Pour plus de details voir le fichier COPYING.txt.
+	 *  
+	 **/
+
+
 	include_spip('inc/lettres_fonctions');
 	include_spip('inc/lettres_admin');
  	include_spip('inc/presentation');
 	include_spip('inc/date');
 	include_spip('inc/logos');
+	include_spip('inc/extra');
 
 
 	/**
@@ -15,7 +29,7 @@
 	 * @author Pierre Basson
 	 **/
 	function exec_lettres_visualisation() {
-		global $dir_lang, $spip_lang_right;
+		global $dir_lang, $spip_lang_right, $champs_extra;
 
 		lettres_verifier_droits();
 
@@ -31,8 +45,11 @@
 			$texte		= addslashes($_POST['texte']);
 			$lang		= addslashes($_POST['lang']);
 			$statut		= addslashes($_POST['statut']);
+			if ($champs_extra)
+				$champs_extra = extra_recup_saisie("lettres");
+
 			if ($id_lettre == -1) {
-				$insertion = 'INSERT INTO spip_lettres (titre, descriptif, texte, lang, statut, date, maj) VALUES ("'.$titre.'", "'.$descriptif.'", "'.$texte.'", "'.$lang.'", "'.$statut.'", NOW(), NOW())';
+				$insertion = 'INSERT INTO spip_lettres (titre, descriptif, texte, lang, statut, date, maj'.($champs_extra ? ", extra" : '').') VALUES ("'.$titre.'", "'.$descriptif.'", "'.$texte.'", "'.$lang.'", "'.$statut.'", NOW(), NOW()'.($champs_extra ? (', "'.addslashes($champs_extra).'"') : '').')';
 				if (spip_query($insertion)) {
 					$id_lettre = spip_insert_id();
 					spip_query('INSERT INTO spip_auteurs_lettres (id_auteur, id_lettre) VALUES ("'.$GLOBALS['auteur_session']['id_auteur'].'", "'.$id_lettre.'")');
@@ -40,7 +57,7 @@
 					lettres_rediriger_javascript($url_lettre);
 				}
 			} else {
-				$modification = 'UPDATE spip_lettres SET titre="'.$titre.'", descriptif="'.$descriptif.'", texte="'.$texte.'", maj=NOW() WHERE id_lettre="'.$id_lettre.'"';
+				$modification = 'UPDATE spip_lettres SET titre="'.$titre.'", descriptif="'.$descriptif.'", texte="'.$texte.'", maj=NOW()'.($champs_extra ? (", extra='".addslashes($champs_extra)."'") : '').' WHERE id_lettre="'.$id_lettre.'"';
 				spip_query($modification);
 				lettres_rediriger_javascript($url_lettre);
 			}
@@ -218,9 +235,9 @@
 			}
 		}
 
-		$requete_lettre = 'SELECT titre, descriptif, texte, lang, statut, date FROM spip_lettres WHERE id_lettre="'.$id_lettre.'" LIMIT 1';
+		$requete_lettre = 'SELECT titre, descriptif, texte, lang, statut, date, extra FROM spip_lettres WHERE id_lettre="'.$id_lettre.'" LIMIT 1';
 		$resultat_lettre = spip_query($requete_lettre);
-		list($titre, $descriptif, $texte, $lang, $statut, $date) = spip_fetch_array($resultat_lettre);
+		list($titre, $descriptif, $texte, $lang, $statut, $date, $extra) = spip_fetch_array($resultat_lettre);
 		$titre		= entites_html($titre);
 		$descriptif	= propre($descriptif);
 		$texte		= propre($texte);
@@ -290,14 +307,19 @@
 		icone(_T('lettres:modifier_lettre'), generer_url_ecrire("lettres_edition","id_lettre=$id_lettre"), '../'._DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/lettre-24.png', "edit.gif");
 		echo "</td>";
 		echo "</tr>\n";
+		echo "<tr><td>\n";
 		if (strlen($descriptif) > 1) {
-			echo "<tr><td>\n";
 			echo "<div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa;'>";
 			echo "<font size=2 face='Verdana,Arial,Sans,sans-serif'>";
 			echo $descriptif;
 			echo "</font>";
-			echo "</div></td></tr>\n";
+			echo "</div>";
 		}
+		if ($champs_extra AND $extra) {
+			echo "<br />\n";
+			extra_affichage($extra, "lettres");
+		}
+		echo "</td></tr>\n";
 		echo "</table>\n";
 
 		echo "<div>&nbsp;</div>";

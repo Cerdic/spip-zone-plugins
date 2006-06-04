@@ -1,5 +1,18 @@
 <?php
 
+
+	/**
+	 * SPIP-Lettres : plugin de gestion de lettres d'information
+	 *
+	 * Copyright (c) 2006
+	 * Agence Atypik Créations
+	 *  
+	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	 * Pour plus de details voir le fichier COPYING.txt.
+	 *  
+	 **/
+
+
 	include_spip('inc/lettres_fonctions');
 	include_spip('inc/lettres_admin');
  	include_spip('inc/presentation');
@@ -165,9 +178,9 @@
 				$timestamp = mktime(0, 0, 0, date("m"), date("d") - (7 - $i), date("Y"));
 				$date_mysql = date('Y-m-d', $timestamp);
 				$nom_jour = nom_jour(date('Y-m-d h:i:s', $timestamp));
-				list($nb_inscriptions) = spip_fetch_array(spip_query('SELECT COUNT(id_lettre) FROM spip_lettres_statistiques WHERE id_lettre="'.$id_lettre.'" date LIKE "'.$date_mysql.'%" AND type="inscription"'));
+				list($nb_inscriptions) = spip_fetch_array(spip_query('SELECT COUNT(id_lettre) FROM spip_lettres_statistiques WHERE id_lettre="'.$id_lettre.'" AND date LIKE "'.$date_mysql.'%" AND type="inscription"'));
 				$tableau_inscriptions_7j[$nom_jour] = $nb_inscriptions;
-				list($nb_desinscriptions) = spip_fetch_array(spip_query('SELECT COUNT(id_lettre) FROM spip_lettres_statistiques WHERE id_lettre="'.$id_lettre.'" date LIKE "'.$date_mysql.'%" AND type="desinscription"'));
+				list($nb_desinscriptions) = spip_fetch_array(spip_query('SELECT COUNT(id_lettre) FROM spip_lettres_statistiques WHERE id_lettre="'.$id_lettre.'" AND date LIKE "'.$date_mysql.'%" AND type="desinscription"'));
 				$tableau_desinscriptions_7j[$nom_jour] = $nb_desinscriptions;
 			}
 			
@@ -177,9 +190,9 @@
 				$timestamp = mktime(0, 0, 0, date("m") - (12 - $i), date("d"), date("Y"));
 				$date_mysql = date('Y-m', $timestamp);
 				$nom_mois = nom_mois(date('Y-m-d h:i:s', $timestamp));
-				list($nb_inscriptions) = spip_fetch_array(spip_query('SELECT COUNT(id_lettre) FROM spip_lettres_statistiques WHERE id_lettre="'.$id_lettre.'" date LIKE "'.$date_mysql.'%" AND type="inscription"'));
+				list($nb_inscriptions) = spip_fetch_array(spip_query('SELECT COUNT(id_lettre) FROM spip_lettres_statistiques WHERE id_lettre="'.$id_lettre.'" AND date LIKE "'.$date_mysql.'%" AND type="inscription"'));
 				$tableau_inscriptions_12m[$nom_mois] = $nb_inscriptions;
-				list($nb_desinscriptions) = spip_fetch_array(spip_query('SELECT COUNT(id_lettre) FROM spip_lettres_statistiques WHERE id_lettre="'.$id_lettre.'" date LIKE "'.$date_mysql.'%" AND type="desinscription"'));
+				list($nb_desinscriptions) = spip_fetch_array(spip_query('SELECT COUNT(id_lettre) FROM spip_lettres_statistiques WHERE id_lettre="'.$id_lettre.'" AND date LIKE "'.$date_mysql.'%" AND type="desinscription"'));
 				$tableau_desinscriptions_12m[$nom_mois] = $nb_desinscriptions;
 			}
 			

@@ -1,5 +1,18 @@
 <?php
 
+
+	/**
+	 * SPIP-Lettres : plugin de gestion de lettres d'information
+	 *
+	 * Copyright (c) 2006
+	 * Agence Atypik Créations
+	 *  
+	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	 * Pour plus de details voir le fichier COPYING.txt.
+	 *  
+	 **/
+
+
 	include_spip('inc/lettres_fonctions');
 	include_spip('inc/plugin');
 	global $pas;
@@ -7,12 +20,12 @@
 
 
 	/**
-	 * lettres_installer_base
+	 * lettres_verifier_base
 	 *
 	 * @return true
 	 * @author Pierre Basson
 	 **/
-	function lettres_installer_base() {
+	function lettres_verifier_base() {
 		$info_plugin_lettres = plugin_get_infos(_NOM_PLUGIN_LETTRE_INFORMATION);
 		$version_plugin = $info_plugin_lettres['version'];
 		if (!isset($GLOBALS['meta']['spip_lettres_version']) AND !isset($GLOBALS['meta']['fond_formulaire_lettre'])) {
@@ -42,6 +55,12 @@
 				ecrire_meta('spip_lettres_version', $version_base = 1.2);
 				ecrire_metas();
 			}
+			if ($version_base < 1.3) {
+				creer_base();
+				spip_query("ALTER TABLE spip_lettres ADD extra LONGBLOB NULL;");
+				ecrire_meta('spip_lettres_version', $version_base = 1.3);
+				ecrire_metas();
+			}
 		}
 		return true;
 	}
@@ -56,7 +75,7 @@
 	 * @author Pierre Basson
 	 **/
 	function lettres_verifier_droits() {
-		lettres_installer_base();
+		lettres_verifier_base();
 		if ($GLOBALS['connect_statut'] != "0minirezo")
 			lettres_rediriger_javascript(generer_url_ecrire('accueil')); 
 	}

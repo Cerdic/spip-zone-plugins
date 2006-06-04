@@ -1,5 +1,18 @@
 <?php
 
+
+	/**
+	 * SPIP-Lettres : plugin de gestion de lettres d'information
+	 *
+	 * Copyright (c) 2006
+	 * Agence Atypik Créations
+	 *  
+	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	 * Pour plus de details voir le fichier COPYING.txt.
+	 *  
+	 **/
+
+
 	include_spip('inc/lettres_fonctions');
 	include_spip('inc/lettres_admin');
  	include_spip('inc/presentation');
@@ -15,14 +28,15 @@
 	 * @author Pierre Basson
 	 **/
 	function exec_lettres_edition() {
-
+		global $champs_extra;
+		
 		lettres_verifier_droits();
 
 		if (!empty($_GET['id_lettre'])) {
 			$id_lettre = $_GET['id_lettre'];
-			$requete_lettre = 'SELECT titre, descriptif, texte, lang, statut FROM spip_lettres WHERE id_lettre="'.$id_lettre.'" LIMIT 1';
+			$requete_lettre = 'SELECT titre, descriptif, texte, lang, statut, extra FROM spip_lettres WHERE id_lettre="'.$id_lettre.'" LIMIT 1';
 			$resultat_lettre = spip_query($requete_lettre);
-			list($titre, $descriptif, $texte, $lang, $statut) = spip_fetch_array($resultat_lettre);
+			list($titre, $descriptif, $texte, $lang, $statut, $extra) = spip_fetch_array($resultat_lettre);
 			$titre		= entites_html($titre);
 			$descriptif	= entites_html($descriptif);
 			$texte		= entites_html($texte);
@@ -93,6 +107,11 @@
 		echo "<TEXTAREA id='text_area' NAME='texte' ".$GLOBALS['browser_caret']." CLASS='formo' ROWS='20' COLS='40' wrap=soft>";
 		echo $texte;
 		echo "</TEXTAREA></p>\n";
+
+		if ($champs_extra) {
+			include_spip('inc/extra');
+			extra_saisie($extra, 'lettres');
+		}
 
 		echo "<DIV ALIGN='right'>";
 		echo "<INPUT CLASS='fondo' TYPE='submit' NAME='enregistrer' VALUE='"._T('lettres:enregistrer')."'>";
