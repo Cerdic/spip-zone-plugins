@@ -168,14 +168,14 @@ if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
 
 $reta .= bouton_barre_racc ("barre_inserer('&Agrave;',$champ)", _DIR_IMG_ICONES_BARRE."agrave-maj.png", _T('barre_a_accent_grave'), $champhelp);
 $reta .= bouton_barre_racc ("barre_inserer('&Eacute;',$champ)", _DIR_IMG_ICONES_BARRE."eacute-maj.png", _T('barre_e_accent_aigu'), $champhelp);
-$reta .= bouton_barre_racc ("barre_inserer('&Egrave;',$champ)", '&Egrave;', _T('barre_e_accent_grave'), $champhelp);
-$reta .= bouton_barre_racc ("barre_inserer('&aelig;',$champ)", _DIR_IMG_ICONES_BARRE."aelig.png", _T('barre_ea'), $champhelp);
-$reta .= bouton_barre_racc ("barre_inserer('&AElig;',$champ)", _DIR_IMG_ICONES_BARRE."aelig-maj.png", _T('barre_ea_maj'), $champhelp);
+$reta .= bouton_barre_racc ("barre_inserer('&Egrave;',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/eagrave-maj.png', _T('bartypenr:barre_e_accent_grave'), $champhelp);
+$reta .= bouton_barre_racc ("barre_inserer('&aelig;',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/aelig.png', _T('bartypenr:barre_ea'), $champhelp);
+$reta .= bouton_barre_racc ("barre_inserer('&AElig;',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/aelig-maj.png', _T('bartypenr:barre_ea_maj'), $champhelp);
 
 if ($spip_lang == "fr") {
 $reta .= bouton_barre_racc ("barre_inserer('&oelig;',$champ)", _DIR_IMG_ICONES_BARRE."oelig.png", _T('barre_eo'), $champhelp);
 $reta .= bouton_barre_racc ("barre_inserer('&OElig;',$champ)", _DIR_IMG_ICONES_BARRE."oelig-maj.png", _T('barre_eo_maj'), $champhelp);
-$reta .= bouton_barre_racc ("barre_inserer('&Ccedil;',$champ)", '&Ccedil;', _T('barre_c_cedille_maj'), $champhelp);
+$reta .= bouton_barre_racc ("barre_inserer('&Ccedil;',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/ccedil-maj.png', _T('bartypenr:barre_c_cedille_maj'), $champhelp);
 }
 }
 // euro
