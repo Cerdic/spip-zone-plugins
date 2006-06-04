@@ -73,6 +73,11 @@ function barre_demande(debut,milieu,fin,affich,bulle,champ) {
 	}
 }
 
+function barre_demande_lien(debut,milieu,fin,affich,bulle,langue,champ) {
+	if (langue != "") {bulle = bulle+"{"+langue+"}"; }
+	barre_demande(debut,milieu,fin,affich,bulle,champ);
+}
+
 function barre_ancre(debut,milieu,fin,affich,champ) {
 	var inserer = affich;
 	var renvoi = '';
