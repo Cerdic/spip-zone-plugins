@@ -220,7 +220,7 @@ function nettoyer_raccourcis_typo($texte){
 	$texte = ereg_replace("[}{]", "", $texte);
 
 	// supprimer les tableaux
-	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);	
+	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);
 	return $texte;
 }
 
@@ -255,7 +255,7 @@ function couper($texte, $taille=50) {
 
 	$texte = nettoyer_raccourcis_typo($texte);
 
-	// corriger la longueur de coupe 
+	// corriger la longueur de coupe
 	// en fonction de la presence de caracteres utf
 	if ($GLOBALS['meta']['charset']=='utf-8'){
 		$long = charset2unicode($texte);
@@ -263,8 +263,8 @@ function couper($texte, $taille=50) {
 		$nbcharutf = preg_match_all("/(&#[0-9]{3,5};)/",$long,$matches);
 		$taille += $nbcharutf;
 	}
-	
-	
+
+
 	// couper au mot precedent
 	$long = spip_substr($texte, 0, max($taille-4,1));
 	$court = ereg_replace("([^[:space:]][[:space:]]+)[^[:space:]]*\n?$", "\\1", $long);
@@ -536,6 +536,13 @@ function typo($letexte, $echapper=true) {
 function extraire_lien ($regs) {
 	$lien_texte = $regs[1];
 
+	if (ereg('^([^|]*|[^{]*)\{([a-z-]+)}$', $lien_texte, $match)) {
+		$lien_texte = $match[1];
+		$lien_hreflang = ' hreflang="'.$match[2].'"';
+	}
+
+	if ($regs[2] == '>') $lien_sortant = true;
+
 	$lien_url = entites_html(vider_url($regs[3]));
 	$lien_interne = false;
 	if (ereg('^[[:space:]]*(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))?[[:space:]]*([[:digit:]]+)(#.*)?[[:space:]]*$', $lien_url, $match)) {
@@ -640,8 +647,14 @@ function extraire_lien ($regs) {
 
 	// Preparer le texte du lien ; attention s'il contient un <div>
 	// (ex: [<docXX|right>->lien]), il faut etre smart
-	$insert = typo("<a href=\"$lien_url\" class=\"spip_$class_lien\""
-		.">$lien_texte</a>");
+	if ($lien_sortant) {
+		$class_lien = 'blank';
+		$insert = typo("<a href=\"$lien_url\" class=\"spip_$class_lien\""
+			." target=\"_blank\"$lien_hreflang>$lien_texte</a>");
+	} else {
+		$insert = typo("<a href=\"$lien_url\" class=\"spip_$class_lien\""
+			."$lien_hreflang>$lien_texte</a>");
+	}
 
 	return array($insert, $lien_url, $lien_texte);
 }
@@ -1013,7 +1026,7 @@ function traiter_raccourcis($letexte) {
 				$url = $url_glossaire_externe.$terme_underscore;
 			$url = str_replace("@lang@", $GLOBALS['spip_lang'], $url);
 			$code = '['.$terme.'->?'.$url.']';
-			
+
 			// Eviter les cas particulier genre "[?!?]"
 			if (preg_match(',[a-z],i', $terme))
 				$letexte = str_replace($regs[0], $code, $letexte);
