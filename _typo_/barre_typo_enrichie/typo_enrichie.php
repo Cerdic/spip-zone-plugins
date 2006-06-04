@@ -129,12 +129,12 @@ function BarreTypoEnrichie_post_propre($texte) {
 	$texte = ereg_replace('@@SPIP_fin_intertitre_5@@[[:space:]]*(</p>)?', $fin_intertitre_5, $texte);*/
 
 		$cherche1 = array(
-		/* 15 */ 	"/\[\//",
-		/* 16 */	"/\/\]/",
-		/* 17 */ 	"/\[\|/",
-		/* 18 */	"/\|\]/",
-		/* 19 */ 	"/\[\(/",
-		/* 20 */	"/\)\]/",
+			/* 15 */ 	"/\[\//",
+			/* 16 */	"/\/\]/",
+			/* 17 */ 	"/\[\|/",
+			/* 18 */	"/\|\]/",
+			/* 19 */ 	"/\[\(/",
+			/* 20 */	"/\)\]/",
 			/* 21 */ 	"/\[\*\*/",
 			/* 21b */ 	"/\[\*/",
 			/* 22 */	"/\*\]/",
@@ -160,12 +160,12 @@ function BarreTypoEnrichie_post_propre($texte) {
 
 		);
 		$remplace1 = array(
-		/* 15 */ 	"<div style=\"text-align:right;\">",
-		/* 16 */	"</div>",
-		/* 17 */ 	"<div style=\"text-align:center;\">",
-		/* 18 */	"</div>",
-		/* 19 */ 	"<div class=\"texteencadre-spip\">",
-		/* 20 */	"</div>",
+			/* 15 */ 	"<div style=\"text-align:right;\">",
+			/* 16 */	"</div>",
+			/* 17 */ 	"<div style=\"text-align:center;\">",
+			/* 18 */	"</div>",
+			/* 19 */ 	"<div class=\"texteencadre-spip\">",
+			/* 20 */	"</div>",
 			/* 21 */ 	"<strong class=\"caractencadre2-spip\">",
 			/* 21b */ 	"<strong class=\"caractencadre-spip\">",
 			/* 22 */	"</strong>",

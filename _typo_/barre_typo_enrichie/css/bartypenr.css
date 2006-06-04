@@ -24,3 +24,13 @@ acronym.spip_acronym {
 	cursor: help;
 	border-bottom: 1px dotted;
 }
+
+a[hreflang]:after {
+content: "\0000a0[" attr(hreflang) "]";
+color: #999;
+background : transparent;
+}
+
+a.spip_blank {
+	color: #F00;
+}

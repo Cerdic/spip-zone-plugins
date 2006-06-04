@@ -12,6 +12,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_centrer' => '[|Centrer|] le paragraphe',
 'barre_alignerdroite' => '[/Aligne &agrave; droite/] le paragraphe',
 'barre_encadrer' => '[(Encadrer)] le paragraphe',
+'barre_e_accent_grave' => 'Ins&eacute;rer un E majuscule accent grave',
+'barre_ea' => 'Ins&eacute;rer un E dans l\'A',
+'barre_ea_maj' => 'Ins&eacute;rer un E dans l\'A majuscule',
+'barre_c_cedille_maj' => 'Ins&eacute;rer un C c&eacute;dille majuscule',
+
 
 'barre_caracteres' => 'Caract&egrave;res sp&eacute;ciaux',
 'barre_adresse' => 'Adresse',
