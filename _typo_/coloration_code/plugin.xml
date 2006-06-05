@@ -7,10 +7,10 @@
 		</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	  Pierre Andrews (Mortimer)
+	  Pierre Andrews (Mortimer) &amp; ARNO*
 	</auteur>
 	<version>
-	  0.1
+	  0.2
 	</version>
 	<etat>
 	  stable
@@ -20,18 +20,18 @@
 	[fr]
 	  Coloration syntaxique du code source dans SPIP
 
-	  il suffit de mettre le code entre {{&lt;code class="langage">...&lt;/code>}}.
-	  Les langages support&eacute;s sont ceux fournis par [->geshi.sf.net].
+	  il suffit de mettre le code entre {{&lt;code class="langage">...&lt;/code>}} ou {{&lt;cadre class="langage">...&lt;/cadre>}}.
+	  Les langages support&eacute;s sont ceux fournis par [->http://sourceforge.net/projects/geshi/].
 	  [en]
 	  Syntax higlighting of code placed in SPIP articles.
 
-	  You just have to put it between the tags:{{&lt;code class="language">...&lt;/code>}}.
-	  The possible languages are the ones supported by [->geshi.sf.net].
+	  You just have to put it between the tags:{{&lt;code class="language">...&lt;/code>}} or  ou {{&lt;cadre class="langage">...&lt;/cadre>}}.
+	  The possible languages are the ones supported by [->http://sourceforge.net/projects/geshi/].
 	[it]
 	Colorazione sintattica del codice utilizzato nel testo.
 
-	Dovete solo utilizzare il segnaposto:  {{&lt;code class="linguaggio">...&lt;/code>}}
-	&Egrave; compatibile con i linguaggi di [->geshi.sf.net].
+	Dovete solo utilizzare il segnaposto:  {{&lt;code class="linguaggio">...&lt;/code>}},  ou {{&lt;cadre class="langage">...&lt;/cadre>}}.
+	&Egrave; compatibile con i linguaggi di [->http://sourceforge.net/projects/geshi/].
 	  </multi>
 	</description>
 	<prefix> 

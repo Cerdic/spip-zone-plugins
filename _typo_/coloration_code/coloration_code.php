@@ -21,7 +21,7 @@
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 define('_DIR_PLUGIN_COLORATION_CODE',(_DIR_PLUGINS.end($p)));
 
-function coloration_code_color($code, $language='php') {
+function coloration_code_color($code, $language='php', $cadre="cadre") {
   
   include_once(_DIR_PLUGIN_COLORATION_CODE.'/geshi/geshi.php');
   //
@@ -29,11 +29,11 @@ function coloration_code_color($code, $language='php') {
   //
   $geshi =& new GeSHi($code, $language);
 
-  if(strpos($code, "\n")!==false) {
+  if($cadre=="cadre") {
 	  $geshi->set_header_type(GESHI_HEADER_DIV);
 	  $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
   } else {
-	  $geshi->set_header_type(GESHI_HEADER_PRE);
+	  $geshi->set_header_type(GESHI_HEADER_NONE);
 	  $geshi->enable_line_numbers(GESHI_NO_LINE_NUMBERS);
   }
 
@@ -49,10 +49,10 @@ function coloration_code_echappe($texte) {
   $rempl ='';
 
   if (preg_match_all(
-		 ',<code[[:space:]]+class="(.*)"[[:space:]]*>(.*)</code>,Uims',
+		 ',<(cadre|code)[[:space:]]+class="(.*)"[[:space:]]*>(.*)</(cadre|code)>,Uims',
 		 $texte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
-	  $code = echappe_retour($regs[2]);
+	  $code = echappe_retour($regs[3]);
 	  
 	  if(strpos($code, "\n")!==false) {
 	  // Gerer le fichier contenant le code au format texte
@@ -66,8 +66,8 @@ function coloration_code_echappe($texte) {
 			fclose($handle);
 		}
 	  }
-	  
-	  $rempl = coloration_code_color($code,$regs[1]);
+	 
+	  $rempl = coloration_code_color(trim($code),$regs[2], $regs[1]);
 	 if(strpos($code, "\n")!==false) {
 	 	$rempl .= "<div class='".$regs[1]."_download' style='text-align: $spip_lang_right;'><a href='$fichier' style='font-family: verdana, arial, sans; font-weight: bold; font-style: normal;'>".
 	  		propre("<multi>Download[fr]T&eacute;l&eacute;charger</multi>").

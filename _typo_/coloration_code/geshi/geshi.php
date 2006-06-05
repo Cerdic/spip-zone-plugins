@@ -2503,7 +2503,7 @@ class GeSHi
 		$attributes = '';
 
 		if ($this->overall_class != '') {
-			$attributes .= " class=\"{$this->overall_class}\"";
+			$attributes .= " class=\"spip_code spip_code_{$this->overall_class}\"";
 		}
 		if ($this->overall_id != '') {
 			$attributes .= " id=\"{$this->overall_id}\"";
