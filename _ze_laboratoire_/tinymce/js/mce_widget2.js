@@ -30,8 +30,6 @@ function beforeSaveCallBack(element_id, html, body) {
 
 	url= "?exec=ajax_edit_article&OK=ok";
 
-// A REVOIR : comment en faire du post pour poster des textes > 4Ko ?
-	//xmlhttp[element_id].open("GET", '?exec=ajax_edit_article&champ='+element_id+'&id_article='+id_article+'&valeur='+escape(html), true);
 	xmlhttp[element_id].open("POST", url);
 	xmlhttp[element_id].setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
@@ -40,6 +38,7 @@ function beforeSaveCallBack(element_id, html, body) {
 		if (xmlhttp[element_id].readyState == 4) { 
 			// si elle est non vide, l'afficher
 			if (xmlhttp[element_id].responseText != '') {
+//alert(body.innerHTML+" -> "+xmlhttp[element_id].responseText);
 				body.innerHTML = xmlhttp[element_id].responseText;
 			}
 		}

@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('base/abstract_sql');
 
-function exec_articles_edit_dist() {
+function exec_articles_edit() {
 	global $id_auteur;
 
 	if(_request('new')=='oui') {
@@ -33,10 +33,14 @@ function exec_articles_edit_dist() {
 		spip_abstract_insert('spip_auteurs_articles',
 							 "(id_auteur,id_article)",
 							 "('$id_auteur','$id_article')");
+
+		// et partir pour l'editer
+		redirige_par_entete("index.php?exec=articles&id_article=$id_article");
+	} else {
+		include_ecrire('exec/articles_edit.php');
+		return exec_articles_edit_dist();
 	}
 
-	// et partir pour l'editer
-	redirige_par_entete("index.php?exec=articles&id_article=$id_article");
 }
 
 ?>
