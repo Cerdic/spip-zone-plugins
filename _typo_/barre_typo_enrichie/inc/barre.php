@@ -129,14 +129,14 @@ $tableau_formulaire = '
   <tr>
     <td width="10%" align="center"><strong>Gestion des ancres</strong></td>
     <td width="45%"><strong>Transformer en ancre</strong><br/>
-    <lable for="ancre_nom"><i>Nom de l\'ancre</i></label> <br/>
+    <label for="ancre_nom"><i>Nom de l\'ancre</i></label> <br/>
       <input type="text" name="ancre_nom" id="ancre_nom">
 	  
 	<input type="button" value="OK" class="fondo" onclick="javascript:barre_ancre(\'[#\', \'<-\', \']\', ancre_nom.value, '.$champ.');" > 
     </td>
 	<td width="45%"><strong>Pointer vers une ancre</strong><br/>
-    <lable for="ancre_cible"><i>Ancre cible</i></label> <input type="text" name="ancre_cible" id="ancre_cible"><br/>
-	<lable for="ancre_bulle"><i>Bulle d\'aide ancre</i></label> <input type="text" name="ancre_bulle" id="ancre_bulle">
+    <label for="ancre_cible"><i>Ancre cible</i></label> <input type="text" name="ancre_cible" id="ancre_cible"><br/>
+	<label for="ancre_bulle"><i>Bulle d\'aide ancre</i></label> <input type="text" name="ancre_bulle" id="ancre_bulle">
 	<input type="button" value="OK" class="fondo" onclick="javascript:barre_demande(\'[\', \'->#\', \']\', ancre_cible.value, ancre_bulle.value, '.$champ.');" > 
 </td>
   </tr> 
