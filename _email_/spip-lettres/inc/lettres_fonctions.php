@@ -13,12 +13,11 @@
 	 **/
 
 
-	include_spip('base/create');
-	include_spip('base/abstract_sql');
 	include_spip('base/lettres');
 	include_spip('inc/plugin');
 	include_spip('inc/lettres_balises');
 	include_spip('inc/lettres_filtres');
+	include_spip('inc/lettres_classes');
 
 
 	/**
@@ -427,11 +426,6 @@
 		global $lang;
 		if (empty($id_abonne)) return false;
 
-		$charset			= lire_meta('charset');
-		$email_webmaster	= lire_meta('email_webmaster');
-		$nom_site			= lire_meta('nom_site');
-		$url_site			= lire_meta('adresse_site');
-
 		// Récupération des données de l'abonné
 		$requete_donnees_abonne = 'SELECT email, code, format FROM spip_abonnes WHERE id_abonne="'.$id_abonne.'"';
 		list($email, $code, $format) = spip_fetch_array(spip_query($requete_donnees_abonne));
@@ -439,7 +433,6 @@
 		// Doit-on forcer le format ?
 		if (!empty($format_force)) $format = $format_force;
 
-		$message_html	= ereg_replace('IMG/', "$url_site/IMG/", $message_html);
 		// Remplacement de %%CODE%% dans $message_html et $message_texte par $code
 		$message_html	= ereg_replace("%%CODE%%", $code, $message_html);
 		$message_texte	= ereg_replace("%%CODE%%", $code, $message_texte);
@@ -458,44 +451,23 @@
 		$message_html	= ereg_replace("%%FORMAT%%", $format_force, $message_html);
 		$message_texte	= ereg_replace("%%FORMAT%%", $format_force, $message_texte);
 
-		// Définition de l'entête du message
-		$entete = 'From: "'._T('lettres:webmaster').' '.$nom_site.'" <'.$email_webmaster.'>'."\n";
-		
 		switch ($format) {
 			case 'html':
-				$entete.= 'Content-Type: text/html; charset="'.$charset.'"'."\n";
-				$entete.= 'Content-Transfer-Encoding: 7bit'."\n\n";
-				$message = $message_html;
+				$notification = new LettresMail($email, $objet, $message_html, '');
 				break;
 				
 			case 'texte':
-				$entete.= 'Content-Type: text/plain; charset="'.$charset.'"'."\n";
-				$entete.= 'Content-Transfer-Encoding: 7bit'."\n\n";
-				$message = $message_texte;
+				$notification = new LettresMail($email, $objet, '', $message_texte);
 				break;
 				
 			case 'mixte':
 			default:
-				$frontiere = "-----=" . md5( uniqid ( rand() ) );
-				$entete.= 'MIME-Version: 1.0'."\n";
-				$entete.= 'Content-Type: multipart/alternative; boundary="'.$frontiere.'"';
-				$message = 'This is a multi-part message in MIME format.'."\n\n";
-				$message.= '--'.$frontiere."\n";
-				$message.= 'Content-Type: text/plain; charset="'.$charset.'"'."\n";
-				$message.= 'Content-Transfer-Encoding: 7bit'."\n\n";
-				$message.= $message_texte;
-				$message.= "\n\n";
-				$message.= '--'.$frontiere."\n";
-				$message.= 'Content-Type: text/html; charset="'.$charset.'"'."\n";
-				$message.= 'Content-Transfer-Encoding: 7bit'."\n\n";
-				$message.= $message_html;
-				$message.= "\n\n";
-				$message.= '--'.$frontiere."--\n";
+				$notification = new LettresMail($email, $objet, $message_html, $message_texte);
 				break;
 		}
 
-		// Envoi du mail
-		return mail($email, $objet, $message, $entete);
+		return $notification->Send();
+
 
 	}
 
@@ -519,30 +491,10 @@
 		global $lang;
 		if (empty($id_abonne)) return false;
 
-		$charset			= lire_meta('charset');
-		$email_webmaster	= lire_meta('email_webmaster');
-		$nom_site			= lire_meta('nom_site');
-		$url_site			= lire_meta('adresse_site');
-
-		$requete_auteurs = 'SELECT A.email
-							FROM spip_auteurs AS A
-							INNER JOIN spip_auteurs_lettres AS AL ON AL.id_auteur=A.id_auteur
-							WHERE AL.id_lettre="'.$id_lettre.'"';
-		$resultat_auteurs = spip_query($requete_auteurs);
-		if (@spip_num_rows($resultat_auteurs) > 0) {
-			$auteurs = array();
-			while ($arr = spip_fetch_array($resultat_auteurs))
-				$auteurs[] = $arr['email'];
-			$liste_auteurs = implode(', ', $auteurs);
-		} else {
-			$liste_auteurs = $email_webmaster;
-		}
-
 		// Récupération des données de l'abonné
 		$requete_donnees_abonne = 'SELECT email, code, format FROM spip_abonnes WHERE id_abonne="'.$id_abonne.'"';
 		list($email, $code, $format) = spip_fetch_array(spip_query($requete_donnees_abonne));
 		
-		$message_html	= ereg_replace('../IMG', "$url_site/IMG", $message_html);
 		// Remplacement de %%CODE%% dans $message_html et $message_texte par $code
 		$message_html	= ereg_replace("%%CODE%%", $code, $message_html);
 		$message_texte	= ereg_replace("%%CODE%%", $code, $message_texte);
@@ -554,45 +506,22 @@
 		$message_html	= ereg_replace("%%LETTRES%%", $chaine_lettres, $message_html);
 		$message_texte	= ereg_replace("%%LETTRES%%", $chaine_lettres, $message_texte);
 
-		// Définition de l'entête du message
-		$entete = 'From: "'._T('lettres:webmaster').' '.$nom_site.'" <'.$email_webmaster.'>'."\n";
-		$entete.= 'Reply-To: '.$liste_auteurs."\n";
-		
 		switch ($format) {
 			case 'html':
-				$entete.= 'Content-Type: text/html; charset="'.$charset.'"'."\n";
-				$entete.= 'Content-Transfer-Encoding: 7bit'."\n\n";
-				$message = $message_html;
+				$lettre = new LettresMail($email, $objet, $message_html, '');
 				break;
 				
 			case 'texte':
-				$entete.= 'Content-Type: text/plain; charset="'.$charset.'"'."\n";
-				$entete.= 'Content-Transfer-Encoding: 7bit'."\n\n";
-				$message = $message_texte;
+				$lettre = new LettresMail($email, $objet, '', $message_texte);
 				break;
 				
 			case 'mixte':
 			default:
-				$frontiere = "-----=" . md5( uniqid ( rand() ) );
-				$entete.= 'MIME-Version: 1.0'."\n";
-				$entete.= 'Content-Type: multipart/alternative; boundary="'.$frontiere.'"';
-				$message = 'This is a multi-part message in MIME format.'."\n\n";
-				$message.= '--'.$frontiere."\n";
-				$message.= 'Content-Type: text/plain; charset="'.$charset.'"'."\n";
-				$message.= 'Content-Transfer-Encoding: 7bit'."\n\n";
-				$message.= $message_texte;
-				$message.= "\n\n";
-				$message.= '--'.$frontiere."\n";
-				$message.= 'Content-Type: text/html; charset="'.$charset.'"'."\n";
-				$message.= 'Content-Transfer-Encoding: 7bit'."\n\n";
-				$message.= $message_html;
-				$message.= "\n\n";
-				$message.= '--'.$frontiere."--\n";
+				$lettre = new LettresMail($email, $objet, $message_html, $message_texte);
 				break;
 		}
 
-		// Envoi du mail
-		return mail($email, $objet, $message, $entete);
+		return $lettre->Send();
 
 	}
 
@@ -613,50 +542,9 @@
 	function lettres_envoyer_test($email, $objet, $message_html, $message_texte, $id_lettre) {
 		if (!lettres_verifier_validite_email($email)) return false;
 
-		$charset			= lire_meta('charset');
-		$email_webmaster	= lire_meta('email_webmaster');
-		$nom_site			= lire_meta('nom_site');
-		$url_site			= lire_meta('adresse_site');
+		$lettre_test = new LettresMail($email, $objet, $message_html, $message_texte);
 
-		$message_html	= ereg_replace('../IMG', "$url_site/IMG", $message_html);
-
-		$requete_auteurs = 'SELECT A.email
-							FROM spip_auteurs AS A
-							INNER JOIN spip_auteurs_lettres AS AL ON AL.id_auteur=A.id_auteur
-							WHERE AL.id_lettre="'.$id_lettre.'"';
-		$resultat_auteurs = spip_query($requete_auteurs);
-		if (@spip_num_rows($resultat_auteurs) > 0) {
-			$auteurs = array();
-			while ($arr = spip_fetch_array($resultat_auteurs))
-				$auteurs[] = $arr['email'];
-			$liste_auteurs = implode(', ', $auteurs);
-		} else {
-			$liste_auteurs = $email_webmaster;
-		}
-
-		$frontiere = "-----=" . md5( uniqid ( rand() ) );
-
-		$entete = 'From: "'._T('lettres:webmaster').' '.$nom_site.'" <'.$email_webmaster.'>'."\n";
-		$entete.= 'Reply-To: '.$liste_auteurs."\n";
-		$entete.= 'MIME-Version: 1.0'."\n";
-		$entete.= 'Content-Type: multipart/alternative; boundary="'.$frontiere.'"';
-		
-		$message = 'This is a multi-part message in MIME format.'."\n\n";
-		$message.= '--'.$frontiere."\n";
-		$message.= 'Content-Type: text/plain; charset="'.$charset.'"'."\n";
-		$message.= 'Content-Transfer-Encoding: 7bit'."\n\n";
-		$message.= $message_texte;
-		$message.= "\n\n";
-		$message.= '--'.$frontiere."\n";
-		$message.= 'Content-Type: text/html; charset="'.$charset.'"'."\n";
-		$message.= 'Content-Transfer-Encoding: 7bit'."\n\n";
-		$message.= $message_html;
-		$message.= "\n\n";
-		$message.= '--'.$frontiere."--\n";
-
-		// Envoi du mail
-		return mail($email, $objet, $message, $entete);
-
+		$lettre_test->Send();
 	}
 
 

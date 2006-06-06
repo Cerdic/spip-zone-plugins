@@ -56,7 +56,9 @@
 		while ($arr = @spip_fetch_array($resultat_auteurs)) 
 			lettres_envoyer_test($arr['email'], $titre, $message_html, $message_texte, $id_lettre);
 		
-		echo '<html><head><title>'._T('lettres:fenetre_envoi').'</title></head><body>';
+		echo '<html><head><title>'._T('lettres:fenetre_envoi').'</title>';
+		echo '<meta http-equiv="Content-Type" content="text/html; charset='.$GLOBALS['meta']['charset'].'" />';
+		echo '</head><body>';
 		echo '<h1 style="position: absolute; top: 30px; left: 50px; width: 300px;">'._T('lettres:fenetre_envoi_termine').'</h1>';
 		echo '<div style="position: absolute; top: 100px; left: 50px; background-color: green; width: 300px; height: 24px;"></div>';
 		echo '<div style="position: absolute; top: 140px; left: 130px;"><a href="javascript: window.close();">'._T('lettres:fermer').'</a></div>';

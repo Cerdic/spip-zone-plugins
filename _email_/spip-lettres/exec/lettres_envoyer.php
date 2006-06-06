@@ -59,7 +59,9 @@
 		
 		$fait = $total - $a_envoyer;
 		
-		echo '<html><head><title>'._T('lettres:fenetre_envoi').'</title></head><body>';
+		echo '<html><head><title>'._T('lettres:fenetre_envoi').'</title>';
+		echo '<meta http-equiv="Content-Type" content="text/html; charset='.$GLOBALS['meta']['charset'].'" />';
+		echo '</head><body>';
 		if ($total)
 			$largeur = intval(($fait / $total) * 300);
 		if ($a_envoyer == 0) {
