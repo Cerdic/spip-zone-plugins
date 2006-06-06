@@ -185,7 +185,7 @@
 			else
 				$bouton =  bouton_block_invisible("leszones");
 		}
-		debut_cadre_enfonce("../"._DIR_PLUGIN_ACCES_RESTREINT."/zones-acces-24.png", false, "", $bouton._T('accesrestreint:titre_zones_acces'));
+		debut_cadre_enfonce("../"._DIR_PLUGIN_ACCES_RESTREINT."/img_pack/zones-acces-24.png", false, "", $bouton._T('accesrestreint:titre_zones_acces'));
 	
 		//////////////////////////////////////////////////////
 		// Recherche de zones d'acces
@@ -253,7 +253,7 @@
 		
 				$url = "href='" . generer_url_ecrire('acces_restreint_edit', "id_zone=$id_zone&retour=".rawurlencode(generer_url_ecrire($url_base, "$id_table=$id_objet#zones"))) . "'";
 	
-				$vals[] = "<a $url>" . http_img_pack("../"._DIR_PLUGIN_ACCES_RESTREINT.'/restreint-16.png', "", "width='16' height='16' border='0'") ."</a>";
+				$vals[] = "<a $url>" . http_img_pack("../"._DIR_PLUGIN_ACCES_RESTREINT.'/img_pack/restreint-16.png', "", "width='16' height='16' border='0'") ."</a>";
 
 				$s = "<a $url>".typo($titre_zone)."</a>";
 				$vals[] = $s;
@@ -356,7 +356,7 @@
 			/*if ($connect_statut == '0minirezo' AND $flag_editable AND $options == "avancees" AND $connect_toutes_rubriques) {
 				echo "<tr><td></td><td colspan='2'>";
 				echo "<div style='width: 200px;'>";
-				icone_horizontale(_T('accesrestreint:icone_creer_zone'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&id_table=$id_table&redirect=$retour"), "zones-acces-24.png", "creer.gif");
+				icone_horizontale(_T('accesrestreint:icone_creer_zone'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&id_table=$id_table&redirect=$retour"), "img_pack/zones-acces-24.png", "creer.gif");
 				echo "</div> ";
 				echo "</td></tr>";
 			}*/

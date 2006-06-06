@@ -9,7 +9,7 @@ define('_DIR_PLUGIN_ACCES_RESTREINT',(_DIR_PLUGINS.end($p)));
 		AND $GLOBALS["options"]=="avancees") {
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['configuration']->sousmenu['acces_restreint']= new Bouton(
-			"../"._DIR_PLUGIN_ACCES_RESTREINT."/zones-acces-24.png",  // icone
+			"../"._DIR_PLUGIN_ACCES_RESTREINT."/img_pack/zones-acces-24.png",  // icone
 			_T('accesrestreint:icone_menu_config')	// titre
 			);
 		}
