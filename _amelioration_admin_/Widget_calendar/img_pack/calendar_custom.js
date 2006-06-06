@@ -47,6 +47,12 @@ SPIP.widget.Calendar2up_INT_Cal.prototype = new SPIP.widget.Calendar2up_Cal();
 SPIP.widget.Calendar2up_INT = function(id, containerId, monthyear, selected) {
 	if (arguments.length > 0)
 	{	
+		var outerContainer = document.getElementById(containerId);
+	
+		outerContainer.innerHTML="";
+		if (SPIP.widget.Calendar_Core._getBrowser() == "ie") {
+			outerContainer.innerHTML="<iframe src='about:blank' scrolling='no' frameborder='0' style='position:absolute;left:0px;top:0px;z-index:0;' class='califrame'></iframe>";
+		}
 		this.buildWrapper(containerId);
 		this.init(2, id, containerId, monthyear, selected);
 	}
@@ -58,15 +64,6 @@ SPIP.widget.Calendar2up_INT.prototype.constructChild = function(id,containerId,m
 	var cal = new SPIP.widget.Calendar2up_INT_Cal(id,containerId,monthyear,selected);
 	return cal;
 };
-SPIP.widget.Calendar2up_INT.prototype.buildWrapper = function(containerId) {
-	var outerContainer = document.getElementById(containerId);
-
-	outerContainer.innerHTML="";
-	if (SPIP.widget.Calendar_Core._getBrowser() == "ie") {
-		outerContainer.innerHTML="<iframe src='about:blank' scrolling='no' frameborder='0' style='position:absolute;left:0px;top:0px;z-index:0;' class='califrame'></iframe>";
-	}
-	SPIP.widget.Calendar2up.prototype.buildWrapper(containerId);
-}
 	
 
 
