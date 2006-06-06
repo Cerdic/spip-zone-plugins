@@ -617,13 +617,14 @@ function extraire_lien ($regs) {
 				}
 				break;
 		}
-
+		
+		$params = str_replace('&', '&amp;', substr(str_replace('&amp;', '&', $params), 1));
 		if (strpos($lien_url,'?')) {
-			str_replace('?','&amp;',$params);
+			$params = '&amp;' . $params;
 		} else {
-			str_replace('&amp;','?',$params);
+			$params = '?' . $params;
 		}
-		$lien_url .= $ancre.$params;
+		$lien_url .= $params . $ancre;
 
 		// supprimer les numeros des titres
 		$lien_texte = supprimer_numero($lien_texte);
