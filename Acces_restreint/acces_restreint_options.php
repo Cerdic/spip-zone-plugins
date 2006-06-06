@@ -10,6 +10,7 @@ include_spip('inc/acces_restreint');
 if ($auteur_session['id_auteur']){
 	$zones = AccesRestreint_liste_zones_appartenance_auteur(intval($auteur_session['id_auteur']));
 	$zones = join("-",$zones);
+	if (!isset($GLOBALS['marqueur'])) $GLOBALS['marqueur']="";
 	$GLOBALS['marqueur'].=":zones_acces_autorises $zones";
 }
 
