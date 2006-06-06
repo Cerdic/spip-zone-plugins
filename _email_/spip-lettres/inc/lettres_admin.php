@@ -13,6 +13,8 @@
 	 **/
 
 
+-	include_spip('base/create');
+-	include_spip('base/abstract_sql');
 	include_spip('inc/lettres_fonctions');
 	include_spip('inc/plugin');
 	global $pas;
