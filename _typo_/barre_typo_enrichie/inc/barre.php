@@ -204,8 +204,10 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	include_spip('inc/layer');
 	if (!$GLOBALS['browser_barre']) return '';
 	if (!$lang) $lang = $spip_lang;
+	$layer_public = (!$forum) ? '' :
+	 '<script type="text/javascript" src="' . find_in_path('img_pack/layer.js').'"></script>';
 	$ret = ($num_barre > 0)  ? '' :
-	  '<script type="text/javascript" src="' . find_in_path('js/spip_barre.js').'"></script>';
+	  $layer_public . '<script type="text/javascript" src="' . find_in_path('js/spip_barre.js').'"></script>';
 
 
 	$num_barre++;
