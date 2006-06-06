@@ -81,13 +81,13 @@ function WCalendar_js_verifie_lies($sd,$sf){
 	return "
 		function verifie_date$sd$sf(modif){
 			var Date$sd = new Date;
-			Date$sd.setDate( this.selDay$sd.selectedIndex + 1);
-			Date$sd.setMonth(this.selMonth$sd.selectedIndex);
 			Date$sd.setFullYear(this.selYear$sd.selectedIndex+parseInt(selYear$sd.options[0].value));
+			Date$sd.setMonth(this.selMonth$sd.selectedIndex);
+			Date$sd.setDate( this.selDay$sd.selectedIndex + 1);
 			var Date$sf = new Date;
-			Date$sf.setDate( this.selDay$sf.selectedIndex + 1);
-			Date$sf.setMonth(this.selMonth$sf.selectedIndex);
 			Date$sf.setFullYear(this.selYear$sf.selectedIndex+parseInt(selYear$sf.options[0].value));
+			Date$sf.setMonth(this.selMonth$sf.selectedIndex);
+			Date$sf.setDate( this.selDay$sf.selectedIndex + 1);
 			if (Date$sf<Date$sd){
 				if (modif==1){
 					selYear$sf.selectedIndex=selYear$sd.selectedIndex;
