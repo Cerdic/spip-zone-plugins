@@ -48,6 +48,9 @@ Rajoute une barre typographique enrichie et les raccourcis typographiques corres
 	<prefix> 
 	BarreTypoEnrichie
 	</prefix>
+	<options> <!-- fichier charge a chaque hit -->
+	typo_enrichie_options.php
+	</options>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 			<nom>pre_propre</nom>
