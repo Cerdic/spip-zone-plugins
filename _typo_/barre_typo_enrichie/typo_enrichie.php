@@ -55,39 +55,43 @@ function BarreTypoEnrichie_pre_propre($texte) {
 	global $debut_intertitre_5, $fin_intertitre_5;
 
 	$chercher_raccourcis = array(
-		/*  3 */ "/\{1\{/",
-		/*  4 */ "/\}1\}/",
-		/*  5 */ "/\{2\{/",
-		/*  6 */ "/\}2\}/",
-		/*  7 */ "/\{3\{/",
-		/*  8 */ "/\}3\}/",
-		/*  9 */ "/\{4\{/",
-		/*  10 */ "/\}4\}/",
-		/*  9b */ "/\{5\{/",
-		/*  10b */ "/\}5\}/",
-		/* 11 */ "/\{(§|Â§)\{/", # Â§ Pour gérer l'unicode aussi !
-		/* 12 */ "/\}(§|Â§)\}/",
-		/* 13 */ "/<-->/",
-		/* 14 */ "/-->/",
-		/* 15 */ "/<--/"
+		/* 1 */ 	"/(^|[^{])[{][{][{]/",
+		/* 2 */ 	"/[}][}][}]($|[^}])/",
+		/* 3 */ 	"/(^|[^{])\{1\{/",
+		/* 4 */ 	"/\}1\}($|[^}])/",
+		/* 5 */ 	"/(^|[^{])\{2\{/",
+		/* 6 */ 	"/\}2\}($|[^}])/",
+		/* 7 */ 	"/(^|[^{])\{3\{/",
+		/* 8 */ 	"/\}3\}($|[^}])/",
+		/* 9 */ 	"/(^|[^{])\{4\{/",
+		/* 10 */ 	"/\}4\}($|[^}])/",
+		/* 9b */ 	"/(^|[^{])\{5\{/",
+		/* 10b */ 	"/\}5\}($|[^}])/",
+		/* 11 */ 	"/\{(§|Â§)\{/", # Â§ Pour gérer l'unicode aussi !
+		/* 12 */ 	"/\}(§|Â§)\}/",
+		/* 13 */ 	"/<-->/",
+		/* 14 */ 	"/-->/",
+		/* 15 */ 	"/<--/"
 	);
 
 	$remplacer_raccourcis = array(
-		/*  3 */ $debut_intertitre,
-		/*  4 */ $fin_intertitre,
-		/*  5 */ $debut_intertitre_2,
-		/*  6 */ $fin_intertitre_2,
-		/*  7 */ $debut_intertitre_3,
-		/*  8 */ $fin_intertitre_3,
-		/*  9 */ $debut_intertitre_4,
-		/*  10 */ $fin_intertitre_4,
-		/*  9b */ $debut_intertitre_5,
-		/*  10b */ $fin_intertitre_5,
-		/* 11 */ "<span style=\"font-variant: small-caps\">",
-		/* 12 */ "</span>",
-		/* 13 */ "&harr;",
-		/* 14 */ "&rarr;",
-		/* 15 */ "&larr;"
+		/* 1 */ 	"\$1\n\n$debut_intertitre",
+		/* 2 */ 	"$fin_intertitre\n\n\$1",
+		/* 3 */ 	"\$1\n\n$debut_intertitre",
+		/* 4 */ 	"$fin_intertitre\n\n\$1",
+		/* 5 */ 	"\$1\n\n$debut_intertitre_2",
+		/* 6 */ 	"$fin_intertitre_2\n\n\$1",
+		/* 7 */ 	"\$1\n\n$debut_intertitre_3",
+		/* 8 */ 	"$fin_intertitre_3\n\n\$1",
+		/* 9 */ 	"\$1\n\n$debut_intertitre_4",
+		/* 10 */ 	"$fin_intertitre_4\n\n\$1",
+		/* 9b */ 	"\$1\n\n$debut_intertitre_5",
+		/* 10b */ 	"$fin_intertitre_5\n\n\$1",
+		/* 11 */ 	"<span style=\"font-variant: small-caps\">",
+		/* 12 */ 	"</span>",
+		/* 13 */ 	"&harr;",
+		/* 14 */ 	"&rarr;",
+		/* 15 */ 	"&larr;"
 	);
 
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
