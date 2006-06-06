@@ -82,12 +82,9 @@ $tableau_formulaire = '
 '._T('bartypenr:barre_adresse').': <input type="text" name="lien_nom" value="http://" size="21" maxlength="255" /><br/>
 '._T('bartypenr:barre_bulle').': <input type="text" name="lien_bulle" value="" size="21" maxlength="255" />
 </td><td>
-<input type="checkbox" name="lien_ext" value="yes" />
-'._T('bartypenr:barre_lien_externe').'<br />
 '._T('bartypenr:barre_langue').': <input type="text" name="lien_langue" value="" size="10" maxlength="10" />
 </td><td>
-  <input type="button" value="OK" class="fondo" onclick="javascript:var token =
-  \'->\'; if (lien_ext.checked){ token += \'>\';}barre_demande_lien(\'[\', token, \']\', lien_nom.value, lien_bulle.value, lien_langue.value,'.$champ.');"> 
+  <input type="button" value="OK" class="fondo" onclick="javascript:barre_demande_lien(\'[\', \'->\', \']\', lien_nom.value, lien_bulle.value, lien_langue.value,'.$champ.');"> 
 </td></tr></table>
 ';
   return produceWharf('tableau_lien','',$tableau_formulaire); 	

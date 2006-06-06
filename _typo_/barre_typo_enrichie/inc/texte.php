@@ -541,8 +541,6 @@ function extraire_lien ($regs) {
 		$lien_hreflang = ' hreflang="'.$match[2].'"';
 	}
 
-	if ($regs[2] == '>') $lien_sortant = true;
-
 	$lien_url = entites_html(vider_url($regs[3]));
 	$lien_interne = false;
 	if (ereg('^[[:space:]]*(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))?[[:space:]]*([[:digit:]]+)(#.*)?(\?[^\s]*)[[:space:]]*$', $lien_url, $match)) {
@@ -654,14 +652,8 @@ function extraire_lien ($regs) {
 
 	// Preparer le texte du lien ; attention s'il contient un <div>
 	// (ex: [<docXX|right>->lien]), il faut etre smart
-	if ($lien_sortant) {
-		$class_lien = 'blank';
-		$insert = typo("<a href=\"$lien_url\" class=\"spip_$class_lien\""
-			." target=\"_blank\"$lien_hreflang>$lien_texte</a>");
-	} else {
-		$insert = typo("<a href=\"$lien_url\" class=\"spip_$class_lien\""
-			."$lien_hreflang>$lien_texte</a>");
-	}
+	$insert = typo("<a href=\"$lien_url\" class=\"spip_$class_lien\""
+		."$lien_hreflang>$lien_texte</a>");
 
 	return array($insert, $lien_url, $lien_texte);
 }
