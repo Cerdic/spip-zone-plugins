@@ -113,6 +113,20 @@
 
 
 	/**
+	 * lettres_pre_typo
+	 *
+	 * transforme les <imgXX|xxx> en <embXX|xxx>
+	 *
+	 * @param texte
+	 * @return texte
+	 * @author Pierre Basson
+	 **/
+	function lettres_pre_typo($texte) {
+		return preg_replace('@<img([0-9]+)@i', '<emb${1}', $texte);
+	}
+
+
+	/**
 	 * lettres_exec_init
 	 *
 	 * @param flux
@@ -416,6 +430,7 @@
 		$charset			= lire_meta('charset');
 		$email_webmaster	= lire_meta('email_webmaster');
 		$nom_site			= lire_meta('nom_site');
+		$url_site			= lire_meta('adresse_site');
 
 		// Récupération des données de l'abonné
 		$requete_donnees_abonne = 'SELECT email, code, format FROM spip_abonnes WHERE id_abonne="'.$id_abonne.'"';
@@ -424,6 +439,7 @@
 		// Doit-on forcer le format ?
 		if (!empty($format_force)) $format = $format_force;
 
+		$message_html	= ereg_replace('IMG/', "$url_site/IMG/", $message_html);
 		// Remplacement de %%CODE%% dans $message_html et $message_texte par $code
 		$message_html	= ereg_replace("%%CODE%%", $code, $message_html);
 		$message_texte	= ereg_replace("%%CODE%%", $code, $message_texte);

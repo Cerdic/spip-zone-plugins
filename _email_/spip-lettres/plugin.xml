@@ -17,4 +17,7 @@
         <pipeline>
                 <nom>taches_generales_cron</nom>
         </pipeline>
+        <pipeline>
+                <nom>pre_typo</nom>
+        </pipeline>
 </plugin>
