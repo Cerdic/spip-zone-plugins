@@ -73,8 +73,8 @@
 			preg_match_all('/"([^"]+\.('.implode('|', $extensions).'))"/Ui', $this->Body, $images);
 
 			for ($i=0; $i<count($images[1]); $i++) {
-				if (file_exists($images[1][$i])) {
-					$html_images[] = $images[1][$i];
+				if (file_exists('../'.$images[1][$i])) {
+					$html_images[] = '../'.$images[1][$i];
 					$this->Body = str_replace($images[1][$i], basename($images[1][$i]), $this->Body);
 				}
 			}
@@ -82,8 +82,9 @@
 				$html_images = array_unique($html_images);
 				sort($html_images);
 				for ($i=0; $i<count($html_images); $i++) {
-					$this->AddEmbeddedImage($html_images[$i], $i);
-					$this->Body = str_replace(basename($html_images[$i]), "cid:$i", $this->Body);
+					$cid = md5(uniqid(time()));
+					$this->AddEmbeddedImage($html_images[$i], $cid);
+					$this->Body = str_replace(basename($html_images[$i]), "cid:$cid", $this->Body);
 				}
 			}
 		}
