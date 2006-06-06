@@ -545,9 +545,10 @@ function extraire_lien ($regs) {
 
 	$lien_url = entites_html(vider_url($regs[3]));
 	$lien_interne = false;
-	if (ereg('^[[:space:]]*(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))?[[:space:]]*([[:digit:]]+)(#.*)?[[:space:]]*$', $lien_url, $match)) {
+	if (ereg('^[[:space:]]*(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))?[[:space:]]*([[:digit:]]+)(#.*)?(\?[^\s]*)[[:space:]]*$', $lien_url, $match)) {
 		$id_lien = $match[8];
 		$ancre = $match[9];
+		$params = $match[10];
 		$type_lien = substr($match[1], 0, 2);
 		$lien_interne=true;
 		$class_lien = "in";
@@ -617,7 +618,12 @@ function extraire_lien ($regs) {
 				break;
 		}
 
-		$lien_url .= $ancre;
+		if (strpos($lien_url,'?')) {
+			str_replace('?','&amp;',$params);
+		} else {
+			str_replace('&amp;','?',$params);
+		}
+		$lien_url .= $ancre.$params;
 
 		// supprimer les numeros des titres
 		$lien_texte = supprimer_numero($lien_texte);
