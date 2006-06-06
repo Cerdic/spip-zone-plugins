@@ -1,0 +1,1 @@
+﻿Ce repertoire est destiné a accueillir les plugins qui vont prendre en charges les fonctionnalites de AGORA non presentes dans le coeur de spip
