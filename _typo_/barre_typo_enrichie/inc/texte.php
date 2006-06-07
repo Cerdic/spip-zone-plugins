@@ -543,7 +543,7 @@ function extraire_lien ($regs) {
 
 	$lien_url = entites_html(vider_url($regs[3]));
 	$lien_interne = false;
-	if (ereg('^[[:space:]]*(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))?[[:space:]]*([[:digit:]]+)(#.*)?(\?[^\s]*)[[:space:]]*$', $lien_url, $match)) {
+	if (ereg('^[[:space:]]*(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))?[[:space:]]*([[:digit:]]+)(#.*)?(\?[^\s]*)?[[:space:]]*$', $lien_url, $match)) {
 		$id_lien = $match[8];
 		$ancre = $match[9];
 		$params = $match[10];
@@ -615,14 +615,19 @@ function extraire_lien ($regs) {
 				}
 				break;
 		}
-		
-		$params = str_replace('&', '&amp;', substr(str_replace('&amp;', '&', $params), 1));
-		if (strpos($lien_url,'?')) {
-			$params = '&amp;' . $params;
+
+		if ($params) {
+			if ((strpos($lien_url,'?'))) {
+				$params = str_replace('&', '&amp;', substr(str_replace('&amp;', '&', $params), 1));
+				$params = '&amp;' . $params;
+			} else {
+				$params = str_replace('&', '&amp;', substr(str_replace('&amp;', '&', $params), 1));
+				$params = '?' . $params;
+			}
+			$lien_url .= $params . $ancre;
 		} else {
-			$params = '?' . $params;
+			$lien_url .= $ancre;
 		}
-		$lien_url .= $params . $ancre;
 
 		// supprimer les numeros des titres
 		$lien_texte = supprimer_numero($lien_texte);
