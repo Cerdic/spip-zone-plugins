@@ -16,7 +16,8 @@
 	function csvimport_ajouterBoutons($boutons_admin) {
 		// si on est admin
 		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]
-		AND $GLOBALS["options"]=="avancees" AND $GLOBALS['meta']["activer_csvimport"]!="non") {
+		AND $GLOBALS["options"]=="avancees" AND 
+		isset($GLOBALS['meta']["activer_csvimport"]) AND $GLOBALS['meta']["activer_csvimport"]!="non") {
 
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['naviguer']->sousmenu["csvimport_tous"]= new Bouton(

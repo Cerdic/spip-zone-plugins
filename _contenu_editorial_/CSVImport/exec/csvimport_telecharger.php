@@ -99,7 +99,7 @@ function exec_csvimport_telecharger(){
 			$output .= csvimport_csv_ligne($ligne,$delim);
 		}
 
-		$charset = lire_meta('charset');
+		$charset = $GLOBALS['meta']['charset'];
 
 
 		$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo($titre))));
