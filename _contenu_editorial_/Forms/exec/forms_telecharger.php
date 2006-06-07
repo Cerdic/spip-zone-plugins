@@ -136,7 +136,7 @@ function exec_forms_telecharger(){
 		$structure = unserialize($row['structure']);
 	}
 
-	$charset = lire_meta('charset');
+	$charset = $GLOBALS['meta']['charset'];
 	$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo($titre))));
 
 	$s = '';
@@ -196,7 +196,7 @@ function exec_forms_telecharger(){
 		$champ = $row['champ'];
 		if ($types[$champ] == 'fichier') {
 			$fichiers[] = $row['valeur'];
-			//$valeurs[$champ][] = lire_meta('adresse_site')."/ecrire/forms_telecharger.php?id_reponse=$id_reponse&champ=$champ";
+			//$valeurs[$champ][] = $GLOBALS['meta']['adresse_site']."/ecrire/forms_telecharger.php?id_reponse=$id_reponse&champ=$champ";
 			$valeurs[$champ][] = 'fichiers/'.basename($row['valeur']);
 		}
 		else if ($v = $trans[$champ][$row['valeur']])

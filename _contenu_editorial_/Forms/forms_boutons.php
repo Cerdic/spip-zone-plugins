@@ -16,7 +16,8 @@ define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end($p)));
 	function Forms_ajouterBoutons($boutons_admin) {
 		// si on est admin
 		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]
-		AND $GLOBALS["options"]=="avancees" AND lire_meta("activer_forms")!="non") {
+		AND $GLOBALS["options"]=="avancees" 
+		AND (!isset($GLOBALS['meta']['activer_forms']) OR $GLOBALS['meta']['activer_forms']!="non") ) {
 
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['naviguer']->sousmenu["forms_tous"]= new Bouton(
