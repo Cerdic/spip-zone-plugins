@@ -78,6 +78,17 @@
 					$this->Body = str_replace($images[1][$i], basename($images[1][$i]), $this->Body);
 				}
 			}
+
+			$images = array();
+			preg_match_all("/'([^']+\.(".implode('|', $extensions)."))'/Ui", $this->Body, $images);
+
+			for ($i=0; $i<count($images[1]); $i++) {
+				if (file_exists('../'.$images[1][$i])) {
+					$html_images[] = '../'.$images[1][$i];
+					$this->Body = str_replace($images[1][$i], basename($images[1][$i]), $this->Body);
+				}
+			}
+
 			if (!empty($html_images)) {
 				$html_images = array_unique($html_images);
 				sort($html_images);
