@@ -35,7 +35,8 @@ function Forms_generer_url_sondage($id_form) {
 	return generer_url_public("sondage","id_form=$id_form",true);
 }
 
-if ($GLOBALS['ajout_reponse'] == 'oui' && $GLOBALS['ajout_cookie_form'] == 'oui')
+if (isset($GLOBALS['ajout_reponse']) && $GLOBALS['ajout_reponse'] == 'oui' 
+		isset($GLOBALS['ajout_cookie_form']) && $GLOBALS['ajout_cookie_form'] == 'oui')
 	Forms_poser_cookie_sondage();
 
 // test si un cookie sondage a ete pose
