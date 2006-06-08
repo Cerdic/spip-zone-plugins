@@ -33,6 +33,11 @@
 	*/
 
 function BarreTypoEnrichie_pre_propre($texte) {
+	// remplace les fausses listes à puce par de vraies
+	// (recherche en début de lignes - suivi d'un ou plusieurs caractères blancs, en mode multiligne)
+	if (!isset($GLOBALS['barre_typo_preserve_puces']))
+		$texte =  preg_replace('/^-\s+/m','-* ',$texte);
+
 	// tous les elements block doivent etre introduits ici
 	// pour etre pris en charge par paragrapher
 
@@ -105,12 +110,7 @@ function BarreTypoEnrichie_pre_propre($texte) {
 
 function BarreTypoEnrichie_post_propre($texte) {
 
-	// remplace les fausses listes à puce par de vraies
-	// (recherche en début de lignes - suivi d'un ou plusieurs caractères blancs, en mode multiligne)
-	if (!isset($GLOBALS['barre_typo_preserve_puces']))
-		$texte =  preg_replace('/^-\s+/m','-* ',$texte);
-
-	# Le remplacement des intertitres de premier niveau a déjà été effectué dans inc_texte.php
+	# Le remplacement des intertitres de premier niveau a déjà été effectué dans inc/texte.php
 
 	# Intertitre de deuxième niveau
 	/*global $debut_intertitre_2, $fin_intertitre_2;
