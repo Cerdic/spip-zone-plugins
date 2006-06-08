@@ -21,5 +21,19 @@ define('_DIR_PLUGIN_ACCES_RESTREINT',(_DIR_PLUGINS.end($p)));
 		$rubrique = $flux['args'];
 		return $flux;
 	}
+		
+	function AccesRestreint_affiche_milieu($flux){
+		$exec = $flux['args']['exec'];
+		if ($exec == 'auteurs_edit'){
+			include_spip('inc/acces_restreint_gestion');
+			$id_auteur = $flux['args']['id_auteur'];
+			$nouv_zone = _request('nouv_zone');
+			$supp_zone = _request('supp_zone');
+			// le formulaire qu'on ajoute
+			global $connect_statut;
+			$flux['data'] .= AccesRestreint_formulaire_zones('auteurs', $id_auteur, $nouv_zone, $supp_zone, $connect_statut == '0minirezo', generer_url_ecrire('auteurs_edit',"id_auteur=$id_auteur"));
+		}
+		return $flux;
+	}
 
 ?>

@@ -161,6 +161,7 @@
 	function AccesRestreint_formulaire_zones($table, $id_objet, $nouv_zone, $supp_zone, $flag_editable, $retour) {
 	  global $connect_statut, $connect_toutes_rubriques, $options;
 		global $spip_lang_rtl, $spip_lang_right;
+		$out = "";
 	
 		$retour = urlencode($retour);
 		$select_groupe = $GLOBALS['select_groupe'];
@@ -178,14 +179,14 @@
 	
 		list($nombre_zones) = spip_fetch_array(spip_query("SELECT COUNT(*) FROM spip_zones AS zones, spip_zones_$table AS lien WHERE lien.$id_table=$id_objet AND zones.id_zone=lien.id_zone"));
 	
-		echo "<a name='zones'></a>";
+		$out .= "<a name='zones'></a>";
 		if ($flag_editable){
 			if ($nouv_zone||$supp_zone)
 				$bouton = bouton_block_visible("leszones");
 			else
 				$bouton =  bouton_block_invisible("leszones");
 		}
-		debut_cadre_enfonce("../"._DIR_PLUGIN_ACCES_RESTREINT."/img_pack/zones-acces-24.png", false, "", $bouton._T('accesrestreint:titre_zones_acces'));
+		$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_ACCES_RESTREINT."/img_pack/zones-acces-24.png", true, "", $bouton._T('accesrestreint:titre_zones_acces'));
 	
 		//////////////////////////////////////////////////////
 		// Recherche de zones d'acces
@@ -230,8 +231,8 @@
 		$result = spip_query($query);
 	
 		if (spip_num_rows($result) > 0) {
-			echo "<div class='liste'>";
-			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
+			$out .= "<div class='liste'>";
+			$out .= "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
 		
 			$ifond=0;
 				
@@ -273,9 +274,9 @@
 		
 			$largeurs = array('25', '', '', '');
 			$styles = array('arial11', 'arial2', 'arial2', 'arial1');
-			echo afficher_liste($largeurs, $tableau, $styles);
+			$out .= afficher_liste($largeurs, $tableau, $styles);
 		
-			echo "</table></div>";
+			$out .= "</table></div>";
 		}
 	
 		if ($les_zones) {
@@ -289,23 +290,23 @@
 		// Afficher le formulaire d'ajout de zones d'acces
 		//
 		if ($flag_editable) {
-			if ($nouveaux_zones.$supp_zone)
-				echo debut_block_visible("leszones");
+			if ($nouveaux_zones | $supp_zone)
+				$out .= debut_block_visible("leszones");
 			/*else if ($nb_groupes > 0) {
-				echo debut_block_visible("leszones");
+				$out .= debut_block_visible("leszones");
 				// vilain hack pour redresser un triangle
 				$couche_a_redresser = $GLOBALS['numero_block']['leszones'];
-				if ($GLOBALS['browser_layer']) echo http_script("
+				if ($GLOBALS['browser_layer']) $out .= http_script("
 					triangle = findObj('triangle' + $couche_a_redresser);
 					if (triangle) triangle.src = '" . _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif';");
 			}*/
 			else
-				echo debut_block_invisible("leszones");
+				$out .= debut_block_invisible("leszones");
 	
 			if ($nombre_zones_associes > 3) {
-				echo "<div align='right' class='arial1'>";
-				echo "<a href='", generer_url_ecrire($url_base, "$id_table=$id_objet&supp_zone=-1#zones"), "'>",_T('accesrestreint:info_retirer_zones'),"</a>";
-				echo "</div><br />\n";
+				$out .= "<div align='right' class='arial1'>";
+				$out .= "<a href='". generer_url_ecrire($url_base, "$id_table=$id_objet&supp_zone=-1#zones"). "'>"._T('accesrestreint:info_retirer_zones')."</a>";
+				$out .= "</div><br />\n";
 			}
 	
 			// il faudrait rajouter STYLE='margin:1px;' qq part
@@ -316,7 +317,7 @@
 	
 			$message_ajouter_zone = "<span class='verdana1'><B>"._T('accesrestreint:titre_ajouter_zone')."</B></span> &nbsp;\n";
 	
-			echo "<table border='0' width='100%' style='text-align: $spip_lang_right'>";
+			$out .= "<table border='0' width='100%' style='text-align: $spip_lang_right'>";
 	
 					
 			$query = "SELECT * FROM spip_zones ";
@@ -326,45 +327,46 @@
 			$result = spip_query($query);
 
 			if (spip_num_rows($result) > 0) {
-				echo "\n<tr>";
-				echo $form_zone;
-				echo "\n<td>";
-				echo $message_ajouter_zone;
+				$out .= "\n<tr>";
+				$out .= $form_zone;
+				$out .= "\n<td>";
+				$out .= $message_ajouter_zone;
 				$message_ajouter_zone = "";
-				echo "</td>\n<td>";
+				$out .= "</td>\n<td>";
 
-				echo "<select name='nouv_zone' size='1' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" style='width: 180px; ' class='fondl'>";
+				$out .= "<select name='nouv_zone' size='1' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" style='width: 180px; ' class='fondl'>";
 
-				echo "\n<option value='x' style='font-variant: small-caps;'>"._T("accesrestreint:selectionner_une_zone")."</option>";
+				$out .= "\n<option value='x' style='font-variant: small-caps;'>"._T("accesrestreint:selectionner_une_zone")."</option>";
 				while($row = spip_fetch_array($result)) {
 					$id_zone = $row['id_zone'];
 					$titre_zone = $row['titre'];
 					$texte_option = entites_html(textebrut(typo($titre_zone)));
-					echo "\n<option value=\"$id_zone\">";
-					echo "&nbsp;&nbsp;&nbsp;";
-					echo "$texte_option</option>";
+					$out .= "\n<option value=\"$id_zone\">";
+					$out .= "&nbsp;&nbsp;&nbsp;";
+					$out .= "$texte_option</option>";
 				}
-				echo "</select>";
-				echo "</td>\n<td>";
-				echo "<span class='visible_au_chargement' id='valider_groupe_$id_groupe'>";
-				echo " &nbsp; <input type='submit' name='Choisir' value='"._T('bouton_choisir')."' class='fondo'>";
-				echo "</span>";
-				echo "</td></form>";
-				echo "</tr>";
+				$out .= "</select>";
+				$out .= "</td>\n<td>";
+				$out .= "<span class='visible_au_chargement' id='valider_groupe_$id_groupe'>";
+				$out .= " &nbsp; <input type='submit' name='Choisir' value='"._T('bouton_choisir')."' class='fondo'>";
+				$out .= "</span>";
+				$out .= "</td></form>";
+				$out .= "</tr>";
 			}
 			
 			/*if ($connect_statut == '0minirezo' AND $flag_editable AND $options == "avancees" AND $connect_toutes_rubriques) {
-				echo "<tr><td></td><td colspan='2'>";
-				echo "<div style='width: 200px;'>";
+				$out .= "<tr><td></td><td colspan='2'>";
+				$out .= "<div style='width: 200px;'>";
 				icone_horizontale(_T('accesrestreint:icone_creer_zone'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&id_table=$id_table&redirect=$retour"), "img_pack/zones-acces-24.png", "creer.gif");
-				echo "</div> ";
-				echo "</td></tr>";
+				$out .= "</div> ";
+				$out .= "</td></tr>";
 			}*/
 			
-			echo "</table>";
-			echo fin_block();
+			$out .= "</table>";
+			$out .= fin_block();
 		}
 	
-		fin_cadre_enfonce();
+		$out .= fin_cadre_enfonce(true);
+		return $out;
 	}
 ?>	
