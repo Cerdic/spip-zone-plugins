@@ -1,0 +1,36 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+  	<multi>[fr]Convertisseur de formats
+    [en]Format convertor</multi>
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	[erational->http://www.erational.org]
+_ &copy; 2006 - Licence GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+    	<multi>[fr]Convertit les formats de type wiki, phpBB en format SPIP et vice versa
+    	[en]Converts various formats (wiki, phpBB) into SPIP format</multi>
+	</description>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	Convertisseur
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+        <nom>ajouter_boutons</nom>
+        <action>ajouterBoutons</action>
+        <inclure>inc_convertisseur.php</inclure>
+  </pipeline>
+
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
