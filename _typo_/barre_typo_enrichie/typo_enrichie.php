@@ -35,6 +35,7 @@
 function BarreTypoEnrichie_pre_propre($texte) {
 	// remplace les fausses listes à puce par de vraies
 	// (recherche en début de lignes - suivi d'un ou plusieurs caractères blancs, en mode multiligne)
+	// Mettre $GLOBALS['barre_typo_preserve_puces'] = true; dans mes_options.php pour ne pas avoir ce comportement
 	if (!isset($GLOBALS['barre_typo_preserve_puces']))
 		$texte =  preg_replace('/^-\s+/m','-* ',$texte);
 
