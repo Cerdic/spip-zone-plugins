@@ -10,7 +10,7 @@
  *
  */
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
 define('_DIR_PLUGIN_GESTION_DOCUMENTS',(_DIR_PLUGINS.end($p)));
 
 function generer_query_string($conteneur,$id_type,$nb_aff,$filtre){
@@ -391,6 +391,7 @@ function exec_portfolio(){
 				generer_url_ecrire('portfolio',"updatetable=oui&".generer_query_string($conteneur,$id_type,$nb_aff,$filtre)),
 				"administration-24.gif");
 		}
+		icone_horizontale (_L('Reparer les liens'), generer_url_ecrire('reparer_liens_documents'),"../"._DIR_PLUGIN_GESTION_DOCUMENTS."/stock_broken_image.png");
 
 		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string($conteneur,"",$nb_aff,$filtre))."' method='post'><div>\n";
 		echo _L('Type :') . "<br /><select name='id_type'";
