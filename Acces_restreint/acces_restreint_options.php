@@ -7,7 +7,7 @@ include_spip('inc/acces_restreint');
 
 // ajouter un marqueur de cache pour permettre de differencier le cache en fonction des zones autorisees
 // potentiellement une version de cache differente par combinaison de zones habilitees + le cache de base sans autorisation
-if ($auteur_session['id_auteur']){
+if (isset($auteur_session['id_auteur'])){
 	$zones = AccesRestreint_liste_zones_appartenance_auteur(intval($auteur_session['id_auteur']));
 	$zones = join("-",$zones);
 	if (!isset($GLOBALS['marqueur'])) $GLOBALS['marqueur']="";

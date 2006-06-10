@@ -160,7 +160,7 @@ include_spip('inc/rubriques');
 			$liste_rub_exclues = array();
 			global $auteur_session;
 			$liste_rub_exclues = AccesRestreint_liste_rubriques_acces_proteges();
-			if ($auteur_session['id_auteur']){
+			if (isset($auteur_session['id_auteur'])){
 				$id_auteur = intval($auteur_session['id_auteur']);
 				$s = spip_query("SELECT id_zone FROM spip_zones_auteurs WHERE id_auteur=$id_auteur");
 				while ($row = spip_fetch_array($s)){
