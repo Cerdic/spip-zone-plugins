@@ -24,7 +24,7 @@ $evenements = array(
 		);
 
 $evenements_key = array(
-		"PRIMARY KEY"	=> "id_evenement, id_article",
+		"PRIMARY KEY"	=> "id_evenement",
 		"KEY date_debut"	=> "date_debut",
 		"KEY date_fin"	=> "date_fin",
 		"KEY id_article"	=> "id_article"

@@ -15,7 +15,7 @@ function Agenda_uninstall(){
 }
 
 function Agenda_verifier_base(){
-	$version_base = 0.13;
+	$version_base = 0.12;
 	$current_version = 0.0;
 	if (   (!isset($GLOBALS['meta']['agenda_base_version']) )
 			|| (($current_version = $GLOBALS['meta']['agenda_base_version'])!=$version_base)){
@@ -47,10 +47,6 @@ function Agenda_verifier_base(){
 			}
 			spip_query("DROP TABLE spip_evenements_articles");
 			ecrire_meta('agenda_base_version',$current_version=0.12);
-		}
-		if ($current_version<0.13){
-			spip_query("ALTER IGNORE TABLE spip_evenements DROP PRIMARY KEY, ADD PRIMARY KEY (id_evenement, id_article)");
-			ecrire_meta('agenda_base_version',$current_version=0.13);
 		}
 		
 		ecrire_metas();
