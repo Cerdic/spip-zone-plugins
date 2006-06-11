@@ -49,10 +49,10 @@ global $tables_jointures;
 $tables_jointures['spip_index'][] = 'types_tables';
 
 global $exceptions_des_tables;
-$exceptions_des_tables['index']['type']=array('spip_types_tables', 'type');
+$exceptions_des_tables['index']['type_table']=array('spip_types_tables', 'type');
 
 global $exceptions_des_jointures;
-$exceptions_des_jointures['type'] = array('spip_types_tables', 'type');
+$exceptions_des_jointures['type_table'] = array('spip_types_tables', 'type');
 
 //-- Table des tables ----------------------------------------------------
 
