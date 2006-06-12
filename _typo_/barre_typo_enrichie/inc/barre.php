@@ -17,21 +17,26 @@ define('_DIR_PLUGIN_BARRE_TYPO',(_DIR_PLUGINS.end($p)));
 // construit un bouton (ancre) de raccourci avec icone et aide
 
 function bouton_barre_racc($action, $img, $help, $champhelp) {
+	include_spip('inc/charsets');
 
 	$a = attribut_html($help);
-	return "<a\nhref=\"javascript:"
+	$action = str_replace ("&lt;", '%3C',  $action);
+	$action = str_replace ("&gt;", '%3E',  $action);
+	$action = str_replace ("\n", '%5Cn',  $action);
+	$action = unicode_to_javascript(html2unicode($action));
+	return "<a href=\"javascript:"
 		.$action
-		."\" class='spip_barre' tabindex='1000'\ntitle=\""
+		."\"\n class='spip_barre' tabindex='1000' title=\""
 		. $a
 		."\"" 
-		.(!_DIR_RESTREINT ? '' :  "\nonmouseover=\"helpline('"
+		.(!_DIR_RESTREINT ? '' :  " onmouseover=\"helpline('"
 		  .addslashes($a)
-		  ."',$champhelp)\"\nonmouseout=\"helpline('"
+		  ."',$champhelp)\" onmouseout=\"helpline('"
 		  .attribut_html(_T('barre_aide'))
 		  ."', $champhelp)\"")
-		."><img\nsrc='"
+		."><img src='"
 		.$img
-		."' border='0' height='16' width='16' align='middle' /></a>";
+		."' height='16' width='16' alt=\"".$a."\" /></a>";
 }
 
 // sert à construire les sousbarre
@@ -54,7 +59,7 @@ function produceWharf($id, $title = '', $sb = '') {
 //creation de tableau
 function afficher_gestion_tableau($champ) {
 
-$tableau_formulaire = '<table class="spip_barre" style="width: 100%; padding: 1px!important; border-top: 0px;">
+$tableau_formulaire = '<table class="spip_barre" style="width: 100%; padding: 1px!important; border-top: 0px;" summary="">
 <tr><td>
 '._T('bartypenr:barre_gestion_colonne').': <input type="text" name="barre_nbcolones" style="width: 30px;" value="2" size="2" maxlength="2"   /></td><td>
 '._T('bartypenr:barre_gestion_ligne').': <input type="text" name="barre_nbrangs" style="width: 30px;" value="2" size="2" maxlength="2" /></td><td>
@@ -67,7 +72,7 @@ $tableau_formulaire = '<table class="spip_barre" style="width: 100%; padding: 1p
     = Math.abs(barre_nbrangs.value);
     if (!(barre_nbcolones.value == 0 || barre_nbrangs.value == 0)) {
     barre_tableau('.$champ.', barre_nbcolones.value, barre_nbrangs.value,
-    barre_doentete.checked, barre_docaption.checked); } "> 
+    barre_doentete.checked, barre_docaption.checked); } " /> 
 </td></tr></table>
 ';  
   return produceWharf('tableau_gestion','',$tableau_formulaire); 
@@ -77,14 +82,14 @@ $tableau_formulaire = '<table class="spip_barre" style="width: 100%; padding: 1p
 function afficher_gestion_lien($champ) {
 
 $tableau_formulaire = '
- <table class="spip_barre" style="width: 100%; padding: 1px!important; border-top: 0px;">
+ <table class="spip_barre" style="width: 100%; padding: 1px!important; border-top: 0px;" summary="">
 <tr><td> 
-'._T('bartypenr:barre_adresse').': <input type="text" name="lien_nom" value="http://" size="21" maxlength="255" /><br/>
+'._T('bartypenr:barre_adresse').': <input type="text" name="lien_nom" value="http://" size="21" maxlength="255" /><br />
 '._T('bartypenr:barre_bulle').': <input type="text" name="lien_bulle" value="" size="21" maxlength="255" />
 </td><td>
 '._T('bartypenr:barre_langue').': <input type="text" name="lien_langue" value="" size="10" maxlength="10" />
 </td><td>
-  <input type="button" value="OK" class="fondo" onclick="javascript:barre_demande_lien(\'[\', \'->\', \']\', lien_nom.value, lien_bulle.value, lien_langue.value,'.$champ.');"> 
+  <input type="button" value="OK" class="fondo" onclick="javascript:barre_demande_lien(\'[\', \'->\', \']\', lien_nom.value, lien_bulle.value, lien_langue.value,'.$champ.');" /> 
 </td></tr></table>
 ';
   return produceWharf('tableau_lien','',$tableau_formulaire); 	
@@ -96,23 +101,23 @@ $tableau_formulaire = '
 function afficher_gestion_remplacer($champ) {
 
 $tableau_formulaire = '
-<table class="spip_barre" style="width: 100%; padding: 1px!important; border-top: 0px;">
-<tr><td width = "25%">'.
+<table class="spip_barre" style="width: 100%; padding: 1px!important; border-top: 0px;" summary="">
+<tr><td style="width: 25%;">'.
 _T('bartypenr:barre_gestion_cr_chercher')
-.'<input type="text" name="barre_chercher" value="" size="12" maxlength="255" /></td><td width = "20%">
+.'<input type="text" name="barre_chercher" value="" size="12" maxlength="255" /></td><td style="width: 20%;">
 <input type="checkbox" name="rec_case" value="yes" />'
 ._T('bartypenr:barre_gestion_cr_casse')
-.'<br/><input type="checkbox" name="rec_entier" value="yes" />
+.'<br /><input type="checkbox" name="rec_entier" value="yes" />
 '._T('bartypenr:barre_gestion_cr_entier').'
-</td><td  width = "25%">'
+</td><td  style="width: 25%;">'
 ._T('bartypenr:barre_gestion_cr_remplacer')
 .'<input type="text" name="barre_remplacer" value="" size="12" maxlength="255" /> 
-</td><td width = "20%">
+</td><td style="width: 20%;">
 <input type="checkbox" name="rec_tout" value="yes" />'
 ._T('bartypenr:barre_gestion_cr_tout')
-.'</td><td width = "10%">
+.'</td><td style="width: 10%;">
    <input type="button" value="OK" class="fondo"
-  onclick="javascript:barre_searchreplace(document.formulaire.barre_chercher.value, document.formulaire.barre_remplacer.value, document.formulaire.rec_tout.checked, document.formulaire.rec_case.checked, document.formulaire.rec_entier.checked,'.$champ.');"> 
+  onclick="javascript:barre_searchreplace(document.formulaire.barre_chercher.value, document.formulaire.barre_remplacer.value, document.formulaire.rec_tout.checked, document.formulaire.rec_case.checked, document.formulaire.rec_entier.checked,'.$champ.');" /> 
 </td></tr></table>';
 
   return produceWharf('tableau_remplacer','',$tableau_formulaire); 
@@ -122,19 +127,19 @@ _T('bartypenr:barre_gestion_cr_chercher')
 function afficher_gestion_ancre($champ) {
 
 $tableau_formulaire = '
-<table class="spip_barre" style="width: 100%; padding: 1px!important; border-top: 0px;">
+<table class="spip_barre" style="width: 100%; padding: 1px!important; border-top: 0px;" summary="">
   <tr>
-    <td width="10%" align="center"><strong>Gestion des ancres</strong></td>
-    <td width="45%"><strong>Transformer en ancre</strong><br/>
-    <label for="ancre_nom"><i>Nom de l\'ancre</i></label> <br/>
-      <input type="text" name="ancre_nom" id="ancre_nom">
+    <td style="width:10%; text-align:center;"><strong>Gestion des ancres</strong></td>
+    <td style="width:45%;"><strong>Transformer en ancre</strong><br />
+    <label for="ancre_nom"><i>Nom de l\'ancre</i></label> <br />
+      <input type="text" name="ancre_nom" id="ancre_nom" />
 	  
-	<input type="button" value="OK" class="fondo" onclick="javascript:barre_ancre(\'[#\', \'<-\', \']\', ancre_nom.value, '.$champ.');" > 
+	<input type="button" value="OK" class="fondo" onclick="javascript:barre_ancre(\'[#\', \'%3C-\', \']\', ancre_nom.value, '.$champ.');" /> 
     </td>
-	<td width="45%"><strong>Pointer vers une ancre</strong><br/>
-    <label for="ancre_cible"><i>Ancre cible</i></label> <input type="text" name="ancre_cible" id="ancre_cible"><br/>
-	<label for="ancre_bulle"><i>Bulle d\'aide ancre</i></label> <input type="text" name="ancre_bulle" id="ancre_bulle">
-	<input type="button" value="OK" class="fondo" onclick="javascript:barre_demande(\'[\', \'->#\', \']\', ancre_cible.value, ancre_bulle.value, '.$champ.');" > 
+	<td style="width:45%;"><strong>Pointer vers une ancre</strong><br />
+    <label for="ancre_cible"><i>Ancre cible</i></label> <input type="text" name="ancre_cible" id="ancre_cible" /><br />
+	<label for="ancre_bulle"><i>Bulle d\'aide ancre</i></label> <input type="text" name="ancre_bulle" id="ancre_bulle" />
+	<input type="button" value="OK" class="fondo" onclick="javascript:barre_demande(\'[\', \'->#\', \']\', ancre_cible.value, ancre_bulle.value, '.$champ.');" /> 
 </td>
   </tr> 
 </table>';
@@ -178,12 +183,12 @@ $reta .= bouton_barre_racc ("barre_inserer('&Ccedil;',$champ)", _DIR_PLUGIN_BARR
 // euro
 $reta .= bouton_barre_racc ("barre_inserer('&euro;',$champ)", _DIR_IMG_ICONES_BARRE."euro.png", _T('barre_euro'), $champhelp);
 
-$reta .= "&nbsp;</td>";
+$reta .= "&nbsp;";
 	
 $tableau_formulaire = '
-<table class="spip_barre" style="width: 100%; padding: 1px!important; border-top: 0px;">
+<table class="spip_barre" style="width: 100%; padding: 1px!important; border-top: 0px;" summary="">
   <tr class="spip_barre">
-    <td width="30%">'._T('bartypenr:barre_caracteres').'</td>
+    <td style="width:30%;">'._T('bartypenr:barre_caracteres').'</td>
     <td>'.$reta.'
     </td>
   </tr> 
@@ -219,8 +224,8 @@ function afficher_barre($champ, $forum=false, $lang='') {
     $toolbox .= afficher_gestion_remplacer($champ);
 //
 
-	$ret .= "<table class='spip_barre' width='100%' cellpadding='0' cellspacing='0' border='0'>";
-	$ret .= "\n<tr width='100%' class='spip_barre'>";
+	$ret .= "<table class='spip_barre' style='width:100%;' cellpadding='0' cellspacing='0' border='0' summary=''>";
+	$ret .= "\n<tr style='width: 100%;' class='spip_barre'>";
 	$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 	$col = 1;
 
