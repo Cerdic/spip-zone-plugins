@@ -32,24 +32,33 @@ function exec_convertisseur(){
   // ref. syntaxe: http://moinmoin.wikiwikiweb.de/HelpOnFormatting?highlight=%28formatting%29  
   $conv_formats['MoinWiki_SPIP'] = array(
       "pattern" => array(
-        'code'   => "{{{([^}}}]*)}}}", // FIXME si } dans {{{ }}}
-        'list'   => "\*([^\*]*)",
-        'bold'   => "'''([^'']*)'''",
-        'i'      => "''([^'']*)''",
+        'code'   => "{{{([^}}}]*)}}}", // FIXME si } dans {{{ }}}                
+        'bold3'  => "'''''([^''''']*)'''''",
+        'bold2'  => "''''([^'''']*)''''",
+        'bold'   => "'''([^''']*)'''", 
+        'i'      => "''([^'']*)''",      
         'under'  => "__([^\_]*)__",  
         'del'    => "~~([^\~]*)~~",
-        'h4'     => "==== ([^\====]*) ====",
-        'h3'     => "=== ([^\===]*) ===",
-        'h2'     => "== ([^\==]*) ==",
-        'h'      => "= ([^\=]*) =", 
+        'h4'     => "==== ([^ ====]*) ====",
+        'h3'     => "=== ([^ ===]*) ===",
+        'h2'     => "== ([^ ==]*) ==",
+        'h'      => "= ([^ =]*) =", 
         'link2'  => "\\[([^\\[]*) ([^(\\[| )]*)\\]", // FIXME si plusieurs espaces blanc
         'cell'   => "\|\|([^\|]*)\|\|",
+        'ul'     => "([^ ]*)\*([^ \*]*)",  
+        'ul_pas2'=> " -\*", 
+        'ul2'    => "  -\*", 
+        'ul3'    => "  -\**",        
+        'ol2'    => "   ([^ ]*)1.([^ 1.]*)",
+        'ol'     => " 1\.([^ 1\.]*)",
+        
         ),
       "replacement" => array(
-        'code'   => "<code>\\1</code>",
-        'list'   => "-\\1", 
-        'bold'   => "{{\\1}}",
-        'i'      => "{\\1}", 
+        'code'   => "<code>\\1</code>",              
+        'bold3'   => "{{\\1}}",
+        'bold2'   => "{{\\1}}", 
+        'bold'   => "{{\\1}}", 
+        'i'      => "{\\1}",       
         'under'  => "<span class='underline'>\\1</span",
         'del'    => '<del>\\1</del>',
         'h4'     => "{{{\\1}}}", 
@@ -57,7 +66,13 @@ function exec_convertisseur(){
         'h2'     => "{{{\\1}}}",  
         'h'      => "{{{\\1}}}",                
         'link2'  => "[\\2->\\1]",
-        'cell'   => "|\\1|",
+        'cell'   => "|\\1|",        
+        'ul'     => "-*\\2", 
+        'ul_pas2'=> "-*", 
+        'ul2'    => "-**",
+        'ul3'    => "-***",             
+        'ol2'    => "1.#\\2",
+        'ol'     => "-#\\1", 
         )
   );
   
@@ -152,11 +167,11 @@ function exec_convertisseur(){
 	   $conv_out = str_replace("</textarea>",'&lt;/textarea&gt;',$conv_out);
 	   echo "<div style='background-color:#E6ECF9;padding:8px 3px;margin-bottom:5px'>"._T("convertisseur:convertir_en");
 	   if (isset($conv_formats[$format])) echo "<strong>"._T("convertisseur:$format")."</strong>\n";
-	   echo "<textarea name='conv_out' cols='55' rows='12'>$conv_out</textarea><br />\n";
+	   echo "<textarea name='conv_out' cols='65' rows='12'>$conv_out</textarea><br />\n";
 	   echo "</div>\n";
   }
 	$conv_in = str_replace("</textarea>",'&lt;/textarea&gt;',$conv_in);
-	echo "<textarea name='conv_in' cols='55' rows='12'>$conv_in</textarea><br />\n";
+	echo "<textarea name='conv_in' cols='65' rows='12'>$conv_in</textarea><br />\n";
 	echo _T("convertisseur:from");
   echo "<select name='format'>\n"; 
   foreach ($conv_formats as $k=>$val) {  
