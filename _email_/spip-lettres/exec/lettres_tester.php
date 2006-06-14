@@ -16,6 +16,7 @@
 	include_spip('inc/lettres_fonctions');
 	include_spip('inc/lettres_admin');
  	include_spip('inc/presentation');
+	include_spip('inc/distant');
 
 
 	/**
