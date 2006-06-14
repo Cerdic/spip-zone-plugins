@@ -15,6 +15,7 @@
 
 	include_spip('base/lettres');
 	include_spip('inc/plugin');
+	include_spip('inc/lettres_admin');
 	include_spip('inc/lettres_balises');
 	include_spip('inc/lettres_filtres');
 	include_spip('inc/lettres_classes');
@@ -74,6 +75,7 @@
 	 * @author Pierre Basson
 	 **/
 	function lettres_header_prive($texte) { 
+		lettres_verifier_base();
 		$texte	= ereg_replace('img_pack/presentation.js', _DIR_PLUGIN_LETTRE_INFORMATION.'/img_pack/presentation.js', $texte);
 		return $texte;
 	}

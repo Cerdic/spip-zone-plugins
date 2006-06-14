@@ -13,8 +13,8 @@
 	 **/
 
 
--	include_spip('base/create');
--	include_spip('base/abstract_sql');
+	include_spip('base/create');
+	include_spip('base/abstract_sql');
 	include_spip('inc/lettres_fonctions');
 	include_spip('inc/plugin');
 	global $pas;
@@ -77,7 +77,6 @@
 	 * @author Pierre Basson
 	 **/
 	function lettres_verifier_droits() {
-		lettres_verifier_base();
 		if ($GLOBALS['connect_statut'] != "0minirezo")
 			lettres_rediriger_javascript(generer_url_ecrire('accueil')); 
 	}
