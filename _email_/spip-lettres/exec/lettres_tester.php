@@ -42,11 +42,10 @@
 		
 		$fond_message_html	= $GLOBALS['meta']['fond_message_html'];
 		$fond_message_texte	= $GLOBALS['meta']['fond_message_texte'];
-		$f = charger_fonction('assembler', 'public');
-		$page_html	= $f($fond_message_html, array('id_lettre' => $id_lettre));
-		$page_texte	= $f($fond_message_texte, array('id_lettre' => $id_lettre));
-		$message_html	= $page_html['texte'];
-		$message_texte	= $page_texte['texte'];
+		$url_message_html	= generer_url_public($fond_message_html, 'id_lettre='.$id_lettre, '&');
+		$url_message_texte	= generer_url_public($fond_message_texte, 'id_lettre='.$id_lettre, '&');
+		$message_html	= recuperer_page($url_message_html);
+		$message_texte	= recuperer_page($url_message_texte);
 
 		$requete_auteurs = 'SELECT A.email
 							FROM spip_auteurs AS A
