@@ -302,10 +302,10 @@ function exec_portfolio(){
 			$montexte = propre($montexte);
 			$alt = "";
 			$altgood = false;
-			if (preg_match("{alt=[\"]([^\"]*)[\"]}",$montexte)){
+			if (preg_match("{alt=[\"']([^\"']*)[\"']}",$montexte)){
 				global $alt;
 				$t=$table_type[$row['id_type']];
-				$alt = preg_replace("{\\A(.*)alt=['\"]([^\"]*)['\"].*\\z}is","\\2",$montexte);
+				$alt = preg_replace("{\\A(.*)alt=['\"]([^\"']*)['\"].*\\z}is","\\2",$montexte);
 				if ( (preg_match("{\\A\($t\)\\z}",$alt))
 					|| (preg_match("{\\A$t\s*-\s*[0-9\.]+\s*[ko]+\\z}",$alt)) )
 				  $altgood = false;
