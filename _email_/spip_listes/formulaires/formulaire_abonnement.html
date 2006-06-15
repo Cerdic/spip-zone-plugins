@@ -60,9 +60,12 @@
 			<legend><b><:spiplistes:abo_1_lettre:><a href="#URL_SITE_SPIP">#NOM_SITE_SPIP</a></b></legend>]
 		<//B_listes>
 		[(#ENV{login}|?{' ',''})
-		<div style='clear:both; width:100%'>
-			[(#REM|bloog_extra_saisie{'auteurs', 'inscription','true'})]
-		</div>
+		<ul style='clear:both; width:100%;list-style-type:none;margin:0;padding:0'>
+		<div style="font-size:100%;font-weight:bold">Format :</div>
+		<li><input name="suppl_abo" value="html"  type="radio" checked="checked"><:spiplistes:html:></li>
+		<li><input name="suppl_abo" value="texte" type="radio"><:spiplistes:texte:></li>
+		<li><input name="suppl_abo" value="non"   type="radio"><:spiplistes:desabonnement:></li>
+		</ul>
 
 		<div style='width:100%'>
 			[(#ENV{inscription_redac}|=={oui}|?{' ',[(#ENV{inscription_visiteur}|=={oui}|?{' ',''})]})
