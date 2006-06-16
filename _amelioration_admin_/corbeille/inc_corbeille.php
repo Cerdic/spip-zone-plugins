@@ -50,7 +50,7 @@ define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS.end($p)));
 
   // affiche l'icone poubelle (vide ou pleine)
 	function Corbeille_icone_poubelle($total_table) {
-		if (empty($total_table)) 	return "<img src='"._DIR_PLUGIN_CORBEILLE."/img_pack/trash-empty-24.png' alt='trash empty' />"; 
+		if (empty($total_table)) 	return "<img src='"._DIR_PLUGIN_CORBEILLE."/img_pack/trash-empty-24.png' alt='trash empty'/>"; 
 		                     else return "<img src='"._DIR_PLUGIN_CORBEILLE."/img_pack/trash-full-24.png'  alt='trash full'/>";
 	}
 
@@ -64,24 +64,13 @@ define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS.end($p)));
 	}
   
   // affiche ligne
-  function Corbeille_affiche_ligne($titre,$url,$total_table,$ifond){
-	  global $couleur_claire;
-		if ($ifond==0){
-			$ifond=1;
-			$couleur="$couleur_claire";
-		}else{
-			$ifond=0;
-			$couleur="#FFFFFF";
-		}
-		echo "<tr style='background-color:$couleur;' class='verdana2'>\n";
-		echo "<td>$titre</td>\n";
-		echo "<td style='width:50px;'>";
-		if ($total_table>0)  echo "<a href='$url' class='corbeille'>".Corbeille_icone_poubelle($total_table)."</a>";
-                    else echo Corbeille_icone_poubelle($total_table);	
-		echo "</td>\n";
-		echo "<td>$total_table</td>\n";
-		echo "</tr>\n";
-		return $ifond;
+  function Corbeille_affiche_ligne($titre,$url,$total_table){
+		echo "<div class='verdana2' style='width:100%;padding:5px;'>\n";		
+		if ($total_table>0)  echo "<a href='$url' class='corbeille'>";
+    echo Corbeille_icone_poubelle($total_table);    
+		echo " $total_table $titre";
+		if ($total_table>0)  echo "</a>";
+    echo "</div>\n";
 	}
 
 	function Corbeille_affiche($page){
@@ -106,20 +95,20 @@ define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS.end($p)));
 		$totaux = ($total_auteur + $total_forums_prives + $total_forums_publics + $total_articles + $total_breves + $total_signatures); 
 	
 		//types de documents geres par la corbeille
-		echo _L("Choisissez le type de documents &agrave; afficher :<br/>");
-		echo "<style type='text/css'>a.corbeille {display:block;border:3px solid #f00;padding: 5px;width:28px;height:28px;} a.corbeille:hover {background: #fcc;border:3px solid #c00;} </style>";
-		
-		echo "<table style='width:100%'>";
-		$ifond=0;	
-		$ifond = Corbeille_affiche_ligne(_L('P&eacute;titions'),generer_url_ecrire($page,"type_doc=signatures"),$total_signatures,$ifond);
-		$ifond = Corbeille_affiche_ligne(_L('Br&egrave;ves'),generer_url_ecrire($page,"type_doc=breves"),$total_breves,$ifond);
-		$ifond = Corbeille_affiche_ligne(_L('Articles'),generer_url_ecrire($page,"type_doc=articles"),$total_articles,$ifond);
-		$ifond = Corbeille_affiche_ligne(_L('Forums Publics'),generer_url_ecrire($page,"type_doc=forums_publics"),$total_forums_publics,$ifond);
-		$ifond = Corbeille_affiche_ligne(_L('Forums Priv&eacute;s'),generer_url_ecrire($page,"type_doc=forums_prives"),$total_forums_prives,$ifond);
-		$ifond = Corbeille_affiche_ligne(_L('Auteurs'),generer_url_ecrire($page,"type_doc=auteurs"),$total_auteur,$ifond);
-		// $ifond = Corbeille_affiche_ligne(_L('Tout'),generer_url_ecrire($page,"type_act=tout"),$totaux,$ifond); FIXME: ne pas afficher la ligne "tout" car pas fonctionnel pour l'instant
-		echo "</table><br/>";
+		echo "<strong>"._T('corbeille:choix_doc')."</strong><br/>";
+		echo "<style type='text/css'>a.corbeille {border:3px solid #f00;padding: 5px;} a.corbeille:hover {background: #fcc;border:3px solid #c00;} </style>";
+	
+  	Corbeille_affiche_ligne(_L('P&eacute;titions'),generer_url_ecrire($page,"type_doc=signatures"),$total_signatures);
+		Corbeille_affiche_ligne(_L('Br&egrave;ves'),generer_url_ecrire($page,"type_doc=breves"),$total_breves);
+		Corbeille_affiche_ligne(_L('Articles'),generer_url_ecrire($page,"type_doc=articles"),$total_articles);
+		Corbeille_affiche_ligne(_L('Forums Publics'),generer_url_ecrire($page,"type_doc=forums_publics"),$total_forums_publics);
+		Corbeille_affiche_ligne(_L('Forums Priv&eacute;s'),generer_url_ecrire($page,"type_doc=forums_prives"),$total_forums_prives); // utile ? puisqu'on ne peut pas les supprimer
+		Corbeille_affiche_ligne(_L('Auteurs'),generer_url_ecrire($page,"type_doc=auteurs"),$total_auteur);
+		// Corbeille_affiche_ligne(_L('Tout'),generer_url_ecrire($page,"type_act=tout"),$totaux); FIXME: ne pas afficher la ligne "tout" car pas fonctionnel pour l'instant
+
 	}
+	
+	
 
 
 ?>
