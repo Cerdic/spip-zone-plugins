@@ -293,7 +293,7 @@ function csvimport_array_visu_extrait($data, $head, $nombre_lignes = 0){
 		$output .= "</table>\n";
 	}
 	if ($data_count==0)
-	  $output .= _L("Pas de donnée");
+	  $output .= _L("Pas de donn&eacute;e");
 	else
 	  $output .= count($data) . _L(" lignes au total");
 	return $output;
@@ -486,7 +486,7 @@ function csvimport_ajoute_table_csv($data, $table, $assoc_field, &$erreur){
 					  $erreur[$count_lignes][] = "ajout impossible ::$what::$with::<br />";
 				}
 				else
-				  $erreur[$count_lignes][] = "rien à ajouter<br />";
+				  $erreur[$count_lignes][] = "rien &agrave; ajouter<br />";
 		 	//}
 			// creation de l'enregistrement direct
 		 	/*else {

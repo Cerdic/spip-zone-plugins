@@ -85,11 +85,11 @@ function exec_csvimport_import(){
 				 $erreur[$step][] = _L("Fichier absent");
 	
 			if (!$delim)
-				 $erreur[$step][] = _L("Delimiteur non défini");
+				 $erreur[$step][] = _L("Delimiteur non d&eacute;fini");
 			/*if (!isset($head))
-				 $erreur[$step][] = _L("Header non défini");*/
+				 $erreur[$step][] = _L("Header non d&eacute;fini");*/
 			if (!count($assoc_field))
-				 $erreur[$step][] = _L("Correspondances CSV-Table non définies");
+				 $erreur[$step][] = _L("Correspondances CSV-Table non d&eacute;finies");
 			if (isset($erreur[$step])) $step--;
 		}
 		
@@ -102,7 +102,7 @@ function exec_csvimport_import(){
 			$new_assoc=csvimport_field_associate($data, $table, $assoc_field);
 			$test=array_diff($new_assoc,$assoc_field);
 			if (count($test)>0){
-				$erreur[$step][] = _L("Correspondances CSV-Table incomplètes");
+				$erreur[$step][] = _L("Correspondances CSV-Table incompl&egrave;tes");
 			}
 			if (isset($erreur[$step])) $step--;
 		}
@@ -138,7 +138,7 @@ function exec_csvimport_import(){
 				echo csvimport_array_visu_assoc($data, $table, $assoc_field, 5);
 				fin_cadre_enfonce();
 				echo "<div style='padding: 2px; color: black;'>&nbsp;";
-				echo _L("Cette opération va entraîner la suppression de toutes les données présentes dans la table.");
+				echo _L("Cette op&eacute;ration va entraîner la suppression de toutes les donn&eacute;es pr&eacute;sentes dans la table.");
 				echo $import_form_link;
 				foreach($hidden as  $key=>$value)
 					echo "<input type='hidden' name='$key' value='$value' />";
@@ -161,12 +161,12 @@ function exec_csvimport_import(){
 				echo csvimport_array_visu_assoc($data, $table, $assoc_field, 5);
 				fin_cadre_enfonce();
 				echo "<div style='padding: 2px; color: black;'>&nbsp;";
-				echo _L("Les données du fichier CSV vont être ajoutées à la table comme illustré ci-dessus.");
+				echo _L("Les donn&eacute;es du fichier CSV vont être ajout&eacute;es &agrave; la table comme illustr&eacute; ci-dessus.");
 				echo $import_form_link;
 				foreach($hidden as  $key=>$value)
 					echo "<input type='hidden' name='$key' value='$value' />";
 				echo "<input type='submit' name='annule_ajoute' value='"._L('Annuler')."' class='fondo'> ";
-				echo "<input type='submit' name='confirme_ajoute' value='"._L('Ajouter les données')."' class='fondo'>";
+				echo "<input type='submit' name='confirme_ajoute' value='"._L('Ajouter les donn&eacute;es')."' class='fondo'>";
 				echo "</form>";
 	 		}
 			else {
@@ -231,10 +231,10 @@ function exec_csvimport_import(){
 					(!isset($_FILES['csvfile']))
 				&&( (!$file_name)||(!$tmp_name)||(!$size)||(!$type) )
 				 )
-				 $erreur[$step][] = _L("Problème lors du chargement du fichier");
+				 $erreur[$step][] = _L("Probl&egrave;me lors du chargement du fichier");
 	
 			if ((isset($_FILES['csvfile']))&&($_FILES['csvfile']['error']!=0))
-				$erreur[$step][]=_L("Problème lors du chargement du fichier (erreur ".$_FILES['csvfile']['error'].")");
+				$erreur[$step][]=_L("Probl&egrave;me lors du chargement du fichier (erreur ".$_FILES['csvfile']['error'].")");
 			if (isset($erreur[$step])) $step--;
 		}
 		if ($step==2){
@@ -297,13 +297,13 @@ function exec_csvimport_import(){
 			foreach($hidden as  $key=>$value)
 				echo "<input type='hidden' name='$key' value='$value' />";
 			echo "<div style='margin: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
-			echo "Prévisualisation ";
+			echo "Pr&eacute;visualisation ";
 			echo "<input type='submit' name='apercu' value='"._L('Appliquer')."' class='fondl'>";
 			echo "</div>";
 	
-			echo "<strong><label for='separateur'>"._L("Caractère de séparation")."</label></strong> ";
+			echo "<strong><label for='separateur'>"._L("Caract&egrave;re de s&eacute;paration")."</label></strong> ";
 			echo "<input type='text' name='delim' id='separateur' class='fondl' style='width:2em;' maxlength='1' value='$delim'><br />";
-			echo "<strong><label for='entete'>"._L("1<sup>ère</sup> ligne d'en-tête")."</label></strong> ";
+			echo "<strong><label for='entete'>"._L("1<sup>&egrave;re</sup> ligne d'en-tête")."</label></strong> ";
 			echo "<input type='checkbox' name='head' id='entete' class='fondl' style='width:2em;' value='true'";
 			if ($head==true)
 			  echo " checked='checked'";
@@ -321,7 +321,7 @@ function exec_csvimport_import(){
 	
 			if ($csvimport_add_actif) {
 				echo "<div style='padding: 2px; color: black;'>&nbsp;";
-				echo "<input type='submit' name='ajouter' value='"._L('Ajouter à la table')."' class='fondo'>";
+				echo "<input type='submit' name='ajouter' value='"._L('Ajouter &agrave; la table')."' class='fondo'>";
 				echo "</div>\n";
 			}
 	
@@ -348,7 +348,7 @@ function exec_csvimport_import(){
 			echo "<form action='$import_link' method='POST' enctype='multipart/form-data'>";
 			foreach($hidden as  $key=>$value)
 				echo "<input type='hidden' name='$key' value='$value' />";
-			echo "<strong><label for='file_name'>"._L("Fichier CSV à importer")."</label></strong> ";
+			echo "<strong><label for='file_name'>"._L("Fichier CSV &agrave; importer")."</label></strong> ";
 			echo "<br />";
 			echo "<input type='file' name='csvfile' id='file_name' class='formo'>";
 			echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
