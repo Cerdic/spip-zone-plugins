@@ -16,6 +16,7 @@
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 		'lettres_information' => 'Newsletters',
+		'lettre_information' => 'Newsletter',
 
 		// Installation
 		'installation' => 'Newsletter plugin\'s installation',

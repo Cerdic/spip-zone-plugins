@@ -16,6 +16,7 @@
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 		'lettres_information' => 'Lettres d\'information',
+		'lettre_information' => 'Lettre d\'information',
 
 		// Installation
 		'installation' => 'Installation du plugin "Lettres d\'information"',
