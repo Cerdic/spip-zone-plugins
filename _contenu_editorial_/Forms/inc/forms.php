@@ -490,45 +490,66 @@
 				$type = $t['type'];
 				$code = $t['code'];
 				$type_ext = $t['type_ext'];
-				$form_summary .= $t['nom'] . " : ";
-	
-				$query2 = "SELECT * FROM spip_reponses_champs WHERE id_reponse='$id_reponse' AND champ='$code'";
-				$result2 = spip_query($query2);
-				$reponses = '';
-				while ($row2 = spip_fetch_array($result2)) {
-					if ($email['route']==$code && isset($email[$row2['valeur']]))
-						$email_dest = $email[$row2['valeur']];
-					if ($code == $champconfirm)
-						$mailconfirm = $row2['valeur'];
-						
-					//$reponses .= $row2['valeur'].", ";
-					$reponses .= Forms_traduit_reponse($type, $code,$type_ext,$row2['valeur']).", ";
+
+				if (!in_array($type,array('separateur','textestatique'))){
+					$form_summary .= $t['nom'] . " : ";
+		
+					$query2 = "SELECT * FROM spip_reponses_champs WHERE id_reponse='$id_reponse' AND champ='$code'";
+					$result2 = spip_query($query2);
+					$reponses = '';
+					while ($row2 = spip_fetch_array($result2)) {
+						if ($email['route']==$code && isset($email[$row2['valeur']]))
+							$email_dest = $email[$row2['valeur']];
+						if ($code == $champconfirm)
+							$mailconfirm = $row2['valeur'];
+							
+						//$reponses .= $row2['valeur'].", ";
+						$reponses .= Forms_traduit_reponse($type, $code,$type_ext,$row2['valeur']).", ";
+					}
+					if (strlen($reponses) > 2)
+						$form_summary .= substr($reponses,0,strlen($reponses)-2);
+					$form_summary .= "\n";
 				}
-				if (strlen($reponses) > 2)
-					$form_summary .= substr($reponses,0,strlen($reponses)-2);
-				$form_summary .= "\n";
 			}
 	
-		 	if ($mailconfirm != '') {
+			include_spip('inc/charset');
+			$trans_tbl = get_html_translation_table (HTML_ENTITIES);
+			$trans_tbl = array_flip ($trans_tbl);
+		 	if ($mailconfirm !== '') {
 				$head="From: formulaire@".$_SERVER["HTTP_HOST"]."\n";
-				$message = $texte . "\n" . $form_summary;
+
+				$message = "";
+				$message .= $texte . "\n" . $form_summary;
 				$sujet = $titre;
 				$dest = $mailconfirm;
-	
-				mail($dest, $sujet, $message, $head);
+				
+				// mettre le texte dans un charset acceptable
+				$mess_iso = unicode2charset(charset2unicode($message),'iso-8859-1');
+				// regler les entites si il en reste
+				$mess_iso = strtr($mess_iso, $trans_tbl);
+
+				mail($dest, $sujet, $mess_iso, $head);
 			}
 			if ($email_dest != '') {
 				$head="From: formulaire_$id_form@".$_SERVER["HTTP_HOST"]."\n";
-				$fullurl = _DIR_RESTREINT_ABS .generer_url_ecrire("forms_reponses");
+				$fullurl = generer_url_ecrire("forms_reponses","",true);
 	
-				$link = parametre_url($fullurl,'id_form',$id_form);
-				$message = $link . "\n";
+				$link = parametre_url($fullurl,'id_form',$id_form,'&');
+				$message = "";
+				$message .= _L('Formulaire')." ".$titre."\n";
+				$message .= _L('Retrouvez cette r&eacute;ponse dans l\'interface d\'administration : '). $link . "\n\n";
 				$message .= $form_summary;
 				$message .= "mail confirmation :$mailconfirm:";
 				$sujet = $titre;
 				$dest = $email_dest;
-	
-				mail($dest, $sujet, $message, $head);
+				
+				// mettre le texte dans un charset acceptable
+				$mess_iso = unicode2charset(charset2unicode($message),'iso-8859-1');
+				// regler les entites si il en reste
+				$mess_iso = strtr($mess_iso, $trans_tbl);
+
+				
+				mail($dest, $sujet, $mess_iso, $head);
 		 	}
 		}
 	}
