@@ -63,17 +63,19 @@ define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS.end($p)));
 		return ($total);
 	}
   
-  // affiche ligne
-  function Corbeille_affiche_ligne($titre,$url,$total_table){
+// affiche ligne
+function Corbeille_affiche_ligne($titre,$url,$total_table){
 		echo "<div class='verdana2' style='width:100%;padding:5px;'>\n";		
-		if ($total_table>0)  echo "<a href='$url' class='corbeille'>";
+		if ($total_table>0) $style = "class='corbeille'";
+		               else $style = "";
+    echo "<a href='$url'$style>";		              
     echo Corbeille_icone_poubelle($total_table);    
 		echo " $total_table $titre";
-		if ($total_table>0)  echo "</a>";
+		echo "</a>";
     echo "</div>\n";
-	}
+}
 
-	function Corbeille_affiche($page){
+function Corbeille_affiche($page){
 		//case "signatures" :
 		$statut = "poubelle"; $titre = "nom_email"; $table = "spip_signatures"; $id = "id_signature"; $temps = "date_time";
 		$total_signatures = Corbeille_compte_elements_vider($table, $statut, $titre);
@@ -102,13 +104,10 @@ define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS.end($p)));
 		Corbeille_affiche_ligne(_L('Br&egrave;ves'),generer_url_ecrire($page,"type_doc=breves"),$total_breves);
 		Corbeille_affiche_ligne(_L('Articles'),generer_url_ecrire($page,"type_doc=articles"),$total_articles);
 		Corbeille_affiche_ligne(_L('Forums Publics'),generer_url_ecrire($page,"type_doc=forums_publics"),$total_forums_publics);
-		Corbeille_affiche_ligne(_L('Forums Priv&eacute;s'),generer_url_ecrire($page,"type_doc=forums_prives"),$total_forums_prives); // utile ? puisqu'on ne peut pas les supprimer
+		Corbeille_affiche_ligne(_L('Forums Priv&eacute;s'),generer_url_ecrire($page,"type_doc=forums_prives"),$total_forums_prives); 
 		Corbeille_affiche_ligne(_L('Auteurs'),generer_url_ecrire($page,"type_doc=auteurs"),$total_auteur);
 		// Corbeille_affiche_ligne(_L('Tout'),generer_url_ecrire($page,"type_act=tout"),$totaux); FIXME: ne pas afficher la ligne "tout" car pas fonctionnel pour l'instant
-
-	}
-	
-	
+}
 
 
 ?>

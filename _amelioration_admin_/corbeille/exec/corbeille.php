@@ -63,8 +63,7 @@ lescript;
 			$statut = "privoff"; $table = "spip_forum"; $id = "id_forum";
 			Corbeille_effacement( $table, $statut, $titre, $id);
 			$statut = "5poubelle"; $titre = "nom"; $table="spip_auteurs"; $id="id_auteur";
-			Corbeille_effacement( $table, $statut, $titre, $id);
-			//echo "<meta http-equiv=\"refresh\" content=\"0; URL=".generer_url_ecrire($page)."\">"; 
+			Corbeille_effacement( $table, $statut, $titre, $id);			 
 			$debut=0;$type_act=0;
 		}
 
@@ -121,6 +120,7 @@ lescript;
 					$table="spip_auteurs"; 
 					$id="id_auteur"; 
 					$temps = "maj"; 
+					$page_voir = array("auteurs_edit",'id_auteur');
 					$libelle = _L("Tous les auteurs dans la corbeille :");
 					break;
 			}
