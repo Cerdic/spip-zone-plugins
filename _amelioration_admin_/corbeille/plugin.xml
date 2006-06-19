@@ -8,7 +8,7 @@ _ mail : silicium@japanim.net
 _ web amateur : http://www.japanim.net/
 _ web technique : http://spip.japanim.net/
 _ adaptation en plugin par cedric.morin@yterium.com
-_ &copy; 2005-2006 - Distribue sous licence GNU/GPL
+_ &copy; 2005-2006 - Distribu&eacute; sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.1
@@ -17,7 +17,7 @@ _ &copy; 2005-2006 - Distribue sous licence GNU/GPL
 	experimental
 	</etat>
 	<description>
-	Gestion des documents mis a la corbeille
+	Gestion des documents mis &agrave; la corbeille
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::

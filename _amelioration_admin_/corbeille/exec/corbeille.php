@@ -2,6 +2,7 @@
 
 include(dirname(__FILE__).'/../inc_corbeille.php');
 
+
 //
 // Corbeille
 function exec_corbeille(){
@@ -15,7 +16,7 @@ function exec_corbeille(){
 
 	$js=<<<lescript
 <script type="text/javascript">
-
+<!--
 function checkAll() {  // (un)check all checkboxes by erational.org 
    var flag = document.corb.checkmaster.checked;       
    var ElNum = document.corb.elements.length;   
@@ -25,17 +26,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
    }                                         
 }  
 
-<!-- The JavaScript Source!! http://javascript.internet.com -->
-
-<!-- Begin
-function NewWindow(mypage, myname, w, h, scroll) {
-         var winl = (screen.width - w) / 2;
-         var wint = 0;
-         winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable'
-         win = window.open(mypage, myname, winprops)
-         if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
-}
-//  End -->
+-->
 </script>
 lescript;
 
@@ -44,10 +35,7 @@ lescript;
 	debut_page(_T('corbeille:corbeille'));	  
  
 	if ($connect_statut == "0minirezo") {
-		$page = "corbeille";
-		$page3 = "Corbeille_forum";
-		$page4 = "Corbeille_signature";	
-		
+		$page = "corbeille";	
 				
 		if (empty($debut)) $debut = 0;
 		$titre = "titre"; 
@@ -77,7 +65,7 @@ lescript;
 					$table = "spip_signatures";
 					$id = "id_signature"; 
 					$temps = "date_time"; 
-					$page_voir = array($page4,'id_document');
+					//$page_voir = array($page4,'id_document');
 					$libelle = _L("Toutes les p&eacute;titions dans la corbeille :");
 					break;
 				case "breves" : 
@@ -101,8 +89,7 @@ lescript;
 					$table = "spip_forum";
 					$id = "id_forum";
 					$temps = "date_heure";
-					$page_voir = array($page3,'id_document');
-					$page_voir_fin=" onclick=\"NewWindow(this.href,'name','500','500','yes');return false;\""; 
+					//$page_voir = array($page3,'id_document');
 					$libelle = _L("Tous les messages du forum dans la corbeille :");
 					break;
 				case "forums_prives" :
@@ -110,8 +97,7 @@ lescript;
 					$table = "spip_forum"; 
 					$id = "id_forum"; 
 					$temps = "date_heure"; 
-					$page_voir = array($page3,'id_document');
-					$page_voir_fin=" onclick=\"NewWindow(this.href,'name','500','500','yes');return false;\""; 
+					//$page_voir = array($page3,'id_document');
 					$libelle = _L("Tous les messages du forum dans la corbeille :");
 					break;
 				case "auteurs" :  
@@ -223,10 +209,25 @@ lescript;
 						echo "<tr style='background:$couleur;'>";
 						echo "<td style='width:5%;'><input type='checkbox' name='effacer[]' value='$id_document'' /></td>";					
 						echo "<td class='verdana2' style='width:70%;'>";
-						// FIXME bug: lien sur forums et petition pas bon,
-						if (! empty($page_voir))echo "<a href='".generer_url_ecrire($page_voir[0],$page_voir[1]."=$id_document")."'$page_voir_fin>";
-						echo typo($titre);
-						if (! empty($page_voir)) echo "</a>";						
+						if (! empty($page_voir)) {
+                echo "<a href='".generer_url_ecrire($page_voir[0],$page_voir[1]."=$id_document")."'>".typo($titre)."</a>";
+            } else {
+                /* version 1: avec bloc dépliant
+                echo typo($titre);
+                echo "<br />".bouton_block_invisible("for_".$id_document)._T('corbeille:voir_detail');
+                echo debut_block_invisible("for_".$id_document);
+                if ($type_doc == "signatures") $detail = recupere_signature_detail($id_document);
+                                          else $detail = recupere_forum_detail($id_document);
+                echo "<div style='background:#aaa;padding:5px'>$detail</div>";
+                echo fin_block();
+                */
+                // version 2 rollover
+                echo "<a href='#' onmouseover=\"changestyle('for_$id_document', 'visibility', 'visible');\" onmouseout=\"changestyle('for_$id_document', 'visibility', 'hidden');\">".typo($titre)."</a>";
+                if ($type_doc == "signatures") $detail = recupere_signature_detail($id_document);
+                                          else $detail = recupere_forum_detail($id_document);
+                echo "<div id='for_$id_document' style='position:absolute;background:#aaa;padding:5px;margin:-150px 0 0 350px;width: 350px;' class='invisible_au_chargement'>$detail</div>";
+                
+            }						
 						echo "</td>";
 						echo "<td class='verdana2' style='width:25%;'>".affdate($date_heure)."</td>";						
 						echo "</tr>\n";

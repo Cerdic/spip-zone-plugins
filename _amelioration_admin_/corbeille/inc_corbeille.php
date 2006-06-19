@@ -109,5 +109,44 @@ function Corbeille_affiche($page){
 		// Corbeille_affiche_ligne(_L('Tout'),generer_url_ecrire($page,"type_act=tout"),$totaux); FIXME: ne pas afficher la ligne "tout" car pas fonctionnel pour l'instant
 }
 
+//
+// recupere les details du forum
+function recupere_forum_detail($id_document){
+  $str = "";	
+	$req="SELECT id_forum, date_heure, titre, texte, auteur, email_auteur FROM spip_forum WHERE id_forum=$id_document";
+	$result = spip_query($req);
+	$row=spip_fetch_array($result);
+	
+	$str = "Le " . affdate($row[1]) . ", ";
+	if (! empty($row[5])) $str .= "<a href=\"mailto:" . $row[5] . "\">";
+	$str .= $row[4];
+	if (! empty($row[5])) 	$str .= "</a>";
+	$str .= " a &eacute;crit :<br /><br /><strong>";
+  $str .= $row[2] . "</strong><br /><br /><p align=justify>" . $row[3] . "</p>";
+	
+  return $str;	
+}
+
+//
+// recupe les details d'une petition
+function recupere_signature_detail($id_document){
+  $str = "";
+	$req="SELECT id_article, date_time, ad_email, nom_site, nom_email  FROM spip_signatures WHERE id_signature=$id_document";
+	$result = spip_query($req);
+	$row=spip_fetch_array($result);
+	
+	$str = "Le <strong>" . affdate($row[1]) . "</strong>,<br />";
+	if (! empty($row[5])) $str .= "<a href=\"mailto:" . $row[5] . $row[4] . "\">";
+	$str .= $row[4];
+	if (! empty($row[5])) $str .= "</a>";
+	$str .= " a sign&eacute; via : <strong>";
+	$str .= $row[2] . "</strong><br />";
+	$str .= " la p&eacute;tition : <strong>";
+	$row2=spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article=$row[0]"));
+	$str .= $row2[2] . "<strong> : " . $row2[5] . "</strong><br />";
+
+  return $str;
+}
+
 
 ?>
