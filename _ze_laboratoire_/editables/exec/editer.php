@@ -8,6 +8,7 @@ function exec_editer() {
 	}
 
 	// recuperer les morceaux et verifier qu'ils sont nets
+	$retour = urldecode($_POST['url']);
 	$actions = urldecode($_POST['actions']);
 	$callbacks = urldecode($_POST['callbacks']);
 	$secu = $_POST['actions_secu'];
@@ -52,7 +53,8 @@ function exec_editer() {
 	if(!$res) {
 		echo mysql_error();
 	}
-	//rediriger($_POST['retour']);
+	if($retour)
+		rediriger($retour);
 }
 
 // A l'alle, on a calcule un md5 sur les elements sensibles, concatene a un peu

@@ -85,6 +85,10 @@ error_log("callbacks $callbacks");
 	return $p;
 }
 
+// genere le code d'un formulaire dans lequel placer des editables
+// _ syntaxe : <code>#EDITABLE_DEBUT{actions,url}</code>
+// -* actions = un nom de squelette contenant les actions
+// -* url = l'url a laquelle revenir apres validation du formulaire
 function balise_EDITABLE_DEBUT($p) {
 	global $editable;
 error_log("EDITABLE_DEBUT");
