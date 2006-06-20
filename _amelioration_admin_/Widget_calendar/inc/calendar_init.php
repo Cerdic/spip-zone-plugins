@@ -155,7 +155,7 @@ function WCalendar_header_prive($flux) {
 		$months_long = "";
 		$months_short = "";
 		for ($j=1;$j<=12;$j++){
-			$nom = entites_html(ucfirst(html_entity_decode(_T("spip:date_mois_$j"))));
+			$nom = entites_html(ucfirst(filtrer_entites(_T("spip:date_mois_$j"))));
 			$months_long .= ",'".unicode2charset(charset2unicode($nom,''))."'";
 			$months_short .= ",'".unicode2charset(charset2unicode(preg_replace("/^((&#x?[0-9]{2,5};|.){0,3}).*$/i","\\1",$nom),''))."'";
 		}
@@ -167,7 +167,7 @@ function WCalendar_header_prive($flux) {
 		$days_short = "";
 		$days_1char = "";
 		for ($j=1;$j<=7;$j++){
-			$nom = entites_html(ucfirst(html_entity_decode(_T("spip:date_jour_$j"))));
+			$nom = entites_html(ucfirst(filtrer_entites(_T("spip:date_jour_$j"))));
 			$days_long .= ",'".$nom."'";
 			$days_medium .= ",'".preg_replace("/^((&#x?[0-9]{2,5};|.){0,3}).*$/i","\\1",$nom)."'";
 			$days_short .= ",'".preg_replace("/^((&#x?[0-9]{2,5};|.){0,2}).*$/i","\\1",$nom)."'";
