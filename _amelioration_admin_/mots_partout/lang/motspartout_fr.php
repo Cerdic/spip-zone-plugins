@@ -19,7 +19,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'tagmachine' => 'liste des mots &agrave; ajouter',
 									   'par' => 'par',
 									   'installer' => 'configurer la base de donn&eacute;es pour avoir des mots sur les',
-									   'toutinstalle' => 'La base de donn&eacute;es est d&eacute;j&agrave; configur&eacute;e pour mettre des mots partout.'
+									   'toutinstalle' => 'La base de donn&eacute;es est d&eacute;j&agrave; configur&eacute;e pour mettre des mots partout.',
+
+									   'info_articles' => 'Articles',
+									   'info_breves' => 'Br&egrave;ves',
+									   'info_rubriques' => 'Rubriques',
+									   'info_syndic' => 'Syndic',
+									   'info_auteurs' => 'Auteurs',
+									   'info_documents' => 'Documents',
+									   'info_messages' => 'Messages',
+
+									   'item_mots_cles_association_auteurs' => 'aux auteurs',
+									   'item_mots_cles_association_documents' => 'aux documents',
+									   'item_mots_cles_association_messages' => 'aux messages',
 									   );
 
 ?>
