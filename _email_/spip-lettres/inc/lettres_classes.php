@@ -77,6 +77,10 @@
 					$html_images[] = '../'.$images[1][$i];
 					$this->Body = str_replace($images[1][$i], basename($images[1][$i]), $this->Body);
 				}
+				if (file_exists($images[1][$i])) {
+					$html_images[] = $images[1][$i];
+					$this->Body = str_replace($images[1][$i], basename($images[1][$i]), $this->Body);
+				}
 			}
 
 			$images = array();
@@ -85,6 +89,10 @@
 			for ($i=0; $i<count($images[1]); $i++) {
 				if (file_exists('../'.$images[1][$i])) {
 					$html_images[] = '../'.$images[1][$i];
+					$this->Body = str_replace($images[1][$i], basename($images[1][$i]), $this->Body);
+				}
+				if (file_exists($images[1][$i])) {
+					$html_images[] = $images[1][$i];
 					$this->Body = str_replace($images[1][$i], basename($images[1][$i]), $this->Body);
 				}
 			}
