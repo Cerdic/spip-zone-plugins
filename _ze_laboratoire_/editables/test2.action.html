@@ -9,22 +9,6 @@
 </update>
 </BOUCLE_arts>
 
-<BOUCLE_pipo(PIPO)>
-<update type='pipo'>
-	<where name='id' value='#ID'/>
-	<field name='titre' valueFrom='pipo#ID'/>
-</update>
-</BOUCLE_pipo>
-
-<insert type='pipo'>
-	<where name='id' value='42'/>
-	<field name='str' valueFrom='pipoNew1'/>
-</insert>
-<insert type='pipo'>
-	<field name='id' value='24'/>
-	<field name='str' valueFrom='pipoNew2'/>
-</insert>
-
 <insert type='articles' id='art'>
 	<field name='titre' obligatoire='1' valueFrom='titreNewArt'/>
 	<field name='surtitre' valueFrom='surtitreNewArt'/>

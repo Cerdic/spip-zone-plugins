@@ -13,21 +13,32 @@ class actionParser  {
 	var $sql= array();
 
 	// on part d'un etat 'vide' et on empile des etats 'actions' puis
-	// 'update' ou 'insert' puis 'key' ou 'field' puis eventuellement 'get' 
+	// 'update' ou 'insert' puis 'field' puis eventuellement 'select' 
 	var $state=array();
 
-	// la liste d'action qui en resulte
+	// la liste d'actions qui en resulte
 	var $liste= array();
 	// les actions en cours d'interpretation
 	var $actions= array();
+	/** ce tableau contient une liste d'entrées, chacune étant elle même un
+	 * tableau associatif avec les clés suivantes :
+	 * type = insert ou  update
+	 * table = la table concernées (nom spip et pas nom de table sql,
+	 *  càd articles et pas spip_articles par exemple)
+	 * id = le nom à donner à l'éventuel autoincrément
+	 * field = la liste des champs avec leur valeur
+	 * aTrouver = la liste des champs dont il faut trouver la valeur par ailleurs
+	 * (via un select imbriqué)
+	 */
 
-	// si on trouve des erreurs en court de route (valeurs obligatoires
+	// si on trouve des erreurs en cours de route (valeurs obligatoires
 	// absentes principalement)
 	var $errors= array();
 
 	// compteur pour les variables temporaires generees
 	var $tmpVars= 0;
 
+	// initialisation d'un parseur d'actions et des données de travail
 	function actionParser($valeurs) {
 		$this->valeurs= $valeurs;
 		$this->parser = xml_parser_create($GLOBALS['meta']['charset']);
@@ -38,20 +49,29 @@ class actionParser  {
 		xml_set_element_handler($this->parser, "startElement", "endElement");
 	}
 
+	// effectue le parsing et en déduit une structure "actions"
 	function parse($data) {
 		//xml_parse_into_struct($this->parser, $data, $values, $indexes);
 		//echo "VALUES=".var_export($values, 1)."\n";
 		//echo "INDEXES=".var_export($indexes, 1)."\n";
 		xml_parse($this->parser, $data);
+
+		if(($c=xml_get_error_code($this->parser)) != XML_ERROR_NONE) {
+			return xml_error_string($c);
+		} else {
+			return null;
+		}
 	}
 
+	// parcours la structure "actions" et en déduit un code php effectuant les
+	// appels sql correspondants.
 	function getCode($liste=null) {
 		if(!$liste) {
 			$l= $this->liste;
 		} else {
 			$l= $liste;
 		}
-		echo "<xmp>getSql:".var_export($l, 1)."</xmp>";
+		//echo "<xmp>getSql:".var_export($l, 1)."</xmp>";
 		$res='';
 		foreach($l as $action) {
 			if($action['type']=='insert') {
@@ -64,9 +84,9 @@ class actionParser  {
 				$valeurs= '('.join(", ", array_values($action['field'])).')';
 				$appel= "spip_abstract_insert(\"$table\",\"$colonnes\",\"$valeurs\")";
 				if($id=$action['id']) {
-					$res.="\n && (\$var_tmp_$id= $appel)";
+					$res.="\n && (\$tmp_var_$id= $appel)!==false";
 				} else {
-					$res.="\n && $appel";
+					$res.="\n && $appel!==false";
 				}
 			} else {
 				$set= array();
@@ -181,6 +201,7 @@ class actionParser  {
 			//array_unshift($this->state, $name);
 			array_unshift($this->actions,
 						  array('type' => 'select',
+								'aFaire' => 'oui',
 								'table' => $attrs['type'],
 								'colonne' => $attrs['name']));
 			break;
@@ -209,8 +230,9 @@ class actionParser  {
 			//	die("fin update/insert inattendu");
 			//}
 			$a= array_shift($this->actions);
-			echo "FERME ".var_export($a, 1);
-			if($a['aFaire']=='oui' && $a['field']!=array()) {
+			//echo "FERME ".var_export($a, 1);
+			if($a['aFaire']=='oui'
+			   && ($a['field']!=array() || $a['where']!=array()) ) {
 				unset($a['aFaire']);
 				if(count($this->actions)) {
 					$this->actions[0]['sousActions'][]= $a;
@@ -222,7 +244,7 @@ class actionParser  {
 
 		case 'field':
 			//if($st!=$name) {
-			//	die("fin key/field inattendu");
+			//	die("fin field inattendu");
 			//}
 			//array_shift($this->state);
 			break;
@@ -275,8 +297,8 @@ class actionParser  {
 				$table= $table['table'];
 				$res.="\n && (($var=spip_abstract_fetsel(\""
 					.$value['colonne']."\", \"".$table
-					."\", \"$where\")) && ($var= ${var}['"
-					.$value['colonne']."']))";
+					."\", \"$where\"))!==false && ($var= ${var}['"
+					.$value['colonne']."'])!==false)";
 				$value= "\".$var.\"";
 			}
 		} else {

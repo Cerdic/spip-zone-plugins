@@ -1,29 +1,31 @@
 <actions>
 <update type='articles'>
-	<key name='id_article' value='1'/>
+	<where name='id_article' value='1'/>
 	<field name='titre' valueFrom='titreArt1'/>
 	<field name='surtitre' valueFrom='surtitreArt1'/>
 </update>
 
 <update type='articles'>
-	<key name='id_article' value='2'/>
+	<where name='id_article' value='2'/>
 	<field name='titre' valueFrom='titreArt2'/>
 	<field name='surtitre' valueFrom='surtitreArt2'/>
 </update>
 
+<!--
 <update type='pipo'>
-	<key name='id' value='42'/>
+	<where name='id' value='42'/>
 	<field name='titre' valueFrom='pipo42'/>
 </update>
 
 <insert type='pipo' id='pipo1'>
-	<key name='id' value='42'/>
+	<field name='id' value='42'/>
 	<field name='str' valueFrom='pipo1'/>
 </insert>
 <insert type='pipo' id='pipo2'>
 	<field name='id' value='24'/>
 	<field name='str' valueFrom='pipo2'/>
 </insert>
+-->
 
 <insert type='articles' id='art'>
 	<field name='titre' cond='!' valueFrom='titreNewArt'/>
@@ -32,9 +34,9 @@
 	<callback>???</callback>
 	<field name='id_rubrique' cond='!' valueFrom='rubrique'/>
 	<field name='id_secteur'>
-		<get type='rubriques' name='id_secteur'>
+		<select type='rubriques' name='id_secteur'>
 			<where name='id_rubrique' valueFrom='rubrique'/>
-		</get>
+		</select>
 	</field>
 </insert>
 <insert type='auteurs_articles'>
