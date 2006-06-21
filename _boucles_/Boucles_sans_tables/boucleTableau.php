@@ -75,7 +75,7 @@ function boucle_TABLEAU($id_boucle, &$boucles) {
 	}
 
 	if($var===null) {
-	  erreur_squelette("pas de variable sélectionnée",
+	  erreur_squelette("pas de variable s&eacute;lectionn&eacute;e",
 					   $boucle->id_boucle);
 	  return;
 	}
@@ -140,7 +140,7 @@ function boucle_AFFECTER($id_boucle, &$boucles) {
 	}
 
 	if($var===null) {
-	  erreur_squelette("pas de variable sélectionnée",
+	  erreur_squelette("pas de variable s&eacute;lectionn&eacute;e",
 					   $boucle->id_boucle);
 	  return;
 	}
@@ -167,15 +167,12 @@ function balise_TABLEAU($p) {
 		}
 
 		// les cles
-		array_shift($p->param[0]);
-		array_shift($p->param[0]);
-		foreach($p->param[0] as $pp) {
+		foreach(array_slice($p->param[0], 2) as $pp) {
 			$cle.= '['.calculer_liste($pp,
 				$p->descr, $p->boucles, $p->id_boucle).']';
 		}
-		array_shift($p->param);
 	} else {
-	  erreur_squelette("pas de variable sélectionnée dans balise TABLEAU",
+	  erreur_squelette("pas de variable s&eacute;lectionn&eacute;e dans balise TABLEAU",
 					   $boucle->id_boucle);
 	  return;
 	}
@@ -191,15 +188,12 @@ function balise_AFFECTER($p) {
 		$var=  $p->param[0][1][0]->texte;
 
 		// les cles
-		array_shift($p->param[0]);
-		array_shift($p->param[0]);
-		foreach($p->param[0] as $pp) {
+		foreach(array_slice($p->param[0], 2) as $pp) {
 			$cle.= '['.calculer_liste($pp,
 				$p->descr, $p->boucles, $p->id_boucle).']';
 		}
-		array_shift($p->param);
 	} else {
-	  erreur_squelette("pas de variable sélectionnée dans balise AFFECTER",
+	  erreur_squelette("pas de variable s&eacute;lectionn&eacute;e dans balise AFFECTER",
 					   $boucle->id_boucle);
 	  return;
 	}
