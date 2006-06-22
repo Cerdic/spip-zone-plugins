@@ -22,7 +22,7 @@ function boucle_SESSION($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 
 	$code='
-		error_log("session : ".var_export($GLOBALS[\'auteur_session\'], 1));
+		//error_log("session : ".var_export($GLOBALS[\'auteur_session\'], 1));
 ';
 	foreach($boucle->where as $w) {
 		$code.="\n		if(!($w)) return '';";
@@ -36,17 +36,34 @@ function boucle_SESSION($id_boucle, &$boucles) {
 			\$Pile[\$SP]['login']= \$GLOBALS['auteur_session']['login'];
 			\$Pile[\$SP]['email']= \$GLOBALS['auteur_session']['email'];
 			\$Pile[\$SP]['statut']= \$GLOBALS['auteur_session']['statut'];
+			\$prefs = spip_abstract_fetsel("prefs", "spip_auteurs",
+					"id_auteur = " . \$GLOBALS['auteur_session']['id_auteur']);
+			\$Pile[\$SP]['prefs']= unserialize(\$prefs['prefs']);
+			//error_log("PREFS : ".var_export(\$Pile[\$SP]['prefs'],1));
 		} else {
 			\$Pile[\$SP]['id_auteur']='';
 			\$Pile[\$SP]['nom']='';
 			\$Pile[\$SP]['login']='';
 			\$Pile[\$SP]['email']='';
 			\$Pile[\$SP]['statut']='anonymous';
+			\$Pile[\$SP]['prefs']= array();
 		}
 		return $boucle->return;
 CODE;
 
 	return $code;
+}
+
+function balise_PREFS($p) {
+	if ($p->param && !$p->param[0][0]) {
+		$p->code = '($Pile[$SP][\'prefs\'][\''.$p->param[0][1][0]->texte.'\'])';
+		$p->interdire_scripts = false;
+		return $p;
+	} else {
+	  erreur_squelette("quelle pref ? dans balise PREFS",
+					   $boucle->id_boucle);
+	  return;
+	}
 }
 
 function critere_anonymous($idb, &$boucles, $crit) {
