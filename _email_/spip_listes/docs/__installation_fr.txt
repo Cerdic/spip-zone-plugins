@@ -57,7 +57,7 @@ Vous pouvez utiliser un squelette personnel à la place de inscription_listes.htm
 
 Note : La page abonnement.php3/html gère des modifications/désinscriptions des abonnés.
 
-3) éditer les fichiers /patrons/nouveautes.html et /patrons/patron.html, et adaptez les adresses des images à votre site.
+3) Dans le repertoire du plugin, éditer les fichiers /patrons/nouveautes.html et /patrons/patron.html, et adapter les adresses des images à votre site.
 Attention en cas de sélection fondées sur des boucles sur l'âge, le squelette doit retourner un message vide en cas d'erreur.
 Vous pouvez créer tous les patrons que vous désirez, en les déposant dans ce répertoire, ils apparaîtront automatiquement dans les choix de la partie privée.
 
