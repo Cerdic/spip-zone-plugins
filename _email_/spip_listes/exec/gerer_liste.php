@@ -1065,7 +1065,7 @@ if (spip_num_rows($result)) {
  	        { 
                 if($lim!=$pas) 
  	                { 
- 		                echo "<div style='float:left'><a href='".$PHP_SELF."?mode=liste_edit&id_article=$id_article&lim=".($pas+100); 
+ 		                echo "<div style='float:left'><a href='".$PHP_SELF."?mode=liste_edit&id_article=$id_article&lim=".($pas); 
  	                echo "'>[".$pas."-".($pas+100)."]</a></div>"; 
  	                $pas=$pas+100; 
  	                }else{ 
