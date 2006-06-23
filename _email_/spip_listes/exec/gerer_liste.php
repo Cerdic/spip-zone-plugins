@@ -896,8 +896,15 @@ fin_cadre_relief();
 // Liste des auteurs de l'article
 //
 
-echo "<a name='auteurs'></a>";
-debut_cadre_enfonce("auteur-24.gif", false, "",  _T('spiplistes:abon').aide ("artauteurs"));
+$query_ = "SELECT * FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien ". 
+	        "WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=$id_article ". 
+	        "GROUP BY auteurs.id_auteur ORDER BY auteurs.nom"; 
+	$result_ = spip_query($query_); 
+	$total_abos = spip_num_rows($result_); 
+	 
+	echo "<a name='auteurs'></a>"; 
+
+debut_cadre_enfonce("auteur-24.gif", false, "",  _T('spiplistes:abon')."($total_abos)".aide ("artauteurs")); 
 
 
 ////////////////////////////////////////////////////
@@ -1036,15 +1043,46 @@ if ($supp_auteur && $flag_editable) {
 
 unset($les_auteurs);
 
+	if(!isset($_GET['lim'])){ 
+ 	$lim=0; 
+ 	}else{ 
+ 	$lim=$_GET['lim']; 
+ 	} 
+
 $query = "SELECT * FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien ".
 	"WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=$id_article ".
-	"GROUP BY auteurs.id_auteur ORDER BY auteurs.nom";
+	"GROUP BY auteurs.id_auteur ORDER BY auteurs.nom LIMIT $lim,100";
 $result = spip_query($query);
 
 if (spip_num_rows($result)) {
 	
 	
 	echo "<div class='liste'>";
+	
+	echo "<div style='margin:5px;text-align:justify'>"; 
+         $pas=0; 
+ 	        for ($i=0; $i <= round(($total_abos/100)); $i++ ) 
+ 	        { 
+                if($lim!=$pas) 
+ 	                { 
+ 		                echo "<div style='float:left'><a href='".$PHP_SELF."?mode=liste_edit&id_article=$id_article&lim=".($pas+100); 
+ 	                echo "'>[".$pas."-".($pas+100)."]</a></div>"; 
+ 	                $pas=$pas+100; 
+ 	                }else{ 
+ 		                if($total_abos > 100) 
+ 		                echo "<div style='float:left'><strong>[".$pas."-".($pas+100)."]</strong></div>"; 
+ 		                $pas=$pas+100; 
+ 		                $lim=O; 
+ 		                } 
+ 		         
+ 		         
+ 		        } 
+ 		        echo "<div style='clear:both'>&nbsp;</div>"; 
+ 		        echo "</div>"; 
+ 		        echo "<div class='liste' style='clear:both'>";
+	
+	
+	
 	echo "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
 	$table = '';
 	while ($row = spip_fetch_array($result)) {
@@ -1136,7 +1174,7 @@ if ($flag_editable AND $options == 'avancees') {
 		echo "<span class='verdana1'><b>"._T('spiplistes:abon_ajouter')."</b></span>\n";
 		echo "<div><input type='Hidden' name='id_article' value=\"$id_article\">";
 
-		if (spip_num_rows($result) > 80 AND $flag_mots_ressemblants) {
+		if (spip_num_rows($result) > 80 ) {
 			echo "<input type='text' name='cherche_auteur' onClick=\"setvisibility('valider_ajouter_auteur','visible');\" class='fondl' value='' size='20'>";
 			echo "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>";
 			echo " <input type='submit' name='Chercher' value='"._T('bouton_chercher')."' class='fondo'>";
