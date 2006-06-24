@@ -17,7 +17,7 @@ _ &copy; 2006 - Licence GPL
 	Google siteMap
 _ Ce plugin cr&eacute;e dynamiquement un [sitemap Google->http://www.google.com/webmasters/sitemaps/]
 _ Le contenu le plus proche de la racine est prioritaire
-_ La pr&eacute;sence des squelettes article, br&eagrave;ve, ... est test&eacute;e pour chaque type d'objet
+_ La pr&eacute;sence des squelettes article, br&egrave;ve, ... est test&eacute;e pour chaque type d'objet
 	</description>
 	<prefix> 
 	siteMap
