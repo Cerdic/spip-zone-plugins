@@ -1,6 +1,6 @@
 <?php
 
-include_spip('inc/widgets/Widget.php');
+include_spip('inc/widgets/Widget');
 
 //
 // Un Widget qui affiche un textarea basique

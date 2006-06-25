@@ -1,0 +1,59 @@
+#CACHE{0}
+<html>
+<head>
+<title>Soumettre un article</title>
+</head>
+<body>
+
+<BOUCLE_moi(SESSION){!anonymous}>
+
+<BOUCLE_prop(ARTICLES){id_article}{tous}{id_auteur=#ID_AUTEUR}{statut=prop}>
+<h1>Article soumis</h1>
+
+L'article "#TITRE" à été soumis à la rédaction et n'est plus modifiable.
+</BOUCLE_prop>
+
+#EDITABLE_DEBUT{soumettre.action,#SELF}
+[(#REM)
+  On peut modifier un article, si on en est l'auteur et qu'il n'est
+  pas encore publié
+]<BOUCLE_art(ARTICLES){id_article}{tous}{id_auteur=#ID_AUTEUR}{statut=prepa}>
+<!-- modif de l'article #ID_ARTICLE/#ID_RUBRIQUE = #TITRE -->
+
+<h1>Modifier un article</h1>
+
+#EDITABLE{id,Hidden,#ID_ARTICLE}
+titre : #EDITABLE{titre,Widget,#TITRE}
+<br>texte : #EDITABLE{texte,TextAreaWidget,#TEXTE*}
+<br>rubrique : #EDITABLE{rub,Vide,#ID_RUBRIQUE}
+<select name='content_rub'><BOUCLE_secteuru(RUBRIQUES){racine}{tous}>
+	<option value='#ID_RUBRIQUE'[ (#ID_RUBRIQUE|=={#_art:ID_RUBRIQUE}|?{selected,''})]>#TITRE</option>
+</BOUCLE_secteuru></select>
+
+</BOUCLE_art>
+
+<h1>Soumettre un article</h1>
+
+<!-- creation d'un nouvel article -->
+titre : #EDITABLE{titre,Widget}
+<br>texte : #EDITABLE{texte,TextAreaWidget}
+<br>rubrique : #EDITABLE{rub,Vide,#ID_RUBRIQUE}
+<select name='content_rub'><BOUCLE_secteuri(RUBRIQUES){racine}{tous}>
+	<option value='#ID_RUBRIQUE'>#TITRE</option>
+</BOUCLE_secteuri></select>
+
+<//B_art>
+
+<br><input type="submit" value="valider" />
+#EDITABLE{submit,Vide}
+<input type="submit" name="content_submit" value="soumettre à la rédaction" />
+#EDITABLE_FIN
+
+<//B_prop>
+
+</BOUCLE_moi>
+Pour soumettre un article, il faut être connecté :
+#LOGIN_PUBLIC
+<//B_moi>
+</body>
+</html>

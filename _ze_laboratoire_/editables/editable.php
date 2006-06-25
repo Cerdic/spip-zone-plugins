@@ -13,15 +13,6 @@ error_log("new_widget($id, $classe, $valeur, $callbacks)");
 	return $res;
 }
 
-function doSpipInclude($fond) {
-	$contexte_inclus = $GLOBALS['contexte'];
-	$contexte_inclus['fond']= $fond;
-	ob_start();
-	include('ecrire/public.php');
-	$inclu= ob_get_clean();
-	return $inclu;
-}
-
 function compactCallBacks() {
 	global $editable;
 error_log("compactCallBacks:".var_export($editable['callbacks'], 1));
@@ -126,15 +117,14 @@ error_log("EDITABLE_FIN");
 }
 
 function editable_debut(&$editable) {
-	return '"<form method=\'post\' name=\'zonesEditables\' action=\'ecrire/index.php\'>
-	<input type=\'hidden\' name=\'exec\' value=\'editer\'>
-	<input type=\'hidden\' name=\'retour\' value=\'".'.$editable['retour'].'."\'>
+	return '"<form method=\'post\' name=\'zonesEditables\' action=\'".self()."\'>
+	<input type=\'hidden\' name=\'action\' value=\'editer\'>
+	<input type=\'hidden\' name=\'retour\' value=\'".urlencode('.$editable['retour'].')."\'>
 "';
 }
 
 function editable_fin(&$editable) {
-	return '"	<input type=\"submit\" value=\"ok\" />
-	<input type=\'hidden\' name=\'actions\' value=\'".(urlencode($actions=doSpipInclude('.$editable['actions'].')))."\'>
+	return '"<input type=\'hidden\' name=\'actions\' value=\'".($actions='.$editable['actions'].')."\'>
 	<input type=\'hidden\' name=\'callbacks\' value=\'".urlencode($callbacks=compactCallBacks())."\'>
 	<input type=\'hidden\' name=\'actions_secu\' value=\'".md5($actions.\' - \'.$GLOBALS[\'meta\'][\'alea_ephemere\'].\' - \'.$callbacks)."\'>
 </form>"';
