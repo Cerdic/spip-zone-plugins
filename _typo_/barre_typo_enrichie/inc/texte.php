@@ -220,7 +220,7 @@ function nettoyer_raccourcis_typo($texte){
 	$texte = ereg_replace("[}{]", "", $texte);
 
 	// supprimer les tableaux
-	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);	
+	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);
 	return $texte;
 }
 
@@ -255,7 +255,7 @@ function couper($texte, $taille=50) {
 
 	$texte = nettoyer_raccourcis_typo($texte);
 
-	// corriger la longueur de coupe 
+	// corriger la longueur de coupe
 	// en fonction de la presence de caracteres utf
 	if ($GLOBALS['meta']['charset']=='utf-8'){
 		$long = charset2unicode($texte);
@@ -530,15 +530,6 @@ function typo($letexte, $echapper=true) {
 
 // obsolete, utiliser calculer_url
 
-/*function extraire_lien ($regs) {
-	$lien_texte = $regs[1];
-
-	if (ereg('^([^|]*|[^{]*)\{([a-z-]+)}$', $lien_texte, $match)) {
-		$lien_texte = $match[1];
-		$lien_hreflang = ' hreflang="'.$match[2].'"';
-	}
-*/
-
 function extraire_lien ($regs) {
 	list($lien, $class, $texte) = calculer_url($regs[3], $regs[1],'tout');
 	// Preparer le texte du lien ; attention s'il contient un <div>
@@ -569,7 +560,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 			return ($pour == 'titre') ? $res[2] : $res;
 		}
 	}
-  
+
 	$lien = ltrim($lien);
 	if ($lien[0] == '?') {
 		if ($pour == 'titre') return $texte;
@@ -1071,16 +1062,22 @@ function traiter_raccourcis($letexte) {
 
 
 	//
-	// Raccourcis liens [xxx->url] 
+	// Raccourcis liens [xxx->url]
 	// Note : complique car c'est ici qu'on applique typo() !
 	//
-	$regexp = "|\[([^][]*)->(>?)([^]]*)\]|ms";
+	#$regexp = "|\[([^][]*)->(>?)([^]]*)\]|ms";
+	$regexp =  "|\[([^][]*)(\|([^]{]*)(\{([a-z-]+)})?)?->(>)?([^]]*)\]|msU";
 	$inserts = array();
 	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER)) {
 		$i = 0;
 		foreach ($matches as $regs) {
-			list($lien, $class, $texte) = calculer_url($regs[3], $regs[1], 'tout');
-			$inserts[++$i] = "<a href=\"$lien\" class=\"$class\">"
+			$str_title = attribut_html($regs[3]);
+			if ($str_title) $str_title = " title=\"$str_title\"";
+			$str_hreflang = attribut_html($regs[5]);
+			if ($str_hreflang) $str_hreflang = " hreflang=\"$str_hreflang\"";
+			//$str_targetblank = $regs[6]; // Pourrait servir pour la compatibilité AGORA
+			list($lien, $class, $texte) = calculer_url($regs[7], $regs[1], 'tout');
+			$inserts[++$i] = "<a href=\"$lien\" class=\"$class\"$str_title$str_hreflang>"
 				.  typo(supprimer_numero($texte))
 				. "</a>";
 
