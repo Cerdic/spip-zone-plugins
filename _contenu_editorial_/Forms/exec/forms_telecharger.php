@@ -113,7 +113,8 @@ function exec_forms_telecharger(){
 	$delim = _request('delim');
 	if ($delim == 'TAB') $delim = "\t";
 
-	if ($retour)
+	$retour = _request('retour');
+	if ($retour!==NULL)
 		$retour = urldecode($retour);
 	else
 		$retour = generer_url_ecrire('forms_tous');
