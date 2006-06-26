@@ -68,7 +68,7 @@ function balise_E_VALEUR($p) {
 	}
 	$nom=  calculer_liste($p->param[0][1],
 						  $p->descr, $p->boucles, $p->id_boucle);
-	$p->code= "(\$_REQUEST['content_'.$nom])";
+	$p->code= "htmlspecialchars(\$_REQUEST['content_'.$nom], ENT_QUOTES)";
 	return $p;
 }
 

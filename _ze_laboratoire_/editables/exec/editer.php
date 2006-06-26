@@ -98,7 +98,7 @@ function doActions($actions, $valeurs) {
 	$parser = new actionParser($valeurs);
 	$parser->parse($actions);
 	$code= $parser->getCode();
-	echo "<xmp>$code</xmp>\n";
+	//echo "<xmp>$code</xmp>\n";
 	return eval($code);
 }
 
