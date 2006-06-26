@@ -21,11 +21,11 @@ function csv_champ($champ) {
 	return '"'.$champ.'"';
 }
 
-function csv_ligne($ligne) {
-	return join(',', array_map('csv_champ', $ligne))."\r\n";
+function csv_ligne($ligne,$delim=',') {
+	return join($delim, array_map('csv_champ', $ligne))."\r\n";
 }
 
-function formater_reponse($ligne, $structure, $valeurs) {
+function formater_reponse($ligne, $structure, $valeurs,$delim=',') {
 	static $groupes, $mots;
 
 	// Prendre les differents champs dans l'ordre
@@ -36,7 +36,7 @@ function formater_reponse($ligne, $structure, $valeurs) {
 		}
 		$ligne[] = strval(join(', ', $v));
 	}
-	return csv_ligne($ligne);
+	return csv_ligne($ligne,$delim);
 }
 
 function acces_interdit() {
@@ -110,7 +110,57 @@ function exec_forms_telecharger(){
 	}
 
 
+	$delim = _request('delim');
+	if ($delim == 'TAB') $delim = "\t";
 
+	if ($retour)
+		$retour = urldecode($retour);
+	else
+		$retour = generer_url_ecrire('forms_tous');
+	
+	$titre = _L("Telecharger les r&eacute;ponses");
+	if (!$delim){
+		$icone = "../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png";
+	
+		debut_page($titre, "documents", "forms");
+		debut_gauche();
+	
+		echo "<br /><br />\n";
+		debut_droite();
+	
+		debut_cadre_relief($icone);
+		gros_titre($titre);
+		echo "<br />\n";
+		echo _L("Format du fichier&nbsp;:");
+		echo "<br />\n";
+		// Extrait de la table en commencant par les dernieres maj
+		echo generer_url_post_ecrire('forms_telecharger');
+		echo form_hidden(self());
+		echo "<select name='delim'>\n";
+		echo "<option value=','>"._L("CSV classique (,)")."</option>\n";
+		echo "<option value=';'>"._L("CSV pour Excel (;)")."</option>\n";
+		echo "<option value='TAB'>"._L("CSV avec tabulations")."</option>\n";
+		echo "</select>";
+		echo "<br /><br />\n";
+		echo "<input type='submit' name='ok' value='T&eacute;l&eacute;charger' />\n";
+	
+		fin_cadre_relief();
+	
+	
+		//
+		// Icones retour
+		//
+		if ($retour) {
+			echo "<br />\n";
+			echo "<div align='$spip_lang_right'>";
+			icone(_T('icone_retour'), $retour, $icone, "rien.gif");
+			echo "</div>\n";
+		}
+		fin_page();
+		exit;
+	
+	}
+	
 	//
 	// Telechargement du tableau de reponses au format CSV
 	//
@@ -171,7 +221,7 @@ function exec_forms_telecharger(){
 	foreach ($structure as $index => $t) {
 		$ligne[] = textebrut(typo($t['nom']));
 	}
-	$s .= csv_ligne($ligne);
+	$s .= csv_ligne($ligne,$delim);
 
 
 	// Ensuite les reponses
@@ -185,7 +235,7 @@ function exec_forms_telecharger(){
 	while ($row = spip_fetch_array($result)) {
 		if ($id_reponse != $row['id_reponse']) {
 			if ($id_reponse) {
-				$s .= formater_reponse($ligne, $structure, $valeurs);
+				$s .= formater_reponse($ligne, $structure, $valeurs,$delim);
 			}
 			$id_reponse = $row['id_reponse'];
 			$ligne = array();
@@ -207,12 +257,23 @@ function exec_forms_telecharger(){
 
 	// Ne pas oublier la derniere reponse
 	if ($id_reponse) {
-		$s .= formater_reponse($ligne, $structure, $valeurs);
+		$s .= formater_reponse($ligne, $structure, $valeurs,$delim);
+	}
+
+	// Excel ?
+	if ($delim == ',')
+		$extension = 'csv';
+	else {
+		$extension = 'xls';
+		# Excel n'accepte pas l'utf-8 ni les entites html... on fait quoi?
+		include_spip('inc/charsets');
+		$s = unicode2charset(charset2unicode($s), 'iso-8859-1');
+		$charset = 'iso-8859-1';
 	}
 
 	if (!count($fichiers)) {
 		Header("Content-Type: text/comma-separated-values; charset=$charset");
-		Header("Content-Disposition: attachment; filename=$filename.csv");
+		Header("Content-Disposition: attachment; filename=$filename.$extension");
 		//Header("Content-Type: text/plain; charset=$charset");
 		Header("Content-Length: ".strlen($s));
 		echo $s;
@@ -226,7 +287,7 @@ function exec_forms_telecharger(){
 	include_ecrire("inc_session");
 
 	$zip = "data/form".$id_form."_".rand().".zip";
-	$csv = "data/$filename.csv";
+	$csv = "data/$filename.$extension";
 
 	$f = fopen($csv, "wb");
 	fwrite($f, $s);

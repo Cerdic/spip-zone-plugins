@@ -454,10 +454,11 @@ function exec_forms_edit(){
 	if (Forms_form_administrable($id_form) && $nb_reponses) {
 		debut_boite_info();
 
+		$retour = urlencode(self());
 		icone_horizontale(_L("Suivi des r&eacute;ponses")."<br />".$nb_reponses." "._L("r&eacute;ponses"),
 			generer_url_ecrire('forms_reponses',"id_form=$id_form"), "forum-public-24.gif", "rien.gif");
 		icone_horizontale(_L("T&eacute;l&eacute;charger les r&eacute;ponses"),
-			generer_url_ecrire('forms_telecharger',"id_form=$id_form"), "doc-24.gif", "rien.gif");
+			generer_url_ecrire('forms_telecharger',"id_form=$id_form&retour=$retour"), "doc-24.gif", "rien.gif");
 
 		fin_boite_info();
 	}
@@ -548,9 +549,9 @@ function exec_forms_edit(){
 		}
 
 		afficher_articles(_L("Articles utilisant ce formulaire"),
-			", spip_forms_articles AS lien WHERE lien.id_article=articles.id_article ".
-			"AND id_form=$id_form AND statut!='poubelle' ORDER BY titre");
-
+			array('FROM' => 'spip_articles AS articles, spip_forms_articles AS lien',
+			'WHERE' => "lien.id_article=articles.id_article AND id_form=$id_form AND statut!='poubelle'",
+			'ORDER BY' => "titre"));
 
 		fin_cadre_relief();
 	}

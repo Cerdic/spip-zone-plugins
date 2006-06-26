@@ -40,8 +40,9 @@ function exec_forms_reponses(){
 		icone_horizontale(_L("Aller au formulaire"), "?exec=forms_edit&id_form=$id_form", "../"._DIR_PLUGIN_FORMS. "/img_pack/form-24.png", "rien.gif");
 
 		if (Forms_form_administrable($id_form)) {
+			$retour = urlencode(self());
 			icone_horizontale(_L("T&eacute;l&eacute;charger les r&eacute;ponses"),
-				"?exec=forms_telecharger&id_form=$id_form", "doc-24.gif", "rien.gif");
+				generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), "doc-24.gif", "rien.gif");
 		}
 
 		fin_boite_info();
@@ -164,7 +165,7 @@ function exec_forms_reponses(){
 					while ($row = spip_fetch_array($result_mot)) {
 						$id_mot = $row['id_mot'];
 						$titre = $row['titre'];
-						$trans[$id_form][$code][$id_mot] = "<a href='mots_edit.php?id_mot=$id_mot'>".typo($titre)."</a>";
+						$trans[$id_form][$code][$id_mot] = "<a href='".generer_url_ecrire("mots_edit","id_mot=$id_mot")."'>".typo($titre)."</a>";
 					}
 				}
 			}
@@ -174,10 +175,11 @@ function exec_forms_reponses(){
 		$query2 = "SELECT * FROM spip_reponses_champs WHERE id_reponse=$id_reponse";
 		$result2 = spip_query($query2);
 		$valeurs = array();
+		$retour = urlencode(self());
 		while ($row2 = spip_fetch_array($result2)) {
 			$champ = $row2['champ'];
 			if ($types[$id_form][$champ] == 'fichier') {
-				$valeurs[$champ][] = "<a href='?exec=forms_telecharger.php&id_reponse=$id_reponse&champ=$champ'>".
+				$valeurs[$champ][] = "<a href='".generer_url_ecrire("forms_telecharger","id_reponse=$id_reponse&champ=$champ&retour=$retour")."'>".
 					$row2['valeur']."</a>";
 			}
 			else if (isset($trans[$id_form][$champ][$row2['valeur']]))
@@ -207,7 +209,7 @@ function exec_forms_reponses(){
 		}
 
 		if ($id_auteur) {
-			$s = "<a href='auteur_infos.php3?id_auteur=$id_auteur'>".typo($nom_auteur)."</a>";
+			$s = "<a href='".generer_url_ecrire("auteur_infos","id_auteur=$id_auteur")."'>".typo($nom_auteur)."</a>";
 			echo _T('forum_par_auteur', array('auteur' => $s));
 			echo "<br />\n";
 		}
