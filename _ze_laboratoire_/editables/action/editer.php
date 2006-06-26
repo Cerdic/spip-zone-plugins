@@ -7,9 +7,8 @@ function action_editer() {
 
 	// recuperer les autres morceaux et verifier qu'ils sont nets
 	$actions = urldecode($_REQUEST['actions']);
-	$callbacks = urldecode($_REQUEST['callbacks']);
 	$secu = $_REQUEST['actions_secu'];
-	if(!verif_secu($actions, $callbacks, $secu)) {
+	if(!verif_secu($actions, $secu)) {
 		die("Actions truandees !");
 	}
 	$xml= doSpipInclude($actions);
@@ -33,20 +32,21 @@ function action_editer() {
 	} elseif($retour = urldecode($_REQUEST['retour'])) {
 		$GLOBALS['redirect']= str_replace('&amp;', '&', $retour);
 	}
+	if(count($parser->qs)) {
+		foreach($parser->qs as $k => $v) {
+			$GLOBALS['redirect']= parametre_url($GLOBALS['redirect'], $k, $v);
+		}
+	}
 	echo "RETOUR : ".$parser->retour."/".$GLOBALS['redirect']."\n";
 }
 
 // A l'alle, on a calcule un md5 sur les elements sensibles, concatene a un peu
 // de sel (alea_ephemere). si ce qu'on recoit a le meme md5, c'est que
 // l'internaute n'a pas truande les valeurs
-// Petit hack en passant, on calcule sur action.alea.callback et pas
-// action.callback.alea pour pas risquer qu'un plaisantin mette action.callback
-// dans action et zappe donc les callback
-function verif_secu($v1, $v2, $secu) {
-	$ligne= $v1.' - '.$GLOBALS['meta']['alea_ephemere'].' - '.$v2;
-	error_log("verif_secu($v1, $v2, $secu) / ".$GLOBALS['meta']['alea_ephemere'].' => '.md5($ligne));
-	return ( $secu == md5($v1.' - '.$GLOBALS['meta']['alea_ephemere'].' - '.$v2)
-		  OR $secu == md5($v1.' - '.$GLOBALS['meta']['alea_ephemere_ancien'].' - '.$v2) );
+function verif_secu($v, $secu) {
+	$ligne= $v.' - '.$GLOBALS['meta']['alea_ephemere'];
+	return ( $secu == md5($v.' - '.$GLOBALS['meta']['alea_ephemere'])
+		  OR $secu == md5($v.' - '.$GLOBALS['meta']['alea_ephemere_ancien']) );
 }
 
 @define ('_INC_PUBLIC', 1);

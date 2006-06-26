@@ -12,8 +12,6 @@ class Widget {
 	var $md5text;
 	// une cle md5 permettant de valider qu'on a pas tripote les données
 	var $md5secu;
-	// la liste de callbacks de ce widget
-	var $callbacks;
 
 	// un constructeur avec en argument un nom et une valeur initiale
 	function Widget($id, $text='') {
@@ -24,9 +22,8 @@ class Widget {
 
 	// le code html a inserer avant le formulaire lui meme
 	// les "vrais" widgets peuvent surcharger cette methode pour insérer
-	// des callbacks spécifiques
-	function code($callbacks=null) {
-		$this->callbacks= $callbacks;
+	// des hidden spécifiques par exemple
+	function code() {
 		$res=
 		  '<input type="hidden" name="widgets[]" value="'.$this->key.'" />'."\n"
 		. '<input type="hidden" name="md5_'.$this->key

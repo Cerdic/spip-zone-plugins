@@ -21,6 +21,12 @@ class actionParser  {
 	// les valeurs de ref/id rencontres
 	var $ids= array();
 
+	// forcage d'une url de retour
+	var $retour= null;
+
+	// parametre supplementaires a mettre dans l'url de retour
+	var $qs= array();
+
 	// initialisation d'un parseur d'actions et des données de travail
 	function actionParser() {
 		$this->parser = xml_parser_create($GLOBALS['meta']['charset']);
@@ -50,6 +56,9 @@ class actionParser  {
 		$varCpt=0; // compteur pour les variables intermediaires
 		$res= array();
 		foreach($actions as $action) {
+			if(count($action['set'])==0) {
+				continue;
+			}
 			$r= '';
 			if($action['type']=='insert') {
 
@@ -114,6 +123,7 @@ class actionParser  {
 
 		case 'where':
 		case 'set':
+		case 'urlparam':
 		case 'url':
 			$this->currentBloc= array('type' => $name, 'name' => $attrs['name']);
 
@@ -169,6 +179,12 @@ class actionParser  {
 
 		case 'url':
 			$this->retour= join('.', $this->currentBloc['value']);
+			$this->currentBloc= null;
+			break;
+
+		case 'urlparam':
+			$this->retourQs[$this->currentBloc['name']]=
+				join('.', $this->currentBloc['value']);
 			$this->currentBloc= null;
 			break;
 

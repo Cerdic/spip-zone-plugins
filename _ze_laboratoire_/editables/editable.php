@@ -1,37 +1,20 @@
 <?php
 
-function new_widget($id, $classe, $valeur, $callbacks) {
+function new_widget($id, $classe, $valeur) {
 	global $editable;
-error_log("new_widget($id, $classe, $valeur, $callbacks)");
+//error_log("new_widget($id, $classe, $valeur)");
 	include_spip('inc/widgets/'.$classe);
 	$w= new $classe($id, $valeur);
-	$res= $w->code($callbacks).$w->input();
-	if($w->callbacks) {
-		$editable['callbacks'][$id]= $w->callbacks;
-		error_log("$id -> ".$w->callbacks);
-	}
-	return $res;
-}
-
-function compactCallBacks() {
-	global $editable;
-error_log("compactCallBacks:".var_export($editable['callbacks'], 1));
-
-	$callbacks= '';
-	foreach($editable['callbacks'] as $id => $cbs) {
-		$callbacks.="&$id=$cbs";
-	}
-	return $callbacks;
+	$res= $w->code().$w->input();
+return $res;
 }
 
 //
-// genere le code d'un widget donne avec l'action et les callbacks associes
-// _ syntaxe : <code>#EDITABLE{id,action,classe,valeur,callbacks}</code>
+// genere le code d'un widget donne
+// _ syntaxe : <code>#EDITABLE{id,classe,valeur}</code>
 // -* id = un identifiant qui doit etre unique dans la page
-// -* action = le "script" de l'action associee
 // -* classe = le type de widget a instancier ('Widget' par defaut)
 // -* valeur = le contenu initial du widget (vide par defaut)
-// -* callbacks = liste de callbacks (separes par des |) pour valider la saisie
 //
 function balise_EDITABLE($p) {
 	global $editable;
@@ -59,19 +42,12 @@ error_log("classe $classe");
 			$valeur="''";
 		}
 error_log("valeur $valeur");
-		if ($param[4]) {
-			$callbacks=  calculer_liste($param[3],
-				$p->descr, $p->boucles, $p->id_boucle);
-		} else {
-			$callbacks="null";
-		}
-error_log("callbacks $callbacks");
 	} else {
 		erreur_squelette('EDITABLE necessite au moins 1 parametre');
 		return $p;
 	}
 
-	$p->code = editable($editable, $id, $classe, $valeur, $callbacks);
+	$p->code = editable($editable, $id, $classe, $valeur);
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -87,7 +63,7 @@ error_log("EDITABLE_DEBUT");
 	// on force a partir d'un nouveau formulaire
 	// => on ne peut en faire qu'un a la fois
 	// => verifier si ca met pas la zone dans des <include> ?
-	$editable= array('callbacks' => array() , 'actions' => null);
+	$editable= array('actions' => null);
 
 	if ($p->param && !$p->param[0][0] && $p->param[0][1]) {
 		$actions=  calculer_liste($p->param[0][1],
@@ -125,13 +101,12 @@ function editable_debut(&$editable) {
 
 function editable_fin(&$editable) {
 	return '"<input type=\'hidden\' name=\'actions\' value=\'".($actions='.$editable['actions'].')."\'>
-	<input type=\'hidden\' name=\'callbacks\' value=\'".urlencode($callbacks=compactCallBacks())."\'>
-	<input type=\'hidden\' name=\'actions_secu\' value=\'".md5($actions.\' - \'.$GLOBALS[\'meta\'][\'alea_ephemere\'].\' - \'.$callbacks)."\'>
+	<input type=\'hidden\' name=\'actions_secu\' value=\'".md5($actions.\' - \'.$GLOBALS[\'meta\'][\'alea_ephemere\'])."\'>
 </form>"';
 }
 
-function editable(&$editable, $id, $classe, $valeur=null, $callbacks=null) {
-	return "new_widget($id, $classe, $valeur, $callbacks)";
+function editable(&$editable, $id, $classe, $valeur=null) {
+	return "new_widget($id, $classe, $valeur)";
 }
 
 ?>
