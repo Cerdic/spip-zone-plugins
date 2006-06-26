@@ -32,9 +32,20 @@ function formater_reponse($ligne, $structure, $valeurs,$delim=',') {
 	foreach ($structure as $index => $t) {
 		if (!$v = $valeurs[$t['code']]) {
 			$ligne[] = "";
-			continue;
 		}
-		$ligne[] = strval(join(', ', $v));
+		else{
+			if ($t['type']=='multiple'){
+				// pour un choix multiple on cree une colonne par reponse potentielle
+				$type_ext = $t['type_ext'];
+				foreach($type_ext as $choix)
+					if (in_array($choix,$v))
+						$ligne[] = strval($choix);
+					else
+						$ligne[] = "";
+			}
+			else
+				$ligne[] = strval(join(', ', $v));
+		}
 	}
 	return csv_ligne($ligne,$delim);
 }
@@ -221,6 +232,13 @@ function exec_forms_telecharger(){
 	$ligne[] = _L("Date");
 	foreach ($structure as $index => $t) {
 		$ligne[] = textebrut(typo($t['nom']));
+		if ($t['type']=='multiple'){
+			// pour un choix multiple on cree une colonne par reponse potentielle
+			$type_ext = $t['type_ext'];
+			array_pop($type_ext);
+			foreach($type_ext as $choix)
+				$ligne[] = "";
+		}
 	}
 	$s .= csv_ligne($ligne,$delim);
 
