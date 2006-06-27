@@ -220,7 +220,7 @@ function nettoyer_raccourcis_typo($texte){
 	$texte = ereg_replace("[}{]", "", $texte);
 
 	// supprimer les tableaux
-	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);	
+	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);
 	return $texte;
 }
 
@@ -255,7 +255,7 @@ function couper($texte, $taille=50) {
 
 	$texte = nettoyer_raccourcis_typo($texte);
 
-	// corriger la longueur de coupe 
+	// corriger la longueur de coupe
 	// en fonction de la presence de caracteres utf
 	if ($GLOBALS['meta']['charset']=='utf-8'){
 		$long = charset2unicode($texte);
@@ -547,8 +547,9 @@ function extraire_lien ($regs) {
 
 function calculer_url ($lien, $texte='', $pour='url') {
 	global $tableau_raccourcis;
-	if (preg_match(',^\s*(\w*?)\s*(\d+)(#[^\s]*)?\s*$,', $lien, $match)) {
-		$ancre = isset($match[3]) ? $match[3] :'';
+	if (preg_match(',^\s*(\w*?)\s*(\d+)(\?([^#]+))?(#[^\s]*)?\s*$,', $lien, $match)) {
+		$params = isset($match[4]) ? $match[4] :'';
+		$ancre = isset($match[5]) ? $match[5] :'';
 		if (!$f =  $match[1]) $f='article';
 		if (isset($tableau_raccourcis[$f])
 		AND is_string($tableau_raccourcis[$f]))
@@ -556,8 +557,12 @@ function calculer_url ($lien, $texte='', $pour='url') {
 		$f=(($pour == 'url') ? 'generer' : 'calculer') . '_url_' . $f;
 		charger_generer_url();
 		if (function_exists($f)) {
-			if ($pour == 'url') return $f($match[2]) . $ancre;
-			$res = $f($match[2], $texte, $ancre);
+			if ($pour == 'url') {
+				$lien = $f($match[2]);
+				if ($params != '') $params = ((strpos($lien, '?') > 0) ? '&' : '?') . $params;
+				return  $lien . $params . $ancre;
+			}
+			$res = $f($match[2], $texte, $ancre, $params);
 			return ($pour == 'titre') ? $res[2] : $res;
 		}
 	}
@@ -591,9 +596,11 @@ function calculer_url ($lien, $texte='', $pour='url') {
 	return ($pour == 'url') ? $lien : array($lien, $class, $texte);
 }
 
-function calculer_url_article($id, $texte, $ancre)
+function calculer_url_article($id, $texte, $ancre, $params)
 {
-	$lien = generer_url_article($id) . $ancre;
+	$lien = generer_url_article($id);
+	if ($params != '') $params = ((strpos($lien, '?') > 0) ? '&' : '?') . $params;
+	$lien = $lien . $params . $ancre;
 	if (!$texte) {
 		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id"));
 		$texte = $row['titre'];
@@ -601,9 +608,11 @@ function calculer_url_article($id, $texte, $ancre)
 	return array($lien, 'spip_in', $texte);
 }
 
-function calculer_url_rubrique($id, $texte, $ancre)
+function calculer_url_rubrique($id, $texte, $ancre, $params)
 {
-	$lien = generer_url_rubrique($id) . $ancre;
+	$lien = generer_url_rubrique($id);
+	if ($params != '') $params = ((strpos($lien, '?') > 0) ? '&' : '?') . $params;
+	$lien = $lien . $params . $ancre;
 	if (!$texte) {
 		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id"));
 		$texte = $row['titre'];
@@ -611,9 +620,11 @@ function calculer_url_rubrique($id, $texte, $ancre)
 	return array($lien, 'spip_in', $texte);
 }
 
-function calculer_url_mot($id, $texte, $ancre)
+function calculer_url_mot($id, $texte, $ancre, $params)
 {
-	$lien = generer_url_mot($id) . $ancre;
+	$lien = generer_url_mot($id);
+	if ($params != '') $params = ((strpos($lien, '?') > 0) ? '&' : '?') . $params;
+	$lien = $lien . $params . $ancre;
 	if (!$texte) {
 		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_mots WHERE id_mot=$id"));
 		$texte = $row['titre'];
@@ -621,9 +632,11 @@ function calculer_url_mot($id, $texte, $ancre)
 	return array($lien, 'spip_in', $texte);
 }
 
-function calculer_url_breve($id, $texte, $ancre)
+function calculer_url_breve($id, $texte, $ancre, $params)
 {
-	$lien = generer_url_breve($id) . $ancre;
+	$lien = generer_url_breve($id);
+	if ($params != '') $params = ((strpos($lien, '?') > 0) ? '&' : '?') . $params;
+	$lien = $lien . $params . $ancre;
 	if (!$texte) {
 		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_breves WHERE id_breve=$id"));
 		$texte = $row['titre'];
@@ -631,9 +644,11 @@ function calculer_url_breve($id, $texte, $ancre)
 	return array($lien, 'spip_in', $texte);
 }
 
-function calculer_url_auteur($id, $texte, $ancre)
+function calculer_url_auteur($id, $texte, $ancre, $params)
 {
-	$lien = generer_url_auteur($id) . $ancre;
+	$lien = generer_url_auteur($id);
+	if ($params != '') $params = ((strpos($lien, '?') > 0) ? '&' : '?') . $params;
+	$lien = $lien . $params . $ancre;
 	if (!$texte) {
 		$row = @spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$id"));
 		$texte = $row['nom'];
@@ -641,9 +656,11 @@ function calculer_url_auteur($id, $texte, $ancre)
 	return array($lien, 'spip_in', $texte);
 }
 
-function calculer_url_document($id, $texte, $ancre)
+function calculer_url_document($id, $texte, $ancre, $params)
 {
-	$lien = generer_url_document($id) . $ancre;
+	$lien = generer_url_document($id);
+	if ($params != '') $params = ((strpos($lien, '?') > 0) ? '&' : '?') . $params;
+	$lien = $lien . $params . $ancre;
 	if (!$texte) {
 		$row = @spip_fetch_array(spip_query("SELECT titre,fichier FROM spip_documents WHERE id_document=$id"));
 		$texte = $row['titre'];
@@ -653,10 +670,11 @@ function calculer_url_document($id, $texte, $ancre)
 	return array($lien, 'spip_in', $texte);
 }
 
-function calculer_url_site($id, $texte, $ancre)
+function calculer_url_site($id, $texte, $ancre, $params)
 {
 	# attention dans le cas des sites le lien pointe non pas sur
 	# la page locale du site, mais directement sur le site lui-meme
+	# et on ne tient pas compte de $ancre et $params
 	$row = @spip_fetch_array(spip_query("SELECT nom_site,url_site FROM spip_syndic WHERE id_syndic=$id"));
 	if ($row) {
 		$lien = $row['url_site'];
@@ -666,7 +684,7 @@ function calculer_url_site($id, $texte, $ancre)
 	return array($lien, 'spip_in', $texte);
 }
 
-function calculer_url_spip($id, $texte, $ancre)
+function calculer_url_spip($id, $texte, $ancre, $params)
 {
 	global $tableau_raccourcis, $home_server;
 	if (is_numeric($tableau_raccourcis['spip'][$id]))
