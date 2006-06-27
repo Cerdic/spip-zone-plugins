@@ -1,0 +1,15 @@
+<plugin>
+<nom>Indicizzazione tabelle aggiuntive</nom>
+<auteur>Renato Formato</auteur>
+<version>0.1</version>
+<etat>dev</etat>
+<description>
+Consente di indicizzare tabelle esterne a SPIP e consentire ricerche
+</description>
+<prefix>Ind_Tab_Agg</prefix>
+<pipeline>
+	<nom>ajouter_boutons</nom>
+	<inclure>ind_tab.php</inclure>
+</pipeline>
+</plugin>
+
