@@ -220,7 +220,7 @@ function nettoyer_raccourcis_typo($texte){
 	$texte = ereg_replace("[}{]", "", $texte);
 
 	// supprimer les tableaux
-	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);
+	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);	
 	return $texte;
 }
 
@@ -255,7 +255,7 @@ function couper($texte, $taille=50) {
 
 	$texte = nettoyer_raccourcis_typo($texte);
 
-	// corriger la longueur de coupe
+	// corriger la longueur de coupe 
 	// en fonction de la presence de caracteres utf
 	if ($GLOBALS['meta']['charset']=='utf-8'){
 		$long = charset2unicode($texte);
@@ -549,7 +549,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 	global $tableau_raccourcis;
 	if (preg_match(',^\s*(\w*?)\s*(\d+)(#[^\s]*)?\s*$,', $lien, $match)) {
 		$ancre = isset($match[3]) ? $match[3] :'';
-		$f =  $match[1];
+		if (!$f =  $match[1]) $f='article';
 		if (isset($tableau_raccourcis[$f])
 		AND is_string($tableau_raccourcis[$f]))
 			$f = $tableau_raccourcis[$f];
