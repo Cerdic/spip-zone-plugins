@@ -18,9 +18,10 @@ function action_editer() {
 
 	$res= $parser->parse($xml);
 	//echo "RES : '$res'\n";
-	echo "ACTIONS : ".var_export($parser->actions, 1)."\n";
+	//echo "ACTIONS : ".var_export($parser->actions, 1)."\n";
 	$cmds= $parser->evaluate($parser->actions);
 	//echo "PHP : ".var_export($cmds, 1)."\n";
+	//exit();
 	foreach($cmds as $cmd) {
 		echo "=> $cmd\n";
 		if(eval("return (\$r= ($cmd))===false;")) {
@@ -30,14 +31,16 @@ function action_editer() {
 	if($parser->retour) {
 		$GLOBALS['redirect']= eval("return ".$parser->retour.";");
 	} elseif($retour = urldecode($_REQUEST['retour'])) {
-		$GLOBALS['redirect']= str_replace('&amp;', '&', $retour);
+		$GLOBALS['redirect']= $retour;
 	}
-	if(count($parser->qs)) {
-		foreach($parser->qs as $k => $v) {
-			$GLOBALS['redirect']= parametre_url($GLOBALS['redirect'], $k, $v);
+	if(count($parser->retourQs)) {
+		foreach($parser->retourQs as $k => $v) {
+			$GLOBALS['redirect']= parametre_url($GLOBALS['redirect'], $k, eval("return $v;"));
+//error_log("param $k/$v => ".$GLOBALS['redirect']);
 		}
 	}
-	echo "RETOUR : ".$parser->retour."/".$GLOBALS['redirect']."\n";
+	$GLOBALS['redirect']= str_replace('&amp;', '&', $GLOBALS['redirect']);
+//error_log("RETOUR : ".$parser->retour."/".$GLOBALS['redirect']);
 }
 
 // A l'alle, on a calcule un md5 sur les elements sensibles, concatene a un peu
@@ -80,7 +83,7 @@ function balise_E_MODIFIE($p) {
 	$nom=  calculer_liste($p->param[0][1],
 						  $p->descr, $p->boucles, $p->id_boucle);
 
-	$p->code= "(array_key_exists('md5_'.$nom, \$_REQUEST) && (!(\$md5 = \$_REQUEST['md5_'.$nom]) || \$md5!=md5(\$_REQUEST['content_'.$nom])))";
+	$p->code= "((array_key_exists('md5_'.$nom, \$_REQUEST) && (!(\$md5 = \$_REQUEST['md5_'.$nom]) || \$md5!=md5(\$_REQUEST['content_'.$nom])))?1:0)";
 	$p->interdire_script= false;
 	return $p;
 }

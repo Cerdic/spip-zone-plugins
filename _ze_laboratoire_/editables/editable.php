@@ -19,14 +19,14 @@ return $res;
 function balise_EDITABLE($p) {
 	global $editable;
 
-error_log("EDITABLE");
+//error_log("EDITABLE");
 	if ($p->param && !$p->param[0][0] && $p->param[0][1]) {
 		$param= $p->param[0];
 
 		// recuperer les params
 		$id=  calculer_liste($param[1],
 			$p->descr, $p->boucles, $p->id_boucle);
-error_log("id $id");
+//error_log("id $id");
 
 		if ($param[2]) {
 			$classe=  calculer_liste($param[2],
@@ -34,14 +34,14 @@ error_log("id $id");
 		} else {
 			$classe="'Widget'";
 		}
-error_log("classe $classe");
+//error_log("classe $classe");
 		if ($param[3]) {
 			$valeur=  calculer_liste($param[3],
 				$p->descr, $p->boucles, $p->id_boucle);
 		} else {
 			$valeur="''";
 		}
-error_log("valeur $valeur");
+//error_log("valeur $valeur");
 	} else {
 		erreur_squelette('EDITABLE necessite au moins 1 parametre');
 		return $p;
@@ -58,7 +58,7 @@ error_log("valeur $valeur");
 // -* url = l'url a laquelle revenir apres validation du formulaire
 function balise_EDITABLE_DEBUT($p) {
 	global $editable;
-error_log("EDITABLE_DEBUT");
+//error_log("EDITABLE_DEBUT");
 
 	// on force a partir d'un nouveau formulaire
 	// => on ne peut en faire qu'un a la fois
@@ -66,34 +66,43 @@ error_log("EDITABLE_DEBUT");
 	$editable= array('actions' => null);
 
 	if ($p->param && !$p->param[0][0] && $p->param[0][1]) {
-		$actions=  calculer_liste($p->param[0][1],
+		$editable['actions']=  calculer_liste($p->param[0][1],
 			$p->descr, $p->boucles, $p->id_boucle);
-		$editable['actions']= $actions;
 
 		if ($p->param[0][2]) {
 			$editable['retour']=  calculer_liste($p->param[0][2],
 				$p->descr, $p->boucles, $p->id_boucle);
+error_log("EDITABLE_DEBUT retour=".$editable['retour']);
+			if($editable['retour']=="''") $editable['retour']= 'self()';
 		} else {
 			$editable['retour']= 'self()';
 		}
+		if ($p->param[0][3]) {
+			$complement=  calculer_liste($p->param[0][3],
+				$p->descr, $p->boucles, $p->id_boucle);
+error_log("EDITABLE_DEBUT complement=".$complement);
+		} else {
+			$complement= '';
+		}
 	} else {
-		$editable['actions']='';
+		erreur_squelette('EDITABLE_DEBUT necessite au moins 1 parametre');
+		return $p;
 	}
 
-	$p->code= editable_debut($editable);
+	$p->code= editable_debut($editable, $complement);
 
 	return $p;
 }
 
 function balise_EDITABLE_FIN($p) {
 	global $editable;
-error_log("EDITABLE_FIN");
+//error_log("EDITABLE_FIN");
 	$p->code = editable_fin($editable);
 	return $p;
 }
 
-function editable_debut(&$editable) {
-	return '"<form method=\'post\' name=\'zonesEditables\' action=\'".self()."\'>
+function editable_debut(&$editable, $complement='') {
+	return '"<form method=\'post\' action=\'".self()."\' ".'.$complement.'.">
 	<input type=\'hidden\' name=\'action\' value=\'editer\'>
 	<input type=\'hidden\' name=\'retour\' value=\'".urlencode('.$editable['retour'].')."\'>
 "';

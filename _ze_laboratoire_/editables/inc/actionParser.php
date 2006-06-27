@@ -25,7 +25,7 @@ class actionParser  {
 	var $retour= null;
 
 	// parametre supplementaires a mettre dans l'url de retour
-	var $qs= array();
+	var $retourQs= array();
 
 	// initialisation d'un parseur d'actions et des données de travail
 	function actionParser() {
@@ -56,12 +56,10 @@ class actionParser  {
 		$varCpt=0; // compteur pour les variables intermediaires
 		$res= array();
 		foreach($actions as $action) {
-			if(count($action['set'])==0) {
-				continue;
-			}
-			$r= '';
 			if($action['type']=='insert') {
 
+				if(count($action['set'])==0) { continue; }
+				$r= '';
 				if($action['id']) {
 					$r.='$tmp_var_'.$action['id'].'= ';
 				}
@@ -80,6 +78,9 @@ class actionParser  {
 
 			} elseif($action['type']=='update') {
 
+				if(count($action['set'])==0) { continue; }
+				// pour eviter les catastrophes
+				if(count($action['where'])==0) { continue; }
 				$set= array();
 				foreach($action['set'] as $s) {
 					$set[]=$s['name']." = \".spip_abstract_quote(".$s['value'].").\"";
@@ -93,7 +94,20 @@ class actionParser  {
 				$rq='UPDATE '.$table.' SET '.join(', ', $set)
 					.' WHERE '.join(' AND ', $where);
 				$res[]="spip_query(\"$rq\")";
-				
+
+			} elseif($action['type']=='delete') {
+
+				// pour eviter les catastrophes
+				if(count($action['where'])==0) { continue; }
+				$where= array();
+				foreach($action['where'] as $w) {
+					$where[]=$w['name']." = \".spip_abstract_quote(".$w['value'].").\"";
+				}
+				$table= description_type_requete($action['table']);
+				$table= $table['table'];
+				$rq='DELETE FROM '.$table.' WHERE '.join(' AND ', $where);
+				$res[]="spip_query(\"$rq\")";
+
 			} else {
 				die("action de type '".$action['type']."' inconnu");
 			}
@@ -102,14 +116,15 @@ class actionParser  {
 	}
 
 	function startElement($parser, $name, $attrs) {
-		error_log("START $name ".var_export($attrs, 1)."\n");
+		//error_log("START $name ".var_export($attrs, 1)."\n");
 		//$st= ($this->state==null)?null:$this->state[0];
 		switch($name) {
 		case 'actions':
 			break;
 
-		case 'update':
 		case 'insert':
+		case 'update':
+		case 'delete':
 			$this->currentAction=array(
 				'type' => $name,
 				'table' => $attrs['type'],
@@ -163,8 +178,9 @@ class actionParser  {
 		case 'actions' :
 			break;
 
-		case 'update':
 		case 'insert':
+		case 'update':
+		case 'delete':
 			$this->actions[]= $this->currentAction;
 			$this->currentAction= null;
 			$this->currentBloc= null;
