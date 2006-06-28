@@ -35,11 +35,20 @@
 	[$ps="(#PS|pdf_first_clean)";]
 	[$notes="(#NOTES|pdf_first_clean)";]
 	
-	$copyright = "[(#REM|texte{'Copyright &copy; '}|pdf_first_clean)][(#NOM_SITE_SPIP|pdf_first_clean)][(#REM|texte{'\nTous droits réservés'}|pdf_first_clean)]";
+	$copyright = "[(#REM|texte{'Copyright (c) '}|pdf_first_clean)][(#NOM_SITE_SPIP|pdf_first_clean)][(#REM|texte{'\nTous droits réservés'}|pdf_first_clean)]";
 	
 	$id_article = "#ID_ARTICLE";
 	
-	$files_pdf = "article_".$id_article.".pdf" ;
+	
+	$url_article = generer_url_article($id_article);
+	if (strpos($url_article,'?')===FALSE){
+		$p = strrpos($url_article,'.');
+		if ($p!==FALSE)
+			$url_article = substr($url_article,0,$p);
+		$files_pdf = $url_article.".pdf";
+	}
+	else
+		$files_pdf = "article_".$id_article.".pdf" ;
 	$file_out = $path_pdf . $files_pdf ;
 	
 	if (file_exists($file_out)) 

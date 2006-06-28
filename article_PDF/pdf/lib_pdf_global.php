@@ -207,21 +207,14 @@ function WriteHTML($html,$LineFeedHeight)
 			else
 			// C'est une balise ouvrante
 			{
-				
-				//Extraction des propriétés
-				$a2=split(' ',$e);	// scinde dans un tableau (caractère séparateur = espace)  
-				$tag=strtoupper(array_shift($a2));		// retourne (et supprime du tableau) le premier élément du tableau et le transforme en majuscule.
-				$this->prop=array();		// Crée un tableau de portée globale dans la classe
-				
-				foreach($a2 as $v)
-				{
-					if (ereg('^([^=]*)=["\']?([^"\']*)["\']?$',$v,$a3))
-					{
-						$this->prop[strtoupper($a3[1])]=$a3[2];
-					}
+				if (preg_match(',^\s*([^\s]+)\s,',$e,$match)!==FALSE){
+					$tag=strtoupper($match[1]);
+					$this->prop=array();		// Crée un tableau de portée globale dans la classe
+					preg_match_all(',([^=\s]*)\s*=\s*["\']?([^"\']*)["\'],is',$e,$matches,PREG_SET_ORDER);
+					foreach($matches as $match)
+						$this->prop[strtoupper($match[1])]=$match[2];
+					$this->OpenTag($tag,$this->prop,$LineFeedHeight);
 				}
-				
-				$this->OpenTag($tag,$this->prop,$LineFeedHeight);
 			}
 		}
 	}
