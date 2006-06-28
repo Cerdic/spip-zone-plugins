@@ -11,9 +11,9 @@
  */
 
 
-include_ecrire('inc_forms');
-include_ecrire("inc_charsets");
-include_ecrire("inc_presentation");
+include_spip('inc/forms');
+include_spip("inc/charsets");
+include_spip("inc/presentation");
 
 function csv_champ($champ) {
 	$champ = preg_replace(',[\s]+,', ' ', $champ);
@@ -303,7 +303,7 @@ function exec_forms_telecharger(){
 	// S'il y a des fichiers joints, creer un ZIP
 	//
 	include_ecrire("pclzip.lib");
-	include_ecrire("inc_session");
+	include_spip("inc/session");
 
 	$zip = "data/form".$id_form."_".rand().".zip";
 	$csv = "data/$filename.$extension";

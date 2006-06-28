@@ -21,7 +21,7 @@
 	}
 	
 	function Forms_verifier_base(){
-		$version_base = 0.13;
+		$version_base = 0.14;
 		$current_version = 0.0;
 		if (   (isset($GLOBALS['meta']['forms_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['forms_base_version'])==$version_base))
@@ -57,17 +57,20 @@
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			creer_base();
-			spip_query("ALTER TABLE `spip_forms` CHANGE `descriptif` `descriptif` TEXT");
-			spip_query("ALTER TABLE `spip_forms` CHANGE `schema` `schema` TEXT");
-			spip_query("ALTER TABLE `spip_forms` CHANGE `email` `email` TEXT");
-			spip_query("ALTER TABLE `spip_forms` CHANGE `texte` `texte` TEXT");
+			spip_query("ALTER TABLE spip_forms CHANGE `descriptif` `descriptif` TEXT");
+			spip_query("ALTER TABLE spip_forms CHANGE `schema` `schema` TEXT");
+			spip_query("ALTER TABLE spip_forms CHANGE `email` `email` TEXT");
+			spip_query("ALTER TABLE spip_forms CHANGE `texte` `texte` TEXT");
 			ecrire_meta('forms_base_version',$current_version=0.12);
 		}
 		if ($current_version<0.13){
-			spip_query("ALTER TABLE `spip_forms` CHANGE `schema` `structure` TEXT");
+			spip_query("ALTER TABLE spip_forms CHANGE `schema` `structure` TEXT");
 			ecrire_meta('forms_base_version',$current_version=0.13);
 		}
-		
+		if ($current_version<0.14){
+			spip_query("ALTER TABLE spip_reponses ADD `id_article_export` BIGINT( 21 ) NOT NULL AFTER `id_auteur` ");
+			ecrire_meta('forms_base_version',$current_version=0.14);
+		}
 		ecrire_metas();
 	}
 
@@ -89,8 +92,8 @@
 	}
 
 	function Forms_nommer_fichier_form($orig, $dir) {
-		include_ecrire("inc_charsets.php");
-		include_ecrire("inc_filtres.php");
+		include_spip("inc/charsets");
+		include_spip("inc/filtres");
 		if (ereg("^(.*)\.([^.]+)$", $orig, $match)) {
 			$ext = strtolower($match[2]);
 			$orig = $match[1];
@@ -149,7 +152,7 @@
 		if (!$cookie = addslashes($GLOBALS['cookie_form'])){
 			if (!$cookie = $_COOKIE[$nom_cookie]) {
 		  	$cookie_utilise=false;  // pas de cookie a l'horizon donc pas de reponse presumée
-				//include_ecrire("inc_session.php");
+				//include_spip("inc/session");
 				//$cookie = creer_uniqid();
 			}
 		}
@@ -590,7 +593,7 @@
 			}
 			if ($type == 'url') {
 				if ($t['verif'] == 'oui') {
-					include_ecrire("inc_sites.php");
+					include_spip("inc/sites");
 					if (!recuperer_page($val)) {
 						$erreur[$code] = _T("site_introuvable");
 					}

@@ -10,12 +10,13 @@
  *
  */
 
-include_ecrire('inc_forms');
+include_spip('inc/forms');
 
 function exec_forms_reponses(){
 	global $id_form;
 	global $supp_reponse;
-  include_ecrire("inc_presentation");
+  include_spip("inc/presentation");
+  Forms_verifier_base();
 
 	$id_form = intval($id_form);
 
@@ -197,6 +198,13 @@ function exec_forms_reponses(){
 		//icone(_L("Supprimer cette r&eacute;ponse"), $link->getUrl(),"../"._DIR_PLUGIN_FORMS."/form-24.png", "supprimer.gif", "right");
 		$link=parametre_url(self(),'supp_reponse', $id_reponse);
 		icone(_L("Supprimer cette r&eacute;ponse"), $link,"../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "supprimer.gif", "right");
+		
+		if ($row['id_article_export']==0){
+			icone(_L("Exporter dans un article"), generer_action_auteur('forms_exporte_reponse_article',"$id_reponse",self()),"article-24.gif", "creer.gif", "right");
+		}
+		else 
+			icone(_L("Voir l'article"), generer_url_ecrire('articles',"id_article=".$row['id_article_export']),"article-24.gif", "", "right");
+		
 
 		echo _L("R&eacute;ponse envoy&eacute;e le ").affdate($date)."<br />\n";
 		if (!$form_unique) {

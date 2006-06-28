@@ -22,7 +22,7 @@ function Forms_poser_cookie_sondage() {
 		$nom_cookie = 'spip_cookie_form_'.$id_form;
 		// Ne generer un nouveau cookie que s'il n'existe pas deja
 		if (!$cookie = $_COOKIE[$nom_cookie]) {
-			include_ecrire("inc_session");
+			include_spip("inc/session");
 			$cookie = creer_uniqid();
 		}
 		$GLOBALS['cookie_form'] = $cookie; // pour utilisation dans inc_forms...

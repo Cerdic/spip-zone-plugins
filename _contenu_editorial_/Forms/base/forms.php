@@ -33,6 +33,7 @@ $spip_reponses = array(
 	"date"		=> "DATETIME NOT NULL",
 	"ip"		=> "VARCHAR(255) NOT NULL",
 	"id_auteur"	=> "bigint(21) NOT NULL",
+	"id_article_export"	=> "bigint(21) NOT NULL",
 	"statut" 	=> "VARCHAR(255) NOT NULL",
 	"cookie"	=> "VARCHAR(255) NOT NULL",
 	"maj" 		=> "TIMESTAMP");

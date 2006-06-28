@@ -1,6 +1,6 @@
 <?php
 
-include_ecrire('inc_forms');
+include_spip('inc/forms');
 
 function Forms_duplique_form(){
 	$duplique = intval(_request('duplique_form'));

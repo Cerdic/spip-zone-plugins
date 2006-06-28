@@ -384,8 +384,8 @@ function exec_forms_edit(){
 
 	if ($retour)
 		$retour = urldecode($retour);
-  include_ecrire("inc_presentation");
-	include_ecrire("inc_config");
+  include_spip("inc/presentation");
+	include_spip("inc/config");
 
 	if ($id_form) {
 		$query = "SELECT COUNT(*) FROM spip_reponses WHERE id_form=$id_form AND statut='valide'";
