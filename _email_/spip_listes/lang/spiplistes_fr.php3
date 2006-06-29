@@ -15,7 +15,7 @@ dans lequel ils souhaitent recevoir les courriers (HTML/texte). </p><p>Tout mess
 'abonnement' => 'Abonnement',
 'abonnement'=>'Vous souhaitez modifier votre abonnement &agrave; la lettre d\'information',
 'abonnement_bouton'=>'Modifier votre abonnement',
-'abonnement_cdt' => '<a href=\'http://bloog.net/spip-listes/\'>SPIP-Listes</a>' ,
+'abonnement_cdt' => '<a href=\'http://bloog.net\'>SPIP-Listes</a>' ,
 'abonnement_change_format'=>'Vous pouvez changer de format de r&eacute;ception ou vous d&eacute;sabonner : ',
 'abonnement_mail' => 'Pour modifier votre abonnement, veuillez vous rendre &agrave; l\'adresse suivante',
 'abonnement_mail_passcookie' => '(ceci est un message automatique)
@@ -24,14 +24,14 @@ Pour modifier votre abonnement &agrave la lettre d\'information de ce site :
 
 Veuillez vous rendre &agrave; l\'adresse suivante :
 
-    @adresse_site@/abonnement.php3?d=@cookie@
+    @adresse_site@/spip.php?page=abonnement?d=@cookie@
 
 Vous pourrez alors confirmer la modification de votre abonnement.',
 'abonnement_modifie'=>'Vos modifications sont prises en compte',
 'abonnement_nouveau_format'=>'Votre format de r&eacute;ception est d&eacute;sormais : ',
 'abonnement_titre_mail'=>'Modifier votre abonnement',
-'abonnement_texte_mail'=>'Indiquez ci-dessous l\'adresse email sous laquelle vous vous &ecirc;tes pr&eacute;c&eacute;demment enregistr&eacute;s. 
-Vous recevrez un email permettant d\'acc&eacute;der &agrave; page de modification de votre abonnement.',
+'abonnement_texte_mail'=>'Indiquez ci-dessous l\'adresse email sous laquelle vous vous &ecirc;tes pr&eacute;c&eacute;demment enregistr&eacute;. 
+Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modification de votre abonnement.',
 'abonner' => 's\'abonner',
 'actualiser' => 'Actualiser',
 'adresse' => 'Indiquez ici l\'adresse &agrave; utiliser pour les retours de mails (&agrave; d&eacute;faut, l\'adresse du webmestre sera utilis&eacute;e comme adresse de retour) :',
@@ -241,7 +241,7 @@ et de recevoir les lettres d\'informations.',
 'mail_a_envoyer' => 'Nombre de mails &agrave; envoyer : ',
 'mail_tache_courante' => 'Mails envoy&eacute;s pour la t&acirc;che courante : ',
 'messages_auto_envoye' => 'Messages automatiques envoy&eacute;s',
-'message_en_cours' => 'Ce message est en cours de r&eacute;daction',
+'message_en_cours' => 'Un message est en cours d\'envoi',
 'message_presque_envoye' =>'Ce message est sur le point d\'&ecirc;tre envoy&eacute;.',
 'mode_inscription' => 'Param&eacute;trer le mode d\'inscription des visiteurs',
 'modif_envoi' => 'Vous pouvez le modifier ou demander son envoi.',
@@ -257,6 +257,7 @@ et de recevoir les lettres d\'informations.',
 'plus_abonne' => ' n\'est plus abonn&eacute; &agrave; la liste ',
 'prochain_envoi_aujd' => 'Prochain envoi pr&eacute;vu aujourd\'hui',
 'prochain_envoi_prevu' => 'Prochain envoi pr&eacute;vu',
+'prochain_envoi_prevu_dans' => 'Prochain envoi pr&eacute;vu dans',
 'prog_env' => 'Programmer un envoi automatique',
 'prog_env_non' => 'Ne pas programmer d\'envoi',
 'program' => 'Programmation des messages automatiques',
