@@ -195,7 +195,7 @@ function exec_forms_reponses(){
 
 		//$link = new Link();
 		//$link->addVar('supp_reponse', $id_reponse);
-		//icone(_L("Supprimer cette r&eacute;ponse"), $link->getUrl(),"../"._DIR_PLUGIN_FORMS."/form-24.png", "supprimer.gif", "right");
+		//icone(_L("Supprimer cette r&eacute;ponse"), $link->getUrl(),"../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "supprimer.gif", "right");
 		$link=parametre_url(self(),'supp_reponse', $id_reponse);
 		icone(_L("Supprimer cette r&eacute;ponse"), $link,"../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "supprimer.gif", "right");
 		

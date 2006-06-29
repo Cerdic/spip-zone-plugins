@@ -175,7 +175,7 @@
 		$s = "";
 		// Ajouter un formulaire
 		$s .= "\n<p>";
-		$s .= debut_cadre_relief("../"._DIR_PLUGIN_FORMS."/form-24.png", true);
+		$s .= debut_cadre_relief("../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", true);
 	
 		$s .= "<div style='padding: 2px; background-color: $couleur_claire; text-align: center; color: black;'>";
 		$s .= bouton_block_invisible("ajouter_form");
@@ -836,7 +836,7 @@
 			$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
 		}
 		
-		if (!$icone) $icone = "../"._DIR_PLUGIN_FORMS."/form-24.png";
+		if (!$icone) $icone = "../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png";
 		
 		if ($cpt) {
 			if ($titre_table) echo "<div style='height: 12px;'></div>";
