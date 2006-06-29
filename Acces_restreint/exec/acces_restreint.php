@@ -104,7 +104,7 @@ function exec_acces_restreint(){
 			$vals[] = $s;
 			
 			$s="";
-			$s = icone_horizontale (_T('accesrestreint:icone_supprimer_zone'), generer_url_ecrire('acces_restreint', "supp_zone=$id_zone"), "../"._DIR_PLUGIN_ACCES_RESTREINT."/img_pack/zones-acces-24.png", "supprimer.gif", false);
+			$s = icone_horizontale (_T('accesrestreint:icone_supprimer_zone'), generer_url_ecrire('acces_restreint', "supp_zone=$id_zone"), "../"._DIR_PLUGIN_ACCES_RESTREINT."/img_pack/zones-acces-24.gif", "supprimer.gif", false);
 			$vals[] = $s;
 
 			$table[] = $vals;
@@ -113,7 +113,7 @@ function exec_acces_restreint(){
 
 	// on affiche la table
 	$titre_table = _T('accesrestreint:titre_table');
-	$icone = "../"._DIR_PLUGIN_ACCES_RESTREINT."/img_pack/zones-acces-24.png";
+	$icone = "../"._DIR_PLUGIN_ACCES_RESTREINT."/img_pack/zones-acces-24.gif";
 	//if ($titre_table) echo "<div style='height: 12px;'></div>";
 	echo "<div class='liste'>";
 	bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black");
