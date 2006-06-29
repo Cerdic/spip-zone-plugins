@@ -11,7 +11,7 @@ _ &copy; 2006 - Licence GPL
 	0.1
 	</version>
 	<etat>
-	test
+	stable
 	</etat>
 	<description>
 	Import de fichiers CSV dans les tables SPIP
