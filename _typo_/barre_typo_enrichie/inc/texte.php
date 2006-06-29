@@ -1055,7 +1055,7 @@ function traiter_raccourcis($letexte) {
 		if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
 		foreach ($matches as $regs) {
 			$terme = trim($regs[1]);
-			$terme_underscore = rawurlencode(preg_replace(',\s+,', '_', $terme));
+			$terme_underscore = rawurlencode(preg_replace(',\s+,', '_', preg_replace("/([^|]+)(\|.*)?/", "$1", $terme)));
 			if (strstr($url_glossaire_externe,"%s"))
 				$url = str_replace("%s", $terme_underscore, $url_glossaire_externe);
 			else
