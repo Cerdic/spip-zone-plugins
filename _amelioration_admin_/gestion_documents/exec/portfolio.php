@@ -119,7 +119,7 @@ function exec_portfolio(){
 		if (!isset($_POST['filtre'])) $_POST['filtre']=$_REQUEST['filtre'];
 	}
 	$titre_table=_L("Tous les Documents");
-	if (!$icone) $icone = "../"._DIR_PLUGIN_GESTION_DOCUMENTS."/stock_broken_image.png";
+	if (!$icone) $icone = "../"._DIR_PLUGIN_GESTION_DOCUMENTS."/img_pack/stock_broken_image.png";
 
 	$table_type=array();
 	$s=spip_query('SELECT * FROM spip_types_documents');
@@ -221,13 +221,16 @@ function exec_portfolio(){
 		$_GET['t_debut'] = $deb_aff; // pour que afficher_tranches_requete le retrouve ...
 	}
 
+	$deb_aff = intval(_request('t_' .$tmp_var));
 	if ($cpt > 1.5*$nb_aff) {
 		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
+		$limit = ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : "99999");
 	}
+	else $limit="99999";
 
 	$table_need_update = false;
 	if ($cpt) {
-	 	$result = spip_query("SELECT $select FROM $from$join$where$order$group LIMIT $deb_aff,$nb_aff");
+	 	$result = spip_query("SELECT $select FROM $from$join$where$order$group LIMIT $limit");
 		$num_rows = spip_num_rows($result);
 
 		$ifond = 0;
@@ -391,7 +394,7 @@ function exec_portfolio(){
 				generer_url_ecrire('portfolio',"updatetable=oui&".generer_query_string($conteneur,$id_type,$nb_aff,$filtre)),
 				"administration-24.gif");
 		}
-		icone_horizontale (_L('Reparer les liens'), generer_url_ecrire('reparer_liens_documents'),"../"._DIR_PLUGIN_GESTION_DOCUMENTS."/stock_broken_image.png");
+		icone_horizontale (_L('Reparer les liens'), generer_url_ecrire('reparer_liens_documents'),"../"._DIR_PLUGIN_GESTION_DOCUMENTS."/img_pack/stock_broken_image.png");
 
 		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string($conteneur,"",$nb_aff,$filtre))."' method='post'><div>\n";
 		echo _L('Type :') . "<br /><select name='id_type'";

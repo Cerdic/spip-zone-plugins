@@ -43,7 +43,7 @@ function exec_reparer_liens_documents(){
 	debut_raccourcis();
 	icone_horizontale (_L('Portfolio'), 
 		generer_url_ecrire('portfolio'),
-		"../"._DIR_PLUGIN_GESTION_DOCUMENTS."/stock_broken_image.png");
+		"../"._DIR_PLUGIN_GESTION_DOCUMENTS."/img_pack/stock_broken_image.png");
 	fin_raccourcis();
 	debut_droite();
 

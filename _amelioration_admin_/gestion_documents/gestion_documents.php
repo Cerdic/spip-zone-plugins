@@ -21,7 +21,7 @@ define('_DIR_PLUGIN_GESTION_DOCUMENTS',(_DIR_PLUGINS.end($p)));
 
 		  // on voit les bouton dans la barre "accueil"
 			$boutons_admin['naviguer']->sousmenu["portfolio"]= new Bouton(
-			"../"._DIR_PLUGIN_GESTION_DOCUMENTS."/stock_broken_image.png",  // icone
+			"../"._DIR_PLUGIN_GESTION_DOCUMENTS."/img_pack/stock_broken_image.png",  // icone
 			_L("Tous vos documents") //titre
 			);
 		}
