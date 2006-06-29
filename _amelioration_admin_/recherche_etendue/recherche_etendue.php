@@ -23,12 +23,12 @@
 
 		  // on voit les bouton dans la barre "accueil"
 			$boutons_admin['accueil']->sousmenu["admin_index"]= new Bouton(
-			"../"._DIR_PLUGIN_ADVANCED_SEARCH."/img_pack/stock_index.png",  // icone
+			"../"._DIR_PLUGIN_ADVANCED_SEARCH."/img_pack/stock_index.gif",  // icone
 			_L("Gestion de l'indexation") //titre
 			);
 
 			$boutons_admin['accueil']->sousmenu["index_tous"]= new Bouton(
-			"../"._DIR_PLUGIN_ADVANCED_SEARCH."/img_pack/stock_book-alt.png",  // icone
+			"../"._DIR_PLUGIN_ADVANCED_SEARCH."/img_pack/stock_book-alt.gif",  // icone
 			_L("Dictionnaire indexe") //titre
 			);
 		}
