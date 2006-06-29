@@ -21,8 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 
-function public_styliser($fond, $id_rubrique, $lang) {
-  global $contexte;
+function public_styliser($fond, $id_rubrique, $lang, $contexte) {
 	
   // Actuellement tous les squelettes se terminent par .html
   // pour des raisons historiques, ce qui est trompeur
