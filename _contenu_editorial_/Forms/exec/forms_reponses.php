@@ -15,6 +15,7 @@ include_spip('inc/forms');
 function exec_forms_reponses(){
 	global $id_form;
 	global $supp_reponse;
+	$debut = _request('debut');
   include_spip("inc/presentation");
   Forms_verifier_base();
 
@@ -108,10 +109,6 @@ function exec_forms_reponses(){
 			if ($i == $debut)
 				echo "<strong>$i</strong>";
 			else {
-				//objet link supprime remplace par parametre_url()
-				//$link = new Link();
-				//$link->addVar('debut', strval($i));
-				//echo "<a href='".$link->getUrl()."'>$i</a>";
 				$link=parametre_url(self(),'debut', strval($i));
 				echo "<a href='".$link."'>$i</a>";
 				
