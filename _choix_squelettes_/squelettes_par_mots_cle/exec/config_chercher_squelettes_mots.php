@@ -75,8 +75,6 @@ function exec_config_chercher_squelettes_mots() {
 	
 
 	$fonds = unserialize(lire_meta('SquelettesMots:fond_pour_groupe'));
-	if (!is_array($fonds))
-	  $fonds = array();
 
 	$field_fonds = $_REQUEST['fonds'];
 	$id_groupes = $_REQUEST['tid_groupe'];
@@ -85,17 +83,17 @@ function exec_config_chercher_squelettes_mots() {
 	
 	/*On transforme les _POST en jolie tableau*/
 	if($field_fonds) {
+	  $new_fonds = array();
 	  foreach($field_fonds as $index => $fond) {		
 		$index = intval($index);
 		$fond = addslashes($fond);
 		if($actif[$index]) {
 		  $id_groupe = intval($id_groupes[$index]);
 		  $type = addslashes($types[$index]);
-		  $fonds[$fond] = array($id_groupe,$type,$id_tables[$type]);
-		} else {
-		  unset($fonds[$fond]);
-		}
+		  $new_fonds[$fond] = array($id_groupe,$type,$id_tables[$type]);
+		} 
 	  }
+	  $fonds = $new_fonds;
 	}
 	
 	$index = 0;
