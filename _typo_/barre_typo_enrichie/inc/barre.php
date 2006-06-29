@@ -59,7 +59,7 @@ function produceWharf($id, $title = '', $sb = '') {
 //creation de tableau
 function afficher_gestion_tableau($champ) {
 
-$tableau_formulaire = '<table class="spip_barre" style="width: 100%; padding: 1px!important; border-top: 0px;" summary="">
+$tableau_formulaire = '<table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
 <tr><td>
 '._T('bartypenr:barre_gestion_colonne').': <input type="text" name="barre_nbcolones" style="width: 30px;" value="2" size="2" maxlength="2"   /></td><td>
 '._T('bartypenr:barre_gestion_ligne').': <input type="text" name="barre_nbrangs" style="width: 30px;" value="2" size="2" maxlength="2" /></td><td>
@@ -82,7 +82,7 @@ $tableau_formulaire = '<table class="spip_barre" style="width: 100%; padding: 1p
 function afficher_gestion_lien($champ) {
 
 $tableau_formulaire = '
- <table class="spip_barre" style="width: 100%; padding: 1px!important; border-top: 0px;" summary="">
+ <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
 <tr><td> 
 '._T('bartypenr:barre_adresse').': <input type="text" name="lien_nom" value="http://" size="21" maxlength="255" /><br />
 '._T('bartypenr:barre_bulle').': <input type="text" name="lien_bulle" value="" size="21" maxlength="255" />
@@ -101,7 +101,7 @@ $tableau_formulaire = '
 function afficher_gestion_remplacer($champ) {
 
 $tableau_formulaire = '
-<table class="spip_barre" style="width: 100%; padding: 1px!important; border-top: 0px;" summary="">
+<table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
 <tr><td style="width: 25%;">'.
 _T('bartypenr:barre_gestion_cr_chercher')
 .'<input type="text" name="barre_chercher" value="" size="12" maxlength="255" /></td><td style="width: 20%;">
@@ -127,16 +127,16 @@ _T('bartypenr:barre_gestion_cr_chercher')
 function afficher_gestion_ancre($champ) {
 
 $tableau_formulaire = '
-<table class="spip_barre" style="width: 100%; padding: 1px!important; border-top: 0px;" summary="">
+<table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
   <tr>
-    <td style="width:10%; text-align:center;"><strong>Gestion des ancres</strong></td>
-    <td style="width:45%;"><strong>Transformer en ancre</strong><br />
+    <td style="width:auto; text-align:center;"><strong>Gestion des ancres</strong></td>
+    <td style="width:auto;"><strong>Transformer en ancre</strong><br />
     <label for="ancre_nom"><i>Nom de l\'ancre</i></label> <br />
       <input type="text" name="ancre_nom" id="ancre_nom" />
 	  
 	<input type="button" value="OK" class="fondo" onclick="javascript:barre_ancre(\'[#\', \'%3C-\', \']\', ancre_nom.value, '.$champ.');" /> 
     </td>
-	<td style="width:45%;"><strong>Pointer vers une ancre</strong><br />
+	<td style="width:auto;"><strong>Pointer vers une ancre</strong><br />
     <label for="ancre_cible"><i>Ancre cible</i></label> <input type="text" name="ancre_cible" id="ancre_cible" /><br />
 	<label for="ancre_bulle"><i>Bulle d\'aide ancre</i></label> <input type="text" name="ancre_bulle" id="ancre_bulle" />
 	<input type="button" value="OK" class="fondo" onclick="javascript:barre_demande(\'[\', \'->#\', \']\', ancre_cible.value, ancre_bulle.value, '.$champ.');" /> 
@@ -186,7 +186,7 @@ $reta .= bouton_barre_racc ("barre_inserer('&euro;',$champ)", _DIR_IMG_ICONES_BA
 $reta .= "&nbsp;";
 	
 $tableau_formulaire = '
-<table class="spip_barre" style="width: 100%; padding: 1px!important; border-top: 0px;" summary="">
+<table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
   <tr class="spip_barre">
     <td style="width:30%;">'._T('bartypenr:barre_caracteres').'</td>
     <td>'.$reta.'
@@ -224,8 +224,8 @@ function afficher_barre($champ, $forum=false, $lang='') {
     $toolbox .= afficher_gestion_remplacer($champ);
 //
 
-	$ret .= "<table class='spip_barre' style='width:100%;' cellpadding='0' cellspacing='0' border='0' summary=''>";
-	$ret .= "\n<tr style='width: 100%;' class='spip_barre'>";
+	$ret .= "<table class='spip_barre' style='width:auto;' cellpadding='0' cellspacing='0' border='0' summary=''>";
+	$ret .= "\n<tr style='width: auto;' class='spip_barre'>";
 	$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 	$col = 1;
 
@@ -255,7 +255,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 //	$ret .= bouton_barre_racc ("barre_demande('[','->',']', '".addslashes(_T('barre_lien_input'))."', $champ)", _DIR_IMG_ICONES_BARRE."lien.png", _T('barre_lien'), $champhelp);
 
 // gestion des liens
-      $ret .=    bouton_barre_racc("javascript:swap_couche('".$GLOBALS['numero_block']['tableau_lien']."','');", _DIR_IMG_ICONES_BARRE."lien.png", _T('barre_lien'), $formulaire, $texte,'tableau_lien' );
+      $ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_lien']."','');", _DIR_IMG_ICONES_BARRE."lien.png", _T('barre_lien'), $formulaire, $texte,'tableau_lien' );
 	  
 	if (!$forum) {
 		$ret .= bouton_barre_racc ("barre_raccourci('[[',']]',$champ)", _DIR_IMG_ICONES_BARRE."notes.png", _T('barre_note'), $champhelp);
@@ -270,17 +270,17 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 
 //gestion des tableaux		
-		$ret .= bouton_barre_racc("javascript:swap_couche('".$GLOBALS['numero_block']['tableau_gestion']."',
-      '');", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/barre-tableau.png', "Ins&eacute;rer un tableau",
-      $formulaire, $texte, 'tableau_gestion');
-	  
+		$ret .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_gestion']."','');",
+			_DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/barre-tableau.png', "Ins&eacute;rer un tableau",
+			$formulaire, $texte, 'tableau_gestion');
+
 	$ret .= "&nbsp</td>\n<td>";
 
 // gestion du remplacement
-      $ret .=    bouton_barre_racc("javascript:swap_couche('".$GLOBALS['numero_block']['tableau_remplacer']."','');", _DIR_PLUGIN_BARRE_TYPO."/img_pack/icones_barre/chercher_remplacer.png", "Chercher Remplacer", $formulaire, $texte,'tableau_remplacer' );
+      $ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_remplacer']."','');", _DIR_PLUGIN_BARRE_TYPO."/img_pack/icones_barre/chercher_remplacer.png", "Chercher Remplacer", $formulaire, $texte,'tableau_remplacer' );
 
 // gestion des ancres		
-		$ret .=    bouton_barre_racc("javascript:swap_couche('".$GLOBALS['numero_block']['tableau_ancre']."','');", _DIR_PLUGIN_BARRE_TYPO."/img_pack/icones_barre/ancre.png", 'Gestion des ancres', $formulaire, $texte,'tableau_ancre' );  
+		$ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_ancre']."','');", _DIR_PLUGIN_BARRE_TYPO."/img_pack/icones_barre/ancre.png", 'Gestion des ancres', $formulaire, $texte,'tableau_ancre' );  
 
 }
 
@@ -290,7 +290,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	// Insertion de caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...)
 	$ret .= "\n<td style='text-align:$spip_lang_left;' valign='middle'>";
 	$col++;
-	$ret .=    bouton_barre_racc("javascript:swap_couche('".$GLOBALS['numero_block']['tableau_caracteres']."','');", _DIR_PLUGIN_BARRE_TYPO."/img_pack/icones_barre/clavier.png", _T('bartypenr:barre_caracteres'), $formulaire, $texte,'tableau_caracteres' );
+	$ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_caracteres']."','');", _DIR_PLUGIN_BARRE_TYPO."/img_pack/icones_barre/clavier.png", _T('bartypenr:barre_caracteres'), $formulaire, $texte,'tableau_caracteres' );
 	
 
 
@@ -309,7 +309,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 	// Sur les forums publics, petite barre d'aide en survol des icones
 	if (_DIR_RESTREINT)
-		$ret .= "\n<tr>\n<td colspan='$col'><input disabled='disabled' type='text' id='barre_$num_barre' size='45' maxlength='100' style='width:100%; font-size:11px; color: black; background-color: #e4e4e4; border: 0px solid #dedede;'\nvalue=\"".attribut_html(_T('barre_aide'))."\" /></td></tr>";
+		$ret .= "\n<tr>\n<td colspan='$col'><input disabled='disabled' type='text' id='barre_$num_barre' size='45' maxlength='100' style='width:auto; font-size:11px; color: black; background-color: #e4e4e4; border: 0px solid #dedede;'\nvalue=\"".attribut_html(_T('barre_aide'))."\" /></td></tr>";
 
 	$ret .= "</table>";
 	 $ret .= $toolbox;
