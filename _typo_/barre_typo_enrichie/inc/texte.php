@@ -220,7 +220,7 @@ function nettoyer_raccourcis_typo($texte){
 	$texte = ereg_replace("[}{]", "", $texte);
 
 	// supprimer les tableaux
-	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);
+	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);	
 	return $texte;
 }
 
@@ -255,7 +255,7 @@ function couper($texte, $taille=50) {
 
 	$texte = nettoyer_raccourcis_typo($texte);
 
-	// corriger la longueur de coupe
+	// corriger la longueur de coupe 
 	// en fonction de la presence de caracteres utf
 	if ($GLOBALS['meta']['charset']=='utf-8'){
 		$long = charset2unicode($texte);
@@ -546,14 +546,27 @@ function extraire_lien ($regs) {
 // 'url':   seulement L (i.e. generer_url_RACCOURCI)
 
 function calculer_url ($lien, $texte='', $pour='url') {
-	global $tableau_raccourcis;
-	if (preg_match(',^\s*(\w*?)\s*(\d+)(\?([^#]+))?(#[^\s]*)?\s*$,', $lien, $match)) {
-		$params = isset($match[4]) ? $match[4] :'';
+
+	// Cherche un lien du type [->raccourci 123]
+	// associe a une fonction generer_url_raccourci()
+	if (preg_match(',^(\S*?)\s*(\d+)(\?([^#]+))?(#[^\s]*)?$,', trim($lien), $match)) {
 		$ancre = isset($match[5]) ? $match[5] :'';
-		if (!$f =  $match[1]) $f='article';
-		if (isset($tableau_raccourcis[$f])
-		AND is_string($tableau_raccourcis[$f]))
-			$f = $tableau_raccourcis[$f];
+		$params = isset($match[4]) ? $match[4] :'';
+		// valeur par defaut
+		if (!$f = $match[1]) $f = 'article';
+
+		// aliases (historique)
+		if ($f == 'art') $f = 'article';
+		else if ($f == 'art') $f = 'article';
+		else if ($f == 'rub') $f = 'rubrique';
+		else if ($f == 'rub') $f = 'rubrique';
+		else if ($f == 'aut') $f = 'auteur';
+		else if ($f == 'doc' OR $f == 'im' OR $f == 'img' OR $f == 'image')
+			$f = 'document';
+		else if (preg_match(',^br..?ve$,', $f)) $f = 'breve'; # accents :(
+
+		// chercher la fonction nommee generer_url_$raccourci
+		// ou calculer_url_raccourci si on n'a besoin que du lien
 		$f=(($pour == 'url') ? 'generer' : 'calculer') . '_url_' . $f;
 		charger_generer_url();
 		if (function_exists($f)) {
@@ -682,17 +695,6 @@ function calculer_url_site($id, $texte, $ancre, $params)
 			$texte = $row['nom_site'];
 	}
 	return array($lien, 'spip_in', $texte);
-}
-
-function calculer_url_spip($id, $texte, $ancre, $params)
-{
-	global $tableau_raccourcis, $home_server;
-	if (is_numeric($tableau_raccourcis['spip'][$id]))
-		$p= "/spip.php?page=article&amp;id_article=" . $tableau_raccourcis['spip'][$id];
-	else $p = '';
-	return array($home_server ."$p$ancre",
-		     'spip',
-		     'SPIP ' . join('.', preg_split('//',strval($id),-1,PREG_SPLIT_NO_EMPTY)));
 }
 
 //
@@ -1081,7 +1083,7 @@ function traiter_raccourcis($letexte) {
 
 
 	//
-	// Raccourcis liens [xxx->url]
+	// Raccourcis liens [xxx->url] 
 	// Note : complique car c'est ici qu'on applique typo() !
 	//
 	#$regexp = "|\[([^][]*)->(>?)([^]]*)\]|ms";
