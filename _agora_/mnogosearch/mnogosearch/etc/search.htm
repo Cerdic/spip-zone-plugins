@@ -1,0 +1,521 @@
+<!--
+
+    This is default template file for mnoGoSearch 3.2
+    (C) 1999-2001, mnoGoSearch developers team <devel@mnogosearch.org>
+
+    Please rename to search.htm and edit as desired.
+    See doc/msearch-templates.html for detailed information.
+    You may want to keep the original file for future reference.
+
+    WARNING: Use proper chmod to protect your passwords!
+-->
+<!--variables
+# Database parameters are to be used with SQL backend
+# and do not matter for built-in text files support
+# Format: <DBType>:[//[DBUser[:DBPass]@]DBHost[:DBPort]]/DBName/[?dbmode=mode]
+DBAddr	mysql://foo:bar@localhost/mnogosearch/?dbmode=multi
+
+# Uncomment this line to enable search result cache
+Cache yes
+
+#  Uncomment this line if you do not want to detect and show clones
+#DetectClones	no
+
+# Use proper local and browser charsets
+# Default charset is iso-8859-1 (latin1)
+# which is suitable for the most Western European languages
+
+LocalCharset   UTF-8
+BrowserCharset UTF-8
+
+# Load stopwords file.  File name is either absolute
+# or relative to /etc directory of mnoGoSearch installation.
+#
+#StopwordFile stopwords/en.sl
+#StopwordFile stopwords/ru.sl
+#
+StopwordFile stopwords/fr.sl
+#
+# Minimum and maximum word lengths
+#
+MinWordLength 3
+MaxWordLength 32
+
+# Number of pages in navigator bar
+#
+#PagesPerScreen 10
+
+# Load synonyms file.  File name is either absolute
+# or relative to /etc directory of mnoGoSearch installation.
+#
+#Synonym synonym/english.syn
+#Synonym synonym/russian.syn
+#
+Synonym synonym/francais.syn
+#LangMapFile langmap/fr.latin1.lm
+#LangMapFile langmap/fr.latin1.bible.lm
+
+# ISpell
+Affix fr iso-8859-1 ispell/francais.aff
+Spell fr iso-8859-1 ispell/francais.dico
+
+#
+# How to hilight searched words.
+HlBeg	'<span class="spip_surligne">'
+HlEnd	'</span>'
+
+# Uncomment this line to enable error logging to stderr
+#Log2stderr yes
+#
+
+# Uncomment this line to change default maximal excerpt size. Default value is 256.
+ExcerptSize 256
+#
+
+# Uncomment this line to change number of characters before and after search words
+# in excerpts. Default value is 40.
+ExcerptPadding 64
+#
+
+# Uncomment this line to change Last-Modified format output
+# Use strftime function meta variables
+DateFormat '%d %m %Y %X %Z'
+
+# Uncomment this line if you want to generate misspelled
+# search word suggestions. You need to run "indexer -Ewrdstat"
+# before using this feature.
+#
+Suggest yes
+-->
+<!--top-->
+<!IFNOT name="fmt" CONTENT="xml">
+	<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'
+	    'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+	<html xmlns="http://www.w3.org/1999/xhtml">
+	  <head>
+	    <title>
+	      [SPIP-galaxie]::recherche dans la galaxie SPIP::$&(q)
+	    </title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="Description" content="Recherche dans la galaxie SPIP" />
+	  </head>
+		
+		<style type="text/css">
+		<!--
+		.spip_surligne { 
+			font-weight: bold; 
+			background-color: #ff0;
+			color: #f00;
+		}
+		-->
+		</style>
+	
+		<body BGCOLOR="#FFFFFF" LINK="#0000CC" VLINK="#0000CC" ALINK="#0000CC">
+
+		<!IF name="form" CONTENT="extended">
+			<form method='GET' action="$(Self)">
+			<table bgcolor=#EEEEEE border=0>
+			  <tr>
+			    <td>Rechercher </td>
+			    <td colspan='4'>
+					  <!IF name="q" CONTENT="">
+					      <input type="text"   name="q"    value="$&(qprev)" size=50 />
+					      <input type="submit" name="cmd"  value="Trouver!" />
+					      <input type="hidden" name="form" value="extended" />
+					      <small><a href="$(self)?qprev=$%(qprev)">Recherche rapide</a></small>
+					  <!ELSE>
+					      <input type="text"   name="q"    value="$&(q)" size=50 />
+					      <input type="submit" name="cmd"  value="Trouver!" />
+					      <input type="hidden" name="form" value="extended" />
+					      <small><a href="$(self)?qprev=$%(q)">Recherche rapide</a></small>
+					  <!ENDIF>
+	    		</td>
+	  		</tr>
+	  		<tr>
+			    <td>Comment </td>
+			    <td>
+			      <select name="m">
+			        <option value="all"  selected="$(m)">Tous les mots</option>
+			        <option value="any"  selected="$(m)">Au moins un mot</option>
+			        <option value="bool" selected="$(m)">Expression logique</option>
+			      </select>
+			    </td>
+			    <td> </td>
+			    <td>
+			      <select name="wm">
+			        <option value="wrd" selected="$(wm)">Mots entiers</option>
+			        <option value="beg" selected="$(wm)">Commencant par ...</option>
+			        <option value="end" selected="$(wm)">Finissant par ...</option>
+			        <option value="sub" selected="$(wm)">Contenant ...</option>
+			      </select>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td>Quoi </td>
+			    <td>
+			       <select name="sp">
+			         <option value="1"  selected="$(sp)">Mots+Variantes</option>
+			         <option value="0" selected="$(sp)">Mots exacts</option>
+			       </select>
+			    </td>
+			    <td> </td>
+			    <td>
+			      <select name="sy">
+			        <option value="1"  selected="$(sy)">+Synonymes</option>
+			        <option value="0" selected="$(sy)">seulement</option>
+			      </select>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td>Ou</td>
+			    <td>
+			      <select name="wf">
+			        <option value="2221"  selected="$(wf)">Document entier</option>
+			        <option value="2000"  selected="$(wf)">Description</option>
+			        <option value="0200"  selected="$(wf)">Mots cles</option>
+			        <option value="0020"  selected="$(wf)">Titre</option>
+			        <option value="0001"  selected="$(wf)">Corps</option>
+			      </select>
+			    </td>
+			    <td> </td>
+			    <td>
+			      <select name="type">
+			        <option value=""           selected="$(type)">Tous types</option>
+			        <option value="text/html"  selected="$(type)">documents html</option>
+			        <option value="text/plain" selected="$(type)">documents texte</option>
+			      </select>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td>Galaxie</td>
+			    <TD colspan='6'>
+			      <select name="ul">
+			        <option value=""           selected="$(ul)">Tous les sites</option>
+			        <option value="www.spip.net" selected="$(ul)">www.spip.net</option>
+			        <option value="www.spip-contrib.net" selected="$(ul)">www.spip-contrib.net</option>
+			        <option value="www.spip-blog.net" selected="$(ul)">www.spip-blog.net</option>
+			        <option value="zine.spip.org" selected="$(ul)">zine.spip.org</option>
+			        <option value="forum.spip.org" selected="$(ul)">forum.spip.org</option>
+			      </select>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td><br /></td>
+			  </tr>
+			  <tr>
+			    <td>Resultats</td>
+			    <td>
+			      <select name="fmt">
+			        <option value="long"  selected="$(fmt)">Liste detaille</option>
+			        <option value="short" selected="$(fmt)">Resumes</option>
+			        <option value="url"   selected="$(fmt)">URL</option>
+			        <option value="xml"   selected="$(fmt)">XML</option>
+			      </select>
+			    </td>
+			    <td> </td>
+			    <td>
+			      <select name="ps">
+			        <option value="10" selected="$(ps)">10 par page</option>
+			        <option value="20" selected="$(ps)">20 par page</option>
+			        <option value="50" selected="$(ps)">50 par page</option>
+			      </select>
+			    </td>
+			      <td>
+						<select name="GroupBySite">
+						<option value="no" selected="$(GroupBySite)">non regroupes</option>
+						<option value="yes" selected="$(GroupBySite)">regroupes par site</option>
+						</select>
+			    </td>
+			  </tr>
+				<!-- Uncomment this to limit database subsection by "tag" -->
+				<!--
+				  <tr>
+				    <td>Search through:</td>
+				    <td>
+				      <select name="t">
+				        <option value=""  selected="$(t)">All sites</option>
+				        <option value="1" selected="$(t)">Sport</option>
+				        <option value="2" selected="$(t)">Technology</option>
+				        <option value="3" selected="$(t)">Shopping</option>
+				      </select>
+				    </td>
+				   </tr>
+				-->
+			</table>
+		</form>
+	<!ELSE>
+		<div style='text-align:center;'>
+			<form method='GET' action="$(Self)">
+				<table bgcolor=#EEEEEE width=100%>
+				  <tr>
+				    <td> <br /> Rechercher :
+							<!IF name="q" CONTENT="">
+					      <input type="text"   name="q"    value="$&(qprev)" size='50' />
+					      <input type="submit" name="cmd" value="Trouver!" />
+					      <small><a href="?form=extended&amp;qprev=$%(qprev)">Recherche Etendue</a></small>
+	  					<!ELSE>
+					      <input type="text"   name="q"    value="$&(q)" size='50' >
+					      <input type="submit" name="cmd" value="Trouver!">
+					      <small><a href="?form=extended&amp;qprev=$%(q)">Recherche Etendue</a></small>
+	  					<!ENDIF>
+	      			<br /><br />
+	    			</td>
+	  			</tr>
+				</table>
+			</form>
+		</div>
+	<!ENDIF>
+<!ELSE><?xml version="1.0" encoding="utf-8"?>
+<recherche>
+<!ENDIF>
+<!--/top-->
+<!--restop-->
+<!IFNOT name="fmt" CONTENT="xml">
+	<table bgcolor=#EEEEEE width=100% border=0>
+	  <tr>
+	    <td>
+	      <small>Recherche de <b>$&(q)</b>.</small>
+	      <small>Resultats : <b>$(WE)</b>.</small>
+	    </td>
+	    <td>
+	      <small>Resultats : <b>$(first) a $(last)</b> sur <B>$(total)</B></small>
+	      <small>trouves en <b>$(SearchTime)</b> secondes</small>
+	    </td>
+	  </tr>
+	  <tr><td colspan="2">
+	      Trier par :
+	      <!IF name="s" CONTENT="DRP">
+	      <a href="$(FirstPage)&s=RPD">pertinence</a>&nbsp;|&nbsp;<b>date de modification</b>&nbsp;|&nbsp;<a href="$(FirstPage)&s=SRPD&su=title">titre</a><!ELSEIF name="s" CONTENT="SRPD">
+	      <a href="$(FirstPage)&s=RPD">pertinence</a>&nbsp;|&nbsp;<a href="$(FirstPage)&s=DRP">date de modification</a>&nbsp;|&nbsp;<b>titre</b><!ELSE>
+	      <b>pertinence</b>&nbsp;|&nbsp;<a href="$(FirstPage)&s=DRP">date de modification</a>&nbsp;|&nbsp;<a href="$(FirstPage)&s=SRPD&su=title">titre</a><!ENDIF>
+	  </td></tr>
+	</table>
+	<table width=100% bgcolor=#FFFFFF>
+	  <tr>
+	    <td align=center>
+	      <TABLE BORDER=0>
+	        <tr>$(NL)$(NB)<td><small>|</td>$(NR)</td></tr>
+	      </TABLE>
+	    </td>
+	  </tr>
+	</table>
+<!ELSE>
+	<balise_MNOGO_RECHERCHE>$&(q)</balise_MNOGO_RECHERCHE>
+	<balise_MNOGO_RESUME_RESULTATS>$(WE)</balise_MNOGO_RESUME_RESULTATS>
+	<balise_MNOGO_PREMIER>$(first)</balise_MNOGO_PREMIER>
+	<balise_MNOGO_DERNIER>$(last)</balise_MNOGO_DERNIER>
+	<balise_MNOGO_TOTAL>$(total)</balise_MNOGO_TOTAL>
+	<balise_MNOGO_SEARCHTIME>$(SearchTime)</balise_MNOGO_SEARCHTIME>
+	<resultats>
+<!ENDIF>
+<!--/restop-->
+<!--res-->
+<!IFNOT name="Alias" CONTENT=""><!COPY name="URL" CONTENT="Alias"><!ENDIF>
+<!IF   name="fmt" CONTENT="url">
+	<dl>
+	  <dt>$(Order).
+	  <a href="$(URL)" TARGET="_blank">$(URL:40)</a>
+	  <small>[<b>$(Score)</b>]</small>
+	</dl>
+<!ELSEIF name="fmt" CONTENT="short">
+	<dl>
+	  <dt>$(Order).
+	  <a href="$(URL)" TARGET="_blank">
+	    <!IF name="Title" CONTENT="[no title]">$(URL:40)<!ELSE>$&(Title)<!ENDIF>
+	  </a>
+	  <small>[<b>$(Score)</b>]</small>
+	</dl>
+<!ELSEIF name="fmt" CONTENT="xml">
+		<resultat>
+			<balise_MNOGO_ITEM_NUMERO>$(Order)</balise_MNOGO_ITEM_NUMERO>
+			<balise_MNOGO_ITEM_TITRE>$&(Title)</balise_MNOGO_ITEM_TITRE>
+			<balise_MNOGO_ITEM_URL>$(URL)</balise_MNOGO_ITEM_URL>
+			<balise_MNOGO_ITEM_POINTS>$(Score)</balise_MNOGO_ITEM_POINTS>
+			<balise_MNOGO_ITEM_POPULARITE>$(Pop_Rank)</balise_MNOGO_ITEM_POPULARITE>
+			<balise_MNOGO_ITEM_DESCRIPTIF>$&(Body)</balise_MNOGO_ITEM_DESCRIPTIF>
+			<balise_MNOGO_ITEM_TAILLE>$(Content-Length)</balise_MNOGO_ITEM_TAILLE>
+			<balise_MNOGO_ITEM_TYPE>$(Content-Type)</balise_MNOGO_ITEM_TYPE>
+			<balise_MNOGO_ITEM_DATE>$(Last-Modified)</balise_MNOGO_ITEM_DATE>
+			<balise_MNOGO_ITEM_CACHE_URL>$(stored_href)</balise_MNOGO_ITEM_CACHE_URL>
+		</resultat>
+<!ELSE>
+	<dl>
+	  <dt>$(Order).
+	  <a href="$(URL)" TARGET="_blank">
+	    <!IF name="Title" CONTENT="[no title]">$(URL:40)<!ELSE>$&(Title)<!ENDIF>
+	  </a>
+	  <small>[<b>$(Score)</b> Popularite: <b>$(Pop_Rank)</b>]</small>
+	  <dd>
+	  <table width=60%>
+	    <tr>
+	      <td>
+	        <small>$&(Body)...</small>
+	      </td>
+	    </tr>
+	    <tr>
+	      <td>
+	        <ul>
+	         <li>
+	           <small>
+	             <a href="$(URL)">$(URL:40)</a>
+	             <font color="#008800">
+	              - $(Content-Length) octets [$(Content-Type)] 
+	              - $(Last-Modified) 
+					      <!IFNOT name="CachedCopy" CONTENT="">
+						      <dd><small>[<a href="$(stored_href)">Copie en cache</a>]</small></dd>
+					      <!ENDIF>
+					      <!IFNOT name="sitelimit_href" CONTENT="">
+						      <!IFNOT name="PerSite" CONTENT="0">
+							      <dd><small>
+				              [<a href="$(self)$(sitelimit_href)">Plus de resulats de ce site ($(PerSite) total) </a>]
+							      </small></dd>
+						      <!ENDIF>
+					      <!ENDIF>
+	             </font>
+	           </small>
+	           <br />
+	           $(CL)
+	        </ul>
+	        $(STORED)
+	      </td>
+	    </tr>
+	  </table>
+	</dl>
+<!ENDIF>
+<!--/res-->
+<!--resbot-->
+<!IFNOT name="fmt" CONTENT="xml">
+	<table width=100% bgcolor=#FFFFFF>
+	  <tr>
+	    <td align=center>
+	      <TABLE BORDER=0>
+	        <tr>$(NL)$(NB)<td><small>|</td>$(NR)</td></tr>
+	      </TABLE>
+	    </td>
+	  </tr>
+	</table>
+<!ELSE>
+	</resultats>
+</recherche>
+<!ENDIF>
+<!--/resbot-->
+<!--clone-->
+<!IFNOT name="fmt" CONTENT="xml">
+	<!IFNOT name="Alias" CONTENT=""><!COPY name="URL" CONTENT="Alias"><!ENDIF>
+	<li>
+		<small>
+		  <a href="$(URL)" TARGET="_blank">$(URL:40)</a>
+		  <font color="#008800">
+		  - $(Content-Length) octets
+		  - $(Last-Modified) 
+		  </font>
+		</small>
+	</li>
+<!ENDIF>
+<!--/clone-->
+<!--navleft-->
+<td><small><a href="$(self)$(NH)">&lt;&lt; Retour</a></td>
+<!--/navleft-->
+<!--navleft_nop-->
+<td><small><FONT COLOR=gray>&lt;&lt; Retour</FONT></td>
+<!--/navleft_nop-->
+<!--navbar1-->
+<td><small>| <a href="$(self)$(NH)">$(NP)</a></td>
+<!--/navbar1-->
+<!--navbar0-->
+<td><small>| $(NP)</td>
+<!--/navbar0-->
+<!--navright-->
+<td><small><a href="$(self)$(NH)">Suite &gt;&gt;</a></td>
+<!--/navright-->
+<!--navright_nop-->
+<td><small><FONT COLOR=gray>Suite &gt;&gt;</FONT></td>
+<!--/navright_nop-->
+<!--notfound-->
+<!IFNOT name="fmt" CONTENT="xml">
+	<!IFNOT name="WS" CONTENT="">
+		Vouliez vous rechercher <b><a href="?q=$%(WS)">$(WS)</a></b>?
+	<!ENDIF>
+	<table bgcolor=#EEEEEE width=100%>
+	  <tr>
+	    <td>
+	      <small>Recherche de <b>$&(q)</b>.</small>
+	      <small>Resultats : <b>$(WE)</b></small>
+	    </td>
+	  </tr>
+	</table>
+	<p>
+	Desole, la recherche de <b>$&(q)</b> n'a pas ete fructueuse.<br>
+	Aucun document trouve contenant <b>"$&(q)"</b>.<br>
+	<p>
+	Suggestions:
+	<ul>
+	  <LI> Assurez vous que tous les mots sont correctements orthographies.
+	  <LI> Essayez d'autre mots cles.
+	  <LI> Essayez des mots cles plus generaux. 
+		<!IFNOT name="form" CONTENT="extended">
+		  Vous pouvez aussi essayer la <a href="$(self)?form=extended">recherche etendue</a>.
+		<!ENDIF>
+	</ul>
+<!ELSE>
+	<balise_MNOGO_RECHERCHE>$&(q)</balise_MNOGO_RECHERCHE>
+	<balise_MNOGO_RESUME_RESULTATS/>$(WE)</balise_MNOGO_RESUME_RESULTATS>
+	<balise_MNOGO_PREMIER>$(first)</balise_MNOGO_PREMIER>
+	<balise_MNOGO_DERNIER>$(last)</balise_MNOGO_DERNIER>
+	<balise_MNOGO_TOTAL>$(total)</balise_MNOGO_TOTAL>
+	<balise_MNOGO_SEARCHTIME>$(SearchTime)</balise_MNOGO_SEARCHTIME>
+	<balise_MNOGO_RECHERCHE_ALTERNATIVE>$(WS)</balise_MNOGO_RECHERCHE_ALTERNATIVE>
+</recherche>
+<!ENDIF>
+<!--/notfound-->
+<!--noquery-->
+<div style='text-align:center'>
+Merci de saisir un ou plusieurs mots et de cliquer sur recherche
+</div>
+<!--/noquery-->
+<!--error-->
+<div style='text-align:center'>
+<span style="color:#FF0000">Une erreur est survenue !</span>
+<p><strong>$(E)</strong></p>
+</div>
+<!--/error-->
+<!--bottom-->
+<!IFNOT name="fmt" CONTENT="xml">
+	<table bgcolor=#EEEEEE width=100%>
+	  <tr><td>&nbsp;</td></tr>
+	</table>
+	
+	<table width=100% bgcolor=#FFFFFF>
+	<tr>
+	  <td align=left>
+	    <a href="http://www.mnogosearch.org/"><IMG BORDER=0 SRC="http://www.mnogosearch.org/img/udm.gif"></a>
+	    <FONT size=1><a href="http://www.mnogosearch.org/">Powered by mnoGoSearch - free web search engine software</a></FONT><br />
+	  </td>
+	</tr>
+	</table>
+	<p />
+</body>
+</html>
+<!ENDIF>
+<!--/bottom-->
+<!--storedoc_top-->
+<base href="$(URL)">
+<table border="1" cellpadding="2" cellspacing="0"><tr>
+<td><b>Document Ref:</b> $(ID)</td>
+<td><b>Modifie le:</b> $(Last-Modified)</td>
+<td><b>Langue:</b> $(Content-Language)</td>
+<td><b>Characteres:</b> $(Charset)</td>
+<td><b>Taille:</b> $(Content-Length)</td>
+</tr></table>
+<hr>
+<!--/storedoc_top-->
+<!--storedoc-->
+$^(document)
+<!--/storedoc-->
+<!--storedoc_bottom-->
+<hr />
+<div style='text-align:center'>
+<a href="http://www.mnogosearch.ru/"><IMG BORDER=0 SRC="http://www.mnogosearch.ru/img/udm.gif"></a>
+<font size=1><a href="http://www.mnogosearch.org/">Powered by mnoGoSearch - free web search engine software</a></font>
+</div>
+<!--/storedoc_bottom-->

@@ -1,0 +1,18 @@
+#CACHE{0}
+
+Recherche ::#MNOGO_RECHERCHE::<br/>
+Resume ::#MNOGO_RESUME_RESULTATS::<br/>
+Resultats de ::#MNOGO_PREMIER::a::#MNOGO_DERNIER::sur un total de ::#MNOGO_TOTAL::<br/>
+Temps de recherche ::#MNOGO_SEARCHTIME::s<br/>
+
+<BOUCLE_t(TABLEAU){var=mnogo_resultats}>
+#MNOGO_ITEM_NUMERO{#CLE} - <a href='#MNOGO_ITEM_URL{#CLE}'>#MNOGO_ITEM_TITRE{#CLE}</a><br/>
+#MNOGO_ITEM_POINTS{#CLE}<br/>
+#MNOGO_ITEM_POPULARITE{#CLE}<br/>
+#MNOGO_ITEM_DESCRIPTIF{#CLE}<br/>
+#MNOGO_ITEM_TAILLE{#CLE}<br/>
+#MNOGO_ITEM_TYPE{#CLE}<br/>
+#MNOGO_ITEM_DATE{#CLE}<br/>
+<a href='#CONFIG{mnogo_url_search}#MNOGO_ITEM_CACHE_URL{#CLE}'>Copie en cache</a>
+<hr/>
+</BOUCLE_t>
