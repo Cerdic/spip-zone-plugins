@@ -302,7 +302,7 @@ function exec_forms_telecharger(){
 	//
 	// S'il y a des fichiers joints, creer un ZIP
 	//
-	include_ecrire("pclzip.lib");
+	include_spip("inc/pclzip.php");
 	include_spip("inc/session");
 
 	$zip = "data/form".$id_form."_".rand().".zip";
