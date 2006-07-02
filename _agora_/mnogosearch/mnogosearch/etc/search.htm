@@ -459,7 +459,7 @@ Suggest yes
 	</ul>
 <!ELSE>
 	<balise_MNOGO_RECHERCHE>$&(q)</balise_MNOGO_RECHERCHE>
-	<balise_MNOGO_RESUME_RESULTATS/>$(WE)</balise_MNOGO_RESUME_RESULTATS>
+	<balise_MNOGO_RESUME_RESULTATS>$(WE)</balise_MNOGO_RESUME_RESULTATS>
 	<balise_MNOGO_PREMIER>$(first)</balise_MNOGO_PREMIER>
 	<balise_MNOGO_DERNIER>$(last)</balise_MNOGO_DERNIER>
 	<balise_MNOGO_TOTAL>$(total)</balise_MNOGO_TOTAL>
@@ -469,15 +469,30 @@ Suggest yes
 <!ENDIF>
 <!--/notfound-->
 <!--noquery-->
-<div style='text-align:center'>
-Merci de saisir un ou plusieurs mots et de cliquer sur recherche
-</div>
+<!IFNOT name="fmt" CONTENT="xml">
+	<div style='text-align:center'>
+	Merci de saisir un ou plusieurs mots et de cliquer sur recherche
+	</div>
+<!ELSE>
+	<balise_MNOGO_RECHERCHE>$&(q)</balise_MNOGO_RECHERCHE>
+	<balise_MNOGO_RESUME_RESULTATS>$(WE)</balise_MNOGO_RESUME_RESULTATS>
+	<balise_MNOGO_PREMIER>$(first)</balise_MNOGO_PREMIER>
+	<balise_MNOGO_DERNIER>$(last)</balise_MNOGO_DERNIER>
+	<balise_MNOGO_TOTAL>$(total)</balise_MNOGO_TOTAL>
+	<balise_MNOGO_SEARCHTIME>$(SearchTime)</balise_MNOGO_SEARCHTIME>
+	<balise_MNOGO_RECHERCHE_ALTERNATIVE>$(WS)</balise_MNOGO_RECHERCHE_ALTERNATIVE>
+</recherche>
+<!ENDIF>
 <!--/noquery-->
 <!--error-->
-<div style='text-align:center'>
-<span style="color:#FF0000">Une erreur est survenue !</span>
-<p><strong>$(E)</strong></p>
-</div>
+<!IFNOT name="fmt" CONTENT="xml">
+	<div style='text-align:center'>
+	<span style="color:#FF0000">Une erreur est survenue !</span>
+	<p><strong>$(E)</strong></p>
+	</div>
+<!ELSE>
+	</recherche>
+<!ENDIF>
 <!--/error-->
 <!--bottom-->
 <!IFNOT name="fmt" CONTENT="xml">
