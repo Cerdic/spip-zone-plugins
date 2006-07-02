@@ -7,7 +7,7 @@
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt. ou l'aide en ligne.   *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -126,14 +126,14 @@ function affiche_logos($logos, $lien, $align) {
 		. ($align ? " align=\"$align\"" : '') 
 		. $taille
 		. $artoff
-		. ' style="border-width: 0px;" class="spip_logos" />';
+		. ' class="spip_logos" />';
 
 	return (!$lien ? $milieu :
 		('<a href="' .
 		 quote_amp($lien) .
 		'">' .
 		$milieu .
-		'</a>'	 ));
+		'</a>'));
 }
 
 //
@@ -311,7 +311,7 @@ function calcul_exposer ($id, $type, $reference) {
 	}
 
 	// And the winner is...
-	return isset($exposer[$type]) ? $exposer[$type][$id] : '';
+	return isset($exposer[$type]) ? isset($exposer[$type][$id]) : '';
 }
 
 function lister_objets_avec_logos ($type) {
@@ -484,9 +484,7 @@ function calculer_notes() {
 
 // Renvoie le titre du "lien hypertexte"
 function construire_titre_lien($nom,$url) {
-	$result = extraire_lien(array(1=>$nom, 3=>$url));
-	preg_match("/>([^>]*)<\/a>/", $result[0], $matches);
-	return $matches[1];
+	return typo(supprimer_numero(calculer_url($url, $nom, 'titre')));
 }
 
 // Ajouter "&lang=..." si la langue de base n'est pas celle du site
@@ -543,6 +541,7 @@ function spip_optim_select ($select = array(), $from = array(),
 		list($t,$c) = $join[$k];
 		$cle = "L$k";
 		if (!$menage
+		OR spip_optim_joint($cle, $select)
 		OR spip_optim_joint($cle, $join)
 		OR spip_optim_joint($cle, $where))
 			$where[]= "$t.$c=$cle.$c";
