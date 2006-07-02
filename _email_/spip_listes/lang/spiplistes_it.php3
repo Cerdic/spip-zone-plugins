@@ -102,7 +102,7 @@ di intervenire nei forum riservati ai visitatori registrati e di ricevere le new
 Dopo essersi registrati &egrave; possibile consultare gli articoli in corso di redazione, proporre articoli 
 e partecipare a tutti i forum.  L\'iscrizione permette di accedere anche alle zone riservate del sito 
 e ricevere le newsletter.',
-'import_export' => 'Import / Export ***FIXME***',
+'import_export' => 'Importa / Esporta',
 
 //J
 'jours' => 'giorni',
@@ -255,7 +255,8 @@ e ricevere le newsletter.',
 'pas_acces' => 'Non avete i diritti di accesso per questa pagina.',
 'plus_abonne' => ' non &egrave; abbonato alla lista ',
 'prochain_envoi_aujd' => 'Prossimmo invio previsto oggi',
-'prochain_envoi_prevu' => 'Prossimo invio previsto tra ',
+'prochain_envoi_prevu' => 'Prossimo invio previsto ',
+'prochain_envoi_prevu_dans' => 'Prossimo invio previsto tra',
 'prog_env' => 'Programmare un invio automatico',
 'prog_env_non' => 'non programmare l\'invio',
 'program' => 'Programmazione dei messaggi automatici',
@@ -316,7 +317,7 @@ e ricevere le newsletter.',
 'envoi_fini' => 'Invii terminati',
 'erreur_destinataire' => 'Errore destinatario: invio non effettuato',
 'erreur_sans_destinataire' => 'Errore: nessun destinatario trovato per questo messaggio',
-'erreur_mail' => 'Erreur : envoi du mail impossible (vérifier si mail() de php est disponible) ***FIXME***',
+'erreur_mail' => 'Errore : invio della posta impossibile (verificare che la funzione mail() del php sia disponibile)',
 
 'forcer_lot' => 'Inizia l\'invio del flusso seguente',
 
