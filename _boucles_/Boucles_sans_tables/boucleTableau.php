@@ -52,8 +52,9 @@ function boucle_TABLEAU($id_boucle, &$boucles) {
 	}
 
 	if($boucle->mode_partie) {
-		$start= $start."+$boucle->partie-1";
-		$incr=$boucle->total_parties;
+		$start= $start."+$boucle->partie";
+		$incr=1;
+		$end=$boucle->total_parties."+$boucle->partie";
 	} else {
 		$incr=1;
 	}
@@ -89,6 +90,7 @@ function boucle_TABLEAU($id_boucle, &$boucles) {
 	if(empty(\$__t)) { return ''; }
 	\$code=array();
 	\$Pile[\$SP]['var']=&\$__t;
+	\$Numrows['$id_boucle']['grand_total']=count(\$__t);
 	for(\$i= $start; \$i<$end; \$i+=$incr) {
 		\$Numrows['$id_boucle']['compteur_boucle']= \$Pile[\$SP]['cle']= \$i;
 		\$Pile[\$SP]['valeur']=\$__t[\$i];
@@ -105,6 +107,7 @@ CODE;
 	\$code=array();
 	\$Pile[\$SP]['var']=&\$__t;
 	\$i= 1;
+	\$Numrows['$id_boucle']['grand_total']=count(\$__t);
 	foreach(\$__t as \$k => \$v) {
 		\$Numrows['$id_boucle']['compteur_boucle']=\$i++;
 		\$Pile[\$SP]['cle']=\$k;
