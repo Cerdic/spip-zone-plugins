@@ -84,10 +84,10 @@ function afficher_gestion_lien($champ) {
 $tableau_formulaire = '
  <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
 <tr><td> 
-'._T('bartypenr:barre_adresse').': <input type="text" name="lien_nom" value="http://" size="21" maxlength="255" /><br />
-'._T('bartypenr:barre_bulle').': <input type="text" name="lien_bulle" value="" size="21" maxlength="255" />
+'._T('bartypenr:barre_adresse').'&nbsp;: <input type="text" name="lien_nom" value="http://" size="21" maxlength="255" /><br />
+'._T('bartypenr:barre_bulle').'&nbsp;: <input type="text" name="lien_bulle" value="" size="21" maxlength="255" />
 </td><td>
-'._T('bartypenr:barre_langue').': <input type="text" name="lien_langue" value="" size="10" maxlength="10" />
+'._T('bartypenr:barre_langue').'&nbsp;: <input type="text" name="lien_langue" value="" size="10" maxlength="10" />
 </td><td>
   <input type="button" value="OK" class="fondo" onclick="javascript:barre_demande_lien(\'[\', \'->\', \']\', lien_nom.value, lien_bulle.value, lien_langue.value,'.$champ.');" /> 
 </td></tr></table>
