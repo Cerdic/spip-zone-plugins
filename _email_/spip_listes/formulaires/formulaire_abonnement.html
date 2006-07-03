@@ -48,7 +48,7 @@
 				</li>]
 				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 				<div style='text-align:left; padding:0px 0px 4px 0px;clear:both'>
-					<div style='float:left'><input type="checkbox" name="list&#91;&#93;"   value="#ID_ARTICLE" />&nbsp;</div>
+					<div style='float:left'><input type="checkbox" name="list&#91;&#93;"  checked="checked"   value="#ID_ARTICLE" />&nbsp;</div>
 				<a href='[(#SELF|parametre_url{liste,#ID_ARTICLE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a><br />
 				</div>]
 		</BOUCLE_listes>
