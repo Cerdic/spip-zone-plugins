@@ -45,6 +45,7 @@
 	<prefix> 
 	  TriMots
 	</prefix>
+	<fonctions>balise_rang.php</fonctions>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>affiche_droite</nom>
