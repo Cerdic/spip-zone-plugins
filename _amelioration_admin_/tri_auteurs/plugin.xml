@@ -33,6 +33,7 @@
 	<prefix> 
 	  TriAuteurs
 	</prefix>
+	<fonctions>fonctions.php</fonctions>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>affiche_droite</nom>
