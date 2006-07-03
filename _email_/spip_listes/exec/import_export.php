@@ -42,8 +42,8 @@ $urlsite=lire_meta("adresse_site");
  
  // generation du fichier export ?
 if (isset($_POST['export_txt']) && isset($_POST['export_id']) && $connect_statut == "0minirezo" ) {
-    $export_id = (int) $_POST['export_id'];   
-    if ($export_id>0) {
+    $export_id =  $_POST['export_id'];   
+    if (intval($export_id)>0) {
         $query="SELECT id_auteur FROM spip_auteurs_articles WHERE id_article='$export_id'";        
 				$abonnes = spip_query($query);
 				$str_export  = "# spip-listes\r\n"; 
@@ -58,15 +58,80 @@ if (isset($_POST['export_txt']) && isset($_POST['export_id']) && $connect_statut
 					     $subresult = spip_query($subquery);
 					     while ($subrow = spip_fetch_array($subresult)) {
 					       $str_export .= $subrow['email']."\r\n";					       
-               }					     
-           }          
-        }
+              			 }					     
+           			}             
+        		}
         header("Content-type: text/plain");
         header("Content-Disposition: attachment; filename=\"export_liste$export_id-".date("Y-m-d").".txt\"");
         echo $str_export;   
         exit;               
          
     }
+    
+    else{
+           
+           if($export_id == "abo_sans_liste"){
+	
+	$abonnes = spip_query("select a.id_auteur, count(d.id_article) from spip_auteurs a 
+               left join spip_auteurs_articles d on a.id_auteur = 
+                d.id_auteur group by a.id_auteur having count(d.id_article) = 0;");
+	  			
+		$str_export  = "# spip-listes\r\n"; 
+        $str_export .= "# "._T('spiplistes:membres_liste')."\r\n";
+				$str_export .= "# liste id: $export_id\r\n";
+				$str_export .= "# date: ".date("Y-m-d")."\r\n\r\n";				
+				while($row = spip_fetch_array($abonnes)) {
+					 $abonne = $row['id_auteur'];					 
+					 $extras = get_extra($abonne,"auteur");					 
+					 if ($extras["abo"]=="html" || $extras["abo"]=="texte") {					    
+					     $subquery = "SELECT email FROM spip_auteurs WHERE statut!='5poubelle' AND statut!='nouveau' AND id_auteur='$abonne' LIMIT 1";
+					     $subresult = spip_query($subquery);
+					     while ($subrow = spip_fetch_array($subresult)) {
+					       $str_export .= $subrow['email']."\r\n";					       
+           	    		}					     
+           			}             
+        		}
+        header("Content-type: text/plain");
+        header("Content-Disposition: attachment; filename=\"export_liste$export_id-".date("Y-m-d").".txt\"");
+        echo $str_export;   
+        exit; 
+     
+        }
+           if($export_id == "desabo"){
+           
+           
+$query = "SELECT id_auteur, nom, extra FROM spip_auteurs";
+$result = spip_query($query);
+$nb_inscrits = spip_num_rows($result);
+	  			
+		$str_export  = "# spip-listes\r\n"; 
+        $str_export .= "# "._T('spiplistes:membres_liste')."\r\n";
+				$str_export .= "# liste id: $export_id\r\n";
+				$str_export .= "# date: ".date("Y-m-d")."\r\n\r\n";				
+				while($row = spip_fetch_array($result)) {
+					 $abonne = $row['id_auteur'];					 
+					 $extras = get_extra($abonne,"auteur");					 
+					 if ($extras["abo"]=="non" || !$extras["abo"]) {					    
+					     $subquery = "SELECT email FROM spip_auteurs WHERE statut!='5poubelle' AND statut!='nouveau' AND id_auteur='$abonne' LIMIT 1";
+					     $subresult = spip_query($subquery);
+					     while ($subrow = spip_fetch_array($subresult)) {
+					       $str_export .= $subrow['email']."\r\n";					       
+           	    		}					     
+           			}             
+        		}
+        header("Content-type: text/plain");
+        header("Content-Disposition: attachment; filename=\"export_liste$export_id-".date("Y-m-d").".txt\"");
+        echo $str_export;   
+        exit; 
+
+           
+           
+           
+           }
+           
+}
+
+    
 }  	
 // generation du fichier export fin
  
@@ -103,9 +168,7 @@ creer_colonne_droite();
 
 debut_droite("messagerie");
 
- // MODE INOUT: import / export abonnés------------------------------------------
-
-   // import //  
+// import //  
    function test_login2($mail) {
       	if (strpos($mail, "@") > 0) $login_base = substr($mail, 0, strpos($mail, "@"));
       	else $login_base = $mail;
@@ -177,17 +240,20 @@ debut_droite("messagerie");
                                $query = "SELECT * FROM spip_auteurs WHERE email='$mail_inscription'";
                 						   $resulta = spip_query($query);
                                                 
-                							 if ($row = spip_fetch_array($resulta)) {
-                                                $nom = $row['nom'] ;
-                                                $mail = $row['email'] ;                                
-                								                echo _T('spiplistes:adresse_deja_inclus').": ";
-                								                echo "<span style='color:#999;margin-bottom:5px'>".$mail_inscription."</span><br />\n" ; 
-                               } else {                                                
-                								                $sub_report .= "<span style='color:#090;margin-bottom:5px'>$mail_inscription</span> ($format)<br />\n";
-                                              	$query = "INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, extra, cookie_oubli) ".
+                			 if ($row = spip_fetch_array($resulta)) {
+                                     $nom = $row['nom'] ;
+                                     $mail = $row['email'] ; 
+                                     $id   = $row['id_auteur'] ;                           
+                					 echo _T('spiplistes:adresse_deja_inclus').": ";
+                					echo "<span style='color:#999;margin-bottom:5px'>".$mail_inscription."</span><br />\n" ; 
+                              spip_query("UPDATE spip_auteurs SET extra='$extras' WHERE id_auteur='$id'");
+                               }
+                                else {                                                
+                				 $sub_report .= "<span style='color:#090;margin-bottom:5px'>$mail_inscription</span> ($format)<br />\n";
+                               	$query = "INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, extra, cookie_oubli) ".
                                         		"VALUES ('$nom_inscription', '$mail_inscription', '$login', '$mdpass', '$statut', '$htpass', '$extras', '$cookie')";
-                                        		spip_query($query);                        		
-                							}
+                          		spip_query($query);                        		
+                				}
                                                            
                               // Inscription aux listes
                               // abonnement aux listes http://www.phpfrance.com/tutorials/index.php?page=2&id=13
@@ -207,14 +273,23 @@ debut_droite("messagerie");
     											reset($list_abo);
     											while( list(,$val) = each($list_abo) ){
     												 //echo "<h2>$nom :liste $val </h2>" ;
-    												 $sub_report .= "<span style='color:#090;margin-bottom:5px'>".$mel."</span><br />\n" ;
     												 $query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$id_auteur' AND id_article='$val'";
     												 $result=spip_query($query);
+    												 
+    												 
+    												 if($GLOBALS['suppl_abo'] !='non'){
+    												 $sub_report .= "<span style='color:#090;margin-bottom:5px'>".$mel."</span><br />\n" ;
     												 $query="INSERT INTO spip_auteurs_articles (id_auteur,id_article) VALUES ('$id_auteur','$val')";
+    												 }
     												 $result=spip_query($query);
     												 $new_abonne++;
     											}
     								  
+    										 }else{
+    										 if($GLOBALS['suppl_abo'] =='non'){
+	    										$query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$id_auteur'";
+    											$result=spip_query($query); 
+    										}
     										 }
     									}
                             
@@ -240,7 +315,7 @@ debut_droite("messagerie");
     	   else echo "<br /><br /><center><strong>"._T('spiplistes:erreur')."</strong></center>";
     
     
-        echo  "<a href='?exec=spiplistes&mode=inout'>["._T('spiplistes:retour_link')."]</a>";
+        echo  "<a href='spip_listes.php3?mode=inout'>["._T('spiplistes:retour_link')."]</a>";
     
         }
         break ;
@@ -322,7 +397,7 @@ debut_droite("messagerie");
   $nb_listes = spip_num_rows($list);
   if ($nb_listes > 0) {	
 	   debut_cadre_relief("redacteurs-24.gif", false, "", _T('spiplistes:exporter'));
-	   echo "<form action='$PHP_SELF?mode=statut' method='post'>\n";	   
+	   echo "<form action='$PHP_SELF?exec=import_export' method='post'>\n";	   
 	   while($row = spip_fetch_array($list)) {
 					$id_article = $row['id_article'] ;
 			     $titre = $row['titre'];
@@ -330,6 +405,8 @@ debut_droite("messagerie");
 			                  else $checked = "";
 			    echo "<input type=\"radio\" name=\"export_id\"   value=\"".$id_article."\"$checked>$titre <br />\n"; 
       }      
+	   echo "<input type=\"radio\" name=\"export_id\"  value=\"abo_sans_liste\"$checked>Abonnés à aucune liste <br />\n"; 
+	   echo "<input type=\"radio\" name=\"export_id\"  value=\"desabo\"$checked>Désabonnés <br />\n"; 
 	   echo "<input type='submit' name='export_txt' class='fondo' value='"._T('bouton_valider')."' />\n";
 	   echo "</form>\n";
 	   fin_cadre_relief();	
