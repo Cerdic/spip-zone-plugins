@@ -11,7 +11,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 dans lequel ils souhaitent recevoir les courriers (HTML/texte). </p><p>Tout message sera traduit automatiquement en format texte pour les abonn&eacute;s qui en ont fait la demande.</p><p><b>Note :</b><br />L\'envoi des mails peut prendre quelques minutes : les lots partent peu &agrave; peu quand les utilisateurs parcourent le site public. Vous pouvez aussi provoquer manuellement l\'envoi des lots en cliquant sur le lien "suivi des envois" pendant un envoi.</p>',
 
 // A
-'abo_1_lettre' => 'Abonnement &agrave; la lettre d\'information de ',
+'abo_1_lettre' => 'Lettre d\'information',
 'abonnement' => 'Abonnement',
 'abonnement'=>'Vous souhaitez modifier votre abonnement &agrave; la lettre d\'information',
 'abonnement_bouton'=>'Modifier votre abonnement',
@@ -24,7 +24,7 @@ Pour modifier votre abonnement &agrave la lettre d\'information de ce site :
 
 Veuillez vous rendre &agrave; l\'adresse suivante :
 
-    @adresse_site@/spip.php?page=abonnement?d=@cookie@
+    @adresse_site@/spip.php?page=abonnement&d=@cookie@
 
 Vous pourrez alors confirmer la modification de votre abonnement.',
 'abonnement_modifie'=>'Vos modifications sont prises en compte',
@@ -290,7 +290,7 @@ et de recevoir les lettres d\'informations.',
 
 // ====================== inscription-listes.php3 / abonnement.php3 ======================
 
-'abo_listes' => 'Abonnement aux listes de diffusion du site',
+'abo_listes' => 'Abonnement',
 'acces_refuse' => 'Vous n\'avez plus acc&egrave;s &agrave; ce site',
 
 'confirmation_format' => ' en format ',
