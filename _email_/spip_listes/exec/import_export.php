@@ -23,7 +23,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-
+include_spip('inc/acces');
 
 function exec_import_export()
 {
@@ -31,8 +31,8 @@ function exec_import_export()
 global $connect_statut;
 global $connect_toutes_rubriques;
 global $connect_id_auteur;
-global $type;
-global $new;
+global $type,$list_abo;
+global $new, $etape;
  
  
 $nomsite=lire_meta("nom_site"); 
@@ -137,7 +137,7 @@ $nb_inscrits = spip_num_rows($result);
  
  
 // Admin SPIP-Listes
-debut_page("Spip listes", "redacteurs", "spiplistes");
+debut_page("SPIP-listes", "redacteurs", "spiplistes");
 
 // spip-listes bien installé ?
 if (!function_exists(spip_listes_onglets)){
@@ -246,7 +246,8 @@ debut_droite("messagerie");
                                      $id   = $row['id_auteur'] ;                           
                 					 echo _T('spiplistes:adresse_deja_inclus').": ";
                 					echo "<span style='color:#999;margin-bottom:5px'>".$mail_inscription."</span><br />\n" ; 
-                              spip_query("UPDATE spip_auteurs SET extra='$extras' WHERE id_auteur='$id'");
+                              $ok = spip_query("UPDATE spip_auteurs SET extra='$extras' WHERE id_auteur='$id'");
+                              if ($ok){echo "format mis a jour<br />";}
                                }
                                 else {                                                
                 				 $sub_report .= "<span style='color:#090;margin-bottom:5px'>$mail_inscription</span> ($format)<br />\n";
@@ -274,8 +275,8 @@ debut_droite("messagerie");
     											while( list(,$val) = each($list_abo) ){
     												 //echo "<h2>$nom :liste $val </h2>" ;
     												 $query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$id_auteur' AND id_article='$val'";
-    												 $result=spip_query($query);
-    												 
+    												 $result = spip_query($query);
+    												
     												 
     												 if($GLOBALS['suppl_abo'] !='non'){
     												 $sub_report .= "<span style='color:#090;margin-bottom:5px'>".$mel."</span><br />\n" ;
@@ -289,6 +290,7 @@ debut_droite("messagerie");
     										 if($GLOBALS['suppl_abo'] =='non'){
 	    										$query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$id_auteur'";
     											$result=spip_query($query); 
+    										$sub_report .= "<span style='color:#090;margin-bottom:5px'>".$mel."</span> (desabo)<br />\n" ;
     										}
     										 }
     									}
@@ -315,7 +317,7 @@ debut_droite("messagerie");
     	   else echo "<br /><br /><center><strong>"._T('spiplistes:erreur')."</strong></center>";
     
     
-        echo  "<a href='spip_listes.php3?mode=inout'>["._T('spiplistes:retour_link')."]</a>";
+        echo  "<a href='?exec=import_export'>["._T('spiplistes:retour_link')."]</a>";
     
         }
         break ;
@@ -339,14 +341,14 @@ debut_droite("messagerie");
       echo "<legend>"._T('spiplistes:abonnement_newsletter')."</legend>";
       echo _T('spiplistes:importer_preciser');
       echo "<div style='text-align:left'>" ;
-      echo "<form action='$PHP_SELF?etape=2' method='post' enctype='multipart/form-data'  name='importform'> ";
+      echo "<form action='$PHP_SELF?exec=import_export&etape=2' method='post' enctype='multipart/form-data'  name='importform'> ";
       while($row = spip_fetch_array($list)) {					
     			$id_article = $row['id_article'] ;
     			$titre = $row['titre'] ;
     			if ($nb_listes = 1) $ischecked = "";
     			               else $ischecked = "checked='checked'";
     			echo "<input type=\"checkbox\" name=\"list_abo[]\" $ischecked value=\"".$id_article."\">\n";
-          echo "<a href='?liste=$id_article' title='informations sur cette liste'>$titre</a><br />" ;
+          echo "<a href='?exec=import_export&liste=$id_article' title='informations sur cette liste'>$titre</a><br />" ;
     		 
       }
       echo "<br />";
@@ -405,8 +407,8 @@ debut_droite("messagerie");
 			                  else $checked = "";
 			    echo "<input type=\"radio\" name=\"export_id\"   value=\"".$id_article."\"$checked>$titre <br />\n"; 
       }      
-	   echo "<input type=\"radio\" name=\"export_id\"  value=\"abo_sans_liste\"$checked>Abonnés à aucune liste <br />\n"; 
-	   echo "<input type=\"radio\" name=\"export_id\"  value=\"desabo\"$checked>Désabonnés <br />\n"; 
+	   echo "<input type=\"radio\" name=\"export_id\"  value=\"abo_sans_liste\"$checked><strong>Abonnés à aucune liste</strong> <br />\n"; 
+	   echo "<input type=\"radio\" name=\"export_id\"  value=\"desabo\"$checked><strong>Désabonnés</strong> <br />\n"; 
 	   echo "<input type='submit' name='export_txt' class='fondo' value='"._T('bouton_valider')."' />\n";
 	   echo "</form>\n";
 	   fin_cadre_relief();	
