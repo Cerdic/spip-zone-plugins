@@ -6,7 +6,10 @@ function critere_pim_agenda_actif_dist($idb, &$boucles, $crit){
   $type = $boucle->type_requete;
   $nom = $table_des_tables[$type];
   if ($boucle->id_table=='auteurs'){
-		$auteurs_agenda_actif = unserialize($GLOBALS['meta']['pim_agenda_auteurs_actifs']);
+  	if (isset($GLOBALS['meta']['pim_agenda_auteurs_actifs']))
+			$auteurs_agenda_actif = unserialize($GLOBALS['meta']['pim_agenda_auteurs_actifs']);
+		else
+			$auteurs_agenda_actif = array();
 		$c = calcul_mysql_in($type .'.id_auteur', implode(',',$auteurs_agenda_actif),$not);
 		$boucle->where[]= "'$c'";
   }
