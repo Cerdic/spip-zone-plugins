@@ -4,8 +4,8 @@
         <version>1.9</version>
         <etat>dev</etat>
         <description>Listes d'informations par email</description>
-        <options>mes_options.php</options>
-        <fonctions>mes_fonctions.php</fonctions>
+        <options>spiplistes_mes_options.php</options>
+        <fonctions>spiplistes_mes_fonctions.php</fonctions>
         <prefix>spiplistes</prefix>
 		<lien>[Documentation->http://bloog.net/spip-listes]</lien>
         <pipeline>
