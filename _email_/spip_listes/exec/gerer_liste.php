@@ -42,7 +42,7 @@ global $texte;
 
 
 global $statut_nouv;
-global $flag_auteur,$creer_auteur,$ajout_auteur,$supp_auteur;
+global $flag_auteur,$creer_auteur,$ajout_auteur,$supp_auteur,$cherche_auteur,$nouv_auteur,$valider_ajouter_auteur;
 global $ok_nouveau_statut;
 
 global $Valider_auto,$Modifier;
@@ -896,17 +896,6 @@ fin_cadre_relief();
 // Liste des auteurs de l'article
 //
 
-$query_ = "SELECT * FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien ". 
-	        "WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=$id_article ". 
-	        "GROUP BY auteurs.id_auteur ORDER BY auteurs.nom"; 
-	$result_ = spip_query($query_); 
-	$total_abos = spip_num_rows($result_); 
-	 
-	echo "<a name='auteurs'></a>"; 
-
-debut_cadre_enfonce("auteur-24.gif", false, "",  _T('spiplistes:abon')."($total_abos)".aide ("artauteurs")); 
-
-
 ////////////////////////////////////////////////////
 // Gestion des auteurs
 //
@@ -922,6 +911,25 @@ if ($creer_auteur AND $connect_statut=='0minirezo'){
 	$ajout_auteur = true;
 }
 
+//
+// Appliquer les modifications sur les auteurs
+//
+
+
+if ($supp_auteur && $flag_editable) {
+	$query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$supp_auteur' AND id_article='$id_article'";
+	$result=spip_query($query);
+	if (lire_meta('activer_moteur') == 'oui') {
+		include_ecrire ("inc_index.php3");
+		indexer_article($id_article);
+	}
+}
+
+
+
+
+echo "<a name='auteurs'></a>";
+debut_cadre_enfonce("auteur-24.gif", false, "",  _T('spiplistes:abon').aide ("artauteurs"));
 
 //
 // Recherche d'auteur
@@ -971,15 +979,15 @@ if ($cherche_auteur) {
 			$result = spip_query($query);
 			echo "<ul>";
 			while ($row = spip_fetch_array($result)) {
-				$id_auteur = $row['id_auteur'];
+				$new_auteur = $row['id_auteur'];
 				$nom_auteur = $row['nom'];
 				$email_auteur = $row['email'];
 				$bio_auteur = $row['bio'];
-
+				$ajouter_auteur=true;
 				echo "<li><font face='Verdana,Arial,Sans,sans-serif' size=2><b><font size=3>".typo($nom_auteur)."</font></b>";
 
 				if ($email_auteur) echo " ($email_auteur)";
-				echo " | <a href=\"?exec=liste_edit&id_article=$id_article&ajout_auteur=oui&nouv_auteur=$id_auteur#auteurs\">"._T('lien_ajouter_auteur')."</a>";
+				echo " | <a href=\"spip_listes.php3?mode=liste_edit&id_article=$id_article&ajout_auteur=oui&nouv_auteur=$id_auteur#auteurs\">"._T('lien_ajouter_auteur')."</a>";
 
 				if (trim($bio_auteur)) {
 					echo "<br /><font size=1>".couper(propre($bio_auteur), 100)."</font>\n";
@@ -999,12 +1007,6 @@ if ($cherche_auteur) {
 	echo "<p>";
 
 }
-
-
-
-//
-// Appliquer les modifications sur les auteurs
-//
 
 if ($ajout_auteur && $flag_editable) {
 	if ($nouv_auteur > 0) {
@@ -1027,65 +1029,116 @@ if ($ajout_auteur && $flag_editable) {
 	}
 }
 
-if ($supp_auteur && $flag_editable) {
-	$query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$supp_auteur' AND id_article='$id_article'";
-	$result=spip_query($query);
-	if (lire_meta('activer_moteur') == 'oui') {
-		include_ecrire ("inc_index.php3");
-		indexer_article($id_article);
-	}
-}
-
-
 //
 // Afficher les auteurs
 //
 
-unset($les_auteurs);
+//
+// Liste des auteurs de l'article
+//
 
-	if(!isset($_GET['lim'])){ 
- 	$lim=0; 
- 	}else{ 
- 	$lim=$_GET['lim']; 
- 	} 
-
-$query = "SELECT * FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien ".
+$query_ = "SELECT * FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien ".
 	"WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=$id_article ".
-	"GROUP BY auteurs.id_auteur ORDER BY auteurs.nom LIMIT $lim,100";
-$result = spip_query($query);
+	"GROUP BY auteurs.id_auteur ORDER BY auteurs.nom";
+$result_ = spip_query($query_);
+$nombre_auteurs = spip_num_rows($result_);
 
-if (spip_num_rows($result)) {
+if ($nombre_auteurs) {
 	
-	
-	echo "<div class='liste'>";
-	
-	echo "<div style='margin:5px;text-align:justify'>"; 
-         $pas=0; 
- 	        for ($i=0; $i <= round(($total_abos/100)); $i++ ) 
- 	        { 
-                if($lim!=$pas) 
- 	                { 
- 		                echo "<div style='float:left'><a href='".$PHP_SELF."?mode=liste_edit&id_article=$id_article&lim=".($pas); 
- 	                echo "'>[".$pas."-".($pas+100)."]</a></div>"; 
- 	                $pas=$pas+100; 
- 	                }else{ 
- 		                if($total_abos > 100) 
- 		                echo "<div style='float:left'><strong>[".$pas."-".($pas+100)."]</strong></div>"; 
- 		                $pas=$pas+100; 
- 		                $lim=O; 
- 		                } 
- 		         
- 		         
- 		        } 
- 		        echo "<div style='clear:both'>&nbsp;</div>"; 
- 		        echo "</div>"; 
- 		        echo "<div class='liste' style='clear:both'>";
-	
-	
+	echo "<div class='liste' style='clear:both'>";
 	
 	echo "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
+	
+	// Lire les auteurs qui nous interessent
+// et memoriser la liste des lettres initiales
+//
+
+$retour='spip_listes.php3?mode=liste_edit&id_article='.$id_article;
+
+$max_par_page = 30;
+if ($debut > $nombre_auteurs - $max_par_page)
+	$debut = max(0,$nombre_auteurs - $max_par_page);
+$debut = intval($debut);
+
+$i = 0;
+$auteurs=array();
+while ($auteur = spip_fetch_array($result_)) {
+	if ($i>=$debut AND $i<$debut+$max_par_page) {
+		if ($auteur['statut'] == '0minirezo')
+			$auteur['restreint'] = spip_num_rows(
+				spip_query("SELECT * FROM spip_auteurs_rubriques
+				WHERE id_auteur=".$auteur['id_auteur']));
+			$auteurs[] = $auteur;
+	}
+	$i++;
+
+	
+		$lettres_nombre_auteurs ++;
+		$premiere_lettre = strtoupper(spip_substr(extraire_multi($auteur['nom']),0,1));
+		if ($premiere_lettre != $lettre_prec) {
+#			echo " - $auteur[nom] -";
+			$lettre[$premiere_lettre] = $lettres_nombre_auteurs-1;
+		}
+		$lettre_prec = $premiere_lettre;
+	
+}
+
+
+
+// reglage du debut
+$max_par_page = 30;
+if ($debut > $nombre_auteurs - $max_par_page)
+	$debut = max(0,$nombre_auteurs - $max_par_page);
+$fin = min($nombre_auteurs, $debut + $max_par_page);
+
+
+// ignorer les $debut premiers
+unset ($i);
+reset ($auteurs);
+while ($i++ < $debut AND each($auteurs));
+
+if ($nombre_auteurs > $max_par_page) {
+	echo "<tr bgcolor='white'><td colspan='7'>";
+	echo "<div style='background-color:white'>";
+	for ($j=0; $j < $nombre_auteurs; $j+=$max_par_page) {
+		if ($j > 0) echo " | ";
+
+		if ($j == $debut)
+			echo "<b>$j</b>";
+		else if ($j > 0)
+			echo "<a href=$retour&debut=$j>$j</a>";
+		else
+			echo " <a href=$retour>0</a>";
+
+		if ($debut > $j  AND $debut < $j+$max_par_page){
+			echo " | <b>$debut</b>";
+		}
+
+	}
+	echo "</font>";
+		// affichage des lettres
+		
+		echo "<div style='font-familly:Verdana,Arial,Sans,sans-serif;font-size=2'>";
+		foreach ($lettre as $key => $val) {
+			if ($val == $debut)
+				echo "<b>$key</b> ";
+			else
+				echo "<a href=$retour&debut=$val>$key</a> ";
+		}
+		echo "</div>";
+		echo "</div>\n";
+		
+		echo "</td></tr>\n";
+	
+	echo "<tr height='5'></tr>";
+}
+
+//print_r($auteurs);
+
+ if($debut)$retour .="&debut=".$debut;
+	
 	$table = '';
-	while ($row = spip_fetch_array($result)) {
+	foreach ($auteurs as $row) {
 		$vals = '';
 		$id_auteur = $row["id_auteur"];
 		$nom_auteur = $row["nom"];
@@ -1098,9 +1151,11 @@ if (spip_num_rows($result)) {
 
 		$les_auteurs[] = $id_auteur;
 
-		if ($connect_statut == "0minirezo") $aff_articles = "('prepa', 'prop', 'publie', 'refuse')";
-		else $aff_articles = "('prop', 'publie')";
-
+		 $aff_articles = "('liste','inact')";
+		
+		
+		//print_r($les_auteurs);
+		
 		$query2 = "SELECT COUNT(articles.id_article) AS compteur ".
 			"FROM spip_auteurs_articles AS lien, spip_articles AS articles ".
 			"WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article ".
@@ -1129,16 +1184,13 @@ if (spip_num_rows($result)) {
 		else if ($nombre_articles == 1) $vals[] =  _T('info_1_article');
 		else $vals[] =  "&nbsp;";
 
-		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
-			$vals[] =  "<a href='?exec=liste_edit&id_article=$id_article&supp_auteur=$id_auteur#auteurs'>"._T('spiplistes:desabonnement')."<img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></a>";
-		} else {
-			$vals[] = "";
-		}
+		
+			$vals[] =  "<a href='?exec=gerer_liste&id_article=$id_article&supp_auteur=$id_auteur#auteurs'>"._T('spiplistes:desabonnement')."<img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></a>";
+		
 		
 		$table[] = $vals;
 	}
 	
-	//print_r($table);
 	
 	$largeurs = array('14', '', '', '', '', '', '');
 	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial11', 'arial1');
@@ -1148,6 +1200,8 @@ if (spip_num_rows($result)) {
 	echo "</table></div>\n";
 
 	$les_auteurs = join(',', $les_auteurs);
+	
+	
 }
 
 
@@ -1155,7 +1209,7 @@ if (spip_num_rows($result)) {
 // Ajouter un auteur
 //
 
-if ($flag_editable AND $options == 'avancees') {
+if ($flag_editable) {
 	//echo debut_block_invisible("auteursarticle");
 
 	$query = "SELECT * FROM spip_auteurs WHERE ";
@@ -1170,7 +1224,7 @@ if ($flag_editable AND $options == 'avancees') {
 	
 	
 	if (spip_num_rows($result) > 0) {
-		echo "<form action='?exec=liste_edit&id_article=$id_article#auteurs' METHOD='post'>";
+		echo "<form action='?exec=gerer_liste&id_article=$id_article#auteurs' METHOD='post'>";
 		echo "<span class='verdana1'><b>"._T('spiplistes:abon_ajouter')."</b></span>\n";
 		echo "<div><input type='Hidden' name='id_article' value=\"$id_article\">";
 
@@ -1284,7 +1338,7 @@ fin_cadre_relief();
 //
 // Forums
 //
-
+/*
 echo "<br /><br />";
 
 $forum_retour = urlencode("?exec=gerer_liste&id_article=$id_article");
@@ -1337,8 +1391,10 @@ if ($total > $total_afficher) {
 	echo "</div>";
 }
 
+*/
 
 echo "</div>\n";
+
 
 if ($ok_nouveau_statut || $reindexer) {
 	@flush();
