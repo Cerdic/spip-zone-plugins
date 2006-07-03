@@ -21,11 +21,12 @@ $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FI
 define('_DIR_PLUGIN_TRI_AUTEURS',(_DIR_PLUGINS.end($p)));
 
 function TriAuteurs_affiche_droite($arguments) {  
-  if($arguments['args']['exec'] == 'articles') {
+  global $connect_statut, $connect_toutes_rubriques;
+  if(_request('exec') == 'articles') {
 	include('tri_auteurs_utils.php');
 	$table_pref = 'spip';
 	if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
-	if(TriAuteurs_verifier_admin() OR TriAuteurs_verifier_admin_restreint($arguments['args']['id_rubrique']) 
+	if(($connect_statut == '0minirezo' AND $connect_toutes_rubriques)
 	   OR TriAuteurs_verifier_auteur($arguments['args']['id_article'])) {
 	  
 	  //Installation
@@ -39,13 +40,13 @@ function TriAuteurs_affiche_droite($arguments) {
 		ecrire_metas();
 	  }
 
-	  $arguments['data'] .= TriAuteurs_boite_tri_auteurs($arguments['args']['id_article'],$arguments['args']['id_rubrique']);
+	  $arguments['data'] .= TriAuteurs_boite_tri_auteurs(_request('id_article'));
 	}
   }
   return $arguments;
 }
 
-function TriAuteurs_boite_tri_auteurs($id_article,$id_rubrique) {
+function TriAuteurs_boite_tri_auteurs($id_article) {
   global $spip_lang_left,$connect_id_auteur;
   
   include_spip('base/abstract_sql');
@@ -53,11 +54,11 @@ function TriAuteurs_boite_tri_auteurs($id_article,$id_rubrique) {
   $from = array('spip_auteurs_articles as lien','spip_auteurs as auteurs');
   $select = array('lien.rang','lien.id_auteur','auteurs.nom');
   $where = array('lien.id_auteur=auteurs.id_auteur',"lien.id_article=$id_article");
-  $order = 'lien.rang';
+  $order = array('lien.rang');
 
-  $rez = spip_abstract_select($select,$from,$where,$order);
+  $rez = spip_abstract_select($select,$from,$where,'',$order);
   $to_ret = '';
- 
+
   if(spip_abstract_count($rez) > 1) {
 	$to_ret .= '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_AUTEURS.'/javascript/prototype.js"></script>';
 	$to_ret .= '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_AUTEURS.'/javascript/scriptaculous.js"></script>';

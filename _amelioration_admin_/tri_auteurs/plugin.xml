@@ -36,6 +36,7 @@
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>affiche_droite</nom>
+		<action>affiche_droite</action>
 		<inclure>TriAuteurs.php</inclure>
 	</pipeline>	
 	<pipeline>
