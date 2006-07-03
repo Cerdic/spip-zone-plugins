@@ -1,0 +1,13 @@
+Plugin: Tri Auteurs 
+Auteur: Pierre Andrews (mortimer.pa@free.fr)
+Licence: GPL
+
+Le plugin tri auteurs permet d'ordonner les auteurs d'un article.
+
+Une fois le plugin activé, une boite apparaît à gauche de la page de l'article (dans l'espace privé), il suffit de faire un glisser déposer dans cette boite pour trier les auteurs. Les modifications sont enregistré automatiquement.
+
+
+Pour l'utiliser dans les squelettes, il suffit de faire une boucle du genre:
+
+<BOUCLE_tri_auteur(AUTEURS) {id_article} {par rang}>
+
