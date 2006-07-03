@@ -186,6 +186,7 @@ $oubli_pass = _request('oubli_pass');
 				
 }
 
+/*
 // fonction qu'on peut redefinir pour filtrer les adresses mail et les noms,
 // et donner des infos supplémentaires
 // Std: controler que le nom (qui sert a calculer le login) est assez long
@@ -284,34 +285,6 @@ function envoyer_inscription_dist($ids, $nom, $mode, $id_rubrique) {
 
 
 
-function test_login($nom, $mail) {
-	include_spip('inc/charsets');
-	$nom = strtolower(translitteration($nom));
-	$login_base = ereg_replace("[^a-zA-Z0-9_]", "_", $nom);
-
-	// il faut eviter que le login soit vraiment trop court
-	if (strlen($login_base) < 3) {
-		$mail = strtolower(translitteration(preg_replace('/@.*/', '', $mail)));
-		$login_base = ereg_replace("[^a-zA-Z0-9]", "_", $nom);
-	}
-	if (strlen($login_base) < 3)
-		$login_base = 'user';
-
-	// eviter aussi qu'il soit trop long (essayer d'attraper le prenom)
-	if (strlen($login_base) > 10) {
-		$login_base = preg_replace("/^(.{4,}(_.{1,7})?)_.*/",
-			'\1', $login_base);
-		$login_base = substr($login_base, 0,13);
-	}
-
-	$login = $login_base;
-
-	for ($i = 1; ; $i++) {
-		$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='$login' LIMIT 1"));
-		if (!$n) return $login;
-		$login = $login_base.$i;
-	}
-}
 
 function creer_pass_pour_auteur($id_auteur) {
 	include_spip('inc/acces');
@@ -324,7 +297,7 @@ function creer_pass_pour_auteur($id_auteur) {
 	return $pass;
 }
 
-
+*/
 
 function test_login2($mail) {
 	if (strpos($mail, "@") > 0) $login_base = substr($mail, 0, strpos($mail, "@"));
