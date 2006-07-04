@@ -1,0 +1,33 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Switcher
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Philippe Drouot, adaptation en plugin de la contrib switcher de Fil
+_ &copy; 2006 - Distribue sous licence GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Ajoute une liste d&eacute;roulante permettant de basculer entre les squelettes par d&eacute;faut du site, les squelettes fraichdist (spip) et l'ensemble des squelettes contenus dans le r&eacute;pertoire nomm&eacute; <code>squelettes-test</code>	(un sous-r&eacute;pertoire par jeu de squelettes).
+
+	Si vous souhaitez modifier le nom du r&eacute;pertoire contenant les squelettes, &eacute;ditez le fichier <code>config.inc.php</code>. Il est &eacute;galement possible dans ce meme fichier de sp&eacute;cifier que seuls les administrateurs ont la possibilit&eacute; de jouer avec les jeux de squelettes en mettant a TRUE la variable <code>$afficherSeulementPourLesAdmins</code>.
+
+	Pour se faire une id&eacute;e, voir [d&eacute;mo->http://spiptest.africa-web.org/].
+	</description>
+	<prefix> 
+	switcher
+	</prefix>	
+	<options>
+	switcher.php
+	</options>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<action>affichage_final</action>
+		<inclure>switcher_fonctions.php</inclure>
+	</pipeline>
+</plugin>
