@@ -557,7 +557,7 @@
 		}
 	}
 
-	function Forms_enregistrer_reponse_formulaire($id_form, &$erreur, &$reponse) {
+	function Forms_enregistrer_reponse_formulaire($id_form, &$erreur, &$reponse, $script_validation = 'valide_sondage', $script_args='') {
 		$erreur = '';
 		$reponse = '';
 		$r = '';
@@ -694,12 +694,12 @@
 				spip_query($query);
 				if ($row['sondage'] != 'non') {
 					$hash = calculer_action_auteur("forms valide reponse sondage $id_reponse");
-					$url = generer_url_public("valide_sondage","verif_cookie=oui&id_reponse=$id_reponse&hash=$hash");
+					$url = generer_url_public($script_validation,"verif_cookie=oui&id_reponse=$id_reponse&hash=$hash".($script_args?"&$script_args":""));
 					$r .= "<img src='".$url."' width='1' height='1' alt='' />";
 				}
 				else if (($email) || ($mailconfirm)) {
 					$hash = calculer_action_auteur("forms confirme reponse $id_reponse");
-					$url = generer_url_public("valide_sondage","mel_confirm=oui&id_reponse=$id_reponse&hash=$hash");
+					$url = generer_url_public($script_validation,"mel_confirm=oui&id_reponse=$id_reponse&hash=$hash".($script_args?"&$script_args":""));
 					$r .= "<img src='".$url."' width='1' height='1' alt='' />";
 	
 					$reponse = $mailconfirm;
@@ -713,7 +713,7 @@
 	//
 	// Afficher un formulaire
 	//
-	function Forms_afficher_formulaire($id_form) {
+	function Forms_afficher_formulaire($id_form,$message_confirm='forms:avis_message_confirmation',$script_validation = 'valide_sondage', $script_args='') {
 		static $num_ancre;
 		global $flag_ecrire;
 	
@@ -754,7 +754,7 @@
 	
 		$flag_reponse = ($GLOBALS['ajout_reponse'] == 'oui' && $GLOBALS['id_form'] == $id_form);
 		if ($flag_reponse) {
-			$r .= Forms_enregistrer_reponse_formulaire($id_form, $erreur, $reponse);
+			$r .= Forms_enregistrer_reponse_formulaire($id_form, $erreur, $reponse, $script_validation, $script_args);
 			//print_r($_POST);
 			if (!$erreur) {
 				$r .= "<p class='spip_form_ok'>".
@@ -763,7 +763,7 @@
 					$r .= " <a href='".self()."#$ancre"."'>"._T("forms:valider")."</a>";
 				if ($reponse){
 					$r .= "<span class='spip_form_ok_confirmation'>";
-				  $r .= _T("forms:avis_message_confirmation",array('mail'=>$reponse));
+				  $r .= _T($message_confirm,array('mail'=>$reponse));
 				  $r .= "</span>";
 				}
 				$r .= "</p>";

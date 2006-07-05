@@ -328,8 +328,8 @@ function forms_update(){
 		if ($id_form && Forms_form_editable($id_form)) {
 			if ($modif_structure) {
 				ksort($structure);
-				$query = "UPDATE `spip_forms` SET `structure`='".addslashes(serialize($structure))."' ".
-					"WHERE `id_form`=$id_form";
+				$query = "UPDATE spip_forms SET `structure`='".addslashes(serialize($structure))."' ".
+					"WHERE id_form=$id_form";
 				spip_query($query);
 			}
 		}
