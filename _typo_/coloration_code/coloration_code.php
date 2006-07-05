@@ -49,10 +49,10 @@ function coloration_code_echappe($texte) {
   $rempl ='';
 
   if (preg_match_all(
-		 ',<(cadre|code)[[:space:]]+class="(.*)"[[:space:]]*>(.*)</(cadre|code)>,Uims',
+		 ',<(cadre|code)[[:space:]]+class=("|\')(.*)\2([^>])*>((?:((?R))|.)*)</\1>,Uims',
 		 $texte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
-	  $code = echappe_retour($regs[3]);
+	  $code = echappe_retour($regs[5]);
 	  
 	  if(strpos($code, "\n")!==false) {
 	  // Gerer le fichier contenant le code au format texte
@@ -67,7 +67,7 @@ function coloration_code_echappe($texte) {
 		}
 	  }
 	 
-	  $rempl = coloration_code_color(trim($code),$regs[2], $regs[1]);
+	  $rempl = coloration_code_color(trim($code),$regs[3], $regs[1]);
 	 if(strpos($code, "\n")!==false) {
 	 	$rempl .= "<div class='".$regs[1]."_download' style='text-align: $spip_lang_right;'><a href='$fichier' style='font-family: verdana, arial, sans; font-weight: bold; font-style: normal;'>".
 	  		propre("<multi>Download[fr]T&eacute;l&eacute;charger</multi>").
