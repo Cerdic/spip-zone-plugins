@@ -18,9 +18,7 @@ function EnTravaux_ajouterBoutons($boutons_admin) {
 	if ($GLOBALS['connect_statut'] == "0minirezo") {
 		$boutons_admin['configuration']->sousmenu['en_travaux']= 
 		new Bouton("../"._DIR_PLUGIN_EN_TRAVAUX."/spip_mecano_24.png", "En travaux");
-		
-		return $boutons_admin;
 		}
-	return true;
+	return $boutons_admin;
 	}
 ?>
