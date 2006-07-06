@@ -47,14 +47,16 @@ function boucle_TABLEAU($id_boucle, &$boucles) {
 		error_log("LIMIT :  $boucle->limit");
 		list($start,$end)=explode(',', $boucle->limit);
 		$end= "($start+$end>count(\$__t)?count(\$__t):$start+$end)";
+		$total= "($end-$start)";
 	} else {
-		$start='0'; $end='count($__t)';
+		$start='0'; $total= $end= 'count($__t)';
 	}
 
-error_log("$start,$end ".$boucle->partie."/".$boucle->total_parties);
+error_log("$id_boucle ".$boucle->total_boucle." => $start,$end '".$boucle->mode_partie."' => ".$boucle->partie."/".$boucle->total_parties);
 	if($boucle->mode_partie) {
 		$start= $start."+$boucle->partie-1";
 		$incr=$boucle->total_parties;
+		$total="floor(($total+$incr-".$boucle->partie.")/$incr)";
 	} else {
 		$incr=1;
 	}
@@ -90,6 +92,7 @@ error_log("$start,$end ".$boucle->partie."/".$boucle->total_parties);
 	\$__t_k= array_keys(\$__t);
 	\$code=array();
 	\$Pile[\$SP]['var']=&\$__t;
+	\$Numrows['$id_boucle']['total']=$total;
 	\$Numrows['$id_boucle']['grand_total']=count(\$__t);
 	for(\$i= $start; \$i<$end; \$i+=$incr) {
 		\$Numrows['$id_boucle']['compteur_boucle']= \$i;
@@ -109,6 +112,7 @@ CODE;
 	\$code=array();
 	\$Pile[\$SP]['var']=&\$__t;
 	\$i= 1;
+	\$Numrows['$id_boucle']['total']=$total;
 	\$Numrows['$id_boucle']['grand_total']=count(\$__t);
 	foreach(\$__t as \$k => \$v) {
 		\$Numrows['$id_boucle']['compteur_boucle']=\$i++;

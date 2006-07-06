@@ -1,5 +1,5 @@
 <B_t>
-le tableau 'tables_principales' :
+le tableau 'tables_principales' ( #TOTAL_BOUCLE ) :
 <UL>
 <BOUCLE_t(TABLEAU){var=tables_principales}>
 	<LI> #COMPTEUR_BOUCLE #CLE => #VALEUR
@@ -22,11 +22,15 @@ le tableau 'tables_principales' :
 </UL>
 </B_t>
 
+<B_tables>
+extrait de tableau PAGE[tables] ( #TOTAL_BOUCLE )
 <BOUCLE_tables(TABLEAU){var=PAGE}{cle=tables}{0,15}{3/4}>
 <br>- #CLE => #VALEUR
 </BOUCLE_tables>
 
 <br><br>le tableau 'toto' :
+<B_t2>
+( #TOTAL_BOUCLE )
 <BOUCLE_t2(TABLEAU){var=toto}>
 oui
 </BOUCLE_t2>
@@ -34,6 +38,8 @@ non
 <//B_t2>
 
 <br><br>l'entrée tables_principales['spip_tableau']['field'] :
+<B_t3>
+( #TOTAL_BOUCLE )
 <BOUCLE_t3(TABLEAU){var=tables_principales}{cle=spip_tableau}{cle=field}>
 <br>- #COMPTEUR_BOUCLE #CLE => #VALEUR
 </BOUCLE_t3>
@@ -45,11 +51,15 @@ non
 
 <br><br>liste d'articles mise dans PAGE['articles']
 <br>la boucle interne n'affiche rien.
+<B_a>
+( #TOTAL_BOUCLE )
 <BOUCLE_a(ARTICLES){0,5}{","}>
 #ID_ARTICLE<BOUCLE_aff(AFFECTER){var=PAGE}{cle=articles}>#ID_ARTICLE</BOUCLE_aff>
 </BOUCLE_a>
 
 <br><br>afficher le contenu du tableau qu'on vient de générer :
+<B_res>
+( #TOTAL_BOUCLE )
 <BOUCLE_res(TABLEAU){var=PAGE}{cle=articles}{","}>
 <br> -> #VALEUR
 </BOUCLE_res>
