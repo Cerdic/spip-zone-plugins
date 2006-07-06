@@ -605,6 +605,8 @@ function calculer_url ($lien, $texte='', $pour='url') {
 		$lien = "http://".$lien;
 	else if (strpos($lien, "@") && email_valide($lien))
 		$lien = "mailto:".$lien;
+		
+	if (preg_match(",^#,",$lien)) $class = "spip_ancre";
 
 	return ($pour == 'url') ? $lien : array($lien, $class, $texte);
 }
