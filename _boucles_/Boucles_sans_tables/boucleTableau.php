@@ -51,10 +51,10 @@ function boucle_TABLEAU($id_boucle, &$boucles) {
 		$start='0'; $end='count($__t)';
 	}
 
+error_log("$start,$end ".$boucle->partie."/".$boucle->total_parties);
 	if($boucle->mode_partie) {
 		$start= $start."+$boucle->partie";
-		$incr=1;
-		$end=$boucle->total_parties."+$boucle->partie";
+		$incr=$boucle->total_parties;
 	} else {
 		$incr=1;
 	}
@@ -81,29 +81,31 @@ function boucle_TABLEAU($id_boucle, &$boucles) {
 	  return;
 	}
 
-	// s'il y a des limites ou un increment, ça ne marche que pour un tableau
-	// séquentiel
+	// s'il y a des limites ou un increment, il faut ruser
 	if($boucle->limit || $boucle->mode_partie) {
 		$code=<<<CODE
 	\$__t= &${var}$cle;
 	\$SP++;
-	if(empty(\$__t)) { return ''; }
+	if(!\$__t || empty(\$__t)) { return ''; }
+	\$__t_k= array_keys(\$__t);
 	\$code=array();
 	\$Pile[\$SP]['var']=&\$__t;
 	\$Numrows['$id_boucle']['grand_total']=count(\$__t);
 	for(\$i= $start; \$i<$end; \$i+=$incr) {
-		\$Numrows['$id_boucle']['compteur_boucle']= \$Pile[\$SP]['cle']= \$i;
-		\$Pile[\$SP]['valeur']=\$__t[\$i];
+		\$Numrows['$id_boucle']['compteur_boucle']= \$i;
+		\$Pile[\$SP]['cle']= \$__t_k[\$i];
+		\$Pile[\$SP]['valeur']= \$__t[\$__t_k[\$i]];
 		\$code[]=$boucle->return;
 	}
 	\$t0= join($code_sep, \$code);
 	return \$t0;
 CODE;
+	// sinon, un brave foreach fait l'affaire
 	} else {
 		$code=<<<CODE
 	\$__t= ${var}$cle;
 	\$SP++;
-	if(empty(\$__t)) { return ''; }
+	if(!\$__t || empty(\$__t)) { return ''; }
 	\$code=array();
 	\$Pile[\$SP]['var']=&\$__t;
 	\$i= 1;

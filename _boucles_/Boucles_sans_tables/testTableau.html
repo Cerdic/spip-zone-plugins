@@ -1,7 +1,7 @@
 <B_t>
 le tableau 'tables_principales' :
 <UL>
-<BOUCLE_t(TABLEAU){var=tables_principales}>
+<BOUCLE_t(TABLEAU){var=tables_principales}{1,5}>
 	<LI> #COMPTEUR_BOUCLE #CLE => #VALEUR
 [(#AFFECTER{+PAGE,tables})#CLE]
 	<B_tt>
@@ -22,7 +22,7 @@ le tableau 'tables_principales' :
 </UL>
 </B_t>
 
-<BOUCLE_tables(TABLEAU){var=PAGE}{cle=tables}{2,5}{2/2}>
+<BOUCLE_tables(TABLEAU){var=PAGE}{cle=tables}{0,15}{3/4}>
 <br>- #CLE => #VALEUR
 </BOUCLE_tables>
 
