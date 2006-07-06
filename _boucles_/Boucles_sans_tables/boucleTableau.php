@@ -53,7 +53,7 @@ function boucle_TABLEAU($id_boucle, &$boucles) {
 
 error_log("$start,$end ".$boucle->partie."/".$boucle->total_parties);
 	if($boucle->mode_partie) {
-		$start= $start."+$boucle->partie";
+		$start= $start."+$boucle->partie-1";
 		$incr=$boucle->total_parties;
 	} else {
 		$incr=1;
