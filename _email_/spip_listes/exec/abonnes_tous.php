@@ -201,7 +201,7 @@ echo"<div style='float:right;width:150px'>";
 echo "<b>"._T('spiplistes:repartition')."</b>  <br /><b>"._T('spiplistes:html')."</b> : $cmpt_html <br /><b>"._T('spiplistes:texte')."</b> : $cmpt_texte <br /><b>"._T('spiplistes:desabonnes')."</b> : $cmpt_non";
 echo"</div>";
 $total= $cmpt_html+$cmpt_texte+$cmpt_non;
-echo "Nombre d'abonnés : ".$total_abo."<p>Abonnés aux listes publiques : ".$nb_abonnes."<br />Abonnés aux listes internes : ".$nb_abonnes_int."<br />Abonnés à aucune liste : ".$nb_abonnes_auc."</p>";
+echo "Nombre d'abonnés : ".$total_abo."<p>Abonn&acute;s aux listes publiques : ".$nb_abonnes."<br />Abonn&eacute;s aux listes internes : ".$nb_abonnes_int."<br />Abonn&eacute;s à aucune liste : ".$nb_abonnes_auc."</p>";
 
 echo"</div>";
 
