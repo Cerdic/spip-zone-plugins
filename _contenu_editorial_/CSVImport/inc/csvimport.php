@@ -184,26 +184,34 @@ function csvimport_csv_ligne($ligne, $delim = ',') {
  * @param int $len Line length to be passed to fgetcsv
  * @return array or false on failure to retrieve any rows.
  */
+
+function csvimport_importcharset($texte){
+	return importer_charset($texte, 'iso-8859-1');
+}
+
 function csvimport_importcsv($file, $head = false, $delim = ",", $enclos = '"', $len = 1000) {
-   $return = false;
-   $handle = fopen($file, "r");
-   if ($handle){
-	   if ($head) {
-	       $header = fgetcsv($handle, $len, $delim);
-	   }
-	   while (($data = fgetcsv($handle, $len, $delim)) !== FALSE) {
-	       if ($head AND isset($header)) {
-	           foreach ($header as $key=>$heading) {
-	               $row[$heading]=(isset($data[$key])) ? $data[$key] : '';
-	           }
-	           $return[]=$row;
-	       } else {
-	           $return[]=$data;
-	       }
-	   }
-	   fclose($handle);
-   }
-   return $return;
+	include_spip('inc/charset');
+	$return = false;
+	$handle = fopen($file, "r");
+	if ($handle){
+		if ($head) {
+			$header = fgetcsv($handle, $len, $delim);
+			$header = array_map('csvimport_importcharset',$header);
+		}
+		while (($data = fgetcsv($handle, $len, $delim)) !== FALSE) {
+			$data = array_map('csvimport_importcharset',$data);
+			if ($head AND isset($header)) {
+				foreach ($header as $key=>$heading) {
+					$row[$heading]=(isset($data[$key])) ? $data[$key] : '';
+				}
+				$return[]=$row;
+			} else {
+				$return[]=$data;
+			}
+		}
+		fclose($handle);
+	}
+	return $return;
 }
 
 function csvimport_show_erreurs($erreur){
