@@ -45,7 +45,7 @@ debut_page("Spip listes", "redacteurs", "spiplistes");
 // spip-listes bien installé ?
 if (!function_exists(spip_listes_onglets)){
     echo("<h3>erreur: spip-listes est mal installé !</h3>"); 
-    echo("<p>Vérifier les étapes d'installation,notamment si vous avez bien renommé <i>mes_options.txt</i> en <i>mes_options.php3</i>.</p>");    
+    echo("<p>Vérifier les étapes d'installation,notamment si vous avez bien renommé <i>mes_options.txt</i> en <i>mes_options.php</i>.</p>");    
     fin_page();
 	  exit;
 }
@@ -108,7 +108,7 @@ if ($cherche_auteur) {
 			$email_auteur = $row['email'];
 			$bio_auteur = $row['bio'];
 
-			echo "<li><font face='Verdana,Arial,Sans,sans-serif' size=2><b><font size=3><a href=\"spip_listes.php3?mode=abonne&id_auteur=$id_auteur\">".typo($nom_auteur)."</a></font></b>";
+			echo "<li><font face='Verdana,Arial,Sans,sans-serif' size=2><b><font size=3><a href=\"?exec=abonne_edit&id_auteur=$id_auteur\">".typo($nom_auteur)."</a></font></b>";
 			echo " | $email_auteur";
                         echo "</font>\n";
 		}
@@ -213,7 +213,7 @@ echo"</div>";
 	$result = spip_query($query);
 
 	if (spip_num_rows($result) > 0) {
-		echo "<form action='spip_listes.php3?mode=statut' METHOD='post'>";
+		echo "<form action='?exec=abonne_tous' METHOD='post'>";
         echo "<div align=center>\n";
 		echo "<input type='text' name='cherche_auteur' class='fondl' value='' size='20'>";
 		echo " <input type='submit' name='Chercher' value='"._T('bouton_chercher')."' class='fondo'>";
@@ -229,7 +229,7 @@ echo "<p>";
 
 // auteur
 
-$retour = "spip_listes.php3?mode=statut&";
+$retour = "?exec=abonne_tous&";
 
 //changer de statut
 
@@ -374,13 +374,13 @@ echo "<td width='20'>";
 	if ($tri=='statut')
 		echo $img;
 	else
-		echo "<a href='spip_listes.php3?mode=statut&tri=statut' title='"._T('lien_trier_statut')."'>$img</a>";
+		echo "<a href='?exec=abonne_tous&tri=statut' title='"._T('lien_trier_statut')."'>$img</a>";
 
 echo "</td><td>";
 	if ($tri == '' OR $tri=='nom')
 		echo '<b>'._T('info_nom').'</b>';
 	else
-		echo "<a href='spip_listes.php3?mode=statut&tri=nom' title='"._T('lien_trier_nom')."'><b>"._T('info_nom')."</b></a>";
+		echo "<a href='?exec=abonne_tous&tri=nom' title='"._T('lien_trier_nom')."'><b>"._T('info_nom')."</b></a>";
 
 if ($options == 'avancees') echo "</td><td colspan='2'><b>"._T('info_contact')."</b>";
 echo "</td><td>";
@@ -457,7 +457,7 @@ foreach ($auteurs as $row) {
 
 	// nom
 	echo '</td><td>';
-	echo "<a href='spip_listes.php3?mode=abonne&id_auteur=".$row['id_auteur']."'>".typo($row['nom']).'</a>';
+	echo "<a href='?exec=abonne_edit&id_auteur=".$row['id_auteur']."'>".typo($row['nom']).'</a>';
 
 	if ($connect_statut == '0minirezo' AND $row['restreint'])
 		echo " &nbsp;<small>"._T('statut_admin_restreint')."</small>";
