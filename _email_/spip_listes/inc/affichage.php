@@ -263,7 +263,7 @@ $requete_listes = 'SELECT articles.id_article, articles.titre, articles.statut, 
 				
 				switch ($element){
 				case "abonnements":
-				$en_liste.= "<td width='120' class='arial1'><a href=\"".$url_desabo."\" dir='ltr' style='display:block;'>Désabonnement</a></td>\n";
+				$en_liste.= "<td width='120' class='arial1'><a href=\"".$url_desabo."\" dir='ltr' style='display:block;'>D&eacute;sabonnement</a></td>\n";
 				break;
 				default:
 				$en_liste.= "<td width='120' class='arial1'>".$date."</td>\n";
