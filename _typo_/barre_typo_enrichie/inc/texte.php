@@ -1089,7 +1089,7 @@ function traiter_raccourcis($letexte) {
 	// Note : complique car c'est ici qu'on applique typo() !
 	//
 	#$regexp = "|\[([^][]*)->(>?)([^]]*)\]|ms";
-	$regexp =  "|\[([^][]*)(\|([^]{]*)(\{([a-z-]+)})?)?->(>)?([^]]*)\]|msU";
+	$regexp =  "|\[([^][]*)(\|([^]>{]*)(\{([a-z-]+)})?)?->(>)?([^]]*)\]|msU";
 	$inserts = array();
 	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER)) {
 		$i = 0;
