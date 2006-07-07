@@ -49,7 +49,7 @@ function coloration_code_echappe($texte) {
   $rempl ='';
 
   if (preg_match_all(
-		 ',<(cadre|code)[[:space:]]+class=("|\')(.*)\2([^>])*>((?:((?R))|.)*)</\1>,Uims',
+		 ',<(cadre|code)[[:space:]]+class=("|\')(.*)\2([^>]*)>((?:(?R)|.)*)</\1>,Uims',
 		 $texte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
 	  $code = echappe_retour($regs[5]);
