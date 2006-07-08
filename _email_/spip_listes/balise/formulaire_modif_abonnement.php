@@ -3,9 +3,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-global $balise_FORMULAIRE_MODIF_ABONNEMENT_collecte;
-$balise_FORMULAIRE_MODIF_ABONNEMENT_collecte = array();
+function balise_FORMULAIRE_MODIF_ABONNEMENT ($p) {
 
+	return calculer_balise_dynamique($p, 'FORMULAIRE_MODIF_ABONNEMENT', array());
+}
 
 function balise_FORMULAIRE_MODIF_ABONNEMENT_stat ($args, $filtres) {
 	
@@ -13,25 +14,27 @@ function balise_FORMULAIRE_MODIF_ABONNEMENT_stat ($args, $filtres) {
 	return array($args[0]);
 }
 
+
+
 function balise_FORMULAIRE_MODIF_ABONNEMENT_dyn($formulaire) {
+
+include_spip ("inc/meta");
+include_spip ("inc/session");
+include_spip ("inc/filtres");
+include_spip ("inc/texte");
+include_spip ("inc/meta");
+include_spip ("inc/mail");
+include_spip ("inc/acces");
+
 	global $confirm,$d,$list,$champs_extra,$email_desabo;
-    
-    if (!defined("_ECRIRE_INC_VERSION"))
-	include ("ecrire/inc_version.php3");
-	
-	include_ecrire ("inc_meta.php3");
-	include_ecrire ("inc_session.php3");
-	include_ecrire ("inc_filtres.php3");
-	include_ecrire ("inc_texte.php3");
-	include_ecrire ("inc_meta.php3");
-	include_ecrire ("inc_mail.php3");
-	include_ecrire ("inc_acces.php3");
+
 	
 	//utiliser_langue_site();
 	$nomsite=lire_meta("nom_site");
 	$urlsite=lire_meta("adresse_site");
 	
-	
+	// aller chercher le formulaire html qui va bien				
+$formulaire = "formulaires/formulaire_modif_abonnement";	
 	
 	// 3 Cas :
 	// 1) La personne valide le formulaire de modif, traitement des données
