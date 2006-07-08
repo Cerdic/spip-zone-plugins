@@ -195,7 +195,7 @@ function exec_mots_partout() {
   /* récuperation de la chose sur laquelle on travaille*/
   /***********************************************************************/
 
-  $nom_chose = addslashes($_POST['nom_chose']);
+  $nom_chose = addslashes(_request('nom_chose'));
   if(!isset($choses_possibles[$nom_chose])) {
 	list($nom_chose,) = each($choses_possibles);
 	reset($choses_possibles);
@@ -205,18 +205,18 @@ function exec_mots_partout() {
   $table_auth = $choses_possibles[$nom_chose]['table_auth'];
   $tables_limite = $choses_possibles[$nom_chose]['tables_limite'];
 
-  list($mots_voir, $mots_cacher, $mots_ajouter, $mots_enlever) = splitArrayIds($_REQUEST['mots']);
+  list($mots_voir, $mots_cacher, $mots_ajouter, $mots_enlever) = splitArrayIds(_request('mots'));
   $choses = secureIntArray(_request('choses'));
 
-  $limit =  addslashes($_POST['limit']);
+  $limit =  addslashes(_request('limit'));
   if($limit == '') $limit = 'rien';
-  $id_limit =  intval($_POST['identifiant_limit']);
+  $id_limit =  intval(_request('identifiant_limit'));
   if($id_limit < 1) $id_limit = 0;
-  $nb_aff = intval($_POST['nb_aff']);
+  $nb_aff = intval(_request('nb_aff'));
   if($nb_aff < 1) $nb_aff = 20;
-  $switch = addslashes($_POST['switch']);
+  $switch = addslashes(_request('switch'));
   if($switch == '') $switch = 'voir';
-  $strict = intval($_POST['strict']);
+  $strict = intval(_request('strict'));
 
   /**********************************************************************/
   /* recherche des choses.*/

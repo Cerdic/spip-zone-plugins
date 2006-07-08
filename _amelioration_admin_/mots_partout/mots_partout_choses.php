@@ -206,28 +206,34 @@ function afficher_liste_documents($choses,$nb_aff=20) {
   echo "<table width='100%' cellspacing='0' cellpadding='3' style=\"border-top:1px solid black\">\n";
   $i=0;
   
-  $query = "SELECT * FROM spip_documents WHERE id_document".((count($choses))?(' IN('.calcul_in($choses).')'):'');
+  $deb_aff = intval(_request('t_debut'));
 
-  $tranches =  afficher_tranches_requete($query, 3,'debut',false,$nb_aff);
-  if($tranches) {
-	echo $tranches;
-	
-	$results = spip_query($query);
-	
-	while($document = spip_fetch_array($results)) {
-	  afficher_horizontal_document_assoc($document,true,$i);
-	  $i++;
-	  if ($i > 2) {
-		$i = 0;
-		echo "</tr>\n";
-	  }
-	}
-	// fermer la derniere ligne
-	if ($i > 0) {
-	  echo "<td style='border-$spip_lang_left: 1px solid $couleur;'>&nbsp;</td>";
-	  echo "</tr>";
+  $query = "SELECT * FROM spip_documents WHERE id_document".((count($choses))?(' IN('.calcul_in($choses).')'):''). " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : "99999");
+
+  $cpt = spip_fetch_array(spip_query('SELECT COUNT(*) AS n  FROM spip_documents WHERE id_document'.((count($choses))?(' IN('.calcul_in($choses).')'):'')));
+
+  if (! ($cpt = $cpt['n'])) return;
+
+  $tranches =  afficher_tranches_requete($cpt, 3,'debut',false,$nb_aff);
+  
+  echo $tranches;
+  
+  $results = spip_query($query);
+  
+  while($document = spip_fetch_array($results)) {
+	afficher_horizontal_document_assoc($document,true,$i);
+	$i++;
+	if ($i > 2) {
+	  $i = 0;
+	  echo "</tr>\n";
 	}
   }
+  // fermer la derniere ligne
+  if ($i > 0) {
+	echo "<td style='border-$spip_lang_left: 1px solid $couleur;'>&nbsp;</td>";
+	echo "</tr>";
+  }
+
   echo '</table>';
 }
 
