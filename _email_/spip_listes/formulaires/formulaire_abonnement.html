@@ -26,7 +26,7 @@
 <div class="formulaire_spip formulaire_inscription">
 [(#ENV*{reponse_formulaire})]
 [(#ENV{login}|?{' ',''})
-	<form action='#SELF' method='post' >
+	<form action="#SELF" method="post" class="lettre">
 ]
 		<BOUCLE_liste(ARTICLES) {statut=liste} {id_article=#ENV{liste}} {0,(#ENV{login}|?{1,0})}>
 			<fieldset>
@@ -37,24 +37,18 @@
 		</BOUCLE_liste>
 		<B_listes>
 			<fieldset>
-			<legend><b>[(#TOTAL_BOUCLE|=={1}|?{
-				<:spiplistes:abo_1_lettre:></b></legend><ul>
-				,<:spiplistes:abo_listes:></b></legend><div style='text-align:left; padding:0px 0px 4px 0px;clear:both'>})]
+			<legend>[(#TOTAL_BOUCLE|=={1}|?{
+				<:spiplistes:abo_1_lettre:></legend><ul>
+				,<:spiplistes:abo_listes:></legend>})]
 			
 		<BOUCLE_listes(ARTICLES) {statut=liste} {0,(#ENV{login}|?{100,0})}>
 				[(#TOTAL_BOUCLE|=={1}|?{' ',''})
-				<li style='list-style-type:none'>
-				<a href='[(#SELF|parametre_url{liste,#ID_ARTICLE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>&nbsp;&nbsp;&nbsp;<input type="checkbox" name="list&#91;&#93;" checked="checked"  value="#ID_ARTICLE" />
+				<input type="hidden" name="list&#91;&#93;" checked="checked"  value="12" />
 				</li>]
 				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 				<div style='text-align:left; padding:0px 0px 4px 0px;clear:both'>
-					<div style='float:left'><input type="checkbox" name="list&#91;&#93;"  checked="checked"   value="#ID_ARTICLE" />&nbsp;</div>
-				<a href='[(#SELF|parametre_url{liste,#ID_ARTICLE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a><br />
-				</div>]
+				<input type="hidden" name="list&#91;&#93;"  checked="checked"   value="12" />]
 		</BOUCLE_listes>
-			[(#TOTAL_BOUCLE|=={1}|?{
-			</ul>,
-			</div><br />})]
 		</B_listes>
 			[(#ENV{login}|?{' ',''})<fieldset>
 			<legend><:spiplistes:abo_1_lettre:></legend>]
@@ -64,13 +58,13 @@
 			[(#REM|bloog_extra_saisie{'auteurs', 'inscription','true'})]
 		</div>
 
-			[(#ENV{inscription_redac}|=={oui}|?{' ',[(#ENV{inscription_visiteur}|=={oui}|?{' ',''})]})
+			[(#ENV{inscription_redac}|=={oui}|?{' ',[(#ENV{acces_membres}|=={oui}|?{' ',''})]})
 				<p><b><:form_pet_votre_nom:></b><br />
 				<input type="text" class="forml" name="nom_inscription" value="" size="35" /> </p>
 				]
 			
 			<p><label for="mail_inscription"><:form_pet_votre_email:></label>
 		  <input type="text" class="forml" name="mail_inscription" id="mail_inscription" value="#ENV{mail_inscription}" size="30" /></p>
-		 <div class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></div>
+		 <input type="submit" value="<:bouton_valider:>" class="inscrire" />
 		</fieldset></form>]
 </div>
