@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Interface MonGoSearch
+	Interface mnoGoSearch
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->	
 	Cedric MORIN [notre-ville.net->http://www.notre-ville.net]
@@ -9,14 +9,13 @@
 	0.10
 	</version>
 	<etat>
-	dev
+	test
 	</etat>
 	<description>
 Interfacage du moteur mnoGoSearch avec l'API SPIP
 _ {{Ce plugin requiert le plugin Boucles sans table}}
 _ Ce plugin prend en charge l'interrogation de monogosearch 
-et la mise a disposition des resultats de recherche dans des balises et un tableau utilisable dans une boucle
-au moyen du plugin Boucles sans table.
+et la mise a disposition des resultats de recherche dans des balises et une boucle MNOGOSEARCH
 	</description>
 	<prefix> 
 	monogo

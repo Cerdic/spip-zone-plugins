@@ -8,6 +8,7 @@ function boucle_MNOGOSEARCH_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$boucle->from[$id_table] =  "spip_mnogosearch";
+	$boucle->select[] = 'numero';
 
 	$out = calculer_boucle($id_boucle, $boucles);
 	$out = str_replace("\$Numrows['$id_boucle']['compteur_boucle']++;","\$Numrows['$id_boucle']['compteur_boucle']=\$Pile[\$SP]['numero'];",$out);
