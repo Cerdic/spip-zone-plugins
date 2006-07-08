@@ -315,11 +315,10 @@ function exec_mots_partout() {
   }
 
   if(count($choses) > 0) {
-	//BUG
-	$query = "SELECT spip_mots_$nom_chose.id_mot FROM spip_mots_$nom_chose WHERE spip_mots_$nom_chose.$id_chose".((count($choses))?(' IN('.calcul_in($choses).')'):'');
+	$debut_aff = _request('t_debut');
 
-	afficher_tranches_requete($query, 3,'debut',false,$nb_aff);
-	
+	$query = "SELECT spip_mots_$nom_chose.id_mot FROM spip_mots_$nom_chose WHERE spip_mots_$nom_chose.$id_chose".((count($choses))?(' IN('.calcul_in(array_slice($choses,$debut_aff,$nb_aff)).')'):'');
+
 	$res = spip_query($query);
 	
 	while ($row = spip_fetch_array($res)) {
