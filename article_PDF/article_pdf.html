@@ -15,27 +15,27 @@
 	
 	// Recuperation et definition des differents elements
 	
-	$site="[(#NOM_SITE_SPIP|pdf_first_clean)]";
-	$rubrique="<B_rubrique_mere><BOUCLE_rubrique_mere(RUBRIQUES){id_rubrique}>[(#TITRE|supprimer_numero|pdf_first_clean)]</BOUCLE_rubrique_mere></B_rubrique_mere>[(#NOM_SITE_SPIP|pdf_first_clean)]<//B_rubrique_mere>";
-	$DateParution="[(#DATE_REDAC|affdate|pdf_first_clean)]";
-	$DateMiseEnLigne="[(#DATE|nom_jour)] [(#DATE|affdate|pdf_first_clean)]";
+	$site='[(#NOM_SITE_SPIP|pdf_first_clean|texte_script)]';
+	$rubrique='<B_rubrique_mere><BOUCLE_rubrique_mere(RUBRIQUES){id_rubrique}>[(#TITRE|supprimer_numero|pdf_first_clean|texte_script)]</BOUCLE_rubrique_mere></B_rubrique_mere>[(#NOM_SITE_SPIP|pdf_first_clean|texte_script)]<//B_rubrique_mere>';
+	$DateParution='[(#DATE_REDAC|affdate|pdf_first_clean|texte_script)]';
+	$DateMiseEnLigne='[(#DATE|nom_jour|texte_script)] [(#DATE|affdate|pdf_first_clean|texte_script)]';
 	
-	/*$auteur="<BOUCLE_auteurs(AUTEURS){id_article}{", "}>[(#NOM|pdf_first_clean)]</BOUCLE_auteurs>";*/
-	$motsclef="<BOUCLE_keywords(MOTS){id_article}{", "}>[(#TITRE|pdf_first_clean)]</BOUCLE_keywords>";
-	$yahoo="-<BOUCLE_yahoo(HIERARCHIE){id_article}> [(#TITRE|supprimer_numero|pdf_first_clean)] - </BOUCLE_yahoo>";
+	/*$auteur='<BOUCLE_auteurs(AUTEURS){id_article}{", "}>[(#NOM|pdf_first_clean|texte_script)]</BOUCLE_auteurs>';*/
+	$motsclef='<BOUCLE_keywords(MOTS){id_article}{", "}>[(#TITRE|pdf_first_clean|texte_script)]</BOUCLE_keywords>';
+	$yahoo='-<BOUCLE_yahoo(HIERARCHIE){id_article}> [(#TITRE|supprimer_numero|pdf_first_clean|texte_script)] - </BOUCLE_yahoo>';
 
-	$logo_site="[(#LOGO_SITE_SPIP|extraire_attribut{src})]";
+	$logo_site='[(#LOGO_SITE_SPIP|extraire_attribut{src}|texte_script)]';
 	
-	[$surtitre="(#SURTITRE|pdf_first_clean)";]
-	[$titre="(#TITRE|SUPPRIMER_NUMERO|pdf_first_clean)";]
-	[$soustitre="(#SOUSTITRE|pdf_first_clean)";]
-	[$chapo="(#CHAPO|pdf_first_clean)";]
-	[$descriptif="(#DESCRIPTIF|pdf_first_clean)";]
-	[$texte= "(#TEXTE|pdf_first_clean)";]
-	[$ps="(#PS|pdf_first_clean)";]
-	[$notes="(#NOTES|pdf_first_clean)";]
+	[$surtitre='(#SURTITRE|pdf_first_clean|texte_script)';]
+	[$titre='(#TITRE|SUPPRIMER_NUMERO|pdf_first_clean|texte_script)';]
+	[$soustitre='(#SOUSTITRE|pdf_first_clean|texte_script)';]
+	[$chapo='(#CHAPO|pdf_first_clean|texte_script)';]
+	[$descriptif='(#DESCRIPTIF|pdf_first_clean|texte_script)';]
+	[$texte= '(#TEXTE|pdf_first_clean|texte_script)';]
+	[$ps='(#PS|pdf_first_clean|texte_script)';]
+	[$notes='(#NOTES|pdf_first_clean|texte_script)';]
 	
-	$copyright = "[(#REM|texte{'Copyright (c) '}|pdf_first_clean)][(#NOM_SITE_SPIP|pdf_first_clean)][(#REM|texte{'\nTous droits réservés'}|pdf_first_clean)]";
+	$copyright = '[(#REM|texte{'Copyright (c) '}|pdf_first_clean|texte_script)][(#NOM_SITE_SPIP|pdf_first_clean|texte_script)][(#REM|texte{'\nTous droits réservés'}|pdf_first_clean|texte_script)]';
 	
 	$id_article = "#ID_ARTICLE";
 	
