@@ -31,20 +31,13 @@ $choses_possibles['articles'] = array(
 									  
 function afficher_liste_articles($choses,$nb_aff=20) {
 
-  
-  $cpt = spip_fetch_array(spip_query('SELECT COUNT(*) AS n FROM spip_articles as articles WHERE articles.id_article'
-									 .((count($choses))?(' IN('.calcul_in($choses).')'):'')));
-  
-  if (! ($cpt = $cpt['n'])) return;
-
-
-  $tranches =  afficher_tranches_requete($cpt, 6,'debut',false,$nb_aff);
+  $tranches =  afficher_tranches_requete(count($choses), 6,'debut',false,$nb_aff);
 	
   echo "<div class='liste'>";
   bandeau_titre_boite2('Articles', "article-24.gif");
   
   echo afficher_liste_debut_tableau();
-  echo $tranches;
+  if(count($choses) >= $nb_aff) echo $tranches;
   
   
   $deb_aff = intval(_request('t_debut'));
@@ -210,13 +203,9 @@ function afficher_liste_documents($choses,$nb_aff=20) {
 
   $query = "SELECT * FROM spip_documents WHERE id_document".((count($choses))?(' IN('.calcul_in($choses).')'):''). " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : "99999");
 
-  $cpt = spip_fetch_array(spip_query('SELECT COUNT(*) AS n  FROM spip_documents WHERE id_document'.((count($choses))?(' IN('.calcul_in($choses).')'):'')));
-
-  if (! ($cpt = $cpt['n'])) return;
-
-  $tranches =  afficher_tranches_requete($cpt, 3,'debut',false,$nb_aff);
+  $tranches =  afficher_tranches_requete(count($choses), 3,'debut',false,$nb_aff);
   
-  echo $tranches;
+  if(count($choses) >= $nb_aff) echo $tranches;
   
   $results = spip_query($query);
   
@@ -354,78 +343,41 @@ $choses_possibles['auteurs'] = array(
 
 function afficher_liste_auteurs($choses,$nb_aff=20) {
   
-  $query = 'SELECT id_auteur, nom, login, email, extra, statut FROM spip_auteurs as auteurs WHERE auteurs.id_auteur'.((count($choses))?(' IN('.calcul_in($choses).')'):'');
+  $deb_aff = intval(_request('t_debut'));
+
+  $query = 'SELECT id_auteur, nom, login, email, extra, statut FROM spip_auteurs as auteurs WHERE auteurs.id_auteur'.((count($choses))?(' IN('.calcul_in($choses).')'):''). " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : "99999");
   
-  $tranches =  afficher_tranches_requete($query, 3,'debut',false,$nb_aff);
+  $tranches =  afficher_tranches_requete(count($choses), 2,'debut',false,$nb_aff);
+	
+  echo "<div style='height: 12px;'></div>";
+  echo "<div class='liste'>";
+  bandeau_titre_boite2(_T('auteurs'),"auteur-24.gif");
+  
+  echo afficher_liste_debut_tableau();
+  
+  if(count($choses) >= $nb_aff) echo $tranches;
 
-  if($tranches) {
+  $result = spip_query($query);
+  $i = 0;
+  $table = array();
+  while ($row = spip_fetch_array($result)) {
+	$i++;
+	$crap = array();
+	$vals = affiche_auteur_boucle($row,$crap);
 	
-	echo "<div style='height: 12px;'></div>";
-	echo "<div class='liste'>";
-	bandeau_titre_boite2($titre_table, "reply-to-all-24.gif");
+	$id_auteur = $row['id_auteur'];
 	
-	echo afficher_liste_debut_tableau();
-	
-	echo $tranches;
-
-	$result = spip_query($query);
-	$i = 0;
-	while ($row = spip_fetch_array($result)) {
-	  $i++;
-	  $vals = '';
-	  
-	  $id_auteur = $row['id_auteur'];
-	  $tous_id[] = $id_auteur;
-	  $nom = $row['nom'];
-	  $login = $row['login'];
-	  $email = $row['email'];
-	  $extra = $row['extra'];
-	  $statut = $row['statut'];
-	  
-	  $vals[] = "<input type='checkbox' name='choses[]' value='$id_auteur' id='id_chose$i'/>";
-	  
-	  // Le titre (et la langue)
-	  $s = "<div>";
-	  $s .= '<a href="'.generer_url_ecrire('auteur_edit',"id_auteur=$id_auteur").'" style="display:block;">';
-	  $s .= typo($login);
-	  $s .= "</a>";
-	  $s .= "</div>";
-	  $vals[] = $s;
-	  
-	  $s = "<div>";
-	  $s .= " (<a href=\"mailto:$email\">";
-	  
-	  $s .= typo($nom);
-	  $s .= "</a>)";
-	  $s .= "</div>";
-	  
-	  $vals[] = $s;
-	  
-	  // TODO : extra
-	  //	$s = affdate_jourcourt($date);
-	  //	$vals[] = $s;
-	  
-	  // Le numero (moche)
-	  if ($options == "avancees") {
-		$vals[] = "<b>"._T('info_numero_abbreviation')."$id_auteur</b>";
-	  }
-	  
-	  
-	  $table[] = $vals;
-	}
-	spip_free_result($result);
-	
-	if ($options == "avancees") { // Afficher le numero (JMB)
-	  $largeurs = array(11, '', 100,35);
-	  $styles = array('', 'arial2', 'arial1', 'arial1');
-	} else {
-	  $largeurs = array(11, '', 100);
-	  $styles = array('', 'arial2', 'arial1');
-	}
-	afficher_liste($largeurs, $table, $styles);
-	
-	echo afficher_liste_fin_tableau();
+	$vals[] = "<input type='checkbox' name='choses[]' value='$id_auteur' id='id_chose$i'/>";
+		
+	$table[] = $vals;
   }
+  spip_free_result($result);
+
+  $largeurs = array('', 100);
+  $styles = array('arial2', 'arial1');
+  echo afficher_liste($largeurs, $table, $styles);
+  
+  echo afficher_liste_fin_tableau();
 }
 
 
