@@ -15,11 +15,11 @@ dans lequel ils souhaitent recevoir les courriers (HTML/texte). </p><p>Tout mess
 'abonnement' => 'Abonnement',
 'abonnement'=>'Vous souhaitez modifier votre abonnement &agrave; la lettre d\'information',
 'abonnement_bouton'=>'Modifier votre abonnement',
-'abonnement_cdt' => '<a href=\'http://bloog.net\'>SPIP-Listes</a>' ,
+'abonnement_cdt' => '<a href=\'http://bloog.net/spip-listes/\'>SPIP-Listes</a>' ,
 'abonnement_change_format'=>'Vous pouvez changer de format de r&eacute;ception ou vous d&eacute;sabonner : ',
 'abonnement_mail' => 'Pour modifier votre abonnement, veuillez vous rendre &agrave; l\'adresse suivante',
 'abonnement_mail_passcookie' => '(ceci est un message automatique)
-Pour modifier votre abonnement &agrave; la lettre d\'information de ce site :
+Pour modifier votre abonnement &agrave la lettre d\'information de ce site :
 @nom_site_spip@ (@adresse_site@)
 
 Veuillez vous rendre &agrave; l\'adresse suivante :
@@ -75,7 +75,7 @@ Vous recevrez un email permettant d\'acc&eacute;der &agrave; la page de modifica
 'envoi_nouv' => 'Envoi des nouveaut&eacute;s',
 'envoi_program' => 'Envoi programm&eacute;',
 'envoi_texte' => 'Si ce message vous convient, vous pouvez l\'envoyer',
-'exporter' => 'Exporter une liste d\'abonn&eacute;s',
+'exporter' => 'Exporter la liste d\'abonn&eacute;s',
 
 //F
 'faq' => 'FAQ',
