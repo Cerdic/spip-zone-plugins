@@ -30,70 +30,41 @@ $choses_possibles['articles'] = array(
 									  
 									  
 function afficher_liste_articles($choses,$nb_aff=20) {
-  
-  $query = 'SELECT id_article, titre, id_rubrique, date, statut, lang, descriptif FROM spip_articles as articles WHERE articles.id_article'
-	.((count($choses))?(' IN('.calcul_in($choses).')'):'');
-  
-  $tranches =  afficher_tranches_requete($query, 3,'debut',false,$nb_aff);
-  if($tranches) {
 
-	$results = spip_query($query);
+  
+  $cpt = spip_fetch_array(spip_query('SELECT COUNT(*) AS n FROM spip_articles as articles WHERE articles.id_article'
+									 .((count($choses))?(' IN('.calcul_in($choses).')'):'')));
+  
+  if (! ($cpt = $cpt['n'])) return;
+
+
+  $tranches =  afficher_tranches_requete($cpt, 6,'debut',false,$nb_aff);
 	
-	echo "<div class='liste'>";
-	bandeau_titre_boite2('Articles', "article-24.gif");
-	
-	echo afficher_liste_debut_tableau();
-	echo $tranches;
-	
-	$i = 0;
-	while ($row = spip_fetch_array($results)) {
-	  $i++;
-	  $vals = '';
-	  
-	  $id_article = $row['id_article'];
-	  $tous_id[] = $id_article;
-	  $titre = $row['titre'];
-	  $id_rubrique = $row['id_rubrique'];
-	  $date = $row['date'];
-	  $statut = $row['statut'];
-	  if ($lang = $row['lang']) changer_typo($lang);
-	  $descriptif = $row['descriptif'];
-	  if ($descriptif) $descriptif = ' title="'.attribut_html(typo($descriptif)).'"';
-	  
-	  $vals[] = "<input type='checkbox' name='choses[]' value='$id_article' id='id_chose$i'/>";
-	  
-	  // Le titre (et la langue)
-	  $s = "<div>";
-	  
-	  $s .= '<a href="'.generer_url_ecrire('articles',"id_article=$id_article").'"$descriptif$dir_lang style="display:block;">';
-	  
-	  if ($spip_display != 1 AND $spip_display != 4 AND lire_meta('image_process') != "non") {
-		include_ecrire("inc_logos"._EXTENSION_PHP);
-		$s .= decrire_logo('art','on',$id_article,24,24);
-	  }
-	  
-	  $s .= typo($titre);
-	  if ($afficher_langue AND $lang != $langue_defaut)
-		$s .= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
-	  $s .= "</a>";
-	  $s .= "</div>";
-	  
-	  $vals[] = $s;
-	  
-	  // La date
-	  $s = affdate_jourcourt($date);
-	  $vals[] = $s;
-	  
-	  // Le numero (moche)
-	  if ($options == "avancees") {
-		$vals[] = "<b>"._T('info_numero_abbreviation')."$id_article</b>";
-	  }
-	  
-	  
-	  $table[] = $vals;
-	}
-	spip_free_result($results);
-	
+  echo "<div class='liste'>";
+  bandeau_titre_boite2('Articles', "article-24.gif");
+  
+  echo afficher_liste_debut_tableau();
+  echo $tranches;
+  
+  
+  $deb_aff = intval(_request('t_debut'));
+
+  $query = 'SELECT id_article, titre, id_rubrique, date, statut, lang, descriptif FROM spip_articles as articles WHERE articles.id_article'
+	.((count($choses))?(' IN('.calcul_in($choses).')'):'') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : "99999");
+
+  $results = spip_query($query);
+  
+  $table = array();
+  $i = 0;
+  while ($row = spip_fetch_array($results)) {
+	$i++;
+	$id_article=$row['id_article'];
+	$vals = afficher_articles_boucle($row, $tous_id, true, false, false, $voir_logo);
+	$vals[] = "<input type='checkbox' name='choses[]' value='$id_article' id='id_chose$i'/>";
+	$table[] = $vals; 
+  }
+  spip_free_result($results);
+  
 	if ($options == "avancees") { // Afficher le numero (JMB)
 	  if ($afficher_auteurs) {
 		$largeurs = array(11, '', 80, 100, 35);
@@ -111,11 +82,11 @@ function afficher_liste_articles($choses,$nb_aff=20) {
 		$styles = array('', 'arial2', 'arial1');
 	  }
 	}
-	afficher_liste($largeurs, $table, $styles);
+	echo afficher_liste($largeurs, $table, $styles);
 	
 	echo afficher_liste_fin_tableau();
 	echo '</div>';
-  }
+
 }
 
 

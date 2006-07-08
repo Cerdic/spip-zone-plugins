@@ -78,6 +78,7 @@ function action_mots_partout() {
   */   
   
   include(_DIR_PLUGIN_MOTS_PARTOUT."/mots_partout_choses.php");
+  include_spip('base/abstract_sql');
   
   /***********************************************************************/
   /* récuperation de la chose sur laquelle on travaille*/
@@ -143,9 +144,11 @@ function action_mots_partout() {
 	}
   }
   if (count($mots_enlever) && count($choses)) {
+	$table_pref = 'spip';
+	if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
 	foreach($mots_enlever as $m) {
 	  foreach($choses as $d) {
-		spip_query("DELETE FROM $table_pref_mots_$nom_chose WHERE id_mot=$m AND $id_chose=$d");
+		spip_query('DELETE FROM '.$table_pref.'_mots_'.$nom_chose." WHERE id_mot=$m AND $id_chose=$d");
 	  }
 	}
   }
@@ -164,7 +167,10 @@ function action_mots_partout() {
 	  $par_mots .= "&mots[$id]=$m";
   }
 
-  $redirect = generer_url_action('mots_partout_cherche',"nom_chose=$nom_chose&stict=$strict&switch=$switch&ajax=$ajax&redirect=$redirect$par_chose$par_mots");
+
+  //  $redirect = generer_url_action('mots_partout',"nom_chose=$nom_chose&stict=$strict&switch=$switch&ajax=$ajax&redirect=$redirect$par_chose$par_mots");
+  $redirect = _request('redirect')."&nom_chose=$nom_chose&stict=$strict&switch=$switch&ajax=$ajax&redirect=$redirect$par_choses$par_mots";
+
 
   redirige_par_entete($redirect);
 
