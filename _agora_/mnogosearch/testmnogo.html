@@ -1,21 +1,20 @@
 #CACHE{0}
 [(#FORMULAIRE_RECHERCHE_ETENDUE|spip.php?page=testmnogo)]
 
-Recherche ::#MNOGO_RECHERCHE::<br/>
+<B_test>
+Recherche ::#RECHERCHE::<br/>
 Resume ::#MNOGO_RESUME_RESULTATS::<br/>
-Resultats de ::#MNOGO_PREMIER::a::#MNOGO_DERNIER::sur un total de ::#MNOGO_TOTAL::<br/>
-Temps de recherche ::#MNOGO_SEARCHTIME::s<br/>
-<B_t>
-[<p class="pagination">(#PAGINATION)</p>]
-<BOUCLE_t(TABLEAU){var=mnogo_resultats}{pagination}>
-#MNOGO_ITEM_NUMERO{#CLE} - <a href='#MNOGO_ITEM_URL{#CLE}'>#MNOGO_ITEM_TITRE{#CLE}</a><br/>
-#MNOGO_ITEM_POINTS{#CLE}<br/>
-#MNOGO_ITEM_POPULARITE{#CLE}<br/>
-#MNOGO_ITEM_DESCRIPTIF{#CLE}<br/>
-#MNOGO_ITEM_TAILLE{#CLE}<br/>
-#MNOGO_ITEM_TYPE{#CLE}<br/>
-#MNOGO_ITEM_DATE{#CLE}<br/>
-<a href='#CONFIG{mnogo_url_search}#MNOGO_ITEM_CACHE_URL{#CLE}'>Copie en cache</a>
+Nb Resultats ::#MNOGO_TOTAL::<br/>
+<p class='pagination'>#PAGINATION</p>
+<BOUCLE_test(MNOGOSEARCH){recherche}{pagination}>
+#NUMERO - <a href='#URL'>#TITRE</a><br/>
+#POINTS<br/>
+#POPULARITE<br/>
+#DESCRIPTIF<br/>
+#TAILLE<br/>
+#MIME_TYPE<br/>
+#DATE<br/>
+<a href='#CONFIG{mnogo_url_search}#CACHE_URL'>Copie en cache</a>
 <hr/>
-</BOUCLE_t>
-</B_t>
+</BOUCLE_test>
+</B_test>

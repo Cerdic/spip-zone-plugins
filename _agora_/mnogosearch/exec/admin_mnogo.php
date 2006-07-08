@@ -4,6 +4,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_admin_mnogo(){
 	global $connect_statut,$connect_toutes_rubriques;
+
+	include_spip('inc/mnogo_distant');
+	mnogo_verifier_base();
 	
 	include_spip("inc/presentation");
 		
@@ -12,7 +15,7 @@ function exec_admin_mnogo(){
 	debut_gauche();
 	
 	debut_boite_info();
-	echo propre(_L('Cette page permet de configurer l\'interrogation du moteur de recherche mnoGoSearch<br/> Configurez votre mnoGoSearch avec '));
+	echo propre(_L('Cette page permet de configurer l\'interrogation du moteur de recherche mnoGoSearch<br/> Configurez votre mnoGoSearch avec les exemples fournis dans le repertoire mnogosearch du plugin.'));
 	fin_boite_info();
 
 
