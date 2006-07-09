@@ -99,15 +99,32 @@ function exec_config_types_documents() {
 	  $vals[] = $titre;    
 	  $vals[] = $ext;
 //	  $vals[] = $desc;
-	  $vals[] = '<input type="checkbox" disabled="true" name="upload['.$id_type.']"'.(($upload=='oui')?' checked="true"':'').'/>';
+	  $vals[] = '<form id="form_'.$id_type.'_upload" action="'.generer_url_action('types_documents_check_upload',"redirect=$redirect").'" method="post">
+<input type="checkbox" onchange="this.form.submit()" name="upload_'.$id_type.'"'.(($upload=='oui')?' checked="true"':'').'/>
+
+	               <input type="hidden" name="id_auteur" value="'.$connect_id_auteur.'"/>
+                       <input type="hidden" name="date_comp" value="'.date('Ymd').'"> 
+                       <input type="hidden" name="hash" value="'.calculer_action_auteur("types_documents ".date('Ymd')).'"/>
+                       <input type="hidden" name="id_type" value="'.$id_type.'"/>
+</form>';
 	  $vals[] = $mime;
-	  $vals[] = $inclus;
+	  $vals[] = '<form id="form_'.$id_type.'_inclus" action="'.generer_url_action('types_documents_inclus',"redirect=$redirect").'" method="post">
+<select onchange="this.form.submit()" name="inclus_'.$id_type.'"/>
+<option value="non" '.(($inclus=='non')?'selected="true"':'').'>'._T('non').'</option>
+<option value="image" '.(($inclus=='image')?'selected="true"':'').'>'._T('image').'</option>
+<option value="embed" '.(($inclus=='embed')?'selected="true"':'').'>'._T('embed').'</option>
+</select>
+	               <input type="hidden" name="id_auteur" value="'.$connect_id_auteur.'"/>
+                       <input type="hidden" name="date_comp" value="'.date('Ymd').'"> 
+                       <input type="hidden" name="hash" value="'.calculer_action_auteur("types_documents ".date('Ymd')).'"/>
+                       <input type="hidden" name="id_type" value="'.$id_type.'"/>
+</form>';
 	  
 	  list($count) = spip_abstract_fetsel($s_count,$f_count,array("id_type=$id_type"));
-	  $vals[] = $count;
+	  $vals[] = ($count)?$count:'0';
 
 	  if($count == 0) {
-		$vals[] = '<form id="form_'.$id_type.'" action="'.generer_url_action('types_documents_delete',"redirect=$redirect").'" method="post">
+		$vals[] = '<form id="form_'.$id_type.'_delete" action="'.generer_url_action('types_documents_delete',"redirect=$redirect").'" method="post">
 	               <input type="hidden" name="id_auteur" value="'.$connect_id_auteur.'"/>
                        <input type="hidden" name="date_comp" value="'.date('Ymd').'"> 
                        <input type="hidden" name="hash" value="'.calculer_action_auteur("types_documents ".date('Ymd')).'"/>
