@@ -47,6 +47,30 @@ function critere_recherche($idb, &$boucles, $crit) {
 		critere_recherche_dist($idb, $boucles, $crit);
 }
 
+function mnogo_querystring($recherche,$debut,$nombre){
+	$default_qs=array('q'=>'','m'=>'bool','wm'=>'wrd','sp'=>1,'sy'=>1,'wf'=>'2221','type'=>'','ul'=>'','fmt'=>'xml','np'=>0,'ps'=>10,'GroupBySite'=>'no');
+	$key_translate = array('recherche'=>'q','site'=>'ul');
+
+	foreach($_REQUEST as $key=>$value){
+		if (isset($key_translate[$key]))
+			$key = $key_translate[$key];
+		if (isset($default_qs[$key]))
+			$default_qs[$key] = $value;
+	}
+	$default_qs['fmt'] = 'xml'; // obligatoire
+	// remplacer les operateurs ET,AND,OR,OU par leur forme & |
+	$default_qs['q'] = urlencode(mnogo_formate_recherche(urldecode($recherche)));
+	
+	// gerer les pages
+	$default_qs['ps'] = max(100,$nombre);
+	$default_qs['np'] = (int)floor($debut/$default_qs['ps']);
+
+	$req = "";
+	foreach($default_qs as $key=>$value)
+		$default_qs[$key]=$key."=".$value;
+	return implode("&",$default_qs);
+}
+
 function mnogo_formate_recherche($recherche){
 	$recherche = trim($recherche);
 	$recherche = preg_replace(',\s(ET|AND)\s,',' & ',$recherche);
@@ -56,8 +80,9 @@ function mnogo_formate_recherche($recherche){
 }
 
 function mnogo_hash($recherche=NULL){
-	if ($recherche==NULL) $recherche = mnogo_formate_recherche(_request('recherche'));
-	$h = substr(md5($recherche), 0, 16);
+	if ($recherche==NULL) $recherche = _request('recherche');
+	$query = mnogo_querystring($recherche, 0,10);
+	$h = substr(md5($query), 0, 16);
 	return $h;
 }
 function hash_where($recherche=NULL){

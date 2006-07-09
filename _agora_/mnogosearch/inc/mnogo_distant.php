@@ -24,29 +24,6 @@ function mnogo_verifier_base(){
 	ecrire_metas();
 }
 	
-function mnogo_querystring($recherche,$debut,$nombre){
-	$default_qs=array('q'=>'','m'=>'bool','wm'=>'wrd','sp'=>1,'sy'=>1,'wf'=>'2221','type'=>'','ul'=>'','fmt'=>'xml','np'=>0,'ps'=>10,'GroupBySite'=>'no');
-	$key_translate = array('recherche'=>'q','site'=>'ul');
-
-	foreach($_REQUEST as $key=>$value){
-		if (isset($key_translate[$key]))
-			$key = $key_translate[$key];
-		if (isset($default_qs[$key]))
-			$default_qs[$key] = $value;
-	}
-	$default_qs['fmt'] = 'xml'; // obligatoire
-	// remplacer les operateurs ET,AND,OR,OU par leur forme & |
-	$default_qs['q'] = urlencode(mnogo_formate_recherche(urldecode($recherche)));
-	
-	// gerer les pages
-	$default_qs['ps'] = max(100,$nombre);
-	$default_qs['np'] = (int)floor($debut/$default_qs['ps']);
-
-	$req = "";
-	foreach($default_qs as $key=>$value)
-		$default_qs[$key]=$key."=".$value;
-	return implode("&",$default_qs);
-}
 
 function mnogo_getresults($recherche, $debut, $nombre){
 	global $tables_principales;
