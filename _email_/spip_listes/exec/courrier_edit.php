@@ -39,6 +39,15 @@ global $id_message;
 $nomsite=lire_meta("nom_site"); 
 $urlsite=lire_meta("adresse_site"); 
 
+
+	if ($new == "oui") { 
+	$statut = 'redac'; 
+	$type = 'nl'; 
+	$query = "INSERT INTO spip_messages (titre, date_heure, statut, type, id_auteur) VALUES ('".addslashes(filtrer_entites(_T('texte_nouveau_message')))."', NOW(), '$statut', '$type', $connect_id_auteur)"; 
+	$result = spip_query($query); 
+	$id_message = spip_insert_id(); 
+	spip_query("INSERT INTO spip_auteurs_messages (id_auteur,id_message,vu) VALUES ('$connect_id_auteur','$id_message','oui')"); 
+	}
  
 // Admin SPIP-Listes
 debut_page("Spip listes", "redacteurs", "spiplistes");

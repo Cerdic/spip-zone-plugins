@@ -387,20 +387,19 @@ if ($statut == 'redac' AND $type =='nl' ){
 
 	echo "<br /><br />";
 
-	$forum_retour = urlencode("?exec=spiplistes&mode=courrier&id_message=$id_message");
-
-
-	echo "\n<div align='center'>";
-		icone(_T('icone_poster_message'), 'forum_envoi.php3?statut=perso&adresse_retour='.$forum_retour.'&id_message=$id_message&titre_message='.urlencode($titre), 'forum-interne-24.gif', 'creer.gif');
-	echo "</div>";
-    
 	
+
+
+    
+	 echo "<br /><br />\n<div align='center'>";
+	    icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=perso&id_message=$id_message&titre_message=".urlencode($titre)."&url=" . generer_url_retour("gerer_courrier","id_message=$id_message")), "forum-interne-24.gif", "creer.gif");
+	    echo  "</div>\n<p align='left'>";
 
 	echo "<p align='left'>";
 
 	$query_forum = "SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' AND id_parent=0 ORDER BY date_heure DESC LIMIT 0,20";
 	$result_forum = spip_query($query_forum);
-	afficher_forum($result_forum, $forum_retour);
+	afficher_forum($result_forum, "gerer_courrier","id_message=$id_message");
 
 }//while
 
