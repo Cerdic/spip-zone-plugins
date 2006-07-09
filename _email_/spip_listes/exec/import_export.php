@@ -279,7 +279,7 @@ debut_droite("messagerie");
     												
     												 
     												 if($GLOBALS['suppl_abo'] !='non'){
-    												 $sub_report .= "<span style='color:#090;margin-bottom:5px'>".$mel."</span> &nbsp;(abo)<br />\n" ;
+    												 $sub_report .= "<span style='color:#090;margin-bottom:5px'>".$mel."</span><br />\n" ;
     												 $query="INSERT INTO spip_auteurs_articles (id_auteur,id_article) VALUES ('$id_auteur','$val')";
     												 }
     												 $result=spip_query($query);
@@ -407,7 +407,7 @@ debut_droite("messagerie");
 			                  else $checked = "";
 			    echo "<input type=\"radio\" name=\"export_id\"   value=\"".$id_article."\"$checked>$titre <br />\n"; 
       }      
-	   echo "<input type=\"radio\" name=\"export_id\"  value=\"abo_sans_liste\"$checked><strong>Abonn&eacute;s à aucune liste</strong> <br />\n"; 
+	   echo "<input type=\"radio\" name=\"export_id\"  value=\"abo_sans_liste\"$checked><strong>Abonn&eacute;s &agrave; aucune liste</strong> <br />\n"; 
 	   echo "<input type=\"radio\" name=\"export_id\"  value=\"desabo\"$checked><strong>D&eacute;sabonn&eacute;s</strong> <br />\n"; 
 	   echo "<input type='submit' name='export_txt' class='fondo' value='"._T('bouton_valider')."' />\n";
 	   echo "</form>\n";
