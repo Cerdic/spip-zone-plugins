@@ -8,7 +8,7 @@
 	<input type="text" class="forml" name="recherche" id="recherche" value="[(#ENV{recherche}|sinon{<:info_rechercher:>" onfocus="this.value='';})]" />
 	<label for="site"><:info_site:></label>
   <select name="site" class="forml" id="site">
-    <option value=""           [(#ENV{site}|=={''}?{' ',''})selected="selected"]>Tous la galaxie</option>
+    <option value=""           [(#ENV{site}|=={''}?{' ',''})selected="selected"]>Toute la galaxie</option>
     <option value="www.spip.net" [(#ENV{site}|=={'www.spip.net'}?{' ',''})selected="selected"]>www.spip.net</option>
     <option value="www.spip-contrib.net" [(#ENV{site}|=={'www.spip-contrib.net'}?{' ',''})selected="selected"]>www.spip-contrib.net</option>
     <option value="www.spip-blog.net" [(#ENV{site}|=={'www.spip-blog.net'}?{' ',''})selected="selected"]>www.spip-blog.net</option>
