@@ -110,9 +110,9 @@ function exec_config_types_documents() {
 	  $vals[] = $mime;
 	  $vals[] = '<form id="form_'.$id_type.'_inclus" action="'.generer_url_action('types_documents_inclus',"redirect=$redirect").'" method="post">
 <select onchange="this.form.submit()" name="inclus_'.$id_type.'"/>
-<option value="non" '.(($inclus=='non')?'selected="true"':'').'>'._T('non').'</option>
-<option value="image" '.(($inclus=='image')?'selected="true"':'').'>'._T('image').'</option>
-<option value="embed" '.(($inclus=='embed')?'selected="true"':'').'>'._T('embed').'</option>
+<option value="non" '.(($inclus=='non')?'selected="true"':'').'>'._T('types_documents_inclus:non').'</option>
+<option value="image" '.(($inclus=='image')?'selected="true"':'').'>'._T('types_documents_inclus:image').'</option>
+<option value="embed" '.(($inclus=='embed')?'selected="true"':'').'>'._T('types_documents_inclus:embed').'</option>
 </select>
 	               <input type="hidden" name="id_auteur" value="'.$connect_id_auteur.'"/>
                        <input type="hidden" name="date_comp" value="'.date('Ymd').'"> 

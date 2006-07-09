@@ -6,12 +6,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'help' => 'Par d&eacute;faut, SPIP permet d\'associer que certain type de documents aux articles et rubriques. Tous les autres sont automatiquement mis dans un fichier zip pour des question de s&eacutes;curit&eacute;.
 
 Cette page permet d\'ajouter des types de documents permis, de changer leur logo par d&eacute;faut, etc...',
-	'type' => 'Type',
-	'extension' => 'Extension',
-	'description' => 'Description',
-	'permission' => 'Permis?',
-	'mime' => 'Mime Type',
-	'nombre_documents' => 'Nombre de Documents',
-	'effacer' => 'Effacer'
+									   'type' => 'Type',
+									   'extension' => 'Extension',
+									   'description' => 'Description',
+									   'permission' => 'Permis?',
+									   'mime' => 'Mime Type',
+									   'nombre_documents' => 'Nombre de Documents',
+									   'effacer' => 'Effacer',
+									   'non' => 'non',
+									   'embed' => 'embed',
+									   'image' => 'image'
 );
 ?>
