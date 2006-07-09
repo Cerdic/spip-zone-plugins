@@ -248,68 +248,69 @@ $choses_possibles['messages'] = array(
 
 function afficher_liste_messages($choses,$nb_aff=20) {
 
-  $query = 'SELECT id_message,titre,type,date_heure,statut FROM spip_messages as messages WHERE messages.id_message'.((count($choses))?(' IN('.calcul_in($choses).')'):'');
+  $query = 'SELECT id_message,titre,type,date_heure,statut FROM spip_messages as messages WHERE messages.id_message'.((count($choses))?(' IN('.calcul_in($choses).')'):''). " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : "99999");
   
-  $tranches =  afficher_tranches_requete($query, 3,'debut',false,$nb_aff);
   
-  if($tranches) {
+  $deb_aff = intval(_request('t_debut'));
 
-	echo "<div style='height: 12px;'></div>";
-	echo "<div class='liste'>";
-	bandeau_titre_boite2($titre_table, "stock_mail.gif");
-	
-	echo afficher_liste_debut_tableau();
+  $tranches =  afficher_tranches_requete(count($choses), 3,'debut',false,$nb_aff);
+  
+  echo "<div style='height: 12px;'></div>";
+  echo "<div class='liste'>";
+  bandeau_titre_boite2($titre_table, "stock_mail.gif");
+  
+  echo afficher_liste_debut_tableau();
 
-	echo $tranches;
+  if(count($choses) >= $nb_aff) echo $tranches;
+  
+  $result = spip_query($query);
+  $i = 0;
+  while ($row = spip_fetch_array($result)) {
+	$i++;
+	$vals = '';
 	
-	$result = spip_query($query);
-	$i = 0;
-	while ($row = spip_fetch_array($result)) {
-	  $i++;
-	  $vals = '';
-	  
-	  $id_message = $row['id_message'];
-	  $tous_id[] = $id_message;
-	  $titre = $row['titre'];
-	  $date = $row['date_heure'];
-	  $statut = $row['statut'];
-	  
-	  $vals[] = "<input type='checkbox' name='choses[]' value='$id_message' id='id_chose$i'/>";
-	  
-	  // Le titre (et la langue)
-	  $s = "<div>";
-	  
-	  $s .= '<a href="'.generer_url_ecrire('bloogletter',"mode=courrier&id_message=$id_message").'" style="display:block;">';
-	  
-	  $s .= typo($titre);
-	  $s .= "</a>";
-	  $s .= "</div>";
-	  
-	  $vals[] = $s;
-	  
-	  // La date
-	  $s = affdate_jourcourt($date);
-	  $vals[] = $s;
-	  
-	  // Le numero (moche)
-	  if ($options == "avancees") {
-		$vals[] = "<b>"._T('info_numero_abbreviation')."$id_message</b>";
-	  }
-	  
-	  
-	  $table[] = $vals;
+	$id_message = $row['id_message'];
+	$tous_id[] = $id_message;
+	$titre = $row['titre'];
+	$date = $row['date_heure'];
+	$statut = $row['statut'];
+	
+	$vals[] = "<input type='checkbox' name='choses[]' value='$id_message' id='id_chose$i'/>";
+	
+	// Le titre (et la langue)
+	$s = "<div>";
+	
+	$s .= '<a href="'.generer_url_ecrire('bloogletter',"mode=courrier&id_message=$id_message").'" style="display:block;">';
+	
+	$s .= typo($titre);
+	$s .= "</a>";
+	$s .= "</div>";
+	
+	$vals[] = $s;
+	
+	// La date
+	$s = affdate_jourcourt($date);
+	$vals[] = $s;
+	
+	// Le numero (moche)
+	if ($options == "avancees") {
+	  $vals[] = "<b>"._T('info_numero_abbreviation')."$id_message</b>";
 	}
-	spip_free_result($result);
 	
-	if ($options == "avancees") { // Afficher le numero (JMB)
-	  if ($afficher_auteurs) {
-		$largeurs = array(11, '', 80, 100, 35);
-		$styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
-	  } else {
-		$largeurs = array(11, '', 100, 35);
-		$styles = array('', 'arial2', 'arial1', 'arial1');
-	  }
+	
+	$table[] = $vals;
+  }
+  spip_free_result($result);
+  
+  if ($options == "avancees") { // Afficher le numero (JMB)
+	if ($afficher_auteurs) {
+	  $largeurs = array(11, '', 80, 100, 35);
+	  $styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
 	} else {
+	  $largeurs = array(11, '', 100, 35);
+		$styles = array('', 'arial2', 'arial1', 'arial1');
+	}
+  } else {
 	  if ($afficher_auteurs) {
 		$largeurs = array(11, '', 100, 100);
 		$styles = array('', 'arial2', 'arial1', 'arial1');
@@ -317,12 +318,10 @@ function afficher_liste_messages($choses,$nb_aff=20) {
 		$largeurs = array(11, '', 100);
 		$styles = array('', 'arial2', 'arial1');
 	  }
-	}
-	afficher_liste($largeurs, $table, $styles);
-	
-	echo afficher_liste_fin_tableau();
-	
   }
+  afficher_liste($largeurs, $table, $styles);
+  
+  echo afficher_liste_fin_tableau();
 }
 
 //=============================AUTEURS=========================================

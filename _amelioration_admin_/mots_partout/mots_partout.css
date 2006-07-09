@@ -22,10 +22,6 @@
   background: #b8b8dd;
  }
 
-.liste ul li label._multistateradio {
-  border: 1px solid #c0c0ff;
-  border-right-width: 3px;
-  border-bottom-width: 3px;
-  background: #f0faff;
-  padding: 0 3px;
+.liste ul li select {
+	font-size: 90%;
 }

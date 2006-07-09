@@ -333,17 +333,7 @@ function exec_mots_partout() {
   /***********************************************************************/
 
   debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_MOTS_PARTOUT."/mots_partout.css");
-  echo'</script>
-
-		<script type="text/javascript" src="'. _DIR_PLUGIN_MOTS_PARTOUT.'/javascript/prototype.js"></script>
-		<script type="text/javascript" src="'. _DIR_PLUGIN_MOTS_PARTOUT.'/javascript/behaviour.js"></script>
-		<script type="text/javascript" src="'. _DIR_PLUGIN_MOTS_PARTOUT.'/javascript/effects.js"></script>
-		<script type="text/javascript" src="'. _DIR_PLUGIN_MOTS_PARTOUT.'/javascript/MultiStateRadio.js"></script>
-		<script type="text/javascript">
-
-		MultiStateRadio.apply(\'.liste ul\');
-
-  </script>';
+  echo'</script>';
 
 	  echo '<br><br><center>';
   gros_titre(_T('motspartout:titre_page'));
@@ -473,16 +463,8 @@ _T('motspartout:stricte').
 		  $s = typo($titre_mot);
 		  
 		  $vals["$s"] = calcul_numeros($show_mots,$id_mot,count($choses));
-		  
-		  $vals["<label for='id_mot".$id_mot."_vide'>"._T('motspartout:action')."?</label><input type='radio' id='id_mot".$id_mot."_vide' checked='true'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
-		  
-		  $vals["<label for='id_mot".$id_mot."_voir'>"._T('motspartout:voir')."</label><input type='radio' name='mots[$id_mot]' id='id_mot".$id_mot."_voir' value='voir'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
-		  
-		  $vals["<label for='id_mot".$id_mot."_cacher'>"._T('motspartout:cacher')."</label><input type='radio' name='mots[$id_mot]' id='id_mot".$id_mot."_cacher' value='cacher'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
-		  
-		  $vals["<label for='id_mot".$id_mot."_avec'>"._T('motspartout:ajouter')."</label><input type='radio' name='mots[$id_mot]' id='id_mot".$id_mot."_avec' value='avec'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
-		  
-		  $vals["<label for='id_mot".$id_mot."_sans'>"._T('motspartout:enlever')."</label><input type='radio' name='mots[$id_mot]' id='id_mot".$id_mot."_sans' value='sans'>"] = calcul_numeros($show_mots,$id_mot,count($choses));
+
+		  $vals['<select id="id_mot'.$id_mot.'" name="mots['.$id_mot.']"><option value="">--'._T('motspartout:action').'--</option><option value="voir">'._T('motspartout:voir').'</option><option value="cacher">'._T('motspartout:cacher').'</option><option value="avec">'._T('motspartout:ajouter').'</option><option value="sans">'._T('motspartout:enlever').'</option></select>'] = calcul_numeros($show_mots,$id_mot,count($choses));
 		  $table[] = $vals;
 		}
 		

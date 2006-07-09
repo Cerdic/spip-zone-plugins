@@ -8,7 +8,6 @@ n'importe quelle "objet" spip. Pour plus d'info, voir la contrib sur
 spip-contrib.net. L'interface etait destiné à l'origine à l'ajout de
 mots clefs sur les documents et s'inspire d'iPhoto. 
 
-
 [en] Interface for the private part of a SPIP web site to put tags on
 any "object". The interface was primarilly intended for using keywords
 on documents and is inspired from iPhoto.
