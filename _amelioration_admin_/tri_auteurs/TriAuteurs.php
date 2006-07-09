@@ -21,13 +21,25 @@ $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FI
 define('_DIR_PLUGIN_TRI_AUTEURS',(_DIR_PLUGINS.end($p)));
 
 function TriAuteurs_affiche_droite($arguments) {  
-  global $connect_statut, $connect_toutes_rubriques;
+  global $connect_statut, $connect_toutes_rubriques, $connect_id_rubrique;
   if(_request('exec') == 'articles') {
 	include('tri_auteurs_utils.php');
 	$table_pref = 'spip';
 	if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
+
+	include_spip('base/abstract_sql');
+	
+	$from = array('spip_articles');
+	$select = array('id_rubrique');
+	$where = array("id_article="._request('id_article'));
+	
+	$rez =  spip_abstract_fetch(spip_abstract_select($select,$from,$where));
+
+	$id_rubrique = $rez['id_rubrique'];
+	
 	if(($connect_statut == '0minirezo' AND $connect_toutes_rubriques)
-	   OR TriAuteurs_verifier_auteur($arguments['args']['id_article'])) {
+	   OR TriAuteurs_verifier_auteur($arguments['args']['id_article'])
+	   OR ($connect_statut == "0minirezo" AND isset($connect_id_rubrique[$id_rubrique]))) {
 	  
 	  //Installation
 	  if(!lire_meta('TriAuteurs:installe')) {
