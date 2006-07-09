@@ -2,73 +2,48 @@
 /**********************************************************
 * Ce squelette pour spip-listes    
 * Patron: nouveautes_formum.html, recence les derniers messages de forums
-*
+* Ce squelette affiche les articles et brèves publiés depuis la date passée en référence
+* Utilise une balise #DATE_MODIF_SITE
 * Précautions:                             
 * - ne pas dépasser les gabarits de plus de 10Ko
 * - ne pas placer du header html <html><body> ni de pied </body></html>
 * ils seront ajoutés automatiquement à l'envoi du mail 
 * - les urls et liens images seront automatiquement converties en absolues
 *  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+*
+* La balise suivante est utile pour générer un message vide si il n'y a pas de messages depuis la date indiquée
+* [ Affichage ici (#DATE_MODIF_FORUM|strtotime|>{[(#ENV{date}|strtotime)]}|?{' ',''})  Affichage ici ]
+*
 ***********************************************************/
 ]
-<style>
-body {
-  background: #f60;
-  color: #fff;
-  font-family: Arial, Verdana,sans-serif;
-  font-size: 0.9em;
-  text-align: left;
-}
-#container {
-  width: 500px;
-  background: #fff;
-  color: #000;
-  text-align: left;
-  margin: 0 auto;
-  padding: 15px;
-}
 
-h1 {
-  font-size: 1.2em;
-  border-bottom: 1px solid #666;
-}
-h2 {
-  font-size: 1.1em;
-  background: #ff9;
-}
+[ 
+  <div class="body" style="background: #fff;color: #ccc;font-family:'Trebuchet MS', Tahoma, Arial, Verdana,sans-serif;font-size: 0.9em;text-align: left;">
+	<div class="conteneur" style="width: 500px;background: #fff;color: #000;text-align: left;margin: 0 auto;padding: 15px;">
+	
+	<h1 style="font-size: 1.2em;border-bottom: 1px solid #666;">Lettre d'information</h1>  
+	
+	  	
+	<p>Bonjour, <br /> Voici les discussions démarrées sur le site  <a href="#URL_SITE_SPIP">#NOM_SITE_SPIP</a> [(#DATE|date_depuis)]</p>
+(#DATE_MODIF_FORUM|strtotime|>{[(#ENV{date}|strtotime)]}|?{' ',''})
+]
 
-h2.titre {
-  font-size: 1.2em;
-}
-
-#container a {
-  color: #f60;
-}
-a {
-  color: #000;
-}
-.extra {
-  color: #666;
-}
-</style>
-
-<div id="container">
-
-<h1>Lettre d'information</h1>  
- 
-  <p>Voici les discussions démarrées sur le site  <a href="#URL_SITE_SPIP">#NOM_SITE_SPIP</a> [(#DATE|date_depuis)]</p>
-  
-    
-<h2 class="titre">Messages</h2> 
-  
-  <BOUCLE_fil(FORUMS){age_relatif < 0 }{"<br>"}{par date}{inverse}>
-
-<h2>[(#TITRE)]</h2> 
-
-[(#DATE|affdate)] par [(#NOM|sinon{"anonyme"})] - <BOUCLE_rep(FORUMS){id_parent}{plat}> </BOUCLE_rep> #TOTAL_BOUCLE [(#TOTAL_BOUCLE|>{1}|?{'réponses' , 'réponse'})] </B_rep>
+	 	
+	 <B_fils>
+	 
+	 <h2 class="titre" style="background: #EEE;border: 1px solid #CCC;padding: 0.5em;margin-bottom: 1em;font-weight: bold;text-align: center;">Messages</h2> 
+	 
+	 <BOUCLE_fils(FORUMS){age_relatif < 0 }{par date}{inverse}>
+	
+	
+	 [<h3 style="font-size: 1.27em;font-weight: bold;color: #000;">(#TITRE|supprimer_numero)</h3>]
+	 <small>[(#DATE|affdate)], par  #NOM</small>
+	 <div  style="margin-top: 5px;margin-bottom: 2em;border: 1px solid #ccc;padding: 0.9em;font-size: 0.82em;line-height: 1.4em;" >
+	 #INTRODUCTION
+	 [(#DATE|affdate)] par [(#NOM|sinon{"anonyme"})] - <BOUCLE_rep(FORUMS){id_parent}{plat}> </BOUCLE_rep> #TOTAL_BOUCLE [(#TOTAL_BOUCLE|>{1}|?{'réponses' , 'réponse'})] </B_rep>
 
 <p>#INTRODUCTION</p>
-
+ <div class="extra">
 <BOUCLE_ArticleForum(ARTICLES){id_article}>
 <a href='[(#URL_SITE_SPIP)]/[(#URL_ARTICLE)]#forum[(#ID_FORUM)]' title='[(#TITRE)]'> 
 </BOUCLE_ArticleForum>
@@ -85,9 +60,18 @@ a {
 <//B_RubriqueForum>
 <//B_BreveForum>
 <//B_ArticleForum>
-Voir la discussion</a>
-</BOUCLE_fil>
+Voir la discussion</a></div>
+	 </div>  
+	 
+	 
+</BOUCLE_fils>	
 
-  
 
-</div>
+[
+(#DATE_MODIF_FORUM|strtotime|>{[(#ENV{date}|strtotime)]}|?{' ',''})
+	</div>
+	
+	
+	
+  </div>
+]
