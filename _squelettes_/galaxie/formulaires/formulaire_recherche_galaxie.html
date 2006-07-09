@@ -1,0 +1,21 @@
+<div class="formulaire_spip formulaire_recherche">
+<a name="formulaire_recherche" id="formulaire_recherche"></a>
+
+<form action="[(#ENV{lien})]" method="get">
+	[(#ENV{lien}|form_hidden)]
+	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
+	<label for="recherche"><:info_rechercher:></label>
+	<input type="text" class="forml" name="recherche" id="recherche" value="[(#ENV{recherche}|sinon{<:info_rechercher:>" onfocus="this.value='';})]" />
+	<label for="site"><:info_site:></label>
+  <select name="site" class="forml" id="site">
+    <option value=""           [(#ENV{site}|=={''}?{' ',''})selected="selected"]>Tous la galaxie</option>
+    <option value="www.spip.net" [(#ENV{site}|=={'www.spip.net'}?{' ',''})selected="selected"]>www.spip.net</option>
+    <option value="www.spip-contrib.net" [(#ENV{site}|=={'www.spip-contrib.net'}?{' ',''})selected="selected"]>www.spip-contrib.net</option>
+    <option value="www.spip-blog.net" [(#ENV{site}|=={'www.spip-blog.net'}?{' ',''})selected="selected"]>www.spip-blog.net</option>
+    <option value="zine.spip.org" [(#ENV{site}|=={'zine.spip.org'}?{' ',''})selected="selected"]>zine.spip.org</option>
+    <option value="forum.spip.org" [(#ENV{site}|=={'forum.spip.org'}?{' ',''})selected="selected"]>forum.spip.org</option>
+  </select>
+	<div class="spip_bouton"><input type="submit" value="Go !" /></div>
+</form>
+
+</div>

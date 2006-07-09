@@ -1,0 +1,21 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Recherche dans la galaxie SPIP
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->	
+	Cedric MORIN
+	</auteur>
+	<version>
+	0.10
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+Formulaire et squelette de recherche dans la galaxye SPIP
+_ Necessite le plugin mnoGoSearch et un serveur de recherche mnoGoSearch
+	</description>
+	<prefix> 
+	galaxie
+	</prefix>
+</plugin>
