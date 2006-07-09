@@ -10,4 +10,7 @@ function balise_MNOGO_TOTAL_dist($p) {
 	return $p;
 }
 
+function mnogo_nettoyer_resume($texte){
+	return preg_replace('/\s+[a-z]*\s*:\s*0\s*,/is',' ',$texte);
+}
 ?>
