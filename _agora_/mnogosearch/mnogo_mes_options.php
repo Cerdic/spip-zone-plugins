@@ -90,13 +90,13 @@ function hash_where($recherche=NULL){
 	
 	// Attention en MySQL 3.x il faut passer par HEX(hash)
 	// alors qu'en MySQL 4.1 c'est interdit !
-	/*$vers = spip_query("SELECT VERSION() AS v");
+	$vers = spip_query("SELECT VERSION() AS v");
 	$vers = spip_fetch_array($vers);
 	if (substr($vers['v'], 0, 1) >= 4
 	AND substr($vers['v'], 2, 1) >= 1 )
-		return "hash='$h'";
-	else*/
-	return  "HEX(hash)='$h'";
+		return  "HEX(hash)='$h'";
+	else
+		return "hash=0x$h";
 }
 
 function mnogo_checkresults($recherche, $debut, $nombre){
