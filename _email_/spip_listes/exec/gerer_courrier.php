@@ -159,7 +159,7 @@ if ($statut == 'redac') {
         <b>"._T('spiplistes:envoi_program')."</b><br />
         <a href='?exec=spip_listes'>["._T('spiplistes:voir_historique')."]</a></font></p>";
 			if ($expediteur == $connect_id_auteur  OR ($type == 'nl' AND $connect_statut == '0minirezo') OR ($type == 'auto' AND $connect_statut == '0minirezo')) {
-			icone (_T('icone_supprimer_message'), '?exec=gerer_courrier&detruire_message=$id_message', 'messagerie-24.gif', 'supprimer.gif');
+			icone (_T('icone_supprimer_message'), '?exec=spip_listes&detruire_message=$id_message', 'messagerie-24.gif', 'supprimer.gif');
 			echo "<br />";
 			}
 	}
@@ -358,7 +358,7 @@ if ($statut == 'redac' AND $type =='nl' ){
 	if ($expediteur == $connect_id_auteur  OR ($type == 'nl' AND $connect_statut == '0minirezo')) {
 	echo "<br /><table width='100%'><tr><td>";
 	echo "\n<table align='left'><tr><td>";
-	icone (_T('icone_supprimer_message'), '?exec=spiplistes&detruire_message='.$id_message, 'messagerie-24.gif');
+	icone (_T('icone_supprimer_message'), '?exec=spip_listes&detruire_message='.$id_message, 'messagerie-24.gif');
 	echo "</td></tr></table>";
 	}
 

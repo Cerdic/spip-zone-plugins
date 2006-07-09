@@ -41,6 +41,7 @@ include_ecrire ("inc_documents.php3");
 global $connect_statut;
 global $connect_toutes_rubriques;
 global $connect_id_auteur;
+global $supp_dest,$detruire_message;
  
 $nomsite=lire_meta("nom_site"); 
 $urlsite=lire_meta("adresse_site"); 
