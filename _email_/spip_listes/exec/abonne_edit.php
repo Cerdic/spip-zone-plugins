@@ -32,7 +32,7 @@ global $connect_statut;
 global $connect_toutes_rubriques;
 global $connect_id_auteur, $id_auteur;
 global $champs_extra, $confirm ;
-global $suppr_auteur , $id_article ; 
+global $suppr_auteur , $id_article, $effacer_definitif,$nom,$email ; 
  
 $nomsite=lire_meta("nom_site"); 
 $urlsite=lire_meta("adresse_site"); 
@@ -73,12 +73,13 @@ debut_droite("messagerie");
 
 
 
-if($effacer_definitif=$_POST['effacer_definitif']){
+if($effacer_definitif){
 debut_cadre_relief("redacteurs-poubelle-24.gif");
 spip_query("DELETE FROM spip_auteurs_articles WHERE id_auteur='$id_auteur'");
 spip_query("DELETE FROM spip_auteurs WHERE id_auteur='$id_auteur'");
 
 echo "$nom ($email) "._T('spiplistes:efface');
+echo "<p><a href='?exec=abonnes_tous'>Retour au suivi des abonnements</a><p>";
 fin_cadre_relief();
 }
 
@@ -125,6 +126,7 @@ if ($suppr_auteur AND $id_article) {
         echo "<h2> ".$nom." "._T('spiplistes:plus_abonne').$title." </h2>";
         $query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$suppr_auteur' AND id_article='$id_article'";
 	spip_query($query);
+	
 }
 
 
@@ -184,7 +186,7 @@ afficher_en_liste(_T('spiplistes:abonne_listes'), '../'._DIR_PLUGIN_SPIPLISTES.'
 if(!$effacer_definitif=$_POST['effacer_definitif']){
 debut_cadre_relief("$logo");
 echo "<h3>"._T('spiplistes:supprime_contact')."</h3>";
-echo "<form action='?exec=spiplistes&mode=abonne' method='post'>";
+echo "<form action='?exec=abonne_edit' method='post'>";
 echo "<p align='center'>";
 
 echo "<input type='submit' name='Valider' value='"._T('spiplistes:supprime_contact_base')."'>";

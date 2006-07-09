@@ -32,8 +32,9 @@ global $connect_statut;
 global $connect_toutes_rubriques;
 global $connect_id_auteur;
 global $type;
-global $new;
+global $new,$changer_statut,$statut,$tri,$cherche_auteur,$id_auteur;
  
+ $options = 'avancees' ;
  
 $nomsite=lire_meta("nom_site"); 
 $urlsite=lire_meta("adresse_site"); 
@@ -133,7 +134,7 @@ if ($cherche_auteur) {
 				echo "<li><font face='Verdana,Arial,Sans,sans-serif' size=2><b><font size=3>".typo($nom_auteur)."</font></b>";
 
 				if ($email_auteur) echo " ($email_auteur)";
-				echo " | <a href=\"spip_listes.php3?mode=abonne&id_auteur=$id_auteur\">"._T('spiplistes:choisir')."</a>";
+				echo " | <a href=\"?exec=gerer_abonne&id_auteur=$id_auteur\">"._T('spiplistes:choisir')."</a>";
 
 				if (trim($bio_auteur)) {
 					echo "<br /><font size=1>".couper(propre($bio_auteur), 100)."</font>\n";
@@ -213,7 +214,7 @@ echo"</div>";
 	$result = spip_query($query);
 
 	if (spip_num_rows($result) > 0) {
-		echo "<form action='?exec=abonne_tous' METHOD='post'>";
+		echo "<form action='?exec=abonnes_tous' METHOD='post'>";
         echo "<div align=center>\n";
 		echo "<input type='text' name='cherche_auteur' class='fondl' value='' size='20'>";
 		echo " <input type='submit' name='Chercher' value='"._T('bouton_chercher')."' class='fondo'>";
@@ -229,7 +230,7 @@ echo "<p>";
 
 // auteur
 
-$retour = "?exec=abonne_tous&";
+$retour = "?exec=abonnes_tous&";
 
 //changer de statut
 
@@ -374,13 +375,13 @@ echo "<td width='20'>";
 	if ($tri=='statut')
 		echo $img;
 	else
-		echo "<a href='?exec=abonne_tous&tri=statut' title='"._T('lien_trier_statut')."'>$img</a>";
+		echo "<a href='?exec=abonnes_tous&tri=statut' title='"._T('lien_trier_statut')."'>$img</a>";
 
 echo "</td><td>";
 	if ($tri == '' OR $tri=='nom')
 		echo '<b>'._T('info_nom').'</b>';
 	else
-		echo "<a href='?exec=abonne_tous&tri=nom' title='"._T('lien_trier_nom')."'><b>"._T('info_nom')."</b></a>";
+		echo "<a href='?exec=abonnes_tous&tri=nom' title='"._T('lien_trier_nom')."'><b>"._T('info_nom')."</b></a>";
 
 if ($options == 'avancees') echo "</td><td colspan='2'><b>"._T('info_contact')."</b>";
 echo "</td><td>";
