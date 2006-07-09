@@ -382,14 +382,18 @@ function exec_mots_partout() {
   echo"    </button>
 	</td>";
 
+  if(count($choses)>0) {
 	echo '<td colspan=2><label for="nb_aff">'._T('motspartout:par').':</label><select name="nb_aff">';
+	
+	for($nb = 10;$nb<count($choses);$nb=$nb+10)
+	  echo "<option value=\"$nb\"".(($nb == $nb_aff)?'selected="true"':'').">$nb</option>";
+	
+	echo '</select></td>';
+  } else {
+	echo '<td colspan=2></td>';
+  }
 
-  for($nb = 10;$nb<count($choses);$nb=$nb+10)
-					 echo "<option value=\"$nb\"".(($nb == $nb_aff)?'selected="true"':'').">$nb</option>";
-
-  echo '</select></td>';
-
-					 echo "	</table></div>";
+	echo "	</table></div>";
   fin_cadre_enfonce();
 
   $redirect = generer_url_ecrire('mots_partout',"limit=$limit&identifiant_limit=$id_limit&nb_aff=$nb_aff");
