@@ -38,7 +38,7 @@
 				[<div class="cartouche">
 					<h1 class="surtitre"><:resultats_recherche:></h1>
 					<p class="titre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</p>
-					<h2 class="soustitre">#MNOGO_RESUME_RESULTATS</h2>
+					<h2 class="soustitre">[(#MNOGO_RESUME_RESULTATS|mnogo_nettoyer_resume|couper{512})]</h2>
 					<small>#GRAND_TOTAL r&eacute;sultats</small>
 				[<div class="pagination">(#PAGINATION)</div>]
 				</div>]
