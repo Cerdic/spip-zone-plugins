@@ -117,4 +117,48 @@ function Agenda_affiche_full($i)
 	return $texte;
 }
 
+function Agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui'){
+	$date_debut = strtotime($date_debut);
+	$date_fin = strtotime($date_fin);
+	$s = "";
+	if (($d=date("Y-m-d",$date_debut))==date("Y-m-d",$date_fin))
+	{ // meme jour
+		$s = affdate_jourcourt($d);
+		if ($horaire=='oui'){
+			$s .= " ".($hd=date("H:i",$date_debut));
+			if ($hd!=($hf=date("H:i",$date_fin)))
+				$s .= "-$hf";
+		}
+	}
+	else if ((date("Y-m",$date_debut))==date("Y-m",$date_fin))
+	{ // meme annee et mois, jours differents
+		$d=date("Y-m-d",$date_debut);
+		$s = affdate_jourcourt($d);
+		if ($horaire=='oui')
+			$s .= " ".($hd=date("H:i",$date_debut));
+		$s .= " " . _T('agenda:evenement_date_au').date(($horaire=='oui')?"d  H:i ":"d ",$date_fin);
+	}
+	else if ((date("Y",$date_debut))==date("Y",$date_fin))
+	{ // meme annee, mois et jours differents
+		$d=date("Y-m-d",$date_debut);
+		$s = affdate_jourcourt($d);
+		if ($horaire=='oui')
+			$s .= " ".date("H:i",$date_debut);
+		$d = date("Y-m-d",$date_fin);
+		$s .= " "._T('agenda:evenement_date_au').affdate_jourcourt($d);
+		if ($horaire=='oui')
+			$s .= " ".date("H:i",$date_fin);
+	}
+	else
+	{ // tout different
+		$s = affdate($d);
+		if ($horaire=='oui')
+			$s .= " ".date("(H:i)",$date_debut);
+		$d = date("Y-m-d",$date_fin);
+		$s .= " "._T('agenda:evenement_date_au').affdate($d);
+		if ($horaire=='oui')
+			$s .= " ".date("(H:i)",$date_fin);
+	}
+	return $s;	
+}
 ?>
