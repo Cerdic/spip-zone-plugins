@@ -683,7 +683,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 		$nb_mots = 0;
 		$select = "";	
 		$select .= "<select name='evenement_groupe_mot_select_{$id_groupe}[]' class='fondl verdana1 agenda_mot_cle_select' $multiple>\n";
-		$select .= "\n<option value='x' style='font-variant: small-caps;' disabled='disabled'>".supprimer_numero($row['titre'])."</option>";
+		$select .= "\n<option value='x' style='font-variant: small-caps;' >".supprimer_numero($row['titre'])."</option>";
 
 		$res2= spip_query("SELECT * FROM spip_mots WHERE id_groupe=".spip_abstract_quote($id_groupe)." ORDER BY titre");
 		while ($row2 = spip_fetch_array($res2,SPIP_ASSOC)){
