@@ -1,4 +1,8 @@
 <?php
+global $repertoire_squelettes_alternatifs;
+global $styleListeSwitcher;
+global $afficherSeulementPourLesAdmins;
+
 // Répertoire contenant les répertoires squelettes à tester
 $repertoire_squelettes_alternatifs ='squelettes-test';
 
