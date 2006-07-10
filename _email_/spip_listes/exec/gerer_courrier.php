@@ -44,6 +44,7 @@ $nomsite=lire_meta("nom_site");
 $urlsite=lire_meta("adresse_site"); 
 
  
+ 
 // Admin SPIP-Listes
 debut_page("Spip listes", "redacteurs", "spiplistes");
 
@@ -72,61 +73,70 @@ spip_listes_raccourcis();
 
 creer_colonne_droite();
 
-
 debut_droite("messagerie");
 
 
 // MODE COURRIER: Affichage d'un courrier---------------------------------------
 
 
+// Ajouter si on le connait le destinataire
+// on fait ca comme un sale directos dans le texte du message :))   
+$query = "SELECT texte FROM spip_messages WHERE id_message=$id_message";
+$result = spip_query($query);
 
-$query_message = "SELECT * FROM spip_messages WHERE id_message=$id_message";
-$result_message = spip_query($query_message);
-        while($row = spip_fetch_array($result_message)) {
-		$type = $row['type'];
+while($row = spip_fetch_array($result)) {	
+	if(($choisir_dest OR $envoi_test)){
+	if($envoi_test){
+	 $destinataire = $adresse_test ;
+	 global $table_prefix;
+		$query__ = "SELECT id_auteur FROM ".$table_prefix."_auteurs WHERE email = '$destinataire' ORDER BY id_auteur ASC ";
+		if(spip_num_rows(spip_query($query__))==0){
+		$erreur_mail_pas_bon = "<h3>"._T('spiplistes:sans_envoi')."</h3>\n"; 
 		}
-	if (!$connect_statut == "0minirezo"){
-	echo "<b>"._T('avis_non_acces_message')._T('info_acces_refuse')."</b><p>";
-	fin_page();
-	exit;
+
 	}
-
-
-
-if ($modifier_message == "oui") {	
-    $titre = addslashes($titre);
-	$texte = addslashes($texte);
-	spip_query("UPDATE spip_messages SET titre='$titre', texte='$texte' WHERE id_message='$id_message'");	
+	$texte_mod = "__bLg__".$destinataire."__bLg__".$row['texte'] ;
+	$texte_mod = addslashes($texte_mod);
+	if(!$erreur_mail_pas_bon)
+	spip_query("UPDATE spip_messages SET texte='$texte_mod' WHERE id_message='$id_message'");
+	}
 }
 
-
-
-if ($change_statut) {
-spip_query("UPDATE spip_messages SET statut='$change_statut' WHERE id_message='$id_message'");
+if(intval($id_message)){
+	
+	if ($modifier_message == "oui") {	
+	    $titre = addslashes($titre);
+		$texte = addslashes($texte);
+		spip_query("UPDATE spip_messages SET titre='$titre', texte='$texte' WHERE id_message='$id_message'");	
+	}
+	
+	if ($change_statut) {
+	spip_query("UPDATE spip_messages SET statut='$change_statut' WHERE id_message='$id_message'");
+	}
+	
+	if ($supp_dest) {
+		spip_query("DELETE FROM spip_auteurs_messages WHERE id_message='$id_message' AND id_auteur='$supp_dest'");
+	}
+	
+	// A sécuriser ?
+	if ($envoi) {
+	 spip_query("UPDATE spip_messages SET statut='encour' WHERE id_message='$id_message'");
+	}
+	
 }
 
-if ($supp_dest) {
-	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message='$id_message' AND id_auteur='$supp_dest'");
-}
-
-// A sécuriser ?
-if ($envoi) {
- spip_query("UPDATE spip_messages SET statut='encour' WHERE id_message='$id_message'");
-}
-
-//
-//
+//le message
 
 $query_m = "SELECT * FROM spip_messages WHERE id_message=$id_message";
 $result_m = spip_query($query_m);
 
 while($row = spip_fetch_array($result_m)) {
 	$id_message = $row['id_message'];
+	
 	$date_heure = $row["date_heure"];
 	$date_fin = $row["date_fin"];
 	$titre = typo($row["titre"]);
 	$texte = $row["texte"];
-	//$texte = propre($row["texte"]);
 	$type = $row["type"];
 	$statut = $row["statut"];
 	$page = $row["page"];
@@ -136,144 +146,116 @@ while($row = spip_fetch_array($result_m)) {
 	$lejour=journum($row['date_heure']);
 	$lemois = mois($row['date_heure']);		
 	$lannee = annee($row['date_heure']);		
-
 	
-		$le_type = _T('spiplistes:message_type');
-		$la_couleur = "red";	
+	$le_type = _T('spiplistes:message_type');
+	$la_couleur = "red";
+		
+	//trouver un dest dans le texte
+			
+	$destinataire = ''; //secu
+	eregi("^__bLg__[0-9@\.A-Z_-]+__bLg__", $texte, $res );
+	$destinataire = str_replace("__bLg__","",$res[0]);
+		
+	if($destinataire != ''){
+		//est-ce une liste ?
+		if(intval($destinataire)){
+		$query_ = spip_query ("SELECT * FROM spip_articles WHERE id_article = '$destinataire' ");
+		$row = spip_fetch_array($query_);
+		$destinataire = 'la liste : "'.$row['titre'].'"';
+		//echo $liste_destinataire ;
+		}elseif($destinataire == 'tous'){
+		//est-ce l'ensemble des abonnés
+			$destinataire = _T('spiplistes:abonees');
+			}elseif(email_valide_bloog($destinataire)){				
+				$destinataire = "l'email de test : ".$destinataire ;
+				}else{$erreur_mail == 'oui';}
+	}
 	
-    debut_cadre_relief('../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail_send.gif');
+
+	debut_cadre_relief('../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail_send.gif');
 
 
-
-if ($statut == 'redac') {
-		if (!$envoi && $destinataire) 
+	if ($statut == 'redac' && !$erreur_mail_pas_bon) {
+		if ($destinataire!='') {
 		echo "<font face='Verdana,Arial,Sans,sans-serif' size=2 color='red'>
-		<b>"._T('spiplistes:message_presque_envoye')."<br />"._T('spiplistes:confirme_envoi')."</b></font>";
-		elseif (!$envoi) 
-		echo "<br /><font face='Verdana,Arial,Sans,sans-serif' size=2 color='red'>
-		<b>"._T('spiplistes:message_en_cours')." <br />"._T('spiplistes:modif_envoi')."</b></font>";
+		<b>"._T('spiplistes:message_presque_envoye')."</b></font> <br />  &agrave; destination de $destinataire<br />"._T('spiplistes:confirme_envoi');
+		}else {
+		echo "<br /><font face='Verdana,Arial,Sans,sans-serif' size=2 color='red'><b>"._T('spiplistes:message_en_cours')." <br />"._T('spiplistes:modif_envoi')."</b></font>";
+		}
+    }elseif($erreur_mail_pas_bon){
+    echo $erreur_mail_pas_bon ;
+    echo "<br /><font face='Verdana,Arial,Sans,sans-serif' size=2 color='red'><b>"._T('spiplistes:message_en_cours')." <br />"._T('spiplistes:modif_envoi')."</b></font>";
     }
 
     if ($statut == 'encour'){
-        echo "<p><font face='Verdana,Arial,Sans,sans-serif' size=2 color='red'>
-        <b>"._T('spiplistes:envoi_program')."</b><br />
-        <a href='?exec=spip_listes'>["._T('spiplistes:voir_historique')."]</a></font></p>";
-			if ($expediteur == $connect_id_auteur  OR ($type == 'nl' AND $connect_statut == '0minirezo') OR ($type == 'auto' AND $connect_statut == '0minirezo')) {
-			icone (_T('icone_supprimer_message'), '?exec=spip_listes&detruire_message=$id_message', 'messagerie-24.gif', 'supprimer.gif');
-			echo "<br />";
+        if ($expediteur == $connect_id_auteur  OR ($type == 'nl' AND $connect_statut == '0minirezo') OR ($type == 'auto' AND $connect_statut == '0minirezo')) {
+			echo "<div style='float:right'>";
+			icone (_T('icone_supprimer_message'), '?exec=spip_listes&detruire_message='.$id_message, 'messagerie-24.gif', 'supprimer.gif');
+			echo "</div>";
 			}
+        echo "<p><font face='Verdana,Arial,Sans,sans-serif' size=2 color='red'>
+        <b>"._T('spiplistes:envoi_program')."</b></font><br />  &agrave; destination de $destinataire<br /><br />
+        <a href='?exec=spip_listes'>["._T('spiplistes:voir_historique')."]</a></p>";
 	}
 
-	if ($statut == 'publie')  
+	if ($statut == 'publie')  {
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size=2 color='red'>
 	<b>"._T('spiplistes:message_arch')."</b></font>";
-
-
-
+	echo "<br />envoy&eacute; &agrave $destinataire le $lejour/$lemois/$lannee";
+	}
 
     fin_cadre_relief();
-
+	
+	//ne pas afficher le destinataire
+	$texte = eregi_replace("__bLg__[0-9@\.A-Z_-]+__bLg__","",$texte);
+	$texte = stripslashes($texte);
+	$texte_original = $texte;
+	
+	
+	// ne pas faire ca si y'a du htlm (lent, erreur spip class truc), à revoir
+	$temp_style = ereg("<style[^>]*>[^<]*</style>", $texte, $style_reg);
+  	if (isset($style_reg[0])) $style_str = $style_reg[0]; 
+                         else $style_str = "";
+  	$texte = ereg_replace("<style[^>]*>[^<]*</style>", "__STYLE__", $texte);
+	$texte = propre($texte); // pb: enleve aussi <style>...  
+	$texte = propre_bloog($texte);
+	$texte = ereg_replace("__STYLE__", $style_str, $texte);
+	
+	
 	echo "<div style='margin-top:20px;border: 1px solid $la_couleur; background-color: $couleur_fond; padding: 5px;'>"; // debut cadre de couleur
 	//debut_cadre_relief("messagerie-24.gif");
 	echo "<table width=100% cellpadding=0 cellspacing=0 border=0>";
 	echo "<tr><td width=100%>";
+if ($statut=="redac") {
+		echo "<div style='float:right'>";
+		icone (_T('icone_modifier_message'),'?exec=courrier_edit&id_message='.$id_message, 'messagerie-24.gif');
+		echo "</div>";	
+			}
 
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size=2 color='$la_couleur'><b>$le_type</b></font><br />";
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size=5><b>$titre</b></font>";
+	echo "<font face='Verdana,Arial,Sans,sans-serif'><h1>$titre</h1></font>";
 	
-
-    if ($statut == 'redac') {
-		if ($expediteur == $connect_id_auteur OR ($type == 'nl' AND $connect_statut == '0minirezo')) {
-			echo "\n</td> <td align='right'>";
-			if (!$envoi) 
-		icone (_T('icone_modifier_message'),'?exec=courrier_edit&id_message='.$id_message, 'messagerie-24.gif');
-			echo "</td><tr></table>";
-		}
-	}
-	
-	
-
-	echo "<p>";
-
-    //////////////////////////////////////////////////////
-	// Le message lui-meme
-	//
-  $texte = eregi_replace("__bLg__[0-9@\.A-Z_-]+__bLg__","",$texte);
-	$texte = stripslashes($texte);
-	$texte_original = $texte;
-	
-	$temp_style = ereg("<style[^>]*>[^<]*</style>", $texte, $style_reg);
-  if (isset($style_reg[0])) $style_str = $style_reg[0]; 
-                         else $style_str = "";
-  $texte = ereg_replace("<style[^>]*>[^<]*</style>", "__STYLE__", $texte);
-
-$texte = propre($texte); // pb: enleve aussi <style>...  
-$texte = propre_bloog($texte);
-
-  $texte = ereg_replace("__STYLE__", $style_str, $texte);
-
-  echo "<div align='left'>";
-	echo "<table width=100% cellpadding=0 cellspacing=0 border=0>";
-	echo "<tr><td>";
-
 	echo "<br /><font face='Georgia,Garamond,Times,serif' size=3>";
 	debut_boite_info();
-  echo "<h2> "._T('spiplistes:version')." HTML </h2>";
-  echo "<iframe src=\"?exec=courrier_preview&id_message=$id_message\" width=\"100%\" height=\"500\"></iframe>\n";
+	   echo "<h3>"._T('spiplistes:version')." HTML</h3><a href=\"".generer_url_ecrire('courrier_preview','id_message='.$id_message)."\">(Plein &eacute;cran)</a><br />\n";
+	  echo "<iframe src=\"?exec=courrier_preview&id_message=$id_message\" width=\"100%\" height=\"500\"></iframe>\n";
 	fin_boite_info();    
 	echo "<p>";
-  debut_boite_info();
-	echo "<h2> "._T('spiplistes:version')." "._T('spiplistes:val_texte')." </h2>";
+	  debut_boite_info();
+	echo "<h3> "._T('spiplistes:version')." "._T('spiplistes:val_texte')." </h3>";
     echo "<textarea name='texte' rows='20' class='formo' cols='40' wrap=soft>";
 	echo version_texte($texte);
 	echo "</textarea><p>\n";
 
 	fin_boite_info();
-	echo "</font>";
+	echo "</font><br />";
 
-	echo "</td></tr></table><p>";	
-	
-//////////////////////////////////////////////////////
-	// Newsletter?
-	//
-
-// Ajouter si on le connait le destinataire
-// on fait ca comme un sale directos dans le texte du message :))
-	
-if ($statut == 'redac' AND $type =='nl' ){     
-	
-	if(!$envoi && ($destinataire && $choisir_dest)){
-	$texte_original = "__bLg__".$destinataire."__bLg__".$texte_original ;
-	$texte_original = addslashes($texte_original);
-	spip_query("UPDATE spip_messages SET texte='$texte_original' WHERE id_message='$id_message'");
-	}
-	
-	// email de test
-	elseif($envoi_test){
-	//vérifier si l adresse est valide ?
-	// si l'abonnéest inscrit ?
-     
-     if(email_valide_bloog($adresse_test)){
-		$query = "SELECT id_auteur FROM ".$table_prefix."_auteurs WHERE email = '$adresse_test' ORDER BY id_auteur ASC ";
-		$result_in = spip_query($query);
-		$is_inscrit = spip_num_rows($result_in);
-			 if($is_inscrit > 0){
-			 $texte = "__bLg__".$adresse_test."__bLg__".$texte ;
-			 $texte = addslashes($texte);
-			 spip_query("UPDATE spip_messages SET texte='$texte' WHERE id_message='$id_message'");
-			 } else{$erreur_mail ='oui';}
-     
-     }  else{$erreur_mail = 'oui';}
- 
-	}
-
-
-	if(!$envoi){
-	
-	//envoi de test ?
+    if($statut=="redac"){
+    //envoi de test 
 	echo "<form action='?exec=gerer_courrier&id_message=".$id_message."' method='post'>";
 			debut_boite_info();
 			echo "<div style='font-size:12px;font-familly:Verdana,Garamond,Times,serif;color:#000000;'>";
+			if($destinataire==""){
 			echo "<b>"._T('spiplistes:envoi')."</b><p style='font-familly : Georgia,Garamond,Times,serif'>"._T('spiplistes:envoi_texte')."</p>";
 			debut_cadre_enfonce();
 			echo "<div style='font-size:12px;font-familly:Verdana,Garamond,Times,serif;color:#000000;'>";
@@ -282,32 +264,7 @@ if ($statut == 'redac' AND $type =='nl' ){
 			echo "</div>" ;
 			fin_cadre_enfonce() ;
 			
-			if($envoi_test){
-			echo "<h2>"._T('spiplistes:email_test')."</h2>" ;
-			}else{
-			echo "<h2>"._T('spiplistes:email_test_liste')."</h2>" ;
-			}
-	
-					
-					//trouver un dest dans le texte
-			
-	$query_mess = "SELECT * FROM spip_messages WHERE id_message=$id_message";
-	$result_mess = spip_query($query_mess);
-	
-		while($row4 = spip_fetch_array($result_mess)){
-		$texte = $row4['texte'] ;
-		$destinataires = ''; //secu
-		eregi("^__bLg__[0-9@\.A-Z_-]+__bLg__", $texte, $res );
-		$destinataires = str_replace("__bLg__","",$res[0]);
-		 //echo"destinataire >> $destinataires ";
-		// si pas de dest
-		
-			if($destinataires == ''){
-			
-				if($erreur_mail == 'oui'){
-				echo "<br />"._T('spiplistes:sans_envoi');
-				}else{
-				$list = spip_query ("SELECT * FROM spip_articles WHERE statut = 'liste' OR statut = 'inact' ");
+			$list = spip_query ("SELECT * FROM spip_articles WHERE statut = 'liste' OR statut = 'inact' ");
 				echo "<div style='font-size:14px;font-weight:bold'>"._T('spiplistes:destinataires')."</div>";
 				echo "<div style='float:right'><input type='submit' name='choisir_dest' value='"._T('spiplistes:choisir_cette')."' class='fondo'></div>";
 				echo "<select name='destinataire' >";
@@ -318,97 +275,27 @@ if ($statut == 'redac' AND $type =='nl' ){
 					echo "<option value='$id_article'>$titre</option>" ;
 					}
 				echo "</select>";
-				echo "</div>";
-				}
-				
-			}else{
-		
-			if($destinataires == 'tous'){
-			$vers = _T('spiplistes:abonees');
-			}else{
-				if(email_valide_bloog($destinataires)){
-				$vers = $destinataires ;
-				//echo "<h1>$vers</h1>";
 				}else{
-				//echo "->$vers";
-				$destinataires = intval($destinataires) ;
-				$desti = spip_query ("SELECT * FROM spip_articles WHERE id_article = '$destinataires' ");
-				$row = spip_fetch_array($desti);
-				$vers = $row['titre'];
+				echo "<div style='float:right'><input type='submit' name='envoi' value='"._T('spiplistes:envoyer')."' class='fondo'></div>";
+				$envoyer_a= _T('spiplistes:envoyer_a');
+			echo "<div style='font-size:14px;font-weight:bold'>".$envoyer_a." ".$destinataire."</div>";
+
 				}
-			}
-		
-			if($erreur_mail != 'oui'){
-			echo "<div style='float:right'><input type='submit' name='envoi' value='"._T('spiplistes:envoyer')."' class='fondo'></div>";
-			}
-			$envoyer_a= _T('spiplistes:envoyer_a');
-			echo "<div style='font-size:14px;font-weight:bold'>".$envoyer_a." -> ".$vers."</div>";
-			echo "<p>";
-			echo "</div>";
-			}
-	  
-		
-		} //while
-	
-	fin_boite_info();
-	echo "</form>";
-	
-	}// pas en mode envoyer
-	
-	if ($expediteur == $connect_id_auteur  OR ($type == 'nl' AND $connect_statut == '0minirezo')) {
-	echo "<br /><table width='100%'><tr><td>";
-	echo "\n<table align='left'><tr><td>";
-	icone (_T('icone_supprimer_message'), '?exec=spip_listes&detruire_message='.$id_message, 'messagerie-24.gif');
+				}
+				echo "</div>";
+				
+				fin_boite_info();
+				echo "</form>";
+			
+			
+				
 	echo "</td></tr></table>";
-	}
-
-}// statut
-
-
-	echo "</td></tr></table></div>";
-	//fin_cadre_relief();
 	echo "</div>"; // fin du cadre de couleur
 	
-
-
-	if ($statut == 'publie' AND  $type == 'nl' ) {
-	echo "\n<table align='left'><tr><td>";
-	icone (_T('icone_arret_discussion'), '?exec=spiplistes&id_message=$id_message&supp_dest=$connect_id_auteur', 'supprimer.gif');
-	echo "</td></tr></table>";
-	}
-
-
-		
-	echo "</td></tr></table>";
-		
-	//////////////////////////////////////////////////////
-	// Forums
-	//
-
-	echo "<br /><br />";
-
 	
-
-
-    
-	 echo "<br /><br />\n<div align='center'>";
-	    icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=perso&id_message=$id_message&titre_message=".urlencode($titre)."&url=" . generer_url_retour("gerer_courrier","id_message=$id_message")), "forum-interne-24.gif", "creer.gif");
-	    echo  "</div>\n<p align='left'>";
-
-	echo "<p align='left'>";
-
-	$query_forum = "SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' AND id_parent=0 ORDER BY date_heure DESC LIMIT 0,20";
-	$result_forum = spip_query($query_forum);
-	afficher_forum($result_forum, "gerer_courrier","id_message=$id_message");
-
-}//while
-
-// MODE COURRIER FIN -----------------------------------------------------------
-
-
-
-$spiplistes_version = "SPIP-listes b1.9";
-echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$spiplistes_version."<p>" ;
+			
+		
+}//while		
 
 fin_page();
 
