@@ -3,7 +3,7 @@
 // --------------------------------------------------
 
 	// Inclusion du fichier de configuration
-	include_spip('inc/switcher_config.php');
+	include_spip('inc/switcher_config');
 	
 	// Squelettes par défaut : squelettes courant + fraichdist
 	$squelettes_alternatifs = array(
