@@ -95,11 +95,11 @@ if($mssage_pile > 0 ){
 	echo "<p>"._T('spiplistes:texte_boite_en_cours')."</p>" ;
 	echo "<p align='center'><a href='$url_site/spip.php?page=meleuse'>["._T('spiplistes:suivi_envois')."]</a></p>";
 	
-	echo "<p align='center'><a href='".$PHP_SELF."?envoi_lot=oui'><tt>["._T('spiplistes:lot_suivant')."]</tt></a></p>";
-  echo "<p align='center'><a href='".$PHP_SELF."'><tt>["._T('spiplistes:actualiser')."]</tt></a></p>";
+	/*echo "<p align='center'><a href='".generer_url_ecrire('spip_listes','envoi_lot=oui')."'><tt>["._T('spiplistes:lot_suivant')."]</tt></a></p>";
+  echo "<p align='center'><a href='".generer_url_ecrire('spip_listes','')."'><tt>["._T('spiplistes:actualiser')."]</tt></a></p>";
 	if($envoi_lot == "oui"){
-	// echo"<iframe src='../spip-meleuse.php3' height='1' width='1' frameborder='0' >"._T('spiplistes:desole')."</iframe>";
-  }
+	echo"<iframe src='../spip-meleuse.php3' height='1' width='1' frameborder='0' >"._T('spiplistes:desole')."</iframe>";
+  }*/
 	
 	fin_boite_info();
  } elseif ($extra_meta["debut"] != 0){

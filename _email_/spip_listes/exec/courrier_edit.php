@@ -35,6 +35,7 @@ global $type;
 global $new;
 global $id_message;
  
+
  
 $nomsite=lire_meta("nom_site"); 
 $urlsite=lire_meta("adresse_site"); 
@@ -48,6 +49,8 @@ $urlsite=lire_meta("adresse_site");
 	$id_message = spip_insert_id(); 
 	spip_query("INSERT INTO spip_auteurs_messages (id_auteur,id_message,vu) VALUES ('$connect_id_auteur','$id_message','oui')"); 
 	}
+ 
+ 
  
 // Admin SPIP-Listes
 debut_page("Spip listes", "redacteurs", "spiplistes");
@@ -82,6 +85,22 @@ debut_droite("messagerie");
 
 // MODE EDIT: Rédaction d'un courrier ------------------------------------------
 
+$query = "SELECT * FROM spip_messages WHERE id_message=$id_message";
+$result = spip_query($query);
+
+if ($row = spip_fetch_array($result)) {
+	$id_message = $row['id_message'];
+	$date_heure = $row["date_heure"];
+	$date_fin = $row["date_fin"];
+	$titre = entites_html($row["titre"]);
+	$texte = entites_html($row["texte"]);
+	$type = $row["type"];
+	$statut = $row["statut"];
+	$page = $row["page"];
+	$rv = $row["rv"];
+	$expediteur = $row["id_auteur"];
+	if (!($expediteur == $connect_id_auteur OR ($type == 'nl' AND $connect_statut == '0minirezo'))) die();
+	}
 
      debut_cadre_relief('../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_insert-slide.gif');
      //Charger un patron ?    
