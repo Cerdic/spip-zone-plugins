@@ -1,0 +1,72 @@
+<div class="formulaire_spip formulaire_ecrire_message">
+<a id="formulaire_ecrire_message" name="formulaire_ecrire_message"></a>
+
+[<p class="reponse_formulaire">(#ENV*{destko})</p>]
+[<p class="reponse_formulaire">(#ENV*{messageko})</p>]
+
+[<fieldset class="reponse_formulaire">
+<legend><:envoyer_message:></legend>
+<p>(#ENV*{messageenvoye})</p>
+</fieldset>]
+
+[(#ENV**{messageenvoye}|?{'',' '})
+
+<form action="#SELF#formulaire_ecrire_message" method="post">
+
+[(#REM) Previsualisation... ]
+[<input type="hidden" name="num_formulaire_ecrire_message" value="(#ENV{valide})" />]
+[<fieldset class="previsu">
+<legend><:previsualisation:></legend>
+<p><strong>#ENV{sujet}</strong> <br/> <em><INCLURE{fond=liste_auteurs}{auteurs=#ENV**{destinataires}}></em></p>
+[(#ENV{texte}|propre)]
+<div class="spip_bouton"><input type="submit" name="confirmer" value="(#ENV{boutonconfirmation})" /></div>
+</fieldset>]
+]
+[(#REM) Sinon, formulaire normal ]
+
+<fieldset>
+<legend><:envoyer_message:></legend>
+
+<p><label for="sujet_message"><:form_prop_sujet:></label>
+<input type="text" class="forml" name="sujet_message" id="sujet_message" value="#ENV{sujet}" size="30" /></p>
+<p><label for="texte_message"><:info_texte_message:></label>
+<textarea class="forml" name="texte_message" id="texte_message" rows="10" cols="40">#ENV{texte}</textarea></p>
+<p><label for="destinataires_message"><:messagerie:form_destinataires:></label>
+[(#REM) Destinataires ]
+<select name='destinataires[]' class='fondl verdana1 agenda_auteur_select' id="destinataires_message" size='6' multiple='multiple'>
+	<BOUCLE_dest(AUTEURS){tout}{id_auteur IN #ENV**{destinataires}}{doublons destinataires}>
+	<option value='#ID_AUTEUR' selected='selected'>#NOM</option>
+	</BOUCLE_dest>
+	<BOUCLE_dest2(AUTEURS){tout}{doublons destinataires}>
+	<option value='#ID_AUTEUR'>#NOM</option>
+	</BOUCLE_dest2>
+</select>
+<script type='text/javascript' src='#CHEMIN{img_pack/multiselect.js}'></script>
+</p>
+
+[<div class="spip_bouton"><input type="submit" name="valide" value="(#ENV{bouton})" /></div>]
+</fieldset>
+
+</form>
+</div>
+[(#REM) les messages recus et envoyes dont l'auteur est auteur ou destinataire ]
+<B_envoyes>
+<table class='spip'>
+
+<tr>
+<th><a href='[(#ENV{self}|parametre_url{tri,nom}|parametre_url{senstri,[(#ENV{tri}|=={nom}|?{[(#ENV{senstri}|?{0,1})],#ENV{senstri}})]})]'>De</a></th>
+<th>A</th>
+<th><a href='[(#ENV{self}|parametre_url{tri,titre}|parametre_url{senstri,[(#ENV{tri}|=={titre}|?{[(#ENV{senstri}|?{'0','1'})],#ENV{senstri}})]})]'>Sujet</a></th>
+<th>Texte</th>
+<th><a href='[(#ENV{self}|parametre_url{tri,date_heure}|parametre_url{senstri,[(#ENV{tri}|=={date_heure}|?{[(#ENV{senstri}|?{'0','1'})],#ENV{senstri}})]})]'>Date</a></th></tr>
+<BOUCLE_envoyes(SPIP_MESSAGES spip_auteurs){id_auteur=#ENV{id_auteur}}{par #ENV{tri,date_heure}}{inverse #ENV{senstri,1}}{pagination 5}>
+<tr>
+<td><BOUCLE_auteur(AUTEURS){id_auteur}>#NOM</BOUCLE_auteur></td>
+<td><BOUCLE_destinataires(SPIP_AUTEURS_MESSAGES){id_message}{', '}><BOUCLE_auteurdest(AUTEURS){id_auteur}{tout}>#NOM</BOUCLE_auteurdest></BOUCLE_destinataires></td>
+<td>#TITRE</td>
+<td>#TEXTE</td>
+<td>[(#DATE_HEURE|affdate_jourcourt|=={[(#ENV{date}|affdate_jourcourt)]}|?{[(#DATE_HEURE|heures):[(#DATE_HEURE|minutes)]],[(#DATE_HEURE|affdate_jourcourt)]}) ]</td>
+</tr>
+</BOUCLE_envoyes>
+</table>
+</B_envoyes>

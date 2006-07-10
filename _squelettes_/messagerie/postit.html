@@ -1,0 +1,42 @@
+<?php
+	if ($auteur_session) {
+		$visiteur_id=$auteur_session['id_auteur'];
+		$visiteur_nom=$auteur_session['nom'];
+		$visiteur_statut=$auteur_session['statut'];
+
+		include_spip("inc/filtres");
+
+		// Messages non vus affiches en post-it ------------------------------------
+
+		$query="SELECT nom FROM spip_auteurs WHERE id_auteur=$visiteur_id;";
+		$res = spip_query($query);
+		if ($row = spip_fetch_array($res)) {
+		// un message a ete vu
+			if (($id=_request('vu'))!==NULL){
+				spip_query("UPDATE spip_auteurs_messages SET vu='oui' WHERE id_message = ".spip_abstract_quote($id)." AND id_auteur=".spip_abstract_quote($visiteur_id));
+			}
+
+			// tous les messages non lus dont le visiteur est destinataire
+			$res = spip_query("SELECT messages.*,auteurs.nom FROM spip_messages AS messages 
+								LEFT JOIN spip_auteurs_messages AS auteurs_messages ON messages.id_message=auteurs_messages.id_message 
+								RIGHT JOIN spip_auteurs AS auteurs ON messages.id_auteur=auteurs.id_auteur 
+								WHERE auteurs_messages.id_auteur=".spip_abstract_quote($visiteur_id).
+								" AND messages.type='normal' AND auteurs_messages.vu='non' 
+								ORDER BY spip_messages.date_heure DESC");
+
+			$url=self();
+			while ($row = spip_fetch_array($res)){
+				echo "<div class='postit'>";
+				$url=parametre_url($url,'vu',$row['id_message']);
+				echo "<div class='postit-titre'><a href='$url'><img src='#CHEMIN{img_pack/croix.png}' width='12' height='12' alt='fermer' /></a>";
+				echo propre($row['titre'])."</div>";
+				echo "<div class='postit-auteur'>".propre($row['nom'])."</div>";
+				echo "<div class='postit-texte'>".propre($row['texte'])."</div>";
+				echo "</div>";
+			}
+ 		}
+
+		// Petit hack pour indiquer la connexion d'un visiteur
+		@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$visiteur_id'");
+	}
+?>

@@ -1,0 +1,23 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	messagerie
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Cedric MORIN
+ 	[notre-ville.net->http://www.notre-ville.net]
+_ &copy; 2006 - Licence GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Gestion de la messagerie interne entre auteurs dans les squelettes publics
+	</description>
+	<prefix> 
+	messagerie
+	</prefix>
+
+</plugin>
