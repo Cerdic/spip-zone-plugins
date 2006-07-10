@@ -110,9 +110,9 @@ function exec_config_types_documents() {
 	  $vals[] = $mime;
 	  $vals[] = '<form id="form_'.$id_type.'_inclus" action="'.generer_url_action('types_documents_inclus',"redirect=$redirect").'" method="post">
 <select onchange="this.form.submit()" name="inclus_'.$id_type.'"/>
-<option value="non" '.(($inclus=='non')?'selected="true"':'').'>'._T('types_documents:non').'</option>
-<option value="image" '.(($inclus=='image')?'selected="true"':'').'>'._T('types_documents:image').'</option>
-<option value="embed" '.(($inclus=='embed')?'selected="true"':'').'>'._T('types_documents:embed').'</option>
+<option value="non" '.(($inclus=='non')?'selected="true"':'').'>'._T('typesdocuments:non').'</option>
+<option value="image" '.(($inclus=='image')?'selected="true"':'').'>'._T('typesdocuments:image').'</option>
+<option value="embed" '.(($inclus=='embed')?'selected="true"':'').'>'._T('typesdocuments:embed').'</option>
 </select>
 	               <input type="hidden" name="id_auteur" value="'.$connect_id_auteur.'"/>
                        <input type="hidden" name="date_comp" value="'.date('Ymd').'"> 
@@ -173,7 +173,7 @@ function exec_config_types_documents() {
 			   //	   '<input type="text" name="desc"/>',
 			   '<input type="checkbox" name="upload" checked="true"/>',
 			   '<input type="text" size="10" name="mime"/>',
-			   '<select name="inclus"><option value="image">'._T('types_documents:image').'</option><option value="embed">'._T('types_documents:embed').'</option><option value="non">'._T('types_documents:non').'</option></select>',
+			   '<select name="inclus"><option value="image">'._T('typesdocuments:image').'</option><option value="embed">'._T('typesdocuments:embed').'</option><option value="non">'._T('typesdocuments:non').'</option></select>',
 			   '',
 			   '<input type="submit" value="'._T('bouton_valider').'"/>'
 			   );
