@@ -71,7 +71,6 @@
 	/**
 	 * lettres_verifier_droits
 	 *
-	 * installe ou met à jour les tables du plugin
 	 * redirige vers l'accueil si l'auteur n'est pas un admin
 	 *
 	 * @author Pierre Basson
@@ -650,7 +649,7 @@
 		$nb_lettres_envoi_en_cours = @spip_num_rows(spip_query($requete_nb_lettres_envoi_en_cours));
 
 		$cadre = '';
-		$cadre.= debut_cadre_relief("plugin-24.png", true, "", _T('lettres:lettres_information'));
+		$cadre.= debut_cadre_relief("plugin-24.gif", true, "", _T('lettres:lettres_information'));
 		$cadre.= "<div class='verdana1'>";
 		$cadre.= "<b>"._T('lettres:plugin')."</b>";
 		$cadre.= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
