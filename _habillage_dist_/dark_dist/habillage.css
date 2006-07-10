@@ -177,7 +177,7 @@ q, blockquote, .liste-articles li .texte, h3.spip {
 .cartouche .titre {
 	font-size: 1.27em;
 	font-weight: bold;
-	color: #000; }
+	color: #FFF; }
 #contenu .surtitre, #contenu .soustitre { font-size: 0.82em; }
 
 .cartouche .spip_logos {
@@ -288,7 +288,7 @@ q, blockquote, .liste-articles li .texte, h3.spip {
 
 .page_plan #contenu h2 {
 	clear: both;
-	background: #EEE;
+	background: #333;
 	border: 1px solid #CCC;
 	padding: 0.5em;
 	margin-bottom: 1em;
@@ -328,7 +328,7 @@ q, blockquote, .liste-articles li .texte, h3.spip {
 .formulaire_spip legend { 
 	font-weight: bold; 
 	padding: 3px;
-	background: #FFF; /* Sinon, superposition dans MSIE */
+	background: #000; /* Sinon, superposition dans MSIE */
 }
 
 .formulaire_spip label {}
@@ -337,7 +337,8 @@ q, blockquote, .liste-articles li .texte, h3.spip {
 	padding: 1px;
 	border: 1px solid #e6e6e6;
 	font-family: inherit;
-	font-size: inherit; }
+	font-size: inherit;
+	color: #FFF; }
 
 .spip_bouton { text-align: right; }
 .spip_bouton input {
@@ -440,6 +441,5 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 /*  Couleurs des liens
 /*  ------------------------------------------ */
 a { text-decoration: none; color: #ffffff; }
-a:hover { text-decoration: underline;
-	color: #ffffff;
-}
+.on { color: #ffffff; }
+a:hover { text-decoration: underline; }
