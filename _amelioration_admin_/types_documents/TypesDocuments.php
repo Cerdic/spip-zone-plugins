@@ -24,7 +24,7 @@ function TypesDocuments_ajouter_onglets($flux) {
   if($connect_statut == '0minirezo' AND $connect_toutes_rubriques)
     if($flux['args']=='configuration')
 	$flux['data']['config_types_documents']= new Bouton("", 
-	'Gestion des types de documents',
+	_T('typesdocuments:titre'),
 	 generer_url_ecrire("config_types_documents"));
   return $flux;
 }

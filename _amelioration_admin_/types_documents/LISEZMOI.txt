@@ -1,1 +1,5 @@
-Plugin qui ajoute un onglet dans la page de configuration (seulement pour les admins) pour gerer les types de documents acceptes par SPIP.
+[fr]Plugin qui ajoute un onglet dans la page de configuration (seulement pour les admins) pour gerer les types de documents acceptes par SPIP.
+
+[es]Plugin que permite una pestaña en la página de configuración (únicamente
+para los administradores) para ajustar los tipos de documentos que serán
+aceptados por SPIP.
