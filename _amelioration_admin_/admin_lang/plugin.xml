@@ -1,0 +1,37 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	admin_lang
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	aurelien levy , alm()elastick.net
+_ &copy; 2006 - Distribue sous licence GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	permet de gerer les traductions dans les fichiers de langues
+	</description>
+	<options>  
+	admin_lang_options.php
+	</options>
+ 	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<action>ajouterOnglets</action>
+        <inclure>admin_lang_boutons.php</inclure>
+	</pipeline>
+	
+	<prefix> 
+	admin_lang
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines
+	<pipeline>
+		<nom>pre_typo</nom>
+		<action>pre_typo</action>
+		<inclure>toutmulti.php</inclure>
+	</pipeline> -->
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
