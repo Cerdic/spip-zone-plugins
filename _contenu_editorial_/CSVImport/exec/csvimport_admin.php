@@ -180,6 +180,33 @@ function exec_csvimport_admin(){
 		echo "</div>\n";
 	}
 
+	include_spip('base/serial');
+	include_spip('base/auxiliaires');
+	global $tables_principales;
+	global $tables_auxiliaires;
+	global $table_des_tables;
+	global $tables_jointures;
+	// on construit un index des tables de liens
+	// pour les ajouter SI les deux tables qu'ils connectent sont sauvegardees
+	$tables_for_link = array();
+	foreach($tables_jointures as $table=>$liste_relations)
+		if (is_array($liste_relations))
+		{
+			$nom = $table;
+			if (!isset($tables_auxiliaires[$nom])&&!isset($tables_principales[$nom]))
+				$nom = "spip_$table";
+			if (isset($tables_auxiliaires[$nom])||isset($tables_principales[$nom])){
+				foreach($liste_relations as $link_table){
+					if (isset($tables_auxiliaires[$link_table])/*||isset($tables_principales[$link_table])*/){
+						$tables_for_link[$link_table][] = $nom;
+					}
+					else if (isset($tables_auxiliaires["spip_$link_table"])/*||isset($tables_principales["spip_$link_table"])*/){
+						$tables_for_link["spip_$link_table"][] = $nom;
+					}
+				}
+			}
+		}
+	
 	$res = spip_query("SHOW TABLES");
 	$liste_des_tables_spip=array();
 	$liste_des_tables_autres=array();
@@ -189,11 +216,7 @@ function exec_csvimport_admin(){
 		// evite les melanges sur une base avec plusieurs spip installes
 		if (substr($table,0,strlen($table_prefix))==$table_prefix){
 			$table_abr = substr($table,strlen($table_prefix)+1);
-			$is_jointure = false;
-			foreach($tables_jointures as $jointures)
-				if (in_array($table_abr,$jointures))
-					$is_jointure = true;
-			if (!$is_jointure && !in_array($table_abr,$tables_defendues)){
+			if (!isset($tables_for_link["spip_$table_abr"]) && !in_array($table_abr,$tables_defendues)){
 				$liste_des_tables_spip[]=$table;
 			}
 		}
