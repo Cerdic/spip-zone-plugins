@@ -79,44 +79,44 @@ function exec_portfolio(){
 			}
 			if (strlen($update)){
 				$update = substr($update,1);
-				spip_query("UPDATE spip_documents SET $update WHERE id_document=$id_document");
+				spip_query("UPDATE spip_documents SET $update WHERE id_document=".spip_abstract_quote($id_document));
 			}
 	 	}
 	}
-	if (isset($_POST['modif_document'])){
-		$id_document = intval($_POST['id_document']);
-		$titre=addslashes($_POST['titre_document']);
-		$jour_doc = intval($_POST['jour_doc']);
-		$mois_doc = intval($_POST['mois_doc']);
-		$annee_doc = intval($_POST['annee_doc']);
-		$descriptif = addslashes($_POST['descriptif_document']);
+	if (_request('modif_document')!==NULL){
+		$id_document = intval(_request('id_document'));
+		$titre=_request('titre_document');
+		$jour_doc = intval(_request('jour_doc'));
+		$mois_doc = intval(_request('mois_doc'));
+		$annee_doc = intval(_request('annee_doc'));
+		$descriptif = _request('descriptif_document');
 		$date_doc = "$annee_doc-$mois_doc-$jour_doc";
-		spip_query("UPDATE spip_documents SET titre='$titre',descriptif='$descriptif',date='$date_doc' WHERE id_document='$id_document'");
+		spip_query("UPDATE spip_documents SET titre=".spip_abstract_quote($titre).",descriptif=".spip_abstract_quote($descriptif).",date='$date_doc' WHERE id_document=".spip_abstract_quote($id_document));
 	}
 
-	if (isset($_REQUEST['id_type'])){
-		$id_type=intval($_REQUEST['id_type']);
-		if (!isset($_POST['id_type'])) $_POST['id_type']=$_REQUEST['id_type'];
+	if (_request('id_type')!==NULL){
+		$id_type=intval(_request('id_type'));
+		if (!isset($_POST['id_type'])) $_POST['id_type']=_request('id_type');
 	}
-	if (isset($_REQUEST['conteneur'])){
-		$conteneur=addslashes($_REQUEST['conteneur']);
-		if (!isset($_POST['conteneur'])) $_POST['conteneur']=$_REQUEST['conteneur'];
+	if (_request('conteneur')!==NULL){
+		$conteneur=addslashes(_request('conteneur'));
+		if (!isset($_POST['conteneur'])) $_POST['conteneur']=_request('conteneur');
 	}
 	else
 		$conteneur="";
-	if (isset($_REQUEST['nb_aff'])){
-		$nb_aff=intval($_REQUEST['nb_aff']);
-		if (!isset($_POST['nb_aff'])) $_POST['nb_aff']=$_REQUEST['nb_aff'];
+	if (_request('nb_aff')!==NULL){
+		$nb_aff=intval(_request('nb_aff'));
+		if (!isset($_POST['nb_aff'])) $_POST['nb_aff']=_request('nb_aff');
 	}
-	if (isset($_REQUEST['t_debut'])){
-		$t_debut=intval($_REQUEST['t_debut']);
-		if (!isset($_POST['t_debut'])) $_POST['t_debut']=$_REQUEST['t_debut'];
+	if (_request('t_debut')!==NULL){
+		$t_debut=intval(_request('t_debut'));
+		if (!isset($_POST['t_debut'])) $_POST['t_debut']=_request('t_debut');
 	}
 	else
 		$t_debut=0;
-	if (isset($_REQUEST['filtre'])){
-		$filtre=addslashes($_REQUEST['filtre']);
-		if (!isset($_POST['filtre'])) $_POST['filtre']=$_REQUEST['filtre'];
+	if (_request('filtre')!==NULL){
+		$filtre=addslashes(_request('filtre'));
+		if (!isset($_POST['filtre'])) $_POST['filtre']=_request('filtre');
 	}
 	$titre_table=_L("Tous les Documents");
 	if (!$icone) $icone = "../"._DIR_PLUGIN_GESTION_DOCUMENTS."/img_pack/stock_broken_image.png";
@@ -127,9 +127,9 @@ function exec_portfolio(){
 	  $table_type[$row['id_type']]=$row['titre'];
 	}
 
-	$res = spip_query("SELECT COUNT(*) FROM spip_documents");
+	$res = spip_query("SELECT COUNT(*) as total FROM spip_documents");
 	if ($row = spip_fetch_array($res))
-		$nombre_documents = $row[0];
+		$nombre_documents = $row['total'];
 	else
 		$nombre_documents = 0;
 
@@ -206,6 +206,7 @@ function exec_portfolio(){
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $from$join$where"));
 	//if (! ($cpt = $cpt['n'])) return $tous_id ;
 	$cpt = $cpt['n'];
+
 	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
 
 	if (_request('show_docs'))
@@ -229,6 +230,7 @@ function exec_portfolio(){
 	else $limit="99999";
 
 	$table_need_update = false;
+
 	if ($cpt) {
 	 	$result = spip_query("SELECT $select FROM $from$join$where$order$group LIMIT $limit");
 		$num_rows = spip_num_rows($result);
@@ -465,12 +467,13 @@ function exec_portfolio(){
 	
 		debut_droite();
 
-		if ($tranches) {
+		if (count($documents)) {
 			if ($titre_table) echo "<div style='height: 12px;'></div>";
 			echo "<div class='liste'>";
 			bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black");
 			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
-			echo $tranches;
+			if (isset($tranches))
+				echo $tranches;
 			$args = "";
 			foreach($_GET as $key=>$val)
 				if ($key!='exec')
