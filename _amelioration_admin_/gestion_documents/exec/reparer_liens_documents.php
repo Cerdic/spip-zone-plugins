@@ -77,6 +77,13 @@ function exec_reparer_liens_documents(){
 				$res2 = spip_query("SELECT * FROM $lien WHERE $cond AND $primary=".spip_abstract_quote($id_objet));
 				while ($row2 = spip_fetch_array($res2))
 					unset($liste_doc[$row2['id_document']]);
+				// et ne garder que les docs existants
+				$cond = calcul_mysql_in("id_document", implode(",",array_keys($liste_doc)));
+				$res2 = spip_query("SELECT id_document FROM spip_documents WHERE $cond");
+				$temp = $liste_doc;
+				$liste_doc = array();
+				while ($row2 = spip_fetch_array($res2))
+					$liste_doc[$row2['id_document']] = $temp[$row2['id_document']];
 			}
 			if (count($liste_doc)){
 				foreach($liste_doc as $id_document=>$dummy){
