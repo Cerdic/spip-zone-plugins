@@ -3,7 +3,7 @@
 // --------------------------------------------------
 
 	// Inclusion du fichier de configuration
-	require_once(dirname(__FILE__).'/config.inc.php');
+	include_spip('inc/switcher_config.php');
 	
 	// Squelettes par défaut : squelettes courant + fraichdist
 	$squelettes_alternatifs = array(
