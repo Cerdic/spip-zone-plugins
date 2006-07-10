@@ -1,0 +1,21 @@
+<plugin>
+	<nom><!-- Nom du plugin -->
+	Noire Dist
+	</nom>
+	<auteur><!-- Auteur du plugin -->
+	Tetue
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+	Activez ce plugin pour changer l'habillage de votre squelette SPIP.
+	Cet habillage est une simple version en négatif de l'habillage par défaut de SPIP 1.9.
+	</description>
+	<prefix> 
+	cssdist
+	</prefix>
+</plugin>
