@@ -55,6 +55,7 @@ function exec_admin_index_dist()
 	icone_horizontale (_L('Relancer l\'indexation du site sans purger les donn&eacute;es.'), generer_url_ecrire("admin_index", "forcer_indexation=oui"), "../"._DIR_PLUGIN_ADVANCED_SEARCH."/img_pack/stock_exec.gif");
 	echo "<div style='width: 100%; border-top: solid 1px white;background: url(".http_wrapper('rayures-danger.png').");'>";
 	icone_horizontale (_L('Cliquez ici pour purger les tables d\'indexation.'), generer_url_ecrire("admin_index", "purger=oui"), "effacer-cache-24.gif");
+	icone_horizontale (_L('Cliquez ici pour resetter les param&egrave;tres d\'indexation.'), generer_url_ecrire("admin_index", "resetmeta=oui"), "effacer-cache-24.gif");
 	echo "</div>";
 	
 	fin_raccourcis();
@@ -69,6 +70,15 @@ function exec_admin_index_dist()
 		exit;
 	}
 
+	if (_request('resetmeta')=='oui'){
+		include_spip('inc/meta');
+		effacer_meta('INDEX_elements_objet');
+		effacer_meta('INDEX_objet_associes');
+		effacer_meta('INDEX_elements_associes');
+		effacer_meta('INDEX_critere_indexation');
+		effacer_meta('INDEX_iteration_nb_maxi');
+		ecrire_metas();
+	}
 	include_spip('inc/indexation');
 	
 	
