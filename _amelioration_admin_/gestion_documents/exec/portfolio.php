@@ -402,7 +402,7 @@ function exec_portfolio(){
 		echo _L('Type :') . "<br /><select name='id_type'";
 		echo "onchange=\"document.location.href='";
 		echo generer_url_ecrire('portfolio',generer_query_string($conteneur,"",$nb_aff,$filtre).'id_type=')."'+this.options[this.selectedIndex].value\"";
-		echo ">" . "\n";
+		echo " class='forml' >" . "\n";
 		$s=spip_query('SELECT * FROM spip_types_documents');
 		echo "<option value=''>Tous</option>";
 		while ($row=spip_fetch_array($s)){
@@ -421,7 +421,7 @@ function exec_portfolio(){
 		echo _L('Conteneur :') . "<br /><select name='conteneur'";
 		echo "onchange=\"document.location.href='";
 		echo generer_url_ecrire('portfolio',generer_query_string("",$id_type,$nb_aff,$filtre).'conteneur=')."'+this.options[this.selectedIndex].value\"";
-		echo ">" . "\n";
+		echo " class='forml' >" . "\n";
 		echo "<option value=''>Tous</option>";
 		echo "<option value='rubriques'".($conteneur=='rubriques'?(" selected='selected'"):"").">Rubriques</option>";
 		echo "<option value='articles'".($conteneur=='articles'?(" selected='selected'"):"").">Articles</option>";
@@ -437,7 +437,7 @@ function exec_portfolio(){
 		echo _L('Filtrer :') . "<br /><select name='filtre'";
 		echo "onchange=\"document.location.href='";
 		echo generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,$nb_aff,"").'filtre=')."'+this.options[this.selectedIndex].value\"";
-		echo ">" . "\n";
+		echo " class='forml' >" . "\n";
 		echo "<option value=''>Tous</option>";
 		echo "<option value='notitle'".($filtre=='notitle'?(" selected='selected'"):"").">Sans titre ni descriptif</option>";
 		echo "<option value='nofile'".($filtre=='nofile'?(" selected='selected'"):"").">Fichier introuvable</option>";
@@ -452,7 +452,7 @@ function exec_portfolio(){
 		echo _L('Affichage :') . "<br /><select name='nb_aff'";
 		echo "onchange=\"document.location.href='";
 		echo generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,"",$filtre).'nb_aff=')."'+this.options[this.selectedIndex].value\"";
-		echo ">" . "\n";
+		echo " class='forml' >" . "\n";
 		echo "<option value='12'>Par 12</option>";
 		echo "<option value='24'".($nb_aff=='24'?(" selected='selected'"):"").">Par 24</option>";
 		echo "<option value='48'".($nb_aff=='48'?(" selected='selected'"):"").">Par 48</option>";
