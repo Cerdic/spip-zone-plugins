@@ -24,7 +24,7 @@
 	<h1 style="font-size: 1.2em;border-bottom: 1px solid #666;">Lettre d'information</h1>  
 	
 	  	
-	<p>Bonjour, <br /> Voici les discussions démarrées sur le site  <a href="#URL_SITE_SPIP">#NOM_SITE_SPIP</a> [(#DATE|date_depuis)]</p>
+	<p>Bonjour, <br /> Voici les discussions d&eacute;marr&eacute;es sur le site  <a href="#URL_SITE_SPIP">#NOM_SITE_SPIP</a> [(#DATE|date_depuis)]</p>
 (#DATE_MODIF_FORUM|strtotime|>{[(#ENV{date}|strtotime)]}|?{' ',''})
 ]
 
@@ -40,7 +40,7 @@
 	 <small>[(#DATE|affdate)], par  #NOM</small>
 	 <div  style="margin-top: 5px;margin-bottom: 2em;border: 1px solid #ccc;padding: 0.9em;font-size: 0.82em;line-height: 1.4em;" >
 	 #INTRODUCTION
-	 [(#DATE|affdate)] par [(#NOM|sinon{"anonyme"})] - <BOUCLE_rep(FORUMS){id_parent}{plat}> </BOUCLE_rep> #TOTAL_BOUCLE [(#TOTAL_BOUCLE|>{1}|?{'réponses' , 'réponse'})] </B_rep>
+	 [(#DATE|affdate)] par [(#NOM|sinon{"anonyme"})] - <BOUCLE_rep(FORUMS){id_parent}{plat}> </BOUCLE_rep> #TOTAL_BOUCLE [(#TOTAL_BOUCLE|>{1}|?{'r&eacute;ponses' , 'r&eacute;ponse'})] </B_rep>
 
 <p>#INTRODUCTION</p>
  <div class="extra">
