@@ -30,8 +30,9 @@
 	[(#REM) Destinataires ]
 	<p><label for="sujet_message"><:form_prop_sujet:></label>
 	<input type="text" class="forml" name="sujet_message" id="sujet_message" value="#ENV{sujet}" size="30" /></p>
+	
 	<INCLURE{fond=options_select_destinataires}{destinataires=#ENV**{destinataires}}>
-
+	
 	<p><label for="texte_message"><:info_texte_message:></label>
 	<textarea class="" style='border:1px solid' name="texte_message" id="texte_message" rows="6" cols="40">#ENV{texte}</textarea></p>
 	
@@ -45,6 +46,7 @@
 <BOUCLE_envoyes(SPIP_MESSAGES){id_auteur=#ENV{id_auteur}}{doublons selection}> </BOUCLE_envoyes>
 <BOUCLE_recus(SPIP_AUTEURS_MESSAGES){id_auteur=#ENV{id_auteur}}><BOUCLE_memo(SPIP_MESSAGES){id_message}{doublons selection}> </BOUCLE_memo></BOUCLE_recus>
 <B_liste>
+<p>
 #ANCRE_PAGINATION
 
 <table class='spip'>
@@ -57,7 +59,7 @@
 <th scope='col'><a href='[(#ENV{self}|parametre_url{tri,date_heure}|parametre_url{senstri,[(#ENV{tri}|=={date_heure}|?{[(#ENV{senstri}|?{'0','1'})],#ENV{senstri}})]})]'>Date</a></th></tr>
 </thead>
 <tbody>
-<BOUCLE_liste(SPIP_MESSAGES spip_auteurs){!doublons selection}{par #ENV{tri}}{par nom}{inverse #ENV{senstri,1}}{pagination 5}>
+<BOUCLE_liste(SPIP_MESSAGES spip_auteurs){!doublons selection}{par #ENV{tri}}{inverse #ENV{senstri,1}}{pagination 5}>
 <tr class='[(#COMPTEUR_BOUCLE|alterner{'row_even','row_odd'})]'>
 <td>#NOM</td>
 <td><BOUCLE_destinataires(SPIP_AUTEURS_MESSAGES){id_message}{', '}><BOUCLE_auteurdest(AUTEURS){id_auteur}{tout}>[(#_destinataires:VU|=={oui}|?{'','<strong>'})]#NOM[(#_destinataires:VU|=={oui}|?{'','</strong>'})]</BOUCLE_auteurdest></BOUCLE_destinataires></td>
@@ -68,5 +70,6 @@
 </BOUCLE_liste>
 </tbody>
 </table>
+</p>
 <p class='pagination'>#PAGINATION</p>
 </B_liste>
