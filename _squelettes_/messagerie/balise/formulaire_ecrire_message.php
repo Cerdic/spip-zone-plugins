@@ -40,7 +40,7 @@ function balise_FORMULAIRE_ECRIRE_MESSAGE_dyn() {
 	if (isset($auteur_session['id_auteur']))
 		$id_auteur=$auteur_session['id_auteur'];
 	else
-		$id_auteur=0;
+		$id_auteur='';
 
 
 	$sujet = _request('sujet_message');
