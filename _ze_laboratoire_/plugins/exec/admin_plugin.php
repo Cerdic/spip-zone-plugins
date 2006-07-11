@@ -78,8 +78,7 @@ function exec_admin_plugin() {
 	border-bottom:0;
 	border-left:0;
 	border-right:0;
-	}
-	EOF;
+	}EOF;
 	echo "</style>";
 	echo "<br/><br/><br/>";
 	
