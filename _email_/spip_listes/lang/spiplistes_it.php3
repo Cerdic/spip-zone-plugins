@@ -182,6 +182,8 @@ e ricevere le newsletter.',
 
 //V
 'voir' => 'vedere',
+'vous_pouvez_egalement' => 'Puoi anche',
+'vous_inscrire_auteur' => 'iscriverti come autore',
 
 // ====================== spip_listes.php3 ======================
 'abon' => 'ABBONATI',

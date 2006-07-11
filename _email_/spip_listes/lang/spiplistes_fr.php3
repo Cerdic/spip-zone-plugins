@@ -182,6 +182,8 @@ et de recevoir les lettres d\'informations.',
 
 //V
 'voir' => 'voir',
+'vous_pouvez_egalement' => 'Vous pouvez &eacute;galement',
+'vous_inscrire_auteur' => 'vous inscrire en tant qu\'auteur',
 
 // ====================== spip_listes.php3 ======================
 'abon' => 'ABONNES',

@@ -1,24 +1,23 @@
 [(#ENV{oubli_pass}|=={oui}|?{' ',''})
-<h2><:pass_mot_oublie:></h2><br />
+<h2><:pass_mot_oublie:></h2>
 <p>[(#ENV*{erreur})]
 
 [(#ENV{erreur}|?{'',' '})
 	<:pass_indiquez_cidessous:>
 	<p>
-	<form action='#SELF' method='post'>
-		<div style='text-align:right'>
-				<input type='text' class='spip_formulaires' name='email_oubli' value='' />
-				<input type='hidden' name='oubli_pass' value='oui' />
-				<input type='submit' class='spip_bouton' name='oubli' value='OK' />
-			</div>
-		</form>
-		
+	<form action="#SELF" method="post">
+		<div style="text-align:right">
+				<input type="text" class="spip_formulaires" name="email_oubli" value="" />
+				<input type="hidden" name="oubli_pass" value="oui" />
+				<input type="submit" class="spip_bouton" name="oubli" value="OK" />
+		</div>
+	</form>	
 	</p>]
 ]
 
 <div class="formulaire_spip formulaire_inscription">
 [(#REM) 
-texte d'inscription en tand que rédacteur
+texte d'inscription en tant que rédacteur
 ]
 [(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
 <fieldset>
@@ -30,14 +29,14 @@ texte d'inscription en tand que rédacteur
 ]
 
 [(#REM) 
-texte d'inscription en tand que visiteur
+texte d'inscription en tant que visiteur
 ]
 [(#ENV{inscription_visiteur}|=={oui}|?{' ',''})
 <fieldset>
 <legend><:spiplistes:devenir_abonne:></legend>
 <div><:spiplistes:inscription_visiteurs:></div>
 <div style="margin-top:5px"><:form_forum_indiquer_nom_email:></div>
-<div style="margin-top:5px">(Vous pouvez &eacute;galement <a href="[(#SELF|parametre_url{'type','redac'})]">vous inscrire en tand qu'auteur)</a></div>
+<div style="margin-top:5px">(<:spiplistes:vous_pouvez_egalement:> <a href="[(#SELF|parametre_url{'type','redac'})]"><:spiplistes:vous_inscrire_auteur:></a>)</div>
 </fieldset>
 ]
 
@@ -49,11 +48,10 @@ texte d'inscription en tand que visiteur
 	<form action="#SELF" method="post" class="lettre">
 ]
 		<BOUCLE_liste(ARTICLES) {statut=liste} {id_article=#ENV{liste}} {0,(#ENV{mode_login}|?{1,0})}>
-			<fieldset>
-			<legend><b>#TITRE</b></legend>
+			<fieldset style="margin-bottom:1em;">
+			<legend style="font-weight:bold;">#TITRE</legend>
 			#TEXTE
 			</fieldset>
-			<br />
 		</BOUCLE_liste>
 		
 		<B_listes>
@@ -67,7 +65,7 @@ texte d'inscription en tand que visiteur
 				<input type="hidden" name="list&#91;&#93;"  checked="checked" value="#ID_ARTICLE" />
 				</li>]
 				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
-				<div style='text-align:left; padding:0px 0px 4px 0px;clear:both'>
+				<div style="text-align:left; padding:0px 0px 4px 0px;clear:both">
 				<input type="checkbox" name="list&#91;&#93;"  checked="checked"   value="#ID_ARTICLE" />]
 		</BOUCLE_listes>
 		</B_listes>
@@ -76,21 +74,19 @@ texte d'inscription en tand que visiteur
 			<legend><:spiplistes:abo_1_lettre:></legend>]
 		<//B_listes>
 		[(#ENV{mode_login}|?{' ',''})
-		<ul style='clear:both; width:100%;list-style-type:none;margin:0;padding:0'>
-		<div style="font-size:100%;font-weight:bold">Format :</div>
+		<label style="font-size:100%;font-weight:bold">Format :</label>
+		<ul style="clear:both; width:100%;list-style-type:none;margin:0;padding:0">
 		<li><input name="suppl_abo" value="html"  type="radio" checked="checked"><:spiplistes:html:></li>
 		<li><input name="suppl_abo" value="texte" type="radio"><:spiplistes:texte:></li>
 		<li><input name="suppl_abo" value="non"   type="radio"><:spiplistes:desabonnement:></li>
 		</ul>
 
-		<div style='width:100%'>
 			[(#ENV{acces_membres}|=={oui}|?{' ',''})
-				<p><b><:form_pet_votre_nom:></b><br />
-				<input type="text" class="forml" name="nom_inscription_" value="" size="35" /> </p>
+				<p><label style="font:weight:bold;"><:form_pet_votre_nom:></label>
+				<input type="text" class="forml" name="nom_inscription_" value="" size="35" style="clear:both;" /> </p>
 				]
-			<p><b><:form_pet_votre_email:></b><br />
-			<input type="text" class="forml" name="mail_inscription_" value="" size="35" /> </p>
-		</div>
+			<p><label style="font:weight:bold;"><:form_pet_votre_email:><label>
+			<input type="text" class="forml" name="mail_inscription_" value="" size="35" style="clear:both;" /> </p>
 		<div style="text-align:right"><input type="submit" name="Valider" class="spip_bouton" value="<:bouton_valider:>" />
 		</div></fieldset></form>]
 </div>
