@@ -78,7 +78,8 @@ function exec_admin_plugin() {
 	border-bottom:0;
 	border-left:0;
 	border-right:0;
-	}EOF;
+	}
+EOF;
 	echo "</style>";
 	echo "<br/><br/><br/>";
 	
@@ -207,7 +208,7 @@ function ligne_plug($plug_file){
 	$info = plugin_get_infos($plug_file);
 	$plugok=@in_array($plug_file,$GLOBALS['plug_actifs']);
 
-	$s = "<div id='$plug_file' class='nomplugin'>";
+	$s = "<div id='$plug_file' class='nomplugin".($plugok?'_on':'')."'>";
 	if (isset($info['erreur'])){
 		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
 		$erreur = true;
