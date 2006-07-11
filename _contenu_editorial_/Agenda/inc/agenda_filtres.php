@@ -133,10 +133,15 @@ function Agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui'){
 	else if ((date("Y-m",$date_debut))==date("Y-m",$date_fin))
 	{ // meme annee et mois, jours differents
 		$d=date("Y-m-d",$date_debut);
-		$s = affdate_jourcourt($d);
-		if ($horaire=='oui')
+		if ($horaire=='oui'){
+			$s = _T('agenda:evenement_date_du') . " " . affdate_jourcourt($d);
 			$s .= " ".($hd=date("H:i",$date_debut));
-		$s .= " " . _T('agenda:evenement_date_au').date(($horaire=='oui')?"d  H:i ":"d ",$date_fin);
+			$s .= " " . _T('agenda:evenement_date_au').date("d  H:i ",$date_fin);
+		}
+		else {
+			$s = _T('agenda:evenement_date_du') . " " . jour($d);
+			$s .= " " . _T('agenda:evenement_date_au').affdate_jourcourt(date("Y-m-d",$date_fin));
+		}
 	}
 	else if ((date("Y",$date_debut))==date("Y",$date_fin))
 	{ // meme annee, mois et jours differents
