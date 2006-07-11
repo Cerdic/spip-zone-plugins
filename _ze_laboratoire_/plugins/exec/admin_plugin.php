@@ -91,7 +91,7 @@ function exec_admin_plugin() {
 
 }
 
-function recursDirs($maxfiles, $racine, $dir='', $depth=0, &$nbfiles= 0) {
+function recursDirs($maxfiles, $racine, $dir='', $depth=0, $nbfiles= 0) {
 //error_log("recursDirs($maxfiles, $racine, $dir, $depth, $nbfiles)");
 	if ($dir == '') {
 		$dir = '.';
@@ -122,10 +122,14 @@ function recursDirs($maxfiles, $racine, $dir='', $depth=0, &$nbfiles= 0) {
 
 		if(!empty($plugins)) {
 			sort($plugins);
+			$visible = false;
+			foreach($plugins as $p)
+				if (@in_array("$dir/$p",$GLOBALS['plug_actifs'])) $visible = true;
 			echo "<li>";
-			echo bouton_block_invisible($categ);
-			echo "<span style='font-weight:bold;'>$categ</span>\n<ul>";
-			echo debut_block_invisible($categ);
+			echo $visible? bouton_block_visible($categ):bouton_block_invisible($categ);
+			echo "$categ\n<ul>";
+			
+			echo $visible? debut_block_visible($categ):debut_block_invisible($categ);
 			foreach($plugins as $p) {
 				echo "<li>";
 				echo ligne_plug("$dir/$p");
@@ -191,9 +195,17 @@ function ligne_plug($plug_file){
 			break;
 	}
 	$s .= "<img src='"._DIR_IMG_PACK."$puce' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;";
+	if (!$erreur){
+		$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
+		$s .= $plugok?" checked='checked'":"";
+		$s .= " /> <label for='label_$id_input' style='display:none'><strong>"._T('activer_plugin')."</strong></label>";
+	}
+	$id_input++;
 	
 	$s .= bouton_block_invisible("$plug_file");
 	$s .= ($plugok?"<strong>":"").typo($info['nom']).($plugok?"</strong>":"");
+
+
 	$s .= "</div>";
 	$s .= debut_block_invisible("$plug_file");
 	$s .= "<div class='detailplugin'>";
@@ -210,16 +222,6 @@ function ligne_plug($plug_file){
 	$s .= "</div>";
 	$s .= fin_block();
 
-	$s .= "<div class='droite'>";
-
-	if (!$erreur){
-		$s .= "<label for='label_$id_input'><input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
-		$s .= $plugok?" checked='checked'":"";
-		$s .= " /><strong>"._T('activer_plugin')."</strong></label>";
-	}
-	$id_input++;
-
-	$s .= "</div>";
 
 	return $s;
 }
