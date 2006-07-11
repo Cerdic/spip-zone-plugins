@@ -134,6 +134,7 @@ if ($id_article) {
 		$flag_auteur = (spip_num_rows($result_auteur) > 0);
 
 		$flag_editable = (acces_rubrique($id_rubrique) OR ($flag_auteur > 0 AND ($statut == 'prepa' OR $statut == 'prop' OR $new == 'oui')));
+		
 	}
 } else if ($new=='oui') {
 	if ($lier_trad) {
@@ -250,51 +251,7 @@ function coupe_trop_long($texte){	// utile pour les textes > 32ko
 
 
 debut_cadre_formulaire();
- /*
 
-function mySel($varaut,$variable) {
-	$retour= " value=\"$varaut\"";
-
-	if ($variable==$varaut) {
-		$retour.= " SELECTED";
-	}
-
-	return $retour;
-}
-
-
-
-function my_sel($num,$tex,$comp){
-	if ($num==$comp){
-		echo "<option value='$num' SELECTED>$tex\n";
-	}else{
-		echo "<option value='$num'>$tex\n";
-	}
-
-}
-
-function afficher_mois($mois){
-	my_sel("01",_T('date_mois_1'),$mois);
-	my_sel("02",_T('date_mois_2'),$mois);
-	my_sel("03",_T('date_mois_3'),$mois);
-	my_sel("04",_T('date_mois_4'),$mois);
-	my_sel("05",_T('date_mois_5'),$mois);
-	my_sel("06",_T('date_mois_6'),$mois);
-	my_sel("07",_T('date_mois_7'),$mois);
-	my_sel("08",_T('date_mois_8'),$mois);
-	my_sel("09",_T('date_mois_9'),$mois);
-	my_sel("10",_T('date_mois_10'),$mois);
-	my_sel("11",_T('date_mois_11'),$mois);
-	my_sel("12",_T('date_mois_12'),$mois);
-}
-
-function afficher_jour($jour){
-	for($i=1;$i<32;$i++){
-		if ($i<10){$aff="&nbsp;".$i;}else{$aff=$i;}
-		my_sel($i,$aff,$jour);
-	}
-}
-  */
 
 
 
@@ -462,10 +419,9 @@ echo "<p><HR><p>";
 	echo $textes_supplement;
 
 	//echo "<br />";
-	echo afficher_barre('formulaire', 'texte');
-	echo "<textarea id='text_area' name='texte' ".afficher_claret()." class='formo' rows='$rows' cols='40' wrap=soft>";
-	echo $texte;
-	echo "</textarea>\n";
+	echo afficher_barre('document.formulaire.texte');
+    echo "<textarea id='text_area' NAME='texte' ".$GLOBALS['browser_caret']." CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>";    		echo $texte;
+ 	echo "</textarea>\n";
 
 /* 	// traitement automatique des sauts de ligne : pas mur
 	if ($proposer_autobr AND ($options == "avancees")) {
