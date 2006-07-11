@@ -277,7 +277,7 @@ et de recevoir les lettres d\'informations.',
 'supprime_contact_base' => 'Supprimer d&eacute;finitivement de la base',
 
 'tableau_bord' => 'Tableau de bord',
-'texte' => 'texte',
+'texte' => 'Texte',
 'toutes' => 'Tous les inscrits',
 'txt_abonnement' => '(Indiquez ici le texte pour l\'abonnement &agrave; cette liste, affich&eacute; sur le site public si la liste est active)',
 'txt_inscription' => 'Texte d\'inscription : ',

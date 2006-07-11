@@ -7,8 +7,7 @@
 /**********************************************************/
 
 //Parametrer le logo et le fond du titre (url des images)
-$url_logo = "[(#URL_SITE_SPIP)]/logo.gif";
-$url_fond = "[(#URL_SITE_SPIP)]/IMG/fondgauche.gif";
+$url_fond = "#URL_SITE_SPIP/#DOSSIER_SQUELETTE/fondgauche.gif";
 $largeur_mail = "500px";
 
 /**********************************************************/
@@ -20,29 +19,22 @@ $largeur_mail = "500px";
 /**********************************************************/
 ?>
 
-<table width='<?php echo $largeur_mail ?>' border='0' cellspacing='0' cellpadding='0' style='BORDER-BOTTOM: black 1px solid; BORDER-TOP: #333333 1px solid;'>
-  <tr>
-    <td background='<?php echo $url_fond ?>'>
-    <a href='[(#URL_SITE_SPIP)]'>
-    <img src='<?php echo $url_logo ?>' border='0'>
-    </a>
-    </td>
-  </tr>
-</table><br>
-<div style='width: <?php echo $largeur_mail ?>; background-color: #F5F5F5; text-align: left; PADDING: 1px; '>
-<b><:bonjour|texte_script:></b>,
-<br><:texte_lettre_information|texte_script:> '[(#NOM_SITE_SPIP|textebrut|texte_script)]' (#URL_SITE_SPIP).
+<div style="background:url(<?php echo $url_fond ?>) repeat-y;width:<?php echo $largeur_mail; ?>;">
+	<a href="[(#URL_SITE_SPIP)]" title="#NOM_SITE_SPIP">
+	[(#LOGO_SITE_SPIP|inserer_attribut{'style', 'border:0;'})]
+	</a>
 </div>
-<br><table width='<?php echo $largeur_mail ?>' border='0' cellspacing='0' cellpadding='5'>
-  <tr>
-    <td valign='top'>
-<div style='background: url(<?php echo $url_fond ?>) repeat-y left; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FF9900; FONT-SIZE: 12px; letter-spacing: 1px; font-weight: bold; text-align: left; width: <?php echo $largeur_mail ?>;'>
+<div style="width: <?php echo $largeur_mail ?>; background-color: #F5F5F5; padding: 1px;">
+<span style="font-weight:bold;"><:bonjour|texte_script:></span>,
+<br /><:texte_lettre_information|texte_script:> '[(#NOM_SITE_SPIP|textebrut|texte_script)]' (#URL_SITE_SPIP).
+</div>
+<div style='background: url(<?php echo $url_fond ?>) repeat-y; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FF9900; font-size: 12px; letter-spacing: 1px; font-weight: bold; width: <?php echo $largeur_mail ?>;'>
 
 <div style="padding:5px">Actu</div>
 
 </div>
 
-<h2> Modifier le texte </h2>
+<h2> Modifiez le texte </h2>
 
 <div>
 
@@ -56,5 +48,3 @@ Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ip
 Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
 
 </div>
-
-</td></tr></table>
