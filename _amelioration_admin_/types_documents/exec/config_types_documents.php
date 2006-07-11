@@ -108,7 +108,8 @@ function exec_config_types_documents() {
                        <input type="hidden" name="id_type" value="'.$id_type.'"/>
 </form>';
 	  $vals[] = $mime;
-	  $vals[] = '<form id="form_'.$id_type.'_inclus" action="'.generer_url_action('types_documents_inclus',"redirect=$redirect").'" method="post">
+	  $vals[] = '<form id="form_'.$id_type.'_inclus" action="'.generer_url_action('types_documents_inclus'
+																				  ,"redirect=$redirect").'" method="post">
 <select onchange="this.form.submit()" name="inclus_'.$id_type.'"/>
 <option value="non" '.(($inclus=='non')?'selected="true"':'').'>'._T('typesdocuments:non').'</option>
 <option value="image" '.(($inclus=='image')?'selected="true"':'').'>'._T('typesdocuments:image').'</option>

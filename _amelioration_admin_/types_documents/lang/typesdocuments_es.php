@@ -11,17 +11,17 @@ ciertos tipos de documentos en los art&iacute;culos y secciones. El resto de
 documentos son colocados como archivos comprimidos (zip) por motivos de
 seguridad.
 		 
-Esta p&aacute;gina permite añadir los tipos de documentos admisibles,
+Esta p&aacute;gina permite a&ntilde;adir los tipos de documentos admisibles,
 cambiar su logotipo predeterminado, etc...',
 									   'type' => 'Tipo',
-									   'extension' => 'Extensicn',
+									   'extension' => 'Extensi&oacute;n',
 									   'description' => 'Descripci&oacute;n',
-									   'permission' => '¿Permitido?',
+									   'permission' => '&iquest;Permitido?',
 									   'mime' => 'Tipo Mime',
 									   'nombre_documents' => 'N&uacute;mero de Documentos',
 									   'effacer' => 'Borrar',
 									   'non' => 'no',
-									   'embed' => 'incrustado (embebido)',
+									   'embed' => 'integrado',
 									   'image' => 'imagen',
 									   'inclus' => 'incluidos'
 									   );
