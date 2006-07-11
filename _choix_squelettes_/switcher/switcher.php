@@ -5,10 +5,10 @@
 	// Inclusion du fichier de configuration
 	include_spip('inc/switcher_config');
 	
-	// Squelettes par défaut : squelettes courant + fraichdist
+	// Squelettes par défaut : squelettes courant + dist
 	$squelettes_alternatifs = array(
 		'defaut' => '',
-		'fraich' => 'dist');
+		'dist' => 'dist');
 		
 	// Squelettes supplémentaires : tous les répertoires contenus dans 	$repertoire_squelettes_alternatifs
 	if (is_dir($repertoire_squelettes_alternatifs)) {

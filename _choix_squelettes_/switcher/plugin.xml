@@ -15,7 +15,7 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	<description>
 	Ajoute une liste d&eacute;roulante permettant de basculer entre les squelettes par d&eacute;faut du site, les squelettes fraichdist (spip) et l'ensemble des squelettes contenus dans le r&eacute;pertoire nomm&eacute; <code>squelettes-test</code>	(un sous-r&eacute;pertoire par jeu de squelettes).
 
-	Si vous souhaitez modifier le nom du r&eacute;pertoire contenant les squelettes, &eacute;ditez le fichier <code>config.inc.php</code>. Il est &eacute;galement possible dans ce meme fichier de sp&eacute;cifier que seuls les administrateurs ont la possibilit&eacute; de jouer avec les jeux de squelettes en mettant a TRUE la variable <code>$afficherSeulementPourLesAdmins</code>.
+	Si vous souhaitez modifier le nom du r&eacute;pertoire contenant les squelettes, &eacute;ditez le fichier <code>inc/switcher_config.php</code>. Il est &eacute;galement possible dans ce meme fichier de sp&eacute;cifier que seuls les administrateurs ont la possibilit&eacute; de jouer avec les jeux de squelettes en mettant a TRUE la variable <code>$afficherSeulementPourLesAdmins</code>.
 
 	Pour se faire une id&eacute;e, voir [d&eacute;mo->http://spiptest.africa-web.org/].
 	</description>
