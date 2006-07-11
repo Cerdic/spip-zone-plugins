@@ -158,7 +158,7 @@ function ligne_plug($plug_file){
 	$info = plugin_get_infos($plug_file);
 	$plugok=@in_array($plug_file,$GLOBALS['plug_actifs']);
 
-	$s = "<div id='$plug_file' class='nomplugin'>";
+	$s = "<div id='$plug_file'>";
 	if (isset($info['erreur'])){
 		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
 		$erreur = true;
@@ -196,6 +196,7 @@ function ligne_plug($plug_file){
 	$s .= ($plugok?"<strong>":"").typo($info['nom']).($plugok?"</strong>":"");
 	$s .= "</div>";
 	$s .= debut_block_invisible("$plug_file");
+	$s .= "<div class='detailplugin'>";
 	$s .= _T('version') .' '.  $info['version'] . " | <strong>$titre_etat</strong><br/>";
 	$s .= _T('repertoire_plugins') .' '. $plug_file . "<br/>";
 
@@ -206,15 +207,15 @@ function ligne_plug($plug_file){
 		$s .= "<hr/>" . _T('auteur') .' '. propre($info['auteur']) . "<br/>";
 	if (isset($info['lien']))
 		$s .= "<hr/>" . _T('info_url') .' '. propre($info['lien']) . "<br/>";
-
+	$s .= "</div>";
 	$s .= fin_block();
 
 	$s .= "<div class='droite'>";
 
 	if (!$erreur){
-		$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
+		$s .= "<label for='label_$id_input'><input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
 		$s .= $plugok?" checked='checked'":"";
-		$s .= " /> <label for='label_$id_input'><strong>"._T('activer_plugin')."</strong></label>";
+		$s .= " /><strong>"._T('activer_plugin')."</strong></label>";
 	}
 	$id_input++;
 
