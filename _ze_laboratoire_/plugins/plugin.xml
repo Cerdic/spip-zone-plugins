@@ -1,0 +1,11 @@
+<plugin>
+	<nom>liste des plugin, version sexy
+	</nom>
+	<auteur>Pif</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>Surcharge d'une partie de l'interface de gestion des plugins
+	</description>
+
+	<prefix>plugins</prefix>
+</plugin>
