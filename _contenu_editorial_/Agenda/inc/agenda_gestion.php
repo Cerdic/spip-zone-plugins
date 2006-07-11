@@ -265,7 +265,11 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 		$out .=  "<td>";
 	
 		$out .=  generer_url_post_ecrire("articles", "id_article=$id_article");
-		$out .=  "<span class='verdana1'><strong>"._T('agenda:titre_cadre_ajouter_evenement')."&nbsp; </strong></span>\n";
+		if (in_array($id_evenement,explode(",",$les_evenements)) && $edit==1){
+			$out .=  "<span class='verdana1'><strong>"._T('agenda:titre_cadre_modifier_evenement')."&nbsp; </strong></span>\n";
+		} else {
+			$out .=  "<span class='verdana1'><strong>"._T('agenda:titre_cadre_ajouter_evenement')."&nbsp; </strong></span>\n";
+		}
 		$out .=  "<div><input type='hidden' name='id_article' value=\"$id_article\">";
 
 		if (in_array($id_evenement,explode(",",$les_evenements)) && $edit==1){
