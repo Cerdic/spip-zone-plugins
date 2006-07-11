@@ -37,24 +37,28 @@ function exec_admin_plugin() {
 	debut_page(_T('icone_admin_plugin'), "administration", "plugin");
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
-	div.cadre-padding ul li {
+div.cadre-padding ul li {
 	list-style:none ;
-	}
-	div.cadre-padding ul {
+}
+div.cadre-padding ul {
 	padding-left:1em;
 	margin:1em 0 0 0;
-	}
-	div.cadre-padding ul ul {
+}
+div.cadre-padding ul ul {
 	border-left:5px solid #DFDFDF;
-	}
-	div.cadre-padding ul li li {
+}
+div.cadre-padding ul li li {
 	border:1px solid #AFAFAF;
 	margin:0 0 .5em 0;
-	}
-	div.cadre-padding ul li li div.nomplugin {
+}
+div.cadre-padding ul li li div.nomplugin, div.cadre-padding ul li li div.nomplugin_on {
 	padding:.3em;
-	}
-	div.cadre-padding div.droite label {
+}
+div.cadre-padding ul li li div.nomplugin_on {
+	background:#FFF8EF;
+	font-weight:bold;
+}
+div.cadre-padding div.droite label {
 	padding:.3em;
 	background:#EFEFEF;
 	border:1px dotted #95989F !important;
@@ -63,17 +67,17 @@ function exec_admin_plugin() {
 	margin:.2em;
 	display:block;
 	width:10.1em;
-	}
-	div.cadre-padding input {
+}
+div.cadre-padding input {
 	cursor:pointer;
-	}
-	div.detailplugin {
+}
+div.detailplugin {
 	border-top:1px solid #B5BECF;
 	padding:.6em;
 	margin-top:.5em;
 	background:#F5F5F5;
-	}
-	div.detailplugin hr {
+}
+div.detailplugin hr {
 	border-top:1px solid #67707F;
 	border-bottom:0;
 	border-left:0;
