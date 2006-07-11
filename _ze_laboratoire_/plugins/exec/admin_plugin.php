@@ -122,8 +122,9 @@ function recursDirs($maxfiles, $racine, $dir='', $depth=0, &$nbfiles= 0) {
 
 		if(!empty($plugins)) {
 			sort($plugins);
+			echo "<li>";
 			echo bouton_block_invisible($categ);
-			echo "<li><b>$categ</b>\n<ul>";
+			echo "<span style='font-weight:bold;'>$categ</span>\n<ul>";
 			echo debut_block_invisible($categ);
 			foreach($plugins as $p) {
 				echo "<li>";
@@ -157,7 +158,7 @@ function ligne_plug($plug_file){
 	$info = plugin_get_infos($plug_file);
 	$plugok=@in_array($plug_file,$GLOBALS['plug_actifs']);
 
-	$s = "<div id='$plug_file'>";
+	$s = "<div id='$plug_file' class='nomplugin'>";
 	if (isset($info['erreur'])){
 		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
 		$erreur = true;
