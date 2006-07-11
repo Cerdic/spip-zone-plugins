@@ -68,7 +68,7 @@ function PIMAgenda_ajoute_creneaux_horaires($urlbase,$ts_start,$ts_fin,$type,$pa
 	}
 }
 
-function PIMAgenda_memorise_evenement($urlbase, $row, $categorie, $affiche_auteur = true){
+function PIMAgenda_memorise_evenement($id_agenda,$urlbase, $row, $categorie, $affiche_auteur = true){
 	$is_evt=(in_array($row['type'],array('evenement','anniversaire','rappel')))
 					||($row['date_debut']<$datestart && $row['date_fin']>$datefin);
 
@@ -156,7 +156,7 @@ function PIMAgenda_affiche_evenements($texte){
 		PIMAgenda_ajoute_creneaux_horaires($urlbase,$ts_start,$ts_fin,$type,$partie_cal,_request('echelle'));
 
 
-	$categorie_concerne=array('reunion'=>'calendrier-reunions','rendez-vous'=>'calendrier-rdv','evenement'=>'calendrier-evenement','anniversaire'=>'calendrier-anniversaire','rappel'=>'calendrier-rappel');
+	$categorie_concerne=array('reunion'=>'calendrier-reunions','rendez-vous'=>'calendrier-rdv','evenement'=>'calendrier-evenements','anniversaire'=>'calendrier-anniversaire','rappel'=>'calendrier-rappel');
 	$categorie_info=array('reunion'=>'calendrier-info','rendez-vous'=>'calendrier-info','evenement'=>'calendrier-info','anniversaire'=>'calendrier-info','rappel'=>'calendrier-info');
 
 	$datestart=date('Y-m-d H:i:s',$ts_start-24*60*60);
@@ -181,7 +181,7 @@ function PIMAgenda_affiche_evenements($texte){
 							 				OR (agenda.date_debut<'$datestart' AND agenda.date_fin>'$datefin'))
 							 ORDER BY agenda.date_debut;");
 		while ($row = spip_fetch_array($res)){
-			PIMAgenda_memorise_evenement($urlbase, $row, $categorie_concerne, false);
+			PIMAgenda_memorise_evenement($id_agenda,$urlbase, $row, $categorie_concerne, false);
 			$visu_evenements[$row['id_agenda']]=1;
 		}
 	
@@ -196,7 +196,7 @@ function PIMAgenda_affiche_evenements($texte){
 							 ORDER BY agenda.date_debut;");
 		while ($row = spip_fetch_array($res)){
 			if (!isset($visu_evenements[$row['id_agenda']])){
-				PIMAgenda_memorise_evenement($urlbase, $row, $categorie_concerne);
+				PIMAgenda_memorise_evenement($id_agenda,$urlbase, $row, $categorie_concerne);
 				$visu_evenements[$row['id_agenda']]=1;
 			}
 		}
@@ -214,7 +214,7 @@ function PIMAgenda_affiche_evenements($texte){
 							 ORDER BY agenda.date_debut;");
 		while ($row = spip_fetch_array($res)){
 			if (!isset($visu_evenements[$row['id_agenda']])){
-				PIMAgenda_memorise_evenement($urlbase, $row, $categorie_info);
+				PIMAgenda_memorise_evenement($id_agenda,$urlbase, $row, $categorie_info);
 				$visu_evenements[$row['id_agenda']]=1;
 			}
 		}
@@ -224,7 +224,7 @@ function PIMAgenda_affiche_evenements($texte){
 	$spip_ecran = 'etroit';
 	$s = "<span class='agenda-calendrier'>\n";
 	// attention : bug car $type est modifie apres cet appel !
-	$s .= Agenda_affiche_full(1,'', $type, 'calendrier-creneau','calendrier-creneau-today','calendrier-creneau-sunday','calendrier-reunions','calendrier-rdv','calendrier-evenement','calendrier-anniversaire','calendrier-rappel','calendrier-info');
+	$s .= Agenda_affiche_full(1,'', $type, 'calendrier-creneau','calendrier-creneau-today','calendrier-creneau-sunday','calendrier-reunions','calendrier-rdv','calendrier-evenements-selection','calendrier-evenements','calendrier-anniversaire-selection','calendrier-anniversaire','calendrier-rappel-selection','calendrier-rappel','calendrier-info-selection','calendrier-info','calendrier-reunions-selection','calendrier-rdv-selection');
 	$s .= "</span>";
 
 	return $s;

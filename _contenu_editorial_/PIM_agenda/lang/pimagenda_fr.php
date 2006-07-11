@@ -36,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'invites_descriptif' => 'Invit&eacute;s',
 'titre_sur_l_agenda' => "Sur l'agenda",
 'icone_creer_evenement' => 'Cr&eacute;er un nouveau Rendez-vous',
+'evenement_sans_titre' => '(sans titre)',
 );
 
 

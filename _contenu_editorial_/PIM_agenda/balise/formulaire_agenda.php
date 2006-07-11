@@ -167,6 +167,8 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			$descriptif = addslashes(_request('evenement_descriptif'));
 			$lieu = addslashes(_request('evenement_lieu'));
 			
+			if (!strlen(trim($titre))) $titre= _T('pimagenda:evenement_sans_titre');
+			
 			// pour les cas ou l'utilisateur a saisi 29-30-31 un mois ou ca n'existait pas
 			$maxiter=4;
 			$st_date_deb=FALSE;
