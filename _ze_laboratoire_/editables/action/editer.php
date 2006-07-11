@@ -12,18 +12,18 @@ function action_editer() {
 		die("Actions truandees !");
 	}
 	$xml= doSpipInclude($actions);
-	echo "XML : $xml\n";
+//echo "XML : $xml\n";
 	include_spip('inc/actionParser');
 	$parser = new actionParser();
 
 	$res= $parser->parse($xml);
 	//echo "RES : '$res'\n";
-	//echo "ACTIONS : ".var_export($parser->actions, 1)."\n";
+//echo "ACTIONS : ".var_export($parser->actions, 1)."\n";
 	$cmds= $parser->evaluate($parser->actions);
-	//echo "PHP : ".var_export($cmds, 1)."\n";
-	//exit();
+//echo "PHP : ".var_export($cmds, 1)."\n";
+exit();
 	foreach($cmds as $cmd) {
-		echo "=> $cmd\n";
+//echo "=> $cmd\n";
 		if(eval("return (\$r= ($cmd))===false;")) {
 			die("erreur : $r");
 		}
@@ -88,4 +88,57 @@ function balise_E_MODIFIE($p) {
 	return $p;
 }
 
+/**
+ * equivalent de E_VALEUR pour des elements d'un fichier envoye par upload
+ */
+function balise_E_UPLOAD($p) {
+	if (!$p->param || $p->param[0][0] || !$p->param[0][1] || !$p->param[0][2]) {
+		erreur_squelette('UPLOAD necessite 2 parametre');
+		return $p;
+	}
+
+	$nom=  calculer_liste($p->param[0][1],
+						  $p->descr, $p->boucles, $p->id_boucle);
+	$champ=  calculer_liste($p->param[0][2],
+							$p->descr, $p->boucles, $p->id_boucle);
+
+	$p->code= "getUploadInfo($nom, $champ)";
+	return $p;
+}
+
+// la fonction appelee par la balise precedente => plutot a mettre dans un
+// fichier options ?
+function getUploadInfo($nom, $champ) {
+	static $lastImg, $lastName;
+	static $imgTypes=array(1 => 'gif', 2 => 'jpg', 3 => 'png');
+
+//error_log("getUploadInfo($nom, $champ)");
+	if(!($f=$GLOBALS['_FILES'][$nom])) {
+		return '';
+	}
+//error_log(var_export($GLOBALS['_FILES'], 1));
+
+	// pour une image, il faut determiner ses donnees avant de les retourner
+	if($champ=='width' || $champ=='height' || $champ=='type') {
+		// presque comme un cache ;-)
+		if($lastName!=$nom) {
+			$lastName=$nom;
+			$lastImg= getimagesize($f['tmp_name']);
+//error_log(var_export($lastImg, 1));
+		}
+		if($lastImg) {
+			switch($champ) {
+			case 'width': return $lastImg[0];
+			case 'height': return $lastImg[1];
+			case 'type': return $imgTypes[$lastImg[2]];
+			}
+		} else {
+			return '';
+		}
+	}
+
+	// sinon, on retourne la valeur en vrac.
+//error_log($f[$champ]);
+	return $f[$champ];
+}
 ?>

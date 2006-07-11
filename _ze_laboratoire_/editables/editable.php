@@ -53,9 +53,10 @@ function balise_EDITABLE($p) {
 }
 
 // genere le code d'un formulaire dans lequel placer des editables
-// _ syntaxe : <code>#EDITABLE_DEBUT{actions,url}</code>
+// _ syntaxe : <code>#EDITABLE_DEBUT{actions,url,complement}</code>
 // -* actions = un nom de squelette contenant les actions
 // -* url = l'url a laquelle revenir apres validation du formulaire
+// -* complement (optionnel) = attributs a ajouter au "form"
 function balise_EDITABLE_DEBUT($p) {
 	global $editable;
 //error_log("EDITABLE_DEBUT");
@@ -72,7 +73,7 @@ function balise_EDITABLE_DEBUT($p) {
 		if ($p->param[0][2]) {
 			$editable['retour']=  calculer_liste($p->param[0][2],
 				$p->descr, $p->boucles, $p->id_boucle);
-error_log("EDITABLE_DEBUT retour=".$editable['retour']);
+//error_log("EDITABLE_DEBUT retour=".$editable['retour']);
 			if($editable['retour']=="''") $editable['retour']= 'self()';
 		} else {
 			$editable['retour']= 'self()';
@@ -80,9 +81,9 @@ error_log("EDITABLE_DEBUT retour=".$editable['retour']);
 		if ($p->param[0][3]) {
 			$complement=  calculer_liste($p->param[0][3],
 				$p->descr, $p->boucles, $p->id_boucle);
-error_log("EDITABLE_DEBUT complement=".$complement);
+//error_log("EDITABLE_DEBUT complement=".$complement);
 		} else {
-			$complement= '';
+			$complement= "''";
 		}
 	} else {
 		erreur_squelette('EDITABLE_DEBUT necessite au moins 1 parametre');
@@ -101,7 +102,7 @@ function balise_EDITABLE_FIN($p) {
 	return $p;
 }
 
-function editable_debut(&$editable, $complement='') {
+function editable_debut(&$editable, $complement="''") {
 	return '"<form method=\'post\' action=\'".self()."\' ".'.$complement.'.">
 	<input type=\'hidden\' name=\'action\' value=\'editer\'>
 	<input type=\'hidden\' name=\'retour\' value=\'".urlencode('.$editable['retour'].')."\'>

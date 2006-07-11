@@ -40,7 +40,6 @@ class actionParser  {
 
 	// effectue le parsing et en déduit une structure "actions"
 	function parse($data) {
-		error_log("xml_parse");
 		xml_parse($this->parser, $data);
 
 		if(($c=xml_get_error_code($this->parser)) != XML_ERROR_NONE) {
