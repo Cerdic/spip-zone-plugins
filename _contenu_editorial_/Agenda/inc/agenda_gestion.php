@@ -431,7 +431,7 @@ function Agenda_action_update_liste_mots($id_evenement,$liste_mots){
 	// suppression des mots obsoletes
 	$cond_in = "";
 	if (count($liste_mots))
-		$cond_in = "AND" . calcul_mysql_in('id_mot', implode(",",$liste_mots), 'NOT');
+		$cond_in = "AND " . calcul_mysql_in('id_mot', implode(",",$liste_mots), 'NOT');
 	spip_query("DELETE FROM spip_mots_evenements WHERE id_evenement=".spip_abstract_quote($id_evenement)." ".$cond_in);
 	// ajout/maj des nouveaux mots
 	foreach($liste_mots as $id_mot){
