@@ -1100,11 +1100,12 @@ function traiter_raccourcis($letexte) {
 			if ($str_hreflang) $str_hreflang = " hreflang=\"$str_hreflang\"";
 			//$str_targetblank = $regs[6]; // Pourrait servir pour la compatibilité AGORA
 			list($lien, $class, $texte) = calculer_url($regs[7], $regs[1], 'tout');
-			$inserts[++$i] = "<a href=\"$lien\" class=\"$class\"$str_title$str_hreflang>"
-				.  typo(supprimer_numero($texte))
-				. "</a>";
+			$inserts[++$i] = typo("<a href=\"$lien\" class=\"$class\"$str_title$str_hreflang>"
+				. supprimer_numero($texte)
+				. "</a>");
 
-			$letexte = str_replace($regs[0], "@@SPIP_ECHAPPE_LIEN_$i@@", $letexte);
+			$letexte = str_replace($regs[0], "@@SPIP_ECHAPPE_LIEN_$i@@",
+				$letexte);
 		}
 	}
 
