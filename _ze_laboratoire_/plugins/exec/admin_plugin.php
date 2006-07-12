@@ -224,7 +224,7 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 	echo tree_open_close_dir($current_dir,$init_dir);
 }
 
-function ligne_plug($plug_file, $actif, $iteration){
+function ligne_plug($plug_file, $actif, $id){
 	static $id_input=0;
 
 	$erreur = false;
@@ -232,7 +232,7 @@ function ligne_plug($plug_file, $actif, $iteration){
 	$info = plugin_get_infos($plug_file);
 	$s = "<script type='text/javascript'>";
 $s .= <<<EOF
-function verifchange$iteration(inputp) {
+function verifchange$id(inputp) {
 	if(inputp.checked == true)
 	{
 		document.getElementById('$plug_file').className = 'nomplugin_on';
@@ -279,7 +279,7 @@ EOF;
 	if (!$erreur){
 		$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
 		$s .= $actif?" checked='checked'":"";
-		$s .= " onclick='verifchange$iteration(this)' /> <label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
+		$s .= " onclick='verifchange$id(this)' /> <label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
 	}
 	$id_input++;
 	
