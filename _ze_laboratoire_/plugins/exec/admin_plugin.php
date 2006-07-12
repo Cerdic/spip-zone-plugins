@@ -162,7 +162,9 @@ function tree_open_close_dir(&$current,$target,$visible = false){
 		$output .= fin_block();
 		$output .= "</ul></li>\n";
 	}
-	$chemin = implode("/",$tcom)."/";
+	$chemin = "";
+	if (count($tcom))
+		$chemin .= implode("/",$tcom)."/";
 	// ouvrir les repertoires jusqu'a la cible
 	while($open = array_shift($ttarg)){
 		$chemin .= $open . "/";
@@ -177,25 +179,36 @@ function tree_open_close_dir(&$current,$target,$visible = false){
 }
 
 function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
+	$racine = basename(_DIR_PLUGINS);
 	$init_dir = $current_dir = "";
 	// liste des repertoires deplies : construit en remontant l'arbo de chaque plugin actif
 	$deplie = array();
-	foreach($liste_plugins_actifs as $plug){
-		$dir = dirname($plug);$maxiter=100;
+	foreach($liste_plugins_actifs as $key=>$plug){
+		$liste_plugins_actifs[$key] = "$racine/$plug";
+		$dir = dirname("$racine/$plug");$maxiter=100;
+		$deplie[] = $dir;
 		while(strlen($dir) && $dir!='.' && $maxiter-->0){
-			$deplie[] = $dir;
 			$dir = dirname($dir);
+			$deplie[] = $dir;
 		}
 	}
 	
 	// index repertoires --> plugin
 	$dir_index=array();
 	foreach($liste_plugins as $key=>$plug){
-		$dir_index[dirname($plug)][] = $key;
+		$liste_plugins[$key] = "$racine/$plug";
+		$dir_index[dirname("$racine/$plug")][] = $key;
 	}
 	
 	$visible = @in_array($current_dir,$deplie);
-	while (count($liste_plugins)){
+	$maxiter=1000;
+	while (count($liste_plugins) && $maxiter--){
+		// le rep suivant
+		$dir = dirname(reset($liste_plugins));
+		$visible = @in_array($dir,$deplie);
+		if ($dir != $current_dir)
+			echo tree_open_close_dir($current_dir,$dir,$visible);
+			
 		// d'abord tous les plugins du rep courant
 		if (isset($dir_index[$current_dir]))
 			foreach($dir_index[$current_dir] as $key){
@@ -203,15 +216,10 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 				$actif = @in_array($plug,$liste_plugins_actifs);
 				$id = substr(md5($plug),0,16);
 				echo "<li>";
-				echo ligne_plug($plug, $actif, $id);
+				echo ligne_plug(substr($plug,strlen($racine)+1), $actif, $id);
 				echo "</li>\n";
 				unset($liste_plugins[$key]);
 			}
-		// le rep suivant
-		$dir = dirname(reset($liste_plugins));
-		$visible = @in_array($dir,$deplie);
-		if ($dir != $current_dir)
-			echo tree_open_close_dir($current_dir,$dir,$visible);
 	}
 	echo tree_open_close_dir($current_dir,$init_dir);
 }
