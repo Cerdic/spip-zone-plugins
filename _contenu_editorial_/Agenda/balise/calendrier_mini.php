@@ -4,23 +4,23 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 // Pas besoin de contexte de compilation
 global $balise_CALENDRIER_MINI_collecte;
-$balise_CALENDRIER_MINI_collecte = array('date', 'id_article','id_mot');
+$balise_CALENDRIER_MINI_collecte = array('id_article','id_mot');
 
 function balise_CALENDRIER_MINI ($p) {
-	return calculer_balise_dynamique($p,'CALENDRIER_MINI', array('date', 'id_article', 'id_mot'));
+	return calculer_balise_dynamique($p,'CALENDRIER_MINI', array('id_article', 'id_mot'));
 }
 
 function balise_CALENDRIER_MINI_stat($args, $filtres) {
 	return $args;
 }
  
-function balise_CALENDRIER_MINI_dyn($date, $id_article = 0, $id_mot = 0, $var_date = 'date', $url = '') {
+function balise_CALENDRIER_MINI_dyn($id_article = 0, $id_mot = 0,$date, $var_date = 'date', $url = '') {
 	if(!$url)
 		$url = self();
 	// nettoyer l'url qui est passee par htmlentities pour raison de securités
 	$url = str_replace("&amp;","&",$url);
 
-	return array('formulaires/calendrier_mini', 3600, 
+	return array('formulaires/calendrier_mini', 0, 
 		array(
 			'date' => $date,
 			'id_article' => $id_article,

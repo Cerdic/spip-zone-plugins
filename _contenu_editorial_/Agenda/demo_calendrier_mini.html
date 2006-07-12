@@ -35,8 +35,16 @@
 		[(#REM) Contenu principal : contenu de l'article ]
 
 		<div id="contenu">
-#CALENDRIER_MINI{#ENV{date},#ID_ARTICLE}
-			<div class="cartouche">
+<style type='text/css'>
+		td.occupe a {font-weight:bold;text-decoration:underline;}
+</style>
+[(#REM) mini calendrier : 
+1er arg la date, 
+2eme le nom de la variable date (optionel : 'date' par defaut)
+3eme l'url sur laquelle boucler (optionel : url courante par defaut) ]
+#CALENDRIER_MINI{#ENV{date},'date',#SELF}
+
+		<div class="cartouche">
 				#DEBUT_SURLIGNE
 				[(#LOGO_ARTICLE||image_reduire{200,200})]
 				[<p class="surtitre">(#SURTITRE)</p>]
