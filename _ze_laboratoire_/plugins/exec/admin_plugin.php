@@ -23,7 +23,7 @@ function exec_admin_plugin() {
 
 	// mise a jour des donnees si envoi via formulaire
 	// sinon fait une passe de verif sur les plugin
-	if ($_POST['changer_plugin']=='oui'){
+	if (_request('changer_plugin')=='oui'){
 		enregistre_modif_plugin();
 		// pour la peine, un redirige, 
 		// que les plugin charges soient coherent avec la liste
@@ -178,22 +178,40 @@ function tree_open_close_dir(&$current,$target,$visible = false){
 
 function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 	$init_dir = $current_dir = "";
-	foreach($liste_plugins as $plug){
-		$dir = dirname($plug);
-		$visible = true;
-		$actif = @in_array($plug,$liste_plugins_actifs);
-		/*foreach($plugins as $p) {
-			if (@in_array("$dir/$p",$GLOBALS['plug_actifs'])) $visible = true;
-		}*/
+	// liste des repertoires deplies : construit en remontant l'arbo de chaque plugin actif
+	$deplie = array();
+	foreach($liste_plugins_actifs as $plug){
+		$dir = dirname($plug);$maxiter=100;
+		while(strlen($dir) && $dir!='.' && $maxiter-->0){
+			$deplie[] = $dir;
+			$dir = dirname($dir);
+		}
+	}
 	
+	// index repertoires --> plugin
+	$dir_index=array();
+	foreach($liste_plugins as $key=>$plug){
+		$dir_index[dirname($plug)][] = $key;
+	}
+	
+	$visible = @in_array($current_dir,$deplie);
+	while (count($liste_plugins)){
+		// d'abord tous les plugins du rep courant
+		if (isset($dir_index[$current_dir]))
+			foreach($dir_index[$current_dir] as $key){
+				$plug = $liste_plugins[$key];
+				$actif = @in_array($plug,$liste_plugins_actifs);
+				$id = substr(md5($plug),0,16);
+				echo "<li>";
+				echo ligne_plug($plug, $actif, $id);
+				echo "</li>\n";
+				unset($liste_plugins[$key]);
+			}
+		// le rep suivant
+		$dir = dirname(reset($liste_plugins));
+		$visible = @in_array($dir,$deplie);
 		if ($dir != $current_dir)
 			echo tree_open_close_dir($current_dir,$dir,$visible);
-
-		$id = substr(md5($plug),0,16);
-		echo "<li>";
-		echo ligne_plug($plug, $actif, $id);
-		$iteration++;
-		echo "</li>\n";
 	}
 	echo tree_open_close_dir($current_dir,$init_dir);
 }
