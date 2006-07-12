@@ -297,12 +297,12 @@ include_spip('inc/rubriques');
 				$liste_documents_exclus[$row['id_document']]=1;
 			}
 			// rattaches aux syndic
-			$liste_syn = AccesRestreint_liste_syndic_exclus();
+			/*$liste_syn = AccesRestreint_liste_syndic_exclus();
 			$where = calcul_mysql_in('id_syndic', join(",",$liste_syn));
 			$s = spip_query("SELECT id_document FROM spip_documents_syndic WHERE $where");
 			while ($row = spip_fetch_array($s)){
 				$liste_documents_exclus[$row['id_document']]=1;
-			}
+			}*/
 			$liste_documents_exclus = array_keys($liste_documents_exclus);
 		}
 		return $liste_documents_exclus;
@@ -360,6 +360,21 @@ include_spip('inc/rubriques');
 	// par erreur fatale
 	function AccesRestreint_securise_squelette($letexte){
 		return "";
+	}
+	
+	// filtre de test pour savoir si l'acces a un article est restreint
+	function AccesRestreint_article_restreint($id_article){
+		if (@in_array($id_article,AccesRestreint_liste_articles_exclus()))
+			return true;
+		else
+			return false;
+	}
+	// filtre de test pour savoir si l'acces a une rubrique est restreinte
+	function AccesRestreint_rubrique_restreinte($id_rubrique){
+		if (@in_array($id_rubrique,AccesRestreint_liste_rubriques_exclues()))
+			return true;
+		else
+			return false;
 	}
 
 ?>
