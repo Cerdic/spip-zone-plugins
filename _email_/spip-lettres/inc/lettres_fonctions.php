@@ -567,11 +567,13 @@
 		if (!$existence) {
 			return true;
 		} else {
-			foreach ($lettres as $id_lettre) {
-				if (!lettres_verifier_action_possible($id_lettre, 'inscription', $email))
-					return false;
+			if (!empty($lettres)) {
+				foreach ($lettres as $id_lettre) {
+					if (!lettres_verifier_action_possible($id_lettre, 'inscription', $email))
+						return false;
+				}
+				return true;
 			}
-			return true;
 		}
 	}
 
