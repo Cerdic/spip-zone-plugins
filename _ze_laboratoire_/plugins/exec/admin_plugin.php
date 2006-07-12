@@ -33,7 +33,7 @@ function exec_admin_plugin() {
 		verif_plugin();
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
-
+	global $couleur_claire;
 	debut_page(_T('icone_admin_plugin'), "administration", "plugin");
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
@@ -48,10 +48,10 @@ div.cadre-padding ul ul {
 	border-left:5px solid #DFDFDF;
 }
 div.cadre-padding ul li li {
-	border:1px solid #AFAFAF;
 	margin:0 0 .5em 0;
 }
 div.cadre-padding ul li li div.nomplugin, div.cadre-padding ul li li div.nomplugin_on {
+	border:1px solid #AFAFAF;
 	padding:.3em .3em .6em .3em;
 	font-weight:normal;
 }
@@ -61,7 +61,7 @@ div.cadre-padding ul li li div.nomplugin a, div.cadre-padding ul li li div.nompl
 	-moz-outline:0 !important;
 }
 div.cadre-padding ul li li div.nomplugin_on {
-	background:#FFF8EF;
+	background:$couleur_claire;
 	font-weight:bold;
 }
 div.cadre-padding div.droite label {
@@ -116,9 +116,8 @@ EOF;
 
 	echo generer_url_post_ecrire("admin_plugin");
 
-	$GLOBALS['plug_actifs']= liste_plugin_actifs();
 	echo "<ul>";
-	recursDirs(100, _DIR_PLUGINS);
+	affiche_arbre_plugins(liste_plugin_files(),liste_plugin_actifs());
 	echo "</ul>";
 
 	echo "</table></div>\n";
@@ -147,81 +146,64 @@ EOF;
 
 }
 
-function recursDirs($maxfiles, $racine, $dir='', $depth=0, $nbfiles= 0) {
-//error_log("recursDirs($maxfiles, $racine, $dir, $depth, $nbfiles)");
-	if ($dir == '') {
-		$dir = '.';
-		$categ='racine';
-	} else {
-		$categ=$dir;
+function tree_open_close_dir(&$current,$target,$visible = false){
+	if ($current == $target) return "";
+	$tcur = explode("/",$current);
+	$ttarg = explode("/",$target);
+	$tcom = array();
+	$output = "";
+	// la partie commune
+	while (reset($tcur)==reset($ttarg)){
+		$tcom[] = array_shift($tcur);
+		array_shift($ttarg);
 	}
-
-	$aSuivre= array();
-	$plugins= array();
-
-	if (@is_dir("$racine$dir")
-		&& is_readable("$racine$dir")
-		&& $d = @opendir("$racine$dir")) {
-		while (($f = readdir($d)) !== false && ($nbfiles<$maxfiles)) {
-			if($f{0} == '.') continue;
-			if(is_dir("$racine$dir/$f")) {
-				if(is_readable("$racine$dir/$f/plugin.xml")) {
-					$plugins[]=$f;
-					$nbfiles++;
-				} else {
-					$aSuivre[]= $f;
-				}
-			}
-		}
-
-		closedir($d);
-
-		if(!empty($plugins)) {
-			sort($plugins);
-			$visible = false;
-			foreach($plugins as $p) {
-				if (@in_array("$dir/$p",$GLOBALS['plug_actifs'])) $visible = true;
-			}
-			echo "<li>";
-			echo $visible? bouton_block_visible($categ):bouton_block_invisible($categ);
-			echo "$categ\n<ul>";
-			
-			echo $visible? debut_block_visible($categ):debut_block_invisible($categ);
-			
-			$iteration = 0;
-			foreach($plugins as $p) {
-				$iteration .= abs(crc32($dir));
-				echo "<li>";
-				echo ligne_plug("$dir/$p", $iteration);
-				$iteration++;
-				echo "</li>\n";
-			}
-			echo "</ul></li>\n";
-			echo fin_block();
-		}
-
-		if(!empty($aSuivre)) {
-			sort($aSuivre);
-			if($dir=='.') {
-				$sub='';
-			} else {
-				$sub="$dir/";
-			}
-			foreach($aSuivre as $d) {
-				recursDirs($maxfiles, $racine, "$sub$d", $depth+1, $nbfiles);
-			}
-		}
+	// fermer les repertoires courant jusqu'au point de fork
+	while($close = array_pop($tcur)){
+		$output .= fin_block();
+		$output .= "</ul></li>\n";
 	}
+	$chemin = implode("/",$tcom)."/";
+	// ouvrir les repertoires jusqu'a la cible
+	while($open = array_shift($ttarg)){
+		$chemin .= $open . "/";
+		$output .= "<li>";
+		$output .= $visible? bouton_block_visible($chemin):bouton_block_invisible($chemin);
+		$output .= "$chemin\n<ul>";
+			
+		$output .= $visible? debut_block_visible($chemin):debut_block_invisible($chemin);
+	}
+	$current = $target;
+	return $output;
 }
 
+function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
+	$init_dir = $current_dir = "";
+	foreach($liste_plugins as $plug){
+		$dir = dirname($plug);
+		$visible = true;
+		$actif = @in_array($plug,$liste_plugins_actifs);
+		/*foreach($plugins as $p) {
+			if (@in_array("$dir/$p",$GLOBALS['plug_actifs'])) $visible = true;
+		}*/
+	
+		if ($dir != $current_dir)
+			echo tree_open_close_dir($current_dir,$dir,$visible);
 
-function ligne_plug($plug_file, $iteration){
+		$id = substr(md5($plug),0,16);
+		echo "<li>";
+		echo ligne_plug($plug, $actif, $id);
+		$iteration++;
+		echo "</li>\n";
+	}
+	echo tree_open_close_dir($current_dir,$init_dir);
+}
+
+function ligne_plug($plug_file, $actif, $iteration){
 	static $id_input=0;
 
 	$erreur = false;
 	$vals = array();
 	$info = plugin_get_infos($plug_file);
-	$plugok=@in_array($plug_file,$GLOBALS['plug_actifs']);
 	$s = "<script type='text/javascript'>";
 $s .= <<<EOF
 function verifchange$iteration(inputp) {
@@ -235,7 +217,7 @@ function verifchange$iteration(inputp) {
 	}
 EOF;
 	$s .= "</script>";
-	$s .= "<div id='$plug_file' class='nomplugin".($plugok?'_on':'')."'>";
+	$s .= "<div id='$plug_file' class='nomplugin".($actif?'_on':'')."'>";
 	if (isset($info['erreur'])){
 		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
 		$erreur = true;
@@ -270,13 +252,13 @@ EOF;
 	$s .= "<img src='"._DIR_IMG_PACK."$puce' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;";
 	if (!$erreur){
 		$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
-		$s .= $plugok?" checked='checked'":"";
+		$s .= $actif?" checked='checked'":"";
 		$s .= " onclick='verifchange$iteration(this)' /> <label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
 	}
 	$id_input++;
 	
 	$s .= bouton_block_invisible("$plug_file");
-	$s .= ($plugok?"":"").typo($info['nom']).($plugok?"":"");
+	$s .= ($actif?"":"").typo($info['nom']).($actif?"":"");
 
 
 	$s .= "</div>";
