@@ -125,7 +125,7 @@ function csvimport_afficher_tables($titre_table, $icone = '') {
 				$s = "";
 				if ($importable)
 					$s .= "<a href='$link'>";
-				$s .= "<img src='"._DIR_INCLUDE."img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
+				$s .= "<img src='"._DIR_IMG_PACK."$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
 				$s .= strlen($titre)?typo($titre):$latable;
 				if ($importable)
 					$s .= "</a>";
