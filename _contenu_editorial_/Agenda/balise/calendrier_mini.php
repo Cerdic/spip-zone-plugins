@@ -17,17 +17,16 @@ function balise_CALENDRIER_MINI_stat($args, $filtres) {
 function balise_CALENDRIER_MINI_dyn($date, $id_article = 0, $id_mot = 0, $var_date = 'date', $url = '') {
 	if(!$url)
 		$url = self();
-	else{
-		// nettoyer l'url qui est passee par htmlentities pour raison de securités
-		$url = str_replace("&amp;","&",$url);
-	}
+	// nettoyer l'url qui est passee par htmlentities pour raison de securités
+	$url = str_replace("&amp;","&",$url);
+
 	return array('formulaires/calendrier_mini', 3600, 
 		array(
 			'date' => $date,
 			'id_article' => $id_article,
 			'id_mot' => $id_mot,
 			'var_date' => $var_date,
-			'self' => $url
+			'self' => $url,
 		));
 }
 

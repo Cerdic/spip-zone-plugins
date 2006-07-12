@@ -166,4 +166,9 @@ function Agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui'){
 	}
 	return $s;	
 }
+
+function Agenda_dateplus($date,$secondes,$format){
+	$date = strtotime($date)+eval("return $secondes;"); // permet de passer une expression
+	return date($format,$date);
+}
 ?>
