@@ -63,8 +63,9 @@
 	 * @author Pierre Basson
 	 **/
 	function balise_URL_FORMULAIRE_LETTRES($p) {
+		$_lang = champ_sql('lang', $p);
 		$fond_formulaire_inscription = lire_meta('fond_formulaire_lettre');
-		$p->code = "generer_url_public($fond_formulaire_inscription)";
+		$p->code = "generer_url_public($fond_formulaire_inscription,'lang='.$_lang)";
 		$p->statut = 'php';
 		return $p;
 	}
