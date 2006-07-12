@@ -42,7 +42,7 @@ div.cadre-padding ul li {
 }
 div.cadre-padding ul {
 	padding-left:1em;
-	margin:1em 0 0 0;
+	margin:.5em 0 .5em 0;
 }
 div.cadre-padding ul ul {
 	border-left:5px solid #DFDFDF;
@@ -52,7 +52,13 @@ div.cadre-padding ul li li {
 	margin:0 0 .5em 0;
 }
 div.cadre-padding ul li li div.nomplugin, div.cadre-padding ul li li div.nomplugin_on {
-	padding:.3em;
+	padding:.3em .3em .6em .3em;
+	font-weight:normal;
+}
+div.cadre-padding ul li li div.nomplugin a, div.cadre-padding ul li li div.nomplugin_on a {
+	outline:0;
+	outline:0 !important;
+	-moz-outline:0 !important;
 }
 div.cadre-padding ul li li div.nomplugin_on {
 	background:#FFF8EF;
@@ -74,7 +80,6 @@ div.cadre-padding input {
 div.detailplugin {
 	border-top:1px solid #B5BECF;
 	padding:.6em;
-	margin-top:.5em;
 	background:#F5F5F5;
 }
 div.detailplugin hr {
@@ -85,6 +90,7 @@ div.detailplugin hr {
 	}
 EOF;
 	echo "</style>";
+
 	echo "<br/><br/><br/>";
 	
 	gros_titre(_T('icone_admin_plugin'));
@@ -173,16 +179,21 @@ function recursDirs($maxfiles, $racine, $dir='', $depth=0, $nbfiles= 0) {
 		if(!empty($plugins)) {
 			sort($plugins);
 			$visible = false;
-			foreach($plugins as $p)
+			foreach($plugins as $p) {
 				if (@in_array("$dir/$p",$GLOBALS['plug_actifs'])) $visible = true;
+			}
 			echo "<li>";
 			echo $visible? bouton_block_visible($categ):bouton_block_invisible($categ);
 			echo "$categ\n<ul>";
 			
 			echo $visible? debut_block_visible($categ):debut_block_invisible($categ);
+			
+			$iteration = 0;
 			foreach($plugins as $p) {
+				$iteration .= abs(crc32($dir));
 				echo "<li>";
-				echo ligne_plug("$dir/$p");
+				echo ligne_plug("$dir/$p", $iteration);
+				$iteration++;
 				echo "</li>\n";
 			}
 			echo "</ul></li>\n";
@@ -204,15 +215,27 @@ function recursDirs($maxfiles, $racine, $dir='', $depth=0, $nbfiles= 0) {
 }
 
 
-function ligne_plug($plug_file){
+function ligne_plug($plug_file, $iteration){
 	static $id_input=0;
 
 	$erreur = false;
 	$vals = array();
 	$info = plugin_get_infos($plug_file);
 	$plugok=@in_array($plug_file,$GLOBALS['plug_actifs']);
-
-	$s = "<div id='$plug_file' class='nomplugin".($plugok?'_on':'')."'>";
+	$s = "<script type='text/javascript'>";
+$s .= <<<EOF
+function verifchange$iteration(inputp) {
+	if(inputp.checked == true)
+	{
+		document.getElementById('$plug_file').className = 'nomplugin_on';
+	}
+	else {
+		document.getElementById('$plug_file').className = 'nomplugin';
+	}
+	}
+EOF;
+	$s .= "</script>";
+	$s .= "<div id='$plug_file' class='nomplugin".($plugok?'_on':'')."'>";
 	if (isset($info['erreur'])){
 		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
 		$erreur = true;
@@ -248,12 +271,12 @@ function ligne_plug($plug_file){
 	if (!$erreur){
 		$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
 		$s .= $plugok?" checked='checked'":"";
-		$s .= " /> <label for='label_$id_input' style='display:none'><strong>"._T('activer_plugin')."</strong></label>";
+		$s .= " onclick='verifchange$iteration(this)' /> <label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
 	}
 	$id_input++;
 	
 	$s .= bouton_block_invisible("$plug_file");
-	$s .= ($plugok?"<strong>":"").typo($info['nom']).($plugok?"</strong>":"");
+	$s .= ($plugok?"":"").typo($info['nom']).($plugok?"":"");
 
 
 	$s .= "</div>";
