@@ -11,6 +11,7 @@
 	</fieldset>]
 
 	<form action="#SELF#formulaire_ecrire_message" method="post">
+	[(#SELF|form_hidden)]
 		
 	[(#ENV**{messageenvoye}|?{'',' '})
 		[(#REM) Previsualisation... ]
@@ -43,9 +44,12 @@
 ]
 </div>
 [(#REM) les messages recus et envoyes dont l'auteur est auteur ou destinataire ]
-<BOUCLE_envoyes(SPIP_MESSAGES){id_auteur=#ENV{id_auteur}}{doublons selection}> </BOUCLE_envoyes>
-<BOUCLE_recus(SPIP_AUTEURS_MESSAGES){id_auteur=#ENV{id_auteur}}><BOUCLE_memo(SPIP_MESSAGES){id_message}{doublons selection}> </BOUCLE_memo></BOUCLE_recus>
+<BOUCLE_envoyes(SPIP_MESSAGES){id_auteur=#ENV{id_auteur}}{doublons selection}{statut!=poub}> </BOUCLE_envoyes>
+<BOUCLE_recus(SPIP_AUTEURS_MESSAGES){id_auteur=#ENV{id_auteur}}{vu!=pou}><BOUCLE_memo(SPIP_MESSAGES){id_message}{doublons selection}> </BOUCLE_memo></BOUCLE_recus>
 <B_liste>
+<form action="#SELF#formulaire_ecrire_message" method="post">
+[(#SELF|form_hidden)]
+
 <p>
 #ANCRE_PAGINATION
 
@@ -56,20 +60,46 @@
 <th scope='col'>A</th>
 <th scope='col'><a href='[(#ENV{self}|parametre_url{tri,titre}|parametre_url{senstri,[(#ENV{tri}|=={titre}|?{[(#ENV{senstri}|?{'0','1'})],#ENV{senstri}})]})]'>Sujet</a></th>
 <th scope='col'>Texte</th>
-<th scope='col'><a href='[(#ENV{self}|parametre_url{tri,date_heure}|parametre_url{senstri,[(#ENV{tri}|=={date_heure}|?{[(#ENV{senstri}|?{'0','1'})],#ENV{senstri}})]})]'>Date</a></th></tr>
+<th scope='col'><a href='[(#ENV{self}|parametre_url{tri,date_heure}|parametre_url{senstri,[(#ENV{tri}|=={date_heure}|?{[(#ENV{senstri}|?{'0','1'})],#ENV{senstri}})]})]'>Date</a></th>
+<th scope='col'></th>
+</tr>
 </thead>
 <tbody>
 <BOUCLE_liste(SPIP_MESSAGES spip_auteurs){!doublons selection}{par #ENV{tri}}{inverse #ENV{senstri,1}}{pagination 5}>
 <tr class='[(#COMPTEUR_BOUCLE|alterner{'row_even','row_odd'})]'>
-<td>#NOM</td>
-<td><BOUCLE_destinataires(SPIP_AUTEURS_MESSAGES){id_message}{', '}><BOUCLE_auteurdest(AUTEURS){id_auteur}{tout}>[(#_destinataires:VU|=={oui}|?{'','<strong>'})]#NOM[(#_destinataires:VU|=={oui}|?{'','</strong>'})]</BOUCLE_auteurdest></BOUCLE_destinataires></td>
+<td>
+[(#STATUT|=={poub}|?{'<small><i>',''})]
+[(#ID_AUTEUR|=={#ENV{id_auteur}}|?{'<strong>',''})]
+#NOM
+[(#ID_AUTEUR|=={#ENV{id_auteur}}|?{'</strong>',''})]
+[(#STATUT|=={poub}|?{'</small></i>',''})]
+</td>
+<td><BOUCLE_destinataires(SPIP_AUTEURS_MESSAGES){id_message}{', '}>
+<BOUCLE_auteurdest(AUTEURS){id_auteur}{tout}>
+[(#_destinataires:VU|=={pou}|?{'<small><i>',''})][(#_destinataires:VU|=={non}|?{'<strong>',''})]
+#NOM
+[(#_destinataires:VU|=={non}|?{'</strong>',''})]
+[(#_destinataires:VU|=={pou}|?{'</small></i>',''})]
+</BOUCLE_auteurdest>
+</BOUCLE_destinataires></td>
 <td>#TITRE</td>
 <td>#TEXTE</td>
 <td>[(#DATE_HEURE|affdate_jourcourt|=={[(#ENV{date}|affdate_jourcourt)]}|?{[(#DATE_HEURE|heures):[(#DATE_HEURE|minutes)]],[(#DATE_HEURE|affdate_jourcourt)]}) ]</td>
+<td><input type='checkbox' name='messagecheck[#ID_MESSAGE]' id='messagecheck#ID_MESSAGE' value='oui' /></td>
 </tr>
 </BOUCLE_liste>
+<tr class='[(#COMPTEUR_BOUCLE|plus{1}|alterner{'row_even','row_odd'})]'>
+<td colspan='6'>
+<:messagerie:action_item_selection:>
+<input type="submit" name="efface" value="<:messagerie:effacer_messages:>" class='fondl' />
+<input type="submit" name="rappel" value="<:messagerie:rappeler_messages:>" class='fondl' />
+<input type="submit" name="vu" value="<:messagerie:marquer_vu:>" class='fondl' />
+</div>
+</td>
+</tr>
 </tbody>
 </table>
 </p>
 <p class='pagination'>#PAGINATION</p>
+</form>
 </B_liste>

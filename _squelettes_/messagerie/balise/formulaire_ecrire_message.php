@@ -42,6 +42,40 @@ function balise_FORMULAIRE_ECRIRE_MESSAGE_dyn() {
 	else
 		$id_auteur='';
 
+	if (_request('vu')!==NULL){
+		$liste = _request('messagecheck');
+		foreach($liste as $id=>$value){
+			$res = spip_query("SELECT * FROM spip_auteurs_messages WHERE vu='non' AND id_auteur=".spip_abstract_quote($id_auteur)." AND id_message=".spip_abstract_quote($id));
+			if ($row = spip_fetch_array($res)){
+				spip_query("UPDATE spip_auteurs_messages SET vu='oui' WHERE id_auteur=".spip_abstract_quote($id_auteur)." AND id_message=".spip_abstract_quote($id));
+			}
+		}
+	}
+	if (_request('rappel')!==NULL){
+		$liste = _request('messagecheck');
+		foreach($liste as $id=>$value){
+			$res = spip_query("SELECT * FROM spip_auteurs_messages WHERE vu='oui' AND id_auteur=".spip_abstract_quote($id_auteur)." AND id_message=".spip_abstract_quote($id));
+			if ($row = spip_fetch_array($res)){
+				spip_query("UPDATE spip_auteurs_messages SET vu='non' WHERE id_auteur=".spip_abstract_quote($id_auteur)." AND id_message=".spip_abstract_quote($id));
+			}
+		}
+	}
+	if (_request('efface')!==NULL){
+		$liste = _request('messagecheck');
+		foreach($liste as $id=>$value){
+			$res = spip_query("SELECT * FROM spip_auteurs_messages WHERE vu!='pou' AND id_auteur=".spip_abstract_quote($id_auteur)." AND id_message=".spip_abstract_quote($id));
+			if ($row = spip_fetch_array($res)){
+				spip_query("UPDATE spip_auteurs_messages SET vu='pou' WHERE id_auteur=".spip_abstract_quote($id_auteur)." AND id_message=".spip_abstract_quote($id));
+			}
+			else {
+				$res = spip_query("SELECT * FROM spip_messages WHERE  statut!='poub' AND id_auteur=".spip_abstract_quote($id_auteur)." AND id_message=".spip_abstract_quote($id));
+				if ($row = spip_fetch_array($res)){
+					spip_query("UPDATE spip_messages SET statut='poub' WHERE id_auteur=".spip_abstract_quote($id_auteur)." AND id_message=".spip_abstract_quote($id));
+				}
+			}
+		}
+	}
+		
 
 	$sujet = _request('sujet_message');
 	$texte = _request('texte_message');
