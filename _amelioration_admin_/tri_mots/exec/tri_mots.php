@@ -70,13 +70,17 @@ function exec_tri_mots() {
   }
   spip_abstract_free($res);
 
-  $table = addslashes($_REQUEST['table']);
+  $table = addslashes($_REQUEST['objet']);
   if(!$table) $table = 'articles';
-  $id_table = addslashes($_REQUEST['id_table']);
+  $id_table = addslashes($_REQUEST['id_objet']);
   if(!$id_table) $id_table = 'id_article';
 
   //Installation
-  if(!lire_meta('TriMots:installe')) {
+  $installe = unserialize(lire_meta('TriMots:installe'));
+  if(!isset($installe)) { 
+	$installe = array(); 
+  }		
+  if(!isset($installe[$table])) {
 	$res = spip_query("SHOW COLUMNS FROM `".$table_pref."_mots_$table` LIKE 'rang'");
 	if(!spip_fetch_array($res)) {
 	  spip_query("ALTER TABLE `".$table_pref."_mots_$table` ADD `rang` BIGINT NOT NULL DEFAULT 0;");
@@ -91,7 +95,8 @@ function exec_tri_mots() {
 		}
 	  }
 	  spip_abstract_free($results);
-	  ecrire_meta('TriMots:installe',true); //histoire de pas faire une recherche dans la base à chaque coup
+	  $installe[$table] = true;
+	  ecrire_meta('TriMots:installe',serialize($installe)); //histoire de pas faire une recherche dans la base à chaque coup
 	  ecrire_metas();
 	}
 	spip_free_result($res);
@@ -140,7 +145,7 @@ function exec_tri_mots() {
 
   $result_articles = "SELECT $table.titre, $table.$id_table, lien.rang FROM spip_mots_$table AS lien, spip_$table AS $table
  	    WHERE $table.$id_table=lien.$id_table AND $table.statut='publie' AND lien.id_mot=$id_mot ORDER BY lien.rang";
-
+ 
 global $spip_lang_left;
   echo "<div style='height: 12px;'></div>";
   echo "<div class='liste'>";  
