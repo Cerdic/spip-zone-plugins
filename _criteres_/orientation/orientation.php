@@ -12,9 +12,9 @@ function critere_portrait($idb, &$boucles) {
   $not = $param->not;
 
   if ($not) 
-	$boucle->where[] = $table.".hauteur <= ".$table.".largeur";
+	$boucle->where[] = "'$table.hauteur <= $table.largeur'";
   else
-	$boucle->where[] = $table.".hauteur > ".$table.".largeur";
+	$boucle->where[] = "'$table.hauteur > $table.largeur'";
 }
 // {paysage}
 
@@ -24,9 +24,9 @@ function critere_paysage($idb, &$boucles) {
   $not = $param->not;
 
   if ($not) 
-	$boucle->where[] = $table.".largeur <= ".$table.".hauteur";
+	$boucle->where[] = "'$table.largeur <= $table.hauteur'";
   else 
-	$boucle->where[] = $table.".largeur > ".$table.".hauteur";
+	$boucle->where[] = "'$table.largeur > $table.hauteur'";
 }
 // {carre}
 function critere_carre($idb, &$boucles) {
@@ -35,9 +35,9 @@ function critere_carre($idb, &$boucles) {
   $not = $param->not;
 
   if ($not) 
-	$boucle->where[] = $table.".largeur != ".$table.".hauteur";
+	$boucle->where[] = "'$table.largeur != $table.hauteur'";
   else
-	$boucle->where[] = $table.".largeur = ".$table.".hauteur";
+	$boucle->where[] = "'$table.largeur = $table.hauteur'";
 }
 
 
