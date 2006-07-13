@@ -81,7 +81,7 @@ Timeline.ClassicTheme._Impl = function() {
             gap:            0.5  // em
         },
         instant: {
-            icon:           Timeline.urlPrefix + "images/dull-blue-circle.png",
+            icon:           Timeline.urlPrefix + "images/wrapper.php?file=dull-blue-circle.png",
             lineColor:      "#58A0DC",
             impreciseColor: "#58A0DC",
             impreciseOpacity: 20,

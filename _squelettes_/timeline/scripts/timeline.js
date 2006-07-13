@@ -213,7 +213,7 @@ Timeline._Impl.prototype._initialize = function() {
     /*
      *  inserting copyright and link to simile
      */
-    var elmtCopyright = Timeline.Graphics.createTranslucentImage(doc, Timeline.urlPrefix + (this.isHorizontal() ? "images/copyright-vertical.png" : "images/copyright.png"));
+    var elmtCopyright = Timeline.Graphics.createTranslucentImage(doc, Timeline.urlPrefix + (this.isHorizontal() ? "images/wrapper.php?file=copyright-vertical.png" : "images/wrapper.php?file=copyright.png"));
     elmtCopyright.className = "timeline-copyright";
     elmtCopyright.title = "Timeline (c) SIMILE - http://simile.mit.edu/timeline/";
     Timeline.DOM.registerEvent(elmtCopyright, "click", function() { window.location = "http://simile.mit.edu/timeline/"; });

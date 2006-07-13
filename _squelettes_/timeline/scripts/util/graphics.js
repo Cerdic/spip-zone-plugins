@@ -107,22 +107,22 @@ Timeline.Graphics.createBubbleForPoint = function(doc, pageX, pageY, contentWidt
         divInner.appendChild(divImg);
     }
     
-    createImg(urlPrefix + "images/bubble-top-left.png", 0, 0, margins.left, margins.top);
-    createImg(urlPrefix + "images/bubble-top.png", margins.left, 0, contentWidth, margins.top);
-    createImg(urlPrefix + "images/bubble-top-right.png", margins.left + contentWidth, 0, margins.right, margins.top);
+    createImg(urlPrefix + "images/wrapper.php?file=bubble-top-left.png", 0, 0, margins.left, margins.top);
+    createImg(urlPrefix + "images/wrapper.php?file=bubble-top.png", margins.left, 0, contentWidth, margins.top);
+    createImg(urlPrefix + "images/wrapper.php?file=bubble-top-right.png", margins.left + contentWidth, 0, margins.right, margins.top);
     
-    createImg(urlPrefix + "images/bubble-left.png", 0, margins.top, margins.left, contentHeight);
-    createImg(urlPrefix + "images/bubble-right.png", margins.left + contentWidth, margins.top, margins.right, contentHeight);
+    createImg(urlPrefix + "images/wrapper.php?file=bubble-left.png", 0, margins.top, margins.left, contentHeight);
+    createImg(urlPrefix + "images/wrapper.php?file=bubble-right.png", margins.left + contentWidth, margins.top, margins.right, contentHeight);
     
-    createImg(urlPrefix + "images/bubble-bottom-left.png", 0, margins.top + contentHeight, margins.left, margins.bottom);
-    createImg(urlPrefix + "images/bubble-bottom.png", margins.left, margins.top + contentHeight, contentWidth, margins.bottom);
-    createImg(urlPrefix + "images/bubble-bottom-right.png", margins.left + contentWidth, margins.top + contentHeight, margins.right, margins.bottom);
+    createImg(urlPrefix + "images/wrapper.php?file=bubble-bottom-left.png", 0, margins.top + contentHeight, margins.left, margins.bottom);
+    createImg(urlPrefix + "images/wrapper.php?file=bubble-bottom.png", margins.left, margins.top + contentHeight, contentWidth, margins.bottom);
+    createImg(urlPrefix + "images/wrapper.php?file=bubble-bottom-right.png", margins.left + contentWidth, margins.top + contentHeight, margins.right, margins.bottom);
     
     var divClose = doc.createElement("div");
     divClose.style.left = (bubbleWidth - margins.right + Timeline.Graphics._bubblePadding - 16 - 2) + "px";
     divClose.style.top = (margins.top - Timeline.Graphics._bubblePadding + 1) + "px";
     divClose.style.cursor = "pointer";
-    setImg(divClose, urlPrefix + "images/close-button.png", 16, 16);
+    setImg(divClose, urlPrefix + "images/wrapper.php?file=close-button.png", 16, 16);
     Timeline.DOM.registerEventWithObject(divClose, "click", bubble, bubble.close);
     divInner.appendChild(divClose);
         
@@ -151,7 +151,7 @@ Timeline.Graphics.createBubbleForPoint = function(doc, pageX, pageY, contentWidt
                 
                 divImg.style.left = (pageX - Timeline.Graphics._halfArrowWidth - left) + "px";
                 divImg.style.top = (margins.top + contentHeight) + "px";
-                setImg(divImg, urlPrefix + "images/bubble-bottom-arrow.png", 37, margins.bottom);
+                setImg(divImg, urlPrefix + "images/wrapper.php?file=bubble-bottom-arrow.png", 37, margins.bottom);
                 divInner.appendChild(divImg);
                 
                 div.style.left = left + "px";
@@ -164,7 +164,7 @@ Timeline.Graphics.createBubbleForPoint = function(doc, pageX, pageY, contentWidt
                 
                 divImg.style.left = (pageX - Timeline.Graphics._halfArrowWidth - left) + "px";
                 divImg.style.top = "0px";
-                setImg(divImg, urlPrefix + "images/bubble-top-arrow.png", 37, margins.top);
+                setImg(divImg, urlPrefix + "images/wrapper.php?file=bubble-top-arrow.png", 37, margins.top);
                 divInner.appendChild(divImg);
                 
                 div.style.left = left + "px";
@@ -185,7 +185,7 @@ Timeline.Graphics.createBubbleForPoint = function(doc, pageX, pageY, contentWidt
             
             divImg.style.left = (margins.left + contentWidth) + "px";
             divImg.style.top = (pageY - Timeline.Graphics._halfArrowWidth - top) + "px";
-            setImg(divImg, urlPrefix + "images/bubble-right-arrow.png", margins.right, 37);
+            setImg(divImg, urlPrefix + "images/wrapper.php?file=bubble-right-arrow.png", margins.right, 37);
             divInner.appendChild(divImg);
             
             div.style.left = (pageX - Timeline.Graphics._bubblePointOffset - bubbleWidth +
@@ -196,7 +196,7 @@ Timeline.Graphics.createBubbleForPoint = function(doc, pageX, pageY, contentWidt
             
             divImg.style.left = "0px";
             divImg.style.top = (pageY - Timeline.Graphics._halfArrowWidth - top) + "px";
-            setImg(divImg, urlPrefix + "images/bubble-left-arrow.png", margins.left, 37);
+            setImg(divImg, urlPrefix + "images/wrapper.php?file=bubble-left-arrow.png", margins.left, 37);
             divInner.appendChild(divImg);
             
             div.style.left = (pageX + Timeline.Graphics._bubblePointOffset - 
