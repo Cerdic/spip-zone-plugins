@@ -289,10 +289,16 @@ function initLightbox()
 	for (var i=0; i<anchors.length; i++){
 		var anchor = anchors[i];
 
-		if (anchor.getAttribute("href") && 
-		//(anchor.getAttribute("rel") == "lightbox")
-		(anchor.getAttribute("type") == "image/jpeg")
-		){
+		if (anchor.getAttribute("href")
+		&&
+		(anchor.getAttribute("rel") == "lightbox"
+		|| ((anchor.getAttribute("type")
+			&& anchor.getAttribute("type").match(/^image\/(jpeg|png|gif)$/i))
+			|| (!anchor.getAttribute("type")
+				&& anchor.getAttribute("href").match(/\.(jpg|jpeg|png|gif)/i)
+			)
+			)
+		)) {
 			anchor.onclick = function () {showLightbox(this); return false;}
 		}
 	}
