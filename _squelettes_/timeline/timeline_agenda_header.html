@@ -1,0 +1,54 @@
+#CACHE{365*24*3600}
+<script src="#CHEMIN{timeline-api.js}" type="text/javascript"></script>
+<script type="text/javascript">
+var tl;
+function onLoad() {
+  var eventSource = new Timeline.DefaultEventSource();
+  var bandInfos = [
+				   Timeline.createBandInfo({
+					   eventSource:    eventSource,
+						 date:           "[(#ENV{date}|affdate{'M d Y H:i:s'})]",
+						 width:          "75%", 
+						 intervalUnit:   Timeline.DateTime.DAY, 
+						 intervalPixels: 100
+						 }),
+				   Timeline.createBandInfo({
+					   showEventText:  false,
+						 trackHeight:    0.5,
+						 trackGap:       0.2,
+					   eventSource:    eventSource,
+						 date:           "[(#ENV{date}|affdate{'M d Y H:i:s'})]",
+						 width:          "20%", 
+						 intervalUnit:   Timeline.DateTime.MONTH, 
+						 intervalPixels: 100
+						 }),
+				   Timeline.createBandInfo({
+					 	 showEventText:  false,
+						 trackHeight:    0.5,
+						 trackGap:       0.2,
+						 eventSource:    eventSource,
+						 date:           "[(#ENV{date}|affdate{'M d Y H:i:s'})]",
+						 width:          "5%", 
+						 intervalUnit:   Timeline.DateTime.YEAR, 
+						 intervalPixels: 200
+						 })
+				   ];
+  bandInfos[1].syncWith = 0;
+  bandInfos[2].syncWith = 0;
+  bandInfos[1].highlight = true;
+  bandInfos[2].highlight = true;
+  
+  var tl = Timeline.create(document.getElementById("my-timeline"), bandInfos);
+  Timeline.loadXML("[(#URL_PAGE{timeline_agenda_xml}|parametre_url{id_rubrique,#ENV{id_rubrique}})]", function(xml, url) { eventSource.loadXML(xml, url); });
+}
+
+var resizeTimerID = null;
+	function onResize() {
+  if (resizeTimerID == null) {
+	resizeTimerID = window.setTimeout(function() {
+										resizeTimerID = null;
+										tl.layout();
+									  }, 500);
+  }
+}
+</script>
