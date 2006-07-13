@@ -25,19 +25,21 @@ function TriMots_affiche_droite($arguments) {
   global $connect_statut, $connect_toutes_rubriques;
   if (($connect_statut == '0minirezo') AND $connect_toutes_rubriques) {
 	if(_request('exec') == 'articles') {
-	  $arguments['data'] .= TriMots_boite_tri_mots(_request('id_article'),'articles','id_article');
+	  $arguments['data'] .= TriMots_boite_tri_mots(_request('id_article'),'articles','id_article','articles');
 	}
-	else if(_request('exec') == 'rubriques') {
-	  $arguments['data'] .= TriMots_boite_tri_mots(_request('id_rubrique'),'rubriques','id_rubrique');
+	else if(_request('exec') == 'naviguer') {
+	  $arguments['data'] .= TriMots_boite_tri_mots(_request('id_rubrique'),'rubriques','id_rubrique','naviguer');
 	}
 	else if(_request('exec') == 'mots_edit') {
-	  $arguments['data'] .= icone(_T('trimots:titre_page'),generer_url_ecrire('tri_mots','objet=articles&id_objet=id_article&id_mot='._request('id_mot').'&retour='.urlencode(generer_url_ecrire('mots_edit',"id_mot="._request('id_mot')))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
+	  $arguments['data'] .= icone(_T('trimots:titre_articles'),generer_url_ecrire('tri_mots','objet=articles&id_objet=id_article&id_mot='._request('id_mot').'&retour='.urlencode(generer_url_ecrire('mots_edit',"id_mot="._request('id_mot')))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
+	$arguments['data'] .= icone(_T('trimots:titre_rubriques'),generer_url_ecrire('tri_mots','objet=rubriques&id_objet=id_rubrique&id_mot='._request('id_mot').'&retour\
+='.urlencode(generer_url_ecrire('mots_edit',"id_mot="._request('id_mot')))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
 	}
   }
   return $arguments;
 }
 
-function TriMots_boite_tri_mots($id,$objet,$id_objet) {
+function TriMots_boite_tri_mots($id,$objet,$id_objet,$retour) {
   global $spip_lang_left;
   include_ecrire('inc_abstract_sql');
   $to_ret = '<div>&nbsp;</div>';
@@ -57,7 +59,7 @@ function TriMots_boite_tri_mots($id,$objet,$id_objet) {
   $rez = spip_abstract_select($select,$from,$where);
   $to_ret .= '<div class="plan-articles">';
   while($row = spip_abstract_fetch($rez)) {
-    $to_ret .= '<a href="'.generer_url_ecrire('tri_mots','objet='.$objet.'&id_objet='.$id_objet.'&id_mot='.$row['id_mot'].'&retour='.urlencode(generer_url_ecrire($objet,"$id_objet=$id"))).'">
+    $to_ret .= '<a href="'.generer_url_ecrire('tri_mots','objet='.$objet.'&id_objet='.$id_objet.'&id_mot='.$row['id_mot'].'&retour='.urlencode(generer_url_ecrire($retour,"$id_objet=$id"))).'">
 <div class="arial1" style="float: right; color: black; padding-left: 4px;">
 <b> '._T('trimots:rang').'&nbsp;'.$row['rang'].'</b>
 </div>';
