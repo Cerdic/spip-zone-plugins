@@ -5,9 +5,13 @@
 
 <BOUCLE_events(EVENEMENTS) {id_rubrique?} {!par date}>
     <event start="[(#DATE_DEBUT|affdate{'M d Y H:i:s'})]" end="[(#DATE_FIN|affdate{'M d Y H:i:s'})]" title="[(#TITRE|texte_backend)]" link="#URL_ARTICLE" isDuration="true">
-
-      [(#DESCRIPTIF|texte_backend)]
-        </event>
+    [(#DESCRIPTIF|texte_backend)]
+    <BOUCLE_detail(ARTICLES){id_article}>
+    [<br/> (#DESCRIPTIF|texte_backend)]
+    [<br/> (#CHAPO|texte_backend)]
+    [<br/> (#TEXTE|texte_backend)]
+    </BOUCLE_detail>
+    </event>
 </BOUCLE_events>
 
 </data>
