@@ -9,7 +9,7 @@
 			<BOUCLE_breves(BREVES) {id_rubrique}>
 				<url>
 				  <loc>[(#URL_BREVE|entites_html|url_absolue)]</loc>
-				  <lastmod>[(#DATE_MODIF|affdate{"Y-m-d"})]</lastmod>
+				  <lastmod>[(#DATE|affdate{"Y-m-d"})]</lastmod>
 				  <priority>[(#REM|priorite)]</priority>
 				  [(#DATE_MODIF|affdate{"Y-m-d"}|update{[(#DATE|affdate{"Y-m-d"})]})]
 				</url>
