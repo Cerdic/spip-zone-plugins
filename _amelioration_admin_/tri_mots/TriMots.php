@@ -31,8 +31,8 @@ function TriMots_affiche_droite($arguments) {
 	  $arguments['data'] .= TriMots_boite_tri_mots($arguments['args']['id_rubrique'],'rubriques','id_rubrique','naviguer');
 	}
 	else if($arguments['args']['exec'] == 'mots_edit') {
-	  $arguments['data'] .= icone(_T('trimots:titre_page',array('objets' => _T('articles'))),generer_url_ecrire('tri_mots','objet=articles&id_objet=id_article&id_mot='.$arguments['args']['id_mot'].'&retour='.urlencode(generer_url_ecrire('mots_edit',"id_mot=".$arguments['args']['id_mot']))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
-	$arguments['data'] .= icone(_T('trimots:titre_page',array('objets' => _T('rubriques'))),generer_url_ecrire('tri_mots','objet=rubriques&id_objet=id_rubrique&id_mot='.$arguments['args']['id_mot'].'&retour\
+	  $arguments['data'] .= icone(_T('trimots:titre_page',array('objets' => _T('public:articles'))),generer_url_ecrire('tri_mots','objet=articles&ident_objet=id_article&id_mot='.$arguments['args']['id_mot'].'&retour='.urlencode(generer_url_ecrire('mots_edit',"id_mot=".$arguments['args']['id_mot']))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
+	$arguments['data'] .= icone(_T('trimots:titre_page',array('objets' => _T('public:rubriques'))),generer_url_ecrire('tri_mots','objet=rubriques&ident_objet=id_rubrique&id_mot='.$arguments['args']['id_mot'].'&retour\
 ='.urlencode(generer_url_ecrire('mots_edit',"id_mot=".$arguments['args']['id_mot']))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
 	}
   }
@@ -47,7 +47,7 @@ function TriMots_boite_tri_mots($id,$objet,$id_objet,$retour) {
   $to_ret .= "<div style='position: relative;'>";
   $to_ret .= "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>
 	<img src='"._DIR_PLUGIN_TRI_MOTS."/img/updown.png'/></div>";
-  $to_ret .= "<div style='background-color: white; color: black; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>"._T('trimots:ordonner',array('objets' => _T($objet)))."</b></div>";
+  $to_ret .= "<div style='background-color: white; color: black; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>"._T('trimots:ordonner',array('objets' => _T("public:$objet")))."</b></div>";
   $to_ret .= "</div>";
 
   $to_ret .= '<div class="plan-articles">';
@@ -64,7 +64,7 @@ function TriMots_boite_tri_mots($id,$objet,$id_objet,$retour) {
   $rez = spip_abstract_select($select,$from,$where);
   $to_ret .= '<div class="plan-articles">';
   while($row = spip_abstract_fetch($rez)) {
-    $to_ret .= '<a href="'.generer_url_ecrire('tri_mots','objet='.$objet.'&id_objet='.$id_objet.'&id_mot='.$row['id_mot'].'&retour='.urlencode(generer_url_ecrire($retour,"$id_objet=$id"))).'">
+    $to_ret .= '<a href="'.generer_url_ecrire('tri_mots','objet='.$objet.'&ident_objet='.$id_objet.'&id_mot='.$row['id_mot'].'&retour='.urlencode(generer_url_ecrire($retour,"$id_objet=$id"))).'">
 <div class="arial1" style="float: right; color: black; padding-left: 4px;">
 <b> '._T('trimots:rang').'&nbsp;'.($row['rang']?$row['rang']:0).'</b>
 </div>';

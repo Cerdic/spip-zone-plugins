@@ -41,13 +41,13 @@ function exec_tri_mots() {
   
   $table = addslashes(_request('objet'));
   if(!$table) $table = 'articles';
-  $id_table = addslashes(_request('id_objet'));
+  $id_table = addslashes(_request('ident_objet'));
   if(!$id_table) $id_table = 'id_article';
 
   include_spip("inc/presentation");
   include_spip("base/abstract_sql");
 
-  debut_page('&laquo; '._T('trimots:titre_page',array('objets'=>_T($table))).' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_TRI_MOTS."/tri_mots.css");
+  debut_page('&laquo; '._T('trimots:titre_page',array('objets'=>_T("public:$table"))).' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_TRI_MOTS."/tri_mots.css");
    
   if(!verifier_admin()) {
 	echo "<strong>"._T('avis_acces_interdit')."</strong>";
@@ -118,14 +118,14 @@ function exec_tri_mots() {
   echo "Event.observe(window, 'load', initialiseSort, false);";
   echo ' </script>';
 
-  gros_titre(_T('trimots:titre_tri_mots',array('titre_mot'=>$titre,'type_mot'=>$type,'objets'=>_T($table))));
+  gros_titre(_T('trimots:titre_tri_mots',array('titre_mot'=>$titre,'type_mot'=>$type,'objets'=>_T("public:$table"))));
 
   //Colonne de gauche
   debut_gauche();
 
   debut_cadre_enfonce();
 
-  echo _T('trimots:tri_mots_help',array('titre_mot'=>$titre, 'type_mot'=>$type,'objets'=>_T($table)));
+  echo _T('trimots:tri_mots_help',array('titre_mot'=>$titre, 'type_mot'=>$type,'objets'=>_T("public:$table")));
 
   fin_cadre_enfonce();
 
@@ -156,7 +156,7 @@ function exec_tri_mots() {
   echo "<div style='position: relative;'>";
   echo "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>
 	  <img src='"._DIR_PLUGIN_TRI_MOTS."/img/updown.png'/></div>";
-  echo "<div style='background-color: white; color: black; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>"._T($table)."</b></div>";
+  echo "<div style='background-color: white; color: black; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>"._T("public:$table")."</b></div>";
   echo "</div>";
 
   echo "<ul id='liste_tri'>";
