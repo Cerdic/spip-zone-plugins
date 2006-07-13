@@ -5,7 +5,7 @@
 	 * SPIP-Lettres : plugin de gestion de lettres d'information
 	 *
 	 * Copyright (c) 2006
-	 * Agence Atypik Créations
+	 * Agence Artégo http://www.artego.fr
 	 *  
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	 * Pour plus de details voir le fichier COPYING.txt.
@@ -181,6 +181,21 @@
 		'derniers_mois' => 'Ces 12 derniers mois',
 		'au_fil_des_envois' => 'Au fil des envois',
 		'statistiques_par_lettre' => 'Statistiques par lettre',
+		'configuration_squelettes' => 'Configuration des squelettes',
+		'configuration_mailer' => 'Configuration du mailer',
+		'configuration_smtp' => 'Choix du mailer',
+		'configuration_smtp_descriptif' => 'Si vous n\'êtes pas sûrs, choisissez la fonction mail de PHP.',
+		'utiliser_mail' => 'Utiliser la fonction mail de PHP',
+		'utiliser_smtp' => 'Utiliser SMTP',
+		'spip_lettres_smtp_host' => 'Hôte :',
+		'spip_lettres_smtp_port' => 'Port :',
+		'spip_lettres_smtp_auth' => 'Requiert une authentification :',
+		'spip_lettres_smtp_auth_oui' => 'oui',
+		'spip_lettres_smtp_auth_non' => 'non',
+		'spip_lettres_smtp_username' => 'Nom d\'utilisateur :',
+		'spip_lettres_smtp_password' => 'Mot de passe :',
+		'spip_lettres_smtp_sender' => 'Retour des erreurs (optionnel)',
+		'spip_lettres_smtp_sender_descriptif' => 'Définit dans l\'entête du mail l\'adresse email de retour des erreurs (ou Return-Path), et lors d\'un envoi via la méthode SMTP cela définit aussi l\'adresse de l\'envoyeur.',
 
 
 		// Formulaires

@@ -5,7 +5,7 @@
 	 * SPIP-Lettres : plugin de gestion de lettres d'information
 	 *
 	 * Copyright (c) 2006
-	 * Agence Atypik Créations
+	 * Agence Artégo http://www.artego.fr
 	 *  
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	 * Pour plus de details voir le fichier COPYING.txt.

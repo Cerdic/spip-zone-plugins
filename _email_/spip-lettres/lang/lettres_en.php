@@ -5,7 +5,7 @@
 	 * SPIP-Lettres : plugin de gestion de lettres d'information
 	 *
 	 * Copyright (c) 2006
-	 * Agence Atypik Créations
+	 * Agence Artégo http://www.artego.fr
 	 *  
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	 * Pour plus de details voir le fichier COPYING.txt.
@@ -182,6 +182,21 @@
 		'derniers_mois' => 'Last 12 months',
 		'au_fil_des_envois' => 'By archives',
 		'statistiques_par_lettre' => 'Statistics by newsletter',
+		'configuration_squelettes' => 'Templates\' configuration',
+		'configuration_mailer' => 'Mailer\'s configuration',
+		'configuration_smtp' => 'Choose your mailer',
+		'configuration_smtp_descriptif' => 'If you\'re not sure about the settings, leave them set to "PHP mail".',
+		'utiliser_mail' => 'Use mail function from PHP',
+		'utiliser_smtp' => 'Use SMTP',
+		'spip_lettres_smtp_host' => 'Host :',
+		'spip_lettres_smtp_port' => 'Port :',
+		'spip_lettres_smtp_auth' => 'Requires authentication :',
+		'spip_lettres_smtp_auth_oui' => 'yes',
+		'spip_lettres_smtp_auth_non' => 'no',
+		'spip_lettres_smtp_username' => 'Username :',
+		'spip_lettres_smtp_password' => 'Paswword :',
+		'spip_lettres_smtp_sender' => 'Return-Path (optional)',
+		'spip_lettres_smtp_sender_descriptif' => 'Define the Return-Path in the mail header, useful for error feedback, also in SMTP mode it defines the sender\'s email.',
 
 
 

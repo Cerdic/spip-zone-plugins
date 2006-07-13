@@ -5,7 +5,7 @@
 	 * SPIP-Lettres : plugin de gestion de lettres d'information
 	 *
 	 * Copyright (c) 2006
-	 * Agence Atypik Créations
+	 * Agence Artégo http://www.artego.fr
 	 *  
 	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 	 * Pour plus de details voir le fichier COPYING.txt.
@@ -36,6 +36,9 @@
 			ecrire_meta('fond_formulaire_lettre', 'inscription');
 			ecrire_meta('fond_message_html', 'lettre_information_html');
 			ecrire_meta('fond_message_texte', 'lettre_information_texte');
+			ecrire_meta('spip_lettres_smtp', 'non');
+			ecrire_meta('spip_lettres_smtp_auth', 'non');
+			ecrire_meta('spip_lettres_smtp_sender', '');
 			ecrire_metas();
 		} else {
 			$version_base = $GLOBALS['meta']['spip_lettres_version'];
@@ -61,6 +64,13 @@
 				creer_base();
 				spip_query("ALTER TABLE spip_lettres ADD extra LONGBLOB NULL;");
 				ecrire_meta('spip_lettres_version', $version_base = 1.3);
+				ecrire_metas();
+			}
+			if ($version_base < 1.4) {
+				ecrire_meta('spip_lettres_smtp', 'non');
+				ecrire_meta('spip_lettres_smtp_auth', 'non');
+				ecrire_meta('spip_lettres_smtp_sender', '');
+				ecrire_meta('spip_lettres_version', $version_base = 1.4);
 				ecrire_metas();
 			}
 		}

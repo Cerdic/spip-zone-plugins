@@ -1,7 +1,7 @@
 <plugin>
         <nom>Plugin SPIP-Lettres</nom>
-        <auteur>[Atypik Cr&eacute;ations->http://www.atypik-creations.fr]</auteur>
-        <version>1.3</version>
+        <auteur>[Art&eacute;go->http://www.artego.fr]</auteur>
+        <version>1.4</version>
         <etat>stable</etat>
         <description>Gestion de lettres d'information</description>
         <options>lettres.php</options>
