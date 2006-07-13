@@ -27,18 +27,18 @@
 			$this->AddAddress($email);
 
 			if (isset($GLOBALS['meta']['spip_lettres_smtp_sender'])) {
-	       		$this->Sender = $GLOBALS["spip_lettres_smtp_sender"];
+	       		$this->Sender = $GLOBALS['meta']['spip_lettres_smtp_sender'];
 	       		$this->AddCustomHeader("Errors-To: ".$this->Sender);
 			}
 			
 			if (isset($GLOBALS['meta']['spip_lettres_smtp']) AND $GLOBALS['meta']['spip_lettres_smtp'] == 'oui') {
 	    		$this->Mailer	= 'smtp';
-			    $this->Host 	= $GLOBALS["spip_lettres_smtp_host"];
-			    $this->Port 	= $GLOBALS["spip_lettres_smtp_port"];
+			    $this->Host 	= $GLOBALS['meta']['spip_lettres_smtp_host'];
+			    $this->Port 	= $GLOBALS['meta']['spip_lettres_smtp_port'];
 				if ($GLOBALS['meta']['spip_lettres_smtp_auth'] == 'oui') {
 				    $this->SMTPAuth = true;
-				    $this->Username = $GLOBALS["spip_lettres_smtp_username"];
-				    $this->Password = $GLOBALS["spip_lettres_smtp_password"];
+				    $this->Username = $GLOBALS['meta']['spip_lettres_smtp_username'];
+				    $this->Password = $GLOBALS['meta']['spip_lettres_smtp_password'];
 				} else {
 				    $this->SMTPAuth = false;
 				}
