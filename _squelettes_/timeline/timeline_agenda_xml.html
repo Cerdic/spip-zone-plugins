@@ -4,12 +4,21 @@
 <data>
 
 <BOUCLE_events(EVENEMENTS) {id_rubrique?} {!par date}>
-    <event start="[(#DATE_DEBUT|affdate{'M d Y H:i:s'})]" end="[(#DATE_FIN|affdate{'M d Y H:i:s'})]" title="[(#TITRE|texte_backend)]" link="#URL_ARTICLE" isDuration="true">
+    <event
+    [(#HORAIRE|=={oui}|?{' ',''})
+    start="[(#DATE_DEBUT|affdate{'M d Y H:i:s'})]"
+    [(#DATE_FIN|=={#DATE_DEBUT}|?{'',' '}) end="[(#DATE_FIN|affdate{'M d Y H:i:s'})]" isDuration="true" ]
+    ][(#HORAIRE|=={non}|?{' ',''})
+    start="[(#DATE_DEBUT|affdate{'M d Y 00:00:00'})]"
+    [(#DATE_FIN|affdate{'M d Y'}|=={[(#DATE_DEBUT|affdate{'M d Y'})]}|?{'',' '}) end="[(#DATE_FIN|affdate{'M d Y 00:00:00'})]" isDuration="true" ]
+    ]
+    title="[(#TITRE|texte_backend)]" link="[(#URL_ARTICLE|parametre_url{id_evenement,#ID_EVENEMENT})]">
+    [(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})]&lt;br/&gt; 
     [(#DESCRIPTIF|texte_backend)]
     <BOUCLE_detail(ARTICLES){id_article}>
-    [<br/> (#DESCRIPTIF|texte_backend)]
-    [<br/> (#CHAPO|texte_backend)]
-    [<br/> (#TEXTE|texte_backend)]
+    [&lt;br/&gt; (#DESCRIPTIF|texte_backend)]
+    [&lt;br/&gt; (#CHAPO|texte_backend)]
+    [&lt;br/&gt; (#TEXTE|texte_backend)]
     </BOUCLE_detail>
     </event>
 </BOUCLE_events>

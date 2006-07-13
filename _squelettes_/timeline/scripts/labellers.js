@@ -50,7 +50,7 @@ Timeline.GregorianDateLabeller.prototype.defaultLabelInterval = function(date, i
     var text;
     var emphasized = false;
     
-    date = Timeline.DateTime.removeTimeZoneOffset(date, this._timeZone);
+    date2 = Timeline.DateTime.removeTimeZoneOffset(date, this._timeZone);
     
     switch(intervalUnit) {
     case Timeline.DateTime.MILLISECOND:

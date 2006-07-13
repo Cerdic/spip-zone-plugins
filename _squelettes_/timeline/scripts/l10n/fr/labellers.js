@@ -12,14 +12,14 @@ Timeline.GregorianDateLabeller.dayNames["fr"] = [
 
 Timeline.GregorianDateLabeller.labelPreciseFunctions["fr"] = function(date) {
     var text;
-    var emphasized = false;
+    return "";
 
     var date2 = Timeline.DateTime.removeTimeZoneOffset(date, this._timeZone);
-    text = Timeline.GregorianDateLabeller.dayNames["fr"][date2.getUTCDay()];
-    text = text + " " + date2.getUTCDate();
-    text = text + " " + Timeline.GregorianDateLabeller.getMonthName(date2.getUTCMonth(), this._locale);
-    text = text + " " + date2.getUTCFullYear();
-    text = text + ", " + date2.getUTCHours() + "h" + date2.getUTCMinutes();
+    text = Timeline.GregorianDateLabeller.dayNames["fr"][date.getUTCDay()];
+    text = text + " " + date.getUTCDate();
+    text = text + " " + Timeline.GregorianDateLabeller.getMonthName(date.getUTCMonth(), this._locale);
+    text = text + " " + date.getUTCFullYear();
+    text = text + ", " + date.getUTCHours() + "h" + date.getUTCMinutes();
     
     return text;
 };
