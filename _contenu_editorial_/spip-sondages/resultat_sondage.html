@@ -1,0 +1,5 @@
+<B_choix><ul class="spip">
+<BOUCLE_choix(CHOIX) {id_sondage=#ENV{id_sondage}} {par id_parent}>
+	<li>#TITRE : <BOUCLE_resultats(AVIS) {id_choix}> </BOUCLE_resultats>#TOTAL_BOUCLE <:sondages:votes:></B_resultats></li>
+</BOUCLE_choix></ul>
+</B_choix>

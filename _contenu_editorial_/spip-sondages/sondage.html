@@ -1,0 +1,99 @@
+#CACHE{7200}
+<BOUCLE_sondage(SONDAGES) {id_sondage}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[(#TITRE|textebrut)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	[<meta name="description" content="(#INTRODUCTION|couper{150}|attribut_html)" />]
+	<meta name="generator" content="SPIP" />
+	[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+
+	<!-- Lien vers le backend pour navigateurs eclaires -->
+	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}" />
+
+	<!-- Ceci est la feuille de style par defaut pour le code genere par SPIP -->
+	<link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" media="all" />
+	<!-- Feuille de styles CSS pour l'affichage du site sur ecran -->
+	<link rel="stylesheet" href="[(#CHEMIN{habillage.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
+	<!-- Feuille de styles CSS pour l'impression -->
+	<link rel="stylesheet" href="[(#CHEMIN{impression.css}|direction_css)]" type="text/css" media="print" />
+</head>
+
+<body>
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}{lang}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE) {id_rubrique} {tout}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : sondage ]
+
+		<div id="contenu">
+
+			<div class="cartouche">
+				[(#LOGO_SONDAGE||image_reduire{200,200})]
+				<h1 class="titre">#TITRE</h1>
+			</div>
+
+			[<div class="chapo">(#TEXTE)</div>]
+			
+			#FORMULAIRE_SONDAGE
+
+			<br class="nettoyeur" />
+
+			<div class="contre-encart">
+
+				<B_sous_rubriques>
+				<div class="rubriques">
+					<h2 class="menu-titre"><:sous_rubriques:></h2>
+					<ul>
+						<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
+						<li>
+							<a href="#URL_RUBRIQUE">[(#TITRE)]</a>
+
+							[(#REM) Une boucle recursive pour le mini plan]
+							<B_miniplan>
+							<ul>
+								<BOUCLE_miniplan(RUBRIQUES) {id_parent} {par num titre, titre}>
+								<li>
+									<a href="#URL_RUBRIQUE">[(#TITRE)]</a>
+									<BOUCLE_m2(BOUCLE_miniplan)></BOUCLE_m2>
+								</li>
+								</BOUCLE_miniplan>
+							</ul>
+							</B_miniplan>
+
+						</li>
+						</BOUCLE_sous_rubriques>
+					</ul>
+					</div>
+				</B_sous_rubriques>
+
+			</div><!-- fin contre-encart -->
+			
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+			<h1 class="invisible"><:navigation:></h1>
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{lang}>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{lang}>
+
+</div><!-- fin page -->
+#SPIP_CRON
+</body>
+</html>
+</BOUCLE_sondage>

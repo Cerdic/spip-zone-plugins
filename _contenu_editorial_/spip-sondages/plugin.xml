@@ -1,0 +1,19 @@
+<plugin>
+        <nom>Plugin SPIP-Sondages</nom>
+        <auteur>[Art&eacute;go->http://www.artego.fr]</auteur>
+        <version>1</version>
+        <etat>dev</etat>
+        <description>Gestion de sondages</description>
+        <options>sondages.php</options>
+        <fonctions>sondages.php</fonctions>
+        <prefix>sondages</prefix>
+        <pipeline>
+                <nom>ajouter_boutons</nom>
+        </pipeline>
+        <pipeline>
+                <nom>header_prive</nom>
+        </pipeline>
+        <pipeline>
+                <nom>taches_generales_cron</nom>
+        </pipeline>
+</plugin>
