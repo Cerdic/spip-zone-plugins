@@ -28,6 +28,7 @@
 		// Administration
 		'plugin' => 'Plugin',
 		'plugin_version' => 'version',
+		'plugin_auteur' => 'author',
 		'lettres_publiees' => 'Online newsletters',
 		'lettres_brouillon' => 'Offline newsletters',
 		'lettres_envoi_en_cours' => 'Pending delivery newsletters',

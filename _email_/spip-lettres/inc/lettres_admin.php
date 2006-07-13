@@ -664,6 +664,7 @@
 		$cadre.= "<b>"._T('lettres:plugin')."</b>";
 		$cadre.= "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
 		$cadre.= "<li>"._T("lettres:plugin_version")."&nbsp;: <b>".$info_plugin_lettres['version'].'</b></li>';
+		$cadre.= "<li>"._T("lettres:plugin_auteur")."&nbsp;: <b>".propre($info_plugin_lettres['auteur']).'</b></li>';
 		$cadre.= "</ul>";
 		$cadre.= "<br />";
 		if ($nb_inscrits) {

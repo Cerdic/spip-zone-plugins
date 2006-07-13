@@ -28,6 +28,7 @@
 		// Administration
 		'plugin' => 'Plugin',
 		'plugin_version' => 'version',
+		'plugin_auteur' => 'auteur',
 		'lettres_publiees' => 'Vos lettres publiées en ligne',
 		'lettres_brouillon' => 'Vos lettres non publiées en ligne',
 		'lettres_envoi_en_cours' => 'Vos lettres à envoyer',
