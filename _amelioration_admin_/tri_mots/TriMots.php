@@ -31,8 +31,8 @@ function TriMots_affiche_droite($arguments) {
 	  $arguments['data'] .= TriMots_boite_tri_mots($arguments['args']['id_rubrique'],'rubriques','id_rubrique','naviguer');
 	}
 	else if($arguments['args']['exec'] == 'mots_edit') {
-	  $arguments['data'] .= icone(_T('trimots:titre_articles'),generer_url_ecrire('tri_mots','objet=articles&id_objet=id_article&id_mot='.$arguments['args']['id_mot'].'&retour='.urlencode(generer_url_ecrire('mots_edit',"id_mot=".$arguments['args']['id_mot']))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
-	$arguments['data'] .= icone(_T('trimots:titre_rubriques'),generer_url_ecrire('tri_mots','objet=rubriques&id_objet=id_rubrique&id_mot='.$arguments['args']['id_mot'].'&retour\
+	  $arguments['data'] .= icone(_T('trimots:titre_page',array('objets' => _T('articles'))),generer_url_ecrire('tri_mots','objet=articles&id_objet=id_article&id_mot='.$arguments['args']['id_mot'].'&retour='.urlencode(generer_url_ecrire('mots_edit',"id_mot=".$arguments['args']['id_mot']))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
+	$arguments['data'] .= icone(_T('trimots:titre_page',array('objets' => _T('rubriques'))),generer_url_ecrire('tri_mots','objet=rubriques&id_objet=id_rubrique&id_mot='.$arguments['args']['id_mot'].'&retour\
 ='.urlencode(generer_url_ecrire('mots_edit',"id_mot=".$arguments['args']['id_mot']))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
 	}
   }
@@ -47,7 +47,7 @@ function TriMots_boite_tri_mots($id,$objet,$id_objet,$retour) {
   $to_ret .= "<div style='position: relative;'>";
   $to_ret .= "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>
 	<img src='"._DIR_PLUGIN_TRI_MOTS."/img/updown.png'/></div>";
-  $to_ret .= "<div style='background-color: white; color: black; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>"._T('trimots:ordonner')."</b></div>";
+  $to_ret .= "<div style='background-color: white; color: black; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>"._T('trimots:ordonner',array('objets' => _T($objet)))."</b></div>";
   $to_ret .= "</div>";
 
   $to_ret .= '<div class="plan-articles">';

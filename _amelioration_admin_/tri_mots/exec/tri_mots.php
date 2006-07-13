@@ -1,23 +1,23 @@
 <?php 
 
 
-//	  exec_tri_mots.php
-//    Fichier créé pour SPIP avec un bout de code emprunté à celui ci.
-//    Distribué sans garantie sous licence GPL./
-//    Copyright (C) 2006  Pierre ANDREWS
-//
-//    This program is free software; you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation; either version 2 of the License, or any later version.
-//
-//    This program is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//
-//    You should have received a copy of the GNU General Public License
-//    along with this program; if not, write to the Free Software
-//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+  //	  exec_tri_mots.php
+  //    Fichier créé pour SPIP avec un bout de code emprunté à celui ci.
+  //    Distribué sans garantie sous licence GPL./
+  //    Copyright (C) 2006  Pierre ANDREWS
+  //
+  //    This program is free software; you can redistribute it and/or modify
+  //    it under the terms of the GNU General Public License as published by
+  //    the Free Software Foundation; either version 2 of the License, or any later version.
+  //
+  //    This program is distributed in the hope that it will be useful,
+  //    but WITHOUT ANY WARRANTY; without even the implied warranty of
+  //    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  //    GNU General Public License for more details.
+  //
+  //    You should have received a copy of the GNU General Public License
+  //    along with this program; if not, write to the Free Software
+  //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
@@ -38,16 +38,22 @@ function verifier_admin() {
 function exec_tri_mots() {
   global $connect_id_auteur;
 
+  
+  $table = addslashes(_request('objet'));
+  if(!$table) $table = 'articles';
+  $id_table = addslashes(_request('id_objet'));
+  if(!$id_table) $id_table = 'id_article';
+
   include_spip("inc/presentation");
   include_spip("base/abstract_sql");
 
-  debut_page('&laquo; '._T('trimots:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_TRI_MOTS."/tri_mots.css");
-  
+  debut_page('&laquo; '._T('trimots:titre_page',array('objets'=>_T($table))).' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_TRI_MOTS."/tri_mots.css");
+   
   if(!verifier_admin()) {
-		echo "<strong>"._T('avis_acces_interdit')."</strong>";
-		fin_page();
-		exit;
-	}
+	echo "<strong>"._T('avis_acces_interdit')."</strong>";
+	fin_page();
+	exit;
+  }
 
   /***********************************************************************/
   /* PREFIXE*/
@@ -55,7 +61,7 @@ function exec_tri_mots() {
   $table_pref = 'spip';
   if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
 
-  $id_mot = intval($_REQUEST['id_mot']);
+  $id_mot = intval(_request('id_mot'));
 
   $select = array("titre,type");
   $from = array("spip_mots");
@@ -69,11 +75,6 @@ function exec_tri_mots() {
 	$type ='';
   }
   spip_abstract_free($res);
-
-  $table = addslashes($_REQUEST['objet']);
-  if(!$table) $table = 'articles';
-  $id_table = addslashes($_REQUEST['id_objet']);
-  if(!$id_table) $id_table = 'id_article';
 
   //Installation
   $installe = unserialize(lire_meta('TriMots:installe'));
@@ -109,55 +110,58 @@ function exec_tri_mots() {
   echo '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_MOTS.'/javascript/scriptaculous.js"></script>';
   echo '	<script type="text/javascript">';
   echo "function initialiseSort() {
-	Sortable.create('liste_tri');
-	$('submit_form').onsubmit = function() {
-	  $('order').value=Sortable.serialize('liste_tri',{name:'o'});
-	};
+  Sortable.create('liste_tri');
+  $('submit_form').onsubmit = function() {
+  $('order').value=Sortable.serialize('liste_tri',{name:'o'});
+  };
   }";
   echo "Event.observe(window, 'load', initialiseSort, false);";
   echo ' </script>';
 
-  gros_titre(_T('trimots:titre_tri_mots',array('titre_mot'=>$titre,'type_mot'=>$type)));
+  gros_titre(_T('trimots:titre_tri_mots',array('titre_mot'=>$titre,'type_mot'=>$type,'objets'=>_T($table))));
 
   //Colonne de gauche
   debut_gauche();
 
   debut_cadre_enfonce();
 
-  echo _T('trimots:tri_mots_help',array('titre_mot'=>$titre, 'type_mot'=>$type));
+  echo _T('trimots:tri_mots_help',array('titre_mot'=>$titre, 'type_mot'=>$type,'objets'=>_T($table)));
 
   fin_cadre_enfonce();
 
   debut_cadre_enfonce();
-			 $redirect = generer_url_ecrire('tri_mots',"table=$table&id_table=$id_table&id_mot=$id_mot");
+  $redirect = generer_url_ecrire('tri_mots',"table=$table&id_table=$id_table&id_mot=$id_mot");
   echo '<form id="submit_form" action="'.generer_url_action('tri_mots',"table=$table&id_table=$id_table&id_mot=$id_mot").'" method="post">
-<input type="hidden" name="redirect" value="'.$redirect.'"/>
-<input type="hidden" name="hash" value="'.calculer_action_auteur("tri_mots $table $id_table $id_mot").'"/>
-<input type="hidden" name="id_auteur" value="'.$connect_id_auteur.'" />
-<input type="hidden" name="order" id="order"/><label for="submit_button">'._T('trimots:envoyer').'</label><input type="submit" id="submit_button" value="'._T('valider').'"/></form>';
+  <input type="hidden" name="redirect" value="'.$redirect.'"/>
+  <input type="hidden" name="hash" value="'.calculer_action_auteur("tri_mots $table $id_table $id_mot").'"/>
+  <input type="hidden" name="id_auteur" value="'.$connect_id_auteur.'" />
+  <input type="hidden" name="order" id="order"/><label for="submit_button">'._T('trimots:envoyer').'</label><input type="submit" id="submit_button" value="'._T('valider').'"/></form>';
   fin_cadre_enfonce();
 
-  if($_REQUEST['retour']) icone(_T('icone_retour'), addslashes($_REQUEST['retour']), "mot-cle-24.gif", "rien.gif");
+  if(_request('retour')) icone(_T('icone_retour'), addslashes(_request('retour')), "mot-cle-24.gif", "rien.gif");
 
   //Milieu
 
   debut_droite();
 
-  $result_articles = "SELECT $table.titre, $table.$id_table, lien.rang FROM spip_mots_$table AS lien, spip_$table AS $table
- 	    WHERE $table.$id_table=lien.$id_table AND $table.statut='publie' AND lien.id_mot=$id_mot ORDER BY lien.rang";
- 
-global $spip_lang_left;
+
+  $select = array("$table.titre", "$table.$id_table", 'lien.rang');
+  $from = array("spip_mots_$table AS lien", "spip_$table AS $table");
+  $where = array("$table.$id_table=lien.$id_table" , "$table.statut='publie'" ,"lien.id_mot=$id_mot");
+  $order = array('lien.rang');
+
+  global $spip_lang_left;
   echo "<div style='height: 12px;'></div>";
   echo "<div class='liste'>";  
- echo "<div style='position: relative;'>";
+  echo "<div style='position: relative;'>";
   echo "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>
-	<img src='"._DIR_PLUGIN_TRI_MOTS."/img/updown.png'/></div>";
+	  <img src='"._DIR_PLUGIN_TRI_MOTS."/img/updown.png'/></div>";
   echo "<div style='background-color: white; color: black; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>"._T($table)."</b></div>";
   echo "</div>";
 
   echo "<ul id='liste_tri'>";
-  $result = spip_query($result_articles);
-  while ($row = spip_fetch_array($result)) {
+  $result = spip_abstract_select($select,$from,$where,'',$order);
+  while ($row = spip_abstract_fetch($result)) {
 	$id=$row[$id_table];
 	$titre=$row['titre'];
 	$rang=$row['rang'];
@@ -166,11 +170,11 @@ global $spip_lang_left;
 
   }
 
-  spip_free_result($result);
+  spip_abstract_free($result);
   echo '</ul>';
   echo '</div>';
 
   fin_page();
-  
+
 }
 ?>
