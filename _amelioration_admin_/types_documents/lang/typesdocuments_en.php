@@ -13,7 +13,7 @@ This plugin allows you to manage the allowed types.',
 									   'permission' => 'Allowed?',
 									   'mime' => 'Mime Type',
 									   'nombre_documents' => 'Number of Documents',
-									   'effacer' => 'Remove'
+									   'effacer' => 'Remove',
 									   'non' => 'no',
 									   'embed' => 'embed',
 									   'image' => 'image',
