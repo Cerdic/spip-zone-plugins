@@ -68,7 +68,9 @@ function http_calendrier_mini($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	$ligne = '';
 	$debut = date("w",mktime(1,1,1,$mois,$premier_jour,$annee));
 	for ($i=$debut ? $debut : 7;$i>1;$i--) {
-		$ligne .= "\n\t<td>&nbsp;</td>";
+		$mois_precedent = mktime(1,1,1,$mois-1,1,$annee);
+		$jour_mois_precedent = date('t', $mois_precedent)+2-$i;
+		$ligne .= "\n\t<td class=\"horsperiode\">$jour_mois_precedent</td>";
 	}
 
 	$total = '';
@@ -100,7 +102,7 @@ function http_calendrier_mini($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	}
 	// affichage de la fin de semaine hors periode
 	for($j=$jour_semaine ? $jour_semaine : 7; $j<7; $j++) {
-		$ligne .= "\n\t<td>&nbsp;</td>";			
+		$ligne .= "\n\t<td class=\"horsperiode\">$i</td>";			
 	}
 
 	return $total . ($ligne ? "\n<tr>$ligne\n</tr>" : '');
