@@ -30,6 +30,9 @@ function TriMots_affiche_droite($arguments) {
 	else if($arguments['args']['exec'] == 'naviguer') {
 	  $arguments['data'] .= TriMots_boite_tri_mots($arguments['args']['id_rubrique'],'rubriques','id_rubrique','naviguer');
 	}
+	else if($arguments['args']['exec'] == 'auteurs_edit') {
+	  $arguments['data'] .= TriMots_boite_tri_mots($arguments['args']['id_auteur'],'auteurs','id_auteur','auteurs_edit');
+	}
 	else if($arguments['args']['exec'] == 'mots_edit') {
 	  $arguments['data'] .= icone(_T('trimots:titre_page',array('objets' => _T('public:articles'))),generer_url_ecrire('tri_mots','objet=articles&ident_objet=id_article&id_mot='.$arguments['args']['id_mot'].'&retour='.urlencode(generer_url_ecrire('mots_edit',"id_mot=".$arguments['args']['id_mot']))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
 	$arguments['data'] .= icone(_T('trimots:titre_page',array('objets' => _T('public:rubriques'))),generer_url_ecrire('tri_mots','objet=rubriques&ident_objet=id_rubrique&id_mot='.$arguments['args']['id_mot'].'&retour\
@@ -41,7 +44,7 @@ function TriMots_affiche_droite($arguments) {
 
 function TriMots_boite_tri_mots($id,$objet,$id_objet,$retour) {
   global $spip_lang_left;
-  include_ecrire('inc_abstract_sql');
+  include_spip('base/abstract_sql');
   $to_ret = '<div>&nbsp;</div>';
   $to_ret .= '<div class="bandeau_rubriques" style="z-index: 1;">';
   $to_ret .= "<div style='position: relative;'>";
