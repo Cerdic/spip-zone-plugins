@@ -118,12 +118,18 @@ function Agenda_affiche_full($i)
 }
 
 function Agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui'){
+	static $trans_tbl=NULL;
+	if ($trans_tbl==NULL){
+		$trans_tbl = get_html_translation_table (HTML_ENTITIES);
+		$trans_tbl = array_flip ($trans_tbl);
+	}
+	
 	$date_debut = strtotime($date_debut);
 	$date_fin = strtotime($date_fin);
 	$s = "";
 	if (($d=date("Y-m-d",$date_debut))==date("Y-m-d",$date_fin))
 	{ // meme jour
-		$s = affdate_jourcourt($d);
+		$s = ucfirst(nom_jour($d))." ".affdate_jourcourt($d);
 		if ($horaire=='oui'){
 			$s .= " ".($hd=date("H:i",$date_debut));
 			if ($hd!=($hf=date("H:i",$date_fin)))
@@ -146,7 +152,7 @@ function Agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui'){
 	else if ((date("Y",$date_debut))==date("Y",$date_fin))
 	{ // meme annee, mois et jours differents
 		$d=date("Y-m-d",$date_debut);
-		$s = affdate_jourcourt($d);
+		$s = _T('agenda:evenement_date_du') . " " . affdate_jourcourt($d);
 		if ($horaire=='oui')
 			$s .= " ".date("H:i",$date_debut);
 		$d = date("Y-m-d",$date_fin);
@@ -156,7 +162,7 @@ function Agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui'){
 	}
 	else
 	{ // tout different
-		$s = affdate($d);
+		$s = _T('agenda:evenement_date_du') . " " . affdate($d);
 		if ($horaire=='oui')
 			$s .= " ".date("(H:i)",$date_debut);
 		$d = date("Y-m-d",$date_fin);
@@ -164,7 +170,7 @@ function Agenda_affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui'){
 		if ($horaire=='oui')
 			$s .= " ".date("(H:i)",$date_fin);
 	}
-	return $s;	
+	return unicode2charset(charset2unicode(strtr($s,$trans_tbl),''));	
 }
 
 function Agenda_dateplus($date,$secondes,$format){
