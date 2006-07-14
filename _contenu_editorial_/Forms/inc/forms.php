@@ -6,7 +6,7 @@
  * Auteur :
  * Antoine Pitrou
  * adaptation en 182e puis plugin par cedric.morin@yterium.com
- *  2005,2006 - Distribue sous licence GNU/GPL
+ * © 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -151,7 +151,7 @@
 		// Ne generer un nouveau cookie que s'il n'existe pas deja
 		if (!$cookie = addslashes($GLOBALS['cookie_form'])){
 			if (!$cookie = $_COOKIE[$nom_cookie]) {
-		  	$cookie_utilise=false;  // pas de cookie a l'horizon donc pas de reponse presumï¿½
+		  	$cookie_utilise=false;  // pas de cookie a l'horizon donc pas de reponse presumée
 				//include_spip("inc/session");
 				//$cookie = creer_uniqid();
 			}
