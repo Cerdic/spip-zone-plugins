@@ -5,7 +5,7 @@ div.spip_forms h2 {
 	margin:.2em;
 	color:#543E29;
 }
-div.spip_forms .spip_forms, div.spip_forms .spip_sondage {
+.div.spip_forms spip_forms, div.spip_forms .spip_sondage {
 	color: black;
 	margin: 0px;
 	margin-bottom: 16px;
@@ -125,6 +125,7 @@ div.spip_forms .forml, div.spip_forms .formo, div.spip_forms .fondl, div.spip_fo
 }
 div.spip_forms .forml, div.spip_forms .fondl {
 	background: #FFFDE7;
+	color:#4A4336;
 }
 div.spip_forms .formo, div.spip_forms .fondo {
 	background-color: white;
@@ -156,7 +157,7 @@ div.spip_forms form .formo-focus, div.spip_forms form input.formo-focus:focus, d
 	padding:.3em;
 	width:95%;
 }
-div.spip_forms form .champ_obli_oubli-focus, form input.champ_obli_oubli-focus:focus, form textarea.champ_obli_oubli-focus:focus {
+.div.spip_forms form .champ_obli_oubli-focus, form input.champ_obli_oubli-focus:focus, form textarea.champ_obli_oubli-focus:focus {
 	border-top:solid 2px #980F1B;
 	border-left:solid 2px #980F1B;
 	border-bottom:2px solid #F3192B;
