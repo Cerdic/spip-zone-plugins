@@ -1,31 +1,30 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+#CACHE{24*3600}
 <BOUCLE_sondage_principal(FORMS) {id_form}>
-<html lang="#LANG">
+<html dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>R&eacute;sultats : [(#TITRE|textebrut)]</title>
-<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
-<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
-<link rel="stylesheet" href="spip_style.css" type="text/css">
+	<title><:forms:resultats:>[(#TITRE|textebrut)]</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	<meta name="generator" content="SPIP" />
+	[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
 
-<!-- Les feuilles de style specifiques aux presents squelettes -->
-<link rel="stylesheet" href="typographie.css" type="text/css">
+	<!-- Lien vers le backend pour navigateurs eclaires -->
+	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}" />
 
-<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
-<link rel="stylesheet" href="habillage.css" type="text/css" media="projection, screen, tv">
-<link rel="stylesheet" href="spip_forms.css" type="text/css" media="projection, screen, tv">
-<!-- media="print" permet d'utiliser cette feuille de style quand vous imprimez depuis votre navigateur -->
-<link rel="stylesheet" href="impression.css" type="text/css" media="print">
-
+	<!-- Ceci est la feuille de style par defaut pour le code genere par SPIP -->
+	<link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" media="all" />
+	<!-- Feuille de styles CSS pour l'affichage du site sur ecran -->
+	<link rel="stylesheet" href="[(#CHEMIN{habillage.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
+	<!-- Feuille de styles CSS pour l'impression -->
+	<link rel="stylesheet" href="[(#CHEMIN{impression.css}|direction_css)]" type="text/css" media="print" />
+	
+	<link rel="stylesheet" href="[(#CHEMIN{spip_forms.css}|direction_css)]" type="text/css" media="all" />	
 </head>
-
 <body bgcolor="white" dir="#LANG_DIR">
-
 <h3 class='spip'>#TITRE</h3>
-
+<div class='spip_forms'>
 #RESULTATS_SONDAGE
-
+</div>
 </body>
 </html>
-
 
 </BOUCLE_sondage_principal>
