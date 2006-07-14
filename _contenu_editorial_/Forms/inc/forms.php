@@ -326,11 +326,12 @@
 		if ($flag_label) $r .= "</label>"; 
  		if ($flag_champ)
 		{
-			if ($obligatoire)
+			if ($obligatoire){
 				($msg = $erreur[$code]) ? $champ_erreur=" obligatoire_oublie" : $champ_erreur="";
 				$r .= "<span class='spip_form_label_obligatoire$champ_erreur'>"
 							. _T('forms:info_obligatoire_02')
 							. "</span>";
+			}
 			$r .= " :";
 			$r .= "</span>\n";
 		}
@@ -761,7 +762,7 @@
 		$r .= "<div class='spip_forms'>\n";
 		$r .= "<h3 class='spip'>".typo($titre)."</h3>\n";
 	
-		$flag_reponse = ($GLOBALS['ajout_reponse'] == 'oui' && $GLOBALS['id_form'] == $id_form);
+		$flag_reponse = (_request('ajout_reponse') == 'oui' && _request('id_form') == $id_form);
 		if ($flag_reponse) {
 			$r .= Forms_enregistrer_reponse_formulaire($id_form, $erreur, $reponse, $script_validation, $script_args);
 			//print_r($_POST);
