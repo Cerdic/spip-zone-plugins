@@ -444,7 +444,7 @@ function exec_forms_edit(){
 	// Affichage de la page
 	//
 
-	debut_page("&laquo; $titre &raquo;", "documents", "forms");
+	debut_page("&laquo; $titre &raquo;", "documents", "forms","",_DIR_PLUGIN_FORMS."/spip_forms.css");
 
 	debut_gauche();
 
@@ -540,7 +540,7 @@ function exec_forms_edit(){
 			echo debut_block_invisible("preview_form");
 			echo _L("Voici une pr&eacute;visualisation du formulaire tel qu'il ".
 				"appara&icirc;tra aux visiteurs du site public.")."<p>\n";
-			echo "<div style='margin: 10px; padding: 10px; border: 1px dashed $couleur_foncee;'>";
+			echo "<div class='spip_forms'>";
 			echo Forms_afficher_formulaire_structure($structure);
 			echo "</div>\n";
 			echo fin_block();
