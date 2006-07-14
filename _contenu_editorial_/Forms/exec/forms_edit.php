@@ -529,7 +529,6 @@ function exec_forms_edit(){
 
 		if (count($structure)) {
 			echo "<br />";
-			debut_cadre_relief();
 
 			echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
 			echo bouton_block_invisible("preview_form");
@@ -545,7 +544,6 @@ function exec_forms_edit(){
 			echo "</div>\n";
 			echo fin_block();
 
-			fin_cadre_relief();
 		}
 
 		afficher_articles(_L("Articles utilisant ce formulaire"),
