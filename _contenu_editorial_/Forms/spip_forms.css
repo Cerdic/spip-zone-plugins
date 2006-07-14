@@ -44,7 +44,7 @@ div.spip_forms .spip_form_choix_multiple {
 	display:block;
 }
 
-div.spip_forms .spip_form_choix_unique input {
+div.spip_forms .spip_form_choix_unique input, div.spip_forms .spip_form_choix_unique input.fondo, div.spip_forms .spip_form_choix_unique input.fondl {
 	width:auto;
 }
 
@@ -52,7 +52,7 @@ div.spip_forms .spip_form_choix_unique label {
 	margin:0 0 5px 0;
 }
 
-div.spip_forms .spip_form_choix_multiple input {
+div.spip_forms .spip_form_choix_multiple input, div.spip_forms .spip_form_choix_multiple input.fondo, div.spip_forms .spip_form_choix_multiple input.fondl {
 	width:auto;
 	margin:0 5px 0 0;
 }
@@ -126,10 +126,12 @@ div.spip_forms .forml, div.spip_forms .formo {
 div.spip_forms .forml, div.spip_forms .fondl {
 	background: #FFFDE7;
 	color:#4A4336;
+	width:95%;
 }
 div.spip_forms .formo, div.spip_forms .fondo {
 	background-color: white;
 	color:#4A4336;
+	width:95%;
 }
 div.spip_forms .champ_obli_oubli {
 	border:2px solid red;
