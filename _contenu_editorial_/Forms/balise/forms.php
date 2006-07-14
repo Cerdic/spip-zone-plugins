@@ -47,8 +47,11 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $retour='') {
 				$valeurs[$key] = interdire_scripts($val);
 		}
 	}
-	if (($row['sondage'] == 'public')&&(Forms_verif_cookie_sondage_utilise($id_form)==true)&&(_DIR_RESTREINT!=""))
-		$affiche_sondage=' ';
+	if ($row['sondage'] == 'public'){
+		include_spip('inc/forms');
+		if ((Forms_verif_cookie_sondage_utilise($id_form)==true)&&(_DIR_RESTREINT!=""))
+			$affiche_sondage=' ';
+	}
 	return array('formulaires/forms', 0, 
 		array(
 			'erreur_message'=>isset($erreur['@'])?$erreur['@']:'',
