@@ -6,7 +6,7 @@
  * Auteur :
  * Antoine Pitrou
  * adaptation en 182e puis plugin par cedric.morin@yterium.com
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ *  2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -151,7 +151,7 @@
 		// Ne generer un nouveau cookie que s'il n'existe pas deja
 		if (!$cookie = addslashes($GLOBALS['cookie_form'])){
 			if (!$cookie = $_COOKIE[$nom_cookie]) {
-		  	$cookie_utilise=false;  // pas de cookie a l'horizon donc pas de reponse presumée
+		  	$cookie_utilise=false;  // pas de cookie a l'horizon donc pas de reponse presumï¿½
 				//include_spip("inc/session");
 				//$cookie = creer_uniqid();
 			}
@@ -326,8 +326,9 @@
 		if ($flag_label) $r .= "</label>"; 
  		if ($flag_champ)
 		{
-			if ($obligatoire) 
-				$r .= "<span class='spip_form_label_obligatoire'>"
+			if ($obligatoire)
+				($msg = $erreur[$code]) ? $champ_erreur=" obligatoire_oublie" : $champ_erreur="";
+				$r .= "<span class='spip_form_label_obligatoire$champ_erreur'>"
 							. _T('forms:info_obligatoire_02')
 							. "</span>";
 			$r .= " :";
@@ -336,27 +337,34 @@
 	
 		$class1 = $obligatoire ? "forml" : "formo";
 		$class2 = $obligatoire ? "fondl" : "fondo";
-	
+
+// On attribue des classes speciales aux champs mal remplis
+		if($msg = $erreur[$code]) {
+			$class1.=" champ_obli_oubli";
+			$class2.=" champ_obli_oubli";
+		}
+
+
 		$span = "<span class='spip_form_label_details'>";
 	
 		switch ($type) {
 		case 'email':
 			$value = $erreur ? entites_html($GLOBALS[$code]) : "";
 			$r .= $span . _T("forms:champ_email_details")."</span>";
-			$r .= "<input type='text' name='$code' id='$id_champ' value=\"$value\" class='$class1' size='40'$attributs />";
+			$r .= "<input type='text' name='$code' id='$id_champ' value=\"$value\" class='$class1' onfocus=\"this.className='$class1-focus'\" onblur=\"this.className='$class1'\" size='40'$attributs />";
 			break;
 		case 'url':
 			$value = $erreur ? entites_html($GLOBALS[$code]) : "";
 			$r .= $span . _T("forms:champ_url_details")."</span>";
-			$r .= "<input type='text' name='$code' id='$id_champ' value=\"$value\" class='$class1' size='40'$attributs />";
+			$r .= "<input type='text' name='$code' id='$id_champ' value=\"$value\" class='$class1' onfocus=\"this.className='$class1-focus'\" onblur=\"this.className='$class1'\" size='40'$attributs />";
 			break;
 		case 'ligne':
 			$value = $erreur ? entites_html($GLOBALS[$code]) : "";
-			$r .= "<input type='text' name='$code' id='$id_champ' value=\"$value\" class='$class1' size='40'$attributs />";
+			$r .= "<input type='text' name='$code' id='$id_champ' value=\"$value\" class='$class1' onfocus=\"this.className='$class1-focus'\" onblur=\"this.className='$class1'\" size='40'$attributs />";
 			break;
 		case 'texte':
 			$value = $erreur ? entites_html($GLOBALS[$code]) : "";
-			$r .= "<textarea name='$code' id='$id_champ' class='$class1' rows='4' cols='40'$attributs>";
+			$r .= "<textarea name='$code' id='$id_champ' class='$class1'  onfocus=\"this.className='$class1-focus'\" onblur=\"this.className='$class1'\"rows='4' cols='40'$attributs>";
 			$r .= $value;
 			$r .= "</textarea>";
 			break;
@@ -367,11 +375,11 @@
 		case 'multiple':
 			$value = ($erreur && is_array($GLOBALS[$code]))
 				? array_flip($GLOBALS[$code]) : array();
-			$r .= Forms_afficher_champ_multiple($code, $id_champ, $type_ext, $value, "class='$class2'$attributs");
+			$r .= Forms_afficher_champ_multiple($code, $id_champ, $type_ext, $value, "class='$class2' onfocus=\"this.className='$class1-focus'\" onblur=\"this.className='$class1'\"$attributs");
 			break;
 		case 'fichier':
 			// Pas de valeur par defaut pour les champs "fichier"
-			$r .= "<input type='file' name='$code' id='$id_champ' class='$class2' size='25'$attributs>";
+			$r .= "<input type='file' name='$code' id='$id_champ' class='$class2'  onfocus=\"this.className='$class2-focus'\" onblur=\"this.className='$class2'\" size='25'$attributs>";
 			break;
 		case 'mot':
 			// Distinction unique / multiple selon le parametrage du groupe de mots
@@ -393,16 +401,17 @@
 			if ($multiple) {
 				$value = ($erreur && is_array($GLOBALS[$code]))
 					? array_flip($GLOBALS[$code]) : array();
-				$r .= Forms_afficher_champ_multiple($code, $id_champ, $liste, $value, "class='$class2'$attributs");
+				$r .= Forms_afficher_champ_multiple($code, $id_champ, $liste, $value, "class='$class2 onfocus=\"this.className='$class2-focus'\" onblur=\"this.className='$class2'\"'$attributs");
 			}
 			else {
 				$value = $erreur ? $GLOBALS[$code] : "";
-				$r .= Forms_afficher_champ_select($code, $id_champ, $liste, $value, "class='$class2'$attributs");
+				$r .= Forms_afficher_champ_select($code, $id_champ, $liste, $value, "class='$class2' onfocus=\"this.className='$class2-focus'\" onblur=\"this.className='$class2'\"$attributs");
 			}
 			break;
 		}
+//On garde le message. si la css par defaut est utilisee il est masque et l'erreur est signalee avec les couleurs, sinon c'est l'inverse (pour que le formulaire reste accessible sans la css par defaut)
 		if ($msg = $erreur[$code]) {
-			$r = "<p class='spip_form_erreur'>"._T("forms:form_erreur")." ".$msg."</p>" . $r;
+			$r .= "<p class='spip_form_erreur'>"._T("forms:form_erreur")." ".$msg."</p>";
 		}
 		$r .= "</div>";
 		return $r;
