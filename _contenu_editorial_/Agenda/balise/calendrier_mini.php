@@ -102,7 +102,7 @@ function http_calendrier_mini($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	}
 	// affichage de la fin de semaine hors periode
 	for($j=$jour_semaine ? $jour_semaine : 7; $j<7; $j++) {
-		$ligne .= "\n\t<td class=\"horsperiode\">$i</td>";			
+		$ligne .= "\n\t<td class=\"horsperiode\">$j</td>";			
 	}
 
 	return $total . ($ligne ? "\n<tr>$ligne\n</tr>" : '');
