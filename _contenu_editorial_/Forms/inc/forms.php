@@ -260,7 +260,7 @@
 		if ($flag_menu) {
 			$checked = (!$value) ? " selected='selected'" : "";
 			$r .= "&nbsp; <select name='$code' id='$id_champ' $attributs>\n";
-			$r .= "<option value=''$selected> </option>\n";
+			$r .= "<option value=''$checked> </option>\n";
 		}
 		$att = $flag_menu ? "selected" : "checked";
 		foreach ($liste as $key => $val) {
@@ -371,16 +371,16 @@
 			break;
 		case 'select':
 			$value = $erreur ? $GLOBALS[$code] : "";
-			$r .= Forms_afficher_champ_select($code, $id_champ, $type_ext, $value, "class='$class2'$attributs");
+			$r .= Forms_afficher_champ_select($code, $id_champ, $type_ext, $value, "class='$class2' $attributs");
 			break;
 		case 'multiple':
 			$value = ($erreur && is_array($GLOBALS[$code]))
 				? array_flip($GLOBALS[$code]) : array();
-			$r .= Forms_afficher_champ_multiple($code, $id_champ, $type_ext, $value, "class='$class2' onfocus=\"this.className='$class1-focus'\" onblur=\"this.className='$class1'\"$attributs");
+			$r .= Forms_afficher_champ_multiple($code, $id_champ, $type_ext, $value, "class='$class2' $attributs");
 			break;
 		case 'fichier':
 			// Pas de valeur par defaut pour les champs "fichier"
-			$r .= "<input type='file' name='$code' id='$id_champ' class='$class2'  onfocus=\"this.className='$class2-focus'\" onblur=\"this.className='$class2'\" size='25'$attributs>";
+			$r .= "<input type='file' name='$code' id='$id_champ' class='$class1'  onfocus=\"this.className='$class1-focus'\" onblur=\"this.className='$class1'\" size='25'$attributs>";
 			break;
 		case 'mot':
 			// Distinction unique / multiple selon le parametrage du groupe de mots
@@ -402,11 +402,11 @@
 			if ($multiple) {
 				$value = ($erreur && is_array($GLOBALS[$code]))
 					? array_flip($GLOBALS[$code]) : array();
-				$r .= Forms_afficher_champ_multiple($code, $id_champ, $liste, $value, "class='$class2 onfocus=\"this.className='$class2-focus'\" onblur=\"this.className='$class2'\"'$attributs");
+				$r .= Forms_afficher_champ_multiple($code, $id_champ, $liste, $value, "class='$class2' $attributs");
 			}
 			else {
 				$value = $erreur ? $GLOBALS[$code] : "";
-				$r .= Forms_afficher_champ_select($code, $id_champ, $liste, $value, "class='$class2' onfocus=\"this.className='$class2-focus'\" onblur=\"this.className='$class2'\"$attributs");
+				$r .= Forms_afficher_champ_select($code, $id_champ, $liste, $value, "class='$class2' $attributs");
 			}
 			break;
 		}
