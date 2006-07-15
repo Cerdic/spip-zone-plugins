@@ -8,10 +8,9 @@
 
 		if (++$compteur>4) return ''; # ne pas boucler indefiniment
 
+		$fond = 'modele_'.$type;
 		if ($squelette)
-			$fond = 'modele_'.$squelette;
-		else
-			$fond = 'modele_'.$type;
+			$fond .= "_$squelette";
 
 /*
 		### pour tester directement :
@@ -45,22 +44,12 @@
 	/* static public */ 
 	function Modeles_traiter_modeles($texte) {
 
-		$regexp = ',<(breve|article)([0-9]+)([|]([a-z_0-9]+))?'.'>,';
+		$regexp = ',<(breve|article|doc|img)([0-9]+)([|]([a-z_0-9]+))?'.'>,';
 		if (preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER))
-		foreach ($matches as $regs) {
-			$modele = Modeles_inclure_modele($regs[4], $regs[1], $regs[2]);
-			$texte = str_replace($regs[0], code_echappement($modele), $texte);
-		}
-		
-		$regexp = ',<(doc|img)([0-9]+)([|]([a-z_0-9]+))?'.'>,';
-		if (preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER)) {
 			foreach ($matches as $regs) {
-				$alignement = (isset($regs[4])) ? '_'.$regs[4] : '';
-				$modele = Modeles_inclure_modele($regs[1].$alignement, 'document', $regs[2]);
+				$modele = Modeles_inclure_modele($regs[4], $regs[1], $regs[2]);
 				$texte = str_replace($regs[0], code_echappement($modele), $texte);
 			}
-		}
-
 
 		return $texte;
 	}
