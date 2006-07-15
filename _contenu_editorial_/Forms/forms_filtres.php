@@ -66,5 +66,9 @@ include_spip("inc/forms");
 		}
 		return $flux;
 	}
+	function Forms_insert_head($flux){
+		$flux .= 	"<link rel='stylesheet' href='".find_in_path('spip_forms.css')."' type='text/css' media='all' />\n";
+		return $flux;
+	}
 
 ?>

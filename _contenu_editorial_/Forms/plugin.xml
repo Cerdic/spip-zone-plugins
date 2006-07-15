@@ -37,9 +37,8 @@
 		<inclure>forms_filtres.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>spip_style</nom>
-		<action>forms_style</action>
-		<inclure>forms_style.php</inclure>
+		<nom>insert_head</nom>
+		<inclure>forms_filtres.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
