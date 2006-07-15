@@ -11,8 +11,10 @@
 	<!-- Lien vers le backend pour navigateurs eclaires -->
 	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}" />
 
-<script type="text/javascript" src="#CHEMIN{lightbox.js}"></script>
-<link rel="stylesheet" href="#CHEMIN{lightbox.css}" type="text/css" media="screen" />
+<script type="text/javascript" src="#CHEMIN{lightbox}/js/prototype.js"></script>
+<script type="text/javascript" src="#CHEMIN{lightbox}/js/scriptaculous.js?load=effects"></script>
+<script type="text/javascript" src="#CHEMIN{lightbox}/js/lightbox.js"></script>
+<link rel="stylesheet" href="#CHEMIN{lightbox}/css/lightbox.css" type="text/css" media="screen" />
 
 	<!-- Ceci est la feuille de style par defaut pour le code genere par SPIP -->
 	<link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" media="all" />
@@ -78,8 +80,8 @@
 				<BOUCLE_documents_portfolio(DOCUMENTS) {id_article}
 				{mode=document} {extension IN png,jpg,gif} {par date}
 				{doublons}>
-				[<a href="#URL_DOCUMENT" type="#MIME_TYPE"
-				onclick="location.href='[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio';return false;"[title="(#TITRE|couper{80}|texte_backend)"]>(#LOGO_DOCUMENT||image_reduire{0,60}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
+				[<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="lightbox[documents_portfolio]" 
+				[title="(#TITRE|couper{80}|texte_backend)"]>(#LOGO_DOCUMENT||image_reduire{0,60}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
 				</BOUCLE_documents_portfolio>
 			</div>
 			</B_documents_portfolio>
