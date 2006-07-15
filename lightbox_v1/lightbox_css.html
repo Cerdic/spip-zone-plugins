@@ -1,3 +1,4 @@
+#HTTP_HEADER{Content-Type: text/css}
 #lightbox{
 	background-color:#eee;
 	padding: 10px;
@@ -15,11 +16,11 @@
 #lightbox img{ border: none; clear: both;} 
 #overlay img{ border: none; }
 
-#overlay{ background-image: url(overlay.png); }
+#overlay{ background-image: url([(#CHEMIN{overlay.png}|url_absolue)]); }
 
 * html #overlay{
 	background-color: #333;
 	back\ground-color: transparent;
 	background-image: url(blank.gif);
-	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="overlay.png", sizingMethod="scale");
-	}
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="[(#CHEMIN{overlay.png}|url_absolue)]", sizingMethod="scale");
+}
