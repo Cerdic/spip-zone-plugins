@@ -1,0 +1,32 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Lightbox
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Fil, en cadeau pour l'anniversaire d'Izo.
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	ajouter au fichier article.html de la dist les lignes :
+
+<code>
+	<script type="text/javascript" src="#CHEMIN{lightbox.js}"></script>
+	<link rel="stylesheet" href="#CHEMIN{lightbox.css}" type="text/css" media="screen" />
+
+(&agrave; transformer en balise #LIGHTBOX)
+</code>
+
+	</description>
+	<options> <!-- fichier charge a chaque hit -->
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	</fonctions>
+	<prefix> 
+	</prefix>
+
+</plugin>
