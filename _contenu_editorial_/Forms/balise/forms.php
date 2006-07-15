@@ -14,7 +14,7 @@ function balise_FORMS_stat($args, $filtres) {
 	return $args;
 }
  
-function balise_FORMS_dyn($id_form = 0, $id_article = 0, $retour='') {
+function balise_FORMS_dyn($id_form = 0, $id_article = 0, $script_validation = 'valide_form', $message_confirm='form:avis_message_confirmation') {
 	$url = self();
 	// nettoyer l'url qui est passee par htmlentities pour raison de securités
 	$url = str_replace("&amp;","&",$url);
@@ -27,13 +27,14 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $retour='') {
 	$valide_sondage = '';
 	$reponse = '';
 	$formok = '';
-	$valeurs = array();
+	$valeurs = array('0'=>'0');
 	$affiche_sondage = '';
+	$formactif = (_DIR_RESTREINT==_DIR_RESTREINT_ABS)?' ':'';
 	
 	$flag_reponse = (_request('ajout_reponse') == 'oui' && _request('id_form') == $id_form) && _request('nobotnobot')=='';
 	if ($flag_reponse) {
 		include_spip('inc/forms');
-		$message = Forms_enregistrer_reponse_formulaire($id_form, $erreur, $reponse);
+		$url_validation = Forms_enregistrer_reponse_formulaire($id_form, $erreur, $reponse, $script_validation, $id_article?"id_article=$id_article":"");
 		if (!$erreur) {
 			$formok = _T("forms:reponse_enregistree");
 			if ($reponse)
@@ -56,13 +57,15 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $retour='') {
 		array(
 			'erreur_message'=>isset($erreur['@'])?$erreur['@']:'',
 			'erreur'=>serialize($erreur),
-			'reponse'=>$reponse,
+			'reponse'=>filtrer_entites($reponse),
 			'id_article' => $id_article,
 			'id_form' => $id_form,
 			'self' => $url,
 			'valeurs' => serialize($valeurs),
-			'message' => $message,
+			'url_validation' => str_replace("&amp;","&",$url_validation),
 			'affiche_sondage' => $affiche_sondage,
+			'formok' => filtrer_entites($formok),
+			'formactif' => $formactif,
 		));
 }
 

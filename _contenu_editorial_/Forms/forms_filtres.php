@@ -33,17 +33,20 @@ include_spip("inc/forms");
 			}
 		}
 
-		// Remplacer les raccourcis de type <formXXX>
-		if (is_int(strpos($texte, '<form')) &&
-			preg_match_all(',<form(\d+)>,', $texte, $regs, PREG_SET_ORDER)) {
+		// Remplacer les raccourcis de type <formXXX|modificateur>
+		// par le produit du squelette modele_form[_modificateur]
+		if ((strpos($texte, '<form')!==NULL) &&
+			preg_match_all(',<form([0-9]+)([|]([a-z_0-9]+))?'.'>,', $texte, $regs, PREG_SET_ORDER)) {
 			foreach ($regs as $r) {
 				$id_form = $r[1];
 				$forms[$id_form] = $id_form;
-				$cherche = $r[0];
-				$remplace = Forms_afficher_formulaire($id_form);
-				// passer en base64 pour echapper a la typo()
-				$remplace = code_echappement($remplace);
-				$texte = str_replace($cherche, $remplace, $texte);
+				
+				$fond = 'modele_form'.($r[3]?("_".$r[3]):'');
+				include_spip('public/assembler');
+				$contexte = array('id_form' => $id_form);
+				$page = recuperer_fond($fond, $contexte);
+				
+				$texte = str_replace($r[0], code_echappement($page), $texte);
 			}
 		}
 		if ($maj_liens && $forms) {

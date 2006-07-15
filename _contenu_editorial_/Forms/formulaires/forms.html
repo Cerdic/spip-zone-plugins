@@ -1,104 +1,38 @@
-<link rel="stylesheet" href="#CHEMIN{spip_forms.css}" type="text/css" />
 <BOUCLE_form(FORMS){id_form=#ENV{id_form}}>
 <a name='form#ID_FORM'></a>
 <div class='spip_forms'>
 <h3 class='spip'>#TITRE</h3>
 <div class='spip_descriptif'>#DESCRIPTIF</div>
 
-[<p class='spip_form_ok'>(#FORMOK)
+[<p class='spip_form_ok'>(#ENV{formok})
 	[(#SONDAGE|=={non}|?{'',' '})	<a href='#ENV{self}#form#ID_FORM'><:forms:valider:></a>]
-	[<span class='spip_form_ok_confirmation'>(#REPONSE)</span>]
+	[<span class='spip_form_ok_confirmation'>(#ENV{reponse})</span>]
 </p>]
-[<p class='spip_form_erreur'>(#ERREUR_MESSAGE)</p>]
-[(#MESSAGE)]
+[<p class='spip_form_erreur'>(#ENV{erreur_message})</p>]
+[<img src='(#ENV{url_validation})' width='1' height='1' alt='validation de la saisie' />]
+[(#ENV{formactif})
 <form method='post' action='#ENV{self}#form#ID_FORM'
-enctype='multipart/form-data'>
-<div>
-[(#ENV{self}|form_hidden)]
-<input type='hidden' name='ajout_reponse' value='oui' />
-<input type='hidden' name='id_form' value='#ID_FORM' />
-<input type='hidden' name='retour_form' value='#ENV{url_retour}' />
-[(#SONDAGE|=={non}|?{'',' '})<input type='hidden' name='ajout_cookie_form' value='oui' />]
-[(#SONDAGE|=={public}|?{' ',''})
-
-<input type='hidden' name='ajout_cookie_form' value='oui' />]
-<div style='text-align:right'><a href='[(#URL_PAGE{sondage}|parametre_url{id_form,#ID_FORM})]' class='spip_in'
- target="spip_sondage" onclick="javascript:window.open(this.href, 'spip_sondage', 'scrollbars=yes, resizable=yes, width=450, height=300'); return false;" 
- onkeypress="javascript:window.open(this.href, 'spip_sondage', 'scrollbars=yes,resizable=yes, width=450, height=300'); return false;"><:forms:voir_resultats:></a></div>
-
-</div>
-<fieldset>
-<legend>#TITRE</legend>
-<BOUCLE_champs(FORMS_CHAMPS){id_form}>
-[(#ENV{affiche_sondage}) #RESULTATS_SONDAGE]
-[(#ENV{affiche_sondage}|?{'',' '})
-	[</fieldset><fieldset><legend>(#TYPE|=={separateur}|?{#TITRE,''})</legend>]
-	[(#TYPE|=={separateur}|?{'',' '})
-		<div class='spip_form_champ'>
-			[(#TYPE|=={textestatique}|?{#TITRE,''})]
-			[(#TYPE|=={textestatique}|?{'',' '})
-				<span class='spip_form_label'>
-					<label for="#CHAMP">#TITRE</label>
-					[<span class='spip_form_label_obligatoire[(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''})obligatoire_oublie]'>
-						(#OBLIGATOIRE|=={oui}|?{<:forms:info_obligatoire_02:>,''})</span>]
-					:
-				</span>
-				[(#TYPE|=={email}|?{' ',''})
-					<span class='spip_form_label_details'><:forms:champ_email_details:></span>
-					<input type='text' name='#CHAMP' id='#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
-						class='[(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
-						onfocus="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]-focus'" 
-						onblur="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]'" size='40' />
-				]
-				[(#TYPE|=={url}|?{' ',''})
-					<span class='spip_form_label_details'><:forms:champ_url_details:></span>
-					<input type='text' name='#CHAMP' id='#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
-						class='[(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
-						onfocus="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]-focus'" 
-						onblur="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]'" size='40' />
-				]
-				[(#TYPE|=={ligne}|?{' ',''})
-					<input type='text' name='#CHAMP' id='#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
-						class='[(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
-						onfocus="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]-focus'" 
-						onblur="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]'" size='40' />
-				]
-				[(#TYPE|=={texte}|?{' ',''})
-					<textarea name='#CHAMP' id='#CHAMP'
-						class='[(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
-						onfocus="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]-focus'" 
-						onblur="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]'" size='40' 
-						>[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]</textarea>
-				]
-				[(#TYPE|=={fichier}|?{' ',''})
-					<input type='file' name='#CHAMP' id='#CHAMP'
-						class='[(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
-						onfocus="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]-focus'" 
-						onblur="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]'" size='40' />
-				]
-				[(#TYPE|=={select}|?{' ',''})
-					<INCLURE{fond=formulaires/forms_champ_select}{id_form}{cle}{valeur=#ENV**{valeurs}}>
-				]
-				[(#TYPE|=={multiple}|?{' ',''})
-					<INCLURE{fond=formulaires/forms_champ_multiple}{id_form}{cle}{valeur=#ENV**{valeurs}}>
-				]
-				[(#TYPE|=={mot}|?{' ',''})
-					<INCLURE{fond=formulaires/forms_select_mot}{id_groupe}{champ}{valeur=#ENV**{valeurs}}>
-				]
-			]
-		</div>
-	]
-]
-</BOUCLE_champs>
-</fieldset>
-
-	[(#REM) Piege a robots spammeurs ]
-	<p style='display:none;'><label for="nobotnobot"><:antispam_champ_vide:></label>
-	<input type="text" name="nobotnobot" value="#ENV{nobotnobot}" size="10" /></p>
+	enctype='multipart/form-data'>
+]	
+	<div>
+	[(#ENV{self}|form_hidden)]
+	<input type='hidden' name='ajout_reponse' value='oui' />
+	<input type='hidden' name='id_form' value='#ID_FORM' />
 	
-	<div style='text-align:#LANG_RIGHT'><input type="submit" name='Valider' value="<:bouton_valider:>" class='fondo spip_bouton'/></div>
-
+	<input type='hidden' name='retour_form' value='#ENV{url_retour}' />
+	
+	[(#SONDAGE|=={non}|?{'',' '})<input type='hidden' name='ajout_cookie_form' value='oui' />]
+	[(#SONDAGE|=={public}|?{' ',''})
+		<input type='hidden' name='ajout_cookie_form' value='oui' />
+		<div style='text-align:right'><a href='[(#URL_PAGE{sondage}|parametre_url{id_form,#ID_FORM})]' class='spip_in'
+		 target="spip_sondage" onclick="javascript:window.open(this.href, 'spip_sondage', 'scrollbars=yes, resizable=yes, width=450, height=300'); return false;" 
+		 onkeypress="javascript:window.open(this.href, 'spip_sondage', 'scrollbars=yes,resizable=yes, width=450, height=300'); return false;"><:forms:voir_resultats:></a></div>
+	]
+	</div>
+	<INCLURE{fond=formulaires/forms_structure}{id_form}{affiche_sondage}{erreur}{valeurs=#ENV**{valeurs}}>
+[(#ENV{formactif})
 </form>
-[(<div class='spip_form_notes'>(#NOTES)</div>]
+]
+[<div class='spip_form_notes'>(#NOTES)</div>]
 </div>
 </BOUCLE_form>

@@ -540,7 +540,7 @@ function exec_forms_edit(){
 			echo _L("Voici une pr&eacute;visualisation du formulaire tel qu'il ".
 				"appara&icirc;tra aux visiteurs du site public.")."<p>\n";
 			echo "<div class='spip_forms'>";
-			echo Forms_afficher_formulaire_structure($structure);
+			echo propre("<form$id_form>");
 			echo "</div>\n";
 			echo fin_block();
 

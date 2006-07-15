@@ -422,48 +422,6 @@
 	// Afficher les champs d'edition specifies par un structure
 	//
 	
-	function Forms_afficher_formulaire_structure($structure, $link = '', $ancre = '', $remplir = false) {
-		global $flag_ecrire, $les_notes, $spip_lang_left, $spip_lang_right;
-		
-		// Les formulaires ont leurs propres notes "de bas de page",
-		// afin d'annoter les champs
-		$notes_orig = $les_notes;
-		$les_notes = "";
-		
-		$readonly = $flag_ecrire ? " readonly='readonly'" : "";
-		$disabled = $flag_ecrire ? " disabled='disabled'" : "";
-		$r = "";
-		
-		$champs = "";
-		$fieldset = false;
-	
-		ksort($structure);
-		foreach ($structure as $index => $t) {
-			if ($t['type']!='separateur')
-				$champs .= Forms_afficher_champ_formulaire($t, $readonly, $remplir);
-			else{
-				$champs .= "</fieldset><fieldset>\n";
-				$fieldset = true;
-			}
-		}
-	
-		if ($fieldset)
-			$champs = "<fieldset>\n" . $champs . "</fieldset>\n";
-
-		$r .= $champs;
-		$r .= "<div style='text-align:$spip_lang_right;'>";
-		$r .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' ".
-			"class='fondo spip_bouton'$disabled />";
-		$r .= "</div></form>\n";
-		if ($les_notes)
-			$r .= "<div class='spip_form_notes'>$les_notes</div>\n";
-		//$r .= "\n<!-- fin formulaire -->\n";
-	
-		$les_notes = $notes_orig;
-		return $r;
-	}
-
-
 	function Forms_traduit_reponse($type,$code, $liste, $value) {
 		$out = $value;
 		switch ($type){
@@ -567,7 +525,7 @@
 		}
 	}
 
-	function Forms_enregistrer_reponse_formulaire($id_form, &$erreur, &$reponse, $script_validation = 'valide_sondage', $script_args='') {
+	function Forms_enregistrer_reponse_formulaire($id_form, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='') {
 		$erreur = '';
 		$reponse = '';
 		$r = '';
@@ -705,12 +663,12 @@
 				if ($row['sondage'] != 'non') {
 					$hash = calculer_action_auteur("forms valide reponse sondage $id_reponse");
 					$url = generer_url_public($script_validation,"verif_cookie=oui&id_reponse=$id_reponse&hash=$hash".($script_args?"&$script_args":""));
-					$r .= "<img src='".$url."' width='1' height='1' alt='' />";
+					$r = $url;
 				}
 				else if (($email) || ($mailconfirm)) {
 					$hash = calculer_action_auteur("forms confirme reponse $id_reponse");
 					$url = generer_url_public($script_validation,"mel_confirm=oui&id_reponse=$id_reponse&hash=$hash".($script_args?"&$script_args":""));
-					$r .= "<img src='".$url."' width='1' height='1' alt='' />";
+					$r = $url;
 	
 					$reponse = $mailconfirm;
 				}
@@ -720,95 +678,6 @@
 		return $r;
 	}
 
-	//
-	// Afficher un formulaire
-	//
-	function Forms_afficher_formulaire($id_form,$message_confirm='forms:avis_message_confirmation',$script_validation = 'valide_sondage', $script_args='') {
-		static $num_ancre;
-		global $flag_ecrire;
-	
-		$id_form = intval($id_form);
-		$query = "SELECT * FROM spip_forms WHERE id_form=$id_form";
-		$result = spip_query($query);
-		if (!$row = spip_fetch_array($result)) return;
-		
-		$r = '';
-		$titre = $row['titre'];
-		$descriptif = $row['descriptif'];
-		$sondage = $row['sondage'];
-		$structure = unserialize($row['structure']);
-	
-		$ancre = 'form'.(++$num_ancre);
-
-		if ($flag_ecrire) 
-			$link = str_replace('&amp;', '&', self());
-		else if ($GLOBALS['retour_form'])
-			$link = $GLOBALS['retour_form'];
-		else 
-			$link = self();
-		$retour = self();
-
-		$formhead = "";
-		$formhead = "<form method='post' action='$link#$ancre' enctype='multipart/form-data' style='border: 0px; margin: 0px;'>\n";
-		$formhead .= "<div><input type='hidden' name='ajout_reponse' value='oui' />";
-		$formhead .= "<input type='hidden' name='id_form' value='$id_form' />";
-		$formhead .= "<input type='hidden' name='retour_form' value='$retour' />";
-		if ($sondage != 'non') {
-			$formhead .= "<input type='hidden' name='ajout_cookie_form' value='oui' />";
-		}
-		$formhead .= "</div>";
-	
-		$r .= "<a name='$ancre'></a>";
-		$r .= "<div class='spip_forms'>\n";
-		$r .= "<h3 class='spip'>".typo($titre)."</h3>\n";
-	
-		$flag_reponse = (_request('ajout_reponse') == 'oui' && _request('id_form') == $id_form);
-		if ($flag_reponse) {
-			$r .= Forms_enregistrer_reponse_formulaire($id_form, $erreur, $reponse, $script_validation, $script_args);
-			//print_r($_POST);
-			if (!$erreur) {
-				$r .= "<p class='spip_form_ok'>".
-					_T("forms:reponse_enregistree");
-				if ($sondage != 'non')
-					$r .= " <a href='".self()."#$ancre"."'>"._T("forms:valider")."</a>";
-				if ($reponse){
-					$r .= "<span class='spip_form_ok_confirmation'>";
-				  $r .= _T($message_confirm,array('mail'=>$reponse));
-				  $r .= "</span>";
-				}
-				$r .= "</p>";
-			}
-			else {
-				if ($s = $erreur['@']) 
-					$r .= "<p class='spip_form_erreur'>".$s."</p>";
-			}
-		}
-		if (($sondage == 'public')&&(Forms_verif_cookie_sondage_utilise($id_form)==true)&&(_DIR_RESTREINT!="")){
-			$r .= Forms_afficher_reponses_sondage($id_form);
-			$r .= "</div>\n";
-	 	}
-		else	{
-			if ($descriptif) {
-				$r .= "<div class='spip_descriptif'>".propre($descriptif)."</div>";
-			}
-			if ($sondage == 'public' || ($sondage == 'prot' && $flag_ecrire)) {
-				$url_sondage = ($flag_ecrire ? "../" : "").Forms_generer_url_sondage($id_form);
-				$r .= "<div style='text-align:right'>";
-				$r .= "<a href='".htmlspecialchars($url_sondage)."' class='spip_in' ".
-					"target=\"spip_sondage\" onclick=\"javascript:window.open(this.href, 'spip_sondage', 'scrollbars=yes, ".
-				"	resizable=yes, width=450, height=300'); return false;\"".
-				" onkeypress=\"javascript:window.open(this.href, 'spip_sondage', 'scrollbars=yes, ".
-				"	resizable=yes, width=450, height=300'); return false;\">";
-				$r .= _T("forms:voir_resultats")."</a></div>";
-				$r .= "<br />\n";
-			}
-			$r .= $formhead;
-			$r .= Forms_afficher_formulaire_structure($structure, $form_link, $ancre, $erreur);
-			$r .= "</div>\n";
-	 	}
-		return $r;
-	}
-	
 	//
 	// Afficher une liste de formulaires
 	//

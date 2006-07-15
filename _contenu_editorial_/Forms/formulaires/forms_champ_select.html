@@ -14,7 +14,7 @@
 [(#TOTAL_BOUCLE|>{6}|?{'',' '})
 	<span class='spip_form_choix_unique'>
 	&nbsp; <input type='radio' name='#CHAMP' value='#CHOIX' id='#CHOIX'
-	[(#CHOIX|in_any{[(#ENV**{valeur}|unserialize|array_keys)], ''}|?{'checked="checked"',''})] />
+	[(#CHOIX|=={[(#ENV**{valeur}|forms_valeur{#CHAMP})]}|?{'checked="checked"',''})] />
 	<label for='#CHOIX'>[(#TITRE|supprimer_numero)]</label>
 ]
 	</BOUCLE_choix>
