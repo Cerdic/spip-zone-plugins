@@ -1,32 +1,24 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Lightbox
+	Lightbox v1
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Fil, en cadeau pour l'anniversaire d'Izo.
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
 	dev
 	</etat>
 	<description>
-	ajouter au fichier article.html de la dist les lignes :
-
-<code>
-	<script type="text/javascript" src="#CHEMIN{lightbox.js}"></script>
-	<link rel="stylesheet" href="#CHEMIN{lightbox.css}" type="text/css" media="screen" />
-
-(&agrave; transformer en balise #LIGHTBOX)
-</code>
-
+	ajoute un effet [lightbox->www.huddletogether.com/projects/lightbox/] (ne fonctionne que sur les squelettes qui disposent de la balise <code>#SPIP_HEAD</code>)
 	</description>
-	<options> <!-- fichier charge a chaque hit -->
-	</options>
-	<fonctions> <!-- fichier charge a chaque recalcul -->
-	</fonctions>
-	<prefix> 
+	<prefix>
+	Lightbox_v1
 	</prefix>
-
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
 </plugin>
