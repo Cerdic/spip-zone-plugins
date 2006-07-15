@@ -18,7 +18,9 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS . 'mots_partout'));
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
+define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS.end($p)));
+
 
 //force a un tableau de int
 function secureIntArray($array) {
@@ -63,11 +65,6 @@ function splitArrayIds($array) {
 
 
 function action_mots_partout() {
-  global $nom_chose, $redirect;
-  global $choses, $mots;
-  global $strict, $switch;
-  global $ajax;
-  
   /*
   global $hash, $id_auteur;
   include_ecrire("inc_session");
@@ -80,25 +77,43 @@ function action_mots_partout() {
   include(_DIR_PLUGIN_MOTS_PARTOUT."/mots_partout_choses.php");
   include_spip('base/abstract_sql');
   
+
+  $choses = secureIntArray(_request('choses'));
+
+  $limit =  addslashes(_request('limit'));
+  if($limit == '') $limit = 'rien';
+  $id_limit =  intval(_request('identifiant_limit'));
+  if($id_limit < 1) $id_limit = 0;
+  $nb_aff = intval(_request('nb_aff'));
+  if($nb_aff < 1) $nb_aff = 20;
+  $switch = addslashes(_request('switch'));
+  if($switch == '') $switch = 'voir';
+  $strict = intval(_request('strict'));
+
   /***********************************************************************/
   /* récuperation de la chose sur laquelle on travaille*/
   /***********************************************************************/
 
-  $nom_chose = addslashes($nom_chose);
+
+  $nom_chose = addslashes(_request('nom_chose'));
   if(!isset($choses_possibles[$nom_chose])) {
 	list($nom_chose,) = each($choses_possibles);
 	reset($choses_possibles);
   }
   $id_chose = $choses_possibles[$nom_chose]['id_chose'];
+  $table_principale = $choses_possibles[$nom_chose]['table_principale'];
+  $table_auth = $choses_possibles[$nom_chose]['table_auth'];
+  $tables_limite = $choses_possibles[$nom_chose]['tables_limite'];
 
   /***********************************************************************/
   /* action */
   /***********************************************************************/
-  list($mots_voir, $mots_cacher, $mots_ajouter, $mots_enlever) = splitArrayIds($mots);
+  list($mots_voir, $mots_cacher, $mots_ajouter, $mots_enlever) = splitArrayIds(_request('mots'));
   $choses = secureIntArray($choses);
   $switch = addslashes($switch);
   if($switch == '') $switch = 'voir';
   $strict = intval($strict);
+
 
   if(count($mots_ajouter) && count($choses)) {
 	if(count($mots_ajouter)) {
@@ -152,7 +167,7 @@ function action_mots_partout() {
 	  }
 	}
   }
-  
+
   $par_choses = '';
 
   if(count($choses)) {
@@ -162,15 +177,12 @@ function action_mots_partout() {
 
   $par_mots = '';
 
-  if(count($mots)) {
-	foreach($mots as $id => $m) 
+  if(count(_request('mots'))) {
+	foreach(_request('mots') as $id => $m) 
 	  $par_mots .= "&mots[$id]=$m";
   }
 
-
-  //  $redirect = generer_url_action('mots_partout',"nom_chose=$nom_chose&stict=$strict&switch=$switch&ajax=$ajax&redirect=$redirect$par_chose$par_mots");
   $redirect = _request('redirect')."&nom_chose=$nom_chose&stict=$strict&switch=$switch&ajax=$ajax&redirect=$redirect$par_choses$par_mots";
-
 
   redirige_par_entete($redirect);
 
