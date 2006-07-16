@@ -12,7 +12,7 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	1.0
 	</version>
 	<etat>
-	dev
+	stable
 	</etat>
 	<description>
 	Permet d'afficher un message personalisable pendant une phase de maintenance sur tout le site public

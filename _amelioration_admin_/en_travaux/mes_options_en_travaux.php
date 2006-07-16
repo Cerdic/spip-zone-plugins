@@ -10,13 +10,14 @@ if ($GLOBALS['meta']['en_travaux']=='true')
 	$en_travaux_mode_admin = ($en_travaux_mode_admin OR (isset($page) && $page=='login'));
 	$en_travaux_mode_admin = ($en_travaux_mode_admin OR isset($_GET['action']));
 	$en_travaux_mode_admin = ($en_travaux_mode_admin OR isset($_POST['action']));
-
-	if ($en_travaux_mode_admin){
-		// je suis admin
+	$en_travaux_mode_admin = ($en_travaux_mode_admin OR $_GET['page']== 'style_prive'); // filtrage de la feuille de style admin mise en squelette
+	
+	if ($en_travaux_mode_admin) {
+		// ne rien faire si zone ecrire 
 	}
 	else {
 		$_GET['action']="en_travaux";
-		//echo "titi   ";
+		//dans tous les autres cas on force l'execution de l'affichage
 	}
 }
 function action_en_travaux(){
