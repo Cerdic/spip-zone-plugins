@@ -10,7 +10,7 @@
  *
  */
 
-include_spip("inc/forms_base");
+include_spip("base/forms");
 include_spip("inc/forms");
 
 //
