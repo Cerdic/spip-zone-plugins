@@ -1100,6 +1100,7 @@ function traiter_raccourcis($letexte) {
 			if ($str_hreflang) $str_hreflang = " hreflang=\"$str_hreflang\"";
 			//$str_targetblank = $regs[6]; // Pourrait servir pour la compatibilité AGORA
 			list($lien, $class, $texte) = calculer_url($regs[7], $regs[1], 'tout');
+			# ici bien passer le lien pour traiter [<doc3>->url]
 			$inserts[++$i] = typo("<a href=\"$lien\" class=\"$class\"$str_title$str_hreflang>"
 				. supprimer_numero($texte)
 				. "</a>");
@@ -1114,6 +1115,7 @@ function traiter_raccourcis($letexte) {
 	foreach ($inserts as $i => $insert) {
 		$letexte = str_replace("@@SPIP_ECHAPPE_LIEN_$i@@", $insert, $letexte);
 	}
+
 
 	//
 	// Tableaux
