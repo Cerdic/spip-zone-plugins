@@ -93,7 +93,7 @@ if($mssage_pile > 0 ){
 		echo "<p align='center'><b>".round($extra_meta["debut"]/$nb_inscrits *100)." %</b></p>";
 	}
 	echo "<p>"._T('spiplistes:texte_boite_en_cours')."</p>" ;
-	echo "<p align='center'><a href='$url_site/spip.php?page=meleuse'>["._T('spiplistes:suivi_envois')."]</a></p>";
+	echo "<p align='center'><a href='".generer_url_public('meleuse')."'>["._T('spiplistes:suivi_envois')."]</a></p>";
 	
 	/*echo "<p align='center'><a href='".generer_url_ecrire('spip_listes','envoi_lot=oui')."'><tt>["._T('spiplistes:lot_suivant')."]</tt></a></p>";
   echo "<p align='center'><a href='".generer_url_ecrire('spip_listes','')."'><tt>["._T('spiplistes:actualiser')."]</tt></a></p>";
