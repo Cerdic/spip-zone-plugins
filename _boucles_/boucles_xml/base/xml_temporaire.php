@@ -1,14 +1,14 @@
 <?php
 /*
- * forms
- * version plug-in de spip_form
+ * Boucle xml
+ * 
  *
  * Auteur :
- * Antoine Pitrou
- * adaptation en 182e puis plugin par cedric.morin@yterium.com
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * Cedric Morin
+ * © 2006 - Distribue sous licence GNU/GPL
  *
  */
+
 // Definition des tables temporaires pour permettre la squeletisation des formulaires
 //
 
@@ -43,7 +43,7 @@ function xml_creer_tables_temporaires(){
 }
 
 function xml_fill_table($xml_file){
-	if (lire_fichier($xml_file,$contenu)!==false){
+	if (lire_fichier(find_in_path($xml_file),$contenu)!==false){
 		include_spip('inc/plugin');
 		$tree = parse_plugin_xml($contenu);
 		xml_recurse_parse_to_table('/',$tree);

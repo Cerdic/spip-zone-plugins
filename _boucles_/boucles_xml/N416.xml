@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><?xml-stylesheet type="text/xsl" href="Noeud.xsl"?>
+<Noeud xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="N416" racine="false" version="01.07.03" xsi:noNamespaceSchemaLocation="../Schemas/Noeud.xsd">
+    <TitreLong>Sécurité sociale</TitreLong>
+    <Coproducteur>La Documentation française</Coproducteur>
+    <DateValidité>03/08/2004</DateValidité>
+    <Type>
+        <Nom>Noeud</Nom>
+    </Type>
+    <TypeCatégorie nom="Rubrique">
+        <Catégorie nom="Particuliers"/>
+    </TypeCatégorie>
+    <CouvertureGéographique>
+        <Nom>France métropolitaine</Nom>
+    </CouvertureGéographique>
+    <Indexation>
+        <MotClé typeMotClé="1">Sécurité sociale</MotClé>
+    </Indexation>
+    <CheminPréf><RéférenceNoeud ID="N17">Santé</RéférenceNoeud></CheminPréf>
+    <Ascendance>
+        <Père lien="N17" préférentiel="true"/>
+    </Ascendance>
+    
+    
+<Descendance>
+        <Fils lien="N418" nature="Noeud" positionPrésentation="1" type="Noeud">
+            <TitreContextuel>De quelle caisse dépendez-vous?</TitreContextuel>
+        </Fils>
+        <Fils lien="N424" nature="Noeud" positionPrésentation="2" type="Noeud">
+            <TitreContextuel>Régime général de la Sécurité sociale</TitreContextuel>
+        </Fils>
+        <Fils lien="N428" nature="Noeud" positionPrésentation="3" type="Noeud">
+            <TitreContextuel>Couverture maladie universelle (CMU), régime de base</TitreContextuel>
+        </Fils>
+        <Fils lien="N429" nature="Noeud" positionPrésentation="4" type="Noeud">
+            <TitreContextuel>Couverture maladie universelle (CMU), régime complémentaire</TitreContextuel>
+        </Fils>
+        <Fils lien="F13375" nature="Fiche" positionPrésentation="5" type="Fiche d'information">
+            <TitreContextuel>Aide à l'acquisition d'une couverture maladie complémentaire</TitreContextuel>
+        </Fils>
+        <Fils lien="F163" nature="Fiche" positionPrésentation="6" type="Fiche d'information">
+            <TitreContextuel>Libre choix du praticien</TitreContextuel>
+        </Fils>
+        <Fils lien="F235" nature="Fiche" positionPrésentation="7" type="Fiche d'information">
+            <TitreContextuel>Contrat de suivi médical patient-médecin généraliste</TitreContextuel>
+        </Fils>
+        <Fils lien="N417" nature="Noeud" positionPrésentation="8" type="Noeud">
+            <TitreContextuel>Remboursement</TitreContextuel>
+        </Fils>
+        <Fils lien="N438" nature="Noeud" positionPrésentation="9" type="Noeud">
+            <TitreContextuel>Carte d'assuré social et carnet de santé</TitreContextuel>
+        </Fils>
+        <Fils lien="N12204" nature="Noeud" positionPrésentation="10" type="Noeud">
+            <TitreContextuel>Accès au dossier médical</TitreContextuel>
+        </Fils>
+        <Fils lien="F241" nature="Fiche" positionPrésentation="11" type="Fiche d'information (avec sommaire interne)">
+            <TitreContextuel>Ayants droit d'un assuré social</TitreContextuel>
+        </Fils>
+        <Fils lien="N420" nature="Noeud" positionPrésentation="12" type="Noeud">
+            <TitreContextuel>Cotisations d'assurance maladie, CSG et CRDS</TitreContextuel>
+        </Fils>
+        <Fils lien="N257" nature="Noeud" positionPrésentation="13" type="Noeud">
+            <TitreContextuel>Recours</TitreContextuel>
+        </Fils>
+        <Fils lien="F737" nature="Fiche" positionPrésentation="14" type="Fiche d'information">
+            <TitreContextuel>Changement de situation familiale</TitreContextuel>
+        </Fils>
+        <Fils lien="F395" nature="Fiche" positionPrésentation="15" type="Fiche Question-réponse">
+            <TitreContextuel>Comment s'effectue la prise en charge médicale d'un touriste étranger qui tombe malade en France ?</TitreContextuel>
+        </Fils>
+        
+        <Fils lien="F1543" nature="Fiche" positionPrésentation="17" type="Fiche Question-réponse">
+            <TitreContextuel>Quelles sont les prestations servies par le régime de sécurité sociale des étudiants ?</TitreContextuel>
+        </Fils>
+    </Descendance><RessourcesRattachées>
+        <RessourceRattachée lien="R1418" positionPrésentation="1" type="Formulaire"/>
+        <RessourceRattachée lien="R1419" positionPrésentation="2" type="Formulaire"/>
+        <RessourceRattachée lien="R1420" positionPrésentation="3" type="Formulaire"/>
+        <RessourceRattachée lien="R1421" positionPrésentation="4" type="Formulaire"/>
+        <RessourceRattachée lien="R1422" positionPrésentation="5" type="Formulaire"/>
+        <RessourceRattachée lien="R3046" positionPrésentation="1" type="Site Web"/>
+        <RessourceRattachée lien="R3047" positionPrésentation="2" type="Site Web"/>
+        <RessourceRattachée lien="R1740" positionPrésentation="1" type="Texte de référence"/>
+    </RessourcesRattachées><ListeRacines><RacinePréf>N17</RacinePréf></ListeRacines></Noeud>

@@ -1,12 +1,12 @@
 #CACHE{3600}
 [(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
 <?php echo '<' ?>?xml version="1.0"[ encoding="(#CHARSET)"]?>
-<BOUCLE_parse(XML){xml}>
-	<BOUCLE_tree(XML){parent}>
+<BOUCLE_parse(XML){xml}{0,1}>
+	<BOUCLE_tree(XML){xpath=#XPATH#NOEUD}>
 		<#NOEUD #ATTRIBUTS>
 			<BOUCLE_rec(BOUCLE_tree)></BOUCLE_rec>
 		</#NOEUD>
 	</BOUCLE_tree>
 		#TEXTE
 	<//B_tree>
-</B_parse>
+</BOUCLE_parse>
