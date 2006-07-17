@@ -41,4 +41,31 @@ function xml_creer_tables_temporaires(){
 		
 	}
 }
+
+function xml_fill_table($xml_file){
+	if (lire_fichier($xml_file,$contenu)!==false){
+		include_spip('inc/plugin');
+		$tree = parse_plugin_xml($contenu);
+		xml_recurse_parse_to_table('/',$tree);
+	}
+}
+
+function xml_recurse_parse_to_table($xpath,$subtree){
+	foreach($subtree as $tag=>$tagoccur){
+		$attrs = explode(' ',$tag);
+		$noeud = array_shift($attrs);
+		$attrs = trim(implode(' ',$attrs));
+		if ((count($tagoccur)==1) AND !is_array($tagoccur[0])){
+			// c'est une feuille
+			// insertion sql
+		}
+		else{
+			foreach ($tagoccur as $subsubtree) {
+				// c'est un noeud
+				// insertion sql
+				xml_recurse_parse_to_table("$xpath$noeud/",$subsubtree);
+			}
+		}
+	}
+}
 ?>

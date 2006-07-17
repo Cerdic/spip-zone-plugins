@@ -1,0 +1,27 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Boucles XML
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Cedric MORIN
+	</auteur>
+	<version>
+	0.10
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Parser du xml avec les boucles SPIP
+	</description>
+	<options> <!-- fichier charge a chaque hit -->
+	xml_options.php
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	xml_fonctions.php
+	</fonctions>
+	<prefix> 
+	xml
+	</prefix>
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
