@@ -31,7 +31,9 @@ function WCalendar_statique_point_entree($suffixe, $dates = ""){
 }
 
 
-function WCalendar_header($flux){
+function WCalendar_header($flux,$onload=""){
+	global $init_functions;
+	$init_functions = $onload;
 	include_spip('inc/calendar_init');
 	return WCalendar_header_prive($flux);
 }
@@ -51,6 +53,12 @@ function WCalendar_controller($date,$suffixe){
     afficher_mois(mois($date), "id='mois$suffixe' name='mois$suffixe' size='1' class='fondl verdana1' onchange='changeDate$suffixe()'") .
     afficher_annee(annee($date), "id='annee$suffixe' name='annee$suffixe' size='1' class='fondl verdana1' onchange='changeDate$suffixe()'", date('Y')-4);
   return $s;
+}
+
+function WCalendar_statique_controller($dates,$suffixe){
+	if (is_array($dates))
+		$dates = implode(',',$dates);
+  return WCalendar_statique_point_entree($suffixe, $dates);
 }
 
 ?>

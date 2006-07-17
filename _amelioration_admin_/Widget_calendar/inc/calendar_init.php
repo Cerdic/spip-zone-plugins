@@ -255,7 +255,7 @@ function WCalendar_header_prive($flux) {
 			list($v,$a,$b,$c) = WCalendar_jsinit($t, $s);
 			$vars .= $v; $js_a .= $a; $js_b .= $b;$js_c .= $c;
 		}
-					
+		global $init_functions;
 		$js .= "
 		$vars
 		function hideall(){
@@ -263,6 +263,7 @@ function WCalendar_header_prive($flux) {
 		}
 		function init() {
 			$js_b
+			$init_functions
 		}
 		
 		$js_c
