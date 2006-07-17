@@ -16,14 +16,14 @@ _ &copy; 2006 Licence GPL
 	Parser du xml avec les boucles SPIP
 	
 	Le plugin introduit un type de boucle XML qui permet de parcourir l'arborescence d'un fichier au format
-xml au moyen des boucles spip. Les critères disponibles sont
--* {xml=fichier.xml} pour aller chercher fichier.xml dans le path
--* {xpath} pour acceder a un noeud par son chemin a partir de la racine (fini par un /}
--* {racine}
--* {id_parent}
--* {statut=noeud} {statut=feuille}
--* {noeud=MonElement} pour acceder directement a un noeud independamment de son arborescence
--* NIY {id_enfant}
+xml au moyen des boucles spip. Les crit&egrave;res disponibles sont
+-* <code>{xml=fichier.xml}</code> pour aller chercher fichier.xml dans le path
+-* <code>{xpath}</code> pour acceder a un noeud par son chemin a partir de la racine (fini par un /}
+-* <code>{racine}</code>
+-* <code>{id_parent}</code>
+-* <code>{statut=noeud} {statut=feuille}</code>
+-* <code>{noeud=MonElement}</code> pour acceder directement a un noeud independamment de son arborescence
+-* NIY <code>{id_enfant}</code>
 
 Les balises utilses sont #XPATH, #NOEUD, #ATTRIBUTS (sur laquelle on utilisera le filtre extraire_attributs), et #TEXTE pour les feuilles (vide pour les noeuds)
 	</description>
