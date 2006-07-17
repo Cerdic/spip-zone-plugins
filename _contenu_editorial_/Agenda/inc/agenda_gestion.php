@@ -308,7 +308,7 @@ function Agenda_formulaire_article($id_article, $flag_editable){
 	$out = "";
 	$out .= "<a name='agenda'></a>";
 	if ($flag_editable) {
-		$out .= Agenda_action_formulaire_article();
+		$out .= Agenda_action_formulaire_article($id_article);
 		if (_request('edit')||_request('neweven'))
 			$bouton = bouton_block_visible("evenementsarticle");
 		else
@@ -441,7 +441,7 @@ function Agenda_action_update_liste_mots($id_evenement,$liste_mots){
 }
 
 
-function Agenda_action_formulaire_article(){
+function Agenda_action_formulaire_article($id_article){
 	include_spip('base/abstract_sql');
 	// s'assurer que les tables sont crees
 	Agenda_install();
@@ -451,10 +451,6 @@ function Agenda_action_formulaire_article(){
 	$modif = _request('evenement_modif');
 	$supp_evenement = intval(_request('supp_evenement'));
 	if ($insert || $modif){
-		$id_article = intval(_request('id_article'));
-		if (!$id_article){
-			$id_article = intval(_request('ajouter_id_article'));
-		}
 	
 		if ( ($insert) && (!$id_evenement) ){
 			$id_evenement = spip_abstract_insert("spip_evenements",
@@ -527,12 +523,25 @@ function Agenda_action_formulaire_article(){
 		// gestion des repetitions
 		if (($repetitions = _request('selected_date_repetitions'))!=NULL){
 			$repetitions = explode(',',$repetitions);
+			$rep = array();
 			foreach($repetitions as $key=>$date){
-				$date = preg_replace(",[0-2][0-9]:[0-6][0-9]:[0-6][0-9]\s*(UTC|GMT)(\+|\-)[0-9]{4},","",$date);
-				$date = explode(' ',$date);
-				$date = strtotime($date[2]." ".$date[1]." ".$date[3]);
-				$repetitions[$key] = $date;
+				var_dump(preg_match(",[0-9][0-9]?/[0-9][0-9]?/[0-9][0-9][0-9][0-9],",$date));
+				if (preg_match(",[0-9][0-9]?/[0-9][0-9]?/[0-9][0-9][0-9][0-9],",$date)){
+					#echo "<hr/>";var_dump($date);
+					$date = explode('/',$date);
+					$date = $date[2]."/".$date[0]."/".$date[1];
+					#var_dump(date('Y-m-d',strtotime($date)));
+					$date = strtotime($date);
+				}
+				else {
+					$date = preg_replace(",[0-2][0-9]:[0-6][0-9]:[0-6][0-9]\s*(UTC|GMT)(\+|\-)[0-9]{4},","",$date);
+					$date = explode(' ',$date);
+					$date = strtotime($date[2]." ".$date[1]." ".$date[3]);
+				}
+				if (!in_array($date,$repetitions))
+					$rep[] = $date;
 			}
+			$repetitions = $rep;
 		}
 		else 
 			$repetitions = array();

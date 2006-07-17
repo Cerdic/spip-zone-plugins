@@ -75,7 +75,7 @@ function affiche_evenements_agenda($flag_editable){
 	$jour = intval(_request('jour'));
 
 	if ($flag_editable)
-		Agenda_action_formulaire_article();
+		Agenda_action_formulaire_article($ajouter_id_article);
 
 	$visu_evenements=array();
 
