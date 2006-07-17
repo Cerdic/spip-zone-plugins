@@ -51,6 +51,8 @@ function xml_fill_table($xml_file){
 	static $file_done=array(''=>true);
 	if (isset($file_done[$xml_file])) return;
 	if (lire_fichier($f=find_in_path($xml_file),$contenu)!==false){
+		include_spip('inc/charset');
+		$contenu = html2unicode(transcoder_page($contenu));
 		include_spip('inc/plugin');
 		$tree = parse_plugin_xml($contenu);
 		spip_query("DELETE FROM spip_xml WHERE xml=".spip_abstract_quote($xml_file));

@@ -3,16 +3,29 @@
 	Boucles XML
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	Cedric MORIN
+	Cedric MORIN [notre-ville.net->http://notre-ville.net]
+_ &copy; 2006 Licence GPL
 	</auteur>
 	<version>
 	0.10
 	</version>
 	<etat>
-	dev
+	test
 	</etat>
 	<description>
 	Parser du xml avec les boucles SPIP
+	
+	Le plugin introduit un type de boucle XML qui permet de parcourir l'arborescence d'un fichier au format
+xml au moyen des boucles spip. Les critères disponibles sont
+-* {xml=fichier.xml} pour aller chercher fichier.xml dans le path
+-* {xpath} pour acceder a un noeud par son chemin a partir de la racine (fini par un /}
+-* {racine}
+-* {id_parent}
+-* {statut=noeud} {statut=feuille}
+-* {noeud=MonElement} pour acceder directement a un noeud independamment de son arborescence
+-* NIY {id_enfant}
+
+Les balises utilses sont #XPATH, #NOEUD, #ATTRIBUTS (sur laquelle on utilisera le filtre extraire_attributs), et #TEXTE pour les feuilles (vide pour les noeuds)
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
 	xml_options.php
