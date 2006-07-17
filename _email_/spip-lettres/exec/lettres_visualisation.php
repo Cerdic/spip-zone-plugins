@@ -60,6 +60,7 @@
 			} else {
 				$modification = 'UPDATE spip_lettres SET titre="'.$titre.'", descriptif="'.$descriptif.'", texte="'.$texte.'", maj=NOW()'.($champs_extra ? (", extra='".addslashes($champs_extra)."'") : '').' WHERE id_lettre="'.$id_lettre.'"';
 				spip_query($modification);
+				$url_lettre = generer_url_ecrire('lettres_visualisation', 'id_lettre='.$id_lettre, '&');
 				lettres_rediriger_javascript($url_lettre);
 			}
 		}
@@ -148,7 +149,7 @@
 												D.fichier
 											FROM spip_documents_lettres AS DL 
 											INNER JOIN spip_documents AS D ON D.id_document=DL.id_document 
-											WHERE id_lettre="'.$id_lettre.'"');
+											WHERE DL.id_lettre="'.$id_lettre.'"');
 				while ($arr = spip_fetch_array($documents)) {
 					if ($arr['id_vignette'] != 0) {
 						$vignette = spip_query('SELECT fichier FROM spip_documents WHERE id_document="'.$arr['id_vignette'].'"');
@@ -260,16 +261,8 @@
 			lettres_afficher_numero_lettre($id_lettre, true, false);
 
 		global $table_logos;
+		$table_logos['id_lettre'] = 'let';
 
-		$table_logos = array( // cf public/composer.php
-				     'id_article' => 'art', 
-				     'id_auteur' => 'aut', 
-				     'id_breve' => 'breve', 
-				     'id_mot' => 'mot', 
-				     'id_syndic'=> 'site',
-				     'id_rubrique' => 'rub',
-				     'id_lettre' => 'let'
-				     );
 	  	afficher_boite_logo('id_lettre', $id_lettre, _T('lettres:logo_lettre'), _T('logo_survol'), 'lettres_visualisation');
 		lettres_afficher_statistiques_lettre_publiee($titre, $id_lettre);
 

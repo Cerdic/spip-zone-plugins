@@ -30,7 +30,7 @@
 	       		$this->Sender = $GLOBALS['meta']['spip_lettres_smtp_sender'];
 	       		$this->AddCustomHeader("Errors-To: ".$this->Sender);
 			}
-			
+
 			if (isset($GLOBALS['meta']['spip_lettres_smtp']) AND $GLOBALS['meta']['spip_lettres_smtp'] == 'oui') {
 	    		$this->Mailer	= 'smtp';
 			    $this->Host 	= $GLOBALS['meta']['spip_lettres_smtp_host'];

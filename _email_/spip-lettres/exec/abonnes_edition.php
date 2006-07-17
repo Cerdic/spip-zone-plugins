@@ -19,7 +19,7 @@
 
 
 	function exec_abonnes_edition() {
-		global $champs_extra, $couleur_foncee, $tri, $debut;
+		global $champs_extra;
 	 	
 		lettres_verifier_droits();
 
