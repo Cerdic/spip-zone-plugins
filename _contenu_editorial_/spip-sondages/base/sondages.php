@@ -48,7 +48,7 @@
 	$spip_choix = array(
 						"id_choix"		=> "bigint(21) NOT NULL",
 						"id_sondage"	=> "bigint(21) NOT NULL",
-						"id_parent"		=> "bigint(21) NOT NULL default '0'",
+						"ordre"			=> "bigint(21) NOT NULL default '0'",
 						"titre"			=> "text NOT NULL"
 					);
 	$spip_choix_key = array(
@@ -176,6 +176,21 @@
 					$boucle->where[]= array("'='", "'$id_table.statut'", "'\"publie\"'");
 				}
 			}
+			
+	        return calculer_boucle($id_boucle, $boucles); 
+	}
+
+
+	//
+	// <BOUCLE(CHOIX)>
+	//
+	function boucle_CHOIX_dist($id_boucle, &$boucles) {
+	        $boucle = &$boucles[$id_boucle];
+	        $id_table = $boucle->id_table;
+	        $boucle->from[$id_table] =  "spip_choix";  
+
+			$boucle->default_order[] = "'$id_table.ordre ASC'" ;
+
 	        return calculer_boucle($id_boucle, $boucles); 
 	}
 

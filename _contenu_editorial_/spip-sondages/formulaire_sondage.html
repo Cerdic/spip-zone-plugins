@@ -6,14 +6,14 @@
 
 <BOUCLE_sondage_simple(SONDAGES) {id_sondage=#ENV{id_sondage}} {type=simple}>
 <B_radio>		<p>
-<BOUCLE_radio(CHOIX) {id_sondage=#ENV{id_sondage}} {par id_parent}>			<input type="radio" name="choix_#ENV{id_sondage}[]" id="choix_#ID_CHOIX" value="#ID_CHOIX" /> <label for="choix_#ID_CHOIX">#TITRE</label><br />
+<BOUCLE_radio(CHOIX) {id_sondage=#ENV{id_sondage}}>			<input type="radio" name="choix_#ENV{id_sondage}[]" id="choix_#ID_CHOIX" value="#ID_CHOIX" /> <label for="choix_#ID_CHOIX">#TITRE</label><br />
 </BOUCLE_radio>		</p>
 </B_radio>
 </BOUCLE_sondage_simple>
 
 <BOUCLE_sondage_multiple(SONDAGES) {id_sondage=#ENV{id_sondage}} {type=multiple}>
 <B_checkbox>		<p>
-<BOUCLE_checkbox(CHOIX) {id_sondage=#ENV{id_sondage}} {par id_parent}>			<input type="checkbox" name="choix_#ENV{id_sondage}[]" id="choix_#ID_CHOIX" value="#ID_CHOIX" /> <label for="choix_#ID_CHOIX">#TITRE</label><br />
+<BOUCLE_checkbox(CHOIX) {id_sondage=#ENV{id_sondage}}>			<input type="checkbox" name="choix_#ENV{id_sondage}[]" id="choix_#ID_CHOIX" value="#ID_CHOIX" /> <label for="choix_#ID_CHOIX">#TITRE</label><br />
 </BOUCLE_checkbox>		</p>
 </B_checkbox>
 </BOUCLE_sondage_multiple>
