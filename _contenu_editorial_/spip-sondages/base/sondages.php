@@ -22,6 +22,7 @@
 
 	$table_des_tables['sondages'] = 'sondages';
 	$table_des_tables['choix'] = 'choix';
+	$table_des_tables['sondes'] = 'sondes';
 	$table_des_tables['avis'] = 'avis';
 
 
@@ -36,7 +37,8 @@
 						"lang"			=> "varchar(10) NOT NULL",
 						"maj"			=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 						"type"			=> "enum('simple','multiple') NOT NULL default 'simple'",
-						"statut"		=> "enum('brouillon','publie','termine') NOT NULL default 'brouillon'",
+						"en_ligne"		=> "enum('oui','non') NOT NULL default 'non'",
+						"statut"		=> "enum('en_attente','publie','termine') NOT NULL default 'en_attente'",
 						"extra"			=> "longblob NULL"
 					);
 	$spip_sondages_key = array(
@@ -53,12 +55,20 @@
 						"PRIMARY KEY" => "id_choix"
 					);
 
-	$spip_avis = array(
-						"id_avis"		=> "bigint(21) NOT NULL",
+	$spip_sondes = array(
+						"id_sonde"		=> "bigint(21) NOT NULL",
 						"id_sondage" 	=> "bigint(21) NOT NULL",
-						"id_choix" 		=> "bigint(21) NOT NULL",
 						"ip"		 	=> "varchar(255) NOT NULL",
 						"date"			=> "datetime NOT NULL default '0000-00-00 00:00:00'"
+					);
+	$spip_sondes_key = array(
+						"PRIMARY KEY" => "id_sonde"
+					);
+
+	$spip_avis = array(
+						"id_avis"		=> "bigint(21) NOT NULL",
+						"id_sonde"	 	=> "bigint(21) NOT NULL",
+						"id_choix" 		=> "bigint(21) NOT NULL"
 					);
 	$spip_avis_key = array(
 						"PRIMARY KEY" => "id_avis"
@@ -100,6 +110,8 @@
 		array('field' => &$spip_sondages, 'key' => &$spip_sondages_key);
 	$tables_principales['spip_choix'] =
 		array('field' => &$spip_choix, 'key' => &$spip_choix_key);
+	$tables_principales['spip_sondes'] =
+		array('field' => &$spip_sondes, 'key' => &$spip_sondes_key);
 	$tables_principales['spip_avis'] =
 		array('field' => &$spip_avis, 'key' => &$spip_avis_key);
 
@@ -116,6 +128,7 @@
 
 	$tables_jointures['spip_sondages'][]= 'rubriques';
 	$tables_jointures['spip_sondages'][]= 'choix';
+	$tables_jointures['spip_sondages'][]= 'sondes';
 	$tables_jointures['spip_sondages'][]= 'avis';
 	$tables_jointures['spip_sondages'][]= 'auteurs_sondages';
 	$tables_jointures['spip_sondages'][]= 'auteurs';
@@ -127,10 +140,16 @@
 	$tables_jointures['spip_rubriques'][]= 'sondages';
 
 	$tables_jointures['spip_choix'][]= 'sondages';
+	$tables_jointures['spip_choix'][]= 'sondes';
 	$tables_jointures['spip_choix'][]= 'avis';
+
+	$tables_jointures['spip_sondes'][]= 'sondages';
+	$tables_jointures['spip_sondes'][]= 'choix';
+	$tables_jointures['spip_sondes'][]= 'avis';
 
 	$tables_jointures['spip_avis'][]= 'sondages';
 	$tables_jointures['spip_avis'][]= 'choix';
+	$tables_jointures['spip_avis'][]= 'sondes';
 
 	$tables_jointures['spip_mots'][]= 'mots_sondages';
 	$tables_jointures['spip_mots'][]= 'sondages';
@@ -153,7 +172,8 @@
 
 			if (!$GLOBALS['var_preview']) {
 				if (!$boucle->statut) {
-					$boucle->where[]= array("'IN'", "'$id_table.statut'", "'(\"publie\",\"termine\")'");
+					$boucle->where[]= array("'='", "'$id_table.en_ligne'", "'\"oui\"'");
+					$boucle->where[]= array("'='", "'$id_table.statut'", "'\"publie\"'");
 				}
 			}
 	        return calculer_boucle($id_boucle, $boucles); 

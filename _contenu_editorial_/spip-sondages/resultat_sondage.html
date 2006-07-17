@@ -1,3 +1,7 @@
+[(#ENV*{sondage_termine}|?{' ',''})<p class="spip"><:sondages:sondage_termine:></p>]
+[(#ENV*{sondage_deja_vote}|?{' ',''})<p class="spip"><:sondages:sondage_deja_vote:></p>]
+[(#ENV*{sondage_merci}|?{' ',''})<p class="spip"><:sondages:sondage_merci:></p>]
+
 <B_choix><ul class="spip">
 <BOUCLE_choix(CHOIX) {id_sondage=#ENV{id_sondage}} {par id_parent}>
 	<li>#TITRE : <BOUCLE_resultats(AVIS) {id_choix}> </BOUCLE_resultats>#TOTAL_BOUCLE <:sondages:votes:></B_resultats></li>

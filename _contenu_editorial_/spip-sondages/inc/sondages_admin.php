@@ -32,7 +32,7 @@
 		$version_plugin = $info_plugin_sondages['version'];
 		if (!isset($GLOBALS['meta']['spip_sondages_version'])) {
 			creer_base();
-#			ecrire_meta('spip_sondages_version', $version_plugin);
+			ecrire_meta('spip_sondages_version', $version_plugin);
 			ecrire_metas();
 		} else {
 			$version_base = $GLOBALS['meta']['spip_sondages_version'];
@@ -72,5 +72,42 @@
 		exit();
 	}
 
+	/**
+	 * sondages_mettre_a_jour_sondages
+	 *
+	 * met à jour un sondage en fonction de ses dates de début et de fin
+	 *
+	 * @param int id_sondage
+	 * @return true
+	 * @author Pierre Basson
+	 **/
+	function sondages_mettre_a_jour_sondages($id_sondage) {
+		$requete_en_attente = 'SELECT statut FROM spip_sondages WHERE id_sondage="'.$id_sondage.'" AND NOW() < date_debut';
+		$resultat_en_attente = spip_query($requete_en_attente);
+		if (spip_num_rows($resultat_en_attente) == 1) {
+			list($statut) = spip_fetch_array($resultat_en_attente);
+			if ($statut != 'en_attente')
+				spip_query('UPDATE spip_sondages SET statut="en_attente" WHERE id_sondage="'.$id_sondage.'"');
+			return true;
+		}
+
+		$requete_publie = 'SELECT statut FROM spip_sondages WHERE id_sondage="'.$id_sondage.'" AND NOW() >= date_debut AND NOW() <= date_fin';
+		$resultat_publie = spip_query($requete_publie);
+		if (spip_num_rows($resultat_publie) == 1) {
+			list($statut) = spip_fetch_array($resultat_publie);
+			if ($statut != 'publie')
+				spip_query('UPDATE spip_sondages SET statut="publie" WHERE id_sondage="'.$id_sondage.'"');
+			return true;
+		}
+
+		$requete_termine = 'SELECT statut FROM spip_sondages WHERE id_sondage="'.$id_sondage.'" AND NOW() > date_fin';
+		$resultat_termine = spip_query($requete_termine);
+		if (spip_num_rows($resultat_termine) == 1) {
+			list($statut) = spip_fetch_array($resultat_termine);
+			if ($statut != 'termine')
+				spip_query('UPDATE spip_sondages SET statut="termine" WHERE id_sondage="'.$id_sondage.'"');
+			return true;
+		}
+	}
 
 ?>

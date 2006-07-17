@@ -60,24 +60,26 @@
 	 * @author Pierre Basson
 	 **/
 	function sondages_taches_generales_cron($taches_generales) {
-		$taches_generales['sondages'] = 60 * 10;
+		$taches_generales['sondages'] = 60 * 5; // toutes les 5 minutes
 		return $taches_generales;
 	}
+
 
 	/**
 	 * cron_sondages
 	 *
-	 * Tâche de fond pour publier/mettre hors ligne les sondages
+	 * Tâche de fond pour publier/terminer les sondages
 	 *
 	 * @param array taches_generales
 	 * @return true
 	 * @author Pierre Basson
 	 **/
 	function cron_sondages($t) {
-
-		# ici le code pour lancer les envois
-
-		# return (0 - $t); # si pas terminé
+		$requete_tous_les_sondages_en_ligne = 'SELECT id_sondage FROM spip_sondages WHERE en_ligne="oui"';
+		$resultat_tous_les_sondages_en_ligne = spip_query($requete_tous_les_sondages_en_ligne);
+		while (list($id_sondage) = spip_fetch_array($resultat_tous_les_sondages_en_ligne)) {
+			sondages_mettre_a_jour_sondages($id_sondage);
+		}
 		return true;
 	}
 

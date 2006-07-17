@@ -13,9 +13,6 @@
 	 **/
 
 
-	include_spip('base/abstract_sql');
-
-
 	/**
 	 * balise_FORMULAIRE_SONDAGE
 	 *
@@ -32,10 +29,10 @@
 		if (!$args[0])
 			return erreur_squelette(_T('zbug_champ_hors_motif', array ('champ' => '#FORMULAIRE_SONDAGE', 'motif' => 'SONDAGES')), '');
 
-		// On ne peut pas "voir les résultats"/"donner son avis" si le sondage n'est pas à l'état publie ou termine
-		$requete_statut = 'SELECT statut FROM spip_sondages WHERE id_sondage="'.$args[0].'"';
-		list($statut) = spip_fetch_array(spip_query($requete_statut));
-		if ($statut == 'brouillon')
+		// On ne peut pas "voir les résultats"/"donner son avis" si le sondage n'est pas en ligne et publié/terminé
+		$requete_statut = 'SELECT statut, en_ligne FROM spip_sondages WHERE id_sondage="'.$args[0].'"';
+		list($statut, $en_ligne) = spip_fetch_array(spip_query($requete_statut));
+		if ($statut == 'en_attente' OR $en_ligne == 'non')
 			return '';
 
 		return $args;
@@ -52,43 +49,68 @@
 	function balise_FORMULAIRE_SONDAGE_dyn($id_sondage) {
 
 		$requete_statut = 'SELECT statut FROM spip_sondages WHERE id_sondage="'.$id_sondage.'"';
-		list($statut) = spip_fetch_array(spip_query($requete_statut));
+		$resultat_statut = spip_query($requete_statut);
+		list($statut) = spip_fetch_array($resultat_statut);
 		
-		if ($statut == 'termine') { // le sondage est terminé, l'internaute a déjà voté
+		if ($statut == 'termine') { // le sondage est terminé ou l'internaute a déjà voté
 			return	array(
 						'resultat_sondage', 
 						0,
 						array(
-							'id_sondage'	=> $id_sondage
+							'sondage_termine'	=> ' ',
+							'sondage_deja_vote'	=> '',
+							'sondage_merci'		=> '',
+							'id_sondage'		=> $id_sondage
 						)
 					);
 		
 		} else { // le sondage est en cours
 			$choix		= _request('choix_'.$id_sondage);
 			$valider	= _request('valider');
+			$ip			= $_SERVER['REMOTE_ADDR'];
 
-			if (!empty($choix) AND !empty($valider)) {
-				$ip = $_SERVER['REMOTE_ADDR'];
-				foreach ($choix as $id_choix) {
-					spip_query('INSERT INTO spip_avis (id_sondage, id_choix, ip, date) VALUES ("'.$id_sondage.'", "'.intval($id_choix).'", "'.$ip.'", NOW())');
-				}
-				
+			$requete_deja_vote = 'SELECT id_sonde FROM spip_sondes WHERE id_sondage="'.$id_sondage.'" AND ip="'.$ip.'"';
+			$resultat_deja_vote = spip_query($requete_deja_vote);
+			$deja_vote = spip_num_rows($resultat_deja_vote);
+			if ($deja_vote == 1) {
 				return	array(
 							'resultat_sondage', 
+							0,
+							array(
+								'sondage_termine'	=> '',
+								'sondage_deja_vote'	=> ' ',
+								'sondage_merci'		=> '',
+								'id_sondage'		=> $id_sondage
+							)
+						);
+			} else {
+				if (!empty($choix) AND !empty($valider)) {
+					spip_query('INSERT INTO spip_sondes (id_sondage, ip, date) VALUES ("'.$id_sondage.'", "'.$ip.'", NOW())');
+					$id_sonde = spip_insert_id();
+					foreach ($choix as $id_choix) {
+						spip_query('INSERT INTO spip_avis (id_sonde, id_choix) VALUES ("'.$id_sonde.'", "'.intval($id_choix).'")');
+					}
+				
+					return	array(
+								'resultat_sondage', 
+								0,
+								array(
+									'sondage_termine'	=> '',
+									'sondage_deja_vote'	=> '',
+									'sondage_merci'		=> ' ',
+									'id_sondage'		=> $id_sondage
+								)
+							);
+				}
+
+				return	array(
+							'formulaire_sondage', 
 							0,
 							array(
 								'id_sondage'	=> $id_sondage
 							)
 						);
 			}
-
-			return	array(
-						'formulaire_sondage', 
-						0,
-						array(
-							'id_sondage'	=> $id_sondage
-						)
-					);
 		}
 	}
 
