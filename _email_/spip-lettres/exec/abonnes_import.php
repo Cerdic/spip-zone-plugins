@@ -27,9 +27,12 @@
 				$etape = 2;
 				$chemin_fichier = $_FILES['fichier_csv']['tmp_name'];
 				$nom_fichier = $_FILES['fichier_csv']['name'];
+				move_uploaded_file($chemin_fichier, _DIR_CACHE.$nom_fichier);
+				$chemin_fichier = _DIR_CACHE.$nom_fichier;
 				$tableau = explode("\n", str_replace("\r", "\n", implode('', file($chemin_fichier))));
 				$tableau_emails_valides = array();
 				foreach ($tableau as $cle => $email) {
+					$email = strtolower(trim($email));
 					if (lettres_verifier_validite_email($email)) {
 						if (!in_array($email, $tableau_emails_valides))
 							$tableau_emails_valides[] = $email;
@@ -82,7 +85,6 @@
 
 		$id_lettre = intval($_REQUEST['id_lettre']);
 			
-
 
 		debut_page(_T('lettres:import_csv'), "lettres", "abonnes");
 	
