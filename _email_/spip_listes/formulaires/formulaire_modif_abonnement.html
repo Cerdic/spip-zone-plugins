@@ -16,8 +16,8 @@
 </BOUCLE_auteur>
 <B_listes>
 	<fieldset>
-	<legend>[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:abo_1_lettre:>,<:spiplistes:abo_listes:>})] #NOM_SITE_SPIP</legend>
-	<ul style='width:350px'>
+	<legend>[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:abo_1_lettre:>,<:spiplistes:abo_listes:>})]</legend>
+	<ul style='width:350px;list-style-type:none'>
 <BOUCLE_listes(ARTICLES) {statut=liste} {0,(#ENV{formulaire_affiche}|?{100,0})}>
 				[(#TOTAL_BOUCLE|=={1}|?{' ',''})
 				<li style="margin-bottom:3px">
