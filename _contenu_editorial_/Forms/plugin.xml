@@ -14,7 +14,7 @@
 	</etat>
 	<description>
 	Gestion et administration de formulaires editables.
-	Ce plugin permet egalement la publication de sondages et enquetes, la collecte des reponses dans la base de données et le telechargement au format csv
+	Ce plugin permet egalement la publication de sondages et enquetes, la collecte des reponses dans la base de donn&eacute;es et le telechargement au format csv
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
 	forms_options.php
@@ -38,6 +38,10 @@
 	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom>
+		<inclure>forms_filtres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
 		<inclure>forms_filtres.php</inclure>
 	</pipeline>
 	<pipeline>

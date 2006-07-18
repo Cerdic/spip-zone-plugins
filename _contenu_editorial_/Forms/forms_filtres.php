@@ -73,5 +73,9 @@ include_spip("inc/forms");
 		$flux .= 	"<link rel='stylesheet' href='".find_in_path('spip_forms.css')."' type='text/css' media='all' />\n";
 		return $flux;
 	}
+	function Forms_header_prive($flux){
+		$flux .= 	"<link rel='stylesheet' href='".find_in_path('spip_forms.css')."' type='text/css' media='all' />\n";
+		return $flux;
+	}
 
 ?>
