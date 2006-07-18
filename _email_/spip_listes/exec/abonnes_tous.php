@@ -31,7 +31,7 @@ function exec_abonnes_tous()
 global $connect_statut;
 global $connect_toutes_rubriques;
 global $connect_id_auteur;
-global $type;
+global $type,$debut;
 global $new,$changer_statut,$statut,$tri,$cherche_auteur,$id_auteur;
  
  $options = 'avancees' ;
@@ -524,18 +524,14 @@ if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
 	echo "<tr bgcolor='white'><td align='left'>";
 	if ($debut > 0) {
 		$debut_prec = strval(max($debut - $max_par_page, 0));
-		$link = new Link;
-		$link->addVar('debut', $debut_prec);
-		echo $link->getForm('GET');
+		echo "<form method=\"get\" action=\"".generer_url_ecrire('abonnes_tous','debut=$debut_prec')."\">";
 		echo "<input type='submit' name='submit' value='&lt;&lt;&lt;' class='fondo'>";
 		echo "</form>";
 		//echo "<a href='$retour&debut=$debut_prec'>&lt;&lt;&lt;</a>";
 	}
 	echo "</td><td align='right'>";
 	if ($debut_suivant < $nombre_auteurs) {
-		$link = new Link;
-		$link->addVar('debut', $debut_suivant);
-		echo $link->getForm('GET');
+		echo '<form method="post" action="'.generer_url_ecrire("abonnes_tous","debut=$debut_suivant").'">';
 		echo "<input type='submit' name='submit' value='&gt;&gt;&gt;' class='fondo'>";
 		echo "</form>";
 		//echo "<a href='$retour&debut=$debut_suivant'>&gt;&gt;&gt;</a>";
