@@ -319,7 +319,7 @@ $result = spip_query($query);
       }
 
       $message .= "\n\n-----------------------------------------\n\n" ;
-      $message .= _T('spiplistes:abonnement_mail')." ".$adresse_site."/spip.php?page=abonnement&d=".$cookie;
+      $message .= _T('spiplistes:abonnement_mail').' '.generer_url_public("abonnement","d=$cookie") ;
       $message .= "\n\n-----------------------------------------\n\n" ;
 		
 		if($abonne_existant != 'oui'){
