@@ -298,7 +298,7 @@ if ($message_pile > 0){
 			 $deb["debut"] = $debut ;
 			}	
 		set_extra(1,$deb,"auteur");	
-		$addresse_desabo =  $urlsite."/spip.php?page=abonnement";
+		
 		echo "<h4>"._T('spiplistes:contacts_lot')."</h4>\n";
 		echo "<ul>\n";
 	
@@ -338,7 +338,7 @@ if ($message_pile > 0){
 					// pied de page texte			
 					$pagem = $page_."\n\n"  ;
 					$pagem.= _T('spiplistes:abonnement_mail')."\n" ;
-					$pagem.= $addresse_desabo."?d=".$cookie."\n\n"  ;
+					$pagem.= generer_url_public("abonnement","d=$cookie")."\n\n"  ;
 		
 					// fin du pied de page texte					
 						if (email_valide_bloog($from)){							
@@ -366,7 +366,7 @@ if ($message_pile > 0){
 		
 						$pagehm = $pageh."<hr />"._T('spiplistes:editeur')."<a href=\"".$urlsite."\">".$nomsite."</a><br />
 						<a href=\"".$urlsite."\">".$urlsite."</a><hr />
-						<a href=\"".$addresse_desabo."?d=".$cookie."\">"._T('spiplistes:abonnement_mail')."</a></BODY></HTML>";
+						<a href=\"".generer_url_public('abonnement','d='.$cookie)."\">"._T('spiplistes:abonnement_mail')."</a></BODY></HTML>";
 						$pagehm .="\n\n\n--$boundary--\n end of the multi-part";
 		
 						// fin du pied de page HTML
