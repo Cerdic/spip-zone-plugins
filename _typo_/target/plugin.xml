@@ -13,7 +13,10 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	test
 	</etat>
 	<description>
-	Ouvre tous les liens de class spip_out dans une nouvelle fenêtre.
+ 	Ouvre tous les liens de class spip_out dans une nouvelle fenêtre.
+ 	Ajoute la class spip_out aux liens de type directory des sites syndiqués et les ouvrent dans une nouvelle fenêtre.
+ 	Ouvre tous les liens de class spip_glossaire (vers wikipedia)  aussi dans une nouvelle fenêtre.
+	<br /><a href="http://monsitespip.com/spip.php?article2" target="_blank">Voir MonSiteSpip.com pour plus de détails</a>
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
