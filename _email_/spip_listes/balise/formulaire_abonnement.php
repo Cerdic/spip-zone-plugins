@@ -8,21 +8,16 @@ include_spip('base/abstract_sql');
 
 
 function balise_FORMULAIRE_ABONNEMENT ($p) {
-
-	return calculer_balise_dynamique($p, 'FORMULAIRE_ABONNEMENT', array());
+	return calculer_balise_dynamique($p, 'FORMULAIRE_ABONNEMENT', array('liste'));
 }
 
-// args[0] indique le focus eventuel
-// args[1] indique la rubrique eventuelle de proposition
-// [(#FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE})]
+// args[0] indique une liste
+// args[1] indique un eventuel squeletyte alternatif
+// [(#FORMULAIRE_INSCRIPTION{mon_squelette})]
+
 function balise_FORMULAIRE_ABONNEMENT_stat($args, $filtres) {
-	if ( ($GLOBALS['meta']['accepter_inscriptions'] != 'oui') AND ($GLOBALS['meta']['accepter_visiteurs'] != 'oui' ) )
-		return '';
-	else 
-		return array('redac', 
-			(isset($args[0]) ? $args[0] : ''),
-			(isset($args[1]) ? $args[1] : ''));
-}
+	if(!$args[1]) $args[1]='formulaire_abonnement';
+	 return array($args[0],$args[1]);}
 
 // Si inscriptions pas autorisees, retourner une chaine d'avertissement
 // Sinon inclusion du squelette
@@ -31,7 +26,7 @@ function balise_FORMULAIRE_ABONNEMENT_stat($args, $filtres) {
 // formulaire.
 
 
-function balise_FORMULAIRE_ABONNEMENT_dyn($mode, $focus, $id_rubrique=0) {
+function balise_FORMULAIRE_ABONNEMENT_dyn($liste, $formulaire) {
 
 include_spip ("inc/meta");
 include_spip ("inc/session");
@@ -53,7 +48,7 @@ $acces_abonne = get_extra(1,"auteur");
 ($acces_abonne['config'] == 'membre') ? $acces_membres = 'oui' : $acces_membres = 'non';
 	
 // aller chercher le formulaire html qui va bien				
-$formulaire = "formulaires/formulaire_abonnement";		
+$formulaire = "formulaires/".$formulaire ;		
 		
 // code inscription au site ou/et  a la lettre d'info	
 	
@@ -95,7 +90,7 @@ $inscription_visiteur ="";
 	
 	// afficher le formulaire d'oubli du pass
 	if($oubli_pass=="oui") {
-		return array($formulaire, 'formulaire_abonnement', $GLOBALS['delais'],
+		return array($formulaire, $GLOBALS['delais'],
 			array(
 				'oubli_pass' => $oubli_pass,
 				'erreur' => $erreur,

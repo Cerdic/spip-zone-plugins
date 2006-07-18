@@ -66,15 +66,16 @@ texte d'inscription en tant que visiteur
 				</li>]
 				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 				<div style="text-align:left; padding:0px 0px 4px 0px;clear:both">
-				<input type="checkbox" name="list&#91;&#93;"  checked="checked"   value="#ID_ARTICLE" />]
+				<input type="checkbox" name="list&#91;&#93;"  [(#COMPTEUR_BOUCLE|=={1}|?{'checked="checked"',''})]  value="#ID_ARTICLE" />]<label>#TITRE</label></div>
 		</BOUCLE_listes>
+		[(#COMPTEUR_BOUCLE|!={1}|?{'<br />',''})]
 		</B_listes>
 			[(#ENV{mode_login}|?{' ',''})
 			<fieldset>
 			<legend><:spiplistes:abo_1_lettre:></legend>]
 		<//B_listes>
 		[(#ENV{mode_login}|?{' ',''})
-		<label style="font-size:100%;font-weight:bold">Format :</label>
+		<label style="font-size:100%;font-weight:bold">Format</label>
 		<ul style="clear:both; width:100%;list-style-type:none;margin:0;padding:0">
 		<li><input name="suppl_abo" value="html"  type="radio" checked="checked"><:spiplistes:html:></li>
 		<li><input name="suppl_abo" value="texte" type="radio"><:spiplistes:texte:></li>
@@ -82,11 +83,11 @@ texte d'inscription en tant que visiteur
 		</ul>
 
 			[(#ENV{acces_membres}|=={oui}|?{' ',''})
-				<p><label style="font:weight:bold;"><:form_pet_votre_nom:></label>
-				<input type="text" class="forml" name="nom_inscription_" value="" size="35" style="clear:both;" /> </p>
+				<div style="margin-top:5px"><label style="font-weight:bold;"><:form_pet_votre_nom:></label></div>
+				<input type="text" class="forml" style="width:200px" name="nom_inscription_" value="" size="35" style="clear:both;" />
 				]
-			<p><label style="font:weight:bold;"><:form_pet_votre_email:><label>
-			<input type="text" class="forml" name="mail_inscription_" value="" size="35" style="clear:both;" /> </p>
+			<div style="margin-top:5px"><label style="font-weight:bold;"><:form_pet_votre_email:><label></div>
+			<input type="text" class="forml" style="width:200px" name="mail_inscription_" value="" size="35" style="clear:both;" />
 		<div style="text-align:right"><input type="submit" name="Valider" class="spip_bouton" value="<:bouton_valider:>" />
 		</div></fieldset></form>]
 </div>
