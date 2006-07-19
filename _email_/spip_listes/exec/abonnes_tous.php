@@ -134,7 +134,7 @@ if ($cherche_auteur) {
 				echo "<li><font face='Verdana,Arial,Sans,sans-serif' size=2><b><font size=3>".typo($nom_auteur)."</font></b>";
 
 				if ($email_auteur) echo " ($email_auteur)";
-				echo " | <a href=\"?exec=gerer_abonne&id_auteur=$id_auteur\">"._T('spiplistes:choisir')."</a>";
+				echo " | <a href=\"".generer_url_ecrire("abonne_edit","id_auteur=$id_auteur")."\">"._T('spiplistes:choisir')."</a>";
 
 				if (trim($bio_auteur)) {
 					echo "<br /><font size=1>".couper(propre($bio_auteur), 100)."</font>\n";
