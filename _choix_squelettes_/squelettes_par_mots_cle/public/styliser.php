@@ -30,7 +30,7 @@ function public_styliser($fond, $id_rubrique, $lang, $contexte) {
 	if (!$base = find_in_path("$fond.$ext")) {
 		include_spip(_DIR_COMPIL.'debug');
 		erreur_squelette(_T('info_erreur_squelette2',
-			array('fichier'=>$fond)),
+			array('fichier'=>"'$fond'")),
 			$GLOBALS['dossier_squelettes']);
 		$f = find_in_path("404.$ext");
 		return array(substr($f, 0, -strlen(".$ext")),
