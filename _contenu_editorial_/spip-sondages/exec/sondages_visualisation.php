@@ -116,7 +116,7 @@
 				sondages_modifier_ordre_choix($id_sondage, $id_choix, $position);
 			}
 			$url_sondage = generer_url_ecrire('sondages_visualisation', 'id_sondage='.$id_sondage, '&');
-#			sondages_rediriger_javascript($url_sondage);
+			sondages_rediriger_javascript($url_sondage);
 		}
 
 		$id_sondage	= $_GET['id_sondage'];
@@ -178,13 +178,30 @@
 
 		if (!empty($_POST['changer_en_ligne'])) {
 			$en_ligne = $_POST['en_ligne'];
-			if ($en_ligne == 'poubelle') {
+			if ($en_ligne == 'purger_avis') {
+				$requete_sondes = 'SELECT id_sonde FROM spip_sondes WHERE id_sondage="'.$id_sondage.'"';
+				$resultat_sondes = spip_query($requete_sondes);
+				while ($arr = spip_fetch_array($resultat_sondes)) {
+					spip_query('DELETE FROM spip_avis WHERE id_sonde="'.$arr['id_sonde'].'"');
+				}
+				$suppression = 'DELETE FROM spip_sondes WHERE id_sondage="'.$id_sondage.'"';
+				spip_query($suppression);
+			} else if ($en_ligne == 'poubelle') {
 				$suppression = 'DELETE FROM spip_sondages WHERE id_sondage="'.$id_sondage.'" LIMIT 1';
 				spip_query($suppression);
 				$suppression_mots = 'DELETE FROM spip_mots_sondages WHERE id_sondage="'.$id_sondage.'"';
 				spip_query($suppression_mots);
 				$suppression_auteurs = 'DELETE FROM spip_auteurs_sondages WHERE id_sondage="'.$id_sondage.'"';
 				spip_query($suppression_auteurs);
+				$requete_sondes = 'SELECT id_sonde FROM spip_sondes WHERE id_sondage="'.$id_sondage.'"';
+				$resultat_sondes = spip_query($requete_sondes);
+				while ($arr = spip_fetch_array($resultat_sondes)) {
+					spip_query('DELETE FROM spip_avis WHERE id_sonde="'.$arr['id_sonde'].'"');
+				}
+				$suppression = 'DELETE FROM spip_sondes WHERE id_sondage="'.$id_sondage.'"';
+				spip_query($suppression);
+				$suppression = 'DELETE FROM spip_choix WHERE id_sondage="'.$id_sondage.'"';
+				spip_query($suppression);
 				// suppression logos
 				$logo_on = array();
 				$logo_on = cherche_logo($id_sondage, 'son', 'on');
@@ -218,6 +235,25 @@
 				sondages_mettre_a_jour_sondage($id_sondage);
 				sondages_rediriger_javascript($url_sondage);
 			}
+		}
+		
+		if (!empty($_GET['position'])) {
+			$id_sondage		= $_GET['id_sondage'];
+			$id_choix		= $_GET['id_choix'];
+			$position		= intval($_GET['position']);
+			sondages_modifier_ordre_choix($id_sondage, $id_choix, $position);
+			sondages_rediriger_javascript($url_sondage);
+		}
+
+		if (!empty($_GET['supprimer_choix'])) {
+			$id_choix	= intval($_GET['supprimer_choix']);
+			$id_sondage	= $_GET['id_sondage'];
+			sondages_modifier_ordre_choix($id_sondage, $id_choix, 'dernier');
+			$suppression = 'DELETE FROM spip_avis WHERE id_choix="'.$id_choix.'"';
+			spip_query($suppression);
+			$suppression = 'DELETE FROM spip_choix WHERE id_choix="'.$id_choix.'" AND id_sondage="'.$id_sondage.'" LIMIT 1';
+			spip_query($suppression);
+			sondages_rediriger_javascript($url_sondage);
 		}
 
 		$requete_sondage = 'SELECT titre, id_rubrique, type, texte, lang, en_ligne, statut, date_debut, date_fin, extra FROM spip_sondages WHERE id_sondage="'.$id_sondage.'" LIMIT 1';
@@ -295,51 +331,107 @@
 		echo generer_url_post_ecrire("sondages_visualisation", "id_sondage=$id_sondage", 'formulaire');
 
 		sondages_afficher_dates($date_debut, $date_fin, true);
+
+		debut_cadre_enfonce('../'._DIR_PLUGIN_SONDAGES.'/img_pack/choix.png', false, '', _T('sondages:choix'));
+		$requete_choix = 'SELECT * FROM spip_choix WHERE id_sondage="'.$id_sondage.'" ORDER BY ordre';
+		$resultat_choix = spip_query($requete_choix);
+		$total = spip_num_rows($resultat_choix);
+		if ($type == 'multiple')
+			$icone = "checkbox";
+		else
+			$icone = "radio";
+		if ($total != 0) {
+			$position = 0;
+			echo "<div class='liste'>\n";
+			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>\n";
+			while ($arr = spip_fetch_array($resultat_choix)) {
+				echo "<tr class='tr_liste'>\n";
+				echo "<td width='25' class='arial11'>\n";
+				echo "<img src='"._DIR_PLUGIN_SONDAGES."/img_pack/".$icone.".png' alt='radio' width='16' height='16' border='0' />\n";
+				echo "</td>\n";
+				echo "<td class='arial2' width='150'>\n";
+				echo "<A HREF='".generer_url_ecrire("choix_edition","id_sondage=$id_sondage&id_choix=".$arr['id_choix'])."'>\n";
+				echo $arr['titre'];
+				echo "</A>\n";
+				echo "</td>\n";
+				echo "<td class='arial1' width='50' align='right'>\n";
+				$requete_nb_votes = 'SELECT id_avis FROM spip_avis WHERE id_choix="'.$arr['id_choix'].'"';
+				$resultat_nb_votes = spip_query($requete_nb_votes);
+				$nb_votes = intval(spip_num_rows($resultat_nb_votes));
+				echo $nb_votes.'&nbsp;'._T('sondages:votes');
+				echo "</td>\n";
+				echo "<td class='arial1' width='120'>\n";
+				$pourcentage = sondages_calculer_pourcentage($id_sondage, $arr['id_choix']);
+				echo "<img src='img_pack/jauge-vert.gif' alt='monter' title='".$pourcentage."%' width='".$pourcentage."' height='8' border='0' />&nbsp;".$pourcentage."%\n";
+				echo "</td>\n";
+				echo "<td class='arial2' width='24'>\n";
+				if ($position == 0) {
+					echo "&nbsp;";
+				} else {
+					echo "<A HREF='".generer_url_ecrire("sondages_visualisation","id_sondage=$id_sondage&id_choix=".$arr['id_choix']."&position=".($position-1))."'>\n";
+					echo "<img src='img_pack/monter-16.png' alt='monter' width='16' height='16' border='0' />\n";
+					echo "</A>\n";
+				}
+				echo "</td>\n";
+				echo "<td class='arial2' width='24'>\n";
+				if ($position == ($total-1)) {
+					echo '&nbsp;';
+				} else {
+					echo "<A HREF='".generer_url_ecrire("sondages_visualisation","id_sondage=$id_sondage&id_choix=".$arr['id_choix']."&position=".($position+1))."'>\n";
+					echo "<img src='img_pack/descendre-16.png' alt='descendre' width='16' height='16' border='0' />\n";
+					echo "</A>\n";
+				}
+				echo "</td>\n";
+				echo "<td class='arial1' width='24'>\n";
+				echo "<A HREF='".generer_url_ecrire("sondages_visualisation","id_sondage=$id_sondage&supprimer_choix=".$arr['id_choix'])."'>\n";
+				echo "<img src='"._DIR_PLUGIN_SONDAGES."/img_pack/poubelle.png' alt='X' width='16' height='16' border='0' align='middle' />\n";
+				echo "</A>\n";
+				echo "</td>\n";
+				echo "</tr>\n";
+				$position++;
+			}
+			echo "</table>\n";
+			echo "</div>\n";
+
+			echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
+			echo "<tr>";
+			echo "<td>";
+			echo "<div align='$spip_lang_right'>";
+			icone(_T('sondages:ajouter_un_choix'), generer_url_ecrire("choix_edition","id_sondage=$id_sondage&new=oui"), '../'._DIR_PLUGIN_SONDAGES.'/img_pack/choix.png', "creer.gif");
+			echo "</div>";
+			echo "</td></tr></table>";
+		}
+		fin_cadre_enfonce();
+
 		sondages_afficher_auteurs($id_sondage, true);
 		sondages_afficher_mots_cles($id_sondage, true);
 		sondages_afficher_langue($lang, true);
 		
 		echo "<br />";
 		debut_cadre_relief();
-		echo "<center><B>"._T('sondages:action_en_ligne')."</B>&nbsp;";
+		echo "<center><B>"._T('sondages:action')."</B>&nbsp;";
 		echo "<SELECT NAME='en_ligne' SIZE='1' CLASS='fondl'>\n";
 		echo '	<OPTION VALUE="non"'.(($en_ligne == 'non') ? ' SELECTED' : '').'>'._T('sondages:action_hors_ligne').'</OPTION>'."\n";
 		echo '	<OPTION VALUE="oui"'.(($en_ligne == 'oui') ? ' SELECTED' : '').'>'._T('sondages:action_en_ligne').'</OPTION>'."\n";
+		echo '	<OPTION VALUE="purger_avis">'._T('sondages:action_purger_avis').'</OPTION>'."\n";
 		echo '	<OPTION VALUE="poubelle">'._T('sondages:action_poubelle').'</OPTION>'."\n";
 		echo "</SELECT>";
 		echo "&nbsp;&nbsp;<INPUT TYPE='submit' NAME='changer_en_ligne' CLASS='fondo' VALUE='"._T('sondages:changer')."' STYLE='font-size:10px'>";
-		echo '<br><br>'._T('sondages:note_periode_validite');
 		echo '</center>';
 		fin_cadre_relief();
-
 		echo '</form>';
 
 		echo "<div align='justify' style='padding: 10px;'>";
 		echo "<div $dir_lang>";
 		echo $texte;
-
-		$requete_choix = 'SELECT * FROM spip_choix WHERE id_sondage="'.$id_sondage.'" ORDER BY ordre';
-		$resultat_choix = spip_query($requete_choix);
-		if (spip_num_rows($resultat_choix) != 0) {
-			echo "<div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa;'>";
-			echo "<font size=2 face='Verdana,Arial,Sans,sans-serif'>";
-			echo "<ol>";
-			while ($arr = spip_fetch_array($resultat_choix))
-				echo '<li><a href="'.generer_url_ecrire("choix_edition","id_sondage=$id_sondage&id_choix=".$arr['id_choix']).'">'.$arr['titre'].'</a></li>';
-			echo '</ol>';
-			echo "</font>";
-			echo "</div>";
-		}
-		
 		echo "\n\n<div align='$spip_lang_right'><br />";
-		icone(_T('sondages:ajouter_un_choix'), generer_url_ecrire("choix_edition","id_sondage=$id_sondage&new=oui"), '../'._DIR_PLUGIN_SONDAGES.'/img_pack/choix.png', "creer.gif");
+		icone(_T('sondages:modifier_sondage'), generer_url_ecrire("sondages_edition","id_sondage=$id_sondage"), '../'._DIR_PLUGIN_SONDAGES.'/img_pack/sondages-24.png', "edit.gif");
 		echo "</div>";
 		echo "<br clear='both' />";
 		echo "</div>";
 		echo "</div>";
-		fin_cadre_relief();
 
-		echo '<br/>';
+		fin_cadre_relief();
 
 		fin_page();
 

@@ -418,9 +418,9 @@
 		$titre_barre = _T('sondages:auteurs');
 
 		if ($modif)
-			debut_cadre_enfonce('../'._DIR_PLUGIN_SONDAGES.'/img_pack/auteur.png', false, "", bouton_block_invisible('auteurs').$titre_barre);
+			debut_cadre_enfonce('../'._DIR_PLUGIN_SONDAGES.'/img_pack/auteurs.png', false, "", bouton_block_invisible('auteurs').$titre_barre);
 		else
-			debut_cadre_enfonce('../'._DIR_PLUGIN_SONDAGES.'/img_pack/auteur.png', false, "", $titre_barre);
+			debut_cadre_enfonce('../'._DIR_PLUGIN_SONDAGES.'/img_pack/auteurs.png', false, "", $titre_barre);
 
 		$tableau_auteurs_interdits = array();
 
@@ -650,7 +650,13 @@
 	function sondages_modifier_ordre_choix($id_sondage, $id_choix, $position) {
 		$tous_les_choix = 'SELECT id_choix FROM spip_choix WHERE id_sondage="'.$id_sondage.'" AND id_choix!="'.$id_choix.'" ORDER BY ordre';
 		$resultat_tous_les_choix = spip_query($tous_les_choix);
-		if ($position == 0) {
+		if ($position === 'dernier') {
+			$tableau_choix = array();
+			while ($arr = spip_fetch_array($resultat_tous_les_choix)) {
+				$tableau_choix[] = $arr['id_choix'];
+			}
+			$tableau_final = array_merge($tableau_choix, array($id_choix));
+		} else if ($position == 0) {
 			$tableau_choix = array();
 			while ($arr = spip_fetch_array($resultat_tous_les_choix)) {
 				$tableau_choix[] = $arr['id_choix'];

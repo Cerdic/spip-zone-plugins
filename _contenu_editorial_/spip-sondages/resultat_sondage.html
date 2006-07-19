@@ -4,6 +4,6 @@
 
 <B_choix><ul class="spip">
 <BOUCLE_choix(CHOIX) {id_sondage=#ENV{id_sondage}}>
-	<li>#TITRE : <BOUCLE_resultats(AVIS) {id_choix}> </BOUCLE_resultats>#TOTAL_BOUCLE <:sondages:votes:></B_resultats></li>
+	<li>#TITRE : #POURCENTAGE % <BOUCLE_resultats(AVIS) {id_choix}> </BOUCLE_resultats>#TOTAL_BOUCLE <:sondages:votes:></B_resultats></li>
 </BOUCLE_choix></ul>
 </B_choix>

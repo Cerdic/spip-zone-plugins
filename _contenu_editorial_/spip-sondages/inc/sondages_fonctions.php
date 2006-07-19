@@ -16,6 +16,7 @@
 	include_spip('base/sondages');
 	include_spip('inc/plugin');
 	include_spip('inc/sondages_admin');
+	include_spip('inc/sondages_balises');
 
 
 	/**
@@ -81,6 +82,37 @@
 			sondages_mettre_a_jour_sondage($id_sondage);
 		}
 		return true;
+	}
+
+
+	/**
+	 * sondages_calculer_pourcentage
+	 *
+	 * calcule le pourcentage associé à un choix
+	 *
+	 * @param int id_sondage
+	 * @param int id_choix
+	 * @return string pourcentage
+	 * @author Pierre Basson
+	 **/
+	function sondages_calculer_pourcentage($id_sondage, $id_choix) {
+		$requete_total_sondage = 'SELECT A.id_avis
+								FROM spip_avis AS A, spip_sondes AS S 
+								WHERE S.id_sonde=A.id_sonde
+									AND S.id_sondage="'.$id_sondage.'"';
+		$resultat_total_sondage = spip_query($requete_total_sondage);
+		$total_sondage = intval(spip_num_rows($resultat_total_sondage));
+		
+		$requete_total_avis = 'SELECT A.id_avis
+								FROM spip_avis AS A, spip_sondes AS S 
+								WHERE S.id_sonde=A.id_sonde
+									AND A.id_choix="'.$id_choix.'"
+									AND S.id_sondage="'.$id_sondage.'"';
+		$resultat_total_avis = spip_query($requete_total_avis);
+		$total_avis = intval(spip_num_rows($resultat_total_avis));
+
+		$pourcentage = floor( ($total_avis / $total_sondage) * 100 );
+		return $pourcentage;
 	}
 
 

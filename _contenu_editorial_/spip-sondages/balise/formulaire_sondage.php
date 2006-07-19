@@ -24,6 +24,15 @@
 		return calculer_balise_dynamique($p,'FORMULAIRE_SONDAGE', array('id_sondage'));
 	}
 
+
+	/**
+	 * balise_FORMULAIRE_SONDAGE_stat
+	 *
+	 * @param array args
+	 * @param array filtres
+	 * @return array args si le sondage est "votable"
+	 * @author Pierre Basson
+	 **/
 	function balise_FORMULAIRE_SONDAGE_stat($args, $filtres) {
 		// Pas d'id_sondage ? Erreur de squelette
 		if (!$args[0])
@@ -37,6 +46,7 @@
 
 		return $args;
 	}
+
 
 	/**
 	 * balise_FORMULAIRE_SONDAGE_dyn
