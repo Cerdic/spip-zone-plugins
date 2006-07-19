@@ -117,7 +117,7 @@ if ($row = spip_fetch_array($result)) {
 			
 		 echo "<table><tr><td>";				
 	  
-	  echo "<form action='?exec=import_patron&mode=courrier&id_message=$id_message' METHOD='post'>";  
+	  echo "<form action='".generer_url_ecrire("import_patron","id_message=$id_message")."' METHOD='post'>";  
       $dir = _DIR_PLUGIN_SPIPLISTES."/patrons/";
 
 		// Ouvre un dossier bien connu, et liste tous les fichiers
@@ -166,7 +166,7 @@ if ($row = spip_fetch_array($result)) {
      //Ecrire dans le formulaire
 
 
-	echo "<form action='?exec=gerer_courrier&id_message=$id_message' METHOD='post' name='formulaire'>";
+	echo "<form action='".generer_url_ecrire("gerer_courrier","id_message=$id_message")."' METHOD='post' name='formulaire'>";
 
 	if ($type == 'nl') $le_type = _T('spiplistes:email_collec');
 

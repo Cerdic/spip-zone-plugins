@@ -33,22 +33,12 @@ global $_POST ;
 $nomsite=lire_meta("nom_site"); 
 $urlsite=lire_meta("adresse_site");
 
- if (!isset($mode)) $mode = $_GET['mode'] ;
-if (!isset($inclure_patron)) $inclure_patron = $_POST['inclure_patron'] ; 
-
-if (($inclure_patron == "oui") AND ($mode == "courrier")) {
 	if (!isset($patron)) $patron = $_POST['patron'] ;
 	if (!isset($date)) $date = $_POST['date'] ; 
-  
-	//echo generer_url_public('patron_switch',"patron=$patron&date=$date") ; // bug de fou
 	
 	$texte_patron = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;
-
 	
 	$titre_patron = _T('spiplistes:lettre_info')." ".$nomsite;
-	
-	//chdir('./ecrire/');
-	//echo getcwd() . "\n";
 	
 	$titre = addslashes($titre_patron);
 	$texte = addslashes($texte_patron);
@@ -85,7 +75,4 @@ if (($inclure_patron == "oui") AND ($mode == "courrier")) {
 		 
 	}	
 
-
-
-}
 ?>
