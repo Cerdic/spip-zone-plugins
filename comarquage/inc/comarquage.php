@@ -98,7 +98,7 @@ function comarquage_prepare_fichiers_xml($parametres, $profondeur = 2){
 		return $parsed[$parametres['xml_full_path']];
 
 	$page ="";
-	$mise_a_jour = comarquage_lire_xml($parametres, &$page);
+	$mise_a_jour = comarquage_lire_xml($parametres, $page);
 	if ($mise_a_jour == FALSE){
 		$parsed[$parametres['xml_full_path']] = FALSE;
 		return FALSE;
