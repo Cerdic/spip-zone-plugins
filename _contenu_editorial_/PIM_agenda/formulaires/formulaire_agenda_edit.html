@@ -1,4 +1,4 @@
-<div class='agenda-visu-evenement'>
+<div class='agenda-visu-evenement' id='agenda-visu-evenement'>
 	<BOUCLE_article_lie(ARTICLES){id_article=#ENV{ajouter_id_article}}>
 		<div class='article-evenement'>
 		<a href='#URL_ARTICLE'>#TITRE</a>
@@ -6,7 +6,18 @@
 	</BOUCLE_article_lie>
 	
 	<div class='agenda-visu-evenement-bouton-fermer'>
-  <a href='#ENV{retour_agenda}'><img src='#CHEMIN{'img_pack/croix.png'}' width='12' height='12' style='border:none;'></a>
+<a href='[(#ENV{self}|parametre_url{id_evenement,''})]'
+onclick="setvisibility('agenda-visu-evenement', 'hidden');
+setvisibility('afficher_horaire_debut_evenement', 'hidden');
+setvisibility('afficher_horaire_fin_evenement', 'hidden');
+setvisibility('container_repetitions', 'hidden');cal_repetitions.hide();
+return false;">
+	
+	<a href='#ENV{retour_agenda}'
+onclick="setvisibility('agenda-visu-evenement', 'hidden');
+setvisibility('afficher_horaire_debut_evenement', 'hidden');
+setvisibility('afficher_horaire_fin_evenement', 'hidden');
+return false;"><img src='#CHEMIN{'img_pack/croix.png'}' width='12' height='12' style='border:none;'></a>
   </div>
 
 	<form name='edition_evenement' action='#ENV{url}' method='post'>
