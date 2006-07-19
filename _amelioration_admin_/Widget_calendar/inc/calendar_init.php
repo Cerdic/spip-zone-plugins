@@ -262,8 +262,8 @@ function WCalendar_header_prive($flux) {
 			$js_a
 		}
 		function init() {
-			$js_b
 			$init_functions
+			$js_b
 		}
 		
 		$js_c
