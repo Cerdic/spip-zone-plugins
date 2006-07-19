@@ -1,0 +1,36 @@
+<BOUCLE_main(XML){xml}{racine}{0,1}>
+  <h4><a name="haut"/><span style='color:#cc3333'><b>VOS DROITS ET DEMARCHES : MOTS-CLÉS</b></span></h4>
+  <br/>
+  <p> Votre sélection<b> : #ENV{motcle}</b></p>
+  <INCLURE{fond=abcedaire}{lettre=#ENV{lettre}}{self=#ENV**{self}}>
+	<BOUCLE_item(XML){xml}{noeud=MotCl�}>
+		<BOUCLE_publis(XML){id_parent}{noeud=Publication}>
+			<BOUCLE_titre(XML){id_parent}{noeud=Titre}>
+			[(#_item:ATTRIBUTS|extraire{libell�}|=={#ENV{motcle}}|?{' ',''})
+				[(#_publis:ATTRIBUTS|extraire{type}|=={Fiche Question-réponse}|?{' ',''})
+					<p>
+        	<img src='#CHEMIN{images/puce_rouge2.gif}' width="15" height="16" alt="" />
+        	[(#_publis:ATTRIBUTS|extraire{nature}|=={Noeud}|?{' ',''})
+        		<a href='[(#URL_PAGE{Noeud}|parametre_url{xml,[(#_publis:ATTRIBUTS|extraire{ID}).xml]})]'>#TEXTE</a>
+        	]
+        	[(#_publis:ATTRIBUTS|extraire{nature}|=={Noeud}|?{'',' '})
+        		<a href='[(#URL_PAGE{Fiche}|parametre_url{xml,[(#_publis:ATTRIBUTS|extraire{ID}).xml]})]'>#TEXTE</a>
+        	]
+					</p>
+				]
+				[(#_publis:ATTRIBUTS|extraire{type}|=={Fiche Question-réponse}|?{'',' '})
+        	<img src='#CHEMIN{images/chapitre_ferme.gif}' width="18" height="18" alt="" />
+        	<p>
+        	[(#_publis:ATTRIBUTS|extraire{nature}|=={Noeud}|?{' ',''})
+        		<a href='[(#URL_PAGE{Noeud}|parametre_url{xml,[(#_publis:ATTRIBUTS|extraire{ID}).xml]})]'>#TEXTE</a>
+        	]
+        	[(#_publis:ATTRIBUTS|extraire{nature}|=={Noeud}|?{'',' '})
+        		<a href='[(#URL_PAGE{Fiche}|parametre_url{xml,[(#_publis:ATTRIBUTS|extraire{ID}).xml]})]'>#TEXTE</a>
+        	]
+					</p>
+				]
+			]
+			</BOUCLE_titre>
+		</BOUCLE_publis>
+	</BOUCLE_item>
+</BOUCLE_main>

@@ -2,26 +2,24 @@
 <BOUCLE_titre(XML){xml}{xpath=/Noeud/TitreLong}>#TEXTE</BOUCLE_titre>
 
 <table>
-<thead>
-<tr><td></td><td></td>
-</tr>
-</thead>
-<tbody>
-<tr><td>
-<BOUCLE_items1(XML){xml}{xpath=/Noeud/Descendance/Fils}{1/2}>
-<a href='[(#URL_PAGE{[(#ATTRIBUTS|extraire{nature})]}|parametre_url{xml,[(#ATTRIBUTS|extraire{lien})]})]'>
-<BOUCLE_titrelien1(XML){id_parent}>#TEXTE</BOUCLE_titrelien1>
-</a><br/>
-</BOUCLE_items1>
-</td><td>
-<BOUCLE_items2(XML){xml}{xpath=/Noeud/Descendance/Fils}{2/2}>
-<a href='[(#URL_PAGE{[(#ATTRIBUTS|extraire{nature})]}|parametre_url{xml,[(#ATTRIBUTS|extraire{lien})]})]'>
-<BOUCLE_titrelien2(XML){id_parent}>#TEXTE</BOUCLE_titrelien2>
-</a><br/>
-</BOUCLE_items2>
-</td>
-</tr>
-</tbody>
+	<thead>
+		<tr><td></td><td></td></tr>
+	</thead>
+	<tbody>
+		<tr><td>
+			<BOUCLE_items1(XML){xml}{xpath=/Noeud/Descendance/Fils}{1/2}>
+			<a href='[(#URL_PAGE{[(#ATTRIBUTS|extraire{nature})]}|parametre_url{xml,[(#ATTRIBUTS|extraire{lien})]})]'>
+			<BOUCLE_titrelien1(XML){id_parent}>#TEXTE</BOUCLE_titrelien1>
+			</a><br/>
+			</BOUCLE_items1>
+		</td><td>
+			<BOUCLE_items2(XML){xml}{xpath=/Noeud/Descendance/Fils}{2/2}>
+			<a href='[(#URL_PAGE{[(#ATTRIBUTS|extraire{nature})]}|parametre_url{xml,[(#ATTRIBUTS|extraire{lien})]})]'>
+			<BOUCLE_titrelien2(XML){id_parent}>#TEXTE</BOUCLE_titrelien2>
+			</a><br/>
+			</BOUCLE_items2>
+		</td></tr>
+	</tbody>
 </table>
 
 <h4>

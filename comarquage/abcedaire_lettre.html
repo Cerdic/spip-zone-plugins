@@ -1,0 +1,9 @@
+[(#ENV{abc}|=={#ENV{lettre}}|?{' ',''})
+<span style='color:#cc3333'>
+<b>#ENV{abc}</b>
+</span>
+][(#ENV{abc}|=={#ENV{lettre}}|?{'',' '})
+<a href='[(#ENV{self}|parametre_url{lettre,#ENV{abc}}|parametre_url{xml,[MotsCles(#ENV{abc}).xml]})]'>
+#ENV{abc}
+</a>
+][(#ENV{abc}|=={Z}|?{'','|'})]
