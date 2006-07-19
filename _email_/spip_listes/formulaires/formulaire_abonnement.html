@@ -57,16 +57,16 @@ texte d'inscription en tant que visiteur
 		<B_listes>
 			<fieldset>
 			<legend>[(#TOTAL_BOUCLE|=={1}|?{
-				<:spiplistes:abo_1_lettre:></legend><ul>
+				<:spiplistes:abo_1_lettre:></legend>
 				,<:spiplistes:abo_listes:></legend>})]
 			
 		<BOUCLE_listes(ARTICLES) {statut=liste} {0,(#ENV{mode_login}|?{100,0})}>
 				[(#TOTAL_BOUCLE|=={1}|?{' ',''})
 				<input type="hidden" name="list&#91;&#93;"  checked="checked" value="#ID_ARTICLE" />
-				</li>]
+				]
 				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 				<div style="text-align:left; padding:0px 0px 4px 0px;clear:both">
-				<input type="checkbox" name="list&#91;&#93;"  [(#COMPTEUR_BOUCLE|=={1}|?{'checked="checked"',''})]  value="#ID_ARTICLE" />]<label>#TITRE</label></div>
+				<input type="checkbox" name="list&#91;&#93;"  [(#COMPTEUR_BOUCLE|=={1}|?{'checked="checked"',''})]  value="#ID_ARTICLE" /><label>#TITRE</label></div>]
 		</BOUCLE_listes>
 		[(#COMPTEUR_BOUCLE|!={1}|?{'<br />',''})]
 		</B_listes>
@@ -84,10 +84,10 @@ texte d'inscription en tant que visiteur
 
 			[(#ENV{acces_membres}|=={oui}|?{' ',''})
 				<div style="margin-top:5px"><label style="font-weight:bold;"><:form_pet_votre_nom:></label></div>
-				<input type="text" class="forml" style="width:200px" name="nom_inscription_" value="" size="35" style="clear:both;" />
+				<input type="text" class="forml" style="width:12em" name="nom_inscription_" value="" size="30" style="clear:both;" />
 				]
 			<div style="margin-top:5px"><label style="font-weight:bold;"><:form_pet_votre_email:><label></div>
-			<input type="text" class="forml" style="width:200px" name="mail_inscription_" value="" size="35" style="clear:both;" />
-		<div style="text-align:right"><input type="submit" name="Valider" class="spip_bouton" value="<:bouton_valider:>" />
+			<input type="text" class="forml" style="width:12em" name="mail_inscription_" value="" size="30" style="clear:both;" />
+		<div class="spip_bouton" style="text-align:right"><input type="submit" name="Valider" value="<:bouton_valider:>" />
 		</div></fieldset></form>]
 </div>
