@@ -988,7 +988,7 @@ if ($cherche_auteur) {
 				echo "<li><font face='Verdana,Arial,Sans,sans-serif' size=2><b><font size=3>".typo($nom_auteur)."</font></b>";
 
 				if ($email_auteur) echo " ($email_auteur)";
-				echo " | <a href=\"spip_listes.php3?mode=liste_edit&id_article=$id_article&ajout_auteur=oui&nouv_auteur=$id_auteur#auteurs\">"._T('lien_ajouter_auteur')."</a>";
+				echo " | <a href=\"".generer_url_ecrire("gerer_liste","id_article=$id_article&ajout_auteur=oui&nouv_auteur=$new_auteur#auteurs")."\">"._T('lien_ajouter_auteur')."</a>";
 
 				if (trim($bio_auteur)) {
 					echo "<br /><font size=1>".couper(propre($bio_auteur), 100)."</font>\n";
@@ -1136,12 +1136,14 @@ if ($nombre_auteurs > $max_par_page) {
 
 //print_r($auteurs);
 
- if($debut)$retour .="&debut=".$debut;
-	
+
+
+if($debut)$retour .="&debut=".$debut;
+$les_auteurs=array();	
 	$table = '';
 	foreach ($auteurs as $row) {
 		$vals = '';
-		$id_auteur = $row["id_auteur"];
+		$idi_auteur = $row["id_auteur"];
 		$nom_auteur = $row["nom"];
 		$email_auteur = $row["email"];
 		if ($bio_auteur = attribut_html(propre(couper($row["bio"], 100))))
@@ -1150,7 +1152,7 @@ if ($nombre_auteurs > $max_par_page) {
 		$statut_auteur = $row["statut"];
 		if ($row['messagerie'] == 'non' OR $row['login'] == '') $messagerie = 'non';
 
-		$les_auteurs[] = $id_auteur;
+		$les_auteurs[] = $idi_auteur;
 
 		 $aff_articles = "('liste','inact')";
 		
@@ -1159,19 +1161,19 @@ if ($nombre_auteurs > $max_par_page) {
 		
 		$query2 = "SELECT COUNT(articles.id_article) AS compteur ".
 			"FROM spip_auteurs_articles AS lien, spip_articles AS articles ".
-			"WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article ".
+			"WHERE lien.id_auteur=$idi_auteur AND articles.id_article=lien.id_article ".
 			"AND articles.statut IN $aff_articles GROUP BY lien.id_auteur";
 		$result2 = spip_query($query2);
 		if ($result2) list($nombre_articles) = spip_fetch_array($result2);
 		else $nombre_articles = 0;
 
-		$url_auteur = "?exec=abonne_edit&id_auteur=$id_auteur";
+		$url_auteur = generer_url_ecrire("abonne_edit","id_auteur=$idi_auteur");
 
 		$vals[] = bonhomme_statut($row);
 
 		$vals[] = "<a href=\"$url_auteur\"$bio_auteur>".typo($nom_auteur)."</a>";
 
-		$vals[] = bouton_imessage($id_auteur);
+		$vals[] = bouton_imessage($idi_auteur);
 
 		
 		
@@ -1181,12 +1183,12 @@ if ($nombre_auteurs > $max_par_page) {
 		if ($url_site_auteur) $vals[] =  "<a href='$url_site_auteur'>"._T('info_site_min')."</a>";
 		else $vals[] =  "&nbsp;";
 
-		if ($nombre_articles > 1) $vals[] =  $nombre_articles.' '._T('info_article_2');
-		else if ($nombre_articles == 1) $vals[] =  _T('info_1_article');
+		if ($nombre_articles > 1) $vals[] =  $nombre_articles.' listes' ;
+		else if ($nombre_articles == 1) $vals[] = '1 liste';
 		else $vals[] =  "&nbsp;";
 
 		
-			$vals[] =  "<a href='?exec=gerer_liste&id_article=$id_article&supp_auteur=$id_auteur#auteurs'>"._T('spiplistes:desabonnement')."<img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></a>";
+			$vals[] =  "<a href='".generer_url_ecrire("gerer_liste","id_article=$id_article&supp_auteur=$idi_auteur#auteurs")."'>"._T('spiplistes:desabonnement')."<img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></a>";
 		
 		
 		$table[] = $vals;
