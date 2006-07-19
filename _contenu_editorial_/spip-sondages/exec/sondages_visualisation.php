@@ -346,10 +346,10 @@
 			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>\n";
 			while ($arr = spip_fetch_array($resultat_choix)) {
 				echo "<tr class='tr_liste'>\n";
-				echo "<td width='25' class='arial11'>\n";
+				echo "<td width='20' class='arial11'>\n";
 				echo "<img src='"._DIR_PLUGIN_SONDAGES."/img_pack/".$icone.".png' alt='radio' width='16' height='16' border='0' />\n";
 				echo "</td>\n";
-				echo "<td class='arial2' width='150'>\n";
+				echo "<td class='arial2' width='135'>\n";
 				echo "<A HREF='".generer_url_ecrire("choix_edition","id_sondage=$id_sondage&id_choix=".$arr['id_choix'])."'>\n";
 				echo $arr['titre'];
 				echo "</A>\n";
@@ -360,7 +360,7 @@
 				$nb_votes = intval(spip_num_rows($resultat_nb_votes));
 				echo $nb_votes.'&nbsp;'._T('sondages:votes');
 				echo "</td>\n";
-				echo "<td class='arial1' width='120'>\n";
+				echo "<td class='arial1' width='140'>\n";
 				$pourcentage = sondages_calculer_pourcentage($id_sondage, $arr['id_choix']);
 				echo "<img src='img_pack/jauge-vert.gif' alt='monter' title='".$pourcentage."%' width='".$pourcentage."' height='8' border='0' />&nbsp;".$pourcentage."%\n";
 				echo "</td>\n";
