@@ -525,12 +525,9 @@ function Agenda_action_formulaire_article($id_article){
 			$repetitions = explode(',',$repetitions);
 			$rep = array();
 			foreach($repetitions as $key=>$date){
-				var_dump(preg_match(",[0-9][0-9]?/[0-9][0-9]?/[0-9][0-9][0-9][0-9],",$date));
 				if (preg_match(",[0-9][0-9]?/[0-9][0-9]?/[0-9][0-9][0-9][0-9],",$date)){
-					#echo "<hr/>";var_dump($date);
 					$date = explode('/',$date);
 					$date = $date[2]."/".$date[0]."/".$date[1];
-					#var_dump(date('Y-m-d',strtotime($date)));
 					$date = strtotime($date);
 				}
 				else {

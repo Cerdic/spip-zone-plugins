@@ -15,7 +15,7 @@ function balise_FORMULAIRE_EDITION_EVENEMENT_stat($args, $filtres) {
 }
  
 function balise_FORMULAIRE_EDITION_EVENEMENT_dyn($id_evenement = 0, $id_article = 0) {
-	$url = self();
+	$url = parametre_url(self(),'ajout_evenement','');
 	// nettoyer l'url qui est passee par htmlentities pour raison de securités
 	$url = str_replace("&amp;","&",$url);
 	if ($retour=='') $retour = $url;
@@ -32,8 +32,10 @@ function balise_FORMULAIRE_EDITION_EVENEMENT_dyn($id_evenement = 0, $id_article 
 
 	
 	$evenement_action='evenement_insert';
-	$valeurs=array('mots'=>array(),'dates'=>array());
+	$valeurs=array('mots'=>array(),'dates'=>array(),'evenement_horaire'=>'oui');
 
+	$formulaire_actif = _request('ajout_evenement')!=NULL;
+	
 	// les champs
 	$res = spip_query("SELECT * FROM spip_evenements WHERE id_evenement=".spip_abstract_quote($id_evenement)." AND id_article=".spip_abstract_quote($id_article));
 	if ($row = spip_fetch_array($res,SPIP_ASSOC)){
@@ -51,11 +53,13 @@ function balise_FORMULAIRE_EDITION_EVENEMENT_dyn($id_evenement = 0, $id_article 
 		while ($row=spip_fetch_array($res)){
 			$valeurs['repetitions'][] = date('m/d/Y',strtotime($row['date_debut']));
 		}
+		$formulaire_actif = true;
 	}
 	$t=time();
 	$valeurs["date_evenement_debut"]=isset($valeurs["evenement_date_debut"])?$valeurs["evenement_date_debut"]:date('Y-m-d H:i:00',$t);
 	$valeurs["date_evenement_fin"]=isset($valeurs["evenement_date_fin"])?$valeurs["evenement_date_fin"]:date('Y-m-d H:i:00',$t+3600);
-		
+
+	if (!$formulaire_actif) return;
 
 	return array('formulaires/formulaire_edition_evenement', 0, 
 		array(
