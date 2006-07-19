@@ -68,13 +68,19 @@ function public_styliser($fond, $id_rubrique, $lang, $contexte) {
 		$fonds = unserialize($GLOBALS['meta']['SquelettesMots:fond_pour_groupe']);
 		if (is_array($fonds) && (list($id_groupe,$table,$id_table) = $fonds[$fond])) {
 		  $trouve = false;
+		  $stop = false;
 		  if (($id = $contexte[$id_table]) && ($n = sql_mot_squelette($id,$id_groupe,$table,$id_table))) {
-				if ($squel = find_in_path("$fond-$n.$ext")) {
-				  $squelette = substr($squel, 0, - strlen(".$ext"));
-				  $trouve = true;
-				}
+			if ($squel = find_in_path("$fond=$n.$ext")) {
+			  $squelette = substr($squel, 0, - strlen(".$ext"));
+			  $trouve = true;
+			  $stop = true;
+			}
+			else if ($squel = find_in_path("$fond-$n.$ext")) {
+			  $squelette = substr($squel, 0, - strlen(".$ext"));
+			  $trouve = true;
+			}
 		  } 
-		  if((!$trouve) && ($n = sql_mot_squelette($id_rub_init,$id_groupe,'rubriques','id_rubrique',true))) {	
+		  if((!$trouve) && (!$stop) && ($n = sql_mot_squelette($id_rub_init,$id_groupe,'rubriques','id_rubrique',true))) {	
 				if ($squel = find_in_path("$fond-$n.$ext")) {
 				  $squelette = substr($squel, 0, - strlen(".$ext"));
 				}
@@ -106,9 +112,9 @@ function sql_mot_squelette($id,$id_groupe,$table,$id_table,$recurse=false) {
 	if ($r) {
 	  include_spip("inc/charsets");
 	   include_spip("inc/filtres");
-	  return translitteration(preg_replace('["\'.] ','_',extraire_multi($r['titre'])));	
+	  return translitteration(preg_replace('/["\'.\s]/','_',extraire_multi($r['titre'])));	
 	}
-	if(!recurse) return '';
+	if(!$recurse) return '';
 	$id = sql_parent($id);
   }
   return '';

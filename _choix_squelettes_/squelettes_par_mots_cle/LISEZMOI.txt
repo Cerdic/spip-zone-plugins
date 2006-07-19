@@ -12,7 +12,7 @@ spécifient quel squelette utiliser)
 question) 
 
 Le plugin permet de sélectionner des squelettes nommés:
-- fond==motclef.html pour le squelette d'un élément spécifique
+- fond=motclef.html pour le squelette d'un élément spécifique
 - fond-motclef.html pour le squelette de tous les éléments d'une
 rubrique
 
@@ -27,7 +27,7 @@ onglets "Configurer Squelettes Mots",
  o le type d'élément "articles"
 4- créer, par exemple, un mot clef "galerie"
 5- vous pouvez alors:
-  o soit créer un fichier article==galerie.html et associer le mot clef
+  o soit créer un fichier article=galerie.html et associer le mot clef
     galerie à des articles individuels
   o soit créer un fichier article-galerie.html et associer le mot clef
     à une rubrique qui contiendra tous vos articles de galerie.
