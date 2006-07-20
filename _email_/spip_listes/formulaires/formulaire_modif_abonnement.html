@@ -1,11 +1,10 @@
 [(#ENV*{message_formulaire})]
-<B_liste>
-<ul>
-<BOUCLE_liste(ARTICLES) {statut=liste} {id_auteur=#ENV{id_auteur}} {0,(#ENV{modif_affiche}|?{100,0})}>
-	<li>#TITRE</li>
-</BOUCLE_liste>
-</ul>
-</B_liste>
+<BOUCLE_liste(ARTICLES) {statut=liste} {id_article=#ENV{liste}} {0,(#ENV{mode_login}|?{1,0})}>
+			<fieldset style="margin-bottom:1em;">
+			<legend style="font-weight:bold;">#TITRE</legend>
+			#TEXTE
+			</fieldset>
+		</BOUCLE_liste>
 [(#ENV*{confirm_formulaire})]
 <BOUCLE_auteur(AUTEURS){tous} {id_auteur=(#ENV{id_auteur})}>
 [(#ENV{formulaire_affiche}|?{' ',''})
@@ -27,7 +26,7 @@
 				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 				<li style="margin-bottom:3px">
 					<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ',''})checked="checked"] value="#ID_ARTICLE" />
-					<a href='[(#SELF|parametre_url{liste,#ID_ARTICLE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>
+					<a title='<:spiplistes:infos_liste:>' href='[(#SELF|parametre_url{liste,#ID_ARTICLE})]' title='<:spiplistes:infos_liste:>'>#TITRE</a>
 				</li>]
 </BOUCLE_listes>
 	</ul>
