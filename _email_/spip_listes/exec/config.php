@@ -257,9 +257,9 @@ if (isset($_POST['patron'])) {
 	   	
 	   echo "<br /><strong>$patron</strong><br /><br />\n";
      echo _T('spiplistes:date_ref').": $date\n";
-     echo "<h3>HTML</h3><a href=\"".generer_url_public('patron_switch',"patron=".$patron."&date=".$date)."\">(Plein écran)</a><br /><br />\n";
+     echo "<h3>HTML</h3><a href=\"".generer_url_public('patron_switch',"patron=".$patron."&date=".$date)."\">(Plein &eacute;cran)</a><br /><br />\n";
      echo "<iframe width=\"100%\" height=\"500\" src=\"".generer_url_public('patron_switch',"patron=".$patron."&date=".$date)."\"></iframe>\n";
-     echo "<h3>"._T('spiplistes:val_texte')."</h3><a href=\"".generer_url_public('patron_switch',"patron=".$patron."&date=".$date."&format=texte")."\">(Plein écran)</a><br /><br />\n";  
+     echo "<h3>"._T('spiplistes:val_texte')."</h3><a href=\"".generer_url_public('patron_switch',"patron=".$patron."&date=".$date."&format=texte")."\">(Plein &eacute;cran)</a><br /><br />\n";  
     
     echo generer_url_public('patron_switch',"patron=$patron&date=$date") ;
 $texte_patron = recuperer_page(generer_url_public('patron_switch',"patron=$patron",true)) ;
