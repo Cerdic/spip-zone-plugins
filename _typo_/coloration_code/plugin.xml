@@ -1,5 +1,5 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
+	<nom> <!-- Coloration code , geshi -->
 	  <multi>
 		[fr]Coloration Code
 		[en]Code higlighting
