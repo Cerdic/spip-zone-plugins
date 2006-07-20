@@ -34,6 +34,9 @@
 	&Egrave; compatibile con i linguaggi di [->http://sourceforge.net/projects/geshi/].
 	  </multi>
 	</description>
+    <fonctions> <!-- fichier charge a chaque recalul de page -->
+        coloration_code.php
+    </fonctions>
 	<prefix> 
 	  coloration_code
 	</prefix>
