@@ -22,26 +22,53 @@
 
 	  il suffit de mettre le code entre {{&lt;code class="langage">...&lt;/code>}} ou {{&lt;cadre class="langage">...&lt;/cadre>}}.
 	  Les langages support&eacute;s sont ceux fournis par [->http://sourceforge.net/projects/geshi/].
+	  
+	  Vous pouvez aussi utiliser coloration_code comme un filtre , voir exemple lecode.html
+	  
+	  L'url depuis l'article serait 
+<![CDATA[	  
+        <div style="float: right">
+        <a href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}" title="voir le code de article" class="spip_in">Voir le code de l'article</a>
+        </div>	  
+]]>
 	  [en]
 	  Syntax higlighting of code placed in SPIP articles.
 
 	  You just have to put it between the tags:{{&lt;code class="language">...&lt;/code>}} or  ou {{&lt;cadre class="langage">...&lt;/cadre>}}.
 	  The possible languages are the ones supported by [->http://sourceforge.net/projects/geshi/].
+	  
+	  You may also use coloration_code as a filter , see example lecode.html
+	  
+	  From article url would be 
+<![CDATA[	  
+        <div style="float: right">
+        <a href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}" title="view article's code" class="spip_in">View article's code</a>
+        </div>	  
+]]>
 	[it]
 	Colorazione sintattica del codice utilizzato nel testo.
 
 	Dovete solo utilizzare il segnaposto:  {{&lt;code class="linguaggio">...&lt;/code>}},  ou {{&lt;cadre class="langage">...&lt;/cadre>}}.
 	&Egrave; compatibile con i linguaggi di [->http://sourceforge.net/projects/geshi/].
+	  
+	  Vous pouvez aussi utiliser coloration_code comme un filtre , voir exemple lecode.html
+	  
+	  L'url depuis l'article serait 
+<![CDATA[	  
+        <div style="float: right">
+        <a href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}" title="voir le code de article" class="spip_in">Voir le code de l'article</a>
+        </div>	  
+]]>
 	  </multi>
 	</description>
-    <fonctions> <!-- fichier charge a chaque recalul de page -->
+    <fonctions> <!-- charge a chaque recalul de page , donc filtre -->
         coloration_code.php
     </fonctions>
 	<prefix> 
 	  coloration_code
 	</prefix>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines 
-	La liste des pipelines disponibles est dans ecrire/inc_version ($spip_pipeline = ... ) 
+	<!--
+Lors de pre typo , on va passer le texte a travers de coloration_code_echappe() (prefix+action)
 	-->
 	<pipeline>
 		<nom>pre_typo</nom>
