@@ -134,7 +134,7 @@ $tableau_formulaire = '
     <label for="ancre_nom"><i>Nom de l\'ancre</i></label> <br />
       <input type="text" name="ancre_nom" id="ancre_nom" />
 	  
-	<input type="button" value="OK" class="fondo" onclick="javascript:barre_ancre(\'[#\', \'%3C-\', \']\', ancre_nom.value, '.$champ.');" /> 
+	<input type="button" value="OK" class="fondo" onclick="javascript:barre_ancre(\'[\', \'<-\', \']\', ancre_nom.value, '.$champ.');" />
     </td>
 	<td style="width:auto;"><strong>Pointer vers une ancre</strong><br />
     <label for="ancre_cible"><i>Ancre cible</i></label> <input type="text" name="ancre_cible" id="ancre_cible" /><br />
