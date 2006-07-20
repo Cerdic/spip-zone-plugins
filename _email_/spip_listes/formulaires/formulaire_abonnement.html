@@ -48,11 +48,12 @@ texte d'inscription en tant que visiteur
 	<form action="#SELF" method="post" class="lettre">
 ]
 		<BOUCLE_liste(ARTICLES) {statut=liste} {id_article=#ENV{liste}} {0,(#ENV{mode_login}|?{1,0})}>
-			<fieldset style="margin-bottom:1em;">
-			<legend style="font-weight:bold;">#TITRE</legend>
-			#TEXTE
-			</fieldset>
+			[<fieldset style="margin-bottom:1em;">
+			[<legend style="font-weight:bold;">(#TITRE)</legend>]
+			(#TEXTE)
+			</fieldset>]
 		</BOUCLE_liste>
+
 		
 		<B_listes>
 			<fieldset>
@@ -66,7 +67,7 @@ texte d'inscription en tant que visiteur
 				]
 				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 				<div style="text-align:left; padding:0px 0px 4px 0px;clear:both">
-				<input type="checkbox" name="list&#91;&#93;"  [(#COMPTEUR_BOUCLE|=={1}|?{'checked="checked"',''})]  value="#ID_ARTICLE" /><label>#TITRE</label></div>]
+				<input type="checkbox" name="list&#91;&#93;"  [(#COMPTEUR_BOUCLE|=={1}|?{'checked="checked"',''})]  value="#ID_ARTICLE" /><label><a title='<:spiplistes:infos_liste:>' href="[(#SELF|parametre_url{liste,#ID_ARTICLE})]">#TITRE</a></label></div>]
 		</BOUCLE_listes>
 		[(#COMPTEUR_BOUCLE|!={1}|?{'<br />',''})]
 		</B_listes>
