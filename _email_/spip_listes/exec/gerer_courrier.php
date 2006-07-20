@@ -212,7 +212,7 @@ while($row = spip_fetch_array($result_m)) {
 	$texte_original = $texte;
 	
 	
-	// ne pas faire ca si y'a du htlm (lent, erreur spip class truc), à revoir
+	// ne pas faire ca si y'a du htlm dans le message (lent, erreur spip class truc), à revoir
 	$temp_style = ereg("<style[^>]*>[^<]*</style>", $texte, $style_reg);
   	if (isset($style_reg[0])) $style_str = $style_reg[0]; 
                          else $style_str = "";
@@ -249,6 +249,8 @@ if ($statut=="redac") {
 
 	fin_boite_info();
 	echo "</font><br />";
+	
+	
 
     if($statut=="redac"){
     //envoi de test 
@@ -276,7 +278,7 @@ if ($statut=="redac") {
 					}
 				echo "</select>";
 				}else{
-				echo "<div style='float:right'><input type='submit' name='envoi' value='"._T('spiplistes:envoyer')."' class='fondo'></div>";
+				echo "<div style='text-align:center'><input type='submit' name='envoi' value='"._T('spiplistes:envoyer')."' class='fondo'></div>";
 				$envoyer_a= _T('spiplistes:envoyer_a');
 			echo "<div style='font-size:14px;font-weight:bold'>".$envoyer_a." ".$destinataire."</div>";
 
@@ -290,6 +292,11 @@ if ($statut=="redac") {
 			
 				
 	echo "</td></tr></table>";
+	if($statut != 'publie'){
+	echo "<div style='margin:auto;margin-top:10px'>";
+			icone (_T('icone_supprimer_message'), '?exec=spip_listes&detruire_message='.$id_message, 'messagerie-24.gif', 'supprimer.gif');
+			echo "</div>";
+			}
 	echo "</div>"; // fin du cadre de couleur
 	
 	
