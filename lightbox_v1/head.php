@@ -7,5 +7,7 @@
 			.generer_url_public('lightbox_css')."' type='text/css' media='all' />\n";
 		return $flux;
 	}
-
+	function Lightbox_v1_body_prive($flux){
+		return Lightbox_v1_insert_head($flux);
+	}
 ?>

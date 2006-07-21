@@ -20,5 +20,7 @@
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>head.php</inclure>
+		<nom>body_prive</nom>
+		<inclure>head.php</inclure>
 	</pipeline>
 </plugin>
