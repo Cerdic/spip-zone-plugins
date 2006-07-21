@@ -40,6 +40,29 @@ function MiroirSyndic_creer_article($t) {
 	return $id_article;
 }
 
+// indique la rubrique d'un (nouvel) article en fonction de ses tags
+//
+function MiroirSyndic_regler_rubrique($t) {
+	$nom_rub = '';
+
+	if (_MODE_RUBRIQUE_MIROIR != '') {
+		$annee = substr(trim($t['date']), 0, strlen('2006'));
+		$mois = substr(trim($t['date']), 0, strlen('2006-03'));
+		$nom_rub = "$annee/$mois";
+	}
+	if (_MODE_RUBRIQUE_MIROIR == 'tag'
+	AND $tag = afficher_tags($t['tags'], 'directory')) {
+		$nom_rub = supprimer_tags($tag);
+	}
+
+	if ($nom_rub) {
+		#spip_log("rubrique '$nom_rub'");
+		$r = creer_rubrique_nommee($nom_rub, $t['lang'], $t['id_rubrique']);
+		spip_query("UPDATE spip_articles SET
+		id_rubrique=$r WHERE id_article=".$t['id_article']);
+	}
+}
+
 // Cette fonction regarde les spip_syndic_articles modifies recemment
 // et les reporte dans spip_articles ; a appeler avec cron() ou autre...
 function MiroirSyndic_miroir() {
@@ -78,6 +101,8 @@ function MiroirSyndic_miroir() {
 		// est la meme que la rubrique du site syndique (idem pour le secteur)
 		if (!$t['id_article']) {
 			$t['id_article'] = MiroirSyndic_creer_article($t);
+
+			MiroirSyndic_regler_rubrique($t);
 		}
 
 		spip_query("UPDATE spip_articles SET
@@ -88,32 +113,13 @@ function MiroirSyndic_miroir() {
 			soustitre = '".addslashes($t['tags'])."'
 			WHERE id_article=".$t['id_article']);
 
-
-		// Regler la rubrique
-		$nom_rub = '';
-
-		if (_MODE_RUBRIQUE_MIROIR != '') {
-			$annee = substr(trim($t['date']), 0, strlen('2006'));
-			$mois = substr(trim($t['date']), 0, strlen('2006-03'));
-			$nom_rub = "$annee/$mois";
-		}
-		if (_MODE_RUBRIQUE_MIROIR == 'tag'
-		AND $tag = afficher_tags($t['tags'], 'directory')) {
-			$nom_rub = supprimer_tags($tag);
-		}
-
-		if ($nom_rub) {
-			#spip_log("rubrique '$nom_rub'");
-			$r = creer_rubrique_nommee($nom_rub, $t['lang'], $t['id_rubrique']);
-			spip_query("UPDATE spip_articles SET
-			id_rubrique=$r WHERE id_article=".$t['id_article']);
-		} else
-			spip_log('pas de nom rub !');
 	}
 
 	spip_log('miroir de '.$nombre.' articles syndiques');
 	return $nombre;
 }
+
+
 
 
 // creer_rubrique_nommee('/truc/machin/chose', $lang) a partir de id_rubrique
