@@ -373,7 +373,7 @@ function initLightbox()
 	// create link
 	var objLink = document.createElement("a");
 	objLink.setAttribute('href','#');
-	objLink.setAttribute('title','Click to close');
+	// objLink.setAttribute('title','Click to close');
 	objLink.onclick = function () {hideLightbox(); return false;}
 	objLightbox.appendChild(objLink);
 
@@ -414,7 +414,7 @@ function initLightbox()
 	// create keyboard message
 	var objKeyboardMsg = document.createElement("div");
 	objKeyboardMsg.setAttribute('id','keyboardMsg');
-	objKeyboardMsg.innerHTML = 'press <a href="#" onclick="hideLightbox(); return false;"><kbd>x</kbd></a> to close';
+	// objKeyboardMsg.innerHTML = 'press <a href="#" onclick="hideLightbox(); return false;"><kbd>x</kbd></a> to close';
 	objLightboxDetails.appendChild(objKeyboardMsg);
 
 
