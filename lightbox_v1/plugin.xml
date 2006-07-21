@@ -20,7 +20,10 @@
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>head.php</inclure>
-		<nom>body_prive</nom>
-		<inclure>head.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<nom>header_prive</nom>
 	</pipeline>
 </plugin>
