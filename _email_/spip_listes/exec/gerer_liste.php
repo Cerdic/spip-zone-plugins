@@ -718,7 +718,7 @@ echo "<p>" ;
 
 
 
-debut_cadre_relief("../"._DIR_PLUGIN_SPIPLISTES."img_pack/reply-to-all-24.gif");
+debut_cadre_relief("../"._DIR_PLUGIN_SPIPLISTES."/img_pack/reply-to-all-24.gif");
      
 echo "<form action='?exec=gerer_liste&id_article=$id_article' METHOD='post'>";
 		 
@@ -751,7 +751,7 @@ $email_envoi = ($extra['email_envoi'] !='') ? $extra['email_envoi'] : $email_env
 
 fin_cadre_relief();
 
-debut_cadre_relief("../"._DIR_PLUGIN_SPIPLISTES."img_pack/stock_timer.gif");
+debut_cadre_relief("../"._DIR_PLUGIN_SPIPLISTES."/img_pack/stock_timer.gif");
      
 echo "<form action='?exec=gerer_liste&id_article=$id_article' METHOD='post'>";
 		 

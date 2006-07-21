@@ -111,7 +111,7 @@ $nb_inscrits = spip_num_rows($result);
 	}
 
 
-debut_cadre_relief('../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/forum-interne-24.gif');
+debut_cadre_relief('forum-interne-24.gif');
 
 echo _T('spiplistes:nb_abonnes')."$nb_abonnes<p>";
 echo "<p>";
