@@ -1,5 +1,12 @@
 <?php
 
+// Syndication miroir : ce plugin permet de recopier les articles
+// de la table spip_syndic_articles vers spip_articles ; on identifie
+// un article par son url seulement :
+//
+//    `spip_articles`.url_site = `spip_syndic_articles`.url
+//
+// (c) Fil 2006 - Licence GNU/GPL
 
 // Ajoute notre fonction dans un cron
 function MiroirSyndic_ajouter_cron($taches) {
@@ -18,15 +25,7 @@ function cron_miroir_syndic($t) {
 }
 
 
-
-// Syndication miroir : ce plugin permet de recopier les articles
-// de la table spip_syndic_articles vers spip_articles ; on identifie
-// un article par son url seulement :
-//
-//    `spip_articles`.url_site = `spip_syndic_articles`.url
-//
-
-// un nouvel article : le creer, et creer au besoin la rubrique qui va bien
+// un nouvel article : le creer
 function MiroirSyndic_creer_article($t) {
 	lang_select(trim(preg_replace(',[-_].*,', '', $t['lang'])));
 	$lang = $GLOBALS['spip_lang'];
@@ -38,13 +37,6 @@ function MiroirSyndic_creer_article($t) {
 		'publie', '".addslashes($t['url'])."', '$lang')"
 	);
 
-	// si la rubrique n'existe pas, la creer
-	spip_query("INSERT IGNORE INTO spip_rubriques
-	(id_rubrique, id_secteur, titre, lang) VALUES
-	(".$t['id_syndic'].", ".$t['id_syndic'].",
-	'".addslashes($t['nom_site'])."',
-	'$lang')");
-
 	return $id_article;
 }
 
@@ -52,7 +44,17 @@ function MiroirSyndic_creer_article($t) {
 // et les reporte dans spip_articles ; a appeler avec cron() ou autre...
 function MiroirSyndic_miroir() {
 	include_spip('inc/lang');
+	include_spip('inc/filtres');
 	include_spip('base/abstract_sql');
+
+	// S'il y a un tag de rubrique, deplacer l'article
+	// dans une sous-rubrique nommee de la meme maniere
+	// (si la rubrique est nommee Truc/Chose/Machin ca cree l'arbo)
+	// ou alors organiser les choses par date
+	// -- le mode par defaut est 'tag' (qui prend le mois s'il n'y a pas de tag)
+	// -- define('_MODE_RUBRIQUE_MIROIR', '') pour ne pas ranger
+	// -- define('_MODE_RUBRIQUE_MIROIR', 'mois') : par mois exclusivement
+	define('_MODE_RUBRIQUE_MIROIR', 'tag');
 
 	$q = "
 	SELECT s.*, a.id_article AS id_article, src.nom_site as nom_site,
@@ -68,12 +70,12 @@ function MiroirSyndic_miroir() {
 	ORDER BY maj DESC LIMIT 200";
 
 	$s = spip_query($q);
-	$nombre = spip_num_rows($s);
-	spip_log('miroir de '.$nombre.' articles syndiques');
 
 	while ($t = spip_fetch_array($s)) {
+		$nombre ++;
 
-		// Si l'article n'existe pas, on le cree
+		// Si l'article n'existe pas, on le cree ; a priori sa rubrique
+		// est la meme que la rubrique du site syndique (idem pour le secteur)
 		if (!$t['id_article']) {
 			$t['id_article'] = MiroirSyndic_creer_article($t);
 		}
@@ -86,9 +88,67 @@ function MiroirSyndic_miroir() {
 			soustitre = '".addslashes($t['tags'])."'
 			WHERE id_article=".$t['id_article']);
 
+
+		// Regler la rubrique
+		$nom_rub = '';
+
+		if (_MODE_RUBRIQUE_MIROIR != '') {
+			$annee = substr(trim($t['date']), 0, strlen('2006'));
+			$mois = substr(trim($t['date']), 0, strlen('2006-03'));
+			$nom_rub = "$annee/$mois";
+		}
+		if (_MODE_RUBRIQUE_MIROIR == 'tag'
+		AND $tag = afficher_tags($t['tags'], 'directory')) {
+			$nom_rub = supprimer_tags($tag);
+		}
+
+		if ($nom_rub) {
+			#spip_log("rubrique '$nom_rub'");
+			$r = creer_rubrique_nommee($nom_rub, $t['lang'], $t['id_rubrique']);
+			spip_query("UPDATE spip_articles SET
+			id_rubrique=$r WHERE id_article=".$t['id_article']);
+		} else
+			spip_log('pas de nom rub !');
 	}
 
+	spip_log('miroir de '.$nombre.' articles syndiques');
 	return $nombre;
 }
+
+
+// creer_rubrique_nommee('/truc/machin/chose', $lang) a partir de id_rubrique
+function creer_rubrique_nommee($titre, $lang = '', $id_parent=0) {
+
+	// eclater l'arborescence demandee
+	$arbo = explode('/', preg_replace(',^/,', '', $titre));
+
+	foreach ($arbo as $titre) {
+		$s = spip_query("SELECT id_rubrique, id_secteur FROM spip_rubriques
+		WHERE titre = '".addslashes($titre)."'
+		AND id_parent=".intval($id_parent));
+		if (!$t = spip_fetch_array($s)) {
+			spip_query("INSERT INTO spip_rubriques
+			(titre, id_parent, statut, lang) VALUES
+			('".addslashes($titre)."', $id_parent, 'prive', '$lang')");
+			$id_rubrique = spip_insert_id();
+			if ($id_parent > 0) {
+				list($id_secteur) = spip_fetch_array(spip_query(
+				"SELECT id_secteur FROM spip_rubriques
+				WHERE id_rubrique=$id_rubrique"));
+			} else
+				$id_secteur = $id_rubrique;
+
+			spip_query("UPDATE spip_rubriques SET id_secteur=$id_secteur
+			WHERE id_rubrique=$id_rubrique");
+		} else
+			$id_rubrique = $t['id_rubrique'];
+
+		// pour la recursion
+		$id_parent = $id_rubrique;
+	}
+
+	return $id_rubrique;
+}
+
 
 ?>
