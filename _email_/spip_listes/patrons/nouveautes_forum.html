@@ -37,12 +37,11 @@
 	
 	
 	 [<h3 style="font-size: 1.27em;font-weight: bold;color: #000;">(#TITRE|supprimer_numero)</h3>]
-	 <small>[(#DATE|affdate)], par  #NOM</small>
+	 <small>[(#DATE|affdate)] par [(#NOM|sinon{"anonyme"})] - <BOUCLE_rep(FORUMS){id_thread}{plat}> </BOUCLE_rep> #TOTAL_BOUCLE [(#TOTAL_BOUCLE|>{1}|?{'r&eacute;ponses' , 'r&eacute;ponse'})] </B_rep></small>
 	 <div  style="margin-top: 5px;margin-bottom: 2em;border: 1px solid #ccc;padding: 0.9em;font-size: 0.82em;line-height: 1.4em;" >
-	 #INTRODUCTION
-	 [(#DATE|affdate)] par [(#NOM|sinon{"anonyme"})] - <BOUCLE_rep(FORUMS){id_parent}{plat}> </BOUCLE_rep> #TOTAL_BOUCLE [(#TOTAL_BOUCLE|>{1}|?{'r&eacute;ponses' , 'r&eacute;ponse'})] </B_rep>
+	 <p>#INTRODUCTION</p>
+	 
 
-<p>#INTRODUCTION</p>
  <div class="extra">
 <BOUCLE_ArticleForum(ARTICLES){id_article}>
 <a href='[(#URL_SITE_SPIP)]/[(#URL_ARTICLE)]#forum[(#ID_FORUM)]' title='[(#TITRE)]'> 
