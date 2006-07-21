@@ -78,14 +78,14 @@ function xml_recurse_parse_to_table(&$file,$xpath,$id_parent,&$subtree){
 			#	."VALUES (".spip_abstract_quote($file).",".spip_abstract_quote($xpath).",".spip_abstract_quote($noeud).",".spip_abstract_quote($texte).",".spip_abstract_quote($attrs).",'feuille')");
 			$id = spip_abstract_insert('spip_xml',
 				"(xml,xpath,noeud,texte,attributs,id_parent,statut)",
-				"(".spip_abstract_quote($file).",".spip_abstract_quote($xpath).",".spip_abstract_quote($noeud).",".spip_abstract_quote($texte).",".spip_abstract_quote($attrs).",$id_parent,'noeud')"
+				"(".spip_abstract_quote($file).",".spip_abstract_quote("$xpath$noeud").",".spip_abstract_quote($noeud).",".spip_abstract_quote($texte).",".spip_abstract_quote($attrs).",$id_parent,'noeud')"
 				);
 		}
 		else{
 			// c'est un noeud
 			$id = spip_abstract_insert('spip_xml',
 				"(xml,xpath,noeud,texte,attributs,id_parent,statut)",
-				"(".spip_abstract_quote($file).",".spip_abstract_quote($xpath).",".spip_abstract_quote($noeud).",".spip_abstract_quote($texte).",".spip_abstract_quote($attrs).",$id_parent,'noeud')"
+				"(".spip_abstract_quote($file).",".spip_abstract_quote("$xpath$noeud").",".spip_abstract_quote($noeud).",".spip_abstract_quote($texte).",".spip_abstract_quote($attrs).",$id_parent,'noeud')"
 				);
 			#spip_query("REPLACE INTO spip_xml "
 			#	."(xml,xpath,noeud,texte,attributs,statut) "
