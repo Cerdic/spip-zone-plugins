@@ -163,7 +163,7 @@ echo "<input type='hidden' name='reinitialiser_config' value='oui'>";
 	echo "<br />"._T('spiplistes:mail_a_envoyer').$extra['total_auteurs'] ;
 	echo "<br />"._T('spiplistes:mail_tache_courante'). $extra['debut'] ;
 	
-echo "<input type='submit' name='Valider_reinit' value='reinitialiser' class='fondo' style='float:right'>";
+echo "<input type='submit' name='Valider_reinit' value='"._T('spiplistes:reinitialiser')."' class='fondo' style='float:right'>";
 echo "<hr style='clear:both;visibility:hidden'>";
 echo "</form>";	
 fin_cadre_relief();  

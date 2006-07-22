@@ -407,8 +407,8 @@ debut_droite("messagerie");
 			                  else $checked = "";
 			    echo "<input type=\"radio\" name=\"export_id\"   value=\"".$id_article."\"$checked>$titre <br />\n"; 
       }      
-	   echo "<input type=\"radio\" name=\"export_id\"  value=\"abo_sans_liste\"$checked><strong>Abonn&eacute;s &agrave; aucune liste</strong> <br />\n"; 
-	   echo "<input type=\"radio\" name=\"export_id\"  value=\"desabo\"$checked><strong>D&eacute;sabonn&eacute;s</strong> <br />\n"; 
+	   echo "<input type=\"radio\" name=\"export_id\"  value=\"abo_sans_liste\"$checked><strong>"._T('spiplistes:abonne_aucune_liste')."</strong> <br />\n"; 
+	   echo "<input type=\"radio\" name=\"export_id\"  value=\"desabo\"$checked><strong>"._T('spiplistes:desabonnes')."</strong> <br />\n"; 
 	   echo "<input type='submit' name='export_txt' class='fondo' value='"._T('bouton_valider')."' />\n";
 	   echo "</form>\n";
 	   fin_cadre_relief();	

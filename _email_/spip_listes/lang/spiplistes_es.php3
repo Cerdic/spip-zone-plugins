@@ -192,6 +192,7 @@ Un saludo
 'abon_ajouter' => 'A&Ntilde;ADIR INSCRIPCIONES &nbsp; ',
 'abonees' => 'Todas las inscripciones',
 'abonne_listes' => 'Este contacto est&aacute; inscrito/a en las siguientes listas',
+'abonne_aucune_liste' => 'Abonn&eacute;s &agrave; aucune liste (FIXME)',
 'abonnement_simple' => '<b>Inscripci&oacute;n simple: </b><br><i>Las personas inscritas s&oacute;lo recibir&aacute;n un mensaje de confirmaci&oacute;n</i>',
 'abonnement_code_acces' => '<b>Inscripci&oacute;n con identificadores: </b><br><i>Las personas inscritas recibir&aacute;n un login y una contrase&ntilde;a que les permitir&aacute; acceder a la parte privada del sitio. </i>',
 'abonnement_newsletter' => '<b>Inscripci&oacute;n en las listas</b>',
@@ -265,6 +266,7 @@ Un saludo
 'prog_env_non' => 'No programar el env&iacute;o',
 'program' => 'Programaci&oacute;n de env&iacute;os',
 
+'reinitialiser' => 'reinitialiser (FIXME)',
 'remplir_tout' => 'Tous les champs doivent être remplis',
 'repartition' => 'Distribuci&oacute;n',
 'retour_link' => 'Volver',
