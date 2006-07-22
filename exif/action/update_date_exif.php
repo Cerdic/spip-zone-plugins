@@ -1,7 +1,7 @@
 <?php
 
-//    Fichier cr?pour SPIP avec un bout de code emprunt? celui ci.
-//    Distribu?ans garantie sous licence GPL./
+//    Fichier cr‚‚ pour SPIP avec un bout de code emprunt‚ … celui ci.
+//    Distribu‚ sans garantie sous licence GPL./
 //    Copyright (C) 2006  Pierre ANDREWS
 //
 //    This program is free software; you can redistribute it and/or modify
