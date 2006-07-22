@@ -1,0 +1,24 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Splickrbox
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	BoOz (booz@rezo.net)
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Noisette pour afficher à la Flickr (le "badge") les dernieres photos, tout ca en javascript via <code>#INSERT_HEAD</code>. <br /> Il faut mettre onload="getIt();" dans la balise <body> de la page.
+	</description>
+	<prefix>
+	Splickr
+	</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+</plugin>
