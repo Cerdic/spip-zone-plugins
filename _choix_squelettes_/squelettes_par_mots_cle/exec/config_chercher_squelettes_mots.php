@@ -1,7 +1,7 @@
 <?php
 
-//    Fichier crÃ©Ã© pour SPIP avec un bout de code empruntÃ© Ã  celui ci.
-//    DistribuÃ© sans garantie sous licence GPL./
+//    Fichier cr‚‚ pour SPIP avec un bout de code emprunt‚ … celui ci.
+//    Distribu‚ sans garantie sous licence GPL./
 //    Copyright (C) 2006  Pierre ANDREWS
 //
 //    This program is free software; you can redistribute it and/or modify
@@ -97,7 +97,7 @@ function exec_config_chercher_squelettes_mots() {
 	}
 	
 	$index = 0;
-	
+	if (is_array($fonds))
 	foreach($fonds as $fond => $a) {
 	  list($id_groupe,$type,$id_table) = $a;
 	  $index++;
