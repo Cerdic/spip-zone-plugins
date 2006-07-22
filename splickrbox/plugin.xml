@@ -12,7 +12,8 @@
 	test
 	</etat>
 	<description>
-	Noisette pour afficher à la Flickr (le "badge") les dernieres photos, tout ca en javascript via <code>#INSERT_HEAD</code>. <br /> Il faut mettre onload="getIt();" dans la balise <body> de la page.
+	Noisette pour afficher les dernieres photos à la Flickr (le "badge") , tout ca en javascript via <code>#INSERT_HEAD</code>. <br /> Mettre <code><INCLURE{fond=inc-splickrbox}></code> dans un squelette, et hop :)
+
 	</description>
 	<prefix>
 	Splickr

@@ -1,14 +1,10 @@
 <div style="position:relative">
 
    <script>
-   var startWidth, startHeight, startTop, startLeft;
    i=0; 
-     
-   // A mettre dans le body de la page HTML qui appelle le script
-   //  <body onLoad="getIt();">
-   // ou essayer de faire fonctionner ca avec jquery en plus de rico et prototype ?
-   // $(document).ready(getIt);
-
+  
+   window.onload = getIt;
+   
    function getIt(){
 	
 	//$('statusMsg').innerHTML += 'get'+i+'->';
@@ -79,12 +75,5 @@
 <div id="statusContainer" class="statusContainer">
   <span class="statusMsg" id="statusMsg">x</span>
 </div>
-
-ca serait bien de pouvoir surcharger le document.body.onload dynamiquement genre :
-<script type="text/javascript">
-var b = document.body ? document.body : document.getElementsByTagName('body')[0];
-if(b) b.onload = getIt;
-</script>
-Mais ca marche pas
 //-->
 </div>
