@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 //    Fichier créé pour SPIP avec un bout de code emprunté à celui ci.
 //    Distribué sans garantie sous licence GPL./
@@ -23,7 +23,7 @@ function action_tri_auteurs() {
 
   $id_article = intval($id_article);
   
-  include_spip("inc/session");
+  include_spip("inc/actions");
   if (!verifier_action_auteur("tri_auteurs $id_article", $hash, $id_auteur)) {
 	include_spip('inc/minipres');
 	minipres(_T('info_acces_interdit'));

@@ -1,7 +1,7 @@
 <?php
 
-//    Fichier créé pour SPIP avec un bout de code emprunté à celui ci.
-//    Distribué sans garantie sous licence GPL./
+//    Fichier cr?pour SPIP avec un bout de code emprunt? celui ci.
+//    Distribu?ans garantie sous licence GPL./
 //    Copyright (C) 2006  Pierre ANDREWS
 //
 //    This program is free software; you can redistribute it and/or modify
@@ -22,7 +22,7 @@ function action_update_date_exif() {
   
   $id_mot = intval($id_auteur);
 
-  include_ecrire("inc_session");
+  include_spip("inc/actions");
   if (!verifier_action_auteur("update_date_exif $date_conb", $hash, $id_auteur)) {
 	include_ecrire('inc_minipres');
 	minipres(_T('info_acces_interdit'));
@@ -72,4 +72,3 @@ function action_update_date_exif() {
   if(!$_REQUEST['ajax']) 	redirige_par_entete(generer_url_ecrire('update_date_exif',"done=$total_doc"));
 }
 ?>
-   

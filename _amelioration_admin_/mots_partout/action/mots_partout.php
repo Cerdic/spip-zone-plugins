@@ -1,8 +1,8 @@
 <?php
 
 //	  action/mots_partout.php
-//    Fichier crÃ©Ã© pour SPIP avec un bout de code empruntÃ© Ã  celui ci.
-//    DistribuÃ© sans garantie sous licence GPL./
+//    Fichier créé pour SPIP avec un bout de code emprunté à celui ci.
+//    Distribué sans garantie sous licence GPL./
 //    Copyright (C) 2006  Pierre ANDREWS
 //
 //    This program is free software; you can redistribute it and/or modify
@@ -67,7 +67,7 @@ function splitArrayIds($array) {
 function action_mots_partout() {
   /*
   global $hash, $id_auteur;
-  include_ecrire("inc_session");
+  include_spip("inc/actions");
   if (!verifier_action_auteur("mots_partout $nom_chose", $hash, $id_auteur)) {
 	include_ecrire('inc_minipres');
 	minipres(_T('info_acces_interdit'));
@@ -91,7 +91,7 @@ function action_mots_partout() {
   $strict = intval(_request('strict'));
 
   /***********************************************************************/
-  /* rÃ©cuperation de la chose sur laquelle on travaille*/
+  /* récuperation de la chose sur laquelle on travaille*/
   /***********************************************************************/
 
 

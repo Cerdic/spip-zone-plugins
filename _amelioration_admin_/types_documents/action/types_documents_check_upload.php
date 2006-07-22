@@ -1,7 +1,7 @@
 <?php
 
-//    Fichier créé pour SPIP avec un bout de code emprunté à celui ci.
-//    Distribué sans garantie sous licence GPL./
+//    Fichier cr?pour SPIP avec un bout de code emprunt? celui ci.
+//    Distribu?ans garantie sous licence GPL./
 //    Copyright (C) 2006  Pierre ANDREWS
 //
 //    This program is free software; you can redistribute it and/or modify
@@ -29,7 +29,7 @@ function action_types_documents_check_upload() {
 
   $upload = ($checked=='on')?'oui':'non';
 
-  include_spip("inc/session");
+  include_spip("inc/actions");
   if (!verifier_action_auteur("types_documents $date_comp", $hash, $id_auteur)) {
 	include_spip('inc/minipres');
 	minipres(_T('info_acces_interdit'));
@@ -46,4 +46,3 @@ function action_types_documents_check_upload() {
   if(!$_REQUEST['ajax']) 	redirige_par_entete(urldecode($redirect));
 }
 ?>
-   
