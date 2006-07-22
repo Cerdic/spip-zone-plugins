@@ -1,0 +1,28 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Thickbox
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Thickbox par [Cody Lindley->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all], mis en plugin par Fil.
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	ajoute un effet [thickbox->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all] (fonctionne sur les squelettes disposant de la balise <code>#SPIP_HEAD</code>, ainsi que dans l'espace priv&eacute;)
+	</description>
+	<prefix>
+	ThickBox
+	</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>body_prive</nom>
+		<action>insert_head</action>
+	</pipeline>
+</plugin>
