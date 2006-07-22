@@ -83,8 +83,8 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
 			
 			TB_WIDTH = imageWidth + 30;
 			TB_HEIGHT = imageHeight + 60;
-			$("#TB_window").append("<a href='' id='TB_ImageOff' title='Close'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+"'/></a>"
-								 + "<div id='TB_caption'>"+caption+"</div><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'>close</a></div>"); 
+			$("#TB_window").append("<a href='' id='TB_ImageOff'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+"'/></a>"
+								 + "<div id='TB_caption'>"+caption+"</div><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'>x</a></div>"); 
 			$("#TB_closeWindowButton").click(TB_remove);		
 			TB_position();
 			$("#TB_load").remove();
