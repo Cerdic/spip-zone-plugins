@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Comarquage Service Publique avec la Documentation Francaise
+	Comarquage Service Public avec La Documentation fran&ccedil;aise
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Cedric MORIN [notre-ville.net->http://www.notre-ville.net]
@@ -13,17 +13,17 @@ _ Licence GPL
 	stable
 	</etat>
 	<description>
-	Gestion du flux XML documentaion francaise et insertion du comarquage dans le site
-_	le flux s'insere dans un article au moyen du tag 
-_ <code><comarquage></code>.
+	Gestion du flux XML de La Documentaion fran&ccedil;aise et insertion du comarquage dans le site
+_	le flux s'ins&egrave;re dans un article au moyen de la balise
+_ <code><comarquage></code>
 _ Vous pouvez pr&eacute;ciser une page pr&eacute;cise en definissant les attributs xml et xsl de l'url :
 _ <code><comarquage xml='N333.xml' xsl='Noeud.xsl'></code>
 
-Les parametres de connexion a la documentation francaise sont ajustables a la page [ecrire/?exec=admin_comarquage-> index.php?exec=admin_comarquage]
+Les param&egrave;tres de connexion &agrave; La Documentation fran&ccedil;aise sont ajustables depuis la page [ecrire/?exec=admin_comarquage-> index.php?exec=admin_comarquage]
 
-Ce plugin necessite la presence de libxslt sur votre serveur, utilisable en ligne de commande par 'xsltproc', et que la commande php 'exec' ne soit pas inhib&eacute;e.
+Ce plugin n&eacute;cessite la pr&eacute;sence de libxslt sur votre serveur, utilisable en ligne de commande par 'xsltproc', et que la commande php 'exec' ne soit pas inhib&eacute;e.
 
-Necessite SPIP 1.9.1 ou une version de developpement >=6862
+N&eacute;cessite SPIP 1.9.1 ou une version de d&eacute;veloppement &gt;=6862
 	</description>
 	<prefix> 
 	comarquage
