@@ -142,7 +142,7 @@ function exec_tri_mots() {
   <input type="hidden" name="redirect" value="'.$redirect.'"/>
   <input type="hidden" name="hash" value="'.calculer_action_auteur("tri_mots $table $id_table $id_mot").'"/>
   <input type="hidden" name="id_auteur" value="'.$connect_id_auteur.'" />
-  <input type="hidden" name="order" id="order"/><label for="submit_button">'._T('trimots:envoyer').'</label><input type="submit" id="submit_button" value="'._T('valider').'"/></form>';
+  <input type="hidden" name="order" id="order"/><label for="submit_button">'._T('trimots:envoyer').'</label><input type="submit" id="submit_button" value="'._T('bouton_valider').'"/></form>';
   fin_cadre_enfonce();
 
   if(_request('retour')) icone(_T('icone_retour'), addslashes(_request('retour')), "mot-cle-24.gif", "rien.gif");
@@ -178,7 +178,7 @@ function exec_tri_mots() {
         else $titre=$row['titre'];
 	$rang=$row['rang'];
 
-	echo "<li id='".$table."_$id'><span class=\"titre\">$titre</span><span class=\"lien\"><a href='" . generer_url_ecrire("$tables","$id_table=$id") . "'>"._T('trimots:voir')."</a></span><span class=\"rang\">$rang</span></li>";
+	echo "<li id='".$table."_$id'><span class=\"titre\">$titre</span><span class=\"lien\"><a href='" . generer_url_ecrire("$table","$id_table=$id") . "'>"._T('trimots:voir')."</a></span><span class=\"rang\">$rang</span></li>";
 
   }
 
