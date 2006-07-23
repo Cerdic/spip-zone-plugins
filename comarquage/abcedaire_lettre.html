@@ -3,7 +3,7 @@
 <b>#ENV{abc}</b>
 </span>
 ][(#ENV{abc}|=={#ENV{lettre}}|?{'',' '})
-<a href='[(#ENV{self}|parametre_url{lettre,#ENV{abc}}|parametre_url{xml,[MotsCles(#ENV{abc}).xml]})]'>
+<a href='[(#SELF|parametre_url{lettre,#ENV{abc}}|parametre_url{xml,[MotsCles(#ENV{abc}).xml]})]'>
 #ENV{abc}
 </a>
 ][(#ENV{abc}|=={Z}|?{'','|'})]

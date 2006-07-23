@@ -1,0 +1,5 @@
+[(#ENV{xsl,Themes}|match{^(Themes|MotsCles|Noeud)$}|?{' ',''})
+<INCLURE{fond=#ENV{xsl,Themes}}{xml}{motcle}{lettre}{self=#SELF}>
+][(#ENV{xsl,Themes}|match{^(Themes|MotsCles|Noeud)$}|?{'',' '})
+Feuille de style non support&eacute;e
+]

@@ -8,13 +8,13 @@
 	<tbody>
 		<tr><td>
 			<BOUCLE_items1(XML){xml}{xpath=/Noeud/Descendance/Fils}{1/2}>
-			<a href='[(#URL_PAGE{[(#ATTRIBUTS|extraire{nature})]}|parametre_url{xml,[(#ATTRIBUTS|extraire{lien})]})]'>
+			<a href='[(#SELF|parametre_url{xsl,[(#ATTRIBUTS|extraire{nature})]}|parametre_url{xml,[xml/(#ATTRIBUTS|extraire{lien}).xml]})]'>
 			<BOUCLE_titrelien1(XML){id_parent}>#TEXTE</BOUCLE_titrelien1>
 			</a><br/>
 			</BOUCLE_items1>
 		</td><td>
 			<BOUCLE_items2(XML){xml}{xpath=/Noeud/Descendance/Fils}{2/2}>
-			<a href='[(#URL_PAGE{[(#ATTRIBUTS|extraire{nature})]}|parametre_url{xml,[(#ATTRIBUTS|extraire{lien})]})]'>
+			<a href='[(#SELF|parametre_url{xsl,[(#ATTRIBUTS|extraire{nature})]}|parametre_url{xml,[xml/(#ATTRIBUTS|extraire{lien}).xml]})]'>
 			<BOUCLE_titrelien2(XML){id_parent}>#TEXTE</BOUCLE_titrelien2>
 			</a><br/>
 			</BOUCLE_items2>
@@ -23,7 +23,7 @@
 </table>
 
 <h4>
-<a href='[(#URL_PAGE{MotsCles}|parametre_url{xml,MotsClesA})]'>INDEX ALPHABÉTIQUE PAR MOTS CLÉS</a>
+<a href='[(#SELF|parametre_url{xsl,MotsCles}|parametre_url{xml,MotsClesA}|parametre_url{lettre,A})]'>INDEX ALPHABÉTIQUE PAR MOTS CLÉS</a>
 </h4>
  
 <INCLURE{fond=Pied}{xml}>

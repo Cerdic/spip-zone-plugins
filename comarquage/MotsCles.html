@@ -1,8 +1,8 @@
 <BOUCLE_main(XML){xml=xml/MotsClesA.xml}{racine}{0,1}>
-	<!-- <I NCLURE{fond=Entete}{xml}> -->
+	<INCLURE{fond=Entete}{xml}{self=#SELF}>
   <br/>
-		[(#ENV{motcle,''}|?{' ',''})<INCLURE{fond=MotsCles_publi}{xml}{motcle=#ENV{motcle}}{lettre=#ENV{lettre}}{self=#SELF**}>]
-		[(#ENV{motcle,''}|?{'',' '})<INCLURE{fond=MotsCles_mots}{xml}{lettre=#ENV{lettre}}{self=#SELF**}>]
+		[(#ENV{motcle,''}|?{' ',''})<INCLURE{fond=MotsCles_publi}{xml}{motcle}{lettre}{self=#SELF}>]
+		[(#ENV{motcle,''}|?{'',' '})<INCLURE{fond=MotsCles_mots}{xml}{lettre}{self=#SELF}>]
     <br/>
 	<INCLURE{fond=Pied}{xml}>
 </BOUCLE_main>

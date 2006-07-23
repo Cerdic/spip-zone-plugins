@@ -1,24 +1,25 @@
 <table cellSpacing="0" cellPadding="0" width="100%" border="0">
   <tr>
     <td colSpan="3">
-      <a href='[(#URL_PAGE{Themes}|parametre_url{xml,Themes})]'>Liste des thèmes</a><br />
+      <a href='[(#SELF|parametre_url{xsl,''}|parametre_url{xml,''})]'>Liste des th&egrave;mes</a>
       <BOUCLE_nav(XML){xml}{noeud=Navigation}>
-      	<BOUCLE_navitems(XML){xml}{id_parent}>
-        	<a href='[(#URL_PAGE{Noeud}|parametre_url{xml,[(#ATTRIBUTS|extraire{href})])]'> #ATTRIBUTS </a>
-        </BOUCE_navitems>
+      	<B_navitems>
+      	::
+      	<BOUCLE_navitems(XML){xml}{id_parent}{' :: '}>
+        	<a href='[(#SELF|parametre_url{xsl,Noeud}|parametre_url{xml,(#ATTRIBUTS|extraire{href})})]'> #TEXTE </a>
+        </BOUCLE_navitems>
         &#xA0;&gt;&#xA0;
       </BOUCLE_nav>
-        <BOUCLE_nav2(XML){xml}{noeud=CheminPréf}>
-        	<BOUCLE_navitems2(XML){xml}{id_parent}>
-<br />
-          	<a href='[(#URL_PAGE{Noeud}|parametre_url{xml,[(#ATTRIBUTS|extraire{ID})])]'> #ATTRIBUTS </a>
-          </BOUCE_navitems2>
-          &#xA0;&gt;&#xA0;
+        <BOUCLE_nav2(XML){xml}{noeud=CheminPr�f}>
+        	<B_navitems2>
+        	::
+        	<BOUCLE_navitems2(XML){xml}{id_parent}{' :: '}>
+          	<a href='[(#SELF|parametre_url{xsl,Noeud}|parametre_url{xml,(#ATTRIBUTS|extraire{ID})})]'> #TEXTE </a>
+          </BOUCLE_navitems2>
         </BOUCLE_nav2>
-<br />
-        </B_nav2>
+        	<BOUCLE_titre(XML){xml}{noeud=TitreLong}> :: #TEXTE</BOUCLE_titre>
+        <//B_nav2>
       <//B_nav>
-      <BOUCLE_titre(XML){xml}{noeud=TitreLong}>#TEXTE</BOUCLE_titre>
     </td>
   </tr>
 </table>
