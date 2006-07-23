@@ -39,7 +39,8 @@
 						"type"			=> "enum('simple','multiple') NOT NULL default 'simple'",
 						"en_ligne"		=> "enum('oui','non') NOT NULL default 'non'",
 						"statut"		=> "enum('en_attente','publie','termine') NOT NULL default 'en_attente'",
-						"extra"			=> "longblob NULL"
+						"extra"			=> "longblob NULL",
+						"idx"			=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL"
 					);
 	$spip_sondages_key = array(
 						"PRIMARY KEY" 	=> "id_sondage"

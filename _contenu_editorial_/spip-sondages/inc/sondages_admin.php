@@ -37,12 +37,13 @@
 			ecrire_metas();
 		} else {
 			$version_base = $GLOBALS['meta']['spip_sondages_version'];
-/*			if ($version_base < 1.1) {
+			if ($version_base < 1.1) {
 				creer_base();
+				spip_query("ALTER TABLE spip_sondages ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL;");
 				ecrire_meta('spip_sondages_version', $version_base = 1.1);
 				ecrire_metas();
 			}
-*/		}
+		}
 		return true;
 	}
 
