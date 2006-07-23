@@ -34,12 +34,14 @@
 						"code"		=> "varchar(255) NOT NULL default ''",
 						"format"	=> "enum('html','texte','mixte') NOT NULL default 'mixte'",
 						"maj"		=> "datetime NOT NULL default '0000-00-00 00:00:00'",
-						"extra"		=> "longblob NULL"
+						"extra"		=> "longblob NULL",
+						"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL"
 					);
 	$spip_abonnes_key = array(
 						"PRIMARY KEY" 	=> "id_abonne",
 						"UNIQUE email"	=> "email",
-						"UNIQUE code"	=> "code"
+						"UNIQUE code"	=> "code",
+						"KEY idx"		=> "idx"
 					);
 
 	$spip_abonnes_archives = array(
@@ -77,10 +79,12 @@
 						"nb_emails_texte"		=> "bigint(21) NOT NULL default '0'",
 						"nb_emails_mixte"		=> "bigint(21) NOT NULL default '0'",
 						"date_debut_envoi"		=> "datetime NOT NULL default '0000-00-00 00:00:00'",
-						"date_fin_envoi"		=> "datetime NOT NULL default '0000-00-00 00:00:00'"
+						"date_fin_envoi"		=> "datetime NOT NULL default '0000-00-00 00:00:00'",
+						"idx"					=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL"
 					);
 	$spip_archives_key = array(
-						"PRIMARY KEY" => "id_archive"
+						"PRIMARY KEY"	=> "id_archive",
+						"KEY idx"		=> "idx"
 					);
 
 	$spip_archives_statistiques = array(
@@ -121,10 +125,12 @@
 						"lang"			=> "varchar(10) NOT NULL",
 						"maj"			=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 						"statut"		=> "enum('brouillon','publie','envoi_en_cours') NOT NULL default 'brouillon'",
-						"extra"			=> "longblob NULL"
+						"extra"			=> "longblob NULL",
+						"idx"			=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL"
 					);
 	$spip_lettres_key = array(
-						"PRIMARY KEY" => "id_lettre"
+						"PRIMARY KEY"	=> "id_lettre",
+						"KEY idx"		=> "idx"
 					);
 
 	$spip_lettres_statistiques = array(

@@ -73,6 +73,14 @@
 				ecrire_meta('spip_lettres_version', $version_base = 1.4);
 				ecrire_metas();
 			}
+			if ($version_base < 1.5) {
+				creer_base();
+				spip_query("ALTER TABLE spip_abonnes ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL;");
+				spip_query("ALTER TABLE spip_archives ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL;");
+				spip_query("ALTER TABLE spip_lettres ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL;");
+				ecrire_meta('spip_lettres_version', $version_base = 1.5);
+				ecrire_metas();
+			}
 		}
 		return true;
 	}
@@ -785,6 +793,7 @@
 		echo $cadre;
 	}
 
+
 	/**
 	 * lettres_afficher_statistiques_archive
 	 *
@@ -822,6 +831,7 @@
 		}
 		echo $cadre;
 	}
+
 
 	/**
 	 * lettres_afficher_numero_lettre
