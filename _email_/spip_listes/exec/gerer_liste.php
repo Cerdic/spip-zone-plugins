@@ -824,7 +824,7 @@ echo "<tr><td background='img_pack/rien.gif' align='$spip_lang_left' class='verd
 		echo "<ul>";
                 echo "<li>"._T('spiplistes:squel');
 		
-		$dir = _DIR_PLUGIN_SPIPLISTES."/patrons/";
+	  $dir = find_in_path("patrons/");
 		
 
 		// Ouvre un dossier bien connu, et liste tous les fichiers

@@ -207,7 +207,7 @@ fin_cadre_relief();
 	echo "</div>";
 	  
 	  
-	  $dir = _DIR_PLUGIN_SPIPLISTES."/patrons/";
+	  $dir = find_in_path("patrons/");
 
 		// Ouvre un dossier bien connu, et liste tous les fichiers
 		if (is_dir($dir)) {

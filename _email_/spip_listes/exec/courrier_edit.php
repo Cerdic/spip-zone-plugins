@@ -118,7 +118,7 @@ if ($row = spip_fetch_array($result)) {
 		 echo "<table><tr><td>";				
 	  
 	  echo "<form action='".generer_url_ecrire("import_patron","id_message=$id_message")."' METHOD='post'>";  
-      $dir = _DIR_PLUGIN_SPIPLISTES."/patrons/";
+	  $dir = find_in_path("patrons/");
 
 		// Ouvre un dossier bien connu, et liste tous les fichiers
 		if (is_dir($dir)) {
