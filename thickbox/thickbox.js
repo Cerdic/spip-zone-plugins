@@ -10,7 +10,7 @@ $(document).ready(TB_init);
 
 //add thickbox to href elements that have a class of .thickbox
 TB_Image = function() {
-	var t = this.title || this.name || this.href || null;
+	var t = this.title || this.name || '<small>'+this.href+'</small>';
 	TB_show(t,this.href);
 	this.blur();
 	return false;
@@ -21,7 +21,7 @@ function TB_init(){
 		function(i) {
 			if (
 			this.type
-				? this.type.match(/image[/](jpeg|gif|png)/i)
+				? this.type.match(/image[\/](jpeg|gif|png)/i)
 				: (this.href
 					? this.href.match(/^[^?]+\.(jpeg|jpg|gif|png)$/i)
 					: false
