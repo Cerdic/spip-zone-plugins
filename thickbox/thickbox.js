@@ -53,44 +53,45 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
 		
 		if(urlType == '.jpg' || urlType == '.jpeg' || urlType == '.png' || urlType == '.gif'){//code to show images
 
-			var imgPreloader = new Image();
+			imgPreloader = new Image();
 			imgPreloader.onload = function(){
-				imgPreloader.onload = null;
-				// Resizing large images added by Christian Montoya
-				var pagesize = getPageSize();
-				var x = pagesize[0] - 150;
-				var y = pagesize[1] - 150;
-				var imageWidth = imgPreloader.width;
-				var imageHeight = imgPreloader.height;
-				if (imageWidth > x) {
-					imageHeight = imageHeight * (x / imageWidth); 
-					imageWidth = x; 
-					if (imageHeight > y) { 
-						imageWidth = imageWidth * (y / imageHeight); 
-						imageHeight = y; 
-					}
-				} else if (imageHeight > y) { 
+				
+			imgPreloader.onload = null;
+				
+			// Resizing large images added by Christian Montoya
+			var pagesize = getPageSize();
+			var x = pagesize[0] - 150;
+			var y = pagesize[1] - 150;
+			var imageWidth = imgPreloader.width;
+			var imageHeight = imgPreloader.height;
+			if (imageWidth > x) {
+				imageHeight = imageHeight * (x / imageWidth); 
+				imageWidth = x; 
+				if (imageHeight > y) { 
 					imageWidth = imageWidth * (y / imageHeight); 
 					imageHeight = y; 
-					if (imageWidth > x) { 
-						imageHeight = imageHeight * (x / imageWidth); 
-						imageWidth = x;
-					}
 				}
-				// End Resizing
-				$("#TB_ImageOff").html("<img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+"'/>");
-				TB_WIDTH = imageWidth + 30;
-				TB_HEIGHT = imageHeight + 60;
-				TB_position();
+			} else if (imageHeight > y) { 
+				imageWidth = imageWidth * (y / imageHeight); 
+				imageHeight = y; 
+				if (imageWidth > x) { 
+					imageHeight = imageHeight * (x / imageWidth); 
+					imageWidth = x;
+				}
 			}
-
-			$("#TB_window").append("<a href='' id='TB_ImageOff'><img id='TB_Image' src='"+url+"' alt='"+caption+"'/></a>"
-				+ "<div id='TB_caption'>"+caption+"</div><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'>x</a></div>"); 
-			$("#TB_closeWindowButton").click(TB_remove);
+			// End Resizing
+			
+			TB_WIDTH = imageWidth + 30;
+			TB_HEIGHT = imageHeight + 60;
+			$("#TB_window").append("<a href='' id='TB_ImageOff'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+"'/></a>"
+								 + "<div id='TB_caption'>"+caption+"</div><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'>x</a></div>"); 
+			$("#TB_closeWindowButton").click(TB_remove);		
+			TB_position();
 			$("#TB_load").remove();
 			$("#TB_ImageOff").click(TB_remove);
 			$("#TB_window").slideDown();
-
+			}
+	  
 			imgPreloader.src = url;
 		}
 		
