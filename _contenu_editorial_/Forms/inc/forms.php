@@ -31,8 +31,14 @@
 		if ($current_version==0.0){
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
-			creer_base();
-			ecrire_meta('forms_base_version',$current_version=$version_base);
+			// attention on vient peut etre d'une table spip-forms 1.8
+			$desc = spip_abstract_showtable('spip_forms','',true);
+			if (isset($desc['field'])) 
+				$current_version=0.1;
+			else {
+				creer_base();
+				ecrire_meta('forms_base_version',$current_version=$version_base);
+			}
 		}
 		if ($current_version<0.11){
 			include_spip('base/create');
