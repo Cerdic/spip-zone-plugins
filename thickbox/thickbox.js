@@ -23,7 +23,7 @@ function TB_init(){
 			this.type
 				? this.type.match(/image[/](jpeg|gif|png)/i)
 				: (this.href
-					? this.href.match(/\.(jpeg|jpg|gif|png)$/i)
+					? this.href.match(/^[^?]+\.(jpeg|jpg|gif|png)$/i)
 					: false
 				)
 			) {

@@ -296,7 +296,7 @@ function initLightbox()
 		|| ((anchor.getAttribute("type")
 			&& anchor.getAttribute("type").match(/^image\/(jpeg|png|gif)$/i))
 			|| (!anchor.getAttribute("type")
-				&& anchor.getAttribute("href").match(/\.(jpg|jpeg|png|gif)/i)
+				&& anchor.getAttribute("href").match(/^[^?]+\.(jpg|jpeg|png|gif)$/i)
 			)
 			)
 		)) {
