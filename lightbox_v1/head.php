@@ -1,7 +1,8 @@
 <?php
 
 	function Lightbox_v1_insert_head($flux){
-		$flux .= '<script src="'.find_in_path('jquery.js').'" type="text/javascript"></script>';
+		//jquery.js passe en plugin separe
+		//$flux .= '<script src="'.find_in_path('jquery.js').'" type="text/javascript"></script>';
 		$flux .= 	'<script type="text/javascript" src="'
 			.generer_url_public('lightbox_js').'"></script>';
 		$flux .= 	"<link rel='stylesheet' href='"

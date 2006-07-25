@@ -1,0 +1,28 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	jQuery
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Librairie javascript par [John Resig->http://jquery.com], mis en plugin par BoOz.
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	ajoute l'appel &agrave; jquery.js dans l'entete (fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>)
+	</description>
+	<prefix>
+	JQuery
+	</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>body_prive</nom>
+		<action>insert_head</action>
+	</pipeline>
+</plugin>
