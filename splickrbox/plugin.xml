@@ -6,13 +6,13 @@
 	BoOz (booz@rezo.net)
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
-	test
+	dev
 	</etat>
 	<description>
-	Noisette pour afficher les dernieres photos à la Flickr (le "badge") , tout ca en javascript via <code>#INSERT_HEAD</code>. <br /> Mettre <code><INCLURE{fond=inc-splickrbox}></code> dans un squelette, et hop :)
+	Noisette pour afficher les dernieres photos à la Flickr (le "badge") , tout ca en javascript via <code>#INSERT_HEAD</code> et le plugin Jquery. <br /> Mettre <code><INCLURE{fond=inc-splickrbox}></code> dans un squelette, et hop :)
 
 	</description>
 	<prefix>
