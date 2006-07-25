@@ -16,13 +16,16 @@ max = $("td.image img").size();
 // http://www.mythin.net/pause.js
 // et essayer de redemmarer le slide show apres la derniere image
 
-while(cptj <= max) {
-setTimeout('$("td.image img").splicker('+cptj+');',6000 + cptj*6000);
-//if(cptj==max) cptj=-1;
-cptj++;
-}
+start();
+
 
 });
+
+
+function start(){
+setTimeout('$("td.image img").splicker('+cptj+');',1000);
+}
+
 
 $.fn.splicker = function(i) {
 image = this.get(i).cloneNode(true) ;
@@ -40,15 +43,16 @@ if(i>=6 && i<=8){
 $("div#changeMe").css("top","0px");
 }
 
-setTimeout('$("div#changeMe img").hide_propre();',5000);
-}
+setTimeout('$("div#changeMe img").hide_propre();start()',5000);
 
+}
 
 $.fn.hide_propre = function() {
 this.hide("slow", function(){
         $(this).remove();
       });
-
+if(cptj == max-1){ cptj=0 ;}else{ cptj++ ;}
+//$("#statusMsg").html(cptj+"=?"+max);
 }
 
 
