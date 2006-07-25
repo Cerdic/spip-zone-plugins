@@ -68,6 +68,7 @@
 
 	$spip_avis = array(
 						"id_avis"		=> "bigint(21) NOT NULL",
+						"id_sondage" 	=> "bigint(21) NOT NULL",
 						"id_sonde"	 	=> "bigint(21) NOT NULL",
 						"id_choix" 		=> "bigint(21) NOT NULL"
 					);

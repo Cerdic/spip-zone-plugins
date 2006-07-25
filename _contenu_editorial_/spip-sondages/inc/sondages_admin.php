@@ -43,6 +43,19 @@
 				ecrire_meta('spip_sondages_version', $version_base = 1.1);
 				ecrire_metas();
 			}
+			if ($version_base < 1.2) {
+				creer_base();
+				spip_query("ALTER TABLE spip_avis ADD id_sondage bigint(21) NOT NULL AFTER id_avis;");
+				$requete = 'SELECT C.id_sondage AS id_sondage, 
+								A.id_avis AS id_avis
+							FROM spip_avis AS A 
+							INNER JOIN spip_choix AS C ON C.id_choix=A.id_choix';
+				$resultat = spip_query($requete);
+				while ($arr = spip_fetch_array($resultat)) 
+					spip_query('UPDATE spip_avis SET id_sondage="'.$arr['id_sondage'].'" WHERE id_avis="'.$arr['id_avis'].'"');
+				ecrire_meta('spip_sondages_version', $version_base = 1.2);
+				ecrire_metas();
+			}
 		}
 		return true;
 	}

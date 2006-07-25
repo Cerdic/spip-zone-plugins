@@ -17,6 +17,7 @@
 	include_spip('inc/plugin');
 	include_spip('inc/sondages_admin');
 	include_spip('inc/sondages_balises');
+	include_spip('inc/sondages_filtres');
 
 
 	/**
@@ -111,7 +112,8 @@
 		$resultat_total_avis = spip_query($requete_total_avis);
 		$total_avis = intval(spip_num_rows($resultat_total_avis));
 
-		$pourcentage = floor( ($total_avis / $total_sondage) * 100 );
+		$pourcentage = ( ($total_avis / $total_sondage) * 100 );
+		$pourcentage = number_format($pourcentage, 1, '.', '');
 		return $pourcentage;
 	}
 

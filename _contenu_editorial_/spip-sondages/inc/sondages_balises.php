@@ -44,13 +44,28 @@
 	 * balise_POURCENTAGE
 	 *
 	 * @param p est un objet SPIP
-	 * @return string url de validation de l'inscription
+	 * @return float pourcentage
 	 * @author Pierre Basson
 	 **/
 	function balise_POURCENTAGE($p) {
 		$_id_choix = champ_sql('id_choix',$p);
 		$_id_sondage = champ_sql('id_sondage',$p);
 		$p->code = "sondages_calculer_pourcentage($_id_sondage, $_id_choix)";
+		$p->statut = 'php';
+		return $p;
+	}
+
+
+	/**
+	 * balise_POURCENTAGE_MAX
+	 *
+	 * @param p est un objet SPIP
+	 * @return float pourcentage max pour le sondage
+	 * @author Pierre Basson
+	 **/
+	function balise_POURCENTAGE_MAX($p) {
+		$_id_sondage = champ_sql('id_sondage',$p);
+		$p->code = "sondages_calculer_pourcentage_max($_id_sondage)";
 		$p->statut = 'php';
 		return $p;
 	}
