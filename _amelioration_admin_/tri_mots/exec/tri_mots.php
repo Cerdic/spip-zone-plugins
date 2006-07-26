@@ -2,8 +2,8 @@
 
 
   //	  exec_tri_mots.php
-  //    Fichier créé pour SPIP avec un bout de code emprunté à celui ci.
-  //    Distribué sans garantie sous licence GPL./
+  //    Fichier créé pour SPIP avec un bout de code emprunt‚ à celui ci.
+  //    Distribu‚ sans garantie sous licence GPL./
   //    Copyright (C) 2006  Pierre ANDREWS
   //
   //    This program is free software; you can redistribute it and/or modify
@@ -157,7 +157,7 @@ function exec_tri_mots() {
   $select = array("$table.titre", "$table.$id_table", 'lien.rang');
   $from = array("spip_mots_$table AS lien", "spip_$table AS $table");
   $where = array("$table.$id_table=lien.$id_table" , "lien.id_mot=$id_mot");
-	if($table != 'auteurs') $where[] = "$table.statut='publie'";
+	if($table != 'auteurs') $where[] = "$table.statut IN ('prop', 'publie')";
   $order = array('lien.rang');
 
   global $spip_lang_left;
