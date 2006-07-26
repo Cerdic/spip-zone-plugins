@@ -28,6 +28,9 @@ N&eacute;cessite SPIP 1.9.1 ou une version de d&eacute;veloppement &gt;=6862
 	<prefix> 
 	comarquage
 	</prefix>
+	<fonctions>
+	comarquage_fonctions.php
+	</fonctions>
 	<pipeline>
 		<nom>post_propre</nom>
 		<action>post_propre</action>

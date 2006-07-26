@@ -1,4 +1,4 @@
-<BOUCLE_main(XML){xml=xml/MotsClesA.xml}{racine}{0,1}>
+<BOUCLE_main(XML){xml=(#ENV{xml}|comarquage_cache_xml)}{racine}{0,1}>
 	<INCLURE{fond=Entete}{xml}{self=#SELF}>
   <br/>
 		[(#ENV{motcle,''}|?{' ',''})<INCLURE{fond=MotsCles_publi}{xml}{motcle}{lettre}{self=#SELF}>]

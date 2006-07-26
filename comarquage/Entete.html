@@ -6,7 +6,7 @@
       	<B_navitems>
       	::
       	<BOUCLE_navitems(XML){xml}{id_parent}{' :: '}>
-        	<a href='[(#SELF|parametre_url{xsl,Noeud}|parametre_url{xml,(#ATTRIBUTS|extraire{href})})]'> #TEXTE </a>
+        	<a href='[(#SELF|parametre_url{xsl,Noeud}|parametre_url{xml,[(#ATTRIBUTS|extraire{href})]})]'> #TEXTE </a>
         </BOUCLE_navitems>
         &#xA0;&gt;&#xA0;
       </BOUCLE_nav>
@@ -14,11 +14,10 @@
         	<B_navitems2>
         	::
         	<BOUCLE_navitems2(XML){xml}{id_parent}{' :: '}>
-          	<a href='[(#SELF|parametre_url{xsl,Noeud}|parametre_url{xml,(#ATTRIBUTS|extraire{ID})})]'> #TEXTE </a>
+          	<a href='[(#SELF|parametre_url{xsl,Noeud}|parametre_url{xml,[(#ATTRIBUTS|extraire{ID})]})]'> #TEXTE </a>
           </BOUCLE_navitems2>
         </BOUCLE_nav2>
         	<BOUCLE_titre(XML){xml}{noeud=TitreLong}> :: #TEXTE</BOUCLE_titre>
-        <//B_nav2>
       <//B_nav>
     </td>
   </tr>

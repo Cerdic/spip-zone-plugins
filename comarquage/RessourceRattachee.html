@@ -125,10 +125,10 @@
     </xsl:choose>
   </xsl:template>
   <!-- Ressource-->
-  <xsl:template match="Ressource" mode="Ressource_Web">
-    <xsl:apply-templates select="LienWeb" mode="Ressource"/>
-    <xsl:call-template name="source"/>
-  </xsl:template>
+																								  <xsl:template match="Ressource" mode="Ressource_Web">
+																								    <xsl:apply-templates select="LienWeb" mode="Ressource"/>
+																								    <xsl:call-template name="source"/>
+																								  </xsl:template>
   <!-- Ressource-->
   <xsl:template match="Ressource" mode="Ressource_Teleservice">
     <xsl:apply-templates select="LienWeb" mode="Ressource"/>
@@ -185,12 +185,12 @@
         </td>
       </tr>
   </xsl:template>
-  <!-- Ressource-->
-  <xsl:template match="Ressource" mode="Ressource_Definition_glossaire">
-    <xsl:if test="Type/Nom ='Définition de glossaire'">
-      <xsl:apply-templates mode="Ressource"/>
-    </xsl:if>
-  </xsl:template>
+																											  <!-- Ressource-->
+																											  <xsl:template match="Ressource" mode="Ressource_Definition_glossaire">
+																											    <xsl:if test="Type/Nom ='Définition de glossaire'">
+																											      <xsl:apply-templates mode="Ressource"/>
+																											    </xsl:if>
+																											  </xsl:template>
   <!-- Can we lose this or do we have to change it ? -->
   <xsl:template match="Ressource" mode="RessourceInterne">
     <xsl:param name="libelle"/>
@@ -209,29 +209,29 @@
     <xsl:apply-templates mode="Ressource"/>
   </xsl:template>
   <!-- TitreLong-->
-  <xsl:template match="TitreLong" mode="Ressource">
-   <tr>
-     <xsl:choose>
-       <xsl:when test="/*/Type/Nom = 'Définition de glossaire' or /*/Type/Nom = 'Texte de référence' or /*/Type/Nom = 'Référent de calcul'">
-         <td colspan="2">
-           <b>
-             <xsl:value-of select="."/>
-           </b>
-         </td>
-       </xsl:when>
-       <xsl:otherwise>
-         <td width="20" align="LEFT" valign="baseline">
-           <img alt="">
-             <xsl:attribute name="src"><xsl:value-of select="$IMAGESURL"/><xsl:text>/puce_r.gif</xsl:text></xsl:attribute>
-           </img>
-         </td>
-         <td>
-           <xsl:value-of select="."/>
-         </td>
-       </xsl:otherwise>
-     </xsl:choose>
-    </tr>
-  </xsl:template>
+									  <xsl:template match="TitreLong" mode="Ressource">
+									   <tr>
+									     <xsl:choose>
+									       <xsl:when test="/*/Type/Nom = 'Définition de glossaire' or /*/Type/Nom = 'Texte de référence' or /*/Type/Nom = 'Référent de calcul'">
+									         <td colspan="2">
+									           <b>
+									             <xsl:value-of select="."/>
+									           </b>
+									         </td>
+									       </xsl:when>
+									       <xsl:otherwise>
+									         <td width="20" align="LEFT" valign="baseline">
+									           <img alt="">
+									             <xsl:attribute name="src"><xsl:value-of select="$IMAGESURL"/><xsl:text>/puce_r.gif</xsl:text></xsl:attribute>
+									           </img>
+									         </td>
+									         <td>
+									           <xsl:value-of select="."/>
+									         </td>
+									       </xsl:otherwise>
+									     </xsl:choose>
+									    </tr>
+									  </xsl:template>
   <!-- TypeCatégorie -->
   <xsl:template match="TypeCatégorie"/>
   <!-- CouvertureGéographique -->
@@ -320,40 +320,40 @@
       </td>
     </tr>
   </xsl:template>
-  <!-- Titre de Chapitre-->
-  <xsl:template match="Chapitre/Titre" mode="Ressource">
-    <tr>
-      <xsl:choose>
-        <xsl:when test="/Ressource/Type/Nom='Texte de référence' or /Ressource/Type/Nom='Référent de calcul'">
-          <td colspan="2">
-            <b>
-              <xsl:apply-templates mode="Ressource"/>
-            </b>
-          </td>
-        </xsl:when>
-        <xsl:when test="/Ressource/Type/Nom='Définition de glossaire'">
-          <td colspan="2">
-            <a>
-              <xsl:attribute name="name"><xsl:value-of select="/Ressource/@ID"/><xsl:text>.xml</xsl:text></xsl:attribute>
-              <b>
-                <xsl:apply-templates mode="Ressource"/>
-              </b>
-            </a>
-          </td>
-        </xsl:when>
-        <xsl:otherwise>
-          <td width="20" align="left" valign="baseline">
-            <img alt="">
-              <xsl:attribute name="src"><xsl:value-of select="$IMAGESURL"/><xsl:text>/puce_o.gif</xsl:text></xsl:attribute>
-            </img>
-          </td>
-          <td width="100%">
-            <xsl:apply-templates mode="Ressource"/>
-          </td>
-        </xsl:otherwise>
-      </xsl:choose>
-    </tr>
-  </xsl:template>
+					  <!-- Titre de Chapitre-->
+					  <xsl:template match="Chapitre/Titre" mode="Ressource">
+					    <tr>
+					      <xsl:choose>
+					        <xsl:when test="/Ressource/Type/Nom='Texte de référence' or /Ressource/Type/Nom='Référent de calcul'">
+					          <td colspan="2">
+					            <b>
+					              <xsl:apply-templates mode="Ressource"/>
+					            </b>
+					          </td>
+					        </xsl:when>
+					        <xsl:when test="/Ressource/Type/Nom='Définition de glossaire'">
+					          <td colspan="2">
+					            <a>
+					              <xsl:attribute name="name"><xsl:value-of select="/Ressource/@ID"/><xsl:text>.xml</xsl:text></xsl:attribute>
+					              <b>
+					                <xsl:apply-templates mode="Ressource"/>
+					              </b>
+					            </a>
+					          </td>
+					        </xsl:when>
+					        <xsl:otherwise>
+					          <td width="20" align="left" valign="baseline">
+					            <img alt="">
+					              <xsl:attribute name="src"><xsl:value-of select="$IMAGESURL"/><xsl:text>/puce_o.gif</xsl:text></xsl:attribute>
+					            </img>
+					          </td>
+					          <td width="100%">
+					            <xsl:apply-templates mode="Ressource"/>
+					          </td>
+					        </xsl:otherwise>
+					      </xsl:choose>
+					    </tr>
+					  </xsl:template>
   <!-- SousChapitre -->
   <xsl:template match="SousChapitre" mode="Ressource">
     <tr>
@@ -508,36 +508,36 @@
       </td>
     </tr>
   </xsl:template>
-  <!-- LienWeb -->
-  <xsl:template match="LienWeb" mode="Ressource">
-    <tr>
-      <td width="20" align="LEFT" valign="baseline">
-        <img alt="">
-          <xsl:attribute name="src"><xsl:value-of select="$IMAGESURL"/><xsl:text>/puce_o.gif</xsl:text></xsl:attribute>
-        </img>
-      </td>
-      <td width="100%">
-        <xsl:choose>
-          <xsl:when test="@Lien != ''">
-            <a class="choix" target="_blank">
-              <xsl:attribute name="href"><xsl:value-of select="@Lien"/></xsl:attribute>
-              <xsl:if test="@Commentaire">
-                <xsl:attribute name="title"><xsl:value-of select="@Commentaire"/></xsl:attribute>
-                <xsl:attribute name="alt"><xsl:value-of select="@Commentaire"/></xsl:attribute>
-              </xsl:if>
-              <xsl:value-of select="@Libellé"/>
-              <xsl:text/>
-            </a>
-          </xsl:when>
-          <xsl:otherwise>
-            <b>
-              <xsl:value-of select="@Libellé"/>
-            </b>
-          </xsl:otherwise>
-        </xsl:choose>
-      </td>
-    </tr>
-  </xsl:template>
+																																	  <!-- LienWeb -->
+																																	  <xsl:template match="LienWeb" mode="Ressource">
+																																	    <tr>
+																																	      <td width="20" align="LEFT" valign="baseline">
+																																	        <img alt="">
+																																	          <xsl:attribute name="src"><xsl:value-of select="$IMAGESURL"/><xsl:text>/puce_o.gif</xsl:text></xsl:attribute>
+																																	        </img>
+																																	      </td>
+																																	      <td width="100%">
+																																	        <xsl:choose>
+																																	          <xsl:when test="@Lien != ''">
+																																	            <a class="choix" target="_blank">
+																																	              <xsl:attribute name="href"><xsl:value-of select="@Lien"/></xsl:attribute>
+																																	              <xsl:if test="@Commentaire">
+																																	                <xsl:attribute name="title"><xsl:value-of select="@Commentaire"/></xsl:attribute>
+																																	                <xsl:attribute name="alt"><xsl:value-of select="@Commentaire"/></xsl:attribute>
+																																	              </xsl:if>
+																																	              <xsl:value-of select="@Libellé"/>
+																																	              <xsl:text/>
+																																	            </a>
+																																	          </xsl:when>
+																																	          <xsl:otherwise>
+																																	            <b>
+																																	              <xsl:value-of select="@Libellé"/>
+																																	            </b>
+																																	          </xsl:otherwise>
+																																	        </xsl:choose>
+																																	      </td>
+																																	    </tr>
+																																	  </xsl:template>
   <xsl:template match="Tableau" mode="Ressource">
     <tr>
       <td colspan="2">

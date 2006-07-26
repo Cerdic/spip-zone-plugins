@@ -12,12 +12,7 @@
 
 include_spip('inc/comarquage');
 
-function comarquage_liens_externes($texte){
-	if (strpos($texte,"<LienExterne")!==FALSE){
-		$texte = preg_replace(",<LienExterne[^>]*URL=['\"]([^'\"]*)['\"][^>]*>(.*)</LienExterne>,","<a href='\\1'>\\2</a>",$texte);
-	}
-	return $texte;
-}
+
 
 
 function comarquage_run($parametres_defaut){
