@@ -6,6 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'ajouter' => 'add',
 									   'enlever' => 'remove',
 									   'voir' => 'see',
+									   'cacher' => 'hide',
 									   'limite' => 'limitation',
 									   'aucune' => 'none',
 									   'action' => 'Action',
@@ -20,6 +21,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'par' => 'by',
 									   'installer' => 'Configure the database for keywords on:',
 									   'toutinstalle' => 'The database is already fully configured to have keywords everywhere.'
-									   );
+									   
+									   'info_articles' => 'Articles',
+									   'info_breves' => 'News',
+									   'info_rubriques' => 'Sections',
+									   'info_syndic' => 'Syndic',
+									   'info_auteurs' => 'Authors',
+									   'info_documents' => 'Documents',
+									   'info_messages' => 'Messages',
+
+									   'item_mots_cles_association_auteurs' => 'authors',
+									   'item_mots_cles_association_documents' => 'documents',
+									   'item_mots_cles_association_messages' => 'messages',
+									  );
 
 ?>

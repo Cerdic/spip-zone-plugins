@@ -6,6 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'ajouter' => 'aggiungere',
 									   'enlever' => 'cancella',
 									   'voir' => 'vedere',
+									   'cacher' => 'excludere',
 									   'limite' => 'limitazione',
 									   'aucune' => 'nessuna',
 									   'action' => 'Azione',
