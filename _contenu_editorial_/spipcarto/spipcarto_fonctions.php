@@ -122,10 +122,11 @@ function wkt2imgwidth($args, $callage = "",$url_carte){
 function wkt2imgsize($args="", $callage = "",$url_carte){
 	//recuperer taille reelle carte
 	$callage 	= worldfile2array ($callage);
-	
 	$GeoWidth 	= ($callage['bottom_right']['x']-$callage['top_left']['x']);
 	$GeoHeight 	= ($callage['bottom_right']['y']-$callage['top_left']['y']);
 	
+//	echo "!!!".$GeoWidth."=(".$callage['bottom_right']['x']."-".$callage['top_left']['x'].")";
+//	echo "!!!".$GeoHeight."=(".$callage['bottom_right']['y']."-".$callage['top_left']['y'].")";
 	
 	//recuperer taille de l'image
 	$ImgRealWidth = getImgWidth ($url_carte);
@@ -468,14 +469,14 @@ $spip_documents_carto_cartes_key = array(
 //global $tables_principales,$table_primary,$tables_auxiliaires,$tables_relations;
 
 
-$tables_principales['spip_carto_cartes'] =
+$GLOBALS['tables_principales']['spip_carto_cartes'] =
 	array('field' => &$spip_carto_cartes, 'key' => &$spip_carto_cartes_key);
 
-$tables_principales['spip_carto_objets'] =
+$GLOBALS['tables_principales']['spip_carto_objets'] =
 	array('field' => &$spip_carto_objets, 'key' => &$spip_carto_objets_key);
 
 //Relation avec les articles
-$tables_auxiliaires['spip_carto_cartes_articles'] = array(
+$GLOBALS['tables_auxiliaires']['spip_carto_cartes_articles'] = array(
 	'field' => &$spip_carto_cartes_articles,
 	'key' => &$spip_carto_cartes_articles_key);
 
@@ -486,21 +487,21 @@ $tables_auxiliaires['spip_carto_cartes_articles'] = array(
 //$tables_principales['spip_mots_carto_objets'] = array(
 //	'field' => &$spip_mots_carto_objets,
 //	'key' => &$spip_mots_carto_objets_key);
-$tables_auxiliaires['spip_mots_carto_objets'] = array(
+$GLOBALS['tables_auxiliaires']['spip_mots_carto_objets'] = array(
 	'field' => &$spip_mots_carto_objets,
 	'key' => &$spip_mots_carto_objets_key);
 	
 
-$table_primary['carto_objets']="id_carto_objet";
-$table_primary['carto_cartes']="id_carto_carte";
+$GLOBALS['table_primary']['carto_objets']="id_carto_objet";
+$GLOBALS['table_primary']['carto_cartes']="id_carto_carte";
 
-$table_des_tables['carto_objets']="carto_objets";
-$table_des_tables['carto_cartes']="carto_cartes";
+$GLOBALS['table_des_tables']['carto_objets']="carto_objets";
+$GLOBALS['table_des_tables']['carto_cartes']="carto_cartes";
 
-$tables_relations['documents']['id_carto_carte']='documents_carto_cartes';
-$tables_relations['mots']['id_carto_objet']='mots_carto_objets';
-$tables_relations['carto_objets']['id_mot']='mots_carto_objets';
-$tables_relations['carto_cartes']['id_document']='documents_carto_cartes';
+$GLOBALS['tables_relations']['documents']['id_carto_carte']='documents_carto_cartes';
+$GLOBALS['tables_relations']['mots']['id_carto_objet']='mots_carto_objets';
+$GLOBALS['tables_relations']['carto_objets']['id_mot']='mots_carto_objets';
+$GLOBALS['tables_relations']['carto_cartes']['id_document']='documents_carto_cartes';
 
 function boucle_CARTO_CARTES($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];

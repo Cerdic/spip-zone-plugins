@@ -88,10 +88,37 @@ function embed_fond_carte_url($fond_carte) {
 }
 
 function afficher_cartes($titre_table, $requete, $icone = '') {
-	global $couleur_claire, $couleur_foncee;
-	global $connect_id_auteur;
+	global $connect_id_auteur, $connect_statut;
+	global $spip_lang_right, $couleur_claire, $spip_lang;
 
-	$tranches = afficher_tranches_requete($requete, 3);
+		$select = $requete['SELECT'] ? $requete['SELECT'] : '*';
+		$from = $requete['FROM'] ? $requete['FROM'] : 'spip_articles AS articles';
+		$join = $requete['JOIN'] ? (' LEFT JOIN ' . $requete['JOIN']) : '';
+		$where = $requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '';
+		$order = $requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '';
+		$group = $requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '';
+		$limit = $requete['LIMIT'] ? (' LIMIT ' . $requete['LIMIT']) : '';
+	
+		$cpt = "$from$where";
+		$tmp_var = substr(md5($cpt), 0, 4);
+		
+		//if (!$group){
+			$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $cpt"));
+			if (! ($cpt = $cpt['n'])) return $tous_id ;
+		/*}
+		else
+			$cpt = spip_num_rows(spip_query("SELECT $select FROM $cpt"));
+		*/
+		if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
+	
+		$nb_aff = 1.5 * _TRANCHES;
+		$deb_aff = intval(_request('t_' .$tmp_var));
+	
+		if ($cpt > $nb_aff) {
+			$nb_aff = (_TRANCHES); 
+			$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
+		}
+			
 	if (!$icone) $icone = "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.png";
 
 	if ($tranches) {
@@ -102,7 +129,7 @@ function afficher_cartes($titre_table, $requete, $icone = '') {
 
 		echo $tranches;
 
-	 	$result = spip_query($requete);
+	 	$result = spip_query("SELECT $select FROM $from$join$where$group$order LIMIT $deb_aff, $nb_aff");
 		$num_rows = spip_num_rows($result);
 
 		$ifond = 0;
@@ -132,8 +159,11 @@ function afficher_cartes($titre_table, $requete, $icone = '') {
 			
 			//articles liés
 			afficher_articles(_T("spipcarto:carte_articles_use"),
-				", spip_carto_cartes_articles AS lien WHERE lien.id_article=articles.id_article ".
-				"AND id_carto_carte=$id_carte AND statut!='poubelle' ORDER BY titre");
+				array(
+					"FROM"=>"spip_carto_cartes_articles AS lien",
+					"WHERE"=>"lien.id_article=articles.id_article".
+						"AND id_carto_carte=$id_carte AND statut!='poubelle'",
+					"ORDER BY"=>"titre"));
 			
 			echo "</a></td></tr>";
 			
@@ -174,7 +204,12 @@ function afficher_carte_interface($id_carte,$retour,$fichier,$callage, $id_img =
 <script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/javascript/x_event_nn4.js"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/javascript/navTools.js"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/javascript/graphTools.js"></script>
-<form method="post" action="#nouveau_objet" name="carto_form">
+<form method="get" action="#nouveau_objet" name="carto_form">
+ <input type="hidden" name="exec" value="cartes_edit"/>
+ <input type="hidden" name="id_carte" value="'.$id_carte.'"/>
+ <input type="hidden" name="retour" value="'.$retour.'"/>
+ <input type="hidden" name="selection_type" />
+ <input type="hidden" name="selection_coords" />
 <script type="text/javascript">
 /*<![CDATA[*/ 
     var dhtmlDivs = new String();
@@ -258,10 +293,6 @@ function afficher_carte_interface($id_carte,$retour,$fichier,$callage, $id_img =
     }
 	/*]]>*/
   </script>
-    <input type="hidden" name="id_carte" value="'.$id_carte.'"/>
-	<input type="hidden" name="retour" value="'.$retour.'"/>
-	<input type="hidden" name="selection_type" />
-	<input type="hidden" name="selection_coords" />
 	<div id="mapAnchorDiv" style="position:relative; width:'.$width.'px; height:'.$height.'px;"> 
      <table>
       <tr> 

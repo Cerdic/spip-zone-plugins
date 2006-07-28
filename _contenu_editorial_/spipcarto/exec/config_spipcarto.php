@@ -74,7 +74,7 @@ if (($_REQUEST['installation']=='oui')&&(($connect_statut == '0minirezo') AND $c
 ) TYPE=MyISAM;");
 	spip_query("ALTER TABLE `".$table_pref."_groupes_mots` ADD `carto_objets` CHAR( 3 ) NOT NULL AFTER `syndic` ;");
 	spip_query("ALTER TABLE `".$table_pref."_groupes_mots` ADD INDEX ( `carto_objets` ) ;");
-	spip_query("INSERT INTO `".$table_pref."_carto_srs` (id_carto_srs, label, code) VALUES ('-1', 'Par défaut', '-1');");
+	spip_query("INSERT INTO `".$table_pref."_carto_srs` (id_carto_srs, label, code) VALUES ('-1', 'Par defaut', '-1');");
 	spip_query("INSERT INTO `".$table_pref."_carto_srs` (label, code) VALUES ('NTF (Paris) / Lambert zone II étendu', 'EPSG:27582');");
 	spip_query("INSERT INTO `".$table_pref."_carto_srs` (label, code) VALUES ('NTF (Paris) / Lambert zone II', 'EPSG:27572');");
 	spip_query("INSERT INTO `".$table_pref."_carto_srs` (label, code) VALUES ('NTF (Paris) / Lambert zone III', 'EPSG:27573');");

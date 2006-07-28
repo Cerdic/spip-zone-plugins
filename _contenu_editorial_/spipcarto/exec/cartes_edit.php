@@ -49,7 +49,7 @@ define('_DIR_PLUGIN_SPIPCARTO',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS).
 function exec_cartes_edit() {
   include(_DIR_PLUGIN_SPIPCARTO."/inc/carto.php");
 //include_spip ("inc/carto");
-include_spip ("spipcarto_mes_fonctions");
+include_spip ("spipcarto_fonctions");
 include_spip ("inc/carto_import");
 include_spip ("inc/presentation");
 include_spip ("inc/documents");
@@ -76,7 +76,7 @@ $supp_rejet=stripslashes($_REQUEST['supp_rejet']);
 $modif_carte=stripslashes($_REQUEST['modif_carte']);
 
 $selection_type=stripslashes($_REQUEST['selection_type']);
-$selection_coord=stripslashes($_REQUEST['selection_coord']);
+$selection_coords=stripslashes($_REQUEST['selection_coords']);
 $modif_objet=stripslashes($_REQUEST['modif_objet']);
 $objet_titre=stripslashes($_REQUEST['objet_titre']);
 $objet_texte=stripslashes($_REQUEST['objet_texte']);
@@ -145,6 +145,21 @@ if ($flag_editable) {
 
 		
 
+//$flag_mots = "oui";
+if ($id_carte) {
+			//TODO : passer tout ca en spip_abstract ...
+			$query = "SELECT * FROM spip_carto_cartes WHERE id_carto_carte=$id_carte";
+			$result = spip_query($query);
+			if ($row = spip_fetch_array($result)) {
+				$titre = entites_html($row['titre']);
+				$url_carte = $row['url_carte'];
+				$texte = entites_html($row['texte']);
+				$callage = entites_html($row['callage']);
+				$id_srs = intval($row['id_srs']);
+				$js_titre = "";
+			}
+		}
+		
 //
 // Modifications des objets de la carte
 //
@@ -195,21 +210,6 @@ if ($id_carte && $flag_editable) {
 }
 
 
-//$flag_mots = "oui";
-if ($id_carte) {
-			//TODO : passer tout ca en spip_abstract ...
-			$query = "SELECT * FROM spip_carto_cartes WHERE id_carto_carte=$id_carte";
-			$result = spip_query($query);
-			if ($row = spip_fetch_array($result)) {
-				$titre = entites_html($row['titre']);
-				$url_carte = $row['url_carte'];
-				$texte = entites_html($row['texte']);
-				$callage = entites_html($row['callage']);
-				$id_srs = intval($row['id_srs']);
-				$js_titre = "";
-			}
-		}
-		
 
 $param="id_carte=".$id_carte;
 if ($retour) $param.='&retour='.$retour;
@@ -310,10 +310,14 @@ if ($id_carte) {
 		//TODO : gerer zoom et position
 		//if (intval($url_carte)>0) $leurl_carte="../spip_carto.php?fond_carte=".intval($url_carte);
 		//else $leurl_carte=$url_carte;
-		$lurl_carte="../spip_carto.php?fond_carte=".urlencode($url_carte);
+		$lurl_carte="../spip_carto.php?fond_carte=".base64_encode($url_carte);
 		$tabcallage=worldfile2array($callage);
-   	
+//   	echo"<div style=\"position:relative\">";
+//   	echo"<div style=\"position:absolute\">";
    		echo afficher_carte_interface($id_carte,$retour,$lurl_carte,$tabcallage, $url_carte);
+//   	echo"<hr/>aaa";
+//	echo"</div>";
+//	echo"</div>";
 				
 		echo fin_block();
 		//echo "</div>\n";
@@ -460,7 +464,7 @@ if ($flag_editable) {
 				
   echo "<form method='post' action='".generer_url_ecrire("cartes_edit","#objet_visible")."'>";
   echo '<input type="hidden" name="id_carte" value="'.$id_carte.'">'; 
-  $mlink='supp_objet='.$id_objet;
+  $mlink='supp_objet='.$id_objet.'&id_carte='.$id_carte;
   if ($retour) {
   	$mlink.='&retour='.$retour;
   	echo '<input type="hidden" name="retour" value="'.$retour.'">'; 

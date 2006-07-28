@@ -1,0 +1,620 @@
+[(#HTTP_HEADER{Content-type: image/svg+xml[; charset=(#CHARSET)]})]
+<?xml version="1.0"[ encoding="(#CHARSET)"] standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/SVG/DTD/svg10.dtd">
+<BOUCLE_carte(CARTO_CARTES){id_carto_carte}>
+<svg width="100%" height="100%" viewBox="0 0 850 590" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:attrib="http://www.carto.net/attrib" onload="init(evt);" zoomAndPan="enable" encoding="ISO-8859-1">
+	<script type="text/ecmascript" xlink:href="helper_functions.js"/>
+	<script type="text/ecmascript" xlink:href="navigation.js"/>
+	<script type="text/ecmascript"><![CDATA[
+
+
+/* slider.js */
+//slider properties
+function slider(x1,y1,value1,x2,y2,value2,startVal,sliderGroupId,sliderColor,visSliderWidth,invisSliderWidth,sliderSymb,functionToCall,mouseMoveBool) {
+	this.x1 = x1;
+	this.y1 = y1;
+	this.value1 = value1;
+	this.x2 = x2;
+	this.y2 = y2;
+	this.value2 = value2;
+	this.startVal = startVal;
+	this.value = startVal;
+	this.sliderGroupId = sliderGroupId;
+	this.sliderGroup = document.getElementById(this.sliderGroupId);
+	this.sliderColor = sliderColor;
+	this.visSliderWidth = visSliderWidth;
+	this.invisSliderWidth = invisSliderWidth;
+	this.sliderSymb = sliderSymb;
+	this.functionToCall = functionToCall;
+	this.mouseMoveBool = mouseMoveBool;
+	this.length = toPolarDist((this.x2 - this.x1),(this.y2 - this.y1));
+	this.direction = toPolarDir((this.x2 - this.x1),(this.y2 - this.y1));
+	this.createSlider();
+	this.slideStatus = 0;
+	this.ctm = getTransformToRootElement(this.sliderGroup).inverse();
+}
+
+//create slider
+slider.prototype.createSlider = function() {
+	var mySliderLine = document.createElementNS(svgNS,"line");
+	mySliderLine.setAttributeNS(null,"x1",this.x1);
+	mySliderLine.setAttributeNS(null,"y1",this.y1);
+	mySliderLine.setAttributeNS(null,"x2",this.x2);
+	mySliderLine.setAttributeNS(null,"y2",this.y2);
+	mySliderLine.setAttributeNS(null,"stroke",this.sliderColor);
+	mySliderLine.setAttributeNS(null,"stroke-width",this.invisSliderWidth);
+	mySliderLine.setAttributeNS(null,"opacity","0");
+	mySliderLine.setAttributeNS(null,"id",this.sliderGroupId+"_invisibleSliderLine");
+	mySliderLine.addEventListener("mousedown",this,false);
+	this.sliderGroup.appendChild(mySliderLine);
+	mySliderLine = document.createElementNS(svgNS,"line");
+	mySliderLine.setAttributeNS(null,"x1",this.x1);
+	mySliderLine.setAttributeNS(null,"y1",this.y1);
+	mySliderLine.setAttributeNS(null,"x2",this.x2);
+	mySliderLine.setAttributeNS(null,"y2",this.y2);
+	mySliderLine.setAttributeNS(null,"stroke",this.sliderColor);
+	mySliderLine.setAttributeNS(null,"stroke-width",this.visSliderWidth);
+	mySliderLine.setAttributeNS(null,"id",this.sliderGroupId+"_visibleSliderLine");
+	mySliderLine.setAttributeNS(null,"pointer-events","none");
+	this.sliderGroup.appendChild(mySliderLine);
+	mySliderSymb = document.createElementNS(svgNS,"use");
+	mySliderSymb.setAttributeNS(xlinkNS,"xlink:href","#"+this.sliderSymb);
+	var myStartDistance = this.length - ((this.value2 - this.startVal) / (this.value2 - this.value1)) * this.length;
+	var myPosX = this.x1 + toRectX(this.direction,myStartDistance);
+	var myPosY = this.y1 + toRectY(this.direction,myStartDistance);
+	var myTransformString = "translate("+myPosX+","+myPosY+") rotate(" + Math.round(this.direction / Math.PI * 180) + ")";
+	mySliderSymb.setAttributeNS(null,"transform",myTransformString);
+	mySliderSymb.setAttributeNS(null,"id",this.sliderGroupId+"_sliderSymbol");
+	this.sliderGroup.appendChild(mySliderSymb);
+}
+
+//remove all slider elements
+slider.prototype.removeSlider = function() {
+    var mySliderSymb = document.getElementById(this.sliderGroup+"_sliderSymbol");
+	this.sliderGroup.removeChild(mySliderSymb);
+    var mySliderLine = document.getElementById(this.sliderGroup+"_visibleSliderLine");
+	this.sliderGroup.removeChild(mySliderLine);
+    var mySliderLine = document.getElementById(this.sliderGroup+"_invisibleSliderLine");
+	this.sliderGroup.removeChild(mySliderLine);
+}
+
+//handle events
+slider.prototype.handleEvent = function(evt) {
+	this.drag(evt);
+}
+
+//drag slider
+slider.prototype.drag = function(evt) {
+	var svgroot = document.documentElement;
+	if (evt.type == "mousedown" || (evt.type == "mousemove" && this.slideStatus == 1)) {
+		var myCoords = myMapApp.calcCoord(evt.clientX,evt.clientY);
+		//undo the effect of transformations
+		var mySVGPoint = svgroot.createSVGPoint();
+		mySVGPoint.x = myCoords["x"];
+		mySVGPoint.y = myCoords["y"];
+		mySVGPoint = mySVGPoint.matrixTransform(this.ctm);
+		myCoords["x"] = mySVGPoint.x;
+		myCoords["y"] = mySVGPoint.y;
+	
+		//draw normal line for first vertex
+		var ax = this.x2 - this.x1;
+		var ay = this.y2 - this.y1;
+		//normal vector 1
+		var px1 = parseFloat(this.x1) + ay * -1;
+		var py1 = parseFloat(this.y1) + ax;
+		//normal vector 2
+		var px2 = parseFloat(this.x2) + ay * -1;
+		var py2 = parseFloat(this.y2) + ax;
+				
+		if (leftOfTest(myCoords["x"],myCoords["y"],this.x1,this.y1,px1,py1) == 0 && leftOfTest(myCoords["x"],myCoords["y"],this.x2,this.y2,px2,py2) == 1) {
+			if (evt.type == "mousedown" && evt.detail == 1) {
+				this.slideStatus = 1;
+				svgroot.addEventListener("mousemove",this,false);
+				svgroot.addEventListener("mouseup",this,false);
+			}
+			myNewPos = intersect2lines(this.x1,this.y1,this.x2,this.y2,myCoords["x"],myCoords["y"],myCoords["x"] + ay * -1,myCoords["y"] + ax);
+			var myPercentage = toPolarDist(myNewPos['x'] - this.x1,myNewPos['y'] - this.y1) / this.length;
+			this.value = this.value1 + myPercentage * (this.value2 - this.value1);
+		}
+		else {
+			var myNewPos = new Array();
+			if (leftOfTest(myCoords["x"],myCoords["y"],this.x1,this.y1,px1,py1) == 0 && leftOfTest(myCoords["x"],myCoords["y"],this.x2,this.y2,px2,py2) == 0) {
+				//more than max
+				this.value = this.value2;
+				myNewPos['x'] = this.x2;
+				myNewPos['y'] = this.y2;
+			}
+			if (leftOfTest(myCoords["x"],myCoords["y"],this.x1,this.y1,px1,py1) == 1 && leftOfTest(myCoords["x"],myCoords["y"],this.x2,this.y2,px2,py2) == 1) {
+				//less than min
+				this.value = this.value1;
+				myNewPos['x'] = this.x1;
+				myNewPos['y'] = this.y1;
+			}
+		}
+		var myTransformString = "translate("+myNewPos['x']+","+myNewPos['y']+") rotate(" + Math.round(this.direction / Math.PI * 180) + ")";
+		document.getElementById(this.sliderGroupId+"_sliderSymbol").setAttributeNS(null,"transform",myTransformString);
+		this.getValue();
+	}
+	if (evt.type == "mouseup" && evt.detail == 1) {
+		if (this.slideStatus == 1) {
+			this.slideStatus = 2;
+			svgroot.removeEventListener("mousemove",this,false);
+			svgroot.removeEventListener("mouseup",this,false);
+			this.getValue();
+		}
+		this.slideStatus = 0;
+	}
+}
+
+//this code is executed, after the slider is released
+//you can use switch/if to detect which slider was used (use this.sliderGroup) for that
+slider.prototype.getValue = function() {
+	if (this.slideStatus == 1 && this.mouseMoveBool == true) {
+		if (typeof(this.functionToCall) == "function") {
+			this.functionToCall("change",this.sliderGroupId,this.value);
+		}
+		if (typeof(this.functionToCall) == "object") {
+			this.functionToCall.getSliderVal("change",this.sliderGroupId,this.value);
+		}
+		if (typeof(this.functionToCall) == "string") {
+			eval(this.functionToCall+"('change','"+this.sliderGroupId+"',"+this.value+")");
+		}
+	}
+	if (this.slideStatus == 2) {
+		if (typeof(this.functionToCall) == "function") {
+			this.functionToCall("release",this.sliderGroupId,this.value);
+		}
+		if (typeof(this.functionToCall) == "object") {
+			this.functionToCall.getSliderVal("release",this.sliderGroupId,this.value);
+		}
+		if (typeof(this.functionToCall) == "string") {
+			eval(this.functionToCall+"('release','"+this.sliderGroupId+"',"+this.value+")");
+		}
+	}
+}	
+
+//this is to set the value from other scripts
+slider.prototype.setValue = function(value) {
+	var myPercAlLine = (value - this.value1) / (this.value2 - this.value1);
+	this.value = myPercAlLine;
+	var myPosX = this.x1 + toRectX(this.direction,this.length * myPercAlLine);
+	var myPosY = this.y1 + toRectY(this.direction,this.length * myPercAlLine);
+	var myTransformString = "translate("+myPosX+","+myPosY+") rotate(" + Math.round(this.direction / Math.PI * 180) + ")";
+	document.getElementById(this.sliderGroupId+"_sliderSymbol").setAttributeNS(null,"transform",myTransformString);
+}	
+/* slider.js */
+
+
+
+
+/* mapApp.js */	
+//holds data on window size
+function mapApp() {
+	if (!document.documentElement.getScreenCTM) {
+		//initialize ratio
+		this.resetFactors();
+		//add resize event to document element
+		document.documentElement.addEventListener("SVGResize",this,false);
+	}
+}
+
+mapApp.prototype.handleEvent = function(evt) {
+	if (evt.type == "SVGResize") {
+		this.resetFactors();
+	}
+}
+
+mapApp.prototype.resetFactors = function() {
+	if (!document.documentElement.getScreenCTM) {
+		//case for viewers that don't support .getScreenCTM, such as ASV3
+		//calculate ratio and offset values of app window
+		var viewBoxArray = document.documentElement.getAttributeNS(null,"viewBox").split(" ");
+		var myRatio = viewBoxArray[2]/viewBoxArray[3];
+		if ((window.innerWidth/window.innerHeight) > myRatio) { //case window is more wide than myRatio
+			this.scaleFactor = viewBoxArray[3] / window.innerHeight;
+		}
+		else { //case window is more tall than myRatio
+			this.scaleFactor = viewBoxArray[2] / window.innerWidth;
+		}
+		this.offsetX = (window.innerWidth - viewBoxArray[2] * 1 / this.scaleFactor) / 2;
+		this.offsetY = (window.innerHeight - viewBoxArray[3] * 1 / this.scaleFactor) / 2;
+	}
+}
+
+mapApp.prototype.calcCoord = function(coordx,coordy) {
+	var coords = new Array();
+	if (!document.documentElement.getScreenCTM) {
+		//case ASV3 a. Corel
+		coords["x"] = (coordx  - this.offsetX) * this.scaleFactor;
+		coords["y"] = (coordy - this.offsetY) * this.scaleFactor;
+	}
+	else {
+		matrix=document.documentElement.getScreenCTM();
+		coords["x"]= matrix.inverse().a*coordx+matrix.inverse().c*coordy+matrix.inverse().e;
+		coords["y"]= matrix.inverse().b*coordx+matrix.inverse().d*coordy+matrix.inverse().f;
+	}
+	return coords;
+}
+/* mapApp.js */	
+	
+		
+/* checkbox.js */
+function checkBoxScript(evt,myLayer) { //checkBox for toggling layers an contextMenue
+	var myLayerObj = document.getElementById(myLayer);
+	var myCheckCrossObj = document.getElementById("checkCross"+myLayer);
+	var myCheckCrossVisibility = myCheckCrossObj.getAttributeNS(null,"visibility");
+	//alert ( "chech" + myCheckCrossVisibility );
+	if (evt.type == "click" && evt.detail == 1) {
+		if (myCheckCrossVisibility == "visible") {
+			myLayerObj.setAttributeNS(null,"visibility","hidden");
+			myCheckCrossObj.setAttributeNS(null,"visibility","hidden");
+			//you can do if/else or switch statements to set different actions on activating a checkbox here
+			//myLayer holds the currentLayer name
+			
+		}
+		else {
+			myLayerObj.setAttributeNS(null,"visibility","visible");
+			myCheckCrossObj.setAttributeNS(null,"visibility","visible");
+			<BOUCLE_WMS_Check(SITES){titre_mot="WMS"}>
+			if (myLayer == #ID_SYNDIC) getWMS(#ID_SYNDIC);
+			</BOUCLE_WMS_Check>
+		}
+	}
+}
+/* checkbox.js */	
+		
+		
+		
+		var myMapApp = new mapApp();
+		var myMainMap;
+		var myRefMapDragger;
+		var myZoomSlider;
+		function init(evt) {
+			//dynamic layer array that allow loading from database
+			var dynamicLayers = new Array();
+			//initialize digiLayers (layers that allow digitizing)
+			var digiLayers = new Array();
+			myMainMap = new map("mainMap",[(#CALLAGE|worldfileWidth)],0,0.6,0,"m",true,"coordX","coordY",dynamicLayers,digiLayers,"");
+			//slider properties: x1,y1,value1,x2,y2,value2,startValue,group in which to build the slider,color of slider
+			//width of slider of sliderbar,width of invisible slider bar,width of visible slider
+			myZoomSlider = new slider(710,70,myMainMap.minWidth,710,170,myMainMap.maxWidth,myMainMap.maxWidth,"mapZoomSlider","dimgray",2,10,"sliderSymbol","myRefMapDragger.resizeDragger",true);
+			//set constraints to draggable rect in reference map
+			myRefMapDragger = new dragObj("dragRectForRefMap","referenceMap","myDragCross",4750,true,"coordX","coordY",myMainMap);
+			loadProjectSpecific();
+		}
+		function loadProjectSpecific() {
+			//adopt width and height of map extent
+			document.getElementById("myScaleTextW").firstChild.nodeValue = formatNumberString(myMainMap.curWidth.toFixed(myMainMap.nrDecimals)) + myMainMap.units;
+			document.getElementById("myScaleTextH").firstChild.nodeValue = formatNumberString(myMainMap.curHeight.toFixed(myMainMap.nrDecimals)) + myMainMap.units;
+			
+			document.getElementById("spipCartoObj").setAttributeNS(null,"stroke-width",myMainMap.curWidth*0.005);	
+			
+			<BOUCLE__OBJ(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}{par num titre}>
+		 	<BOUCLE__M(MOTS){id_carto_objet}{par num titre}{doublons a}>
+			document.getElementById("spipCarto_#ID_MOT").setAttributeNS(null,"stroke-width",myMainMap.curWidth*0.005);	
+			</BOUCLE__M>
+			</BOUCLE__OBJ>
+
+			// Pour charger un claque WMS ... 
+			<BOUCLE_WMS_evt(SITES){titre_mot="WMS"}>
+			getWMS(#ID_SYNDIC);
+			</BOUCLE_WMS_evt>
+		}
+		
+		function openWin (id) {
+			window.open(url, "info");
+		}
+
+
+		//load usgs/terraserver orthoimage
+		//you have to use full pixel values, otherwise an error appears
+		function getWMS(id) {
+			// For each WMS server - loop on WMS website with keyword WMS
+			switch (id){
+			<BOUCLE_WMS_get(SITES){titre_mot="WMS"}>
+				case #ID_SYNDIC:
+					url = "#URL_SITE";
+				break;
+			</BOUCLE_WMS_get>
+				default : return;
+			}	
+			
+			var myRasterLayer = document.getElementById(id);
+			
+			if (myRasterLayer.childNodes.length > 0) {
+				var oldImage = document.getElementById(id+"Image");
+				myRasterLayer.removeChild(oldImage);
+			}
+			
+			if (document.getElementById(id).getAttributeNS(null,"visibility") == "visible") {
+				var myRasterImage = document.createElementNS(svgNS,"image");
+				myRasterImage.setAttributeNS(null,"x",myMainMap.curxOrig);
+				myRasterImage.setAttributeNS(null,"y",myMainMap.curyOrig);
+				myRasterImage.setAttributeNS(null,"width",myMainMap.curWidth);
+				myRasterImage.setAttributeNS(null,"height",myMainMap.curHeight);
+				myRasterImage.setAttributeNS(null,"id",id+"Image");
+				//var myImageUrl = "http://www.sandre.fr/geo/wmszonage?Layers=CIBA&SRS=EPSG:27572&";
+				var myImageUrl = url;
+
+				// WMS are supposed to be Version 1.1.1, returning PNG file. No styles applied
+				myImageUrl += "&transparent=true&version=1.1.1&request=GetMap&service=WMS&BBOX=" + parseInt(myMainMap.curxOrig) + "," + (parseInt(myMainMap.curyOrig + myMainMap.curHeight) * -1);
+				myImageUrl += "," + parseInt(myMainMap.curxOrig + myMainMap.curWidth) + "," + (parseInt(myMainMap.curyOrig) * -1);
+				myImageUrl += "&width=" + myMainMap.pixWidth + "&height=" + myMainMap.pixHeight + "&format=image/png&styles=";
+				myImageUrl  = myImageUrl.replace('&amp;',"&");
+				myRasterImage.setAttributeNS(xlinkNS,"xlink:href",myImageUrl);
+				myRasterLayer.appendChild(myRasterImage);
+			}
+		}		
+
+
+]]></script>
+	<defs>
+	<!-- section for CSS stylesheet definitions -->
+	<!-- you may globally adjust your styles here -->
+	<style type="text/css"><![CDATA[
+	.allText {font-family:Arial;fill:dimgray;}
+	.titleText {font-size:22;font-weight:bold;}
+	.subTitleText {font-size:18;font-weight:bold;}
+	.normalText {font-size:15;}
+	.smallText {font-size:12;}
+	.boldText {font-weight:bold;}
+	.centerText {text-anchor:middle;}
+	.dragRect {fill:lightskyblue;stroke:none;opacity:0.4;}
+	.dragSymbol {stroke:darkblue;}
+	.normalLinestyle {fill:none;stroke:dimgray;}
+	.background {fill:aliceblue;stroke:none;}
+	.darkRectstyle {fill:dimgray;stroke:none;}
+	.nofill {fill:none;}
+	.whitefill {fill:white;}
+	.normalfillcol {fill:dimgray;}
+	.normallinecol {stroke:dimgray;}
+	.nostroke {stroke:none;}
+	.verythinline {stroke-width:1;}
+	.thinline {stroke-width:1.5;}
+	.normalline {stroke-width:2;}
+	.mediumThickLine {stroke-width:5;}
+  ]]></style>
+
+		<INCLURE(carto_style.css)>
+		<INCLURE(carto_symbol.xml)>
+
+
+		<!-- Symbols for checkboxes -->
+		<symbol id="checkBoxRect" overflow="visible">
+			<rect x="-6" y="-6" width="12" height="12" class="whitefill normallinecol thinline"/>
+		</symbol>
+		<symbol id="checkBoxCross" overflow="visible" class="normallinecol nofill verythinline" pointer-events="none">
+			<line x1="-5" y1="-5" x2="5" y2="5"/>
+			<line x1="-5" y1="5" x2="5" y2="-5"/>
+		</symbol>
+		<!-- Symbols for Zoom Magnifyer glasses -->
+		<symbol id="magnifyer" overflow="visible" class="whitefill normalline normallinecol">
+			<line x1="0" y1="0" x2="-8" y2="20"/>
+			<circle r="8"/>
+		</symbol>
+		<symbol id="magnifyerZoomOut" overflow="visible" class="whitefill normalline normallinecol">
+			<use xlink:href="#magnifyer"/>
+			<line x1="-4" y1="0" x2="4" y2="0" style="stroke:dimgray;stroke-width:2;"/>
+		</symbol>
+		<symbol id="magnifyerZoomIn" overflow="visible">
+			<use xlink:href="#magnifyer"/>
+			<line x1="-4" y1="0" x2="4" y2="0" class="whitefill normalline normallinecol"/>
+			<line x1="0" y1="-4" x2="0" y2="4" class="whitefill normalline normallinecol"/>
+		</symbol>
+		<symbol id="magnifyerFull" overflow="visible">
+			<use xlink:href="#magnifyer"/>
+			<text y="4.5" class="allText smallText centerText boldText" pointer-events="none">F</text>
+		</symbol>
+		<symbol id="magnifyerManual" overflow="visible">
+			<line x1="0" y1="0" x2="-8" y2="20" class="whitefill normalline normallinecol"/>
+			<circle r="8" class="whitefill normalline normallinecol"/>
+			<rect x="-3" y="-3" width="6" height="6" class="nofill thinline normallinecol" stroke-dasharray="1.5,1.5"/>
+		</symbol>
+		<symbol id="magnifyerZoomInWo" overflow="visible" class="whitefill normalline normallinecol">
+			<circle r="8"/>
+			<line x1="-4" y1="0" x2="4" y2="0"/>
+			<line x1="0" y1="-4" x2="0" y2="4"/>
+		</symbol>
+		<symbol id="magnifyerZoomOutWo" overflow="visible" class="whitefill normalline normallinecol">
+			<circle r="8"/>
+			<line x1="-4" y1="0" x2="4" y2="0" style="stroke:dimgray;stroke-width:2;"/>
+		</symbol>
+		<!-- hand symbol for panning -->
+		<symbol id="symbPan" overflow="visible">
+			<circle r="9" class="normallinecol normalline whitefill"/>
+			<path class="normallinecol verythinline nofill" d="M-2 6 C -2.2 2.5 -8.0 -0 -5.7 -1.9 C -4.3 -2.5 -3.3 -0.5 -2.5 0.7 C -3.2 -2.1 -5.5 -5.2 -3.6 -5.8 C -2.1 -6.3 -1.6 -3.6 -1.1 -1.9 C -0.9 -4.2 -1.6 -6.4 -0.2 -6.6 C 1.4 -6.8 0.9 -3 1.1 -1.9 C 1.5 -3.5 1.2 -6.1 2.5 -6.1 C 3.9 -6.1 3.5 -3.2 3.6 -1.6 C 4 -2.9 4.1 -4.3 5.3 -4.4 C 7.3 -3.5 4 2.2 3 6z"/>
+		</symbol>
+		<!-- Symbol for Pan Arrows -->
+		<symbol id="symbArrow" overflow="visible" class="nofill verythinline normallinecol" pointer-events="none">
+			<polyline points="-3,-5 3,-5 3,1 5,1 0,5 -5,1 -3,1 -3,-5"/>
+		</symbol>
+		<!-- Symbol for Recentering Map -->
+		<symbol id="symbRecenter" overflow="visible">
+			<circle r="9" class="normallinecol normalline whitefill"/>
+			<circle class="normalfillcol nostroke" cx="0" cy="0" r="1" pointer-events="none"/>
+			<g class="normallinecol thinline nofill" pointer-events="none">
+				<line x1="-7" y1="-7" x2="-3" y2="-3"/>
+				<line x1="7" y1="7" x2="3" y2="3"/>
+				<line x1="-7" y1="7" x2="-3" y2="3"/>
+				<line x1="7" y1="-7" x2="3" y2="-3"/>
+			</g>
+		</symbol>
+		<!-- Symbol for Slider -->
+		<symbol id="sliderSymbol" overflow="visible" class="nofill mediumThickLine normallinecol" pointer-events="none">
+			<line x1="0" y1="-5" x2="0" y2="5"/>
+		</symbol>
+		<!-- Symbol for Dragging if zoomed in far -->
+		<symbol id="myDragCrossSymbol" overflow="visible" stroke-width="2000" class="nofill dragSymbol" pointer-events="none">
+			<line x1="-7000" y1="0" x2="-2500" y2="0"/>
+			<line x1="7000" y1="0" x2="2500" y2="0"/>
+			<line x1="0" y1="-3300" x2="0" y2="-7800"/>
+			<line x1="0" y1="3300" x2="0" y2="7800"/>
+		</symbol>
+		<!-- Marker for Extent-Arrows -->
+		<marker id="myStartArrow" overflow="visible" orient="auto">
+			<polyline class="nostroke normalfillcol" points="-0.5,0 8,-2 8,2"/>
+		</marker>
+		<marker id="myEndArrow" overflow="visible" orient="auto">
+			<polyline class="nostroke normalfillcol" points="0.5,0 -8,-2 -8,2"/>
+		</marker>
+		<linearGradient id="MyGradient" gradientTransform="rotate(45)"> 
+			<stop offset="0%" style="stop-color:white"/> 
+			<stop offset="30%" style="stop-color:red"/> 
+			<stop offset="100%" style="stop-color:black"/> 
+		</linearGradient> 
+
+
+	</defs>
+	<rect x="-500" y="-500" width="3000" height="[(#CALLAGE|getPropMapHeight{3000})]" stroke="none" class="background" />
+	
+	
+	<!-- Main Map Frame -->
+	<svg id="mainMap" x="0" y="15" viewBox="[(#CALLAGE|worldfileLRX)] [(#CALLAGE|worldfileULY)] [(#CALLAGE|worldfileWidth)] [(#CALLAGE|worldfileHeight)]" width="553" height="[(#CALLAGE|getPropMapHeight{553})]">
+		<!-- this group is necessary for manual panning, it temporarily gets a translate transformation which is later removed on mouseup -->
+		<g id="mainMapGroup" transform="translate(0,0)">
+			<!-- within this group you should place all map layers, usually, if you have more than one element in a map layer, you would use a group instead of a single element, as in this example -->
+			<!-- Background image from spip-carto map -->
+			<image id="ShadedRelief" x="[(#CALLAGE|worldfileLRX)]" y="[(#CALLAGE|worldfileULY)]" width="[(#CALLAGE|worldfileWidth)]px" height="[(#CALLAGE|worldfileHeight)]px" xlink:href="#URL_SITE_SPIP/spip_carto.php?fond_carte=[(#URL_CARTE|base64_encode)][&amp;scale=(#ENV{scale})][&amp;x=(#ENV{x})][&amp;y=(#ENV{y})]" />
+			
+			<!-- Background WMS -->
+			// For each WMS server - loop on WMS website with keyword WMS
+			<BOUCLE_WMS_layer(SITES){titre_mot="WMS"}>
+				<g id="#ID_SYNDIC" visibility="hidden" />
+			</BOUCLE_WMS_layer>
+		
+			<BOUCLE_OBJ(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}{par num titre}>
+			 <BOUCLE_M(MOTS){id_carto_objet}{par num titre}{doublons b}>
+	 		 <!-- #DESCRIPTIF -->
+				<g id="spipCarto_#ID_MOT">
+				<BOUCLE_OBJECT(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}{id_mot}{doublons obj}>
+					<a target='new' xlink:href='[(#URL_OBJET)]'><[(#GEOMETRIE|wkt2shape{SVGGEO})] [(#GEOMETRIE|wkt2coords{SVGGEO,#CALLAGE,#URL_CARTE,#_M:DESCRIPTIF})] onmouseover="statusChange('#TEXTE');" class="[(#GEOMETRIE|wkt2shape{SVGGEO})[(#_M:DESCRIPTIF)]]"/></a>
+				</BOUCLE_OBJECT>
+				</g>
+			 </BOUCLE_M>
+			</BOUCLE_OBJ>
+			<g id="spipCartoObj">
+			
+				<!-- Couche d'objets SPIP -->
+				<B_objets>
+				<BOUCLE_objets(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}{doublons obj}>
+				<a target='new' xlink:href='[(#URL_OBJET)]'><[(#GEOMETRIE|wkt2shape{SVG})] [(#GEOMETRIE|wkt2coords{SVG,#CALLAGE,#URL_CARTE})] onmouseover="statusChange('#TEXTE');" class="[(#GEOMETRIE|wkt2shape{SVG})]"/></a>
+				</BOUCLE_objets>
+				</B_objets>	
+			</g>
+		</g>
+	</svg>
+	
+	
+	
+	<!-- this group holds navigation, title and if you like, legend information -->
+	<g>
+		<!-- your map title -->
+		<text class="allText titleText" x="580" y="30">#TITRE</text>
+		<!-- coordinate display -->
+		<g class="allText normalText">
+			<text id="coordX" x="730" y="145">X:</text>
+			<text id="coordY" x="730" y="160">Y:</text>
+		</g>
+		<!-- display width and height of map extent -->
+		<g>
+			<!-- vertical line, displays current height of map extent -->
+			<line class="normalLinestyle" style="stroke-width:1.5;marker-start:url(#myStartArrow);marker-end:url(#myEndArrow);" x1="561" y1="15" x2="561" y2="[(#CALLAGE|getPropMapHeight{575})]"/>
+			<rect class="background" x="555" y="[(#CALLAGE|getPropMapHeight{230})]" width="12" height="100"/>
+			<text id="myScaleTextH" class="allText normalText centerText" transform="translate(556,[(#CALLAGE|getPropMapHeight{280})]),rotate(90)">81,000 m</text>
+			<!-- horizontal line, displays current width of map extent -->
+			<line class="normalLinestyle" style="stroke-width:1.5;marker-start:url(#myStartArrow);marker-end:url(#myEndArrow);" x1="0" y1="[(#CALLAGE|getPropMapHeight{583})]" x2="553.1" y2="[(#CALLAGE|getPropMapHeight{583})]"/>
+			<rect class="background" x="236" y="[(#CALLAGE|getPropMapHeight{580})]" width="100" height="12"/>
+			<text id="myScaleTextW" class="allText normalText centerText" transform="translate(277,[(#CALLAGE|getPropMapHeight{590})])">64,000 m</text>
+			<!-- small rectangle in lower right corner, onclick displays current map extent in real world coordinates -->
+			<rect class="darkRectstyle" x="558.5" y="[(#CALLAGE|getPropMapHeight{580})]" width="5" height="5" onclick="showExtent()" />
+		</g>
+		<!-- control map layer visibility with checkBoxes -->
+		<g transform="translate(590 225)">
+			<text class="allText subTitleText" x="-10" y="0">Calques :</text>
+			
+			<!-- checkbox -->
+			<BOUCLE_OBJ2(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}{par num titre}>
+			 <BOUCLE_M2(MOTS){id_carto_objet}{par num titre}{doublons c}>
+				<g transform="translate(0 [(#ID_MOT|ajoute{20})])">
+					<use id="checkBoxspipCarto_#ID_MOT" xlink:href="#checkBoxRect" onclick="checkBoxScript(evt,'spipCarto_#ID_MOT');"/>
+					<use id="checkCrossspipCarto_#ID_MOT" xlink:href="#checkBoxCross" visibility="visible"/>
+				</g>
+				<g class="allText normalText">
+					<text x="12" y="[(#ID_MOT|plus{6})]">#TITRE</text>';
+				</g>
+			 </BOUCLE_M2>
+			</BOUCLE_OBJ2>
+
+
+			
+			<BOUCLE_WMS_guick(SITES){titre_mot="WMS"}{par nom_site}>
+				<g transform="translate(0 [(#COMPTEUR_BOUCLE|ajoute{20})])">
+				<use id="checkBox#ID_SYNDIC" xlink:href="#checkBoxRect" visibility="visible"
+				onclick="checkBoxScript(evt,'#ID_SYNDIC');"/>
+				<use id="checkCross#ID_SYNDIC" xlink:href="#checkBoxCross" 
+				visibility="hidden"/>
+				</g>
+				<g class="allText normalText">
+				<text x="12" y="[(#COMPTEUR_BOUCLE|plus{6})]">[(#NOM_SITE|supprimer_numero)]</text>
+				</g>
+			</BOUCLE_WMS_guick>
+			
+			<!-- first checkbox -->
+			<g transform="translate(0 [(#COMPTEUR_BOUCLE|plus{20})])">
+				<use id="checkBoxspipCartoObj" xlink:href="#checkBoxRect" onclick="checkBoxScript(evt,'spipCartoObj');"/>
+				<use id="checkCrossspipCartoObj" xlink:href="#checkBoxCross" visibility="visible"/>
+			</g>
+			<!-- second checkbox -->
+			<g transform="translate(0 [(#COMPTEUR_BOUCLE|plus{40})])">
+				<use id="checkBoxShadedRelief" xlink:href="#checkBoxRect" onclick="checkBoxScript(evt,'ShadedRelief');"/>
+				<use id="checkCrossShadedRelief" xlink:href="#checkBoxCross" visibility="visible"/>
+			</g>
+			
+			<!-- checkbox text labels -->
+			<g class="allText normalText">
+				<text x="12" y="[(#COMPTEUR_BOUCLE|plus{26})]">Objets cartographiques</text>
+				<text x="12" y="[(#COMPTEUR_BOUCLE|plus{46})]">Image de fond</text>
+						
+			</g>
+			
+			
+			
+		</g>
+		<!-- map impressum and status Bar -->
+		<g text-rendering="optimizeLegibility">
+			<!-- text with this id is required to show help texts -->
+			<text id="statusText" class="allText smallText" x="1" y="[(#CALLAGE|getPropMapHeight{600})]">Info: </text>
+			<text class="allText smallText" x="1" y="[(#CALLAGE|getPropMapHeight{620})]">Auteur: spip-carto, 2004</text>
+			<text class="allText smallText" x="510" y="[(#CALLAGE|getPropMapHeight{620})]">Source: </text>
+		</g>
+	</g>
+	<!-- small reference map, shares the same coordinate system than the main map -->
+	<svg id="referenceMap" x="580" y="45" viewBox="[(#CALLAGE|worldfileLRX)] [(#CALLAGE|worldfileULY)] [(#CALLAGE|worldfileWidth)] [(#CALLAGE|worldfileHeight)]" width="118.52" height="[(#CALLAGE|getPropMapHeight{118.52})]" onmousedown="myRefMapDragger.drag(evt)" onmousemove="myRefMapDragger.drag(evt)" onmouseup="myRefMapDragger.drag(evt)" onmouseout="myRefMapDragger.drag(evt)">
+		<image id="ShadedRelief" x="[(#CALLAGE|worldfileLRX)]" y="[(#CALLAGE|worldfileULY)]" width="[(#CALLAGE|worldfileWidth)]" height="[(#CALLAGE|worldfileHeight)]" xlink:href="#URL_SITE_SPIP/spip_carto.php?fond_carte=[(#URL_CARTE|base64_encode)][&amp;scale=(#ENV{scale})][&amp;x=(#ENV{x})][&amp;y=(#ENV{y})]" />
+		<path pointer-events="none" style="fill:none;stroke:salmon;stroke-width:1000" d="M250528.8 -4218899.3l2380.5 -1305.3l1593.4 928.3l1326.1 -752.7l4218.1 -70.2l4072.3 -3965.5l5552.8 -1556.9l313 -1368.6l3042.8 -2535.6l1098.2 945.4l124.7 2135.2l2579.4 431.2l-22.8 1238l3516.2 779.5l-66.6 -1725.9l1001.7 -419l625.5 2735.2l1659.5 476.6l-330.2 1248.2l1330.8 747.9l-583.6 1341.1l1261.8 -103.1l285.3 729.8l1411.9 -2540.5l552.1 995.2l2360 129.9l1432.7 1622l2981.7 1123.5l2940.7 4333.1l-270.6 1128.2l792.4 1201.5l-1726.7 5827.8l785 2018.2l2160 2274.1l2083.2 772.6l-29.7 1587l2579.8 273.2l2903.1 2611.6l-1211.6 1736.7l-304 2424.3l1806.8 664.5l-952.3 432.8l228.8 1126.8l-1164.6 1204.8l1028.8 823.8l134.5 1768.4l-3601.7 2856.7l-1067.8 2250.5l-1294 1012.3l939.2 1643.7l-426.7 1493.5l-1730.1 1237.5l-1330.5 3254.3l-3443.5 3823l-1377.3 499.3l-1732.6 -647.3l-2658.4 9242.1l-2580.3 -63.8l-1626.7 1640.8l-11817 92.4l-111.4 4297.6l-745.7 11.6l-6670.9 -270.2l-1972.9 -5940.7l-1565.6 -523.5l821.7 -7022.1l-765 -27.8l26.9 -795.4l742.7 19.8l74.1 -825.8l-2396.2 -52l748.7 -3186.1l-3846.4 -78l60.9 -5551.1l-1599 -53.4l110.1 -3306.4l-6584.6 -269.6l-573.6 -4908.1l-895.7 -69.6l-3.4 -3096.9l2384.7 -772.2l99.6 -1566.5l1598.9 3l268.3 -6583.2l-5123.5 -132.5l183.9 -10111.9l1168.6 -4214.1l-716.7 -975.6l1461.4 -2002.8l-593.4 -565.8l2659.9 -3238.9z" />
+		<!-- rectangle that represents map extent -->
+		<rect id="dragRectForRefMap" class="dragRect" x="[(#CALLAGE|worldfileLRX)]" y="[(#CALLAGE|worldfileULY)]" width="[(#CALLAGE|worldfileWidth)]" height="[(#CALLAGE|worldfileHeight)]" pointer-events="none"/>
+		<!-- if zoomed in very far, we display a cross-symbol here to indicate the map position in the reference map -->
+		<use id="myDragCross" x="[(#CALLAGE|worldfileLRX)]" y="-[(#CALLAGE|worldfileHeight)]" xlink:href="#myDragCrossSymbol" visibility="hidden" />
+	</svg>
+	<!-- this group holds symbol instances for navigation tools -->
+	<g>
+		<!-- empty group where zoomSlider is later appended -->
+		<g id="mapZoomSlider"/>
+		<text class="allText subTitleText" x="735" y="55">Localisation</text>
+		<!-- button for zoom-in, above slider -->
+		<use x="710" y="55" xlink:href="#magnifyerZoomInWo" onclick="zoomIt(evt,'in');" onmouseover="magnify(evt,1.2,'in');" onmouseout="magnify(evt,1,'in');"/>
+		<!-- button for zoom-out, below slider -->
+		<use x="710" y="185" xlink:href="#magnifyerZoomOutWo" onclick="zoomIt(evt,'out');" onmouseover="magnify(evt,1.2,'out');" onmouseout="magnify(evt,1,'out');"/>
+		<!-- button for full view (f) -->
+		<use x="740" y="85" xlink:href="#magnifyerFull" onclick="zoomIt(evt,'full');" onmouseover="magnify(evt,1.2,'full');" onmouseout="magnify(evt,1,'full');"/>
+		<!-- button for manual zoom (rectangle) -->
+		<use x="770" y="85" xlink:href="#magnifyerManual" onclick="myMainMap.zoomManual(evt)" onmouseover="magnify(evt,1.2,'manual');" onmouseout="magnify(evt,1,'manual');"/>
+		<!-- button for manual pan -->
+		<use x="800" y="85" xlink:href="#symbPan" onclick="myMainMap.panManual(evt)" onmouseover="magnify(evt,1.2,'panmanual');" onmouseout="magnify(evt,1,'panmanual');"/>
+		<!-- button for redefining map center -->
+		<use xlink:href="#symbRecenter" x="830" y="85" onmouseover="magnify(evt,1.2,'recenter')" onmouseout="magnify(evt,1,'recenter')" onclick="myMainMap.recenter(evt)"/>
+	</g>
+</svg>
+</BOUCLE_carte>
+

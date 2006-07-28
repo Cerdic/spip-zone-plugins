@@ -66,10 +66,12 @@ function exec_cartes() {
 	
 	//TODO !!!
 	afficher_cartes(_T("spipcarto:cartes_toutes"),
-		"SELECT cartes.*, COUNT(id_carto_objet) AS objets ".
-		"FROM spip_carto_cartes AS cartes LEFT JOIN spip_carto_objets AS objets ".
-		"ON (cartes.id_carto_carte=objets.id_carto_carte) ".
-		"GROUP BY cartes.id_carto_carte ORDER BY cartes.titre");
+			array(
+		"SELECT"=>"cartes.*, COUNT(id_carto_objet) AS objets ",
+		"FROM"=>"spip_carto_cartes AS cartes" ,
+		"JOIN"=>"spip_carto_objets AS objets ON (cartes.id_carto_carte=objets.id_carto_carte) ",
+		"GROUP BY"=>"cartes.id_carto_carte",
+		"ORDER BY"=>"cartes.titre"));
 	//TODO : gerer un statut par objet
 	//ajouter cette clause à la jointure :
 	//// AND objets.statut='valide'
