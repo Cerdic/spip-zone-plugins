@@ -45,8 +45,7 @@ debut_page("Spip listes", "redacteurs", "spiplistes");
 
 // spip-listes bien installé ?
 if (!function_exists(spip_listes_onglets)){
-    echo("<h3>erreur: spip-listes est mal installé !</h3>"); 
-    echo("<p>Vérifier les étapes d'installation,notamment si vous avez bien renommé <i>mes_options.txt</i> en <i>mes_options.php</i>.</p>");    
+    echo("<h3>erreur: spip-listes est mal installé !</h3>");    
     fin_page();
 	  exit;
 }
