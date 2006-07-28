@@ -160,9 +160,8 @@ function afficher_cartes($titre_table, $requete, $icone = '') {
 			//articles liés
 			afficher_articles(_T("spipcarto:carte_articles_use"),
 				array(
-					"FROM"=>"spip_carto_cartes_articles AS lien",
-					"WHERE"=>"lien.id_article=articles.id_article".
-						"AND id_carto_carte=$id_carte AND statut!='poubelle'",
+					"FROM"=>"spip_articles AS articles, spip_carto_cartes_articles AS lien",
+					"WHERE"=>"lien.id_article=articles.id_article AND id_carto_carte=$id_carte AND statut!='poubelle'",
 					"ORDER BY"=>"titre"));
 			
 			echo "</a></td></tr>";

@@ -40,6 +40,8 @@ or check http://www.gnu.org/copyleft/gpl.html
 // Ce fichier ne sera execute qu'une fois
 if (defined("_ECRIRE_INC_CARTE")) return;
 define("_ECRIRE_INC_CARTE", "1");
+$GLOBALS['rep_cartes']="spipcarto";
+$GLOBALS['sq_cartes']=array('map','logo','lien','svg','svgx','geosvgwms');
 
 function worldfileWidth($callage){	
 	$tabcallage=worldfile2array($callage);

@@ -47,9 +47,8 @@ define('_DIR_PLUGIN_SPIPCARTO',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS).
 //------------------------la fonction qui fait tout-----------------------------------
 
 function exec_cartes_edit() {
-  include(_DIR_PLUGIN_SPIPCARTO."/inc/carto.php");
-//include_spip ("inc/carto");
-include_spip ("spipcarto_fonctions");
+include(_DIR_PLUGIN_SPIPCARTO."/spipcarto_fonctions.php");
+include_spip ("inc/carto");
 include_spip ("inc/carto_import");
 include_spip ("inc/presentation");
 include_spip ("inc/documents");
@@ -236,6 +235,7 @@ echo "<br><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_carte</b></
 if ($url_carte && ($new!="oui")) {
 	echo "<br><font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('spipcarto:carte_apercu')."</b></font>\n";
 	$sq_cartes=$GLOBALS['sq_cartes'];
+
 	if (!is_array($sq_cartes)) $sq_cartes=array('map');
 	foreach ($sq_cartes as $sq_carte)
 		icone_horizontale( _T('spipcarto:carte_'.$sq_carte), "../carto.php?id_carto_carte=".$id_carte."&fond=".$sq_carte."&var_mode=recalcul", "racine-24.gif", "rien.gif");

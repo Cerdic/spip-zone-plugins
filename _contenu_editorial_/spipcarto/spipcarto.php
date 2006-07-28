@@ -118,8 +118,10 @@ function spipcarto_post_propre($texte) {
 			else {
 				$lecontexte['id_carto_carte']=$id_carte;
 				$lecontexte['args']=$r[5];
-				if ($r[3]) $lecontexte['fond']="spipcarto/carto_".$r[3];
-				else $lecontexte['fond']="spipcarto/carto";
+				if ($GLOBALS['rep_cartes']) $rep_fond=$GLOBALS['rep_cartes'];
+				else $rep_fond="spipcarto";
+				if ($r[3]) $lecontexte['fond']=$rep_fond."/carto_".$r[3];
+				else $lecontexte['fond']=$rep_fond."/carto";
 				//$lecontexte['fond']="bloc.php3";
 				$remplace=inclure_page($lecontexte['fond'],$lecontexte);
 	/*			$lechemin=generer_nom_fichier_cache($lecontexte, $lecontexte['fond']);

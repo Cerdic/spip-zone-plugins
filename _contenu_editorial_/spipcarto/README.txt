@@ -1,9 +1,15 @@
-Auteur: Stephane LAURENT (aka Bill) bill@adequates.com
+Auteur: Stephane LAURENT (Bill) bill@adequates.com
 Licence: GPL
 
 Description:
 
-[fr] ... 
+[fr]
+version plugin de spipcarto
+Installation:
+- copier le repertoire dans le repertoire plugin de spip
+- deplacer les fichier du repertoire /racine_spip à la racine du site
+- activer le plugin
+- configurer le plugin (installation en base et metas)
 
 
 [en] ... 
