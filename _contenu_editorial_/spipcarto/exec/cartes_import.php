@@ -37,7 +37,7 @@ or check http://www.gnu.org/copyleft/gpl.html
 *
 \***************************************************************************/
 function exec_cartes_import() {
-  include(_DIR_PLUGIN_SPIPCARTO."/inc/carto.php");
+include_spip ("inc/carto");
 //include_spip ("inc/carto_fonctions");
 include_spip ("inc/carto_import");
 include_spip ("inc/presentation");
@@ -56,13 +56,19 @@ else
 //meme si il faut le faire ...
 //include_ecrire("inc_config.php3");
 
+
+$id_carte = intval($_REQUEST['id_carte']);
+$new =stripslashes($_REQUEST['new']);
+$retour=stripslashes($_REQUEST['retour']);
+$step=intval($_REQUEST['step']);
+$typeImport=stripslashes($_REQUEST['typeImport']);
+			
 $flag_editable=carte_editable($id_carte);
 $id_carte = intval($id_carte);
 $flag_mots = lire_meta("carto_mots");
 //$flag_mots = "oui";
 $nouveau=false;
 $dir = 'upload';						// Répertoire où chercher les fichiers
-			
 
 
 if ($id_carte) {
@@ -82,57 +88,15 @@ if ($id_carte) {
 		
 
 
-$carte_link = new Link("carte_edit.php3");
-$carte_link->addVar('id_carte', $id_carte);
-if ($retour) $carte_link->addVar('retour', $retour);
+$param="id_carte=".$id_carte;
+if ($retour) $param.='&retour='.$retour;
+$carte_link = generer_url_ecrire("cartes_edit",$param);
+$carte_importlink = generer_url_ecrire("carte_import",$param);
 
-$carte_supplink = new Link("carte_edit.php3");
-$carte_supplink->addVar('id_carte', $id_carte);
-$carte_supplink->addVar('supp_carte', $id_carte);
-if ($retour) $carte_supplink->addVar('retour', $retour);
-
-$carte_importlink = new Link("carte_import.php3");
-$carte_importlink->addVar('id_carte', $id_carte);
-if ($retour) $carte_importlink->addVar('retour', $retour);
+$param.="supp_carte=".$id_carte;
+$carte_supplink = generer_url_ecrire("cartes_edit",$param);
 
 
-//
-// Modifications des objets de la carte
-//
-
-if ($id_carte && $flag_editable) {
-
-	// Ajout d'un objet
-	if ($selection_type) {
-		$geometrie=coords2wkt($selection_type,$selection_coords, worldfile2array($row['callage'])); // Si pas de fonction de zoom le callage correspond bien à la valeur. Sinon avec zoom, il faut passer les coordonnées géographiques de la vue en cours ....
-		$objet_titre = _T("spipcarto:objet_nouvel");
-		$url_objet = "#";
-		//TODO : passer tout ca en spip_abstract ...
-		spip_query("INSERT INTO spip_carto_objets (id_carto_carte,titre,geometrie,url_objet) VALUES (".$id_carte.",'".addslashes($objet_titre)."','".$geometrie."','".$url_objet."')");
-		$id_objet = spip_insert_id();
-		$objet_visible=$id_objet;
-		$nouveau=true;
-	}
-	// Modif d'un objet
-	if ($modif_objet) {
-		//TODO : passer tout ca en spip_abstract ...
-		$query = "UPDATE spip_carto_objets SET ".
-			//"id_carto_carte=".intval($id_carte).", ".
-			"titre='".addslashes($objet_titre)."', ".
-			"texte='".addslashes($objet_texte)."', ".
-			"url_objet='".$url_objet."', ".
-			"url_logo='".$url_logo."', ".
-			"geometrie='".addslashes($geometrie)."' ".
-			"WHERE id_carto_objet=$modif_objet";
-			$result = spip_query($query);
-			$objet_visible=$modif_objet;
-	}
-	if ($id_objet) {
-			$objet_visible=$id_objet;
-	}
-	
-
-}
 
 
 //

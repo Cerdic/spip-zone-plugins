@@ -84,7 +84,8 @@ $url_objet=stripslashes($_REQUEST['url_objet']);
 $url_logo=stripslashes($_REQUEST['url_logo']);
 $geometrie=stripslashes($_REQUEST['geometrie']);
 
-$retour=$_REQUEST['retour'];
+$retour=stripslashes($_REQUEST['retour']);
+//$retour=$_REQUEST['retour'];
 
 $flag_editable=carte_editable($id_carte);
 $flag_mots = lire_meta("carto_mots");
@@ -215,7 +216,7 @@ $param="id_carte=".$id_carte;
 if ($retour) $param.='&retour='.$retour;
 $carte_link = generer_url_ecrire("cartes_edit",$param);
 $carte_supplink = generer_url_ecrire("cartes_edit",$param.'&supp_carte='.$id_carte);
-$carte_importlink = generer_url_ecrire("cartes_import.php",$param);
+$carte_importlink = generer_url_ecrire("cartes_import",$param);
 $carte_suppallobjlink = generer_url_ecrire("cartes_edit",$param.'&supp_objet_all=ok');
 
 //

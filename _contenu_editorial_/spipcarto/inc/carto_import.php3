@@ -60,7 +60,7 @@ function avertissement_carto_import() {
 // Repris de inc_document avec ajout d'un filtre sur les extensions 
 
 function texte_upload_file($dir, $inclus = '', $extw = '') {
-	$fichiers = fichiers_upload($dir);
+	$fichiers = preg_files($dir);
 	$exts = array();
 
 	while (list(, $f) = each($fichiers)) {
