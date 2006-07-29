@@ -280,7 +280,7 @@ $requete_listes = 'SELECT articles.id_article, articles.titre, articles.statut, 
 								ORDER BY date DESC';
 			$resultat_total = spip_query($requete_total);
 			$total = spip_num_rows($resultat_total);
-			$en_liste.= lettres_afficher_pagination('lettres', '', $total, $position, $nom_position);
+			$en_liste.= spiplistes_afficher_pagination('lettres', '', $total, $position, $nom_position);
 			$en_liste.= "</div>\n";
 			$en_liste.= "<br />\n";
 		}
@@ -300,7 +300,7 @@ $requete_listes = 'SELECT articles.id_article, articles.titre, articles.statut, 
 	 * @param int position
 	 * @author Pierre Basson
 	 **/
-	function lettres_afficher_pagination($fond, $arguments, $total, $position, $nom) {
+	function spiplistes_afficher_pagination($fond, $arguments, $total, $position, $nom) {
 		global $pas;
 		$pagination = '';
 		$i = 0;
