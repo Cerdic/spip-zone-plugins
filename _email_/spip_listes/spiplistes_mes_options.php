@@ -12,12 +12,12 @@ $champs_extra = true;
 if (!is_array($GLOBALS['champs_extra'])) $GLOBALS['champs_extra'] = Array ();
 
 	$GLOBALS['champs_extra']['auteurs']['abo'] = "radio|brut|Format|Html,Texte,D&eacute;sabonnement|html,texte,non" ;
-	$GLOBALS['champs_extra']['articles']['squelette'] = 'text|propre|Patron' ;			
+	//$GLOBALS['champs_extra']['articles']['squelette'] = 'text|propre|Patron' ;			
 
 if (!is_array($GLOBALS['champs_extra_proposes'])) $GLOBALS['champs_extra_proposes'] = Array ();		
 		
 	$GLOBALS['champs_extra_proposes']['auteurs']['tous'] = 'abo' ;
-	$GLOBALS['champs_extra_proposes']['articles']['0'] = 'squelette' ;
+	//$GLOBALS['champs_extra_proposes']['articles']['0'] = 'squelette' ;
 		
 
 //Balises Spip-listes
