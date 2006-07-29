@@ -1,0 +1,21 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Recommander &agrave; un ami
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	[fil@rezo.net->mailto:fil@rezo.net]
+_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Fonction recommander un article &agrave; un ami
+	</description>
+	<prefix> 
+	recommander
+	</prefix>
+</plugin>

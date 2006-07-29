@@ -117,6 +117,7 @@ function recommander($contexte_inclus) {
 function main_recommander() {
 	$erreur ='';
 	include_spip('inc/lang');
+	include_spip('inc/layer');
 	lang_select($GLOBALS['contexte_inclus']['lang']);
 	if (!_request('recommander_env')
 	OR (_request('recommander_cle') <> md5(_SECRET._request('recommander_env')))
@@ -125,15 +126,20 @@ function main_recommander() {
 		$r = $erreur;
 
 		// le formulaire normal
+		$r .=  _T("recommander:recommander");
 		$r .= "<form method='post' action='".self()."'
 		onsubmit=\"ahahform('spip.php', 'recommander');return false;\">";
-		$r .= _T('form_pet_votre_email')." <input type='text' name='recommander_from'
-		value='".htmlspecialchars(_request('recommander_from'))."' />";
-		$r .= "<br />"._L('destinataire :')." <input type='text' name='recommander_to'
-		value='".htmlspecialchars(_request('recommander_to'))."' />";
-		$r .= "<br />"._T('forum_texte')." <input type='text' name='recommander_message'
-		value='".htmlspecialchars(_request('recommander_message'))."' />";
-		$r .= "<input type='submit' name='recommander_email' value='"._T('recommander_message')."' />";
+
+		$r .= "<div><label for='recommander_from'>"._T('form_pet_votre_email')."</label>";
+		$r .= " <input type='text' name='recommander_from'
+		value='".htmlspecialchars(_request('recommander_from'))."' class='formo' /></div>";
+		$r .= "<div><label for='recommander_to'>"._T('recommander:destinataire')."</label>";
+		$r .= " <input type='text' name='recommander_to'
+		value='".htmlspecialchars(_request('recommander_to'))."' class='formo' /></div>";
+		$r .= "<div><label for='recommander_message'>"._T('forum_texte')."</label>";
+		$r .= " <input type='text' name='recommander_message'
+		value='".htmlspecialchars(_request('recommander_message'))."' class='forml' /></div>";
+		$r .= "<div class='spip_bouton'><input type='submit' name='recommander_email' value='"._T('recommander_message')."' /></div>";
 
 		if (!_request('recommander_cle')) {
 			$contexte = base64_encode(serialize($GLOBALS['contexte_inclus']));
@@ -155,7 +161,7 @@ function main_recommander() {
 }
 
 // main()
-echo "<script type='text/javascript' src='squelettes/ahah.js'></script>\n",
+echo "<script type='text/javascript' src='".find_in_path('recommander_ahah.js')."></script>\n",
 	"<div id='recommander' class='formulaire_spip'>\n",
 	"<span></span>\n", # pour l'icone "searching..."
 	main_recommander(),
