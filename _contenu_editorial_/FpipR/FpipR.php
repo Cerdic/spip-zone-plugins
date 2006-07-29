@@ -32,4 +32,12 @@ function FpipR_affiche_milieu($flux) {
   }
 }
 
+function FpipR_affiche_gauche($flux) {
+  //Verifier les droits des auteurs
+  if((($flux['args']['exec'] == 'articles') && ($GLOBALS['meta']["documents_articles"] != 'non')) || (($flux['args']['exec'] == 'naviguer')&& ($GLOBALS['meta']["documents_rubriques"] != 'non'))) {
+	$flux['data'] .= '<a class="thickbox" href="'.generer_url_ecrire('flickr_choix_photos',"type=".$flux['args']['exec'].'&'.(($flux['args']['exec'] == 'articles')?'id_article='.$flux['args']['id_article']:'id_rubrique='.$flux['args']['id_rubrique'])).'">ajouter une photo Flickr</a>';
+  }
+  return $flux;
+}
+
 ?>
