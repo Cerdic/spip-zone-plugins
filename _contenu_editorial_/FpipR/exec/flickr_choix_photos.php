@@ -24,21 +24,23 @@ function exec_flickr_choix_photos() {
 	}
 	$html .= "</ul>\n";
 	$html .= '<button type="submit">'._T('spip:valider')."</button>\n";
-	$html .= '<input type="hidden" name="type" value="'.((_request('type') == 'articles')?'article':'rubrique').'"/>'."\n";
-	$html .= '<input type="hidden" name="id" value="'.((_request('type') == 'articles')?_request('id_article'):_request('id_rubrique')).'"/>'."\n";
+	$html .= '<input type="hidden" name="type" value="'._request('type').'"/>'."\n";
+	$html .= '<input type="hidden" name="id" value="'._request('id').'"/>'."\n";
 
 	include_spip('inc/actions');
-	if(_request('type') == 'articles') {
-	  echo generer_action_auteur('flickr_ajouter_documents',_request('id_article'), generer_url_ecrire('articles','id_article='._request('id_article')),$html);
+	if(_request('type') == 'article') {
+	  echo generer_action_auteur('flickr_ajouter_documents',_request('id'), generer_url_ecrire('articles','id_article='._request('id')),$html);
+	} else if(_request('type') == 'rubrique') {
+	  echo generer_action_auteur('flickr_ajouter_documents',_request('id'), generer_url_ecrire('naviguer','id_rubrique='._request('id')),$html);
 	} else {
-	  echo generer_action_auteur('flickr_ajouter_documents',_request('id_rubrique'), generer_url_ecrire('naviguer','id_rubrique='._request('id_rubrique')),$html);
+	  echo generer_action_auteur('flickr_ajouter_documents',_request('id'), generer_url_ecrire('breves_edit','id_breve='._request('id')),$html);
 	}
 	echo '<hr/>';
 	  
 
 	for($i=1;$i <= $photos->pages;$i++) {
 	  if($i != $page) {
-	  	echo '<a href="'.generer_url_ecrire('flickr_choix_photos',"page=$i&type="._request('type').'&'.((_request('type') == 'articles')?'id_article='._request('id_article'):'id_rubrique='._request('id_rubrique'))).'">';
+	  	echo '<a href="'.generer_url_ecrire('flickr_choix_photos',"page=$i&type="._request('type')."&id="._request('id')).'">';
 	  }
 	  echo $i.'|';
 	  if($i != $page) {
@@ -47,7 +49,7 @@ function exec_flickr_choix_photos() {
 	  
 	}
   } else {
-	echo 'vous devez d\'abord vous authetifier <a href="'.generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur).'">l&agrave;</a>';
+	echo 'vous devez d\'abord vous authentifier <a href="'.generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur).'">l&agrave;</a>';
   }
 }
 
