@@ -118,7 +118,7 @@ fin_boite_info();
 }
 
 /**
-	 * afficher_en_liste
+	 * spiplistes_afficher_en_liste
 	 *
 	 * affiche des listes d'éléments
 	 *
@@ -130,7 +130,7 @@ fin_boite_info();
 	 * @return string la liste des lettres pour le statut demandé
 	 * @author BoOz / Pierre Basson
 	 **/
-	function afficher_en_liste($titre, $image, $element='articles', $statut, $recherche='', $nom_position='position') {
+	function spiplistes_afficher_en_liste($titre, $image, $element='articles', $statut, $recherche='', $nom_position='position') {
 		
 		global $pas, $id_auteur;
 		$position = intval($_GET[$nom_position]);

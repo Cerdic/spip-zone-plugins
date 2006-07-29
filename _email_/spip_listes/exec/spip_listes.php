@@ -102,11 +102,11 @@ if ($detruire_message) {
 
 $messages_vus = '';
 
-afficher_en_liste(_T('spiplistes:aff_encours'),  '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'messages', 'encour', '', 'position') ;
+spiplistes_afficher_en_liste(_T('spiplistes:aff_encours'),  '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'messages', 'encour', '', 'position') ;
 
 
 
-afficher_en_liste(_T('spiplistes:aff_redac'), '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'messages', 'redac', '', 'position') ;
+spiplistes_afficher_en_liste(_T('spiplistes:aff_redac'), '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'messages', 'redac', '', 'position') ;
 
 
 
@@ -200,10 +200,10 @@ fin_cadre_enfonce();
 echo "<br /><br />";
 
 
-afficher_en_liste(_T('spiplistes:messages_auto_envoye'),'../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'messages', 'auto', '', 'position') ;
+spiplistes_afficher_en_liste(_T('spiplistes:messages_auto_envoye'),'../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'messages', 'auto', '', 'position') ;
 
 
-afficher_en_liste(_T('spiplistes:aff_envoye'), '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'messages', 'publie', '', 'position') ;
+spiplistes_afficher_en_liste(_T('spiplistes:aff_envoye'), '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'messages', 'publie', '', 'position') ;
 
 
 

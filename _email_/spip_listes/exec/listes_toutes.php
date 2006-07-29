@@ -127,15 +127,15 @@ echo "<p>";
 // lettres d'infos
 //
 
-afficher_en_liste(_T('spiplistes:listes_internes'), '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'articles', 'inact', '', 'position') ;
+spiplistes_afficher_en_liste(_T('spiplistes:listes_internes'), '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'articles', 'inact', '', 'position') ;
 
 
 
-afficher_en_liste(_T('spiplistes:liste_diff_publiques'), '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'articles', 'liste', '', 'position') ;
+spiplistes_afficher_en_liste(_T('spiplistes:liste_diff_publiques'), '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'articles', 'liste', '', 'position') ;
 
 
 
-afficher_en_liste(_T('spiplistes:listes_poubelle'), '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'articles', 'poublist', '', 'position') ;
+spiplistes_afficher_en_liste(_T('spiplistes:listes_poubelle'), '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'articles', 'poublist', '', 'position') ;
 
 
 // MODE EDIT LISTES FIN --------------------------------------------------------

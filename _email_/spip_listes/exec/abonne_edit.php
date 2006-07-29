@@ -179,7 +179,7 @@ else $aff_art = "'prop','publie'";
 
 }
 
-afficher_en_liste(_T('spiplistes:abonne_listes'), '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'abonnements', '', '', 'position') ;
+spiplistes_afficher_en_liste(_T('spiplistes:abonne_listes'), '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'abonnements', '', '', 'position') ;
 
 
 
