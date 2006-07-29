@@ -57,6 +57,7 @@ function FpipR_affiche_gauche($flux) {
 	  }*/
 	if($acces)
 	  $flux['data'] .= '<a class="thickbox" href="'.generer_url_ecrire('flickr_choix_photos',"type=$type&id=$id").'">ajouter une photo Flickr</a>';
+	  $flux['data'] .= '<a class="thickbox" href="'.generer_url_ecrire('flickr_choix_sets',"type=$type&id=$id").'">ajouter un set de photos Flickr</a>';
   }
   return $flux;
 }

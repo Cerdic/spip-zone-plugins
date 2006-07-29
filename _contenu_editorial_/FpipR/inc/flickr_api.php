@@ -120,12 +120,39 @@ class Photo {
    o	original image, either a jpg, gif or png, depending on source format
   */
   function source($size='') {
-	return "http://static.flickr.com/".$this->server."/".$this->id."_".$this->secret."_$size.".(($size=='o')?$this->originalformat:'jpg');
+	return "http://static.flickr.com/".$this->server."/".$this->id."_".$this->secret.($size?"_$size":'').'.'.(($size=='o')?$this->originalformat:'jpg');
   }
 
   function url() {
 	return "http://www.flickr.com/photos/".$this->owner.'/'.$this->id;
   }
+}
+
+class PhotoSet {
+  var $owner;
+  var $id;
+  var $primary;
+  var $secret;
+  var $server;
+  var $photos;
+  var $title;
+  var $description;
+
+    /*
+   s	small square 75x75
+   t	thumbnail, 100 on longest side
+   m	small, 240 on longest side
+   medium, 500 on longest side
+   b	large, 1024 on longest side (only exists for very large original images)
+  */
+  function logo($size='') {
+	return "http://static.flickr.com/".$this->server."/".$this->primary."_".$this->secret."_$size.jpg";
+  }
+
+  function url() {
+	return "http://www.flickr.com/photos/".$this->owner.'/sets/'.$this->id;
+  }
+
 }
 
 //======================================================================
@@ -185,6 +212,73 @@ function flickr_photos_search(
 	}
   }  
   return $resp;
+}
+
+function flickr_photosets_getList($user_id,$auth_token) {
+  /*<photosets cancreate="1">
+	<photoset id="5" primary="2483" secret="abcdef"
+		server="8" photos="4">
+		<title>Test</title>
+		<description>foo</description>
+	</photoset>
+	<photoset id="4" primary="1234" secret="832659"
+		server="3" photos="12">
+		<title>My Set</title>
+		<description>bar</description>
+	</photoset>
+	</photosets>*/
+
+
+  $photosets =  flickr_check_error(flickr_api_call('flickr.photosets.getList',array('user_id'=>$user_id),$auth_token));
+  $resp = array();
+  if($photosets) {
+
+	$rez = array_keys($photosets);
+	$photosets = $photosets[$rez[0]][0];
+
+	foreach($photosets as $set => $data) {
+	  $new_p = new PhotoSet;
+	  $new_p->owner = $user_id;
+	  foreach(split(' ',$set) as $attr){
+		if(preg_match('#([a-zA-Z_]+)="(.*?)"#',$attr,$matches)) {
+		  $new_p->$matches[1] = $matches[2];
+		}
+	  }
+	  foreach($data[0] as $k => $v) {
+		$new_p->$k = $v[0];
+	  }
+	  $resp[] = $new_p;
+	}
+  }  
+  return $resp;
+}
+
+function flickr_photosets_getPhotos($photoset_id,$extras='',$privacy_filter='',$auth_token) {
+
+  $params = array();
+  $params['photoset_id'] = $photoset_id;
+  if($privacy_filter) $params['privacy_filter'] = $privacy_filter;
+  if($extras) $params['extras'] = "original_format,$extras"; 
+  else $params['extras'] = "original_format";
+
+  $photos =  flickr_check_error(flickr_api_call('flickr.photosets.getPhotos',$params,$auth_token));
+  $resp = array();
+  if($photos) {
+	$rez = array_keys($photos);
+	$photos = array_keys($photos[$rez[0]][0]);
+
+	foreach($photos as $photo) {
+	  $new_p = new Photo;
+	  foreach(split(' ',$photo) as $attr){
+		if(preg_match('#([a-zA-Z_]+)="(.*?)"#',$attr,$matches)) {
+		  $new_p->$matches[1] = $matches[2];
+		}
+	  }
+	  $resp[] = $new_p;
+	}
+  }  
+  return $resp;
+
 }
 
 ?>
