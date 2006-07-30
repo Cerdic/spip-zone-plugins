@@ -9,7 +9,7 @@ function exec_flickr_bookmarklet_photo() {
 
   pipeline('exec_init',array('args'=>array('exec'=>'flickr_bookmarklet_photo'),'data'=>''));
   
-  debut_page('TEST2',
+  debut_page(_T('fpipr:ajouter_une_photo'),
 			 "documents",
 			 'plugin');
 
@@ -29,7 +29,7 @@ function exec_flickr_bookmarklet_photo() {
 </div>
 </div>
 <div style="overflow: hidden;" class="cadre-padding">';
-  gros_titre('Ajouter une photo');
+  gros_titre(_T('fpipr:ajouter_une_photo'));
 
   $id = _request('id');
   $secret = _request('secret');
@@ -38,7 +38,7 @@ function exec_flickr_bookmarklet_photo() {
 
   echo '<div>';
   echo '<img style="float:right;" src="'.$photo_details->source('m').'"/>';
-  echo '<span>Ajoutez la photo "'.$photo_details->title.'" par '.$photo_details->owner_username.'</span>';
+  echo '<span>'._T('fpipr:ajouter_une_photo_info',array('title'=>$photo_details->title,'owner'=>$photo_details->owner_username)).'</span>';
   echo '</div>';
   echo '<br clear="both"/>';
 
@@ -48,10 +48,10 @@ function exec_flickr_bookmarklet_photo() {
 	$rub = '';
 	foreach(array_keys($connect_id_rubrique) as $id_rub) $rub .= 'OR id_rubrique='.$id_rub;
 	$rub = substr($rub,3);
-	$requete = array('WHERE' => "id_auteur='$connect_id_auteur' AND statut='prop'".(($rub)?" AND $rub":''), 'ORDER BY' => "date DESC");
+	$requete = array('WHERE' => "id_auteur='$connect_id_auteur' AND (statut='prop' OR statut='prepa' OR statut='poubelle')".(($rub)?" AND $rub":''), 'ORDER BY' => "date DESC");
   }
 
-  flickr_afficher_articles('Choisir un article',$requete,$id,$secret);
+  flickr_afficher_articles(_T('fpipr:choisir_un_article'),$requete,$id,$secret);
   echo '</div>';
   fin_page();
 }

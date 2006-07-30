@@ -399,9 +399,7 @@ function flickr_photos_getInfo($photo_id,$secret,$auth_token='') {
 //======================================================================
 
 function flickr_bookmarklet_info() {
-	return  '<h3>Bookmarklet</h3><p>Vous pouvez ajouter n\'importe quel photo de Flickr &agrave; vos articles en plaçant ce <a href=\'javascript:var bookmarkletURL="'.$GLOBALS['meta']['adresse_site'].'/ecrire/'.find_in_path('fpipr_bookmarklet.js').'"; var script=document.createElement("script");script.type="text/javascript";script.src=bookmarkletURL;var head=document.getElementsByTagName("head")[0];head.appendChild(script);fpipr_add_photo("'.generer_url_ecrire('flickr_bookmarklet_photo').'")\'>lien</a> dans vos bookmarks.
-</p>
-<p>Quand vous visitez une photo, en cliquant sur ce bookmark, vous arriverez &agrave; une page pour choisir &agrave; quel article l\'ajouter.</p>';
+  return  '<h3>'._T('fpipr:bookmarklet').'</h3>'._T('fpipr:bookmarklet_info',array('url'=>'javascript:var bookmarkletURL="'.$GLOBALS['meta']['adresse_site'].'/ecrire/'.find_in_path('fpipr_bookmarklet.js').'"; var script=document.createElement("script");script.type="text/javascript";script.src=bookmarkletURL;var head=document.getElementsByTagName("head")[0];head.appendChild(script);fpipr_add_photo("'.generer_url_ecrire('flickr_bookmarklet_photo').'")'));
 }
 
 ?>

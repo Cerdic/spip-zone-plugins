@@ -25,7 +25,13 @@ Une nouvelle fen&ecirc;tre sera ouverte, suivez les instructions qui y sont four
 									   'date-taken-desc' => 'Dates de prise de vue, descendantes',
 									   'interestingness-asc' => 'Interestingness, ascendant',
 									   'interestingness-desc' => 'Interestingness, descendant',
-									   'relevance' => 'Pertinence'
+									   'relevance' => 'Pertinence',
+									   'bookmarklet' => 'Bookmarklet',
+									   'bookmarklet_info' => '<p>Vous pouvez ajouter n\'importe quelle photo de Flickr &agrave; vos articles en plaçant ce lien: <a href=\'@url@\'>Envoyer cette photo &agrave; SPIP</a> dans vos bookmarks.</p>
+<p>Quand vous visitez une photo, en cliquant sur ce bookmark, vous arriverez &agrave; une page pour choisir &agrave; quel article l\'ajouter.</p>',
+									   'ajouter_une_photo' => 'Ajouter une photo',
+									   'ajouter_une_photo_info' => 'Ajoutez la photo "@title@" par @owner@',
+									   'choisir_un_article' => 'Choisir un article'
 );
 
 ?>

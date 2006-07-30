@@ -25,7 +25,13 @@ A new window will open, please follow the instructions it will provide.',
 									   'date-taken-desc' => 'Date taken, descendant',
 									   'interestingness-asc' => 'Interestingness, ascendant',
 									   'interestingness-desc' => 'Interestingness, descendant',
-									   'relevance' => 'Relevance'
+									   'relevance' => 'Relevance',
+									   'bookmarklet' => 'Bookmarklet',
+									   'bookmarklet_info' => '<p>You can add a photo from flickr that is not yours by placing this link: <a href=\'@url@\'>Send this photo to SPIP</a> in your bookmarks.</p>
+<p>When you visit a photo on flickr, by clicking this bookmark, you will get to a new page where you can select which article to add it to.</p>',
+									   'ajouter_une_photo' => 'Add a photo',
+									   'ajouter_une_photo_info' => 'Add the photo "@title@" by @owner@',
+									   'choisir_un_article' => 'Choose an article'
 );
 
 ?>
