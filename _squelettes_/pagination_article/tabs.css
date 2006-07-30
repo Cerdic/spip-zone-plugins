@@ -1,0 +1,46 @@
+/* tabs */
+.anchors {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 1px;
+}
+.anchors:after { /* clearing without presentational markup, IE gets extra treatment */
+    display: block;
+    clear: both;
+    content: " ";
+}
+.anchors li {
+    float: left;
+    margin: 0 1px 0 0;
+}
+.anchors a {
+    display: block;
+    position: relative;
+    top: 1px;
+    border: 1px solid #eaeaea;
+    border-bottom: 0;
+    z-index: 2;
+    padding: 2px 9px 1px;
+    color: #000;
+    text-decoration: none;
+}
+.anchors .on a {
+    padding-bottom: 2px;
+    font-weight: bold;
+}
+.anchors a:focus, .anchors a:active {
+    outline: none; /* @ Firefox 1.5, remove ugly dotted border */
+}
+.anchors .on a, .anchors a:hover, .anchors a:focus, .anchors a:active,
+.anchor {
+    background: #eaeaea;    
+}
+.anchors .on a:link, .anchors .on a:visited { /* @ Opera, use pseudo classes otherwise it confuses cursor... */
+    cursor: text;
+}
+.anchors a:hover, .anchors a:focus, .anchors a:active {
+    cursor: pointer;
+}
+.anchor {
+    padding: 10px;
+}
