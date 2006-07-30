@@ -15,7 +15,17 @@ Une nouvelle fen&ecirc;tre sera ouverte, suivez les instructions qui y sont four
 									   'info_sets' => 'Veillez choisir les sets que vous voulez ajouter.',
 									   'demande_authentification' =>  'vous devez d\'abord vous authentifier <a href="@url@">l&agrave;</a>',
 									   'pages' => 'Pages',
-									   'retour' => 'Retour'
+									   'retour' => 'Retour',
+									   'recherche' => 'Recherche',
+									   'ordre' => 'Ordonner par',
+									   'text_search' => 'dans tout le texte (titre, description, tag)',
+									   'date-posted-asc' => 'Dates d\'envoie, ascendantes',
+									   'date-posted-desc' => 'Dates d\'envoie, descendantes',
+									   'date-taken-asc' => 'Dates de prise de vue, ascendantes',
+									   'date-taken-desc' => 'Dates de prise de vue, descendantes',
+									   'interestingness-asc' => 'Interestingness, ascendant',
+									   'interestingness-desc' => 'Interestingness, descendant',
+									   'relevance' => 'Pertinence'
 );
 
 ?>

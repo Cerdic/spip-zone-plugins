@@ -15,7 +15,17 @@ A new window will open, please follow the instructions it will provide.',
 									   'info_sets' => 'Please choose the sets of photos to add.',
 									   'demande_authentification' =>  'You must first authorize Flickr <a href="@url@">here</a>',
 									   'pages' => 'Pages',
-									   'retour' => 'Back'
+									   'retour' => 'Back',
+									   'recherche' => 'Search',
+									   'ordre' => 'Order by',
+									   'text_search' => 'Full Text Search',
+									   'date-posted-asc' => 'Date posted, ascendant',
+									   'date-posted-desc' => 'Date posted, descendant',
+									   'date-taken-asc' => 'Date taken, ascendant',
+									   'date-taken-desc' => 'Date taken, descendant',
+									   'interestingness-asc' => 'Interestingness, ascendant',
+									   'interestingness-desc' => 'Interestingness, descendant',
+									   'relevance' => 'Relevance'
 );
 
 ?>

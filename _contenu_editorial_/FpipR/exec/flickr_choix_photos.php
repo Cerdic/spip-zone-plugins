@@ -13,6 +13,7 @@ function exec_flickr_choix_photos() {
     <style>
        li {float: left; list-style-type:none; height: 90px; width: 90px; margin: 1em;}
        li img {display:block; clear:both;}
+       #recherche label {display: block;}
     </style>
   </head>
 
@@ -29,7 +30,9 @@ function exec_flickr_choix_photos() {
   if($row['flickr_nsid'] != '' && $row['flickr_token'] != '') {
 	$page = _request('page')?_request('page'):1;
 	//TODO: ajouter des options de recherches
-	$photos = flickr_photos_search(40,$page,$row['flickr_nsid'],'','','','','','','','','','','',$row['flickr_token']);
+	$sort = _request('sort')?_request('sort'):'date-posted-desc';
+
+	$photos = flickr_photos_search(40,$page,$row['flickr_nsid'],'','',_request('text_search'),'','','','','',$sort,'','',$row['flickr_token']);
 
 	
 	$html = '<input type="hidden" name="flickr_nsid" value="'.$row['flickr_nsid'].'">';
@@ -67,19 +70,40 @@ function exec_flickr_choix_photos() {
 	} else {
 	  echo generer_action_auteur('flickr_ajouter_documents',_request('id'), generer_url_ecrire('breves_edit','id_breve='._request('id')),$html);
 	}
-	echo '<hr/><h3>'._T('fpipr:pages').':</h3>';
-	  
-
-	for($i=1;$i <= $photos->pages;$i++) {
-	  if($i != $page) {
-	  	echo '<a href="'.generer_url_ecrire('flickr_choix_photos',"page=$i&type="._request('type')."&id="._request('id')).'">';
+	if($photos->pages > 1) {
+	  echo '<hr/><h3>'._T('fpipr:pages').':</h3>';	  
+	  for($i=1;$i <= $photos->pages;$i++) {
+		if($i != $page) {
+		  echo '<a href="'.generer_url_ecrire('flickr_choix_photos',"page=$i&type="._request('type')."&id="._request('id')."&sort=$sort".(_request('text_search')?"&text_search="._request('text_search'):'')).'">';
+		}
+		echo $i.'|';
+		if($i != $page) {
+		  echo '</a>';
+		}
+		echo "\n";
 	  }
-	  echo $i.'|';
-	  if($i != $page) {
-	  	echo '</a>';
-	  }
-	  
 	}
+
+	echo '<hr/><h3>'._T('fpipr:recherche').':</h3>';
+	echo '<form id="recherche" method="get">';
+	echo '<input type="hidden" name="exec" value="'._request('exec').'"/>';
+	echo '<input type="hidden" name="type" value="'._request('type').'"/>';
+	echo '<input type="hidden" name="id" value="'._request('id').'"/>';
+	echo '<label for="text_search">'._T('fpipr:text_search').':</label>';
+	echo '<input type="text" name="text_search" id="text_search" value="'._request('text_search').'"/>';
+	echo '<label for="sort">'._T('fpipr:ordre').'</label>';
+	echo '<select name="sort" id="sort">';
+	echo '<option value="date-posted-asc"'.(($sort=="date-posted-asc")?' selected="true"':'').'>'._T('fpipr:date-posted-asc').'</option>';
+	echo '<option value="date-posted-desc"'.(($sort=="date-posted-desc")?' selected="true"':'').'>'._T('fpipr:date-posted-desc').'</option>';
+	echo '<option value="date-taken-asc"'.(($sort=="date-taken-asc")?' selected="true"':'').'>'._T('fpipr:date-posted-asc').'</option>';
+	echo '<option value="date-taken-desc"'.(($sort=="date-taken-desc")?' selected="true"':'').'>'._T('fpipr:date-taken-desc').'</option>';
+	echo '<option value="interestingness-desc"'.(($sort=="interestingness-desc")?' selected="true"':'').'>'._T('fpipr:interestingness-desc').'</option>';
+	echo '<option value="interestingness-asc"'.(($sort=="interestingness-asc")?' selected="true"':'').'>'._T('fpipr:interestingness-asc').'</option>';
+	echo '<option value="relevance"'.(($sort=="relevance")?' selected="true"':'').'>'._T('fpipr:relevance').'</option>';
+	echo '</select>';
+	echo '<button type="submit">'._T('fpipr:recherche').'</button>';
+	echo '</form>';
+
   } else {
 	echo _T('fpipr:demande_authentification',array('url'=>generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur)));
   }
