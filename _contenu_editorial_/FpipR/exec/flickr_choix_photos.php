@@ -5,7 +5,18 @@ function exec_flickr_choix_photos() {
 
   include_spip('inc/flickr_api');
   include_spip('base/abstract_sql');
-  
+
+  echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>'._T('fpipr:ajouter_photos').'</title>
+    <style>
+       li {float: left; list-style-type:none; height: 90px; width: 90px; margin: 1em;}
+       li img {display:block; clear:both;}
+    </style>
+  </head>
+
+  <body>';
   
   echo '<h1>'._T('fpipr:ajouter_photos').'</h1>';
   echo _T('fpipr:info_photos');
@@ -20,18 +31,31 @@ function exec_flickr_choix_photos() {
 	//TODO: ajouter des options de recherches
 	$photos = flickr_photos_search(40,$page,$row['flickr_nsid'],'','','','','','','','','','','',$row['flickr_token']);
 
-	$html = "<ul>\n";
+	
+	$html = '<input type="hidden" name="flickr_nsid" value="'.$row['flickr_nsid'].'">';
+	$html .= '<input type="hidden" name="flickr_token" value="'.$row['flickr_token'].'">';
+	$html .= "<ul>\n";
 	foreach($photos->photos as $photo) {
-	  $html .= '<li style="display:inline;">
-<label for="photo_'.$photo->id.'"><a href="'.$photo->url().'">
-<img src="'.$photo->source('s').'" alt="'.$photo->title.'">'.
-$photo->title.
-'</a></label>
-<input type="checkbox" name="photos[]" id="photo_'.$photo->id.'" value="'.$photo->source('o').'@#@'.$photo->title.'"/>
-</li>'."\n";
+	  $html .= '<li>';
+	  if($photo->title) {
+		$html .= '<a  href="'.$photo->url().'">';
+		$html .= '<img src="'.$photo->source('s').'" alt="'.$photo->title.' on Flickr">';
+		$html .= '</a>';
+		$html .= '<input type="checkbox" name="photos[]" id="photo_'.$photo->id.'" value="'.$photo->id.'@#@'.$photo->secret.'"/>';
+		$html .= '<label for="photo_'.$photo->id.'">'.$photo->title.'</label>';
+	  } else {
+		$html .= '<label for="photo_'.$photo->id.'">';
+		$html .= '<a  href="'.$photo->url().'">';
+		$html .= '<img src="'.$photo->source('s').'" alt="'.$photo->title.' on Flickr">';
+		$html .= '</a>';
+		$html .= '</label>';
+		$html .= '<input type="checkbox" name="photos[]" id="photo_'.$photo->id.'" value="'.$photo->id.'@#@'.$photo->secret.'"/>';
+	  }
+	  $html .= '</li>'."\n";
 	}
 	$html .= "</ul>\n";
-	$html .= '<button type="submit">'._T('spip:photo_valider')."</button>\n";
+	$html .= '<br clear="both"/>';
+	$html .= '<button type="submit">'._T('spip:bouton_valider')."</button>\n";
 	$html .= '<input type="hidden" name="type" value="'._request('type').'"/>'."\n";
 	$html .= '<input type="hidden" name="id" value="'._request('id').'"/>'."\n";
 
@@ -67,7 +91,9 @@ $photo->title.
   } else {
 	echo '<a href="'.generer_url_ecrire('breves_edit','id_breve='._request('id')).'">'._T('fpipr:retour').'</a>';
   }
-
+  echo '
+  </body>
+</html>';
 }
 
 ?>

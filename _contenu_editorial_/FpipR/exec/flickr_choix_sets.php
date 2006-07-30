@@ -6,6 +6,18 @@ function exec_flickr_choix_sets() {
   include_spip('inc/flickr_api');
   include_spip('base/abstract_sql');
   
+  echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>'._T('fpipr:ajouter_sets').'</title>
+    <style>
+       li {float: left; list-style-type:none; height: 90px; width: 90px; margin: 1em;}
+       li img {display:block; clear:both;}
+    </style>
+  </head>
+
+  <body>';
+
   echo '<h1>'._T('fpipr:ajouter_sets').'</h1>';
   echo _T('fpipr:info_sets');
 
@@ -17,19 +29,29 @@ function exec_flickr_choix_sets() {
 	$page = _request('page')?_request('page'):1;
 	$photosets = flickr_photosets_getList($row['flickr_nsid'],$row['flickr_token']);
 	
-	$html = "<ul>\n";
+	$html = '<input type="hidden" name="flickr_nsid" value="'.$row['flickr_nsid'].'">';
+	$html .= '<input type="hidden" name="flickr_token" value="'.$row['flickr_token'].'">';
+	$html .= "<ul>\n";
 	foreach($photosets as $set) {
-
-	  $html .= '<li style="display:inline;">
-<label for="set'.$set->id.'">
-<a href="'.$set->url().'"><img alt="'.$set->title.'" src="'.$set->logo('s').'">'.
-$set->title.
-'</a>
-</label>
-<input type="checkbox" id="set'.$set->id.'" name="sets[]" value="'.$set->id.'"/>
-</li>'."\n";
+	  $html .= '<li>';
+	  if($set->title) {
+		$html .= '<a  href="'.$set->url().'">';
+		$html .= '<img src="'.$set->logo('s').'" alt="'.$set->title.' on Flickr">';
+		$html .= '</a>';
+		$html .= '<input type="checkbox" name="sets[]" id="set_'.$set->id.'" value="'.$set->id.'"/>';
+		$html .= '<label for="set_'.$set->id.'">'.$set->title.'</label>';
+	  } else {
+		$html .= '<label for="set_'.$set->id.'">';
+		$html .= '<a  href="'.$set->url().'">';
+		$html .= '<img src="'.$set->logo('s').'" alt="'.$set->title.' on Flickr">';
+		$html .= '</a>';
+		$html .= '</label>';
+		$html .= '<input type="checkbox" name="sets[]" id="set_'.$set->id.'" value="'.$set->id.'"/>';
+	  }
+	  $html .= '</li>'."\n";
 	}
 	$html .= "</ul>\n";
+	$html .= '<br clear="both">';
 	$html .= '<button type="submit">'._T('spip:bouton_valider')."</button>\n";
 	$html .= '<input type="hidden" name="type" value="'._request('type').'"/>'."\n";
 	$html .= '<input type="hidden" name="id" value="'._request('id').'"/>'."\n";
@@ -53,6 +75,8 @@ $set->title.
 	  echo '<a href="'.generer_url_ecrire('naviguer','id_rubrique='._request('id')).'">'._T('fpipr:retour').'</a>';
   } else {
 	  echo '<a href="'.generer_url_ecrire('breves_edit','id_breve='._request('id')).'">'._T('fpipr:retour').'</a>';
-  }}
+  }
+  echo '</body></html>';  
+}
 
 ?>

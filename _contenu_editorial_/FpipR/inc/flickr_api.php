@@ -77,7 +77,7 @@ function flickr_authenticate_end($id_auteur,$frob) {
   $token = '';
   if(isset($frob['auth'])) {
 	foreach ($frob['auth'][0] as $k => $v) {
-	  if((strpos('user',$k) == 0) && preg_match('#nsid="(.*?)"#', $k, $matches)) 
+	  if((strpos($k,'user') === 0) && preg_match('#nsid="(.*?)"#', $k, $matches)) 
 		$nsid = $matches[1];
 	  else if($k == 'token') $token = $v[0];
 	}
@@ -98,6 +98,45 @@ class Photos {
   var $pages;
 
   var $photos = array();
+}
+
+class PhotoDetails {
+  var $id;
+  var $secret;
+  var $server;
+  var $isfavorite;
+  var $license;
+  var $rotation;
+  var $originalformat;
+  var $owner_nsid;
+  var $owner_username;
+  var $owner_realname;
+  var $owner_location;
+  var $title;
+  var $description;
+  var $ispublic;
+  var $isfriend;
+  var $isfamily;
+  var $date_posted;
+  var $date_taken;
+  var $date_takengranularity;
+  var $date_lastupdate;
+  var $comments;
+  var $tags;
+  var $urls;
+  
+    /*
+   s	small square 75x75
+   t	thumbnail, 100 on longest side
+   m	small, 240 on longest side
+   medium, 500 on longest side
+   b	large, 1024 on longest side (only exists for very large original images)
+   o	original image, either a jpg, gif or png, depending on source format
+  */
+  function source($size='') {
+	return "http://static.flickr.com/".$this->server."/".$this->id."_".$this->secret.($size?"_$size":'').'.'.(($size=='o')?$this->originalformat:'jpg');
+  }
+
 }
 
 class Photo {
@@ -193,21 +232,18 @@ function flickr_photos_search(
   if($photos) {
 	$rez = array_keys($photos);
 	$photos = array_keys($photos[$rez[0]][0]);
-	$rez = split(' ',$rez[0]);
 
-	foreach($rez as $attr){
-	  if(preg_match('#(page|pages|perpage|total)="([0-9]+)"#',$attr,$matches)) {
-		$resp->$matches[1] = $matches[2];
-	  }
+	if(preg_match_all('#(page|pages|perpage|total)="([0-9]+)"#',$rez[0],$matches,PREG_SET_ORDER)) {
+	  foreach($matches as $m) $resp->$m[1] = $m[2];
 	}
+
 
 	foreach($photos as $photo) {
 	  $new_p = new Photo;
-	  foreach(split(' ',$photo) as $attr){
-		if(preg_match('#([a-zA-Z_]+)="(.*?)"#',$attr,$matches)) {
-		  $new_p->$matches[1] = $matches[2];
-		}
+	  if(preg_match_all('#([a-zA-Z_]+)="(.*?)"#',$photo,$matches,PREG_SET_ORDER)) {
+		foreach($matches as $m) $new_p->$m[1] = $m[2];
 	  }
+
 	  $resp->photos[] = $new_p;
 	}
   }  
@@ -232,15 +268,14 @@ function flickr_photosets_getList($user_id,$auth_token) {
   $photosets =  flickr_check_error(flickr_api_call('flickr.photosets.getList',array('user_id'=>$user_id),$auth_token));
   $resp = array();
   if($photosets) {
-
 	$rez = array_keys($photosets);
 	$photosets = $photosets[$rez[0]][0];
 
 	foreach($photosets as $set => $data) {
 	  $new_p = new PhotoSet;
 	  $new_p->owner = $user_id;
-	  foreach(split(' ',$set) as $attr){
-		if(preg_match('#([a-zA-Z_]+)="(.*?)"#',$attr,$matches)) {
+	  if(preg_match_all('#([a-zA-Z_]+)="(.*?)"#',$set,$matches,PREG_SET_ORDER)) {
+		foreach($matches as $m) {
 		  $new_p->$matches[1] = $matches[2];
 		}
 	  }
@@ -269,16 +304,96 @@ function flickr_photosets_getPhotos($photoset_id,$extras='',$privacy_filter='',$
 
 	foreach($photos as $photo) {
 	  $new_p = new Photo;
-	  foreach(split(' ',$photo) as $attr){
-		if(preg_match('#([a-zA-Z_]+)="(.*?)"#',$attr,$matches)) {
-		  $new_p->$matches[1] = $matches[2];
-		}
+	  if(preg_match_all('#([a-zA-Z_]+)="(.*?)"#',$photo,$matches,PREG_SET_ORDER)) {
+		foreach($matches as $m)
+		  $new_p->$m[1] = $m[2];
 	  }
 	  $resp[] = $new_p;
 	}
   }  
   return $resp;
 
+}
+
+function flickr_photos_getInfo($photo_id,$secret,$auth_token) {
+  $params = array('photo_id'=>$photo_id,'secret'=>$secret);
+
+  $photo =  flickr_check_error(flickr_api_call('flickr.photos.getInfo',$params,$auth_token));
+  $resp = new PhotoDetails;
+  if($photo) {
+	$rez = array_keys($photo);
+	//	$details = array_keys($photo[$rez[0]][0]);
+
+
+	if(preg_match_all('#(id|secret|server|isfavorite|license|rotation|originalformat)="(.*?)"#',$rez[0],$matches,PREG_SET_ORDER)) {
+	  foreach($matches as $m) $resp->$m[1] = $m[2];
+	}
+
+	foreach($photo[$rez[0]][0] as $tag => $v) {
+	  if(strpos($tag,'title') === 0 || strpos($tag,'description') === 0 || strpos($tag,'comments')===0) {
+		$resp->$tag = $v[0];
+	  } else if(strpos($tag,'owner') === 0) {
+		if(preg_match_all('#([a-zA-Z_]+)="(.*?)"#',$tag,$matches,PREG_SET_ORDER)) {
+		  foreach($matches as $m) {
+			$name = 'owner_'.$m[1];
+			$resp->$name = $m[2];
+		  }
+		}
+	  } else if(strpos($tag,'dates') === 0) {
+		if(preg_match_all('#([a-zA-Z_]+)="(.*?)"#',$tag,$matches,PREG_SET_ORDER)) {
+		  foreach($matches as $m) {
+			$name = 'date_'.$m[1];
+			$resp->$name = $m[2];
+		  }
+		}
+	  } else if(strpos($tag,'visibility') === 0) {
+		if(preg_match_all('#([a-zA-Z_]+)="(.*?)"#',$tag,$matches,PREG_SET_ORDER)) {
+		  foreach($matches as $m) {
+			$name = $m[1];
+			$resp->$name = $m[2];
+		  }
+		}
+	  } else if(strpos($tag,'tags') === 0) {
+		foreach($v[0] as $taginfo => $tag) { 
+		  $resp->tags[] = $tag[0];
+		}
+	  } else if(strpos($tag,'urls') === 0) {
+		foreach($v[0] as $urltype => $url) { 
+		  if(preg_match('#type="(.*?)"#',$urltype,$matches)) {
+			$resp->urls[$matches[1]] = $url[0];
+		  }
+		}
+	  } 
+	}
+  }  
+  return $resp;
+
+  /*
+   <photo id="2733" secret="123456" server="12"
+	isfavorite="0" license="3" rotation="90" originalformat="png">
+	<owner nsid="12037949754@N01" username="Bees"
+		realname="Cal Henderson" location="Bedford, UK" />
+	<title>orford_castle_taster</title>
+	<description>hello!</description>
+	<visibility ispublic="1" isfriend="0" isfamily="0" />
+	<dates posted="1100897479" taken="2004-11-19 12:51:19"
+		takengranularity="0" lastupdate="1093022469" />
+	<permissions permcomment="3" permaddmeta="2" />
+	<editability cancomment="1" canaddmeta="1" />
+	<comments>1</comments>
+	<notes>
+		<note id="313" author="12037949754@N01"
+			authorname="Bees" x="10" y="10"
+			w="50" h="50">foo</note>
+	</notes>
+	<tags>
+		<tag id="1234" author="12037949754@N01" raw="woo yay">wooyay</tag>
+		<tag id="1235" author="12037949754@N01" raw="hoopla">hoopla</tag>
+	</tags>
+	<urls>
+		<url type="photopage">http://www.flickr.com/photos/bees/2733/</url> 
+	</urls>
+  */
 }
 
 ?>
