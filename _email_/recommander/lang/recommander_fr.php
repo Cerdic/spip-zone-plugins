@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'destinataire' => "destinataire :",
 'recommander_titre' => 'A lire sur @nom_site@ --',
 'recommander_lecture'=> "Bonjour, @from@ vous recommande la lecture de cet article : ",
+'recommander_message'=> "Recommander",
 );
 
 

@@ -126,7 +126,8 @@ function main_recommander() {
 		$r = $erreur;
 
 		// le formulaire normal
-		$r .=  _T("recommander:recommander");
+		$r .=  "<a href='#' onclick=\"toggle_formulaire_recommander();return false;\" >"._T("recommander:recommander")."</a>";
+		$r .= "<div id='formulaire_recommander'>";
 		$r .= "<form method='post' action='".self()."'
 		onsubmit=\"ahahform('spip.php', 'recommander');return false;\">";
 
@@ -139,7 +140,7 @@ function main_recommander() {
 		$r .= "<div><label for='recommander_message'>"._T('forum_texte')."</label>";
 		$r .= " <input type='text' name='recommander_message'
 		value='".htmlspecialchars(_request('recommander_message'))."' class='forml' /></div>";
-		$r .= "<div class='spip_bouton'><input type='submit' name='recommander_email' value='"._T('recommander_message')."' /></div>";
+		$r .= "<div class='spip_bouton'><input type='submit' name='recommander_email' value='"._T('recommander:recommander_message')."' /></div>";
 
 		if (!_request('recommander_cle')) {
 			$contexte = base64_encode(serialize($GLOBALS['contexte_inclus']));
@@ -151,6 +152,15 @@ function main_recommander() {
 		$r .= "<input type='hidden' name='recommander_env' value='$contexte' />\n";
 		$r .= "<input type='hidden' name='recommander_cle' value='$cle' />\n";
 		$r .= "</form>";
+		$r .= '</div>';
+		$r .= '<script type="text/javascript">
+		$(document).ready(function(){$("div#formulaire_recommander").hide();});
+		function toggle_formulaire_recommander(){
+      var p = $("div#formulaire_recommander");
+      if (p.is(":hidden")) p.slideDown("fast");
+      else p.slideUp("fast");
+		}
+		</script>';
 
 	} else {
 		$r .= _T('form_prop_message_envoye');
@@ -161,7 +171,7 @@ function main_recommander() {
 }
 
 // main()
-echo "<script type='text/javascript' src='".find_in_path('recommander_ahah.js')."></script>\n",
+echo "<script type='text/javascript' src='".find_in_path('recommander_ahah.js')."'></script>\n",
 	"<div id='recommander' class='formulaire_spip'>\n",
 	"<span></span>\n", # pour l'icone "searching..."
 	main_recommander(),
