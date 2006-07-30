@@ -52,8 +52,10 @@ function action_flickr_ajouter_documents() {
 		$row = spip_abstract_fetsel($select,$from,$where);
 		if($row['id_document']) {
 		  global $table_prefix;
-		  var_dump("UPDATE ".$table_prefix."_documents SET titre = '".$photo_details->title."', descriptif = '".$photo_details->description."', date= '".$photo_details->date_taken."' WHERE id_document=".$row['id_document']);
-		  spip_query("UPDATE ".$table_prefix."_documents SET titre = '".$photo_details->title."', descriptif = '".$photo_details->description."', date= '".$photo_details->date_taken."' WHERE id_document=".$row['id_document']);
+		  $q = "UPDATE ".$table_prefix."_documents SET titre = '".$photo_details->title."', descriptif = '".$photo_details->description."'";
+		  if($photo_details->date_taken) $q .=", date= '".$photo_details->date_taken."'";
+		  $q .=" WHERE id_document=".$row['id_document'];
+		  spip_query($q);
 		}
 	  }
 	  redirige_par_entete(urldecode($redirect));
