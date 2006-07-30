@@ -6,70 +6,29 @@ include_spip('class.smtp');
 
 $mail = new PHPMailer();
 
-// envoyer un mail par smtp : exemple 1
-
-	$mail->IsSMTP();
-	$mail->Host='smtp.machin.com';
-	$mail->port=25;
-	$mail->From='booz@machin.com';
-	$mail->AddAddress('cedric@ymachin.com');
-	$mail->AddReplyTo('booz@machin.net');	
-	$mail->Subject='ceci n\'est pas un test';
-	$mail->Body='Voici un exemple d\'e-mail au format Texte';
-	if(!$mail->Send()){ //Teste le return code de la fonction
-	  echo $mail->ErrorInfo; //Affiche le message d'erreur (ATTENTION:voir section 7)
-	}
-	else{	  
-	  echo 'Mail envoyé avec succès';
-	}
-	$mail->SmtpClose();
-	unset($mail);
-
-
-
-//envoi par mail();
-/*$mail->Mailer   = "mail";*/
-
-
-/* envoyer un mail par smtp : exemple 2
-
-$mail->From     = "booz@truc.com";
-$mail->FromName = "List manager";
-
-//envoi par smtp
-$mail->Mailer   = "smtp";
-
-$mail->Host     = "smtp.truc.com";
-
+$mail->IsSMTP();
+$mail->Host='smtp.machin.com';
+$mail->port=25;
+$mail->From='booz@machin.com';
+$mail->AddAddress('booz@rezo.net');
+$mail->AddReplyTo('booz@machin.net');	
+$mail->Subject='ceci n\'est pas un test';
+$mail->Body='Voici un exemple d\'e-mail au format Texte';
 $mail->SMTPAuth = true;
 $mail->Username = "booz@machin.com";
-$mail->Password = "booz";
+$mail->Password = "toto";
+$mail->AddStringAttachment("IMG/auton4.jpg", "Logo.jpg");
 
+if(!$mail->Send()){ //Teste le return code de la fonction
+  echo $mail->ErrorInfo; //Affiche le message d'erreur (ATTENTION:voir section 7)
+}
+else{
+  echo 'Mail envoye avec succes';
+}
+$mail->SmtpClose();
+unset($mail);
 
-$mail->port="25";
+//envoi par mail();
+#$mail->Mailer   = "mail";
 
-    // HTML body
-    $body  = "Hello <font size=\"4\">BoOz</font>, <p>";
-    $body .= "<i>Your</i> personal photograph to this message.<p>";
-    $body .= "Sincerely, <br>";
-    $body .= "PHPMailer List manager";
-
-    // Plain text body (for mail clients that cannot read HTML)
-    $text_body  = "Hello BoOz, \n\n";
-    $text_body .= "Your personal photograph to this message.\n\n";
-    $text_body .= "Sincerely, \n";
-    $text_body .= "PHPMailer List manager";
-
-    $mail->Body    = $body;
-    $mail->AltBody = $text_body;
-    $mail->AddAddress("cedric@truc.com","boozman");
-    $mail->AddStringAttachment("IMG/siteon0", "YourPhoto.jpg");
-
-    if(!$mail->Send())
-        echo "There has been a mail error sending to BoOz <br>";
-
-    // Clear all addresses and attachments for next loop
-    $mail->ClearAddresses();
-    $mail->ClearAttachments();   
-*/
 ?>

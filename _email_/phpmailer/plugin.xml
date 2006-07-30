@@ -1,17 +1,16 @@
 <plugin>
-        <nom>Plugin phpmailer</nom>
-        <auteur>Brent R. Matzelle</auteur>
-        <version>0</version>
-        <etat>dev</etat>
-        <description>Classe email phpmailer http://phpmailer.sourceforge.net/ , mise en plugin par BoOz BoOz@rezo.net </description>
-        <options></options>
-        <fonctions></fonctions>
-        <prefix>phpmailer</prefix>
-		<lien>http://phpmailer.sourceforge.net/</lien>
-        <pipeline>
-                <nom></nom>
-                <action></action>
-                <inclure></inclure>
-        </pipeline>
-      
+	<nom>Plugin phpmailer</nom>
+	<auteur>Brent R. Matzelle</auteur>
+	<version>0</version>
+	<etat>dev</etat>
+	<description>Classe email phpmailer http://phpmailer.sourceforge.net/ , mise en plugin par BoOz BoOz@rezo.net </description>
+	<options></options>
+	<fonctions></fonctions>
+	<prefix>phpmailer</prefix>
+	<lien>http://phpmailer.sourceforge.net/</lien>
+	<pipeline>
+		<nom></nom>
+		<action></action>
+		<inclure></inclure>
+	</pipeline>
 </plugin>
