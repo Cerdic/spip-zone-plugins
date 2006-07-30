@@ -26,6 +26,8 @@ function FpipR_affiche_milieu($flux) {
 </div>
 <div style="overflow: hidden;" class="cadre-padding">';
 	  $html .= '<h3>'._T('fpipr:autorisation_titre').'</h3>';
+	  include_spip('inc/flickr_api');
+
 
 	  $from = array('spip_auteurs');
 	  $select = array('flickr_token','flickr_nsid');
@@ -34,8 +36,9 @@ function FpipR_affiche_milieu($flux) {
 	  $row = spip_abstract_fetch($rez);
 	  if($row['flickr_nsid'] != '' && $row['flickr_token'] != '') {
 		$html .= _T('fpipr:identifie_ok',array('user_id'=>'<a href="http://www.flickr.com/photos/'.$row['flickr_nsid'].'">'.$row['flickr_nsid'].'</a>'));
+
+		$html .= flickr_bookmarklet_info();
 	  } else {
-		include_spip('inc/flickr_api');
 		$infos = flickr_authenticate_get_frob();
 		$html .= '<ol><li>'.
 		  _T('fpipr:identifie_etape1',array('url'=>$infos['url'])).

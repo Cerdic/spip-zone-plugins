@@ -41,21 +41,23 @@ function action_flickr_ajouter_documents() {
 	  foreach($photos as $info) {
 		list($id_photo,$secret) = split('@#@',$info);
 		$photo_details = flickr_photos_getInfo($id_photo,$secret,$row['auth_token']);
-		$empty = array();
-		$url = $photo_details->source('o');
-		$date = date('Y-m-d H:i:s');
-		ajouter_un_document($url,$photo_details->title,$type,$id,'distant',0,$empty);
-		$date2 = date('Y-m-d H:i:s');
-		$from = array('spip_documents');
-		$select = array('id_document');
-		$where = array("distant='oui'","fichier='$url'","maj >= '$date'","maj <= '$date2'");
-		$row = spip_abstract_fetsel($select,$from,$where);
-		if($row['id_document']) {
-		  global $table_prefix;
-		  $q = "UPDATE ".$table_prefix."_documents SET titre = '".$photo_details->title."', descriptif = '".$photo_details->description."'";
-		  if($photo_details->date_taken) $q .=", date= '".$photo_details->date_taken."'";
-		  $q .=" WHERE id_document=".$row['id_document'];
-		  spip_query($q);
+		if($photo_details->id) {
+		  $empty = array();
+		  $url = $photo_details->source('o');
+		  $date = date('Y-m-d H:i:s');
+		  ajouter_un_document($url,$photo_details->title,$type,$id,'distant',0,$empty);
+		  $date2 = date('Y-m-d H:i:s');
+		  $from = array('spip_documents');
+		  $select = array('id_document');
+		  $where = array("distant='oui'","fichier='$url'","maj >= '$date'","maj <= '$date2'");
+		  $row = spip_abstract_fetsel($select,$from,$where);
+		  if($row['id_document']) {
+			global $table_prefix;
+			$q = "UPDATE ".$table_prefix."_documents SET titre = '".$photo_details->title."', descriptif = '".$photo_details->description."'";
+			if($photo_details->date_taken) $q .=", date= '".$photo_details->date_taken."'";
+			$q .=" WHERE id_document=".$row['id_document'];
+			spip_query($q);
+		  }
 		}
 	  }
 	  redirige_par_entete(urldecode($redirect));

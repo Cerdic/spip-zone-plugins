@@ -250,7 +250,7 @@ function flickr_photos_search(
   return $resp;
 }
 
-function flickr_photosets_getList($user_id,$auth_token) {
+function flickr_photosets_getList($user_id,$auth_token='') {
   /*<photosets cancreate="1">
 	<photoset id="5" primary="2483" secret="abcdef"
 		server="8" photos="4">
@@ -288,7 +288,7 @@ function flickr_photosets_getList($user_id,$auth_token) {
   return $resp;
 }
 
-function flickr_photosets_getPhotos($photoset_id,$extras='',$privacy_filter='',$auth_token) {
+function flickr_photosets_getPhotos($photoset_id,$extras='',$privacy_filter='',$auth_token='') {
 
   $params = array();
   $params['photoset_id'] = $photoset_id;
@@ -315,7 +315,7 @@ function flickr_photosets_getPhotos($photoset_id,$extras='',$privacy_filter='',$
 
 }
 
-function flickr_photos_getInfo($photo_id,$secret,$auth_token) {
+function flickr_photos_getInfo($photo_id,$secret,$auth_token='') {
   $params = array('photo_id'=>$photo_id,'secret'=>$secret);
 
   $photo =  flickr_check_error(flickr_api_call('flickr.photos.getInfo',$params,$auth_token));
@@ -394,6 +394,14 @@ function flickr_photos_getInfo($photo_id,$secret,$auth_token) {
 		<url type="photopage">http://www.flickr.com/photos/bees/2733/</url> 
 	</urls>
   */
+}
+
+//======================================================================
+
+function flickr_bookmarklet_info() {
+	return  '<h3>Bookmarklet</h3><p>Vous pouvez ajouter n\'importe quel photo de Flickr &agrave; vos articles en plaçant ce <a href=\'javascript:var bookmarkletURL="'.$GLOBALS['meta']['adresse_site'].'/ecrire/'.find_in_path('fpipr_bookmarklet.js').'"; var script=document.createElement("script");script.type="text/javascript";script.src=bookmarkletURL;var head=document.getElementsByTagName("head")[0];head.appendChild(script);fpipr_add_photo("'.generer_url_ecrire('flickr_bookmarklet_photo').'")\'>lien</a> dans vos bookmarks.
+</p>
+<p>Quand vous visitez une photo, en cliquant sur ce bookmark, vous arriverez &agrave; une page pour choisir &agrave; quel article l\'ajouter.</p>';
 }
 
 ?>
