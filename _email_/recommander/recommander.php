@@ -126,7 +126,7 @@ function main_recommander() {
 		$r = $erreur;
 
 		// le formulaire normal
-		$r .=  "<span class='recommander_titre'><a href='#' onclick=\"toggle_formulaire_recommander();return false;\" >"._T("recommander:recommander")."</a></span>";
+		$r .=  "<span class='toto'><a href='#formulaire_recommander' onclick=\"toggle_formulaire_recommander();return false;\" >"._T("recommander:recommander")."</a></span>";
 		$r .= "<div id='formulaire_recommander' class='bloc_invisible'>";
 		$r .= "<form method='post' action='".self()."'
 		onsubmit=\"ahahform('spip.php', 'recommander');return false;\">";
@@ -154,6 +154,7 @@ function main_recommander() {
 		$r .= "</form>";
 		$r .= '</div>';
 		$r .= '<script type="text/javascript">
+		$(document).ready(function(){$("div#formulaire_recommander").hide();});
 		function toggle_formulaire_recommander(){
       var p = $("div#formulaire_recommander");
       if (p.is(":hidden")) p.slideDown("fast");
