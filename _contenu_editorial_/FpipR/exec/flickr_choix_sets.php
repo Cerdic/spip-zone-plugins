@@ -6,8 +6,8 @@ function exec_flickr_choix_sets() {
   include_spip('inc/flickr_api');
   include_spip('base/abstract_sql');
   
-  echo '<h1>Ajouter des sets de photos</h1>';
-  echo 'Veillez choisir les sets que vous voulez ajouter.';
+  echo '<h1>'._T('fpipr:ajouter_sets').'</h1>';
+  echo _T('fpipr:info_sets');
 
   $from = array('spip_auteurs');
   $select = array('flickr_token','flickr_nsid');
@@ -30,7 +30,7 @@ $set->title.
 </li>'."\n";
 	}
 	$html .= "</ul>\n";
-	$html .= '<button type="submit">'._T('spip:valider')."</button>\n";
+	$html .= '<button type="submit">'._T('spip:bouton_valider')."</button>\n";
 	$html .= '<input type="hidden" name="type" value="'._request('type').'"/>'."\n";
 	$html .= '<input type="hidden" name="id" value="'._request('id').'"/>'."\n";
 	$html .= '<input type="hidden" name="set" value="oui"/>'."\n";
@@ -45,15 +45,14 @@ $set->title.
 	  echo generer_action_auteur('flickr_ajouter_documents',_request('id'), generer_url_ecrire('breves_edit','id_breve='._request('id')),$html);
 	}
   } else {
-	echo 'vous devez d\'abord vous authentifier <a href="'.generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur).'">l&agrave;</a>';
+	echo _T('fpipr:demande_authentification',array('url'=>generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur).'">l&agrave;</a>'));
   }
   if(_request('type') == 'article') {
-	echo '<a href="'.generer_url_ecrire('articles','id_article='._request('id')).'">retour</a>';
+	echo '<a href="'.generer_url_ecrire('articles','id_article='._request('id')).'">'._T('fpipr:retour').'</a>';
   } else if(_request('type') == 'rubrique') {
-	  echo '<a href="'.generer_url_ecrire('naviguer','id_rubrique='._request('id')).'">retour</a>';
+	  echo '<a href="'.generer_url_ecrire('naviguer','id_rubrique='._request('id')).'">'._T('fpipr:retour').'</a>';
   } else {
-	  echo '<a href="'.generer_url_ecrire('breves_edit','id_breve='._request('id')).'">retour</a>';
-  }
-}
+	  echo '<a href="'.generer_url_ecrire('breves_edit','id_breve='._request('id')).'">'._T('fpipr:retour').'</a>';
+  }}
 
 ?>

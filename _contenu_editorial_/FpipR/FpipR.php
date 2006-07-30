@@ -15,7 +15,7 @@ function FpipR_affiche_milieu($flux) {
 	}
 	if($connect_id_auteur == $flux['args']['id_auteur']) {
 
-	  include('inc/presentation');
+	  include_spip('inc/presentation');
 
 	  $html = debut_cadre_relief('',true);
 	  $html .= '<h3>'._T('fpipr:autorisation_titre').'</h3>';
@@ -26,13 +26,16 @@ function FpipR_affiche_milieu($flux) {
 	  $rez = spip_abstract_select($select,$from,$where);
 	  $row = spip_abstract_fetch($rez);
 	  if($row['flickr_nsid'] != '' && $row['flickr_token'] != '') {
-		$html .= 'Vous êtes identifié avec l\'utilisateur: <a href="http://www.flickr.com/photos/'.$row['flickr_nsid'].'">'.$row['flickr_nsid'].'</a>';
+		$html .= _T('fpipr:identifie_ok',array('user_id'=>'<a href="http://www.flickr.com/photos/'.$row['flickr_nsid'].'">'.$row['flickr_nsid'].'</a>'));
 	  } else {
 		include_spip('inc/flickr_api');
 		$infos = flickr_authenticate_get_frob();
-		$html .= '<ol><li>Veillez d\'abord autoriser ce plugin sur flickr en cliquant <strong><a target="blank" href="'.$infos['url'].'">ici</a></strong><br/>
- Une nouvelle fen&ecirc;tre sera ouverte, suivez les instructions qui y sont fournis.</li>
-<li>Une fois termin&eacute; vous devez revenir sur cette fen&ecirc;tre pour '.generer_action_auteur('flickr_authenticate_end',$infos['frob'], generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur),'<button type="submit">'._T('fpipr:terminer').'</button> l\'authentification.</li></ol>');
+		$html .= '<ol><li>'.
+		  _T('fpipr:identifie_etape1',array('url'=>$infos['url'])).
+		  '</li>
+<li>'.
+		  _T('fpipr:identifie_etape2',array('form'=>generer_action_auteur('flickr_authenticate_end',$infos['frob'], generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur),'<button type="submit">'._T('fpipr:terminer').'</button>'))).
+		  '</li></ol>';
 	  }
 	  spip_abstract_free($rez);
 	  $html .= fin_cadre_relief(true);
@@ -69,13 +72,13 @@ function FpipR_affiche_gauche($flux) {
 	  $to_ret .= "<div style='position: relative;'>";
 	  $to_ret .= "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>
 	<img src=''/></div>";
-	  $to_ret .= "<div style='background-color: white; color: black; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>"._T('Flickr')."</b></div>";
+	  $to_ret .= "<div style='background-color: white; color: black; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>"._T('fpipr:Flickr')."</b></div>";
 	  $to_ret .= "</div>";
 
 	  $to_ret .= '<div class="plan-articles">';
 
-	  $to_ret .= '<a class="thickbox" href="'.generer_url_ecrire('flickr_choix_photos',"type=$type&id=$id").'">ajouter une photo Flickr</a>';
-	  $to_ret .= '<a class="thickbox" href="'.generer_url_ecrire('flickr_choix_sets',"type=$type&id=$id").'">ajouter un set de photos Flickr</a>';
+	  $to_ret .= '<a class="thickbox" href="'.generer_url_ecrire('flickr_choix_photos',"type=$type&id=$id").'">'._T('fpipr:ajouter_photos').'</a>';
+	  $to_ret .= '<a class="thickbox" href="'.generer_url_ecrire('flickr_choix_sets',"type=$type&id=$id").'">'._T('fpipr:ajouter_sets').'</a>';
 	  $to_ret .= '</div>';
 	  $to_ret .= '</div></div>';
 
