@@ -3,7 +3,10 @@
 include_spip('class.phpmailer');
 include_spip('class.smtp');
 
+
 $mail = new PHPMailer();
+
+// envoyer un mail par smtp : exemple 1
 
 	$mail->IsSMTP();
 	$mail->Host='smtp.machin.com';
@@ -24,13 +27,11 @@ $mail = new PHPMailer();
 
 
 
-
-
-/* autres possibilités
-
 //envoi par mail();
 /*$mail->Mailer   = "mail";*/
 
+
+/* envoyer un mail par smtp : exemple 2
 
 $mail->From     = "booz@truc.com";
 $mail->FromName = "List manager";
@@ -38,8 +39,7 @@ $mail->FromName = "List manager";
 //envoi par smtp
 $mail->Mailer   = "smtp";
 
-$mail->Host     = "smtp.yterium.com";
-
+$mail->Host     = "smtp.truc.com";
 
 $mail->SMTPAuth = true;
 $mail->Username = "booz@machin.com";
@@ -62,7 +62,7 @@ $mail->port="25";
 
     $mail->Body    = $body;
     $mail->AltBody = $text_body;
-    $mail->AddAddress("cedric@yterium.com","boozman");
+    $mail->AddAddress("cedric@truc.com","boozman");
     $mail->AddStringAttachment("IMG/siteon0", "YourPhoto.jpg");
 
     if(!$mail->Send())
