@@ -1,6 +1,11 @@
 function ahah(url, target, delay) {
   // afficher la roue ajax dans le premier <span> du <div> cible.
-  document.getElementById(target).getElementsByTagName('SPAN')[0].innerHTML = '<div style="position:absolute;z-index:10;"><img src="ecrire/img_pack/searching.gif" alt="Waiting..." /></div>';
+  //document.getElementById(target).getElementsByTagName('SPAN')[0].innerHTML = '<div style="position:absolute;z-index:10;"><img src="ecrire/img_pack/searching.gif" alt="Waiting..." /></div>';
+  $('#'+target).each(function(){
+		var group=this;
+		var s= $('.waiting',group).get(0);
+		s.innerHTML = '<div style="position:absolute;z-index:10;"><img src="ecrire/img_pack/searching.gif" alt="Waiting..." /></div>';
+  });
   if (window.XMLHttpRequest) {
     req = new XMLHttpRequest();
   } else if (window.ActiveXObject) {
@@ -29,30 +34,24 @@ function ahahDone(url, target, delay) {
 
 
 function ahahform(url,target) {
-      var obj = document.getElementById(target).getElementsByTagName('FORM')[0];
-      var getstr = "?";
-      for (i=0; i<obj.childNodes.length; i++) {
-         if (obj.childNodes[i].tagName == "INPUT") {
-            if ((obj.childNodes[i].type == "text") || (obj.childNodes[i].type == "hidden")) {
-               getstr += obj.childNodes[i].name + "=" + encodeURIComponent(obj.childNodes[i].value) + "&";
-            }
-            if (obj.childNodes[i].type == "checkbox") {
-               if (obj.childNodes[i].checked) {
-                  getstr += obj.childNodes[i].name + "=" + encodeURIComponent(obj.childNodes[i].value) + "&";
-               } else {
-                  getstr += obj.childNodes[i].name + "=&";
-               }
-            }
-            if (obj.childNodes[i].type == "radio") {
-               if (obj.childNodes[i].checked) {
-                  getstr += obj.childNodes[i].name + "=" + encodeURIComponent(obj.childNodes[i].value) + "&";
-               }
-            }
-         }   
-         if (obj.childNodes[i].tagName == "SELECT") {
-            var sel = obj.childNodes[i];
-            getstr += sel.name + "=" + encodeURIComponent(sel.options[sel.selectedIndex].value) + "&";
-         }
-      }
-      ahah(url+getstr+'action=fragment&fragment='+target, target);
-   }
+	var getstr = "?";
+	$('#'+target).each(function(){
+		var group=this;
+		$('input',group).each(function(){
+			if ((this.type == "text") || (this.type == "hidden"))
+				getstr += this.name + "=" + encodeURIComponent(this.value) + "&";
+			if (this.type == "checkbox")
+				if (this.checked)
+					getstr += this.name + "=" + encodeURIComponent(this.value) + "&";
+				else
+					getstr += this.name + "=&";
+			if (this.type == "radio")
+				if (this.checked)
+					getstr += this.name + "=" + encodeURIComponent(this.value) + "&";
+		});
+		$('select',group).each(function(){
+			getstr += this.name + "=" + encodeURIComponent(this.value) + "&";
+		});
+	});
+  ahah(url+getstr+'action=fragment&fragment='+target, target);
+}

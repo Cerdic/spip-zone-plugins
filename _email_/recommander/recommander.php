@@ -54,18 +54,18 @@ function recommander($contexte_inclus) {
 
 	// verifier que le formulaire est bien rempli
 	if (!email_valide(_request('recommander_from')))
-		$retour = _T('pass_erreur_non_valide',
+		$retour .= _T('pass_erreur_non_valide',
 			array(
 			'email_oubli' => htmlspecialchars(_request('recommander_from'))
 			)
-		);
+		).'from:'._request('recommander_from');
 
 	if (!email_valide(_request('recommander_to')))
-		$retour = _T('pass_erreur_non_valide',
+		$retour .= _T('pass_erreur_non_valide',
 			array(
 			'email_oubli' => htmlspecialchars(_request('recommander_to'))
 			)
-		);
+		).'to:'._request('recommander_to');
 
 	if ($retour)
 		return $retour;
@@ -123,10 +123,9 @@ function main_recommander() {
 	OR (_request('recommander_cle') <> md5(_SECRET._request('recommander_env')))
 	OR $erreur = recommander(@unserialize(base64_decode(_request('recommander_env'))))) {
 
-		$r = $erreur;
-
+		$r = "";
 		// le formulaire normal
-		$r .=  "<span class='toto'><a href='#formulaire_recommander' onclick=\"toggle_formulaire_recommander();return false;\" >"._T("recommander:recommander")."</a></span>";
+		$r .=  "<span class='recommander_titre'><a href='#formulaire_recommander' onclick=\"toggle_formulaire_recommander();return false;\" >"._T("recommander:recommander")."</a></span>";
 		$r .= "<div id='formulaire_recommander' class='bloc_invisible'>";
 		$r .= "<form method='post' action='".self()."'
 		onsubmit=\"ahahform('spip.php', 'recommander');return false;\">";
@@ -152,6 +151,7 @@ function main_recommander() {
 		$r .= "<input type='hidden' name='recommander_env' value='$contexte' />\n";
 		$r .= "<input type='hidden' name='recommander_cle' value='$cle' />\n";
 		$r .= "</form>";
+		$r .= "<span class='waiting'>$erreur</span>";# pour l'icone "searching..."
 		$r .= '</div>';
 		$r .= '<script type="text/javascript">
 		$(document).ready(function(){$("div#formulaire_recommander").hide();});
@@ -173,7 +173,6 @@ function main_recommander() {
 // main()
 echo "<script type='text/javascript' src='".find_in_path('recommander_ahah.js')."'></script>\n",
 	"<div id='recommander' class='formulaire_spip'>\n",
-	"<span></span>\n", # pour l'icone "searching..."
 	main_recommander(),
 	"</div>\n";
 
