@@ -17,7 +17,14 @@ function FpipR_affiche_milieu($flux) {
 
 	  include_spip('inc/presentation');
 
-	  $html = debut_cadre_relief('',true);
+	  $html = '<div>&nbsp;</div>';
+	  $html .= '<div style="margin-top: 14px;" class="cadre-r">
+<div style="position: relative;">
+<div style="position: absolute; top: -16px; left: 10px;">
+<img src="'.find_in_path('fpipr.gif').'"/>
+</div>
+</div>
+<div style="overflow: hidden;" class="cadre-padding">';
 	  $html .= '<h3>'._T('fpipr:autorisation_titre').'</h3>';
 
 	  $from = array('spip_auteurs');
@@ -68,13 +75,19 @@ function FpipR_affiche_gauche($flux) {
 	  }*/
 	if($acces) {
 	  $to_ret = '<div>&nbsp;</div>';
-	  $to_ret .= '<div class="bandeau_rubriques" style="z-index: 1;">';
-	  $to_ret .= "<div style='position: relative;'>";
-	  $to_ret .= "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>
-	<img src=''/></div>";
-	  $to_ret .= "<div style='background-color: white; color: black; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>"._T('fpipr:Flickr')."</b></div>";
-	  $to_ret .= "</div>";
-
+	  $to_ret .='<div style="z-index: 1;" class="bandeau_rubriques">
+<div style="position: relative;">
+<div style="position: absolute; top: -12px; left: 3px;">
+<font size="1" face="Verdana,Arial,Sans,sans-serif">
+<img alt="article-24" src="'.find_in_path('fpipr.gif').'"/>
+</font>
+</div>
+<div class="verdana2" style="border-bottom: 1px solid rgb(68, 68, 68); padding: 3px 3px 3px 30px; background-color: white; color: black;">
+<font size="1" face="Verdana,Arial,Sans,sans-serif">
+   <b>'._T('fpipr:Flickr').'</b>
+		</font>
+		</div>
+		</div>';
 	  $to_ret .= '<div class="plan-articles">';
 
 	  $to_ret .= '<a class="thickbox" href="'.generer_url_ecrire('flickr_choix_photos',"type=$type&id=$id").'">'._T('fpipr:ajouter_photos').'</a>';

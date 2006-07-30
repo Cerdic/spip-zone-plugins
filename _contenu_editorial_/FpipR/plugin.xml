@@ -3,16 +3,18 @@
 	  FpipR
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	  Pierre Andrews (mortimer)
+	  Pierre Andrews (mortimer.pa@free.fr)
 	</auteur>
 	<version>
 	  0.1
 	</version>
 	<etat>
-	  dev
+	  test
 	</etat>
 	<description>
-	  <multi>[fr] associer des photos et sets Flickr.com &agrave; vos articles.
+	  <multi>
+		[fr] associer des photos et sets Flickr.com &agrave; vos articles et rubriques. Ce plugin ne peut pas être utilis&eacute; sur un site commercial.
+		[en] add photos and sets from your Flickr.com account to articles and sections. This plugin cannot be used on a commercial web site.
 	  </multi>
 	</description>
 	<prefix> 
