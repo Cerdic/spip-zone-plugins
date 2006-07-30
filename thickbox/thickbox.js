@@ -25,7 +25,7 @@ function TB_init(){
 				: (this.href
 					? this.href.match(/^[^?]+\.(jpeg|jpg|gif|png)$/i)
 					: false
-				)
+				) || this.className == 'thickbox'
 			) {
 				this.onclick = TB_Image;
 			}
