@@ -9,11 +9,11 @@
   //    Bricolage (sale) à partir du code SPIP
   
   /* utiliser : <?php 
-  include('inc_formulaire_document.php');
+  include_spip('formulaires/inc_formulaire_document.php');
   afficher_formulaire_document_tag('[(#ENV{id_document})]','nom_groupe'); 
   ?>  dans un squelette */
   /* ou bien  
-  include('inc_formulaire_document.php');
+  include_spip('formulaires/inc_formulaire_document.php');
   afficher_formulaire_document_tag('$id_document','nom_groupe');  
   
   dans une page php de spip */
@@ -519,7 +519,7 @@ $fichier = $document['fichier'];
 $fichier =ereg_replace(" ","%20",$fichier);
 
 // Copy remote file locally to scan with getID3()
-require_once('getid3/getid3.php');
+include_spip('inc/getid3/getid3.php');
 $getID3 = new getID3;	
 $remotefilename = $fichier ;
 if ($fp_remote = @fopen($remotefilename, 'rb')) {
