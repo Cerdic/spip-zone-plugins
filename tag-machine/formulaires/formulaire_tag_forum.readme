@@ -1,0 +1,22 @@
+les fichiers (formulaire_tag_forum.html et inc-formulaire_tag_forum.php)squelette de balise se placent dans votre repertoire squelettes.
+
+ils supposent que la librairie inc_tag-machine.php se trouve dans le repertoire ecrire/_libs_/tag-machine/
+
+On l'utilise dans une boucle Forum, par exemple:
+<code>
+<BOUCLE_forums(FORUMS) {"<hr>"} {id_article?} {0,30}>
+<h1>#TITRE</h1>
+#TEXTE
+<br>
+<BOUCLE_mots(MOTS) {id_forum} {"<br>"}>
+#TITRE
+</BOUCLE_mots>
+
+#FORMULAIRE_TAG_FORUM
+</BOUCLE_forums>
+</code>
+
+et elle affiche un champ de texte et un bouton pour ajouter des tags en utilisant tag-machine. Le groupe par défaut et FAQ, on peut le changer l40 du fichier php.
+
+amusez vous bien
+Pierre

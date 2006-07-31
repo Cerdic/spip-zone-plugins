@@ -6,7 +6,8 @@
  */
 
 //on page load call TB_init
-$(document).ready(TB_init);
+$(document).ready(TB_init);	
+
 
 //add thickbox to href elements that have a class of .thickbox
 TB_Image = function() {

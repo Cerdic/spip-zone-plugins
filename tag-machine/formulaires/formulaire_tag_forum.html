@@ -1,0 +1,46 @@
+<!--
+    Copyright (C) 2005  Pierre ANDREWS
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+-->
+
+<script  type='text/javascript' src="#DOSSIER_SQUELETTE/javascripts/prototype/prototype.js">
+</script>
+<script  type='text/javascript' src="#DOSSIER_SQUELETTE/javascripts/ajaxTagMachine.js">
+</script>
+<BOUCLE_groupes(GROUPES_MOTS) {par titre}>
+  <form action="[(#ENV{self})]" method="post">
+    <fieldset	class='spip_encadrer' style='color: black; font-size: 90%'>
+	  <legend>Ajouter des tags #TITRE</legend>
+	  <label for="tags_#ID_GROUPE_[(#ENV{id})]">
+		Tags:
+	  </label>
+	  <img id="wait_#ID_GROUPE" src="ecrire/img_pack/searching.gif"/>
+      <input autocomplete="off" type="texte" id="tags_[(#ID_GROUPE)]_[(#ENV{id})]" name="tags_[(#ID_GROUPE)]_[(#ENV{id})]" value="<BOUCLE_mots(MOTS) {id_forum = #ENV{id}} {id_groupe}>[(#TITRE|echapper_mot{#TYPE,#_groupes:TITRE}) ]</BOUCLE_mots>" class='forml' cols='40' style="width: 100%;"/>
+      <div id="suggest_#ID_GROUPE" class="suggest_list"></div>
+	  <input type="hidden" name="titre_groupe" value="[(#TITRE|entites_html)]">
+	  <input type="hidden" name="id_groupe" value="#ID_GROUPE">
+	  [<input type="hidden" name="fond" value="(#ENV{fond})">]
+	  <div align="right"><input type="submit" class="spip_bouton" value="<:bouton_valider:>" /></div> 
+    </fieldset>
+  </form>
+
+  <script  type='text/javascript'> <!--
+							   groupe_#ID_GROUPE = new AjaxSuggestMenu('[(#URL_PAGE{ajax-mots-forum})]', 'titre', 'tags_[(#ID_GROUPE)]_[(#ENV{id})]','suggest_#ID_GROUPE');
+groupe_#ID_GROUPE.addVar('id_groupe','#ID_GROUPE');
+groupe_#ID_GROUPE.setWaiting('wait_#ID_GROUPE');
+groupe_#ID_GROUPE.setNbrLineVisible(10);
+groupe_#ID_GROUPE.setScrollEnabled(false);
+		--></script>
+</BOUCLE_groupes>

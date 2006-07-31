@@ -1,0 +1,67 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html;charset=#CHARSET">
+
+<link rel="stylesheet" type="text/css" href="#DOSSIER_SQUELETTE/javascripts/ajaxTagMachine.css">
+
+<title> Test d'un syst&egrave;me d'ajout de mot Yet another Ajax Suggestion Menu</title>
+</head>
+
+<body>
+
+<div style="font-size: 90%">
+<H1>C'est quoi ce truc?</H1>
+
+<p>
+C'est un formulaire pour avoir une interface d'ajout de mots clefs plus rapide sur des objets SPIP. Dans ce cas, on ajoute sur un forum bidon, c'est pas tr&egrave;s important
+</p>
+
+<p>
+On a un champ par groupe de mot. On peut taper dans ce champ une liste de mots &agrave; ajouter pour ce groupe. Le syst&egrave;me va v&eacute;rifier que les mots existent, cr&eacute;er ceux qui n'existent pas et ajouter le tout au message du forum.
+</p>
+
+<p>
+&ccedil;a fait moins de bouton &agrave; cliquer que l'interface de SPIP actuelle. C'est un peu comme del.icio.us pour ceux qui connaissent.
+</p>
+
+<p>
+Jusque l&agrave;, le syst&egrave;me  a l'air de marcher, de plus c'est du c&ocirc;t&eacute; serveur, donc pas besoin de s'inqui&eacute;ter de compatibilit&eacute;. Par contre, on ne sait plus quels mots clefs existent comme dans l'ancienne interface o&ugrave; l'on a un menu (des fois).
+</p>
+
+<p>
+Actuellement cette page permet de tester le nouveau menu en javascript pour choisir un mot. Quand on commence &agrave; tapper un mot qui existe, il envoi une requette au serveur pour avoir une liste des mots qui commence par les mêmes lettres. La liste s'affiche sous le champ (sauf dans IE o&ugrave; il y a un probl&egrave;me), on peut naviguer dedans avec les fl&eacute;ches HAUT/BAS. TAB/GAUCHE valide le mot... on peut alors tapper des mots en plus. Le syst&egrave;me essai alors de trouver d'autres mots existant plus pertinant (&ccedil;a c'est pas au point, mais c'est c&orcic;t&eacute; serveur, &ccedil;a attendra).
+</p>
+
+<p>Actuellement, &ccedil;a marche &agrave; peut pret dans Safari (1.3, 2.0.1), Firefox (1.0.6) et Opera 8.5. Sur IE6 le menu appara&icirc;t &agrave; gauche, un pbl css, mais le js marche.</p>
+
+<p>j'essai d'ajouter un syst&egrave;me de "scroll" pour n'afficher qu'une partie des r&eacute;sultats, pour l'instant, c'est pas <i>totalement</i> fonctionnel.</p> 
+</div>
+
+<div>
+<h2>Les mots possibles sont</h2>
+<BOUCLE_groupes(GROUPES_MOTS) {par titre}>
+<h3>#TITRE</h3>
+<BOUCLE_tousmots(MOTS) {id_groupe} {par titre}>
+- #TITRE<br/>
+</BOUCLE_tousmots>
+</BOUCLE_groupes>
+</div>
+
+<BOUCLE_forums(FORUMS) {0,1}>
+<B_lesmots>
+<h2>Les mots d&eacute;j&agrave; ajout&eacute;s sont</h2>
+<ul>
+<BOUCLE_lesmots(MOTS) {id_forum}>
+[<li>(#TITRE)</li>]
+</BOUCLE_lesmots>
+</ul>
+</B_lesmots>
+
+<br>
+#FORMULAIRE_TAG_FORUM
+</BOUCLE_forums>
+<hr>
+</body>
+</html>

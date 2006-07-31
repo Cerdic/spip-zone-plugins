@@ -1,0 +1,355 @@
+<style type='text/css'>
+	#popularTags {line-height:1.2em }
+	#suggestions {margin:3px }
+	#popularTags span { background-color: #cccccc; cursor: pointer; margin:2px }
+	#suggestions span { cursor: pointer; margin:2px }
+	#popularTags span.selected { background-color: yellow; }
+	#popularTags span.auto { background-color: #ccffcc; }
+</style>
+
+#CACHE{0}
+<?php
+
+[(#ENV{id_article}|?{' ',''}) $elements='articles'; $element='article'; $id_element='#ID_ARTICLE';]
+[(#ENV{id_document}|?{' ',''}) $elements='documents'; $element='document'; $id_element='#ID_DOCUMENT';]
+	
+	if (!$id_element = intval($id_element)) die ('bah, non...');
+
+	if (isset($_REQUEST['tags'])) {
+		include_once 'inc_tag-machine.php';
+		ajouter_mots(_request('tags'),
+			$id_element,
+			$groupe_defaut = 'tags',
+			$elements,
+			'id_'.$element,
+			true);
+
+		if (isset($_REQUEST['descriptif'])) {
+$query="UPDATE spip_".$element."s SET descriptif='".addslashes(_request('descriptif'))."' WHERE id_".$element."='".$id_element."'";
+			spip_query($query);
+		}
+
+		if (isset($_REQUEST['titre'])) {
+$query="UPDATE spip_".$element."s SET titre='".addslashes(_request('titre'))."' WHERE id_".$element."='".$id_element."'";
+		spip_query($query);
+		}
+
+		redirige_par_entete(
+			parametre_url(
+			parametre_url(
+			parametre_url(
+			parametre_url(self(),
+				'tags', ''),
+				'descriptif', ''),
+				'titre', ''),
+				'url', '',
+			'&')
+		);
+	}
+?>
+
+[(#REM)
+
+	Les tags de notre article
+	
+	// ici mettre {" "} si on ne veut pas de virgule, voir aussi dans le
+	// javascript ci-dessous
+]
+<BOUCLE_a(ARTICLES){id_article}{statut IN prop,publie}>
+<h1>#TITRE</h1>
+
+<form method='get' action='[(#SELF|parametre_url{tags,""}|parametre_url{titre,""}|parametre_url{descriptif,""}|parametre_url{url,""})]'>
+[(#SELF|parametre_url{tags,""}|parametre_url{titre,""}|parametre_url{descriptif,""}|parametre_url{url,""}|form_hidden)]
+
+<table><tr><td align='right'>
+	url
+</td><td>
+	<input type='text' name='url' readonly='1'
+		value="[(#URL_ARTICLE|url_absolue|entites_html)]" size='80' />
+</td></tr><tr><td align='right'>
+	titre
+</td><td>
+	<input type='text' name='titre'
+	value="[(#TITRE*|entites_html)]" size='80' />
+</td></tr><tr><td align='right'>
+	desc
+</td><td>
+	<textarea name='descriptif' rows='2'
+	cols='77'>[(#DESCRIPTIF*|entites_html)]</textarea>
+</td></tr><tr><td align='right'>
+	tags
+</td><td>
+	<input type='text' name='tags' autocomplete='off' id='tags'
+	value="<BOUCLE_m(MOTS){type=tags}{id_article}{" "}>[(#TITRE*|strcspn{' ,"'}|=={[(#TITRE*|strlen)]}|?{'',&quot;})][(#TITRE*|entites_html)][(#TITRE*|strcspn{' ,"'}|=={[(#TITRE*|strlen)]}|?{'',&quot;})]</BOUCLE_m>" size='80' />
+</td></tr>
+<tr><td align='right'>
+<span id='sug'></span>
+</td><td>
+<div id='suggestions'>
+&nbsp;
+</div>
+</td></tr>
+<tr><td colspan='2'>
+	<div align="#LANG_RIGHT"><input type='submit' value='ok' />
+</td></tr>
+</table>
+
+
+
+</form>
+
+</BOUCLE_a>
+
+<BOUCLE_d(DOCUMENTS){id_document}>
+<h1>#TITRE</h1>
+
+<form method='get' action='[(#SELF|parametre_url{tags,""}|parametre_url{titre,""}|parametre_url{descriptif,""}|parametre_url{url,""})]'>
+[(#SELF|parametre_url{tags,""}|parametre_url{titre,""}|parametre_url{descriptif,""}|parametre_url{url,""}|form_hidden)]
+
+<table><tr><td align='right'>
+	url
+</td><td>
+	<input type='text' name='url' readonly='1'
+		value="[(#URL_DOCUMENT|url_absolue|entites_html)]" size='80' />
+</td></tr><tr><td align='right'>
+	titre
+</td><td>
+	<input type='text' name='titre'
+	value="[(#TITRE*|entites_html)]" size='80' />
+</td></tr><tr><td align='right'>
+	desc
+</td><td>
+	<textarea name='descriptif' rows='2'
+	cols='77'>[(#DESCRIPTIF*|entites_html)]</textarea>
+</td></tr><tr><td align='right'>
+	tags
+</td><td>
+	<input type='text' name='tags' autocomplete='off' id='tags'
+	value="<BOUCLE_md(MOTS){type=tags}{id_document}{" "}>[(#TITRE*|strcspn{' ,"'}|=={[(#TITRE*|strlen)]}|?{'',&quot;})][(#TITRE*|entites_html)][(#TITRE*|strcspn{' ,"'}|=={[(#TITRE*|strlen)]}|?{'',&quot;})]</BOUCLE_md>" size='80' />
+</td></tr>
+<tr><td align='right'>
+<span id='sug'></span>
+</td><td>
+<div id='suggestions'>
+&nbsp;
+</div>
+</td></tr>
+<tr><td colspan='2'>
+	<div align="#LANG_RIGHT"><input type='submit' value='ok' />
+</td></tr>
+</table>
+
+
+
+</form>
+
+</BOUCLE_d>
+
+
+[(#REM)
+
+	La liste des tags, dans des gentils < span >
+	Idealement le addtag(this) serait ajoute par
+	la fonction loadpopular ci-dessous
+
+]
+
+<div id='popularTags'>
+<BOUCLE_tags(MOTS){type=tags}{par titre}><span>#TITRE*</span>
+</BOUCLE_tags>
+</div>
+
+
+
+
+[(#REM)
+
+	Code partiellement copie du genial scuttle ; 
+
+]
+<script><!--
+
+Array.prototype.contains = function (ele) {
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] == ele) {
+            return true;
+        }
+    }
+    return false;
+};
+
+Array.prototype.remove = function (ele) {
+    var arr = new Array();
+    var count = 0;
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] != ele) {
+            arr[count] = this[i];
+            count++;
+        }
+    }
+    return arr;
+};
+
+function splittags(txt) {
+	var temp = new Array();
+	var r, i, debut;
+	var compteur=1;
+
+	if (txt.match(/^[ ,"]*$/))
+		return new Array();
+
+	while (r = txt.match(/(^| )"([^"]*)"(,| |$)/)) {
+		debut = txt.search(r[0]);
+		txt = txt.substring(0,debut)
+			+ r[1]
+			+ 'compteur'+compteur
+			+ r[3]
+			+ txt.substring(debut+r[0].length, 100000);
+		temp['compteur'+compteur] = r[2];
+		compteur++;
+	}
+	txt = txt.split(/[, ]+/);
+	for (i=0; i<txt.length; i++) {
+		if (txt[i].match('^compteur[0-9]+$')) {
+			txt[i] = temp[txt[i]];
+		}
+	}
+	return txt;
+}
+
+function jointags(a) {
+	var tag, sp;
+	for (var i = 0; i < a.length; i++) {
+		tag = a[i];
+		if (tag.split('"').length == 1
+		&&(tag.split(' ').length > 1
+			|| tag.split(',').length > 1
+		)) {
+			tag = '"'+tag+'"';
+		}
+		a[i] = tag;
+	}
+
+	return a.join(' ');  // ici mettre ' ' si on ne veut pas de virgule et ', ' dans le cas contraire
+}
+
+
+
+function addtag() {
+    var thisTag = this.innerHTML;
+    var taglist = document.getElementById('tags');
+    var tags = splittags(taglist.value);
+    
+   var pop = new Array();
+   var populartags = document.getElementById('popularTags').getElementsByTagName('span');
+       
+    //effacer la saisie 
+   for (var i = 0; i < populartags.length; i++) {
+		pop[i] = populartags[i].innerHTML ;
+		}
+   
+    for (var i = 0; i < tags.length; i++) {
+		if (!pop.contains(tags[i])) {
+		tags = tags.remove(tags[i]);
+		}
+	}
+   
+    // If tag is already listed, remove it
+    if (tags.contains(thisTag)) {
+        tags = tags.remove(thisTag);
+        this.className = 'unselected';
+        
+        
+    // Otherwise add it
+    } else {
+        tags.push(thisTag);
+        // tags.splice(0, 0, thisTag);
+        this.className = 'selected';
+    }
+    
+    taglist.value = jointags(tags);
+    document.getElementById('tags').focus();
+}
+
+function loadpopular() {
+	var taglist = document.getElementById('tags');
+
+	var tags = splittags(taglist.value);
+
+	var populartags = document.getElementById('popularTags').getElementsByTagName('span');
+
+	for (var i = 0; i < populartags.length; i++) {
+		populartags[i]['onmousedown'] = addtag;
+		if (tags.contains(populartags[i].innerHTML)) {
+			populartags[i].className = 'selected';
+		}
+	}
+document.onkeydown = document.onkeypress = document.onkeyup = handler ;
+}
+
+
+function handler(event) { var e=(event||window.event) //w3||ie
+	var taglist = document.getElementById('tags');
+	var tags = splittags(taglist.value);
+
+	
+	for (var i = 0; i < pop.length; i++) {
+		pop[i].className = '';
+		if (tags.contains(pop[i].innerHTML)) {
+			pop[i].className = 'selected';
+		}
+	}
+	
+		if (e.type == 'keypress' && e.keyCode == 9) {
+		e.preventDefault();
+	
+		susu=document.getElementById('suggestions').getElementsByTagName('span');
+		document.write(susu.tosource());
+		susu[0] = addtag ;
+			}
+			
+			if (e.type == 'keypress' && e.keyCode == 32) {
+			//effacer les suggestions
+	var tab_sug = document.getElementById('suggestions') ;
+	tab_sug.innerHTML='&nbsp;';
+			}
+		
+		if (e.type == 'keyup') {
+		//effacer les suggestions
+		var tab_sug = document.getElementById('suggestions') ;
+		tab_sug.innerHTML='&nbsp;';
+
+		var saisie = tags.pop() ;
+		
+		var is_text = new RegExp('^[A-Za-z0-9]+$');
+		var re = new RegExp('^'+saisie+'[A-Za-z0-9]+$' , 'gi');
+		
+		if(saisie.match(is_text)){
+
+			var i = 1 ;
+			for (var j = 0; j < pop.length; j++) {
+				//trouver les tags
+				var tag_c = pop[j].innerHTML;
+				if (tag_c.match(re) ) {
+				pop[j].className = 'auto';
+				
+				//afficher des suggestions 
+				var suggestion = document.createElement('span');
+				suggestion.id = 'span'+i ;
+				var titre = document.createTextNode(tag_c);
+				document.getElementById('suggestions').appendChild(suggestion);	
+				
+				document.getElementById('span'+i).appendChild(titre);		
+		
+				suggestion['onmousedown'] = addtag;
+				i=i+1;
+				}
+		}	}
+			
+}}
+var pop = document.getElementById('popularTags').getElementsByTagName('span');
+loadpopular();
+
+
+
+// --></script>
