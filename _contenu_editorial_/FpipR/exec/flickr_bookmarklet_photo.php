@@ -173,7 +173,7 @@ function flickr_afficher_articles_boucle($row, $langue_defaut, $voir_logo, $id,$
 	if (acces_restreint_rubrique($id_rubrique))
 		$s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
 
-	$s .= "<a href='" . generer_action_auteur("flickr_ajouter_documents","$id_article",generer_url_ecrire('articles',"id_article=$id_article"))."&id=$id_article&type=article&photos[]=".urlencode("$id@#@$secret")."'$descriptif$dir_lang style=\"display:block;\">";
+	$s .= "<a href='" . generer_action_auteur("flickr_ajouter_documents","$id_article",generer_url_ecrire('articles',"id_article=$id_article",false,_DIR_RESTREINT_ABS))."&id=$id_article&type=article&photos[]=".urlencode("$id@#@$secret")."'$descriptif$dir_lang style=\"display:block;\">";
 
 	if ($voir_logo) {
 		$logo_f = charger_fonction('chercher_logo', 'inc');

@@ -1,5 +1,8 @@
 <?php
 
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__).'/../')));
+define('_DIR_PLUGIN_FPIPR',(_DIR_PLUGINS.end($p)));
+
 function exec_flickr_choix_photos() {
   global $connect_id_auteur;
 
@@ -10,50 +13,9 @@ function exec_flickr_choix_photos() {
 <html>
   <head>
     <title>'._T('fpipr:ajouter_photos').'</title>
-    <style>
-body {
-	background: #ffffff;
-	width: 90%;
-	margin-right: auto;
-	margin-left: auto;
-	color: #333399;
-	font: small Geneva, Arial, Helvetica, sans-serif;
-}
+	
 
-h1 {
-	font-size: x-large;
-	color: #333399;
-	font-weight: bolder;
-	letter-spacing: 1px;
-	text-align: left;
-}
-
-li {
-	background: #333399;
-	width: 100px;
-	height: 130px;
-	color: #ff0080;
-	padding: 5px;
-	margin: 10px;
-	font-size: x-small;
-	text-align: left;
-	float: left;
-	list-style-type:none;
-}
-
-img {
-	margin: 10px;
-	border: 2px solid #ffffff;
-}
-
-
-img:hover {
-	border: 2px solid #000000;
-}
-
-
-li img {display:block; clear:both;}       #recherche label {display: block;}
-    </style>
+	<link href="'._DIR_PLUGIN_FPIPR.'/styles.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>';

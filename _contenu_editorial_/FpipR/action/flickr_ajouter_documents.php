@@ -65,8 +65,6 @@ function action_flickr_ajouter_documents() {
 		  }
 		}
 	  }
-	  //var_dump($redirect);
-	  //exit;
 	  redirige_par_entete(urldecode($redirect));
 	}
   }
