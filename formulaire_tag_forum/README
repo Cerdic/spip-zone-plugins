@@ -1,6 +1,4 @@
-les fichiers (formulaire_tag_forum.html et inc-formulaire_tag_forum.php)squelette de balise se placent dans votre repertoire squelettes.
-
-ils supposent que la librairie inc_tag-machine.php se trouve dans le repertoire ecrire/_libs_/tag-machine/
+ils supposent que le plugin tag-machine est installé et actif.
 
 On l'utilise dans une boucle Forum, par exemple:
 <code>
