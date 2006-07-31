@@ -2,9 +2,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-//on utilise cette variable pour dire quelles variables doivent être récupérées de l'environement: url, boucle englobante
-global $balise_FORMULAIRE_TAG_FORUM_collecte;
-$balise_FORMULAIRE_TAG_FORUM_collecte = array('id_forum','fond');
 
 // les filtres pour le formulaire
 function echapper_mot($titre, $type, $groupe_defaut) {
@@ -19,6 +16,13 @@ function echapper_mot($titre, $type, $groupe_defaut) {
 	$tag = new Tag($titre,$groupe_defaut);
   return $tag->echapper();
 }
+
+
+
+function balise_FORMULAIRE_TAG_FORUM ($p) {
+	return calculer_balise_dynamique($p,'FORMULAIRE_TAG_FORUM', array('id_forum', 'fond'));
+}
+
 
 /*
 * La fonction statique retourne fait les verifications sur les variables récupérées par collecte
