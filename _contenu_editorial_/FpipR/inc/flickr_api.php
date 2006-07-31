@@ -276,7 +276,7 @@ function flickr_photosets_getList($user_id,$auth_token='') {
 	  $new_p->owner = $user_id;
 	  if(preg_match_all('#([a-zA-Z_]+)="(.*?)"#',$set,$matches,PREG_SET_ORDER)) {
 		foreach($matches as $m) {
-		  $new_p->$matches[1] = $matches[2];
+		  $new_p->$m[1] = $m[2];
 		}
 	  }
 	  foreach($data[0] as $k => $v) {
