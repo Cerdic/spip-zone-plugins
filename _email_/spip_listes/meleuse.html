@@ -5,59 +5,12 @@
 <head>
 	<title>#NOM_SITE_SPIP</title>
 	<meta http-equiv='Content-Type' content='text/html; charset=#CHARSET' />
-	<style type="text/css">
-	<!--
-	
-	body {
-		color:#000000;
-		background-color:#F5F5F5;
-		font-family:sans-serif;
-	}
-	
-	
-	.cadre {
-		/*border: 1px #000000 solid;*/
-		background-color:#FFFFFF;
-	        text-align: justify;
-	        width:500px;
-	        padding: 10px;
-	        margin-left: auto;
-	        margin-right: auto;
-	        margin-bottom: 10px;
-		-moz-border-radius: 6px;
-		border-radius: 6px;
-	}
-	
-	h1 {
-	 font-size: 150%;
-	 text-decoration: underline ;
-	
-	}
-	
-	.bloc {
-	 margin-top: 10px;
-	 padding: 10px;
-	 text-align: center;
-	}
-	
-	.cdt{
-	  font-size:10px;
-	  text-align:center;
-	  margin-top:10px
-	}
-	
-	-->
-	</style>
 </head>
 <body dir="#LANG_DIR">
 		
 	<div class='bloc'>
 		<h1>#NOM_SITE_SPIP</h1>
-		
-
-		
 		<div class='cadre'>
-			
 			
 			
 			
@@ -85,6 +38,11 @@
 
 // Trouver un message à envoyer
 
+include_spip('inc/meta');
+include_spip('spiplistes_boutons');
+include_once(_DIR_PLUGIN_SPIPLISTES.'/inc/spiplistes_mail.inc.php');
+
+
 $charset=lire_meta('charset');
 
 global $table_prefix;
@@ -96,9 +54,10 @@ $message_pile = spip_num_rows($result_pile);
 if ($message_pile > 0){
 
 	//locker
-	$meta_liste = get_extra(1,"auteur");
-	$meta_liste["locked"] = "oui" ;
-	set_extra(1,$meta_liste,"auteur");
+	$meta_liste = lire_meta('lock');
+	$meta_liste = "oui" ;
+	ecrire_meta('lock' , $meta_liste);
+	ecrire_metas();
 
 	// Message
 	$row = spip_fetch_array($result_pile);
@@ -177,11 +136,10 @@ if ($message_pile > 0){
 
 	$objet= filtrer_entites($titre);
   	if ($charset <> 'utf-8') {
-	   $objet = str_replace("&#8217;", "'", $objet);
+ 	   $objet = str_replace("&#8217;", "'", $objet);
 	   $objet = str_replace("&#8220;", "\"", $objet);
 	   $objet = str_replace("&#8221;", "\"", $objet);
-	}
-
+ 	}
 	$texte = absolute_url($texte);
 	
 	// on prépare la version texte
@@ -191,7 +149,7 @@ if ($message_pile > 0){
 		$texte = str_replace("&#8220;", "\"", $texte);
 		$texte = str_replace("&#8221;", "\"", $texte);
 	}
-  
+	
   
     $page_ = version_texte($texte);
 
@@ -203,18 +161,9 @@ if ($message_pile > 0){
 	
 	// on prépare la version html
 
-	$pageh = "This is a multi-part message in MIME format\n";
-	$pageh .="--$boundary\nContent-Type: text/plain;charset=\"$charset\"\n";
-	$pageh .="Content-Transfer-Encoding: 7 BIT\n\n";
-	$pageh .=_T('spiplistes:non_html')."\n".$urlsite."\n".version_texte($texte)."\n";
-	$pageh .="\n\n";
-	$pageh .="--$boundary\nContent-Type: text/html;charset=\"$charset\"\n";
-	$pageh .="Content-Transfer-Encoding: 7 BIT\n\n";
-	$pageh .="<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n";
-	$pageh .="<HTML><HEAD></HEAD><BODY>";
-	$pageh .= $texte;
-	// la fin de la version html sera générée pour chaque destinataire
 
+	$pageh = "<html>\n\n<body>\n\n".$texte."\n\n";
+	// la fin de la version html sera générée pour chaque destinataire
   
 	// Envoi par lot
 	// Compter les inscrits
@@ -238,9 +187,8 @@ if ($message_pile > 0){
 	$result_inscrits = spip_query($query);
 	$nb_inscrits = spip_num_rows($result_inscrits);
 
-	$extra_meta = get_extra(1,"auteur");
-	$extra_meta["total_auteurs"] = $nb_inscrits ;
-	set_extra(1,$extra_meta,"auteur");
+	ecrire_meta('total_auteurs' , $nb_inscrits);
+	ecrire_metas();
 	echo _T('spiplistes:contacts')." : ".$nb_inscrits."\n" ;
 
 	if($test == 'oui' && $nb_inscrits == 0){
@@ -250,20 +198,18 @@ if ($message_pile > 0){
 	
 	if($nb_inscrits > 0){
 	
-	// l' extra debut existe il ?
+	// initialiser le compteur 
+	if(!$meta_liste = lire_meta('debut')){
+	$meta_liste = 0 ;
+	ecrire_meta('debut' , $meta_liste);
+	ecrire_metas();
+	}
 	
-		$deb = get_extra(1,"auteur");
-		if(!$deb["debut"]){
-			$deb["debut"] = 0;
-			set_extra(1,$deb,"auteur");
-			$deb = get_extra(1,"auteur");
-		}
-	 
-		echo "<h3>"._T('spiplistes:message'). $titre."</h3>\n";
+	echo "<h3>"._T('spiplistes:message'). $titre."</h3>\n";
     echo "<img src='plugins/spip_listes/img_pack/48_import.gif' alt='sending mail ...' /><br />\n";
 	
 		//Envoi par lots
-		$debut = $deb["debut"];
+		$debut = lire_meta('debut') ;
 		$limit=20; // nombre de messages envoyés par boucles.	
 		if($test== 'oui'){
 			global $table_prefix;
@@ -289,21 +235,21 @@ if ($message_pile > 0){
 				if ($test== 'oui') {				
   				$texte_original = eregi_replace("__bLg__[0-9@\.A-Z_-]+__bLg__","",$texte_original);
   				$texte_original = addslashes($texte_original);
-  				spip_query("UPDATE ".$table_prefix."_messages SET statut='redac', texte='$texte_original' WHERE id_message='$id_message'");
-  				$deb["debut"] = 0 ;
-  				$deb["total_auteurs"] = 0 ;
+  			spip_query("UPDATE ".$table_prefix."_messages SET statut='redac', texte='$texte_original' WHERE id_message='$id_message'");
+  				ecrire_meta('debut', 0 ) ;
+  				ecrire_meta('total_auteurs', 0 ) ;
 				} else {
   				// archiver
   				$texte = addslashes($texte) ;
   				spip_query("UPDATE ".$table_prefix."_messages SET statut='publie' WHERE id_message='$id_message'");
-  				$deb["debut"] = 0 ;
-  				$deb["total_auteurs"] = 0 ;
+  				ecrire_meta('debut', 0 ) ;
+  				ecrire_meta('total_auteurs', 0 ) ;
 				}	
 			//attention si on interrompt
 			} else {
-			 $deb["debut"] = $debut ;
+			 ecrire_meta('debut', $debut ) ;
 			}	
-		set_extra(1,$deb,"auteur");	
+		ecrire_metas();	
 		
 		echo "<h4>"._T('spiplistes:contacts_lot')."</h4>\n";
 		echo "<ul>\n";
@@ -317,6 +263,7 @@ if ($message_pile > 0){
 		
 				$nom_auteur = $row3["nom"];
 				$str_temp .= "<li>".$nom_auteur;
+		
 				$email = $row3["email"];
 				$id = $row3["id_auteur"];
 				$total=$total+1;
@@ -324,31 +271,27 @@ if ($message_pile > 0){
 				
 				$extra = unserialize ($row3["extra"]);
 				if (($extra["abo"] == 'texte') OR ($extra["abo"] == 'html')) $abo = true;
-				                                                        else $abo = false;				
+				                                                       else $abo = false;				
+
+				
 				if ($abo) {
 					$cookie = creer_uniqid();
 					spip_query("UPDATE spip_auteurs SET cookie_oubli = '$cookie' WHERE email ='$email'");				
-		
-					if ($extra["abo"] == 'texte'){    // email TXT -----------------------
-					// entete texte			
-					$headers = "From: $from\n";
-					$headers .= "Reply-to: $from\n";
-					$headers .= "Return-Path: $from\n";					 
-					//$headers .= "cc:$from\n";
-					//$headers .= "bcc:$from\n, $from\n";
-					$headers .= "MIME-Version: 1.0\n";
-					$headers  .= "Content-Type: text/plain; charset=\"$charset\"\n";
-					$headers  .= "Content-Transfer-Encoding:8bit\n";
-					$headers  .= "\n";
 		
 					// pied de page texte			
 					$pagem = $page_."\n\n"  ;
 					$pagem.= filtrer_entites(_T('spiplistes:abonnement_mail'))."\n" ;
 					$pagem.= generer_url_public("abonnement","d=$cookie")."\n\n"  ;
 		
+				if ($extra["abo"] == 'texte'){    // email TXT -----------------------
+
 					// fin du pied de page texte					
-						if (email_valide_bloog($from)){							
-							if (@mail($email,$objet,$pagem,$headers)) {
+						$email_a_envoyer = new phpMail($email, $objet, '',$pagem);
+						if (email_valide_bloog($from)){	
+						$email_a_envoyer->AddCustomHeader("Errors-To: ".$from);
+						$email_a_envoyer->AddCustomHeader("Return-Path: ".$from);
+	
+							if ($email_a_envoyer->Send()) {
 							     $str_temp .= " <span style='color:green'>ok</span>";
 							     $cmpt++;
               } else {
@@ -359,26 +302,19 @@ if ($message_pile > 0){
             }
 		
 					} else if ($extra["abo"] == 'html') {  // email HTML ------------------
-						//entete html
-						$headersh = "From: $from\n";
-						$headersh .= "Reply-to: $from\n";
-						$headersh .= "Return-Path: $from\n";		
-						//$headers .= "cc:$from\n"; // CC to
-						//$headers .= "bcc:$from\n, $from\n"; // BCCs to
-						$headersh .="MIME-Version: 1.0\n";
-						$headersh  .="Content-Type: MULTIPART/ALTERNATIVE;BOUNDARY=\"$boundary\"\n\n";
 		
-						// pied de page HTML
-		
-						$pagehm = $pageh."<hr />"._T('spiplistes:editeur')."<a href=\"".$urlsite."\">".$nomsite."</a><br />
-						<a href=\"".$urlsite."\">".$urlsite."</a><hr />
-						<a href=\"".generer_url_public('abonnement','d='.$cookie)."\">"._T('spiplistes:abonnement_mail')."</a></BODY></HTML>";
-						$pagehm .="\n\n\n--$boundary--\n end of the multi-part";
+						$pagehm = $pageh."<hr style=\"noshade color:#000;size:1px;\" />"._T('spiplistes:editeur')."<a href=\"".$urlsite."\">".$nomsite."</a><br /><a href=\"".$urlsite."\">".$urlsite."</a><hr style=\"noshade color:#000;size:1px;\"/>
+						<a href=\"".generer_url_public('abonnement','d='.$cookie)."\">"._T('spiplistes:abonnement_mail')."</a>\n\n</body></html>";
+						
 		
 						// fin du pied de page HTML
-		
-						if (email_valide_bloog($from)){							
-							if (@mail($email,$objet,$pagehm,$headersh)){
+		$email_a_envoyer = new phpMail($email, $objet, $pagehm, $pagem);
+						if (email_valide_bloog($from)){	
+						
+						$email_a_envoyer->AddCustomHeader("Errors-To: ".$from);
+						$email_a_envoyer->AddCustomHeader("Return-Path: ".$from);
+
+							if ($email_a_envoyer->Send()){
 							     $str_temp .= " <span style='color:green'>ok</span>";
 							     $cmpt++;
               } else {
@@ -404,20 +340,17 @@ if ($message_pile > 0){
 	echo "<h4>"._T('spiplistes:erreur_sans_destinataire')."</h4> <h4>"._T('spiplistes:envoi_annule')."</h4>";
 		 
 	spip_query("UPDATE ".$table_prefix."_messages SET titre='"._T('spiplistes:erreur_destinataire')."', statut='publie' WHERE id_message='$id_message'"); 
-	$deb = get_extra(1,"auteur");
-	$deb["debut"] = 0 ;
-	$deb["total_auteurs"] = 0 ;
-	set_extra(1,$deb,"auteur");
+	ecrire_meta('debut', 0 ) ;
+  	ecrire_meta('total_auteurs', 0 ) ;
+	ecrire_metas();
 	}
 	
-	
-
-
-	
 	//delocker
-	$meta_liste = get_extra(1,"auteur");
-	$meta_liste["locked"] = "non" ;
-	set_extra(1,$meta_liste,"auteur");
+	$meta_liste = lire_meta('lock');
+	$meta_liste = "non" ;
+	ecrire_meta('lock' , $meta_liste);
+	ecrire_metas();
+	
 	echo "<div><a href='".generer_url_public('meleuse')."'>"._T('spiplistes:forcer_lot')."</a></div>\n";
 
 } else {
@@ -425,9 +358,10 @@ if ($message_pile > 0){
 	echo "<h4>"._T('spiplistes:envoi_fini')."</h4>"   ;
 	echo _T('spiplistes:non_courrier');
 	//delocker
-	$meta_liste = get_extra(1,"auteur");
-	$meta_liste["locked"] = "non" ;
-	set_extra(1,$meta_liste,"auteur");
+	$meta_liste = lire_meta('lock');
+	$meta_liste = "non" ;
+	ecrire_meta('lock' , $meta_liste);
+	ecrire_metas();
 
 }	/* flag pile*/
 ?>
@@ -435,9 +369,53 @@ if ($message_pile > 0){
 			
 			
 						
-					</div>
+		</div>
 		<p style="text-align:center"><a href='#URL_SITE_SPIP/ecrire/?exec=spip_listes'>retour</a></p>
 		<div class='cdt'><:spiplistes:abonnement_cdt:></div>
 	</div>
+<style type="text/css">
+	<!--
+	
+	body {
+		color:#000000;
+		background-color:#F5F5F5;
+		font-family:sans-serif;
+	}
+	
+	
+	.cadre {
+		/*border: 1px #000000 solid;*/
+		background-color:#FFFFFF;
+	        text-align: justify;
+	        width:500px;
+	        padding: 10px;
+	        margin-left: auto;
+	        margin-right: auto;
+	        margin-bottom: 10px;
+		-moz-border-radius: 6px;
+		border-radius: 6px;
+	}
+	
+	h1 {
+	 font-size: 150%;
+	 text-decoration: underline ;
+	
+	}
+	
+	.bloc {
+	 margin-top: 10px;
+	 padding: 10px;
+	 text-align: center;
+	}
+	
+	.cdt{
+	  font-size:10px;
+	  text-align:center;
+	  margin-top:10px
+	}
+	
+	-->
+	</style>
+
 </body>
 </html>

@@ -24,6 +24,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/distant');
+include_spip('inc/affichage');
+include_spip('inc/meta');
+include_spip('inc/config');
+
 
 function exec_config()
 {
@@ -34,17 +38,10 @@ global $connect_id_auteur;
 global $statut_abo,$reinitialiser_config, $Valider_reinit,$changer_config;
 global $_POST;
 
-
- include_ecrire ("inc_config.php3");
  
 $nomsite=lire_meta("nom_site"); 
 $urlsite=lire_meta("adresse_site"); 
 
- 
-init_config();
-if ($changer_config == 'oui') {
-	appliquer_modifs_config();
-}
  
 // Admin SPIP-Listes
 debut_page("Spip listes", "redacteurs", "spiplistes");
@@ -77,6 +74,54 @@ debut_droite("messagerie");
 
 // MODE CONFIG: Configuration de spip-listes -----------------------------------
 
+function configurer_spip_listes() {
+
+  if ($abonnement_config = _request('abonnement_config')) {
+ 	                $abonnement_config = addslashes($abonnement_config);
+ 	                ecrire_meta('abonnement_config', $abonnement_config);
+ 	            } 
+
+
+  if ($smtp_server = _request('smtp_server')) {
+ 	                $smtp_server = addslashes($smtp_server);
+ 	                ecrire_meta('smtp_server', $smtp_server);
+ 	            } 	            	
+ if ($smtp_login = _request('smtp_login')) {
+ 	                $smtp_login = addslashes($smtp_login);
+ 	                ecrire_meta('smtp_login', $smtp_login);
+ 	            }
+ 	            
+ if ($smtp_pass = _request('smtp_pass')) {
+ 	                $smtp_pass = addslashes($smtp_pass);
+ 	                ecrire_meta('smtp_pass', $smtp_pass);
+ 	            } 	
+ 	            
+ if ($smtp_port = _request('smtp_port')) {
+ 	                $smtp_port = addslashes($smtp_port);
+ 	                ecrire_meta('smtp_port', $smtp_port);
+ 	            }   
+ 	            
+  if ($mailer_smtp = _request('mailer_smtp')) {
+ 	                $mailer_smtp = addslashes($mailer_smtp);
+ 	                ecrire_meta('mailer_smtp', $mailer_smtp);
+ 	            }           
+ 
+ if ($smtp_identification = _request('smtp_identification')) {
+ 	                $smtp_identification = addslashes($smtp_identification);
+ 	                ecrire_meta('smtp_identification', $smtp_identification);
+ 	            }
+ 
+  if ($smtp_sender = _request('smtp_sender')) {
+ 	                $smtp_sender = addslashes($smtp_sender);
+ 	                ecrire_meta('smtp_sender', $smtp_sender);
+ 	            }
+ 
+ 	             	  
+ecrire_metas();
+}
+
+configurer_spip_listes();
+
 
 $accepter_visiteurs = lire_meta('accepter_visiteurs');
 
@@ -87,40 +132,19 @@ ecrire_metas();
 echo _T('spiplistes:autorisation_inscription');
 }
 
-$extra = get_extra(1,'auteur');
-
-//print_r($extra);
-
-$deb = $extra['debut'] ;
-//echo "<h1>$deb</h1>";
-if( !is_array($extra) ){
-        $extra = array();
-        $extra["config"] = "simple";
-        set_extra(1,$extra,'auteur');
-        $extra = get_extra(1,'auteur');
-        }
-if( !$extra['config']) {
-        $extra["config"] = "simple";
-        set_extra(1,$extra,'auteur');
-        $extra = get_extra(1,'auteur');
-        }
 
 
-if ($changer_config == 'oui') {
-$extra['config'] = $statut_abo ;
-set_extra(1,$extra,'auteur');
-$extra = get_extra(1,'auteur');
-}
+if(!$abonnement_config = lire_meta('abonnement_config')){
+ ecrire_meta('abonnement_config', $abonnement_config);
+ ecrire_metas();
+ }
 
-$config = $extra['config'];
+$config = lire_meta('abonnement_config') ;
 
-
-
+debut_cadre_relief("redacteurs-24.gif", false, "", _T('spiplistes:mode_inscription'));
 echo "<form action='".generer_url_ecrire('config')."' method='post'>";
 echo "<input type='hidden' name='changer_config' value='oui'>";
  
-  debut_cadre_relief("redacteurs-24.gif", false, "", _T('spiplistes:mode_inscription'));
-
 	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
 
 	echo "<tr><td background='img_pack/rien.gif' class='verdana2'>";
@@ -131,9 +155,9 @@ echo "<input type='hidden' name='changer_config' value='oui'>";
 	 $texte2 = '' ;
         ($config == 'simple' ) ? $texte1 = "checked"  : $texte2 = "checked" ;
 
-  echo "<input type='radio' name='statut_abo' value='simple' $texte1 id='statut_simple'>";
+  echo "<input type='radio' name='abonnement_config' value='simple' $texte1 id='statut_simple'>";
 	echo "<label for='statut_simple'>"._T('spiplistes:abonnement_simple')."</label> ";
-	echo "<p><input type='radio' name='statut_abo' value='membre' $texte2 id='statut_membre'>";
+	echo "<p><input type='radio' name='abonnement_config' value='membre' $texte2 id='statut_membre'>";
 	echo "<label for='statut_membre'>"._T('spiplistes:abonnement_code_acces')."</label></b> ";
 	echo "</td></tr>";
 	echo "<tr><td style='text-align:$spip_lang_right;'>";
@@ -143,29 +167,74 @@ echo "<input type='hidden' name='changer_config' value='oui'>";
 
 echo "</form>";
 fin_cadre_relief();
-	
-if ($reinitialiser_config == 'oui' AND $Valider_reinit) {
-spip_query("DELETE from spip_messages WHERE statut='encour'");
-$extra['debut'] = 0 ;
-$extra['locked'] = "non" ;
-$extra['total_auteurs'] = 0 ;
-set_extra(1,$extra,'auteur');
-$extra = get_extra(1,'auteur');
-}	
-	
-	debut_cadre_relief("redacteurs-24.gif", false, "", _T('spiplistes:tableau_bord'));
-//print_r($extra);
-echo "<form action='".generer_url_ecrire('config')."' method='post'>";
-echo "<input type='hidden' name='reinitialiser_config' value='oui'>";	
 
-	echo "<br />"._T('spiplistes:lock').$extra['locked'] ;
-	echo "<br />"._T('spiplistes:mail_a_envoyer').$extra['total_auteurs'] ;
-	echo "<br />"._T('spiplistes:mail_tache_courante'). $extra['debut'] ;
+
 	
-echo "<input type='submit' name='Valider_reinit' value='"._T('spiplistes:reinitialiser')."' class='fondo' style='float:right'>";
+echo "<form action='".generer_url_ecrire('config')."' method='post'>";
+
+echo '<br />';
+		debut_cadre_trait_couleur("", false, "", "Envoi des emails");
+
+		debut_cadre_relief("", false, "", "M&eacute;thode d'envoi");
+		
+		echo "<div>
+		Si vous n'&ecirc;tes pas s&ucirc;rs, choisissez la fonction mail de PHP.
+		</div>";
+
+		$mailer_smtp = lire_meta('mailer_smtp');
+
+		echo bouton_radio("mailer_smtp", "non", "Utiliser la fonction mail() de PHP", $mailer_smtp == "non", "changeVisible(this.checked, 'smtp', 'none', 'block');");
+		echo "<br />";
+		echo bouton_radio("mailer_smtp", "oui", "Utiliser SMTP", $mailer_smtp == "oui", "changeVisible(this.checked, 'smtp', 'block', 'none');");
+
+		if ($mailer_smtp == "oui") $style = "display: block;";
+		else $style = "display: none;";
+		echo "<div id='smtp' style='$style'>";
+		echo "<ul>";
+		echo "<li>H&ocirc;te <input type='text' name='smtp_server' value='".lire_meta('smtp_server')."' size='30' class='fondl'>";
+		echo "<li>Port <input type='text' name='smtp_port' value='".lire_meta('smtp_port')."' size='4' class='fondl'>";
+		echo "<li>Requiert une identification";
+		
+		$smtp_identification = lire_meta('smtp_identification');
+		
+		echo bouton_radio("smtp_identification", "oui", "oui", $smtp_identification == "oui", "changeVisible(this.checked, 'smtp-auth', 'block', 'none');");
+		echo "&nbsp;";
+		echo bouton_radio("smtp_identification", "non", "non", $smtp_identification == "non", "changeVisible(this.checked, 'smtp-auth', 'none', 'block');");
+
+		if ($smtp_identification == "oui") $style = "display: block;";
+		else $style = "display: none;";
+		echo "<div id='smtp-auth' style='$style'>";
+		echo "<ul>";
+		echo "<li>Login <input type='text' name='smtp_login' value='".lire_meta('smtp_login')."' size='30' CLASS='fondl'>";
+		echo "<li>Password <input type='password' name='smtp_pass' value='".lire_meta('smtp_pass')."' size='30' CLASS='fondl'>";
+		echo "</ul>";
+		echo "</div>";
+
+		echo "</ul>";
+		echo "</div>";
+		
+		echo "<br /><br />";
+		fin_cadre_relief();
+		
+		if ($mailer_smtp == "oui") $style = "display: block;";
+		else $style = "display: none;" ;
+		echo "<div style='$style'>";
+		debut_cadre_relief("", false, "", "adresse email du <i>sender</i> SMTP");
+		echo "<p style='margin:10px'>Lors d'un envoi via la m&eacute;thode SMTP ce champ d&eacute;finit l'adresse de l'envoyeur.</p>";
+		echo "<input type='text' name='smtp_sender' value=\"".lire_meta('smtp_sender')."\" style='width:20em' CLASS='forml'>";
+		fin_cadre_relief();
+		echo "</div>\n";
+		
+		
+		
+echo "<input type='submit' name='valid_smtp' value='"._T('spiplistes:valider')."' class='fondo' style='float:right'>";
 echo "<hr style='clear:both;visibility:hidden'>";
+		
 echo "</form>";	
-fin_cadre_relief();  
+
+		fin_cadre_trait_couleur();
+
+
 
 // SQUELETTES: visionner les patrons---------------------------------------
 //
@@ -233,7 +302,7 @@ fin_cadre_relief();
 	  		  
 	
 	echo "</div>";
-	echo "</FORM>";
+	echo "</form>";
 
 
                 echo "<blockquote><i>"._T('spiplistes:definir_squel_texte')."</i></blockquote>";
@@ -244,7 +313,6 @@ fin_cadre_relief();
 
 	echo "</table>\n";
 
-	echo "</FORM>";
 	
 	// doit on visualiser un squelette ?
 if (isset($_POST['patron'])) {
@@ -272,11 +340,36 @@ echo $texte_patron.version_texte($texte_patron) ;
 // SQUELETTES FIN ---------------------------------------------------------
 
 
+
+$deb = lire_meta('debut');
+
+if ( !($deb) OR ($reinitialiser_config == 'oui' AND $Valider_reinit)) {
+spip_query("DELETE from spip_messages WHERE statut='encour'");
+ecrire_meta('debut', 0 ) ;
+ecrire_meta('lock' , 'non') ;
+ecrire_meta('total_auteurs' , 0) ;
+ecrire_metas();
+}
+
+debut_cadre_relief("redacteurs-24.gif", false, "", _T('spiplistes:tableau_bord'));
+
+echo "<form action='".generer_url_ecrire('config')."' method='post'>";
+echo "<input type='hidden' name='reinitialiser_config' value='oui'>";	
+
+	echo "<br />"._T('spiplistes:lock').lire_meta('lock') ;
+	echo "<br />"._T('spiplistes:mail_a_envoyer').lire_meta('total_auteurs') ;
+	echo "<br />"._T('spiplistes:mail_tache_courante').lire_meta('debut') ;
+	
+
+	
+echo "<input type='submit' name='Valider_reinit' value='"._T('spiplistes:reinitialiser')."' class='fondo' style='float:right'>";
+echo "<hr style='clear:both;visibility:hidden'>";
+echo "</form>";	
+fin_cadre_relief();
+
 // MODE CONFIG FIN -------------------------------------------------------------
 
-
-
-$spiplistes_version = "SPIP-listes b1.9";
+$spiplistes_version = "SPIP-listes 1.9b1";
 echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$spiplistes_version."<p>" ;
 
 fin_page();

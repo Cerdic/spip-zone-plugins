@@ -22,6 +22,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
+include_spip('inc/affichage');
 
 
 function exec_courrier_preview()
@@ -44,8 +45,9 @@ $result_m = spip_query($query_m);
 	    $texte = propre($texte); // pb: enleve aussi <style>...
 	    $texte = propre_bloog($texte);
 	    $texte = ereg_replace("__STYLE__", $style_str, $texte);
-	    echo "$texte";
+	    echo liens_absolus($texte);
 	}
 
 }
+
 ?>

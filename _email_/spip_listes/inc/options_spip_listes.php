@@ -19,9 +19,6 @@
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
 /******************************************************************************************/
 
-include_spip('inc/affichage');
-include_spip('inc/extra_plus');
-
 // Bloogletter
 
 

@@ -176,7 +176,7 @@ et de recevoir les lettres d\'informations.',
 'sujet_clos_texte' => 'Ce sujet est clos, vous ne pouvez pas y poster.',
  
  //T
-'texte_boite_en_cours' => 'SPIP-Listes envoie un message automatique en ce moment. <p> Vous pouvez provoquer l\'envoi acc&eacute;l&eacute;r&eacute; des lots gr&acirc;ce au lien ci-dessous.</p> <p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>',
+'texte_boite_en_cours' => 'En ce moment, SPIP-Listes envoie un message. <p> Vous pouvez provoquer l\'envoi acc&eacute;l&eacute;r&eacute; des lots gr&acirc;ce au lien ci-dessous.</p> <p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>',
 'texte_lettre_information' => 'Voici la lettre d\'information de ',
 'Tous_les' => 'Tous les',
 

@@ -44,8 +44,8 @@ $type = _request('type');
 	
 // recuperation de la config
 	
-$acces_abonne = get_extra(1,"auteur");
-($acces_abonne['config'] == 'membre') ? $acces_membres = 'oui' : $acces_membres = 'non';
+$acces_abonne = lire_meta('abonnement_config');
+($acces_abonne == 'membre') ? $acces_membres = 'oui' : $acces_membres = 'non';
 	
 // aller chercher le formulaire html qui va bien				
 $formulaire = "formulaires/".$formulaire ;		
@@ -128,7 +128,7 @@ $inscription_visiteur ="";
 					'reponse_formulaire' => $reponse_formulaire,
 					'accepter_auteur' => lire_meta("accepter_inscriptions") ,
 					'liste' => $liste
-						)
+					)
 				);
 				
 				

@@ -44,23 +44,19 @@ $urlsite=lire_meta("adresse_site");
 $time = time();
 
 
-$meta_liste = get_extra(1,"auteur");
-$locked = $meta_liste["locked"];
-if(!$locked){
-$meta_liste["locked"] = "non" ;
-set_extra(1,$meta_liste,"auteur");
-$meta_liste = get_extra(1,"auteur");
-}
-$locked = $meta_liste["locked"];
+	
+	
+$locked = lire_meta('lock');
 
+if(!$locked){
+$meta_liste = lire_meta('lock');
+	$meta_liste = "non" ;
+	ecrire_meta('lock', $meta_liste);
+	ecrire_metas();
+}
 
 
 // Vérifier toutes les listes et determiner les dates d'envoi
-
-
-/***********/
-
-
 
 $list_bg = spip_query ("SELECT * FROM spip_articles WHERE statut = 'liste' OR statut = 'inact'");
 

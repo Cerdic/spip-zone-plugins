@@ -23,6 +23,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/distant');
+include_spip('inc/affichage');
+include_spip('inc/meta');
+include_spip('inc/filtres');
+
 
 function exec_import_patron()
 {
@@ -65,7 +69,7 @@ $urlsite=lire_meta("adresse_site");
 	echo "</form>";
 	echo "</div>";
 	echo "<div style='text-align:left;margin-right:250px;border-right:2px outset #000000'>";
-	echo $texte_patron.$message_erreur;
+	echo liens_absolus($texte_patron).$message_erreur;
 	
 	echo "<hr />"._T('spiplistes:editeur')."<a href=\"".$urlsite."\">".$nomsite."</a><br />";
 	echo "<a href=\"".$urlsite."\">".$nomsite."</a><hr />";
@@ -74,5 +78,7 @@ $urlsite=lire_meta("adresse_site");
 	echo "</BODY></HTML>";
 		 
 	}	
+$spiplistes_version = "SPIP-listes 1.9b1";
+echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$spiplistes_version."<p>" ;
 
 ?>

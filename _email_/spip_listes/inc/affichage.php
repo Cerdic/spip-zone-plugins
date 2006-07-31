@@ -70,24 +70,21 @@ $rsult_pile = spip_query($qery_message);
 $mssage_pile = spip_num_rows($rsult_pile);
 		
 
-//initialiser le nombre total d'abonnes		
-$extra_meta = get_extra(1,"auteur");
-if(!$extra_meta["total_auteurs"]){
-  $extra_meta["total_auteurs"] = "0";
-  set_extra(1,$extra_meta,"auteur");
-  $extra_meta = get_extra(1,"auteur");
-}
-
-
 if($mssage_pile > 0 ){
 	// Les valeurs sont deja initialisés
 	// Compter le nombre de mails à envoyer
 
-	$nb_inscrits = $extra_meta["total_auteurs"];
+	$nb_inscrits = $GLOBALS["meta"]["total_auteurs"];
+	if(!nb_inscrits){
+	//initialiser le nombre total d'abonnes		
+	ecrire_meta('total_auteurs', 0);
+	ecrire_metas();
+	}
+	
 	echo "<br />";
 	debut_boite_info();
 
-	echo "<div style='font-weight:bold;text-align:center'>"._T('spiplistes:message_en_cours')."</div>";
+		echo "<div style='font-weight:bold;text-align:center'>"._T('spiplistes:envoi_en_cours')."</div>";
 	echo "<div style='padding : 10px;text-align:center'><img src='../"._DIR_PLUGIN_SPIPLISTES."/img_pack/48_import.gif'></div>";
 	if($nb_inscrits > 0){
 		echo "<p align='center'><b>".round($extra_meta["debut"]/$nb_inscrits *100)." %</b></p>";
@@ -102,9 +99,9 @@ if($mssage_pile > 0 ){
   }*/
 	
 	fin_boite_info();
- } elseif ($extra_meta["debut"] != 0){
-	$extra_meta["debut"] = 0; // initialiser le compteur a zero pour etre sur
-	set_extra(1,$extra_meta,"auteur");
+ } elseif ($GLOBALS["meta"]["debut"] != 0){
+	ecrire_meta('debut', 0);// initialiser le compteur a zero pour etre sur
+	ecrire_metas();
 }
 
 

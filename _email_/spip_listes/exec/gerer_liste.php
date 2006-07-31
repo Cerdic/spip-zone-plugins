@@ -24,6 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/mots');
+include_spip('inc/affichage');
 
 
 function exec_gerer_liste()
@@ -1407,10 +1408,7 @@ if ($ok_nouveau_statut || $reindexer) {
 
 // MODE EDIT LISTE FIN ---------------------------------------------------------
 
-
-
-
-$spiplistes_version = "SPIP-listes b1.9";
+$spiplistes_version = "SPIP-listes 1.9b1";
 echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$spiplistes_version."<p>" ;
 
 fin_page();

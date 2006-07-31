@@ -23,6 +23,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
+include_spip('inc/affichage');
 
 
 function exec_listes_toutes()
@@ -140,9 +141,7 @@ spiplistes_afficher_en_liste(_T('spiplistes:listes_poubelle'), '../'._DIR_PLUGIN
 
 // MODE EDIT LISTES FIN --------------------------------------------------------
 
-
-
-$spiplistes_version = "SPIP-listes b1.9";
+$spiplistes_version = "SPIP-listes 1.9b1";
 echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$spiplistes_version."<p>" ;
 
 fin_page();

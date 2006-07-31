@@ -19,6 +19,7 @@ if (!is_array($GLOBALS['champs_extra_proposes'])) $GLOBALS['champs_extra_propose
 	$GLOBALS['champs_extra_proposes']['auteurs']['tous'] = 'abo' ;
 	//$GLOBALS['champs_extra_proposes']['articles']['0'] = 'squelette' ;
 		
+include_spip('inc/extra_plus');
 
 //Balises Spip-listes
 
