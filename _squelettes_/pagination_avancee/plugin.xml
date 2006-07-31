@@ -1,4 +1,4 @@
-<plugin>        <nom> <!-- Nom du plugin -->        pagination_avancee        </nom>        <auteur>        <!-- Auteur du plugin -->        Maïeul Rouquette (maieulrouquette@tele2.fr)        </auteur>        <version>        0.1        </version>        <etat>        experimental        
+<plugin>        <nom> <!-- Nom du plugin -->        pagination_avancee        </nom>        <auteur>        <!-- Auteur du plugin -->        Maïeul Rouquette (maieulrouquette@tele2.fr)        </auteur>        <version>        0.1        </version>        <etat>        test        
         </etat>        <description>      
       	Permet d'avoir de nouveaux modele de pagination.
         
@@ -10,5 +10,8 @@
 -* page : affiche les pages de 1 à n
         
         On peut metter ses propres modéles dans inc/        </description>       <lien>[http://zone.spip.org/trac/spip-zone/wiki/Pagination_avancee ->http://zone.spip.org/trac/spip-zone/wiki/Pagination_avancee]
-       </lien>        <fonctions> <!-- fichier charge a chaque recalul de page -->        mes_fonctions.php        </fonctions>        <!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction        sur le mode Rien::        ainsi les fonctions hors espace de nommage ne peuvent etre appelees        ce parametre est obligatoire et doit etre non vide        -->        
+       </lien>        <prefix>
+        pagination_avancee
+        </prefix>
+        <fonctions> <!-- fichier charge a chaque recalul de page -->        mes_fonctions.php        </fonctions>        <!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction        sur le mode Rien::        ainsi les fonctions hors espace de nommage ne peuvent etre appelees        ce parametre est obligatoire et doit etre non vide        -->        
                 <!-- Definitions des fonctions qui s'inserent dans les pipelines -->                <!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.        --></plugin>
