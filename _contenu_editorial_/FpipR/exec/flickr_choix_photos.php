@@ -13,8 +13,6 @@ function exec_flickr_choix_photos() {
 <html>
   <head>
     <title>'._T('fpipr:ajouter_photos').'</title>
-	
-
 	<link href="'._DIR_PLUGIN_FPIPR.'/styles.css" rel="stylesheet" type="text/css" />
   </head>
 

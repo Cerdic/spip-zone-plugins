@@ -28,5 +28,7 @@
 	  <nom>affiche_gauche</nom>
 	  <inclure>FpipR.php</inclure>
 	</pipeline>
-
+	<options>
+	  options.php
+	</options>
 </plugin>
