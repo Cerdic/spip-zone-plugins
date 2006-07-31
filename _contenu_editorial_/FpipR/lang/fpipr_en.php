@@ -32,7 +32,20 @@ A new window will open, please follow the instructions it will provide.',
 									   'ajouter_une_photo' => 'Add a photo',
 									   'ajouter_une_photo_info' => 'Add the photo "@title@" by @owner@',
 									   'choisir_un_article' => 'Choose an article',
-									   'par' => '@title@ by <a href="@url@">@user@</a>'
+									   'par' => '@title@ by <a href="@url@">@user@</a>',
+
+									   'warning_family_friend' => 'Beware, this photo is only <strong>visible to familly and friends</strong>. If you add it to one of your article, it might be visible to everyone. Ask the authorisation to the author of the photo before continuing',
+									   'warning_family' => 'Beware, this photo is only <strong>visible to familly</strong>. If you add it to one of your article, it might be visible to everyone. Ask the authorisation to the author of the photo before continuing',
+									   'warning_friend' => 'Beware, this photo is only <strong>visible to friends</strong>. If you add it to one of your article, it might be visible to everyone. Ask the authorisation to the author of the photo before continuing',
+
+									   'warning_copyright_general' => 'Beware, this photo is protected by a license: <strong><a href="@url@">"@name@"</a></strong>. Get more information and ask the author of the photo before posting on this site.',
+									   'warning_copyright_0' => 'Beware, this photo is protected by <strong>copyright</strong>. You need to ask the author of the photo before posting it on this site.',
+									   'warning_copyright_1' => 'Beware, this photo is protected by a license: <strong><a href="http://creativecommons.org/licenses/by-nc-sa/2.0/">"CC Attribution - NonCommercial - ShareAlike"</a></strong>. Get more information and ask the author of the photo if needed.',
+									   'warning_copyright_2' => 'Beware, this photo is protected by a license: <strong><a href="http://creativecommons.org/licenses/by-nc/2.0/">"CC Attribution - NonCommercial"<a></strong>. Get more information and ask the author of the photo if needed.',
+									   'warning_copyright_3' => 'Beware, this photo is protected by a license: <strong><a href="http://creativecommons.org/licenses/by-nc-nd/2.0/">"CC Attribution - NonCommercial - NoDerivs"</a></strong>. Get more information and ask the author of the photo if needed.',
+									   'warning_copyright_4' => 'Beware, this photo is protected by a license: <strong><a href="http://creativecommons.org/licenses/by/2.0/">"Attribution"</a></strong>. Get more information and ask the author of the photo if needed.',
+									   'warning_copyright_5' => 'Beware, this photo is protected by a license: <strong><a href="http://creativecommons.org/licenses/by-sa/2.0/">"Attribution -  ShareAlike"</a></strong>. Get more information and ask the author of the photo if needed.',
+									   'warning_copyright_6' => 'Beware, this photo is protected by a license: <strong><a href="http://creativecommons.org/licenses/by-nd/2.0/">"CC Attribution - NoDerivs"</a></strong>. Get more information and ask the author of the photo if needed.',
 );
 
 ?>

@@ -194,6 +194,12 @@ class PhotoSet {
 
 }
 
+class License {
+  var $url;
+  var $name;
+  var $id;
+}
+
 //======================================================================
 
 function flickr_photos_search(
@@ -394,6 +400,37 @@ function flickr_photos_getInfo($photo_id,$secret,$auth_token='') {
 		<url type="photopage">http://www.flickr.com/photos/bees/2733/</url> 
 	</urls>
   */
+}
+
+function flickr_photos_licenses_getInfo() {
+  $licenses =  flickr_check_error(flickr_api_call('flickr.photos.licenses.getInfo',array()));
+  $larray = array();
+  if($licenses = $licenses['licenses']) {
+	foreach(array_keys($licenses[0]) as $l) {
+	  if(preg_match_all('#(name|url|id)="(.*?)"#',$l,$matches,PREG_SET_ORDER)) {
+		$lic = new License;
+		foreach($matches as $m) {
+		  $lic->$m[1] = $m[2];
+		}
+		$larray[$lic->id] = $lic;
+	  }
+	}
+  }
+  return $larray;
+  /*<licenses>
+	<license id="4" name="Attribution License"
+		url="http://creativecommons.org/licenses/by/2.0/" /> 
+	<license id="6" name="Attribution-NoDerivs License"
+		url="http://creativecommons.org/licenses/by-nd/2.0/" /> 
+	<license id="3" name="Attribution-NonCommercial-NoDerivs License"
+		url="http://creativecommons.org/licenses/by-nc-nd/2.0/" /> 
+	<license id="2" name="Attribution-NonCommercial License"
+		url="http://creativecommons.org/licenses/by-nc/2.0/" /> 
+	<license id="1" name="Attribution-NonCommercial-ShareAlike License"
+		url="http://creativecommons.org/licenses/by-nc-sa/2.0/" /> 
+	<license id="5" name="Attribution-ShareAlike License"
+		url="http://creativecommons.org/licenses/by-sa/2.0/" /> 
+		</licenses>*/
 }
 
 //======================================================================

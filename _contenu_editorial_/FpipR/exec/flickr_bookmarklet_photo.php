@@ -40,9 +40,32 @@ function exec_flickr_bookmarklet_photo() {
   gros_titre(_T('fpipr:ajouter_une_photo'));
 
 
-  echo '<div>';
-  echo '<img style="float:right;" src="'.$photo_details->source('m').'"/>';
-  echo '<span>'._T('fpipr:ajouter_une_photo_info',array('title'=>$photo_details->title,'owner'=>$photo_details->owner_username)).'</span>';
+  echo '<div style="margin:.5em;">';
+  echo '<img style="float:right;margin:.5em;" src="'.$photo_details->source('m').'"/>';
+  echo '<h3>'._T('fpipr:ajouter_une_photo_info',array('title'=>$photo_details->title,'owner'=>$photo_details->owner_username)).'</h3>';
+  if(!$photo_details->ispublic) {
+	echo '<div  style="margin:.5em;">';
+	if($photo_details->isfriend && $photo_details->isfamily) {
+	  echo _T('fpipr:warning_family_friend');
+	} else if($photo_details->isfamily) {
+	  echo _T('fpipr:warning_family');
+	} else if($photo_details->isfriend) {
+	  echo _T('fpipr:waring_friend');
+	} 
+	echo '</div>';
+  }
+  echo '<div style="margin:.5em;">';
+  if(($w = _T('fpipr:warning_copyright_'.$photo_details->license)) != 'warning copyright '.$photo_details->license) {
+	echo $w;
+  } else {
+	  $licenses = flickr_photos_licenses_getInfo();
+	  if($l = $licenses[$photo_details->license]) {			
+		echo _T('fpipr:warning_copyright_general',array('name'=>$l->name,'url'=>$l->url));
+	  } else {
+		echo _T('fpipr:warning_copyright_0');
+	  }
+  }
+  echo '</div>';
   echo '</div>';
   echo '<br clear="both"/>';
 
