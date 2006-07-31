@@ -67,7 +67,7 @@ function exec_flickr_bookmarklet_photo() {
 //
 // Afficher tableau d'articles
 //
-function flickr_afficher_articles($titre_table, $requete, $id,$secret) {
+function flickr_afficher_articles($titre_table, $requete) {
   include_spip('inc/presentation');
 	global $connect_id_auteur, $dir_lang;
 	global $spip_display;
@@ -138,7 +138,7 @@ function flickr_afficher_articles($titre_table, $requete, $id,$secret) {
 
 	$table = array();
 	while ($row = spip_fetch_array($result)) {
-	  $table[]= flickr_afficher_articles_boucle($row,$langue_defaut, $voir_logo,$id,$secret);
+	  $table[]= flickr_afficher_articles_boucle($row,$langue_defaut, $voir_logo);
 	}
 	spip_free_result($result);
 
@@ -154,7 +154,7 @@ function flickr_afficher_articles($titre_table, $requete, $id,$secret) {
 	}
 }
 
-function flickr_afficher_articles_boucle($row, $langue_defaut, $voir_logo, $id,$secret)
+function flickr_afficher_articles_boucle($row, $langue_defaut, $voir_logo)
 {
   global $connect_id_auteur, $dir_lang, $spip_lang_right;
   include_spip('inc/presentation');
