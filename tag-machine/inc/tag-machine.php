@@ -18,29 +18,29 @@
   //
   //    You should have received a copy of the GNU General Public License
   //    along with this program; if not, write to the Free Software
- //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+  //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
 if (!defined("_ECRIRE_INC_VERSION")) exit;
 
 
 function entableau($tag) {
-	return array('groupe' => $tag->type, 'tag' => $tag->titre);
+  return array('groupe' => $tag->type, 'tag' => $tag->titre);
 }
 
 
 /**
-   Ajoute les mots clefs dans la liste passée en paramètre au bon objet.
-   Si le mot clef n'existe pas, on le crée,
-   Si le groupe n'existe pas, on le crée.
+ Ajoute les mots clefs dans la liste passée en paramètre au bon objet.
+ Si le mot clef n'existe pas, on le crée,
+ Si le groupe n'existe pas, on le crée.
 
-IN:
-$tags: tableau de tag ('groupe' => groupe, 'tag' => tag),
-$id: id de l'objet sur lequel ajouter les mots clefs,
-[groupe_defaut]: groupe par défaut pour les mots qui n'ont pas de groupe dans la chaîne
-[$nom_objet]: type d'objet sur lequel ajouter les mots clefs (une table: spip_mots_$nom_objet doit exister dans la base de donnée),
-[$id_objet]: colone de la table de cet objet qui contient les ids.
-OUT: rien;
+ IN:
+ $tags: tableau de tag ('groupe' => groupe, 'tag' => tag),
+ $id: id de l'objet sur lequel ajouter les mots clefs,
+ [groupe_defaut]: groupe par défaut pour les mots qui n'ont pas de groupe dans la chaîne
+ [$nom_objet]: type d'objet sur lequel ajouter les mots clefs (une table: spip_mots_$nom_objet doit exister dans la base de donnée),
+ [$id_objet]: colone de la table de cet objet qui contient les ids.
+ OUT: rien;
 */
 	
 function ajouter_liste_mots($tags,
@@ -65,15 +65,15 @@ function ajouter_mots($liste_tags,
 }
 
 /**
-  enleve les mots clefs passé en paramètre
+ enleve les mots clefs passé en paramètre
 
-IN:
-$tags: tableau de tag ('groupe' => groupe, 'tag' => tag),
-$id: id de l'objet sur lequel ajouter les mots clefs,
-[groupe_defaut]: groupe par défaut pour les mots qui n'ont pas de groupe dans la chaîne
-[$nom_objet]: type d'objet sur lequel ajouter les mots clefs (une table: spip_mots_$nom_objet doit exister dans la base de donnée),
-[$id_objet]: colone de la table de cet objet qui contient les ids.
-OUT: rien;
+ IN:
+ $tags: tableau de tag ('groupe' => groupe, 'tag' => tag),
+ $id: id de l'objet sur lequel ajouter les mots clefs,
+ [groupe_defaut]: groupe par défaut pour les mots qui n'ont pas de groupe dans la chaîne
+ [$nom_objet]: type d'objet sur lequel ajouter les mots clefs (une table: spip_mots_$nom_objet doit exister dans la base de donnée),
+ [$id_objet]: colone de la table de cet objet qui contient les ids.
+ OUT: rien;
 */
 function retirer_liste_mots($tags,
 							$id,
@@ -102,23 +102,23 @@ function parser_liste($liste_tags) {
 /*des objets*/
 
 class Tag {
- var $titre;
- var $type;
- var $id_mot;
- var $id_groupe;
+  var $titre;
+  var $type;
+  var $id_mot;
+  var $id_groupe;
 
- function Tag($titre, $type='', $id_groupe='') {
+  function Tag($titre, $type='', $id_groupe='') {
 	$this->titre = $titre;
 	$this->id_groupe = $id_groupe;
 	$this->type = $type;
   }
 
   /*  function Tag($id_mot,$id_groupe) {
-	$this->id_mot = $id_mot;
-	$this->id_groupe = $id_groupe;
-  }*/
+   $this->id_mot = $id_mot;
+   $this->id_groupe = $id_groupe;
+   }*/
 
- function getID() {
+  function getID() {
 	return $this->id_mot;
   }
 
@@ -135,29 +135,29 @@ class Tag {
   }
 
   /*public*/ function getTitreEchappe() {
-      return (strpos($this->titre,' ') || strpos($this->titre,':') || strpos($this->titre,','))?'"'.$this->titre.'"':$this->titre;
+	return (strpos($this->titre,' ') || strpos($this->titre,':') || strpos($this->titre,','))?'"'.$this->titre.'"':$this->titre;
   }
 
   /*public*/ function getTypeEchappe() {
-      return (strpos($this->type,' ') || strpos($this->type,':') || strpos($this->type,','))?'"'.$this->type.'"':$this->type;
+	return (strpos($this->type,' ') || strpos($this->type,':') || strpos($this->type,','))?'"'.$this->type.'"':$this->type;
   }
 
 
- function echapper() {
-   $cgroupe = $this->type;
-   $ctag = $this->titre;
+  function echapper() {
+	$cgroupe = $this->type;
+	$ctag = $this->titre;
    
-   $cgroupe = (strpos($cgroupe,' ') || strpos($cgroupe,':') || strpos($cgroupe,','))?'"'.$cgroupe.'"':$cgroupe;
-   $ctag = (strpos($ctag,' ') || strpos($ctag,':') || strpos($ctag,','))?'"'.$ctag.'"':$ctag;
+	$cgroupe = (strpos($cgroupe,' ') || strpos($cgroupe,':') || strpos($cgroupe,','))?'"'.$cgroupe.'"':$cgroupe;
+	$ctag = (strpos($ctag,' ') || strpos($ctag,':') || strpos($ctag,','))?'"'.$ctag.'"':$ctag;
    
-   return (($cgroupe)? ($cgroupe.':'):'').$ctag;
- }
+	return (($cgroupe)? ($cgroupe.':'):'').$ctag;
+  }
   
   //----------------------------------------------------------------------
 
   /*private*/ function verifier($nom_objet) {
-	include_spip ('base/abstract_sql');
-   list($id_groupe,$unseul,$titre) = $this->verifier_groupe();
+	include_spip('base/abstract_sql');
+	list($id_groupe,$unseul,$titre) = $this->verifier_groupe();
 	if($id_groupe > 0) {
 	  if ($unseul == 'oui') {
 		// on verifie qu'il y a pas déjà un mot associé
@@ -174,6 +174,13 @@ class Tag {
 	  }
 	} else if($this->type) {
 	  spip_log("création du groupe $this->type");
+	  global $table_prefix;
+	  if(!lire_meta("tag-machine:colonne_.$nom_objet")) {
+		spip_query("ALTER TABLE `".$table_prefix."_groupes_mots` ADD `".$nom_objet."` CHAR( 3 ) NOT NULL DEFAULT 'non';");
+		ecrire_meta("tag-machine:colonne_.$nom_objet");
+		ecrire_meta();
+	  }
+
 	  $id_groupe = spip_abstract_insert("spip_groupes_mots",
 										"(titre, $nom_objet, minirezo)",
 										"('".addslashes($this->type)."','oui','oui')");
@@ -192,9 +199,9 @@ class Tag {
 											  array('spip_groupes_mots'), 
 											  array("titre = '".addslashes($this->type)."'"));
 		if($groupe_row = spip_abstract_fetch($select_groupe)) {
-		$id = $groupe_row['id_groupe']; 
-		$unseul = $groupe_row['unseul'];
-		$groupes_verifie[$this->type] = array($id,$unseul,$this->type);
+		  $id = $groupe_row['id_groupe']; 
+		  $unseul = $groupe_row['unseul'];
+		  $groupes_verifie[$this->type] = array($id,$unseul,$this->type);
 		}
 	   
 		spip_abstract_free($select_groupe);
@@ -206,9 +213,9 @@ class Tag {
 											  array('spip_groupes_mots'), 
 											  array("id_groupe = $this->id_groupe"));
 		if($groupe_row = spip_abstract_fetch($select_groupe)) {
-		$type = $groupe_row['titre']; 
-		$unseul = $groupe_row['unseul'];
-		$groupes_verifie_id[$this->id_groupe] = array($this->id_groupe,$unseul,$type);
+		  $type = $groupe_row['titre']; 
+		  $unseul = $groupe_row['unseul'];
+		  $groupes_verifie_id[$this->id_groupe] = array($this->id_groupe,$unseul,$type);
 		}
 	   
 		spip_abstract_free($select_groupe);
@@ -232,12 +239,12 @@ class Tag {
 	  if ($row = spip_fetch_array($result)) {
 		$this->id_mot = $row['id_mot'];
 	  } else {
-		 if($this->id_groupe) {
-		   spip_log("Creer le mot $this->type:$this->titre ($this->id_mot)");
-		   $this->id_mot = spip_abstract_insert("spip_mots",
-												'(id_groupe, type, titre)', 
-												"('".$this->id_groupe."','".addslashes($this->type)."','".addslashes($this->titre)."')");		   
-		 }
+		if($this->id_groupe) {
+		  spip_log("Creer le mot $this->type:$this->titre ($this->id_mot)");
+		  $this->id_mot = spip_abstract_insert("spip_mots",
+											   '(id_groupe, type, titre)', 
+											   "('".$this->id_groupe."','".addslashes($this->type)."','".addslashes($this->titre)."')");		   
+		}
 	  }
 	  spip_abstract_free($result);	 
 	}
@@ -289,7 +296,7 @@ class ListeTags {
 								$groupe_defaut='',
 								$id_groupe='') {
 	if(!$groupe_defaut && !$id_groupe)
-		$groupe_defaut = $this->creer_groupe_defaut();
+	  $groupe_defaut = $this->creer_groupe_defaut();
 
 	$this->groupe_defaut = $groupe_defaut;
 	$this->id_groupe = $id_groupe;
@@ -303,21 +310,21 @@ class ListeTags {
 
 
   /*public*/ /*function ListeTags($id,
-							$groupe_defaut='',
-							$nom_objet='documents',
-							$id_objet='id_document') {
-	$result = spip_abstract_select(array('titre','type'),
-								   array("spip_mots_$nom_objet",'spip_mots'),
-								   array("spip_mots_$nom_objet.id_mot=spip_mots.id_mot",
-										 "spip_mots_$nom_objet.$id_objet = $id"));
+			  $groupe_defaut='',
+			  $nom_objet='documents',
+			  $id_objet='id_document') {
+			  $result = spip_abstract_select(array('titre','type'),
+			  array("spip_mots_$nom_objet",'spip_mots'),
+			  array("spip_mots_$nom_objet.id_mot=spip_mots.id_mot",
+			  "spip_mots_$nom_objet.$id_objet = $id"));
 	
-	while ($row = spip_abstract_fetch($result)) {
-	  $this->tags[] = new Tag($row['titre'],$row['type']);
-	}
-	spip_abstract_free($result);
-	$this->groupe_defaut = $groupe_defaut;
-  }
-*/
+			  while ($row = spip_abstract_fetch($result)) {
+			  $this->tags[] = new Tag($row['titre'],$row['type']);
+			  }
+			  spip_abstract_free($result);
+			  $this->groupe_defaut = $groupe_defaut;
+			  }
+			 */
 
   //------------------------------- Info -----------------------------------------
 
@@ -441,16 +448,16 @@ class ListeTags {
   }
  
 
-	function creer_groupe_defaut() {
-		$s = spip_query("SELECT id_groupe FROM spip_groupes_mots
+  function creer_groupe_defaut() {
+	$s = spip_query("SELECT id_groupe FROM spip_groupes_mots
 			WHERE titre='tags'");
-		if ($t=spip_fetch_array($s))
-			return $this->groupe_defaut = $t['id_groupe'];
-		else {
-			spip_query("INSERT spip_groupes_mots (titre) VALUES ('tags')");
-			return $this->groupe_defaut = spip_insert_id();
-		}
+	if ($t=spip_fetch_array($s))
+	  return $this->groupe_defaut = $t['id_groupe'];
+	else {
+	  spip_query("INSERT spip_groupes_mots (titre) VALUES ('tags')");
+	  return $this->groupe_defaut = spip_insert_id();
 	}
+  }
 }
 
 ?>
