@@ -8,6 +8,12 @@ function exec_flickr_bookmarklet_photo() {
   ///// debut de la page
 
   pipeline('exec_init',array('args'=>array('exec'=>'flickr_bookmarklet_photo'),'data'=>''));
+
+
+  $id = _request('id');
+  $secret = _request('secret');
+
+  $photo_details = flickr_photos_getInfo($id,$secret);
   
   debut_page(_T('fpipr:ajouter_une_photo'),
 			 "documents",
@@ -20,6 +26,8 @@ function exec_flickr_bookmarklet_photo() {
   echo flickr_bookmarklet_info();
   fin_boite_info();
 
+  echo '<div>&nbsp;</div>';
+  echo icone(_T('icone_retour'), $photo_details->urls['photopage'], "article-24.gif", "rien.gif", '',false);
 
   debut_droite();
   echo '<div style="margin-top: 14px;" class="cadre-r">
@@ -31,10 +39,6 @@ function exec_flickr_bookmarklet_photo() {
 <div style="overflow: hidden;" class="cadre-padding">';
   gros_titre(_T('fpipr:ajouter_une_photo'));
 
-  $id = _request('id');
-  $secret = _request('secret');
-
-  $photo_details = flickr_photos_getInfo($id,$secret);
 
   echo '<div>';
   echo '<img style="float:right;" src="'.$photo_details->source('m').'"/>';
