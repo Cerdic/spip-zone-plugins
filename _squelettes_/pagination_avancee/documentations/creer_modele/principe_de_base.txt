@@ -1,0 +1,33 @@
+A chaque modele modele de pagination correspond un fichier pagination_modele.php.
+
+Ce fichier se situe dans le répértoire inc :
+-sois du plugin : pour les modèles livrées en standards
+-sois du dossier de squelettes
+
+Il doit contenir une fonction pagination_modele().
+
+Celle-ci retournera : -soit les liens vers les pages (balise #PAGINATION), précédée ou nom de l'ancre de pagination
+					- soit #ANCRE_PAGINATION
+
+
+Celle-ci aura comme paramètres (dans cette ordre) :
+
+	•	$total correspond à la balise #GRAND_TOTAL de la boucle de pagination.
+	•	$nom le nom de la boucle de pagination (_ compris)
+	•	$pas : le pas de pagination
+	•	$liste : valeur boolénne : est égale à FALSE si seul l'ancre de pagination est demandée. Est égale à TRUE sinon
+
+Afin de tester si l'ancre de pagination a déja été affichée, il est conseillé d'introduire dedans le code suivant :
+
+<code>
+static $ancres = array();
+	$bloc_ancre = "";
+$ancre='pagination'.$nom;
+
+	// n'afficher l'ancre qu'une fois
+	if (!isset($ancres[$ancre]))
+		$bloc_ancre = $ancres[$ancre] = "<a name='$ancre' id='$ancre'></a>";
+</code>
+
+
+Pour aider à faire crére le modéle, Spip définit un certain nombre de fonction. Le guide d'explication de ces fonctions se situ dans le dossier fonctions_utiles

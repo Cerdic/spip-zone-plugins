@@ -1,0 +1,3 @@
+Les modéles suivants sont livrés en standard : 
+- dist : modele 0 | 2 | 4 | 6
+- page : modele 1 | 2 | 3 | 4 
