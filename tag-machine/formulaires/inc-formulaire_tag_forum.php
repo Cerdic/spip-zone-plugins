@@ -8,7 +8,7 @@ $balise_FORMULAIRE_TAG_FORUM_collecte = array('id_forum','fond');
 
 // les filtres pour le formulaire
 function echapper_mot($titre, $type, $groupe_defaut) {
-  include_ecrire('_libs_/tag-machine/inc_tag-machine.php');
+  include_spip('inc/tag-machine');
   $tag = '';
   if($type) {
 	if($type == $groupe_defaut)
@@ -44,7 +44,7 @@ _request() cherche dans les valeurs post.
 */
 function balise_FORMULAIRE_TAG_FORUM_dyn($id_forum,$fond) {
 
-	include_ecrire('_libs_/tag-machine/inc_tag-machine.php');
+	include_spip('inc/tag-machine');
 
 	$url = new Link();
 	if($fond) $url->addVar('fond',$fond);

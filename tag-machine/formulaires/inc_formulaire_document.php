@@ -38,29 +38,25 @@ define("_LIB_FORMULAIRE_DOCUMENT", "1");
 
 if(@file_exists('ecrire/inc_version.php')){
 include('ecrire/inc_version.php');
-include('inc-urls-standard.php');
+include_spip('urls/standard');
 }elseif(@file_exists('ecrire/inc_version.php3')){
 include('ecrire/inc_version.php3');
-include('inc-urls-standard.php3');
+include_spip('urls/standard');
 }elseif(@file_exists('inc_version.php')){
 include('inc_version.php');
-include('inc-urls-standard.php');
+include_spip('urls/standard');
 }elseif(@file_exists('inc_version.php3')){
 include('inc_version.php3');
-include('inc-urls-standard.php3');
+include_spip('urls/standard');
 }
-$path_inc_abstract_sql="inc_abstract_sql". _EXTENSION_PHP ;
-include_ecrire ($path_inc_abstract_sql);
-$path_inc_presentation ="inc_presentation". _EXTENSION_PHP ;
-$path_inc_layer ="inc_layer". _EXTENSION_PHP ;
+include_spip ('base/abstract_sql');
+include_spip('inc/presentation');
+include_spip('inc/layer');
+include_spip('inc/documents');
+include_spip('inc/texte');
+include_spip('base/db_mysql');
 
-include_ecrire($path_inc_presentation);
-include_ecrire($path_inc_layer);
-include_ecrire('inc_documents.php3');
-include_ecrire('inc_texte.php3');
-include_ecrire('inc_db_mysql.php3');
-
-include('inc_tag-machine.php');
+include_spip('inc/tag-machine');
 
 function maj_tags (  $groupe_defaut='',
 					  $nom_objet='documents',
@@ -277,7 +273,7 @@ function maj_documents2 ($id_objet, $type) {
 		}
 
 		// Demander l'indexation du document
-		include_ecrire('inc_index.php3');
+		include_spip('inc/indexation');
 		marquer_indexer('document', $id_doc);
 
 	}

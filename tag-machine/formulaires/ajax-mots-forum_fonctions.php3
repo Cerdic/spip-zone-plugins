@@ -4,7 +4,7 @@
 génére une regexp OU pour la liste de mot
 */
 function tags_enregexp($liste,$id_groupe) {
-    include_ecrire('_libs_/tag-machine/inc_tag-machine.php');
+    include_spip('inc/tag-machine');
 	$tags = new ListeTags(filtrer_entites($liste),'',$id_groupe);
 	$mots = $tags->getTags();
 	$str = '';
@@ -67,7 +67,7 @@ function dernier_quote($lst) {
 }
 
 function trouve_debut($liste,$id_groupe) {
-  include_ecrire('_libs_/tag-machine/inc_tag-machine.php');
+  include_spip('inc/tag-machine');
   $liste = dernier_quote($liste);
   $tags = new ListeTags(filtrer_entites($liste),'',$id_groupe);
   return array_slice($tags->getTags(),0,-1);
@@ -116,7 +116,7 @@ combien il y a de mots dans le paramétre
 */
 if(!function_exists('compte_having')) {
   function compte_having($liste) {
-    include_ecrire('_libs_/tag-machine/inc_tag-machine.php');
+    include_spip('inc/tag-machine');
 	$tags_liste = new ListeTags(filtrer_entites($liste),'FAQ',1);
 	return count($tags_liste->getTags())-1;
   }
