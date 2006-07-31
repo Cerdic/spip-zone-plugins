@@ -31,7 +31,8 @@ A new window will open, please follow the instructions it will provide.',
 <p>When you visit a photo on flickr, by clicking this bookmark, you will get to a new page where you can select which article to add it to.</p>',
 									   'ajouter_une_photo' => 'Add a photo',
 									   'ajouter_une_photo_info' => 'Add the photo "@title@" by @owner@',
-									   'choisir_un_article' => 'Choose an article'
+									   'choisir_un_article' => 'Choose an article',
+									   'par' => '@title@ by <a href="@url@">@user@</a>'
 );
 
 ?>

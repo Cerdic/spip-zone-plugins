@@ -50,12 +50,16 @@ function action_flickr_ajouter_documents() {
 		  $from = array('spip_documents');
 		  $select = array('id_document');
 		  $where = array("distant='oui'","fichier='$url'","maj >= '$date'","maj <= '$date2'");
-		  $row = spip_abstract_fetsel($select,$from,$where);
-		  if($row['id_document']) {
+		  $doc_row = spip_abstract_fetsel($select,$from,$where);
+		  if($doc_row['id_document']) {
 			global $table_prefix;
-			$q = "UPDATE ".$table_prefix."_documents SET titre = '".$photo_details->title."', descriptif = '".$photo_details->description."'";
+			$title = $photo_details->title;
+			if($photo_details->owner_nsid != $row['flickr_nsid']) {
+			  $title = _T('flickr:par',array('title'=>$title,'user'=>(($photo_details->owner_username)?$photo_details->username:$photo_details->nsid),'url'=>'http://www.flickr.com/people/'.$photo_details->nsid));
+			}
+			$q = "UPDATE ".$table_prefix."_documents SET titre = '".$title."', descriptif = '".$photo_details->description."'";
 			if($photo_details->date_taken) $q .=", date= '".$photo_details->date_taken."'";
-			$q .=" WHERE id_document=".$row['id_document'];
+			$q .=" WHERE id_document=".$doc_row['id_document'];
 			spip_query($q);
 		  }
 		}

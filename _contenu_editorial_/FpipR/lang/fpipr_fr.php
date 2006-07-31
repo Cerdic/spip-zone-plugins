@@ -31,7 +31,8 @@ Une nouvelle fen&ecirc;tre sera ouverte, suivez les instructions qui y sont four
 <p>Quand vous visitez une photo, en cliquant sur ce bookmark, vous arriverez &agrave; une page pour choisir &agrave; quel article l\'ajouter.</p>',
 									   'ajouter_une_photo' => 'Ajouter une photo',
 									   'ajouter_une_photo_info' => 'Ajoutez la photo "@title@" par @owner@',
-									   'choisir_un_article' => 'Choisir un article'
+									   'choisir_un_article' => 'Choisir un article',
+									   'par' => '@title@ par <a href="@url@">@user@</a>'
 );
 
 ?>
