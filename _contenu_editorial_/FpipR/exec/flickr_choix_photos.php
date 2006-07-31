@@ -75,10 +75,11 @@ function exec_flickr_choix_photos() {
 		if($i != $page) {
 		  echo '<a href="'.generer_url_ecrire('flickr_choix_photos',"page=$i&type="._request('type')."&id="._request('id')."&sort=$sort".(_request('text_search')?"&text_search="._request('text_search'):'')).'">';
 		}
-		echo $i.'|';
+		echo $i;
 		if($i != $page) {
 		  echo '</a>';
 		}
+		echo (($i == $photos->pages)?'':'&nbsp;|');
 		echo "\n";
 	  }
 	}

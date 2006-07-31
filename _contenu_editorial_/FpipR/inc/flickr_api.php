@@ -91,7 +91,7 @@ function flickr_authenticate_end($id_auteur,$frob) {
 
 //======================================================================
 
-class Photos {
+class FlickrPhotos {
   var $page;
   var $per_page;
   var $total;
@@ -100,7 +100,7 @@ class Photos {
   var $photos = array();
 }
 
-class PhotoDetails {
+class FlickrPhotoDetails {
   var $id;
   var $secret;
   var $server;
@@ -139,7 +139,7 @@ class PhotoDetails {
 
 }
 
-class Photo {
+class FlickrPhoto {
   var $id;
   var $owner;
   var $secret;
@@ -167,7 +167,7 @@ class Photo {
   }
 }
 
-class PhotoSet {
+class FlickrPhotoSet {
   var $owner;
   var $id;
   var $primary;
@@ -194,10 +194,17 @@ class PhotoSet {
 
 }
 
-class License {
+class FlickrLicense {
   var $url;
   var $name;
   var $id;
+}
+
+class FlickrTag {
+  var $id;
+  var $author;
+  var $raw;
+  var $safe;
 }
 
 //======================================================================
@@ -234,7 +241,7 @@ function flickr_photos_search(
   else $params['extras'] = "original_format";
 
   $photos =  flickr_check_error(flickr_api_call('flickr.photos.search',$params,$auth_token));
-  $resp = new Photos;
+  $resp = new FlickrPhotos;
   if($photos) {
 	$rez = array_keys($photos);
 	$photos = array_keys($photos[$rez[0]][0]);
@@ -245,7 +252,7 @@ function flickr_photos_search(
 
 
 	foreach($photos as $photo) {
-	  $new_p = new Photo;
+	  $new_p = new FlickrPhoto;
 	  if(preg_match_all('#([a-zA-Z_]+)="(.*?)"#',$photo,$matches,PREG_SET_ORDER)) {
 		foreach($matches as $m) $new_p->$m[1] = $m[2];
 	  }
@@ -278,7 +285,7 @@ function flickr_photosets_getList($user_id,$auth_token='') {
 	$photosets = $photosets[$rez[0]][0];
 
 	foreach($photosets as $set => $data) {
-	  $new_p = new PhotoSet;
+	  $new_p = new FlickrPhotoSet;
 	  $new_p->owner = $user_id;
 	  if(preg_match_all('#([a-zA-Z_]+)="(.*?)"#',$set,$matches,PREG_SET_ORDER)) {
 		foreach($matches as $m) {
@@ -309,7 +316,7 @@ function flickr_photosets_getPhotos($photoset_id,$extras='',$privacy_filter='',$
 	$photos = array_keys($photos[$rez[0]][0]);
 
 	foreach($photos as $photo) {
-	  $new_p = new Photo;
+	  $new_p = new FlickrPhoto;
 	  if(preg_match_all('#([a-zA-Z_]+)="(.*?)"#',$photo,$matches,PREG_SET_ORDER)) {
 		foreach($matches as $m)
 		  $new_p->$m[1] = $m[2];
@@ -325,7 +332,7 @@ function flickr_photos_getInfo($photo_id,$secret,$auth_token='') {
   $params = array('photo_id'=>$photo_id,'secret'=>$secret);
 
   $photo =  flickr_check_error(flickr_api_call('flickr.photos.getInfo',$params,$auth_token));
-  $resp = new PhotoDetails;
+  $resp = new FlickrPhotoDetails;
   if($photo) {
 	$rez = array_keys($photo);
 	//	$details = array_keys($photo[$rez[0]][0]);
@@ -361,7 +368,14 @@ function flickr_photos_getInfo($photo_id,$secret,$auth_token='') {
 		}
 	  } else if(strpos($tag,'tags') === 0) {
 		foreach($v[0] as $taginfo => $tag) { 
-		  $resp->tags[] = $tag[0];
+		  $t = new FlickrTag;
+		  $t->safe = $tag[0];
+		  if(preg_match_all('#(id|raw|author)="(.*?)"#',$taginfo,$matches,PREG_SET_ORDER)) {
+			foreach($matches as $m) {
+			  $t->$m[1] = $m[2];
+			}
+		  }
+		  $resp->tags[] = $t;
 		}
 	  } else if(strpos($tag,'urls') === 0) {
 		foreach($v[0] as $urltype => $url) { 
@@ -408,7 +422,7 @@ function flickr_photos_licenses_getInfo() {
   if($licenses = $licenses['licenses']) {
 	foreach(array_keys($licenses[0]) as $l) {
 	  if(preg_match_all('#(name|url|id)="(.*?)"#',$l,$matches,PREG_SET_ORDER)) {
-		$lic = new License;
+		$lic = new FlickrLicense;
 		foreach($matches as $m) {
 		  $lic->$m[1] = $m[2];
 		}
