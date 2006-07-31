@@ -54,8 +54,12 @@ function exec_flickr_bookmarklet_photo() {
 	$rub = substr($rub,3);
 	$requete = array('WHERE' => "id_auteur='$connect_id_auteur' AND (statut='prop' OR statut='prepa' OR statut='poubelle')".(($rub)?" AND $rub":''), 'ORDER BY' => "date DESC");
   }
-
-  flickr_afficher_articles(_T('fpipr:choisir_un_article'),$requete,$id,$secret);
+  echo '<form method="post" action="'.generer_action_auteur("flickr_ajouter_documents","article").'">';
+  echo '<input type="hidden" name="type" value="article"/>';
+  echo '<input type="hidden" name="photos[]" value="'."$id@#@$secret".'"/>';
+  flickr_afficher_articles(_T('fpipr:choisir_un_article'),$requete);
+  echo '<button type="submit">'._T('spip:bouton_valider').'</button>';
+  echo '</form>';
   echo '</div>';
   fin_page();
 }
@@ -99,7 +103,7 @@ function flickr_afficher_articles($titre_table, $requete, $id,$secret) {
 	$tranches = '';
 	if ($cpt > $nb_aff) {
 		$nb_aff = (_TRANCHES); 
-		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, $javascript, $nb_aff);
+		$tranches = afficher_tranches_requete($cpt, 4, $tmp_var, $javascript, $nb_aff);
 	}
 
 	$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1");
@@ -138,8 +142,8 @@ function flickr_afficher_articles($titre_table, $requete, $id,$secret) {
 	}
 	spip_free_result($result);
 
-	$largeurs = array(11, '', 100);
-	$styles = array('', 'arial2', 'arial1');
+	$largeurs = array(11, '', 100,'');
+	$styles = array('', 'arial2', 'arial1','');
 
 	echo afficher_liste($largeurs, $table, $styles);
 	echo afficher_liste_fin_tableau();
@@ -173,8 +177,8 @@ function flickr_afficher_articles_boucle($row, $langue_defaut, $voir_logo, $id,$
 	if (acces_restreint_rubrique($id_rubrique))
 		$s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
 
-	$s .= "<a href='" . generer_action_auteur("flickr_ajouter_documents","$id_article",generer_url_ecrire('articles',"id_article=$id_article",false,_DIR_RESTREINT_ABS))."&id=$id_article&type=article&photos[]=".urlencode("$id@#@$secret")."'$descriptif$dir_lang style=\"display:block;\">";
-
+	$s .= "<a href='" .generer_url_ecrire('articles',"id_article=$id_article")."'$descriptif$dir_lang style=\"display:block;\">";
+	
 	if ($voir_logo) {
 		$logo_f = charger_fonction('chercher_logo', 'inc');
 		if ($logo = $logo_f($id_article, 'id_article', 'on'))
@@ -190,6 +194,11 @@ function flickr_afficher_articles_boucle($row, $langue_defaut, $voir_logo, $id,$
 
 	// La date
 	$vals[] = affdate_jourcourt($date);
+
+	$input .= '<input type="radio" name="id" value="'.$id_article.'"/>';
+	$input .= '<input type="hidden" name="redirect" value="'.generer_url_ecrire('articles',"id_article=$id_article").'"/>';
+
+	$vals[] = $input;
 
 	return $vals;
 }
