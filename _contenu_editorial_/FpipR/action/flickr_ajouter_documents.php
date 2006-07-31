@@ -55,7 +55,7 @@ function action_flickr_ajouter_documents() {
 			global $table_prefix;
 			$title = $photo_details->title;
 			if($photo_details->owner_nsid != $row['flickr_nsid']) {
-			  $title = _T('fpipr:par',array('title'=>$title,'user'=>(($photo_details->owner_username)?$photo_details->owner_username:$photo_details->owner_nsid),'url'=>'http://www.flickr.com/people/'.$photo_details->nsid));
+			  $title = _T('fpipr:par',array('title'=>$title,'user'=>(($photo_details->owner_username)?$photo_details->owner_username:$photo_details->owner_nsid),'url'=>'http://www.flickr.com/people/'.$photo_details->owner_nsid));
 			}
 			$q = "UPDATE ".$table_prefix."_documents SET titre = '".$title."', descriptif = '".$photo_details->description."'";
 			if($photo_details->date_taken) $q .=", date= '".$photo_details->date_taken."'";
