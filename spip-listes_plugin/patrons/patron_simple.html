@@ -1,0 +1,50 @@
+<?php
+/**********************************************************/
+/* Ce squelette tres specifique est utilise pour creer    */
+/* un patron pour la bloogletter : lettre d'information.  */
+/* voir aussi le patron nouveautes.html pour l'envoi      */
+/* automatique des nouveautés                             */
+/**********************************************************/
+
+//Parametrer le logo et le fond du titre (url des images)
+$url_fond = "#URL_SITE_SPIP/#DOSSIER_SQUELETTE/fondgauche.gif";
+$largeur_mail = "500px";
+
+/**********************************************************/
+/* Par défaut ce patron présente le logo en haut du       */
+/* message et le texte en dessous avec un titre de partie.*/
+/* Vous pouvez faire des modifications en HTML, mais      */
+/* attention de ne pas faire un gabarit de plus de 10Ko.  */                                              
+/* - ne mettez pas de balises <HTML>,<BODY> ou <HEAD>     */
+/**********************************************************/
+?>
+
+<div style="background:url(<?php echo $url_fond ?>) repeat-y;width:<?php echo $largeur_mail; ?>;">
+	<a href="[(#URL_SITE_SPIP)]" title="#NOM_SITE_SPIP">
+	[(#LOGO_SITE_SPIP|inserer_attribut{'style', 'border:0;'})]
+	</a>
+</div>
+<div style="width: <?php echo $largeur_mail ?>; background-color: #F5F5F5; padding: 1px;">
+<span style="font-weight:bold;"><:bonjour|texte_script:></span>,
+<br /><:texte_lettre_information|texte_script:> '[(#NOM_SITE_SPIP|textebrut|texte_script)]' (#URL_SITE_SPIP).
+</div>
+<div style='background: url(<?php echo $url_fond ?>) repeat-y; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FF9900; font-size: 12px; letter-spacing: 1px; font-weight: bold; width: <?php echo $largeur_mail ?>;'>
+
+<div style="padding:5px">Actu</div>
+
+</div>
+
+<h2> Modifiez le texte </h2>
+
+<div>
+
+Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
+Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
+
+Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
+Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
+
+Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
+Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
+
+</div>
