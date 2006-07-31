@@ -46,10 +46,12 @@ Actuellement cette page permet de tester le nouveau menu en javascript pour choi
 <BOUCLE_tousmots(MOTS) {id_groupe} {par titre}>
 - #TITRE<br/>
 </BOUCLE_tousmots>
+pas de mots
+<//B_tousmots>
 </BOUCLE_groupes>
 </div>
 
-<BOUCLE_forums(FORUMS) {0,1}>
+<BOUCLE_forums(FORUMS) {tous}{0,1}>
 <B_lesmots>
 <h2>Les mots d&eacute;j&agrave; ajout&eacute;s sont</h2>
 <ul>
@@ -58,10 +60,12 @@ Actuellement cette page permet de tester le nouveau menu en javascript pour choi
 </BOUCLE_lesmots>
 </ul>
 </B_lesmots>
-
+Le formulaire devrait se voir là:
 <br>
 #FORMULAIRE_TAG_FORUM
 </BOUCLE_forums>
+pas de forums
+<//B_forums>
 <hr>
 </body>
 </html>

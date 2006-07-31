@@ -50,13 +50,13 @@ function balise_FORMULAIRE_TAG_FORUM_dyn($id_forum,$fond) {
 
 	include_spip('inc/tag-machine');
 
-	$url = new Link();
-	if($fond) $url->addVar('fond',$fond);
+	$url = self();
+	if($fond) parametre($url,'fond',$fond);
 	// si ya pas de mot dans le formulaire
 	if (!_request('tags_'._request('id_groupe').'_'.$id_forum)) {
 	  // on affiche le squelette en ajoutant un id_forum et l'url de la page (self) dans le contexte
 	  return array('formulaire_tag_forum', $GLOBALS['delais'],
-				   array('self' => $url->getUrl(),
+				   array('self' => $url,
 						 'id' => $id_forum,
 						 'fond' => $fond
 						 )
@@ -70,7 +70,7 @@ function balise_FORMULAIRE_TAG_FORUM_dyn($id_forum,$fond) {
 	  
 	  //et on retourne le formulaire (c'est le même apres tout)
 	  return array('formulaire_tag_forum', $GLOBALS['delais'],
-				   array('self' => $url->getUrl(),
+				   array('self' => $url,
 						 'id' => $id_forum,
 						 'fond' => $fond
 						 )
