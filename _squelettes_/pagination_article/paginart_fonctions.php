@@ -3,7 +3,7 @@
 
 function paginer_intertitres($texte){
 	$t = explode('<h3 class="spip">',$texte);
-	if (count($t)){
+	if (count($t)>2){
 		$texte = array_shift($t);
 		foreach($t as $p){
 			$texte .= "<div class='section'><h3 class='spip'>".$p."</div>";
