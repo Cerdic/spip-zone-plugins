@@ -1,0 +1,23 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	  Formulaire Tag Forum
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	  Pierre Andrews (mortimer.pa@free.fr)
+	</auteur>
+	<version>
+	  0.1
+	</version>
+	<etat>
+	  dev
+	</etat>
+	<description>
+	  Introduit une nouvelle balise #FORMULAIRE_TAG_FORUM valide dans les boucles FORUMS
+	  et qui affiche un champ de texte et un bouton pour ajouter des tags en utilisant tag-machine. 
+
+	  Le groupe par défaut et FAQ, on peut le changer l40 du fichier php.
+	</description>
+	<prefix>
+	  formulaire_tag_forum
+	</prefix>
+</plugin>

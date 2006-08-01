@@ -1,0 +1,24 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	  tag-machine
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	  Pierre Andrews (mortimer.pa@free.fr)
+	</auteur>
+	<version>
+	  0.1
+	</version>
+	<etat>
+	  dev
+	</etat>
+	<description>
+	  <multi>
+		[fr] outil pour ajouter des tags (mots clefs) (un peu le bordel actuellement)
+		[en] tool to add tags (keywords) (a bit of a mess right now)
+	  </multi>
+	</description>
+	<prefix>
+	  tag-machine
+	</prefix>
+	<!--rien d'autre, on fournit juste un inc-->
+</plugin>

@@ -1,0 +1,26 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	  GetId3
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	  BoOz
+	</auteur>
+	<version>
+	  0.1
+	</version>
+	<etat>
+	  dev
+	</etat>
+	<description>
+	  Librairies pour gérerer un formulaire d'édition d'un document
+	  Distribué sans garantie sous licence GPL.
+	  Bricolage (sale) à partir du code SPIP
+
+	  voir formulaires/inc_formulaire_document.php
+
+	  necessite le plugin tag-machine.
+	</description>
+	<prefix>
+	  getid3
+	</prefix>
+</plugin>
