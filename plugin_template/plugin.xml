@@ -1,0 +1,140 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Template : un template de plugin vide pour servir de guide
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	collectif
+_ &copy; 2006 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+	0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	stable
+	</etat>
+	<description>
+	Ici decrivez plus ou moins longuement ce que fait votre plugin
+	</description>
+	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
+	template_options.php
+	</options>
+	<fonctions> <!-- fichier fonctions charge a chaque recalcul (comme l'ancien mes_fonctions.php) !! ne surtout pas l'appeler mes_fonctions -->
+	template_fonctions.php
+	</fonctions>
+	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
+		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : template_ma_fonction() par exemple)
+		C'est par ailleurs conseille pour les noms de fichier
+		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
+		-->
+	<prefix> 
+	template
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<!-- Le parametre action est facultatif : en son absence la fonction appelee sera le prefixe suivi du nom du pipeline
+	ex : template_affichage_final()
+	Le parametre inclure est egalement facultatif, si la fonction est deja chargee en memoire (car presente dans le fichier options par exemple)	-->
+	<pipeline>
+		<!-- pipeline qui permet de modifier les pages publiques html issues du cache ou du calcul avant leur envoi au navigateur 
+		il permet de modifier n'importe quoi, mais est execute a chaque fois et ne profite pas du cache
+		il est donc a reserver pour des plugins qui ne sont pas utilises en production de preference
+		-->
+		<nom>affichage_final</nom> 
+		<action>affichage_final</action>
+		<inclure>template_pipelines_public.php</inclure>
+	</pipeline>	
+	<pipeline>
+		<nom>affiche_droite</nom> 
+		<action>affiche_droite</action>
+		<inclure>template_pipelines_admin.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom> 
+		<action>affiche_gauche</action>
+		<inclure>template_pipelines_admin.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom> 
+		<action>affiche_milieu</action>
+		<inclure>template_pipelines_admin.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom> 
+		<action>ajouter_boutons</action>
+		<inclure>template_pipelines_admin.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_onglets</nom> 
+		<action>ajouter_onglets</action>
+		<inclure>template_pipelines_admin.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>body_prive</nom> 
+		<action>body_prive</action>
+		<inclure>template_pipelines_admin.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>exec_init</nom> 
+		<action>exec_init</action>
+		<inclure>template_pipelines_admin.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom> 
+		<action>header_prive</action>
+		<inclure>template_pipelines_admin.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom> 
+		<action>insert_head</action>
+		<inclure>template_pipelines_public.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>nettoyer_raccourcis_typo</nom> 
+		<action>nettoyer_raccourcis_typo</action>
+		<inclure>template_pipelines_typo.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_indexation</nom> 
+		<action>pre_indexation</action>
+		<inclure>template_pipelines_cron.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_propre</nom> 
+		<action>pre_propre</action>
+		<inclure>template_pipelines_typo.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_syndication</nom> 
+		<action>pre_syndication</action>
+		<inclure>template_pipelines_cron.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_typo</nom> 
+		<action>pre_typo</action>
+		<inclure>template_pipelines_typo.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_propre</nom> 
+		<action>post_propre</action>
+		<inclure>template_pipelines_typo.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_syndication</nom> 
+		<action>post_syndication</action>
+		<inclure>template_pipelines_cron.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_typo</nom> 
+		<action>post_typo</action>
+		<inclure>template_pipelines_typo.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>rendu_evenement</nom> 
+		<action>rendu_evenement</action>
+		<inclure>template_pipelines_public.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom> 
+		<action>taches_generales_cron</action>
+		<inclure>template_pipelines_cron.php</inclure>
+	</pipeline>
+</plugin>
