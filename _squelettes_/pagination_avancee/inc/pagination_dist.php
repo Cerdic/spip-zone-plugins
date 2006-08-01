@@ -9,7 +9,7 @@ static $ancres = array();
 	
 
 	$debut = 'debut'.$nom;
-
+	$ancre='pagination'.$nom;
 	$pagination = array(
 		'lien_base' => self(),
 		'total' => $total,
