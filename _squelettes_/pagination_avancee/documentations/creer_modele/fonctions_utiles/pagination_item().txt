@@ -8,7 +8,7 @@ prend en parametre : ->$num : le numero qui va apparaitre dans l'url (debut_mach
 
 ->$pattern : ce qui sera retourner. On peut y placer Ç@url@È qui sera remplacer par l'url de la page former ˆ partir de des autres paramtres. On peut galement y placer @item@ qui sera remplacer par $txt
 
-->$lien_base : le la page sur laquelele il faut renvoyer self()
+->$lien_base : le la page sur laquelele il faut renvoyer,gnralement self()
 
 ->$debut : le type de debut qu'il faut mettre.
 
