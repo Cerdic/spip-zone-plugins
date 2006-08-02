@@ -30,26 +30,34 @@ static $ancres = array();
 	$texte = '';
 		
 	$num=_request($debut);
+	// calcul des pages
 	
-	if ($num<0+$pas){
-		$texte=pagination_item($num+$pas,
+	$num + $pas  > $total - 1 ? $suivant = $total - 1 : $suivant = $num + $pas; // la page suivante
+	$num - $pas < 0 ? $precedant = 0 : $precedant = $num - $pas; // la page précédante
+	echo $precedant;
+	echo $total;
+	// calcul des liens
+	
+	if ($num == 0){
+		$texte=pagination_item($suivant,
 			'<:pagination_suivant:>',
 			$lien_suivant,self(),$debut,$ancre);
 			}
 	
 	
-	else if ($num>=$total-1-$pas){					
-			$texte=pagination_item($num-$pas,
+	else if (($num >= $total - 1 - $pas) and ($num >  $pas)){					
+			$texte=pagination_item($precedant,
 			'<:pagination_precedent:>',
 			$lien_precedent,self(),$debut,$ancre);
 			}
 	
 	else {
-			$texte=pagination_item($num-$pas,
+			
+			$texte=pagination_item($precedant,
 			'<:pagination_precedent:>',
 			$lien_precedent,self(),$debut,$ancre);
 			
-			$texte = $texte.pagination_item($num+$pas,
+			$texte = $texte.pagination_item($suivant,
 			'<:pagination_suivant:>',
 			$lien_suivant,self(),$debut,$ancre);
 			
