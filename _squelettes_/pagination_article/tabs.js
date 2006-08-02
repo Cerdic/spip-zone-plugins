@@ -29,12 +29,12 @@ $(document).ready(function(){
 	var art=1;
 	$("div.paginer_intertitres").each(function(){
 		var group=this;
-		//var p = $(this);
+
 		var sect = 1;
 		var liste = "<ul class='anchors'>";
-		//$("h3.spip",group).before("toto");
+
 		$("div.section",group).each(function(){
-			liste += "<li><a href='#art"+art+"sect"+sect+"'>"+$('h3.spip',this).get(0).innerHTML+"</a></li>";
+			liste += "<li><a href='#art"+art+"sect"+sect+"'>"+$('span.titre_onglet',this).get(0).innerHTML+"</a></li>";
 			$(this).set('id',"art"+art+"sect"+sect);
 			$(this).set('class',"anchor");
 			sect += 1;

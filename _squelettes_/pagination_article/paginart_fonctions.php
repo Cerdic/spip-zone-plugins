@@ -2,11 +2,13 @@
 
 
 function paginer_intertitres($texte){
-	$t = explode('<h3 class="spip">',$texte);
+	global $debut_intertitre,$fin_intertitre;
+	$t = explode($debut_intertitre,$texte);
 	if (count($t)>2){
 		$texte = array_shift($t);
 		foreach($t as $p){
-			$texte .= "<div class='section'><h3 class='spip'>".$p."</div>";
+			$p = str_replace($fin_intertitre,"</span>$fin_intertitre",$p);
+			$texte .= "<div class='section'>$debut_intertitre<span class='titre_onglet'>".$p."</div>";
 		}
 		$texte = "<div class='paginer_intertitres'>".$texte."</div>";
 	}
