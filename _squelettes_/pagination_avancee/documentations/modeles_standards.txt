@@ -1,3 +1,4 @@
 Les modéles suivants sont livrés en standard : 
 - dist : modele 0 | 2 | 4 | 6
 - page : modele 1 | 2 | 3 | 4 
+- precedent_suivant Affiche précédent | suivant . le fichier de traduction s'appelle paginationavance_xx.php
