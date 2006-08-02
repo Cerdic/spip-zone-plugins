@@ -34,11 +34,21 @@ function FpipR_affiche_milieu($flux) {
 	  $where = array('id_auteur='.$flux['args']['id_auteur']);
 	  $rez = spip_abstract_select($select,$from,$where);
 	  $row = spip_abstract_fetch($rez);
+	  $wrong = false;
 	  if($row['flickr_nsid'] != '' && $row['flickr_token'] != '') {
-		$html .= _T('fpipr:identifie_ok',array('user_id'=>'<a href="http://www.flickr.com/photos/'.$row['flickr_nsid'].'">'.$row['flickr_nsid'].'</a>'));
+		$check = flickr_auth_checkToken($row['flickr_token']);
+		if($check) {
+		  $html .= _T('fpipr:identifie_ok',array('user_id'=>'<a href="http://www.flickr.com/photos/'.$row['flickr_nsid'].'">'.$row['flickr_nsid'].'</a>'));
 
-		$html .= flickr_bookmarklet_info();
-	  } else {
+		  $html .= flickr_bookmarklet_info();
+		} else {
+		  include_spip('base/abstract_sql');
+		  global $table_prefix;
+		  spip_query("UPDATE ".$table_prefix."_auteurs SET flickr_nsid = '', flickr_token = '' WHERE id_auteur=$connect_id_auteur");
+		  $wrong = true;
+		}
+	  } else $wrong = true;
+	  if($wrong){
 		$infos = flickr_authenticate_get_frob();
 		$html .= '<ol><li>'.
 		  _T('fpipr:identifie_etape1',array('url'=>$infos['url'])).
