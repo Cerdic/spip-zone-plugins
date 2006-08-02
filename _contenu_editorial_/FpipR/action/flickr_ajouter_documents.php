@@ -44,33 +44,38 @@ function action_flickr_ajouter_documents() {
 		if($photo_details->id) {
 		  $empty = array();
 		  $url = $photo_details->source('o');
-		  $date = date('Y-m-d H:i:s');
-		  ajouter_un_document($url,$photo_details->title,$type,$id,'distant',0,$empty);
-		  $date2 = date('Y-m-d H:i:s');
-		  $from = array('spip_documents');
-		  $select = array('id_document');
-		  $where = array("distant='oui'","fichier='$url'","maj >= '$date'","maj <= '$date2'");
-		  $doc_row = spip_abstract_fetsel($select,$from,$where);
-		  if($doc_row['id_document']) {
-			global $table_prefix;
-			$title = $photo_details->title;
-			if($photo_details->owner_nsid != $row['flickr_nsid']) {
-			  $title = _T('fpipr:par',array('title'=>$title,'user'=>(($photo_details->owner_username)?$photo_details->owner_username:$photo_details->owner_nsid),'url'=>'http://www.flickr.com/people/'.$photo_details->owner_nsid));
-			}
-			include_spip('inc/filtres');
-			$q = "UPDATE ".$table_prefix."_documents SET titre = '<html>".$title."</html>', descriptif = '<html>".filtrer_entites($photo_details->description)."</html>'";
-			if($photo_details->date_taken) $q .=", date= '".$photo_details->date_taken."'";
-			$q .=" WHERE id_document=".$doc_row['id_document'];
-			spip_query($q);
-			if(in_array('tag-machine',liste_plugin_actifs())) {
-			  include_spip('inc/tag-machine');
-			  foreach($photo_details->tags as $tag) {
-				if($tag->raw) {
-				  $t = new Tag($tag->raw,'FlickrTag');
-				  $t->ajouter($doc_row['id_document'],'documents','id_document');
+		  $cnt =spip_abstract_fetsel(array('id_document'),array('spip_documents'),array("fichier='$url'","distant='oui'"));
+		  if(!$cnt) {
+			$date = date('Y-m-d H:i:s');
+			ajouter_un_document($url,$photo_details->title,$type,$id,'distant',0,$empty);
+			$date2 = date('Y-m-d H:i:s');
+			$from = array('spip_documents');
+			$select = array('id_document');
+			$where = array("distant='oui'","fichier='$url'","maj >= '$date'","maj <= '$date2'");
+			$doc_row = spip_abstract_fetsel($select,$from,$where);
+			if($doc_row['id_document']) {
+			  global $table_prefix;
+			  $title = $photo_details->title;
+			  if($photo_details->owner_nsid != $row['flickr_nsid']) {
+				$title = _T('fpipr:par',array('title'=>$title,'user'=>(($photo_details->owner_username)?$photo_details->owner_username:$photo_details->owner_nsid),'url'=>'http://www.flickr.com/people/'.$photo_details->owner_nsid));
+			  }
+			  include_spip('inc/filtres');
+			  $q = "UPDATE ".$table_prefix."_documents SET titre = '<html>".$title."</html>', descriptif = '<html>".filtrer_entites($photo_details->description)."</html>'";
+			  if($photo_details->date_taken) $q .=", date= '".$photo_details->date_taken."'";
+			  $q .=" WHERE id_document=".$doc_row['id_document'];
+			  spip_query($q);
+			  if(in_array('tag-machine',liste_plugin_actifs())) {
+				include_spip('inc/tag-machine');
+				foreach($photo_details->tags as $tag) {
+				  if($tag->raw) {
+					$t = new Tag($tag->raw,'FlickrTag');
+					$t->ajouter($doc_row['id_document'],'documents','id_document');
+				  }
 				}
 			  }
 			}
+		  } else {
+			spip_abstract_insert('spip_documents_'.$type.'s',array("id_$type",'id_document'),($id,$cnt['id_document']));
 		  }
 		}
 	  }
