@@ -3,9 +3,16 @@
 
 <?
 
+function balise_ANCRE_PAGINATION($p) {
+	$p = balise_PAGINATION($p, $liste='false');
+	
+	return $p;
+}
+
 
 function balise_PAGINATION($p, $liste='true') {
 	#nouvel_balise
+	
 	$modele=$p->param[0][1][0]->texte;
 	
 	
