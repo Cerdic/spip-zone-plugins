@@ -18,14 +18,17 @@ function flickr_sign($params) {
 }
 
 //lance une requette à flickr. $method est le nom de la méthode à appeler (flickr.auth.getToken par exemple) $params est un tableau de paramétres nom => valeur. Retourne le xml renvoye par Flickr 
-function flickr_api_call($method, $params=array(), $auth_token='') {
+function flickr_api_call($method, $params=array(), $auth_token='', $force_sign=false) {
   global $FLICKR_API_KEY;
+  spip_log("Flickr api call: $method");
   $params['api_key'] = $FLICKR_API_KEY;
   if($auth_token) {
 	$params['auth_token'] = $auth_token;
-	$params['api_sig'] = flickr_sign($params);
   }
   $params['method'] = $method;
+  if(!$auth_token && $force_sign)
+	$params['api_sig'] = flickr_sign($params);
+
   
   $args = '';
   foreach($params as $k => $v) {
@@ -56,7 +59,7 @@ function flickr_check_error($resp) {
 
 function flickr_authenticate_get_frob() {
   global $FLICKR_API_KEY;
-  $frob = flickr_check_error(flickr_api_call('flickr.auth.getFrob'));
+  $frob = flickr_check_error(flickr_api_call('flickr.auth.getFrob',array(),false,true));
   if(isset($frob['frob'])) {
 	$params['api_key'] = $FLICKR_API_KEY;
 	$params['frob'] = $frob['frob'][0];
@@ -74,7 +77,8 @@ function flickr_authenticate_get_frob() {
 }
 
 function flickr_authenticate_end($id_auteur,$frob) {
-  $frob = flickr_check_error(flickr_api_call('flickr.auth.getToken',array('frob'=>$frob)));
+  $resp = flickr_api_call('flickr.auth.getToken',array('frob'=>$frob),false,true);
+  $frob = flickr_check_error($resp);
   $nsid='';
   $token = '';
   if(isset($frob['auth'])) {
@@ -101,7 +105,7 @@ function flickr_auth_checkToken($token) {
 	<perms>read</perms>
 	<user nsid="12037949754@N01" username="Bees" fullname="Cal H" />
 </auth>*/
-  $check = flickr_check_error(flickr_api_call('flickr.auth.checkToken',array('auth_tokne'=>$token)));
+  $check = flickr_check_error(flickr_api_call('flickr.auth.checkToken',array('auth_token'=>$token)));
   if($check) {
 	$auth_info = array();
 	foreach($check as $t => $v) {

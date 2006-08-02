@@ -19,7 +19,6 @@ function exec_flickr_choix_photos() {
   <body>';
   
   echo '<h1>'._T('fpipr:ajouter_photos').'</h1>';
-  echo _T('fpipr:info_photos');
 
   $from = array('spip_auteurs');
   $select = array('flickr_token','flickr_nsid');
@@ -29,6 +28,7 @@ function exec_flickr_choix_photos() {
   if($row['flickr_nsid'] != '' && $row['flickr_token'] != '') {
 	$check = flickr_auth_checkToken($row['flickr_token']);
 	if($check) {
+	  echo _T('fpipr:info_photos');
 	  $page = _request('page')?_request('page'):1;
 	  $sort = _request('sort')?_request('sort'):'date-posted-desc';
 	  

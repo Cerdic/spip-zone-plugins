@@ -20,7 +20,6 @@ function exec_flickr_choix_sets() {
   <body>';
 
   echo '<h1>'._T('fpipr:ajouter_sets').'</h1>';
-  echo _T('fpipr:info_sets');
 
   $from = array('spip_auteurs');
   $select = array('flickr_token','flickr_nsid');
@@ -29,6 +28,7 @@ function exec_flickr_choix_sets() {
   if($row['flickr_nsid'] != '' && $row['flickr_token'] != '') {
 	$check = flickr_auth_checkToken($row['flickr_token']);
 	if($check) {
+	  echo _T('fpipr:info_sets');
 	  $page = _request('page')?_request('page'):1;
 	  $photosets = flickr_photosets_getList($row['flickr_nsid'],$row['flickr_token']);
 	  
@@ -77,8 +77,9 @@ function exec_flickr_choix_sets() {
 	  echo _T('fpipr:demande_authentification',array('url'=>generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur)));
 	}
   } else {
-	echo _T('fpipr:demande_authentification',array('url'=>generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur).'">l&agrave;</a>'));
+	echo _T('fpipr:demande_authentification',array('url'=>generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur)));
   }
+  echo '<br/>';
   if(_request('type') == 'article') {
 	echo '<a href="'.generer_url_ecrire('articles','id_article='._request('id')).'">'._T('fpipr:retour').'</a>';
   } else if(_request('type') == 'rubrique') {
