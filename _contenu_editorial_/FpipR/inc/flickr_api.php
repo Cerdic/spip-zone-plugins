@@ -21,9 +21,11 @@ function flickr_sign($params) {
 function flickr_api_call($method, $params=array(), $auth_token='') {
   global $FLICKR_API_KEY;
   $params['api_key'] = $FLICKR_API_KEY;
-  if($auth_token) $params['auth_token'] = $auth_token;
+  if($auth_token) {
+	$params['auth_token'] = $auth_token;
+	$params['api_sig'] = flickr_sign($params);
+  }
   $params['method'] = $method;
-  $params['api_sig'] = flickr_sign($params);
   
   $args = '';
   foreach($params as $k => $v) {
@@ -87,6 +89,32 @@ function flickr_authenticate_end($id_auteur,$frob) {
 	  spip_query("UPDATE ".$table_prefix."_auteurs SET flickr_nsid = '$nsid', flickr_token = '$token' WHERE id_auteur=$id_auteur");
 	} 
   }
+}
+
+function flickr_auth_checkToken($token) {
+  /*<rsp stat="fail">
+	 <err code="98" msg="Invalid auth token"/>
+	 </rsp>
+	 OR
+<auth>
+	<token>976598454353455</token>
+	<perms>read</perms>
+	<user nsid="12037949754@N01" username="Bees" fullname="Cal H" />
+</auth>*/
+  $check = flickr_check_error(flickr_api_call('flickr.auth.checkToken',array('auth_tokne'=>$token)));
+  if($check) {
+	$auth_info = array();
+	foreach($check as $t => $v) {
+	  if(strpos($t,'user')) {		
+		if(preg_match_all('#(nsid|fullname|username)="(.*?)"#',$photo,$matches,PREG_SET_ORDER)) {
+		  foreach($matches as $m) $auth_info['user_'.$m[1]] = $m[2];
+		}
+	  } else {
+		$auth_info[$t] = $v[0];
+	  }
+	}
+	return $auth_info;
+  } else return false;
 }
 
 //======================================================================
