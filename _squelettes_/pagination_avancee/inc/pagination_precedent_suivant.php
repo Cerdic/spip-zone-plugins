@@ -1,7 +1,7 @@
 <?
 function pagination_precedent_suivant($total, $nom, $pas, $liste){
 static $ancres = array();
-	include_spip('lang/paginationavancee');
+	
 	$separateur= " | ";
 	
 	$debut = 'debut'.$nom;
