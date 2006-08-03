@@ -7,7 +7,7 @@ Author : Cody Lindley
 
 /* ---------->>> CSS Hacks <<<---------------------------------------------------------------*/
 
-#TB_window  {font-size: 1.2em}
+#TB_window  { /*font-size: 1.2em */ }
 
 #contentPad{
 margin:20px;
@@ -37,7 +37,7 @@ display:none;
 	z-index: 102;
 	color:#000000;
 	display:none;
-	border: 4px solid #525252;
+	border: 2px solid #525252;
 }
 
 #TB_window img {
