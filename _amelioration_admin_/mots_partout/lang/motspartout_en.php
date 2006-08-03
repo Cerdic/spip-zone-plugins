@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'tagmachine' => 'Keywords to add',
 									   'par' => 'by',
 									   'installer' => 'Configure the database for keywords on:',
-									   'toutinstalle' => 'The database is already fully configured to have keywords everywhere.'
+									   'toutinstalle' => 'The database is already fully configured to have keywords everywhere.',
 									   
 									   'info_articles' => 'Articles',
 									   'info_breves' => 'News',
