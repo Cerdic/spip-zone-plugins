@@ -75,7 +75,7 @@ function action_flickr_ajouter_documents() {
 			  }
 			}
 		  } else {
-			spip_abstract_insert('spip_documents_'.$type.'s',array("id_$type",'id_document'),($id,$cnt['id_document']));
+			spip_abstract_insert('spip_documents_'.$type.'s',array("id_$type",'id_document'),array($id,$cnt['id_document']));
 		  }
 		}
 	  }
