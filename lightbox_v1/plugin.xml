@@ -12,7 +12,7 @@
 	test
 	</etat>
 	<description>
-	ajoute un effet [lightbox->www.huddletogether.com/projects/lightbox/] (fonctionne sur les squelettes disposant de la balise <code>#SPIP_HEAD</code>, ainsi que dans l'espace priv&eacute;)
+	ajoute un effet [lightbox->www.huddletogether.com/projects/lightbox/] (fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>, ainsi que dans l'espace priv&eacute;)
 	</description>
 	<prefix>
 	Lightbox_v1
