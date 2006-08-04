@@ -59,6 +59,6 @@ function balise_DATE_MODIF_SITE($p) {
 }
 
 
-include('inc/options_spip_listes.php');
+include_spip('inc/options_spip_listes');
 
 ?>
