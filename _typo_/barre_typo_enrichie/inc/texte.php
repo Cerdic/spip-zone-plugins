@@ -378,12 +378,13 @@ function typo_fr($letexte) {
 			"&deg;" => "&#176;"
 		);
 		$chars = array(160 => '~', 187 => '&#187;', 171 => '&#171;', 148 => '&#148;', 147 => '&#147;', 176 => '&#176;');
-
-		#include_spip('inc/charsets');
-		while (list($c, $r) = each($chars)) {
-			$c = unicode2charset(charset2unicode(chr($c), 'iso-8859-1', 'forcer'));
-			$trans[$c] = $r;
-		}
+		$chars_trans = array_keys($chars);
+		$chars = array_values($chars);
+		$chars_trans = implode(' ',array_map('chr',$chars_trans));
+		$chars_trans = unicode2charset(charset2unicode($chars_trans, 'iso-8859-1', 'forcer'));
+		$chars_trans = explode(" ",$chars_trans);
+		foreach($chars as $k=>$r)
+			$trans[$chars_trans[$k]] = $r;
 	}
 
 	$letexte = strtr($letexte, $trans);
@@ -1149,6 +1150,21 @@ function traiter_raccourcis($letexte) {
 		$puce = definir_puce();
 	else $puce = '';
 
+
+	// Proteger les caracteres actifs a l'interieur des tags html
+	$protege = "{}-";
+	$illegal = "\x1\x2\x3";
+	if (preg_match_all(",</?[a-z!][^<>]*[!':;\?~][^<>]*>,ims",
+	$letexte, $regs, PREG_SET_ORDER)) {
+		foreach ($regs as $reg) {
+			$insert = $reg[0];
+			// hack: on transforme les caracteres a proteger en les remplacant
+			// par des caracteres "illegaux". (cf corriger_caracteres())
+			$insert = strtr($insert, $protege, $illegal);
+			$letexte = str_replace($reg[0], $insert, $letexte);
+		}
+	}
+
 	// autres raccourcis
 	$cherche1 = array(
 		/* 0 */ 	"/\n(----+|____+)/",
@@ -1187,6 +1203,8 @@ function traiter_raccourcis($letexte) {
 	$letexte = preg_replace($cherche1, $remplace1, $letexte);
 	$letexte = preg_replace("@^ <br />@", "", $letexte);
 
+	// Retablir les caracteres proteges
+	$letexte = strtr($letexte, $illegal, $protege);
 
 	// Fermer les paragraphes
 	$letexte = paragrapher($letexte);
