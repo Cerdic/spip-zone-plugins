@@ -1,0 +1,25 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Pagination article 2
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	fil@rezo.net
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Exercice de jQuery ; le plugin transforme les articles contenant des intertitres en une suite de blocs qui s'affichent quand on clique sur leur titre (fonctionne sur les squelettes disposant de la balise <code>#SPIP_HEAD</code>).
+	Voir aussi le plugin <code>pagination_article</code>.
+	</description>
+	<prefix>
+	Pagination_Article2
+	</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+</plugin>
