@@ -7,7 +7,10 @@ Author : Cody Lindley
 
 /* ---------->>> CSS Hacks <<<---------------------------------------------------------------*/
 
-#TB_window  { /*font-size: 1.2em */ }
+#TB_window  { 
+/*font-size: 1.2em */ 
+font: 10px Verdana, Helvetica, sans-serif;
+}
 
 #contentPad{
 margin:20px;
@@ -37,28 +40,30 @@ display:none;
 	z-index: 102;
 	color:#000000;
 	display:none;
-	border: 2px solid #525252;
+	//border: 2px solid #525252;
 }
 
 #TB_window img {
 	display:block;
 	margin: 15px 0 0 15px;
-	border-right: 1px solid #ccc;
+	/*border-right: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
 	border-top: 1px solid #666;
-	border-left: 1px solid #666;
+	border-left: 1px solid #666;*/
 }
 
 #TB_caption{
 	height:25px;
 	padding:10px 30px 10px 25px;
 	float:left;
+	font-weight: bold;
+	text-align:left;
 }
 
 #TB_closeWindow{
-	height:25px;
-	padding:10px 25px 10px 0;
-	float:right;
+	width: 66px; 
+	float: right;  
+	padding-bottom: 0.7em;
 }
 
 #TB_closeAjaxWindow{

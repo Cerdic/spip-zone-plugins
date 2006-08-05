@@ -8,8 +8,12 @@
  *
  */
 
+
 function TB_Image() {
 	var t = this.title || this.name || '<small>'+this.href+'</small>';
+	
+	t = lignes_longues(t,35)
+		
 	TB_on();
 	TB_show(t,this.href,'image');
 	return false;
@@ -103,7 +107,7 @@ function TB_show(caption, url, type) {//function called when the user clicks on 
 			TB_WIDTH = imageWidth + 30;
 			TB_HEIGHT = imageHeight + 60;
 			$("#TB_window").append("<a href='' id='TB_ImageOff'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+"'/></a>"
-								 + "<div id='TB_caption'>"+caption+"</div><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'>x</a></div>"); 
+								 + "<div id='TB_caption'>"+caption+"</div><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'><img src='"+TB_chemin_close+"' /></a></div>"); 
 			$("#TB_closeWindowButton").click(TB_remove);		
 			TB_position();
 			$("#TB_load").remove();
@@ -166,8 +170,10 @@ function TB_next() {
 
 	if (next<imageArray.length) {
 		$("#TB_window").html('');
-		TB_show(imageArray[next][1] || imageArray[next][0],
-			imageArray[next][0], 'image');
+		
+		var t = imageArray[next][1] || imageArray[next][0];
+		t = lignes_longues(t,35);
+		TB_show(t,imageArray[next][0], 'image');
 	}
 	else {
 		TB_remove();
@@ -242,6 +248,13 @@ function getPageSize(){
 	
 	arrayPageSize = new Array(w,h) 
 	return arrayPageSize;
+}
+
+function lignes_longues(t, n){
+var _debut_ = t.substring(0, n);
+var _fin_ = t.substring(n, 500);
+t = "".concat(_debut_,'<br />',_fin_);
+return t;
 }
 
 
