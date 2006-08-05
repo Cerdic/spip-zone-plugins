@@ -4,8 +4,13 @@
  * Under an Attribution, Share Alike License
  * Thickbox is built on top of the very light weight jquery library.
  *
- * Modified for SPIP <www.spip.net> by Fil <fil@rezo.net>
- *
+ * Modified for SPIP <www.spip.net> by Fil <fil@rezo.net>:
+ * - added recognition of images based on a.type
+ * - added an image gallery
+ * - added keyboard navigation ('n'ext, 'p'revious, 'q'uit)
+ * - customize path to the css and wheel image
+ * - don't load css when not needed
+ * - TODO: don't load js when not needed!!
  */
 
 
@@ -17,62 +22,85 @@ function TB_Image() {
 	return false;
 }
 
+function TB_text() {
+	var t = this.title || this.name || '<small>'+this.href+'</small>';
+	TB_on();
+	TB_show(t,this.href, 'text');
+	return false;
+}
+
 function TB_init(){
 	// add the thickbox to all links of class=thickbox
-	$("a.thickbox").click(TB_Image);
-
-	// and to all links of type image/jpeg (or gif|png)
-	// here we also deal with the prev/next thing
-	$("a[@type]")
-	.each(
+	$("a.thickbox").each(
 		function(i) {
 			if (
-				this.type.match(/^image[\/](jpeg|gif|png)$/i)
+				(this.type && this.type.match(/^image[\/](jpeg|gif|png)$/i))
+				|| (this.href && this.href.match(/\.(jpeg|jpg|png|gif)$/i))
 			) {
 				this.onclick = TB_Image;
 
-				// on stocke le lien dans un tableau
+				// we store image links in an array (for a gallery)
 				imageArray.push ([
 					this.href,
 					this.title || this.name
 				]);
 
 			}
-		}
-	);
-
-	// and to all links to images (maybe too slow?)
-/*
-	$("a[@href]").each(
-		function(i) {
-			if (
-				this.href.match(/^[^?]+\.(jpeg|jpg|gif|png)$/i)
-			) {
-				this.onclick = TB_Image;
+			else {
+				this.onclick = TB_text;
 			}
 		}
 	);
-*/
+}
+
+// keyboard controls:
+// q,x => quit
+// n, space => next
+// p => previous
+function TB_keys (e) {
+	if (e == null) { // ie
+		keycode = event.keyCode;
+	} else { // mozilla
+		keycode = e.which;
+	}
+	key = String.fromCharCode(keycode).toLowerCase();
+	if (key == 'x' || key =='q'){
+		e.stopPropagation();
+		TB_remove();
+	} else if (key == ' ' || key == 'n') {
+		e.stopPropagation();
+		TB_next();
+	} else if (key == 'p') {
+		e.stopPropagation();
+		TB_prev();
+	}
 }
 
 function TB_on() {
+	// charger la css
+	$("head").append(
+		"<style type='text/css' media='all'>@import '"
+		+ TB_chemin_css
+		+ "';</style>"
+	);
 
-		$("body").append("<div id='TB_overlay'></div><div id='TB_window'></div>");
-		$("#TB_overlay").click(TB_next);
-		$(window).scroll(TB_position);
-		TB_overlaySize();
-		
-		$("body").append("<div id='TB_load' style='display:none;'><img src='"+TB_chemin_animation+"' /></div>");
-		TB_load_position();
+
+	$("body").append("<div id='TB_overlay'></div><div id='TB_window'></div>");
+	$("#TB_overlay").click(TB_remove);
+	$(window).scroll(TB_position);
+	TB_overlaySize();
+
+	$("body").append("<div id='TB_load'><img src='"+TB_chemin_animation+"' /></div>");
+	TB_load_position();
+
+	old_onkeypress = document.onkeypress;
+	document.onkeypress = TB_keys;
 }
 
 function TB_show(caption, url, type) {//function called when the user clicks on a thickbox link
 	try {
 
-		var urlString = /\.jpg|\.jpeg|\.png|\.gif|\.html|\.htm|\.php|\.cfm|\.asp|\.aspx|\.jsp|\.jst|\.rb|\.txt/g;
-		var urlType = url.toLowerCase().match(urlString);
-		
-		if (type=='image' || urlType == '.jpg' || urlType == '.jpeg' || urlType == '.png' || urlType == '.gif'){//code to show images
+		if (type=='image') {//code to show images
 
 			imgPreloader = new Image();
 			imgPreloader.onload = function(){
@@ -123,14 +151,14 @@ function TB_show(caption, url, type) {//function called when the user clicks on 
 	  
 			imgPreloader.src = url;
 		}
-		
-		if(urlType=='.htm'||urlType=='.html'||urlType=='.php'||urlType=='.asp'||urlType=='.aspx'||urlType=='.jsp'||urlType=='.jst'||urlType=='.rb'||urlType=='.txt'||urlType=='.cfm' || (url.indexOf('TB_inline') != -1)){//code to show html pages
+
+		else {//code to show html pages
 			
 			var queryString = url.replace(/^[^\?]+\??/,'');
 			var params = parseQuery( queryString );
 			
-			TB_WIDTH = (params['width']*1) + 30;
-			TB_HEIGHT = (params['height']*1) + 40;
+			TB_WIDTH = ((params['width'] || 640)*1) + 30;
+			TB_HEIGHT = ((params['height'] || 480)*1) + 40;
 			ajaxContentW = TB_WIDTH - 30;
 			ajaxContentH = TB_HEIGHT - 45;
 			$("#TB_window").append("<div id='TB_closeAjaxWindow'><a href='#' id='TB_closeWindowButton'>close</a></div><div id='TB_ajaxContent' style='width:"+ajaxContentW+"px;height:"+ajaxContentH+"px;'></div>");
@@ -161,6 +189,7 @@ function TB_show(caption, url, type) {//function called when the user clicks on 
 //helper functions below
 
 function TB_remove() {
+	document.onkeypress = old_onkeypress;
 	$("#TB_window").fadeOut("fast",function(){$('#TB_window,#TB_overlay').remove();});
 	$("#TB_load").remove();
 	return false;
@@ -191,6 +220,28 @@ function TB_next() {
 
 	return false;
 }
+
+function TB_prev() {
+	var current = $("#TB_Image").get(0).src;
+	var prev = -1;
+	for (var i=0; i<imageArray.length; i++) {
+		if (imageArray[i][0] == current) {
+			prev = i-1;
+		}
+	}
+
+	if (prev>=0) {
+		$("#TB_window").html('');
+		TB_show(imageArray[prev][1] || imageArray[prev][0],
+			imageArray[prev][0], 'image');
+	}
+	else {
+		TB_remove();
+	}
+
+	return false;
+}
+
 
 function TB_position() {
 	var pagesize = getPageSize();	
@@ -237,6 +288,13 @@ function parseQuery ( query ) {
 	return Params;
 }
 
+function lignes_longues(t, n){
+var _debut_ = t.substring(0, n);
+var _fin_ = t.substring(n, 500);
+t = "".concat(_debut_,'<br />',_fin_);
+return t;
+}
+
 
 function getPageScrollTop(){
 	var yScrolltop;
@@ -260,17 +318,12 @@ function getPageSize(){
 	return arrayPageSize;
 }
 
-function lignes_longues(t, n){
-var _debut_ = t.substring(0, n);
-var _fin_ = t.substring(n, 500);
-t = "".concat(_debut_,'<br />',_fin_);
-return t;
-}
-
-
-/* init */
-// $(document).load(TB_init) si on veut que ca marche dans l'espace prive
+//
+// init
+//
+// note: $(document).load() si on veut que ca marche dans l'espace prive
 // (a cause des document_write() qu'il y a en pagaille...)
-// $(document).ready(TB_init);
 var imageArray = [];
+if(typeof TB_chemin_css == 'undefined') { TB_chemin_css = 'thickbox.css'; }
+if(typeof TB_chemin_animation == 'undefined') { TB_chemin_animation = 'circle_animation.gif'; }
 $(document).load(TB_init);
