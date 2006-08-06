@@ -1,5 +1,4 @@
 <?php
-echo "chargement choses_possibles spipcarto";
 
 $choses_possibles['carto_objets'] = array(
 									  'titre_chose' => 'Objets',
