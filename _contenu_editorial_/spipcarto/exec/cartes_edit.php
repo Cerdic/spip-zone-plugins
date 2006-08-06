@@ -248,7 +248,7 @@ fin_boite_info();
 
 if ($new!="oui") {
 	# modifs de la description d'un des docs joints
-	maj_documents($id_carte, 'carto_carte');
+//	maj_documents($id_carte, 'carto_carte');
 	
 	# affichage
 	afficher_documents_colonne($id_carte, 'carto_carte', true);
