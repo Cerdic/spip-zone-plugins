@@ -44,6 +44,7 @@
 	</pipeline>
 
 	<fonctions>spipcarto_fonctions.php</fonctions>
+	<options>spipcarto_options.php</options>
 
 	<pipeline>
 		<nom>post_propre</nom>
