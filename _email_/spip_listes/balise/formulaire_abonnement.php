@@ -340,7 +340,7 @@ $result = spip_query($query);
 	else {
 		//Non c'è email o non è valida
 		if($mail_inscription_ AND !$mail_valide && $verify_source_fond){
-        $reponse_formulaire ="<h2>"._T('spiplistes:erreur_adresse')."</h2>";
+        $reponse_formulaire =_T('spiplistes:erreur_adresse');
    		}
 		
 		//Infos sur la liste

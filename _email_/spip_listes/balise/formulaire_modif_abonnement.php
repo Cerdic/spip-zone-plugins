@@ -168,7 +168,8 @@ $formulaire = "formulaires/formulaire_modif_abonnement";
 				$erreur = _T('pass_erreur_non_enregistre', array('email_oubli' => htmlspecialchars($email_desabo)));
 		}
 		else
-			$erreur = _T('pass_erreur_non_valide', array('email_desabo' => htmlspecialchars($email_desabo)));
+			$erreur = _T('spiplistes:erreur_adresse');
+
 	}
 	
 	if($confirm != 'oui'){

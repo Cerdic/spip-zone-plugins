@@ -1,5 +1,6 @@
 [(#ENV*{message_formulaire})]
-<BOUCLE_liste(ARTICLES) {statut=liste} {id_article=#ENV{liste}} {0,(#ENV{mode_login}|?{1,0})}>
+
+<BOUCLE_liste(ARTICLES) {statut=liste} {id_article=#ENV{liste}}>
 			<fieldset style="margin-bottom:1em;">
 			<legend style="font-weight:bold;">#TITRE</legend>
 			#TEXTE
@@ -47,7 +48,7 @@
 <fieldset> 
 	<legend><:spiplistes:abonnement_bouton:></legend>
 	<h4><:spiplistes:abonnement_change_format:></h4>
-	[(#ENV{erreur}|sinon{
+	[(#ENV*{erreur}|sinon{
 	<:spiplistes:abonnement_texte_mail:>
 	<form action="#SELF" method="post">
 		<div style="text-align:right">
