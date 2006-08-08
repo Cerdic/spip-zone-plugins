@@ -11,14 +11,17 @@ $flux .=
 
 '
 <script type="text/javascript"><!--
+$(document).load(function() {
+	if ($("a.thickbox,a[@type=\'image/jpeg\'],a[@type=\'image/png\'],a[@type=\'image/gif\']").addClass("thickbox").size()) {
 TB_chemin_animation = "'.url_absolue(find_in_path('circle_animation.gif')).'";
 TB_chemin_close = "'.url_absolue(find_in_path('close.gif')).'";
 TB_chemin_css = "'.url_absolue(find_in_path('thickbox.css')).'";
-$(document).load(function() {
-	$("a[@type=\'image/jpeg\'],a[@type=\'image/png\'],a[@type=\'image/gif\']").addClass("thickbox");
-} );
+var e = document.createElement("script");
+e.src = \''.url_absolue(find_in_path('thickbox.js')).'\';
+e.type="text/javascript";
+document.getElementsByTagName("head")[0].appendChild(e);
+}});
 // --></script>
-<script src=\''.url_absolue(find_in_path('thickbox.js')).'\' type=\'text/javascript\'></script>
 ';
 
 	return $flux;

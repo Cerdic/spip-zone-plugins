@@ -9,6 +9,7 @@
  * - added an image gallery
  * - added keyboard navigation ('n'ext, 'p'revious, 'q'uit)
  * - customize path to the css and wheel image
+ * - default size for thickbox links that have no width x height indicated
  * - don't load css when not needed
  * - TODO: don't load js when not needed!!
  */
