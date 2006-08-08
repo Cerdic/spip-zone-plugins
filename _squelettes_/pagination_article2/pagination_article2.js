@@ -53,8 +53,8 @@ if ($('.'+BLOC+'>'+HEADING).size() > 1) {
 				//current set of elements
 				$('#'+nom).append($('>*:lt('+(h[k]+1)+')',this).filter('*:gt('+(h[k-1]+1)+')').get()).hide();
 				//build table
-				table = table.prepend('<li><a></a></li>').find('li:first-child a').click(f).html(my_heading.innerHTML).end();
-				//manage link inside the page to the blocks
+				table = table.prepend('<li><a></a></li>').find('li:first-child a').click(f).set('href','#'+nom).html(my_heading.innerHTML).end();
+				//manage links inside the page to the blocks. 
 				//$('a[@href$="#'+nom+'"]').click(f);
 			}
 		}
