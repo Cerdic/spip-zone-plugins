@@ -18,4 +18,9 @@ function spiip_header_prive($flux){
 	$flux .= '<link rel="stylesheet" href="'.direction_css(find_in_path('dist_back/gadget-rubriques.css')).'" type="text/css" media="projection, screen" />';
 	return $flux;
 }
+
+function spiip_insert_head($flux){
+	$flux .= "<script type='text/javascript' src='".find_in_path('dist_back/pagination-ahah.js')."'></script>\n";
+	return $flux;
+}
 ?>
