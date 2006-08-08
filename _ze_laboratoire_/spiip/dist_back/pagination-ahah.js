@@ -8,14 +8,10 @@ $(document).ready(function(){
 			url = url.replace(reg,'')+'&ahah_id='+id;
 			$(this).click(function(){
 				var idtemp = 'temp_'+id;
-				$('#'+id).before("<div id='"+idtemp+"'></div>");
+				//$('#'+id).before("<div id='"+idtemp+"'></div>");
+				$('div#'+id).wrap('<div id="'+idtemp+'"></div>');
 				$('div#'+idtemp).load(url,'');
 				return false;
-/*				
-$("p").hide("fast");
-  $("p").load("/test/ajax-test.html",function(){
-    $("p").show("fast");
-  });				*/
 			});
 		});
 	});
