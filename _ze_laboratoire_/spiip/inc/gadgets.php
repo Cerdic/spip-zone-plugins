@@ -72,7 +72,7 @@ function gen_liste_rubriques() {
 
 function gadget_rubriques() {
 	include_spip('public/assembler');
-	$contexte = array('lang' => 'fr');
+	$contexte = array('lang' => $GLOBALS['spip_lang']);
 	$page = recuperer_fond('dist_back/inc-gadget-rubriques', $contexte);
 	return $page;
 
@@ -451,14 +451,14 @@ function gadget_messagerie() {
 	return $gadget;
 }
 
-
 function dessiner_gadgets($id_rubrique) {
 	if ($_COOKIE['spip_accepte_ajax'] != -1) {
 		return "\n<!-- javascript gadgets -->\n" .
 		http_script(
-		"document.getElementById('gadget-rubriques').innerHTML = \""
-		. addslashes(strtr(gadget_rubriques($id_rubrique),"\n\r","  "))
-		. "\";\n" .
+		"$('#bandeautoutsite').load('".generer_url_public('inc-gadget-rubriques','lang='.$GLOBALS['spip_lang'],'&')."');\n".
+		//"document.getElementById('bandeautoutsite').innerHTML = \""
+		//. addslashes(strtr(gadget_rubriques($id_rubrique),"\n\r","  "))
+		//. "\";\n" 
 		"document.getElementById('gadget-navigation').innerHTML = \""
 		. addslashes(strtr(gadget_navigation($id_rubrique),"\n\r","  "))
 		. "\";\n" .
