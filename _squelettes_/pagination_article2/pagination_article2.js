@@ -33,14 +33,14 @@ if ($('.'+BLOC+'>'+HEADING).size() > 1) {
 			h[h.length] = children.size();
 			classe = 'inter-'+j;
 			//reverse iteration not to change live collection indexes of the elements before the current
-			for (k=h.length-1; k>0; k--) {
+			for (var k=h.length-1; k>0; k--) {
 				nom = classe+'-'+k;
 				//create onclick function
 				eval('var f = function() {'+
 					'$(\'.'+classe+':visible\').slideUp();$(\'#'+nom+'\').filter(\':hidden\').slideDown();' +
 				'}'); 
 				//Get current heading
-				var my_heading = $(':nth-child('+h[k-1]+')',this)
+				var my_heading = $('>:nth-child('+h[k-1]+')',this)
 				//bind click function evaluating on each iteration "classe" and "nom"
 				.click(f)
 				//add the div container and get the heading for later use
