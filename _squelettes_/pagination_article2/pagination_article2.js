@@ -9,7 +9,7 @@ function() {
 
 // configuration :
 var BLOC = 'texte';
-var HEADING = 'h3';
+var HEADING = 'h3.spip';
 
 if ($('.'+BLOC+'>'+HEADING).size() > 1) {
 	$('.'+BLOC).each(
@@ -27,7 +27,7 @@ if ($('.'+BLOC+'>'+HEADING).size() > 1) {
 			//search for indexes of headers
 			children = $('>',this).each(
 				function(k) {
-					if(this.tagName == HEADING.toUpperCase()) h[h.length] = k;
+					if($(this).is(HEADING)) h[h.length] = k;
 				}
 			)
 			h[h.length] = children.size();
@@ -53,8 +53,7 @@ if ($('.'+BLOC+'>'+HEADING).size() > 1) {
 				$('#'+nom).append($('>*:lt('+(h[k]+1)+')',this).filter('*:gt('+(h[k-1]+1)+')').get()).hide();
 //				$('#'+nom).prepend(my_heading);
 				//build table
-				table = table.prepend('<li><a></a></li>').find('li:first-child a').click(f).set('href','#'+nom).html(my_heading.innerHTML).end();
-//				table.prepend('<li><a></a></li>').find('li:first-child a').set('href','#'+nom).html(my_heading.innerHTML).click(f);
+				table.prepend('<li><a></a></li>').find('li:first-child a').set('href','#'+nom).html(my_heading.innerHTML).click(f).end();
 				//manage links inside the page to the blocks.
 				//$('a[@href$="#'+nom+'"]').click(f);
 			}
