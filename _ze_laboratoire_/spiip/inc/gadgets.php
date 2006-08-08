@@ -35,85 +35,6 @@ function extraire_article($id_p) {
 	}
 }
 
-function gen_liste_rubriques() {
-	// ici, un petit fichier cache ne fait pas de mal
-	if (lire_fichier(_DIR_SESSIONS.'cache-menu-rubriques.txt', $cache)
-	AND list($date,$GLOBALS['db_art_cache']) = @unserialize($cache)
-	AND $date == $GLOBALS['meta']["date_calcul_rubriques"])
-		return; // c'etait en cache :-)
-
-	// se restreindre aux rubriques utilisees recemment +secteurs
-	$liste="0";
-	$s = spip_query("SELECT id_rubrique FROM spip_rubriques ORDER BY id_parent=0 DESC, date DESC LIMIT 500");
-	while ($t = spip_fetch_array($s))
-		$liste .=",".$t['id_rubrique']; 
-	 
-	$res = spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE id_rubrique IN ($liste) ORDER BY id_parent,0+titre,titre");
-
-	$GLOBALS['db_art_cache'] = array();
-	if (spip_num_rows($res) > 0) { 
-		while ($row = spip_fetch_array($res)) {
-			$parent = $row['id_parent'];
-			$id = $row['id_rubrique'];
-			$GLOBALS['db_art_cache'][$parent][$id] = 
-				supprimer_numero(typo(sinon($row['titre'], _T('ecrire:info_sans_titre'))));
-		}
-	}
-
-	// ecrire dans le cache
-	ecrire_fichier(_DIR_SESSIONS.'cache-menu-rubriques.txt',
-		serialize(array(
-			$GLOBALS['meta']["date_calcul_rubriques"],
-			$GLOBALS['db_art_cache']
-		))
-	);
-}
-
-
-function gadget_rubriques() {
-	include_spip('public/assembler');
-	$contexte = array('lang' => $GLOBALS['spip_lang']);
-	$page = recuperer_fond('dist_back/inc-gadget-rubriques', $contexte);
-	return $page;
-
-	global $max_lignes;
-
-	gen_liste_rubriques(); 
-	$arr_low = extraire_article(0);
-
-	$total_lignes = $i = sizeof($arr_low);
-
-	$nb_col = min(10,max(1,ceil($total_lignes / 10)));
-	$max_lignes = ceil($total_lignes / $nb_col);
-
-	$count_lignes = 0;
-
-	if ($i > 0) {
-		$ret = "<div>&nbsp;</div>";
-		$ret .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-		foreach( $arr_low as $id_rubrique => $titre_rubrique) {
-
-			if ($count_lignes == $max_lignes) {
-				$count_lignes = 0;
-				$ret .= "</div></td><td valign='top' width='200'><div>&nbsp;</div><div class='bandeau_rubriques' style='z-index: 1;'>";
-			}
-			$count_lignes ++;
-
-			$ret .= bandeau_rubrique($id_rubrique, $titre_rubrique, $i);
-			$i = $i - 1;
-		}
-		$ret .= "</div>";
-	}
-	unset($GLOBALS['db_art_cache']); // On libere la memoire
-
-	$ret = "<table><tr><td valign='top' width='200'>\n"
-		. $ret
-		. "\n</td></tr></table>\n";
-
-	return $ret;
-}
-
-
 function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 	global $zdecal;
 	global $max_lignes;
@@ -456,9 +377,6 @@ function dessiner_gadgets($id_rubrique) {
 		return "\n<!-- javascript gadgets -->\n" .
 		http_script(
 		"$('#bandeautoutsite').load('".generer_url_public('inc-gadget-rubriques','lang='.$GLOBALS['spip_lang'],'&')."');\n".
-		//"document.getElementById('bandeautoutsite').innerHTML = \""
-		//. addslashes(strtr(gadget_rubriques($id_rubrique),"\n\r","  "))
-		//. "\";\n" 
 		"document.getElementById('gadget-navigation').innerHTML = \""
 		. addslashes(strtr(gadget_navigation($id_rubrique),"\n\r","  "))
 		. "\";\n" .

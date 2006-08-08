@@ -1,5 +1,6 @@
 #HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+<BOUCLE_filtre(RUBRIQUES){par id_parent=0}{!par date}{0,500}{doublons}{tout}><BOUCLE_filtre>
 <ul><li><a href='#URL_ECRIRE{articles_tous}'><:info_tout_site:></a></li><B_rubriques>
-<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}><li><a href="#URL_ECRIRE{naviguer,id_rubrique=#ID_RUBRIQUE}" class="intitule<BOUCLE_test_soussect(RUBRIQUES){id_parent}{0,1}> daddy</BOUCLE_test_soussect>">[(#TITRE|supprimer_numero|couper{80})]</a>
-<B_sous_rubriques><ul><BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}><li><a href="#URL_ECRIRE{naviguer,id_rubrique=#ID_RUBRIQUE}"<BOUCLE_test_sousrub(RUBRIQUES){id_parent}{0,1}>class='daddy'</BOUCLE_test_sousrub>>[(#TITRE|supprimer_numero|couper{80})]</a><BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re></li></BOUCLE_sous_rubriques></ul></B_sous_rubriques>
+<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}{!doublons}{tout}><li><a href="#URL_ECRIRE{naviguer,id_rubrique=#ID_RUBRIQUE}" class="intitule<BOUCLE_test_soussect(RUBRIQUES){id_parent}{0,1}> daddy</BOUCLE_test_soussect>">[(#TITRE|supprimer_numero|couper{80})]</a>
+<B_sous_rubriques><ul><BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}{!doublons}{tout}><li><a href="#URL_ECRIRE{naviguer,id_rubrique=#ID_RUBRIQUE}"<BOUCLE_test_sousrub(RUBRIQUES){id_parent}{0,1}>class='daddy'</BOUCLE_test_sousrub>>[(#TITRE|supprimer_numero|couper{80})]</a><BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re></li></BOUCLE_sous_rubriques></ul></B_sous_rubriques>
 </li></BOUCLE_rubriques></B_rubriques></ul>
