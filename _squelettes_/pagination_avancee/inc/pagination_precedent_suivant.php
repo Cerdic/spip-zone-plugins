@@ -1,4 +1,4 @@
-<?
+<?php
 function pagination_precedent_suivant($total, $nom, $pas, $liste){
 static $ancres = array();
 	

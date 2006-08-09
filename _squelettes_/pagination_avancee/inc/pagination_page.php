@@ -1,4 +1,4 @@
-<?
+<?php
 function pagination_page($total, $nom, $pas, $liste){
 static $ancres = array();
 	

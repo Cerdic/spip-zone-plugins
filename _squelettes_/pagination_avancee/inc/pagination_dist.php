@@ -1,4 +1,4 @@
-<?
+<?php
 function pagination_dist($total, $nom, $pas, $liste){
 static $ancres = array();
 	
