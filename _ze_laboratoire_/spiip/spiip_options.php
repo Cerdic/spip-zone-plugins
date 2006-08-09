@@ -33,7 +33,7 @@ function balise_HTTP_IMG_PACK_dist($p) {
 		$p->code .= ','.$args;
 	}
 
-	$p->code = 'http_img_pack(' . $p->code .')';
+	$p->code = 'minipres_http_img_pack(' . $p->code .')';
 
 	#$p->interdire_scripts = true;
 	return $p;

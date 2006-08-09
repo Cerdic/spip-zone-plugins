@@ -1,6 +1,6 @@
 [(#REM)
 
-	Ce squelette definit les styles de l'espace prive
+	Ce squelette definit les styles de l'espace public
 
 	Note: l'entete "Vary:" sert a repousser l'entete par
 	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
@@ -14,18 +14,15 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-#bandeautoutsite a.daddy {
-	background: url([(#ENV{ltr}|choixsiegal{left,#HTTP_WRAPPER{triangle-droite.gif},#HTTP_WRAPPER{triangle-droite_rtl.gif}})]) center [(#ENV{ltr}|choixsiegal{left,right,left})] no-repeat;
-}
 .ahah_searching_left{
 	float:left;
-	width:13;
-	height:13;
-	background: url(#HTTP_WRAPPER{searching.gif}) center center no-repaeat;
+	width:13px;
+	height:13px;
+	background: url(#HTTP_WRAPPER{searching.gif}) top left no-repeat;
 }
 .ahah_searching_right{
 	float:right;
-	width:13;
-	height:13;
-	background: url(#HTTP_WRAPPER{searching.gif}) center center no-repaeat;
+	width:13px;
+	height:13px;
+	background: url(#HTTP_WRAPPER{searching.gif}) top left no-repeat;
 }
