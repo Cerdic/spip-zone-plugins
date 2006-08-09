@@ -6,7 +6,6 @@ float:left;
 	}
 #bandeautoutsite,#bandeautoutsite ul {
 	float: left;
-	width: 14em;
 	list-style: none;
 	line-height: 1;
 	background: white;
@@ -34,8 +33,9 @@ float:left;
 }*/
 
 #bandeautoutsite li {
+float:left;
 	padding-right: 1em;
-	width: 13em
+	width: 14em
 }
 
 #bandeautoutsite li ul {
