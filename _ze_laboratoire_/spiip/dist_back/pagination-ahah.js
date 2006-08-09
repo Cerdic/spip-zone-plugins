@@ -5,7 +5,7 @@ $.blocpagination = function(containerId) {
 		$('a.lien_pagination',group).each(function(){
 			var url = this.href;
 			var reg = new RegExp('#[a-z0-9_]*$','i');
-			url = url.replace(reg,'')+'&ahah_id='+id;
+			url = url.replace(reg,'')+'&fragment='+id;
 			$(this).click(function(){
 				$('div#'+id).load(url,'',function(){
 					$.blocpagination(id);
@@ -18,7 +18,7 @@ $.blocpagination = function(containerId) {
 
 
 $(document).ready(function(){
-	$('div.bloc_ahah_pagination').each(function(){
+	$('div.fragment').each(function(){
 		$.blocpagination(this.id);
 	});
 });
