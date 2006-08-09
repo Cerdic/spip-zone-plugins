@@ -8,7 +8,7 @@ $.blocpagination = function(containerId) {
 			url = url.replace(reg,'$1');
 			if (url.indexOf("?")>0) url = url+'&';
 			else url = url+'?';
-			url=url + 'fragment='+id;
+			url=url + 'var_fragment='+id;
 			$(this).click(function(){
 				$(this.parentNode).before('<div class="ahah_searching_right">&nbsp;</div>');
 				$('div#'+id).load(url,null,function(){

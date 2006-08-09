@@ -401,6 +401,7 @@ $.g = {
 	// TODO: Write getAttribute helper
 	".": "$.hasWord(a,m[2])",
 	"@": {
+## note Fil : ajouter regexp ##
 		"=": "$.attr(a,m[3]) == m[4]",
 		"!=": "$.attr(a,m[3]) != m[4]",
 		"~=": "$.hasWord($.attr(a,m[3]),m[4])",
