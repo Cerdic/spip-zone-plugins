@@ -4,14 +4,13 @@ $.blocpagination = function(containerId) {
 		var group = this;
 		$('a.lien_pagination',group).each(function(){
 			var url = this.href;
-			var reg = new RegExp('#[a-z0-9_]*$','i');
-			url = url.replace(reg,'');
-			if (url.indexOf("?")>0) url = url+'&';
-			else url = url+'?';
-			url=url + 'fragment='+id;
+			url = url.replace(new RegExp('#[a-z0-9_]*$','i'),'');
+			if (url.indexOf("?")>0) url += '&';
+			else url += '?';
+			url += 'fragment='+id;
 			$(this).click(function(){
 				$(this.parentNode).before('<div class="ahah_searching_right">&nbsp;</div>');
-				$('div#'+id).load(url,'',function(){
+				$('div#'+id).load(url,null,function(){
 					$.blocpagination(id);
 				});
 				return false;
