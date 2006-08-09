@@ -16,9 +16,11 @@ $(document).load(function() {
 TB_chemin_animation = "'.url_absolue(find_in_path('circle_animation.gif')).'";
 TB_chemin_close = "'.url_absolue(find_in_path('close.gif')).'";
 TB_chemin_css = "'.url_absolue(find_in_path('thickbox.css')).'";
-}} );
+}
+} );
 // --></script>
 <script src=\''.url_absolue(find_in_path('thickbox.js')).'\' type=\'text/javascript\'></script>
+<link rel="stylesheet" href="'.url_absolue(find_in_path('thickbox.css')).'" type="text/css" media="projection, screen" />
 ';
 
 	return $flux;

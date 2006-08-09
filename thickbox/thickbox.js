@@ -78,12 +78,13 @@ function TB_keys (e) {
 }
 
 function TB_on() {
+	// NON, ne marche pas avec ie
 	// charger la css
-	$("head").append(
+	/*$("head").append(
 		"<style type='text/css' media='all'>@import '"
 		+ TB_chemin_css
 		+ "';</style>"
-	);
+	);*/
 
 
 	$("body").append("<div id='TB_overlay'></div><div id='TB_window'></div>");
