@@ -1,1 +1,30 @@
-<plugin>  <nom> <!-- Nom du plugin -->  Pagination des Articles  </nom>  <auteur>        <!-- Auteur du plugin -->  cedric@yterium.com  </auteur>  <version>  0.1  </version>  <etat>  dev  </etat>  <description>  Paginer les articles en les d&eacute;coupant selon les intertitres h3 et en pr&eacute;sentant les pages sous forme d'onglets  </description>  <fonctions>  paginart_fonctions.php  </fonctions>  <options>  paginart_options.php  </options>  <prefix>  paginart  </prefix>  <pipeline>  	<nom>insert_head</nom>  	<inclure>paginart_fonctions.php</inclure>  </pipeline></plugin>
+<plugin>
+  <nom> <!-- Nom du plugin -->
+  Pagination des Articles
+  </nom>
+  <auteur>        <!-- Auteur du plugin -->
+  cedric@yterium.com
+  </auteur>
+  <version>
+  0.1
+  </version>
+  <etat>
+  dev
+  </etat>
+  <description>
+  Paginer les articles en les d&eacute;coupant selon les intertitres h3 et en pr&eacute;sentant les pages sous forme d'onglets
+  </description>
+  <fonctions>
+  paginart_fonctions.php
+  </fonctions>
+  <options>
+  paginart_options.php
+  </options>
+  <prefix>
+  paginart
+  </prefix>
+  <pipeline>
+  	<nom>insert_head</nom>
+  	<inclure>paginart_fonctions.php</inclure>
+  </pipeline>
+</plugin>
