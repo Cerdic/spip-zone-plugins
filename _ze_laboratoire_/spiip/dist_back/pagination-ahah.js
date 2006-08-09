@@ -1,5 +1,5 @@
-$(document).ready(function(){
-	$('div.bloc_ahah_pagination').each(function(){
+$.blocpagination = function(containerId) {
+	$('#'+containerId).each(function(){
 		var id = this.id;
 		var group = this;
 		$('a.lien_pagination',group).each(function(){
@@ -7,12 +7,18 @@ $(document).ready(function(){
 			var reg = new RegExp('#[a-z0-9_]*$','i');
 			url = url.replace(reg,'')+'&ahah_id='+id;
 			$(this).click(function(){
-				var idtemp = 'temp_'+id;
-				//$('#'+id).before("<div id='"+idtemp+"'></div>");
-				$('div#'+id).wrap('<div id="'+idtemp+'"></div>');
-				$('div#'+idtemp).load(url,'');
+				$('div#'+id).load(url,'',function(){
+					$.blocpagination(id);
+				});
 				return false;
 			});
 		});
+	});
+};
+
+
+$(document).ready(function(){
+	$('div.bloc_ahah_pagination').each(function(){
+		$.blocpagination(this.id);
 	});
 });
