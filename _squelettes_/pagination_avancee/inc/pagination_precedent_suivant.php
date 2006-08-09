@@ -8,8 +8,8 @@ static $ancres = array();
 	$ancre='pagination'.$nom;
 	
 
-	$lien_precedent = '<a href="@url@" rev="prev" class="pagination_precedent" title="'._T('public:page_precedente').'">@item@</a>';
-	$lien_suivant	= '<a href="@url@" rel="next" class="pagination_suivant" title="'._T('public:page_suivante').'">@item@</a>';
+	$lien_precedent = '<a href="@url@" rev="prev" class="pagination_precedent lien_pagination" title="'._T('public:page_precedente').'">@item@</a>';
+	$lien_suivant	= '<a href="@url@" rel="next" class="pagination_suivant lien_pagination" title="'._T('public:page_suivante').'">@item@</a>';
 
 	// n'afficher l'ancre qu'une fois
 	if (!isset($ancres[$ancre]))
@@ -36,11 +36,11 @@ static $ancres = array();
 	$num - $pas < 0 ? $precedant = 0 : $precedant = $num - $pas; // la page précédante
 	
 	// calcul des liens
-	
+	$url = parametre_url(self(),'fragment','');
 	if ($num == 0){
 		$texte=pagination_item($suivant,
 			_T('public:page_suivante'),
-			$lien_suivant,self(),$debut,$ancre);
+			$lien_suivant,$url,$debut,$ancre);
 			}
 	
 	
@@ -48,18 +48,18 @@ static $ancres = array();
 			echo "truc";				
 			$texte=pagination_item($precedant,
 			_T('public:page_precedente'),
-			$lien_precedent,self(),$debut,$ancre);
+			$lien_precedent,$url,$debut,$ancre);
 			}
 	
 	else {
 			
 			$texte=pagination_item($precedant,
 			_T('public:page_precedente'),
-			$lien_precedent,self(),$debut,$ancre);
+			$lien_precedent,$url,$debut,$ancre);
 			
 			$texte = $texte.$separateur.pagination_item($suivant,
 			_T('public:page_suivante'),
-			$lien_suivant,self(),$debut,$ancre);
+			$lien_suivant,$url,$debut,$ancre);
 			
 			}
 		
