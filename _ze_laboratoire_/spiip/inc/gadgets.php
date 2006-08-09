@@ -376,7 +376,7 @@ function dessiner_gadgets($id_rubrique) {
 	if ($_COOKIE['spip_accepte_ajax'] != -1) {
 		return "\n<!-- javascript gadgets -->\n" .
 		http_script(
-		"$('#bandeautoutsite').load('".generer_url_public('inc-gadget-rubriques','lang='.$GLOBALS['spip_lang'],'&')."');\n".
+		"$('#bandeautoutsite').load('".generer_url_prive('inc-gadget-rubriques','lang='.$GLOBALS['spip_lang'],'&')."');\n".
 		"document.getElementById('gadget-navigation').innerHTML = \""
 		. addslashes(strtr(gadget_navigation($id_rubrique),"\n\r","  "))
 		. "\";\n" .
