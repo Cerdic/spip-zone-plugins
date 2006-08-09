@@ -9,7 +9,7 @@ function() {
 
 // configuration :
 var BLOC = 'texte';
-var HEADING = 'h3.spip';
+var HEADING = pagination_article2_HEADING || 'h3.spip';
 
 if ($('.'+BLOC+'>'+HEADING).size() > 1) {
 	$('.'+BLOC).each(
