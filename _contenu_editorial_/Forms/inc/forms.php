@@ -21,7 +21,7 @@
 	}
 	
 	function Forms_verifier_base(){
-		$version_base = 0.14;
+		$version_base = 0.15;
 		$current_version = 0.0;
 		if (   (isset($GLOBALS['meta']['forms_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['forms_base_version'])==$version_base))
@@ -76,6 +76,10 @@
 		if ($current_version<0.14){
 			spip_query("ALTER TABLE spip_reponses ADD `id_article_export` BIGINT( 21 ) NOT NULL AFTER `id_auteur` ");
 			ecrire_meta('forms_base_version',$current_version=0.14);
+		}
+		if ($current_version<0.15){
+			spip_query("ALTER TABLE spip_reponses ADD `url` VARCHAR(255) NOT NULL AFTER `id_article_export` ");
+			ecrire_meta('forms_base_version',$current_version=0.15);
 		}
 		ecrire_metas();
 	}
@@ -147,13 +151,13 @@
 	}
 
 	function Forms_nom_cookie_form($id_form) {
-		return 'spip_cookie_form_'.$id_form;
+		return $GLOBALS['cookie_prefix'].'cookie_form_'.$id_form;
 	}
 
 	function Forms_verif_cookie_sondage_utilise($id_form) {
 		//var_dump($_COOKIE);
 		$cookie_utilise=true;
-		$nom_cookie = 'spip_cookie_form_'.$id_form;
+		$nom_cookie = Forms_nom_cookie_form($id_form);
 		// Ne generer un nouveau cookie que s'il n'existe pas deja
 		if (!$cookie = addslashes($GLOBALS['cookie_form'])){
 			if (!$cookie = $_COOKIE[$nom_cookie]) {
@@ -457,9 +461,20 @@
 			$champconfirm = $row['champconfirm'];
 			$email = unserialize($row['email']);
 
-			$form_summary = '';
+			$url = "";
+			$date = "";
+			$result2 = spip_query("SELECT * FROM spip_reponses WHERE id_reponse=".spip_abstract_quote($id_reponse));
+			if ($row2 = spip_fetch_array($result2)) {
+				$url = $row2['url'];
+				$date = $row2['date'];
+			}
+			include_spip("inc/filtres");
+			$form_summary = _L("R&eacute;ponse saisie le ").affdate($date)."\n";
+			$form_summary .= _L("depuis la page "). $url . "\n";
 			$email_dest = $email['defaut'];
 			$mailconfirm = "";
+			$pieces_jointes_confirm = "";
+			$pieces_jointes_admin = "";
 			
 			$structure = unserialize($row['structure']);
 			// Ici on parcourt les valeurs entrees pour les champs demandes
@@ -468,8 +483,9 @@
 				$code = $t['code'];
 				$type_ext = $t['type_ext'];
 
+				$ligne = "";
 				if (!in_array($type,array('separateur','textestatique'))){
-					$form_summary .= $t['nom'] . " : ";
+					$ligne .= $t['nom'] . " : ";
 		
 					$query2 = "SELECT * FROM spip_reponses_champs WHERE id_reponse='$id_reponse' AND champ='$code'";
 					$result2 = spip_query($query2);
@@ -480,12 +496,19 @@
 						if ($code == $champconfirm)
 							$mailconfirm = $row2['valeur'];
 							
-						//$reponses .= $row2['valeur'].", ";
 						$reponses .= Forms_traduit_reponse($type, $code,$type_ext,$row2['valeur']).", ";
 					}
 					if (strlen($reponses) > 2)
-						$form_summary .= substr($reponses,0,strlen($reponses)-2);
-					$form_summary .= "\n";
+						$reponses = substr($reponses,0,strlen($reponses)-2);
+					if ($type=='fichier'){
+						$pieces_jointes_confirm .= $ligne . basename($reponses);
+						$pieces_jointes_admin .= $ligne . basename($reponses) 
+							. "(".generer_url_ecrire('forms_telecharger',"id_reponse=$id_reponse&champ=$code",true).")";						
+					}
+					else{
+						$ligne .= $reponses;
+						$form_summary .= $ligne . "\n";
+					}
 				}
 			}
 	
@@ -496,7 +519,7 @@
 				$head="From: formulaire@".$_SERVER["HTTP_HOST"]."\n";
 
 				$message = "";
-				$message .= $texte . "\n" . $form_summary;
+				$message .= $texte . "\n" . $form_summary . "\nPieces jointes :\n" . $pieces_jointes_confirm;
 				$sujet = $titre;
 				$dest = $mailconfirm;
 				
@@ -517,6 +540,7 @@
 				$message .= _L('Retrouvez cette r&eacute;ponse dans l\'interface d\'administration : '). $link . "\n\n";
 				$message .= $form_summary;
 				$message .= "mail confirmation :$mailconfirm:";
+				$message .= "\nPieces jointes :\n" . $pieces_jointes_admin;
 				$sujet = $titre;
 				$dest = $email_dest;
 				
@@ -594,6 +618,7 @@
 			global $auteur_session;
 			$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
 			$ip = addslashes($GLOBALS['REMOTE_ADDR']);
+			$url = parametre_url(self(),'id_form','');
 			$ok = true;
 			
 			if ($row['sondage'] != 'non') {
@@ -607,8 +632,8 @@
 			}
 			// D'abord creer la reponse dans la base de donnees
 			if ($ok) {
-				$query = "INSERT INTO spip_reponses (id_form, id_auteur, date, ip, statut, cookie) ".
-					"VALUES ($id_form, '$id_auteur', NOW(), '$ip', '$statut', '$cookie')";
+				$query = "INSERT INTO spip_reponses (id_form, id_auteur, date, ip, url, statut, cookie) ".
+					"VALUES ($id_form, '$id_auteur', NOW(), '$ip', ".spip_abstract_quote($url).", '$statut', '$cookie')";
 				spip_query($query);
 				$id_reponse = spip_insert_id();
 				if (!$id_reponse) {

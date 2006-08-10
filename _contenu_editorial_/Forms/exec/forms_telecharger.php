@@ -64,12 +64,12 @@ function acces_interdit() {
 // Telechargement d'un fichier particulier
 //
 function exec_forms_telecharger(){
-	global $id_reponse;
-	global $id_form;
+	$id_reponse = _request('id_reponse');
+	$id_form = _request('id_form');
+	$champ = _request('champ');
 
 	if ($id_reponse = intval($id_reponse) AND $champ) {
-		$query = "SELECT id_form FROM spip_reponses WHERE id_reponse=$id_reponse";
-		$result = spip_query($query);
+		$result = spip_query("SELECT id_form FROM spip_reponses WHERE id_reponse=".spip_abstract_quote($id_reponse));
 		if ($row = spip_fetch_array($result)) {
 			$id_form = $row['id_form'];
 		}
@@ -230,6 +230,7 @@ function exec_forms_telecharger(){
 	// Une premiere ligne avec les noms de champs
 	$ligne = array();
 	$ligne[] = _L("Date");
+	$ligne[] = _L("Page");
 	foreach ($structure as $index => $t) {
 		$ligne[] = textebrut(typo($t['nom']));
 		if ($t['type']=='multiple'){
@@ -246,7 +247,7 @@ function exec_forms_telecharger(){
 	// Ensuite les reponses
 	$fichier = array();
 	$id_reponse = 0;
-	$query = "SELECT r.id_reponse, r.date, c.champ, c.valeur ".
+	$query = "SELECT r.id_reponse, r.date,r.url, c.champ, c.valeur ".
 		"FROM spip_reponses AS r LEFT JOIN spip_reponses_champs AS c USING (id_reponse) ".
 		"WHERE id_form=$id_form AND statut='valide' AND c.id_reponse IS NOT NULL ".
 		"ORDER BY date, r.id_reponse";
@@ -261,6 +262,7 @@ function exec_forms_telecharger(){
 			$valeurs = array();
 			$date = $row['date'];
 			$ligne[] = jour($date).'/'.mois($date).'/'.annee($date);
+			$ligne[] = str_replace("&amp;","&",$row['url']);
 		}
 		$champ = $row['champ'];
 		if ($types[$champ] == 'fichier') {
@@ -302,7 +304,7 @@ function exec_forms_telecharger(){
 	//
 	// S'il y a des fichiers joints, creer un ZIP
 	//
-	include_spip("inc/pclzip.php");
+	include_spip("inc/pclzip");
 	include_spip("inc/session");
 
 	$zip = "data/form".$id_form."_".rand().".zip";

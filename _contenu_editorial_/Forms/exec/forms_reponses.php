@@ -135,6 +135,7 @@ function exec_forms_reponses(){
 		$id_reponse = $row['id_reponse'];
 		$date = $row['date'];
 		$ip = $row['ip'];
+		$url = $row['url'];
 		$id_auteur = $row['id_auteur'];
 		$nom_auteur = $row['nom'];
 
@@ -218,6 +219,8 @@ function exec_forms_reponses(){
 			echo _T('forum_par_auteur', array('auteur' => $s));
 			echo "<br />\n";
 		}
+		echo _L("Depuis la page ")."<a href='$url'>$url</a><br />\n";
+		
 		echo "<br />\n";
 
 		foreach ($structure as $index => $t) {

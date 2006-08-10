@@ -19,7 +19,7 @@ include_spip('base/forms');
 // (NB : le reglage du cookie doit se faire avant l'envoi de tout HTML au client)
 function Forms_poser_cookie_sondage() {
 	if ($id_form = intval($_POST['id_form'])) {
-		$nom_cookie = 'spip_cookie_form_'.$id_form;
+		$nom_cookie = $GLOBALS['cookie_prefix'].'cookie_form_'.$id_form;
 		// Ne generer un nouveau cookie que s'il n'existe pas deja
 		if (!$cookie = $_COOKIE[$nom_cookie]) {
 			include_spip("inc/session");
@@ -41,8 +41,8 @@ if (isset($GLOBALS['ajout_reponse']) && $GLOBALS['ajout_reponse'] == 'oui' &&
 
 // test si un cookie sondage a ete pose
 foreach($_COOKIE as $cookie=>$value){
-	if (preg_match(",spip_cookie_form_([0-9]+),",$cookie)){
-		$idf = preg_replace(",spip_cookie_form_([0-9]+),","\\1",$cookie);
+	if (preg_match(",".$GLOBALS['cookie_prefix']."cookie_form_([0-9]+),",$cookie)){
+		$idf = preg_replace(",".$GLOBALS['cookie_prefix']."cookie_form_([0-9]+),","\\1",$cookie);
 		$res = spip_query("SELECT id_article FROM spip_forms_articles WHERE id_form=$idf");
 		while($row=spip_fetch_array($res)){
 			$ida = $row['id_article'];
