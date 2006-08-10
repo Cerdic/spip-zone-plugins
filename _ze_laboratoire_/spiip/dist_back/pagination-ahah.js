@@ -1,4 +1,4 @@
-$.fn.blocpagination = function() {
+$.blocpagination = function() {
 		var blocfrag = this;
 		$('a.lien_pagination',this).each(function(){
 			var url = this.href.split('#');
