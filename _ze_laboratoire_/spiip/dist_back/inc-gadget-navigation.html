@@ -1,0 +1,99 @@
+<a href='#URL_ECRIRE{brouteur}'>Navigation Rapide</a>
+<B_articlesprepa>
+	<div>&nbsp;</div>
+	<div class='bandeau_rubriques'>
+		<div style='position: relative;'>
+			<div class='bandeau_boite2_icone'>#HTTP_IMG_PACK{article-24.gif}</div>
+			<div class='bandeau_boite2 verdana2'><b><:info_en_cours_validation:></b></div>
+		</div>
+		<div class='plan-articles'>
+			<BOUCLE_articlesprepa(ARTICLES){statut=prepa}{id_auteur}{!par date}{0,5}>
+				[<a class='#STATUT' href='#URL_ECRIRE{articles,id_article=#ID_ARTICLE}'>
+				(#TITRE|sinon{<:ecrire:info_sans_titre:>})</a>]
+			</BOUCLE_articlesprepa>
+		</div>
+	</div>
+</B_articlesprepa>
+
+<B_articlesprop>
+	<div>&nbsp;</div>
+	<div class='bandeau_rubriques'>
+		<div style='position: relative;'>
+			<div class='bandeau_boite2_icone'>#HTTP_IMG_PACK{article-24.gif}</div>
+			<div class='bandeau_boite2 verdana2'><b><:info_articles_proposes:></b></div>
+		</div>
+		<div class='plan-articles'>
+			<BOUCLE_articlesprop(ARTICLES){statut=prop}{!par date}{0,5}>
+				[<a class='#STATUT' href='#URL_ECRIRE{articles,id_article=#ID_ARTICLE}'>
+				(#TITRE|sinon{<:ecrire:info_sans_titre:>})</a>]
+			</BOUCLE_articlesprop>
+		</div>
+	</div>
+</B_articlesprop>
+
+<B_brevesprop>
+	<div>&nbsp;</div>
+	<div class='bandeau_rubriques'>
+		<div style='position: relative;'>
+			<div class='bandeau_boite2_icone'>#HTTP_IMG_PACK{breve-24.gif}</div>
+			<div class='bandeau_boite2 verdana2'><b><:info_breves_valider:></b></div>
+		</div>
+		<div class='plan-articles'>
+			<BOUCLE_brevesprop(BREVES){statut=prop}{!par date}{0,5}>
+				[<a class='#STATUT' href='#URL_ECRIRE{breves_voir,id_breve=#ID_BREVE}'>
+				(#TITRE|sinon{<:ecrire:info_sans_titre:>})</a>]
+			</BOUCLE_brevesprop>
+		</div>
+	</div>
+</B_articlesprop>
+<BOUCLE_rubs(RUBRIQUES){0,1}>
+<div>&nbsp;</div>
+
+<?php
+if ($connect_statut == "0minirezo") {	
+?>
+<div class='icone_horizontale'>
+	<div class='icone_horizontale_icone'>
+		[(#HTTP_IMG_PACK{rubrique-24.gif}|image_masque{#CHEMIN{img_pack/creer.gif},mode=normal})]
+	</div>
+	<div class='icone_horizontale_texte'>
+		<a href='[(#URL_ECRIRE{rubriques_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
+		[(#ENV{id_rubrique,0}|?{<:icone_creer_sous_rubrique:>,<:icone_creer_rubrique:>})]</a>
+	</div>
+</div>
+<?php
+}
+?>
+<div class='icone_horizontale'>
+	<div class='icone_horizontale_icone'>
+		[(#HTTP_IMG_PACK{article-24.gif}|image_masque{#CHEMIN{img_pack/creer.gif},mode=normal})]
+	</div>
+	<div class='icone_horizontale_texte'>
+		<a href='[(#URL_ECRIRE{articles_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
+		<:icone_ecrire_article:></a>
+	</div>
+</div>
+[(#CONFIG{activer_breves}|=={non}|?{'',' '})
+	<div class='icone_horizontale'>
+		<div class='icone_horizontale_icone'>
+			[(#HTTP_IMG_PACK{breve-24.gif}|image_masque{#CHEMIN{img_pack/creer.gif},mode=normal})]
+		</div>
+		<div class='icone_horizontale_texte'>
+			<a href='[(#URL_ECRIRE{breves_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
+			<:icone_nouvelle_breve:></a>
+		</div>
+	</div>
+]
+	<!--if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) ]-->
+[(#CONFIG{activer_sites}|=={non}|?{'',' '})
+	<div class='icone_horizontale'>
+		<div class='icone_horizontale_icone'>
+			[(#HTTP_IMG_PACK{site-24.gif}|image_masque{#CHEMIN{img_pack/creer.gif},mode=normal})]
+		</div>
+		<div class='icone_horizontale_texte'>
+			<a href='[(#URL_ECRIRE{sites_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
+			<:info_sites_referencer:></a>
+		</div>
+	</div>
+]
+</BOUCLE_rubs>

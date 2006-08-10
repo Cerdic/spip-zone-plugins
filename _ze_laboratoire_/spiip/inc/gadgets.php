@@ -23,181 +23,6 @@ include_spip('inc/presentation');
 //    -> fonction dessiner_gadgets()
 //
 
-
-//
-// GADGET DES RUBRIQUES
-//
-function extraire_article($id_p) {
-	if (array_key_exists($id_p, $GLOBALS['db_art_cache'])) {
-		return $GLOBALS['db_art_cache'][$id_p];
-	} else {
-		return array();
-	}
-}
-
-function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
-	global $zdecal;
-	global $max_lignes;
-	global $spip_ecran, $spip_display;
-	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
-
-	$titre_rubrique = preg_replace(',[\x00-\x1f]+,', ' ', $titre_rubrique);
-	$count_ligne = 0;
-	$zdecal = $zdecal + 1;
-	// Limiter volontairement le nombre de sous-menus 
-	$zmax = 6;
-
-	if ($zdecal == 1) $image = "secteur-12.gif";
-	//else $image = "rubrique-12.gif";
-	else $image = '';
-	
-	if (strlen($image) > 1)
-		$image = " style='background-image:url(" . http_wrapper($image) .");'";
-
-	$arr_rub = extraire_article($id_rubrique);
-
-	$i = sizeof($arr_rub);
-	if ($i > 0 AND $zdecal < $zmax) {
-		$ret = "<div class='pos_r' style='z-index: $z;' onMouseOver=\"montrer('b_$id_rubrique');\" onMouseOut=\"cacher('b_$id_rubrique');\">";
-		$ret .= '<div class="brt"><a href="' . generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique)
-		  . '" class="bandeau_rub"'.$image.'>'.supprimer_tags($titre_rubrique)."</a></div>\n"
-		  . '<div class="bandeau_rub" style="z-index: '.($z+1).';" id="b_'.$id_rubrique.'">';
-		
-		$ret .= '<table cellspacing="0" cellpadding="0"><tr><td valign="top">';
-		$ret .= "<div style='width: 200px;'>\n";
-		
-		if ($nb_rub = count($arr_rub))
-			$ret_ligne =  ceil($nb_rub / ceil($nb_rub / $max_lignes)) + 1;
-				
-		foreach( $arr_rub as $id_rub => $titre_rub) {
-			$count_ligne ++;
-			
-			if ($count_ligne == $ret_ligne) {
-				$count_ligne = 0;
-				$ret .= "</div>";
-				$ret .= "</td>";
-				$ret .= '<td valign="top" style="border-left: 1px solid #cccccc;">';
-				$ret .= "<div style='width: 200px;'>";
-
-			}
-		
-			$titre_rub = supprimer_numero(typo($titre_rub));
-			$ret .= bandeau_rubrique($id_rub, $titre_rub, ($z+$i));
-			$i = $i - 1;
-		}
-		
-		$ret .= "</div></td></tr></table>\n";
-		
-		$ret .= "</div></div>\n";
-	} else {
-		$ret = '<div><a href="' . generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique)
-		  . '" class="bandeau_rub"'.$image.'>'.supprimer_tags($titre_rubrique)."</a></div>\n";
-	}
-	$zdecal = $zdecal - 1;
-	return $ret;
-}
-
-// FIN GADGET DES RUBRIQUES
-
-
-//
-// GADGET DE NAVIGATION RAPIDE
-//
-function gadget_navigation($id_rubrique) {
-	global $connect_id_auteur, $connect_login, $connect_statut, $couleur_claire,$couleur_foncee, $spip_lang_left, $spip_lang_right, $spip_ecran;
-
-	$gadget = '';
-
-	$vos_articles = spip_query("SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC LIMIT 5");
-	if (spip_num_rows($vos_articles) > 0) {
-			$gadget .= "<div>&nbsp;</div>";
-			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire("articles_page",""))._T('info_en_cours_validation'), "article-24.gif", $couleur_foncee, 'white', false);
-			$gadget .= "\n<div class='plan-articles'>\n";
-			while($row = spip_fetch_array($vos_articles)) {
-				$id_article = $row['id_article'];
-				$titre = typo(sinon($row['titre'], _T('ecrire:info_sans_titre')));
-				$statut = $row['statut'];
-				$gadget .= "<a class='$statut' style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a>\n";
-			}
-			$gadget .= "</div>";
-			$gadget .= "</div>";
-	}
-	
-	$vos_articles = spip_query("SELECT id_article, id_rubrique, titre, statut FROM spip_articles WHERE statut='prop' ORDER BY date DESC LIMIT 5");
-	if (spip_num_rows($vos_articles) > 0) {
-			$gadget .= "<div>&nbsp;</div>";
-			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus('./')._T('info_articles_proposes'), "article-24.gif", $couleur_foncee, 'white', false);
-			$gadget .= "<div class='plan-articles'>";
-			while($row = spip_fetch_array($vos_articles)) {
-				$id_article = $row['id_article'];
-				$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
-				$statut = $row['statut'];
-	
-				$gadget .= "<a class='$statut' style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a>";
-			}
-			$gadget .= "</div>";
-			$gadget .= "</div>";
-	}
-
-	$vos_articles = spip_query("SELECT * FROM spip_breves WHERE statut='prop' ORDER BY date_heure DESC LIMIT 5");
-	if (spip_num_rows($vos_articles) > 0) {
-			$gadget .= "<div>&nbsp;</div>";
-			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire("breves"))._T('info_breves_valider'), "breve-24.gif", "$couleur_foncee", "white", false);
-			$gadget .= "<div class='plan-articles'>";
-			while($row = spip_fetch_array($vos_articles)) {
-				$id_breve = $row['id_breve'];
-				$titre = typo(sinon($row['titre'], _T('ecrire:info_sans_titre')));
-				$statut = $row['statut'];
-	
-				$gadget .= "<a class='$statut' style='font-size: 10px;' href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "'>$titre</a>";
-			}
-			$gadget .= "</div>";
-			$gadget .= "</div>";
-	}
-
-	$result = spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1");
-		
-	if (spip_num_rows($result) > 0) {
-			$gadget .= "<div>&nbsp;</div>";
-			if ($id_rubrique > 0) {
-				$dans_rub = "&id_rubrique=$id_rubrique";
-				$dans_parent = "&id_parent=$id_rubrique";
-			} else $dans_rub = $dans_parent = '';
-			if ($connect_statut == "0minirezo") {	
-				$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
-				if ($id_rubrique > 0)
-					$gadget .= icone_horizontale(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui$dans_parent"), "rubrique-24.gif", "creer.gif", false);
-				else 
-					$gadget .= icone_horizontale(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.gif", "creer.gif", false);
-				$gadget .= "</div>";
-			}		
-			$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
-			$gadget .= icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui$dans_rub"), "article-24.gif","creer.gif", false);
-			$gadget .= "</div>";
-			
-			if ($GLOBALS['meta']["activer_breves"] != "non") {
-				$gadget .= "<div style='width: 140px;  float: $spip_lang_left;'>";
-				$gadget .= icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui$dans_rub"), "breve-24.gif","creer.gif", false);
-				$gadget .= "</div>";
-			}
-			
-			if ($GLOBALS['meta']["activer_sites"] == 'oui') {
-				if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
-					$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
-					$gadget .= icone_horizontale(_T('info_sites_referencer'), generer_url_ecrire("sites_edit","new=oui$dans_parent"), "site-24.gif","creer.gif", false);
-					$gadget .= "</div>";
-				}
-			}
-			
-	}
-
-	return $gadget;
-}
-
-
 function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	global $connect_id_auteur, $connect_login, $connect_statut, $couleur_claire,$couleur_foncee, $spip_lang_left, $spip_lang_right, $spip_ecran;
 
@@ -373,13 +198,16 @@ function gadget_messagerie() {
 }
 
 function dessiner_gadgets($id_rubrique) {
+	global $connect_id_auteur;
+	global $couleur_claire;
+	global $couleur_foncee;
+	$args_coul="couleur_claire=".substr($couleur_claire,1)."&couleur_foncee=".substr($couleur_foncee,1);
 	if ($_COOKIE['spip_accepte_ajax'] != -1) {
 		return "\n<!-- javascript gadgets -->\n" .
 		http_script(
 		"$('#bandeautoutsite').load('".generer_url_prive('inc-gadget-rubriques','lang='.$GLOBALS['spip_lang'],'&')."');\n".
-		"document.getElementById('gadget-navigation').innerHTML = \""
-		. addslashes(strtr(gadget_navigation($id_rubrique),"\n\r","  "))
-		. "\";\n" .
+		"$('#bandeaunavrapide').load('".generer_url_prive('inc-gadget-navigation',"id_auteur=$connect_id_auteur&lang=".$GLOBALS['spip_lang'],'&')."');\n
+		\n" .
 #		"document.getElementById('gadget-recherche').innerHTML = \""
 #		. addslashes(strtr(gadget_recherche($id_rubrique),"\n\r","  "))
 #		. "\";\n" .
