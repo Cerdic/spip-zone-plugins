@@ -16,7 +16,7 @@ if ($('.'+BLOC+'>'+HEADING).size() > 1) {
 		function (j) {
 			//prepend table to the texte block
 			$(this).prepend(
-				'<div class="tdm" style="float: right; width: 120px;">'
+				'<div class="tdm breves" style="float: right; width: 120px;">'
 				+ '<ul></ul>'
 				+ '</div>'
 				);
@@ -53,7 +53,6 @@ if ($('.'+BLOC+'>'+HEADING).size() > 1) {
 				.find('+div').append($('>*:lt('+(h[k]+1)+')',this).filter('*:gt('+(h[k-1]+1)+')').get()).hide()
 				//go back to the heading and get it
 				.end().get(0);
-//				$('#'+nom).prepend(my_heading);
 				//build table
 				table.prepend('<li><a></a></li>').find('li:first-child a').html(my_heading.innerHTML).click(f).end();
 			}
