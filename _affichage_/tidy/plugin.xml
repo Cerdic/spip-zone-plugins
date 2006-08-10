@@ -9,7 +9,7 @@
 	0.1
 	</version>
 	<etat>
-	dev
+	stable
 	</etat>
 	<description>
 	Applique tidy sur les pages de l'espace public, cf. [->http://www.spip.net/fr_article3070.html].
