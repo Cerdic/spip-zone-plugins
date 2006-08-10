@@ -1,29 +1,20 @@
-$.blocpagination = function(containerId) {
-	$('#'+containerId).each(function(){
-		var id = this.id;
+$.fn.blocpagination = function() {
+		var blocfrag = this;
 		$('a.lien_pagination',this).each(function(){
-			var reg = new RegExp('^(.*)#([a-z0-9_]*)$','i');
-			var url = this.href;
-			var ancre = url.replace(reg,'$2');
-			url = url.replace(reg,'$1');
-			if (url.indexOf("?")>0) url = url+'&';
-			else url = url+'?';
-			url=url + 'var_fragment='+id;
+			var url = this.href.split('#');
+			url[0] += (url[0].indexOf("?")>0 ? '&':'?')+'var_fragment='+blocfrag.id;
 			$(this).click(function(){
 				$(this.parentNode).before('<div class="ahah_searching_right">&nbsp;</div>');
-				$('div#'+id).load(url,null,function(){
-					window.location.hash = ancre;
-					$.blocpagination(id);
+				$(blocfrag).load(url[0],null,function(){
+					window.location.hash = url[1];
+					$.apply(blocfrag,$.blocpagination);
 				});
 				return false;
 			});
 		});
-	});
 };
 
 
 $(document).ready(function(){
-	$('div.fragment').each(function(){
-		$.blocpagination(this.id);
-	});
+	$('div.fragment').each($.blocpagination);
 });
