@@ -1,0 +1,27 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Tidy
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	fil@rezo.net
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Applique tidy sur les pages de l'espace public, cf. [->http://www.spip.net/fr_article3070.html].
+
+	Configuration : &eacute;diter dans  le fichier <code>options.php</code> du plugin les lignes suivantes :
+-- <code>$xhtml = 'tidy';</code> active le mode tidy
+-- <code>define('_TIDY_COMMAND', 'tidy');</code> d&eacute;finit le chemin du binaire
+	</description>
+	<prefix>
+	Tidy
+	</prefix>
+	<options>
+	options.php
+	</options>
+</plugin>
