@@ -1,9 +1,6 @@
 .nav_logo_rub{
-float:left;
+	float:left;
 }
-#bandeautoutsite-container{
-	font-size:100%;
-	}
 #bandeautoutsite,#bandeautoutsite ul {
 	float: left;
 	list-style: none;
@@ -14,6 +11,7 @@ float:left;
 	border: solid #eda;
 	margin: 0 0 0 0;
 	text-align:left;
+	width:200px;
 } 
 #bandeautoutsite ul {
 	border-width: 1px 0;

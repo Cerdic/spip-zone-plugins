@@ -18,7 +18,7 @@
 //if (window.attachEvent) window.attachEvent("onload", sfHover);
 
 $(document).ready(function(){
-	$('li',document.getElementById("nav")).hover(
+	$('li',document.getElementById("gadget-rubriques")).hover(
 		function(){$(this).addClass('sfhover')},
 		function(){$(this).removeClass('sfhover')}
 		);
