@@ -1,0 +1,24 @@
+<plugin>
+	<nom>Edition des articles avec FCKeditor - 2&egrave;me solution</nom>
+	<auteur>[Frank SAURET->http://electropol.free.fr] &copy; 2006 - Distribu&eacute; sous licence GNU/GPL</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>
+{{Edition des articles avec FCKeditor}}
+
+<u>Caract&eacute;ristiques :</u>
+-* Seule la zone 'texte' est &eacute;ditable,
+-* NON INTRUSIF (ne se substitue pas &agrave; la barre SPIP qui reste disponible),
+-* G&eacute;n&egrave;re du HTML,
+-* Bas&eacute; sur FCKeditor 2.2 modifi&eacute;,
+-* Ajout d'une aide &agrave; l'utilisation en fran&ccedil;ais.
+
+<u>Limitations</u>
+-* La fonction de d&eacute;coupe des gros articles est d&eacute;sactiv&eacute;e (non probl&eacute;matique sur les navigateurs r&eacute;cents),
+-* Ne pas mixer pour un m&ecirc;me article l'&eacute;dition WYSIWYG et le code SPIP,
+-* Les fichiers envoy&eacute;s sur le serveur par l'interm&eacute;diaire de FCKeditor sont partag&eacute;s entre tous les utilisateurs. Il n'est pas possible de supprimer / renommer / les fichiers et dossiers. Il est possible de d&eacute;sactiver ces fonctionnalit&eacute;s &agrave; l'aide des fichiers de configuration,
+-* Les fichiers envoy&eacute;s par l'interm&eacute;diaire de FCKeditor ne sont pas utilisables par SPIP et r&eacute;ciproquement.
+	</description>
+
+	<prefix>fckeditor2</prefix>
+</plugin>
