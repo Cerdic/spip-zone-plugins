@@ -9,7 +9,7 @@
 	0.1
 	</version>
 	<etat>
-	dev
+	stable
 	</etat>
 	<description>
 	ajoute l'appel &agrave; jquery.js dans l'entete (fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>)
