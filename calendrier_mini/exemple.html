@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html dir="#LANG_DIR" xmlns="http://www.w3.org/1999/xhtml" lang="#LANG" xml:lang="#LANG">
+<head>
+<title>Exemple #[(#REM)]CALENDRIER_MINI</title>
+<INCLURE{fond=inc-head}{lang}>
+<link rel="stylesheet" href="[(#CHEMIN{layout.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
+<link rel="stylesheet" href="[(#CHEMIN{style.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
+</head>
+
+<body class="page_sommaire">
+<div id="page">
+<div id="conteneur">
+<div id="contenu">
+
+<h1>Exemple #[(#REM)]CALENDRIER_MINI</h1>
+
+[(#REM) Archives]
+<B_articles_archives>
+<div class="liste-articles">
+[<h2>(#DATE_ARCHIVES|affdate)</h2>][
+<div>(#PAGINATION)</div>
+]<BOUCLE_articles_archives(ARTICLES){pagination 15}{par date}{inverse}{date==^#DATE_ARCHIVES}>
+<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
+[<div class="texte">(#INTRODUCTION)</div>]
+<br class="nettoyeur" />
+</BOUCLE_articles_archives>[
+<div>(#PAGINATION)</div>
+]</div></B_articles_archives>[
+<h2>Rien pour (#DATE_ARCHIVES|affdate)</h2>
+]<//B_articles_archives>
+
+</div>
+
+<div id="navigation">
+<div id="sidebar">
+#CALENDRIER_MINI
+</div>
+</div>
+
+</div>
+</div>
+</body>
+</html>

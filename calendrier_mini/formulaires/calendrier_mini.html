@@ -1,0 +1,25 @@
+<div id="calendar">
+	<h2><:icone_calendrier:></h2>
+	<table summary="<:icone_calendrier:>">
+		<caption><BOUCLE_mois_precedent(ARTICLES){branche?}{mois_relatif=1}{0,1}>[
+			<a
+				href="(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE|affdate{'Y-m'})]})"
+				title="[(#DATE|affdate_mois_annee)]">&#171;</a>]</BOUCLE_mois_precedent>[
+			(#ENV{date}|affdate_mois_annee)]<BOUCLE_mois_suivant(ARTICLES){branche?}{mois_relatif=-1}{0,1}>[
+			<a
+				href="(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE|affdate{'Y-m'})]})"
+				title="[(#DATE|affdate_mois_annee)]">&#187;</a>]</BOUCLE_mois_suivant>
+		</caption>[
+		(#LANG|thead)
+		]<tbody><BOUCLE_calendrier(ARTICLES)
+			{branche?}
+			{agenda date, mois, (#ENV{date}|annee), (#ENV{date}|mois)}>[
+			(#DATE|agenda_memo{'',
+				[(#DATE|affdate{'j'})],
+				[(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE|affdate{'Y-m-d'})]})]})
+			]</BOUCLE_calendrier>[
+			(#ENV{date}|agenda_mini)
+			]</tbody>
+	</table>
+	<span>&nbsp;</span>
+</div>
