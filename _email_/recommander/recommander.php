@@ -158,7 +158,7 @@ function main_recommander() {
 		function toggle_formulaire_recommander(){
       var p = $("div#formulaire_recommander");
       if (p.is(":hidden")) p.slideDown("fast");
-      else p.slideUp("fast");
+      /*else p.slideUp("fast");*/ // fait planter safari ? pas vraiment utile en plus
 		}
 		</script>';
 
