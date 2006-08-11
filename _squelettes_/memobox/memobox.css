@@ -1,0 +1,15 @@
+/*Change the style as you desire*/
+/*The drop box*/
+#memobox {width:100%;background:#FFC;font-size:80%;}
+/*The drop box heading*/
+#memobox_heading {font-weight:bold;background:#FF0;padding:5px}
+/*The ul that will receive link items*/
+#memobox ul {padding:5px}
+/*The listitems in the box*/
+#memobox ul li {position:relative}
+/*The delete link*/
+.memobox_delete {right:0px;position:absolute}
+/*The delete link text - to consent not to show it and place an image as background*/
+.memobox_delete span {}
+/*The draggable items. This class is added only if javascript is active*/
+.memobox_drag {background:#ffc}
