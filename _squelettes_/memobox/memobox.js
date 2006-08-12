@@ -59,6 +59,7 @@ function memobox_init() {
 	//if($('li',memobox_ul).size()) $('>p',memobox).remove();
 }
 
+// http://www.quirksmode.org/js/cookies.html 
 function memobox_createCookie(name,value,days) {
 	if (days) {
 		var date = new Date();

@@ -878,8 +878,15 @@ jQuery.prototype.hover = function(f,g) {
 	// A private function for haandling mouse 'hovering'
 	function handleHover(e) {
 		// Check if mouse(over|out) are still within the same parent element
-		var p = (e.type == "mouseout")?	(e.toElement || e.relatedTarget) : (e.fromElement || e.toElement || e.relatedTarget);
-
+		var p = (e.type == "mouseout")?	(e.toElement || e.relatedTarget) : (e.fromElement || e.toElement || e.relatedTarget);		
+		/*
+		var p;
+		if(e.type == "mouseout") {
+			p = e.toElement || e.relatedTarget;
+		} else {
+			p = e.fromElement || e.toElement || e.relatedTarget;
+		}
+		*/
 		while ( p && p != this ) p = p.parentNode;
 		
 		// If we actually just moused on to a sub-element, ignore it
