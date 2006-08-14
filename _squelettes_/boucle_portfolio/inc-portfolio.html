@@ -1,0 +1,41 @@
+<div id="documents_portfolio">
+	<h2><:info_portfolio:></h2>
+	<B_afficher_document>
+		#SET{debut,'debut_afficher_document'}
+		#SET{ancre,'pagination_afficher_document'}
+		<a name='#GET{ancre}' id='#GET{ancre}'></a>
+		
+		#SET{url,#SELF|parametre_url{fragment,''}}
+		#SET{page_courante,#ENV{debut_afficher_document,0}|plus{1}}
+		#SET{nombre_pages,#GRAND_TOTAL}
+		
+		#SET{max,#ENV{nb_vignettes,5}}
+		#SET{moitie,#GET{max}|moins{1}|div{2}|floor}
+		#SET{premiere, #GET{page_courante}|moins{#GET{moitie}}|max{1}}
+		#SET{derniere, #GET{premiere}|plus{#GET{max}}|moins{1}|min{#GET{nombre_pages}}}
+		#SET{premiere, #GET{derniere}|moins{#GET{max}}|plus{1}|max{1}}
+
+		#SET{separateur,''}
+
+		<p class='pagination_portfolio'>
+		[(#REM)
+		[<a href='[(#GET{url}|parametre_url{#GET{debut},''})]##GET{ancre}' class='lien_pagination'>(#GET{premiere}|>{1}|?{'&lt;&lt;',''})</a> #GET{separateur}]
+		]
+		#SET{nombre,#GET{derniere}|moins{#GET{premiere}}|plus{1}}
+		<BOUCLE_paginer_document(DOCUMENTS) {id_article} {extension IN png,jpg,gif}{#GET{premiere}|moins{1},#GET{nombre}}{par num titre, date} >
+			#SET{item, #COMPTEUR_BOUCLE|moins{1}}
+			[(#INCLURE{fond=modeles/paginationitem}{num=#COMPTEUR_BOUCLE}{texte=#LOGO_DOCUMENT||image_reduire{0,50}}{separateur=#GET{separateur}}{url=#GET{url}|parametre_url{#GET{debut},#GET{item}}|ancre_url{#GET{ancre}}}{page_courante=#GET{page_courante}}{derniere=#GET{derniere}})]
+		</BOUCLE_paginer_document>
+		[(#REM)
+		[#GET{separateur} <a href='[(#GET{url}|parametre_url{#GET{debut},#GET{nombre_pages}|moins{1}})]##GET{ancre}' class='lien_pagination'>(#GET{derniere}|<{#GET{nombre_pages}}|?{'&gt;&gt;',''})</a>]
+		]
+		</p>
+		
+	<BOUCLE_afficher_document(DOCUMENTS) {id_article} {extension IN png,jpg,gif}{pagination 1}{par num titre, date} >
+	<div class="spip_documents spip_documents_center" id="document_actif">
+		[(#LOGO_DOCUMENT||image_reduire{400,0}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})]
+		[<div class="spip_doc_titre">(#TITRE)</div>]
+		[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+	</div>
+	</BOUCLE_afficher_document>
+</div>
