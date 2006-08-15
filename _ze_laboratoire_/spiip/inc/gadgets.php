@@ -26,9 +26,10 @@ include_spip('inc/presentation');
 function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	global $connect_id_auteur, $connect_login, $connect_statut, $couleur_claire,$couleur_foncee, $spip_lang_left, $spip_lang_right, $spip_ecran;
 
-	$bandeau = "<div id='bandeau-gadgets'>".
-	"\n<table width='$largeur' cellpadding='0' cellspacing='0' align='center'><tr><td>\n<div style='position: relative; z-index: 1000;'>"
-
+	$bandeau = "<div id='bandeau-gadgets' style='width:{$largeur}px;'>"
+	//"\n<div style='position: relative; z-index: 1000;height:1%'>"
+	//"\n<table width='$largeur' cellpadding='0' cellspacing='0' align='center'><tr><td>\n<div style='position: relative; z-index: 1000;'>"
+	
 	// GADGET Menu rubriques
 	. "\n<div id='bandeautoutsite' class='bandeau_couleur_sous' style='$spip_lang_left: 0px;'>"
 	. "<a href='" . generer_url_ecrire("articles_tous") . "' class='lien_sous'>"._T('icone_site_entier')."</a>"
@@ -139,7 +140,7 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 
 	$bandeau .= "</div>";
 	$bandeau .= "</div>";
-	$bandeau .= "</td></tr></table>";
+	//$bandeau .= "</td></tr></table>";
 
 
 	$bandeau .= '</div>';
