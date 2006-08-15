@@ -100,6 +100,11 @@ function traite_xhtml ($buffer) {
 		// en ligne de commande 
 		// (pour les sites qui n'ont pas tidyPHP)
 
+		if (!_TIDY_COMMAND) {
+			$GLOBALS['xhtml'] = false;
+			return $buffer;
+		}
+
 		list($buffer, $les_echap) = echappe_xhtml($buffer); # math et textarea
 
 		$cache = sous_repertoire(_DIR_CACHE,'tidy');
