@@ -1658,8 +1658,6 @@ function debut_javascript($admin, $stat)
 			"\nvar ajax_image_searching = '<div style=\"float: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(_DIR_IMG_PACK."searching.gif")."\" /></div>';" .
 			"\nvar admin = " . ($admin ? 1 : 0) .
 			"\nvar stat = " . ($stat ? 1 : 0) .
-			"\nvar largeur_icone = " .
-			largeur_icone_bandeau_principal(_T('icone_a_suivre')) .
 			"\nvar  bug_offsetwidth = " .
 // uniquement affichage ltr: bug Mozilla dans offsetWidth quand ecran inverse!
 			((($spip_lang_left == "left") &&
@@ -2082,12 +2080,14 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 	
 	$num_boutons = count($GLOBALS['boutons_admin']);
 	$espacement = isset($GLOBALS['boutons_admin']['espacement']);
-	$cell_width = intval(($largeur)/$num_boutons);
+	$largeur_icone_bandeau_principal = intval(($largeur)/$num_boutons);
 	//echo "larghezza: $largeur cella: $cell_width totale ".$cell_width*$num_boutons;
+	echo "<script type='text/javascript'>var largeur_icone = " .
+			$largeur_icone_bandeau_principal."</script>";
 	
 	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
 		if($page=='espacement') {
-			echo "<style>.boutons_admin {width:".($cell_width-20)."px}</style>";
+			echo "<style>.boutons_admin {width:".($largeur_icone_bandeau_principal-20)."px}</style>";
 			echo "<li class='cellule48 boutons_admin' ><span class='menu-item boutons_admin'>&nbsp</span></li>";
 		} else {
 			if ($detail->url)
@@ -2109,7 +2109,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 				$lien_noscript,
 				$page,
 				$sous_rubrique,
-				$cell_width);
+				$largeur_icone_bandeau_principal);
 		}
 	}
 
@@ -2160,7 +2160,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 			echo "</ul></div>";
 		}
 		
-		$decal += largeur_icone_bandeau_principal(_T($detail->libelle));
+		$decal += $largeur_icone_bandeau_principal+5;//largeur_icone_bandeau_principal(_T($detail->libelle));
 	}
 
 	echo "</div>";
