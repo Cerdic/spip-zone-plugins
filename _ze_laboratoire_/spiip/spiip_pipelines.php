@@ -51,7 +51,7 @@ function spiip_insert_head($flux){
 
 		$contexte = array('id_'.$type => $id);
 
-		$page = recuperer_fond($fond, $contexte);
+		$page = trim(recuperer_fond($fond, $contexte));
 
 		$compteur--;
 
@@ -65,8 +65,30 @@ function spiip_insert_head($flux){
 		if (preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER))
 			foreach ($matches as $regs) {
 				$modele = spiip_inclure_modele($regs[4], $regs[1], $regs[2], $regs[0]);
-				$texte = str_replace($regs[0], code_echappement($modele), $texte);
+
+				$rempl = code_echappement($modele);
+
+				// XHTML : remplacer par une <div onclick> le lien
+				// dans le cas [<docXX>->lien] ; sachant qu'il n'existe
+				// pas de bonne solution en XHTML pour produire un lien
+				// sur une div (!!)...
+				if (substr($rempl, 0, 5) == '<div '
+				AND preg_match(',(<a [^>]+>)'.preg_quote($regs[0]).'</a>,Uims',
+				$letexte, $r)) {
+					$lien = extraire_attribut($r[1], 'href');
+					$rempl = '<div style="cursor:pointer;cursor:hand;" '
+					.'onclick="document.location=\''.$lien
+					.'\'"'
+##					.' href="'.$lien.'"' # href deviendra legal en XHTML2
+					.'>'
+					.$rempl
+					.'</div>';
+				}
+
+				$letexte = str_replace($r[0], $rempl, $letexte);
 			}
+
+//	print_r($texte);
 
 		return $texte;
 	}
