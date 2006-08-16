@@ -52,7 +52,7 @@ function spiip_insert_head($flux){
 
 		$contexte = array('id_'.$type => $id);
 
-		$page = trim(recuperer_fond($fond, $contexte));
+		$page = recuperer_fond($fond, $contexte);
 
 		$compteur--;
 
