@@ -1,0 +1,181 @@
+<html>
+<head>
+
+    <title>ReadMe: Flash Video Player 2.4</title>
+
+    <style type="text/css">    body  {
+       color: #000000;	   margin: 0;	   padding: 0;	   font-family: Arial, sans-serif;	   font-size: 13px;	   line-height: 18px;	   background-color: #eeeeee;    }    h1 {
+       margin-top: 40px;
+       line-height: 24px;
+       border-bottom: 2px solid #557722; 	   font-size: 20px;    }
+    h2 {
+       margin-top: 50px;	   font-size: 16px;
+    }    p {	   margin-top: 5px;	   margin-bottom: 15px;    }    a {	   color: #557722;    }    a:hover { 
+       color: #000000;    }    pre {	   margin-top: 5px;	   margin-bottom: 15px;	   font-family: monospace;	   font-size: 12px;	   color: #557722;    }    ul {	   margin: 5px 0 15px 50px;
+	   padding: 0;	   list-style-type: square;    }
+        #wrapper {	   width: 700px;	   padding: 10px 50px;	   text-align: left;	   margin: 0 auto;	   background-color: white;    }    #lead {	   font-weight: bold;	   font-style: italic;    }    #footer {
+       margin-top: 60px;	   font-size: 11px;	   clear: both;	   width: 480px;	   padding-bottom: 5px;    }
+    </style>
+    
+</head>
+<body>
+<div id="wrapper">
+
+
+
+    <h1>README: FLASH VIDEO PLAYER 2.4</h1>
+    <p id="lead">thanks for downloading my flash flv player. this flv player can be used standalone, without the need for flash mx 2004. the player 
+allows you to show your videos more controlled and to a broader 
+audience as with quicktime, windows media or real media. if you do 
+work with flash mx 2004, this player is also smaller and easier to 
+adjust than the components that accompany flash mx 2004. Contents of this readme:</p>
+    <ul>
+        <li><a href="#licensing">Licensing information</a></li>
+        <li><a href="#html">Installing for HTML</a></li>
+        <li><a href="#vars">Variables</a></li>
+        <li><a href="#flash">Installing inside a Flash Movie</a></li>
+        <li><a href="#hints">Some Hints</a></li>
+        <li><a href="#version">Version History</a></li>
+        <li><a href="#support">Support</a></li>
+    </ul>
+
+
+    <h2 id="licensing">LICENSING INFORMATION</h2>
+    <p>This script is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/2.5/">Creative Commons License</a>. It allows you to use, modify and redistribute the script as long as you use it non-commercially and credit me as the author. For commercial use, I distribute licenses of the script at a fee of 15 euros. One license applies to a single project, and you don't have to credit me as the author anymore. Please <a href="mailto:mail@jeroenwijering.com">contact me</a> for obtaining licenses!</p>
+    
+
+    <h2 id="html">INSTALLING FOR HTML</h2>
+    <p>if you only have one flv file, name it "video.flv" and put it in 
+the same directory as your webpage and the flvplayer.swf. now put
+this code in your html page on the place you want the player to 
+appear:</p>
+
+<pre>
+&lt;object type="application/x-shockwave-flash" width="400" height="220" 
+	wmode="transparent" data="flvplayer.swf"&gt;
+	&lt;param name="movie" value="flvplayer.swf" /&gt;
+	&lt;param name="wmode" value="transparent" /&gt;
+&lt;object/&gt;
+</pre>
+
+<p>you can adjust the width and height values to suit your video 
+dimensions. the width should be the width of your video and the
+height should be your video's width + 20 (for the controlbar). </p>
+
+    <h2 id="vars">VARIABLES</h2>
+    
+    <p>you can give the flash movie two variables, both through the html 
+code. the first one is the video file you want to play. if you 
+want to play another file than the default video. for example if 
+you have a movie "holiday.flv" inside the "movies" subdirectory, 
+you can tell this to the flvplayer:</p>
+
+<pre>
+&lt;object type="application/x-shockwave-flash" width="400" height="220" 
+	wmode="transparent data="flvplayer.swf?file=movies/holiday.flv"&gt;
+	&lt;param name="movie" value="flvplayer.swf?file=movies/holiday.flv" /&gt;
+	&lt;param name="wmode" value="transparent" /&gt;
+&lt;/object&gt;
+</pre>
+
+<p>you can play movies from another website if you include the entire 
+http:// path. great for saving bandwidth !</p>
+
+<p>the second variable is autostart. the movie starts automatically 
+by default, but you might want the user to press the play button. 
+this is the code:</p> 
+
+<pre>
+&lt;object type="application/x-shockwave-flash" width="400" height="220" 
+	wmode="transparent" data="flvplayer.swf?autoStart=false"&gt;
+	&lt;param name="movie" value="flvplayer.swf?autoStart=false" /&gt;
+	&lt;param name="wmode" value="transparent" /&gt;
+&lt;/object&gt;
+</pre>
+
+
+<p>when you've set the autoStart to false, the video display shows a 
+black screen with the words "click to play". if you put a jpg 
+file with the same name and in the same folder as your flv file
+online, that jpg file will be shown as a placehoder instead. the
+default is, as with the flv, the name video.jpg</p>
+
+<p>last but not least you can combine these variables if you put a 
+"&" sign in between them. example:</p>
+
+&lt;object type="application/x-shockwave-flash" width="400" height="220" wmode="transparent"
+	data="flvplayer.swf?file=movies/holiday.flv&autoStart=false"&gt;
+	&lt;param name="movie" value="flvplayer.swf?file=movies/holiday.flv&autoStart=false" /&gt;
+	&lt;param name="wmode" value="transparent" /&gt;
+&lt;/object&gt;
+</pre>
+    
+    
+    
+    <h2 id="flash">INSTALLING INSIDE A FLASH MOVIE</h2>
+ 
+    <p>if you have flash mx 2004, you can also choose to embed the player 
+into a flash project. just copy-paste the movieclip from 
+flvplayer.fla to your movie. at the top of the actionscript in the 
+movieclip you can set the variables for the filename, autostart 
+(true/false), width and height of the movie. you can also easily 
+change the look and colors of the player, as long as you keep the 
+symbol nesting intact.</p>
+
+    <h2 id="hints">SOME HINTS</h2>
+ 
+<ul>
+<li>you need flash mx 2004 with the 7.2 update from macromedia if you 
+want to open the .fla file ! i cannot save this to a lower version 
+since some scripting is only supported by this version.</li>
+
+<li>you can encode flv video with the free flv encoder at 
+www.rivavx.com. an article with some hints and pittfalls regarding 
+flv compression can be found at my website.</li>
+
+<li>the jpg file cannot be saved as "progressive jpg". flash is unable
+to load this type of jpegs.</li>
+
+<li>the various versions of the flv video exporter that comes with flash 
+mx 2004, as well as sorenson squeeze, do not export proper duration 
+and screensize meta tags with the flv file. so the player doesn't 
+know how long the file is and is unable to build a progress bar. a 
+small tool that can be found at www.buraks.com/flvmdi/ fixes this 
+error by inserting the proper duration metadata in the flv file. 
+please try it if you have problems with proper scrubbing and 
+autorewinding of the movie.</li>
+
+<li>it is not possible to stop the automatic streaming of the video file 
+(in theory it is, but flash has some bugs on the netStream.close() 
+method). if you have many videos and want to reduce bandwidth, just 
+use a jpg screenshot of the movie that is replaced by the video when 
+you click on it.</li>
+</ul>
+
+
+    <h2 id="version">VERSION HISTORY</h2>
+    <ul>
+        <li>2.4: added volume control, switched to square design, largened 'click here' font.</li>
+        <li>2.3: After finishing the jpg cover is shown again. Script for resizing based on metadata is reinserted, but commented out.</li>
+        <li>2.2: the script now doesn't automatically preload a video when the autoStart is set to false. it shows a 'click to play' screen 
+     instead. A jpg image is automatically detected and loaded instead.</li>
+        <li>2.1: setting of the width and height of the video to be the same size 
+     as the html object. all repositioning and rescaling based upon 
+     the flv metadata are gone.</li>
+        <li>2.0: the fullscreen button has been discarded. All mediacomponent dependencies have been removed.</li>
+        <li>1.0: initial release, depending on Media Components.</li>
+    </ul>
+
+
+    <h2 id="support">SUPPORT</h2>
+
+    <p>For extras, tips and tricks you can always have a look at my forum's <a href="http://www.jeroenwijering.com?forum=Flash_FLV_Player">Flash Video Player threads</a>!</p>
+    
+
+    <div id="footer"> 
+        website: <a href="http://www.jeroenwijering.com">www.jeroenwijering.com</a> | last update: may 18th, 2006
+    </div>
+    
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<html>
+<head>
+	<title>Flash FLV Player Playlist</title>
+	<script type="text/javascript" src="ufo.js"></script>
+	<script type="text/javascript">
+		function playMovie(file) {
+			var FO = { 	movie:"flvplayer.swf", 
+						width:"320px", 
+						height:"260px", 
+						majorversion:"7", 
+						build:"0", 
+						flashvars:"file="+file+"&autoStart=true" };
+			UFO.create(FO, 'player');
+		}
+	</script>
+</head>
+<body style="margin: 50px;">
+
+
+	<h2>Javascript playlist example</h2>
+	
+	<div id="player">
+		<object type="application/x-shockwave-flash" data="flvplayer.swf?file=../video.flv" width="320" height="260">
+			<param name="movie" value="flvplayer.swf?file=../video.flv" />
+		</object>
+	</div>
+	
+	
+	<ul>
+		<li><a href="javascript:playMovie('http://www.jeroenwijering.com/upload/acera.flv')">JW's La Acera</a></li>
+		<li><a href="javascript:playMovie('http://www.jeroenwijering.com/upload/windmill_warriors.flv')">JW's Windmill Warriors</a></li>
+		<li><a href="javascript:playMovie('http://www.fkkc.nl/uploads/kenniswijk.flv')">FKKC's Kenniswijk</a></li>
+		<li><a href="javascript:playMovie('../video.flv')">This video.flv</a></li>
+	</ul>
+
+</body>
+</html>
