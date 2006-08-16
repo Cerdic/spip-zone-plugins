@@ -54,12 +54,17 @@ include_spip ("inc/presentation");
 include_spip ("inc/documents");
 include_spip ("inc/mots");
 
-$id_carte = intval($_REQUEST['id_carte']);
-if (intval($_REQUEST['id_carto_carte'])) $id_carte = intval($_REQUEST['id_carto_carte']);
-$retour=$_REQUEST['retour'];
+global $connect_statut,$options;
 
+$id_carte = intval($_REQUEST['id_carte']);
+$id_objet = intval($_REQUEST['id_carto_objet']);
+//??? je ne sais plas dans que cas, il faudrait peut etre utiliser id_carto_carte partout ...
+if (intval($_REQUEST['id_carto_carte'])) $id_carte = intval($_REQUEST['id_carto_carte']);
+$retour=stripslashes($_REQUEST['retour']);
+$nouveau=false;
 $flag_editable=carte_editable($id_carte);
-$flag_mots = lire_meta("carto_mots");
+$flag_mots = (lire_meta("carto_mots")=='oui');
+//$flag_mots = "oui";
 
 $titre = stripslashes($_REQUEST['titre']);
 $url_carte = stripslashes($_REQUEST['url_carte']);
@@ -70,9 +75,15 @@ $new =stripslashes($_REQUEST['new']);
 $supp_carte=stripslashes($_REQUEST['supp_carte']);
 $supp_objet=stripslashes($_REQUEST['supp_objet']);
 $supp_objet_all=stripslashes($_REQUEST['supp_objet_all']);
+$supp_objet_confirme=stripslashes($_REQUEST['supp_objet_confirme']);
+$supp_objet_rejet=stripslashes($_REQUEST['supp_objet_rejet']);
 $supp_confirme=stripslashes($_REQUEST['supp_confirme']);
 $supp_rejet=stripslashes($_REQUEST['supp_rejet']);
 $modif_carte=stripslashes($_REQUEST['modif_carte']);
+
+$nouv_mot=stripslashes($_REQUEST['nouv_mot']);
+$supp_mot=stripslashes($_REQUEST['supp_mot']);
+$cherche_mot=stripslashes($_REQUEST['cherche_mot']);
 
 $selection_type=stripslashes($_REQUEST['selection_type']);
 $selection_coords=stripslashes($_REQUEST['selection_coords']);
@@ -83,13 +94,6 @@ $url_objet=stripslashes($_REQUEST['url_objet']);
 $url_logo=stripslashes($_REQUEST['url_logo']);
 $geometrie=stripslashes($_REQUEST['geometrie']);
 
-$retour=stripslashes($_REQUEST['retour']);
-//$retour=$_REQUEST['retour'];
-
-$flag_editable=carte_editable($id_carte);
-$flag_mots = lire_meta("carto_mots");
-//$flag_mots = "oui";
-$nouveau=false;
 //
 // Modifications aux donnees de base de la carte
 //
@@ -145,7 +149,6 @@ if ($flag_editable) {
 
 		
 
-//$flag_mots = "oui";
 if ($id_carte) {
 			//TODO : passer tout ca en spip_abstract ...
 			$query = "SELECT * FROM spip_carto_cartes WHERE id_carto_carte=$id_carte";
@@ -202,7 +205,7 @@ if ($id_carte && $flag_editable) {
 		$result = spip_query($query);
 	}
 	// Suppression de tous les objets de la carte
-	if ($supp_objet_all) {
+	if ($supp_objet_all && $supp_objet_confirme && !$supp_objet_rejet) {
 		//TODO : passer tout ca en spip_abstract ...
 		$query = "DELETE FROM spip_carto_objets WHERE id_carto_carte=$id_carte";
 		$result = spip_query($query);
@@ -253,11 +256,10 @@ if ($new!="oui") {
 	# affichage
 	afficher_documents_colonne($id_carte, 'carto_carte', true);
 
-	global $connect_statut;
 	if (($connect_statut == "0minirezo")&&(in_array('mots_partout',liste_plugin_actifs()))) {
 		debut_cadre_relief("mot-cle-24.gif");
 		$mp_retour=$carte_link;
-		icone_horizontale(_T('motspartout:titre_page'),generer_url_ecrire("mots_partout","nom_chose=carto_objets&limit=carto_cartes&id_limit=".$id_carte."&retour=".urlencode($mp_retour)), "mot-cle-24.gif");
+		icone_horizontale(_T('motspartout:titre_page'),generer_url_ecrire("mots_partout","nom_chose=carto_objets&limit=carto_cartes&identifiant_limit=".$id_carte."&retour=".urlencode($mp_retour)), "mot-cle-24.gif");
 		fin_cadre_relief();
 	}
 }
@@ -268,7 +270,8 @@ if ($supp_carte && !$supp_confirme && !$supp_rejet) {
 	echo "<p><strong>"._T("spipcarto:carte_warning")."</strong> ";
 	echo _T("spipcarto:carte_supp_confirm")."</p>\n";
 
-	echo "<form method='post' action='".generer_url_ecrire('cartes_edit')."'>";
+	echo "<form method='post' action='index.php'>";
+	echo '<input type="hidden" name="exec" value="cartes_edit">'; 
 	if ($retour)
 		echo '<input type="hidden" name="retour" value="'.$retour.'">'; 
 	echo '<input type="hidden" name="id_carte" value="'.$id_carte.'">'; 
@@ -278,7 +281,21 @@ if ($supp_carte && !$supp_confirme && !$supp_rejet) {
 	echo "<input type='submit' name='supp_rejet' value=\""._T('item_non')."\" class='fondl'>";
 	echo "</form><br />\n";
 }
+if ($supp_objet_all && !$supp_objet_confirme && !$supp_objet_rejet) {
+	echo "<p><strong>"._T("spipcarto:carte_warning")."</strong> ";
+	echo _T("spipcarto:objet_supp_confirm")."</p>\n";
 
+	echo "<form method='post' action='index.php'>";
+	echo '<input type="hidden" name="exec" value="cartes_edit">'; 
+	echo '<input type="hidden" name="id_carte" value="'.$id_carte.'">'; 
+	if ($retour)
+		echo '<input type="hidden" name="retour" value="'.$retour.'">'; 
+	echo '<input type="hidden" name="supp_objet_all" value="'.$supp_objet_all.'">'; 
+	echo "<input type='submit' name='supp_objet_confirme' value=\""._T('item_oui')."\" class='fondl'>";
+	echo " &nbsp; ";
+	echo "<input type='submit' name='supp_objet_rejet' value=\""._T('item_non')."\" class='fondl'>";
+	echo "</form><br />\n";
+}
 
 if ($id_carte) {
 	debut_cadre_relief("../"._DIR_PLUGIN_SPIPCARTO."img/carte-24.gif");
@@ -328,8 +345,10 @@ if ($id_carte) {
 	
 	//articles liés
 	afficher_articles(_T("spipcarto:carte_articles_use"),
-		", spip_carto_cartes_articles AS lien WHERE lien.id_article=articles.id_article ".
-		"AND id_carto_carte=$id_carte AND statut!='poubelle' ORDER BY titre");
+				array(
+					"FROM"=>"spip_articles AS articles, spip_carto_cartes_articles AS lien",
+					"WHERE"=>"lien.id_article=articles.id_article AND id_carto_carte=$id_carte AND statut!='poubelle'",
+					"ORDER BY"=>"titre"));
 	
 	
 	fin_cadre_relief();
@@ -361,7 +380,7 @@ if ($flag_editable) {
 	debut_cadre_formulaire();
 
 	echo "<div class='verdana2'>";
-  echo "<form method='get' action='".generer_url_ecrire('cartes_edit',"")."'>";
+  echo "<form method='post' action='index.php'>";
 	echo '<input type="hidden" name="exec" value="cartes_edit">'; 
 	echo '<input type="hidden" name="id_carte" value="'.$id_carte.'">'; 
 	echo '<input type="hidden" name="modif_carte" value="'.$id_carte.'">'; 
@@ -404,12 +423,8 @@ if ($flag_editable) {
 		echo $callage;
 		echo "</textarea><br />\n";
 
-
 		afficher_srs ($id_srs);
-		/*echo "<strong><label for='srs_carte'>"._T("spipcarto:carte_srs")."</label></strong> "._T('info_obligatoire_02');
-		echo "<br />";
-		echo "<input type='text' name='id_srs' id='srs_carte' CLASS='formo' ".
-			"value=\"".$id_srs."\" size='40'><br />\n";*/
+
 	}
 	
 	
@@ -463,8 +478,9 @@ if ($flag_editable) {
 			echo "<a name='objet$id_objet'></a><p>\n";
 			debut_cadre_relief();
 				
-  echo "<form method='post' action='".generer_url_ecrire("cartes_edit","#objet_visible")."'>";
-  echo '<input type="hidden" name="id_carte" value="'.$id_carte.'">'; 
+  echo "<form method='post' action='index.php'>";
+	echo '<input type="hidden" name="exec" value="cartes_edit">'; 
+ echo '<input type="hidden" name="id_carte" value="'.$id_carte.'">'; 
   $mlink='supp_objet='.$id_objet.'&id_carte='.$id_carte;
   if ($retour) {
   	$mlink.='&retour='.$retour;
@@ -567,11 +583,16 @@ if ($flag_editable) {
       			echo "</script>";
 //map ?
 //				$laMap.='<area shape="'.wkt2shape($geometrie,"HTML").'" coords="'.wkt2coords($geometrie,"HTML",$callage,$url_carte).'" href="#objet'.$id_objet.'" alt="'.$titre_objet.'"/>';				
-				if ($flag_mots!='non' AND $options == 'avancees') {
+				if ($flag_mots AND $options == 'avancees') {
 					$tab_id['id_carte']=$id_carte;
 					$tab_id['id_objet']=$id_objet;
 					//TODO : passer les ,ouceau, cherche et supp que si bon mot
-					((!$nouveau) && ($visible)) ? formulaire_mots('carto_objets', $tab_id, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable): formulaire_mots('carto_objets', $tab_id, null, null, null, $flag_editable);
+					if ((!$nouveau) && ($visible)) {
+						echo formulaire_mots('carto_objets', $tab_id, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
+					}
+					else {
+						echo formulaire_mots('carto_objets', $tab_id, null, null, null, $flag_editable);
+					}
 				}
 				
 				fin_cadre_relief();
