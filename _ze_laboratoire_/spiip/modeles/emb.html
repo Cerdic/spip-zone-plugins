@@ -9,12 +9,27 @@
 </BOUCLE_svg>
 
 <BOUCLE_real (DOCUMENTS) {id_document} {extension==rm}>
-<div><object width='0' height='0'><param name='movie' value='#FICHIER' /><param name='src' value='#FICHIER' /><param name='controls' value='ImageWindow' /><param name='type' value='audio/x-pn-realaudio-plugin' /><param name='console' value='Console#ID_DOCUMENT' /><param name='nojava' value='true' /><embed src='#FICHIER'  controls='ImageWindow' type='audio/x-pn-realaudio-plugin' console='Console#ID_DOCUMENT' nojava='true' width='0' height='0'></embed></object></div><object width='40' height='25'><param name='movie' value='#FICHIER' /><param name='src' value='#FICHIER' /><param name='controls' value='PlayButton' /><param name='type' value='audio/x-pn-realaudio-plugin' /><param name='console' value='Console#ID_DOCUMENT' /><param name='nojava' value='true' /><embed src='#FICHIER'  controls='PlayButton' type='audio/x-pn-realaudio-plugin' console='Console#ID_DOCUMENT' nojava='true' width='40' height='25'></embed></object><object width='-40' height='25'><param name='movie' value='#FICHIER' /><param name='src' value='#FICHIER' /><param name='controls' value='PositionSlider' /><param name='type' value='audio/x-pn-realaudio-plugin' /><param name='console' value='Console#ID_DOCUMENT' /><param name='nojava' value='true' /><embed src='#FICHIER'  controls='PositionSlider' type='audio/x-pn-realaudio-plugin' console='Console#ID_DOCUMENT' nojava='true' width='-40' height='25'></embed></object>
+<div><object width='0' height='0'>
+<param name='movie' value='#FICHIER' />
+<param name='src' value='#FICHIER' />
+<param name='controls' value='ImageWindow' /><param name='type' value='audio/x-pn-realaudio-plugin' /><param name='console' value='Console#ID_DOCUMENT' /><param name='nojava' value='true' /><embed src='#FICHIER'  controls='ImageWindow' type='audio/x-pn-realaudio-plugin' console='Console#ID_DOCUMENT' nojava='true' width='0' height='0'></embed>
+</object>
+</div><object width='40' height='25'>
+<param name='movie' value='#FICHIER' />
+<param name='src' value='#FICHIER' />
+<param name='controls' value='PlayButton' /><param name='type' value='audio/x-pn-realaudio-plugin' /><param name='console' value='Console#ID_DOCUMENT' /><param name='nojava' value='true' /><embed src='#FICHIER'  controls='PlayButton' type='audio/x-pn-realaudio-plugin' console='Console#ID_DOCUMENT' nojava='true' width='40' height='25'></embed>
+</object>
+<object width='-40' height='25'>
+<param name='movie' value='#FICHIER' />
+
+<param name='src' value='#FICHIER' />
+<param name='controls' value='PositionSlider' /><param name='type' value='audio/x-pn-realaudio-plugin' /><param name='console' value='Console#ID_DOCUMENT' /><param name='nojava' value='true' /><embed src='#FICHIER'  controls='PositionSlider' type='audio/x-pn-realaudio-plugin' console='Console#ID_DOCUMENT' nojava='true' width='-40' height='25'></embed>
+</object>
 
 </BOUCLE_real>
 
 <BOUCLE_autre (DOCUMENTS) {id_document}>
-[(#INCLUDE{fond=modeles/img_dist}{id_document}{align=#ENV{align}})]
+[(#INCLUDE{fond=modeles/img}{id_document}{align=#ENV{align}})]
 </BOUCLE_autre>
 
 <//B_real>
