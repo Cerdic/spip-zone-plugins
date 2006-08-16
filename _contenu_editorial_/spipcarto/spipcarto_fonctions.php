@@ -42,6 +42,158 @@ if (defined("_ECRIRE_INC_CARTE")) return;
 define("_ECRIRE_INC_CARTE", "1");
 $GLOBALS['rep_cartes']="spipcarto";
 $GLOBALS['sq_cartes']=array('map','logo','lien','svg','svgx','geosvgwms');
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+// PARAMETRAGE
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+
+//////////////////////////////////////////////////
+// CARTO_CARTES
+//////////////////////////////////////////////////
+$spip_carto_cartes = array(
+	"id_carto_carte" => "bigint(21) NOT NULL",
+	"titre" => "VARCHAR(255) BINARY NOT NULL",
+	"texte" => "TEXT BINARY NOT NULL",
+	"url_carte" => "TEXT BINARY NOT NULL",
+	"callage" => "TEXT BINARY NOT NULL",
+	"id_srs" => "bigint(21) NOT NULL");
+
+$spip_carto_cartes_key = array(
+	"PRIMARY KEY" => "id_carto_carte",
+	"KEY id_carto_carte" => "id_carto_carte");
+
+
+//////////////////////////////////////////////////
+// CARTO_OBJETS
+//////////////////////////////////////////////////
+
+$spip_carto_objets = array(
+	"id_carto_objet" => "bigint(21) NOT NULL",
+	"id_carto_carte" => "bigint(21) NOT NULL",
+	"titre" => "VARCHAR(255) BINARY NOT NULL",
+	"texte" => "TEXT BINARY NOT NULL",
+	"url_objet" => "TEXT BINARY NOT NULL",
+	"url_logo" => "TEXT BINARY NOT NULL",
+	"geometrie" => "TEXT BINARY NOT NULL",
+	"statut"	=> "VARCHAR(8) NOT NULL default 'publie'"
+	);
+	
+$spip_carto_objets_key = array(
+	"PRIMARY KEY" => "id_carto_objet",
+	"KEY id_carto_carte" => "id_carto_carte",
+	"KEY titre" => "titre",
+	"KEY statut" => "statut"
+	);
+
+//////////////////////////////////////////////////
+// CARTO_CARTES_ARTICLES
+//////////////////////////////////////////////////
+
+$spip_carto_cartes_articles = array(
+	"id_carto_carte" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+	"id_article" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+
+$spip_carto_cartes_articles_key = array(
+	"KEY id_carto_carte" 	=> "id_carto_carte",
+	"KEY id_article" => "id_article");
+
+
+//////////////////////////////////////////////////
+// CARTO_CARTES_ARTICLES
+//////////////////////////////////////////////////
+
+$spip_carto_cartes_articles = array(
+	"id_carto_carte" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+	"id_article" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+
+$spip_carto_cartes_articles_key = array(
+	"KEY id_carto_carte" 	=> "id_carto_carte",
+	"KEY id_article" => "id_article");
+
+
+$tables_auxiliaires['spip_carto_cartes_articles'] = array(
+	'field' => &$spip_carto_cartes_articles,
+	'key' => &$spip_carto_cartes_articles_key);
+
+//////////////////////////////////////////////////
+// MOTS_CARTO_OBJETS
+//////////////////////////////////////////////////
+
+$spip_mots_carto_objets= array(
+	"id_carto_objet" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+	"id_mot" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+
+$spip_mots_carto_objets_key = array(
+	"KEY id_carto_objet" 	=> "id_carto_objet",
+	"KEY id_mot" => "id_mot");
+
+//////////////////////////////////////////////////
+// DOCUMENTS_CARTO_OBJETS
+//////////////////////////////////////////////////
+
+$spip_documents_carto_cartes= array(
+	"id_carto_carte" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+	"id_document" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+
+$spip_documents_carto_cartes_key = array(
+	"KEY id_carto_carte" 	=> "id_carto_carte",
+	"KEY id_document" => "id_document");
+
+
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+// DECLARATION
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+
+//global $tables_principales,$table_primary,$tables_auxiliaires,$tables_relations;
+
+
+$GLOBALS['tables_principales']['spip_carto_cartes'] =
+	array('field' => &$spip_carto_cartes, 'key' => &$spip_carto_cartes_key);
+
+$GLOBALS['tables_principales']['spip_carto_objets'] =
+	array('field' => &$spip_carto_objets, 'key' => &$spip_carto_objets_key);
+
+//Relation avec les articles
+$GLOBALS['tables_auxiliaires']['spip_carto_cartes_articles'] = array(
+	'field' => &$spip_carto_cartes_articles,
+	'key' => &$spip_carto_cartes_articles_key);
+
+$GLOBALS['tables_auxiliaires']['spip_mots_carto_objets'] = array(
+	'field' => &$spip_mots_carto_objets,
+	'key' => &$spip_mots_carto_objets_key);
+	
+$GLOBALS['tables_auxiliaires']['spip_documents_carto_cartes'] = array(
+	'field' => &$spip_documents_carto_cartes,
+	'key' => &$spip_documents_carto_cartes_key);
+	
+
+$GLOBALS['table_primary']['carto_objets']="id_carto_objet";
+$GLOBALS['table_primary']['carto_cartes']="id_carto_carte";
+
+$GLOBALS['table_des_tables']['carto_objets']="carto_objets";
+$GLOBALS['table_des_tables']['carto_cartes']="carto_cartes";
+
+$GLOBALS['tables_jointures']['spip_mots'][]= 'mots_carto_objets';
+$GLOBALS['tables_jointures']['spip_documents'][]='documents_carto_cartes';
+$GLOBALS['tables_jointures']['spip_carto_objets'][]='mots_carto_objets';
+$GLOBALS['tables_jointures']['spip_carto_cartes'][]='documents_carto_cartes';
+
+function boucle_CARTO_CARTES($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$boucle->from[] =  "spip_carto_cartes AS " . $boucle->type_requete;
+	return calculer_boucle($id_boucle, $boucles); 
+}
+
+function boucle_CARTO_OBJETS($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$boucle->from[] =  "spip_carto_objets AS " . $boucle->type_requete;
+	return calculer_boucle($id_boucle, $boucles); 
+}
+
+
 
 function worldfileWidth($callage){	
 	$tabcallage=worldfile2array($callage);
@@ -365,156 +517,6 @@ function worldfile2google($callage){
 	$x=intval($tabcallage['top_left']['x']-($tabcallage['bottom_right']['x']-$tabcallage['top_left']['x'])/2);
 	$y=intval($tabcallage['top_left']['y']-($tabcallage['bottom_right']['y']-$tabcallage['top_left']['y'])/2);
 	return "GPoint(".$x.",".$y.")";
-}
-
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
-// PARAMETRAGE
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
-
-//////////////////////////////////////////////////
-// CARTO_CARTES
-//////////////////////////////////////////////////
-$spip_carto_cartes = array(
-	"id_carto_carte" => "bigint(21) NOT NULL",
-	"titre" => "VARCHAR(255) BINARY NOT NULL",
-	"texte" => "TEXT BINARY NOT NULL",
-	"url_carte" => "TEXT BINARY NOT NULL",
-	"callage" => "TEXT BINARY NOT NULL",
-	"id_srs" => "bigint(21) NOT NULL");
-
-$spip_carto_cartes_key = array(
-	"PRIMARY KEY" => "id_carto_carte",
-	"KEY id_carto_carte" => "id_carto_carte");
-
-
-//////////////////////////////////////////////////
-// CARTO_OBJETS
-//////////////////////////////////////////////////
-
-$spip_carto_objets = array(
-	"id_carto_objet" => "bigint(21) NOT NULL",
-	"id_carto_carte" => "bigint(21) NOT NULL",
-	"titre" => "VARCHAR(255) BINARY NOT NULL",
-	"texte" => "TEXT BINARY NOT NULL",
-	"url_objet" => "TEXT BINARY NOT NULL",
-	"url_logo" => "TEXT BINARY NOT NULL",
-	"geometrie" => "TEXT BINARY NOT NULL");
-	
-$spip_carto_objets_key = array(
-	"PRIMARY KEY" => "id_carto_objet",
-	"KEY id_carto_carte" => "id_carto_carte",
-	"KEY titre" => "titre");
-
-//////////////////////////////////////////////////
-// CARTO_CARTES_ARTICLES
-//////////////////////////////////////////////////
-
-$spip_carto_cartes_articles = array(
-	"id_carto_carte" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-	"id_article" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
-
-$spip_carto_cartes_articles_key = array(
-	"KEY id_carto_carte" 	=> "id_carto_carte",
-	"KEY id_article" => "id_article");
-
-
-//////////////////////////////////////////////////
-// CARTO_CARTES_ARTICLES
-//////////////////////////////////////////////////
-
-$spip_carto_cartes_articles = array(
-	"id_carto_carte" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-	"id_article" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
-
-$spip_carto_cartes_articles_key = array(
-	"KEY id_carto_carte" 	=> "id_carto_carte",
-	"KEY id_article" => "id_article");
-
-
-$tables_auxiliaires['spip_carto_cartes_articles'] = array(
-	'field' => &$spip_carto_cartes_articles,
-	'key' => &$spip_carto_cartes_articles_key);
-
-//////////////////////////////////////////////////
-// MOTS_CARTO_OBJETS
-//////////////////////////////////////////////////
-
-$spip_mots_carto_objets= array(
-	"id_carto_objet" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-	"id_mot" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
-
-$spip_mots_carto_objets_key = array(
-	"KEY id_carto_objet" 	=> "id_carto_objet",
-	"KEY id_mot" => "id_mot");
-
-//////////////////////////////////////////////////
-// DOCUMENTS_CARTO_OBJETS
-//////////////////////////////////////////////////
-
-$spip_documents_carto_cartes= array(
-	"id_carto_carte" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-	"id_document" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
-
-$spip_documents_carto_cartes_key = array(
-	"KEY id_carto_carte" 	=> "id_carto_carte",
-	"KEY id_document" => "id_document");
-
-
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
-// DECLARATION
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
-
-//global $tables_principales,$table_primary,$tables_auxiliaires,$tables_relations;
-
-
-$GLOBALS['tables_principales']['spip_carto_cartes'] =
-	array('field' => &$spip_carto_cartes, 'key' => &$spip_carto_cartes_key);
-
-$GLOBALS['tables_principales']['spip_carto_objets'] =
-	array('field' => &$spip_carto_objets, 'key' => &$spip_carto_objets_key);
-
-//Relation avec les articles
-$GLOBALS['tables_auxiliaires']['spip_carto_cartes_articles'] = array(
-	'field' => &$spip_carto_cartes_articles,
-	'key' => &$spip_carto_cartes_articles_key);
-
-//La, ca se discute ...
-//Ca devrait etre une table secondaire
-//mais comme on n'utilise que l'id_mot dans la boucle
-//on gagne une jointure dans la requete
-//$tables_principales['spip_mots_carto_objets'] = array(
-//	'field' => &$spip_mots_carto_objets,
-//	'key' => &$spip_mots_carto_objets_key);
-$GLOBALS['tables_auxiliaires']['spip_mots_carto_objets'] = array(
-	'field' => &$spip_mots_carto_objets,
-	'key' => &$spip_mots_carto_objets_key);
-	
-
-$GLOBALS['table_primary']['carto_objets']="id_carto_objet";
-$GLOBALS['table_primary']['carto_cartes']="id_carto_carte";
-
-$GLOBALS['table_des_tables']['carto_objets']="carto_objets";
-$GLOBALS['table_des_tables']['carto_cartes']="carto_cartes";
-
-$GLOBALS['tables_relations']['documents']['id_carto_carte']='documents_carto_cartes';
-$GLOBALS['tables_relations']['mots']['id_carto_objet']='mots_carto_objets';
-$GLOBALS['tables_relations']['carto_objets']['id_mot']='mots_carto_objets';
-$GLOBALS['tables_relations']['carto_cartes']['id_document']='documents_carto_cartes';
-
-function boucle_CARTO_CARTES($id_boucle, &$boucles) {
-	$boucle = &$boucles[$id_boucle];
-	$boucle->from[] =  "spip_carto_cartes AS " . $boucle->type_requete;
-	return calculer_boucle($id_boucle, $boucles); 
-}
-
-function boucle_CARTO_OBJETS($id_boucle, &$boucles) {
-	$boucle = &$boucles[$id_boucle];
-	$boucle->from[] =  "spip_carto_objets AS " . $boucle->type_requete;
-	return calculer_boucle($id_boucle, $boucles); 
 }
 
 
