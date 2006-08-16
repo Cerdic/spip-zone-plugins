@@ -1792,7 +1792,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 
 	if ($spip_display != 1 AND $spip_display != 4) {
 		
-		$a_href .= "<div class='icon_fond'><div style='background-image:url(\""._DIR_IMG_PACK.$fond."\")'></div></div>";
+		$a_href .= "<span class='icon_fond'><span style='background-image:url(\""._DIR_IMG_PACK.$fond."\")'></span></span>";
 		echo "<li class='cellule48 boutons_admin'$id_bouton>$a_href";
 		if ($spip_display != 3) {
 			echo "<span>$texte</span>";
