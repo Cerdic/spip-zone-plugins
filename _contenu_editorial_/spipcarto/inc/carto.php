@@ -198,12 +198,12 @@ function afficher_carte_interface($id_carte,$retour,$fichier,$callage, $id_img =
 	
 	$returned=' <table border="0">
   <tr> 
-   <td colspan="7"><script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/javascript/x_core_nn4.js"></script>
-<script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/javascript/x_dom_nn4.js"></script>
-<script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/javascript/x_event_nn4.js"></script>
-<script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/javascript/navTools.js"></script>
-<script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/javascript/graphTools.js"></script>
-<form method="get" action="#nouveau_objet" name="carto_form">
+   <td colspan="7"><script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/spipcarto/js/x_core_nn4.js"></script>
+<script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/spipcarto/js/x_dom_nn4.js"></script>
+<script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/spipcarto/js/x_event_nn4.js"></script>
+<script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/spipcarto/js/navTools.js"></script>
+<script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/spipcarto/js/graphTools.js"></script>
+<form method="post" action="#nouveau_objet" name="carto_form">
  <input type="hidden" name="exec" value="cartes_edit"/>
  <input type="hidden" name="id_carte" value="'.$id_carte.'"/>
  <input type="hidden" name="retour" value="'.$retour.'"/>
