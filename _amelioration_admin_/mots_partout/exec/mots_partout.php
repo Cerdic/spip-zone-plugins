@@ -177,8 +177,9 @@ function afficher_liste_defaut($choses) {
 //------------------------la fonction qui fait tout-----------------------------------
 
 function exec_mots_partout() {
-
+global $choses_possibles;
   include(_DIR_PLUGIN_MOTS_PARTOUT."/mots_partout_choses.php");
+  include_spip("inc/choses");
   include_spip ("inc/presentation");
   include_spip ("inc/documents");
   include_spip ("base/abstract_sql");

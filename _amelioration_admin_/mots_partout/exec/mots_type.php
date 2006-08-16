@@ -28,11 +28,11 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 	$ancien_type = '';
 	$unseul = 'non';
 	$obligatoire = 'non';
-	$articles = 'oui';
+/*	$articles = 'oui';
 	$breves = 'oui';
 	$rubriques = 'non';
 	$syndic = 'oui';
-	$acces_minirezo = 'oui';
+*/	$acces_minirezo = 'oui';
 	$acces_comite = 'oui';
 	$acces_forum = 'non';
 } else {
@@ -48,11 +48,11 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 		$texte = $row['texte'];
 		$unseul = $row['unseul'];
 		$obligatoire = $row['obligatoire'];
-		$articles = $row['articles'];
+/*		$articles = $row['articles'];
 		$breves = $row['breves'];
 		$rubriques = $row['rubriques'];
 		$syndic = $row['syndic'];
-		$acces_minirezo = $row['minirezo'];
+*/		$acces_minirezo = $row['minirezo'];
 		$acces_comite = $row['comite'];
 		$acces_forum = $row['forum'];
 		$onfocus ="";
@@ -60,11 +60,14 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 	}
 }
 
+pipeline('exec_init',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
 debut_page("&laquo; $titre &raquo;", "documents", "mots");
 
 debut_gauche();
 
-
+echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
+creer_colonne_droite();
+echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
 
 debut_droite();
 
@@ -131,7 +134,7 @@ if ($connect_statut =="0minirezo"){
 	echo "<div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>";
 		echo "<b>"._T('info_mots_cles_association')."</b>";
 		echo "<ul>";
-		
+/*		
 		if ($articles == "oui") $checked = "checked";
 		else $checked = "";
 		echo "<input type='checkbox' name='articles' value='oui' $checked id='articles'> <label for='articles'>"._T('item_mots_cles_association_articles')."</label><br>";
@@ -149,7 +152,7 @@ if ($connect_statut =="0minirezo"){
 		if ($syndic == "oui") $checked = "checked";
 		else $checked = "";
 		echo "<input type='checkbox' name='syndic' value='oui' $checked id='syndic'> <label for='syndic'>"._T('item_mots_cles_association_sites')."</label>";
-		
+*/		
 	// DEBUT MODIF
 	foreach($tables_installees as $chose => $m) {
 		if ($row[$chose] == "oui") $checked = "checked";

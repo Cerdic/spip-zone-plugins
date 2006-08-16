@@ -19,9 +19,9 @@ function exec_mots_tous()
 // DEBUT MODIF
 // liste des types de tables sur lesquels on peut mettre des mots clés
 // - ceux du core
-	$choses= array('articles', 'breves', 'rubriques', 'syndic');
+//	$choses= array('articles', 'breves', 'rubriques', 'syndic');
 // - ceux du plugin
-	include(_DIR_PLUGIN_MOTS_PARTOUT."/mots_partout_choses.php");
+//	include(_DIR_PLUGIN_MOTS_PARTOUT."/mots_partout_choses.php");
 	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
 	foreach($tables_installees as $chose => $m) { $choses[]= $chose; }
 // FIN MODIF
@@ -38,7 +38,13 @@ function exec_mots_tous()
 		if ($connect_statut=="0minirezo") $aff_articles="'prepa','prop','publie','refuse'";
 		else $aff_articles="'prop','publie'";
 
-		$nb_articles = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots_articles AS lien, spip_articles AS article WHERE lien.id_mot=$conf_mot AND article.id_article=lien.id_article AND (article.statut IN ($aff_articles))>0 AND article.statut!='refuse'"));
+$nb_total=0;
+foreach ($choses as $chose){
+	$r = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots_".$chose." AS lien, spip_".$chose." AS chose WHERE lien.id_mot=$conf_mot AND chose.id_".$chose."=lien.id_".$chose." AND (chose.statut IN ($aff_articles))>0 AND chose.statut!='refuse'"));
+	$nb[$chose]=$r['n'];
+	$nb_total+=$r['n'];
+}
+/*		$nb_articles = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots_articles AS lien, spip_articles AS article WHERE lien.id_mot=$conf_mot AND article.id_article=lien.id_article AND (article.statut IN ($aff_articles))>0 AND article.statut!='refuse'"));
 		$nb_articles = $nb_articles['n'];
 
 		$nb_rubriques = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots_rubriques AS lien, spip_rubriques AS rubrique WHERE lien.id_mot=$conf_mot AND rubrique.id_rubrique=lien.id_rubrique"));
@@ -55,6 +61,8 @@ function exec_mots_tous()
 
 		// si le mot n'est pas lie, on demande sa suppression
 		if ($nb_articles + $nb_breves + $nb_sites + $nb_forum == 0) {
+*/
+		if ($nb_total == 0) {
 		  redirige_par_entete(generer_url_ecrire("mots_edit","supp_mot=$id_mot&redirect_ok=oui&redirect=" . rawurlencode(generer_url_ecrire('mots_tous')), true));
 		} // else traite plus loin (confirmation de suppression)
 	}
@@ -97,13 +105,17 @@ if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques) {
  }
 
 
+pipeline('exec_init',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 debut_page(_T('titre_page_mots_tous'), "documents", "mots");
 debut_gauche();
 
+echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
+creer_colonne_droite();
+echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 debut_droite();
 
 gros_titre(_T('titre_mots_tous'));
-if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques) {
+ if (acces_mots()) {
   echo typo(_T('info_creation_mots_cles')) . aide ("mots") ;
   }
 echo "<br><br>";
@@ -208,8 +220,10 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	// Afficher les mots-cles du groupe
 	//
 	$supprimer_groupe = afficher_groupe_mots($id_groupe);
+	
+	echo $supprimer_groupe;
 
-	if ($connect_statut =="0minirezo" AND $connect_toutes_rubriques AND !$conf_mot){
+	if (acces_mots() AND !$conf_mot){
 		echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 		echo "<tr>";
 		echo "<td>";
@@ -232,7 +246,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 
 }
 
-if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques  AND !$conf_mot){
+if (acces_mots() AND !$conf_mot){
 	echo "<p>&nbsp;</p><div align='right'>";
 	icone(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif");
 	echo "</div>";
@@ -241,5 +255,5 @@ if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques  AND !$conf_mot
 fin_page();
 }
 
-error_log("aLORS QUOI ?");
+//error_log("aLORS QUOI ?");
 ?>
