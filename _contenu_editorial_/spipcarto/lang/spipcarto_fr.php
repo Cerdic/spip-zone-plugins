@@ -91,6 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'objet_logo' => 'Logo de l\'objet', 
 'objet_geom' => 'G&eacute;ometrie', 
 'objet_supp' => 'Supprimer cet objet',
+'objet_supp_confirm' => 'Voulez-vous vraiment supprimer tous les objets de cette carte ?',
 'objet_x' => 'Coordonn&eacute;es X ',
 'objet_y' => 'Coordonn&eacute;es Y ',
 'objet_coord_default' => '(0 par d&eacute;faut)',
