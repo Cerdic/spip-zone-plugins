@@ -29,9 +29,14 @@ function exec_config_mots_partout() {
 	$type = addslashes($_POST['nom_chose']);
 	$id_chose = $choses_possibles[$type]['id_chose'];
 	$table_principale = $choses_possibles[$type]['table_principale'];
+	$tables_natives=array("articles"=>true,"rubriques"=>true,"breves"=>true,"forum"=>true,"syndic"=>true,"documents"=>true);
 
 	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
-
+	if (!$tables_installees){
+		$tables_installees=$tables_natives;
+		ecrire_meta('MotsPartout:tables_installees',serialize($tables_installees));
+	  	ecrire_metas();
+	  }
 	if ($type != ''){
 		if (!$tables_installees[$type]) {
 		  spip_query("ALTER TABLE `".$table_pref."_groupes_mots` ADD `".$type."` CHAR( 3 ) NOT NULL DEFAULT 'non';");
@@ -84,17 +89,22 @@ function exec_config_mots_partout() {
 
 	fin_cadre_enfonce();
 
-	debut_cadre_enfonce();
-	echo "<form action=\"".generer_url_ecrire('config_mots_partout')."\" method=\"post\">";
-	echo "<label for=\"nom_chose\">"._T("motspartout:desinstaller").":</label><br><br><select name=\"nom_chose\">";
+	$desinst=debut_cadre_enfonce('',true);
+	$desinst.="<form action=\"".generer_url_ecrire('config_mots_partout')."\" method=\"post\">";
+	$desinst.="<label for=\"nom_chose\">"._T("motspartout:desinstaller").":</label><br><br><select name=\"nom_chose\">";
+	$_desinst=false;
 	foreach($tables_installees as $chose => $data) {
-	  echo "<option value=\"$chose\">$chose</option>";
+	  if (!$tables_natives[$chose]) {
+	  	$desinst.="<option value=\"$chose\">$chose</option>";
+	  	$_desinst=true;
+	  }
 	}
-	echo "</select>";
+	$desinst.="</select>";
 //	echo "<input type=\"hidden\" name=\"del\" value=\"oui\"/>";
-	echo "<input type=\"submit\" value=\""._T('valider')."\"/>";
-	echo '</form>';
-	fin_cadre_enfonce();
+	$desinst.="<input type=\"submit\" value=\""._T('valider')."\"/>";
+	$desinst.='</form>';
+	$desinst.=fin_cadre_enfonce(true);
+	if ($_desinst) echo $desinst;
   } 
 
   fin_page();
