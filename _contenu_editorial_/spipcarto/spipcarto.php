@@ -61,7 +61,7 @@ function spipcarto_affiche_droite($flux){
 function spipcarto_ajouterOnglets($flux) {
   if($flux['args']=='configuration')
 	$flux['data']['spipcarto']= new Bouton(
-											  "../"._DIR_PLUGIN_SPIPCARTO."/carte-24.gif", 'Configurer SpipCarto',
+											  "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.gif", 'SpipCarto',
 											  generer_url_ecrire("config_spipcarto"));
   return $flux;
 }
@@ -133,6 +133,7 @@ function spipcarto_post_propre($texte) {
 			$texte = str_replace($cherche, $remplace['texte'], $texte);
 		}
 		//mettre à jour la table de liaison avec les articles
+		//TODO : spip_abstract_insert ?
 		if ($maj_liens) {
 			$query = "INSERT INTO spip_carto_cartes_articles (id_article, id_carto_carte) ".
 			"VALUES ($id_article, ".join("), ($id_article, ", $cartes).")";
