@@ -9,12 +9,13 @@ function spiip_header_prive($flux){
 		'&ltr=' . 
 		$GLOBALS['spip_lang_left'];
 		
-	$flux .= '<link rel="stylesheet" href="'.generer_url_public('style_spiip_prive',$args).'" type="text/css" media="projection, screen" />';
 	if (_request('jqdb')!==NULL)
-		$flux .= '<script src="'.find_in_path('jquery_uncompressed.js').'" type="text/javascript"></script>';
+		$flux = '<script src="'.find_in_path('jquery_uncompressed.js').'" type="text/javascript"></script>'.$flux;
 	else
-		$flux .= '<script src="'.find_in_path('jquery.js').'" type="text/javascript"></script>';
+		$flux = '<script src="'.find_in_path('jquery.js').'" type="text/javascript"></script>'.$flux;
+
 	$flux .= "<script type='text/javascript' src='".find_in_path('dist_back/gadget-rubriques.js')."'></script>\n";
+	$flux .= '<link rel="stylesheet" href="'.generer_url_public('style_spiip_prive',$args).'" type="text/css" media="projection, screen" />';
 	$flux .= '<link rel="stylesheet" href="'.direction_css(find_in_path('dist_back/gadget-rubriques.css')).'" type="text/css" media="projection, screen" />';
 	return $flux;
 }
