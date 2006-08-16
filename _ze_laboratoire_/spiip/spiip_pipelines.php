@@ -32,25 +32,34 @@ function spiip_insert_head($flux){
  */
 
 	// Calcule le modele et retourne la mini-page ainsi calculee
-	function spiip_inclure_modele($squelette, $type, $id, $default) {
+	function spiip_inclure_modele($squelette, $type, $id) {
 	static $compteur;
 
 		if (++$compteur>4) return ''; # ne pas boucler indefiniment
 
-		$fond = 'modeles/'.$type;
-		if ($squelette)
-			$fond .= "_$squelette";
+		$type = strtolower($type);
+
+		if ($squelette) {
+			$fond = 'modeles/'.$type.'_'.$squelette;
+			if (!find_in_path($fond.'.html')) {
+				$class = $squelette;
+				$fond = 'modeles/'.$type;
+			}
+		}
 
 		// en cas d'echec on passe la main au suivant
 		if (!find_in_path($fond.'.html'))
-			return $default;
+			return false;
 
 		include_spip('public/assembler');
 
+		// raccourcis specifiques img, doc, emb
 		if (in_array($type, array('img', 'doc', 'emb')))
 			$type = 'document';
 
 		$contexte = array('id_'.$type => $id);
+		if ($class)
+			$contexte['class'] = $class;
 
 		$page = recuperer_fond($fond, $contexte);
 
@@ -62,34 +71,37 @@ function spiip_insert_head($flux){
 	/* static public */ 
 	function spiip_traiter_modeles($texte) {
 
-		$regexp = ',<([a-z_-]+)([0-9]+)([|]([a-z_0-9]+))?'.'>,';
-		if (preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER))
+		if (preg_match_all(',<([a-z_-]+)([0-9]+)([|]([a-z_0-9]+))?'.'>,iS',
+		$texte, $matches, PREG_SET_ORDER)) {
 			foreach ($matches as $regs) {
-				$modele = spiip_inclure_modele($regs[4], $regs[1], $regs[2], $regs[0]);
+				$modele = spiip_inclure_modele($regs[4], $regs[1], $regs[2]);
+				if ($modele !== false) {
+					$rempl = code_echappement($modele);
+					$cherche = $regs[0];
 
-				$rempl = code_echappement($modele);
+					// XHTML : remplacer par une <div onclick> le lien
+					// dans le cas [<docXX>->lien] ; sachant qu'il n'existe
+					// pas de bonne solution en XHTML pour produire un lien
+					// sur une div (!!)...
+					if (substr($rempl, 0, 5) == '<div '
+					AND preg_match(
+					',(<a [^>]+>)\s*'.preg_quote($regs[0]).'\s*</a>,Uims',
+					$texte, $r)) {
+						$lien = extraire_attribut($r[1], 'href');
+						$cherche = $r[0];
+						$rempl = '<div style="cursor:pointer;cursor:hand;" '
+						.'onclick="document.location=\''.$lien
+						.'\'"'
+##						.' href="'.$lien.'"' # href deviendra legal en XHTML2
+						.'>'
+						.$rempl
+						.'</div>';
+					}
 
-				// XHTML : remplacer par une <div onclick> le lien
-				// dans le cas [<docXX>->lien] ; sachant qu'il n'existe
-				// pas de bonne solution en XHTML pour produire un lien
-				// sur une div (!!)...
-				if (substr($rempl, 0, 5) == '<div '
-				AND preg_match(',(<a [^>]+>)'.preg_quote($regs[0]).'</a>,Uims',
-				$letexte, $r)) {
-					$lien = extraire_attribut($r[1], 'href');
-					$rempl = '<div style="cursor:pointer;cursor:hand;" '
-					.'onclick="document.location=\''.$lien
-					.'\'"'
-##					.' href="'.$lien.'"' # href deviendra legal en XHTML2
-					.'>'
-					.$rempl
-					.'</div>';
+					$texte = str_replace($cherche, $rempl, $texte);
 				}
-
-				$letexte = str_replace($r[0], $rempl, $letexte);
 			}
-
-//	print_r($texte);
+		}
 
 		return $texte;
 	}
