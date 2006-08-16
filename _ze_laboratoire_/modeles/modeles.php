@@ -1,14 +1,12 @@
 <?php
 
-
-
 	// Calcule le modele et retourne la mini-page ainsi calculee
 	function Modeles_inclure_modele($squelette, $type, $id) {
 		static $compteur;
 
 		if (++$compteur>4) return ''; # ne pas boucler indefiniment
 
-		$fond = 'modele_'.$type;
+		$fond = 'modeles/'.$type;
 		if ($squelette)
 			$fond .= "_$squelette";
 
@@ -16,7 +14,12 @@
 			return '<div><b>'.htmlentities($fond).'</b></div>';
 
 		include_spip('public/assembler');
+
+		if (in_array($type, array('img', 'doc')))
+			$type = 'document';
+
 		$contexte = array('id_'.$type => $id);
+
 		$page = recuperer_fond($fond, $contexte);
 
 		$compteur--;
