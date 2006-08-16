@@ -1,0 +1,9 @@
+[(#REM)
+	Modele de document lie au raccourci <doc1>
+
+]<BOUCLE_document(DOCUMENTS){id_document}>
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{alignement})]'>
+<dt class='spip_doc_titre'><a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#TITRE|texte_backend)"]>#LOGO_DOCUMENT[<span class="title" style="display:block;">(#TITRE)</span>]</a></dt>
+</dt>[<dd>(#DESCRIPTIF)</dd>]
+</dl>
+</BOUCLE_document>
