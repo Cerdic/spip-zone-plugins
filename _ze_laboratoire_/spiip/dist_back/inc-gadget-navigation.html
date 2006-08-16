@@ -53,8 +53,8 @@
 <?php // en attendant mieux ...
 if ($connect_statut == "0minirezo") {	
 ?>
-<div class='icone_horizontale'>
-	<a class='cellule-h' href='[(#URL_ECRIRE{rubriques_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
+<div class='icone_horizontale_gadget'>
+	<a class='cellule-h icone26' href='[(#URL_ECRIRE{rubriques_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
 		[(#HTTP_IMG_PACK{rubrique-24.gif}|image_masque{#CHEMIN{img_pack/creer.gif},mode=normal})]
 	</a>
 	<a class='cellule-h-texte' href='[(#URL_ECRIRE{rubriques_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
@@ -64,8 +64,8 @@ if ($connect_statut == "0minirezo") {
 <?php
 }
 ?>
-<div class='icone_horizontale'>
-	<a class='cellule-h' href='[(#URL_ECRIRE{articles_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
+<div class='icone_horizontale_gadget'>
+	<a class='cellule-h icone26' href='[(#URL_ECRIRE{articles_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
 	[(#HTTP_IMG_PACK{article-24.gif}|image_masque{#CHEMIN{img_pack/creer.gif},mode=normal})]
 	</a>
 	<a class='cellule-h-texte' href='[(#URL_ECRIRE{articles_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
@@ -73,8 +73,8 @@ if ($connect_statut == "0minirezo") {
 	</a>
 </div>
 [(#CONFIG{activer_breves}|=={non}|?{'',' '})
-	<div class='icone_horizontale'>
-		<a class='cellule-h' href='[(#URL_ECRIRE{breves_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
+	<div class='icone_horizontale_gadget'>
+		<a class='cellule-h icone26' href='[(#URL_ECRIRE{breves_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
 			[(#HTTP_IMG_PACK{breve-24.gif}|image_masque{#CHEMIN{img_pack/creer.gif},mode=normal})]
 		</a>
 		<a class='cellule-h-texte' href='[(#URL_ECRIRE{breves_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
@@ -85,8 +85,8 @@ if ($connect_statut == "0minirezo") {
 ]
 	<!--if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) ]-->
 [(#CONFIG{activer_sites}|=={non}|?{'',' '})
-	<div class='icone_horizontale'>
-		<a class='cellule-h' href='[(#URL_ECRIRE{sites_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
+	<div class='icone_horizontale_gadget'>
+		<a class='cellule-h icone26' href='[(#URL_ECRIRE{sites_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
 			[(#HTTP_IMG_PACK{site-24.gif}|image_masque{#CHEMIN{img_pack/creer.gif},mode=normal})]
 		</a>
 		<a class='cellule-h-texte' href='[(#URL_ECRIRE{sites_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
