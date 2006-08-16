@@ -3,9 +3,9 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/SVG/DTD/svg10.dtd">
 <BOUCLE_carte(CARTO_CARTES){id_carto_carte}>
 <svg width="100%" height="100%" viewBox="0 0 760 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:attrib="http://www.carto.net/attrib" onload="init(evt);" zoomAndPan="enable" encoding="ISO-8859-1">
-	<script type="text/ecmascript" xlink:href="helper_functions.js"/>
-	<script type="text/ecmascript" xlink:href="navigation.js"/>
-	<script type="text/ecmascript" xlink:href="navigationTools.js"/>
+	<script type="text/ecmascript" xlink:href="[(#CHEMIN{spipcarto/js/helper_functions.js})]"/>
+	<script type="text/ecmascript" xlink:href="[(#CHEMIN{spipcarto/js/navigation.js})]"/>
+	<script type="text/ecmascript" xlink:href="[(#CHEMIN{spipcarto/js/navigationTools.js})]"/>
 	<script type="text/ecmascript"><![CDATA[
 		
 		
@@ -34,7 +34,7 @@
 			document.getElementById("spipCartoObj").setAttributeNS(null,"stroke-width",myMainMap.curWidth*0.005);	
 			// Pour charger un claque WMS ... getOrthoImage();
 		<BOUCLE__OBJ(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}{par num titre}>
-		 <BOUCLE__M(MOTS){id_carto_objet}{par num titre}{doublons a}>
+		 <BOUCLE__M(MOTS){id_carto_objet}{par titre}{doublons a}>
 			document.getElementById("spipCarto_#ID_MOT").setAttributeNS(null,"stroke-width",myMainMap.curWidth*0.005);	
 		 </BOUCLE__M>
 		</BOUCLE__OBJ>
@@ -197,7 +197,7 @@
 			<image id="ShadedRelief" x="[(#CALLAGE|worldfileLRX)]" y="[(#CALLAGE|worldfileULY)]" width="[(#CALLAGE|worldfileWidth)]px" height="[(#CALLAGE|worldfileHeight)]px" xlink:href="#URL_SITE_SPIP/spip_carto.php?fond_carte=[(#URL_CARTE|base64_encode)][&amp;scale=(#ENV{scale})][&amp;x=(#ENV{x})][&amp;y=(#ENV{y})]" />
 
 		<BOUCLE_OBJ(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}{par num titre}>
-		 <BOUCLE_M(MOTS){id_carto_objet}{par num titre}{doublons b}>
+		 <BOUCLE_M(MOTS){id_carto_objet}{par titre}{doublons b}>
 	<!-- #DESCRIPTIF -->
 			<g id="spipCarto_#ID_MOT">
 			<BOUCLE_OBJECT(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}{id_mot}{doublons obj}>
@@ -250,31 +250,31 @@
 
 			<!-- checkbox -->
 		<BOUCLE_OBJ2(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}{par num titre}>
-		 <BOUCLE_M2(MOTS){id_carto_objet}{par num titre}{doublons c}>
+		 <BOUCLE_M2(MOTS){id_carto_objet}{par titre}{doublons c}>
 			<g transform="translate(0 [(#ID_MOT|ajoute{20})])">
 				<use id="checkBoxspipCarto_#ID_MOT" xlink:href="#checkBoxRect" onclick="checkBoxScript(evt,'spipCarto_#ID_MOT');"/>
 				<use id="checkCrossspipCarto_#ID_MOT" xlink:href="#checkBoxCross" visibility="visible"/>
 			</g>
 			<g class="allText normalText">
-				<text x="12" y="[(#ID_MOT|plus{6})]">#TITRE</text>';
+				<text x="12" y="[(#_OBJ2:COMPTEUR_BOUCLE|plus{6})]">#TITRE</text>';
 			</g>
 		 </BOUCLE_M2>
 		</BOUCLE_OBJ2>
 
 			<!-- first checkbox -->
-			<g transform="translate(0 [(#ID_MOT|plus{20})])">
+			<g transform="translate(0 [(#TOTAL_BOUCLE|plus{20})])">
 				<use id="checkBoxspipCartoObj" xlink:href="#checkBoxRect" onclick="checkBoxScript(evt,'spipCartoObj');"/>
 				<use id="checkCrossspipCartoObj" xlink:href="#checkBoxCross" visibility="visible"/>
 			</g>
 			<!-- second checkbox -->
-			<g transform="translate(0 [(#ID_MOT|plus{40})])">
+			<g transform="translate(0 [(#TOTAL_BOUCLE|plus{40})])">
 				<use id="checkBoxShadedRelief" xlink:href="#checkBoxRect" onclick="checkBoxScript(evt,'ShadedRelief');"/>
 				<use id="checkCrossShadedRelief" xlink:href="#checkBoxCross" visibility="visible"/>
 			</g>
 			<!-- checkbox text labels -->
 			<g class="allText normalText">
-				<text x="12" y="[(#ID_MOT|plus{26})]">Objets</text>
-				<text x="12" y="[(#ID_MOT|plus{46})]">Fond de carte</text>
+				<text x="12" y="[(#TOTAL_BOUCLE|plus{26})]">Objets</text>
+				<text x="12" y="[(#TOTAL_BOUCLE|plus{46})]">Fond de carte</text>
 			</g>
 		</g>
 		</B_OBJ2>
