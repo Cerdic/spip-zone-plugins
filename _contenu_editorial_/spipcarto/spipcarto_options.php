@@ -1,9 +1,10 @@
 <?php
 
-$choses_possibles['carto_objets'] = array(
+$GLOBALS['choses_possibles']['carto_objets'] = array(
 									  'titre_chose' => 'Objets',
 									  'id_chose' => 'id_carto_objet',
 									  'table_principale' => 'spip_carto_objets',
+								  	  'url_base' => 'cartes_edit&id_carte=',
 									  
 									  'table_carte' => 'spip_carto_cartes',
 									  'tables_limite' => array(
@@ -15,11 +16,15 @@ $choses_possibles['carto_objets'] = array(
 																					'nom_id' =>  'id_carto_carte'),
 															   )
 									  );
+
+/*function spipcarto_body_prive($flux) {
+	return $flux;
+}*/
 ////////////////////////////////////////////////////////////////////////
-function afficher_liste_carto_objets($choses) {
+function afficher_liste_carto_objets($choses,$nb_aff=20) {
   echo "<div style='height: 12px;'></div>";
   echo "<div class='liste'>";
-  bandeau_titre_boite2($titre_table, "../"._DIR_PLUGIN_SPIPCARTO."img/carte-24.gif");
+  bandeau_titre_boite2("Objets", "../"._DIR_PLUGIN_SPIPCARTO."img/carte-24.gif");
   
   echo afficher_liste_debut_tableau();
   
