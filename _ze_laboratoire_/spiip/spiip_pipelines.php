@@ -35,15 +35,23 @@ function spiip_insert_head($flux){
 	function spiip_inclure_modele($squelette, $type, $id) {
 	static $compteur;
 
+
 		if (++$compteur>4) return ''; # ne pas boucler indefiniment
 
 		$type = strtolower($type);
 
-		if ($squelette) {
-			$fond = 'modeles/'.$type.'_'.$squelette;
+		$fond = 'modeles/'.$type;
+		if (preg_match(',^[a-z_0-9-]+,i', $squelette, $sub)) {
+			if (in_array(strtolower($sub[0]),
+			array('left', 'right', 'center')))
+				$align = $sub[0];
+
+			$fond = 'modeles/'.$type.'_'.$sub[0];
+
 			if (!find_in_path($fond.'.html')) {
-				$class = $squelette;
 				$fond = 'modeles/'.$type;
+				if (!$align)
+					$class = $sub[0];
 			}
 		}
 
@@ -55,13 +63,37 @@ function spiip_insert_head($flux){
 
 		// raccourcis specifiques img, doc, emb
 		if (in_array($type, array('img', 'doc', 'emb')))
-			$type = 'document';
+			$id_type = 'id_document';
+		else
+			$id_type = 'id_'.$type;
 
-		$contexte = array('id_'.$type => $id);
+		$contexte = array(
+			$id_type => $id,
+			'fond' => $fond
+		);
+		if ($align)
+			$contexte['align'] = $align;
+
 		if ($class)
 			$contexte['class'] = $class;
 
-		$page = recuperer_fond($fond, $contexte);
+		// cas particulier des params d'un <embXX|params>
+		if ($type == 'emb') {
+			unset($contexte['class']);
+			foreach (explode('|', $squelette) as $param) {
+				if (!in_array(strtolower($param),
+				array('left', 'right', 'center'))) {
+					$params[] = $param;
+				}
+				if ($params)
+					$contexte['params'] = join('|', $params);
+			}
+		}
+
+#	var_dump($type);
+#	var_dump($contexte);
+
+		$page = recuperer_fond('', $contexte);
 
 		$compteur--;
 
@@ -71,7 +103,7 @@ function spiip_insert_head($flux){
 	/* static public */ 
 	function spiip_traiter_modeles($texte) {
 
-		if (preg_match_all(',<([a-z_-]+)([0-9]+)([|]([a-z_0-9]+))?'.'>,iS',
+		if (preg_match_all(',<([a-z_-]+)([0-9]+)([|]([^>]+))?'.'>,iS',
 		$texte, $matches, PREG_SET_ORDER)) {
 			foreach ($matches as $regs) {
 				$modele = spiip_inclure_modele($regs[4], $regs[1], $regs[2]);

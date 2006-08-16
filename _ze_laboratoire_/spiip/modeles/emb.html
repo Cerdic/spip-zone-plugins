@@ -1,14 +1,15 @@
+Coucou
 <BOUCLE_tous (DOCUMENTS) {id_document}>
 #SET{hauteur,#ENV{hauteur}|sinon{#HAUTEUR}}
 #SET{largeur,#ENV{largeur}|sinon{#LARGEUR}}
 
 </BOUCLE_tous>
 
-<BOUCLE_svg (DOCUMENTS) {id_document} {extension==svg}>
+<BOUCLE_svg (DOCUMENTS) {id_document} {extension=svg}>
 <embed src='#FICHIER' width='#GET{largeur}' height='#GET{hauteur}' />
 </BOUCLE_svg>
 
-<BOUCLE_real (DOCUMENTS) {id_document} {extension==rm}>
+<BOUCLE_real (DOCUMENTS) {id_document} {extension=rm}>
 <div><object width='0' height='0'>
 <param name='movie' value='#FICHIER' />
 <param name='src' value='#FICHIER' />
