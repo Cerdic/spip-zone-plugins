@@ -51,6 +51,8 @@ $spip_carto_cartes = array(
 	"texte" => "TEXT BINARY NOT NULL",
 	"url_carte" => "TEXT BINARY NOT NULL",
 	"callage" => "TEXT BINARY NOT NULL",
+	"statut" => "VARCHAR(8) NOT NULL default 'publie'",
+	"idx" => "enum('','1','non','oui','idx') NOT NULL default ''",
 	"id_srs" => "bigint(21) NOT NULL");
 
 $spip_carto_cartes_key = array(
@@ -69,7 +71,9 @@ $spip_carto_objets = array(
 	"texte" => "TEXT BINARY NOT NULL",
 	"url_objet" => "TEXT BINARY NOT NULL",
 	"url_logo" => "TEXT BINARY NOT NULL",
-	"geometrie" => "TEXT BINARY NOT NULL");
+	"geometrie" => "TEXT BINARY NOT NULL",
+	"statut" => "VARCHAR(8) NOT NULL default 'publie'",
+	"idx" => "enum('','1','non','oui','idx') NOT NULL default ''");
 	
 $spip_carto_objets_key = array(
 	"PRIMARY KEY" => "id_carto_objet",
