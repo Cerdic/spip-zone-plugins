@@ -5,7 +5,7 @@ function params_spip_to_params_html($texte){
 	'id_document',
 	'params' ,			  	// on pou!rra supprimer cette ligne quand fil aura virer #ENV{params} 
 	'date',
-	'date_redac','align','largeur','hauteur'
+	'date_redac','align','largeur','hauteur','fond',''
 	) ;	
 
 	
@@ -31,7 +31,7 @@ function params_spip_to_attributs_html($texte){
 	'id_document',
 	'params' ,			  	// on pou!rra supprimer cette ligne quand fil aura virer #ENV{params} 
 	'date',
-	'date_redac','align'
+	'date_redac','align','largeur','hauteur','fond',''
 	) ;	
 	
 	$tableau = unserialize($texte);
