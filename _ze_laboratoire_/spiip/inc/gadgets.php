@@ -220,6 +220,9 @@ function dessiner_gadgets($id_rubrique) {
 		"document.getElementById('gadget-agenda').innerHTML = \""
 		. addslashes(strtr(gadget_agenda($id_rubrique),"\n\r","  "))
 		. "\";\n" .
+		"$('#bandeauagenda').append(\"<div id='test'></div>\");
+		$('#test').load('".generer_url_prive('inc-gadget-agenda','','&')."');\n
+		\n" .
 		"document.getElementById('gadget-messagerie').innerHTML = \""
 		. addslashes(strtr(gadget_messagerie($id_rubrique),"\n\r","  "))
 		. "\";\n" .

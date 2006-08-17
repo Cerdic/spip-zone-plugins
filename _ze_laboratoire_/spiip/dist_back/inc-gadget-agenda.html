@@ -1,0 +1,19 @@
+#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+<a href='#URL_ECRIRE{calendrier,type=semaine}' class='lien_sous'><:icone_agenda:></a>
+
+#SET{today,#DATE|strtotime|getdate}
+#SET{jour_today,#GET{today}|table_valeur{'mday'}}
+#SET{mois_today,#GET{today}|table_valeur{'mon'}}
+#SET{annee_today,#GET{today}|table_valeur{'year'}}
+
+<div style='float:left;width:200px;'>
+[(#GET{annee_today}|http_calendrier_mini_agenda{#GET{mois_today},#GET{jour_today},#GET{mois_today},#GET{annee_today}, '',#URL_ECRIRE{calendrier}})]
+<div style='clear:both'>&nbsp;</div>
+</div>
+
+<div style='margin-left:220px;width:200px;'>
+#DEBUT_CADRE_ENFONCE{titre=info_annonces_generales}
+
+&nbsp;
+#FIN_CADRE_ENFONCE
+</div>
