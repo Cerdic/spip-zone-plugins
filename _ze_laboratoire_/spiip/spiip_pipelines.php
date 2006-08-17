@@ -80,20 +80,14 @@ function spiip_insert_head($flux){
 		// cas particulier des params d'un <embXX|params>
 		if ($type == 'emb') {
 			unset($contexte['class']);
-			foreach (explode('|', $squelette) as $param) {
-				if (!in_array(strtolower($param),
-				array('left', 'right', 'center'))) {
-					$params[] = $param;
-				}
-				if ($params)
-					$contexte['params'] = join('|', $params);
-			}
+			$contexte = array_merge($contexte,
+				creer_contexte_de_modele(explode('|', $squelette)));
 		}
 
 #	var_dump($type);
 #	var_dump($contexte);
 
-		$page = recuperer_fond('', $contexte);
+		$page = recuperer_fond($fond, $contexte);
 
 		$compteur--;
 
