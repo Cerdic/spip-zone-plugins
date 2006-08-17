@@ -63,9 +63,8 @@ if (intval($_REQUEST['id_carto_carte'])) $id_carte = intval($_REQUEST['id_carto_
 $retour=stripslashes($_REQUEST['retour']);
 $nouveau=false;
 $flag_editable=carte_editable($id_carte);
-$flag_mots = (lire_meta("carto_mots")=='oui');
-//$flag_mots = "oui";
-
+//$flag_mots = (lire_meta("carto_mots")=='oui');
+$flag_mots=true;
 $titre = stripslashes($_REQUEST['titre']);
 $url_carte = stripslashes($_REQUEST['url_carte']);
 $texte = stripslashes($_REQUEST['texte']);

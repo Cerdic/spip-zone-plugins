@@ -81,7 +81,7 @@ if (($_REQUEST['installation']=='oui')&&(($connect_statut == '0minirezo') AND $c
 	$r=spip_query("SELECT code FROM ".$table_pref."_carto_srs WHERE code='-1';");
 	if ($row=spip_fetch_array($r)){
 		spip_query("UPDATE ".$table_pref."_meta SET valeur='oui', maj=now() WHERE nom='activer_carto';");
-		spip_query("UPDATE ".$table_pref."_meta SET valeur='oui', maj=now() WHERE nom='carto_mots';");
+//		spip_query("UPDATE ".$table_pref."_meta SET valeur='oui', maj=now() WHERE nom='carto_mots';");
 	} else {
 		spip_query("INSERT INTO ".$table_pref."_carto_srs (id_carto_srs, label, code) VALUES ('-1', 'Par defaut', '-1');");
 		spip_query("INSERT INTO ".$table_pref."_carto_srs (label, code) VALUES ('NTF (Paris) / Lambert zone II étendu', 'EPSG:27582');");
@@ -92,7 +92,7 @@ if (($_REQUEST['installation']=='oui')&&(($connect_statut == '0minirezo') AND $c
 		spip_query("INSERT INTO ".$table_pref."_carto_srs (label, code) VALUES ('WGS 84', 'epsg:4326');");
 		spip_query("INSERT INTO ".$table_pref."_carto_srs (label, code) VALUES ('ED50', 'epsg:4230');");
 		spip_query("INSERT INTO ".$table_pref."_meta(nom, valeur, maj) VALUES ('activer_carto','oui',now());");
-		spip_query("INSERT INTO ".$table_pref."_meta(nom, valeur, maj) VALUES ('carto_mots','oui',now());");
+//		spip_query("INSERT INTO ".$table_pref."_meta(nom, valeur, maj) VALUES ('carto_mots','oui',now());");
 	}
 	$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='MotsPartout:tables_installees';");
 	if ($row=spip_fetch_array($r)){
@@ -104,7 +104,7 @@ if (($_REQUEST['installation']=='oui')&&(($connect_statut == '0minirezo') AND $c
 		$tables=array('articles'=>true,'rubriques'=>true,'breves'=>true,'syndic'=>true,'documents'=>true,'carto_objets'=>true);
 		spip_query("INSERT INTO ".$table_pref."_meta(nom, valeur, maj) VALUES ('MotsPartout:tables_installees','".serialize($tables)."',now());");
 	}
-//	spip_query("INSERT INTO ".$table_pref."_meta(nom, valeur, maj) VALUES ('config_precise_groupes','oui',now());");
+	spip_query("INSERT INTO ".$table_pref."_meta(nom, valeur, maj) VALUES ('config_precise_groupes','oui',now());");
 	spip_query("UPDATE ".$table_pref."_meta SET valeur='oui', maj=now() WHERE nom='config_precise_groupes';");
 }
 elseif (($_REQUEST['installation']=='non')&&(($connect_statut == '0minirezo') AND $connect_toutes_rubriques)){
@@ -114,6 +114,23 @@ elseif (($_REQUEST['installation']=='non')&&(($connect_statut == '0minirezo') AN
 		$tables=unserialize($row[0]);
 		$tables['carto_objets']=false;
 		spip_query("UPDATE ".$table_pref."_meta SET valeur='".serialize($tables)."', maj=now() WHERE nom='MotsPartout:tables_installees';");
+	}
+}
+elseif (lire_meta("carto_mots")=='oui') {
+		spip_query("DELETE FROM ".$table_pref."_meta WHERE nom='carto_mots';");
+		spip_query("ALTER TABLE ".$table_pref."_carto_cartes ADD statut VARCHAR(8) NOT NULL default 'publie';");
+		spip_query("ALTER TABLE ".$table_pref."_carto_cartes ADD idx enum('','1','non','oui','idx') NOT NULL default '';");
+		spip_query("ALTER TABLE ".$table_pref."_carto_objets ADD statut VARCHAR(8) NOT NULL default 'publie';");
+		spip_query("ALTER TABLE ".$table_pref."_carto_objets ADD idx enum('','1','non','oui','idx') NOT NULL default '';");	
+	$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='MotsPartout:tables_installees';");
+	if ($row=spip_fetch_array($r)){
+		$tables=unserialize($row[0]);
+		$tables['carto_objets']=true;
+		spip_query("UPDATE ".$table_pref."_meta SET valeur='".serialize($tables)."', maj=now() WHERE nom='MotsPartout:tables_installees';");
+	}
+	else {
+		$tables=array('articles'=>true,'rubriques'=>true,'breves'=>true,'syndic'=>true,'documents'=>true,'carto_objets'=>true);
+		spip_query("INSERT INTO ".$table_pref."_meta(nom, valeur, maj) VALUES ('MotsPartout:tables_installees','".serialize($tables)."',now());");
 	}
 }	
 	ecrire_metas();

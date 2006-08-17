@@ -65,8 +65,8 @@ $typeImport=stripslashes($_REQUEST['typeImport']);
 			
 $flag_editable=carte_editable($id_carte);
 $id_carte = intval($id_carte);
-$flag_mots = lire_meta("carto_mots");
-//$flag_mots = "oui";
+//$flag_mots = lire_meta("carto_mots");
+$flag_mots=true;
 $nouveau=false;
 $dir = 'upload';						// Répertoire où chercher les fichiers
 
