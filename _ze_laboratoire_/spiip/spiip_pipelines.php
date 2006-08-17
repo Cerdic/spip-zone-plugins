@@ -75,7 +75,12 @@ function spiip_insert_head($flux){
 
 		if ($class)
 			$contexte['class'] = $class;
-
+		
+		
+	// cas particulier des parametres : 
+	// <emb12|autostart=true> ou <doc1|lang=en>
+	$contexte = array_merge($contexte, 
+		creer_contexte_de_modele(explode('|', $squelette))); 
 		
 #	var_dump($type);
 #	var_dump($contexte);
