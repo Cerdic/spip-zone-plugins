@@ -39,17 +39,17 @@ function spiip_insert_head($flux){
 		$type = strtolower($type);
 
 		$fond = 'modeles/'.$type;
-		if (preg_match(',^[a-z_0-9-]+,i', $squelette, $sub)) {
-			if (in_array(strtolower($sub[0]),
+		if (preg_match(',^([a-z_0-9-]+)([|]|$),i', $squelette, $sub)) {
+			if (in_array(strtolower($sub[1]),
 			array('left', 'right', 'center')))
 				$align = $sub[0];
 
-			$fond = 'modeles/'.$type.'_'.$sub[0];
+			$fond = 'modeles/'.$type.'_'.$sub[1];
 
 			if (!find_in_path($fond.'.html')) {
 				$fond = 'modeles/'.$type;
 				if (!$align)
-					$class = $sub[0];
+					$class = $sub[1];
 			}
 		}
 
@@ -67,7 +67,8 @@ function spiip_insert_head($flux){
 
 		$contexte = array(
 			$id_type => $id,
-			'fond' => $fond
+			'fond' => $fond,
+			'lang' => $GLOBALS['spip_lang']
 		);
 		if ($align)
 			$contexte['align'] = $align;
@@ -75,12 +76,10 @@ function spiip_insert_head($flux){
 		if ($class)
 			$contexte['class'] = $class;
 
-		// cas particulier des params d'un <embXX|params>
-		if ($type == 'emb') {
-			unset($contexte['class']);
-			$contexte = array_merge($contexte,
-				creer_contexte_de_modele(explode('|', $squelette)));
-		}
+		// cas particulier des parametres :
+		// <emb12|autostart=true> ou <doc1|lang=en>
+		$contexte = array_merge($contexte,
+			creer_contexte_de_modele(explode('|', $squelette)));
 
 #	var_dump($type);
 #	var_dump($contexte);
