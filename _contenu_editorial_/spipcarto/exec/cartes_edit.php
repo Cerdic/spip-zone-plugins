@@ -99,6 +99,8 @@ $geometrie=stripslashes($_REQUEST['geometrie']);
 if (carte_administrable($id_carte)) {
 	if ($supp_carte = intval($supp_carte) AND $supp_confirme AND !$supp_rejet) {
 		//TODO : passer tout ca en spip_abstract ...
+		$query = "DELETE FROM spip_carto_objets WHERE id_carto_carte=$supp_carte";
+		$result = spip_query($query);
 		$query = "DELETE FROM spip_carto_cartes WHERE id_carto_carte=$supp_carte";
 		$result = spip_query($query);
 		Header("Location: $retour");
@@ -358,18 +360,17 @@ if ($id_carte) {
 // Icones retour et suppression
 //
 if ($retour) {
-	echo "<br />\n";
-	echo "<div align='$spip_lang_right'>";
+	echo "<div style='float: left'>";
 	icone(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.gif", "rien.gif");
 	echo "</div>\n";
 }
 if ($id_carte && carte_administrable($id_carte)) {
-	echo "<br />\n";
-	echo "<div align='$spip_lang_right'>";
+//	echo "<br />\n";
+	echo "<div style='float: right'>";
 	icone(_T("spipcarto:carte_supp"), 	$carte_supplink, "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.gif", "supprimer.gif");
 	echo "</div>\n";
 }
-
+	echo "<br style='clear:both'/>\n";
 
 //
 // Edition des donnees de la carte
@@ -444,7 +445,7 @@ if ($flag_editable) {
 		echo "</div>\n";
 
 		echo "<br />\n";
-		echo "<div align='$spip_lang_right'>";
+		echo "<div style='float: left'>";
 		// Icone importer des objets
 		icone(_T("spipcarto:carte_import_objet"), $carte_importlink, "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.gif", "creer.gif");
 		echo "</div>\n";
@@ -455,9 +456,10 @@ if ($flag_editable) {
 	
 	if (spip_num_rows($result)>0) {
 		// Icone supprimer tous les objets de la carte
-		echo "<div align='$spip_lang_right'>";
+		echo "<div style='float: right'>";
 		icone(_T("spipcarto:carte_supp_objets"), $carte_suppallobjlink, "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.gif", "supprimer.gif");
 		echo "</div>\n";
+		echo "<br style='clear:both'/>\n";
 		
 //map ?
 //		$laMap='<map name="map1">';
@@ -470,6 +472,7 @@ if ($flag_editable) {
 			$texte_objet= entites_html($t['texte']);
 			$url_logo = $t['url_logo'];
 			$geometrie = entites_html($t['geometrie']);
+			$statut = $t['statut'];
 	
 			$visible = ($id_objet == $objet_visible);
 			if ($nouveau&&$visible) echo "<a name='nouveau_objet'></a>";
@@ -488,16 +491,29 @@ if ($flag_editable) {
   echo '<input type="hidden" name="modif_objet" value="'.$id_objet.'">'; 
   echo '<input type="hidden" name="id_carte" value="'.$id_carte.'">'; 
 
-				echo "<table>";
-					echo "<tr valign='top'><td>";
+				echo "<table width=\"100%\">";
+					echo "<tr valign='top'><td width='20px'>";
+	if ($visible)
+		echo bouton_block_visible("objet".$id_objet);
+	else 
+		echo bouton_block_invisible("objet".$id_objet);
+					echo "</td><td width='20px'>";
+					echo puce_statut_breve($id_objet,$statut,"carto_objet",carte_administrable());
+					echo "</td><td>";					
 					echo "<strong>".$titre_objet."</strong>";
 					echo "</td><td width='20px'></td><td>";					
 					echo "<br/><div style='float:right;'>";
 					$link = generer_url_ecrire('cartes_edit',$mlink);
 					icone_horizontale(_T("spipcarto:objet_supp"), $link , "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.gif", "supprimer.gif");
 					echo "</div>\n";
-					echo "</td></tr>";					
-					echo "<tr><td>";
+					echo "</td></tr></table>";					
+
+	if ($visible)
+		echo debut_block_visible("objet".$id_objet);
+	else 
+		echo debut_block_invisible("objet".$id_objet);
+
+					echo "<table width=\"100%\"><tr><td>";
 					if ($nouveau) {
 						echo "<script type='text/javascript'><!-- \nvar antifocus_champ = false; // --></script>\n";
 						$js = " onfocus=\"if(!antifocus_champ){this.value='';antifocus_champ=true;}\"";
@@ -532,11 +548,9 @@ if ($flag_editable) {
 					echo "</td></tr>";
 				echo "</table>";
 	
-				echo "<div align='right'>";
-				echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo verdana2'></div>\n";
-				echo "</div>\n";
+				echo "<div align='right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo verdana2'></div>\n";
+//				echo "</div>\n";
 				echo "</form>";
-				
 				
 				// Objet géométrique pour l'affichage DHTML
 				$mygeom = wkt2coords($geometrie, "JSDHTML", $callage, $url_carte); 
@@ -593,6 +607,7 @@ if ($flag_editable) {
 						echo formulaire_mots('carto_objets', $tab_id, null, null, null, $flag_editable);
 					}
 				}
+echo fin_block();
 				
 				fin_cadre_relief();
 			}

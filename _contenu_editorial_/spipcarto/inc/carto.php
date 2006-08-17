@@ -104,6 +104,9 @@ function afficher_cartes($titre_table, $requete, $icone = '') {
 	
 	$res = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $cpt"));
 	$cpt = $res['n'];
+	
+	if ($cpt==0) return;
+	
 
 	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
 
@@ -114,7 +117,7 @@ function afficher_cartes($titre_table, $requete, $icone = '') {
 		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
 	}
 			
-	if (!$icone) $icone = "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.png";
+	if (!$icone) $icone = "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.gif";
 
 	if ($titre_table) echo "<div style='height: 12px;'></div>";
 	echo "<div class='liste'>";
@@ -136,18 +139,21 @@ function afficher_cartes($titre_table, $requete, $icone = '') {
 		$id_carte= $row['id_carto_carte'];
 		$objets= $row['objets'];
 		$titre = $row['titre'];
+		$statut = $row['statut'];
 		
 		$link = generer_url_ecrire("cartes_edit","id_carte=".$id_carte."&retour=".urlencode(generer_url_ecrire("cartes")));
-		if ($objets) {
+		
+		$puce=puce_statut_carto_carte($id_carte,$statut);
+/*		if ($objets) {
 			$puce = 'puce-verte-breve.gif';
 		}
 		else {
 			$puce = 'puce-orange-breve.gif';
 		}
-
-		echo "<tr class='tr_liste'><td class=\"arial11\">";
+*/
+		echo "<tr class='tr_liste'><td>".$puce;
+		echo "</td><td class=\"arial11\">";
 		echo "<a href=\"".$link."\">";
-		echo  "<img src='img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
 		echo  typo($titre);
 		echo "</a></td><td>";
 		
@@ -337,7 +343,8 @@ function carte_editable() {
 	return true;
 }
 function carte_administrable() {
-	return true;
+	global $connect_statut;
+	return $connect_statut=='0minirezo';
 }
 //
 // Afficher un pave cartes dans la colonne de gauche
@@ -461,5 +468,116 @@ function afficher_srs ($id_srs=''){
 	fin_cadre_enfonce();
 
 }
+// http://doc.spip.org/@puce_statut_carto_carte
+function puce_statut_carto_carte($id, $statut) {
+	global $spip_lang_left, $dir_lang, $connect_statut, $options;
+	
+	switch ($statut) {
+	case 'publie':
+		$clip = 2;
+		$puce = 'verte';
+		$title = _T('info_carto_carte_publie');
+		break;
+	case 'prepa':
+		$clip = 0;
+		$puce = 'blanche';
+		$title = _T('info_carto_carte_redaction');
+		break;
+	case 'prop':
+		$clip = 1;
+		$puce = 'orange';
+		$title = _T('info_carto_carte_propose');
+		break;
+	case 'refuse':
+		$clip = 3;
+		$puce = 'rouge';
+		$title = _T('info_carto_carte_refuse');
+		break;
+	case 'poubelle':
+		$clip = 4;
+		$puce = 'poubelle';
+		$title = _T('info_carto_carte_supprime');
+		break;
+	}
+	$puce = "puce-$puce.gif";
+	
+	if ($connect_statut == '0minirezo' AND $options == 'avancees') {
+	  // les versions de MSIE ne font pas toutes pareil sur alt/title
+	  // la combinaison suivante semble ok pour tout le monde.
+	  $titles = array(
+			  "blanche" => _T('texte_statut_en_cours_redaction'),
+			  "orange" => _T('texte_statut_propose_evaluation'),
+			  "verte" => _T('texte_statut_publie'),
+			  "rouge" => _T('texte_statut_refuse'),
+			  "poubelle" => _T('texte_statut_poubelle'));
+	  $action = "onmouseover=\"montrer('statutdecalcarto_carte$id');\"";
+	  $inser_puce = "\n<div class='puce_article' id='statut$id'$dir_lang>"
+			. "\n<div class='puce_article_fixe' $action>" .
+		  http_img_pack("$puce", "", "id='imgstatutcarto_carte$id' style='margin: 1px;'") ."</div>"
+			. "\n<div class='puce_article_popup' id='statutdecalcarto_carte$id' onmouseout=\"cacher('statutdecalcarto_carte$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>\n"
+			. afficher_script_statut($id, 'carto_carte', -1, 'puce-blanche.gif', 'prepa', $titles['blanche'], $action)
+			. afficher_script_statut($id, 'carto_carte', -12, 'puce-orange.gif', 'prop', $titles['orange'], $action)
+			. afficher_script_statut($id, 'carto_carte', -23, 'puce-verte.gif', 'publie', $titles['verte'], $action)
+			. afficher_script_statut($id, 'carto_carte', -34, 'puce-rouge.gif', 'refuse', $titles['rouge'], $action)
+			. afficher_script_statut($id, 'carto_carte', -45, 'puce-poubelle.gif', 'poubelle', $titles['poubelle'], $action)
+		. "</div></div>";
+	} else {
+		$inser_puce = http_img_pack("$puce", "", "id='imgstatutcarto_carte$id' style='margin: 1px;'");
+	}
+	return $inser_puce;
+}
 
+// http://doc.spip.org/@puce_statut_carto_objet
+function puce_statut_carto_objet($id, $statut, $type, $droit) {
+	global $spip_lang_left, $dir_lang;
+
+	$puces = array(
+		       0 => 'puce-orange-breve.gif',
+		       1 => 'puce-verte-breve.gif',
+		       2 => 'puce-rouge-breve.gif',
+		       3 => 'puce-blanche-breve.gif');
+
+	switch ($statut) {
+			case 'prop':
+				$clip = 0;
+				$puce = $puces[0];
+				$title = _T('titre_carto_objet_proposee');
+				break;
+			case 'publie':
+				$clip = 1;
+				$puce = $puces[1];
+				$title = _T('titre_carto_objet_publiee');
+				break;
+			case 'refuse':
+				$clip = 2;
+				$puce = $puces[2];
+				$title = _T('titre_carto_objet_refusee');
+				break;
+			default:
+				$clip = 0;
+				$puce = $puces[3];
+				$title = '';
+	}
+
+	$type1 = "statut$type$id"; 
+	$inser_puce = http_img_pack($puce, "", "id='img$type1' style='margin: 1px;'");
+
+	if (!$droit) return $inser_puce;
+	
+	$type2 = "statutdecal$type$id";
+	$action = "onmouseover=\"montrer('$type2');\"\n";
+
+	  // les versions de MSIE ne font pas toutes pareil sur alt/title
+	  // la combinaison suivante semble ok pour tout le monde.
+
+	return	"<div class='puce_carto_objet' id='$type1'$dir_lang>"
+		. "<div class='puce_carto_objet_fixe' $action>"
+		. $inser_puce
+		. "</div>"
+		. "\n<div class='puce_carto_objet_popup' id='$type2' onmouseout=\"cacher('$type2');\" style=' margin-left: -".((9*$clip)+1)."px;'>\n"
+		. afficher_script_statut($id, $type, -1, $puces[0], 'prop',_T('texte_statut_propose_evaluation'), $action)
+		. afficher_script_statut($id, $type, -10, $puces[1], 'publie',_T('texte_statut_publie'), $action)
+	  	. afficher_script_statut($id, $type, -19, $puces[2], 'refuse',_T('texte_statut_refuse'), $action)
+		.  "</div></div>";
+}
 ?>
