@@ -4,15 +4,15 @@ var init_gauche = true;
 var active_menu = $('empty');
 $(document).ready(function() {
 		//init submenus
-		$('.bandeau_sec').css({'display':'none','position':'absolute'});
+		$('#haut-page div.bandeau_sec').css({'display':'none','position':'absolute'});
 		//activate submenus
-		$('.bandeau-principal>.h-list li[@id]').mouseover(showMenu);
-		$('.bandeau_couleur a[@id]').mouseover(showMenu);
+		$('#haut-page div.bandeau-principal>div.h-list li[@id]').mouseover(showMenu);
+		$('#bandeau_couleur li.bandeau_couleur a[@id]').mouseover(showMenu);
 		$('map').mouseover(
-			function(){active_menu.hide();active_menu=$('empty');}		
+			function(){active_menu.hide();active_menu=$('empty');}			
 		);
 		//init ajax links
-		$('.ajax').click(exec_ajax_links).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
+		$('a.ajax').click(exec_ajax_links).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
 	}
 );
 
