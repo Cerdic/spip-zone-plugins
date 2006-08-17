@@ -412,7 +412,7 @@ $link = generer_url_ecrire("cartes_edit",$param);
 	if (carte_editable()) {
 		echo "\n<br />";
 $param="new=oui";
-if ($retour) $param.='&retour='.$retour;
+$param.='&retour='.generer_url_ecrire("articles_edit","id_article=".$id_article);
 $link = generer_url_ecrire("cartes_edit",$param);
 		icone_horizontale(_T("spipcarto:carte_creer"),
 			$link, "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.gif", "creer.gif");
