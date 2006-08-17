@@ -14,7 +14,9 @@
 
 
 <BOUCLE_svg (DOCUMENTS) {id_document} {doublons} {extension==svg}>
-<inclus src='#FICHIER' width='#GET{largeur}' height='#GET{hauteur}' />
+<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_document_(#ENV{align})]' style='[(#ENV{align}=={left}|?{float:left; })][(#ENV{align}=={right}|?{float:right; })]width:#LARGEURpx'>
+<embed src='#FICHIER' [(#ENV*|params_spip_to_attributs_html)] width='#LARGEUR' height='#HAUTEUR' />
+[<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF)</div>]</div>
 </BOUCLE_svg>
 
 <BOUCLE_real (DOCUMENTS) {id_document}{doublons} {extension==rm|ram|ra}>
@@ -38,7 +40,7 @@
 </BOUCLE_real>
 
 <BOUCLE_inclus (DOCUMENTS) {id_document} {doublons} {inclus=embed}>
-<div class='spip_document_#ID_DOCUMENT spip_documents [spip_document_(#ENV{align})]' style='[(#ENV{align}=={left}|?{float:left; })][(#ENV{align}=={right}|?{float:right; })]width:[(#LARGEUR|<{120}|?{120,#LARGEUR})[(#REM)<!--ligne]]px'>
+<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_document_(#ENV{align})]' style='[(#ENV{align}=={left}|?{float:left; })][(#ENV{align}=={right}|?{float:right; })]width:[(#LARGEUR|<{120}|?{120,#LARGEUR})[(#REM)<!--ligne]]px'>
 <object width='#GET{largeur}' height='#GET{hauteur}'>
 <param name='movie' value='#FICHIER' />
 <param name='src' value='#FICHIER' />
