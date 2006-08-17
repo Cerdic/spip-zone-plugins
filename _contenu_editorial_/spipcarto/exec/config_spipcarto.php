@@ -23,7 +23,7 @@ function exec_config_spipcarto() {
 	/*MODIFICATION/CREATION des tables*/
 	/************************************************************************/
 
-if (($_REQUEST['installation']=='oui')&&(($connect_statut == '0minirezo') AND $connect_toutes_rubriques)){
+if ($_REQUEST['installation']=='oui'){
 	spip_query("CREATE TABLE IF NOT EXISTS `".$table_pref."_carto_cartes` (
   `id_carto_carte` smallint(5) unsigned NOT NULL auto_increment,
   `url_carte` varchar(255) NOT NULL default '',
