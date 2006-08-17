@@ -55,7 +55,7 @@ if ($connect_statut == "0minirezo") {
 ?>
 <div class='icone_horizontale_gadget'>
 	<a class='icone-h icone26' href='[(#URL_ECRIRE{rubriques_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
-		[(#HTTP_IMG_PACK{rubrique-24.gif}|image_masque{#CHEMIN{img_pack/creer.gif},mode=normal})]
+		[(#CHEMIN{img_pack/rubrique-24.gif}|image_masque{#CHEMIN{img_pack/creer.gif},mode=normal})]
 	</a>
 	<a class='icone-h-texte' href='[(#URL_ECRIRE{rubriques_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
 		[(#ENV{id_rubrique,0}|?{<:icone_creer_sous_rubrique:>,<:icone_creer_rubrique:>})]
@@ -66,7 +66,7 @@ if ($connect_statut == "0minirezo") {
 ?>
 <div class='icone_horizontale_gadget'>
 	<a class='icone-h icone26' href='[(#URL_ECRIRE{articles_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
-	[(#HTTP_IMG_PACK{article-24.gif}|image_masque{#CHEMIN{img_pack/creer.gif},mode=normal})]
+	[(#CHEMIN{img_pack/article-24.gif}|image_masque{#CHEMIN{img_pack/creer.gif},mode=normal})]
 	</a>
 	<a class='icone-h-texte' href='[(#URL_ECRIRE{articles_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
 	<:icone_ecrire_article:>
@@ -75,7 +75,7 @@ if ($connect_statut == "0minirezo") {
 [(#CONFIG{activer_breves}|=={non}|?{'',' '})
 	<div class='icone_horizontale_gadget'>
 		<a class='icone-h icone26' href='[(#URL_ECRIRE{breves_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
-			[(#HTTP_IMG_PACK{breve-24.gif}|image_masque{#CHEMIN{img_pack/creer.gif},mode=normal})]
+			[(#CHEMIN{img_pack/breve-24.gif}|image_masque{#CHEMIN{img_pack/creer.gif},mode=normal})]
 		</a>
 		<a class='icone-h-texte' href='[(#URL_ECRIRE{breves_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
 			<:icone_nouvelle_breve:>
@@ -87,7 +87,7 @@ if ($connect_statut == "0minirezo") {
 [(#CONFIG{activer_sites}|=={non}|?{'',' '})
 	<div class='icone_horizontale_gadget'>
 		<a class='icone-h icone26' href='[(#URL_ECRIRE{sites_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
-			[(#HTTP_IMG_PACK{site-24.gif}|image_masque{#CHEMIN{img_pack/creer.gif},mode=normal})]
+			[(#CHEMIN{img_pack/site-24.gif}|image_masque{#CHEMIN{img_pack/creer.gif},mode=normal})]
 		</a>
 		<a class='icone-h-texte' href='[(#URL_ECRIRE{sites_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique,''}}|parametre_url{id_parent,#ENV{id_rubrique,''}})]'>
 			<:info_sites_referencer:>

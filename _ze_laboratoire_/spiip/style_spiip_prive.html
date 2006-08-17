@@ -14,9 +14,115 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
+.nav_logo_rub{
+	float:left;
+}
+#bandeautoutsite,#bandeautoutsite ul {
+	float: left;
+	list-style: none;
+	line-height: 1;
+	background-color:	##ENV{couleur_claire,edf3fe};
+	color: #606060;
+	font-weight: bold;
+	padding: 0;
+	border: solid ##ENV{couleur_claire,edf3fe};
+	border-width: 1px;
+	margin: 0 0 0 0;
+	text-align:left;
+	width:16em;
+} 
+#bandeautoutsite ul {
+	border-width: 1px 0;
+}
+
+#bandeautoutsite a {
+	display: block;
+	width: 13em;
+	w\idth: 9em;
+	text-decoration: none;
+	padding: 0.25em 2em;
+}
+
 #bandeautoutsite a.daddy {
 	background: url([(#ENV{ltr}|choixsiegal{left,#HTTP_WRAPPER{triangle-droite.gif},#HTTP_WRAPPER{triangle-droite_rtl.gif}})]) center [(#ENV{ltr}|choixsiegal{left,right,left})] no-repeat;
 }
+
+#bandeautoutsite li {
+float:left;
+	padding-right: 1em;
+	width: 14em
+}
+
+#bandeautoutsite li ul {
+	position: absolute;
+	left: -999em;
+	top: -999em;
+	height: auto;
+	width: 14.4em;
+	w\idth: 13.9em;
+	font-weight: normal;
+	border-width: 1px;
+	border: solid ##ENV{couleur_foncee,edf3fe};
+	margin: 0;
+	margin-top: -1.75em;
+	margin-left: 10em;
+}
+
+#bandeautoutsite li li {
+	padding-right: 1em;
+	width: 13em
+}
+
+#bandeautoutsite li ul a {
+	width: 13em;
+	w\idth: 9em;
+}
+
+#bandeautoutsite li ul ul {
+	margin-top: -1.75em;
+	margin-left: 10em;
+}
+
+#bandeautoutsite li:hover ul ul, #bandeautoutsite li:hover ul ul ul, #bandeautoutsite li:hover ul ul ul ul,
+#bandeautoutsite li.sfhover ul ul, #bandeautoutsite li.sfhover ul ul ul, #bandeautoutsite li.sfhover ul ul ul ul
+{
+	left: -999em;
+	top: -999em;
+}
+
+
+#bandeautoutsite li:hover ul, 
+#bandeautoutsite li li:hover ul, 
+#bandeautoutsite li li li:hover ul,
+#bandeautoutsite li li li li:hover ul
+{
+	left: auto;
+	top:auto;
+}
+
+#bandeautoutsite li.sfhover ul{
+	left:auto;
+	top:auto;
+}
+#bandeautoutsite li li.sfhover ul,
+#bandeautoutsite li li li.sfhover ul,
+#bandeautoutsite li li li li.sfhover ul,
+{
+	left: auto;
+	top:auto;
+}
+
+#bandeautoutsite li:hover, #bandeautoutsite li.sfhover,
+#bandeautoutsite li:hover>a {
+	background-color: #85909A;
+	color: #fff;
+}
+#bandeautoutsite li a:hover, #bandeautoutsite li.sfhover a {
+	color: #fff;
+}
+
+
+
 .ahah_searching_left{
 	float:left;
 	width:13;
@@ -180,6 +286,7 @@ a.icone-h img {
 	height: 24px;
 	border: none;
 	margin: 3px;
+	background-color: transparent;
 	background-repeat: no-repeat;
 	background-position: center center;
 }

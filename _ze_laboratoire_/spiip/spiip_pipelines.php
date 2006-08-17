@@ -16,7 +16,7 @@ function spiip_header_prive($flux){
 
 	$flux .= "<script type='text/javascript' src='".find_in_path('dist_back/gadget-rubriques.js')."'></script>\n";
 	$flux .= '<link rel="stylesheet" href="'.generer_url_public('style_spiip_prive',$args).'" type="text/css" media="projection, screen" />';
-	$flux .= '<link rel="stylesheet" href="'.direction_css(find_in_path('dist_back/gadget-rubriques.css')).'" type="text/css" media="projection, screen" />';
+	//$flux .= '<link rel="stylesheet" href="'.direction_css(find_in_path('dist_back/gadget-rubriques.css')).'" type="text/css" media="projection, screen" />';
 	return $flux;
 }
 
