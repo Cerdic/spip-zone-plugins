@@ -7,10 +7,10 @@
 	</auteur>
 	<lien>http://spipcarto.berlios.de</lien>
 	<version>
-	  2.0 Alpha1
+	  2.0 Beta1
 	</version>
 	<etat>
-	  dev
+	  test
 	</etat>
 	<description>
 	  Gestion de cartes et d'images interactives.
