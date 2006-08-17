@@ -3,9 +3,11 @@ function params_spip_to_params_html($texte){
 	//a partir d'un tableau serialisé, retourne des <param name="cle" value="valeur" 
 	$ne_pas_garder=array( 	// tableau de ce qu'il n'est pas nécéssaire de garder
 	'id_document',
-	'params' ,			  	// on pou!rra supprimer cette ligne quand fil aura virer #ENV{params} 
 	'date',
-	'date_redac','align','largeur','hauteur','fond',''
+	'date_redac',
+	'align',
+	//'largeur','hauteur',	//on la mettra plus tard, pour regler les problemes de largeur et hauteur trop petite avec un controleur video
+	'fond',''
 	) ;	
 
 	
@@ -29,9 +31,10 @@ function params_spip_to_attributs_html($texte){
 	
 	$ne_pas_garder=array( 	// tableau de ce qu'il n'est pas nécéssaire de garder
 	'id_document',
-	'params' ,			  	// on pou!rra supprimer cette ligne quand fil aura virer #ENV{params} 
 	'date',
-	'date_redac','align','largeur','hauteur','fond',''
+	'date_redac','align',
+	//'largeur','hauteur',	//on la mettra plus tard, pour regler les problemes de largeur et hauteur trop petite avec un controleur video
+	'fond',''
 	) ;	
 	
 	$tableau = unserialize($texte);
