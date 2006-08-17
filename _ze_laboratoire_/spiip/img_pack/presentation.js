@@ -6,11 +6,13 @@ $(document).ready(function() {
 		//init submenus
 		$('.bandeau_sec').css({'display':'none','position':'absolute'});
 		//activate submenus
-		$('.bandeau-principal>.h-list li[@id]').mouseover(function(){showMenu.apply(this);});
-		$('.bandeau_couleur a[@id]').mouseover(function(){showMenu.apply(this);});
+		$('.bandeau-principal>.h-list li[@id]').mouseover(showMenu);
+		$('.bandeau_couleur a[@id]').mouseover(showMenu);
 		$('map').mouseover(
 			function(){active_menu.hide();active_menu=$('empty');}		
 		);
+		//init ajax links
+		$('.ajax').click(exec_ajax_links).not('[@href]').css('cursor','pointer');
 	}
 );
 
@@ -27,7 +29,7 @@ function showMenu() {
 	active_menu=$('#'+this.id.replace(/^bouton\d?_/,'bandeau')).show();
 }
 
-function decalerCouche(id_couche) {
+function decalerCouche() {
 	var layer = this;
 	if (bug_offsetwidth && ( parseInt(layer.style.left) > 0)) {
 		var demilargeur = Math.floor( layer.offsetWidth / 2 );
@@ -41,6 +43,23 @@ function decalerCouche(id_couche) {
 		layer.style.left = gauche+"px";
 	}
 
+}
+
+function exec_ajax_links() {
+			//call information is inside the link id
+			//id='page-var1:val1:var2:val2-dest_el'
+			//params are separated by --
+			//param 0 = page to exec
+			//param 1 = arguments of exec (pairs of name, value separated by :)
+			//param 3 = id of the receiving element
+			var params = this.id.split('--');
+			var url = './?exec='+params[0]+'&var_ajax=1';
+			var args = params[1].split(':');
+			for(var i=0;i<args.length;i+=2) {
+				url += '&'+args[i]+'='+args[i+1];
+			}
+			charger_id_url(url,params[2]);
+			return false;
 }
 
 var accepter_change_statut;

@@ -466,8 +466,10 @@ function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $javascript=fa
 			else {
 				$url = parametre_url($self, $tmp_var, $deb-1);
 				if ($javascript) {
-					$jj = str_replace("::deb::", "&amp;$tmp_var=$deb", $javascript);
-					$texte .= "<a onClick=\"$jj; return false;\" href=\"$url#a$ancre\">$deb</a>";
+					//$jj = str_replace("::deb::", "&amp;$tmp_var=$deb", $javascript);
+					$jj = str_replace("::deb::", "$tmp_var:$deb", $javascript);
+					//$texte .= "<a onClick=\"$jj; return false;\" href=\"$url#a$ancre\">$deb</a>";
+					$texte .= "<a class='ajax' id='$jj' href=\"$url#a$ancre\">$deb</a>";
 				}
 				else $texte .= "<a href=\"$url#a$ancre\">$deb</a>";
 			}
@@ -485,8 +487,10 @@ function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $javascript=fa
 	} else {
 			$lien = parametre_url(self(), $tmp_var, -1);
 			if ($javascript) {
-				$jj = str_replace("::deb::", "&amp;$tmp_var=-1", $javascript);
-				$texte .= "<a onClick=\"$jj; return false; \" href=\"$lien#a$ancre\"><img src='". _DIR_IMG_PACK . "plus.gif' title='"._T('lien_tout_afficher')."' /></a>";
+				//$jj = str_replace("::deb::", "&amp;$tmp_var=-1", $javascript);
+				$jj = str_replace("::deb::", "$tmp_var:-1", $javascript);
+				//$texte .= "<a onClick=\"$jj; return false; \" href=\"$lien#a$ancre\"><img src='". _DIR_IMG_PACK . "plus.gif' title='"._T('lien_tout_afficher')."' /></a>";
+				$texte .= "<a class='ajax' id='$jj' href=\"$lien#a$ancre\"><img src='". _DIR_IMG_PACK . "plus.gif' title='"._T('lien_tout_afficher')."' /></a>";
 			}
 			else
 				$texte .= "<A HREF=\"$lien#a$ancre\"><img src='". _DIR_IMG_PACK . "plus.gif' title='"._T('lien_tout_afficher')."' /></A>";
@@ -743,8 +747,9 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 
 	$tmp_var = substr($hash, 2, 6);
-	$javascript = "charger_id_url('" . generer_url_ecrire('memoriser',"&var_ajax=1&id_ajax_fonc=::id_ajax_fonc::::deb::", true) . "','$tmp_var')";
-
+	//$javascript = "charger_id_url('" . generer_url_ecrire('memoriser',"&var_ajax=1&id_ajax_fonc=::id_ajax_fonc::::deb::", true) . "','$tmp_var')";
+	$javascript = "memoriser--id_ajax_fonc:::id_ajax_fonc:::::deb::--$tmp_var";
+	
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 	$tous_id = array();
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
@@ -783,7 +788,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			if ($afficher_trad) {
 				$texte_img .= http_img_pack("searching.gif", "*", "style='visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
-				$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire('memoriser',"&var_ajax=1&id_ajax_fonc=$id_ajax_trad"). "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-12.gif' /></a></div>";
+				$texte_img .= "<div style='float: $spip_lang_right;'><a class='ajax' id='memoriser--id_ajax_fonc:$id_ajax_trad--$div_trad'><img src='". _DIR_IMG_PACK . "langues-12.gif' /></a></div>";
 			}
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -972,7 +977,8 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	$jjscript = (serialize($jjscript));
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 	$tmp_var = substr($hash, 2, 6);	
-	$javascript = "charger_id_url('" . generer_url_ecrire('memoriser', '&var_ajax=1&id_ajax_fonc=::id_ajax_fonc::::deb::') . "','$tmp_var')";
+	//$javascript = "charger_id_url('" . generer_url_ecrire('memoriser', '&var_ajax=1&id_ajax_fonc=::id_ajax_fonc::::deb::') . "','$tmp_var')";
+	$javascript = "memoriser--id_ajax_fonc:::id_ajax_fonc:::::deb::--$tmp_var";
 
 	$tous_id = array();
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
@@ -1005,7 +1011,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			
 			$texte_img .= http_img_pack("searching.gif", "*", "style='visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
 
-			$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire('memoriser',"&var_ajax=1&id_ajax_fonc=$id_ajax_trad") . "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-off-12.gif' /></a></div>";
+			$texte_img .= "<div style='float: $spip_lang_right;'><a class='ajax' id='memoriser--id_ajax_fonc:$id_ajax_trad--$div_trad'><img src='". _DIR_IMG_PACK . "langues-off-12.gif' /></a></div>";
 
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
