@@ -1,4 +1,5 @@
 <?php
+$GLOBALS['sq_cartes']=array('map','logo','lien','svg','svgx','geosvgwms');
 
 $GLOBALS['choses_possibles']['carto_objets'] = array(
 									  'titre_chose' => 'Objets',

@@ -52,7 +52,7 @@ function spipcarto_ajouterBoutons($boutons_admin) {
 function spipcarto_affiche_droite($flux){
   include_spip ("inc/carto");
 	if (_request('exec')=='articles_edit'){
-		$flux['data'] .= spipcarto_afficher_insertion_carte($flux['arg']['id_article']);
+		$flux['data'] .= spipcarto_afficher_insertion_carte($flux['args']['id_article']);
 	}
 	return $flux;
 }

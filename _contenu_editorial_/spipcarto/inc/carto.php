@@ -91,88 +91,82 @@ function afficher_cartes($titre_table, $requete, $icone = '') {
 	global $connect_id_auteur, $connect_statut;
 	global $spip_lang_right, $couleur_claire, $spip_lang;
 
-		$select = $requete['SELECT'] ? $requete['SELECT'] : '*';
-		$from = $requete['FROM'] ? $requete['FROM'] : 'spip_articles AS articles';
-		$join = $requete['JOIN'] ? (' LEFT JOIN ' . $requete['JOIN']) : '';
-		$where = $requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '';
-		$order = $requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '';
-		$group = $requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '';
-		$limit = $requete['LIMIT'] ? (' LIMIT ' . $requete['LIMIT']) : '';
+	$select = $requete['SELECT'] ? $requete['SELECT'] : '*';
+	$from = $requete['FROM'] ? $requete['FROM'] : 'spip_articles AS articles';
+	$join = $requete['JOIN'] ? (' LEFT JOIN ' . $requete['JOIN']) : '';
+	$where = $requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '';
+	$order = $requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '';
+	$group = $requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '';
+	$limit = $requete['LIMIT'] ? (' LIMIT ' . $requete['LIMIT']) : '';
+
+	$cpt = "$from$where";
+	$tmp_var = substr(md5($cpt), 0, 4);
 	
-		$cpt = "$from$where";
-		$tmp_var = substr(md5($cpt), 0, 4);
-		
-		//if (!$group){
-			$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $cpt"));
-			if (! ($cpt = $cpt['n'])) return $tous_id ;
-		/*}
-		else
-			$cpt = spip_num_rows(spip_query("SELECT $select FROM $cpt"));
-		*/
-		if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
-	
-		$nb_aff = 1.5 * _TRANCHES;
-		$deb_aff = intval(_request('t_' .$tmp_var));
-	
-		if ($cpt > $nb_aff) {
-			$nb_aff = (_TRANCHES); 
-			$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
-		}
+	$res = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $cpt"));
+	$cpt = $res['n'];
+
+	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
+
+	$nb_aff = 1.5 * _TRANCHES;
+	$deb_aff = intval(_request('t_' .$tmp_var));
+	if ($cpt > $nb_aff) {
+		$nb_aff = (_TRANCHES); 
+		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
+	}
 			
 	if (!$icone) $icone = "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.png";
 
-	if ($tranches) {
-		if ($titre_table) echo "<div style='height: 12px;'></div>";
-		echo "<div class='liste'>";
-		bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black");
-		echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
+	if ($titre_table) echo "<div style='height: 12px;'></div>";
+	echo "<div class='liste'>";
+	bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black");
+	echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
 
-		echo $tranches;
+	echo $tranches;
 
-	 	$result = spip_query("SELECT $select FROM $from$join$where$group$order LIMIT $deb_aff, $nb_aff");
-		$num_rows = spip_num_rows($result);
+ 	$result = spip_query("SELECT $select FROM $from$join$where$group$order LIMIT $deb_aff, $nb_aff");
+	$num_rows = spip_num_rows($result);
 
-		$ifond = 0;
-		$premier = true;
+	$ifond = 0;
+	$premier = true;
+	
+	$compteur_liste = 0;
+
+	echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
+	while ($row = spip_fetch_array($result)) {
+		$id_carte= $row['id_carto_carte'];
+		$objets= $row['objets'];
+		$titre = $row['titre'];
 		
-		$compteur_liste = 0;
-
-		echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
-			while ($row = spip_fetch_array($result)) {
-			$id_carte= $row['id_carto_carte'];
-			$objets= $row['objets'];
-			$titre = $row['titre'];
-			
-			$link = generer_url_ecrire("cartes_edit","id_carte=".$id_carte."&retour=".urlencode(generer_url_ecrire("cartes")));
-			if ($objets) {
-				$puce = 'puce-verte-breve.gif';
-			}
-			else {
-				$puce = 'puce-orange-breve.gif';
-			}
-
-			echo "<tr class='tr_liste'><td class=\"arial11\">";
-			echo "<a href=\"".$link."\">";
-			echo  "<img src='img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
-			echo  typo($titre);
-			echo "</a></td><td>";
-			
-			//articles liés
-			afficher_articles(_T("spipcarto:carte_articles_use"),
-				array(
-					"FROM"=>"spip_articles AS articles, spip_carto_cartes_articles AS lien",
-					"WHERE"=>"lien.id_article=articles.id_article AND id_carto_carte=$id_carte AND statut!='poubelle'",
-					"ORDER BY"=>"titre"));
-			
-			echo "</a></td></tr>";
-			
+		$link = generer_url_ecrire("cartes_edit","id_carte=".$id_carte."&retour=".urlencode(generer_url_ecrire("cartes")));
+		if ($objets) {
+			$puce = 'puce-verte-breve.gif';
 		}
-		spip_free_result($result);
+		else {
+			$puce = 'puce-orange-breve.gif';
+		}
+
+		echo "<tr class='tr_liste'><td class=\"arial11\">";
+		echo "<a href=\"".$link."\">";
+		echo  "<img src='img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
+		echo  typo($titre);
+		echo "</a></td><td>";
 		
-		echo "</table>";
-		echo "</div>\n";
+		//articles liés
+		afficher_articles(_T("spipcarto:carte_articles_use"),
+			array(
+				"FROM"=>"spip_articles AS articles, spip_carto_cartes_articles AS lien",
+				"WHERE"=>"lien.id_article=articles.id_article AND id_carto_carte=$id_carte AND statut!='poubelle'",
+				"ORDER BY"=>"titre"));
+		
+		echo "</a></td></tr>";
+		
 	}
-	return;// $tous_id;
+	spip_free_result($result);
+	
+	echo "</table>";
+	echo "</div>\n";
+
+	return;
 }
 
 
@@ -357,7 +351,7 @@ function spipcarto_afficher_insertion_carte($id_article) {
 
 	// Ajouter une carte
 	echo "\n<p>";
-	debut_cadre_relief("../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.png", false);
+	debut_cadre_relief("../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.gif", false);
 
 	echo "<div style='padding: 2px; background-color: $couleur_claire; text-align: center; color: black;'>";
 	echo bouton_block_invisible("ajouter_carte");
@@ -386,7 +380,7 @@ function spipcarto_afficher_insertion_carte($id_article) {
 			$titre = typo($row['titre']);
 			
 $param="id_carte=".$id_carte;
-if ($retour) $param.='&retour='.$retour;
+$param.='&retour='.generer_url_ecrire("articles_edit","id_article=".$id_article);
 $link = generer_url_ecrire("cartes_edit",$param);
 
 			echo "<div class='verdana3' style='border:1px;background-color: $couleur_claire;'>";
