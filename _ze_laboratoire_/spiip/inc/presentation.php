@@ -600,16 +600,16 @@ function puce_statut_article($id, $statut, $id_rubrique) {
 			  "verte" => _T('texte_statut_publie'),
 			  "rouge" => _T('texte_statut_refuse'),
 			  "poubelle" => _T('texte_statut_poubelle'));
-	  $action = "onmouseover=\"montrer('statutdecalarticle$id');\"";
+
 	  $inser_puce = "\n<div class='puce_article' id='statut$id'$dir_lang>"
-			. "\n<div class='puce_article_fixe' $action>" .
+			. "\n<div class='puce_article_fixe'>" .
 		  http_img_pack("$puce", "", "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>"
-			. "\n<div class='puce_article_popup' id='statutdecalarticle$id' onmouseout=\"cacher('statutdecalarticle$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>\n"
-			. afficher_script_statut($id, 'article', -1, 'puce-blanche.gif', 'prepa', $titles['blanche'], $action)
-			. afficher_script_statut($id, 'article', -12, 'puce-orange.gif', 'prop', $titles['orange'], $action)
-			. afficher_script_statut($id, 'article', -23, 'puce-verte.gif', 'publie', $titles['verte'], $action)
-			. afficher_script_statut($id, 'article', -34, 'puce-rouge.gif', 'refuse', $titles['rouge'], $action)
-			. afficher_script_statut($id, 'article', -45, 'puce-poubelle.gif', 'poubelle', $titles['poubelle'], $action)
+			. "\n<div class='puce_article_popup' id='statutdecalarticle$id' style=' margin-left: -".((11*$clip)+1)."px;'>\n"
+			. afficher_script_statut($id, 'article', -1, 'puce-blanche.gif', 'prepa', $titles['blanche'])
+			. afficher_script_statut($id, 'article', -12, 'puce-orange.gif', 'prop', $titles['orange'])
+			. afficher_script_statut($id, 'article', -23, 'puce-verte.gif', 'publie', $titles['verte'])
+			. afficher_script_statut($id, 'article', -34, 'puce-rouge.gif', 'refuse', $titles['rouge'])
+			. afficher_script_statut($id, 'article', -45, 'puce-poubelle.gif', 'poubelle', $titles['poubelle'])
 		. "</div></div>";
 	} else {
 		$inser_puce = http_img_pack("$puce", "", "id='imgstatutarticle$id' style='margin: 1px;'");
@@ -654,7 +654,6 @@ function puce_statut_breve($id, $statut, $type, $droit) {
 	if (!$droit) return $inser_puce;
 	
 	$type2 = "statutdecal$type$id";
-	$action = "onmouseover=\"montrer('$type2');\"\n";
 
 	  // les versions de MSIE ne font pas toutes pareil sur alt/title
 	  // la combinaison suivante semble ok pour tout le monde.
@@ -663,14 +662,14 @@ function puce_statut_breve($id, $statut, $type, $droit) {
 		. "<div class='puce_breve_fixe' $action>"
 		. $inser_puce
 		. "</div>"
-		. "\n<div class='puce_breve_popup' id='$type2' onmouseout=\"cacher('$type2');\" style=' margin-left: -".((9*$clip)+1)."px;'>\n"
-		. afficher_script_statut($id, $type, -1, $puces[0], 'prop',_T('texte_statut_propose_evaluation'), $action)
-		. afficher_script_statut($id, $type, -10, $puces[1], 'publie',_T('texte_statut_publie'), $action)
-	  	. afficher_script_statut($id, $type, -19, $puces[2], 'refuse',_T('texte_statut_refuse'), $action)
+		. "\n<div class='puce_breve_popup' id='$type2' style=' margin-left: -".((9*$clip)+1)."px;'>\n"
+		. afficher_script_statut($id, $type, -1, $puces[0], 'prop',_T('texte_statut_propose_evaluation'))
+		. afficher_script_statut($id, $type, -10, $puces[1], 'publie',_T('texte_statut_publie'))
+	  	. afficher_script_statut($id, $type, -19, $puces[2], 'refuse',_T('texte_statut_refuse'))
 		.  "</div></div>";
 }
 
-function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
+function afficher_script_statut($id, $type, $n, $img, $statut, $title)
 {
   include_spip('inc/actions');
   return http_href_img("javascript:selec_statut('$id', '$type', -1, '" .
@@ -679,9 +678,7 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
 		       generer_action_auteur("instituer_$type","$id-$statut") .
 		      "');",
 		      $img,
-			"title=\"".$title."\"",
-			'','','',
-		      $act);
+			"title=\"".$title."\"");
 }
 
 //
@@ -2179,7 +2176,7 @@ if (true /*$bandeau_colore*/) {
 		  http_img_pack("cal-rv.png", "", "width='26' height='20'") ."</a>";
 		echo "<a href='" . generer_url_ecrire("messagerie") . "' class='icone26' id='bouton_messagerie'>" .
 		  http_img_pack("cal-messagerie.png", "", "width='26' height='20'") ."</a>";
-		echo "<a href='" . generer_url_ecrire("synchro") . "' class='icone26' id='bouton_synchro'" .
+		echo "<a href='" . generer_url_ecrire("synchro") . "' class='icone26' id='bouton_synchro'>" .
 		  http_img_pack("cal-suivi.png", "", "width='26' height='20'") . "</a>";
 		
 

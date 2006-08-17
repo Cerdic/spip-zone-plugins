@@ -2,21 +2,29 @@ var init_gauche = true;
 
 //init document
 var active_menu = $('empty');
+var puce_popup;
 $(document).ready(function() {
 		//init submenus
+		//console.time("total");
 		$('#haut-page div.bandeau_sec').css({'display':'none','position':'absolute'});
 		//activate submenus
 		$('#haut-page div.bandeau-principal>div.h-list li[@id]').mouseover(showMenu);
 		$('#bandeau_couleur li.bandeau_couleur a[@id]').mouseover(showMenu);
-		$('map').mouseover(
-			function(){active_menu.hide();active_menu=$('empty');}			
-		);
+		$('map').mouseover(function(){active_menu.hide();active_menu=$('empty');});
 		//init couche images
-		console.time("couche");
+		//console.time("couche");
 		$('img.swapCouche').click(jquerySwapCouche).css('display','inline');
-		console.timeEnd("couche");
+		//console.timeEnd("couche");
 		//init ajax links
 		$('a.ajax').click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
+		//init fast change of an article state
+		//console.time("faststatut");
+		puce_popup = $('div.puce_article_fixe,div.puce_breve_fixe').mouseover(function(){puce_popup.hide();$('+div',this).show();false;})
+		.find('+div').hover(function(){},function(){puce_popup.hide();return false;})
+		//compatibility with default style_prive (temporary)
+		.css({'visibility':'visible','display':'none'});
+		//console.timeEnd("faststatut");
+		//console.timeEnd("total");
 	}
 );
 
@@ -74,10 +82,9 @@ function selec_statut(id, type, decal, puce, script) {
 	}
 
 	if (accepter_change_statut) {
-		changestyle ('statutdecal'+type+id, 'marginLeft', decal+'px');
-		cacher ('statutdecal'+type+id);
-
-		findObj('imgstatut'+type+id).src = puce;
+		$('#statutdecal'+type+id).css({'marginLeft':decal+'px','visibility':'hidden'})
+		$('#imgstatut'+type+id).set('src',puce);
+		
 		frames['iframe_action'].location.href = script;
 	}
 }
