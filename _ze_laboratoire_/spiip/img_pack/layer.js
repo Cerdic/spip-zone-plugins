@@ -212,7 +212,7 @@ function charger_id_url(myUrl, myField, jjscript)
 		Field.innerHTML = url_chargee['mem_'+myUrl];
 		Field.style.visibility = "visible";
 		Field.style.display = "block";
-		$('.ajax',Field).click(exec_ajax_links).not('[@href]').css('cursor','pointer');
+		$('.ajax',Field).click(exec_ajax_links).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
 		if(jjscript) eval(jjscript);
 	} else {
 		image_search[myField] = findObj_forcer('img_'+myField);
@@ -223,12 +223,11 @@ function charger_id_url(myUrl, myField, jjscript)
 		xmlhttp[myField].open("GET", myUrl, true);
 		// traiter la reponse du serveur
 		xmlhttp[myField].onreadystatechange = function() {
-			console.log("readyState %o",xmlhttp[myField].readyState);
 			if (xmlhttp[myField].readyState == 4) { 
 				// si elle est non vide, l'afficher
 				if (xmlhttp[myField].responseText != '') {
 					Field.innerHTML = xmlhttp[myField].responseText;
-					$('.ajax',Field).click(exec_ajax_links).not('[@href]').css('cursor','pointer');
+					$('.ajax',Field).click(exec_ajax_links).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
 					url_chargee['mem_'+myUrl] = Field.innerHTML;
 				
 					Field.style.visibility = "visible";

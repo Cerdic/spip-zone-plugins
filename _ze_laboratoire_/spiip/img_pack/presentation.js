@@ -12,7 +12,7 @@ $(document).ready(function() {
 			function(){active_menu.hide();active_menu=$('empty');}		
 		);
 		//init ajax links
-		$('.ajax').click(exec_ajax_links).not('[@href]').css('cursor','pointer');
+		$('.ajax').click(exec_ajax_links).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
 	}
 );
 
