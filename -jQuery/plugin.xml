@@ -22,7 +22,7 @@
 		<inclure>head.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>body_prive</nom>
+		<nom>header_prive</nom>
 		<action>insert_head</action>
 	</pipeline>
 </plugin>
