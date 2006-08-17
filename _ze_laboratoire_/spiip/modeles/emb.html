@@ -12,11 +12,13 @@
 [(#ENV{controls}=={PositionSlider}|?{#SET{hauteur,25},''})]
 [(#ENV{controls}=={PositionSlider}|?{#SET{largeur,#ENV{largeur}|moins{40}},''})]
 
+[(#INCLUS|=={embed}|?{' '})<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_document_(#ENV{align})]' style='[(#ENV{align}=={left}|?{float:left; })][(#ENV{align}=={right}|?{float:right; })]width:[(#LARGEUR|<{120}|?{120,#LARGEUR})[(#REM)<!--ligne 196 de inc/documents-->]]px'>]
+
 
 <BOUCLE_svg (DOCUMENTS) {id_document} {doublons} {extension==svg}>
-<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_document_(#ENV{align})]' style='[(#ENV{align}=={left}|?{float:left; })][(#ENV{align}=={right}|?{float:right; })]width:#LARGEURpx'>
+
 <embed src='#FICHIER' [(#ENV*|params_spip_to_attributs_html)] width='#LARGEUR' height='#HAUTEUR' />
-[<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF)</div>]</div>
+
 </BOUCLE_svg>
 
 <BOUCLE_real (DOCUMENTS) {id_document}{doublons} {extension==rm|ram|ra}>
@@ -40,18 +42,19 @@
 </BOUCLE_real>
 
 <BOUCLE_inclus (DOCUMENTS) {id_document} {doublons} {inclus=embed}>
-<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_document_(#ENV{align})]' style='[(#ENV{align}=={left}|?{float:left; })][(#ENV{align}=={right}|?{float:right; })]width:[(#LARGEUR|<{120}|?{120,#LARGEUR})[(#REM)<!--ligne]]px'>
+
 <object width='#GET{largeur}' height='#GET{hauteur}'>
 <param name='movie' value='#FICHIER' />
 <param name='src' value='#FICHIER' />
 [(#ENV*|params_spip_to_params_html)]
 <embed src='#FICHIER' [(#ENV*|params_spip_to_attributs_html)] width='#GET{largeur}' height='#GET{hauteur}'></embed></object>
-[<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF)</div>]</div>
+
 </BOUCLE_inclus>
 
 <BOUCLE_image (DOCUMENTS) {id_document}{inclus=image} {doublons}>
 [(#INCLUDE{fond=modeles/img}{id_document}{align=#ENV{align}})]
 </BOUCLE_image>
+[(#INCLUS|=={embed}|?{' '})[<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF)</div>]</div>]
 
 
 </BOUCLE_tous>
