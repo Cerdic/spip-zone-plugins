@@ -41,8 +41,8 @@ define('_DIR_PLUGIN_SPIPCARTO',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS).
 
 function spipcarto_ajouterBoutons($boutons_admin) {
   
-  // on voit les bouton dans la barre "accueil"
-  $boutons_admin['naviguer']->sousmenu["cartes"]= new Bouton(
+  if (lire_meta('activer_carto')=='oui')
+  	$boutons_admin['naviguer']->sousmenu["cartes"]= new Bouton(
 																   "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.png",  // icone
 																   _L('spipcarto:cartes') //titre
 																   );
@@ -50,10 +50,12 @@ function spipcarto_ajouterBoutons($boutons_admin) {
 }
 
 function spipcarto_affiche_droite($flux){
+  if (lire_meta('activer_carto')=='oui'){
   include_spip ("inc/carto");
 	if (_request('exec')=='articles_edit'){
 		$flux['data'] .= spipcarto_afficher_insertion_carte($flux['args']['id_article']);
 	}
+  }
 	return $flux;
 }
 
@@ -68,6 +70,7 @@ function spipcarto_ajouterOnglets($flux) {
 
 
 function spipcarto_post_propre($texte) {
+if (lire_meta('activer_carto')=='oui'){
 	static $reset;
 	$cartes = array();
 	$maj_liens = ($_GET['exec']=='articles' AND $id_article = intval($_GET['id_article']));
@@ -140,8 +143,8 @@ function spipcarto_post_propre($texte) {
 			spip_query($query);
 		}
 	}
-	
-	return $texte;
+}	
+return $texte;
 }
 
 ?>
