@@ -462,7 +462,7 @@ if ($flag_editable) {
 		echo "<br style='clear:both'/>\n";
 		
 //map ?
-//		$laMap='<map name="map1">';
+//		$laMap='<map name="map'.$id_carte.'">';
 
 		while ($t = spip_fetch_array($result)) {
 	
@@ -613,10 +613,9 @@ echo fin_block();
 			}
 		}
 	
-//map ?
-//	$laMap.='</map>';
 	echo "</div>\n";
 //map ?
+//	$laMap.='</map>';
 //	echo $laMap;
 	fin_cadre_formulaire();
 }
