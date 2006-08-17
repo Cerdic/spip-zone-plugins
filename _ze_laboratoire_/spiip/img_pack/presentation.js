@@ -11,14 +11,18 @@ $(document).ready(function() {
 		$('map').mouseover(
 			function(){active_menu.hide();active_menu=$('empty');}			
 		);
+		//init couche images
+		console.time("couche");
+		$('img.swapCouche').click(jquerySwapCouche).css('display','inline');
+		console.timeEnd("couche");
 		//init ajax links
-		$('a.ajax').click(exec_ajax_links).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
+		$('a.ajax').click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
 	}
 );
 
 function showMenu() {
 	if(init_gauche) {
-		$('.bandeau_sec').
+		$('#haut-page div.bandeau_sec').
 		//before adjusting offset let the submenu have a layout
 		css({'visible':'hidden','display':'block'}).each(decalerCouche).
 		//reset visibility
@@ -42,16 +46,15 @@ function decalerCouche() {
 
 		layer.style.left = gauche+"px";
 	}
-
 }
 
-function exec_ajax_links() {
-			//call information is inside the link id
-			//id='page-var1:val1:var2:val2-dest_el'
-			//params are separated by --
-			//param 0 = page to exec
-			//param 1 = arguments of exec (pairs of name, value separated by :)
-			//param 3 = id of the receiving element
+//call information is inside the link id
+//id='page-var1:val1:var2:val2-dest_el'
+//params are separated by --
+//param 0 = page to exec
+//param 1 = arguments of exec (pairs of name, value separated by :)
+//param 3 = id of the receiving element
+function execAjaxLinks() {
 			var params = this.id.split('--');
 			var url = './?exec='+params[0]+'&var_ajax=1';
 			var args = params[1].split(':');

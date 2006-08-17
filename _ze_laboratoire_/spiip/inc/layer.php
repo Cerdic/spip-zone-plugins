@@ -68,12 +68,14 @@ function bouton_block_invisible($nom_block, $icone='') {
 
 		if (!$icone) {
 			$icone = "deplierhaut$spip_lang_rtl.gif";
-			$couches[] = array($numero_block[$nom_block],0);
+			//$couches[] = array($numero_block[$nom_block],0);
 		}
-		else
-			$couches[] = array($numero_block[$nom_block],1);
+		//else
+		//	$couches[] = array($numero_block[$nom_block],1);
+		$couches[] = $numero_block[$nom_block];
 	}
-	return produire_acceder_couche($couches, $numero_block[$nom_block], $icone);
+	//return produire_acceder_couche($couches, $numero_block[$nom_block], $icone);
+	return produire_acceder_couche($couches, $icone);
 }
 
 
@@ -91,17 +93,21 @@ function bouton_block_visible($nom_block){
 			$numero_block[$nom_block] = $compteur_block;
 		}
 
-		$couches[] = array($numero_block[$nom_block],0);
+		//$couches[] = array($numero_block[$nom_block],0);
+		$couches[] = $numero_block[$nom_block];
 
 	}
 
-	return produire_acceder_couche($couches, $numero_block[$nom_block], "deplierbas.gif");
+	//return produire_acceder_couche($couches, $numero_block[$nom_block], "deplierbas.gif");
+	return produire_acceder_couche($couches, "deplierbas.gif");
 }
 
 // http://doc.spip.org/@produire_acceder_couche
-function produire_acceder_couche($couches, $nom, $icone) {
-
+//function produire_acceder_couche($couches, $nom, $icone) {
+function produire_acceder_couche($couches, $icone) {
+	global $spip_lang_rtl;
 	// ne rien afficher si js desactive
+	/*
 	if ($_COOKIE['spip_accepte_ajax'] == -1)
 		return '';
 
@@ -112,9 +118,11 @@ function produire_acceder_couche($couches, $nom, $icone) {
 			. _DIR_IMG_PACK."',"
 			. $couche[1].');';
 
-	return 
+	/*return 
 	'<img name="triangle'.$nom.'" src="'._DIR_IMG_PACK.$icone.'" alt="" title="'._T('info_deplier').'" border="0" height="10" width="10"
-onclick="'.join(' ',$onclick).'" />';
+onclick="'.join(' ',$onclick).'" />';*/
+	return 
+	'<img class="swapCouche" id="triangle'.join($couches,'-').$spip_lang_rtl.'" src="'._DIR_IMG_PACK.$icone.'" alt="" title="'._T('info_deplier').'" style="display:none;border:none" height="10" width="10" />';
 
 }
 

@@ -46,6 +46,7 @@ function hide_obj(obj) {
 	}
 }
 
+/*
 function swap_couche(couche, rtl, dir, no_swap) {
 	var layer;
 	var triangle = findObj('triangle' + couche);
@@ -58,6 +59,15 @@ function swap_couche(couche, rtl, dir, no_swap) {
 		layer.style.display = 'none';
 	}
 }
+*/
+function jquerySwapCouche() {
+	var m = this.id.match(/([-\d]+)(_rtl)?/);
+	var ids = m[1].split("-"); 
+	var dir = m[2] || '';
+	for(id in ids) $('#Layer'+ids[id]).toggle();
+	this.src = this.src.search(/bas\.gif$/)==-1 ? this.src.replace(/haut(_rtl)?\.gif$/,'bas.gif'): this.src.replace(/bas\.gif$/,'haut'+dir+'.gif'); 
+}
+
 function ouvrir_couche(couche, rtl,dir) {
 	var layer;
 	var triangle = findObj('triangle' + couche);
@@ -212,7 +222,7 @@ function charger_id_url(myUrl, myField, jjscript)
 		Field.innerHTML = url_chargee['mem_'+myUrl];
 		Field.style.visibility = "visible";
 		Field.style.display = "block";
-		$('a.ajax',Field).click(exec_ajax_links).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
+		$('a.ajax',Field).click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
 		if(jjscript) eval(jjscript);
 	} else {
 		image_search[myField] = findObj_forcer('img_'+myField);
@@ -227,7 +237,7 @@ function charger_id_url(myUrl, myField, jjscript)
 				// si elle est non vide, l'afficher
 				if (xmlhttp[myField].responseText != '') {
 					Field.innerHTML = xmlhttp[myField].responseText;
-					$('a.ajax',Field).click(exec_ajax_links).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
+					$('a.ajax',Field).click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
 					url_chargee['mem_'+myUrl] = Field.innerHTML;
 				
 					Field.style.visibility = "visible";

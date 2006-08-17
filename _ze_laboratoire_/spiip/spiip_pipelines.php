@@ -12,7 +12,7 @@ function spiip_header_prive($flux){
 	if (_request('jqdb')!==NULL)
 		$flux = '<script src="'.find_in_path('jquery_uncompressed.js').'" type="text/javascript"></script>'.$flux;
 	else
-		$flux = '<script src="'.find_in_path('jquery.js').'" type="text/javascript"></script>'.$flux;
+		$flux = '<script src="'.find_in_path('jquery-1.0a.js').'" type="text/javascript"></script>'.$flux;
 
 	$flux .= '<link rel="stylesheet" href="'.generer_url_public('style_spiip_prive',$args).'" type="text/css" media="projection, screen" />';
 	return $flux;
