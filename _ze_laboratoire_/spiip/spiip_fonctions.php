@@ -1,22 +1,53 @@
 <?
 function params_spip_to_params_html($texte){
-	//transforme les valeurs de param écries de maniere "valeur=xx|valeur2=xxx" en <param name='valeur1' value='xxx'>...
+	//a partir d'un tableau serialisé, retourne des <param name="cle" value="valeur" 
+	$ne_pas_garder=array( 	// tableau de ce qu'il n'est pas nécéssaire de garder
+	'id_document',
+	'params' ,			  	// on pou!rra supprimer cette ligne quand fil aura virer #ENV{params} 
+	'date',
+	'date_redac','align','largeur','hauteur'
+	) ;	
 
-	$texte = str_replace("=","' value='",$texte);
-	$texte = str_replace("|","' />\n<param name='",$texte);
-	$texte = ereg_replace("$","' />\n",$texte);
-	$texte = ereg_replace("^","<param name='",$texte);
+	
+	
+	
+	$tableau = unserialize($texte);
+	
+	$texte = "";
+	foreach ($tableau as $i => $j){
+		if (!in_array($i,$ne_pas_garder)) 
+			{
+			$texte .= "<param name='".$i."' value='".$j."' />";
+			}
+		}
 	
 	return $texte;
 	}
 
 function params_spip_to_attributs_html($texte){
+	//a partir d'un tableau serialisé, retourne des attributs html
 	
-	$texte = str_replace("=","='",$texte);
-	$texte = str_replace("|","' ",$texte);
+	$ne_pas_garder=array( 	// tableau de ce qu'il n'est pas nécéssaire de garder
+	'id_document',
+	'params' ,			  	// on pou!rra supprimer cette ligne quand fil aura virer #ENV{params} 
+	'date',
+	'date_redac','align'
+	) ;	
 	
+	$tableau = unserialize($texte);
 	
+	$texte = "";
+	foreach ($tableau as $i => $j){
+		
+		if (!in_array($i,$ne_pas_garder)) 
+			{
+			$texte .= $i."='".$j."' "; 
+			}
+		}
 	
-	return $texte."'";}
+	return $texte;
+	}
+
+	
 
 ?>
