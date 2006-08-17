@@ -2138,7 +2138,8 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 		$decal += $largeur_icone_bandeau_principal+5;
 	}
 
-	echo "</div>";
+	echo "</div>\n";
+	echo "<script type='text/javascript'>$('#haut-page div.bandeau_sec').css({'display':'none','position':'absolute'});</script>";
 	
 	echo "</div>\n"; // referme: <div class='bandeau-principal' align='center'>"
 

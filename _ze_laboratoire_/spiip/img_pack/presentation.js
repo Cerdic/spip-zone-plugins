@@ -6,7 +6,7 @@ var puce_popup;
 $(document).ready(function() {
 		//init submenus
 		//console.time("total");
-		$('#haut-page div.bandeau_sec').css({'display':'none','position':'absolute'});
+		//$('#haut-page div.bandeau_sec').css({'display':'none','position':'absolute'});
 		//activate submenus
 		$('#haut-page div.bandeau-principal>div.h-list li[@id]').mouseover(showMenu);
 		$('#bandeau_couleur li.bandeau_couleur a[@id]').mouseover(showMenu);
