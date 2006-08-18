@@ -2059,7 +2059,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 	echo "<div id='haut-page'>";
 
 	// Icones principales
-	echo "<div class='bandeau-principal'>\n";
+	echo "<div id='bandeau-principal'>\n";
 
 	//$espacement = isset($GLOBALS['boutons_admin']['espacement']);
 	$largeur_icone_bandeau_principal = intval(($largeur)/count($GLOBALS['boutons_admin']));
@@ -2138,11 +2138,10 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 		$decal += $largeur_icone_bandeau_principal+5;
 	}
 
-	echo "</div>\n";
-	echo "<script type='text/javascript'>$('#haut-page div.bandeau_sec').css({'display':'none','position':'absolute'});</script>";
-	
+	echo "</div>";	
 	echo "</div>\n"; // referme: <div class='bandeau-principal' align='center'>"
-
+	//echo "<script type='text/javascript'>$('#bandeau-principal div.bandeau_sec').css({'display':'none','position':'absolute'});</script>";
+	
 	//
 	// Bandeau colore
 	//

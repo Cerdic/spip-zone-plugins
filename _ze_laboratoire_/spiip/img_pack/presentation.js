@@ -6,14 +6,14 @@ var puce_popup;
 $(document).ready(function() {
 		//init submenus
 		//console.time("total");
-		//$('#haut-page div.bandeau_sec').css({'display':'none','position':'absolute'});
+		$('#bandeau-principal div.bandeau_sec').css({'display':'none','position':'absolute'});
 		//activate submenus
-		$('#haut-page div.bandeau-principal>div.h-list li[@id]').mouseover(showMenu);
+		$('#bandeau-principal>div.h-list li[@id]').mouseover(showMenu);
 		$('#bandeau_couleur li.bandeau_couleur a[@id]').mouseover(showMenu);
 		$('map').mouseover(function(){active_menu.hide();active_menu=$('empty');});
 		//init couche images
 		//console.time("couche");
-		$('img.swapCouche').click(jquerySwapCouche).css('display','inline');
+		$('img.swapCouche').click(jquerySwapCouche).css({display:'inline',cursor:'pointer'});
 		//console.timeEnd("couche");
 		//init ajax links
 		$('a.ajax').click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
