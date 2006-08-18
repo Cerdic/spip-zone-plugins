@@ -1,10 +1,11 @@
 <BOUCLE_tous (DOCUMENTS spip_types_documents) {id_document}>
 
-[(#REM)<!--on trouvera plusieur variable de hauteur/largeur
--les balise #HAUTEUR et #LARGEUR
--#ENV{hauteur} et {largeur} correspondant <emb|hauteur=xx...
--#GET{hauteur} et #GET{loargeur} correspondt prioriatiremnt à #ENV,puis #LARGEUR/HAUTEUR sauf si il y a un controleur
--->)]
+[(#REM) on trouvera plusieurs variable de hauteur/largeur
+- les balises #HAUTEUR et #LARGEUR
+- #ENV{hauteur} et {largeur} correspondant <emb|hauteur=xx...>
+- #GET{hauteur} et #GET{largeur} correspondent prioritairemnt a #ENV,
+  puis #LARGEUR/HAUTEUR sauf si il y a un controleur
+]
 #SET{hauteur,#ENV{hauteur}|sinon{#HAUTEUR}}
 #SET{largeur,#ENV{largeur}|sinon{#LARGEUR}}
 [(#ENV{controls}=={PlayButton}|?{#SET{hauteur,25},''})]
@@ -12,8 +13,9 @@
 [(#ENV{controls}=={PositionSlider}|?{#SET{hauteur,25},''})]
 [(#ENV{controls}=={PositionSlider}|?{#SET{largeur,#ENV{largeur}|moins{40}},''})]
 
-[(#INCLUS|=={embed}|?{' '})<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_document_(#ENV{align})]' style='[(#ENV{align}=={left}|?{float:left; })][(#ENV{align}=={right}|?{float:right; })]width:[(#LARGEUR|<{120}|?{120,#LARGEUR})[(#REM)<!--ligne 196 de inc/documents-->]]px'>]
-
+[(#INCLUS|=={embed}|?{
+<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_document_(#ENV{align})]' style='[(#ENV{align}=={left}|?{float:left; })][(#ENV{align}=={right}|?{float:right; })]width:[(#LARGEUR|<{120}|?{120,#LARGEUR})[(#REM)<!--ligne 196 de inc/documents-->]]px'>
+})]
 
 <BOUCLE_svg (DOCUMENTS) {id_document} {doublons} {extension==svg}>
 
@@ -73,7 +75,9 @@
 <BOUCLE_image (DOCUMENTS) {id_document}{inclus=image} {doublons}>
 [(#INCLUDE{fond=modeles/img}{id_document}{align=#ENV{align}})]
 </BOUCLE_image>
-[(#INCLUS|=={embed}|?{' '})[<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF)</div>]</div>]
+[(#INCLUS|=={embed}|?{
+	[<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][<div class='spip_doc_descriptif'>(#DESCRIPTIF)</div>]</div>
+})]
 
 
 </BOUCLE_tous>
