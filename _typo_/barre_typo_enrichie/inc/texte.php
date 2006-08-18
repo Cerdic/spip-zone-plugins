@@ -66,11 +66,12 @@ function definir_puce() {
 
 
 // XHTML - Preserver les balises-bloc
+// http://fr.selfhtml.org/html/reference/elements.htm#elements_bloc
 define('_BALISES_BLOCS',
-	'div|pre|ul|ol|li|blockquote|h[1-6r]|'
-	.'t(able|[rdh]|body|foot|extarea)|'
-	.'form|object|center|marquee|address|'
-	.'d[ltd]|script|noscript|map|del|ins|button|fieldset');
+	'div|pre|ul|ol|blockquote|h[1-6r]|'
+	.'table|menu|noframes|p|'
+	.'form|center|marquee|address|'
+	.'dl|noscript|dir|fieldset|isindex');
 
 
 // Ne pas afficher le chapo si article virtuel
