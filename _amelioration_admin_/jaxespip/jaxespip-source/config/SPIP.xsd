@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:element name="SPIP">
+<xs:annotation>
+<xs:documentation>
+Racine du document SPIP.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType mixed="true">
+<xs:choice maxOccurs="unbounded" minOccurs="0">
+<xs:element ref="INTERTITRE"/>
+<xs:element ref="LIEN"/>
+<xs:element ref="ANCRE"/>
+<xs:element ref="LISTE"/>
+<xs:element ref="LISTENUM"/>
+<xs:element ref="NOTE"/>
+<xs:element ref="IMAGE"/>
+<xs:element ref="TABLE"/>
+<xs:element ref="BR"/>
+<xs:element ref="SEPARATION"/>
+<xs:element ref="CITATION"/>
+<xs:element ref="MATH"/>
+<xs:element ref="DOCUMENT"/>
+<xs:element ref="EMBED"/>
+<xs:element ref="GLOSSAIRE"/>
+<xs:element ref="CADRE"/>
+<xs:element ref="CODE"/>
+<xs:element ref="POESIE"/>
+<xs:group ref="styles"/>
+</xs:choice>
+</xs:complexType>
+</xs:element>
+
+<xs:element name="INTERTITRE" type="xs:string">
+<xs:annotation>
+<xs:documentation>
+Titre pour une partie du document (ceci n&apos;est pas le titre de l&apos;article !).
+</xs:documentation>
+</xs:annotation>
+</xs:element>
+
+<xs:element name="LIEN">
+<xs:annotation>
+<xs:documentation>
+Lien vers un autre article, vers une ancre, ou vers un site externe à SPIP. Le contenu de l&apos;élément LIEN correspond au texte affiché sur lequel sera le lien.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType mixed="true">
+<xs:choice maxOccurs="unbounded" minOccurs="0">
+<xs:group ref="styles"/>
+</xs:choice>
+<xs:attribute default="article" name="type" type="xs:string" use="required">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:enumeration value="article"/>
+<xs:enumeration value="rubrique"/>
+<xs:enumeration value="brève"/>
+<xs:enumeration value="image"/>
+<xs:enumeration value="document"/>
+<xs:enumeration value="ancre"/>
+<xs:enumeration value="externe"/>
+<xs:enumeration value="mot-clé"/>
+<xs:enumeration value="site-syndiqué"/>
+<xs:enumeration value="auteur"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+<xs:attribute name="numéro" type="xs:positiveInteger">
+</xs:attribute>
+</xs:complexType>
+</xs:element>
+
+<xs:element name="ANCRE">
+<xs:annotation>
+<xs:documentation>
+Référence dans le texte permettant de faire un lien vers cet endroit.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:attribute name="nom" type="xs:string" use="required"/>
+</xs:complexType>
+</xs:element>
+
+<xs:element name="LISTE">
+<xs:annotation>
+<xs:documentation>
+Liste à puces.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:sequence maxOccurs="unbounded">
+<xs:element ref="EL"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+
+<xs:element name="LISTENUM">
+<xs:annotation>
+<xs:documentation>
+Liste numérotée.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:sequence maxOccurs="unbounded">
+<xs:element ref="EL"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+
+<xs:element name="EL">
+<xs:annotation>
+<xs:documentation>
+Element de liste.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType mixed="true">
+<xs:choice maxOccurs="unbounded" minOccurs="0">
+<xs:element ref="LISTE"/>
+<xs:element ref="LIEN"/>
+<xs:element ref="NOTE"/>
+<xs:element ref="IMAGE"/>
+<xs:element ref="BR"/>
+<xs:element ref="MATH"/>
+<xs:element ref="DOCUMENT"/>
+<xs:element ref="EMBED"/>
+<xs:group ref="styles"/>
+</xs:choice>
+</xs:complexType>
+</xs:element>
+
+<xs:element name="NOTE">
+<xs:annotation>
+<xs:documentation>
+Note de bas de page. Le texte à l&apos;intérieur de l&apos;élément NOTE sera affiché en bas du document.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType mixed="true">
+<xs:choice maxOccurs="unbounded" minOccurs="0">
+<xs:group ref="styles"/>
+</xs:choice>
+<xs:attribute name="mention" type="xs:string" use="optional"/>
+</xs:complexType>
+</xs:element>
+
+<xs:element name="IMAGE">
+<xs:annotation>
+<xs:documentation>
+Référence dans une image déjà téléchargée dans SPIP.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:attribute name="numéro" type="xs:positiveInteger" use="required"/>
+<xs:attribute default="gauche" name="position" use="required">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:enumeration value="gauche"/>
+<xs:enumeration value="milieu"/>
+<xs:enumeration value="droite"/>
+<xs:enumeration value="danstexte"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+</xs:complexType>
+</xs:element>
+
+<xs:element name="TABLE">
+<xs:annotation>
+<xs:documentation>
+Tableau.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:sequence maxOccurs="unbounded">
+<xs:element ref="TR"/>
+</xs:sequence>
+<xs:attribute name="titre" type="xs:string" use="optional"/>
+<xs:attribute name="résumé" type="xs:string" use="optional"/>
+</xs:complexType>
+</xs:element>
+
+<xs:element name="TR">
+<xs:annotation>
+<xs:documentation>
+Ligne de tableau.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:choice maxOccurs="unbounded">
+<xs:element ref="TH"/>
+<xs:element ref="TD"/>
+</xs:choice>
+</xs:complexType>
+</xs:element>
+
+
+<xs:element name="TH">
+<xs:annotation>
+<xs:documentation>
+Cellule entête de tableau.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType mixed="true">
+<xs:choice maxOccurs="unbounded" minOccurs="0">
+<xs:element ref="LIEN"/>
+<xs:element ref="NOTE"/>
+<xs:element ref="IMAGE"/>
+<xs:element ref="BR"/>
+<xs:element ref="MATH"/>
+<xs:element ref="DOCUMENT"/>
+<xs:element ref="EMBED"/>
+<xs:group ref="styles"/>
+</xs:choice>
+<xs:attribute name="colspan" type="xs:positiveInteger"/>
+<xs:attribute name="rowspan" type="xs:positiveInteger"/>
+<xs:attribute name="align" use="optional">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:enumeration value="left"/>
+<xs:enumeration value="center"/>
+<xs:enumeration value="right"/>
+<xs:enumeration value="justify"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+</xs:complexType>
+</xs:element>
+
+<xs:element name="TD">
+<xs:annotation>
+<xs:documentation>
+Cellule de tableau.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType mixed="true">
+<xs:choice maxOccurs="unbounded" minOccurs="0">
+<xs:element ref="LIEN"/>
+<xs:element ref="NOTE"/>
+<xs:element ref="IMAGE"/>
+<xs:element ref="BR"/>
+<xs:element ref="MATH"/>
+<xs:element ref="DOCUMENT"/>
+<xs:element ref="EMBED"/>
+<xs:group ref="styles"/>
+</xs:choice>
+<xs:attribute name="colspan" type="xs:positiveInteger"/>
+<xs:attribute name="rowspan" type="xs:positiveInteger"/>
+<xs:attribute name="align" use="optional">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:enumeration value="left"/>
+<xs:enumeration value="center"/>
+<xs:enumeration value="right"/>
+<xs:enumeration value="justify"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+</xs:complexType>
+</xs:element>
+
+<xs:element name="BR">
+<xs:annotation>
+<xs:documentation>
+Saut de ligne forcé.
+</xs:documentation>
+</xs:annotation>
+</xs:element>
+
+<xs:element name="SEPARATION">
+<xs:annotation>
+<xs:documentation>
+Ligne de séparation.
+</xs:documentation>
+</xs:annotation>
+</xs:element>
+
+<xs:element name="CITATION">
+<xs:annotation>
+<xs:documentation>
+Pour citer un extrait de message. Le texte à l&apos;intérieur de l&apos;élément sera un peu décalé par rapport au reste du texte.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType mixed="true">
+<xs:choice maxOccurs="unbounded" minOccurs="0">
+<xs:element ref="LIEN"/>
+<xs:element ref="NOTE"/>
+<xs:element ref="BR"/>
+<xs:element ref="MATH"/>
+<xs:group ref="styles"/>
+</xs:choice>
+</xs:complexType>
+</xs:element>
+
+<xs:element name="MATH" type="xs:string">
+<xs:annotation>
+<xs:documentation>
+Equation utilisant la syntaxe TeX.
+</xs:documentation>
+</xs:annotation>
+</xs:element>
+
+<xs:element name="DOCUMENT">
+<xs:annotation>
+<xs:documentation>
+Référence vers un document déjà téléchargée dans SPIP.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:attribute name="numéro" type="xs:positiveInteger" use="required"/>
+<xs:attribute default="gauche" name="position" use="required">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:enumeration value="gauche"/>
+<xs:enumeration value="milieu"/>
+<xs:enumeration value="droite"/>
+<xs:enumeration value="danstexte"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+</xs:complexType>
+</xs:element>
+
+<xs:element name="EMBED">
+<xs:annotation>
+<xs:documentation>
+Document multimédia à inclure dans une page (par ex. animation MPEG ou Quicktime)
+</xs:documentation>
+</xs:annotation>
+<xs:complexType>
+<xs:attribute name="numéro" type="xs:positiveInteger" use="required"/>
+<xs:attribute default="gauche" name="position" use="required">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:enumeration value="gauche"/>
+<xs:enumeration value="milieu"/>
+<xs:enumeration value="droite"/>
+<xs:enumeration value="danstexte"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:attribute>
+</xs:complexType>
+</xs:element>
+
+<xs:element name="GLOSSAIRE" type="xs:string">
+<xs:annotation>
+<xs:documentation>
+Mot qui pointera vers une entrée d'un glossaire.
+</xs:documentation>
+</xs:annotation>
+</xs:element>
+
+<xs:element name="CODE" type="xs:string">
+<xs:annotation>
+<xs:documentation>
+Bout de code.
+</xs:documentation>
+</xs:annotation>
+</xs:element>
+
+<xs:element name="CADRE" type="xs:string">
+<xs:annotation>
+<xs:documentation>
+Texte de code, qui sera placé dans une zone de texte de formulaire permettant un copier-coller facile de l'ensemble.
+</xs:documentation>
+</xs:annotation>
+</xs:element>
+
+<xs:element name="POESIE">
+<xs:annotation>
+<xs:documentation>
+Poésie. Les retours à la ligne sont automatiques à l'intérieur de ces balises.
+</xs:documentation>
+</xs:annotation>
+<xs:complexType mixed="true">
+<xs:choice maxOccurs="unbounded" minOccurs="0">
+<xs:group ref="styles"/>
+</xs:choice>
+</xs:complexType>
+</xs:element>
+
+<xs:group name="styles">
+<xs:choice>
+<xs:element ref="I"/>
+<xs:element ref="B"/>
+<xs:element ref="SUP"/>
+<xs:element ref="SUB"/>
+</xs:choice>
+</xs:group>
+
+<xs:element name="I" type="xs:string">
+<xs:annotation>
+<xs:documentation>
+Italique.
+</xs:documentation>
+</xs:annotation>
+</xs:element>
+
+<xs:element name="B" type="xs:string">
+<xs:annotation>
+<xs:documentation>
+Gras.
+</xs:documentation>
+</xs:annotation>
+</xs:element>
+
+<xs:element name="SUP" type="xs:string">
+<xs:annotation>
+<xs:documentation>
+Exposant.
+</xs:documentation>
+</xs:annotation>
+</xs:element>
+
+<xs:element name="SUB" type="xs:string">
+<xs:annotation>
+<xs:documentation>
+Indice.
+</xs:documentation>
+</xs:annotation>
+</xs:element>
+
+</xs:schema>

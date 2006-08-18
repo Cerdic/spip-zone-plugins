@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html><head>    <title>Edition</title>    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">    <script type="text/javascript">
+
+function enregistrer() {
+  if (window.opener && !window.opener.closed) {
+      texte = document.applets['jaxe'].getTexte();
+      if (texte != null)
+          window.opener.document.formulaire.texte.value = texte;
+  }
+  window.close();
+}
+
+function charger() {
+    document.applets['jaxe'].setTexte(window.opener.document.formulaire.texte.value);
+}
+
+    </script>
+</head><body onload="charger()">
+    <applet name="jaxe" code="JaxeSPIPApplet" archive="JaxeSPIPApplet.jar" width="680" height="540">
+        Java 1.4+ est nécessaire pour afficher cette applet.
+    </applet>
+    <form action="">
+        <input type="button" value="Enregistrer" onclick="enregistrer()">
+    </form>
+    <em>Attention ! N'oubliez pas d'enregistrer vos modifications dans Jaxe ET dans l'&eacute;diteur de SPIP</em></body>
+</html>

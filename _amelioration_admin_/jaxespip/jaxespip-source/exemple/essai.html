@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html><head>    <title>Essai d'applet Jaxe pour SPIP</title>    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">    <script type="text/javascript">
+
+function editer() {
+    editwin = window.open('edition.html', '', 'scrollbars=yes,scrolling=auto,toolbar=no,directories=no,menubar=no,status=no, width=720,height=640');
+}
+
+    </script>
+</head><body>
+    Texte à éditer :
+    <br>
+    <form name="formulaire">
+        <input type="button" value="Editer avec Jaxe" onclick="editer()">
+        <br>
+        <textarea name="texte" rows="20" cols="80">
+{{{STYLES}}}
+
+Styles : {{gras}} {italique} &lt;sub&gt;indice&lt;/sub&gt; &lt;sup&gt;exposant&lt;/sup&gt;
+
+----
+
+{{{LIENS}}}
+
+[lien externe->http://media4.obspm.fr/], liens vers [auteur->auteur 36], [mot-clé->mot12],
+[rubrique->rub5], [brève->br1], [ancre->#suite], [image->img10], [site syndiqué->site10]
+
+ancre : [suite<-]
+
+----
+
+{{{LISTES}}}
+
+- une
+- simple
+- liste
+
+-# avec
+-# des
+-# numéros
+
+- Ton cheval est :
+-* alezan;
+-* bai ;
+-* noir ;
+- mais mon lapin est :
+-* blanc ;
+-** angora ;
+-** ou à poils ras.
+
+----
+
+{{{IMAGES}}}
+
+image :
+&lt;IMG3|left&gt;
+
+document :
+&lt;DOC4|center&gt;
+
+embed :
+&lt;EMB5|right&gt;
+
+image dans &lt;IMG3&gt; le texte
+
+----
+
+{{{TABLES}}}
+
+table HTML
+&lt;table&gt;
+&lt;tr&gt;&lt;th&gt;colonne 1&lt;/th&gt;&lt;th&gt;colonne 2&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt;grande cellule 1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;cellule 2&lt;/td&gt;&lt;td&gt;cellule 3&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+table avec titre
+|| titre ||
+| {{colonne 1}} | {{colonne 2}} | {{colonne 3}} |
+| un | deux | trois |
+|4|5|6|
+
+table avec titre et résumé
+|| titre | résumé ||
+| {{colonne 1}} | {{colonne 2}} | {{colonne 3}} |
+| un | deux | trois |
+|4|5|6|
+
+| {{colonne 1}} | {{colonne 2}} | {{colonne 3}} |
+| sur
+_ trois
+_ lignes | deux | trois |
+|4|5|6|
+
+----
+
+{{{DIVERS}}}
+
+&lt;quote&gt;
+J'ai pas dit ça !
+&lt;/quote&gt;
+
+équation TeX : &lt;math&gt;x^2&lt;/math&gt;
+
+mot du glossaire : [?SPIP]
+
+note de bas de page sans mention : [[ceci est une note]]
+
+note de bas de page avec une mention particulière : [[&lt;Bau&gt;Baudelaire]]
+
+bout de code : &lt;code&gt;[[&lt;Bau&gt;Baudelaire]] {{gras}}&lt;/code&gt;
+
+horrible erreur de syntaxe : &lt;baliseàlanoix&gt; &amp; "cie"
+
+poésie :
+&lt;poesie&gt;
+Horloge! dieu sinistre, effrayant, impassible,
+Dont le doigt nous menace et nous dit : "Souviens-toi !"
+Les vibrantes Douleurs dans ton coeur plein d'effroi
+Se planteront bientôt comme dans une cible;
+
+Le plaisir vaporeux fuira vers l'horizon
+Ainsi qu'une sylphide au fond de la coulisse;
+Chaque instant te dévore un morceau du délice
+A chaque homme accordé pour toute sa saison
+
+Trois mille six cents fois par heure la Seconde 
+Chuchote: Souviens-toi!- Rapide, avec sa voix
+D'insecte, Maintenant dit : Je suis Autrefois,
+Et j'ai pompé ta vie avec ma trompe immonde!
+
+Remember! Souviens-toi! Prodigue! Esto memor!
+( Mon gosier de métal parle toutes les langues.)
+Les minutes, mortel folâtre, sont des gangues
+Qu'il ne faut pas lâcher sans en extraire l'or!
+
+Souviens-toi que le Temps est un joueur avide
+Qui gagne sans tricher, à tout coup! c'est la loi,
+Le jour décroît; la nuit augmente; souviens-toi!
+La gouffre a toujours soif; la clepsydre se vide,
+
+Tantôt sonnera l'heure où le divin Hasard,
+Où l'auguste Vertu, ton épouse encore vierge,
+Où le Repentir même ( oh! la dernière auberge! ),
+Où tout te dira : Meurs vieux lâche! il est trop tard!
+&lt;/poesie&gt;
+
+cadre :
+&lt;cadre&gt;
+    while (j &lt; taille - 17 &amp;&amp; !"&lt;caption&gt".equalsIgnoreCase(texte.substring(j, j+9)) &&
+            !"&lt;/table&gt".equalsIgnoreCase(texte.substring(j, j+8)))
+        j++;
+&lt;/cadre&gt;
+
+</textarea>
+    </form></body>
+</html>

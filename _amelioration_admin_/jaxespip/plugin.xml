@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!-- mais pourquoi SPIP n'est-il pas capable de gérer un encodage de caractères ?!? -->
+<!-- les entités HTML sont interdites ici, mais SPIP oblige à en mettre... -->
+<!-- contrairement à ce que l'on pourrait croire, ce fichier n'est donc pas un fichier XML -->
+<plugin>
+	<nom>JaxeSPIP</nom>
+	<auteur>Damien Guillaume</auteur>
+	<version>0.2</version>
+	<etat>experimental</etat>
+	<description>
+
+{{Editeur graphique pour les articles/rubriques/br&egrave;ves}}
+
+[documentation->../plugins/jaxespip/LISEZ_MOI.html]
+
+{Limitations:}
+- Test&eacute; sur SPIP 1.9.0, risque de ne pas marcher sur les versions ult&eacute;rieures de SPIP.
+- incompatible avec d'autres plugins modifiant les fichiers articles_edit.php, rubriques_edit.php ou breves_edit.php.
+
+	</description>
+
+	<prefix>jaxespip</prefix>
+</plugin>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<JAXECFG>
+<DESCRIPTION>Configuration pour SPIP</DESCRIPTION>
+<FICHIERSCHEMA nom="SPIP.xsd"/>
+
+<RACINE>
+<BALISE nom="SPIP" titre="Document SPIP" type="division"/>
+</RACINE>
+
+<MENU titre="Eléments">
+<BALISE nom="INTERTITRE" titre="Intertitre" type="string">
+<PARAMETRE nom="style" valeur="GRAS"/>
+</BALISE>
+
+<BALISE nom="LIEN" titre="Lien" type="string"/>
+
+<BALISE nom="ANCRE" titre="Ancre" type="vide">
+<PARAMETRE nom="titreAtt" valeur="nom"/>
+</BALISE>
+
+<BALISE nom="LISTE" titre="Liste" type="liste"/>
+
+<BALISE nom="LISTENUM" titre="Liste numérotée" type="liste">
+<PARAMETRE nom="typeListe" valeur="NUMEROS"/>
+</BALISE>
+
+<BALISE nom="EL" titre="Elément de liste" type="item"/>
+
+<BALISE nom="NOTE" titre="Note" type="string">
+<PARAMETRE nom="titreAtt" valeur="mention"/>
+</BALISE>
+
+<BALISE nom="IMAGE" titre="Image" type="plugin">
+<PARAMETRE nom="classe" valeur="JEImageSPIP"/>
+</BALISE>
+
+<BALISE nom="TABLE" titre="Table" type="tabletexte">
+<PARAMETRE nom="trTag" valeur="TR"/>
+<PARAMETRE nom="thTag" valeur="TH"/>
+<PARAMETRE nom="tdTag" valeur="TD"/>
+</BALISE>
+<BALISE cache="true" nom="TR" titre=" Ligne pour table" type="zone"/>
+<BALISE cache="true" nom="TH" titre=" Cellule entête pour table" type="string">
+<PARAMETRE nom="style" valeur="GRAS"/>
+</BALISE>
+<BALISE cache="true" nom="TD" titre=" Cellule pour table" type="string"/>
+
+<BALISE nom="BR" titre="Saut de ligne" type="vide"/>
+
+<BALISE nom="SEPARATION" titre="Trait de séparation" type="vide"/>
+
+<BALISE nom="CITATION" titre="Citation" type="zone"/>
+
+<BALISE nom="MATH" titre="Equation TeX" type="string"/>
+
+<BALISE nom="DOCUMENT" titre="Document" type="vide">
+<PARAMETRE nom="titreAtt" valeur="numéro"/>
+</BALISE>
+
+<BALISE nom="EMBED" titre="Embed" type="vide">
+<PARAMETRE nom="titreAtt" valeur="numéro"/>
+</BALISE>
+
+<BALISE nom="GLOSSAIRE" titre="Mot du glossaire" type="string"/>
+
+<BALISE nom="CODE" titre="Bout de code" type="string">
+<PARAMETRE nom="police" valeur="Monospaced"/>
+</BALISE>
+
+<BALISE nom="CADRE" titre="Cadre de long code" type="zone">
+<PARAMETRE nom="police" valeur="Monospaced"/>
+</BALISE>
+
+<BALISE nom="POESIE" titre="Poésie" type="zone"/>
+
+</MENU>
+
+<MENU titre="Style">
+<FONCTION classe="jaxe.FonctionNormal" titre="Normal"/>
+<BALISE nom="I" titre="Italique" type="style">
+<PARAMETRE nom="style" valeur="ITALIQUE"/>
+</BALISE>
+<BALISE nom="B" titre="Gras" type="style">
+<PARAMETRE nom="style" valeur="GRAS"/>
+</BALISE>
+<BALISE nom="SUP" titre="Exposant" type="style">
+<PARAMETRE nom="style" valeur="EXPOSANT"/>
+</BALISE>
+<BALISE nom="SUB" titre="Indice" type="style">
+<PARAMETRE nom="style" valeur="INDICE"/>
+</BALISE>
+</MENU>
+
+<MENU titre="plugins">
+<FONCTION classe="pluginsjaxe.ImportationTableau" titre="Importation de tableau"/>
+</MENU>
+</JAXECFG>
