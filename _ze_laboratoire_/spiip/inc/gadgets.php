@@ -206,8 +206,8 @@ function dessiner_gadgets($id_rubrique) {
 	if ($_COOKIE['spip_accepte_ajax'] != -1) {
 		return "\n<!-- javascript gadgets -->\n" .
 		http_script(
-		"$('#bandeautoutsite').load('".generer_url_prive('inc-gadget-rubriques','lang='.$GLOBALS['spip_lang'],'&')."',null,function(){
-			$('li',document.getElementById('bandeautoutsite')).hover(
+		"$('#bandeautoutsite').load('".generer_url_prive('inc-gadget-rubriques','lang='.$GLOBALS['spip_lang'],'&')."',function(){
+			$(this).find('li').hover(
 				function(){\$(this).addClass('sfhover')},
 				function(){\$(this).removeClass('sfhover')}
 				);

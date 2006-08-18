@@ -1763,6 +1763,8 @@ jQuery.extend({
 		
 		// Wait for a response to come back
 		var onreadystatechange = function(istimeout){
+			//Safari call onreadystatechange with the event as parameter
+			if(!parseInt(istimeout)) istimeout=0;
 			// The transfer is complete and the data is available, or the request timed out
 			if ( xml && (xml.readyState == 4 || istimeout) ) {
 				var status = jQuery.httpSuccess( xml ) && !istimeout ?
