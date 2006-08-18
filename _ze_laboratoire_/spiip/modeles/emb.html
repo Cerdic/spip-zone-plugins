@@ -17,26 +17,26 @@
 
 <BOUCLE_svg (DOCUMENTS) {id_document} {doublons} {extension==svg}>
 
-<embed src='#EVAL{_DIR_RACINE}#FICHIER' [(#ENV*|params_spip_to_attributs_html)] width='#LARGEUR' height='#HAUTEUR' />
+<embed src='[(#DISTANT|=={non}|{#EVAL{_DIR_RACINE}})]#FICHIER' [(#ENV*|params_spip_to_attributs_html)] width='#LARGEUR' height='#HAUTEUR' />
 
 </BOUCLE_svg>
 
 <BOUCLE_real (DOCUMENTS) {id_document}{doublons} {extension==rm|ram|ra}>
 <div><object width='0' height='0'>
-<param name='movie' value='#EVAL{_DIR_RACINE}#FICHIER' />
-<param name='src' value='#EVAL{_DIR_RACINE}#FICHIER' />
-<param name='controls' value='ImageWindow' /><param name='type' value='audio/x-pn-realaudio-plugin' /><param name='console' value='Console#ID_DOCUMENT' /><param name='nojava' value='true' /><inclus src='#EVAL{_DIR_RACINE}#FICHIER'  controls='ImageWindow' type='audio/x-pn-realaudio-plugin' console='Console#ID_DOCUMENT' nojava='true' width='0' height='0'></inclus>
+<param name='movie' value='[(#DISTANT|=={non}|{#EVAL{_DIR_RACINE}})]#FICHIER' />
+<param name='src' value='[(#DISTANT|=={non}|{#EVAL{_DIR_RACINE}})]#FICHIER' />
+<param name='controls' value='ImageWindow' /><param name='type' value='audio/x-pn-realaudio-plugin' /><param name='console' value='Console#ID_DOCUMENT' /><param name='nojava' value='true' /><inclus src='[(#DISTANT|=={non}|{#EVAL{_DIR_RACINE}})]#FICHIER'  controls='ImageWindow' type='audio/x-pn-realaudio-plugin' console='Console#ID_DOCUMENT' nojava='true' width='0' height='0'></inclus>
 </object>
 </div><object width='40' height='25'>
-<param name='movie' value='#EVAL{_DIR_RACINE}#FICHIER' />
-<param name='src' value='#EVAL{_DIR_RACINE}#FICHIER' />
-<param name='controls' value='PlayButton' /><param name='type' value='audio/x-pn-realaudio-plugin' /><param name='console' value='Console#ID_DOCUMENT' /><param name='nojava' value='true' /><inclus src='#EVAL{_DIR_RACINE}#FICHIER'  controls='PlayButton' type='audio/x-pn-realaudio-plugin' console='Console#ID_DOCUMENT' nojava='true' width='40' height='25'></inclus>
+<param name='movie' value='[(#DISTANT|=={non}|{#EVAL{_DIR_RACINE}})]#FICHIER' />
+<param name='src' value='[(#DISTANT|=={non}|{#EVAL{_DIR_RACINE}})]#FICHIER' />
+<param name='controls' value='PlayButton' /><param name='type' value='audio/x-pn-realaudio-plugin' /><param name='console' value='Console#ID_DOCUMENT' /><param name='nojava' value='true' /><inclus src='[(#DISTANT|=={non}|{#EVAL{_DIR_RACINE}})]#FICHIER'  controls='PlayButton' type='audio/x-pn-realaudio-plugin' console='Console#ID_DOCUMENT' nojava='true' width='40' height='25'></inclus>
 </object>
 <object width='-40' height='25'>
-<param name='movie' value='#EVAL{_DIR_RACINE}#FICHIER' />
+<param name='movie' value='[(#DISTANT|=={non}|{#EVAL{_DIR_RACINE}})]#FICHIER' />
 
-<param name='src' value='#EVAL{_DIR_RACINE}#FICHIER' />
-<param name='controls' value='PositionSlider' /><param name='type' value='audio/x-pn-realaudio-plugin' /><param name='console' value='Console#ID_DOCUMENT' /><param name='nojava' value='true' /><inclus src='#EVAL{_DIR_RACINE}#FICHIER'  controls='PositionSlider' type='audio/x-pn-realaudio-plugin' console='Console#ID_DOCUMENT' nojava='true' width='-40' height='25'></inclus>
+<param name='src' value='[(#DISTANT|=={non}|{#EVAL{_DIR_RACINE}})]#FICHIER' />
+<param name='controls' value='PositionSlider' /><param name='type' value='audio/x-pn-realaudio-plugin' /><param name='console' value='Console#ID_DOCUMENT' /><param name='nojava' value='true' /><inclus src='[(#DISTANT|=={non}|{#EVAL{_DIR_RACINE}})]#FICHIER'  controls='PositionSlider' type='audio/x-pn-realaudio-plugin' console='Console#ID_DOCUMENT' nojava='true' width='-40' height='25'></inclus>
 </object>
 
 </BOUCLE_real>
@@ -45,12 +45,12 @@
 <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" 
  codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" 
  width='#GET{largeur}' height='#GET{hauteur}'>
-	<param name='movie' value='#EVAL{_DIR_RACINE}#FICHIER' />
+	<param name='movie' value='[(#DISTANT|=={non}|{#EVAL{_DIR_RACINE}})]#FICHIER' />
 	[(#ENV{quality,''}|?{'',' '})<param name="quality" value="high" />]
 	[(#ENV*|params_spip_to_params_html)]
 
 	<!--[if !IE]> <-->
-	<object data="#EVAL{_DIR_RACINE}#FICHIER" width='#GET{largeur}' height='#GET{hauteur}' type="application/x-shockwave-flash">
+	<object data="[(#DISTANT|=={non}|{#EVAL{_DIR_RACINE}})]#FICHIER" width='#GET{largeur}' height='#GET{hauteur}' type="application/x-shockwave-flash">
 		[(#ENV{quality,''}|?{'',' '})<param name="quality" value="high" />]
 		[(#ENV*|params_spip_to_params_html)]
 		<param name="pluginurl" value="http://www.macromedia.com/go/getflashplayer" />
@@ -63,10 +63,10 @@
 <BOUCLE_inclus (DOCUMENTS) {id_document} {doublons} {inclus=embed}>
 
 <object width='#GET{largeur}' height='#GET{hauteur}'>
-<param name='movie' value='#EVAL{_DIR_RACINE}#FICHIER' />
-<param name='src' value='#EVAL{_DIR_RACINE}#FICHIER' />
+<param name='movie' value='[(#DISTANT|=={non}|{#EVAL{_DIR_RACINE}})]#FICHIER' />
+<param name='src' value='[(#DISTANT|=={non}|{#EVAL{_DIR_RACINE}})]#FICHIER' />
 [(#ENV*|params_spip_to_params_html)]
-<embed src='#EVAL{_DIR_RACINE}#FICHIER' [(#ENV*|params_spip_to_attributs_html)] width='#GET{largeur}' height='#GET{hauteur}'></embed></object>
+<embed src='[(#DISTANT|=={non}|{#EVAL{_DIR_RACINE}})]#FICHIER' [(#ENV*|params_spip_to_attributs_html)] width='#GET{largeur}' height='#GET{hauteur}'></embed></object>
 
 </BOUCLE_inclus>
 
