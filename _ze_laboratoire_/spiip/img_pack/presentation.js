@@ -6,7 +6,7 @@ var puce_popup;
 $(document).ready(function() {
 		//init submenus
 		//console.time("total");
-		$('#bandeau-principal div.bandeau_sec').css({'display':'none','position':'absolute'});
+		//$('#bandeau-principal div.bandeau_sec').css({'display':'none','position':'absolute'});
 		//activate submenus
 		$('#bandeau-principal>div.h-list li[@id]').mouseover(showMenu);
 		$('#bandeau_couleur li.bandeau_couleur a[@id]').mouseover(showMenu);
@@ -16,13 +16,13 @@ $(document).ready(function() {
 		$('img.swapCouche').click(jquerySwapCouche).css({display:'inline',cursor:'pointer'});
 		//console.timeEnd("couche");
 		//init ajax links
-		$('a.ajax').click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
+		$('a.ajax').click(execAjaxLinks).not('[@href]').css({cursor:'pointer',visibility:'visible'});
 		//init fast change of an article state
 		//console.time("faststatut");
-		puce_popup = $('div.puce_article_fixe,div.puce_breve_fixe').mouseover(function(){puce_popup.hide();$('+div',this).show();false;})
+		puce_popup = $('div.puce_article_fixe,div.puce_breve_fixe').mouseover(function(){puce_popup.hide();$('+div',this).show();return false;})
 		.find('+div').hover(function(){},function(){puce_popup.hide();return false;})
 		//compatibility with default style_prive (temporary)
-		.css({'visibility':'visible','display':'none'});
+		.css({visibility:'visible',display:'none'});
 		//console.timeEnd("faststatut");
 		//console.timeEnd("total");
 	}
@@ -30,15 +30,17 @@ $(document).ready(function() {
 
 function showMenu() {
 	if(init_gauche) {
-		$('#haut-page div.bandeau_sec').
+		$('#bandeau-principal div.bandeau_sec').
 		//before adjusting offset let the submenu have a layout
-		css({'visible':'hidden','display':'block'}).each(decalerCouche).
+		css({visibility:'hidden',display:'block'}).each(decalerCouche).
 		//reset visibility
-		css({'visible':'visible','display':'none'});
+		css({visibility:'visible',display:'none'});
 		init_gauche = false;
 	}
 	active_menu.hide();
 	active_menu=$('#'+this.id.replace(/^bouton\d?_/,'bandeau')).show();
+	//bug safari..runtime style returns null 
+	active_menu.get(0).style.display='block';
 }
 
 function decalerCouche() {
@@ -82,8 +84,8 @@ function selec_statut(id, type, decal, puce, script) {
 	}
 
 	if (accepter_change_statut) {
-		$('#statutdecal'+type+id).css({'marginLeft':decal+'px','visibility':'hidden'})
-		$('#imgstatut'+type+id).set('src',puce);
+		$('#statutdecal'+type+id).css({marginLeft:decal+'px',display:'none'})
+		$('#imgstatut'+type+id).attr('src',puce);
 		
 		frames['iframe_action'].location.href = script;
 	}

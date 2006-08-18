@@ -672,7 +672,7 @@ function puce_statut_breve($id, $statut, $type, $droit) {
 function afficher_script_statut($id, $type, $n, $img, $statut, $title)
 {
   include_spip('inc/actions');
-  return http_href_img("javascript:selec_statut('$id', '$type', -1, '" .
+  return http_href_img("javascript:selec_statut('$id', '$type', $n, '" .
 		      http_wrapper($img) .
 		      "', '" .
 		       generer_action_auteur("instituer_$type","$id-$statut") .
@@ -2140,7 +2140,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 
 	echo "</div>";	
 	echo "</div>\n"; // referme: <div class='bandeau-principal' align='center'>"
-	//echo "<script type='text/javascript'>$('#bandeau-principal div.bandeau_sec').css({'display':'none','position':'absolute'});</script>";
+	echo "<script type='text/javascript'>$('#bandeau-principal div.bandeau_sec').css({'display':'none','position':'absolute'});</script>";
 	
 	//
 	// Bandeau colore
@@ -2156,7 +2156,7 @@ if (true /*$bandeau_colore*/) {
 	}
 
 	echo "\n<div id='bandeau_couleur' style=\"max-height: 40px; width: 100%; border-bottom: solid 1px white;$style\">";
-	echo "<div class='h-list centered' style='width:{$largeur}px'><ul>";
+	echo "<div class='h-list centered vcentered' style='width:{$largeur}px'><ul>";
 
 	echo "<li id='bandeau_couleur1' class='bandeau_couleur'><div class='menu-item'>";
 
