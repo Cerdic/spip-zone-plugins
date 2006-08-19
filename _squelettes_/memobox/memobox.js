@@ -25,7 +25,6 @@ $(document).ready(function(){
 })
 
 function memobox_dropit(drop,drag) {
-	//if(!$('li',memobox_ul).size()) $('>p',drop).remove(); 
 	memobox_addItem.apply(memobox_ul.append(MEMOBOX_ITEM),[drag.cloneNode(true)]);
 	memobox_createCookieString();
 }
@@ -51,7 +50,8 @@ function memobox_createCookieString() {
 }
 
 function memobox_init() {
-	var items = memobox_readCookie('memobox').split(',');
+	var cookie = memobox_readCookie('memobox');
+	var items = cookie ? cookie.split(',') : [];
 	for(var i=0;i<items.length-1;i++) {
 		var args = items[i].split('|'); 
 		memobox_addItem.apply(memobox_ul.append(MEMOBOX_ITEM),['<a href="'+args[0]+'" title="'+args[1]+'">'+args[2]+'</a>']);

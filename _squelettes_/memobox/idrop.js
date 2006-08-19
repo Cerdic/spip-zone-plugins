@@ -17,8 +17,8 @@ jQuery.drophighlight = function ()
 	var i;
 	for (i in jQuery.droppables) {
 		if ( i != 'atLeast') {
-			iEL = jQuery.droppables[i].cur[0];
-			if (jQuery.hasWord(jQuery.drug,iEL.f.a)) {
+			iEL = jQuery.droppables[i][0];
+			if (jQuery.className.has(jQuery.drug,iEL.f.a)) {
 				if (iEL.f.m == false) {
 					iEL.f.p = jQuery.getPos(iEL);
 					iEL.f.m = true;
@@ -48,7 +48,7 @@ jQuery.dropcheck = function (e)
 	var i;
 	for (i in jQuery.droppablesHighlited) {
 		if ( i != 'atLeast') {
-			iEL = jQuery.droppablesHighlited[i].cur[0];
+			iEL = jQuery.droppablesHighlited[i][0];
 			if (iEL.f.ac) {
 				jQuery.droppablesHighlited[i].removeClass(iEL.f.ac);
 			}
@@ -80,7 +80,7 @@ jQuery.dropcheckhover = function ( x, y, ex, ey)
 	for (i in jQuery.droppablesHighlited)
 	{
 		if ( i != 'atLeast') {
-			iEL = jQuery.droppablesHighlited[i].cur[0];
+			iEL = jQuery.droppablesHighlited[i][0];
 				cond = false;
 			if ( jQuery.overzone == false) {
 				switch (iEL.f.t)
@@ -137,8 +137,8 @@ jQuery.dropcheckhover = function ( x, y, ex, ey)
 		}
 	}
 	if (jQuery.sortables && jQuery.overzone == false) {
-		jQuery.sortHelper.cur[0].style.display = 'none';
-		jQuery('body').append(jQuery.sortHelper.cur[0]);
+		jQuery.sortHelper[0].style.display = 'none';
+		jQuery('body').append(jQuery.sortHelper[0]);
 	}
 };
 

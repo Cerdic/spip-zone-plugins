@@ -29,7 +29,7 @@ jQuery.dragstart = function(e)
 		elm.d.sy = e.clientY;
 	}
 	dEs = elm.style;
-	if (jQuery.hasWord(elm.parentNode, 'fxWrapper')) {
+	if (jQuery.className.has(elm.parentNode, 'fxWrapper')) {
 		p = jQuery(elm.parentNode);
 		p.before(elm);
 		dEs.top = p.css('top') + 'px';
@@ -83,7 +83,7 @@ jQuery.dragstart = function(e)
 			top: 		'0px'
 		}
 	);
-	$(elm).before(jQuery.dragHelper.cur[0]);
+	$(elm).before(jQuery.dragHelper[0]);
 	jQuery.dragHelper.append(c);/*
 				.css('left', elm.d.oC.x + 'px')
 				.css('top', elm.d.oC.y + 'px' )
@@ -95,7 +95,7 @@ jQuery.dragstart = function(e)
 						overflow:	'hidden'
 					}
 				);*/
-	dhs = jQuery.dragHelper.cur[0].style;
+	dhs = jQuery.dragHelper[0].style;
 	dhs.left = elm.d.oC.x + 'px';
 	dhs.top = elm.d.oC.y + 'px';
 	dhs.width = elm.d.oC.wb + 'px';
@@ -162,7 +162,7 @@ jQuery.dragstop = function(e)
 	dEs.marginRight = jQuery.drug.d.oM.r + 'px';
 	dEs.marginBottom = jQuery.drug.d.oM.b + 'px';
 	dEs.marginLeft = jQuery.drug.d.oM.l + 'px';
-	hp = jQuery.getPos(jQuery.dragHelper.cur[0]);
+	hp = jQuery.getPos(jQuery.dragHelper[0]);
 	if (jQuery.drug.d.revert == false) {
 		nx = jQuery.drug.d.oR.x + (jQuery.drug.d.nx - jQuery.drug.d.oC.x);
 		ny = (jQuery.drug.d.oR.y + (jQuery.drug.d.ny - jQuery.drug.d.oC.y));
@@ -176,13 +176,13 @@ jQuery.dragstop = function(e)
 			jQuery.drug.style.top = ny + 'px';
 		}
 		jQuery.dragHelper.empty();
-		jQuery.dragHelper.cur[0].style.display = 'none';
+		jQuery.dragHelper[0].style.display = 'none';
 	} else {
 		if (jQuery.drug.d.fx > 0) {
 			jQuery.drug.d.prot = true;
-			y = new jQuery.fx(jQuery.dragHelper.cur[0],{duration:jQuery.drug.d.fx}, 'top');
+			y = new jQuery.fx(jQuery.dragHelper[0],{duration:jQuery.drug.d.fx}, 'top');
 			x = new jQuery.fx(
-				jQuery.dragHelper.cur[0],
+				jQuery.dragHelper[0],
 				{
 					duration : jQuery.drug.d.fx,
 					complete : function()
@@ -200,7 +200,7 @@ jQuery.dragstop = function(e)
 				'left'
 			);
 			if(jQuery.overzone && jQuery.sortables) {
-				dh = jQuery.getPos(jQuery.sortHelper.cur[0]);
+				dh = jQuery.getPos(jQuery.sortHelper[0]);
 			} else {
 				dh = false;
 			}
@@ -209,7 +209,7 @@ jQuery.dragstop = function(e)
 		} else {
 			//jQuery.dragHelper.css('display','none');
 			jQuery.dragHelper.empty();
-			jQuery.dragHelper.cur[0].style.display = 'none';
+			jQuery.dragHelper[0].style.display = 'none';
 		}
 	}
 	
@@ -265,8 +265,8 @@ jQuery.drag = function(e,init)
 		jQuery.drug.d.ny = jQuery.drug.d.ny < jQuery.drug.d.cont.y ? jQuery.drug.d.cont.y : ((jQuery.drug.d.ny + jQuery.drug.d.oC.h) > (jQuery.drug.d.cont.y + jQuery.drug.d.cont.h) ? (jQuery.drug.d.cont.y + ((jQuery.drug.d.cont.h - jQuery.drug.d.oC.h) >= 0 ? (jQuery.drug.d.cont.h - jQuery.drug.d.oC.h) : jQuery.drug.d.cont.h)) : jQuery.drug.d.ny);
 	}
 
-	jQuery.dragHelper.cur[0].style.left = jQuery.drug.d.nx + 'px';
-	jQuery.dragHelper.cur[0].style.top = jQuery.drug.d.ny + 'px';
+	jQuery.dragHelper[0].style.left = jQuery.drug.d.nx + 'px';
+	jQuery.dragHelper[0].style.top = jQuery.drug.d.ny + 'px';
 	
 	if (jQuery.drug.d.si && jQuery.drug.d.onslide) {
 		x = (jQuery.drug.d.oR.x + (jQuery.drug.d.nx - jQuery.drug.d.oC.x));
@@ -291,10 +291,10 @@ jQuery.fn.Draggable = function(o)
     if (!jQuery.dragHelper) {
 		jQuery('body').append('<div id="dragHelper"></div>');
 		jQuery.dragHelper = jQuery('#dragHelper');
-		jQuery.dragHelper.cur[0].style.position = 'absolute';
-		jQuery.dragHelper.cur[0].style.display = 'none';
-		jQuery.dragHelper.cur[0].style.cursor = 'move';
-		jQuery.dragHelper.cur[0].style.listStyle = 'none';
+		jQuery.dragHelper[0].style.position = 'absolute';
+		jQuery.dragHelper[0].style.display = 'none';
+		jQuery.dragHelper[0].style.cursor = 'move';
+		jQuery.dragHelper[0].style.listStyle = 'none';
 		/*jQuery.dragHelper.css(
 			{
 				position:	'absolute',
@@ -303,8 +303,8 @@ jQuery.fn.Draggable = function(o)
 			}
 		);*/
 		if (window.ActiveXObject) {
-			jQuery.dragHelper.cur[0].onselectstart = function(){return false;};
-			jQuery.dragHelper.cur[0].ondragstart = function(){return false;};
+			jQuery.dragHelper[0].onselectstart = function(){return false;};
+			jQuery.dragHelper[0].ondragstart = function(){return false;};
 		}
     }
     if (!o) {
