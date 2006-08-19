@@ -1,23 +1,23 @@
 <?php
 /*****************************************************************************\
-* SPIP-CARTO, Solution de partage et d’élaboration d’information 
+* SPIP-CARTO, Solution de partage et dï¿½ï¿½laboration dï¿½information 
 * (Carto)Graphique sous SPIP
 *
 * Copyright (c) 2005
 *
-* Stéphane Laurent, François-Xavier Prunayre, Pierre Giraud, Jean-Claude 
+* Stï¿½phane Laurent, Franï¿½ois-Xavier Prunayre, Pierre Giraud, Jean-Claude 
 * Moissinac et tous les membres du projet SPIP-CARTO V1 (Annie Danzart - Arnaud
-* Fontaine - Arnaud Saint Léger - Benoit Veler - Christine Potier - Christophe 
+* Fontaine - Arnaud Saint Lï¿½ger - Benoit Veler - Christine Potier - Christophe 
 * Betin - Daniel Faivre - David Delon - David Jonglez - Eric Guichard - Jacques
-* Chatignoux - Julien Custot - Laurent Jégou - Mathieu Géhin - Michel Briand - 
-* Mose - Olivier Frérot - Philippe Fournel - Thierry Joliveau)
+* Chatignoux - Julien Custot - Laurent Jï¿½gou - Mathieu Gï¿½hin - Michel Briand - 
+* Mose - Olivier Frï¿½rot - Philippe Fournel - Thierry Joliveau)
 * 
 * voir : http://www.geolibre.net/article.php3?id_article=16
 *
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL. 
-* Pour plus de details voir le fichier COPYING.txt ou l’aide en ligne.
+* Pour plus de details voir le fichier COPYING.txt ou lï¿½aide en ligne.
 * 
-— -
+ï¿½ -
 This program is free software ; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation ; either version 2 of the License, or
@@ -33,10 +33,11 @@ along with this program (COPYING.txt) ; if not, write to
 the Free Software Foundation, Inc.,
 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 or check http://www.gnu.org/copyleft/gpl.html
-— -
+ï¿½ -
 *
 \***************************************************************************/
 function exec_cartes_import() {
+include_spip("base/carto");
 include_spip ("inc/carto");
 //include_spip ("inc/carto_fonctions");
 include_spip ("inc/carto_import");
@@ -68,7 +69,7 @@ $id_carte = intval($id_carte);
 //$flag_mots = lire_meta("carto_mots");
 $flag_mots=true;
 $nouveau=false;
-$dir = 'upload';						// Répertoire où chercher les fichiers
+$dir = 'upload';						// Rï¿½pertoire oï¿½ chercher les fichiers
 
 
 if ($id_carte) {
@@ -130,7 +131,7 @@ if ($id_carte) {
 	
 	//
 	// Importer des objets / Formulaire
-	//	1.Sélection d'un fichier du répertoire upload
+	//	1.Sï¿½lection d'un fichier du rï¿½pertoire upload
 	//	2.Analyse du fichier
 	// 	3.Importation
 	switch ($step)
@@ -153,18 +154,18 @@ if ($id_carte) {
 					echo "<input type='hidden' name='step' value='3'>";
 					echo "<input type='hidden' name='file' value='".$file."'>";
 				
-					// TODO : Paramètrage du séparateur de champ
-					// TODO : Filtrer les champs de type numérique et les autres pour le choix des champs pour les coordonnées
+					// TODO : Paramï¿½trage du sï¿½parateur de champ
+					// TODO : Filtrer les champs de type numï¿½rique et les autres pour le choix des champs pour les coordonnï¿½es
 					
 					$rec = new csvUtil($dir."/".$file, ";");		// Ouverture du fichier & lecture
 					$i = 0;
 					$nbcol = $rec->numCols();
-					while ($i<$nbcol) {								// Création d'une liste des colonnes du fichiers
+					while ($i<$nbcol) {								// Crï¿½ation d'une liste des colonnes du fichiers
 							$collist .= "<option value='".$i."'>".$rec->getField(0, $i)."</option>";
 							$i++;
 					}
 					echo "<ul>";
-					// Création du formulaire d'importation
+					// Crï¿½ation du formulaire d'importation
 					echo "<li>"._T("spipcarto:objet_titre")."<select name='col'>" .
 							"<option value='null'>"._T("spipcarto:objet_nouvel")."</option>\n".
 							$collist.
@@ -175,7 +176,7 @@ if ($id_carte) {
 							"<option value='null'>null</option>\n".
 							$collist.
 							"</select>\n".
-							_L("(null par défaut)")."</li>";
+							_L("(null par dï¿½faut)")."</li>";
 			
 					echo "<li>"._T("spipcarto:objet_url").
 							"<br/><input id='link_prefix' name='link_prefix' value='' size='6'/>\n" .
@@ -232,7 +233,7 @@ if ($id_carte) {
 						 <sym>Waypoint</sym>
 						 <type>Gas Station</type>
 						 
-						 -> Importer les types via des mots clés ?
+						 -> Importer les types via des mots clï¿½s ?
 					 */
 					$collist = "<option value='name'>name</option>";
 					$collist .= "<option value='cmt'>cmt</option>";
@@ -241,7 +242,7 @@ if ($id_carte) {
 					$collist .= "<option value='time'>time</option>";
 					$collist .= "<option value='type'>type</option>";
 					
-					// Création du formulaire d'importation
+					// Crï¿½ation du formulaire d'importation
 							
 				}
 				
@@ -264,7 +265,7 @@ if ($id_carte) {
 					while ($i<$nb) {
 							if (!is_null($rec->getField($i,$col)) && 
 								is_numeric((float)str_replace($rec->getField($i,$x), ',', '.')) && 
-								is_numeric((float)str_replace($rec->getField($i,$y), ',', '.')))		// Champ code non null et x et y numérique
+								is_numeric((float)str_replace($rec->getField($i,$y), ',', '.')))		// Champ code non null et x et y numï¿½rique
 							{	$sql = sprintf ("Insert into spip_carto_objets (id_carto_carte, titre, texte, url_objet, url_logo, geometrie) values 		(%d, '%s', '%s', '%s', '', 'point(%f %f)');\n",
 									($carte=="null"?"0":$id_carte),
 									($col=="null"?"Nouvel Objet":addslashes ($rec->getField($i,$col))),
@@ -313,7 +314,7 @@ if ($id_carte) {
 			echo "<br /></div>";
 			echo debut_block_visible("IMPORT-TXT");			
 			
-			//	1.Sélection d'un fichier du répertoire upload
+			//	1.Sï¿½lection d'un fichier du rï¿½pertoire upload
 			$texte_upload = texte_upload_file($dir, '', 'txt');
 			if ($texte_upload) {
 				echo "<p><div style='color: #505050;'>";
@@ -352,7 +353,7 @@ if ($id_carte) {
 			echo "<strong>"._T("spipcarto:import_gpx")."</strong>";
 			echo "<br /></div>";
 			echo debut_block_invisible("IMPORT-GPS");
-			echo "<strong class='verdana2'>"._L("Sélectionner un fichier") . "</strong> ";
+			echo "<strong class='verdana2'>"._L("Sï¿½lectionner un fichier") . "</strong> ";
 			
 			$texte_upload = texte_upload_file($dir, '', 'gpx');
 			if ($texte_upload) {
@@ -394,7 +395,7 @@ if ($id_carte) {
 			echo "<strong>"._L("Import fichier ESRI (SHP)")."</strong>";
 			echo "<br /></div>";
 			echo debut_block_invisible("IMPORT-SHP");
-			echo "<strong class='verdana2'>"._L("Sélectionner un fichier.") . "</strong> ";		
+			echo "<strong class='verdana2'>"._L("Sï¿½lectionner un fichier.") . "</strong> ";		
 			echo fin_block();
 			fin_cadre_relief();	
 			echo "</form>";		
