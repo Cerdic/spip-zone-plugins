@@ -16,10 +16,6 @@ function spiip_header_prive($flux){
 function spiip_insert_head($flux){
 	$flux .= '<link rel="stylesheet" href="'.generer_url_public('style_spiip_public',$args).'" type="text/css" media="projection, screen" />';
 	$flux .= "<script type='text/javascript' src='".find_in_path('dist_back/pagination-ahah.js')."'></script>\n";
-	if (_request('jqdb')!==NULL)
-		$flux = '<script src="'.find_in_path('jquery_uncompressed.js').'" type="text/javascript"></script>'.$flux;
-	else
-		$flux = '<script src="'.find_in_path('jquery.lite.213.js').'" type="text/javascript"></script>'.$flux;
 	return $flux;
 }
 
