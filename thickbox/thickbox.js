@@ -17,7 +17,22 @@
 
 function TB_Image() {
 	//var t = this.title || this.name || '<small>'+this.href+'</small>';
-	var t = this.title || this.name  ;
+	var t = this.title || this.name ;
+	var dd;
+
+	// affiche les dd qui sont associes a des dt contenant des a class=thickbox
+//	$("#documents_portfolio/dl/dt/a.thickbox/../../dd").each();
+
+//	$("../../dt/../dd", this).show(); // OK mais pas parfait
+//	$("parent::dt/parent::dl/dd", this).show();
+
+//	$(this).parent().next().show();
+
+	// chercher une description (si je suis dans un dt => dd suivants)
+	if (dd = $(this.parentNode.parentNode).find('dd').get(0)) {
+		t += '<div class="description">'+ dd.innerHTML +'</div>';
+	}
+
 	TB_on();
 	TB_show(t,this.href,'image');
 	return false;
