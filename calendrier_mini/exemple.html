@@ -10,37 +10,37 @@
 </head>
 
 <body class="page_sommaire">
-<div id="page">
-<div id="conteneur">
-<div id="contenu">
-
-<h1>Exemple #[(#REM)]CALENDRIER_MINI</h1>
-
-[(#REM) Archives]
-<B_articles_archives>
-<div class="liste-articles">
-[<h2>(#DATE_ARCHIVES|affdate)</h2>][
-<div>(#PAGINATION)</div>
-]<BOUCLE_articles_archives(ARTICLES){pagination 15}{par date}{inverse}{archives ?}>
-<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
-[<div class="texte">(#INTRODUCTION)</div>]
-<br class="nettoyeur" />
-</BOUCLE_articles_archives>[
-<div>(#PAGINATION)</div>
-]</div></B_articles_archives>[
-<h2>Rien pour (#DATE_ARCHIVES|affdate)</h2>
-]<//B_articles_archives>
-
-</div>
-
-<div id="navigation">
-<div id="sidebar">
-#CALENDRIER_MINI
-</div>
-</div>
-
-</div>
+ <div id="page">
+  <div id="conteneur">
+   <div id="contenu">
+   
+   <h1>Exemple #[(#REM)]CALENDRIER_MINI</h1>
+   
+   [(#REM) Archives]
+   <B_articles_archives>
+    <div class="liste-articles">
+    [<h2>(#DATE_ARCHIVES|affdate)</h2>][
+    <div>(#PAGINATION)</div>
+    ]<BOUCLE_articles_archives(ARTICLES){pagination 15}{par date}{inverse}{archives ?}>
+    <h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+    <small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
+    [<div class="texte">(#INTRODUCTION)</div>]
+    <br class="nettoyeur" />
+   </BOUCLE_articles_archives>[
+   <div>(#PAGINATION)</div>
+   ]</div></B_articles_archives>[
+   <h2>Rien pour (#DATE_ARCHIVES|affdate)</h2>
+   ]<//B_articles_archives>
+   
+   </div>
+  
+  <div id="navigation">
+   <div id="sidebar">
+   #CALENDRIER_MINI
+   </div>
+  </div>
+ 
+ </div>
 </div>
 </body>
 </html>

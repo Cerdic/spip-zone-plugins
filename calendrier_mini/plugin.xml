@@ -2,10 +2,10 @@
 	<nom>Mini Calendrier</nom>
 	<auteur>James (james.at.rezo.net)
 _ &copy; 2006 - Licence GNU/GPL</auteur>
-	<version>0.1</version>
-	<etat>dev</etat>
+	<version>0.2</version>
+	<etat>test</etat>
 	<description>Permet l'utilisation d'une balise #CALENDRIER_MINI.
-_ Cette balise affiche un calendrier au design issu de dotclear et donc compatible avec les styles issus de ce blogms.
+_ Cette balise affiche un calendrier au design issu de dotclear et donc compatible avec les styles issus de ce syst&egrave;me de blog.
 _ Documentation, explications et support : _hum... &agrave; d&eacute;finir_
 _ Une fois activ&eacute;, vous pouvez consulter le squelette d'exemple sur cette [d&eacute;monstration locale->../spip.php?page=exemple]	</description>
 	<fonctions>calendrier_mini_fonctions.php</fonctions>
