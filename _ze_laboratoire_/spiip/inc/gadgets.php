@@ -212,17 +212,23 @@ function dessiner_gadgets($id_rubrique) {
 				function(){\$(this).removeClass('sfhover')}
 				);
 		});\n".
-		"$('#bandeaunavrapide').load('".generer_url_prive('inc-gadget-navigation',"id_auteur=$connect_id_auteur&lang=".$GLOBALS['spip_lang'],'&')."');\n
+		"$('#bandeaunavrapide').load('".generer_url_prive('inc-gadget-navigation',"id_auteur=$connect_id_auteur&lang=".$GLOBALS['spip_lang'].
+	($id_rubrique ? '&id_rubrique='.$id_rubrique : ''),'&')."');\n
 		\n" .
 #		"document.getElementById('gadget-recherche').innerHTML = \""
 #		. addslashes(strtr(gadget_recherche($id_rubrique),"\n\r","  "))
 #		. "\";\n" .
-		"document.getElementById('gadget-agenda').innerHTML = \""
-		. addslashes(strtr(gadget_agenda($id_rubrique),"\n\r","  "))
-		. "\";\n" .
-		"$('#bandeauagenda').append(\"<div id='test'></div>\");
-		$('#test').load('".generer_url_prive('inc-gadget-agenda','','&')."');\n
+
+# agenda via InnerHTML
+#		"document.getElementById('gadget-agenda').innerHTML = \""
+#		. addslashes(strtr(gadget_agenda($id_rubrique),"\n\r","  "))
+#		. "\";\n" .
+
+# ou via .load()
+		"$('#gadget-agenda').load('".
+			generer_url_prive('inc-gadget-agenda','','&')."');\n
 		\n" .
+
 		"document.getElementById('gadget-messagerie').innerHTML = \""
 		. addslashes(strtr(gadget_messagerie($id_rubrique),"\n\r","  "))
 		. "\";\n" .
