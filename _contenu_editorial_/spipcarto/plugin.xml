@@ -47,6 +47,11 @@
 	<options>spipcarto_options.php</options>
 
 	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>spipcarto_options.php</inclure>
+	</pipeline>
+	
+	<pipeline>
 		<nom>post_propre</nom>
 		<action>post_propre</action>
 		<inclure>spipcarto.php</inclure>

@@ -41,6 +41,7 @@ or check http://www.gnu.org/copyleft/gpl.html
 if (defined("_ECRIRE_INC_CARTE")) return;
 define("_ECRIRE_INC_CARTE", "1");
 $GLOBALS['rep_cartes']="spipcarto";
+/*
 //////////////////////////////////////////////////
 //////////////////////////////////////////////////
 // PARAMETRAGE
@@ -176,10 +177,12 @@ $GLOBALS['table_des_tables']['carto_objets']="carto_objets";
 $GLOBALS['table_des_tables']['carto_cartes']="carto_cartes";
 
 $GLOBALS['tables_jointures']['spip_mots'][]= 'mots_carto_objets';
-$GLOBALS['tables_jointures']['spip_documents'][]='documents_carto_cartes';
 $GLOBALS['tables_jointures']['spip_carto_objets'][]='mots_carto_objets';
+$GLOBALS['tables_jointures']['spip_documents'][]='documents_carto_cartes';
 $GLOBALS['tables_jointures']['spip_carto_cartes'][]='documents_carto_cartes';
-
+$GLOBALS['tables_jointures']['spip_documents'][]='carto_cartes_articles';
+$GLOBALS['tables_jointures']['spip_carto_cartes'][]='carto_cartes_articles';
+*/
 function boucle_CARTO_CARTES($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$boucle->from[] =  "spip_carto_cartes AS " . $boucle->type_requete;

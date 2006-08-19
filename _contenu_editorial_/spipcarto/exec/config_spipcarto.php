@@ -98,24 +98,111 @@ if ($_REQUEST['installation']=='oui'){
 	if ($row=spip_fetch_array($r)){
 		$tables=unserialize($row[0]);
 		$tables['carto_objets']=true;
-		spip_query("UPDATE ".$table_pref."_meta SET valeur='".serialize($tables)."', maj=now() WHERE nom='MotsPartout:tables_installees';");
+		spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='MotsPartout:tables_installees';");
 	}
 	else {
 		$tables=array('articles'=>true,'rubriques'=>true,'breves'=>true,'syndic'=>true,'documents'=>true,'carto_objets'=>true);
-		spip_query("INSERT INTO ".$table_pref."_meta(nom, valeur, maj) VALUES ('MotsPartout:tables_installees','".serialize($tables)."',now());");
+		spip_query("INSERT INTO ".$table_pref."_meta(nom, valeur, maj) VALUES ('MotsPartout:tables_installees','".addslashes(serialize($tables))."',now());");
 	}
 	spip_query("INSERT INTO ".$table_pref."_meta(nom, valeur, maj) VALUES ('config_precise_groupes','oui',now());");
 	spip_query("UPDATE ".$table_pref."_meta SET valeur='oui', maj=now() WHERE nom='config_precise_groupes';");
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='INDEX_elements_objet';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+			$tables['spip_carto_cartes'] = array('titre'=>8,'texte'=>5);
+			$tables['spip_carto_objets'] = array('titre'=>4,'texte'=>2,'url_objet'=>1);
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='INDEX_elements_objet';");
+		}
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='INDEX_objet_associes';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+						$tables['spip_articles']['spip_carto_cartes'] = 2;
+						$tables['spip_carto_cartes'] = array('spip_carto_objets'=>1);
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='INDEX_objet_associes';");
+		}
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='INDEX_elements_associes';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+			$tables['spip_carto_cartes'] = array('titre'=>3,'texte'=>1);
+			$tables['spip_carto_objets'] = array('titre'=>3,'texte'=>1);
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='INDEX_elements_associes';");
+		}
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='INDEX_critere_indexation';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+			$tables['spip_carto_cartes'] = "statut='publie'";
+			$tables['spip_carto_objets'] = "statut='publie'";
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='INDEX_critere_indexation';");
+		}
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='INDEX_critere_optimisation';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+			$tables['spip_carto_cartes'] = "statut<>'publie'";
+			$tables['spip_carto_objets'] = "statut<>'publie'";
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='INDEX_critere_optimisation';");
+		}
+
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='index_table';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+			$tables[]='spip_carto_cartes';
+			$tables[]='spip_carto_objets';
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='index_table';");
+		}
 }
+//desinstallation
 elseif (($_REQUEST['installation']=='non')&&(($connect_statut == '0minirezo') AND $connect_toutes_rubriques)){
 	spip_query("UPDATE ".$table_pref."_meta SET valeur='non', maj=now() WHERE nom='activer_carto';");
 	$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='MotsPartout:tables_installees';");
 	if ($row=spip_fetch_array($r)){
 		$tables=unserialize($row[0]);
 		$tables['carto_objets']=false;
-		spip_query("UPDATE ".$table_pref."_meta SET valeur='".serialize($tables)."', maj=now() WHERE nom='MotsPartout:tables_installees';");
+		spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='MotsPartout:tables_installees';");
 	}
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='INDEX_elements_objet';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+			unset($tables['spip_carto_cartes']);
+			unset($tables['spip_carto_objets']);
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='INDEX_elements_objet';");
+		}
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='INDEX_objet_associes';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+			unset($tables['spip_carto_cartes']);
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='INDEX_objet_associes';");
+		}
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='INDEX_elements_associes';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+			unset($tables['spip_carto_cartes']);
+			unset($tables['spip_carto_objets']);
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='INDEX_elements_associes';");
+		}
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='INDEX_critere_indexation';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+			unset($tables['spip_carto_cartes']);
+			unset($tables['spip_carto_objets']);
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='INDEX_critere_indexation';");
+		}
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='INDEX_critere_optimisation';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+			unset($tables['spip_carto_cartes']);
+			unset($tables['spip_carto_objets']);
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='INDEX_critere_optimisation';");
+		}
+
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='index_table';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+			unset($tables['spip_carto_cartes']);
+			unset($tables['spip_carto_objets']);
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='index_table';");
+		}
 }
+//upgrade
 elseif (lire_meta("carto_mots")=='oui') {
 		spip_query("DELETE FROM ".$table_pref."_meta WHERE nom='carto_mots';");
 		spip_query("ALTER TABLE ".$table_pref."_carto_cartes ADD statut VARCHAR(8) NOT NULL default 'publie';");
@@ -126,11 +213,53 @@ elseif (lire_meta("carto_mots")=='oui') {
 	if ($row=spip_fetch_array($r)){
 		$tables=unserialize($row[0]);
 		$tables['carto_objets']=true;
-		spip_query("UPDATE ".$table_pref."_meta SET valeur='".serialize($tables)."', maj=now() WHERE nom='MotsPartout:tables_installees';");
+		spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='MotsPartout:tables_installees';");
 	}
 	else {
 		$tables=array('articles'=>true,'rubriques'=>true,'breves'=>true,'syndic'=>true,'documents'=>true,'carto_objets'=>true);
-		spip_query("INSERT INTO ".$table_pref."_meta(nom, valeur, maj) VALUES ('MotsPartout:tables_installees','".serialize($tables)."',now());");
+		spip_query("INSERT INTO ".$table_pref."_meta(nom, valeur, maj) VALUES ('MotsPartout:tables_installees','".addslashes(serialize($tables))."',now());");
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='INDEX_elements_objet';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+			$tables['spip_carto_cartes'] = array('titre'=>8,'texte'=>5);
+			$tables['spip_carto_objets'] = array('titre'=>4,'texte'=>2,'url_objet'=>1);
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='INDEX_elements_objet';");
+		}
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='INDEX_objet_associes';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+						$tables['spip_carto_cartes'] = array('spip_carto_objets'=>1);
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='INDEX_objet_associes';");
+		}
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='INDEX_elements_associes';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+			$tables['spip_carto_cartes'] = array('titre'=>3,'texte'=>1);
+			$tables['spip_carto_objets'] = array('titre'=>3,'texte'=>1);
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='INDEX_elements_associes';");
+		}
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='INDEX_critere_indexation';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+			$tables['spip_carto_cartes'] = "statut='publie'";
+			$tables['spip_carto_objets'] = "statut='publie'";
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='INDEX_critere_indexation';");
+		}
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='INDEX_critere_optimisation';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+			$tables['spip_carto_cartes'] = "statut<>'publie'";
+			$tables['spip_carto_objets'] = "statut<>'publie'";
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='INDEX_critere_optimisation';");
+		}
+
+		$r=spip_query("SELECT valeur FROM ".$table_pref."_meta WHERE nom='index_table';");
+		if ($row=spip_fetch_array($r)){
+			$tables=unserialize($row[0]);
+			$tables[]='spip_carto_cartes';
+			$tables[]='spip_carto_objets';
+			spip_query("UPDATE ".$table_pref."_meta SET valeur='".addslashes(serialize($tables))."', maj=now() WHERE nom='index_table';");
+		}
 	}
 }	
 	ecrire_metas();
