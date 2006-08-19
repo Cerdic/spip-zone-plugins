@@ -946,31 +946,33 @@ function traiter_modeles($texte) {
 	$texte, $matches, PREG_SET_ORDER)) {
 		include_spip('public/assembler');
 		foreach ($matches as $regs) {
-			$modele = inclure_modele($regs[4], $regs[1], $regs[2]);
-			if ($modele !== false) {
-				$rempl = code_echappement($modele);
-				$cherche = $regs[0];
+			if (strtolower($regs[1]) != 'h') {
+				$modele = inclure_modele($regs[4], $regs[1], $regs[2]);
+				if ($modele !== false) {
+					$rempl = code_echappement($modele);
+					$cherche = $regs[0];
 
-				// XHTML : remplacer par une <div onclick> le lien
-				// dans le cas [<docXX>->lien] ; sachant qu'il n'existe
-				// pas de bonne solution en XHTML pour produire un lien
-				// sur une div (!!)...
-				if (substr($rempl, 0, 5) == '<div '
-				AND preg_match(
-				',(<a [^>]+>)\s*'.preg_quote($regs[0]).'\s*</a>,Uims',
-				$texte, $r)) {
-					$lien = extraire_attribut($r[1], 'href');
-					$cherche = $r[0];
-					$rempl = '<div style="cursor:pointer;cursor:hand;" '
-					.'onclick="document.location=\''.$lien
-					.'\'"'
-##						.' href="'.$lien.'"' # href deviendra legal en XHTML2
-					.'>'
-					.$rempl
-					.'</div>';
+					// XHTML : remplacer par une <div onclick> le lien
+					// dans le cas [<docXX>->lien] ; sachant qu'il n'existe
+					// pas de bonne solution en XHTML pour produire un lien
+					// sur une div (!!)...
+					if (substr($rempl, 0, 5) == '<div '
+					AND preg_match(
+					',(<a [^>]+>)\s*'.preg_quote($regs[0]).'\s*</a>,Uims',
+					$texte, $r)) {
+						$lien = extraire_attribut($r[1], 'href');
+						$cherche = $r[0];
+						$rempl = '<div style="cursor:pointer;cursor:hand;" '
+						.'onclick="document.location=\''.$lien
+						.'\'"'
+	##						.' href="'.$lien.'"' # href deviendra legal en XHTML2
+						.'>'
+						.$rempl
+						.'</div>';
+					}
+
+					$texte = str_replace($cherche, $rempl, $texte);
 				}
-
-				$texte = str_replace($cherche, $rempl, $texte);
 			}
 		}
 	}
