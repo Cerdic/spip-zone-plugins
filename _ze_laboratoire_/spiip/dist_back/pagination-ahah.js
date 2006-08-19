@@ -13,9 +13,9 @@ $.blocpagination = function() {
 			$(this).click(function(){
 				$(this.parentNode).before('<div class="ahah_searching_right">&nbsp;</div>');
 				$(blocfrag).load(url[0],null,function(){
-					$.apply(blocfrag,$.addFade);
+					$.addFade.apply(blocfrag);
 					window.location.hash = url[1];
-					$.apply(blocfrag,$.blocpagination);
+					$.blocpagination.apply(blocfrag);
 				});
 				return false;
 			});
