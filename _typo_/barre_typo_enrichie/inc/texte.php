@@ -940,39 +940,44 @@ function supprime_img($letexte) {
 // traite les modeles (dans la fonction typo), en remplacant
 // le raccourci <modeleN|parametres> par la page calculee a
 // partir du squelette modeles/modele.html
+// Le nom du modele doit faire au moins trois caracteres (evite <h2>)
 // http://doc.spip.org/@traiter_modeles
 function traiter_modeles($texte) {
-	if (preg_match_all(',<([a-z_-]+)([0-9]+)([|]([^>]+))?'.'>,iS',
+	if (preg_match_all('/<([a-z_-]{3,})([0-9]+)([|]([^>]+))?'.'>/iS',
 	$texte, $matches, PREG_SET_ORDER)) {
 		include_spip('public/assembler');
 		foreach ($matches as $regs) {
-			if (strtolower($regs[1]) != 'h') {
-				$modele = inclure_modele($regs[4], $regs[1], $regs[2]);
-				if ($modele !== false) {
-					$rempl = code_echappement($modele);
-					$cherche = $regs[0];
+			$modele = inclure_modele($regs[4], $regs[1], $regs[2]);
+			if ($modele !== false) {
+				$rempl = code_echappement($modele);
+				$cherche = $regs[0];
 
-					// XHTML : remplacer par une <div onclick> le lien
-					// dans le cas [<docXX>->lien] ; sachant qu'il n'existe
-					// pas de bonne solution en XHTML pour produire un lien
-					// sur une div (!!)...
-					if (substr($rempl, 0, 5) == '<div '
-					AND preg_match(
-					',(<a [^>]+>)\s*'.preg_quote($regs[0]).'\s*</a>,Uims',
-					$texte, $r)) {
-						$lien = extraire_attribut($r[1], 'href');
-						$cherche = $r[0];
-						$rempl = '<div style="cursor:pointer;cursor:hand;" '
-						.'onclick="document.location=\''.$lien
-						.'\'"'
-	##						.' href="'.$lien.'"' # href deviendra legal en XHTML2
-						.'>'
-						.$rempl
-						.'</div>';
-					}
-
-					$texte = str_replace($cherche, $rempl, $texte);
+				// XHTML : remplacer par une <div onclick> le lien
+				// dans le cas [<docXX>->lien] ; sachant qu'il n'existe
+				// pas de bonne solution en XHTML pour produire un lien
+				// sur une div (!!)...
+				if (substr($rempl, 0, 5) == '<div '
+				AND preg_match(
+				',(<a [^>]+>)\s*'.preg_quote($regs[0]).'\s*</a>,Uims',
+				$texte, $r)) {
+					$lien = extraire_attribut($r[1], 'href');
+					$cherche = $r[0];
+					$rempl = '<div style="cursor:pointer;cursor:hand;" '
+					.'onclick="document.location=\''.$lien
+					.'\'"'
+##						.' href="'.$lien.'"' # href deviendra legal en XHTML2
+					.'>'
+					.$rempl
+					.'</div>';
 				}
+
+				$texte = str_replace($cherche, $rempl, $texte);
+
+				// Hack: dans l'espace prive on veut savoir quels sont les 
+				// docs inclus sans se repayer l'analyse du texte complet:
+				if (!_DIR_RESTREINT
+				AND strstr($modele, 'spip_document_'.$regs[2]))
+					$GLOBALS['doublons_documents_inclus'][] = $regs[2];
 			}
 		}
 	}
