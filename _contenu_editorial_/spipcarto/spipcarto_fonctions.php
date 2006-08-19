@@ -40,7 +40,6 @@ or check http://www.gnu.org/copyleft/gpl.html
 // Ce fichier ne sera execute qu'une fois
 if (defined("_ECRIRE_INC_CARTE")) return;
 define("_ECRIRE_INC_CARTE", "1");
-$GLOBALS['rep_cartes']="spipcarto";
 include_spip("base/carto");
 
 function boucle_CARTO_CARTES($id_boucle, &$boucles) {
