@@ -4,3 +4,9 @@
 <BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}{!doublons}{tout}><li>[(#HTTP_IMG_PACK{secteur-12.gif}|inserer_attribut{class,'nav_logo_rub'})]<a href="#URL_ECRIRE{naviguer,id_rubrique=#ID_RUBRIQUE}" class="intitule<BOUCLE_test_soussect(RUBRIQUES){id_parent}{0,1}> daddy</BOUCLE_test_soussect>">[(#TITRE|supprimer_numero|couper{80})]</a>
 <B_sous_rubriques><ul><BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}{!doublons}{tout}><li>[(#HTTP_IMG_PACK{rubrique-12.gif}|inserer_attribut{class,'nav_logo_rub'})]<a href="#URL_ECRIRE{naviguer,id_rubrique=#ID_RUBRIQUE}"<BOUCLE_test_sousrub(RUBRIQUES){id_parent}{0,1}>class='daddy'</BOUCLE_test_sousrub>>[(#TITRE|supprimer_numero|couper{80})]</a><BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re></li></BOUCLE_sous_rubriques></ul></B_sous_rubriques>
 </li></BOUCLE_rubriques></B_rubriques></ul>
+<script type='text/javascript'>
+$('#bandeautoutsite li').hover(
+				function(){$(this).addClass('sfhover')},
+				function(){$(this).removeClass('sfhover')}
+				);
+</script>
