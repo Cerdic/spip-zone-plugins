@@ -8,7 +8,7 @@ $(document).ready(function() {
 		//console.time("total");
 		//$('#bandeau-principal div.bandeau_sec').css({'display':'none','position':'absolute'});
 		//activate submenus
-		$('#bandeau-principal>div.h-list li[@id]').mouseover(showMenu);
+		//$('#bandeau-principal>div.h-list li[@id]').mouseover(showMenu);
 		$('#bandeau_couleur li.bandeau_couleur a[@id]').mouseover(showMenu);
 		$('map').mouseover(function(){active_menu.hide();active_menu=$('empty');});
 		//init couche images

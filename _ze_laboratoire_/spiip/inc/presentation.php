@@ -2140,7 +2140,10 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 
 	echo "</div>";	
 	echo "</div>\n"; // referme: <div class='bandeau-principal' align='center'>"
-	echo "<script type='text/javascript'>$('#bandeau-principal div.bandeau_sec').css({'display':'none','position':'absolute'});</script>";
+	echo "<script type='text/javascript'>\n".
+	"$('#bandeau-principal div.bandeau_sec').css({'display':'none','position':'absolute'});\n".
+	"$('#bandeau-principal>div.h-list li[@id]').mouseover(showMenu);\n".
+	"</script>";
 	
 	//
 	// Bandeau colore
