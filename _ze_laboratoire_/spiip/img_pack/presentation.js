@@ -1,16 +1,10 @@
-var init_gauche = true;
-
 //init document
 var active_menu = $('empty');
 var puce_popup;
 $(document).ready(function() {
-		//init submenus
 		//console.time("total");
-		//$('#bandeau-principal div.bandeau_sec').css({'display':'none','position':'absolute'});
-		//activate submenus
-		//$('#bandeau-principal>div.h-list li[@id]').mouseover(showMenu);
-		$('#bandeau_couleur li.bandeau_couleur a[@id]').mouseover(showMenu);
-		$('map').mouseover(function(){active_menu.hide();active_menu=$('empty');});
+		//$('#bandeau_couleur li.bandeau_couleur a[@id]').mouseover(showMenu);
+		//$('map').mouseover(function(){active_menu.hide();active_menu=$('empty');});
 		//init couche images
 		//console.time("couche");
 		$('img.swapCouche').click(jquerySwapCouche).css({display:'inline',cursor:'pointer'});
@@ -29,33 +23,28 @@ $(document).ready(function() {
 );
 
 function showMenu() {
-	if(init_gauche) {
-		$('#bandeau-principal div.bandeau_sec').
-		//before adjusting offset let the submenu have a layout
-		css({visibility:'hidden',display:'block'}).each(decalerCouche).
-		//reset visibility
-		css({visibility:'visible',display:'none'});
-		init_gauche = false;
-	}
 	active_menu.hide();
 	active_menu=$('#'+this.id.replace(/^bouton\d?_/,'bandeau')).show();
 	//bug safari..runtime style returns null 
-	active_menu.get(0).style.display='block';
+	active_menu.css('display','block');
 }
 
 function decalerCouche() {
-	var layer = this;
-	if (bug_offsetwidth && ( parseInt(layer.style.left) > 0)) {
-		var demilargeur = Math.floor( layer.offsetWidth / 2 );
-		if (demilargeur == 0) demilargeur = 100; // bug offsetwidth MSIE, on fixe une valeur arbitraire
-		var gauche = parseInt(layer.style.left)
-		  - demilargeur
-		  + Math.floor(largeur_icone / 2);
-
-		if (gauche < 0) gauche = 0;
-
-		layer.style.left = gauche+"px";
-	}
+	this.decaler = true;
+	//make the submenu have a layout, center it and reset state
+	$('div.bandeau_sec',this).css({visibility:'visible',display:'block'}).each(function() {
+		if (bug_offsetwidth) {
+			var demilargeur = Math.floor( this.offsetWidth / 2 );
+			var offset = jQuery.browser.msie?this.parentNode.offsetLeft:this.offsetLeft;
+			var gauche = offset - demilargeur	+ Math.floor(largeur_icone / 2);
+			if (gauche < 0) gauche = 0;
+			
+			this.style.left = gauche+'px';
+			var b = document.getElementById('bandeau-principal');
+			//-1 is the border of bandeau-principal
+			this.style.top = b.offsetTop+b.offsetHeight+-1+'px';
+		}
+	}).css({visibility:'',display:''});
 }
 
 //call information is inside the link id

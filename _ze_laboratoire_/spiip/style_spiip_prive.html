@@ -175,7 +175,7 @@ float:left;
 .righted {margin:0 0 0 auto;}
 
 /*style for bandeau-principal*/
-#bandeau-principal {padding-top:5px;border-bottom: 1px solid #000;}
+#bandeau-principal {padding-top:5px;border-bottom: 1px solid #000;position:relative}
 #bandeau-principal .h-list .menu-item {margin:0 auto}
 * html #bandeau-principal li * {word-wrap:break-word}
 
@@ -194,6 +194,11 @@ float:left;
 	height:48px;
 	width:48px;
 	margin:auto;
+}
+#bandeau-principal li.boutons_admin:hover .bandeau_sec,
+#bandeau-principal li.boutons_admin.sfhover .bandeau_sec
+ {
+	display:block;
 }
 #bandeau-principal span.icon_fond span {
 	behavior: url(../win_png.htc);
@@ -227,7 +232,10 @@ float:left;
 	-moz-border-radius-bottomleft: 5px;
 	-moz-border-radius-bottomright: 5px;
 	z-index: 100;
+	display:none;
+	position:absolute;
 }
+* html .bandeau_sec {float:none}
 * html .bandeau_sec ul {display:inline}
 /*style for gadgets*/ 
 #bandeau-gadgets {margin:0 auto;position: relative; z-index: 1000;top:2px}

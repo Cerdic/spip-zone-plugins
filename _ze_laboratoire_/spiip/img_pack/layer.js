@@ -46,20 +46,6 @@ function hide_obj(obj) {
 	}
 }
 
-/*
-function swap_couche(couche, rtl, dir, no_swap) {
-	var layer;
-	var triangle = findObj('triangle' + couche);
-	if (!(layer = findObj('Layer' + couche))) return;
-	if (layer.style.display == "none"){
-		if (!no_swap && triangle) triangle.src = dir + 'deplierbas.gif';
-		layer.style.display = 'block';
-	} else {
-		if (!no_swap && triangle) triangle.src = dir + 'deplierhaut' + rtl + '.gif';
-		layer.style.display = 'none';
-	}
-}
-*/
 function jquerySwapCouche() {
 	var m = this.id.match(/([-\d]+)(_rtl)?/);
 	var ids = m[1].split("-"); 

@@ -1749,9 +1749,15 @@ function barre_onglets($rubrique, $ongletCourant){
 	fin_onglet();
 }
 
-function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique = "", $lien_noscript = "", $sous_rubrique_icone = "", $sous_rubrique = ""){
+function icone_bandeau_principal($detail, $page = "vide", $rubrique = "", $sous_rubrique = "",$largeur_ecran){
 	global $spip_display, $spip_ecran;
 	global $menu_accesskey, $compteur_survol;
+
+	$texte = _T($detail->libelle);
+		
+	$lien_noscript = $detail->url ? $detail->url : generer_url_ecrire($page);
+
+	$lien = $detail->url2 ? $detail->url2 : $lien_noscript; 
 
 	if ($spip_display != 1 AND $spip_display != 4) {$largeur = $cell_width;} 
 	else {$largeur = $cell_width-8;}
@@ -1779,7 +1785,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	}
 
 	$class_select = " class='menu-item boutons_admin";
-	$class_select .= ($sous_rubrique_icone == $sous_rubrique) ? " selection'" : "'";
+	$class_select .= ($page == $rubrique) ? " selection'" : "'";
 	 
 	
 	if (eregi("^javascript:",$lien)) {
@@ -1791,18 +1797,39 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 
 	$compteur_survol ++;
 	
-	$id_bouton = $rubrique_icone == "vide" ? "": " id='bouton_$rubrique_icone'";
-
 	if ($spip_display != 1 AND $spip_display != 4) {
 		
-		$a_href .= "<span class='icon_fond'><span style='background-image:url(\""._DIR_IMG_PACK.$fond."\")'></span></span>";
-		echo "<li class='cellule48 boutons_admin'$id_bouton>$a_href";
+		$a_href .= "<span class='icon_fond'><span style='background-image:url(\""._DIR_IMG_PACK.$detail->icone."\")'></span></span>";
+		echo "<li class='cellule48 boutons_admin'>$a_href";
 		if ($spip_display != 3) {
 			echo "<span>$texte</span>";
 		}
 	}
-	else echo "<li class='cellule-texte'$id_bouton>$a_href".$texte;
-	echo "</a></li>\n";
+	else echo "<li class='cellule-texte boutons_admin'>$a_href".$texte;
+	echo "</a>\n";
+	/*insert submenu*/
+	$sousmenu = $detail->sousmenu;
+	if($sousmenu) {
+		//$style = $rubrique != $page ? 'display:none;' : '';
+		echo "<div class='bandeau_sec h-list'><ul>\n";
+		$width=0;
+		$largitem_moy = 85;
+		$largeur_maxi_menu = $largeur_ecran-100;
+		foreach($sousmenu as $souspage => $sousdetail) {
+			if ($width+1.25*$largitem_moy>$largeur_maxi_menu){echo "</ul><ul><li>\n";$width=0;}
+			if($souspage=='espacement') {
+				if ($width>0){
+					echo "<li class='separateur'></li>\n";
+					$largitem = 0;
+				}
+			} else {
+				$largitem = icone_bandeau_secondaire (_T($sousdetail->libelle), generer_url_ecrire($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg), $sousdetail->icone, $souspage, $sous_rubrique);
+			}
+			$width+=$largitem+10;
+		}
+		echo "</ul></div>";
+	}
+	echo "</li>";
 }
 
 
@@ -2081,69 +2108,24 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 				$lien = $lien_noscript;
 
 			icone_bandeau_principal(
-				_T($detail->libelle),
-				$lien,
-				$detail->icone,
+				$detail,
 				$page,
 				$rubrique,
-				$lien_noscript,
-				$page,
-				$sous_rubrique);
+				$sous_rubrique,$largeur);
 		}
 	}
 
 	echo "</ul></div>\n";
-	
-
-	//echo "<table width='$largeur' cellpadding='0' cellspacing='0' align='center'><tr><td>";
-	echo "<div style='text-align: $spip_lang_left; width: ".$largeur."px; position: relative; z-index: 2000;margin:0 auto'>";
-
-	// Icones secondaires
-
-	global $browser_name;
-	$coeff_decalage = 0;
-	if ($browser_name=="MSIE")
-		$coeff_decalage = 1.0;
-	$decal=0;
-	$largitem_moy = 85;
-	$largeur_maxi_menu = $largeur-100;
-
-	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
-		/*you must always show the right submenu and adjust layout if js is active*/  
-		if ($rubrique != $page) {
-			$style = 'display:none;';
-		} else {$style = '';}
-
-		$sousmenu= $detail->sousmenu;
-		if($sousmenu) {
-			$offset = (int)round($decal-$coeff_decalage*max(0,($decal+count($sousmenu)*$largitem_moy-$largeur_maxi_menu)));
-			if ($offset<0){	$offset = 0; }
-			echo "<div class='bandeau_sec h-list' id='bandeau$page' style='{$style}position: relative; $spip_lang_left: ".$offset."px;'><ul>\n";
-			$width=0;
-			foreach($sousmenu as $souspage => $sousdetail) {
-				if ($width+1.25*$largitem_moy>$largeur_maxi_menu){echo "</ul><li>\n";$width=0;}
-				if($souspage=='espacement') {
-					if ($width>0){
-						echo "<li class='separateur'></li>\n";
-						$largitem = 0;
-					}
-				} else {
-					$largitem = icone_bandeau_secondaire (_T($sousdetail->libelle), generer_url_ecrire($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg), $sousdetail->icone, $souspage, $sous_rubrique);
-				}
-				$width+=$largitem+10;
-			}
-			echo "</ul></div>";
-		}
-		
-		$decal += $largeur_icone_bandeau_principal+5;
-	}
-
-	echo "</div>";	
 	echo "</div>\n"; // referme: <div class='bandeau-principal' align='center'>"
-	echo "<script type='text/javascript'>\n".
-	"$('#bandeau-principal div.bandeau_sec').css({'display':'none','position':'absolute'});\n".
-	"$('#bandeau-principal>div.h-list li[@id]').mouseover(showMenu);\n".
-	"</script>";
+	//init position of submenus and attach behaviour for hover on li (IE)
+	echo http_script(
+	"$('#bandeau-principal li.boutons_admin').hover(\n".
+	"//init the position one submenu at a time and only once when hovering\n".
+	"	function(){if(!this.decaler)decalerCouche.apply(this);active_menu.hide();if(jQuery.browser.msie){\$('#bandeau_couleur select').css('visibility','hidden');$(this).addClass('sfhover')}},\n".
+	"	function(){active_menu.hide();if(jQuery.browser.msie){\$('#bandeau_couleur select').css('visibility','visible');$(this).removeClass('sfhover')}}\n".
+	").\n".
+	"//bug safari does not fire onmouseover on li when applying hover style but on one of its children\n".
+	"mouseover(function(){active_menu.hide()});");
 	
 	//
 	// Bandeau colore
@@ -2271,7 +2253,6 @@ if (true /*$bandeau_colore*/) {
 
 } // fin bandeau colore
 
-
 	// <div> pour la barre des gadgets
 	// (elements invisibles qui s'ouvrent sous la barre precedente)
 	include_spip('inc/gadgets');
@@ -2280,7 +2261,13 @@ if (true /*$bandeau_colore*/) {
 
 	echo "</div>";
 	echo "</div>";
+	
+	//init bandeau_couleur
+	echo	http_script(
+	"$('#bandeau_couleur li.bandeau_couleur a[@id]').mouseover(showMenu);\n".
+	"$('map').mouseover(function(){active_menu.hide();active_menu=$('empty');});");
 
+	
 	if ($options != "avancees") echo "<div style='height: 18px;'>&nbsp;</div>";
 }
 
