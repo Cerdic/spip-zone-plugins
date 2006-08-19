@@ -1,23 +1,23 @@
 <?php
 /*****************************************************************************\
-* SPIP-CARTO, Solution de partage et d’élaboration d’information 
+* SPIP-CARTO, Solution de partage et dï¿½ï¿½laboration dï¿½information 
 * (Carto)Graphique sous SPIP
 *
 * Copyright (c) 2005
 *
-* Stéphane Laurent, François-Xavier Prunayre, Pierre Giraud, Jean-Claude 
+* Stï¿½phane Laurent, Franï¿½ois-Xavier Prunayre, Pierre Giraud, Jean-Claude 
 * Moissinac et tous les membres du projet SPIP-CARTO V1 (Annie Danzart - Arnaud
-* Fontaine - Arnaud Saint Léger - Benoit Veler - Christine Potier - Christophe 
+* Fontaine - Arnaud Saint Lï¿½ger - Benoit Veler - Christine Potier - Christophe 
 * Betin - Daniel Faivre - David Delon - David Jonglez - Eric Guichard - Jacques
-* Chatignoux - Julien Custot - Laurent Jégou - Mathieu Géhin - Michel Briand - 
-* Mose - Olivier Frérot - Philippe Fournel - Thierry Joliveau)
+* Chatignoux - Julien Custot - Laurent Jï¿½gou - Mathieu Gï¿½hin - Michel Briand - 
+* Mose - Olivier Frï¿½rot - Philippe Fournel - Thierry Joliveau)
 * 
 * voir : http://www.geolibre.net/article.php3?id_article=16
 *
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL. 
-* Pour plus de details voir le fichier COPYING.txt ou l’aide en ligne.
+* Pour plus de details voir le fichier COPYING.txt ou lï¿½aide en ligne.
 * 
-— -
+ï¿½ -
 This program is free software ; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation ; either version 2 of the License, or
@@ -33,7 +33,7 @@ along with this program (COPYING.txt) ; if not, write to
 the Free Software Foundation, Inc.,
 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 or check http://www.gnu.org/copyleft/gpl.html
-— -
+ï¿½ -
 *
 \***************************************************************************/
 //////////////////////////////////////////////////
@@ -51,8 +51,6 @@ $spip_carto_cartes = array(
 	"texte" => "TEXT BINARY NOT NULL",
 	"url_carte" => "TEXT BINARY NOT NULL",
 	"callage" => "TEXT BINARY NOT NULL",
-	"statut" => "VARCHAR(8) NOT NULL default 'publie'",
-	"idx" => "enum('','1','non','oui','idx') NOT NULL default ''",
 	"id_srs" => "bigint(21) NOT NULL");
 
 $spip_carto_cartes_key = array(
@@ -72,13 +70,15 @@ $spip_carto_objets = array(
 	"url_objet" => "TEXT BINARY NOT NULL",
 	"url_logo" => "TEXT BINARY NOT NULL",
 	"geometrie" => "TEXT BINARY NOT NULL",
-	"statut" => "VARCHAR(8) NOT NULL default 'publie'",
-	"idx" => "enum('','1','non','oui','idx') NOT NULL default ''");
+	"statut"	=> "VARCHAR(8) NOT NULL default 'publie'"
+	);
 	
 $spip_carto_objets_key = array(
 	"PRIMARY KEY" => "id_carto_objet",
 	"KEY id_carto_carte" => "id_carto_carte",
-	"KEY titre" => "titre");
+	"KEY titre" => "titre",
+	"KEY statut" => "statut"
+	);
 
 //////////////////////////////////////////////////
 // CARTO_CARTES_ARTICLES
@@ -105,10 +105,6 @@ $spip_carto_cartes_articles_key = array(
 	"KEY id_carto_carte" 	=> "id_carto_carte",
 	"KEY id_article" => "id_article");
 
-
-$tables_auxiliaires['spip_carto_cartes_articles'] = array(
-	'field' => &$spip_carto_cartes_articles,
-	'key' => &$spip_carto_cartes_articles_key);
 
 //////////////////////////////////////////////////
 // MOTS_CARTO_OBJETS
@@ -144,51 +140,54 @@ $spip_documents_carto_cartes_key = array(
 //global $tables_principales,$table_primary,$tables_auxiliaires,$tables_relations;
 
 
-$tables_principales['spip_carto_cartes'] =
+$GLOBALS['tables_principales']['spip_carto_cartes'] =
 	array('field' => &$spip_carto_cartes, 'key' => &$spip_carto_cartes_key);
 
-$tables_principales['spip_carto_objets'] =
+$GLOBALS['tables_principales']['spip_carto_objets'] =
 	array('field' => &$spip_carto_objets, 'key' => &$spip_carto_objets_key);
 
 //Relation avec les articles
-$tables_auxiliaires['spip_carto_cartes_articles'] = array(
+$GLOBALS['tables_auxiliaires']['spip_carto_cartes_articles'] = array(
 	'field' => &$spip_carto_cartes_articles,
 	'key' => &$spip_carto_cartes_articles_key);
 
-//La, ca se discute ...
-//Ca devrait etre une table secondaire
-//mais comme on n'utilise que l'id_mot dans la boucle
-//on gagne une jointure dans la requete
-//$tables_principales['spip_mots_carto_objets'] = array(
-//	'field' => &$spip_mots_carto_objets,
-//	'key' => &$spip_mots_carto_objets_key);
-$tables_auxiliaires['spip_mots_carto_objets'] = array(
+$GLOBALS['tables_auxiliaires']['spip_mots_carto_objets'] = array(
 	'field' => &$spip_mots_carto_objets,
 	'key' => &$spip_mots_carto_objets_key);
 	
+$GLOBALS['tables_auxiliaires']['spip_documents_carto_cartes'] = array(
+	'field' => &$spip_documents_carto_cartes,
+	'key' => &$spip_documents_carto_cartes_key);
+	
 
-$table_primary['carto_objets']="id_carto_objet";
-$table_primary['carto_cartes']="id_carto_carte";
+$GLOBALS['table_primary']['carto_objets']="id_carto_objet";
+$GLOBALS['table_primary']['carto_cartes']="id_carto_carte";
 
-$table_des_tables['carto_objets']="carto_objets";
-$table_des_tables['carto_cartes']="carto_cartes";
+$GLOBALS['table_des_tables']['carto_objets']="carto_objets";
+$GLOBALS['table_des_tables']['carto_cartes']="carto_cartes";
 
-$tables_relations['documents']['id_carto_carte']='documents_carto_cartes';
-$tables_relations['mots']['id_carto_objet']='mots_carto_objets';
-$tables_relations['carto_objets']['id_mot']='mots_carto_objets';
-$tables_relations['carto_cartes']['id_document']='documents_carto_cartes';
+$GLOBALS['tables_jointures']['spip_mots'][]= 'mots_carto_objets';
+$GLOBALS['tables_jointures']['spip_carto_objets'][]='mots_carto_objets';
+$GLOBALS['tables_jointures']['spip_documents'][]='documents_carto_cartes';
+$GLOBALS['tables_jointures']['spip_carto_cartes'][]='documents_carto_cartes';
+$GLOBALS['tables_jointures']['spip_articles'][]='carto_cartes_articles';
+$GLOBALS['tables_jointures']['spip_carto_cartes'][]='carto_cartes_articles';
 
-function boucle_CARTO_CARTES($id_boucle, &$boucles) {
-	$boucle = &$boucles[$id_boucle];
-	$boucle->from[] =  "spip_carto_cartes AS " . $boucle->type_requete;
-	return calculer_boucle($id_boucle, $boucles); 
-}
-
-function boucle_CARTO_OBJETS($id_boucle, &$boucles) {
-	$boucle = &$boucles[$id_boucle];
-	$boucle->from[] =  "spip_carto_objets AS " . $boucle->type_requete;
-	return calculer_boucle($id_boucle, $boucles); 
-}
-
+$GLOBALS['choses_possibles']['carto_objets'] = array(
+									  'titre_chose' => 'Objets',
+									  'id_chose' => 'id_carto_objet',
+									  'table_principale' => 'spip_carto_objets',
+								  	  'url_base' => 'cartes_edit&id_carte=',
+									  
+									  'table_carte' => 'spip_carto_cartes',
+									  'tables_limite' => array(
+															   'carto_objets' => array(
+																				   'table' => 'spip_carto_objets',
+																				   'nom_id' => 'id_carto_objet'),
+															   'carto_cartes' => array(
+																					'table' => 'spip_carto_objets',
+																					'nom_id' =>  'id_carto_carte'),
+															   )
+									  );
 
 ?>

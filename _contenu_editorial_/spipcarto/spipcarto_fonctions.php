@@ -1,23 +1,23 @@
 <?php
 /*****************************************************************************\
-* SPIP-CARTO, Solution de partage et d’élaboration d’information 
+* SPIP-CARTO, Solution de partage et dï¿½ï¿½laboration dï¿½information 
 * (Carto)Graphique sous SPIP
 *
 * Copyright (c) 2005
 *
-* Stéphane Laurent, François-Xavier Prunayre, Pierre Giraud, Jean-Claude 
+* Stï¿½phane Laurent, Franï¿½ois-Xavier Prunayre, Pierre Giraud, Jean-Claude 
 * Moissinac et tous les membres du projet SPIP-CARTO V1 (Annie Danzart - Arnaud
-* Fontaine - Arnaud Saint Léger - Benoit Veler - Christine Potier - Christophe 
+* Fontaine - Arnaud Saint Lï¿½ger - Benoit Veler - Christine Potier - Christophe 
 * Betin - Daniel Faivre - David Delon - David Jonglez - Eric Guichard - Jacques
-* Chatignoux - Julien Custot - Laurent Jégou - Mathieu Géhin - Michel Briand - 
-* Mose - Olivier Frérot - Philippe Fournel - Thierry Joliveau)
+* Chatignoux - Julien Custot - Laurent Jï¿½gou - Mathieu Gï¿½hin - Michel Briand - 
+* Mose - Olivier Frï¿½rot - Philippe Fournel - Thierry Joliveau)
 * 
 * voir : http://www.geolibre.net/article.php3?id_article=16
 *
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL. 
-* Pour plus de details voir le fichier COPYING.txt ou l’aide en ligne.
+* Pour plus de details voir le fichier COPYING.txt ou lï¿½aide en ligne.
 * 
-— -
+ï¿½ -
 This program is free software ; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation ; either version 2 of the License, or
@@ -33,7 +33,7 @@ along with this program (COPYING.txt) ; if not, write to
 the Free Software Foundation, Inc.,
 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 or check http://www.gnu.org/copyleft/gpl.html
-— -
+ï¿½ -
 *
 \***************************************************************************/
 
@@ -41,148 +41,8 @@ or check http://www.gnu.org/copyleft/gpl.html
 if (defined("_ECRIRE_INC_CARTE")) return;
 define("_ECRIRE_INC_CARTE", "1");
 $GLOBALS['rep_cartes']="spipcarto";
-/*
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
-// PARAMETRAGE
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
+include_spip("base/carto");
 
-//////////////////////////////////////////////////
-// CARTO_CARTES
-//////////////////////////////////////////////////
-$spip_carto_cartes = array(
-	"id_carto_carte" => "bigint(21) NOT NULL",
-	"titre" => "VARCHAR(255) BINARY NOT NULL",
-	"texte" => "TEXT BINARY NOT NULL",
-	"url_carte" => "TEXT BINARY NOT NULL",
-	"callage" => "TEXT BINARY NOT NULL",
-	"id_srs" => "bigint(21) NOT NULL");
-
-$spip_carto_cartes_key = array(
-	"PRIMARY KEY" => "id_carto_carte",
-	"KEY id_carto_carte" => "id_carto_carte");
-
-
-//////////////////////////////////////////////////
-// CARTO_OBJETS
-//////////////////////////////////////////////////
-
-$spip_carto_objets = array(
-	"id_carto_objet" => "bigint(21) NOT NULL",
-	"id_carto_carte" => "bigint(21) NOT NULL",
-	"titre" => "VARCHAR(255) BINARY NOT NULL",
-	"texte" => "TEXT BINARY NOT NULL",
-	"url_objet" => "TEXT BINARY NOT NULL",
-	"url_logo" => "TEXT BINARY NOT NULL",
-	"geometrie" => "TEXT BINARY NOT NULL",
-	"statut"	=> "VARCHAR(8) NOT NULL default 'publie'"
-	);
-	
-$spip_carto_objets_key = array(
-	"PRIMARY KEY" => "id_carto_objet",
-	"KEY id_carto_carte" => "id_carto_carte",
-	"KEY titre" => "titre",
-	"KEY statut" => "statut"
-	);
-
-//////////////////////////////////////////////////
-// CARTO_CARTES_ARTICLES
-//////////////////////////////////////////////////
-
-$spip_carto_cartes_articles = array(
-	"id_carto_carte" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-	"id_article" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
-
-$spip_carto_cartes_articles_key = array(
-	"KEY id_carto_carte" 	=> "id_carto_carte",
-	"KEY id_article" => "id_article");
-
-
-//////////////////////////////////////////////////
-// CARTO_CARTES_ARTICLES
-//////////////////////////////////////////////////
-
-$spip_carto_cartes_articles = array(
-	"id_carto_carte" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-	"id_article" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
-
-$spip_carto_cartes_articles_key = array(
-	"KEY id_carto_carte" 	=> "id_carto_carte",
-	"KEY id_article" => "id_article");
-
-
-$tables_auxiliaires['spip_carto_cartes_articles'] = array(
-	'field' => &$spip_carto_cartes_articles,
-	'key' => &$spip_carto_cartes_articles_key);
-
-//////////////////////////////////////////////////
-// MOTS_CARTO_OBJETS
-//////////////////////////////////////////////////
-
-$spip_mots_carto_objets= array(
-	"id_carto_objet" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-	"id_mot" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
-
-$spip_mots_carto_objets_key = array(
-	"KEY id_carto_objet" 	=> "id_carto_objet",
-	"KEY id_mot" => "id_mot");
-
-//////////////////////////////////////////////////
-// DOCUMENTS_CARTO_OBJETS
-//////////////////////////////////////////////////
-
-$spip_documents_carto_cartes= array(
-	"id_carto_carte" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-	"id_document" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
-
-$spip_documents_carto_cartes_key = array(
-	"KEY id_carto_carte" 	=> "id_carto_carte",
-	"KEY id_document" => "id_document");
-
-
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
-// DECLARATION
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
-
-//global $tables_principales,$table_primary,$tables_auxiliaires,$tables_relations;
-
-
-$GLOBALS['tables_principales']['spip_carto_cartes'] =
-	array('field' => &$spip_carto_cartes, 'key' => &$spip_carto_cartes_key);
-
-$GLOBALS['tables_principales']['spip_carto_objets'] =
-	array('field' => &$spip_carto_objets, 'key' => &$spip_carto_objets_key);
-
-//Relation avec les articles
-$GLOBALS['tables_auxiliaires']['spip_carto_cartes_articles'] = array(
-	'field' => &$spip_carto_cartes_articles,
-	'key' => &$spip_carto_cartes_articles_key);
-
-$GLOBALS['tables_auxiliaires']['spip_mots_carto_objets'] = array(
-	'field' => &$spip_mots_carto_objets,
-	'key' => &$spip_mots_carto_objets_key);
-	
-$GLOBALS['tables_auxiliaires']['spip_documents_carto_cartes'] = array(
-	'field' => &$spip_documents_carto_cartes,
-	'key' => &$spip_documents_carto_cartes_key);
-	
-
-$GLOBALS['table_primary']['carto_objets']="id_carto_objet";
-$GLOBALS['table_primary']['carto_cartes']="id_carto_carte";
-
-$GLOBALS['table_des_tables']['carto_objets']="carto_objets";
-$GLOBALS['table_des_tables']['carto_cartes']="carto_cartes";
-
-$GLOBALS['tables_jointures']['spip_mots'][]= 'mots_carto_objets';
-$GLOBALS['tables_jointures']['spip_carto_objets'][]='mots_carto_objets';
-$GLOBALS['tables_jointures']['spip_documents'][]='documents_carto_cartes';
-$GLOBALS['tables_jointures']['spip_carto_cartes'][]='documents_carto_cartes';
-$GLOBALS['tables_jointures']['spip_documents'][]='carto_cartes_articles';
-$GLOBALS['tables_jointures']['spip_carto_cartes'][]='carto_cartes_articles';
-*/
 function boucle_CARTO_CARTES($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$boucle->from[] =  "spip_carto_cartes AS " . $boucle->type_requete;
@@ -223,13 +83,13 @@ function worldfileLRY($callage){
 }
 function getPropMapHeight($callage, $width){
 	$tabcallage=worldfile2array($callage);
-	// Calcul d'une hauteur relative à un callage (proportion)
+	// Calcul d'une hauteur relative ï¿½ un callage (proportion)
 	return $width*($tabcallage['bottom_right']['y']-$tabcallage['top_left']['y'])/($tabcallage['bottom_right']['x']-$tabcallage['top_left']['x']);
 }
 
 
-// Définition du callage à partir de la dimension de l'image
-// Option par défaut / le callage est défini à la main si une projection est utilisée
+// Dï¿½finition du callage ï¿½ partir de la dimension de l'image
+// Option par dï¿½faut / le callage est dï¿½fini ï¿½ la main si une projection est utilisï¿½e
 function array2worldfile($mArray){	
 	return "polygon(0 0,".$mArray['largeur']." ".$mArray['hauteur'].")";
 }
@@ -288,14 +148,14 @@ function wkt2imgsize($args="", $callage = "",$url_carte){
 	$ImgRealWidth = getImgWidth ($url_carte);
 	$ImgRealHeight = getImgHeight ($url_carte);
 	
-	//ou la taille passée, ou à defaut celle de la carte ???
+	//ou la taille passï¿½e, ou ï¿½ defaut celle de la carte ???
 	if ($ImgRealWidth) $ImgWidth = $ImgRealWidth;
 	else $ImgWidth = $GeoWidth;
 	if ($ImgRealHeight) $ImgHeight = $ImgRealHeight;
 	else $ImgHeight = $GeoHeight;
 	$ratio=$ImgHeight/$ImgWidth;
 	
-	//tailles maximum parametrées ?
+	//tailles maximum parametrï¿½es ?
 	//TODO : optimiser un peu tout ca ...
 	$ImgMaxWidth = getArg($args,1);
 	$ImgMaxHeight = getArg($args,0);
@@ -367,14 +227,14 @@ function wkt2coords($geometrie, $format = "HTML", $callage = "",$url_carte, $mot
 	$wktGeom 	= substr($geometrie,strpos($geometrie,"(")+1,-1);
 	
 	$tab=wkt2imgsize($args, $callage,$url_carte);
-	//recuperer taille affichée 
+	//recuperer taille affichï¿½e 
 	$ImgHeight=$tab[0];
 	$ImgWidth=$tab[1];
 	//recuperer taille reelle carte
 	$GeoHeight 	= $tab[2];
 	$GeoWidth 	= $tab[3];
 
-	$radius	= 6;	// TODO : Paramètre (ou fonction du callage ?) préférable car fonction des projections 5 peut être bcp trop petit
+	$radius	= 6;	// TODO : Paramï¿½tre (ou fonction du callage ?) prï¿½fï¿½rable car fonction des projections 5 peut ï¿½tre bcp trop petit
 	$rgeo 		= round($radius*$GeoWidth/$ImgWidth);
 	$callage 	= worldfile2array ($callage);
 	
@@ -392,7 +252,7 @@ function wkt2coords_jsdhtml($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeigh
 			{		
 				$coord[$i] 		= explode(' ',$coordpair[$i]);
 				$coord[$i][0] 	= ($coord[$i][0]-$callage['top_left']['x'])/$GeoWidth*$ImgWidth;
-				$coord[$i][1] 	= ($callage['bottom_right']['y']-$coord[$i][1])/$GeoHeight*$ImgHeight;		// Calcul de l'Y par rapport au coin inférieur
+				$coord[$i][1] 	= ($callage['bottom_right']['y']-$coord[$i][1])/$GeoHeight*$ImgHeight;		// Calcul de l'Y par rapport au coin infï¿½rieur
  				$coord[$i][1]   = $ImgHeight/2-($coord[$i][1]-$ImgHeight/2);								// Pour que le dessin DHTML soit ok 
  				$coordpair[$i] 	= implode(',',$coord[$i]);
 			}
@@ -413,14 +273,14 @@ function wkt2shape_html($wktGeomType){
 function wkt2coords_html($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeight,$GeoWidth,$rgeo,$callage,$mot_desc){	
 
 			// Pour obtenir des objets HTML/MAP ...
-			// 	Séparateur coordonnées ',' / Séparateur paires de coordonnées ','
+			// 	Sï¿½parateur coordonnï¿½es ',' / Sï¿½parateur paires de coordonnï¿½es ','
 			$coordpair = explode (',',$wktGeom);
 			
 			for ($i=0; $i<sizeof($coordpair); $i++)
 			{		
 				$coord[$i] 		= explode(' ',$coordpair[$i]);
 				$coord[$i][0] 	= ($coord[$i][0]-$callage['top_left']['x'])/$GeoWidth*$ImgWidth;
-				$coord[$i][1] 	= ($callage['bottom_right']['y']-$coord[$i][1])/$GeoHeight*$ImgHeight;		// Calcul de l'Y par rapport au coin inférieur
+				$coord[$i][1] 	= ($callage['bottom_right']['y']-$coord[$i][1])/$GeoHeight*$ImgHeight;		// Calcul de l'Y par rapport au coin infï¿½rieur
  				$coordpair[$i] 	= implode(',',$coord[$i]);
 			}
 			$wktGeom = implode(',', $coordpair);
@@ -441,7 +301,7 @@ function wkt2coords_htmldiv($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeigh
 			{		
 				$coord[$i] 		= explode(' ',$coordpair[$i]);
 				$coord[$i][0] 	= ($coord[$i][0]-$callage['top_left']['x'])/$GeoWidth*$ImgWidth;
-				$coord[$i][1] 	= ($callage['bottom_right']['y']-$coord[$i][1])/$GeoHeight*$ImgHeight;		// Calcul de l'Y par rapport au coin inférieur
+				$coord[$i][1] 	= ($callage['bottom_right']['y']-$coord[$i][1])/$GeoHeight*$ImgHeight;		// Calcul de l'Y par rapport au coin infï¿½rieur
  				$x 				+= $coord[$i][1];
 				$y				+= $coord[$i][0];
 			}
@@ -464,8 +324,8 @@ function wkt2shape_svg($wktGeomType){
 
 function wkt2coords_svg($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeight,$GeoWidth,$rgeo,$callage,$mot_desc){	
 			// Pour obtenir des objets SVG ...
-			// Conservation des Y selon le format WKT car en coordonnées géographique
-			// Séparateur coordonnées ',' / Séparateur paires de coordonnées ' '
+			// Conservation des Y selon le format WKT car en coordonnï¿½es gï¿½ographique
+			// Sï¿½parateur coordonnï¿½es ',' / Sï¿½parateur paires de coordonnï¿½es ' '
 			$coordpair = explode (',',$wktGeom);
 
 			for ($i=0; $i<sizeof($coordpair); $i++)
@@ -488,7 +348,7 @@ function wkt2coords_svg($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeight,$G
 // GOOGLE
 ///////////////////////////////////////////////
 function wkt2coords_google($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeight,$GeoWidth,$rgeo,$callage){	
-// Conservation des Y selon le format WKT car en coordonnées géographique
+// Conservation des Y selon le format WKT car en coordonnï¿½es gï¿½ographique
 			$coordpair = explode (',',$wktGeom);
 			
 			for ($i=0; $i<sizeof($coordpair); $i++)

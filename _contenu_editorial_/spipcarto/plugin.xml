@@ -44,11 +44,10 @@
 	</pipeline>
 
 	<fonctions>spipcarto_fonctions.php</fonctions>
-	<options>spipcarto_options.php</options>
 
 	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>spipcarto_options.php</inclure>
+		<inclure>spipcarto_prive.php</inclure>
 	</pipeline>
 	
 	<pipeline>
