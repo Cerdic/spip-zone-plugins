@@ -1,0 +1,22 @@
+<div style="float: left;visibility: visible; margin: 0px; padding: 0px; height: 410px;">
+	<div style="position: absolute;">
+	<BOUCLE_carte(CARTO_CARTES){id_carto_carte}>
+		<B_objets>
+			<map name="map#ID_CARTO_CARTE">
+			<BOUCLE_objets(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}>
+			<area shape="[(#GEOMETRIE|wkt2shape)]" coords="[(#GEOMETRIE|wkt2coords{HTML,#CALLAGE,#URL_CARTE,'',#ENV{args}})]" href="[(#URL_OBJET)]" alt="#TITRE"/>
+		</BOUCLE_objets>
+		</map>
+		</B_objets>
+		<img alt="#TITRE" src="#URL_SITE_SPIP/spip_carto.php?fond_carte=[(#URL_CARTE|base64_encode)][&amp;scale=(#ENV{scale})][&amp;x=(#ENV{x})][&amp;y=(#ENV{y})]" usemap="#map#ID_CARTO_CARTE" [height="(#ENV{args}|wkt2imgheight{#CALLAGE,#URL_CARTE})px"] [width="(#ENV{args}|wkt2imgwidth{#CALLAGE,#URL_CARTE})px"] style="border: 0px;"/>
+		<BOUCLE_objets2(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}>
+			<div style="position: absolute;margin: 0px; padding: 0px;[(#GEOMETRIE|wkt2coords{HTMLDIV,#CALLAGE,#URL_CARTE,'',#ENV{args}})]border: 0px;">
+			<a href="[(#URL_OBJET)]" class="cartolabel" alt="#TEXTE">
+			<BOUCLE_mot(MOTS){id_carto_objet}{par titre}{0,1}>[(#LOGO_MOT)]
+			</BOUCLE_mot> #TITRE
+			</a>
+			</div>
+		</BOUCLE_objets2>
+	</BOUCLE_carte>
+	</div>
+</div>

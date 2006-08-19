@@ -1,0 +1,21 @@
+
+<div style="position: relative;visibility: visible; margin: 0px; padding: 0px;">
+ <div style="position: absolute;">
+ <BOUCLE_carte(CARTO_CARTES){id_carto_carte}>
+  <img alt="#TITRE" src="#URL_SITE_SPIP/spip_carto.php?fond_carte=[(#URL_CARTE|base64_encode)][&amp;scale=(#ENV{scale})][&amp;x=(#ENV{x})][&amp;y=(#ENV{y})]" usemap="#map#ID_CARTO_CARTE" [height="(#ENV{args}|wkt2imgheight{#CALLAGE,#URL_CARTE})px"] [width="(#ENV{args}|wkt2imgwidth{#CALLAGE,#URL_CARTE})px"] style="position:absolute;top:0;left:0;border: 0px;"/>
+  <B_objets>
+  <map name="map#ID_CARTO_CARTE">
+  <BOUCLE_objets(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}>
+	<area shape="[(#GEOMETRIE|wkt2shape)]" coords="[(#GEOMETRIE|wkt2coords{HTML,#CALLAGE,#URL_CARTE,'',#ENV{args}})]" href="[(#URL_OBJET)]" alt="#TITRE"/>
+  </BOUCLE_objets>
+  </map>
+  </B_objets>
+  <BOUCLE_objets2(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}>
+  <a href="[(#URL_OBJET)]" title='[(#TEXTE|texte_script)]'>
+	<img style="position: absolute;margin: 0px; padding: 0px;[(#GEOMETRIE|wkt2coords{HTMLDIV,#CALLAGE,#URL_CARTE,'',#ENV{args}})]border: 0px;"[ alt='(#TEXTE|texte_script)'] src="<BOUCLE_MOT(MOTS){id_carto_objet}{par titre}{0,1}>[IMG/(#LOGO_MOT_NORMAL|fichier)][" onMouseOver="this.src='[IMG/(#LOGO_MOT_SURVOL|fichier)]'" onMouseOut="this.src='IMG/(#LOGO_MOT_NORMAL|fichier)']</BOUCLE_MOT>ecrire/img_pack/croix-rouge.gif<//B_MOT>"/>
+  </a>
+  </BOUCLE_objets2>
+ </BOUCLE_carte>
+<hr/>
+ </div>
+</div>

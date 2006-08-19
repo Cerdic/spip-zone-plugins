@@ -1,0 +1,4 @@
+<?php [include ("ecrire/inc_version.php");
+redirige_par_entete("(#ENV{fond_carte}|notintvalue)");]
+<BOUCLE_DOC(DOCUMENTS){id_document==(#ENV{fond_carte})}>redirige_par_entete("#URL_DOCUMENT");</BOUCLE_DOC>
+?>

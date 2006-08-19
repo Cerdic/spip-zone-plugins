@@ -1,0 +1,4 @@
+<BOUCLE_carte(CARTO_CARTES){id_carto_carte}>
+<img alt="#TITRE" src="#URL_SITE_SPIP/spip_carto.php?fond_carte=[(#URL_CARTE|base64_encode)][&amp;scale=(#ENV{scale})][&amp;x=(#ENV{x})][&amp;y=(#ENV{y})]" usemap="#map#ID_CARTO_CARTE" border="0"/><B_objets><map name="map#ID_CARTO_CARTE"><BOUCLE_objets(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}>
+<area shape="[(#GEOMETRIE|wkt2shape)]" coords="[(#GEOMETRIE|wkt2coords{HTML,#CALLAGE,#URL_CARTE})]" href="[(#URL_OBJET)]" alt="#TEXTE"/>
+</BOUCLE_objets></map></B_objets></BOUCLE_carte>
