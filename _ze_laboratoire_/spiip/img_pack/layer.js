@@ -3,7 +3,6 @@ var url_chargee = new Array();
 var xmlhttp = new Array();
 var image_search = new Array();
 
-
 function findObj_test_forcer(n, forcer) { 
 	var p,i,x;
 
@@ -163,37 +162,18 @@ function ajahReady(xhr, f) {
 
 function AjaxSqueeze(trig, id)
 {
-	var i, s, g;
-	var u = '';
-	
-	// pere du demandeur dans le DOM (le donner direct serait mieux)
-	var noeud = document.getElementById(id);
-	if (!noeud) return true;
-
-	// vivement jquery !
-	if (typeof ajax_image_searching != 'undefined') {
-		g = document.createElement('div');
-		g.innerHTML = ajax_image_searching;
-		noeud.insertBefore(g, noeud.firstChild);
+	if(trig.constructor == String) {
+		$('#'+id).prepend(ajax_image_searching).load(trig);
+	} else {
+		//must check if it works with checkboxes
+		var success = false; 
+		$('#'+id).prepend(ajax_image_searching).
+		load(trig.getAttribute('action'),$('input',trig).get(),
+		function(res,status){
+			if(status=="success") success=true;
+		});
+		return !success;
 	}
-
-	if (typeof(trig) == 'string') {
-		return ajah('GET', trig, null, function(r) { noeud.innerHTML = r;});
-	}
-
-	for (i=0;i < trig.elements.length;i++) {
-		n = trig.elements[i];
-		s = (n.type != 'checkbox') ? n.name : n.checked;
-		if (s) {
-			u += n.name+"="+ encodeURIComponent(n.value) + '&';
-		}
-	}
-
-	s = trig.getAttribute('action');
-	return !ajah('POST', // ou 'GET'
-		     s ,     // s + '?'+ u,
-		     u,      // null,
-		     function(r) { noeud.innerHTML = r;} );
 }
 
 
