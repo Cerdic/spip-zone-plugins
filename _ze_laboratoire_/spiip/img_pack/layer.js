@@ -166,13 +166,12 @@ function AjaxSqueeze(trig, id)
 		$('#'+id).prepend(ajax_image_searching).load(trig);
 	} else {
 		//must check if it works with checkboxes
-		var success = false; 
 		$('#'+id).prepend(ajax_image_searching).
 		load(trig.getAttribute('action'),$('input',trig).get(),
 		function(res,status){
-			if(status=="success") success=true;
+			if(status=="error") success=true;
 		});
-		return !success;
+		return false;
 	}
 }
 
