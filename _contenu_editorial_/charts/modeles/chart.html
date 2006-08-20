@@ -1,0 +1,21 @@
+<BOUCLE_chart(CHARTS){id_chart}>
+(#REM) on trouvera plusieurs variable de hauteur/largeur
+- les balises #HAUTEUR et #LARGEUR
+- #ENV{hauteur} et {largeur} correspondant <emb|hauteur=xx...>
+- #GET{hauteur} et #GET{largeur} correspondent prioritairemnt a #ENV,
+  puis #LARGEUR/HAUTEUR sauf si il y a un controleur
+]
+#SET{hauteur,#ENV{hauteur,#HAUTEUR}} #SET{largeur,#ENV{largeur,#LARGEUR}}
+<div class='spip_chart_#ID_CHART spip_documents[ spip_documents_(#ENV{align})]'[
+style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']>
+	<object type="application/x-shockwave-flash"
+		data="#CHEMIN{charts.swf}" width="#GET{largeur}" height="#GET{hauteur}">
+		<param name="movie" value="#CHEMIN{charts.swf}" />
+		<param name="FlashVars" value="library_path=[(#CHEMIN{charts_library}|urlencode)]&xml_source=[#EVAL{_DIR_RACINE}(#REM|sinon{spip.php?page=chart_code&id_chart=#ID_CHART}|urlencode)]" />
+		<param name="quality" value="high" />
+		<param name="bgcolor" value="##BACKGROUND" />
+	</object>
+	[<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>]
+	[<div class='spip_doc_descriptif'>(#DESCRIPTIF)</div>]
+</div>
+</BOUCLE_chart>
