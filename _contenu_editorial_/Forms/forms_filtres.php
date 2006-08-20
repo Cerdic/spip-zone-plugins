@@ -31,28 +31,17 @@ include_spip("inc/forms");
 				spip_query($query);
 				$reset = true;
 			}
-		}
-
-		// Remplacer les raccourcis de type <formXXX|modificateur>
-		// par le produit du squelette modele_form[_modificateur]
-		if ((strpos($texte, '<form')!==NULL) &&
-			preg_match_all(',<form([0-9]+)([|]([a-z_0-9]+))?'.'>,', $texte, $regs, PREG_SET_ORDER)) {
-			foreach ($regs as $r) {
-				$id_form = $r[1];
-				$forms[$id_form] = $id_form;
-				
-				$fond = 'modele_form'.($r[3]?("_".$r[3]):'');
-				include_spip('public/assembler');
-				$contexte = array('id_form' => $id_form);
-				$page = recuperer_fond($fond, $contexte);
-				
-				$texte = str_replace($r[0], code_echappement($page), $texte);
+			if (preg_match_all(',<form([0-9]+)([|]([a-z_0-9]+))?'.'>,', $texte, $regs, PREG_SET_ORDER)){
+				foreach ($regs as $r) {
+					$id_form = $r[1];
+					$forms[$id_form] = $id_form;
+				}
 			}
-		}
-		if ($maj_liens && $forms) {
-			$query = "INSERT INTO spip_forms_articles (id_article, id_form) ".
-				"VALUES ($id_article, ".join("), ($id_article, ", $forms).")";
-			spip_query($query);
+			if ($forms) {
+				$query = "INSERT INTO spip_forms_articles (id_article, id_form) ".
+					"VALUES ($id_article, ".join("), ($id_article, ", $forms).")";
+				spip_query($query);
+			}
 		}
 	
 		return $texte;
