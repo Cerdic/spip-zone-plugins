@@ -7,7 +7,7 @@ $(document).ready(function() {
 		//$('map').mouseover(function(){active_menu.hide();active_menu=$('empty');});
 		//init couche images
 		//console.time("couche");
-		$('img.swapCouche').click(jquerySwapCouche).css({display:'inline',cursor:'pointer'});
+		//$('img.swapCouche').click(jquerySwapCouche).css({display:'inline',cursor:'pointer'});
 		//console.timeEnd("couche");
 		//init ajax links
 		$('a.ajax').click(execAjaxLinks).not('[@href]').css({cursor:'pointer',visibility:'visible'});
@@ -30,8 +30,8 @@ function showMenu() {
 }
 
 function decalerCouche() {
-	this.decaler = true;
 	//make the submenu have a layout, center it and reset state
+	var b = document.getElementById('bandeau-principal');
 	$('div.bandeau_sec',this).css({visibility:'visible',display:'block'}).each(function() {
 		if (bug_offsetwidth) {
 			var demilargeur = Math.floor( this.offsetWidth / 2 );
@@ -40,11 +40,13 @@ function decalerCouche() {
 			if (gauche < 0) gauche = 0;
 			
 			this.style.left = gauche+'px';
-			var b = document.getElementById('bandeau-principal');
 			//-1 is the border of bandeau-principal
 			this.style.top = b.offsetTop+b.offsetHeight+-1+'px';
 		}
 	}).css({visibility:'',display:''});
+	//i love ff...
+	if(jQuery.browser.msie)$('>:first-child',this).css('height',b.childNodes[0].offsetHeight+'px');
+	if(jQuery.browser.safari)$('>:first-child',this).css('height',b.offsetHeight-6+'px');
 }
 
 //call information is inside the link id

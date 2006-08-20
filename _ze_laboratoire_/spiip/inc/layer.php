@@ -107,10 +107,10 @@ function bouton_block_visible($nom_block){
 function produire_acceder_couche($couches, $icone) {
 	global $spip_lang_rtl;
 	// ne rien afficher si js desactive
-	/*
+	
 	if ($_COOKIE['spip_accepte_ajax'] == -1)
 		return '';
-
+	/*
 	$onclick = array();
 	foreach($couches as $i=>$couche)
 		$onclick[] = 'swap_couche(' . $couche[0]
@@ -122,7 +122,7 @@ function produire_acceder_couche($couches, $icone) {
 	'<img name="triangle'.$nom.'" src="'._DIR_IMG_PACK.$icone.'" alt="" title="'._T('info_deplier').'" border="0" height="10" width="10"
 onclick="'.join(' ',$onclick).'" />';*/
 	return 
-	'<img class="swapCouche" id="triangle'.join($couches,'-').$spip_lang_rtl.'" src="'._DIR_IMG_PACK.$icone.'" alt="" title="'._T('info_deplier').'" style="display:none;border:none" height="10" width="10" />';
+	'<img class="swapCouche" onclick="jquerySwapCouche.apply(this)" id="triangle'.join($couches,'-').$spip_lang_rtl.'" src="'._DIR_IMG_PACK.$icone.'" alt="" title="'._T('info_deplier').'" style="border:none;cursor:pointer" height="10" width="10" />';
 
 }
 

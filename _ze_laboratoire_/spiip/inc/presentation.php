@@ -2121,12 +2121,11 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 	echo http_script(
 	"$('#bandeau-principal li.boutons_admin').hover(\n".
 	"//init the position one submenu at a time and only once when hovering\n".
-	"	function(){if(!this.decaler)decalerCouche.apply(this);active_menu.hide();if(jQuery.browser.msie){\$('#bandeau_couleur select').css('visibility','hidden');$(this).addClass('sfhover')}},\n".
-	"	function(){active_menu.hide();if(jQuery.browser.msie){\$('#bandeau_couleur select').css('visibility','visible');$(this).removeClass('sfhover')}}\n".
-	").\n".
-	"//bug safari does not fire onmouseover on li when applying hover style but on one of its children\n".
-	"mouseover(function(){active_menu.hide()});");
-	
+	"	function(){active_menu.hide();$(this).addClass('sfhover');if(jQuery.browser.msie)\$('#bandeau_couleur select').css('visibility','hidden')},\n".
+	"	function(){active_menu.hide();$(this).removeClass('sfhover');if(jQuery.browser.msie)\$('#bandeau_couleur select').css('visibility','visible')}\n".
+	").onemouseover(decalerCouche).\n".
+	"//bug safari does not fire onmouseover on li but on one of its children when applying hover style so it breaks hover\n".
+	"mouseover(function(){active_menu.hide();})\n");
 	//
 	// Bandeau colore
 	//
