@@ -1,0 +1,37 @@
+<plugin>
+        <nom> <!-- Nom du plugin -->
+          sauvegarde automatique
+        </nom>
+        <auteur>        <!-- Auteur du plugin -->
+          cy_altern d'apr&egrave;s une contrib de Silicium (silicium@japanim.net)
+        </auteur>
+        <version>
+        0.1
+        </version>
+        <etat>
+          test
+        </etat>
+        <description>
+          Permet de r&eacute;aliser une sauvegarde de toute la base de donn&eacute;es utilis&eacute;e par SPIP.
+          Le fichier .gz obtenu est stock&eacute; dans un r&eacute;pertoire (par d&eacute;faut ecrire/data, configurable)
+          et peut &ecirc;tre envoy&eacute; par mail.<br />
+          La sauvegarde est d&eacute;clench&eacute;e lors d'une visite dans l'espace priv&eacute; si le d&eacute;lais
+          depuis la derni&egrave;re sauvegarde est sup&eacute;rieur &agrave; celui configur&eacute; comme fr&eacute;quence.
+          Les sauvegardes stock&eacute;es consid&eacute;r&eacute;es comme obsol&egrave;tes (en fonction du param&egrave;tre de config correspondant)
+          sont automatiquement d&eacute;truites.
+        </description>
+        <prefix>
+          saveauto
+        </prefix>
+        <!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+        <pipeline>
+             <nom>header_prive</nom>
+             <inclure>inc_saveauto.php</inclure>
+        </pipeline>
+        <pipeline>
+        		<nom>ajouter_boutons</nom>
+            <inclure>inc_saveauto.php</inclure>
+        </pipeline>
+	
+        <!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.        -->
+</plugin>
