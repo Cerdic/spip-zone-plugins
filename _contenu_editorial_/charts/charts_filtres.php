@@ -22,28 +22,17 @@ include_spip("inc/charts");
 				spip_query($query);
 				$reset = true;
 			}
-		}
-
-		// Remplacer les raccourcis de type <chartXXX|modificateur>
-		// par le produit du squelette modele_chart[_modificateur]
-		if ((strpos($texte, '<chart')!==NULL) &&
-			preg_match_all(',<chart([0-9]+)([|]([a-z_0-9]+))?'.'>,', $texte, $regs, PREG_SET_ORDER)) {
-			foreach ($regs as $r) {
-				$id_chart = $r[1];
-				$charts[$id_chart] = $id_chart;
-				
-				$fond = 'modele_chart'.($r[3]?("_".$r[3]):'');
-				include_spip('public/assembler');
-				$contexte = array('id_chart' => $id_chart);
-				$page = recuperer_fond($fond, $contexte);
-				
-				$texte = str_replace($r[0], code_echappement($page), $texte);
+			if (preg_match_all(',<chart([0-9]+)([|]([a-z_0-9]+))?'.'>,', $texte, $regs, PREG_SET_ORDER)) {
+				foreach ($regs as $r) {
+					$id_chart = $r[1];
+					$charts[$id_chart] = $id_chart;
+				}
 			}
-		}
-		if ($maj_liens && $charts) {
-			$query = "INSERT INTO spip_charts_articles (id_article, id_chart) ".
-				"VALUES ($id_article, ".join("), ($id_article, ", $charts).")";
-			spip_query($query);
+			if ($charts) {
+				$query = "INSERT INTO spip_charts_articles (id_article, id_chart) ".
+					"VALUES ($id_article, ".join("), ($id_article, ", $charts).")";
+				spip_query($query);
+			}
 		}
 	
 		return $texte;
