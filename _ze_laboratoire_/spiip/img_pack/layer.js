@@ -127,6 +127,7 @@ function createXmlHttp() {
 		return new ActiveXObject("Microsoft.XMLHTTP");
 }
 
+/*
 function ajah(method, url, flux, rappel)
 {
 	var xhr = createXmlHttp();
@@ -150,6 +151,7 @@ function ajahReady(xhr, f) {
                 else  { f(xhr.responseText); }
         }
 }
+*/
 
 // Si Ajax est disponible, cette fonction envoie la requete en Ajax.
 // Si le premier argument n'est pas une url, ce doit etre un formulaire.
@@ -160,18 +162,39 @@ function ajahReady(xhr, f) {
 // Toutefois il y toujours un coup de retard dans la pose d'un cookie:
 // eviter de se loger avec redirection vers un telle page
 
-function AjaxSqueeze(trig, id)
+function AjaxSqueeze(trig, id, callback, img)
 {
+	var reqObj;
+	callback = callback || function(){};
+	//needs a better way to display error to the user
 	if(trig.constructor == String) {
-		$('#'+id).prepend(ajax_image_searching).load(trig);
-	} else {
-		//needs error checking and a way to display it to the user
-		//uses form plugin
-		$(trig).prepend(ajax_image_searching).ajaxSubmit('#'+id,function(res,status){
-			if(status=='success') verifForm(this);
+		reqObj = $('#'+id).imgOn(img).load(trig,function(res,status){
+			imgOff(reqObj);
+			if(status=='error') this.html('Erreur HTTP');
+			callback(res,status);
 		});
-		return false;
+	} else {
+		//submit a form. Uses form plugin
+		reqObj = $(trig).imgOn(img).ajaxSubmit('#'+id,function(res,status){
+			if(status=='success' && browser_verifForm) verifForm(this);
+			if(status=='error') this.html('Erreur HTTP');
+			imgOff(reqObj);
+			callback(res,status);
+		});
 	}
+	return false;
+}
+
+//jQuery helper function to show and hide an image as the first children of a jQuery object
+//if no id is passed or the image with the id specified 
+jQuery.fn.imgOn = function(img) { 
+		if(img) this.ajaxImg = $('#'+img).css('visibility','visible');
+		else this.prepend(ajax_image_searching);
+		return this 
+	} 	
+imgOff = function(reqObj) {
+	if(reqObj.ajaxImg) reqObj.ajaxImg.css('visibility','hidden');
+	reqObj.ajaxImg = null;
 }
 
 

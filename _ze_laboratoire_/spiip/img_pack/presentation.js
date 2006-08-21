@@ -47,7 +47,7 @@ function decalerCouche() {
 //id='page--var1:val1:var2:val2--dest_el'
 //params are separated by --
 //param 0 = page to exec
-//param 1 = arguments of exec (pairs of name, value separated by :)
+//param 1 = arguments of exec (pairs of name, value separated by : )
 //param 2 = id of the receiving element
 function execAjaxLinks() {
 			var params = this.id.split('--');
@@ -61,16 +61,12 @@ function execAjaxLinks() {
 				find('a.ajax').click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
 				return false;
 			}
-			var img = $('#img_'+params[2]).css('visibility','visible');
-			$('#'+params[2]).load(url,function(res,status){
+			return AjaxSqueeze(url,params[2],function(res,status){
 				if(status=='success') {
 					url_chargee['mem_'+url]=res;
-					img.css('visibility','hidden');
 					$('a.ajax',this).click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
 				}
-			});
-			//charger_id_url(url,params[2]);
-			return false;
+			},'img_'+params[2]);
 }
 
 var accepter_change_statut;

@@ -2034,7 +2034,8 @@ function init_entete($titre, $rubrique, $css='',$onLoad = '') {
 			'<link rel="stylesheet" href="' . entites_html($css)
 			. '" type="text/css" />'. "\n"
 		) ) ."\n"
-		."<script type='text/javascript'>$(document).ready(function(){ $browser_verifForm$onLoad });var largeur_icone = $largeur_icone_bandeau_principal; </script>\n"
+		."<script type='text/javascript'>".($browser_verifForm?"var browser_verifForm = true;":"")
+		."$(document).ready(function(){ $browser_verifForm$onLoad });var largeur_icone = $largeur_icone_bandeau_principal; </script>\n"
 		."<style type='text/css'>.boutons_admin {width:{$largeur_icone_bandeau_principal}px}</style>\n";
 	echo pipeline('header_prive', $head)
 		. "</head>\n";
