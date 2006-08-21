@@ -10,8 +10,11 @@
    $p->code = "''";
   }
   
-  $p->code = "recuperer_fond('modeles/article_tablematiere',
-   array('table_matiere' => AncresIntertitres_table_matiere('retour'))
+  $p->code = "recuperer_fond(
+   'modeles/article_table_matiere',
+   array(
+    'id_article' => ".champ_sql('id_article', $p).",
+    'table_matiere' => AncresIntertitres_table_matiere('retour'))
   )";
 
 		$p->interdire_scripts = false; // securite apposee par recuperer_fond()

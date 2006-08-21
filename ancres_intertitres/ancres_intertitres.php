@@ -14,7 +14,7 @@
 	function AncresIntertitres_lien_de_retour($texte, $ancre_retour = "tdm") {
 		$regexp = '/@@RETOUR_TDM@@/S';
 		$rempl = '<a href="#'.$ancre_retour.'"><img src="' .
-  find_in_path('tdm.png') . 
+  find_in_path('img_pack/tdm.png') . 
   '" alt="' .
    _T('tdm:retour_table_matiere') .
    '" title="' .
