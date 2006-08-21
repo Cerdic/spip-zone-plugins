@@ -167,7 +167,9 @@ function AjaxSqueeze(trig, id)
 	} else {
 		//needs error checking and a way to display it to the user
 		//uses form plugin
-		$(trig).prepend(ajax_image_searching).ajaxSubmit('#'+id);
+		$(trig).prepend(ajax_image_searching).ajaxSubmit('#'+id,function(res,status){
+			if(status=='success') verifForm(this);
+		});
 		return false;
 	}
 }

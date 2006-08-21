@@ -3,12 +3,6 @@ var active_menu = $('empty');
 var puce_popup;
 $(document).ready(function() {
 		//console.time("total");
-		//$('#bandeau_couleur li.bandeau_couleur a[@id]').mouseover(showMenu);
-		//$('map').mouseover(function(){active_menu.hide();active_menu=$('empty');});
-		//init couche images
-		//console.time("couche");
-		//$('img.swapCouche').click(jquerySwapCouche).css({display:'inline',cursor:'pointer'});
-		//console.timeEnd("couche");
 		//init ajax links
 		$('a.ajax').click(execAjaxLinks).not('[@href]').css({cursor:'pointer',visibility:'visible'});
 		//init fast change of an article state
@@ -50,11 +44,11 @@ function decalerCouche() {
 }
 
 //call information is inside the link id
-//id='page-var1:val1:var2:val2-dest_el'
+//id='page--var1:val1:var2:val2--dest_el'
 //params are separated by --
 //param 0 = page to exec
 //param 1 = arguments of exec (pairs of name, value separated by :)
-//param 3 = id of the receiving element
+//param 2 = id of the receiving element
 function execAjaxLinks() {
 			var params = this.id.split('--');
 			var url = './?exec='+params[0]+'&var_ajax=1';
@@ -62,7 +56,20 @@ function execAjaxLinks() {
 			for(var i=0;i<args.length;i+=2) {
 				url += '&'+args[i]+'='+args[i+1];
 			}
-			charger_id_url(url,params[2]);
+			if(url_chargee['mem_'+url]) {
+				$('#'+params[2]).html(url_chargee['mem_'+url]).
+				find('a.ajax').click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
+				return false;
+			}
+			var img = $('#img_'+params[2]).css('visibility','visible');
+			$('#'+params[2]).load(url,function(res,status){
+				if(status=='success') {
+					url_chargee['mem_'+url]=res;
+					img.css('visibility','hidden');
+					$('a.ajax',this).click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
+				}
+			});
+			//charger_id_url(url,params[2]);
 			return false;
 }
 
@@ -166,7 +173,7 @@ function changeVisible(input, id, select, nonselect) {
 
 
 // pour MOzilla >= 1.7
-function verifForm() {
+function verifForm(root) {
 	/* if (pluginlist.indexOf("SVG")!=-1)
 		document.cookie = "spip_svg_plugin=oui";
 	else
@@ -174,40 +181,14 @@ function verifForm() {
 	*/
 
 	//convert2math();
-
+	root = root || document;
 	retrait = 16;
-	var obj=document.getElementsByTagName("input");
-	for(i=0;i<obj.length;i++) {
-		if(obj[i].className=="forml" || obj[i].className=="formo") {
-			element = obj[i];
-			if (element.offsetWidth) {
-				obj[i]["nouvelle-largeur"] = (element.offsetWidth - retrait) + "px";
-			} else {
-				obj[i]["nouvelle-largeur"] = "95%";
-			}
-		}
+	$('input,textarea',root).filter('.formo, .forml').each(function() {
+		this['nouvelle-largeur'] = this.offsetWidth ? (this.offsetWidth - retrait) + 'px' : '95%';
 	}
-	
-	var objx=document.getElementsByTagName("textarea");
-	for(i=0;i<objx.length;i++) {
-		if(objx[i].className=="forml" || objx[i].className=="formo") {
-			element = objx[i];
-			if (element.offsetWidth) {
-				objx[i]["nouvelle-largeur"] = (element.offsetWidth - retrait) + "px";
-			} else {
-				objx[i]["nouvelle-largeur"] = "95%";
-			}
-		}
-	}
-	
-	// Appliquer les modifs apres les calculs, sinon des decalages peuvent apparaitre
-	for(i=0;i<obj.length;i++) {
-		if (obj[i]["nouvelle-largeur"]) obj[i].style.width = obj[i]["nouvelle-largeur"];
-	}
-
-	for(i=0;i<objx.length;i++) {
-		if (objx[i]["nouvelle-largeur"]) objx[i].style.width = objx[i]["nouvelle-largeur"];
-	}
+	).each(function() {
+		if(this['nouvelle-largeur']) this.style.width = this['nouvelle-largeur'];
+	});
 }
 
 // livesearchlike...
