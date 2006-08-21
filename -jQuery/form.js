@@ -47,8 +47,8 @@ $.fn.ajaxSubmit = function(target, post_cb, pre_cb, url, mth) {
 	if (pre_cb && pre_cb.constructor == Function && pre_cb(this.vars) === false) return;
 
 	var f = this.get(0);
-	var url = url || f.getAttribute('action') || '';
-	var mth = mth || f.method || 'POST';
+	var url = url || f.getAttributeNode('action').nodeValue || '';
+	var mth = mth || f.getAttributeNode('action').nodeValue || 'POST';
 
 	if (target && target.constructor == Function)
 		$.ajax(mth, url, $.param(this.vars), target);
