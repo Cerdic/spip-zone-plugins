@@ -165,12 +165,9 @@ function AjaxSqueeze(trig, id)
 	if(trig.constructor == String) {
 		$('#'+id).prepend(ajax_image_searching).load(trig);
 	} else {
-		//must check if it works with checkboxes
-		$('#'+id).prepend(ajax_image_searching).
-		load(trig.getAttribute('action'),$('input',trig).get(),
-		function(res,status){
-			if(status=="error") success=true;
-		});
+		//needs error checking and a way to display it to the user
+		//uses form plugin
+		$(trig).prepend(ajax_image_searching).ajaxSubmit('#'+id);
 		return false;
 	}
 }
