@@ -11,7 +11,7 @@
   }
   
   $p->code = "recuperer_fond(
-   'modeles/article_table_matiere',
+   'modeles/table_matiere',
    array(
     'id_article' => ".champ_sql('id_article', $p).",
     'table_matiere' => AncresIntertitres_table_matiere('retour'))
