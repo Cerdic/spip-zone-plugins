@@ -352,10 +352,17 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	// Creer le lien s'il est nouveau - cle=(id_syndic,url)
 	$le_lien_sale = substr($data['url'], 0,255);
 	$pos_avant_calc = strpos($le_lien_sale,'&url=');
+	
+	if ($pos_avant_calc == '') {
+		$le_lien = $le_lien_sale;
+	}
+	
+	else {
 	$pos_avant = $pos_avant_calc +5;
     $lien_avant = substr($le_lien_sale, $pos_avant);
     $pos_apres = strpos($lien_avant,'&cid=');
     $le_lien = substr($lien_avant, 0, $pos_apres);
+	}
 	
 	$n = spip_num_rows(spip_query("SELECT * FROM spip_syndic_articles WHERE url_propre=" . spip_abstract_quote($le_lien) . " AND id_syndic=$now_id_syndic"));
 	if ($n == 0 and !spip_sql_error()) {
