@@ -1,0 +1,20 @@
+<plugin>
+        <nom> <!-- Nom du plugin -->
+        Patch Google actualit&eacute;s.
+        </nom>
+        <auteur>        <!-- Auteur du plugin -->
+        Franck Ducas
+        </auteur>
+        <version>
+        0.1
+        </version>
+        <etat>
+        stable
+        </etat>
+        <description>
+        Les liens de syndication des actualit&eacute;s Google changeant tout le temps, m&ecirc;me si il s'agit de la m&ecirc;me news, et compte-tenu des crit&egrave;res de v&eacute;rification des articles syndiqu&eacute;s pr&eacute;sents dans la base, il n'est pas possible de syndiquer actuellement les articles de Google actualit&eacute;s sans avoir trois, quatre, cinq, six (et ceatera !) fois le m&ecirc;me article. Avec ce patch, c'est possible. Vous n'avez qu'&agrave; l'activer et il vous &eacute;vitera d'avoir des dizaines de doublons si vous syndiquez des recherches google.
+        </description>
+        <prefix>
+        patch_google
+        </prefix>
+</plugin>
