@@ -60,7 +60,6 @@ $.fn.ajaxSubmit = function(target, post_cb, pre_cb, url, mth) {
 			eval(r.responseText);
 		});
 	}
-
 	return this;
 };
 
@@ -172,29 +171,35 @@ $.fn.formdata = function(){
  */
 $.fn.serialize = function() {
 	var a = [];
-	var ok = {INPUT:true, TEXTAREA:true, OPTION:true};
+	var ok = {INPUT:true, TEXTAREA:true, SELECT:true/*OPTION:true*/};
 
-	$('*', this).each(function() {
+	$('input,textarea,select', this).each(function() {
 		var par = this.parentNode;
-		var p = par.nodeName.toUpperCase();
-		var n = this.name || p == 'OPTGROUP' && par.parentNode.name || p == 'SELECT' && par.name || this.id;
+		//var p = par.nodeName.toUpperCase();
+		var n = this.name || /*p == 'OPTGROUP' && par.parentNode.name || p == 'SELECT' && par.name ||*/ this.id;
 
 		if ( !n || this.disabled || this.type == 'reset' || 
 			(this.type == 'checkbox' || this.type == 'radio') && !this.checked || 
-			!ok[this.nodeName.toUpperCase()] ||
-			(this.type == 'submit' || this.type == 'image') && this.form.clicked != this ||
-			(p == 'SELECT' || p == 'OPTGROUP') && !this.selected ) return;
+			/*!ok[this.nodeName.toUpperCase()] ||*/
+			(this.type == 'submit' || this.type == 'image') && this.form.clicked != this /*||
+			(p == 'SELECT' || p == 'OPTGROUP') && !this.selected*/ ) return;
 
 		if (this.type == 'image' && this.form.clicked_x)
 			return a.push(
 				{name: this.name+'_x', value: this.form.clicked_x},
 				{name: this.name+'_y', value: this.form.clicked_y}
 			);
-
+		if(this.nodeName.toUpperCase()=='SELECT' && this.multiple) {
+			//verify multiple options
+			$('option:enabled',this).each(function() {
+				if(this.selected)a.push({name: n, value: this.value});
+			});			
+			return;
+		}
+		
 		a.push({name: n, value: this.value});
 	}).end();
 	
 	this.vars = a;
-
 	return this;
 };
