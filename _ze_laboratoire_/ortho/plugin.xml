@@ -1,0 +1,10 @@
+<plugin>
+	<nom>verificateur d'orthographe
+	</nom>
+	<auteur>Pif</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>Test d'une amelioration du verificateur d'orthographe
+	</description>
+	<prefix>ortho</prefix>
+</plugin>
