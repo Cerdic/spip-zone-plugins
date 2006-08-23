@@ -1,0 +1,41 @@
+#CACHE{86400}
+[(#REM) Menu de navigation laterale ]
+<B_evt>
+<div style="float:right;padding: 5px 5px 5px 5px;">
+    <div align="left">
+    <h2 class="titre"><strong>L'AGENDA du #ENV{jselect}/#ENV{mselect}/#ENV{aselect}</strong></h2>
+		<ul class="spip">
+		<B_lesevenements>
+		<BOUCLE_evt(EVENEMENTS){agendafull date_debut,date_fin, jour, #ENV{aselect}, #ENV{mselect}, #ENV{jselect}}{par date_debut}>
+		<BOUCLE_article(ARTICLES){id_article}{doublons}>
+		<li class="spip"><h2><strong>[(#TITRE|supprimer_numero|couper{80})]&nbsp;:</strong></h2>
+		[(#DESCRIPTIF|textebrut|entites_html)<br />]
+		<BOUCLE_lesevenements(EVENEMENTS){id_article}{agendafull date_debut,date_fin, jour, #ENV{aselect}, #ENV{mselect}, #ENV{jselect}}{par date_debut}>
+		[(#DATE_DEBUT|jour|=={[(#DATE_FIN|jour)]}|?{
+		le [(#DATE_DEBUT|nom_jour)] [(#DATE_DEBUT|affdate)]
+		[(#HORAIRE|=={oui}|?{
+		[(#REM) memes heures ?]
+		[(#DATE_DEBUT|=={#DATE_FIN}|?{&agrave
+		[(#DATE_DEBUT|heures)]h[(#DATE_DEBUT|minutes)],''})]
+		[(#REM) pas memes heures ?]
+		[(#DATE_DEBUT|!={#DATE_FIN}|?{de
+		[(#DATE_DEBUT|heures)]:[(#DATE_DEBUT|minutes)] &agrave;
+		[(#DATE_FIN|heures)]:[(#DATE_FIN|minutes)],''})]
+		,''})]
+		,
+		du [(#DATE_DEBUT|nom_jour)] [(#DATE_DEBUT|affdate)]
+		[(#HORAIRE|=={oui}|?{&agrave; partir de
+		[(#DATE_DEBUT|heures)]H[(#DATE_DEBUT|minutes)],''})] au
+		[(#DATE_FIN|nom_jour)]
+		[(#DATE_FIN|affdate)] [(#HORAIRE|=={oui}|?{jusqu'&agrave;
+		[(#DATE_FIN|heures)]H[(#DATE_FIN|minutes)],''})]  })]
+		[-&nbsp;lieu&nbsp;: (#LIEU)]
+		</li>
+		</BOUCLE_lesevenements>
+		<blockquote><INCLURE{fond=inc-outevpararticle}{id_article}></blockquote>
+		</BOUCLE_article>
+		</BOUCLE_evt>
+		</ul><br />
+</div>
+</div>
+</B_etv>

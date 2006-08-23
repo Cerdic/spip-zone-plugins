@@ -1,0 +1,29 @@
+[(#REM) sortie de tous les événements pour un article donné
+à insérer avec un INCLURE -> fond=inc-outevpararticle 
+dans une boucle retournant un id_article ]
+<B_lesevenements>
+<em>Tous les &eacute;v&eacute;nements associ&eacute;s &agrave; cet article</em>
+<blockquote><ul class="spip" type=circle>
+<BOUCLE_lesevenements(EVENEMENTS) {par date} {id_article}{doublons}><li class="spip"><em>[(#DATE_DEBUT|jour|=={[(#DATE_FIN|jour)]}|?{
+le [(#DATE_DEBUT|nom_jour)] [(#DATE_DEBUT|affdate)]
+[(#HORAIRE|=={oui}|?{
+[(#REM) memes heures ?]
+[(#DATE_DEBUT|=={#DATE_FIN}|?{&agrave
+[(#DATE_DEBUT|heures)]h[(#DATE_DEBUT|minutes)],''})]
+[(#REM) pas memes heures ?]
+[(#DATE_DEBUT|!={#DATE_FIN}|?{de
+[(#DATE_DEBUT|heures)]:[(#DATE_DEBUT|minutes)] &agrave;
+[(#DATE_FIN|heures)]:[(#DATE_FIN|minutes)],''})]
+,''})]
+,
+du [(#DATE_DEBUT|nom_jour)] [(#DATE_DEBUT|affdate)]
+[(#HORAIRE|=={oui}|?{&agrave; partir de
+[(#DATE_DEBUT|heures)]H[(#DATE_DEBUT|minutes)],''})] au
+[(#DATE_FIN|nom_jour)]
+[(#DATE_FIN|affdate)] [(#HORAIRE|=={oui}|?{jusqu'&agrave;
+[(#DATE_FIN|heures)]H[(#DATE_FIN|minutes)],''})]  })]
+[-&nbsp;lieu&nbsp;: (#LIEU)]
+</em></li>
+</BOUCLE_lesevenements>
+</ul></blockquote>
+</B_lesevenements>

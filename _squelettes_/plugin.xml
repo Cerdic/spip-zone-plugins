@@ -1,0 +1,28 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	JSCALENDAR
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Roger BURTON - CIRCA asbl
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Ce plugin permet d'insérer un mini calendrier dans vos pages
+	et de paramètrer facilement les actions à accomplir quand la date cliquée
+	contient au moins un événement.
+	Voir la doc sur la wiki.
+	Le code est documenté.
+	Nécessite Agenda et Widget Agenda.
+	</description>
+	<options> <!-- fichier charge a chaque hit -->
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	</fonctions>
+	<prefix> 
+	</prefix>
+</plugin>

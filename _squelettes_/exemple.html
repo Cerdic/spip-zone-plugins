@@ -1,0 +1,24 @@
+#CACHE{86400}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Mini Calendrier</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="#URL_PAGE{backend,id_rubrique=#ID_RUBRIQUE}" />
+<link rel="stylesheet" href="#CHEMIN{habillage.css}" type="text/css" media="projection, screen, tv" />
+<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" media="projection, screen, tv" />
+<link rel="stylesheet" href="#CHEMIN{impression.css}" type="text/css" media="print" />
+<link rel="stylesheet" type="text/css" media="all" href="#CHEMIN{jscalendar/jscalendarecolo.css}" title="perso" />
+<script type="text/javascript" src="#CHEMIN{jscalendar/calendar.js}"></script>
+<script type="text/javascript" src="#CHEMIN{jscalendar/lang/calendar-fr.js}"></script>
+<script type="text/javascript" src="#CHEMIN{jscalendar/calendar-setup.js}"></script>
+</head>
+<body>	
+<!--
+A utiliser avec une url du type:
+?page=exemple&dannee=2006&dmois=01&djour=01&fannee=2006&fmois=12&fjour=31
+-->	
+[(#ENV{jselect}|<{1}|?{'',' '})<INCLURE{fond=inc-outevselect}{aselect=#ENV{aselect}}{mselect=#ENV{mselect}}{jselect=#ENV{jselect}}>]
+<INCLURE{fond=inc-jscalendar}{dannee=#ENV{dannee}}{dmois=#ENV{dmois}}{djour=#ENV{djour}}{fannee=#ENV{fannee}}{fmois=#ENV{fmois}}{fjour=#ENV{fjour}}>
+</body>
+</html>
