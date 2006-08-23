@@ -66,13 +66,13 @@ function definir_puce() {
 //
 
 
-// XHTML - Preserver les balises-bloc
-// http://fr.selfhtml.org/html/reference/elements.htm#elements_bloc
+// XHTML - Preserver les balises-bloc : on liste ici tous les elements
+// dont on souhaite qu'ils provoquent un saut de paragraphe
 define('_BALISES_BLOCS',
-	'div|pre|ul|ol|blockquote|h[1-6r]|'
-	.'table|menu|noframes|p|'
-	.'form|center|marquee|address|'
-	.'dl|noscript|dir|fieldset|isindex');
+	'div|pre|ul|ol|li|blockquote|h[1-6r]|'
+	.'t(able|[rdh]|body|foot|extarea)|'
+	.'form|object|center|marquee|address|'
+	.'d[ltd]|script|noscript|map|button|fieldset');
 
 
 // Ne pas afficher le chapo si article virtuel
@@ -578,6 +578,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 
 		// aliases (historique)
 		if ($f == 'art') $f = 'article';
+		else if ($f == 'br') $f = 'breve';
 		else if ($f == 'rub') $f = 'rubrique';
 		else if ($f == 'aut') $f = 'auteur';
 		else if ($f == 'doc' OR $f == 'im' OR $f == 'img' OR $f == 'image' OR $f == 'emb')
