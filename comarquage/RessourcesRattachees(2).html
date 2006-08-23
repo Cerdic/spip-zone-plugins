@@ -23,6 +23,7 @@
           <xsl:sort select="@positionPrésentation" data-type="number" order="ascending"/>
         </xsl:apply-templates>
         </xsl:if>
+        
         <xsl:if test="count(RessourceRattachée[starts-with(@type, 'Organisme') and contains(@typologieDémarche, 'informer')])>0">
         <tr valign="bottom"> 
           <td>
@@ -70,54 +71,7 @@
 	</BOUCLE_orgalies>
 [(#REM)
   <!-- RessourceRattachée-->
-  <xsl:template match="RessourceRattachée" mode="Ressource_Organismes">
-    <xsl:variable name="lien">
-      <xsl:text>../xml/</xsl:text>
-      <xsl:value-of select="@lien"/>
-      <xsl:text>.xml</xsl:text>
-    </xsl:variable>
-    <tr>
-      <td width="552">
-        <img width="1" height="2" alt="">
-          <xsl:attribute name="src"><xsl:value-of select="$IMAGESURL"/><xsl:text>/trsp.gif</xsl:text></xsl:attribute>
-        </img>
-      </td>
-    </tr>
-    <tr bgcolor="#EEF0FB">
-      <td>
-        <table border="0" cellpadding="0" cellspacing="6" width="100%">
-          <tr>
-            <td>
-              <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                <xsl:choose>
-                  <xsl:when test="@type='Organisme local SPL'">
-                    <xsl:apply-templates select="document($lien)/Ressource" mode="Ressource_Organisme_local_SPL">
-                      <xsl:with-param name="commentaire" select="CommentaireDiffusion"></xsl:with-param>
-                    </xsl:apply-templates>
-                  </xsl:when>
-                  <xsl:when test="@type='Organisme local Web'">
-                    <xsl:apply-templates select="document($lien)/Ressource" mode="Ressource_Organisme_local_Web">
-                      <xsl:with-param name="commentaire" select="CommentaireDiffusion"></xsl:with-param>
-                    </xsl:apply-templates>
-                  </xsl:when>
-                  <xsl:when test="@type='Organisme national'">
-                    <xsl:apply-templates select="document($lien)/Ressource" mode="Ressource_Organisme_national">
-                      <xsl:with-param name="commentaire" select="CommentaireDiffusion"></xsl:with-param>
-                    </xsl:apply-templates>
-                  </xsl:when>
-                  <xsl:otherwise>
-                    <xsl:apply-templates select="document($lien)/Ressource" mode="Ressource">
-                      <xsl:with-param name="commentaire" select="CommentaireDiffusion"></xsl:with-param>
-                    </xsl:apply-templates>
-                  </xsl:otherwise>
-                </xsl:choose>
-              </table>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </xsl:template>
+
   <!-- RessourceRattachée-->
   <xsl:template match="RessourceRattachée" mode="Ressource_Lettre_type">
     <xsl:variable name="lien">

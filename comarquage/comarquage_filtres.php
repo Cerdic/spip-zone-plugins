@@ -63,27 +63,4 @@ function & comarquage_parametres($defaut,&$urlbase) {
 	return $parametres;
 }
 
-
-function comarquage_post_propre($texte){
-	
-	$pattern="<[\s]*comarquage[\s]*([^>]*)>";
-	if ( 	(preg_match_all("{" . $pattern . "}is", $texte, $matches,PREG_SET_ORDER))
-			&& comarquage_processeur_disponible()) {
-		foreach($matches as $occurence){
-			$args = trim($occurence[1]);
-			$args = trim($args);
-			$args = explode(" ",$args);
-			$targs = array();
-			foreach($args as $arg){
-				if (preg_match(",([^=\s]*)\s*=\s*[\"']([^\"']*)[\"'],Uis",$arg,$extract))
-					$targs[$extract[1]] = $extract[2];
-			}
-		  $out = comarquage_run($targs);
-			$texte = str_replace($occurence[0],$out,$texte);
-		}
-	}
-	
-  return $texte;
-}
-
 ?>

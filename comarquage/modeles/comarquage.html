@@ -1,0 +1,7 @@
+#SET{fond,#ENV{xsl,#ENV{initxsl,Themes}}}
+#SET{xml,#ENV{xml,#ENV{initxml,Themes}}}
+[(#GET{fond}|match{^(Themes|MotsCles|Noeud)$}|?{' ',''})
+<INCLURE{fond=#GET{fond}}{xml=#GET{xml}}{motcle}{lettre}{self=#SELF}>
+][(#GET{fond,Themes}|match{^(Themes|MotsCles|Noeud)$}|?{'',' '})
+Feuille de style non support&eacute;e
+]

@@ -20,10 +20,8 @@ _ Vous pouvez pr&eacute;ciser une page pr&eacute;cise en definissant les attribu
 _ <code><comarquage xml='N333.xml' xsl='Noeud.xsl'></code>
 
 Les param&egrave;tres de connexion &agrave; La Documentation fran&ccedil;aise sont ajustables depuis la page [ecrire/?exec=admin_comarquage-> index.php?exec=admin_comarquage]
-
-Ce plugin n&eacute;cessite la pr&eacute;sence de libxslt sur votre serveur, utilisable en ligne de commande par 'xsltproc', et que la commande php 'exec' ne soit pas inhib&eacute;e.
-
-N&eacute;cessite SPIP 1.9.1 ou une version de d&eacute;veloppement &gt;=6862
+Ce plugin n&eacute;cessite le plugin boucles_xml
+N&eacute;cessite SPIP 1.9.1 ou une version de d&eacute;veloppement
 	</description>
 	<prefix> 
 	comarquage
@@ -31,11 +29,6 @@ N&eacute;cessite SPIP 1.9.1 ou une version de d&eacute;veloppement &gt;=6862
 	<fonctions>
 	comarquage_fonctions.php
 	</fonctions>
-	<pipeline>
-		<nom>post_propre</nom>
-		<action>post_propre</action>
-		<inclure>comarquage_filtres.php</inclure>
-	</pipeline>
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 		<inclure>comarquage_pipeline.php</inclure>
