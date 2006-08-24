@@ -7,7 +7,7 @@ function JQuery_insert_head($flux){
 		//else
 		//	$js = '<script src="'.find_in_path('jquery.pack.213.js').'" type="text/javascript"></script>';
 		
-		return $js.$flux;
+		return preg_replace('/<script /', $js.'<script ', $flux, 1);
 	}
 
 ?>
