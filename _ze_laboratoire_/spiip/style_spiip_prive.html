@@ -166,7 +166,7 @@ float:left;
 .h-list li {display:table-cell;padding:0;margin:0}
 * html .h-list li {display:inline}
 
-* html .h-list li .menu-item {float:[(#ENV{ltr}|choixsiegal{left,left,right})];margin:0 -2px;}
+* html .h-list li .menu-item {float:[(#ENV{ltr}|choixsiegal{left,left,right})];margin:0 -2px}
 .h-list ul>li .menu-item {width:auto !important}
 
 .vcentered li {vertical-align:middle}
@@ -201,7 +201,7 @@ float:left;
 	display:block;
 }
 #bandeau-principal span.icon_fond span {
-	behavior: url(../win_png.htc);
+	behavior: url(win_back_png.htc);
 	background:center top no-repeat;
 	height:48px;
 	display:block;
@@ -321,3 +321,32 @@ a.icone-h-texte:hover {
 	text-decoration: none;
 	color: #000;
 }
+
+/*icone orizzontali centrate verticalmente*/
+a.h-icon {display:table;height:30px}
+* html a.h-icon {cursor:pointer}
+.h-icon-row {display:table-row;min-height:30px;}
+* html .h-icon-row {display:block;height:100%}
+.h-icon-cell {
+	display:table-cell;
+	vertical-align:middle;
+	min-height:30px;
+}
+* html .h-icon-cell {display:inline-block;padding-left:30px;}
+.h-icon-cell-ie {display:table-cell;vertical-align:middle;width:28px;height:28px;border: 1px solid transparent}
+* html .h-icon-cell-ie {display:inline-block;vertical-align:middle;height:100%;width:28px;margin-right:-28px}
+a.h-icon .h-icon-cell-fond {
+	background: 2px center no-repeat;
+	height:30px;width:30px;
+	display:block;
+}
+* html a.h-icon .h-icon-cell-fond {display:inline-block;margin-right:-30px;}
+a.h-icon:hover .h-icon-cell-ie {
+	background:url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=fond-gris-anim.gif);
+	border: 1px solid ##ENV{couleur_foncee,edf3fe};
+	-moz-border-radius:5px;
+	/*width:28px;height:28px*/
+}
+
+/*fine icone orizzontali*/
+

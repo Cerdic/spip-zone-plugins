@@ -1961,15 +1961,18 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 		//if (!$fonction) $fonction = "rien.gif";
 	
 		if ($spip_display != 1) {
-			$retour .= "<a href='$lien' class='cellule-h' $javascript";
-			if ($fonction){
-			  $retour .= "><table valign='center'><tr><td ".http_style_background($fond, "center center no-repeat");
-			  $retour .= ">".http_img_pack($fonction, "", "");
+			$retour .= "<a href='$lien' class='cellule-h h-icon' $javascript>";
+			$fond = _DIR_IMG_PACK.$fond;
+			if($fonction) {
+				include_spip('inc/filtres');
+				include_spip('inc/filtres_images');
+				$fond = extraire_attribut(png2gif(image_masque($fond,_DIR_IMG_PACK.$fonction,'mode=normal'),'gif'),'src');
 			}
-			else {
-				$retour .= "><table valign='center'><tr><td>".http_img_pack($fond, "", "");
-			}
-			$retour .= "</td><td>$texte</td></tr></table></a>\n";
+			$retour .= "<span class='h-icon-row'>";
+			//h-icon-cell-ie is necessary to vertical center in IE. A really nice way to center in IE.
+			//h-icon-cell-fond in necessary to display the animated gif background 
+			$retour .= "<span class='h-icon-cell-ie'><span class='h-icon-cell-fond' style='background-image:url(\"$fond\")'></span></span>";
+			$retour .= "<span class='h-icon-cell'>$texte</span></span></a>";
 		}
 		else {
 			$retour .= "<a href='$lien' class='cellule-h-texte' $javascript><div>$texte</div></a>\n";
@@ -1984,6 +1987,35 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 	return $retour;
 }
 
+function png2gif($im,$format) {
+		$image = image_valeurs_trans($im, "format-$format", $format);
+		if (!$image) return("");
+		
+		$dest = $image["fichier_dest"];
+		$im = $image["fichier"];
+		
+		$im = $image["fonction_imagecreatefrom"]($im);
+		
+		$im_ = imagecreatetruecolor($image["largeur"],$image["hauteur"]);
+		imageantialias($im_,true);
+		$transp = imagecolorallocate ($im_,255,0,0);
+		imagefill($im_,0,0,$transp);
+		imagecolortransparent($im_,$transp);
+		imagecopy($im_,$im,0,0,0,0,$image["largeur"],$image["hauteur"]);
+		imagetruecolortopalette($im_, true, 256);
+		
+		imagegif($im_, "$dest");
+		imagedestroy($im_);
+		
+		
+		$class = $image["class"];
+		if (strlen($class) > 1) $tags=" class='$class'";
+		$tags = "$tags alt='".$image["alt"]."'";
+		$style = $image["style"];
+	
+		return "<img src='$dest'$tags />";
+
+}
 
 function bandeau_barre_verticale(){
 	echo "<td class='separateur'></td>\n";
@@ -2259,7 +2291,7 @@ if (true /*$bandeau_colore*/) {
 	echo bandeau_gadgets($largeur, $options, $id_rubrique);
 	$GLOBALS['id_rubrique_gadgets'] = $id_rubrique;  # un peu sale
 
-	echo "</div>";
+	//echo "</div>";
 	echo "</div>";
 	
 	//init bandeau_couleur
