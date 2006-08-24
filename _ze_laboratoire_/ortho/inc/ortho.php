@@ -12,227 +12,23 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Mettre a jour la liste locale des miroirs
-// http://doc.spip.org/@maj_miroirs_ortho
-function maj_miroirs_ortho() {
-	$liste = explode(" ", $GLOBALS['meta']["liste_miroirs_ortho"]);
-	$miroirs_old = array();
-	foreach ($liste as $index) {
-		list($url) = explode(" ", $GLOBALS['meta']["miroir_ortho_$index"]);
-		$miroirs_old[$url] = $index;
-	}
-
-	// TODO: recuperer la liste dynamiquement depuis ortho.spip.net
-	$page = recuperer_page($GLOBALS['services']['ortho']);
-	$urls=array();
-	foreach(explode("\n", $page) as $ligne) {
-		$t= explode(";", $ligne);
-		$urls[$t[1]]=$t[0];
-	}
-
-# 	$urls = array(
-# 		'http://tony.ortho.spip.net/ortho_serveur.php',
-# 		'http://spip.destination-linux.org/ortho_serveur.php',
-# 		'http://spip-ortho.linagora.org:18080/ortho_serveur.php',
-# 		'http://ortho.spip.net/ortho_serveur.php'
-# 	);
-
-	$liste = array();
-	$miroirs_new = array();
-	$index = 1;
-	foreach ($urls as $url) {
-		if ($index_old = $miroirs_old[$url]) {
-			$s = $GLOBALS['meta']["miroir_ortho_$index_old"];
-		}
-		else {
-			$s = $url." ".time();
-		}
-		$miroirs_new[$index] = $s;
-		$liste[] = $index++;
-	}
-	foreach ($miroirs_old as $index) {
-		effacer_meta("miroir_ortho_$index");
-	}
-	foreach ($miroirs_new as $index => $s) {
-		ecrire_meta("miroir_ortho_$index", $s);
-	}
-	ecrire_meta("liste_miroirs_ortho", join(" ", $liste));
-}
-
-// Lire la liste des miroirs et les langues associees
-// http://doc.spip.org/@lire_miroirs_ortho
-function lire_miroirs_ortho() {
-	global $miroirs_ortho, $index_miroirs_ortho, $duree_cache_miroirs_ortho;
-
-	$miroirs_ortho = array();
-	$index_miroirs_ortho = array();
-
-	$t = time();
-	$maj = $GLOBALS['meta']["maj_miroirs_ortho"];
-	if ($maj < $t - $duree_cache_miroirs_ortho) {
-		maj_miroirs_ortho();
-		ecrire_meta("maj_miroirs_ortho", $t);
-		lire_metas();
-	}
-
-	$liste = explode(" ", $GLOBALS['meta']["liste_miroirs_ortho"]);
-	foreach ($liste as $index) {
-		$s = explode(" ", $GLOBALS['meta']["miroir_ortho_$index"]);
-		$url = $s[0];
-		$maj = $s[1];
-		$langs = explode(",", $s[2]);
-		// Reinitialiser periodiquement la liste des langues non-supportees
-		if ($maj < $t - $duree_cache_miroirs_ortho) {
-			foreach ($langs as $key => $lang) {
-				if (substr($lang, 0, 1) == '!') unset($langs[$key]);
-			}
-			$s[1] = $t;
-			$s[2] = join(",", $langs);
-			ecrire_meta("miroir_ortho_$index", join(" ", $s));
-		}
-		$index_miroirs_ortho[$url] = $index;
-		$miroirs_ortho[$url] = array();
-		foreach ($langs as $lang) {
-			if ($lang) $miroirs_ortho[$url][$lang] = $lang;
-		}
-	}
-	lire_metas();
-	mt_srand(time());
-}
-
-// Sauvegarder les infos de langues pour le miroir
-// http://doc.spip.org/@ecrire_miroir_ortho
-function ecrire_miroir_ortho($url, $langs) {
-	global $index_miroirs_ortho;
-
-	$index = $index_miroirs_ortho[$url];
-	$s = explode(" ", $GLOBALS['meta']["miroir_ortho_$index"]);
-	$s[2] = join(",", $langs);
-	ecrire_meta("miroir_ortho_$index", join(" ", $s));
-}
-
-// http://doc.spip.org/@ajouter_langue_miroir
-function ajouter_langue_miroir($url, $lang) {
-	global $miroirs_ortho;
-	$langs = $miroirs_ortho[$url];
-	$langs[$lang] = $lang;
-	unset($langs["!$lang"]);
-	ecrire_miroir_ortho($url, $langs);
-}
-
-// http://doc.spip.org/@enlever_langue_miroir
-function enlever_langue_miroir($url, $lang) {
-	global $miroirs_ortho;
-	$langs = $miroirs_ortho[$url];
-	unset($langs[$lang]);
-	$langs["!$lang"] = "!$lang";
-	ecrire_miroir_ortho($url, $langs);
-}
-
-// http://doc.spip.org/@reset_miroir
-function reset_miroir($url) {
-	global $miroirs_ortho;
-	ecrire_miroir_ortho($url, array());
-}
-
-//
-// Renvoie la liste des miroirs utilisables pour une langue donnee
-//
-// http://doc.spip.org/@chercher_miroirs_ortho
-function chercher_miroirs_ortho($lang) {
-	global $miroirs_ortho;
-	
-	$result = array();
-	$chercher = true;
-	foreach ($miroirs_ortho as $url => $langs) {
-		if ($langs[$lang]) {
-			$result[] = $url;
-		}
-		else if ($chercher && !$langs["!$lang"]) {
-			//echo "test $lang $url<br />";
-			if (verifier_langue_miroir($url, $lang)) $result[] = $url;
-			// Ne recuperer la langue d'un miroir qu'une seule fois par requete
-			if ($result) $chercher = false;
-		}
-	}
-	return $result;
-}
-
-// http://doc.spip.org/@choisir_miroirs_ortho
-function choisir_miroirs_ortho($lang) {
-	$liste = chercher_miroirs_ortho($lang);
-	if (!count($liste)) return false;
-	foreach ($liste as $url) {
-		$miroirs[md5(mt_rand().$url.rand())] = $url;
-	}
-	ksort($miroirs);
-	return $miroirs;
-}
-
 //
 // Envoyer une requete a un serveur d'orthographe
 //
 // http://doc.spip.org/@post_ortho
-function post_ortho($url, $texte, $lang) {
+function post_ortho($texte, $lang) {
+	$url="http://orangoo.com/labs/spellchecker/?lang=$lang";
+	//$url="http://localhost/GSpellerServer/spell.php?lang=$lang";
+//error_log("ORTHO : post '$url' '$texte'");
+	$xml='<?xml version="1.0" encoding="utf-8" ?>
+<spellrequest textalreadyclipped="0" ignoredups="0" ignoredigits="1" ignoreallcaps="1"><text>'.$texte.'</text></spellrequest>';
 
-	$gz = ($GLOBALS['flag_gz'] && strlen($texte) >= 200);
-	$boundary = '';
-	$vars = array(
-		'op' => 'spell',
-		'lang' => $lang,
-		'texte' => $texte,
-		'gz' => $gz ? 1 : 0
-	);
-	// Si le texte est petit, l'overhead du multipart est dispendieux
-	// Sinon, on passe en multipart pour compresser la chaine a corriger
-	if ($gz) {
-		// Il faut eliminer les caracteres 0 sinon PHP ne lit pas la suite du parametre
-		// passe en multipart/form-data (gros hack bien sale)
-		$texte_gz = gzcompress($texte);
-		for ($echap = 255; $echap > 0; $echap--) {
-			$str_echap = chr($echap ^ 1).chr($echap).chr($echap).chr($echap ^ 2);
-			if (!is_int(strpos($texte_gz, $str_echap))) break;
-		}
-		$texte_gz = str_replace("\x00", $str_echap, $texte_gz);
-		$vars['texte'] = $texte_gz;
-		$vars['nul_echap'] = $str_echap;
-		$boundary = substr(md5(rand().'ortho'), 0, 8);
-	}
-	
-  $r = recuperer_page($url, false, false, 1048576, $vars, $boundary, true);
+	$r = recuperer_page($url, false, false, 1048576, $xml);
 
-	// decompression de GZ ortho
-	if ($gz) $r = gzuncompress($r);
+//error_log("ORTHO : post => '$r'");
+
 	return $r;
-	
-/*
- * Note a propos de la compression : si on ne refuse pas le gz dans recuperer_page(),
- * le serveur d'ortho va retourner des donnees compressees deux fois ; le code
- * saurait les decompresser deux fois, mais on perd alors beaucoup de temps (on
- * passe, dans un test, de 5 s a 25 s de delai !)
- */
-
 }
-
-//
-// Verifier si un serveur gere une langue donnee
-//
-// http://doc.spip.org/@verifier_langue_miroir
-function verifier_langue_miroir($url, $lang) {
-	// Envoyer une requete bidon
-	$result = post_ortho($url, " ", $lang);
-	if (!preg_match(',<ortho>.*</ortho>,s', $result)) {
-		reset_miroir($url);
-		return false;
-	}
-	if (!preg_match(',<erreur>.*<code>E_LANG_ABSENT</code>.*</erreur>,s', $result)) {
-		ajouter_langue_miroir($url, $lang);
-		return true;
-	}
-	enlever_langue_miroir($url, $lang);
-	return false;
-}
-
 
 //
 // Gestion du dictionnaire local
@@ -416,66 +212,24 @@ function corriger_ortho($texte, $lang, $charset = 'AUTO') {
 	$result_cache = suggerer_cache_ortho($mots, $lang);
 
 	// 3. Envoyer les mots restants a un serveur
-	$mauvais = array();
-	if (count($mots)) {
-		$texte = join(' ', $mots);
-		
-		// Hack : ligatures en francais pas gerees par aspell
-		unset($trans_rev);
-		$texte_envoi = $texte;
-		if ($lang == 'fr') {
-			$trans = array(chr(197).chr(146) => 'OE', chr(197).chr(147) => 'oe', 
-					chr(195).chr(134) => 'AE', chr(195).chr(166) => 'ae');
-			$texte_envoi = strtr($texte_envoi, $trans);
-			$trans_rev = array_flip($trans);
-		}
-		
-		// POST de la requete et recuperation du resultat XML
-		$urls = choisir_miroirs_ortho($lang);
-		if (!$urls) return false;
-		unset($ok);
-		$erreur = false;
-		foreach ($urls as $url) {
-			$xml = post_ortho($url, $texte_envoi, $lang);
-			if ($xml && preg_match(',<ortho>(.*)</ortho>,s', $xml, $r)) {
-				$xml = $r[1];
-				if (preg_match(',<erreur>.*<code>(.*)</code>.*</erreur>,s', $xml, $r)) 
-					$erreur = $r[1];
-				if (preg_match(',<ok>(.*)</ok>,s', $xml, $r)) {
-					$ok = $r[1];
-					break;
-				}
-			}
-			reset_miroir($url);
-		}
-		if (!isset($ok)) return $erreur;
-
-		// Remplir le tableau des resultats (mots mal orthographies)
-		if ($trans_rev) {
-			$assoc_mots = array_flip($mots);
-		}
-		while (preg_match(',<mot>(.*?)</mot>(\s*<suggest>(.*?)</suggest>)?,s', $ok, $r)) {
-			$p = strpos($ok, $r[0]);
-			$ok = substr($ok, $p + strlen($r[0]));
-			$mot = $r[1];
-			if ($suggest = $r[3]) 
-				$s = preg_split('/[ ,]+/', $suggest);
-			else 
-				$s = array();
-			// Hack ligatures
-			if ($trans_rev) {
-				$mot_rev = strtr($mot, $trans_rev);
-				if ($mot != $mot_rev) {
-					if ($assoc_mots[$mot]) 
-						$mauvais[$mot] = $s;
-					if ($assoc_mots[$mot_rev]) 
-						$mauvais[$mot_rev] = $s;
-				}
-				else $mauvais[$mot] = $s;
-			}
-			else $mauvais[$mot] = $s;
-		}
+	$xml = post_ortho($texte, $lang);
+	if(preg_match('!<spellresult error=.0..*?>(.*)</spellresult>!s', $xml, $r)) {
+		$body= $r[1];
+	} else {
+		return array(
+			'erreur' => $xml,
+			'bons' => $bons,
+			'mauvais' => $mauvais
+		);
 	}
+
+	preg_match_all('!<c o="(\d*)" l="(\d*)" s="(\d*)">(.*?)</c>!', $body, $r);
+	$mauvais = array();
+	for($i=0; $i<count($r[0]); $i++) {
+		$mot=mon_substr($texte, $r[1][$i], $r[2][$i]);
+		$mauvais[$mot]= explode("\t", $r[4][$i]);
+	}
+//error_log("MAUVAIS : ".var_export($mauvais, 1));
 	if (!$erreur) ajouter_cache_ortho($mots, $mauvais, $lang);
 
 	// Retour a l'envoyeur
@@ -484,8 +238,37 @@ function corriger_ortho($texte, $lang, $charset = 'AUTO') {
 		'bons' => $bons,
 		'mauvais' => $mauvais
 	);
+
 	if ($erreur) $result['erreur'] = $erreur;
 	return $result;
+}
+
+function mon_substr($s, $o, $l) {
+	if(init_mb_string()) {
+		return mb_substr($s, $o, $l);
+	}
+
+	$ss=strlen($s);
+
+	$delta=0;
+	for($i=0, $j=0; $j<$o && $i<$ss; $i++) {
+		if(ord($s{$i})>=192) {
+			$delta++;
+		} else {
+			$j++;
+			$delta=0;
+		}
+	}
+	if($i==$ss) return $s;
+	$debut=$i-$delta;
+
+	for($j=0; $j<$l && $i<$ss; $i++) {
+		if(ord($s{$i})<192) {
+			$j++;
+		}
+	}
+	if($i==$ss) return substr($s, $debut);
+	return substr($s, $debut, $i-$debut);
 }
 
 //
@@ -670,7 +453,6 @@ function init_ortho() {
  
  	$duree_cache_ortho = 7 * 24 * 3600;
 	$duree_cache_miroirs_ortho = 24 * 3600;
-	lire_miroirs_ortho();
 }
 
 init_ortho();
