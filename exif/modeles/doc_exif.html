@@ -10,9 +10,12 @@
 [<div class='spip_doc_titre' style='width:200px;'><strong>(#TITRE)</strong></div>]
 [<div class='spip_doc_descriptif' style='width:200px;'>
 	(#EXIF|sinon{#DESCRIPTIF}|?{' '})
-	#EXIF
+[(#EXIF{IFD0,Model})] - [(#EXIF{EXIF,ExposureTime})] sec - f/[(#EXIF{EXIF,ApertureValue})] - [(#EXIF{EXIF,FocalLength})] mm - [(#EXIF{EXIF,ISOSpeedRatings})] iso">
 	#DESCRIPTIF
 	#NOTES
+	
+	
+
 </div>]
 </div>
 </BOUCLE_doc>
