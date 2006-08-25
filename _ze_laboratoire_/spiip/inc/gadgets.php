@@ -122,15 +122,17 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 		
 	// En interface simplifiee, afficher en permanence l'indication de l'interface
 	if ($options != "avancees") {
-			$bandeau .= "<div id='displayfond' class='bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right; visibility: visible; background-color: white; color: $couleur_foncee; z-index: -1000; border: 1px solid $couleur_claire; border-top: 0px;'>";
+			$bandeau .= "<div id='displayfond' class='bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right; display: block; background-color: white; color: $couleur_foncee; z-index: -1000; border: 1px solid $couleur_claire; border-top: 0px;'>";
 			$bandeau .= "<b>"._T('icone_interface_simple')."</b>";
 			$bandeau .= "</div>";
 	}
 	$bandeau .= "<div id='bandeaudisplay' class='bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
 
 	if ($options != 'avancees') {
+		$lien = parametre_url(self(), 'set_options', 'avancees');
 		$bandeau .= "<b>"._T('icone_interface_simple')."</b>/<a href='$lien' class='lien_sous'>"._T('icone_interface_complet')."</a>";
 	} else {
+		$lien = parametre_url(self(), 'set_options', 'basiques');
 		$bandeau .= "<a href='$lien' class='lien_sous'>"._T('icone_interface_simple')."</a>/<b>"._T('icone_interface_complet')."</b>";
 	}
 
