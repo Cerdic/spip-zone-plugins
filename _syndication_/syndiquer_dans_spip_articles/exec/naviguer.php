@@ -578,7 +578,7 @@ $champs_extra
 WHERE id_rubrique=$id_rubrique");
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
-			marquer_indexer('rubrique', $id_rubrique);
+			marquer_indexer('spip_rubriques', $id_rubrique);
 	}
 	propager_les_secteurs();
 	return $id_rubrique;

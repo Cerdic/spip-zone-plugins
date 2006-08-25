@@ -274,7 +274,7 @@ function maj_documents2 ($id_objet, $type) {
 
 		// Demander l'indexation du document
 		include_spip('inc/indexation');
-		marquer_indexer('document', $id_doc);
+		marquer_indexer('spip_documents', $id_doc);
 
 	}
 }

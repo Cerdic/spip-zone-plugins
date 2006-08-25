@@ -1043,7 +1043,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique,
 
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 		include_spip("inc/indexation");
-		marquer_indexer('article', $id_article);
+		marquer_indexer('spip_articles', $id_article);
 	}
   }
 
@@ -1053,7 +1053,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique,
 
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 		include_spip("inc/indexation");
-		marquer_indexer('article', $id_article);
+		marquer_indexer('spip_articles', $id_article);
 	}
   }
 
