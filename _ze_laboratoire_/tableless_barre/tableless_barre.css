@@ -1,0 +1,25 @@
+.spip_barre {display:table;width:100%;border-right: 1px solid #C0CAD4;border-top: 1px solid #C0CAD4;}
+.spip_barre_row {display:table-row;}
+.spip_barre_row span {
+	display:table-cell;
+	vertical-align:middle;
+	text-align: left;
+	border-left: 1px solid #C0CAD4;
+}
+/*IE ruins all the plans, as always. The width depends on the number of span in the toolbar.
+this number (25%=100/4 span) has to be changed by those who want to override inc/barre.php and add more span*/
+* html .spip_barre_row span {
+	display:inline-block;
+	width:25%;
+	margin-right:-4px;
+	height:100%
+}
+.spip_barre_row a img {
+	padding: 3px;
+	margin: 0;
+	background-color: #eee;
+	border-right: 1px solid #C0CAD4;
+}
+.spip_barre_row a:hover img {
+	background-color: #fff;
+}
