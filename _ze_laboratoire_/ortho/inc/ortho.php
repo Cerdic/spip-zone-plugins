@@ -17,8 +17,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // http://doc.spip.org/@post_ortho
 function post_ortho($texte, $lang) {
-	$url="http://orangoo.com/labs/spellchecker/?lang=$lang";
+	//$url="http://tech-nova.fr/GSpellerServer/spell.php?lang=$lang";
+	//$url="https://www.google.com/tbproxy/spell?lang=$lang";
+	//$url="http://orangoo.com/labs/spellchecker/?lang=$lang";
 	//$url="http://localhost/GSpellerServer/spell.php?lang=$lang";
+	$url="http://localhost/spip/?page=spell&lang=$lang";
 //error_log("ORTHO : post '$url' '$texte'");
 	$xml='<?xml version="1.0" encoding="utf-8" ?>
 <spellrequest textalreadyclipped="0" ignoredups="0" ignoredigits="1" ignoreallcaps="1"><text>'.$texte.'</text></spellrequest>';
