@@ -25,7 +25,11 @@ function saveauto_trouve_table($table, $tableau_tables) {
 //Url : http://www.nexen.net
 //modifiée pour plus de souplesse sur les entêtes
 function saveauto_mail_attachement($to , $sujet , $message , $fichier, $nom, $reply="", $from="") {
-   $limite = "_parties_".md5(uniqid (rand()));
+   if (! @mail('toto@truc.net', 'test envoi mail', 'le message de test')) {
+	 		echo _T('saveauto:config_inadaptee').' '._T('saveauto:mail_absent').'<br>';
+			return false;
+	 }
+	 $limite = "_parties_".md5(uniqid (rand()));
    
    $mail_mime = "Date: ".date("l j F Y, G:i")."\n";
    $mail_mime .= "MIME-Version: 1.0\n";
@@ -196,7 +200,7 @@ function saveauto_sauvegarde() {
                        if (defined('PHP_OS') && eregi('win', PHP_OS)) $os_serveur = "Windows"; 
 											 else $os_serveur = "Linux/Unix";
                        saveauto_ecrire("# "._T('saveauto:os').$os_serveur, $fp, $_fputs);
-                       saveauto_ecrire("# ".T('saveauto:phpversion').phpversion(), $fp, $_fputs);
+                       saveauto_ecrire("# "._T('saveauto:phpversion').phpversion(), $fp, $_fputs);
                        saveauto_ecrire("# "._T('saveauto:mysqlversion').saveauto_mysql_version(), $fp, $_fputs);
                        saveauto_ecrire("# "._T('saveauto:ipclient').$REMOTE_ADDR, $fp, $_fputs);
                        saveauto_ecrire("# "._T('saveauto:compatible_phpmyadmin')."\n", $fp, $_fputs);

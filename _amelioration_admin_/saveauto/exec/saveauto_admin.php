@@ -90,7 +90,7 @@ function exec_saveauto_admin() {
 				 
          debut_droite();
          echo "\r\n<form action=\"$PHP_SELF?exec=saveauto_admin\" name=\"frm_config\" method=\"post\">";
-         debut_cadre_trait_couleur("plugin-24.png", false, "", _T('saveauto:options_config'));       
+         debut_cadre_trait_couleur("plugin-24.gif", false, "", _T('saveauto:options_config'));       
 				 
 				 debut_cadre_couleur();
          echo "<strong>"._T('saveauto:nom_base')."</strong>";
@@ -150,15 +150,16 @@ function exec_saveauto_admin() {
          echo "<strong>"._T('saveauto:envoi_mail')._T('saveauto:adresse')."</strong>";
 				 echo "<input type='text' name='destinataire_save' id='destinataire_save' value='".$destinataire_save."' style='width: 200px;'>";
 				 echo "<br /><span style='font-size: 11px;'>("._T('saveauto:help_envoi').")</span>";
+				 if ($destinataire_save != '' AND !@mail('toto@truc.net', 'test envoi mail', 'le message de test')) {
+	 			 		echo "<br><font color=red><strong>"._T('saveauto:attention')."</strong>"._T('saveauto:mail_absent')._T('saveauto:pas_envoi')."</font>";
+			   }
          fin_cadre_couleur();
 				 debut_cadre_couleur();
          echo "<strong>"._T('saveauto:tables_acceptes')."</strong>";
-         echo "<input type='text' name='entete' id='entete' value='".$entete."' style='width: 300px;'>";
+         echo "<input type='text' name='accepter' id='accepter' value='".$accepter."' style='width: 300px;'>";
 				 echo "<br /><span style='font-size: 11px;'>("._T('saveauto:help_accepter').")</span>";
 				 fin_cadre_couleur();
 				 debut_cadre_couleur();
-       //récupère et sépare tous les noms de tables dont on évite de récupérer les données
-         $tab_eviter = explode(";", $eviter);
          echo "<strong>"._T('saveauto:donnees_ignorees')."</strong>";
          echo "<input type='text' name='eviter' id='eviter' value='".$eviter."' style='width: 300px;'>";
 				 echo "<br /><span style='font-size: 11px;'>("._T('saveauto:help_eviter').")</span>";
