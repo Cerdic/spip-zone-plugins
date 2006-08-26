@@ -13,25 +13,13 @@ se terminant par "|en" la barre vertical et les caracteres suivants (cas de la b
 Installation :
 
 - copier le repertoire href_lang dans le repertoire plugins de votre site spip.
-- creer un fichier ecrire/mes_options.php3 s'il n'existe pas
-- ajouter dans ce fichier les lignes :
-
----rien avant les lignes ci-dessous---
-<?php
-
-$plugins[] = 'href_lang';
-
-?>
----rien apres la ligne ci-dessus---
+- l'activer dans l'interface.
 
 Utilisation : 
 
 les rédacteurs préciseront s'il le souhaite le code de langue dans le titre du lien externe.
 Exemple [titre|lang->http://lien.externe.net]
 
-TODO :
-
-changer la notation en [titre[lang]->http://lien.externe.net] pour faire référence à la notation multi ?
 
 ChangeLog :
 
