@@ -29,7 +29,10 @@ Utilisation :
 les rédacteurs préciseront s'il le souhaite le code de langue dans le titre du lien externe.
 Exemple [titre|lang->http://lien.externe.net]
 
+TODO :
+
+changer la notation en [titre[lang]->http://lien.externe.net] pour faire référence à la notation multi ?
+
 ChangeLog :
 
 2005-11-18 : version initiale 0.1
-
