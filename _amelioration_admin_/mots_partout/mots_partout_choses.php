@@ -84,7 +84,7 @@ $choses_possibles['syndic'] = array(
 															   )
 									  );
 
-$choses_possibles['forums'] = array(
+$choses_possibles['forum'] = array(
 									  'titre_chose' => 'forum',
 									  'id_chose' => 'id_forum',
 									  'table_principale' => 'spip_forum',

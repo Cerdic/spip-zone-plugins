@@ -1,25 +1,21 @@
 <?php
 
-// SURCHARGE du mots_type par defaut, pour permettre de spécifier des
+// SURCHARGE du mots_type par defaut, pour permettre de specifier des
 // autorisations sur les autres tables
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
 define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS.end($p)));
 
+// http://doc.spip.org/@exec_mots_type_dist
 function exec_mots_type()
 {
   global $connect_statut, $descriptif, $id_groupe, $new, $options, $texte, $titre;
 
   $id_groupe= intval($id_groupe);
-
-// DEBUT MODIF
-// liste des types du plugin de tables sur lesquels on peut mettre des mots clés
-	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
-// FIN MODIF
+  $tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
 
 if ($connect_statut == '0minirezo' AND $new == "oui") {
 	$id_groupe = '';
@@ -28,19 +24,27 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 	$ancien_type = '';
 	$unseul = 'non';
 	$obligatoire = 'non';
+///////////////////
+//MODIFICATION
+///////////////////
 /*	$articles = 'oui';
 	$breves = 'oui';
 	$rubriques = 'non';
 	$syndic = 'oui';
-*/	$acces_minirezo = 'oui';
+*/
+///////////////////
+	$acces_minirezo = 'oui';
 	$acces_comite = 'oui';
 	$acces_forum = 'non';
 } else {
 	$result_groupes = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe");
 
-	// MODIF : while -> if pour garder la valeur de $row
+///////////////////
+//MODIFICATION
+///////////////////
+//	while($row = spip_fetch_array($result_groupes)) {
 	if($row = spip_fetch_array($result_groupes)) {
-	// FIN MODIF
+///////////////////
 		$id_groupe = $row['id_groupe'];
 		$type = $row['titre'];
 		$titre = typo($type);
@@ -48,11 +52,16 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 		$texte = $row['texte'];
 		$unseul = $row['unseul'];
 		$obligatoire = $row['obligatoire'];
+///////////////////
+//MODIFICATION
+///////////////////
 /*		$articles = $row['articles'];
 		$breves = $row['breves'];
 		$rubriques = $row['rubriques'];
 		$syndic = $row['syndic'];
-*/		$acces_minirezo = $row['minirezo'];
+*/
+///////////////////
+		$acces_minirezo = $row['minirezo'];
 		$acces_comite = $row['comite'];
 		$acces_forum = $row['forum'];
 		$onfocus ="";
@@ -61,14 +70,15 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 }
 
 pipeline('exec_init',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
-debut_page("&laquo; $titre &raquo;", "documents", "mots");
+debut_page("&laquo; $titre &raquo;", "naviguer", "mots");
 
 debut_gauche();
+
+
 
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
 creer_colonne_droite();
 echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
-
 debut_droite();
 
 debut_cadre_relief("groupe-mot-24.gif");
@@ -134,6 +144,9 @@ if ($connect_statut =="0minirezo"){
 	echo "<div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>";
 		echo "<b>"._T('info_mots_cles_association')."</b>";
 		echo "<ul>";
+///////////////////
+//MODIFICATION
+///////////////////
 /*		
 		if ($articles == "oui") $checked = "checked";
 		else $checked = "";
@@ -152,16 +165,16 @@ if ($connect_statut =="0minirezo"){
 		if ($syndic == "oui") $checked = "checked";
 		else $checked = "";
 		echo "<input type='checkbox' name='syndic' value='oui' $checked id='syndic'> <label for='syndic'>"._T('item_mots_cles_association_sites')."</label>";
-*/		
-	// DEBUT MODIF
+*/			
 	foreach($tables_installees as $chose => $m) {
-		if ($row[$chose] == "oui") $checked = "checked";
-		else $checked = "";
-		echo "<br><input type='checkbox' name='$chose' value='oui' $checked id='$chose'> <label for='$chose'>"._T('motspartout:item_mots_cles_association_'.$chose)."</label>";
+		if ($chose!='forum'){
+			if ($row[$chose] == "oui") $checked = "checked";
+			else $checked = "";
+			echo "<br/><input type='checkbox' name='$chose' value='oui' $checked id='$chose'> <label for='$chose'>"._T('motspartout:item_mots_cles_association_'.$chose)."</label>";
+		}
 	}
-	// FIN MODIF
+///////////////		
 		echo "</ul>";
-
 	echo "</div>";
 
 
@@ -212,7 +225,7 @@ if ($connect_statut =="0minirezo"){
 		else {
 			echo "<input type='hidden' name='acces_forum' value='non'>";
 		}
-			
+
 		echo "</ul>";
 	echo "</div>";
 	
