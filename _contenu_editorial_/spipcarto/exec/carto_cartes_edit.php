@@ -46,7 +46,7 @@ define('_DIR_PLUGIN_SPIPCARTO',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS).
 
 //------------------------la fonction qui fait tout-----------------------------------
 
-function exec_cartes_edit() {
+function exec_carto_cartes_edit() {
 //include(_DIR_PLUGIN_SPIPCARTO."/spipcarto_fonctions.php");
 include_spip("spipcarto_fonctions");
 include_spip ("inc/carto");
@@ -218,10 +218,10 @@ if ($id_carte && $flag_editable) {
 
 $param="id_carte=".$id_carte;
 if ($retour) $param.='&retour='.$retour;
-$carte_link = generer_url_ecrire("cartes_edit",$param);
-$carte_supplink = generer_url_ecrire("cartes_edit",$param.'&supp_carte='.$id_carte);
+$carte_link = generer_url_ecrire("carto_cartes_edit",$param);
+$carte_supplink = generer_url_ecrire("carto_cartes_edit",$param.'&supp_carte='.$id_carte);
 $carte_importlink = generer_url_ecrire("cartes_import",$param);
-$carte_suppallobjlink = generer_url_ecrire("cartes_edit",$param.'&supp_objet_all=ok');
+$carte_suppallobjlink = generer_url_ecrire("carto_cartes_edit",$param.'&supp_objet_all=ok');
 
 //
 // Affichage de la page
@@ -273,7 +273,7 @@ if ($supp_carte && !$supp_confirme && !$supp_rejet) {
 	echo _T("spipcarto:carte_supp_confirm")."</p>\n";
 
 	echo "<form method='post' action='index.php'>";
-	echo '<input type="hidden" name="exec" value="cartes_edit">'; 
+	echo '<input type="hidden" name="exec" value="carto_cartes_edit">'; 
 	if ($retour)
 		echo '<input type="hidden" name="retour" value="'.$retour.'">'; 
 	echo '<input type="hidden" name="id_carte" value="'.$id_carte.'">'; 
@@ -288,7 +288,7 @@ if ($supp_objet_all && !$supp_objet_confirme && !$supp_objet_rejet) {
 	echo _T("spipcarto:objet_supp_confirm")."</p>\n";
 
 	echo "<form method='post' action='index.php'>";
-	echo '<input type="hidden" name="exec" value="cartes_edit">'; 
+	echo '<input type="hidden" name="exec" value="carto_cartes_edit">'; 
 	echo '<input type="hidden" name="id_carte" value="'.$id_carte.'">'; 
 	if ($retour)
 		echo '<input type="hidden" name="retour" value="'.$retour.'">'; 
@@ -382,7 +382,7 @@ if ($flag_editable) {
 
 	echo "<div class='verdana2'>";
   echo "<form method='post' action='index.php'>";
-	echo '<input type="hidden" name="exec" value="cartes_edit">'; 
+	echo '<input type="hidden" name="exec" value="carto_cartes_edit">'; 
 	echo '<input type="hidden" name="id_carte" value="'.$id_carte.'">'; 
 	echo '<input type="hidden" name="modif_carte" value="'.$id_carte.'">'; 
 	if ($retour)
@@ -482,7 +482,7 @@ if ($flag_editable) {
 			debut_cadre_relief();
 				
   echo "<form method='post' action='index.php'>";
-	echo '<input type="hidden" name="exec" value="cartes_edit">'; 
+	echo '<input type="hidden" name="exec" value="carto_cartes_edit">'; 
  echo '<input type="hidden" name="id_carte" value="'.$id_carte.'">'; 
   $mlink='supp_objet='.$id_objet.'&id_carte='.$id_carte;
   if ($retour) {
@@ -504,7 +504,7 @@ if ($flag_editable) {
 					echo "<strong>".$titre_objet."</strong>";
 					echo "</td><td width='20px'></td><td>";					
 					echo "<br/><div style='float:right;'>";
-					$link = generer_url_ecrire('cartes_edit',$mlink);
+					$link = generer_url_ecrire('carto_cartes_edit',$mlink);
 					icone_horizontale(_T("spipcarto:objet_supp"), $link , "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.gif", "supprimer.gif");
 					echo "</div>\n";
 					echo "</td></tr></table>";					
@@ -600,12 +600,12 @@ if ($flag_editable) {
 				if ($flag_mots AND $options == 'avancees') {
 					$tab_id['id_carte']=$id_carte;
 					$tab_id['id_objet']=$id_objet;
-					//TODO : passer les ,ouceau, cherche et supp que si bon mot
+					global $select_group;
 					if ((!$nouveau) && ($visible)) {
-						echo formulaire_mots('carto_objets', $tab_id, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
+						echo formulaire_mots('carto_objet', $tab_id, $cherche_mot, $select_group, $flag_editable);
 					}
 					else {
-						echo formulaire_mots('carto_objets', $tab_id, null, null, null, $flag_editable);
+						echo formulaire_mots('carto_objet', $tab_id, null, $select_group, $flag_editable);
 					}
 				}
 echo fin_block();

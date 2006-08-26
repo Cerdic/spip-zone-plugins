@@ -42,7 +42,7 @@ define('_DIR_PLUGIN_SPIPCARTO',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS).
 function spipcarto_ajouterBoutons($boutons_admin) {
   
   if (lire_meta('activer_carto')=='oui')
-  	$boutons_admin['naviguer']->sousmenu["cartes"]= new Bouton(
+  	$boutons_admin['naviguer']->sousmenu["carto_cartes"]= new Bouton(
 																   "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.png",  // icone
 																   _L('spipcarto:cartes') //titre
 																   );

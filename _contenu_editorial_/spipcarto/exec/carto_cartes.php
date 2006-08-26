@@ -45,7 +45,7 @@ define('_DIR_PLUGIN_SPIPCARTO',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS).
 
 //------------------------la fonction qui fait tout-----------------------------------
 
-function exec_cartes() {
+function exec_carto_cartes() {
 
 //  include(_DIR_PLUGIN_SPIPCARTO."/inc/carto.php");
   include_spip("inc/carto");
@@ -89,7 +89,7 @@ function exec_cartes() {
 	
 	if (carte_editable()) {
 		echo "<div align='right'>";
-		$link = generer_url_ecrire('cartes_edit','new=oui&retour='.urlencode(generer_url_ecrire('cartes')));
+		$link = generer_url_ecrire('carto_cartes_edit','new=oui&retour='.urlencode(generer_url_ecrire('carto_cartes')));
 		icone(_T("spipcarto:carte_creer"), $link, "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.png", "creer.gif");
 		echo "</div>";
 	}

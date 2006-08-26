@@ -178,7 +178,7 @@ $GLOBALS['choses_possibles']['carto_objets'] = array(
 									  'titre_chose' => 'Objets',
 									  'id_chose' => 'id_carto_objet',
 									  'table_principale' => 'spip_carto_objets',
-								  	  'url_base' => 'cartes_edit&id_carte=',
+								  	  'url_base' => 'carto_cartes_edit&id_carte=',
 									  
 									  'table_carte' => 'spip_carto_cartes',
 									  'tables_limite' => array(

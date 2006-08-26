@@ -91,11 +91,11 @@ if ($id_carte) {
 
 $param="id_carte=".$id_carte;
 if ($retour) $param.='&retour='.$retour;
-$carte_link = generer_url_ecrire("cartes_edit",$param);
+$carte_link = generer_url_ecrire("carto_cartes_edit",$param);
 $carte_importlink = generer_url_ecrire("carte_import",$param);
 
 $param.="supp_carte=".$id_carte;
-$carte_supplink = generer_url_ecrire("cartes_edit",$param);
+$carte_supplink = generer_url_ecrire("carto_cartes_edit",$param);
 
 
 

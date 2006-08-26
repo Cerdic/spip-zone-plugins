@@ -141,7 +141,7 @@ function afficher_cartes($titre_table, $requete, $icone = '') {
 		$titre = $row['titre'];
 		$statut = $row['statut'];
 		
-		$link = generer_url_ecrire("cartes_edit","id_carte=".$id_carte."&retour=".urlencode(generer_url_ecrire("cartes")));
+		$link = generer_url_ecrire("carto_cartes_edit","id_carte=".$id_carte."&retour=".urlencode(generer_url_ecrire("carto_cartes")));
 		
 		$puce=puce_statut_carto_carte($id_carte,$statut);
 /*		if ($objets) {
@@ -204,7 +204,7 @@ function afficher_carte_interface($id_carte,$retour,$fichier,$callage, $id_img =
 <script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/'.$GLOBALS['rep_cartes'].'/js/navTools.js"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/'.$GLOBALS['rep_cartes'].'/js/graphTools.js"></script>
 <form method="post" action="#nouveau_objet" name="carto_form">
- <input type="hidden" name="exec" value="cartes_edit"/>
+ <input type="hidden" name="exec" value="carto_cartes_edit"/>
  <input type="hidden" name="id_carte" value="'.$id_carte.'"/>
  <input type="hidden" name="retour" value="'.$retour.'"/>
  <input type="hidden" name="selection_type" />
@@ -388,7 +388,7 @@ function spipcarto_afficher_insertion_carte($id_article) {
 			
 $param="id_carte=".$id_carte;
 $param.='&retour='.generer_url_ecrire("articles_edit","id_article=".$id_article);
-$link = generer_url_ecrire("cartes_edit",$param);
+$link = generer_url_ecrire("carto_cartes_edit",$param);
 
 			echo "<div class='verdana3' style='border:1px;background-color: $couleur_claire;'>";
 			echo bouton_block_invisible("lien_carte$id_carte");
@@ -420,7 +420,7 @@ $link = generer_url_ecrire("cartes_edit",$param);
 		echo "\n<br />";
 $param="new=oui";
 $param.='&retour='.generer_url_ecrire("articles_edit","id_article=".$id_article);
-$link = generer_url_ecrire("cartes_edit",$param);
+$link = generer_url_ecrire("carto_cartes_edit",$param);
 		icone_horizontale(_T("spipcarto:carte_creer"),
 			$link, "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.gif", "creer.gif");
 	}
