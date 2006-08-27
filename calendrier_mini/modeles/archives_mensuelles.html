@@ -1,0 +1,16 @@
+<B_archives_mensuelles>
+<div id="archives">
+  <h2>Archives</h2>
+  <ul>
+   <BOUCLE_archives_mensuelles(ARTICLES){branche ?}{par date}{inverse}>[
+   <li>
+   <a href="[(#ENV{self}|parametre_url{archives,[(#DATE|affdate{'Y-m'})]})]">[
+   (#ENV{archives}|=={[(#DATE|affdate{'Y-m'})]}|?{<b>})
+   ](#DATE|affdate_mois_annee|unique)[
+   (#ENV{archives}|=={[(#DATE|affdate{'Y-m'})]}|?{</b>})
+   ]</a>
+   </li>
+   ]</BOUCLE_archives_mensuelles>
+  </ul>
+</div>
+</B_archives_mensuelles>
