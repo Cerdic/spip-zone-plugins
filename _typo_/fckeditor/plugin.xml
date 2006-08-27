@@ -21,4 +21,11 @@
 	</description>
 
 	<prefix>fckeditor2</prefix>
+
+	<pipeline>
+		<nom>header_prive</nom> 
+		<action>header_prive</action>
+		<inclure>fckeditor2_pipelines.php</inclure>
+	</pipeline>
+
 </plugin>
