@@ -2086,70 +2086,14 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 
 	echo pipeline('body_prive',"<body ". _ATTRIBUTES_BODY.'>');
 
-	if ($spip_ecran == "large") $largeur = 974;
-	else $largeur = 750;
+	include_spip('public/assembler');
+	echo recuperer_fond('dist_back/bandeau_principal',array(
+		'spip_ecran'=>$spip_ecran,
+		'spip_display'=>$spip_display,
+		'rubrique'=>$rubrique,
+		'sous_rubrique'=>$sous_rubrique
+		));
 
-	echo "\n<map name='map_layout'>";
-	echo lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "");
-	echo lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "");
-	echo lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "");
-	echo "\n</map>";
-
-
-
-	if ($spip_display == "4") {
-		// Icones principales
-		echo "<ul>";
-		echo "<li><a href='./'>"._T('icone_a_suivre')."</a>";
-		echo "<li><a href='" . generer_url_ecrire("naviguer") . "'>"._T('icone_edition_site')."</a>";
-		echo "<li><a href='" . generer_url_ecrire("forum"). "'>"._T('titre_forum')."</a>";
-		echo "<li><a href='" . generer_url_ecrire("auteurs") . "'>"._T('icone_auteurs')."</a>";
-		echo "<li><a href=\"$adresse_site/\">"._T('icone_visiter_site')."</a>";
-		echo "</ul>";
-
-		return;
-	}
-
-	// iframe permettant de passer les changements de statut rapides
-	echo "<iframe id='iframe_action' name='iframe_action' width='1' height='1' style='position: absolute; visibility: hidden;'></iframe>";
-
-	// Lien oo
-	echo "<div class='invisible_au_chargement' style='position: absolute; height: 0px; visibility: hidden;'><a href='oo'>"._T("access_mode_texte")."</a></div>";
-	
-	echo "<div id='haut-page'>";
-
-	// Icones principales
-	echo "<div id='bandeau-principal'>\n";
-
-	//$espacement = isset($GLOBALS['boutons_admin']['espacement']);
-	$largeur_icone_bandeau_principal = intval(($largeur)/count($GLOBALS['boutons_admin']));
-	
-	echo "<div class='h-list centered' style='width:{$largeur}px'><ul>\n";	
-	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
-		if($page=='espacement') {
-			
-			echo "<li class='cellule48' style='width:".($largeur_icone_bandeau_principal-20)."px'><span class='menu-item' style='width:".($largeur_icone_bandeau_principal-20)."px'>&nbsp</span></li>";
-		} else {
-			if ($detail->url)
-				$lien_noscript = $detail->url;
-			else
-				$lien_noscript = generer_url_ecrire($page);
-
-			if ($detail->url2)
-				$lien = $detail->url2;
-			else
-				$lien = $lien_noscript;
-
-			icone_bandeau_principal(
-				$detail,
-				$page,
-				$rubrique,
-				$sous_rubrique,$largeur);
-		}
-	}
-
-	echo "</ul></div>\n";
-	echo "</div>\n"; // referme: <div class='bandeau-principal' align='center'>"
 	//init position of submenus and attach behaviour for hover on li (IE)
 	echo http_script(
 	"$('#bandeau-principal li.boutons_admin').hover(\n".

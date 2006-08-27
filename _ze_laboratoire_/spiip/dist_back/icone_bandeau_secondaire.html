@@ -1,0 +1,43 @@
+					#SET{largeur_maxi_menu, #ENV{largeur}|moins{100} }
+					#SET{accesskey_sous,#ENV{accesskey}}
+					<B_sous_menu>
+					<div class='bandeau_sec h-list'><ul>
+					<BOUCLE_sous_menu(TABLEAU){fonction=#ENV**{sousmenu}}>
+						[(#GET{width,0}|plus{#EVAL{1.25*85}}|>{#GET{largeur_maxi_menu}}|?{' ',''})#SET{width,0} </ul><ul><li>]
+						<BOUCLE_espacement_sous(IF){condition (#CLE|=={espacement})}>
+							[(#GET{width,0}|>{0}|?{' ',''})#SET{largitem,0} <li class='separateur'></li>] 
+						</BOUCLE_espacement_sous>
+								#SET{texte,(#OBJ{#VALEUR**,libelle}|_T)}
+								<BOUCLE_init_vars(IF){condition (#ENV{spip_display}|=={1})}>
+									#SET{largeur_sous,80}
+								</BOUCLE_init_vars>
+									#SET{icone,#OBJ**{#VALEUR**,icone}}
+									<BOUCLE_init_vars3(IF){condition (#ENV{spip_display}|=={3})}>
+ 										#SET{largeur_sous,40} 
+										#SET{title,(#GET{texte}|replace{'.*','title="$0"',i})}
+										#SET{alt,#GET{texte}}
+									</BOUCLE_init_vars3>
+ 										[(#GET{texte}|match{' '}|?{#SET{largeur_sous,80},#SET{largeur_sous,70}})]
+ 									<//B_init_vars3>
+								<//B_init_vars>
+								<BOUCLE_init_vars2(IF){condition (#ENV{spip_display}|!={3}|sinon{false}) && (#GET{texte}|strlen|>{16}|sinon{false})}>
+									#SET{largeur_sous,(#GET{largeur_sous}|plus{20})}
+								</BOUCLE_init_vars2>
+								#SET{class_sous,menu-item(#CLE|!={#ENV{sous_rubrique}}|?{""," selection"})}
+								#SET{url_sous,(#OBJ{#VALEUR**,url}|sinon{#CLE})}
+								<BOUCLE_display_mode_sous(IF){condition (#ENV{spip_display}|!={1})}>
+								<li class='cellule36' style='width:#GET{largeur_sous}px'>
+									<a [accesskey='(#GET{accesskey_sous})'] href="#URL_ECRIRE{#GET{url_sous}}" [class='(#GET{class_sous})'] style='width:#GET{largeur_sous}px'>
+										#HTTP_IMG_PACK{#GET**{icone},#GET{alt},#GET{title}}
+										[(#ENV{spip_display}|!={3}|?{' ',''})<span>#GET{texte}</span>] 
+								</BOUCLE_display_mode_sous>
+									<li class='cellule-texte' width='#GET{largeur_sous}px'><a [accesskey='(#GET{accesskey_sous})'] href="#URL_ECRIRE{#GET{url_sous}}" [class='(#GET{class_sous})'] style='width:#GET{largeur_sous}px'>#GET{texte}
+								<//B_display_mode_sous>
+									#SET{accesskey_sous,(#GET{accesskey_sous}|plus{1}|modulo{10})}
+									</a>
+								</li>
+						<//B_espacement_sous>
+						#SET{width,#GET{largeur_sous}|plus{10}}
+					</BOUCLE_sous_menu>
+					</ul></div>
+					</B_sous_menu>

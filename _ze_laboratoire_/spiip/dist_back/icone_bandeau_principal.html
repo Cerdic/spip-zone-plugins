@@ -1,0 +1,26 @@
+			<BOUCLE_espacement(IF){condition (#ENV{nom_bouton}|=={espacement})}>
+				<li class='cellule48' style='width:[(#ENV{largeur_bouton}|moins{20})]px'><span class='menu-item' style='width:[(#ENV{largeur_bouton}|moins{20})]px'>&nbsp</span></li>
+			</BOUCLE_espacement>
+				#SET{texte,(#OBJ{#ENV**{bouton},libelle}|_T)}
+				#SET{lien_noscript,(#OBJ{#ENV**{bouton},url}|sinon{#URL_ECRIRE{#ENV{nom_bouton}}})}
+				#SET{lien,(#OBJ{#ENV**{bouton},url2}|sinon{#GET{lien_noscript}})}
+				#SET{accesskey,#ENV{accesskey}}
+				#SET{title,(#ENV{spip_display}|=={3}|?{#GET{texte},''})}
+				#SET{class,menu-item boutons_admin(#ENV{nom_bouton}|=={#ENV{rubrique}}|?{" selection",""})}
+				[(#GET{lien}|match{^javascript:}|?{
+					[(#SET{href,<a [accesskey='(#GET{accesskey})'] [title='(#GET{title})'] [onClick="(#GET{lien}); return false;"] [href="(#GET{lien_noscript})"] target="spip_aide" [class='(#GET{class})']>})],
+					[(#SET{href,<a [accesskey='(#GET{accesskey})'] [title='(#GET{title})'] [href="(#GET{lien})"] [class='(#GET{class})']>})]
+					})]
+				<BOUCLE_display_icone(IF){condition (#ENV**{spip_display}|!={1}|sinon{false}) && (#ENV**{spip_display}|!={4}|sinon{false})}>
+					<li class='cellule48 boutons_admin'>
+						#GET{href}
+							<span class='icon_fond'><span style='background-image:url("[(#EVAL{_DIR_IMG_PACK})][(#OBJ**{#ENV**{bouton},icone})]")'></span></span>
+							[(#ENV{spip_display}|!={3}|?{' ',''})<span>#GET{texte}</span>]
+				</BOUCLE_display_icone>
+					<li class='cellule-texte boutons_admin'>[(#GET{href})][(#GET{texte})]
+				<//B_display_icone>
+						</a>
+					#SET{accesskey,(#ENV{accesskey}|plus{1})}
+					[(#INCLUDE{fond=icone_bandeau_secondaire}{largeur}{sousmenu=#OBJ**{#ENV**{bouton},sousmenu}}{spip_display}{nom_bouton}{rubrique}{sous_rubrique}{accesskey=#GET{accesskey}})]
+					</li>
+			<//B_espacement>
