@@ -2085,7 +2085,10 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 	//global $browser_verifForm;
 
 	echo pipeline('body_prive',"<body ". _ATTRIBUTES_BODY.'>');
-
+	
+	if ($spip_ecran == "large") $largeur = 974;
+	else $largeur = 750;
+	
 	include_spip('public/assembler');
 	echo recuperer_fond('dist_back/bandeau_principal',array(
 		'spip_ecran'=>$spip_ecran,
