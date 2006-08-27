@@ -319,6 +319,9 @@ function couper_intro($texte, $long) {
 	else {
 		$intro = preg_replace(',([|]\s*)+,S', '; ', couper($texte, $long));
 	}
+
+	// supprimer un eventuel chapo redirecteur =http:/.....
+	return $intro;
 }
 
 
@@ -939,6 +942,7 @@ function supprime_img($letexte) {
 // partir du squelette modeles/modele.html
 // Le nom du modele doit faire au moins trois caracteres (evite <h2>)
 // Si $doublons==true, on repere les documents sans calculer les modeles
+// mais on renvoie les params (pour l'indexation par le moteur de recherche)
 // http://doc.spip.org/@traiter_modeles
 function traiter_modeles($texte, $doublons=false) {
 	// detecter les modeles (rapide)
@@ -973,7 +977,11 @@ function traiter_modeles($texte, $doublons=false) {
 			}
 
 			// calculer le modele
-			if ($doublons) $modele = ''; else # hack articles_edit, breves_edit
+			# hack articles_edit, breves_edit, indexation
+			if ($doublons)
+				$texte .= preg_replace(',[|][^|=]*,s',' ',$regs[4]);
+			# version normale
+			else {
 			$modele = inclure_modele($regs[2], $regs[3], $regs[4], $lien);
 
 			// le remplacer dans le texte
@@ -983,6 +991,7 @@ function traiter_modeles($texte, $doublons=false) {
 					.$rempl
 					. substr($texte, $a+strlen($cherche));
 				}
+			}
 
 			// hack pour tout l'espace prive
 			if (!_DIR_RESTREINT)
