@@ -1,7 +1,7 @@
 <?php
 
-/* A REVOIR ... */
-define('_DIR_PLUGIN_FCKEDITOR','/spip/plugins/_typo_/fckeditor');
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\',/*'*/'/',realpath(dirname(dirname(__FILE__)))));//**********
+define('_DIR_PLUGIN_FCKEDITOR',(_DIR_PLUGINS.end($p)));//**********
 
 function fckeditor2_header_prive($flux) {
 	global $exec;
