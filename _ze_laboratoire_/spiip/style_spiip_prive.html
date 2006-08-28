@@ -175,7 +175,7 @@ float:left;
 .righted {margin:0 0 0 auto;}
 
 /*style for bandeau-principal*/
-#bandeau-principal {padding-top:5px;border-bottom: 1px solid #000;position:relative;z-index:90}
+#bandeau-principal {padding-top:5px;border-bottom: 1px solid #000;position:relative;z-index:90;background:#fff}
 #bandeau-principal .h-list .menu-item {margin:0 auto}
 * html #bandeau-principal li * {word-wrap:break-word}
 
@@ -216,10 +216,12 @@ float:left;
 
 #bandeau_couleur {min-height:20px;padding:2px 0}
 #bandeau_couleur1 .menu-item {width:230px}
-#bandeau_couleur3 .menu-item {width:150px}
-#bandeau_couleur4 .menu-item {width:70px}
-#bandeau_couleur5 .menu-item {width:110px}
-#bandeau_couleur6 .menu-item {width:38px}
+#bandeau_couleur3 .menu-item {width:150px;text-align:[(#ENV{ltr}|choixsiegal{left,right,left})]}
+#bandeau_couleur4 .menu-item {width:68px;text-align:center;margin:0 5px}
+* html #bandeau_couleur4 .menu-item{margin:0 11px} 
+#bandeau_couleur5 .menu-item {width:114px;}
+#bandeau_couleur6 .menu-item {width:32px}
+* html #bandeau_couleur6 .menu-item {margin-left:-3px;margin-right:-6px}
 /*style for submenus*/
 .bandeau_sec {
 	margin-top: 0;
