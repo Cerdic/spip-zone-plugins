@@ -52,6 +52,8 @@ global $auto;
 global $changer_extra,$email_envoi,$patron,$periode;
 global $envoyer_direct;
 
+global $debut;
+
 
 
 
@@ -83,6 +85,15 @@ if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
 }
 
 debut_gauche();
+
+debut_boite_info();
+
+echo '<div align="center">
+<font face="Verdana,Arial,Sans,sans-serif" size="1"><b>LISTE NUMÉRO&nbsp;:</b></font>
+<br><font face="Verdana,Arial,Sans,sans-serif" size="6"><b>'.$id_article.'</b></font>
+</div>';
+
+fin_boite_info();
 
 spip_listes_raccourcis();
 
@@ -1054,7 +1065,7 @@ if ($nombre_auteurs) {
 // et memoriser la liste des lettres initiales
 //
 
-$retour='spip_listes.php3?mode=liste_edit&id_article='.$id_article;
+$retour=generer_url_ecrire("gerer_liste", "id_article=$id_article");
 
 $max_par_page = 30;
 if ($debut > $nombre_auteurs - $max_par_page)
