@@ -7,9 +7,7 @@
    <BOUCLE_archives_mensuelles(ARTICLES){branche ?}{lang}{par date}{inverse}>[
    <option value='[(#DATE|affdate{'Y-m'})]'[
    (#ENV{archives}|=={[(#DATE|affdate{'Y-m'})]}|?{selected="selected"})
-   ]>
-   (#DATE|affdate{'Y-m'}|unique{select}|affdate_mois_annee)
-   </option>
+   ]>(#DATE|affdate{'Y-m'}|unique{select}|affdate_mois_annee)</option>
    ]</BOUCLE_archives_mensuelles>
   </select>
   <input type='submit' />

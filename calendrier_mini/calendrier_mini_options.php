@@ -7,5 +7,6 @@
 */
 
 define(VAR_DATE, 'archives');
+define(LG_ABBR, 3);
 
 ?>
