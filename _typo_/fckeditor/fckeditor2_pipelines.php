@@ -1,7 +1,7 @@
 <?php
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\',/*'*/'/',realpath(dirname(dirname(__FILE__)))));//**********
-define('_DIR_PLUGIN_FCKEDITOR',(_DIR_PLUGINS.end($p)));//**********
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\',/*'*/'/',realpath(dirname(__FILE__))));
+define('_DIR_PLUGIN_FCKEDITOR',(_DIR_PLUGINS.end($p)));
 
 function fckeditor2_header_prive($flux) {
 	global $exec;
