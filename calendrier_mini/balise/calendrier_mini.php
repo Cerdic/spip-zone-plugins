@@ -1,7 +1,7 @@
 <?php
 
 /* Balise #CALENDRIER_MINI
-   Auteur James
+   Auteur James (c) 2006
    Plugin pour spip 1.9
    Licence GNU/GPL
 */
@@ -9,14 +9,14 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 function balise_CALENDRIER_MINI($p) {
-	return calculer_balise_dynamique($p,'CALENDRIER_MINI', array('archives', 'id_rubrique'));
+	return calculer_balise_dynamique($p,'CALENDRIER_MINI', array(VAR_DATE, 'id_rubrique'));
 }
  
 function balise_CALENDRIER_MINI_stat($args, $filtres) {
 	return $args;
 }
  
-function balise_CALENDRIER_MINI_dyn($date, $id_rubrique = 0, $var_date = 'archives', $url = '') {
+function balise_CALENDRIER_MINI_dyn($date, $id_rubrique = 0, $url = '') {
 	if(!$url) {
 		$url = self();
 	}
@@ -24,7 +24,7 @@ function balise_CALENDRIER_MINI_dyn($date, $id_rubrique = 0, $var_date = 'archiv
 		array(
 			'date' => $date?$date:date('Y-m'),
 			'id_rubrique' => $id_rubrique,
-			'var_date' => $var_date,
+			'var_date' => VAR_DATE,
 			'self' => $url
 		));
 }

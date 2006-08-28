@@ -39,8 +39,10 @@
    
    #CALENDRIER_MINI
    
-   [(#MODELE{archives_mensuelles}{id_rubrique,archives,self=#SELF,lang})]
+   [(#MODELE{archives_mensuelles}{id_rubrique,archives,self=[(#SELF|parametre_url{debut_articles_archives,''})],lang})]
    
+   [(#MODELE{select_archives_mensuelles}{id_rubrique,archives,self=[(#SELF|parametre_url{debut_articles_archives,''})],lang})]
+
    </div>
   </div>
  
