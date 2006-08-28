@@ -2109,137 +2109,27 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 	//
 	// Bandeau colore
 	//
-
-if (true /*$bandeau_colore*/) {
-	if ($rubrique == "administration") {
-		$style = "background: url(" . _DIR_IMG_PACK . "rayures-danger.png); background-color: $couleur_foncee";
-		echo "<style>a.icone26 { color: white; }</style>";
-	}
-	else {
-		$style = "background-color: $couleur_claire";
-	}
-
-	echo "\n<div id='bandeau_couleur' style=\"max-height: 40px; width: 100%; border-bottom: solid 1px white;$style\">";
-	echo "<div class='h-list centered vcentered' style='width:{$largeur}px'><ul>";
-
-	echo "<li id='bandeau_couleur1' class='bandeau_couleur'><div class='menu-item'>";
-
-	echo "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' id='bouton_toutsite' onmouseover=\"charger_id_url_si_vide('" . generer_url_ecrire('rubriquer',"&var_ajax=1&id=$id_rubrique") . "','nav-recherche');\">",
-		  http_img_pack("tout-site.png", "", "width='26' height='20'") . "</a>";
-		if ($id_rubrique > 0) echo "<a href='" . generer_url_ecrire("brouteur","id_rubrique=$id_rubrique") . "' class='icone26' id='bouton_navrapide'>" .
-		  http_img_pack("naviguer-site.png", "", "width='26' height='20'") ."</a>";
-		else echo "<a href='" . generer_url_ecrire("brouteur") . "' class='icone26' id='bouton_navrapide'>" .
-		  http_img_pack("naviguer-site.png", "", "width='26' height='20'") . "</a>";
-
-		echo "<a href='" . generer_url_ecrire("recherche") . "' class='icone26' id='bouton_recherche' onmouseover=\"findObj('form_recherche').focus();\" >" .
-		  http_img_pack("loupe.png", "", "width='26' height='20'") ."</a>";
-
-		echo http_img_pack("rien.gif", " ", "width='10'");
-
-		echo "<a href='" . generer_url_ecrire("calendrier","type=semaine") . "' class='icone26' id='bouton_agenda'>" .
-		  http_img_pack("cal-rv.png", "", "width='26' height='20'") ."</a>";
-		echo "<a href='" . generer_url_ecrire("messagerie") . "' class='icone26' id='bouton_messagerie'>" .
-		  http_img_pack("cal-messagerie.png", "", "width='26' height='20'") ."</a>";
-		echo "<a href='" . generer_url_ecrire("synchro") . "' class='icone26' id='bouton_synchro'>" .
-		  http_img_pack("cal-suivi.png", "", "width='26' height='20'") . "</a>";
-		
-
-		if (!($connect_statut == "0minirezo" AND $connect_toutes_rubriques)) {
-			echo http_img_pack("rien.gif", " ", "width='10'");
-			echo "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur") . "' class='icone26' id='bouton_infoperso'>" .
-			  http_img_pack("fiche-perso.png", "", "");
-			echo "</a>";
-		}
-		
-	echo "</div></li>";
-	// overflow pour masquer les noms tres longs (et eviter debords, notamment en ecran etroit)
-		if ($spip_ecran == "large") $largeur_nom = 380;
-		else $largeur_nom= 150;
 	
-	echo "<li id='bandeau_couleur2' class='bandeau_couleur' style='width:{$largeur_nom}px'>";
-	
+	echo recuperer_fond('dist_back/bandeau_couleur',array(
+		'spip_ecran'=>$spip_ecran,
+		'id_rubrique'=>$id_rubrique,
+		'rubrique'=>$rubrique,
+		'couleur_foncee'=>$couleur_foncee,
+		'couleur_claire'=>$couleur_claire,
+		'connect_statut'=>$connect_statut,
+		'connect_toutes_rubriques'=>$connect_toutes_rubriques,
+		'auteur'=>$GLOBALS['auteur_session']['nom'],
+		'options'=>$options,
+		'auth_can_disconnect'=>$auth_can_disconnect
+		));
 		
-		echo "<div class='menu-item' style='width: ".$largeur_nom."px; overflow: hidden;'>";
-		// Redacteur connecte
-		echo typo($GLOBALS['auteur_session']['nom']);
-		echo "</div>";
-	
-	echo "</li>";
-
-	echo "<li><div class='menu-item'> &nbsp; </div></li>";
-
-	echo "<li id='bandeau_couleur3' class='bandeau_couleur'><div class='menu-item'>";
-
-			// Choix display
-		//	echo"<img src=_DIR_IMG_PACK . 'rien.gif' width='10' />";
-			if ($options != "avancees") {
-				$lien = parametre_url(self(), 'set_options', 'avancees');
-				$icone = "interface-display-comp.png";
-			} else {
-				$lien = parametre_url(self(), 'set_options', 'basiques');
-				$icone = "interface-display.png";
-			}
-			echo "<a href='$lien' class='icone26' id='bouton_display'>" .
-			  http_img_pack("$icone", "", "width='26' height='20'")."</a>";
-
-			echo http_img_pack("rien.gif", " ", "width='10' height='1'");
-			echo http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", "abc", "class='format_png' valign='middle' width='59' height='15' usemap='#map_layout'");
-
-
-			echo http_img_pack("rien.gif", " ", "width='10' height='1'");
-			// grand ecran
-			if ($spip_ecran == "large") {
-				$i = _T('info_petit_ecran');
-				echo "<a href='". parametre_url(self(),'set_ecran', 'etroit') ."' class='icone26' id='bouton_ecran' title=\"$i\">" .
-				  http_img_pack("set-ecran-etroit.png", $i, "width='26' height='20'") . "</a>";
-				$ecran = "<div><a href='".parametre_url(self(),'set_ecran', 'etroit')."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
-			}
-			else {
-				$i = _T('info_grand_ecran');
-				echo "<a href='".parametre_url(self(),'set_ecran', 'large')."' class='icone26' id='bouton_ecran' title=\"$i\">" .
-				  http_img_pack("set-ecran.png", $i, "width='26' height='20'") ."</a>";
-				$ecran = "<div><b>"._T('info_petit_ecran')."</b>/<a href='".parametre_url(self(),'set_ecran', 'large')."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
-			}
-
-		echo "</div></li>";
-		
-		echo "<li id='bandeau_couleur4' class='bandeau_couleur'><div class='menu-item'>";
-		choix_couleur();
-		
-		echo "</div></li>";
-	//
-	// choix de la langue
-	//
-	if ($GLOBALS['all_langs']) {
-		echo "<li id='bandeau_couleur5' class='bandeau_couleur'><div class='menu-item'>";
-		echo menu_langues('var_lang_ecrire');
-		echo "</div></li>";
-	}
-
-		echo "<li id='bandeau_couleur6' class='bandeau_couleur'><div class='menu-item'>";
-		
-		if ($auth_can_disconnect) {
-			echo "<a href='",
-			  generer_url_action("logout","logout=prive"),
-			  "' class='icone26' id='bouton_deconnecter'>",
-			  http_img_pack("deconnecter-24.gif", "", ""),
-			  "</a>";
-			}
-		echo "</div></li>";
-	
-	
-	echo "</ul></div>";
-
-} // fin bandeau colore
-
 	// <div> pour la barre des gadgets
 	// (elements invisibles qui s'ouvrent sous la barre precedente)
 	include_spip('inc/gadgets');
 	echo bandeau_gadgets($largeur, $options, $id_rubrique);
 	$GLOBALS['id_rubrique_gadgets'] = $id_rubrique;  # un peu sale
 
-	//echo "</div>";
-	echo "</div>";
+	echo "</div>";//fin haut_page
 	
 	//init bandeau_couleur
 	echo	http_script(
