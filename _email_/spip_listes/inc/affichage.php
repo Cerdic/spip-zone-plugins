@@ -156,10 +156,10 @@ fin_boite_info();
 		
 		if($element == 'messages'){
 		$type='nl' ;
-		if($statut=='auto'){
-		$type='auto';
-		$statut='publie';
-		}
+			if($statut=='auto'){
+			$type='auto';
+			$statut='publie';
+			}
 		$requete_listes = 'SELECT id_message,
 								titre,
 								date_heure
@@ -167,15 +167,12 @@ fin_boite_info();
 							WHERE type="'.$type.'" AND statut="'.$statut.'" '.$clause_where.'
 							ORDER BY date_heure DESC
 							LIMIT '.$position.','.$pas.'';
-		
 		}
 		
 		if($element == 'abonnements'){
-		
-	
 		if($statut==''){
 		
-$requete_listes = 'SELECT articles.id_article, articles.titre, articles.statut, articles.date, lien.id_auteur,lien.id_article FROM  spip_auteurs_articles AS lien LEFT JOIN spip_articles AS articles  ON lien.id_article=articles.id_article WHERE lien.id_auteur="'.$id_auteur.'" AND (articles.statut ="liste" OR articles.statut ="inact") ORDER BY articles.date DESC LIMIT '.$position.','.$pas.'';
+		$requete_listes = 'SELECT articles.id_article, articles.titre, articles.statut, articles.date, 							lien.id_auteur,lien.id_article FROM  spip_auteurs_articles AS lien LEFT JOIN spip_articles AS articles  ON 				lien.id_article=articles.id_article WHERE lien.id_auteur="'.$id_auteur.'" AND (articles.statut ="liste" OR 				articles.statut ="inact") ORDER BY articles.date DESC LIMIT '.$position.','.$pas.'';
 		
 		}else{
 		$requete_listes = 'SELECT id_message,
@@ -271,13 +268,28 @@ $requete_listes = 'SELECT articles.id_article, articles.titre, articles.statut, 
 
 			}
 			$en_liste.= "</table>\n";
-			$requete_total = 'SELECT id_articles,
+			
+			
+			switch ($element){
+			case "articles":
+			$requete_total = 'SELECT id_article
 								FROM spip_articles
 								WHERE statut="'.$statut.'" '.$clause_where.'
 								ORDER BY date DESC';
+			$retour = 'listes_toutes';
+			break;
+			case "messages":
+			$requete_total = 'SELECT id_message
+							FROM spip_messages
+							WHERE type="'.$type.'" AND statut="'.$statut.'"';
+			$retour = 'spip_listes';
+			break;
+			}
+			
 			$resultat_total = spip_query($requete_total);
 			$total = spip_num_rows($resultat_total);
-			$en_liste.= spiplistes_afficher_pagination('lettres', '', $total, $position, $nom_position);
+			
+			$en_liste.= spiplistes_afficher_pagination($retour, '', $total, $position, $nom_position);
 			$en_liste.= "</div>\n";
 			$en_liste.= "<br />\n";
 		}
@@ -289,7 +301,7 @@ $requete_listes = 'SELECT articles.id_article, articles.titre, articles.statut, 
 
 
 /**
-	 * lettres_afficher_pagination
+	 * adapté de lettres_afficher_pagination
 	 *
 	 * @param string fond
 	 * @param string arguments
