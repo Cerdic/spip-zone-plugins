@@ -271,7 +271,7 @@ echo "</form>";
 
     $auj = date(_T('spiplistes:format_date'));
     echo "<p align='center'><b>"._T('spiplistes:date_ref')."</b><br /><input type='text' name='date' value=\"$auj\"></p>";
-	echo "<p align='center'>"._T('spiplistes:alerte_modif')."<br /><br /><input type='submit' name='Valider' value='"._T('spiplistes:charger_le_patron')."' class='fondo'></p>";
+	echo "<p align='center'><br /><br /><input type='submit' name='Valider' value='"._T('spiplistes:charger_le_patron')."' class='fondo'></p>";
 	echo "</div>";
 	  
 	  
