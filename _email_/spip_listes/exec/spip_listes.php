@@ -103,7 +103,7 @@ if ($detruire_message) {
 
 $messages_vus = '';
 
-spiplistes_afficher_en_liste(_T('spiplistes:aff_encours'),  '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'messages', 'encour', '', 'position') ;
+spiplistes_afficher_en_liste(_T('spiplistes:aff_encours'),  '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/24_send-receive.gif', 'messages', 'encour', '', 'position') ;
 
 
 

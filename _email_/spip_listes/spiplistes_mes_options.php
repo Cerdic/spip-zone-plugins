@@ -58,6 +58,11 @@ function balise_DATE_MODIF_SITE($p) {
    return $p;
 }
 
+//utiliser le cron pour envoyer les messages en attente
+function spiplistes_taches_generales_cron($taches_generales){
+	$taches_generales['spiplistes_cron'] = 20;
+	return $taches_generales;
+}
 
 include_spip('inc/options_spip_listes');
 

@@ -45,7 +45,7 @@ function spip_listes_raccourcis(){
 	global  $connect_statut;
 
 	// debut des racourcis
-debut_raccourcis("../"._DIR_PLUGIN_LETTRE_INFORMATION."/img_pack/mailer_config.gif");
+debut_raccourcis("../"._DIR_PLUGIN_SPIPLISTES."/img_pack/mailer_config.gif");
 
 if ($connect_statut == "0minirezo") {
   icone_horizontale(_T('spiplistes:Nouveau_courrier'), "?exec=courrier_edit&new=oui&type=nl", "../"._DIR_PLUGIN_SPIPLISTES."/img_pack/stock_mail_send.gif");
@@ -87,7 +87,7 @@ if($mssage_pile > 0 ){
 		echo "<div style='font-weight:bold;text-align:center'>"._T('spiplistes:envoi_en_cours')."</div>";
 	echo "<div style='padding : 10px;text-align:center'><img src='../"._DIR_PLUGIN_SPIPLISTES."/img_pack/48_import.gif'></div>";
 	if($nb_inscrits > 0){
-		echo "<p align='center'><b>".round($extra_meta["debut"]/$nb_inscrits *100)." %</b></p>";
+		echo "<p align='center'><b>".round($GLOBALS["meta"]["debut"]/$nb_inscrits *100)." %</b></p>";
 	}
 	echo "<p>"._T('spiplistes:texte_boite_en_cours')."</p>" ;
 	echo "<p align='center'><a href='".generer_url_public('meleuse')."'>["._T('spiplistes:suivi_envois')."]</a></p>";
@@ -160,11 +160,15 @@ fin_boite_info();
 			$type='auto';
 			$statut='publie';
 			}
+			if($statut=='encour'){
+			$type2='OR type="auto"';
+			}
+			
 		$requete_listes = 'SELECT id_message,
 								titre,
 								date_heure
 							FROM spip_messages
-							WHERE type="'.$type.'" AND statut="'.$statut.'" '.$clause_where.'
+							WHERE (type="'.$type.'"'.$type2.') AND statut="'.$statut.'" '.$clause_where.'
 							ORDER BY date_heure DESC
 							LIMIT '.$position.','.$pas.'';
 		}
@@ -284,12 +288,17 @@ fin_boite_info();
 							WHERE type="'.$type.'" AND statut="'.$statut.'"';
 			$retour = 'spip_listes';
 			break;
+			case "abonnements":
+			$requete_total = 'SELECT articles.id_article, articles.titre, articles.statut, articles.date, 							lien.id_auteur,lien.id_article FROM  spip_auteurs_articles AS lien LEFT JOIN spip_articles AS articles  ON 				lien.id_article=articles.id_article WHERE lien.id_auteur="'.$id_auteur.'" AND (articles.statut ="liste" OR 				articles.statut ="inact") ORDER BY articles.date DESC';
+			$retour = 'abonne_edit';
+			$param = '&id_auteur='.$id_auteur;
+			break;
 			}
 			
 			$resultat_total = spip_query($requete_total);
 			$total = spip_num_rows($resultat_total);
 			
-			$en_liste.= spiplistes_afficher_pagination($retour, '', $total, $position, $nom_position);
+			$en_liste.= spiplistes_afficher_pagination($retour, $param, $total, $position, $nom_position);
 			$en_liste.= "</div>\n";
 			$en_liste.= "<br />\n";
 		}

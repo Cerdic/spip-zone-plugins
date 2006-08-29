@@ -342,7 +342,7 @@ echo $texte_patron.version_texte($texte_patron) ;
 
 
 $deb = lire_meta('debut');
-
+//hum... !deb
 if ( !($deb) OR ($reinitialiser_config == 'oui' AND $Valider_reinit)) {
 spip_query("DELETE from spip_messages WHERE statut='encour'");
 ecrire_meta('debut', 0 ) ;
