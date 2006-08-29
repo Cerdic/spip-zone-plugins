@@ -25,13 +25,12 @@ prepararlo en HTML.
 Te enviaremos un correo electr&oacute;nico con el enlace a la p&aacute;gina en la que podr&aacute;s hacer los cambios.',
 'abonnement_mail_passcookie'=>'(este es un mensaje autom&aacute;tico)
 
-En el siguiente enlace:
+Hola. En el siguiente enlace:
 
-@adresse_site@/abonnement.php3?d=@cookie@
+@adresse_site@/spip.php?page=abonnement&d=@cookie@
 
 podr&aacute;s cambiar el formato de recepci&oacute;n de los mensajes y novedades de
-"@nom_site_spip@" (@adresse_site@)
-o darte de baja.
+"@nom_site_spip@" (@adresse_site@) o darte de baja.
 
 Un saludo
   
