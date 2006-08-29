@@ -23,17 +23,8 @@ include_spip('inc/extra_plus');
 
 //Balises Spip-listes
 
-function calcul_MELEUSE_CRON() {
-  global $include_ok;
-   if(!$include_ok) {
-include_spip("inc/meleuse-cron");
-$include_ok = true;
-}
-   return '';
-}
-
 function balise_MELEUSE_CRON($p) {
-   $p->code = "calcul_MELEUSE_CRON()";
+   $p->code = "";
    $p->statut = 'php';
    return $p;
 }
@@ -63,6 +54,8 @@ function spiplistes_taches_generales_cron($taches_generales){
 	$taches_generales['spiplistes_cron'] = 20;
 	return $taches_generales;
 }
+
+$GLOBALS['spiplistes_version'] = "SPIP-listes 1.9b2";
 
 include_spip('inc/options_spip_listes');
 
