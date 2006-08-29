@@ -21,7 +21,7 @@
     <div class="liste-articles">
     [<h2>(#DATE_ARCHIVES|affdate)</h2>][
     <div>(#PAGINATION)</div>
-    ]<BOUCLE_articles_archives(ARTICLES){pagination 15}{par date}{inverse}{archives ?}>
+    ]<BOUCLE_articles_archives(ARTICLES){pagination 15}{par date}{inverse}{archives ?}{branche ?}>
     <h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
     <small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
     [<div class="texte">(#INTRODUCTION)</div>]
@@ -29,7 +29,7 @@
    </BOUCLE_articles_archives>[
    <div>(#PAGINATION)</div>
    ]</div></B_articles_archives>[
-   <h2>Rien pour (#DATE_ARCHIVES|affdate)</h2>
+   <h2>Rien pour (#DATE_ARCHIVES|affdate)[ (#ENV{id_rubrique}?{dans ce secteur})]</h2>
    ]<//B_articles_archives>
    
    </div>
@@ -37,11 +37,24 @@
   <div id="navigation">
    <div id="sidebar">
    
-   #CALENDRIER_MINI
+   [(#CALENDRIER_MINI{#URL_PAGE{exemple}})]
    
-   [(#MODELE{archives_mensuelles}{id_rubrique,archives,self=[(#SELF|parametre_url{debut_articles_archives,''})],lang})]
+   <B_categories>
+   <div id='categories'>
+   <h2><:categories|ucfirst:></h2>
+   <ul>
+    <BOUCLE_categories(RUBRIQUES){racine}>[
+    <li>[(#EXPOSE{<b>})]
+    <a href="(#URL_PAGE{exemple}|parametre_url{id_rubrique,#ID_RUBRIQUE})">#TITRE</a>
+    [(#EXPOSE{</b>})]</li>
+    ]</BOUCLE_categories>
+   </ul>
+   </div>
+   </B_categories>
    
-   [(#MODELE{select_archives_mensuelles}{id_rubrique,archives,self=[(#SELF|parametre_url{debut_articles_archives,''})],lang})]
+   [(#MODELE{archives_mensuelles}{id_rubrique,archives,self=#URL_PAGE{exemple},lang})]
+   
+   [(#MODELE{select_archives_mensuelles}{id_rubrique,archives,self=#URL_PAGE{exemple},lang})]
 
    </div>
   </div>

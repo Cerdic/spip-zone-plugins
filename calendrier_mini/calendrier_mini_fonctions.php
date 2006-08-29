@@ -6,19 +6,6 @@
    Licence GNU/GPL
 */
 
-//projet une balise #URL_ARCHIVES
-/*function balise_URL_ARCHIVES($p) {
-	$_date = champ_sql('date', $p);
-	$p->code = "generer_url_archives($_date)";
-	
-	#$p->interdire_scripts = true;
-	return $p;
-}
-
-function generer_url_archives($date) {
- return parametre_url(self(), VAR_DATE, affdate($date, 'Y-m'));
-}*/
-
 function balise_DATE_ARCHIVES($p) {
 	$p->code = "_request('".VAR_DATE."')";
 
@@ -36,6 +23,21 @@ function critere_archives($idb, &$boucles, $crit) {
   "spip_abstract_quote(('^' . interdire_scripts(entites_html(\$Pile[0]['".VAR_DATE."']))))"
  );
  
+}
+
+function thead($lang){
+	$ret = '';
+	$debut = 2;
+	if($lang == 'en') $debut = 1;
+	for($i=0;$i<7;$i++) {
+		$ret .= "\n\t\t\t\t".'<th scope="col"><abbr title="'._T('date_jour_'.$debut).'">' .
+		ucfirst(couper(_T('date_jour_'.$debut),LG_ABBR)).'</abbr></th>';
+		$debut = $debut == 7 ? 1 : $debut+1;
+	}
+	return "\n\t\t".'<thead>
+			<tr>' .$ret. '
+			</tr>
+		</thead>'."\n";
 }
 
 ?>

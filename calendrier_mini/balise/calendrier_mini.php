@@ -9,23 +9,23 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 function balise_CALENDRIER_MINI($p) {
-	return calculer_balise_dynamique($p,'CALENDRIER_MINI', array(VAR_DATE, 'id_rubrique'));
+	return calculer_balise_dynamique($p,'CALENDRIER_MINI', array(VAR_DATE, 'id_rubrique','id_article', 'id_mot'));
 }
  
 function balise_CALENDRIER_MINI_stat($args, $filtres) {
+ //les parametres passe en {...}, les filtres sont des vraiss filtres
 	return $args;
 }
  
-function balise_CALENDRIER_MINI_dyn($date, $id_rubrique = 0, $url = '') {
-	if(!$url) {
-		$url = self();
-	}
+function balise_CALENDRIER_MINI_dyn($date, $id_rubrique = 0, $id_article = 0, $id_mot = 0, $url = '') {
 	return array('formulaires/calendrier_mini', 3600, 
 		array(
 			'date' => $date?$date:date('Y-m'),
-			'id_rubrique' => $id_rubrique,
 			'var_date' => VAR_DATE,
-			'self' => $url
+			'self' => $url?$url:self(),
+			'id_rubrique' => $id_rubrique,
+			'id_article' => $id_article,
+			'id_mot' => $id_mot
 		));
 }
 
@@ -106,21 +106,6 @@ function http_calendrier_mini($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	}
 
 	return $total . ($ligne ? "\n<tr>$ligne\n</tr>" : '');
-}
-
-function thead($lang){
-	$ret = '';
-	$debut = 2;
-	if($lang == 'en') $debut = 1;
-	for($i=0;$i<7;$i++) {
-		$ret .= "\n\t\t\t\t".'<th scope="col"><abbr title="'._T('date_jour_'.$debut).'">' .
-		ucfirst(couper(_T('date_jour_'.$debut),LG_ABBR)).'</abbr></th>';
-		$debut = $debut == 7 ? 1 : $debut+1;
-	}
-	return "\n\t\t".'<thead>
-			<tr>' .$ret. '
-			</tr>
-		</thead>'."\n";
 }
 
 ?>
