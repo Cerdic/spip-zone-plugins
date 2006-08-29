@@ -369,8 +369,8 @@ fin_cadre_relief();
 
 // MODE CONFIG FIN -------------------------------------------------------------
 
-$spiplistes_version = "SPIP-listes 1.9b1";
-echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$spiplistes_version."<p>" ;
+//$spiplistes_version = "SPIP-listes 1.9b2";
+echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$GLOBALS['spiplistes_version']."<p>" ;
 
 fin_page();
 

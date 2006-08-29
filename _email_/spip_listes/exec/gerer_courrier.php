@@ -300,8 +300,7 @@ if ($statut=="redac") {
 	echo "</div>"; // fin du cadre de couleur
 	
 	
-$spiplistes_version = "SPIP-listes 1.9b1";
-echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$spiplistes_version."<p>" ;
+echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$GLOBALS['spiplistes_version']."<p>" ;
 			
 		
 }//while		

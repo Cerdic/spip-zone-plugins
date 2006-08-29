@@ -141,8 +141,7 @@ spiplistes_afficher_en_liste(_T('spiplistes:listes_poubelle'), '../'._DIR_PLUGIN
 
 // MODE EDIT LISTES FIN --------------------------------------------------------
 
-$spiplistes_version = "SPIP-listes 1.9b1";
-echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$spiplistes_version."<p>" ;
+echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$GLOBALS['spiplistes_version']."<p>" ;
 
 fin_page();
 
