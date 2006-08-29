@@ -3,6 +3,7 @@
 	  Smooth
 <multi>
 [fr] gallery photo en js. Portage de http://smoothslideshow.jondesign.net/
+
 </multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
@@ -16,7 +17,11 @@ IZO 	</auteur>
 	<description>
 	  <multi>
 	  [fr]
-J'aimerai obtenir #SMOOTH comme pour le plugin #PORTOFOLIO
+un plugin de gallerie d'image 
+
+portage de http://smoothslideshow.jondesign.net/
+
+J'aimerai obtenir #SMOOTH comme pour le plugin #PORTOFOLIO mais j'y arrive pas mais je veux bien l'on m'explique 
 ... au fait le plugin marche pas :)
 	  </multi>
 	</description>
