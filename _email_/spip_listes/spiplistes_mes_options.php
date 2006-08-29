@@ -1,23 +1,20 @@
 <?php
 
-//$dossier_squelettes = " "; 
-
-
 //
-// Definition de tous les extras possibles
+// Creation / ajout du champ extra auteur pour l'abonnement
 //
 
-$champs_extra = true;
 
 if (!is_array($GLOBALS['champs_extra'])) $GLOBALS['champs_extra'] = Array ();
-
-	$GLOBALS['champs_extra']['auteurs']['abo'] = "radio|brut|Format|Html,Texte,D&eacute;sabonnement|html,texte,non" ;
-	//$GLOBALS['champs_extra']['articles']['squelette'] = 'text|propre|Patron' ;			
+$GLOBALS['champs_extra']['auteurs']['abo'] = _T("spiplistes:options") ;
 
 if (!is_array($GLOBALS['champs_extra_proposes'])) $GLOBALS['champs_extra_proposes'] = Array ();		
-		
+
+if (!isset($GLOBALS['champs_extra_proposes']['auteurs']['tous'])){		
 	$GLOBALS['champs_extra_proposes']['auteurs']['tous'] = 'abo' ;
-	//$GLOBALS['champs_extra_proposes']['articles']['0'] = 'squelette' ;
+	}else{
+	$GLOBALS['champs_extra_proposes']['auteurs']['tous'] = $GLOBALS['champs_extra_proposes']['auteurs']['tous']."|abo";
+	}
 		
 include_spip('inc/extra_plus');
 
