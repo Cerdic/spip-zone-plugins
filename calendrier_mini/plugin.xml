@@ -7,9 +7,9 @@ _ &copy; 2006 - Licence GNU/GPL</auteur>
 	<description>Permet l'utilisation d'une balise #CALENDRIER_MINI.
 _ Cette balise affiche un calendrier au design issu de dotclear et donc compatible avec les styles issus de ce syst&egrave;me de blog.
 _ Lui sont adjoints d'autre elements, tels que balises, criteres, modeles...
-_ Documentation, explications et support : _hum... &agrave; d&eacute;finir_
-_ Une fois activ&eacute;, vous pouvez consulter le squelette d'exemple sur cette [d&eacute;monstration locale->../spip.php?page=exemple]	</description>
-	<fonctions>calendrier_mini_fonctions.php</fonctions>
-	<options>calendrier_mini_options.php</options>
+_ Support, questions/r&eacute;ponses via la liste de discussion [spip-zone@rezo.net->http://listes.rezo.net/mailman/listinfo/spip-zone]
+_ Une fois activ&eacute;, vous pouvez consulter le squelette d'exemple sur cette [d&eacute;monstration sur votre site->../spip.php?page=minical_demo] ainsi qu'une [documentation->../spip.php?page=minical_doc].</description>
+	<fonctions>minical_fonctions.php</fonctions>
+	<options>minical_options.php</options>
 	<prefix>CalendrierMini</prefix>
 </plugin>
