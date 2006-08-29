@@ -86,7 +86,7 @@ function http_calendrier_mini($annee, $mois, $jour, $echelle, $partie_cal, $scri
 		$annee_en_cours = date("Y",$nom);
 		$amj = date("Y",$nom) . $mois_en_cours . $jour;
 
-		if ($jour_semaine==$jour_semaine_lang) { 
+		if ($jour_semaine==$jour_semaine_lang AND $ligne != '') { 
 			$total .= "\n<tr>$ligne\n</tr>";
 			$ligne = '';
 		}
