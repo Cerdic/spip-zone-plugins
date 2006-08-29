@@ -250,9 +250,14 @@ fin_boite_info();
 				$en_liste.= "<div>\n";
 				$en_liste.= "<a href=\"".$url_row."\" dir='ltr' style='display:block;'>\n";
 				$en_liste.= $titre;
-				if ($GLOBALS['langue_site'] != $row['lang']) {
+				if ($element == 'articles') {
+					
+					$nb_abo= spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article='$id_row'"));
+					
+					$nb_abo = ($nb_abo>1)? $nb_abo." abonn&eacute;s" : $nb_abo." abonn&eacute;";
+					
 					$en_liste.= " <font size='1' color='#666666' dir='ltr'>\n";
-					$en_liste.= "(".$nom_langue.")\n";
+					$en_liste.= "(".$nb_abo.")\n";
 					$en_liste.= "</font>\n";
 				}
 				$en_liste.= "</a>\n";
