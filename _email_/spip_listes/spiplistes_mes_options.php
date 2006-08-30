@@ -15,6 +15,10 @@ if (!isset($GLOBALS['champs_extra_proposes']['auteurs']['tous'])){
 	}else{
 	$GLOBALS['champs_extra_proposes']['auteurs']['tous'] = $GLOBALS['champs_extra_proposes']['auteurs']['tous']."|abo";
 	}
+	
+if (isset($GLOBALS['champs_extra_proposes']['auteurs']['inscription'])){		
+	$GLOBALS['champs_extra_proposes']['auteurs']['inscription'] = $GLOBALS['champs_extra_proposes']['auteurs']['inscription']."|abo";
+	}
 		
 include_spip('inc/extra_plus');
 
