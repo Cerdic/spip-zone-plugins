@@ -1,0 +1,11 @@
+<plugin>
+	<nom>Mot-croisé</nom>
+	<etat>dev</etat>
+	<version>0.1</version>
+	<auteur>Maïeul Rouquette</auteur>
+	<description>Des mots-croisés avec Spip !</description>
+	<fonctions>grille_fonctions.php</fonctions>
+	<prefix>grille</prefix>
+
+	
+</plugin>
