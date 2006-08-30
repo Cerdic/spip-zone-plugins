@@ -1,0 +1,27 @@
+<plugin>
+	<nom>
+Cambiar esqueleto
+	</nom>
+	<auteur>
+joseluis@digital77.com
+_ CopyLeft - 2006
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+Sistema de selecci&oacute;n de esqueletos por men&uacute; desplegable
+_ Para utilizarlo:
+-* Crea en la ra&iacute;z del sitio una carpeta llamada "esqueletos"
+-* Pon en esa carpeta los esqueletos que quieras, cada uno en una subcarpeta y a una ll&aacute;mala "predeterminada"
+-* Coloca la baliza #CAMBIAR_ESQUELETO donde quieras que aparezca el desplegable (cabecera del sitio, men&uacute; de navegaci&oacute;n,...)
+	</description>
+		<prefix> 
+	cambiar_esqueleto
+	</prefix>
+	<options>cambiar_esqueleto_options.php</options>
+	<fonctions>baliza_cambiar_esqueleto.php</fonctions>
+</plugin>
