@@ -46,7 +46,8 @@ function solution_grille($tableau_grille){//cree une grille affichant la solutio
     $grille=$grille."</table>\n";
     return $grille;
     }  
-function grille_formulaire($tableau_grille,$page){
+function grille_formulaire($tableau_grille){
+	$page=self();
     $hauteur =sizeof($tableau_grille);
     $largeur= sizeof($tableau_grille[0]);
   	
@@ -97,17 +98,15 @@ function grille_formulaire($tableau_grille,$page){
 
     return  $grille;}
 
-function grille($texte,$page){
+function grille($texte,$page=''){						//on garde $page pour compatibilité
 	if (eregi("<grille>",$texte)!=1){return $texte;} //verifie s'il y a une grille de mot croisé
     
     	include_spip('inc/calculer_grille');
 	$tableau_grille=calcul_tableau_grille($texte);
     
-    
-    
    
     
-	$grille_formulaire=grille_formulaire($tableau_grille,$page);
+	$grille_formulaire=grille_formulaire($tableau_grille);
 	
 	if ($GLOBALS["bouton_envoi"] == ''){$erreur='';}
 	else {
