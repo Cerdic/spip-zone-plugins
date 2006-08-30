@@ -271,7 +271,9 @@ if ($message_pile > 0){
 					// fin du pied de page texte					
 						$email_a_envoyer = new phpMail($email, $objet, '',$pagem);
 						if (email_valide_bloog($from)){	
+						$email_a_envoyer->From = $from ;
 						$email_a_envoyer->AddCustomHeader("Errors-To: ".$from);
+						$email_a_envoyer->AddCustomHeader("Reply-To: ".$from);
 						$email_a_envoyer->AddCustomHeader("Return-Path: ".$from);
 	
 							if ($email_a_envoyer->send()) {
@@ -293,8 +295,9 @@ if ($message_pile > 0){
 						// fin du pied de page HTML
 		$email_a_envoyer = new phpMail($email, $objet, $pagehm, $pagem);
 						if (email_valide_bloog($from)){	
-						
+						$email_a_envoyer->From = $from ;
 						$email_a_envoyer->AddCustomHeader("Errors-To: ".$from);
+						$email_a_envoyer->AddCustomHeader("Reply-To: ".$from);
 						$email_a_envoyer->AddCustomHeader("Return-Path: ".$from);
 
 							if ($email_a_envoyer->send()){
