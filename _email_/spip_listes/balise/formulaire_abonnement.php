@@ -8,25 +8,35 @@ include_spip('base/abstract_sql');
 
 
 function balise_FORMULAIRE_ABONNEMENT ($p) {
-	return calculer_balise_dynamique($p, 'FORMULAIRE_ABONNEMENT', array('liste'));
+	return calculer_balise_dynamique($p, 'FORMULAIRE_ABONNEMENT', array('id_liste'));
 }
 
-// args[0] indique une liste
-// args[1] indique un eventuel squeletyte alternatif
-// [(#FORMULAIRE_INSCRIPTION{mon_squelette})]
+// args[0] indique une liste, mais ne sert pas encore
+// args[1] indique un eventuel squelette alternatif
+// [(#FORMULAIRE_ABONNEMENT{mon_squelette})]
+// un cas particulier est :
+// [(#FORMULAIRE_ABONNEMENT{listeX})]
+// qui permet d'afficher le formulaire d'abonnement a la liste numero X
 
 function balise_FORMULAIRE_ABONNEMENT_stat($args, $filtres) {
 	if(!$args[1]) $args[1]='formulaire_abonnement';
+	preg_match_all("/liste([0-9]+)/x",
+               $args[1], $matches);
+
+	if($id_liste=intval($matches[1][0])) {
+	$args[1]='formulaire_abonnement_une_liste';
+	$args[0]=$id_liste;
+	}
 	 return array($args[0],$args[1]);}
 
 // Si inscriptions pas autorisees, retourner une chaine d'avertissement
 // Sinon inclusion du squelette
-// Si pas de mon ou pas de mail valide, premier appel rien d'autre a faire
+// Si pas de nom ou pas de mail valide, premier appel rien d'autre a faire
 // Autrement 2e appel, envoyer un mail et le squelette ne produira pas de
 // formulaire.
 
 
-function balise_FORMULAIRE_ABONNEMENT_dyn($liste, $formulaire) {
+function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 
 include_spip ("inc/meta");
 include_spip ("inc/session");
@@ -127,7 +137,7 @@ $inscription_visiteur ="";
 					'mode_login' => $affiche_formulaire,
 					'reponse_formulaire' => $reponse_formulaire,
 					'accepter_auteur' => lire_meta("accepter_inscriptions") ,
-					'liste' => $liste
+					'id_liste' => $id_liste
 					)
 				);
 				
