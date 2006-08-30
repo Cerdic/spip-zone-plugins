@@ -457,7 +457,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	// Afficher un menu par groupe de mots
 	$ajouter ='';
 	while ($row = spip_fetch_array($result_groupes)) {
-		if ($menu = menu_mots($row, $id_groupes_vus, $les_mots)) {
+		if ($menu = menu_mots($row, $id_groupes_vus, $les_mots, $id_objet)) {
 			$menu = ajax_action_auteur('editer_mot',
 				"$id_objet,,$table,$table_id,$objet",
 				$url_base,
