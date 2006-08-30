@@ -35,10 +35,10 @@ function action_instituer_carto_carte_dist() {
 	if ($statut != $statut_ancien) {
 		spip_query("UPDATE spip_carto_cartes SET statut='$statut' WHERE id_carto_carte=$id_carto_carte");
 
-/*		if ($statut == 'publie') {
+		if ($statut == 'publie') {
 			if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
-			marquer_indexer('carto_carte', $id_carto_carte);
+			marquer_indexer('spip_carto_carte', $id_carto_carte);
 			}
 		}
 
@@ -46,7 +46,6 @@ function action_instituer_carto_carte_dist() {
 			include_spip('inc/invalideur');
 			suivre_invalideur("id='id_carto_carte/$id_carto_carte'");
 		}
-*/
 	}
 }
 ?>
