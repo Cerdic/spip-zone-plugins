@@ -21,7 +21,7 @@ include_spip('inc/extra_plus');
 //Balises Spip-listes
 
 function balise_MELEUSE_CRON($p) {
-   $p->code = "";
+   $p->code = "''";
    $p->statut = 'php';
    return $p;
 }
