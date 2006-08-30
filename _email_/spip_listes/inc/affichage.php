@@ -219,9 +219,7 @@ fin_boite_info();
 				$id_row	= $row['id_message'];
 				if(!intval($id_row)) $id_row = $row['id_article'];
 				$titre		= $row['titre'];
-				$date		= affdate($row['date']);
-				$nom_langue	= traduire_nom_langue($row['lang']);
-				
+				$date		= affdate($row['date']);				
 				
 					switch ($element){
 				case "abonnements":
