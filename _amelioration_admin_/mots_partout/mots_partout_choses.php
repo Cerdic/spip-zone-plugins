@@ -1,5 +1,4 @@
 <?php
-
 /***********************************************************************/
 /* Définition des choses sur lesquels on peut vouloir mettre des mots clefs*/
 /***********************************************************************/
@@ -32,6 +31,7 @@ $choses_possibles['breves'] = array(
 									  'titre_chose' => 'breves',
 									  'id_chose' => 'id_breve',
 									  'table_principale' => 'spip_breves',
+									  'url_base' => 'breves_voir',
 									  'tables_limite' => array(
 															   'breves' => array(
 																				   'table' => 'spip_breves',
