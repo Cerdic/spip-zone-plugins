@@ -72,7 +72,7 @@ function exec_articles_dist()
 
 	$flag_auteur = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur LIMIT 1"));
 
-	$flag_editable = ($statut_rubrique OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
+	$flag_editable = ($statut_rubrique OR $flag_auteur);
 
 	debut_page("&laquo; $titre &raquo;", "naviguer", "articles", "", "", $id_rubrique);
 

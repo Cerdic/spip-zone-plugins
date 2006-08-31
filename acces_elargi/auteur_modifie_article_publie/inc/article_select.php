@@ -48,7 +48,7 @@ function article_select($id_article, $id_rubrique, $lier_trad, $new) {
 
 		$flag_auteur = (spip_num_rows($result_auteur) > 0);
 
-		$flag_editable = (acces_rubrique($id_rubrique) OR ($flag_auteur > 0 AND ($statut == 'prepa' OR $statut == 'prop' OR $new == 'oui')));
+		$flag_editable = (acces_rubrique($id_rubrique) OR ($flag_auteur > 0));
  	}
 }
 else if ($new=='oui') {
