@@ -16,7 +16,7 @@ function solution_grille($tableau_grille){//cree une grille affichant la solutio
 	$hauteur =sizeof($tableau_grille);
     $largeur= sizeof($tableau_grille[0]);
     
-    $grille='<table class=\"grille\" summary=\"'._T('grille:table_summary',Array('hauteur'=>$hauteur,'largeur'=>$largeur))."\">\n\t<tr>\n\t\t<td class=\"coin\"></td>\n";
+    $grille='<table class="grille" summary="'._T('grille:table_summary',Array('hauteur'=>$hauteur,'largeur'=>$largeur))."\">\n\t<tr>\n\t\t<td class=\"coin\"></td>\n";
     
     $increment_largeur=1;   //un icnrement pour les cellues d'entete
     

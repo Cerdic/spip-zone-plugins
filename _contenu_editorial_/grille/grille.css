@@ -4,7 +4,7 @@ width:1.5em;
 text-align:center;
 vertical-align:middle;
 height:1.5em;}
-table.grille td{border:1px solid black}
+table.grille td{border:1px solid black;text-align:center}
 .grille td.coin,table.grille input,.grille th{border:0px solid black}
 .erreur{float:left;}
 
