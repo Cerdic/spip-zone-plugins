@@ -103,7 +103,19 @@ if ($row = spip_fetch_array($result)) {
 	if (!($expediteur == $connect_id_auteur OR ($type == 'nl' AND $connect_statut == '0minirezo'))) die();
 	}
 
+   
+    if ($type == 'nl') $le_type = _T('spiplistes:email_collec');
+
+	echo "<p><font face='Verdana,Arial,Sans,sans-serif' size=2 color='green'><b>$le_type</b></font></p>";
+    echo "<p style='margin-bottom:10px'><font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='red'>"._T('spiplistes:alerte_edit')."</font><br/><br /></p>";
+
+
+   
+   
      debut_cadre_relief('../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_insert-slide.gif');
+    
+    
+       
      //Charger un patron ?    
 
 	  // inclusion du script de gestion des layers de SPIP
@@ -164,16 +176,14 @@ if ($row = spip_fetch_array($result)) {
 
      fin_cadre_relief();
 
+     echo "<br />";
+     
      //Ecrire dans le formulaire
 
 
 	echo "<form action='".generer_url_ecrire("gerer_courrier","id_message=$id_message")."' METHOD='post' name='formulaire'>";
 
-	if ($type == 'nl') $le_type = _T('spiplistes:email_collec');
-
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size=2 color='green'><b>$le_type</b></font><p>";
-    echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='red'>"._T('spiplistes:alerte_edit')."</font><p>";
-
+	
 	echo "<input type='Hidden' name='modifier_message' value=\"oui\">";
 	echo "<input type='Hidden' name='id_message' value=\"$id_message\">";
 	if(!intval($id_message))
