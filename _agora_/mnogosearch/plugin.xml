@@ -13,7 +13,6 @@
 	</etat>
 	<description>
 Interfacage du moteur mnoGoSearch avec l'API SPIP
-_ {{Ce plugin requiert le plugin Boucles sans table}}
 _ Ce plugin prend en charge l'interrogation de monogosearch 
 et la mise a disposition des resultats de recherche dans des balises et une boucle MNOGOSEARCH
 	</description>
