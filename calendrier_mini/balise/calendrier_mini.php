@@ -9,7 +9,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 function balise_CALENDRIER_MINI($p) {
-	return calculer_balise_dynamique($p,'CALENDRIER_MINI', array(VAR_DATE, 'lang', 'id_rubrique','id_article', 'id_mot'));
+	return calculer_balise_dynamique($p,'CALENDRIER_MINI', array(VAR_DATE, 'id_rubrique','id_article', 'id_mot'));
 }
  
 function balise_CALENDRIER_MINI_stat($args, $filtres) {
@@ -17,13 +17,13 @@ function balise_CALENDRIER_MINI_stat($args, $filtres) {
 	return $args;
 }
  
-function balise_CALENDRIER_MINI_dyn($date, $lang = '', $id_rubrique = 0, $id_article = 0, $id_mot = 0, $url = '') {
+function balise_CALENDRIER_MINI_dyn($date, $id_rubrique = 0, $id_article = 0, $id_mot = 0, $url = '') {
+	/* tenir compte de la langue, c'est pas de la tarte */
 	return array('formulaires/calendrier_mini', 3600, 
 		array(
 			'date' => $date?$date:date('Y-m'),
 			'var_date' => VAR_DATE,
 			'self' => $url?$url:self(),
-			'lang' => $lang?$lang:_request('lang'),
 			'id_rubrique' => $id_rubrique,
 			'id_article' => $id_article,
 			'id_mot' => $id_mot
