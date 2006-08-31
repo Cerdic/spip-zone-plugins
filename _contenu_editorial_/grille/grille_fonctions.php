@@ -7,7 +7,12 @@
 
 
 
-
+function pas_de_grille ($texte){
+	//evite d'afficher la grille la ou on veux pas (par exemple pour les backend)
+		$texte = ereg_replace ('<p class="spip"><grille></p>.*</grille></p>','',$texte);
+	echo $texte;
+	return $texte;
+	}
 
               
 
