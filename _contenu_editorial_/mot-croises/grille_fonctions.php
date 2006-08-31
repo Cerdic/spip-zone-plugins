@@ -10,11 +10,13 @@
 function pas_de_grille ($texte){
 	//evite d'afficher la grille la ou on veux pas (par exemple pour les backend)
 		$texte = ereg_replace ('<p class="spip"><grille></p>.*</grille></p>','',$texte);
-	echo $texte;
+		/*A tester
+		$texte = preg_replace(',<(grille)>(.*)<\/\1>,UimsS','',$texte);
+		*/
 	return $texte;
-	}
+}
 
-              
+
 
 function grille($texte,$page=''){						//on garde $page pour compatibilité
 	if (eregi("<grille>",$texte)!=1){return $texte;} //verifie s'il y a une grille de mot croisé
