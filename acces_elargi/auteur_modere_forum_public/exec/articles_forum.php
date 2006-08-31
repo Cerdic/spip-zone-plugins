@@ -17,7 +17,7 @@ include_spip('inc/forum'); // pour boutons_controle_forum
 // http://doc.spip.org/@exec_articles_forum_dist
 function exec_articles_forum_dist()
 {
-  global $connect_statut, $debut, $id_article, $pack, $enplus;
+  global $connect_id_auteur, $connect_statut, $debut, $id_article, $pack, $enplus;
 
 	$id_article = intval($id_article);
 	$debut = intval($debut);
@@ -40,7 +40,12 @@ function exec_articles_forum_dist()
 
 	articles_forum_cadres($id_rubrique, $titre, 'articles', "id_article=$id_article");
 
-	if (! ($connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)))
+
+	// L'article est-il celui du visiteur ?
+	$result_auteur = spip_query("SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur");
+	$flag_auteur = (spip_num_rows($result_auteur) > 0);
+
+	if (! (($connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)) OR $flag_auteur))
 		return;
 
 	$limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;

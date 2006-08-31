@@ -108,7 +108,7 @@ if (substr($chapo, 0, 1) == '=') {
 
 // Boites de configuration avancee
 
-if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable)
+if ($options == "avancees" && (($connect_statut=='0minirezo' && $flag_editable) OR $flag_auteur))
   {
 	boites_de_config_articles($id_article);
  

@@ -3,4 +3,5 @@
 	<version>1.0</version>
 	<prefix>AE2</prefix>
 	<description>Surcharge permettant aux r&eacute;dacteurs du site de mod&eacute;rer le forum public de leurs articles</description>
+	<etat>experimental</etat>
 </plugin>
