@@ -1,11 +1,20 @@
 <plugin>
 	<nom>Mot-croisé</nom>
 	<etat>dev</etat>
-	<version>0.1</version>
-	<auteur>Maïeul Rouquette</auteur>
+	<version>2.0 pour Spip 1.9.1
+	
+	</version>
+	<auteur>Maïeul Rouquette
+	maieulrouquette@tele2.fr
+	[http://maieul.ouvaton.org->http://maieul.ouvaton.org]
+	</auteur>
 	<description>Des mots-croisés avec Spip !</description>
 	<fonctions>grille_fonctions.php</fonctions>
 	<prefix>grille</prefix>
-
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>grille_insert_head.php</inclure>
+		<action>insert_head</action>
+	</pipeline>
 	
 </plugin>
