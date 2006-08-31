@@ -54,11 +54,9 @@
 	Potete utilizzare coloration_code anche come un filtro , vedete l'esempio lecode.html
 	  
 	L'url per vedere il codice dell'articolo dalla sua stessa pagina sarà:
-				<cadre>
         <div style="float: right">
         <a href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}" title="vedi il codice dell'articolo" class="spip_in">Vedi il codice dell'articolo</a>
         </div>
-				</cadre>
 	  </multi>
 	</description>
     <fonctions> <!-- charge a chaque recalul de page , donc filtre -->
