@@ -7,7 +7,7 @@
 </multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-IZO 	</auteur>
+IZO, James	</auteur>
 	<version>
 	  0.1
 	</version>
@@ -29,6 +29,7 @@ J'aimerai obtenir #SMOOTH comme pour le plugin #PORTOFOLIO mais j'y arrive pas m
 http://smoothslideshow.jondesign.net/	</lien>
 
 	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	smooth_fonctions.php
 	</fonctions>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
