@@ -30,7 +30,7 @@
 				[(#ANCRE_PAGINATION)]
 				[(#ENV{debut_articles_recents}|?{'',' '})<h2 class="invisible"><:articles_recents:>[ - (#DATE_ARCHIVES|affdate)]</h2>]
 				<ul>
-					<BOUCLE_articles_recents(ARTICLES) {pagination} {par date}{inverse} {archives ?}{branche ?}>
+					<BOUCLE_articles_recents(ARTICLES) {pagination} {par date}{inverse} {archives ?}{branche ?} {lang ?}>
 					<li>
 						[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
 						[<p class="surtitre">(#SURTITRE)</p>]
@@ -54,7 +54,7 @@
 
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
-
+		
    [(#CALENDRIER_MINI{#URL_PAGE{minical_demo}})]
    
    <B_categories>
@@ -73,6 +73,17 @@
    [(#MODELE{archives_mensuelles}{id_rubrique,archives,self=#URL_PAGE{minical_demo},lang})]
    
    [(#MODELE{select_archives_mensuelles}{id_rubrique,archives,self=#URL_PAGE{minical_demo},lang})]
+   
+		 [<div>(#MENU_LANG)<small>(<a href="[(#SELF|parametre_url{lang,''})]">toutes les langues</a>)</small><br class="nettoyeur" /></div>]
+
+   <div id="links" class="syndic">
+    <h2 class="menu-titre"><:liens|ucfirst:></h2>
+    <ul>
+     <li><a href="http://zone.spip.org/trac/spip-zone/">Spip Zone</a></li>
+     <li><a href="#URL_PAGE{minical_doc}"><:documentation|ucfirst:></a></li>
+    </ul>
+   </div>
+   
    
 		</div><!-- fin navigation -->
 
