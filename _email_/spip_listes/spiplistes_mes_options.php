@@ -4,9 +4,10 @@
 // Creation / ajout du champ extra auteur pour l'abonnement
 //
 
-
 if (!is_array($GLOBALS['champs_extra'])) $GLOBALS['champs_extra'] = Array ();
-$GLOBALS['champs_extra']['auteurs']['abo'] = _T("spiplistes:options") ;
+$GLOBALS['champs_extra']['auteurs']['abo'] = "radio|brut|Format|Html,Texte,D&eacute;sabonnement|html,texte,non";
+//la ligne suivante serait ideale, mais ca retourne l'admin de spip 1.9...
+//$GLOBALS['champs_extra']['auteurs']['abo'] = _T("spiplistes:options") ;
 
 if (!is_array($GLOBALS['champs_extra_proposes'])) $GLOBALS['champs_extra_proposes'] = Array ();		
 
