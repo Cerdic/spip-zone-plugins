@@ -31,7 +31,7 @@ function thead($lang){
 	if($lang == 'en') $debut = 1;
 	for($i=0;$i<7;$i++) {
 		$ret .= "\n\t\t\t\t".'<th scope="col"><abbr title="'._T('date_jour_'.$debut).'">' .
-		ucfirst(couper(_T('date_jour_'.$debut),LG_ABBR)).'</abbr></th>';
+		_T('minical:date_jour_abbr_'.$debut) . '</abbr></th>';
 		$debut = $debut == 7 ? 1 : $debut+1;
 	}
 	return "\n\t\t".'<thead>
