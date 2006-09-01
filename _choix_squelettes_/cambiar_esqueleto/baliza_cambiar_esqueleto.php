@@ -30,7 +30,7 @@ $path = "esqueletos";
 //abrimos el directorio
 $dir = opendir($path);
 
-$texto= "<div style='width:35%; margin:auto'>";
+$texto= "<div style='width:100%; margin:auto'>";
 $texto .= "\n<form method='get' action='ver_esqueletos.php' style=\"display:inline;font-size:87%\">";
 $texto .= "\n<select name='select' onChange='if (options[selectedIndex].value) { location = options[selectedIndex].value; }' style=\"width:100%;border:1px solid gray;background-color:white;color:green;font-size:87%\">";
 $texto .= "\n<option selected style=\"padding-left:.4em;border-bottom: 1px solid silver;color:silver;\">Cambiar visualizaci&oacute;n</option>";
