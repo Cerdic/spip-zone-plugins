@@ -1,13 +1,13 @@
 <?php
 
-	$GLOBALS['i18n_minical_es'] = array(
-		'date_jour_abbr_1' => 'dom',
-		'date_jour_abbr_2' => 'lun',
-		'date_jour_abbr_3' => 'mar',
-		'date_jour_abbr_4' => 'mie',
-		'date_jour_abbr_5' => 'jue',
-		'date_jour_abbr_6' => 'vie',
-		'date_jour_abbr_7' => 'sab'
+	$GLOBALS['i18n_minical_ca'] = array(
+		'date_jour_abbr_1' => 'dg',
+		'date_jour_abbr_2' => 'dl',
+		'date_jour_abbr_3' => 'dt',
+		'date_jour_abbr_4' => 'dc',
+		'date_jour_abbr_5' => 'dj',
+		'date_jour_abbr_6' => 'dv',
+		'date_jour_abbr_7' => 'db'
 	);
 
 ?>
