@@ -257,8 +257,8 @@ echo "<INPUT TYPE='text' NAME='nom' CLASS='formo' VALUE=\"".entites_html($auteur
 
 echo "<B>"._T('entree_adresse_email')."</B>";
 
-if ($connect_statut == "0minirezo"
-AND ($connect_toutes_rubriques OR $auteur['statut']<>'0minirezo')) {
+if ($id_auteur == $connect_id_auteur OR ($connect_statut == "0minirezo"
+AND $connect_toutes_rubriques)) {
 	echo "<br><INPUT TYPE='text' NAME='email' CLASS='formo' VALUE=\"".entites_html($auteur['email'])."\" SIZE='40'><P>\n";
 }
 else {

@@ -3,4 +3,5 @@
 	<version>1.0</version>
 	<prefix>AE3</prefix>
 	<description>Surcharge permettant aux r&eacute;dacteurs du site de modifier leur email</description>
+	<etat>experimental</etat>
 </plugin>
