@@ -92,12 +92,15 @@ function saveauto_mysql_version() {
    return $match[0] . "." . $match[1] . "." . $match[2];
 }
 
-
+// fonction principale : sauvegarde la base
 function saveauto_sauvegarde() {
         include (_DIR_PLUGIN_SAVEAUTO."/inc/saveauto_conf.php");
+   // options complexes des sauvegardes déportées depuis saveauto_conf.php :
+         // true = clause INSERT avec nom des champs
+         $insertComplet = true;
         
 				global $sauver_base, $fin_sauvegarde_base;
-				global $connect_statut, $acces_redac;
+				global $connect_statut;
         //accès admin ou accès rédacteur (si autorisé)
         if (($connect_statut == "0minirezo") || ($acces_redac && $connect_statut == "1comite")) {
            //si la compression est impossible, au cas où le webmaster l'aurait activé : on désactive
@@ -106,11 +109,6 @@ function saveauto_sauvegarde() {
 					 }
            $temps = time();
 
-				 // options complexes des sauvegardes déportées depuis saveauto_conf.php :
-           // true = la connexion d'un rédacteur autorise le script à sauver la base
-           $acces_redac = true;
-           // true = clause INSERT avec nom des champs
-           $insertComplet = true;
            
            //1-FAUT IL SAUVER (le soldat ryan ?)
            // Lister des fichiers contenus dans le répertoire de sauvegardes

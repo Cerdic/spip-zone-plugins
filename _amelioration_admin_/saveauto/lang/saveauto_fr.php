@@ -39,10 +39,13 @@
 						 'fin_fichier' => 'fin du fichier',
 						 'probleme_envoi' => 'problème d\'envoi de ',
 						 'adresse' => ' &agrave; l\'adresse : ',
+						 'config_inadaptee' => 'Plugin saveauto : configuration non-adapt&eacute;e,',
+						 'mail_absent' => ' votre serveur n\'assure pas les fonctions d\'envoi de mail !',
 						 
 					// saveauto_admin.php
 						 'config_saveauto' => 'Sauvegarde automatis&eacute;e de la base de donn&eacute;es',
 						 'plugin_saveauto' => 'Plugin saveauto : configuration',
+						 'erreur_ecrire_conf' => 'Erreur lors de la cr&eacute;ation du fichier de configuration plugins/saveauto/inc/saveauto_conf.php : v&eacute;rifiez que le fichier est accessible en &eacute;criture pour le serveur apache',
 						 'help_titre' => 'Cette page vous permet de configurer les options de sauvegarde de la base.',
 						 'version' => 'Version : ',
 						 'options_config' => 'Options configur&eacute;es : ',
@@ -52,6 +55,7 @@
 						 'attention' => 'Attention :',
 						 'compression_impossible' => ' la sauvegarde ne pourra pas &ecirc;tre compress&eacute;e car cette fonctionnalit&eacute; n\'est pas disponible sur votre serveur.',
 						 'tables_acceptes' => 'Tables accept&eacute;es : ',
+						 'pas_envoi' => ' Les sauvegardes ne seront pas envoy&eacute;es !',
 						 'toutes' => ' toutes',
 						 'prefixe_nom' => ' celles qui ont comme pr&eacute;fixe de nom ',
 						 'donnees_ignorees' => 'Donn&eacute;es ignor&eacute;es : ',
@@ -68,6 +72,7 @@
 						 'structure' => ' structure des tables : ',
 						 'donnees' => ' donn&eacute;es des tables : ',
 						 'prefixe_sauvegardes' => 'Pr&eacute;fixe pour les sauvegardes : ',
+						 'acces_redac' => 'Sauvegarde d&eacute;clench&eacute;e lors de la connexion d\'un auteur : ',
 						 
 						 
 						 'valider' => 'Valider',
@@ -96,7 +101,8 @@
 						 								 		Ne mettez rien pour accepter toutes les tables. S&eacute;parez les diff&eacute;rents noms par le symbole point-virgule (;)',
 						 'help_eviter' => 'optionnel : si la table contient dans son nom la cha&icirc;ne sp&eacute;cifi&eacute;e : les donn&eacute;es sont ignor&eacute;es (pas la structure). S&eacute;parez les diff&eacute;rents noms par le symbole point-virgule (;)',
 						 'help_rep' => 'r&eacute;pertoire o&ugrave; stocker les fichiers (chemin &agrave; partir de la <strong>racine</strong> du SPIP, ecrire/data/ par ex). <strong>DOIT</strong> se terminer par un /.',
-						 'help_prefixe' => 'optionnel : mettre un pr&eacute;fixe au nom du fichier de sauvegarde'
+						 'help_prefixe' => 'optionnel : mettre un pr&eacute;fixe au nom du fichier de sauvegarde',
+						 'help_acces_redac' => 'si non, les sauvegardes ne sont d&eacute;clench&eacute;es que lors de la connexion des administrateurs'
 						 
 
 	);

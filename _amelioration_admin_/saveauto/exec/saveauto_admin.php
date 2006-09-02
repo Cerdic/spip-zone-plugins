@@ -29,7 +29,7 @@ function exec_saveauto_admin() {
 				 
 			// traitement des données postées dans le formulaire de config : recréer le fichier saveauto_conf.php
 				 if (isset($_POST['valide_config'])) {
-				 		$T_params = array('base', 'destinataire_save', 'jours_obso', 'ecrire_succes', 'gz', 'structure', 'donnees', 'accepter', 'eviter', 'rep_bases', 'frequence_maj', 'prefixe_save');
+				 		$T_params = array('base', 'destinataire_save', 'jours_obso', 'ecrire_succes', 'gz', 'structure', 'donnees', 'accepter', 'eviter', 'rep_bases', 'frequence_maj', 'prefixe_save', 'acces_redac');
 						$a_ecrire = "<?php ";
 						foreach ($T_params as $p) {
 										$a_ecrire .= "\n $".$p." = ";
@@ -39,9 +39,13 @@ function exec_saveauto_admin() {
 										$a_ecrire .= ";";
 						}
 						$a_ecrire .= "\n ?>";
-						$fconf = fopen($page_save_conf, "wt");
-						fwrite($fconf, $a_ecrire);
-						fclose($fconf);
+						if ($fconf = @fopen($page_save_conf, "wt")) {
+    						fwrite($fconf, $a_ecrire);
+    						fclose($fconf);
+						}
+						else {
+								 echo '<font color=red><strong>'._T('saveauto:erreur_ecrire_conf').'</strong></font>';
+						}
 				 }
 				 include($page_save_conf);
 				 
@@ -181,6 +185,18 @@ function exec_saveauto_admin() {
 				 echo "<input type='text' name='jours_obso' id='jours_obso' value='".$jours_obso."' style='width: 30px;'>"._T('saveauto:jours');
 		 		 echo "<br /><span style='font-size: 11px;'>("._T('saveauto:help_obsolete').")</span>";
 				 fin_cadre_couleur();
+				 debut_cadre_couleur();
+         echo "<strong>"._T('saveauto:acces_redac')."</strong>";
+				 echo _T('saveauto:oui');
+				 echo "<input type='radio' name='acces_redac' id='acces_redac_true' value='true' ";
+				 if ($acces_redac) echo "checked";
+				 echo ">";
+    		 echo "<input type='radio' name='acces_redac' id='acces_redac_false' value='false' ";
+				 if (!$acces_redac) echo "checked";
+				 echo ">";
+     		 echo _T('saveauto:non');
+				 echo "<br /><span style='font-size: 11px;'>("._T('saveauto:help_acces_redac').")</span>";
+         fin_cadre_couleur();
 				 
 				 echo "<input type='submit' name='valide_config' id='valide_config' value='"._T('saveauto:valider')."' style='float: right;'><br />";
 				 fin_cadre_trait_couleur();
