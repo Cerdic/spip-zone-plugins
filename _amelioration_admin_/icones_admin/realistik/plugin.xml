@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Smooth 
+	Realistik 
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	Franck Ducas
@@ -12,7 +12,7 @@
 	dev
 	</etat>
 	<description>
-	Plugin qui change les icones principales de l'espace prive de SPIP. Le present plugin comporte un jeu graphique de base. 
+	Change les icones de l'administration avec des icones realistes. Integration du theme d'icones ["Realistik"->http://www.kde-look.org/content/show.php?content=44972]
 	</description>
 	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
 		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : template_ma_fonction() par exemple)
@@ -20,6 +20,6 @@
 		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
 		-->
 	<prefix> 
-	icones_admin_smooth
+	icones_admin_realistik
 	</prefix>
 </plugin>
