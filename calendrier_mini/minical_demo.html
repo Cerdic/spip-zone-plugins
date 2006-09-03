@@ -55,20 +55,26 @@
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
 		
-   [(#CALENDRIER_MINI{#URL_PAGE{minical_demo}})]
+		[(#MODELE{rubrique_calendrier}
+			{self=#URL_PAGE{minical_demo}}
+			{var_date=archives}
+			{date=#ENV{archives,#DATE}}
+			{lang}
+			{id_rubrique}
+		)]
    
-   <B_categories>
-   <div id='categories' class="rubriques">
-   <h2 class="menu-titre"><:categories|ucfirst:></h2>
-   <ul>
-    <BOUCLE_categories(RUBRIQUES){racine}>[
-    <li>[(#EXPOSE{<b>})]
-    <a href="(#URL_PAGE{minical_demo}|parametre_url{id_rubrique,#ID_RUBRIQUE})">#TITRE</a>
-    [(#EXPOSE{</b>})]</li>
-    ]</BOUCLE_categories>
-   </ul>
-   </div>
-   </B_categories>
+	<B_categories>
+	<div id='categories' class="rubriques">
+		<h2 class="menu-titre"><:categories|ucfirst:></h2>
+		<ul>
+			<BOUCLE_categories(RUBRIQUES){racine}>[
+			<li>[(#EXPOSE{<b>})]
+			<a href="(#URL_PAGE{minical_demo}|parametre_url{id_rubrique,#ID_RUBRIQUE})">#TITRE</a>
+			[(#EXPOSE{</b>})]</li>
+			]</BOUCLE_categories>
+		</ul>
+	</div>
+	</B_categories>
    
    [(#MODELE{archives_mensuelles}{id_rubrique,archives,self=#URL_PAGE{minical_demo},lang})]
    
