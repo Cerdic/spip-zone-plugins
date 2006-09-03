@@ -1,5 +1,7 @@
 <plugin>        <nom> <!-- Nom du plugin -->        pagination_avancee        </nom>        <auteur>        <!-- Auteur du plugin -->        Maïeul Rouquette (maieulrouquette@tele2.fr)        </auteur>        <version>        0.1        </version>        <etat>        test        
         </etat>        <description>      
+      	/!\ Suite à l'introduction du systeme de modeles sur spip 1.9.1, je n'assurerai plus la mise à jour de ce plugin. Signé : Maïeul Rouquette
+      	
       	Permet d'avoir de nouveaux modele de pagination.
         
         On peux passer un parametre modele au balise #PAGINATIONS et #ANCRE_PAGINATION.
