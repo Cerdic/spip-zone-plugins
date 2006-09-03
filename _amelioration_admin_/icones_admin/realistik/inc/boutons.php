@@ -99,20 +99,20 @@ function definir_barre_boutons() {
 
 	if ($GLOBALS['meta']["activer_breves"] != "non") {
 		$sousmenu['breves']=
-		  new Bouton('breve-24.gif', 'icone_breves');
+		  new Bouton("../"._DIR_PLUGIN_ICONES_ADMIN_SMOOTH.'/../img_pack/breve-24.png', 'icone_breves');
 	}
 
 	if ($GLOBALS['options'] == "avancees"){
 		$articles_mots = $GLOBALS['meta']['articles_mots'];
 		if ($articles_mots != "non") {
 			$sousmenu['mots_tous']=
-			  new Bouton('mot-cle-24.gif', 'icone_mots_cles');
+			  new Bouton("../"._DIR_PLUGIN_ICONES_ADMIN_SMOOTH.'/../img_pack/mot-cle-24.png', 'icone_mots_cles');
 		}
 
 		$activer_sites = $GLOBALS['meta']['activer_sites'];
 		if ($activer_sites<>'non')
 			$sousmenu['sites_tous']=
-			  new Bouton('site-24.gif', 'icone_sites_references');
+			  new Bouton("../"._DIR_PLUGIN_ICONES_ADMIN_SMOOTH.'/../img_pack/site-24.png', 'icone_sites_references');
 
 		$n = spip_num_rows(spip_query("SELECT * FROM spip_documents_rubriques LIMIT 1"));
 		if ($n) {
@@ -131,9 +131,9 @@ function definir_barre_boutons() {
 		  new Bouton('forum-admin-24.gif', 'icone_forum_administrateur');
 
 	$sousmenu['controle_forum']=
-		  new Bouton("suivi-forum-24.gif", "icone_suivi_forums");
+		  new Bouton("../"._DIR_PLUGIN_ICONES_ADMIN_SMOOTH.'/../img_pack/suivi-forum-24.png', "icone_suivi_forums");
 	$sousmenu['controle_petition']=
-		  new Bouton("suivi-petition-24.gif", "icone_suivi_pettions");
+		  new Bouton("../"._DIR_PLUGIN_ICONES_ADMIN_SMOOTH.'/../img_pack/suivi-petition-24.png', "icone_suivi_pettions");
 	
 	$boutons_admin['forum']->sousmenu= $sousmenu;
 
@@ -141,10 +141,10 @@ function definir_barre_boutons() {
 
 	$boutons_admin['auteurs']->sousmenu= array(
 		'auteurs_edit' => 
-		  new Bouton("fiche-perso-24.gif", "icone_informations_personnelles",
+		  new Bouton("../"._DIR_PLUGIN_ICONES_ADMIN_SMOOTH.'/../img_pack/fiche-perso-24.png', "icone_informations_personnelles",
 			null, 'id_auteur='.$GLOBALS['connect_id_auteur']),
 		'auteur_infos' => 
-		  new Bouton("auteur-24.gif", "icone_creer_nouvel_auteur",
+		  new Bouton("../"._DIR_PLUGIN_ICONES_ADMIN_SMOOTH.'/../img_pack/auteur-24.png', "icone_creer_nouvel_auteur",
 					 null, 'new=oui')
 	);
 
@@ -153,7 +153,7 @@ function definir_barre_boutons() {
 		$sousmenu=array(
 			'espacement' => null,
 			'statistiques_repartition' =>
-				new Bouton("rubrique-24.gif", "icone_repartition_visites")
+				new Bouton("../"._DIR_PLUGIN_ICONES_ADMIN_SMOOTH.'/../img_pack/rubrique-24.png', "icone_repartition_visites")
 		);
 
 		if ($GLOBALS['meta']['multi_articles'] == 'oui'
@@ -162,7 +162,7 @@ function definir_barre_boutons() {
 				new Bouton("langues-24.gif", "onglet_repartition_lang");
 
 		$sousmenu['statistiques_referers']=
-		  new Bouton("referers-24.gif", "titre_liens_entrants");
+		  new Bouton("../"._DIR_PLUGIN_ICONES_ADMIN_SMOOTH.'/../img_pack/referers-24.png', "titre_liens_entrants");
 
 		$boutons_admin['statistiques_visites']->sousmenu= $sousmenu;
 	}
@@ -171,18 +171,18 @@ function definir_barre_boutons() {
 
 	$sousmenu=array(
 		'config_lang' => 
-			new Bouton("langues-24.gif", "icone_gestion_langues"),
+			new Bouton("../"._DIR_PLUGIN_ICONES_ADMIN_SMOOTH.'/../img_pack/langues-24.png', "icone_gestion_langues"),
 		'espacement' => null
 	);
 
 	if ($GLOBALS['options'] == "avancees") {
 		$sousmenu['admin_tech']= 
-			new Bouton("base-24.gif", "icone_maintenance_site");
+			new Bouton("../"._DIR_PLUGIN_ICONES_ADMIN_SMOOTH.'/../img_pack/base-24.png', "icone_maintenance_site");
 		$sousmenu['admin_vider']=
-			new Bouton("cache-24.gif", "onglet_vider_cache");
+			new Bouton("../"._DIR_PLUGIN_ICONES_ADMIN_SMOOTH.'/../img_pack/cache-24.png', "onglet_vider_cache");
   	if ((@file_exists(_DIR_PLUGINS))&&(is_dir(_DIR_PLUGINS)))
 			$sousmenu['admin_plugin']=
-				new Bouton("plugin-24.gif", "icone_admin_plugin");
+				new Bouton("../"._DIR_PLUGIN_ICONES_ADMIN_SMOOTH.'/../img_pack/plugin-24.png', "icone_admin_plugin");
 	} else {
 		$sousmenu['admin_tech']=
 			new Bouton("base-24.gif", "icone_sauver_site");
