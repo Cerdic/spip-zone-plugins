@@ -1,0 +1,25 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Icones Admin Smooth 
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	Franck Ducas
+	</auteur>
+	<version> <!-- Version du plugin -->
+	0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	dev
+	</etat>
+	<description>
+	Plugin qui change les icones principales de l'espace prive de SPIP. Le present plugin comporte un jeu graphique de base. 
+	</description>
+	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
+		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : template_ma_fonction() par exemple)
+		C'est par ailleurs conseille pour les noms de fichier
+		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
+		-->
+	<prefix> 
+	icones_admin_smooth
+	</prefix>
+</plugin>
