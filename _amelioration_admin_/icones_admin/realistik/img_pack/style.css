@@ -1,0 +1,8 @@
+.cellule48 a img {
+	behavior: url(../win_png.htc);
+	display: inline;
+	margin: 4px;
+	padding: 0;
+	border: none;
+	background-color: white;
+}

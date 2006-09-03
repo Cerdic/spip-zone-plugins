@@ -20,7 +20,11 @@
 		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
 		-->
 	<prefix> 
-	icones_admin
+	realistik
 	</prefix>
-	
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>header_prive</action>
+		<inclure>realistik.php</inclure>
+	</pipeline>
 </plugin>
