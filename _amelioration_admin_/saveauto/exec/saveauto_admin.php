@@ -11,7 +11,7 @@
 function exec_saveauto_admin() {
 	 			 include_spip("inc/presentation");
 
-				 $version_script = "0.1";
+				 $version_script = "0.2";
 				
       // vérifier les droits
          global $connect_statut;
@@ -23,8 +23,10 @@ function exec_saveauto_admin() {
       		  exit;
       	 }
 
-//         $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-         define('_DIR_PLUGIN_SAVEAUTO',(_DIR_PLUGINS."saveauto"));
+         $p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+         $pp = explode("/", end($p));
+         define('_DIR_PLUGIN_SAVEAUTO',(_DIR_PLUGINS.$pp[0]));
+
          $page_save_conf = _DIR_PLUGIN_SAVEAUTO."/inc/saveauto_conf.php";
 				 
 			// traitement des données postées dans le formulaire de config : recréer le fichier saveauto_conf.php
