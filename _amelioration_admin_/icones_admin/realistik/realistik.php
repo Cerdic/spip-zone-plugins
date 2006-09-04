@@ -5,7 +5,7 @@ $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FI
 // Fonction qui bidouille le fichier mes_options.php pour qu'il definisse
 // le bon chemin d'img_pack. C'est pour l'instant le foutoir et ca ne
 // marche pas.
-function realistik_exec_init($ecriture) {
+function realistik_exec_init($write) {
 	$mes_options_file = "mes_options.php";
 	$opening = fopen($mes_options_file, 'a+');
 	$file_size = filesize ($mes_options_file);
