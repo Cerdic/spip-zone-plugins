@@ -9,7 +9,7 @@
 	0.1
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-	test
+	dev
 	</etat>
 	<description>
 	Change les icones de l'administration avec des icones realistes. Integration du theme d'icones ["Realistik"->http://www.kde-look.org/content/show.php?content=44972]
