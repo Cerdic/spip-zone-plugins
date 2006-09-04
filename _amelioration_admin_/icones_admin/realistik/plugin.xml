@@ -23,6 +23,11 @@
 	realistik
 	</prefix>
 	<pipeline>
+		<nom>exec_init</nom>
+		<action>exec_init</action>
+		<inclure>realistik.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>header_prive</nom>
 		<action>header_prive</action>
 		<inclure>realistik.php</inclure>
