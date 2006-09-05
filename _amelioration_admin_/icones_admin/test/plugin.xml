@@ -13,7 +13,7 @@ _ &copy; 2006 - Distribu&eacute; sous licence GPL
 	experimental
 	</etat>
 	<description>
-	Plugin qui teste la possibilite d'un pipeline mes_options. Le resultat recherche est que l'on ne devrait plus voir les images de la partie privee du site (puisque le chemin d'img_pack devrait changer sous l'effet de ce plugin). Il faut mettre le fichier "mes_options.php.rename" dans le repertoire ecrire.
+	Plugin qui teste la possibilite d'un pipeline mes_options. Le resultat recherche est que l'on ne devrait plus voir les images de la partie privee du site (puisque le chemin d'img_pack devrait changer sous l'effet de ce plugin). Il faut mettre le fichier "mes_options.php.rename" dans le repertoire ecrire et le renommer en "mes_options.php".
 	</description>
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
 	test_options.php
