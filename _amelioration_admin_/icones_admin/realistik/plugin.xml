@@ -12,7 +12,12 @@
 	dev
 	</etat>
 	<description>
-	Change les icones de l'administration avec des icones realistes. Integration du theme d'icones ["Realistik"->http://www.kde-look.org/content/show.php?content=44972]
+Change les ic&ocirc;nes de l'administration avec des icones r&eacute;alistes.
+
+Int&eacute;gration du th&ecirc;me d'ic&ocirc;nes ["Realistik"->http://www.kde-look.org/content/show.php?content=44972].
+	
+
+Mode d'emploi : activez simplement le plugin et les nouvelles ic&ocirc;nes appara&icirc;tront apr&egrave;s quelques clics. Lorsque vous d&eacute;sacriverez ce plugin, pensez bien &agrave; effacer votre fichier "mes_options.php" dans votre r&eacute;pertoire "ecrire" et &agrave; renommer le fichier "mes_options.php.backup" en "mes_options.php". Si vous n'avez pas de fichier "mes_options.php.backup", effacez juste votre fichier "mes_options.php" dans votre r&eacute;pertoire "ecrire".
 	</description>
 	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
 		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : template_ma_fonction() par exemple)
