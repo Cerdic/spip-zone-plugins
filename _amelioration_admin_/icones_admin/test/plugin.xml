@@ -1,0 +1,33 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Test pipeline mes_options
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	collectif
+_ &copy; 2006 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+	0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	experimental
+	</etat>
+	<description>
+	Plugin qui teste la possibilite d'un pipeline mes_options. Le resultat recherche est que l'on ne devrait plus voir les images de la partie privee du site (puisque le chemin d'img_pack devrait changer sous l'effet de ce plugin). Il faut mettre le fichier "mes_options.php.rename" dans le repertoire ecrire.
+	</description>
+	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
+	test_options.php
+	</options>
+	<prefix> 
+	test
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<!-- Le parametre action est facultatif : en son absence la fonction appelee sera le prefixe suivi du nom du pipeline
+	ex : template_affichage_final()
+	Le parametre inclure est egalement facultatif, si la fonction est deja chargee en memoire (car presente dans le fichier options par exemple)	-->
+	<pipeline>
+		<nom>mes_options</nom> 
+		<action>mes_options</action>
+		<inclure>test.php</inclure>
+	</pipeline>
+</plugin>
