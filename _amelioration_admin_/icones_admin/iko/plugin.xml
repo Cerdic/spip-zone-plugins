@@ -1,0 +1,40 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Iko 
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	Franck Ducas
+	</auteur>
+	<version> <!-- Version du plugin -->
+	0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	dev
+	</etat>
+	<description>
+Change les ic&ocirc;nes de l'administration avec le icones "iko".
+
+Insertion du jeu d'icones ["Iko"->http://www.koakidi.com/article.php3?id_article=230] de scoty.
+	
+
+Mode d'emploi : activez simplement le plugin et les nouvelles ic&ocirc;nes appara&icirc;tront apr&egrave;s quelques clics. Lorsque vous d&eacute;sacriverez ce plugin, pensez bien &agrave; effacer votre fichier "mes_options.php" dans votre r&eacute;pertoire "ecrire" et &agrave; renommer le fichier "mes_options.php.backup" en "mes_options.php". Si vous n'avez pas de fichier "mes_options.php.backup", effacez juste votre fichier "mes_options.php" dans votre r&eacute;pertoire "ecrire".
+	</description>
+	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
+		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : template_ma_fonction() par exemple)
+		C'est par ailleurs conseille pour les noms de fichier
+		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
+		-->
+	<prefix> 
+	iko
+	</prefix>
+	<pipeline>
+		<nom>exec_init</nom>
+		<action>exec_init</action>
+		<inclure>iko.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>header_prive</action>
+		<inclure>iko.php</inclure>
+	</pipeline>
+</plugin>
