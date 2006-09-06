@@ -1,6 +1,6 @@
 <?php
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
 define('_DIR_PLUGIN_HABILLAGE_PRIVE',(_DIR_PLUGINS.end($p)));
 
 function exec_config_habillage_prive() {
@@ -19,7 +19,7 @@ function exec_config_habillage_prive() {
   if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques ) {
 
  	echo '<br><br>';
-	echo '<img src="' . _DIR_PLUGIN_HABILLAGE_PRIVE. '/../img_pack/habillage_prive-48.png">';
+	echo '<img src="' . _DIR_PLUGIN_HABILLAGE_PRIVE. '/img_pack/habillage_prive-48.png">';
  	gros_titre(_T('habillageprive:gros_titre'));
 
  	barre_onglets("configuration", "config_habillage_prive");
@@ -36,9 +36,9 @@ function exec_config_habillage_prive() {
  	echo '<form action="'.generer_url_ecrire('config_habillage_prive').'" method="post">';
 	
  	echo '<INPUT type=radio name="theme" value="initial" checked>';
- 	echo "Revenir &agrave; l'habillage de base<br />";
+ 	echo "SPIP classique<br />";
  	
- 	$dossier = opendir (_DIR_PLUGIN_HABILLAGE_PRIVE.'/../themes/');
+ 	$dossier = opendir (_DIR_PLUGIN_HABILLAGE_PRIVE.'/themes/');
 	while ($fichier = readdir ($dossier)) {
     	if ($fichier != "." && $fichier != "..") {
 	    	echo '<INPUT type=radio name="theme" value="'.$fichier.'">';
