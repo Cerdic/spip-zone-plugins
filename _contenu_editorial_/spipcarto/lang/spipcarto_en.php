@@ -74,7 +74,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'carte_line' => 'Line',
 'carte_polygon' => 'Polygon',
 'carte_draw' => 'Draw ',
-
+'config' => 'Spipcarto configuration ',
+'configuration' => 'configuration',
 'import_objet_sel_texte' => 'Link columns from your text file to object fields.',
 'import_objet_sel_gpx' => 'Link columns from your GPX file to object fields.',
 'import_texte' => 'Import text file (CSV)',
