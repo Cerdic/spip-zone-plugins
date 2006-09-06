@@ -1,23 +1,23 @@
 <?php
 /*****************************************************************************\
-* SPIP-CARTO, Solution de partage et dï¿½ï¿½laboration dï¿½information 
+* SPIP-CARTO, Solution de partage et d'élaboration d'information 
 * (Carto)Graphique sous SPIP
 *
-* Copyright (c) 2005
+* Copyright (c) 2005-2006
 *
-* Stï¿½phane Laurent, Franï¿½ois-Xavier Prunayre, Pierre Giraud, Jean-Claude 
+* Stéphane Laurent, François-Xavier Prunayre, Pierre Giraud, Jean-Claude 
 * Moissinac et tous les membres du projet SPIP-CARTO V1 (Annie Danzart - Arnaud
-* Fontaine - Arnaud Saint Lï¿½ger - Benoit Veler - Christine Potier - Christophe 
+* Fontaine - Arnaud Saint Léger - Benoit Veler - Christine Potier - Christophe 
 * Betin - Daniel Faivre - David Delon - David Jonglez - Eric Guichard - Jacques
-* Chatignoux - Julien Custot - Laurent Jï¿½gou - Mathieu Gï¿½hin - Michel Briand - 
-* Mose - Olivier Frï¿½rot - Philippe Fournel - Thierry Joliveau)
+* Chatignoux - Julien Custot - Laurent Jégou - Mathieu Géhin - Michel Briand - 
+* Mose - Olivier Frérot - Philippe Fournel - Thierry Joliveau)
 * 
 * voir : http://www.geolibre.net/article.php3?id_article=16
 *
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL. 
-* Pour plus de details voir le fichier COPYING.txt ou lï¿½aide en ligne.
+* Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.
 * 
-ï¿½ -
+— -
 This program is free software ; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation ; either version 2 of the License, or
@@ -33,11 +33,11 @@ along with this program (COPYING.txt) ; if not, write to
 the Free Software Foundation, Inc.,
 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 or check http://www.gnu.org/copyleft/gpl.html
-ï¿½ -
+— -
 *
 \***************************************************************************/
 
-// Ce fichier ne sera execute qu'une fois
+// Ce fichier ne sera executé qu'une fois
 if (defined("_ECRIRE_INC_CARTE")) return;
 define("_ECRIRE_INC_CARTE", "1");
 include_spip("base/carto");
@@ -87,8 +87,8 @@ function getPropMapHeight($callage, $width){
 }
 
 
-// Dï¿½finition du callage ï¿½ partir de la dimension de l'image
-// Option par dï¿½faut / le callage est dï¿½fini ï¿½ la main si une projection est utilisï¿½e
+// Définition du callage à partir de la dimension de l'image
+// Option par défaut / le callage est défini à la main si une projection est utilisée
 function array2worldfile($mArray){	
 	return "polygon(0 0,".$mArray['largeur']." ".$mArray['hauteur'].")";
 }
@@ -147,14 +147,14 @@ function wkt2imgsize($args="", $callage = "",$url_carte){
 	$ImgRealWidth = getImgWidth ($url_carte);
 	$ImgRealHeight = getImgHeight ($url_carte);
 	
-	//ou la taille passï¿½e, ou ï¿½ defaut celle de la carte ???
+	//ou la taille passée, ou à defaut celle de la carte ???
 	if ($ImgRealWidth) $ImgWidth = $ImgRealWidth;
 	else $ImgWidth = $GeoWidth;
 	if ($ImgRealHeight) $ImgHeight = $ImgRealHeight;
 	else $ImgHeight = $GeoHeight;
 	$ratio=$ImgHeight/$ImgWidth;
 	
-	//tailles maximum parametrï¿½es ?
+	//tailles maximum parametrées ?
 	//TODO : optimiser un peu tout ca ...
 	$ImgMaxWidth = getArg($args,1);
 	$ImgMaxHeight = getArg($args,0);
@@ -209,7 +209,7 @@ function wkt2shape($geometrie, $format = "HTML"){
  *    site :  
  *   +---------------------------------------------+
  *    Fonctions de ce filtre :
- *     Appelez le dans vos squellette tout simplement
+ *     Appelez le dans vos squelettes tout simplement
  *     par : [(#GEOMETRIE|wkt2coords)]
  *   +---------------------------------------------+
  *  
@@ -233,7 +233,7 @@ function wkt2coords($geometrie, $format = "HTML", $callage = "",$url_carte, $mot
 	$GeoHeight 	= $tab[2];
 	$GeoWidth 	= $tab[3];
 
-	$radius	= 6;	// TODO : Paramï¿½tre (ou fonction du callage ?) prï¿½fï¿½rable car fonction des projections 5 peut ï¿½tre bcp trop petit
+	$radius	= 6;	// TODO : Paramètre (ou fonction du callage ?) prï¿½fï¿½rable car fonction des projections 5 peut être bcp trop petit
 	$rgeo 		= round($radius*$GeoWidth/$ImgWidth);
 	$callage 	= worldfile2array ($callage);
 	
@@ -251,7 +251,7 @@ function wkt2coords_jsdhtml($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeigh
 			{		
 				$coord[$i] 		= explode(' ',$coordpair[$i]);
 				$coord[$i][0] 	= ($coord[$i][0]-$callage['top_left']['x'])/$GeoWidth*$ImgWidth;
-				$coord[$i][1] 	= ($callage['bottom_right']['y']-$coord[$i][1])/$GeoHeight*$ImgHeight;		// Calcul de l'Y par rapport au coin infï¿½rieur
+				$coord[$i][1] 	= ($callage['bottom_right']['y']-$coord[$i][1])/$GeoHeight*$ImgHeight;		// Calcul de l'Y par rapport au coin inférieur
  				$coord[$i][1]   = $ImgHeight/2-($coord[$i][1]-$ImgHeight/2);								// Pour que le dessin DHTML soit ok 
  				$coordpair[$i] 	= implode(',',$coord[$i]);
 			}
@@ -272,7 +272,7 @@ function wkt2shape_html($wktGeomType){
 function wkt2coords_html($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeight,$GeoWidth,$rgeo,$callage,$mot_desc){	
 
 			// Pour obtenir des objets HTML/MAP ...
-			// 	Sï¿½parateur coordonnï¿½es ',' / Sï¿½parateur paires de coordonnï¿½es ','
+			// 	Séparateur coordonnées ',' / Séparateur paires de coordonnï¿½es ','
 			$coordpair = explode (',',$wktGeom);
 			
 			for ($i=0; $i<sizeof($coordpair); $i++)
@@ -300,7 +300,7 @@ function wkt2coords_htmldiv($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeigh
 			{		
 				$coord[$i] 		= explode(' ',$coordpair[$i]);
 				$coord[$i][0] 	= ($coord[$i][0]-$callage['top_left']['x'])/$GeoWidth*$ImgWidth;
-				$coord[$i][1] 	= ($callage['bottom_right']['y']-$coord[$i][1])/$GeoHeight*$ImgHeight;		// Calcul de l'Y par rapport au coin infï¿½rieur
+				$coord[$i][1] 	= ($callage['bottom_right']['y']-$coord[$i][1])/$GeoHeight*$ImgHeight;		// Calcul de l'Y par rapport au coin inférieur
  				$x 				+= $coord[$i][1];
 				$y				+= $coord[$i][0];
 			}
@@ -323,8 +323,8 @@ function wkt2shape_svg($wktGeomType){
 
 function wkt2coords_svg($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeight,$GeoWidth,$rgeo,$callage,$mot_desc){	
 			// Pour obtenir des objets SVG ...
-			// Conservation des Y selon le format WKT car en coordonnï¿½es gï¿½ographique
-			// Sï¿½parateur coordonnï¿½es ',' / Sï¿½parateur paires de coordonnï¿½es ' '
+			// Conservation des Y selon le format WKT car en coordonnées géographique
+			// Sï¿½parateur coordonnées ',' / Séparateur paires de coordonnées ' '
 			$coordpair = explode (',',$wktGeom);
 
 			for ($i=0; $i<sizeof($coordpair); $i++)

@@ -1,23 +1,23 @@
 <?php
 /*****************************************************************************\
-* SPIP-CARTO, Solution de partage et dï¿½ï¿½laboration dï¿½information 
+* SPIP-CARTO, Solution de partage et d'élaboration d'information 
 * (Carto)Graphique sous SPIP
 *
-* Copyright (c) 2005
+* Copyright (c) 2005-2006
 *
-* Stï¿½phane Laurent, Franï¿½ois-Xavier Prunayre, Pierre Giraud, Jean-Claude 
+* Stéphane Laurent, François-Xavier Prunayre, Pierre Giraud, Jean-Claude 
 * Moissinac et tous les membres du projet SPIP-CARTO V1 (Annie Danzart - Arnaud
-* Fontaine - Arnaud Saint Lï¿½ger - Benoit Veler - Christine Potier - Christophe 
+* Fontaine - Arnaud Saint Léger - Benoit Veler - Christine Potier - Christophe 
 * Betin - Daniel Faivre - David Delon - David Jonglez - Eric Guichard - Jacques
-* Chatignoux - Julien Custot - Laurent Jï¿½gou - Mathieu Gï¿½hin - Michel Briand - 
-* Mose - Olivier Frï¿½rot - Philippe Fournel - Thierry Joliveau)
+* Chatignoux - Julien Custot - Laurent Jégou - Mathieu Géhin - Michel Briand - 
+* Mose - Olivier Frérot - Philippe Fournel - Thierry Joliveau)
 * 
 * voir : http://www.geolibre.net/article.php3?id_article=16
 *
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL. 
-* Pour plus de details voir le fichier COPYING.txt ou lï¿½aide en ligne.
+* Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.
 * 
-ï¿½ -
+— -
 This program is free software ; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation ; either version 2 of the License, or
@@ -33,7 +33,7 @@ along with this program (COPYING.txt) ; if not, write to
 the Free Software Foundation, Inc.,
 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 or check http://www.gnu.org/copyleft/gpl.html
-ï¿½ -
+— -
 *
 \***************************************************************************/
 # ou est l'espace prive ?

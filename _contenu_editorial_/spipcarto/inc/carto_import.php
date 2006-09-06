@@ -1,9 +1,9 @@
 <?php
 /*****************************************************************************\
-* SPIP-CARTO, Solution de partage et d’élaboration d’information 
+* SPIP-CARTO, Solution de partage et d'élaboration d'information 
 * (Carto)Graphique sous SPIP
 *
-* Copyright (c) 2005
+* Copyright (c) 2005-2006
 *
 * Stéphane Laurent, François-Xavier Prunayre, Pierre Giraud, Jean-Claude 
 * Moissinac et tous les membres du projet SPIP-CARTO V1 (Annie Danzart - Arnaud

@@ -1,23 +1,23 @@
 <?php
 /*****************************************************************************\
-* SPIP-CARTO, Solution de partage et dï¿½ï¿½laboration dï¿½information 
+* SPIP-CARTO, Solution de partage et d'élaboration d'information 
 * (Carto)Graphique sous SPIP
 *
-* Copyright (c) 2005
+* Copyright (c) 2005-2006
 *
-* Stï¿½phane Laurent, Franï¿½ois-Xavier Prunayre, Pierre Giraud, Jean-Claude 
+* Stéphane Laurent, François-Xavier Prunayre, Pierre Giraud, Jean-Claude 
 * Moissinac et tous les membres du projet SPIP-CARTO V1 (Annie Danzart - Arnaud
-* Fontaine - Arnaud Saint Lï¿½ger - Benoit Veler - Christine Potier - Christophe 
+* Fontaine - Arnaud Saint Léger - Benoit Veler - Christine Potier - Christophe 
 * Betin - Daniel Faivre - David Delon - David Jonglez - Eric Guichard - Jacques
-* Chatignoux - Julien Custot - Laurent Jï¿½gou - Mathieu Gï¿½hin - Michel Briand - 
-* Mose - Olivier Frï¿½rot - Philippe Fournel - Thierry Joliveau)
+* Chatignoux - Julien Custot - Laurent Jégou - Mathieu Géhin - Michel Briand - 
+* Mose - Olivier Frérot - Philippe Fournel - Thierry Joliveau)
 * 
 * voir : http://www.geolibre.net/article.php3?id_article=16
 *
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL. 
-* Pour plus de details voir le fichier COPYING.txt ou lï¿½aide en ligne.
+* Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.
 * 
-ï¿½ -
+— -
 This program is free software ; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation ; either version 2 of the License, or
@@ -33,7 +33,7 @@ along with this program (COPYING.txt) ; if not, write to
 the Free Software Foundation, Inc.,
 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 or check http://www.gnu.org/copyleft/gpl.html
-ï¿½ -
+— -
 *
 \***************************************************************************/
 
@@ -43,10 +43,10 @@ if (defined("_ECRIRE_INC_CARTE")) return;
 define("_ECRIRE_INC_CARTE", "1");
 
 
-// Conversion coordonnï¿½es interface DHTML -> WKT
-// 	- Modification des sï¿½parateurs dï¿½cimaux & sï¿½parateurs de paires de coordonnï¿½es
-// 	- Calcul des Y par rapport au coin infï¿½rieur
-//  TODO : Calcul des coordonnï¿½es dans l'espace (pas de reprojection en terme de SIG)
+// Conversion coordonnées interface DHTML -> WKT
+// 	- Modification des sï¿½parateurs décimaux & séparateurs de paires de coordonnées
+// 	- Calcul des Y par rapport au coin inférieur
+//  TODO : Calcul des coordonnées dans l'espace (pas de reprojection en terme de SIG)
 function coords2wkt(	$selection_type,
 						$selection_coords, 
 						$callageGeo = "", 
@@ -67,8 +67,8 @@ function coords2wkt(	$selection_type,
 	{		
 		$coord[$i] 		= explode(',',$coordpair[$i]);
 		$coord[$i][0] 	= $coord[$i][0]*$GeoWidth/$ImgWidth+$callageGeo['top_left']['x'];
-		$coord[$i][1] 	= ($ImgHeight-$coord[$i][1])*$GeoHeight/$ImgHeight+$callageGeo['top_left']['y'];		// Calcul de l'Y par rapport au coin infï¿½rieur
- 		//$coord[$i][1] 	= $coord[$i][1];		// recu et stockï¿½ en pixels ... non ok si approche SIG
+		$coord[$i][1] 	= ($ImgHeight-$coord[$i][1])*$GeoHeight/$ImgHeight+$callageGeo['top_left']['y'];		// Calcul de l'Y par rapport au coin inférieur
+ 		//$coord[$i][1] 	= $coord[$i][1];		// recu et stocké en pixels ... non ok si approche SIG
 		$coordpair[$i] 	= implode(' ',$coord[$i]);
 	}
 	$wktCoords = implode(',', $coordpair);
@@ -181,8 +181,8 @@ function afficher_carte_interface($id_carte,$retour,$fichier,$callage, $id_img =
 	$widthgeo=$callage['bottom_right']['x']-$callage['top_left']['x'];
 	$heightgeo=$callage['top_left']['y']-$callage['bottom_right']['y'];
 	
-	//TODO : Possibilitï¿½s :
-	// - vue non zoomable de la taille de l'image uploadï¿½ (Actuel)
+	//TODO : Possibilités :
+	// - vue non zoomable de la taille de l'image uploadé (Actuel)
 	// - vue zoomable largeur fixe, hauteur variable , ...
 	
 	// Rï¿½cupï¿½rer largeur/hauteur de la carte associï¿½e :
@@ -436,7 +436,7 @@ $link = generer_url_ecrire("carto_cartes_edit",$param);
  * 
  * - Initialisation avec la valeur d'un SRS
  * - 2 options : 
- * 		* Sï¿½lection d'un SRS dï¿½jï¿½ en base
+ * 		* Sélection d'un SRS déjà en base
  *  	* Ajout d'un SRS dans la base
  * 
  */

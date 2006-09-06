@@ -1,23 +1,23 @@
 <?php
 /*****************************************************************************\
-* SPIP-CARTO, Solution de partage et dï¿½ï¿½laboration dï¿½information 
+* SPIP-CARTO, Solution de partage et d'élaboration d'information 
 * (Carto)Graphique sous SPIP
 *
 * Copyright (c) 2005
 *
-* Stï¿½phane Laurent, Franï¿½ois-Xavier Prunayre, Pierre Giraud, Jean-Claude 
+* Stéphane Laurent, François-Xavier Prunayre, Pierre Giraud, Jean-Claude 
 * Moissinac et tous les membres du projet SPIP-CARTO V1 (Annie Danzart - Arnaud
-* Fontaine - Arnaud Saint Lï¿½ger - Benoit Veler - Christine Potier - Christophe 
+* Fontaine - Arnaud Saint Léger - Benoit Veler - Christine Potier - Christophe 
 * Betin - Daniel Faivre - David Delon - David Jonglez - Eric Guichard - Jacques
-* Chatignoux - Julien Custot - Laurent Jï¿½gou - Mathieu Gï¿½hin - Michel Briand - 
-* Mose - Olivier Frï¿½rot - Philippe Fournel - Thierry Joliveau)
+* Chatignoux - Julien Custot - Laurent Jégou - Mathieu Géhin - Michel Briand - 
+* Mose - Olivier Frérot - Philippe Fournel - Thierry Joliveau)
 * 
 * voir : http://www.geolibre.net/article.php3?id_article=16
 *
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL. 
-* Pour plus de details voir le fichier COPYING.txt ou lï¿½aide en ligne.
+* Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.
 * 
-ï¿½ -
+— -
 This program is free software ; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation ; either version 2 of the License, or
@@ -33,7 +33,7 @@ along with this program (COPYING.txt) ; if not, write to
 the Free Software Foundation, Inc.,
 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 or check http://www.gnu.org/copyleft/gpl.html
-ï¿½ -
+— -
 *
 \***************************************************************************/
 function exec_cartes_import() {
@@ -131,7 +131,7 @@ if ($id_carte) {
 	
 	//
 	// Importer des objets / Formulaire
-	//	1.Sï¿½lection d'un fichier du rï¿½pertoire upload
+	//	1.Sélection d'un fichier du répertoire upload
 	//	2.Analyse du fichier
 	// 	3.Importation
 	switch ($step)
@@ -154,18 +154,18 @@ if ($id_carte) {
 					echo "<input type='hidden' name='step' value='3'>";
 					echo "<input type='hidden' name='file' value='".$file."'>";
 				
-					// TODO : Paramï¿½trage du sï¿½parateur de champ
-					// TODO : Filtrer les champs de type numï¿½rique et les autres pour le choix des champs pour les coordonnï¿½es
+					// TODO : Paramétrage du séparateur de champ
+					// TODO : Filtrer les champs de type numérique et les autres pour le choix des champs pour les coordonnées
 					
 					$rec = new csvUtil($dir."/".$file, ";");		// Ouverture du fichier & lecture
 					$i = 0;
 					$nbcol = $rec->numCols();
-					while ($i<$nbcol) {								// Crï¿½ation d'une liste des colonnes du fichiers
+					while ($i<$nbcol) {								// Création d'une liste des colonnes du fichiers
 							$collist .= "<option value='".$i."'>".$rec->getField(0, $i)."</option>";
 							$i++;
 					}
 					echo "<ul>";
-					// Crï¿½ation du formulaire d'importation
+					// Création du formulaire d'importation
 					echo "<li>"._T("spipcarto:objet_titre")."<select name='col'>" .
 							"<option value='null'>"._T("spipcarto:objet_nouvel")."</option>\n".
 							$collist.
@@ -242,7 +242,7 @@ if ($id_carte) {
 					$collist .= "<option value='time'>time</option>";
 					$collist .= "<option value='type'>type</option>";
 					
-					// Crï¿½ation du formulaire d'importation
+					// Création du formulaire d'importation
 							
 				}
 				
