@@ -60,5 +60,5 @@ if (isset($fond_carte) && !empty($fond_carte))
        redirige_par_entete($fond_carte);
    }
 } 
-redirige_par_entete("spip.php?fond=404");
+redirige_par_entete("spip.php?page=404");
 ?>
