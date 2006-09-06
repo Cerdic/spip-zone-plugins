@@ -1,10 +1,10 @@
 svn://trac.rezo.net/spip/branches/spip-1.9
-temps:1157537116
+temps:1157579698
 CACHE/remove.txt:80:1012897441
 dist/modeles/img.html:1061:1156361342
 dist/modeles/emb.html:3045:1156332181
 dist/modeles/lesauteurs.html:265:1156251271
-dist/modeles/doc.html:949:1156361342
+dist/modeles/doc.html:977:1157285063
 dist/modeles/article_traductions.html:758:1156511410
 dist/modeles/article_mots.html:439:1156361342
 dist/modeles/pagination_page.html:4071:1155511400
