@@ -45,7 +45,7 @@ include_once _DIR_RESTREINT_ABS.'inc_version.php';
 //squelettes de carte disponibles 
 //(preview dans carto_cartes.php et raccourcis dans carto_carte_edit.php)
 if ($GLOBALS['rep_cartes']) $rep_fond=$GLOBALS['rep_cartes'];
-else $rep_fond="spipcarto";
+else $rep_fond="modeles";
 //  valeurs par defaut
 //$delai=24*3600;
 
@@ -55,18 +55,17 @@ if (isset($contexte_inclus['fond'])&&($contexte_inclus['fond']!="")){
 		if (strstr($fond, '/')
 		OR preg_match(',^formulaire_,i', $fond))
 			die ("Faut pas se gener");
-		else $fond = $rep_fond."/carto_".$contexte_inclus['fond'];
+		else $fond = $rep_fond."/map_".$contexte_inclus['fond'];
 }
 elseif (isset($_GET["fond"])&&($_GET["fond"]!="")){
 		if (strstr($fond, '/')
 		OR preg_match(',^formulaire_,i', $fond))
 			die ("Faut pas se gener");
-		else $fond = $rep_fond."/carto_".$_GET["fond"];
+		else $fond = $rep_fond."/map_".$_GET["fond"];
 }
-else $fond = $rep_fond."/carto";
+else $fond = $rep_fond."/map";
 
 // Securite 
-
 if (!find_in_path("$fond.html")) {
 	spip_log("carto.php: find_in_path ne trouve pas le squelette $fond");
 	$fond = '404';

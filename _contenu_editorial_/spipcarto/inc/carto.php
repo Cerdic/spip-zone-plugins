@@ -79,7 +79,7 @@ function coords2wkt(	$selection_type,
 // TODO : Faut il rendre fixe la taille de l'interface DHTML ?
 
 function embed_carto_url($id_carte, $url_parse) {
-	$lURL = $url_parse['path']."/carto.php?id_carte=".$id_carte."&scale=".$_GET['scale']."&x=".$_GET['x']."&y=".$_GET['y'];
+	$lURL = $url_parse['path']."/carto.php?id_map=".$id_carte."&scale=".$_GET['scale']."&x=".$_GET['x']."&y=".$_GET['y'];
 	return $lURL;
 }
 function embed_fond_carte_url($fond_carte) {
@@ -198,11 +198,11 @@ function afficher_carte_interface($id_carte,$retour,$fichier,$callage, $id_img =
 	
 	$returned=' <table border="0">
   <tr> 
-   <td colspan="7"><script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/'.$GLOBALS['rep_cartes'].'/js/x_core_nn4.js"></script>
-<script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/'.$GLOBALS['rep_cartes'].'/js/x_dom_nn4.js"></script>
-<script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/'.$GLOBALS['rep_cartes'].'/js/x_event_nn4.js"></script>
-<script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/'.$GLOBALS['rep_cartes'].'/js/navTools.js"></script>
-<script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/'.$GLOBALS['rep_cartes'].'/js/graphTools.js"></script>
+   <td colspan="7"><script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/js/x_core_nn4.js"></script>
+<script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/js/x_dom_nn4.js"></script>
+<script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/js/x_event_nn4.js"></script>
+<script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/js/navTools.js"></script>
+<script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/js/graphTools.js"></script>
 <form method="post" action="#nouveau_objet" name="carto_form">
  <input type="hidden" name="exec" value="carto_cartes_edit"/>
  <input type="hidden" name="id_carte" value="'.$id_carte.'"/>

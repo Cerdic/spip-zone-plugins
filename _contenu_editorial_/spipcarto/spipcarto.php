@@ -69,7 +69,8 @@ function spipcarto_ajouterOnglets($flux) {
 }
 
 
-function spipcarto_post_propre($texte) {
+function spipcarto_pre_propre($texte) {
+//est-ce bien necessaire ... 
 	if (lire_meta('activer_carto')=='oui'){
 		static $reset;
 		$cartes = array();
@@ -87,7 +88,7 @@ function spipcarto_post_propre($texte) {
 		if (is_int(strpos($texte, '<map')) &&
 		  (preg_match_all(",<map(\d+)([|])?([a-zA-Z.]+)?([(])?([a-zA-Z0-9\,\-.]+)?([)])?>,", $texte, $regs, PREG_SET_ORDER))) {	
 		
-			include_spip ("public/assembler");
+//			include_spip ("public/assembler");
 			foreach ($regs as $r) {
 				$id_carte = $r[1];
 				$cartes[$id_carte] = $id_carte;
@@ -111,13 +112,16 @@ function spipcarto_post_propre($texte) {
 				
 				
 				//mettre a jour la table de liaison avec les articles
-				if ($maj_liens && $cartes) {
+				if ($maj_liens && $cartes &&(lire_meta('carto_preview_ecrire')!='oui')) {
 					global $couleur_claire;
 					$remplace['texte']="<div><table class='gauche'><tr>" .
-							"<td class='cellule36' style='width: 100px;'><a href='../carto.php?id_carto_carte=".$r[1]."&fond=".$r[3]."&args=".$r[5]."' class='selection' target='_blank'><img src='../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.png' alt=' '/>" .
+//							"<td class='cellule36' style='width: 100px;'><a href='../carto.php?id_map=".$r[1]."&fond=".$r[3]."&args=".$r[5]."' class='selection' target='_blank'><img src='../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.png' alt=' '/>" .
+							"<td class='cellule36' style='width: 100px;'><a href='?exec=carto_cartes_edit&id_carte=".$r[1]."&retour=".rawurlencode(self())."' class='selection' target='_blank'><img src='../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.png' alt=' '/>" .
 							"<span>Carte ".$r[1]."</span></a></td></tr></table></div>";				
+					$texte = str_replace($cherche, $remplace['texte'], $texte);
 				}
 				//recuperation de la map en cache
+/*
 				else {
 					$lecontexte['id_carto_carte']=$id_carte;
 					$lecontexte['args']=$r[5];
@@ -130,6 +134,7 @@ function spipcarto_post_propre($texte) {
 				}
 				//TODO : ajouter alignement ici
 				$texte = str_replace($cherche, $remplace['texte'], $texte);
+*/
 			}
 			//mettre a jour la table de liaison avec les articles
 			//TODO : spip_abstract_insert ?

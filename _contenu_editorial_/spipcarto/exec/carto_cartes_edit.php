@@ -243,7 +243,7 @@ if ($url_carte && ($new!="oui")) {
 
 	if (!is_array($sq_cartes)) $sq_cartes=array('map');
 	foreach ($sq_cartes as $sq_carte)
-		icone_horizontale( _T('spipcarto:carte_'.$sq_carte), "../carto.php?id_carto_carte=".$id_carte."&fond=".$sq_carte."&var_mode=recalcul", "racine-24.gif", "rien.gif");
+		icone_horizontale( _T('spipcarto:carte_'.$sq_carte), "../carto.php?id_map=".$id_carte."&fond=".$sq_carte."&var_mode=recalcul", "racine-24.gif", "rien.gif");
 }
 echo "</div>\n";
 

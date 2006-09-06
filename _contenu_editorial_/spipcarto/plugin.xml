@@ -51,8 +51,8 @@
 	</pipeline>
 	
 	<pipeline>
-		<nom>post_propre</nom>
-		<action>post_propre</action>
+		<nom>pre_propre</nom>
+		<action>pre_propre</action>
 		<inclure>spipcarto.php</inclure>
 	</pipeline>
 	
