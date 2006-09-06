@@ -3,6 +3,7 @@ function calcul_tableau_grille2($texte){
 	$texte = trim($texte);
 	
 	
+	
 	$tableau = explode("\r",$texte);
 	
 
