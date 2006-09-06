@@ -24,7 +24,7 @@ function exec_config_verifcore() {
 
   chdir (_DIR_RACINE) ;
   
-  $fich =fopen("http://toto.aviron-club-manosque.org/refcorespip191.txt", "r");
+  $fich =fopen("http://zone.spip.org/trac/spip-zone/browser/_plugins_/_amelioration_admin_/verifcore/refcorespip191.txt?format=txt", "r");
   if($fich){
     while (!feof($fich)) {
       $contenu = fgets($fich, 4096);
@@ -46,10 +46,10 @@ function exec_config_verifcore() {
     }
     fclose($fich) ;
   }else{
-    echo "Attention le fichier http://toto.aviron-club-manosque.org/refcorespip191.txt n\'existe plus\n<br />" ;
+    echo "Attention le fichier http://zone.spip.org/trac/spip-zone/browser/_plugins_/_amelioration_admin_/verifcore/refcorespip191.txt?format=txt n\'existe plus\n<br />" ;
     echo "Contactez auteur du plugin rudjob chez gmail.com" ;
   }
-  $fich2 =fopen("http://toto.aviron-club-manosque.org/fichier_repertoire_supprimer_depuis_svn6797.txt", "r"); 
+  $fich2 =fopen("http://zone.spip.org/trac/spip-zone/browser/_plugins_/_amelioration_admin_/verifcore/fichier_repertoire_supprimer_depuis_svn6797.txt?format=txt", "r"); 
   if($fich2){
     $com = 0 ;
     while (!feof($fich2)) {
