@@ -3,6 +3,8 @@
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
 define('_DIR_PLUGIN_HABILLAGE_PRIVE',(_DIR_PLUGINS.end($p)));
 
+// Fonction qui gere les habillages. Tentative de faire la fonction sans appel a la
+// base de donnees, et donc sans manipulation sql.
 function exec_config_habillage_prive() {
   global $connect_statut, $connect_toutes_rubriques;
 
@@ -34,23 +36,66 @@ function exec_config_habillage_prive() {
  	debut_droite();
 
  	echo '<form action="'.generer_url_ecrire('config_habillage_prive').'" method="post">';
-	
- 	echo '<INPUT type=radio name="theme" value="initial" checked>';
- 	echo "SPIP classique<br />";
+ 	
+ 	// Debut des manipulations de mes_options.php. Le fichier mes_options sert de 
+ 	// reference pour savoir quel habillage a choisi l'utilisateur.
+ 	
+ 	$options_file = "mes_options.php";
+ 	$theme = $_REQUEST['theme'];
+ 	$plugin_directory = _DIR_PLUGIN_HABILLAGE_PRIVE;
+
+ 	
+ 	// Si le fichier mes_options.php existe,
+ 	if (file_exists($options_file)) {
+// 	 	$backup_number = date(YmdHi);
+// 		$backup_file = "$options_file$backup_number.backup";
+		$backup_file = "$options_file.backup";
+	 	rename($options_file, $backup_file);
+	 		
+		if ($theme != "initial") {
+			$open_backup_file = fopen($backup_file, 'r');
+			$backup_file_size = filesize ($backup_file);
+	 		$read_backup_file = fread ($open_backup_file, $backup_file_size);
+	 		$search_comment = eregi("//start_define_img_pack(.*)//end_define_img_pack", $read_backup_file);
+	 		$search_content = eregi("define\(\'_DIR_IMG_PACK\', \(\'(.*)\'\)\)\;", $read_backup_file, $content);
+	 		
+	 		if ($search_comment) {
+		 		$open_options_file = fopen($options_file, 'w+');
+		 		$new_content = "".$plugin_directory."/themes/".$theme."/img_pack/";
+		 		$insert_new_content = ereg_replace($content[1], $new_content, $read_backup_file);
+		 		$write = fwrite($open_options_file, $insert_new_content);
+	 		}
+ 		}
+ 	}
+ 	
+ 	else {
+	 	$open_options_file = fopen($options_file, 'w+');
+	 	$new_content = "<?\ndefine('_DIR_IMG_PACK', ('".$plugin_directory."/themes/".$theme."/img_pack/'));\n?>";
+		$write = fwrite($open_options_file, $new_content);
+ 	}
+ 	
+ 	echo '<INPUT type=radio name="theme" value="initial"';
+ 		if ($_REQUEST['theme'] == "initial") {
+	 		echo "checked";
+ 		}
+ 	echo ">";
+ 	echo "SPIP classique";
+ 	echo "<br />";
  	
  	$dossier = opendir (_DIR_PLUGIN_HABILLAGE_PRIVE.'/themes/');
 	while ($fichier = readdir ($dossier)) {
     	if ($fichier != "." && $fichier != "..") {
-	    	echo '<INPUT type=radio name="theme" value="'.$fichier.'">';
+	    	echo '<INPUT type=radio name="theme" value="'.$fichier.'"';
+	    	if ($_REQUEST['theme'] == $fichier) {
+		    	echo " checked";
+	    	}
+	    	echo ">";
         	echo $fichier.'<br />';
     	}
 	}
 	closedir ($dossier);
 	
-// 	$theme = $_REQUEST['theme'];
-// 	echo $theme;
- 	
- 	echo '<input type="submit" value="'._T('valider').'"/>';
+	echo '<input type="submit" value="'._T('valider').'"/>';
  	echo '</form>';
   } 
   
