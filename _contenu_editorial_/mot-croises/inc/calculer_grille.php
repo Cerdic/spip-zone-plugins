@@ -1,4 +1,26 @@
 <?php
+function calcul_tableau_grille2($texte){
+	$texte = trim($texte);
+	
+	
+	$tableau = explode("\r",$texte);
+	
+
+	$j =0;
+	
+	foreach ($tableau as $i){	//ligne par ligne
+		
+		
+		
+		$tableau[$j] = explode('|',$i);
+		array_shift($tableau[$j]);
+		array_pop($tableau[$j]);
+		$j++;
+		
+		}
+	
+	return $tableau;}
+
 
 function calcul_tableau_grille($texte){// cree un tableau qui va contenir la valeau de l'ensemble des cellules.
     
