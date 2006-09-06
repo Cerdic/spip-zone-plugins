@@ -1,0 +1,32 @@
+<plugin>
+        <nom> <!-- Nom du plugin -->
+          Comparaison avec spip stable
+        </nom>
+        <auteur>        <!-- Auteur du plugin -->
+         job
+        </auteur>
+        <version>
+        0.1
+        </version>
+        <etat>
+          test
+        </etat>
+        <description>
+          Permet de r&eacute;aliser une comparaison de ce ces fichiers spip par rapport  &agrave; ceux disponible sur http://trac.rezo.net/trac/spip/browser/branches/spip-1.9/  (pour l'instant).
+La comparaison est faite par rapport à la taille des fichiers et leur date de modification.
+         L'int&eacute;ret de ce plugin est double:
+         1) V&eacute;rifie que le transfert ftp des fichiers c'est bien effectu&eacute;
+         2) Permet de voir s'il y a eu des mis &agrave;  jour (du principalement &agrave; des corrections de bugs)
+        </description>
+        <prefix>
+          verifcore
+        </prefix>
+        <!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+        <pipeline>
+		<nom>ajouter_onglets</nom>
+		<action>ajouterOnglets</action>
+            <inclure>verifcore.php</inclure>
+        </pipeline>
+	
+        <!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.        -->
+</plugin>
