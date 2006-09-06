@@ -84,7 +84,7 @@ if ($_REQUEST['installation']=='oui'){
 //		spip_query("UPDATE ".$table_pref."_meta SET valeur='oui', maj=now() WHERE nom='carto_mots';");
 	} else {
 		spip_query("INSERT INTO ".$table_pref."_carto_srs (id_carto_srs, label, code) VALUES ('-1', 'Par defaut', '-1');");
-		spip_query("INSERT INTO ".$table_pref."_carto_srs (label, code) VALUES ('NTF (Paris) / Lambert zone II étendu', 'EPSG:27582');");
+		spip_query("INSERT INTO ".$table_pref."_carto_srs (label, code) VALUES ('NTF (Paris) / Lambert zone II etendu', 'EPSG:27582');");
 		spip_query("INSERT INTO ".$table_pref."_carto_srs (label, code) VALUES ('NTF (Paris) / Lambert zone II', 'EPSG:27572');");
 		spip_query("INSERT INTO ".$table_pref."_carto_srs (label, code) VALUES ('NTF (Paris) / Lambert zone III', 'EPSG:27573');");
 		spip_query("INSERT INTO ".$table_pref."_carto_srs (label, code) VALUES ('NTF (Paris) / Lambert zone I', 'EPSG:27571');");

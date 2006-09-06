@@ -1,23 +1,23 @@
 <?php
 /*****************************************************************************\
-* SPIP-CARTO, Solution de partage et d'élaboration d'information 
+* SPIP-CARTO, Solution de partage et d'elaboration d'information 
 * (Carto)Graphique sous SPIP
 *
 * Copyright (c) 2005-2006
 *
-* Stéphane Laurent, François-Xavier Prunayre, Pierre Giraud, Jean-Claude 
+* Stephane Laurent, Franeois-Xavier Prunayre, Pierre Giraud, Jean-Claude 
 * Moissinac et tous les membres du projet SPIP-CARTO V1 (Annie Danzart - Arnaud
-* Fontaine - Arnaud Saint Léger - Benoit Veler - Christine Potier - Christophe 
+* Fontaine - Arnaud Saint Leger - Benoit Veler - Christine Potier - Christophe 
 * Betin - Daniel Faivre - David Delon - David Jonglez - Eric Guichard - Jacques
-* Chatignoux - Julien Custot - Laurent Jégou - Mathieu Géhin - Michel Briand - 
-* Mose - Olivier Frérot - Philippe Fournel - Thierry Joliveau)
+* Chatignoux - Julien Custot - Laurent Jegou - Mathieu Gehin - Michel Briand - 
+* Mose - Olivier Frerot - Philippe Fournel - Thierry Joliveau)
 * 
 * voir : http://www.geolibre.net/article.php3?id_article=16
 *
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL. 
 * Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.
 * 
-— -
+e -
 This program is free software ; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation ; either version 2 of the License, or
@@ -33,7 +33,7 @@ along with this program (COPYING.txt) ; if not, write to
 the Free Software Foundation, Inc.,
 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 or check http://www.gnu.org/copyleft/gpl.html
-— -
+e -
 *
 \***************************************************************************/
 
@@ -95,22 +95,22 @@ function spipcarto_post_propre($texte) {
 				
 				//TODO : traiter l'alignement avant replace
 				//Le mieux etant de les traiter ici, dans le plugin
-				//car le code doit rester identique à celui de Spip
+				//car le code doit rester identique a celui de Spip
 				//$align = $r[3];
 				
 				//TODO : voir si on ne peut pas faire un reglage plus fin ...
-				// voir aussi pour les variables passées en POST (pa de cache ???)
+				// voir aussi pour les variables passees en POST (pa de cache ???)
 				// en attendant : 60s ca permet de tester facilement le cache et le recalcul
 				$ledelai="60";
 				//TODO : peut etre d'autres parametres ... ???
 				//forcer un type de carte ?
 				//$type_carte = $r[3];
 				
-				//l'url du site parsée, ca peut servir ...
+				//l'url du site parsee, ca peut servir ...
 				//$taburl=parse_url(lire_meta('adresse_site'));
 				
 				
-				//mettre à jour la table de liaison avec les articles
+				//mettre a jour la table de liaison avec les articles
 				if ($maj_liens && $cartes) {
 					global $couleur_claire;
 					$remplace['texte']="<div><table class='gauche'><tr>" .

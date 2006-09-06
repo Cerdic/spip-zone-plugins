@@ -1,23 +1,23 @@
 <?php
 /*****************************************************************************\
-* SPIP-CARTO, Solution de partage et d'élaboration d'information 
+* SPIP-CARTO, Solution de partage et d'elaboration d'information 
 * (Carto)Graphique sous SPIP
 *
 * Copyright (c) 2005-2006
 *
-* Stéphane Laurent, François-Xavier Prunayre, Pierre Giraud, Jean-Claude 
+* Stephane Laurent, Franeois-Xavier Prunayre, Pierre Giraud, Jean-Claude 
 * Moissinac et tous les membres du projet SPIP-CARTO V1 (Annie Danzart - Arnaud
-* Fontaine - Arnaud Saint Léger - Benoit Veler - Christine Potier - Christophe 
+* Fontaine - Arnaud Saint Leger - Benoit Veler - Christine Potier - Christophe 
 * Betin - Daniel Faivre - David Delon - David Jonglez - Eric Guichard - Jacques
-* Chatignoux - Julien Custot - Laurent Jégou - Mathieu Géhin - Michel Briand - 
-* Mose - Olivier Frérot - Philippe Fournel - Thierry Joliveau)
+* Chatignoux - Julien Custot - Laurent Jegou - Mathieu Gehin - Michel Briand - 
+* Mose - Olivier Frerot - Philippe Fournel - Thierry Joliveau)
 * 
 * voir : http://www.geolibre.net/article.php3?id_article=16
 *
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL. 
 * Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.
 * 
-— -
+e -
 This program is free software ; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation ; either version 2 of the License, or
@@ -33,11 +33,11 @@ along with this program (COPYING.txt) ; if not, write to
 the Free Software Foundation, Inc.,
 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 or check http://www.gnu.org/copyleft/gpl.html
-— -
+e -
 *
 \***************************************************************************/
 
-// Ce fichier ne sera executé qu'une fois
+// Ce fichier ne sera execute qu'une fois
 if (defined("_ECRIRE_INC_CARTE")) return;
 define("_ECRIRE_INC_CARTE", "1");
 include_spip("base/carto");
@@ -82,13 +82,13 @@ function worldfileLRY($callage){
 }
 function getPropMapHeight($callage, $width){
 	$tabcallage=worldfile2array($callage);
-	// Calcul d'une hauteur relative ï¿½ un callage (proportion)
+	// Calcul d'une hauteur relative a un callage (proportion)
 	return $width*($tabcallage['bottom_right']['y']-$tabcallage['top_left']['y'])/($tabcallage['bottom_right']['x']-$tabcallage['top_left']['x']);
 }
 
 
-// Définition du callage à partir de la dimension de l'image
-// Option par défaut / le callage est défini à la main si une projection est utilisée
+// Definition du callage a partir de la dimension de l'image
+// Option par defaut / le callage est defini a la main si une projection est utilisee
 function array2worldfile($mArray){	
 	return "polygon(0 0,".$mArray['largeur']." ".$mArray['hauteur'].")";
 }
@@ -147,14 +147,14 @@ function wkt2imgsize($args="", $callage = "",$url_carte){
 	$ImgRealWidth = getImgWidth ($url_carte);
 	$ImgRealHeight = getImgHeight ($url_carte);
 	
-	//ou la taille passée, ou à defaut celle de la carte ???
+	//ou la taille passee, ou a defaut celle de la carte ???
 	if ($ImgRealWidth) $ImgWidth = $ImgRealWidth;
 	else $ImgWidth = $GeoWidth;
 	if ($ImgRealHeight) $ImgHeight = $ImgRealHeight;
 	else $ImgHeight = $GeoHeight;
 	$ratio=$ImgHeight/$ImgWidth;
 	
-	//tailles maximum parametrées ?
+	//tailles maximum parametrees ?
 	//TODO : optimiser un peu tout ca ...
 	$ImgMaxWidth = getArg($args,1);
 	$ImgMaxHeight = getArg($args,0);
@@ -226,14 +226,14 @@ function wkt2coords($geometrie, $format = "HTML", $callage = "",$url_carte, $mot
 	$wktGeom 	= substr($geometrie,strpos($geometrie,"(")+1,-1);
 	
 	$tab=wkt2imgsize($args, $callage,$url_carte);
-	//recuperer taille affichï¿½e 
+	//recuperer taille affichee 
 	$ImgHeight=$tab[0];
 	$ImgWidth=$tab[1];
 	//recuperer taille reelle carte
 	$GeoHeight 	= $tab[2];
 	$GeoWidth 	= $tab[3];
 
-	$radius	= 6;	// TODO : Paramètre (ou fonction du callage ?) prï¿½fï¿½rable car fonction des projections 5 peut être bcp trop petit
+	$radius	= 6;	// TODO : Parametre (ou fonction du callage ?) preferable car fonction des projections 5 peut etre bcp trop petit
 	$rgeo 		= round($radius*$GeoWidth/$ImgWidth);
 	$callage 	= worldfile2array ($callage);
 	
@@ -251,7 +251,7 @@ function wkt2coords_jsdhtml($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeigh
 			{		
 				$coord[$i] 		= explode(' ',$coordpair[$i]);
 				$coord[$i][0] 	= ($coord[$i][0]-$callage['top_left']['x'])/$GeoWidth*$ImgWidth;
-				$coord[$i][1] 	= ($callage['bottom_right']['y']-$coord[$i][1])/$GeoHeight*$ImgHeight;		// Calcul de l'Y par rapport au coin inférieur
+				$coord[$i][1] 	= ($callage['bottom_right']['y']-$coord[$i][1])/$GeoHeight*$ImgHeight;		// Calcul de l'Y par rapport au coin inferieur
  				$coord[$i][1]   = $ImgHeight/2-($coord[$i][1]-$ImgHeight/2);								// Pour que le dessin DHTML soit ok 
  				$coordpair[$i] 	= implode(',',$coord[$i]);
 			}
@@ -272,14 +272,14 @@ function wkt2shape_html($wktGeomType){
 function wkt2coords_html($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeight,$GeoWidth,$rgeo,$callage,$mot_desc){	
 
 			// Pour obtenir des objets HTML/MAP ...
-			// 	Séparateur coordonnées ',' / Séparateur paires de coordonnï¿½es ','
+			// 	Separateur coordonnees ',' / Separateur paires de coordonnees ','
 			$coordpair = explode (',',$wktGeom);
 			
 			for ($i=0; $i<sizeof($coordpair); $i++)
 			{		
 				$coord[$i] 		= explode(' ',$coordpair[$i]);
 				$coord[$i][0] 	= ($coord[$i][0]-$callage['top_left']['x'])/$GeoWidth*$ImgWidth;
-				$coord[$i][1] 	= ($callage['bottom_right']['y']-$coord[$i][1])/$GeoHeight*$ImgHeight;		// Calcul de l'Y par rapport au coin infï¿½rieur
+				$coord[$i][1] 	= ($callage['bottom_right']['y']-$coord[$i][1])/$GeoHeight*$ImgHeight;		// Calcul de l'Y par rapport au coin inferieur
  				$coordpair[$i] 	= implode(',',$coord[$i]);
 			}
 			$wktGeom = implode(',', $coordpair);
@@ -300,7 +300,7 @@ function wkt2coords_htmldiv($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeigh
 			{		
 				$coord[$i] 		= explode(' ',$coordpair[$i]);
 				$coord[$i][0] 	= ($coord[$i][0]-$callage['top_left']['x'])/$GeoWidth*$ImgWidth;
-				$coord[$i][1] 	= ($callage['bottom_right']['y']-$coord[$i][1])/$GeoHeight*$ImgHeight;		// Calcul de l'Y par rapport au coin inférieur
+				$coord[$i][1] 	= ($callage['bottom_right']['y']-$coord[$i][1])/$GeoHeight*$ImgHeight;		// Calcul de l'Y par rapport au coin inferieur
  				$x 				+= $coord[$i][1];
 				$y				+= $coord[$i][0];
 			}
@@ -323,8 +323,8 @@ function wkt2shape_svg($wktGeomType){
 
 function wkt2coords_svg($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeight,$GeoWidth,$rgeo,$callage,$mot_desc){	
 			// Pour obtenir des objets SVG ...
-			// Conservation des Y selon le format WKT car en coordonnées géographique
-			// Sï¿½parateur coordonnées ',' / Séparateur paires de coordonnées ' '
+			// Conservation des Y selon le format WKT car en coordonnees geographique
+			// Separateur coordonnees ',' / Separateur paires de coordonnees ' '
 			$coordpair = explode (',',$wktGeom);
 
 			for ($i=0; $i<sizeof($coordpair); $i++)
@@ -347,7 +347,7 @@ function wkt2coords_svg($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeight,$G
 // GOOGLE
 ///////////////////////////////////////////////
 function wkt2coords_google($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeight,$GeoWidth,$rgeo,$callage){	
-// Conservation des Y selon le format WKT car en coordonnï¿½es gï¿½ographique
+// Conservation des Y selon le format WKT car en coordonnees geographique
 			$coordpair = explode (',',$wktGeom);
 			
 			for ($i=0; $i<sizeof($coordpair); $i++)

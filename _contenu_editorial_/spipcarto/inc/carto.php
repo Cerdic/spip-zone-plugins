@@ -1,23 +1,23 @@
 <?php
 /*****************************************************************************\
-* SPIP-CARTO, Solution de partage et d'élaboration d'information 
+* SPIP-CARTO, Solution de partage et d'elaboration d'information 
 * (Carto)Graphique sous SPIP
 *
 * Copyright (c) 2005-2006
 *
-* Stéphane Laurent, François-Xavier Prunayre, Pierre Giraud, Jean-Claude 
+* Stephane Laurent, Franeois-Xavier Prunayre, Pierre Giraud, Jean-Claude 
 * Moissinac et tous les membres du projet SPIP-CARTO V1 (Annie Danzart - Arnaud
-* Fontaine - Arnaud Saint Léger - Benoit Veler - Christine Potier - Christophe 
+* Fontaine - Arnaud Saint Leger - Benoit Veler - Christine Potier - Christophe 
 * Betin - Daniel Faivre - David Delon - David Jonglez - Eric Guichard - Jacques
-* Chatignoux - Julien Custot - Laurent Jégou - Mathieu Géhin - Michel Briand - 
-* Mose - Olivier Frérot - Philippe Fournel - Thierry Joliveau)
+* Chatignoux - Julien Custot - Laurent Jegou - Mathieu Gehin - Michel Briand - 
+* Mose - Olivier Frerot - Philippe Fournel - Thierry Joliveau)
 * 
 * voir : http://www.geolibre.net/article.php3?id_article=16
 *
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL. 
 * Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.
 * 
-— -
+e -
 This program is free software ; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation ; either version 2 of the License, or
@@ -33,7 +33,7 @@ along with this program (COPYING.txt) ; if not, write to
 the Free Software Foundation, Inc.,
 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 or check http://www.gnu.org/copyleft/gpl.html
-— -
+e -
 *
 \***************************************************************************/
 
@@ -43,10 +43,10 @@ if (defined("_ECRIRE_INC_CARTE")) return;
 define("_ECRIRE_INC_CARTE", "1");
 
 
-// Conversion coordonnées interface DHTML -> WKT
-// 	- Modification des sï¿½parateurs décimaux & séparateurs de paires de coordonnées
-// 	- Calcul des Y par rapport au coin inférieur
-//  TODO : Calcul des coordonnées dans l'espace (pas de reprojection en terme de SIG)
+// Conversion coordonnees interface DHTML -> WKT
+// 	- Modification des separateurs decimaux & separateurs de paires de coordonnees
+// 	- Calcul des Y par rapport au coin inferieur
+//  TODO : Calcul des coordonnees dans l'espace (pas de reprojection en terme de SIG)
 function coords2wkt(	$selection_type,
 						$selection_coords, 
 						$callageGeo = "", 
@@ -54,7 +54,7 @@ function coords2wkt(	$selection_type,
 	$GeoWidth 	= ($callageGeo['bottom_right']['x']-$callageGeo['top_left']['x']);
 	$GeoHeight 	= ($callageGeo['bottom_right']['y']-$callageGeo['top_left']['y']);
 	
-	// Rï¿½cupï¿½rer largeur/hauteur de la carte associï¿½e :
+	// Recuperer largeur/hauteur de la carte associee :
 	$image = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $url_carte"));
 	$ImgWidth=$image['largeur'];
 	$ImgHeight=$image['hauteur'];
@@ -67,13 +67,13 @@ function coords2wkt(	$selection_type,
 	{		
 		$coord[$i] 		= explode(',',$coordpair[$i]);
 		$coord[$i][0] 	= $coord[$i][0]*$GeoWidth/$ImgWidth+$callageGeo['top_left']['x'];
-		$coord[$i][1] 	= ($ImgHeight-$coord[$i][1])*$GeoHeight/$ImgHeight+$callageGeo['top_left']['y'];		// Calcul de l'Y par rapport au coin inférieur
- 		//$coord[$i][1] 	= $coord[$i][1];		// recu et stocké en pixels ... non ok si approche SIG
+		$coord[$i][1] 	= ($ImgHeight-$coord[$i][1])*$GeoHeight/$ImgHeight+$callageGeo['top_left']['y'];		// Calcul de l'Y par rapport au coin inferieur
+ 		//$coord[$i][1] 	= $coord[$i][1];		// recu et stocke en pixels ... non ok si approche SIG
 		$coordpair[$i] 	= implode(' ',$coord[$i]);
 	}
 	$wktCoords = implode(',', $coordpair);
 	
-	return $selection_type."(".$wktCoords.")";			// Gï¿½omï¿½trie au format WKT
+	return $selection_type."(".$wktCoords.")";			// Geometrie au format WKT
 }
 
 // TODO : Faut il rendre fixe la taille de l'interface DHTML ?
@@ -157,7 +157,7 @@ function afficher_cartes($titre_table, $requete, $icone = '') {
 		echo  typo($titre);
 		echo "</a></td><td>";
 		
-		//articles liï¿½s
+		//articles lies
 		afficher_articles(_T("spipcarto:carte_articles_use"),
 			array(
 				"FROM"=>"spip_articles AS articles, spip_carto_cartes_articles AS lien",
@@ -181,11 +181,11 @@ function afficher_carte_interface($id_carte,$retour,$fichier,$callage, $id_img =
 	$widthgeo=$callage['bottom_right']['x']-$callage['top_left']['x'];
 	$heightgeo=$callage['top_left']['y']-$callage['bottom_right']['y'];
 	
-	//TODO : Possibilités :
-	// - vue non zoomable de la taille de l'image uploadé (Actuel)
+	//TODO : Possibilites :
+	// - vue non zoomable de la taille de l'image uploade (Actuel)
 	// - vue zoomable largeur fixe, hauteur variable , ...
 	
-	// Rï¿½cupï¿½rer largeur/hauteur de la carte associï¿½e :
+	// Recuperer largeur/hauteur de la carte associee :
 	$image = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_img"));
 	
 	if ($image) {
@@ -436,7 +436,7 @@ $link = generer_url_ecrire("carto_cartes_edit",$param);
  * 
  * - Initialisation avec la valeur d'un SRS
  * - 2 options : 
- * 		* Sélection d'un SRS déjà en base
+ * 		* Selection d'un SRS deje en base
  *  	* Ajout d'un SRS dans la base
  * 
  */

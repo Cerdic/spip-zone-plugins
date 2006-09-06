@@ -7,7 +7,7 @@ Description:
 version plugin de spipcarto
 Installation:
 - copier le repertoire dans le repertoire plugin de spip
-- deplacer les fichier du repertoire /racine_spip à la racine du site
+- deplacer les fichier du repertoire /racine_spip a la racine du site
 - activer le plugin
 - configurer le plugin (installation en base et metas)
 
@@ -18,8 +18,8 @@ Listes des fichiers:
 
 [fr]
 README.txt vous y etes,
-_REGLES_DE_COMMIT.txt régles pour faire évoluer cette contrib,
-TODO.txt ce qu'il reste à faire,
+_REGLES_DE_COMMIT.txt regles pour faire evoluer cette contrib,
+TODO.txt ce qu'il reste a faire,
 BUG.txt les bugs connus.
 
 [en]
