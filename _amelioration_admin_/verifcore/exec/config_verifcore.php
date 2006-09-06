@@ -22,7 +22,8 @@ function exec_config_verifcore() {
   $dossier_supprime =array() ;
   $branche = "";
   $dateversion = "";
-
+	
+  $cwd = getcwd();
   chdir (_DIR_RACINE) ; 
   $fich =recuperer_page("http://zone.spip.org/trac/spip-zone/browser/_plugins_/_amelioration_admin_/verifcore/refcorespip191.txt?format=txt");
   if($fich){
@@ -113,6 +114,7 @@ function exec_config_verifcore() {
   
   fin_cadre_enfonce();
 
+  chdir ($cwd) ;
   fin_page();
 }
 ?>
