@@ -56,13 +56,16 @@ CODE;
 
 function balise_PREFS($p) {
 	if ($p->param && !$p->param[0][0]) {
-		$p->code = '($Pile[$SP][\'prefs\'][\''.$p->param[0][1][0]->texte.'\'])';
+		$p->code = '($Pile[$SP][\'prefs\']['
+			.calculer_liste($p->param[0][1], $p->descr,
+							$p->boucles, $p->id_boucle)
+			.'])';
 		$p->interdire_scripts = false;
 		return $p;
 	} else {
-	  erreur_squelette("quelle pref ? dans balise PREFS",
-					   $boucle->id_boucle);
-	  return;
+		$p->code = '($Pile[$SP][\'prefs\'])';
+		$p->interdire_scripts = false;
+		return $p;
 	}
 }
 
