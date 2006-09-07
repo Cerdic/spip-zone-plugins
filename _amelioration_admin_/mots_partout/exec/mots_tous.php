@@ -56,7 +56,7 @@ function exec_mots_tous()
 // insert "dynamique" en fonction de la liste de choses possibles
 			$rqCol='';
 			$rqVal='';
-			foreach($choses as $chose) {
+			foreach($choses as $chose) if ($chose!='forum'){
 				$rqCol.=", $chose";
 				$rqVal.=", " . spip_abstract_quote($GLOBALS[$chose]);
 			}
