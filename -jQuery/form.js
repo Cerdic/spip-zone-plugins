@@ -48,7 +48,7 @@ $.fn.ajaxSubmit = function(target, post_cb, pre_cb, url, mth) {
 
 	var f = this.get(0);
 	var url = url || f.getAttributeNode('action').nodeValue || '';
-	var mth = mth || f.getAttributeNode('action').nodeValue || 'POST';
+	var mth = mth || f.getAttributeNode('method').nodeValue || 'POST';
 
 	if (target && target.constructor == Function)
 		$.ajax(mth, url, $.param(this.vars), target);
@@ -171,18 +171,15 @@ $.fn.formdata = function(){
  */
 $.fn.serialize = function() {
 	var a = [];
-	var ok = {INPUT:true, TEXTAREA:true, SELECT:true/*OPTION:true*/};
 
 	$('input,textarea,select', this).each(function() {
 		var par = this.parentNode;
-		//var p = par.nodeName.toUpperCase();
-		var n = this.name || /*p == 'OPTGROUP' && par.parentNode.name || p == 'SELECT' && par.name ||*/ this.id;
+		var n = this.name || this.id;
 
 		if ( !n || this.disabled || this.type == 'reset' || 
 			(this.type == 'checkbox' || this.type == 'radio') && !this.checked || 
-			/*!ok[this.nodeName.toUpperCase()] ||*/
-			(this.type == 'submit' || this.type == 'image') && this.form.clicked != this /*||
-			(p == 'SELECT' || p == 'OPTGROUP') && !this.selected*/ ) return;
+			(this.type == 'submit' || this.type == 'image') && this.form.clicked != this) 
+			return;
 
 		if (this.type == 'image' && this.form.clicked_x)
 			return a.push(
