@@ -13,7 +13,7 @@ function calcul_tableau_grille2($texte){
 		
 		
 		
-		$tableau[$j] = explode('|',$i);
+		$tableau[$j] = explode('|',trim($i));		//une cellule, c'est beau !
 		array_shift($tableau[$j]);
 		array_pop($tableau[$j]);
 		$j++;

@@ -61,7 +61,7 @@ function affichage_grille($tableau_grille,$solution=false){
                     else
                         {
                         
-                        $grille.='<input type="text" maxlength="1"  name="col'.$colonne.'lig'.$ligne.'" id="col'.$colonne.'lig'.$ligne."\"";                        
+                        $grille.='<input type="text" maxlength="1"  name="col'.$colonne.'lig'.$ligne.'" id="col'.$colonne.'lig'.$ligne."\" />";                        
 						}
 					
 					$grille.= "</td>\n" ;		//cloture de la cellule
