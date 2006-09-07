@@ -2,8 +2,8 @@
 
 
 //	  exec/mots_partout.php
-//    Fichier créé pour SPIP avec un bout de code emprunté à celui ci.
-//    Distribué sans garantie sous licence GPL./
+//    Fichier crï¿½ï¿½ pour SPIP avec un bout de code empruntï¿½ ï¿½ celui ci.
+//    Distribuï¿½ sans garantie sous licence GPL./
 //    Copyright (C) 2006  Pierre ANDREWS
 //
 //    This program is free software; you can redistribute it and/or modify
@@ -52,7 +52,7 @@ function verifier_auteur($table, $id_objet, $id) {
 }
 
 
-//on calcul le style pour ce mot. I.E. on regarde si il est attache à tout ou seulement une partie
+//on calcul le style pour ce mot. I.E. on regarde si il est attache ï¿½ tout ou seulement une partie
 function calcul_numeros($array, $search, $total) {
   if(is_array($array))
 	$tt = count(array_keys($array,$search));
@@ -193,7 +193,7 @@ global $choses_possibles;
   
   
   /***********************************************************************/
-  /* récuperation de la chose sur laquelle on travaille*/
+  /* rï¿½cuperation de la chose sur laquelle on travaille*/
   /***********************************************************************/
 
   $nom_chose = addslashes(_request('nom_chose'));
@@ -335,11 +335,12 @@ global $choses_possibles;
 
   debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_MOTS_PARTOUT."/mots_partout.css");
   echo'</script>';
-
-	  echo '<br><br><center>';
+  
+  echo "<table width='750' cellpadding='0' cellspacing='0' border='0' align='center'><tr><td>";
+  if ($_REQUEST['retour']) icone(_T('icone_retour'), $_REQUEST['retour'], "rubrique-24.gif", "rien.gif",'left');
+  echo '<br/><br/><center>';
   gros_titre(_T('motspartout:titre_page'));
-  echo '</center>';
-
+  echo "<center></td></tr></table>";
   //Colonne de gauche
   debut_gauche();
 
@@ -520,7 +521,7 @@ _T('motspartout:stricte').
 	fin_cadre_relief();
   }
 
-  // Affichage de toutes les choses (on pourrait imaginer faire une pagination là)
+  // Affichage de toutes les choses (on pourrait imaginer faire une pagination lï¿½)
   debut_cadre_relief('',false,'document', _T('portfolio'));
   if(count($choses) > 0) {
 	$function = "afficher_liste_$nom_chose";
