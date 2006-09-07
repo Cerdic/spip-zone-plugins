@@ -30,4 +30,3 @@ function mot_croises_pre_propre($texte){
 
 
 ?>
-

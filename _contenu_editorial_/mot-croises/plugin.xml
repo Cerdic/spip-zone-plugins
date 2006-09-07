@@ -21,4 +21,9 @@
 		<inclure>mot_croises_avant_propre.php</inclure>
 		<action>pre_propre</action>
 	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>mot_croises_header_prive.php</inclure>
+		<action>header_prive</action>
+	</pipeline>
 </plugin>
