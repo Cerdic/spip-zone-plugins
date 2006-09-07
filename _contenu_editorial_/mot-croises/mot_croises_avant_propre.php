@@ -2,8 +2,8 @@
 
 function mot_croises_pre_propre($texte){
 	
-	$echappeur_debut = '<html><!-- grille--></html>';		//pour pas_de_grille
-	$echappeur_fin = '<html><!-- fin-grille--></html>';	//pour pas_de_grille
+	$echappeur_debut = code_echappement("<!-- debut-grille-->");		//pour pas_de_grille
+	$echappeur_fin = code_echappement("<!-- fin-grille-->");	//pour pas_de_grille
 	
 	include_spip('inc/calculer_grille');
 	
@@ -31,7 +31,8 @@ function mot_croises_pre_propre($texte){
 					}
 				//fin calcul erreur
 				
-				$tableau[$j] = $echappeur_debut.$erreur.affichage_grille($tableau_php).$echappeur_fin;				
+				$tableau[$j] = $echappeur_debut.$erreur.affichage_grille($tableau_php).$echappeur_fin;	
+						
 				}
 			
 			
