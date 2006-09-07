@@ -1,13 +1,13 @@
 <?php
+define('_DIR_PLUGIN_VERIFCORE',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__).'/..'))))));
 
-define('_DIR_PLUGIN_VERIFCORE',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 function exec_config_verifcore() {
   include_spip ("inc/presentation");
   include_spip ("inc/distant"); 
  
   debut_page('configurations');
   echo '<br><br><br>';
-  gros_titre("yes");
+  gros_titre("V&eacute;fication mis a jour");
   
   barre_onglets("configuration", "config_verifcore");
   
