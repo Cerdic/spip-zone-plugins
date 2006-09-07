@@ -64,7 +64,10 @@ error_log("$id_boucle ".$boucle->total_boucle." => $start,$end '".$boucle->mode_
 
 	foreach($boucle->criteres as $critere) {
 	  if($critere->op=='valeur') {
-		$var= '$Pile[$SP][\'valeur\']';
+		  $var= '$Pile[$SP][\'valeur\']';
+	  } elseif($critere->op=='=' && $critere->param[0][0]->texte=='valeur') {
+		  $var= calculer_liste($critere->param[1],
+							   array(), $boucles, $boucle->id_parent);
 	  } elseif($critere->op=='=' && $critere->param[0][0]->texte=='var') {
 		$var= '$GLOBALS['.calculer_liste($critere->param[1],
 			array(), $boucles, $boucle->id_parent).']';
@@ -88,7 +91,7 @@ error_log("$id_boucle ".$boucle->total_boucle." => $start,$end '".$boucle->mode_
 		$code=<<<CODE
 	\$__t= &${var}$cle;
 	\$SP++;
-	if(!\$__t || empty(\$__t)) { return ''; }
+	if(!is_array(\$__t) || empty(\$__t)) { return ''; }
 	\$__t_k= array_keys(\$__t);
 	\$code=array();
 	\$Pile[\$SP]['var']=&\$__t;
@@ -108,7 +111,7 @@ CODE;
 		$code=<<<CODE
 	\$__t= ${var}$cle;
 	\$SP++;
-	if(!\$__t || empty(\$__t)) { return ''; }
+	if(!is_array(\$__t) || empty(\$__t)) { return ''; }
 	\$code=array();
 	\$Pile[\$SP]['var']=&\$__t;
 	\$i= 1;
