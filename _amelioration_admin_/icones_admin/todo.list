@@ -1,0 +1,7 @@
+- Mettre une vérification de la redéfinition originale par l'utilisateur du chemin img_pack et sauvegarder la valeur.
+- Mettre une restauration de la valeur du chemin d'img_pack défini par l'utilisateur à l'origine et mettre un effacement de la valeur ajoutée par le plugin, le tout pour une restauration finale.
+- Voir comment gérer les chemins vers le dossier img_pack des plugins puisque le plugin habillage_prive redefini l'img_pack original (celui qui a servi aux concepteurs des autres plugins pour définir leur chemin vers img_pack).
+- Mettre au clic sur "configurer habillage privé" une vérification de l'habillage déjà chargé.
+- Insérer captures ecrans et descriptifs via un fichier theme à la racine des dossiers de thèmes.
+- Rédiger mode d'emploi pour personnaliser les thèmes.
+- Mise à jour graphique des thèmes.
