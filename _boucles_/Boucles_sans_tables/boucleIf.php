@@ -16,7 +16,7 @@ function boucle_IF($id_boucle, &$boucles) {
 	$code=<<<CODE
 
 	if(eval("return ".$boucle->where.";")) {
-		\$SP++;
+		//\$SP++;
 		return $boucle->return;
 	}
 CODE;
