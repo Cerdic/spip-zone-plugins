@@ -109,7 +109,6 @@ function exec_config_habillage_prive() {
  		}
  		
  		# Si l'utilisateur ou l'utilisatrice veut revenir a la situation initiale.
- 		# ! Manque la restauration du define d'origine !
  		else if ($theme == "initial") {
 	 		$search_comment_backup = eregi("//backup_define\(\'_DIR_IMG_PACK\', \(\'(.*)\'\)\)\;", $read_backup_file);
 	 		
@@ -126,8 +125,8 @@ function exec_config_habillage_prive() {
 		 		$insert_new_content = ereg_replace( '//backup_define', 'define', $read_backup_file);
 		 		$write = fwrite($open_options_file, $insert_new_content);
 		 		fclose($open_options_file);
-		 		
 		 	}
+		 	
 	 		else {
 		 		rename($backup_file, $options_file);
 	 		}
