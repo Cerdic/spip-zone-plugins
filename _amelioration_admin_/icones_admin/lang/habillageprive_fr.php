@@ -5,8 +5,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'gros_titre' => 'Choisissez le th&egrave;me d\'habillage de l\'espace priv&eacute;.',
    	'help' => '{{Fonctionnement}} 
    	
-Choisissez l\'habillage plus validez. Le nouvel habillage s\'affichera au prochain clic.
+Choisissez l\'habillage plus validez. Le nouvel habillage s\'affichera au prochain clic (cliquez deux fois sur "valider" si vous voulez voir l\'habillage apparaitre). 
 
-{{Attention ! En l\'etat actuel du plugin, il est conseille de faire une sauvegarde de votre fichier ecrire/mes_options.php si vous avez redefini intialement dans celui-ci votre chemin vers img_pack. En effet, une sauvegarde de ce fichier est bien effectuee par le plugin, mais chaque changement d\'habillage ecrase la sauvegarde precendente, donc il vous faudra remettre le chemin personnalise vers img_pack a la fin de l\'utilisation de ce plugin.}}',)
+{{Pensez &agrave; bien cocher "Revenir &agrave; l\'habillage d\'origine" pour effacer tout effet du plugin sur vos fichiers.}}
+
+{{Explication technique}} : ce plugin, normalement (mais il est en developpement et &agrave; tester), fait une sauvegarde de votre ancien fichier ecrire/mes_options.php et est cens&eacute; le restaurer lorsque vous cessez d\'utiliser ce plugin. Il est malgr&egrave; tout conseill&eacute; de faire d\'abord une sauvegarde de votre fichier ecrire/mes_options.php tant que le plugin n\'est pas stabilis&eacute;.',)
 
 ?>
