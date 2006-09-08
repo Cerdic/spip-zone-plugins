@@ -243,7 +243,7 @@ if ($url_carte && ($new!="oui")) {
 
 	if (!is_array($sq_cartes)) $sq_cartes=array('map');
 	foreach ($sq_cartes as $sq_carte)
-		icone_horizontale( _T('spipcarto:carte_'.$sq_carte), "../carto.php?id_map=".$id_carte."&fond=".$sq_carte."&var_mode=recalcul", "racine-24.gif", "rien.gif");
+		icone_horizontale( _T('spipcarto:carte_'.$sq_carte), "../carto.php?id_map=".$id_carte."&modele=".$sq_carte."&var_mode=recalcul", "racine-24.gif", "rien.gif");
 }
 echo "</div>\n";
 
@@ -258,7 +258,9 @@ if ($new!="oui") {
 	# affichage
 	afficher_documents_colonne($id_carte, 'carto_carte', true);
 
-	if (($connect_statut == "0minirezo")&&(in_array('mots_partout',liste_plugin_actifs()))) {
+	//TODO : gerer les droits
+//	if (($connect_statut == "0minirezo")&&(in_array('mots_partout',liste_plugin_actifs()))) {
+	if (in_array('mots_partout',liste_plugin_actifs())) {
 		debut_cadre_relief("mot-cle-24.gif");
 		$mp_retour=$carte_link;
 		icone_horizontale(_T('motspartout:titre_page'),generer_url_ecrire("mots_partout","nom_chose=carto_objets&limit=carto_cartes&identifiant_limit=".$id_carte."&retour=".urlencode($mp_retour)), "mot-cle-24.gif");

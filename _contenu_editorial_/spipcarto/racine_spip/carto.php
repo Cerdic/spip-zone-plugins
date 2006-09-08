@@ -51,17 +51,11 @@ else $rep_fond="modeles";
 
 $flag_preserver = true;
 
-if (isset($contexte_inclus['fond'])&&($contexte_inclus['fond']!="")){
+if (_request("modele")){
 		if (strstr($fond, '/')
 		OR preg_match(',^formulaire_,i', $fond))
 			die ("Faut pas se gener");
-		else $fond = $rep_fond."/map_".$contexte_inclus['fond'];
-}
-elseif (isset($_GET["fond"])&&($_GET["fond"]!="")){
-		if (strstr($fond, '/')
-		OR preg_match(',^formulaire_,i', $fond))
-			die ("Faut pas se gener");
-		else $fond = $rep_fond."/map_".$_GET["fond"];
+		else $fond = $rep_fond."/map_".$_GET["modele"];
 }
 else $fond = $rep_fond."/map";
 
@@ -72,7 +66,7 @@ if (!find_in_path("$fond.html")) {
 }
 
 if (isset($contexte_inclus['delais'])) $delais = intval($contexte_inclus['delais']);
-
+//echo $fond."/"._request("modele");
 # au travail...
 include _DIR_RESTREINT_ABS.'public.php';
 
