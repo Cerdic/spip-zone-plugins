@@ -135,7 +135,7 @@ function exec_config_habillage_prive() {
  	
  	else {
 	 	$open_options_file = fopen($options_file, 'w+');
-	 	$new_content = "<?\ndefine('_DIR_IMG_PACK', ('".$plugin_directory."/themes/".$theme."/img_pack/'));\n?>";
+	 	$new_content = "<?//\nstart_define_img_pack\ndefine('_DIR_IMG_PACK', ('".$plugin_directory."/themes/".$theme."/img_pack/'));\n//end_define_img_pack\n?>";
 		$write = fwrite($open_options_file, $new_content);
 		fclose($open_options_file);
  	}
