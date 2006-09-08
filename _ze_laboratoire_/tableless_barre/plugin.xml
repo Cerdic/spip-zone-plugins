@@ -1,1 +1,31 @@
-<plugin>  <nom> <!-- Nom du plugin -->  Tableless shortcut toolbar  </nom>  <auteur>        <!-- Auteur du plugin -->  [Renato Formato->mailto:renatoformato@virgilio.it]  </auteur>  <version>  0.1  </version>  <etat>  dev  </etat>  <description>  <multi>[it]La barra delle scorciatoie senza tabelle	[en]Shortcut toolbar without table elements</multi>  </description>  <prefix>  tableless_barre  </prefix>  <pipeline>  	<nom>header_prive</nom>  	<inclure>tableless_barre_pipelines.php</inclure>  </pipeline></plugin>
+<plugin>
+  <nom> <!-- Nom du plugin -->
+  Tableless shortcut toolbar
+  </nom>
+  <auteur>        <!-- Auteur du plugin -->
+  [Renato Formato->mailto:renatoformato@virgilio.it]
+  </auteur>
+  <version>
+  0.1
+  </version>
+  <etat>
+  dev
+  </etat>
+  <description>
+  <multi>[it]La barra delle scorciatoie senza tabelle
+	[en]Shortcut toolbar without table elements
+	[fr]Barre de raccourcis sans table html</multi>
+  </description>
+  <prefix>
+  tableless_barre
+  </prefix>
+  <pipeline>
+  	<nom>header_prive</nom>
+  	<inclure>tableless_barre_pipelines.php</inclure>
+  </pipeline>
+  <pipeline>
+			<nom>insert_head</nom>
+			<action>insert_head</action>
+			<inclure>tableless_barre_pipelines.php</inclure>
+  </pipeline>
+</plugin>
