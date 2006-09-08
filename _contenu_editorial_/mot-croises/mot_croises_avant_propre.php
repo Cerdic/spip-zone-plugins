@@ -2,8 +2,7 @@
 
 function mot_croises_pre_propre($texte){
 	
-	$echappeur_debut = code_echappement("<!-- debut-grille-->");		//pour pas_de_grille
-	$echappeur_fin = code_echappement("<!-- fin-grille-->");	//pour pas_de_grille
+	$echappeur = "<!--grille-->";		//pour pas_de_grille
 	
 	include_spip('inc/calculer_grille');
 	
@@ -14,7 +13,7 @@ function mot_croises_pre_propre($texte){
 			if ($j!=0 and $j!=count($tableau)-1)	//pas les extremités du tableau
 				{
 				include_spip('inc/affichage_grille');
-				$tableau_php = calcul_tableau_grille2($tableau[$j]);
+				$tableau_php = calcul_tableau_grille($tableau[$j]);
 				
 				//calcul erreur
 				if ($GLOBALS["bouton_envoi"] == ''){$erreur='';}
@@ -31,7 +30,8 @@ function mot_croises_pre_propre($texte){
 					}
 				//fin calcul erreur
 				
-				$tableau[$j] = $echappeur_debut.$erreur.affichage_grille($tableau_php).$echappeur_fin;	
+				$tableau[$j] = code_echappement($echappeur.$erreur.affichage_grille($tableau_php).$echappeur);	
+				
 						
 				}
 			
@@ -56,8 +56,8 @@ function mot_croises_pre_propre($texte){
 		if ($j!=0 and $j!=count($tableau)-1)	//pas les extremités du tableau
 				{
 				
-				$tableau[$j] = $echappeur_debut."<div class=\"spip horizontal\">\n
-				<h4 class=\"spip grille\">"._T('grille:horizontalement')." :</h4>\n".liste_spip(trim($i))."</div>".$echappeur_fin;
+				$tableau[$j] = code_echappement($echappeur."<div class=\"spip horizontal\">\n
+				<h4 class=\"spip grille\">"._T('grille:horizontalement')." :</h4>\n".liste_spip(trim($i))."</div>".$echappeur);
 			
 				
 			}
@@ -77,8 +77,8 @@ function mot_croises_pre_propre($texte){
 		if ($j!=0 and $j!=count($tableau)-1)	//pas les extremités du tableau
 				{
 				
-				$tableau[$j] = $echappeur_debut."<div class=\"spip vertical\">\n
-				<h4 class=\"spip grille\">"._T('grille:verticalement')." :</h4>\n".liste_spip(trim($i))."</div>".$echappeur_fin;
+				$tableau[$j] = code_echappement($echappeur."<div class=\"spip vertical\">\n
+				<h4 class=\"spip grille\">"._T('grille:verticalement')." :</h4>\n".liste_spip(trim($i))."</div>".$echappeur);
 			
 				
 			}
@@ -88,7 +88,7 @@ function mot_croises_pre_propre($texte){
 	
 	//fin def-vertical
 	
-	if ($GLOBALS["solution"][0] == 1){$texte = $texte.$echappeur_debut.affichage_grille($tableau_php,true).$echappeur_fin;} //solution
+	if ($GLOBALS["solution"][0] == 1){$texte = $texte.$echappeur.affichage_grille($tableau_php,true).$echappeur;} //solution
 
 	
 	

@@ -9,13 +9,20 @@
 
 function pas_de_grille ($texte){
 	//evite d'afficher la grille la ou on veux pas (par exemple pour les backend)
-		$texte = preg_replace ('/<(grille)>(.*)<\\1>,UimsS/','',$texte);
-		//$texte = ereg_replace ('<p class="spip"><grille></p>.*</grille></p>','',$texte);
-		/*A tester
-		$texte = preg_replace(',<(grille)>(.*)<\/\1>,UimsS','',$texte);
-		*/
-	return $texte;
+		$j = 0;
+		$texte = preg_split ('/<!--grille-->/',$texte);
+		
+		foreach ($texte as $i){
+			
+			if ($j%2==1){
+				$texte[$j]='';
+				}
+			$j++;
+			}
+		
+	return implode($texte);
 }
+
 
 
 
