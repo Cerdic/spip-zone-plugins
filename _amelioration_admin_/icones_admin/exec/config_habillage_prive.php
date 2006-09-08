@@ -53,6 +53,7 @@ function exec_config_habillage_prive() {
 		$backup_file_size = filesize ($backup_file);
  		$read_backup_file = fread ($open_backup_file, $backup_file_size);
  		$search_comment = eregi("//start_define_img_pack(.*)//end_define_img_pack", $read_backup_file, $comment);
+ 		$search_original_content = eregi("define\(\'_DIR_IMG_PACK\', \(\'(.*)\'\)\)\;", $read_backup_file, $original_content);
  		$search_content = eregi("define\(\'_DIR_IMG_PACK\', \(\'(.*)\'\)\)\;(.*)//end_define_img_pack", $read_backup_file, $content);
  		$search_all_content = eregi("<\?(.*)define\(\'_DIR_IMG_PACK\', \(\'(.*)\'\)\)\;(.*)\?>", $read_backup_file, $all_content);
 	 	
@@ -75,7 +76,7 @@ function exec_config_habillage_prive() {
 	 		# Si le fichier mes_options sauvegarde redefinissait le chemin d'img_pack
 	 		# par la ligne define('_DIR_IMG_PACK', [...]) avant le choix d'un autre 
 	 		# habillage :
-	 		else if ($search_content) {
+	 		else if ($search_original_content) {
 		 		$search_comment_backup = eregi("//backup(.*)", $read_backup_file);
 		 		
 		 		if ($search_comment_backup) {
@@ -110,6 +111,8 @@ function exec_config_habillage_prive() {
  		# Si l'utilisateur ou l'utilisatrice veut revenir a la situation initiale.
  		# ! Manque la restauration du define d'origine !
  		else if ($theme == "initial") {
+	 		$search_comment_backup = eregi("//backup_define\(\'_DIR_IMG_PACK\', \(\'(.*)\'\)\)\;", $read_backup_file);
+	 		
 	 		if ($search_comment) {
 		 		$open_options_file = fopen($options_file, 'w+');
 		 		$erased_content = "//start_define_img_pack(.*)//end_define_img_pack";
@@ -117,6 +120,14 @@ function exec_config_habillage_prive() {
 		 		$write = fwrite($open_options_file, $insert_new_content);
 		 		fclose($open_options_file);
 	 		}
+	 		
+	 		else if ($search_comment_backup){
+		 		$open_options_file = fopen($options_file, 'w+');
+		 		$insert_new_content = ereg_replace( '//backup_define', 'define', $read_backup_file);
+		 		$write = fwrite($open_options_file, $insert_new_content);
+		 		fclose($open_options_file);
+		 		
+		 	}
 	 		else {
 		 		rename($backup_file, $options_file);
 	 		}
