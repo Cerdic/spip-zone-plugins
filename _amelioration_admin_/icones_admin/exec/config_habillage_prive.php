@@ -35,6 +35,21 @@ function exec_config_habillage_prive() {
 
  	debut_droite();
 
+ 	# Pour enlever le message d'avertissement, enlever le code a partir d'ici...
+ 	debut_boite_info();
+	echo "<div class='verdana2' align='justify'>
+	<p align='center'><B>"._T('avis_attention')."</B></p>",
+	  http_img_pack("warning.gif", (_T('avis_attention')), "width='48' height='48' align='right' style='padding-$spip_lang_left: 10px;'");
+	echo _T('habillageprive:texte_inc_config');
+	echo "</div>";
+	fin_boite_info();
+ 	# ... jusque la.
+ 	
+	echo "<br />";
+	
+	debut_cadre_trait_couleur("", false, "", _T('habillageprive:titre_habillage_prive'));
+
+		
  	echo '<form action="'.generer_url_ecrire('config_habillage_prive').'" method="post">';
  	
  	// Debut des manipulations de mes_options.php. Le fichier mes_options sert de 
@@ -44,6 +59,9 @@ function exec_config_habillage_prive() {
  	$theme = $_REQUEST['theme'];
  	$plugin_directory = _DIR_PLUGIN_HABILLAGE_PRIVE;
 
+ 	## ATTENTION : LE CAS DE FIGURE DANS LEQUEL L'UTILISATEUR OUVRE CETTE PAGE SANS
+ 	## CHOISIR UNE CASE A COCHER N'A PAS ETE PROGRAMME, CE QUI CAUSE UNE ERREUR DANS
+ 	## LE FICHIER MES_OPTIONS.PHP SI L'ON VISITE JUSTE CETTE PAGE SANS RIEN FAIRE.
  	
  	// Si le fichier inc/mes_options.php existe deja
  	if (file_exists($options_file)) {
@@ -163,6 +181,13 @@ function exec_config_habillage_prive() {
 	
 	echo '<input type="submit" value="'._T('valider').'"/>';
  	echo '</form>';
+ 	fin_cadre_trait_couleur();
+ 	
+ 	echo "<br />";
+	
+	debut_cadre_trait_couleur("", false, "", _T('habillageprive:titre_habillage_public'));
+ 	echo "A venir...";
+	fin_cadre_trait_couleur();
   } 
   
   fin_page();
