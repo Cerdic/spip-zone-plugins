@@ -108,6 +108,7 @@ function exec_config_habillage_prive() {
  		}
  		
  		# Si l'utilisateur ou l'utilisatrice veut revenir a la situation initiale.
+ 		# ! Manque la restauration du define d'origine !
  		else if ($theme == "initial") {
 	 		if ($search_comment) {
 		 		$open_options_file = fopen($options_file, 'w+');
