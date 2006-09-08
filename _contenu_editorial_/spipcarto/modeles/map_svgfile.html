@@ -1,5 +1,5 @@
 [(#HTTP_HEADER{Content-type: image/svg+xml[; charset=(#CHARSET)]})]
-<?xml version="1.0"[ encoding="(#CHARSET)"] standalone="no"?>
+<<?php echo'?' ?>xml version="1.0"[ encoding="(#CHARSET)"] standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/SVG/DTD/svg10.dtd">
 <BOUCLE_carte(CARTO_CARTES){id_carto_carte=#ID_MAP}>
 	<svg viewBox="[(#CALLAGE|worldfileLRX)] [(#CALLAGE|worldfileULY)] [(#CALLAGE|worldfileWidth)] [(#CALLAGE|worldfileHeight)]" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
@@ -22,7 +22,7 @@
 		 
 		<g id="mainlayer">
 		 	<BOUCLE_objets(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}>
-		  		<a xlink:href="[(#URL_OBJET)]" alt="#TITRE"><[(#GEOMETRIE|wkt2shape{SVG})] [(#GEOMETRIE|wkt2coords{SVG,#CALLAGE,#URL_CARTE})] class="[(#GEOMETRIE|wkt2shape{SVG})]"/></a>
+		  		<a xlink:href="[(#URL_OBJET|entites_html)]" alt="#TITRE"><[(#GEOMETRIE|wkt2shape{SVG})] [(#GEOMETRIE|wkt2coords{SVG,#CALLAGE,#URL_CARTE})] class="[(#GEOMETRIE|wkt2shape{SVG})]"/></a>
 		 	</BOUCLE_objets>
 		</g>
 	</svg>

@@ -1,5 +1,5 @@
 [(#HTTP_HEADER{Content-type: image/svg+xml[; charset=(#CHARSET)]})]
-<?xml version="1.0"[ encoding="(#CHARSET)"] standalone="no"?>
+<<?php echo'?' ?>xml version="1.0"[ encoding="(#CHARSET)"] standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/SVG/DTD/svg10.dtd">
 <BOUCLE_carte(CARTO_CARTES){id_carto_carte=#ID_MAP}>
 <svg width="100%" height="100%" viewBox="0 0 760 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:attrib="http://www.carto.net/attrib" onload="init(evt);" zoomAndPan="enable" encoding="ISO-8859-1">
@@ -201,7 +201,7 @@
 	<!-- #DESCRIPTIF -->
 			<g id="spipCarto_#ID_MOT">
 			<BOUCLE_OBJECT(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}{id_mot}{doublons obj}>
-				<a target='new' xlink:href='[(#URL_OBJET)]'><[(#GEOMETRIE|wkt2shape{SVG})] [(#GEOMETRIE|wkt2coords{SVG,#CALLAGE,#URL_CARTE,#_M:DESCRIPTIF})] onmouseover="statusChange('#TEXTE');" class="[(#GEOMETRIE|wkt2shape{SVG})[(#_M:DESCRIPTIF)]]"/></a>
+				<a target='new' xlink:href='[(#URL_OBJET|entites_html)]'><[(#GEOMETRIE|wkt2shape{SVG})] [(#GEOMETRIE|wkt2coords{SVG,#CALLAGE,#URL_CARTE,#_M:DESCRIPTIF})] onmouseover="statusChange('#TEXTE');" class="[(#GEOMETRIE|wkt2shape{SVG})[(#_M:DESCRIPTIF)]]"/></a>
 			</BOUCLE_OBJECT>
 			</g>
 		 </BOUCLE_M>
@@ -212,7 +212,7 @@
 				<!-- Couche d'objets SPIP -->
 				<B_objets>
 				<BOUCLE_objets(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}{doublons obj}>
-				<a target='new' xlink:href='[(#URL_OBJET)]'><[(#GEOMETRIE|wkt2shape{SVG})] [(#GEOMETRIE|wkt2coords{SVG,#CALLAGE,#URL_CARTE})] onmouseover="statusChange('#TEXTE');" class="[(#GEOMETRIE|wkt2shape{SVG})]"/></a>
+				<a target='new' xlink:href='[(#URL_OBJET|entites_html)]'><[(#GEOMETRIE|wkt2shape{SVG})] [(#GEOMETRIE|wkt2coords{SVG,#CALLAGE,#URL_CARTE})] onmouseover="statusChange('#TEXTE');" class="[(#GEOMETRIE|wkt2shape{SVG})]"/></a>
 				</BOUCLE_objets>
 				</B_objets>	
 			</g>
