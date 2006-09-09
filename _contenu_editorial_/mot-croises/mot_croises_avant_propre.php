@@ -2,7 +2,11 @@
 
 function mot_croises_pre_propre($texte){
 	
+	
+	if (! preg_match("/<grille>|<\/grille>/",$texte))
+		{return $texte;}
 	$echappeur = "<!--grille-->";		//pour pas_de_grille
+	
 	
 	include_spip('inc/calculer_grille');
 	
@@ -88,7 +92,7 @@ function mot_croises_pre_propre($texte){
 	
 	//fin def-vertical
 	
-	if ($GLOBALS["solution"][0] == 1){$texte = $texte.$echappeur.affichage_grille($tableau_php,true).$echappeur;} //solution
+	if ($GLOBALS["solution"][0] == 1){$texte = $texte.code_echappement($echappeur.affichage_grille($tableau_php,true).$echappeur);} //solution
 
 	return $texte;
 	
