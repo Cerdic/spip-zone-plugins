@@ -1,4 +1,4 @@
-<?
+<?php
 function lettre($texte) //return la lettre correpondant au chiffres
 {$alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
  return $alphabet[$texte-1];}
