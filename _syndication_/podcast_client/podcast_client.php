@@ -49,7 +49,6 @@
 	// presentes sous la forme microformat <a rel="enclosure">
 	//
 	function PodcastClient_traiter_les_enclosures_rss($enclosures,$id_syndic,$le_lien) {
-	spip_log("podcast_client : $enclosures <-");
 		if (!preg_match_all(
 		',<a([[:space:]][^>]*)?[[:space:]]rel=[\'"]enclosure[^>]*>,',
 		$enclosures, $regs, PREG_PATTERN_ORDER))
