@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Mot-croisé</nom>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<version>2.0 pour Spip 1.9.1
 	
 	</version>
@@ -10,6 +10,7 @@
 	</auteur>
 	<description>Des mots-croisés avec Spip !</description>
 	<fonctions>mot_croises_fonctions.php</fonctions>
+	<options>mot_croises_options.php</options>
 	<prefix>mot_croises</prefix>
 	<pipeline>
 		<nom>insert_head</nom>

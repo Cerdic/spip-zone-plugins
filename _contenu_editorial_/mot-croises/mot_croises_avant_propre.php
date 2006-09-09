@@ -14,7 +14,7 @@ function mot_croises_pre_propre($texte){
 				{
 				include_spip('inc/affichage_grille');
 				$tableau_php = calcul_tableau_grille($tableau[$j]);
-				
+			
 				//calcul erreur
 				if ($GLOBALS["bouton_envoi"] == ''){$erreur='';}
 				else {
@@ -90,9 +90,9 @@ function mot_croises_pre_propre($texte){
 	
 	if ($GLOBALS["solution"][0] == 1){$texte = $texte.$echappeur.affichage_grille($tableau_php,true).$echappeur;} //solution
 
+	return $texte;
 	
 	
-	return $texte ;
 }
 
 function liste_spip ($texte){				//transforme les listes verticales/horizontale spip en html
