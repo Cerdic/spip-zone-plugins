@@ -15,7 +15,6 @@ function spiip_header_prive($flux){
 
 function spiip_insert_head($flux){
 	$flux .= '<link rel="stylesheet" href="'.generer_url_public('style_spiip_public',$args).'" type="text/css" media="projection, screen" />';
-	$flux .= "<script type='text/javascript' src='".find_in_path('dist_back/pagination-ahah.js')."'></script>\n";
 	return $flux;
 }
 
