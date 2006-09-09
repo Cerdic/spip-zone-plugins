@@ -1,0 +1,4 @@
+#SET{help,#REM|sinon{#ENV{help}}|_T|attribut_html}<a href="javascript:#ENV{js}" tabindex='1000' title="#GET{help}"
+[(#EVAL{_DIR_RESTREINT}|?{' ',''})onmouseover="helpline('#GET{help}',[(#ENV{champhelp})])" 
+	onmouseout="helpline('[(#REM|sinon{barre_aide}|_T|addslashes|attribut_html)]',[(#ENV{champhelp})])"
+]><img src='#EVAL{_DIR_IMG_ICONES_BARRE}#ENV{img}' height='16' width='16' align='middle' /></a>
