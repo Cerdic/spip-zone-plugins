@@ -1,5 +1,5 @@
 <?php 
 
 function mot_croises_insert_head($flux){
-	return $flux.'<link rel="stylesheet" type="text/css" href="'.find_in_path('mots-croises.css').'" />';}
+	return $flux.'<link rel="stylesheet" type="text/css" href="'.direction_css(find_in_path('mots-croises.css')).'" />';}
 ?>

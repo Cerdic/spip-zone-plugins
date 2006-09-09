@@ -27,9 +27,9 @@ function mot_croises_pre_propre($texte){
 						$nbr_erreur=comparaison($tableau_php); 
 						
 					$erreur='<strong class="erreur">';
-					if ($nbr_erreur==0){$erreur.= _T('grille:aucune_erreur');}
-						if ($nbr_erreur>=2){$erreur.= _T("grille:nombre_erreurs", Array('nbr'=>$nbr_erreur));}
-						if ($nbr_erreur==1){$erreur.= _T('grille:1erreur');}
+					if ($nbr_erreur==0){$erreur.= _T('motscroises:aucune_erreur');}
+						if ($nbr_erreur>=2){$erreur.= _T("motscroises:nombre_erreurs", Array('nbr'=>$nbr_erreur));}
+						if ($nbr_erreur==1){$erreur.= _T('motscroises:1erreur');}
 					$erreur.='</strong>';
 					}
 				//fin calcul erreur
@@ -61,7 +61,7 @@ function mot_croises_pre_propre($texte){
 				{
 				
 				$tableau[$j] = code_echappement($echappeur."<div class=\"spip horizontal\">\n
-				<h4 class=\"spip grille\">"._T('grille:horizontalement')." :</h4>\n".liste_spip(trim($i))."</div>".$echappeur);
+				<h4 class=\"spip grille\">"._T('motscroises:horizontalement')." :</h4>\n".liste_spip(trim($i))."</div>".$echappeur);
 			
 				
 			}
@@ -82,7 +82,7 @@ function mot_croises_pre_propre($texte){
 				{
 				
 				$tableau[$j] = code_echappement($echappeur."<div class=\"spip vertical\">\n
-				<h4 class=\"spip grille\">"._T('grille:verticalement')." :</h4>\n".liste_spip(trim($i))."</div>".$echappeur);
+				<h4 class=\"spip grille\">"._T('motscroises:verticalement')." :</h4>\n".liste_spip(trim($i))."</div>".$echappeur);
 			
 				
 			}
