@@ -22,7 +22,6 @@
 	
 		list($le_lien, $id_syndic, $data) = func_get_arg(0);
 		PodcastClient_traiter_les_enclosures_rss($data['enclosures'],$id_syndic,$le_lien);
-
 		return func_get_arg(0); # remettre les infos dans le pipeline
 	}
 	
@@ -50,7 +49,7 @@
 	// presentes sous la forme microformat <a rel="enclosure">
 	//
 	function PodcastClient_traiter_les_enclosures_rss($enclosures,$id_syndic,$le_lien) {
-	spip_log('podcast_client');
+	spip_log("podcast_client : $enclosures <-");
 		if (!preg_match_all(
 		',<a([[:space:]][^>]*)?[[:space:]]rel=[\'"]enclosure[^>]*>,',
 		$enclosures, $regs, PREG_PATTERN_ORDER))
@@ -60,11 +59,11 @@
 	
 		list($id_syndic_article) = spip_fetch_array(spip_query(
 		"SELECT id_syndic_article FROM spip_syndic_articles
-		WHERE id_syndic=$id_syndic AND url='".addslashes($le_lien)."'"));
+		WHERE id_syndic=$id_syndic AND url='".addslashes($le_lien)."'"),SPIP_NUM);
 	
 		// Attention si cet article est deja vu, ne pas doubler les references
 		spip_query("DELETE FROM spip_documents_syndic
-		WHERE id_syndic_article=$id_syndic_article");
+		WHERE id_syndic_article='$id_syndic_article'");
 	
 		// Integrer les enclosures
 		foreach ($enclosures as $enclosure) {
@@ -79,11 +78,12 @@
 	
 				// Verifier que le content-type nous convient
 				list($id_type) = spip_fetch_array(spip_query("SELECT id_type
-				FROM spip_types_documents WHERE mime_type='$type'"));
+				FROM spip_types_documents WHERE mime_type='$type'"),SPIP_NUM);
+
 				if (!$id_type) {
 					spip_log("podcast_client: enclosure inconnue ($type) $url");
 					list($id_type) = spip_fetch_array(spip_query("SELECT id_type
-					FROM spip_types_documents WHERE extension='bin'"));
+					FROM spip_types_documents WHERE extension='bin'"),SPIP_NUM);
 					// si les .bin ne sont pas autorises, on ignore ce document
 					if (!$id_type) continue;
 				}
