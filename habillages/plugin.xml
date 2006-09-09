@@ -22,10 +22,10 @@ En développement. Plugin non fonctionnel.
 		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
 		-->
 	<prefix> 
-	habillage_prive
+	habillages
 	</prefix>
 	<pipeline>
 		<nom>ajouter_onglets</nom>
-		<inclure>habillage_prive.php</inclure>
+		<inclure>habillages.php</inclure>
 	</pipeline>
 </plugin>

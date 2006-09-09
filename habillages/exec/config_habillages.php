@@ -1,17 +1,17 @@
 <?php
 
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
-define('_DIR_PLUGIN_HABILLAGE_PRIVE',(_DIR_PLUGINS.end($p)));
+define('_DIR_PLUGIN_HABILLAGES',(_DIR_PLUGINS.end($p)));
 
 // Fonction qui gere les habillages. Tentative de faire la fonction sans appel a la
 // base de donnees, et donc sans manipulation sql.
-function exec_config_habillage_prive() {
+function exec_config_habillages() {
   global $connect_statut, $connect_toutes_rubriques;
 
   include_spip("inc/presentation");
   include_spip ("base/abstract_sql");
 
-  debut_page('&laquo; '._T('habillageprive:titre_page').' &raquo;', 'configurations', 'habillage_prive','',_DIR_PLUGIN_HABILLAGE_PRIVE.'/img_pack/habillage_prive.css');
+  debut_page('&laquo; '._T('habillageprive:titre_page').' &raquo;', 'configurations', 'habillage_prive','',_DIR_PLUGIN_HABILLAGES.'/img_pack/habillage_prive.css');
 
   if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	echo _T('avis_non_acces_page');
@@ -21,10 +21,10 @@ function exec_config_habillage_prive() {
   if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques ) {
 
  	echo '<br><br>';
-	echo '<img src="' . _DIR_PLUGIN_HABILLAGE_PRIVE. '/img_pack/habillage_prive-48.png">';
+	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/img_pack/habillage_prive-48.png">';
  	gros_titre(_T('habillageprive:gros_titre'));
 
- 	barre_onglets("configuration", "config_habillage_prive");
+ 	barre_onglets("configuration", "config_habillages");
 
  	/*Affichage*/
  	debut_gauche();	
@@ -50,14 +50,14 @@ function exec_config_habillage_prive() {
 	debut_cadre_trait_couleur("", false, "", _T('habillageprive:titre_habillage_prive'));
 
 		
- 	echo '<form action="'.generer_url_ecrire('config_habillage_prive').'" method="post">';
+ 	echo '<form action="'.generer_url_ecrire('config_habillages').'" method="post">';
  	
  	// Debut des manipulations de mes_options.php. Le fichier mes_options sert de 
  	// reference pour savoir quel habillage a choisi l'utilisateur.
  	
  	$options_file = "mes_options.php";
  	$theme = $_REQUEST['theme'];
- 	$plugin_directory = _DIR_PLUGIN_HABILLAGE_PRIVE;
+ 	$plugin_directory = _DIR_PLUGIN_HABILLAGES;
 
  	# N'agir que si le theme n'est pas vide. Ceci permet, en cas de non-choix, de ne pas
  	# ecrire un fichier mes_options.php errone. 	
@@ -84,7 +84,7 @@ function exec_config_habillage_prive() {
 		 		# img_pack. :
 		 		if ($search_comment) {
 			 		$open_options_file = fopen($options_file, 'w+');
-			 		$new_content = $plugin_directory."/themes/".$theme."/img_pack/";
+			 		$new_content = $plugin_directory."/prive/themes/".$theme."/img_pack/";
 			 		$insert_new_content = ereg_replace($content[1], $new_content, $read_backup_file);
 			 		$write = fwrite($open_options_file, $insert_new_content);
 			 		fclose($open_options_file);
@@ -98,7 +98,7 @@ function exec_config_habillage_prive() {
 			 		
 			 		if ($search_comment_backup) {
 				 		$open_options_file = fopen($options_file, 'w+');
-				 		$new_content = "//start_define_img_pack\ndefine('_DIR_IMG_PACK', ('".$plugin_directory."/themes/".$theme."/img_pack/'));\n//end_define_img_pack\n?>";
+				 		$new_content = "//start_define_img_pack\ndefine('_DIR_IMG_PACK', ('".$plugin_directory."/prive/themes/".$theme."/img_pack/'));\n//end_define_img_pack\n?>";
 				 		$insert_new_content = ereg_replace( '\?>', $new_content, $read_backup_file);
 				 		$write = fwrite($open_options_file, $insert_new_content);
 				 		fclose($open_options_file);
@@ -106,7 +106,7 @@ function exec_config_habillage_prive() {
 			 		else {
 				 		$open_options_file = fopen($options_file, 'w+');
 				 		$replaced_content = "define\(\'_DIR_IMG_PACK\', \(\'";
-				 		$new_content = "//start_define_img_pack\ndefine('_DIR_IMG_PACK', ('".$plugin_directory."/themes/".$theme."/img_pack/'));\n//end_define_img_pack\n//backup_define('_DIR_IMG_PACK', ('";
+				 		$new_content = "//start_define_img_pack\ndefine('_DIR_IMG_PACK', ('".$plugin_directory."/prive/themes/".$theme."/img_pack/'));\n//end_define_img_pack\n//backup_define('_DIR_IMG_PACK', ('";
 				 		$insert_new_content = ereg_replace( $replaced_content, $new_content, $read_backup_file);
 				 		$write = fwrite($open_options_file, $insert_new_content);
 				 		fclose($open_options_file);
@@ -117,7 +117,7 @@ function exec_config_habillage_prive() {
 		 		# pas le chemin vers img_pack.
 		 		else {
 			 		$open_options_file = fopen($options_file, 'w+');
-			 		$new_content = "//start_define_img_pack\ndefine('_DIR_IMG_PACK', ('".$plugin_directory."/themes/".$theme."/img_pack/'));\n//end_define_img_pack\n?>";
+			 		$new_content = "//start_define_img_pack\ndefine('_DIR_IMG_PACK', ('".$plugin_directory."/prive/themes/".$theme."/img_pack/'));\n//end_define_img_pack\n?>";
 			 		$insert_new_content = ereg_replace( '\?>', $new_content, $read_backup_file);
 			 		$write = fwrite($open_options_file, $insert_new_content);
 			 		fclose($open_options_file);
@@ -152,7 +152,7 @@ function exec_config_habillage_prive() {
 	 	
 	 	else {
 		 	$open_options_file = fopen($options_file, 'w+');
-		 	$new_content = "<?\n//start_define_img_pack\ndefine('_DIR_IMG_PACK', ('".$plugin_directory."/themes/".$theme."/img_pack/'));\n//end_define_img_pack\n?>";
+		 	$new_content = "<?\n//start_define_img_pack\ndefine('_DIR_IMG_PACK', ('".$plugin_directory."/prive/themes/".$theme."/img_pack/'));\n//end_define_img_pack\n?>";
 			$write = fwrite($open_options_file, $new_content);
 			fclose($open_options_file);
 	 	}
@@ -166,11 +166,20 @@ function exec_config_habillage_prive() {
  	echo "Revenir &agrave; l'habillage d'origine";
  	echo "<br />";
  	
- 	$dossier = opendir (_DIR_PLUGIN_HABILLAGE_PRIVE.'/themes/');
+ 	$dossier = opendir (_DIR_PLUGIN_HABILLAGES.'/prive/themes/');
 	while ($fichier = readdir ($dossier)) {
     	if ($fichier != "." && $fichier != "..") {
 	    	echo '<INPUT type=radio name="theme" value="'.$fichier.'"';
-	    	if ($_REQUEST['theme'] == $fichier) {
+	    	if ($_REQUEST['theme'] == "" AND file_exists($options_file)) {
+		    	$open_options_file = fopen($options_file, 'r');
+				$options_file_size = filesize ($options_file);
+				$read_options_file = fread ($open_options_file, $options_file_size);
+				$search_template_name = eregi("$plugin_directory/prive/themes/(.*)/img_pack/", $read_options_file, $template_name);
+				if ($template_name[1] == $fichier) {
+		    	echo " checked";
+	    		}
+	    	}
+	    	else if ($_REQUEST['theme'] == $fichier) {
 		    	echo " checked";
 	    	}
 	    	echo ">";
