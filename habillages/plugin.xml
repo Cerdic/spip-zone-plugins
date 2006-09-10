@@ -9,7 +9,7 @@
 	0.2
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-	en test
+	test
 	</etat>
 	<description>
 Plugin qui change les ic&ocirc;nes de l'espace priv&eacute; et charge le squellette de votre choix sur votre site public.
