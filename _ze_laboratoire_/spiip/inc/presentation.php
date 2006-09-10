@@ -79,6 +79,9 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	global $spip_display, $spip_lang_left;
 	static $accesskey = 97; // a
 
+	//zoom:1 fixes all expanding block in IE, see authors block in articles_edit.php
+	//being not standard, next step can be putting this kind of hacks in separate style sheet
+	//visible to IE only using conditional comments.  
 	$style_cadre = " style='zoom:1;";
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
 		$style_gauche = " padding-$spip_lang_left: 38px;";
