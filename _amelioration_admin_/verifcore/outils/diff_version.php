@@ -9,8 +9,8 @@ $local_svn = "tmppourcreationsvn/" ;
 $local_export = "tmppourexport/" ;
 #numero de version de spip 1.9 1 er juillet 
 $rev_num = 6797 ;
-$file_transfert = "fichier2_repertoire_ajoute_modifie_depuis_svn".$rev_num ;
-$file_delete = "fichier2_repertoire_supprimer_depuis_svn".$rev_num ;
+$file_transfert = "fichier_repertoire_ajoute_modifie_depuis_svn".$rev_num ;
+$file_delete = "fichier_repertoire_supprimer_depuis_svn".$rev_num ;
 $chemin_absolu_svn_premier = "/spip/" ;
 $chemin_absolu_svn_deuxieme = "/branches/spip-1.9/" ;
 $repertoire_de_base =  $cwd ;
@@ -34,7 +34,7 @@ function  add_file_or_directory($nom_fichier){
   $fichier_decompo = explode("/", $nom_fichier );
   $nom_fichier  = implode( "/", $fichier_decompo );
   if ( preg_match( '/[0-9a-zA-Z_-]*\.[0-9a-zA-Z]*/',end($fichier_decompo) )) {
-   array_pop($fichier_decompo);
+    array_pop($fichier_decompo);
     $fichier_decompo_rep = implode( "/", $fichier_decompo);
     if(in_array($nom_fichier, $filedelete)){
       $i = 0 ;
@@ -68,10 +68,10 @@ function  add_file_or_directory($nom_fichier){
   } else {
     if(in_array($nom_fichier, $repdelete)){
       $i = 0 ; 
-     array_push( $repadd, $nom_fichier ) ;
+      array_push( $repadd, $nom_fichier ) ;
       foreach( $repdelete as $file){ 
 	if($file == $nom_fichier){
-	    array_splice( $repdelete, $i, 1) ;
+	  array_splice( $repdelete, $i, 1) ;
 	  break ;
 	}
 	$i++ ;
@@ -98,11 +98,11 @@ function delete_file_or_directory($nom_fichier){
 
     if(in_array($nom_fichier, $fileadd)) {
       $i = 0 ; 
-     array_push( $filedelete, $nom_fichier) ;
+      array_push( $filedelete, $nom_fichier) ;
       foreach( $fileadd as $file){ 
 	if( $file == $nom_fichier){
 	  //          $tututu =$fileadd["$i"] ;
-	    array_splice( $fileadd, $i, 1) ;
+	  array_splice( $fileadd, $i, 1) ;
 	  break ;
 	}
 	$i++ ;
@@ -115,10 +115,10 @@ function delete_file_or_directory($nom_fichier){
   } else {
     if (in_array($nom_fichier, $repadd)) {
       $i = 0 ; 
-    array_push( $repdelete, $nom_fichier ) ;
+      array_push( $repdelete, $nom_fichier ) ;
       foreach( $repadd as $file){ 
 	if( $file  == $nom_fichier){
-	    array_splice(  $repadd, $i, 1) ;
+	  array_splice(  $repadd, $i, 1) ;
 	  break ;
 	}
 	$i++ ;
@@ -133,19 +133,18 @@ function delete_file_or_directory($nom_fichier){
 
 chdir ("$repertoire_de_base")  ;
 
-
 //creation repertoire où sera stocker provisoirement la svn
 if ( is_dir($local_svn)) {
   exec( "chmod -R 777  $local_svn" ) ;
   exec( "rm -r $local_svn" ) ;
-}
+ }
 exec( "mkdir -p $local_svn" ) ;
 
 //creation repertoire qui servira a faire l'archive
 if ( is_dir($local_export)) {
   exec( "chmod -R 777  $local_export" ) ;
   exec( "rm -r $local_export" ) ;
-}
+ }
 exec( "mkdir -p $local_export" ) ;
 
 chdir ("$chemin_absolu_local_svn") ;
@@ -180,7 +179,7 @@ while (!feof($tmpfic)) {
 
       if ( ($debut_fichier == "$chemin_absolu_svn") || ($file == "$chemin_absolu_svn_deuxieme")) {
      
-     if ($file == "$chemin_absolu_svn_deuxieme") {
+	if ($file == "$chemin_absolu_svn_deuxieme") {
 	  $chemin_absolu_svn = $chemin_absolu_svn_deuxieme ;
 	  $split_chemin_absolu_svn = explode("/", $chemin_absolu_svn ) ;
 	} else {
@@ -207,8 +206,8 @@ while (!feof($tmpfic)) {
 		  $tmptmpfic = fopen("temporaire_mouvement", "r");
 		  $new_directory = '';
 		  while (!feof($tmptmpfic)) {
-		       $conten =trim(fgets($tmptmpfic, 4096));
-		     if (  preg_match('/^([0-9a-zA-Z\/\._-]*):.*/', $conten, $resu) ) {
+		    $conten =trim(fgets($tmptmpfic, 4096));
+		    if (  preg_match('/^([0-9a-zA-Z\/\._-]*):.*/', $conten, $resu) ) {
 		      $new_directory = $resu[1] ;
 		    } elseif ( $conten != '' &&  preg_match('/[0-9a-zA-Z_-]*\.[0-9a-zA-Z]*/', $conten)  && $new_directory != '' ) {
 		      add_file_or_directory($new_directory."/".$conten) ;
@@ -223,7 +222,6 @@ while (!feof($tmpfic)) {
 	      }
 	    }
 	  } else {
-
 	    if ( ($typemodif == "A") || ($typemodif == "M") ) {
 	      add_file_or_directory($file) ;
 	    } elseif ( $typemodif == "D" ) {
@@ -233,12 +231,10 @@ while (!feof($tmpfic)) {
 	}
       }
     }
-   }
+  }
 }
 fclose ($tmpfic) ;
 exec( "rm diff_svnlog" ) ;
-
-
 
 chdir ("$repertoire_de_base")  ;
 $tmpfic = fopen ("$file_transfert.txt", "w+" ) ; 
@@ -260,15 +256,17 @@ fclose($tmpfic) ;
 
 chdir ("$chemin_absolu_export")  ;
 // decommenter ligne suivante pour obtenir un tgz des fichiers modifié entre spip 1.9 et sp 1.9.1
-exec( "tar cvfz $file_transfert.tgz *" ) ;
-chdir ("$repertoire_de_base")  ;
-exec( "mv $local_export/$file_transfert.tgz ." ) ;
+//exec( "tar cvfz $file_transfert.tgz *" ) ;
+//chdir ("$repertoire_de_base")  ;
+//exec( "mv $local_export/$file_transfert.tgz ." ) ;
 
 chdir ("$chemin_absolu_export")  ;
 // decommenter ligne suivante pour obtenir un zip des fichiers modifié entre spip 1.9 et sp 1.9.1
-exec( "zip -r $file_transfert *" ) ;
+//exec( "zip -r $file_transfert *" ) ;
+//chdir ("$repertoire_de_base")  ;
+//exec( "mv $local_export/$file_transfert.zip ." ) ;
+
 chdir ("$repertoire_de_base")  ;
-exec( "mv $local_export/$file_transfert.zip ." ) ;
 
 //creation du fichier désirer
 $tmpfic = fopen ("$file_delete.txt", "w+" ) ; 
