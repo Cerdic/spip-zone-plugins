@@ -225,8 +225,9 @@ debut_cadre_trait_couleur("", false, "", _T('habillageprive:titre_habillage_publ
  	
  	if ($squelette == "initial") {
 		$open_plugin_options_file = fopen($plugin_options_file, 'w+');
-		$news_content = "<\?php\n\?>";
-		$write = fwrite($open_plugin_options_file, $new_content);
+		$empty_content = "<?php\n?>";
+		$write = fwrite($open_plugin_options_file, $empty_content);
+		fclose($open_plugin_options_file);
 	}
 	
 	else if ($squelette != "") {
