@@ -1,0 +1,244 @@
+<!--
+
+Squelette Sarka-SPIP
+Copyright (C) 2005 Sylvain Bellégo - sylvain.bellego NO-SPM no-log.org - http://sylvain.bellego.free.fr
+
+Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes
+de la Licence Publique Générale GNU publiée par la Free Software Foundation (version 2
+ou bien toute autre version ultérieure choisie par vous).
+
+Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE, ni
+explicite ni implicite, y compris les garanties de commercialisation ou d'adaptation
+dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU pour plus de détails.
+
+Vous devez avoir reçu une copie de la Licence Publique Générale GNU en même temps que ce programme
+; si ce n'est pas le cas, écrivez à la Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+Boston, MA 02111-1307, États-Unis.
+
+-->
+
+<!--
+
+REMERCIEMENTS
+
+Le squelette Sarka-SPIP est en constante évolution.
+
+Les modifications déployées s'appuient sur les commentaires et les conseils
+proposés par des utilisateurs du squelette. A ce titre, les évolutions apportées par T. STOUKY,
+pour son site http://webpublic.ac-dijon.fr/pedago/enspro/matsci/ ont été particulièrement utiles.
+Un grand merci, donc, à celles et ceux qui ont contribué (et qui vont contribuer) à l'amélioration
+de ce squelette.
+
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="#LANG">
+
+<INCLURE(inclusions/header.php3)>
+
+<body  dir="#LANG_DIR" onload="setHover()">
+
+<div id="conteneur">
+
+<INCLURE(inclusions/bandeau.php3)>
+
+<INCLURE(inclusions/bande-chemin.php3)>
+
+<INCLURE(inclusions/bloc-gauche.php3)>
+
+[(#NOOP) <!-- ================================== BLOC DE DROITE  ================================== --> ]
+
+<div id="droite" class="droite">
+
+<INCLURE(inclusions/bloc-droite-all-news.php3){id_secteur}>
+
+</div>
+
+</B_sites>
+
+</div>
+
+[(#NOOP) <!-- ================================== BLOC CENTRAL  ================================== --> ]
+
+<div id="centre" class="centre">
+<div class="sommaire">
+<div class="recherche">
+
+<div class="intitule">
+      <:resultats_recherche:> : #RECHERCHE
+</div>
+
+<!-- Rubriques trouvees -->
+
+	<B_rubriques>
+		<div class="elements-trouves"><:recherche_rubrique_resultat:></div>
+		<div class="indentation">
+			<BOUCLE_rubriques(RUBRIQUES){recherche} {par points} {inverse} {0,5}>
+				<div class="rubrique" [style="[min-height: (#LOGO_RUBRIQUE||reduire_image{110}||hauteur_majoree)]px; _height: (#LOGO_RUBRIQUE||reduire_image{110}||hauteur)px;"]>
+					[<div class="image">(#LOGO_RUBRIQUE||reduire_image{110})</div>]
+					[<a class="titre" href="#URL_RUBRIQUE">(#TITRE|supprimer_numero)</a>]
+					<div class="texte">[(#TEXTE|reduire_image{200,0})]</div>
+				</div>
+			</BOUCLE_rubriques>
+		</div>
+	</B_rubriques>
+
+<!-- Mots-cles trouves et articles associes-->
+
+	<B_mots>
+		<div class="elements-trouves"><:recherche_mots_resultat:></div>
+		<div class="indentation">
+			<BOUCLE_mots(MOTS) {recherche} {par points} {type!==^squelette\_} {inverse} {0,5}>
+				<div class="mot-cle">#TITRE</div>
+				<B_articles_mots>
+					<div class="indentation">
+						<div class="derniers-articles">
+							<div id="articles_mot" class="en-tete"><:articles_mot:></div>
+							<BOUCLE_articles_mots(ARTICLES) {id_mot} {par hasard} {0,5}>
+								<div class="annonce">
+									[<div class="image">(#LOGO_ARTICLE||reduire_image{150})</div>]
+									<div class="detail">[(#DATE|nom_jour)] [(#DATE|affdate)]<br>
+										<B_auteurs-article>
+											<:par_auteur:>
+												<BOUCLE_auteurs-article(AUTEURS) {id_article} {", "}>
+													<a href="#URL_AUTEUR">#NOM</a>
+												</BOUCLE_auteurs-article>
+										</B_auteurs-article>
+									</div>
+									<div class="chemin">
+										<BOUCLE_rubrique-mere(RUBRIQUES){id_rubrique}>
+											[<A HREF="#URL_RUBRIQUE">(#TITRE|supprimer_numero)</A>]
+										</BOUCLE_rubrique-mere>
+									</div>
+									[<div class="surtitre">(#SURTITRE)</div>]
+									[<a class="titre" href="#URL_ARTICLE" title="<:lire_suite_article:>">(#TITRE|supprimer_numero)</a>]
+									[<div class="soustitre">(#SOUSTITRE)</div>]
+									<div class="introduction">
+										[(#INTRODUCTION|typo_couleur)]
+										<br><br>
+										<a class="suite" href="#URL_ARTICLE"><:lire_suite_article:></a>
+									</div>
+								</div>
+							</BOUCLE_articles_mots>
+						</div>
+					</div>
+				</B_articles_mots>
+			</BOUCLE_mots>
+			</div>
+	</B_mots>
+
+<!-- Breves trouvees -->
+
+	<B_breves-recherche>
+		<div class="elements-trouves"><:recherche_rubriques_resultats:></div>
+		<div class="indentation redimensionnement">
+			<div class="breves">
+				<BOUCLE_breves-recherche(BREVES) {recherche} {par points} {inverse} {0,10}>
+					<div class="contenu">
+						<div class="titre">#TITRE</div>
+						<div class="date">[(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)]</div>
+						<div class="texte">[(#TEXTE|reduire_image{200,0})]</div>
+						[<div class="notes">(#NOTES)</div>]
+					</div>
+					<br>
+				</BOUCLE_breves-recherche>
+			</div>
+		</div>
+	</B_breves-recherche>
+
+<!-- Sites Web trouves -->
+
+	<B_sites-recherche>
+		<div class="elements-trouves"><:recherche_sites_resultats:></div>
+		<div class="web">
+			<div class="indentation redimensionnement">
+				<BOUCLE_sites-recherche(SITES) {recherche} {par points} {inverse} {0,10}>
+					<div class="site">
+						<a class="nom-site" href="#URL_SITE">#NOM_SITE</a>
+						[<div class="descriptif">(#DESCRIPTIF)</div>]
+						<B_syndic-recherche>
+							<BOUCLE_syndic-recherche(SYNDIC_ARTICLES) {id_syndic}{par date}{inverse}{0,20}>
+								[<a class="article-synd info" href="#URL_ARTICLE">(#TITRE*|supprimer_numero)<span>[(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)]</span></a>]
+							</BOUCLE_syndic-recherche>
+						</B_syndic-recherche>
+					</div>
+					<br>
+				</BOUCLE_sites-recherche>
+			</div>
+		</div>
+	</B_sites-recherche>
+
+<!-- Messages trouves -->
+
+	<B_messages-recherche>
+		<div class="elements-trouves"><:recherche_messages_resultats:></div>
+		<div class="forum">
+			<div class="indentation">
+				<BOUCLE_messages-recherche(FORUMS) {recherche} {par points} {inverse} {0,10}>
+					<div class="visualisation">
+						<div class="titre">#TITRE</div>
+						<div class="detail">
+							[(#DATE|nom_jour)] [(#DATE|affdate)]<br>
+							[<:par_auteur:> (#NOM)]
+						</div>
+						<div class="texte">
+							#TEXTE
+							[<br><br><a href="[(#URL_SITE)]">(#NOM_SITE)</a>]
+						</div>
+					</div>
+					<br><a class="repondre" href="#URL_FORUM"><:forum:></a><br><br>
+				</BOUCLE_messages-recherche>
+			</div>
+		</div>
+	</B_messages-recherche>
+
+<!-- Articles trouves -->
+
+	<B_articles-recherche>
+		<div class="elements-trouves"><:recherche_articles_resultats:></div>
+		<div class="indentation">
+			<div class="derniers-articles">
+				<BOUCLE_articles-recherche(ARTICLES) {recherche} {par points} {inverse} {0,10}>
+					<div class="annonce">
+						[<div class="image">(#LOGO_ARTICLE||reduire_image{150})</div>]
+						<div class="detail">[(#DATE|nom_jour)] [(#DATE|affdate)]<br>
+							<B_auteurs-article-recherche>
+								<:par_auteur:>
+								<BOUCLE_auteurs-article-recherche(AUTEURS) {id_article} {", "}>
+									<a href="#URL_AUTEUR">#NOM</a>
+								</BOUCLE_auteurs-article-recherche>
+							</B_auteurs-article-recherche>
+						</div>
+						<div class="chemin">
+							<BOUCLE_rubrique-mere-recherche(RUBRIQUES){id_rubrique}>
+								[<a href="#URL_RUBRIQUE">(#TITRE|supprimer_numero)</a>]
+							</BOUCLE_rubrique-mere-recherche>
+						</div>
+						[<div class="surtitre">(#SURTITRE)</div>]
+						[<a class="titre" href="#URL_ARTICLE" title="<:lire_suite_article:>">(#TITRE|supprimer_numero)</a>]
+						[<div class="soustitre">(#SOUSTITRE)</div>]
+						<div class="introduction">
+							[(#INTRODUCTION|typo_couleur)]
+							<br><br>
+							<a class="suite" href="#URL_ARTICLE"><:lire_suite_article:></a>
+						</div>
+					</div>
+				</BOUCLE_articles-recherche>
+			</div>
+		</div>
+	</B_articles-recherche>
+
+</div>
+</div>
+
+<INCLURE(inclusions/footer.php3)>
+
+</div>
+
+<!-- pour rajouter des trucs -- à la CSSZengarden -->
+<div id="extraDiv1"><span></span></div><div id="extraDiv2"><span></span></div><div id="extraDiv3"><span></span></div>
+<div id="extraDiv4"><span></span></div><div id="extraDiv5"><span></span></div><div id="extraDiv6"><span></span></div>
+
+</body>
+</html>

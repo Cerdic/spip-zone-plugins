@@ -1,0 +1,131 @@
+<!--
+
+Squelette Sarka-SPIP
+Copyright (C) 2005 Sylvain Bellégo - sylvain.bellego NO-SPM no-log.org - http://sylvain.bellego.free.fr
+
+Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes
+de la Licence Publique Générale GNU publiée par la Free Software Foundation (version 2
+ou bien toute autre version ultérieure choisie par vous).
+
+Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE, ni
+explicite ni implicite, y compris les garanties de commercialisation ou d'adaptation
+dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU pour plus de détails.
+
+Vous devez avoir reçu une copie de la Licence Publique Générale GNU en même temps que ce programme
+; si ce n'est pas le cas, écrivez à la Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+Boston, MA 02111-1307, États-Unis.
+
+-->
+
+<!--
+
+REMERCIEMENTS
+
+Le squelette Sarka-SPIP est en constante évolution.
+
+Les modifications déployées s'appuient sur les commentaires et les conseils
+proposés par des utilisateurs du squelette. A ce titre, les évolutions apportées par T. STOUKY,
+pour son site http://webpublic.ac-dijon.fr/pedago/enspro/matsci/ ont été particulièrement utiles.
+Un grand merci, donc, à celles et ceux qui ont contribué (et qui vont contribuer) à l'amélioration
+de ce squelette.
+
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="#LANG">
+
+<INCLURE(inclusions/header.php3){id_breve}>
+
+<body  dir="#LANG_DIR" onload="setHover()">
+
+<div id="conteneur">
+
+<INCLURE(inclusions/bandeau.php3)>
+
+<INCLURE(inclusions/bande-chemin.php3)>
+
+<INCLURE(inclusions/bloc-gauche.php3)>
+
+[(#NOOP) <!-- ================================== BLOC DE DROITE  ================================== --> ]
+
+<div id="droite" class="droite">
+
+<!-- SPIP-1.1.1 : affichage des mots-clés associés à la breve-->
+
+	<B_mots>
+		<div class="mots-cles">
+			<div id="mots_clefs"><a class="en-tete" href="mot.php3"><:mots_clefs:></a></div>
+			<div class="contenu">
+				<BOUCLE_mots(MOTS) {id_breve} {type!==^squelette\_} {par titre}>
+					<a href="#URL_MOT" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a>
+				</BOUCLE_mots>
+			</div>
+		</div>
+	</B_mots>
+	
+	<INCLURE(inclusions/bloc-droite-all-news.php3)>
+
+</div>
+
+[(#NOOP) <!-- ================================== BLOC CENTRAL  ================================== --> ]
+
+<div id="centre" class="centre">
+
+<!-- affichage de la brève courante -->
+
+<div class="sommaire">
+<div class="recherche">
+
+	<div class="redimensionnement">
+	<div class="breves">
+		<B_breve-principale>
+			<BOUCLE_breve-principale(BREVES) {id_breve}>
+				<div class="contenu">
+					<a class="nom-breve">#TITRE</a>
+					<div class="date">[(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)]</div>
+					<div class="texte">[(#TEXTE|reduire_image{400,0})]</div>
+					[<div class="notes">(#NOTES)</div>]
+					[<div class="notes"><:sur_web:>&nbsp;:&nbsp;<a href="#URL_SITE">(#NOM_SITE)</a></div>]
+				</div>
+				<br>
+			</BOUCLE_breve-principale>
+		</B_breve-principale>
+	</div>
+	</div>
+
+</div>
+</div>
+
+<!-- affichage du plan des brèves classées par secteurs -->
+
+<div class="plan">
+	<div class="intitule"><:toutes_les_breves:></div>
+	<B_rubrique-racine>
+		<BOUCLE_rubrique-racine(RUBRIQUES){racine}{par num titre}>
+			<B_breves-dans-rubrique>
+				<ul>
+					<li>
+						[<a class="rubrique" href="#URL_RUBRIQUE">(#TITRE|supprimer_numero)</a>]
+						<ul>
+							<BOUCLE_breves-dans-rubrique(BREVES) {id_rubrique} {par date}>
+								<li><a class="breve" href="#URL_BREVE"><span class="date">[[(#DATE|affdate{'d-m-Y'})]] </span> #TITRE</a></li>
+							</BOUCLE_breves-dans-rubrique>
+						</ul>
+					</li>
+				</ul>
+			</B_breves-dans-rubrique>
+		</BOUCLE_rubrique-racine>
+	</B_rubrique-racine>
+	</div>
+</div>
+
+<INCLURE(inclusions/footer.php3)>
+</div>
+
+<!-- pour rajouter des trucs -- à la CSSZengarden -->
+<div id="extraDiv1"><span></span></div><div id="extraDiv2"><span></span></div><div id="extraDiv3"><span></span></div>
+<div id="extraDiv4"><span></span></div><div id="extraDiv5"><span></span></div><div id="extraDiv6"><span></span></div>
+
+</body>
+</html>

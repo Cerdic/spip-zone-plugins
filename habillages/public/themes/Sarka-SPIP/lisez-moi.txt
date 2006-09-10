@@ -1,0 +1,256 @@
+<!--
+
+Squelette Sarka-SPIP
+Copyright (C) 2005 Sylvain Bellégo
+sylvain.bellego NO-SPM no-log.org
+http://sylvain.bellego.free.fr
+http://sarka-spip.com
+
+Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes
+de la Licence Publique Générale GNU publiée par la Free Software Foundation (version 2
+ou bien toute autre version ultérieure choisie par vous).
+
+Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE, ni
+explicite ni implicite, y compris les garanties de commercialisation ou d'adaptation
+dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU pour plus de détails.
+
+Vous devez avoir reçu une copie de la Licence Publique Générale GNU en même temps que ce programme
+; si ce n'est pas le cas, écrivez à la Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+Boston, MA 02111-1307, États-Unis.
+
+-->
+
+--------            Version 1.2.1         --------
+--------    Compatible SPIP 1.8 et 1.9    --------
+
+*************************************
+* Comment installer ce squelette ?  *
+*************************************
+
+
+=====================================================
+Si vous installez Sarka-SPIP pour la première fois...
+=====================================================
+
+... c’est tout simple [1] ! Encore faut-il avoir au préalable installé le
+CMS SPIP à la racine de votre site. Si ce n’est pas déjà fait, vous pouvez
+télécharger la dernière version de SPIP.
+
+Une fois SPIP installé, reste à charger l’ensemble des fichiers et des
+dossiers présents dans l’archive du squelette, préalablement décompressée,
+à la racine de votre site, ou dans le répertoire contenant SPIP.
+
+Un vidage de cache est ensuite nécessaire, depuis l’interface privée, pour
+que le nouveau graphisme soit pris en compte lors de l’affichage des pages
+de votre site.
+
+Ensuite rendez-vous à la rubrique du fichier .htaccess ci-dessous.
+
+========================================================
+Si vous remplacez Sarka-SPIP 1.1.x par Sarka-SPIP 1.2...
+========================================================
+
+Il suffit de rempacer les anciens fichiers, correspondant aux versions
+antérieures, par ceux de la nouvelle version.
+
+Ensuite rendez-vous à la rubrique du fichier .htaccess ci-dessous.
+
+=================
+Fichier .htaccess
+=================
+
+Avec SPIP 1.9, les fichiers article.php3 etc. ont désormais disparu. Pour conserver
+ces anciennes URLs (par flemme ou pour que les gens ou moteurs de recherche qui les
+connaissent continuent à trouver le contenu correspondant), il est nécessaire de déposer
+à la racine du site un fichier .htaccess. 
+
+Comme ce fichier peut poser des problèmes chez certains hébergeurs, il est livré sous le
+nom htaccess.txt : il vous faut donc le recopier sous le nom .htaccess, si vous n'en possédez
+pas encore ou recopier son contenu dans le fichier .htaccess existant déjà à la racine de votre site.
+
+Le fichier .htaccess livré permet d’assurer une transition complète vers les nouvelles adresses
+du site, mais aussi de gérer les URLs « propres » ou « html ». Ce fichier est à l'origine livré
+dans la version SPIP 1.9 avec une configuration par défaut. Il a été mis à jour dans cette distribution
+pour les besoins spécifiques de Sarka.
+
+Pour tous renseignements complémentaires sur la configuration fine de ce fichier veuillez
+consulter les site www.spip.net.
+
+=========================
+Arborescence des fichiers
+=========================
+
+Pour information, voici l’arborescence des fichier contenus dans l’archive
+du squelette, qu’il est nécessaire de conserver (les nouveaux fichiers créés pour la version 1.2 sont suivis de
+la mention [1.2]) :
+
+    * /..
+    * /ecrire [1.2] 
+          o /lang [1.2]
+                + squelette_fr.php3 [1.2]
+                + squelette_en.php3 [1.2]
+                + squelette_es.php3 [1.2]
+    * /squelettes
+          o /inclusions
+                + 404.html
+                + 404.php3
+                + bandeau.html
+                + bandeau.php3
+                + bande-chemin.html
+                + bande-chemin.php3
+                + bloc-droite-all-news.html
+                + bloc-droite-all-news.php3
+                + bloc-droite-secteur-news.html
+                + bloc-droite-secteur-news.php3
+                + bloc-gauche-recherche-exalead.html [1.2]
+                + bloc-gauche-recherche-google.html [1.2]
+                + bloc-gauche-recherche-msn.html [1.2]
+                + bloc-gauche-recherche-voila.html [1.2]
+                + bloc-gauche-recherche-yahoo.html [1.2]
+                + bloc-gauche-recherche-ext.php3 [1.2]
+                + bloc-gauche.html
+                + bloc-gauche.php3
+                + bloc-gauche-menu.php3 [1.2]
+                + bloc-gauche-menu-deplie.html [1.2]
+                + bloc-gauche-menu-deroulant.html [1.2]
+                + forum-pagination.php3 [1.2]
+                + forum-pagination.html [1.2]
+                + forum-pagination19.html [1.2]
+                + footer.html
+                + footer.php3
+                + header.html
+                + header.php3
+                + mini-agenda.html [1.2]
+                + mini-agenda.php3 [1.2]
+          o /puces
+                + arrow.gif [1.2]
+                + arrowb.gif [1.2]
+                + logo-exalead.gif [1.2]
+                + logo-google.gif [1.2]
+                + logo-msn.gif [1.2]
+                + logo-voila.gif [1.2]
+                + logo-yahoo.gif [1.2]
+                + printer.gif
+                + puce0.jpg
+                + puce1.jpg
+                + puce-n0.gif
+                + puce-n1.gif
+                + puce-n2.gif
+                + sarka-spip.png
+                + sarka-spip-hover.png
+                + spip-powered.png
+                + spip-powered-hover.png
+				+ favicon.ico [1.2]
+          o /styles
+                + impression.css
+                + style.css
+                + style-menu-deplie.css [1.2]
+                + style-menu-deroulant.css [1.2]
+          o /scripts
+                + spip-bouton-hover.htc
+                + menuderoulant.js [1.2]
+          o article.html
+          o auteur.html
+          o bandeau.html
+          o bandeau.php3
+          o breve.html
+          o contact.html [1.2]
+          o footer.html
+          o footer.php3
+          o formulaire_forum_previsu.html
+          o formulaire_inscription.html
+          o formulaire_signature.html
+          o formulaire_site.html
+          o forum.html
+          o forum-news.html
+          o imprimer.html
+          o local_en.php3
+          o local_es.php3
+          o local_fr.php3
+          o mot.html
+          o plan.html
+          o recherche.html
+          o rubrique.html
+          o site.html
+          o sommaire.html
+    * COPYING.txt
+    * imprimer.php3
+    * lisez-moi.php3
+    * mes_fonctions.php3
+    * contact.php3 [1.2]
+    * forum-news.php3
+	* htaccess.txt
+
+    
+*******************************
+* Principales fonctionnalités *
+*******************************
+
+Les nouvelles fonctionnalités apportées par la version 1.2 sont précédées de la mention [1.2]
+
+-  Navigation
+
+    * [1.2]menu des rubriques à gauche, configurable pour être soit déroulant (défaut) soit déplié
+    * chemin hiérarchique de l’objet consulté dans le bandeau
+    * dernières brèves et derniers sites référencés à droite
+    * plan du site pour les articles
+    * plan du site pour les brèves
+    * récapitulatif des derniers messages postés par les visiteurs
+    * menu de navigation par mots-clés et groupes de mots
+    * affichage des articles-frères dans l’article consulté
+    * icône permettant aux visiteurs de générer une page "propre" à imprimer
+
+-  Interactivité
+
+    * formulaire pour écrire aux auteurs
+    * recherche portant sur tout le contenu (articles, rubriques, forums)
+    * référencement de sites par les visiteurs
+    * forums pour réagir aux articles
+    * formulaire d’inscription pour les visiteurs
+    * [1.2] Remplacement du contact par mailto par un formulaire de type auteur
+    * [1.2] Bloc de recherche par moteurs externes configurables (exalead, google, msn, voila, yahoo)
+
+-  Les ch’ti plus
+
+    * affichage de la date de mise à jour
+    * non-affichage des e.mail des auteurs
+    * redimensionnement automatique des images insérées dans les articles, les brèves et les rubriques.
+    * redimensionnement automatique des logos de rubriques et des logos d’articles
+    * création d’un album minimaliste avec les images jointes aux rubriques et aux articles
+    * classement des rubriques par numéro si les titres sont numérotés, par ordre alphabétique sinon
+    * classement des articles par numéro si les titres sont numérotés, par ordre anti-chronologique sinon
+    * affichage des sites référencés dans les rubriques qui ne comprennent pas d'article
+    * [1.2] Mini-agenda dans la colonne de droite
+	* [1.2] Favicon dans la barre d'adresse (déplacé de squelettes/rblack.ico en squelettes/puces/favicon.ico)
+	* [1.2] Création d'un filtre de pagination (paginer) utilisable pour SPIP 1.8.3
+	* [1.2] Pagination des messages de forums (page forum-news.html)
+	* [1.2] Réorganisation du pied de page et insertion du numéro de version SPIP et Sarka-SPIP (balises #VERSION_SPIP et #VERSION_SQUELETTE)
+	* [1.2] Statistiques éditoriales (articles, brèves...) attenantes au bloc de la date de mise à jour
+	* [1.2] Statistiques des visites sur le site (jour même, la veille, depuis le début) attenantes au bloc de la date de mise à jour
+	* [1.2] Possibilité de définir la taille de l'introduction affichée pour un article, une brève, un message ou une rubrique
+	* [1.2] Possibilité de colorer des parties du texte ou de l'introduction d'un article(filtre typo_couleur)
+    
+- Personnalisation de l'affichage grâce aux mots-clés
+
+    * génération automatique des META-balises, paramétrable depuis l'espace privé
+    * insertion d'un logo dans le bandeau, déterminé dans l'interface privé
+    * affichage en une d'un article parqué comme "edito" dans l'espace privé
+    
+********************************
+*   Langues prises en compte   *
+********************************
+
+Sarka-spip gère le multilinguisme grâce aux fichiers de langue (local_xx.php3).
+Seuls l'anglais, le français et l'espagnol ont été intégrés.
+    
+********************************************
+* Avertissements sur Sarka 1.2 et SPIP 1.9 *
+********************************************
+
+Certains bugs ont été introduits par SPIP 1.9 (styles incorrects de certains boutons, balise #NOM_SITE mal
+gérée si vide...). Nous avons délibérement choisi de ne pas essayer de les contourner dans Sarka 1.2 et de 
+laisser l'équipe SPIP apporter elle-même les corrections, ce qui soyons en sur ne tardera pas.
+
+Cette version 1.2 sera la dernière de la lignée Sarka 1 et restera compatible avec SPIP 1.8/1.9 uniquement.
+Les changements radicaux qui seront apportés par SPIP 2.0 ne seront pas pris en compte dans cette version 
+Sarka 1.2. Un nouvelle lignée Sarka 2 verra alors le jour...  

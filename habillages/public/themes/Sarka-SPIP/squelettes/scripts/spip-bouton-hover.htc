@@ -1,0 +1,29 @@
+<PUBLIC:COMPONENT URN="SARKASPIP-spip_bouton:hover" >
+   <PUBLIC:ATTACH EVENT="onmouseover" ONEVENT="spip_bouton_hover()" />
+   <PUBLIC:ATTACH EVENT="onmouseout"  ONEVENT="spip_bouton_restore()"  />
+
+   <SCRIPT LANGUAGE="JScript">
+
+   var normalColor, normalBgColor, normalCursor;
+ 
+   function spip_bouton_hover()
+   {
+     normalColor  = currentStyle.color;  
+     normalBgColor = currentStyle.backgroundColor;
+	 normalCursor = currentStyle.cursor;
+ 
+     runtimeStyle.color  = normalBgColor;
+     runtimeStyle.backgroundColor = normalColor;
+     runtimeStyle.cursor = "pointer";
+   }
+
+   function spip_bouton_restore()
+   {
+     runtimeStyle.color  = normalColor;
+     runtimeStyle.backgroundColor = normalBgColor;
+     runtimeStyle.cursor = normalCursor;
+   }
+
+   </SCRIPT>
+</PUBLIC:COMPONENT>
+

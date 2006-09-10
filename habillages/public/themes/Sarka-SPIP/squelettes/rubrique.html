@@ -1,0 +1,268 @@
+<!--
+
+Squelette Sarka-SPIP
+Copyright (C) 2005 Sylvain Bellégo - sylvain.bellego NO-SPM no-log.org - http://sylvain.bellego.free.fr
+
+Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes
+de la Licence Publique Générale GNU publiée par la Free Software Foundation (version 2
+ou bien toute autre version ultérieure choisie par vous).
+
+Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE, ni
+explicite ni implicite, y compris les garanties de commercialisation ou d'adaptation
+dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU pour plus de détails.
+
+Vous devez avoir reçu une copie de la Licence Publique Générale GNU en même temps que ce programme
+; si ce n'est pas le cas, écrivez à la Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+Boston, MA 02111-1307, États-Unis.
+
+-->
+
+<!--
+
+REMERCIEMENTS
+
+Le squelette Sarka-SPIP est en constante évolution.
+
+Les modifications déployées s'appuient sur les commentaires et les conseils
+proposés par des utilisateurs du squelette. A ce titre, les évolutions apportées par T. STOUKY,
+pour son site http://webpublic.ac-dijon.fr/pedago/enspro/matsci/ ont été particulièrement utiles.
+Un grand merci, donc, à celles et ceux qui ont contribué (et qui vont contribuer) à l'amélioration
+de ce squelette.
+
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<BOUCLE_rubrique_principal(RUBRIQUES) {id_rubrique}>
+
+<html lang="#LANG">
+
+<INCLURE(inclusions/header.php3){id_rubrique}>
+
+<body  dir="#LANG_DIR" onload="setHover()">
+
+<div id="conteneur">
+
+<INCLURE(inclusions/bandeau.php3)>
+
+<INCLURE(inclusions/bande-chemin.php3){id_rubrique}>
+
+<INCLURE(inclusions/bloc-gauche.php3){id_rubrique}>
+
+[(#NOOP) <!-- ================================== BLOC DE DROITE  ================================== --> ]
+
+<div id="droite" class="droite">
+
+<!-- affichage des mots-clés associés à la rubrique-->
+
+<B_mots>
+	<div id="mots-cles-rubrique" class="mots-cles">
+		<div id="mots_clefs"><a class="en-tete" href="mot.php3"><:mots_clefs:></a></div>
+		<div class="contenu">
+			<BOUCLE_mots(MOTS) {id_rubrique} {type!==^squelette\_} {par id_groupe}>
+				<BOUCLE_groupe(GROUPES_MOTS){id_groupe}>
+					[<div class="nom-groupe">(#TITRE) :</div>]
+				</BOUCLE_groupe>
+				<a href="#URL_MOT" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a>
+			</BOUCLE_mots>
+		</div>
+	</div>
+</B_mots>
+
+<!-- affichage des dernières brèves et derniers sites publiés dans le "secteur" -->
+
+<INCLURE(inclusions/bloc-droite-secteur-news.php3){id_secteur}>
+
+</div>
+
+[(#NOOP) <!-- ================================== BLOC CENTRAL  ================================== --> ]
+
+<div id="centre" class="centre">
+<div class="contenu">
+
+	<div class="rubrique" [style="[min-height: (#LOGO_RUBRIQUE||reduire_image{110}||hauteur_majoree)]px; _height: (#LOGO_RUBRIQUE||reduire_image{110}||hauteur)px;"]>
+		[<div class="image">(#LOGO_RUBRIQUE||reduire_image{110})</div>]
+		[<a class="titre">(#TITRE|supprimer_numero)</a>]
+		[<div class="descriptif">(#DESCRIPTIF)</div>]
+
+		<div class="texte">[(#TEXTE|reduire_image{200,x})]</div>
+
+		<!-- Liens vers les rubriques filles -->
+
+		<B_rubriques_filles>
+			<div class="filles">
+				<BOUCLE_rubriques_filles(RUBRIQUES){id_parent}{par num titre}{par titre}>
+					[<a href="#URL_RUBRIQUE">(#TITRE|supprimer_numero)</a>]
+				</BOUCLE_rubriques_filles>
+			</div>
+		</B_rubriques_filles>
+
+		<!-- Liens vers les documents joints -->
+
+		<B_documents_rubrique>
+			<div class="doc">
+				<div id="docu_rubrique" class="en-tete">
+					<:docu_rubrique:> :
+				</div>
+				<!-- Liens vers les documents joints, à l'exclusion des images -->
+				<BOUCLE_documents_rubrique(DOCUMENTS){id_rubrique}{extension !== jpg|png|gif}{mode=document}{doublons}>
+					<a href=#URL_DOCUMENT>#LOGO_DOCUMENT  #TITRE </a>
+				</BOUCLE_documents_rubrique>
+			</div>
+		</B_documents_rubrique>
+
+		<!-- Liens vers les images jointes -->
+
+		<B_images_rubrique>
+			<div class="images">
+				<div id="img_rubrique" class="en-tete">
+					<:img_rubrique:> :
+				</div>
+				<BOUCLE_images_rubrique(DOCUMENTS){id_rubrique}{extension == jpg|png|gif}{mode=document}{doublons}>
+					<div class="vignette">
+						<a href=#URL_DOCUMENT target="blank" class="info"> #LOGO_DOCUMENT [<span>(#DESCRIPTIF)</span>]</a>
+						<ul>
+							[<li><:img_titre:> : (#TITRE)</li>]
+							<li><:img_taille:> : #LARGEUR par #HAUTEUR</li>
+							<li><:img_poids:> : [(#TAILLE|taille_en_octets)]</li>
+							<li><:img_format:> : #TYPE_DOCUMENT</li>
+						</ul>
+					</div>
+				<div class="clear"><span></span></div>
+				</BOUCLE_images_rubrique>
+			</div>
+		</B_images_rubrique>
+	</div>
+
+	<!-- Articles de la rubrique, classés par numéro s'ils sont numérotés, ou par date inverse sinon -->
+
+	<B_test_numero>
+
+		<BOUCLE_test_numero(ARTICLES){id_rubrique}{titre==^[0-9]+\.}{0,1}>
+
+			<B_article-numerotes>
+				<div class="derniers-articles">
+					<div id="articles_rubrique" class="en-tete"><:article_rubrique:></div>
+					<BOUCLE_article-numerotes(ARTICLES) {id_rubrique}{par num titre}>
+						<div class="annonce">
+							[<div class="image">(#LOGO_ARTICLE||reduire_image{150})</div>]
+							<div class="detail">[(#DATE|nom_jour)] [(#DATE|affdate)]<br>
+							<B_auteurs-article-numerotes>
+								<:par_auteur:>
+								<BOUCLE_auteurs-article-numerotes(AUTEURS) {id_article} {", "}>
+									<a href="#URL_AUTEUR">#NOM</a>
+								</BOUCLE_auteurs-article-numerotes>
+							</B_auteurs-article-numerotes>
+							</div>
+							[<div class="surtitre">(#SURTITRE)</div>]
+							[<a class="titre" href="#URL_ARTICLE" title="<:lire_suite_article:>">(#TITRE|supprimer_numero)</a>]
+							[<div class="soustitre">(#SOUSTITRE)</div>]
+							<div class="introduction">
+								[(#INTRODUCTION|typo_couleur)]
+								<br><br>
+								<a class="suite" href="#URL_ARTICLE"><:lire_suite_article:></a>
+							</div>
+						</div>
+					</BOUCLE_article-numerotes>
+				</div>
+			</B_article-numerotes>
+
+		</BOUCLE_test_numero>
+
+	</B_test_numero>
+
+			<B_article-dates>
+				<div class="derniers-articles">
+					<div id="article_rubrique" class="en-tete"><:article_rubrique:></div>
+					<BOUCLE_article-dates(ARTICLES) {id_rubrique}{par date}{inverse}>
+						<div class="annonce">
+							[<div class="image">(#LOGO_ARTICLE||reduire_image{150})</div>]
+							<div class="detail">[(#DATE|nom_jour)] [(#DATE|affdate)]<br>
+								<B_auteurs-article-date>
+									<:par_auteur:>
+									<BOUCLE_auteurs-article-date(AUTEURS) {id_article} {", "}>
+										<a href="#URL_AUTEUR">#NOM</a>
+									</BOUCLE_auteurs-article-date>
+								</B_auteurs-article-date>
+							</div>
+							[<div class="surtitre">(#SURTITRE)</div>]
+							[<a class="titre" href="#URL_ARTICLE" title="<:lire_suite_article:>">(#TITRE|supprimer_numero)</a>]
+							[<div class="soustitre">(#SOUSTITRE)</div>]
+							<div class="introduction">
+								[(#INTRODUCTION|typo_couleur)]
+								<br><br>
+								<a class="suite" href="#URL_ARTICLE"><:lire_suite_article:></a>
+							</div>
+						</div>
+					</BOUCLE_article-dates>
+				</div>
+			</B_article-dates>
+
+	<!-- si pas d'article, test de l'existence de rubriques filles (si test négatif, affichage des sites référencés -->
+
+			<!-- test de l'existence de rubriques filles -->
+			<B_test-pas-de-rubrique-fille>
+				<BOUCLE_test-pas-de-rubrique-fille(RUBRIQUES){id_parent}{0,1}>
+				</BOUCLE_test-pas-de-rubrique-fille>
+			</B_test-pas-de-rubrique-fille>
+			
+	</div>
+			<div class="plan">
+			<!-- si articles syndiqués dans la rubrique, affichage des plus récents, tout site confondu -->
+				<BOUCLE_test-syndic(SYNDIC_ARTICLES){0,1}>
+					<B_syndic-nouveaux>
+						<div id="recents_syndic" class="intitule"><:recents_syndic:> :</div>
+						<ul>
+							<BOUCLE_syndic-nouveaux(SYNDIC_ARTICLES) {id_rubrique}{par date}{inverse}{0,10}>
+								<li><a class="article-syndic" href="#URL_ARTICLE"><span class="date-syndic">[[(#DATE|affdate{'d-m-Y'})]]</span> [(#TITRE|couper{75})]</a></li>
+								<div class="a-propos">
+									[<:publie_sur_site:> <span class="site-pere">(#NOM_SITE)</span>]
+									[<:par_auteur:> <span class="auteur-pere">(#LESAUTEURS)</span>.]<br>
+									[<span class="commentaire">(#DESCRIPTIF|supprimer_tags)</span>]
+								</div>
+							</BOUCLE_syndic-nouveaux>
+						</ul>
+					</B_syndic-nouveaux>
+					<br>
+				</BOUCLE_test-syndic>
+			<!-- affichage des sites référencés de la rubrique -->
+				<B_site-secteur>
+					<div class="intitule"><:icone_sites_references:> :</div>
+					<div class="indentation redimensionnement">
+						<div class="web">
+							<BOUCLE_site-secteur(SITES){id_rubrique}{par date}{inverse}>
+								<div class="site">
+									<a class="nom-site" href="#URL_SITE">#NOM_SITE</a>
+									[<div class="descriptif">(#DESCRIPTIF)</div>]
+								<!-- si articles syndiqués dans le site, affichage des plus récents -->
+									<B_syndic-recherche1>
+										<BOUCLE_syndic-recherche1(SYNDIC_ARTICLES) {id_syndic}{par date}{inverse}{0,20}>
+											[<a class="article-synd info" href="#URL_ARTICLE">(#TITRE*|supprimer_numero)<span>[(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)]</span></a>]
+										</BOUCLE_syndic-recherche1>
+									</B_syndic-recherche1>
+								</div>
+								<br>
+							</BOUCLE_site-secteur>
+						</div>
+					</div>
+				</B_site-secteur>
+
+			</div>
+
+			<//B_test-pas-de-rubrique-fille>
+ 		<//B_article-dates>
+	<//B_test_numero>
+</div>
+</div>
+<INCLURE(inclusions/footer.php3)>
+</div>
+
+<!-- pour rajouter des trucs -- à la CSSZengarden -->
+<div id="extraDiv1"><span></span></div><div id="extraDiv2"><span></span></div><div id="extraDiv3"><span></span></div>
+<div id="extraDiv4"><span></span></div><div id="extraDiv5"><span></span></div><div id="extraDiv6"><span></span></div>
+
+</body>
+</html>
+
+</BOUCLE_rubrique_principal>
+<INCLURE(inclusions/404.php3)>
+<//B_rubrique_principal>
