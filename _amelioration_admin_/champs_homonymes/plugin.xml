@@ -1,0 +1,48 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Champs homonymes
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	Iago, contact: <a href="mailto:francois.vachon@iago.ca">francois.vachon@iago.ca</a>
+_ Site web: [iago.ca->http://www.iago.ca]
+_ &copy; 2006 - Distribue sous licence GNU/GPL
+ 	
+	
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Rendre possible la visualisation et la mise à jours de nouveaux champs ajoutés dans plusieurs tables de SPIP grâce aux champs EXTRA.
+	<hr>
+{{Modification au code source}}
+_ Ce plugin utilise une version modifiée du fichier extra.php
+_ À l'activation de ce plugin, le fichier extra.php contenu dans ce plugin aura priorité sur celui natif de SPIP.
+_ Pour éviter tout conflit possible, ne pas activer avec un autre plugin contenant aussi un fichier extra.php.
+	<hr>
+	{{Dernière version testée:}} 
+_ SPIP 1.9.2 alpha SVN [7334]
+	<hr>
+	Ce plugin ne modifie aucune table ni ne crée aucun champ extra.
+_ Ces modifications restent à votre discretion.
+_ Les détails de son utilisation sont décrits ici: 
+_ <a href="http://monsitespip.com/spip.php?article12" target="_blank">Gestion des nouveaux champs dans les tables SPIP par les champs extra : champs homonymes</a>
+_ Merci de nous signaler son bon fonctionnement ou non sur le forum lié à cet article.
+	</description>
+	<options> <!-- fichier charge a chaque hit -->
+	mes_options_homonymes.php
+	</options>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	homonymes
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
