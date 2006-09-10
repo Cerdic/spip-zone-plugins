@@ -7,5 +7,5 @@
 - Voir comment gérer les chemins vers le dossier img_pack des plugins puisque le plugin habillage_prive redefini l'img_pack original (celui qui a servi aux concepteurs des autres plugins pour définir leur chemin vers img_pack) -> regarder "find_in_path"...
 - Insérer captures ecrans via un fichier theme à la racine des dossiers de thèmes.
 - mettre la possibilité d'insérer sa feuille de style css pour gérer la présentation de l'espace privé.
-- Rédiger mode d'emploi pour personnaliser les thèmes.
+<done>- Rédiger mode d'emploi pour personnaliser les thèmes.</done>
 - Mise à jour graphique des thèmes.
