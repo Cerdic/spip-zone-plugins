@@ -1,0 +1,26 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Checklink
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Cedric & James
+_ &copy; 2006 - Licence GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Ce plugin maintient une liste des liens inseres dans le contenu editorial afin d'en valider periodiquement la validite,
+	et d'en detecter les attributs de langue et de titre qui sont ainsi renseignes automatiquements sur les balises a
+	</description>
+	<prefix> 
+	checklink
+	</prefix>
+	<pipeline>
+		<nom>pre_enregistre_contenu</nom>
+		<inclure>checklink_pipelines.php</inclure>
+	</pipeline>
+</plugin>
