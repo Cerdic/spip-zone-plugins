@@ -3,6 +3,9 @@
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
 define('_DIR_PLUGIN_HABILLAGES',(_DIR_PLUGINS.end($p)));
 
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',dirname(__FILE__)));
+define('_DIR_PLUGIN_HABILLAGES_OPT',(_DIR_PLUGINS.end($p)));
+
 // Fonction qui gere les habillages. Tentative de faire la fonction sans appel a la
 // base de donnees, et donc sans manipulation sql.
 function exec_config_habillages() {
@@ -46,7 +49,8 @@ function exec_config_habillages() {
  	# ... jusque la.
  	
 	echo "<br />";
-	
+
+#### DEBUT DE L'ENCADRE QUI GERE L'HABILLAGE PRIVE ######################################
 	debut_cadre_trait_couleur("", false, "", _T('habillageprive:titre_habillage_prive'));
 
 		
@@ -94,7 +98,7 @@ function exec_config_habillages() {
 		 		# par la ligne define('_DIR_IMG_PACK', [...]) avant le choix d'un autre 
 		 		# habillage :
 		 		else if ($search_original_content) {
-			 		$search_comment_backup = eregi("//backup(.*)", $read_backup_file);
+			 		$search_comment_backup = eregi("//backup_define(.*)", $read_backup_file);
 			 		
 			 		if ($search_comment_backup) {
 				 		$open_options_file = fopen($options_file, 'w+');
@@ -152,7 +156,7 @@ function exec_config_habillages() {
 	 	
 	 	else {
 		 	$open_options_file = fopen($options_file, 'w+');
-		 	$new_content = "<?\n//start_define_img_pack\ndefine('_DIR_IMG_PACK', ('".$plugin_directory."/prive/themes/".$theme."/img_pack/'));\n//end_define_img_pack\n?>";
+		 	$new_content = "<?php\n//start_define_img_pack\ndefine('_DIR_IMG_PACK', ('".$plugin_directory."/prive/themes/".$theme."/img_pack/'));\n//end_define_img_pack\n?>";
 			$write = fwrite($open_options_file, $new_content);
 			fclose($open_options_file);
 	 	}
@@ -178,25 +182,125 @@ function exec_config_habillages() {
 				if ($template_name[1] == $fichier) {
 		    	echo " checked";
 	    		}
+	    		fclose($open_options_file);
 	    	}
 	    	else if ($_REQUEST['theme'] == $fichier) {
 		    	echo " checked";
 	    	}
 	    	echo ">";
-        	echo $fichier.'<br />';
+	    	
+	    	$theme_file = $plugin_directory.'/prive/themes/'.$fichier.'/theme.xml';
+	    	if (file_exists($theme_file)) {
+        	$open_theme_file = fopen($theme_file, 'r');
+			$theme_file_size = filesize ($theme_file);
+			$read_theme_file = fread ($open_theme_file, $theme_file_size);
+			$search_theme_name = eregi("<nom>(.*)</nom>", $read_theme_file, $theme_name);
+			$search_theme_name = eregi("<auteur>(.*)</auteur>", $read_theme_file, $theme_author);
+			$search_theme_name = eregi("<version>(.*)</version>", $read_theme_file, $theme_version);
+			$search_theme_name = eregi("<description>(.*)</description>", $read_theme_file, $theme_description);
+			echo '<strong>'.$theme_name[1].'</strong> version '.$theme_version[1].' (Auteur : '.$theme_author[1].')<br />';
+			echo $theme_description[1];
+        	echo "<BR />";
+        	fclose($open_theme_file);
+    		}
+    		
+    		else {
+	    		echo $fichier.'<br />';
+    		}
     	}
 	}
 	closedir ($dossier);
 	
 	echo '<input type="submit" value="'._T('valider').'"/>';
- 	echo '</form>';
  	fin_cadre_trait_couleur();
+#### FIN DE L'ENCADRE QUI GERE L'HABILLAGE PRIVE ########################################
+
+echo "<br />";
+
+#### DEBUT DE L'ENCADRE QUI GERE L'HABILLAGE PUBLIC #####################################
+debut_cadre_trait_couleur("", false, "", _T('habillageprive:titre_habillage_public'));
  	
- 	echo "<br />";
+	$squelette = $_REQUEST['squelette'];
+ 	$plugin_options_file = "$plugin_directory/habillages_options.php";
+ 	
+ 	if ($squelette == "initial") {
+		$open_plugin_options_file = fopen($plugin_options_file, 'w+');
+		$news_content = "<\?php\n\?>";
+		$write = fwrite($open_plugin_options_file, $new_content);
+	}
 	
-	debut_cadre_trait_couleur("", false, "", _T('habillageprive:titre_habillage_public'));
- 	echo "A venir...";
-	fin_cadre_trait_couleur();
+	else if ($squelette != "") {
+		$cleaned_path = str_replace('../', "", _DIR_PLUGIN_HABILLAGES);
+	 	$open_plugin_options_file = fopen($plugin_options_file, 'w+');
+		$new_content = "<?php\n\$GLOBALS['dossier_squelettes']='".$cleaned_path."/public/themes/$squelette/squelettes';\n?>"; 
+		$write = fwrite($open_plugin_options_file, $new_content);
+		fclose($open_plugin_options_file);
+	}
+	
+	else if ($squelette == "") {
+		$open_plugin_options_file = fopen($plugin_options_file, 'r');
+		$plugin_options_file_size = filesize ($plugin_options_file);
+		$read_options_file = fread ($open_plugin_options_file, $plugin_options_file_size);
+		$search_skel_name = eregi("\$GLOBALS\[\'dossier_squelettes\'\]\=$clean_path\.\'\/public\/themes\/(.*)\/squelettes\'\;", $read_options_file, $skel_name);
+		echo $skel_name[1];
+		fclose($open_plugin_options_file);
+	}
+	
+ 	echo '<INPUT type=radio name="squelette" value="initial"';
+ 		if ($_REQUEST['squelette'] == "initial") {
+	 		echo "checked";
+ 		}
+ 	echo ">";
+ 	echo "Revenir &agrave; l'habillage d'origine";
+ 	echo "<br />";
+ 	
+ 	$dossier = opendir ($plugin_directory.'/public/themes/');
+	while ($fichier = readdir ($dossier)) {
+    	if ($fichier != "." && $fichier != "..") {
+	    	echo '<INPUT type=radio name="squelette" value="'.$fichier.'"';
+	    	if ($_REQUEST['squelette'] == "") {
+		    	$open_plugin_options_file = fopen($plugin_options_file, 'r');
+				$plugin_options_file_size = filesize ($plugin_options_file);
+				$read_plugin_options_file = fread ($open_plugin_options_file, $plugin_options_file_size);
+				$search_skel_name = eregi("\$GLOBALS\[\'dossier_squelettes\'\]\=$clean_path\.\'\/public\/themes\/(.*)\/squelettes\'\;", $read_plugin_options_file, $skel_name);
+				if ($skel_name[1] == $fichier) {
+		    	echo " checked";
+	    		}
+	    		fclose($open_plugin_options_file);
+	    	}
+	    	else if ($_REQUEST['squelette'] == $fichier) {
+		    	echo " checked";
+	    	}
+	    	echo ">";
+        	
+        	$theme_file = $plugin_directory.'/public/themes/'.$fichier.'/theme.xml';
+	    	if (file_exists($theme_file)) {
+        	$open_theme_file = fopen($theme_file, 'r');
+			$theme_file_size = filesize ($theme_file);
+			$read_theme_file = fread ($open_theme_file, $theme_file_size);
+			$search_theme_name = eregi("<nom>(.*)</nom>", $read_theme_file, $theme_name);
+			$search_theme_name = eregi("<auteur>(.*)</auteur>", $read_theme_file, $theme_author);
+			$search_theme_name = eregi("<version>(.*)</version>", $read_theme_file, $theme_version);
+			$search_theme_name = eregi("<description>(.*)</description>", $read_theme_file, $theme_description);
+			echo '<strong>'.$theme_name[1].'</strong> version '.$theme_version[1].' (Auteur : '.$theme_author[1].')<br />';
+			echo $theme_description[1];
+        	echo "<BR />";
+        	fclose($open_theme_file);
+    		}
+    		
+    		else {
+	    		echo $fichier.'<br />';
+    		}
+    	}
+	}
+	closedir ($dossier);
+	
+	echo '<input type="submit" value="'._T('valider').'"/>';
+	
+	echo '</form>';
+fin_cadre_trait_couleur();
+#### FIN DE L'ENCADRE QUI GERE L'HABILLAGE PUBLIC #######################################
+	
   } 
   
   fin_page();

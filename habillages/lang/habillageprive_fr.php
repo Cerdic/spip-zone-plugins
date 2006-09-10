@@ -1,8 +1,8 @@
 <?php
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	'titre_page' => 'Configuration de l\'habillage de l\'espace priv&eacute;',
-	'gros_titre' => 'Choisissez le th&egrave;me d\'habillage de l\'espace priv&eacute;.',
+	'titre_page' => 'Configuration des habillages de votre site',
+	'gros_titre' => 'Configuration des habillages de votre site',
    	'help' => '{{Fonctionnement}} 
    	
 Choisissez l\'habillage plus validez. Le nouvel habillage s\'affichera au prochain clic (cliquez deux fois sur "valider" si vous voulez voir l\'habillage apparaitre). 

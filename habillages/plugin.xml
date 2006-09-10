@@ -1,21 +1,24 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Habilage espace priv&eacute;
+	Habillages du site
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	Franck Ducas
 	</auteur>
 	<version> <!-- Version du plugin -->
-	0.1
+	0.2
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-	dev
+	en test
 	</etat>
 	<description>
-Plugin qui change les ic&ocirc;nes de l'espace priv&eacute;.
+Plugin qui change les ic&ocirc;nes de l'espace priv&eacute; et charge le squellette de votre choix sur votre site public.
 
-En développement. Plugin non fonctionnel.
+Vous configurez les habillages en cliquant sur "Configuration", puis sur "Habillages".
 	</description>
+	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
+	habillages_options.php
+	</options>
 	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
 		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : template_ma_fonction() par exemple)
 		C'est par ailleurs conseille pour les noms de fichier
