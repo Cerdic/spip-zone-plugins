@@ -14,9 +14,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/agenda'); // inclut inc/layer, inc/texte, inc/filtre
 include_spip('inc/boutons');
+include_spip('inc/actions');
 
 // Choix dynamique de la couleur
 
+// http://doc.spip.org/@choix_couleur
 function choix_couleur() {
 	global $couleurs_spip;
 	if ($couleurs_spip) {
@@ -30,6 +32,7 @@ function choix_couleur() {
 //
 // affiche un bouton imessage
 //
+// http://doc.spip.org/@bouton_imessage
 function bouton_imessage($destinataire, $row = '') {
 	// si on passe "force" au lieu de $row, on affiche l'icone sans verification
 	global $connect_id_auteur;
@@ -58,6 +61,7 @@ function bouton_imessage($destinataire, $row = '') {
 
 // Faux HR, avec controle de couleur
 
+// http://doc.spip.org/@hr
 function hr($color, $retour = false) {
 	$ret = "<div style='height: 1px; margin-top: 5px; padding-top: 5px; border-top: 1px solid $color;'></div>";
 	
@@ -70,14 +74,19 @@ function hr($color, $retour = false) {
 // Cadres
 //
 
+// http://doc.spip.org/@debut_cadre
 function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	global $spip_display, $spip_lang_left;
 	static $accesskey = 97; // a
 
+	$style_cadre = " style='zoom:1;";
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
 		$style_gauche = " padding-$spip_lang_left: 38px;";
-		$style_cadre = " style='margin-top: 14px;'";
-	} else $style_cadre = $style_gauche = '';
+		$style_cadre .= "margin-top: 14px;'";
+	} else {
+		$style_cadre .= "'"; 
+		$style_gauche = '';
+	}
 	
 	// accesskey pour accessibilite espace prive
 	if ($accesskey <= 122) // z
@@ -120,12 +129,13 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	
 	$ret .= "</div>";
 	
-	$ret .= "<div class='cadre-padding' style='overflow:hidden;'>";
+	$ret .= "<div class='cadre-padding' style='overflow:hidden;zoom:1'>";
 
 
 	return $ret;
 }
 
+// http://doc.spip.org/@fin_cadre
 function fin_cadre($style) {
 
 	$ret = "</div>";
@@ -137,6 +147,7 @@ function fin_cadre($style) {
 }
 
 
+// http://doc.spip.org/@debut_cadre_relief
 function debut_cadre_relief($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('r', $icone, $fonction, $titre);
 
@@ -144,6 +155,7 @@ function debut_cadre_relief($icone='', $return = false, $fonction='', $titre = '
 	else echo $retour_aff;
 }
 
+// http://doc.spip.org/@fin_cadre_relief
 function fin_cadre_relief($return = false){
 	$retour_aff = fin_cadre('r');
 
@@ -152,6 +164,7 @@ function fin_cadre_relief($return = false){
 }
 
 
+// http://doc.spip.org/@debut_cadre_enfonce
 function debut_cadre_enfonce($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('e', $icone, $fonction, $titre);
 
@@ -159,6 +172,7 @@ function debut_cadre_enfonce($icone='', $return = false, $fonction='', $titre = 
 	else echo $retour_aff;
 }
 
+// http://doc.spip.org/@fin_cadre_enfonce
 function fin_cadre_enfonce($return = false){
 
 	$retour_aff = fin_cadre('e');
@@ -168,12 +182,14 @@ function fin_cadre_enfonce($return = false){
 }
 
 
+// http://doc.spip.org/@debut_cadre_sous_rub
 function debut_cadre_sous_rub($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('sous_rub', $icone, $fonction, $titre);
 	if ($return) return $retour_aff;
 	else echo $retour_aff;
 }
 
+// http://doc.spip.org/@fin_cadre_sous_rub
 function fin_cadre_sous_rub($return = false){
 	$retour_aff = fin_cadre('sous_rub');
 	if ($return) return $retour_aff;
@@ -182,6 +198,7 @@ function fin_cadre_sous_rub($return = false){
 
 
 
+// http://doc.spip.org/@debut_cadre_forum
 function debut_cadre_forum($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('forum', $icone, $fonction, $titre);
 
@@ -189,6 +206,7 @@ function debut_cadre_forum($icone='', $return = false, $fonction='', $titre = ''
 	else echo $retour_aff;
 }
 
+// http://doc.spip.org/@fin_cadre_forum
 function fin_cadre_forum($return = false){
 	$retour_aff = fin_cadre('forum');
 
@@ -196,6 +214,7 @@ function fin_cadre_forum($return = false){
 	else echo $retour_aff;
 }
 
+// http://doc.spip.org/@debut_cadre_thread_forum
 function debut_cadre_thread_forum($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('thread-forum', $icone, $fonction, $titre);
 
@@ -203,6 +222,7 @@ function debut_cadre_thread_forum($icone='', $return = false, $fonction='', $tit
 	else echo $retour_aff;
 }
 
+// http://doc.spip.org/@fin_cadre_thread_forum
 function fin_cadre_thread_forum($return = false){
 	$retour_aff = fin_cadre('thread-forum');
 
@@ -210,6 +230,7 @@ function fin_cadre_thread_forum($return = false){
 	else echo $retour_aff;
 }
 
+// http://doc.spip.org/@debut_cadre_gris_clair
 function debut_cadre_gris_clair($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('gris-clair', $icone, $fonction, $titre);
 
@@ -217,6 +238,7 @@ function debut_cadre_gris_clair($icone='', $return = false, $fonction='', $titre
 	else echo $retour_aff;
 }
 
+// http://doc.spip.org/@fin_cadre_gris_clair
 function fin_cadre_gris_clair($return = false){
 	$retour_aff = fin_cadre('gris-clair');
 
@@ -225,6 +247,7 @@ function fin_cadre_gris_clair($return = false){
 }
 
 
+// http://doc.spip.org/@debut_cadre_couleur
 function debut_cadre_couleur($icone='', $return = false, $fonction='', $titre=''){
 	$retour_aff = debut_cadre('couleur', $icone, $fonction, $titre);
 
@@ -232,6 +255,7 @@ function debut_cadre_couleur($icone='', $return = false, $fonction='', $titre=''
 	else echo $retour_aff;
 }
 
+// http://doc.spip.org/@fin_cadre_couleur
 function fin_cadre_couleur($return = false){
 	$retour_aff = fin_cadre('couleur');
 
@@ -240,6 +264,7 @@ function fin_cadre_couleur($return = false){
 }
 
 
+// http://doc.spip.org/@debut_cadre_couleur_foncee
 function debut_cadre_couleur_foncee($icone='', $return = false, $fonction='', $titre=''){
 	$retour_aff = debut_cadre('couleur-foncee', $icone, $fonction, $titre);
 
@@ -247,6 +272,7 @@ function debut_cadre_couleur_foncee($icone='', $return = false, $fonction='', $t
 	else echo $retour_aff;
 }
 
+// http://doc.spip.org/@fin_cadre_couleur_foncee
 function fin_cadre_couleur_foncee($return = false){
 	$retour_aff = fin_cadre('couleur-foncee');
 
@@ -254,6 +280,7 @@ function fin_cadre_couleur_foncee($return = false){
 	else echo $retour_aff;
 }
 
+// http://doc.spip.org/@debut_cadre_trait_couleur
 function debut_cadre_trait_couleur($icone='', $return = false, $fonction='', $titre=''){
 	$retour_aff = debut_cadre('trait-couleur', $icone, $fonction, $titre);
 
@@ -261,6 +288,7 @@ function debut_cadre_trait_couleur($icone='', $return = false, $fonction='', $ti
 	else echo $retour_aff;
 }
 
+// http://doc.spip.org/@fin_cadre_trait_couleur
 function fin_cadre_trait_couleur($return = false){
 	$retour_aff = fin_cadre('trait-couleur');
 
@@ -273,11 +301,13 @@ function fin_cadre_trait_couleur($return = false){
 //
 // une boite alerte
 //
+// http://doc.spip.org/@debut_boite_alerte
 function debut_boite_alerte() {
 	echo "<p><table cellpadding='6' border='0'><tr><td width='100%' bgcolor='red'>";
 	echo "<table width='100%' cellpadding='12' border='0'><tr><td width='100%' bgcolor='white'>";
 }
 
+// http://doc.spip.org/@fin_boite_alerte
 function fin_boite_alerte() {
 	echo "</td></tr></table>";
 	echo "</td></tr></table>";
@@ -287,11 +317,13 @@ function fin_boite_alerte() {
 //
 // une boite info
 //
+// http://doc.spip.org/@debut_boite_info
 function debut_boite_info($return=false) {
 	$r ="<div class='cadre-info verdana1'>";
 	if ($return) return $r; else echo $r;
 }
 
+// http://doc.spip.org/@fin_boite_info
 function fin_boite_info($return=false) {
 	//echo "</font></td></tr></table></div>\n\n";
 	$r = "</div>";
@@ -301,6 +333,7 @@ function fin_boite_info($return=false) {
 //
 // une autre boite
 //
+// http://doc.spip.org/@bandeau_titre_boite
 function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true) {
 	global $couleur_foncee;
 	if ($boite_importante) {
@@ -326,6 +359,7 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 //
 // une autre boite
 //
+// http://doc.spip.org/@bandeau_titre_boite2
 function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $echo = true) {
 	global $spip_lang_left, $spip_display;
 	
@@ -351,6 +385,7 @@ function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $
 // La boite raccourcis
 //
 
+// http://doc.spip.org/@debut_raccourcis
 function debut_raccourcis() {
 	global $spip_display;
 	echo "<div>&nbsp;</div>";
@@ -366,6 +401,7 @@ function debut_raccourcis() {
 	}
 }
 
+// http://doc.spip.org/@fin_raccourcis
 function fin_raccourcis() {
 	global $spip_display;
 	
@@ -378,6 +414,7 @@ function fin_raccourcis() {
 
 // Afficher un petit "+" pour lien vers autre page
 
+// http://doc.spip.org/@afficher_plus
 function afficher_plus($lien) {
 	global $options, $spip_lang_right, $spip_display, $browser_name;
 	
@@ -397,6 +434,7 @@ function afficher_plus($lien) {
 // Fonctions d'affichage
 //
 
+// http://doc.spip.org/@afficher_liste
 function afficher_liste($largeurs, $table, $styles = '') {
 	global $browser_name, $spip_display, $spip_lang_left;
 
@@ -443,6 +481,7 @@ function afficher_liste($largeurs, $table, $styles = '') {
 	return $res;
 }
 
+// http://doc.spip.org/@afficher_tranches_requete
 function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $javascript=false, $nb_aff = 10) {
 	static $ancre = 0;
 	global $spip_lang_right, $spip_display;
@@ -502,6 +541,7 @@ function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $javascript=fa
 }
 
 
+// http://doc.spip.org/@affiche_tranche_bandeau
 function affiche_tranche_bandeau($requete, $icone, $col, $fg, $bg, $tmp_var, $deb_aff, $titre, $force, $largeurs, $styles, $skel, $own='')
 {
 	global $spip_display ;
@@ -547,18 +587,21 @@ function affiche_tranche_bandeau($requete, $icone, $col, $fg, $bg, $tmp_var, $de
 }
 
 
+// http://doc.spip.org/@afficher_liste_debut_tableau
 function afficher_liste_debut_tableau() {
 	global $spip_display;
 
 	if ($spip_display != 4) return "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 }
 
+// http://doc.spip.org/@afficher_liste_fin_tableau
 function afficher_liste_fin_tableau() {
 	global $spip_display;
 	if ($spip_display != 4) return "</table>";
 }
 
 
+// http://doc.spip.org/@puce_statut_article
 function puce_statut_article($id, $statut, $id_rubrique) {
 	global $spip_lang_left, $dir_lang, $connect_statut, $options;
 	
@@ -617,6 +660,7 @@ function puce_statut_article($id, $statut, $id_rubrique) {
 	return $inser_puce;
 }
 
+// http://doc.spip.org/@puce_statut_breve
 function puce_statut_breve($id, $statut, $type, $droit) {
 	global $spip_lang_left, $dir_lang;
 
@@ -684,6 +728,7 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $title)
 //
 // Afficher tableau d'articles
 //
+// http://doc.spip.org/@afficher_articles
 function afficher_articles($titre_table, $requete, $afficher_visites = false, $afficher_auteurs = true, $obligatoire = false, $afficher_cadre = true, $afficher_descriptif = true) {
 
 	global $connect_id_auteur, $connect_statut, $dir_lang;
@@ -841,6 +886,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	return $tous_id;
 }
 
+// http://doc.spip.org/@afficher_articles_boucle
 function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_langue, $langue_defaut, $voir_logo)
 {
   global $connect_id_auteur, $dir_lang, $options, $spip_lang_right;
@@ -924,6 +970,7 @@ function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_
 }
 
 
+// http://doc.spip.org/@afficher_articles_trad
 function afficher_articles_trad($titre_table, $requete, $afficher_visites = false, $afficher_auteurs = true,
 		$obligatoire = false, $afficher_cadre = true, $afficher_descriptif = true) {
 
@@ -1042,6 +1089,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	return $tous_id;
 }
 
+// http://doc.spip.org/@afficher_articles_trad_boucle
 function afficher_articles_trad_boucle($row, &$tous_id, $afficher_langue, $langue_defaut, $langues_site)
 {
 	global $dir_lang,  $spip_lang_right;
@@ -1129,6 +1177,7 @@ function afficher_articles_trad_boucle($row, &$tous_id, $afficher_langue, $langu
 // Afficher tableau de breves
 //
 
+// http://doc.spip.org/@afficher_breves
 function afficher_breves($titre_table, $requete, $affrub=false) {
 	global  $couleur_foncee, $options;	
  
@@ -1159,6 +1208,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 
 }
 
+// http://doc.spip.org/@afficher_breves_boucle
 function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 {
   global  $dir_lang, $options, $connect_statut, $spip_lang_right;
@@ -1219,6 +1269,7 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 // Afficher tableau de rubriques
 //
 
+// http://doc.spip.org/@afficher_rubriques
 function afficher_rubriques($titre_table, $requete) {
 	global $options;
 
@@ -1230,6 +1281,7 @@ function afficher_rubriques($titre_table, $requete) {
 	return affiche_tranche_bandeau($requete, "rubrique-24.gif", $col, "#999999", "white", $tmp_var, $deb_aff, $titre_table, false, $largeurs, $styles, 'afficher_rubriques_boucle');
 }
 
+// http://doc.spip.org/@afficher_rubriques_boucle
 function afficher_rubriques_boucle($row, &$tous_id)
 {
 	$vals = '';
@@ -1267,6 +1319,7 @@ function afficher_rubriques_boucle($row, &$tous_id)
 //
 // Afficher des auteurs sur requete SQL
 //
+// http://doc.spip.org/@bonhomme_statut
 function bonhomme_statut($row) {
 	global $connect_statut;
 
@@ -1295,6 +1348,7 @@ function bonhomme_statut($row) {
 }
 
 // La couleur du statut
+// http://doc.spip.org/@puce_statut
 function puce_statut($statut, $type='article') {
 	switch ($statut) {
 		case 'publie':
@@ -1311,6 +1365,7 @@ function puce_statut($statut, $type='article') {
 }
 
 
+// http://doc.spip.org/@afficher_auteurs
 function afficher_auteurs ($titre_table, $requete) {
 
 	if (!$requete['SELECT']) $requete['SELECT'] = '*' ;
@@ -1362,6 +1417,7 @@ function afficher_auteurs ($titre_table, $requete) {
 	return $tous_id;
 }
 
+// http://doc.spip.org/@affiche_auteur_boucle
 function affiche_auteur_boucle($row, &$tous_id)
 {
 	$vals = '';
@@ -1383,35 +1439,40 @@ function affiche_auteur_boucle($row, &$tous_id)
 // Afficher les forums
 //
 
+// http://doc.spip.org/@afficher_forum
 function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 	global $spip_display;
 	static $compteur_forum = 0;
 	static $nb_forum = array();
-	static $i = array();
+	static $thread = array();
 
 	$compteur_forum++;
 	$nb_forum[$compteur_forum] = spip_num_rows($request);
-	$i[$compteur_forum] = 1;
+	$thread[$compteur_forum] = 1;
 	
-	if ($spip_display == 4) echo "<ul>";
+	$res = '';
+
+	if ($spip_display == 4) $res .= "<ul>";
  
  	while($row = spip_fetch_array($request)) {
 		$statut=$row['statut'];
-		if ($compteur_forum==1) echo "\n<br /><br />";
+		if ($compteur_forum==1) $res .= "\n<br />";
 		if (($controle_id_article) ? ($statut!="perso") :
 			(($statut=="prive" OR $statut=="privrac" OR $statut=="privadm" OR $statut=="perso")
 			 OR ($statut=="publie" AND $id_parent > 0))) {
 
-			afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $i, $retour, $arg);
-			afficher_forum(spip_query("SELECT * FROM spip_forum WHERE id_parent='" . $row['id_forum'] . "'" . ($controle_id_article ? " AND statut<>'off'" : '') . " ORDER BY date_heure"), $retour, $arg, $controle_id_article);
+			$res .= afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $thread, $retour, $arg)
+			. afficher_forum(spip_query("SELECT * FROM spip_forum WHERE id_parent='" . $row['id_forum'] . "'" . ($controle_id_article ? " AND statut<>'off'" : '') . " ORDER BY date_heure"), $retour, $arg, $controle_id_article);
 		}
-		$i[$compteur_forum]++;
+		$thread[$compteur_forum]++;
 	}
-	if ($spip_display == 4) echo "</ul>";
+	if ($spip_display == 4) $res .= "</ul>";
 	spip_free_result($request);
 	$compteur_forum--;
+	return $res;
 }
 
+// http://doc.spip.org/@afficher_forum_thread
 function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $i, $retour, $arg) {
 	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right, $spip_display;
 	static $voir_logo = array(); // pour ne calculer qu'une fois
@@ -1440,136 +1501,140 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	$ip=$row["ip"];
 	$id_auteur=$row["id_auteur"];
 	
-	echo "<a id='$id_forum'></a>";
-	if ($spip_display != 4) {
-		echo "<table width='100%' cellpadding='0' cellspacing='0' border='0'><tr>";
-		afficher_forum_4($compteur_forum, $nb_forum, $i);
-	}
-	$titre_boite = '';
-	if ($id_auteur AND $voir_logo) {
-		$logo_f = charger_fonction('chercher_logo', 'inc');
-		if ($logo = $logo_f($id_auteur, 'id_auteur', 'on'))
-		  if ($logo = decrire_logo("id_auteur", 'on', $id_auteur, 48, 48, $logo))
-			    $titre_boite = "<div style='$voir_logo'>$$logo</div>" ;
-	} 
+	$res = "<a id='$id_forum'></a>";
 
-	$titre_boite .= typo($titre);
-		
 	if ($spip_display == 4) {
-		echo "<li>".typo($titre)."<br>";
+		$res .= "<li>".typo($titre)."<br>";
 	} else {
+
+		$titre_boite = '';
+		if ($id_auteur AND $voir_logo) {
+			$logo_f = charger_fonction('chercher_logo', 'inc');
+			if ($logo = $logo_f($id_auteur, 'id_auteur', 'on'))
+				if ($logo = decrire_logo("id_auteur", 'on', $id_auteur, 48, 48, $logo))
+					$titre_boite = "<div style='$voir_logo'>$logo</div>" ;
+		} 
+
+		$titre_boite .= typo($titre);
+
+		$res .= "<table width='100%' cellpadding='0' cellspacing='0' border='0'><tr>";
+		$res .= afficher_forum_4($compteur_forum, $nb_forum, $i);
+
 		if ($compteur_forum == 1) 
-			echo afficher_forum_logo($statut, $titre_boite);
-		else echo debut_cadre_thread_forum("", false, "", $titre_boite);
+			$res .= afficher_forum_logo($statut, $titre_boite);
+		else $res .= debut_cadre_thread_forum("", true, "", $titre_boite);
 	}
 			
 	// Si refuse, cadre rouge
 	if ($statut=="off") {
-		echo "<div style='border: 2px dashed red; padding: 5px;'>";
+		$res .= "<div style='border: 2px dashed red; padding: 5px;'>";
 	}
 	// Si propose, cadre jaune
 	else if ($statut=="prop") {
-		echo "<div style='border: 1px solid yellow; padding: 5px;'>";
+		$res .= "<div style='border: 1px solid yellow; padding: 5px;'>";
 	}
 		
-	echo "<span class='arial2'>";
-	//	echo affdate_court($date_heure);
-	//	echo ", ";
-	//	echo heures($date_heure).":".minutes($date_heure);
-	
-	echo date_relative($date_heure);
-	
-	echo "</span> ";
-	
+	$res .= "<span class='arial2'>". date_interface($date_heure) . "</span> ";
+
 	if ($id_auteur)
-		echo "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'>".typo($auteur)."</a>";
+		$res .= "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'>".typo($auteur)."</a>";
 	else if ($email_auteur)
-		echo "<a href='mailto:$email_auteur'>".typo($auteur)."</a>";
-	else	echo typo($auteur);
+		$res .= "<a href='mailto:$email_auteur'>".typo($auteur)."</a>";
+	else	$res .= typo($auteur);
 
 	if ($id_auteur) {
 		$bouton = bouton_imessage($id_auteur);
-		if ($bouton) echo "&nbsp;".$bouton;
+		if ($bouton) $res .= "&nbsp;".$bouton;
 	}
 
 	// boutons de moderation
 	if ($controle_id_article)
-		echo boutons_controle_forum($id_forum, $statut, $id_auteur, "id_article=$id_article", $ip);
+		$res .= boutons_controle_forum($id_forum, $statut, $id_auteur, "id_article=$id_article", $ip);
 
-	echo safehtml(justifier(propre($texte)));
+	$res .= safehtml(justifier(propre($texte)));
 
 	if ($nom_site) {
 		if (strlen($url_site) > 10)
-			echo "<div align='left' class='verdana2'><b><a href='$url_site'>$nom_site</a></b></div>";
-		else echo "<b>$nom_site</b>";
+			$res .= "<div align='left' class='verdana2'><b><a href='$url_site'>$nom_site</a></b></div>";
+		else $res .= "<b>$nom_site</b>";
 	}
 
 	if (!$controle_id_article) {
 	  	$tm = rawurlencode($titre);
-		echo "<div align='right' class='verdana1'>";
-		echo "<b><a href='", generer_url_ecrire("forum_envoi","id_parent=$id_forum&titre_message=$tm&url=" . generer_url_retour($retour, $arg)  .'#formulaire'), 
-		  "'>",
-		  _T('lien_repondre_message'),
-		  "</a></b></div>";
+		$res .= "<div align='right' class='verdana1'>"
+		. "<b><a href='"
+		. generer_url_ecrire("forum_envoi","id_parent=$id_forum&titre_message=$tm&url=" . generer_url_retour($retour, $arg)  .'#formulaire')
+		. "'>"
+		. _T('lien_repondre_message')
+		. "</a></b></div>";
 	}
 
 	if ($GLOBALS['meta']["mots_cles_forums"] == "oui")
-		afficher_forum_mots($id_forum);
+		$res .= afficher_forum_mots($id_forum);
 	
-	if ($statut == "off" OR $statut == "prop") echo "</div>";
+	if ($statut == "off" OR $statut == "prop") $res .= "</div>";
 
 	if ($spip_display != 4) {
-		if ($compteur_forum == 1) echo fin_cadre_forum();
-		else echo fin_cadre_thread_forum();
-		echo "</td></tr></table>\n";
+		if ($compteur_forum == 1) $res .= fin_cadre_forum(true);
+		else $res .= fin_cadre_thread_forum(true);
+		$res .= "</td></tr></table>\n";
 	}
+	return $res;
 }
 
 
+// http://doc.spip.org/@afficher_forum_logo
 function afficher_forum_logo($statut, $titre_boite)
 {
 	if ($statut == "prive") $logo = "forum-interne-24.gif";
 	else if ($statut == "privadm") $logo = "forum-admin-24.gif";
 	else if ($statut == "privrac") $logo = "forum-interne-24.gif";
 	else $logo = "forum-public-24.gif";
-	return debut_cadre_forum($logo, false, "", $titre_boite);
+	return debut_cadre_forum($logo, true, "", $titre_boite);
 }
 
+// http://doc.spip.org/@afficher_forum_mots
 function afficher_forum_mots($id_forum)
 {
-	$result_mots = spip_query("SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
+	$result = spip_query("SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
 
-	echo '<ul>';
-	while ($row_mots = spip_fetch_array($result_mots)) {
-		$id_mot = $row_mots['id_mot'];
-		$titre_mot = propre($row_mots['titre']);
-		$type_mot = propre($row_mots['type']);
-		echo "<li> <b>",$type_mot," :</b> ",$titre_mot, "<li>";
+	$res = '<ul>';
+	while ($row = spip_fetch_array($result)) {
+		$res .= "<li> <b>"
+		. propre($row['titre'])
+		. " :</b> "
+		.  propre($row['type'])
+		.  "<li>";
 	}
-	echo '</ul>';
+	$res .= '</ul>';
+	return $res;
 }
 
 // affiche les traits de liaisons entre les reponses
 
-function afficher_forum_4($compteur_forum, $nb_forum, $i)
+// http://doc.spip.org/@afficher_forum_4
+function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 {
 	global $spip_lang_rtl;
 	$fleche='rien.gif';
-	for ($count=2;$count<=$compteur_forum AND $count<20;$count++){
-		$fond[$count]=_DIR_IMG_PACK . 'rien.gif';
-		if ($i[$count]!=$nb_forum[$count]){
-			$fond[$count]=_DIR_IMG_PACK . 'forum-vert.gif';
+	$res = '';
+	for ($j=2;$j<=$compteur_forum AND $j<20;$j++){
+		$fond[$j]=_DIR_IMG_PACK . 'rien.gif';
+		if ($thread[$j]!=$nb_forum[$j]){
+			$fond[$j]=_DIR_IMG_PACK . 'forum-vert.gif';
 		}
-		echo "<td width='10' valign='top' background=$fond[$count]>";
-		if ($count==$compteur_forum){
+		if ($j==$compteur_forum){
 			$fleche="forum-droite$spip_lang_rtl.gif";
 		}
-		echo http_img_pack($fleche, " ", "width='10' height='13'"), "</td>\n";
+		$res .= "<td width='10' valign='top' background=$fond[$j]>"
+		. http_img_pack($fleche, " ", "width='10' height='13'")
+		. "</td>\n";
 	}
-	echo "\n<td width=100% valign='top'>";
+	return $res . "\n<td width=100% valign='top'>";
 }
 
 
+// http://doc.spip.org/@envoi_link
 function envoi_link($nom_site_spip, $rubrique="") {
 	global $connect_statut, $connect_toutes_rubriques, $spip_display;
 	global $spip_lang, $couleur_claire, $couleur_foncee;
@@ -1591,7 +1656,7 @@ function envoi_link($nom_site_spip, $rubrique="") {
 
 	// CSS calendrier
 	. '<link rel="stylesheet" type="text/css" href="'
-	. find_in_path('calendrier.css') .'" >' . "\n"
+	. find_in_path('agenda.css') .'" >' . "\n"
 
 	// CSS imprimante (masque des trucs, a completer)
 	. '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
@@ -1607,7 +1672,6 @@ function envoi_link($nom_site_spip, $rubrique="") {
 	. '<link rel="shortcut icon" href="'
 	. url_absolue(find_in_path('favicon.ico'))
 	. "\" >\n";
-	
 	$js = debut_javascript($connect_statut == "0minirezo"
 			AND $connect_toutes_rubriques,
 			($GLOBALS['meta']["activer_statistiques"] != 'non'));
@@ -1631,6 +1695,7 @@ function envoi_link($nom_site_spip, $rubrique="") {
 	return $res . $js;
 }
 
+// http://doc.spip.org/@debut_javascript
 function debut_javascript($admin, $stat)
 {
 	global $spip_lang_left, $browser_name, $browser_version;
@@ -1675,12 +1740,14 @@ function debut_javascript($admin, $stat)
 
 // Fonctions onglets
 
+// http://doc.spip.org/@onglet_relief_inter
 function onglet_relief_inter(){
 	
 	echo "<td>&nbsp;</td>";
 	
 }
 
+// http://doc.spip.org/@debut_onglet
 function debut_onglet(){
 
 	echo "\n\n";
@@ -1688,11 +1755,13 @@ function debut_onglet(){
 	echo "<tr>";
 }
 
+// http://doc.spip.org/@fin_onglet
 function fin_onglet(){
 	echo "</tr>";
 	echo "</table></div>\n\n";
 }
 
+// http://doc.spip.org/@onglet
 function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	global $spip_display, $spip_lang_left ;
 
@@ -1735,6 +1804,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	echo "</td>";
 }
 
+// http://doc.spip.org/@barre_onglets
 function barre_onglets($rubrique, $ongletCourant){
 	$onglets= definir_barre_onglets($rubrique);
 	if(count($onglets)==0) return;
@@ -1835,6 +1905,7 @@ function icone_bandeau_principal($detail, $page = "vide", $rubrique = "", $sous_
 
 
 
+// http://doc.spip.org/@icone_bandeau_secondaire
 function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique, $aide=""){
 	global $spip_display;
 	global $menu_accesskey, $compteur_survol;
@@ -1898,6 +1969,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 
 
 
+// http://doc.spip.org/@icone
 function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	global $spip_display, $compteur_survol;
 
@@ -1951,6 +2023,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 		return $icone;
 }
 
+// http://doc.spip.org/@icone_horizontale
 function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = true, $javascript='') {
 	global $spip_display;
 
@@ -2023,6 +2096,7 @@ function bandeau_barre_verticale(){
 
 
 // lien changement de couleur
+// http://doc.spip.org/@lien_change_var
 function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") {
 	$lien = parametre_url($lien, $set, $couleur);
 	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" alt=' ' $mouseOver>";
@@ -2032,6 +2106,7 @@ function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") 
 // Presentation de l'interface privee, debut du HTML
 //
 
+// http://doc.spip.org/@debut_page
 function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $onLoad = "", $css="", $id_rubrique = "") {
 	definir_barre_boutons();
 	init_entete($titre, $rubrique, $css, $onLoad);
@@ -2074,6 +2149,7 @@ function init_entete($titre, $rubrique, $css='',$onLoad = '') {
 }
 
 // fonction envoyant la double serie d'icones de redac
+// http://doc.spip.org/@init_body
 function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $id_rubrique='') {
 	global $couleur_foncee, $couleur_claire, $adresse_site;
 	global $connect_id_auteur;
@@ -2141,6 +2217,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 }
 
 
+// http://doc.spip.org/@debut_corps_page
 function debut_corps_page($rubrique='') {
 	global $couleur_foncee;
 	global $connect_id_auteur;
@@ -2193,6 +2270,7 @@ function debut_corps_page($rubrique='') {
 }
 
 
+// http://doc.spip.org/@gros_titre
 function gros_titre($titre, $ze_logo='', $aff=true){
 	global $couleur_foncee, $spip_display;
 	if ($spip_display == 4) {
@@ -2212,6 +2290,7 @@ function gros_titre($titre, $ze_logo='', $aff=true){
 // Cadre centre (haut de page)
 //
 
+// http://doc.spip.org/@debut_grand_cadre
 function debut_grand_cadre(){
 	global $spip_ecran;
 	
@@ -2223,18 +2302,21 @@ function debut_grand_cadre(){
 
 }
 
+// http://doc.spip.org/@fin_grand_cadre
 function fin_grand_cadre(){
 	echo "\n</td></tr></table>";
 }
 
 // Cadre formulaires
 
+// http://doc.spip.org/@debut_cadre_formulaire
 function debut_cadre_formulaire($style=''){
 	echo "\n<div class='cadre-formulaire'" .
 	  (!$style ? "" : " style='$style'") .
 	   ">";
 }
 
+// http://doc.spip.org/@fin_cadre_formulaire
 function fin_cadre_formulaire(){
 	echo "</div>\n";
 }
@@ -2245,6 +2327,7 @@ function fin_cadre_formulaire(){
 // Debut de la colonne de gauche
 //
 
+// http://doc.spip.org/@debut_gauche
 function debut_gauche($rubrique = "accueil") {
 	global $connect_statut;
 	global $options, $spip_display;
@@ -2288,6 +2371,7 @@ function debut_gauche($rubrique = "accueil") {
 // Presentation de l''interface privee, marge de droite
 //
 
+// http://doc.spip.org/@creer_colonne_droite
 function creer_colonne_droite($rubrique=""){
 	global $deja_colonne_droite;
 	global $flag_3_colonnes, $flag_centre_large;
@@ -2315,6 +2399,7 @@ function creer_colonne_droite($rubrique=""){
 
 }
 
+// http://doc.spip.org/@debut_droite
 function debut_droite($rubrique="") {
 	global $options, $spip_ecran, $deja_colonne_droite, $spip_display;
 	global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques;
@@ -2349,14 +2434,11 @@ function debut_droite($rubrique="") {
 					
 					echo "<div class='$statut'><a style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$ze_article") . "'>$ze_titre</a>";
 
-					if ($ze_article != $GLOBALS['id_article_bloque']) {
-						$nb_liberer ++;
-						echo "<div style='text-align:right; font-size: 9px;'>", debloquer_article($ze_article,_T('lien_liberer')), "</div>";
-					}
+					$nb_liberer ++;
+					echo "<div style='text-align:right; font-size: 9px;'>", debloquer_article($ze_article,_T('lien_liberer')), "</div>";
 
-					echo "</div>";	
-						
-				
+					echo "</div>";
+
 				}
 				echo "</div></div>";
 			}
@@ -2393,6 +2475,7 @@ function debut_droite($rubrique="") {
 // Presentation de l'interface privee, fin de page et flush()
 //
 
+// http://doc.spip.org/@fin_html
 function fin_html() {
 
 	echo "</font>", $GLOBALS['rejoue_session'];
@@ -2406,6 +2489,7 @@ function fin_html() {
 }
 
 
+// http://doc.spip.org/@fin_page
 function fin_page($credits='') {
 	global $spip_display;
 
@@ -2432,6 +2516,7 @@ function fin_page($credits='') {
 	fin_html();
 }
 
+// http://doc.spip.org/@debloquer_article
 function debloquer_article($arg, $texte) {
 	$lien = parametre_url(self(), 'debloquer_article', $arg, '&');
 	return "<a href='" .
@@ -2448,6 +2533,7 @@ function debloquer_article($arg, $texte) {
 // Afficher la hierarchie des rubriques
 //
 
+// http://doc.spip.org/@afficher_hierarchie
 function afficher_hierarchie($id_rubrique, $parents="") {
 	global $spip_lang_left;
 
@@ -2488,6 +2574,7 @@ function afficher_hierarchie($id_rubrique, $parents="") {
 }
 
 // Pour construire des menu avec SELECTED
+// http://doc.spip.org/@mySel
 function mySel($varaut,$variable, $option = NULL) {
 	$res = ' value="'.$varaut.'"' . (($variable==$varaut) ? ' selected="selected"' : '');
 
@@ -2496,6 +2583,7 @@ function mySel($varaut,$variable, $option = NULL) {
 
 
 // Voir en ligne, ou apercu, ou rien (renvoie tout le bloc)
+// http://doc.spip.org/@voir_en_ligne
 function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 	global $connect_statut;
 
@@ -2549,6 +2637,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 
 //
 // Creer un bouton qui renvoie vers la bonne url spip_rss
+// http://doc.spip.org/@bouton_spip_rss
 function bouton_spip_rss($op, $args, $fmt='rss') {
 
 	include_spip('inc/acces');
@@ -2590,6 +2679,7 @@ function bouton_spip_rss($op, $args, $fmt='rss') {
 
 // Fonction pour la messagerie et la page d'accueil
 
+// http://doc.spip.org/@http_calendrier_rv
 function http_calendrier_rv($messages, $type) {
 	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 

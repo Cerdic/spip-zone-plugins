@@ -221,7 +221,7 @@ float:left;
 * html #bandeau_couleur4 .menu-item{margin:0 11px} 
 #bandeau_couleur5 .menu-item {width:114px;}
 #bandeau_couleur6 .menu-item {width:32px}
-* html #bandeau_couleur6 .menu-item {margin-left:-3px;margin-right:-6px}
+* html #bandeau_couleur6 .menu-item {margin-[(#ENV{ltr}|choixsiegal{left,left,right})]:-3px;margin-[(#ENV{ltr}|choixsiegal{left,right,left})]:-6px}
 /*style for submenus*/
 .bandeau_sec {
 	margin-top: 0;
@@ -336,13 +336,13 @@ a.h-icon {display:table;height:30px}
 }
 * html .h-icon-cell {display:inline-block;padding-left:30px;}
 .h-icon-cell-ie {display:table-cell;vertical-align:middle;width:28px;height:28px;border: 1px solid transparent}
-* html .h-icon-cell-ie {display:inline-block;vertical-align:middle;height:100%;width:28px;margin-right:-28px}
+* html .h-icon-cell-ie {display:inline-block;vertical-align:middle;height:100%;width:28px;margin-[(#ENV{ltr}|choixsiegal{right,left,right})]:-28px}
 a.h-icon .h-icon-cell-fond {
 	background: 2px center no-repeat;
 	height:30px;width:30px;
 	display:block;
 }
-* html a.h-icon .h-icon-cell-fond {display:inline-block;margin-right:-30px;}
+* html a.h-icon .h-icon-cell-fond {display:inline-block;margin-[(#ENV{ltr}|choixsiegal{right,left,right})]:-30px;}
 a.h-icon:hover .h-icon-cell-ie {
 	background:url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=fond-gris-anim.gif);
 	border: 1px solid ##ENV{couleur_foncee,edf3fe};

@@ -1,12 +1,10 @@
 var memo_obj = new Array();
 var url_chargee = new Array();
-var xmlhttp = new Array();
-var image_search = new Array();
 
 function findObj_test_forcer(n, forcer) { 
 	var p,i,x;
 
-	// Voir si on n'a pas deja memoriser cet element
+	// Voir si on n'a pas deja memorise cet element
 	if (memo_obj[n] && !forcer) {
 		return memo_obj[n];
 	}
@@ -52,7 +50,6 @@ function jquerySwapCouche() {
 	for(id in ids) $('#Layer'+ids[id]).toggle();
 	this.src = this.src.search(/bas\.gif$/)==-1 ? this.src.replace(/haut(_rtl)?\.gif$/,'bas.gif'): this.src.replace(/bas\.gif$/,'haut'+dir+'.gif'); 
 }
-
 function ouvrir_couche(couche, rtl,dir) {
 	var layer;
 	var triangle = findObj('triangle' + couche);
@@ -113,7 +110,32 @@ function aff_selection (type, rac, id) {
 	
 	findObj_forcer(rac+"_selection").style.display = "none";
 	
-	charger_id_url("./?exec=informer&var_ajax=1&type="+type+"&id="+id+"&rac="+rac, rac+"_selection");
+	charger_id_url("./?exec=informer&type="+type+"&id="+id+"&rac="+rac, rac+"_selection");
+}
+
+// selecteur de rubrique et affichage de son titre dans le bandeau
+
+function aff_selection_titre(titre, id_rubrique, racine, url, col, sens)
+{
+	findObj('titreparent').value=titre;
+	findObj('id_parent').value=id_rubrique;
+	findObj('selection_rubrique').style.display='none';
+	return aff_selection_provisoire(id_rubrique, racine, url, col, sens);
+}
+
+function aff_selection_provisoire(id_rubrique, racine, url, col, sens)
+{
+    charger_id_url(url.href,
+		   racine + '_col_' + (col+1),
+		   function() {
+		     slide_horizontal(racine + 'principal', ((col-1)*150), sens);
+  // afficher le descriptif de la rubrique dans la div du dessous?
+  // si trop lent, commenter la ligne ci-dessous
+		     aff_selection('rubrique',racine,id_rubrique);
+		   }
+		   );
+  // empecher le chargement non Ajax
+  return false;
 }
 
 //
@@ -153,10 +175,12 @@ function ajahReady(xhr, f) {
 }
 */
 
-// Si Ajax est disponible, cette fonction envoie la requete en Ajax.
+// Si Ajax est disponible, cette fonction l'utilise pour envoyer la requete.
 // Si le premier argument n'est pas une url, ce doit etre un formulaire.
-// Le deuxieme argument doit etre l'ID du noeud a affecter avec la reponse.
-// En cas de formulaire, la fonction retourne False pour empecher son envoi
+// Le deuxieme argument doit etre l'ID d'un noeud qu'on animera pendant Ajax.
+// Le troisieme, optionnel, est la fonction traitant la réponse.
+// La fonction par defaut affecte le noeud ci-dessus avec la reponse Ajax.
+// En cas de formulaire, AjaxSqueeze retourne False pour empecher son envoi
 // Le cas True ne devrait pas se produire car le cookie spip_accepte_ajax
 // a du anticiper la situation.
 // Toutefois il y toujours un coup de retard dans la pose d'un cookie:
@@ -168,7 +192,7 @@ function AjaxSqueeze(trig, id, callback, img)
 	callback = callback || function(){};
 	//needs a better way to display error to the user
 	if(trig.constructor == String) {
-		reqObj = $('#'+id).imgOn(img).load(trig,function(res,status){
+		reqObj = $('#'+id).imgOn(img).load(trig+"&var_ajaxcharset=utf-8",function(res,status){
 			imgOff(reqObj);
 			if(status=='error') this.html('Erreur HTTP');
 			callback(res,status);
@@ -190,7 +214,7 @@ function AjaxSqueeze(trig, id, callback, img)
 jQuery.fn.imgOn = function(img) { 
 		if(img) this.ajaxImg = $('#'+img).css('visibility','visible');
 		else this.prepend(ajax_image_searching);
-		return this 
+		return this;
 	} 	
 imgOff = function(reqObj) {
 	if(reqObj.ajaxImg) reqObj.ajaxImg.css('visibility','hidden');
@@ -200,46 +224,37 @@ imgOff = function(reqObj) {
 
 function charger_id_url(myUrl, myField, jjscript) 
 {
-	var Field = findObj_forcer(myField); // selects the given element
+	var Field = findObj_forcer(myField);
 	if (!Field) return;
 
-	if (xmlhttp[myField]) xmlhttp[myField].abort();
-
-	if (url_chargee['mem_'+myUrl]) {
-		Field.innerHTML = url_chargee['mem_'+myUrl];
-		Field.style.visibility = "visible";
-		Field.style.display = "block";
-		$('a.ajax',Field).click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
-		if(jjscript) eval(jjscript);
-	} else {
-		image_search[myField] = findObj_forcer('img_'+myField);
-		if (image_search[myField]) image_search[myField].style.visibility = "visible";
-
-
-		if (!(xmlhttp[myField] = createXmlHttp())) return false;
-		xmlhttp[myField].open("GET", myUrl, true);
-		// traiter la reponse du serveur
-		xmlhttp[myField].onreadystatechange = function() {
-			if (xmlhttp[myField].readyState == 4) { 
-				// si elle est non vide, l'afficher
-				if (xmlhttp[myField].responseText != '') {
-					Field.innerHTML = xmlhttp[myField].responseText;
-					$('a.ajax',Field).click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
-					url_chargee['mem_'+myUrl] = Field.innerHTML;
-				
-					Field.style.visibility = "visible";
-					Field.style.display = "block";
-					if (image_search[myField]) {
-						image_search[myField].style.visibility = "hidden";
-					}
-					if(jjscript) eval(jjscript);
-				} else {
-					charger_id_url(myUrl, myField, jjscript);
-				}
+	if (!myUrl) 
+		retour_id_url('', Field, jjscript);
+	else {
+	  var r = url_chargee[myUrl];
+	// disponible en cache ?
+	  if (r) {
+		retour_id_url(r, Field, jjscript);
+	  } else {
+		var img = findObj_forcer('img_' + myField);
+		if (img) img.style.visibility = "visible";
+		AjaxSqueezeNode(myUrl,
+			'',
+			function (r) {
+				if (img) img.style.visibility = "hidden";
+				url_chargee[myUrl] = r;
+				retour_id_url(r, Field, jjscript);
 			}
-		}
-		xmlhttp[myField].send(null); 
+		     )
+		  }
 	}
+}
+
+function retour_id_url(r, Field, jjscript)
+{
+	Field.innerHTML = r;
+	Field.style.visibility = "visible";
+	Field.style.display = "block";
+	if (jjscript) jjscript();
 }
 
 // ne sert que pour selecteur_rubrique_ajax() dans inc/chercher_rubrique.php
