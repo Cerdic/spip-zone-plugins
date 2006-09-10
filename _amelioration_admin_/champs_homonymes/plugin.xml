@@ -29,7 +29,7 @@ _ SPIP 1.9.2 alpha SVN [7334]
 	Ce plugin ne modifie aucune table ni ne crée aucun champ extra.
 _ Ces modifications restent à votre discretion.
 _ Les détails de son utilisation sont décrits ici: 
-_ <a href="http://monsitespip.com/spip.php?article17" target="_blank">Gestion des nouveaux champs dans les tables SPIP par les champs extra : champs homonymes</a>
+_ <a href="http://monsitespip.com/spip.php?article7" target="_blank">Gestion des nouveaux champs dans les tables SPIP par les champs extra : champs homonymes</a>
 _ Merci de nous signaler son bon fonctionnement ou non sur le forum lié à cet article.
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
