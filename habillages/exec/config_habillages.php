@@ -167,7 +167,7 @@ function exec_config_habillages() {
 	 		echo "checked";
  		}
  	echo ">";
- 	echo "Revenir &agrave; l'habillage d'origine";
+ 	echo "<strong>Revenir &agrave; l'habillage d'origine</strong>";
  	echo "<br />";
  	
  	$dossier = opendir (_DIR_PLUGIN_HABILLAGES.'/prive/themes/');
@@ -198,8 +198,8 @@ function exec_config_habillages() {
 			$search_theme_name = eregi("<auteur>(.*)</auteur>", $read_theme_file, $theme_author);
 			$search_theme_name = eregi("<version>(.*)</version>", $read_theme_file, $theme_version);
 			$search_theme_name = eregi("<description>(.*)</description>", $read_theme_file, $theme_description);
-			echo '<strong>'.$theme_name[1].'</strong> version '.$theme_version[1].' (Auteur : '.$theme_author[1].')<br />';
-			echo $theme_description[1];
+			echo '<strong>'.$theme_name[1].'</strong> version '.$theme_version[1].'<br /><i><medium>Auteur : '.$theme_author[1].'</medium></i><br />';
+			echo '<small>'.$theme_description[1].'</small>';
         	echo "<BR />";
         	fclose($open_theme_file);
     		}
@@ -252,7 +252,7 @@ debut_cadre_trait_couleur("", false, "", _T('habillageprive:titre_habillage_publ
 	 		echo "checked";
  		}
  	echo ">";
- 	echo "Revenir &agrave; l'habillage d'origine";
+ 	echo "<strong>Revenir &agrave; l'habillage d'origine</strong>";
  	echo "<br />";
  	
  	$dossier = opendir ($plugin_directory.'/public/themes/');
@@ -285,8 +285,8 @@ debut_cadre_trait_couleur("", false, "", _T('habillageprive:titre_habillage_publ
 			$search_theme_name = eregi("<auteur>(.*)</auteur>", $read_theme_file, $theme_author);
 			$search_theme_name = eregi("<version>(.*)</version>", $read_theme_file, $theme_version);
 			$search_theme_name = eregi("<description>(.*)</description>", $read_theme_file, $theme_description);
-			echo '<strong>'.$theme_name[1].'</strong> version '.$theme_version[1].' (Auteur : '.$theme_author[1].')<br />';
-			echo $theme_description[1];
+			echo '<strong>'.$theme_name[1].'</strong> version '.$theme_version[1].'<br /><i><medium>Auteur : '.$theme_author[1].'</medium></i><br />';
+			echo '<small>'.$theme_description[1].'</small>';
         	echo "<BR />";
         	fclose($open_theme_file);
     		}

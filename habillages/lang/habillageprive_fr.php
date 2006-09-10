@@ -3,7 +3,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page' => 'Configuration des habillages de votre site',
 	'gros_titre' => 'Configuration des habillages de votre site',
-   	'help' => 'Choisissez l\'habillage plus validez. Pour l\'habillage de l\'espace priv&eacute;, il faut cliquer deux fois sur "valider" pour voir le nouveau jeu d\'ic&ocirc;nes remplacer l\'ancien. Sinon vous verrez le nouveau jeu d\'ic&ocirc;nes au prochain clic dans l\'espace priv&eacute;.
+   	'help' => 'Choisissez l\'habillage puis validez. Pour l\'habillage de l\'espace priv&eacute;, il faut cliquer deux fois sur "valider" pour voir le nouveau jeu d\'ic&ocirc;nes remplacer l\'ancien. Sinon vous verrez le nouveau jeu d\'ic&ocirc;nes au prochain clic dans l\'espace priv&eacute;.
 
 {{Pensez &agrave; bien cocher "Revenir &agrave; l\'habillage d\'origine" pour effacer tout effet du plugin sur vos fichiers.}}
 
