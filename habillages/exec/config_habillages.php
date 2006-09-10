@@ -237,14 +237,14 @@ debut_cadre_trait_couleur("", false, "", _T('habillageprive:titre_habillage_publ
 		fclose($open_plugin_options_file);
 	}
 	
-	else if ($squelette == "") {
-		$open_plugin_options_file = fopen($plugin_options_file, 'r');
-		$plugin_options_file_size = filesize ($plugin_options_file);
-		$read_options_file = fread ($open_plugin_options_file, $plugin_options_file_size);
-		$search_skel_name = eregi("\$GLOBALS\[\'dossier_squelettes\'\]\=$clean_path\.\'\/public\/themes\/(.*)\/squelettes\'\;", $read_options_file, $skel_name);
-		echo $skel_name[1];
-		fclose($open_plugin_options_file);
-	}
+// 	else if ($squelette == "") {
+// 		$cleaned_path = str_replace('../', "", _DIR_PLUGIN_HABILLAGES);
+// 		$open_plugin_options_file = fopen($plugin_options_file, 'r');
+// 		$plugin_options_file_size = filesize ($plugin_options_file);
+// 		$read_options_file = fread ($open_plugin_options_file, $plugin_options_file_size);
+// 		$search_skel_name = eregi("\$GLOBALS\[\'dossier_squelettes\'\]\=$cleaned_path\.\'\/public\/themes\/(.*)\/squelettes\'\;", $read_options_file, $skel_name);
+// 		fclose($open_plugin_options_file);
+// 	}
 	
  	echo '<INPUT type=radio name="squelette" value="initial"';
  		if ($_REQUEST['squelette'] == "initial") {
@@ -259,10 +259,12 @@ debut_cadre_trait_couleur("", false, "", _T('habillageprive:titre_habillage_publ
     	if ($fichier != "." && $fichier != "..") {
 	    	echo '<INPUT type=radio name="squelette" value="'.$fichier.'"';
 	    	if ($_REQUEST['squelette'] == "") {
+		    	$cleaned_path = str_replace('../', "", _DIR_PLUGIN_HABILLAGES);
+		    	$plugin_options_file = "$plugin_directory/habillages_options.php";
 		    	$open_plugin_options_file = fopen($plugin_options_file, 'r');
 				$plugin_options_file_size = filesize ($plugin_options_file);
 				$read_plugin_options_file = fread ($open_plugin_options_file, $plugin_options_file_size);
-				$search_skel_name = eregi("\$GLOBALS\[\'dossier_squelettes\'\]\=$clean_path\.\'\/public\/themes\/(.*)\/squelettes\'\;", $read_plugin_options_file, $skel_name);
+				$search_skel_name = eregi("\/public\/themes\/(.*)\/squelettes", $read_plugin_options_file, $skel_name);
 				if ($skel_name[1] == $fichier) {
 		    	echo " checked";
 	    		}
@@ -289,7 +291,7 @@ debut_cadre_trait_couleur("", false, "", _T('habillageprive:titre_habillage_publ
     		}
     		
     		else {
-	    		echo $fichier.'<br />';
+	    		echo '<strong>'.$fichier.'</strong><br />';
     		}
     	}
 	}
