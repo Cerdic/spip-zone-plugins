@@ -205,7 +205,7 @@ function exec_config_habillages() {
     		}
     		
     		else {
-	    		echo $fichier.'<br />';
+	    		echo '<strong>'.$fichier.'</strong><br />';
     		}
     	}
 	}
