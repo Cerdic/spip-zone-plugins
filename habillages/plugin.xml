@@ -31,4 +31,9 @@ Vous configurez les habillages en cliquant sur "Configuration", puis sur "Habill
 		<nom>ajouter_onglets</nom>
 		<inclure>habillages.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>header_prive</action>
+		<inclure>habillages.php</inclure>
+	</pipeline>
 </plugin>
