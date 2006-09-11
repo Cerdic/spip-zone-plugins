@@ -39,7 +39,7 @@ width:auto;
 h4.spip{margin:0;padding:0}                   
 
 .horizontal ol,.vertical ol{margin:0;
-
+list-style-position:inside;
 }
 .horizontal >ol, .vertical > ol{list-style-position:outside;}
 
