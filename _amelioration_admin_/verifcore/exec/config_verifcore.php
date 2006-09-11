@@ -111,8 +111,8 @@ function exec_config_verifcore() {
     echo "Attention le fichier http://zone.spip.org/trac/spip-zone/browser/_plugins_/_amelioration_admin_/verifcore/refcorespip191.txt?format=txt n\'existe plus\n<br />" ;
     echo "Contactez auteur du plugin rudjob chez gmail.com" ;
   }
-  echo "Vous avez la possibiliteacute; de chercher tous les fichiers d'extension php3 qui se trouve sur votre serveur<br />" ;
-  echo "En effet depuis spip 1.9 les fichiers php3 sont devenus obsolètes mis &agrave;  part inc-public.php3 &agrace; la racine de votre site<br />" ;
+  echo "Vous avez la possibilit&eacute; de chercher tous les fichiers d'extension php3 qui se trouve sur votre serveur<br />" ;
+  echo "En effet depuis spip 1.9 les fichiers php3 sont devenus obsol&egrave;tes mis &agrave;  part inc-public.php3 &agrave; la racine de votre site<br />" ;
   echo "Pour avoir la liste de tous ces fichiers cliquez sur le lien suivant <a href=\"".generer_url_ecrire("verifcore_cherche_php3")."\" > cherche le php3 </a>" ;
   fin_cadre_enfonce();
 

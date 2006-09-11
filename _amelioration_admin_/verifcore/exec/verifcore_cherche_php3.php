@@ -17,21 +17,23 @@ function exec_verifcore_cherche_php3() {
   
   debut_droite();	
   debut_cadre_enfonce();
-  
-
 	
   $cwd = getcwd();
   chdir (_DIR_RACINE) ; 
   global $verifcore_fichierphp3 ;
-    $verifcore_fichierphp3    = array () ;
+  $verifcore_fichierphp3    = array () ;
   explorateur_php3(".") ;
   if( count($verifcore_fichierphp3) != 0){
-    echo "Pour info lesfichiers  en extension php3 sont :\n<ul>" ;
+    echo "Depuis spip 1.9, les fichiers php3 ont disparu du coeur de spip (mis &agrave; part inc-public.html) c'est pourquoi je vous propose de lister les fichiers php3 qui vous reste sur votre serveur.<br />\n" ;
+    echo "Suivez les conseils de l'article  <a href=\"http://www.spip.net/fr_article3370.html\" >la migration vers spip 1.9 de spip.net</a><br /> " ;
+    echo "Voici la liste des fichiers php3 : <br />\n" ;
     foreach ($verifcore_fichierphp3 as $file){
       echo "<li>$file</li>\n" ;
     }
     echo "</ul>\n" ;
-  } 
+  } else {
+    echo "Il n\' y a aucun fichier php3\n" ;
+  }
   fin_cadre_enfonce();
 
   chdir ($cwd) ;
