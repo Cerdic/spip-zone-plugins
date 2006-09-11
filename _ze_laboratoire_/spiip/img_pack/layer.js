@@ -175,6 +175,33 @@ function ajahReady(xhr, f) {
 }
 */
 
+//call information is inside the link id
+//id='var1:val1:var2:val2--dest_el'
+//params are separated by --
+//param 0 = arguments of exec (pairs of name, value separated by : )
+//param 1 = id of the receiving element
+function execAjaxLinks() {
+			var params = this.id.split('--');
+			var url = './?';
+			//var url = './?exec='+params[0]';
+			var args = params[0].split(':');
+			for(var i=0;i<args.length;i+=2) {
+				url += args[i]+'='+args[i+1]+'&';
+			}
+			if(url_chargee['mem_'+url]) {
+				$('#'+params[1]).html(url_chargee['mem_'+url]).
+				find('a.ajax').click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
+				return false;
+			}
+			//console.log("%o %o",url,params[1]);
+			return AjaxSqueeze(url,params[1],function(res,status){
+				if(status=='success') {
+					url_chargee['mem_'+url]=res;
+					$('a.ajax',this).click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
+				}
+			});
+}
+
 // Si Ajax est disponible, cette fonction l'utilise pour envoyer la requete.
 // Si le premier argument n'est pas une url, ce doit etre un formulaire.
 // Le deuxieme argument doit etre l'ID d'un noeud qu'on animera pendant Ajax.
@@ -186,20 +213,21 @@ function ajahReady(xhr, f) {
 // Toutefois il y toujours un coup de retard dans la pose d'un cookie:
 // eviter de se loger avec redirection vers un telle page
 
-function AjaxSqueeze(trig, id, callback, img)
+function AjaxSqueeze(trig, id, callback)
 {
 	var reqObj;
+	//console.log("%o %o",trig,id);
 	callback = callback || function(){};
 	//needs a better way to display error to the user
 	if(trig.constructor == String) {
-		reqObj = $('#'+id).imgOn(img).load(trig+"&var_ajaxcharset=utf-8",function(res,status){
+		reqObj = $('#'+id).imgOn().load(trig+"&var_ajaxcharset=utf-8",function(res,status){
 			imgOff(reqObj);
 			if(status=='error') this.html('Erreur HTTP');
 			callback(res,status);
 		});
 	} else {
 		//submit a form. Uses form plugin
-		reqObj = $(trig).imgOn(img).ajaxSubmit('#'+id,function(res,status){
+		reqObj = $(trig).imgOn().ajaxSubmit('#'+id,function(res,status){
 			if(status=='success' && browser_verifForm) verifForm(this);
 			if(status=='error') this.html('Erreur HTTP');
 			imgOff(reqObj);
@@ -211,8 +239,10 @@ function AjaxSqueeze(trig, id, callback, img)
 
 //jQuery helper function to show and hide an image as the first children of a jQuery object
 //if no id is passed or the image with the id specified 
-jQuery.fn.imgOn = function(img) { 
-		if(img) this.ajaxImg = $('#'+img).css('visibility','visible');
+jQuery.fn.imgOn = function() {
+		//console.log("%o",this[0].id);
+		var img = $('#img_'+this[0].id);
+		if(img.is('img')) this.ajaxImg = img.css('visibility','visible');
 		else this.prepend(ajax_image_searching);
 		return this;
 	} 	

@@ -43,32 +43,6 @@ function decalerCouche() {
 	if(jQuery.browser.safari)$('>:first-child',this).css('height',b.offsetHeight-6+'px');
 }
 
-//call information is inside the link id
-//id='page--var1:val1:var2:val2--dest_el'
-//params are separated by --
-//param 0 = page to exec
-//param 1 = arguments of exec (pairs of name, value separated by : )
-//param 2 = id of the receiving element
-function execAjaxLinks() {
-			var params = this.id.split('--');
-			var url = './?exec='+params[0]+'&var_ajax=1';
-			var args = params[1].split(':');
-			for(var i=0;i<args.length;i+=2) {
-				url += '&'+args[i]+'='+args[i+1];
-			}
-			if(url_chargee['mem_'+url]) {
-				$('#'+params[2]).html(url_chargee['mem_'+url]).
-				find('a.ajax').click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
-				return false;
-			}
-			return AjaxSqueeze(url,params[2],function(res,status){
-				if(status=='success') {
-					url_chargee['mem_'+url]=res;
-					$('a.ajax',this).click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
-				}
-			},'img_'+params[2]);
-}
-
 var accepter_change_statut;
 
 function selec_statut(id, type, decal, puce, script) {

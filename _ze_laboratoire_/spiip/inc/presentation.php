@@ -793,7 +793,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	$tmp_var = substr($hash, 2, 6);
 	//$javascript = "charger_id_url('" . generer_url_ecrire('memoriser',"&var_ajax=1&id_ajax_fonc=::id_ajax_fonc::::deb::", true) . "','$tmp_var')";
-	$javascript = "memoriser--id_ajax_fonc:::id_ajax_fonc:::::deb::--$tmp_var";
+	$javascript = "exec:memoriser:id_ajax_fonc:::id_ajax_fonc:::::deb::--$tmp_var";
 	
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 	$tous_id = array();
@@ -833,7 +833,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			if ($afficher_trad) {
 				$texte_img .= http_img_pack("searching.gif", "*", "style='visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
-				$texte_img .= "<div style='float: $spip_lang_right;'><a class='ajax' id='memoriser--id_ajax_fonc:$id_ajax_trad--$div_trad' style='visibility:hidden'><img src='". _DIR_IMG_PACK . "langues-12.gif' /></a></div>";
+				$texte_img .= "<div style='float: $spip_lang_right;'><a class='ajax' id='exec:memoriser:id_ajax_fonc:$id_ajax_trad--$div_trad' style='visibility:hidden'><img src='". _DIR_IMG_PACK . "langues-12.gif' /></a></div>";
 			}
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -1025,7 +1025,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 	$tmp_var = substr($hash, 2, 6);	
 	//$javascript = "charger_id_url('" . generer_url_ecrire('memoriser', '&var_ajax=1&id_ajax_fonc=::id_ajax_fonc::::deb::') . "','$tmp_var')";
-	$javascript = "memoriser--id_ajax_fonc:::id_ajax_fonc:::::deb::--$tmp_var";
+	$javascript = "exec:memoriser:id_ajax_fonc:::id_ajax_fonc:::::deb::--$tmp_var";
 
 	$tous_id = array();
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
@@ -1058,7 +1058,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			
 			$texte_img .= http_img_pack("searching.gif", "*", "style='visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
 
-			$texte_img .= "<div style='float: $spip_lang_right;'><a class='ajax' id='memoriser--id_ajax_fonc:$id_ajax_trad--$div_trad' style='visibility:hidden'><img src='". _DIR_IMG_PACK . "langues-off-12.gif' /></a></div>";
+			$texte_img .= "<div style='float: $spip_lang_right;'><a class='ajax' id='exec:memoriser:id_ajax_fonc:$id_ajax_trad--$div_trad' style='visibility:hidden'><img src='". _DIR_IMG_PACK . "langues-off-12.gif' /></a></div>";
 
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -2031,7 +2031,12 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 	global $spip_display;
 
 	$retour = '';
-
+	// cas d'ajax_action_auteur: faut defaire le boulot 
+	// (il faudrait fusionner avec le cas $javascript)
+	if (preg_match(",^<a href='([^']*)'([^>]*)>(.*)</a>$,i",$lien,$r))
+	  list($x,$lien,$atts,$texte)= $r;
+	else $atts = '';
+	$lien = " href='$lien'$atts";
 
 	if ($spip_display != 4) {
 		//if (!$fonction) $fonction = "rien.gif";
@@ -2051,12 +2056,12 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 			$retour .= "<span class='h-icon-cell'>$texte</span></span></a>";
 		}
 		else {
-			$retour .= "<a href='$lien' class='cellule-h-texte' $javascript><div>$texte</div></a>\n";
+			$retour .= "<a $lien class='cellule-h-texte' $javascript><div>$texte</div></a>\n";
 		}
 		if ($fonction == "supprimer.gif")
 			$retour = "<div class='danger'>$retour</div>";
 	} else {
-		$retour = "<li><a href='$lien'>$texte</a></li>";
+		$retour = "<li><a $lien>$texte</a></li>";
 	}
 
 	if ($echo) echo $retour;
@@ -2074,7 +2079,9 @@ function png2gif($im,$format) {
 		
 		$im_ = imagecreatetruecolor($image["largeur"],$image["hauteur"]);
 		imageantialias($im_,true);
-		$transp = imagecolorallocate ($im_,255,0,0);
+		//must use a color not present in the final image as the transparent one
+		//I've put just a random one, sorry
+		$transp = imagecolorallocate ($im_,37,29,78);
 		imagefill($im_,0,0,$transp);
 		imagecolortransparent($im_,$transp);
 		imagecopy($im_,$im,0,0,0,0,$image["largeur"],$image["hauteur"]);
