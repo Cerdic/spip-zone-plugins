@@ -53,7 +53,7 @@ function exec_config_habillages() {
 #### DEBUT DE L'ENCADRE QUI GERE L'HABILLAGE PRIVE ######################################
 	debut_cadre_trait_couleur("", false, "", _T('habillageprive:titre_habillage_prive'));
 
-		
+	echo "<small><strong>Attention, si vous utilisez d'autres plugins, certaines icones peuvent ne pas apparaitre pour l'instant.</strong></small><br />";
  	echo '<form action="'.generer_url_ecrire('config_habillages').'" method="post">';
  	
  	// Debut des manipulations de mes_options.php. Le fichier mes_options sert de 
