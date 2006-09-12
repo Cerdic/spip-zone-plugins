@@ -82,12 +82,12 @@ function exec_config_habillages() {
 	 		# ... et reagir en fonction de ce qui est trouve dans mes_options.php.
 	 		
 	 		if ($search_comment_backup) {
-		 		echo "commentaire backup trouve dans mes options";
+		 		###echo "commentaire backup trouve dans mes options";
 		 		fclose($open_options_file);
 		 		
 		 		# Debut routine.
 		 		if (file_exists($theme_duplicated) AND file_exists($theme_xml)) {
-			 		echo "theme.xml existe dans img_pack";
+			 		###echo "theme.xml existe dans img_pack";
 			 		$open_theme_xml = fopen($theme_xml, 'r');
 					$theme_xml_size = filesize ($theme_xml);
 					$read_theme_xml = fread ($open_theme_xml, $theme_xml_size);
@@ -101,7 +101,7 @@ function exec_config_habillages() {
 					$search_duplicated_version = eregi("<version>(.*)</version>", $read_theme_duplicated, $duplicated_version);
 			
 					if ($theme_name[1] != $duplicated_name[1]) {
-						echo "le theme choisi n'est pas le même que dans img_pack UN";
+						###echo "le theme choisi n'est pas le même que dans img_pack UN";
 						if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
 						mkdir ("img_pack", 0700);
 						mkdir ("img_pack/icones_barre", 0700);
@@ -138,7 +138,7 @@ function exec_config_habillages() {
 						
 					}
 					else if ($theme_name[1] == $duplicated_name[1]) {
-						echo "le theme choisi est le même que dans img_pack TROIS";
+						###echo "le theme choisi est le même que dans img_pack TROIS";
 						if (($duplicated_version[1] != $theme_version[1]) AND ($duplicated_version[1] < $theme_version[1])) {
 							
 							if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
@@ -179,22 +179,22 @@ function exec_config_habillages() {
  				}
  		
  				else if (file_exists($theme_duplicated) AND !file_exists($theme_xml)) {
-	 				echo "fichier theme.xml n'exite pas dans le theme";
+	 				###echo "fichier theme.xml n'exite pas dans le theme";
 	 				if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
-		 				echo "backup existe, pas img_pack";
+		 				###echo "backup existe, pas img_pack";
 						mkdir ("img_pack", 0700);
 						mkdir ("img_pack/icones_barre", 0700);
 						mkdir ("img_pack/icones", 0700);
 					}
 					else if (!is_dir('img_pack_backup') AND is_dir('img_pack')){
-						echo "backup n'existe pas, img_pack si";
+						###echo "backup n'existe pas, img_pack si";
 						rename ("img_pack", "img_pack_backup");
 						mkdir ("img_pack", 0700);
 						mkdir ("img_pack/icones_barre", 0700);
 						mkdir ("img_pack/icones", 0700);
 					}
 					else if (is_dir('img_pack_backup') AND is_dir('img_pack')){
-						echo "backup existe, img_pack aussi";
+						###echo "backup existe, img_pack aussi";
 					}
 					
 					
@@ -221,7 +221,7 @@ function exec_config_habillages() {
  				}
 	 				
  		else if (!file_exists($theme_duplicated)){
-	 		echo "le theme.xml existe pas dans img_pack";
+	 		###echo "le theme.xml existe pas dans img_pack";
 			if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
 						mkdir ("img_pack", 0700);
 						mkdir ("img_pack/icones_barre", 0700);
@@ -260,7 +260,7 @@ function exec_config_habillages() {
 	 		}
 	 			 		
 	 		else if (!$search_comment_backup AND $search_define) {
-		 		echo "commentaire backup options pas trouvé mais define";
+		 		###echo "commentaire backup options pas trouvé mais define";
 		 		fclose($open_options_file);
 		 		# Definir un fichier de sauvegarde.
 				$backup_file = "$options_file.backup";
@@ -278,7 +278,7 @@ function exec_config_habillages() {
 		 		
 		 		# Debut routine.
 		 		if (file_exists($theme_duplicated)) {
-		 		echo "theme.xml existe dans img_pack";
+		 		###echo "theme.xml existe dans img_pack";
 		 		$open_theme_xml = fopen($theme_xml, 'r');
 				$theme_xml_size = filesize ($theme_xml);
 				$read_theme_xml = fread ($open_theme_xml, $theme_xml_size);
@@ -292,7 +292,7 @@ function exec_config_habillages() {
 				$search_duplicated_version = eregi("<version>(.*)</version>", $read_theme_duplicated, $duplicated_version);
 				
 				if ($theme_name[1] != $duplicated_name[1]) {
-					echo "le theme choisi n'est pas le même que dans img_pack";
+					###echo "le theme choisi n'est pas le même que dans img_pack";
 					if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
 						mkdir ("img_pack", 0700);
 						mkdir ("img_pack/icones_barre", 0700);
@@ -329,7 +329,7 @@ function exec_config_habillages() {
 					
 				}
 				else if ($theme_name[1] == $duplicated_name[1]) {
-					echo "le theme choisi est le même que dans img_pack UN";
+					###echo "le theme choisi est le même que dans img_pack UN";
 					if (($duplicated_version[1] != $theme_version[1]) AND ($duplicated_version[1] < $theme_version[1])) {
 						
 						if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
@@ -371,7 +371,7 @@ function exec_config_habillages() {
 	 		}
 	 		
 	 		else if (!file_exists($theme_duplicated)){
-		 		echo "le theme.xml existe pas dans img_pack";
+		 		###echo "le theme.xml existe pas dans img_pack";
 				if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
 						mkdir ("img_pack", 0700);
 						mkdir ("img_pack/icones_barre", 0700);
@@ -415,7 +415,7 @@ function exec_config_habillages() {
 
 	 	# Routines a mettre en fonction.
  			if (file_exists($theme_duplicated)) {
-	 		echo "theme.xml existe dans img_pack";
+	 		###echo "theme.xml existe dans img_pack";
 	 		$open_theme_xml = fopen($theme_xml, 'r');
 			$theme_xml_size = filesize ($theme_xml);
 			$read_theme_xml = fread ($open_theme_xml, $theme_xml_size);
@@ -429,7 +429,7 @@ function exec_config_habillages() {
 			$search_duplicated_version = eregi("<version>(.*)</version>", $read_theme_duplicated, $duplicated_version);
 			
 			if ($theme_name[1] != $duplicated_name[1]) {
-				echo "le theme choisi n'est pas le meme que dans img_pack";
+				###echo "le theme choisi n'est pas le meme que dans img_pack";
 				if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
 						mkdir ("img_pack", 0700);
 						mkdir ("img_pack/icones_barre", 0700);
@@ -466,7 +466,7 @@ function exec_config_habillages() {
 				
 			}
 			else if ($theme_name[1] == $duplicated_name[1]) {
-				echo "le theme choisi est le même que dans img_pack DEUX";
+				###echo "le theme choisi est le même que dans img_pack DEUX";
 				if (($duplicated_version[1] != $theme_version[1]) AND ($duplicated_version[1] < $theme_version[1])) {
 					
 					if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
@@ -508,7 +508,7 @@ function exec_config_habillages() {
  		}
  		
  		else if (!file_exists($theme_duplicated)){
-	 		echo "le theme.xml existe pas dans img_pack";
+	 		###echo "le theme.xml existe pas dans img_pack";
 			if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
 						mkdir ("img_pack", 0700);
 						mkdir ("img_pack/icones_barre", 0700);
