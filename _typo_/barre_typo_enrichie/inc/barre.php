@@ -337,7 +337,7 @@ function MajPreview() {
 }
 
 $(document).ready(function(){
-	$("#text_area").after("<div id=\"article_preview\" style=\"display:none;\"></div>");
+	$("#text_area").after("<div id=\"article_preview\"></div>");
 	//$("#text_area").oneresize($("#article_preview").height($("#text_area").height()+"px"));
 	$.ajaxTimeout( 5000 );
 	$("#text_area").keypress(function() { MajPreview() });

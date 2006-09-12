@@ -34,3 +34,11 @@ background : transparent;
 a.spip_blank {
 	color: #F00;
 }
+
+/* Pour le mode preview dans l'admin */
+#article_preview {
+	display:none;
+	border:1px solid #666;
+	overflow: auto;
+	background-color: #FFCCCC;
+}
