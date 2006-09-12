@@ -1,5 +1,5 @@
 svn://trac.rezo.net/spip/branches/spip-1.9
-temps:1157921397
+temps:1158045679
 CACHE/remove.txt:80:1012897441
 dist/modeles/img.html:1061:1156361342
 dist/modeles/emb.html:3045:1156332181
@@ -369,7 +369,7 @@ ecrire/inc/presentation.php:94866:1157852246
 ecrire/inc/filtres.php:51163:1157849102
 ecrire/inc/import.php:14070:1156519934
 ecrire/inc/install_ldap1.php:3139:1155592721
-ecrire/inc/forum_insert.php:10618:1157664944
+ecrire/inc/forum_insert.php:10616:1158005573
 ecrire/inc/revisions.php:17511:1155592721
 ecrire/inc/rubriques.php:14000:1155592721
 ecrire/inc/meta.php:2729:1157664944

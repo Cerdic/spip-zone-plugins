@@ -11,10 +11,7 @@ function exec_config_verifcore() {
   
   barre_onglets("configuration", "config_verifcore");
   
-  debut_gauche();
-  
   debut_droite();	
-  debut_cadre_enfonce();
   
   $fichier_inexistant = array() ;
   $fichier_modifie = array() ;
@@ -69,52 +66,65 @@ function exec_config_verifcore() {
       }
     }
 
-  
+    debut_cadre_trait_couleur("", false, "","Pr&eacute;ambule" );
     echo "Ce programme effectue une comparaison entre vos fichiers et ceux de la version $branche dat&eacute; du $dateversion<br />" ;
+    fin_cadre_trait_couleur();
     if( count($fichier_inexistant) == 0 && count($fichier_modifie) == 0 && count($fichier_supprime) == 0 && count($dossier_supprime) == 0 ){
+      debut_cadre_trait_couleur("", false, "","Fichiers modifi&eacute;" );
       echo "Tout va tr&egrav;s bien vos fichiers correspondent bien &agrave; la version $branche" ;
     }else{
-      if( count($fichier_inexistant) != 0){
+      if( count($fichier_inexistant) != 0){ 
+ 	debut_cadre_trait_couleur("", false, "","Fichiers manquants" );
 	echo "ATTENTION DANGER il vous manque les fichiers suivants\n<ul>" ;
 	foreach ($fichier_inexistant as $file){
 	  echo "<li>$file(<a href=\"http://trac.rezo.net/trac/spip/browser/$branche/$file?format=txt\">Voir l'original</a></li>\n" ;
 	}
 	echo "</ul>\n" ;
+     fin_cadre_trait_couleur();
       }
       
       if( count($fichier_modifie) != 0){
+	debut_cadre_trait_couleur("", false, "","Fichiers modifi&eacute;s" );
 	echo "ATTENTION vos fichiers suivants sont modifi&eacute;s par rapport &agrave;  ceux de la version $branche:\n<ul>" ;
 	foreach ($fichier_modifie as $file){
 	  echo "<li>$file(<a href=\"http://trac.rezo.net/trac/spip/browser/$branche/$file?format=txt\">Voir l'original</a>)</li>\n" ;
 	}
 	echo "</ul>\n" ;
+	fin_cadre_trait_couleur();
       }
       
       if( count($fichier_supprime) != 0){
-	echo "Pour info les fichiers suivant sont obsol&egrave;tes pour $branche, vous pouvez les supprimez\n<ul>" ;
+	debut_cadre_trait_couleur("", false, "","Fichiers obsol&egrave;tes" );
+	echo "Pour info les fichiers suivants sont obsol&egrave;tes pour $branche, vous pouvez les supprimez\n<ul>" ;
 	foreach ($fichier_supprime as $file){
 	  echo "<li>$file</li>\n" ;
 	}
 	echo "</ul>\n" ;
+    fin_cadre_trait_couleur();
       }
       
       if( count($dossier_supprime) != 0){
+	debut_cadre_trait_couleur("", false, "","R&eacute;pertoires obsol&egrave;tes" );
 	echo "Pour info les r&eacute;pertoires suivants sont obsol&egrave;tes pour  $branche, vous pouvez les supprimez\n<ul>" ;
 	foreach ($dossier_supprime as $file){
 	  echo "<li>$file</li>\n" ;
 	}
 	echo "</ul>\n" ;
+	fin_cadre_trait_couleur();
       }
     } 
 
-  }else{
+  }else{ 
+    debut_cadre_trait_couleur("", false, "","IMPOSSIBLE fichier r&eacute;f&eacute;rent manquant" );
     echo "Attention le fichier http://zone.spip.org/trac/spip-zone/browser/_plugins_/_amelioration_admin_/verifcore/refcorespip191.txt?format=txt n\'existe plus\n<br />" ;
     echo "Contactez auteur du plugin rudjob chez gmail.com" ;
-  }
+    fin_cadre_trait_couleur();
+  } 
+   debut_cadre_trait_couleur("", false, "","Recherche php3" );
   echo "Vous avez la possibilit&eacute; de chercher tous les fichiers d'extension php3 qui se trouve sur votre serveur<br />" ;
   echo "En effet depuis spip 1.9 les fichiers php3 sont devenus obsol&egrave;tes mis &agrave;  part inc-public.php3 &agrave; la racine de votre site<br />" ;
   echo "Pour avoir la liste de tous ces fichiers cliquez sur le lien suivant <a href=\"".generer_url_ecrire("verifcore_cherche_php3")."\" > cherche le php3 </a>" ;
-  fin_cadre_enfonce();
+    fin_cadre_trait_couleur();
 
   chdir ($cwd) ;
   fin_page();

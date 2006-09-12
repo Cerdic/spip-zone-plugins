@@ -13,10 +13,9 @@ function exec_verifcore_cherche_php3() {
   
   barre_onglets("configuration", "config_verifcore");
   
-  debut_gauche();
+
   
   debut_droite();	
-  debut_cadre_enfonce();
 	
   $cwd = getcwd();
   chdir (_DIR_RACINE) ; 
@@ -24,6 +23,7 @@ function exec_verifcore_cherche_php3() {
   $verifcore_fichierphp3    = array () ;
   explorateur_php3(".") ;
   if( count($verifcore_fichierphp3) != 0){
+    debut_cadre_trait_couleur("", false, "","Recherche fichiers php3");
     echo "Depuis spip 1.9, les fichiers php3 ont disparu du coeur de spip (mis &agrave; part inc-public.html) c'est pourquoi je vous propose de lister les fichiers php3 qui vous reste sur votre serveur.<br />\n" ;
     echo "Suivez les conseils de l'article  <a href=\"http://www.spip.net/fr_article3370.html\" >la migration vers spip 1.9 de spip.net</a><br /> " ;
     echo "Voici la liste des fichiers php3 : <br />\n" ;
@@ -31,11 +31,14 @@ function exec_verifcore_cherche_php3() {
       echo "<li>$file</li>\n" ;
     }
     echo "</ul>\n" ;
+    fin_cadre_trait_couleur();
   } else {
+    debut_cadre_trait_couleur("", false, "","R&eacute;ussite"); 
     echo "Il n\' y a aucun fichier php3\n" ;
+    fin_cadre_trait_couleur();
   }
-  fin_cadre_enfonce();
-
+  
+  
   chdir ($cwd) ;
   fin_page();
 }
