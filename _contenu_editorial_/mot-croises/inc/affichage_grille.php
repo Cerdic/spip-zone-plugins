@@ -13,7 +13,7 @@ function affichage_grille($tableau_grille,$solution=false){
     $grille='';
     //fin variable de la grille
     
-    (! $solution) ? $grille.="<form action=\"".$page."\" method=\"post\">\n" : $grille.="<div class=\"solution\"><h2 class=\"spip\">"._T('motscroises:Solution')." : </h2>" ;	// debut formulaire
+    (! $solution) ? $grille.="<form class=\"grille\" action=\"".$page."\" method=\"post\">\n" : $grille.="<div class=\"solution\"><h2 class=\"spip\">"._T('motscroises:Solution')." : </h2>" ;	// debut formulaire
     
     $grille.="<table class=\"grille\" summary=\""._T('motscroises:table_summary',Array('hauteur'=>$hauteur,'largeur'=>$largeur))."\">\n
     \t<tr>\n\t\t<td class=\"coin\"></td>\n";	// debut tableau + 1ere celule
