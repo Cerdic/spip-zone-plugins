@@ -22,28 +22,41 @@ function checklink_pre_enregistre_contenu($flux){
 	}
 	
 	// passer le contenu dans propre pour transformer les liens internes et les modeles eventuels
-	$letexte = propre($flux['data']);
+	$letexte = propre(join(' ',$flux['data']));
 	// recuperer les liens des balises a
 	if (preg_match_all(
 	',<a [^>]*>,UimsS',
 	$letexte, $regs, PREG_SET_ORDER)) {
 		foreach ($regs as $reg) {
-			$url = extraire_attributs($reg[0], 'href');
+			$url = extraire_attribut($reg[0], 'href');
 			// prevoir les liens dont les attributs ont pu etre renseignes a la main
-			$titre = extraire_attributs($reg[0], 'title');
-			$lang = extraire_attributs($reg[0], 'lang');
+			$titre = extraire_attribut($reg[0], 'title');
+			$lang = extraire_attribut($reg[0], 'lang');
 			$titre_auto = strlen($titre)?'non':'oui';
 			$lang_auto = strlen($lang)?'non':'oui';
 			
 			// regarder si le lien est deja reference
 			// et le creer eventuellement pour cet objet
-			if ($row = spip_fetch_array(spip_query("SELECT FROM spip_liens WHERE url=".spip_abstract_quote($url)))){
-				if ($row['id_objet']!=$id_objet OR $row['id_table']!=$id_table){
-					$id_lien = spip_abstract_insert("spip_liens","(url,id_table,id_objet)",
-						"(".spip_abstract_quote($url).",".spip_abstract_quote($id_table).",".spip_abstract_quote($id_objet).")");
-				}
-				else 
+			//echo "SELECT FROM spip_liens WHERE url=".spip_abstract_quote($url);
+			if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_liens WHERE url=".spip_abstract_quote($url)))){
 					$id_lien = $row['id_lien'];
+			}
+			else {
+				$titre = 'test';
+					$lang = 'fr';
+					$status = 200;
+					$verification = 'x';
+					$date_verif = gmdate("Y-m-d H:i:s"); 
+					$id_lien = spip_abstract_insert("spip_liens","(url,titre,lang,statut,verification,date_verif,titre_auto,lang_auto,id_table,id_objet)",
+						"(".spip_abstract_quote($url).",".
+						spip_abstract_quote($titre).",".
+						spip_abstract_quote($lang).",".
+						spip_abstract_quote($status).",".
+						spip_abstract_quote($verification).",".
+						spip_abstract_quote($date_verif).",".
+						spip_abstract_quote($titre_auto).",".
+						spip_abstract_quote($lang_auto).",".
+						spip_abstract_quote($id_table).",".spip_abstract_quote($id_objet).")");
 			}
 			if (($titre_auto=='oui') AND (isset($row['titre'])))
 					$titre = $row['titre'];
@@ -60,10 +73,17 @@ function checklink_pre_enregistre_contenu($flux){
 				$date_verif='';
 			}
 			
-			spip_query("UPDATE spip_liens (titre,lang,maj,statut,verification,date_verif,obsolete,titre_auto,lang_auto)
-				VALUES (".spip_abstract_quote($titre).",".spip_abstract_quote($lang).", NOW(),".spip_abstract_quote($statut).","
-				.spip_abstract_quote($verification).",".spip_abstract_quote($date_verif).", 'non' ,"
-				.spip_abstract_quote($titre_auto).",".spip_abstract_quote($lang_auto).")");
+			spip_query("UPDATE spip_liens SET
+				titre = ".spip_abstract_quote($titre).",
+				lang = ".spip_abstract_quote($lang).",
+				maj = NOW(),
+				statut = ".spip_abstract_quote($statut).",
+				verification = ".spip_abstract_quote($verification).",
+				date_verif = ".spip_abstract_quote($date_verif).",
+				obsolete = 'non',
+				titre_auto = ".spip_abstract_quote($titre_auto).",
+				lang_auto = ".spip_abstract_quote($lang_auto)."
+			WHERE id_lien=".$id_lien);
 		}
 	}
 	return $flux;

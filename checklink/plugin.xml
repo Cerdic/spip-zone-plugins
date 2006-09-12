@@ -19,6 +19,12 @@ _ &copy; 2006 - Licence GPL
 	<prefix> 
 	checklink
 	</prefix>
+	<options> <!-- fichier charge a chaque hit -->
+	checklink_mes_options.php
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	checklink_mes_fonctions.php
+	</fonctions>
 	<pipeline>
 		<nom>pre_enregistre_contenu</nom>
 		<inclure>checklink_pipelines.php</inclure>

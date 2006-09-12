@@ -1,7 +1,12 @@
 <?php
 
+include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
+
+global $tables_principales;
+global $tables_auxiliaires;
+
 $spip_liens = array(
-		"id_lien"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_lien"	=> "bigint(21) NOT NULL",
 		"url"	=> "VARCHAR(255) NOT NULL",
 		"titre"	=> "text NOT NULL",
 		"lang"	=> "VARCHAR(10) DEFAULT '' NOT NULL",

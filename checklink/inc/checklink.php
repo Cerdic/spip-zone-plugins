@@ -15,8 +15,13 @@ function checklink_uninstall(){
 function checklink_verifier_base(){
 	$version_base = 0.10;
 	$current_version = 0.0;
-	if (   (!isset($GLOBALS['meta']['checklink_base_version']) )
-			|| (($current_version = $GLOBALS['meta']['checklink_base_version'])!=$version_base)){
+	if(
+		(!isset($GLOBALS['meta']['checklink_base_version']))
+		||
+		(
+			($current_version = $GLOBALS['meta']['checklink_base_version'])!=$version_base
+		)
+	){
 		include_spip('base/checklink');
 		if ($current_version==0.0){
 			include_spip('base/create');
@@ -27,8 +32,6 @@ function checklink_verifier_base(){
 		
 		ecrire_metas();
 	}
-	
 }
-
 
 ?>
