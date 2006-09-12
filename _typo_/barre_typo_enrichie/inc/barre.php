@@ -313,6 +313,31 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 	$ret .= "</table>";
 	 $ret .= $toolbox;
+	 $ret .= '<script type="text/javascript" src="' . _DIR_PLUGIN_BARRE_TYPO . '/js/jquery-latest.pack.js"></script><script type="text/javascript"><!--
+function hauteurTextarea() {
+	hauteur = (hauteur_fenetre() - 40) /2;
+	source = document.getElementById("text_area");
+	source.style.height = hauteur + "px";
+}
+
+function MajPreview() {
+	$.post("' . generer_url_ecrire("article_preview",""). '", { texte:$("#text_area").val() }, function(data) {
+		$("#article_preview").empty()
+		$("#article_preview").append(data);
+		});
+}
+
+$(document).ready(function(){
+	$("#text_area").after("<div id=\"article_preview\"></div>");
+	$("#text_area").oneresize($("#article_preview").height($("#text_area").height()+"px"));
+	$.ajaxTimeout( 5000 );
+	$("#text_area").keypress(function() { MajPreview() });
+	$("#text_area").keyup(function() { MajPreview() });
+	$("#text_area").change(function() { MajPreview() });
+	$("#text_area").blur(function() { MajPreview() });
+	$("#text_area").focus(function() { MajPreview() });
+});
+	 //--></script>';
 	return $ret;
 }
 
