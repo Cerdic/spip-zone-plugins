@@ -605,7 +605,6 @@ function exec_config_habillages() {
 				# Mettre dans l'expression reguliere ci-dessous la possibilite de reconnaitre le prefixe
 				# meme si le prefixe n'est pas colle aux balises <prefixes>.
 				$search_duplicated_name = eregi("<prefixe>(.*)</prefixe>", $read_theme_duplicated, $duplicated_name);
-				echo $duplicated_name[1];
 				if ($duplicated_name[1] == $fichier) {
 		    	echo " checked";
 	    		}
