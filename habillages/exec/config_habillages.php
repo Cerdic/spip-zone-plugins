@@ -52,6 +52,10 @@ function exec_config_habillages() {
 
 #### DEBUT DE L'ENCADRE QUI GERE L'HABILLAGE PRIVE ######################################
 	debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_prive-32.png", false, "", _T('habillageprive:titre_habillage_prive'));
+	
+	echo "<small>La gestion des habillages de l'espace priv&eacute; est encore en d&eacute;veloppement. ";
+	echo "Rien ne vous emp&ecirc;che de l'essayer (il faut juste savoir que les ic&ocirc;nes appara&icirc;tront au fur et &agrave; mesure";
+	echo " de votre navigation dans l'espace priv&eacute; et que c'est un peu cahotique).</small><br />";
  	echo '<form action="'.generer_url_ecrire('config_habillages').'" method="post">';
  	
  	
@@ -67,7 +71,7 @@ function exec_config_habillages() {
  	# fichier mes_options.php. 	
  	if ($theme != "" AND $theme != "initial" AND file_exists($options_file)) {
 	 	// Si le fichier inc/mes_options.php existe deja
-		 	echo "option existe";
+		 	###echo "option existe";
 		 	# Ouvrir et lire le fichier...
 		 	$open_options_file = fopen($options_file, 'r');
 			$options_file_size = filesize ($options_file);
@@ -542,36 +546,39 @@ function exec_config_habillages() {
  	}
 
  	else if ($theme == "initial") {
-	 	echo "veut revenir initial";
-	 	if (is_dir('img_pack_backup')) {
-		 	mkdir ("img_pack", 0700);
+	 	###echo "veut revenir initial";
+	 	if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
+			mkdir ("img_pack", 0700);
 			mkdir ("img_pack/icones_barre", 0700);
 			mkdir ("img_pack/icones", 0700);
+			}
+		else if (!is_dir('img_pack_backup') AND is_dir('img_pack')){
+			rename ("img_pack", "img_pack_backup");
+			mkdir ("img_pack", 0700);
+			mkdir ("img_pack/icones_barre", 0700);
+			mkdir ("img_pack/icones", 0700);
+		}
 			
-			$img_pack_backup_one = opendir ('/img_pack_backup/');
+			$img_pack_backup_one = opendir ('img_pack_backup/');
 			while ($fichier = readdir ($img_pack_backup_one)) {
 				if ($fichier != "." && $fichier != ".." && $fichier != ".svn" && $fichier != "icones_barre" && $fichier != "icones") {
-						copy ("/img_pack_backup/$fichier","img_pack/$fichier");
+						copy ("img_pack_backup/$fichier","img_pack/$fichier");
 				}
 			}
 			
-			$img_pack_backup_two = opendir ('/img_pack_backup/icones_barre/');
-			while ($fichier_two = readdir ($img_pack_sub_one)) {
+			$img_pack_backup_two = opendir ('img_pack_backup/icones_barre/');
+			while ($fichier_two = readdir ($img_pack_backup_two)) {
 				if ($fichier_two != "." && $fichier_two != ".." && $fichier_two != ".svn") {
-						copy ("/img_pack_backup/icones_barre/$fichier_two","img_pack/icones_barre/$fichier_two");
+						copy ("img_pack_backup/icones_barre/$fichier_two","img_pack/icones_barre/$fichier_two");
 				}
 			}
 			
-			$img_pack_backup_three = opendir ('/img_pack_backup/icones/');
+			$img_pack_backup_three = opendir ('img_pack_backup/icones/');
 			while ($fichier_three = readdir ($img_pack_backup_three)) {
 				if ($fichier_three != "." && $fichier_three != ".." && $fichier_three != ".svn") {
-						copy ("/img_pack_backup//icones/$fichier_three","img_pack/icones/$fichier_three");
+						copy ("img_pack_backup//icones/$fichier_three","img_pack/icones/$fichier_three");
 				}
-			}
-	 	}
-	 	else if (!is_dir('img_pack_backup')) {
-		 	echo "mettre in img_pack natif quelque part pour le restaurer et restaurer mes options";
-	 	}
+		}
  	}
  	
  	echo "<a name='access-c' href='#access-c' accesskey='c'></a><div class='cadre-r'><div style='position: relative;'><div class='cadre-titre' style='margin: 0px;'>";
@@ -590,7 +597,8 @@ function exec_config_habillages() {
 	    	echo "<a name='access-c' href='#access-c' accesskey='c'></a><div class='cadre-r'><div style='position: relative;'><div class='cadre-titre' style='margin: 0px;'>";
 	    	echo '<INPUT type=radio name="theme" value="'.$fichier.'"';
 	    	if ($_REQUEST['theme'] == "" AND file_exists($theme_duplicated)) {
-		    	echo "Pas de theme choisi et le fichier theme est reconnu dans img_pack";
+		    	if (fopen($theme_duplicated, 'r') == TRUE) {
+		    	###echo "Pas de theme choisi et le fichier theme est reconnu dans img_pack";
 		    	$open_theme_duplicated_file = fopen($theme_duplicated, 'r');
 				$theme_duplicated_file_size = filesize ($theme_duplicated);
 				$read_theme_duplicated = fread ($open_theme_duplicated_file, $theme_duplicated_file_size);
@@ -602,6 +610,7 @@ function exec_config_habillages() {
 		    	echo " checked";
 	    		}
 	    		fclose($open_theme_duplicated_file);
+    			}
 	    	}
 	    	else if ($_REQUEST['theme'] == $fichier) {
 		    	echo " checked";
@@ -660,18 +669,20 @@ debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_publ
 		fclose($open_plugin_options_file);
 	}
 
-	
+	echo "<a name='access-c' href='#access-c' accesskey='c'></a><div class='cadre-r'><div style='position: relative;'><div class='cadre-titre' style='margin: 0px;'>";
  	echo '<INPUT type=radio name="squelette" value="initial"';
  		if ($_REQUEST['squelette'] == "initial") {
 	 		echo "checked";
  		}
  	echo ">";
  	echo "<strong>Revenir &agrave; l'habillage d'origine</strong>";
- 	echo "<br />";
+ 	echo '</div></div><div class="cadre-padding" style="overflow:hidden;">';
+	echo "</div></div><div style='height: 5px;'></div>";
  	
  	$dossier = opendir ($plugin_directory.'/public/themes/');
 	while ($fichier = readdir ($dossier)) {
     	if ($fichier != "." && $fichier != "..") {
+	    	echo "<a name='access-c' href='#access-c' accesskey='c'></a><div class='cadre-r'><div style='position: relative;'><div class='cadre-titre' style='margin: 0px;'>";
 	    	echo '<INPUT type=radio name="squelette" value="'.$fichier.'"';
 	    	if ($_REQUEST['squelette'] == "") {
 		    	$cleaned_path = str_replace('../', "", _DIR_PLUGIN_HABILLAGES);
@@ -699,14 +710,17 @@ debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_publ
 			$search_theme_name = eregi("<auteur>(.*)</auteur>", $read_theme_file, $theme_author);
 			$search_theme_name = eregi("<version>(.*)</version>", $read_theme_file, $theme_version);
 			$search_theme_name = eregi("<description>(.*)</description>", $read_theme_file, $theme_description);
-			echo '<strong>'.$theme_name[1].'</strong> version '.$theme_version[1].'<br /><i><medium>Auteur : '.$theme_author[1].'</medium></i><br />';
-			echo '<small>'.$theme_description[1].'</small>';
-        	echo "<BR />";
+			echo '<strong>'.$theme_name[1].'</strong> version '.$theme_version[1].'</div></div><div class="cadre-padding" style="overflow:hidden;">';
+				echo '<i><medium>Auteur : '.$theme_author[1].'</medium></i><br />';
+				echo '<small>'.$theme_description[1].'</small>';
+	        	echo "</div></div><div style='height: 5px;'></div>";
         	fclose($open_theme_file);
     		}
     		
     		else {
-	    		echo '<strong>'.$fichier.'</strong><br />';
+	    		echo '<strong>'.$fichier.'</strong>';
+	    		echo '</div></div><div class="cadre-padding" style="overflow:hidden;">';
+	    		echo "</div></div><div style='height: 5px;'></div>";
     		}
     	}
 	}
