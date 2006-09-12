@@ -5,9 +5,12 @@
 	<auteur>
  	Franck Ducas - http://franck.ducas.free.fr
 	</auteur>
-	<version>
-	0.1
+	<version> <!--Vous devez obligatoirement changer de numero de version lorsque vous ajoutez ou modifiez des icones dans le theme. -->
+	0.4
 	</version>
+	<prefixe>
+	smooth
+	</prefixe>
 	<description>
 	Change les ic&ocirc;nes de l'administration avec des icones "douces". L'avantage de ces ic&ocirc;nes est qu'elles gardent la couleur de fond que vous avez choisi pour l'espace priv&eacute;.
 	</description>

@@ -1,17 +1,17 @@
 <theme>
 	<nom>
-	Iko
+	Realistik
 	</nom>
 	<auteur>
- 	scoty.koakidi.com - http://www.koakidi.com
+ 	Voir licence.
 	</auteur>
 	<version> <!--Vous devez obligatoirement changer de numero de version lorsque vous ajoutez ou modifiez des icones dans le theme. -->
 	0.1
 	</version>
 	<prefixe>
-	iko
+	realistik
 	</prefixe>
 	<description>
-	Insertion du jeu d'icones "Iko" (voir http://www.koakidi.com/article.php3?id_article=230).
+	Change les ic&ocirc;nes de l'administration avec des icones "realistes". 
 	</description>
 </theme>

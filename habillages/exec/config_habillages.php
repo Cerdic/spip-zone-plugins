@@ -51,129 +51,545 @@ function exec_config_habillages() {
 	echo "<br />";
 
 #### DEBUT DE L'ENCADRE QUI GERE L'HABILLAGE PRIVE ######################################
-	debut_cadre_trait_couleur("", false, "", _T('habillageprive:titre_habillage_prive'));
-
-	echo "<small><strong>Attention, si vous utilisez d'autres plugins, certaines icones peuvent ne pas apparaitre pour l'instant.</strong></small><br />";
+	debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_prive-32.png", false, "", _T('habillageprive:titre_habillage_prive'));
  	echo '<form action="'.generer_url_ecrire('config_habillages').'" method="post">';
  	
- 	// Debut des manipulations de mes_options.php. Le fichier mes_options sert de 
- 	// reference pour savoir quel habillage a choisi l'utilisateur.
  	
  	$options_file = "mes_options.php";
- 	$theme = $_REQUEST['theme'];
+ 	$img_directory = "img_pack";
  	$plugin_directory = _DIR_PLUGIN_HABILLAGES;
+ 	$theme = $_REQUEST['theme'];
+ 	$theme_path = "$plugin_directory/prive/themes/$theme";
+ 	$theme_xml = "$theme_path/theme.xml";
+ 	$theme_duplicated = "img_pack/theme.xml";
 
- 	# N'agir que si le theme n'est pas vide. Ceci permet, en cas de non-choix, de ne pas
- 	# ecrire un fichier mes_options.php errone. 	
- 	if ($theme != "") {
+ 	# N'agir d'abord que si l'utilisateur a choisi un theme qui n'est pas initial et si le
+ 	# fichier mes_options.php. 	
+ 	if ($theme != "" AND $theme != "initial" AND file_exists($options_file)) {
 	 	// Si le fichier inc/mes_options.php existe deja
-	 	if (file_exists($options_file)) {
-			$backup_file = "$options_file.backup";
-		 	rename($options_file, $backup_file);
-		 	$open_backup_file = fopen($backup_file, 'r');
-			$backup_file_size = filesize ($backup_file);
-	 		$read_backup_file = fread ($open_backup_file, $backup_file_size);
-	 		$search_comment = eregi("//start_define_img_pack(.*)//end_define_img_pack", $read_backup_file, $comment);
-	 		$search_original_content = eregi("define\(\'_DIR_IMG_PACK\', \(\'(.*)\'\)\)\;", $read_backup_file, $original_content);
-	 		$search_content = eregi("define\(\'_DIR_IMG_PACK\', \(\'(.*)\'\)\)\;(.*)//end_define_img_pack", $read_backup_file, $content);
-	 		$search_all_content = eregi("<\?(.*)define\(\'_DIR_IMG_PACK\', \(\'(.*)\'\)\)\;(.*)\?>", $read_backup_file, $all_content);
-		 	
-		 	# Si l'utilisateur ou l'utilisatrice ne demande pas a revenir a la situation 
-		 	# initiale (= a son chemin vers img_pack d'origine).
-		 	if ($theme != "initial") {
-	
-			 	# Si le fichier ecrire/mes_options.php contient le commentaire ajoute par 
-		 		# le plugin, cela signifie que le plugin a deja ete active pour un habillage.
-		 		# Il faut donc modifier la ligne existante personnalisee du chemin vers 
-		 		# img_pack. :
-		 		if ($search_comment) {
-			 		$open_options_file = fopen($options_file, 'w+');
-			 		$new_content = $plugin_directory."/prive/themes/".$theme."/img_pack/";
-			 		$insert_new_content = ereg_replace($content[1], $new_content, $read_backup_file);
-			 		$write = fwrite($open_options_file, $insert_new_content);
-			 		fclose($open_options_file);
-		 		}
+		 	###echo "option existe";
+		 	# Ouvrir et lire le fichier...
+		 	$open_options_file = fopen($options_file, 'r');
+			$options_file_size = filesize ($options_file);
+	 		$read_options_file = fread ($open_options_file, $options_file_size);
+	 		# ...definir les chaines recherchees...
+	 		$search_comment_backup = eregi("//backup_define\(\'_DIR_IMG_PACK\', \(\'(.*)\'\)\)\;", $read_options_file, $comment_backup);
+	 		$search_define = eregi("(.*)define\(\'_DIR_IMG_PACK\'(.*)", $read_options_file, $define_content);
+	 		# ... et reagir en fonction de ce qui est trouve dans mes_options.php.
+	 		
+	 		if ($search_comment_backup) {
+		 		###echo "commentaire backup trouve dans mes options";
+		 		fclose($open_options_file);
 		 		
-		 		# Si le fichier mes_options sauvegarde redefinissait le chemin d'img_pack
-		 		# par la ligne define('_DIR_IMG_PACK', [...]) avant le choix d'un autre 
-		 		# habillage :
-		 		else if ($search_original_content) {
-			 		$search_comment_backup = eregi("//backup_define(.*)", $read_backup_file);
+		 		# Debut routine.
+		 		if (file_exists($theme_duplicated) AND file_exists($theme_xml)) {
+			 		###echo "theme.xml existe dans img_pack";
+			 		$open_theme_xml = fopen($theme_xml, 'r');
+					$theme_xml_size = filesize ($theme_xml);
+					$read_theme_xml = fread ($open_theme_xml, $theme_xml_size);
+					$search_theme_name = eregi("<prefixe>(.*)</prefixe>", $read_theme_xml, $theme_name);
+					$search_theme_version = eregi("<version>(.*)</version>", $read_theme_xml, $theme_version);
 			 		
-			 		if ($search_comment_backup) {
-				 		$open_options_file = fopen($options_file, 'w+');
-				 		$new_content = "//start_define_img_pack\ndefine('_DIR_IMG_PACK', ('".$plugin_directory."/prive/themes/".$theme."/img_pack/'));\n//end_define_img_pack\n?>";
-				 		$insert_new_content = ereg_replace( '\?>', $new_content, $read_backup_file);
-				 		$write = fwrite($open_options_file, $insert_new_content);
-				 		fclose($open_options_file);
-			 		}
-			 		else {
-				 		$open_options_file = fopen($options_file, 'w+');
-				 		$replaced_content = "define\(\'_DIR_IMG_PACK\', \(\'";
-				 		$new_content = "//start_define_img_pack\ndefine('_DIR_IMG_PACK', ('".$plugin_directory."/prive/themes/".$theme."/img_pack/'));\n//end_define_img_pack\n//backup_define('_DIR_IMG_PACK', ('";
-				 		$insert_new_content = ereg_replace( $replaced_content, $new_content, $read_backup_file);
-				 		$write = fwrite($open_options_file, $insert_new_content);
-				 		fclose($open_options_file);
-		 			}
-		 		}
+					$open_theme_duplicated = fopen($theme_duplicated, 'r');
+					$theme_duplicated_size = filesize ($theme_duplicated);
+					$read_theme_duplicated = fread ($open_theme_duplicated, $theme_duplicated_size);
+					$search_duplicated_name = eregi("<prefixe>(.*)</prefixe>", $read_theme_duplicated, $duplicated_name);
+					$search_duplicated_version = eregi("<version>(.*)</version>", $read_theme_duplicated, $duplicated_version);
+			
+					if ($theme_name[1] != $duplicated_name[1]) {
+						###echo "le theme choisi n'est pas le même que dans img_pack";
+						if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+					else if (!is_dir('img_pack_backup') AND is_dir('img_pack')){
+						rename ("img_pack", "img_pack_backup");
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+						
+						$img_pack_path = opendir ($theme_path.'/img_pack/');
+						while ($fichier = readdir ($img_pack_path)) {
+							if ($fichier != "." && $fichier != ".." && $fichier != ".svn" && $fichier != "icones_barre" && $fichier != "icones") {
+									copy ("$theme_path/img_pack/$fichier","img_pack/$fichier");
+									copy ("$theme_path/theme.xml","img_pack/theme.xml");
+							}
+						}
+						
+						$img_pack_sub_one = opendir ($theme_path.'/img_pack/icones_barre/');
+						while ($fichier_two = readdir ($img_pack_sub_one)) {
+							if ($fichier_two != "." && $fichier_two != ".." && $fichier_two != ".svn") {
+									copy ("$theme_path/img_pack/icones_barre/$fichier_two","img_pack/icones_barre/$fichier_two");
+							}
+						}
+						
+						$img_pack_sub_two = opendir ($theme_path.'/img_pack/icones/');
+						while ($fichier_three = readdir ($img_pack_sub_two)) {
+							if ($fichier_three != "." && $fichier_three != ".." && $fichier_three != ".svn") {
+									copy ("$theme_path/img_pack/icones/$fichier_three","img_pack/icones/$fichier_three");
+							}
+						}
+						
+					}
+					else if ($theme_name[1] == $duplicated_name[1]) {
+						###echo "le theme choisi est le même que dans img_pack";
+						if (($duplicated_version[1] != $theme_version[1]) AND ($duplicated_version[1] < $theme_version[1])) {
+							
+							if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+					else if (!is_dir('img_pack_backup') AND is_dir('img_pack')){
+						rename ("img_pack", "img_pack_backup");
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+							
+							$img_pack_path = opendir ($theme_path.'/img_pack/');
+							while ($fichier = readdir ($img_pack_path)) {
+								if ($fichier != "." && $fichier != ".." && $fichier != ".svn" && $fichier != "icones_barre" && $fichier != "icones") {
+										copy ("$theme_path/img_pack/$fichier","img_pack/$fichier");
+										copy ("$theme_path/theme.xml","img_pack/theme.xml");
+								}
+							}
+							
+							$img_pack_sub_one = opendir ($theme_path.'/img_pack/icones_barre/');
+							while ($fichier_two = readdir ($img_pack_sub_one)) {
+								if ($fichier_two != "." && $fichier_two != ".." && $fichier_two != ".svn") {
+										copy ("$theme_path/img_pack/icones_barre/$fichier_two","img_pack/icones_barre/$fichier_two");
+								}
+							}
+							
+							$img_pack_sub_two = opendir ($theme_path.'/img_pack/icones/');
+							while ($fichier_three = readdir ($img_pack_sub_two)) {
+								if ($fichier_three != "." && $fichier_three != ".." && $fichier_three != ".svn") {
+										copy ("$theme_path/img_pack/icones/$fichier_three","img_pack/icones/$fichier_three");
+								}
+							}
+						}
+					}
+ 				}
+ 		
+ 				else if (file_exists($theme_duplicated) AND !file_exists($theme_xml)) {
+	 				###echo "fichier theme.xml n'exite pas dans le theme";
+	 				if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
+		 				###echo "backup existe, pas img_pack";
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+					else if (!is_dir('img_pack_backup') AND is_dir('img_pack')){
+						###echo "backup n'existe pas, img_pack si";
+						rename ("img_pack", "img_pack_backup");
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+					else if (is_dir('img_pack_backup') AND is_dir('img_pack')){
+						###echo "backup existe, img_pack aussi";
+					}
+					
+					
+					$img_pack_path = opendir ($theme_path.'/img_pack/');
+					while ($fichier = readdir ($img_pack_path)) {
+						if ($fichier != "." && $fichier != ".." && $fichier != ".svn" && $fichier != "icones_barre" && $fichier != "icones") {
+								copy ("$theme_path/img_pack/$fichier","img_pack/$fichier");
+						}
+					}
+					
+					$img_pack_sub_one = opendir ($theme_path.'/img_pack/icones_barre/');
+					while ($fichier_two = readdir ($img_pack_sub_one)) {
+						if ($fichier_two != "." && $fichier_two != ".." && $fichier_two != ".svn") {
+								copy ("$theme_path/img_pack/icones_barre/$fichier_two","img_pack/icones_barre/$fichier_two");
+						}
+					}
+					
+					$img_pack_sub_two = opendir ($theme_path.'/img_pack/icones/');
+					while ($fichier_three = readdir ($img_pack_sub_two)) {
+						if ($fichier_three != "." && $fichier_three != ".." && $fichier_three != ".svn") {
+								copy ("$theme_path/img_pack/icones/$fichier_three","img_pack/icones/$fichier_three");
+						}
+					}
+ 				}
+	 				
+ 		else if (!file_exists($theme_duplicated)){
+	 		###echo "le theme.xml existe pas dans img_pack";
+			if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+					else if (!is_dir('img_pack_backup') AND is_dir('img_pack')){
+						rename ("img_pack", "img_pack_backup");
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+			
+			$img_pack_path = opendir ($theme_path.'/img_pack/');
+			while ($fichier = readdir ($img_pack_path)) {
+				if ($fichier != "." && $fichier != ".." && $fichier != ".svn" && $fichier != "icones_barre" && $fichier != "icones") {
+						copy ("$theme_path/img_pack/$fichier","img_pack/$fichier");
+						copy ("$theme_path/theme.xml","img_pack/theme.xml");
+				}
+			}
+			
+			$img_pack_sub_one = opendir ($theme_path.'/img_pack/icones_barre/');
+			while ($fichier_two = readdir ($img_pack_sub_one)) {
+				if ($fichier_two != "." && $fichier_two != ".." && $fichier_two != ".svn") {
+						copy ("$theme_path/img_pack/icones_barre/$fichier_two","img_pack/icones_barre/$fichier_two");
+				}
+			}
+			
+			$img_pack_sub_two = opendir ($theme_path.'/img_pack/icones/');
+			while ($fichier_three = readdir ($img_pack_sub_two)) {
+				if ($fichier_three != "." && $fichier_three != ".." && $fichier_three != ".svn") {
+						copy ("$theme_path/img_pack/icones/$fichier_three","img_pack/icones/$fichier_three");
+				}
+			}
+ 		}
+		 		# Fin routine
+	 		}
+	 			 		
+	 		else if (!$search_comment_backup AND $search_define) {
+		 		###echo "commentaire backup options pas trouvé mais define";
+		 		fclose($open_options_file);
+		 		# Definir un fichier de sauvegarde.
+				$backup_file = "$options_file.backup";
+				# Renommer le fichier mes_options.php afin de preserver sa virginite.
+			 	rename($options_file, $backup_file);
+			 	$open_backup_file = fopen($backup_file, 'r');
+			 	$backup_file_size = filesize ($backup_file);
+	 			$read_backup_file = fread ($open_backup_file, $backup_file_size);
+		 		$new_content = "//backup_define('_DIR_IMG_PACK'";
+		 		$insert_new_content = ereg_replace("define\(\'_DIR_IMG_PACK\'", $new_content, $read_backup_file);
+		 		$open_options_file = fopen($options_file, 'w+');
+		 		$write = fwrite($open_options_file, $insert_new_content);
+				fclose($open_backup_file);
+		 		fclose($open_options_file);
 		 		
-		 		# Si le fichier ecrire/mes_options.php existe deja mais qu'il ne redefinie 
-		 		# pas le chemin vers img_pack.
-		 		else {
-			 		$open_options_file = fopen($options_file, 'w+');
-			 		$new_content = "//start_define_img_pack\ndefine('_DIR_IMG_PACK', ('".$plugin_directory."/prive/themes/".$theme."/img_pack/'));\n//end_define_img_pack\n?>";
-			 		$insert_new_content = ereg_replace( '\?>', $new_content, $read_backup_file);
-			 		$write = fwrite($open_options_file, $insert_new_content);
-			 		fclose($open_options_file);
-		 		}
+		 		# Debut routine.
+		 		if (file_exists($theme_duplicated)) {
+		 		###echo "theme.xml existe dans img_pack";
+		 		$open_theme_xml = fopen($theme_xml, 'r');
+				$theme_xml_size = filesize ($theme_xml);
+				$read_theme_xml = fread ($open_theme_xml, $theme_xml_size);
+				$search_theme_name = eregi("<prefixe>(.*)</prefixe>", $read_theme_xml, $theme_name);
+				$search_theme_version = eregi("<version>(.*)</version>", $read_theme_xml, $theme_version);
 		 		
+				$open_theme_duplicated = fopen($theme_duplicated, 'r');
+				$theme_duplicated_size = filesize ($theme_duplicated);
+				$read_theme_duplicated = fread ($open_theme_duplicated, $theme_duplicated_size);
+				$search_duplicated_name = eregi("<prefixe>(.*)</prefixe>", $read_theme_duplicated, $duplicated_name);
+				$search_duplicated_version = eregi("<version>(.*)</version>", $read_theme_duplicated, $duplicated_version);
+				
+				if ($theme_name[1] != $duplicated_name[1]) {
+					###echo "le theme choisi n'est pas le même que dans img_pack";
+					if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+					else if (!is_dir('img_pack_backup') AND is_dir('img_pack')){
+						rename ("img_pack", "img_pack_backup");
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+					
+					$img_pack_path = opendir ($theme_path.'/img_pack/');
+					while ($fichier = readdir ($img_pack_path)) {
+						if ($fichier != "." && $fichier != ".." && $fichier != ".svn" && $fichier != "icones_barre" && $fichier != "icones") {
+								copy ("$theme_path/img_pack/$fichier","img_pack/$fichier");
+								copy ("$theme_path/theme.xml","img_pack/theme.xml");
+						}
+					}
+					
+					$img_pack_sub_one = opendir ($theme_path.'/img_pack/icones_barre/');
+					while ($fichier_two = readdir ($img_pack_sub_one)) {
+						if ($fichier_two != "." && $fichier_two != ".." && $fichier_two != ".svn") {
+								copy ("$theme_path/img_pack/icones_barre/$fichier_two","img_pack/icones_barre/$fichier_two");
+						}
+					}
+					
+					$img_pack_sub_two = opendir ($theme_path.'/img_pack/icones/');
+					while ($fichier_three = readdir ($img_pack_sub_two)) {
+						if ($fichier_three != "." && $fichier_three != ".." && $fichier_three != ".svn") {
+								copy ("$theme_path/img_pack/icones/$fichier_three","img_pack/icones/$fichier_three");
+						}
+					}
+					
+				}
+				else if ($theme_name[1] == $duplicated_name[1]) {
+					###echo "le theme choisi est le même que dans img_pack";
+					if (($duplicated_version[1] != $theme_version[1]) AND ($duplicated_version[1] < $theme_version[1])) {
+						
+						if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+					else if (!is_dir('img_pack_backup') AND is_dir('img_pack')){
+						rename ("img_pack", "img_pack_backup");
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+						
+						$img_pack_path = opendir ($theme_path.'/img_pack/');
+						while ($fichier = readdir ($img_pack_path)) {
+							if ($fichier != "." && $fichier != ".." && $fichier != ".svn" && $fichier != "icones_barre" && $fichier != "icones") {
+									copy ("$theme_path/img_pack/$fichier","img_pack/$fichier");
+									copy ("$theme_path/theme.xml","img_pack/theme.xml");
+							}
+						}
+						
+						$img_pack_sub_one = opendir ($theme_path.'/img_pack/icones_barre/');
+						while ($fichier_two = readdir ($img_pack_sub_one)) {
+							if ($fichier_two != "." && $fichier_two != ".." && $fichier_two != ".svn") {
+									copy ("$theme_path/img_pack/icones_barre/$fichier_two","img_pack/icones_barre/$fichier_two");
+							}
+						}
+						
+						$img_pack_sub_two = opendir ($theme_path.'/img_pack/icones/');
+						while ($fichier_three = readdir ($img_pack_sub_two)) {
+							if ($fichier_three != "." && $fichier_three != ".." && $fichier_three != ".svn") {
+									copy ("$theme_path/img_pack/icones/$fichier_three","img_pack/icones/$fichier_three");
+							}
+						}
+					}
+			}
+				
 	 		}
 	 		
-	 		# Si l'utilisateur ou l'utilisatrice veut revenir a la situation initiale.
-	 		else if ($theme == "initial") {
-		 		$search_comment_backup = eregi("//backup_define\(\'_DIR_IMG_PACK\', \(\'(.*)\'\)\)\;", $read_backup_file);
-		 		
-		 		if ($search_comment) {
-			 		$open_options_file = fopen($options_file, 'w+');
-			 		$erased_content = "//start_define_img_pack(.*)//end_define_img_pack";
-			 		$insert_new_content = ereg_replace($erased_content, '', $read_backup_file);
-			 		$write = fwrite($open_options_file, $insert_new_content);
-			 		fclose($open_options_file);
-		 		}
-		 		
-		 		else if ($search_comment_backup){
-			 		$open_options_file = fopen($options_file, 'w+');
-			 		$insert_new_content = ereg_replace( '//backup_define', 'define', $read_backup_file);
-			 		$write = fwrite($open_options_file, $insert_new_content);
-			 		fclose($open_options_file);
-			 	}
-			 	
-		 		else {
-			 		rename($backup_file, $options_file);
-		 		}
+	 		else if (!file_exists($theme_duplicated)){
+		 		###echo "le theme.xml existe pas dans img_pack";
+				if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+					else if (!is_dir('img_pack_backup') AND is_dir('img_pack')){
+						rename ("img_pack", "img_pack_backup");
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+				
+				$img_pack_path = opendir ($theme_path.'/img_pack/');
+				while ($fichier = readdir ($img_pack_path)) {
+					if ($fichier != "." && $fichier != ".." && $fichier != ".svn" && $fichier != "icones_barre" && $fichier != "icones") {
+							copy ("$theme_path/img_pack/$fichier","img_pack/$fichier");
+							copy ("$theme_path/theme.xml","img_pack/theme.xml");
+					}
+				}
+				
+				$img_pack_sub_one = opendir ($theme_path.'/img_pack/icones_barre/');
+				while ($fichier_two = readdir ($img_pack_sub_one)) {
+					if ($fichier_two != "." && $fichier_two != ".." && $fichier_two != ".svn") {
+							copy ("$theme_path/img_pack/icones_barre/$fichier_two","img_pack/icones_barre/$fichier_two");
+					}
+				}
+				
+				$img_pack_sub_two = opendir ($theme_path.'/img_pack/icones/');
+				while ($fichier_three = readdir ($img_pack_sub_two)) {
+					if ($fichier_three != "." && $fichier_three != ".." && $fichier_three != ".svn") {
+							copy ("$theme_path/img_pack/icones/$fichier_three","img_pack/icones/$fichier_three");
+					}
+				}
 	 		}
-	 	}
-	 	
-	 	else {
-		 	$open_options_file = fopen($options_file, 'w+');
-		 	$new_content = "<?php\n//start_define_img_pack\ndefine('_DIR_IMG_PACK', ('".$plugin_directory."/prive/themes/".$theme."/img_pack/'));\n//end_define_img_pack\n?>";
-			$write = fwrite($open_options_file, $new_content);
-			fclose($open_options_file);
-	 	}
-	}
+		 		# Fin routine
+	 		}
+ 			 
+ 	}
  	
+ 	else if ($theme != "" AND $theme != "initial" AND !file_exists($options_file)) {
+
+	 	# Routines a mettre en fonction.
+ 			if (file_exists($theme_duplicated)) {
+	 		###echo "theme.xml existe dans img_pack";
+	 		$open_theme_xml = fopen($theme_xml, 'r');
+			$theme_xml_size = filesize ($theme_xml);
+			$read_theme_xml = fread ($open_theme_xml, $theme_xml_size);
+			$search_theme_name = eregi("<prefixe>(.*)</prefixe>", $read_theme_xml, $theme_name);
+			$search_theme_version = eregi("<version>(.*)</version>", $read_theme_xml, $theme_version);
+	 		
+			$open_theme_duplicated = fopen($theme_duplicated, 'r');
+			$theme_duplicated_size = filesize ($theme_duplicated);
+			$read_theme_duplicated = fread ($open_theme_duplicated, $theme_duplicated_size);
+			$search_duplicated_name = eregi("\<prefixe\>(.*)\<\/prefixe\>", $read_theme_duplicated, $duplicated_name);
+			$search_duplicated_version = eregi("<version>(.*)</version>", $read_theme_duplicated, $duplicated_version);
+			
+			if ($theme_name[1] != $duplicated_name[1]) {
+				###echo "le theme choisi n'est pas le meme que dans img_pack";
+				if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+					else if (!is_dir('img_pack_backup') AND is_dir('img_pack')){
+						rename ("img_pack", "img_pack_backup");
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+				
+				$img_pack_path = opendir ($theme_path.'/img_pack/');
+				while ($fichier = readdir ($img_pack_path)) {
+					if ($fichier != "." && $fichier != ".." && $fichier != ".svn" && $fichier != "icones_barre" && $fichier != "icones") {
+							copy ("$theme_path/img_pack/$fichier","img_pack/$fichier");
+							copy ("$theme_path/theme.xml","img_pack/theme.xml");
+					}
+				}
+				
+				$img_pack_sub_one = opendir ($theme_path.'/img_pack/icones_barre/');
+				while ($fichier_two = readdir ($img_pack_sub_one)) {
+					if ($fichier_two != "." && $fichier_two != ".." && $fichier_two != ".svn") {
+							copy ("$theme_path/img_pack/icones_barre/$fichier_two","img_pack/icones_barre/$fichier_two");
+					}
+				}
+				
+				$img_pack_sub_two = opendir ($theme_path.'/img_pack/icones/');
+				while ($fichier_three = readdir ($img_pack_sub_two)) {
+					if ($fichier_three != "." && $fichier_three != ".." && $fichier_three != ".svn") {
+							copy ("$theme_path/img_pack/icones/$fichier_three","img_pack/icones/$fichier_three");
+					}
+				}
+				
+			}
+			else if ($theme_name[1] == $duplicated_name[1]) {
+				###echo "le theme choisi est le même que dans img_pack";
+				if (($duplicated_version[1] != $theme_version[1]) AND ($duplicated_version[1] < $theme_version[1])) {
+					
+					if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+					else if (!is_dir('img_pack_backup') AND is_dir('img_pack')){
+						rename ("img_pack", "img_pack_backup");
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+					
+					$img_pack_path = opendir ($theme_path.'/img_pack/');
+					while ($fichier = readdir ($img_pack_path)) {
+						if ($fichier != "." && $fichier != ".." && $fichier != ".svn" && $fichier != "icones_barre" && $fichier != "icones") {
+								copy ("$theme_path/img_pack/$fichier","img_pack/$fichier");
+								copy ("$theme_path/theme.xml","img_pack/theme.xml");
+						}
+					}
+					
+					$img_pack_sub_one = opendir ($theme_path.'/img_pack/icones_barre/');
+					while ($fichier_two = readdir ($img_pack_sub_one)) {
+						if ($fichier_two != "." && $fichier_two != ".." && $fichier_two != ".svn") {
+								copy ("$theme_path/img_pack/icones_barre/$fichier_two","img_pack/icones_barre/$fichier_two");
+						}
+					}
+					
+					$img_pack_sub_two = opendir ($theme_path.'/img_pack/icones/');
+					while ($fichier_three = readdir ($img_pack_sub_two)) {
+						if ($fichier_three != "." && $fichier_three != ".." && $fichier_three != ".svn") {
+								copy ("$theme_path/img_pack/icones/$fichier_three","img_pack/icones/$fichier_three");
+						}
+					}
+				}
+		}
+			
+ 		}
+ 		
+ 		else if (!file_exists($theme_duplicated)){
+	 		###echo "le theme.xml existe pas dans img_pack";
+			if (is_dir('img_pack_backup') AND !is_dir('img_pack')) {
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+					else if (!is_dir('img_pack_backup') AND is_dir('img_pack')){
+						rename ("img_pack", "img_pack_backup");
+						mkdir ("img_pack", 0700);
+						mkdir ("img_pack/icones_barre", 0700);
+						mkdir ("img_pack/icones", 0700);
+					}
+			
+			$img_pack_path = opendir ($theme_path.'/img_pack/');
+			while ($fichier = readdir ($img_pack_path)) {
+				if ($fichier != "." && $fichier != ".." && $fichier != ".svn" && $fichier != "icones_barre" && $fichier != "icones") {
+						copy ("$theme_path/img_pack/$fichier","img_pack/$fichier");
+						copy ("$theme_path/theme.xml","img_pack/theme.xml");
+				}
+			}
+			
+			$img_pack_sub_one = opendir ($theme_path.'/img_pack/icones_barre/');
+			while ($fichier_two = readdir ($img_pack_sub_one)) {
+				if ($fichier_two != "." && $fichier_two != ".." && $fichier_two != ".svn") {
+						copy ("$theme_path/img_pack/icones_barre/$fichier_two","img_pack/icones_barre/$fichier_two");
+				}
+			}
+			
+			$img_pack_sub_two = opendir ($theme_path.'/img_pack/icones/');
+			while ($fichier_three = readdir ($img_pack_sub_two)) {
+				if ($fichier_three != "." && $fichier_three != ".." && $fichier_three != ".svn") {
+						copy ("$theme_path/img_pack/icones/$fichier_three","img_pack/icones/$fichier_three");
+				}
+			}
+ 		}	 
+ 	}
+
+ 	else if ($theme == "initial") {
+	 	###echo "veut revenir initial";
+	 	if (is_dir('img_pack_backup')) {
+		 	mkdir ("img_pack", 0700);
+			mkdir ("img_pack/icones_barre", 0700);
+			mkdir ("img_pack/icones", 0700);
+			
+			$img_pack_backup_one = opendir ('/img_pack_backup/');
+			while ($fichier = readdir ($img_pack_backup_one)) {
+				if ($fichier != "." && $fichier != ".." && $fichier != ".svn" && $fichier != "icones_barre" && $fichier != "icones") {
+						copy ("/img_pack_backup/$fichier","img_pack/$fichier");
+				}
+			}
+			
+			$img_pack_backup_two = opendir ('/img_pack_backup/icones_barre/');
+			while ($fichier_two = readdir ($img_pack_sub_one)) {
+				if ($fichier_two != "." && $fichier_two != ".." && $fichier_two != ".svn") {
+						copy ("/img_pack_backup/icones_barre/$fichier_two","img_pack/icones_barre/$fichier_two");
+				}
+			}
+			
+			$img_pack_backup_three = opendir ('/img_pack_backup/icones/');
+			while ($fichier_three = readdir ($img_pack_backup_three)) {
+				if ($fichier_three != "." && $fichier_three != ".." && $fichier_three != ".svn") {
+						copy ("/img_pack_backup//icones/$fichier_three","img_pack/icones/$fichier_three");
+				}
+			}
+	 	}
+	 	else if (!is_dir('img_pack_backup')) {
+		 	###echo "mettre in img_pack natif quelque part pour le restaurer et restaurer mes options";
+	 	}
+ 	}
+ 	
+ 	echo "<a name='access-c' href='#access-c' accesskey='c'></a><div class='cadre-r'><div style='position: relative;'><div class='cadre-titre' style='margin: 0px;'>";
  	echo '<INPUT type=radio name="theme" value="initial"';
  		if ($_REQUEST['theme'] == "initial") {
 	 		echo "checked";
  		}
  	echo ">";
  	echo "<strong>Revenir &agrave; l'habillage d'origine</strong>";
- 	echo "<br />";
+ 	echo '</div></div><div class="cadre-padding" style="overflow:hidden;">';
+	    		echo "</div></div><div style='height: 5px;'></div>";
  	
  	$dossier = opendir (_DIR_PLUGIN_HABILLAGES.'/prive/themes/');
 	while ($fichier = readdir ($dossier)) {
     	if ($fichier != "." && $fichier != "..") {
+	    	echo "<a name='access-c' href='#access-c' accesskey='c'></a><div class='cadre-r'><div style='position: relative;'><div class='cadre-titre' style='margin: 0px;'>";
 	    	echo '<INPUT type=radio name="theme" value="'.$fichier.'"';
+	    	$input_begin = '<INPUT type=radio name="theme" value="'.$fichier.'"';
 	    	if ($_REQUEST['theme'] == "" AND file_exists($options_file)) {
 		    	$open_options_file = fopen($options_file, 'r');
 				$options_file_size = filesize ($options_file);
@@ -181,6 +597,7 @@ function exec_config_habillages() {
 				$search_template_name = eregi("$plugin_directory/prive/themes/(.*)/img_pack/", $read_options_file, $template_name);
 				if ($template_name[1] == $fichier) {
 		    	echo " checked";
+		    	$input_checked = ' checked';
 	    		}
 	    		fclose($open_options_file);
 	    	}
@@ -191,21 +608,24 @@ function exec_config_habillages() {
 	    	
 	    	$theme_file = $plugin_directory.'/prive/themes/'.$fichier.'/theme.xml';
 	    	if (file_exists($theme_file)) {
-        	$open_theme_file = fopen($theme_file, 'r');
-			$theme_file_size = filesize ($theme_file);
-			$read_theme_file = fread ($open_theme_file, $theme_file_size);
-			$search_theme_name = eregi("<nom>(.*)</nom>", $read_theme_file, $theme_name);
-			$search_theme_name = eregi("<auteur>(.*)</auteur>", $read_theme_file, $theme_author);
-			$search_theme_name = eregi("<version>(.*)</version>", $read_theme_file, $theme_version);
-			$search_theme_name = eregi("<description>(.*)</description>", $read_theme_file, $theme_description);
-			echo '<strong>'.$theme_name[1].'</strong> version '.$theme_version[1].'<br /><i><medium>Auteur : '.$theme_author[1].'</medium></i><br />';
-			echo '<small>'.$theme_description[1].'</small>';
-        	echo "<BR />";
-        	fclose($open_theme_file);
+	        	$open_theme_file = fopen($theme_file, 'r');
+				$theme_file_size = filesize ($theme_file);
+				$read_theme_file = fread ($open_theme_file, $theme_file_size);
+				$search_theme_name = eregi("<nom>(.*)</nom>", $read_theme_file, $theme_name);
+				$search_theme_author = eregi("<auteur>(.*)</auteur>", $read_theme_file, $theme_author);
+				$search_theme_version = eregi("<version>(.*)</version>", $read_theme_file, $theme_version);
+				$search_theme_description = eregi("<description>(.*)</description>", $read_theme_file, $theme_description);
+				echo '<strong>'.$theme_name[1].'</strong> version '.$theme_version[1].'</div></div><div class="cadre-padding" style="overflow:hidden;">';
+				echo '<i><medium>Auteur : '.$theme_author[1].'</medium></i><br />';
+				echo '<small>'.$theme_description[1].'</small>';
+	        	echo "</div></div><div style='height: 5px;'></div>";
+	        	fclose($open_theme_file);
     		}
     		
     		else {
-	    		echo '<strong>'.$fichier.'</strong><br />';
+	    		echo '<strong>'.$fichier.'</strong>';
+	    		echo '</div></div><div class="cadre-padding" style="overflow:hidden;">';
+	    		echo "</div></div><div style='height: 5px;'></div>";
     		}
     	}
 	}
@@ -218,7 +638,7 @@ function exec_config_habillages() {
 echo "<br />";
 
 #### DEBUT DE L'ENCADRE QUI GERE L'HABILLAGE PUBLIC #####################################
-debut_cadre_trait_couleur("", false, "", _T('habillageprive:titre_habillage_public'));
+debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_public-32.png", false, "", _T('habillageprive:titre_habillage_public'));
  	
 	$squelette = $_REQUEST['squelette'];
  	$plugin_options_file = "$plugin_directory/habillages_options.php";
