@@ -33,5 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_gestion_cr_casse' => 'Respecter la casse',
 'barre_gestion_cr_tout' => 'Tout remplacer',
 'barre_gestion_cr_entier' => 'Mot entier',
+'barre_preview' => 'Mode pr&eacute;visualisation',
 );
 ?>
