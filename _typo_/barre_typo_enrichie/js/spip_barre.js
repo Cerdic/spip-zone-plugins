@@ -16,6 +16,21 @@ function delayFunction(callbackFunction, seconds){
 		this.currentTimeout = setTimeout(callbackFunction, seconds*1000);
 }
 
+function toggle_preview() {
+	if ($("#article_preview").css("display") == "none") {
+		$("#text_area").height($("#text_area").height()/2+"px");
+		$("#article_preview").height($("#text_area").height()+"px")
+		$("#article_preview").show();
+		MajPreview();
+	} else {
+		$("#text_area").height($("#text_area").height()*2+"px");
+		$("#article_preview").hide();
+	}
+}
+
+function preview_off() {
+}
+
 // Check for Browser & Platform for PC & IE specific bits
 // More details from: http://www.mozilla.org/docs/web-developer/sniffer/browser_type.html
 var clientPC = navigator.userAgent.toLowerCase(); // Get client info
