@@ -1,0 +1,21 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	SVN Update
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Cedric &amp; Fil
+_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Un utilisateur (par defaut, l'administrateur numero 1) a le droit de faire une mise &agrave; jour SVN du site ou de tout autre r&eacute;pertoire. Se rendre sur la page [ecrire/?exec=svn_update->./?exec=svn_update].
+	</description>
+	<prefix>
+	svn_update
+	</prefix>
+</plugin>
