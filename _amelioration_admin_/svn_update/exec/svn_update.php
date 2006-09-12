@@ -52,7 +52,8 @@ function exec_svn_update() {
 	$dirs = explode(':', _SVN_UPDATE_DIRS);
 	$dirs_ok = array();
 	foreach ($dirs as $dir) {
-		if (is_dir($dir.'.svn') AND is_writeable($dir.'.svn'))
+		$test = _DIR_RACINE.$dir.'.svn';
+		if (is_dir($test) AND is_writeable($test))
 			$dirs_ok[] = $dir;
 	}
 
@@ -61,7 +62,7 @@ function exec_svn_update() {
 		// Appliquer la demande
 		if ($dir_svn = _request('dir_svn')
 		AND in_array($dir_svn, $dirs_ok)) {
-			echo "Update $dir_svn:<br />\n";
+			echo "<tt>&gt; svn update <b>$dir_svn</b></tt><br />\n";
 			
 			$retour = update_svn(_DIR_RACINE.$dir_svn);
 			if (!$retour)
