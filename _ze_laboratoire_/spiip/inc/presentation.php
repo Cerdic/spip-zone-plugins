@@ -2043,7 +2043,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 		//if (!$fonction) $fonction = "rien.gif";
 	
 		if ($spip_display != 1) {
-			$retour .= "<a href='$lien' class='cellule-h h-icon' $javascript>";
+			$retour .= "<a $lien class='cellule-h h-icon' $javascript>";
 			$fond = _DIR_IMG_PACK.$fond;
 			if($fonction) {
 				include_spip('inc/filtres');

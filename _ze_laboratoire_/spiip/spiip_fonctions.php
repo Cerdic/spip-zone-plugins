@@ -57,6 +57,7 @@ function balise_URL_ACTION($p) {
 
 //
 // Get the next available accesskey
+// Cannot manage accesskey on ajax fragments
 //
 function balise_GET_ACCESSKEY($p) {
 	global $accesskey;

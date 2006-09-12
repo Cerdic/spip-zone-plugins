@@ -3,7 +3,7 @@
 #SET{spip_display,#EVAL{$GLOBALS["spip_display"]}}
 #SET{titre,#ENV{titre}|_T}
 <BOUCLE_style(IF){condition (#GET{spip_display}|!={1}|sinon{false}) && (#GET{spip_display}|!={4}|sinon{false}) && (#ENV*{icone}|strlen|>{1}|sinon{false})}>
-#SET{style_gauche,  padding-(#ENV{spip_lang_left}): 38px;}
+#SET{style_gauche,  padding-(#EVAL{$GLOBALS["spip_lang_left"]}): 38px;}
 #SET{style_cadre,(#GET{style_cadre})margin-top: 14px;'}
 </BOUCLE_style>
 #SET{style_cadre,(#GET{style_cadre})"'"}
@@ -17,9 +17,7 @@
 <BOUCLE_style2(IF){condition (#GET{spip_display}|!={1}|sinon{false}) && (#GET{spip_display}|!={4}|sinon{false}) && (#ENV*{icone}|strlen|>{1}|sinon{false})}>
 <div style='position: absolute; top: -16px; #ENV{spip_lang_left}: 10px;'>
 [(#ENV{fonction}|?{
-<div style="background:url(#ENV{icone}) no-repeat  padding: 0px; margin: 0px">
-#HTTP_IMG_PACK{#ENV{fonction}, "", ""}
-</div>,
+<div style="background:url([(#EVAL{_DIR_IMG_PACK})][(#ENV{icone})]) no-repeat; padding: 0px; margin: 0px">[(#HTTP_IMG_PACK{#ENV{fonction}, "", ""})]</div>,
 #HTTP_IMG_PACK{#ENV{icone}, "", ""}
 })]
 </div>
