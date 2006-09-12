@@ -3,7 +3,7 @@
 # redefinissables dans ecrire/mes_options ; si on veut en mettre
 # plusieurs separer par des virgules
 define('_SVN_UPDATE_AUTEURS', '1');
-define('_SVN_UPDATE_DIRS', '../');
+define('_SVN_UPDATE_DIRS', './');
 
 
 # securite
@@ -40,7 +40,7 @@ function exec_svn_update() {
 
 
 	if ($connect_statut != '0minirezo'
-	OR !in_array($connect_id_auteur, explode(',', _SVN_UPDATE_AUTEURS))) {
+	OR !in_array($connect_id_auteur, explode(':', _SVN_UPDATE_AUTEURS))) {
 		echo _T('avis_non_acces_page');
 		fin_page();
 		exit;
@@ -49,7 +49,7 @@ function exec_svn_update() {
 	debut_gauche();
 	debut_droite();
 
-	$dirs = explode(',', _SVN_UPDATE_DIRS);
+	$dirs = explode(':', _SVN_UPDATE_DIRS);
 	$dirs_ok = array();
 	foreach ($dirs as $dir) {
 		if (is_dir($dir.'.svn') AND is_writeable($dir.'.svn'))
@@ -63,7 +63,7 @@ function exec_svn_update() {
 		AND in_array($dir_svn, $dirs_ok)) {
 			echo "Update $dir_svn:<br />\n";
 			
-			$retour = update_svn($dir_svn);
+			$retour = update_svn(_DIR_RACINE.$dir_svn);
 			if (!$retour)
 				$retour = "Erreur SVN";
 			
@@ -78,10 +78,10 @@ function exec_svn_update() {
 		<input type='hidden' name='exec' value='$exec' />
 		<select name='dir_svn'>";
 		foreach ($dirs_ok as $dir) {
-			echo "<option value='$dir'>".joli_repertoire($dir)."</option>\n";
+			echo "<option value='$dir'>".$dir."</option>\n";
 		}
 		echo "</select>
-		<input type='submit' value='UPDATE' />
+		<input type='submit' value='Update' />
 		</form>
 		";
 
