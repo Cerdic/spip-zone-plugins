@@ -76,8 +76,9 @@ function hr($color, $retour = false) {
 
 // http://doc.spip.org/@debut_cadre
 function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
-	global $spip_display, $spip_lang_left;
-	static $accesskey = 97; // a
+	global $spip_display, $spip_lang_left,$accesskey;
+	//use a global var to manage accesskey via debut_cadre and #GET_ACCESSKEY 
+	if(!$accesskey) $accesskey = 97;
 
 	//zoom:1 fixes all expanding blocks in IE, see authors block in articles.php
 	//being not standard, next step can be putting this kind of hacks in a different stylesheet

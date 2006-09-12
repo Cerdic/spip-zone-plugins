@@ -55,15 +55,14 @@ function balise_URL_ACTION($p) {
 	return $p;
 }
 
-function static_var($dummy,$name,$value='') {
-	static $vars = array();
-	if(!$value) {
-		if(isset($vars[$name])) return $vars[$name];
-		else return '';
-	} else {
-		$vars[$name] = $value;
-		return '';
-	}
+//
+// Get the next available accesskey
+//
+function balise_GET_ACCESSKEY($p) {
+	global $accesskey;
+	if(!$accesskey) $accesskey = 97;
+	$key = $accesskey<=122?chr($accesskey):'';
+	$p->code = "'$key'";
+	return $p;
 }
-
 ?>
