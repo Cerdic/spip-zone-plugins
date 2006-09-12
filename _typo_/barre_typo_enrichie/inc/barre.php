@@ -331,7 +331,9 @@ function MajPreviewCallBack() {
 }
 
 function MajPreview() {
-	delayFunction("MajPreviewCallBack()",1);
+	if ($("#article_preview").css("display") != "none") {
+		delayFunction("MajPreviewCallBack()",1);
+	}
 }
 
 $(document).ready(function(){
