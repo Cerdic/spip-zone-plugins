@@ -55,5 +55,15 @@ function balise_URL_ACTION($p) {
 	return $p;
 }
 
+function static_var($dummy,$name,$value='') {
+	static $vars = array();
+	if(!$value) {
+		if(isset($vars[$name])) return $vars[$name];
+		else return '';
+	} else {
+		$vars[$name] = $value;
+		return '';
+	}
+}
 
 ?>
