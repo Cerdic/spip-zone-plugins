@@ -8,9 +8,7 @@
 	<version> <!--Vous devez obligatoirement changer de numero de version lorsque vous ajoutez ou modifiez des icones dans le theme. -->
 	0.1
 	</version>
-	<prefixe>
-	iko
-	</prefixe>
+	<prefixe>iko</prefixe>
 	<description>
 	Insertion du jeu d'icones "Iko" (voir http://www.koakidi.com/article.php3?id_article=230).
 	</description>
