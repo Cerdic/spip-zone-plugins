@@ -320,11 +320,15 @@ function hauteurTextarea() {
 	source.style.height = hauteur + "px";
 }
 
-function MajPreview() {
+function MajPreviewCallBack() {
 	$.post("' . generer_url_ecrire("article_preview",""). '", { texte:$("#text_area").val() }, function(data) {
 		$("#article_preview").empty()
 		$("#article_preview").append(data);
 		});
+}
+
+function MajPreview() {
+	delayFunction("MajPreviewCallBack()",1);
 }
 
 $(document).ready(function(){
@@ -332,10 +336,6 @@ $(document).ready(function(){
 	$("#text_area").oneresize($("#article_preview").height($("#text_area").height()+"px"));
 	$.ajaxTimeout( 5000 );
 	$("#text_area").keypress(function() { MajPreview() });
-	$("#text_area").keyup(function() { MajPreview() });
-	$("#text_area").change(function() { MajPreview() });
-	$("#text_area").blur(function() { MajPreview() });
-	$("#text_area").focus(function() { MajPreview() });
 });
 	 //--></script>';
 	return $ret;

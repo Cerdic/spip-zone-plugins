@@ -5,6 +5,17 @@
 // Startup variables
 var theSelection = false;
 
+// Variables globales
+var currentTimeout;
+
+// Déclencher une fonction après n secondes ou annuler un appel précédent à la fonction
+function delayFunction(callbackFunction, seconds){
+	if(this.currentTimeout)
+		clearTimeout(this.currentTimeout);
+	if(callbackFunction && seconds)
+		this.currentTimeout = setTimeout(callbackFunction, seconds*1000);
+}
+
 // Check for Browser & Platform for PC & IE specific bits
 // More details from: http://www.mozilla.org/docs/web-developer/sniffer/browser_type.html
 var clientPC = navigator.userAgent.toLowerCase(); // Get client info
@@ -218,7 +229,7 @@ function mozWrap(txtarea, open, close)
 	window.setSelectionRange(txtarea, selDeb, selFin);
 	txtarea.scrollTop = selTop;
 	txtarea.focus();
-	
+	MajPreview();
 	return;
 }
 
