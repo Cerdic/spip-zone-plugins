@@ -578,8 +578,10 @@ function exec_config_habillages() {
 				if ($fichier_three != "." && $fichier_three != ".." && $fichier_three != ".svn") {
 						copy ("img_pack_backup//icones/$fichier_three","img_pack/icones/$fichier_three");
 				}
-		}
- 	}
+			}
+			
+			unlink ("img_pack/theme.xml");
+ 		}
  	
  	echo "<a name='access-c' href='#access-c' accesskey='c'></a><div class='cadre-r'><div style='position: relative;'><div class='cadre-titre' style='margin: 0px;'>";
  	echo '<INPUT type=radio name="theme" value="initial"';
