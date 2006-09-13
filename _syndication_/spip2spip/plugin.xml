@@ -1,0 +1,44 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	SPIP2SPIP
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	erational
+ 	[erational.org->http://www.erational.org]
+_ &copy; 2006 - Licence GPL
+	</auteur>
+	<version>
+	1.4
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+    Migration de la [contribution SPIP2SPIP->http://www.a-brest.net/article2340.html] en plugin.
+    <p>Permet de copier les articles de SPIP distant dans le SPIP sous forme d'articles. 
+    A la diff&eacute;rence de miroir de syndication, vous avez le choix des articles &agrave; recopier ou diffuser en attribuant les mots-cl&eacute;s du groupe dedi&eacute; - spip2spip - 
+    <br />Les articles recopi&eacute;s tentent de r&eacute;cuperer le maximum de donn&eacute;es: 
+    <ul>
+    <li>formatage original SPIP de l'article</li>
+    <li>images, documents attach&eacute;s recopi&eacute;s en documents distants</li>
+    <li>essayer de faire correspondre les auteurs</li>
+    <li>licence ...</li>  
+    </ul>
+    </p>
+	</description>
+	<fonctions>spiptospip_filtre.php</fonctions>
+	<prefix> 
+	spip2spip
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>inc-spip2spip.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<action>ajouter_cron</action>
+		<inclure>spip2spip.php</inclure>
+	</pipeline>
+</plugin>
