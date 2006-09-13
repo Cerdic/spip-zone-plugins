@@ -49,12 +49,13 @@ _ Et aussi sur les entr&eacute;es de glossaire <code>[?GPL|Gnu Public Licence]</
 	<prefix> 
 	BarreTypoEnrichie
 	</prefix>
-	<options> <!-- fichier charge a chaque hit -->
-	typo_enrichie_options.php
-	</options>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 			<nom>pre_propre</nom>
+			<inclure>typo_enrichie.php</inclure>
+	</pipeline>
+	<pipeline>
+			<nom>traiter_raccourci_lien</nom>
 			<inclure>typo_enrichie.php</inclure>
 	</pipeline>
 	<pipeline>
