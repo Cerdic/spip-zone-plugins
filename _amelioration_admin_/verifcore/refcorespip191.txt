@@ -1,12 +1,12 @@
 svn://trac.rezo.net/spip/branches/spip-1.9
-temps:1158045679
+temps:1158183946
 CACHE/remove.txt:80:1012897441
-dist/modeles/img.html:1061:1156361342
+dist/modeles/img.html:1062:1158161676
 dist/modeles/emb.html:3045:1156332181
-dist/modeles/lesauteurs.html:265:1156251271
-dist/modeles/doc.html:977:1157285063
-dist/modeles/article_traductions.html:758:1156511410
-dist/modeles/article_mots.html:439:1156361342
+dist/modeles/lesauteurs.html:316:1158161676
+dist/modeles/doc.html:977:1158161676
+dist/modeles/article_traductions.html:773:1158161676
+dist/modeles/article_mots.html:517:1158161676
 dist/modeles/pagination_page.html:4071:1155511400
 dist/modeles/paginationitem.html:262:1155517138
 dist/modeles/pagination.html:4101:1155751422
@@ -258,7 +258,7 @@ ecrire/exec/export_all.php:13887:1155592721
 ecrire/exec/rubriquer.php:1120:1155592721
 ecrire/exec/export.php:3639:1155592721
 ecrire/exec/messagerie.php:6634:1155592721
-ecrire/exec/grouper_mots.php:6710:1157664944
+ecrire/exec/grouper_mots.php:6662:1158166791
 ecrire/exec/synchro.php:4315:1155592721
 ecrire/exec/breves.php:2312:1155592721
 ecrire/exec/mots_edit.php:11230:1156521956
@@ -315,7 +315,7 @@ ecrire/inc/signatures.php:4554:1156324130
 ecrire/inc/install_0.php:1568:1155592721
 ecrire/inc/minipres.php:8572:1157852246
 ecrire/inc/install_1.php:2662:1155592721
-ecrire/inc/sites_voir.php:8087:1157664944
+ecrire/inc/sites_voir.php:8052:1158166791
 ecrire/inc/install_2.php:1858:1155592721
 ecrire/inc/install_3.php:3338:1155592721
 ecrire/inc/admin.php:2943:1155592721
@@ -336,7 +336,7 @@ ecrire/inc/headers.php:2497:1155592721
 ecrire/inc/charsets.php:21020:1157204562
 ecrire/inc/acces.php:6922:1155592721
 ecrire/inc/getdocument.php:17904:1157664944
-ecrire/inc/message_select.php:4740:1155592721
+ecrire/inc/message_select.php:4691:1158166791
 ecrire/inc/suivi_versions.php:7095:1156324130
 ecrire/inc/texte.php:38847:1156715740
 ecrire/inc/filtres_images.php:48452:1156612756
@@ -365,7 +365,7 @@ ecrire/inc/documents.php:33337:1157664944
 ecrire/inc/invalideur.php:5946:1155592721
 ecrire/inc/indexation.php:30070:1156523793
 ecrire/inc/config.php:9989:1157127060
-ecrire/inc/presentation.php:94866:1157852246
+ecrire/inc/presentation.php:94318:1158166791
 ecrire/inc/filtres.php:51163:1157849102
 ecrire/inc/import.php:14070:1156519934
 ecrire/inc/install_ldap1.php:3139:1155592721
@@ -467,7 +467,7 @@ ecrire/img_pack/puce-blanche-breve.gif:53:1085585118
 ecrire/img_pack/historique-24.gif:775:1088824378
 ecrire/img_pack/presentation.js:7035:1157405497
 ecrire/img_pack/traductions-24.gif:664:1070226335
-ecrire/img_pack/layer.js:8062:1157405497
+ecrire/img_pack/layer.js:8304:1158166791
 ecrire/img_pack/aide_rtl.gif:102:1046102901
 ecrire/img_pack/rond-bd.gif:72:1019577758
 ecrire/img_pack/fiche-perso-24.gif:173:1095171483
