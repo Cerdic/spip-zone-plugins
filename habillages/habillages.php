@@ -32,6 +32,5 @@ function habillages_header_prive($flux){
 		$flux .= '<meta http-equiv="expires" content="0">'."\n";
 		return $flux;
 	}
-	
 }
 ?>

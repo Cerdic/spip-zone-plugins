@@ -656,6 +656,7 @@ debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_publ
  	$plugin_options_file = "$plugin_directory/habillages_options.php";
  	
  	if ($squelette == "initial") {
+	 	chmod($plugin_options_file, 0777);
 		$open_plugin_options_file = fopen($plugin_options_file, 'w+');
 		$empty_content = "<?php\n?>";
 		$write = fwrite($open_plugin_options_file, $empty_content);
@@ -664,6 +665,7 @@ debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_publ
 	
 	else if ($squelette != "") {
 		$cleaned_path = str_replace('../', "", _DIR_PLUGIN_HABILLAGES);
+		chmod($plugin_options_file, 0777);
 	 	$open_plugin_options_file = fopen($plugin_options_file, 'w+');
 		$new_content = "<?php\n\$GLOBALS['dossier_squelettes']='".$cleaned_path."/public/themes/$squelette/squelettes';\n?>"; 
 		$write = fwrite($open_plugin_options_file, $new_content);
@@ -713,6 +715,8 @@ debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_publ
 			$search_theme_name = eregi("<description>(.*)</description>", $read_theme_file, $theme_description);
 			echo '<strong>'.$theme_name[1].'</strong> version '.$theme_version[1].'</div></div><div class="cadre-padding" style="overflow:hidden;">';
 				echo '<i><medium>Auteur : '.$theme_author[1].'</medium></i><br />';
+				echo '<div style="float:left";><img src="../'.$plugin_directory.'/public/themes/'.$fichier.'/capture.png" alt="description" class="preview" /></div>';
+
 				echo '<small>'.$theme_description[1].'</small>';
 	        	echo "</div></div><div style='height: 5px;'></div>";
         	fclose($open_theme_file);
@@ -721,6 +725,7 @@ debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_publ
     		else {
 	    		echo '<strong>'.$fichier.'</strong>';
 	    		echo '</div></div><div class="cadre-padding" style="overflow:hidden;">';
+	    		echo '<div style="float:left";><img src="../'.$plugin_directory.'/public/themes/'.$fichier.'/capture.png" alt="description" class="preview" /></div>';
 	    		echo "</div></div><div style='height: 5px;'></div>";
     		}
     	}
