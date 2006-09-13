@@ -1,4 +1,4 @@
-- Travailler l'ergonomie et la presentation du plugin.
+- Attention : la mise un jour d'un thème de l'espace privé ne se rechargera que si on change de thème et que l'on reprend le précédent (voir pour mettre une vérif des versions de theme dans mes_options).
 - Mettre verrou pour ne pas utiliser deux noms de thème identiques (?).
 - Dans le gestionnaire de l'espace public, mettre un "aperçu" pour voir le squelette en situation sur le site public.
 - Embarquer les logos et autres images des plugins dans img_pack de chaque thème de l'espace privé : les icônes des plugins seront en effet parfois à modifier afin de maintenir l'uniformité d'un thème.

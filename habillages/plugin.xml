@@ -6,7 +6,7 @@
  	Franck Ducas
 	</auteur>
 	<version> <!-- Version du plugin -->
-	0.2
+	0.3.1
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	test
