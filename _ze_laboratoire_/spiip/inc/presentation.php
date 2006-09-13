@@ -2119,10 +2119,28 @@ function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") 
 
 // http://doc.spip.org/@debut_page
 function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $onLoad = "", $css="", $id_rubrique = "") {
+	
+	include_spip('public/assembler');
+
+	echo recuperer_fond('debut_page',array(
+		"titre" => _T('titre_page_index'),
+		"rubrique" => "accueil",
+		"sous_rubrique" => "accueil",
+		"on_load" => $onLoad,
+		"css" => $css,
+		"id_rubrique" => $id_rubrique,		
+		"spip_display" => $GLOBALS["spip_display"],
+		"spip_ecran" => $GLOBALS["spip_ecran"],
+		"lang" => $GLOBALS["spip_lang"],
+		"couleur_foncee" => $GLOBALS["couleur_foncee"],
+		"couleur_claire" => $GLOBALS["couleur_claire"]
+	));
+	/*
 	definir_barre_boutons();
 	init_entete($titre, $rubrique, $css, $onLoad);
 	init_body($rubrique, $sous_rubrique, '', $id_rubrique);
 	debut_corps_page($rubrique);
+	*/
 }
  
 function init_entete($titre, $rubrique, $css='',$onLoad = '') {
@@ -2161,7 +2179,7 @@ function init_entete($titre, $rubrique, $css='',$onLoad = '') {
 
 // fonction envoyant la double serie d'icones de redac
 // http://doc.spip.org/@init_body
-function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $id_rubrique='') {
+function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $id_rubrique='',$echo=true) {
 	global $couleur_foncee, $couleur_claire, $adresse_site;
 	global $connect_id_auteur;
 	global $connect_statut;
@@ -2171,21 +2189,25 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 	//global $browser_verifForm;
 
-	echo pipeline('body_prive',"<body ". _ATTRIBUTES_BODY.'>');
+	$ret = pipeline('body_prive',"<body ". _ATTRIBUTES_BODY.'>');
 	
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
 	
 	include_spip('public/assembler');
-	echo recuperer_fond('dist_back/bandeau_principal',array(
+	$ret .= recuperer_fond('dist_back/bandeau_principal',array(
 		'spip_ecran'=>$spip_ecran,
 		'spip_display'=>$spip_display,
 		'rubrique'=>$rubrique,
 		'sous_rubrique'=>$sous_rubrique
 		));
-
+	if($spip_display==4) {
+		if($echo) echo $ret;
+		else return $ret;
+	} 
+	
 	//init position of submenus and attach behaviour for hover on li (IE)
-	echo http_script(
+	$ret .= http_script(
 	"$('#bandeau-principal li.boutons_admin').hover(\n".
 	"//init the position one submenu at a time and only once when hovering\n".
 	"	function(){active_menu.hide();$(this).addClass('sfhover');if(jQuery.browser.msie)\$('#bandeau_couleur select').css('visibility','hidden')},\n".
@@ -2197,7 +2219,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 	// Bandeau colore
 	//
 	
-	echo recuperer_fond('dist_back/bandeau_couleur',array(
+	$ret .= recuperer_fond('dist_back/bandeau_couleur',array(
 		'spip_ecran'=>$spip_ecran,
 		'id_rubrique'=>$id_rubrique,
 		'rubrique'=>$rubrique,
@@ -2213,39 +2235,47 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 	// <div> pour la barre des gadgets
 	// (elements invisibles qui s'ouvrent sous la barre precedente)
 	include_spip('inc/gadgets');
-	echo bandeau_gadgets($largeur, $options, $id_rubrique);
+	$ret .= bandeau_gadgets($largeur, $options, $id_rubrique);
 	$GLOBALS['id_rubrique_gadgets'] = $id_rubrique;  # un peu sale
+	//dirty trick to trigger function dessiner_gadgets on fin_page
+	//while it is passed on squelette
+	$ret .= "<"."?php ".
+	"include_spip('inc/gadgets');". 
+	($id_rubrique?"\$GLOBALS['id_rubrique_gadgets'] = $id_rubrique; ":"").
+	"?".">";
 
-	echo "</div>";//fin haut_page
+	$ret .= "</div>";//fin haut_page
 	
 	//init bandeau_couleur
-	echo	http_script(
+	$ret .= http_script(
 	"$('#bandeau_couleur li.bandeau_couleur a[@id]').mouseover(showMenu);\n".
 	"$('map').mouseover(function(){active_menu.hide();active_menu=$('empty');});");
 
 	
-	if ($options != "avancees") echo "<div style='height: 18px;'>&nbsp;</div>";
+	if ($options != "avancees") $ret .= "<div style='height: 18px;'>&nbsp;</div>";
+	if($echo) echo $ret;
+	else return $ret;
 }
 
 
 // http://doc.spip.org/@debut_corps_page
-function debut_corps_page($rubrique='') {
+function debut_corps_page($rubrique='',$echo=true) {
 	global $couleur_foncee;
 	global $connect_id_auteur;
   
 	// Ouverture de la partie "principale" de la page
 
-	echo "<center onmouseover='recherche_desesperement()'>";
+	$ret = "<center onmouseover='recherche_desesperement()'>";
 
 	$result_messages = spip_query("SELECT lien.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
 	$total_messages = @spip_num_rows($result_messages);
 	if ($total_messages == 1) {
 				while($row = @spip_fetch_array($result_messages)) {
 					$ze_message=$row['id_message'];
-					echo "<div class='messages'><a href='" . generer_url_ecrire("message","id_message=$ze_message") . "'><font color='$couleur_foncee'>"._T('info_nouveau_message')."</font></a></div>";
+					$ret .= "<div class='messages'><a href='" . generer_url_ecrire("message","id_message=$ze_message") . "'><font color='$couleur_foncee'>"._T('info_nouveau_message')."</font></a></div>";
 				}
 			}
-			if ($total_messages > 1) echo "<div class='messages'><a href='" . generer_url_ecrire("messagerie") . "'><font color='$couleur_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</font></a></div>";
+			if ($total_messages > 1) $ret .= "<div class='messages'><a href='" . generer_url_ecrire("messagerie") . "'><font color='$couleur_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</font></a></div>";
 
 
 	// Afficher les auteurs recemment connectes
@@ -2269,15 +2299,17 @@ function debut_corps_page($rubrique='') {
 			
 			if ($nb_connectes > 0) {
 				if ($nb_connectes > 0) {
-					echo "<b>"._T('info_en_ligne')."</b>";
+					$ret .= "<b>"._T('info_en_ligne')."</b>";
 					while ($row = spip_fetch_array($result_auteurs)) {
 						$id_auteur = $row["id_auteur"];
 						$nom_auteur = typo($row["nom"]);
-						echo " &nbsp; ".bouton_imessage($id_auteur,$row)."&nbsp;<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "' style='color: #666666;'>$nom_auteur</a>";
+						$ret .= " &nbsp; ".bouton_imessage($id_auteur,$row)."&nbsp;<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "' style='color: #666666;'>$nom_auteur</a>";
 					}
 				}
 			}
-			if ($flag_cadre) echo "</div>";
+			if ($flag_cadre) $ret .= "</div>";
+			if($echo) echo $ret;
+			else return $ret;
 }
 
 

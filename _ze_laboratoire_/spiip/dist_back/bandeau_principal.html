@@ -31,7 +31,7 @@
 				<BOUCLE_accesskey(IF){condition (#CLE|!={espacement})}>
 					#SET{accesskey,(#GET{accesskey,0}|plus{1})}
 				</BOUCLE_accesskey>	
-			[(#INCLUDE{fond=icone_bandeau_principal}{bouton=#OBJ**{#VALEUR**}}{nom_bouton=#CLE}{largeur=#GET{largeur}}{rubrique}{sous_rubrique}{spip_display}{largeur_bouton=#GET{largeur_bouton}}{accesskey=#GET{accesskey}})]
+			[(#MODELE{icone_bandeau_principal}{bouton=#OBJ**{#VALEUR**}}{nom_bouton=#CLE}{largeur=#GET{largeur}}{rubrique}{sous_rubrique}{spip_display}{largeur_bouton=#GET{largeur_bouton}}{accesskey=#GET{accesskey}})]
 			</BOUCLE_boutons_admin>
 		</ul></div>
 	</div>

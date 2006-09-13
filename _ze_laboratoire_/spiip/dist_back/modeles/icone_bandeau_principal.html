@@ -21,6 +21,6 @@
 				<//B_display_icone>
 						</a>
 					#SET{accesskey,(#ENV{accesskey}|plus{1})}
-					[(#INCLUDE{fond=icone_bandeau_secondaire}{largeur}{sousmenu=#OBJ**{#ENV**{bouton},sousmenu}}{spip_display}{nom_bouton}{rubrique}{sous_rubrique}{accesskey=#GET{accesskey}})]
+					[(#MODELE{icone_bandeau_secondaire}{largeur}{sousmenu=#OBJ**{#ENV**{bouton},sousmenu}}{spip_display}{nom_bouton}{rubrique}{sous_rubrique}{accesskey=#GET{accesskey}})]
 					</li>
 			<//B_espacement>

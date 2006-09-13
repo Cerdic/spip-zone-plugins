@@ -1,0 +1,43 @@
+ [(#EVAL{include_spip("inc/boutons")}|vide)]
+ [(#EVAL{include_spip("inc/layer")}|vide)]
+ [(#EVAL{definir_barre_boutons()})]
+ #SET{largeur,(#EVAL{$GLOBALS["spip_ecran"]}|=={large}|?{974,750})}
+ #SET{largeur_bouton,#GET{largeur}|div{#EVAL{$GLOBALS["boutons_admin"]}|count}|intval}
+ #SET{nom,#CONFIG{nom_site,#REM|sinon{info_mon_site_spip}|_T}[(#REM)
+	//Store array variables names (containing square brackets) to be fine with the phraseur]
+ #SET{cookie_Ajax,$_COOKIE["spip_accepte_ajax"]}
+ #SET{spip_display,$GLOBALS["spip_display"]}
+ #SET{browser_verifForm,$GLOBALS["browser_verifForm"]}
+ #SET{browser_verifForm,#EVAL{#GET{browser_verifForm}}}
+ #SET{img_pack,#EVAL{_DIR_IMG_PACK}}
+	<title>&#91;[(#GET{nom})]&#93; [(#ENV{titre}|typo|textebrut)]</title>[(#REM)
+	// CSS de secours en cas de non fonct de la suivante]
+	<link rel="stylesheet" type="text/css" href="[(#GET{img_pack})]style_prive_defaut.css" >[(#REM)
+	// CSS espace prive : la vraie]
+	<link rel="stylesheet" type="text/css" href="#URL_PAGE{style_prive,couleur_claire=(#EVAL{$GLOBALS["couleur_claire"]}|substr{1})&couleur_foncee=(#EVAL{$GLOBALS["couleur_foncee"]}|substr{1})&ltr=#LANG_LEFT}" >[(#REM)
+	// CSS calendrier]
+	<link rel="stylesheet" type="text/css" href="#CHEMIN{agenda.css}" >[(#REM)
+	// CSS imprimante (masque des trucs, a completer)]
+	<link rel="stylesheet" type="text/css" href="[(#GET{img_pack})]spip_style_print.css" media="print" >[(#REM)
+	// CSS "visible au chargement" differente selon js actif ou non]
+	<link rel="stylesheet" type="text/css" href="[(#GET{img_pack})]spip_style_[(#EVAL{#GET{cookie_Ajax}}|!={-1}|?{invisible,visible})].css" >[(#REM)
+	// favicon.ico]
+	<link rel="shortcut icon" href="[(#CHEMIN{favicon.ico}|url_absolue)]" >
+	[(#GET{spip_display}|!={4}|?{' ',''})
+	<link rel='alternate' type='application/rss+xml' title="[(#GET{nom}|entites_html)]" href='[(#URL_PAGE{backend})]' >
+	<link rel='help' type='text/html' title="<:icone_aide_ligne:>" href='[(#URL_ECRIRE{aide_index,var_lang=#LANG})]' >
+	[(#CONFIG{activer_breves}|!={non}|?{' ',''})
+	<link rel='alternate' type='application/rss+xml' title="[(#GET{nom}|entites_html)] &#40;<:info_breves_03:>&#41;" href='#URL_PAGE{backend-breves}' >
+	]
+	]
+	<?php
+	echo debut_javascript($connect_statut == "0minirezo"
+			AND $connect_toutes_rubriques,
+			($GLOBALS['meta']["activer_statistiques"] != 'non'));
+	?>
+	[<link rel="stylesheet" href="(#ENV{css}|entites_html)" type="text/css" />]
+	<script type='text/javascript'>
+		[(#GET{browser_verifForm}?{var browser_verifForm = true;,''})]
+		$(document).ready(function(){ [(#GET{browser_verifForm})][(#ENV**{onLoad})]});var largeur_icone = #GET{largeur_bouton}; 
+	</script>
+	<style type='text/css'>.boutons_admin {width:[(#GET{largeur_bouton})]px}</style>

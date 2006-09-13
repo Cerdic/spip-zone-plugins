@@ -66,4 +66,18 @@ function balise_GET_ACCESSKEY($p) {
 	$p->code = "'$key'";
 	return $p;
 }
+
+//
+// #INSERT_HEAD_PRIVE
+// pour permettre aux plugins d'inserer des styles, js ou autre
+// dans l'entete sans modification du squelette prive
+// #INSERT_HEAD_PRIVE
+//
+// http://doc.spip.org/@balise_INSERT_HEAD_dist
+function balise_INSERT_HEAD_PRIVE($p) {
+	$p->code = "pipeline('header_prive',recuperer_fond('modeles/init_entete',array()))";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 ?>
