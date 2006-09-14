@@ -1,0 +1,104 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>Exemple #[(#REM)]CALENDRIER_MINI</title>
+	<INCLURE{fond=inc-head}>
+	<link rel="stylesheet" href="[(#CHEMIN{style.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
+</head>
+
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_PAGE{minical_demo}">Exemple #[(#REM)]CALENDRIER_MINI</a></div>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : derniers articles publies ]
+		<div id="contenu">
+
+			<h1 class="invisible">#NOM_SITE_SPIP</h1>
+			[<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
+
+			[(#REM) Les deux derniers articles ]
+			<B_articles_recents>
+			<div class="liste-articles">
+				[(#ANCRE_PAGINATION)]
+				[(#ENV{debut_articles_recents}|?{'',' '})<h2 class="invisible"><:articles_recents:>[ - (#DATE_ARCHIVES|affdate)]</h2>]
+				<ul>
+					<BOUCLE_articles_recents(ARTICLES) {pagination} {par date}{inverse} {archives ?}{branche ?} {lang ?}>
+					<li>
+						[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
+						[<p class="surtitre">(#SURTITRE)</p>]
+						<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+						[<p class="soustitre">(#SOUSTITRE)</p>]
+						<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
+						[<div class="texte">(#INTRODUCTION)</div>]
+						<br class="nettoyeur" />
+					</li>
+					</BOUCLE_articles_recents>
+				</ul>
+				[<p class="pagination">(#PAGINATION)</p>]
+			</div>
+			</B_articles_recents>[
+   <h2>Rien pour (#DATE_ARCHIVES|affdate)[ (#ENV{id_rubrique}?{dans ce secteur})]</h2>
+   ]<//B_articles_recents>
+
+			<br class="nettoyeur" />
+
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+		
+		[(#MODELE{rubrique_calendrier}
+			{self=#URL_PAGE{minical_demo}}
+			{var_date=archives}
+			{date=#ENV{archives,#DATE}}
+			{lang}
+			{id_rubrique}
+		)]
+   
+	<B_categories>
+	<div id='categories' class="rubriques">
+		<h2 class="menu-titre"><:categories|ucfirst:></h2>
+		<ul>
+			<BOUCLE_categories(RUBRIQUES){racine}>[
+			<li>[(#EXPOSE{<b>})]
+			<a href="(#URL_PAGE{minical_demo}|parametre_url{id_rubrique,#ID_RUBRIQUE})">#TITRE</a>
+			[(#EXPOSE{</b>})]</li>
+			]</BOUCLE_categories>
+		</ul>
+	</div>
+	</B_categories>
+   
+   [(#MODELE{archives_mensuelles}{id_rubrique,archives,self=#URL_PAGE{minical_demo},lang})]
+   
+   [(#MODELE{select_archives_mensuelles}{id_rubrique,archives,self=#URL_PAGE{minical_demo},lang})]
+   
+		 [<div>(#MENU_LANG)<small>(<a href="[(#SELF|parametre_url{lang,''})]">toutes les langues</a>)</small><br class="nettoyeur" /></div>]
+
+   <div id="links" class="syndic">
+    <h2 class="menu-titre"><:liens|ucfirst:></h2>
+    <ul>
+     <li><a href="http://zone.spip.org/trac/spip-zone/">Spip Zone</a></li>
+     <li><a href="#URL_PAGE{minical_doc}"><:documentation|ucfirst:></a></li>
+    </ul>
+   </div>
+   
+   
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+#SPIP_CRON
+</body>
+</html>
