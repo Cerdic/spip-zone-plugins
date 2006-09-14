@@ -16,7 +16,7 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	test
 	</etat>
 	<description>
-	Rendre possible la visualisation et la mise à jours de nouveaux champs ajout&eacute;s dans plusieurs tables de SPIP grâce aux champs EXTRA.
+	Rendre possible la visualisation et la mise &agrave; jours de nouveaux champs ajout&eacute;s dans plusieurs tables de SPIP grâce aux champs EXTRA.
 	<hr>
 {{Modification au code source}}
 _ Ce plugin utilise une version modifi&eacute;e du fichier extra.php
@@ -27,10 +27,10 @@ _ Pour &eacute;viter tout conflit possible, ne pas activer avec un autre plugin 
 _ SPIP 1.9.2 alpha SVN [7334]
 	<hr>
 	Ce plugin ne modifie aucune table ni ne cr&eacute;e aucun champ extra.
-_ Ces modifications restent à votre discretion.
+_ Ces modifications restent &agrave; votre discretion.
 _ Les d&eacute;tails de son utilisation sont d&eacute;crits ici: 
 _ <a href="http://monsitespip.com/spip.php?article7" target="_blank">Gestion des nouveaux champs dans les tables SPIP par les champs extra : champs homonymes</a>
-_ Merci de nous signaler son bon fonctionnement ou non sur le forum li&eacute; à cet article.
+_ Merci de nous signaler son bon fonctionnement ou non sur le forum li&eacute; &agrave; cet article.
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
 	mes_options_homonymes.php
