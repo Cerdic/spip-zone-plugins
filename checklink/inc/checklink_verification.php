@@ -5,19 +5,42 @@ function checklink_verifie_lien($url, $date_verif, $maj_statut){
 	$datas="";
 	$boundary="";
 	$statut = recuperer_page($url, false, false, 1048576, $datas, $boundary, false, $date_verif);
-	// inchangee
+	// inchangee : on met juste a jour les infos
 	if ($statut==200){
 		spip_query("UPDATE spip_liens SET statut='oui',date_verif=NOW() WHERE url=".spip_abstract_quote($url));
+		spip_log("checklink : $url statut 200");
 		return;
 	}
 	// absente
-	if (in_array($statut,array())){
+	if ($statut===false){
 		spip_query("UPDATE spip_liens SET statut='$maj_statut',date_verif=NOW() WHERE url=".spip_abstract_quote($url));
+		spip_log("checklink : $url introuvable, passage a $maj_statut");
 		return;
 	}
 	// presente
 	// extraire le titre et la langue
+	$texte = $statut;
+	$titre = null;
+	$lang = null;
+	if (preg_match(',<title[^>]*>(.*)</title>,Uims',$texte,$reg))
+		$titre = trim($reg[1]);
+	else if (preg_match(',<(h[1-6])[^>]*>.*</$1>,Uims',$texte,$reg))
+		$titre = trim($reg[2]);
 
+	if (preg_match(',<html[^>]*>,Uims',$texte,$reg))
+		$lang = extraire_attribut($reg[0],'lang');
+	if (!$lang){
+		// en depit on cherche un lang= quelque part ...
+		if (preg_match('/lang\s*=\s*[\'"]?([a-z\-]{2,5})/Uims',$texte,$reg))
+			$lang=$reg[1];
+	}
+
+	spip_query("UPDATE spip_liens SET statut='oui',date_verif=NOW() WHERE url=".spip_abstract_quote($url));
+	if ($titre)
+		spip_query("UPDATE spip_liens SET titre=".spip_abstract_quote($titre)." WHERE url=".spip_abstract_quote($url)." AND titre_auto='oui'");
+	if ($lang)
+		spip_query("UPDATE spip_liens SET lang=".spip_abstract_quote(strtolower($lang))." WHERE url=".spip_abstract_quote($url)." AND lang_auto='oui'");
+	spip_log("checklink : $url mise a jour, passage a 'oui'");
 }
 
 

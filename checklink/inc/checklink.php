@@ -82,7 +82,8 @@ function checklink_extrait_liens($id_table,$id_objet,$texte){
 			// filtrer les documents locaux
 			if ($url){
 				if (strpos($url,_DIR_IMG)!==FALSE){
-					if (spip_fetch_array(spip_query("SELECT id_document FROM spip_documents WHERE fichier=".spip_abstract_quote($url))))
+					$url2 = substr($url,strlen(_DIR_RACINE));
+					if (spip_fetch_array(spip_query("SELECT id_document FROM spip_documents WHERE fichier=".spip_abstract_quote($url2))))
 						$url = null;
 				}
 			}
@@ -123,8 +124,8 @@ function checklink_extrait_liens($id_table,$id_objet,$texte){
 					}
 					else{
 						// nouveau lien, que l'on presume bon, mais a verifier
-						$titre = $titre_auto=='non' ? $titre : "(sans titre)";
-						$lang = $lang_auto=='non' ? $lang : "fr";
+						$titre = $titre_auto=='non' ? $titre : "";
+						$lang = $lang_auto=='non' ? $lang : "";
 						$statut = 'ind';
 						$verification = '1';
 						$date_verif = gmdate("Y-m-d H:i:s",time()-365*24*3600);

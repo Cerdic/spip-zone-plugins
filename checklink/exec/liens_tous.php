@@ -15,8 +15,20 @@ function exec_liens_tous(){
 	//fin_boite_info();
 	
 	debut_droite();
-	
-	echo recuperer_fond("exec/table_liens",array());
+	if (_request('verifier')!==NULL){
+		include_spip('inc/checklink_verification');
+		if (is_numeric($id_lien=_request('verifier'))) {
+			$row = spip_fetch_array(spip_query("SELECT url,date_verif,statut FROM spip_liens WHERE id_lien=$id_lien"));
+			if ($row)
+				checklink_verifie_lien($row["url"],'', in_array($row['statut'],array('ind','oui'))?'sus':'off');
+		}
+		else {
+			cron_checklink_verification(1);
+		}
+	}
+	$contexte = array();
+	if (_request('statut')) $contexte['statut'] = _request('statut');
+	echo recuperer_fond("exec/table_liens",$contexte);
 	
 	echo "<br />\n";
 	
