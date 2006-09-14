@@ -29,4 +29,7 @@ _ (c) 2006 - Licence GPL
 		<nom>pre_enregistre_contenu</nom>
 		<inclure>checklink_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+	</pipeline>
 </plugin>
