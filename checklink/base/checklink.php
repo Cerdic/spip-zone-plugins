@@ -3,7 +3,7 @@
 include_spip('base/serial'); // pour eviter une reinit posterieure des tables modifiees
 
 global $tables_principales;
-global $tables_auxiliaires;
+global $table_des_tables;
 
 $spip_liens = array(
 		"id_lien"	=> "bigint(21) NOT NULL",
@@ -30,5 +30,7 @@ $spip_liens_key = array(
 
 $tables_principales['spip_liens'] =
 	array('field' => &$spip_liens, 'key' => &$spip_liens_key);
+
+$table_des_tables['liens']='liens';
 
 ?>
