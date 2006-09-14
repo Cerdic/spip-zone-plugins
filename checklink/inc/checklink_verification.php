@@ -40,11 +40,15 @@ function cron_checklink_verification($t){
 	if ($row)
 		checklink_verifie_lien($row["url"],$row["date_verif"], 'off');
 
-	// Et un lien 'oui' de plus de 2 heures, qui passe en 'sus' s'il echoue
-	$where = "statut='oui'
+	// Et un lien 'ind' (ou 'oui' si plus de 'ind') de plus de 2 heures, qui passe en 'sus' s'il echoue
+	$where = "statut='ind'
 	AND date_verif < DATE_SUB(NOW(), INTERVAL "._PERIODE_VERIFICATION." MINUTE)";
 	$row = spip_fetch_array(spip_query("SELECT url FROM spip_liens WHERE $where	ORDER BY date_verif LIMIT 1"));
-
+	if (!$row){
+		$where = "statut='oui'
+	AND date_verif < DATE_SUB(NOW(), INTERVAL "._PERIODE_VERIFICATION." MINUTE)";
+		$row = spip_fetch_array(spip_query("SELECT url FROM spip_liens WHERE $where	ORDER BY date_verif LIMIT 1"));
+	}
 	if ($row)
 		checklink_verifie_lien($row["url"],$row["date_verif"], 'sus');
 
