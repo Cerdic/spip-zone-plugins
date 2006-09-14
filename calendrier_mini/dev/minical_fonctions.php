@@ -25,13 +25,14 @@ function critere_archives($idb, &$boucles, $crit) {
  
 }
 
-function thead($lang){
+function thead($lang, $forme = 'abbr'){
 	$ret = '';
 	$debut = 2;
 	if($lang == 'en') $debut = 1;
+	$forme = $forme ? '_'.$forme : '';
 	for($i=0;$i<7;$i++) {
 		$ret .= "\n\t\t\t\t".'<th scope="col"><abbr title="'._T('date_jour_'.$debut).'">' .
-		_T('minical:date_jour_abbr_'.$debut) . '</abbr></th>';
+		_T('date_jour_'.$debut.$forme) . '</abbr></th>';
 		$debut = $debut == 7 ? 1 : $debut+1;
 	}
 	return "\n\t\t".'<thead>
