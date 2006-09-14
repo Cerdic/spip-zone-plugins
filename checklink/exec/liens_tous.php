@@ -26,6 +26,10 @@ function exec_liens_tous(){
 			cron_checklink_verification(1);
 		}
 	}
+	if (_request('raz')!==NULL){
+		checklink_reconstruit_table();
+	}
+	
 	$contexte = array();
 	if (_request('statut')) $contexte['statut'] = _request('statut');
 	echo recuperer_fond("exec/table_liens",$contexte);
