@@ -1,0 +1,50 @@
+<plugin>
+        <nom> <!-- Nom du plugin -->
+          Acc&egrave;s restreint par groupes
+        </nom>
+        <auteur>        <!-- Auteur du plugin -->
+          Coyote &amp; cy_altern _ 
+					merci à Cedric cedric.morin@yterium.com pour le concept initial du bridage de l'affichage des BOUCLES (plugin acces_restreint)
+        </auteur>
+        <version>
+          1.0
+        </version>
+        <etat>
+          dev
+        </etat>
+        <description>
+          Permet de g&eacute;rer l'acc&egrave;s restreint (parties publique et priv&eacute;e) &agrave; des rubriques 
+          en utilisant des groupes d'utilisateurs.<br />
+					Documentation : [->http://www.spip-contrib.net/Creer-des-groupes-limiter-l-acces]<br />
+					/!\ ATTENTION ! Ce plugin n'est PAS compatible avec le plugin acces_restreint ! Vous ne pouvez utiliser les 2 simultanéments !
+        </description>
+        <prefix>
+          accesgroupes
+        </prefix>
+				<!-- fichier charge a chaque hit -->
+      	<options> 
+      	  inc/accesgroupes_options.php
+      	</options>
+				<!-- fichier charge a chaque recalcul -->
+      	<fonctions> 
+      	   inc/accesgroupes_fonctions.php
+      	</fonctions>
+        <!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+        <pipeline>
+        		<nom>ajouter_boutons</nom>
+            <inclure>accesgroupes_pipelines.php</inclure>
+        </pipeline>
+<!--        <pipeline>
+             <nom>affiche_milieu</nom>
+             <inclure>accesgroupes_pipelines.php</inclure>
+        </pipeline>
+
+				<pipeline>
+             <nom>body_prive</nom>
+             <inclure>accesgroupes_prive.php</inclure>
+        </pipeline>
+-->	
+        <!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.        -->
+</plugin>
+
+

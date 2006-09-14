@@ -1,0 +1,156 @@
+<!-- page envoyée si accès restreint -->
+<?php
+//print '<br>GLOBALS = ';
+//print_r($GLOBALS['auteur_session']);
+
+		 $id_rubrique = #ID_RUBRIQUE;
+   // traitement des données envoyées par le formulaire
+	   if (isset($_POST['add_auteur']) AND isset($_POST['auteur']) AND $_POST['auteur'] != '' AND isset($_POST['groupe_demande_acces']) AND $_POST['groupe_demande_acces'] != '') {
+				 $auteur = $_POST['auteur'];
+				 $groupe_demande_acces = $_POST['groupe_demande_acces'];
+				 $sql224 = "SELECT nom FROM $Tjpk_groupes WHERE id_grpacces = $groupe_demande_acces LIMIT 1";
+				 $result224 = spip_query($sql224);
+				 $row224 = spip_fetch_array($result224);
+				 $nom_groupe = $row224['nom'];
+				 $sql225 = "SELECT titre FROM $Tspip_rubriques WHERE id_rubrique = $id_rubrique LIMIT 1";
+				 $result225 = spip_query($sql225);
+				 $row225 = spip_fetch_array($result225);
+				 $nom_rubrique = $row225['titre'];
+				 $message = _T('accesgroupes:msg_demande_acces1').'<strong>'.$GLOBALS['auteur_session']['nom'].'</strong> (#'.$auteur.') '
+				 						._T('accesgroupes:msg_demande_acces2').'<strong>'.$nom_groupe.'</strong> (#'.$groupe_demande_acces.')'
+										._T('accesgroupes:msg_demande_acces3').'<strong>'.$nom_rubrique.'</strong> (#'.$id_rubrique.')'
+										._T('accesgroupes:msg_demande_acces4').$groupe_demande_acces
+										._T('accesgroupes:msg_demande_acces5');
+				 if (isset($_POST['message']) AND $message != '') {
+				 		$message .= '<br />'._T('accesgroupes:msg_demande_acces6').$_POST['message'];
+				 }
+				 $message = addslashes($message);
+				 $sql24 = "SELECT proprio FROM $Tjpk_groupes WHERE id_grpacces = $groupe_demande_acces LIMIT 1";
+				 $result24 = spip_query($sql24);
+				 $row24 = spip_fetch_array($result24);
+				 $proprio = $row24['proprio'];				 
+				 $sql23 = "INSERT INTO $Tjpk_groupes_auteurs (id_grpacces, id_auteur, dde_acces, proprio) VALUES ($groupe_demande_acces, $auteur, 1, $proprio)";
+				 spip_query($sql23);
+				 if (mysql_errno() == 1062) {
+				 	  echo "<br /><img src=\"ecrire/img_pack/warning-24.gif\" style=\"vertical-align: middle;\"> "._T('accesgroupes:duplicata_demande_acces');
+				 }
+				 elseif (mysql_error() == '') {
+						 $sql25 = "SELECT MAX(id_message) AS maxId FROM $Tspip_messages";
+						 $result25 = spip_query($sql25);
+						 $row25 = spip_fetch_array($result25);
+    		 		 $id_forum = $row25['maxId'] + 1;
+						 $date_pub = date("y-m-d H:i:s");
+						 $titre_mess = addslashes(_T('accesgroupes:titre_demande_acces'));
+						 $sql26 = "INSERT INTO $Tspip_messages (id_message, titre, texte, type, date_heure, rv, statut, id_auteur, maj)
+						 									VALUES ($id_forum, '$titre_mess', '$message', 'normal', '$date_pub', 'non', 'publie', $auteur, '$date_pub')";
+						 spip_query($sql26);
+						 if (mysql_error() == '') {
+								if ($proprio != 0) {   // si le proprio n'est pas un admin total
+									 $sql28 = "INSERT INTO $Tspip_auteurs_messages (id_auteur, id_message, vu) VALUES ($proprio, $id_forum, 'non')";
+									 spip_query($sql28);
+								}
+								else {  // si le proprio est un admin total ($proprio == 0), envoyer le message à tous les admins
+										 $sql29 = "SELECT id_auteur FROM $Tspip_auteurs WHERE statut = '0minirezo'";
+										 $result29 = spip_query($sql29);
+										 while ($rows29 = spip_fetch_array($result29)) {
+										 			 $id_admin_ec = $rows29['id_auteur'];
+													 $sql30 = "SELECT COUNT(*) AS nb_rub_admin FROM $Tspip_auteurs_rubriques WHERE id_auteur = $id_admin_ec";
+													 $result30 = spip_query($sql30);
+													 $rows30 = spip_fetch_array($result30);
+													 if ($rows30['nb_rub_admin'] < 1) {
+													 		$sql28 = "INSERT INTO $Tspip_auteurs_messages (id_auteur, id_message, vu) VALUES ($id_admin_ec, $id_forum, 'non')";
+									 						spip_query($sql28);
+													 }
+										 }
+								}
+								if (mysql_error() == '') {
+									 echo "<br /><img src=\"ecrire/img_pack/m_envoi.gif\" style=\"vertical-align: middle;\"> <img src=\"ecrire/img_pack/message.gif\" style=\"vertical-align: bottom;\"> ";
+									 echo _T('accesgroupes:demande_ok');
+								}
+								else {
+										 echo "<br /><img src=\"ecrire/img_pack/warning-24.gif\" style=\"vertical-align: middle;\"> "._T('accesgroupes:erreur_creation_demande_acces');
+								}
+						 }
+						 else {
+						 			echo "<br /><img src=\"ecrire/img_pack/warning-24.gif\" style=\"vertical-align: middle;\"> "._T('accesgroupes:erreur_creation_demande_acces');
+						 }
+				 }
+				 else {
+				 		 echo "<br /><img src=\"ecrire/img_pack/warning-24.gif\" style=\"vertical-align: middle;\"> "._T('accesgroupes:erreur_creation_demande_acces');
+				 }
+					
+		 }
+	// envoi de la page accès interdit
+		 else {
+					 echo "<img src=\"ecrire/img_pack/warning.gif\" style=\"vertical-align: middle;\">";
+					 
+				// si non-connecté
+					 if (verif_acces($id_rubrique, 'public') == 1 AND !$auteur_session){
+?>
+    <:accesgroupes:non_connecte:>
+    <link rel="stylesheet" href="spip_style.css" type="text/css" />
+    <br><br><br><center>
+    <table width="400"><tr><td width="400">
+    <div align="center">
+    #LOGIN_PUBLIC
+    </td></tr></table></center>
+<?php					 		
+					 }
+				// si déja connecté
+					 else {
+?>					 
+	  <:accesgroupes:bloque_rubrique:>
+<?php				// envoi du formulaire de demande d'accès si au moins un groupe contrôlant la rubrique l'autorise
+							 if (existe_demande_acces($id_rubrique)) {			
+              		 echo "<br /><br />\r\n<form style=\"background: #eee; border: solid 1px #aaa; padding: 10px;\" name=\"accesgroupe\" method=\"post\" action=\"".basename($_SERVER['SCRIPT_FILENAME'])."?".$_SERVER['QUERY_STRING']."\">";
+                   echo _T('accesgroupes:demande_acces'); 
+        					 echo "<br /><br />"._T('accesgroupes:choix_groupe');
+              	// trouver si c'est la rubrique en cours qui est restreinte ou un de ses ascendant
+									 $id_rub_restreinte = trouve_parent_restreint($id_rubrique, 'public');
+									 $sql22 = "SELECT $Tjpk_groupes_acces.id_grpacces AS id_groupe_ec, 
+              		 									$Tjpk_groupes.nom AS nom_groupe_ec,
+              											$Tspip_auteurs.nom AS nom_proprio_ec, 
+              											$Tjpk_groupes.proprio AS id_proprio_ec 
+              		 					 FROM $Tjpk_groupes_acces, $Tjpk_groupes, $Tspip_auteurs
+              							 WHERE $Tjpk_groupes_acces.id_grpacces = $Tjpk_groupes.id_grpacces
+              							 AND $Tjpk_groupes.demande_acces = 1
+              							 AND $Tjpk_groupes_acces.id_rubrique = $id_rub_restreinte
+              							 AND $Tjpk_groupes.actif = 1
+              							 AND $Tjpk_groupes.proprio = $Tspip_auteurs.id_auteur
+              		 ";
+              		 $result22 = spip_query($sql22);		 
+              	// si il n'existe pas d'admin restreint proprio d'un groupe donnant accès à la rubrique : proprio = admin général
+              			 if (mysql_num_rows($result22) < 1) {  
+                     	  $sql22 = "SELECT $Tjpk_groupes_acces.id_grpacces AS id_groupe_ec, 
+              								 	 				 $Tjpk_groupes.nom AS nom_groupe_ec, 
+              													 $Tjpk_groupes.proprio AS id_proprio_ec
+              										FROM $Tjpk_groupes_acces, $Tjpk_groupes	
+              										WHERE $Tjpk_groupes_acces.id_grpacces = $Tjpk_groupes.id_grpacces
+              										AND $Tjpk_groupes.demande_acces = 1
+              										AND $Tjpk_groupes_acces.id_rubrique = $id_rub_restreinte
+              										AND $Tjpk_groupes.actif = 1
+              										AND $Tjpk_groupes.proprio = 0
+              					";
+              					$result22 = spip_query($sql22);
+              			 }
+              		 	 echo " <select name=\"groupe_demande_acces\" size=\"1\">";
+                		 while ($row22 = spip_fetch_array($result22)) {
+                         		$id_groupe_ec = $row22['id_groupe_ec'];
+                        	  $nom_groupe_ec = $row22['nom_groupe_ec']; 
+                						$row22['id_proprio_ec'] == 0 ? $nom_proprio_ec = _T('accesgroupes:admins') : $nom_proprio_ec = $row22['nom_proprio_ec'];
+              
+                         	  echo "<option value=\"$id_groupe_ec\">$nom_groupe_ec ("._T('accesgroupes:proprio')." = $nom_proprio_ec)</option>";
+                     }  
+                     echo " </select><br /><br />";
+        						 echo _T('accesgroupes:help_demande_acces')."<br /> <textarea name=\"message\" rows=\"4\" cols=\"55\"></textarea>";
+                     echo "<input type=\"hidden\" name=\"auteur\" value=\"".$GLOBALS['auteur_session']['id_auteur']."\" /><br>";
+                     echo "<input type=\"submit\" name=\"add_auteur\" value=\""._T('accesgroupes:envoyer')."\"/>";
+                     echo "</form>";
+							 }
+					 }
+		 }			
+							
+?>
+
+
+
