@@ -3,9 +3,6 @@
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
 define('_DIR_PLUGIN_HABILLAGES',(_DIR_PLUGINS.end($p)));
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',dirname(__FILE__)));
-define('_DIR_PLUGIN_HABILLAGES_OPT',(_DIR_PLUGINS.end($p)));
-
 // Fonction qui gere les habillages. Tentative de faire la fonction sans appel a la
 // base de donnees, et donc sans manipulation sql.
 function exec_config_habillages() {
@@ -13,6 +10,7 @@ function exec_config_habillages() {
 
   include_spip("inc/presentation");
   include_spip ("base/abstract_sql");
+  include_spip("inc/espace_prive");
 
   debut_page('&laquo; '._T('habillageprive:titre_page').' &raquo;', 'configurations', 'habillage_prive','',_DIR_PLUGIN_HABILLAGES.'/img_pack/habillage_prive.css');
 
@@ -59,6 +57,7 @@ function exec_config_habillages() {
  	echo '<form action="'.generer_url_ecrire('config_habillages').'" method="post">';
  	
  	
+ 	# define("_OPTIONS_FILE", "mes_options.php");
  	$options_file = "mes_options.php";
  	$img_directory = "img_pack";
  	$plugin_directory = _DIR_PLUGIN_HABILLAGES;
@@ -67,6 +66,31 @@ function exec_config_habillages() {
  	$theme_xml = "$theme_path/theme.xml";
  	$theme_duplicated = "img_pack/theme.xml";
 
+ 	# Si le fichier mes_options.php est disponible.
+ 		# Tester, dans le cas ou il existe, si il est accessible en ecriture.
+ 			# Si il est accessible en ecriture : on lance la gestion des habillages de l'espace prive.
+ 			
+ 			# Sinon on met un message d'avertissement.
+ 			# private_warning();
+ 			
+ 	# Si le fichier mes_options.php n'est pas disponible.
+ 		# Tester, dans le cas ou il n'existe pas, si on peut le creer.
+ 			# Si on peut le creer : on le cree et on lance la gestion des habillages de l'espace prive.
+ 			
+ 			# Sinon on met un message d'avertissement.
+ 			# private_warning();
+ 			
+ 	# Sinon mettre un message d'avertissement.
+ 	# private_warning();
+ 	
+ 	
+ 	# if (!is_writable($options_file)) {
+	 	# echo "Votre fichier $options_file n'est pas accessible en ecriture.";
+ 	# }
+ 	# else {
+	 	#Inserer le code.
+	#}
+ 	
  	# N'agir d'abord que si l'utilisateur a choisi un theme qui n'est pas initial et si le
  	# fichier mes_options.php. 	
  	if ($theme != "" AND $theme != "initial" AND file_exists($options_file)) {
