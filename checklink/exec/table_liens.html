@@ -19,8 +19,8 @@
 <//B_off>
 </p>
 <B_liens>
-<div class='liste'><div style='position: relative;'><div style='position: absolute; top: -12px; left: 3px;'><img src='img_pack/site-24.gif'
-alt="site-24"  /></div><div style='background-color: #C5E41C; color: black; padding: 3px; padding-left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>Les sites r&eacute;f&eacute;renc&eacute;s</b></div></div><table width='100%' cellpadding='2' cellspacing='0' border='0'>
+<div class='liste'><div style='position: relative;'><div style='position: absolute; top: -12px; left: 3px;'><img src='#EVAL{_DIR_PLUGIN_CHECKLINK}/img_pack/checklink-24.png'
+alt="checklink-24"  /></div><div style='background-color: #C5E41C; color: black; padding: 3px; padding-left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>Les sites r&eacute;f&eacute;renc&eacute;s</b></div></div><table width='100%' cellpadding='2' cellspacing='0' border='0'>
 <tr style='background-color: #dddddd;'>
 <td class="arial1" style='border-bottom: 1px solid #444444;' colspan="5">
 <div class='pagination'>#PAGINATION</div>
@@ -29,10 +29,10 @@ alt="site-24"  /></div><div style='background-color: #C5E41C; color: black; padd
 <BOUCLE_liens(LIENS){statut?}{pagination 20}>
 <tr class='tr_liste'>
 <td class="arial11"><img src='img_pack/[(#GET{#STATUT})]' alt="Statut #STATUT" /></td>
-<td class="arial11">[(#URL|lignes_longues{60})]</td>
+<td class="arial11">[<a href='(#ID_TABLE|url_visu_objet{#ID_OBJET})'>][(#URL|lignes_longues{60})][</a>(#ID_TABLE|url_visu_objet{#ID_OBJET}|?{' '})]</td>
 <td class="arial11">[(#LANG*)]</td>
 <td class="arial11">[<a href='#URL' title="[(#TITRE|texte_backend)]"><:lien_visite_site:></a>]</td>
-<td class="arial11">[<a href='[(#SELF|parametre_url{verifier,#ID_LIEN})]' title="[(#TITRE|texte_backend)]"><:verifier:></a>]</td>
+<td class="arial11">[<a href='[(#SELF|parametre_url{verifier,#ID_LIEN})]' title="[(#TITRE|texte_backend)]"><:lien_mise_a_jour_syndication:></a>]</td>
 </tr>
 </BOUCLE_liens>
 </table>

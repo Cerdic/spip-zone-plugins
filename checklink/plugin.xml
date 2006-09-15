@@ -30,6 +30,14 @@ _ (c) 2006 - Licence GPL
 		<inclure>checklink_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>post_propre</nom>
+		<inclure>checklink_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>checklink_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>taches_generales_cron</nom>
 	</pipeline>
 </plugin>
