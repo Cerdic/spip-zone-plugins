@@ -224,7 +224,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
     $toolbox .= afficher_gestion_remplacer($champ);
 //
 
-	$ret .= '<script type="text/javascript" src="' . _DIR_PLUGIN_BARRE_TYPO . '/js/jquery-latest.pack.js"></script>';
+	//$ret .= '<script type="text/javascript" src="' . _DIR_PLUGIN_BARRE_TYPO . '/js/jquery-latest.pack.js"></script>';
 	$ret .= "<table class='spip_barre' style='width:auto;' cellpadding='0' cellspacing='0' border='0' summary=''>";
 	$ret .= "\n<tr style='width: auto;' class='spip_barre'>";
 	$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
