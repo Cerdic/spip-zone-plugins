@@ -1,0 +1,27 @@
+[(#PARAMETRES_FORUM|?{'',''}) Cette balise (invisible) provoque le recalcul du forum la premiere fois qu'un message est poste (cf. inc/invalideur). ]
+<B_forums>
+	<div class="mgs_menu">
+		#ANCRE_PAGINATION
+		<ul class="general">
+		<li class="mgs_menu_titre"><:mgs_messages_publies:>#GRAND_TOTAL&nbsp;<small><:mgs_messages_tri_date:></small>
+		[&nbsp;&nbsp;&#124;&nbsp;(#PAGINATION)&nbsp;&#124;]</li>
+			<BOUCLE_forums(FORUMS) {id_article ?}{id_breve ?} {par date} {tout} {pagination}>
+				<li class="mgs_menu_item_forum">
+					<div class="mgs_forum_message">
+						<div class="mgs_forum_chapo">
+							<h3 class="mgs_titre">&nbsp;&nbsp;<small>#COMPTEUR_BOUCLE - </small><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></h3>
+							<p class="mgs_infos">[(#DATE|affdate)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM|couper{80})]</p>
+						</div>
+						<div class="mgs_forum_texte">
+							[<div class="mgs_texte">(#TEXTE|lignes_longues)</div>]
+							[<p class="mgs_intro"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out"><b>[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</b></a></p>]
+						</div>
+						[<h4 class="mgs_repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:></a></h4>]
+					</div>
+				</li>
+			</BOUCLE_forums>
+		[<li class="mgs_menu_titre"><:mgs_messages_publies:>#GRAND_TOTAL&nbsp;<small><:mgs_messages_tri_date:></small>
+		&nbsp;&nbsp;&#124;&nbsp;(#PAGINATION)&nbsp;&#124;</li>]
+		</ul>
+	</div>
+</B_forums>

@@ -1,0 +1,41 @@
+<div class="formulaire_spip formulaire_inscription">
+<a name="formulaire_inscription" id="formulaire_inscription"></a>
+
+[<fieldset class="reponse_formulaire mgs_formulaire_menu">
+<h4><:pass_vousinscrire:></h4>
+<p>(#ENV*{message})</p>
+</fieldset>]
+
+[<fieldset class="mgs_formulaire_menu">
+<h4><:pass_vousinscrire:></h4>
+<p><:participer_site:></p>
+<p>(#ENV*{commentaire})</p>
+</fieldset>]
+
+<form id="inscription" method="post" action="#ENV{self}#formulaire_inscription">
+	<fieldset class="mgs_formulaire_menu">
+		<h4><:form_forum_identifiants:></h4>
+		<p><:form_forum_indiquer_nom_email:></p>
+		<p><label for="nom_inscription"><:form_pet_votre_nom:></label>
+		  <input type="text" class="mgs_forml" name="nom_inscription" id="nom_inscription" value="#ENV{nom_inscription}" size="30" /></p>
+		<p><label for="mail_inscription"><:form_pet_votre_email:></label>
+		  <input type="text" class="mgs_forml" name="mail_inscription" id="mail_inscription" value="#ENV{mail_inscription}" size="30" /></p>
+		  <div class="spip_bouton"><input type="submit" value="&nbsp;&nbsp;<:bouton_valider:>&nbsp;&nbsp;" /></div>
+	</fieldset>
+</form>
+
+[<script type="text/javascript"><!--
+document.inscription.(#ENV{focus}).focus()
+--></script>]
+</div>
+[(#ENV{focus}|?{' ',''})
+<div align="#LANG_RIGHT">
+<script type="text/javascript"><!--
+document.write("<a style='color: #e86519' href='")
+document.write((window.opener) ? "javascript:close()" : "./")
+document.write("'><:pass_quitter_fenetre:><" + "/a>");
+//--></script>
+<noscript>
+	&#91;<a href='./'><:pass_retour_public:></a>&#93;
+</noscript>
+</div>]

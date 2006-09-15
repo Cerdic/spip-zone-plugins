@@ -1,0 +1,61 @@
+/* bloc de navigation 1 --> arborescence du site */
+.nav1 {
+        /*bloc contenant la hiérarchie*/
+        width: 100%;
+        padding:0px;
+        font-size: 12px;
+}
+
+ul.menulist li ul{ display:none; }
+
+ul.menulist li:hover>ul{ display:block; }
+
+ul.menulist,
+ul.menulist ul{
+ background:#6262A4;
+ border:1px solid #FFFFFF;
+ border-bottom: 0px;
+ list-style:none;
+ margin:0px;
+ padding:0px;
+ width:180px;
+ _width:182px;
+}
+
+ul.menulist ul{
+ position:absolute;
+ top:-1px;
+ left:180px;
+}
+
+ul.menulist li{
+ position:relative;
+ margin:0px;
+ padding:0px;
+ border-bottom: 1px solid #FFFFFF;
+}
+
+ul.menulist a{
+ display:block;
+ _width: 100%;
+ color:#FFFFFF;
+ text-decoration:none;
+ padding: 5px;
+}
+
+ul.menulist a:hover{
+ background:#323284;
+ color:#FFFFFF;
+}
+
+ul.menulist li.smenu {
+        background-image: url(../puces/arrow.gif) !important;
+        background-position: 171px;
+        background-repeat: no-repeat;
+}
+
+ul.menulist li.smenu:hover, ul.menulist li.smenu>a:hover {
+        background-image: url(../puces/arrowb.gif) !important;
+        background-position: 168px;
+        background-repeat: no-repeat;
+}

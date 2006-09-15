@@ -1,0 +1,33 @@
+<B_forum_new>
+	<BOUCLE_messages_pagination(FORUMS){tous}{par date}{inverse}>
+	</BOUCLE_messages_pagination>
+		[<div class="bande-pagination">(#TOTAL_BOUCLE|paginer{debut_page,3,numero})</div>]
+	</B_messages_pagination>
+	<div class="forum">
+<BOUCLE_forum_new(FORUMS) {tous} {par date} {inverse} {debut_page,3}>
+	<BOUCLE_article-pere(ARTICLES) {id_article=#ID_ARTICLE}>
+		[<a class="article-forum" href="#URL_ARTICLE" title="<:lire_suite_article:>">(#TITRE|supprimer_numero)</a>]
+	</BOUCLE_article-pere>
+	<ul>
+		<div class="visualisation">
+			<div class="titre">
+				#TITRE
+			</div>
+
+			<div class="detail">
+				[(#DATE|nom_jour)] [(#DATE|affdate)]<br>
+				[<:par_auteur:> (#NOM)]
+			</div>
+
+			<div class="texte">
+				[(#TEXTE)]
+				[<br><br><a href="[(#URL_SITE)]">(#NOM_SITE)</a>]
+			</div>
+		</div>
+        [<br><a class="repondre" href="forum.php3?(#PARAMETRES_FORUM)"><:repondre_message:></a><br>]
+	</ul><br>
+</BOUCLE_forum_new>
+	</div>
+</B_forum_new>
+<:aucun_message:>
+<//B_forum_new>

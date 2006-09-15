@@ -1,0 +1,202 @@
+<div id="agenda" class="agenda">
+
+<div class="en-tete"><:squelette:agenda:></div>
+
+<div class="contenu">
+
+<?php
+    $calendrier_mois=$_GET['calendrier_mois'];
+    $calendrier_annee=$_GET['calendrier_annee'];
+?>
+
+	<div class="mois"> 
+
+
+  	<?php
+	$months = array('', _T('squelette:janvier'), _T('squelette:fevrier'), _T('squelette:mars'), _T('squelette:avril'), _T('squelette:mai'), _T('squelette:juin'), 
+					_T('squelette:juillet'), _T('squelette:aout'), _T('squelette:septembre'), _T('squelette:octobre'), _T('squelette:novembre'), _T('squelette:decembre'));
+	$days = array(	_T('squelette:dimanche_abrege'), _T('squelette:lundi_abrege'), _T('squelette:mardi_abrege'), _T('squelette:mercredi_abrege'), 
+					_T('squelette:jeudi_abrege'), _T('squelette:vendredi_abrege'), _T('squelette:samedi_abrege'));
+
+						function mkdate($month, $day, $year)
+						{
+							return mktime(0, 0, 0, $month, $day, $year);
+						}
+
+						function preparation_URL($texte_URL,$mois_URL,$annee_URL)
+							{
+							$position = StrPos($texte_URL,"calendrier_mois");
+							$texte_remplacement = "calendrier_mois=".$mois_URL."&calendrier_annee=".$annee_URL;
+							if ($position!==FALSE) 
+								{        
+								$texte_URL = substr_replace ($texte_URL,$texte_remplacement,$position);}
+								else  { $presence = StrPos($texte_URL,"?");
+										if ($presence==FALSE)
+										  {$texte_URL = $texte_URL."?".$texte_remplacement;}
+										else
+										  {$texte_URL = $texte_URL."&".$texte_remplacement;}
+									  }
+							return $texte_URL;
+							}
+
+	if(isset($GLOBALS['var_nav_month'])) {
+		$cal_day = mkdate($GLOBALS['var_nav_month'], 1, $GLOBALS['var_nav_year']);
+	} else {
+		$cal_day = time();
+	}
+
+	$$D = intval(date('d', $cal_day));
+	if (isset($calendrier_mois)) {
+		$M = $calendrier_mois;
+	} else {$M = intval(date('m', $cal_day));}
+
+	if (isset($calendrier_annee)) {
+		$Y = $calendrier_annee;
+	} else {$Y = intval(date('Y', $cal_day));}
+
+
+	$events = array();
+	?>
+
+	<?php $title_bulle=''; ?>
+	<BOUCLE_evenements(ARTICLES){titre_mot="agenda"}{annee_redac!=0000}>     
+	<?php
+							
+	$date = ereg_replace("^([0-9]{4})-([0-9]{2})-([0-9]{2}).*$", "\\1\\2\\3", '#DATE_REDAC');
+
+	if ($date > date("Ymd", mkdate($M - 1, $D, $Y)) && $date <= date("Ymd", mkdate($M +1, $D, $Y))) {
+		if (!isset($events[$date])) {
+			$events[$date] = array();
+		}
+		if (!isset($events[$date]['title'])) {
+			$title_bulle = '[(#TITRE|texte_script|supprimer_numero)]';
+		}
+		else {
+			$title_bulle = $events[$date]['title'].' - '.'[(#TITRE|texte_script|supprimer_numero)]';
+		}
+		$events[$date] = array('link' => '#URL_ARTICLE', 'title' => $title_bulle, 'logo' => "");
+	}
+
+	?>
+						
+	</BOUCLE_evenements>
+
+<!-- Titre, du style << mai 2006 >>     -->
+
+    <?php
+	$mes = $months [$M];
+	if ($M==1){
+		$calendrier_mois_moins=12;
+		$calendrier_annee_moins=$Y-1;}
+	else {
+		$calendrier_mois_moins=$M-1;
+		$calendrier_annee_moins=$Y;}
+
+	if ($M==12){
+		$calendrier_mois_plus=1;
+		$calendrier_annee_plus=$Y+1;}
+	else {
+		$calendrier_mois_plus=$M+1;
+		$calendrier_annee_plus=$Y;}
+
+	echo '
+	<a href="'.preparation_URL('#SELF',$calendrier_mois_moins,$calendrier_annee_moins).'" title="'._T('squelette:mois_precedent').'">&lt;&lt;   </a>
+	&nbsp;&nbsp;'.$mes.' '.$Y.'&nbsp;&nbsp;   
+	<a href="'.preparation_URL('#SELF',$calendrier_mois_plus,$calendrier_annee_plus).'" title="'._T('squelette:mois_suivant').'">&gt;&gt;</a>';
+	?>
+
+    </div>
+
+	<div class="mois">
+		<table width="100%" border="0" cellpadding="1" cellspacing="0" align="center"  class="tableau"> 
+
+			<tr>
+
+			<!-- La ligne de jours : lu ma me je ve sa di  puis la grille avec les dates-->
+			<?php
+							
+			for($i = 1; $i < 8; $i++) {
+				echo '<th width="14%" class="calendar_head_mini">'.$days[$i%7].'</th>'."\n";
+			}	
+
+			$TempD = 1;
+			if(date('w', mkdate($M, 1, $Y)) != 1) {
+				echo "</tr>\n\n<tr>\n";
+				$tmp = '';
+				while(date('w', mkdate($M, $TempD, $Y)) != 1) {
+					$TempD--;
+					$case = '<td width="14%" valign="top" class="calendar_not_this_month">';
+					$case .= date('j', mkdate($M, $TempD, $Y));
+					$date = date('Ymd', mkdate($M, $TempD, $Y));
+									
+					$case .= "</td>\n";
+					$tmp = $case.$tmp;
+				}
+				echo $tmp;
+			 }
+
+			 $TempD = 1;
+			 while((date('m', mkdate($M, $TempD, $Y)) == $M) || (date('w', mkdate($M, $TempD, $Y)) != 1)) {
+					if(date('w', mkdate($M, $TempD, $Y)) == 1) {
+						echo "</tr>\n\n<tr>\n";
+					}
+					echo '<td width="6%" valign="top" class="calendar_'.(date('m', mkdate($M, $TempD, $Y)) != $M ? 'not_' : '').'this_'.(date('Ymd', mkdate($M, $TempD, $Y)) == date('Ymd') ? 'day' : 'month').'">';
+					$date = date('Ymd', mkdate($M, $TempD, $Y));
+					if (isset($events[$date])) {
+						echo '<a href="'.$events[$date]['link'].'"  title="'.$events[$date]['title'].'">'. date('j', mkdate($M, $TempD, $Y)) .'</a>';
+					}
+					else {
+						echo date('j', mkdate($M, $TempD, $Y));
+					}		
+					echo "</td>\n";
+					$TempD++;
+			 }
+			 ?>
+			</tr>
+		</table> 
+
+
+
+
+
+	</div>  
+
+    <div class="mois"> 
+	<!-- Ligne qui reprend tous les évènements du mois-->
+		
+		<B_agenda_global>
+			<table width="100%" border="0" cellpadding="0" cellspacing="0" style=" font-size:9px; color:#999999;">
+			<?php $test_boucle=0; ?>
+			  <BOUCLE_agenda_global(ARTICLES){titre_mot="agenda"}{annee_redac!=0000}{par date_redac}>
+			  <?php 
+			    $mois_redac = "[(#DATE_REDAC|mois)]";	
+				$annee_redac= "[(#DATE_REDAC|annee)]";
+	
+				if (($M==$mois_redac) && ($Y==$annee_redac)) {				     
+					echo '
+					    <tr>
+						<td align="left" valign="top" nowrap> [(#DATE_REDAC|affdate{'d'})-][(#DATE_REDAC|affdate{'m'}):] </td>
+						<td width="100%" align="left" valign="top"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></td>
+						</tr>';
+
+					$test_boucle++;}          
+			  ?>
+			  </BOUCLE_agenda_global>
+			  <?php
+			  if ($test_boucle==0) {
+				echo "<tr><td width='100%' align='center' valign='top'>"._T('squelette:agenda_mois_vide')."</td></tr>";
+			  }
+			  ?>
+			  </table>
+		</B_agenda_global>
+			  <?php
+			  echo "<tr><td width='100%' align='center' valign='top'>"._T('squelette:agenda_mois_vide')."</td></tr>";
+			  ?>
+			  </table>
+		<//B_agenda_global>
+
+    </div>
+
+</div> 
+</div>
+

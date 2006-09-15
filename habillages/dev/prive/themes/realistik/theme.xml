@@ -1,0 +1,15 @@
+<theme>
+	<nom>
+	Realistik
+	</nom>
+	<auteur>
+ 	Voir licence.
+	</auteur>
+	<version> <!--Vous devez obligatoirement changer de numero de version lorsque vous ajoutez ou modifiez des icones dans le theme. -->
+	0.2
+	</version>
+	<prefixe>realistik</prefixe>
+	<description>
+	Change les ic&ocirc;nes de l'administration avec des icones "realistes". 
+	</description>
+</theme>

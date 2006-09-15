@@ -1,0 +1,39 @@
+[(#NOOP) <!-- affichage du mini-agenda --> ]
+
+<INCLURE(inclusions/mini-agenda.php3)>
+
+[(#NOOP) <!-- affichage complet des 5 brèves les plus récentes --> ]
+
+<B_breves>
+	<div id="breves" class="breves">
+		<a class="en-tete" href="#URL_SITE_SPIP/breve.php3"><:breves:></a>
+		<BOUCLE_breves(BREVES){tout}{par date}{inverse}{0,5}>
+			<div class="contenu">
+				<a class="nom-breve" href="#URL_SITE_SPIP/#URL_BREVE">#TITRE</a>
+				<div class="date">[(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)]</div>
+				<div class="texte">[(#TEXTE|reduire_image{120,0})]</div>
+				[<div class="notes">(#NOTES)</div>]
+				[<div class="notes"><:sur_web:>&nbsp;:&nbsp;<a href="#URL_SITE">(#NOM_SITE)</a></div>]
+			</div>
+		</BOUCLE_breves>
+	</div>
+</B_breves>
+
+[(#NOOP) <!-- liens vers les 5 derniers sites syndiqués --> ]
+
+<B_sites>
+	<div id="web" class="web">
+		<a class="en-tete" href="#URL_SITE_SPIP/site.php3"><:sur_web:></a>
+		<BOUCLE_sites(SITES) {par date}{inverse}{0,5}>
+			<div class="site">
+				<a class="nom-site" href="#URL_SITE">#NOM_SITE</a>
+				[<div class="descriptif">(#DESCRIPTIF)</div>]
+				<B_syndic>
+					<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic}{par date}{inverse}{0,5}>
+						[<a class="article-synd" href="#URL_ARTICLE">(#TITRE*|supprimer_numero)</a>]
+					</BOUCLE_syndic>
+				</B_syndic>
+			</div>
+		</BOUCLE_sites>
+	</div>
+</B_sites>

@@ -1,0 +1,10 @@
+- Attention : la mise un jour d'un thème de l'espace privé ne se rechargera que si on change de thème et que l'on reprend le précédent (voir pour mettre une vérif des versions de theme dans mes_options).
+- Mettre verrou pour ne pas utiliser deux noms de thème identiques (?).
+- La restauration de l'ancien define de mes_options n'est pas mis !
+- Fermer les fichiers ouverts.
+- Et pour les hébergeurs où le chmod n'est pas autorisé ?
+- Dans le gestionnaire de l'espace public, mettre un "aperçu" pour voir le squelette en situation sur le site public.
+- Embarquer les logos et autres images des plugins dans img_pack de chaque thème de l'espace privé : les icônes des plugins seront en effet parfois à modifier afin de maintenir l'uniformité d'un thème.
+- Insérer captures ecrans via un fichier thème à la racine des dossiers de thèmes.
+- mettre la possibilité d'insérer sa feuille de style css pour gérer la présentation de l'espace privé.
+- Mise à jour graphique des thèmes.

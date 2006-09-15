@@ -1,0 +1,708 @@
+/* Styles pour le squelette "MiniGriSpip" */
+/* 2006 © Fredo Mkb */
+
+/* Styles generaux qui s'appliquent à l'ensemble des documents Html... */
+
+/* Fond de la page */
+body {
+	background-color: #fafafc;
+}
+
+/* Paramettres generaux des titres */
+h1,h2,h3,h4,h5,h6 {
+	line-height: 1em;
+	font-weight: bold;
+	margin: 0px;
+	padding: 0px;
+}
+
+/* Paramettres generaux des liens */
+a {
+	text-decoration: none;
+	color: #444;
+	border-bottom-style: dotted;
+	border-bottom-color: #888;
+	border-bottom-width: 1px;
+}
+
+a:link {
+	text-decoration: none;
+	color: #444;
+	border-bottom-style: dotted;
+	border-bottom-color: #888;
+	border-bottom-width: 1px;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #444;
+	border-bottom-style: dotted;
+	border-bottom-color: #888;
+	border-bottom-width: 1px;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #444;
+	border-bottom-color: #444;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	background-color: #eaeaec;
+	border-bottom-color: #000;
+}
+
+/* Pour supprimer l'affichage d'un cadre noir autour
+des images comportant un lien sous Firefox */
+a img {
+	text-decoration: none;
+	border-style: none;
+}
+
+/* Le bloc "page" qui englobe tout le site */
+#mgs_page {
+	width: 800px;
+	color: #444;
+	font-size: 1em;
+	margin-right: auto;
+	margin-left: auto;
+	background-color: #fafafc;
+}
+
+/* Le bloc "tete" qui englobe tous les elements de l'en-tete du site */
+#mgs_tete {
+	width: 800px;
+	border-style: none;
+	margin: 0px;
+	padding: 0px;
+	background-color: #fafafc;
+}
+
+/* Paramettres des liens dans l'en-tete */
+#mgs_tete a {
+	text-decoration: none;
+	color: #444;
+	border-style: none;
+}
+
+#mgs_tete a:hover {
+	color: #000;
+	background-color: #eaeaec;
+}
+
+/* Le bloc "bandeau" contenant l'image et le titre du site */
+#mgs_bandeau {
+	text-align:center;
+	height: 125px;
+	border:1px solid #999;
+	margin-top: 25px;
+	margin-bottom: 0px;
+	background-repeat: no-repeat;
+	background-image: url(FondBandeau.png);
+	background-color: #eaeaec;
+	padding: 0px;
+}
+
+/* Le titre du site */
+#mgs_bandeau h1 {
+	height: 99px;
+	margin: 0px;
+	padding: 0px;
+}
+
+/* Paramettres des menus de l'en-tete, a savoir :
+Accueil, Plan, Contact et Redaction */
+#mgs_menu_tete {
+	font-size: 0.95em;
+	text-align: center;
+	line-height: 1em;
+	height: 25px;
+	margin: 0px;
+	padding: 0px;
+	border-top-color: #999;
+	border-top-width: 1px;
+	border-top-style: solid;
+}
+
+#mgs_menu_tete ul {
+	list-style: none;
+	margin: 0px;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	height: 100%;
+}
+
+#mgs_menu_tete li {
+	list-style: none;
+	text-align: center;
+	width: 80px;
+	float: left;
+	padding: 0px;
+	height: 100%;
+	margin-top: 0px;
+	margin-right: 5px;
+	margin-bottom: 0px;
+	margin-left: 5px;
+}
+
+/* Paramettres des liens dans les menus de l'en-tete */
+#mgs_menu_tete li a {
+	display: block;
+	border-right-color: #999;
+	border-right-style: dotted;
+	border-right-width: 1px;
+	border-left-color: #999;
+	border-left-style: dotted;
+	border-left-width: 1px;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	line-height: 175%;
+}
+
+#mgs_menu_tete li a:hover {
+	border-right-style: solid;
+	border-left-style: solid;
+	background-color: #fff;
+}
+
+#mgs_menu_tete .mgs_form_rech {
+	clear: none; 
+	float: right;
+	width: 160px;
+	margin: 1px 5px;
+	padding: 0px;
+	background-color: inherit;
+}
+
+/* Paramettres du champ de recherche dans l'en-tete */
+#mgs_menu_tete .mgs_form_rech a {
+	border-style: none;
+}
+
+#mgs_menu_tete label {
+	display: none;
+}
+
+#mgs_menu_tete form {
+	margin: 0px;
+	padding: 0px;
+}
+
+/* Paramettres du bandeau contenant la hierarchie des pages */
+#mgs_hierarchie {
+	font-size: 0.75em;
+	text-align: left;
+	margin: 0px;
+	padding-top: 5px;
+	padding-bottom: 3px;
+	padding-right: 10px;
+	padding-left: 10px;
+	border-bottom-color: #999;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+
+/* Le bloc "corps" pour l'ensemble de la navigation et des contenus */
+#mgs_corps {
+	width: 780px;
+	padding: 10px;
+	margin-top: 10px;
+}
+
+/* Le bloc "principal" pour l'ensemble des contenus */
+#mgs_principal {
+	/*colonne principale*/
+	padding: 0px;
+	margin-left: 240px;
+}
+
+/* Le bloc des articles avc paramettrage du contenu */
+.mgs_article {
+	border: 1px none #999;
+	padding: 15px;
+	background-color: white;
+	text-align: left;
+}
+
+/* Surtitre des articles */
+.mgs_surtitre {
+	font-size: 0.85em;
+	padding: 0px;
+	margin: 0px;
+	line-height: 1.2em;
+}
+
+/* Titre des articles */
+.mgs_titre {
+	margin: 8px 0;
+	line-height: 1.2em;
+	background-color: #eaeaec;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	text-align: left;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+/* Logo des articles */
+.mgs_logo {
+	padding: 0px;
+	margin-top: 0px;
+	margin-right: 5px;
+	margin-bottom: 0px;
+	margin-left: 10px;
+}
+
+/* Soustitre des articles */
+.mgs_soustitre {
+	font-size: 0.85em;
+	padding: 0px;
+	margin: 0px;
+	line-height: 1.2em;
+	font-weight: bolder;
+}
+
+/* Infos des articles (date, auteur, etc.) */
+.mgs_infos {
+	font-size: 0.8em;
+	padding: 0px;
+	margin: 4px 0px;
+	line-height: 1.6em;
+}
+
+/* Intro des articles */
+.mgs_intro {
+	font-size: 0.95em;
+	font-style: italic;
+	padding: 0px;
+	margin-top: 8px;
+	margin-bottom: 4px;
+	line-height: 1.2em;
+}
+
+/* Le texte des articles */
+.mgs_texte {
+	font-size: 0.95em;
+	line-height: 1.3em;
+	text-align: justify;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	margin-right: 0px;
+	margin-left: 0px;
+	padding: 0px;
+}
+
+/* Les images dans les texte des articles */
+.mgs_texte img {
+	padding: 0px;
+	margin: 0px;
+}
+
+.mgs_texte .spip_documents {
+	padding: 0px;
+	margin: 0px;
+	text-align: center;
+}
+
+/* Les legendes des images des articles */
+.mgs_texte .spip_doc_titre {
+	padding: 0px;
+	margin-top: 5px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	font-size: 0.95em;
+	color: #444;
+}
+
+.mgs_texte .spip_doc_titre strong {
+	font-weight: normal;
+	font-style: italic;
+}
+
+/* Les images dans les texte des articles selon leur alignement */
+.mgs_texte .spip_documents_center {
+	padding: 0px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.mgs_texte .spip_documents_left {
+	padding: 0px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: 20px;
+	margin-left: 0px;
+}
+
+.mgs_texte .spip_documents_right {
+	padding: 0px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: 0px;
+	margin-left: 20px;
+}
+
+/* Le post-scriptum des articles (les liens) */
+.mgs_ps {
+	text-align: left;
+	font-size: 0.9em;
+	line-height: 1.1em;
+	font-style: italic;
+	font-weight: bolder;
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+
+/* Les notes de bas de page des articles */
+.mgs_notes {
+	text-align: left;
+	font-size: 0.8em;
+	line-height: 1em;
+	margin-top: 4px;
+	border-top-style: dotted;
+	border-top-color: #888;
+	border-top-width: 1px;
+	margin-bottom: 4px;
+}
+
+/* La fin des articles */
+.mgs_article_fin {
+	margin-bottom: 12px;
+	padding-bottom: 8px;
+	border-bottom-color: #eaeaec;
+	border-bottom-style: solid;
+	border-bottom-width: 8px;
+}
+
+/* Le lien de reponse des articles */
+.mgs_repondre {
+	font-size: 0.95em;
+	line-height: 1.1em;
+	text-align: center;
+	padding-bottom: 8px;
+	padding-top: 4px;
+	border-bottom-color: #eaeaec;
+	border-bottom-style: solid;
+	border-bottom-width: 8px;
+	margin: 0;
+}
+
+/* Les styles pour les presentations en liste */
+
+/* Paramettrage des hierarchies */
+.mgs_chemin {
+	font-size: 0.75em;
+	text-align: left;
+	margin: 0px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-right: 0px;
+	padding-left: 0px;
+	border-bottom-color: #999;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;	
+}
+
+.mgs_chemin a {
+	text-decoration: none;
+	color: #444;
+	border-style: none;
+}
+
+.mgs_chemin a:hover {
+	color: #000;
+	background-color: #eaeaec;
+}
+
+/* Le bloc de navigation */
+#mgs_navigation {
+	margin: 0px;
+	float:left;
+	width: 228px;
+	top: 190px;
+}
+
+/* Le pied de navigation (logos Rss et Spip) */
+.mgs_pied {
+	text-align: center; 
+	padding: 8px;
+	margin-top: 8px;
+	border-top-color: #999;
+	border-top-width: 1px;
+	border-top-style: solid;
+	margin-bottom: 0;
+}
+
+/* Formatage des menus pour la navigation */
+/* Ce bloc est utilise dans toutes les pages du site 
+et pas uniquement pour la navigation, toute modification 
+peut entrainer des variations imprevisibles sur certaines pages*/
+.mgs_menu {
+	border: 1px solid #999;
+	margin-bottom: 15px;
+	text-align: center;
+	padding: 5px;
+	background-color: white;
+}
+
+/* Formatage de l'affichage en liste */
+.mgs_menu_item_article {
+	font-size:100%;
+	text-align:left;
+	padding-top: 10px;
+	padding-right: 15px;
+	padding-bottom: 10px;
+	padding-left:15px;
+}
+
+.mgs_menu_item_breve {
+	font-size:88%;
+	padding-left:5px;
+	text-align:left;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.mgs_menu_item_forum {
+	font-size: 0.95em;
+	list-style: none;
+	text-align:left;
+	line-height: 1.1em;
+	padding-top: 10px;
+	padding-right: 15px;
+	padding-bottom: 10px;
+	padding-left:15px;
+}
+
+/* Formatage general des menus de navigation */
+.mgs_menu ul {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+.mgs_menu li {
+	list-style: none;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+/* Titre de menu */
+.mgs_menu_titre {
+	font-weight: bold;
+	font-size:95%;
+	background-color: #b8b8bf;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	color: white;
+}
+
+.mgs_menu_titre small {
+	font-weight: lighter;
+}
+
+/* Formatage de la pagination */
+.mgs_menu_titre .on {
+	font-weight: lighter;
+	color: white;
+	font-style: italic;
+}
+
+/* Formatage des liens des menus */
+.mgs_menu_titre a {
+	color: white;
+	border-style: none;
+}
+
+.mgs_menu_titre a:hover {
+	color: #444;
+	border-style: none;
+	background-color: inherit;
+}
+
+/* Element de menu hors titre de rubrique */
+.mgs_menu_item {
+	font-size: 90%;
+	padding-top: 2px;
+	padding-bottom: 0px;
+}
+
+/* Formatage de la rubrique selectionnee */
+.mgs_menu_selected {
+	background-color: #eaeaec;
+	font-weight: bold;
+}
+
+/* menu-item-0 à 6 : formatage des titres de rubrique */
+.mgs_menu_item_0 {
+	font-size:90%;
+	text-align:left;
+	padding-left:5px;
+	font-weight:800;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.mgs_menu_item_1 {
+	font-size:86%;
+	padding-left: 15px;
+	text-align:left;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.mgs_menu_item_2 {
+	font-size: 86%;
+	padding-left: 30px;
+	text-align:left;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.mgs_menu_item_3 {
+	font-size: 82%;
+	padding-left: 45px;
+	text-align:left;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.mgs_menu_item_4 {
+	font-size: 82%;
+	padding-left: 60px;
+	text-align:left;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.mgs_menu_item_5 {
+	font-size: 78%;
+	padding-left: 75px;
+	text-align:left;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.mgs_menu_item_6 {
+	font-size: 78%;
+	padding-left: 90px;
+	text-align:left;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+/* Formatage des forums des articles et breves */
+ul.forum { 
+	display: block; 
+	clear: both; 
+	margin: 0px; 
+	padding: 0px;
+	list-style: none;
+	font-size: 0.95em;
+	line-height: 1.1em;
+	text-align: left;
+}
+
+.mgs_forum_decompte {
+	text-align: center;
+	font-size: 0.92em;
+}
+
+.mgs_forum_message { 
+	background-color: #fcfcff;
+	margin: 0px;
+	padding: 0px;
+}
+
+.mgs_forum_fil { 
+	list-style: none;
+	padding: 0px;
+	margin-top: 40px;
+	margin-right: 15px;
+	margin-bottom: 40px;
+	margin-left: 15px;
+}
+
+.mgs_forum_fil ul { 
+	display: block; 
+	margin: 0px; 
+	padding: 0px; 
+	margin-left: 10px; 
+}
+
+.mgs_forum_texte { 
+	margin: 0px; 
+	color: #444; 
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.mgs_forum_chapo .mgs_infos {
+	padding-left: 15px;
+}
+
+/* Formatage des differents formulaires */
+.mgs_formulaire {
+	color: #444; 
+	font-size: 0.95em;
+	text-align: left;
+	background-color: white; 
+	border: 2px dotted #666; 
+	margin-bottom: 15px;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.mgs_formulaire_previsu {
+	color: #444; 
+	font-size: 0.95em;
+	text-align: left;
+	background-color: white; 
+	border: 2px dotted #666; 
+	margin-bottom: 16px;
+}
+
+.mgs_formulaire_menu {
+	border: none; 
+	margin: 0px;
+	background-color: white;
+	padding: 0px;
+}
+
+.mgs_formulaire_menu div {
+	margin: 0px;
+	padding: 0px;
+}
+
+.mgs_formulaire_menu p {
+	color: #444; 
+	font-size: 0.78em;
+	text-align: left;
+	margin: 0px;
+	margin-bottom: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.mgs_formulaire_menu h4 {
+	display: block; 
+	text-align: center;
+	font-size: 0.88em;
+	background-color: #eaeaec;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	color: #444;
+	margin-top: 2px;
+	margin-bottom: 5px;
+}
+
+.mgs_forml {
+	/*zones de saisie de la page forum*/
+	width: 100%; 
+}
+
