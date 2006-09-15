@@ -75,12 +75,12 @@
 		</ul>
 	</div>
 	</B_categories>
+
+	[(#MODELE{archives_mensuelles}{id_rubrique}{archives}{self=[(#URL_PAGE{minical_demo})],lang})]
+
+	[(#MODELE{select_archives_mensuelles}{id_rubrique}{archives}{self=#URL_PAGE{minical_demo},lang})]
    
-   [(#MODELE{archives_mensuelles}{id_rubrique,archives,self=#URL_PAGE{minical_demo},lang})]
-   
-   [(#MODELE{select_archives_mensuelles}{id_rubrique,archives,self=#URL_PAGE{minical_demo},lang})]
-   
-		 [<div>(#MENU_LANG)<small>(<a href="[(#SELF|parametre_url{lang,''})]">toutes les langues</a>)</small><br class="nettoyeur" /></div>]
+	[<div id="menu_lang">(#MENU_LANG)<small>(<a href="[(#SELF|parametre_url{lang,''})]">toutes les langues</a>)</small><br class="nettoyeur" /></div>]
 
    <div id="links" class="syndic">
     <h2 class="menu-titre"><:liens|ucfirst:></h2>
