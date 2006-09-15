@@ -15,7 +15,6 @@ $flux .=
 
 <script type="text/javascript"><!--
 $(document).ready(function() {
-	alert(10);
 	if ($("a.thickbox,a[@type=\'image/jpeg\'],a[@type=\'image/png\'],a[@type=\'image/gif\']").addClass("thickbox").size()) {
 TB_chemin_animation = "'.url_absolue(find_in_path('circle_animation.gif')).'";
 TB_chemin_close = "'.url_absolue(find_in_path('close.gif')).'";
