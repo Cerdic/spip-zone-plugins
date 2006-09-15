@@ -4,7 +4,7 @@
 <head>
 	<title>Exemple #[(#REM)]CALENDRIER_MINI</title>
 	<INCLURE{fond=inc-head}>
-	<link rel="stylesheet" href="[(#CHEMIN{style.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
+	<link rel="stylesheet" href="[(#CHEMIN{minical.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
 </head>
 
 <body class="page_sommaire">
@@ -78,11 +78,9 @@
    
    [(#MODELE{archives_mensuelles}{id_rubrique}{archives}{self=[(#URL_PAGE{minical_demo})],lang})]
    
-<!--
 	[(#MODELE{select_archives_mensuelles}{id_rubrique,archives,self=#URL_PAGE{minical_demo},lang})]
    
 	[<div>(#MENU_LANG)<small>(<a href="[(#SELF|parametre_url{lang,''})]">toutes les langues</a>)</small><br class="nettoyeur" /></div>]
--->
 
    <div id="links" class="syndic">
     <h2 class="menu-titre"><:liens|ucfirst:></h2>
