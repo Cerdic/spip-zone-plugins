@@ -29,9 +29,9 @@ function TB_Image() {
 //	$(this).parent().next().show();
 
 	// chercher une description (si je suis dans un dt => dd suivants)
-	if (dd = $(this.parentNode.parentNode).find('dd').get(0)) {
-		t += '<div class="description">'+ dd.innerHTML +'</div>';
-	}
+//	if (dd = $(this.parentNode.parentNode).find('dd').get(0)) {
+//		t += '<div class="description">'+ dd.innerHTML +'</div>';
+//	}
 
 	TB_on();
 	TB_show(t,this.href,'image');
