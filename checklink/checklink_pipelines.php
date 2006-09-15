@@ -77,7 +77,7 @@ function checklink_post_propre($flux){
 							if ($titre_auto=='oui' AND strlen($row['titre']))
 								$tag_repl = inserer_attribut($tag_repl,'title',$row['titre']);
 							if ($lang_auto=='oui' AND strlen($row['lang']))
-								$tag_repl = inserer_attribut($tag_repl,'lang',$row['lang']);
+								$tag_repl = inserer_attribut($tag_repl,'hreflang',$row['lang']);
 						}
 						if ($tag_repl!=$tag){
 							$a_tag[] = $tag;
