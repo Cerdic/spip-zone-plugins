@@ -138,9 +138,10 @@ function creer_rubrique_nommee($titre, $lang = '', $id_parent=0) {
 			('".addslashes($titre)."', $id_parent, 'prive', '$lang')");
 			$id_rubrique = spip_insert_id();
 			if ($id_parent > 0) {
-				list($id_secteur) = spip_fetch_array(spip_query(
+				$t = spip_fetch_array(spip_query(
 				"SELECT id_secteur FROM spip_rubriques
 				WHERE id_rubrique=$id_rubrique"));
+				$id_secteur = $t['id_secteur'];
 			} else
 				$id_secteur = $id_rubrique;
 
