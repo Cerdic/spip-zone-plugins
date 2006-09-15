@@ -43,7 +43,7 @@ function checklink_pre_enregistre_contenu($flux){
 function checklink_post_propre($flux){
 	// recuperer les liens des balises a et img
 	if (preg_match_all(
-	',<(a|img) [^>]*>,UimsS',
+	',<(a) [^>]*>,UimsS',
 	$flux, $regs, PREG_SET_ORDER)) {
 		$a_tag=array();$a_tag_repl=array();	
 		foreach ($regs as $reg) {
