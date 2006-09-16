@@ -90,7 +90,7 @@ function checklink_extrait_liens($id_table,$id_objet,$texte){
 			if ($url){
 				// prevoir les liens dont les attributs ont pu etre renseignes a la main
 				$titre = extraire_attribut($reg[0], 'title');
-				$lang = extraire_attribut($reg[0], 'lang');
+				$lang = extraire_attribut($reg[0], 'hreflang');
 				$titre_auto = strlen($titre)?'non':'oui';
 				$lang_auto = strlen($lang)?'non':'oui';
 				
