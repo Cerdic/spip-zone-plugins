@@ -25,10 +25,12 @@ acronym.spip_acronym {
 	border-bottom: 1px dotted;
 }
 
+/* ne marche pas sur MSIE, a refaire en jQuery */
 a[hreflang]:after {
 content: "\0000a0[" attr(hreflang) "]";
 color: #999;
-background : transparent;
+background: transparent;
+font-size:x-small;
 }
 
 a.spip_blank {

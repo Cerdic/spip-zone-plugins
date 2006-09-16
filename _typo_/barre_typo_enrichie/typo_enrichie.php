@@ -32,26 +32,6 @@
 	 *
 	*/
 
-// recuperer le raccourci [texte|bulle d'aide{lang}->xxx]
-// version compliquee de la function traiter_raccourci_lien($regs) (inc/texte)
-function BarreTypoEnrichie_traiter_raccourci_lien($flux) {
-	$regs = $flux['args'];
-
-	if (preg_match(',^(.*?)([|](.*?))?([{]([a-z_]+)[}])$,', $regs[1], $m)) {
-		if ($m[2]) $bulle = ' title="'.texte_backend($m[3]).'"';
-		if ($m[4]) $hreflang = ' hreflang="'.texte_backend($m[5]).'"';
-		$regs[1] = $m[1];
-	}
-
-	list($lien, $class, $texte) = calculer_url($regs[3], $regs[1], 'tout');
-	# ici bien passer le lien pour traiter [<doc3>->url]
-	$flux['data'] = typo("<a href=\"$lien\" class=\"$class\"$bulle$hreflang>"
-		. $texte
-		. "</a>");
-
-	return $flux;
-}
-
 function BarreTypoEnrichie_pre_propre($texte) {
 	// remplace les fausses listes à puce par de vraies
 	// (recherche en début de lignes - suivi d'un ou plusieurs caractères blancs, en mode multiligne)
