@@ -63,6 +63,15 @@ function balise_HTTP_WRAPPER_dist($p) {
 	return $p;
 }
 
+function generer_url_ecrire_ajax($script, $args="", $no_entities=false) {
+
+	if($args) $args = preg_replace(",&(?![a-zA-z]+;)|=,",":",$args);
+	
+	$args = "exec:$script" . (!$args ? '' : ":$args");
+
+	return ($no_entities ? $args : str_replace('&', '&amp;', $args));
+}
+	
 if (!_DIR_RESTREINT)
 	// le dossier squelette doit etre defini relativement a la racine
 	$GLOBALS['dossier_squelettes'] .= ":".substr(_DIR_PLUGIN_SPIIP,strlen(_DIR_RACINE)).'/dist_back';

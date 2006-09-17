@@ -1,5 +1,6 @@
  [(#EVAL{include_spip("inc/boutons")}|vide)]
  [(#EVAL{include_spip("inc/layer")}|vide)]
+ [(#EVAL{utiliser_langue_visiteur()})]
  [(#EVAL{definir_barre_boutons()})]
  #SET{largeur,(#EVAL{$GLOBALS["spip_ecran"]}|=={large}|?{974,750})}
  #SET{largeur_bouton,#GET{largeur}|div{#EVAL{$GLOBALS["boutons_admin"]}|count}|intval}
@@ -10,7 +11,8 @@
  #SET{browser_verifForm,$GLOBALS["browser_verifForm"]}
  #SET{browser_verifForm,#EVAL{#GET{browser_verifForm}}}
  #SET{img_pack,#EVAL{_DIR_IMG_PACK}}
-	<title>&#91;[(#GET{nom})]&#93; [(#ENV{titre}|typo|textebrut)]</title>[(#REM)
+	<title>&#91;[(#GET{nom})]&#93; [(#ENV{titre}|typo|textebrut)]</title>
+	<meta http-equiv="Content-Type" content="text/html[; charset=(#CHARSET)]" />[(#REM)
 	// CSS de secours en cas de non fonct de la suivante]
 	<link rel="stylesheet" type="text/css" href="[(#GET{img_pack})]style_prive_defaut.css" >[(#REM)
 	// CSS espace prive : la vraie]
