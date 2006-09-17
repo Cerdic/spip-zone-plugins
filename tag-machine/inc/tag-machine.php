@@ -350,7 +350,7 @@ class ListeTags {
 										array('spip_mots'),
 										$where
 										); //+ url_propre ? id_objet ?
-		list($id) = spip_fetch_array($results);
+		list($id) = spip_fetch_array($results,SPIP_NUM);
 		if ($id) 
 		  $ids_mot[] = $id;
 		spip_abstract_free($results);

@@ -1,5 +1,7 @@
-#SET{fond,#ENV{xsl,#ENV{initxsl,Themes}}}
-#SET{xml,#ENV{xml,#ENV{initxml,Themes}}}
+#SET{fond,#EVAL{$_GET['xsl']}}
+#SET{fond,(#GET{fond}|?{#GET{fond},#ENV{initxsl,Themes}})}
+#SET{xml,#EVAL{$_GET['xml']}}
+#SET{xml,(#GET{xml}|?{#GET{xml},#ENV{initxml,Themes}})}
 [(#GET{fond}|match{^(Themes|MotsCles|Noeud)$}|?{' ',''})
 <INCLURE{fond=#GET{fond}}{xml=#GET{xml}}{motcle}{lettre}{self=#SELF}>
 ][(#GET{fond,Themes}|match{^(Themes|MotsCles|Noeud)$}|?{'',' '})

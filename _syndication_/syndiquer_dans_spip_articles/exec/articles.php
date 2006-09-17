@@ -283,12 +283,12 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	list($nb_forums) = spip_fetch_array(spip_query(
 		"SELECT count(*) AS count FROM spip_forum
 		WHERE id_article=$id_article
-		AND statut IN ('publie', 'off', 'prop')"));
+		AND statut IN ('publie', 'off', 'prop')"),SPIP_NUM);
 
 	list($nb_signatures) = spip_fetch_array(spip_query(
 		"SELECT COUNT(*) AS count FROM spip_signatures
 		WHERE id_article=$id_article
-		AND statut IN ('publie', 'poubelle')"));
+		AND statut IN ('publie', 'poubelle')"),SPIP_NUM);
 
 
 	$visible = $change_accepter_forum || $change_petition
@@ -785,7 +785,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
   if (($GLOBALS['meta']['multi_articles'] == 'oui')
 	OR (($GLOBALS['meta']['multi_rubriques'] == 'oui') AND ($GLOBALS['meta']['gerer_trad'] == 'oui'))) {
 
-	list($langue_article) = spip_fetch_array(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article"));
+	list($langue_article) = spip_fetch_array(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article"),SPIP_NUM);
 
 	if ($GLOBALS['meta']['gerer_trad'] == 'oui')
 		$titre_barre = _T('titre_langue_trad_article');
@@ -1139,7 +1139,7 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 			"WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article ".
 			"AND articles.statut IN $aff_articles GROUP BY lien.id_auteur";
 			$result2 = spip_query($query2);
-			if ($result2) list($nombre_articles) = spip_fetch_array($result2);
+			if ($result2) list($nombre_articles) = spip_fetch_array($result2,SPIP_NUM);
 			else $nombre_articles = 0;
 
 			$vals[] = bonhomme_statut($row);
@@ -1441,7 +1441,7 @@ function modif_langue_articles($id_article, $id_rubrique, $changer_lang)
 
 // Appliquer la modification de langue
  if ($GLOBALS['meta']['multi_articles'] == 'oui') {
-	list($langue_parent) = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=" . $id_rubrique));
+	list($langue_parent) = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=" . $id_rubrique),SPIP_NUM);
 
 	if ($changer_lang) {
 		if ($changer_lang != "herit")
@@ -1552,7 +1552,7 @@ function insert_article($id_parent, $new)
 	if ($new!='oui')  redirige_par_entete("./");
 	// Avec l'Ajax parfois id_rubrique vaut 0... ne pas l'accepter
 	if (!$id_rubrique = intval($id_parent)) {
-		list($id_rubrique) = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
+		list($id_rubrique) = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"),SPIP_NUM);
 	}
 
 	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));

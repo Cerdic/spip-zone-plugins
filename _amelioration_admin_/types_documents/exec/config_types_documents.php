@@ -120,7 +120,8 @@ function exec_config_types_documents() {
                        <input type="hidden" name="hash" value="'.calculer_action_auteur("types_documents ".date('Ymd')).'"/>
                        <input type="hidden" name="id_type" value="'.$id_type.'"/>
 </form>';
-	  
+	  // BUG PROBABLE depuis que spip_fetch_array est passe en SPIP_ASSOC par defaut.
+	  // list() ne fonctionne qu'avec des cles numeriques
 	  list($count) = spip_abstract_fetsel($s_count,$f_count,array("id_type=$id_type"));
 	  $vals[] = ($count)?$count:'0';
 

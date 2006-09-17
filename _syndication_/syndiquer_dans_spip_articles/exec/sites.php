@@ -249,7 +249,7 @@ if ($redirect AND $redirect_ok == 'oui') {
 // Appliquer le choix resume/fulltexte (necessite un reload)
 if ($flag_editable AND ($resume == 'oui' OR $resume == 'non')) {
 	list($old_resume) = spip_fetch_array(spip_query(
-		"SELECT resume FROM spip_syndic WHERE id_syndic=$id_syndic"));
+		"SELECT resume FROM spip_syndic WHERE id_syndic=$id_syndic"),SPIP_NUM);
 	if ($old_resume <> $resume) $reload = 'oui';
 	spip_query("UPDATE spip_syndic SET resume='$resume'
 		WHERE id_syndic=$id_syndic");

@@ -469,7 +469,7 @@ function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascrip
 	$res = spip_query($query_count);
 	$num_rows = spip_num_rows($res);
 	if ($num_rows == 1) // ca n'est pas une requete avec jointure
-		list($num_rows) = spip_fetch_array($res);
+		list($num_rows) = spip_fetch_array($res,SPIP_NUM);
 
 	if (!$num_rows) return;
 

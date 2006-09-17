@@ -190,10 +190,10 @@ icone_horizontale(_T('syndicarticles:voir_syndic'),"?exec=sites&id_syndic=$id_ru
 //
 
 		if ($connect_statut == "0minirezo" && acces_rubrique($id_rubrique)) {
-			list($id_parent) = spip_fetch_array(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+			list($id_parent) = spip_fetch_array(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"),SPIP_NUM);
 			if (!$id_parent) {
 			  list($n) = spip_fetch_array(spip_query("SELECT COUNT(*) " .
-								 critere_statut_controle_forum('prop', $id_rubrique)));
+								 critere_statut_controle_forum('prop', $id_rubrique)),SPIP_NUM);
 			  if ($n)
 			    icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $n)), generer_url_ecrire("controle_forum","id_rubrique=$id_rubrique"), "suivi-forum-24.gif", "");
 			}
@@ -470,23 +470,23 @@ function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editabl
 
 function tester_rubrique_vide($id_rubrique) {
 	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent='$id_rubrique' LIMIT 1";
-	list($n) = spip_fetch_array(spip_query($query));
+	list($n) = spip_fetch_array(spip_query($query),SPIP_NUM);
 	if ($n > 0) return false;
 
 	$query = "SELECT id_article FROM spip_articles WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prepa' OR statut='prop') LIMIT 1";
-	list($n) = spip_fetch_array(spip_query($query));
+	list($n) = spip_fetch_array(spip_query($query),SPIP_NUM);
 	if ($n > 0) return false;
 
 	$query = "SELECT id_breve FROM spip_breves WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prop') LIMIT 1";
-	list($n) = spip_fetch_array(spip_query($query));
+	list($n) = spip_fetch_array(spip_query($query),SPIP_NUM);
 	if ($n > 0) return false;
 
 	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prop') LIMIT 1";
-	list($n) = spip_fetch_array(spip_query($query));
+	list($n) = spip_fetch_array(spip_query($query),SPIP_NUM);
 	if ($n > 0) return false;
 
 	$query = "SELECT id_document FROM spip_documents_rubriques WHERE id_rubrique='$id_rubrique' LIMIT 1";
-	list($n) = spip_fetch_array(spip_query($query));
+	list($n) = spip_fetch_array(spip_query($query),SPIP_NUM);
 	if ($n > 0) return false;
 
 	return true;
@@ -557,7 +557,7 @@ function enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, 
 	AND $id_parent > 0) {
 		list($id_secteur) = spip_fetch_array(spip_query(
 			"SELECT id_secteur FROM spip_rubriques
-			WHERE id_rubrique=$id_parent"));
+			WHERE id_rubrique=$id_parent"),SPIP_NUM);
 		if ($id_secteur)
 			spip_query("UPDATE spip_breves
 				SET id_rubrique=$id_secteur

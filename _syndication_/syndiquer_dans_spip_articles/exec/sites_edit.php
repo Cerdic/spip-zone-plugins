@@ -33,7 +33,7 @@ else {
 	$syndication = 'non';
 	$new = 'oui';
 	if (!intval($id_rubrique))
-		list($id_rubrique) = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent='0' ORDER BY titre LIMIT 1"));
+		list($id_rubrique) = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent='0' ORDER BY titre LIMIT 1"),SPIP_NUM);
 
 }
 

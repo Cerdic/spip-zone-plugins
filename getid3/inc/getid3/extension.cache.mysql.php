@@ -101,7 +101,7 @@ class getID3_cached_mysql extends getID3
 
 		// Check version number and clear cache if changed
 		$this->cursor = mysql_query("SELECT `value` FROM `getid3_cache` WHERE (`filename` = '".GETID3_VERSION."') AND (`filesize` = '-1') AND (`filetime` = '-1') AND (`analyzetime` = '-1')", $this->connection);
-		list($version) = @mysql_fetch_array($this->cursor);
+		list($version) = @mysql_fetch_array($this->cursor,SPIP_NUM);
 		if ($version != GETID3_VERSION) {
 			$this->clear_cache();
 		}
@@ -132,7 +132,7 @@ class getID3_cached_mysql extends getID3
 
 			// Loopup file
 			$this->cursor = mysql_query("SELECT `value` FROM `getid3_cache` WHERE (`filename`='".$filenam2."') AND (`filesize`='".$filesize."') AND (`filetime`='".$filetime."')", $this->connection);
-			list($result) = @mysql_fetch_array($this->cursor);
+			list($result) = @mysql_fetch_array($this->cursor,SPIP_NUM);
 
 			// Hit
 			if ($result) {

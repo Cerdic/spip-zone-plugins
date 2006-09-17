@@ -1175,7 +1175,7 @@ $les_auteurs=array();
 			"WHERE lien.id_auteur=$idi_auteur AND articles.id_article=lien.id_article ".
 			"AND articles.statut IN $aff_articles GROUP BY lien.id_auteur";
 		$result2 = spip_query($query2);
-		if ($result2) list($nombre_articles) = spip_fetch_array($result2);
+		if ($result2) list($nombre_articles) = spip_fetch_array($result2,SPIP_NUM);
 		else $nombre_articles = 0;
 
 		$url_auteur = generer_url_ecrire("abonne_edit","id_auteur=$idi_auteur");
