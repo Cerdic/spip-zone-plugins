@@ -7,7 +7,8 @@ include_spip("inc/texte");
 function exec_article_preview_dist()
 {
 	lire_metas();
-	header('Content-Type: text/html;charset='.lire_meta('charset')); 
+	header('Content-Type: text/html;charset='.lire_meta('charset'));
+	echo "<meta http-equiv='Content-Type' content='text/html; charset=".lire_meta('charset')." />";
 	echo propre($_POST['texte']);
 }
 ?>
