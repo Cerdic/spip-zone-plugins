@@ -43,15 +43,15 @@ function BarreTypoEnrichie_pre_propre($texte) {
 	// pour etre pris en charge par paragrapher
 
 	// Definition des différents intertitres possibles, si pas deja definies
-	tester_variable('debut_intertitre', '<h2>');
+	tester_variable('debut_intertitre', '<h2 class="spip">');
 	tester_variable('fin_intertitre', '</h2>');
-	tester_variable('debut_intertitre_2', '<h3>');
+	tester_variable('debut_intertitre_2', '<h3 class="spip">');
 	tester_variable('fin_intertitre_2', '</h3>');
-	tester_variable('debut_intertitre_3', '<h4>');
-	tester_variable('fin_intertitre_3', '</h4>');
-	tester_variable('debut_intertitre_4', '<h5>');
-	tester_variable('fin_intertitre_4', '</h5>');
-	tester_variable('debut_intertitre_5', '<h6>');
+	tester_variable('debut_intertitre_3', '<h4 class="spip">');
+	tester_variable('fin_intertitre_3', '</h4 class="spip">');
+	tester_variable('debut_intertitre_4', '<h5 class="spip">');
+	tester_variable('fin_intertitre_4', '</h5 class="spip">');
+	tester_variable('debut_intertitre_5', '<h6 class="spip">');
 	tester_variable('fin_intertitre_5', '</h6>');
 
 	global $debut_intertitre, $fin_intertitre;
@@ -147,11 +147,11 @@ function BarreTypoEnrichie_post_propre($texte) {
 
 		);
 		$remplace1 = array(
-			/* 15 */ 	"<div style=\"text-align:right;\">$1</div>",
-			/* 17 */ 	"<div style=\"text-align:center;\">$1</div>",
-			/* 19 */ 	"<div class=\"texteencadre-spip\">$1</div>",
-			/* 21 */ 	"<strong class=\"caractencadre2-spip\">",
-			/* 21b */ 	"<strong class=\"caractencadre-spip\">",
+			/* 15 */ 	"<div style=\"text-align:right;\" class=\"spip\">$1</div>",
+			/* 17 */ 	"<div style=\"text-align:center;\" class=\"spip\">$1</div>",
+			/* 19 */ 	"<div class=\"texteencadre-spip\ spip">$1</div>",
+			/* 21 */ 	"<strong class=\"caractencadre2-spip spip\">",
+			/* 21b */ 	"<strong class=\"caractencadre-spip spip\">",
 			/* 22 */	"</strong>",
 			/* 23 */ 	"<sup>",
 			/* 24 */	"</sup>",
@@ -170,7 +170,7 @@ function BarreTypoEnrichie_post_propre($texte) {
 			/* 37 */	#"<div",
 			/* 38 */	#"<blockquote class=\"spip\"><p class=\"spip\">",
 			/* 39 */	#"</p></blockquote>",
-			/* 40 */	"<acronym title='$2' class='spip_acronym'>$1</acronym>",
+			/* 40 */	"<acronym title='$2' class='spip_acronym spip'>$1</acronym>",
 			/* 41 */	"<a href=$1 title=\"$3\">$2</a>"
 
 		);
@@ -187,7 +187,7 @@ function BarreTypoEnrichie_post_typo($texte) {
 	$texte = preg_replace('/@@@amp:([A-Za-z#0-9]*):amp@@@/','&\1;',$texte);
 	// Raccourci typographique <sc></sc>
 	$texte = str_replace("<sc>",
-		"<span style=\"font-variant: small-caps\">", $texte);
+		"<span style=\"font-variant: small-caps\" class=\"spip\">", $texte);
 	$texte = str_replace("</sc>", "</span>", $texte);
 	return $texte;
 }
