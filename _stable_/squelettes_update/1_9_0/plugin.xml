@@ -1,0 +1,28 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Update&amp;Recalcul
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Cedric MORIN
+_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Ajoute un bouton d'admin pour faire un update par svn du dossier squelette en cours d'utilisation et recalculer la page du meme coup
+_ Pour utiliser un subversion necessitant une authentification, 
+ajouter en argument lors de la premiere utilisation &username=toto&password=toto
+_ Si les scripts php sont executes avec l'user apache, vous devez mettre votre dossier squelette en mode 777 pour qu'apache ait
+le droit d'updater le dossier avec subversion
+	</description>
+	<prefix> 
+	squelup
+	</prefix>	
+	<options>
+	squelup_options.php
+	</options>
+</plugin>
