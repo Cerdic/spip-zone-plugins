@@ -1,0 +1,31 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Faut pass pusher
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	Ben.
+ 	_ &copy; 2006 - Distribue sous licence GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	publier des articles à partir d'un email 
+	</description>
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	inc_push.php
+	</fonctions>
+	<prefix> 
+	push
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>inc_push.php</inclure>
+	</pipeline>
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
