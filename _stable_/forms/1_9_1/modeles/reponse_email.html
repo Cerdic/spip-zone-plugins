@@ -1,0 +1,20 @@
+<BOUCLE_reponses(REPONSES){id_reponse}>#SET{champ,''}
+<BOUCLE_form(FORMS){id_form}>#TEXTE
+[(#ENV{mail_admin}|=={'oui'}|?{' ',''})
+Formulaire #TITRE
+Retrouvez cette r&eacute;ponse dans l'interface d'administration : #URL_ECRIRE{forms_reponses,id_form=#ID_FORM}
+]
+R&eacute;ponse saisie le [(#DATE|affdate)]
+depuis la page [(#URL|url_absolue)]
+<BOUCLE_repchamps(REPONSES_CHAMPS){id_reponse}><BOUCLE_champsnom(FORMS_CHAMPS){id_form}{champ}>[(#GET{champ}|=={#CHAMP}|?{'',' '})
+#TITRE : ][(#GET{champ}|=={#CHAMP}|?{', ',''})]#SET{champ,#CHAMP}</BOUCLE_champsnom>[
+		(#REM) Regarder si le champ est du type select ou multiple, car dans ce cas il faut
+		decoder la reponse avec la structure du formulaire
+		]<BOUCLE_champsselectmulti(FORMS_CHAMPS){id_form}{champ}{type IN select,multiple}><BOUCLE_champschoix(FORMS_CHAMPS_CHOIX){id_form}{cle}{choix=#VALEUR}>#TITRE </BOUCLE_champschoix></BOUCLE_champsselectmulti>[
+		(#REM) Regarder si le champ est du type mot cle, car dans ce cas il faut
+		recuperer le titre du mot cle au lieu de l'id
+		]<BOUCLE_champsmot(FORMS_CHAMPS){id_form}{champ}{type=mot}><BOUCLE_champstitre(MOTS){id_mot=#VALEUR}>#TITRE</BOUCLE_champstitre></BOUCLE_champsmot>[
+		(#REM) C'est finalement un champ normal
+		]#VALEUR<BOUCLE_fichier(FORMS_CHAMPS){id_form}{champ}{type=fichier}>[(#ENV{mail_admin}|=={'oui'}|?{' ',''}) #URL_ECRIRE{forms_telecharger,id_reponse=#ID_REPONSE&champ=#CHAMP} ]</BOUCLE_fichier><//B_champsmot><//B_champsselectmulti></BOUCLE_repchamps>
+</BOUCLE_form>
+</BOUCLE_reponses>

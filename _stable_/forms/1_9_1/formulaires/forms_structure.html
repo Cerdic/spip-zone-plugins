@@ -1,0 +1,72 @@
+<BOUCLE_form(FORMS){id_form=#ENV{id_form}}>
+<fieldset>
+<legend>#TITRE</legend>
+<BOUCLE_champs(FORMS_CHAMPS){id_form}>
+[(#ENV{affiche_sondage}) #RESULTATS_SONDAGE]
+[(#ENV{affiche_sondage}|?{'',' '})
+	[</fieldset><fieldset><legend>(#TYPE|=={separateur}|?{#TITRE,''})</legend>]
+	[(#TYPE|=={separateur}|?{'',' '})
+		<div class='spip_form_champ'>
+			[(#TYPE|=={textestatique}|?{#TITRE,''})]
+			[(#TYPE|=={textestatique}|?{'',' '})
+				<span class='spip_form_label'>
+					<label for="#CHAMP">#TITRE</label>
+					[<span class='spip_form_label_obligatoire[(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''})obligatoire_oublie]'>
+						(#OBLIGATOIRE|=={oui}|?{<:forms:info_obligatoire_02:>,''})</span>]
+					:
+				</span>
+				[(#TYPE|=={email}|?{' ',''})
+					<span class='spip_form_label_details'><:forms:champ_email_details:></span>
+					<input type='text' name='#CHAMP' id='#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
+						class='[(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
+						onfocus="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]-focus'" 
+						onblur="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]'" size='40' />
+				]
+				[(#TYPE|=={url}|?{' ',''})
+					<span class='spip_form_label_details'><:forms:champ_url_details:></span>
+					<input type='text' name='#CHAMP' id='#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
+						class='[(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
+						onfocus="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]-focus'" 
+						onblur="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]'" size='40' />
+				]
+				[(#TYPE|=={ligne}|?{' ',''})
+					<input type='text' name='#CHAMP' id='#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
+						class='[(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
+						onfocus="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]-focus'" 
+						onblur="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]'" size='40' />
+				]
+				[(#TYPE|=={texte}|?{' ',''})
+					<textarea name='#CHAMP' id='#CHAMP'
+						class='[(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
+						onfocus="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]-focus'" 
+						onblur="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]'" rows='10'  cols='80' 
+						>[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]</textarea>
+				]
+				[(#TYPE|=={fichier}|?{' ',''})
+					<input type='file' name='#CHAMP' id='#CHAMP'
+						class='[(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
+						onfocus="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]-focus'" 
+						onblur="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]'" size='40' />
+				]
+				[(#TYPE|=={select}|?{' ',''})
+					<INCLURE{fond=formulaires/forms_champ_select}{id_form}{cle}{valeur=#ENV**{valeurs}}>
+				]
+				[(#TYPE|=={multiple}|?{' ',''})
+					<INCLURE{fond=formulaires/forms_champ_multiple}{id_form}{cle}{valeur=#ENV**{valeurs}}>
+				]
+				[(#TYPE|=={mot}|?{' ',''})
+					<INCLURE{fond=formulaires/forms_select_mot}{id_groupe}{champ}{valeur=#ENV**{valeurs}}>
+				]
+				[<span class='erreur'>(#ENV**{erreur}|forms_valeur{#CHAMP})</span>]
+			]
+		</div>
+	]
+]
+</BOUCLE_champs>
+</fieldset>
+[(#REM) Piege a robots spammeurs ]
+<p style='display:none;'><label for="nobotnobot"><:antispam_champ_vide:></label>
+<input type="text" name="nobotnobot" value="#ENV{nobotnobot}" size="10" /></p>
+
+<div style='text-align:#LANG_RIGHT' class='spip_bouton'><input type="submit" name='Valider' value="<:bouton_valider:>" class='fondo'/></div>
+</BOUCLE_form>
