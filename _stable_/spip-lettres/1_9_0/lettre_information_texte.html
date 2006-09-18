@@ -1,0 +1,16 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<BOUCLE_lettre(LETTRES) {id_lettre=(#ENV{id_lettre})}>#TITRE
+
+++
+[(#DESCRIPTIF|textebrut)]
+++
+
+
+[(#TEXTE|textebrut)]
+
+
+---
+<:lettres:action_desinscription:> : #URL_VALIDATION_DESINSCRIPTION
+</BOUCLE_lettre>
+

@@ -1,0 +1,55 @@
+<div class="formulaire_spip">
+<a name="formulaire_lettres" id="formulaire_lettres"></a>
+<form method="post" action="#ENV{self}#formulaire_lettres">
+	<fieldset class="spip_encadrer">
+		<legend><:lettres:lettres_information:></legend>
+[(#REM)
+
+      +++++++++++++++++++++++++
+		Validation d'un email
+      +++++++++++++++++++++++++
+
+][(#ENV*{validation_email}|?{' ',''})[(#REM)
+
+		* Succès
+
+][(#ENV*{resultat_action}|?{' ',''})
+[(#ENV{lettres_action}|=={'inscription'}|?{' ',''})<p><:lettres:validation_inscription_succes:></p>[<ul>(#ENV{lettres_virgule}|lettres_filtrer_lettres_virgule{'<li>','</li>'})</ul>]]
+[(#ENV{lettres_action}|=={'desinscription'}|?{' ',''})<p><:lettres:validation_desinscription_succes:></p>[<ul>(#ENV{lettres_virgule}|lettres_filtrer_lettres_virgule{'<li>','</li>'})</ul>]]
+[(#ENV{lettres_action}|=={'changement_format'}|?{' ',''})<p><:lettres:validation_changement_succes:></p>]][(#REM)
+
+		* Echec
+
+][(#ENV*{resultat_action}|?{'',' '})
+[(#ENV{lettres_action}|=={'inscription'}|?{' ',''})<p><:lettres:validation_inscription_erreur:></p>[<ul>(#ENV{lettres_virgule}|lettres_filtrer_lettres_virgule{'<li>','</li>'})</ul>]]
+[(#ENV{lettres_action}|=={'desinscription'}|?{' ',''})<p><:lettres:validation_desinscription_erreur:></p>[<ul>(#ENV{lettres_virgule}|lettres_filtrer_lettres_virgule{'<li>','</li>'})</ul>]]
+[(#ENV{lettres_action}|=={'changement_format'}|?{' ',''})<p><:lettres:validation_changement_erreur:></p>]
+[(#ENV{lettres_action}|=={'redirection'}|?{' ',''})<p><:lettres:redirection_erreur:></p>]
+[(#ENV{action_inconnue}|?{' ',''})<p><:lettres:action_inconnue:></p>]
+<p><:lettres:contactez_webmaster:> #EMAIL_WEBMASTER</p>]][(#REM)
+
+      ++++++++++++++++++++++++++++++++
+		Confirmation d'envoi d'email
+      ++++++++++++++++++++++++++++++++
+
+][(#ENV*{envoi}|?{' ',''})[(#REM)
+
+		* Succès
+
+][(#ENV*{resultat_envoi}|?{' ',''})
+[(#ENV{lettres_action}|=={'inscription'}|?{' ',''})<p><:lettres:envoi_inscription_succes:></p>[<ul>(#ENV{lettres_virgule}|lettres_filtrer_lettres_virgule{'<li>','</li>'})</ul>]]
+[(#ENV{lettres_action}|=={'desinscription'}|?{' ',''})<p><:lettres:envoi_desinscription_succes:></p>[<ul>(#ENV{lettres_virgule}|lettres_filtrer_lettres_virgule{'<li>','</li>'})</ul>]]
+[(#ENV{lettres_action}|=={'changement_format'}|?{' ',''})<p><:lettres:envoi_changement_format_succes:></p>]
+][(#REM)
+
+		* Echec
+
+][(#ENV*{resultat_envoi}|?{'',' '})
+[(#ENV{lettres_action}|=={'inscription'}|?{' ',''})<p><:lettres:envoi_inscription_erreur:></p>[<ul>(#ENV{lettres_virgule}|lettres_filtrer_lettres_virgule{'<li>','</li>'})</ul>]]
+[(#ENV{lettres_action}|=={'desinscription'}|?{' ',''})<p><:lettres:envoi_desinscription_erreur:></p>[<ul>(#ENV{lettres_virgule}|lettres_filtrer_lettres_virgule{'<li>','</li>'})</ul>]]
+[(#ENV{lettres_action}|=={'changement_format'}|?{' ',''})<p><:lettres:envoi_changement_format_erreur:></p>]
+<p><:lettres:contactez_webmaster:> #EMAIL_WEBMASTER</p>]]
+		<input type="button" class="spip_bouton" value="<:lettres:retour:>" onclick="window.location.replace('#URL_FORMULAIRE_LETTRES');" />
+	</fieldset>
+</form>
+</div><!-- fin formulaire_spip -->

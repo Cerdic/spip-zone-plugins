@@ -1,0 +1,39 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	<link rel="stylesheet" href="#URL_SITE_SPIP/dist/spip_style.css" type="text/css" media="projection, screen, tv" />
+	<link rel="stylesheet" href="#URL_SITE_SPIP/dist/habillage.css" type="text/css" media="projection, screen, tv" />
+	<link rel="stylesheet" href="#URL_SITE_SPIP/dist/impression.css" type="text/css" media="print" />
+</head>
+
+<body>
+<div id="page">
+
+    <div id="entete">
+		<div id="nom_site_spip"><a rel="start" href="#URL_SITE_SPIP">#NOM_SITE_SPIP - <:lettres:titre_changement_format:></a></div>
+	</div>
+    
+    <div id="hierarchie">
+		[(#DATE|affdate)]
+	</div>
+
+    <div id="conteneur">
+        <div id="contenu">
+            <div class="texte"><:lettres:texte_changement_format:></div>
+        </div><!-- fin contenu -->
+        <div id="navigation">
+			<div class="rubriques">
+				<h2 class="titre"><:lettres:action_changement_format:></h2>
+				<ul>	
+					<li><a href="[(#URL_VALIDATION_CHANGEMENT_FORMAT)]"><:lettres:valider_changement_format:></a></li>
+				</ul>
+			</div>
+        </div><!-- fin navigation -->
+    </div><!-- fin conteneur -->
+
+</div><!-- fin page -->
+</body>
+</html>

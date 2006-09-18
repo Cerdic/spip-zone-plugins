@@ -1,0 +1,28 @@
+<div class="formulaire_spip">
+<a name="formulaire_lettres" id="formulaire_lettres"></a>
+<form method="post" action="#ENV{self}#formulaire_lettres">
+	<fieldset class="spip_encadrer">
+		<legend><:lettres:lettres_information:></legend>
+<B_lettres>		<p>
+<BOUCLE_lettres(LETTRES) {par titre}>			<input type="checkbox" name="lettres[]" id="lettre_#ID_LETTRE" value="#ID_LETTRE" [(#ID_LETTRE|lettres_filtrer_parmi_lettres|?{' ',''})checked="checked" ]/> <label for="lettre_#ID_LETTRE">#TITRE[(#ID_LETTRE|lettres_filtrer_parmi_lettres|?{' ',''})[(#ID_LETTRE|lettres_verifier_action_possible{#ENV*{lettres_action},#ENV*{email}}|?{'',' '})[(#ENV{lettres_action}|=={'inscription'}|?{' ',''})<:lettres:deja_abonne:>][(#ENV{lettres_action}|=={'desinscription'}|?{' ',''})<:lettres:pas_abonne:>]]]</label><br />
+</BOUCLE_lettres>		</p>
+</B_lettres>
+		<p><label for="email">[(#ENV*{email_ko}|?{<:lettres:email_non_valide:>,<:lettres:email:>})]</label>
+			<input type="text" class="forml" name="email" id="email" value="#ENV{email}" maxlength="255" /></p>
+		<p><:lettres:changement_affecte_toutes_les_lettres:></p>
+		<p><label for="format"><:lettres:format:></label>
+			<select class="forml" name="format" id="format">
+				<option value="mixte"[(#ENV{format}|=={'mixte'}|?{' ',''}) selected="selected"]><:lettres:format_mixte:></option>
+				<option value="html"[(#ENV{format}|=={'html'}|?{' ',''}) selected="selected"]><:lettres:format_html:></option>
+				<option value="texte"[(#ENV{format}|=={'texte'}|?{' ',''}) selected="selected"]><:lettres:format_texte:></option>
+			</select></p>
+		<p><label for="lettres_action"><:lettres:action:></label>
+			<select class="forml" name="lettres_action" id="lettres_action">
+				<option value="inscription"[(#ENV{lettres_action}|=={'inscription'}|?{' ',''}) selected="selected"]><:lettres:action_inscription:></option>
+				<option value="desinscription"[(#ENV{lettres_action}|=={'desinscription'}|?{' ',''}) selected="selected"]><:lettres:action_desinscription:></option>
+				<option value="changement_format"[(#ENV{lettres_action}|=={'changement_format'}|?{' ',''}) selected="selected"]><:lettres:action_changement_format:></option>
+			</select></p>
+		<p><input type="submit" class="spip_bouton" name="valider" value="<:lettres:valider:>" /></p>
+	</fieldset>
+</form>
+</div>
