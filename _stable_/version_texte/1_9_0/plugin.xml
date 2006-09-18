@@ -1,0 +1,24 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Version texte
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+_ C&eacute;dric MORIN [notre-ville.net->http://www.notre-ville.net]
+_ &copy; 2006 - GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+	Filtres version_texte et version_plein_texte pour transformer une page html
+	</description>
+	<prefix> 
+	verstexte
+	</prefix>
+	<fonctions>
+	verstexte_fonctions.php
+	</fonctions>
+</plugin>
