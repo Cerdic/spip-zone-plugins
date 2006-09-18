@@ -1,0 +1,29 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Google siteMap
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Cedric MORIN
+ 	[notre-ville.net->http://www.notre-ville.net]
+_ &copy; 2006 - Licence GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+	Ce plugin cr&eacute;e dynamiquement un [sitemap Google->http://www.google.com/webmasters/sitemaps/]
+_ Le contenu le plus proche de la racine est prioritaire
+_ La pr&eacute;sence des squelettes article, br&egrave;ve... est test&eacute;e pour chaque type d'objet
+
+Usage : d&eacute;clarer l'[URL du SiteMap->../spip.php?page=sitemap] dans Google (utiliser /?page=sitemap directement ne fonctionnera pas).
+	</description>
+	<prefix> 
+	siteMap
+	</prefix>
+	<fonctions>
+	sitemap_fonctions.php
+	</fonctions>
+</plugin>
