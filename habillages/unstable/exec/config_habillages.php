@@ -108,6 +108,7 @@ debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_publ
  	
 	$squelette = $_REQUEST['squelette'];
  	$plugin_options_file = "$plugin_directory/habillages_options.php";
+ 	$plugin_directory = _DIR_PLUGIN_HABILLAGES;
  	
  	if ($squelette == "initial") {
 	 	chmod($plugin_options_file, 0777);
