@@ -6,10 +6,10 @@
  	Franck Ducas, Cedric MORIN [notre-ville.net->http://www.notre-ville.net].
 	</auteur>
 	<version> <!-- Version du plugin -->
-	0.3.1
+	0.3.3
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-	test
+	dev
 	</etat>
 	<description>
 Plugin qui change les ic&ocirc;nes de l'espace priv&eacute; et charge le squelette de votre choix sur votre site public.
