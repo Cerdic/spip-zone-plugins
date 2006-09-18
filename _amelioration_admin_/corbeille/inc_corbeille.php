@@ -17,7 +17,7 @@ define('_DIR_PLUGIN_CORBEILLE',(_DIR_PLUGINS.end($p)));
 		  // on voit le bouton dans la barre "naviguer"
 		  $boutons_admin['configuration']->sousmenu['corbeille']= new Bouton(
 			"../"._DIR_PLUGIN_CORBEILLE."/img_pack/trash-full-24.png",  // icone
-			_L('Corbeille')	// titre
+			_T('corbeille')	// titre
 			);
 		}
 		return $boutons_admin;
@@ -100,12 +100,12 @@ function Corbeille_affiche($page){
 		echo "<strong>"._T('corbeille:choix_doc')."</strong><br/>";
 		echo "<style type='text/css'>a.corbeille {border:3px solid #f00;padding: 5px;} a.corbeille:hover {background: #fcc;border:3px solid #c00;} </style>";
 	
-  	Corbeille_affiche_ligne(_L('P&eacute;titions'),generer_url_ecrire($page,"type_doc=signatures"),$total_signatures);
-		Corbeille_affiche_ligne(_L('Br&egrave;ves'),generer_url_ecrire($page,"type_doc=breves"),$total_breves);
-		Corbeille_affiche_ligne(_L('Articles'),generer_url_ecrire($page,"type_doc=articles"),$total_articles);
-		Corbeille_affiche_ligne(_L('Forums Publics'),generer_url_ecrire($page,"type_doc=forums_publics"),$total_forums_publics);
-		Corbeille_affiche_ligne(_L('Forums Priv&eacute;s'),generer_url_ecrire($page,"type_doc=forums_prives"),$total_forums_prives); 
-		Corbeille_affiche_ligne(_L('Auteurs'),generer_url_ecrire($page,"type_doc=auteurs"),$total_auteur);
+  	Corbeille_affiche_ligne(_T('lien_petitions'),generer_url_ecrire($page,"type_doc=signatures"),$total_signatures);
+		Corbeille_affiche_ligne(_T('icone_breves'),generer_url_ecrire($page,"type_doc=breves"),$total_breves);
+		Corbeille_affiche_ligne(_T('icone_articles'),generer_url_ecrire($page,"type_doc=articles"),$total_articles);
+		Corbeille_affiche_ligne(_T('titre_forum'),generer_url_ecrire($page,"type_doc=forums_publics"),$total_forums_publics);
+		Corbeille_affiche_ligne(_T('icone_forum_administrateur'),generer_url_ecrire($page,"type_doc=forums_prives"),$total_forums_prives); 
+		Corbeille_affiche_ligne(_T('icone_auteurs'),generer_url_ecrire($page,"type_doc=auteurs"),$total_auteur);
 		// Corbeille_affiche_ligne(_L('Tout'),generer_url_ecrire($page,"type_act=tout"),$totaux); FIXME: ne pas afficher la ligne "tout" car pas fonctionnel pour l'instant
 }
 

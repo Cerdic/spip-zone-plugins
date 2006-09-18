@@ -1,14 +1,19 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Corbeille
+	<multi>[fr]Corbeille[es]Papelera</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Copyright (C) 2002 ONFRAY MATTHIEU
 _ mail : silicium@japanim.net
 _ web amateur : http://www.japanim.net/
 _ web technique : http://spip.japanim.net/
+	<multi>[fr]
 _ adaptation en plugin par cedric.morin@yterium.com
-_ &copy; 2005-2006 - Distribu&eacute; sous licence GNU/GPL
+_ &copy; 2005-2006 - Distribu&eacute; sous licence GPL
+	[es]
+_ adaptaci&oacute;n como plugin por cedric.morin@yterium.com
+_ &copy; 2005-2006 - Distribuido bajo licencia GPL 
+	</multi>
 	</auteur>
 	<version>
 	0.1
@@ -17,7 +22,10 @@ _ &copy; 2005-2006 - Distribu&eacute; sous licence GNU/GPL
 	experimental
 	</etat>
 	<description>
-	Gestion des documents mis &agrave; la corbeille
+	<multi>
+	[fr] 	Gestion des documents mis &agrave; la corbeille
+	[es]    Gesti&oacute;n de los documentos enviados a la papelera.
+	</multi>
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
