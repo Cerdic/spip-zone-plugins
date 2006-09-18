@@ -1,0 +1,30 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Marqueur de Statistiques
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+_ C&eacute;dric MORIN [notre-ville.net->http://www.notre-ville.net]
+_ &copy; 2006 - GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+	Insertion d'un marqueur sur les pages publiques pour les statistiques
+	</description>
+	<prefix> 
+	marqstat
+	</prefix>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>marqstat_fonctions.php</inclure>
+	</pipeline>	
+	<pipeline>
+		<nom>affichage_final</nom>
+		<action>affichage_final</action>
+		<inclure>marqstat_fonctions.php</inclure>
+	</pipeline>
+</plugin>
