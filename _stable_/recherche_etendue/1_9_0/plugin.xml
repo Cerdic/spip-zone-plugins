@@ -1,0 +1,50 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Recherche Etendue
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	cedric.morin@yterium.com
+_ pdepaepe et Nicolas Steinmetz pour google_like
+_ Fil pour le panneau admin_index d'origine
+_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+	Plugin d'outils pour la recherche et l'indexation
+_ Panneaux de controle admin_index et index_tous
+_ Boucle INDEX
+_ Filtre google_like
+	</description>
+	<options> <!-- fichier charge a chaque hit -->
+	recherche_etendue_options.php
+	</options>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	boucle_indexation.php
+	</fonctions>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	recherche_etendue.php
+	</fonctions>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	RechercheEtendue
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>recherche_etendue.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+	</pipeline>
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
