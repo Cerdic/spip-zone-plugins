@@ -1,0 +1,36 @@
+<theme>
+	<nom> <!-- Nom du plugin -->
+	  SkBlueFluid
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	[Skedus->http://skedus.free.fr]
+_ <multi>    
+    September 2006 - Distributed under GNU/GPL Licence.
+[fr]Septembre 2006 - Distribu&eacute; sous licence GNU/GPL.
+</multi>
+	</auteur>
+	<version>
+	0.6
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+<multi>
+This plugin will change the look and feel of the official squelettes distribution ('dist' directory), it can change as well your squelettes.
+_ 
+_ This version adapt contain to your browser size, well hope so ;-)
+_ 
+_ You can easily modify colors of this theme, you will find documentation inside the habillage.css file header in its plugin directory.
+
+[fr]
+Ce plugin permet de changer le theme de la distribution officiel, (ou de vos squelettes), cette version s'&eacute;largie en fonction de la taille du navigateur, enfin normalement ;-)
+_ 
+_ Vous pouvez rapidement changer les couleurs de ce theme, vous trouverez les explications dans le fichier habillage.css du plugin.
+</multi>
+	</description>
+	<prefix> 
+	theme
+	</prefix>
+
+</theme>

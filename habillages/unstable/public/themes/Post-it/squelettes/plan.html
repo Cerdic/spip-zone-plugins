@@ -1,0 +1,30 @@
+<div class="premier-plan">
+
+
+<div class="moduleHeader">
+<div class="fermer"><p>  <a href="#URL_SITE_SPIP" class="bouton">Retour</a> </p></div>
+     <div class="title">Plan du site</div>
+</div>
+<div class="moduleContent">
+     <div class="menu-depliant">
+	<BOUCLE_rubriquesNiv0(RUBRIQUES){id_parent=0}{par num titre}>
+	<dl>
+		<dd><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a> (<a href="#URL_RUBRIQUE#breves">Actualit&eacute;s</a> - <a href="#URL_RUBRIQUE#articles">Articles</a>)
+                 <B_total_art>(<BOUCLE_total_art(ARTICLES){id_rubrique}></BOUCLE_total_art></B_total_art>[(#TOTAL_BOUCLE) [(#TOTAL_BOUCLE|>{1}|?{'articles','article'})].]<//B_total_art>
+                </dd>
+	<B_rubriques>
+	 <dd><dl>
+			<BOUCLE_rubriques(RUBRIQUES){id_parent}>
+			<dd><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+                            <B_total_art2>(<BOUCLE_total_art2(ARTICLES){id_rubrique}></BOUCLE_total_art2></B_total_art2>[(#TOTAL_BOUCLE) [(#TOTAL_BOUCLE|>{1}|?{'articles','article'})].]<//B_total_art2>
+                            </dd>
+			       <BOUCLE_ssrubriques(BOUCLE_rubriques)></BOUCLE_ssrubriques>
+			 </BOUCLE_rubriques>
+			 </dl></dd>
+	 </B_rubriques>
+	</dl>
+	</BOUCLE_rubriquesNiv0>
+
+     </div>
+</div>
+</div>

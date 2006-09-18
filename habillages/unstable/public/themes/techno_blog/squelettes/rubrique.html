@@ -1,0 +1,186 @@
+#CACHE{7200}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	   
+<BOUCLE_rubrique_principal(RUBRIQUES) {id_rubrique}>
+
+<html dir="#LANG_DIR" lang="#LANG">
+
+<head>
+
+<title>[(#TITRE|textebrut|supprimer_numero)]</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+<meta name="author" content="#URL_SITE" />
+
+<meta name="copyright" content="guiderdoni.net" />
+
+<meta name="description" content="YourSite" />
+
+<meta name="keywords" content="your, site" />
+
+<!-- Ceci est la feuille de style du present squelette -->
+
+<link rel="stylesheet" href="#CHEMIN{css/style.css}" type="text/css" />
+
+<!-- Lien vers le backend pour navigateurs eclaires -->
+
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}" />
+
+[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+
+
+
+</head>
+
+<body>
+
+
+<div id="container">
+		<div id="top">
+				
+		
+		<b>#NOM_SITE_SPIP</b>
+		
+		<span class="podnaslov"><br />
+		
+		CSS, XHTML,  WEB, STANDARDS, SPIP etc...
+			
+		</span>
+		
+		</div>
+		
+<div id="left">
+		
+			
+<INCLURE{fond=inc_nav_gauche}{id_rubrique}{lang}{delais=24*3600}>
+
+<INCLURE{fond=inc_logo_rubrique}{id_rubrique}{lang}{delais=24*3600}>
+
+<INCLURE{fond=inc_syndication}{id_rubrique}{lang}{delais=24*3600}>
+	
+
+</div>
+
+		<div id="right">
+		
+
+	<INCLURE(page.php3){fond=inc_nav_droite}{id_rubrique}{lang}{delais=24*3600}>
+	
+
+		
+		</div>
+		
+		<div id="content">
+		
+		<INCLURE{fond=inc_nav_content}{id_rubrique}{lang}{delais=24*3600}>
+	
+
+
+
+<BOUCLE_rubrique_context(RUBRIQUES){id_rubrique}{par num titre}>
+ 
+ [<h2>(#TITRE|supprimer_numero)</h2>]
+
+[(#DESCRIPTIF)<br />]
+
+[(#TEXTE)<br />]
+
+ </BOUCLE_rubrique_context>
+ 
+ <br />
+
+			
+<!-- DEBUT http://forum.spip.org/fr_1405.html -->
+
+
+<BOUCLE_deux(ARTICLES){id_rubrique}{1,1}>
+
+
+<B_sommaire>
+
+<p>Il y a au total <b>#GRAND_TOTAL articles</b> dans cette rubrique. </p>
+
+[<b>Pagination</b> : (#PAGINATION)<br /><br />]
+
+
+<BOUCLE_sommaire(ARTICLES){id_rubrique}{par date}{inverse}{pagination 5}>
+
+
+
+[<h2><a href="#URL_ARTICLE"title="[(#DESCRIPTIF|textebrut|entites_html)]">(#TITRE|supprimer_numero)</a></h2>]
+
+[(#INTRODUCTION)]
+
+<br />
+
+<div class="more">
+<:publie_le:> [(#DATE|nom_jour)] [(#DATE|affdate)] | <a href="#URL_ARTICLE" title="[(#DESCRIPTIF|textebrut|entites_html)]"><:en_lire_plus:></a> | 
+
+<!--Afficher le nombre de commentaire -->
+<a href="#URL_ARTICLE#co" title="<:commentaires_pour:> : [(#TITRE|textebrut|entites_html)]">
+<BOUCLE_commentaires(FORUMS){id_article}{plat}> </BOUCLE_commentaires>
+#TOTAL_BOUCLE [(#TOTAL_BOUCLE|=={1}|?{<:commentaire:>,<:commentaires:>})]
+</B_commentaires><:aucun_commentaire:><//B_commentaires>
+</a>
+
+</div>
+
+
+</BOUCLE_sommaire>
+
+[<b>Pagination</b> : (#PAGINATION)]
+
+</B_sommaire>
+
+
+
+
+</BOUCLE_deux>
+
+<BOUCLE_unseul(ARTICLES){id_rubrique}>
+
+[<h2>(#TITRE|supprimer_numero)</h2>]
+
+#TEXTE
+
+<!-- Documents joints -->
+ <br />
+ 
+ <B_documents_joints>
+
+<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {doublons}>  <br /> 
+
+[(#LOGO_DOCUMENT|#URL_DOCUMENT|inserer_attribut{alt,#TITRE})][<b>(#TITRE)</b>][>(#DESCRIPTIF)]
+	
+
+</BOUCLE_documents_joints>
+
+</B_documents_joints>
+
+
+<!-- Documents joints -->
+
+
+</BOUCLE_unseul>
+
+<//B_deux>
+
+
+<!-- FIN des boucles rubriques -->
+
+</div>
+
+<div id='footer'>
+        
+<INCLURE{fond=inc_footer}{lang}{delais=24*3600}>
+			
+</div>
+	</div>
+
+#SPIP_CRON
+</body>
+</html>
+</BOUCLE_rubrique_principal>

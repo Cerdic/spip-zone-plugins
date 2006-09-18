@@ -1,0 +1,46 @@
+<div class="fenetre">
+          <div class="fenetreBandeau">
+               <div class="fermer"><p>  <a href="#URL_SITE_SPIP" class="bouton">Retour</a> </p></div>
+               <div class="title">[(#TITRE|supprimer_numero)]</div>
+          </div>
+          <div class="fenetreListe">
+          <BOUCLE_list-rub(RUBRIQUES){id_rubrique}>
+          <B_path> <BOUCLE_path(HIERARCHIE) {id_rubrique} {"&nbsp;&gt; "}>
+          <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+         </BOUCLE_path>
+         </B_path>
+          <h2>
+          [(#TITRE|supprimer_numero)]
+          </h2>
+          <ul>
+          <BOUCLE_liste(ARTICLES){id_rubrique}>
+          <li><a href="#URL_ARTICLE"> [(#TITRE|supprimer_numero)]</a></li>
+          </BOUCLE_liste>
+          </ul>
+          <ul>
+          <B_liste-sous-rub>
+          <hr />
+          <h3>Sous rubriques</h3>
+          <BOUCLE_liste-sous-rub(RUBRIQUES){id_parent}{exclus}>
+          <li><a href="#URL_RUBRIQUE"> [(#TITRE|supprimer_numero)]</a></li>
+          </BOUCLE_liste-sous-rub>
+          </B_liste-sous-rub>
+          </ul>
+          </BOUCLE_list-rub>
+          </div>
+          <div class="fenetreContenu">
+
+          <BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+          [<img src="IMG/(#LOGO_ARTICLE_RUBRIQUE|fichier||reduire_image{120})" title="#TITRE" alt="#TITRE" class="logo" /><br />]
+          [(#TEXTE)]
+          <B_documents_joints>
+          <hr /> <h3>Documents joints</h3>
+          <BOUCLE_documents_joints(DOCUMENTS){id_article}{mode=document}{doublons}>
+          <div class="documents">[(#LOGO_DOCUMENT|#URL_DOCUMENT)][<br />(#TITRE)][ - (#DESCRIPTIF)]</div>
+          </BOUCLE_documents_joints>
+          </B_documents_joints>
+          <//B_documents_joints>
+           </BOUCLE_rubrique>
+
+           </div>
+</div>

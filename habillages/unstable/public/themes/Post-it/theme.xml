@@ -1,0 +1,30 @@
+<theme>
+	<nom> <!-- Nom du plugin -->
+	Papanicola's Post-It
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	[Papanicola Robert->http://www.papanicola.info/post-it/spip.php?auteur1]
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+Le squelette Post-IT est constitu&eacute; d’un ensemble de post-it r&eacute;parti sur l’&eacute;cran. ces post-it sont de deux types :
+
+    * la premi&egrave;re s&eacute;rie est constitu&eacute;e de la liste des rubriques secteurs r&eacute;parties sur 3 colonnes, on retrouve pour chacun de ces post-it, un bandeau rappelant le nom du secteur puis la liste des derniers articles de la rubrique (on reconnait ces post-it au num&eacute;ro)
+    * la seconde s&eacute;rie affich&eacute;e en alternance avec la premi&egrave;re regroupe des post-it sp&eacute;cifiques
+          o l’&eacute;dito : l’article associ&eacute; &agrave; ce mot clef est affich&eacute; dans ce post-it ;
+          o la galerie : une image au hasard est affich&eacute;e dans le post galerie, cette image est extraite d’un des articles associ&eacute; au mot clef galerie, en l’absence d’article avec le mot clef galerie, ce post-it n’est pas affich&eacute; ;
+          o la recherche : ce post-it inclus la recherche spip, la recherche par mots-clefs, et par auteur, sur le site de d&eacute;mo, la recherche google a &eacute;t&eacute; ajout&eacute;e ;
+          o les derni&egrave;res nouveaut&eacute;s du site ;
+          o les derni&egrave;res nouvelles du web : on retrouve ici, la liste des derniers articles des sites syndiqu&eacute;s
+          o le bloc-note : ce post-it (le nom du squelette vient de ce post-it) est un forum dont l’affichage est limit&eacute; au dernier article, ce bloc-note est celui d’un article qui peut-etre vide auquel est associ&eacute; le mot clef bloc-note (en l’absence de cet article, le post-it n’est pas affich&eacute;). en fonction du type d’autorisation pour le forum -mod&eacute;ration &agrave; post&eacute;riori, &agrave; priori, sur abonnement) de cet article, l’&eacute;dition du bloc-note pourra être autoris&eacute; &agrave; tous les internautes ou uniquement aux inscrits.
+          o les br&egrave;ves ;
+          o le bloc publicitaire google ;
+	</description>
+	 <prefix>post-it</prefix>
+
+</theme>

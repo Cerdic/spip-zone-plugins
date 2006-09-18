@@ -1,0 +1,36 @@
+Ce squelette en XHTML a été concu pour SPIP 1.9 par Alexandra Guiderdoni.
+
+Sans quelques petites modifications, il ne marchera pas sous la 1.8.
+
+Il reprend des boucles du squelette bleublog pour la 1.8 également disponible en GPL.
+
+Ce squelette ajoute comme fonctionnalité un forum sur les articles, et a remplacé les anciens systèmes de pagination par la pagination native de la 1.9.
+
+Il s'est fortement inspiré d'un template opensource html d'http://www.oswd.org d'un designer talenteux Lanvacation
+
+URL : http://www.oswd.org/design/preview/id/2171
+
+Ce squelette reprend la noisette de Romy Tetue pour le forum avec une adaptation pour la 1.9
+
+Ce squelette s'inspire aussi beaucoup des squelettes par defaut du repertoire dist de la 1.9
+
+URL : http://romy.tetue.free.fr/article.php3?id_article=334 
+
+On a finalement enlevé du menu droite la boucle récursive de Gilles Vincent qui affichait l’ensemble des rubriques et sous-rubriques du site, quel que soit le niveau de profondeur, pour mettre le inc_rubrique de la dist, mais rien ne vous empêche de le réintégrer. Je l'ai laissé en noisette.
+
+Celui de la dist est un menu de navigation, ouverte sur la hierarchie courante. On fait un plan, et, quand on avance vers une rubrique,
+on l'affiche si son parent est expose ou est la racine du site.
+
+On a intégré le stwicher de squelette. A ce sujet voir l'article sur Spipzine
+
+URL : http://zine.spip.org/spip.php?article8
+
+Dernières modifications du squelette le 26 juin 2006
+
+Si vous rencontrez des difficultés avec ce squelette, n'hésitez pas à me contacter par mail ou par le biais des forums du site guiderdoni.net.
+
+(c) 2006 - Alexandra Guiderdoni - webmaster@guiderdoni.net - http://www.guiderdoni.net. Distribue sous licence publique generale GNU/GPL
+
+
+
+

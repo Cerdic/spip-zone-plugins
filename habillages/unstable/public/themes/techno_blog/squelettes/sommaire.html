@@ -1,0 +1,164 @@
+#CACHE{7200}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html dir="#LANG_DIR" lang="#LANG">
+
+<head>
+
+<title>#NOM_SITE_SPIP </title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+<meta name="author" content="#URL_SITE" />
+
+<meta name="copyright" content="guiderdoni.net" />
+
+<meta name="description" content="YourSite" />
+
+<meta name="keywords" content="your, site" />
+
+<!-- Ceci est la feuille de style du present squelette -->
+
+<link rel="stylesheet" href="#CHEMIN{css/style.css}" type="text/css" />
+
+<!-- Lien vers le backend pour navigateurs eclaires -->
+
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}" />
+
+[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+
+
+
+</head>
+
+<body>
+
+
+<div id="container">
+		<div id="top">
+				
+		
+		<b>#NOM_SITE_SPIP</b>
+		
+		<span class="podnaslov"><br />
+		
+		CSS, XHTML,  WEB, STANDARDS, SPIP etc...
+			
+		</span>
+		
+		</div>
+		
+<div id="left">
+
+<INCLURE{fond=inc_nav_gauche}{lang}{delais=24*3600}>
+
+
+<INCLURE{fond=inc_syndication}{lang}{delais=24*3600}>
+		
+
+
+	</div>
+
+		<div id="right">
+		
+
+
+<INCLURE{fond=inc_nav_droite}{lang}{delais=24*3600}>
+		
+		</div>
+		
+<div id="content">
+		
+		
+ <INCLURE{fond=inc_nav_content}{lang}{delais=24*3600}>
+	
+
+
+<!-- DEBUT BOUCLE_de_une-->
+
+<B_de_une>
+
+<h2><:a_la_une:></h2>
+
+
+
+<div class="boucle_de_une">
+		
+<BOUCLE_de_une(ARTICLES){tout}{titre_mot=accueil}{doublons}{par date} {inverse} {0,3}>
+
+
+[<h2><a href="#URL_ARTICLE"title="[(#DESCRIPTIF|textebrut|entites_html)]">(#TITRE|supprimer_numero) </a></h2> ] 
+
+ [(#INTRODUCTION)] 
+ 
+<div class="more">
+<:publie_le:> [(#DATE|nom_jour)] [(#DATE|affdate)] | <a href="#URL_ARTICLE" title="[(#DESCRIPTIF|textebrut|entites_html)]"><:en_lire_plus:></a> | 
+
+<!--Afficher le nombre de commentaire -->
+<a href="#URL_ARTICLE#co" title="<:commentaires_pour:> : [(#TITRE|textebrut|entites_html)]">
+<BOUCLE_commentaires(FORUMS){id_article}{plat}> </BOUCLE_commentaires>
+#TOTAL_BOUCLE [(#TOTAL_BOUCLE|=={1}|?{<:commentaire:>,<:commentaires:>})]
+</B_commentaires><:aucun_commentaire:><//B_commentaires>
+</a>
+
+</div>
+
+</BOUCLE_de_une>
+
+</div>
+
+</B_de_une>
+
+<!-- Code HTML- de_une - optionnel apres --
+
+<//B_de_une>
+
+<!-- FIN BOUCLE_de_une-->
+
+
+
+<!-- DEBUT BOUCLE_les_plus_recents-->
+
+<B_les_plus_recents>
+
+<h2><:derniers_articles:></h2>
+<div class="les_plus_recents">
+
+<!-- avec le critere 0,5 ca bloque et je sais pas pourquoi -->
+
+<BOUCLE_les_plus_recents(ARTICLES){tout}{doublons}{par date}{inverse}{1,3}>
+ 
+<h2><a href="#URL_ARTICLE" title="[(#DESCRIPTIF|textebrut|entites_html)]">[(#TITRE|supprimer_numero)]</a></h2>
+                      
+[(#INTRODUCTION)]
+
+<div class="more">
+<:publie_le:> [(#DATE|nom_jour)] [(#DATE|affdate)] | <a href="#URL_ARTICLE"title="[(#DESCRIPTIF|textebrut|entites_html)]"><:en_lire_plus:></a> 
+</div>
+
+</BOUCLE_les_plus_recents>
+
+</div>
+
+</B_les_plus_recents>
+<!-- Code HTML- les_plus_recents - optionnel apres -->
+<//B_les_plus_recents>
+
+<!-- FIN BOUCLE_les_plus_recents-->
+
+
+
+ </div>
+        
+			<div id='footer'>
+			
+<INCLURE {fond=inc_footer}{lang}{delais=24*3600}>
+			
+</div>
+	</div>
+
+#SPIP_CRON
+</body>
+</html>

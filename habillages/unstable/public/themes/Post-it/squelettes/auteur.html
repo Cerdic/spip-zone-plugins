@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<INCLURE(page.php3){fond='header'}{id_auteur}>
+</head>
+
+<body>
+[(#ENV{menu}|=={1}|?{' ',''})
+  <INCLURE(page.php3) {fond=plan}>
+]
+<INCLURE(page.php3) {fond=fenetre-auteur}{id_auteur}>
+<INCLURE(page.php3) {fond=bandeau}{delais=1}>
+<INCLURE(page.php3) {fond=post-it}>
+
+
+
+
+
+
+[(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+#SPIP_CRON
+</body>
+</html>

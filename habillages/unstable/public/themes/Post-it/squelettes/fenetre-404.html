@@ -1,0 +1,20 @@
+<div class="fenetre">
+          <div class="fenetreBandeau">
+               <div class="fermer"><p>  <a href="#URL_SITE_SPIP" class="bouton">Retour</a> </p></div>
+               <div class="title">[(#TITRE|supprimer_numero)]</div>
+          </div>
+          <div class="fenetreListe">
+          <BOUCLE_list-rub(RUBRIQUES){tout}>
+          <B_path> <BOUCLE_path(HIERARCHIE) {id_rubrique} {"&nbsp;&gt; "}>
+          <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+         </BOUCLE_path>
+          </BOUCLE_list-rub>
+          </div>
+          <div class="fenetreContenu">
+
+<h1><:pass_erreur:> 404</h1>
+	<p>#ERREUR_AUCUN</p>
+</div>
+
+           </div>
+</div>

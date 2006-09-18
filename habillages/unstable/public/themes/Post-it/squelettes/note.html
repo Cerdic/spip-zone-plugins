@@ -1,0 +1,5 @@
+[(#ENV{note}|=={1}|?{' ',''})
+<INCLURE(page.php3){fond=message}{id_article}{delais=1}>]
+[(#ENV{note}|<>{1}|?{' ',''})
+<INCLURE(page.php3){fond=post-bloc-notes}{delais=1}>]
+]

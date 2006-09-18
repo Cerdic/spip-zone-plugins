@@ -1,0 +1,43 @@
+<!-- on a finalement enleve ce menu recursif pour ce lui du inc_rubrique de la dist -->
+
+
+[(#FORMULAIRE_RECHERCHE)]
+
+<!-- pas besoin du menu lang puisque le site  n'est pas multilingue -->
+		
+<!--#MENU_LANG --> 
+		
+		<h3><:detoutderien:></h3>
+		
+		<!--<p> </p>-->
+		
+		<h3><:navigation:></h3>
+		
+<!-- rubriques recursives boucles de Gilles Vincent merci a lui -->
+		
+<ul class="offsite">
+
+ <BOUCLE_principale(RUBRIQUES){racine} {par titre} >
+
+ <li>
+    <a class="lien#EXPOSER" href="#URL_RUBRIQUE" title="[(#DESCRIPTIF|textebrut|entites_html)]"> [(#TITRE|supprimer_numero)]</a>
+    <B_rubriques>
+    <ul>
+       <BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre} >
+       <li>
+
+           <a class="lien#EXPOSER" href="#URL_RUBRIQUE" title="[(#DESCRIPTIF|textebrut|entites_html)]"> [(#TITRE|supprimer_numero)]</a>
+           
+           <BOUCLE_sousRubriques(BOUCLE_rubriques)> </BOUCLE_sousRubriques>
+
+       </li>
+       </BOUCLE_rubriques>
+    </ul>
+    </B_rubriques>
+ </li>
+
+ </BOUCLE_principale>
+</ul>
+
+<!-- Fin des rubriques recursives -->
+		

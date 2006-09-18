@@ -1,0 +1,19 @@
+<B_nouveaux>
+<div class="postit">
+<div class="postitframe">
+<div class="postitBandeau">
+     <div class="title">Les Nouveautés</div>
+</div>
+<div class="postitContent">
+
+<BOUCLE_nouveaux(ARTICLES){0,3}{!par date}{'<div class="alaligne"> </div>'}>
+ [(#LOGO_ARTICLE_RUBRIQUE|right||reduire_image{50,50})<br />]
+ <h3><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|supprimer_tags|attribut_html)"]> [(#TITRE|supprimer_numero)] </a></h3>
+ [(#INTRODUCTION|couper{125})]
+ 
+</BOUCLE_nouveaux>
+
+</div>
+</div>
+</div>
+</B_nouveaux>

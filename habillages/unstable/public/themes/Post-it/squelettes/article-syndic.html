@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[#NOM_SITE_SPIP] </title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+<link rel="stylesheet" href="spip_style.css" type="text/css" />
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/post-it.css" type="text/css" />
+
+
+<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/habillage.css" type="text/css" media="print, projection, screen, tv" />
+
+<!-- Lien vers le backend pour navigateurs eclaires -->
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="backend.php3" />
+</head>
+
+<body>
+[(#ENV{menu}|=={1}|?{' ',''})
+  <INCLURE(page.php3) {fond=plan}>
+]
+<INCLURE(page.php3) {fond=bandeau}{delais=1}>
+<INCLURE(page.php3) {fond=post-it}>
+
+<BOUCLE_article(SYNDIC_ARTICLES){id_syndic_article}>
+<div class="fenetre">
+          <div class="fenetreBandeau">
+          <div class="fermer"><p>  <a href="#URL_SITE_SPIP" class="bouton">Retour</a> </p></div>
+               <div class="title">Les nouvelles du web - [(#TITRE|supprimer_numero)]</div>
+          </div>
+          <div class="fenetreListe">
+          <ul>
+          <BOUCLE_liste(SITES){syndication=oui}>
+          <li> <a href="#URL_SITE">#NOM_SITE</a>
+          <ul>
+          <BOUCLE_liste-art(SYNDIC_ARTICLES){id_syndic}{0,5}{!par date}>
+          <li><a href="page.php3?fond=article-syndic&amp;id_syndic_article=#ID_SYNDIC_ARTICLE"> [(#TITRE|supprimer_numero)]</a></li>
+          </BOUCLE_liste-art>
+          </ul>
+          </li>
+          </BOUCLE_liste>
+          </ul>
+
+          </div>
+          <div class="fenetreContenu">
+          [<div class="logo">
+          [Site source :<a href="#URL_SITE">(#NOM_SITE)</a> <br /> ]
+          <a href="(#URL_ARTICLE)">Aller à l'article</a></div><br />]
+           <div class="auteurs">
+           <B_mots>
+          <h3>Mots clefs</h3>
+          <B_mots>
+          <ul>
+           <BOUCLE_mots(MOTS){id_article}{type!=Administration du site} >
+	     <li> [<a href="#URL_MOT">(#TITRE|supprimer_numero)</a>]</li>
+           </BOUCLE_mots>
+           </ul>
+           </B_mots>
+          </div>
+          <h2>[(#TITRE|supprimer_numero)]</h2>
+          [le :(#DATE)<br />]
+          [(#LESAUTEURS)<br />]
+                    <div class="alaligne"> </div>
+
+          <hr />
+          
+          [<div class="chapo">(#CHAPO)</div>]
+          [<br />(#DESCRIPTIF)<br />]
+          <a href="#URL_ARTICLE">lire la suite</a>
+
+           </div>
+</div>
+</BOUCLE_article>
+
+
+[(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+#SPIP_CRON
+</body>
+</html>

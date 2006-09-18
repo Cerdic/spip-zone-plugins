@@ -1,0 +1,36 @@
+<theme>
+	<nom> <!-- Nom du plugin -->
+	SkCofeeNCream
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	[Skedus->http://skedus.free.fr]
+_ <multi>    
+    September 2006 - Distributed under GNU/GPL Licence.
+[fr]Septembre 2006 - Distribu&eacute; sous licence GNU/GPL.
+</multi>
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+<multi>
+This plugin will change the look and feel of the official squelettes distribution ('dist' directory), it can change as well your squelettes.
+_ 
+_ This version is based on Viktor Persson idea on  [OpenWebDesign->http://www.openwebdesign.org]
+_ 
+_ I would like to thank you James and Romy who gave me this idea of this convertion for SPIP
+
+[fr]
+Ce plugin permet de changer le theme de la distribution officiel, (ou de vos squelettes)
+_ 
+_ Ce theme est bas&eacute;e sur une id&eacute;e de Viktor Persson sur  [OpenWebDesign->http://www.openwebdesign.org]
+_ Je tiens &eacute;galement &agrave; remercier James et Romy pour m'avoir donn&eacute; l'id&eacute;e de cette convertion pour SPIP.
+
+</multi>
+	</description>
+	 <prefix>theme</prefix>
+
+</theme>

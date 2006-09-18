@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr"><head>
+    <meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1"/>
+    <meta name="revisit-after" content="10 days"/>
+    <meta name="robots" content="index,follow"/>
+ <BOUCLE_principale(RUBRIQUES){id_rubrique}{tout}>
+         <title><BOUCLE_titre(RUBRIQUES){id_rubrique}{doublons}>[(#TITRE)]</BOUCLE_titre></title>
+    <meta name="keywords" content="<BOUCLE_mot(MOTS){id_rubrique}{"; "}>#TITRE_MOT</BOUCLE_mot>
+                         </B_mot><BOUCLE_art(ARTICLES){id_rubrique}{"; "}>[(#TITRE|supprimer_numero|textebrut)]</BOUCLE_art><//B_mot>
+                        " />
+    <meta name="description" content="[(#INTRODUCTION|textebrut)]"/>
+        
+<link href="#DOSSIER_SQUELETTE/presentation.css" type="text/css" rel="stylesheet" />
+<link href="#DOSSIER_SQUELETTE/ecran[(#ENV{style})].css" type="text/css"  rel="stylesheet" media="screen"/>
+
+
+</head>
+<body >
+
+
+<div id="entete"><div class="colonne-inter">
+<div class="logo">
+[(#LOGO_RUBRIQUE)]
+</div>
+
+ <p class="mini">
+ <a href="[(#SELF|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{compteur,[(#ENV{compteur})]}|parametre_url{style,'1'})]">800x600</a>
+ <a href="[(#SELF|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{compteur,[(#ENV{compteur})]}|parametre_url{style,'2'})]">1024x768</a>
+ <a href="[(#SELF|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{compteur,[(#ENV{compteur})]}|parametre_url{style,'3'})]">100%</a>
+ </p>
+<B_rub>
+<div class="droite">
+<p>
+     <BOUCLE_fleches1(ARTICLES){id_rubrique}{par titre}>
+        [(#COMPTEUR_BOUCLE|=={1}|?{' ',''})
+   	<a href="[(#SELF|parametre_url{compteur,-1})]" title="[(#TITRE)]">
+        <img src='#DOSSIER_SQUELETTE/img_nav/start.gif' />
+	</a>
+        ]
+
+        [(#COMPTEUR_BOUCLE|incremente|=={#ENV{compteur}}|?{' ',''})
+   	<a href="[(#SELF|parametre_url{compteur,[(#ENV{compteur}|incremente)]})]" title="[(#TITRE)]">
+        <img src='#DOSSIER_SQUELETTE/img_nav/previous.gif' />
+	</a>
+        ]
+     </BOUCLE_fleches1>
+
+        [(#ENV{compteur}|=={0}|?{' ',''})
+   	<a href="[(#SELF|parametre_url{compteur,[(#ENV{compteur}|incremente)]})]" title="[(#TITRE)]">
+        <img src='#DOSSIER_SQUELETTE/img_nav/previous.gif' />
+	</a>
+        ]
+
+        [(#ENV{compteur}|=={1}|?{' ',''})
+   	<a href="[(#SELF)]&compteur=0" title="[(#TITRE)]">
+        <img src='#DOSSIER_SQUELETTE/img_nav/previous.gif' />
+	</a>
+        ]
+        [(#ENV{compteur}|=={-1}|?{' ',''})
+   	<a href="[(#SELF|parametre_url{compteur,00})]" title="[(#TITRE)]">
+        <img src='#DOSSIER_SQUELETTE/img_nav/next.gif' />
+	</a>
+        ]
+     
+     <BOUCLE_fleches2(ARTICLES){id_rubrique}{par titre}>
+        [(#COMPTEUR_BOUCLE|decremente|=={#ENV{compteur}}|?{' ',''})
+   	<a href="[(#SELF|parametre_url{compteur,[(#ENV{compteur}|incremente)]})]" title="[(#TITRE)]">
+        <img src='#DOSSIER_SQUELETTE/img_nav/next.gif' />
+	</a>
+        ]
+
+        [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{' ',''})
+   	<a href="[(#SELF|parametre_url{compteur,[(#COMPTEUR_BOUCLE|decremente)]})]" title="[(#TITRE)]">
+        <img src='#DOSSIER_SQUELETTE/img_nav/end.gif' />
+	</a>
+        ]
+     </BOUCLE_fleches2>
+</p>
+
+
+<form name="jump">
+<select name="menu" onChange="location=document.jump.menu.options[document.jump.menu.selectedIndex].value;" value="GO">
+<option value="#URL_RUBRIQUE">[Sommaire]</option>
+<BOUCLE_liste(ARTICLES){id_rubrique}{par titre}>
+<option value="[(#SELF|parametre_url{compteur,[(#COMPTEUR_BOUCLE|decremente)]}|parametre_url{style,[(#ENV{style})]})]">[#COMPTEUR_BOUCLE-(#TITRE|supprimer_numero)]</option>
+</BOUCLE_liste>
+
+</select>
+</form>
+</div>
+<BOUCLE_rub(ARTICLES){id_rubrique}>
+</BOUCLE_rub>
+</B_rub>
+
+	    <span class="titre-site">[(#TITRE|supprimer_numero)]</span>
+
+<p>  <strong><a href="#URL_SITE_SPIP">Retour à l'accueil</a></strong></p>
+</div></div>
+
+<div id="contenant-principal1"><div id="contenant-principal2">
+
+	<div id="contenant-centre"><div class="colonne-inter">
+		<div class="bloc-horizontal">
+    <BOUCLE_contenu(ARTICLES){id_rubrique}{(#ENV{compteur}),1}{par titre}>
+         <div class="contenu">
+           <h2 style='text-align: center'>[(#TITRE|supprimer_numero)]</h2>
+           [(#TEXTE)]
+        </div>
+    </BOUCLE_contenu>
+    </B_contenu>
+	  <div class="contenu">
+	    #TEXTE
+	    [(#TEXTE|?{'','<br />'})#DESCRIPTIF]
+
+            <h3>Sommaire</h3>
+            <ol>
+	     <B_sommaire>
+             <BOUCLE_sommaire(ARTICLES){id_rubrique}{par titre}>
+             <!--petit hack pour passer la valeur zero au compteur, 0 est vide mais n'est ps nul!!! -->
+             [(#COMPTEUR_BOUCLE|=={1}|?{' ',''})
+             <li><a href="[(#SELF|parametre_url{style,[(#ENV{style})]})]&compteur=0" title="[(#TITRE)]">[(#TITRE|supprimer_numero)]</a></li>
+             ]
+             <!-- fin petit hack  -->
+             [(#COMPTEUR_BOUCLE|=={1}||?{'',' '})
+            <li><a href="[(#SELF|parametre_url{compteur,[(#COMPTEUR_BOUCLE|decremente)]}|parametre_url{style,[(#ENV{style})]})]" title="[(#TITRE)]">[(#TITRE|supprimer_numero)]</a></li>
+             ]
+            </BOUCLE_sommaire>
+            <BOUCLE_sommairesrub(RUBRIQUES){id_parent}{par titre}>
+            <li><a href="#URL_RUBRIQUE&amp;compteur=-1&amp;style=[(#ENV{style})]" title="[(#TITRE)]">[(#TITRE|supprimer_numero)]</a></li>
+            </BOUCLE_sommairesrub>
+	    </ol>
+            <B_retour>
+            <h4> Remonter </h3>
+	    <ul>
+            <BOUCLE_retour(HIERARCHIE){id_rubrique}{n-1,1}>
+            <li><a href="#URL_RUBRIQUE&amp;compteur=-1&amp;style=[(#ENV{style})]" title="[(#TITRE)]">[(#TITRE|supprimer_numero)]</a></li>
+            </BOUCLE_retour>
+              </ul>
+	  </div>
+    <//B_contenu>
+</div>
+
+
+                </div>
+
+                </div><!--fin colonne inter--></div><!-- fin contenant centre-->
+
+	<div class="alaligne">&nbsp;</div>
+
+</div>
+
+<div id="contenant-pied"><div class="colonne-inter">
+<div class="droite">
+       <!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-nc/2.0/fr/"><img alt="Creative Commons License" border="0" src="http://creativecommons.org/images/public/somerights20.fr.png"/></a><br/>
+		<!--/Creative Commons License--><!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+		<Work rdf:about="">
+			<license rdf:resource="http://creativecommons.org/licenses/by-nc/2.0/fr/" />
+	<dc:title>Formation Spip</dc:title>
+	<dc:date>2005</dc:date>
+	<dc:description>Diaporama SPIP sur l'utilisation et la mise en oeuvre de SPIP</dc:description>
+	<dc:creator><Agent><dc:title>Robert Papanicola</dc:title></Agent></dc:creator>
+	<dc:rights><Agent><dc:title>Robert Papanicola</dc:title></Agent></dc:rights>
+	<dc:source rdf:resource="www.papanicola.info/formation-spip/" />
+		</Work>
+		<License rdf:about="http://creativecommons.org/licenses/by-nc/2.0/fr/"><permits rdf:resource="http://web.resource.org/cc/Reproduction"/><permits rdf:resource="http://web.resource.org/cc/Distribution"/><requires rdf:resource="http://web.resource.org/cc/Notice"/><requires rdf:resource="http://web.resource.org/cc/Attribution"/><prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"/><permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/></License></rdf:RDF> -->
+       </div>
+        <h3>
+	    <BOUCLE_equipe(ARTICLES)
+		  {id_rubrique}><BOUCLE_auteurs(AUTEURS)
+		    {id_article}{doublons}{" "}
+		    >#NOM</BOUCLE_auteurs></BOUCLE_equipe>
+	      </h3>
+
+
+</div></div>
+
+</body></html>
+</BOUCLE_principale>

@@ -1,0 +1,16 @@
+<B_breves>
+<div class="postit">
+<div class="postitframe">
+<div class="postitBandeau">
+     <div class="title">Les dernières brèves</div>
+</div>
+<div class="postitContent">
+<ul>
+<BOUCLE_breves(BREVES){0,7}{!par date}>
+ <li><a href="page.php3?fond=breve&amp;id_breve=#ID_BREVE"> [(#TITRE|supprimer_numero)]</a></li>
+</BOUCLE_breves>
+</ul>
+</div>
+</div>
+</div>
+</B_breves>

@@ -1,0 +1,190 @@
+#CACHE{7200}
+
+<BOUCLE_article_principal(ARTICLES) {id_article}>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">	
+
+<html dir="#LANG_DIR" lang="#LANG">
+
+<head>
+
+<title>[(#TITRE|textebrut|supprimer_numero)]</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+<meta name="author" content="#URL_SITE" />
+
+<meta name="copyright" content="guiderdoni.net" />
+
+<meta name="description" content="YourSite" />
+
+<meta name="keywords" content="your, site" />
+
+<!-- Ceci est la feuille de style du present squelette -->
+
+<link rel="stylesheet" href="#CHEMIN{css/style.css}" type="text/css" />
+
+<!-- Lien vers le backend pour navigateurs eclaires -->
+
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}" />
+
+[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+
+
+</head>
+
+<body>
+
+
+<div id="container">
+		<div id="top">
+				
+		
+		<b>#NOM_SITE_SPIP</b>
+		
+		<span class="podnaslov"><br />
+		
+		CSS, XHTML,  WEB, STANDARDS, SPIP etc...
+			
+		</span>
+		
+		</div>
+		
+<div id="left">
+		
+			
+
+<INCLURE{fond=inc_nav_gauche}{id_rubrique}{lang}{delais=24*3600}>
+
+<INCLURE{fond=inc_logo_rubrique}{id_rubrique}{lang}{delais=24*3600}>
+
+<INCLURE{fond=inc_syndication}{id_rubrique}{lang}{delais=24*3600}>
+	
+
+</div>
+
+		<div id="right">
+		
+
+	<INCLURE{fond=inc_nav_droite}{lang}{delais=24*3600}>
+	
+	<br />
+	
+<!-- Articles dans la meme rubrique-->
+
+<BOUCLE_principalemr(ARTICLES){id_article}{doublons}>
+
+<B_meme_rubrique>
+
+<h3><:voir_aussi:> </h3>
+
+[<b>Pagination</b> : (#PAGINATION)]
+
+<BOUCLE_meme_rubrique(ARTICLES){id_rubrique}{par date}{inverse}{exclus}{pagination 7}>
+ 
+ <!-- cette boucle selectionne les articles de la meme rubrique en excluant celui en cours -->
+
+<ul>
+
+[<li><a href="#URL_ARTICLE" title="[(#DESCRIPTIF|textebrut|entites_html)]">(#TITRE|supprimer_numero)</a> </li>]
+
+</ul>
+
+</BOUCLE_meme_rubrique>
+
+
+</B_meme_rubrique>
+
+</BOUCLE_principalemr>
+		
+		</div>
+		
+		<div id="content">
+		
+		<INCLURE{fond=inc_nav_content}{lang}{delais=24*3600}>
+	
+
+<!-- DEBUT BOUCLE_article-->
+
+<BOUCLE_articlem(ARTICLES){id_article}>
+
+[<h2>(#TITRE|supprimer_numero)</h2>] 
+
+
+[(#TEXTE|liens_ouvrants)<br />]
+                    
+[(#PS)<br />]
+                      
+[(#NOTES) <br />]
+
+
+<!-- boucle portfolio inspiree du squelette de  SPIP PARTY faites initialement par Ben-Spip et James : Paolo a reussi a Paginer avec le truc de James -->
+ 
+<BOUCLE_afficher_document(DOCUMENTS){id_document}{mode=document}{extension==(png|jpg|gif)$}{doublons}>
+
+[(#TITRE)]
+[(#DESCRIPTIF)]
+[<a href="#URL_DOCUMENT">(#FICHIER|reduire_image{380}|inserer_attribut{alt,#TITRE})</a>]
+</BOUCLE_afficher_document>
+
+<B_documents_portfolio>
+<BOUCLE_documents_portfolio(DOCUMENTS){id_article}{mode=document}{extension==(png|jpg|gif)$}{doublons}>
+[<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{?}|?{&amp;,?})]id_document=#ID_DOCUMENT" onclick="return !showpic('current_image','#URL_DOCUMENT',
+'[(#FICHIER|reduire_image{380}|extraire_attribut{src})]',[(#FICHIER|reduire_image{380}|extraire_attribut{width})],[(#FICHIER|reduire_image{380}|extraire_attribut{height})]);">
+(#LOGO_DOCUMENT{0,60})</a>] 
+
+
+</BOUCLE_documents_portfolio>
+</B_documents_portfolio>
+
+ <!-- Fin boucle portfolio party -->
+ 
+  <!-- Documents joints -->
+ <br />
+ 
+ <B_documents_joints>
+
+<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {doublons}>  <br /> 
+
+[(#LOGO_DOCUMENT|#URL_DOCUMENT|inserer_attribut{alt,#TITRE})][<b>(#TITRE)</b>][>(#DESCRIPTIF)]
+	
+
+</BOUCLE_documents_joints>
+
+</B_documents_joints>
+        
+
+</BOUCLE_articlem>
+
+
+<!-- FIN -->
+
+[(#REM)REPONDRE A CET ARTICLE]
+
+[<div class="forum-repondre"><b><a  href="(#PARAMETRES_FORUM|url_reponse_forum)" title="<:repondre_article:>"><:repondre_article:></a></b></div>]
+<br />
+
+
+[(#REM) Titre : inc-forum-celadon
+Created : janvier 2006
+Author : romy.tetue.net
+URL : http://romy.tetue.free.fr/article.php3?id_article=334
+Cette noisette affiche les commentaires d'article ou de breve, de facon simple, par fils de discussion, du plus ancien au plus recent.]
+
+
+<INCLURE{fond=inc-forum-celadon}{id_article}>
+
+ </div>
+        
+<div id='footer'>
+			
+<INCLURE{fond=inc_footer}{lang}{delais=24*3600}>
+			
+</div>
+	</div>
+
+#SPIP_CRON
+</body>
+</html>
+</BOUCLE_article_principal>

@@ -1,0 +1,14 @@
+<BOUCLE_edito(ARTICLES){titre_mot=edito}{0,1}>
+<div class="postit">
+<div class="postitframe">
+<div class="postitBandeau">
+     <div class="title">EDITO</div>
+</div>
+<div class="postitContent">
+ <h3><a href="#URL_ARTICLE"> [(#TITRE|supprimer_numero)]</a></h3>
+[(#TEXTE|couper{300})]
+<a href="#URL_ARTICLE">a suivre </a>
+</div>
+</div>
+</div>
+</BOUCLE_edito>

@@ -1,0 +1,226 @@
+#CACHE{7200}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html dir="#LANG_DIR" lang="#LANG">
+
+<head>
+
+<title><:recherche:> :#NOM_SITE_SPIP</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+<meta name="author" content="#URL_SITE" />
+
+<meta name="copyright" content="guiderdoni.net" />
+
+<meta name="description" content="YourSite" />
+
+<meta name="keywords" content="your, site" />
+
+<!-- Ceci est la feuille de style du present squelette -->
+
+<link rel="stylesheet" href="#CHEMIN{css/style.css}" type="text/css" />
+
+<!-- Lien vers le backend pour navigateurs eclaires -->
+
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}" />
+
+[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+
+
+
+
+</head>
+
+<body>
+
+
+<div id="container">
+		<div id="top">
+				
+		
+		<b>#NOM_SITE_SPIP</b>
+		
+		<span class="podnaslov"><br />
+		
+		CSS, XHTML,  WEB, STANDARDS, SPIP etc...
+			
+		</span>
+		
+		</div>
+		
+<div id="left">
+		
+			
+<INCLURE{fond=inc_nav_gauche}{lang}{delais=24*3600}>
+
+<INCLURE{fond=inc_syndication}{lang}{delais=24*3600}>
+
+	
+
+
+	
+
+</div>
+
+		<div id="right">
+
+
+
+	<h3><:detoutderien:></h3>
+		
+		<!--<p> </p>-->
+		
+		<h3><:navigation:></h3>
+		
+<!-- rubriques recursives boucles de Gilles Vincent merci a lui -->
+		
+<ul class="offsite">
+
+ <BOUCLE_principale(RUBRIQUES){racine} {par titre} >
+
+ <li>
+    <a class="lien#EXPOSER" href="#URL_RUBRIQUE" title="[(#DESCRIPTIF|textebrut|entites_html)]">[(#TITRE|supprimer_numero)]</a>
+    <B_rubriques>
+    <ul>
+       <BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre} >
+       <li>
+
+           <a class="lien#EXPOSER" href="#URL_RUBRIQUE" title="[(#DESCRIPTIF|textebrut|entites_html)]">[(#TITRE|supprimer_numero)]</a>
+           
+           <BOUCLE_sousRubriques(BOUCLE_rubriques)> </BOUCLE_sousRubriques>
+
+       </li>
+       </BOUCLE_rubriques>
+    </ul>
+    </B_rubriques>
+ </li>
+
+ </BOUCLE_principale>
+</ul>
+
+<!-- Fin des rubriques recursives -->
+		
+
+		
+		</div>
+		
+<div id="content">
+		
+<INCLURE{fond=inc_nav_content}{lang}{delais=24*3600}>
+	
+
+
+<!-- DEBUT BOUCLE RECHERCHE -->
+
+<!--Recherche boucles spip-->
+
+<h2>Tapez le mot de votre recherche dans le formulaire et faites "enter"</h2>
+
+<br />[(#FORMULAIRE_RECHERCHE)] <br />
+
+<h2>R&eacute;sultats de la recherche </h2>
+
+
+<p><em>[(#RECHERCHE|majuscules)]&nbsp; </em></p>
+
+
+<!-- Rubriques trouvees -->
+
+ <ul>
+
+
+<!-- DEBUT BOUCLE_rubriquesre-->
+
+<B_rubriquesre>
+ <!-- Code HTML - optionnel avant -->
+             
+<BOUCLE_rubriquesre(RUBRIQUES) {recherche} {par points} {inverse} {0,8}>
+
+
+
+[<li><a href="#URL_RUBRIQUE">(#TITRE|supprimer_numero)</a></li>]
+
+</BOUCLE_rubriquesre>
+
+</B_rubriquesre>
+<!--code optionnel-->
+
+<//B_rubriquesre>
+
+<!-- FIN BOUCLE_rubriquesre-->
+
+
+<!-- Breves trouvees -->
+
+
+<!-- DEBUT BOUCLE_brevesre-->
+
+              <B_brevesre>
+              <!-- Code HTML - brevesre - optionnel avant -->
+<BOUCLE_brevesre(BREVES) {recherche} {par points} {inverse} {0,8}>
+[<li><a href="#URL_BREVE">(#TITRE)</a></li>]
+</BOUCLE_brevesre>
+  </B_brevesre>
+              <!-- Code HTML- brevesre - optionnel apres -->
+
+             
+              <//B_brevesre>
+
+<!-- FIN BOUCLE_brevesre-->
+
+<!-- DEBUT BOUCLE_articlesre-->
+
+              <B_articlesre>
+              <!-- Code HTML - articlesre - optionnel avant -->
+
+<BOUCLE_articlesre(ARTICLES) {recherche} {par points} {inverse} {0,10}>
+[<li><a href="#URL_ARTICLE"> (#TITRE)</a></li>]
+
+
+</BOUCLE_articlesre>
+
+              </B_articlesre>
+              <!-- Code HTML- articlesre - optionnel apres -->
+       
+              <//B_articlesre>
+
+<!-- FIN BOUCLE_articlesre-->
+
+<!-- boucle forum -->
+
+<BOUCLE_messages(FORUMS) {recherche} {par points} {inverse} {0,8}>
+<:messages_forum:>
+[<li><a href="#URL_FORUM">(#TITRE)</a></li>]
+</BOUCLE_messages>
+
+
+<!-- Fin de la boucle forum -->
+
+
+
+
+</ul>
+
+<!--Fin recherche boucles spip-->
+
+
+
+<!-- FIN BOUCLE RECHERCHE-->
+
+
+
+ </div>
+        
+			<div id='footer'>
+			
+<INCLURE{fond=inc_footer}{lang}{delais=24*3600}>
+			
+</div>
+	</div>
+
+#SPIP_CRON
+</body>
+</html>

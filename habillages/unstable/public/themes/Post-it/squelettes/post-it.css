@@ -1,0 +1,299 @@
+
+
+* { margin: 0pt; padding: 0pt; }
+html {
+  font-family: Tahoma,Verdana,Arial,Helvetica,"Bitstream Vera Sans",sans-serif;
+  font-size: 12px;
+}
+body {
+  background: aqua;
+  color: rgb(51, 51, 51);
+}
+a:link, a:visited {
+  border-bottom: 1px solid rgb(221, 221, 221);
+  color: rgb(51, 51, 51);
+  text-decoration: none;
+}
+a:hover {
+  border-bottom: 1px solid rgb(255, 102, 0);
+  color: rgb(255, 102, 0);
+}
+img {
+  border: medium none ;
+}
+table {
+  margin: 0pt;
+  padding: 0pt;
+}
+h1 {
+  font-family: Trebuchet MS;
+  font-weight: normal;
+  font-size:25px;
+}
+h2 {
+  font-family: georgia,arial,tahoma,sans-serif;
+  font-style: normal; font-variant: normal;
+  font-weight: normal;
+  font-size: 21px;
+  line-height: normal;
+  font-size-adjust: none;
+  font-stretch: normal;
+}
+h3 {
+  font-family: georgia,arial,tahoma,sans-serif;
+  font-style: normal; font-variant: normal;
+  font-weight: normal;
+  font-size: 17px;
+  line-height: normal;
+  font-size-adjust: none;
+  font-stretch: normal;
+}
+ul {
+  padding-left: 5px;
+}
+li {
+  background: transparent url('../squelettes/arrowList.gif') no-repeat scroll 0pt 5px;
+  margin-bottom: 2px;
+  padding-left: 10px;
+  list-style-type: none;
+}
+p{
+  font-family: arial,tahoma,sans-serif;
+  font-style: normal; font-variant: normal;
+  font-weight: normal;
+  line-height: normal;
+  font-size-adjust: none;
+  font-stretch: normal;
+    font-size: 12px;
+}
+li.icone  {
+  background: transparent ;
+  margin-bottom: 2px;
+  padding-left: 10px;
+  list-style-type: none;
+}
+
+.colonnes {
+margin-left:10px;
+margin-right:10px;
+width:100%;
+position:absolute;
+top:30px;
+left:0px;
+    }
+    
+.bandeau {
+  height:40px;
+  text-align:center;
+width:100%;
+background:transparent;
+}
+
+.colonne {
+  width: 33%;
+  min-height: 1px;
+  float:left;
+}
+.postit {
+  border: 1px solid #8860BF;
+  margin: 5px;
+    min-height: 100px;
+  background: rgb(255, 255, 255) none repeat;
+}
+.postitFrame {
+  border: 1px solid blue;
+  overflow: hidden;
+}
+.postitBandeau {
+  background: pink none repeat;
+  border-bottom: 1px solid #8860BF;
+  overflow: hidden; 
+  height: 1.8em;
+}
+.postitBandeau .showHide { padding: 2px 0pt 0pt 2px; width: 16px; height: 16px; cursor: pointer; float: left; }
+.postitBandeau .title { font-weight: bold; padding-top: 2px; line-height: 1.4em; color: rgb(0, 54, 143); }
+.postitBandeau .title a { color: rgb(0, 54, 143); }
+.postitBandeau .title a:hover { color: rgb(255, 102, 0); }
+.postitBandeau .edit { padding: 2px 5px 0pt; float: right; cursor: pointer; }
+.postitBandeau .edit a { border-bottom: medium none; color: rgb(133, 133, 133); text-decoration: underline; }
+.postitBandeau .edit a:hover { color: rgb(255, 102, 0); }
+.postitBandeau .close { padding: 2px 2px 2px 0pt; float: right; cursor: pointer; }
+.postitBandeau .refresh { padding: 3px 5px 2px 0pt; float: right; cursor: pointer; }
+
+.postitContent {
+  padding: 7px;
+  background: rgb(255, 255, 255) none repeat;
+  clear: both;
+}
+.centre{
+  text-align:center;
+}
+#postitGhost { border: 1px dashed rgb(255, 0, 0); margin: 2px; }
+
+.divColonne {
+  	margin:0;
+        padding:0;
+        background:white;
+        position:absolute; top:30px; z-index:3;
+}
+
+.fenetre {
+	margin:0;
+        padding:0;
+        background:white;
+        position:absolute; top:43px; z-index:3;left:50px;right:50px;
+        height:510px;
+        background: purple none repeat;
+         border: 2px solid #8860BF;
+         overflow: hidden;
+}
+.fenetreBandeau{
+  background: orange none repeat;
+  border-bottom: 1px solid #8860BF;
+  height: 20px;
+}
+.fenetreBandeau .title {
+   font-weight: bold; padding-top: 2px; line-height: 15px; color: rgb(0, 54, 143);
+   text-align:center;
+   }
+
+.fenetreContenu {
+  height: 465px;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top:15px;
+  background: rgb(255, 255, 255) none repeat;
+  border: 1px solid rgb(121, 167, 226);
+  margin-left:10px;
+  margin-right:10px;
+  margin-top:3px;
+  overflow:auto;
+
+}
+.fenetreListe {
+  width: 180px;
+  height: 465px;
+  float:left;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top:15px;
+  margin-left:10px;
+  background: rgb(255, 255, 255) none repeat;
+  border: 1px solid rgb(121, 167, 226);
+  margin-top:3px;
+  overflow:auto;
+}
+
+
+.fermer{
+  float:right;
+}
+
+a.bouton {
+  color: white;
+  background-color: #000080;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  padding: 2px;
+  border: 2px outset #c0c0c0;
+  display: block;
+  line-height: 12px;
+}
+a.bouton:hover {
+  background-color: #00AAA0;
+  border: 2px inset #c0c0c0;
+}
+.logo {
+  float:right;
+  margin:3px;
+}
+.documents {
+  float:left;
+  margin:3px;
+  height:150px;
+}
+
+.premier-plan{
+  z-index:5;
+  position:absolute;
+  top:12px;
+  left:18px;
+    border: 2px solid #8860BF;
+    width:250px;
+}
+
+.menu-depliant {
+  max-height:400px;
+  overflow:auto;
+  background:lightblue; 
+}
+
+.menu-depliant dd {
+ background:#FFFFFF;
+ margin-left : 0;
+ text-align:left;
+ text-decoration:none;
+ padding : 0px ;
+ margin:0px;
+font-size : 10;
+}
+.menu-depliant dd dd{
+background : #DDDDDD;
+ margin-left : 10px;
+}
+.menu-depliant dd dd dd{
+background : #CCCCCC;
+ margin-left : 20px;
+}
+.menu-depliant dd dd dd dd{
+background :#BBBBBB;
+ margin-left : 30px;
+}
+.menu{
+  float:left;
+  font-size:11px;
+  font-weight:600;
+  padding:3px;
+}
+.auteurs{
+  float:left;
+  width:180px;
+}
+.alaligne{
+    clear: both;
+}
+
+.spip_documents_center {
+ text-align:center;
+}
+.chapo {
+  font-weight: bold;
+  font-size: 14px;
+}
+.fond-jaune{
+  background:yellow;
+  min-height:100px;
+}
+
+.formrecherche {
+	background-color: lightblue;
+	color: blue;
+	margin: 0px;
+	padding: 5px;
+	border: solid 1px black;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 100%;
+	font-weight: normal;
+}
+
+.PS{
+  background: #F0E6FF;
+  padding-left:15px;
+  padding-right:15px;
+}
+.pieddepage {
+  font-size:80%;
+  text-align:center;
+  position:relative;
+}
