@@ -1,0 +1,77 @@
+#CACHE{7200}
+#HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
+#HTTP_HEADER{Pragma: no-cache}
+#HTTP_HEADER{Content-type: text/html; charset=#CHARSET}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|attribut_html)" />]
+	<meta name="generator" content="SPIP" />
+	[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+
+	<!-- Ceci est la feuille de style par defaut pour le code genere par SPIP -->
+	<link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" media="all" />
+	<!-- Feuille de styles CSS pour les postit -->
+	<link rel="stylesheet" href="[(#CHEMIN{postit.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
+	<!-- Feuille de styles CSS pour l'impression -->
+	<link rel="stylesheet" href="[(#CHEMIN{impression.css}|direction_css)]" type="text/css" media="print" />
+<?php
+	if ($GLOBALS['auteur_session']) {
+		echo '<meta http-equiv="Refresh" content="180">';
+	}
+	echo "</head>\n";
+	echo "<body >\n";
+
+	if ($GLOBALS['auteur_session']) {
+		$visiteur_id=$GLOBALS['auteur_session']['id_auteur'];
+		$visiteur_nom=$GLOBALS['auteur_session']['nom'];
+		$visiteur_statut=$GLOBALS['auteur_session']['statut'];
+
+		include_spip("inc/filtres");
+		include_spip("inc/texte");
+
+		// Messages non vus affiches en post-it ------------------------------------
+
+		$res = spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=".spip_abstract_quote($visiteur_id));
+		if ($row = spip_fetch_array($res)) {
+		// un message a ete vu
+			if (($id=_request('vu'))!==NULL){
+				spip_query("UPDATE spip_auteurs_messages SET vu='oui' WHERE id_message = ".spip_abstract_quote($id)." AND id_auteur=".spip_abstract_quote($visiteur_id));
+			}
+
+			// tous les messages non lus dont le visiteur est destinataire
+			$res = spip_query("SELECT messages.* FROM spip_messages AS messages 
+								LEFT JOIN spip_auteurs_messages AS auteurs_messages
+								ON messages.id_message=auteurs_messages.id_message 
+								WHERE auteurs_messages.id_auteur=".spip_abstract_quote($visiteur_id).
+								" AND messages.type='normal' AND auteurs_messages.vu='non'
+								GROUP BY messages.id_message
+								ORDER BY messages.date_heure DESC");
+			$url=self();
+			while ($row = spip_fetch_array($res)){
+				echo "<div class='postit'>";
+				$url=parametre_url($url,'vu',$row['id_message']);
+				echo "<div class='postit-titre'><a href='$url'><img src='#CHEMIN{img_pack/croix.png}' width='12' height='12' alt='fermer' /></a>";
+				echo propre($row2['titre'])."</div>";
+				$res2=spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=".$row['id_auteur']);
+				if ($row2=spip_fetch_array($res2))
+					echo "<div class='postit-auteur'>".propre($row2['nom'])."</div>";
+				$texte = propre($row['texte']);
+				if (preg_match_all(",<a[^>]*>,Uims",$texte,$regs)){
+					foreach($regs as $reg){
+						$texte = str_replace($reg[0],inserer_attribut($reg[0],'target','_parent'),$texte);
+					}
+				}
+				echo "<div class='postit-texte'>".$texte."</div>";
+				echo "</div>";
+			}
+ 		}
+
+		// Petit hack pour indiquer la connexion d'un visiteur
+		@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$visiteur_id'");
+	}
+?>
+</body>
+</html>
