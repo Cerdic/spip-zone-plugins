@@ -1,0 +1,181 @@
+/* Copyright (c) 2006 Yahoo! Inc. All rights reserved. */
+/* Container Styles */
+
+.calcontainer {*height:1%;} /* IE */
+.calcontainer:after {content:'.';clear:both;display:block;visibility:hidden;height:0;} /* others */
+
+.calbordered {
+	font-family: Verdana, Arial, Sans, sans-serif;
+	font-size:small;
+	float:left;
+	padding:5px;
+	background-color:#F7F9FB;
+	border:1px solid #7B9EBD;
+min-width:28em;
+-height:14em;
+}
+
+.califrame{
+margin:1px;
+	padding:5px;
+	font-family: Verdana, Arial, Sans, sans-serif;
+	font-size:small;
+width:28em;
+height:14em;
+}
+.calbordered .title{
+	font:small Arial,Helvetica,sans-serif;
+	color:#000;
+	font-weight:bold;
+	margin-bottom:5px;
+	height:auto;
+-width:28em;
+	position:relative;
+}
+
+.close-icon-right, .close-icon-left {
+	position:absolute;
+	top:0;
+	border:none;
+}
+.close-icon-right {
+right:0;
+}
+.close-icon-left {
+left:0;
+}
+.cal2up {
+	/*float:left;*/
+	-position:absolute;
+left:0.5em;
+}
+.calbordered > .cal2up{
+	float:left;
+}
+
+.cal2up2 {
+	/*float:left;*/
+	-position:absolute;
+-left:14em;
+}
+.calbordered > .cal2up2{
+	float:left;
+}
+
+.calnavleft {
+	position:absolute;
+	top:0;
+	bottom:0;
+	height:12px;   
+	left:2px;
+}
+
+.calnavright {
+	position:absolute;
+	top:0;
+	bottom:0;
+	height:12px;  
+	right:2px;
+}
+
+/* Calendar element styles */
+
+.calendar {
+	font:small Arial,Helvetica,sans-serif;
+	text-align:center;
+	border-spacing:0;
+}
+
+.calcell{
+	width:1.5em;
+	height:1em;
+	border:1px solid #E0E0E0;
+	background-color:#FFF;
+text-align:center;
+}
+
+.calcell a {
+	color:#003DB8;
+	text-decoration:none;
+}
+
+.calcell.today {
+	border:1px solid #000;
+}
+
+.calcell.oom, .calcell.oom:hover {
+	cursor:default;
+	color:#999;
+	background-color:#EEE;
+	border:1px solid #E0E0E0;
+}
+
+.selected, .calcell.selected {
+	color:#003DB8;
+	background-color:#FFF19F;
+	border:1px solid #FF9900;
+font-weight:bold;
+}
+
+.calcell:hover, .calcell.calcellhover, .calcell a:hover{
+	cursor:pointer;
+	color:#FFF;
+	background-color:#FF9900;
+	border:1px solid #FF9900;
+}
+
+.calcell.calcellhover a, .calcell:hover a {
+	color:#FFF;
+	background-color:#FF9900;
+	border:1px solid #FF9900;
+}
+
+.calcell.restricted {
+	text-decoration:line-through;
+}
+
+.calcell.previous {
+	color:#CCC;
+}
+
+.calcell.highlight1 { background-color:#CCFF99; }
+.calcell.highlight2 { background-color:#99CCFF; }
+.calcell.highlight3 { background-color:#FFCCCC; }
+.calcell.highlight4 { background-color:#CCFF99; }
+
+
+.calhead {
+	border:1px solid #E0E0E0;
+	vertical-align:middle;
+	background-color:#FFF;
+}
+
+.calheader {
+	position:relative;
+	width:100%;
+}
+
+.calheader img {
+	border:none;
+}
+
+.calweekdaycell {
+	color:#666;
+	font-weight:normal;
+}
+
+.calfoot {
+	background-color:#EEE;
+}
+
+.calrowhead, .calrowfoot {
+	color:#666;
+	font-size:9px;
+	font-style:italic;
+	font-weight:normal;
+	width:15px;
+}
+
+.calrowhead {
+	border-right-width:2px;
+}
