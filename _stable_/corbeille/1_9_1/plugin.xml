@@ -1,0 +1,37 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Corbeille
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Copyright (C) 2002 ONFRAY MATTHIEU
+_ mail : silicium@japanim.net
+_ web amateur : http://www.japanim.net/
+_ web technique : http://spip.japanim.net/
+_ adaptation en plugin par cedric.morin@yterium.com
+_ &copy; 2005-2006 - Distribu&eacute; sous licence GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	experimental
+	</etat>
+	<description>
+	Gestion des documents mis &agrave; la corbeille
+	</description>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	Corbeille
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>inc_corbeille.php</inclure>
+	</pipeline>
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
