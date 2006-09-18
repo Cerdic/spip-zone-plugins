@@ -1,0 +1,42 @@
+<?php
+function switcher_affichage_final($texte){
+	
+	global 	$html;
+	global $squelettes_alternatifs;
+
+	if ($html) {
+	
+	  
+		
+		// Doit-on afficher le sélecteur de squelette ? (Fonctionnalitée restreinte aux seuls administrateurs ?)
+		$afficherSelecteur=TRUE;
+		if (($afficherSeulementPourLesAdmins) AND (!isset($_COOKIE['spip_admin']))) $afficherSelecteur=FALSE;
+		
+		if ($afficherSelecteur) {
+			
+			// Insertion du Javascript de rechargement de page
+			$code='<script type="text/javascript">
+						//<![CDATA[
+						function gotof(url) {
+						window.location=url;
+						}//]]>
+						</script>';	  
+			
+			// Insertion du sélecteur de squelettes			
+			$code.='<div id="plugin_switcher" style="top: 0;left: 20px; position: absolute; background-color: transparent;z-index: 100;">';
+			$code.='<form action="" method="post">';
+			$code.='<select name="selecteurSkel" style="'.$styleListeSwitcher.'" onchange="gotof(this.options[this.selectedIndex].value)">';
+			$code.='<option selected="selected" value="">Squelettes</option>';
+			foreach( $squelettes_alternatifs as $key => $value)	$code.='<option value="'.parametre_url(self(),'var_skel',$key).'">&nbsp;-> '.$key.'</option>';
+			$code.='</select>';
+			$code.='</form>';
+			$code.='</div>';
+			}
+
+			
+		// On rajoute le code du selecteur de squelettes après la balise <body *>
+		$texte=eregi_replace("<body([^>]*)>","<body \\1>$code",$texte);
+	}
+	return($texte);
+}
+?>
