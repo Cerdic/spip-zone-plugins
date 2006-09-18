@@ -1,0 +1,25 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Modeles liste
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Cedric Morin
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+	Affichage de la liste des modeles existants lors de l'edition d'un contenu
+	</description>
+	<prefix> 
+	modlist
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>modlist_filtres.php</inclure>
+	</pipeline>
+</plugin>
