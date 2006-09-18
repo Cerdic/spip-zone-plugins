@@ -3,8 +3,7 @@
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
 define('_DIR_PLUGIN_HABILLAGES',(_DIR_PLUGINS.end($p)));
 
-// Fonction qui gere les habillages. Tentative de faire la fonction sans appel a la
-// base de donnees, et donc sans manipulation sql.
+// Fonction qui gere les habillages.
 function exec_config_habillages() {
   global $connect_statut, $connect_toutes_rubriques;
 
@@ -45,24 +44,11 @@ function exec_config_habillages() {
 
  	debut_droite();
 
- 	# Pour enlever le message d'avertissement, enlever le code a partir d'ici...
- 	debut_boite_info();
-	echo "<div class='verdana2' align='justify'>
-	<p align='center'><B>"._T('avis_attention')."</B></p>",
-	  http_img_pack("warning.gif", (_T('avis_attention')), "width='48' height='48' align='right' style='padding-$spip_lang_left: 10px;'");
-	echo _T('habillageprive:texte_inc_config');
-	echo "</div>";
-	fin_boite_info();
- 	# ... jusque la.
- 	
 	echo "<br />";
 
 #### DEBUT DE L'ENCADRE QUI GERE L'HABILLAGE PRIVE ######################################
 	debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_prive-32.png", false, "", _T('habillageprive:titre_habillage_prive'));
 	
-	echo "<small>La gestion des habillages de l'espace priv&eacute; est encore en d&eacute;veloppement. ";
-	echo "Rien ne vous emp&ecirc;che de l'essayer (il faut juste savoir que les ic&ocirc;nes appara&icirc;tront au fur et &agrave; mesure";
-	echo " de votre navigation dans l'espace priv&eacute; et que c'est un peu cahotique).</small><br />";
  	echo '<form action="'.generer_url_ecrire('config_habillages').'" method="post">';
  	 	
  	echo "<a name='access-c' href='#access-c' accesskey='c'></a><div class='cadre-r'><div style='position: relative;'><div class='cadre-titre' style='margin: 0px;'>";
