@@ -1,0 +1,26 @@
+<div class="formulaire_spip">
+<a name="formulaire_sondage" id="formulaire_sondage"></a>
+<form method="post" action="#ENV{self}#formulaire_sondage">
+	<fieldset class="spip_encadrer">
+		<legend><:sondages:voter:></legend>
+
+<BOUCLE_sondage_simple(SONDAGES) {id_sondage=#ENV{id_sondage}} {type=simple}>
+<B_radio>		<p>
+<BOUCLE_radio(CHOIX) {id_sondage=#ENV{id_sondage}}>			<input type="radio" name="choix_#ENV{id_sondage}[]" id="choix_#ID_CHOIX" value="#ID_CHOIX" /> <label for="choix_#ID_CHOIX">#TITRE</label><br />
+</BOUCLE_radio>		</p>
+</B_radio>
+</BOUCLE_sondage_simple>
+
+<BOUCLE_sondage_multiple(SONDAGES) {id_sondage=#ENV{id_sondage}} {type=multiple}>
+<B_checkbox>		<p>
+<BOUCLE_checkbox(CHOIX) {id_sondage=#ENV{id_sondage}}>			<input type="checkbox" name="choix_#ENV{id_sondage}[]" id="choix_#ID_CHOIX" value="#ID_CHOIX" /> <label for="choix_#ID_CHOIX">#TITRE</label><br />
+</BOUCLE_checkbox>		</p>
+</B_checkbox>
+</BOUCLE_sondage_multiple>
+
+<//B_sondage_simple>
+
+		<p><input type="submit" class="spip_bouton" name="valider" value="<:sondages:valider:>" /></p>
+	</fieldset>
+</form>
+</div>

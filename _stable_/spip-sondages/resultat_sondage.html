@@ -1,0 +1,12 @@
+<BOUCLE_sondage(SONDAGES) {id_sondage=#ENV{id_sondage}}>
+[(#ENV*{sondage_termine}|?{' ',''})<p class="spip"><:sondages:sondage_termine:></p>]
+[(#ENV*{sondage_deja_vote}|?{' ',''})<p class="spip"><:sondages:sondage_deja_vote:></p>]
+[(#ENV*{sondage_merci}|?{' ',''})<p class="spip"><:sondages:sondage_merci:></p>]
+
+<B_choix><ul class="spip">
+<BOUCLE_choix(CHOIX) {id_sondage}>
+	<li>#TITRE : <B_resultats>[<small>((#TOTAL_BOUCLE|sondages_pourcentage{#ID_SONDAGE}) %)</small>]<div style="border: 1px solid #CCC; font-size: 0.77em; background: #EAFFEA; width: [(#TOTAL_BOUCLE|sondages_largeur{#ID_SONDAGE,200})]px;">#TOTAL_BOUCLE</div> <BOUCLE_resultats(AVIS) {id_choix}> </BOUCLE_resultats></li>
+</BOUCLE_choix></ul>
+</B_choix>
+<BOUCLE_nb_votes(AVIS) {id_sondage}> </BOUCLE_nb_votes><p class="spip">#TOTAL_BOUCLE <:sondages:votes:></p></B_nb_votes>
+</BOUCLE_sondage>

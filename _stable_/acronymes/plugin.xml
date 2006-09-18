@@ -1,0 +1,47 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Acronymes
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Cedric MORIN
+ 	[notre-ville.net->http://www.notre-ville.net]
+_ &copy; 2006 - Licence GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+	D&eacute;tection et ajout des d&eacute;finitions des acronymes &agrave; partir d'une base syndiqu&eacute;e ou d'une rubrique.
+	Les acronymes sont d&eacute;finis dans des articles, le titre correspond &agrave; l'acronyme 
+	(en majuscule, sans point de s&eacute;paration) et le descriptif au contenu &agrave; ajouter dans la balise.
+	Les d&eacute;finitions peuvent &ecirc;tre regroup&eacute;es dans une rubrique ou sur un site distant syndiqu&eacute;
+
+	Pour d&eacute;finir la rubrique et/ou le site, aller dessus dans l'interface d'admin et cliquer selectionnez-le dans le cadre blanc situ&eacute; en bas &agrave; gauche (ou en haut a droite si vous &egrave;tes en &eacute;cran large)
+
+	Une page de test (<code>?page=acronymes_voir</code>) boucle sur l'ensemble des articles du site et rep&egrave;re tout ce qui ressemble de pr&egrave;s ou de loin a un accronyme. Elle permet de v&eacute;rifier la compl&egrave;tude de votre base.
+	</description>
+	<prefix> 
+	acronymes
+	</prefix>
+	<fonctions>
+	acronymes_filtres.php
+	</fonctions>
+	<pipeline>
+		<nom>post_propre</nom>
+		<action>traiter_raccourcis</action>
+		<inclure>acronymes_filtres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_propre</nom>
+		<action>ajouter</action>
+		<inclure>acronymes_filtres.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<action>config</action>
+		<inclure>acronymes_config.php</inclure>
+	</pipeline>
+</plugin>

@@ -1,0 +1,14 @@
+#CACHE{0}
+<html>
+<body>
+<BOUCLE_arts(ARTICLES){tout}>
+<a href='#URL_ARTICLE'>#TITRE</a>
+  [(#TITRE|acronymes_voir|acronymes_ajouter)]
+  [(#SOUSTITRE|acronymes_voir|acronymes_ajouter)]
+  [(#DESCRIPTIF|acronymes_voir|acronymes_ajouter)]
+  [(#CHAPO|acronymes_voir|acronymes_ajouter)]
+  [(#TEXTE|acronymes_voir|acronymes_ajouter)]
+  <br/>
+</BOUCLE_arts>
+</body>
+</html>
