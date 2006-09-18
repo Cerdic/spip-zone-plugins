@@ -1,0 +1,30 @@
+<B_DOC>
+ <br style="clear:both;" />
+ <a name='portfolio'></a>
+<div style='background-color: #C0CAD4; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'>
+  <b><span style='text-transform: uppercase'>Portfolio</span></b>
+</div>
+<div style="position:relative;">
+ <BOUCLE_DOC(DOCUMENTS){id_article}>
+ <div style="width:125px;min-height:160px;height:160px;float:left;">
+  <div style='text-align:center;'>
+   [(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+  </div>
+  <div class='verdana1'>
+   [(#ID_DOCUMENT**|str_cat{document_article}|md5|bouton_block_invisible)]
+
+	[<b>(#TITRE|?{[(#TITRE|supprimer_numero)],[(#URL_DOCUMENT|basename)]})</b>]
+  </div>
+  <div class='verdana1' style='text-align: center;'>
+   [(#LARGEUR|?{' ',''})#LARGEUR &#215; #HAUTEUR <:info_pixels:>]
+   [(#LARGEUR|?{'',' '})[(#TAILLE|taille_en_octets)]]
+  </div>
+  [(#ID_DOCUMENT**|str_cat{document_article}|md5|debut_block_invisible)]
+   [(#DATE|affdate)<br/>]
+   #DESCRIPTIF
+  </div>
+ </div>
+ </BOUCLE_DOC>
+</div>
+	 <div style='clear: both;'></div>
+</B_DOC>

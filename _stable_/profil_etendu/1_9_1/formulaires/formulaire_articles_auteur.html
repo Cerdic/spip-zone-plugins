@@ -1,0 +1,16 @@
+<iframe id='iframe_action' name='iframe_action' width='1' height='1' style='position: absolute; visibility: hidden;'></iframe>
+<B_art>
+<ul style="margin:0;padding:0;list-style:none;">
+<BOUCLE_art(ARTICLES){statut!=publie}{id_auteur}{!par statut}{!par date}{doublons}>
+<li style="position:relative;clear:left;margin:3px 0;padding:0px;">
+  <div style="float:left;margin:4px 0 0 0;padding:0;width:20px; _position:relative;">
+	[(#ID_ARTICLE|puce_admin_article{#STATUT,#ID_RUBRIQUE,#ENV{auteur_statut},#ENV{id_auteur}})]
+  </div>
+  <div style="padding:0;padding:0; _float:left; _position:relative;">
+   <a href="spip.php?page=article_edit&id_article=#ID_ARTICLE"[ title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a>
+  </div>
+   <div style="clear:left;position:relative;margin:0; padding:0">[le (#DATE|affdate)]</div>
+ </li>
+</BOUCLE_art>
+</ul>
+</B_art>

@@ -1,0 +1,31 @@
+
+<BOUCLE_art(ARTICLES){id_article}{statut=#ENV{statut_article}}>
+<div class="wikilike" ondblclick="document.location='[(#ENV{url_modifier_article})]';" >
+[<div class="message">(#ENV*{message})</div>]
+    
+[(#ENV{gerer_sutitre})
+    [<div class="titre4">(#SURTITRE)</div>]
+]
+    [<h1 class="titre1">[(#LOGO_ARTICLE||reduire_image{#ENV{logo_size,70}}|inserer_attribut{'alt',#TITRE}|inserer_attribut{'title',#TITRE})](#TITRE|supprimer_numero)</h1>]
+[(#ENV{gerer_soustitre})
+    [<div class="titre3">(#SOUSTITRE)</div>] 	
+]
+    <div class="titre4">[le (#DATE|affdate)&nbsp;][par (#LESPAGESAUTEURS)]</div>	
+[(#ENV{gerer_descriptif})
+    [<span class="texte2">(#DESCIPTIF|justifier)</span>]
+]
+[(#ENV{gerer_chapeau})
+    [<br/>
+    <span class="texte3">(#CHAPO|justifier)</span>]
+]
+    [<br/>
+    <span class="texte3">(#TEXTE|justifier)</span>]
+[(#ENV{gerer_urlref})
+    [<hr/>
+    <div class="titre5"><:voir_en_ligne:> : <a href="(#LIEN_URL)" target="_blank">[(#LIEN_TITRE)]</a></div>]
+]
+[(#ENV{gerer_ps})
+	[<div class="ps">(#PS)</div>]
+]
+</div>
+</BOUCLE_art>

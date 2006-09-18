@@ -1,0 +1,63 @@
+<form action="[(#ENV{url})#formulaire]" method="post"  name="formulaire_article" id="Formulaire_article" enctype="multipart/form-data" >
+	[(#ENV*{previsu})	]
+	[(#ENV*{imglogo1})	]
+	[(#ENV*{imglogo2})	]
+ <div class="spip_encadrer important">
+   <div class="legend">
+  	<label><:forms:article_accueil:></label>
+   </div>
+	<input class="id_rubrique" type="hidden" name="titre" value="[(#ENV*{id_rubrique})]"  size="50">
+		
+	<label><:info_multi_cet_article:></label>
+	<select name='var_lang'  class='lang' >
+	[(#ENV*{langues})]
+	</select>
+	<br/>
+	<label><:forms:article_date_public:></label>
+	  [(#ENV{jour}|afficher_jour{name="jour" size="1" class="fondl"})]
+	  [(#ENV{mois}|afficher_mois{name="mois" size="1" class="fondl"})]
+	  [(#ENV{annee}|afficher_annee{name="annee" size="1" class="fondl"})]
+	<br/>
+  <fieldset>
+	<label><:forms:article_titre:></label>
+	<input class="forml" type="text" name="titre" value="[(#ENV*{titre})]"  size="50"><br>
+
+	<label><:forms:article_soustitre:></label><br/>
+	<input class="forml" type="text" name="soustitre" value="[(#ENV*{soustitre})]"  size="50"><br>
+	<label><:forms:article_descriptif:></label><br/>
+	<textarea class="forml" name="descriptif" cols="50" rows="3">[(#ENV*{descriptif})]</textarea>
+	<br/><label><:forms:article_chapo:></label><br/>
+	<textarea class="forml" name="chapo" cols="50" rows="3">[(#ENV*{chapo})]</textarea>
+	<br/><label><:forms:article_texte:></label><br/>
+	[(#ENV**{texte}|barre_article{texte})]
+	<br/><label><:forms:article_ps:></label><br/>
+	<textarea class="forml" name="ps" cols="50" rows="1">[(#ENV*{ps})]</textarea><br>
+[	<div class="legend"><:info_lien_hypertexte:></div>
+	<label><:forum_titre:></label><br/>
+	<input class="lien_titre" type="text" name="lien_titre" value="[(#ENV*{lien_titre})]" size="50">
+	<br/><label><:form_prop_url_site:></label><br/>
+	<input class="lien_url" type="text" name="lien_url" value="(#ENV*{lien_url})" size="50">]
+	</fieldset>
+	
+	<fieldset>
+		<label><:forms:article_logo:></label>
+		[(#ENV*{logo1})]
+		<label><:forms:article_logo_survol:></label>
+		[(#ENV*{logo2})]
+	</fieldset>
+	<fieldset>
+	<div class="legend"><:entree_infos_perso:></div>
+	[<div style="float: #LANG_RIGHT; padding-#LANG_LEFT: 10px;"><img src="(#ENV{id_auteur_session}|logoauteur)"
+	width="75"
+	/></div>]
+		<label><:form_pet_votre_nom:></label>
+		<input class="nom_auteur_session" type="text" name="nom_auteur_session" value="[(#ENV{nom_auteur_session})]" readonly="readonly" size="50"><br>
+
+		<label><:form_pet_votre_email:></label>
+		<input class="email_auteur_session" type="text" name="email_auteur_session" value="[(#ENV{email_auteur_session})]" readonly="readonly" size="50"><br>
+	</fieldset>
+
+	<div align="right"><input type="submit" name="previsualiser" class="spip_bouton" value="<:previsualiser:>" /></div>
+      </fieldset>
+ </div>
+</form>

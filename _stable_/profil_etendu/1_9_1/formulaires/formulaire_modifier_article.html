@@ -1,0 +1,94 @@
+<BOUCLE_art(ARTICLES){id_article}{statut=#ENV{statut_article}}>
+[(#ENV*{fma_form})]
+ <div class="legend">
+  <label><:article_accueil:></label>
+ </div>
+ 
+	<input type="hidden" name="[(#ENV{form_prefixe})]id_rubrique" value="[(#ID_RUBRIQUE)]"/>
+  <fieldset style="clear:both">
+ <div style="float:right;clear:right;width:200px;margin:5px;background:#fff;border:1px solid;">
+  <div style='font-weight: bold;padding: 3px;background: #aaaaaa;border-bottom: 1px solid #666666;margin: 0px; padding-left: 30px;'>
+	[(#LOGO_ARTICLE_NORMAL|fichier|str_cat{normal}|md5|bouton_block_invisible)]<:logo_article:>
+  </div>
+   [(#LOGO_ARTICLE_NORMAL|fichier|str_cat{normal}|md5|debut_block_invisible)]
+	[<center>(#LOGO_ARTICLE_NORMAL)<br/>]
+[(#LOGO_ARTICLE_NORMAL|fichier|?{
+	<a href="spip_image.php3?id_article=#ID_ARTICLE[&amp;image_supp=(#LOGO_ARTICLE_NORMAL|fichier)][&amp;hash_id_auteur=(#ENV{id_auteur_session})][&amp;hash=(#ENV{id_auteur_session}|calculer_hash{supp_logo [(#LOGO_ARTICLE_NORMAL|fichier)]})]&amp;retour_formulaire=oui[&amp;redirect=(#ENV*{redirect_url}|urlencode)]">
+	<:lien_supprimer:></a></center><br/>
+,<input id="logo1" name="logo1" type="file" class="forml" SIZE=15><br/>})]
+   </div>
+ </div>
+ <div style="float:right;clear:right;width:200px;margin:5px;background:#fff;border:1px solid;">
+ <div style='font-weight: bold;padding: 3px;background: #aaaaaa;border-bottom: 1px solid #666666;margin: 0px; padding-left: 30px;'>
+	[(#LOGO_ARTICLE_SURVOL|fichier|str_cat{survol}|md5|bouton_block_invisible)]<:logo_survol:>
+  </div>
+   [(#LOGO_ARTICLE_SURVOL|fichier|str_cat{survol}|md5|debut_block_invisible)]
+	[<center>(#LOGO_ARTICLE_SURVOL)<br/>]
+[(#LOGO_ARTICLE_SURVOL|fichier|?{
+	<a href="spip_image.php3?id_article=#ID_ARTICLE[&amp;image_supp=(#LOGO_ARTICLE_SURVOL|fichier)][&amp;hash_id_auteur=(#ENV{id_auteur_session})][&amp;hash=(#ENV{id_auteur_session}|calculer_hash{supp_logo [(#LOGO_ARTICLE_SURVOL|fichier)]})]&amp;retour_formulaire=oui[&amp;redirect=(#ENV*{redirect_url}|urlencode)]">
+	<:lien_supprimer:></a></center><br/>
+,<input id="logo2" name="logo2" type="file" class="forml" SIZE=15><br/>})]
+  </div>
+ </div>
+
+	[(#ENV{gerer_lang})
+	<label><:info_multi_cet_article:></label>
+	[<select name="[(#ENV{form_prefixe})]lang"  class="lang" >
+	(#NOOP|liste_options_langues{#LANG})
+	</select>]
+	<br/>
+]
+	[<label><:info_multi_cet_article:></label>
+	[<select name='[(#ENV{form_prefixe})]statut_article' size='1' class='fondl' >
+	(#STATUT|generer_liste_statuts{#ENV{auteur_statut}})
+	</select><br/>]
+	<label><:texte_date_publication_article:></label>
+	  [(#DATE|jour|afficher_jour{name="[(#ENV{form_prefixe})]jour_date" size="1" class="fondl"})]
+	  [(#DATE|mois|afficher_mois{name="[(#ENV{form_prefixe})]mois_date" size="1" class="fondl"})]
+	  [(#DATE|annee|afficher_annee{name="[(#ENV{form_prefixe})]annee_date" size="1" class="fondl"})]
+	<br/>
+[(#ENV{gerer_redac})
+	<label><:info_date_publication_anterieure:></label>
+	  [(#DATE|jour|afficher_jour{name="[(#ENV{form_prefixe})]jour_date_redac" size="1" class="fondl"})]
+	  [(#DATE|mois|afficher_mois{name="[(#ENV{form_prefixe})]mois_date_redac" size="1" class="fondl"})]
+	  [(#DATE|annee|afficher_annee{name="[(#ENV{form_prefixe})]annee_date_redac" size="1" class="fondl"})]
+	<br/>
+]
+
+[(#ENV{gerer_sutitre})
+	<label><:texte_sur_titre:></label><br/>
+	<input class="forml" type="text" name="[(#ENV{form_prefixe})]surtitre" value="[(#SURTITRE*)]"  size="50"><br>
+]
+	<label><:texte_titre_obligatoire:></label><br/>
+	<input class="forml" type="text" name="[(#ENV{form_prefixe})]titre" value="[(#TITRE*)]"  size="50"><br>
+[(#ENV{gerer_soustitre})
+	<label><:texte_sous_titre:></label><br/>
+	<input class="forml" type="text" name="[(#ENV{form_prefixe})]soustitre" value="[(#SOUSTITRE*)]"  size="50"><br>
+]
+[(#ENV{gerer_descriptif})
+	<label><:texte_descriptif_rapide:><br/><:texte_contenu_article:></label><br/>
+	<textarea class="forml" name="[(#ENV{form_prefixe})]descriptif" cols="50" rows="3">[(#DESCRIPTIF*)]</textarea><br/>
+]
+[(#ENV{gerer_chapeau})
+	<label><:info_chapeau:></label><br/>
+	<textarea class="forml" name="[(#ENV{form_prefixe})]chapo" cols="50" rows="3">[(#CHAPO*)]</textarea><br/>
+]
+	<label><:info_texte:><br/><:texte_enrichir_mise_a_jour:></label><br/>
+	[(#TEXTE**|barre_article{[(#ENV{form_prefixe})]texte})]
+	<br/>
+[(#ENV{gerer_ps})
+	<label for="[(#ENV{form_prefixe})]ps"><:info_post_scriptum:></label><br/>
+	<textarea class="forml" name="[(#ENV{form_prefixe})]ps" id="[(#ENV{form_prefixe})]ps" cols="50" rows="1">[(#PS*)]</textarea><br>
+]
+[(#ENV{gerer_urlref})
+	<div class="legend"><:entree_liens_sites:></div>
+	<label><:forum_titre:></label><br/>
+	<input class="lien_titre" type="text" name="[(#ENV{form_prefixe})]lien_titre" value="[(#URL_SITE*)]" size="50">
+	<br/><label><:info_url:></label><br/>
+	<input class="lien_url" type="text" name="[(#ENV{form_prefixe})]lien_url" value="[(#URL_SITE*)]" size="50">
+	</fieldset>
+]
+	<div align="right"><input type="submit" name="[(#ENV{form_prefixe})]enregistrer" class="spip_bouton" value="<:enregistrer:>" /></div>
+      </fieldset>
+</form>
+</BOUCLE_art>

@@ -1,0 +1,11 @@
+
+<BOUCLE_art(ARTICLES){id_article}{statut=#ENV{statut_article}}>
+<div class="wikilike" ondblclick="document.location='[(#ENV{url_modifier_article})]';" >
+[<div class="message">(#ENV*{message})</div>]
+    
+    [<h1>(#TITRE|supprimer_numero)</h1>]
+    <span>[le (#DATE|affdate)&nbsp;][par (#LESAUTEURS)]</span>	
+    [<br/>
+    <span>(#TEXTE|justifier)</span>]
+</div>
+</BOUCLE_art>

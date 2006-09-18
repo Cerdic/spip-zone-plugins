@@ -1,0 +1,118 @@
+
+<B_DOC>
+ <br style="clear:both;" />
+ <a name='portfolio'></a>
+ <div style='background-color: #C0CAD4; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'>
+  <b><span style='text-transform: uppercase'>Portfolio</span></b>
+ </div>
+<div style="position:relative;">
+ <BOUCLE_DOC(DOCUMENTS){id_article}>
+ <div style="width:125px;min-height:160px;_height:160px;float:left;">
+    <div style='text-align:center;'>
+     <div class='verdana1' style='float: right; text-align: right;'>
+
+      <a href="spip.php?action=tourner&amp;arg=#ID_DOCUMENT--90&amp;id_auteur=184&amp;hash=[(#ENV{id_auteur_session}|calculer_hash{tourner-#ID_DOCUMENT--90})]&amp;redirect=[(#ENV*{redirect_url}|rawurlencode)]" title="Rotation 90&deg; &agrave; gauche" class="bouton_rotation">
+  	   <img src='ecrire/img_pack/tourner-gauche.gif' alt="Rotation 90&deg; &agrave; gauche" style='border-width: 0px;' />
+  	  </a><br />
+      <a href="spip.php?action=tourner&amp;arg=#ID_DOCUMENT-90&amp;id_auteur=184&amp;hash=[(#ENV{id_auteur_session}|calculer_hash{tourner-#ID_DOCUMENT-90})]&amp;redirect=[(#ENV*{redirect_url}|rawurlencode)]" title="Rotation 90&deg; &agrave; droite" class="bouton_rotation">
+  	   <img src='ecrire/img_pack/tourner-droite.gif' alt="Rotation 90&deg; &agrave; droite" style='border-width: 0px;' />
+  	  </a><br />
+      <a href="spip.php?action=tourner&amp;arg=#ID_DOCUMENT-180&amp;id_auteur=184&amp;hash=[(#ENV{id_auteur_session}|calculer_hash{tourner-#ID_DOCUMENT-180})]&amp;redirect=[(#ENV*{redirect_url}|rawurlencode)]" title="Rotation 180&deg;" class="bouton_rotation">
+  	   <img src='ecrire/img_pack/tourner-180.gif' alt="Rotation 180&deg;" style='border-width: 0px;' />
+	  </a>
+	 </div>
+	 [(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+	</div>
+	<div class='verdana1'>
+[(#ENV**{show_docs}|=={#ID_DOCUMENT}|?{
+   [(#ID_DOCUMENT**|str_cat{portfolio_article}|md5|bouton_block_visible)],
+   [(#ID_DOCUMENT**|str_cat{portfolio_article}|md5|bouton_block_invisible)]})]
+	#ID_DOCUMENT(#ID_VIGNETTE) - [(#TITRE|?{[(#TITRE|supprimer_numero|couper{20})],[(#URL_DOCUMENT|basename|couper{20})]})]
+   </div>
+   <div class='verdana1' style='text-align: center;'>
+   [(#LARGEUR|?{' ',''})#LARGEUR &#215; #HAUTEUR <:info_pixels:>]
+   [(#LARGEUR|?{'',' '})[(#TAILLE|taille_en_octets)]]
+   </div>
+[(#ENV**{show_docs}|=={#ID_DOCUMENT}|?{
+   [(#ID_DOCUMENT**|str_cat{portfolio_article}|md5|debut_block_visible)],
+   [(#ID_DOCUMENT**|str_cat{portfolio_article}|md5|debut_block_invisible)]})]
+	 <div class='verdana1' style='background:#fff ; border: 1px solid ; padding: 5px; margin-top: 3px;'>
+	  <form method='POST' action="spip.php" style='border: 0px; margin: 0px;'>
+		<input type="hidden" name="id_article" value="[(#ENV{id_article})]" />
+		<input type="hidden" name="action" value="documenter" />
+		<input type="hidden" name="hash" value="[(#ENV{id_auteur_session}|calculer_hash{documenter-#ID_DOCUMENT})]" />
+		<input type="hidden" name="id" value="#ID_ARTICLE" />
+		<input type="hidden" name="show_docs" value="#ID_DOCUMENT" />
+	   <b><:titre_titre_document:></b><br />
+	   <input type='text' onFocus="changeVisible(true, 'valider_doc#ID_DOCUMENT', 'block', 'block');" name='titre_document' class='forml' style='font-size:11px;' value="#TITRE" size='40'><br />
+	   <b><:info_mise_en_ligne:></b><br />
+	   [(#DATE|afficher_jour_mois_annee{_doc})]
+	   <br />
+	   <b><:info_description:></b><br />
+	   <textarea name='descriptif_document' rows='4' class='forml' style='font-size:10px;' cols='*' wrap='soft' onFocus="changeVisible(true, 'valider_doc#ID_DOCUMENT', 'block', 'block');">#DESCRIPTIF</textarea>
+	   <div class='display_au_chargement' id='valider_doc#ID_DOCUMENT' align='right'><input TYPE='submit' class='fondl' NAME='Valider' VALUE='Enregistrer'></div>
+	  </form><hr />
+	    [(#ID_DOCUMENT**|str_cat{portfolio_article_v}|md5|bouton_block_invisible)]
+
+	  <b><:info_vignette_personnalisee:></b>
+  [(#ID_DOCUMENT**|str_cat{portfolio_article_v}|md5|debut_block_invisible)]
+[(#ID_VIGNETTE|choixsivide{' ',''})
+	   <form method='POST' action='spip.php' enctype='multipart/form-data' style='border: 0px; margin: 0px;'>
+		<input type="hidden" name="id_auteur" value="[(#ENV{id_auteur_session})]" />
+		<input type="hidden" name="id" value="[(#ENV{id_chose})]" />
+		<input type="hidden" name="hash" value="[(#ENV{id_auteur_session}|calculer_hash{joindre-vignette})]" />
+		<input name='action' type='hidden' value='joindre' />
+		<input type="hidden" name="arg" value="vignette" />
+		<input type="hidden" name="id_document" value="#ID_DOCUMENT" />
+		<input type="hidden" name="ancre" value="portfolio" />
+		<input type="hidden" name="redirect" value="[(#ENV*{redirect_url})&show_docs=#ID_DOCUMENT]" />
+		<div></div>
+		<div><input name='fichier1' type='File' style='font-size: 10px;' class='forml' size='15'></div>
+		<div align='right'>	<input name='sousaction1' type='submit' value='T&eacute;l&eacute;charger' class='fondo' /></div>
+		 <div style='clear: both;'></div>
+	   </form>
+]
+[(#ID_VIGNETTE|choixsivide{'',' '})
+	 <div class='danger'>
+	  <a href='spip.php?action=supprimer&amp;arg=document-#ID_VIGNETTE&amp;hash=[(#ENV{id_auteur_session}|calculer_hash{supprimer-document-#ID_VIGNETTE})]&redirect=[(#ENV*{redirect_url}|rawurlencode)]' class='cellule-h' >
+	  <table cellpadding='0' valign='middle'>
+	   <tr>
+		<td>
+		 <a href='spip.php?action=supprimer&amp;arg=document-#ID_VIGNETTE&amp;hash=[(#ENV{id_auteur_session}|calculer_hash{supprimer-document-#ID_VIGNETTE})]&redirect=[(#ENV*{redirect_url}|rawurlencode)]'>
+		  <div class='cell-i'><img src='ecrire/img_pack/supprimer.gif' alt="<:icone_supprimer:>"  style='border: 0;background: url("ecrire/img_pack/image-24.gif") center center no-repeat;' /></div>
+		 </a>
+		</td>
+		<td class='cellule-h-lien'>
+		 <a href='spip.php?action=supprimer&amp;arg=document-#ID_VIGNETTE&amp;hash=[(#ENV{id_auteur_session}|calculer_hash{supprimer-document-#ID_VIGNETTE})]&redirect=[(#ENV*{redirect_url}|rawurlencode)]' class='cellule-h'><:icone_supprimer_vignette:></a>
+		</td>
+	   </tr>
+	  </table>
+	  </a>
+	 </div>
+]
+	   <div style='clear: both;'></div>
+	  </div>
+	 </div>
+	 <div class='danger'>
+	  <a href='spip.php?action=supprimer&amp;arg=document-#ID_DOCUMENT&amp;hash=[(#ENV{id_auteur_session}|calculer_hash{supprimer-document-#ID_DOCUMENT})]&ancre=portfolio&redirect=[(#ENV*{redirect_url}|rawurlencode)]' class='cellule-h' >
+	  <table cellpadding='0' valign='middle'>
+	   <tr>
+		<td>
+		 <a href='spip.php?action=supprimer&amp;arg=document-#ID_DOCUMENT&amp;hash=[(#ENV{id_auteur_session}|calculer_hash{supprimer-document-#ID_DOCUMENT})]&ancre=portfolio&redirect=[(#ENV*{redirect_url}|rawurlencode)]'>
+		  <div class='cell-i'><img src='ecrire/img_pack/supprimer.gif' alt="<:icone_supprimer:>"  style='border: 0;background: url("ecrire/img_pack/image-24.gif") center center no-repeat;' /></div>
+		 </a>
+		</td>
+		<td class='cellule-h-lien'>
+		 <a href='spip.php?action=supprimer&amp;arg=document-#ID_DOCUMENT&amp;hash=[(#ENV{id_auteur_session}|calculer_hash{supprimer-document-#ID_DOCUMENT})]&ancre=portfolio&redirect=[(#ENV*{redirect_url}|rawurlencode)]' class='cellule-h'><:icone_supprimer_document:></a>
+		</td>
+	   </tr>
+	  </table>
+	  </a>
+	 </div>
+	 <div style='clear: both;'></div>
+	</div>
+</div>
+   </BOUCLE_DOC>
+</div>
+	 <div style='clear: both;'></div>
+</B_DOC>

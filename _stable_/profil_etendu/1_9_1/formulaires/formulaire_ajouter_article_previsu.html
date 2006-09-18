@@ -1,0 +1,21 @@
+	<h3 class="titre2"><:previsualisation:></h2>
+	<hr/>
+	[(#ENV*{logo})]
+   <div class="zone_texte"> 
+    [<h3 class="titre2">(#ENV*{titre})</h3>]
+    [<h3 class="titre3">(#ENV*{soustitre})</h3><br/>] 	
+    <p class="titre4">[le (#ENV{date_redac}|affdate)&nbsp;][par (#ENV*{auteur})]</p>	
+   </div><br/>
+	<hr/>
+    [<span class="texte2">(#ENV*{descriptif}|justifier)</span>]
+    [<br/>
+    <span class="texte3">(#ENV*{chapo}|justifier)</span>]
+    [<br/>
+    <span class="texte3">(#ENV*{texte}|justifier)</span>]
+    <hr/>
+    [<span class="titre5"><:voir_en_ligne:> :</span>
+    <span class="titre5"><a href="(#ENV*{lien_url})" target="_blank">[(#ENV*{lien_titre})]</a></span><br/><br/>]
+	[<div class="ps">(#ENV*{ps})</div>]
+	[<div class="erreur">(#ENV*{erreur})</div>]
+	[<div style='text-align:right;'><input type='submit' name='valider' class='spip_bouton' value="(#ENV*{bouton})" /></div>]
+<br/>

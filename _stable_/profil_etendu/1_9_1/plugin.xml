@@ -1,0 +1,12 @@
+<plugin>
+ 	<nom>Profil etendu</nom>
+	<auteur>Stephane LAURENT (Bill) - Distribue sous licence GNU/GPL</auteur>
+	<version>1.0</version>
+	<etat>test</etat>
+	<description>gestion d'un profil etendu
+	</description>
+	
+	<options>profil_etendu_options.php</options>
+	<fonctions>profil_etendu_fonctions.php</fonctions>
+	<prefix>profil_etendu</prefix>
+</plugin>

@@ -1,0 +1,22 @@
+<BOUCLE_art(ARTICLES){id_article}{statut=#ENV{statut_article}}>
+[(#ENV*{fma_form})]
+ <div class="legend">
+  <label><:article_accueil:></label>
+ </div>
+ 
+	<input type="hidden" name="[(#ENV{form_prefixe})]id_rubrique" value="[(#ID_RUBRIQUE)]"/>
+<input type="hidden" name='[(#ENV{form_prefixe})]statut_article' value="[(#STATUT)]"/>
+  <input type="hidden" name='[(#ENV{form_prefixe})]lang' value="[(#LANG)]"/>
+  <input type="hidden" name='[(#ENV{form_prefixe})]jour_date' value="[(#DATE|jour)]"/>
+  <input type="hidden" name='[(#ENV{form_prefixe})]jour_mois' value="[(#DATE|mois)]"/>
+  <input type="hidden" name='[(#ENV{form_prefixe})]jour_annee' value="[(#DATE|annee)]"/>
+    <fieldset style="clear:both">
+	<label><:texte_titre_obligatoire:></label><br/>
+	<input class="forml" type="text" name="[(#ENV{form_prefixe})]titre" value="[(#TITRE*)]"  size="50"><br>
+	<label><:info_texte:><br/><:texte_enrichir_mise_a_jour:></label><br/>
+	[(#TEXTE**|barre_article{[(#ENV{form_prefixe})]texte})]
+	<br/>
+	<div align="right"><input type="submit" name="[(#ENV{form_prefixe})]enregistrer" class="spip_bouton" value="<:enregistrer:>" /></div>
+      </fieldset>
+</form>
+</BOUCLE_art>

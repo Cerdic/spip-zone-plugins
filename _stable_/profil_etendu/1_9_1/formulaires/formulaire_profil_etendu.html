@@ -1,0 +1,16 @@
+[
+<p class="message">(#ENV*{message})</p>]
+[
+<form id="[(#ENV{type})]" method='post' action="[(#ENV{self})]" > 
+	
+  [<input type="hidden" name="update_(#ENV{type})" value="oui"/>]
+  
+(#ENV*{form})
+     <div align="right"><input type="submit" class="spip_bouton" value="<:bouton_valider:>" /></div> 
+</form> 
+]
+[
+<script type="text/javascript"><!--
+document.inscription.(#ENV{focus}).focus()
+--></script>
+ ]
