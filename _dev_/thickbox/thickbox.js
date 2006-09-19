@@ -45,9 +45,9 @@ function TB_text() {
 	return false;
 }
 
-function TB_init(){
+function TB_init(root){
 	// add the thickbox to all links of class=thickbox
-	$("a.thickbox").each(
+	$("a.thickbox",root).each(
 		function(i) {
 			if (
 				(this.type && this.type.match(/^image[\/](jpeg|gif|png)$/i))
