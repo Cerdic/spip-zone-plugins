@@ -60,7 +60,17 @@ function exec_config_habillages() {
  	echo '</div></div><div class="cadre-padding" style="overflow:hidden;">';
 	echo "</div></div><div style='height: 5px;'></div>";
 
-	$liste_themes = preg_files(_DIR_PLUGIN_HABILLAGES.'/prive/themes/',"/theme[.]xml$");
+	if (_DIR_PLUGIN_HABILLAGES.'/_themes_/prive/') {
+		$themes_dir = _DIR_PLUGIN_HABILLAGES.'/_themes_/prive/';
+	}
+	else if ('../'._DIR_PLUGIN_HABILLAGES.'/_themes_/prive/') {
+		$themes_dir = '../'._DIR_PLUGIN_HABILLAGES.'/_themes_/prive/';
+	}
+	else if ('../../'._DIR_PLUGIN_HABILLAGES.'/_themes_/prive/') {
+		$themes_dir = '../../'._DIR_PLUGIN_HABILLAGES.'/_themes_/prive/';
+	}
+	
+	$liste_themes = preg_files($themes_dir,"/theme[.]xml$");
 	foreach ($liste_themes as $fichier){
 			$c = dirname($fichier)."/img_pack/";
     	echo "<a name='access-c' href='#access-c' accesskey='c'></a><div class='cadre-r'><div style='position: relative;'><div class='cadre-titre' style='margin: 0px;'>";
@@ -93,9 +103,15 @@ echo "<br />";
 debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_public-32.png", false, "", _T('habillageprive:titre_habillage_public'));
  	
 	$squelette = $_REQUEST['squelette'];
- 	$plugin_options_file = "$plugin_directory/habillages_options.php";
  	$plugin_directory = _DIR_PLUGIN_HABILLAGES;
+ 	$plugin_options_file = "$plugin_directory/habillages_options.php";
  	
+ 	if (chmod($plugin_options_file, 0777 == FALSE)) {
+	 	echo 'Vous régler vos droits d\'écriture sur le fichier '._DIR_PLUGIN_HABILLAGES.'/habillages_options.php';
+	 	echo '<input type="submit" value="'._T('valider').'"/>';
+ 	}
+ 	
+ 	else {
  	if ($squelette == "initial") {
 	 	chmod($plugin_options_file, 0777);
 		$open_plugin_options_file = fopen($plugin_options_file, 'w+');
@@ -123,7 +139,17 @@ debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_publ
  	echo '</div></div><div class="cadre-padding" style="overflow:hidden;">';
 	echo "</div></div><div style='height: 5px;'></div>";
  	
- 	$dossier = opendir ($plugin_directory.'/public/themes/');
+	if (_DIR_PLUGIN_HABILLAGES.'/_themes_/prive/') {
+		$skel_dir = _DIR_PLUGIN_HABILLAGES.'/_themes_/';
+	}
+	else if ('../'._DIR_PLUGIN_HABILLAGES.'/_themes_/') {
+		$skel_dir = '../'._DIR_PLUGIN_HABILLAGES.'/_themes_/';
+	}
+	else if ('../../'._DIR_PLUGIN_HABILLAGES.'/_themes_/') {
+		$skel_dir = '../../'._DIR_PLUGIN_HABILLAGES.'/_themes_/';
+	}
+	
+ 	$dossier = opendir ($skel_dir.'public/');
 	while ($fichier = readdir ($dossier)) {
     	if ($fichier != "." && $fichier != "..") {
 	    	echo "<a name='access-c' href='#access-c' accesskey='c'></a><div class='cadre-r'><div style='position: relative;'><div class='cadre-titre' style='margin: 0px;'>";
@@ -144,8 +170,8 @@ debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_publ
 		    	echo " checked";
 	    	}
 	    	echo ">";
-        	
-        	$theme_file = $plugin_directory.'/public/themes/'.$fichier.'/theme.xml';
+			
+        	$theme_file = $skel_dir.'public/'.$fichier.'/theme.xml';
 	    	if (file_exists($theme_file)) {
         	$open_theme_file = fopen($theme_file, 'r');
 			$theme_file_size = filesize ($theme_file);
@@ -174,7 +200,7 @@ debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_publ
 	closedir ($dossier);
 	
 	echo '<input type="submit" value="'._T('valider').'"/>';
-	
+	}
 	echo '</form>';
 fin_cadre_trait_couleur();
 #### FIN DE L'ENCADRE QUI GERE L'HABILLAGE PUBLIC #######################################

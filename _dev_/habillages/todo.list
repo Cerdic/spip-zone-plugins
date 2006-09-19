@@ -4,3 +4,5 @@
 - Dans le gestionnaire de l'espace public, mettre un "aperçu" pour voir le squelette en situation sur le site public.
 - Insérer captures ecrans via un fichier thème à la racine des dossiers de thèmes.
 - Mise à jour graphique des thèmes.
+- Trouver un moyen de faire des captures d'écran homogène niveau graphique.
+- Voir pour ajouter des thèmes de couleurs (simple trippottage de habillages_options.php sur le même mode que la gestion des habillages publics).
