@@ -1,19 +1,0 @@
-<plugin>        <nom> <!-- Nom du plugin -->        pagination_avancee        </nom>        <auteur>        <!-- Auteur du plugin -->        Maïeul Rouquette (maieulrouquette@tele2.fr)        </auteur>        <version>        0.1        </version>        <etat>        test        
-        </etat>        <description>      
-      	/!\ Suite à l'introduction du systeme de modeles sur spip 1.9.1, je n'assurerai plus la mise à jour de ce plugin. Signé : Maïeul Rouquette
-      	
-      	Permet d'avoir de nouveaux modele de pagination.
-        
-        On peux passer un parametre modele au balise #PAGINATIONS et #ANCRE_PAGINATION.
-        
-        Est livré avec deux modéle :
-        
--* dist : modèle standard de Spip
--* page : affiche les pages de 1 à n
-        
-        On peut metter ses propres modéles dans inc/        </description>       <lien>[http://zone.spip.org/trac/spip-zone/wiki/Pagination_avancee ->http://zone.spip.org/trac/spip-zone/wiki/Pagination_avancee]
-       </lien>        <prefix>
-        pagination_avancee
-        </prefix>
-        <fonctions> <!-- fichier charge a chaque recalul de page -->        pagination_avancee_fonctions.php        </fonctions>        <!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction        sur le mode Rien::        ainsi les fonctions hors espace de nommage ne peuvent etre appelees        ce parametre est obligatoire et doit etre non vide        -->        
-                <!-- Definitions des fonctions qui s'inserent dans les pipelines -->                <!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.        --></plugin>

@@ -18,7 +18,7 @@
 
 		if (!is_dir($dest)
 		OR !is_writable($dest))
-			return $dest; // erreur
+			return "Impossible d'ecrire dans ".$dest; // erreur
 
 		// Checkout ?
 		if (!file_exists($entries = "$dest/.svn/entries")) {

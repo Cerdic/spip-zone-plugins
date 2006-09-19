@@ -1,3 +1,40 @@
-svn://zone.spip.org/spip-zone/_plugins_/_stable_/version_texte plugins/vtx
-svn://zone.spip.org/spip-zone/_plugins_/_stable_/switcher plugins/sw
+## Fichier d'exemple ##
+##
+## On note ici la source SVN de chaque paquet qui nous interesse
+## et sa destination sur le disque (a partir de la racine du site)
+##
+##
+## la plupart des sources sont commentees :
+## recopiez ce fichier dans votre repertoire personnel, et
+## ajoutez/configurez ce qu'il vous faut
+##
+######################################################################
 
+
+##### SPIP
+# la branche 1.9, a la racine
+# svn://trac.rezo.net/spip/branches/spip-1.9 .
+
+
+
+##### PLUGINS
+# auto-installation de ce plugin svn_update
+# svn://zone.spip.org/spip-zone/_plugins_/_dev_/svn_update plugins/svn_update
+
+# Forms en version 1.9.1
+svn://zone.spip.org/spip-zone/_plugins_/_stable_/forms/1_9_1 plugins/Forms
+
+# jQuery et Thickbox
+svn://zone.spip.org/spip-zone/_plugins_/_dev_/-jQuery plugins/jquery
+svn://zone.spip.org/spip-zone/_plugins_/_dev_/thickbox plugins/thickbox
+
+
+##### SQUELETTES
+# sedna
+svn://zone.spip.org/spip-zone/_squelettes_/sedna sedna
+
+# et enfin mes squelettes, pris dans mon svn perso
+# svn://mon.svn.perso/chemin/vers/mes/squelettes squelettes
+
+# ou dans spip-party
+# svn://zone.spip.org/spip-zone/_squelettes_/spip-party squelettes

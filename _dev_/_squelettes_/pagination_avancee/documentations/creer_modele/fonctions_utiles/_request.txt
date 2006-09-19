@@ -1,4 +1,0 @@
-_request()
-Permet de récupérer la valeur d'un paramétré de l'URL.
-
-Exemple request("debut_xxx") return un nombre n

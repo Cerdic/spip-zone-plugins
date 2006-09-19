@@ -1,9 +1,0 @@
-Suivre la procédure de la documentation de Spip (http://www.spip.net/fr_article3396.html?).
-
-
-Dans vos squelettes, remplacer #PAGINATION par #PAGINATION{modèle} et #ANCRE_PAGINATION par #ANCRE_PAGINATION{modèle}, où modèle correspond au modèle de pagination que vous désirer (voir le fichier modèle.txt pour des explications). Si vous ne changer rien, le modèle standard sera gardé.
-
-
-
-
-

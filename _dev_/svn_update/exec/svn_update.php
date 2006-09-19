@@ -45,8 +45,9 @@ function exec_svn_update() {
 	foreach ($config as $l) {
 		$l = trim($l);
 		if ($l AND substr($l,0,1) != "#") {
-			list(,$dest) = explode(' ', $l);
+			list($src,$dest) = explode(' ', $l);
 			$dirs_ok[$dest] = $l;
+			$sources[$dest] = $src;
 		}
 	}
 
@@ -71,8 +72,9 @@ function exec_svn_update() {
 		<input type='hidden' name='exec' value='$exec' />
 		<select name='dir_svn'>
 		<option value=''></option>";
-		foreach ($dirs_ok as $dir => $ignore) {
-			echo "<option value='$dir'>".$dir."</option>\n";
+		foreach ($dirs_ok as $dir => $source) {
+			echo "<option value='$dir'>".$dir
+				." depuis ".$sources[$dir]."</option>\n";
 		}
 		echo "<option value='-1'>** "._L('Tous')."</option>\n";
 		echo "</select>
