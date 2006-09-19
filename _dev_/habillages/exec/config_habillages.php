@@ -117,7 +117,7 @@ debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_publ
 	}
 	
  	if (chmod($plugin_options_file, 0777 == FALSE)) {
-	 	echo 'Vous régler vos droits d\'écriture sur le fichier '._DIR_PLUGIN_HABILLAGES.'/habillages_options.php';
+	 	echo 'Vous  régler vos droits d\'écriture sur le fichier '._DIR_PLUGIN_HABILLAGES.'/habillages_options.php';
 	 	echo '<input type="submit" value="'._T('valider').'"/>';
  	}
  	
@@ -155,12 +155,12 @@ debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_publ
 	    	echo "<a name='access-c' href='#access-c' accesskey='c'></a><div class='cadre-r'><div style='position: relative;'><div class='cadre-titre' style='margin: 0px;'>";
 	    	echo '<INPUT type=radio name="squelette" value="'.$fichier.'"';
 	    	if ($_REQUEST['squelette'] == "") {
-		    	$cleaned_path = str_replace('../', "", _DIR_PLUGIN_HABILLAGES);
+		    	$cleaned_path = str_replace('../', "", $skel_dir);
 		    	$plugin_options_file = "$plugin_directory/habillages_options.php";
 		    	$open_plugin_options_file = fopen($plugin_options_file, 'r');
 				$plugin_options_file_size = filesize ($plugin_options_file);
 				$read_plugin_options_file = fread ($open_plugin_options_file, $plugin_options_file_size);
-				$search_skel_name = eregi("\/public\/themes\/(.*)\/squelettes", $read_plugin_options_file, $skel_name);
+				$search_skel_name = eregi("\/public\/(.*)\/squelettes", $read_plugin_options_file, $skel_name);
 				if ($skel_name[1] == $fichier) {
 		    	echo " checked";
 	    		}
@@ -182,7 +182,7 @@ debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_publ
 			$search_theme_name = eregi("<description>(.*)</description>", $read_theme_file, $theme_description);
 			echo '<strong>'.$theme_name[1].'</strong> version '.$theme_version[1].'</div></div><div class="cadre-padding" style="overflow:hidden;">';
 				echo '<i><medium>Auteur : '.$theme_author[1].'</medium></i><br />';
-				echo '<div style="float:left";><img src="../'.$plugin_directory.'/public/themes/'.$fichier.'/capture.png" alt="description" class="preview" /></div>';
+				echo '<div style="float:left";><img src="../'.$skel_dir.'public/'.$fichier.'/capture.png" alt="description" class="preview" /></div>';
 
 				echo '<small>'.$theme_description[1].'</small>';
 	        	echo "</div></div><div style='height: 5px;'></div>";
@@ -192,7 +192,7 @@ debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_publ
     		else {
 	    		echo '<strong>'.$fichier.'</strong>';
 	    		echo '</div></div><div class="cadre-padding" style="overflow:hidden;">';
-	    		echo '<div style="float:left";><img src="../'.$plugin_directory.'/public/themes/'.$fichier.'/capture.png" alt="description" class="preview" /></div>';
+	    		echo '<div style="float:left";><img src="../'.$skel_dir.'public/'.$fichier.'/capture.png" alt="description" class="preview" /></div>';
 	    		echo "</div></div><div style='height: 5px;'></div>";
     		}
     	}
