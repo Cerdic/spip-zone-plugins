@@ -24,8 +24,8 @@ margin-left:1%}
 #texte >.vertical,#texte >.horizontal  {margin-top:-3ex}
 
 form.grille{float:left;
-clear:both; //nécéssaire pour que safari place bien les erreurs
-border-right:1px solid #888888;
+clear:both; 
+
 padding:0;
 padding-right:2%;
 margin:0; 

@@ -2,7 +2,7 @@
 var sens='h';
 
 $(document).ready(function(){
-	$('table.grille tr td input').css('cursor', 'w-resize').bind('contextmenu', changeDir).bind('keypress', mykey);
+	$('table.grille tr td input').css('cursor', 'e-resize').bind('contextmenu', changeDir).bind('keypress', mykey);
 	
 	
 });
@@ -21,13 +21,12 @@ function changeDir(e) {
 }
 
 function mykey(e) {
-
-	var p=this.parentNode;
-	var pp=p.parentNode;
-	var x=parseInt(p.id);
-	var y=parseInt(pp.id);
+	var m = this.name.match(/col(\d+)lig(\d+)/);
 	
-	$('h1').each(css('color','blue'));
+	var x=m[1];
+	var y=m[2];
+	
+	
 	switch(e.keyCode) {
 		case 40: y++; break;
 		case 38: y--; break;
