@@ -106,6 +106,16 @@ debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_publ
  	$plugin_directory = _DIR_PLUGIN_HABILLAGES;
  	$plugin_options_file = "$plugin_directory/habillages_options.php";
  	
+ 	if (_DIR_PLUGIN_HABILLAGES.'/_themes_/prive/') {
+		$skel_dir = _DIR_PLUGIN_HABILLAGES.'/_themes_/';
+	}
+	else if ('../'._DIR_PLUGIN_HABILLAGES.'/_themes_/') {
+		$skel_dir = '../'._DIR_PLUGIN_HABILLAGES.'/_themes_/';
+	}
+	else if ('../../'._DIR_PLUGIN_HABILLAGES.'/_themes_/') {
+		$skel_dir = '../../'._DIR_PLUGIN_HABILLAGES.'/_themes_/';
+	}
+	
  	if (chmod($plugin_options_file, 0777 == FALSE)) {
 	 	echo 'Vous régler vos droits d\'écriture sur le fichier '._DIR_PLUGIN_HABILLAGES.'/habillages_options.php';
 	 	echo '<input type="submit" value="'._T('valider').'"/>';
@@ -121,10 +131,10 @@ debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_publ
 	}
 	
 	else if ($squelette != "") {
-		$cleaned_path = str_replace('../', "", _DIR_PLUGIN_HABILLAGES);
+		$cleaned_path = str_replace('../', "", $skel_dir);
 		chmod($plugin_options_file, 0777);
 	 	$open_plugin_options_file = fopen($plugin_options_file, 'w+');
-		$new_content = "<?php\n\$GLOBALS['dossier_squelettes']='".$cleaned_path."/public/themes/$squelette/squelettes';\n?>"; 
+		$new_content = "<?php\n\$GLOBALS['dossier_squelettes']='".$cleaned_path."public/$squelette/squelettes';\n?>"; 
 		$write = fwrite($open_plugin_options_file, $new_content);
 		fclose($open_plugin_options_file);
 	}
@@ -138,16 +148,6 @@ debut_cadre_trait_couleur("../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillage_publ
  	echo "<strong>Revenir &agrave; l'habillage d'origine</strong>";
  	echo '</div></div><div class="cadre-padding" style="overflow:hidden;">';
 	echo "</div></div><div style='height: 5px;'></div>";
- 	
-	if (_DIR_PLUGIN_HABILLAGES.'/_themes_/prive/') {
-		$skel_dir = _DIR_PLUGIN_HABILLAGES.'/_themes_/';
-	}
-	else if ('../'._DIR_PLUGIN_HABILLAGES.'/_themes_/') {
-		$skel_dir = '../'._DIR_PLUGIN_HABILLAGES.'/_themes_/';
-	}
-	else if ('../../'._DIR_PLUGIN_HABILLAGES.'/_themes_/') {
-		$skel_dir = '../../'._DIR_PLUGIN_HABILLAGES.'/_themes_/';
-	}
 	
  	$dossier = opendir ($skel_dir.'public/');
 	while ($fichier = readdir ($dossier)) {
