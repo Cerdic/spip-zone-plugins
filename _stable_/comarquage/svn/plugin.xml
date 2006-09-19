@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Comarquage Service Public avec La Documentation fran&ccedil;aise
+	Comarquage Service Public avec La Documentation fran&ccedil;aise (version utilisant les mod&egrave;les de SPIP 1.9.1)
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Cedric MORIN [notre-ville.net->http://www.notre-ville.net]
@@ -10,10 +10,10 @@ _ Licence GPL
 	0.10
 	</version>
 	<etat>
-	stable
+	dev
 	</etat>
 	<description>
-	Gestion du flux XML de La Documentaion fran&ccedil;aise et insertion du comarquage dans le site
+	Gestion du flux XML de la Documentation fran&ccedil;aise et insertion du comarquage dans le site
 _	le flux s'ins&egrave;re dans un article au moyen de la balise
 _ <code><comarquage></code>
 _ Vous pouvez pr&eacute;ciser une page pr&eacute;cise en definissant les attributs xml et xsl de l'url :
