@@ -10,7 +10,7 @@ _ &copy; 2006 - Distribu&eacute; sous licence GPL
 	0.1
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-	stable
+	experimental
 	</etat>
 	<description>
 	Ici decrivez plus ou moins longuement ce que fait votre plugin
