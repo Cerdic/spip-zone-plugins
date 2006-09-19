@@ -1,0 +1,27 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	R&eacute;vision des espaces ins&eacute;cables
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	fil@rezo.net
+_ &copy; 2005 - Distribu&eacute; sous licence GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+	Dans l'espace priv&eacute;, souligne en gris les espaces ins&eacute;cables, pour faciliter la relecture.
+_ Compatibilit&eacute; : SPIP versions 1.9.0 et sup&eacute;rieures
+	</description>
+	<prefix>
+	RevisionNbsp
+	</prefix>
+	<pipeline>
+		<nom>post_typo</nom>
+		<action>revision_nbsp</action>
+		<inclure>revision_nbsp.php</inclure>
+	</pipeline>
+</plugin>
