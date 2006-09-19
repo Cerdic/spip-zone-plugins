@@ -1,9 +1,9 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-Orientation	
+	Orientation des images: portrait ou paysage
 </nom>
 	<auteur>	<!-- Auteur du plugin -->
-	  Pierre Andrews (Mortimer) &amp; IZO</auteur>
+	  Pierre Andrews (Mortimer) & IZO</auteur>
 <lien>[->http://www.spip-contrib.net/Portrait-ou-Paysage]</lien>
 
 	<version>
@@ -13,7 +13,7 @@ Orientation
 	test
 	</etat>
 	<description>
-Le plugin orientation ajoute le crit&egrave;re {portrait} , {carre} ou {paysage} pour le classement des photos.
+Le plugin orientation ajoute les crit&egrave;res <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code> pour le classement des photos.
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
