@@ -72,39 +72,40 @@ function TriAuteurs_boite_tri_auteurs($id_article) {
   $to_ret = '';
 
   if(spip_abstract_count($rez) > 1) {
-	$to_ret .= '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_AUTEURS.'/javascript/prototype.js"></script>';
-	$to_ret .= '		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_AUTEURS.'/javascript/scriptaculous.js"></script>';
-	$to_ret .= '	<script type="text/javascript">';
-	$to_ret .= "function TriAuteurs_initialiseSort() {
-	Sortable.create('liste_tri_auteurs',{onUpdate:updateTriAuteur});
-  }";
-	$hash = calculer_action_auteur("tri_auteurs $id_article");
-	$to_ret .= "function updateTriAuteur() {
-           var url = '".generer_url_action('tri_auteurs')."';
-           var pars = Sortable.serialize('liste_tri_auteurs',{name:'o'})+'&id_article=$id_article&id_auteur=$connect_id_auteur&hash=$hash';
-           new Ajax.Request(url,{method:'post',parameters:pars});
-  }";
-	$to_ret .= "Event.observe(window, 'load', TriAuteurs_initialiseSort, false);";
-	$to_ret .= ' </script>';
-	
 	
 	
 	$to_ret .= '<div>&nbsp;</div>';
 	$to_ret .= '<div class="bandeau_rubriques" style="z-index: 1;">';
 	$to_ret .= "<div style='position: relative;'>";
 	$to_ret .= "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>
-	<img src='"._DIR_PLUGIN_TRI_MOTS."/img/updown.png'/></div>";
+	<img src=\""._DIR_PLUGIN_TRI_AUTEURS."/img/updown.png\"/></div>";
 	$to_ret .= "<div style='background-color: white; color: black; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>"._T('triauteurs:ordonner_auteurs')."</b></div>";
 	$to_ret .= "</div>";
 	
-	$to_ret .= '<div class="plan-articles">';
-	$to_ret .= '<ol id="liste_tri_auteurs">';
+	$to_ret .= '<div class="plan-articles" id="liste_tri_auteurs_cont">';
+	$to_ret .= '<div id="liste_tri_auteurs">';
 	while($row = spip_abstract_fetch($rez)) {
-	  $to_ret .= '<li id="auteur_'.$row['id_auteur'].'">';
-	  $to_ret .= $row['nom'].'</li>';
+	  $to_ret .= '<div id="auteur_'.$row['id_auteur'].'">';
+	  $to_ret .= $row['nom'].'</div>';
 	}
-	$to_ret .= '</ol>';
+	$to_ret .= '</div>';
 	$to_ret .= '</div></div>';
+		$to_ret .= "\n".'		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_AUTEURS.'/javascript/prototype.js"></script>';
+	$to_ret .= "\n".'		<script type="text/javascript" src="'._DIR_PLUGIN_TRI_AUTEURS.'/javascript/scriptaculous.js"></script>';
+	$to_ret .= "\n".'	<script type="text/javascript">//<![CDATA[';
+	$to_ret .= "\nfunction TriAuteurs_initialiseSort() {
+	Sortable.create('liste_tri_auteurs',{onUpdate:updateTriAuteur,ghosting:true,tag:'div'});
+  }";
+	$hash = calculer_action_auteur("tri_auteurs $id_article");
+	$to_ret .= "\nfunction updateTriAuteur() {
+           var url = '".generer_url_action('tri_auteurs')."';
+           var pars = Sortable.serialize('liste_tri_auteurs',{name:'o',tag:'div'})+'&id_article=$id_article&id_auteur=$connect_id_auteur&hash=$hash';
+           new Ajax.Request(url,{method:'post',parameters:pars});
+  }";
+	//	$to_ret .= "Event.observe(window, 'load', TriAuteurs_initialiseSort, false);";
+	$to_ret .= "\n".'TriAuteurs_initialiseSort();'.
+	  "\n".'//]]></script>';
+	
   }
   return $to_ret;
 }
