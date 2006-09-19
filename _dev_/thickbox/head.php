@@ -25,7 +25,7 @@ var init_f = function() {
 	};
 }
 //onAjaxLoad is defined in private area only
-if(onAjaxLoad) onAjaxLoad(init_f);
+if(typeof onAjaxLoad == "function") onAjaxLoad(init_f);
 $(document).ready(init_f);
 // --></script>';
 
