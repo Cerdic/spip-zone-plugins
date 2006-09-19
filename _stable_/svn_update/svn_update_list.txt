@@ -19,7 +19,7 @@
 
 ##### PLUGINS
 # auto-installation de ce plugin svn_update
-# svn://zone.spip.org/spip-zone/_plugins_/_dev_/svn_update plugins/svn_update
+# svn://zone.spip.org/spip-zone/_plugins_/_stable_/svn_update plugins/svn_update
 
 # Forms en version 1.9.1
 svn://zone.spip.org/spip-zone/_plugins_/_stable_/forms/1_9_1 plugins/Forms
