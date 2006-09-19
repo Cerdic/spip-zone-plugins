@@ -1,5 +1,6 @@
 <?php
 
+	define('_SVN_COMMAND', 'svn');
 
 	// la fonction qui fait le travail
 	function update_svn($l) {
@@ -54,8 +55,7 @@
 
 	}
 
-	function traiter_config_svn($file = 'svn_update.txt') {
-		$config = file($file);
+	function traiter_config_svn($config = array()) {
 		foreach($config as $l) {
 			echo "<hr /><b>", htmlspecialchars($l), "</b>";
 			$res = update_svn($l);
@@ -65,11 +65,8 @@
 					"</b>";
 			if (is_array($res))
 				echo "<br />".nl2br(htmlspecialchars(join("\n", $res)));
+			echo "<br />\n";
 		}
 	}
-
-	define('_SVN_COMMAND', '/sw/bin/svn');
-	define('_SVN_COMMAND', 'svn');
-	traiter_config_svn();
 
 ?>

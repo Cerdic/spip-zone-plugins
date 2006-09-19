@@ -1,29 +1,15 @@
 <?php
 
+include_spip('inc/svn_update');
+
 # redefinissables dans ecrire/mes_options ; si on veut en mettre
 # plusieurs separer par des virgules
 define('_SVN_UPDATE_AUTEURS', '1');
-define('_SVN_UPDATE_DIRS', './');
-
+# fichier source
+define('_SVN_UPDATE_FILE', find_in_path('svn_update_list.txt'));
 
 # securite
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
-
-// la fonction qui fait le travail
-function update_svn($dir) {
-
-	$user = ''; # TODO si on veut
-
-	$out = array();
-	$command = "svn $user update ".$dir;
-	spip_log($command);
-
-	exec($command,$out);
-
-	return end($out);
-}
-
 
 function exec_svn_update() {
 	global $connect_statut, $connect_id_auteur, $connect_toutes_rubriques;
@@ -49,27 +35,33 @@ function exec_svn_update() {
 	debut_gauche();
 	debut_droite();
 
-	$dirs = explode(':', _SVN_UPDATE_DIRS);
+	if (!defined('_SVN_UPDATE_FILE')
+	OR !file_exists(_SVN_UPDATE_FILE)) {
+		die ("Fichier de configuration "._SVN_UPDATE_FILE." absent");
+	}
+	$config = file(_SVN_UPDATE_FILE);
+
 	$dirs_ok = array();
-	foreach ($dirs as $dir) {
-		$test = _DIR_RACINE.$dir.'.svn';
-		if (is_dir($test) AND is_writeable($test))
-			$dirs_ok[] = $dir;
+	foreach ($config as $l) {
+		$l = trim($l);
+		if ($l AND substr($l,0,1) != "#") {
+			list(,$dest) = explode(' ', $l);
+			$dirs_ok[$dest] = $l;
+		}
 	}
 
 	if ($dirs_ok) {
 
+		chdir(_DIR_RACINE);
 		// Appliquer la demande
+		if (_request('dir_svn') == -1) {
+			traiter_config_svn($config);
+		} else
 		if ($dir_svn = _request('dir_svn')
-		AND in_array($dir_svn, $dirs_ok)) {
-			echo "<tt>&gt; svn update <b>$dir_svn</b></tt><br />\n";
-			
-			$retour = update_svn(_DIR_RACINE.$dir_svn);
-			if (!$retour)
-				$retour = "Erreur SVN";
-			
-			echo "<tt>$retour</tt><hr />\n";
+		AND isset($dirs_ok[$dir_svn])) {
+			traiter_config_svn(array($dirs_ok[$dir_svn]));
 		}
+		chdir(_DIR_RESTREINT_ABS);
 
 
 		// Menu
@@ -77,10 +69,12 @@ function exec_svn_update() {
 		echo _L("Choisir le r&eacute;pertoire &agrave; mettre &agrave; jour&nbsp;: ");
 		echo "<form action='./?exec=$exec' method='post'>
 		<input type='hidden' name='exec' value='$exec' />
-		<select name='dir_svn'>";
-		foreach ($dirs_ok as $dir) {
+		<select name='dir_svn'>
+		<option value=''></option>";
+		foreach ($dirs_ok as $dir => $ignore) {
 			echo "<option value='$dir'>".$dir."</option>\n";
 		}
+		echo "<option value='-1'>** "._L('Tous')."</option>\n";
 		echo "</select>
 		<input type='submit' value='Update' />
 		</form>
