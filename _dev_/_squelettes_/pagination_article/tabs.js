@@ -26,25 +26,21 @@ $.tabs = function(containerId, start) {
 
 // mise en forme des articles a paginer pour appliquer le script tab
 $(document).ready(function(){
-	var art=1;
+	var art=1;	
 	$("div.paginer_intertitres").each(function(){
 		var group=this;
-
 		var sect = 1;
 		var liste = "<ul class='anchors'>";
-
 		$("div.section",group).each(function(){
 			liste += "<li><a href='#art"+art+"sect"+sect+"'>"+$('span.titre_onglet',this).get(0).innerHTML+"</a></li>";
-			$(this).set('id',"art"+art+"sect"+sect);
-			$(this).set('class',"anchor");
+			$(this).id('art'+art+'sect'+sect);
+			$(this).addClass('anchor');
 			sect += 1;
 		});
 		liste += "</ul>";
 		$("div#"+"art"+art+"sect1",group).before(liste);
-		$(this).set('id','article-container'+art);
+		$(this).id('article-container'+art);
 		$.tabs('article-container'+art);
 		art+=1;
 	});
-	
-	//
 });
