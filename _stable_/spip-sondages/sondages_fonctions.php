@@ -84,7 +84,7 @@
 	function cron_sondages($t) {
 		$requete_tous_les_sondages_en_ligne = 'SELECT id_sondage FROM spip_sondages WHERE en_ligne="oui"';
 		$resultat_tous_les_sondages_en_ligne = spip_query($requete_tous_les_sondages_en_ligne);
-		while (list($id_sondage) = spip_fetch_array($resultat_tous_les_sondages_en_ligne),SPIP_NUM) {
+		while (list($id_sondage) = spip_fetch_array($resultat_tous_les_sondages_en_ligne,SPIP_NUM) ) {
 			sondages_mettre_a_jour_sondage($id_sondage);
 		}
 		return true;
