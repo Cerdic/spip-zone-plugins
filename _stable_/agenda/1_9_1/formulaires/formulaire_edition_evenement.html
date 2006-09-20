@@ -52,20 +52,20 @@ return false;"><img src='#CHEMIN{img_pack/croix.png}' width='12' height='12' sty
 </span>
 
 [(#REM) DATES]
-<span class='date-titre'><:pimagenda:evenement_date:></span>
+<span class='date-titre'><:agenda:evenement_date:></span>
 <span class='date-visu'>
-<:pimagenda:evenement_date_de:>
+<:agenda:evenement_date_de:>
 [(#ENV**{valeurs}|table_valeur{date_evenement_debut}|WCalendar_controller{'_evenement_debut'})]
 <span class='agenda_visible_au_chargement' id='afficher_horaire_debut_evenement'>
-<:pimagenda:evenement_date_a:>
-[(#ENV**{valeurs}|table_valeur{date_evenement_debut}|PIMAgenda_heure_selector{'_debut'})]
+<:agenda:evenement_date_a:>
+[(#ENV**{valeurs}|table_valeur{date_evenement_debut}|Agenda_heure_selector{'_debut'})]
 </span>
 <br/>
-<:pimagenda:evenement_date_au:>
+<:agenda:evenement_date_au:>
 [(#ENV**{valeurs}|table_valeur{date_evenement_fin}|WCalendar_controller{'_evenement_fin'})]
 <span class='agenda_visible_au_chargement' id='afficher_horaire_fin_evenement'>
-<:pimagenda:evenement_date_a:>
-[(#ENV**{valeurs}|table_valeur{date_evenement_fin}|PIMAgenda_heure_selector{'_fin'})]
+<:agenda:evenement_date_a:>
+[(#ENV**{valeurs}|table_valeur{date_evenement_fin}|Agenda_heure_selector{'_fin'})]
 </span>
 </span>
 
