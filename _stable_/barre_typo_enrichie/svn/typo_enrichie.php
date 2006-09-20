@@ -149,7 +149,7 @@ function BarreTypoEnrichie_post_propre($texte) {
 		$remplace1 = array(
 			/* 15 */ 	"<div style=\"text-align:right;\" class=\"spip\">$1</div>",
 			/* 17 */ 	"<div style=\"text-align:center;\" class=\"spip\">$1</div>",
-			/* 19 */ 	"<div class=\"texteencadre-spip\ spip">$1</div>",
+			/* 19 */ 	"<div class=\"texteencadre-spip\">$1</div>",
 			/* 21 */ 	"<strong class=\"caractencadre2-spip spip\">",
 			/* 21b */ 	"<strong class=\"caractencadre-spip spip\">",
 			/* 22 */	"</strong>",
