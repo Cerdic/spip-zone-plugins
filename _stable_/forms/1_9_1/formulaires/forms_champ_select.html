@@ -16,6 +16,7 @@
 	&nbsp; <input type='radio' name='#CHAMP' value='#CHOIX' id='#CHOIX'
 	[(#CHOIX|=={[(#ENV**{valeur}|forms_valeur{#CHAMP})]}|?{'checked="checked"',''})] />
 	<label for='#CHOIX'>[(#TITRE|supprimer_numero)]</label>
+	</span>
 ]
 	</BOUCLE_choix>
 [(#TOTAL_BOUCLE|>{6}|?{' ',''})
