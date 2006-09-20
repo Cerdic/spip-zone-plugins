@@ -35,7 +35,7 @@ $formschampchoix_field = array(
 		"id_form"	=> "bigint(21) NOT NULL",
 		"cle" => "bigint(21) NOT NULL",
 		"choix" => "varchar(100) NOT NULL DEFAULT ''",
-		"titre" => "varchar(100)"
+		"titre" => "text"
 );
 $formschampchoix_key = array(
 	"PRIMARY KEY"	=> "id_form, cle, choix",
