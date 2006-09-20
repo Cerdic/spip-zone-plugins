@@ -201,7 +201,7 @@ function exec_portfolio(){
 	$group = $requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '';
 	$limit = $requete['LIMIT'] ? (' LIMIT ' . $requete['LIMIT']) : '';
 
-	$tmp_var = "debut";
+	$tmp_var = "t_debut";
 
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $from$join$where"));
 	//if (! ($cpt = $cpt['n'])) return $tous_id ;
@@ -222,7 +222,7 @@ function exec_portfolio(){
 		$_GET['t_debut'] = $deb_aff; // pour que afficher_tranches_requete le retrouve ...
 	}
 
-	$deb_aff = intval(_request('t_' .$tmp_var));
+	$deb_aff = intval(_request($tmp_var));
 	if ($cpt > 1.5*$nb_aff) {
 		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
 		$limit = ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : "99999");
@@ -480,7 +480,9 @@ function exec_portfolio(){
 					$args.="$key=".urlencode($val)."&";
 
 			global $couleur_claire;
-			afficher_portfolio(
+			$f = 'afficher_portfolio';
+			if (!function_exists($f)) $f='formulaire_documenter';
+			$ret = $f(
 				$documents,	# liste des documents, avec toutes les donnees
 				"article",	# article ou rubrique ?
 				'portfolio',	# album d'images ou de documents ?
@@ -488,16 +490,8 @@ function exec_portfolio(){
 				$couleur_claire		# couleur des cases du tableau
 			);
 
-			/*echo "<form action='".generer_url_ecrire("portfolio",$args)."' method='post'>";
-			echo "<table width='100%' cellpadding='5' cellspacing='0' border='0'>";
-			echo $tranches;
-
-			$largeurs = array('','','','','','','','','','');
-			$styles = array('arial11', 'arial1', 'arial1','arial1','arial1','arial1','arial1','arial1','arial1','arial1');
-			echo afficher_liste($largeurs, $table, $styles);
-			echo "<input type='submit' name='modif' value='"._T('bouton_valider')."' class='fondo' />";
-			echo "</form>";*/
 			echo "</table>";
+			if ($f == 'formulaire_documenter') echo $ret; // spip>=1.9.2
 
 			echo "<a name='bas'>";
 			echo "<table width='100%' border='0'>";
