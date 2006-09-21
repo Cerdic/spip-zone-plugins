@@ -20,6 +20,15 @@
 
 			<div class="cartouche">
 				<h1 class="titre">Exemples Balise #[(#REM)]SESSION</h1>
+				<div class="chapo">La balise #[(#REM)]SESSION fonctionne comme
+				<a href="http://www.spip.net/fr_article3368.html#config" class="spip_out">
+				#[(#REM)]CONFIG
+				</a>
+				&agrave; ceci près qu'elle s'appuie sur le tableau associatif <tt>$auteur_session</tt>. le param&egrave;tre pass&eacute; en argument d&eacute;termine la valeur de session &agrave; afficher. Pour avoir une liste exhaustive des valeurs possible, consultez la doc de la fonction
+				<a href="http://doc.spip.org/@ajouter_session" class="spip_out">
+				ajouter_session
+				</a>
+				</div>
 			</div>
 
 			<div class="liste-articles">
@@ -60,7 +69,7 @@
 
 					<li>
 						<p class=" texte spip_logos" style="background: #fff; border: 1px dashed #ccc;"><code>
-							[(&#35;SESSION{id_auteur}|=={0minirezo}?{<br>
+							[(&#35;SESSION{statut}|=={0minirezo}?{<br>
 							Je suis adminstrateur<br>
 							})]<br>
 						</code></p>
@@ -111,6 +120,16 @@
 				})
 				#LOGIN_PUBLIC
 			]</div>
+			
+			[(#SESSION{id_auteur}|?{'', ' '})
+			#FORMULAIRE_INSCRIPTION
+			]
+
+			[<div class="syndic">
+				<h2 class="menu-titre">Liste des valeurs qui fonctionnent sur votre site</h2>
+				(#SESSION{statut}|=={0minirezo}|?{' '})
+				[(#SESSION|unserialize|liste_ul_li)]
+			</div>]
 
 		</div>
 
