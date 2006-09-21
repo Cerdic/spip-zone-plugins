@@ -1,11 +1,11 @@
 <BOUCLE_reponses(REPONSES){id_reponse}>#SET{champ,''}
 <BOUCLE_form(FORMS){id_form}>#TEXTE
 [(#ENV{mail_admin}|=={'oui'}|?{' ',''})
-Formulaire #TITRE
-Retrouvez cette r&eacute;ponse dans l'interface d'administration : #URL_ECRIRE{forms_reponses,id_form=#ID_FORM}
+<:forms:formulaire:> #TITRE
+<:forms:reponse_retrovez:> #URL_ECRIRE{forms_reponses,id_form=#ID_FORM}
 ]
-R&eacute;ponse saisie le [(#DATE|affdate)]
-depuis la page [(#URL|url_absolue)]
+<:forms:reponse_envoyee:> [(#DATE|affdate)]
+<:forms:reponse_depuis:> [(#URL|url_absolue)]
 <BOUCLE_repchamps(REPONSES_CHAMPS){id_reponse}><BOUCLE_champsnom(FORMS_CHAMPS){id_form}{champ}>[(#GET{champ}|=={#CHAMP}|?{'',' '})
 #TITRE : ][(#GET{champ}|=={#CHAMP}|?{', ',''})]#SET{champ,#CHAMP}</BOUCLE_champsnom>[
 		(#REM) Regarder si le champ est du type select ou multiple, car dans ce cas il faut

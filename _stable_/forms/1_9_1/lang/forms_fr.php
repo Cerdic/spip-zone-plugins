@@ -67,6 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fichier_type_interdit'=>"Ce type de fichier est interdit.",
 'form_erreur' => "Erreur&nbsp;:",
 'format_fichier' => "Format du fichier&nbsp;:",
+'formulaire' => "Formulaire",
 'formulaire_aller' => "Aller au formulaire",
 'formulaires_sondages' => "Formulaires et sondages",
 'formulaires_copie' => "Copie de ", 
@@ -101,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'reponse_depuis' => 'Depuis la page ', 
 'reponse_envoyee' => 'R&eacute;ponse envoy&eacute;e le ',
 'reponse_envoyee_a' => '&agrave;', 
+'reponse_retrovez' => "Retrouvez cette r&eacute;ponse dans l'interface d'administration :",
 'reponses' => 'r&eacute;ponses',
 
 'taille_max' => "Taille maximale (en ko)",
