@@ -1,0 +1,6 @@
+<plugin>
+ 	<nom>balise #FORMULAIRE_AUTEUR_EDIT</nom>
+	<version>0.1</version>
+	<etat>experimental</etat>
+	<prefix>gne</prefix>
+</plugin>

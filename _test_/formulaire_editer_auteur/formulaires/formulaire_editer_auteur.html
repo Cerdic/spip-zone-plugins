@@ -1,0 +1,48 @@
+[(#SESSION{id_auteur}|=={#ENV{id_auteur}}|?{'
+'})<div class="formulaire_spip formulaire_editer_auteur">
+<a id="formulaire_editer_auteur#ENV{id_auteur}" name="formulaire_editer_auteur#ENV{id_auteur}"></a>
+
+<form action="#SELF#formulaire_editer_auteur#ENV{id_auteur}" method="post">
+
+	[(#SELF|form_hidden)]
+
+	<fieldset>
+	<legend><:forum_qui_etes_vous:></legend>
+	<p><label for="nom"><:forum_votre_nom:></label>
+	<input type="text" class="forml" name="nom" id="nom" value="#ENV{nom}" size="40"[ readonly="(#ENV{readonly})"] /></p>
+	<p><label for="email"><:forum_votre_email:></label>
+	<input type="text" class="forml" name="email" id="email" value="#ENV{email}" size="40"[ readonly="(#ENV{readonly})"] /></p>
+	</fieldset>
+
+	<fieldset>
+	<legend><:form_pet_message_commentaire:></legend>
+	<label>BIO::<:forum_texte:></label>
+	<p><small><:info_creation_paragraphe:></small></p>
+	[(#ENV**{bio}|barre_textarea{12,40})]
+	</fieldset>
+
+	<fieldset>
+	<legend><:forum_lien_hyper:></legend>
+	<p><:forum_page_url:></p>
+	<p><label for="nom_site"><:forum_titre:></label>
+	<input type="text" class="forml" name="nom_site" id="nom_site" size="40" value="#ENV{nom_site}" /></p>
+	<p><label for="url_site"><:forum_url:></label>
+	<input type="text" class="forml" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="#ENV{url_site}" /></p>
+	</fieldset>
+
+	<fieldset>
+	<legend><:form_pet_message_commentaire:></legend>
+	<label>PGP::<:forum_texte:></label>
+	<p><small><:info_creation_paragraphe:></small></p>
+	[(#ENV**{pgp}|barre_textarea{12,40})]
+	</fieldset>
+
+	Login et Mot de Passe
+
+	<div class="spip_bouton">
+		<input type="submit" value="<:forum_voir_avant:>" />
+	</div>
+
+</form>
+
+</div>]
