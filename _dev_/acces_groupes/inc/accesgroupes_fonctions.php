@@ -11,41 +11,38 @@
 // inclure le fichier de redéfinitions des BOUCLES
 	 include_spip('inc/accesgroupes_boucles');
 	 
-echo '<br>tableau des rubriques = ';
-print_r(accesgroupes_liste_rubriques_restreintes(0));
 
-// fct récursive pour construire et renvoyer le tableau des rubriques à accès restreint dans la partie PUBLIQUE
-// 		 boucler dans l'arborescence des rubriques en commençant par la racine et en descendant chaque branche 
-// 		 pour remplir le tableau des rubriques restreintes en minimisant les requêtes SQL 
+// fct pour construire et renvoyer le tableau des rubriques à accès restreint dans la partie PUBLIQUE
+// 		 boucler dans l'arborescence des rubriques en commençant par la racine (secteurs en 1ers)
+// 		 pour remplir le tableau des rubriques restreintes en utilisant le principe d'héritage des restrictions 
 	function accesgroupes_liste_rubriques_restreintes($id_parent = 0){
+//echo '<br>debut accesgroupes_liste_rubriques_restreintes';
 	  			 $id_parent = intval($id_parent); // securite					 
-      		 if (!is_array($Trub_restreintes)){
-  				 		static $Trub_restreintes; // indispensable vu la récursivité de la fonction
+  				 static $Trub_restreintes; // nécessaire pour que la suite ne soit éxécutée qu'une fois par hit (même si on à n BOUCLES)
+      		 if (!is_array($Trub_restreintes)) {
       			  $Trub_restreintes = array();
-      		 }
-    			// attaquer à la racine
-    			 $sql1 = "SELECT id_rubrique, id_parent, id_secteur FROM spip_rubriques WHERE id_parent = $id_parent";
-    			 $result1 = spip_query($sql1);
-    			 while ($row1 = spip_fetch_array($result1)) {
-    			 			 $rub_ec = $row1['id_rubrique'];
-								 $sect_ec = $rox['id_secteur'];
-    					// si le parent ou le secteur est déja dans le tableau : vu le principe d'héritage pas la peine d'aller plus loin :)
-    						 if (in_array($rub_ec, $Trub_restreintes) OR in_array($sect_ec, $Trub_restreintes)) {
-    						 		$Trub_restreintes[] = $rub_ec;								
-    						 }
-    					// sinon c'est plus couteux : il faut faire le test complet de la restriction de la rubrique pour espace public
-    						 else {
-    									if (accesgroupes_verif_acces($rub_ec, 'public') == 1 OR accesgroupes_verif_acces($rub_ec, 'public') == 2) {
-    										 $Trub_restreintes[] = $rub_ec;
-    									}
-    						 }
-    					// récursivité : dans tous les cas tester tous les enfants
-    						 $sql2 = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent = $rub_ec";
-    						 $result2 = spip_query($sql2);
-    						 while ($row2 = spip_fetch_array($result2)) {
-											 accesgroupes_liste_rubriques_restreintes($row2['id_rubrique']); 
-    						 }
-    			 }
+    			// attaquer à la racine pour mettre tout de suite les éventuels secteurs restreints dans le tableau ce qui accélèrera la suite
+        			$sql1 = "SELECT id_rubrique, id_parent, id_secteur FROM spip_rubriques";	
+        			$result1 = spip_query($sql1);
+//echo '<br>mysql_error $sql1 = '.mysql_error();					 
+        			while ($row1 = spip_fetch_array($result1)) {
+        			 			 $rub_ec = $row1['id_rubrique'];
+    								 $parent_ec = $row1['id_parent'];
+    								 $sect_ec = $row1['id_secteur'];
+        					// si le parent ou le secteur est déja dans le tableau : vu le principe d'héritage pas la peine d'aller plus loin :)
+/*        						 if (in_array($parent_ec, $Trub_restreintes) OR in_array($sect_ec, $Trub_restreintes)) {
+        						 		$Trub_restreintes[] = $rub_ec;								
+        						 }
+        					// sinon c'est plus couteux : il faut faire le test complet de la restriction de la rubrique pour espace public
+        						 else {  */
+        									if (accesgroupes_verif_acces($rub_ec, 'public') == 1 OR accesgroupes_verif_acces($rub_ec, 'public') == 2) {
+        										 $Trub_restreintes[] = $rub_ec;
+       									  }
+//        						 }
+        			}
+					 }
+//echo '<br>tableau des rubriques = ';
+//print_r($Trub_restreintes);
 					 return $Trub_restreintes;
 	}
 
@@ -124,7 +121,7 @@ print_r(accesgroupes_liste_rubriques_restreintes(0));
 // fct pour renvoyer le tableau des documents liés à un élément appartenant à une rubrique restreinte
 // 		 subtil la méthode de stocker les valeurs comme clés d'un tableau pour ne pas doublonner les valeurs
 //		 avec le petit array_keys() qui va bien pour récupérer le tableau de valeurs à la fin !
-  function accesgroupes_documents_restreints() {
+  function accesgroupes_liste_documents_restreints() {
         	 static $Tdocuments_restreints;
         	 if (!is_array($Tdocuments_restreints)){
         			$Tdocuments_restreints = array();

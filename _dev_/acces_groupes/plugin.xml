@@ -7,10 +7,10 @@
 					merci à Cedric cedric.morin@yterium.com pour le concept initial du bridage de l'affichage des BOUCLES (plugin acces_restreint)
         </auteur>
         <version>
-          1.0
+          1.0_PR
         </version>
         <etat>
-          dev
+          test
         </etat>
         <description>
           Permet de g&eacute;rer l'acc&egrave;s restreint (parties publique et priv&eacute;e) &agrave; des rubriques 

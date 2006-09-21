@@ -28,13 +28,17 @@
 			 nombreuses modifs des requètes SQL et renvoi de certaines clause des WHERE en post-traitement
 		   pour cause d'alias impossibles dans les clauses WHERE 
 			 (résultat de l'utilisation de abstract_sql de spip 1.9 qui permet d'éviter la détection du préfixe des tables de spip ?)
+			 + filtrage des éléments à accès restreint directement dans les requètes SQL des boucles par surcharge des fonctions du core
+			 + gestion du cache en fonction des combinaisons de rubriques restreintes pour éviter les mauvaises surprises
+			 + possibilité de modifier le propriétaire d'un groupe par les admins généraux
+			 + amélioration du traitement des messages de demande d'accès
+			 + marquage des groupes désactivés dans l'interface admin
 
 */
 
 
 include_spip('base/db_mysql');
 include_spip('base/abstract_sql');
-//include_spip('inc/rubriques');
 
 
 function exec_accesgroupes_admin() {
@@ -78,32 +82,131 @@ function exec_accesgroupes_admin() {
         	 $Trub_restreint =  accesgroupes_cree_Trub_admin ();
         }	 
         
-        //$msg_text .= 'accesgroupes_est_admin_restreint = '.accesgroupes_est_admin_restreint().' $Trub_restreint = '.print_r($Trub_restreint).'<br>$id_util_restreint ='.$id_util_restreint.' accesgroupes_trouve_id_utilisateur() = '.accesgroupes_trouve_id_utilisateur();
-        //$msg_text .= '<br>$_REQUEST = '.print_r($_REQUEST);
-        //$msg_text . = '<br>$GLOBALS[auteur_session]= '.$GLOBALS['auteur_session'];
+//$msg_text .= 'accesgroupes_est_admin_restreint = '.accesgroupes_est_admin_restreint().' $Trub_restreint = '.print_r($Trub_restreint).'<br>$id_util_restreint ='.$id_util_restreint.' accesgroupes_trouve_id_utilisateur() = '.accesgroupes_trouve_id_utilisateur();
+//$msg_text .= '<br>$_REQUEST = '.print_r($_REQUEST);
+//$msg_text . = '<br>$GLOBALS[auteur_session]= '.$GLOBALS['auteur_session'];
         
         // désactive toutes les fcts de modifs du groupe si admin restreint + pas proprio !!! ATTENTION ce if est extra long !!!
         if ($id_util_restreint == 0 OR ($id_util_restreint != 0 AND accesgroupes_est_proprio($groupe) == TRUE)) {
                 
   // AUTEURS ======== gestion des auteurs
-     // AUTEUR Ajout...
+     // AUTEUR Ajout
             if (isset($_POST['add_auteur'])){
             	$auteur = $_POST['auteur'];
-            	$sql = "INSERT INTO spip_accesgroupes_auteurs(id_grpacces,id_auteur, dde_acces, proprio) VALUES($groupe, $auteur, 0, $id_util_restreint)";
+            	$sql = "INSERT INTO spip_accesgroupes_auteurs(id_grpacces,id_auteur, dde_acces, proprio) 
+									 	  VALUES($groupe, $auteur, 0, $id_util_restreint)";
               $result = spip_query($sql);
             }
             
-     // AUTEUR Modif...
+     // AUTEUR Modif = accepter un auteur ayant envoyé un message de demande d'accès
             if (isset($_GET['mod_auteur'])){
-              $sql = "UPDATE spip_accesgroupes_auteurs SET dde_acces = 0, proprio = $id_util_restreint WHERE id_grpacces = $groupe AND id_auteur = $mod_auteur";
-              $result = spip_query($sql);
+								$mod_auteur = $_GET['mod_auteur'];
+								if (isset($_GET['message']) AND $_GET['message'] == 'accepte') {
+  								 $sql21 = "SELECT dde_acces FROM spip_accesgroupes_auteurs
+									 					 WHERE id_auteur = $mod_auteur
+														 AND id_grpacces = $groupe
+														 LIMIT 1";
+									 $result21 = spip_query($sql21);
+									 $row21 = spip_fetch_array($result21);
+									 $id_message_efface = $row21['dde_acces'];
+								}
+						// modifier l'auteur (dde_acces passe à 0)
+                $sql = "UPDATE spip_accesgroupes_auteurs 
+  									 	  SET dde_acces = 0, proprio = $id_util_restreint 
+  											WHERE id_grpacces = $groupe 
+  											AND id_auteur = $mod_auteur";
+                spip_query($sql);
+  					// gérer l'effacement du message à l'admin du groupe + envoyer message retour au demandeur
+								if (isset($_GET['message']) AND $_GET['message'] == 'accepte') {
+									 $sql22 = "DELETE FROM spip_messages
+									 				 	  WHERE id_message = $id_message_efface
+															LIMIT 1";
+									 spip_query($sql22);
+									 $sql23 = "DELETE FROM spip_auteurs_messages
+									 				 	  WHERE id_message = $id_message_efface";
+									 spip_query($sql23);
+									 $sql24 = "SELECT nom FROM spip_accesgroupes_groupes
+									 					 WHERE id_grpacces = $groupe
+														 LIMIT 1";
+									 $result24 = spip_query($sql24);
+									 $row24 = spip_fetch_array($result24);
+									 $nom_groupe = $row24['nom'];
+    						 	 $titre_mess = addslashes(_T('accesgroupes:titre_message_retour'));
+									 $message = _T('accesgroupes:message_retour').'<strong>'.$nom_groupe.'</strong>'._T('accesgroupes:message_accepte');
+									 $message = addslashes($message);
+									 $sql25 = "SELECT MAX(id_message) AS maxId FROM spip_messages";
+									 $result25 = spip_query($sql25);
+									 $row25 = spip_fetch_array($result25);
+									 $id_forum = $row25['maxId'] + 1;
+    						 	 $date_pub = date("y-m-d H:i:s");
+									 $auteur_message = accesgroupes_trouve_id_utilisateur();
+    						 	 $sql26 = "INSERT INTO spip_messages (id_message, titre, texte, type, date_heure, rv, statut, id_auteur, maj)
+    						 					 VALUES ($id_forum, '$titre_mess', '$message', 'normal', '$date_pub', 'non', 'publie', $auteur_message, '$date_pub')";
+    						   spip_query($sql26);
+    						 	 if (mysql_error() == '') {
+									 		$sql27 = "INSERT INTO spip_auteurs_messages (id_auteur, id_message, vu) 
+																VALUES ($mod_auteur, $id_forum, 'non')";
+    									spip_query($sql27);
+									 }
+  							}
+								spip_query("OPTIMIZE TABLE spip_auteurs_messages");
+								spip_query("OPTIMIZE TABLE spip_messages");
             }
             
     // AUTEUR Suppression...
-            if (isset($_GET['del_auteur']) AND $_GET['del_auteur'] != ''){
-              $del_auteur = $_GET['del_auteur'];
-							$sql = "DELETE FROM spip_accesgroupes_auteurs WHERE id_grpacces = $groupe AND id_auteur = $del_auteur";
-              $result = spip_query($sql);
+            if (isset($_GET['del_auteur']) AND $_GET['del_auteur'] != '') {
+                $del_auteur = $_GET['del_auteur'];
+  							if (isset($_GET['message']) AND $_GET['message']== 'refuse') {
+  								 $sql21 = "SELECT dde_acces FROM spip_accesgroupes_auteurs
+									 					 WHERE id_auteur = $del_auteur
+														 AND id_grpacces = $groupe
+														 LIMIT 1";
+									 $result21 = spip_query($sql21);
+									 $row21 = spip_fetch_array($result21);
+									 $id_message_efface = $row21['dde_acces'];
+  							}
+						// effacer l'auteur
+  							$sql = "DELETE FROM spip_accesgroupes_auteurs 
+  									 	  WHERE id_grpacces = $groupe 
+  											AND id_auteur = $del_auteur";
+                $result = spip_query($sql);
+  					// gérer l'effacement du message à l'admin du groupe + envoyer message retour au demandeur
+  							if (isset($_GET['message']) AND $_GET['message']== 'refuse') {
+									 $sql22 = "DELETE FROM spip_messages
+									 				 	  WHERE id_message = $id_message_efface
+															LIMIT 1";
+									 spip_query($sql22);
+									 $sql23 = "DELETE FROM spip_auteurs_messages
+									 				 	  WHERE id_message = $id_message_efface";
+									 spip_query($sql23);
+									 $sql24 = "SELECT nom FROM spip_accesgroupes_groupes
+									 					 WHERE id_grpacces = $groupe
+														 LIMIT 1";
+									 $result24 = spip_query($sql24);
+									 $row24 = spip_fetch_array($result24);
+									 $nom_groupe = $row24['nom'];
+    						 	 $titre_mess = addslashes(_T('accesgroupes:titre_message_retour'));
+									 $message = _T('accesgroupes:message_retour').'<strong>'.$nom_groupe.'</strong>'._T('accesgroupes:message_refuse');
+									 $message = addslashes($message);
+									 $sql25 = "SELECT MAX(id_message) AS maxId FROM spip_messages";
+									 $result25 = spip_query($sql25);
+									 $row25 = spip_fetch_array($result25);
+									 $id_forum = $row25['maxId'] + 1;
+    						 	 $date_pub = date("y-m-d H:i:s");
+									 $auteur_message = accesgroupes_trouve_id_utilisateur();
+    						 	 $sql26 = "INSERT INTO spip_messages (id_message, titre, texte, type, date_heure, rv, statut, id_auteur, maj)
+    						 					 VALUES ($id_forum, '$titre_mess', '$message', 'normal', '$date_pub', 'non', 'publie', $auteur_message, '$date_pub')";
+    						   spip_query($sql26);
+    						 	 if (mysql_error() == '') {
+									 		$sql27 = "INSERT INTO spip_auteurs_messages (id_auteur, id_message, vu) 
+																VALUES ($del_auteur, $id_forum, 'non')";
+    									spip_query($sql27);
+									 }
+  							}
+								spip_query("OPTIMIZE TABLE spip_accesgroupes_auteurs");
+								spip_query("OPTIMIZE TABLE spip_auteurs_messages");
+								spip_query("OPTIMIZE TABLE spip_messages");
+
             }
             
   // SS-GROUPES ======== gestion des sous-groupes
@@ -112,7 +215,8 @@ function exec_accesgroupes_admin() {
               // vérification que le sous-groupe à créer n'est pas dans l'ascendance du groupe en cours 
             	// "never trust user" : en principe ce cas n'est pas possible mais un hack du POST est si vite arrivé...
               	if (accesgroupes_verifie_inclusions_groupe($_POST['add_ss_groupe'], $groupe) != FALSE) {
-                	$sql = "INSERT INTO spip_accesgroupes_auteurs(id_grpacces,id_ss_groupe,dde_acces, proprio) VALUES($groupe,{$_POST['ss_groupe']}, 0, $id_util_restreint)";
+                	$sql = "INSERT INTO spip_accesgroupes_auteurs(id_grpacces,id_ss_groupe,dde_acces, proprio) 
+											 	  VALUES($groupe,{$_POST['ss_groupe']}, 0, $id_util_restreint)";
                   $result = spip_query($sql);
               	}
             		else {
@@ -122,13 +226,17 @@ function exec_accesgroupes_admin() {
             
     // SS-GROUPES Modif...
             if (isset($_GET['mod_ss_groupe'])){
-              $sql = "UPDATE spip_accesgroupes_auteurs SET dde_acces = 0, proprio = $id_util_restreint WHERE id_grpacces = $groupe AND id_ss_groupe = {$_GET['mod_ss_groupe']}";
+              $sql = "UPDATE spip_accesgroupes_auteurs SET dde_acces = 0, proprio = $id_util_restreint 
+									 	  WHERE id_grpacces = $groupe 
+											AND id_ss_groupe = {$_GET['mod_ss_groupe']}";
               $result = spip_query($sql);
             }
             
    // SS-GROUPES Suppression...
             if (isset($_GET['del_ss_groupe'])){
-              $sql = "DELETE FROM spip_accesgroupes_auteurs WHERE id_grpacces=$groupe AND id_ss_groupe = {$_GET['del_ss_groupe']}";
+              $sql = "DELETE FROM spip_accesgroupes_auteurs 
+									 	  WHERE id_grpacces=$groupe 
+											AND id_ss_groupe = {$_GET['del_ss_groupe']}";
               $result = spip_query($sql);
             }
             
@@ -136,21 +244,25 @@ function exec_accesgroupes_admin() {
      // STATUTS Ajout...
             if (isset($_POST['add_statut'])){
                 	$sp_statut = $_POST['sp_statut'];
-            			$sql = "INSERT INTO spip_accesgroupes_auteurs(id_grpacces,sp_statut,dde_acces, proprio) VALUES ($groupe,'$sp_statut',0, $id_util_restreint)";
+            			$sql = "INSERT INTO spip_accesgroupes_auteurs(id_grpacces,sp_statut,dde_acces, proprio) 
+											 	  VALUES ($groupe,'$sp_statut',0, $id_util_restreint)";
                   $result = spip_query($sql);
             }
             
      // STATUTS Modif...
             if (isset($_GET['mod_statut'])){
               $mod_statut = $_GET['mod_statut'];
-            	$sql = "UPDATE spip_accesgroupes_auteurs SET dde_acces = 0, proprio = $id_util_restreint WHERE id_grpacces = $groupe AND sp_statut = '$mod_statut'";
+            	$sql = "UPDATE spip_accesgroupes_auteurs 
+									 	  SET dde_acces = 0, proprio = $id_util_restreint 
+									 	  WHERE id_grpacces = $groupe AND sp_statut = '$mod_statut'";
               $result = spip_query($sql);
             }
             
      // STATUTS Suppression...
             if (isset($_GET['del_statut'])){
               $del_statut = $_GET['del_statut'];
-            	$sql = "DELETE FROM spip_accesgroupes_auteurs WHERE id_grpacces = $groupe AND sp_statut = '$del_statut'";
+            	$sql = "DELETE FROM spip_accesgroupes_auteurs 
+									 	  WHERE id_grpacces = $groupe AND sp_statut = '$del_statut'";
               $result = spip_query($sql);
             }
             
@@ -162,29 +274,81 @@ function exec_accesgroupes_admin() {
         				$_POST['demandes_acces'] == 1 ? $demande_acces = 1 : $demande_acces = 0;
 								$description_modif = addslashes($_POST['description']);
 								$nom_modif = addslashes($_POST['nom']);
+								$id_grpe_change_proprio = $_POST['groupe'];
+								$sql121 = "SELECT proprio 
+												   FROM spip_accesgroupes_groupes
+													 WHERE id_grpacces = $id_grpe_change_proprio
+													 LIMIT 1";
+								$result121 = spip_query($sql121);
+								$row121 = spip_fetch_array($result121);
+								$ancien_proprio = $row121['proprio'];
+                if (isset($_POST['proprio']) AND $_POST['proprio'] != '' AND $id_util_restreint == 0) {  // chgmnt de proprio autorisé que pour les admins généraux
+								 	 $proprio_grpe_modif = $_POST['proprio'];
+							  }
+								else {
+									 	 $proprio_grpe_modif =  $ancien_proprio;
+								}
                 $sql = "UPDATE spip_accesgroupes_groupes
                  		    SET nom='".$nom_modif."',
                        			description = '".$description_modif."',
                        			actif = $actif,
-            					 			proprio = $id_util_restreint,
+            					 			proprio = $proprio_grpe_modif,
         							 			demande_acces = $demande_acces
-                 			  WHERE id_grpacces=".$_POST['groupe'];
+                 			  WHERE id_grpacces = $id_grpe_change_proprio";
                 $result = spip_query($sql);
                 accesgroupes_debug($result);
+                if (mysql_error() != '') {
+        					 $alerte = 1;
+        					 $msg_text .= _T('accesgroupes:erreur_modif_proprio').$id_grpe_change_proprio.' : '.mysql_error();
+        				}
+        				else {	
+									// seuls les admins généraux peuvent faire les opérations liées au changement de proprio
+										 if ($id_util_restreint == 0) {  
+    									// réatribuer tous les accès aux rubriques  de ce groupe dont le proprio est l'ancien proprio ou les admins au nv proprio 
+												 $sql118 = "UPDATE spip_accesgroupes_acces
+    										 				    SET proprio = \"".$proprio_grpe_modif."\"
+    																WHERE id_grpacces = \"".$id_grpe_change_proprio."\"
+    												AND (proprio = $ancien_proprio 
+    												OR proprio = 0)";
+    										 spip_query($sql118);
+                         if (mysql_error() != '') {
+                					  $alerte = 1;
+                					  $msg_text .= _T('accesgroupes:erreur_modif_proprio_acces').$id_grpe_change_proprio.' : '.mysql_error();
+                				 }
+    										 else {
+												 			// réatribuer tous les proprios des auteurs appartenants à ce groupe au nv proprio 
+    										 			// (plus souvenir de pourquoi on a besoin et quand on utilise le proprio des auteurs mais dans le doute... ou si ça doit servir un jour
+    										 			$sql119 = "UPDATE spip_accesgroupes_auteurs
+    																		 SET proprio = \"".$proprio_grpe_modif."\"
+    																		 WHERE id_grpacces = \"".$id_grpe_change_proprio."\" ";
+    													spip_query($sql119);
+    													if (mysql_error() != '') {
+    													 		$alerte = 1;
+    															$msg_text .= _T('accesgroupes:erreur_modif_proprio_auteurs').$id_grpe_change_proprio.' : '.mysql_error();
+    													}
+    										 }
+										 }
+								}  // fin des changements de proprios
             }
+						
+						
         } // fin du IF admin restreints + proprio
 				
      // GROUPE Ajout (actif est mis à 1 systématiquement lors de la création d'un groupe)
-		 // !!! cette partie de la gestion des modifs/suppression/additions par $_POST ou $_GET 
-		 // est la SEULE à ne pas etre réservée aux admins pas restreint ou admins restreints proprios du groupe !!!
         if (isset($_POST['add_groupe'])){
           // éviter les duplicatas de noms de groupes
     				if (accesgroupes_verifie_duplicata_groupes($_POST['nom']) == FALSE) {
     					 $msg_text = '<h2 style="color: #f00;">'.$_POST['nom'].' : '._T('accesgroupes:duplicata_nom').'</h2>';
     				}
     				else {
-                  $sql = "INSERT INTO spip_accesgroupes_groupes(nom, description, actif, proprio, demande_acces)
-                       	 				 VALUES(\"".addslashes($_POST['nom'])."\",\"".addslashes($_POST['description'])."\", 1, $id_util_restreint, ".$_POST['demandes_acces'].")
+                  if (isset($_POST['proprio']) AND $_POST['proprio'] != '') {
+										 $proprio_nv_grpe = $_POST['proprio'];
+									}
+									else {
+											 $proprio_nv_grpe =  $id_util_restreint;
+									}
+									$sql = "INSERT INTO spip_accesgroupes_groupes(nom, description, actif, proprio, demande_acces)
+                       	 	VALUES(\"".addslashes($_POST['nom'])."\",\"".addslashes($_POST['description'])."\", 1, $proprio_nv_grpe, ".$_POST['demandes_acces'].")
                   ";
                   $result = spip_query($sql);
                   accesgroupes_debug($result);
@@ -237,45 +401,33 @@ function exec_accesgroupes_admin() {
           								 }
             					 }
         				}
-            }        
+            }
+        }  // fin du IF admin restreint + proprio
+			
+										        
         
   // ACCES  ======== gestion des accès restreints
      // ACCES AJOUT
             if (isset($_POST['add_rub']) && $_POST['add_id_rubrique'] > 0){
-              // si admin restreint, modif autorisées si proprio de l'accès
                 $acces_groupe_ec = $_POST['groupe'];
             	  $acces_id_parent = $_POST['add_id_rubrique'];
             	  $acces_prive_public = $_POST['prive_public'];
-                if ($id_admin_restreint == 0 OR  ($id_admin_restreint !== 0 AND accesgroupes_est_proprio_acces($acces_id_parent) == TRUE)) {
-                    $sql_verif = "SELECT count(*) AS RubAcces
-                      				 	  FROM spip_accesgroupes_acces
-                     							WHERE id_grpacces = \"".$acces_groupe_ec."\" 
-            											AND id_rubrique = \"".$acces_id_parent."\" ";
-                    $result = spip_query($sql_verif);
-                  // création nvl accès
-            				$nb_verif = spip_fetch_array($result);
-            				if ($nb_verif['RubAcces'] <= 0) {
+              // ajout rubrique restreinte si admin général ou admin restreint + admin de la rubrique
+//echo '<br>accesgroupes_est_admin_rubrique('.$acces_id_parent.') = '.accesgroupes_est_admin_rubrique($acces_id_parent);
+                if ($id_util_restreint == 0 OR ($id_util_restreint !== 0 AND accesgroupes_est_admin_rubrique($acces_id_parent) == TRUE) ) {
               				 $sql601 = "INSERT INTO spip_accesgroupes_acces(id_grpacces, id_rubrique, id_article, dtdb, dtfn, proprio, prive_public)
-                               VALUES(\"".$acces_groupe_ec."\", \"".$acces_id_parent."\", \"\",now(),now(), $id_util_restreint, \"".$acces_prive_public."\")";
+                               	  VALUES(\"".$acces_groupe_ec."\", \"".$acces_id_parent."\", \"\",now(),now(), $id_util_restreint, \"".$acces_prive_public."\")";
                        $result601 = spip_query($sql601);
-                    }
-            				else {
-            						$sql604 = "UPDATE spip_accesgroupes_acces 
-            						 				SET prive_public = $acces_prive_public
-            								 	  WHERE id_grpacces = $acces_groupe_ec 
-            										AND id_rubrique = $acces_id_parent
-            										LIMIT 1" ;
-            						$result604 = spip_query($sql604); 
-            				}
-            		}
+            		}  // fin du IF admin restreint + proprio
+
             }
      // ACCES MODIFICATION
             if (isset($_POST['modif_id_groupe']) AND isset($_POST['modif_id_rubrique'])){
-              // si admin restreint, modif autorisées si proprio de l'accès
             //         	 $msg_text = "<h2>"._T('accesgroupes:acces_double')."</h2>";
                $modif_prive_public = $_POST['modif_prive_public'];
                $modif_id_rubrique = $_POST['modif_id_rubrique'];
                $modif_id_groupe = $_POST['modif_id_groupe'];
+              // si admin restreint, modif autorisées si proprio de l'accès
                if ($id_admin_restreint == 0 OR  ($id_admin_restreint !== 0 AND accesgroupes_est_proprio_acces($modif_id_rubrique) == TRUE)) {
               		 $sql602 = "UPDATE spip_accesgroupes_acces 
               		 				SET prive_public = $modif_prive_public
@@ -288,7 +440,7 @@ function exec_accesgroupes_admin() {
             
      // ACCES SUPPRESSION
             if (isset($_GET['del_rub'])){
-             // si admin restreint, efface autorisé si proprio de l'accès
+             // si admin restreint, suppression autorisée si proprio de l'accès
               $id_parent_del = $_GET['del_rub'];
               if ($id_admin_restreint == 0 OR  ($id_admin_restreint !== 0 AND accesgroupes_est_proprio_acces($id_parent_del) == TRUE)) {
                   $sql = "DELETE FROM spip_accesgroupes_acces WHERE id_grpacces = $groupe AND id_rubrique = \"".$id_parent_del."\"";
@@ -297,9 +449,7 @@ function exec_accesgroupes_admin() {
             	}
             }
             //accesgroupes_rub_reinit();
-            
-        }  // fin du IF admin restreint + proprio
-        
+                    
 				
 // DEBUT AFFICHAGE DE LA PAGE  
         debut_page(_T('accesgroupes:module_titre'));
@@ -328,6 +478,18 @@ function exec_accesgroupes_admin() {
         			if (isset($msg) AND $msg != '') {
         				 echo $msg;
         			}
+				// affichage de la version en cours de acces_groupes à partir de plugin.xml
+				$Tlecture_fich_plugin = file(_DIR_PLUGIN_ACCESGROUPES.'/plugin.xml');
+				$stop_prochain = 0;
+				foreach ($Tlecture_fich_plugin as $ligne) {
+								if ($stop_prochain == 1) {
+									 echo '<br /><br/>Version : <strong>'.$ligne.'</strong>';
+									 break;
+								}
+								if (substr_count($ligne, '<version>') > 0) {
+									 $stop_prochain = 1;
+								}
+				}
         fin_boite_info();
         
         $sql = "SELECT * FROM spip_accesgroupes_groupes";
@@ -356,6 +518,19 @@ function exec_accesgroupes_admin() {
            $actif = $row['actif'];
         	 $prive_public = $row['prive_public'];
         	 $demande_acces = $row['demande_acces'];
+					 $le_proprio = $row['proprio'];
+					 if ($le_proprio != 0) {
+					 		$sql258 = "SELECT spip_auteurs.nom
+											   FROM spip_auteurs
+												 WHERE id_auteur = $le_proprio
+												 LIMIT 1";
+						  $result258 = spip_query($sql258);
+							$row258 = spip_fetch_array($result258);
+				 			$nom_proprio = $row258['nom'];
+					 }
+					 else {
+					 			$nom_proprio = _T('accesgroupes:tous_les_admins');
+					 }
         
         echo "\r\n<table style=\"width: 100%;\"><tr><td class='serif2'>";
         echo bouton_block_invisible('groupeinfo')._T('accesgroupes:creer');
@@ -366,14 +541,17 @@ function exec_accesgroupes_admin() {
         echo "\r\n</td></tr></table>\n";
         
         echo debut_block_invisible('groupeinfo');
-        echo "\r\n<input type=\"hidden\" name=\"id_grpacces\" value=\"$groupe\" />";
+		// partie nom et description
+        echo "\r\n<input type=\"hidden\" name=\"groupe\" value=\"$groupe\" />";
         echo "\r\n<table width=\"100%\">";
         echo "\r\n<tr><td colspan=\"2\" style=\"font-weight: bold;\">"._T('accesgroupes:nom')." : </td></tr>";
         echo "\r\n<tr><td colspan=\"2\"><input type=\"text\" name=\"nom\" value=\"$nom\" size=\"18\" />\r\n</td>\r\n</tr>";			
         echo "\r\n<tr><td colspan=\"2\" style=\"padding-top: 7px; font-weight: bold;\">"._T('accesgroupes:description')." : </td></tr>";
         echo "\r\n<tr><td colspan=\"2\"><textarea name=\"description\" rows=\"2\" cols=\"15\">$desc</textarea></td>\r\n</tr>";
+		// bouton créer
         echo "\r\n<tr><td  style=\"padding-top: 3px;\"><input type=\"submit\" name=\"add_groupe\" value=\""._T('accesgroupes:creer')."\" class='fondo' style='font-size:10px;' />";
         echo "\r\n</td>\r\n</tr>";
+		// partie demande d'accès
         echo "\r\n<tr><td colspan=\"2\" style=\"padding-top: 7px; font-weight: bold;\">"._T('accesgroupes:autoriser_demandes');
         echo " <span style=\"font-size: 10px; font-weight: normal;\">"._T('accesgroupes:help_inscriptions')."</span>\r\n</td></tr>";
         echo "\r\n<tr><td colspan=\"2\">";
@@ -381,6 +559,7 @@ function exec_accesgroupes_admin() {
         echo "&nbsp;&nbsp;<input name=\"demandes_acces\" value=\"0\" type=\"radio\" ".($demande_acces == 0 ? "checked=\"checked\"" : "")."\">"._T('accesgroupes:non');
         echo "\r\n</td>\r\n</tr>";
         
+		// partie activé/désactivé
         // admins restreints interdits si pas proprios			
         if ($groupe > 0 AND ($id_util_restreint == 0 OR ($id_util_restreint != 0 AND accesgroupes_est_proprio($groupe) == TRUE))) {
         	  
@@ -391,6 +570,36 @@ function exec_accesgroupes_admin() {
             echo "\r\n"._T('accesgroupes:inactif');
         		echo "\r\n</td>\r\n</tr>";
         }
+		// partie changer de proprio
+			  // admin généraux uniquement (PAS admins restreints)
+				if ($groupe > 0 AND $id_util_restreint == 0) {
+					 echo "\r\n<tr><td colspan=\"2\" style=\"padding-top: 7px; font-weight: bold;\">"._T('accesgroupes:changer_proprio_groupe')." : ";
+					 echo "<span style=\"font-size: 10px; font-weight: normal;\">("._T('accesgroupes:changer_proprio_help').")</span>";
+					 $sql256 = "SELECT spip_auteurs.nom, spip_auteurs.id_auteur 
+					 				    FROM spip_auteurs_rubriques
+											LEFT JOIN spip_auteurs
+											ON spip_auteurs_rubriques.id_auteur = spip_auteurs.id_auteur
+											GROUP BY nom 
+											ORDER BY nom";
+					 $result256 = spip_query($sql256);
+//echo '<br>mysql_error $sql256 = '.mysql_error();					 
+					 echo "\r\n<select name=\"proprio\" id=\"proprio\">";
+					 echo "<option value=\"0\" ";
+					 if ($le_proprio == 0) {
+					 		echo "selected=\"selected\" "; 
+					 }
+					 echo ">"._T('accesgroupes:tous_les_admins')."</option>";
+					 while ($row256 = spip_fetch_array($result256)) {
+					 			 echo "<option value=\"".$row256['id_auteur']."\" ";
+								 if ($le_proprio == $row256['id_auteur']) {
+								 		echo "selected=\"selected\" "; 
+								 }
+								 echo ">".$row256['nom']."</option>";
+					 }
+					 echo "</select>";
+					 echo " </td></tr>";
+				}
+		// boutons modifier + effacer
         // admins restreints interdits si pas proprios			
         if ($groupe > 0 AND ($id_util_restreint == 0 OR ($id_util_restreint != 0 AND accesgroupes_est_proprio($groupe) == TRUE))){
             echo "\r\n<tr style=\"padding-top: 7px; font-weight: bold;\"><td>";
@@ -427,49 +636,51 @@ function exec_accesgroupes_admin() {
         
         // afficher l'arborescence des groupes
         
+				echo '<div style="width: 220px !important;">'; // blocage de la largeur du cadre raccourcis pour Mozilla Seamonkey
         debut_raccourcis();
         					
-              echo "\r\n<table CELLPADDING=2 CELLSPACING=0 class='arial2' style='border: 1px solid #aaa; width: 100%;'>\n";
-              echo "\r\n<tr style='background-color: #fff;'><th colspan=\"2\">"._T('accesgroupes:arborescence_groupes')."</th><th colspan=\"2\">&nbsp;</th></tr>";
-        			$sql102 = "SELECT id_grpacces, nom, actif
-        								 FROM spip_accesgroupes_groupes
-        								 GROUP BY nom";
-        			$result102 = spip_query($sql102);
-              while ($row = spip_fetch_array($result102)){
-              			 $id_ec = $row['id_grpacces'];
-              			 $nom_ec = typo($row['nom']); //$row['nom'];
-              			 echo "\r\n<tr style='background-color: #eeeeee;'>";
-                     echo "\r\n<td class='verdana11' style='border-top: 1px solid #cccccc; width: 14px; vertical-align:top;'>";
-            				 if (accesgroupes_est_admin_restreint() == TRUE AND accesgroupes_est_proprio($id_ec) == TRUE) {
-      							 		echo "<img src='img_pack/admin-12.gif' alt='|_' style='vertical-align:top;'>";
-      							 }
-        						 echo "\r\n<img src='"._DIR_PLUGIN_ACCESGROUPES."/img_pack/groupe-12.png' alt='|_'></td>";
-                     echo "\r\n<td style='border-top: 1px solid #cccccc;'><a href=\"$PHP_SELF?exec=accesgroupes_admin&groupe=".$id_ec."\">";
-        						 if ($row['actif'] != 1) {
-        						 		echo '('.$nom_ec.' : '._T('accesgroupes:inactif').')';
-        						 }
-        						 else {
-        						 			echo $nom_ec;
-        						 }
-										 echo "</a><br />";
-              			 echo accesgroupes_affiche_descendance($id_ec, accesgroupes_descendance_groupe($id_ec));
-              			 echo "\r\n</td>";
-                     echo "\r\n<td style='border-top: 1px solid #cccccc; text-align : right; padding-right: 20px; vertical-align: middle;'>";
-        		  // supprimer rapide pour les admins pas restreints
-            				 if (($id_util_restreint == 0 OR ($id_util_restreint != 0 AND accesgroupes_est_proprio($id_ec) == TRUE) ) AND $groupe != 0) {
-            						 echo "\r\n<a style=\"vertical-align: bottom;\" href=\"".$PHP_SELF."?exec=accesgroupes_admin&del_groupe=".$id_ec."&groupe=".$groupe."\">". http_img_pack('croix-rouge.gif', _T('accesgroupes:suppression'), "width='7' height='7' border='0' style='vertical-align: middle;'")."</a>";
-            				 }
-            				 else {
-            						  echo "&nbsp;";
-            				 }					 
-        						 echo "\r\n</td>";
-                     echo "\r\n</tr>";
-              }
-        
-              echo "\r\n</table>";
+        echo "\r\n<table CELLPADDING=2 CELLSPACING=0 class='arial2' style='border: 1px solid #aaa; width: 100%;'>\n";
+        echo "\r\n<tr style='background-color: #fff;'><th colspan=\"2\">"._T('accesgroupes:arborescence_groupes')."</th><th colspan=\"2\">&nbsp;</th></tr>";
+  			$sql102 = "SELECT id_grpacces, nom, actif
+  								 FROM spip_accesgroupes_groupes
+  								 GROUP BY nom";
+  			$result102 = spip_query($sql102);
+        while ($row = spip_fetch_array($result102)){
+        			 $id_ec = $row['id_grpacces'];
+        			 $nom_ec = typo($row['nom']); //$row['nom'];
+        			 echo "\r\n<tr style='background-color: #eeeeee;'>";
+               echo "\r\n<td class='verdana11' style='border-top: 1px solid #cccccc; width: 14px; vertical-align:top;'>";
+      				 if (accesgroupes_est_admin_restreint() == TRUE AND accesgroupes_est_proprio($id_ec) == TRUE) {
+							 		echo "<img src='img_pack/admin-12.gif' alt='|_' style='vertical-align:top;'>";
+							 }
+  						 echo "\r\n<img src='"._DIR_PLUGIN_ACCESGROUPES."/img_pack/groupe-12.png' alt='|_'></td>";
+               echo "\r\n<td style='border-top: 1px solid #cccccc;'><a href=\"$PHP_SELF?exec=accesgroupes_admin&groupe=".$id_ec."\">";
+  						 if ($row['actif'] != 1) {
+  						 		echo '('.$nom_ec.' : <span style="color: #6c3;">'._T('accesgroupes:inactif').'</span>)';
+  						 }
+  						 else {
+  						 			echo $nom_ec;
+  						 }
+				 echo "</a><br />";
+        			 echo accesgroupes_affiche_descendance($id_ec, accesgroupes_descendance_groupe($id_ec));
+        			 echo "\r\n</td>";
+               echo "\r\n<td style='border-top: 1px solid #cccccc; text-align : right; padding-right: 20px; vertical-align: middle;'>";
+  		  // supprimer rapide pour les admins pas restreints
+      				 if (($id_util_restreint == 0 OR ($id_util_restreint != 0 AND accesgroupes_est_proprio($id_ec) == TRUE) ) AND $groupe != 0) {
+      						 echo "\r\n<a style=\"vertical-align: bottom;\" href=\"".$PHP_SELF."?exec=accesgroupes_admin&del_groupe=".$id_ec."&groupe=".$groupe."\">". http_img_pack('croix-rouge.gif', _T('accesgroupes:suppression'), "width='7' height='7' border='0' style='vertical-align: middle;'")."</a>";
+      				 }
+      				 else {
+      						  echo "&nbsp;";
+      				 }					 
+  						 echo "\r\n</td>";
+               echo "\r\n</tr>";
+        }
+  
+        echo "\r\n</table>";
         	
         fin_raccourcis();
-        
+        echo '</div>';
+				
      // DROITE ======== 
         debut_droite();
         
@@ -506,7 +717,7 @@ function exec_accesgroupes_admin() {
 							gros_titre(_T('accesgroupes:titre_page_groupe').' : '.$nom.' (n&deg; '.$groupe.')'.$inactif);
               if ($desc != "") {
             			echo "<div align='$spip_lang_left' style='margin-top: 10px; padding: 5px; border: 1px dashed #aaa; font-family: Verdana,Arial,Sans,sans-serif; font-size: 10px;'>";
-            			echo "$desc";
+            			echo "$desc ("._T('accesgroupes:proprio')." : $nom_proprio)";
             			echo "</div>\r\n<br />";
         			}
           		if ($msg_text != '') {
@@ -535,8 +746,6 @@ function exec_accesgroupes_admin() {
               	 			 		WHERE statut != '5poubelle' 
               				 		AND statut != 'nouveau' 
               				 		ORDER BY statut, nom";
-//              	 			 WHERE spip_accesgroupes_auteurs.id_auteur IS NULL
-//              				 AND spip_accesgroupes_auteurs.id_grpacces = \"$groupe\"
                  $result1 = spip_query($sql1);
               	 if (mysql_errno() != 0) {
         				 		echo mysql_errno().": ".mysql_error();
@@ -587,13 +796,13 @@ function exec_accesgroupes_admin() {
         			echo "\r\n<table CELLPADDING=2 CELLSPACING=0 class='arial2' style='width: 100%; border: 1px solid #aaa;'>\n";
               echo "\r\n<tr><th colspan=\"2\">"._T('accesgroupes:auteurs_groupe')."</th><th colspan=\"2\">&nbsp;</th></tr>";
 
-              $sql2 = "SELECT spip_auteurs.id_auteur, spip_auteurs.nom, spip_auteurs.statut, spip_accesgroupes_auteurs.dde_acces
+              $sql2 = "SELECT spip_auteurs.id_auteur, spip_auteurs.nom, spip_auteurs.statut
 											 FROM spip_accesgroupes_auteurs
 											 LEFT JOIN spip_auteurs 
 											 ON spip_auteurs.id_auteur = spip_accesgroupes_auteurs.id_auteur
 											 WHERE id_grpacces = $groupe
 											 AND dde_acces = 0";											 
-							
+// , spip_accesgroupes_auteurs.dde_acces
 							$result2 = spip_query($sql2);
 //echo '<br>mysql_error $sql2 = '.mysql_error();							
               while ($row = spip_fetch_array($result2)){
@@ -610,24 +819,25 @@ function exec_accesgroupes_admin() {
         				// admins restreints interdits de modifs des membres du groupe si pas proprios
         					 if ($id_util_restreint == 0 OR ($id_util_restreint != 0 AND accesgroupes_est_proprio($groupe) == TRUE)) {
             					 echo "\r\n<a href=\"".$PHP_SELF."?exec=accesgroupes_admin&del_auteur=".$row['id_auteur']."&groupe=$groupe\"> "._T('lien_retirer_auteur')." &nbsp;  ".http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' style='vertical-align: middle;'")."</a>";
-                       echo ($row['dde_acces']==1) ? "&nbsp;|&nbsp;<a href=\"".$PHP_SELF."?exec=accesgroupes_admin&mod_auteur=".$row['id_auteur']."&groupe=".$groupe."\"> "._T('accesgroupes:accepter')."</a>" : "";
+//                       echo ($row['dde_acces'] == 1) ? "&nbsp;|&nbsp;<a href=\"".$PHP_SELF."?exec=accesgroupes_admin&mod_auteur=".$row['id_auteur']."&groupe=".$groupe."\"> "._T('accesgroupes:accepter')."</a>" : "";
             				}
             				else {
             						 echo $row['id_auteur'];
             				}
         					 echo "\r\n</td>";
-                   echo "\r\n<td style='border-top: 1px solid #cccccc;'><a href=\"mailto:$email\"></a></td>";
+                   echo "\r\n<td style='border-top: 1px solid #ccc;'><a href=\"mailto:$email\"></a></td>";
                    echo "\r\n</tr>";
               }
               echo "</table>";
         			
             // tableau des auteurs en attente d'une demande d'accès
-              $sql2 = "SELECT spip_auteurs.id_auteur, spip_auteurs.nom, spip_auteurs.statut, spip_accesgroupes_auteurs.dde_acces
+              $sql2 = "SELECT spip_auteurs.id_auteur, spip_auteurs.nom, spip_auteurs.statut
                 			 FROM spip_accesgroupes_auteurs 
                				 LEFT JOIN spip_auteurs
 											 ON spip_accesgroupes_auteurs.id_auteur = spip_auteurs.id_auteur 
               				 WHERE id_grpacces = $groupe
-        							 AND dde_acces = 1";
+        							 AND dde_acces != 0";
+// , spip_accesgroupes_auteurs.dde_acces											 
               $result2 = spip_query($sql2);
         			if (spip_num_rows($result2) > 0) {
                   echo "\r\n<br /><table CELLPADDING=2 CELLSPACING=0 class='arial2' style='width: 100%; border: 1px solid #aaaaaa;'>\n";
@@ -637,12 +847,13 @@ function exec_accesgroupes_admin() {
                        echo "\r\n<td class='verdana11' style='border-top: 1px solid #cccccc; width: 14px; vertical-align:top;'>";
               				 $statut_util_ec = accesgroupes_trouve_statut($row['id_auteur']);
             					 $statut_util_ec == '0minirezo' ?  $ico_statut = 'admin-12.gif' : ($statut_util_ec == '1comite' ? $ico_statut = 'redac-12.gif' : $ico_statut = 'visit-12.gif');
-            					 echo "\r\n<img src='"._DIR_PLUGIN_ACCESGROUPES."/img_pack/".$ico_statut."' alt='|_' style='vertical-align:top;'></td>";
+            					 echo "\r\n<img src='img_pack/".$ico_statut."' alt='|_' style='vertical-align:top;'></td>";
                        echo "\r\n<td style='border-top: 1px solid #cccccc;'><a href=\"?exec=auteurs_edit&id_auteur=".$row['id_auteur']."\">".$row['nom']."</a></td>";
                        echo "\r\n<td style='border-top: 1px solid #cccccc; text-align : right; padding-right: 20px;'>";
             			     if ($id_util_restreint == 0 OR ($id_util_restreint != 0 AND accesgroupes_est_proprio($groupe) == TRUE)) {
-            					 		echo "\r\n<a href=\"".$PHP_SELF."?exec=accesgroupes_admin&del_auteur=".$row['id_auteur']."&groupe=$groupe\"> "._T('lien_retirer_auteur')." &nbsp;  ".http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' style='vertical-align: middle;'")."</a>";
-                       		echo ($row['dde_acces']==1) ? "&nbsp;|&nbsp;<a href=\"".$PHP_SELF."?exec=accesgroupes_admin&mod_auteur=".$row['id_auteur']."&groupe=".$groupe."\"> "._T('accesgroupes:accepter')."</a>" : "";
+            					 		echo "\r\n<a href=\"".$PHP_SELF."?exec=accesgroupes_admin&del_auteur=".$row['id_auteur']."&groupe=$groupe&message=refuse\"> "._T('lien_retirer_auteur')." &nbsp;  ".http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' style='vertical-align: middle;'")."</a>";
+													echo "&nbsp;|&nbsp;<a href=\"".$PHP_SELF."?exec=accesgroupes_admin&mod_auteur=".$row['id_auteur']."&groupe=".$groupe."&message=accepte\"> "._T('accesgroupes:accepter')."</a>";
+//                       		echo ($row['dde_acces'] == 1) ? "&nbsp;|&nbsp;<a href=\"".$PHP_SELF."?exec=accesgroupes_admin&mod_auteur=".$row['id_auteur']."&groupe=".$groupe."\"> "._T('accesgroupes:accepter')."</a>" : "";
             				   }
             				   else {
             						 		echo $row['id_auteur'];
@@ -694,12 +905,13 @@ function exec_accesgroupes_admin() {
 					 
         		  echo "\r\n<table CELLPADDING=2 CELLSPACING=0 class='arial2' style='width: 100%; border: 1px solid #aaa;'>\n";
               echo "\r\n<tr><th colspan='3'>"._T('accesgroupes:ss_groupes_groupe')."</th></tr>";
-        		  $sql102 = "SELECT spip_accesgroupes_auteurs.id_ss_groupe, spip_accesgroupes_auteurs.dde_acces, spip_accesgroupes_groupes.nom, spip_accesgroupes_auteurs.id_grpacces 
+        		  $sql102 = "SELECT spip_accesgroupes_auteurs.id_ss_groupe, spip_accesgroupes_groupes.nom, spip_accesgroupes_auteurs.id_grpacces 
         								 FROM spip_accesgroupes_auteurs
 												 LEFT JOIN spip_accesgroupes_groupes
 												 ON spip_accesgroupes_auteurs.id_ss_groupe = spip_accesgroupes_groupes.id_grpacces
         								 WHERE actif = 1 
         								 ORDER BY nom";
+// , spip_accesgroupes_auteurs.dde_acces
 //        								 WHERE spip_accesgroupes_auteurs.id_grpacces = $groupe 
         		  $result102 = spip_query($sql102);
 //echo '<br>mysql_error $sql102 = '.mysql_error();							
@@ -718,7 +930,7 @@ function exec_accesgroupes_admin() {
                      echo "\r\n<td style='border-top: 1px solid #cccccc; text-align : right; padding-right: 20px;'>";
             		     if ($id_util_restreint == 0 OR ($id_util_restreint != 0 AND accesgroupes_est_proprio($groupe) == TRUE)) {
             						 echo "\r\n<a href=\"".$PHP_SELF."?exec=accesgroupes_admin&del_ss_groupe=".$row['id_ss_groupe']."&groupe=".$groupe."\">"._T('accesgroupes:retirer_groupe')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' style='vertical-align: middle;'")."</a>";
-                         echo $row['dde_acces'] == 1 ? "&nbsp;|&nbsp;<a href=\"".$PHP_SELF."?exec=accesgroupes_admin&mod_ss_groupe=".$row['id_ss_groupe']."&groupe=".$groupe."\">"._T('accesgroupes:accepter')."</a>" : "";
+//                         echo $row['dde_acces'] == 1 ? "&nbsp;|&nbsp;<a href=\"".$PHP_SELF."?exec=accesgroupes_admin&mod_ss_groupe=".$row['id_ss_groupe']."&groupe=".$groupe."\">"._T('accesgroupes:accepter')."</a>" : "";
             				 }
             				 else {
             						  echo "&nbsp;";
@@ -752,15 +964,14 @@ function exec_accesgroupes_admin() {
           			 echo "\r\n<input type=\"submit\" name=\"add_statut\" value=\""._T('accesgroupes:ajouter')."\"  CLASS='fondo'/>";
         fin_cadre_couleur();
               } // fin limitation admin restreint
-           		$sql104 = "SELECT spip_accesgroupes_auteurs.sp_statut, spip_accesgroupes_auteurs.dde_acces, spip_accesgroupes_auteurs.id_grpacces
+           		$sql104 = "SELECT spip_accesgroupes_auteurs.sp_statut, spip_accesgroupes_auteurs.id_grpacces
               				 FROM spip_accesgroupes_auteurs
 											 LEFT JOIN spip_accesgroupes_groupes
 											 ON spip_accesgroupes_groupes.id_grpacces = spip_accesgroupes_auteurs.id_grpacces
               				 WHERE actif = 1 
               				 AND sp_statut != ''";
-//              				 GROUP BY sp_statut";
-//              				 WHERE spip_accesgroupes_auteurs.id_grpacces = $groupe 
            		$result104 = spip_query($sql104);
+// , spip_accesgroupes_auteurs.dde_acces
 //echo '<br>mysql_error $sql104 = '.mysql_error();              
            		echo "\r\n<table CELLPADDING=2 CELLSPACING=0 class='arial2' style='width: 100%; border: 1px solid #aaaaaa;'>\n";
            		echo "\r\n<tr><th colspan=\"3\">"._T('accesgroupes:statut_groupe')."</th></tr>";
@@ -779,7 +990,7 @@ function exec_accesgroupes_admin() {
                  		echo "\r\n<td style='border-top: 1px solid #cccccc; text-align : right; padding-right: 20px;'>";
         			   		if ($id_util_restreint == 0 OR ($id_util_restreint != 0 AND accesgroupes_est_proprio($groupe) == TRUE)) {
         						 	 echo "\r\n<a href=\"".$PHP_SELF."?exec=accesgroupes_admin&del_statut=".$statut_ec."&groupe=".$groupe."\">"._T('accesgroupes:retirer_statut')."&nbsp;".http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' style='vertical-align: middle;'")."</a>";
-                     	 echo ($row['dde_acces']== 1) ? "&nbsp;|&nbsp;<a href=\"".$PHP_SELF."?exec=accesgroupes_admin&mod_statut=".$statut_ec."&groupe=".$groupe."\">"._T('accesgroupes:accepter')."</a>" : "";
+//                     	 echo ($row['dde_acces']== 1) ? "&nbsp;|&nbsp;<a href=\"".$PHP_SELF."?exec=accesgroupes_admin&mod_statut=".$statut_ec."&groupe=".$groupe."\">"._T('accesgroupes:accepter')."</a>" : "";
         			   		}
         			   		else {
         			 					 echo "&nbsp;";
@@ -878,10 +1089,12 @@ function exec_accesgroupes_admin() {
            		echo "\r\n</form>\n";
         	 		echo "\r\n<script language=\"JavaScript\" type=\"text/javascript\">select_rubrique_acces();</script>";			
 
-					    $sql603 = "SELECT spip_rubriques.*, spip_accesgroupes_acces.prive_public
+					    $sql603 = "SELECT spip_rubriques.*, spip_accesgroupes_acces.prive_public, spip_auteurs.nom, spip_auteurs.id_auteur
                 				 FROM spip_accesgroupes_acces
 												 LEFT JOIN spip_rubriques
 												 ON spip_accesgroupes_acces.id_rubrique = spip_rubriques.id_rubrique
+												 LEFT JOIN spip_auteurs 
+												 ON spip_accesgroupes_acces.proprio = spip_auteurs.id_auteur
 												 WHERE id_grpacces = \"$groupe\"";
 //echo '<br>mysql_error $sql603 = '.mysql_error();
               
@@ -893,12 +1106,15 @@ function exec_accesgroupes_admin() {
            		while ($row = spip_fetch_array($result603)){
               			$prive_public_ec = $row['prive_public'];
         						$modif_id_rubrique = $row['id_rubrique'];
+										$id_proprio_ec = $row['id_auteur'];
+										$nom_proprio_ec = $row['nom'];
         						echo "\r\n<tr style='background-color: #eeeeee;'>";
         						echo "\r\n<td class='verdana11' style='border-top: 1px solid #cccccc; width: 14px; vertical-align:middle;'>";
         						echo "\r\n<img src='img_pack/rubrique-12.gif' alt='|_'></td>";
         						echo "\r\n<td style='border-top: 1px solid #cccccc;'><a href=\"?exec=naviguer&id_rubrique=".$row['id_rubrique']."\">".typo($row['titre'])."</a></td>";
         						echo "\r\n<td style='border-top: 1px solid #cccccc; text-align: right;'>";
-            		 		if ($id_util_restreint == 0 OR ($id_util_restreint != 0 AND accesgroupes_est_proprio_acces($row['id_rubrique']) == TRUE AND accesgroupes_est_proprio($groupe) == TRUE)) {
+            		 		if ($id_util_restreint == 0 OR ($id_util_restreint != 0 AND accesgroupes_est_proprio_acces($row['id_rubrique']) == TRUE)) {
+//  AND accesgroupes_est_proprio($groupe) == TRUE										
                   		  echo "\r\n<form action=\"$PHP_SELF?exec=accesgroupes_admin&groupe=$groupe\" name=\"form_modif_rubrique_".$modif_id_rubrique."\" method=\"post\">\n";
             						echo "\r\n<input  style=\"font-size: 75%;\" type=\"submit\" name=\"submit_modif_rub\" value=\""._T('accesgroupes:modifier')."\"  CLASS='fondo'/></td>\n";
             						echo "\r\n<td style=\"border-top: 1px solid #cccccc;\">";
@@ -918,8 +1134,15 @@ function exec_accesgroupes_admin() {
             			  }
             			  else {
             			 		  echo "\r\n</td>";
-												echo "\r\n<td style=\"border-top: 1px solid #ccc; padding-right: 10px;\" ></td>";
-												echo "\r\n<td style=\"border-top: 1px solid #ccc; padding-right: 10px;\" ></td>";
+												echo "\r\n<td style=\"border-top: 1px solid #ccc; padding-right: 10px;\" colspan=\"2\">";
+												echo '('._T('accesgroupes:restriction_cree_par').' : ';
+												if ($nom_proprio_ec != '') {
+													 echo '<a href="?exec=auteurs_edit&id_auteur='.$id_proprio_ec.'">'.$nom_proprio_ec.'</a>';
+												}
+												else {
+														 echo _T('accesgroupes:tous_les_admins');
+												}		 
+												echo ")</td>";
             			  }
             				echo "\r\n</tr>";
               }
@@ -958,7 +1181,7 @@ function exec_accesgroupes_admin() {
                   }
 							}
       
-        }   // fin du else extra-long (interface gestion si groupe déterminé)
+        }   // fin du else extra-long (affichage interface gestion si groupe déterminé)
 				
 				
         fin_page();
@@ -968,157 +1191,4 @@ function exec_accesgroupes_admin() {
 
 
 
-// OLD : v 0.7
-
-/*     INITIALISATION DES TABLES DE JPK_GROUPES
-*   définition et test existence des tables jpk_ 
-*   + création de la table si pas encore installée. 
-*   PAS de DROP donc pas de risque de RAZ des contenus existants
-
-
-// existe t'il des tables version 0.6 ?
-		$sql6880 = "SHOW TABLES LIKE '".$prefix_tables_SPIP."_jpk_groupes'";
-		@$result6880 = spip_query($sql6880);
-// si pas de tables v0.6, créer les tables
-		if (! @$data6880 =  spip_num_rows($result6880) AND spip_num_rows($result6880) < 1) {
-    		$sql6881 = "SHOW TABLES LIKE '$Tjpk_groupes'";
-    		@$result6881 = spip_query($sql6881);
-        if (! @$data6881 =  spip_num_rows($result6881) AND spip_num_rows($result6881) < 1) {
-    // création de la table si elle n'existe pas
-    			 $sql_create1 = "CREATE TABLE $Tjpk_groupes (
-                                    id_grpacces bigint(20) NOT NULL auto_increment,
-                                    nom varchar(30) NOT NULL default '',
-                                    description varchar(250) default NULL,
-                                    actif smallint(1) NOT NULL default '0',
-                                    proprio bigint(21) NOT NULL default '0',
-    																demande_acces tinyint(4) NOT NULL default '0',
-                            PRIMARY KEY  (id_grpacces),
-                            UNIQUE KEY nom (nom) )";
-    			 @spip_query($sql_create1);
-    			 if (mysql_error() != '') {
-    			 			$msg_text .= "<br />".mysql_error()." "._T('accesgroupes:creation_table')." ".$Tjpk_groupes."\r\n";
-    						$alerte = 1;
-    			 }
-    			 else {
-    					 $msg_text .= "<br />"._T('accesgroupes:creation_table')." ".$Tjpk_groupes."\r\n";
-    			 }
-    		}
-    		
-    		$sql6882 = "SHOW TABLES LIKE '$Tjpk_groupes_auteurs'";
-    		$result6882 = spip_query($sql6882);
-        if (! @$data6882 =  spip_num_rows($result6882) AND spip_num_rows($result6882) < 1) {
-    // création de la table si elle n'existe pas
-    			 $sql_create2 = "CREATE TABLE $Tjpk_groupes_auteurs (
-                                id_grpacces bigint(21) NOT NULL default '0',
-                                id_auteur bigint(21) NOT NULL default '0',
-                                id_ss_groupe bigint(21) NOT NULL default '0',
-                                sp_statut varchar(255) NOT NULL default '',
-                                dde_acces smallint(1) NOT NULL default '1',
-                                proprio bigint(21) NOT NULL default '0',
-                             UNIQUE KEY id_grp (id_grpacces,id_auteur,id_ss_groupe,sp_statut) )";
-    			 @spip_query($sql_create2);
-    			 if (mysql_error() != '') {
-    					 $msg_text .= "<br />".mysql_error()."  "._T('accesgroupes:creation_table')." ".$Tjpk_groupes_auteurs."\r\n";
-    					 $alerte = 1;
-    			 }
-    			 else {
-    					 $msg_text .= "<br />"._T('accesgroupes:creation_table')." ".$Tjpk_groupes_auteurs."\r\n";
-    			 }
-    		}
-    		
-    		
-    		$sql6883 = "SHOW TABLES LIKE '$Tjpk_groupes_acces'";
-    		$result6883 = spip_query($sql6883);
-        if (! @$data6883 =  spip_num_rows($result6883) AND spip_num_rows($result6883) < 1) {
-    // création de la table si elle n'existe pas
-    			 $sql_create3 ="CREATE TABLE $Tjpk_groupes_acces (
-                                id_grpacces bigint(21) NOT NULL default '0',
-                                id_rubrique bigint(21) NOT NULL default '0',
-                                id_article bigint(21) default NULL,
-                                dtdb date default NULL,
-                                dtfn date default NULL,
-                                proprio bigint(21) NOT NULL default '0',
-    														prive_public SMALLINT(6) NOT NULL default '0',
-    														
-                              KEY id_grpacces (id_grpacces),
-                              KEY id_rubrique (id_rubrique),
-                              KEY id_article (id_article) )";
-    			@spip_query($sql_create3);
-    			if (mysql_error() != '' ) {
-    			 			$msg_text .= "<br />".mysql_error()." "._T('accesgroupes:creation_table')." ".$Tjpk_groupes_acces."\r\n";
-    						$alerte = 1;
-    			 }
-    			 else {
-    					 $msg_text .= "<br />"._T('accesgroupes:creation_table')." ".$Tjpk_groupes_acces."\r\n";
-    			 }
-    		}
-		}
-// si il existe des tables v0.6, lancement du patch pour passer de v0.61	à v0.7
-		else {
-    // étape 1 renommer les tables prefixspip_jpk_xxx en prefixspip_accesgroupe_groupes, prefixspip_accesgroupe_acces, prefixspip_accesgroupe_auteurs  	       
-    		 spip_query("ALTER TABLE ".$prefix_tables_SPIP."_jpk_groupes RENAME ".$Tjpk_groupes);
-    		 spip_query("ALTER TABLE ".$prefix_tables_SPIP."_jpk_groupes_acces RENAME ".$Tjpk_groupes_acces);
-    		 spip_query("ALTER TABLE ".$prefix_tables_SPIP."_jpk_groupes_auteurs RENAME ".$Tjpk_groupes_auteurs);		
-    		 if (mysql_error() != '') {
-    		 		$alerte = 1;
-    				$msg_text .= _T('accesgroupes:erreur_patch0.7_etape1');
-    		 }
-    
-    // étape 2 : ajout des champs supplémentaires
-      	$sql701 = "SHOW COLUMNS FROM $Tjpk_groupes_acces";
-    		$result701 = spip_query($sql701);
-        $col_names = array();
-      	if ($sql701) {
-         		while ($row701 = spip_fetch_array($result701)) {
-         					$col_names[]=$row701[0];
-         		}
-      	}
-        if (!in_array('prive_public', $col_names)) {
-      		  spip_query("ALTER TABLE $Tjpk_groupes_acces ADD prive_public smallint(6) NOT NULL");
-      		  if (mysql_error() != '') {  
-      				 $alerte = 1;
-    					 $msg_text .= _T('accesgroupes:erreur_patch0.7_etape2');
-      	 		}
-      	}
-    		
-      	$sql702 = "SHOW COLUMNS FROM $Tjpk_groupes";
-    		$result702 = spip_query($sql702);
-        $col_names = array();
-      	if ($sql702) {
-         		while ($row702 = spip_fetch_array($result702)) {
-         					$col_names[]=$row702[0];
-         		}
-      	}
-        if (!in_array('demande_acces', $col_names)) {
-      		  spip_query("ALTER TABLE $Tjpk_groupes ADD demande_acces tinyint(4) NOT NULL default '0'");
-      		  if (mysql_error() != '') {  
-      				 $alerte = 1;
-    					 $msg_text .= _T('accesgroupes:erreur_patch0.7_etape2');
-      	 		}
-      	}
-    		
-    // étape 3 transformation des champs intitulés id_groupe en id_grpacces
-     	  if (!in_array('id_grpacces', $col_names)) {
-     	      spip_query("ALTER TABLE $Tjpk_groupes CHANGE id_groupe id_grpacces BIGINT( 20 ) NOT NULL AUTO_INCREMENT ");
-     	    	spip_query("ALTER TABLE $Tjpk_groupes_acces CHANGE id_groupe id_grpacces BIGINT( 21 ) DEFAULT '0' NOT NULL ");
-     	    	spip_query("ALTER TABLE $Tjpk_groupes_auteurs CHANGE id_groupe id_grpacces BIGINT( 21 ) DEFAULT '0' NOT NULL ");   
-     	    	if (mysql_error() != '') {
-     	         $alerte = 1;
-     	         $msg_text .= '<br>'._T('accesgroupes:erreur_patch0.7_etape3');
-    					 $msg_text .= mysql_error();
-     	    	}
-     	  }
-				if ($msg_txt == '') {
-					 $msg_text .= _T('accesgroupes:OK_patch0.7');
-				}
-    // fin patch
-	  }	  
-
-		if ($msg_text != '') {
-			 $msg_text = _T('accesgroupes:installation').($alerte != 1 ? _T('accesgroupes:install_ok') : _T('accesgroupes:install_pas_ok') ).'<br />'.$msg_text;
-		}
-		
-// FIN INITIALISATION TABLES ACCESGROUPES
-
-*/		
 ?>

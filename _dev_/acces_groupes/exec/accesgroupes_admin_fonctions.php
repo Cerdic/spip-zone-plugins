@@ -4,12 +4,13 @@
 // affichage de la liste des rubriques disponibles pour l'utilisateur 
 //      rubriques privées en rouge + vert + jaune + bleu
 function accesgroupes_enfant($leparent){
-				global $Trub_grpe_ec_parent;
+				global $Trub_grpe_ec_parent;  // tableau des rubriques restreintes par le groupe en cours
 				global $groupe;
         global $connect_toutes_rubriques;
         global $i;
         global $couleur_claire, $spip_lang_left;
         global $browser_name, $browser_version;
+				global $dernier_option;
 //				global $prive_public_ec, $prive_public_parent_ec;
 
         $i++;
@@ -25,7 +26,7 @@ function accesgroupes_enfant($leparent){
               $langue_choisie_rub = $row['langue_choisie'];
               $style = "";
               $espace = "";
-              $prive = $row['prive'];
+//              $prive = $row['prive'];
       
               if (eregi("mozilla", $browser_name)) {
                   $style .= "padding-$spip_lang_left: ".($i*16)."px;";
@@ -232,20 +233,13 @@ function accesgroupes_affiche_groupes_rubriques() {
 							 $a_afficher .= "<img src='"._DIR_PLUGIN_ACCESGROUPES."/img_pack/groupe-12.png' alt='|_' style='vertical-align:top;'></td>";
       				 $a_afficher .= "<td style='border-top: 1px solid #cccccc;'><a href=\"$PHP_SELF?exec=accesgroupes_admin&groupe=".$id_grpe_ec."\">";
   						 if ($row301['actif'] != 1) {
-  						 		$a_afficher .= '('.$nom_grpe_ec.' : '._T('accesgroupes:inactif').')';
+  						 		$a_afficher .= '('.$nom_grpe_ec.' : <span style="color: #6c3;">'._T('accesgroupes:inactif').'</span>)';
   						 }
   						 else {
   						 			$a_afficher .= $nom_grpe_ec;
   						 }
 							 $a_afficher .= "</a><br />";
       				 $a_afficher .= "<div style='margin-left: 20px; font-size: 10px; padding: 2px;'>";
-      				 
-/*							 
-							 $sql302 = "SELECT spip_rubriques.titre, spip_rubriques.id_rubrique
-      				 				 	  FROM spip_rubriques, spip_accesgroupes_acces
-      										WHERE spip_accesgroupes_acces.id_grpacces = $id_grpe_ec
-      										AND spip_accesgroupes_acces.id_rubrique = spip_rubriques.id_rubrique";
-*/													
 							 $sql302 = "SELECT spip_rubriques.titre, spip_rubriques.id_rubrique
       				 				 	  FROM spip_rubriques
 													LEFT JOIN spip_accesgroupes_acces
@@ -257,7 +251,13 @@ function accesgroupes_affiche_groupes_rubriques() {
       				 					$id_rub_ec = $row302['id_rubrique'];
       									$nom_rub_ec = $row302['titre'];
       									$a_afficher .= "<img src='"._DIR_PLUGIN_ACCESGROUPES."/img_pack/sous-groupe.png' alt='|_' style='vertical-align:top;'>";
-      									$a_afficher .= " <a href=\"?exec=naviguer&id_rubrique=".$id_rub_ec."\"><img src='img_pack/rubrique-12.gif' alt='|_' style='vertical-align:top; border: 0px;'>".$nom_rub_ec."</a><br />";
+      									$a_afficher .= " <a href=\"?exec=naviguer&id_rubrique=".$id_rub_ec."\"><img src='img_pack/rubrique-12.gif' alt='|_' style='vertical-align:top; border: 0px;'>".$nom_rub_ec;
+							 
+          							if (accesgroupes_est_admin_rubrique($id_rub_ec) == TRUE) {
+          							 		$a_afficher .= " <img src='img_pack/admin-12.gif'>";
+          							}
+          							 
+												$a_afficher .= "</a><br />";
       				 		}
       				 }
 //echo '<br>mysql_error $sql302 = '.mysql_error();				 
@@ -381,6 +381,32 @@ function accesgroupes_rub_reinit(){
         }
 }
 
+//  fct pour déterminer si une sous-rubrique est inclue dans une rubrique gérée par un admin restreint
+function accesgroupes_est_admin_rubrique($id_rub) {
+				 $id_auteur_ec = accesgroupes_trouve_id_utilisateur();
+			// remonter dans l'ascendance de la rubrique jusqu'à trouver une rubrique parent dont l'admin en cours est l'admin restreint
+				 do {
+						$sql563 = "SELECT COUNT(*) AS nb_rub 
+											 FROM spip_auteurs_rubriques
+											 WHERE id_rubrique = $id_rub
+											 AND id_auteur = $id_auteur_ec";
+						$result563 = spip_query($sql563);
+						if ($row563 = spip_fetch_array($result563) AND $row563['nb_rub'] > 0) {
+							 return TRUE;
+						}
+						else {
+								 $sql564 = "SELECT id_parent
+								 				 	  FROM spip_rubriques
+														WHERE id_rubrique = $id_rub
+														LIMIT 1";
+								 $result564 = spip_query($sql564);
+								 $row564 = spip_fetch_array($result564);
+								 $id_rub = $row564['id_parent'];
+						}
+				 }
+				 while ($id_rub != 0);
+				 return FALSE;
+}
 
 
 /* versions avant modifs

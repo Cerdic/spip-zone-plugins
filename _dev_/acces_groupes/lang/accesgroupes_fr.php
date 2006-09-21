@@ -1,9 +1,27 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+// patch pour maj des tables
+'erreur_patch0.7_etape1' => 'Erreur lors du renommage des tables : le passage &agrave; la version 0.7 n\'est pas fait !',
+'erreur_patch0.7_etape2' => 'Erreur lors de la cr&eacute;ation du champ prive_public dans la table xxx_jpk_groupes_acces : le passage &agrave; la version 0.7 n\'est pas fait !',
+'erreur_patch0.7_etape3' => 'Erreur lors de la conversion des champs "id_groupe" en "id_grpacces" : le passage &agrave; la version 0.7 n\'est pas fait !',
+'OK_patch0.7' => 'La modification des tables pour le passage &agrave; la version 0.7 s\'est d&eacute;roul&eacute; sans probl&egrave;me',
+'lancer_patch' => 'Lancer la modification des tables',
+'titre_patch' => 'Mise &agrave; jour des tables utilis&eacute;es par le plugin acces_groupes',
+'info_patch' => 'Ce script permet de modifier les tables de la base de donn&eacute;es de la contrib "acc&egrave;s par groupes" afin de les rendre compatibles avec la version 1.0
+						 		 <br><strong>Si vous n\'aviez pas install&eacute; la contrib "acc&egrave;s restreints par groupes" sur votre spip 1.8, il n\'est pas utile pour vous : passez votre chemin !</strong>
+								 <br>Versions support&eacute;es : contrib v0.6* et v0.7
+								 <br><br>Afin de pouvoir r&eacute;aliser cette mise &agrave; jour (et pour s&eacute;curit&eacute;)
+								 vous devez renseigner les param&egrave;tres de connexion &agrave; la base de donn&eacute;es
+								 <br>Pour le param&egrave;tre "Pr&eacute;fixe des tables SPIP", si vous avez une install "standard", laissez "spip"
+								 sinon il s\'agit de la valeur de la variable "$table_prefix" renseign&eacute;e dans le fichier /ecrire/mes_options.php
+								 (si ce fichier n\'existe pas, alors c\'est que votre install est "standard").',
+'titre_formulaire_patch' => 'Param&egrave;tres de la base de donn&eacute;es',								 
+
 'module_titre'=>'Acc&egrave;s restreints par groupes',
-'module_info'=>'Ce module permet de g&eacute;rer les acc&egrave;s aux rubriques.<br />Choisir de donner l\'acc&egrave;s a une rubrique, la rend automatiquement priv&eacute;e pour les autres utilisateurs.',
-// BLOC GROUPES
+'module_info'=>'Ce plugin permet de g&eacute;rer les restrictions d\'acc&egrave;s aux rubriques.<br />
+								Si un groupe restreint l\'acc&egrave;s pour une rubrique elle sera invisible dans l\'espace public 
+								et inaccessible dans l\'espace priv&eacute; pour les utilisateurs n\'appartenant pas &agrave; ce groupe.',
 'select' => 'S&eacute;lection d\'un groupe',
 'select_vide' => '-- liste des groupes --',
 'nom' => 'NOM',
@@ -12,14 +30,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'inactif' => 'd&eacute;sactiv&eacute;',
 'creer' => 'Cr&eacute;er',
 'modifier' => 'Modifier',
-// BLOC MEMBRES
+'changer_proprio_groupe' => 'Propri&eacute;taire',
+'tous_les_admins' => 'admins g&eacute;n&eacute;raux',
+'changer_proprio_help' => 'Modifie le propri&eacute;pri&eacute;taire du groupe', 
+'erreur_modif_proprio' => 'Erreur lors de la modification du proprio du groupe : ',
+'erreur_modif_proprio_acces' => 'Erreur lors de la modification du proprio des acces aux rubriques du groupe : ',
+'erreur_modif_proprio_auteurs' => 'Erreur lors de la modification du proprio des auteurs du groupe : ',
 'membres' => 'Membres du groupe',
 'choisir' => 'Vous devez choisir un groupe',
 'ajouter' => 'Ajouter',
 'accepter' => 'Accepter dans le groupe',
-// BLOC RUBRIQUES
 'rubriques_restreintes' => 'Rubriques &agrave; acc&egrave;s restreint',
-'rubriques_autorisees_info' => 'Rubriques &agrave; acc&egrave;s restreint pour ce groupe: ',
+'rubriques_autorisees_info' => 'Rubriques &agrave; acc&egrave;s restreint par ce groupe: ',
 'prive_public' => 'priv&eacute; + public',
 'prive_seul' =>  'priv&eacute;',
 'public_seul' => 'public',
@@ -34,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'non_connecte' => 'Votre profil ne vous donne pas acc&egrave;s &agrave; cette partie du site',
 'bloque_rubrique' => 'Vous ne faites pas partie d\'un groupe autoris&eacute; &agrave; acc&eacute;der &agrave; cette rubrique',
 'bloque_article' => 'Vous ne faites pas partie d\'un groupe autoris&eacute; &agrave; acc&eacute;der aux articles de cette rubrique',
+'bloque_breve' => 'Vous ne faites pas partie d\'un groupe autoris&eacute; &agrave; acc&eacute;der aux breves de cette rubrique',
 'groupes' => 'Groupes',
 'titre_groupes' => 'Groupes et rubriques &agrave; acc&egrave;s restreint<br />',
 'titre_page_groupe' => 'Gestion du groupe',
@@ -65,10 +88,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'prive' => 'partie priv&eacute;e',
 'les_2' => 'priv&eacute;e + publique',
 'suppression' => 'Suppression',
-'erreur_patch0.7_etape1' => 'Erreur lors du renommage des tables : le passage &agrave; la version 0.7 n\'est pas fait !',
-'erreur_patch0.7_etape2' => 'Erreur lors de la cr&eacute;ation du champ prive_public dans la table xxx_jpk_groupes_acces : le passage &agrave; la version 0.7 n\'est pas fait !',
-'erreur_patch0.7_etape3' => 'Erreur lors de la conversion des champs "id_groupe" en "id_grpacces" : le passage &agrave; la version 0.7 n\'est pas fait !',
-'OK_patch0.7' => 'La modification des tables pour le passage &agrave; la version 0.7 s\'est d&eacute;roul&eacute; sans probl&egrave;me',
 'supprimer' => 'Supprimer',
 'supprimer_tout' => 'D&eacute;truire le groupe',
 'help_supprimer' => 'D&eacute;truire le groupe aura pour cons&eacute;quence de supprimer tous les utilisateurs/sous-groupes/statuts qu\'il contient ainsi que de remettre toutes les rubriques qu\'il contr&ocirc;le accessibles!',
@@ -91,14 +110,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'msg_demande_acces1' => 'l\'auteur ',
 'msg_demande_acces2' => ' souhaite &ecirc;tre int&eacute;gr&eacute; dans le groupe ',
 'msg_demande_acces3' => ' pour pouvoir acc&eacute;der &agrave; la rubrique ',
-'msg_demande_acces4' => '<br />Pour traiter sa demande, rendez-vous sur l\'interface de gestion des groupes <a href="accesgroupes_admin.php3?groupe=',
-'msg_demande_acces5' => '">en cliquant sur ce lien</a>',
-'msg_demande_acces6' => '<br /><strong>Message de l\'utilisateur :</strong><br />',
+'msg_demande_acces4' => '<br />Pour traiter sa demande, rendez-vous sur l\'interface de gestion des groupes ',
+'msg_demande_acces5' => ' en cliquant sur ce lien.',
+'msg_demande_acces6' => '(lorsque vous aurez trait&eacute; la demande de cet auteur, ce message sera automatiquement effac&eacute; et un message l\'informant de votre d&eacute;cision lui sera envoy&eacute;)',
+'msg_demande_acces7' => 'Message de l\'utilisateur :',
 'titre_demande_acces' => 'Demande d\'int&eacute;gration dans un groupe pour acc&eacute;der &agrave; une rubrique restreinte',
 'demande_ok' => 'Votre demande à été envoy&eacute;e au(x) gestionnaire(s) du groupe',
 'duplicata_demande_acces' => 'Il existe d&eacute;ja une demande d\'int&eacute;gration dans ce groupe &agrave; votre nom : merci d\'&ecirc;tre patient et d\'attendre que cette demande ait &eacute;t&eacute; trait&eacute;e...',
 'erreur_creation_demande_acces' => 'Une erreur s\'est produite lors de la cr&eacute;ation de votre demande d\'acc&egrave;s',
-'titre_msg_text' => 'Information'
+'titre_msg_text' => 'Information',
+'restriction_cree_par' => 'restriction g&eacute;r&eacute;e par',
+'titre_message_retour' => 'R&eacute;ponse &agrave; une demande d\'acc&egrave;s',
+'message_retour' => 'Votre demande d\'int&eacute;gration au groupe ',
+'message_accepte' => ' est accept&eacute;e.',
+'message_refuse' => ' est refus&eacute;e.'
 
 );
 ?>

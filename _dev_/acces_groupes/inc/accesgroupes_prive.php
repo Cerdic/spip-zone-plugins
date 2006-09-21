@@ -1,7 +1,6 @@
 <?php
 // toutes les fonctions exec_xxx de l'espace privé modifiées par accesgroupes
 
-
 // http://doc.spip.org/@exec_articles_dist
 function exec_articles() {
       	global $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $debut, $id_article, $trad_err; 
@@ -65,22 +64,7 @@ function exec_articles() {
       //echo '<br>$acces = '.$acces;
       //echo '<br>accesgroupes_RubPrive(42, "prive") = '.accesgroupes_RubPrive(42, 'prive');		
           if ($acces == 1 || $acces == 2) { 
-              debut_gauche(); 
-              debut_boite_info(); 
-              echo "<div align='center'>\n"; 
-              echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('info_numero_article')."</b></font>\n"; 
-              echo "<br><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_article</b></font>\n"; 
-              echo "</div>\n"; 
-              fin_boite_info(); 
-              debut_droite(); 
-              debut_cadre_relief($ze_logo); 
-              echo "\n<table cellpadding=2 cellspacing=0 border=0 width='100%'>"; 
-              echo "<tr width='100%'> <td width='100%' valign='top' colspan='2'>"; 
-              gros_titre($titre); 
-              echo "</td> </tr> <td>".http_img_pack("warning.gif",'', "width='48' height='48'", _T('info_administrer_rubrique')); 
-              echo "</td><td>"._T('accesgroupes:bloque_article')."</td></tr>"; 
-              echo "</table>\n"; 
-              fin_cadre_relief(); 
+              accesgroupes_affichage_acces_restreint(); 
           } 
       		else { 
       
@@ -277,22 +261,7 @@ function exec_articles_edit()
 //echo '<br>$acces = '.$acces;
 //echo '<br>accesgroupes_RubPrive(42, "prive") = '.accesgroupes_RubPrive(42, 'prive');		
     if ($acces == 1 || $acces == 2) { 
-        debut_gauche(); 
-        debut_boite_info(); 
-        echo "<div align='center'>\n"; 
-        echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('info_numero_article')."</b></font>\n"; 
-        echo "<br><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_article</b></font>\n"; 
-        echo "</div>\n"; 
-        fin_boite_info(); 
-        debut_droite(); 
-        debut_cadre_relief($ze_logo); 
-        echo "\n<table cellpadding=2 cellspacing=0 border=0 width='100%'>"; 
-        echo "<tr width='100%'> <td width='100%' valign='top' colspan='2'>"; 
-        gros_titre($titre); 
-        echo "</td> </tr> <td>".http_img_pack("warning.gif",'', "width='48' height='48'", _T('info_administrer_rubrique')); 
-        echo "</td><td>"._T('accesgroupes:bloque_article')."</td></tr>"; 
-        echo "</table>\n"; 
-        fin_cadre_relief(); 
+        accesgroupes_affichage_acces_restreint(); 
     } 
 		else { 
 
@@ -388,22 +357,7 @@ fin_grand_cadre();
 //echo '<br>$acces = '.$acces;
 //echo '<br>accesgroupes_RubPrive(42, "prive") = '.accesgroupes_RubPrive(42, 'prive');		
     if ($acces == 1 || $acces == 2) { 
-        debut_gauche(); 
-        debut_boite_info(); 
-        echo "<div align='center'>\n"; 
-        echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('info_numero_article')."</b></font>\n"; 
-        echo "<br><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_article</b></font>\n"; 
-        echo "</div>\n"; 
-        fin_boite_info(); 
-        debut_droite(); 
-        debut_cadre_relief($ze_logo); 
-        echo "\n<table cellpadding=2 cellspacing=0 border=0 width='100%'>"; 
-        echo "<tr width='100%'> <td width='100%' valign='top' colspan='2'>"; 
-        gros_titre($titre); 
-        echo "</td> </tr> <td>".http_img_pack("warning.gif",'', "width='48' height='48'", _T('info_administrer_rubrique')); 
-        echo "</td><td>"._T('accesgroupes:bloque_article')."</td></tr>"; 
-        echo "</table>\n"; 
-        fin_cadre_relief(); 
+        accesgroupes_affichage_acces_restreint(); 
     } 
 		else { 
 
@@ -597,22 +551,7 @@ fin_grand_cadre();
 //echo '<br>$acces = '.$acces;
 //echo '<br>accesgroupes_RubPrive(42, "prive") = '.accesgroupes_RubPrive(42, 'prive');		
     if ($acces == 1 || $acces == 2) { 
-        debut_gauche(); 
-        debut_boite_info(); 
-        echo "<div align='center'>\n"; 
-        echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('info_numero_article')."</b></font>\n"; 
-        echo "<br><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_article</b></font>\n"; 
-        echo "</div>\n"; 
-        fin_boite_info(); 
-        debut_droite(); 
-        debut_cadre_relief($ze_logo); 
-        echo "\n<table cellpadding=2 cellspacing=0 border=0 width='100%'>"; 
-        echo "<tr width='100%'> <td width='100%' valign='top' colspan='2'>"; 
-        gros_titre($titre); 
-        echo "</td> </tr> <td>".http_img_pack("warning.gif",'', "width='48' height='48'", _T('info_administrer_rubrique')); 
-        echo "</td><td>"._T('accesgroupes:bloque_article')."</td></tr>"; 
-        echo "</table>\n"; 
-        fin_cadre_relief(); 
+        accesgroupes_affichage_acces_restreint(); 
     } 
 		else { 
 
@@ -797,28 +736,13 @@ function exec_naviguer()
 	  else $titre = _T('info_racine_site').": ". $GLOBALS['meta']["nom_site"];
 	  fin_grand_cadre();
 
-// MODIF GROUPEACCES : début du contrôle d'acces à la rubrique
+// MODIF ACCESGROUPES : début du contrôle d'acces à la rubrique
     
     $acces = accesgroupes_verif_acces($id_rubrique, 'prive'); 
 //echo '<br>$acces = '.$acces;
 //echo '<br>accesgroupes_RubPrive(42, "prive") = '.accesgroupes_RubPrive(42, 'prive');		
     if ($acces == 1 || $acces == 2) { 
-        debut_gauche(); 
-        debut_boite_info(); 
-        echo "<div align='center'>\n"; 
-        echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('info_numero_article')."</b></font>\n"; 
-        echo "<br><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_article</b></font>\n"; 
-        echo "</div>\n"; 
-        fin_boite_info(); 
-        debut_droite(); 
-        debut_cadre_relief($ze_logo); 
-        echo "\n<table cellpadding=2 cellspacing=0 border=0 width='100%'>"; 
-        echo "<tr width='100%'> <td width='100%' valign='top' colspan='2'>"; 
-        gros_titre($titre); 
-        echo "</td> </tr> <td>".http_img_pack("warning.gif",'', "width='48' height='48'", _T('info_administrer_rubrique')); 
-        echo "</td><td>"._T('accesgroupes:bloque_article')."</td></tr>"; 
-        echo "</table>\n"; 
-        fin_cadre_relief(); 
+			 accesgroupes_affichage_acces_restreint();
     } 
 		else { 
 
