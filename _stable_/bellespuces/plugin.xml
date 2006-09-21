@@ -1,0 +1,24 @@
+<plugin>
+  <nom>
+<!-- Nom du plugin -->
+	Belles puces
+	</nom>
+  <auteur>
+<!-- Auteur du plugin -->J&eacute;r&ocirc;me Combaz - Distribu&eacute; sous licence GNU/GPL
+	</auteur>
+  <lien>http://conseil-recherche-innovation.net/index.php/2000/07/08/72-jerome-combaz</lien>
+  <version>
+	0.1
+	</version>
+  <etat>
+        stable
+	</etat>
+  <description>Remplace les puces - (tiret) des articles par des puces -* (&lt;li>...)</description>
+  <prefix>bellespuces
+	</prefix>
+<!-- Definitions des fonctions qui s'inserent dans les pipelines -->  <pipeline>
+    <nom>pre_typo</nom>
+    <action>pre_typo</action>
+    <inclure>bellespuces.php</inclure>
+  </pipeline>
+</plugin>
