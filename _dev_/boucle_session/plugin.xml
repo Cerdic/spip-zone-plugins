@@ -1,9 +1,17 @@
 <plugin>
- 	<nom>Boucle session</nom>
-	<auteur>Christian Lefebvre, Atos Worldline &copy; 2006 - Distribue sous licence GNU/GPL</auteur>
-	<version>0.1</version>
+ 	<nom>Boucle Session</nom>
+	<auteur>
+		Christian Lefebvre, Atos Worldline;
+	 	James, Portos Worldwide
+
+		- &#169; 2006 Distribue sous licence GNU/GPL
+	</auteur>
+	<version>0.2</version>
 	<etat>dev</etat>
-	<description>boucle sur la session courante, permettant d'obtenir des d&eacute;tails sur l'internaute qui est en train de charger la page
+	<description>
+	Boucle sur la session courante, permettant d'obtenir des d&#233;tails sur l'internaute qui est en train de charger la page, ou de lui fournir un contenu particulier.
+
+	[Page de test->../spip.php?page=session]
 	</description>
 	<fonctions>boucleSession.php</fonctions>
 	<prefix>boucleSession</prefix>

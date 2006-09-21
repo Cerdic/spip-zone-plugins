@@ -1,0 +1,125 @@
+#CACHE{0}<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>Exemples Boucle(SESSION)</title>
+	<INCLURE{fond=inc-head}>
+</head>
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Exemples Boucle(SESSION)</div>
+
+	<div id="conteneur">
+
+		<div id="contenu">
+
+			<div class="cartouche">
+				<h1 class="titre">Exemples Boucle(SESSION)</h1>
+			</div>
+
+			<div class="liste-articles">
+				<h2 class="invisible"><:derniers_articles:></h2>
+				<ul>
+
+					<li>
+						<p class=" texte spip_logos" style="background: #fff; border: 1px dashed #ccc;"><code>
+							&lt;BOUCLE_sess1(SESSION)><br>
+							&lt;p>id_auteur = &#35;ID_AUTEUR&lt;/p><br>
+							&lt;p>nom = &#35;NOM&lt;/p><br>
+							&lt;p>statut = &#35;STATUT&lt;/p><br>
+							&lt;p>couleur = &#35;PREFS{couleur}&lt;/p><br>
+							&lt;/BOUCLE_sess1>
+						</code></p>
+						<h3 class="titre">Sans condition :</h3>
+						<div class="texte">
+							<BOUCLE_sess1(SESSION)>
+							<p class="spip">id_auteur = #ID_AUTEUR</p>
+							<p>nom = #NOM</p>
+							<p>statut = #STATUT</p>
+							<p>couleur = #PREFS{couleur}</p>
+							</BOUCLE_sess1>
+						</div>
+						<br class="nettoyeur" />
+					</li>
+
+					<li>
+						<p class=" texte spip_logos" style="background: #fff; border: 1px dashed #ccc;"><code>
+							&lt;BOUCLE_sess2(SESSION){anonymous}><br>
+							&lt;p>id_auteur = &#35;ID_AUTEUR&lt;/p><br>
+							&lt;p>nom = &#35;NOM&lt;/p><br>
+							&lt;p>statut = &#35;STATUT&lt;/p><br>
+							&lt;p>couleur = &#35;PREFS{couleur}&lt;/p><br>
+							&lt;/BOUCLE_sess2>
+						</code></p>
+						<h3 class="titre">Crit&egrave;re {anonymous} :</h3>
+						<div class="texte">
+							<BOUCLE_sess2(SESSION){anonymous}>
+							<p class="spip">id_auteur = #ID_AUTEUR</p>
+							<p>nom = #NOM</p>
+							<p>statut = #STATUT</p>
+							<p>couleur = #PREFS{couleur}</p>
+							</BOUCLE_sess2>
+						</div>
+						<br class="nettoyeur" />
+					</li>
+
+					<li>
+						<p class=" texte spip_logos" style="background: #fff; border: 1px dashed #ccc;"><code>
+							&lt;BOUCLE_sess3(SESSION){!anonymous}><br>
+							&lt;p>id_auteur = &#35;ID_AUTEUR&lt;/p><br>
+							&lt;p>nom = &#35;NOM&lt;/p><br>
+							&lt;p>statut = &#35;STATUT&lt;/p><br>
+							&lt;p>couleur = &#35;PREFS{couleur}&lt;/p><br>
+							&lt;/BOUCLE_sess3>
+						</code></p>
+						<h3 class="titre">Crit&egrave;re {!anonymous} :</h3>
+						<div class="texte">
+							<BOUCLE_sess3(SESSION){!anonymous}>
+							<p class="spip">id_auteur = #ID_AUTEUR</p>
+							<p>nom = #NOM</p>
+							<p>statut = #STATUT</p>
+							<p>couleur = #PREFS{couleur}</p>
+							</BOUCLE_sess3>
+						</div>
+						<br class="nettoyeur" />
+					</li>
+
+				</ul>
+			</div>
+	
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+	
+			<div class="divers">
+				<BOUCLE_connu(SESSION){!anonymous}>
+				<h2 class="menu-titre">Bonjour #NOM</h2>
+				<ul>
+					<li><a href="#URL_LOGOUT"><:deconnexion:> [#NOM]</a></li>
+					<BOUCLE_admin(SESSION){admin}>
+					<li><a href="./ecrire/?exec=admin_plugin">Page des plugins</a></li>
+					</BOUCLE_admin>
+				</ul>
+				</BOUCLE_connu>
+				<h2 class="menu-titre">Login public</h2>
+				#LOGIN_PUBLIC
+				<//B_connu>
+			</div>
+	
+		</div>
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+#SPIP_CRON
+</body>
+</html>

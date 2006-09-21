@@ -1,8 +1,8 @@
 <?php
 
 /** BOUCLE SESSION
- * Christian Lefebvre, Atos Worldline Â© 2006
- * DistribuÃ© sous licence GPL
+ * Christian Lefebvre, Atos Worldline © 2006
+ * Distribué sous licence GPL
  */
 
 $GLOBALS['tables_principales']['spip_session']= array(
