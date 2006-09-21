@@ -1,0 +1,125 @@
+#CACHE{0}<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>Exemples Balise #[(#REM)]SESSION</title>
+	<INCLURE{fond=inc-head}>
+</head>
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; Exemples Balise #[(#REM)]SESSION</div>
+
+	<div id="conteneur">
+
+		<div id="contenu">
+
+			<div class="cartouche">
+				<h1 class="titre">Exemples Balise #[(#REM)]SESSION</h1>
+			</div>
+
+			<div class="liste-articles">
+				<h2 class="invisible"><:derniers_articles:></h2>
+				<ul>
+
+					<li>
+						<p class=" texte spip_logos" style="background: #fff; border: 1px dashed #ccc;"><code>
+							&lt;p>id_auteur = &#35;SESSION{id_auteur}&lt;/p><br>
+							&lt;p>nom = &#35;SESSION{nom}&lt;/p><br>
+							&lt;p>statut = &#35;SESSION{statut}&lt;/p><br>
+						</code></p>
+						<h3 class="titre">Afficher des informations</h3>
+						<div class="texte">
+							<p class="spip">id_auteur = #SESSION{id_auteur}</p>
+							<p>nom = #SESSION{nom}</p>
+							<p>statut = #SESSION{statut}</p>
+						</div>
+						<br class="nettoyeur" />
+					</li>
+
+					<li>
+						<p class=" texte spip_logos" style="background: #fff; border: 1px dashed #ccc;"><code>
+							[(&#35;SESSION{id_auteur}|?{<br>
+							Je suis connect&eacute;<br>
+							})]<br>
+						</code></p>
+						<h3 class="titre">Conditionner un affichage</h3>
+						<div class="texte">
+							<p class="spip">
+							[(#SESSION{id_auteur}|?{
+							Je suis connect&eacute;
+							})]
+							</p>
+						</div>
+						<br class="nettoyeur" />
+					</li>
+
+					<li>
+						<p class=" texte spip_logos" style="background: #fff; border: 1px dashed #ccc;"><code>
+							[(&#35;SESSION{id_auteur}|=={0minirezo}?{<br>
+							Je suis adminstrateur<br>
+							})]<br>
+						</code></p>
+						<h3 class="titre">Conditionner un affichage selon le satut</h3>
+						<div class="texte">
+							<p class="spip">
+							[(#SESSION{statut}|=={0minirezo}|?{
+							Je suis adminstrateur
+							})]
+							</p>
+						</div>
+						<br class="nettoyeur" />
+					</li>
+
+				</ul>
+			</div>
+	
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+	
+			<div class="divers">[
+				<h2 class="menu-titre">(#SESSION{id_auteur}|?{
+				Bonjour
+				})[(#SESSION{nom})]</h2>
+				<ul>
+					<li><a href="#URL_LOGOUT"><:deconnexion:></a></li>[
+					(#SESSION{statut}|=={0minirezo}|?{' '})
+					<li>
+						<a href="#URL_ECRIRE{admin_plugin}">
+							<:ecrire:icone_admin_plugin:>
+						</a>
+					</li>]
+					]<BOUCLE_infos_persos(AUTEURS){tout}{id_auteur=#SESSION{id_auteur}}>
+					<li>
+						[(#LOGO_AUTEUR|#URL_AUTEUR|image_reduire{48})]
+						<a href="#URL_PAGE{profil,id_auteur=#SESSION{id_auteur}}"><:icone_informations_personnelles:></a>
+						<div class="texte">#BIO</div>
+						<br class="nettoyeur" />
+					</li>
+					</BOUCLE_infos_persos>[
+					(#SESSION{id_auteur}|?{' '})
+				</ul>
+				][
+				(#SESSION{id_auteur}|?{'',
+				<h2 class="menu-titre">Login public</h2>
+				})
+				#LOGIN_PUBLIC
+			]</div>
+
+		</div>
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+#SPIP_CRON
+</body>
+</html>
