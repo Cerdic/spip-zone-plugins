@@ -1,5 +1,4 @@
-#CACHE{86400}
-<BOUCLE_auteur_principal(AUTEURS){tout}{id_auteur}>
+#CACHE{0}<BOUCLE_auteur_principal(AUTEURS){tout}{id_auteur}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
@@ -16,7 +15,7 @@
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; (#NOM|couper{80})]<p><a href="#URL_PAGE{session}"><:retour_demo:></a></p></div>
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; (#NOM|couper{80})]<p><a href="#URL_PAGE{session}"><:retour_demo:></a>[ (#SESSION{id_auteur}|=={#ID_AUTEUR}|?{-}) <a href="[(#URL_PAGE{editer_profil}|parametre_url{id_auteur,#ID_AUTEUR})]"><:editer_profil:></a>]</p></div>
 
 	<div id="conteneur">
 
