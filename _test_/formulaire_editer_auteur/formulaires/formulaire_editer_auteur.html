@@ -18,7 +18,7 @@
 	<legend><:form_pet_message_commentaire:></legend>
 	<label>BIO::<:forum_texte:></label>
 	<p><small><:info_creation_paragraphe:></small></p>
-	[(#ENV**{bio}|barre_textarea{12,40})]
+	<textarea name='bio' rows='12' class='forml' cols='40' id='bio'>[(#ENV**{bio})]</textarea>
 	</fieldset>
 
 	<fieldset>
@@ -34,13 +34,13 @@
 	<legend><:form_pet_message_commentaire:></legend>
 	<label>PGP::<:forum_texte:></label>
 	<p><small><:info_creation_paragraphe:></small></p>
-	[(#ENV**{pgp}|barre_textarea{12,40})]
+	<textarea name='pgp' rows='12' class='forml' cols='40' id='pgp'>[(#ENV**{pgp})]</textarea>
 	</fieldset>
 
 	Login et Mot de Passe
 
 	<div class="spip_bouton">
-		<input type="submit" value="<:forum_voir_avant:>" />
+		<input type="submit" name="modifier_auteur" value="<:forum_voir_avant:>" />
 	</div>
 
 </form>
