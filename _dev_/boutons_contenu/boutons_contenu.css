@@ -2,23 +2,3 @@
 .boutons_contenu {
 	float : right;
 }
-/*
-body {
-    background-color: red;
-}
-
-body.page_article .texte, body.page_lecode .texte {
-    background-color: #F0F0F0;
-    padding : 5px 10px;
-}
-
-body.page_lecode #navigation {
-    display: none;
-}
-body.page_lecode .texte {
-    width: 740px;
-}
-.liste-articles .texte {
-    background-color: #F0F0F0;
-}
-*/
