@@ -1,5 +1,6 @@
 var memo_obj = new Array();
 var url_chargee = new Array();
+var load_handlers = new Array();
 
 function findObj_test_forcer(n, forcer) { 
 	var p,i,x;
@@ -175,6 +176,21 @@ function ajahReady(xhr, f) {
 }
 */
 
+//
+// Add a function to the list of those to be executed on ajax load complete
+//
+function onAjaxLoad(f) {
+	load_handlers.push(f);
+}
+
+//
+// Call the functions that have been added to onAjaxLoad
+//
+function triggerAjaxLoad(root) {
+	for ( var i = 0; i < load_handlers.length; i++ )
+	load_handlers[i].apply( root );
+}
+
 //call information is inside the link id
 //id='var1:val1:var2:val2--dest_el'
 //params are separated by --
@@ -189,8 +205,9 @@ function execAjaxLinks() {
 				url += args[i]+'='+args[i+1]+'&';
 			}
 			if(url_chargee['mem_'+url]) {
-				$('#'+params[1]).html(url_chargee['mem_'+url]).
-				find('a.ajax').click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
+				var el = $('#'+params[1]).html(url_chargee['mem_'+url]);
+				$(el).find('a.ajax').click(execAjaxLinks).not('[@href]').css({'cursor':'pointer','visibility':'visible'});
+				triggerAjaxLoad(el[0]);
 				return false;
 			}
 			//console.log("%o %o",url,params[1]);
@@ -221,17 +238,21 @@ function AjaxSqueeze(trig, id, callback)
 	//needs a better way to display error to the user
 	if(trig.constructor == String) {
 		reqObj = $('#'+id).imgOn().load(trig+"&var_ajaxcharset=utf-8",function(res,status){
-			imgOff(reqObj);
 			if(status=='error') this.html('Erreur HTTP');
 			callback(res,status);
+			if(status=='success') AjaxTrigger(this[0]);
+			imgOff(reqObj);
 		});
 	} else {
 		//submit a form. Uses form plugin
 		reqObj = $(trig).imgOn().ajaxSubmit('#'+id,function(res,status){
-			if(status=='success' && browser_verifForm) verifForm(this);
 			if(status=='error') this.html('Erreur HTTP');
-			imgOff(reqObj);
 			callback(res,status);
+			if(status=='success') {
+				if(browser_verifForm) verifForm(this);
+				AjaxTrigger(this[0]);
+			} 
+			imgOff(reqObj);
 		});
 	}
 	return false;
@@ -261,21 +282,21 @@ function charger_id_url(myUrl, myField, jjscript)
 		retour_id_url('', Field, jjscript);
 	else {
 	  var r = url_chargee[myUrl];
-	// disponible en cache ?
+		// disponible en cache ?
 	  if (r) {
-		retour_id_url(r, Field, jjscript);
+			retour_id_url(r, Field, jjscript);
 	  } else {
-		var img = findObj_forcer('img_' + myField);
-		if (img) img.style.visibility = "visible";
-		AjaxSqueezeNode(myUrl,
-			'',
-			function (r) {
-				if (img) img.style.visibility = "hidden";
-				url_chargee[myUrl] = r;
-				retour_id_url(r, Field, jjscript);
-			}
-		     )
-		  }
+			var img = findObj_forcer('img_' + myField);
+			if (img) img.style.visibility = "visible";
+			AjaxSqueezeNode(myUrl,
+				'',
+				function (r) {
+					if (img) img.style.visibility = "hidden";
+					url_chargee[myUrl] = r;
+					retour_id_url(r, Field, jjscript);
+				}
+			)
+		}
 	}
 }
 

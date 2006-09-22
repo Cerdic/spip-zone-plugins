@@ -1712,7 +1712,7 @@ function debut_javascript($admin, $stat)
 	// pose un cookie valant -1
 	if ($_COOKIE['spip_accepte_ajax'] < 1) {
 		$tester_javascript = "if (a = createXmlHttp()) {
-	a.open('GET', '" . generer_url_ecrire('test_ajax', 'js=1') .
+	a.open('GET', '" . generer_url_ecrire('test_ajax', 'js=1', "&") .
 		  "', true) ;
 	a.send(null);
 }";
@@ -1738,7 +1738,7 @@ function debut_javascript($admin, $stat)
 			"\nvar confirm_changer_statut = '" .
 			unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))) . 
 			"';\n") .
-		http_script('',find_in_path(_DIR_IMG_PACK . 'presentation.js'));
+		http_script('',find_in_path(_DIR_JAVASCRIPT . 'presentation.js'));
 }
 
 // Fonctions onglets
