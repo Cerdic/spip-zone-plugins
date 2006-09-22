@@ -28,3 +28,9 @@ boutonsContenu.prototype.fontBigger = function()
 		this.style.fontSize = (1.2 * parseInt($(this).css('fontSize'))) + 'px';
 	});
 }
+boutonsContenu.prototype.fontSmaller = function()
+{
+	$("#contenu .texte").each(function(){
+		this.style.fontSize = (parseInt($(this).css('fontSize')) / 1.2) + 'px';
+	});
+}
