@@ -25,7 +25,6 @@ function boutonsContenu(options)
 boutonsContenu.prototype.fontBigger = function()
 {
 	$("#contenu .texte").each(function(){
-		//alert(this.toSource());
-		this.style.fontSize = '32px'; // marche pas (:? 1.2 * this.style.fontSize;
+		this.style.fontSize = (1.2 * parseInt($(this).css('fontSize'))) + 'px';
 	});
 }
