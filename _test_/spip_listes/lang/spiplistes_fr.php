@@ -19,7 +19,7 @@ dans lequel ils souhaitent recevoir les courriers (HTML/texte). </p><p>Tout mess
 'abonnement_change_format'=>'Vous pouvez changer de format de r&eacute;ception ou vous d&eacute;sabonner : ',
 'abonnement_mail' => 'Pour modifier votre abonnement, veuillez vous rendre &agrave; l\'adresse suivante',
 'abonnement_mail_passcookie' => '(ceci est un message automatique)
-Pour modifier votre abonnement &agrave la lettre d\'information de ce site :
+Pour modifier votre abonnement &agrave; la lettre d\'information de ce site :
 @nom_site_spip@ (@adresse_site@)
 
 Veuillez vous rendre &agrave; l\'adresse suivante :
