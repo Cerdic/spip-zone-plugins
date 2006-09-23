@@ -2,9 +2,11 @@
 var sens='h';
 
 $(document).ready(function(){
-	$('table.grille tr td input').bind('keypress', mykey).bind('contextmenu', changeDir);
-	$('form.grille').bind('contextmenu', changeDir);
-	
+	$('table.grille tr td input').bind('keypress', mykey).css('cursor', 'e-resize');
+	if (jQuery.browser.safari) or (jQuery.browser.Konqueror)
+		$('form.grille').bind('contextmenu', changeDir);
+	else
+		$('table.grille tr td input').bind('contextmenu', changeDir);	
 });
 
 function changeDir(e) {
@@ -25,8 +27,7 @@ function mykey(e) {
 	
 	var x=m[1];
 	var y=m[2];
-	
-	
+
 	switch(e.keyCode) {
 		case 40: y++; break;
 		case 38: y--; break;
