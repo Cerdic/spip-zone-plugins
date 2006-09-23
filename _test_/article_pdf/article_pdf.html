@@ -10,8 +10,8 @@
 	<B_principale>
 	<BOUCLE_principale(ARTICLES){id_article}>
 	
-	$conf_url_site = "#URL_SITE_SPIP" ;
-	$conf_nom_site = "[(#NOM_SITE_SPIP|pdf_first_clean)]" ;
+	$conf_url_site = '[(#URL_SITE_SPIP|texte_script)]' ;
+	$conf_nom_site = '[(#NOM_SITE_SPIP|pdf_first_clean|texte_script)]' ;
 	
 	// Recuperation et definition des differents elements
 	
@@ -51,6 +51,7 @@
 		$files_pdf = "article_".$id_article.".pdf" ;
 	$file_out = $path_pdf . $files_pdf ;
 	
+			unlink($file_out);// DEBUG
 	if (file_exists($file_out)) 
 	{
 		clearstatcache;
@@ -102,7 +103,6 @@
 		$pdf->Buid($file_out);
 		
 	}
-	
 	if ($debug==1)
 	{
 		// Affiche le PDF directement dans l'onglet de Firefox

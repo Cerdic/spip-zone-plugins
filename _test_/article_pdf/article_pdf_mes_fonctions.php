@@ -25,7 +25,7 @@
 			$texte = strtr($texte, $trans);
 					
 			// Echappement des "
-			 $texte = ereg_replace("\"", "\\\"", $texte);
+			//$texte = ereg_replace("\"", "\\\"", $texte);
 	
 			// Traitement des Espaces
 			$texte = ereg_replace("(&nbsp;| )+", " ", $texte);

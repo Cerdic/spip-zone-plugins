@@ -13,6 +13,7 @@ define (DUMP_FILE_FULL_PATH_NAME,"Dump.txt");
 class PDF extends FPDF
 {
 var $HREF;
+var $texteAddSpace;
 var $SRC;
 var $columnProp=array();		# propriétés de la ligne
 var $inFirstRow;		# flag si première ligne en cours
@@ -95,132 +96,127 @@ function unhtmlentities($string)
 
 function WriteHTML($html,$LineFeedHeight)
 {
+	$this->texteAddSpace=false;
 	//Parseur HTML
 	$html=str_replace("\n",' ',$html);
 	$html=$this->unhtmlentities($html);
 	
-	// Rôle du i dans le troisième paramètre ?
-	$a=preg_split('/<(.*)>/U', $html, i-1, PREG_SPLIT_DELIM_CAPTURE);
-	
+	$a=preg_split('/(<.*>)/U', $html, -1, PREG_SPLIT_DELIM_CAPTURE);
+	//var_dump($a);
 	
 	// $a = le tableau de tags
 	// $i = index de l'élément courant
 	// $e = valeur de l'élément courant
 	foreach($a as $i=>$e) 
 	{
-		if ($i%2==0) 
-		// Texte  (i. e. tout ce qui n'est pas dans une balise)
-		{
-			# Attention, ce mécanisme ne permet pas de traiter les liens dans les tableaux...
-			# ni les tableaux dans les tableaux, d'ailleurs...
-			if ($this->ProcessingTDTH)
-			{
-				# tableCurrentCol - 1 car tableCurrentCol déjà incrémenté.
-				$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['content'] .= $e;
-				if ($this->ProcessingTH) {
-					$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['TH']=1;
-				} else {
-					$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['TH']=0;
-				}
-			} 
-			else 
-			{
-				// C'est un lien. Il faut faire la distinction entre lien externe, lien interne et note de bas de page (couples ancre + lien interne)
-				if($this->HREF) 
+		//Balise
+		if (($e{0}=='<')&&(preg_match(',^<([^\s]+)(\s.*)?>$,',$e,$match)!==FALSE)) {
+			//var_dump("::$tag::");
+			$tag=strtoupper($match[1]);
+			if ($tag{0}=='/')
+			// C'est une balise fermante
+				$this->CloseTag(substr($tag,1),$LineFeedHeight);
+			else
+				$this->OpenTag($tag,$e,$LineFeedHeight);
+		}
+		// Contenu
+		else {
+			if (strlen($e)){
+				$this->texteAddSpace = $this->texteAddSpace OR $e{0}==" ";
+				$next_add_space = substr($e,-1)==" ";
+				$e = trim($e);
+			}
+			if(strlen($e)){
+				$e = $this->texteAddSpace?" $e":$e;
+				$this->texteAddSpace = $next_add_space;
+				# Attention, ce mécanisme ne permet pas de traiter les liens dans les tableaux...
+				# ni les tableaux dans les tableaux, d'ailleurs...
+				if ($this->ProcessingTDTH)
 				{
-					$Link=$this->HREF;
-					$Text=$e;
-					
-					if ( strstr($Link,"http:") || strstr($Link,"mailto:") || strstr($Link,"ftp:") )
-					{
-						// C'est un lien  externe
-						$this->PutLink($Link, $Text);
+					# tableCurrentCol - 1 car tableCurrentCol déjà incrémenté.
+					$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['content'] .= $e;
+					if ($this->ProcessingTH) {
+						$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['TH']=1;
+					} else {
+						$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['TH']=0;
 					}
-					else
+				} 
+				else 
+				{
+					// C'est un lien. Il faut faire la distinction entre lien externe, lien interne et note de bas de page (couples ancre + lien interne)
+					if($this->HREF) 
 					{
-						// C'est une note (référence dans le texte)
-						if ( strstr($Link,"#nb") )
+						$Link=$this->HREF;
+						$Text=$e;
+						if ( strstr($Link,"http:") || strstr($Link,"mailto:") || strstr($Link,"ftp:") )
 						{
-							if ($this->FirstIteration)
-							{
-								$LinkID=$this->AddLink();
-								$this->SetLink($LinkID,-1,-1);
-								$this->TopLinkIDArray[]=$LinkID;
-								$this->PutLink($Link,$Text);  // Lien bidon (première itération)
-							}
-							else
-							{
-								$LinkID=$this->BottomLinkIDArray[$this->BottomLinkIDArrayIt++];
-								$this->PutLink($LinkID,$Text);   // Bon lien  (deuxième itération)
-							}
+							// C'est un lien  externe
+							$this->PutLink($Link, $Text);
 						}
-						// C'est une note (détail de bas de texte)
-						else if ( strstr($Link,"#nh") )
-						{
-						
-							// C'est le lien "#nh1" (le premier) : on met un trait séparateur
-							if ( strlen($Link)==4 && $Link[3]=="1" )
-							{
-								$this->SetLineWidth(0.3);
-								$this->Line($this->lMargin, $this->GetY()-5, $this->w - $this->rMargin, $this->GetY()-5);
-							}
-							
-							if ($this->FirstIteration)
-							{
-								$LinkID=$this->AddLink();
-								$this->SetLink($LinkID,-1,-1);
-								$this->BottomLinkIDArray[]=$LinkID;
-								$this->PutLink($Link,$Text);  // Lien bidon (première itération)
-							}
-							else
-							{
-								$LinkID=$this->TopLinkIDArray[$this->TopLinkIDArrayIt++];
-								$this->PutLink($LinkID,$Text);		// Bon lien  (deuxième itération)
-							}
-							
-						}
-						// C'est un lien interne
 						else
 						{
-							$WebSiteURL=entites_html(lire_meta("adresse_site"));
+							// C'est une note (référence dans le texte)
+							if ( strstr($Link,"#nb") )
+							{
+								if ($this->FirstIteration)
+								{
+									$LinkID=$this->AddLink();
+									$this->SetLink($LinkID,-1,-1);
+									$this->TopLinkIDArray[]=$LinkID;
+									$this->PutLink($Link,$Text);  // Lien bidon (première itération)
+								}
+								else
+								{
+									$LinkID=$this->BottomLinkIDArray[$this->BottomLinkIDArrayIt++];
+									$this->PutLink($LinkID,$Text);   // Bon lien  (deuxième itération)
+								}
+							}
+							// C'est une note (détail de bas de texte)
+							else if ( strstr($Link,"#nh") )
+							{
 							
-							// Bug d'interprétation du point d'interrogation remplacé par 3 points. Correctif ici
-							$Link=str_replace("...","?",$Link);
-							
-							$this->PutLink($WebSiteURL . "/" . $Link, $Text);
+								// C'est le lien "#nh1" (le premier) : on met un trait séparateur
+								if ( strlen($Link)==4 && $Link[3]=="1" )
+								{
+									$this->SetLineWidth(0.3);
+									$this->Line($this->lMargin, $this->GetY()-5, $this->w - $this->rMargin, $this->GetY()-5);
+								}
+								
+								if ($this->FirstIteration)
+								{
+									$LinkID=$this->AddLink();
+									$this->SetLink($LinkID,-1,-1);
+									$this->BottomLinkIDArray[]=$LinkID;
+									$this->PutLink($Link,$Text);  // Lien bidon (première itération)
+								}
+								else
+								{
+									$LinkID=$this->TopLinkIDArray[$this->TopLinkIDArrayIt++];
+									$this->PutLink($LinkID,$Text);		// Bon lien  (deuxième itération)
+								}
+								
+							}
+							// C'est un lien interne
+							else
+							{
+								$WebSiteURL=entites_html(lire_meta("adresse_site"));
+								// Bug d'interprétation du point d'interrogation remplacé par 3 points. Correctif ici
+								$Link=str_replace("...","?",$Link);
+								
+								$this->PutLink($WebSiteURL . "/" . $Link, $Text);
+							}
 						}
+					} else 
+					{
+						$this->Write(5,$e);
 					}
-				} else 
-				{
-					$this->Write(5,$e);
-				}
-			}
-		}
-		else 
-		{
-			//Balise
-			if ($e{0}=='/')
-			// C'est une balise fermante
-			{
-				$this->CloseTag(strtoupper(substr($e,1)),$LineFeedHeight);
-			} 
-			else
-			// C'est une balise ouvrante
-			{
-				if (preg_match(',^\s*([^\s]+)\s,',$e,$match)!==FALSE){
-					$tag=strtoupper($match[1]);
-					$this->prop=array();		// Crée un tableau de portée globale dans la classe
-					preg_match_all(',([^=\s]*)\s*=\s*["\']?([^"\']*)["\'],is',$e,$matches,PREG_SET_ORDER);
-					foreach($matches as $match)
-						$this->prop[strtoupper($match[1])]=$match[2];
-					$this->OpenTag($tag,$this->prop,$LineFeedHeight);
 				}
 			}
 		}
 	}
 }
 
-function OpenTag($tag,$prop,$LineFeedHeight)
+function OpenTag($tag,$e,$LineFeedHeight)
 {
 	//Balise ouvrante
 	if ($tag=='B' || $tag=='U' || $tag=='I')
@@ -240,7 +236,12 @@ function OpenTag($tag,$prop,$LineFeedHeight)
 
 	if($tag=='A')
 	{
-		$this->HREF=$this->prop['HREF'];
+		$this->HREF=extraire_attribut($e,'href');
+		$this->$texteHREF="";
+		if ($this->texteAddSpace) {
+			$this->Write(5," ");
+			$this->texteAddSpace = false;
+		}
 	}
 
 	if($tag=='BR') {
@@ -248,7 +249,7 @@ function OpenTag($tag,$prop,$LineFeedHeight)
 	}
 
 	if($tag=='P') {
-		$this->Ln($LineFeedHeight);
+		$this->Ln(1.5*$LineFeedHeight);
 	}
 
 	if($tag=='CODE') {
@@ -279,60 +280,72 @@ function OpenTag($tag,$prop,$LineFeedHeight)
 	}
 
 	if ($tag=='IMG') {
-		$this->SRC=$this->prop['SRC'];
-		$size=getimagesize($this->SRC);		# Attention, utilisation de GD !!! FPDF ne sait pas lire les images à moitié... et je n'ai pas envie de surcharger la méthode Image...
-		if ($size[0] < 30 && $size[1] < 30) {
-			# pixel / 3 pour avoir des cm. Petite cuisine...
-			$imgX=$size[0]/3;
-			$imgY=$size[1]/3;
-			$yoffset=$imgY/4;
-			if ($this->GetY() + $imgY > $this->h - $this->bMargin)
-				$this->AddPage();
-			$this->Image($this->SRC, $this->GetX(), $this->GetY()-$yoffset, $imgX, $imgY);
-			$this->SetX($this->GetX()+$size[0]/2);
-		} else if ($size[0] < 600 && $size[1] < 600) {
-			$pwidth=$this->w-$this->lMargin-$this->rMargin;
-			$ratio = 0.24;	# ce qui fait environ 600 pixels sur 16cm d'espace utile (160/600) - 2 pouillièmes
-			$imgX=$size[0]*$ratio;
-			$imgY=$size[1]*$ratio;
-			if ($this->GetY() + $imgY > $this->h - $this->bMargin) {
-				if ($this->GetY() + $imgY*0.8 > $this->h - $this->bMargin) {
+		$this->SRC=extraire_attribut($e,'src');
+		// si l'image est manquante mettre un lien avec le texte alt
+		if (!@is_readable($this->SRC)){
+			$alt = extraire_attribut($e,'alt');
+			if ($alt==NULL) $alt = $this->SRC;
+			//var_dump("img:href=".$this->HREF.':');
+			if ($this->HREF=="")
+				$this->Write(5,"[$alt]");
+			else 
+				$this->PutLink($this->HREF,"[$alt]");
+		}
+		else {
+			$size=getimagesize($this->SRC);		# Attention, utilisation de GD !!! FPDF ne sait pas lire les images à moitié... et je n'ai pas envie de surcharger la méthode Image...
+			if ($size[0] < 30 && $size[1] < 30) {
+				# pixel / 3 pour avoir des cm. Petite cuisine...
+				$imgX=$size[0]/3;
+				$imgY=$size[1]/3;
+				$yoffset=$imgY/4;
+				if ($this->GetY() + $imgY > $this->h - $this->bMargin)
 					$this->AddPage();
-				} else {
-					$imgX=$imgX*0.8;
-					$imgY=$imgY*0.8;
+				$this->Image($this->SRC, $this->GetX(), $this->GetY()-$yoffset, $imgX, $imgY);
+				$this->SetX($this->GetX()+$size[0]/2);
+			} else if ($size[0] < 600 && $size[1] < 600) {
+				$pwidth=$this->w-$this->lMargin-$this->rMargin;
+				$ratio = 0.24;	# ce qui fait environ 600 pixels sur 16cm d'espace utile (160/600) - 2 pouillièmes
+				$imgX=$size[0]*$ratio;
+				$imgY=$size[1]*$ratio;
+				if ($this->GetY() + $imgY > $this->h - $this->bMargin) {
+					if ($this->GetY() + $imgY*0.8 > $this->h - $this->bMargin) {
+						$this->AddPage();
+					} else {
+						$imgX=$imgX*0.8;
+						$imgY=$imgY*0.8;
+					}
 				}
-			}
-			$this->Image($this->SRC, $this->GetX()+($pwidth-$imgX)/2, $this->GetY(), $imgX, $imgY);
-			$this->SetY($this->GetY()+$imgY);
-		} else {
-			// les deux dimensions sont supérieurs à 600 pixels
-			$pwidth=$this->w-$this->lMargin-$this->rMargin;
-			$ratioX = $pwidth / $size[0];
-			$plen=$this->h-$this->GetY()-$this->bMargin-20;		// on retire 20mm pour placer le cartouche de l'image
-			$ratioY = $plen / $size[1];
-			$ratio = 0.24;	# ce qui fait environ 600 pixels sur 16cm d'espace utile (160/600) - 2 pouillièmes
-			$imgX=$size[0]*$ratio;
-			$imgY=$size[1]*$ratio;
-
-			if ($size[1] > 900 || ($plen - ($size[1]*$ratio)  < 0)) {
-				if ($plen - ($size[1]*$ratio*0.8)  < 0) {
-					$this->AddPage();
-					$plen=$this->h-$this->GetY()-$this->bMargin-20;	// toujours la marge du cartouche
-					$ratioY = $plen / $size[1];
-				} else {
-					$ratioX *= 0.8;
-					$ratioY *= 0.8;
+				$this->Image($this->SRC, $this->GetX()+($pwidth-$imgX)/2, $this->GetY(), $imgX, $imgY);
+				$this->SetY($this->GetY()+$imgY);
+			} else {
+				// les deux dimensions sont supérieurs à 600 pixels
+				$pwidth=$this->w-$this->lMargin-$this->rMargin;
+				$ratioX = $pwidth / $size[0];
+				$plen=$this->h-$this->GetY()-$this->bMargin-20;		// on retire 20mm pour placer le cartouche de l'image
+				$ratioY = $plen / $size[1];
+				$ratio = 0.24;	# ce qui fait environ 600 pixels sur 16cm d'espace utile (160/600) - 2 pouillièmes
+				$imgX=$size[0]*$ratio;
+				$imgY=$size[1]*$ratio;
+	
+				if ($size[1] > 900 || ($plen - ($size[1]*$ratio)  < 0)) {
+					if ($plen - ($size[1]*$ratio*0.8)  < 0) {
+						$this->AddPage();
+						$plen=$this->h-$this->GetY()-$this->bMargin-20;	// toujours la marge du cartouche
+						$ratioY = $plen / $size[1];
+					} else {
+						$ratioX *= 0.8;
+						$ratioY *= 0.8;
+					}
 				}
+	
+				$ratio=min(0.24, $ratioX, $ratioY);
+	
+				$imgX=$size[0]*$ratio;
+				$imgY=$size[1]*$ratio;
+	
+				$this->Image($this->SRC, $this->GetX()+($pwidth-$imgX)/2, $this->GetY(), $imgX, $imgY,'',$this->HREF);
+				$this->SetY($this->GetY()+$imgY);
 			}
-
-			$ratio=min(0.24, $ratioX, $ratioY);
-
-			$imgX=$size[0]*$ratio;
-			$imgY=$size[1]*$ratio;
-
-			$this->Image($this->SRC, $this->GetX()+($pwidth-$imgX)/2, $this->GetY(), $imgX, $imgY);
-			$this->SetY($this->GetY()+$imgY);
 		}
 	}
 
@@ -373,7 +386,7 @@ function OpenTag($tag,$prop,$LineFeedHeight)
 		# on commence une ligne
 		$this->tableCurrentCol=0;
 		$this->tableCurrentRow++;
-		if ($prop['CLASS'] == 'row_first') {
+		if (extraire_attribut($e,'class') == 'row_first') {
 			$this->ProcessingTH=true;
 		}
 	}
