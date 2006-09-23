@@ -16,6 +16,7 @@ var $HREF;
 var $texteAddSpace;
 var $SRC;
 var $columnProp=array();		# propriétés de la ligne
+var $lineProp=array();		# propriétés de la ligne
 var $inFirstRow;		# flag si première ligne en cours
 var $TableX;			# abscisse du tableau
 var $HeaderColor;
@@ -39,7 +40,7 @@ var $BottomLinkIDArray = array(); #Sauve les IDs des liens internes (notes en fi
 var $BottomLinkIDArrayIt = 0; #Itérateur dans le tableau des IDs des liens internes
 
 var $FirstIteration = TRUE;  # booleen pour la génération des liens
-
+var $maxLineWidth = 0;
 
 
 function Buid($OutputFileFullPathName)
@@ -110,14 +111,19 @@ function WriteHTML($html,$LineFeedHeight)
 	foreach($a as $i=>$e) 
 	{
 		//Balise
-		if (($e{0}=='<')&&(preg_match(',^<([^\s]+)(\s.*)?>$,',$e,$match)!==FALSE)) {
+		if (($e{0}=='<')&&(preg_match(',^<(/)?([^\s]+)(\s.*)?>$,',$e,$match)!==FALSE)) {
 			//var_dump("::$tag::");
-			$tag=strtoupper($match[1]);
-			if ($tag{0}=='/')
-			// C'est une balise fermante
-				$this->CloseTag(substr($tag,1),$LineFeedHeight);
-			else
-				$this->OpenTag($tag,$e,$LineFeedHeight);
+			$tag=strtoupper($match[2]);
+			$closing = $match[1]=="/";
+			if (($this->ProcessingTDTH) AND (!in_array($tag,array("TABLE","TH","TD","THEAD","TBODY"))))
+				$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['content'] .= $e;
+			else {
+				if ($closing)
+				// C'est une balise fermante
+					$this->CloseTag($tag,$LineFeedHeight);
+				else
+					$this->OpenTag($tag,$e,$LineFeedHeight);
+			}
 		}
 		// Contenu
 		else {
@@ -135,11 +141,6 @@ function WriteHTML($html,$LineFeedHeight)
 				{
 					# tableCurrentCol - 1 car tableCurrentCol déjà incrémenté.
 					$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['content'] .= $e;
-					if ($this->ProcessingTH) {
-						$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['TH']=1;
-					} else {
-						$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['TH']=0;
-					}
 				} 
 				else 
 				{
@@ -245,10 +246,12 @@ function OpenTag($tag,$e,$LineFeedHeight)
 	}
 
 	if($tag=='BR') {
+		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
 		$this->Ln($LineFeedHeight);
 	}
 
 	if($tag=='P') {
+		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
 		$this->Ln(1.5*$LineFeedHeight);
 	}
 
@@ -258,6 +261,7 @@ function OpenTag($tag,$e,$LineFeedHeight)
 	
 	if($tag=='H3')
 	{
+		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
 		$this->Ln($LineFeedHeight*3);
 		$this->SetStyle($tag='B',true,14);
 	}
@@ -270,6 +274,7 @@ function OpenTag($tag,$e,$LineFeedHeight)
 	}
 
 	if($tag=='LI'){ 
+		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
 		$this->Ln();
 		$this->listParm[$this->listDepth]['curr']++;
 		$this->SetX($this->GetX()-7);
@@ -430,6 +435,7 @@ function CloseTag($tag,$LineFeedHeight)
 	}
 		
 	if($tag=='P'){
+		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
 		$this->Ln($LineFeedHeight);
 	}
 
@@ -439,11 +445,13 @@ function CloseTag($tag,$LineFeedHeight)
 
 	if($tag=='H3'){		
 		$this->SetStyle($tag='B',false,10);
+		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
 		$this->Ln($LineFeedHeight);
 	}
 	
 	if($tag=='UL' or $tag=='OL') { 
 		$this->SetLeftMargin($this->lMargin-7); 
+		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
 		$this->Ln();
 		$this->listParm[$this->listDepth]=array();
 		$this->listDepth--;
@@ -456,6 +464,12 @@ function CloseTag($tag,$LineFeedHeight)
 	}
 	if($tag=='TD' or $tag=='TH') {
 		$this->ProcessingTDTH=false;
+		if (!strlen($this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['content']))
+			$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['content']=" ";
+		if ($tag=='TH')
+			$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['TH']=1;
+		else
+			$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['TH']=0;
 	}
 	if($tag=='TR') {
 		$this->inFirstRow=0;	# on a fini une ligne donc la première aussi
@@ -463,7 +477,7 @@ function CloseTag($tag,$LineFeedHeight)
 	}
 
 	if($tag=='TABLE') {
-		$this->TableShow('C');
+		$this->TableShow('C',$LineFeedHeight);
 		$this->inFirstRow=0;
 		$this->ProcessingTable=false;
 		$this->cMargin=$cMargin;
@@ -533,8 +547,13 @@ function TableHeader()
 }
 */
 
-function TableShow($align)
+function TableShow($align,$LineFeedHeight)
 {
+
+	$cell_pdf=new PDF_SPIP();
+	$cell_pdf->Open();
+	$cell_pdf->FirstIteration=TRUE;
+	
 
 	// Calcul de la taille de police optimale
 	// Le calcul ne l'est pas, lui ;-)
@@ -550,7 +569,8 @@ function TableShow($align)
 		$tableFontSize = $tableFontSize - 1.0;
 		// on boucle sur la taille de police tant que la largeur du tableau ne rentre pas dans la page
 
-		$this->SetFont($tableFontFamily, '', $tableFontSize);
+		$cell_pdf->SetFont($tableFontFamily, '', $tableFontSize);
+		
 
 		// remise à zéro des largeurs de colonnes
 		foreach ($this->columnProp as $i=>$cprop) {
@@ -561,20 +581,24 @@ function TableShow($align)
 		// de façon à calculer la largeur max de chaque colonne pour la taille de police courante
 		foreach($this->tableContent as $j=>$row) {
 			foreach($row as $i=>$cell) {
+				$cell_pdf->ResetBuffer();
+				$cell_pdf->maxLineWidth = 0;
+				$left = $cell_pdf->x;
+				$top = $cell_pdf->y;
 				if ($this->tableContent[$j][$i]['TH']) {
-					$this->SetFont($tableFontFamily, 'B', $tableFontSize);
+					$cell_pdf->SetFont($tableFontFamily, 'B', $tableFontSize);
 				}
-				$len = $this->GetStringWidth($cell['content']);
-				$len += $cellmargin;
-				if ($len > $this->columnProp[$i]['w']) {
-					// max...
-					$this->columnProp[$i]['w'] = $len;
-				}
-				$this->SetFont($tableFontFamily, '', $tableFontSize);
+				$cell_pdf -> WriteHTML($cell['content']."<br />",$LineFeedHeight);
+				$width = $cell_pdf->maxLineWidth;
+				$height = $cell_pdf->y - $top;
+				$width += $cellmargin;
+				$height += $cellmargin;
+				$this->columnProp[$i]['w'] = max($this->columnProp[$i]['w'],$width);
+				$this->lineProp[$j]['h'] = max($this->lineProp[$j]['h'],$height);
 			}
 		}
-// Repris de CalcWidth : calcul de la largeur de la table
-	    $TableWidth=0.0;
+		// Repris de CalcWidth : calcul de la largeur de la table
+    $TableWidth=0.0;
 		foreach($this->columnProp as $col) {
 			$TableWidth += $col['w'];
 		}
@@ -610,14 +634,29 @@ function TableShow($align)
 				$this->SetFillColor(255, 255, 0);	// jaune
 				$fill=1;
 			}
-			$this->Cell($this->columnProp[$i]['w'], 5, $cell['content'], 1, 0, $this->columnProp[$i]['a'], $fill);	
+			//$this->Cell($this->columnProp[$i]['w'], 5, $cell['content'], 1, 0, $this->columnProp[$i]['a'], $fill);	
+			$this->Cell($this->columnProp[$i]['w'], $this->lineProp[$j]['h'], '', 1, 0, $this->columnProp[$i]['a'], $fill);
+			// on note la position apres la cellule
+			$x = $this->x; $y = $this->y;
+			$margin = $this->lMargin;
+			
+			// on se remet en debut de cellule
+			$this->x-=$this->columnProp[$i]['w'];
+			$this->lMargin = $this->x; // pour que les retour ligne se fassent correctement
+			
+			$this -> WriteHTML($cell['content'],$LineFeedHeight);
+			// on se remet a la fin de la cellule
+			$this->x = $x; $this->y = $y;
+			$this->lMargin = $margin;
+			
 			if ($this->tableContent[$j][$i]['TH']) {
 				$this->SetFont('', '', $tableFontSize);
 				$this->SetFillColor(255);	// blanc
 			}
 		}
 		$ci=1-$ci;
-		$this->Ln();
+		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
+		$this->Ln($this->lineProp[$j]['h']);
 	}
 
 	$this->SetFont($oldFontFamily, '', $oldFontSizePt);
