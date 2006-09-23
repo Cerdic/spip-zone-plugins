@@ -2,8 +2,8 @@
 var sens='h';
 
 $(document).ready(function(){
-	$('table.grille tr td input').css('cursor', 'e-resize').bind('contextmenu', changeDir).bind('keypress', mykey);
-	
+	$('table.grille tr td input').bind('keypress', mykey).bind('contextmenu', changeDir);
+	$('form.grille').bind('contextmenu', changeDir);
 	
 });
 
