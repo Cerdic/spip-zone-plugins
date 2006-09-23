@@ -9,20 +9,29 @@
  *
  */
 //CSS style selector to match the draggables
-var DRAGGABLES_SEL = '.titre a';
+var DRAGGABLES_SEL = '.titre>a';
 //CSS style selector to match the element you want to append the drop box to
 var MEMOBOX_CONTAINER = "#navigation";
-var MEMOBOX_HEADER = '<p id="memobox_heading"><:memobox:drag_drop:></p>';
 var MEMOBOX_ITEM = '<li> <a href="#" class="memobox_delete" title="<:memobox:anchor_delete_title:>"><span><:memobox:anchor_delete_text:></span></a></li>';
+var MEMOBOX_LINK = '<a class="memobox_link" href="#" title="<:memobox:anchor_add_title:>"><:memobox:anchor_add_text:></a>';
+var MEMOBOX_MODE = 'link'; //can be link or drag
+var heading_text = MEMOBOX_MODE=="link"?"<:memobox:link:>":"<:memobox:drag_drop:>"; 
+var MEMOBOX_HEADER = '<p id="memobox_heading">'+heading_text+'</p>';
 
 var memobox_ul,memobox;
 
 $(document).ready(function(){
-	$(DRAGGABLES_SEL).addClass('memobox_drag');
 	$(MEMOBOX_CONTAINER).append('<div id="memobox"></div>');
-	memobox = $('#memobox').Droppable({accept:'memobox_drag',tolerance:'intersect',ondrop:memobox_dropit}).append(MEMOBOX_HEADER).append('<ul></ul>');
+	memobox = $('#memobox').append(MEMOBOX_HEADER).append('<ul></ul>');
+	if(MEMOBOX_MODE=='drag') {
+		memobox.Droppable({accept:'memobox_drag',tolerance:'intersect',ondrop:memobox_dropit});
+		$(DRAGGABLES_SEL).addClass('memobox_drag').Draggable({ghosting:true,revert:true,insideParent:true,zIndex:1,opacity:0.8});
+	} else if(MEMOBOX_MODE=='link') {
+		$(DRAGGABLES_SEL).after(MEMOBOX_LINK).next().click(function(){
+				memobox_dropit(this.previousSibling);
+			});;
+	}
 	memobox_ul = $('ul',memobox);
-	$(DRAGGABLES_SEL).Draggable({ghosting:true,revert:true,insideParent:true,zIndex:1,opacity:0.8});
 	memobox_init();
 })
 

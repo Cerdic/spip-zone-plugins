@@ -13,3 +13,5 @@
 .memobox_delete span {}
 /*The draggable items. This class is added only if javascript is active*/
 .memobox_drag {background:#ffc}
+/*The memobox link, if MEMOBOX_MODE is link*/
+.memobox_link {font-size:80%;margin:0px 10px} 
