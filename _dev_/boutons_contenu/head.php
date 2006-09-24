@@ -6,6 +6,7 @@ function boutons_contenu_insert_head($flux)
 	$cssFile = find_in_path('boutons_contenu.css');
 	$imgPath = dirname(find_in_path('img/fontsizeup.png'));
 
+	$txtOnly = _T('boutons_contenu:texte_seulement');
 	$txtSizeUp = _T('boutons_contenu:augmenter_police');
 	$txtSizeDown = _T('boutons_contenu:diminuer_police');
 
@@ -15,6 +16,7 @@ function boutons_contenu_insert_head($flux)
 <script type="text/javascript">
 	boutons_contenu = new boutonsContenu({
 		'imgPath':'{$imgPath}',
+		'txtOnly':'{$txtOnly}',
 		'txtSizeUp':'{$txtSizeUp}',
 		'txtSizeDown':'{$txtSizeDown}'
 	});
