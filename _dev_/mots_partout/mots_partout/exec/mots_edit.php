@@ -225,7 +225,11 @@ if ($id_mot) {
 		 elseif ($choses_possibles[$chose]['statut_'.$GLOBALS['connect_statut']])
 		 	$where.=" AND chose.statut IN (".$choses_possibles[$chose]['statut_tous'].")";
 
-		if (function_exists($f)) $f(_T('info_'.$chaine1.$chaine2), array("FROM" => $from,'WHERE' => $where, 'ORDER BY' => $chose.".titre"));
+		if ($chose == 'auteurs') $orderby = $chose.".nom";
+		elseif ($chose == 'site') $orderby = $chose.".nom_site";
+		else $orderby = $chose.".titre";
+		
+		if (function_exists($f)) $f(_T('info_'.$chaine1.$chaine2), array("FROM" => $from,'WHERE' => $where, 'ORDER BY' => $orderby));
 	}
 /*
 	echo "<P>";

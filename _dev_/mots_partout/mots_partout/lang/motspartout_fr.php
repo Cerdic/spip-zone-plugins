@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'action' => 'Action',
 									   'stricte' => 'stricte',
 									   'select' => 'selection',
-									   'pas_de_documents' => 'Il n&#39;y a aucun objet avec ces charactéristiques',
+									   'pas_de_documents' => 'Il n&#39;y a aucun objet avec ces charact&eacute;ristiques',
 									   'choses' => 'Ajouter des mots clefs sur:',
 									   'dejamotgroupe' => 'il y a d&eacute;j&agrave; un mot de ce groupe (@groupe@) sur l&#39;objet @chose@.',
 									   'ATTENTION' => 'ATTENTION',
@@ -33,6 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'item_mots_cles_association_auteurs' => 'aux auteurs',
 									   'item_mots_cles_association_documents' => 'aux documents',
 									   'item_mots_cles_association_messages' => 'aux messages',
+
+									   'info_auteurs_lies_mot' => 'Les auteurs li&eacute;s &agrave; ce mot-cl&eacute;',
 									   );
 
 ?>

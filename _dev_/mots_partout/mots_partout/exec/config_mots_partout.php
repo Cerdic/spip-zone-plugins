@@ -29,7 +29,7 @@ function exec_config_mots_partout() {
 	$type = addslashes($_POST['nom_chose']);
 	$id_chose = $choses_possibles[$type]['id_chose'];
 	$table_principale = $choses_possibles[$type]['table_principale'];
-	$tables_natives=array("articles"=>true,"rubriques"=>true,"breves"=>true,"forums"=>true,"syndic"=>true);
+	$tables_natives=array("articles"=>true,"rubriques"=>true,"breves"=>true,"forum"=>true,"syndic"=>true);
 
 	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
 	if (!$tables_installees){
