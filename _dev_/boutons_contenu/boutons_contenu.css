@@ -2,3 +2,13 @@
 .boutons_contenu {
 	float : right;
 }
+.boutons_contenu button {
+	margin: -10px 0 0 0;
+	padding: 0;
+	border: 1px transparent solid;
+	background-color: transparent;
+	cursor: pointer;
+}
+.boutons_contenu button:hover {
+	border: 1px red solid;
+}
