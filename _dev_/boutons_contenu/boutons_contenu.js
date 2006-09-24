@@ -29,13 +29,15 @@ function boutonsContenu(options)
 boutonsContenu.prototype.fontBigger = function(elt)
 {
 	$(elt).ancestors(".texte").each(function(){
-		this.style.fontSize = (1.2 * parseFloat($(this).css('fontSize'))) + 'px';
+		var m = $(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
+		this.style.fontSize = (1.2 * parseFloat(m[1])) + m[2];
 	});
 }
 boutonsContenu.prototype.fontSmaller = function(elt)
 {
 	$(elt).ancestors(".texte").each(function(){
-		this.style.fontSize = (parseFloat($(this).css('fontSize')) / 1.2) + 'px';
+		var m = $(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
+		this.style.fontSize = (parseFloat(m[1]) / 1.2) + m[2];
 	});
 }
 
