@@ -22,9 +22,12 @@ var $TableX;			# abscisse du tableau
 var $HeaderColor;
 var $RowColors;
 var $tableProp=array();
+
+var $ProcessingBloc=0;
+var $BlocContent=array();
+var $BlocTags=array();
+
 var $ProcessingTable=false;	# =1 : en cours lecture table
-var $ProcessingTDTH=false;	# =1 : en cours lecture cellule tableau
-var $ProcessingTH=false;	# =1 : en cours lecture cellule tableau heading
 var $ProcessingCadre=false;	# =1 : en cours lecture contenu d'un cadre SPIP (TEXTAREA HTML)
 var $tableCurrentCol;	# numéro de cellule courante
 var $tableCurrentRow;	# Numero de ligne courante pendant la lecture d'un tableau
@@ -40,10 +43,9 @@ var $BottomLinkIDArray = array(); #Sauve les IDs des liens internes (notes en fi
 var $BottomLinkIDArrayIt = 0; #Itérateur dans le tableau des IDs des liens internes
 
 var $FirstIteration = TRUE;  # booleen pour la génération des liens
-var $maxLineWidth = 0;
 
 
-function Buid($OutputFileFullPathName)
+function Build($OutputFileFullPathName)
 {
 	$this->Open();
 	
@@ -65,13 +67,13 @@ function Buid($OutputFileFullPathName)
 
 function AddCol($field=-1,$width=-1,$align='L')
 {
-    //Ajoute une colonne au tableau
-    if($field==-1)
+	//Ajoute une colonne au tableau
+	if($field==-1)
 	{
-        $field=count($this->columnProp);
+		$field=count($this->columnProp);
 	}
 	
-    $this->columnProp[$field]=array('f'=>$field,'w'=>$width,'a'=>$align);
+	$this->columnProp[$field]=array('f'=>$field,'w'=>$width,'a'=>$align);
 	#$this->Write(5, "Ajout de colonne : ".$field."/".$width."/".$align); $this->Ln();
 }
 
@@ -111,12 +113,13 @@ function WriteHTML($html,$LineFeedHeight)
 	foreach($a as $i=>$e) 
 	{
 		//Balise
-		if (($e{0}=='<')&&(preg_match(',^<(/)?([^\s]+)(\s.*)?>$,',$e,$match)!==FALSE)) {
+		if (($e{0}=='<')&&(preg_match(',^<(/)?([^\s]+)(\s.*|/)?>$,',$e,$match)!==FALSE)) {
 			//var_dump("::$tag::");
 			$tag=strtoupper($match[2]);
 			$closing = $match[1]=="/";
-			if (($this->ProcessingTDTH) AND (!in_array($tag,array("TABLE","TH","TD","THEAD","TBODY"))))
-				$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['content'] .= $e;
+			
+			if (($this->ProcessingBloc) AND (!in_array($tag,$this->BlocTags[$this->ProcessingBloc-1])))
+				$this->BlocContent[$this->ProcessingBloc-1] .= $e;
 			else {
 				if ($closing)
 				// C'est une balise fermante
@@ -137,11 +140,8 @@ function WriteHTML($html,$LineFeedHeight)
 				$this->texteAddSpace = $next_add_space;
 				# Attention, ce mécanisme ne permet pas de traiter les liens dans les tableaux...
 				# ni les tableaux dans les tableaux, d'ailleurs...
-				if ($this->ProcessingTDTH)
-				{
-					# tableCurrentCol - 1 car tableCurrentCol déjà incrémenté.
-					$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['content'] .= $e;
-				} 
+				if (($this->ProcessingBloc))
+					$this->BlocContent[$this->ProcessingBloc-1] .= $e;
 				else 
 				{
 					// C'est un lien. Il faut faire la distinction entre lien externe, lien interne et note de bas de page (couples ancre + lien interne)
@@ -403,7 +403,19 @@ function OpenTag($tag,$e,$LineFeedHeight)
 			$this->nCols=$this->tableCurrentCol;
 			$this->AddCol();
 		}
-		$this->ProcessingTDTH=true;
+		$this->ProcessingBloc++;
+		$this->BlocTags[$this->ProcessingBloc-1]=array("TH","TD");
+		$this->BlocContent[$this->ProcessingBloc-1]="";
+	}
+	if($tag=='BLOCKQUOTE') {
+		$this->ProcessingBloc++;
+		$this->BlocTags[$this->ProcessingBloc-1]=array("BLOCKQUOTE");
+		$this->BlocContent[$this->ProcessingBloc-1]="";
+	}
+	if($tag=='TEXTAREA') {
+		$this->ProcessingBloc++;
+		$this->BlocTags[$this->ProcessingBloc-1]=array("TEXTAREA");
+		$this->BlocContent[$this->ProcessingBloc-1]="";
 	}
 	if($tag=='HR') 
 	{
@@ -416,19 +428,13 @@ function OpenTag($tag,$e,$LineFeedHeight)
 function CloseTag($tag,$LineFeedHeight)
 {
 	if($tag=='B' || $tag=='U' || $tag=='I')
-	{
 		$this->SetStyle($tag,false);
-	}
 	
 	if($tag=='STRONG')
-	{
 		$this->SetStyle('B',false);
-	}
 	
 	if($tag=='EM')
-	{
 		$this->SetStyle('I',false);
-	}
 		
 	if($tag=='A'){
 		$this->HREF='';
@@ -463,19 +469,19 @@ function CloseTag($tag,$LineFeedHeight)
 			$this->ProcessingCadre=false;
 	}
 	if($tag=='TD' or $tag=='TH') {
-		$this->ProcessingTDTH=false;
-		if (!strlen($this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['content']))
+		if (!strlen($this->BlocContent[$this->ProcessingBloc-1]))
 			$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['content']=" ";
+		else 
+			$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['content']=$this->BlocContent[$this->ProcessingBloc-1];
 		if ($tag=='TH')
 			$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['TH']=1;
 		else
 			$this->tableContent[$this->tableCurrentRow][$this->tableCurrentCol - 1]['TH']=0;
+		$this->ProcessingBloc--;
 	}
 	if($tag=='TR') {
 		$this->inFirstRow=0;	# on a fini une ligne donc la première aussi
-		$this->ProcessingTH=false;
 	}
-
 	if($tag=='TABLE') {
 		$this->TableShow('C',$LineFeedHeight);
 		$this->inFirstRow=0;
@@ -484,28 +490,30 @@ function CloseTag($tag,$LineFeedHeight)
 		$this->columnProp=array();
 		$this->tableContent=array();
 	}
+	if($tag=='BLOCKQUOTE') {
+		if (strlen($content=$this->BlocContent[$this->ProcessingBloc-1])){
+			$this->ProcessingBloc--;
+			$this->BlocShow(10,$content,1,$LineFeedHeight);
+		}
+	}
+	if($tag=='TEXTAREA') {
+		if (strlen($content=$this->BlocContent[$this->ProcessingBloc-1])){
+			$this->ProcessingBloc--;
+			$this->BlocShow(0,$content,1,$LineFeedHeight);
+		}
+	}
 }
 
 function SetStyle($tag,$enable,$size=0)
 {
-	//Modifie le style et sélectionne la police correspondante
-	$this->$tag+=($enable ? 1 : -1);
-	$style='';
-	foreach (array('B','I','U') as $s)
-	{
-		// $this->$s est une variable membre de FPDF (représente le texte à afficher ?)
-		if ($this->$s > 0)
-		{
-			$style.=$s;
-		}
-		if ($size==0)
-		{
-			$this->SetFont('',$style);
-		}
-		else
-		{
-			$this->SetFont('',$style, $size);
-		}
+	static $currentStyle=array();
+	if (in_array($tag,array('B','I','U'))){
+		if ($enable)
+			$currentStyle = array_merge($currentStyle,array($tag));
+		else 
+			$currentStyle = array_diff($currentStyle,array($tag));
+		$family = $this->FontFamily?$this->FontFamily:'helvetica';
+		$this->SetFont($family,implode("",$currentStyle), $size);
 	}
 }
 
@@ -547,14 +555,60 @@ function TableHeader()
 }
 */
 
-function TableShow($align,$LineFeedHeight)
-{
-
+function CellSize($htmlContent,$fontFamily,$fontSize,$LineFeedHeight,$cellmargin=3,$max_width=0){
 	$cell_pdf=new PDF_SPIP();
 	$cell_pdf->Open();
 	$cell_pdf->FirstIteration=TRUE;
+	$cell_pdf->SetFont($fontFamily, '', $fontSize);
 	
+	$cell_pdf->ResetBuffer();
+	$cell_pdf->maxLineWidth = 0;
+	$cell_pdf->x=$cell_pdf->lMargin;
+	$cell_pdf->y=0;
+	if ($max_width){
+		$cell_pdf->rMargin=$cell_pdf->w-$cell_pdf->x-$max_width-$cellmargin;
+	}
+	$cell_pdf -> WriteHTML($htmlContent,$LineFeedHeight);
+	
+	$width = $cell_pdf->maxLineWidth-$cell_pdf->lMargin;
+	$height = $cell_pdf->y;
+	
+	$width += $cellmargin;
+	$height += $cellmargin;
+	return array($width,$height);
+}
 
+function OutputCell($width,$height,$htmlContent,$border=0,$LineFeedHeight=0,$align='',$fill=0){
+		// dessiner la cellule vide
+		$this->Cell($width, $height, '', $border, 0, $align, $fill);
+		// on note la position apres la cellule
+		$x = $this->x; $y = $this->y;
+		$lmargin = $this->lMargin;
+		$rmargin = $this->rMargin;
+		
+		// on se remet en debut de cellule
+		$this->x-=$width;
+		$this->lMargin = $this->x; // pour que les retour ligne se fassent correctement dans la cellule
+		$this->rMargin = $this->w-$this->x-$width; 
+		
+		$this -> WriteHTML($htmlContent,$LineFeedHeight);
+		// on se remet a la fin de la cellule
+		$this->x = $x; $this->y = $y;
+		$this->lMargin = $lmargin;
+		$this->rMargin = $rmargin;
+}
+
+function BlocShow($left_margin,$htmlContent,$border=0,$LineFeedHeight){
+	$this->Ln($LineFeedHeight);
+	$this->x=$this->lMargin+$left_margin;
+	$width = $this->w-$this->rMargin-$this->x;
+	list($width,$height) = $this->CellSize($htmlContent,$this->FontFamily,$this->FontSizePt,$LineFeedHeight,3,$width);
+	$this->OutputCell($width,$height,$htmlContent,$border,$LineFeedHeight);
+	$this->Ln($LineFeedHeight);
+}
+
+function TableShow($align,$LineFeedHeight)
+{
 	// Calcul de la taille de police optimale
 	// Le calcul ne l'est pas, lui ;-)
 	$oldFontSizePt=$this->FontSizePt;
@@ -564,36 +618,38 @@ function TableShow($align,$LineFeedHeight)
 	$cellmargin=3.0;		// pifomètre : un peu de marge sur la largeur de cellule
 	$wrwi=$this->w - $this->lMargin - $this->rMargin;
 //-----------
-	$tableFontSize=10.0;
+	$tableFontSize=10;
+	$TableWidth = $wrwi;
+	$max_width=0;
+	$min_font_size=5.0;
 	do {
-		$tableFontSize = $tableFontSize - 1.0;
+		$coeff=0;
+		$tableFontSize = $tableFontSize *$wrwi/$TableWidth;
+		if ($tableFontSize<$min_font_size)
+				$coeff=$wrwi/$TableWidth;
+				
+		$tableFontSize = max($min_font_size,$tableFontSize);
 		// on boucle sur la taille de police tant que la largeur du tableau ne rentre pas dans la page
-
-		$cell_pdf->SetFont($tableFontFamily, '', $tableFontSize);
 		
-
 		// remise à zéro des largeurs de colonnes
-		foreach ($this->columnProp as $i=>$cprop) {
-			$this->columnProp[$i]['w']=0.0;
-		}
+		foreach ($this->columnProp as $i=>$cprop)
+			if ($coeff>0)	$this->columnProp[$i]['w']=$this->columnProp[$i]['w']*$coeff;// redimenssioner la largeur de la colonne
+			else	$this->columnProp[$i]['w']=0.0;
+		foreach($this->tableContent as $j=>$row)
+			$this->lineProp[$j]['h']=0.0;
 		
 		// on passe toutes les cellules du tableau en revue
 		// de façon à calculer la largeur max de chaque colonne pour la taille de police courante
 		foreach($this->tableContent as $j=>$row) {
 			foreach($row as $i=>$cell) {
-				$cell_pdf->ResetBuffer();
-				$cell_pdf->maxLineWidth = 0;
-				$left = $cell_pdf->x;
-				$top = $cell_pdf->y;
+				$htmlContent = $cell['content']."<br />";
 				if ($this->tableContent[$j][$i]['TH']) {
-					$cell_pdf->SetFont($tableFontFamily, 'B', $tableFontSize);
+					$htmlContent="<B>$htmlContent</B>";
 				}
-				$cell_pdf -> WriteHTML($cell['content']."<br />",$LineFeedHeight);
-				$width = $cell_pdf->maxLineWidth;
-				$height = $cell_pdf->y - $top;
-				$width += $cellmargin;
-				$height += $cellmargin;
-				$this->columnProp[$i]['w'] = max($this->columnProp[$i]['w'],$width);
+				list($width,$height)=$this->CellSize($htmlContent,$tableFontFamily,$tableFontSize,$LineFeedHeight,$cellmargin,($coeff>0)?$this->columnProp[$i]['w']:0);
+				
+				if ($coeff==0)
+					$this->columnProp[$i]['w'] = max($this->columnProp[$i]['w'],$width);
 				$this->lineProp[$j]['h'] = max($this->lineProp[$j]['h'],$height);
 			}
 		}
@@ -602,20 +658,20 @@ function TableShow($align,$LineFeedHeight)
 		foreach($this->columnProp as $col) {
 			$TableWidth += $col['w'];
 		}
-	} while ($TableWidth > $wrwi && $tableFontSize > 1.0);
+	} while ($TableWidth > $wrwi && $tableFontSize > 5.0);
 
+	//-----------
+	//	Envoi du tableau dans le flux PDF
+	//-----------
 
-//-----------
-//	Envoi du tableau dans le flux PDF
-//-----------
-
-    //Calcule l'abscisse du tableau
-    if($align=='C') 
+	$this->SetFont($tableFontFamily, '', $tableFontSize);
+	//Calcule l'abscisse du tableau
+	if($align=='C') 
 		$this->TableX=max(($this->w-$TableWidth)/2, 0);
-    elseif($align=='R')
-        $this->TableX=max($this->w-$this->rMargin-$TableWidth, 0);
-    else
-        $this->TableX=$this->lMargin;
+	elseif($align=='R')
+		$this->TableX=max($this->w-$this->rMargin-$TableWidth, 0);
+	else
+		$this->TableX=$this->lMargin;
 
 	$ci=0;	# flip-flop pour couleur de fond de ligne
 	foreach($this->tableContent as $j=>$row) {
@@ -628,26 +684,19 @@ function TableShow($align,$LineFeedHeight)
 		}
 		
 		foreach($this->tableContent[$j] as $i=>$cell) {
-//		print("Cellule : [".$cell."], \$i=".$i."  largeur : ".$this->columnProp[$i]['w']."<BR>");
 			if ($this->tableContent[$j][$i]['TH'] == true) {
 				$this->SetFont($tableFontFamily, 'B', $tableFontSize);
 				$this->SetFillColor(255, 255, 0);	// jaune
 				$fill=1;
 			}
-			//$this->Cell($this->columnProp[$i]['w'], 5, $cell['content'], 1, 0, $this->columnProp[$i]['a'], $fill);	
-			$this->Cell($this->columnProp[$i]['w'], $this->lineProp[$j]['h'], '', 1, 0, $this->columnProp[$i]['a'], $fill);
-			// on note la position apres la cellule
-			$x = $this->x; $y = $this->y;
-			$margin = $this->lMargin;
-			
-			// on se remet en debut de cellule
-			$this->x-=$this->columnProp[$i]['w'];
-			$this->lMargin = $this->x; // pour que les retour ligne se fassent correctement
-			
-			$this -> WriteHTML($cell['content'],$LineFeedHeight);
-			// on se remet a la fin de la cellule
-			$this->x = $x; $this->y = $y;
-			$this->lMargin = $margin;
+			$this->OutputCell(
+				$this->columnProp[$i]['w'],
+				$this->lineProp[$j]['h'],
+				$cell['content'],
+				1,
+				$LineFeedHeight,
+				$this->columnProp[$i]['a'],
+				$fill);
 			
 			if ($this->tableContent[$j][$i]['TH']) {
 				$this->SetFont('', '', $tableFontSize);
@@ -662,40 +711,40 @@ function TableShow($align,$LineFeedHeight)
 	$this->SetFont($oldFontFamily, '', $oldFontSizePt);
 }
 	
-	// Efface le fichier de dump
-	function InitDumpFile()
-	{
-		@unlink(DUMP_FILE_FULL_PATH_NAME);
-	}
+// Efface le fichier de dump
+function InitDumpFile()
+{
+	@unlink(DUMP_FILE_FULL_PATH_NAME);
+}
 	
 	
-	// trace une chaîne dans un fichier 
-	function Dump($String)
-	{
-		if ($f = @fopen(DUMP_FILE_FULL_PATH_NAME,"a"))
-	    {
-			@fwrite($f,$String);
-	        @fwrite($f,"\n");
-			@fclose($f);
-	    }
-	}
+// trace une chaîne dans un fichier 
+function Dump($String)
+{
+	if ($f = @fopen(DUMP_FILE_FULL_PATH_NAME,"a"))
+    {
+		@fwrite($f,$String);
+        @fwrite($f,"\n");
+		@fclose($f);
+    }
+}
 	
-	// trace un tableau dans un fichier 
-	function DumpArray($String,$Array)
-	{
-		$Result=print_r($Array,true);
-		
-		if ($f = @fopen(DUMP_FILE_FULL_PATH_NAME,"a"))
-	    {
-			@fwrite($f,$String);
-			@fwrite($f,"\n\n");
-	        if(@fwrite($f,$Result))
-	        {
-	            @fclose($f);
-	        }
-	    }
-		$Array.reset();
-	}
+// trace un tableau dans un fichier 
+function DumpArray($String,$Array)
+{
+	$Result=print_r($Array,true);
+	
+	if ($f = @fopen(DUMP_FILE_FULL_PATH_NAME,"a"))
+    {
+		@fwrite($f,$String);
+		@fwrite($f,"\n\n");
+        if(@fwrite($f,$Result))
+        {
+            @fclose($f);
+        }
+    }
+	$Array.reset();
+}
 
 }	// class PDF extends FPDF
 

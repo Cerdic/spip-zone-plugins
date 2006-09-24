@@ -51,7 +51,7 @@
 		$files_pdf = "article_".$id_article.".pdf" ;
 	$file_out = $path_pdf . $files_pdf ;
 	
-			unlink($file_out);// DEBUG
+	//		unlink($file_out);// DEBUG
 	if (file_exists($file_out)) 
 	{
 		clearstatcache;
@@ -100,7 +100,7 @@
 		$pdf->SetSubject($rubrique);
 		$pdf->SetKeywords($motsclef);
 	
-		$pdf->Buid($file_out);
+		$pdf->Build($file_out);
 		
 	}
 	if ($debug==1)

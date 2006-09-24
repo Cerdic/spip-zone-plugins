@@ -18,25 +18,12 @@
 			$trans["&#8220;"] = "\"";
 			$trans["&#8221;"] = "\"";
 			$trans["&#8230;"] = "...";
+			$trans["&#8364;"] = "Euros";
 			$trans["&ucirc;"] = "û";
-			$trans['$'] = '\$';
 			$trans['->'] = '-»';
 			$trans['<-'] = '«-';
+			$trans['&nbsp;'] = ' ';
 			$texte = strtr($texte, $trans);
-					
-			// Echappement des "
-			//$texte = ereg_replace("\"", "\\\"", $texte);
-	
-			// Traitement des Espaces
-			$texte = ereg_replace("(&nbsp;| )+", " ", $texte);
-	
-			// Traitement des cadres
-			$trans=array("\n" => '<BR>');
-			while (preg_match('/(.*<textarea[^>]*>)(.*\n.*)(<\/textarea>.*)/ims', $texte, $textarea)) 
-			{
-					$rep=strtr($textarea[2], $trans);
-					$texte=$textarea[1].$rep.$textarea[3];
-			}
 			
 			$texte = unicode2charset(charset2unicode($texte), 'iso-8859-1'); // repasser tout dans un charset acceptable par export PDF
 	

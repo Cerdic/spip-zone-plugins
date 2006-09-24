@@ -71,6 +71,8 @@ var $creator;            //creator
 var $AliasNbPages;       //alias for total number of pages
 var $PDFVersion;         //PDF version number
 
+var $maxLineWidth;				// ajout CM 24/09/2006
+
 /*******************************************************************************
 *                                                                              *
 *                               Public methods                                 *
@@ -179,6 +181,7 @@ function FPDF($orientation='P',$unit='mm',$format='A4')
 	$this->SetCompression(true);
 	//Set default PDF version number
 	$this->PDFVersion='1.3';
+	$this->maxLineWidth=0;
 }
 
 function SetMargins($left,$top,$right=-1)
@@ -710,6 +713,7 @@ function Cell($w,$h=0,$txt='',$border=0,$ln=0,$align='',$fill=0,$link='')
 	$this->lasth=$h;
 	if($ln>0)
 	{
+		$this->maxLineWidth=max($this->maxLineWidth,$this->x+$w);
 		//Go to next line
 		$this->y+=$h;
 		if($ln==1)
@@ -853,6 +857,7 @@ function Write($h,$txt,$link='')
 		{
 			//Explicit line break
 			$this->Cell($w,$h,substr($s,$j,$i-$j),0,2,'',0,$link);
+			$this->maxLineWidth=max($this->maxLineWidth,$this->x);
 			$i++;
 			$sep=-1;
 			$j=$i;
@@ -877,6 +882,7 @@ function Write($h,$txt,$link='')
 				if($this->x>$this->lMargin)
 				{
 					//Move to next line
+					$this->maxLineWidth=max($this->maxLineWidth,$this->x);
 					$this->x=$this->lMargin;
 					$this->y+=$h;
 					$w=$this->w-$this->rMargin-$this->x;
@@ -888,10 +894,12 @@ function Write($h,$txt,$link='')
 				if($i==$j)
 					$i++;
 				$this->Cell($w,$h,substr($s,$j,$i-$j),0,2,'',0,$link);
+				$this->maxLineWidth=max($this->maxLineWidth,$this->x);
 			}
 			else
 			{
 				$this->Cell($w,$h,substr($s,$j,$sep-$j),0,2,'',0,$link);
+				$this->maxLineWidth=max($this->maxLineWidth,$this->x);
 				$i=$sep+1;
 			}
 			$sep=-1;
@@ -899,6 +907,7 @@ function Write($h,$txt,$link='')
 			$l=0;
 			if($nl==1)
 			{
+				$this->maxLineWidth=max($this->maxLineWidth,$this->x);
 				$this->x=$this->lMargin;
 				$w=$this->w-$this->rMargin-$this->x;
 				$wmax=($w-2*$this->cMargin)*1000/$this->FontSize;
@@ -911,6 +920,7 @@ function Write($h,$txt,$link='')
 	//Last chunk
 	if($i!=$j)
 		$this->Cell($l/1000*$this->FontSize,$h,substr($s,$j),0,0,'',0,$link);
+	$this->maxLineWidth=max($this->maxLineWidth,$this->x);
 }
 
 function Image($file,$x,$y,$w=0,$h=0,$type='',$link='')
@@ -1004,6 +1014,7 @@ function Image($file,$x,$y,$w=0,$h=0,$type='',$link='')
 
 function Ln($h='')
 {
+	$this->maxLineWidth=max($this->maxLineWidth,$this->x);
 	//Line feed; default value is last cell height
 	$this->x=$this->lMargin;
 	if(is_string($h))
