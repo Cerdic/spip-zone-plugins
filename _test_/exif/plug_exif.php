@@ -1,26 +1,27 @@
 <?php
 
-function EXIF_verifier_JPG_TIFF($id_document) {
-  	if ($id_document > 0) {
-		$query = "SELECT id_type FROM spip_documents WHERE id_document = $id_document";
-		$result = spip_query($query);
-		if ($row = spip_fetch_array($result)) {
-			$id_type = $row['id_type'];
-		}
-	}
+function EXIF_verifier_JPG_TIFF($id_type) {
 	return (($id_type==1) || ($id_type==6));
 }
 
-function EXIF_tag_exif($url_document,$section='',$tag='') {
+function EXIF_tag_exif($fichier,$section='',$tag='') {
   $to_ret = '';
   static $last_url;
   static $last_exif;
 
-  if($last_url == $url_document) {
+  // Fichier distant ?
+  include_spip('inc/distant');
+  $fichier = copie_locale($fichier);
+
+  // Si on a affaire a un fichier tourne, se referer a l'original (s'il existe)
+  $f = preg_replace(',-r(90|180|270)(\.[^.]*)$,', '$2', $fichier);
+  if (@file_exists($f)) $fichier = $f;
+
+  if($last_url == $fichier) {
 	$exif = $last_exif;
   } else {
-	$exif = $last_exif =  @exif_read_data($url_document, 0, true);
-	$last_url = $url_document;
+	$exif = $last_exif =  @exif_read_data($fichier, 0, true);
+	$last_url = $fichier;
   }
 
   if($exif) {
@@ -61,8 +62,10 @@ function balise_EXIF($params) {
   $tag = addslashes($tag);
 
   $id_doc = champ_sql('id_document', $params);
+  $_id_type = champ_sql('id_type', $params);
+  $_fichier = champ_sql('fichier', $params);
 
-  $params->code = "(EXIF_verifier_JPG_TIFF($id_doc))?(EXIF_tag_exif(generer_url_document($id_doc),'$section','$tag')):''";
+  $params->code = "(EXIF_verifier_JPG_TIFF($_id_type))?(EXIF_tag_exif($_fichier,'$section','$tag')):''";
   $params->type = 'php';
   
   return $params;
