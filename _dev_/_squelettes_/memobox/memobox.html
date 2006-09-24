@@ -29,7 +29,7 @@ $(document).ready(function(){
 	} else if(MEMOBOX_MODE=='link') {
 		$(DRAGGABLES_SEL).after(MEMOBOX_LINK).next().click(function(){
 				memobox_dropit(this.previousSibling);
-			});;
+		});
 	}
 	memobox_ul = $('ul',memobox);
 	memobox_init();
@@ -46,9 +46,6 @@ function memobox_addItem(node) {
 
 function memobox_delItem() {
 	$(this).parent().remove();
-	/*if(!$('li',memobox_ul).size()) {
-		memobox.prepend(MEMOBOX_HEADER);
-	}*/
 	memobox_createCookieString();
 }
 
@@ -67,7 +64,6 @@ function memobox_init() {
 		var args = items[i].split('|'); 
 		memobox_addItem.apply(memobox_ul.append(MEMOBOX_ITEM),['<a href="'+args[0]+'" title="'+args[1]+'">'+args[2]+'</a>']);
 	}
-	//if($('li',memobox_ul).size()) $('>p',memobox).remove();
 }
 
 // http://www.quirksmode.org/js/cookies.html 
