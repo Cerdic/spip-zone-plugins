@@ -509,11 +509,11 @@ function SetStyle($tag,$enable,$size=0)
 	static $currentStyle=array();
 	if (in_array($tag,array('B','I','U'))){
 		if ($enable)
-			$currentStyle = array_merge($currentStyle,array($tag));
+			$currentStyle = array_merge($currentStyle,array($tag=>true));
 		else 
-			$currentStyle = array_diff($currentStyle,array($tag));
+			$currentStyle = array_diff($currentStyle,array($tag=>true));
 		$family = $this->FontFamily?$this->FontFamily:'helvetica';
-		$this->SetFont($family,implode("",$currentStyle), $size);
+		$this->SetFont($family,implode("",array_keys($currentStyle)), $size);
 	}
 }
 
@@ -578,7 +578,7 @@ function CellSize($htmlContent,$fontFamily,$fontSize,$LineFeedHeight,$cellmargin
 	return array($width,$height);
 }
 
-function OutputCell($width,$height,$htmlContent,$border=0,$LineFeedHeight=0,$align='',$fill=0){
+function OutputCell($width,$height,$htmlContent,$border=0,$LineFeedHeight=0,$align='',$fill=0,$cellmargin=3){
 		// dessiner la cellule vide
 		$this->Cell($width, $height, '', $border, 0, $align, $fill);
 		// on note la position apres la cellule
@@ -588,8 +588,9 @@ function OutputCell($width,$height,$htmlContent,$border=0,$LineFeedHeight=0,$ali
 		
 		// on se remet en debut de cellule
 		$this->x-=$width;
+		$this->x = $this->x+$cellmargin/2;
 		$this->lMargin = $this->x; // pour que les retour ligne se fassent correctement dans la cellule
-		$this->rMargin = $this->w-$this->x-$width; 
+		$this->rMargin = $this->w-$this->x-$width+$cellmargin/2; 
 		
 		$this -> WriteHTML($htmlContent,$LineFeedHeight);
 		// on se remet a la fin de la cellule
@@ -601,9 +602,11 @@ function OutputCell($width,$height,$htmlContent,$border=0,$LineFeedHeight=0,$ali
 function BlocShow($left_margin,$htmlContent,$border=0,$LineFeedHeight){
 	$this->Ln($LineFeedHeight);
 	$this->x=$this->lMargin+$left_margin;
+	$y = $this->y;
 	$width = $this->w-$this->rMargin-$this->x;
-	list($width,$height) = $this->CellSize($htmlContent,$this->FontFamily,$this->FontSizePt,$LineFeedHeight,3,$width);
+	list($width2,$height) = $this->CellSize($htmlContent,$this->FontFamily,$this->FontSizePt,$LineFeedHeight,3,$width);
 	$this->OutputCell($width,$height,$htmlContent,$border,$LineFeedHeight);
+	$this->y = $y+$height;
 	$this->Ln($LineFeedHeight);
 }
 
@@ -619,21 +622,23 @@ function TableShow($align,$LineFeedHeight)
 	$wrwi=$this->w - $this->lMargin - $this->rMargin;
 //-----------
 	$tableFontSize=10;
-	$TableWidth = $wrwi;
+	$TableWidth = 1.01*$wrwi;
 	$max_width=0;
 	$min_font_size=5.0;
+	$maxiter = 10;
 	do {
-		$coeff=0;
-		$tableFontSize = $tableFontSize *$wrwi/$TableWidth;
-		if ($tableFontSize<$min_font_size)
-				$coeff=$wrwi/$TableWidth;
+		$tableFontSize = $tableFontSize *min(1.0,$wrwi/$TableWidth)*0.99; // 0.99 pour converger plus vite
+		
+		$fixed_width= ($tableFontSize<$min_font_size) || ($maxiter==1) || ($TableWidth<=$wrwi);
+		if ($fixed_width)
+			$coeff=min(1.0,$wrwi/$TableWidth);
 				
 		$tableFontSize = max($min_font_size,$tableFontSize);
 		// on boucle sur la taille de police tant que la largeur du tableau ne rentre pas dans la page
 		
 		// remise à zéro des largeurs de colonnes
 		foreach ($this->columnProp as $i=>$cprop)
-			if ($coeff>0)	$this->columnProp[$i]['w']=$this->columnProp[$i]['w']*$coeff;// redimenssioner la largeur de la colonne
+			if ($fixed_width)	$this->columnProp[$i]['w']=$this->columnProp[$i]['w']*$coeff;// redimenssioner la largeur de la colonne
 			else	$this->columnProp[$i]['w']=0.0;
 		foreach($this->tableContent as $j=>$row)
 			$this->lineProp[$j]['h']=0.0;
@@ -646,9 +651,9 @@ function TableShow($align,$LineFeedHeight)
 				if ($this->tableContent[$j][$i]['TH']) {
 					$htmlContent="<B>$htmlContent</B>";
 				}
-				list($width,$height)=$this->CellSize($htmlContent,$tableFontFamily,$tableFontSize,$LineFeedHeight,$cellmargin,($coeff>0)?$this->columnProp[$i]['w']:0);
+				list($width,$height)=$this->CellSize($htmlContent,$tableFontFamily,$tableFontSize,$LineFeedHeight,$cellmargin,$fixed_width?$this->columnProp[$i]['w']:0);
 				
-				if ($coeff==0)
+				if (!$fixed_width)
 					$this->columnProp[$i]['w'] = max($this->columnProp[$i]['w'],$width);
 				$this->lineProp[$j]['h'] = max($this->lineProp[$j]['h'],$height);
 			}
@@ -658,7 +663,7 @@ function TableShow($align,$LineFeedHeight)
 		foreach($this->columnProp as $col) {
 			$TableWidth += $col['w'];
 		}
-	} while ($TableWidth > $wrwi && $tableFontSize > 5.0);
+	} while (!$fixed_width && $maxiter--);
 
 	//-----------
 	//	Envoi du tableau dans le flux PDF
@@ -696,7 +701,7 @@ function TableShow($align,$LineFeedHeight)
 				1,
 				$LineFeedHeight,
 				$this->columnProp[$i]['a'],
-				$fill);
+				$fill,0);
 			
 			if ($this->tableContent[$j][$i]['TH']) {
 				$this->SetFont('', '', $tableFontSize);
@@ -709,6 +714,7 @@ function TableShow($align,$LineFeedHeight)
 	}
 
 	$this->SetFont($oldFontFamily, '', $oldFontSizePt);
+	$this->Ln($LineFeedHeight);
 }
 	
 // Efface le fichier de dump
