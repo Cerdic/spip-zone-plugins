@@ -4,10 +4,14 @@ if (typeof $ == 'function') {
 		$("#contenu .texte").prepend(
 
 '<span class="boutons_contenu">\
-<button onclick="boutons_contenu.fontBigger(this);"><img src="' +
- boutons_contenu.imgPath + '/fontBigger.png" /></button>\
-<button onclick="boutons_contenu.fontSmaller(this);"><img src="' +
- boutons_contenu.imgPath + '/fontSmaller.png" /></button></span>'
+<button onclick="boutons_contenu.fontBigger(this);" alt="' +
+ boutons_contenu.txtSizeUp + '" title="' +
+ boutons_contenu.txtSizeUp + '"><img src="' +
+ boutons_contenu.imgPath + '/fontsizeup.png" /></button>\
+<button onclick="boutons_contenu.fontSmaller(this);" alt="' +
+ boutons_contenu.txtSizeDown + '" title="' +
+ boutons_contenu.txtSizeDown + '"><img src="' +
+ boutons_contenu.imgPath + '/fontsizedown.png"/></button></span>'
 
 		);
 	});
@@ -25,13 +29,13 @@ function boutonsContenu(options)
 boutonsContenu.prototype.fontBigger = function(elt)
 {
 	$(elt).ancestors(".texte").each(function(){
-		this.style.fontSize = (1.2 * parseInt($(this).css('fontSize'))) + 'px';
+		this.style.fontSize = (1.2 * parseFloat($(this).css('fontSize'))) + 'px';
 	});
 }
 boutonsContenu.prototype.fontSmaller = function(elt)
 {
 	$(elt).ancestors(".texte").each(function(){
-		this.style.fontSize = (parseInt($(this).css('fontSize')) / 1.2) + 'px';
+		this.style.fontSize = (parseFloat($(this).css('fontSize')) / 1.2) + 'px';
 	});
 }
 

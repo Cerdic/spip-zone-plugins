@@ -16,7 +16,7 @@
 	ATTENTION: Necessite jQuery et la balise <code>#INSERT_HEAD</code> dans les squelettes
   </description>
   <prefix>
-	BoutonsContenu
+	boutons_contenu
   </prefix>
   <pipeline>
 	  <nom>insert_head</nom>
