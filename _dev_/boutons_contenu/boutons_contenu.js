@@ -1,13 +1,13 @@
 // on dépend de jQuery (ou autre définissant $)
 if (typeof $ == 'function') {
 	$(document).ready(function(){
-		$("#contenu .titre").append(
+		$("#contenu .texte").prepend(
 
 '<span class="boutons_contenu">\
-<a href="javascript:boutons_contenu.fontBigger();"><img src="' +
- boutons_contenu.imgPath + '/fontBigger.png" /></a>\
-<a href="javascript:boutons_contenu.fontSmaller();"><img src="' +
- boutons_contenu.imgPath + '/fontSmaller.png" /></a></span>'
+<button onclick="boutons_contenu.fontBigger(this);"><img src="' +
+ boutons_contenu.imgPath + '/fontBigger.png" /></button>\
+<button onclick="boutons_contenu.fontSmaller(this);"><img src="' +
+ boutons_contenu.imgPath + '/fontSmaller.png" /></button></span>'
 
 		);
 	});
@@ -22,15 +22,18 @@ function boutonsContenu(options)
         this[opt] = options[opt];
     }
 }
-boutonsContenu.prototype.fontBigger = function()
+boutonsContenu.prototype.fontBigger = function(elt)
 {
-	$("#contenu .texte").each(function(){
+	$(elt).ancestors(".texte").each(function(){
 		this.style.fontSize = (1.2 * parseInt($(this).css('fontSize'))) + 'px';
 	});
 }
-boutonsContenu.prototype.fontSmaller = function()
+boutonsContenu.prototype.fontSmaller = function(elt)
 {
-	$("#contenu .texte").each(function(){
+	$(elt).ancestors(".texte").each(function(){
 		this.style.fontSize = (parseInt($(this).css('fontSize')) / 1.2) + 'px';
 	});
 }
+
+function dump(elt)
+{var txt=''; for (var prop in elt) {txt += prop+'='+elt[prop]+'/';} alert(txt);}
