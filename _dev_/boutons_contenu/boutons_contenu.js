@@ -4,6 +4,10 @@ if (typeof $ == 'function') {
 		$("#contenu .texte").prepend(
 
 '<span class="boutons_contenu">\
+<button onclick="boutons_contenu.textOnly(this);" alt="' +
+ boutons_contenu.txtSizeUp + '" title="' +
+ boutons_contenu.txtSizeUp + '"><img src="' +
+ boutons_contenu.imgPath + '/textonly.png" /></button>\
 <button onclick="boutons_contenu.fontBigger(this);" alt="' +
  boutons_contenu.txtSizeUp + '" title="' +
  boutons_contenu.txtSizeUp + '"><img src="' +
@@ -26,18 +30,26 @@ function boutonsContenu(options)
         this[opt] = options[opt];
     }
 }
+boutonsContenu.prototype.textOnly = function(elt)
+{
+	if (elt['backTextOnly']) {
+		elt['backTextOnly'].show();
+		elt['backTextOnly'].prev().remove();
+		return;
+	}
+	elt['backTextOnly'] = $(elt).ancestors(".texte").prependTo("body").next();
+	elt['backTextOnly'].hide();
+}
 boutonsContenu.prototype.fontBigger = function(elt)
 {
 	$(elt).ancestors(".texte").each(function(){
-		var m = $(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
-		this.style.fontSize = (1.2 * parseFloat(m[1])) + m[2];
+		this.style.fontSize = (1.2 * parseFloat($(this).css('fontSize'))) + 'px';
 	});
 }
 boutonsContenu.prototype.fontSmaller = function(elt)
 {
 	$(elt).ancestors(".texte").each(function(){
-		var m = $(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
-		this.style.fontSize = (parseFloat(m[1]) / 1.2) + m[2];
+		this.style.fontSize = (parseFloat($(this).css('fontSize')) / 1.2) + 'px';
 	});
 }
 
