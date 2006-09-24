@@ -7,15 +7,29 @@
 _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
-	stable
+	test
 	</etat>
 	<description>
-	Fonction recommander un article &agrave; un ami
+	Fonction recommander un article &agrave; un ami.
+
+On l'ajoute dans n'importe quel squelette en pr&eacute;cisant comme param&egrave;tres d'inclusion :
+- le titre de la page;
+- l'url de la page;
+- le texte a afficher.
+
+Sous la forme :
+<code><INCLURE(recommander.php) {titre=#TITRE} {url=#URL_ARTICLE}
+ {texte=#INTRODUCTION}></code>
+
+On peut ajouter <code>{subject=xxxx}</code> si on veut fixer le sujet,
+sinon par d&eacute;faut c'est <code>"A lire sur #NOM_SITE -- #ENV{titre}"</code>.
+
+Bonus : si {{jQuery}} est pr&eacute;sent, l'interface est en ahah.
 	</description>
-	<prefix> 
+	<prefix>
 	recommander
 	</prefix>
 </plugin>
