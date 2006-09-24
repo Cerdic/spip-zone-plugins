@@ -22,7 +22,7 @@ function exec_config_verifcore() {
 	
   $cwd = getcwd();
   chdir (_DIR_RACINE) ; 
-  $fich =recuperer_page("http://zone.spip.org/trac/spip-zone/browser/_plugins_/_amelioration_admin_/verifcore/refcorespip191.txt?format=txt");
+  $fich =recuperer_page("http://zone.spip.org/trac/spip-zone/browser/_plugins_/_test_/verifcore/refcorespip191.txt?format=txt");
   if($fich){
     $tab_fic = split( "\n" ,"$fich") ;
 
@@ -44,7 +44,7 @@ function exec_config_verifcore() {
 	}
     }
 
-    $fich =recuperer_page("http://zone.spip.org/trac/spip-zone/browser/_plugins_/_amelioration_admin_/verifcore/fichier_repertoire_supprimer_depuis_svn6797.txt?format=txt"); 
+    $fich =recuperer_page("http://zone.spip.org/trac/spip-zone/browser/_plugins_/_test_/verifcore/fichier_repertoire_supprimer_depuis_svn6797.txt?format=txt"); 
     if($fich){
       $tab_fic = split( "\n" ,"$fich") ;
       $com = 0 ;
@@ -116,7 +116,7 @@ function exec_config_verifcore() {
 
   }else{ 
     debut_cadre_trait_couleur("", false, "","IMPOSSIBLE fichier r&eacute;f&eacute;rent manquant" );
-    echo "Attention le fichier http://zone.spip.org/trac/spip-zone/browser/_plugins_/_amelioration_admin_/verifcore/refcorespip191.txt?format=txt n\'existe plus\n<br />" ;
+    echo "Attention le fichier http://zone.spip.org/trac/spip-zone/browser/_plugins_/_test_/verifcore/refcorespip191.txt?format=txt n\'existe plus\n<br />" ;
     echo "Contactez auteur du plugin rudjob chez gmail.com" ;
     fin_cadre_trait_couleur();
   } 
