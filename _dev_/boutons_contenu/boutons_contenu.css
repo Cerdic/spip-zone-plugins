@@ -13,3 +13,6 @@
 .boutons_contenu button:hover {
 	border: 1px red solid;
 }
+.boutons_contenu button img {
+	behavior:url(win_png.htc)
+}
