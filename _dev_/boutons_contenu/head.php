@@ -4,10 +4,11 @@ function boutons_contenu_insert_head($flux)
 {
 	$jsFile = find_in_path('boutons_contenu.js');
 	$cssFile = find_in_path('boutons_contenu.css');
-	$imgPath = dirname($jsFile) . '/img';
+	$imgPath = dirname(find_in_path('img/fontsizeup.png'));
+
 	$txtSizeUp = _T('boutons_contenu:augmenter_police');
 	$txtSizeDown = _T('boutons_contenu:diminuer_police');
-//	$imgPath = find_in_path('fontBigger.png');
+
 	$incHead = <<<EOH
 <link rel="stylesheet" href="$cssFile" type="text/css" media="all" />
 <script src="{$jsFile}" type="text/javascript"></script>
