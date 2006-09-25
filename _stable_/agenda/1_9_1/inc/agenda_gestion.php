@@ -453,7 +453,8 @@ function Agenda_action_formulaire_article($id_article){
 	$insert = _request('evenement_insert');
 	$modif = _request('evenement_modif');
 	$supp_evenement = intval(_request('supp_evenement'));
-	if ($insert || $modif){
+
+	if (($insert || $modif)&&(!$supp_evenement)){
 	
 		if ( ($insert) && (!$id_evenement) ){
 			$id_evenement = spip_abstract_insert("spip_evenements",
@@ -549,6 +550,7 @@ function Agenda_action_formulaire_article($id_article){
 	}
 	else if ($supp_evenement){
 		$id_article = intval(_request('id_article'));
+
 		if (!$id_article)
 			$id_article = intval(_request('ajouter_id_article'));
 		$res = spip_query("SELECT * FROM spip_evenements WHERE id_article=".spip_abstract_quote($id_article)." AND id_evenement=".spip_abstract_quote($supp_evenement));

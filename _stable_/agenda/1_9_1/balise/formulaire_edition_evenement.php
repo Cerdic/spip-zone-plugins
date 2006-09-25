@@ -25,7 +25,13 @@ function balise_FORMULAIRE_EDITION_EVENEMENT_dyn($id_evenement = 0, $id_article 
 
 	$flag_modif = (_request('evenement_modif') && _request('id_evenement') == $id_evenement);
 	$flag_ajout = _request('evenement_insert');
-	if ($flag_ajout || $flag_modif){
+	$flag_supp = _request('supp_evenement')!==NULL;
+	if ($flag_supp) {
+		$_GET['supp_evenement']=$id_evenement;
+		$_GET['id_article']=$id_article;
+	}
+
+	if ($flag_ajout || $flag_modif || $flag_supp){
 		include_spip("inc/agenda_gestion");
 		Agenda_action_formulaire_article($id_article);
 	}
