@@ -1,6 +1,6 @@
 <?php
 
-include(_DIR_RESTREINT.'/public/assembler.php');
+include(_DIR_RESTREINT.'public/assembler.php');
 
 function public_assembler($fond) {
 	  global $auteur_session, $forcer_lang, $ignore_auth_http,
