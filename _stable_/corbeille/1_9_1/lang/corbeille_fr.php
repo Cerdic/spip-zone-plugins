@@ -3,51 +3,41 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-  // A
-  'articles' => 'Articles',
-  'aucun' => 'aucun',
-  'auteurs' => 'Auteurs',
-
-  // B
-  'breves' => 'Br&egrave;ves',
-
-  // C
+  
+  'articles_tous' => "Tous les articles dans la corbeille :",
+  'aucun' => "aucun",
+	'auteurs_tous' => "Tous les auteurs dans la corbeille :",
+  
+  'breves_toutes' => "Toutes les brèves dans la corbeille :",
+	
+	// C
   'corbeille'=>'Corbeille',
-  'choix_doc'=>'Choisissez le type de documents &agrave; afficher',
-
+  'choix_doc'=>'Choisissez le type de documents &agrave; afficher', 
+  
   // D
   'doc_effaces' => 'Documents effac&eacute;s :',
-
-  // E
-  'effacer' => 'Effacer',
-  'erreur' => 'Erreur ',
-
-  // F
-  'forums_pri' => 'Forums priv&eacute;s',
-  'forums_pub' => 'Forums publics',
-
-  // P
-  'parution' => 'Parution',
-  'petitions' => 'P&eacute;titions',
-
-  // R
+ 	
+ 	'ecrit' => " a &eacute;crit :",
+	'effacer' => "Effacer",
+ 	'erreur' => " : erreur !",
+ 	
+	'messages_tous_pri' => "Tous les messages du forum des administrateurs dans la corbeille :", 
+ 	'messages_tous_pub' => "Tous les messages du forum dans la corbeille :",
+ 
+ 	'parution' => "Parution",
+ 	'petition' => "la p&eacute;tition :",
+	'petitions_toutes' => "Toutes les p&eacute;titions dans la corbeille :",
+  
+  // readme
   'readme' => 'Cette page permet de {{supprimer d&eacute;finitivement}} tout document que vous avez jet&eacute; &agrave; la corbeille. Vous pouvez laisser un document dans la corbeille tant que vous le souhaitez. C\'est {{&agrave; vous}} de faire le m&eacute;nage.',
-
-  // S
-  'souci_grave' => 'souci grave !',
-
-  // T
-  'titre' => 'Titre',
-  'tous_les_articles' => 'Tous les articles dans la corbeille :',
-  'tous_les_auteurs' => 'Tous les auteurs dans la corbeille :',
-  'toutes_les_breves' => 'Toutes les br&egrave;ves dans la corbeille :',
-  'tous_les_messages_du_forum_pri' => 'Tous les messages du forum priv&eacute; dans la corbeille :',
-  'tous_les_messages_du_forum_pub' => 'Tous les messages du forum public dans la corbeille :',
-  'toutes_les_petitions' => 'Toutes les p&eacute;titions dans la corbeille :',
-  'tout' => 'Tout',
-
+  
+  'signe' => " a sign&eacute; via :",
+  'souci' => "souci grave !",
+  
+  'titre' => "Titre",
+  
   // V
-  'voir_detail' => 'voir les d&eacute;tails'
+  'voir_detail' => 'voir les d&eacute;tails',
  
 );
 

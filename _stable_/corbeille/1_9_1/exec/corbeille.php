@@ -12,8 +12,7 @@ function exec_corbeille(){
   global $operation;
   global $debut;
   global $effacer;
-//  include_ecrire("inc_presentation");
-  include_spip("inc/presentation");
+  include_ecrire("inc_presentation");
 
 /*	$js='
 <script type="text/javascript">
@@ -67,7 +66,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 					$id = "id_signature"; 
 					$temps = "date_time"; 
 					//$page_voir = array($page4,'id_document');
-					$libelle = _T('corbeille:toutes_les_petitions');
+					$libelle = _T("corbeille:petitions_toutes");
 					break;
 				case "breves" : 
 					$statut = "refuse"; 
@@ -75,7 +74,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 					$id = "id_breve"; 
 					$temps = "date_heure"; 
 					$page_voir = array("breves_voir",'id_breve');
-					$libelle = _T('corbeille:toutes_les_breves');
+					$libelle = _T("corbeille:breves_toutes");
 					break;
 				case "articles" : 
 					$statut = "poubelle"; 
@@ -83,7 +82,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 					$id = "id_article"; 
 					$temps = "date";  
 					$page_voir = array("articles",'id_article');
-					$libelle = _T('corbeille:tous_les_articles');
+					$libelle = _T("corbeille:articles_tous");
 					break;
 				case "forums_publics" :
 					$statut = "off";
@@ -91,7 +90,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 					$id = "id_forum";
 					$temps = "date_heure";
 					//$page_voir = array($page3,'id_document');
-					$libelle = _T('corbeille:tous_les_messages_du_forum_pub');
+					$libelle = _T("corbeille:messages_tous_pub");
 					break;
 				case "forums_prives" :
 					$statut = "privoff"; 
@@ -99,7 +98,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 					$id = "id_forum"; 
 					$temps = "date_heure"; 
 					//$page_voir = array($page3,'id_document');
-					$libelle = _T('corbeille:tous_les_messages_du_forum_pri');
+					$libelle = _T("corbeille:messages_tous_pri");
 					break;
 				case "auteurs" :  
 					$statut = "5poubelle"; 
@@ -108,12 +107,12 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 					$id="id_auteur"; 
 					$temps = "maj"; 
 					$page_voir = array("auteurs_edit",'id_auteur');
-					$libelle = _T('corbeille:tous_les_auteurs');
+					$libelle = _T("corbeille:auteurs_tous");
 					break;
 			}
 
 			//securite
-			if (empty($table) || empty($temps) || empty($id) || empty($statut) || empty($titre)) die(_T('corbeille:souci_grave'));
+			if (empty($table) || empty($temps) || empty($id) || empty($statut) || empty($titre)) die(_T("corbeille:souci"));
 	    
       $log_efface = "";            
       if ($operation == "effacer") {
@@ -131,7 +130,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 						$log_efface .= "<li>" . $row2[0];
 						$req = "DELETE FROM $table WHERE statut='$statut' and $id=$id_doc";
 						$result = spip_query($req);
-						if (! $result) $log_efface .= " : erreur !";
+						if (! $result) $log_efface .= _T("corbeille:erreur");
 						$log_efface .= "</li>\n";
 					}					 
 					$log_efface .= "</ul>";
@@ -172,7 +171,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 					for ($i = 0; $i < $total; $i = $i + 10){
 						$y = $i + 9;
 						if ($i == $debut)
-						echo "<span stylz='font-size:large'><strong>[$i-$y]</strong></span> ";
+						echo "<span style='font-size:large'><strong>[$i-$y]</strong></span> ";
 						else
 						echo "[<a href='".generer_url_ecrire($page,"type_doc=$type_doc&debut=$i")."'>$i-$y</a>] ";
 					}
@@ -223,11 +222,10 @@ function checkAll() {  // (un)check all checkboxes by erational.org
                 echo fin_block();
                 */
                 // version 2 rollover
-                echo "<a href='#' onmouseover=\"changestyle('for_$id_document', 'visibility', 'visible');\" onmouseout=\"changestyle('for_$id_document', 'visibility', 'hidden');\">".typo($titre)."</a>";
                 if ($type_doc == "signatures") $detail = recupere_signature_detail($id_document);
                                           else $detail = recupere_forum_detail($id_document);
-                echo "<div id='for_$id_document' style='position:absolute;background:#aaa;padding:5px;margin:-150px 0 0 350px;width: 350px;' class='invisible_au_chargement'>$detail</div>";
-
+                echo "<div id='for_$id_document' style='position:absolute;background:".$GLOBALS["couleur_claire"].";padding:5px;margin:0 0 0 350px;width: 350px;' class='invisible_au_chargement'>$detail</div>";
+                echo "<a href='#' onmouseover=\"changestyle('for_$id_document', 'visibility', 'visible');\" onmouseout=\"changestyle('for_$id_document', 'visibility', 'hidden');\">".typo($titre)."</a>";                
             }
 						echo "</td>";
 						echo "<td class='verdana2' style='width:25%;'>".affdate($date_heure)."</td>";
@@ -255,7 +253,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 			}
 	}
 	else 
-		echo "<strong>Vous n'avez pas acc&egrave;s &agrave; cette page.</strong>";
+		echo "<strong>"._T("ecrire:avis_acces_interdit")."</strong>";
 
 }
 

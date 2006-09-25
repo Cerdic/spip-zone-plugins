@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	<multi>[fr]Corbeille[es]Papelera</multi>
+	<multi>[fr]Corbeille[es]Papelera[it]Cestino</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Copyright (C) 2002 ONFRAY MATTHIEU
@@ -13,6 +13,9 @@ _ &copy; 2005-2006 - Distribu&eacute; sous licence GPL
 	[es]
 _ adaptaci&oacute;n como plugin por cedric.morin@yterium.com
 _ &copy; 2005-2006 - Distribuido bajo licencia GPL 
+	[it]
+_	adattamento in plugin di cedric.morin@yterium.com
+_	&copy; 2005-2006 - Distribuito sotto licenza GPL
 	</multi>
 	</auteur>
 	<version>
@@ -25,6 +28,7 @@ _ &copy; 2005-2006 - Distribuido bajo licencia GPL
 	<multi>
 	[fr] 	Gestion des documents mis &agrave; la corbeille
 	[es]    Gesti&oacute;n de los documentos enviados a la papelera.
+	[it] Gestione dei documenti nel cestino.
 	</multi>
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction

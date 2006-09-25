@@ -4,13 +4,13 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
   // A
-  'articles' => 'Articles',
-  'aucun' => 'none',
-  'auteurs' => 'Authors',
+  'articles_tous' => 'All articles in the recycle bin:',
+	'aucun' => 'none',
+	'auteurs_tous' => 'All authors in the recycle bin:',
 
   // B
-  'breves' => 'Breifs',
-
+	'breves_toutes' => 'All breifs in the recycle bin:',
+	
   // C
   'corbeille'=>'Recycle Bin',
   'choix_doc'=>'Chose the document types to display', 
@@ -19,32 +19,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'doc_effaces' => 'Erased Documents:',
   
   // E
-  'effacer' => 'Erase',
+  'ecrit' => " wrote:",
+	'effacer' => 'Erase',
   'erreur' => 'Error',
 
-  // F
-  'forums_pri' => 'Private Forums',
-  'forums_pub' => 'Publics Forums',
+	// M
+	'messages_tous_pri' => 'All private forum messages in the recycle bin:',
+  'messages_tous_pub' => 'All public forum messages in the recycle bin:',
 
   // P
   'parution' => 'Date Published',
-  'petitions' => 'Petitions',
+  'petition' => 'the petition:',
+	'petitions_toutes' => 'All petitions in the recycle bin:',
 
   // R
   'readme' => 'This page allows the {{permanent deletion}} of documents sent to the recycle bin. You may leave documents in the recycle bin as long as you wish. It\'s {{up to you}} to put out the garbage.',
   
   // S
-  'souci_grave' => 'Fatal Error!',
+  'signe' => " signed with:",
+	'souci' => 'Fatal Error!',
 
   // T
   'titre' => 'Title',
-  'tous_les_articles' => 'All articles in the recycle bin:',
-  'tous_les_auteurs' => 'All authors in the recycle bin:',
-  'toutes_les_breves' => 'All breifs in the recycle bin:',
-  'tous_les_messages_du_forum_pri' => 'All private forum messages in the recycle bin:',
-  'tous_les_messages_du_forum_pub' => 'All public forum messages in the recycle bin:',
-  'toutes_les_petitions' => 'All petitions in the recycle bin:',
-  'tout' => 'All',
 
   // V
   'voir_detail' => 'see details'
