@@ -7,6 +7,7 @@ function boutonstexte_insert_head($flux)
 	$imgPath = dirname(find_in_path('img/fontsizeup.png'));
 
 	$txtOnly = _T('boutonstexte:texte_seulement');
+	$txtBackSpip = _T('boutonstexte:retour_a_spip');
 	$txtSizeUp = _T('boutonstexte:augmenter_police');
 	$txtSizeDown = _T('boutonstexte:diminuer_police');
 
@@ -17,6 +18,7 @@ function boutonstexte_insert_head($flux)
 	boutonstexte = new boutonsTexte({
 		'imgPath':'{$imgPath}',
 		'txtOnly':'{$txtOnly}',
+		'txtBackSpip':'{$txtBackSpip}',
 		'txtSizeUp':'{$txtSizeUp}',
 		'txtSizeDown':'{$txtSizeDown}'
 	});
