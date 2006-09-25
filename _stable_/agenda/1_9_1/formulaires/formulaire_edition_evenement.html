@@ -9,9 +9,9 @@
 <fieldset class='agenda-visu-evenement' id='agenda-visu-evenement'>
 <div class='agenda-visu-evenement-bouton-fermer'>
 <a href='[(#ENV{self}|parametre_url{id_evenement,''})]'
-onclick="setvisibility('agenda-visu-evenement', 'hidden');
-setvisibility('afficher_horaire_debut_evenement', 'hidden');
-setvisibility('afficher_horaire_fin_evenement', 'hidden');
+onclick="$('#agenda-visu-evenement').hide();
+$('#afficher_horaire_debut_evenement').hide();
+$('#afficher_horaire_fin_evenement').hide();
 cal_repetitions.hide();
 return false;"><img src='#CHEMIN{img_pack/croix.png}' width='12' height='12' style='border:none;'></a>
 </div>
@@ -45,10 +45,9 @@ return false;"><img src='#CHEMIN{img_pack/croix.png}' width='12' height='12' sty
 [(#REM) HORAIRE]
 <span class='horaire-titre'>
 	<label for="evenement_lieu"><:agenda:evenement_horaire:></label>
-	<input type='checkbox' name='evenement_horaire' value='oui' [(#ENV**{valeurs}|table_valeur{evenement_horaire,''}|=={oui}|?{' ',''})checked='checked']
-		onClick="var element =  findObj('evenement_horaire');var choix = element.checked;
-	if (choix==true){	setvisibility('afficher_horaire_debut_evenement', 'visible');setvisibility('afficher_horaire_fin_evenement', 'visible');}
-	else{setvisibility('afficher_horaire_debut_evenement', 'hidden');setvisibility('afficher_horaire_fin_evenement', 'hidden');}" />
+	<input type='checkbox' name='evenement_horaire' id='evenement_horaire' value='oui' [(#ENV**{valeurs}|table_valeur{evenement_horaire,''}|=={oui}|?{' ',''})checked='checked']
+		onClick="if ($('#evenement_horaire')[0].checked==true) { $('#afficher_horaire_debut_evenement').show();
+$('#afficher_horaire_fin_evenement').show();} else{$('#afficher_horaire_debut_evenement').hide();$('#afficher_horaire_fin_evenement').hide();}" />
 </span>
 
 [(#REM) DATES]
