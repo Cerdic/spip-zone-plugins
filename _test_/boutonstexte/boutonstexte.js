@@ -34,7 +34,7 @@ function boutonsTexte(options)
 boutonsTexte.prototype.textOnly = function(elt)
 {
 	if (this['backTextOnly']) {
-		window.history.go(-1);
+		window.location = window.location;
 		return;
 	}
 	$(elt).ancestors(".texte").prependTo("body").next().hide();
