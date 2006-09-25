@@ -26,6 +26,7 @@ if (typeof $ == 'function') {
 // le prototype boutons du contenu
 function boutonsTexte(options)
 {
+	this.rate = 1.2;
     for (opt in options) {
         this[opt] = options[opt];
     }
@@ -42,16 +43,18 @@ boutonsTexte.prototype.textOnly = function(elt)
 }
 boutonsTexte.prototype.fontBigger = function(elt)
 {
+	var that = this;
 	$(elt).ancestors(".texte").each(function(){
 		var m = $(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
-		this.style.fontSize = (1.2 * parseFloat(m[1])) + m[2];
+		this.style.fontSize = (that.rate * parseFloat(m[1])) + m[2];
 	});
 }
 boutonsTexte.prototype.fontSmaller = function(elt)
 {
+	var that = this;
 	$(elt).ancestors(".texte").each(function(){
 		var m = $(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
-		this.style.fontSize = (parseFloat(m[1]) / 1.2) + m[2];
+		this.style.fontSize = (parseFloat(m[1]) / that.rate) + m[2];
 	});
 }
 
