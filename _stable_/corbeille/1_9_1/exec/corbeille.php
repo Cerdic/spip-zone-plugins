@@ -12,7 +12,7 @@ function exec_corbeille(){
   global $operation;
   global $debut;
   global $effacer;
-  include_ecrire("inc_presentation");
+  include_spip("inc/presentation");
 
 /*	$js='
 <script type="text/javascript">
