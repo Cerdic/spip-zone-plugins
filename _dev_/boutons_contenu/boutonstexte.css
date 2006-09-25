@@ -1,0 +1,18 @@
+/* boutons_contenu.css */
+.boutons_contenu {
+	float : right;
+}
+.boutons_contenu button {
+	position:relative;
+	top: -10px;
+	padding: 0;
+	border: 1px transparent solid;
+	background-color: transparent;
+	cursor: pointer;
+}
+.boutons_contenu button:hover {
+	border: 1px red solid;
+}
+.boutons_contenu button img {
+	behavior:url(win_png.htc)
+}
