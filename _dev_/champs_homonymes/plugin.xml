@@ -10,7 +10,7 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
 	test
@@ -19,9 +19,10 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	Rendre possible la visualisation et la mise &agrave; jours de nouveaux champs ajout&eacute;s dans plusieurs tables de SPIP grâce aux champs EXTRA.
 	<hr>
 {{Modification au code source}}
-_ Ce plugin utilise une version modifi&eacute;e du fichier extra.php
+_ Ce plugin utilise une version modifi&eacute;e du fichier extra.php de la version 1.9.1
 _ À l'activation de ce plugin, le fichier extra.php contenu dans ce plugin aura priorit&eacute; sur celui natif de SPIP.
 _ Pour &eacute;viter tout conflit possible, ne pas activer avec un autre plugin contenant aussi un fichier extra.php.
+_ Nouvautés de la version 0.2: meilleur synchronisation des champs homonymes et des champs extra.  
 	<hr>
 	{{Derni&egrave;re version test&eacute;e:}} 
 _ SPIP 1.9.2 alpha SVN [7334]

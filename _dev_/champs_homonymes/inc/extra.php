@@ -1,5 +1,4 @@
 <?php
-
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
@@ -87,6 +86,7 @@ $GLOBALS['champs_extra_proposes'] = Array (
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // a partir de la liste des champs, generer la liste des input
+// http://doc.spip.org/@extra_saisie
 function extra_saisie($extra, $type, $ensemble='', $aff=true) {
 	if ($affiche = extra_form($extra, $type, $ensemble)) {
 	  if ($aff) {
@@ -94,12 +94,14 @@ function extra_saisie($extra, $type, $ensemble='', $aff=true) {
 		echo $affiche;
 		fin_cadre_enfonce();
 	  } else {
-	    return debut_cadre_enfonce('',false) . $affiche . fin_cadre_enfonce('',false);
+	    return debut_cadre_enfonce('',true) . $affiche . fin_cadre_enfonce(true);
 	  }
 	}
 }
 
+// http://doc.spip.org/@extra_form
 function extra_form($extra, $type, $ensemble='') {
+	$extra = extra_homonyme($extra, $type); //ajouté le 25/09/2006 par francois.vachon@iago.ca Utilise une fonction déclarée dans mes_options_homonymes.php
 	$extra = unserialize($extra);
 
 	// quels sont les extras de ce type d'objet
@@ -137,7 +139,7 @@ function extra_form($extra, $type, $ensemble='') {
 	reset($champs_proposes);
 	while (list(, $champ) = each($champs_proposes)) {
 		//$desc = $champs[$champ];
-		$desc = extraire_multi($champs[$champ]);// modifié le 01/06/2006 par francois.vachon@iago.ca
+		$desc = extraire_multi($champs[$champ]);// modifié le 30/08/2006 par francois.vachon@iago.ca pour permettre d'utiliser les blocs multi dans la déclaration des champs extras
 		list($form, $filtre, $prettyname, $choix, $valeurs) = explode("|", $desc);
 
 		if (!$prettyname) $prettyname = ucfirst($champ);
@@ -249,7 +251,20 @@ function extra_form($extra, $type, $ensemble='') {
 }
 
 // recupere les valeurs postees pour reconstituer l'extra
-function extra_recup_saisie($type) {
+// http://doc.spip.org/@extra_recup_saisie
+function extra_recup_saisie($type, $id=0) {
+
+// Ajoute 256 *********************************************************************************************************
+// Ajouté le 24-09-2006 par francois.vachon@aigo.ca
+// Implique la surcharge du fichier ecrire/action/editer_article.php pour passer le id de l'article 
+// Permet de toujours synchroniser le champ homonyme et le champ extra dans un sens comme dans l'autre
+if ($type=='articles'){
+	//echo  '<br />(254)id_'.$type.' = '. $id;
+	global $id_article;
+	$id_article=$id;
+}
+// ******************************************************************************************************Fin Ajoute 256
+
 	$champs = $GLOBALS['champs_extra'][$type];
 	if (is_array($champs)) {
 		$extra = Array();
@@ -283,12 +298,14 @@ function extra_recup_saisie($type) {
 				break;
 			}
 		}
+		extra_homonyme(serialize($extra), $type, 'update');// modifié le 30/08/2006 par francois.vachon@iago.ca pour permettre la mise à jours des champs homonymes avec les valeurs extra poster
 		return serialize($extra);
 	} else
 		return '';
 }
 
 // Retourne la liste des filtres a appliquer pour un champ extra particulier
+// http://doc.spip.org/@extra_filtres
 function extra_filtres($type, $nom_champ) {
 	$champ = $GLOBALS['champs_extra'][$type][$nom_champ];
 	if (!$champ) return array();
@@ -301,6 +318,7 @@ function extra_filtres($type, $nom_champ) {
 
 // Retourne la liste des filtres a appliquer a la recuperation
 // d'un champ extra particulier
+// http://doc.spip.org/@extra_filtres_recup
 function extra_filtres_recup($type, $nom_champ) {
 	$champ = $GLOBALS['champs_extra'][$type][$nom_champ];
 	if (!$champ) return array();
@@ -311,19 +329,21 @@ function extra_filtres_recup($type, $nom_champ) {
 	return array();
 }
 
+// http://doc.spip.org/@extra_champ_valide
 function extra_champ_valide($type, $nom_champ) {
 	return isset($GLOBALS['champs_extra'][$type][$nom_champ]);
 }
 
 // a partir de la liste des champs, generer l'affichage
+// http://doc.spip.org/@extra_affichage
 function extra_affichage($extra, $type) {
-extra_homonyme($extra, $type, 'update');// ajouté le 01/06/2006 par francois.vachon@iago.ca
+	$extra = extra_homonyme($extra, $type); //ajouté le 30/08/2006 par francois.vachon@iago.ca Utilise une fonction déclarée dans mes_options_homonymes.php
 	$extra = unserialize ($extra);
 	if (!is_array($extra)) return;
 	$champs = $GLOBALS['champs_extra'][$type];
 
 	while (list($nom,$contenu) = each($extra)) {
-	$champs[$nom] = extraire_multi($champs[$nom]);// modifié le 01/06/2006 par francois.vachon@iago.ca
+		$champs[$nom] = extraire_multi($champs[$nom]);// modifié le 30/08/2006 par francois.vachon@iago.ca pour permettre d'utiliser les blocs multi dans la déclaration des champs extras
 		list ($style, $filtre, $prettyname, $choix, $valeurs) =
 			explode("|", $champs[$nom]);
 		list($filtre, ) = explode(",", $filtre);
@@ -363,23 +383,20 @@ extra_homonyme($extra, $type, 'update');// ajouté le 01/06/2006 par francois.vac
 		fin_cadre_enfonce();
 	}
 }
-
-/***************************************************************************\
- * Pour plus de détails voir:                                              *
- * http://www.spip-contrib.net/Gestion-des-nouveaux-champs-dans            *
- * ou http://aide.iago.ca/article.php3?id_article=210                      * 
- * ou communiquer avec                                                     *
- * francois.vachon@iago.ca                                                 *
-\***************************************************************************/
+// Fonction de gestion des champs extra
+// auteur: francois.vachon@iago.ca 
 function extra_homonyme($extra, $type, $action='select') {
 
         $extra = unserialize ($extra);
+		$extra_ori = $extra;
         if (!is_array($extra)) return;
+		
         
         switch ($type) {
                 case 'articles':
                         $id_table = 'id_article';
                         $id=$GLOBALS['id_article'];
+						//echo  '<br /><br />(extra 389) id ='. $id;
                         break;
                 case 'breves':
                         $id_table = 'id_breve';
@@ -407,19 +424,36 @@ function extra_homonyme($extra, $type, $action='select') {
                         $id_table ='';
            break;
        }
-        
+
         $table = spip_fetch_array(spip_query("SELECT * FROM spip_$type WHERE $id_table=$id"));
         if ($action=='select'){
                 while (list($champ,$contenu) = each($extra)) {
                         // Pour chaque nom de champs extra 
                         // vérifier si la table comporte un champs du même nom (homonyme)
                         if (isset($table[$champ])){
+								if ($extra[$champ]!=$table[$champ]){
+								//echo '<br />table[champ] ='.$table[$champ];
                                 //Si oui, changer la valeur dans le champs extra par celle du champs de la table
                                 $extra[$champ]=$table[$champ];
+								$modification=1;
+								}
                         }
                 }
+				/******************************************************/
+				if ($modification){// si la valeur d'un champ homonyme dans la table diffère de celui dans le champs extra, mettre à jour le champ extra
+								$extra_temp = serialize($extra);
+                               $query = "UPDATE spip_$type SET 
+                                extra ='".$extra_temp."'
+                                WHERE $id_table=".$id;
+								//echo $query;
+								$result = spip_query($query);
+								debug($result);
+								
+				}
+				/******************************************************/
         }else if($action=='update'){
                 while (list($champ,$contenu) = each($extra)) {
+					
                         // Pour chaque nom de champs extra 
                         // vérifier si la table comporte un champs du même nom (homonyme)
                         if (isset($table[$champ])){
@@ -430,7 +464,9 @@ function extra_homonyme($extra, $type, $action='select') {
                                 $trace .= spip_query($query) OR die($query);
                         }
                  }
-        }  
+				//exit;  
+        }
+		 
  return serialize($extra);
 }
 ?>
