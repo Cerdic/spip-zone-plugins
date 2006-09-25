@@ -98,18 +98,18 @@ function critere_agendafull_dist($idb, &$boucles, $crit)
 		$boucle->where[]= array("'AND'", 
 					array("'<='", "'DATE_FORMAT($date_deb, \'%Y%m\')'",("$annee . $mois")),
 					array("'>='", "'DATE_FORMAT($date_fin, \'%Y%m\')'",("$annee . $mois")));
-	elseif ($type == 'semaine') // TBD
+	elseif ($type == 'semaine')
 		$boucle->where[]= array("'AND'", 
 					array("'>='",
-					     "'DATE_FORMAT($date_deb, \'%Y%m%d\')'", 
+					     "'DATE_FORMAT($date_fin, \'%Y%m%d\')'", 
 					      ("date_debut_semaine($annee, $mois, $jour)")),
 					array("'<='",
 					      "'DATE_FORMAT($date_deb, \'%Y%m%d\')'",
 					      ("date_fin_semaine($annee, $mois, $jour)")));
-	elseif (count($crit->param) > 3) // TBD
+	elseif (count($crit->param) > 3)
 		$boucle->where[]= array("'AND'",
 					array("'>='",
-					      "'DATE_FORMAT($date_deb, \'%Y%m%d\')'",
+					      "'DATE_FORMAT($date_fin, \'%Y%m%d\')'",
 					      ("$annee . $mois . $jour")),
 					array("'<='", "'DATE_FORMAT($date_deb, \'%Y%m%d\')'", ("$annee2 . $mois2 . $jour2")));
 	// sinon on prend tout

@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	PIM Agenda
+	PIM Agenda pour SPIP 1.9.1
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Cedric MORIN
@@ -8,7 +8,7 @@
 _ &copy; 2006 - Licence GPL
 	</auteur>
 	<version>
-	0.1
+	0.11
 	</version>
 	<etat>
 	stable
