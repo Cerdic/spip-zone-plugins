@@ -274,7 +274,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 						"(".spip_abstract_quote($message_titre).",".spip_abstract_quote($message_texte).",'normal','$message_date_heure','$message_date_heure','non','publie',$message_auteur,NOW())");
 
 				$head="From: agenda@".$_SERVER["HTTP_HOST"]."\n";
-				$message_texte = supprimer_tags($message_texte) . "\n$redirect_url";
+				$message_texte = supprimer_tags($message_texte) . "\n".url_absolue($redirect_url);
 				include_spip('inc/charset');
 				$trans_tbl = get_html_translation_table (HTML_ENTITIES);
 				$trans_tbl = array_flip ($trans_tbl);
@@ -287,8 +287,11 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 					foreach($id_invites as $value){
 						$id_dest=spip_abstract_quote($value);
 						spip_query("INSERT INTO spip_auteurs_messages (id_message, id_auteur, vu) VALUES ($id_message, $id_dest,'non');");
-						if ($row=spip_fetch_array(spip_query("SELECT email FROM spip_auteurs WHERE id_auteur=$id_dest")) && isset($row['email'])){
-							mail($row['email'],$message_titre,$message_texte,$head);
+						if ($row=spip_fetch_array(spip_query("SELECT email FROM spip_auteurs WHERE id_auteur=$id_dest"))){
+							if ($row['email']){
+								mail($row['email'],$message_titre,$mess_iso,$head);
+								#spip_log("mail: Dest:".$row['email']." $head Sujet:$message_titre $mess_iso");
+							}
 						}
 					}
 				}

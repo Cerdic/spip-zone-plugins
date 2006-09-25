@@ -37,7 +37,7 @@ function PIMAgenda_date_debut_fin($annee,$mois,$jour,$type){
 }
 function PIMAgenda_ajoute_creneaux_horaires($urlbase,$ts_start,$ts_fin,$type,$partie_cal,$echelle){
 	if ($echelle<=120)
-		$freq_creneaux=30*60;
+		$freq_creneaux=60*60;
 	else
 		$freq_creneaux=60*60;
 
