@@ -2,6 +2,7 @@
 
 include_spip('inc/texte');
 include_spip('inc/date');
+include_spip('agenda_mes_fonctions');
 
 function Agenda_install(){
 	Agenda_verifier_base();
@@ -743,11 +744,5 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	return $out;
 }
 
-// Pre traitements -----------------------------------------------------------------------
 
-function Agenda_heure_selector($heure,$minute,$suffixe){
-	return
-		afficher_heure($heure, "name='heure_evenement$suffixe' size='1' class='fondl'") .
-  	afficher_minute($minute, "name='minute_evenement$suffixe' size='1' class='fondl'");
-}
 ?>
