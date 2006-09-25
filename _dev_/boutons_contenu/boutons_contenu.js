@@ -3,19 +3,19 @@ if (typeof $ == 'function') {
 	$(document).ready(function(){
 		$("#contenu .texte").prepend(
 
-'<span class="boutons_contenu">\
-<button onclick="boutons_contenu.textOnly(this);" alt="' +
- boutons_contenu.txtSizeUp + '" title="' +
- boutons_contenu.txtSizeUp + '"><img src="' +
- boutons_contenu.imgPath + '/textonly.png" /></button>\
-<button onclick="boutons_contenu.fontBigger(this);" alt="' +
- boutons_contenu.txtSizeUp + '" title="' +
- boutons_contenu.txtSizeUp + '"><img src="' +
- boutons_contenu.imgPath + '/fontsizeup.png" /></button>\
-<button onclick="boutons_contenu.fontSmaller(this);" alt="' +
- boutons_contenu.txtSizeDown + '" title="' +
- boutons_contenu.txtSizeDown + '"><img src="' +
- boutons_contenu.imgPath + '/fontsizedown.png"/></button></span>'
+'<span class="boutonstexte">\
+<button onclick="boutonstexte.textOnly(this);" alt="' +
+ boutonstexte.txtOnly + '" title="' +
+ boutonstexte.txtOnly + '"><img src="' +
+ boutonstexte.imgPath + '/textonly.png" /></button>\
+<button onclick="boutonstexte.fontBigger(this);" alt="' +
+ boutonstexte.txtSizeUp + '" title="' +
+ boutonstexte.txtSizeUp + '"><img src="' +
+ boutonstexte.imgPath + '/fontsizeup.png" /></button>\
+<button onclick="boutonstexte.fontSmaller(this);" alt="' +
+ boutonstexte.txtSizeDown + '" title="' +
+ boutonstexte.txtSizeDown + '"><img src="' +
+ boutonstexte.imgPath + '/fontsizedown.png"/></button></span>'
 
 		);
 	});
@@ -24,13 +24,13 @@ if (typeof $ == 'function') {
 }
 
 // le prototype boutons du contenu
-function boutonsContenu(options)
+function boutonsTexte(options)
 {
     for (opt in options) {
         this[opt] = options[opt];
     }
 }
-boutonsContenu.prototype.textOnly = function(elt)
+boutonsTexte.prototype.textOnly = function(elt)
 {
 	if (elt['backTextOnly']) {
 		elt['backTextOnly'].show();
@@ -40,14 +40,14 @@ boutonsContenu.prototype.textOnly = function(elt)
 	elt['backTextOnly'] = $(elt).ancestors(".texte").prependTo("body").next();
 	elt['backTextOnly'].hide();
 }
-boutonsContenu.prototype.fontBigger = function(elt)
+boutonsTexte.prototype.fontBigger = function(elt)
 {
 	$(elt).ancestors(".texte").each(function(){
 		var m = $(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
 		this.style.fontSize = (1.2 * parseFloat(m[1])) + m[2];
 	});
 }
-boutonsContenu.prototype.fontSmaller = function(elt)
+boutonsTexte.prototype.fontSmaller = function(elt)
 {
 	$(elt).ancestors(".texte").each(function(){
 		var m = $(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);

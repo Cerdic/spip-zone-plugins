@@ -1,20 +1,20 @@
 <?php
-// insert le css et le js externes pour boutons_contenu dans le <head> du document (#INSERT_HEAD)
-function boutons_contenu_insert_head($flux)
+// insert le css et le js externes pour boutonstexte dans le <head> du document (#INSERT_HEAD)
+function boutonstexte_insert_head($flux)
 {
-	$jsFile = find_in_path('boutons_contenu.js');
-	$cssFile = find_in_path('boutons_contenu.css');
+	$jsFile = find_in_path('boutonstexte.js');
+	$cssFile = find_in_path('boutonstexte.css');
 	$imgPath = dirname(find_in_path('img/fontsizeup.png'));
 
-	$txtOnly = _T('boutons_contenu:texte_seulement');
-	$txtSizeUp = _T('boutons_contenu:augmenter_police');
-	$txtSizeDown = _T('boutons_contenu:diminuer_police');
+	$txtOnly = _T('boutonstexte:texte_seulement');
+	$txtSizeUp = _T('boutonstexte:augmenter_police');
+	$txtSizeDown = _T('boutonstexte:diminuer_police');
 
 	$incHead = <<<EOH
 <link rel="stylesheet" href="$cssFile" type="text/css" media="all" />
 <script src="{$jsFile}" type="text/javascript"></script>
 <script type="text/javascript">
-	boutons_contenu = new boutonsContenu({
+	boutonstexte = new boutonsTexte({
 		'imgPath':'{$imgPath}',
 		'txtOnly':'{$txtOnly}',
 		'txtSizeUp':'{$txtSizeUp}',
