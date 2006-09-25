@@ -1,8 +1,11 @@
 // dans quelle direction on ecrit (h ou v)
 var sens='h';
-
+if ($('html').attr('dir') == 'ltr')
+	var sens_curseur='e-resize';
+else
+	var sens_curseur='w-resize';
 $(document).ready(function(){
-	$('table.grille tr td input').bind('keypress', mykey).css('cursor', 'e-resize');
+	$('table.grille tr td input').bind('keypress', mykey).css('cursor', sens_curseur);
 	if ((jQuery.browser.safari) | (jQuery.browser.Konqueror))
 		$('form.grille').bind('contextmenu', changeDir);
 	else
@@ -16,7 +19,7 @@ function changeDir(e) {
 		style='s-resize';
 	} else {
 		sens='h';
-		style='e-resize';
+		style=sens_curseur;
 	}
 	$('table.grille tr td input').css('cursor', style);
 	return false;
