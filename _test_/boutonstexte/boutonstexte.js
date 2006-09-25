@@ -33,13 +33,12 @@ function boutonsTexte(options)
 }
 boutonsTexte.prototype.textOnly = function(elt)
 {
-	if (elt['backTextOnly']) {
-		elt['backTextOnly'].show();
-		elt['backTextOnly'].prev().remove();
+	if (this['backTextOnly']) {
+		window.history.go(-1);
 		return;
 	}
-	elt['backTextOnly'] = $(elt).ancestors(".texte").prependTo("body").next();
-	elt['backTextOnly'].hide();
+	$(elt).ancestors(".texte").prependTo("body").next().hide();
+	this.backTextOnly = true;
 }
 boutonsTexte.prototype.fontBigger = function(elt)
 {
