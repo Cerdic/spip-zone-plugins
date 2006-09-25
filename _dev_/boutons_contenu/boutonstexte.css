@@ -1,8 +1,8 @@
-/* boutons_contenu.css */
-.boutons_contenu {
+/* boutonstexte.css */
+.boutonstexte {
 	float : right;
 }
-.boutons_contenu button {
+.boutonstexte button {
 	position:relative;
 	top: -10px;
 	padding: 0;
@@ -10,9 +10,9 @@
 	background-color: transparent;
 	cursor: pointer;
 }
-.boutons_contenu button:hover {
+.boutonstexte button:hover {
 	border: 1px red solid;
 }
-.boutons_contenu button img {
+.boutonstexte button img {
 	behavior:url(win_png.htc)
 }
