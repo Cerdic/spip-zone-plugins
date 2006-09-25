@@ -456,7 +456,8 @@ function extra_homonyme($extra, $type, $action='select') {
 					
                         // Pour chaque nom de champs extra 
                         // vérifier si la table comporte un champs du même nom (homonyme)
-                        if (isset($table[$champ])){
+                        //if (isset($table[$champ])){
+						if (array_key_exists($champ,$table)){
                                 //Si oui, mettre à jour la valeur des champs de la table par la valeur du champs extra du même nom
                                 $query = "UPDATE spip_$type SET 
                                 $champ='".addslashes($extra[$champ])."'
