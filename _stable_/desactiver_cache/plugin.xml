@@ -13,7 +13,7 @@ _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	experimental
 	</etat>
 	<description>
-	Inhibition du cache de SPIP pour le d�&eacute;veloppement du site.
+	Inhibition du cache de SPIP pour le d&eacute;veloppement du site.
 	</description>
 	<prefix> 
 	InhibeCache
