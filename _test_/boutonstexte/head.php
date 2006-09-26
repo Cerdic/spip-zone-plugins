@@ -6,10 +6,14 @@ function boutonstexte_insert_head($flux)
 	$cssFile = find_in_path('boutonstexte.css');
 	$imgPath = dirname(find_in_path('img/fontsizeup.png'));
 
-	$txtOnly = _T('boutonstexte:texte_seulement');
-	$txtBackSpip = _T('boutonstexte:retour_a_spip');
-	$txtSizeUp = _T('boutonstexte:augmenter_police');
-	$txtSizeDown = _T('boutonstexte:diminuer_police');
+	$txtOnly = addslashes(unicode_to_javascript(html2unicode(_T(
+		'boutonstexte:texte_seulement'))));
+	$txtBackSpip = addslashes(unicode_to_javascript(html2unicode(_T(
+		'boutonstexte:retour_a_spip'))));
+	$txtSizeUp = addslashes(unicode_to_javascript(html2unicode(_T(
+		'boutonstexte:augmenter_police'))));
+	$txtSizeDown = addslashes(unicode_to_javascript(html2unicode(_T(
+		'boutonstexte:diminuer_police'))));
 
 	$incHead = <<<EOH
 <link rel="stylesheet" href="$cssFile" type="text/css" media="all" />
