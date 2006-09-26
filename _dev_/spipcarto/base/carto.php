@@ -55,8 +55,7 @@ $spip_carto_cartes = array(
 	"id_srs" => "bigint(21) NOT NULL");
 
 $spip_carto_cartes_key = array(
-	"PRIMARY KEY" => "id_carto_carte",
-	"KEY id_carto_carte" => "id_carto_carte");
+	"PRIMARY KEY" => "id_carto_carte");
 
 
 //////////////////////////////////////////////////
