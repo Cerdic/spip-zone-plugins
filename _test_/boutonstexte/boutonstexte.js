@@ -4,15 +4,15 @@ if (typeof $ == 'function') {
 		$("#contenu .texte").prepend(
 
 '<span class="boutonstexte">\
-<button onclick="boutonstexte.textOnly(this);" alt="' +
+<button class="textonly" onclick="boutonstexte.textOnly(this);" alt="' +
  boutonstexte.txtOnly + '" title="' +
  boutonstexte.txtOnly + '"><img src="' +
  boutonstexte.imgPath + '/textonly.png" /></button>\
-<button onclick="boutonstexte.fontBigger(this);" alt="' +
+<button class="textsizeup" onclick="boutonstexte.fontBigger(this);" alt="' +
  boutonstexte.txtSizeUp + '" title="' +
  boutonstexte.txtSizeUp + '"><img src="' +
  boutonstexte.imgPath + '/fontsizeup.png" /></button>\
-<button onclick="boutonstexte.fontSmaller(this);" alt="' +
+<button class="textsizedown" onclick="boutonstexte.fontSmaller(this);" alt="' +
  boutonstexte.txtSizeDown + '" title="' +
  boutonstexte.txtSizeDown + '"><img src="' +
  boutonstexte.imgPath + '/fontsizedown.png"/></button></span>'
@@ -33,11 +33,13 @@ function boutonsTexte(options)
 }
 boutonsTexte.prototype.textOnly = function(elt)
 {
+	var that = this;
 	if (this['backTextOnly']) {
 		window.location = window.location;
 		return;
 	}
 	$(elt).ancestors(".texte").prependTo("body").next().hide();
+	$("button.textonly").attr({ title: that.txtBackSpip, alt: that.txtBackSpip });
 	this.backTextOnly = true;
 }
 boutonsTexte.prototype.fontBigger = function(elt)
