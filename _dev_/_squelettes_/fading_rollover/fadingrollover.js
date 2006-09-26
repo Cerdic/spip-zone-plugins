@@ -10,9 +10,11 @@
 var FADINGROLLOVER_SEL = 'li';
 var FADINGROLLOVER_COLOR = '#FF0000';
 
-$(document).ready(function() {
-	$(FADINGROLLOVER_SEL).fadingRollover(FADINGROLLOVER_COLOR);
-});
+var init_f = function() {
+	$(FADINGROLLOVER_SEL,this).fadingRollover(FADINGROLLOVER_COLOR);
+}
+if (typeof onAjaxLoad == "function") onAjaxLoad(init_f);
+$(document).ready(init_f);
 
 //fadingRollover effect
 jQuery.fn.fadingRollover = function(colorTo,s) {
