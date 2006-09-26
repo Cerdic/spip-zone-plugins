@@ -37,7 +37,13 @@ e -
 *
 \***************************************************************************/
 
-$GLOBALS['sq_cartes']=array('map','logo','lien','svg','svgx','geosvgwms');
+$GLOBALS['sq_cartes'][]='map';
+$GLOBALS['sq_cartes'][]='logo';
+$GLOBALS['sq_cartes'][]='lien';
+$GLOBALS['sq_cartes'][]='zone';
+$GLOBALS['sq_cartes'][]='svg';
+$GLOBALS['sq_cartes'][]='svgx';
+$GLOBALS['sq_cartes'][]='geosvgwms';
 include_spip("base/carto");
 function spipcarto_header_prive($flux) {
 	return $flux;
