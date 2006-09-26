@@ -32,10 +32,10 @@ function mykey(e) {
 	var y=m[2];
 	
 	switch(e.keyCode) {
-		case 40: y++; break;
+		case 40: y++; break; 
 		case 38: y--; break;
-		case 37: x--; break;
-		case 39: x++; break;
+		case 37: if (sens_curseur=='e-resize') x--; else x++; break;
+		case 39: if (sens_curseur=='e-resize') x++; else x--; break;
 		case 8 : break;
 		default:
 			if(sens=='h') x++; else y++;
