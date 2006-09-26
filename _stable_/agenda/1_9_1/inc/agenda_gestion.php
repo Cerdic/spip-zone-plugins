@@ -659,14 +659,14 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	$out .= WCalendar_controller(date('Y-m-d H:i:s',$fstdatedeb),"_evenement_debut");
 	$out .= "<span class='agenda_".($fhoraire=='oui'?"":"in")."visible_au_chargement' id='afficher_horaire_debut_evenement'>";
 	$out .=  _T('agenda:evenement_date_a');
-	$out .= Agenda_heure_selector(date('H',$fstdatedeb),date('i',$fstdatedeb),"_debut");
+	$out .= Agenda_heure_selector($fstdatedeb,"_debut");
 	$out .=	"</span>";
 	$out .=  "<br/>";
 	$out .=  _T('agenda:evenement_date_au');
 	$out .= WCalendar_controller(date('Y-m-d H:i:s',$fstdatefin),"_evenement_fin");
 	$out .= "<span class='agenda_".($fhoraire=='oui'?"":"in")."visible_au_chargement' id='afficher_horaire_fin_evenement'>";
 	$out .=  _T('agenda:evenement_date_a');
-	$out .= Agenda_heure_selector(date('H',$fstdatefin),date('i',$fstdatefin),"_fin");
+	$out .= Agenda_heure_selector($fstdatefin,"_fin");
 	$out .=	"</span>";
 	$out .=  "</div>\n";
 	
