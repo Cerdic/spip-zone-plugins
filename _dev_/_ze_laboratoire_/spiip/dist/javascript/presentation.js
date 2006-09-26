@@ -13,14 +13,23 @@ $(document).ready(function() {
 		.css({visibility:'visible',display:'none'});
 		//console.timeEnd("faststatut");
 		//console.timeEnd("total");
+		
+		// Fix background image caching problem
+    if (jQuery.browser.msie) {
+        try { document.execCommand("BackgroundImageCache", false, true); } 
+				catch(err) {}
+    }
 	}
 );
 
 function showMenu() {
 	active_menu.hide();
-	active_menu=$('#'+this.id.replace(/^bouton\d?_/,'bandeau')).show();
+	var id_menu = this.id.replace(/^bouton\d?_/,'bandeau');
+	active_menu=$('#'+id_menu).show();
 	//bug safari..runtime style returns null 
 	active_menu.css('display','block');
+	//manage focus on search box
+	if(id_menu=='bandeaurecherche') $('#form_recherche')[0].focus();
 }
 
 function decalerCouche() {

@@ -44,7 +44,7 @@
 }
 
 #bandeautoutsite a.daddy {
-	background: url([(#ENV{ltr}|choixsiegal{left,#HTTP_WRAPPER{triangle-droite.gif},#HTTP_WRAPPER{triangle-droite_rtl.gif}})]) center [(#ENV{ltr}|choixsiegal{left,right,left})] no-repeat;
+	background: url([(#ENV{ltr}|choixsiegal{left,triangle-droite.gif,triangle-droite_rtl.gif})]) center [(#ENV{ltr}|choixsiegal{left,right,left})] no-repeat;
 }
 
 #bandeautoutsite li {
@@ -127,13 +127,13 @@ float:left;
 	float:left;
 	width:13;
 	height:13;
-	background: url(#HTTP_WRAPPER{searching.gif}) center center no-repeat;
+	background: url(searching.gif) center center no-repeat;
 }
 .ahah_searching_right{
 	float:right;
 	width:13;
 	height:13;
-	background: url(#HTTP_WRAPPER{searching.gif}) center center no-repeat;
+	background: url(searching.gif) center center no-repeat;
 }
 .bandeau_boite2_icone{
 	position: absolute;
@@ -190,7 +190,7 @@ float:left;
 	margin:auto
 }
 #bandeau-principal a:hover span.icon_fond {
-	background:url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=fond-gris-anim.gif);
+	background:url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
 	height:48px;
 	width:48px;
 	margin:auto;
@@ -286,7 +286,7 @@ margin-right:5px;
 a.icone-h:hover{
 	padding: 0;
 	border: 1px solid #9DBA00;
-	background: url(ecrire/img_pack/wrapper.php?file=fond-gris-anim.gif);
+	background: url(ecrire/img_pack/fond-gris-anim.gif);
 	-moz-border-radius: 5px;
 	margin: 0;
 	margin-right: 3px;
@@ -317,7 +317,7 @@ a.icone-h-texte {
 }
 .danger a.icone-h-texte {
 	border: 1px dashed #000;
-	background: url(ecrire/img_pack/wrapper.php?file=rayures-sup.gif);
+	background: url(ecrire/img_pack/rayures-sup.gif);
 }
 a.icone-h-texte:hover {
 	text-decoration: none;
@@ -344,7 +344,7 @@ a.h-icon .h-icon-cell-fond {
 }
 * html a.h-icon .h-icon-cell-fond {display:inline-block;margin-[(#ENV{ltr}|choixsiegal{right,left,right})]:-30px;}
 a.h-icon:hover .h-icon-cell-ie {
-	background:url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=fond-gris-anim.gif);
+	background:url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
 	border: 1px solid ##ENV{couleur_foncee,edf3fe};
 	-moz-border-radius:5px;
 	/*width:28px;height:28px*/
