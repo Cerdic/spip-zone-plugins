@@ -1,9 +1,9 @@
 // dans quelle direction on ecrit (h ou v)
 var sens='h';
-if ($('html').attr('dir') == 'ltr')
-	var sens_curseur='e-resize';
-else
+if ($('html').attr('dir') == 'rtl') 
 	var sens_curseur='w-resize';
+else
+	var sens_curseur='e-resize';
 $(document).ready(function(){
 	$('table.grille tr td input').bind('keypress', mykey).css('cursor', sens_curseur);
 	if ((jQuery.browser.safari) | (jQuery.browser.Konqueror))
