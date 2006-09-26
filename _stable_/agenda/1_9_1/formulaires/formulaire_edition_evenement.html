@@ -92,7 +92,7 @@ $('#afficher_horaire_fin_evenement').show();} else{$('#afficher_horaire_debut_ev
 	(#UNSEUL|=={'oui'}|?{'',' '}) disabled='disabled']>(#TITRE|supprimer_numero)</option>]
 	<BOUCLE_mots(MOTS){id_groupe}>
 		<option value='#ID_MOT'
-		[(#ID_MOT|in_any{[(#ENV**{valeurs}|table_valeur{mots})]})selected='selected']>#TITRE</option>
+		[(#ID_MOT|in_any{[(#ENV**{valeurs}|table_valeur{mots})],''})selected='selected']>#TITRE</option>
 	</BOUCLE_mots>
 	</select>
 </BOUCLE_groupes>
