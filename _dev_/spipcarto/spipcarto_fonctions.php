@@ -306,6 +306,23 @@ function wkt2coords_htmldiv($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeigh
 			}
 			return "left: ".$y/$i."px;top: ".$x/$i."px;";
 }
+function wkt2coords_htmlzone($wktGeomType,$wktGeom,$ImgHeight,$ImgWidth,$GeoHeight,$GeoWidth,$rgeo,$callage,$mot_desc){	
+			// Pour obtenir des objets HTML/DIV ...
+			// Pour les polygones, la moyenne des valeurs
+			// Pour les points, la valeur
+			$coordpair = explode (',',$wktGeom);
+			$x='';
+			$y='';
+			for ($i=0; $i<sizeof($coordpair); $i++)
+			{		
+				$coord[$i] 		= explode(' ',$coordpair[$i]);
+				$coord[$i][0] 	= ($coord[$i][0]-$callage['top_left']['x'])/$GeoWidth*$ImgWidth;
+				$coord[$i][1] 	= ($callage['bottom_right']['y']-$coord[$i][1])/$GeoHeight*$ImgHeight;		// Calcul de l'Y par rapport au coin inferieur
+ 				if (($x>$coord[$i][1])||($x=='')) $x = $coord[$i][1];
+				if (($y>$coord[$i][0])||($y=='')) $y = $coord[$i][0];
+			}
+			return "left: ".$y."px;top: ".$x."px;";
+}
 
 ///////////////////////////////////////////////
 // SVG
