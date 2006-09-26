@@ -34,12 +34,15 @@ function boutonsTexte(options)
 boutonsTexte.prototype.textOnly = function(elt)
 {
 	var that = this;
+	var texte = $(elt).ancestors(".texte");
 	if (this['backTextOnly']) {
-		window.location = window.location;
+		texte.next().show().prev().insertBefore($("#marktextonly")).find("button.textonly").attr({ 'title': that.txtOnly, 'alt': that.txtOnly });
+		$("#marktextonly").remove();
+		this.backTextOnly = false;
 		return;
 	}
-	$(elt).ancestors(".texte").prependTo("body").next().hide();
-	$("button.textonly").attr({ title: that.txtBackSpip, alt: that.txtBackSpip });
+	texte.after('<div id="marktextonly">marktextonly</div>');
+	texte.prependTo("body").next().hide().prev().find("button.textonly").attr({ 'title': that.txtBackSpip, 'alt': that.txtBackSpip });
 	this.backTextOnly = true;
 }
 boutonsTexte.prototype.fontBigger = function(elt)
