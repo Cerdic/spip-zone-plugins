@@ -14,5 +14,10 @@
 	border: 1px red solid;
 }
 .boutonstexte button img {
-	behavior:url(win_png.htc)
+	behavior:url(win_png.htc):
+}
+
+div.onlytext {
+/* je sais pas comment on fait rtl/ltr */
+	text-align: left;
 }
