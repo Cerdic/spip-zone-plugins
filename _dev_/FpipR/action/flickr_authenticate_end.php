@@ -3,7 +3,7 @@
 function action_flickr_authenticate_end() {
   $redirect = _request('redirect');
   $hash = _request('hash');
-  $id_auteur = _request('id_auteur');
+  $id_auteur =  $GLOBALS['auteur_session']['id_auteur'];
   $arg = _request('arg');
   $action = _request('action');
    

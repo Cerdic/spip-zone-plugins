@@ -12,7 +12,7 @@ function action_flickr_ajouter_documents() {
   $action = _request('action');
   $arg = _request('arg');
   $redirect = _request('redirect');
-  $id_auteur = _request('id_auteur');
+  $id_auteur =  $GLOBALS['auteur_session']['id_auteur'];
 
   if (!verifier_action_auteur("$action-$arg", $hash,$id_auteur)) {
 	include_spip('inc/minipres');
