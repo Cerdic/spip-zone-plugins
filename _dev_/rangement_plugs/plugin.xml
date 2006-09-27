@@ -1,0 +1,31 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Rangement des plugins
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	Collectif
+_ &copy; 2006 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+	0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	experimental
+	</etat>
+	<description>
+	Realise avec Spip SVN 7444.
+	</description>
+	<prefix> 
+	rangement_plugs
+	</prefix>
+	<pipeline>
+		<nom>ajouter_boutons</nom> 
+		<action>ajouterboutons</action>
+		<inclure>pipelines_rangement_plugs.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<action>ajouter_onglets</action>
+		<inclure>pipelines_rangement_plugs.php</inclure>
+	</pipeline>
+</plugin>
