@@ -1,0 +1,28 @@
+<plugin>
+ <nom>SkTheme</nom>
+ <version>0.3</version>
+ <etat>test</etat>
+ <auteur>Jerome RICHARD
+<multi>
+_ &copy; September 2006 - distributed under GNU/GPL licence.
+[fr]_ &copy; Septembre 2006 - distribu&eacute; sous license GNU/GPL.
+</multi>
+</auteur>
+<description>
+<multi>
+Manage theme for SPIP
+_ Activate this plugin and manage themes in the configuration menu.
+_ You can find a default themes directory example on [Skedus Land->http://skedus.free.fr]
+[fr]
+Gestion des th&egrave;mes de SPIP
+_ Activez ce plugin et g&eacute;rez les th&egrave;mes dans le menu configuration
+_ Vous pouvez trouvez un exemple de r&eacute;pertoire theme sur [Skedus Land->http://skedus.free.fr]
+</multi>
+</description>
+ <prefix>sktheme</prefix>
+ <options>sktheme_options.php</options>
+ <pipeline>
+    <nom>ajouter_boutons</nom>
+    <inclure>sktheme_fonctions.php</inclure>
+ </pipeline>
+ </plugin>

@@ -1,0 +1,19 @@
+//
+// list:
+// TODO: Add online user documentation
+// TODO: probably add some tests to be sure that 'dossier_squelettes' 
+//       is not used already.
+// DONE: create a 'habillage.xml' file to specify squelette dependances
+//       (a 'habillage' could not fit all the available 'squelettes' :)
+//       This file could contained description such in plugin.xml 
+//       dependance <squelette>S_Name</squelette>
+// DONE: create a 'squelette.xml' for description/copyright/author ...
+// DONE: Improve text language in the interface
+// TODO: Create some icons for the private area
+// TODO: Create a real process for private area theme (see Franck ideas)
+// DONE: Add a filter to show only available habillages for a given squelette
+// TODO: Include a 'switcher' possibility based on 'switcher' plugin
+// DONE: Add an original habillage for the default squelette one
+// TODO: Download a squelette or habillage zip distribution trough the net
+//       an install it.
+//

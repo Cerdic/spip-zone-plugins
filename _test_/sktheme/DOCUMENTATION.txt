@@ -1,0 +1,74 @@
+// ----------------------------------------------------------------------------
+// STRUCTURE DOCUMENTATION
+//     
+// The Theme directory structure need to be like this
+// This is only for the public theme
+//
+// themes/ 
+//   squelettes/
+//      <squelette_dir1>
+//         squelette.xml
+//        <files ... >
+//      <squelette_dir2>
+//         squelette.xml
+//        <files ... >
+//      <...>
+//   habillages/
+//      <habillage_dir1>
+//         habillage.xml
+//        <files ...>
+//      <habillage_dir2>
+//         habillage.xml
+//        <files ...>
+//
+// Theme = Squelette [+ Habillage]
+// Habillage is optional, because default 'habillage' could be in the
+// 'squelette' directory itself (such 'dist').
+//
+// Available 'squelettes' are in 'squelettes' directory
+// Available 'habillages' are in 'habillages' directory
+//   
+//
+// ---------------------------------------------------------------------------
+// habillage.xml (use to give a description in the interface and to select it
+//                with <squelette> name)
+//    <habillage>
+// 	<nom>name_of_the_habillage</nom>
+// 	<auteur>
+// 	author of the habillage
+// 	</auteur>
+// 	<version>
+// 	1.0
+// 	</version>
+// 	<etat>
+// 	stable
+// 	</etat>
+// 	<description>
+// 	...
+// 	</description>
+// 	<squelette>dist</squelette>
+// 	<squelette>SarkaSpip</squelette>
+//    </habillage>
+//
+// You can define several dependances <squelette></squelette>
+// 
+// ---------------------------------------------------------------------------
+// squelette.xml (use to give description in the interface)
+// 
+//    <habillage>
+// 	<nom>name_of_the_squelette</nom>
+// 	<auteur>
+// 	author of the squelette
+// 	</auteur>
+// 	<version>
+// 	1.0
+// 	</version>
+// 	<etat>
+// 	stable
+// 	</etat>
+// 	<description>
+// 	...
+// 	</description>
+//    </squelette>
+//
+// ---------------------------------------------------------------------------
