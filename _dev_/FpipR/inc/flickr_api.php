@@ -26,7 +26,7 @@ function flickr_api_call($method, $params=array(), $auth_token='', $force_sign=f
 	$params['auth_token'] = $auth_token;
   }
   $params['method'] = $method;
-  if(!$auth_token && $force_sign)
+  if($auth_token || $force_sign)
 	$params['api_sig'] = flickr_sign($params);
 
   
@@ -105,7 +105,7 @@ function flickr_auth_checkToken($token) {
 	<perms>read</perms>
 	<user nsid="12037949754@N01" username="Bees" fullname="Cal H" />
 </auth>*/
-  $check = flickr_check_error(flickr_api_call('flickr.auth.checkToken',array('auth_token'=>$token)));
+  $check = flickr_check_error(flickr_api_call('flickr.auth.checkToken',array('auth_token'=>$token),false,true));
   if($check) {
 	$auth_info = array();
 	foreach($check as $t => $v) {
