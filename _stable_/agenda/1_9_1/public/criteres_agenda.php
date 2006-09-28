@@ -3,12 +3,13 @@
 // {branche ?}
 // http://www.spip.net/@branche
 function critere_branche($idb, &$boucles, $crit) {
-	$not = $crit->not;
-	$boucle = &$boucles[$idb];
+  global $table_des_tables;
+  $not = $crit->not;
+  $boucle = &$boucles[$idb];
   $type = $boucle->type_requete;
   $nom = $table_des_tables[$type];
   if ($boucle->id_table!='evenements' && $boucle->id_table!='pim_agenda')
-  	critere_branche_dist($idb, &$boucles, $crit);
+  	critere_branche_dist($idb, $boucles, $crit);
   else{
 		$arg = calculer_argument_precedent($idb, 'id_rubrique', $boucles);
 		$champ = 'id_rubrique';
