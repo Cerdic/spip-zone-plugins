@@ -240,7 +240,7 @@ function AjaxSqueeze(trig, id, callback)
 		reqObj = $('#'+id).imgOn().load(trig+"&var_ajaxcharset=utf-8",function(res,status){
 			if(status=='error') this.html('Erreur HTTP');
 			callback(res,status);
-			if(status=='success') AjaxTrigger(this[0]);
+			if(status=='success') triggerAjaxLoad(this[0]);
 			imgOff(reqObj);
 		});
 	} else {
@@ -250,7 +250,7 @@ function AjaxSqueeze(trig, id, callback)
 			callback(res,status);
 			if(status=='success') {
 				if(browser_verifForm) verifForm(this);
-				AjaxTrigger(this[0]);
+				triggerAjaxLoad(this[0]);
 			} 
 			imgOff(reqObj);
 		});
