@@ -2,7 +2,7 @@
 
 /*
  *   +----------------------------------+
- *    Nom du Filtre :   respecte_ln                                            
+ *    Nom du Filtre :   spip2spip_respecte_ln                                            
  *   +----------------------------------+
  *    Date :    20060327
  *    Auteur :  erational - http://www.erational.org
@@ -15,14 +15,14 @@
  *   Ce filtre est utilisé par la contrib SPIP2SPIP
 */
 
-function respecte_ln($texte) {
+function spip2spip_respecte_ln($texte) {
 	$texte = preg_replace("/\s\s+/$u", "__LN__", $texte); 
 	return $texte;
 }
 
 /*
  *   +----------------------------------+
- *    Nom du Filtre :   respecte_img                                            
+ *    Nom du Filtre :   spip2spip_respecte_img                                            
  *   +----------------------------------+
  *    Date :    20060515
  *    Auteur :  erational - http://www.erational.org
@@ -36,7 +36,7 @@ function respecte_ln($texte) {
 */
 
 
-function respecte_img($texte) {
+function spip2spip_respecte_img($texte) {
 	$texte = preg_replace("/<img(.*?)>/i", "__IMG$1__",$texte);
 	$texte = preg_replace("/<doc(.*?)>/i", "__DOC$1__",$texte);
 	return $texte;
