@@ -11,7 +11,7 @@
 /*
 >È Message envoyŽ !
 Mensagem enviada!
->È Erreur lors de l'envoi du message.                                           
+>È Erreur lors de l'envoi du message.
 Erro no envio da mensagem
 */
 
@@ -30,18 +30,23 @@ function main_recommander() {
 
 	lang_select($GLOBALS['contexte_inclus']['lang']);
 
-	echo "<div id='recommander' class='formulaire_spip'>\n"
-	. "<span class='recommander_titre'>"
-	. _T("recommander:recommander")."</span>"
+	echo "<div id='recommander' class='formulaire_spip rubriques'>\n"
+	. "<h2 class='menu-titre'>"
+	. _T("recommander:recommander")."</h2>"
 	. "<div id='formulaire_recommander'>";
 
 	echo $f();
 
+	$searching_div = '<div style="float: '.$GLOBALS['spip_lang_right'].'; z-index:2;"><img src="'.url_absolue(_DIR_IMG_PACK.'searching.gif').'" /></div>';
+
 	echo "</div>"
-	. "</div>\n"
-	. <<<EOS
+	. "<br class='nettoyeur' />\n</div>";
+
+	echo '
 <script type="text/javascript"><!--
 if (typeof jQuery == "function") {
+	var ajax_image_searching = "'.addslashes($searching_div).'";'
+	.<<<EOS
 	$("div#formulaire_recommander").hide();
 	function recommander_js() {
 		$("div#formulaire_recommander").css("height","");
@@ -49,14 +54,15 @@ if (typeof jQuery == "function") {
 		.prepend(
 			"<input name='action' value='fragment_recommander' type='hidden' />"
 		)
-		.submit(function(){
-			$(this)
-			.ajaxSubmit("#formulaire_recommander", recommander_js);
-			return false;
-		});
+		.ajaxForm("#formulaire_recommander",
+			recommander_js,
+			function() {
+				$("#formulaire_recommander").prepend(ajax_image_searching);
+			}
+		);
 	}
 	recommander_js();
-	$("span.recommander_titre").oneclick(function(){
+	$("#recommander>h2").oneclick(function(){
 		$("div#formulaire_recommander:hidden").slideDown("slow");
 	});
 }

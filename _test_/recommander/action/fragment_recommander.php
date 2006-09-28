@@ -1,10 +1,22 @@
 <?php
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define ('_SECRET', '1234');  # trouver une meilleure methode pour definir le secret... un meta() dans la base...
 
+
+
+function verifier_email_ou_erreur($email) {
+	if (!$email = trim($email))
+		return '<div class="erreur">'._T('form_prop_indiquer_email').'</div>';
+	if (!email_valide($email))
+		return '<div class="erreur">'
+			. _T('pass_erreur_non_valide',
+				array(
+				'email_oubli' => htmlspecialchars($email)
+				)
+			).'</div>';
+}
 
 //
 // Fonction appelee des qu'il y a un $_POST avec le bouton 'recommander'
@@ -16,23 +28,8 @@ function envoi_recommander($contexte_inclus) {
 	lang_select($contexte_inclus['lang']);
 
 	// verifier que le formulaire est bien rempli
-	if (!email_valide(_request('recommander_from')))
-		$retour .= '<div class="erreur">'
-			. _T('pass_erreur_non_valide',
-				array(
-				'email_oubli' => htmlspecialchars(_request('recommander_from'))
-				)
-			).'</div>';
-
-	if (!email_valide(_request('recommander_to')))
-		$retour .= '<div class="erreur">'
-			._T('pass_erreur_non_valide',
-				array(
-				'email_oubli' => htmlspecialchars(_request('recommander_to'))
-				)
-			).'</div>';
-
-	if ($retour)
+	if ($retour = verifier_email_ou_erreur(_request('recommander_from'))
+	. verifier_email_ou_erreur(_request('recommander_to')))
 		return $retour;
 
 	// envoyer le mail
