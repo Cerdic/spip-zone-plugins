@@ -208,10 +208,10 @@ EOF;
 	else {
 		echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
 		echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
-		echo _T('rangement:plugins_liste')."</font></b></td></tr>";
+		echo _T('rangement:plugins_liste_famille')."</font></b></td></tr>";
 	
 		echo "<tr><td class='serif' colspan=4>";
-		echo _T('rangement:texte_presente_plugin');
+		echo _T('rangement:texte_presente_plugin_famille');
 	
 		if (_request('famille')=='') {
 			echo generer_url_post_ecrire("rangement_plugin");
@@ -321,6 +321,29 @@ EOF;
 
 	fin_page();
 
+}
+
+function ergonomie_etat_plugin() {
+	if (isset($etat_plugin))
+	$etat = trim($etat_plugin);
+	switch ($etat) {
+		case 'experimental':
+			$couleur_txt = "CA2F2F";
+			$titre_etat = _T('rangement:plugin_etat_experimental');
+			break;
+		case 'test':
+			$couleur_txt = "E85600";
+			$titre_etat = _T('rangement:plugin_etat_test');
+			break;
+		case 'stable':
+			$couleur_txt = "149E06";
+			$titre_etat = _T('rangement:plugin_etat_stable');
+			break;
+		default:
+			$couleur_txt = "900B06";
+			$titre_etat = _T('rangement:plugin_etat_developpement');
+			break;
+	}
 }
 
 ?>

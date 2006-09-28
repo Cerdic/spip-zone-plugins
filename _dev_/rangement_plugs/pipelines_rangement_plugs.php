@@ -6,11 +6,18 @@ define('_DIR_PLUGIN_RANGEMENT_PLUGS',(_DIR_PLUGINS.end($p)));
 	function rangement_plugs_ajouterBoutons($boutons_admin) {
 		// si on est admin
 		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
-		  // on voit le bouton dans la barre "naviguer"
+		  if (_request('exec')=='rangement_plugin'){
+			  $boutons_admin['configuration']->sousmenu['rangement_plugin']= new Bouton(
+			"../"._DIR_PLUGIN_RANGEMENT_PLUGS."/../img_pack/rangement.png",  // icone
+			_L('Rangement plugins')	// titre
+			);
+	  		}
+	  		else {
 		  $boutons_admin['configuration']->sousmenu['rangement_plugin']= new Bouton(
 			"../"._DIR_PLUGIN_RANGEMENT_PLUGS."/img_pack/rangement.png",  // icone
 			_L('Rangement plugins')	// titre
 			);
+		}
 		}
 		return $boutons_admin;
 	}
