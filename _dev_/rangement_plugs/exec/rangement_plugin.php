@@ -115,7 +115,7 @@ EOF;
 	
 	debut_gauche();
 	debut_boite_info();
-//	barre_onglets("plugins", "accueil");
+	echo "<a href='".generer_url_ecrire('rangement_plugin')."'><strong>Accueil</strong></a>";
 	barre_onglets("plugins", "");
 	fin_boite_info();
 
@@ -321,29 +321,6 @@ EOF;
 
 	fin_page();
 
-}
-
-function ergonomie_etat_plugin() {
-	if (isset($etat_plugin))
-	$etat = trim($etat_plugin);
-	switch ($etat) {
-		case 'experimental':
-			$couleur_txt = "CA2F2F";
-			$titre_etat = _T('rangement:plugin_etat_experimental');
-			break;
-		case 'test':
-			$couleur_txt = "E85600";
-			$titre_etat = _T('rangement:plugin_etat_test');
-			break;
-		case 'stable':
-			$couleur_txt = "149E06";
-			$titre_etat = _T('rangement:plugin_etat_stable');
-			break;
-		default:
-			$couleur_txt = "900B06";
-			$titre_etat = _T('rangement:plugin_etat_developpement');
-			break;
-	}
 }
 
 ?>
