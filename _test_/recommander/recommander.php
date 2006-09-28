@@ -30,17 +30,17 @@ function main_recommander() {
 
 	lang_select($GLOBALS['contexte_inclus']['lang']);
 
-	echo "<div id='recommander' class='formulaire_spip rubriques'>\n"
+	echo "<div id='recommander' class='formulaire_spip'>\n"
 	. "<h2 class='menu-titre'>"
 	. _T("recommander:recommander")."</h2>"
 	. "<div id='formulaire_recommander'>";
 
 	echo $f();
 
-	$searching_div = '<div style="float: '.$GLOBALS['spip_lang_right'].'; z-index:2;"><img src="'.url_absolue(_DIR_IMG_PACK.'searching.gif').'" /></div>';
+	$searching_div = '<div style="float: '.$GLOBALS['spip_lang_right'].'; z-index:2;"><img src="'._DIR_IMG_PACK.'searching.gif'.'" /></div>';
 
 	echo "</div>"
-	. "<br class='nettoyeur' />\n</div>";
+	. "</div>";
 
 	echo '
 <script type="text/javascript"><!--
@@ -62,7 +62,8 @@ if (typeof jQuery == "function") {
 		);
 	}
 	recommander_js();
-	$("#recommander>h2").oneclick(function(){
+	$("#recommander>h2").click(function(){
+		$("div#formulaire_recommander:visible").slideUp("slow");
 		$("div#formulaire_recommander:hidden").slideDown("slow");
 	});
 }

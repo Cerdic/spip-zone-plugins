@@ -84,15 +84,15 @@ function action_fragment_recommander() {
 
 		$r .= "<form method='post' action='".self()."'>";
 
-		$r .= "<div><label for='recommander_from'>"._T('form_pet_votre_email')."</label>";
+		$r .= "<p><label for='recommander_from'>"._T('form_pet_votre_email')."</label>";
 		$r .= " <input type='text' id='recommander_from' name='recommander_from'
-		value='".htmlspecialchars(_request('recommander_from'))."'  class='forml' /></div>";
-		$r .= "<div><label for='recommander_to'>"._T('recommander:destinataire')."</label>";
+		value='".htmlspecialchars(_request('recommander_from'))."'  class='forml' /></p>";
+		$r .= "<p><label for='recommander_to'>"._T('recommander:destinataire')."</label>";
 		$r .= " <input type='text' id='recommander_to' name='recommander_to' class='forml'
-		value='".htmlspecialchars(_request('recommander_to'))."' class='formo' /></div>";
-		$r .= "<div><label for='recommander_message'>"._T('forum_texte')."</label>";
+		value='".htmlspecialchars(_request('recommander_to'))."' class='formo' /></p>";
+		$r .= "<p><label for='recommander_message'>"._T('forum_texte')."</label>";
 		$r .= " <input type='text' id='recommander_message' name='recommander_message' class='forml'
-		value='".htmlspecialchars(_request('recommander_message'))."' class='forml' /></div>";
+		value='".htmlspecialchars(_request('recommander_message'))."' class='forml' /></p>";
 		$r .= "<div class='spip_bouton'><input type='submit' name='recommander_email' value='"._T('recommander:recommander_message')."' /></div>";
 
 		if (!_request('recommander_cle')) {
