@@ -20,7 +20,7 @@ $.tabs = function(containerId, start) {
                 alert('There is no such container.');
             }
         }
-        return true;
+        return false;
     });
 };
 
