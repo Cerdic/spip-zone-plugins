@@ -1,5 +1,5 @@
 <?php
-function preg_files_plugs($dir, $pattern=-1 /* AUTO */, $maxfiles = 10000, $recurs=array()) {
+function rangement_plugs_preg_files_plugs($dir, $pattern=-1 /* AUTO */, $maxfiles = 10000, $recurs=array()) {
 	$nbfiles = 0;
 	if ($pattern == -1)
 		$pattern = "^$dir";

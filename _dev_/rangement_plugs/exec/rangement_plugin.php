@@ -227,7 +227,7 @@ EOF;
 			
 			$dossier_encours = _request('famille');
 			$xml_encours = preg_files(_DIR_PLUGINS,"/$dossier_encours/plugin[.]xml$");
-			$xml_racine = preg_files_plugs(_DIR_PLUGINS.$dossier_encours,"/plugin[.]xml$");
+			$xml_racine = rangement_plugs_preg_files_plugs(_DIR_PLUGINS.$dossier_encours,"/plugin[.]xml$");
 			
 				if ($xml_encours) {
 					$xml = $xml_encours;
