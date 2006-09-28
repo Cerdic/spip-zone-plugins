@@ -28,4 +28,8 @@ _ &copy; 2006 - Distribu&eacute; sous licence GPL
 		<action>ajouter_onglets</action>
 		<inclure>pipelines_rangement_plugs.php</inclure>
 	</pipeline>
+	<pipeline>
+	<nom>header_prive</nom>
+	<inclure>pipelines_rangement_plugs.php</inclure>
+	</pipeline>
 </plugin>
