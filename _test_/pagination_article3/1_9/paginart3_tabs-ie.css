@@ -1,0 +1,17 @@
+.anchors { /* auto clear */
+    display: inline-block; /* @ IE 7 */
+    _height: 1%; /* @ IE 6 */
+    _margin: 0;
+    _padding: 0;
+}
+.anchors a {
+    float: left;
+    _width:100%;
+    _height: 18px;
+    _margin: 0;
+    _padding: 0 3px;
+}
+.anchors li {	
+    _height: 18px; /* @ IE 6 */
+    _margin: 0;
+}
