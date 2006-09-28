@@ -7,7 +7,7 @@ function pmv_log(pmv_site, pmv_url, pmv_pname, pmv_vars)
 			return '1';
 		return '0';
 	}
-	function plugIE( pmv_plug ){
+	function plugIE(pmv_plug){
 		pmv_find = false;
 		document.write('<SCR' + 'IPT LANGUAGE=VBScript>\n on error resume next \n pmv_find = IsObject(CreateObject("' + pmv_plug + '"))</SCR' + 'IPT>\n');
 		if (pmv_find) return '1';
@@ -17,11 +17,11 @@ function pmv_log(pmv_site, pmv_url, pmv_pname, pmv_vars)
 	var pmv_agent = navigator.userAgent.toLowerCase();
 	var pmv_moz = (navigator.appName.indexOf("Netscape") != -1);
 	var pmv_ie= (pmv_agent.indexOf("msie") != -1);
-	var pmv_win = ((pmv_agent.indexOf("win")!=-1) || (pmv_agent.indexOf("32bit")!=-1));
+	var pmv_win = ((pmv_agent.indexOf("win") != -1) || (pmv_agent.indexOf("32bit") != -1));
 	
 	if (!pmv_win || pmv_moz){
 		pmv_tm = '';
-		for (var i=0; i < navigator.mimeTypes.length; i++) 
+		for (var i=0; i < navigator.mimeTypes.length; i++)
 			pmv_tm += navigator.mimeTypes[i].type.toLowerCase();
 		var pmv_dir = plugMoz("application/x-director");
 		var pmv_fla = plugMoz("application/x-shockwave-flash");
@@ -42,11 +42,15 @@ function pmv_log(pmv_site, pmv_url, pmv_pname, pmv_vars)
 	
 	var getvars='';
 	for (var i in pmv_vars){
-		getvars = getvars + '&a_vars['+ escape(i) + ']' + "=" + escape(pmv_vars[i]);
+		if (!Array.prototype[i]){
+			getvars = getvars + '&a_vars['+ escape(i) + ']' + "=" + escape(pmv_vars[i]);
+		}
 	}
 	pmv_do = document; pmv_da = new Date();
-	try { rtu = top.pmv_do.referrer; } catch(e) { rtu = pmv_do.referrer }
-	
+	try {rtu = top.pmv_do.referrer;} catch(e) {
+		try {rtu = pmv_do.referrer;} catch(E) {rtu = '';}
+	}
+		
 	src = pmv_url;
 	src += '&url='+escape(pmv_do.location)+'&pagename='+escape(pmv_pname)+getvars;
 	src += '&id='+pmv_site+'&res='+screen.width+'x'+screen.height+'&col='+screen.colorDepth;

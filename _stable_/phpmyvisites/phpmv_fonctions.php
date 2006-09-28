@@ -45,7 +45,7 @@ function phpmv_affichage_final($texte){
 				var pagename=\'\';
 				
 				var phpmyvisitesSite = '.$i_site.';
-				var phpmyvisitesURL = "'.($url = generer_url_public('phpmyvisites','',true)).'";
+				var phpmyvisitesURL = "'.($url = generer_url_public('phpmyvisites','var_nophpmv=1',true)).'";
 				//-->
 				</script>
 				<script src="'.url_de_base().find_in_path('spip_phpmyvisites.js').'" type="text/javascript"></script>
@@ -55,10 +55,12 @@ function phpmv_affichage_final($texte){
 				</div>
 				<!-- /phpmyvisites -->';
 		
-		if (strpos($texte,"</body>")!==FALSE)
-			$texte=str_replace("</body>","$code\n</body>",$texte);
-		else
-			$texte=str_replace("</BODY>","$code\n</body>",$texte);
+		if (!isset($_GET['var_nophpmv']) && strpos($texte,"md5.js")===FALSE && strpos($texte,"iframe")===FALSE){
+			if (strpos($texte,"</body>")!==FALSE)
+				$texte=str_replace("</body>","$code\n</body>",$texte);
+			else
+				$texte=str_replace("</BODY>","$code\n</body>",$texte);
+		}
 	}
 	return $texte;
 	
