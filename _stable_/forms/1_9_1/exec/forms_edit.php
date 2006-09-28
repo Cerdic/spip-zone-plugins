@@ -104,6 +104,8 @@ function modif_edition_champ($t) {
 			while (isset($type_ext[$code_choix]))
 				$code_choix = $code.'_'.(++$n);
 			$type_ext[$code_choix] = _T("forms:nouveau_choix");
+			include_spip('inc/charset');
+			$type_ext[$code_choix] = unicode2charset(html2unicode($type_ext[$code_choix]));
 			$ajout_choix = $code_choix;
 		}
 		foreach ($type_ext as $code_choix => $nom_choix) {
@@ -224,6 +226,8 @@ function forms_update(){
 		if (($type = $ajout_champ) && Forms_types_champs_autorises($type)) {
 			$code = code_nouveau_champ($structure,$type);
 			$nom = _T("forms:nouveau_champ");
+			include_spip('inc/charset');
+			$nom = unicode2charset(html2unicode($nom));
 			$structure[] = array('code' => $code, 'nom' => $nom, 'type' => $type, 'type_ext' => array());
 			$champ_visible = $nouveau_champ = $code;
 			$modif_structure = true;
@@ -383,6 +387,11 @@ function exec_forms_edit(){
 	if ($retour) 
 		$form_link = parametre_url($form_link,"retour",urlencode($retour));
 
+	//
+	// Affichage de la page
+	//
+
+	debut_page("&laquo; $titre &raquo;", "documents", "forms","");
 		
 	unset($champ_visible);
 	unset($nouveau_champ);
@@ -391,6 +400,8 @@ function exec_forms_edit(){
 	//
 	if ($new == 'oui' && !$titre) {
 		$titre = _T("forms:nouveau_formulaire");
+		include_spip('inc/charset');
+		$titre = unicode2charset(html2unicode($titre));
 		$descriptif = "";
 		$sondage = "non";
 		$structure = array();
@@ -422,11 +433,6 @@ function exec_forms_edit(){
 	$form_link = parametre_url($form_link,"id_form",$id_form);
 	$clean_link = parametre_url($clean_link,"id_form",$id_form);
 
-	//
-	// Affichage de la page
-	//
-
-	debut_page("&laquo; $titre &raquo;", "documents", "forms","");
 
 	debut_gauche();
 
