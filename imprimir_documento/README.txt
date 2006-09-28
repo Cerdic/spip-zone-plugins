@@ -1,0 +1,11 @@
+PLUGIN IMPRIMIR DOCUMENTO PARA SPIP 1.9
+
+A veces una persona que visita nuestra web quiere una copia del contenido de uno de nuestros documentos, artículo o breve, sin cabeceras ni elementos de navegación de la web. Es lo que se suele conocer como "versión imprimir".Con este plugin puedes instalar en tu sitio Spip un enlace que cumpla esa función.
+El plugin "Imprimir documento" para SPIP 1.9 y siguientes crea un enlace que permite imprimir el contenido del artículo o breve sin las cabeceras, menús y demás elementos de la web.Al cliquear en el enlace aparece una ventana pop-up que visualiza la versión para imprimir y lanza el diálogo de impresión.INSTALACIÓN
+
+- Descomprime el archivo "plugin_imprimir_documento_spip_1_9.zip".- Pon la carpeta "imprimir_documento" dentro de la carpeta plugins de tu instalación de SPIP. Si no existe crea una y llámala "plugins".- En el espacio privado cliquea en Configuración del sitio > Gestión de los plugins.- Marca la casilla de Imprimir documento para activarlo.- Donde quieras que aparezca (en los esqueletos article.html o breve.html) escribe #IMPRIMIR_DOCUMENTO** (con los dos asteriscos)- HechoPERSONALIZARPara personalizar la tipografía del enlace puedes colocar la baliza #IMPRIMIR_DOCUMENTO** entre <span style="font-size:65%">...</span>, por ejemplo, y en style puedes poner tipo de letra, tamaño, color,... o puedes crear una clase en tu hoja de estilos y ponérsela,...Para modificar el icono del sobre pon el que tu quieras (a poder ser en formato gif) en la carpeta del plugin imprimir_documento, y llámalo "impresora.gif"Para otras modificaciones abre el archivo baliza_imprimir_documento.php y retoca lo que quieras. Por ejemplo, el ’700’ y el ’470’ son el ancho y el alto de la ventana que se abre.Para modificar el esqueleto que se envía modifica imprimir_articulo.html o imprimir_breve.html
+
+Merci a Alexandra Guiderdoni y a Cedric por su colaboración.
+
+==========================================================================
+NOTA: Los esqueletos empleados (imprimir_articulo.html e imprimir_breve.html) son bastante viejos y estaría bien reformarlos quitando las tablas y respetando las normas de estilo, pero de momento pueden servir ya que funcinan aceptablemente. Tú mism@.CopyLeft 2006 joseluis@digital77.com
