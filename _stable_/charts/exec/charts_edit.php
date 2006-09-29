@@ -188,12 +188,12 @@ function exec_charts_edit(){
 			echo "<br />";
 
 			echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
-			echo bouton_block_invisible("preview_chart");
+			echo bouton_block_visible("preview_chart");
 			echo "<strong class='verdana3' style='text-transchart: uppercase;'>"
 				._T("charts:apparence_graphique")."</strong>";
 			echo "</div>\n";
 
-			echo debut_block_invisible("preview_chart");
+			echo debut_block_visible("preview_chart");
 			echo _T("charts:previsu_info")."<p>\n";
 			echo "<div class='spip_charts'>";
 			echo propre("<chart$id_chart>");
