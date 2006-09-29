@@ -21,7 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');   // for spip presentation functions
 include_spip('inc/layer');          // for spip layer functions
 include_spip('inc/utils');          // for _request function
-include_spip('inc/plugin');         // 
+include_spip('inc/plugin');         // xml function
 include_spip('inc/sktheme_util');   // for sktheme_* functions
 include_spip('inc/sktheme_xml');    // for sktheme_* functions
 
@@ -48,23 +48,22 @@ function exec_sktheme_public_choice() {
   
   debut_gauche();
   // Include 'raccourcis'
-  sktheme_raccourcis();
+  sktheme_public_theme_doc_box();
   
   debut_droite();
-  echo "<br />";
   
   //
   // Choose Squelette
-  $dir = "../".$GLOBALS['meta']['sktheme_squelettes_public_dir'];
+  $s_dir = _DIR_RACINE.$GLOBALS['meta']['sktheme_squelettes_public_dir'];
   debut_cadre_trait_couleur('', false, "sktheme_public_squelette_list",
 			    _T('sktheme:available_squelette_list')." : ".$GLOBALS['meta']['sktheme_squelettes_public_dir']);
   
   $squelettes_list = array('dist' => '' );
-  if (is_dir($dir)) {
-    if ($dh = opendir($dir)) {
+  if (is_dir($s_dir)) {
+    if ($dh = opendir($s_dir)) {
       while (($file = readdir($dh)) !== false) {
-	if ( (is_dir($dir."/".$file)) AND ($file[0]!=".") ) {
-	  $squelettes_list[$file]=$dir."/".$file;
+	if ( (is_dir($s_dir."/".$file)) AND ($file[0]!=".") ) {
+	  $squelettes_list[$file]=$s_dir."/".$file;
 	}
       }
       closedir($dh);
@@ -118,17 +117,17 @@ function exec_sktheme_public_choice() {
   
   //
   // Choose Habillage
-  $dir ="../".$GLOBALS['meta']['sktheme_habillages_public_dir'];
+  $h_dir = _DIR_RACINE.$GLOBALS['meta']['sktheme_habillages_public_dir'];
   debut_cadre_trait_couleur('', false, "sktheme_public_habillage_list", 
-			    _T('sktheme:available_habillage_list'." : ".$GLOBALS['meta']['sktheme_habillages_public_dir']));
+			    _T('sktheme:available_habillage_list')." : ".$GLOBALS['meta']['sktheme_habillages_public_dir']);
   
   
   $habillages_list = array($original => '');
-  if (is_dir($dir)) {
-    if ($dh = opendir($dir)) {
+  if (is_dir($h_dir)) {
+    if ($dh = opendir($h_dir)) {
       while (($file = readdir($dh)) !== false) {
-	if ( (is_dir($dir."/".$file)) AND ($file[0]!=".") ) {
-	  $habillages_list[$file]=$dir."/".$file;
+	if ( (is_dir($h_dir."/".$file)) AND ($file[0]!=".") ) {
+	  $habillages_list[$file]=$h_dir."/".$file;
 	}
       }
       closedir($dh);

@@ -1,6 +1,6 @@
 <plugin>
  <nom>SkTheme</nom>
- <version>0.3</version>
+ <version>0.4</version>
  <etat>test</etat>
  <auteur>Jerome RICHARD
 <multi>
@@ -24,5 +24,14 @@ _ Vous pouvez trouvez un exemple de r&eacute;pertoire theme sur [Skedus Land->ht
  <pipeline>
     <nom>ajouter_boutons</nom>
     <inclure>sktheme_fonctions.php</inclure>
+ </pipeline>
+ <pipeline>
+    <nom>affichage_final</nom>
+    <action>affichage_final</action>
+    <inclure>sktheme_fonctions.php</inclure>
+ </pipeline>
+ <pipeline>
+   <nom>insert_head</nom>
+      <inclure>sktheme_head.php</inclure>
  </pipeline>
  </plugin>

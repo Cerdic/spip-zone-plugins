@@ -3,7 +3,7 @@
 //     
 // The Theme directory structure need to be like this
 // This is only for the public theme
-//
+// 
 // themes/ 
 //   squelettes/
 //      <squelette_dir1>
@@ -55,6 +55,7 @@
 // ---------------------------------------------------------------------------
 // squelette.xml (use to give description in the interface)
 // 
+// <pre>
 //    <habillage>
 // 	<nom>name_of_the_squelette</nom>
 // 	<auteur>
@@ -70,5 +71,6 @@
 // 	...
 // 	</description>
 //    </squelette>
+// </pre>
 //
 // ---------------------------------------------------------------------------

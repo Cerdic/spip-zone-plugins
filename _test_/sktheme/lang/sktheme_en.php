@@ -24,9 +24,31 @@ $GLOBALS[$GLOBALS['idx_lang']] =
 	  // B
 
 	  // C
-	  "configuration" => "Configuration",
-
+	  "configuration" => "Advanced configuration",
+	  "config_doc_directories" => "<b>R&eacute;pertoires</b>:<br>
+	  It is possible to re-defined default directories locations of yours
+	  <i>squelettes/habillages</i> distributions.Default is  <i>'themes/squelettes'</i>
+	   and <i>'themes/habillages'</i>, directories are always relatives to
+	  your SPIP root site.
+	  ",
+	  "config_doc_switcher" => "<b>Switcher</b>:<br>
+	  The theme switcher can be activated to include a selection list in the
+	  public area, and then easily test themes. It is possible to limit this
+	  functionnality to the administrator only.<br>
+	  Moreover you can modify the style of this theme selector.<br>
+	  <br>
+	  A new 'balise' <b>#SKTHEME_HABILLAGES_SWITCHER</b> is available to
+	  include an 'habillage' selector list in your squelette. This list is
+	  composed of all available 'habillage' corresponding to the squelette
+	  distribution you have choosen. You can as well modify this
+	  list selector style here.
+	  
+	  
+	  ",
+	  
 	  // D
+	  "documentation" => "Documentation",
+	  "extra_documentation" => "Extra Documentation",
 
 	  // E
 
@@ -50,6 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] =
 	  "manage_theme" => "Manage themes",
 
 	  // N
+	  "no" => "No",
 	  "no_available_habillage" => "No available habillage",
 	  "no_available_squelette" => "No available squelette",
 
@@ -57,13 +80,27 @@ $GLOBALS[$GLOBALS['idx_lang']] =
 	  "original" => "Original",
 
 	  // P
-	  "private_choice" => "Private choice",
+	  "private_choice" => "Private theme choice",
 	  "private_themes_config" => "Private themes configuration",
 	  "private_theme_choice" => "Private theme choice",
-	  "public_choice" => "Public choice",
+	  "public_choice" => "Public theme choice",
 	  "public_theme_choice" => "Public theme choice",
 	  "public_themes_config" => "Public themes configuration",
-
+	  "public_theme_doc_squelette" => "<b>Squelette choice:</b><br>
+	  Each time you will choose a 'squelette' (more exactly a squelettes distribution)
+	  the 'habillage' list will be updated with the available ones.
+	  The small square represent the state of the distribution, stable,
+	  test, experimental, ...<br>
+	  Clic on the small black triangle to get more details about the distribution.
+	  You can find a theme directory exemple on http:skedus.free.fr
+	  ",
+	  "public_theme_doc_habillage" => "<b>Habillage choice:</b><br>
+	  An Habillage is modifing colors and graphical aspect of your squelettes.
+	  It is composed of CSS, pictures, ...<br>
+	  A squelette distribution always contain a default 'habillage' which is
+	  called <b>Original</b>.  
+	  ",
+	  
 	  // Q
 
 	  // R
@@ -72,10 +109,15 @@ $GLOBALS[$GLOBALS['idx_lang']] =
 	  "save_habillage" => "Save habillage",
 	  "save_public_directories" => "Save directories",
 	  "save_squelette" => "Save squelette",
+	  "save_switcher_options" => "Save switcher options",
 	  "squelettes_public_dir" => "Public squelettes directory",
+	  "switcher_activated" => "Theme switcher activated",
+	  "switcher_admin_only" => "Only for administrators",
+	  "switcher_style" => "Switcher style",
 
 	  // T
 	  "to_be_done" => "To be done !",
+	  "themes_switcher" => "Theme switch",
 
 	  // U
 	  "update_habillage_to" => "Update habillage to : ",
@@ -88,6 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] =
 	  // X
 
 	  // Y
+	  "yes" => "Yes",
 
 	  // Z
 

@@ -14,18 +14,23 @@
   // along with this program; 
   //
   // ---------------------------------------------------------------------
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function sktheme_xml_get_infos($xml_dir,$xml_type){
+
+  include_spip('inc/plugin'); 
+
   $ret = array();
-  if ((@file_exists(_DIR_PLUGINS))&&(is_dir(_DIR_PLUGINS))){
-    if (@file_exists(_DIR_PLUGINS."$xml_dir/$xml_type.xml")) {
-      lire_fichier(_DIR_PLUGINS."$xml_dir/$xml_type.xml", $texte);
+  if ((@file_exists($xml_dir))&&(is_dir($xml_dir))){
+    if (@file_exists($xml_dir."/$xml_type.xml")) {
+      lire_fichier($xml_dir."/$xml_type.xml", $texte);
       $arbre = parse_plugin_xml($texte);
       if (!isset($arbre[$xml_type])&&is_array($arbre[$xml_type]))
 	$arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_incorrect')." : $xml_dir/$xml_type.xml"));
     }
     else {
       // pour arriver ici on l'a vraiment cherche...
+      //debug echo "error: erreur_plugin_fichier_def_absent $xml_dir/$xml_type.xml<br>";
       $arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_absent')." : $xml_dir/$xml_type.xml"));
     }
 
@@ -81,7 +86,7 @@ function sktheme_xml_get_infos($xml_dir,$xml_type){
     $ret['extra_titre_etat'] = $titre_etat;
   }
   return $ret;
-  }
+}
 
 function sktheme_xml_verifie_conformite($xml_dir,$xml_type="plugin",&$arbre){
 	$silence = false;

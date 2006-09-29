@@ -18,6 +18,8 @@
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 define('_DIR_PLUGIN_SKTHEME',(_DIR_PLUGINS.end($p)));
 
+include_spip('inc/sktheme_list');
+
 // Add private area button
 function sktheme_ajouter_boutons($boutons_admin) {
   // administrator only
@@ -29,6 +31,57 @@ function sktheme_ajouter_boutons($boutons_admin) {
 		  _L("sktheme:manage_theme"));                                     // title
   }
   return $boutons_admin;
+}
+
+
+//
+// Include Philippe Drouot switcher functionnality
+// Based on Fil contrib
+function sktheme_affichage_final($texte){
+	
+  global $html;
+  
+  $sktheme_list = sktheme_list();
+   
+  // Insertion du Javascript de rechargement de page
+  // Always include this script used for #SKTHEME_HABILLAGES_SWITCHER and #SKTHEME_THEMES_SWITCHER
+  $code = '<script type="text/javascript">
+		//<![CDATA[
+		function sktheme_gotof(url) {
+		window.location=url;
+		}//]]>
+		</script>';	  
+  
+  if (isset($GLOBALS['meta']['sktheme_switcher_activated']) 
+      AND ($GLOBALS['meta']['sktheme_switcher_activated']=="yes")) {
+    if ($html) {
+		
+      // Doit-on afficher le seleecteur de squelette ? (Fonctionnalitée restreinte aux seuls administrateurs ?)
+      $afficherSelecteur=TRUE;
+      if (isset($GLOBALS['meta']['sktheme_switcher_admin_only']) 
+	  AND ($GLOBALS['meta']['sktheme_switcher_admin_only']=="yes") 
+	  AND (!isset($_COOKIE['spip_admin']))) $afficherSelecteur=FALSE;
+		
+      if ($afficherSelecteur) {
+			
+			
+	// Insertion du sélecteur de squelettes			
+	$code.='<div id="sktheme_switcher" style="top: 0;left: 20px; position: absolute; background-color: transparent;z-index: 100;">';
+	$code.='<form action="" method="post">';
+	$code.='<select name="selecteurTheme" style="'.$GLOBALS['meta']['sktheme_theme_switcher_style'].'" onchange="sktheme_gotof(this.options[this.selectedIndex].value)">';
+	$code.='<option selected="selected" value="">Themes</option>';
+	foreach( $sktheme_list as $value )	$code.='<option value="'.parametre_url(self(),'sktheme',$value).'">&nbsp;-> '.$value.'</option>';
+	$code.='</select>';
+	$code.='</form>';
+	$code.='</div>';
+      }
+
+			
+    }
+  } 
+  
+  $texte=eregi_replace("<body([^>]*)>","<body \\1>$code",$texte);
+  return($texte);
 }
 
 ?>
