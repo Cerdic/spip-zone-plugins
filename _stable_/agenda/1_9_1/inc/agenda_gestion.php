@@ -481,7 +481,8 @@ function Agenda_action_formulaire_article($id_article){
 		$jour_debut=_request('jour_evenement_debut');
 		// test <= car retour strtotime retourne -1 ou FALSE en cas d'echec suivant les versions
 		while(($st_date_deb<=FALSE)&&($maxiter-->0)) {
-			$date_deb=_request('annee_evenement_debut')."-"._request('mois_evenement_debut')."-".($jour_debut--)." "._request('heure_evenement_debut').":"._request('minute_evenement_debut');
+			$date_deb=_request('annee_evenement_debut').'-'._request('mois_evenement_debut').'-'.($jour_debut--);
+			if ($horaire == 'oui') $date_deb .= ' '._request('heure_evenement_debut').':'._request('minute_evenement_debut');
 			$st_date_deb=strtotime($date_deb);
 		}
 		$date_deb=format_mysql_date(date("Y",$st_date_deb),date("m",$st_date_deb),date("d",$st_date_deb),date("H",$st_date_deb),date("i",$st_date_deb), $s=0);
@@ -492,7 +493,8 @@ function Agenda_action_formulaire_article($id_article){
 		$jour_fin=_request('jour_evenement_fin');
 		// test <= car retour strtotime retourne -1 ou FALSE en cas d'echec suivant les versions
 		while(($st_date_fin<=FALSE)&&($maxiter-->0)) {
-			$st_date_fin=_request('annee_evenement_fin')."-"._request('mois_evenement_fin')."-".($jour_fin--)." "._request('heure_evenement_fin').":"._request('minute_evenement_fin');
+			$st_date_fin=_request('annee_evenement_fin').'-'._request('mois_evenement_fin').'-'.($jour_fin--);
+			if ($horaire == 'oui') $st_date_fin .= ' '._request('heure_evenement_fin').':'._request('minute_evenement_fin');
 			$st_date_fin=strtotime($st_date_fin);
 		}
 		$st_date_fin = max($st_date_deb,$st_date_fin);
