@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	<multi>[fr]Formulaires [it] Forms[es] Formularios</multi>
+	<multi>[fr]Formulaires[it] Forms[es] Formularios</multi> (SPIP 1.9.1 +)
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	<multi>[fr]Antoine Pitrou
