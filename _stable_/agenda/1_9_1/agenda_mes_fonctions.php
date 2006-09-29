@@ -12,4 +12,29 @@ function Agenda_heure_selector($date,$suffixe){
 		afficher_heure($heure, "name='heure_evenement$suffixe' size='1' class='fondl'") .
   	afficher_minute($minute, "name='minute_evenement$suffixe' size='1' class='fondl'");
 }
+
+//
+// <BOUCLE(EVENEMENTS)>
+//
+function boucle_EVENEMENTS_dist($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$boucle->from[$id_table] =  "spip_evenements";
+
+	// Restreindre aux elements publies
+	if (!$boucle->statut) {
+		// Si pas de lien avec un article, selectionner
+		// uniquement les auteurs d'un article publie
+		if (!$GLOBALS['var_preview'])
+		if (!$boucle->lien AND !$boucle->tout) {
+			$boucle->from["articles"] =  "spip_articles";
+			$boucle->where[]= array("'='", "'articles.id_article'", "'$id_table.id_article'");
+			$boucle->where[]= array("'='", "'articles.statut'", "'\"publie\"'");
+			$boucle->group[] = $boucle->id_table . '.' . $boucle->primary;  
+		}
+	}
+
+	return calculer_boucle($id_boucle, $boucles); 
+}
+
 ?>
