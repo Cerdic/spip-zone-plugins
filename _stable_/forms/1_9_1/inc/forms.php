@@ -284,17 +284,12 @@
 			}
 
 			include_spip('inc/charset');
-			$trans_tbl = get_html_translation_table (HTML_ENTITIES);
-			$trans_tbl = array_flip ($trans_tbl);
 			if ($mailconfirm !== '') {
 				$head="From: formulaire@".$_SERVER["HTTP_HOST"]."\n";
 				$sujet = $row['titre'];
 				$dest = $mailconfirm;
-				
-				// mettre le texte dans un charset acceptable
-				$mess_iso = unicode2charset(charset2unicode($corps_mail),'iso-8859-1');
-				// regler les entites si il en reste
-				$mess_iso = strtr($mess_iso, $trans_tbl);
+				// mettre le texte dans un charset acceptable et sans entites
+				$mess_iso = unicode2charset(html2unicode(charset2unicode($corps_mail)),'iso-8859-1');
 
 				mail($dest, $sujet, $mess_iso, $head);
 			}
@@ -302,12 +297,8 @@
 				$head="From: formulaire_$id_form@".$_SERVER["HTTP_HOST"]."\n";
 				$sujet = $row['titre'];
 				$dest = $email_dest;
-				
-				// mettre le texte dans un charset acceptable
-				$mess_iso = unicode2charset(charset2unicode($corps_mail_admin),'iso-8859-1');
-				// regler les entites si il en reste
-				$mess_iso = strtr($mess_iso, $trans_tbl);
-				
+				// mettre le texte dans un charset acceptable et sans entites
+				$mess_iso = unicode2charset(html2unicode(charset2unicode($corps_mail_admin)),'iso-8859-1');
 				mail($dest, $sujet, $mess_iso, $head);
 		 	}
 		}
