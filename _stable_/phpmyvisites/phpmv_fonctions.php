@@ -20,7 +20,7 @@ function phpmv_affichage_final($texte){
 	//$html= preg_match(',^\s*text/html,',$page['entetes']['Content-Type']);
 	global $html;
 	if ($html){
-		if (!isset($GLOBALS['meta']['_PHPMV_DIR_CONFIG'])){
+		if (!isset($GLOBALS['meta']['_PHPMV_DIR_CONFIG']) || !strlen($GLOBALS['meta']['_PHPMV_DIR_CONFIG'])){
 			include_spip("inc/meta");
 			ecrire_meta('_PHPMV_DIR_CONFIG',realpath(_DIR_SESSIONS . "phpmvconfig"));
 			ecrire_meta('_PHPMV_DIR_DATA',realpath(_DIR_SESSIONS . "phpmvdatas"));
@@ -50,7 +50,7 @@ function phpmv_affichage_final($texte){
 				</script>
 				<script src="'.url_de_base().find_in_path('spip_phpmyvisites.js').'" type="text/javascript"></script>
 				<noscript>
-				<img src="'.$url.'" alt="phpMyVisites" class="phpmyvisitestag" />
+				<img src="'.generer_url_public('phpmyvisites','var_nophpmv=1',false).'" alt="phpMyVisites" class="phpmyvisitestag" />
 				</noscript>
 				</div>
 				<!-- /phpmyvisites -->';
