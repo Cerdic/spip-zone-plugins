@@ -216,21 +216,51 @@ function visu_evenement_agenda($id_evenement,$flag_editable){
 		$flieu = entites_html($flieu,ENT_QUOTES);
 		$fdescription = entites_html($fdescription,ENT_QUOTES);
 
-		$out .= "<div class='titre-titre'>Titre</div><div class='titre-visu'>$ftitre &nbsp;</div>\n";
-		$out .= "<div class='lieu-titre'>Lieu</div><div class='lieu-visu'>$flieu &nbsp;</div>\n";
+		$out .= "<div class='titre-titre'>";
+		$out .= _T('agenda:evenement_titre');
+		$out .= "</div><div class='titre-visu'>$ftitre &nbsp;</div>\n";
+
+		$out .= "<div class='lieu-titre'>";
+		$out .= _T('agenda:evenement_lieu');
+		$out .= "</div><div class='lieu-visu'>$flieu &nbsp;</div>\n";
 		$out .= "<div class='horaire-titre'>&nbsp;</div>";
-		$out .= "<div class='date-titre'>Date </div>";
+
+		$out .= "<div class='date-titre'>";
+		$out .= _T('agenda:evenement_date'); 
+		$out .= "</div>";
 		$out .= "<div class='date-visu'>";
-		$out .= "Du ".affdate_jourcourt(date("Y-m-d H:i",$fstdatedeb));
+		$out .= _T('agenda:evenement_date_du'); 
+		$out .= " ".affdate_jourcourt(date("Y-m-d H:i",$fstdatedeb))." ";
+
+
+
 		if ($fhoraire=='oui')
-			$out .= " &agrave; ".date("H:i",$fstdatedeb);
+// M. Possoz Change: Date
+//			$out .= " &agrave; ".date("H:i",$fstdatedeb)." ";
+			$out .= _T('agenda:evenement_date_a_immediat'); 
+			$out .= " ".date("H:i",$fstdatedeb);
+
 		$out .= " <br/>\n";
-		$out .= "Au ".affdate_jourcourt(date("Y-m-d H:i",$fstdatefin));
+
+// M. Possoz Change: Date au
+//		$out .= "Au ".affdate_jourcourt(date("Y-m-d H:i",$fstdatefin));
+		$out .= _T('agenda:evenement_date_au'); 
+		$out .= " ".affdate_jourcourt(date("Y-m-d H:i",$fstdatefin))." ";
+
 		if ($fhoraire=='oui')
-			$out .= " &agrave; ".date("H:i",$fstdatefin);
+// M. Possoz Change: Date
+//			$out .= " &agrave; ".date("H:i",$fstdatefin)." ";
+			$out .= _T('agenda:evenement_date_a_immediat'); 
+			$out .= " ".date("H:i",$fstdatefin);
+
 		$out .= " <br/>\n";
 		$out .= "</div>\n";
-		$out .= "<div class='descriptif-titre'>Description</div><div class='descriptif-visu'>$fdescriptif &nbsp;</div>\n";
+
+// M. Possoz Change: Date
+//		$out .= "<div class='descriptif-titre'>Description</div><div class='descriptif-visu'>$fdescriptif &nbsp;</div>\n";
+		$out .= "<div class='descriptif-titre'>";
+		$out .= _T('agenda:evenement_descriptif'); 
+		$out .= "</div><div class='descriptif-visu'>$fdescriptif &nbsp;</div>\n";
 
 		$out .=  "<div class='agenda_mots_cles'>";
 		$res = spip_query("SELECT * FROM spip_groupes_mots WHERE evenements='oui' ORDER BY titre");

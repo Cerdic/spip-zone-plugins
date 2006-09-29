@@ -589,10 +589,10 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 		if ($row = spip_fetch_array($res)){
 			if (!$neweven){
 				$fid_evenement=$row['id_evenement'];
-				$ftitre=attribut_html($row['titre']);
-				$flieu=attribut_html($row['lieu']);
-				$fhoraire=attribut_html($row['horaire']);
-				$fdescriptif=attribut_html($row['descriptif']);
+				$ftitre=entites_html($row['titre']);
+				$flieu=entites_html($row['lieu']);
+				$fhoraire=entites_html($row['horaire']);
+				$fdescriptif=entites_html($row['descriptif']);
 				$fstdatedeb=strtotime($row['date_debut']);
 				$fstdatefin=strtotime($row['date_fin']);
 			}

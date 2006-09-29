@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'evenement_date_du' => 'Del ',
 'evenement_date_a' => 'a las ',
 'evenement_date_au' => 'Hasta ',
+'evenement_date_a_immediat' => 'a las ',
 'evenement_date_debut' => 'Fecha de comienzo',
 'evenement_date_fin' => 'Fecha de fin',
 'lien_retirer_evenement' => 'Suprimir',
