@@ -40,7 +40,8 @@ a.spip_blank {
 /* Pour le mode preview dans l'admin */
 #article_preview {
 	display:none;
-	border:1px solid #666;
+	border:1px solid #F00;
 	overflow: auto;
-	background-color: #FFCCCC;
+	background-color: #FFF;
+	padding: 0 1em;
 }
