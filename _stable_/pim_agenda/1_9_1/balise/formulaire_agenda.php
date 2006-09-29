@@ -95,6 +95,16 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	if ($url_param_retour) {
 			$script = $url_param_retour;
 	}
+	
+	// verifier les droits de modif (seul l'auteur peut modifier l'evenement)
+	$auteur = $GLOBALS['auteur_session']['nom'];
+	$email_auteur = $GLOBALS['auteur_session']['email'];
+	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+	$droits_modif = false;
+	if (spip_fetch_array(spip_query("SELECT * FROM spip_pim_agenda_auteurs WHERE id_agenda=".spip_abstract_quote($id_agenda)." AND id_auteur=".spip_abstract_quote($id_auteur))))
+		$droits_modif = true;
+	//var_dump("SELECT * FROM spip_pim_agenda_auteurs WHERE id_agenda=".spip_abstract_quote($id_agenda)." AND id_auteur=".spip_abstract_quote($id_auteur));
+	//var_dump($droits_modif);
 
 	// au premier appel (pas de Post-var nommee "retour_forum")
 	// memoriser evntuellement l'URL de retour pour y revenir apres
@@ -105,11 +115,9 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	$modif = _request('evenement_modif');
 	if (!$insert && !$modif) {
 	
-		$auteur = $GLOBALS['auteur_session']['nom'];
-		$email_auteur = $GLOBALS['auteur_session']['email'];
-		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
-		
+	
 		if (_request('neweven')){
+			$droits_modif = true;
 			$type = 'reunion';
 			$prive = 'non';
 			$crayon = 'non';
@@ -143,7 +151,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			}
 		}
 
-	} else { // appels ulterieurs
+	} elseif ($droits_modif) { // appels ulterieurs
 		// gestion des requetes de mises à jour dans la base
 		$id_agenda = intval(_request('id_agenda'));
 		$supp_evenement = _request('supp_evenement');
@@ -357,7 +365,8 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			'lieu' =>	$lieu,
 			'id_auteur' => $id_auteur,
 			'id_agenda' => $id_agenda,
-			'evenement_action' => $evenement_action
+			'evenement_action' => $evenement_action,
+			'modif_auth' => $droits_modif?1:0,
 			));
 	else
 		return false;

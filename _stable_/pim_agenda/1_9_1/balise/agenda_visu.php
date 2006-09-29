@@ -205,12 +205,12 @@ function PIMAgenda_affiche_evenements($texte){
 		// en attendant : tous les evenements restants, non prives
 		$res = spip_query("SELECT * 
 								FROM spip_pim_agenda AS agenda
-					 LEFT JOIN spip_pim_agenda_auteurs ON agenda.id_agenda=spip_pim_agenda_auteurs.id_agenda 
-							 WHERE spip_pim_agenda_auteurs.id_auteur!=$id_auteur
+					 LEFT JOIN spip_pim_agenda_auteurs AS auteur ON agenda.id_agenda=auteur.id_agenda 
+							 WHERE auteur.id_auteur!=$id_auteur
 							 	 AND ((agenda.date_debut>='$datestart' AND agenda.date_debut<='$datefin')
 							 				OR (agenda.date_fin>='$datestart' AND agenda.date_fin<='$datefin')
 							 				OR (agenda.date_debut<'$datestart' AND agenda.date_fin>'$datefin'))
-							 	 AND agenda.prive='non'
+							 	 AND agenda.prive!='oui'
 							 ORDER BY agenda.date_debut;");
 		while ($row = spip_fetch_array($res)){
 			if (!isset($visu_evenements[$row['id_agenda']])){
