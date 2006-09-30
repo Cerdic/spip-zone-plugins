@@ -1,0 +1,46 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Lecteur Flash (MP3,flv)
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	<a href="http://trac.spip.org/trac/spip-zone/browser/_plugins_" target="_blank">BoOz</a>, <a href="http://trac.spip.org/trac/spip-zone/browser/_plugins_branche_stable_/_spip_1_9_0_/dewplayer" target="_blank">C&eacute;dric</a>, Iago (francois.vachon@iago.ca, <a href="http://monsitespip.com/spip.php?article12" target="_blank">http://monsitespip.com/spip.php?article12</a>).
+		</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	- Remplace automatiquement les liens vers un fichier de format mp3 par un lecteur mp3 en flash permettant d'écouter ce fichier.<br />
+	- Le modèle doc.html, fait la même chose en utilisant la balise permettant d'afficher la vignette du document.<br />
+	- Avec le plugin jQuery, et la balise #INSERT_HEAD, ajoute un lecteur devant les liens enclosures MP3
+	
+	<a href="http://spip-zone.info/spip.php?article18">documentation</a>
+	</description>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	player.php
+	</fonctions>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	Player
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines 
+	La liste des pipelines disponibles est dans ecrire/inc_version ($spip_pipeline = ... ) 
+	-->
+	<pipeline>
+		<nom>post_propre</nom>
+		<action>post_propre</action>
+		<inclure>player.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+
+		<!-- Le parametre action est facultatif : en son absence la fonction portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
