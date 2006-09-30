@@ -9,11 +9,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs_tous' => 'All authors in the recycle bin:',
 
   // B
-	'breves_toutes' => 'All breifs in the recycle bin:',
+	'breves_toutes' => 'All news items in the recycle bin:',
 	
   // C
   'corbeille'=>'Recycle Bin',
-  'choix_doc'=>'Chose the document types to display', 
+  'choix_doc'=>'Choose the document types to display', 
   
   // D
   'doc_effaces' => 'Erased Documents:',
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'petitions_toutes' => 'All petitions in the recycle bin:',
 
   // R
-  'readme' => 'This page allows the {{permanent deletion}} of documents sent to the recycle bin. You may leave documents in the recycle bin as long as you wish. It\'s {{up to you}} to put out the garbage.',
+  'readme' => 'This page allows the {{permanent deletion}} of documents sent to the recycle bin. You may leave documents in the recycle bin as long as you wish. It\'s {{up to you}} to put out the rubbish.',
   
   // S
   'signe' => " signed with:",
