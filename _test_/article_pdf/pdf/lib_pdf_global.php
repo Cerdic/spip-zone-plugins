@@ -320,7 +320,7 @@ function OpenTag($tag,$e,$LineFeedHeight)
 						$imgY=$imgY*0.8;
 					}
 				}
-				$this->Image($this->SRC, $this->GetX()+($pwidth-$imgX)/2, $this->GetY(), $imgX, $imgY);
+				$this->Image($this->SRC, $this->GetX()+($pwidth-$imgX)/2, $this->GetY(), $imgX, $imgY,'',$this->HREF);
 				$this->SetY($this->GetY()+$imgY);
 			} else {
 				// les deux dimensions sont supérieurs à 600 pixels
@@ -399,9 +399,17 @@ function OpenTag($tag,$e,$LineFeedHeight)
 	if($tag=='TH' or $tag=='TD') {
 		# Cellule (pas titre)
 		$this->tableCurrentCol += 1;
+		$colspan = extraire_attribut($e,'colspan');
 		if ($this->inFirstRow) {
-			$this->nCols=$this->tableCurrentCol;
-			$this->AddCol();
+			if ($colspan)
+				for($i=0;$i<$colspan;$i++){
+					$this->nCols=$this->tableCurrentCol;
+					$this->AddCol();
+				}
+			else {
+				$this->nCols=$this->tableCurrentCol;
+				$this->AddCol();
+			}
 		}
 		$this->ProcessingBloc++;
 		$this->BlocTags[$this->ProcessingBloc-1]=array("TH","TD");
