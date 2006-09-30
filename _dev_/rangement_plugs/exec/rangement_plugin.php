@@ -16,6 +16,12 @@ function exec_rangement_plugin() {
 	global $connect_statut;
 	global $connect_toutes_rubriques;
 	global $spip_lang_right;
+	
+	# Definition des variables.
+	$dossier_encours = _request('famille');
+	$xml_encours = preg_files(_DIR_PLUGINS,"/$dossier_encours/plugin[.]xml$");
+	$xml_racine = rangement_plugs_preg_files_plugs(_DIR_PLUGINS.$dossier_encours,"/plugin[.]xml$");
+	
 	$surligne = "";
 
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
@@ -32,17 +38,6 @@ function exec_rangement_plugin() {
 		if (_request('famille')=='') {
 			enregistre_modif_plugin();
 		}
-		
-		else if (_request('famille')!='') {
-			if (_request('statusplug') != '') {
-			$plugins_modifies = _request('statusplug');
-			$lire_meta_plugin = isset($GLOBALS['meta']['plugin'])?$GLOBALS['meta']['plugin']:'';
-  				if (strlen($lire_meta_plugin)>0){
-				ecrire_meta('plugin',$lire_meta_plugin.','.$plugins_modifies);
-				ecrire_metas();
-			}
-		}
-	}
 	}
 	else
 		//verif_plugin();
@@ -223,11 +218,7 @@ EOF;
 	
 		echo "<ul>";
 		
-		# Ecrire les plugins de la meme famille.
-			
-			$dossier_encours = _request('famille');
-			$xml_encours = preg_files(_DIR_PLUGINS,"/$dossier_encours/plugin[.]xml$");
-			$xml_racine = rangement_plugs_preg_files_plugs(_DIR_PLUGINS.$dossier_encours,"/plugin[.]xml$");
+		# Ecrire les plugins de la meme famille. Decouper tout ca en fonctions.
 			
 				if ($xml_encours) {
 					$xml = $xml_encours;
@@ -246,7 +237,48 @@ EOF;
 					$recherche_nom = eregi(_DIR_PLUGINS.'(.*)\/(.*)', $chemin_dossier, $nom_chemin);
 					$dossier_plugin = $nom_chemin[1]."/".$nom_chemin[2];
 				}
-			
+				
+				$fichiers_plugin=array();
+				$fichiers_plugin[]=substr(dirname($fichier), strlen(_DIR_PLUGINS));
+				
+				$testo = array();
+				foreach($fichiers_plugin as $filo){
+	  				$testo["statusplug_$filo"] = $filo;
+	  				
+					$plugin = "";
+	  				$plugin=array();
+						if (!isset($_POST['desactive_tous'])){
+							foreach($_POST as $choix=>$val){
+								if (isset($testo[$choix])&&$val=='O') {
+									$plugin[]=$testo[$choix];
+								}
+							}
+							
+							
+							$lire_meta_plugin = isset($GLOBALS['meta']['plugin'])?$GLOBALS['meta']['plugin']:'';
+							$plugin_actif = ereg($filo, $lire_meta_plugin, $pleug_actif);
+							
+							if ($filo != $plugin[0] && isset($pleug_actif[0])) {
+									effacer_meta('plugin',$filo);
+									ecrire_metas();
+							}
+							
+							else if ($plugin[0] != "") {
+								$pleug_actif="";
+								$lire_meta_plugin ="";
+								$plugin_actif="";
+								$lire_meta_plugin = isset($GLOBALS['meta']['plugin'])?$GLOBALS['meta']['plugin']:'';
+								$plugin_actif = ereg($plugin[0], $lire_meta_plugin, $pleug_actif);
+
+	  								if (!isset($pleug_actif[0])) {
+										ecrire_meta('plugin',$lire_meta_plugin.','.$plugin[0]);
+										ecrire_metas();
+									}
+							}
+						}
+				}
+				
+				
 				lire_fichier($fichier, $texte);
 				$arbre = parse_plugin_xml($texte);
 				$arbre = $arbre['plugin'][0];
@@ -284,14 +316,14 @@ EOF;
 					$plugin_actif = eregi($dossier_plugin, $meta_plugin, $plug_actif);
 					
 					if ($plug_actif[0] != "") {
-						$checked = " value='$dossier_plugin' checked='checked'";
+						$checked = " value='O' checked='checked'";
 					}
 					else {
-						$checked = " value='$dossier_plugin'";
+						$checked = " value='O'";
 					}
 				
 				debut_boite_info();
-				echo "<input type='checkbox' name='statusplug'$checked>";
+				echo "<input type='checkbox' name='statusplug_$dossier_plugin'$checked>";
 				echo "<strong>".$nom_plugin."</strong>(version ".$version_plugin.")<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
 				echo "<br /><hr>";
 				echo "<small>".propre($description_plugin)."</small><br /><hr>";
