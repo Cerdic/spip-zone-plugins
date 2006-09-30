@@ -1750,11 +1750,17 @@ function debut_onglet(){
 
 	echo "\n\n";
 	echo "<div style='padding: 7px;'><table cellpadding='0' cellspacing='0' border='0' align='center'>";
+	if (_request('exec')!='rangement_plugin'){
+		echo "<tr>";
+	}
 	
 }
 
 // http://doc.spip.org/@fin_onglet
 function fin_onglet(){
+	if (_request('exec')!='rangement_plugin'){
+		echo "<tr>";
+	}
 	echo "</table></div>\n\n";
 }
 
@@ -1762,7 +1768,9 @@ function fin_onglet(){
 function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	global $spip_display, $spip_lang_left ;
 
-	echo "<tr>";
+	if (_request('exec')=='rangement_plugin'){
+		echo "</tr>";
+	}
 	echo "<td>";
 	
 	if ($onglet != $onglet_ref) {
@@ -1798,7 +1806,10 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 		
 		echo "</div>";
 	}
-	echo "</td></tr>";
+	echo "</td>";
+	if (_request('exec')=='rangement_plugin'){
+		echo "</tr>";
+	}
 }
 
 // http://doc.spip.org/@barre_onglets
