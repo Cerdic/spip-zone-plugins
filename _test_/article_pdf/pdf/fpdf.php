@@ -923,7 +923,7 @@ function Write($h,$txt,$link='')
 	$this->maxLineWidth=max($this->maxLineWidth,$this->x);
 }
 
-function Image($file,$x,$y,$w=0,$h=0,$type='',$link='')
+function Image($file,$x,$y,$w=0,$h=0,$type='',$link='',$maxframe='')
 {
 	//Put an image on the page
 	if(!isset($this->images[$file]))
@@ -962,7 +962,9 @@ function Image($file,$x,$y,$w=0,$h=0,$type='',$link='')
 		}
 		//$info=$this->_parsepng($file);
 
-		elseif($type=='gif') {
+		elseif($type=='gif') 
+    {
+		/*
 			$readgif= gd_info();
 			if ($readgif[3]) {
 				Header( "Content-type: image/png");
@@ -975,7 +977,21 @@ function Image($file,$x,$y,$w=0,$h=0,$type='',$link='')
 			} else {
 				$info=$this->_parsegif($file);
 			}
-		}
+		*/
+       $InfoGif = $this->_parsegif2($file,_DIR_IMG,$maxframe);
+
+        for ($i=0 ; $i < count($InfoGif); $i++)
+        {
+				Header( "Content-type: image/png");
+				$image = imagecreatefromGIF("$InfoGif[$i]");
+				imageinterlace($image,0);
+				ImagePNG($image,"./IMG/tempo.png");
+				$info=$this->_parsepng("./IMG/tempo.png");
+				ImageDestroy($image);
+				unlink ("./IMG/tempo.png");
+ 				unlink ($InfoGif[$i]);
+        }  
+    }
 		else
 		{
 			//Allow for additional formats
@@ -1668,6 +1684,14 @@ function _parsepng($file)
 		$this->Error('Missing palette in '.$file);
 	fclose($f);
 	return array('w'=>$w,'h'=>$h,'cs'=>$colspace,'bpc'=>$bpc,'f'=>'FlateDecode','parms'=>$parms,'pal'=>$pal,'trns'=>$trns,'data'=>$data);
+}
+
+function _parsegif2($file,$path,$frame)
+{
+require('GifSplit.class.php');
+$sg = new GifSplit($file, 'GIF', $path.'/GS-frame',$frame,'1');
+return ($sg->getfilelist());
+
 }
 
 function _parsegif($file)

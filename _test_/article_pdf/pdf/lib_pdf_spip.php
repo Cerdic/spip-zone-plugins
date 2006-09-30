@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * class PDF_SPIP extends PDF : 
@@ -65,7 +65,8 @@ function Footer()
 function GenerateTitlePage()
 {
 	global $site, $rubrique, $yahoo, $surtitre, $titre, $soustitre;
-	global $logo_site, $auteur, $descriptif;
+	global $logo_site,  $logo_fichier, $logo_lien;
+  global $auteur, $descriptif;
 	global $copyright;
 	global $conf_url_site;
 	global $DateParution,$DateMiseEnLigne;
@@ -104,7 +105,20 @@ function GenerateTitlePage()
 	$this->SetFont('helvetica','',8);
 	$this->MultiCell(0,5,$yahoo,0,'C',0);
 	
-	
+	// Logo
+
+	if ($logo_fichier!="") {
+//$this->write(10,$logo_fichier);
+	$x = $this->GetX();
+	$y = $this->GetY();
+//		$this->SetLink($link);
+//		$this->Image($logo_fichier,50,170,'','','','','0');
+//		$this->Image(_DIR_IMG.$logo_fichier,50-($w/2),170,50,50,'','','0');
+//		$this->Image(_DIR_IMG.$logo_fichier,50-($w/2),170,'','','',$logo_lien,'0');
+		$this->SetXY($x, $y);
+	}
+
+
 	//Dates
 	$this->SetFont('times','',10);
 	

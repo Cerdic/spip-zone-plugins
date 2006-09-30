@@ -101,27 +101,37 @@ function WriteHTML($html,$LineFeedHeight)
 {
 	$this->texteAddSpace=false;
 	//Parseur HTML
-	$html=str_replace("\n",' ',$html);
+//	$html=str_replace("\n",' ',$html); non, sinon plus de retour à la ligne dans les textearea
 	$html=$this->unhtmlentities($html);
 	
-	$a=preg_split('/(<.*>)/U', $html, -1, PREG_SPLIT_DELIM_CAPTURE);
-	//var_dump($a);
-	
+	$a=preg_split('/(?m)(<(?!=).*>(?!=))/U', $html, -1, PREG_SPLIT_DELIM_CAPTURE);
+			//autoriser le multiligne 
+      //Il faut détecter les vraies balises <... et pas les <= de formules éventuelles
+			// dans le texte , idem en fermeture, écarter les >= d'où l'ajout des (?!=) 
+//	var_dump($a);
+
 	// $a = le tableau de tags
 	// $i = index de l'élément courant
 	// $e = valeur de l'élément courant
 	foreach($a as $i=>$e) 
 	{
+//          $this->Write(5,"--".$e{0}."+".$e{1}."--"); //DEBUG
+//          $this->Write(5,"--".$e."--"); // simple mais très bon DEBUG
+
 		//Balise
-		if (($e{0}=='<')&&(preg_match(',^<(/)?([^\s]+)(\s.*|/)?>$,',$e,$match)!==FALSE)) {
-			//var_dump("::$tag::");
+		if (($e{0}=='<')&&(preg_match(',^<(/)?([^\s]+)(\s.*|/)?(>)$,',$e,$match)!==FALSE)) {
+      //var_dump("::$tag::")   &&($e{1}!='=');
 			$tag=strtoupper($match[2]);
-			$closing = $match[1]=="/";
+//DEBUG
+//	$this->Write(5,"-**-".$i."-");
+//	$this->Write(5,$match[0]."+".$match[1]."+".$match[2]."-**-\n");
+			
+      $closing = $match[1]=="/";
 			
 			if (($this->ProcessingBloc) AND (!in_array($tag,$this->BlocTags[$this->ProcessingBloc-1])))
 				$this->BlocContent[$this->ProcessingBloc-1] .= $e;
 			else {
-				if ($closing)
+	  			if ($closing)
 				// C'est une balise fermante
 					$this->CloseTag($tag,$LineFeedHeight);
 				else
@@ -130,7 +140,11 @@ function WriteHTML($html,$LineFeedHeight)
 		}
 		// Contenu
 		else {
-			if (strlen($e)){
+//DEBUG
+//	$this->Write(5,"-***-".$i."-");
+//	$this->Write(5,$e."-***-\n");
+	
+  		if (strlen($e)){
 				$this->texteAddSpace = $this->texteAddSpace OR $e{0}==" ";
 				$next_add_space = substr($e,-1)==" ";
 				$e = trim($e);
@@ -215,11 +229,13 @@ function WriteHTML($html,$LineFeedHeight)
 			}
 		}
 	}
+  
 }
 
 function OpenTag($tag,$e,$LineFeedHeight)
 {
-	//Balise ouvrante
+//	$this->Write(15," [  $tag  ] ");
+  //Balise ouvrante
 	if ($tag=='B' || $tag=='U' || $tag=='I')
 	{
 		$this->SetStyle($tag,true);
@@ -238,7 +254,8 @@ function OpenTag($tag,$e,$LineFeedHeight)
 	if($tag=='A')
 	{
 		$this->HREF=extraire_attribut($e,'href');
-		$this->$texteHREF="";
+//    if ($this->HREF ==''){$this->HREF=$this->prop['href'];}
+		$this->texteHREF="";
 		if ($this->texteAddSpace) {
 			$this->Write(5," ");
 			$this->texteAddSpace = false;
@@ -285,9 +302,13 @@ function OpenTag($tag,$e,$LineFeedHeight)
 	}
 
 	if ($tag=='IMG') {
-		$this->SRC=extraire_attribut($e,'src');
+    $this->SRC=extraire_attribut($e,'src');
+ //   if ($this->SRC ==''){$this->SRC=$this->prop['SRC'];}
+ //   $this->write(5,$this->SRC);
+
 		// si l'image est manquante mettre un lien avec le texte alt
 		if (!@is_readable($this->SRC)){
+//  	 	if (!@file_exists($this->SRC)){
 			$alt = extraire_attribut($e,'alt');
 			if ($alt==NULL) $alt = $this->SRC;
 			//var_dump("img:href=".$this->HREF.':');
@@ -296,7 +317,10 @@ function OpenTag($tag,$e,$LineFeedHeight)
 			else 
 				$this->PutLink($this->HREF,"[$alt]");
 		}
-		else {
+		else
+    {
+  // 	if (strlen($this->SRC)>1 ) {
+
 			$size=getimagesize($this->SRC);		# Attention, utilisation de GD !!! FPDF ne sait pas lire les images à moitié... et je n'ai pas envie de surcharger la méthode Image...
 			if ($size[0] < 30 && $size[1] < 30) {
 				# pixel / 3 pour avoir des cm. Petite cuisine...
@@ -351,14 +375,16 @@ function OpenTag($tag,$e,$LineFeedHeight)
 				$this->Image($this->SRC, $this->GetX()+($pwidth-$imgX)/2, $this->GetY(), $imgX, $imgY,'',$this->HREF);
 				$this->SetY($this->GetY()+$imgY);
 			}
-		}
+		// }
+    }
 	}
 
 	if($tag=='TT' or $tag=='TEXTAREA') {
 		$this->SetFont('courier','', 8);
 		$this->SetTextColor(255, 0, 0);
-		if ($tag=='TEXTAREA')
+		if ($tag=='TEXTAREA'){
 			$this->ProcessingCadre=true;
+			}
 	}
 
 	if($tag=='TABLE') {
@@ -475,6 +501,7 @@ function CloseTag($tag,$LineFeedHeight)
 		$this->SetTextColor(0);
 		if ($tag=='TEXTAREA')
 			$this->ProcessingCadre=false;
+			
 	}
 	if($tag=='TD' or $tag=='TH') {
 		if (!strlen($this->BlocContent[$this->ProcessingBloc-1]))
