@@ -10,7 +10,7 @@ $javascript_centrar_imprimir = "<script language=\"JavaScript1.2\">	/*	Open Ce
 		$url = generer_url_public('',$arg);
 		
 // prepara el enlace completo
-		$enlace = $javascript_centrar_imprimir."<a href=\"javascript:;\" onClick=\"centrarVentana('$url','Enviar documento','scrollbars=yes,resizable=yes','700','470','true')\" title=\"Versión para imprimir de este documento\" border=\"0\"><img src=\"$logo\" border=\"0\" /> Versión imprimir</a>";
+		$enlace = $javascript_centrar_imprimir."<a href=\"javascript:;\" onClick=\"centrarVentana('$url','Imprimir_documento','scrollbars=yes,resizable=yes','700','470','true')\" title=\"Versión para imprimir de este documento\" border=\"0\"><img src=\"$logo\" border=\"0\" /> Versi&oacute;n imprimir</a>";
 		return $enlace;
 
 }
