@@ -379,7 +379,36 @@ EOF;
 							if ($filo != $plugin[0] && isset($pleug_actif[0])) {
 									effacer_meta('plugin',$filo);
 									ecrire_metas();
-									echo "efface !";
+									
+										$fichier_options = _DIR_TMP."charger_plugins_options.php";
+										$lire_fichier = file_get_contents($fichier_options);
+										$plugin_deja_active = eregi($prefix_plugin, $lire_fichier, $plugin_present);
+										
+										if (!isset($plugin_present[0])){
+											$prefix = strtoupper($prefix_plugin);
+											$splugs .= '$GLOBALS[\'plugins\'][]=\''.trim($prefix_plugin).'\';';
+											$splugs .= "define(_DIR_PLUGINS_$prefix,_DIR_PLUGINS.'$plugin[0]/');";
+												if ($options_plugin){
+												$splugs .= "\n@include_once _DIR_PLUGINS.'$plugin[0]/".trim($options_plugin)."';\n";
+												}
+											$splugs .= "\n\n?>";
+											$contenu_modifie = str_replace ($splugs, '?>', $lire_fichier);
+											ecrire_fichier(_DIR_TMP."charger_plugins_options.php", $contenu_modifie);
+											echo $fonctions_plugin;
+											
+											if (isset($fonctions_plugin)){
+												$fichier_fonctions = _DIR_TMP."charger_plugins_fonctions.php";
+												$lire_fichier_fonctions = file_get_contents($fichier_fonctions);
+												$plugin_deja_active_fonctions = eregi($prefix_plugin, $lire_fichier_fonctions, $plugin_present_fonctions);
+												$splugsfct .= "\n@include_once _DIR_PLUGINS.'$plugin[0]/".trim($fonctions_plugin)."';\n";
+												
+												if (!isset($plugin_present_fonctions[0])) {
+													$contenu_modifie_fonctions = str_replace ($splugsfct, '', $lire_fichier_fonctions);
+													ecrire_fichier(_DIR_TMP."charger_plugins_fonctions.php", $contenu_modifie_fonctions);
+												}
+												}
+										}
+										
 							}
 							
 							else if ($plugin[0] != "") {
@@ -398,7 +427,6 @@ EOF;
 										$plugin_deja_active = eregi($prefix_plugin, $lire_fichier, $plugin_present);
 										
 										if (!isset($plugin_present[0])){
-											echo "le plugin devrait secrire dans charger options";
 											$prefix = strtoupper($prefix_plugin);
 											$splugs .= '$GLOBALS[\'plugins\'][]=\''.trim($prefix_plugin).'\';';
 											$splugs .= "define(_DIR_PLUGINS_$prefix,_DIR_PLUGINS.'$plugin[0]/');";
@@ -408,10 +436,8 @@ EOF;
 											$splugs .= "\n\n?>";
 											$contenu_modifie = str_replace ('?>', $splugs, $lire_fichier);
 											ecrire_fichier(_DIR_TMP."charger_plugins_options.php", $contenu_modifie);
-											echo $fonctions_plugin;
 											
 											if (isset($fonctions_plugin)){
-												echo "les fonctions doivent secrire";
 												$fichier_fonctions = _DIR_TMP."charger_plugins_fonctions.php";
 												$lire_fichier_fonctions = file_get_contents($fichier_fonctions);
 												$plugin_deja_active_fonctions = eregi($prefix_plugin, $lire_fichier_fonctions, $plugin_present_fonctions);
