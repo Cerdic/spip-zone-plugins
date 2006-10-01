@@ -55,7 +55,7 @@ function phpmv_affichage_final($texte){
 				</div>
 				<!-- /phpmyvisites -->';
 		
-		if (!isset($_GET['var_nophpmv']) && strpos($texte,"md5.js")===FALSE && strpos($texte,"iframe")===FALSE){
+		if (!isset($_GET['var_nophpmv'])){
 			if (strpos($texte,"</body>")!==FALSE)
 				$texte=str_replace("</body>","$code\n</body>",$texte);
 			else
