@@ -1,0 +1,37 @@
+<?php
+
+include_spip('inc/widgets');
+
+//
+// Ma page pleine de malice
+//
+
+echo "<form method='post' action='widgets.php'>\n";
+
+echo "titre: ";
+$n = new SecureWidget('titre', 'allo ?');
+echo $n->code();
+echo $n->input();
+
+echo "<br />";
+
+echo "data: ";
+$n = new SecureWidget('data');
+echo $n->code();
+echo $n->input();
+
+echo "<br />";
+
+echo "auteur: ";
+$n = new Widget('auteur', 'pas moi');
+echo $n->code();
+echo $n->input();
+
+echo "<br />";
+
+
+echo '<input type="submit" value="ok" />'."\n".'</form>'."\n";
+
+
+
+?>

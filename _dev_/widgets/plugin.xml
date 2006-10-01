@@ -1,0 +1,20 @@
+<plugin>
+	<nom>
+	Widgets
+	</nom>
+	<auteur>fil@rezo.net
+	_ &copy; 2006 - Distribue sous licence GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	experimental
+	</etat>
+	<description>
+	Fournit des widgets pour &eacute;diter des donn&eacute;es de mani&egrave;re sympathique
+	</description>
+	<prefix>
+	Widgets
+	</prefix>
+</plugin>
