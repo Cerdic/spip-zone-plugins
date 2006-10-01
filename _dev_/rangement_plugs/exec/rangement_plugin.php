@@ -138,7 +138,7 @@ EOF;
 		}
 	
 		echo "<ul>";
-		
+												
 		# Ecrire les plugins deja actives.
 		$meta_plugin = isset($GLOBALS['meta']['plugin'])?$GLOBALS['meta']['plugin']:'';
 	  	if (strlen($meta_plugin)>0)
@@ -200,8 +200,8 @@ EOF;
 		echo "</ul>";
 	}
 	
-	else {
-		echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
+	else if (_request('famille')!='' && _request('Valider')!='Valider') {
+				echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
 		echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
 		echo _T('rangement:plugins_liste_famille')."</font></b></td></tr>";
 	
@@ -215,7 +215,7 @@ EOF;
 		else if (_request('famille')!='') {
 			echo generer_url_post_ecrire("rangement_plugin", 'famille='._request('famille'));
 		}
-	
+
 		echo "<ul>";
 		
 		# Ecrire les plugins de la meme famille. Decouper tout ca en fonctions.
@@ -232,14 +232,132 @@ EOF;
 				if ($xml_encours) {
 					$recherche_nom = eregi(_DIR_PLUGINS.'(.*)', $chemin_dossier, $nom_chemin);
 					$dossier_plugin = $nom_chemin[1];
+					$nom_plugin = $nom_chemin[1];
 				}
 				else if ($xml_racine) {
 					$recherche_nom = eregi(_DIR_PLUGINS.'(.*)\/(.*)', $chemin_dossier, $nom_chemin);
 					$dossier_plugin = $nom_chemin[1]."/".$nom_chemin[2];
+					$nom_plugin = $nom_chemin[2];
 				}
 				
 				$fichiers_plugin=array();
 				$fichiers_plugin[]=substr(dirname($fichier), strlen(_DIR_PLUGINS));
+				
+				lire_fichier($fichier, $texte);
+				$arbre = parse_plugin_xml($texte);
+				$arbre = $arbre['plugin'][0];
+				
+				$nom_plugin = applatit_arbre($arbre['nom']);
+				$auteur_plugin = applatit_arbre($arbre['auteur']);
+				$etat_plugin = applatit_arbre($arbre['etat']);
+				$version_plugin = applatit_arbre($arbre['version']);
+				$description_plugin = applatit_arbre($arbre['description']);
+				$fonctions_plugin = trim(applatit_arbre($arbre['fonctions']));
+				$options_plugin = trim(applatit_arbre($arbre['options']));
+				$prefix_plugin = trim(applatit_arbre($arbre['prefix']));
+				
+					if (isset($etat_plugin))
+					$etat = trim($etat_plugin);
+					switch ($etat) {
+						case 'experimental':
+							$couleur_txt = "CA2F2F";
+							$titre_etat = _T('rangement:plugin_etat_experimental');
+							break;
+						case 'test':
+							$couleur_txt = "E85600";
+							$titre_etat = _T('rangement:plugin_etat_test');
+							break;
+						case 'stable':
+							$couleur_txt = "149E06";
+							$titre_etat = _T('rangement:plugin_etat_stable');
+							break;
+						default:
+							$couleur_txt = "900B06";
+							$titre_etat = _T('rangement:plugin_etat_developpement');
+							break;
+					}
+					
+					$plug_actif = "";
+					$meta_plugin = isset($GLOBALS['meta']['plugin'])?$GLOBALS['meta']['plugin']:'';
+					$plugin_actif = eregi($dossier_plugin, $meta_plugin, $plug_actif);
+					
+					if ($plug_actif[0] != "") {
+						$checked = " value='O' checked='checked'";
+					}
+					else {
+						$checked = " value='O'";
+					}
+				
+				debut_boite_info();
+				echo "<input type='checkbox' name='statusplug_$dossier_plugin'$checked>";
+				echo "<strong>".$nom_plugin."</strong>(version ".$version_plugin.")<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
+				echo "<br /><hr>";
+				echo "<small>".propre($description_plugin)."</small><br /><hr>";
+				echo propre($auteur_plugin)."<br /><hr>";
+				echo "<img src='"._DIR_PLUGIN_RANGEMENT_PLUGS."/../img_pack/".$etat.".png' />";
+				echo "&nbsp;<small><strong><font COLOR='#".$couleur_txt."'>".$titre_etat."</font></strong></small><br />";
+				fin_boite_info();
+			}
+			
+		echo "</ul>";
+				
+	}
+	
+	else {
+		echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
+		echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
+		echo _T('rangement:plugins_liste_famille')."</font></b></td></tr>";
+	
+		echo "<tr><td class='serif' colspan=4>";
+		echo _T('rangement:texte_presente_plugin_famille');
+	
+		if (_request('famille')=='') {
+			echo generer_url_post_ecrire("rangement_plugin");
+		}
+		
+		else if (_request('famille')!='') {
+			echo generer_url_post_ecrire("rangement_plugin", 'famille='._request('famille'));
+		}
+
+		echo "<ul>";
+		
+		# Ecrire les plugins de la meme famille. Decouper tout ca en fonctions.
+			
+				if ($xml_encours) {
+					$xml = $xml_encours;
+				}
+				else if ($xml_racine) {
+					$xml = $xml_racine;
+				}
+			
+			foreach ($xml as $fichier){
+				$chemin_dossier = dirname ($fichier);
+				if ($xml_encours) {
+					$recherche_nom = eregi(_DIR_PLUGINS.'(.*)', $chemin_dossier, $nom_chemin);
+					$dossier_plugin = $nom_chemin[1];
+					$nom_plugin = $nom_chemin[1];
+				}
+				else if ($xml_racine) {
+					$recherche_nom = eregi(_DIR_PLUGINS.'(.*)\/(.*)', $chemin_dossier, $nom_chemin);
+					$dossier_plugin = $nom_chemin[1]."/".$nom_chemin[2];
+					$nom_plugin = $nom_chemin[2];
+				}
+				
+				$fichiers_plugin=array();
+				$fichiers_plugin[]=substr(dirname($fichier), strlen(_DIR_PLUGINS));
+				
+				lire_fichier($fichier, $texte);
+				$arbre = parse_plugin_xml($texte);
+				$arbre = $arbre['plugin'][0];
+				
+				$nom_plugin = applatit_arbre($arbre['nom']);
+				$auteur_plugin = applatit_arbre($arbre['auteur']);
+				$etat_plugin = applatit_arbre($arbre['etat']);
+				$version_plugin = applatit_arbre($arbre['version']);
+				$description_plugin = applatit_arbre($arbre['description']);
+				$fonctions_plugin = trim(applatit_arbre($arbre['fonctions']));
+				$options_plugin = trim(applatit_arbre($arbre['options']));
+				$prefix_plugin = trim(applatit_arbre($arbre['prefix']));
 				
 				$testo = array();
 				foreach($fichiers_plugin as $filo){
@@ -261,6 +379,7 @@ EOF;
 							if ($filo != $plugin[0] && isset($pleug_actif[0])) {
 									effacer_meta('plugin',$filo);
 									ecrire_metas();
+									echo "efface !";
 							}
 							
 							else if ($plugin[0] != "") {
@@ -273,21 +392,43 @@ EOF;
 	  								if (!isset($pleug_actif[0])) {
 										ecrire_meta('plugin',$lire_meta_plugin.','.$plugin[0]);
 										ecrire_metas();
+									
+										$fichier_options = _DIR_TMP."charger_plugins_options.php";
+										$lire_fichier = file_get_contents($fichier_options);
+										$plugin_deja_active = eregi($prefix_plugin, $lire_fichier, $plugin_present);
+										
+										if (!isset($plugin_present[0])){
+											echo "le plugin devrait secrire dans charger options";
+											$prefix = strtoupper($prefix_plugin);
+											$splugs .= '$GLOBALS[\'plugins\'][]=\''.trim($prefix_plugin).'\';';
+											$splugs .= "define(_DIR_PLUGINS_$prefix,_DIR_PLUGINS.'$plugin[0]/');";
+												if ($options_plugin){
+												$splugs .= "\n@include_once _DIR_PLUGINS.'$plugin[0]/".trim($options_plugin)."';\n";
+												}
+											$splugs .= "\n\n?>";
+											$contenu_modifie = str_replace ('?>', $splugs, $lire_fichier);
+											ecrire_fichier(_DIR_TMP."charger_plugins_options.php", $contenu_modifie);
+											echo $fonctions_plugin;
+											
+											if (isset($fonctions_plugin)){
+												echo "les fonctions doivent secrire";
+												$fichier_fonctions = _DIR_TMP."charger_plugins_fonctions.php";
+												$lire_fichier_fonctions = file_get_contents($fichier_fonctions);
+												$plugin_deja_active_fonctions = eregi($prefix_plugin, $lire_fichier_fonctions, $plugin_present_fonctions);
+												$splugsfct .= "\n@include_once _DIR_PLUGINS.'$plugin[0]/".trim($fonctions_plugin)."';\n";
+												$splugsfct .= "\n\n?>";
+												
+												if (!isset($plugin_present_fonctions[0])) {
+													$contenu_modifie_fonctions = str_replace ('?>', $splugsfct, $lire_fichier_fonctions);
+													ecrire_fichier(_DIR_TMP."charger_plugins_fonctions.php", $contenu_modifie_fonctions);
+												}
+												}
+										}
+		
 									}
+								}
 							}
-						}
 				}
-				
-				
-				lire_fichier($fichier, $texte);
-				$arbre = parse_plugin_xml($texte);
-				$arbre = $arbre['plugin'][0];
-				
-				$nom_plugin = applatit_arbre($arbre['nom']);
-				$auteur_plugin = applatit_arbre($arbre['auteur']);
-				$etat_plugin = applatit_arbre($arbre['etat']);
-				$version_plugin = applatit_arbre($arbre['version']);
-				$description_plugin = applatit_arbre($arbre['description']);
 				
 		
 					if (isset($etat_plugin))
