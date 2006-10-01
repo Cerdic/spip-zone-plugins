@@ -17,6 +17,11 @@ data='$player?son=$url' width='200' height='20'>
 		
 	}
 	
+	 function enclosure_it($url, $titre){
+		$enclosure = '<a rel="enclosure" href="'.$url.'"> '.$titre.' </a>' ;	
+		return $enclosure ;
+	}
+	
 	function flvplayer($url, $width=320, $height=240){
 	static	$player = NULL;
 	$url = urlencode(url_absolue($url));
@@ -46,16 +51,20 @@ wmode='transparent' data='$player?file=$url&autoStart=false'>
 		
 	    //print_r($matches);
 		// S'il n'y a pas de lien sur des fichier de format mp3, retourner le texte sans changement
-		if(!$matches[1][0])return $texte; 
+		if(!$matches[1][0]) return $texte; 
 
 		$url_a=$matches[1];
 		$lien=$matches[0];
+		$titre_a=$matches[4];
+
 
 		//remplacer le lien sur des fichier de format mp3 par le player flash permettant de jouer ce fichier 
 		$y=0;
 		foreach($url_a as $url){
 			if (substr($url, -3)=="mp3"){
-			$texte = ereg_replace($lien[$y],dewplayer($url).$GLOBALS['param_perso']['dewplayer'], $texte);
+			$titre=$titre_a[$y];
+			if(preg_match_all("/http:\/\/[a-zA-Z0-9 ()\/\:\._%\?+'=~-]*\.mp3?/iU", $titre, $matches) AND $fichier=basename($url)) $titre = $fichier ;
+			$texte = ereg_replace($lien[$y],enclosure_it($url,$titre).$GLOBALS['param_perso']['dewplayer'], $texte);
 			}
 			if (substr($url, -3)=="flv"){
 			$texte = ereg_replace($lien[$y],flvplayer($url).$GLOBALS['param_perso']['dewplayer'], $texte);
