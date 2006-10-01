@@ -1,3 +1,12 @@
+<html>
+<head>
+	<title>Tests de Widgets</title>
+
+#INSERT_HEAD
+</head>
+
+<body>
+
 <?php
 
 include_spip('inc/widgets');
@@ -6,7 +15,7 @@ include_spip('inc/widgets');
 // Ma page pleine de malice
 //
 
-echo "<form method='post' action='widgets.php'>\n";
+echo "<form method='post' action='#SELF'>\n";
 
 echo "titre: ";
 $n = new SecureWidget('titre', 'allo ?');
@@ -35,3 +44,7 @@ echo '<input type="submit" value="ok" />'."\n".'</form>'."\n";
 
 
 ?>
+
+
+</body>
+</html>
