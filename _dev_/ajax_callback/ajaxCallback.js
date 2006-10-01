@@ -14,7 +14,7 @@ jQuery.fn.load = function( url, params, callback, ifModified ) {
 			params = null;
 		} 
 	}
-	callback2 = function(res,status) {triggerAjaxLoad(this);callback(res,status)};
+	var callback2 = function(res,status) {triggerAjaxLoad(this);callback(res,status)};
 	
 	this._load( url, params, callback2, ifModified );
 }
