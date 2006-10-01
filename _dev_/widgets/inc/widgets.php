@@ -7,28 +7,34 @@
 #$meta['alea_ephemere'] = $meta['alea_ephemere_ancien'] = 'x';
 
 
-if (isset($_POST['widgets']) AND is_array($_POST['widgets']))
-foreach ($_POST['widgets'] as $widget) {
+function post_widgets() {
+	$results = array();
 
-	$name = $_POST['name_'.$widget];
-	$content = $_POST['content_'.$widget];
+	if (isset($_POST['widgets']) AND is_array($_POST['widgets']))
+	foreach ($_POST['widgets'] as $widget) {
 
-	// Si les donnees POSTees ne correspondent pas a leur md5,
-	// il faut les traiter
-	if (md5($_POST['content_'.$widget]) <> $_POST['md5_'.$widget]) {
+		$name = $_POST['name_'.$widget];
+		$content = $_POST['content_'.$widget];
 
-		if (!isset($_POST['secu_'.$widget]))
-			echo "<br/>widget $name non securise =&gt; $content\n";
+		// Si les donnees POSTees ne correspondent pas a leur md5,
+		// il faut les traiter
+		if (md5($_POST['content_'.$widget]) <> $_POST['md5_'.$widget]) {
 
-		elseif (verif_secu($name, $_POST['secu_'.$widget]))
-			echo "<br/>widget $name securise =&gt; $content\n";
+			if (!isset($_POST['secu_'.$widget]))
+				$results[] = array($name, $content, true);
+
+			elseif (verif_secu($name, $_POST['secu_'.$widget]))
+				$results[] = array($name, $content, true);
+			else
+				return false; // erreur secu
+		}
+		// cas inchange
 		else
-			echo "<br/>widget $name erreur securite =&gt; $content\n";
-	} else
-		echo "<br/>widget $name inchange =&gt; $content\n";
+			$results[] = array($name, $content, false);
+	}
 
+	return $results;
 }
-
 
 function verif_secu($w, $secu) {
 	return (
