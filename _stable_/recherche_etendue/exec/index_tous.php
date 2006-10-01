@@ -57,7 +57,7 @@ function exec_index_tous_dist()
 	// Recupere les donnees
 	//
 
-	debut_page(_L('Moteur de recherche'), "administration", "cache");
+	debut_page(_T('rechercheetendue:moteur_recherche'), "administration", "cache");
 
 	debut_gauche();
 
@@ -68,30 +68,30 @@ function exec_index_tous_dist()
 
 	debut_boite_info();
 
-	echo propre(_L('Cette page r&eacute;capitule la liste des mots indexes sur votre site et de leur occurence.'));
+	echo propre(_T('rechercheetendue:info_index_tous'));
 
 	fin_boite_info();
 
 	debut_raccourcis();
 	echo "<p>";
-	icone_horizontale (_L('Statut de l\'indexation'), generer_url_ecrire("admin_index"), "../"._DIR_PLUGIN_ADVANCED_SEARCH."/img_pack/stock_index.gif");
+	icone_horizontale (_T('rechercheetendue:indexation_statut'), generer_url_ecrire("admin_index"), "../"._DIR_PLUGIN_ADVANCED_SEARCH."/img_pack/stock_index.gif");
 	echo "</p>";
 
-	icone_horizontale (_L('Tout'), generer_url_ecrire("index_tous"), "tout-site-24.gif");
+	icone_horizontale (_T('rechercheetendue:tout'), generer_url_ecrire("index_tous"), "tout-site-24.gif");
 
 	foreach($liste_tables as $t){
 		if (isset($INDEX_elements_objet[$t])){
-			icone_horizontale (_L('Index '.$t), generer_url_ecrire("index_tous","index_table=$t&filtre=$filtre"), $icone_table[$t]);
+			icone_horizontale (_T('rechercheetendue:index',array('table' => $t)), generer_url_ecrire("index_tous","index_table=$t&filtre=$filtre"), $icone_table[$t]);
 		}
 	}
 
 	echo generer_url_post_ecrire("index_tous",$index_table?"index_table=$index_table":"");
 
-	echo _L('Filtrer :') . "<br /><select name='filtre'";
+	echo _T('rechercheetendue:filtrer') . "<br /><select name='filtre'";
 	echo "onchange=\"document.location.href='";
 	echo generer_url_ecrire('index_tous',($index_table?"index_table=$index_table&":"").'filtre=')."'+this.options[this.selectedIndex].value\"";
 	echo ">" . "\n";
-	$filtres=array('1'=>'+ de 1 point','10'=>'+ de 10 points','100'=>'+ de 100 points');
+	$filtres=array('1'=>_T('rechercheetendue:filtrer_plus_1'),'10'=>_T('rechercheetendue:filtrer_plus_10'),'100'=>_T('rechercheetendue:filtrer_plus_100'));
 	foreach($filtres as $val=>$string){
 		echo "<option value='$val'";
 		if ($val == $filtre)
@@ -108,7 +108,7 @@ function exec_index_tous_dist()
 
 	debut_droite();
 
-	gros_titre(_L('Moteur de recherche'));
+	gros_titre(_T('rechercheetendue:moteur_recherche'));
 
 	if ($connect_statut != '0minirezo') {
 		echo "<strong>"._T('avis_acces_interdit')."</strong>";
@@ -117,11 +117,11 @@ function exec_index_tous_dist()
 	}
 
 	if ($index_table==''){
-		$titre_table=_L("Tous les Mots Indexes");
+		$titre_table=_T("rechercheetendue:tous_mots");
 		$icone = "doc-24.gif";
 	}
 	else {
-		$titre_table=_L("Tous les Mots Indexes : table $index_table");
+		$titre_table=_T("rechercheetendue:tous_mots_table",array('table'=>$index_table));
 		$icone = $icone_table[$index_table];
 	}
 
@@ -215,7 +215,7 @@ function exec_index_tous_dist()
 				  . generer_url_ecrire("recherche", "recherche=" . urlencode($dico))
 				  .  "' title='"
 				  . $occurences
-				  . " occurences'>"
+				  . " "._T("rechercheetendue:occurences")."'>"
 				  .  $dico
 				  . "</a>&nbsp;";
 
@@ -231,7 +231,7 @@ function exec_index_tous_dist()
 			echo "</table>";
 			echo "</div>\n";
 		}
-		else echo _L("Aucun mot indexe avec plus de $filtre points");
+		else echo _T("rechercheetendue:filtrer_aucun",array('points'=>$filtre));
 
 	fin_page();
 

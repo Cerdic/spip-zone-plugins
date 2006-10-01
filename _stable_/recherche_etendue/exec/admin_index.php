@@ -35,32 +35,32 @@ function exec_admin_index_dist()
 	if (isset($GLOBALS['meta']['INDEX_elements_objet']))
 		$INDEX_elements_objet = unserialize($GLOBALS['meta']['INDEX_elements_objet']);
 	
-	debut_page(_L('Moteur de recherche'), "administration", "cache");
+	debut_page(_T('rechercheetendue:moteur_recherche'), "administration", "cache");
 	
 	debut_gauche();
 	
 	debut_boite_info();
-	echo propre(_L('Cette page r&eacute;capitule l\'avancement de l\'indexation du site.'));
+	echo propre(_T('rechercheetendue:info_admin_index'));
 	fin_boite_info();
 	
 	debut_raccourcis();
 	echo "<p>";
-	icone_horizontale (_L('Voir le vocabulaire indexe'),  generer_url_ecrire("index_tous"), "../"._DIR_PLUGIN_ADVANCED_SEARCH."/img_pack/stock_book-alt.gif");
+	icone_horizontale (_T('rechercheetendue:vocabulaire_indexe'),  generer_url_ecrire("index_tous"), "../"._DIR_PLUGIN_ADVANCED_SEARCH."/img_pack/stock_book-alt.gif");
 	echo "</p>";
 	
-	icone_horizontale (_L('Mettre &agrave; jour les infos d\'indexation du site'), generer_url_ecrire("admin_index", "mise_a_jour=oui"), "cache-24.gif");
-	icone_horizontale (_L('Forcer l\'indexation du site'), generer_url_ecrire("admin_index", "forcer_indexation=20"), "../"._DIR_PLUGIN_ADVANCED_SEARCH."/img_pack/stock_exec.gif");
-	icone_horizontale (_L('Relancer l\'indexation du site sans purger les donn&eacute;es.'), generer_url_ecrire("admin_index", "forcer_indexation=oui"), "../"._DIR_PLUGIN_ADVANCED_SEARCH."/img_pack/stock_exec.gif");
+	icone_horizontale (_T('rechercheetendue:indexation_a_jour'), generer_url_ecrire("admin_index", "mise_a_jour=oui"), "cache-24.gif");
+	icone_horizontale (_T('rechercheetendue:indexation_forcer'), generer_url_ecrire("admin_index", "forcer_indexation=20"), "../"._DIR_PLUGIN_ADVANCED_SEARCH."/img_pack/stock_exec.gif");
+	icone_horizontale (_T('rechercheetendue:indexation_relancer'), generer_url_ecrire("admin_index", "forcer_indexation=oui"), "../"._DIR_PLUGIN_ADVANCED_SEARCH."/img_pack/stock_exec.gif");
 	echo "<div style='width: 100%; border-top: solid 1px white;background: url(".http_wrapper('rayures-danger.png').");'>";
-	icone_horizontale (_L('Cliquez ici pour purger les tables d\'indexation.'), generer_url_ecrire("admin_index", "purger=oui"), "effacer-cache-24.gif");
-	icone_horizontale (_L('Cliquez ici pour resetter les param&egrave;tres d\'indexation.'), generer_url_ecrire("admin_index", "resetmeta=oui"), "effacer-cache-24.gif");
+	icone_horizontale (_T('rechercheetendue:indexation_purger'), generer_url_ecrire("admin_index", "purger=oui"), "effacer-cache-24.gif");
+	icone_horizontale (_T('rechercheetendue:indexation_resetter'), generer_url_ecrire("admin_index", "resetmeta=oui"), "effacer-cache-24.gif");
 	echo "</div>";
 	
 	fin_raccourcis();
 
 
 	debut_droite();
-	gros_titre(_L('Moteur de recherche'));
+	gros_titre(_T('rechercheetendue:moteur_recherche'));
 	
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 		echo _T('avis_non_acces_page');
@@ -162,11 +162,11 @@ function exec_admin_index_dist()
 				}
 			}
 			else{
-				echo _L("Aucun &eacute;l&eacute;ment &agrave; indexer");
+				echo _T("rechercheetendue:indexer_aucun");
 			}
 		}
 		else{
-			echo _L("Indexation de la table non configur&eacute;e");
+			echo _T("rechercheetendue:indexation_non_configuree");
 		}
 		echo "</td><td>";
 		if ($index_total[$table]>0) {

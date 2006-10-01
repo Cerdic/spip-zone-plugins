@@ -24,12 +24,12 @@
 		  // on voit les bouton dans la barre "accueil"
 			$boutons_admin['accueil']->sousmenu["admin_index"]= new Bouton(
 			"../"._DIR_PLUGIN_ADVANCED_SEARCH."/img_pack/stock_index.gif",  // icone
-			_L("Gestion de l'indexation") //titre
+			_T("rechercheetendue:gestion_idexation") //titre
 			);
 
 			$boutons_admin['accueil']->sousmenu["index_tous"]= new Bouton(
 			"../"._DIR_PLUGIN_ADVANCED_SEARCH."/img_pack/stock_book-alt.gif",  // icone
-			_L("Dictionnaire indexe") //titre
+			_T("rechercheetendue:dictionnaire_indexe") //titre
 			);
 		}
 		return $boutons_admin;
@@ -62,21 +62,21 @@
 		$height = $barheight[$nom_barre];
 		$texte = "";
 		$texte = "<img src='$p/bar_left.gif' alt='' />";
-		$texte .= "<img src='$p/bar_middle.gif' width='$point' height='$height' alt='score $point' />";
+		$texte .= "<img src='$p/bar_middle.gif' width='$point' height='$height' alt='"._T("rechercheetendue:score")." $point' />";
 		$texte .= "<img src='$p/bar_right.gif' alt='' />";
 		return $texte;
 	}
 	
 	function RechercheEtendue_star($texte,$starfilename = "") {
-		if ($starfilename="")
+		if ($starfilename=="")
 			$starfilename=_DIR_PLUGIN_ADVANCED_SEARCH."/star.gif";
 		$point = $texte;
 		$texte = "";
-		$star1="<img src='$starfilename' alt='1 etoile' />";
-		$star2="<img src='$starfilename' alt='2 etoiles' />&nbsp;<img src='$starfilename' alt=''/>";
-		$star3="<img src='$starfilename' alt='3 etoiles' />&nbsp;<img src='$starfilename' alt=''/>&nbsp;<img src='$starfilename' alt=''/>";
-		$star4="<img src='$starfilename' alt='4 etoiles' />&nbsp;<img src='$starfilename' alt=''/>&nbsp;<img src='$starfilename' alt=''/>&nbsp;<img src='$starfilename' alt=''/>";
-		$star5="<img src='$starfilename' alt='5 etoiles' />&nbsp;<img src='$starfilename' alt=''/>&nbsp;<img src='$starfilename' alt=''/>&nbsp;<img src='$starfilename' alt=''/>&nbsp;<img src='$starfilename' alt=''/>";
+		$star1="<img src='$starfilename' alt='"._T("rechercheetendue:etoile_1")."' />";
+		$star2="<img src='$starfilename' alt='"._T("rechercheetendue:etoile_2")."' />&nbsp;<img src='$starfilename' alt=''/>";
+		$star3="<img src='$starfilename' alt='"._T("rechercheetendue:etoile_3")."' />&nbsp;<img src='$starfilename' alt=''/>&nbsp;<img src='$starfilename' alt=''/>";
+		$star4="<img src='$starfilename' alt='"._T("rechercheetendue:etoile_4")."' />&nbsp;<img src='$starfilename' alt=''/>&nbsp;<img src='$starfilename' alt=''/>&nbsp;<img src='$starfilename' alt=''/>";
+		$star5="<img src='$starfilename' alt='"._T("rechercheetendue:etoile_5")."' />&nbsp;<img src='$starfilename' alt=''/>&nbsp;<img src='$starfilename' alt=''/>&nbsp;<img src='$starfilename' alt=''/>&nbsp;<img src='$starfilename' alt=''/>";
 		if ($point > 2) {
 			$texte= $star1;
 		}

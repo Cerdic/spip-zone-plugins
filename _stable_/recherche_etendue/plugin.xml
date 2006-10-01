@@ -1,12 +1,24 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Recherche Etendue
+	<multi>
+	[fr]Recherche Etendue
+	[it]Ricerca avanzata
+	</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
+	<multi>
+	[fr]
 	cedric.morin@yterium.com
 _ pdepaepe et Nicolas Steinmetz pour google_like
 _ Fil pour le panneau admin_index d'origine
 _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+	[it]
+	cedric.morin@yterium.com
+_ pdepaepe e Nicolas Steinmetz per google_like
+_ Fil per il pannello di amministrazione admin_index originale
+_ &copy; 2006 - Distribuito sotto licenza GNU/GPL	
+_ Traduzione italiana a cura di Diego Weisz
+	</multi>
 	</auteur>
 	<version>
 	0.1
@@ -15,10 +27,18 @@ _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	stable
 	</etat>
 	<description>
+	<multi>
+	[fr]
 	Plugin d'outils pour la recherche et l'indexation
 _ Panneaux de controle admin_index et index_tous
 _ Boucle INDEX
 _ Filtre google_like
+	[it]
+	Strumenti per la ricerca e l'indicizzazione
+_ Pannello di controllo admin_index e index_tous
+_ Ciclo INDEX
+_ Filtro google_like	
+	</multi>
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
 	recherche_etendue_options.php
