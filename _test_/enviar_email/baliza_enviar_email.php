@@ -10,7 +10,7 @@ $javascript_centrar_enviar = "<script language=\"JavaScript1.2\">	/*	Open Cent
 		$url = generer_url_public('',$arg);
 		
 // prepara el enlace completo
-		$enlace = $javascript_centrar_enviar."<a href=\"javascript:;\" onClick=\"centrarVentana('$url','Enviar documento','scrollbars=yes,resizable=yes','440','440','true')\" title=\"Enviar la referencia de este documento por email\" border=\"0\"><img src=\"$logo\" border=\"0\" /> Enviar por email</a>";
+		$enlace = $javascript_centrar_enviar."<a href=\"javascript:;\" onClick=\"centrarVentana('$url','Enviar_documento','scrollbars=yes,resizable=yes','440','440','true')\" title=\"Enviar la referencia de este documento por email\" border=\"0\"><img src=\"$logo\" border=\"0\" /> Enviar por email</a>";
 		return $enlace;
 
 }
