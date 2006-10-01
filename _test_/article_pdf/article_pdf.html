@@ -1,11 +1,11 @@
 #CACHE{0}
 <?php
 
-	$path_pdf = sous_repertoire(_DIR_IMG, "article_PDF");
+	$path_pdf = sous_repertoire(_DIR_CACHE, "article_PDF");
 	
 	// Mode release => $debug=0
 	// Mode debug => $debug=1 (ne fonctionne pas sous Internet Explorer)
-	$debug=1;
+	$debug=0;
 	
 	<B_principale>
 	<BOUCLE_principale(ARTICLES){id_article}>
@@ -25,7 +25,7 @@
 	$yahoo='-<BOUCLE_yahoo(HIERARCHIE){id_article}> [(#TITRE|supprimer_numero|pdf_first_clean|texte_script)] - </BOUCLE_yahoo>';
 
 	$logo_site='[(#LOGO_SITE_SPIP|extraire_attribut{src}|texte_script)]';
-	[$logo_fichier='(#LOGO_ARTICLE_RUBRIQUE|texte_script|extraire_attribut{src})';]
+	[$logo_fichier='(#LOGO_ARTICLE_RUBRIQUE|extraire_attribut{src}|texte_script)';]
   //[$logo_fichier="(#LOGO_ARTICLE_RUBRIQUE|extraire_attribut{src})";]
 	//[$logo_lien="(#URL_ARTICLE)";]
 		
@@ -54,7 +54,6 @@
 		$files_pdf = "article_".$id_article.".pdf" ;
 	$file_out = $path_pdf . $files_pdf ;
 	
-	//		unlink($file_out);// DEBUG
 	if (file_exists($file_out)) 
 	{
 		clearstatcache;
