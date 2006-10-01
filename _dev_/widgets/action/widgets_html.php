@@ -6,6 +6,8 @@ function action_widgets_html_dist() {
 	include_spip('inc/widgets');
 	include_spip('inc/texte');
 
+	header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
+
 	// Est-ce qu'on a recu des donnees ?
 	if (isset($_POST['widgets'])) {
 		$modifs = post_widgets();

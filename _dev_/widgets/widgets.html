@@ -3,14 +3,19 @@
 	<title>Tests de Widgets</title>
 	#INSERT_HEAD
 	<script type="text/javascript" src="#CHEMIN{widgets.js}"></script>
+
+	<style type="text/css">
+		.title {font-size: 25px;}
+		.surtitre {text-decoration: underline;}
+	</style>
 </head>
 
 <body>
 
 <BOUCLE_s(ARTICLES){par date}{inverse}{0,3}>
 <h2>Article ##ID_ARTICLE</h2>
-<div class="widget article-surtitre-#ID_ARTICLE">#SURTITRE</div>
-<div class="widget article-titre-#ID_ARTICLE">#TITRE</div>
+<div class="widget article-surtitre-#ID_ARTICLE surtitre">#SURTITRE</div>
+<div class="widget article-titre-#ID_ARTICLE title">#TITRE</div>
 </BOUCLE_s>
 
 
