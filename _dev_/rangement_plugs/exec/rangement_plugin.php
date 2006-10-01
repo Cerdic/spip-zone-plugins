@@ -388,11 +388,9 @@ EOF;
 										$plugin_deja_active = eregi($prefix_plugin, $lire_fichier, $plugin_present);
 										
 										if (isset($plugin_present[0])){
-											$prefix = strtoupper($prefix_plugin);
-											$splugs .= '$GLOBALS[\'plugins\'][]=\''.trim($prefix_plugin).'\';';
-											$splugs .= "define(_DIR_PLUGINS_$prefix,_DIR_PLUGINS.'$plugin[0]/');";
-											$contenu_modifie = str_replace ($splugs, '', $lire_fichier);
-											ecrire_fichier(_DIR_TMP."charger_plugins_options.php", $contenu_modifie);
+											echo "options doit être vide";
+											$options_persos = eregi_replace('\/\*debut_rangement_plugins_'.$prefix_plugin.'(.*)fin_rangement_plugins_'.$prefix_plugin.'\*\/', '', $lire_fichier);
+											ecrire_fichier(_DIR_TMP."charger_plugins_options.php", $options_persos);
 										}
 										
 							}
@@ -414,11 +412,13 @@ EOF;
 										
 										if (!isset($plugin_present[0])){
 											$prefix = strtoupper($prefix_plugin);
-											$splugs .= '$GLOBALS[\'plugins\'][]=\''.trim($prefix_plugin).'\';';
+											$splugs .= "/*debut_rangement_plugins_$prefix_plugin*/";
+											$splugs .= '$GLOBALS[\'plugins\'][]=\''.$prefix_plugin.'\';';
 											$splugs .= "define(_DIR_PLUGINS_$prefix,_DIR_PLUGINS.'$plugin[0]/');";
 												if ($options_plugin){
 												$splugs .= "\n@include_once _DIR_PLUGINS.'$plugin[0]/".trim($options_plugin)."';\n";
 												}
+											$splugs .= "/*fin_rangement_plugins_$prefix_plugin*/";
 											$splugs .= "\n\n?>";
 											$contenu_modifie = str_replace ('?>', $splugs, $lire_fichier);
 											ecrire_fichier(_DIR_TMP."charger_plugins_options.php", $contenu_modifie);
