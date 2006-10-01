@@ -43,6 +43,7 @@ var $BottomLinkIDArray = array(); #Sauve les IDs des liens internes (notes en fi
 var $BottomLinkIDArrayIt = 0; #Itérateur dans le tableau des IDs des liens internes
 
 var $FirstIteration = TRUE;  # booleen pour la génération des liens
+var $CurrentTag=array();
 
 
 function Build($OutputFileFullPathName)
@@ -101,13 +102,11 @@ function WriteHTML($html,$LineFeedHeight)
 {
 	$this->texteAddSpace=false;
 	//Parseur HTML
-//	$html=str_replace("\n",' ',$html); non, sinon plus de retour à la ligne dans les textearea
 	$html=$this->unhtmlentities($html);
 	
-	$a=preg_split('/(?m)(<(?!=).*>(?!=))/U', $html, -1, PREG_SPLIT_DELIM_CAPTURE);
+	$a=preg_split(',(<[/a-zA-Z].*>),Ums', $html, -1, PREG_SPLIT_DELIM_CAPTURE);
 	//autoriser le multiligne 
   //Il faut détecter les vraies balises <... et pas les <= de formules éventuelles
-	// dans le texte , idem en fermeture, écarter les >= d'où l'ajout des (?!=) 
 
 	// $a = le tableau de tags
 	// $i = index de l'élément courant
@@ -131,10 +130,14 @@ function WriteHTML($html,$LineFeedHeight)
 		}
 		// Contenu
 		else {
-  		if (strlen($e)){
-				$this->texteAddSpace = $this->texteAddSpace OR $e{0}==" ";
-				$next_add_space = substr($e,-1)==" ";
-				$e = trim($e);
+			if (!in_array('TEXTAREA',$this->CurrentTag))
+				$e=str_replace("\n",' ',$e);
+			if (strlen($e)){
+				$te = trim($e);
+				if (!$this->texteAddSpace)
+					$this->texteAddSpace = (strlen($te)==0) | ($e{0}!=$te{0});
+				$next_add_space = (strlen($te)==0) | (substr($e,-1)!=substr($te,-1));
+				$e = $te;
 			}
 			if(strlen($e)){
 				$e = $this->texteAddSpace?" $e":$e;
@@ -221,7 +224,8 @@ function WriteHTML($html,$LineFeedHeight)
 
 function OpenTag($tag,$e,$LineFeedHeight)
 {
-  //Balise ouvrante
+	$needclosing = true;	
+	//Balise ouvrante
 	if ($tag=='B' || $tag=='U' || $tag=='I')
 	{
 		$this->SetStyle($tag,true);
@@ -246,15 +250,22 @@ function OpenTag($tag,$e,$LineFeedHeight)
 			$this->texteAddSpace = false;
 		}
 	}
-
 	if($tag=='BR') {
 		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
 		$this->Ln($LineFeedHeight);
+		$needclosing = false;
+		$this->texteAddSpace = false;
 	}
 
 	if($tag=='P') {
 		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
 		$this->Ln(1.5*$LineFeedHeight);
+		$this->texteAddSpace = false;
+	}
+	if($tag=='DIV') {
+		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
+		$this->Ln(1*$LineFeedHeight);
+		$this->texteAddSpace = false;
 	}
 
 	if($tag=='CODE') {
@@ -266,6 +277,7 @@ function OpenTag($tag,$e,$LineFeedHeight)
 		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
 		$this->Ln($LineFeedHeight*3);
 		$this->SetStyle($tag='B',true,14);
+		$this->texteAddSpace = false;
 	}
 
 	if($tag=='UL' or $tag=='OL') {
@@ -302,7 +314,7 @@ function OpenTag($tag,$e,$LineFeedHeight)
 				$this->PutLink($this->HREF,"[$alt]");
 		}
 		else
-    {
+		{
 			$size=getimagesize($this->SRC);		# Attention, utilisation de GD !!! FPDF ne sait pas lire les images à moitié... et je n'ai pas envie de surcharger la méthode Image...
 			if ($size[0] < 30 && $size[1] < 30) {
 				# pixel / 3 pour avoir des cm. Petite cuisine...
@@ -357,7 +369,7 @@ function OpenTag($tag,$e,$LineFeedHeight)
 				$this->Image($this->SRC, $this->GetX()+($pwidth-$imgX)/2, $this->GetY(), $imgX, $imgY,'',$this->HREF);
 				$this->SetY($this->GetY()+$imgY);
 			}
-    }
+		}
 	}
 
 	if($tag=='TT' or $tag=='TEXTAREA') {
@@ -437,11 +449,18 @@ function OpenTag($tag,$e,$LineFeedHeight)
 		# Ligne horizontale
 		$this->SetLineWidth(0.3);
 		$this->Line($this->lMargin, $this->GetY(), $this->w - $this->rMargin, $this->GetY());
+		$needclosing = false;
+		$this->texteAddSpace = false;
 	}
+	if ((substr($e,-2)!="/>") && $needclosing)
+		$this->CurrentTag[]=$tag;	
 }
 
 function CloseTag($tag,$LineFeedHeight)
 {
+	if ($tag==end($this->CurrentTag))
+		array_pop($this->CurrentTag);
+		
 	if($tag=='B' || $tag=='U' || $tag=='I')
 		$this->SetStyle($tag,false);
 	
@@ -675,7 +694,7 @@ function TableShow($align,$LineFeedHeight)
 			}
 		}
 		// Repris de CalcWidth : calcul de la largeur de la table
-    $TableWidth=0.0;
+		$TableWidth=0.0;
 		foreach($this->columnProp as $col) {
 			$TableWidth += $col['w'];
 		}
@@ -738,8 +757,8 @@ function InitDumpFile()
 {
 	@unlink(DUMP_FILE_FULL_PATH_NAME);
 }
-	
-	
+
+
 // trace une chaîne dans un fichier 
 function Dump($String)
 {
@@ -750,7 +769,7 @@ function Dump($String)
 		@fclose($f);
     }
 }
-	
+
 // trace un tableau dans un fichier 
 function DumpArray($String,$Array)
 {
