@@ -21,6 +21,8 @@ function exec_rangement_plugin() {
 	$dossier_encours = _request('famille');
 	$xml_encours = preg_files(_DIR_PLUGINS,"/$dossier_encours/plugin[.]xml$");
 	$xml_racine = rangement_plugs_preg_files_plugs(_DIR_PLUGINS.$dossier_encours,"/plugin[.]xml$");
+	$start_file = "<"."?php\nif (!defined('_ECRIRE_INC_VERSION')) return;\n";
+	$end_file = "\n?".">";
 	
 	$surligne = "";
 
@@ -385,29 +387,12 @@ EOF;
 										$lire_fichier = file_get_contents($fichier_options);
 										$plugin_deja_active = eregi($prefix_plugin, $lire_fichier, $plugin_present);
 										
-										if (!isset($plugin_present[0])){
+										if (isset($plugin_present[0])){
 											$prefix = strtoupper($prefix_plugin);
 											$splugs .= '$GLOBALS[\'plugins\'][]=\''.trim($prefix_plugin).'\';';
 											$splugs .= "define(_DIR_PLUGINS_$prefix,_DIR_PLUGINS.'$plugin[0]/');";
-												if ($options_plugin){
-												$splugs .= "\n@include_once _DIR_PLUGINS.'$plugin[0]/".trim($options_plugin)."';\n";
-												}
-											$splugs .= "\n\n?>";
 											$contenu_modifie = str_replace ($splugs, '', $lire_fichier);
 											ecrire_fichier(_DIR_TMP."charger_plugins_options.php", $contenu_modifie);
-											echo $fonctions_plugin;
-											
-											if (isset($fonctions_plugin)){
-												$fichier_fonctions = _DIR_TMP."charger_plugins_fonctions.php";
-												$lire_fichier_fonctions = file_get_contents($fichier_fonctions);
-												$plugin_deja_active_fonctions = eregi($prefix_plugin, $lire_fichier_fonctions, $plugin_present_fonctions);
-												$splugsfct .= "\n@include_once _DIR_PLUGINS.'$plugin[0]/".trim($fonctions_plugin)."';\n";
-												
-												if (!isset($plugin_present_fonctions[0])) {
-													$contenu_modifie_fonctions = str_replace ($splugsfct, '', $lire_fichier_fonctions);
-													ecrire_fichier(_DIR_TMP."charger_plugins_fonctions.php", $contenu_modifie_fonctions);
-												}
-												}
 										}
 										
 							}
