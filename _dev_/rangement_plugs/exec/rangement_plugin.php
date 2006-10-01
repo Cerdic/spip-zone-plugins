@@ -377,7 +377,8 @@ EOF;
 							$plugin_actif = ereg($filo, $lire_meta_plugin, $pleug_actif);
 							
 							if ($filo != $plugin[0] && isset($pleug_actif[0])) {
-									effacer_meta('plugin',$filo);
+									$effacer_plug = str_replace ($filo, '', $lire_meta_plugin);
+									ecrire_meta('plugin',$effacer_plug);
 									ecrire_metas();
 									
 										$fichier_options = _DIR_TMP."charger_plugins_options.php";
@@ -392,7 +393,7 @@ EOF;
 												$splugs .= "\n@include_once _DIR_PLUGINS.'$plugin[0]/".trim($options_plugin)."';\n";
 												}
 											$splugs .= "\n\n?>";
-											$contenu_modifie = str_replace ($splugs, '?>', $lire_fichier);
+											$contenu_modifie = str_replace ($splugs, '', $lire_fichier);
 											ecrire_fichier(_DIR_TMP."charger_plugins_options.php", $contenu_modifie);
 											echo $fonctions_plugin;
 											
