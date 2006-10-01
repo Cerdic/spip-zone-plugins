@@ -105,33 +105,24 @@ function WriteHTML($html,$LineFeedHeight)
 	$html=$this->unhtmlentities($html);
 	
 	$a=preg_split('/(?m)(<(?!=).*>(?!=))/U', $html, -1, PREG_SPLIT_DELIM_CAPTURE);
-			//autoriser le multiligne 
-      //Il faut détecter les vraies balises <... et pas les <= de formules éventuelles
-			// dans le texte , idem en fermeture, écarter les >= d'où l'ajout des (?!=) 
-//	var_dump($a);
+	//autoriser le multiligne 
+  //Il faut détecter les vraies balises <... et pas les <= de formules éventuelles
+	// dans le texte , idem en fermeture, écarter les >= d'où l'ajout des (?!=) 
 
 	// $a = le tableau de tags
 	// $i = index de l'élément courant
 	// $e = valeur de l'élément courant
 	foreach($a as $i=>$e) 
 	{
-//          $this->Write(5,"--".$e{0}."+".$e{1}."--"); //DEBUG
-//          $this->Write(5,"--".$e."--"); // simple mais très bon DEBUG
-
 		//Balise
 		if (($e{0}=='<')&&(preg_match(',^<(/)?([^\s]+)(\s.*|/)?(>)$,',$e,$match)!==FALSE)) {
-      //var_dump("::$tag::")   &&($e{1}!='=');
 			$tag=strtoupper($match[2]);
-//DEBUG
-//	$this->Write(5,"-**-".$i."-");
-//	$this->Write(5,$match[0]."+".$match[1]."+".$match[2]."-**-\n");
-			
-      $closing = $match[1]=="/";
+			$closing = $match[1]=="/";
 			
 			if (($this->ProcessingBloc) AND (!in_array($tag,$this->BlocTags[$this->ProcessingBloc-1])))
 				$this->BlocContent[$this->ProcessingBloc-1] .= $e;
 			else {
-	  			if ($closing)
+				if ($closing)
 				// C'est une balise fermante
 					$this->CloseTag($tag,$LineFeedHeight);
 				else
@@ -140,10 +131,6 @@ function WriteHTML($html,$LineFeedHeight)
 		}
 		// Contenu
 		else {
-//DEBUG
-//	$this->Write(5,"-***-".$i."-");
-//	$this->Write(5,$e."-***-\n");
-	
   		if (strlen($e)){
 				$this->texteAddSpace = $this->texteAddSpace OR $e{0}==" ";
 				$next_add_space = substr($e,-1)==" ";
@@ -234,7 +221,6 @@ function WriteHTML($html,$LineFeedHeight)
 
 function OpenTag($tag,$e,$LineFeedHeight)
 {
-//	$this->Write(15," [  $tag  ] ");
   //Balise ouvrante
 	if ($tag=='B' || $tag=='U' || $tag=='I')
 	{
@@ -254,7 +240,6 @@ function OpenTag($tag,$e,$LineFeedHeight)
 	if($tag=='A')
 	{
 		$this->HREF=extraire_attribut($e,'href');
-//    if ($this->HREF ==''){$this->HREF=$this->prop['href'];}
 		$this->texteHREF="";
 		if ($this->texteAddSpace) {
 			$this->Write(5," ");
@@ -308,7 +293,6 @@ function OpenTag($tag,$e,$LineFeedHeight)
 
 		// si l'image est manquante mettre un lien avec le texte alt
 		if (!@is_readable($this->SRC)){
-//  	 	if (!@file_exists($this->SRC)){
 			$alt = extraire_attribut($e,'alt');
 			if ($alt==NULL) $alt = $this->SRC;
 			//var_dump("img:href=".$this->HREF.':');
@@ -319,8 +303,6 @@ function OpenTag($tag,$e,$LineFeedHeight)
 		}
 		else
     {
-  // 	if (strlen($this->SRC)>1 ) {
-
 			$size=getimagesize($this->SRC);		# Attention, utilisation de GD !!! FPDF ne sait pas lire les images à moitié... et je n'ai pas envie de surcharger la méthode Image...
 			if ($size[0] < 30 && $size[1] < 30) {
 				# pixel / 3 pour avoir des cm. Petite cuisine...
@@ -329,7 +311,7 @@ function OpenTag($tag,$e,$LineFeedHeight)
 				$yoffset=$imgY/4;
 				if ($this->GetY() + $imgY > $this->h - $this->bMargin)
 					$this->AddPage();
-				$this->Image($this->SRC, $this->GetX(), $this->GetY()-$yoffset, $imgX, $imgY);
+				$this->Image($this->SRC, $this->GetX(), $this->GetY()-$yoffset, $imgX, $imgY,'',$this->HREF);
 				$this->SetX($this->GetX()+$size[0]/2);
 			} else if ($size[0] < 600 && $size[1] < 600) {
 				$pwidth=$this->w-$this->lMargin-$this->rMargin;
@@ -375,7 +357,6 @@ function OpenTag($tag,$e,$LineFeedHeight)
 				$this->Image($this->SRC, $this->GetX()+($pwidth-$imgX)/2, $this->GetY(), $imgX, $imgY,'',$this->HREF);
 				$this->SetY($this->GetY()+$imgY);
 			}
-		// }
     }
 	}
 
