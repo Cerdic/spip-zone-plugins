@@ -963,7 +963,7 @@ function Image($file,$x,$y,$w=0,$h=0,$type='',$link='',$maxframe='')
 		//$info=$this->_parsepng($file);
 
 		elseif($type=='gif') 
-    {
+		{
 		/*
 			$readgif= gd_info();
 			if ($readgif[3]) {
@@ -978,10 +978,9 @@ function Image($file,$x,$y,$w=0,$h=0,$type='',$link='',$maxframe='')
 				$info=$this->_parsegif($file);
 			}
 		*/
-       $InfoGif = $this->_parsegif2($file,_DIR_IMG,$maxframe);
-
-        for ($i=0 ; $i < count($InfoGif); $i++)
-        {
+			$InfoGif = $this->_parsegif2($file,_DIR_IMG,$maxframe);
+			for ($i=0 ; $i < count($InfoGif); $i++)
+			{
 				Header( "Content-type: image/png");
 				$image = imagecreatefromGIF("$InfoGif[$i]");
 				imageinterlace($image,0);
@@ -989,8 +988,8 @@ function Image($file,$x,$y,$w=0,$h=0,$type='',$link='',$maxframe='')
 				$info=$this->_parsepng("./IMG/tempo.png");
 				ImageDestroy($image);
 				unlink ("./IMG/tempo.png");
- 				unlink ($InfoGif[$i]);
-        }  
+				unlink ($InfoGif[$i]);
+			}  
     }
 		else
 		{
@@ -1688,10 +1687,9 @@ function _parsepng($file)
 
 function _parsegif2($file,$path,$frame)
 {
-require('GifSplit.class.php');
-$sg = new GifSplit($file, 'GIF', $path.'/GS-frame',$frame,'1');
-return ($sg->getfilelist());
-
+	require('GifSplit.class.php');
+	$sg = new GifSplit($file, 'GIF', $path.'/GS-frame',$frame,'1');
+	return ($sg->getfilelist());
 }
 
 function _parsegif($file)
