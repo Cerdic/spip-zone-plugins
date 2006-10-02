@@ -64,7 +64,10 @@ include_spip("inc/forms");
 	}
 	function Forms_header_prive($flux){
 		$flux .= 	"<link rel='stylesheet' href='".find_in_path('spip_forms.css')."' type='text/css' media='all' />\n";
-		$active_langs = "'".str_replace(",","','",$GLOBALS['meta']['langues_proposees'])."'";
+		if($GLOBALS['meta']['multi_rubriques']=="oui" || $GLOBALS['meta']['multi_articles']=="oui")
+			$active_langs = "'".str_replace(",","','",$GLOBALS['meta']['langues_proposees'])."'";
+		else
+			$active_langs = $GLOBALS["spip_lang"];
 		$flux .= "<script src='".find_in_path('forms_lang.js')."' type='text/javascript'></script>\n". 
 		"<script type='text/javascript'>\n".
 		"var forms_def_lang='".$GLOBALS["spip_lang"]."';var forms_avail_langs=[$active_langs];\n".
