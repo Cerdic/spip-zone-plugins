@@ -26,7 +26,7 @@ function forms_init_lang() {
 }
 
 function forms_make_menu_lang(container,target) {
-	$(forms_menu_lang).clone().click(function() {forms_change_lang(this,container,target)}).
+	$(forms_menu_lang).clone().find("a").click(function() {forms_change_lang(this,container,target)}).end().
 	append("<div style='clear:left'></div>").appendTo(container);
 }
 
@@ -99,7 +99,7 @@ function forms_save_lang(el,lang) {
 	//if the lang value is equal to the def lang do nothing
 	//else save value
 	if(el.field_lang[forms_def_lang]!=el.value) { 
-		if(el.field_lang[lang]==undefined) el.multi = true;
+		el.multi = true;
 		el.field_lang[lang] = el.value;
 	}
 }
