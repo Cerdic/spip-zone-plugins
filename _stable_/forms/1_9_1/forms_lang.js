@@ -97,8 +97,12 @@ function forms_set_lang(el,lang) {
 
 function forms_save_lang(el,lang) {
 	//if the lang value is equal to the def lang do nothing
-	//else save value
+	//else save value but if the filed is not empty, delete lang value
 	if(el.field_lang[forms_def_lang]!=el.value) { 
+		if(!el.value) {
+			delete el.field_lang[lang];
+			return;
+		}
 		el.multi = true;
 		el.field_lang[lang] = el.value;
 	}
@@ -110,12 +114,17 @@ function forms_multi_submit() {
 		//save data before submit
 		forms_save_lang(this,forms_cur_lang);
 		//build the string value
-		if(!this.multi) this.value = this.field_lang[forms_def_lang];
+		var def_value = this.field_lang[forms_def_lang];
+		if(!this.multi) this.value = def_value;
 		else {
 			var value="",count=0;
 			$.each(this.field_lang,function(name){
-				value += "["+name+"]"+this;
-				count++;
+				//save default lang value and other lang values if different from
+				//the default one
+				if(this!=def_value || name==forms_def_lang) {
+					value += "["+name+"]"+this;
+					count++;
+				}
 			});
 			this.value = count!=1?"<multi>"+value+"</multi>":value.replace('^\[[a-z_]+\]','');
 		} 
