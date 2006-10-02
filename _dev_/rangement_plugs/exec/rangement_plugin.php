@@ -257,6 +257,7 @@ EOF;
 				$fonctions_plugin = trim(applatit_arbre($arbre['fonctions']));
 				$options_plugin = trim(applatit_arbre($arbre['options']));
 				$prefix_plugin = trim(applatit_arbre($arbre['prefix']));
+				$pipeline_plugin = trim(applatit_arbre($arbre['pipeline']));
 				
 					if (isset($etat_plugin))
 					$etat = trim($etat_plugin);
@@ -360,6 +361,10 @@ EOF;
 				$fonctions_plugin = trim(applatit_arbre($arbre['fonctions']));
 				$options_plugin = trim(applatit_arbre($arbre['options']));
 				$prefix_plugin = trim(applatit_arbre($arbre['prefix']));
+				$pipeline_plugin = trim(applatit_arbre($arbre['pipeline']));
+				$nompipe_plugin = trim(applatit_arbre($arbre['nom']));
+				$actionpipe_plugin = trim(applatit_arbre($arbre['action']));
+				$inclurepipe_plugin = trim(applatit_arbre($arbre['inclure']));
 				
 				$testo = array();
 				foreach($fichiers_plugin as $filo){
@@ -388,11 +393,18 @@ EOF;
 										$plugin_deja_active = eregi($prefix_plugin, $lire_fichier, $plugin_present);
 										
 										if (isset($plugin_present[0])){
-											echo "options doit être vide";
 											$options_persos = eregi_replace('\/\*debut_rangement_plugins_'.$prefix_plugin.'(.*)fin_rangement_plugins_'.$prefix_plugin.'\*\/', '', $lire_fichier);
 											ecrire_fichier(_DIR_TMP."charger_plugins_options.php", $options_persos);
 										}
 										
+										$fichier_fonctions = _DIR_TMP."charger_plugins_fonctions.php";
+										$lire_fichier_fonctions = file_get_contents($fichier_fonctions);
+										$plugin_deja_active_fonctions = eregi($prefix_plugin, $lire_fichier_fonctions, $plugin_present_fonctions);
+										
+										if (isset($plugin_present_fonctions[0])){
+											$options_persos_fonctions = eregi_replace('\/\*debut_rangement_plugins_'.$prefix_plugin.'(.*)fin_rangement_plugins_'.$prefix_plugin.'\*\/', '', $lire_fichier_fonctions);
+											ecrire_fichier(_DIR_TMP."charger_plugins_fonctions.php", $options_persos_fonctions);
+										}
 							}
 							
 							else if ($plugin[0] != "") {
@@ -405,7 +417,7 @@ EOF;
 	  								if (!isset($pleug_actif[0])) {
 										ecrire_meta('plugin',$lire_meta_plugin.','.$plugin[0]);
 										ecrire_metas();
-									
+											
 										$fichier_options = _DIR_TMP."charger_plugins_options.php";
 										$lire_fichier = file_get_contents($fichier_options);
 										$plugin_deja_active = eregi($prefix_plugin, $lire_fichier, $plugin_present);
@@ -423,20 +435,54 @@ EOF;
 											$contenu_modifie = str_replace ('?>', $splugs, $lire_fichier);
 											ecrire_fichier(_DIR_TMP."charger_plugins_options.php", $contenu_modifie);
 											
+											# Inserer donnees dans charger_pipelines_fonctions.php
 											if (isset($fonctions_plugin)){
 												$fichier_fonctions = _DIR_TMP."charger_plugins_fonctions.php";
 												$lire_fichier_fonctions = file_get_contents($fichier_fonctions);
 												$plugin_deja_active_fonctions = eregi($prefix_plugin, $lire_fichier_fonctions, $plugin_present_fonctions);
+												$splugsfct .= "/*debut_rangement_plugins_$prefix_plugin*/";
 												$splugsfct .= "\n@include_once _DIR_PLUGINS.'$plugin[0]/".trim($fonctions_plugin)."';\n";
+												$splugsfct .= "/*fin_rangement_plugins_$prefix_plugin*/";
 												$splugsfct .= "\n\n?>";
 												
 												if (!isset($plugin_present_fonctions[0])) {
 													$contenu_modifie_fonctions = str_replace ('?>', $splugsfct, $lire_fichier_fonctions);
 													ecrire_fichier(_DIR_TMP."charger_plugins_fonctions.php", $contenu_modifie_fonctions);
 												}
-												}
+											
+											}
 										}
-		
+										# Inserer donnes dans charger_pipelines.php.
+										$pipes_plug = array($pipeline_plugin);
+										if (is_array($pipes_plug)){
+											$fichier_pipelines = _DIR_TMP."charger_pipelines.php";
+											$lire_fichier_pipes = file_get_contents($fichier_pipelines);
+											$plugin_deja_active_pipe = eregi($prefix_plugin, $lire_fichier_pipes, $pipelines_presentes);
+											if (!isset($pipelines_presentes[0])) {
+												if (is_array($arbre['pipeline'])){
+													foreach($arbre['pipeline'] as $pipe){
+													$nom = trim(end($pipe['nom']));
+													$action = trim(end($pipe['action']));
+													$inclure = trim(end($pipe['inclure']));
+													
+													$contenu_nom = "function execute_pipeline_".$nom."(\$val){";
+													$contenu_nom_rep .= "\n/*debut_rangement_plugins_$prefix_plugin*/";
+													$contenu_nom_rep .= "\n@include_once (_DIR_PLUGINS.'$plugin[0]/".$inclure."');\n";
+														if (isset($action)) {
+															$contenu_nom_rep .= "\$val = minipipe('".$prefix_plugin."_".$action."', \$val);\n";
+														}
+														else {
+															$contenu_nom_rep .= "\$val = minipipe('".$prefix_plugin."_".$nom."', \$val);\n";
+														}
+													$contenu_nom_rep .= "/*fin_rangement_plugins_$prefix_plugin*/";
+													
+													$contenu_modifie_pipes = str_replace ($contenu_nom, $contenu_nom.$contenu_nom_rep, $lire_fichier_pipes);
+													ecrire_fichier(_DIR_TMP."charger_pipelines.php", $contenu_nom.$contenu_modifie_pipes);
+													
+													}
+												}
+											}
+										}
 									}
 								}
 							}
