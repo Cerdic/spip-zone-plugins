@@ -20,7 +20,7 @@ function boucle_LANGUES($id_boucle, &$boucles) {
 	else
 	  $code_sep="''";
 
-	if($boucle->tout) {
+	if(isset($boucle->modificateur['tout'])) {
 	  $liste= "lire_meta('langues_proposees').lire_meta('langues_proposees2')";
 	} else {
 	  $liste= "lire_meta('langues_multilingue')";

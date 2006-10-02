@@ -11,7 +11,7 @@ function checklink_ajouter_boutons($boutons_admin) {
 	AND $GLOBALS["options"]=="avancees") {
 	  // on voit le bouton dans la barre "forum_admin"
 		$boutons_admin['forum']->sousmenu["liens_tous"]= new Bouton(
-		"../"._DIR_PLUGIN_CHECKLINK."/img_pack/checklink-24.png",  // icone
+		_DIR_PLUGIN_CHECKLINK."/img_pack/checklink-24.png",  // icone
 		_T("sites_web") //titre
 		);
 	}

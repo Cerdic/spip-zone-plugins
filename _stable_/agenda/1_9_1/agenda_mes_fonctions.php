@@ -26,12 +26,13 @@ function boucle_EVENEMENTS_dist($id_boucle, &$boucles) {
 		// Si pas de lien avec un article, selectionner
 		// uniquement les auteurs d'un article publie
 		if (!$GLOBALS['var_preview'])
-		if (!$boucle->lien AND !$boucle->tout) {
-			$boucle->from["articles"] =  "spip_articles";
-			$boucle->where[]= array("'='", "'articles.id_article'", "'$id_table.id_article'");
-			$boucle->where[]= array("'='", "'articles.statut'", "'\"publie\"'");
-			$boucle->group[] = $boucle->id_table . '.' . $boucle->primary;  
-		}
+			if (!isset($boucle->modificateur['lien']) AND !isset($boucle->modificateur['tout'])
+			AND (!isset($boucle->lien) OR !$boucle->lien) AND (!isset($boucle->tout) OR !$boucle->tout)) {
+				$boucle->from["articles"] =  "spip_articles";
+				$boucle->where[]= array("'='", "'articles.id_article'", "'$id_table.id_article'");
+				$boucle->where[]= array("'='", "'articles.statut'", "'\"publie\"'");
+				$boucle->group[] = $boucle->id_table . '.' . $boucle->primary;  
+			}
 	}
 
 	return calculer_boucle($id_boucle, $boucles); 
