@@ -44,7 +44,7 @@ function bloc_edition_champ($t, $link) {
 				$js = " onfocus=\"if(!antifocus_choix){this.value='';antifocus_choix=true;}\"";
 			}
 			else $js = "";
-			echo "<input type='text' name='$code_choix' value=\"".entites_html($nom_choix)."\" ".
+			echo "<input type='text' id='nom_$code_choix' name='$code_choix' value=\"".entites_html($nom_choix)."\" ".
 				"class='fondl verdana2' size='20'$js>";
 			// 
 			echo " <input style='display: none;' type='submit' name='modif_choix' value=\""._T('bouton_modifier')."\" class='fondo verdana2'>";
@@ -723,6 +723,7 @@ function exec_forms_edit(){
 			echo "<strong>"._T("forms:champs_formuaire")."</strong><br />\n";
 			echo _T("forms:info_champs_formulaire");
 			echo "</div>\n";
+			echo "<div id='forms_lang'></div>";
 
 			if (count($structure)) {
 				$keys = array_keys($structure);
@@ -765,13 +766,14 @@ function exec_forms_edit(){
 				}
 
 				echo $visible ? bouton_block_visible("champ_$code") : bouton_block_invisible("champ_$code");
-				echo "<strong>".typo($t['nom'])."</strong>";
+				echo "<strong id='titre_nom_$code'>".typo($t['nom'])."</strong>";
 				echo "<br /></div>";
 				echo "(".Forms_nom_type_champ($t['type']).")\n";
 				echo $visible ? debut_block_visible("champ_$code") : debut_block_invisible("champ_$code");
 
 				// Modifier un champ
-				echo "<form method='POST' action='"
+				echo "<div id='forms_lang_nom_$code'></div>";
+				echo "<form class='forms_champ' method='POST' action='"
 					. $form_link . "#champ_visible"
 					. "' style='border: 0px; margin: 0px;'>";
 				echo "<input type='hidden' name='modif_champ' value='$code' />";
