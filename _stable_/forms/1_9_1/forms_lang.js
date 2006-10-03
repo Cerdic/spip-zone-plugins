@@ -6,8 +6,8 @@ $.extend(css_cur_link,css_link)
 $.extend(css_cur_link,{fontWeight:"bold"});
 
 function forms_init_lang() {
-	//Should detect is multilinguism is activated. If not return.
-	if(forms_avail_langs.length<=1) return;
+	//Detect if we're on the right page and is multilinguism is activated. If not return.
+	if(window.location.search.indexOf("exec=forms_edit")==-1 || forms_avail_langs.length<=1) return;
 	forms_cur_lang = forms_def_lang;
 	forms_containers = $("#forms_lang");
 	//create menu lang template 
