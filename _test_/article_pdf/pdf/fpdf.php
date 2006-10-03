@@ -964,7 +964,7 @@ function Image($file,$x,$y,$w=0,$h=0,$type='',$link='',$maxframe='')
 
 		elseif($type=='gif') 
 		{
-		/*
+		
 			$readgif= gd_info();
 			if ($readgif[3]) {
 				Header( "Content-type: image/png");
@@ -977,19 +977,18 @@ function Image($file,$x,$y,$w=0,$h=0,$type='',$link='',$maxframe='')
 			} else {
 				$info=$this->_parsegif($file);
 			}
-		*/
-			$InfoGif = $this->_parsegif2($file,_DIR_IMG,$maxframe);
-			for ($i=0 ; $i < count($InfoGif); $i++)
-			{
+		
+		/*	$InfoGif = $this->_parsegif2($file,substr(_DIR_IMG,0,strlen(_DIR_IMG)-1),$maxframe);
+			foreach($InfoGif as $i=>$file){
 				Header( "Content-type: image/png");
-				$image = imagecreatefromGIF("$InfoGif[$i]");
+				$image = imagecreatefromGIF("$file");
 				imageinterlace($image,0);
 				ImagePNG($image,"./IMG/tempo.png");
 				$info=$this->_parsepng("./IMG/tempo.png");
 				ImageDestroy($image);
 				unlink ("./IMG/tempo.png");
-				unlink ($InfoGif[$i]);
-			}  
+				unlink ($file);
+			}*/
     }
 		else
 		{

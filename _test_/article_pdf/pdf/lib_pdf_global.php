@@ -114,7 +114,7 @@ function WriteHTML($html,$LineFeedHeight)
 	foreach($a as $i=>$e) 
 	{
 		//Balise
-		if (($e{0}=='<')&&(preg_match(',^<(/)?([^\s]+)(\s.*|/)?(>)$,',$e,$match)!==FALSE)) {
+		if (($e{0}=='<')&&(preg_match(',^<(/)?([a-zA-Z][^\s]*)(\s.*|/)?(>)$,',$e,$match)!==FALSE)) {
 			$tag=strtoupper($match[2]);
 			$closing = $match[1]=="/";
 			
@@ -458,9 +458,6 @@ function OpenTag($tag,$e,$LineFeedHeight)
 
 function CloseTag($tag,$LineFeedHeight)
 {
-	if ($tag==end($this->CurrentTag))
-		array_pop($this->CurrentTag);
-		
 	if($tag=='B' || $tag=='U' || $tag=='I')
 		$this->SetStyle($tag,false);
 	
@@ -537,6 +534,8 @@ function CloseTag($tag,$LineFeedHeight)
 			$this->BlocShow(0,$content,1,$LineFeedHeight);
 		}
 	}
+	if ($tag==end($this->CurrentTag))
+		array_pop($this->CurrentTag);
 }
 
 function SetStyle($tag,$enable,$size=0)
@@ -600,10 +599,14 @@ function CellSize($htmlContent,$fontFamily,$fontSize,$LineFeedHeight,$cellmargin
 	$cell_pdf->maxLineWidth = 0;
 	$cell_pdf->x=$cell_pdf->lMargin;
 	$cell_pdf->y=0;
+	$cell_pdf->CurrentTag = $this->CurrentTag;
+	
 	if ($max_width){
 		$cell_pdf->rMargin=$cell_pdf->w-$cell_pdf->x-$max_width-$cellmargin;
 	}
 	$cell_pdf -> WriteHTML($htmlContent,$LineFeedHeight);
+	if($cell_pdf->x>$cell_pdf->lMargin)
+		$cell_pdf->Ln($LineFeedHeight);
 	
 	$width = $cell_pdf->maxLineWidth-$cell_pdf->lMargin;
 	$height = $cell_pdf->y;
