@@ -174,7 +174,7 @@ $.fn.serialize = function() {
 
 	$('input,textarea,select,button', this).each(function() {
 		var n = this.name || this.id;
-		vat t = this.type; 
+		var t = this.type; 
 
 		if ( !n || this.disabled || t == 'reset' || 
 			(t == 'checkbox' || t == 'radio') && !this.checked || 
