@@ -1,5 +1,5 @@
 <BOUCLE_reponses(REPONSES){id_reponse}>#SET{champ,''}
-<BOUCLE_form(FORMS){id_form}>#TEXTE
+<BOUCLE_form(FORMS){id_form}>[(#TEXTE|supprimer_tags)]
 [(#ENV{mail_admin}|=={'oui'}|?{' ',''})
 <:forms:formulaire:> #TITRE
 <:forms:reponse_retrovez:> #URL_ECRIRE{forms_reponses,id_form=#ID_FORM}

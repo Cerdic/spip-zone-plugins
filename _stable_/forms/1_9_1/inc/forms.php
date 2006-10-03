@@ -278,23 +278,24 @@
 					$email_dest = $email[$row2['valeur']];
 			}
 
-			include_spip('inc/charset');
+			include_spip('inc/mail');
 			if ($mailconfirm !== '') {
 				$head="From: formulaire@".$_SERVER["HTTP_HOST"]."\n";
 				$sujet = $row['titre'];
 				$dest = $mailconfirm;
 				// mettre le texte dans un charset acceptable et sans entites
-				$mess_iso = unicode2charset(html2unicode(charset2unicode($corps_mail)),'iso-8859-1');
-
-				mail($dest, $sujet, $mess_iso, $head);
+				//$mess_iso = unicode2charset(html2unicode(charset2unicode($corps_mail)),'iso-8859-1');
+				//mail($dest, $sujet, $mess_iso, $head);
+				envoyer_mail($dest, $sujet, $corps_mail, "formulaire@".$_SERVER["HTTP_HOST"], $headers = "");
 			}
 			if ($email_dest != '') {
 				$head="From: formulaire_$id_form@".$_SERVER["HTTP_HOST"]."\n";
 				$sujet = $row['titre'];
 				$dest = $email_dest;
 				// mettre le texte dans un charset acceptable et sans entites
-				$mess_iso = unicode2charset(html2unicode(charset2unicode($corps_mail_admin)),'iso-8859-1');
-				mail($dest, $sujet, $mess_iso, $head);
+				//$mess_iso = unicode2charset(html2unicode(charset2unicode($corps_mail_admin)),'iso-8859-1');
+				//mail($dest, $sujet, $mess_iso, $head);
+				envoyer_mail($dest, $sujet, $corps_mail_admin, "formulaire@".$_SERVER["HTTP_HOST"], $headers = "");
 		 	}
 		}
 	}
