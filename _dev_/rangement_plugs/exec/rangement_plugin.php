@@ -405,6 +405,15 @@ EOF;
 											$options_persos_fonctions = eregi_replace('\/\*debut_rangement_plugins_'.$prefix_plugin.'(.*)fin_rangement_plugins_'.$prefix_plugin.'\*\/', '', $lire_fichier_fonctions);
 											ecrire_fichier(_DIR_TMP."charger_plugins_fonctions.php", $options_persos_fonctions);
 										}
+										
+										$fichier_pipelines = _DIR_TMP."charger_pipelines.php";
+										$lire_fichier_pipelines = file_get_contents($fichier_pipelines);
+										$plugin_deja_active_pipelines = eregi($prefix_plugin, $lire_fichier_pipelines, $plugin_present_pipelines);
+										
+										if (isset($plugin_present_pipelines[0])){
+											$options_persos_pipelines = eregi_replace('\/\*debut_rangement_plugins_'.$prefix_plugin.'(.*)fin_rangement_plugins_'.$prefix_plugin.'\*\/', '', $lire_fichier_ipelines);
+											ecrire_fichier(_DIR_TMP."charger_pipelines.php", $options_persos_pipelines);
+										}
 							}
 							
 							else if ($plugin[0] != "") {
@@ -480,7 +489,7 @@ EOF;
 													
 													$lire_fichier_modifs = file_get_contents($fichier_pipelines);
 													$contenu_modifie_pipes = str_replace ($contenu_nom, $contenu_nom.$contenu_nom_rep, $lire_fichier_modifs);
-													ecrire_fichier(_DIR_TMP."charger_pipelines.php", $contenu_nom.$contenu_modifie_pipes);
+													ecrire_fichier(_DIR_TMP."charger_pipelines.php", $contenu_modifie_pipes);
 													
 													}
 												}
@@ -489,6 +498,7 @@ EOF;
 									}
 								}
 							}
+							return $liste_fichier_verif
 				}
 				
 		
