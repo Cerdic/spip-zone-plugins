@@ -16,14 +16,14 @@ function fckeditor2_header_prive($flux) {
 
 		if(EDITEUR_PAR_DEFAUT=='text') {
 			$code='
-	$("img[@src=\'img_pack/edit.gif\']").parent().each(function(i){
+	$("img[@src*=\'edit.gif\']").parent().each(function(i){
 		$(this).before(this.cloneNode(true));
 		$(this).attr("href", $(this).attr("href")+"&wysiwyg=oui");
 		$(this).find("span").html(\''.addslashes(_T('fckeditor:icone_modifier_article_fck')).'\');
 	});';
 		} else {
 			$code='
-	$("img[@src=\'img_pack/edit.gif\']").parent().each(function(i){
+	$("img[@src*=\'edit.gif\']").parent().each(function(i){
 		$(this).before(this.cloneNode(true));
 		$(this).attr("href", $(this).attr("href")+"&wysiwyg=non");
 		$(this).find("span").html(\''.addslashes(_T('fckeditor:icone_modifier_article_spip')).'\');
