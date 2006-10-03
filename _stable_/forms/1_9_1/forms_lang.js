@@ -1,7 +1,5 @@
 var forms_containers={},forms_fields={},forms_forms,forms_menu_lang;
 var match_multi = /\[([a-z_]+)\](.*?)(?=\[[a-z_]+\]|$)/mig;
-//var forms_avail_langs = ['it','fr','en'];
-//var forms_def_lang = "it";
 var forms_cur_lang,css_link,css_cur_link={};
 css_link = {cursor:"pointer",margin:"2px 5px",float:"left"};
 $.extend(css_cur_link,css_link)
@@ -20,9 +18,7 @@ function forms_init_lang() {
 	//create menu lang for the global form
 	forms_make_menu_lang(forms_containers);
 	//init fields
-	console.time("forms_init_multi()");
 	forms_init_multi();
-	console.timeEnd("forms_init_multi()");
 }
 
 function forms_make_menu_lang(container,target) {
