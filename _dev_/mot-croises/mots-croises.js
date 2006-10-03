@@ -5,7 +5,7 @@ if ($('html').attr('dir') == 'rtl')
 else
 	var sens_curseur='e-resize';
 $(document).ready(function(){
-	$('table.grille tr td input').bind('keypress', mykey).css('cursor', sens_curseur);
+	$('table.grille tr td input').bind('keypress', mykey).attr('style','cursor:'. sens_curseur);
 	if ((jQuery.browser.safari) | (jQuery.browser.Konqueror))
 		$('form.grille').bind('contextmenu', changeDir);
 	else
