@@ -85,18 +85,10 @@
 	}
 
 	function Forms_deplacer_fichier_form($source, $dest) {
-		// Securite
-		if (strstr($dest, "..")) {
-			exit;
-		}
-	
-		$ok = @rename($source, $dest);
-		if (!$ok) $ok = @move_uploaded_file($source, $dest);
-		if ($ok)
-			@chmod($dest, 0666);
-		else {
-			@unlink($source);
-		}
+		include_spip('inc/getdocument');
+		if ($ok = deplacer_fichier_upload($source, $dest, true))
+			if (file_exists($source)) // argument move pas pris en compte avant spip 1.9.2
+				@unlink($source);
 	
 		return $ok;
 	}
@@ -263,7 +255,10 @@
 	function Forms_generer_mail_reponse_formulaire($id_form, $id_reponse){
 		$result = spip_query("SELECT * FROM spip_forms WHERE id_form=$id_form");
 		if ($row = spip_fetch_array($result)) {
-			$corps_mail = recuperer_fond('modeles/reponse_email',array('id_reponse'=>$id_reponse));
+			$modele = "modeles/form_reponse_email";
+			if (find_in_path($m = "$modele-$id_form"))
+				$modele = $m;
+			$corps_mail = recuperer_fond($modele,array('id_reponse'=>$id_reponse));
 			$corps_mail_admin = recuperer_fond('modeles/reponse_email',array('id_reponse'=>$id_reponse,'mail_admin'=>'oui'));
 			$champconfirm = $row['champconfirm'];
 			$email = unserialize($row['email']);
