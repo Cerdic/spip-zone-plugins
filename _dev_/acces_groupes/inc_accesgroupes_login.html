@@ -1,0 +1,75 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+	<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_article">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
+
+	<div id="conteneur">
+		<div id="contenu">
+<?php  $id_elem = '';
+       $elem = '';
+      // on est dans une config de 404 avec une url du type ?articlexxx ou ?breveyyy ou ?rubriquezzz
+      // trouver l'id_rubrique d'après le paramètre envoyé par l'url
+       $Turl = explode('&',$_SERVER['QUERY_STRING']);
+       $Telem = array('rubrique', 'article', 'breve');
+       foreach ($Telem as $e) {
+          		 foreach ($Turl as $m) {
+          				 				 if ($Tquery = explode($e, $m)) {
+          								 		$id_elem = $Tquery[1];
+          										$elem = $e;
+          										break;
+          								 }
+          		 }
+      				 if ($id_elem != '') {
+      					  break;
+      				 }
+       }
+       if ($elem == 'rubrique') {
+       		$id_rubrique = $id_elem;
+       }
+       else {
+       			$sql = "SELECT id_rubrique FROM spip_".$elem."s WHERE id_".$elem." = ".$id_elem." LIMIT 1";
+//echo '<br>$sql = '.$sql;							
+      			$result = spip_query($sql);
+//echo '<br>mysql_error = '.mysql_error();							
+      			$row = spip_fetch_array($result);
+      			$id_rubrique = $row['id_rubrique'];
+			 }
+			 if ($elem == 'article') {  ?>
+				 <h2><:accesgroupes:bloque_article:></h2> 
+<?php	 }
+			 elseif ($elem == 'breve') {  ?>
+				 <h2><:accesgroupes:bloque_breve:></h2> 
+<?php  }			 
+			 else {  ?>
+			 	 <h2><:accesgroupes:bloque_rubrique:></h2> 
+<?php  } 
+			 if ($auteur_session) { 
+			  // formulaire de demande d'accès
+			 		accesgroupes_affichage_acces_restreint(); ?>
+				 <br /><span style="font-size: 75%;">Login : <strong><?php echo $auteur_session['nom']; ?></strong>
+<?php     if ($auteur_session['statut'] == '0minirezo') { ?>				
+				 <a href="[(#URL_LOGOUT)]">[<:accesgroupes:se_reconnecter:>]</a>
+<?php	    }  ?>
+				  </span>
+<?php  }
+			 else { ?>	
+					 #LOGIN_PUBLIC			 
+<?php  } ?>
+				 
+		</div>
+	</div>
+</body>
+</html>

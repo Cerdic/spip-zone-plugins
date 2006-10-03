@@ -1,0 +1,37 @@
+pour le filtrage du mini-navigateur de rubrique lors du choix de la rubrique 
+pour création d'un article ou sous-rubrique (+ breve ?) :
+  fct exec_selectionner_dist() de /exec/selectionner.php
+    => OK cf /inc/mini_nav.php : mini_afficher_rubrique()
+  
+pour un filtrage complet de l'espace privé = tous les éléments appartenants
+aux rub restreintes invisibles :
+  filtrer les rubriques affichées dans la page d'accueil de /ecrire = index.php 
+    => OK cf /inc/rubrique.php : enfant_rub() et sous_enfant_rub()
+    
+  filtrer les sous-rubriques affichées dans /exec/naviguer.php 
+    => OK cf /inc/rubrique.php : enfant_rub() et sous_enfant_rub()
+    
+  filtrer les rubriques et articles affichés dans /exec/articles_tous.php
+    => OK /exec/articles_tous.php : arbo_articles_tous()
+    
+  filtrer le navigateur rapide de rubriques du bandeau (sous-menu 1ere icone)
+    => inc/gadget.php : gen_liste_rubriques()
+  
+  filtrer les articles
+    => inc/presentation : afficher_articles()
+  
+  filtrer les traductions d'articles
+    => inc/presentation : afficher_articles_trad()
+    
+  filtrer les révisions d'articles
+    => 
+  
+  filtrer les brèves
+    => inc/presentation : afficher_breves()
+  
+  filtrer les forums
+    => inc/presentation : afficher_forum()
+    
+  filtrer les sites
+    => inc/sites_voir.php : afficher_sites()
+  
