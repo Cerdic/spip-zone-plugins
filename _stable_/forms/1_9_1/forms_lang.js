@@ -1,9 +1,9 @@
 var forms_containers={},forms_fields={},forms_forms,forms_menu_lang;
 var match_multi = /\[([a-z_]+)\](.*?)(?=\[[a-z_]+\]|$)/mig;
-var forms_cur_lang,css_link,css_cur_link={};
-css_link = {cursor:"pointer",margin:"2px 5px",float:"left"};
-$.extend(css_cur_link,css_link)
-$.extend(css_cur_link,{fontWeight:"bold"});
+var forms_cur_lang,forms_css_link,forms_css_cur_link={};
+forms_css_link = {"cursor":"pointer","margin":"2px 5px","float":"left"};
+$.extend(forms_css_cur_link,forms_css_link);
+$.extend(forms_css_cur_link,{fontWeight:"bold"});
 
 function forms_init_lang() {
 	//Detect if we're on the right page and if multilinguism is activated. If not return.
@@ -13,7 +13,7 @@ function forms_init_lang() {
 	//create menu lang template 
 	forms_menu_lang =$("<div>");
 	$.each(forms_avail_langs,function() {
-		forms_menu_lang.append($("<a>").html("["+this+"]").css(this==forms_def_lang?css_cur_link:css_link)[0]);
+		forms_menu_lang.append($("<a>").html("["+this+"]").css(this==forms_def_lang?forms_css_cur_link:forms_css_link)[0]);
 	});
 	//create menu lang for the global form
 	forms_make_menu_lang(forms_containers);
