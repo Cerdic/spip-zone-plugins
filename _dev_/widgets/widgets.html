@@ -1,3 +1,4 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 	<title>Tests de Widgets</title>
@@ -8,19 +9,22 @@
 		.title {font-size: 25px;}
 		.surtitre {text-decoration: underline;}
 		div.intro {margin-left: 5em;}
+		.widget:hover {background-color: yellow;}
 	</style>
 </head>
 
 <body>
 
 <BOUCLE_s(ARTICLES){par date}{inverse}{0,3}>
-<h2>Article ##ID_ARTICLE</h2>
+<strong>Article ##ID_ARTICLE</strong>
 <div class="widget article-surtitre-#ID_ARTICLE surtitre">#SURTITRE</div>
-<div class="widget article-titre-#ID_ARTICLE title">#TITRE</div>
+<h2 class="widget article-titre-#ID_ARTICLE title">#TITRE</h2>
 <div class="intro">#INTRODUCTION</div>
 
 </BOUCLE_s>
 
+
+<a href="#" onclick="$('.widget').each($.setupwidget);">Tout &eacute;diter !</a>
 
 </body>
 </html>

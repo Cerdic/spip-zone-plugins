@@ -27,8 +27,14 @@ $.setupwidget = function(){
            })
            .find("input[@type='text']")
              .css('backgroundColor', 'yellow')
-             .css({'font':'inherit'})
-             .each(function(){this.focus();}) // complique...
+             .css('font', 'inherit') // pour safari
+             .each(function(){
+               this.focus();
+               $(this).css({
+                 'fontSize': $(me).css('fontSize'),
+                 'fontFamily': $(me).css('fontFamily')
+               });
+             })
            .end()
          .end()
          ;
@@ -37,12 +43,6 @@ $.setupwidget = function(){
   }
 
 $(function() {
-  $(".widget")
-  .click($.setupwidget)
-  .hover(
-    function() {$(this).css('backgroundColor', 'yellow')},
-    function() {$(this).css('backgroundColor', '')}
-  )
-  ;
+  $(".widget").click($.setupwidget);
 });
 
