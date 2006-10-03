@@ -14,7 +14,7 @@ function balise_FORMS_stat($args, $filtres) {
 	return $args;
 }
  
-function balise_FORMS_dyn($id_form = 0, $id_article = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation') {
+function balise_FORMS_dyn($id_form = 0, $id_article = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation',$reponse_enregistree="forms:reponse_enregistree") {
 	$url = self();
 	// nettoyer l'url qui est passee par htmlentities pour raison de securités
 	$url = str_replace("&amp;","&",$url);
@@ -36,7 +36,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $class='', $script_vali
 		include_spip('inc/forms');
 		$url_validation = Forms_enregistrer_reponse_formulaire($id_form, $erreur, $reponse, $script_validation, $id_article?"id_article=$id_article":"");
 		if (!$erreur) {
-			$formok = _T("forms:reponse_enregistree");
+			$formok = _T($reponse_enregistree);
 			if ($reponse)
 			  $reponse = _T($message_confirm,array('mail'=>$reponse));
 		}

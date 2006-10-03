@@ -14,25 +14,27 @@
 </p>]
 [<p class='spip_form_erreur'>(#ENV{erreur_message})</p>]
 [<img src='(#ENV{url_validation})' width='1' height='1' alt='validation de la saisie' />]
-[(#ENV{formactif})
-<form method='post' action='#ENV{self}#form#ID_FORM'
-	enctype='multipart/form-data'>
-]	
-	<div>
-	[(#ENV{self}|form_hidden)]
-	<input type='hidden' name='ajout_reponse' value='oui' />
-	<input type='hidden' name='id_form' value='#ID_FORM' />
-	
-	<input type='hidden' name='retour_form' value='#ENV{url_retour}' />
-	
-	[(#SONDAGE|=={non}|?{'',' '})<input type='hidden' name='ajout_cookie_form' value='oui' />]
-	[(#SONDAGE|=={public}|?{' ',''})
-		<input type='hidden' name='ajout_cookie_form' value='oui' />]
-	</div>
-	<INCLURE{fond=(#ENV{class})}{id_form}{affiche_sondage}{erreur}{valeurs=#ENV**{valeurs}} >
-[(#ENV{formactif})
-</form>
+[(#ENV{formok}|?{'',' '})
+	[(#ENV{formactif})
+	<form method='post' action='#ENV{self}#form#ID_FORM'
+		enctype='multipart/form-data'>
+	]	
+		<div>
+		[(#ENV{self}|form_hidden)]
+		<input type='hidden' name='ajout_reponse' value='oui' />
+		<input type='hidden' name='id_form' value='#ID_FORM' />
+		
+		<input type='hidden' name='retour_form' value='#ENV{url_retour}' />
+		
+		[(#SONDAGE|=={non}|?{'',' '})<input type='hidden' name='ajout_cookie_form' value='oui' />]
+		[(#SONDAGE|=={public}|?{' ',''})
+			<input type='hidden' name='ajout_cookie_form' value='oui' />]
+		</div>
+			<INCLURE{fond=#ENV{class}}{id_form}{affiche_sondage}{erreur}{valeurs=#ENV**{valeurs}}>
+	[(#ENV{formactif})
+	</form>
+	]
+	[<div class='spip_form_notes'>(#NOTES)</div>]
 ]
-[<div class='spip_form_notes'>(#NOTES)</div>]
 </div>
 </BOUCLE_form>
