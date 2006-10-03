@@ -98,53 +98,54 @@ function exec_config_chercher_squelettes_mots() {
 	
 	$index = 0;
 	
-	foreach($fonds as $fond => $a) {
-	  list($id_groupe,$type,$id_table) = $a;
-	  $index++;
-	  echo '<fieldset class="regle">';
-	  echo '<legend>'._T('squelettesmots:reglei',array('id'=>$index)).'</legend>';
-	  echo '<div class="champs">';
-	  echo "<input type=\"checkbox\" class=\"actif\" name=\"actif[$index]\" checked=\"true\"/>";
-	  echo "<label for=\"fond_$index\" class=\"fond\">"._T('squelettesmots:fond')."</label>";
-	  echo "<input type=\"text\" name=\"fonds[$index]\" class=\"fond\" value=\"$fond\" id=\"fond_$index\"/>";
-	  echo "<label for=\"id_groupe_$index\" class=\"id_groupe\">"._T('squelettesmots:groupe')."</label>";
-	  echo "<select name=\"tid_groupe[$index]\" class=\"id_groupe\" id=\"id_groupe_$index\">";
-	  foreach($groupes_mots as $id => $titre) {
-		echo "<option value=\"$id\"".(($id_groupe == $id)?' selected="true"':'').">$titre</option>";
-	  }
-	  echo '</select>';
-	  echo "<label for=\"type_$index\" class=\"type\">"._T('squelettesmots:type')."</label>";
-	  echo "<select name=\"type[$index]\" class=\"type\" id=\"type_$index\">";
-	  foreach($id_tables as $t => $x) {
-		echo "<option value=\"$t\"".(($type == $t)?' selected="true"':'').">$t</option>";
-	  }
-	  echo '</select>';
-	  echo '</div>';
-	  $select1 = array('titre');
-	  $from1 = array('spip_mots AS mots');
-	  $where1 = array("id_groupe=$id_groupe");
-	  $rez =spip_abstract_select($select1,$from1,$where1);
-	  $liste_squel = '<ul>';
-	  $ext = 'html'; //On force a html, c'est pas beau, mais je vois pas la solution actuellement.
-	  $cnt_actif = 0;
-	  $cnt_inactif = 0;
-	  while ($r = spip_abstract_fetch($rez)) {
-		include_ecrire("inc_charsets");
-		$n = translitteration(preg_replace('/["\'.\s]/','_',extraire_multi($r['titre'])));
-		if ($squel = find_in_path("$fond-$n.$ext")) {
-		  $cnt_actif++;
-		  $liste_squel .= "<li><a href=\"$squel\">$fond-$n.$ext</a></li>";
-		} else {
-		  $cnt_inactif++;
- 		  $liste_squel .= "<li>$fond-$n.$ext</li>";
-		}
-		if ($squel = find_in_path("$fond=$n.$ext")) {
-		  $cnt_actif++;
-		  $liste_squel .= "<li><a href=\"$squel\">$fond=$n.$ext</a></li>";
-		} else {
-		  $cnt_inactif++;
- 		  $liste_squel .= "<li>$fond=$n.$ext</li>";
-		}
+	if($fonds) {
+		foreach($fonds as $fond => $a) {
+		  list($id_groupe,$type,$id_table) = $a;
+		  $index++;
+		  echo '<fieldset class="regle">';
+		  echo '<legend>'._T('squelettesmots:reglei',array('id'=>$index)).'</legend>';
+		  echo '<div class="champs">';
+		  echo "<input type=\"checkbox\" class=\"actif\" name=\"actif[$index]\" checked=\"true\"/>";
+		  echo "<label for=\"fond_$index\" class=\"fond\">"._T('squelettesmots:fond')."</label>";
+		  echo "<input type=\"text\" name=\"fonds[$index]\" class=\"fond\" value=\"$fond\" id=\"fond_$index\"/>";
+		  echo "<label for=\"id_groupe_$index\" class=\"id_groupe\">"._T('squelettesmots:groupe')."</label>";
+		  echo "<select name=\"tid_groupe[$index]\" class=\"id_groupe\" id=\"id_groupe_$index\">";
+		  foreach($groupes_mots as $id => $titre) {
+			echo "<option value=\"$id\"".(($id_groupe == $id)?' selected="true"':'').">$titre</option>";
+		  }
+		  echo '</select>';
+		  echo "<label for=\"type_$index\" class=\"type\">"._T('squelettesmots:type')."</label>";
+		  echo "<select name=\"type[$index]\" class=\"type\" id=\"type_$index\">";
+		  foreach($id_tables as $t => $x) {
+			echo "<option value=\"$t\"".(($type == $t)?' selected="true"':'').">$t</option>";
+		  }
+		  echo '</select>';
+		  echo '</div>';
+		  $select1 = array('titre');
+		  $from1 = array('spip_mots AS mots');
+		  $where1 = array("id_groupe=$id_groupe");
+		  $rez =spip_abstract_select($select1,$from1,$where1);
+		  $liste_squel = '<ul>';
+		  $ext = 'html'; //On force a html, c'est pas beau, mais je vois pas la solution actuellement.
+		  $cnt_actif = 0;
+		  $cnt_inactif = 0;
+		  while ($r = spip_abstract_fetch($rez)) {
+			include_ecrire("inc_charsets");
+			$n = translitteration(preg_replace('/["\'.\s]/','_',extraire_multi($r['titre'])));
+			if ($squel = find_in_path("$fond-$n.$ext")) {
+			  $cnt_actif++;
+			  $liste_squel .= "<li><a href=\"$squel\">$fond-$n.$ext</a></li>";
+			} else {
+			  $cnt_inactif++;
+	 		  $liste_squel .= "<li>$fond-$n.$ext</li>";
+			}
+			if ($squel = find_in_path("$fond=$n.$ext")) {
+			  $cnt_actif++;
+			  $liste_squel .= "<li><a href=\"$squel\">$fond=$n.$ext</a></li>";
+			} else {
+			  $cnt_inactif++;
+	 		  $liste_squel .= "<li>$fond=$n.$ext</li>";
+			}
 	  }
 	  spip_abstract_free($rez);
 	  $liste_squel .= '</ul>';
@@ -161,6 +162,7 @@ function exec_config_chercher_squelettes_mots() {
 	  echo '</div>';
 
 	  echo '</fieldset>';
+	}
 	}
 	
 	$index++;

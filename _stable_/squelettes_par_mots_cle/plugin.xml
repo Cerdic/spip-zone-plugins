@@ -48,7 +48,7 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	[it]
 	  Questo plugin permette di scegliere un modello mediante una parola chiave.
 
-	La pagina di configurazione permette di creare regole per legare:
+	La pagina di configurazione permette di creare regole per collegare:
 -* un tipo di elemento,
 -* un gruppo di parole chiave per scegliere il modello,
 -* un sfondo,

@@ -3,7 +3,7 @@
 	  <multi>
 	  [fr]Tri par mots clefs
 	  [en]Sorting according to keywords
-	  [it]Ordine in funzione delle parole chiave
+	  [it]Ordina in funzione delle parole chiave
 	  </multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
@@ -32,9 +32,9 @@
 		[it]
 		Questo plugin permette di ordinare semplicemente mediante una parola chiave.
 
-		Non &egrave; necessario utilizzare numeri nel titolo. Adesso, associate una parola chiave a differenti elementi e potete ordinare quelli mediante un semplice trascinamento.
+		Non &egrave; necessario utilizzare numeri nel titolo. Associando una parola chiave a differenti elementi, potete ordinarli mediante un semplice trascinamento.
 
-		Poich&eacute; l'ordine &egrave; interno a una parola chiave, potete dare un ordine diverso allo stesso elemento.
+		Poich&eacute; l'ordine &egrave; è determinato in base alla una parola chiave, potete dare un ordine diverso allo stesso elemento.
 		</multi>
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction

@@ -3,7 +3,7 @@
 	  <multi>
 		[fr]Tri Auteurs
 		[en]Sort authors
-		[it]Ordine per autori
+		[it]Ordina gli autori 
 		</multi>	  
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->

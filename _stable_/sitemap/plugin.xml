@@ -14,11 +14,20 @@ _ &copy; 2006 - Licence GPL
 	stable
 	</etat>
 	<description>
+	<multi>
+	[fr]
 	Ce plugin cr&eacute;e dynamiquement un [sitemap Google->http://www.google.com/webmasters/sitemaps/]
 _ Le contenu le plus proche de la racine est prioritaire
 _ La pr&eacute;sence des squelettes article, br&egrave;ve... est test&eacute;e pour chaque type d'objet
 
 Usage : d&eacute;clarer l'[URL du SiteMap->../spip.php?page=sitemap] dans Google (utiliser /?page=sitemap directement ne fonctionnera pas).
+	[it]
+	Questo plugin crea dinamicamente una [sitemap per Google->http://www.google.com/webmasters/sitemaps/]
+_ Il contenuto pi&ugrave; vicino alla radice del sito ha una priorit&agrave; pi&ugrave; alta
+_ La presenza dei modelli article, breve... &egrave; verificata per ogni tipo di oggetto
+
+Modali&agrave; di utilizzo: dichiarare l'[URL della SiteMap->../spip.php?page=sitemap] in Google (inserendo direttamente /?page=sitemap la SiteMap non funzioner&agrave;).
+	</multi>
 	</description>
 	<prefix> 
 	siteMap
