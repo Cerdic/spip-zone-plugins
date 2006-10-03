@@ -27,6 +27,7 @@ $.setupwidget = function(){
            })
            .find("input[@type='text']")
              .css('backgroundColor', 'yellow')
+             .css({'font':'inherit'})
              .each(function(){this.focus();}) // complique...
            .end()
          .end()
