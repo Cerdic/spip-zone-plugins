@@ -18,7 +18,12 @@
 <dt class='spip_doc_titre'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
 <dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF)#NOTES</dd>]
 </dl>
+[(#CONFIG{player}|=={pixplayer}|?{' ',''})
+[(#URL_DOCUMENT|pixplayer{#ID_DOCUMENT})]
+]
+[(#CONFIG{player}|=={dewplayer}|?{' ',''})
 [(#URL_DOCUMENT|dewplayer)]
+]
 ,
 ''
 })]
