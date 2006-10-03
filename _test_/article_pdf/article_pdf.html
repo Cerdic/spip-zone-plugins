@@ -54,7 +54,6 @@
 		$files_pdf = "article_".$id_article.".pdf" ;
 	$file_out = $path_pdf . $files_pdf ;
 	
-			unlink($file_out);
 	if (file_exists($file_out)) 
 	{
 		clearstatcache;
