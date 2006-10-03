@@ -465,7 +465,9 @@ EOF;
 													$action = trim(end($pipe['action']));
 													$inclure = trim(end($pipe['inclure']));
 													
+													$contenu_nom = "";
 													$contenu_nom = "function execute_pipeline_".$nom."(\$val){";
+													$contenu_nom_rep = "";
 													$contenu_nom_rep .= "\n/*debut_rangement_plugins_$prefix_plugin*/";
 													$contenu_nom_rep .= "\n@include_once (_DIR_PLUGINS.'$plugin[0]/".$inclure."');\n";
 														if (isset($action)) {
@@ -476,7 +478,8 @@ EOF;
 														}
 													$contenu_nom_rep .= "/*fin_rangement_plugins_$prefix_plugin*/";
 													
-													$contenu_modifie_pipes = str_replace ($contenu_nom, $contenu_nom.$contenu_nom_rep, $lire_fichier_pipes);
+													$lire_fichier_modifs = file_get_contents($fichier_pipelines);
+													$contenu_modifie_pipes = str_replace ($contenu_nom, $contenu_nom.$contenu_nom_rep, $lire_fichier_modifs);
 													ecrire_fichier(_DIR_TMP."charger_pipelines.php", $contenu_nom.$contenu_modifie_pipes);
 													
 													}
