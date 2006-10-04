@@ -96,7 +96,7 @@ function exec_index_tous_dist()
 		echo "<option value='$val'";
 		if ($val == $filtre)
 		  echo " selected='selected'";
-		echo ">" . _L($string) ."</option>\n";
+		echo ">" . $string ."</option>\n";
 	}
 	echo "</select>";
 	echo "<noscript><div>";
