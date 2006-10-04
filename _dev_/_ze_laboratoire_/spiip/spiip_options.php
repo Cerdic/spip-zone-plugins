@@ -73,6 +73,6 @@ function generer_url_ecrire_ajax($script, $args="", $no_entities=false) {
 	
 if (!_DIR_RESTREINT)
 	// le dossier squelette doit etre defini relativement a la racine
-	$GLOBALS['dossier_squelettes'] .= ":".substr(_DIR_PLUGINS_SPIIP,strlen(_DIR_RACINE)).'dist_back';
+	$GLOBALS['dossier_squelettes'] .= ":".substr(_DIR_PLUGIN_SPIIP,strlen(_DIR_RACINE)).'dist_back';
 
 ?>

@@ -365,12 +365,13 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 //
 // http://doc.spip.org/@bandeau_titre_boite2
 function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $echo = true) {
-	global $spip_lang_left, $spip_display;
+	global $spip_lang_left, $spip_display, $browser_name;
 	
 	$retour = '';
 
 	if (strlen($logo) > 0 AND $spip_display != 1 AND $spip_display != 4) {
-		$retour .= "<div style='position: relative;'>";
+		$ie_style = ($browser_name == "MSIE") ?	"height:1%" : '';
+    $retour .= "<div style='position: relative;$ie_style'>";
 		$retour .= "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>" .
 		  http_img_pack("$logo", "", "") . "</div>";
 		$retour .= "<div style='background-color: $fond; color: $texte; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>$titre</b></div>";
@@ -423,10 +424,6 @@ function afficher_plus($lien) {
 	global $options, $spip_lang_right, $spip_display, $browser_name;
 	
 	if ($options == "avancees" AND $spip_display != 4) {
-		if ($browser_name == "MSIE") 
-			return "<a href='$lien'>" .
-			  http_img_pack("plus.gif", "+", ""). "</a> ";
-		else
 			return "<div style='float:$spip_lang_right; padding-top: 2px;'><a href='$lien'>" .
 			  http_img_pack("plus.gif", "+", "") ."</a></div>";
 	}
@@ -519,7 +516,7 @@ function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $url='', $nb_a
 					. $tmp_var
 					. '\');"';
 					*/
-					$ajax="class=\"ajax\" id=\"$url:$tmp_var:$deb--$tmp_var\" ";
+					$ajax="class=\"ajax\" id=\"$url:$tmp_var:".($deb-1)."--$tmp_var\" ";
 				}
 				$texte .= "<a {$ajax}href=\"$script#a$ancre\">$deb</a>";
 			}
@@ -774,7 +771,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$langue_defaut = $GLOBALS['meta']['langue_site'];
 	// Preciser la requete (alleger les requetes)
 	if (!isset($requete['SELECT'])) {
-		$requete['SELECT'] = "articles.id_article, articles.titre, articles.id_rubrique, articles.statut, articles.date";
+		$requete['SELECT'] = "articles.id_article, articles.titre, articles.id_rubrique, articles.statut, articles.date, articles.lang";
 
 		if (($GLOBALS['meta']['multi_rubriques'] == 'oui' AND (!isset($GLOBALS['id_rubrique']))) OR $GLOBALS['meta']['multi_articles'] == 'oui') {
 			$afficher_langue = true;
@@ -828,7 +825,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	}
 
-	if (!$deb_aff) {
+	if (!_request("var_ajaxcharset")) {
 
 			if ($afficher_trad) echo "<div id='$div_trad'>";
 			echo "<div style='height: 12px;'></div>";
@@ -884,7 +881,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	echo afficher_liste_fin_tableau();
 	echo "</div>";
 		
-	if (!$deb_aff) {
+	if (!_request("var_ajaxcharset")) {
 			echo "</div>";
 			if ($afficher_trad) echo "</div>";
 			
@@ -949,9 +946,12 @@ function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_
 
 	if ($voir_logo) {
 		$logo_f = charger_fonction('chercher_logo', 'inc');
-		if ($logo = $logo_f($id_article, 'id_article', 'on'))
-			if ($logo = decrire_logo("id_article", 'on', $id_article, 26, 20, $logo))
-				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
+		if ($logo = $logo_f($id_article, 'id_article', 'on')) {
+			list($fid, $dir, $nom, $format) = $logo;
+			$logo = ratio_image($fid, $nom, $format, 26, 20, "alt=''");
+			if ($logo)
+      				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
+    }  			
 	}
 
 	$s .= typo($titre);
@@ -1195,7 +1195,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 
 		if (isset($GLOBALS['langue_rubrique'])) $langue_defaut = $GLOBALS['langue_rubrique'];
 		else $langue_defaut = $GLOBALS['meta']['langue_site'];
-	}
+	} else $afficher_langue = $langue_defaut = '';
 
 
 	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
@@ -1239,9 +1239,12 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 
 	if ($voir_logo) {
 		$logo_f = charger_fonction('chercher_logo', 'inc');
-		if ($logo = $logo_f($id_breve, 'id_breve', 'on'))
-		  if ($logo = decrire_logo("id_breve", 'on', $id_breve, 26, 20, $logo))
-				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
+		if ($logo = $logo_f($id_breve, 'id_breve', 'on')) {
+			list($fid, $dir, $nom, $format) = $logo;
+			$logo = ratio_image($fid, $nom, $format, 26, 20, "alt=''");
+			if ($logo)
+      				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
+    }  	
 	}
 
 	$s .= typo($titre);
@@ -1496,7 +1499,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	$date_heure=$row['date_heure'];
 	$titre=$row['titre'];
 	$texte=$row['texte'];
-	$auteur=$row['auteur'];
+	$auteur=extraire_multi($row['auteur']);
 	$email_auteur=$row['email_auteur'];
 	$nom_site=$row['nom_site'];
 	$url_site=$row['url_site'];
@@ -1513,9 +1516,12 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 		$titre_boite = '';
 		if ($id_auteur AND $voir_logo) {
 			$logo_f = charger_fonction('chercher_logo', 'inc');
-			if ($logo = $logo_f($id_auteur, 'id_auteur', 'on'))
-				if ($logo = decrire_logo("id_auteur", 'on', $id_auteur, 48, 48, $logo))
-					$titre_boite = "<div style='$voir_logo'>$logo</div>" ;
+			if ($logo = $logo_f($id_auteur, 'id_auteur', 'on')) {
+				list($fid, $dir, $nom, $format) = $logo;
+				$logo = ratio_image($fid, $nom, $format, 48, 48, "alt=''");
+				if ($logo)
+        	$titre_boite = "<div style='$voir_logo'>$logo</div>" ;
+      }
 		} 
 
 		$titre_boite .= typo($titre);
@@ -1650,8 +1656,9 @@ function envoi_link($nom_site_spip, $rubrique="") {
 		$GLOBALS['spip_lang_left'];
 
 	// CSS de secours en cas de non fonct de la suivante
-	$res = '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
-	. 'style_prive_defaut.css" >'  . "\n"
+	$res = '<link rel="stylesheet" type="text/css" href="'
+	. find_in_path('style_prive_defaut.css')
+  . '" >'  . "\n"
 	
 	// CSS espace prive : la vraie
 	. '<link rel="stylesheet" type="text/css" href="'
@@ -1662,15 +1669,16 @@ function envoi_link($nom_site_spip, $rubrique="") {
 	. find_in_path('agenda.css') .'" >' . "\n"
 
 	// CSS imprimante (masque des trucs, a completer)
-	. '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
-	. 'spip_style_print.css" media="print" >' . "\n"
+	. '<link rel="stylesheet" type="text/css" href="'
+	. find_in_path('spip_style_print.css')
+  . '" media="print" >' . "\n"
 
 	// CSS "visible au chargement" differente selon js actif ou non
-	. '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
-	. 'spip_style_'
-	. (($_COOKIE['spip_accepte_ajax'] != -1) ? 'invisible' : 'visible')
-	. '.css" >' . "\n"
-
+	. '<link rel="stylesheet" type="text/css" href="'
+	. find_in_path('spip_style_'
+	   . (($_COOKIE['spip_accepte_ajax'] != -1) ? 'invisible' : 'visible')
+	   . '.css')
+  . ' " > ' . "\n"
 	// favicon.ico
 	. '<link rel="shortcut icon" href="'
 	. url_absolue(find_in_path('favicon.ico'))
@@ -1710,13 +1718,13 @@ function debut_javascript($admin, $stat)
 	// On envoie un script ajah ; si le script reussit le cookie passera a +1
 	// on installe egalement un <noscript></noscript> qui charge une image qui
 	// pose un cookie valant -1
-	if ($_COOKIE['spip_accepte_ajax'] < 1) {
-		$tester_javascript = "if (a = createXmlHttp()) {
-	a.open('GET', '" . generer_url_ecrire('test_ajax', 'js=1', "&") .
+	$tester_javascript =  ($_COOKIE['spip_accepte_ajax'] >= 1) ? '' : (
+ "if (a = createXmlHttp()) {
+  	a.open('GET', '" . generer_url_ecrire('test_ajax', 'js=1', "&") .
 		  "', true) ;
 	a.send(null);
-}";
-	}
+}");
+	
 	if ($_COOKIE['spip_accepte_ajax'] != -1) {
 		define('_TESTER_NOSCRIPT',
 			"<noscript><div style='display:none;'><img src='".generer_url_ecrire('test_ajax', 'js=-1')."' width='1' height='1' alt='' /></div></noscript>\n"); // pour le pied de page
@@ -2064,8 +2072,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 		$retour = "<li><a $lien>$texte</a></li>";
 	}
 
-	if ($echo) echo $retour;
-	return $retour;
+	if ($echo) echo $retour; else	return $retour;
 }
 
 function png2gif($im,$format) {
@@ -2121,7 +2128,7 @@ function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accuei
 	
 	include_spip('public/assembler');
 
-	echo recuperer_fond('debut_page',array(
+	echo recuperer_fond('dist_back/debut_page',array(
 		"titre" => _T('titre_page_index'),
 		"rubrique" => "accueil",
 		"sous_rubrique" => "accueil",
@@ -2151,10 +2158,6 @@ function init_entete($titre, $rubrique, $css='',$onLoad = '') {
 	// envoi des en-tetes, du doctype et du <head><title...
 	include_spip('inc/headers');
 	http_no_cache();
-	echo _DOCTYPE_ECRIRE
-		. "<html lang='".$GLOBALS['spip_lang']."' dir='"
-		. ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')
-		. "'>\n<head>\n";
 	
 	//calculate a variable to inject in styles and script
 	if ($spip_ecran == "large") $largeur = 974;
@@ -2172,8 +2175,7 @@ function init_entete($titre, $rubrique, $css='',$onLoad = '') {
 		."<script type='text/javascript'>".($browser_verifForm?"var browser_verifForm = true;":"")
 		."$(document).ready(function(){ $browser_verifForm$onLoad });var largeur_icone = $largeur_icone_bandeau_principal; </script>\n"
 		."<style type='text/css'>.boutons_admin {width:{$largeur_icone_bandeau_principal}px}</style>\n";
-	echo pipeline('header_prive', $head)
-		. "</head>\n";
+	echo _DOCTYPE_ECRIRE, html_lang_attributes(), "<head>\n",pipeline('header_prive', $head), "</head>\n";
 }
 
 // fonction envoyant la double serie d'icones de redac
@@ -2336,20 +2338,20 @@ function gros_titre($titre, $ze_logo='', $aff=true){
 //
 
 // http://doc.spip.org/@debut_grand_cadre
-function debut_grand_cadre(){
+function debut_grand_cadre($return=false){
 	global $spip_ecran;
 	
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
-	echo "\n<br><br><table width='$largeur' cellpadding='0' cellspacing='0' border='0'>";
-	echo "\n<tr>";
-	echo "<td width='$largeur' class='serif'>";
+	$res =  "\n<br /><br /><table width='$largeur' cellpadding='0' cellspacing='0' border='0'>\n<tr><td width='$largeur' class='serif'>";
+	if ($return) return $res; else echo $res;
 
 }
 
 // http://doc.spip.org/@fin_grand_cadre
-function fin_grand_cadre(){
-	echo "\n</td></tr></table>";
+function fin_grand_cadre($return=false){
+	$res = "\n</td></tr></table>";
+	if ($return) return $res; else echo $res;
 }
 
 // Cadre formulaires
@@ -2373,7 +2375,7 @@ function fin_cadre_formulaire(){
 //
 
 // http://doc.spip.org/@debut_gauche
-function debut_gauche($rubrique = "accueil") {
+function debut_gauche($rubrique = "accueil", $return=false) {
 	global $connect_statut;
 	global $options, $spip_display;
 	global $connect_id_auteur;
@@ -2402,12 +2404,14 @@ function debut_gauche($rubrique = "accueil") {
 		$rspan = '';
 	}
 
-	echo "<br /><table width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
+	$res = "<br /><table width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
 		<tr><td width='$largeur' class='colonne_etroite serif' valign='top' $rspan>
 		<div style='width: ${largeur}px; overflow:hidden;'>
 \n";
 		
-	if ($spip_display == 4) echo "<!-- ";
+	if ($spip_display == 4) $res .= "<!-- ";
+
+	if ($return) return $res; else echo $res;
 
 }
 
@@ -2417,91 +2421,72 @@ function debut_gauche($rubrique = "accueil") {
 //
 
 // http://doc.spip.org/@creer_colonne_droite
-function creer_colonne_droite($rubrique=""){
+function creer_colonne_droite($rubrique="", $return=false){
 	global $deja_colonne_droite;
 	global $flag_3_colonnes, $flag_centre_large;
 	global $spip_lang_rtl, $spip_lang_left;
 
-	if ($flag_3_colonnes AND !$deja_colonne_droite) {
-		$deja_colonne_droite = true;
+	if (!$flag_3_colonnes OR $deja_colonne_droite) return '';
+	$deja_colonne_droite = true;
 
-		if ($flag_centre_large) {
+	if ($flag_centre_large) {
 			$espacement = 17;
 			$largeur = 140;
-		}
-		else {
+	} else {
+
 			$espacement = 37;
 			$largeur = 200;
-		}
-
-
-		echo "<td width=$espacement rowspan=2 class='colonne_etroite'>&nbsp;</td>";
-		echo "<td rowspan=1 class='colonne_etroite'></td>";
-		echo "<td width=$espacement rowspan=2 class='colonne_etroite'>&nbsp;</td>";
-		echo "<td width=$largeur rowspan=2 align='$spip_lang_left' valign='top' class='colonne_etroite'><p />";
-
 	}
+
+
+	$res = "<td width='"
+	.  $espacement
+	.  "' rowspan='2' class='colonne_etroite'>&nbsp;</td>"
+	. "<td rowspan='1' class='colonne_etroite'></td>"
+	. "<td width='"
+	.  $espacement
+	.  "'rowspan=2 class='colonne_etroite'>&nbsp;</td>"
+	. "<td width='"
+	. $largeur 
+	. "' rowspan=2 align='"
+	. $spip_lang_left
+	. "' valign='top' class='colonne_etroite'><p />";
+
+	if ($return) return $res; else echo $res;
 
 }
 
 // http://doc.spip.org/@debut_droite
-function debut_droite($rubrique="") {
+function debut_droite($rubrique="", $return=false) {
 	global $options, $spip_ecran, $deja_colonne_droite, $spip_display;
-	global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques;
-	global $flag_3_colonnes, $flag_centre_large, $couleur_foncee, $couleur_claire;
-	global $spip_lang_left;
+	global $spip_lang_left, $couleur_foncee, $couleur_claire;
+	global $flag_3_colonnes, $flag_centre_large;
 
-	if ($spip_display == 4) echo " -->";
 
-	echo "</div>\n"; # largeur fixe, cf. debut_gauche
+	$res = '';
+
+	if ($spip_display == 4) $res .= " -->";
+
+	$res .= "</div>\n"; # largeur fixe, cf. debut_gauche
 
 	if ($options == "avancees") {
-		// liste des articles bloques
-		if ($GLOBALS['meta']["articles_modif"] != "non") {
-			include_spip('inc/drapeau_edition');
-			$articles_ouverts = liste_drapeau_edition ($connect_id_auteur, 'article');
-			if (count($articles_ouverts)) {
 
+		$res .= liste_articles_bloques();
+		if (!$deja_colonne_droite) 
+		  $res .= creer_colonne_droite($rubrique, true);
 
-
-		//	$vos_articles = spip_query("SELECT id_article, id_rubrique, titre, statut FROM spip_articles WHERE statut='prop' ORDER BY date DESC LIMIT 5");
-		//	if (spip_num_rows($vos_articles) > 0) {
-				echo "<div>&nbsp;</div>";
-				echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
-				echo bandeau_titre_boite2(_T('info_cours_edition'), "article-24.gif", $couleur_foncee, 'white', false);
-				echo "<div class='plan-articles-bloques'>";
-
-
-				foreach ($articles_ouverts as $row) {
-					$ze_article = $row['id_article'];
-					$ze_titre = $row['titre'];
-					$statut = $row["statut"];
-					
-					echo "<div class='$statut'><a style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$ze_article") . "'>$ze_titre</a>";
-
-					$nb_liberer ++;
-					echo "<div style='text-align:right; font-size: 9px;'>", debloquer_article($ze_article,_T('lien_liberer')), "</div>";
-
-					echo "</div>";
-
-				}
-				echo "</div></div>";
-			}
-		}
-		
-		if (!$deja_colonne_droite) creer_colonne_droite($rubrique);
 	}
 
-	echo "<div>&nbsp;</div></td>";
+	$res .= "<div>&nbsp;</div></td>";
 
 	if (!$flag_3_colonnes) {
-		echo "<td width='50'>&nbsp;</td>";
+		$res .= "<td width='50'>&nbsp;</td>";
 	}
 	else {
 		if (!$deja_colonne_droite) {
-			creer_colonne_droite($rubrique);
+			$res .= creer_colonne_droite($rubrique, true);
 		}
-		echo "</td></tr><tr>";
+		$res .= "</td></tr><tr>";
 	}
 
 	if ($spip_ecran == 'large' AND $flag_centre_large)
@@ -2509,13 +2494,48 @@ function debut_droite($rubrique="") {
 	else
 		$largeur = 500;
 
-	echo '<td width="'.$largeur.'" valign="top" align="'.$spip_lang_left.'" rowspan="1" class="serif">';
+	$res .= '<td width="'.$largeur.'" valign="top" align="'.$spip_lang_left.'" rowspan="1" class="serif">';
 
 	// touche d'acces rapide au debut du contenu
-	echo "\n<a name='saut' href='#saut' accesskey='s'></a>\n";
+	$res .= "\n<a name='saut' href='#saut' accesskey='s'></a>\n";
+
+	if ($return) return $res; else echo $res;
 }
 
+function liste_articles_bloques()
+{
+	global $connect_id_auteur, $couleur_foncee;
 
+	$res = '';
+	if ($GLOBALS['meta']["articles_modif"] != "non") {
+		include_spip('inc/drapeau_edition');
+		$articles_ouverts = liste_drapeau_edition ($connect_id_auteur, 'article');
+		if (count($articles_ouverts)) {
+			$res .= "<div>&nbsp;</div>"
+			. "<div class='bandeau_rubriques' style='z-index: 1;'>"
+			. bandeau_titre_boite2(_T('info_cours_edition'), "article-24.gif", $couleur_foncee, 'white', false)
+			. "<div class='plan-articles-bloques'>";
+
+			foreach ($articles_ouverts as $row) {
+				$ze_article = $row['id_article'];
+				$ze_titre = $row['titre'];
+				$statut = $row["statut"];
+					
+				$res .= "<div class='$statut'><a style='font-size: 10px;' href='" 
+				. generer_url_ecrire("articles","id_article=$ze_article")
+				. "'>$ze_titre</a>"
+				. "<div style='text-align:right; font-size: 9px;'>"
+				. debloquer_article($ze_article,_T('lien_liberer'))
+				. "</div>"
+				. "</div>";
+			}
+			$res .= "</div></div>";
+		}
+	}
+	return $res;
+}
+	
+///// 
 //
 // Presentation de l'interface privee, fin de page et flush()
 //
@@ -2574,48 +2594,83 @@ function debloquer_article($arg, $texte) {
 	  "</a>";
 }
 
+function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
+{
+	global $spip_lang_right, $spip_lang_left, $options;
+
+	$table = $type . 's';
+	$key = 'id_' . $type;
+
+	$voss = spip_query("SELECT $key AS id, titre, statut FROM spip_$table WHERE id_rubrique=$id_rubrique AND (statut = 'publie' OR statut = 'prop') AND ($key != $id) ORDER BY $order DESC LIMIT $limit");
+
+	if (!spip_num_rows($voss)) return '';
+
+	$numero = ($options != "avancees") ?'':_T('info_numero_abbreviation');
+	$style = "float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;";
+	$retour = '';
+
+	while($row = spip_fetch_array($voss)) {
+		$ze = $row['id'];
+		$retour .= "<a class='"
+		. $row['statut']
+		. "' style='font-size: 10px;' href='"
+		  . generer_url_ecrire($table,"$key=$ze")
+		. "'>"
+		. (($options !== "avancees") ? '' :
+		     "<div class='arial1' style='$style'><b>$numero$ze</b></div>")
+		. typo($row['titre'])
+		. "</a>";
+	}
+
+	return "<div>&nbsp;</div>"
+	. "<div class='bandeau_rubriques' style='z-index: 1;'>"
+	. bandeau_titre_boite2(_T('info_meme_rubrique'), "article-24.gif",'','',false)
+	. "<div class='plan-articles'>"
+	. $retour
+	. "</div></div>";
+}
+
 //
 // Afficher la hierarchie des rubriques
 //
 
 // http://doc.spip.org/@afficher_hierarchie
-function afficher_hierarchie($id_rubrique, $parents="") {
+function afficher_hierarchie($id_rubrique) {
 	global $spip_lang_left;
 
-	if ($id_rubrique) {
-		$result = spip_query("SELECT id_rubrique, id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
+	$parents = '';
+	$style1 = "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px";
+	$style2 = "margin-$spip_lang_left: 15px;";
 
-		while ($row = spip_fetch_array($result)) {
-			$id_rubrique = $row['id_rubrique'];
-			$id_parent = $row['id_parent'];
-			$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
-			changer_typo($row['lang']);
+	while ($id_rubrique) {
 
-			if (acces_restreint_rubrique($id_rubrique))
-				$logo = "admin-12.gif";
-			if (!$id_parent)
-				$logo = "secteur-12.gif";
-			else
-				$logo = "rubrique-12.gif";
+		$res = spip_fetch_array(spip_query("SELECT id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 
+		if (!$res) break; // rubrique inexistante
 
-			$parents = "<div class='verdana3' ". 
-			  http_style_background($logo, "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px"). 
-			  "><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>".typo($titre)."</a></div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
+		$id_parent = $res['id_parent'];
+		changer_typo($res['lang']);
 
+		$logo = (!$id_parent) ? "secteur-12.gif"
+		: (acces_restreint_rubrique($id_rubrique)
+		? "admin-12.gif" : "rubrique-12.gif");
 
-		}
-		afficher_hierarchie($id_parent, $parents);
+		$parents = "<div class='verdana3' "
+		. http_style_background($logo, $style1)
+		. "><a href='"
+		. generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")
+		. "'>"
+		. typo(sinon($res['titre'], _T('ecrire:info_sans_titre')))
+		. "</a></div>\n<div style='$style2'>"
+		. $parents
+		. "</div>";
+
+		$id_rubrique = $id_parent;
 	}
-	else {
-		$logo = "racine-site-12.gif";
-		$parents = "<div class='verdana3' " .
-		  http_style_background($logo, "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px"). 
-		  "><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'><b>"._T('lien_racine_site')."</b></a>".aide ("rubhier")."</div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
-	
-		echo $parents;
-		
-	}
+
+	return "<div class='verdana3' " .
+		  http_style_background("racine-site-12.gif", $style1). 
+		  "><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'><b>"._T('lien_racine_site')."</b></a>".aide ("rubhier")."</div>\n<div style='$style2'>".$parents."</div>";
 }
 
 // Pour construire des menu avec SELECTED
@@ -2629,7 +2684,7 @@ function mySel($varaut,$variable, $option = NULL) {
 
 // Voir en ligne, ou apercu, ou rien (renvoie tout le bloc)
 // http://doc.spip.org/@voir_en_ligne
-function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
+function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $echo = true) {
 	global $connect_statut;
 
 	$en_ligne = $message = '';
@@ -2676,7 +2731,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 	}
 
 	if ($message)
-		icone_horizontale($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif");
+		return icone_horizontale($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif", $echo);
 
 }
 
@@ -2717,7 +2772,7 @@ function bouton_spip_rss($op, $args, $fmt='rss') {
 	return "<a href='"
 	. $url
 	. "'>"
-	. http_img_pack('feed.png', $button, '')
+	. http_img_pack('feed.png', $button, 'RSS','RSS')
 	. "</a>";
 }
 
