@@ -123,6 +123,7 @@ EOF;
 	global $couleur_foncee;
 	echo "<table border='0' cellspacing='0' cellpadding='5' width='100%'>";
 	
+	## Si on n'a pas clique sur une categorie.
 	if (_request('famille') == "") {
 		echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
 		echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
@@ -202,6 +203,7 @@ EOF;
 		echo "</ul>";
 	}
 	
+	## Si on a pas clique sur une categorie et si si on a clique sur valider.
 	else if (_request('famille')!='' && _request('Valider')!='Valider') {
 				echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
 		echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
@@ -306,6 +308,7 @@ EOF;
 				
 	}
 	
+	## Sinon.
 	else {
 		echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
 		echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
@@ -379,127 +382,41 @@ EOF;
 								}
 							}
 							
-							
+							$pleug_actif = array();
 							$lire_meta_plugin = isset($GLOBALS['meta']['plugin'])?$GLOBALS['meta']['plugin']:'';
 							$plugin_actif = ereg($filo, $lire_meta_plugin, $pleug_actif);
 							
+							## 
 							if ($filo != $plugin[0] && isset($pleug_actif[0])) {
-									$effacer_plug = str_replace ($filo, '', $lire_meta_plugin);
-									ecrire_meta('plugin',$effacer_plug);
-									ecrire_metas();
-									
-										$fichier_options = _DIR_TMP."charger_plugins_options.php";
-										$lire_fichier = file_get_contents($fichier_options);
-										$plugin_deja_active = eregi($prefix_plugin, $lire_fichier, $plugin_present);
-										
-										if (isset($plugin_present[0])){
-											$options_persos = eregi_replace('\/\*debut_rangement_plugins_'.$prefix_plugin.'(.*)fin_rangement_plugins_'.$prefix_plugin.'\*\/', '', $lire_fichier);
-											ecrire_fichier(_DIR_TMP."charger_plugins_options.php", $options_persos);
-										}
-										
-										$fichier_fonctions = _DIR_TMP."charger_plugins_fonctions.php";
-										$lire_fichier_fonctions = file_get_contents($fichier_fonctions);
-										$plugin_deja_active_fonctions = eregi($prefix_plugin, $lire_fichier_fonctions, $plugin_present_fonctions);
-										
-										if (isset($plugin_present_fonctions[0])){
-											$options_persos_fonctions = eregi_replace('\/\*debut_rangement_plugins_'.$prefix_plugin.'(.*)fin_rangement_plugins_'.$prefix_plugin.'\*\/', '', $lire_fichier_fonctions);
-											ecrire_fichier(_DIR_TMP."charger_plugins_fonctions.php", $options_persos_fonctions);
-										}
-										
-										$fichier_pipelines = _DIR_TMP."charger_pipelines.php";
-										$lire_fichier_pipelines = file_get_contents($fichier_pipelines);
-										$plugin_deja_active_pipelines = eregi($prefix_plugin, $lire_fichier_pipelines, $plugin_present_pipelines);
-										
-										if (isset($plugin_present_pipelines[0])){
-											$options_persos_pipelines = eregi_replace('\/\*debut_rangement_plugins_'.$prefix_plugin.'(.*)fin_rangement_plugins_'.$prefix_plugin.'\*\/', '', $lire_fichier_ipelines);
-											ecrire_fichier(_DIR_TMP."charger_pipelines.php", $options_persos_pipelines);
-										}
+								$plugin = array();
+								$plugin = $pleug_actif;
+								$operation='enleve';
+								ecrire_plugin_actifs($plugin=$pleug_actif,'',$operation='enleve');
+								
+								$effacer_plug = str_replace ($filo, '', $lire_meta_plugin);
+								ecrire_meta('plugin',$effacer_plug);
+								ecrire_metas();
 							}
 							
 							else if ($plugin[0] != "") {
-								$pleug_actif="";
+								$pleug_actif = array();
 								$lire_meta_plugin ="";
 								$plugin_actif="";
 								$lire_meta_plugin = isset($GLOBALS['meta']['plugin'])?$GLOBALS['meta']['plugin']:'';
 								$plugin_actif = ereg($plugin[0], $lire_meta_plugin, $pleug_actif);
 
 	  								if (!isset($pleug_actif[0])) {
-										ecrire_meta('plugin',$lire_meta_plugin.','.$plugin[0]);
+		  								
+		  								$plugin_choisi = $plugin[0];
+										$operation='ajoute';
+										ecrire_plugin_actifs($plugin=$plugin_choisi,'',$operation='ajoute');
+
+										ecrire_meta('plugin',$lire_meta_plugin.','.$plugin_choisi);
 										ecrire_metas();
-											
-										$fichier_options = _DIR_TMP."charger_plugins_options.php";
-										$lire_fichier = file_get_contents($fichier_options);
-										$plugin_deja_active = eregi($prefix_plugin, $lire_fichier, $plugin_present);
-										
-										if (!isset($plugin_present[0])){
-											$prefix = strtoupper($prefix_plugin);
-											$splugs .= "/*debut_rangement_plugins_$prefix_plugin*/";
-											$splugs .= '$GLOBALS[\'plugins\'][]=\''.$prefix_plugin.'\';';
-											$splugs .= "define(_DIR_PLUGINS_$prefix,_DIR_PLUGINS.'$plugin[0]/');";
-												if ($options_plugin){
-												$splugs .= "\n@include_once _DIR_PLUGINS.'$plugin[0]/".trim($options_plugin)."';\n";
-												}
-											$splugs .= "/*fin_rangement_plugins_$prefix_plugin*/";
-											$splugs .= "\n\n?>";
-											$contenu_modifie = str_replace ('?>', $splugs, $lire_fichier);
-											ecrire_fichier(_DIR_TMP."charger_plugins_options.php", $contenu_modifie);
-											
-											# Inserer donnees dans charger_pipelines_fonctions.php
-											if (isset($fonctions_plugin)){
-												$fichier_fonctions = _DIR_TMP."charger_plugins_fonctions.php";
-												$lire_fichier_fonctions = file_get_contents($fichier_fonctions);
-												$plugin_deja_active_fonctions = eregi($prefix_plugin, $lire_fichier_fonctions, $plugin_present_fonctions);
-												$splugsfct .= "/*debut_rangement_plugins_$prefix_plugin*/";
-												$splugsfct .= "\n@include_once _DIR_PLUGINS.'$plugin[0]/".trim($fonctions_plugin)."';\n";
-												$splugsfct .= "/*fin_rangement_plugins_$prefix_plugin*/";
-												$splugsfct .= "\n\n?>";
-												
-												if (!isset($plugin_present_fonctions[0])) {
-													$contenu_modifie_fonctions = str_replace ('?>', $splugsfct, $lire_fichier_fonctions);
-													ecrire_fichier(_DIR_TMP."charger_plugins_fonctions.php", $contenu_modifie_fonctions);
-												}
-											
-											}
-										}
-										# Inserer donnes dans charger_pipelines.php.
-										$pipes_plug = array($pipeline_plugin);
-										if (is_array($pipes_plug)){
-											$fichier_pipelines = _DIR_TMP."charger_pipelines.php";
-											$lire_fichier_pipes = file_get_contents($fichier_pipelines);
-											$plugin_deja_active_pipe = eregi($prefix_plugin, $lire_fichier_pipes, $pipelines_presentes);
-											if (!isset($pipelines_presentes[0])) {
-												if (is_array($arbre['pipeline'])){
-													foreach($arbre['pipeline'] as $pipe){
-													$nom = trim(end($pipe['nom']));
-													$action = trim(end($pipe['action']));
-													$inclure = trim(end($pipe['inclure']));
-													
-													$contenu_nom = "";
-													$contenu_nom = "function execute_pipeline_".$nom."(\$val){";
-													$contenu_nom_rep = "";
-													$contenu_nom_rep .= "\n/*debut_rangement_plugins_$prefix_plugin*/";
-													$contenu_nom_rep .= "\n@include_once (_DIR_PLUGINS.'$plugin[0]/".$inclure."');\n";
-														if (isset($action)) {
-															$contenu_nom_rep .= "\$val = minipipe('".$prefix_plugin."_".$action."', \$val);\n";
-														}
-														else {
-															$contenu_nom_rep .= "\$val = minipipe('".$prefix_plugin."_".$nom."', \$val);\n";
-														}
-													$contenu_nom_rep .= "/*fin_rangement_plugins_$prefix_plugin*/";
-													
-													$lire_fichier_modifs = file_get_contents($fichier_pipelines);
-													$contenu_modifie_pipes = str_replace ($contenu_nom, $contenu_nom.$contenu_nom_rep, $lire_fichier_modifs);
-													ecrire_fichier(_DIR_TMP."charger_pipelines.php", $contenu_modifie_pipes);
-													
-													}
-												}
-											}
-										}
 									}
-								}
 							}
-							return $liste_fichier_verif
-				}
+						}
+					}
 				
 		
 					if (isset($etat_plugin))
