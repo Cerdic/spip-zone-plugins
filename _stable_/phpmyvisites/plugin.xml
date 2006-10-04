@@ -19,6 +19,7 @@ _ &copy; 2006 - GPL
 	<prefix> 
 	phpmv
 	</prefix>
+	<options>phpmv_options.php</options>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
@@ -27,6 +28,10 @@ _ &copy; 2006 - GPL
 	<pipeline>
 		<nom>affichage_final</nom>
 		<action>affichage_final</action>
+		<inclure>phpmv_options.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_body</nom>
 		<inclure>phpmv_fonctions.php</inclure>
 	</pipeline>
 </plugin>
