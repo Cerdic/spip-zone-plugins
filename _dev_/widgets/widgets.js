@@ -17,18 +17,17 @@ $.setupwidget = function(){
          $(me)
          .unclick()
          .html(c)
-         .width(w) // no luck!
-         .height(h)
          .find('form')
            .ajaxForm(function(c){
              $(me)
              .html(c.responseText)
              .click($.setupwidget); // recursif
            })
-           .find("input[@type='text']")
+           .find("textarea")
              .css('backgroundColor', 'yellow')
              .css('font', 'inherit') // pour safari
-             .each(function(){
+             .css({"width":"100%","height":"100%"}) // no luck!
+         		 .each(function(){
                this.focus();
                $(this).css({
                  'fontSize': $(me).css('fontSize'),

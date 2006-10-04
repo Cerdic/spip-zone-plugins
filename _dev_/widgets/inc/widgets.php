@@ -75,10 +75,10 @@ class Widget {
 		switch ($type) {
 			case 'ligne':
 			default:
-				return '<input type="text" width="80"'
-				. ' name="content_'.$this->key.'" value="'
-				. htmlspecialchars($this->text)   # entites_html
-				. '" />'."\n";
+				return '<textarea width="80"'
+				. ' name="content_'.$this->key.'">'
+				. $this->text   # entites_html
+				. '</textarea>'."\n";
 		}
 	}
 }
