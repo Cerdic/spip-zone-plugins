@@ -481,7 +481,8 @@ function exec_portfolio(){
 
 			global $couleur_claire;
 			$f = 'afficher_portfolio';
-			if (!function_exists($f)) $f='formulaire_documenter';
+			//if (!function_exists($f)) $f='formulaire_documenter';
+			if (!function_exists($f)) $f=charger_fonction('documenter', 'inc');
 			$ret = $f(
 				$documents,	# liste des documents, avec toutes les donnees
 				"article",	# article ou rubrique ?
@@ -491,7 +492,7 @@ function exec_portfolio(){
 			);
 
 			echo "</table>";
-			if ($f == 'formulaire_documenter') echo $ret; // spip>=1.9.2
+			if ($f != 'afficher_portfolio') echo $ret; // spip>=1.9.2
 
 			echo "<a name='bas'>";
 			echo "<table width='100%' border='0'>";
