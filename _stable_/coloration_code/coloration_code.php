@@ -21,41 +21,22 @@
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 define('_DIR_PLUGIN_COLORATION_CODE',(_DIR_PLUGINS.end($p)));
 
-function coloration_code_color($code, $language='php', $cadre="cadre") {
+function coloration_code_color($language, $code, $cadre='cadre') {
   
-  include_once(_DIR_PLUGIN_COLORATION_CODE.'/geshi/geshi.php');
-  //
-  // Create a GeSHi object
-  //
-  $geshi =& new GeSHi($code, $language);
-
-  if($cadre=="cadre") {
-	  $geshi->set_header_type(GESHI_HEADER_DIV);
-	  $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
-  } else {
-	  $geshi->set_header_type(GESHI_HEADER_NONE);
-	  $geshi->enable_line_numbers(GESHI_NO_LINE_NUMBERS);
-  }
-
-  //
-  // And echo the result!
-  //
-  return $geshi->parse_code();
-
-}
-
-function coloration_code_echappe($texte) {
+	include_once _DIR_PLUGIN_COLORATION_CODE . '/geshi/geshi.php';
+	//
+	// Create a GeSHi object
+	//
+	$geshi = & new GeSHi($code, $language);
+	if ($geshi->error()) {
+		return false;
+	}
 	global $spip_lang_right;
-  $rempl ='';
 
-  if (preg_match_all(
-		 ',<(cadre|code)[[:space:]]+class=("|\')(.*)\2([^>]*)>(.*)</\1>,Uims',
-		 $texte, $matches, PREG_SET_ORDER))
-	foreach ($matches as $regs) {
-	  $code = echappe_retour($regs[5]);
-	  
-	  if(strpos($code, "\n")!==false) {
-	  // Gerer le fichier contenant le code au format texte
+	$code = echappe_retour($code);
+
+	if (strpos($code, "\n") !== false) {
+		// Gerer le fichier contenant le code au format texte
 		$nom_fichier = md5($code);
 		$dossier = sous_repertoire(_DIR_IMG, 'cache-code');
 		$fichier = "$dossier$nom_fichier.txt";
@@ -65,17 +46,46 @@ function coloration_code_echappe($texte) {
 			fwrite($handle, $code);
 			fclose($handle);
 		}
-	  }
-	 
-	  $rempl = coloration_code_color(trim($code),$regs[3], $regs[1]);
-	 if(strpos($code, "\n")!==false) {
-	 	$rempl .= "<div class='".$regs[1]."_download' style='text-align: $spip_lang_right;'><a href='$fichier' style='font-family: verdana, arial, sans; font-weight: bold; font-style: normal;'>".
-	  		propre("<multi>Download[fr]T&eacute;l&eacute;charger</multi>").
-	  		"</a></div>";
-	  }
-	  $texte = str_replace($regs[0],echappe_html("<html>$rempl</html>"),$texte);
 	}
-  return $texte;
+
+	if ($cadre == 'cadre') {
+	  $geshi->set_header_type(GESHI_HEADER_DIV);
+	  $geshi->enable_line_numbers(GESHI_NORMAL_LINE_NUMBERS);
+	} else {
+	  $geshi->set_header_type(GESHI_HEADER_NONE);
+	  $geshi->enable_line_numbers(GESHI_NO_LINE_NUMBERS);
+	}
+
+	//
+	// And echo the result!
+	//
+	$rempl = $geshi->parse_code();
+
+	if (strpos($code, "\n") !== false) {
+		$rempl .= "<div class='" . $cadre . "_download'
+		style='text-align: $spip_lang_right;'>
+		<a href='$fichier'
+		style='font-family: verdana, arial, sans; font-weight: bold; font-style: normal;'>" .
+			propre("<multi>Download[fr]T&eacute;l&eacute;charger</multi>") .
+				"</a></div>";
+	}
+	return $rempl;
 }
 
-?>
+function cadre_ou_code($regs) {
+	$ret = false;
+// pour l'instant, on oublie $matches[1] et $matches[4] les attributs autour de class="machin"
+	if (!preg_match(',^(.*)class=("|\')(.*)\2(.*)$,Uims',$regs[2], $matches)
+	|| !($ret = coloration_code_color($matches[3], $regs[3], $regs[1]))) {
+		$ret = traiter_echap_code_dist($regs);
+	}
+	return $ret;
+}
+
+function traiter_echap_code($regs) {
+	return cadre_ou_code($regs);
+}
+
+function traiter_echap_cadre($regs) {
+	return cadre_ou_code($regs);
+}

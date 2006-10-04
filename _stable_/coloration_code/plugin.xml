@@ -61,18 +61,10 @@
 ]]>
 	  </multi>
 	</description>
-    <fonctions> <!-- charge a chaque recalul de page , donc filtre -->
+    <fonctions> <!-- charge a chaque recalul de page , donc filtre et surrimpression de traiter_echap_code_dist-->
         coloration_code.php
     </fonctions>
 	<prefix> 
 	  coloration_code
 	</prefix>
-	<!--
-Lors de pre typo , on va passer le texte a travers de coloration_code_echappe() (prefix+action)
-	-->
-	<pipeline>
-		<nom>pre_typo</nom>
-		<action>echappe</action>
-		<inclure>coloration_code.php</inclure>
-	</pipeline>
 </plugin>
