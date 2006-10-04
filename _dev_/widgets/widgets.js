@@ -1,8 +1,24 @@
 
 url_widgets_html = 'spip.php?action=widgets_html&class=';
 
+$.cancelwidgets = function(e){
+  $(".widget").each(function(){
+    var html = $(this).attr('orig_html');
+    if (html != '<>')
+      $(this).html(html);
+  }).attr('orig_html', '<>');
+}
+
 $.setupwidget = function(e){
     var me = this;
+    e.stopPropagation(); // avoid sending a global click to the body onclick
+
+    // si je suis en mode "widget"
+    if ($(me).attr('orig_html') == '<>') {
+      $(me).attr('orig_html', $(me).html());
+    } else {
+      return;
+    }
 
     // reglages de taille mini/maxi; pas tres beau
     var w,h;
@@ -15,15 +31,13 @@ $.setupwidget = function(e){
     // charger le formulaire
     $.get(url_widgets_html+encodeURIComponent(this.className),
        function (c) {
-         var me_orig = $(me).html();
          $(me)
-         .unclick()
          .html(c)
          .find('form')
            .ajaxForm(function(c){
              $(me)
              .html(c.responseText)
-             .click($.setupwidget); // recursif
+             .attr('orig_html','<>');
            })
            .find(".widget-active")
              .css('backgroundColor', 'yellow')
@@ -36,15 +50,17 @@ $.setupwidget = function(e){
              .each(function(){this.focus();})
              .keypress(function(e){
                if (e.keyCode == 27) {
-                 $(me).html(me_orig).click($.setupwidget);
+                 $(me)
+                 .html($(me).attr('orig_html'))
+                 .attr('orig_html','<>');
                }
              })
            .end()
            .find(".cancel_widget")
              .click(function(){
                $(me)
-               .html(me_orig) //restore original html
-               .click($.setupwidget);
+               .html($(me).attr('orig_html')); //restore original html
+               $(me).attr('orig_html', '<>');
                return false;
              })
            .end()
@@ -55,6 +71,10 @@ $.setupwidget = function(e){
   }
 
 $(function() {
-  $(".widget").click($.setupwidget);
+  $(".widget")
+  .attr('orig_html', '<>')
+  .click($.setupwidget);
+  $("body")
+  .click($.cancelwidgets);
 });
 
