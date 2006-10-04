@@ -22,7 +22,7 @@ $.setupwidget = function(){
              .html(c.responseText)
              .click($.setupwidget); // recursif
            })
-           .find("textarea")
+           .find("textarea,input[@type='text']")
              .css('backgroundColor', 'yellow')
              .css('font', 'inherit') // pour safari
              .css({"width":w,"height":h})
