@@ -8,9 +8,8 @@ $.setupwidget = function(){
 
     // Ce bloc ne fonctionne pas :(
     var w,h;
-    w = $(me).width();
-    h = $(me).height();
-
+    w = $(me).width()+'px';
+    h = $(me).height()+'px';
     // charger le formulaire
     $.get(url_widgets_html+encodeURIComponent(this.className),
        function (c) {
@@ -26,14 +25,12 @@ $.setupwidget = function(){
            .find("textarea")
              .css('backgroundColor', 'yellow')
              .css('font', 'inherit') // pour safari
-             .css({"width":"100%","height":"100%"}) // no luck!
-         		 .each(function(){
-               this.focus();
-               $(this).css({
-                 'fontSize': $(me).css('fontSize'),
-                 'fontFamily': $(me).css('fontFamily')
-               });
+             .css({"width":w,"height":h})
+             .css({
+               'fontSize': $(me).css('fontSize'),
+               'fontFamily': $(me).css('fontFamily')
              })
+             .each(function(){this.focus();})
            .end()
          .end()
          ;
