@@ -29,6 +29,9 @@ function exec_liens_tous(){
 	if (_request('raz')!==NULL){
 		checklink_reconstruit_table();
 	}
+	if (_request('update')!==NULL){
+		checklink_reconstruit_table(false);
+	}
 	
 	$contexte = array();
 	if (_request('statut')) $contexte['statut'] = _request('statut');

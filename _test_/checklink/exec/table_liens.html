@@ -4,22 +4,26 @@
 #SET{sus,'puce-orange.gif'}
 #SET{off,'puce-poubelle.gif'}
 <p>
-[(#ENV{statut,''}|?{' ',''})<a href='[(#SELF|parametre_url{statut,''})]'>Tous les liens</a><br/>]
+<div style='float:right'>
+#SET{urlbase,#SELF|parametre_url{raz,''}|parametre_url{debut_liens,''}|parametre_url{update,''}}
+[(#ENV{statut,''}|?{' ',''})<a href='[(#GET{urlbase}|parametre_url{statut,''})]'>Tous les liens</a><br/>]
 <BOUCLE_averif(LIENS){statut=ind}></BOUCLE_averif>
-<img src='img_pack/[(#GET{ind})]' alt="Statut ind" /> #TOTAL_BOUCLE [(#ENV{statut,''}|=={ind}|?{'',' '})<a href='[(#SELF|parametre_url{statut,ind})]'>]liens a verifier[(#ENV{statut,''}|=={ind}|?{'',' '})</a>]<br/>
+<img src='#EVAL{_DIR_IMG_PACK}[(#GET{ind})]' alt="Statut ind" /> #TOTAL_BOUCLE [(#ENV{statut,''}|=={ind}|?{'',' '})<a href='[(#GET{urlbase}|parametre_url{statut,ind})]'>]liens a verifier[(#ENV{statut,''}|=={ind}|?{'',' '})</a>]<br/>
 <//B_averif>
 <BOUCLE_ok(LIENS){statut=oui}></BOUCLE_ok>
-<img src='img_pack/[(#GET{oui})]' alt="Statut oui" /> #TOTAL_BOUCLE [(#ENV{statut,''}|=={oui}|?{'',' '})<a href='[(#SELF|parametre_url{statut,oui})]'>]liens corrects[(#ENV{statut,''}|=={oui}|?{'',' '})</a>]<br/>
+<img src='#EVAL{_DIR_IMG_PACK}[(#GET{oui})]' alt="Statut oui" /> #TOTAL_BOUCLE [(#ENV{statut,''}|=={oui}|?{'',' '})<a href='[(#GET{urlbase}|parametre_url{statut,oui})]'>]liens corrects[(#ENV{statut,''}|=={oui}|?{'',' '})</a>]<br/>
 <//B_ok>
 <BOUCLE_sus(LIENS){statut=sus}></BOUCLE_sus>
-<img src='img_pack/[(#GET{sus})]' alt="Statut sus" /> #TOTAL_BOUCLE [(#ENV{statut,''}|=={sus}|?{'',' '})<a href='[(#SELF|parametre_url{statut,sus})]'>]liens suspendus[(#ENV{statut,''}|=={sus}|?{'',' '})</a>]<br/>
+<img src='#EVAL{_DIR_IMG_PACK}[(#GET{sus})]' alt="Statut sus" /> #TOTAL_BOUCLE [(#ENV{statut,''}|=={sus}|?{'',' '})<a href='[(#GET{urlbase}|parametre_url{statut,sus})]'>]liens suspendus[(#ENV{statut,''}|=={sus}|?{'',' '})</a>]<br/>
 <//B_sus>
 <BOUCLE_off(LIENS){statut=off}></BOUCLE_off>
-<img src='img_pack/[(#GET{off})]' alt="Statut off" /> #TOTAL_BOUCLE [(#ENV{statut,''}|=={off}|?{'',' '})<a href='[(#SELF|parametre_url{statut,off})]'>]liens invalides[(#ENV{statut,''}|=={off}|?{'',' '})</a>]<br/>
+<img src='#EVAL{_DIR_IMG_PACK}[(#GET{off})]' alt="Statut off" /> #TOTAL_BOUCLE [(#ENV{statut,''}|=={off}|?{'',' '})<a href='[(#GET{urlbase}|parametre_url{statut,off})]'>]liens invalides[(#ENV{statut,''}|=={off}|?{'',' '})</a>]<br/>
 <//B_off>
+</div>
+<a href='[(#GET{urlbase}|parametre_url{update,'oui'}|parametre_url{statut,''})]'>Forcer une mise &agrave; jour</a><br/>
 </p>
 <B_liens>
-<div class='liste'><div style='position: relative;'><div style='position: absolute; top: -12px; left: 3px;'><img src='#EVAL{_DIR_PLUGIN_CHECKLINK}/img_pack/checklink-24.png'
+<div class='liste' style='clear:both;'><div style='position: relative;'><div style='position: absolute; top: -12px; left: 3px;'><img src='#EVAL{_DIR_PLUGIN_CHECKLINK}/img_pack/checklink-24.png'
 alt="checklink-24"  /></div><div style='background-color: #C5E41C; color: black; padding: 3px; padding-left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>Les sites r&eacute;f&eacute;renc&eacute;s</b></div></div><table width='100%' cellpadding='2' cellspacing='0' border='0'>
 <tr style='background-color: #dddddd;'>
 <td class="arial1" style='border-bottom: 1px solid #444444;' colspan="5">
@@ -28,11 +32,11 @@ alt="checklink-24"  /></div><div style='background-color: #C5E41C; color: black;
 </tr>
 <BOUCLE_liens(LIENS){statut?}{pagination 20}>
 <tr class='tr_liste'>
-<td class="arial11"><img src='img_pack/[(#GET{#STATUT})]' alt="Statut #STATUT" /></td>
+<td class="arial11"><img src='#EVAL{_DIR_IMG_PACK}[(#GET{#STATUT})]' alt="Statut #STATUT" /></td>
 <td class="arial11">[<a href='(#ID_TABLE|url_visu_objet{#ID_OBJET})'>][(#URL|lignes_longues{60})][</a>(#ID_TABLE|url_visu_objet{#ID_OBJET}|?{' '})]</td>
 <td class="arial11">[(#LANG*)]</td>
 <td class="arial11">[<a href='#URL' title="[(#TITRE|texte_backend)]"><:lien_visite_site:></a>]</td>
-<td class="arial11">[<a href='[(#SELF|parametre_url{verifier,#ID_LIEN})]' title="[(#TITRE|texte_backend)]"><:lien_mise_a_jour_syndication:></a>]</td>
+<td class="arial11">[<a href='[(#GET{urlbase}|parametre_url{verifier,#ID_LIEN})]' title="[(#TITRE|texte_backend)]"><:lien_mise_a_jour_syndication:></a>]</td>
 </tr>
 </BOUCLE_liens>
 </table>

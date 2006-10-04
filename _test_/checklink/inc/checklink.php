@@ -148,7 +148,7 @@ function checklink_extrait_liens($id_table,$id_objet,$texte){
 }
 
 // vider et reconstruire toute la table a partir des contenus
-function checklink_reconstruit_table(){
+function checklink_reconstruit_table($erase=true){
 	global $INDEX_elements_objet;
 	$agregation_defaut = array(
 		'titre'=>true,'soustitre'=>true,'surtitre'=>true,'descriptif'=>true,'chapo'=>true,'texte'=>true,'ps'=>true,'nom_site'=>true,'extra|unserialize_join'=>true,
@@ -161,7 +161,8 @@ function checklink_reconstruit_table(){
 	$liste_tables = liste_index_tables();
 	
 	// vider la table spip_liens
-	spip_query("DELETE FROM spip_liens");
+	if ($erase)
+		spip_query("DELETE FROM spip_liens");
 	
 	// parcourir les tables et les champs
 	foreach($liste_tables as $table){
