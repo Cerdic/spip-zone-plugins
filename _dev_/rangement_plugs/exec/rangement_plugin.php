@@ -112,7 +112,13 @@ EOF;
 	
 	debut_gauche();
 	debut_boite_info();
-	echo "<a href='".generer_url_ecrire('rangement_plugin')."'><strong>Accueil</strong></a>";
+	
+	echo "<table cellpadding='0' cellspacing='0' border='0' align='center'>";
+	echo "</tr><td><div style='position: relative;'>";
+	echo "<div onmouseover='changeclass(this, 'onglet_on');' onmouseout='changeclass(this, 'onglet');' ";
+	echo "class='onglet' style='position: relative; top: 7px;'>";
+		
+	echo "<a href='".generer_url_ecrire('rangement_plugin')."'><strong>Accueil</strong></a></div></div></td></tr></table>";
 	barre_onglets("plugins", "");
 	fin_boite_info();
 
@@ -188,11 +194,11 @@ EOF;
 					}
 				
 				debut_boite_info();
+				echo "<div style='background-color:$couleur_claire'>";
 				echo "<input type='checkbox' name='statusplug_$plugins_actives' value='O' checked='checked'>";
-				echo "<strong>".$nom_plugin."</strong>(version ".$version_plugin.")<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
-				echo "<br /><hr>";
-				echo "<small>".propre($description_plugin)."</small><br /><hr>";
-				echo propre($auteur_plugin)."<br /><hr>";
+				echo "<strong>".$nom_plugin."</strong>(version ".$version_plugin.")<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+				echo "<small>".propre($description_plugin)."</small><br /><br /><hr>";
+				echo "<div class='auteur'>".propre($auteur_plugin)."</div><hr>";
 				echo "<img src='"._DIR_PLUGIN_RANGEMENT_PLUGS."/../img_pack/".$etat.".png' />";
 				echo "&nbsp;<small><strong><font COLOR='#".$couleur_txt."'>".$titre_etat."</font></strong></small><br />";
 				fin_boite_info();
@@ -207,7 +213,9 @@ EOF;
 	else if (_request('famille')!='' && _request('Valider')!='Valider') {
 				echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
 		echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
-		echo _T('rangement:plugins_liste_famille')."</font></b></td></tr>";
+		$famille_plugs = ucfirst(str_replace('_', ' ', _request('famille')));
+		echo _T('rangement:plugins_liste_famille').'&#171;<i>'.$famille_plugs.'</i>&#187;';
+		echo "</font></b></td></tr>";
 	
 		echo "<tr><td class='serif' colspan=4>";
 		echo _T('rangement:texte_presente_plugin_famille');
@@ -294,11 +302,11 @@ EOF;
 					}
 				
 				debut_boite_info();
+				echo "<div style='background-color:$couleur_claire'>";
 				echo "<input type='checkbox' name='statusplug_$dossier_plugin'$checked>";
-				echo "<strong>".$nom_plugin."</strong>(version ".$version_plugin.")<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
-				echo "<br /><hr>";
-				echo "<small>".propre($description_plugin)."</small><br /><hr>";
-				echo propre($auteur_plugin)."<br /><hr>";
+				echo "<strong>".$nom_plugin."</strong>(version ".$version_plugin.")<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+				echo "<small>".propre($description_plugin)."</small><br /><br /><hr>";
+				echo "<div class='auteur'>".propre($auteur_plugin)."</div><hr>";
 				echo "<img src='"._DIR_PLUGIN_RANGEMENT_PLUGS."/../img_pack/".$etat.".png' />";
 				echo "&nbsp;<small><strong><font COLOR='#".$couleur_txt."'>".$titre_etat."</font></strong></small><br />";
 				fin_boite_info();
@@ -452,11 +460,11 @@ EOF;
 					}
 				
 				debut_boite_info();
+				echo "<div style='background-color:$couleur_claire'>";
 				echo "<input type='checkbox' name='statusplug_$dossier_plugin'$checked>";
-				echo "<strong>".$nom_plugin."</strong>(version ".$version_plugin.")<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
-				echo "<br /><hr>";
-				echo "<small>".propre($description_plugin)."</small><br /><hr>";
-				echo propre($auteur_plugin)."<br /><hr>";
+				echo "<strong>".$nom_plugin."</strong>(version ".$version_plugin.")<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+				echo "<small>".propre($description_plugin)."</small><br /><br /><hr>";
+				echo "<div class='auteur'>".propre($auteur_plugin)."</div><hr>";
 				echo "<img src='"._DIR_PLUGIN_RANGEMENT_PLUGS."/../img_pack/".$etat.".png' />";
 				echo "&nbsp;<small><strong><font COLOR='#".$couleur_txt."'>".$titre_etat."</font></strong></small><br />";
 				fin_boite_info();

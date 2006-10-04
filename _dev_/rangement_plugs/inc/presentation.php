@@ -357,12 +357,13 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 //
 // http://doc.spip.org/@bandeau_titre_boite2
 function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $echo = true) {
-	global $spip_lang_left, $spip_display;
+	global $spip_lang_left, $spip_display, $browser_name;
 	
 	$retour = '';
 
 	if (strlen($logo) > 0 AND $spip_display != 1 AND $spip_display != 4) {
-		$retour .= "<div style='position: relative;'>";
+		$ie_style = ($browser_name == "MSIE") ? "height:1%" : '';
+		$retour .= "<div style='position: relative;$ie_style'>";
 		$retour .= "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>" .
 		  http_img_pack("$logo", "", "") . "</div>";
 		$retour .= "<div style='background-color: $fond; color: $texte; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>$titre</b></div>";
@@ -412,13 +413,9 @@ function fin_raccourcis() {
 
 // http://doc.spip.org/@afficher_plus
 function afficher_plus($lien) {
-	global $options, $spip_lang_right, $spip_display, $browser_name;
+	global $options, $spip_lang_right, $spip_display;
 	
 	if ($options == "avancees" AND $spip_display != 4) {
-		if ($browser_name == "MSIE") 
-			return "<a href='$lien'>" .
-			  http_img_pack("plus.gif", "+", ""). "</a> ";
-		else
 			return "<div style='float:$spip_lang_right; padding-top: 2px;'><a href='$lien'>" .
 			  http_img_pack("plus.gif", "+", "") ."</a></div>";
 	}
@@ -506,7 +503,7 @@ function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $url='', $nb_a
 				. "&"
 				. $tmp_var
 				. '='
-				. $deb
+				. ($deb-1)
 				. "','"
 				. $tmp_var
 				. '\');"';
@@ -765,7 +762,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$langue_defaut = $GLOBALS['meta']['langue_site'];
 	// Preciser la requete (alleger les requetes)
 	if (!isset($requete['SELECT'])) {
-		$requete['SELECT'] = "articles.id_article, articles.titre, articles.id_rubrique, articles.statut, articles.date";
+		$requete['SELECT'] = "articles.id_article, articles.titre, articles.id_rubrique, articles.statut, articles.date, articles.lang";
 
 		if (($GLOBALS['meta']['multi_rubriques'] == 'oui' AND (!isset($GLOBALS['id_rubrique']))) OR $GLOBALS['meta']['multi_articles'] == 'oui') {
 			$afficher_langue = true;
@@ -819,7 +816,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	} else 	$tranches = '';
 
-	if (!$deb_aff) {
+	if (!_request("var_ajaxcharset")) {
 
 			if ($afficher_trad) echo "<div id='$div_trad'>";
 			echo "<div style='height: 12px;'></div>";
@@ -830,7 +827,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			if ($afficher_trad) {
 				$texte_img .= http_img_pack("searching.gif", "*", "style='visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
-				$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax_trad"). "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-12.gif' /></a></div>";
+				$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"#\" onclick=\"return charger_id_url('" . generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax_trad"). "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-12.gif' /></a></div>";
 			}
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -875,7 +872,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	echo afficher_liste_fin_tableau();
 	echo "</div>";
 		
-	if (!$deb_aff) {
+	if (!_request("var_ajaxcharset")) {
 			echo "</div>";
 			if ($afficher_trad) echo "</div>";
 			
@@ -941,9 +938,12 @@ function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_
 
 	if ($voir_logo) {
 		$logo_f = charger_fonction('chercher_logo', 'inc');
-		if ($logo = $logo_f($id_article, 'id_article', 'on'))
-			if ($logo = decrire_logo("id_article", 'on', $id_article, 26, 20, $logo))
+		if ($logo = $logo_f($id_article, 'id_article', 'on')) {
+			list($fid, $dir, $nom, $format) = $logo;
+			$logo = ratio_image($fid, $nom, $format, 26, 20, "alt=''");
+			if ($logo)
 				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
+		}
 	}
 
 	$s .= typo($titre);
@@ -1054,7 +1054,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			
 			$texte_img .= http_img_pack("searching.gif", "*", "style='visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
 
-			$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax_trad") . "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-off-12.gif' /></a></div>";
+			$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"#\" onclick=\"return charger_id_url('" . generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax_trad") . "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-off-12.gif' /></a></div>";
 
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -1187,7 +1187,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 
 		if (isset($GLOBALS['langue_rubrique'])) $langue_defaut = $GLOBALS['langue_rubrique'];
 		else $langue_defaut = $GLOBALS['meta']['langue_site'];
-	}
+	} else $afficher_langue = $langue_defaut = '';
 
 
 	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
@@ -1231,9 +1231,12 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 
 	if ($voir_logo) {
 		$logo_f = charger_fonction('chercher_logo', 'inc');
-		if ($logo = $logo_f($id_breve, 'id_breve', 'on'))
-		  if ($logo = decrire_logo("id_breve", 'on', $id_breve, 26, 20, $logo))
+		if ($logo = $logo_f($id_breve, 'id_breve', 'on')) {
+			list($fid, $dir, $nom, $format) = $logo;
+			$logo = ratio_image($fid, $nom, $format, 26, 20, "alt=''");
+			if ($logo)
 				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
+		}
 	}
 
 	$s .= typo($titre);
@@ -1489,7 +1492,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	$date_heure=$row['date_heure'];
 	$titre=$row['titre'];
 	$texte=$row['texte'];
-	$auteur=$row['auteur'];
+	$auteur= extraire_multi($row['auteur']);
 	$email_auteur=$row['email_auteur'];
 	$nom_site=$row['nom_site'];
 	$url_site=$row['url_site'];
@@ -1506,9 +1509,12 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 		$titre_boite = '';
 		if ($id_auteur AND $voir_logo) {
 			$logo_f = charger_fonction('chercher_logo', 'inc');
-			if ($logo = $logo_f($id_auteur, 'id_auteur', 'on'))
-				if ($logo = decrire_logo("id_auteur", 'on', $id_auteur, 48, 48, $logo))
+			if ($logo = $logo_f($id_auteur, 'id_auteur', 'on')) {
+				list($fid, $dir, $nom, $format) = $logo;
+				$logo = ratio_image($fid, $nom, $format, 48, 48, "alt=''");
+				if ($logo)
 					$titre_boite = "<div style='$voir_logo'>$logo</div>" ;
+			}
 		} 
 
 		$titre_boite .= typo($titre);
@@ -1643,8 +1649,9 @@ function envoi_link($nom_site_spip, $rubrique="") {
 		$GLOBALS['spip_lang_left'];
 
 	// CSS de secours en cas de non fonct de la suivante
-	$res = '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
-	. 'style_prive_defaut.css" >'  . "\n"
+	$res = '<link rel="stylesheet" type="text/css" href="'
+	. find_in_path('style_prive_defaut.css')
+	. '" >'  . "\n"
 	
 	// CSS espace prive : la vraie
 	. '<link rel="stylesheet" type="text/css" href="'
@@ -1655,14 +1662,16 @@ function envoi_link($nom_site_spip, $rubrique="") {
 	. find_in_path('agenda.css') .'" >' . "\n"
 
 	// CSS imprimante (masque des trucs, a completer)
-	. '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
-	. 'spip_style_print.css" media="print" >' . "\n"
+	. '<link rel="stylesheet" type="text/css" href="'
+	. find_in_path('spip_style_print.css')
+	. '" media="print" >' . "\n"
 
 	// CSS "visible au chargement" differente selon js actif ou non
-	. '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
-	. 'spip_style_'
-	. (($_COOKIE['spip_accepte_ajax'] != -1) ? 'invisible' : 'visible')
-	. '.css" >' . "\n"
+	. '<link rel="stylesheet" type="text/css" href="'
+	. find_in_path('spip_style_'
+		. (($_COOKIE['spip_accepte_ajax'] != -1) ? 'invisible' : 'visible')
+		. '.css')
+	.' " >' . "\n"
 
 	// favicon.ico
 	. '<link rel="shortcut icon" href="'
@@ -1703,13 +1712,13 @@ function debut_javascript($admin, $stat)
 	// On envoie un script ajah ; si le script reussit le cookie passera a +1
 	// on installe egalement un <noscript></noscript> qui charge une image qui
 	// pose un cookie valant -1
-	if ($_COOKIE['spip_accepte_ajax'] < 1) {
-		$tester_javascript = "if (a = createXmlHttp()) {
+	$tester_javascript =  ($_COOKIE['spip_accepte_ajax'] >= 1) ? '' : (
+ "if (a = createXmlHttp()) {
 	a.open('GET', '" . generer_url_ecrire('test_ajax', 'js=1', '&') .
 		  "', true) ;
 	a.send(null);
-}";
-	}
+}");
+
 	if ($_COOKIE['spip_accepte_ajax'] != -1) {
 		define('_TESTER_NOSCRIPT',
 			"<noscript><div style='display:none;'><img src='".generer_url_ecrire('test_ajax', 'js=-1')."' width='1' height='1' alt='' /></div></noscript>\n"); // pour le pied de page
@@ -1733,7 +1742,7 @@ function debut_javascript($admin, $stat)
 			"\nvar confirm_changer_statut = '" .
 			unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))) . 
 			"';\n") .
-		http_script('',_DIR_JAVASCRIPT . '/presentation.js');
+		http_script('',_DIR_JAVASCRIPT . 'presentation.js');
 }
 
 // Fonctions onglets
@@ -1753,7 +1762,6 @@ function debut_onglet(){
 	if (_request('exec')!='rangement_plugin'){
 		echo "<tr>";
 	}
-	
 }
 
 // http://doc.spip.org/@fin_onglet
@@ -1768,7 +1776,7 @@ function fin_onglet(){
 function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	global $spip_display, $spip_lang_left ;
 
-	if (_request('exec')=='rangement_plugin'){
+if (_request('exec')=='rangement_plugin'){
 		echo "</tr>";
 	}
 	echo "<td>";
@@ -2062,8 +2070,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 		$retour = "<li><a$lien>$texte</a></li>";
 	}
 
-	if ($echo) echo $retour;
-	return $retour;
+	if ($echo) echo $retour; else return $retour;
 }
 
 
@@ -2087,7 +2094,7 @@ function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") 
 // http://doc.spip.org/@debut_page
 function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $onLoad = "", $css="", $id_rubrique = "") {
 
-	utiliser_langue_visiteur();
+  //	utiliser_langue_visiteur(); fait dans index a present
 	init_entete($titre, $rubrique, $css);
 	definir_barre_boutons();
 	init_body($rubrique, $sous_rubrique, $onLoad, $id_rubrique);
@@ -2103,10 +2110,7 @@ function init_entete($titre, $rubrique, $css='') {
 	// envoi des en-tetes, du doctype et du <head><title...
 	include_spip('inc/headers');
 	http_no_cache();
-	$head = _DOCTYPE_ECRIRE
-		. "<html lang='".$GLOBALS['spip_lang']."' dir='"
-		. ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')
-		. "'>\n<head>\n<title>["
+	$head = "<title>["
 		. $nom_site_spip
 		. "] " . textebrut(typo($titre)) . "</title>\n"
 		. "<meta http-equiv='Content-Type' content='text/html"
@@ -2118,9 +2122,8 @@ function init_entete($titre, $rubrique, $css='') {
 			'<link rel="stylesheet" href="' . entites_html($css)
 			. '" type="text/css" />'. "\n"
 		) ) ."\n";
-
-	echo pipeline('header_prive', $head)
-		. "</head>\n";
+	
+	echo _DOCTYPE_ECRIRE, html_lang_attributes(), "<head>\n",pipeline('header_prive', $head), "</head>\n";
 }
 
 // fonction envoyant la double serie d'icones de redac
@@ -2470,20 +2473,19 @@ function gros_titre($titre, $ze_logo='', $aff=true){
 //
 
 // http://doc.spip.org/@debut_grand_cadre
-function debut_grand_cadre(){
+function debut_grand_cadre($return=false){
 	global $spip_ecran;
 	
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
-	echo "\n<br><br><table width='$largeur' cellpadding='0' cellspacing='0' border='0'>";
-	echo "\n<tr>";
-	echo "<td width='$largeur' class='serif'>";
-
+	$res =  "\n<br /><br /><table width='$largeur' cellpadding='0' cellspacing='0' border='0'>\n<tr><td width='$largeur' class='serif'>";
+	if ($return) return $res; else echo $res;
 }
 
 // http://doc.spip.org/@fin_grand_cadre
-function fin_grand_cadre(){
-	echo "\n</td></tr></table>";
+function fin_grand_cadre($return=false){
+	$res = "\n</td></tr></table>";
+	if ($return) return $res; else echo $res;
 }
 
 // Cadre formulaires
@@ -2713,43 +2715,42 @@ function debloquer_article($arg, $texte) {
 //
 
 // http://doc.spip.org/@afficher_hierarchie
-function afficher_hierarchie($id_rubrique, $parents="") {
+function afficher_hierarchie($id_rubrique) {
 	global $spip_lang_left;
 
-	if ($id_rubrique) {
-		$result = spip_query("SELECT id_rubrique, id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
+	$parents = '';
+	$style1 = "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px";
+	$style2 = "margin-$spip_lang_left: 15px;";
 
-		while ($row = spip_fetch_array($result)) {
-			$id_rubrique = $row['id_rubrique'];
-			$id_parent = $row['id_parent'];
-			$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
-			changer_typo($row['lang']);
+	while ($id_rubrique) {
 
-			if (acces_restreint_rubrique($id_rubrique))
-				$logo = "admin-12.gif";
-			if (!$id_parent)
-				$logo = "secteur-12.gif";
-			else
-				$logo = "rubrique-12.gif";
+		$res = spip_fetch_array(spip_query("SELECT id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 
+		if (!$res) break; // rubrique inexistante
 
-			$parents = "<div class='verdana3' ". 
-			  http_style_background($logo, "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px"). 
-			  "><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>".typo($titre)."</a></div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
+		$id_parent = $res['id_parent'];
+		changer_typo($res['lang']);
 
+		$logo = (!$id_parent) ? "secteur-12.gif"
+		: (acces_restreint_rubrique($id_rubrique)
+		? "admin-12.gif" : "rubrique-12.gif");
 
-		}
-		afficher_hierarchie($id_parent, $parents);
+		$parents = "<div class='verdana3' "
+		. http_style_background($logo, $style1)
+		. "><a href='"
+		. generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")
+		. "'>"
+		. typo(sinon($res['titre'], _T('ecrire:info_sans_titre')))
+		. "</a></div>\n<div style='$style2'>"
+		. $parents
+		. "</div>";
+
+		$id_rubrique = $id_parent;
 	}
-	else {
-		$logo = "racine-site-12.gif";
-		$parents = "<div class='verdana3' " .
-		  http_style_background($logo, "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px"). 
-		  "><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'><b>"._T('lien_racine_site')."</b></a>".aide ("rubhier")."</div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
-	
-		echo $parents;
-		
-	}
+
+	return "<div class='verdana3' " .
+		  http_style_background("racine-site-12.gif", $style1). 
+		  "><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'><b>"._T('lien_racine_site')."</b></a>".aide ("rubhier")."</div>\n<div style='$style2'>".$parents."</div>";
 }
 
 // Pour construire des menu avec SELECTED
@@ -2763,7 +2764,7 @@ function mySel($varaut,$variable, $option = NULL) {
 
 // Voir en ligne, ou apercu, ou rien (renvoie tout le bloc)
 // http://doc.spip.org/@voir_en_ligne
-function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
+function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $echo = true) {
 	global $connect_statut;
 
 	$en_ligne = $message = '';
@@ -2810,7 +2811,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 	}
 
 	if ($message)
-		icone_horizontale($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif");
+	  return icone_horizontale($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif", $echo);
 
 }
 
@@ -2851,7 +2852,7 @@ function bouton_spip_rss($op, $args, $fmt='rss') {
 	return "<a href='"
 	. $url
 	. "'>"
-	. http_img_pack('feed.png', $button, '')
+	. http_img_pack('feed.png', $button, 'RSS', 'RSS')
 	. "</a>";
 }
 

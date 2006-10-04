@@ -29,7 +29,7 @@ define('_DIR_PLUGIN_RANGEMENT_PLUGS',(_DIR_PLUGINS.end($p)));
 			if ($handle = opendir('../plugins')) {
     		while (false !== ($dossier_plugin = readdir($handle))) {
         		if ($dossier_plugin != "." && $dossier_plugin != "..") {
-	        		$flux['data'][$dossier_plugin] = new Bouton('', $dossier_plugin, generer_url_ecrire('rangement_plugin', 'famille='.$dossier_plugin));
+	        		$flux['data'][$dossier_plugin] = new Bouton('', ucfirst($dossier_plugin), generer_url_ecrire('rangement_plugin', 'famille='.$dossier_plugin));
         		}
     		}
     		closedir($handle);

@@ -4,16 +4,16 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Franck Ducas
-_ &copy; 2005-2006 - Distribu&eacute; sous licence GNU/GPL
+_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	</auteur>
 	<version>
-	0.5
+	1.0
 	</version>
 	<etat>
-	dev
+	test
 	</etat>
 	<description>
-	Classement des plugins par rubriques. Prefiguration de l'evolution du plugin habillage. Necessite une version SVN de SPIP 7521 minimum.
+	Classement des plugins par rubriques. Necessite une version SVN 7521 minimum.
 	</description>
 	<prefix> 
 	rangement_plugs
