@@ -1,8 +1,0 @@
-- Mettre verrou pour ne pas utiliser deux noms de thème identiques (?).
-- Fermer les fichiers ouverts.
-- Et pour les hébergeurs où le chmod n'est pas autorisé ? Mettre un avertissement et des bidouilles (changer le chmod si possible avant d'ecrire puis après)
-- Dans le gestionnaire de l'espace public, mettre un "aperçu" pour voir le squelette en situation sur le site public.
-- Insérer captures ecrans via un fichier thème à la racine des dossiers de thèmes.
-- Mise à jour graphique des thèmes.
-- Trouver un moyen de faire des captures d'écran homogène niveau graphique.
-- Voir pour ajouter des thèmes de couleurs (simple trippottage de habillages_options.php sur le même mode que la gestion des habillages publics).
