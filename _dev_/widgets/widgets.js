@@ -1,24 +1,27 @@
 
 url_widgets_html = 'spip.php?action=widgets_html&class=';
 
-$.cancelwidgets = function(e){
+$.cancelwidgets = function() {
   $(".widget").each(function(){
     var html = $(this).attr('orig_html');
-    if (html != '<>')
+    if (html != '<>') {
       $(this).html(html);
-  }).attr('orig_html', '<>');
+    }
+    $(this).attr('orig_html', '<>');
+  });
 }
 
-$.setupwidget = function(e){
-    var me = this;
-    e.stopPropagation(); // avoid sending a global click to the body onclick
+$.initallwidgets = function(e) {
+  $('.widget').each(function(){
+    $.initwidget(this);}
+  );
+  e.stopPropagation();
+}
 
-    // si je suis en mode "widget"
-    if ($(me).attr('orig_html') == '<>') {
-      $(me).attr('orig_html', $(me).html());
-    } else {
+$.initwidget = function(me) {
+    // voir si je suis en mode "widget"
+    if ($(me).attr('orig_html') != '<>')
       return;
-    }
 
     // reglages de taille mini/maxi; pas tres beau
     var w,h;
@@ -29,9 +32,10 @@ $.setupwidget = function(e){
     if (h<12) h=12;
 
     // charger le formulaire
-    $.get(url_widgets_html+encodeURIComponent(this.className),
+    $.get(url_widgets_html+encodeURIComponent(me.className),
        function (c) {
          $(me)
+         .attr('orig_html', $(me).html())
          .html(c)
          .find('form')
            .ajaxForm(function(c){
@@ -47,7 +51,7 @@ $.setupwidget = function(e){
                'fontSize': $(me).css('fontSize'),
                'fontFamily': $(me).css('fontFamily')
              })
-             .each(function(){this.focus();})
+             .each(function(n){if (n==0) this.focus();})
              .keypress(function(e){
                if (e.keyCode == 27) {
                  $(me)
@@ -59,8 +63,8 @@ $.setupwidget = function(e){
            .find(".cancel_widget")
              .click(function(){
                $(me)
-               .html($(me).attr('orig_html')); //restore original html
-               $(me).attr('orig_html', '<>');
+               .html($(me).attr('orig_html'))
+               .attr('orig_html', '<>');
                return false;
              })
            .end()
@@ -70,10 +74,15 @@ $.setupwidget = function(e){
      );
   }
 
+$.clickwidget = function(e){
+  e.stopPropagation(); // avoid sending a global click to the body onclick
+  $.initwidget(this);
+}
+
 $(function() {
   $(".widget")
   .attr('orig_html', '<>')
-  .click($.setupwidget);
+  .click($.clickwidget);
   $("body")
   .click($.cancelwidgets);
 });
