@@ -74,16 +74,16 @@ class Widget {
 	function input($type = 'ligne') {
 		switch ($type) {
 			case 'texte':
-				return '<textarea'
+				return '<textarea class="widget-active"'
 				. ' name="content_'.$this->key.'">'
-				. $this->text   # entites_html
+				. entites_html($this->text)
 				. '</textarea>'."\n";
 			case 'ligne':
 			default:
-				return '<input type="text"'
+				return '<input class="widget-active" type="text"'
 				. ' name="content_'.$this->key.'"'
 				. ' value="'
-				. entites_html($this->text)   # entites_html
+				. entites_html($this->text)
 				. '" />'."\n";
 		}
 	}

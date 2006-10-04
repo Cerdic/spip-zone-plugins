@@ -6,10 +6,16 @@ url_widgets_html = 'spip.php?action=widgets_html&class=';
 $.setupwidget = function(){
     var me = this;
 
-    // Ce bloc ne fonctionne pas :(
+    // reglages de taille mini/maxi; pas tres beau
     var w,h;
-    w = $(me).width()+'px';
-    h = $(me).height()+'px';
+    w = $(me).width();
+    if (w<100) w=100;
+    if (w>700) w=700;
+    w+='px';
+    h = $(me).height();
+    if (w<12) h=12;
+    h+='px';
+
     // charger le formulaire
     $.get(url_widgets_html+encodeURIComponent(this.className),
        function (c) {
@@ -22,7 +28,7 @@ $.setupwidget = function(){
              .html(c.responseText)
              .click($.setupwidget); // recursif
            })
-           .find("textarea,input[@type='text']")
+           .find(".widget-active")
              .css('backgroundColor', 'yellow')
              .css('font', 'inherit') // pour safari
              .css({"width":w,"height":h})
