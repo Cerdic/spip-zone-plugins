@@ -1,11 +1,9 @@
-// TODO: passer la valeur a afficher pour pouvoir faire CANCEL
-// en cliquant sur un bouton, ou hors de la div, ou en tapant ESC
 
 url_widgets_html = 'spip.php?action=widgets_html&class=';
 
-$.setupwidget = function(){
+$.setupwidget = function(e){
     var me = this;
-
+    var me_orig = me.innerHTML;
     // reglages de taille mini/maxi; pas tres beau
     var w,h;
     w = $(me).width()-50; // 50 = largeur du bouton "ok"
@@ -19,11 +17,13 @@ $.setupwidget = function(){
        function (c) {
          $(me)
          .unclick()
+         .click(function(e){e.stopPropagation();}) //avoid cancelling on click
          .html(c)
          .find('form')
            .ajaxForm(function(c){
              $(me)
              .html(c.responseText)
+             .unclick() //remove the trap to avoid cancel onclick
              .click($.setupwidget); // recursif
            })
            .find(".widget-active")
@@ -36,10 +36,28 @@ $.setupwidget = function(){
              })
              .each(function(){this.focus();})
            .end()
+           .find(".cancel_widget")
+          	 .click(cancel_widget)	
+           .end()
          .end()
          ;
+         $("html").keypress(exit_on_esc).click(cancel_widget);
        }
      );
+     
+    function cancel_widget() {
+      $(me).html(me_orig) //restore original html
+      .unclick() //remove the trap to avoid cancel onclick
+      .click($.setupwidget);
+      return false;
+    }
+    function exit_on_esc(e) {
+      if(e.keyCode==27) {
+        $("html").unkeypress(exit_on_esc);
+        return cancel_widget();
+      }
+    }
+    e.stopPropagation(); //do not cancel widgets when creating another one
   }
 
 $(function() {

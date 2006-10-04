@@ -55,7 +55,8 @@ function action_widgets_html_dist() {
 			$n = new SecureWidget($regs[0], $t['val']);
 			echo $n->code();
 			echo $n->input($type);
-			echo '<input type="submit" value="ok" />'."\n".'</form>'."\n";
+			echo '<input type="submit" value="ok" />'."\n";
+			echo '<input class="cancel_widget" type="button" value="cancel" />'."\n".'</form>'."\n";
 		}
 	}
 }
