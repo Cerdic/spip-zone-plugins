@@ -8,13 +8,11 @@ $.setupwidget = function(){
 
     // reglages de taille mini/maxi; pas tres beau
     var w,h;
-    w = $(me).width();
+    w = $(me).width()-50; // 50 = largeur du bouton "ok"
     if (w<100) w=100;
     if (w>700) w=700;
-    w+='px';
     h = $(me).height();
-    if (w<12) h=12;
-    h+='px';
+    if (h<12) h=12;
 
     // charger le formulaire
     $.get(url_widgets_html+encodeURIComponent(this.className),
@@ -31,7 +29,7 @@ $.setupwidget = function(){
            .find(".widget-active")
              .css('backgroundColor', 'yellow')
              .css('font', 'inherit') // pour safari
-             .css({"width":w,"height":h})
+             .css({"width":w+'px',"height":h+'px'})
              .css({
                'fontSize': $(me).css('fontSize'),
                'fontFamily': $(me).css('fontFamily')
