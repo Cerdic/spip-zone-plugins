@@ -23,6 +23,9 @@ function habillages_affichage_plugins($fichier_plugin_xml) {
 	echo "<div style='background-color:$couleur_claire'>";
 	echo "<input type='checkbox' name='statusplug_$dossier_plugin'$checked>";
 	echo "<strong>".$nom_plugin."</strong>(version ".$version_plugin.")<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+	# Laisser la possibilite de definir le nom et le chemin de la capure ecran
+	# dans theme.xml.
+	echo '<div style="float:right";><img src="'.dirname($fichier_plugin_xml).'/capture.png" alt="description" class="preview" /></div>';
 	echo "<small>".propre($description_plugin)."</small><br /><br /><hr>";
 	echo "<div class='auteur'>".propre($auteur_plugin)."</div><hr>";
 	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";
