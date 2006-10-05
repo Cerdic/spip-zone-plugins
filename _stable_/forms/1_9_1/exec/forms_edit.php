@@ -168,17 +168,6 @@ function forms_update(){
 	//
 	// Modifications des donnees de base du formulaire
 	//
-	if (Forms_form_administrable($id_form)) {
-		if ($supp_form = intval($supp_form) AND $supp_confirme AND !$supp_rejet) {
-			$query = "DELETE FROM spip_forms WHERE id_form=$supp_form";
-			$result = spip_query($query);
-			if ($retour) {
-				$retour = urldecode($retour);
-				Header("Location: $retour");
-				exit;
-			}
-		}
-	}
 	
 	$nouveau_champ = $champ_visible = NULL;
 
@@ -387,6 +376,18 @@ function exec_forms_edit(){
 	if ($retour) 
 		$form_link = parametre_url($form_link,"retour",urlencode($retour));
 
+	if (Forms_form_administrable($id_form)) {
+		if ($supp_form = intval($supp_form) AND $supp_confirme AND !$supp_rejet) {
+			$query = "DELETE FROM spip_forms WHERE id_form=$supp_form";
+			$result = spip_query($query);
+			if ($retour) {
+				$retour = urldecode($retour);
+				Header("Location: $retour");
+				exit;
+			}
+		}
+	}
+	
 	//
 	// Affichage de la page
 	//
