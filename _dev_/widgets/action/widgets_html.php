@@ -2,6 +2,21 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// fonction d'API manquante a SPIP...
+function autoriser_modifs($quoi = 'article', $id = 0) {
+	global $connect_id_auteur;
+	$connect_id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+
+	if ($quoi != 'article') {
+		echo "pas implemente";
+		return false;
+	}
+
+	include_spip('inc/auth');
+	auth_rubrique(); # definit $connect_toutes_rubriques (argh)
+	return acces_article($id);
+}
+
 function action_widgets_html_dist() {
 	include_spip('inc/widgets');
 	include_spip('inc/texte');
@@ -16,10 +31,12 @@ function action_widgets_html_dist() {
 		AND count($modifs) >= 1) { // normalement, un seul pour l'instant...
 			foreach($modifs as $m) {
 				if (preg_match(
-				',(article)-(titre|surtitre|soustitre|chapo)-(\d+),',
+				',(article)-(titre|surtitre|soustitre|descriptif|chapo|texte|ps)-(\d+),',
 				$m[0], $regs)) {
 					// Enregistrer dans la base
-					if ($m[2]) {
+					if ($m[2]
+					AND autoriser_modifs('article', $regs[3])
+					) {
 						include_spip('action/editer_article');
 						revisions_articles($regs[3], false,
 							array($regs[2] => $m[1]));
@@ -39,7 +56,7 @@ function action_widgets_html_dist() {
 
 	// sinon on affiche le formulaire demande
 	else if (preg_match(
-	',(article)-(titre|surtitre|soustitre|chapo)-(\d+),',
+	',(article)-(titre|surtitre|soustitre|descriptif|chapo|texte|ps)-(\d+),',
 	$_GET['class'], $regs)) {
 
 		// type du widget
