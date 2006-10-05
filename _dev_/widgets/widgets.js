@@ -23,14 +23,12 @@ $.initwidget = function(me) {
     if ($(me).attr('orig_html') != null)
       return;
 
-    // reglages de taille mini/maxi; pas tres beau
-    var w,h;
-    w = $(me).width()-90; // 90 = largeur des bouton "ok"/"cancel"
-    h = $(me).height();
-
     // charger le formulaire
     $.get(url_widgets_html+encodeURIComponent(me.className),
        function (c) {
+         var w,h;
+         w = $(me).width();
+         h = $(me).height();
          $(me)
          .attr('orig_html', $(me).html())
          .html(c)
