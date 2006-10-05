@@ -38,6 +38,7 @@ function Forms_duplique_form(){
 function exec_forms_tous(){
 	//global $clean_link;
   include_spip("inc/presentation");
+	include_spip('public/assembler');
 
   Forms_verifier_base();
 	Forms_duplique_form();
@@ -50,34 +51,8 @@ function exec_forms_tous(){
 	
 	debut_droite();
 	
-	Forms_afficher_forms(_T("forms:tous_formulaires"),
-		array(
-		"SELECT"=>"forms.*, COUNT(id_reponse) AS reponses",
-		"FROM" => "spip_forms AS forms",
-		"JOIN" => "spip_reponses AS reponses ON (forms.id_form=reponses.id_form AND reponses.statut='valide')",
-		"WHERE" => "sondage='non'",
-		"GROUP BY" => "forms.id_form",
-		"ORDER BY" => "titre"));
-	
-	Forms_afficher_forms(_T("forms:tous_sondages_public"),
-		array(
-		"SELECT"=>"forms.*, COUNT(id_reponse) AS reponses",
-		"FROM" => "spip_forms AS forms",
-		"JOIN" => "spip_reponses AS reponses ON (forms.id_form=reponses.id_form AND reponses.statut='valide')",
-		"WHERE" => "sondage='public'",
-		"GROUP BY" => "forms.id_form",
-		"ORDER BY" => "titre"),
-		"statistiques-24.gif");
-	
-	Forms_afficher_forms(_T("forms:tous_sondages_proteges"),
-		array(
-		"SELECT"=>"forms.*, COUNT(id_reponse) AS reponses",
-		"FROM" => "spip_forms AS forms",
-		"JOIN" => "spip_reponses AS reponses ON (forms.id_form=reponses.id_form AND reponses.statut='valide')",
-		"WHERE" => "sondage='prot'",
-		"GROUP BY" => "forms.id_form",
-		"ORDER BY" => "titre"),
-		"statistiques-24.gif");
+	$contexte = array('couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
+	echo recuperer_fond("exec/forms_tous",$contexte);	
 	
 	echo "<br />\n";
 	
@@ -88,8 +63,6 @@ function exec_forms_tous(){
 		icone(_T("forms:icone_creer_formulaire"), $link, "../"._DIR_PLUGIN_FORMS. "/img_pack/form-24.png", "creer.gif");
 		echo "</div>";
 	}
-	
-	
 	
 	fin_page();
 }
