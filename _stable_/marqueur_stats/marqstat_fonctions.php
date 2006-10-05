@@ -26,10 +26,14 @@ function marqstat_ajouter_boutons($boutons_admin) {
 }
 
 function marqstat_get_code(){
-	$code = isset($GLOBALS['meta']['marqueur_stats'])?$GLOBALS['meta']['marqueur_stats']:'';
-	
 	// quelles verifications mettre sur le contenu du marqueur ? ...
-	return trim($code);
+	// plutot a faire au niveau de l'interface de saisie pour eviter d'alourdir le code ici
+	$code = isset($GLOBALS['meta']['marqueur_stats'])?$GLOBALS['meta']['marqueur_stats']:'';
+	$code = trim($code);
+	// encapsuler dans un div en display:none pour eviter l'affichage de contenu a l'aide de ce marqueur
+	if (strlen($code))
+		$code = "<div style='display:none'>$code</div>";
+	return $code;
 }
 
 function marqstat_insert_body($texte){
