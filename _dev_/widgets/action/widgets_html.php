@@ -43,7 +43,7 @@ function action_widgets_html_dist() {
 					}
 
 					// type du widget
-					if ($regs[2] == 'chapo')
+					if (in_array($regs[2], array('chapo', 'texte', 'descriptif')))
 						echo propre($m[1]);
 					else
 						echo typo($m[1]);
@@ -60,7 +60,7 @@ function action_widgets_html_dist() {
 	$_GET['class'], $regs)) {
 
 		// type du widget
-		if ($regs[2] == 'chapo')
+		if (in_array($regs[2], array('chapo', 'texte', 'descriptif')))
 			$type = 'texte';
 		else
 			$type = 'ligne';

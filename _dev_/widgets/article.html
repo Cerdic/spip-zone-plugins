@@ -5,6 +5,15 @@
 	<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 	[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
 	<INCLURE{fond=inc-head}>
+
+	<script type="text/javascript" src="#CHEMIN{widgets.js}"></script>
+	<style type="text/css">
+		.title {font-size: 25px;}
+		.surtitre {text-decoration: underline;}
+		div.intro {margin-left: 5em;}
+		.widget:hover {background-color: yellow;}
+	</style>
+
 </head>
 
 <body class="page_article">
@@ -25,9 +34,9 @@
 			<div class="cartouche">
 				#DEBUT_SURLIGNE
 				[(#LOGO_ARTICLE||image_reduire{200,200})]
-				[<p class="surtitre">(#SURTITRE)</p>]
-				<h1 class="titre">#TITRE</h1>
-				[<p class="soustitre">(#SOUSTITRE)</p>]
+				[<p class="surtitre widget article-surtitre-#ID_ARTICLE">(#SURTITRE)</p>]
+				<h1 class="titre widget article-titre-#ID_ARTICLE">#TITRE</h1>
+				[<p class="soustitre widget article-soustitre-#ID_ARTICLE">(#SOUSTITRE)</p>]
 				#FIN_SURLIGNE
 
 				<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
@@ -38,10 +47,10 @@
 			</div>
 			
 			#DEBUT_SURLIGNE
-			[<div class="chapo">(#CHAPO)</div>]
+			[<div class="chapo widget article-chapo-#ID_ARTICLE">(#CHAPO)</div>]
 			<br class="nettoyeur" />
 			[<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-			[<div class="texte">(#TEXTE|image_reduire{520,0})</div>]
+			[<div class="texte widget article-texte-#ID_ARTICLE">(#TEXTE|image_reduire{520,0})</div>]
 			#FIN_SURLIGNE
 
 			[(#REM) Portfolio : album d'images ]
@@ -61,7 +70,7 @@
 			</div>
 			</BOUCLE_afficher_document>
 
-			[<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
+			[<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE<span class="widget article-ps-#ID_ARTICLE">(#PS)</span>#FIN_SURLIGNE</div>]
 
 			[(#REM) Autres documents joints a l'article ]
 			<B_documents_joints>
