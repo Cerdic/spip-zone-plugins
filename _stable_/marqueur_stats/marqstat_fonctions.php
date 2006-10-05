@@ -24,16 +24,20 @@ function marqstat_ajouter_boutons($boutons_admin) {
 	}
 	return $boutons_admin;
 }
+
+function marqstat_get_code(){
+	$code = isset($GLOBALS['meta']['marqueur_stats'])?$GLOBALS['meta']['marqueur_stats']:'';
 	
-function marqstat_affichage_final($texte){
-	global $html;
-	if ($html){
-		$code = isset($GLOBALS['meta']['marqueur_stats'])?$GLOBALS['meta']['marqueur_stats']:'';
-		
-		// quelles verifications mettre sur le contenu du marqueur ? ...
-		if (strlen($code))
-			$texte=str_replace("</body>","$code\n</body>",$texte);
+	// quelles verifications mettre sur le contenu du marqueur ? ...
+	return trim($code);
+}
+
+function marqstat_insert_body($texte){
+	if (!isset($GLOBALS['meta']['marqstat_flag_insert_body'])){
+		include_spip("inc/meta");
+		ecrire_meta('marqstat_flag_insert_body','oui');
+		ecrire_metas();
 	}
-	return $texte;
+	return $texte.marqstat_get_code();
 }
 ?>

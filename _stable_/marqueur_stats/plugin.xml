@@ -18,13 +18,16 @@ _ &copy; 2006 - GPL
 	<prefix> 
 	marqstat
 	</prefix>
+	<options>marqstat_options.php</options>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<inclure>marqstat_fonctions.php</inclure>
 	</pipeline>	
 	<pipeline>
-		<nom>affichage_final</nom>
-		<action>affichage_final</action>
+		<nom>insert_body</nom>
 		<inclure>marqstat_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
 	</pipeline>
 </plugin>
