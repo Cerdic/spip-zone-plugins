@@ -96,7 +96,7 @@ EOF;
 	
 	debut_gauche();
 	debut_boite_info();
-	echo "boite info";
+	echo _T('habillages:accueil_commentaire');
 	fin_boite_info();
 
 	debut_droite();
@@ -109,11 +109,11 @@ EOF;
 	
 		echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
 		echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
-		echo _T('habillages:config_titre')."</font></b></td></tr>";
+		echo _T('habillages:accueil_titre')."</font></b></td></tr>";
 	
 		echo "<tr><td class='serif' colspan=4>";
-		echo _T('habillages:config_commentaire');
-	echo "</table></div>\n";
+		
+		echo "</table></div>\n";
 	
 	fin_page();
 

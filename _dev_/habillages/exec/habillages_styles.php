@@ -29,7 +29,7 @@ function exec_habillages_styles() {
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
 	global $couleur_claire;
-	debut_page(_T('habillages:icone_config_habillages'), "configuration", "habillages");
+	debut_page(_T('habillages:icone_habillages_styles'), "configuration", "styles");
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
 div.cadre-padding ul li {
@@ -89,8 +89,8 @@ EOF;
 
 	echo "<br/><br/>";
 	
-	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_icone-48.png">';
-	gros_titre(_T('habillages:icone_config_habillages'));
+	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_styles-48.png">';
+	gros_titre(_T('habillages:icone_habillages_styles'));
 
 	barre_onglets("habillages", "");
 	
@@ -108,7 +108,7 @@ EOF;
 	$lire_meta_squelettes = isset($GLOBALS['meta']['habillages_squelettes'])?$GLOBALS['meta']['habillages_squelettes']:'';
 	
 	if (!isset($lire_meta_squelettes)){
-		echo : 'Vous ne pouvez pas choisir de style si vous n'avez pas choisi de squelettes. Veuillez aller dans la rubrique squelettes et choisir un jeu de squelettes';
+		echo "Vous ne pouvez pas choisir de style si vous n'avez pas choisi de squelettes. Veuillez aller dans la rubrique squelettes et choisir un jeu de squelettes";
 	}
 	echo "<br />";
 

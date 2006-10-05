@@ -29,6 +29,7 @@ function exec_habillages_squelettes() {
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
 	global $couleur_claire;
+	global $couleur_foncee;
 	debut_page(_T('habillages:icone_config_habillages'), "configuration", "habillages");
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
@@ -89,14 +90,16 @@ EOF;
 
 	echo "<br/><br/>";
 	
-	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_icone-48.png">';
-	gros_titre(_T('habillages:icone_config_habillages'));
+	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_squelettes-48.png">';
+	gros_titre(_T('habillages:icone_habillages_squelettes'));
 
 	barre_onglets("habillages", "");
 	
 	debut_gauche();
 	debut_boite_info();
-	echo "boite info";
+	echo "<div class='commentaires'>";
+	echo _T('habillages:squelettes_commentaire');
+	echo "</div>";
 	fin_boite_info();
 
 	debut_droite();
@@ -111,7 +114,6 @@ EOF;
 		echo _T('habillages:squelettes_titre')."</font></b></td></tr>";
 	
 		echo "<tr><td class='serif' colspan=4>";
-		echo _T('habillages:squelettes_commentaire');
 	
 	# Chercher les fichiers theme.xml.
 	$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");

@@ -12,7 +12,7 @@ include_spip('inc/actions');
 include_spip('inc/rangement_flock');
 
 // http://doc.spip.org/@exec_admin_plugin
-function exec_habillages_styles() {
+function exec_habillages_icones() {
 	global $connect_statut;
 	global $connect_toutes_rubriques;
 	global $spip_lang_right;
@@ -29,7 +29,7 @@ function exec_habillages_styles() {
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
 	global $couleur_claire;
-	debut_page(_T('habillages:icone_config_habillages'), "configuration", "habillages");
+	debut_page(_T('habillages:icone_habillages_icones'), "configuration", "icones");
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
 div.cadre-padding ul li {
@@ -89,8 +89,8 @@ EOF;
 
 	echo "<br/><br/>";
 	
-	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_icone-48.png">';
-	gros_titre(_T('habillages:icone_config_habillages'));
+	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_icones_prive-48.png">';
+	gros_titre(_T('habillages:icone_habillages_icones'));
 
 	barre_onglets("habillages", "");
 	

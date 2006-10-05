@@ -29,7 +29,7 @@ function exec_habillages_images() {
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
 	global $couleur_claire;
-	debut_page(_T('habillages:icone_config_habillages'), "configuration", "habillages");
+	debut_page(_T('habillages:icone_habillages_images'), "configuration", "images");
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
 div.cadre-padding ul li {
@@ -89,8 +89,8 @@ EOF;
 
 	echo "<br/><br/>";
 	
-	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_icone-48.png">';
-	gros_titre(_T('habillages:icone_config_habillages'));
+	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_images-48.png">';
+	gros_titre(_T('habillages:icone_habillages_images'));
 
 	barre_onglets("habillages", "");
 	
@@ -108,7 +108,7 @@ EOF;
 	$lire_meta_styles = isset($GLOBALS['meta']['habillages_styles'])?$GLOBALS['meta']['habillages_styles']:'';
 	
 	if (!isset($lire_meta_squelettes)){
-		echo : 'Vous ne pouvez pas choisir d'images si vous n'avez pas choisi de style. Veuillez aller dans la rubrique styles et en choisir un.';
+		echo "Vous ne pouvez pas choisir d'images si vous n'avez pas choisi de style. Veuillez aller dans la rubrique styles et en choisir un.";
 	}
 
 	echo "<br />";
