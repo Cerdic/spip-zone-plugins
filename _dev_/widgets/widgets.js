@@ -5,6 +5,9 @@ $.cancelwidgets = function() {
   $(".widget").each(function(){
     var html = $(this).attr('orig_html');
     if (html != null) {
+      // enregistrer le widget avec le contenu modifie, si on veut y revenir
+//      $(this).attr('widget', $(this).html());
+      // puis reafficher le contenu initial
       $(this).html(html);
     }
     $(this).removeAttr('orig_html');
@@ -22,6 +25,15 @@ $.initwidget = function(me) {
     // voir si je suis en mode "widget"
     if ($(me).attr('orig_html') != null)
       return;
+
+    // voir si je dispose deja du widget (ne marche pas)
+    if ($(me).attr('widget') != null) {
+      $(me)
+      .attr('orig_html', $(me).html())
+      .html($(me).attr('widget'));
+      // ici reactiver .ajaxForm() etc...
+      return;
+    }
 
     // charger le formulaire
     $.get(url_widgets_html+encodeURIComponent(me.className),
@@ -62,6 +74,7 @@ $.initwidget = function(me) {
              .keypress(function(e){
                if (e.keyCode == 27) {
                  $(me)
+//                 .attr('widget',$(me).html()) // sauver le widget
                  .html($(me).attr('orig_html'))
                  .removeAttr('orig_html');
                }
@@ -70,7 +83,8 @@ $.initwidget = function(me) {
            .find(".cancel_widget")
              .click(function(){
                $(me)
-               .html($(me).attr('orig_html'))
+//               .attr('widget',$(me).html()) // sauver le widget
+               .html($(me).attr('orig_html')) // retablir le contenu d'origine
                .removeAttr('orig_html');
                return false;
              })
@@ -88,7 +102,6 @@ $.clickwidget = function(e){
 
 $(function() {
   $(".widget")
-  .removeAttr('orig_html')
   .click($.clickwidget);
   $("html")
   .click($.cancelwidgets);

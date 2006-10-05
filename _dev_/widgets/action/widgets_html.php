@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // fonction d'API manquante a SPIP...
 function autoriser_modifs($quoi = 'article', $id = 0) {
 	global $connect_id_auteur;
-	$connect_id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+	$connect_id_auteur = intval($GLOBALS['auteur_session']['id_auteur']);
 
 	if ($quoi != 'article') {
 		echo "pas implemente";
