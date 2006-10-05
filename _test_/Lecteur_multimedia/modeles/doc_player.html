@@ -10,6 +10,8 @@
 	
 
 ]
+
+
 <BOUCLE_doc (DOCUMENTS) {id_document}>
 <div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 [(#TYPE_DOCUMENT|=={MP3}|?{
@@ -35,24 +37,25 @@
 </object>
 ]
 [(#CONFIG{player}|=={neoplayer}|?{' ',''})
-<object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="/plugins/Lecteur_multimedia/neoplayer_maxi.swf" width="200" height="20">
+<object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#CHEMIN{neoplayer_maxi.swf}" width="200" height="20">
 	<param name="wmode" value="transparent" />
-	<param name="movie" value="/plugins/Lecteur_multimedia/neoplayer_maxi.swf" />
+	<param name="movie" value="#CHEMIN{neoplayer_maxi.swf}" />
 	<param name="FlashVars" value="mp3=#URL_DOCUMENT&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;loadingcolor=ffff00&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;showinfo=0&amp;width=200&amp;height=20" />
 </object>
 ]
 
 [(#CONFIG{player}|=={neoplayer_multi}|?{' ',''})
-<object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="/plugins/Lecteur_multimedia/neoplayer_multi.swf" width="200" height="100">
+<object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#CHEMIN{neoplayer_multi.swf}" width="200" height="100">
 	<param name="wmode" value="transparent" />
-	<param name="movie" value="/plugins/Lecteur_multimedia/neoplayer_multi.swf" />
+	<param name="movie" value="#CHEMIN{neoplayer_multi.swf}" />
 	<param name="FlashVars" value="mp3=#URL_DOCUMENT|#URL_DOCUMENT&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;showinfo=1" />
 </object>
 ]
 
 [(#CONFIG{player}|=={dewplayer}|?{' ',''})
-<object type='application/x-shockwave-flash' data='/plugins/Lecteur_multimedia/dewplayer.swf?son=#URL_DOCUMENT' width='200' height='20'>
-<param name='movie' value='/plugins/Lecteur_multimedia/dewplayer.swf?son=#URL_DOCUMENT'/>
+<object type='application/x-shockwave-flash' data='[(#CHEMIN{dewplayer.swf})]' width='200' height='20'>
+<param name='movie' value='#CHEMIN{dewplayer.swf}'/>
+<param name="FlashVars" value='son=[(#URL_DOCUMENT|url_absolue)]'>
 <span>[(#URL_DOCUMENT|enclosure_it{#URL_DOCUMENT})]</span>
 </object>
 ]
@@ -60,21 +63,15 @@
 ''
 })]
 [(#TYPE_DOCUMENT|=={Flash Video}|?{
-<object type='application/x-shockwave-flash' width='320' height='240' wmode='transparent' data='/plugins/Lecteur_multimedia/flvplayer.swf?file=$url&autoStart=false'>
-<param name='movie' value='/plugins/Lecteur_multimedia/flvplayer.swf?file=$url&autoStart=false' />
-<param name='wmode' value='transparent' />
+<object type="application/x-shockwave-flash" data="[(#CHEMIN{player_flv.swf})]" width="[(#LARGEUR|=={0}|?{400,#LARGEUR})]" height="[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]">
+	<param name="movie" value="[(#CHEMIN{player_flv.swf})]" />
+	<param name="FlashVars" value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#LARGEUR|=={0}|?{400,#LARGEUR})]&amp;height=[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;title=#TITRE&amp;startimage=[(#LOGO_DOCUMENT||extraire_attribut{src})]" />
+	<param name="wmode" value="transparent" />
 <span>[(#URL_DOCUMENT|enclosure_it{#URL_DOCUMENT})]</span>
 </object>
 
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
-[<dt><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'>
-(#ID_VIGNETTE|?{
-<img src='[(#LOGO_DOCUMENT||extraire_attribut{src})]' width='[(#LOGO_DOCUMENT||largeur)]' height='[(#LOGO_DOCUMENT||hauteur)]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' /></a></dt>
-,
-''
-})]
 [
-<dt class='spip_doc_titre'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
 <dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF)#NOTES</dd>]
 </dl>
 ,
