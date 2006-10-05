@@ -4,7 +4,7 @@ url_widgets_html = 'spip.php?action=widgets_html&class=';
 $.cancelwidgets = function() {
   $(".widget").each(function(){
     var html = $(this).attr('orig_html');
-    if (html == null) {
+    if (html != null) {
       $(this).html(html);
     }
     $(this).removeAttr('orig_html');
@@ -25,7 +25,7 @@ $.initwidget = function(me) {
 
     // reglages de taille mini/maxi; pas tres beau
     var w,h;
-    w = $(me).width()-50; // 50 = largeur du bouton "ok"
+    w = $(me).width()-90; // 90 = largeur des bouton "ok"/"cancel"
     h = $(me).height();
 
     // charger le formulaire
@@ -47,6 +47,7 @@ $.initwidget = function(me) {
                  'fontSize': $(me).css('fontSize'),
                  'fontFamily': $(me).css('fontFamily')
              })
+             // resize widget to fit current space, and a bit more if too small
              .each(function() {
                if (w<100) w=100;
                if (w>700) w=700;
