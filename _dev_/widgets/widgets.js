@@ -26,10 +26,7 @@ $.initwidget = function(me) {
     // reglages de taille mini/maxi; pas tres beau
     var w,h;
     w = $(me).width()-50; // 50 = largeur du bouton "ok"
-    if (w<100) w=100;
-    if (w>700) w=700;
     h = $(me).height();
-    if (h<12) h=12;
 
     // charger le formulaire
     $.get(url_widgets_html+encodeURIComponent(me.className),
@@ -46,10 +43,21 @@ $.initwidget = function(me) {
            .find(".widget-active")
              .css('backgroundColor', 'yellow')
              .css('font', 'inherit') // pour safari
-             .css({"width":w+'px',"height":h+'px'})
              .css({
-               'fontSize': $(me).css('fontSize'),
-               'fontFamily': $(me).css('fontFamily')
+                 'fontSize': $(me).css('fontSize'),
+                 'fontFamily': $(me).css('fontFamily')
+             })
+             .each(function() {
+               if (w<100) w=100;
+               if (w>700) w=700;
+               if (this.nodeName.toUpperCase()=='TEXTAREA') {
+                 if (h<36) h=36;
+                 h+='px';
+               } else {
+                 if (h<12) h=$(me).css('fontSize');
+                 else h+='px';
+               }
+               $(this).css({"width":w+'px',"height":h});
              })
              .each(function(n){if (n==0) this.focus();})
              .keypress(function(e){
