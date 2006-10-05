@@ -108,7 +108,7 @@ EOF;
 	$lire_meta_squelettes = isset($GLOBALS['meta']['habillages_squelettes'])?$GLOBALS['meta']['habillages_squelettes']:'';
 	
 	if (!isset($lire_meta_squelettes)){
-		echo : 'Vous ne pouvez pas choisir de style si vous n'avez pas choisi de squelettes. Veuillez aller dans la rubrique "squelettes" et choisir un jeu de squelettes';
+		echo : 'Vous ne pouvez pas choisir de style si vous n'avez pas choisi de squelettes. Veuillez aller dans la rubrique squelettes et choisir un jeu de squelettes';
 	}
 	echo "<br />";
 

@@ -116,8 +116,6 @@ EOF;
 	# Chercher les fichiers theme.xml.
 	$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
 	
-	print_r($fichier_theme);
-	
 	# Pour chaque fichier theme.xml trouve, on releve le type et on ne garde que 
 	# les squelettes pour les lister.
 	foreach ($fichier_theme as $fichier){
@@ -125,7 +123,6 @@ EOF;
 		$arbre = parse_plugin_xml($texte);
 		$arbre = $arbre['theme'][0];
 		$type_theme = applatit_arbre($arbre['type']);
-		echo "Le type est : ".$type_theme;
 	}
 	
 	echo "</table></div>\n";

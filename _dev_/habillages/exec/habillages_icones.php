@@ -12,7 +12,7 @@ include_spip('inc/actions');
 include_spip('inc/rangement_flock');
 
 // http://doc.spip.org/@exec_admin_plugin
-function exec_habillages_images() {
+function exec_habillages_styles() {
 	global $connect_statut;
 	global $connect_toutes_rubriques;
 	global $spip_lang_right;
@@ -105,13 +105,7 @@ EOF;
 
 	global $couleur_foncee;
 	
-	$lire_meta_styles = isset($GLOBALS['meta']['habillages_styles'])?$GLOBALS['meta']['habillages_styles']:'';
 	
-	if (!isset($lire_meta_squelettes)){
-		echo : 'Vous ne pouvez pas choisir d'images si vous n'avez pas choisi de style. Veuillez aller dans la rubrique styles et en choisir un.';
-	}
-
-	echo "<br />";
 
 	fin_page();
 
