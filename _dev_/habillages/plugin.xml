@@ -1,0 +1,40 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Habillages du site
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	Franck Ducas [Site personnel->http://franck.ducas.free.fr] pour la r&eacute;alisation et l'id&eacute;e originale.
+_ Cedric MORIN [notre-ville.net->http://www.notre-ville.net] pour l'aide technique et la rationalisation d'une partie du code.
+_ Pierre Andrews pour toutes les id&eacute;es.
+_ Tou(te)s les autres.
+_ Et tous les concepteurs et les conceptrices de squelettes, styles, et images (voir auteurs de chaque habillages).
+_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+	0.4
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	dev
+	</etat>
+	<description>
+Gestionnaire d'habillages SPIP.
+	</description>
+	<prefix> 
+	habillages
+	</prefix>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouter_boutons</action>
+		<inclure>habillages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<action>ajouter_onglets</action>
+		<inclure>habillages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>header_prive</action>
+		<inclure>habillages_pipelines.php</inclure>
+	</pipeline>
+</plugin>
