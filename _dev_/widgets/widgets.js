@@ -4,10 +4,10 @@ url_widgets_html = 'spip.php?action=widgets_html&class=';
 $.cancelwidgets = function() {
   $(".widget").each(function(){
     var html = $(this).attr('orig_html');
-    if (html != '<>') {
+    if (html == null) {
       $(this).html(html);
     }
-    $(this).attr('orig_html', '<>');
+    $(this).removeAttr('orig_html');
   });
 }
 
@@ -20,7 +20,7 @@ $.initallwidgets = function(e) {
 
 $.initwidget = function(me) {
     // voir si je suis en mode "widget"
-    if ($(me).attr('orig_html') != '<>')
+    if ($(me).attr('orig_html') != null)
       return;
 
     // reglages de taille mini/maxi; pas tres beau
@@ -41,7 +41,7 @@ $.initwidget = function(me) {
            .ajaxForm(function(c){
              $(me)
              .html(c.responseText)
-             .attr('orig_html','<>');
+             .removeAttr('orig_html');
            })
            .find(".widget-active")
              .css('backgroundColor', 'yellow')
@@ -56,7 +56,7 @@ $.initwidget = function(me) {
                if (e.keyCode == 27) {
                  $(me)
                  .html($(me).attr('orig_html'))
-                 .attr('orig_html','<>');
+                 .removeAttr('orig_html');
                }
              })
            .end()
@@ -64,7 +64,7 @@ $.initwidget = function(me) {
              .click(function(){
                $(me)
                .html($(me).attr('orig_html'))
-               .attr('orig_html', '<>');
+               .removeAttr('orig_html');
                return false;
              })
            .end()
@@ -81,9 +81,9 @@ $.clickwidget = function(e){
 
 $(function() {
   $(".widget")
-  .attr('orig_html', '<>')
+  .removeAttr('orig_html')
   .click($.clickwidget);
-  $("body")
+  $("html")
   .click($.cancelwidgets);
 });
 
