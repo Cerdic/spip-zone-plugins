@@ -290,7 +290,15 @@
 				// mettre le texte dans un charset acceptable et sans entites
 				//$mess_iso = unicode2charset(html2unicode(charset2unicode($corps_mail)),'iso-8859-1');
 				//mail($dest, $sujet, $mess_iso, $head);
-				envoyer_mail($dest, $sujet, $corps_mail, "formulaire@".$_SERVER["HTTP_HOST"], $headers = "");
+				$headers = "";
+				if (preg_match(",<html>.*</html>,",$corps_mail)){
+					$charset = $GLOBALS['meta']['charset'];
+					$headers .=
+					"MIME-Version: 1.0\n".
+					"Content-Type: text/html; charset=$charset\n".
+					"Content-Transfer-Encoding: 8bit\n";
+				}
+				envoyer_mail($dest, $sujet, $corps_mail, "formulaire@".$_SERVER["HTTP_HOST"], $headers);
 			}
 			if ($email_dest != '') {
 				$head="From: formulaire_$id_form@".$_SERVER["HTTP_HOST"]."\n";
@@ -299,7 +307,15 @@
 				// mettre le texte dans un charset acceptable et sans entites
 				//$mess_iso = unicode2charset(html2unicode(charset2unicode($corps_mail_admin)),'iso-8859-1');
 				//mail($dest, $sujet, $mess_iso, $head);
-				envoyer_mail($dest, $sujet, $corps_mail_admin, "formulaire@".$_SERVER["HTTP_HOST"], $headers = "");
+				$headers = "";
+				if (preg_match(",<html>.*</html>,",$corps_mail_admin)){
+					$charset = $GLOBALS['meta']['charset'];
+					$headers .=
+					"MIME-Version: 1.0\n".
+					"Content-Type: text/html; charset=$charset\n".
+					"Content-Transfer-Encoding: 8bit\n";
+				}
+				envoyer_mail($dest, $sujet, $corps_mail_admin, "formulaire@".$_SERVER["HTTP_HOST"], $headers);
 		 	}
 		}
 	}
