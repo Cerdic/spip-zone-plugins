@@ -15,7 +15,7 @@ _ &copy; 2006 - Licence GPL
 	<description>
 	Envoi d'e-card a partir d'un formulaire de forms
 _ Necessite le plugin forms
-_ Ce plugin illustre le mecanisme de personalisation des squelettes de formulaire : un formulaire d'ecard s'insere par le raccourci <formxx|ecard> qui declenche l'appel au formulaire personalis&eacute; modele_form_ecard.html
+_ Ce plugin illustre le mecanisme de personalisation des squelettes de formulaire : un formulaire d'ecard s'insere par le raccourci <code><formxx|ecard></code> qui declenche l'appel au formulaire personalis&eacute; modele_form_ecard.html
 	</description>
 	<prefix> 
 	ecard

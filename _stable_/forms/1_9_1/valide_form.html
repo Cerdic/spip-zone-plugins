@@ -55,11 +55,8 @@ function valide_sondage()
 			// D'abord verifier que l'URL est legitime, donc que la demande a bien
 			// ete generee par SPIP
 			if (verifier_action_auteur("forms confirme reponse $id_reponse", $hash)) {
-				$modele = '[(#ENV{modele,''}|texte_script)]';
-				if ($modele)
-					Forms_generer_mail_reponse_formulaire($id_form, $id_reponse, $modele);
-				else
-					Forms_generer_mail_reponse_formulaire($id_form, $id_reponse);
+				$env = unserialize('[(#ENV|texte_script)]');
+				Forms_generer_mail_reponse_formulaire($id_form, $id_reponse, $env);
 			}
 		}
 		$renvoyer_image = true;

@@ -252,14 +252,18 @@
 		return $type ? isset($t[$type]) : $t;
 	}
 
-	function Forms_generer_mail_reponse_formulaire($id_form, $id_reponse, $modele_mail = 'form_reponse_email'){
+	function Forms_generer_mail_reponse_formulaire($id_form, $id_reponse, $env){
+		if (!is_array($env)) $env=array();
+		$modele_mail = 'form_reponse_email';
+		if (isset($env['modele']))
+			$modele_mail = $env['modele'];
 		$result = spip_query("SELECT * FROM spip_forms WHERE id_form=$id_form");
 		if ($row = spip_fetch_array($result)) {
 			$modele = "modeles/$modele_mail";
 			if ($f = find_in_path(($m = "$modele-$id_form").".html"))
 				$modele = $m;
-			$corps_mail = recuperer_fond($modele,array('id_reponse'=>$id_reponse));
-			$corps_mail_admin = recuperer_fond($modele,array('id_reponse'=>$id_reponse,'mail_admin'=>'oui'));
+			$corps_mail = recuperer_fond($modele,array_merge($env,array('id_reponse'=>$id_reponse)));
+			$corps_mail_admin = recuperer_fond($modele,array_merge($env,array('id_reponse'=>$id_reponse,'mail_admin'=>'oui')));
 			$champconfirm = $row['champconfirm'];
 			$email = unserialize($row['email']);
 			$email_dest = $email['defaut'];
