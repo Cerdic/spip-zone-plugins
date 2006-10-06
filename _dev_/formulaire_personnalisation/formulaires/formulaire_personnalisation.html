@@ -1,0 +1,19 @@
+
+<h2>Choisissez vos réglages</h2>
+
+<p>Vous pouvez ajuster ci-dessous la présentation de ce site pour un meilleur confort de lecture&nbsp;:</p>
+
+<form action="#ENV{url}" method="post">
+<fieldset>
+<legend>Affichage</legend>
+
+<div class="row"><span class="libl"><input type="radio" name="use" value="#ENV{normal}" id="normal" [checked="(#ENV{checked}|=={'normal'}|?{'checked="checked"',''})]/> <label for="normal"><strong>Normale</strong> (multicolonne, multicolore, police relativement petite)</label></span></div>
+<div class="row"><span class="libl"><input type="radio" name="use" value="#ENV{zoom}" id="zoom" [(#ENV{checked}|=={'zoom'}|?{'checked="checked"',''})]/> <label for="zoom"><strong>Zoomée</strong> (police agrandie et une seul colonne)</label></span></div>
+<div class="row"><span class="libl"><input type="radio" name="use" value="#ENV{inverse}" id="inverse" [(#ENV{checked}|=={'inverse'}|?{'checked="checked"',''})]/> <label for="inverse"><strong>Inversée</strong> (fond sombre, police claire)</label></span></div>
+<div class="row"><span class="libl"><input type="radio" name="use" value="#ENV{zoominverse}" id="zoominverse" [(#ENV{checked}|=={'zoominverse'}|?{'checked="checked"',''})]/> <label for="zoominverse"><strong>Zoomée et inversée</strong> (fond sombre, police claire et agrandie, une colonne)</label></span></div>
+<div style="clear:both;">&nbsp;</div>
+</fieldset>
+
+<div class="rowbt"><input name="Submit" value="Envoyer" class="bt" type="submit" />
+</div>
+</form>

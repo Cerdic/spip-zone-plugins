@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Panneau de personnalisation 
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Aurelien Levy
+ 	[Fairytells->http://www.fairytells.net] - Licence GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Panneau de personnalisation
+	
+	Ce plugin met à disposition du webmaster une balise #FORMULAIRE_PERSONNALISATION.
+	Une fois intégrée dans vos squelettes elle génère un formulaire proposant à vos visiteurs de choisir
+	parmis différent mode d'affichage (zoomer, inverse, etc) ainsi que différent modes de navigations
+	alternatifs comme le mode par défilement et le mode par pointage.
+	</description>
+	<options> <!-- fichier charge a chaque hit -->
+	personnalisation_mes_options.php
+	</options>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	personnalisation
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>personnalisation.php</inclure>
+	</pipeline>
+
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
