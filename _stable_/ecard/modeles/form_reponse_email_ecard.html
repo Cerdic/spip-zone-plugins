@@ -1,3 +1,4 @@
+<html>
 <BOUCLE_reponses(REPONSES){id_reponse}>#SET{champ,''}
 <BOUCLE_art(ARTICLES){id_article}>
 #TITRE
@@ -8,7 +9,7 @@
 <:forms:reponse_retrovez:> #URL_ECRIRE{forms_reponses,id_form=#ID_FORM}
 ]
 <BOUCLE_repchamps(REPONSES_CHAMPS){id_reponse}><BOUCLE_champsnom(FORMS_CHAMPS){id_form}{champ}>[(#GET{champ}|=={#CHAMP}|?{'',' '})
-#TITRE : ][(#GET{champ}|=={#CHAMP}|?{', ',''})]#SET{champ,#CHAMP}</BOUCLE_champsnom>[
+<br/>#TITRE : ][(#GET{champ}|=={#CHAMP}|?{', ',''})]#SET{champ,#CHAMP}</BOUCLE_champsnom>[
 		(#REM) Regarder si le champ est du type select ou multiple, car dans ce cas il faut
 		decoder la reponse avec la structure du formulaire
 		]<BOUCLE_champsselectmulti(FORMS_CHAMPS){id_form}{champ}{type IN select,multiple}><BOUCLE_champschoix(FORMS_CHAMPS_CHOIX){id_form}{cle}{choix=#VALEUR}>#TITRE </BOUCLE_champschoix></BOUCLE_champsselectmulti>[
@@ -21,3 +22,4 @@
 
 [<a href="(#URL|url_absolue)">Retrouvez cette e-card en ligne</a>]
 </BOUCLE_reponses>
+</html>
