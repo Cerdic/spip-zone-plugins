@@ -15,6 +15,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_habillages_styles' => 'Gestion des styles',
 'icone_habillages_images' => 'Gestion des images',
 'icone_habillages_icones' => 'Gestion des icones de l\'espace priv&eacute;',
+'plugin_etat_developpement' => 'Cet habillage est en d&eacute;veloppement et sa stabilit&eacute;e n\'est pas assur&eacute;e.',
+'plugin_etat_experimental' => 'Attention : cet habillage est exp&eacute;rimental et il pourrait alt&eacute;rer le fonctionnement normal de votre site SPIP !',
+'plugin_etat_test' => 'Cet habillage est en test. Si vous observez des disfonctionnements, vous pouvez en avertir son auteur.',
+'plugin_etat_stable' => 'Cet habillage est stable.',
 );
 
 

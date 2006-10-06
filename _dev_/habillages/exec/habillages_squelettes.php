@@ -25,6 +25,10 @@ function exec_habillages_squelettes() {
 		fin_page();
 		exit;
 	}
+	
+	if (_request('changer_plugin')=='oui'){
+			ecrire_plugin_actifs(_request('statusplug'),'',$operation='ajoute');
+	}
 
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
@@ -125,7 +129,9 @@ EOF;
 			$type_theme = trim(applatit_arbre($arbre['type']));
 			$nom_dossier_theme = dirname ($fichier);
 			$fichier_plugin_xml = $nom_dossier_theme."/plugin.xml";
-				
+			
+			echo generer_url_post_ecrire("habillages_squelettes");
+			
 				if (!is_file($fichier_plugin_xml)) {
 					# Mettre dans la construction du dossier habillages-data (lorsque les themes se
 					# telechargeront adopter le meme principe sur les dossiers telecharges) un refus
@@ -133,7 +139,7 @@ EOF;
 					# Ca evitera de mettre des gros pates dans les logs et on laissera l'ecriture dans 
 					# ceux-ci aux etourdis qui personnaliseront leurs themes sans mettre de plugin.xml
 					# dans le dossier de theme.
-					spip_log("Le dossier ".$nom_dossier_theme." ne contient pas de fichier plugin.xml. Le plugin habillages ne peut pas gerer les elements de ce dossier. On zappe le dossier.");
+					spip_log("Le dossier ".$nom_dossier_theme." ne contient pas de fichier plugin.xml. Le plugin habillages ne peut pas gerer les elements de ce dossier.");
 				}
 				
 				if ($type_theme=="squelettes" && is_file($fichier_plugin_xml)) {
@@ -146,6 +152,17 @@ EOF;
 	
 	echo "</table></div>\n";
 
+	echo "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />";
+	echo "\n<input type='hidden' name='hash' value='" . calculer_action_auteur("valide_plugin") . "'>";
+	echo "\n<input type='hidden' name='changer_plugin' value='oui'>";
+
+	echo "\n<p>";
+
+	echo "<div style='text-align:$spip_lang_right'>";
+	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
+	echo "</div>";
+	echo "</form></tr></table>\n";
+	
 	echo "<br />";
 
 	fin_page();
