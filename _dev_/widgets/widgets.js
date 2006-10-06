@@ -1,5 +1,6 @@
 
 url_widgets_html = 'spip.php?action=widgets_html&class=';
+SEARCHING = '<img src="dist/images/searching.gif" style="float:right;" />';
 
 $.cancelwidgets = function() {
   $(".widget").each(function(){
@@ -36,19 +37,23 @@ $.initwidget = function(me) {
     }
 
     // charger le formulaire
+    var contenu = $(me).html();
+    $(me).append(SEARCHING); // icone d'attente
     $.get(url_widgets_html+encodeURIComponent(me.className),
        function (c) {
          var w,h;
          w = $(me).width();
          h = $(me).height();
          $(me)
-         .attr('orig_html', $(me).html())
+         .attr('orig_html', contenu)
          .html(c)
          .find('form')
            .ajaxForm(function(c){
              $(me)
              .html(c.responseText)
              .removeAttr('orig_html');
+           }).submit(function(){
+             $(me).find("form").append(SEARCHING); // icone d'attente
            })
            .find(".widget-active")
              .css('backgroundColor', 'yellow')
@@ -101,9 +106,24 @@ $.clickwidget = function(e){
 }
 
 $(function() {
-  $(".widget")
-  .click($.clickwidget);
-  $("html")
-  .click($.cancelwidgets);
+  var widgets_actives = false;
+  $('html')
+  .dblclick(function(){
+    if (!widgets_actives) {
+      $(".widget")
+      .css('backgroundColor','#ddeeee')
+      .click($.clickwidget);
+      $("html")
+      .click($.cancelwidgets);
+      widgets_actives = true;
+    } else {
+      $(".widget")
+      .css('backgroundColor','')
+      .unclick($.clickwidget);
+      $("html")
+      .unclick($.cancelwidgets);
+      widgets_actives = false;
+    }
+  });
 });
 
