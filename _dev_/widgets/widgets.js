@@ -107,8 +107,12 @@ $.clickwidget = function(e){
 
 $(function() {
   $('head')
-  .prepend('<style>.widget:hover { background-image: url("dist/images/edit.gif"); background-repeat:no-repeat; background-position:right top; background-color: #e3eeee;}</style>');
+  .prepend('<style>.widget-hover { background-image: url("dist/images/edit.gif"); background-repeat:no-repeat; background-position:right top; background-color: #e3eeee;}</style>');
   $(".widget")
+  .hover( // obligatoire pour MSIE
+    function(){$(this).addClass('widget-hover');},
+    function(){$(this).removeClass('widget-hover');}
+  )
   .attr('title', 'Cliquez pour modifier')  // pas terrible ;-)
   .click($.clickwidget);
 // .animate(????);
