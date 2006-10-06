@@ -76,7 +76,10 @@ $.initwidget = function(me) {
                }
                $(this).css({"width":w+'px',"height":h});
              })
-             .each(function(n){if (n==0) this.focus();})
+             .each(function(n){
+               if (n==0)
+                 this.focus();
+             })
              .keypress(function(e){
                if (e.keyCode == 27) {
                  $(me)
@@ -107,6 +110,7 @@ $.clickwidget = function(e){
 }
 
 $(function() {
+
   $('head')
   .prepend('<style>.widget-hover { background-image: url("dist/images/edit.gif"); background-repeat:no-repeat; background-position:right top; background-color: #e3eeee;}</style>');
 
@@ -118,7 +122,6 @@ $(function() {
   });
 
   // TODO: POST ?
-  // TODO: je ne comprends pas pourquoi ca fait deux hits ajax...
   //
   // Quand on recupere la liste des droits, on active les widgets autorises
   if (vus)
