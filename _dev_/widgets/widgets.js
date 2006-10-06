@@ -37,26 +37,26 @@ $.initwidget = function(me) {
     }
 
     // charger le formulaire
-    var contenu = $(me).html();
-    $(me).append(SEARCHING); // icone d'attente
+    $(me)
+    .attr('orig_html', $(me).html())
+    .append(SEARCHING); // icone d'attente
     $.get(url_widgets_html+encodeURIComponent(me.className),
        function (c) {
          var w,h;
          w = $(me).width();
          h = $(me).height();
          $(me)
-         .attr('orig_html', contenu)
          .html(c)
          .find('form')
            .ajaxForm(function(c){
              $(me)
              .html(c.responseText)
              .removeAttr('orig_html');
-           }).submit(function(){
-             $(me).find("form").append(SEARCHING); // icone d'attente
+           }).onesubmit(function(){
+             $("form", me)
+             .append(SEARCHING); // icone d'attente
            })
            .find(".widget-active")
-             .css('backgroundColor', 'yellow')
              .css('font', 'inherit') // pour safari
              .css({
                  'fontSize': $(me).css('fontSize'),
