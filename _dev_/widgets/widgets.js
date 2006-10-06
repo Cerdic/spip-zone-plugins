@@ -106,24 +106,13 @@ $.clickwidget = function(e){
 }
 
 $(function() {
-  var widgets_actives = false;
-  $('html')
-  .dblclick(function(){
-    if (!widgets_actives) {
-      $(".widget")
-      .css('backgroundColor','#ddeeee')
-      .click($.clickwidget);
-      $("html")
-      .click($.cancelwidgets);
-      widgets_actives = true;
-    } else {
-      $(".widget")
-      .css('backgroundColor','')
-      .unclick($.clickwidget);
-      $("html")
-      .unclick($.cancelwidgets);
-      widgets_actives = false;
-    }
-  });
+  $('head')
+  .prepend('<style>.widget:hover { background-image: url("dist/images/edit.gif"); background-repeat:no-repeat; background-position:right top; background-color: #e3eeee;}</style>');
+  $(".widget")
+  .attr('title', 'Cliquez pour modifier')  // pas terrible ;-)
+  .click($.clickwidget);
+// .animate(????);
+  $("html")
+  .click($.cancelwidgets);
 });
 

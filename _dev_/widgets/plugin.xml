@@ -17,4 +17,8 @@
 	<prefix>
 	Widgets
 	</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
 </plugin>
