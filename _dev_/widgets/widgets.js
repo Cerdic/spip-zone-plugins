@@ -1,6 +1,6 @@
 
 url_widgets_html = 'spip.php?action=widgets_html&class=';
-url_widgets_droits = 'spip.php?action=widgets_droits&vus=';
+url_widgets_droits = 'spip.php?action=widgets_droits';
 SEARCHING = '<img src="dist/images/searching.gif" style="float:right;" />';
 
 $.cancelwidgets = function() {
@@ -8,7 +8,7 @@ $.cancelwidgets = function() {
     var html = $(this).attr('orig_html');
     if (html != null) {
       // enregistrer le widget avec le contenu modifie, si on veut y revenir
-//      $(this).attr('widget', $(this).html());
+      $(this).savewidget();
       // puis reafficher le contenu initial
       $(this).html(html);
     }
@@ -83,7 +83,7 @@ $.initwidget = function(me) {
              .keypress(function(e){
                if (e.keyCode == 27) {
                  $(me)
-//                 .attr('widget',$(me).html()) // sauver le widget
+                 .savewidget()
                  .html($(me).attr('orig_html'))
                  .removeAttr('orig_html');
                }
@@ -92,7 +92,7 @@ $.initwidget = function(me) {
            .find(".cancel_widget")
              .click(function(){
                $(me)
-//               .attr('widget',$(me).html()) // sauver le widget
+               .savewidget()
                .html($(me).attr('orig_html')) // retablir le contenu d'origine
                .removeAttr('orig_html');
                return false;
@@ -109,6 +109,13 @@ $.clickwidget = function(e){
   $.initwidget(this);
 }
 
+// TODO recuperer le HTML "actuel" d'un widget (y compris modifications du contenu) et le sauver dans attr('widget')
+$.fn.savewidget = function() {
+  this.each(function(){
+  });
+  return this;
+}
+
 $(function() {
 
   $('head')
@@ -121,11 +128,9 @@ $(function() {
     vus += '&'+this.className
   });
 
-  // TODO: POST ?
-  //
   // Quand on recupere la liste des droits, on active les widgets autorises
   if (vus)
-  $.get(url_widgets_droits+encodeURIComponent(vus),
+  $.post(url_widgets_droits, {'vus': vus},
     function(c) {
       c = c.split('|');
       for (var i=0; i<c.length; i++) {
