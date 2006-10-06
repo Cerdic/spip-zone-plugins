@@ -291,12 +291,14 @@
 				//$mess_iso = unicode2charset(html2unicode(charset2unicode($corps_mail)),'iso-8859-1');
 				//mail($dest, $sujet, $mess_iso, $head);
 				$headers = "";
-				if (preg_match(",<html>.*</html>,",$corps_mail)){
+				if (preg_match(",<html>(.*)</html>,Uims",$corps_mail,$regs)){
 					$charset = $GLOBALS['meta']['charset'];
 					$headers .=
 					"MIME-Version: 1.0\n".
 					"Content-Type: text/html; charset=$charset\n".
 					"Content-Transfer-Encoding: 8bit\n";
+					if (preg_match(",<h[1-6]>(.*)</h[1-6]>,Uims",$regs[1],$$hs))
+						$sujet=$hs[1];
 				}
 				envoyer_mail($dest, $sujet, $corps_mail, "formulaire@".$_SERVER["HTTP_HOST"], $headers);
 			}
@@ -308,12 +310,14 @@
 				//$mess_iso = unicode2charset(html2unicode(charset2unicode($corps_mail_admin)),'iso-8859-1');
 				//mail($dest, $sujet, $mess_iso, $head);
 				$headers = "";
-				if (preg_match(",<html>.*</html>,",$corps_mail_admin)){
+				if (preg_match(",<html>.*</html>,Uims",$corps_mail_admin,$regs)){
 					$charset = $GLOBALS['meta']['charset'];
 					$headers .=
 					"MIME-Version: 1.0\n".
 					"Content-Type: text/html; charset=$charset\n".
 					"Content-Transfer-Encoding: 8bit\n";
+					if (preg_match(",<h[1-6]>(.*)</h[1-6]>,Uims",$regs[1],$$hs))
+						$sujet=$hs[1];
 				}
 				envoyer_mail($dest, $sujet, $corps_mail_admin, "formulaire@".$_SERVER["HTTP_HOST"], $headers);
 		 	}
