@@ -1,5 +1,6 @@
 
 url_widgets_html = 'spip.php?action=widgets_html&class=';
+url_widgets_droits = 'spip.php?action=widgets_droits&vus=';
 SEARCHING = '<img src="dist/images/searching.gif" style="float:right;" />';
 
 $.cancelwidgets = function() {
@@ -108,15 +109,35 @@ $.clickwidget = function(e){
 $(function() {
   $('head')
   .prepend('<style>.widget-hover { background-image: url("dist/images/edit.gif"); background-repeat:no-repeat; background-position:right top; background-color: #e3eeee;}</style>');
+
+  // Aller chercher les droits a partir de la liste des classes
+  var vus = '';
   $(".widget")
-  .hover( // obligatoire pour MSIE
-    function(){$(this).addClass('widget-hover');},
-    function(){$(this).removeClass('widget-hover');}
-  )
-  .attr('title', 'Cliquez pour modifier')  // pas terrible ;-)
-  .click($.clickwidget);
-// .animate(????);
-  $("html")
-  .click($.cancelwidgets);
+  .each(function(){
+    vus += '&'+this.className
+  });
+
+  // TODO: POST ?
+  // TODO: je ne comprends pas pourquoi ca fait deux hits ajax...
+  //
+  // Quand on recupere la liste des droits, on active les widgets autorises
+  if (vus)
+  $.get(url_widgets_droits+encodeURIComponent(vus),
+    function(c) {
+      c = c.split('|');
+      for (var i=0; i<c.length; i++) {
+        $(".widget."+c[i])
+        .hover( // obligatoire pour MSIE
+          function(){$(this).addClass('widget-hover');},
+          function(){$(this).removeClass('widget-hover');}
+        )
+        .attr('title', 'Cliquez pour modifier')  // pas terrible ;-)
+        .click($.clickwidget);
+//      .animate(????);
+        $("html")
+        .click($.cancelwidgets);
+      }
+    }
+  );
 });
 

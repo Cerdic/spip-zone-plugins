@@ -2,22 +2,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// fonction d'API manquante a SPIP...
-function autoriser_modifs($quoi = 'article', $id = 0) {
-	if ($quoi != 'article') {
-		echo "pas implemente";
-		return false;
-	}
-
-	global $connect_id_auteur, $connect_statut;
-	$connect_id_auteur = intval($GLOBALS['auteur_session']['id_auteur']);
-	$connect_statut = $GLOBALS['auteur_session']['statut'];
-	include_spip('inc/auth');
-	auth_rubrique(); # definit $connect_toutes_rubriques (argh)
-	return acces_article($id);
-}
-
 function action_widgets_html_dist() {
+	include_spip('action/widgets_droits');
 	include_spip('inc/widgets');
 	include_spip('inc/texte');
 	include_spip('inc/rubriques');
