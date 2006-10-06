@@ -26,6 +26,8 @@ function action_widgets_droits_dist() {
 
 // fonction d'API manquante a SPIP...
 function autoriser_modifs($quoi = 'article', $id = 0) {
+	return true; # pour la demo
+
 	if ($quoi != 'article') {
 		echo "pas implemente";
 		return false;

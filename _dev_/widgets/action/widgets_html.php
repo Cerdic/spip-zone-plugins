@@ -61,14 +61,16 @@ function action_widgets_html_dist() {
 		if ($w<100) $w=100;
 		if ($w>700) $w=700;
 		if ($type == 'texte') {
-			if ($h<36) $h=36;
+			if ($h<36) $h=36; #ici on pourrait mettre minimum 3*$_GET['em']
 		}
-		elseif ($h<12)
-			$hx = htmlspecialchars($_GET['em']);
+		else // ligne, hauteur naturelle
+			$h='';#$hx = htmlspecialchars($_GET['em']);
+
 		if ($h>700) $h=700; // hauteur maxi d'un textarea -- pas assez ? trop ?
 
 		if (!isset($hx)) $hx = $h.'px';
-		$style = "width:${w}px; height:${hx};";
+		$style = "width:${w}px;";
+		if ($h) $style.=" height:${hx};";
 
 		$s = spip_query("SELECT ".$regs[2]." AS val FROM spip_".$regs[1]."s
 		WHERE id_".$regs[1]."=".$regs[3]);
