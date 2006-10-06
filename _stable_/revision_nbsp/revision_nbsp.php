@@ -21,6 +21,7 @@
 	}
 
 	function RevisionNbsp_ajoute_bouton_corriger_les_notes($x) {
+		if ($GLOBALS['auteur_session']['statut'] == '0minirezo')
 		if ($x['args']['exec'] == 'articles') {
 			$id_article = intval($x['args']['id_article']);
 			$t = spip_fetch_array(spip_query("SELECT texte FROM spip_articles WHERE id_article=$id_article"));
