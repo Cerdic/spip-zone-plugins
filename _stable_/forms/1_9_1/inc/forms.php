@@ -297,7 +297,7 @@
 					"MIME-Version: 1.0\n".
 					"Content-Type: text/html; charset=$charset\n".
 					"Content-Transfer-Encoding: 8bit\n";
-					if (preg_match(",<h[1-6]>(.*)</h[1-6]>,Uims",$regs[1],$$hs))
+					if (preg_match(",<h[1-6]>(.*)</h[1-6]>,Uims",$regs[1],$hs))
 						$sujet=$hs[1];
 				}
 				envoyer_mail($dest, $sujet, $corps_mail, "formulaire@".$_SERVER["HTTP_HOST"], $headers);
@@ -316,7 +316,7 @@
 					"MIME-Version: 1.0\n".
 					"Content-Type: text/html; charset=$charset\n".
 					"Content-Transfer-Encoding: 8bit\n";
-					if (preg_match(",<h[1-6]>(.*)</h[1-6]>,Uims",$regs[1],$$hs))
+					if (preg_match(",<h[1-6]>(.*)</h[1-6]>,Uims",$regs[1],$hs))
 						$sujet=$hs[1];
 				}
 				envoyer_mail($dest, $sujet, $corps_mail_admin, "formulaire@".$_SERVER["HTTP_HOST"], $headers);
