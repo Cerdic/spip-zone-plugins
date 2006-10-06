@@ -55,13 +55,28 @@ function action_widgets_html_dist() {
 		else
 			$type = 'ligne';
 
+		// taille du widget
+		$w = intval($_GET['w']);
+		$h = intval($_GET['h']);
+		if ($w<100) $w=100;
+		if ($w>700) $w=700;
+		if ($type == 'texte') {
+			if ($h<36) $h=36;
+		}
+		elseif ($h<12)
+			$hx = htmlspecialchars($_GET['em']);
+		if ($h>700) $h=700; // hauteur maxi d'un textarea -- pas assez ? trop ?
+
+		if (!isset($hx)) $hx = $h.'px';
+		$style = "width:${w}px; height:${hx};";
+
 		$s = spip_query("SELECT ".$regs[2]." AS val FROM spip_".$regs[1]."s
 		WHERE id_".$regs[1]."=".$regs[3]);
 		if ($t = spip_fetch_array($s)) {
-			echo "<form method='post' action='".self()."'>\n";
+			echo "<form method='post' action='".self()."' $style>\n";
 			$n = new SecureWidget($regs[0], $t['val']);
 			echo $n->code();
-			echo $n->input($type);
+			echo inserer_attribut($n->input($type), 'style', $style);
 			echo '<div style="float:right; width:100px">';
 			echo '<div style="position:absolute;">';
 			echo '<input type="submit" value="ok" />'."\n";

@@ -1,16 +1,13 @@
 
-url_widgets_html = 'spip.php?action=widgets_html&class=';
+url_widgets_html = 'spip.php?action=widgets_html';
 url_widgets_droits = 'spip.php?action=widgets_droits';
 SEARCHING = '<img src="dist/images/searching.gif" style="float:right;" />';
 
 $.cancelwidgets = function() {
   $(".widget").each(function(){
-    var html = $(this).attr('orig_html');
-    if (html != null) {
-      // enregistrer le widget avec le contenu modifie, si on veut y revenir
-      $(this).savewidget();
-      // puis reafficher le contenu initial
-      $(this).html(html);
+    if ($(this).attr('orig_html') != null) {
+      $(this)
+      .cancelwidget();
     }
     $(this).removeAttr('orig_html');
   });
@@ -24,94 +21,100 @@ $.initallwidgets = function(e) {
 }
 
 $.initwidget = function(me) {
-    // voir si je suis en mode "widget"
-    if ($(me).attr('orig_html') != null)
-      return;
+  // voir si je suis en mode "widget"
+  if ($(me).attr('orig_html') != null)
+    return;
 
-    // voir si je dispose deja du widget (ne marche pas)
-    if ($(me).attr('widget') != null) {
-      $(me)
-      .attr('orig_html', $(me).html())
-      .html($(me).attr('widget'));
-      // ici reactiver .ajaxForm() etc...
-      return;
-    }
+  $(me)
+  .attr('orig_html', $(me).html());
 
-    // charger le formulaire
+  // voir si je dispose deja du widget
+  if ($(me).attr('widget') != null) {
+    // alors on restitue le widget enregistre
     $(me)
-    .attr('orig_html', $(me).html())
-    .append(SEARCHING); // icone d'attente
-    $.get(url_widgets_html+encodeURIComponent(me.className),
-       function (c) {
-         var w,h;
-         w = $(me).width();
-         h = $(me).height();
-         $(me)
-         .html(c)
-         .find('form')
-           .ajaxForm(function(c){
-             $(me)
-             .html(c.responseText)
-             .removeAttr('orig_html');
-           }).onesubmit(function(){
-             $("form", me)
-             .append(SEARCHING); // icone d'attente
-           })
-           .find(".widget-active")
-             .css('font', 'inherit') // pour safari
-             .css({
-                 'fontSize': $(me).css('fontSize'),
-                 'fontFamily': $(me).css('fontFamily')
-             })
-             // resize widget to fit current space, and a bit more if too small
-             .each(function() {
-               if (w<100) w=100;
-               if (w>700) w=700;
-               if (this.nodeName.toUpperCase()=='TEXTAREA') {
-                 if (h<36) h=36;
-                 h+='px';
-               } else {
-                 if (h<12) h=$(me).css('fontSize');
-                 else h+='px';
-               }
-               $(this).css({"width":w+'px',"height":h});
-             })
-             .each(function(n){
-               if (n==0)
-                 this.focus();
-             })
-             .keypress(function(e){
-               if (e.keyCode == 27) {
-                 $(me)
-                 .savewidget()
-                 .html($(me).attr('orig_html'))
-                 .removeAttr('orig_html');
-               }
-             })
-           .end()
-           .find(".cancel_widget")
-             .click(function(){
-               $(me)
-               .savewidget()
-               .html($(me).attr('orig_html')) // retablir le contenu d'origine
-               .removeAttr('orig_html');
-               return false;
-             })
-           .end()
-         .end()
-         ;
-       }
-     );
+    .html($(me).attr('widget'))
+    // avec sa valeur eventuellement modifiee
+    .find('.widget-active')[0].value = $(me).attr('valuewidget');
+    $(me)
+    .activatewidget();
   }
+  // sinon charger le formulaire
+  else {
+    $(me)
+    .append(SEARCHING); // icone d'attente
+    $.get(url_widgets_html
+      + '&w=' + $(me).width()
+      + '&h=' + $(me).height()
+      + '&em=' + $(me).css('fontSize')
+      + '&class=' + encodeURIComponent(me.className)
+     ,
+      function (c) {
+        $(me)
+        .html(c)
+        .attr('widget',c)
+        .activatewidget();
+      }
+    );
+  }
+}
 
 $.clickwidget = function(e){
   e.stopPropagation(); // avoid sending a global click to the body onclick
   $.initwidget(this);
 }
 
-// TODO recuperer le HTML "actuel" d'un widget (y compris modifications du contenu) et le sauver dans attr('widget')
-$.fn.savewidget = function() {
+// recupere le contenu "actuel" d'un widget pour recuperer les donnees
+// si on reouvre le widget apres l'avoir ferme
+$.fn.cancelwidget = function() {
   this.each(function(){
+    $(this)
+    .attr('valuewidget', $('.widget-active',this)[0].value)
+    .html($(this).attr('orig_html'))
+    .removeAttr('orig_html');
+  });
+  return this;
+}
+
+
+$.fn.activatewidget = function() {
+  this.each(function(){
+    var me = this;
+    var w,h;
+    $(me)
+    .find('form')
+      .ajaxForm(function(d){
+        $(me)
+        .html(d.responseText)
+        .removeAttr('orig_html');
+      }).onesubmit(function(){
+        $("form", me)
+        .append(SEARCHING); // icone d'attente
+      })
+      .find(".widget-active")
+        .css('font', 'inherit') // pour safari
+        .css({
+            'fontSize': $(me).css('fontSize'),
+            'fontFamily': $(me).css('fontFamily')
+        })
+        .each(function(n){
+          if (n==0)
+            this.focus();
+        })
+        .keypress(function(e){
+          if (e.keyCode == 27) {
+            $(me)
+            .cancelwidget();
+          }
+        })
+      .end()
+      .find(".cancel_widget")
+        .click(function(){
+          $(me)
+          .cancelwidget();
+          return false;
+        })
+      .end()
+    .end();
   });
   return this;
 }
