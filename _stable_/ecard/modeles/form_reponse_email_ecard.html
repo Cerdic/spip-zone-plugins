@@ -1,11 +1,12 @@
 <html>
 <BOUCLE_reponses(REPONSES){id_reponse}>#SET{champ,''}
 <BOUCLE_art(ARTICLES){id_article}>
-#TITRE
+<h1>#TITRE</h1>
 [(#TEXTE|liens_absolus)]
 </BOUCLE_art>
+<br/>
 <BOUCLE_form(FORMS){id_form}>[(#TEXTE|supprimer_tags)]
-#TITRE[(#ENV{mail_admin}|=={'oui'}|?{' ',''})
+[(#ENV{mail_admin}|=={'oui'}|?{' ',''})
 <:forms:reponse_retrovez:> #URL_ECRIRE{forms_reponses,id_form=#ID_FORM}
 ]
 <BOUCLE_repchamps(REPONSES_CHAMPS){id_reponse}><BOUCLE_champsnom(FORMS_CHAMPS){id_form}{champ}>[(#GET{champ}|=={#CHAMP}|?{'',' '})
