@@ -1,0 +1,32 @@
+<plugin>
+	<nom>
+	Auteurs Complets
+	</nom>
+	<auteur>
+ 	Quentin Drouet
+_ &copy; 2006 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version>
+	0.03
+	</version>
+	<etat>
+	experimental
+	</etat>
+	<description>
+	Rajout de champs pour les auteurs...
+	De nouvelles balises ainsi disponibles : 
+	#TELEPHONE #FAX #SKYPE #ADRESSE #CODE_POSTAL #VILLE #PAYS #LATITUDE #LONGITUDE
+	</description>
+	<options>
+	auteurs_complets_options.php
+	</options>
+	<fonctions>
+	</fonctions>
+	<prefix> 
+	auteurs_complets
+	</prefix>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>auteurs_complets.php</inclure>
+	</pipeline>
+</plugin>
