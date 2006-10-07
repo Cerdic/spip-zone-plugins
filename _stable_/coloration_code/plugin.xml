@@ -25,7 +25,7 @@
 	  
 	  Par d&#233;faut, si le code mis en surbrillance fait plus d'une ligne, il est mis en cache sous forme textuelle et propos&#233; au t&#233;l&#233;chargement.
 	  Ce fonctionnement est control&#233; globalement par une constante PLUGIN_COLORATION_CODE_TELECHARGE d&#233;faut true.
-	  Il peut &#234;tre forc&#233; localement en rajoutant la classe "sans_telechargement" dans un sens ou "chargement" dans l'autre comme {{&lt;code class="php sans_telechargement">
+	  Il peut &#234;tre forc&#233; localement en rajoutant la classe "sans_telechargement" dans un sens ou "chargement" dans l'autre comme {{&lt;code class="php sans_telechargement">}}
 	  
 	  Vous pouvez aussi utiliser coloration_code comme un filtre "coloration_code_color" comme #TEXTE**|coloration_code_color{spip,code}: colore #TEXTE avec le language spip en format code (sans cadre), voir exemple lecode.html
 	  
@@ -43,7 +43,7 @@
 	  
 	  By default, when the highlighted code has more than one line, il will be put in cache as text and proposed to upload.
 	  This feature may be controlled globaly through the constant PLUGIN_COLORATION_CODE_TELECHARGE default true.
-	  It may also be forced locally by adding a class "sans_telechargement" in a way or "chargement" in the other as {{&lt;code class="php sans_telechargement">
+	  It may also be forced locally by adding a class "sans_telechargement" in a way or "chargement" in the other as {{&lt;code class="php sans_telechargement">}}
 	  
 	  You may also use coloration_code as a filter "coloration_code_color" as #TEXTE**|coloration_code_color{spip,code}: highlights #TEXTE with langage "spip" in format code (without frame) , see example lecode.html
 	  
