@@ -1,9 +1,17 @@
 <BOUCLE_a(ARTICLES){tout}{0,2}>
 	<br><br>article #ID_ARTICLE
 	<br>ID_ARTICLE > 1 ?
-    <BOUCLE_if1(IF){condition #ID_ARTICLE > 1}>OUI pour #ID_ARTICLE</BOUCLE_if1>NON pour #ID_ARTICLE<//B_if1>
+    <BOUCLE_if1(IF){condition #ID_ARTICLE > 1}>
+		OUI pour #ID_ARTICLE
+	</BOUCLE_if1>
+		NON pour #ID_ARTICLE
+	<//B_if1>
 	<br>ID_ARTICLE = 2 ?
-	<BOUCLE_if2(IF){condition #ID_ARTICLE == 2}>oui pour #ID_ARTICLE</BOUCLE_if2>non pour #ID_ARTICLE<//B_if2>
+	<BOUCLE_if2(IF){condition #ID_ARTICLE == 2}>
+		oui pour #ID_ARTICLE
+	</BOUCLE_if2>
+		non pour #ID_ARTICLE
+	<//B_if2>
 </BOUCLE_a>
 
 <br><br>nom_site = 'Mon site SPIP' ?
@@ -15,3 +23,8 @@ si oui
 </BOUCLE_if3>
 si non
 <//B_if3>
+
+<br>balise IF : statut #SESSION{statut} =>
+
+[c'est un (#IF{ #SESSION**{statut}|=={0minirezo} }) admin]
+[c est un (#IF{ #SESSION**{statut}|=={1comite} }) redacteur]

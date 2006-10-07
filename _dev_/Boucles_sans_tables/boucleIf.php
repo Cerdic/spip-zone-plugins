@@ -16,12 +16,32 @@ function boucle_IF($id_boucle, &$boucles) {
 	$code=<<<CODE
 
 	if(eval("return ".$boucle->where.";")) {
-		//\$SP++;
+		\$SP++;
 		return $boucle->return;
 	}
 CODE;
 
 	return $code;
+}
+
+function balise_IF($p) {
+	if (!$p->param || $p->param[0][0]) {
+	  erreur_squelette("pas de condition dans balise IF", $boucle->id_boucle);
+	}
+	$var=  calculer_liste($p->param[0][1],
+						  $p->descr, $p->boucles, $p->id_boucle);
+	$var= addcslashes($var, "\\'");
+	$code=
+		calculer_liste($p->avant,
+					   $p->descr, $p->boucles, $p->id_boucle)
+		.'.'.
+		calculer_liste($p->apres,
+					   $p->descr, $p->boucles, $p->id_boucle);
+	$code= addcslashes($code, "\\'");
+	$p->avant= $p->apres= "";
+	$p->code= "'<'.'?php /*DEBUT IF*/ if($var) { echo ($code); } /*FIN IF*/ ?'.'>'";
+	$p->interdire_scripts = false;
+	return $p;
 }
 
 function critere_condition($idb, &$boucles, $crit) {
