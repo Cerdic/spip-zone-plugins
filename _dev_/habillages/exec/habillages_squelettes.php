@@ -27,7 +27,13 @@ function exec_habillages_squelettes() {
 	}
 	
 	if (_request('changer_plugin')=='oui'){
-			ecrire_plugin_actifs(_request('statusplug'),'',$operation='ajoute');
+		$lire_meta_squelettes = array(isset($GLOBALS['meta']['habillages_squelettes'])?$GLOBALS['meta']['habillages_squelettes']:'');
+		ecrire_plugin_actifs($lire_meta_squelettes,'',$operation='enleve');
+		ecrire_meta('habillages_squelettes', _request('statusplug'));
+		ecrire_metas;
+		$lire_meta_squelettes_modifs = array(isset($GLOBALS['meta']['habillages_squelettes'])?$GLOBALS['meta']['habillages_squelettes']:'');
+		ecrire_plugin_actifs($lire_meta_squelettes_modifs,'',$operation='ajoute');
+		
 	}
 
 	if (isset($_GET['surligne']))
@@ -144,7 +150,7 @@ EOF;
 				
 				if ($type_theme=="squelettes" && is_file($fichier_plugin_xml)) {
 					echo "<ul>";
-					habillages_affichage_plugins($fichier_plugin_xml);
+					habillages_affichage_squelettes($fichier_plugin_xml);
 					echo "</ul>";
 				}
 				

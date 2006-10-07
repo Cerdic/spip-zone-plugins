@@ -1,6 +1,6 @@
 <?php
 
-function habillages_affichage_plugins($fichier_plugin_xml) {
+function habillages_affichage_squelettes($fichier_plugin_xml) {
 	global $couleur_claire;
 	global $couleur_foncee;
 	
@@ -42,10 +42,11 @@ function habillages_affichage_plugins($fichier_plugin_xml) {
 				break;
 		}
 	
-	$lire_meta_plugin = isset($GLOBALS['meta']['plugin'])?$GLOBALS['meta']['plugin']:'';
-	$plugin_actif = ereg($chemin_plugin_court, $lire_meta_plugin, $pleug_actif);
+		if (_request('exec')=='habillages_squelettes'){
+			$lire_meta_habillages = isset($GLOBALS['meta']['habillages_squelettes'])?$GLOBALS['meta']['habillages_squelettes']:'';
+		}
 	
-	if ($pleug_actif != "") {
+	if ($lire_meta_habillages == $chemin_plugin_court) {
 		$checked = " checked='checked'";
 	}
 	else {
@@ -58,7 +59,10 @@ function habillages_affichage_plugins($fichier_plugin_xml) {
 	echo "<strong>".$nom_plugin."</strong>(version ".$version_plugin.")<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
 	# Laisser la possibilite de definir le nom et le chemin de la capure ecran
 	# dans theme.xml.
-	echo '<div style="float:right";><img src="'.$chemin_plugin_complet.'/capture.png" alt="description" class="preview" /></div>';
+	echo '<div style="float:right";><img src="'.$chemin_plugin_complet.'/captureBW.png" alt="description" class="preview" /></div>';
+	# Ajouter : si theme.xml ne contient pas de theme.xml, on prend la description de plugin.xml. 
+	# Il est necessaire que theme.xml puisse definir les caracteristiques d'un squelette, d'un style, 
+	# d'un jeu d'images.
 	echo "<small>".propre($description_plugin)."</small><br /><br /><hr>";
 	echo "<div class='auteur'>".propre($auteur_plugin)."</div><hr>";
 	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";

@@ -11,7 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 - <strong>Les images</strong> : les logos, voire les icones qui vont habiller votre site.',
 'icone_habillages_squelettes' => 'Gestion des squelettes',
 'squelettes_titre' => 'G&eacute;rer les squelettes de votre site',
-'squelettes_commentaire' => 'Dans cette rubrique, vous g&eacute;rez les squelettes de votre de votre site. Un squelette est l\'armature d\'une page. Il g&egrave;re quelles informations sont pr&eacute;sent&eacute;es sur quelles pages et o&ugrave; elles apparaissent.',
+'squelettes_commentaire' => 'Dans cette rubrique, vous g&eacute;rez les squelettes de votre de votre site. Un squelette est l\'armature d\'une page. Il g&egrave;re quelles informations sont pr&eacute;sent&eacute;es sur quelles pages et o&ugrave; elles apparaissent.<br /><br />
+Les captures d\'&eacute;cran son volontairement en noir et blanc. Pour mettre de la couleur, allez dans la rubrique <i>style après avoir choisi un squelette ci-contre. </i>',
 'icone_habillages_styles' => 'Gestion des styles',
 'icone_habillages_images' => 'Gestion des images',
 'icone_habillages_icones' => 'Gestion des icones de l\'espace priv&eacute;',
