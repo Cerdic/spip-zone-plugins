@@ -1,0 +1,8 @@
+<plugin>
+	<nom>Mail SMTP</nom>
+	<auteur>Cedric&Booz</auteur>
+	<version>1.9.2</version>
+	<etat>test</etat>
+	<description>Envoi des mails par SMTP</description>
+	<prefix>smtp</prefix>
+</plugin>
