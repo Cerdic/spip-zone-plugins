@@ -33,7 +33,8 @@ function habillages_ajouter_onglets($flux) {
 	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_images-22.png', 'Images', generer_url_ecrire("habillages_images"));
 	$flux['data']['icones']= new Bouton(
 	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_icones_prive-22.png', 'Icones', generer_url_ecrire("habillages_icones"));
- 
+	$flux['data']['aide']= new Bouton(
+	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_aide-22.png', 'Aide', generer_url_ecrire("habillages_aide")); 
 }
 return $flux;
 }
