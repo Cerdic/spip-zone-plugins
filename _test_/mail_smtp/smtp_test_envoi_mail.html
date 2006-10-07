@@ -1,0 +1,32 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-Type: image/gif})]
+<?php
+	include_spip("inc/mail");
+	$smtp_host = isset($GLOBALS['meta']['smtp_host'])?$GLOBALS['meta']['smtp_host']:"";
+	$smtp_port = isset($GLOBALS['meta']['smtp_port'])?$GLOBALS['meta']['smtp_port']:"25";
+	$smtp_auth = isset($GLOBALS['meta']['smtp_auth'])?$GLOBALS['meta']['smtp_auth']:"non";
+	$smtp_username = isset($GLOBALS['meta']['smtp_username'])?$GLOBALS['meta']['smtp_username']:"";
+	$texte = _T('smtp:smtp_mail_test_texte')."\n";
+	$texte .= _T('smtp:smtp_host')." $smtp_host \n";
+	$texte .= _T('smtp:smtp_port')." $smtp_port \n";
+	if ($smtp_auth=='oui'){
+		$texte .= _T('smtp:smtp_auth')." $smtp_auth \n";
+		$texte .= _T('smtp:smtp_username')." $smtp_username \n";
+	}
+	$ok = envoyer_mail($GLOBALS['meta']["email_webmaster"], _T('smtp:smtp_mail_test_sujet'), $texte);
+
+	if ($ok) {
+		$image = "47494638396118001800800000ffffff00000021f90401000000002c0000000018001800000216848fa9cbed0fa39cb4da8bb3debcfb0f86e248965301003b";
+		$image = pack("H*", $image);
+		$size = strlen($image);
+
+		//Header("Content-Type: image/gif");
+		Header("Content-Length: ".$size);
+		Header("Cache-Control: no-cache,no-store");
+		Header("Pragma: no-cache");
+		Header("Connection: close");
+
+		echo $image;
+	}
+	
+?>

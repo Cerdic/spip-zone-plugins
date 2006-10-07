@@ -50,8 +50,10 @@ function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = ""
 	if ($email == _T('info_mail_fournisseur')) return false; // tres fort
 
 	// Ajouter au besoin le \n final dans les $headers passes en argument
-	if ($headers = trim($headers)) $headers .= "\n";
-	$mailer->AddCustomHeader($headers);
+	if (strlen($headers)){
+		if ($headers = trim($headers)) $headers .= "\n";
+		$mailer->AddCustomHeader($headers);
+	}
 
 	if (!$from) {
 		$email_envoi = $GLOBALS['meta']["email_envoi"];
@@ -90,7 +92,7 @@ function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = ""
 
 	$mailer->Body = $texte;
 	$mailer->Subject = $sujet;
-	$mailer->Send();
+	return $mailer->Send();
 	
 }
 

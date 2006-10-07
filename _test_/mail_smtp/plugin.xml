@@ -3,6 +3,11 @@
 	<auteur>Cedric&Booz</auteur>
 	<version>1.9.2</version>
 	<etat>test</etat>
-	<description>Envoi des mails par SMTP</description>
+	<description>Utilisation d'un serveur SMTP pour l'envoi des mails par SPIP
+_ Les param&egrave;tres du serveur SMTP sont configur&eacute;s dans la panneau de configuration des fonctions avanc&eacute;es.	</description>
 	<prefix>smtp</prefix>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>smtp_config_fonctions.php</inclure>
+	</pipeline>
 </plugin>
