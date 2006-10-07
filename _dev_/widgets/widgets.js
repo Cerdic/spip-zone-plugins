@@ -157,8 +157,8 @@ $(function() {
           function(){$(this).addClass('widget-hover');},
           function(){$(this).removeClass('widget-hover');}
         )
-        .attr('title', 'Cliquez pour modifier')  // pas terrible ;-)
-        .click($.clickwidget);
+        .attr('title', 'Double-clic pour modifier')  // pas terrible ;-)
+        .dblclick($.clickwidget);
         $("html")
         .click($.cancelwidgets);
       }
