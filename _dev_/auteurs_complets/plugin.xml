@@ -14,15 +14,16 @@ _ &copy; 2006 - Distribu&eacute; sous licence GPL
 	</etat>
 	<description>
 	Rajout de champs pour les auteurs...
-	De nouvelles balises ainsi disponibles : 
-	#TELEPHONE #FAX #SKYPE #ADRESSE #CODE_POSTAL #VILLE #PAYS #LATITUDE #LONGITUDE
+	De nouvelles balises ainsi disponibles :
+_ #TELEPHONE #FAX #SKYPE #ADRESSE #CODE_POSTAL #VILLE #PAYS #LATITUDE #LONGITUDE
+_ Plus d'infos : [http://kent1.sklunk.net/spip.php?article67->http://kent1.sklunk.net/spip.php?article67]
 	</description>
 	<options>
 	auteurs_complets_options.php
 	</options>
 	<fonctions>
 	</fonctions>
-	<prefix> 
+	<prefix>
 	auteurs_complets
 	</prefix>
 	<pipeline>
