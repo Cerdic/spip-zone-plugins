@@ -68,22 +68,23 @@ function action_widgets_html_dist() {
 
 		if ($h>700) $h=700; // hauteur maxi d'un textarea -- pas assez ? trop ?
 
-		if (!isset($hx)) $hx = $h.'px';
+#		if (!isset($hx)) $hx = $h.'px';
 		$style = "width:${w}px;";
-		if ($h) $style.=" height:${hx};";
+		if ($h) $style.="height:${h}px;";
 
 		$s = spip_query("SELECT ".$regs[2]." AS val FROM spip_".$regs[1]."s
 		WHERE id_".$regs[1]."=".$regs[3]);
 		if ($t = spip_fetch_array($s)) {
-			echo "<form method='post' action='".self()."' $style>\n";
-			$n = new SecureWidget($regs[0], $t['val']);
+			echo "<form method='post' action='".self()."' onkeyup=\"\$(&quot;.bouton-mobile&quot;,this).show();\"
+onsubmit=\"\$(&quot;.bouton-mobile&quot;,this).hide();\">\n";
+			$n = new Widget($regs[0], $t['val']);
 			echo $n->code();
 			echo inserer_attribut($n->input($type), 'style', $style);
 			echo '<div style="float:right; width:150px">';
 			echo '<div style="position:absolute;">';
-			echo '<input type="submit" value="ok" />'."\n";
-			echo '<input class="cancel_widget" type="button" value="cancel" />'."\n";
-			echo '<input class="hide_widget" type="button" value="hide" />'."\n";
+			echo '<input type="submit" value="ok" class="bouton-mobile" style="display:none;" />'."\n";
+			echo '<input class="cancel_widget bouton-mobile" type="button" value="cancel" style="display:none;" />'."\n";
+			echo '<input class="hide_widget bouton-mobile" type="button" value="hide" style="display:none;" />'."\n";
 			echo '</div>'."\n";
 			echo '</div>'."\n";
 			echo '</form>'."\n";

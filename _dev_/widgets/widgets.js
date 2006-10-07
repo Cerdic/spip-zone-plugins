@@ -1,7 +1,8 @@
-
+// TODO: closure
 url_widgets_html = 'spip.php?action=widgets_html';
 url_widgets_droits = 'spip.php?action=widgets_droits';
 SEARCHING = '<img class="widget-searching" src="dist/images/searching.gif" style="float:right;" />';
+ICONCLICK = "<img onclick='$.initwidget(this.parentNode, event);' style='float:right;border:0' src='dist/images/edit.gif' title='&Eacute;diter' />";
 
 $.hidewidgets = function() {
   $(".widget").each(function(){
@@ -17,12 +18,15 @@ $.initallwidgets = function(e) {
   e.stopPropagation();
 }
 
-$.initwidget = function(me) {
-  // voir si je suis en mode "widget"
+$.initwidget = function(me, e) {
+  // verifier que je suis un widget
   if (!$(me).is('.widget'))
     return;
 
-  // voir si je dispose deja du widget
+  if (e.stopPropagation)
+    e.stopPropagation();
+
+  // voir si je dispose deja du widget comme voisin
   if ($(me).is('.has-widget')) {
     $(me)
     .hide()
@@ -41,8 +45,9 @@ $.initwidget = function(me) {
      ,
       function (c) {
         $(me)
-        .find("img.widget-searching").remove().end();
-        $(me)
+        .find("img.widget-searching")
+          .remove()
+        .end()
         .hide()
         .addClass('has-widget')
         .next()
@@ -95,6 +100,7 @@ $.fn.activatewidget = function() {
         $(me)
         .prev()
           .html(d.responseText)
+          .prepend(ICONCLICK)
           .show()
           .removeClass('has-widget')
         .next()
@@ -145,9 +151,6 @@ $.fn.activatewidget = function() {
 
 $(function() {
 
-  $('head')
-  .prepend('<style>.widget-hover { background-image: url("dist/images/edit.gif"); background-repeat:no-repeat; background-position:right top; background-color: #e3eeee;}</style>');
-
   // Aller chercher les droits a partir de la liste des classes
   var vus = '';
   $(".widget")
@@ -173,11 +176,7 @@ $(function() {
             .removeClass(c[i])
             .click($.clickwidget); // eviter qu'un clic n'annule le widget
         })
-        .hover( // obligatoire pour MSIE
-          function(){$(this).addClass('widget-hover');},
-          function(){$(this).removeClass('widget-hover');}
-        )
-        .attr('title', 'Double-clic pour modifier')  // pas terrible ;-)
+        .prepend(ICONCLICK)
         .dblclick($.clickwidget);
         $("html")
         .click($.hidewidgets);
