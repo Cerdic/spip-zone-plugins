@@ -1086,7 +1086,7 @@ jQuery.fn.extend({
 			var p = (e.type == "mouseover" ? e.fromElement : e.toElement) || e.relatedTarget;
 	
 			// Traverse up the tree
-			while ( p && p != this ) p = p.parentNode;
+			while ( p && p != this ) try {p = p.parentNode;} catch(e) {p = this;};
 			
 			// If we actually just moused on to a sub-element, ignore it
 			if ( p == this ) return false;
@@ -1701,7 +1701,10 @@ jQuery.extend({
 				// Make sure that the request was successful or notmodified
 				if ( status != "error" ) {
 					// Cache Last-Modified header, if ifModified mode.
-					var modRes = xml.getResponseHeader("Last-Modified");
+					var modRes;
+          try {
+           modRes = xml.getResponseHeader("Last-Modified");
+          } catch(e) {}
 					if ( ifModified && modRes ) jQuery.lastModified[url] = modRes;
 					
 					// If a local callback was specified, fire it
