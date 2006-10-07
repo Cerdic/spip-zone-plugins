@@ -59,13 +59,13 @@
 	Dovete solo utilizzare il segnaposto:  {{&lt;code class="linguaggio">...&lt;/code>}},  o {{&lt;cadre class="langage">...&lt;/cadre>}}.
 	Sono supportati tutti i linguaggi di [->http://sourceforge.net/projects/geshi/] ed in aggiunta la classe "spip".
 	
-  In maniera predefinita, Se il codice da colorare ha più di una linea, sarà salvato in cache sotto forma di testo semplice e disponibile per lo scaricamento.
-  Questa impostazione può essere modificata globalmente grazie alla costante PLUGIN_COLORATION_CODE_TELECHARGE, che normalmente è impostata a true.
-	Quest'ultima può anche essere modificata localmente aggiugendo la classe "sans_telechargement" o "chargement", es: {{&lt;code class="php sans_telechargement">}}
+  In maniera predefinita, Se il codice da colorare ha pi&#249; di una linea, sar&#224; salvato in cache sotto forma di testo semplice e disponibile per lo scaricamento.
+  Questa impostazione pu&#242; essere modificata globalmente grazie alla costante PLUGIN_COLORATION_CODE_TELECHARGE, che normalmente &#232; impostata a true.
+	Quest'ultima pu&#242; anche essere modificata localmente aggiugendo la classe "sans_telechargement" o "chargement", es: {{&lt;code class="php sans_telechargement">}}
   
   Potete utilizzare coloration_code anche come un filtro "coloration_code_color" in questo modo: #TEXTE**|coloration_code_color{spip,code}: colora #TEXTE con le regole del linguaggio "spip" in formato code (senza il riquadro) , vedi l'esempio lecode.html
     
-	L'url per vedere il codice dell'articolo dalla sua stessa pagina sarà:
+	L'url per vedere il codice dell'articolo dalla sua stessa pagina sar&#224;:
 <![CDATA[	  
         <div style="float: right">
         <a href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}" title="vedi il codice dell'articolo" class="spip_in">Vedi il codice dell'articolo</a>
