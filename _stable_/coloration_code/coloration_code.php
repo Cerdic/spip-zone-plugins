@@ -21,8 +21,15 @@
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 define('_DIR_PLUGIN_COLORATION_CODE',(_DIR_PLUGINS.end($p)));
 
+// pour interdire globalement et optionnellement le téléchargement associé
+if (!defined('PLUGIN_COLORATION_CODE_TELECHARGE')) {
+	define('PLUGIN_COLORATION_CODE_TELECHARGE', true);
+}
+
 function coloration_code_color($code, $language, $cadre='cadre') {
-  
+
+	$params = explode(' ', $language);
+	$language = array_shift($params);
 	include_once _DIR_PLUGIN_COLORATION_CODE . '/geshi/geshi.php';
 	//
 	// Create a GeSHi object
@@ -35,7 +42,10 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 
 	$code = echappe_retour($code);
 
-	if (strpos($code, "\n") !== false) {
+	$telecharge = 
+		(PLUGIN_COLORATION_CODE_TELECHARGE || in_array('telecharge', $params))
+	 && (strpos($code, "\n") !== false) && !in_array('sans_telecharge', $params);
+	if ($telecharge) {
 		// Gerer le fichier contenant le code au format texte
 		$nom_fichier = md5($code);
 		$dossier = sous_repertoire(_DIR_IMG, 'cache-code');
@@ -61,7 +71,7 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 	//
 	$rempl = $geshi->parse_code();
 
-	if (strpos($code, "\n") !== false) {
+	if ($telecharge) {
 		$rempl .= "<div class='" . $cadre . "_download'
 		style='text-align: $spip_lang_right;'>
 		<a href='$fichier'
