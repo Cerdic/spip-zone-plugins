@@ -21,7 +21,7 @@
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 define('_DIR_PLUGIN_COLORATION_CODE',(_DIR_PLUGINS.end($p)));
 
-function coloration_code_color($language, $code, $cadre='cadre') {
+function coloration_code_color($code, $language, $cadre='cadre') {
   
 	include_once _DIR_PLUGIN_COLORATION_CODE . '/geshi/geshi.php';
 	//
@@ -76,8 +76,9 @@ function cadre_ou_code($regs) {
 	$ret = false;
 // pour l'instant, on oublie $matches[1] et $matches[4] les attributs autour de class="machin"
 	if (!preg_match(',^(.*)class=("|\')(.*)\2(.*)$,Uims',$regs[2], $matches)
-	|| !($ret = coloration_code_color($matches[3], $regs[3], $regs[1]))) {
-		$ret = traiter_echap_code_dist($regs);
+	|| !($ret = coloration_code_color($regs[3], $matches[3], $regs[1]))) {
+		$ret = $regs[1] == 'code' ? traiter_echap_code_dist($regs)
+					: traiter_echap_cadre_dist($regs);
 	}
 	return $ret;
 }
