@@ -1,15 +1,12 @@
 
 url_widgets_html = 'spip.php?action=widgets_html';
 url_widgets_droits = 'spip.php?action=widgets_droits';
-SEARCHING = '<img src="dist/images/searching.gif" style="float:right;" />';
+SEARCHING = '<img class="widget-searching" src="dist/images/searching.gif" style="float:right;" />';
 
 $.cancelwidgets = function() {
   $(".widget").each(function(){
-    if ($(this).attr('orig_html') != null) {
-      $(this)
-      .cancelwidget();
-    }
-    $(this).removeAttr('orig_html');
+    $(this)
+    .cancelwidget();
   });
 }
 
@@ -22,21 +19,15 @@ $.initallwidgets = function(e) {
 
 $.initwidget = function(me) {
   // voir si je suis en mode "widget"
-  if ($(me).attr('orig_html') != null)
+  if (!$(me).is('.widget'))
     return;
 
-  $(me)
-  .attr('orig_html', $(me).html());
-
   // voir si je dispose deja du widget
-  if ($(me).attr('widget') != null) {
-    // alors on restitue le widget enregistre
+  if ($(me).is('.has-widget')) {
     $(me)
-    .html($(me).attr('widget'))
-    // avec sa valeur eventuellement modifiee
-    .find('.widget-active')[0].value = $(me).attr('valuewidget');
-    $(me)
-    .activatewidget();
+    .hide()
+    .next()
+      .show();
   }
   // sinon charger le formulaire
   else {
@@ -50,9 +41,14 @@ $.initwidget = function(me) {
      ,
       function (c) {
         $(me)
-        .html(c)
-        .attr('widget',c)
-        .activatewidget();
+        .find("img.widget-searching").remove().end();
+        $(me)
+        .hide()
+        .addClass('has-widget')
+        .next()
+          .html(c)
+          .show() // animate
+          .activatewidget();
       }
     );
   }
@@ -63,14 +59,15 @@ $.clickwidget = function(e){
   $.initwidget(this);
 }
 
-// recupere le contenu "actuel" d'un widget pour recuperer les donnees
-// si on reouvre le widget apres l'avoir ferme
+// masque le widget ouvert
 $.fn.cancelwidget = function() {
   this.each(function(){
     $(this)
-    .attr('valuewidget', $('.widget-active',this)[0].value)
-    .html($(this).attr('orig_html'))
-    .removeAttr('orig_html');
+    .filter('.has-widget')
+    .show()
+    .next()
+      .hide()
+    .prev();
   });
   return this;
 }
@@ -84,8 +81,13 @@ $.fn.activatewidget = function() {
     .find('form')
       .ajaxForm(function(d){
         $(me)
-        .html(d.responseText)
-        .removeAttr('orig_html');
+        .prev()
+          .html(d.responseText)
+          .show()
+          .removeClass('has-widget')
+        .next()
+        .hide()
+        .html('');
       }).onesubmit(function(){
         $("form", me)
         .append(SEARCHING); // icone d'attente
@@ -103,6 +105,7 @@ $.fn.activatewidget = function() {
         .keypress(function(e){
           if (e.keyCode == 27) {
             $(me)
+            .prev()
             .cancelwidget();
           }
         })
@@ -110,7 +113,8 @@ $.fn.activatewidget = function() {
       .find(".cancel_widget")
         .click(function(){
           $(me)
-          .cancelwidget();
+          .prev()
+            .cancelwidget();
           return false;
         })
       .end()
@@ -138,13 +142,23 @@ $(function() {
       c = c.split('|');
       for (var i=0; i<c.length; i++) {
         $(".widget."+c[i])
+        .each(function(){
+          $(this)
+          .after(this.cloneNode(true))
+          .next()
+            .hide()
+            .html('')
+            .removeAttr('id') // necessaire ??
+            .removeClass('widget')
+            .removeClass(c[i])
+            .click($.clickwidget); // eviter qu'un clic n'annule le widget
+        })
         .hover( // obligatoire pour MSIE
           function(){$(this).addClass('widget-hover');},
           function(){$(this).removeClass('widget-hover');}
         )
         .attr('title', 'Cliquez pour modifier')  // pas terrible ;-)
         .click($.clickwidget);
-//      .animate(????);
         $("html")
         .click($.cancelwidgets);
       }
