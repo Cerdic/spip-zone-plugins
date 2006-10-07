@@ -1,7 +1,8 @@
 <?php
-
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_MARQSTAT',(_DIR_PLUGINS.end($p)));
+if (!defined("_DIR_PLUGIN_MARQSTAT")){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_MARQSTAT',(_DIR_PLUGINS.end($p)));
+}
 
 function marqstat_ajouter_boutons($boutons_admin) {
 	// si on est admin

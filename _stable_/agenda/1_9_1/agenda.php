@@ -4,7 +4,7 @@ function Agenda_ajouter_onglets($flux) {
   if($flux['args']=='calendrier')
   {
 		$flux['data']['evenements']= new Bouton(
-																 '../'._DIR_PLUGIN_AGENDA_EVENEMENTS.'/img_pack/agenda-24.png', _T('agenda:evenements'),
+																 '../'._DIR_PLUGIN_AGENDA.'/img_pack/agenda-24.png', _T('agenda:evenements'),
 																generer_url_ecrire("calendrier","type=semaine"));
 	
 		$flux['data']['editorial']= new Bouton(
@@ -17,11 +17,11 @@ function Agenda_header_prive($flux) {
 	$exec = _request('exec');
 	// les CSS
 	if ($exec == 'calendrier'){
-		$flux .= '<link rel="stylesheet" href="' ._DIR_PLUGIN_AGENDA_EVENEMENTS . '/img_pack/calendrier.css" type="text/css" />'. "\n";
-		$flux .= '<link rel="stylesheet" href="' ._DIR_PLUGIN_AGENDA_EVENEMENTS . '/img_pack/agenda.css" type="text/css" />'. "\n";
+		$flux .= '<link rel="stylesheet" href="' ._DIR_PLUGIN_AGENDA . '/img_pack/calendrier.css" type="text/css" />'. "\n";
+		$flux .= '<link rel="stylesheet" href="' ._DIR_PLUGIN_AGENDA . '/img_pack/agenda.css" type="text/css" />'. "\n";
 	}
 	if ($exec == 'articles'){
-		$flux .= '<link rel="stylesheet" href="' ._DIR_PLUGIN_AGENDA_EVENEMENTS . '/img_pack/agenda_articles.css" type="text/css" />'. "\n";
+		$flux .= '<link rel="stylesheet" href="' ._DIR_PLUGIN_AGENDA . '/img_pack/agenda_articles.css" type="text/css" />'. "\n";
 	}
 
 

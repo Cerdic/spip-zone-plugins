@@ -10,8 +10,10 @@
  *
  */
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
-define('_DIR_PLUGIN_GESTION_DOCUMENTS',(_DIR_PLUGINS.end($p)));
+if (!defined('_DIR_PLUGIN_GESTIONDOCUMENTS')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
+	define('_DIR_PLUGIN_GESTIONDOCUMENTS',(_DIR_PLUGINS.end($p)));
+}
 
 function exec_reparer_liens_documents(){
 	global $connect_statut;
@@ -43,7 +45,7 @@ function exec_reparer_liens_documents(){
 	debut_raccourcis();
 	icone_horizontale (_L('Portfolio'), 
 		generer_url_ecrire('portfolio'),
-		"../"._DIR_PLUGIN_GESTION_DOCUMENTS."/img_pack/stock_broken_image.png");
+		"../"._DIR_PLUGIN_GESTIONDOCUMENTS."/img_pack/stock_broken_image.png");
 	fin_raccourcis();
 	debut_droite();
 

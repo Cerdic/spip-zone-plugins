@@ -209,7 +209,7 @@ function visu_evenement_agenda($id_evenement,$flag_editable){
 		$url=parametre_url($url,'del','');
 		$url=parametre_url($url,'id_evenement','');
 
-		$out .= "<a href='$url'><img src='"._DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/croix.png' width='12' height='12' style='border:none;'></a>";
+		$out .= "<a href='$url'><img src='"._DIR_PLUGIN_AGENDA."/img_pack/croix.png' width='12' height='12' style='border:none;'></a>";
 		$out .= "</div>\n";
 
 		$fobjet = entites_html($fobjet,ENT_QUOTES);

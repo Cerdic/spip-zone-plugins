@@ -4,9 +4,10 @@
  * definition du plugin "console" version "classe statique"
  * utilisee comme espace de nommage
  */
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_CONSOLE',(_DIR_PLUGINS.end($p)));
- 
+if (!defined('_DIR_PLUGIN_CONSOLE')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_CONSOLE',(_DIR_PLUGINS.end($p)));
+} 
 
 	/* static public */
 

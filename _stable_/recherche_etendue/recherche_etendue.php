@@ -23,12 +23,12 @@
 
 		  // on voit les bouton dans la barre "accueil"
 			$boutons_admin['accueil']->sousmenu["admin_index"]= new Bouton(
-			"../"._DIR_PLUGIN_ADVANCED_SEARCH."/img_pack/stock_index.gif",  // icone
+			"../"._DIR_PLUGIN_RECHERCHEETENDUE."/img_pack/stock_index.gif",  // icone
 			_T("rechercheetendue:gestion_idexation") //titre
 			);
 
 			$boutons_admin['accueil']->sousmenu["index_tous"]= new Bouton(
-			"../"._DIR_PLUGIN_ADVANCED_SEARCH."/img_pack/stock_book-alt.gif",  // icone
+			"../"._DIR_PLUGIN_RECHERCHEETENDUE."/img_pack/stock_book-alt.gif",  // icone
 			_T("rechercheetendue:dictionnaire_indexe") //titre
 			);
 		}
@@ -69,7 +69,7 @@
 	
 	function RechercheEtendue_star($texte,$starfilename = "") {
 		if ($starfilename=="")
-			$starfilename=_DIR_PLUGIN_ADVANCED_SEARCH."/star.gif";
+			$starfilename=_DIR_PLUGIN_RECHERCHEETENDUE."/star.gif";
 		$point = $texte;
 		$texte = "";
 		$star1="<img src='$starfilename' alt='"._T("rechercheetendue:etoile_1")."' />";

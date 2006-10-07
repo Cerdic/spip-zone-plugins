@@ -1,6 +1,8 @@
 <?php
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_ACCES_RESTREINT',(_DIR_PLUGINS.end($p)));
+if (!defined('_DIR_PLUGIN_ACCESRESTREINT')){ // definie automatiquement en 1.9.2
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_ACCESRESTREINT',(_DIR_PLUGINS.end($p)));
+}
 
 	/* public static */
 	function AccesRestreint_ajouterBoutons($boutons_admin) {
@@ -9,7 +11,7 @@ define('_DIR_PLUGIN_ACCES_RESTREINT',(_DIR_PLUGINS.end($p)));
 		AND $GLOBALS["options"]=="avancees") {
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['configuration']->sousmenu['acces_restreint']= new Bouton(
-			"../"._DIR_PLUGIN_ACCES_RESTREINT."/img_pack/zones-acces-24.gif",  // icone
+			"../"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/zones-acces-24.gif",  // icone
 			_T('accesrestreint:icone_menu_config')	// titre
 			);
 		}

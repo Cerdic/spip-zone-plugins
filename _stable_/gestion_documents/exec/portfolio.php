@@ -9,9 +9,10 @@
  * © 2006 - Distribue sous licence GPL
  *
  */
-
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
-define('_DIR_PLUGIN_GESTION_DOCUMENTS',(_DIR_PLUGINS.end($p)));
+if (!defined('_DIR_PLUGIN_GESTIONDOCUMENTS')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
+	define('_DIR_PLUGIN_GESTIONDOCUMENTS',(_DIR_PLUGINS.end($p)));
+}
 
 function generer_query_string($conteneur,$id_type,$nb_aff,$filtre){
   $query = ($conteneur?"conteneur=$conteneur&":"")
@@ -119,7 +120,7 @@ function exec_portfolio(){
 		if (!isset($_POST['filtre'])) $_POST['filtre']=_request('filtre');
 	}
 	$titre_table=_L("Tous les Documents");
-	if (!$icone) $icone = "../"._DIR_PLUGIN_GESTION_DOCUMENTS."/img_pack/stock_broken_image.png";
+	if (!$icone) $icone = "../"._DIR_PLUGIN_GESTIONDOCUMENTS."/img_pack/stock_broken_image.png";
 
 	$table_type=array();
 	$s=spip_query('SELECT * FROM spip_types_documents');
@@ -396,7 +397,7 @@ function exec_portfolio(){
 				generer_url_ecrire('portfolio',"updatetable=oui&".generer_query_string($conteneur,$id_type,$nb_aff,$filtre)),
 				"administration-24.gif");
 		}
-		icone_horizontale (_L('Reparer les liens'), generer_url_ecrire('reparer_liens_documents'),"../"._DIR_PLUGIN_GESTION_DOCUMENTS."/img_pack/stock_broken_image.png");
+		icone_horizontale (_L('Reparer les liens'), generer_url_ecrire('reparer_liens_documents'),"../"._DIR_PLUGIN_GESTIONDOCUMENTS."/img_pack/stock_broken_image.png");
 
 		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string($conteneur,"",$nb_aff,$filtre))."' method='post'><div>\n";
 		echo _L('Type :') . "<br /><select name='id_type'";

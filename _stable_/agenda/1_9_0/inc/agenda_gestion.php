@@ -186,7 +186,7 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 			$les_evenements[] = $id_evenement;
 
 			$s = "<a href='".generer_url_ecrire('calendrier',"id_evenement=$id_evenement&ajouter_id_article=$id_article")."'>";
-			$s .= http_img_pack("../"._DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/agenda-12.png",'', "border='0'", _T('agenda:titre_sur_l_agenda'));
+			$s .= http_img_pack("../"._DIR_PLUGIN_AGENDA."/img_pack/agenda-12.png",'', "border='0'", _T('agenda:titre_sur_l_agenda'));
 			$s .= "</a>";
 			$vals[] = $s;
 
@@ -282,7 +282,7 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 			$url = parametre_url(self(),'edit','');
 			$url = parametre_url($url,'neweven','1');
 			$url = parametre_url($url,'id_evenement','');
-			$out .= icone_horizontale(_T("agenda:icone_creer_evenement"),$url , "../"._DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/agenda-24.png", "creer.gif",false);
+			$out .= icone_horizontale(_T("agenda:icone_creer_evenement"),$url , "../"._DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", "creer.gif",false);
 		}
 		else{
 			// recuperer le titre de l'article pour le mettre par defaut sur l'evenement
@@ -317,7 +317,7 @@ function Agenda_formulaire_article($id_article, $flag_editable){
 			$bouton = bouton_block_invisible("evenementsarticle");
 	}
 
-	$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/agenda-24.png", true, "", $bouton._T('agenda:texte_agenda')
+	$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", true, "", $bouton._T('agenda:texte_agenda')
 	." <a href='".generer_url_ecrire('calendrier',"ajouter_id_article=$id_article")."'>"._T('icone_calendrier')."</a>");
 
 	//
@@ -615,7 +615,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	}
 	
 	$out .= "<div class='agenda-visu-evenement-bouton-fermer'>";
-  $out .=	"<a href='$url'><img src='"._DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/croix.png' width='12' height='12' style='border:none;'></a>";
+  $out .=	"<a href='$url'><img src='"._DIR_PLUGIN_AGENDA."/img_pack/croix.png' width='12' height='12' style='border:none;'></a>";
   $out .= "</div>\n";
   $out .=  "<form name='edition_evenement' action='$url' method='post'>";
   #$out .=  "<input type='hidden' name='redirect' value='$url' />\n";
@@ -734,7 +734,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	$out .=  "</div>\n";
 
 	// feature desactivee pour le moment
-	// $out .= "<script type='text/javascript' src='"._DIR_PLUGIN_AGENDA_EVENEMENTS."/img_pack/multiselect.js'></script>";
+	// $out .= "<script type='text/javascript' src='"._DIR_PLUGIN_AGENDA."/img_pack/multiselect.js'></script>";
 
   $out .=  "</div>";
 

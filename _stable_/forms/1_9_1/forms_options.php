@@ -10,9 +10,10 @@
  * © 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
-
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end($p)));
+if (!defined('_DIR_PLUGIN_FORMS')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end($p)));
+}
 include_spip('base/forms');
 
 // Code a rapatrier dans inc-public et inc_forms

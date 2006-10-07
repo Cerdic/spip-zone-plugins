@@ -80,7 +80,7 @@ function exec_acces_restreint_edit(){
 	if (!$retour)
 		$retour = generer_url_ecrire("acces_restreint");
 
-	icone(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_ACCES_RESTREINT."/img_pack/zones-acces-24.gif", "rien.gif");
+	icone(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/zones-acces-24.gif", "rien.gif");
 	echo "</div>\n";
 	
 	fin_page();
