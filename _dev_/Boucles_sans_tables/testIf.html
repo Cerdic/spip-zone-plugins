@@ -6,12 +6,14 @@
 	</BOUCLE_if1>
 		NON pour #ID_ARTICLE
 	<//B_if1>
+	[(#IF{ #ID_ARTICLE > 1 }) <br>balise => OUI pour #ID_ARTICLE ]
 	<br>ID_ARTICLE = 2 ?
 	<BOUCLE_if2(IF){condition #ID_ARTICLE == 2}>
 		oui pour #ID_ARTICLE
 	</BOUCLE_if2>
 		non pour #ID_ARTICLE
 	<//B_if2>
+	[(#IF{ #ID_ARTICLE == 2 }) <br>balise => OUI pour #ID_ARTICLE]
 </BOUCLE_a>
 
 <br><br>nom_site = 'Mon site SPIP' ?

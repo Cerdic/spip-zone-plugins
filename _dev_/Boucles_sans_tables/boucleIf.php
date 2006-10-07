@@ -37,9 +37,8 @@ function balise_IF($p) {
 		.'.'.
 		calculer_liste($p->apres,
 					   $p->descr, $p->boucles, $p->id_boucle);
-	$code= addcslashes($code, "\\'");
 	$p->avant= $p->apres= "";
-	$p->code= "'<'.'?php /*DEBUT IF*/ if($var) { echo ($code); } /*FIN IF*/ ?'.'>'";
+	$p->code= "'<'.'?php /*DEBUT IF*/ if($var) { ?'.'>'.". $code .".'<'.'?php } /*FIN IF*/ ?'.'>'";
 	$p->interdire_scripts = false;
 	return $p;
 }
