@@ -3,10 +3,10 @@ url_widgets_html = 'spip.php?action=widgets_html';
 url_widgets_droits = 'spip.php?action=widgets_droits';
 SEARCHING = '<img class="widget-searching" src="dist/images/searching.gif" style="float:right;" />';
 
-$.cancelwidgets = function() {
+$.hidewidgets = function() {
   $(".widget").each(function(){
     $(this)
-    .cancelwidget();
+    .hidewidget();
   });
 }
 
@@ -59,15 +59,27 @@ $.clickwidget = function(e){
   $.initwidget(this);
 }
 
-// masque le widget ouvert
+// annule le widget ouvert
 $.fn.cancelwidget = function() {
   this.each(function(){
     $(this)
     .filter('.has-widget')
     .show()
+    .removeClass('has-widget')
     .next()
-      .hide()
-    .prev();
+      .html('')
+      .hide();
+  });
+  return this;
+}
+// masque le widget ouvert
+$.fn.hidewidget = function() {
+  this.each(function(){
+    $(this)
+    .filter('.has-widget')
+    .show()
+    .next()
+      .hide();
   });
   return this;
 }
@@ -118,6 +130,14 @@ $.fn.activatewidget = function() {
           return false;
         })
       .end()
+      .find(".hide_widget")
+        .click(function(){
+          $(me)
+          .prev()
+            .hidewidget();
+          return false;
+        })
+      .end()
     .end();
   });
   return this;
@@ -160,7 +180,7 @@ $(function() {
         .attr('title', 'Double-clic pour modifier')  // pas terrible ;-)
         .dblclick($.clickwidget);
         $("html")
-        .click($.cancelwidgets);
+        .click($.hidewidgets);
       }
     }
   );

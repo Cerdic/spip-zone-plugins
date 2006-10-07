@@ -79,10 +79,11 @@ function action_widgets_html_dist() {
 			$n = new SecureWidget($regs[0], $t['val']);
 			echo $n->code();
 			echo inserer_attribut($n->input($type), 'style', $style);
-			echo '<div style="float:right; width:100px">';
+			echo '<div style="float:right; width:150px">';
 			echo '<div style="position:absolute;">';
 			echo '<input type="submit" value="ok" />'."\n";
 			echo '<input class="cancel_widget" type="button" value="cancel" />'."\n";
+			echo '<input class="hide_widget" type="button" value="hide" />'."\n";
 			echo '</div>'."\n";
 			echo '</div>'."\n";
 			echo '</form>'."\n";
