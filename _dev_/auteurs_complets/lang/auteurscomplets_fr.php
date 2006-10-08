@@ -28,6 +28,8 @@
 	'affiche_latitude' => 'Latitude : ',
 	'affiche_longitude' => 'Longitude : ',
 	'affiche_adresse' => 'Adresse',
+	'paramprofil' => 'Modifier vos param&egrave;tres',
+	'localisation' => 'Localisation',
 	'Z' => 'ZZzZZzzz'
 
 );

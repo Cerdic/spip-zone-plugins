@@ -22,6 +22,7 @@ _ Plus d'infos : [http://kent1.sklunk.net/spip.php?article67->http://kent1.sklun
 	auteurs_complets_options.php
 	</options>
 	<fonctions>
+	auteurs_complets_fonctions.php
 	</fonctions>
 	<prefix>
 	auteurs_complets
