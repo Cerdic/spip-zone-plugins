@@ -4,7 +4,7 @@
 [(#ENV{affiche_sondage}) #RESULTATS_SONDAGE]
 [(#ENV{affiche_sondage}|?{'',' '})
 	[</fieldset><fieldset><legend>(#TYPE|=={separateur}|?{#TITRE,''})</legend> #SET{need_fieldset,0}]
-	[(#GET{need_fieldset}|?{' '})<fieldset><legend>#TITRE</legend> #SET{need_fieldset,0}]
+	[(#GET{need_fieldset}|?{' '})<fieldset><legend>#_form:TITRE</legend> #SET{need_fieldset,0}]
 	[(#TYPE|=={separateur}|?{'',' '})
 		<div class='spip_form_champ'>
 			[(#TYPE|=={textestatique}|?{#TITRE,''})]
