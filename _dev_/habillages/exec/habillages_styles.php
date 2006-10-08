@@ -121,21 +121,31 @@ EOF;
 	echo _T('habillages:squelettes_titre')."</font></b></td></tr>";
 	echo "<tr><td class='serif' colspan=4>";
 	
+		# Lire le squelette choisi.
+		$lire_meta_squelettes = isset($GLOBALS['meta']['habillages_squelettes'])?$GLOBALS['meta']['habillages_squelettes']:'';
+		# Aller chercher le theme.xml du squelette selectionne, le lire...
+		$theme_squelettes = _DIR_PLUGINS.$lire_meta_squelettes."/theme.xml";
+		lire_fichier($theme_squelettes, $texte_squelettes);
+		# ...et relever le prefixe.
+		$arbre = parse_plugin_xml($texte_squelettes);
+		$arbre = $arbre['theme'][0];
+		$prefixe_theme = trim(applatit_arbre($arbre['prefixe']));
+		
 		# Chercher les fichiers theme.xml.
 		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
 		
 		# Pour chaque fichier theme.xml trouve, on releve le <type> et on ne garde que 
 		# les styles pour les lister.
 		foreach ($fichier_theme as $fichier){
+			$arbre = "";
 			lire_fichier($fichier, $texte);
 			$arbre = parse_plugin_xml($texte);
 			$arbre = $arbre['theme'][0];
 			$type_theme = trim(applatit_arbre($arbre['type']));
-			$squelettes_theme = trim(applatit_arbre($arbre['squelettes']));
+			$squelettes_theme = array(trim(applatit_arbre($arbre['squelettes'])));
 			$nom_dossier_theme = dirname ($fichier);
 			$fichier_plugin_xml = $nom_dossier_theme."/plugin.xml";
-			echo $squelettes_theme;
-			
+
 			echo generer_url_post_ecrire("habillages_styles");
 			
 				if (!is_file($fichier_plugin_xml)) {
@@ -148,7 +158,7 @@ EOF;
 					spip_log("Le dossier ".$nom_dossier_theme." ne contient pas de fichier plugin.xml. Le plugin habillages ne peut pas gerer les elements de ce dossier.");
 				}
 				
-				if ($type_theme=="styles" && is_file($fichier_plugin_xml)) {
+				if ($type_theme=="styles" && $prefixe_theme == $squelettes_theme[0] && is_file($fichier_plugin_xml)) {
 					echo "<ul>";
 					habillages_affichage_styles($fichier_plugin_xml);
 					echo "</ul>";

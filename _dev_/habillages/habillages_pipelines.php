@@ -22,7 +22,7 @@ function habillages_ajouter_boutons($boutons_admin) {
 	}
 
 function habillages_ajouter_onglets($flux) {
-	if (_request('exec')=='config_habillages' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_styles' || _request('exec')=='habillages_images' || _request('exec')=='habillages_icones') {
+	if (_request('exec')=='config_habillages' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_styles' || _request('exec')=='habillages_images' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_aide') {
 		$flux['data']['accueil']= new Bouton(
 	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_icone-22.png', 'Accueil', generer_url_ecrire("config_habillages"));
 	$flux['data']['squelettes']= new Bouton(

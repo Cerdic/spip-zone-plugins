@@ -129,7 +129,7 @@ function habillages_affichage_styles($fichier_plugin_xml) {
 	echo "<strong>".$nom_plugin."</strong>(version ".$version_plugin.")<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
 	# Laisser la possibilite de definir le nom et le chemin de la capure ecran
 	# dans theme.xml.
-	echo '<div style="float:right";><img src="'.$chemin_plugin_complet.'/captureBW.png" alt="description" class="preview" /></div>';
+	echo '<div style="float:right";><img src="'.$chemin_plugin_complet.'/capture.png" alt="description" class="preview" /></div>';
 	# Ajouter : si theme.xml ne contient pas de theme.xml, on prend la description de plugin.xml. 
 	# Il est necessaire que theme.xml puisse definir les caracteristiques d'un squelette, d'un style, 
 	# d'un jeu d'images.
