@@ -182,12 +182,12 @@ $(document).ready(function() {
   if (vus)
   $.post(url_widgets_droits, {'vus': vus},
     function(c) {
+      if (!c) return;
       c = c.split('|');
-      if (!c.length) return;
 
       url_widgets_html = 'spip.php?action=widgets_html';
       SEARCHING = '<img class="widget-searching" src="dist/images/searching.gif" style="float:right;" />';
-      ICONCLICK = "<img class='widget-edit' onclick='event.stopPropagation();$(this).parent().openwidget();' style='float:right;border:0' src='dist/images/edit.gif' title='&Eacute;diter' />";
+      ICONCLICK = "<span style='float:right;'><img class='widget-edit' onclick='event.stopPropagation();$(this).parent().parent().openwidget();' style='position:relative;right:0;border:0;z-index:100;' src='dist/images/edit.gif' title='&Eacute;diter' /></span>";
 
       for (var i=0; i<c.length; i++) {
         $(".widget."+c[i])
@@ -200,8 +200,6 @@ $(document).ready(function() {
         $(".widget.has-widget:hidden")
         .hidewidget();
       });
-      $('head')
-      .prepend('<style>img.widget-edit {visibility: hidden;} .widget:hover img.widget-edit, .widget-hover img.widget-edit {visibility: visible;} .widget:hover, .widget-hover {background-color: #e3eeee;}</style>');
     }
   );
 });
