@@ -187,7 +187,7 @@ $(document).ready(function() {
 
       url_widgets_html = 'spip.php?action=widgets_html';
       SEARCHING = '<img class="widget-searching" src="dist/images/searching.gif" style="float:right;" />';
-      ICONCLICK = "<span style='float:right;'><img class='widget-edit' onclick='event.stopPropagation();$(this).parent().parent().openwidget();' style='position:relative;right:0;border:0;z-index:100;' src='dist/images/edit.gif' title='&Eacute;diter' /></span>";
+      ICONCLICK = "<span style='float:right;z-index:100;'><img class='widget-edit' onclick='event.stopPropagation();$(this).parent().parent().openwidget();' style='position:absolute;border:0;' src='dist/images/edit.gif' title='&Eacute;diter' /></span>";
 
       for (var i=0; i<c.length; i++) {
         $(".widget."+c[i])
