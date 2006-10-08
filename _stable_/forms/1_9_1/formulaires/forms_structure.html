@@ -1,10 +1,10 @@
 <BOUCLE_form(FORMS){id_form=#ENV{id_form}}>
-<fieldset>
-<legend>#TITRE</legend>
+#SET{need_fieldset,1}
 <BOUCLE_champs(FORMS_CHAMPS){id_form}>
 [(#ENV{affiche_sondage}) #RESULTATS_SONDAGE]
 [(#ENV{affiche_sondage}|?{'',' '})
-	[</fieldset><fieldset><legend>(#TYPE|=={separateur}|?{#TITRE,''})</legend>]
+	[</fieldset><fieldset><legend>(#TYPE|=={separateur}|?{#TITRE,''})</legend> #SET{need_fieldset,0}]
+	[(#GET{need_fieldset}|?{' '})<fieldset><legend>#TITRE</legend>]
 	[(#TYPE|=={separateur}|?{'',' '})
 		<div class='spip_form_champ'>
 			[(#TYPE|=={textestatique}|?{#TITRE,''})]
