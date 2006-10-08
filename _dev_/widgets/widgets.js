@@ -75,6 +75,14 @@ $.fn.activatewidget = function() {
     $(me)
     .find('form')
       .ajaxForm(function(d){
+        if (!d.responseText) {
+	        alert('Erreur ou pas autorisé !');
+	        $(me)
+	        .find("img.widget-searching")
+	          .remove();
+	        $(".bouton-mobile", me).show();
+	        return false;
+        }
         $(me)
         .prev()
           .html(d.responseText)

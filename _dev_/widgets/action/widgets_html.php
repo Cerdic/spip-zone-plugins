@@ -30,13 +30,15 @@ function action_widgets_html_dist() {
 						include_spip('action/editer_article');
 						revisions_articles($regs[3], false,
 							array($regs[2] => $m[1]));
-					}
 
-					// type du widget
-					if (in_array($regs[2], array('chapo', 'texte', 'descriptif')))
-						echo propre($m[1]);
-					else
-						echo typo($m[1]);
+						// type du widget
+						if (in_array($regs[2], array('chapo', 'texte', 'descriptif')))
+							echo propre($m[1]);
+						else
+							echo typo($m[1]);
+					} else {
+						die();
+					}
 				}
 			}
 		} else if ($modifs === false) {
