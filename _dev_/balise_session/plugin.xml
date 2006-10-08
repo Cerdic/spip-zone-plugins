@@ -4,7 +4,7 @@
 	<version>0.2</version>
 	<etat>dev</etat>
 	<description>
-	Introduction d'un balie #SESSION
+	Introduction d'une balise #SESSION
 	[Page de test->../spip.php?page=session]
 	</description>
 	<fonctions>fonctions_session.php</fonctions>
