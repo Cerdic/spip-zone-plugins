@@ -385,38 +385,6 @@ function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $
 	return $retour;
 }
 
-
-//
-// La boite raccourcis
-//
-
-// http://doc.spip.org/@debut_raccourcis
-function debut_raccourcis() {
-	global $spip_display;
-	echo "<div>&nbsp;</div>";
-	creer_colonne_droite();
-
-	debut_cadre_enfonce();
-	if ($spip_display != 4) {
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size=1>";
-		echo "<b>"._T('titre_cadre_raccourcis')."</b><p />";
-	} else {
-		echo "<h3>"._T('titre_cadre_raccourcis')."</h3>";
-		echo "<ul>";
-	}
-}
-
-// http://doc.spip.org/@fin_raccourcis
-function fin_raccourcis() {
-	global $spip_display;
-	
-	if ($spip_display != 4) echo "</font>";
-	else echo "</ul>";
-	
-	fin_cadre_enfonce();
-}
-
-
 // Afficher un petit "+" pour lien vers autre page
 
 // http://doc.spip.org/@afficher_plus
