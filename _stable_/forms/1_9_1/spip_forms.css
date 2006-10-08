@@ -40,7 +40,8 @@ div.spip_forms .spip_form_label {
   	text-align:left;
   	color:#494949;
 }
-div.spip_forms .spip_form_label label {
+div.spip_forms .spip_form_label label,
+div.spip_forms .spip_form_label .label {
 	text-align:left;
   	font-weight: bold;
   	color:#494949;
