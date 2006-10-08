@@ -14,7 +14,7 @@
 					[(#TYPE|match{^(select|multiple|mot)}|?{' ',''})<span class='label'>#TITRE</span>]
 					[<span class='spip_form_label_obligatoire[(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''})obligatoire_oublie]'>
 						(#OBLIGATOIRE|=={oui}|?{<:forms:info_obligatoire_02:>,''})</span>]
-					:
+					[(#TITRE|strlen|?{':'})]
 				</span>
 				[(#TYPE|=={email}|?{' ',''})
 					<span class='spip_form_label_details'><:forms:champ_email_details:></span>
