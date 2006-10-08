@@ -9,6 +9,8 @@ include_spip('inc/plugin');
 include_spip('inc/presentation');
 include_spip('inc/layer');
 include_spip('inc/actions');
+include_spip('inc/iconifier');
+include_spip('inc/habillages_iconifier');
 
 // http://doc.spip.org/@exec_admin_plugin
 function exec_habillages_images() {
@@ -95,7 +97,9 @@ EOF;
 	
 	debut_gauche();
 	debut_boite_info();
-	echo "boite info";
+	echo "Pour changer le logo de votre site t&#233;l&#233;chargez le ci-dessous. Si vous ne savez pas comment faire, ou si vous voulez t&#233;l&#233;charger des logos pr&#233;d&#233;finis, choisissez-en un &#224; droite.";
+	$iconifier = charger_fonction('iconifier', 'inc');
+	echo $iconifier('id_syndic', 0, 'habillages_images');
 	fin_boite_info();
 
 	debut_droite();
@@ -103,13 +107,11 @@ EOF;
 	debut_cadre_relief();
 
 	global $couleur_foncee;
-	
-	$lire_meta_styles = isset($GLOBALS['meta']['habillages_styles'])?$GLOBALS['meta']['habillages_styles']:'';
-	
-	if (!isset($lire_meta_squelettes)){
-		echo "Vous ne pouvez pas choisir d'images si vous n'avez pas choisi de style. Veuillez aller dans la rubrique styles et en choisir un.";
-	}
 
+	$iconifier = charger_fonction('habillagesiconifier', 'inc');
+	echo $iconifier('id_syndic', 0, 'habillages_images');
+
+	
 	echo "<br />";
 
 	fin_page();
