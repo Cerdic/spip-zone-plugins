@@ -65,7 +65,7 @@
 				<ul>
 					<BOUCLE_categories(RUBRIQUES){racine}>[
 					<li[ class="(#EXPOSE)"]>
-					<a href="(#URL_PAGE{calendrier_demo}|parametre_url{id_rubrique,#ID_RUBRIQUE})">#TITRE</a>
+					<a href="(#SELF|parametre_url{lang,''}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{date_archives,''})">#TITRE</a>
 					</li>
 					]</BOUCLE_categories>
 				</ul>
@@ -76,14 +76,27 @@
 			<div id="archives" class="rubriques">
 				<h2 class="menu-titre"><:archives|ucfirst:></h2>
 				<ul>
-					<BOUCLE_archives_mensuelles(ARTICLES){branche ?}{par date}{inverse}>[
+					<BOUCLE_archives_mensuelles(ARTICLES){par date}{inverse}>[
 					<li[ class="(#ENV{date_archives}|=={[(#DATE|affdate{'Y-m'})]}|?{on})"]>
-					<a href="[(#SELF|parametre_url{date_archives,[(#DATE|affdate{'Y-m'})]})]">(#DATE|affdate{'Y-m'}|unique|affdate_mois_annee)</a>
+					<a href="[(#SELF|parametre_url{lang,''}|parametre_url{id_rubrique,''}|parametre_url{date_archives,[(#DATE|affdate{'Y-m'})]})]">(#DATE|affdate{'Y-m'}|unique|affdate_mois_annee)</a>
 					</li>
 					]</BOUCLE_archives_mensuelles>
 				</ul>
 			</div>
 			</B_archives_mensuelles>
+
+			<B_langues>
+			<div id="langues" class="rubriques">
+				<h2 class="menu-titre"><:langues|ucfirst:></h2>
+				<ul>
+					<BOUCLE_langues(ARTICLES){par lang}>[
+					<li[ class="(#ENV{lang}|=={[(#LANG)]}|?{on})"]>
+					<a href="[(#SELF|parametre_url{lang,#LANG}|parametre_url{id_rubrique,''}|parametre_url{date_archives,''})]">(#LANG|unique)</a>
+					</li>
+					]</BOUCLE_langues>
+				</ul>
+			</div>
+			</B_langues>
 
 		</div><!-- fin navigation -->
 
