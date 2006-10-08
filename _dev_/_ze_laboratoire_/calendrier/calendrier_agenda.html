@@ -22,7 +22,7 @@
 			<h1 class="invisible">#NOM_SITE_SPIP</h1>
 			[<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
 
-			<B_archives>
+			<B_evenements>
 			<div class="liste-articles">
 				[<div class="calendrier divers encart">
 					<h2 class="menu-titre"><:icone_calendrier:></h2>
@@ -30,16 +30,16 @@
 					<span>&nbsp;</span>
 				</div>]
 				<ul>
-					<BOUCLE_archives(EVENEMENTS){id_article}{calendrier}>
+					<BOUCLE_evenements(EVENEMENTS){par date}{inverse}{calendrier}>
 					<li>
 					<h3>#TITRE</h3>
 					<p>#DATE_DEBUT - #DATE_FIN</p>
 					<p>#DESCRIPTIF, #LIEU</p>
 					</li>
-					</BOUCLE_archives>
+					</BOUCLE_evenements>
 				</ul>
 			</div>
-			</B_archives>
+			</B_evenements>
 
 			<br class="nettoyeur" />
 

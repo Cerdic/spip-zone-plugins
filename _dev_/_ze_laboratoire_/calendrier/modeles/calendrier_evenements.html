@@ -11,7 +11,6 @@
 	(#LANG|thead_calendrier)
 	]
 	<tbody><BOUCLE_calendrier(EVENEMENTS)
-	{id_article}
 	{agenda date_debut, mois, (#ENV{date}|annee), (#ENV{date}|mois)}>[
 	(#DATE_DEBUT|agenda_memo{'',
 		[(#DATE_DEBUT|affdate{'j'})],
