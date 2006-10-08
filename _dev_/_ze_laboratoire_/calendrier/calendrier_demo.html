@@ -26,25 +26,29 @@
 			<B_archives>
 			<div class="liste-articles">
 				[(#ANCRE_PAGINATION)]
-				[<div class="calendrier divers encart">
-					<h2 class="menu-titre"><:icone_calendrier:></h2>
-					(#CALENDRIER)
-					<span>&nbsp;</span>
+				[<div class="encart">
+					<div class="calendrier divers">
+						<h2 class="menu-titre"><:icone_calendrier:></h2>
+						(#CALENDRIER)
+						<span>&nbsp;</span>
+					</div>
 				</div>]
-				<ul>
-					<BOUCLE_archives(ARTICLES){pagination}{par date}{inverse}{calendrier ?}{branche ?}{lang ?}>
-					<li>
-						[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
-						[<p class="surtitre">(#SURTITRE)</p>]
-						<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-						[<p class="soustitre">(#SOUSTITRE)</p>]
-						<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
-						[<div class="texte">(#INTRODUCTION)</div>]
-						<br class="nettoyeur" />
-					</li>
-					</BOUCLE_archives>
-				</ul>
-				[<p class="pagination">(#PAGINATION)</p>]
+				<div class="contre-encart">
+					<ul>
+						<BOUCLE_archives(ARTICLES){pagination}{par date}{inverse}{calendrier ?}{branche ?}{lang ?}>
+						<li>
+							[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
+							[<p class="surtitre">(#SURTITRE)</p>]
+							<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+							[<p class="soustitre">(#SOUSTITRE)</p>]
+							<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
+							[<div class="texte">(#INTRODUCTION)</div>]
+							<br class="nettoyeur" />
+						</li>
+						</BOUCLE_archives>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</div>
 			</div>
 			</B_archives>
 
@@ -67,6 +71,19 @@
 				</ul>
 			</div>
 			</B_categories>
+
+			<B_archives_mensuelles>
+			<div id="archives" class="rubriques">
+				<h2 class="menu-titre"><:archives|ucfirst:></h2>
+				<ul>
+					<BOUCLE_archives_mensuelles(ARTICLES){branche ?}{par date}{inverse}>[
+					<li[ class="(#ENV{date_archives}|=={[(#DATE|affdate{'Y-m'})]}|?{on})"]>
+					<a href="[(#SELF|parametre_url{date_archives,[(#DATE|affdate{'Y-m'})]})]">(#DATE|affdate{'Y-m'}|unique|affdate_mois_annee)</a>
+					</li>
+					]</BOUCLE_archives_mensuelles>
+				</ul>
+			</div>
+			</B_archives_mensuelles>
 
 		</div><!-- fin navigation -->
 

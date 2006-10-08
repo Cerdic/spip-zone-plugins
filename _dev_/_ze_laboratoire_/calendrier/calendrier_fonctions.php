@@ -21,6 +21,8 @@ function critere_calendrier_dist($idb, &$boucles, $crit) {
 
 function balise_CALENDRIER_dist($p, $liste='true') {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
+	$boucle = $p->boucles[$b];
+	$_type = $boucle->type_requete;
 
 	// s'il n'y a pas de nom de boucle, on ne peut pas paginer
 	if ($b === '') {
@@ -33,7 +35,7 @@ function balise_CALENDRIER_dist($p, $liste='true') {
 	}
 
 	$_modele = interprete_argument_balise(1,$p);
-	if(!$_modele) $_modele = "'articles'";
+	if(!$_modele) $_modele = "'$_type'";
 
 	$p->code = "calcul_calendrier('$b',
 	$liste,
@@ -88,7 +90,7 @@ function thead_calendrier($lang, $forme = 'abbr'){
 	if($lang == 'en') $debut = 1;
 	$forme = $forme ? '_'.$forme : '';
 	for($i=0;$i<7;$i++) {
-		$ret .= "\n\t\t\t\t".'<th scope="col"><abbr title="'._T('date_jour_'.$debut).'">' .
+		$ret .= "\n\t\t\t\t".'<th'.($debut==1?' class="dimanche"':'').' scope="col"><abbr title="'._T('date_jour_'.$debut).'">' .
 		_T('date_jour_'.$debut.$forme) . '</abbr></th>';
 		$debut = $debut == 7 ? 1 : $debut+1;
 	}
@@ -143,7 +145,7 @@ function http_calendrier_calendrier($annee, $mois, $jour, $echelle, $partie_cal,
 		$jour_semaine_lang=0;
 	} 
 	for ($i=$debut ? $debut : 7;$i>1;$i--) {
-		$ligne .= "\n\t<td>&nbsp;</td>";
+		$ligne .= "\n\t<td class=\"horsperiode\">&nbsp;</td>";
 	}
 
 	$total = '';
@@ -162,16 +164,22 @@ function http_calendrier_calendrier($annee, $mois, $jour, $echelle, $partie_cal,
 
 		$evts = $evenements[$amj];
 		if ($evts) {
-			$evts = "<a href=\"".$evts[0]['URL']."\">".$evts[0]['SUMMARY']."</a>";
+			$title = '';
+			/*$title = $evts[0]['DESCRIPTION'] ?
+			" title=\"".$evts[0]['DESCRIPTION']."\"":
+			'';*/
+			$evts = "<a$title href=\"".$evts[0]['URL']."\">".$evts[0]['SUMMARY']."</a>";
 		}
 		else {
 			$evts = intval($jour);
 		}
-		$ligne .= "\n\t<td".($amj == date("Ymd")?' class="today"':'').">" . $evts . "\n\t</td>";
+		$class = $debut == 1 ? 'dimanche' : '';
+		$class .= $amj == date("Ymd") ? ' today' : '';
+		$ligne .= "\n\t<td".($class ?" class=\"$class\"":'').">" . $evts . "\n\t</td>";
 	}
 	// affichage de la fin de semaine hors periode
 	for($j=$jour_semaine ? $jour_semaine+(1-$jour_semaine_lang) : 7; $j<7; $j++) {
-		$ligne .= "\n\t<td>&nbsp;</td>";
+		$ligne .= "\n\t<td class=\"horsperiode\">&nbsp;</td>";
 	}
 
 	return $total . ($ligne ? "\n<tr>$ligne\n</tr>" : '');

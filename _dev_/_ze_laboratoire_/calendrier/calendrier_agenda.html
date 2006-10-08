@@ -24,20 +24,27 @@
 
 			<B_evenements>
 			<div class="liste-articles">
-				[<div class="calendrier divers encart">
-					<h2 class="menu-titre"><:icone_calendrier:></h2>
-					(#CALENDRIER{evenements})
-					<span>&nbsp;</span>
+				[<div class="encart">
+					<div class="calendrier divers">
+						<h2 class="menu-titre"><:icone_calendrier:></h2>
+						(#CALENDRIER)
+						<span>&nbsp;</span>
+					</div>
 				</div>]
-				<ul>
-					<BOUCLE_evenements(EVENEMENTS){par date}{inverse}{calendrier}>
-					<li>
-					<h3>#TITRE</h3>
-					<p>#DATE_DEBUT - #DATE_FIN</p>
-					<p>#DESCRIPTIF, #LIEU</p>
-					</li>
-					</BOUCLE_evenements>
-				</ul>
+				<div class="contre-encart">
+					<ul>
+						<BOUCLE_evenements(EVENEMENTS){par date}{inverse}{calendrier}>
+						<li>
+						<h3>#TITRE</h3>
+						<p>#DATE_DEBUT - #DATE_FIN</p>
+						<p>#DESCRIPTIF, #LIEU</p>
+						<p>voir :<BOUCLE_reference(ARTICLES){id_article}>
+						<a href="#URL_ARTICLE">#TITRE</a>
+						</BOUCLE_reference></p>
+						</li>
+						</BOUCLE_evenements>
+					</ul>
+				</div>
 			</div>
 			</B_evenements>
 

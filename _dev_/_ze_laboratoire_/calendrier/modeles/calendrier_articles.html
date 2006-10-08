@@ -9,7 +9,7 @@
 			href="(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE|affdate{'Y-m'})]})"
 			title="[(#DATE|affdate_mois_annee)]">&#187;</a>]</BOUCLE_mois_suivant>
 	</caption>[
-	(#LANG|thead)
+	(#LANG|thead_calendrier)
 	]<tbody><BOUCLE_calendrier(ARTICLES)
 		{branche?}
 		{agenda date, mois, (#ENV{date}|annee), (#ENV{date}|mois)}>[
