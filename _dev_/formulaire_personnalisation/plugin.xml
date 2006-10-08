@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <plugin>
 	<nom> <!-- Nom du plugin -->
 	Panneau de personnalisation 
@@ -18,8 +18,8 @@
 	
 	Ce plugin met à disposition du webmaster une balise #FORMULAIRE_PERSONNALISATION.
 	Une fois intégrée dans vos squelettes elle génère un formulaire proposant à vos visiteurs de choisir
-	parmis différent mode d'affichage (zoomer, inverse, etc) ainsi que différent modes de navigations
-	alternatifs comme le mode par défilement et le mode par pointage.
+	parmis différent mode d'affichage (zoomer, inverse, etc). Pour test aller sur ?page=panneau_personnalisation 
+    dans partie publique du site.
 	</description>
 	<options> <!-- fichier charge a chaque hit -->
 	personnalisation_mes_options.php
