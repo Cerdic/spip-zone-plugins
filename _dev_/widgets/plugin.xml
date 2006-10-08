@@ -6,13 +6,15 @@
 	_ &copy; 2006 - Distribue sous licence GPL
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
-	experimental
+	dev
 	</etat>
 	<description>
-	Fournit des widgets pour &eacute;diter des donn&eacute;es de mani&egrave;re sympathique ; pour tester [->../spip.php?page=widgets]
+
+Ce plugin fournit des fonctions d'&eacute;dition rapide depuis les pages publiques du site. Pour en b&eacute;n&eacute;ficier, il faut ajouter quelques <code>class</code> dans les squelettes. Par exemple, pour que le titre soit &eacute;ditable, remplacer <code><h1>#TITRE</h1></code> par :
+_ <code><h1 class="widget article-titre-#ID_ARTICLE">#TITRE</h1></code>.
 	</description>
 	<prefix>
 	Widgets
