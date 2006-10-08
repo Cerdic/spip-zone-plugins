@@ -11,10 +11,10 @@
 	(#LANG|thead_calendrier)
 	]
 	<tbody><BOUCLE_calendrier(EVENEMENTS)
-	{id_article=65}{id_mot?}
+	{id_article}
 	{agenda date_debut, mois, (#ENV{date}|annee), (#ENV{date}|mois)}>[
-	(#DATE_DEBUT|agenda_memo{#DATE_DEBUT,[(#TITRE|addslashes)],
-		#DESCRIPTIF,#LIEU,
+	(#DATE_DEBUT|agenda_memo{'',
+		[(#DATE_DEBUT|affdate{'j'})],
 		[(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE_DEBUT|affdate{'Y-m-d'})]})]})
 	]</BOUCLE_calendrier>[
 	(#ENV{date}|agenda_calendrier)

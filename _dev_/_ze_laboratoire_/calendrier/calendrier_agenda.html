@@ -13,7 +13,7 @@
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_PAGE{calendrier_agenda}">Exemple #[(#REM)]CALENDRIER</a></div>
+	<div id="hierarchie"><a href="#URL_PAGE{calendrier_agenda}">Exemple #[(#REM)]CALENDRIER avec le plugin Agenda</a></div>
 
 	<div id="conteneur">
 
@@ -24,16 +24,17 @@
 
 			<B_archives>
 			<div class="liste-articles">
-				[<div class="calendrier divers">
+				[<div class="calendrier divers encart">
 					<h2 class="menu-titre"><:icone_calendrier:></h2>
 					(#CALENDRIER{evenements})
 					<span>&nbsp;</span>
 				</div>]
 				<ul>
-					<BOUCLE_archives(EVENEMENTS){id_article}>
-					<li>#ID_EVENEMENT
+					<BOUCLE_archives(EVENEMENTS){id_article}{calendrier}>
+					<li>
 					<h3>#TITRE</h3>
 					<p>#DATE_DEBUT - #DATE_FIN</p>
+					<p>#DESCRIPTIF, #LIEU</p>
 					</li>
 					</BOUCLE_archives>
 				</ul>
