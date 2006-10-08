@@ -10,7 +10,8 @@
 			[(#TYPE|=={textestatique}|?{#TITRE,''})]
 			[(#TYPE|=={textestatique}|?{'',' '})
 				<span class='spip_form_label'>
-					<label for="#CHAMP">#TITRE</label>
+					[(#TYPE|match{^(select|multiple|mot)}|?{'',' '})<label for="#CHAMP">#TITRE</label>]
+					[(#TYPE|match{^(select|multiple|mot)}|?{' ',''})<span class='label'>#TITRE</span>]
 					[<span class='spip_form_label_obligatoire[(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''})obligatoire_oublie]'>
 						(#OBLIGATOIRE|=={oui}|?{<:forms:info_obligatoire_02:>,''})</span>]
 					:
@@ -66,7 +67,7 @@
 </fieldset>
 [(#REM) Piege a robots spammeurs ]
 <p style='display:none;'><label for="nobotnobot"><:antispam_champ_vide:></label>
-<input type="text" name="nobotnobot" value="#ENV{nobotnobot}" size="10" /></p>
+<input type="text" name="nobotnobot" id="nobotnobot" value="#ENV{nobotnobot}" size="10" /></p>
 
 <div style='text-align:#LANG_RIGHT' class='spip_bouton'><input type="submit" name='Valider' value="<:bouton_valider:>" class='fondo'/></div>
 </BOUCLE_form>
