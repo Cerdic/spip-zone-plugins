@@ -1,0 +1,81 @@
+#CACHE{7200}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>Exemple #[(#REM)]CALENDRIER</title>
+	<INCLURE{fond=inc-head}>
+	<link rel="stylesheet" href="[(#CHEMIN{calendrier.css}|direction_css)]" type="text/css" media="projection, screen, tv" />
+</head>
+
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_PAGE{calendrier_demo}">Exemple #[(#REM)]CALENDRIER</a></div>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : articles archives ]
+		<div id="contenu">
+
+			<h1 class="invisible">#NOM_SITE_SPIP</h1>
+			[<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
+
+			<B_archives>
+			<div class="liste-articles">
+				[(#ANCRE_PAGINATION)]
+				[<div class="calendrier divers encart">
+					<h2 class="menu-titre"><:icone_calendrier:></h2>
+					(#CALENDRIER)
+					<span>&nbsp;</span>
+				</div>]
+				<ul>
+					<BOUCLE_archives(ARTICLES){pagination}{par date}{inverse}{calendrier ?}{branche ?}{lang ?}>
+					<li>
+						[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
+						[<p class="surtitre">(#SURTITRE)</p>]
+						<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+						[<p class="soustitre">(#SOUSTITRE)</p>]
+						<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
+						[<div class="texte">(#INTRODUCTION)</div>]
+						<br class="nettoyeur" />
+					</li>
+					</BOUCLE_archives>
+				</ul>
+				[<p class="pagination">(#PAGINATION)</p>]
+			</div>
+			</B_archives>
+
+			<br class="nettoyeur" />
+
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			<B_categories>
+			<div id='categories' class="rubriques">
+				<h2 class="menu-titre"><:categories|ucfirst:></h2>
+				<ul>
+					<BOUCLE_categories(RUBRIQUES){racine}>[
+					<li[ class="(#EXPOSE)"]>
+					<a href="(#URL_PAGE{calendrier_demo}|parametre_url{id_rubrique,#ID_RUBRIQUE})">#TITRE</a>
+					</li>
+					]</BOUCLE_categories>
+				</ul>
+			</div>
+			</B_categories>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+#SPIP_CRON
+</body>
+</html>

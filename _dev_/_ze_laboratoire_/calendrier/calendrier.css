@@ -1,0 +1,56 @@
+/* CSS Document */
+
+#contenu .encart{
+	width: 15em; }
+
+div.calendrier{
+	/*border-top: 1px solid #F0F0F0;*/
+}
+
+div.calendrier table{
+	width: 100%;
+	font-size: 0.8em;
+	text-align: center;
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+div.calendrier table caption{
+	margin: 0 auto;
+}
+
+div.calendrier table th{
+	color: #493;
+	background: transparent;
+}
+
+div.calendrier table td{
+	width: 14%;
+	line-height: 2em;
+	border: 1px solid #EEE;
+}
+
+div.calendrier table td a{
+	display: block;
+	background: #EFA;
+	color: #493;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+div.calendrier table td.today a{
+	border: 1px solid #493;
+}
+
+div.calendrier table td a:hover{
+	background: #DBB8DC;
+	color: #636;
+}
+
+div.calendrier table td.today a:hover{
+	border: 1px solid #636;
+}
+
+div.calendrier span{
+	display: none;
+}
