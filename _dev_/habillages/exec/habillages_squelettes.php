@@ -27,11 +27,13 @@ function exec_habillages_squelettes() {
 	}
 	
 	if (_request('changer_plugin')=='oui'){
-		$lire_meta_squelettes = array(isset($GLOBALS['meta']['habillages_squelettes'])?$GLOBALS['meta']['habillages_squelettes']:'');
+		lire_metas();
+		$lire_meta_squelettes = array($GLOBALS['meta']['habillages_squelettes']);
 		ecrire_plugin_actifs($lire_meta_squelettes,'',$operation='enleve');
 		ecrire_meta('habillages_squelettes', _request('statusplug'));
 		ecrire_metas;
-		$lire_meta_squelettes_modifs = array(isset($GLOBALS['meta']['habillages_squelettes'])?$GLOBALS['meta']['habillages_squelettes']:'');
+		lire_metas();
+		$lire_meta_squelettes_modifs = array($GLOBALS['meta']['habillages_squelettes']);
 		ecrire_plugin_actifs($lire_meta_squelettes_modifs,'',$operation='ajoute');
 		
 	}
@@ -122,7 +124,7 @@ EOF;
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
 	echo _T('habillages:squelettes_titre')."</font></b></td></tr>";
 	echo "<tr><td class='serif' colspan=4>";
-	
+
 		# Chercher les fichiers theme.xml.
 		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
 		

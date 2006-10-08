@@ -43,10 +43,11 @@ function habillages_affichage_squelettes($fichier_plugin_xml) {
 		}
 	
 		if (_request('exec')=='habillages_squelettes'){
-			$lire_meta_habillages = isset($GLOBALS['meta']['habillages_squelettes'])?$GLOBALS['meta']['habillages_squelettes']:'';
+			lire_metas();
+			$lire_meta_habillages = array($GLOBALS['meta']['habillages_squelettes']);
 		}
-	
-	if ($lire_meta_habillages == $chemin_plugin_court) {
+
+	if ($lire_meta_habillages[0] == $chemin_plugin_court) {
 		$checked = " checked='checked'";
 	}
 	else {
@@ -113,7 +114,8 @@ function habillages_affichage_styles($fichier_plugin_xml) {
 		}
 	
 		if (_request('exec')=='habillages_styles'){
-			$lire_meta_habillages = isset($GLOBALS['meta']['habillages_styles'])?$GLOBALS['meta']['habillages_styles']:'';
+			lire_metas();
+			$lire_meta_habillages = array($GLOBALS['meta']['habillages_styles']);
 		}
 	
 	if ($lire_meta_habillages == $chemin_plugin_court) {

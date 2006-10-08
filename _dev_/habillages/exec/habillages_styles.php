@@ -27,11 +27,13 @@ function exec_habillages_styles() {
 	}
 	
 	if (_request('changer_plugin')=='oui'){
-		$lire_meta_squelettes = array(isset($GLOBALS['meta']['habillages_styles'])?$GLOBALS['meta']['habillages_styles']:'');
+		lire_metas();
+		$lire_meta_squelettes = $GLOBALS['meta']['habillages_styles'];
 		ecrire_plugin_actifs($lire_meta_squelettes,'',$operation='enleve');
 		ecrire_meta('habillages_styles', _request('statusplug'));
 		ecrire_metas;
-		$lire_meta_squelettes_modifs = array(isset($GLOBALS['meta']['habillages_styles'])?$GLOBALS['meta']['habillages_styles']:'');
+		lire_metas();
+		$lire_meta_squelettes_modifs = array($GLOBALS['meta']['habillages_styles']);
 		ecrire_plugin_actifs($lire_meta_squelettes_modifs,'',$operation='ajoute');
 		
 	}
@@ -122,7 +124,8 @@ EOF;
 	echo "<tr><td class='serif' colspan=4>";
 	
 		# Lire le squelette choisi.
-		$lire_meta_squelettes = isset($GLOBALS['meta']['habillages_squelettes'])?$GLOBALS['meta']['habillages_squelettes']:'';
+		lire_metas();
+		$lire_meta_squelettes = $GLOBALS['meta']['habillages_squelettes'];
 		# Aller chercher le theme.xml du squelette selectionne, le lire...
 		$theme_squelettes = _DIR_PLUGINS.$lire_meta_squelettes."/theme.xml";
 		lire_fichier($theme_squelettes, $texte_squelettes);
@@ -157,7 +160,7 @@ EOF;
 					# dans le dossier de theme.
 					spip_log("Le dossier ".$nom_dossier_theme." ne contient pas de fichier plugin.xml. Le plugin habillages ne peut pas gerer les elements de ce dossier.");
 				}
-				
+
 				if ($type_theme=="styles" && $prefixe_theme == $squelettes_theme[0] && is_file($fichier_plugin_xml)) {
 					echo "<ul>";
 					habillages_affichage_styles($fichier_plugin_xml);
