@@ -1,9 +1,8 @@
 <form action='[(#ENV{self})]' method='post' name="formulaire_profile" id="formulaire_profile">
-	[(#ENV*{previsu})]
+	[(#ENV*{previsu_auteur})]
 	<fieldset>
-<BOUCLE_AUT(AUTEURS){id_auteur=#SESSION{id_auteur}}>
 	<legend><:auteurscomplets:paramprofil:></legend>
-
+<BOUCLE_AUTEUR(AUTEURS){id_auteur=#SESSION{id_auteur}}>
 	<input type='hidden' name='id_auteur' value="[(#ID_AUTEUR)]">
 	<input type='hidden' name='modif' value="1">
 
@@ -51,7 +50,7 @@
 	<span><input type='password' name='new_pass' class='fondl' value="" size='40'></span><br/>
 	<label><:info_confirmer_passe:></label><br />
 	<span><input type='password' name='new_pass2' class='fondl' value="" size='40'></span><br/>
-<div style="float:right"><input type="submit" name="previsualiser" class="spip_bouton" value="<:previsualiser:>" /></div>
-</BOUCLE_AUT>
-</div>
+	<div style="float:right"><input type="submit" name="previsualiser_auteur" class="spip_bouton" value="<:previsualiser:>" /></div>
+</BOUCLE_AUTEUR>
+	</div>
 </form>
