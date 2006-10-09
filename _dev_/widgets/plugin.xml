@@ -20,10 +20,6 @@ _ <code><h1 class="widget article-titre-#ID_ARTICLE">#TITRE</h1></code>.
 	Widgets
 	</prefix>
 	<pipeline>
-		<nom>insert_head</nom>
-		<inclure>tetewidgets.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>affichage_final</nom>
 		<inclure>tetewidgets.php</inclure>
 	</pipeline>
