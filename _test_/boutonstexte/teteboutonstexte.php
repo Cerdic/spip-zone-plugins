@@ -19,7 +19,7 @@ function boutonstexte_insert_head($flux)
 <link rel="stylesheet" href="$cssFile" type="text/css" media="all" />
 <script src="{$jsFile}" type="text/javascript"></script>
 <script type="text/javascript">
-	boutonstexte = new boutonsTexte({
+	var boutonstexte = new boutonsTexte({
 		'imgPath':'{$imgPath}',
 		'txtOnly':'{$txtOnly}',
 		'txtBackSpip':'{$txtBackSpip}',
