@@ -186,37 +186,22 @@ $.fn.initwidget = function(){
 
 // demarrage
 $(document).ready(function() {
+  if (!configWidgets.droits) return;
+  var c = configWidgets.droits.split('|');
+  url_widgets_html = 'spip.php?action=widgets_html';
+  SEARCHING = "<img class='widget-searching' src='" + configWidgets.imgPath + "/searching.gif' style='float:right;' />";
+  ICONCLICK = "<span style='float:right;z-index:100;'><img class='widget-edit' onclick='event.stopPropagation();$(this).parent().parent().openwidget();' style='position:absolute;border:0;' src='" + configWidgets.imgPath + "/edit.gif' title='" + configWidgets.txtEditer + "' /></span>";
 
-  // Aller chercher les droits a partir de la liste des class
-  var vus = '';
-  $(".widget")
-  .each(function(){
-    vus += '&'+this.className
+  for (var i=0; i<c.length; i++) {
+    $(".widget."+c[i])
+    .initwidget();
+  }
+
+  // fermer tous les widgets ouverts
+  $("html")
+  .click(function() {
+    $(".widget.has-widget:hidden")
+    .hidewidget();
   });
-
-  // Quand on recupere la liste des droits, on active les widgets autorises
-  url_widgets_droits = 'spip.php?action=widgets_droits';
-  if (vus)
-  $.post(url_widgets_droits, {'vus': vus},
-    function(c) {
-      if (!c) return;
-      c = c.split('|');
-
-      url_widgets_html = 'spip.php?action=widgets_html';
-      SEARCHING = "<img class='widget-searching' src='" + configWidgets.imgPath + "/searching.gif' style='float:right;' />";
-      ICONCLICK = "<span style='float:right;z-index:100;'><img class='widget-edit' onclick='event.stopPropagation();$(this).parent().parent().openwidget();' style='position:absolute;border:0;' src='" + configWidgets.imgPath + "/edit.gif' title='" + configWidgets.txtEditer + "' /></span>";
-
-      for (var i=0; i<c.length; i++) {
-        $(".widget."+c[i])
-        .initwidget();
-      }
-
-      // fermer tous les widgets ouverts
-      $("html")
-      .click(function() {
-        $(".widget.has-widget:hidden")
-        .hidewidget();
-      });
-    }
-  );
 });
+
