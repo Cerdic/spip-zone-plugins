@@ -14,7 +14,7 @@ function exec_corbeille(){
   global $effacer;
   include_spip("inc/presentation");
 
-/*	$js='
+	$js='
 <script type="text/javascript">
 <!--
 function checkAll() {  // (un)check all checkboxes by erational.org
@@ -31,7 +31,7 @@ function checkAll() {  // (un)check all checkboxes by erational.org
 ';
 
 	echo $js;
-*/
+
 	debut_page(_T('corbeille:corbeille'));
 
 	if ($connect_statut == "0minirezo") {
