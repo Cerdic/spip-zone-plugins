@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_habillages_squelettes' => 'Gestion des squelettes',
 'squelettes_titre' => 'G&eacute;rer les squelettes de votre site',
 'squelettes_commentaire' => 'Dans cette rubrique, vous g&eacute;rez les squelettes de votre de votre site. Un squelette est l\'armature d\'une page. Il g&egrave;re quelles informations sont pr&eacute;sent&eacute;es sur quelles pages et o&ugrave; elles apparaissent.<br /><br />
-Les captures d\'&eacute;cran son volontairement en noir et blanc. Pour mettre de la couleur, allez dans la rubrique <i>style après avoir choisi un squelette ci-contre. </i>',
+Les captures d\'&eacute;cran son volontairement en noir et blanc. Pour mettre de la couleur, allez dans la rubrique <i>style apr&egrave;s avoir choisi un squelette ci-contre. </i>',
 'icone_habillages_styles' => 'Gestion des styles',
 'icone_habillages_images' => 'Gestion des images',
 'icone_habillages_icones' => 'Gestion des icones de l\'espace priv&eacute;',
@@ -20,6 +20,14 @@ Les captures d\'&eacute;cran son volontairement en noir et blanc. Pour mettre de
 'plugin_etat_experimental' => 'Attention : cet habillage est exp&eacute;rimental et il pourrait alt&eacute;rer le fonctionnement normal de votre site SPIP !',
 'plugin_etat_test' => 'Cet habillage est en test. Si vous observez des disfonctionnements, vous pouvez en avertir son auteur.',
 'plugin_etat_stable' => 'Cet habillage est stable.',
+'aide' => 'Ce plugin est en d&eacute;veloppement. Par cons&eacute;quent tout son fonctionnement et les commentraires qui lui sont associ&eacute;s sont &agrave; consid&eacute;rer comme truff&eacute;s d\'erreurs. Merci de revenir quand ce plugin sera en test : il sera plus fiable.<br /><br />
+<strong>Personnalisation et gestion du plugin <i>Habillages</i> : qu\'est-ce qu\'il y a sous le capot ?</strong><br />
+Vous etes concepteur/trice et vous souhaitez faire des th&egrave;mes compatibles avec ce plugin, la d&eacute;marche est expliqu&eacute;e ci-dessous.<br />
+
+- Personnaliser les squelettes<br />
+- Personnaliser les styles<br />
+- Personnaliser les images/logos<br />
+- Personnaliser les icones<br />',
 );
 
 

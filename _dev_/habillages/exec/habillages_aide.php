@@ -95,7 +95,7 @@ EOF;
 	
 	debut_gauche();
 	debut_boite_info();
-	echo "boite info";
+	echo "Navigation rapide dans l'aide";
 	fin_boite_info();
 
 	debut_droite();
@@ -104,7 +104,7 @@ EOF;
 
 	global $couleur_foncee;
 	
-	
+	echo _T('habillages:aide');
 
 	fin_page();
 
