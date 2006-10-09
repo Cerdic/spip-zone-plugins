@@ -110,7 +110,7 @@ function balise_RESULTATS_SONDAGE($p) {
 	return $p;
 }
 
-function boucle_FORMS_dist($id_boucle, &$boucles) {
+/*function boucle_FORMS_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$boucle->from[$id_table] =  "spip_forms";
@@ -119,7 +119,7 @@ function boucle_FORMS_dist($id_boucle, &$boucles) {
 	forms_creer_tables_temporaires_boucles();
 ';
 	return calculer_boucle($id_boucle, $boucles); 
-}
+}*/
 
 function forms_valeur($tableserialisee,$cle,$defaut=''){
 	$t = unserialize($tableserialisee);

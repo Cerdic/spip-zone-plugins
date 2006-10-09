@@ -56,20 +56,6 @@ $tables_principales['spip_reponses'] = array(
 	'field' => &$spip_reponses,
 	'key' => &$spip_reponses_key);
 
-/*
-function boucle_FORMS($id_boucle, &$boucles) {
-$boucle = &$boucles[$id_boucle];
-$id_table = $boucle -> id_table;
-$boucle -> from[] = "spip_forms AS `$id_table`";
-return calculer_boucle($id_boucle, $boucles);
-}*/
-
-function boucle_REPONSES($id_boucle, &$boucles) {
-$boucle = &$boucles[$id_boucle];
-$id_table = $boucle -> id_table;
-$boucle -> from[] = "spip_reponses AS $id_table";
-return calculer_boucle($id_boucle, $boucles);
-}
 //
 // Formulaires : inc_aux_base
 //
@@ -99,19 +85,6 @@ $spip_forms_articles_key = array(
 $tables_principales['spip_forms_articles'] = array(
 	'field' => &$spip_forms_articles,
 	'key' => &$spip_forms_articles_key);
-
-function boucle_REPONSES_CHAMPS($id_boucle, &$boucles) {
-$boucle = &$boucles[$id_boucle];
-$id_table = $boucle -> id_table;
-$boucle -> from[] = "spip_reponses_champs AS $id_table";
-return calculer_boucle($id_boucle, $boucles);
-}
-function boucle_FORMS_ARTICLES($id_boucle, &$boucles) {
-$boucle = &$boucles[$id_boucle];
-$id_table = $boucle -> id_table;
-$boucle -> from[] = "spip_forms_articles AS $id_table";
-return calculer_boucle($id_boucle, $boucles);
-}
 
 //-- Relations ----------------------------------------------------
 global $tables_jointures;

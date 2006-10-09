@@ -310,6 +310,10 @@ function forms_update(){
 		}
 	}
 	
+	// mettre a jour les tables de replication pour les boucles
+	include_spip("base/forms_temporaire");
+	if ($row=spip_fetch_array(spip_query("SELECT * FROM spip_forms WHERE id_form=".spip_abstract_quote($id_form))))
+		forms_structure2table($row,true);
 	return array($id_form,$champ_visible,$nouveau_champ);
 }
 
@@ -378,8 +382,9 @@ function exec_forms_edit(){
 
 	if (Forms_form_administrable($id_form)) {
 		if ($supp_form = intval($supp_form) AND $supp_confirme AND !$supp_rejet) {
-			$query = "DELETE FROM spip_forms WHERE id_form=$supp_form";
-			$result = spip_query($query);
+			$result = spip_query("DELETE FROM spip_forms WHERE id_form=$supp_form");
+			$result = spip_query("DELETE FROM spip_forms_champs WHERE id_form=$supp_form");
+			$result = spip_query("DELETE FROM spip_forms_champs_choix WHERE id_form=$supp_form");
 			if ($retour) {
 				$retour = urldecode($retour);
 				Header("Location: $retour");

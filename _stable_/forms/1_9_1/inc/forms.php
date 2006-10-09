@@ -21,7 +21,7 @@
 	}
 	
 	function Forms_verifier_base(){
-		$version_base = 0.15;
+		$version_base = 0.16;
 		$current_version = 0.0;
 		if (   (isset($GLOBALS['meta']['forms_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['forms_base_version'])==$version_base))
@@ -80,6 +80,15 @@
 		if ($current_version<0.15){
 			spip_query("ALTER TABLE spip_reponses ADD `url` VARCHAR(255) NOT NULL AFTER `id_article_export` ");
 			ecrire_meta('forms_base_version',$current_version=0.15);
+		}
+		if ($current_version<0.16){
+			// virer les tables temporaires crees manuellement sur les serveurs ou ca foirait
+			spip_query("DROP TABLE spip_forms_champs");
+			spip_query("DROP TABLE spip_forms_champs_choix");
+			// passer les tables temporaires en permanentes
+			include_spip('base/forms_temporaire');
+			forms_creer_tables_temporaires(false);
+			ecrire_meta('forms_base_version',$current_version=0.16);
 		}
 		ecrire_metas();
 	}
