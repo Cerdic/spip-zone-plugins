@@ -108,15 +108,14 @@ function GenerateTitlePage()
 	// Logo
 
 	if ($logo_fichier!="") {
-//$this->write(10,$logo_fichier);
 	$x = $this->GetX();
 	$y = $this->GetY();
-//		$this->SetLink($link);
+		$this->SetLink($link);
 //		$this->Image($logo_fichier,50,170,'','','','','0');
-//		$this->Image(_DIR_IMG.$logo_fichier,50-($w/2),170,50,50,'','','0');
-//		$this->Image(_DIR_IMG.$logo_fichier,50-($w/2),170,'','','',$logo_lien,'0');
-		$this->SetXY($x, $y);
-	}
+//		$this->Image($logo_fichier,50-($w/2),170,50,50,'','','0');
+		$this->Image($logo_fichier,50-($w/2),170,'','','',$logo_lien,'0');
+		$this->SetXY($xi, $yi);
+    	}
 
 
 	//Dates

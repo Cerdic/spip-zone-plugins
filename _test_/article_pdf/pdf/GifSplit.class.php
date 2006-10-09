@@ -4,43 +4,45 @@ class GifSplit
 /*===========================================*/
 /*== V A R I A B L E S ==*/
 /*===========================================*/
-var $image_count = 0;
-var $buffer = array();
-var $global = array();
-var $fileframe = array();
-var $gif = array(0x47, 0x49, 0x46);
-var $header = "\x47\x49\x46\x38\x39\x61"; //GIF89a
-var $logical_screen_size;
-var $logical_screen_param;
-var $global_color_table_size;
-var $global_color_table_code;
-var $global_color_table_flag;
-var $global_image_data;
-var $extension_lenght;
-var $extension_type;
-var $image_descriptor;
-var $global_sorted;
-var $fin;
-var $fou;
-var $sp;
-var $fm;
-var $es;
-var $imnbr;
-var $rsz;
+var $gs_image_count = 0;
+var $gs_buffer = array();
+var $gs_global_data = array();
+var $gs_fileframe = array();
+var $gs_gif = array(0x47, 0x49, 0x46);
+var $gs_header = "\x47\x49\x46\x38\x39\x61"; //GIF89a
+var $gs_logical_screen_size;
+var $gs_logical_screen_descriptor;
+var $gs_global_color_table_size;
+var $gs_global_color_table_code;
+var $gs_global_color_table_flag;
+var $gs_global_image_data;
+var $gs_extension_lenght;
+var $gs_extension_type;
+var $gs_image_descriptor;
+var $gs_global_sorted;
+var $gs_fin;
+var $gs_fou;
+var $gs_sp;
+var $gs_fm;
+var $gs_es;
+var $gs_imnbr;
+var $gs_rsz;
 
-function GifSplit($image, $format, $path, $im_number, $resize)
+function GifSplit($image, $format, $name, $max_im_index='0', $resize='1')
 {
 error_reporting(0);
-$this->fm = $format;
-$this->sp = $path;
-$this->imnbr = ($im_number=='')? '-1' : $im_number ;
-$this->rsz = ($resize=='')? '0' : $resize ;
-if($this->fin = fopen($image, "rb"))
+$this->gs_fm = $format;
+$this->gs_sp = $name;
+$this->gs_imnbr = ($max_im_index=='')? '-1' : $max_im_index ; // maximal image index (from 0 to n)
+$this->gs_rsz = ($resize=='')? '0' : $resize ; //0: no change, 1: resize logical screen size to image size
+if ($this->gs_fm != 'GIF') $this->gs_rsz =1;
+
+if($this->gs_fin = fopen($image, "rb"))
 {
 $this->getbytes(6);
-if(!$this->arrcmp($this->buffer, $this->gif, 3))
+if(!$this->arrcmp($this->gs_buffer, $this->gs_gif, 3))
 {
-$this->es = "error #1";
+$this->gs_es = "error #1";
 return(0);
 }
 /*étude du Logical Screen Descriptor
@@ -67,31 +69,31 @@ return(0);
 */
 //echo "début </br>" ;
 $this->getbytes(4);
-$this->logical_screen_size = $this->buffer;
+$this->gs_logical_screen_size = $this->gs_buffer;
 
-//$this->buffer = array();
+//$this->gs_buffer = array();
 $this->getbytes(3);
-$this->logical_screen_descriptor = $this->buffer;
+$this->gs_logical_screen_descriptor = $this->gs_buffer;
 
-$this->global_color_table_flag = ($this->buffer[0] & 0x80) ? TRUE : FALSE;
-$this->global_color_table_code = ($this->buffer[0] & 0x07);
-$this->global_color_table_size = pow(2,($this->global_color_table_code+1));
-//$this->global_color_table_size = 2 << $this->global_color_table_code;
-$this->global_sorted = ($this->buffer[4] & 0x08) ? TRUE : FALSE;
-if($this->global_color_table_flag)
+$this->gs_global_color_table_flag = ($this->gs_buffer[0] & 0x80) ? TRUE : FALSE;
+$this->gs_global_color_table_code = ($this->gs_buffer[0] & 0x07);
+$this->gs_global_color_table_size = pow(2,($this->gs_global_color_table_code+1));
+//$this->gs_global_color_table_size = 2 << $this->gs_global_color_table_code;
+$this->gs_global_sorted = ($this->gs_buffer[4] & 0x08) ? TRUE : FALSE;
+if($this->gs_global_color_table_flag)
 {
-$this->getbytes(3 * $this->global_color_table_size);
-for($i = 0; $i < ((3 * $this->global_color_table_size)); $i++)
-$this->global[$i] = $this->buffer[$i];
+$this->getbytes(3 * $this->gs_global_color_table_size);
+for($i = 0; $i < ((3 * $this->gs_global_color_table_size)); $i++)
+$this->gs_global_data[$i] = $this->gs_buffer[$i];
 }
 
 
-$this->fou = '';
+$this->gs_fou = '';
 
 for($loop = true; $loop; )
 {
 $this->getbytes(1);
-switch($this->buffer[0])
+switch($this->gs_buffer[0])
 {
 case 0x21:
 $this->read_extension();
@@ -103,22 +105,22 @@ case 0x3B:
 $loop = false;
 break;
 default:
-$this->es = sprintf("Unrecognized byte code %u\n<br>", $this->buffer[0]); 
+$this->gs_es = sprintf("Unrecognized byte code %u\n<br>", $this->gs_buffer[0]); 
 }
-if (($this->image_count > $this->imnbr)and($this->imnbr > -1))
+if (($this->gs_image_count > $this->gs_imnbr)and($this->gs_imnbr > -1))
 {
 $loop = false;
 }
 
 }
-fclose($this->fin);
+fclose($this->gs_fin);
 }
 else
 {
-$this->es = "error #2";
+$this->gs_es = "error #2";
 return(0);
 }
-$this->es = "ok";
+$this->gs_es = "ok";
 
 }
 /*///////////////////////////////////////////////*/
@@ -169,31 +171,31 @@ function read_extension()
      +---------------+
 
 */  
-$this->fou .="\x21";
-$this->buffer = array();
+$this->gs_fou .="\x21";
+$this->gs_buffer = array();
 $this->getbytes(2);
-$this->putbytes($this->buffer, 2);
-$this->extension_type = $this->buffer[0];
-$this->extension_lenght=$this->buffer[1]; 
-if (array_search($this->extension_type, array (1=>0xF9,2=>0x01,3=>0xFF)))
+$this->putbytes($this->gs_buffer, 2);
+$this->gs_extension_type = $this->gs_buffer[0];
+$this->gs_extension_lenght=$this->gs_buffer[1]; 
+if (array_search($this->gs_extension_type, array (1=>0xF9,2=>0x01,3=>0xFF)))
 {
-$this->getbytes($this->extension_lenght);
-$this->putbytes($this->buffer, $this->extension_lenght);
-if ($this->extension_type == 0xFF)
+$this->getbytes($this->gs_extension_lenght);
+$this->putbytes($this->gs_buffer, $this->gs_extension_lenght);
+if ($this->gs_extension_type == 0xFF)
   {
  	$this->getbytes(1);
- 	$this->putbytes($this->buffer, 1);
-  $this->extension_lenght=$this->buffer[0]; 
- 	$this->getbytes($this->extension_lenght);
-  $this->putbytes($this->buffer, $this->extension_lenght);
+ 	$this->putbytes($this->gs_buffer, 1);
+  $this->gs_extension_lenght=$this->gs_buffer[0]; 
+ 	$this->getbytes($this->gs_extension_lenght);
+  $this->putbytes($this->gs_buffer, $this->gs_extension_lenght);
   }
 }
  for(;;)
   {
  	$this->getbytes(1);
-  $this->putbytes($this->buffer, 1);
+  $this->putbytes($this->gs_buffer, 1);
 // byte == 0 : fin du data de l'extension
-  if ($this->buffer[0] == 0)
+  if ($this->gs_buffer[0] == 0)
   {
   break ;
   }
@@ -208,7 +210,7 @@ if ($this->extension_type == 0xFF)
 function read_image_descriptor()
 {
 /* Reset global variables */
-$this->buffer = array();
+$this->gs_buffer = array();
 
 //Lecture du descripteur de l'image: Image Descriptor
 /*
@@ -241,140 +243,142 @@ $this->buffer = array();
                              Size of Local Color Table     3 Bits
 */
 
-$this->fou .="\x2C";
+$this->gs_fou .="\x2C";
 
 $this->getbytes(9);
 for($i = 0; $i < 9; $i++)
 {
-$this->image_descriptor[$i] = $this->buffer[$i];
+$this->gs_image_descriptor[$i] = $this->gs_buffer[$i];
 }
 
-if ($this->rsz==1) // new screen sizes and image edges
+if ($this->gs_rsz==1) // new screen sizes and image edges
 {
 // new logical screen size
-$this->logical_screen_size[0] = $this->image_descriptor[4];
-$this->logical_screen_size[1] = $this->image_descriptor[5];
-$this->logical_screen_size[2] = $this->image_descriptor[6];
-$this->logical_screen_size[3] = $this->image_descriptor[7];
+$this->gs_logical_screen_size[0] = $this->gs_image_descriptor[4];
+$this->gs_logical_screen_size[1] = $this->gs_image_descriptor[5];
+$this->gs_logical_screen_size[2] = $this->gs_image_descriptor[6];
+$this->gs_logical_screen_size[3] = $this->gs_image_descriptor[7];
 // reset position
-$this->image_descriptor[0] = $this->image_descriptor[1] = $this->image_descriptor[2] = $this->image_descriptor[3] = 0;
+$this->gs_image_descriptor[0] = $this->gs_image_descriptor[1] = $this->gs_image_descriptor[2] = $this->gs_image_descriptor[3] = 0;
 }
-$this->putbytes($this->image_descriptor, 9);
+$this->putbytes($this->gs_image_descriptor, 9);
 
-$local_color_table_flag = ($this->buffer[8] & 0x80) ? TRUE : FALSE;
+$local_color_table_flag = ($this->gs_buffer[8] & 0x80) ? TRUE : FALSE;
 
 if($local_color_table_flag)
 {
 //il y a une table locale des couleurs
-$code = ($this->buffer[8] & 0x07);
-$sorted = ($this->buffer[8] & 0x20) ? TRUE : FALSE;
+$code = ($this->gs_buffer[8] & 0x07);
+$sorted = ($this->gs_buffer[8] & 0x20) ? TRUE : FALSE;
 $size = pow(2,($code+1));
 }
 
 if($local_color_table_flag)
 {
 $this->getbytes(3 * $size);
-$this->putbytes($this->buffer, 3 * $size);
+$this->putbytes($this->gs_buffer, 3 * $size);
 }
 /* LZW minimum code size */
 $this->getbytes(1);
-$this->putbytes($this->buffer, 1);
+$this->putbytes($this->gs_buffer, 1);
 
 /* Image Data */
 for(;;)
 {
 $this->getbytes(1);
-$this->putbytes($this->buffer, 1);
-if(($u = $this->buffer[0]) == 0)
+$this->putbytes($this->gs_buffer, 1);
+if(($u = $this->gs_buffer[0]) == 0)
 break;
 $this->getbytes($u);
-$this->putbytes($this->buffer, $u);
+$this->putbytes($this->gs_buffer, $u);
 }
 
-$this->global_image_data = $this->fou;
+$this->gs_global_image_data = $this->gs_fou;
 
 //Construction de la structure de tête du fichier
 
 // Header -> GIF89a //
-$this->fou = $this->header;
+$this->gs_fou = $this->gs_header;
 
 //logical_screen_descriptor//
-$this->putbytes($this->logical_screen_size,4);
-$this->putbytes($this->logical_screen_descriptor,3);
+$this->putbytes($this->gs_logical_screen_size,4);
+$this->putbytes($this->gs_logical_screen_descriptor,3);
 
 //Global Color Table//
-$this->putbytes($this->global, $this->global_color_table_size*3);
+$this->putbytes($this->gs_global_data, $this->gs_global_color_table_size*3);
 
 //Global_image_data
 
-$this->fou .= $this->global_image_data;
+$this->gs_fou .= $this->gs_global_image_data;
 
 /* trailer */
-$this->fou .= "\x3B";
+$this->gs_fou .= "\x3B";
 
 
 
+
+/* Write to file */
+switch($this->gs_fm)
+{
+case "GIF":
 //Enregistrement du fichier gif
-$framename = $this->sp . $this->image_count . ".gif";
+$framename = $this->gs_sp . $this->gs_image_count . ".gif";
  if (!$handle = fopen($framename, 'w')) {
          echo "Impossible d'ouvrir le fichier ($framename)";
          exit;
     }
 
-if(!fwrite($handle,$this->fou))
+if(!fwrite($handle,$this->gs_fou))
 {
-$this->es = "error #3";
+$this->gs_es = "error #3";
 return(0);
 }
 
-$this->fileframe[]=$framename;
-
-/* Write to file */
-switch($this->fm)
-{
+$this->gs_fileframe[]=$framename;
+break;
 /* Write as BMP */
 case "BMP":
-$im = imageCreateFromString($this->fou);
-$framename = $this->sp . $this->image_count . ".bmp";
+$im = imageCreateFromString($this->gs_fou);
+$framename = $this->gs_sp . $this->gs_image_count . ".bmp";
 if(!$this->imageBmp($im, $framename))
 {
-$this->es = "error #3";
+$this->gs_es = "error #3";
 return(0);
 }
 imageDestroy($im);
 break;
 /* Write as PNG */
 case "PNG":
-$im = imageCreateFromString($this->fou);
-$framename = $this->sp . $this->image_count . ".png";
+$im = imageCreateFromString($this->gs_fou);
+$framename = $this->gs_sp . $this->gs_image_count . ".png";
 if(!imagePng($im, $framename))
 {
-$this->es = "error #3";
+$this->gs_es = "error #3";
 return(0);
 }
 imageDestroy($im);
 break;
 /* Write as JPG */
 case "JPG":
-$im = imageCreateFromString($this->fou);
-$framename = $this->sp . $this->image_count . ".jpg";
+$im = imageCreateFromString($this->gs_fou);
+$framename = $this->gs_sp . $this->gs_image_count . ".jpg";
 if(!imageJpeg($im, $framename))
 {
-$this->es = "error #3";
+$this->gs_es = "error #3";
 return(0);
 }
 imageDestroy($im);
 break;
 /* Write as GIF */
 case "GIF":
-$im = imageCreateFromString($this->fou);
+$im = imageCreateFromString($this->gs_fou);
 
 imageDestroy($im);
 
 break;
 }
-$this->image_count++;
-$this->fou = '';
+$this->gs_image_count++;
+$this->gs_fou = '';
 }
 /*///////////////////////////////////////////////*/
 /*// BMP creation group //*/
@@ -570,10 +574,10 @@ function getbytes($l)
 {
 for($i = 0; $i < $l; $i++)
 {
-$bin = unpack('C*', fread($this->fin, 1));
-$this->buffer[$i] = $bin[1];
+$bin = unpack('C*', fread($this->gs_fin, 1));
+$this->gs_buffer[$i] = $bin[1];
 }
-return $this->buffer;
+return $this->gs_buffer;
 }
 /*///////////////////////////////////////////////*/
 /*//           Function :: putbytes()          //*/
@@ -582,17 +586,17 @@ function putbytes($s, $l)
 {
 for($i = 0; $i < $l; $i++)
 {
-$this->fou .= pack('C*', $s[$i]);
+$this->gs_fou .= pack('C*', $s[$i]);
 }
 }
-function getfilelist()
+function getFilelist()
 {
-return $this->fileframe;
+return $this->gs_fileframe;
 }
 
 function getReport()
 {
-return $this->es;
+return $this->gs_es;
 }
 }
 ?>

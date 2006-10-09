@@ -1,11 +1,13 @@
 #CACHE{0}
 <?php
 
-	$path_pdf = sous_repertoire(_DIR_CACHE, "article_PDF");
+	//au choix, selon le cas (voir les avantages et les inconvéniants de chaque selon le site):
+  $path_pdf = sous_repertoire(_DIR_CACHE, "article_PDF"); // stockage dans le cache SPIP
+	$path_pdf = sous_repertoire(_DIR_IMG, "article_PDF"); //stockage sous le dossier IMG
 	
 	// Mode release => $debug=0
-	// Mode debug => $debug=1 (ne fonctionne pas sous Internet Explorer)
-	$debug=0;
+	// Mode debug => $debug=1 (ne fonctionne pas sous Internet Explorer)=> ??? si, ça fonctionne !
+	$debug=1;
 	
 	<B_principale>
 	<BOUCLE_principale(ARTICLES){id_article}>
@@ -25,9 +27,10 @@
 	$yahoo='-<BOUCLE_yahoo(HIERARCHIE){id_article}> [(#TITRE|supprimer_numero|pdf_first_clean|texte_script)] - </BOUCLE_yahoo>';
 
 	$logo_site='[(#LOGO_SITE_SPIP|extraire_attribut{src}|texte_script)]';
-	[$logo_fichier='(#LOGO_ARTICLE_RUBRIQUE|extraire_attribut{src}|texte_script)';]
-  //[$logo_fichier="(#LOGO_ARTICLE_RUBRIQUE|extraire_attribut{src})";]
-	//[$logo_lien="(#URL_ARTICLE)";]
+	// attention à l'ordre des filtres SPIP
+//	[$logo_fichier='(#LOGO_ARTICLE_RUBRIQUE|extraire_attribut{src}|texte_script)';] ne fonctionne pas
+  [$logo_fichier='(#LOGO_ARTICLE_RUBRIQUE|texte_script|extraire_attribut{src})';] //fonctionne correctement
+//  [$logo_lien="(#URL_ARTICLE)";]
 		
 	[$surtitre='(#SURTITRE|pdf_first_clean|texte_script)';]
 	[$titre='(#TITRE|SUPPRIMER_NUMERO|pdf_first_clean|texte_script)';]
@@ -105,18 +108,17 @@
 		$pdf->Build($file_out);
 		
 	}
+
+		// Vous voulez afficher un pdf
+		header("Content-type: application/pdf");
 	if ($debug==1)
 	{
 		// Affiche le PDF directement dans l'onglet de Firefox
 		// Ne fonctionne pas sous IE 6 SP2 : le pdf n'est pas reconnu (pris pour un fichier texte)
-		header("Content-type: application/pdf");
 		header("location: ". url_de_base() . $file_out);
 	}
 	else
 	{
-		// Vous voulez afficher un pdf
-		header('Content-type: application/pdf');
-
 		// Il sera nommé $files_pdf
 		// ATTENTION : pour "filename", mettre un nom de fichier court (<nom>.<extension>)
 		// sinon IE 6 SP2 ne reconnaîtra pas le type de fichier

@@ -72,7 +72,7 @@ var $AliasNbPages;       //alias for total number of pages
 var $PDFVersion;         //PDF version number
 
 var $maxLineWidth;				// ajout CM 24/09/2006
-
+var $îmages = array();
 /*******************************************************************************
 *                                                                              *
 *                               Public methods                                 *
@@ -923,9 +923,9 @@ function Write($h,$txt,$link='')
 	$this->maxLineWidth=max($this->maxLineWidth,$this->x);
 }
 
-function Image($file,$x,$y,$w=0,$h=0,$type='',$link='',$maxframe='')
+function Image($file,$x,$y,$w=0,$h=0,$type='',$link='',$maxframe='0')
 {
-	//Put an image on the page
+  //Put an image on the page
 	if(!isset($this->images[$file]))
 	{
 		//First use of image, get info
@@ -935,10 +935,14 @@ function Image($file,$x,$y,$w=0,$h=0,$type='',$link='',$maxframe='')
 			if(!$pos)
 				$this->Error('Image file has no extension and no type was specified: '.$file);
 			$type=substr($file,$pos+1);
+			$name=substr($file,0,$pos);
+			$pos=strrpos($name,'/');
+			$name=substr($name,$pos+1);
 		}
 		$type=strtolower($type);
 		$mqr=get_magic_quotes_runtime();
 		set_magic_quotes_runtime(0);
+
 		if($type=='jpg' || $type=='jpeg')
 		{
 			$info=$this->_parsejpg($file);
@@ -964,7 +968,7 @@ function Image($file,$x,$y,$w=0,$h=0,$type='',$link='',$maxframe='')
 
 		elseif($type=='gif') 
 		{
-		
+		/*
 			$readgif= gd_info();
 			if ($readgif[3]) {
 				Header( "Content-type: image/png");
@@ -977,18 +981,20 @@ function Image($file,$x,$y,$w=0,$h=0,$type='',$link='',$maxframe='')
 			} else {
 				$info=$this->_parsegif($file);
 			}
-		
-		/*	$InfoGif = $this->_parsegif2($file,substr(_DIR_IMG,0,strlen(_DIR_IMG)-1),$maxframe);
-			foreach($InfoGif as $i=>$file){
-				Header( "Content-type: image/png");
-				$image = imagecreatefromGIF("$file");
+		*/
+			$ImagesGif = $this->_parsegif2($file,'GIF','./IMG/'.$name.'_frame',0);
+
+			foreach($ImagesGif as $i=>$gs_frame){
+      	Header( "Content-type: image/png");
+				$image = @imagecreatefromGIF($gs_frame);
 				imageinterlace($image,0);
 				ImagePNG($image,"./IMG/tempo.png");
 				$info=$this->_parsepng("./IMG/tempo.png");
 				ImageDestroy($image);
 				unlink ("./IMG/tempo.png");
-				unlink ($file);
-			}*/
+				unlink ($gs_frame);
+			}
+			
     }
 		else
 		{
@@ -1004,7 +1010,6 @@ function Image($file,$x,$y,$w=0,$h=0,$type='',$link='',$maxframe='')
 		set_magic_quotes_runtime($mqr);
 		$info['i']=count($this->images)+1;
 		$this->images[$file]=$info;
-		
 	}
 	else
 	{
@@ -1684,10 +1689,10 @@ function _parsepng($file)
 	return array('w'=>$w,'h'=>$h,'cs'=>$colspace,'bpc'=>$bpc,'f'=>'FlateDecode','parms'=>$parms,'pal'=>$pal,'trns'=>$trns,'data'=>$data);
 }
 
-function _parsegif2($file,$path,$frame)
+function _parsegif2($gs_file,$gs_type,$gs_path,$gs_maxframe)
 {
-	require('GifSplit.class.php');
-	$sg = new GifSplit($file, 'GIF', $path.'/GS-frame',$frame,'1');
+	include_once('GifSplit.class.php');
+	$sg = new GifSplit($gs_file, $gs_type, $gs_path,$gs_maxframe,1);
 	return ($sg->getfilelist());
 }
 

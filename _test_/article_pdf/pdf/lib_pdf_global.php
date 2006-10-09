@@ -101,21 +101,22 @@ function unhtmlentities($string)
 function WriteHTML($html,$LineFeedHeight)
 {
 	$this->texteAddSpace=false;
-	//Parseur HTML
-	$html=$this->unhtmlentities($html);
+	//Parseur HTML, enlevé pour une meilleure récupération des tag.
+  //Il faut détecter les vraies balises "<" HTML et pas les < de texte "&lt;" HTML 
+  //Parseur remis + loin pour l'édition du texte
+	//$html=$this->unhtmlentities($html);
 	
 	$a=preg_split(',(<[/a-zA-Z].*>),Ums', $html, -1, PREG_SPLIT_DELIM_CAPTURE);
-	//autoriser le multiligne 
-  //Il faut détecter les vraies balises <... et pas les <= de formules éventuelles
 
 	// $a = le tableau de tags
 	// $i = index de l'élément courant
 	// $e = valeur de l'élément courant
 	foreach($a as $i=>$e) 
-	{
-		//Balise
-		if (($e{0}=='<')&&(preg_match(',^<(/)?([a-zA-Z][^\s]*)(\s.*|/)?(>)$,',$e,$match)!==FALSE)) {
-			$tag=strtoupper($match[2]);
+  {
+		//Balise 
+	$Balise= preg_match(',<(?=[/a-zA-Z])(/)?([/a-zA-Z]+)((\s.*|/)?)>,',$e,$match);
+	if ($Balise){
+      $tag=strtoupper($match[2]);
 			$closing = $match[1]=="/";
 			
 			if (($this->ProcessingBloc) AND (!in_array($tag,$this->BlocTags[$this->ProcessingBloc-1])))
@@ -213,7 +214,9 @@ function WriteHTML($html,$LineFeedHeight)
 						}
 					} else 
 					{
-						$this->Write(5,$e);
+					//Parseur remis ici
+						$e=$this->unhtmlentities($e);
+            $this->Write(5,$e);
 					}
 				}
 			}
@@ -269,7 +272,13 @@ function OpenTag($tag,$e,$LineFeedHeight)
 	}
 
 	if($tag=='CODE') {
-		$this->Write(5,'<code>');
+//		$this->Write(5,"<code>\n");
+		$this->SetFont('courier','', 8);
+		$this->SetTextColor(0, 0, 255);
+		$this->ProcessingCadre=true;
+		$this->ProcessingBloc++;
+		$this->BlocTags[$this->ProcessingBloc-1]=array("CODE");
+		$this->BlocContent[$this->ProcessingBloc-1]="";
 	}
 	
 	if($tag=='H3')
@@ -300,8 +309,6 @@ function OpenTag($tag,$e,$LineFeedHeight)
 
 	if ($tag=='IMG') {
     $this->SRC=extraire_attribut($e,'src');
- //   if ($this->SRC ==''){$this->SRC=$this->prop['SRC'];}
- //   $this->write(5,$this->SRC);
 
 		// si l'image est manquante mettre un lien avec le texte alt
 		if (!@is_readable($this->SRC)){
@@ -437,7 +444,7 @@ function OpenTag($tag,$e,$LineFeedHeight)
 	if($tag=='BLOCKQUOTE') {
 		$this->ProcessingBloc++;
 		$this->BlocTags[$this->ProcessingBloc-1]=array("BLOCKQUOTE");
-		$this->BlocContent[$this->ProcessingBloc-1]="";
+		$this->BlocContent[$this->ProcessingBloc-1]='';
 	}
 	if($tag=='TEXTAREA') {
 		$this->ProcessingBloc++;
@@ -477,7 +484,14 @@ function CloseTag($tag,$LineFeedHeight)
 	}
 
 	if($tag=='CODE') {
-		$this->Write(5,'</code>');
+    $this->ProcessingCadre=false;
+		if (strlen($content=$this->BlocContent[$this->ProcessingBloc-1])){
+			$this->ProcessingBloc--;
+			$this->BlocShow(0,$content,1,$LineFeedHeight);
+      }
+		$this->SetTextColor(0);
+		$this->SetFont('helvetica','',10);
+//    $this->Write(5,"\n<\code>");
 	}
 
 	if($tag=='H3'){		
@@ -493,12 +507,9 @@ function CloseTag($tag,$LineFeedHeight)
 		$this->listParm[$this->listDepth]=array();
 		$this->listDepth--;
 	} 
-	if($tag=='TT' or $tag=='TEXTAREA') { 
+	if($tag=='TT') { 
 		$this->SetFont('helvetica','',10);
 		$this->SetTextColor(0);
-		if ($tag=='TEXTAREA')
-			$this->ProcessingCadre=false;
-			
 	}
 	if($tag=='TD' or $tag=='TH') {
 		if (!strlen($this->BlocContent[$this->ProcessingBloc-1]))
@@ -529,10 +540,13 @@ function CloseTag($tag,$LineFeedHeight)
 		}
 	}
 	if($tag=='TEXTAREA') {
+			$this->ProcessingCadre=false;
 		if (strlen($content=$this->BlocContent[$this->ProcessingBloc-1])){
 			$this->ProcessingBloc--;
 			$this->BlocShow(0,$content,1,$LineFeedHeight);
 		}
+		$this->SetFont('helvetica','',10);
+		$this->SetTextColor(0);
 	}
 	if ($tag==end($this->CurrentTag))
 		array_pop($this->CurrentTag);
@@ -662,7 +676,7 @@ function TableShow($align,$LineFeedHeight)
 	$tableFontSize=10;
 	$TableWidth = 1.01*$wrwi;
 	$max_width=0;
-	$min_font_size=5.0;
+	$min_font_size=6.0; // mis à 6, 5 était vraiment petit
 	$maxiter = 10;
 	do {
 		$tableFontSize = $tableFontSize *min(1.0,$wrwi/$TableWidth)*0.99; // 0.99 pour converger plus vite
@@ -693,7 +707,7 @@ function TableShow($align,$LineFeedHeight)
 				
 				if (!$fixed_width)
 					$this->columnProp[$i]['w'] = max($this->columnProp[$i]['w'],$width);
-				$this->lineProp[$j]['h'] = max($this->lineProp[$j]['h'],$height);
+				$this->lineProp[$j]['h'] = max($this->lineProp[$j]['h'],$height)+0.3;
 			}
 		}
 		// Repris de CalcWidth : calcul de la largeur de la table

@@ -1,5 +1,11 @@
 <?php
-	function balise_ARTICLE_PDF_dist($p) {
+function article_pdf_insertion_racourci($arg){
+		$icone = find_in_path('img_pack/article_pdf.png');
+		$url = generer_url_public('article_pdf',$arg);
+		$code = "<a href='$url' title='Enregistrer au format PDF'><img src='$icone' width='24' height='24' alt='Creer un PDF' />Enregistrer au format PDF</a>";
+		return $code;
+	}
+function balise_ARTICLE_PDF_dist($p) {
 		if (!is_array($p->param))
 			$p->param=array();
 		
