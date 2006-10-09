@@ -1,4 +1,5 @@
 // A plugin that wraps all ajax calls introducing a fixed callback function on ajax complete
+
 jQuery.fn._load = jQuery.fn.load;
 
 jQuery.fn.load = function( url, params, callback, ifModified ) {
@@ -16,5 +17,26 @@ jQuery.fn.load = function( url, params, callback, ifModified ) {
 	}
 	var callback2 = function(res,status) {triggerAjaxLoad(this);callback(res,status)};
 	
-	this._load( url, params, callback2, ifModified );
+	return this._load( url, params, callback2, ifModified );
+}
+
+
+jQuery._ajax = jQuery.ajax;
+
+jQuery.ajax = function( type, url, data, ret, ifModified ) {
+  
+  //If called by _load exit now because the callback has already been set
+  if (jQuery.ajax.caller==jQuery.fn._load) return jQuery._ajax( type, url, data, ret, ifModified );
+  // If only a single argument was passed in,
+	// assume that it is a object of key/value pairs
+	if ( !url ) {
+		var orig_complete = type.complete || function() {}; 
+    type.complete = function(res,status) {triggerAjaxLoad(document);orig_complete(res,status)};
+	} else {
+		var orig_ret = ret || function() {};
+    ret = function(res,status) {triggerAjaxLoad(document);orig_ret(res,status)};  
+  }
+
+  jQuery._ajax( type, url, data, ret, ifModified ); 
+
 }
