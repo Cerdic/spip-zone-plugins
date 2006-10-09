@@ -103,8 +103,13 @@ function saveauto_sauvegarde() {
 				global $connect_statut;
         //accès admin ou accès rédacteur (si autorisé)
         if (($connect_statut == "0minirezo") || ($acces_redac && $connect_statut == "1comite")) {
-           //si la compression est impossible, au cas où le webmaster l'aurait activé : on désactive
-           if (!$flag_gz) {
+				  // test support Zlib activé
+					 if ($gz_capable = zlib_get_coding_type()) {
+				 		  $flag_gz = TRUE;
+				   }				 
+					 $gz = zlib_get_coding_type();
+           //si la compression est impossible (support de Zlib pas activé dans php.ini), au cas où le webmaster l'aurait activé : on désactive
+					 if (!$flag_gz) {
 					 		$gz = false;
 					 }
            $temps = time();

@@ -139,6 +139,10 @@ function exec_saveauto_admin() {
 				 echo ">";
  				 echo _T('saveauto:non');
 				 echo "<br /><span style='font-size: 11px;'>("._T('saveauto:help_gz').")</span>";
+			// Le support de Zlib est il activé dans PHP ?
+				 if ($gz_capable = zlib_get_coding_type()) {
+				 		$flag_gz = TRUE;
+				 }				 
          if (!$flag_gz && $gz) {
 				 		echo "<br><font color=red><strong>"._T('saveauto:attention')."</strong>"._T('saveauto:compression_impossible')."</font>";
          }
