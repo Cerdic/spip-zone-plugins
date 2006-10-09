@@ -1,0 +1,14 @@
+/* css pour Widgets
+ *
+ *  Widgets plugin for spip (c) Fil 2006 -- licence GPL
+ */
+
+img.widget-edit {
+	visibility: hidden;
+}
+.widget:hover img.widget-edit, .widget-hover img.widget-edit {
+	visibility: visible;
+}
+.widget:hover, .widget-hover {
+	background-color: #e3eeee;
+}
