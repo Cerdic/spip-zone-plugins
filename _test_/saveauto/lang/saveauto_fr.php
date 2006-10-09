@@ -53,7 +53,7 @@
 						 'oui' => 'oui',
 						 'non' => 'non',
 						 'attention' => 'Attention :',
-						 'compression_impossible' => ' la sauvegarde ne pourra pas &ecirc;tre compress&eacute;e car cette fonctionnalit&eacute; n\'est pas disponible sur votre serveur.',
+						 'compression_impossible' => ' la sauvegarde ne pourra pas &ecirc;tre compress&eacute;e car cette fonctionnalit&eacute; n\'est pas disponible sur votre serveur (support de Zlib pas activ&eacute; dans php.ini).',
 						 'tables_acceptes' => 'Tables accept&eacute;es : ',
 						 'pas_envoi' => ' Les sauvegardes ne seront pas envoy&eacute;es !',
 						 'toutes' => ' toutes',
