@@ -57,6 +57,7 @@ function Widgets_affichage_final($page) {
 }
 
 function Widgets_preparer_page($page, $droits) {
+	include_spip('inc/charsets');
 
 	$jsFile = find_in_path('widgets.js');
 	$cssFile = find_in_path('widgets.css');
