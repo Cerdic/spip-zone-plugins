@@ -660,14 +660,14 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	$out .=  _T('agenda:evenement_date_de');
 	$out .= WCalendar_controller($d=date('Y-m-d H:i:s',$fstdatedeb),"_evenement_debut");
 	$out .= "<span class='agenda_".($fhoraire=='oui'?"":"in")."visible_au_chargement' id='afficher_horaire_debut_evenement'>";
-	$out .=  _T('agenda:evenement_date_a');
+	$out .=  _T('agenda:evenement_date_a_immediat');
 	$out .= Agenda_heure_selector($d,"_debut");
 	$out .=	"</span>";
 	$out .=  "<br/>";
 	$out .=  _T('agenda:evenement_date_au');
 	$out .= WCalendar_controller($d=date('Y-m-d H:i:s',$fstdatefin),"_evenement_fin");
 	$out .= "<span class='agenda_".($fhoraire=='oui'?"":"in")."visible_au_chargement' id='afficher_horaire_fin_evenement'>";
-	$out .=  _T('agenda:evenement_date_a');
+	$out .=  _T('agenda:evenement_date_a_immediat');
 	$out .= Agenda_heure_selector($d,"_fin");
 	$out .=	"</span>";
 	$out .=  "</div>\n";

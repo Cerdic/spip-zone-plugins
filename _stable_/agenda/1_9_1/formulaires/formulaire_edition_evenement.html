@@ -56,14 +56,14 @@ $('#afficher_horaire_fin_evenement').show();} else{$('#afficher_horaire_debut_ev
 <:agenda:evenement_date_de:>
 [(#ENV**{valeurs}|table_valeur{date_evenement_debut}|WCalendar_controller{'_evenement_debut'})]
 <span class='agenda_visible_au_chargement' id='afficher_horaire_debut_evenement'>
-<:agenda:evenement_date_a:>
+<:agenda:evenement_date_a_immediat:>
 [(#ENV**{valeurs}|table_valeur{date_evenement_debut}|Agenda_heure_selector{'_debut'})]
 </span>
 <br/>
 <:agenda:evenement_date_au:>
 [(#ENV**{valeurs}|table_valeur{date_evenement_fin}|WCalendar_controller{'_evenement_fin'})]
 <span class='agenda_visible_au_chargement' id='afficher_horaire_fin_evenement'>
-<:agenda:evenement_date_a:>
+<:agenda:evenement_date_a_immediat:>
 [(#ENV**{valeurs}|table_valeur{date_evenement_fin}|Agenda_heure_selector{'_fin'})]
 </span>
 </span>
