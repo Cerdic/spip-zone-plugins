@@ -10,8 +10,8 @@ function Widgets_insert_head($flux)
 	$cssFile = find_in_path('widgets.css');
 	$imgPath = dirname(find_in_path('images/edit.gif'));
 
-	$txtEditer = addslashes(unicode_to_javascript(html2unicode(_T(
-		'widgets:editer'))));
+	$txtEditer = addslashes(html2unicode(_T(
+		'widgets:editer')));
 	$txtErrInterdit = addslashes(unicode_to_javascript(html2unicode(_T(
 		'widgets:erreur_ou_interdit'))));
 

@@ -151,6 +151,7 @@ $.fn.initwidget = function(){
       this.cloneNode(true)
     );
   })
+  .addClass('widget-autorise')
   .next()
     .hide()
     .html('')
