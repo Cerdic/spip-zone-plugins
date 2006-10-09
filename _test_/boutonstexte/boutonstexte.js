@@ -1,7 +1,7 @@
 // on dépend de jQuery (ou autre définissant $)
 if (typeof $ == 'function') {
 	$(document).ready(function(){
-		$("#contenu .texte").prepend(
+		$("#contenu .texte").before(
 
 '<span class="boutonstexte">\
 <button class="textonly" onclick="boutonstexte.textOnly(this);" alt="' +
@@ -34,21 +34,27 @@ function boutonsTexte(options)
 boutonsTexte.prototype.textOnly = function(elt)
 {
 	var that = this;
-	var texte = $(elt).ancestors(".texte");
+	var texte = $(elt).parent().next();
 	if (this['backTextOnly']) {
-		texte.removeClass("onlytext").next().show().prev().insertBefore($("#marktextonly")).find("button.textonly").attr({ 'title': that.txtOnly, 'alt': that.txtOnly });
-		$("#marktextonly").remove();
+		$(elt).attr({ 'title': that.txtOnly, 'alt': that.txtOnly }).
+			parent().insertBefore($("#marktextonly")).after(texte).
+			next().removeClass("onlytext").
+			next().remove(); // enlever "#marktextonly"
+		$('body').children().show();
 		this.backTextOnly = false;
 		return;
 	}
 	texte.after('<div id="marktextonly">marktextonly</div>');
-	texte.addClass("onlytext").prependTo("body").next().hide().prev().find("button.textonly").attr({ 'title': that.txtBackSpip, 'alt': that.txtBackSpip });
+	$(elt).attr({ 'title': that.txtBackSpip, 'alt': that.txtBackSpip }).
+		parent().prependTo("body").after(texte).
+		next().addClass("onlytext").
+		next().hide();
 	this.backTextOnly = true;
 }
 boutonsTexte.prototype.fontBigger = function(elt)
 {
 	var that = this;
-	$(elt).ancestors(".texte").each(function(){
+	$(elt).parent().next().each(function(){
 		var m = $(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
 		this.style.fontSize = (that.rate * parseFloat(m[1])) + m[2];
 	});
@@ -56,7 +62,7 @@ boutonsTexte.prototype.fontBigger = function(elt)
 boutonsTexte.prototype.fontSmaller = function(elt)
 {
 	var that = this;
-	$(elt).ancestors(".texte").each(function(){
+	$(elt).parent().next().each(function(){
 		var m = $(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
 		this.style.fontSize = (parseFloat(m[1]) / that.rate) + m[2];
 	});
