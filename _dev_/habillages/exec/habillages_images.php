@@ -97,9 +97,7 @@ EOF;
 	
 	debut_gauche();
 	debut_boite_info();
-	echo "Pour changer le logo de votre site t&#233;l&#233;chargez le ci-dessous. Si vous ne savez pas comment faire, ou si vous voulez t&#233;l&#233;charger des logos pr&#233;d&#233;finis, choisissez-en un &#224; droite.";
-	$iconifier = charger_fonction('iconifier', 'inc');
-	echo $iconifier('id_syndic', 0, 'habillages_images');
+	
 	fin_boite_info();
 
 	debut_droite();
@@ -107,9 +105,6 @@ EOF;
 	debut_cadre_relief();
 
 	global $couleur_foncee;
-
-	$iconifier = charger_fonction('habillagesiconifier', 'inc');
-	echo $iconifier('id_syndic', 0, 'habillages_images');
 
 	
 	echo "<br />";
