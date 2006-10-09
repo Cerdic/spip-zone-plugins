@@ -20,6 +20,6 @@
   </prefix>
   <pipeline>
 	  <nom>insert_head</nom>
-	  <inclure>head.php</inclure>
+	  <inclure>teteboutonstexte.php</inclure>
   </pipeline>
 </plugin>
