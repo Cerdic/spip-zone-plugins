@@ -20,7 +20,7 @@ function Widgets_insert_head($flux)
 <link rel="stylesheet" href="$cssFile" type="text/css" media="all" />
 <script src="{$jsFile}" type="text/javascript"></script>
 <script type="text/javascript">
-	widgets = new widgets({
+	var configWidgets = new configWidgets({
 		'imgPath':'{$imgPath}',
 		'txtEditer':'{$txtEditer}',
 		'txtErrInterdit':'{$txtErrInterdit}'

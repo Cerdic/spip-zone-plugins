@@ -21,6 +21,6 @@ _ <code><h1 class="widget article-titre-#ID_ARTICLE">#TITRE</h1></code>.
 	</prefix>
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>head.php</inclure>
+		<inclure>tetewidgets.php</inclure>
 	</pipeline>
 </plugin>

@@ -2,6 +2,14 @@
  *  widgets.js (c) Fil 2006 -- licence GPL
  */
 
+// le prototype configuration de Widgets
+function configWidgets(options)
+{
+    for (opt in options) {
+        this[opt] = options[opt];
+    }
+}
+
 // ouvre un widget
 $.fn.openwidget = function() {
   return this
@@ -76,7 +84,7 @@ $.fn.activatewidget = function() {
     .find('form')
       .ajaxForm(function(d){
         if (!d.responseText) {
-	        alert('Erreur ou pas autorisé !');
+	        alert(configWidgets.txtErrInterdit);
 	        $(me)
 	        .find("img.widget-searching")
 	          .remove();
@@ -194,8 +202,8 @@ $(document).ready(function() {
       c = c.split('|');
 
       url_widgets_html = 'spip.php?action=widgets_html';
-      SEARCHING = '<img class="widget-searching" src="dist/images/searching.gif" style="float:right;" />';
-      ICONCLICK = "<span style='float:right;z-index:100;'><img class='widget-edit' onclick='event.stopPropagation();$(this).parent().parent().openwidget();' style='position:absolute;border:0;' src='dist/images/edit.gif' title='&Eacute;diter' /></span>";
+      SEARCHING = "<img class='widget-searching' src='" + configWidgets.imgPath + "/searching.gif' style='float:right;' />";
+      ICONCLICK = "<span style='float:right;z-index:100;'><img class='widget-edit' onclick='event.stopPropagation();$(this).parent().parent().openwidget();' style='position:absolute;border:0;' src='" + configWidgets.imgPath + "/edit.gif' title='" + configWidgets.txtEditer + "' /></span>";
 
       for (var i=0; i<c.length; i++) {
         $(".widget."+c[i])
