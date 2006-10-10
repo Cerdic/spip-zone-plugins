@@ -6,9 +6,8 @@ include_spip ("inc/texte");
 include_spip ("inc/session");
 include_spip ("inc/extra");
 
-// Le contexte indique dans quelle rubrique le visiteur peut proposer l article
 function balise_FORMULAIRE_PROFILE ($p) {
-	return calculer_balise_dynamique($p,'FORMULAIRE_PROFILE', array('id_article'));
+	return calculer_balise_dynamique($p,'FORMULAIRE_PROFILE', array('id_auteur'));
 }
 
 function balise_FORMULAIRE_PROFILE_stat($args, $filtres) {
@@ -57,10 +56,10 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 	$new_pass =  _request('new_pass');
 	$new_pass2 =  _request('new_pass2');
 
-	$previsualiser= _request('previsualiser');
-	$valider= _request('valider');
+	$previsualiser_auteur= _request('previsualiser_auteur');
+	$valider_auteur= _request('valider_auteur');
 	
-	$previsu = '';
+	$previsu_auteur = '';
 	$bouton= '';
 	$erreur= '';
 
@@ -68,7 +67,7 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 	$id_auteur_session=$auteur_session['id_auteur'];
 	$auteur=unserialize(get_auteur_infos($id_auteur_session));
 
-	if($valider)
+	if($valider_auteur)
 		{
 		// integrer a la base de donnee
 	$nom2= _request('nom2');
@@ -111,7 +110,7 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 
 	return array('formulaire_profile', 0,
 		array(
-				'previsu' => $previsu,
+				'previsu_auteur' => $previsu_auteur,
 				'id_auteur' => $id_auteur,
 				'nom' => $nom,
 				'email' => $email,
@@ -132,7 +131,7 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 		}
 
 	else{
-		if($previsualiser)
+		if($previsualiser_auteur)
 		{
 
 		if ($new_pass) {
@@ -147,7 +146,7 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 			else {
 				$modif_login = true;
 				$auteur['new_pass'] = $new_pass;
-				$bouton= _T('form_prop_confirmer_envoi');
+				$bouton= _T('form_prop_confirmer');
 			}
 		}
 		
@@ -168,14 +167,14 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 
 		else {
 			$query_pass = '';
-			$bouton= _T('form_prop_confirmer_envoi');
+			$bouton= _T('form_prop_confirmer');
 		}
 
-		$previsu = inclure_balise_dynamique(
+		$previsu_auteur = inclure_balise_dynamique(
 			array(
 				'formulaire_profile_previsu', 0,
 			array(
-				'previsu' => $previsu,
+				'previsu_auteur' => $previsu_auteur,
 				'id_auteur' => $id_auteur,
 				'nom' => $nom,
 				'email' => $email,
@@ -201,7 +200,6 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 
 		return array('formulaire_profile', 0,
 		array(
-				'previsu' => $previsu,
 				'id_auteur' => $id_auteur,
 				'nom' => $nom,
 				'email' => $email,

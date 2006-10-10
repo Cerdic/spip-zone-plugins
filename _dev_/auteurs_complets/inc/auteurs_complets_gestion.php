@@ -1,11 +1,7 @@
 <?php
 
 include_spip('inc/texte');
-include_spip('inc/date');
 include_spip('inc/presentation');
-include_spip('agenda_mes_fonctions');
-include_spip('inc/auteur_voir');
-include_spip('inc/message_select');
 
 function auteurs_complets_install(){
 	auteurs_complets_verifier_base();
@@ -61,8 +57,9 @@ function auteurs_complets_verifier_base(){
 	ecrire_metas();
 }
 
-function auteurs_complets_ajouts(){
-	global 
+function auteurs_complets_ajouts()
+{
+	global
 	$connect_id_auteur,
 	$id_auteur;
 
