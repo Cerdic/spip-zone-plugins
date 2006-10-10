@@ -97,7 +97,7 @@ EOF;
 	
 	debut_gauche();
 	debut_boite_info();
-	
+	echo _T('habillages:navigation_images');
 	fin_boite_info();
 
 	debut_droite();
@@ -106,6 +106,8 @@ EOF;
 
 	global $couleur_foncee;
 
+	ecrire_meta('habillages_logo_site', 'toto_site.png');
+	ecrire_metas;
 	
 	echo "<br />";
 

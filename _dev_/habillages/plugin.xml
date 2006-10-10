@@ -37,4 +37,9 @@ Gestionnaire d'habillages SPIP.
 		<action>header_prive</action>
 		<inclure>habillages_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+			<nom>affichage_final</nom>
+			<action>affichage_final</action>
+			<inclure>habillages_pipelines.php</inclure>
+	</pipeline>
 </plugin>

@@ -46,4 +46,12 @@ function habillages_header_prive($flux) {
 	return $flux;
 }
 
+function habillages_affichage_final($texte) {
+		lire_metas();
+		$lire_meta_logo_site = $GLOBALS['meta']['habillages_logo_site'];
+		
+		$texte = str_replace('alt="', 'alt="'.$lire_meta_logo_site, $texte);
+		return $texte;
+}
+	
 ?>

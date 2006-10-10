@@ -22,12 +22,21 @@ Les captures d\'&eacute;cran son volontairement en noir et blanc. Pour mettre de
 'plugin_etat_stable' => 'Cet habillage est stable.',
 'aide' => 'Ce plugin est en d&eacute;veloppement. Par cons&eacute;quent tout son fonctionnement et les commentraires qui lui sont associ&eacute;s sont &agrave; consid&eacute;rer comme truff&eacute;s d\'erreurs. Merci de revenir quand ce plugin sera en test : il sera plus fiable.<br /><br />
 <strong>Personnalisation et gestion du plugin <i>Habillages</i> : qu\'est-ce qu\'il y a sous le capot ?</strong><br />
-Vous etes concepteur/trice et vous souhaitez faire des th&egrave;mes compatibles avec ce plugin, la d&eacute;marche est expliqu&eacute;e ci-dessous.<br />
-
-- Personnaliser les squelettes<br />
-- Personnaliser les styles<br />
-- Personnaliser les images/logos<br />
-- Personnaliser les icones<br />',
+Vous etes concepteur/trice et vous souhaitez faire des th&egrave;mes compatibles avec ce plugin, la d&eacute;marche est expliqu&eacute;e ci-dessous.<br /><br />
+- <strong>Personnaliser les squelettes</strong><br /><br />
+- <strong>Personnaliser les styles</strong><br /><br />
+- <strong>Personnaliser les images/logos</strong><br />
+-> <strong><i>le logo du site</i></strong><br />
+-> <strong><i>les th&egrave;mes de logos</i></strong><br />
+Si vous ne voulez pas donner la possibilit&eacute; de personnaliser s&eacute;par&eacute;ment les logos de rubriques et les logos d\'articles, vous pouvez fournir des th&egrave;mes. Un th&egrave;me regroupe d\'autorit&eacute; les logos des rubriques et ceux des articles : le choix d\'un th&egrave;me s&eacute;lectionne toutes les images pr&eacute;selectionn&eacute;es. Par contre, vous avez la possibilit&eacute; de donner la possibilit&eacute; de ne personnaliser que les logos de rubriques ou d\'articles de facon s&eacute;par&eacute;e. Les &eacute;tapes sont indiqu&eacute;es ci-dessous.<br />
+* les logos de rubriques<br />
+* les logos d\'articles<br /><br />
+- <strong>Personnaliser les icones</strong><br />',
+'navigation_images' => 'Vous pouvez changer plusieurs types d\'images sur votre site. Si vous ne souhaitez pas faire ces d&eacute;marches une par une, choisissez juste un th&egrave;me ci-contre. Sinon cliquez sur les liens correspondants aux &eacute;l&eacute;ments que vous souhaitez modifier :<br /><br />
+* Le logo de votre site<br />
+* Les logos de vos rubriques et articles<br />
+- Les logos de vos rubriques<br />
+- Les logos de vos articles<br /><br />',
 );
 
 

@@ -118,7 +118,7 @@ function habillages_affichage_styles($fichier_plugin_xml) {
 			$lire_meta_habillages = array($GLOBALS['meta']['habillages_styles']);
 		}
 	
-	if ($lire_meta_habillages == $chemin_plugin_court) {
+	if ($lire_meta_habillages[0] == $chemin_plugin_court) {
 		$checked = " checked='checked'";
 	}
 	else {

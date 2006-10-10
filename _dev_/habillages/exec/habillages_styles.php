@@ -28,7 +28,7 @@ function exec_habillages_styles() {
 	
 	if (_request('changer_plugin')=='oui'){
 		lire_metas();
-		$lire_meta_squelettes = $GLOBALS['meta']['habillages_styles'];
+		$lire_meta_squelettes = array($GLOBALS['meta']['habillages_styles']);
 		ecrire_plugin_actifs($lire_meta_squelettes,'',$operation='enleve');
 		ecrire_meta('habillages_styles', _request('statusplug'));
 		ecrire_metas;
@@ -149,6 +149,8 @@ EOF;
 			$nom_dossier_theme = dirname ($fichier);
 			$fichier_plugin_xml = $nom_dossier_theme."/plugin.xml";
 
+			#! Mettre un affichage par defaut de style, ca plante le truc de ne pas le faire.
+			
 			echo generer_url_post_ecrire("habillages_styles");
 			
 				if (!is_file($fichier_plugin_xml)) {
@@ -182,13 +184,6 @@ EOF;
 	echo "</div>";
 	echo "</form></tr></table>\n";
 	
-	echo "<br />";
-	
-// 	$lire_meta_squelettes = isset($GLOBALS['meta']['habillages_squelettes'])?$GLOBALS['meta']['habillages_squelettes']:'';
-// 	
-// 	if (!isset($lire_meta_squelettes)){
-// 		echo "Vous ne pouvez pas choisir de style si vous n'avez pas choisi de squelettes. Veuillez aller dans la rubrique squelettes et choisir un jeu de squelettes";
-// 	}
 	echo "<br />";
 
 	fin_page();
