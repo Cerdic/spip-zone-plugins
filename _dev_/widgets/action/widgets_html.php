@@ -3,7 +3,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_widgets_html_dist() {
-	include_spip('action/widgets_droits');
 	include_spip('inc/widgets');
 	include_spip('inc/texte');
 	include_spip('inc/rubriques');
