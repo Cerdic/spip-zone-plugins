@@ -23,12 +23,13 @@
 ''
 })]
 [
+#SET{player,#ENV{player,#CONFIG{player,'neoplayer'}}}
 <dt class='spip_doc_titre'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
 <dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF)#NOTES</dd>]
 </dl>
-[(#CONFIG{player}|=={pixplayer}|?{' ',''})
-<object type='application/x-shockwave-flash' data='/plugins/Lecteur_multimedia/pixplayer.swf' id='audioplayer#ID_DOCUMENT' height='24' width='290'>
-<param name='movie' value='/plugins/Lecteur_multimedia/pixplayer.swf'>
+[(#GET{player}|=={pixplayer}|?{' ',''})
+<object type='application/x-shockwave-flash' data='#EVAL{_DIR_PLUGIN_PLAYER}pixplayer.swf' id='audioplayer#ID_DOCUMENT' height='24' width='290'>
+<param name='movie' value='#EVAL{_DIR_PLUGIN_PLAYER}pixplayer.swf'>
 <param name='FlashVars' value='playerID=#ID_DOCUMENT&amp;bg=0xf8f8f8&amp;leftbg=0xeeeeee&amp;lefticon=0x666666&amp;rightbg=0xcccccc&amp;rightbghover=0x999999&amp;righticon=0x666666&amp;righticonhover=0xFFFFFF&amp;text=0x666666&amp;slider=0x666666&amp;track=0xFFFFFF&amp;border=0x666666&amp;loader=0x9FFFB8&amp;soundFile=#URL_DOCUMENT'>
 <param name='quality' value='high'>
 <param name='menu' value='false'>
@@ -36,25 +37,25 @@
 <span>[(#URL_DOCUMENT|enclosure_it{#URL_DOCUMENT})]</span>
 </object>
 ]
-[(#CONFIG{player}|=={neoplayer}|?{' ',''})
-<object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#CHEMIN{neoplayer_maxi.swf}" width="200" height="20">
+[(#GET{player}|=={neoplayer}|?{' ',''})
+<object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#EVAL{_DIR_PLUGIN_PLAYER}neoplayer_maxi.swf" width="200" height="20">
 	<param name="wmode" value="transparent" />
-	<param name="movie" value="#CHEMIN{neoplayer_maxi.swf}" />
+	<param name="movie" value="#EVAL{_DIR_PLUGIN_PLAYER}neoplayer_maxi.swf" />
 	<param name="FlashVars" value="mp3=#URL_DOCUMENT&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;loadingcolor=ffff00&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;showinfo=0&amp;width=200&amp;height=20" />
 </object>
 ]
 
-[(#CONFIG{player}|=={neoplayer_multi}|?{' ',''})
-<object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#CHEMIN{neoplayer_multi.swf}" width="200" height="100">
+[(#GET{player}|=={neoplayer_multi}|?{' ',''})
+<object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#EVAL{_DIR_PLUGIN_PLAYER}neoplayer_multi.swf" width="200" height="100">
 	<param name="wmode" value="transparent" />
-	<param name="movie" value="#CHEMIN{neoplayer_multi.swf}" />
+	<param name="movie" value="#EVAL{_DIR_PLUGIN_PLAYER}neoplayer_multi.swf" />
 	<param name="FlashVars" value="mp3=#URL_DOCUMENT|#URL_DOCUMENT&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;showinfo=1" />
 </object>
 ]
 
-[(#CONFIG{player}|=={dewplayer}|?{' ',''})
-<object type='application/x-shockwave-flash' data='[(#CHEMIN{dewplayer.swf})]' width='200' height='20'>
-<param name='movie' value='#CHEMIN{dewplayer.swf}'/>
+[(#GET{player}|=={dewplayer}|?{' ',''})
+<object type='application/x-shockwave-flash' data='#EVAL{_DIR_PLUGIN_PLAYER}dewplayer.swf' width='200' height='20'>
+<param name='movie' value='#EVAL{_DIR_PLUGIN_PLAYER}dewplayer.swf'/>
 <param name="FlashVars" value='son=[(#URL_DOCUMENT|url_absolue)]'>
 <span>[(#URL_DOCUMENT|enclosure_it{#URL_DOCUMENT})]</span>
 </object>
@@ -63,8 +64,8 @@
 ''
 })]
 [(#TYPE_DOCUMENT|=={Flash Video}|?{
-<object type="application/x-shockwave-flash" data="[(#CHEMIN{player_flv.swf})]" width="[(#LARGEUR|=={0}|?{400,#LARGEUR})]" height="[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]">
-	<param name="movie" value="[(#CHEMIN{player_flv.swf})]" />
+<object type="application/x-shockwave-flash" data="#EVAL{_DIR_PLUGIN_PLAYER}player_flv.swf" width="[(#LARGEUR|=={0}|?{400,#LARGEUR})]" height="[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]">
+	<param name="movie" value="#EVAL{_DIR_PLUGIN_PLAYER}player_flv.swf" />
 	<param name="FlashVars" value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#LARGEUR|=={0}|?{400,#LARGEUR})]&amp;height=[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;title=#TITRE&amp;startimage=[(#LOGO_DOCUMENT||extraire_attribut{src})]" />
 	<param name="wmode" value="transparent" />
 <span>[(#URL_DOCUMENT|enclosure_it{#URL_DOCUMENT})]</span>

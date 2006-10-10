@@ -1,4 +1,3 @@
-#HTTP_HEADER{Content-Type: text/js}
 /*
 	appelee par le body onload, cette fonction affiche les players mp3 et genere les playlistes associées
 	auteur :BoOz - booz@rezo.net
@@ -46,22 +45,14 @@ $(this).before('<span class="player"><object style="margin-left:0.1em" ' +
 	'<param name="wmode" value="transparent" />' +
 	'<param name="allowScriptAccess" value="sameDomain" />' +
 	'<param name="flashVars" value="song_url='+playlist+'" />' +
-	'<param name="movie" value="plugins/Lecteur_multimedia/musicplayer.swf?autoplay=false" />' +
+	'<param name="movie" value="'+pixplayerurl+'?autoplay=false" />' +
 	'<param name="quality" value="high" />' +
 	'<embed style="margin-left:0.1em" ' +
-	'src="plugins/Lecteur_multimedia/musicplayer.swf?autoplay=false" '+
+	'src="'+pixplayerurl+'?autoplay=false" '+
 	'flashVars="song_url='+playlist+'"' +
 	'quality="high" wmode="transparent" width="18" height="18" name="player"' +
 	' allowScriptAccess="sameDomain" type="application/x-shockwave-flash"' +
 	' pluginspage="http://www.macromedia.com/go/getflashplayer" /></object></span>');
-
-/*
-$(this).before('<span class="player"><object id="audioplayer'+ i +'" type="application/x-shockwave-flash" data="/plugins/Lecteur_multimedia/neoplayer_maxi.swf?son='+ playlist +'" width="25" height="20">' +
-'	<param name="wmode" value="transparent" /> '+
-'	<param name="movie" value="/plugins/Lecteur_multimedia/neoplayer_maxi.swf" />' +
-'	<param name="FlashVars" value="mp3='+ playlist +'&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=0&amp;showslider=0&amp;width=25" /> ' +
-'</object></span>');
-*/
 
 }
 )

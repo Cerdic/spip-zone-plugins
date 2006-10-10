@@ -15,20 +15,12 @@
 	- Remplace automatiquement les liens vers un fichier de format mp3 par un lecteur mp3 en flash permettant d'écouter ce fichier.<br />
 	- Le modèle doc.html, fait la même chose en utilisant la balise permettant d'afficher la vignette du document.<br />
 	- Avec le plugin jQuery, et la balise #INSERT_HEAD, ajoute un lecteur devant les liens enclosures MP3
-	<a href="?exec=player_admin">configurer le plugin</a> || 
+_ <a href="?exec=player_admin">configurer le plugin</a> || 
 	<a href="http://spip-zone.info/spip.php?article18">documentation</a>
 	</description>
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	<fonctions>
 	player.php
 	</fonctions>
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	player_options.php
-	</fonctions>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
 	<prefix> 
 	Player
 	</prefix>
@@ -37,12 +29,9 @@
 	-->
 	<pipeline>
 		<nom>post_propre</nom>
-		<action>post_propre</action>
-		<inclure>player.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>head.php</inclure>
 	</pipeline>
 
 		<!-- Le parametre action est facultatif : en son absence la fonction portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->

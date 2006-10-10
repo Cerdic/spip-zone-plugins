@@ -1,50 +1,36 @@
 <?php
 
+if (!defined('_DIR_PLUGIN_PLAYER')){ // defini automatiquement par SPIP 1.9.2
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_PLAYER',(_DIR_PLUGINS.end($p)));
+}
+
+function Player_insert_head($flux){
+	$flux .="<script type='text/javascript'>var pixplayerurl='"._DIR_PLUGIN_PLAYER."musicplayer.swf'</script>\n";
+	$flux .= 	'<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'player_enclosure.js"></script>';
+	return $flux;
+}
+
+
 /**
  * enclosures
  */
 
+// Contrairement au plugin original (http://zone.spip.org/trac/spip-zone/browser/_plugins_branche_stable_/_spip_1_9_0_/dewplayer)
+// Cette version pour la version 1.9.1 utilisera la modification du modèle doc pour traiter les adresses relatives 
+// qu'on retrouverait si on placerait un lien dans le texte par une balise <docXX>
+// ajout d'un rel="enclosure" simple sur les liens mp3
+function Player_post_propre($texte) {
+
+	$reg_formats="mp3";
+
+	//trouver des liens complets 
+	$texte = preg_replace(
+		",<a(\s[^>]*href=['\"]?(http:\/\/[a-zA-Z0-9\s()\/\:\._%\?+'=~-]*\.($reg_formats))['\"]?[^>]*)>(.*)</a>,Uims",
+		'<a$1 rel="enclosure">$4</a>', 
+		$texte);
 	
-	 function enclosure_it($url, $titre){
-		$enclosure = '<a rel="enclosure" href="'.$url.'"> '.$titre.' </a>' ;	
-		return $enclosure ;
-	}
-	
-
-
-	/* static public */
-	// Contrairement au plugin original (http://zone.spip.org/trac/spip-zone/browser/_plugins_branche_stable_/_spip_1_9_0_/dewplayer)
-	// Cette version pour la version 1.9.1 utilisera la modification du modèle doc pour traiter les adresses relatives 
-	// qu'on retrouverait si on placerait un lien dans le texte par une balise <docXX>
-	function Player_post_propre($texte) {
-	
-		$reg_formats="mp3";
-
-		//trouver des liens complets 
-		unset($matches) ;
-		preg_match_all("/<a href=['\"]?(http:\/\/[a-zA-Z0-9 ()\/\:\._%\?+'=~-]*\.($reg_formats))['\"]?[^>]*>(.*)<\/a>/iU", $texte, $matches);
-		
-	    //print_r($matches);
-		// S'il n'y a pas de lien sur des fichier de format mp3, retourner le texte sans changement
-		if(!$matches[1][0]) return $texte; 
-
-		$url_a=$matches[1];
-		$lien=$matches[0];
-		$titre_a=$matches[3];
-
-
-		//remplacer le lien sur des fichier de format mp3 par le player flash permettant de jouer ce fichier 
-		$y=0;
-		foreach($url_a as $url){
-
-			$titre=$titre_a[$y];
-			if(preg_match_all("/http:\/\/[a-zA-Z0-9 ()\/\:\._%\?+'=~-]*\.mp3?/iU", $titre, $matches) AND $fichier=basename($url)) $titre = $fichier ;
-			$texte = ereg_replace($lien[$y],enclosure_it($url,$titre).$GLOBALS['param_perso']['dewplayer'], $texte);
-			
-			
-			$y++;
-		}
-		return $texte;
-	}
+	return $texte;
+}
 
 ?>
