@@ -56,7 +56,7 @@ function sktheme_affichage_final($texte){
       AND ($GLOBALS['meta']['sktheme_switcher_activated']=="yes")) {
     if ($html) {
 		
-      // Doit-on afficher le seleecteur de squelette ? (Fonctionnalitée restreinte aux seuls administrateurs ?)
+      // Doit-on afficher le seleecteur de squelette ? (Fonctionnalite restreinte aux seuls administrateurs ?)
       $afficherSelecteur=TRUE;
       if (isset($GLOBALS['meta']['sktheme_switcher_admin_only']) 
 	  AND ($GLOBALS['meta']['sktheme_switcher_admin_only']=="yes") 
@@ -65,7 +65,7 @@ function sktheme_affichage_final($texte){
       if ($afficherSelecteur) {
 			
 			
-	// Insertion du sélecteur de squelettes			
+	// Insertion du selecteur de squelettes			
 	$code.='<div id="sktheme_switcher" style="top: 0;left: 20px; position: absolute; background-color: transparent;z-index: 100;">';
 	$code.='<form action="" method="post">';
 	$code.='<select name="selecteurTheme" style="'.$GLOBALS['meta']['sktheme_theme_switcher_style'].'" onchange="sktheme_gotof(this.options[this.selectedIndex].value)">';
