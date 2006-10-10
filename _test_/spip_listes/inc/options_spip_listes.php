@@ -187,7 +187,7 @@ $out = ereg_replace ('<li[^>]>', "\n".'-', $out);
 		 //$out = ereg_replace("^( )", "", $out);
 		 //$out = ereg_replace("(\n\n\n)+", "", $out) ;
 		 //$out = ereg_replace("(\n\n)+", "", $out) ;
-		 $out = str_replace(chr(160), "", $out); 
+		 
 		 $out = str_replace("\x0B", "", $out); 
 		 $out = ereg_replace("\t", "", $out) ;
 		 //$out = ereg_replace("[\n]{3,}", "\n\n", $out);
