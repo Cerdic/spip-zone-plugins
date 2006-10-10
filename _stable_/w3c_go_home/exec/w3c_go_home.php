@@ -104,9 +104,9 @@ function exec_w3c_go_home(){
 			}
 		}
 
+		$vals = '';
 		$vals[] = ++$cpt;
 		
-		$vals = '';
 
 		if ($ok_access&&$ok_xhtml){
 			$cpt_ok++;
