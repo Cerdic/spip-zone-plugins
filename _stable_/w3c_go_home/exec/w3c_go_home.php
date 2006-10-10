@@ -66,7 +66,7 @@ function exec_w3c_go_home(){
 	echo "<div class='liste'>";
 	bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black");
 	echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
-	$table[] = array('url',"<a href='http://validateur-accessibilite.apinc.org/'>apinc</a>","<a href='http://validator.w3.org/'>validator</a>");
+	$table[] = array('','url',"<a href='http://validateur-accessibilite.apinc.org/'>apinc</a>","<a href='http://validator.w3.org/'>validator</a>");
 
 	$access_compliance = isset($GLOBALS['meta']['xhtml_access_compliance'])?unserialize($GLOBALS['meta']['xhtml_access_compliance']):false;
 	if (!$access_compliance)
