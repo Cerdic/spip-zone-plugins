@@ -1,0 +1,7 @@
+<plugin>
+	<version>0.1</version>
+	<nom>Configuration de SpipClear</nom>
+	<prefix>SC_Cfg</prefix>
+	<etat>experimental</etat>
+	<description>[Installer ou Mettre &agrave; Jour->../spip.php?action=installer_spipclear]</description>
+</plugin>
