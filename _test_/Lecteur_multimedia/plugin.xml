@@ -19,7 +19,7 @@ _ <a href="?exec=player_admin">configurer le plugin</a> ||
 	<a href="http://spip-zone.info/spip.php?article18">documentation</a>
 	</description>
 	<fonctions>
-	player.php
+	player_fonctions.php
 	</fonctions>
 	<prefix> 
 	Player
@@ -33,6 +33,9 @@ _ <a href="?exec=player_admin">configurer le plugin</a> ||
 	<pipeline>
 		<nom>insert_head</nom>
 	</pipeline>
-
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>player_config_fonctions.php</inclure>
+	</pipeline>
 		<!-- Le parametre action est facultatif : en son absence la fonction portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>
