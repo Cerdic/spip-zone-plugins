@@ -237,7 +237,7 @@ if ($statut=="redac") {
 	
 	echo "<br /><font face='Georgia,Garamond,Times,serif' size=3>";
 	debut_boite_info();
-	   echo "<h3>"._T('spiplistes:version')." HTML</h3><a href=\"".generer_url_ecrire('courrier_preview','id_message='.$id_message)."\">(Plein &eacute;cran)</a><br />\n";
+	   echo "<h3>"._T('spiplistes:version')." HTML</h3><a href=\"".generer_url_ecrire('courrier_preview','id_message='.$id_message)."\">"._T('spiplistes:plein_ecran')."</a><br />\n";
 	  echo "<iframe src=\"?exec=courrier_preview&id_message=$id_message\" width=\"100%\" height=\"500\"></iframe>\n";
 	fin_boite_info();    
 	echo "<p>";

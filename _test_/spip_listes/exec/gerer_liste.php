@@ -89,7 +89,7 @@ debut_gauche();
 debut_boite_info();
 
 echo '<div align="center">
-<font face="Verdana,Arial,Sans,sans-serif" size="1"><b>LISTE NUMÉRO&nbsp;:</b></font>
+<font face="Verdana,Arial,Sans,sans-serif" size="1"><b>'._T('spiplistes:liste_numero').'&nbsp;:</b></font>
 <br><font face="Verdana,Arial,Sans,sans-serif" size="6"><b>'.$id_article.'</b></font>
 </div>';
 
@@ -715,7 +715,7 @@ if ($connect_statut == '0minirezo' ) {
 
 	echo "<input type='submit' name='Modifier' value='"._T('bouton_modifier')."' class='fondo'>";
 	echo aide ("artstatut");
-	echo "</CENTER>";
+	echo "</center>";
 	fin_cadre_relief();
 	echo "</form>";
 }
@@ -731,7 +731,7 @@ echo "<p>" ;
 
 debut_cadre_relief("../"._DIR_PLUGIN_SPIPLISTES."/img_pack/reply-to-all-24.gif");
      
-echo "<form action='?exec=gerer_liste&id_article=$id_article' METHOD='post'>";
+echo "<form action='?exec=gerer_liste&id_article=$id_article' method='post'>";
 		 
 	// On réupée les extras
 $extra = get_extra($id_article, 'article');
@@ -892,7 +892,7 @@ echo "<tr><td background='img_pack/rien.gif' align='$spip_lang_left' class='verd
 	echo "</td></tr>";
 	echo "</table>\n";
 	
-	echo "</FORM>";
+	echo "</form>";
 		
 
 
@@ -1238,7 +1238,7 @@ if ($flag_editable) {
 	
 	
 	if (spip_num_rows($result) > 0) {
-		echo "<form action='?exec=gerer_liste&id_article=$id_article#auteurs' METHOD='post'>";
+		echo "<form action='?exec=gerer_liste&id_article=$id_article#auteurs' method='post'>";
 		echo "<span class='verdana1'><b>"._T('spiplistes:abon_ajouter')."</b></span>\n";
 		echo "<div><input type='Hidden' name='id_article' value=\"$id_article\">";
 
@@ -1250,7 +1250,7 @@ if ($flag_editable) {
 		}
 		else {
 			echo "<input type='Hidden' name='ajout_auteur' value='oui'>";
-			echo "<SELECT name='nouv_auteur' size='1' STYLE='width:150px;' class='fondl' onChange=\"setvisibility('valider_ajouter_auteur','visible');\">";
+			echo "<select name='nouv_auteur' size='1' STYLE='width:150px;' class='fondl' onChange=\"setvisibility('valider_ajouter_auteur','visible');\">";
 			$group = false;
 			$group2 = false;
 
@@ -1287,12 +1287,12 @@ if ($flag_editable) {
 				$premiere_old = $premiere;
 			}
 
-			echo "</SELECT>";
+			echo "</select>";
 			echo "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>";
 			echo " <input type='submit' name='Ajouter' value="._T('bouton_ajouter')." class='fondo'>";
 			echo "</span>";
 		}
-		echo "</div></FORM>";
+		echo "</div></form>";
 	}
 	
 	echo "</td></tr></table>";

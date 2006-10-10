@@ -114,6 +114,8 @@ e ricevere le newsletter.',
 'lot_suivant' => 'Inizia l\'invio del flusso seguente',
 'lieu' => 'Localizzazione',
 'lettre_d_information' => 'Newsletter',
+'liste_numero' => 'LISTE NUM&Eacute;RO***FIX ME***',
+
 
 //M
 'mail_format' => 'Siete iscritti alla newsletter del sito @nom_site_spip@ con il formato',
@@ -156,6 +158,8 @@ e ricevere le newsletter.',
 'patron_disponibles' => 'Modelli disponibili',
 'Patrons' => 'Modelli',
 'poster' => 'Invia un messaggio',
+'plein_ecran' => '(Plein &eacute;cran) ****FIX ME***',
+
 
 //R
 'recherche' => 'Cerca',

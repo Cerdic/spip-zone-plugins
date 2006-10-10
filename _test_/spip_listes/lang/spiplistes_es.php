@@ -115,6 +115,8 @@ Un saludo
 'login' => 'Conexi&oacute;n',
 'logout' => 'Desconexi&oacute;n',
 'lot_suivant' => 'Enviar siguiente lote',
+'liste_numero' => 'LISTE NUM&Eacute;RO***FIX ME***',
+
 
 //M
 'mail_format' => 'Est&aacute;s inscrit@ para recibir los novedades de @nom_site_spip@ en formato',
@@ -158,6 +160,8 @@ Un saludo
 'patron_disponibles' => 'Plantillas disponibles',
 'poster' => 'Env&iacute;ar un mensaje',
 'prochain_envoi_prevu' => 'Pr&oacute;ximo env&iacute;o hoy',
+'plein_ecran' => '(Plein &eacute;cran) ****FIX ME***',
+
 
 //R
 'recherche' => 'Buscar',
