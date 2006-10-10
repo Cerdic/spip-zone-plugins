@@ -4,7 +4,7 @@
 <html dir="#LANG_DIR" lang="#LANG">
 
 <head>
-<title>[Imprimir: (#TITRE|supprimer_numero|textebrut)]</title>
+<title>[<:imprimirdocumento:imprimir:> : (#TITRE|supprimer_numero|textebrut)]</title>
 <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 </head>
 
@@ -27,7 +27,7 @@
 
 <td width="100%">
 <div style="border-bottom: 1px solid #999999;">  
-<div style="font-size:120%;">#TITRE</div>
+<div style="font-size:120%;">[(#TITRE|supprimer_numero)]</div>
 <i><div style="color:#333333; font-size:85%;">[<b>(#SURTITRE)</b> / ][(#SOUSTITRE)]</div>
 [<span style="color:#666666; font-size:75%;">(#DATE|nom_jour), ][(#DATE|affdate)</span>]</i>
 <span style="color:#666666; font-size:80%;">
@@ -64,7 +64,7 @@
                   </tr>
                 </table>
                 </B_galeria>
-                
+
                   <B_galeria3>
                   <table width="20%" cellpadding="4">
                   <tr>
@@ -82,14 +82,13 @@
                   </BOUCLE_galeria2>
                   </table>
                   </B_galeria3>
-                
-                
+
                 <B_documents>
                 <hr />
                 <table width="100%" style="font-size: 70%; color:#333333;">   
-					<tr>
-              			<td valign="top">
-                    		Si visitas nuestra web, en este art&iacute;culo encontrar&aacute;s los siguientes documentos para descargar:
+				<tr>
+				<td valign="top">
+				<:imprimirdocumento:documentos_descargar:>
                         </td>
                      </tr>
                     <BOUCLE_documents(DOCUMENTS) {id_article} {mode=document} {doublons}>
@@ -134,12 +133,10 @@
 <hr />
 </div>
 
+[<div style="display:none">(#FORMULAIRE_ADMIN)</div>]
         <script type="text/javascript">
 		window.print();
-</script>
-		
-[<div style="display:none">(#FORMULAIRE_ADMIN)</div>]
-
+	</script>
 
 </body>
 </html>

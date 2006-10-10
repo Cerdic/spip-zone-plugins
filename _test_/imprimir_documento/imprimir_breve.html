@@ -4,7 +4,7 @@
 <html dir="#LANG_DIR" lang="#LANG">
 
 <head>
-<title>[Imprimir: (#TITRE|supprimer_numero|textebrut)]</title>
+<title>[<:imprimirdocumento:imprimir:> : (#TITRE|supprimer_numero|textebrut)]</title>
 <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 </head>
 
@@ -64,7 +64,7 @@
                   </tr>
                 </table>
                 </B_galeria>
-                
+
                   <B_galeria3>
                   <table width="20%" cellpadding="4">
                   <tr>
@@ -82,16 +82,15 @@
                   </BOUCLE_galeria2>
                   </table>
                   </B_galeria3>
-                
-                
+
                 <B_documents>
                 <hr />
                 <table width="100%" style="font-size: 70%; color:#333333;">   
-					<tr>
-              			<td valign="top">
-                    		Si visitas nuestra web, en este art&iacute;culo encontrar&aacute;s los siguientes documentos para descargar:
-                        </td>
-                     </tr>
+			<tr>
+			<td valign="top">
+				<:imprimirdocumento:documentos_descargar:>
+			</td>
+			</tr>
                     <BOUCLE_documents(DOCUMENTS) {id_breve} {mode=document} {doublons}>
                       <tr>
                         	<td>[&bull; #TITRE, (#TYPE_DOCUMENT - (#TAILLE|taille_en_octets))] </td>
