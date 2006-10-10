@@ -1,0 +1,29 @@
+body {
+	font-size:1.5em !important;
+}
+		
+#page {
+	width: 100% !important;
+}
+		
+#conteneur { width: 100% !important; }
+		
+#conteneur #contenu {
+	float: none !important;
+	width: width: 100% !important;
+}
+		
+#conteneur #navigation {
+	float: none !important;
+	width: width: 100% !important;
+}
+
+#contenu .contre-encart {
+	float: none !important;
+	width: 100% !important;
+}
+		
+#contenu .encart {
+	float: none !important;
+	width: 100% !important;
+}

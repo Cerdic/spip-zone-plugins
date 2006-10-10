@@ -1,0 +1,58 @@
+body {
+	background: #000 !important;
+	color: #CCC !important;
+}
+	
+.rubriques, .breves, .syndic, .forums, .divers {
+	background: #333 !important;
+	border: 1px solid #666 !important;
+}
+
+.menu-titre {
+	border-bottom: 1px dotted #666 !important;
+	background: #333 !important;
+}
+
+.cartouche .titre {
+	color: #FFF !important; }
+
+.texte { color: #FFF !important;}
+
+
+.page_plan #contenu h2 {
+	background: #333 !important;
+	border: 1px solid #666 !important; }
+
+legend { 
+	background: #000 !important; 
+}
+
+.spip_cadre, .forml {
+	background: #CCC !important; }
+
+.spip_bouton input {
+	background: #666 !important; }
+
+.reponse_formulaire { color: #F00 !important; }
+.forum-chapo .forum-titre, .forum-chapo .forum-titre a { color: #CCC !important; }
+ul .forum-chapo { background: #333 !important; }
+
+
+#signatures td.signature-date {
+	background: #333 !important;
+}
+
+#signatures td.signature-nom {
+	background: #333 !important;
+}
+
+#signatures td.signature-message {
+	background: #333 !important;
+}
+
+a { text-decoration: none; color: #CCC !important; }
+a.spip_note { color: #F60 !important; }
+a.spip_in { color: #F60 !important; } 
+a.spip_out, a.spip_url { color: #6C0 !important; } 
+a.spip_glossaire { color: #09F !important; }
+.on { font-weight: bold; color: #FFF !important; }

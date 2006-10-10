@@ -14,39 +14,75 @@ function balise_FORMULAIRE_PERSONNALISATION_stat($args, $filtres) {
 	$inverse = 'inverse';
 	$zoominverse = 'zoominverse';
 	$classique = 'classique';
-	$autolink = 'autolink';
+	$autolink = 'autolink';	
 	$autofocus = 'autofocus';
 	$one = '1000';
 	$two = '2000';
 	$tree = '3000';
-	$checked = 'normal';
+	$checkeduse = 'normal';
+	$checkednavmode = 'classique';
+	$checkedduree = '1000';	
 	return
-		array($script,$normal,$zoom,$inverse,$zoominverse,$classique,$autolink,$autofocus,$one,$two,$tree,$checked);
+		array($script,$normal,$zoom,$inverse,$zoominverse,$classique,$autolink,$autofocus,$one,$two,$tree,$checkeduse,$checkednavmode,$checkedduree);
 }
  
-function balise_FORMULAIRE_PERSONNALISATION_dyn($script,$normal,$zoom,$inverse,$zoominverse,$classique,$autolink,$autofocus,$one,$two,$tree,$checked) {
+function balise_FORMULAIRE_PERSONNALISATION_dyn($script,$normal,$zoom,$inverse,$zoominverse,$classique,$autolink,$autofocus,$one,$two,$tree,$checkeduse,$checkednavmode,$checkedduree) {
 	// Recuperer les variables
 	$use = _request('use');
 	$navigationmode = _request('navigationmode');
-	$duree = _request('duree');
-
+	$duree = _request('duree');	
+	
 	// Poser un cookie pour ne pas retaper les infos invariables
 	include_spip('inc/cookie');
-	if($use!=='') {
+	if($use!='') {
 		spip_setcookie('spip_personnalisation_use',$use,time()+60*60*24*365);
 	}
-	if($navigationmode!==''){ 
+	if($navigationmode!='') {
 		spip_setcookie('spip_personnalisation_navigationmode',$navigationmode,time()+60*60*24*365);
 	}
-	if($duree!=='') {
+	if($duree!='') {
 		spip_setcookie('spip_personnalisation_duree',$duree,time()+60*60*24*365);
 	}
 	
-	if (isset($_COOKIE['spip_personnalisation_use'])){
-		$checked = $_COOKIE['spip_personnalisation_use'];
-	} else{
-		$checked = $checked ;
+	
+	if (!isset($_POST['use'])) {
+	// read cookie
+		if (isset($_COOKIE['spip_personnalisation_use'])) {
+			$checkeduse = $_COOKIE['spip_personnalisation_use'] ;
+		}
+		else {
+			$checkeduse = $checkeduse ;
+		}
 	}
+	else {
+		$checkeduse = $use;
+	}
+	
+	if (!isset($_POST['navigationmode'])) {
+	// read cookie
+		if (isset($_COOKIE['spip_personnalisation_navigationmode'])) {
+			$checkednavmode = $_COOKIE['spip_personnalisation_navigationmode'] ;
+		}
+		else {
+			$checkednavmode = $checkednavmode ;
+		}
+	}
+	else {
+		$checkednavmode = $navigationmode;
+	}
+	
+	if (!isset($_POST['duree'])) {
+	// read cookie
+		if (isset($_COOKIE['spip_personnalisation_duree'])) {
+			$checkedduree = $_COOKIE['spip_personnalisation_duree'] ;
+		}
+		else {
+			$checkedduree = $checkedduree ;
+		}
+	}
+	else {
+		$checkedduree = $duree;
+	}	
 	
 	return array('formulaires/formulaire_personnalisation', 0,
 	array(
@@ -56,12 +92,14 @@ function balise_FORMULAIRE_PERSONNALISATION_dyn($script,$normal,$zoom,$inverse,$
 		'inverse' => $inverse,		
 		'zoominverse' => $zoominverse,
 		'classique' => $classique,
-		'autolink' => $autolink,
+		'autolink' => $autolink,	
 		'autofocus' => $autofocus,
 		'1000' => $one,
 		'2000' => $two,
-		'3000' => $tree,
-		'checked' => $checked,
+		'3000' => $tree,		
+		'checkeduse' => $checkeduse,		
+		'checkednavmode' => $checkednavmode,		
+		'checkedduree' => $checkedduree,
 		));
 }
 

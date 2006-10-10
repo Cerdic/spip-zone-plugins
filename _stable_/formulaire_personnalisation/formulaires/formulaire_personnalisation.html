@@ -1,19 +1,34 @@
-
+#CACHE{0}
 <h2>Choisissez vos réglages</h2>
 
 <p>Vous pouvez ajuster ci-dessous la présentation de ce site pour un meilleur confort de lecture&nbsp;:</p>
-
-<form action="#ENV{url}" method="post">
+	
+<form action="#ENV{url}" method="post" id="personnalisation">
 <fieldset>
 <legend>Affichage</legend>
-
-<div class="row"><span class="libl"><input type="radio" name="use" value="#ENV{normal}" id="normal" [checked="(#ENV{checked}|=={'normal'}|?{'checked="checked"',''})]/> <label for="normal"><strong>Normale</strong> (multicolonne, multicolore, police relativement petite)</label></span></div>
-<div class="row"><span class="libl"><input type="radio" name="use" value="#ENV{zoom}" id="zoom" [(#ENV{checked}|=={'zoom'}|?{'checked="checked"',''})]/> <label for="zoom"><strong>Zoomée</strong> (police agrandie et une seul colonne)</label></span></div>
-<div class="row"><span class="libl"><input type="radio" name="use" value="#ENV{inverse}" id="inverse" [(#ENV{checked}|=={'inverse'}|?{'checked="checked"',''})]/> <label for="inverse"><strong>Inversée</strong> (fond sombre, police claire)</label></span></div>
-<div class="row"><span class="libl"><input type="radio" name="use" value="#ENV{zoominverse}" id="zoominverse" [(#ENV{checked}|=={'zoominverse'}|?{'checked="checked"',''})]/> <label for="zoominverse"><strong>Zoomée et inversée</strong> (fond sombre, police claire et agrandie, une colonne)</label></span></div>
+<div class="row"><span class="libl"><input type="radio" name="use" value="#ENV{normal}" id="normal" [checked="(#ENV{checkeduse}|=={'normal'}|?{'checked',''})"]/> <label for="normal"><strong>Normale</strong> (multicolonne, multicolore, police relativement petite)</label></span></div>
+<div class="row"><span class="libl"><input type="radio" name="use" value="#ENV{zoom}" id="zoom" [checked="(#ENV{checkeduse}|=={'zoom'}|?{'checked',''})"]/> <label for="zoom"><strong>Zoomée</strong> (police agrandie et une seul colonne)</label></span></div>
+<div class="row"><span class="libl"><input type="radio" name="use" value="#ENV{inverse}" id="inverse" [checked="(#ENV{checkeduse}|=={'inverse'}|?{'checked',''})"]/> <label for="inverse"><strong>Inversée</strong> (fond sombre, police claire)</label></span></div>
+<div class="row"><span class="libl"><input type="radio" name="use" value="#ENV{zoominverse}" id="zoominverse" [checked="(#ENV{checkeduse}|=={'zoominverse'}|?{'checked',''})"]/> <label for="zoominverse"><strong>Zoomée et inversée</strong> (fond sombre, police claire et agrandie, une colonne)</label></span></div>
 <div style="clear:both;">&nbsp;</div>
 </fieldset>
+<fieldset>
+<legend>Mode de navigation</legend>
 
+<noscript><p>l'utilisation des modes de navigation alternatif nécessite javascript.</p></noscript>
+<div class="row"><span class="libl"><input type="radio" name="navigationmode" value="#ENV{classique}" id="classique" [checked="(#ENV{checkednavmode}|=={'classique'}|?{'checked',''})"]/> <label for="classique"><strong>Normale</strong></label></span></div>
+<div class="row"><span class="libl"><input type="radio" name="navigationmode" value="#ENV{autolink}" id="autolink" [checked="(#ENV{checkednavmode}|=={'autolink'}|?{'checked',''})"]/> <label for="autolink"><strong>Navigation par activation automatique des liens au survol</strong></label></span></div>
+<div class="row"><span class="libl"><input type="radio" name="navigationmode" value="#ENV{autofocus}" id="autofocus" [checked="(#ENV{checkednavmode}|=={'autofocus'}|?{'checked',''})"]/> <label for="autofocus"><strong>Navigation par défilement automatique</strong></label></span></div>
+<div class="row"><span class="libl">temps d'activation ou interval de déclenchement :
+<br/>
+<input type="radio" name="duree" value="#ENV{1000}" id="one" [checked="(#ENV{checkedduree}|=={'1000'}|?{'checked',''})"]/> 
+<label for="one"><strong>1<abbr title="seconde">s</abbr></strong></label>
+<input type="radio" name="duree" value="#ENV{2000}" id="two" [checked="(#ENV{checkedduree}|=={'2000'}|?{'checked',''})"]/>
+<label for="two"><strong>2<abbr title="seconde">s</abbr></strong></label>
+<input type="radio" name="duree" value="#ENV{3000}" id="tree" [checked="(#ENV{checkedduree}|=={'3000'}|?{'checked',''})"]/>
+<label for="tree"><strong>3<abbr title="seconde">s</abbr></strong></label></span></div>
+<div style="clear:both;">&nbsp;</div>
+</fieldset>
 <div class="rowbt"><input name="Submit" value="Envoyer" class="bt" type="submit" />
 </div>
 </form>
