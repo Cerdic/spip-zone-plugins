@@ -24,6 +24,13 @@ function exec_habillages_icones() {
 		fin_page();
 		exit;
 	}
+	
+	// mettre a jour le theme prive pour en profiter tout de suite
+	  if (($c=_request('theme'))!==NULL){
+	  	include_spip('inc/meta');
+	  	ecrire_meta('habillages_icones',$c);
+	  	ecrire_metas();
+	  }
 
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
@@ -103,8 +110,52 @@ EOF;
 	debut_cadre_relief();
 
 	global $couleur_foncee;
-	
-	
+
+	echo '<form action="'.generer_url_ecrire('habillages_icones').'" method="post">';
+ 	 	
+ 	echo "<a name='access-c' href='#access-c' accesskey='c'></a><div class='cadre-r'><div style='position: relative;'><div class='cadre-titre' style='margin: 0px;'>";
+ 	echo '<INPUT type=radio name="theme" value=""';
+ 	if ($GLOBALS['meta']['habillages_icones'] == "")
+	 		echo "checked='checked'";
+ 	echo ">";
+ 	echo "<strong>Revenir &agrave; l'habillage d'origine</strong>";
+ 	echo '</div></div><div class="cadre-padding" style="overflow:hidden;">';
+	echo "</div></div><div style='height: 5px;'></div>";
+
+	# Chercher les fichiers theme.xml.
+		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
+		
+		# Pour chaque fichier theme.xml trouve, on releve le <type> et on ne garde que 
+		# les squelettes pour les lister.
+		foreach ($fichier_theme as $fichier){
+			lire_fichier($fichier, $texte);
+			$arbre = parse_plugin_xml($texte);
+			$arbre = $arbre['theme'][0];
+			$type_theme = trim(applatit_arbre($arbre['type']));
+			$nom_theme = applatit_arbre($arbre['nom']);
+			$auteur_theme = applatit_arbre($arbre['auteur']);
+			$version_theme = applatit_arbre($arbre['version']);
+			$description_theme = applatit_arbre($arbre['description']);
+			
+			$c = dirname ($fichier)."/img_pack/";
+				
+				if ($type_theme=="icones_prive") {
+					echo "<a name='access-c' href='#access-c' accesskey='c'></a><div class='cadre-r'><div style='position: relative;'><div class='cadre-titre' style='margin: 0px;'>";
+    				echo '<INPUT type=radio name="theme" value="'.$c.'"';
+		 			if ($GLOBALS['meta']['habillages_icones'] == $c)
+			 		echo "checked='checked'";
+    				echo ">";
+    				
+    				echo '<strong>'.$nom_theme.'</strong> version '.$theme_version.'</div></div><div class="cadre-padding" style="overflow:hidden;">';
+					echo '<i><medium>Auteur : '.$auteur_theme.'</medium></i><br />';
+					echo '<small>'.$description_theme.'</small>';
+    				echo "</div></div><div style='height: 5px;'></div>";
+				}
+				
+		}
+
+	echo '<input type="submit" value="'._T('valider').'"/>';
+	echo '</form>';
 
 	fin_page();
 

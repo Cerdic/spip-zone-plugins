@@ -41,8 +41,16 @@ return $flux;
 
 function habillages_header_prive($flux) {
 	if (_request('exec')=='config_habillages' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_styles' || _request('exec')=='habillages_images' || _request('exec')=='habillages_icones') {
-		$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_HABILLAGES.'img_pack/habillages_habillages.css" >';
+		$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_HABILLAGES.'img_pack/habillages_habillages.css" type="text/css" >'."\n";
 		}
+		
+	global $exec;
+	include_spip('inc/meta');
+	lire_metas();
+	$theme_link = $GLOBALS['meta']['habillages_icones'];
+	if (isset($GLOBALS['meta']['habillages_icones']) AND ($c=$GLOBALS['meta']['habillages_icones'])!="") {
+  	$flux .= '<link rel="stylesheet" href="'.$theme_link.'style.css" type="text/css" />'."\n";
+	}
 	return $flux;
 }
 
