@@ -77,6 +77,7 @@ function exec_w3c_go_home(){
 	
 	$cpt_ok_access=0;
 	$cpt_ok_xhtml=0;
+	$cpt=0;
 	foreach($sitemap as $url) {
 		$lastmod = strtotime($url['lastmod'][0]);
 		$loc = $url['loc'][0];
@@ -103,6 +104,8 @@ function exec_w3c_go_home(){
 			}
 		}
 
+		$vals[] = ++$cpt;
+		
 		$vals = '';
 
 		if ($ok_access&&$ok_xhtml){
