@@ -1,0 +1,24 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Portfolio
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	&copy; 2006 Cedric Morin [notre-ville.net->http://www.notre-ville.net]
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Portfolio images a utiliser en combinaison avec le plugin pagination ahah
+	</description>
+	<prefix> 
+	portfolio
+	</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>portfolio_pipeline.php</inclure>
+	</pipeline>
+</plugin>

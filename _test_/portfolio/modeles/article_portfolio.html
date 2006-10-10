@@ -1,0 +1,32 @@
+#SET{titre,#ENV{titre,(#REM|sinon{portfolio:titre}|_T)}}
+#SET{debut,'debut_portfolio'}
+#SET{ancre,'pagination_portfolio'}
+#SET{url,#SELF|parametre_url{fragment,''}}
+#SET{page_courante,#ENV{debut_portfolio,0}|plus{1}}
+#SET{max,#ENV{vignettes,10}}
+#SET{separateur,''}
+<B_imagettes>
+<div class='portfolio_galerie'>
+<h3>#GET{titre}</h3>
+<a name='#GET{ancre}' id='#GET{ancre}'></a>
+<span class='pagination pagination_portfolio'>
+<BOUCLE_imagettes(DOCUMENTS) {id_article} {extension IN png,jpg,gif}{pagination #GET{max}}{par num titre, date}>
+	#SET{nombre_pages,#GRAND_TOTAL}
+	#SET{derniere, #GET{page_courante}|plus{#GET{max}}|moins{1}|min{#GET{nombre_pages}}}
+	#SET{item, #COMPTEUR_BOUCLE|moins{1}}
+	#SET{texte,#LOGO_DOCUMENT||image_reduire{0,50}}
+	[<span class="imagette">(#INCLURE{fond=modeles/paginationitem}{num=#COMPTEUR_BOUCLE}{texte=#GET{texte}}{separateur=#GET{separateur}}{url=#GET{url}|parametre_url{#GET{debut},#GET{item}}|ancre_url{#GET{ancre}}}{page_courante=#GET{page_courante}}{derniere=#GET{derniere}})</span>]
+</BOUCLE_imagettes>
+</span>
+<span class='pagination pagination_galerie'>#PAGINATION{page}</span>
+</div>
+	<B_portfolio>
+	<div class="spip_documents portfolio_document" id="document_actif">
+	<span class='pagination'>#PAGINATION{precedent_suivant}</span>
+	<BOUCLE_portfolio(DOCUMENTS) {id_article} {extension IN png,jpg,gif}{pagination 1}{par num titre, date} >
+		[(#LOGO_DOCUMENT||image_reduire{300,0}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})]
+		[<div class="spip_doc_titre">(#TITRE)</div>]
+		[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+	</div>
+	</BOUCLE_portfolio>
+</B_imagettes>

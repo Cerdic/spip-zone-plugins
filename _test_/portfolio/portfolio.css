@@ -1,0 +1,65 @@
+div.portfolio_galerie {
+float:left;
+background:#ffeecc;
+padding:0px;
+width:143px;
+}
+div.portfolio_galerie h3,
+div.portfolio_galerie h3 .ahah_surligne_1,
+div.portfolio_galerie h3 .ahah_surligne_2,
+div.portfolio_galerie h3 .ahah_surligne_3 {
+font-size:1em;
+width:100%;
+background:#ffcc88;
+font-weight:bold;
+text-align:center;
+}
+
+div.portfolio_galerie .pagination_portfolio {
+display:block;
+}
+div.portfolio_galerie .pagination_portfolio img{
+border:3px solid #ffcc88;
+width:60px;
+height:60px;
+}
+div.portfolio_galerie .pagination_portfolio .imagette {
+float:left;
+display:block;
+margin-left:5px;
+margin-top:5px;
+margin-right:-3px;
+}
+div.portfolio_galerie .pagination_portfolio a img {
+border:3px solid #ffeecc;
+	filter:alpha(opacity=60);
+	opacity: 0.6;
+	-moz-opacity:0.6;
+}
+div.portfolio_galerie .pagination_portfolio a:hover img {
+border:3px solid #ffaa66;
+	filter:alpha(opacity=100);
+	opacity: 1.0;
+	-moz-opacity:1.0;
+}
+
+div.portfolio_galerie .pagination_galerie {
+clear:left;
+padding:10px;
+display:block;
+}
+
+.portfolio_document .pagination {
+font-size:1em;
+font-weight:bold;
+background:#ffcc88;
+display:block;
+width:100%;
+}
+
+div.portfolio_galerie .ahah_surligne_1,
+div.portfolio_document .ahah_surligne_1 { background: #ffcc88; }
+div.portfolio_galerie .ahah_surligne_2,
+div.portfolio_document .ahah_surligne_2 { background: #ffdd99; }
+div.portfolio_galerie .ahah_surligne_3,
+div.portfolio_document .ahah_surligne_3 { background: #ffeeaa; }
