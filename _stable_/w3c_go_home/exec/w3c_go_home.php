@@ -135,8 +135,8 @@ function exec_w3c_go_home(){
 	echo "</table>";
 	echo "</div>\n";
 	
-	echo "$cpt_ok_access/".count($url)." pages conforme selon la verification accessibilit&eacute; automatis&eacute;e<br/>";
-	echo "$cpt_ok_xhtml/".count($url)." pages conforme XHTML selon la validator.w3.org";
+	echo "$cpt_ok_access/".count($sitemap)." pages conforme selon la verification accessibilit&eacute; automatis&eacute;e<br/>";
+	echo "$cpt_ok_xhtml/".count($sitemap)." pages conforme XHTML selon la validator.w3.org";
 
 	fin_page();
 
