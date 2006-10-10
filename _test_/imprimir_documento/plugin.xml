@@ -1,6 +1,6 @@
 <plugin>
 	<nom>
-	Imprimir documento
+	<multi>[es]Imprimir documento[fr]Imprimer document</multi>
 	</nom>
 	<auteur>
 joseluis@digital77.com
@@ -13,9 +13,13 @@ _ CopyLeft - 2006
 	test
 	</etat>
 	<description>
-Versi&oacute;n para imprimir art&iacute;culos y breves sin cabeceras, ni mens,...
+<multi>
+[es]Versi&oacute;n para imprimir art&iacute;culos y breves sin cabeceras, ni mens,...
 _ Para utilizarla coloca la baliza #IMPRIMIR_DOCUMENTO** donde quieras que aparezca el enlace (art&iacute;ulos o breves)
 _ Los dos ** asteriscos son importantes, no los olvides.
+[fr]Plugin pour obtenir une version impriable des articles et des br&egrave;ves...
+_ Pour l'utiliser, il suffit d'ajouter la balise #IMPRIMIR_DOCUMENTO** dans les squelettes sans oublier les deux ast&eacute;risque (dans les aricles et br&egrave;ves)
+</multi>
 	</description>
 	<fonctions>
 	baliza_imprimir_documento.php
