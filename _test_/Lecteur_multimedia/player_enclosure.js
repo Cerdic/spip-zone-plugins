@@ -45,10 +45,10 @@ $(this).before('<span class="player"><object style="margin-left:0.1em" ' +
 	'<param name="wmode" value="transparent" />' +
 	'<param name="allowScriptAccess" value="sameDomain" />' +
 	'<param name="flashVars" value="song_url='+playlist+'" />' +
-	'<param name="movie" value="'+pixplayerurl+'?autoplay=false" />' +
+	'<param name="movie" value="'+musicplayerurl+'?autoplay=false" />' +
 	'<param name="quality" value="high" />' +
 	'<embed style="margin-left:0.1em" ' +
-	'src="'+pixplayerurl+'?autoplay=false" '+
+	'src="'+musicplayerurl+'?autoplay=false" '+
 	'flashVars="song_url='+playlist+'"' +
 	'quality="high" wmode="transparent" width="18" height="18" name="player"' +
 	' allowScriptAccess="sameDomain" type="application/x-shockwave-flash"' +

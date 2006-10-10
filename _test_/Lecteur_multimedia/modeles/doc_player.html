@@ -34,7 +34,7 @@
 <param name='quality' value='high'>
 <param name='menu' value='false'>
 <param name='bgcolor' value='#FFFFFF'>
-<span>[(#URL_DOCUMENT|enclosure_it{#URL_DOCUMENT})]</span>
+[<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object>
 ]
 [(#GET{player}|=={neoplayer}|?{' ',''})
@@ -42,6 +42,7 @@
 	<param name="wmode" value="transparent" />
 	<param name="movie" value="#EVAL{_DIR_PLUGIN_PLAYER}neoplayer_maxi.swf" />
 	<param name="FlashVars" value="mp3=#URL_DOCUMENT&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;loadingcolor=ffff00&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;showinfo=0&amp;width=200&amp;height=20" />
+	[<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object>
 ]
 
@@ -50,14 +51,15 @@
 	<param name="wmode" value="transparent" />
 	<param name="movie" value="#EVAL{_DIR_PLUGIN_PLAYER}neoplayer_multi.swf" />
 	<param name="FlashVars" value="mp3=#URL_DOCUMENT|#URL_DOCUMENT&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;showinfo=1" />
+	[<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object>
 ]
 
 [(#GET{player}|=={dewplayer}|?{' ',''})
 <object type='application/x-shockwave-flash' data='#EVAL{_DIR_PLUGIN_PLAYER}dewplayer.swf' width='200' height='20'>
-<param name='movie' value='#EVAL{_DIR_PLUGIN_PLAYER}dewplayer.swf'/>
-<param name="FlashVars" value='son=[(#URL_DOCUMENT|url_absolue)]'>
-<span>[(#URL_DOCUMENT|enclosure_it{#URL_DOCUMENT})]</span>
+	<param name='movie' value='#EVAL{_DIR_PLUGIN_PLAYER}dewplayer.swf'/>
+	<param name="FlashVars" value='son=[(#URL_DOCUMENT|url_absolue)]'>
+	[<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object>
 ]
 ,
@@ -68,7 +70,7 @@
 	<param name="movie" value="#EVAL{_DIR_PLUGIN_PLAYER}player_flv.swf" />
 	<param name="FlashVars" value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#LARGEUR|=={0}|?{400,#LARGEUR})]&amp;height=[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;title=#TITRE&amp;startimage=[(#LOGO_DOCUMENT||extraire_attribut{src})]" />
 	<param name="wmode" value="transparent" />
-<span>[(#URL_DOCUMENT|enclosure_it{#URL_DOCUMENT})]</span>
+	[<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object>
 
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
