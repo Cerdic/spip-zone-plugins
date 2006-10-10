@@ -75,6 +75,8 @@ function exec_w3c_go_home(){
 	if (!$w3c_compliance)
 		$w3c_compliance = array();
 	
+	$cpt_ok_access=0;
+	$cpt_ok_xhtml=0;
 	foreach($sitemap as $url) {
 		$lastmod = strtotime($url['lastmod'][0]);
 		$loc = $url['loc'][0];
@@ -86,6 +88,7 @@ function exec_w3c_go_home(){
 			if (($res[0]==0)&&($lastmod<$res[1])){
 				$valide_access=date("Y-m-d H:i",$res[1]);
 				$ok_access = true;
+				$cpt_ok_access++;
 			}
 		}
 		$ok_xhtml=false;
@@ -96,13 +99,16 @@ function exec_w3c_go_home(){
 			if (($res[0]==0)&&($lastmod<$res[1])){
 				$valide_xhtml=date("Y-m-d H:i",$res[1]);
 				$ok_xhtml = true;
+				$cpt_ok_xhtml++;
 			}
 		}
 
 		$vals = '';
 
-		if ($ok_access&&$ok_xhtml)
+		if ($ok_access&&$ok_xhtml){
+			$cpt_ok++;
 			$puce = 'puce-verte-breve.gif';
+		}
 		else
 			$puce = 'puce-orange-breve.gif';
 
@@ -128,6 +134,9 @@ function exec_w3c_go_home(){
 	echo afficher_liste($largeurs, $table, $styles);
 	echo "</table>";
 	echo "</div>\n";
+	
+	echo "$cpt_ok_access/".count($url)." pages conforme selon la verification accessibilit&eacute; automatis&eacute;e<br/>";
+	echo "$cpt_ok_xhtml/".count($url)." pages conforme XHTML selon la validator.w3.org";
 
 	fin_page();
 
