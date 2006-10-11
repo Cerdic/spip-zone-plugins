@@ -102,13 +102,7 @@ EOF;
 	
 	debut_gauche();
 	debut_boite_info();
-	_T('habillages:accueil_commentaire');
-	_T('habillages:accueil_squelettes');
-	generer_url_ecrire(_T('habillages:lien_squelettes'));
-	_T('habillages:accueil_styles');
-	generer_url_ecrire(_T('habillages:liens_styles'));
-	_T('habillages:accueil_logos');
-	generer_url_ecrire(_T('habillages:lien_logos'));
+	
 	fin_boite_info();
 
 	debut_droite();
