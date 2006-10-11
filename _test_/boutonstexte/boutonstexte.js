@@ -34,21 +34,21 @@ function boutonsTexte(options)
 boutonsTexte.prototype.textOnly = function(elt)
 {
 	var that = this;
-	var texte = $(elt).parent().next();
+	var texte = $(elt).parent().siblings(".texte");
 	if (this['backTextOnly']) {
+		texte.removeClass("onlytext");
 		$(elt).attr({ 'title': that.txtOnly, 'alt': that.txtOnly }).
-			parent().insertBefore($("#marktextonly")).after(texte).
-			next().removeClass("onlytext").
-			next().remove(); // enlever "#marktextonly"
+			parent().insertBefore($("#marktextonly")).after(texte);
+		$("#marktextonly").remove();
 		$('body').children().show();
 		this.backTextOnly = false;
 		return;
 	}
-	texte.after('<div id="marktextonly">marktextonly</div>');
+	texte.addClass("onlytext");
+	$(texte[texte.length-1]).after('<div id="marktextonly">marktextonly</div>');
 	$(elt).attr({ 'title': that.txtBackSpip, 'alt': that.txtBackSpip }).
 		parent().prependTo("body").after(texte).
-		next().addClass("onlytext").
-		next().hide();
+		siblings().not(".texte").hide();
 	this.backTextOnly = true;
 }
 boutonsTexte.prototype.fontBigger = function(elt)
