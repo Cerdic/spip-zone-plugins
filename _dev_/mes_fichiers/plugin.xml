@@ -1,0 +1,9 @@
+<plugin>
+	<version>0.1</version>
+	<nom>mes_fichiers.zip</nom>
+	<prefix>mes_fichiers</prefix>
+	<description>
+	[Cr&eacute;er ou Mettre &agrave; Jour->../spip.php?action=mes_fichiers]
+	[D&eacute;compresser mes fichiers->../spip.php?action=decompresser_mes_fichiers]
+	</description>
+</plugin>
