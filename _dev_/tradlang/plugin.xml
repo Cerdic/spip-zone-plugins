@@ -1,0 +1,17 @@
+<plugin>
+ <nom>Trad-Lang</nom>
+ <version>1.0</version>
+ <prefix>tradlang</prefix>
+ <etat>dev</etat>
+ <description>Un plugin pour g&eacute;rer directement les fichiers langues depuis l'interface priv&eacute;e.</description>
+
+ <fonctions>tradlang_fonctions.php</fonctions>
+ <options>tradlang_options.php</options>
+
+ <pipeline>
+	<nom>ajouter_onglets</nom>
+	<action>ajouterOnglets</action>
+        <inclure>tradlang_boutons.php</inclure>
+ </pipeline>
+
+</plugin>

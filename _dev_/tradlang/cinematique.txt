@@ -1,0 +1,34 @@
+trad-lang v2
+- module spip utilisable directement depuis l'interface
+- but : automatiser la traduction des fichiers langues utilisés dans les squelettes
+- travail en base de données (avec possibilité de n'importer que certaines modules dans la base)
+- les modules sont tous des modules spip et sont configurés automatiquement à partir de fichiers langues (plus besoin de faire un nouveau fichier par module)
+
+
+Fonctionnement :
+
+- nouveau item "gestion des traductions" dans menu "configuration"
+
+- lorsque la table n'existe pas (défaut d'installation), message d'erreur et lien pour générer la table. La génération de la table ne peut être réalisé qu'une seule fois (le script de création vérifie si la table existe déjà). Le préfixe par défaut de SPIP est utilisé. Cette opération ne peut être réalisée que par un admin
+
+- la colonne de gauche affiche les modules déjà configurés sous forme de liens. Un bouton "importer un nouveau module" (visible seulement de l'admin) permet à l'admin de configurer un nouveau module. Si pas de modules configuré, afficher "aucun module configuré".
+
+- lorsqu'un lien "module" est cliqué :
+
+	- si on n'est pas admin
+		- choix de la langue origine, choix de la langue destination, puis clic comme aujourd'hui - la page affiche l'avancée des traductions pour chaque module ; au clic sur une langue, redirection vers la page de traduction elle-meme : la page de traduction s'ouvre dans une fenetre popup afin d'éviter les lourdeurs de rechargement de la page (il faut adapter le rendu de la page de l'interface actuelle avec SPIP)
+	 	- note : lors du choix de la traduction, une couleur permet de signaler les modules qui sont "synchronisés" avec les fichiers langues et ceux qui ne le sont pas. L'utilisateur peut synchroniser un fichier en cliquant dessus (ne laisser cette possibilité qu'aux admins ?) ; lorsque la synchronisation est impossible (problème d'écriture du fichier langue), un message d'erreur est affiché indiquant l'opération à effectuer pour permettre la synchronisation du module (attribuer les bons droits au fichier)
+
+	- si on est admin
+ 		- en plus de la traduction comme ci-dessus, possibilité d'ajouter une nouvelle chaine dans le module (pour la langue mere). Le fait d'ajouter une nouvelle chaine désynchronise le fichier langue mère.
+
+- lien "création de nouveaux modules"
+
+	- accessible seulement aux admins
+	- possibilité de choix du répertoire cible pour le module. Par défaut, le répertoire "lang" est sélectionné
+	- lorsque l'admin a sélectionné le répertoire cible : choix des modules présents dans ce répertoire (parcours des fichiers php et recherche de ceux qui contiennent la bonne variable globale $GLOBALs[idx_lang]) ; possibilité de revenir au choix du répertoire cible ; l'admin peut aussi choisir de créer un nouveau module.
+	- affichage du module avec les différents langues dans lequel il est traduit ; choix d'une langue "mère" pour le module ; les traductions pour lesquelles le droit en écriture n'est pas positionné sont signalées en rouge, l'admin est invité à aller corriger les droits en écriture sur ces fichiers.
+	- import du module
+
+
+
