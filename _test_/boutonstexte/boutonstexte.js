@@ -48,7 +48,7 @@ boutonsTexte.prototype.textOnly = function(elt)
 	$(texte[texte.length-1]).after('<div id="marktextonly">marktextonly</div>');
 	$(elt).attr({ 'title': that.txtBackSpip, 'alt': that.txtBackSpip }).
 		parent().prependTo("body").after(texte).
-		siblings().not(".texte").hide();
+		siblings().gt(texte.length-1).hide();
 	this.backTextOnly = true;
 }
 boutonsTexte.prototype.fontBigger = function(elt)
