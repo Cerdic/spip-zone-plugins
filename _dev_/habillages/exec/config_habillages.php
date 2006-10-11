@@ -104,15 +104,32 @@ EOF;
 
 	global $couleur_foncee;
 	
-	echo "<table border='0' cellspacing='0' cellpadding='5' width='100%'>";
+	lire_metas();
+	$habillages_squelettes = basename($GLOBALS['meta']['habillages_squelettes']);
+	$habillages_styles = basename($GLOBALS['meta']['habillages_styles']);
+	//$habillages_logos = basename($GLOBALS['meta']['habillages_logos']);
 	
-		echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
-		echo _T('habillages:accueil_titre')."</font></b></td></tr>";
-	
-		echo "<tr><td class='serif' colspan=4>";
-		
-		echo "</table></div>\n";
+	echo _T('habillages:accueil_general');
+	if ($habillages_squelettes != "") {
+	echo "<br />";
+	echo "<br />";
+	echo _T('habillages:accueil_general_squelettes')." ".$habillages_squelettes." [Capture]";
+	echo "&nbsp;<a href='".generer_url_ecrire('habillages_squelettes')."'>Modifier</a>";
+	}
+	if ($habillages_styles != "") {
+	echo "<br />";
+	echo "<br />";
+	echo _T('habillages:accueil_general_styles')." ".$habillages_styles." [Capture]";
+	echo "&nbsp;<a href='".generer_url_ecrire('habillages_styles')."'>Modifier</a>";
+	}
+	echo "<br />";
+	echo "<br />";
+	echo _T('habillages:accueil_general_logos');
+	echo "<br />";
+	echo "<br />";
+	echo _T('habillages:accueil_general_maintenance');
+	echo "<br />";
+	echo "<br />";
 	
 	fin_page();
 

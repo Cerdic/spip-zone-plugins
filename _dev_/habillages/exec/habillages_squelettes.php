@@ -37,6 +37,7 @@ function exec_habillages_squelettes() {
 		ecrire_plugin_actifs($lire_meta_squelettes_modifs,'',$operation='ajoute');
 		ecrire_meta('habillages_squelettes', _request('statusplug'));
 		ecrire_metas;
+		echo _request('statusplug');
 	}
 
 	if (isset($_GET['surligne']))

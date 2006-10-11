@@ -28,13 +28,14 @@ function exec_habillages_styles() {
 	
 	if (_request('changer_plugin')=='oui'){
 		lire_metas();
-		$lire_meta_squelettes = array($GLOBALS['meta']['habillages_styles']);
-		ecrire_plugin_actifs($lire_meta_squelettes,'',$operation='enleve');
-		ecrire_meta('habillages_styles', _request('statusplug'));
+		$lire_meta_styles = array($GLOBALS['meta']['habillages_styles']);
+		ecrire_plugin_actifs($lire_meta_styles,'',$operation='enleve');
+		//ecrire_meta('habillages_styles', '');
 		ecrire_metas;
 		lire_metas();
-		$lire_meta_squelettes_modifs = array($GLOBALS['meta']['habillages_styles']);
-		ecrire_plugin_actifs($lire_meta_squelettes_modifs,'',$operation='ajoute');
+		$lire_meta_styles_modifs = _request('statusplug');
+		ecrire_plugin_actifs($lire_meta_styles_modifs,'',$operation='ajoute');
+		ecrire_meta('habillages_styles', _request('statusplug'));
 		ecrire_metas;
 	}
 
