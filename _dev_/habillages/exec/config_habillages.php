@@ -95,7 +95,7 @@ EOF;
 	
 	debut_gauche();
 	debut_boite_info();
-	
+	echo _T('habillages:accueil_infos');
 	fin_boite_info();
 
 	debut_droite();

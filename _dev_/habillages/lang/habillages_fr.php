@@ -5,6 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_config_habillages' => 'Gestion des habillages',
 'accueil_titre' => 'G&eacute;rer les habillages de votre site',
+'accueil_infos' => 'Ici sont propos&eacute;s les diff&eacute;rents squelettes, styles et logos qui habilleront votre site. Vous acc&eacute;dez &agrave; leur configuration tout simplement en cliquant sur &laquo; squelettes &raquo;, &laquo; styles &raquo;, et &laquo; logoth&egrave;que &raquo;.<br /><br />Ensuite, en cliquant sur le bouton rond en haut &agrave; gauche correspondant &agrave; chaque squelette, style ou logo, vous modifierez l\'apparence de votre site public.',
 'accueil_general' => 'Introduction.<br />',
 'accueil_general_squelettes' => 'Vous avez actuellement choisi le squelette',
 'accueil_general_styles' => 'Vous avez actuellement choisi le style',
@@ -33,14 +34,10 @@ Les captures d\'&eacute;cran son volontairement en noir et blanc. Pour mettre de
 'plugin_etat_test' => 'Cet habillage est en test. Si vous observez des disfonctionnements, vous pouvez en avertir son auteur.',
 'plugin_etat_stable' => 'Cet habillage est stable.',
 'aide' => 'Ce plugin est en d&eacute;veloppement. Par cons&eacute;quent tout son fonctionnement et les commentraires qui lui sont associ&eacute;s sont &agrave; consid&eacute;rer comme truff&eacute;s d\'erreurs. Merci de revenir quand ce plugin sera en test : il sera plus fiable.<br /><br />
-
-<strong>Comment utiliser ce plugin ?</strong><br />
-&#149; Vous choisissez un squelette [lien], qui est l\'armature de votre site [capture dist noir et blanc]. <br />
-&#149; Vous choisissez ensuite un style [lien], qui est la fa&ccedil;on dont le contenu texte de votre site sera pr&eacute;sent&eacute; et habill&eacute; [capture fraichdist et hotdist]. <br />
-&#149; Vous choisissez enfin des logos pour habiller votre site, vos rubriques, et vos articles [lien] [capture d\'un logo de site, de rubrique, et d\'article du m&ecirc;me th&egrave;me]. <br /><br />
+<strong>Comment utiliser ce plugin ? Squelettes, styles et logos pr&ecirc;ts &agrave; l\'emploi</strong><br /> Choisissez d\'abord un squelette dans la rubrique du m&ecirc;me nom. Le squelette est l\'armature de votre site, ou la disposition de vos textes dans votre site.<br /><br />Choisissez ensuite un style dans la rubrique du m&ecirc;me nom. A chaque squelette correspondent un ou plusieurs styles. Des styles diff&eacute;rents s\'affichent donc en fonction du squelette choisi. Le style correspond &agrave; la fa&ccedil;on dont telle partie sera mise en relief ou non, &agrave; la taille des caract&egrave;res, des titres, les effets de styles, etc...<br /><br />La logoth&egrave;que rassemble des boutons que vous pourrez ins&eacute;rer dans votre site selon votre choix. <br /><br />
 
 <strong>Personnalisation et gestion du plugin <i>Habillages</i> : qu\'est-ce qu\'il y a sous le capot ?</strong><br />
-Vous etes concepteur/trice et vous souhaitez faire des th&egrave;mes compatibles avec ce plugin, la d&eacute;marche est expliqu&eacute;e ci-dessous.<br /><br />
+Vous etes concepteur/trice et vous souhaitez faire des th&egrave;mes compatibles avec ce plugin, la d&eacute;marche est expliqu&eacute;e ci-dessous. Si vous ne comprenez pas les termes &laquo; tranfert FTP &raquo; ou &laquo; syst&egrave;me de fichiers &raquo;, vous ne pourrez pas mettre en oeuvre les conseils pr&eacute;conis&eacute;s ici.<br /><br />
 - <strong>Personnaliser les squelettes</strong><br /><br />
 - <strong>Personnaliser les styles</strong><br /><br />
 - <strong>Personnaliser les images/logos</strong><br />
