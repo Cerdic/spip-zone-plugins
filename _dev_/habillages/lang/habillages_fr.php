@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'squelettes_commentaire' => 'Dans cette rubrique, vous g&eacute;rez les squelettes de votre de votre site. Un squelette est l\'armature d\'une page. Il g&egrave;re quelles informations sont pr&eacute;sent&eacute;es sur quelles pages et o&ugrave; elles apparaissent.<br /><br />
 Les captures d\'&eacute;cran son volontairement en noir et blanc. Pour mettre de la couleur, allez dans la rubrique <i>style apr&egrave;s avoir choisi un squelette ci-contre. </i>',
 'icone_habillages_styles' => 'Gestion des styles',
-'icone_habillages_images' => 'Gestion des images',
+'icone_habillages_images' => 'Gestion des logos',
 'icone_habillages_icones' => 'Gestion des ic&ocirc;nes de l\'espace priv&eacute;',
 'plugin_etat_developpement' => 'Cet habillage est en d&eacute;veloppement et sa stabilit&eacute;e n\'est pas assur&eacute;e.',
 'plugin_etat_experimental' => 'Attention : cet habillage est exp&eacute;rimental et il pourrait alt&eacute;rer le fonctionnement normal de votre site SPIP !',
