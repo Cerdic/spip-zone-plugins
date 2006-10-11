@@ -183,7 +183,7 @@ EOF;
 			echo "<div style='background-color:$couleur_claire'>";
 			echo "<input type='radio' name='statusplug' value=''";
 			lire_metas();
-			if ($GLOBALS['meta']['habillages_styles']=="") {
+			if ($GLOBALS['meta']['habillages_styles']=="defaut") {
 				echo " checked='checked'";
 				}
 			echo ">";
