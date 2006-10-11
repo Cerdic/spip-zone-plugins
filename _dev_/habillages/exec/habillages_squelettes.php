@@ -30,12 +30,13 @@ function exec_habillages_squelettes() {
 		lire_metas();
 		$lire_meta_squelettes = array($GLOBALS['meta']['habillages_squelettes']);
 		ecrire_plugin_actifs($lire_meta_squelettes,'',$operation='enleve');
-		ecrire_meta('habillages_squelettes', _request('statusplug'));
+		//ecrire_meta('habillages_styles', '');
 		ecrire_metas;
 		lire_metas();
-		$lire_meta_squelettes_modifs = array($GLOBALS['meta']['habillages_squelettes']);
+		$lire_meta_squelettes_modifs = _request('statusplug');
 		ecrire_plugin_actifs($lire_meta_squelettes_modifs,'',$operation='ajoute');
-		
+		ecrire_meta('habillages_squelettes', _request('statusplug'));
+		ecrire_metas;
 	}
 
 	if (isset($_GET['surligne']))
@@ -109,9 +110,46 @@ EOF;
 	
 	debut_gauche();
 	debut_boite_info();
-	echo "<div class='commentaires'>";
-	echo _T('habillages:squelettes_commentaire');
-	echo "</div>";
+		echo "<table><tr>";
+	echo "<td colspan='2'>";
+	echo _T('habillages:accueil_commentaire');
+	echo "</td>";
+	echo "<tr>";
+	echo "<td colspan='2' class='used'>";
+	echo _T('habillages:accueil_squelettes');
+	echo "</td>";
+	echo "</tr>";
+	echo "<tr>";
+	echo "<td>";
+	echo '<img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/habillages_squelettes_bw-22.png">';
+	echo "</td>";
+	echo "<td class='used'>";
+	echo _T('habillages:lien_squelettes_off');
+	echo "</td>";
+	echo "</tr>";
+	echo "<td colspan='2' class='bold_just'>";
+	echo _T('habillages:accueil_styles');
+	echo "</td>";
+	echo "</tr>";
+	echo "<td>";
+	echo '<img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/habillages_styles-22.png">';
+	echo "</td>";
+	echo "<td class='bold_just'>";
+	echo "<a href='".generer_url_ecrire('habillages_styles')."'>"._T('habillages:lien_styles_on')."</a>";
+	echo "</td>";
+	echo "</tr>";
+	echo "<td colspan='2' class='bold_just'>";
+	echo _T('habillages:accueil_logos');
+	echo "</td>";
+	echo "</tr>";
+	echo "<td>";
+	echo '<img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/habillages_images-22.png">';
+	echo "</td>";
+	echo "<td class='bold_just'>";
+	echo "<a href='".generer_url_ecrire('habillages_images')."'>"._T('habillages:lien_logos_on')."</a>";
+	echo "</td>";
+	echo "</tr>";
+	echo "</table>";
 	fin_boite_info();
 
 	debut_droite();

@@ -5,3 +5,14 @@
 .auteur { 
 	color: #626262;
 }
+
+.bold_just {
+	font-weight: bold;
+	text-align: justify;
+}
+
+.used {
+	color: #626262;
+	font-weight: none;
+	text-align: justify;
+}
