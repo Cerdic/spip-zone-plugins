@@ -28,6 +28,7 @@
 			return;
 
 		include_spip('base/forms');
+		include_spip('base/forms_temporaire');
 		if ($current_version==0.0){
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
