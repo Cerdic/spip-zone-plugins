@@ -379,35 +379,24 @@ function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $
 
 
 //
-// La boite raccourcis
-//
+// La boite des raccourcis
+// Se place a droite si l'ecran est en mode panoramique.
 
-// http://doc.spip.org/@debut_raccourcis
-function debut_raccourcis() {
+function bloc_des_raccourcis($bloc) {
 	global $spip_display;
-	echo "<div>&nbsp;</div>";
-	creer_colonne_droite();
 
-	debut_cadre_enfonce();
-	if ($spip_display != 4) {
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size=1>";
-		echo "<b>"._T('titre_cadre_raccourcis')."</b><p />";
-	} else {
-		echo "<h3>"._T('titre_cadre_raccourcis')."</h3>";
-		echo "<ul>";
-	}
+	return "<div>&nbsp;</div>"
+	. creer_colonne_droite('',true)
+	. debut_cadre_enfonce('',true)
+	. (($spip_display != 4)
+	     ? ("<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"
+		._T('titre_cadre_raccourcis')
+		."</b><p />")
+	       : ( "<h3>"._T('titre_cadre_raccourcis')."</h3><ul>"))
+	. $bloc
+	. (($spip_display != 4) ? "</font>" :  "</ul>")
+	. fin_cadre_enfonce(true);
 }
-
-// http://doc.spip.org/@fin_raccourcis
-function fin_raccourcis() {
-	global $spip_display;
-	
-	if ($spip_display != 4) echo "</font>";
-	else echo "</ul>";
-	
-	fin_cadre_enfonce();
-}
-
 
 // Afficher un petit "+" pour lien vers autre page
 
@@ -1637,7 +1626,7 @@ function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 
 
 // http://doc.spip.org/@envoi_link
-function envoi_link($nom_site_spip, $rubrique="") {
+function envoi_link($nom_site_spip) {
 	global $connect_statut, $connect_toutes_rubriques, $spip_display;
 	global $spip_lang, $couleur_claire, $couleur_foncee;
 
@@ -1677,8 +1666,7 @@ function envoi_link($nom_site_spip, $rubrique="") {
 	. '<link rel="shortcut icon" href="'
 	. url_absolue(find_in_path('favicon.ico'))
 	. "\" >\n";
-	$js = debut_javascript($connect_statut == "0minirezo"
-			AND $connect_toutes_rubriques,
+	$js = debut_javascript($connect_toutes_rubriques,
 			($GLOBALS['meta']["activer_statistiques"] != 'non'));
 
 	if ($spip_display == 4) return $res . $js;
@@ -1759,14 +1747,14 @@ function debut_onglet(){
 
 	echo "\n\n";
 	echo "<div style='padding: 7px;'><table cellpadding='0' cellspacing='0' border='0' align='center'>";
-	if (_request('exec')!='rangement_plugin'){
+			if (_request('exec')!='rangement_plugin'){
 		echo "<tr>";
 	}
 }
 
 // http://doc.spip.org/@fin_onglet
 function fin_onglet(){
-	if (_request('exec')!='rangement_plugin'){
+		if (_request('exec')!='rangement_plugin'){
 		echo "<tr>";
 	}
 	echo "</table></div>\n\n";
@@ -1776,7 +1764,7 @@ function fin_onglet(){
 function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	global $spip_display, $spip_lang_left ;
 
-if (_request('exec')=='rangement_plugin'){
+	if (_request('exec')=='rangement_plugin'){
 		echo "</tr>";
 	}
 	echo "<td>";
@@ -1815,7 +1803,7 @@ if (_request('exec')=='rangement_plugin'){
 		echo "</div>";
 	}
 	echo "</td>";
-	if (_request('exec')=='rangement_plugin'){
+		if (_request('exec')=='rangement_plugin'){
 		echo "</tr>";
 	}
 }
@@ -1852,7 +1840,7 @@ function largeur_icone_bandeau_principal($texte) {
 	}
 	if ($spip_ecran == "large") $largeur = $largeur + 30;
 
-	if (!($connect_statut == "0minirezo" AND $connect_toutes_rubriques)) {
+	if (!$connect_toutes_rubriques) {
 		$largeur = $largeur + 30;
 	}
 
@@ -1860,13 +1848,44 @@ function largeur_icone_bandeau_principal($texte) {
 	return $largeur;
 }
 
+function bandeau_principal($rubrique, $sous_rubrique, $largeur)
+{
+	$res = '';
+	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
+		if ($page=='espacement') {
+			$res .= "<td> &nbsp; </td>";
+		} else {
+			if ($detail->url)
+				$lien_noscript = $detail->url;
+			else
+				$lien_noscript = generer_url_ecrire($page);
+
+			if ($detail->url2)
+				$lien = $detail->url2;
+			else
+				$lien = $lien_noscript;
+
+			$res .= icone_bandeau_principal(
+					_T($detail->libelle),
+					$lien,
+					$detail->icone,
+					$page,
+					$rubrique,
+					$lien_noscript,
+					$page,
+					$sous_rubrique);
+		}
+	}
+
+	return "<div class='bandeau-icones'>\n<table width='$largeur' cellpadding='0' cellspacing='0' border='0' align='center'><tr>\n$res</tr></table></div>\n";
+}
+
+
 // http://doc.spip.org/@icone_bandeau_principal
 function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique = "", $lien_noscript = "", $sous_rubrique_icone = "", $sous_rubrique = ""){
-	global $spip_display, $spip_ecran;
-	global $menu_accesskey, $compteur_survol;
+	global $spip_display, $menu_accesskey, $compteur_survol;
 
 	$largeur = largeur_icone_bandeau_principal($texte);
-
 
 	$alt = '';
 	$title = '';
@@ -1893,23 +1912,23 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	$class_select = ($sous_rubrique_icone == $sous_rubrique) ? " class='selection'" : '';
 
 	if (eregi("^javascript:",$lien)) {
-		$a_href = "<a$accesskey onClick=\"$lien; return false;\" href='$lien_noscript' target='spip_aide'$class_select>";
+		$a_href = "\nonClick=\"$lien; return false;\" href='$lien_noscript' target='spip_aide'$class_select";
 	}
 	else {
-		$a_href = "<a$accesskey href=\"$lien\"$class_select>";
+		$a_href = "\nhref=\"$lien\"$class_select";
 	}
 
 	$compteur_survol ++;
 
 	if ($spip_display != 1 AND $spip_display != 4) {
-		echo "<td class='cellule48' onmouseover=\"changestyle('bandeau$rubrique_icone', 'visibility', 'visible');\" width='$largeur'>$a_href" .
-		  http_img_pack("$fond", $alt, "$title width='48' height='48'");
-		if ($spip_display != 3) {
-			echo "<span>$texte</span>";
-		}
-	}
-	else echo "<td class='cellule-texte' onmouseover=\"changestyle('bandeau$rubrique_icone', 'visibility', 'visible');\" width='$largeur'>$a_href".$texte;
-	echo "</a></td>\n";
+		$class ='cellule48';
+		$texte = http_img_pack($fond, $alt, "$title width='48' height='48'")
+		. ($spip_display == 3 ? '' :  "<span>$texte</span>");
+	} else {
+		$class = 'cellule-texte';
+	}  
+		
+	return "<td class='$class' onmouseover=\"changestyle('bandeau$rubrique_icone', 'visibility', 'visible');\" width='$largeur'><a$accesskey$a_href>$texte</a></td>\n";
 }
 
 
@@ -2092,24 +2111,27 @@ function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") 
 //
 
 // http://doc.spip.org/@debut_page
-function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $onLoad = "", $css="", $id_rubrique = "") {
+function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $onLoad = "", $id_rubrique = "") {
 
-  //	utiliser_langue_visiteur(); fait dans index a present
-	init_entete($titre, $rubrique, $css);
-	definir_barre_boutons();
+	include_spip('inc/headers');
+	http_no_cache();
+	echo init_entete($titre, $rubrique);
 	init_body($rubrique, $sous_rubrique, $onLoad, $id_rubrique);
-	debut_corps_page($rubrique);
+
+	echo "<center onmouseover='recherche_desesperement()'>", // ????
+		avertissement_messagerie(),
+		(($rubrique == "messagerie")
+		 OR ($GLOBALS['changer_config']!="oui")) 
+		? auteurs_recemment_connectes() : '';
 }
- 
+
+// envoi du doctype et du <head><title>...</head> 
 // http://doc.spip.org/@init_entete
-function init_entete($titre, $rubrique, $css='') {
+function init_entete($titre='', $rubrique='') {
 
 	if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
 		$nom_site_spip=  _T('info_mon_site_spip');
 
-	// envoi des en-tetes, du doctype et du <head><title...
-	include_spip('inc/headers');
-	http_no_cache();
 	$head = "<title>["
 		. $nom_site_spip
 		. "] " . textebrut(typo($titre)) . "</title>\n"
@@ -2117,28 +2139,28 @@ function init_entete($titre, $rubrique, $css='') {
 		. (($c = $GLOBALS['meta']['charset']) ?
 			"; charset=$c" : '')
 		. "' />\n"
-		. envoi_link($nom_site_spip, $rubrique)
-		. (!$css ? "" : (
-			'<link rel="stylesheet" href="' . entites_html($css)
-			. '" type="text/css" />'. "\n"
-		) ) ."\n";
+		. envoi_link($nom_site_spip);
 	
-	echo _DOCTYPE_ECRIRE, html_lang_attributes(), "<head>\n",pipeline('header_prive', $head), "</head>\n";
+	return _DOCTYPE_ECRIRE
+	. html_lang_attributes()
+	. "<head>\n"
+	. pipeline('header_prive', $head)
+	. "</head>\n";
 }
 
 // fonction envoyant la double serie d'icones de redac
 // http://doc.spip.org/@init_body
 function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $id_rubrique='') {
 	global $couleur_foncee, $couleur_claire;
-	global $connect_id_auteur;
-	global $connect_statut;
-	global $connect_toutes_rubriques;
-	global $auth_can_disconnect, $connect_login;
+	global $connect_id_auteur, $connect_toutes_rubriques;
+	global $auth_can_disconnect;
 	global $options, $spip_display, $spip_ecran;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 	global $browser_verifForm;
+	include_spip('inc/gadgets');
 
-	if ($load = "$browser_verifForm$onLoad")
+	definir_barre_boutons();
+	if ($load = "$browser_verifForm$onLoad" . repercuter_gadgets($id_rubrique))
 		$load = " onLoad=\"$load\"";
 
 	echo pipeline('body_prive',"<body ". _ATTRIBUTES_BODY
@@ -2154,10 +2176,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 	echo lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"");
 	echo "\n</map>";
 
-
-
 	if ($spip_display == "4") {
-		// Icones principales
 		echo "<ul>";
 		echo "<li><a href='./'>"._T('icone_a_suivre')."</a>";
 		echo "<li><a href='" . generer_url_ecrire("naviguer") . "'>"._T('icone_edition_site')."</a>";
@@ -2176,40 +2195,8 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $i
 	echo "<div class='invisible_au_chargement' style='position: absolute; height: 0px; visibility: hidden;'><a href='oo'>"._T("access_mode_texte")."</a></div>";
 	
 	echo "<div id='haut-page'>";
-
-	// Icones principales
 	echo "<div class='bandeau-principal' align='center'>\n";
-	echo "<div class='bandeau-icones'>\n";
-	echo "<table width='$largeur' cellpadding='0' cellspacing='0' border='0' align='center'><tr>\n";
-
-	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
-		if($page=='espacement') {
-			echo "<td> &nbsp; </td>";
-		} else {
-			if ($detail->url)
-				$lien_noscript = $detail->url;
-			else
-				$lien_noscript = generer_url_ecrire($page);
-
-			if ($detail->url2)
-				$lien = $detail->url2;
-			else
-				$lien = $lien_noscript;
-
-			icone_bandeau_principal(
-				_T($detail->libelle),
-				$lien,
-				$detail->icone,
-				$page,
-				$rubrique,
-				$lien_noscript,
-				$page,
-				$sous_rubrique);
-		}
-	}
-	echo "</tr></table>\n";
-
-	echo "</div>\n";
+	echo bandeau_principal($rubrique, $sous_rubrique, $largeur);
 
 	echo "<table width='$largeur' cellpadding='0' cellspacing='0' align='center'><tr><td>";
 	echo "<div style='text-align: $spip_lang_left; width: ".$largeur."px; position: relative; z-index: 2000;'>";
@@ -2299,7 +2286,7 @@ if (true /*$bandeau_colore*/) {
 		  http_img_pack("cal-suivi.png", "", "width='26' height='20'") . "</a>";
 		
 
-		if (!($connect_statut == "0minirezo" AND $connect_toutes_rubriques)) {
+		if (!($connect_toutes_rubriques)) {
 			echo http_img_pack("rien.gif", " ", "width='10'");
 			echo "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur") . "' class='icone26' onmouseover=\"changestyle('bandeauinfoperso','visibility','visible');\">" .
 			  http_img_pack("fiche-perso.png", "", "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"");
@@ -2385,13 +2372,10 @@ if (true /*$bandeau_colore*/) {
 
 } // fin bandeau colore
 
-
 	// <div> pour la barre des gadgets
 	// (elements invisibles qui s'ouvrent sous la barre precedente)
-	include_spip('inc/gadgets');
-	echo bandeau_gadgets($largeur, $options, $id_rubrique);
-	$GLOBALS['id_rubrique_gadgets'] = $id_rubrique;  # un peu sale
 
+	echo bandeau_gadgets($largeur, $options, $id_rubrique);
 	echo "</div>";
 	echo "</div>";
 
@@ -2399,56 +2383,39 @@ if (true /*$bandeau_colore*/) {
 }
 
 
-// http://doc.spip.org/@debut_corps_page
-function debut_corps_page($rubrique='') {
+function avertissement_messagerie() {
 	global $couleur_foncee;
 	global $connect_id_auteur;
-  
-	// Ouverture de la partie "principale" de la page
-
-	echo "<center onmouseover='recherche_desesperement()'>";
 
 	$result_messages = spip_query("SELECT lien.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
 	$total_messages = @spip_num_rows($result_messages);
 	if ($total_messages == 1) {
-				while($row = @spip_fetch_array($result_messages)) {
-					$ze_message=$row['id_message'];
-					echo "<div class='messages'><a href='" . generer_url_ecrire("message","id_message=$ze_message") . "'><font color='$couleur_foncee'>"._T('info_nouveau_message')."</font></a></div>";
-				}
-			}
-			if ($total_messages > 1) echo "<div class='messages'><a href='" . generer_url_ecrire("messagerie") . "'><font color='$couleur_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</font></a></div>";
+		$row = @spip_fetch_array($result_messages);
+		$ze_message=$row['id_message'];
+		return "<div class='messages'><a href='" . generer_url_ecrire("message","id_message=$ze_message") . "'><font color='$couleur_foncee'>"._T('info_nouveau_message')."</font></a></div>";
+	} elseif ($total_messages > 1)
+		return "<div class='messages'><a href='" . generer_url_ecrire("messagerie") . "'><font color='$couleur_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</font></a></div>";
+	else return '';
+}
 
 
-	// Afficher les auteurs recemment connectes
-	
-	global $changer_config;
-	global $activer_imessage;
+function auteurs_recemment_connectes()
+{	
+	global $connect_id_auteur;
+	$res = '';
+	$result_auteurs = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE) AND statut IN ('0minirezo','1comite')");
 
-	if ($changer_config!="oui"){
-		$activer_imessage = "oui";
+	if (spip_num_rows($result_auteurs)) {
+
+		$res = "<b>"._T('info_en_ligne')."</b>";
+		while ($row = spip_fetch_array($result_auteurs)) {
+			$id_auteur = $row["id_auteur"];
+			$nom_auteur = typo($row["nom"]);
+			$res .= " &nbsp; ".bouton_imessage($id_auteur,$row)."&nbsp;<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "' style='color: #666666;'>$nom_auteur</a>";
+		}
 	}
-	
-			if ($activer_imessage != "non") {
-				$result_auteurs = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE) AND statut IN ('0minirezo','1comite')");
 
-				$nb_connectes = spip_num_rows($result_auteurs);
-			}
-				
-			$flag_cadre = (($nb_connectes > 0) OR $rubrique == "messagerie");
-			if ($flag_cadre) echo "<div class='messages' style='color: #666666;'>";
-
-			
-			if ($nb_connectes > 0) {
-				if ($nb_connectes > 0) {
-					echo "<b>"._T('info_en_ligne')."</b>";
-					while ($row = spip_fetch_array($result_auteurs)) {
-						$id_auteur = $row["id_auteur"];
-						$nom_auteur = typo($row["nom"]);
-						echo " &nbsp; ".bouton_imessage($id_auteur,$row)."&nbsp;<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "' style='color: #666666;'>$nom_auteur</a>";
-					}
-				}
-			}
-			if ($flag_cadre) echo "</div>";
+	return "<div class='messages' style='color: #666666;'>$res</div>";
 }
 
 
@@ -2509,7 +2476,7 @@ function fin_cadre_formulaire(){
 //
 
 // http://doc.spip.org/@debut_gauche
-function debut_gauche($rubrique = "accueil") {
+function debut_gauche($rubrique = "accueil", $return=false) {
 	global $connect_statut;
 	global $options, $spip_display;
 	global $connect_id_auteur;
@@ -2538,13 +2505,14 @@ function debut_gauche($rubrique = "accueil") {
 		$rspan = '';
 	}
 
-	echo "<br /><table width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
+	$res = "<br /><table width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
 		<tr><td width='$largeur' class='colonne_etroite serif' valign='top' $rspan>
 		<div style='width: ${largeur}px; overflow:hidden;'>
 \n";
 		
-	if ($spip_display == 4) echo "<!-- ";
+	if ($spip_display == 4) $res .= "<!-- ";
 
+	if ($return) return $res; else echo $res;
 }
 
 
@@ -2553,91 +2521,64 @@ function debut_gauche($rubrique = "accueil") {
 //
 
 // http://doc.spip.org/@creer_colonne_droite
-function creer_colonne_droite($rubrique=""){
-	global $deja_colonne_droite;
+function creer_colonne_droite($rubrique="", $return= false){
+	static $deja_colonne_droite;
 	global $flag_3_colonnes, $flag_centre_large;
 	global $spip_lang_rtl, $spip_lang_left;
 
-	if ($flag_3_colonnes AND !$deja_colonne_droite) {
-		$deja_colonne_droite = true;
+	if (!$flag_3_colonnes OR $deja_colonne_droite) return '';
+	$deja_colonne_droite = true;
 
-		if ($flag_centre_large) {
+	if ($flag_centre_large) {
 			$espacement = 17;
 			$largeur = 140;
-		}
-		else {
+	} else {
 			$espacement = 37;
 			$largeur = 200;
-		}
-
-
-		echo "<td width=$espacement rowspan=2 class='colonne_etroite'>&nbsp;</td>";
-		echo "<td rowspan=1 class='colonne_etroite'></td>";
-		echo "<td width=$espacement rowspan=2 class='colonne_etroite'>&nbsp;</td>";
-		echo "<td width=$largeur rowspan=2 align='$spip_lang_left' valign='top' class='colonne_etroite'><p />";
-
 	}
 
+	$res = "<td width='"
+	.  $espacement
+	.  "' rowspan='2' class='colonne_etroite'>&nbsp;</td>"
+	. "<td rowspan='1' class='colonne_etroite'></td>"
+	. "<td width='"
+	.  $espacement
+	.  "'rowspan=2 class='colonne_etroite'>&nbsp;</td>"
+	. "<td width='"
+	. $largeur 
+	. "' rowspan=2 align='"
+	. $spip_lang_left
+	. "' valign='top' class='colonne_etroite'><p />";
+
+	if ($return) return $res; else echo $res;
 }
 
 // http://doc.spip.org/@debut_droite
-function debut_droite($rubrique="") {
-	global $options, $spip_ecran, $deja_colonne_droite, $spip_display;
-	global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques;
-	global $flag_3_colonnes, $flag_centre_large, $couleur_foncee, $couleur_claire;
-	global $spip_lang_left;
+function debut_droite($rubrique="", $return= false) {
+	global $options, $spip_ecran, $spip_display;
+	global $spip_lang_left, $couleur_foncee, $couleur_claire;
+	global $flag_3_colonnes, $flag_centre_large;
 
-	if ($spip_display == 4) echo " -->";
+	$res = '';
 
-	echo "</div>\n"; # largeur fixe, cf. debut_gauche
+	if ($spip_display == 4) $res .= " -->";
+
+	$res .= "</div>\n"; # largeur fixe, cf. debut_gauche
 
 	if ($options == "avancees") {
-		// liste des articles bloques
-		if ($GLOBALS['meta']["articles_modif"] != "non") {
-			include_spip('inc/drapeau_edition');
-			$articles_ouverts = liste_drapeau_edition ($connect_id_auteur, 'article');
-			if (count($articles_ouverts)) {
 
-
-
-		//	$vos_articles = spip_query("SELECT id_article, id_rubrique, titre, statut FROM spip_articles WHERE statut='prop' ORDER BY date DESC LIMIT 5");
-		//	if (spip_num_rows($vos_articles) > 0) {
-				echo "<div>&nbsp;</div>";
-				echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
-				echo bandeau_titre_boite2(_T('info_cours_edition'), "article-24.gif", $couleur_foncee, 'white', false);
-				echo "<div class='plan-articles-bloques'>";
-
-
-				foreach ($articles_ouverts as $row) {
-					$ze_article = $row['id_article'];
-					$ze_titre = $row['titre'];
-					$statut = $row["statut"];
-					
-					echo "<div class='$statut'><a style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$ze_article") . "'>$ze_titre</a>";
-
-					$nb_liberer ++;
-					echo "<div style='text-align:right; font-size: 9px;'>", debloquer_article($ze_article,_T('lien_liberer')), "</div>";
-
-					echo "</div>";
-
-				}
-				echo "</div></div>";
-			}
-		}
-		
-		if (!$deja_colonne_droite) creer_colonne_droite($rubrique);
+		$res .= liste_articles_bloques()
+		. creer_colonne_droite($rubrique, true);
 	}
 
-	echo "<div>&nbsp;</div></td>";
+	$res .= "<div>&nbsp;</div></td>";
 
 	if (!$flag_3_colonnes) {
-		echo "<td width='50'>&nbsp;</td>";
+		$res .= "<td width='50'>&nbsp;</td>";
 	}
 	else {
-		if (!$deja_colonne_droite) {
-			creer_colonne_droite($rubrique);
-		}
-		echo "</td></tr><tr>";
+		$res .= creer_colonne_droite($rubrique, true)
+		. "</td></tr><tr>";
 	}
 
 	if ($spip_ecran == 'large' AND $flag_centre_large)
@@ -2645,56 +2586,74 @@ function debut_droite($rubrique="") {
 	else
 		$largeur = 500;
 
-	echo '<td width="'.$largeur.'" valign="top" align="'.$spip_lang_left.'" rowspan="1" class="serif">';
+	$res .= '<td width="'.$largeur.'" valign="top" align="'.$spip_lang_left.'" rowspan="1" class="serif">';
 
 	// touche d'acces rapide au debut du contenu
-	echo "\n<a name='saut' href='#saut' accesskey='s'></a>\n";
+	$res .= "\n<a name='saut' href='#saut' accesskey='s'></a>\n";
+
+	if ($return) return $res; else echo $res;
 }
 
+function liste_articles_bloques()
+{
+	global $connect_id_auteur, $couleur_foncee;
 
-//
-// Presentation de l'interface privee, fin de page et flush()
-//
+	$res = '';
+	if ($GLOBALS['meta']["articles_modif"] != "non") {
+		include_spip('inc/drapeau_edition');
+		$articles_ouverts = liste_drapeau_edition ($connect_id_auteur, 'article');
+		if (count($articles_ouverts)) {
+			$res .= "<div>&nbsp;</div>"
+			. "<div class='bandeau_rubriques' style='z-index: 1;'>"
+			. bandeau_titre_boite2(_T('info_cours_edition'), "article-24.gif", $couleur_foncee, 'white', false)
+			. "<div class='plan-articles-bloques'>";
 
-// http://doc.spip.org/@fin_html
-function fin_html() {
-
-	echo "</font>", $GLOBALS['rejoue_session'];
-
-	if (function_exists('dessiner_gadgets'))
-		echo dessiner_gadgets($GLOBALS['id_rubrique_gadgets']);
-	if (defined('_TESTER_NOSCRIPT'))
-		echo _TESTER_NOSCRIPT;
-
-	echo "</body></html>\n";
+			foreach ($articles_ouverts as $row) {
+				$ze_article = $row['id_article'];
+				$ze_titre = $row['titre'];
+				$statut = $row["statut"];
+					
+				$res .= "<div class='$statut'><a style='font-size: 10px;' href='" 
+				. generer_url_ecrire("articles","id_article=$ze_article")
+				. "'>$ze_titre</a>"
+				. "<div style='text-align:right; font-size: 9px;'>"
+				. debloquer_article($ze_article,_T('lien_liberer'))
+				. "</div>"
+				. "</div>";
+			}
+			$res .= "</div></div>";
+		}
+	}
+	return $res;
 }
-
+	
+//
+// Fin de page de l'interface privee. 
+// Elle comporte une image invisble declenchant une tache de fond
 
 // http://doc.spip.org/@fin_page
-function fin_page($credits='') {
+function fin_page() {
 	global $spip_display;
 
-	echo "</td></tr></table>";
+	return "</td></tr></table>"
+	. debut_grand_cadre(true)
 
-	debut_grand_cadre();
+	. (($spip_display == 4)
+		? ("<div><a href='./?set_disp=2'>"
+		.  _T("access_interface_graphique")
+		. "</a></div>")
+		: ('<div style="text-align: right; font-family: Verdana; font-size: 8pt">'
+		. info_copyright()
+		. "<br />"
+		. _T('info_copyright_doc')
+		. '</div>'))
 
-	# ici on en profite pour glisser une tache de fond
-
-	echo generer_spip_cron();
-
-	if ($spip_display == 4) {
-	  echo "<div><a href='./?set_disp=2'>",
-	    _T("access_interface_graphique"),
-	    "</a></div>";
-	} else {
-	  echo '<div style="text-align: right; font-family: Verdana; font-size: 8pt">',
-	    info_copyright(), "<br />",_T('info_copyright_doc'),'</div>' ;
-	}
-
-	fin_grand_cadre();
-	echo "</center>";
-
-	fin_html();
+	. fin_grand_cadre(true)
+	. "</center></font>"
+	. $GLOBALS['rejoue_session']
+	. generer_spip_cron()
+	. (defined('_TESTER_NOSCRIPT') ? _TESTER_NOSCRIPT : '')
+	. "</body></html>\n";
 }
 
 // http://doc.spip.org/@debloquer_article
@@ -2708,6 +2667,45 @@ function debloquer_article($arg, $texte) {
 	  http_img_pack("croix-rouge.gif", ($arg=='tous' ? "" : "X"),
 			"width='7' height='7' align='baseline'") .
 	  "</a>";
+}
+
+
+function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
+{
+	global $spip_lang_right, $spip_lang_left, $options;
+
+spip_log("option mr $options");
+	if ($options != "avancees") return '';
+
+	$table = $type . 's';
+	$key = 'id_' . $type;
+
+	$voss = spip_query("SELECT $key AS id, titre, statut FROM spip_$table WHERE id_rubrique=$id_rubrique AND (statut = 'publie' OR statut = 'prop') AND ($key != $id) ORDER BY $order DESC LIMIT $limit");
+
+	if (!spip_num_rows($voss)) return '';
+
+	$numero = _T('info_numero_abbreviation');
+	$style = "float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;";
+	$retour = '';
+
+	while($row = spip_fetch_array($voss)) {
+		$ze = $row['id'];
+		$retour .= "<a class='"
+		. $row['statut']
+		. "' style='font-size: 10px;' href='"
+		  . generer_url_ecrire($table,"$key=$ze")
+		. "'>"
+		. "<div class='arial1' style='$style'><b>$numero$ze</b></div>"
+		. typo($row['titre'])
+		. "</a>";
+	}
+
+	return "<div>&nbsp;</div>"
+	. "<div class='bandeau_rubriques' style='z-index: 1;'>"
+	. bandeau_titre_boite2(_T('info_meme_rubrique'), "article-24.gif",'','',false)
+	. "<div class='plan-articles'>"
+	. $retour
+	. "</div></div>";
 }
 
 //
