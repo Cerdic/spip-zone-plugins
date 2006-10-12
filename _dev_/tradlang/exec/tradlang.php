@@ -1,6 +1,7 @@
 <?php
 
 include_spip("inc/presentation");
+include("tradlang_popup.php");
 
 function exec_tradlang() {
 
