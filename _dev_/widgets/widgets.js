@@ -83,17 +83,16 @@ $.fn.activatewidget = function() {
     $(me)
     .find('form')
       .ajaxForm(function(d){
-        if (!d.responseText) {
-	        alert(configWidgets.txtErrInterdit);
-	        $(me)
-	        .find("img.widget-searching")
-	          .remove();
+      	d = $(d.responseText); alert(dump(d));
+        d.find('error').each(function() {
+	        alert(configWidgets.txtErrInterdit + d.html());
+	        $(me).find("img.widget-searching").remove();
 	        $(".widgets_boutons", me).show();
 	        return false;
-        }
+        });
         $(me)
         .prev()
-          .html(d.responseText)
+          .html(d.find('valeur'))
           .prepend(ICONCLICK)
           .show()
           .removeClass('has-widget')
@@ -204,4 +203,7 @@ $(document).ready(function() {
     .hidewidget();
   });
 });
+
+function dump(elt)
+{var txt=''; for (var prop in elt) {txt += prop+'='+elt[prop]+'/';} alert(txt);}
 

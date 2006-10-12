@@ -12,6 +12,14 @@ function valeur_colonne_table($table, $col, $id) {
 	return false;
 }
 
+function ecco_widgets($texte, $status=null) {
+	$return = '<widgets><valeur>' . $texte . '</valeur>';
+	if ($status) {
+		$return .= '<error>' . $status . '.</error>';
+	}
+	die($return . '</widgets>');
+}
+
 function action_widgets_html_dist() {
 	include_spip('inc/widgets');
 	include_spip('inc/texte');
@@ -41,16 +49,16 @@ function action_widgets_html_dist() {
 
 						// type du widget
 						if (in_array($regs[2], array('chapo', 'texte', 'descriptif', 'ps')))
-							echo propre($m[1]);
+							ecco_widgets(propre($m[1]));
 						else
-							echo typo($m[1]);
+							ecco_widgets(typo($m[1]));
 					} else {
-						die();
+						ecco_widgets('erreur diverses', 1);
 					}
 				}
 			}
 		} else if ($modifs === false) {
-			echo "erreur";
+			ecco_widgets("erreur", 2);
 		}
 	}
 
@@ -85,7 +93,7 @@ function action_widgets_html_dist() {
 		if ($valeur !== false) {
 			$n = new Widget($regs[0], $valeur);
 			$widgetsAction = self();
-			echo <<<FIN_FORM
+			ecco_widgets( <<<FIN_FORM
 
 <form method="post" action="{$widgetsAction}"
 	onkeyup="$(&quot;.widgets_boutons&quot;, this).show();"
@@ -101,9 +109,9 @@ function action_widgets_html_dist() {
   </div>
 </form>
 
-FIN_FORM;
+FIN_FORM
+			);
 		}
 	}
 }
-
 ?>
