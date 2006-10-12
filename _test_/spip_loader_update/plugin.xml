@@ -1,0 +1,29 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	spip_loader Update
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	James, inspir&eacute; par les travaux de Cedric &amp; Fil
+_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Un utilisateur (par defaut, l'administrateur numero 1) est autoris&eacute; &agrave; faire une mise &agrave; jour spip_loader du site ou de tout autre r&eacute;pertoire. Pour cela il doit se rendre sur la page [ecrire/?exec=spip_loader_update->./?exec=spip_loader_update] et s&eacute;lectionner les &eacute;l&eacute;ments &agrave; mettre &agrave; jour.
+
+La configuration se fait &agrave; deux emplacements :
+- dans <code>ecrire/mes_options.php</code>, on indique la liste des administrateurs autoris&eacute;s &agrave; proc&eacute;der aux mises &agrave; jour, par exemple avec :
+_ <code>define('_SPIP_LOADER_UPDATE_AUTEURS', '1:2:3');</code>
+- Dans le fichier <code>spip_loader_update_list.txt</code> (&agrave; recopier dans son r&eacute;pertoire personnel de squelettes), on indique la liste des r&eacute;pertoires concern&eacute;s, en donnant pour chacun une ligne :
+_ <code>paquet url</code>
+_ Par exemple :
+_ <code>spip http://www.spip.net/spip-dev/DISTRIB/spip.zip</code>
+	</description>
+	<prefix>
+	spip_loader_update
+	</prefix>
+</plugin>

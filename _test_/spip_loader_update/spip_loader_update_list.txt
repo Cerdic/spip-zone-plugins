@@ -1,0 +1,34 @@
+## Fichier d'exemple ##
+##
+## On note ici le nom et l'url de chaque paquet qui nous interesse
+##
+##
+## la plupart des sources sont commentees :
+## recopiez ce fichier dans votre repertoire personnel, et
+## ajoutez/configurez ce qu'il vous faut
+##
+## Attention, un zip valide contient un répertoire de base spip/ ! 
+##
+######################################################################
+
+
+##### SPIP
+# la branche stable
+spip http://www.spip.net/spip-dev/DISTRIB/spip.zip
+
+##### PLUGINS
+# auto-installation de ce plugin spip_loader_update
+spip_loader_update http://trac.rezo.net/files/spip-zone/spip_loader_update.zip
+
+##### SQUELETTES
+#
+# et enfin mes squelettes, pris une url perso
+#squelettes http://mon.site.perso/chemin/vers/mes/squelettes.zip
+
+##### THEMES
+# petites-boites
+#petites-boites http://james.at.rezo.net/files/spip-zone/petites_boites.zip
+
+##### Mes Fichiers
+# mes fichiers persos
+#mes_fichiers.zip ./mes_fichiers.zip
