@@ -2,6 +2,16 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function valeur_colonne_table($table, $col, $id) {
+	$s = spip_query(
+		'SELECT ' . $col .
+		  ' AS val FROM spip_' . $table .'s	WHERE id_' . $table . '=' . $id);
+	if ($t = spip_fetch_array($s)) {
+		return $t['val'];
+	}
+	return false;
+}
+
 function action_widgets_html_dist() {
 	include_spip('inc/widgets');
 	include_spip('inc/texte');
@@ -73,10 +83,9 @@ function action_widgets_html_dist() {
 		$inputAttrs = array(
 			'style' => "width:${w}px;" . ($h ? " height:${h}px;" : ''));
 
-		$s = spip_query("SELECT ".$regs[2]." AS val FROM spip_".$regs[1]."s
-		WHERE id_".$regs[1]."=".$regs[3]);
-		if ($t = spip_fetch_array($s)) {
-			$n = new Widget($regs[0], $t['val']);
+		$valeur = valeur_colonne_table($regs[1], $regs[2], $regs[3]);
+		if ($valeur !== false) {
+			$n = new Widget($regs[0], $valeur);
 			$widgetsAction = self();
 			echo <<<FIN_FORM
 
