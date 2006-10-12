@@ -19,7 +19,8 @@
 	Ce plugin met à disposition du webmaster une balise #FORMULAIRE_PERSONNALISATION.
 	Une fois intégrée dans vos squelettes elle génère un formulaire proposant à vos visiteurs de choisir
 	parmis différent mode d'affichage (zoomer, inverse, etc) et parmis différent mode de navigation. 
-	Pour la démo aller sur la partie publique de votre site à l'adresse ?page=panneau_perso .
+	Pour la démo aller sur la partie publique de votre site à l'adresse ?page=panneau_perso ou
+    depuis le lien panneau personnalisation en bas de page.
 	A noter, par défaut ce plugin est lié à l'utilisation du squelette par defaut livrée sur spip 1.9.
 	Si vous avez un squelette personnalisé, vous devrez modifier les css zoom.css et inverse.css
 	dans le repertoire css de ce plugin ainsi qu'adapter votre inc-head pour que #INSERT_HEAD soit
