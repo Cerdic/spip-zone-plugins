@@ -102,7 +102,7 @@ EOF;
 	
 	debut_gauche();
 	debut_boite_info();
-	
+	echo _T('habillages:icones_commentaires');
 	fin_boite_info();
 
 	debut_droite();

@@ -162,7 +162,7 @@ EOF;
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
 	echo _T('habillages:squelettes_titre')."</font></b></td></tr>";
 	echo "<tr><td class='serif' colspan=4>";
-
+	echo _T('habillages:squelettes_intro');
 		# Chercher les fichiers theme.xml.
 		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
 		

@@ -148,7 +148,7 @@ EOF;
 	# Dans un premier temps, on ne change que le logo du site, celui de toutes les rubriques
 	# et celui de tous les articles. On verra pour sectoriser ensuite. On classe tout ca par 
 	# themes sur une page d'accueil mais on laisse la possibilite de choisir logo de site,
-	# logo de rubrique, et celui d'article s'eparement.
+	# logo de rubrique, et celui d'article separement.
 	debut_boite_info();
 	echo "<strong>"._T('habillages:titre_logos_themes')."</strong>";
 	echo "<br /><br />";
