@@ -30,7 +30,7 @@ function exec_habillages_squelettes() {
 		lire_metas();
 		$lire_meta_squelettes = array($GLOBALS['meta']['habillages_squelettes']);
 		ecrire_plugin_actifs($lire_meta_squelettes,'',$operation='enleve');
-		ecrire_meta('habillages_styles', 'defaut');
+		ecrire_meta('habillages_couleurs', 'defaut');
 		ecrire_metas;
 		lire_metas();
 		$lire_meta_squelettes_modifs = array(_request('statusplug'));

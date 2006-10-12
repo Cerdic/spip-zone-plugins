@@ -22,15 +22,15 @@ function habillages_ajouter_boutons($boutons_admin) {
 	}
 
 function habillages_ajouter_onglets($flux) {
-	if (_request('exec')=='config_habillages' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_styles' || _request('exec')=='habillages_images' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_aide' || _request('exec')=='habillages_couleurs') {
+	if (_request('exec')=='config_habillages' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_extras' || _request('exec')=='habillages_images' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_aide' || _request('exec')=='habillages_couleurs') {
 		$flux['data']['accueil']= new Bouton(
 	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_icone-22.png', 'Accueil', generer_url_ecrire("config_habillages"));
 	$flux['data']['squelettes']= new Bouton(
 	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_squelettes-22.png', 'Squelettes', generer_url_ecrire("habillages_squelettes"));
 	$flux['data']['couleurs']= new Bouton(
 	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_couleurs-22.png', 'Couleurs', generer_url_ecrire("habillages_couleurs"));
-	$flux['data']['styles']= new Bouton(
-	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_styles-22.png', 'Styles', generer_url_ecrire("habillages_styles"));
+	$flux['data']['extras']= new Bouton(
+	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_extras-22.png', 'Extras', generer_url_ecrire("habillages_extras"));
 	$flux['data']['logotheque']= new Bouton(
 	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_images-22.png', 'Logoth&egrave;que', generer_url_ecrire("habillages_images"));
 	$flux['data']['icones']= new Bouton(

@@ -9,9 +9,10 @@ include_spip('inc/plugin');
 include_spip('inc/presentation');
 include_spip('inc/layer');
 include_spip('inc/actions');
+include_spip('inc/habillages_plugins');
 
 // http://doc.spip.org/@exec_admin_plugin
-function exec_config_habillages() {
+function exec_habillages_extras() {
 	global $connect_statut;
 	global $connect_toutes_rubriques;
 	global $spip_lang_right;
@@ -24,11 +25,11 @@ function exec_config_habillages() {
 		fin_page();
 		exit;
 	}
-
+	
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
 	global $couleur_claire;
-	debut_page(_T('habillages:icone_config_habillages'), "configuration", "habillages");
+	debut_page(_T('habillages:icone_habillages_styles'), "configuration", "styles");
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
 div.cadre-padding ul li {
@@ -88,49 +89,21 @@ EOF;
 
 	echo "<br/><br/>";
 	
-	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_icone-48.png">';
-	gros_titre(_T('habillages:icone_config_habillages'));
+	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_extras-48.png">';
+	gros_titre(_T('habillages:icone_habillages_styles'));
 
 	barre_onglets("habillages", "");
 	
 	debut_gauche();
+	
 	debut_boite_info();
-	echo _T('habillages:accueil_infos');
+	
 	fin_boite_info();
 
 	debut_droite();
 
 	debut_cadre_relief();
 
-	global $couleur_foncee;
-	
-	lire_metas();
-	$habillages_squelettes = basename($GLOBALS['meta']['habillages_squelettes']);
-	$habillages_styles = basename($GLOBALS['meta']['habillages_couleurs']);
-	//$habillages_logos = basename($GLOBALS['meta']['habillages_logos']);
-	
-	echo _T('habillages:accueil_general');
-	if ($habillages_squelettes != "") {
-	echo "<br />";
-	echo "<br />";
-	echo _T('habillages:accueil_general_squelettes')." ".$habillages_squelettes." [Capture]";
-	echo "&nbsp;<a href='".generer_url_ecrire('habillages_squelettes')."'>Modifier</a>";
-	}
-	if ($habillages_styles != "") {
-	echo "<br />";
-	echo "<br />";
-	echo _T('habillages:accueil_general_styles')." ".$habillages_styles." [Capture]";
-	echo "&nbsp;<a href='".generer_url_ecrire('habillages_styles')."'>Modifier</a>";
-	}
-	echo "<br />";
-	echo "<br />";
-	echo _T('habillages:accueil_general_logos');
-	echo "<br />";
-	echo "<br />";
-	echo _T('habillages:accueil_general_maintenance');
-	echo "<br />";
-	echo "<br />";
-	
 	fin_page();
 
 }

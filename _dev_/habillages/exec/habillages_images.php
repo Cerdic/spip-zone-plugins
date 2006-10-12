@@ -143,8 +143,41 @@ EOF;
 
 	debut_cadre_relief();
 
+	echo generer_url_post_ecrire("habillages_images");
 	global $couleur_foncee;
+	
+// 	$type_logos = array(
+// 	'hierarchie' => 'rub',
+// 	'rubriques' => 'rub',
+// 	'articles' => 'art',
+// 	'breves' => 'breve',
+// 	'mots' => 'mot',
+// 	'sites' => 'site',
+// 	'auteurs' => 'aut'
+// 	);
 
+##################
+	$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
+		
+		# Pour chaque fichier theme.xml trouve, on releve le <type> et on ne garde que 
+		# les images pour les lister.
+		foreach ($fichier_theme as $fichier){
+			lire_fichier($fichier, $texte);
+			$arbre = parse_plugin_xml($texte);
+			$arbre = $arbre['theme'][0];
+			$type_theme = trim(applatit_arbre($arbre['type']));
+			$nom_dossier_theme = dirname ($fichier);
+			
+				if ($type_theme=="logos_rubart") {
+					$logos = preg_files(_DIR_PLUGINS.$nom_dossier_theme,"[.](gif|png|jpg)$");
+					# AJouter gestion des tailles, bouton radio et mise en page.
+					foreach ($logos as $logo) {
+					echo "<img src='".$logo."' />";
+					}
+				}
+				
+		}
+	
 	# Dans un premier temps, on ne change que le logo du site, celui de toutes les rubriques
 	# et celui de tous les articles. On verra pour sectoriser ensuite. On classe tout ca par 
 	# themes sur une page d'accueil mais on laisse la possibilite de choisir logo de site,
@@ -181,10 +214,24 @@ EOF;
 	# Logo general de toutes les rubriques rubon0.* et ruboff0.*
 	//ecrire_meta('habillages_logo_rubriques', 'rubon0');
 	
-	# Logo general de toutes les rubriques arton0.* et artoff0.*
+	# Logo general de tous les articles arton0.* et artoff0.*
 	//ecrire_meta('habillages_logo_articles', 'arton0');
 	
 	//ecrire_metas;
+	
+	
+	echo "</table></div>\n";
+
+	echo "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />";
+	echo "\n<input type='hidden' name='hash' value='" . calculer_action_auteur("valide_plugin") . "'>";
+	echo "\n<input type='hidden' name='changer_plugin' value='oui'>";
+
+	echo "\n<p>";
+
+	echo "<div style='text-align:$spip_lang_right'>";
+	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
+	echo "</div>";
+	echo "</form></tr></table>\n";
 	
 	echo "<br />";
 

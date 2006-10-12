@@ -71,7 +71,7 @@ function habillages_affichage_squelettes($fichier_plugin_xml) {
 	fin_boite_info();
 }
 
-function habillages_affichage_styles($fichier_plugin_xml) {
+function habillages_affichage_couleurs($fichier_plugin_xml) {
 	global $couleur_claire;
 	global $couleur_foncee;
 	
@@ -113,9 +113,9 @@ function habillages_affichage_styles($fichier_plugin_xml) {
 				break;
 		}
 	
-		if (_request('exec')=='habillages_styles'){
+		if (_request('exec')=='habillages_couleurs'){
 			lire_metas();
-			$lire_meta_habillages = array($GLOBALS['meta']['habillages_styles']);
+			$lire_meta_habillages = array($GLOBALS['meta']['habillages_couleurs']);
 		}
 	
 	if ($lire_meta_habillages[0] == $chemin_plugin_court) {
