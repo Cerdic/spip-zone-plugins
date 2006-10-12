@@ -29,4 +29,5 @@ function exec_documents_colonne_dist()
 	include_spip("inc/presentation");
 	ajax_retour(afficher_documents_colonne($id, $type, true));
 }
+
 ?>

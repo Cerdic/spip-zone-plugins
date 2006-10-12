@@ -118,40 +118,8 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 
 	// seuls cas connus : exec=articles_edit ou breves_edit
 	$script = $type.'s_edit';
-  $ret = <<<EOF
-  <div id="documents_colonne">
-  <script type="text/javascript">
-    $(function() {
-      $(".form_upload").submit(function(){
-        return do_async_upload(this);
-      });
-    });
-    function do_async_upload(form) {
-      $(form).attr("target","upload_frame")
-      .find("input[@name='redirect']").val("")
-      .append("<input type='hidden' name='iframe' value='iframe'>");
-      var iframe = $("<iframe id='upload_frame' name='upload_frame' frameborder='0' marginwidth='0' marginheight='0' scrolling='yes' style='position:absolute'></iframe>");
-      $("body").append(iframe[0]);
+	$ret = '<div id="documents_colonne">';
 
-      function upload_complete() {
-          var txt = $("body",this.contentDocument.documentElement).text();
-          if(txt) {
-            //c'è un errore
-            $(form).append("<div>"+txt+"</div>");      
-          } else {
-            //ricarica colonna documenti
-            $("#documents_colonne").load("?exec=documents_colonne&id=$id&type=$type");
-          }
-          //per non lasciare la connessione appesa
-          setTimeout(function(){iframe.remove()},10);
-      }
-      
-      iframe.bind('load',upload_complete);
-      return true;
-    }
-    
-  </script>
-EOF;
 	/// Ajouter nouvelle image
 	$ret .= "<a name='images'></a>\n";
 	$titre_cadre = _T('bouton_ajouter_image').aide("ins_img");
@@ -205,6 +173,40 @@ EOF;
 		}
 	}
 	$ret .=  "</div>";
+
+	$ret .= <<<EOF
+  <script type="text/javascript">
+      $(".form_upload").submit(function(){
+        return do_async_upload(this);
+      });
+
+    function do_async_upload(form) {
+      $(form).attr("target","upload_frame")
+      .find("input[@name='redirect']").val("")
+      .append("<input type='hidden' name='iframe' value='iframe'>");
+      var iframe = $("<iframe id='upload_frame' name='upload_frame' frameborder='0' marginwidth='0' marginheight='0' scrolling='yes' style='position:absolute'></iframe>");
+      $("body").append(iframe[0]);
+
+      function upload_complete() {
+          var txt = $("body",this.contentDocument.documentElement).text();
+          if(txt) {
+            //c'è un errore
+            $(form).append("<div>"+txt+"</div>");      
+          } else {
+            //ricarica colonna documenti
+            $("#documents_colonne").load("?exec=documents_colonne&id=$id&type=$type");
+          }
+          //per non lasciare la connessione appesa
+          setTimeout(function(){iframe.remove()},10);
+      }
+      
+      iframe.bind('load',upload_complete);
+      return true;
+    }
+    
+  </script>
+EOF;
+
 	return $ret;
 }
 
