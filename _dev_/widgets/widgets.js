@@ -83,16 +83,19 @@ $.fn.activatewidget = function() {
     $(me)
     .find('form')
       .ajaxForm(function(d){
-      	d = $(d.responseText); alert(dump(d));
-        d.find('error').each(function() {
-	        alert(configWidgets.txtErrInterdit + d.html());
-	        $(me).find("img.widget-searching").remove();
-	        $(".widgets_boutons", me).show();
-	        return false;
+        d = $(d.responseText);
+        $('error',d)
+        .each(function() {
+          alert(configWidgets.txtErrInterdit + $(this).text());
+          $(me).find("img.widget-searching").remove();
+          $(".widgets_boutons", me).show();
+          return false;
         });
         $(me)
         .prev()
-          .html(d.find('valeur'))
+          .html(
+            $('valeur',d).html()
+          )
           .prepend(ICONCLICK)
           .show()
           .removeClass('has-widget')
