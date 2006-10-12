@@ -2,6 +2,11 @@ body {
 	background: #000 !important;
 	color: #CCC !important;
 }
+
+#page #entete a.encours, #page #conteneur a.encours, #page #pied a.encours{
+	background:#660000 !important;
+	color:#FFF !important;
+}
 	
 .rubriques, .breves, .syndic, .forums, .divers {
 	background: #333 !important;

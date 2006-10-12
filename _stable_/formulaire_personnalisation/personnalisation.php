@@ -56,6 +56,34 @@ function personnalisation_insert_head($flux) {
 
 		case "autofocus":
 		$flux .= '<script src="' ._DIR_PLUGIN_FORMULAIRE_PERSONNALISATION . '/js/autofocus.js" type="text/javascript"></script>'. "\n";
+		$flux .= '
+		<style type="text/css">
+		#page #entete a.encours, #page #entete a.encours #nom_site_spip, 
+		#page #conteneur a.encours, #page #pied a.encours, #stopper a.encours,
+		body .spip-admin-float a.encours{
+			background:#660000 !important;
+			color:#FFF !important;
+		}
+		#staticbuttons{
+			z-index:200;
+			border:1px solid #000;
+			background-color: #CCC;
+		}
+
+		#stopper{
+			z-index:200;
+			background-color: #333;
+			font-size:82%;
+			width:200px;
+			border:1px solid #000;
+		overflow:hidden;
+		}
+		#stopper a{
+			color:#FFF;
+			text-decoration:none;
+		}
+		</style>
+		'. "\n";
 		break;
 
 		default:
@@ -72,6 +100,34 @@ function personnalisation_insert_head($flux) {
 
 		case "autofocus":
 		$flux .= '<script src="' ._DIR_PLUGIN_FORMULAIRE_PERSONNALISATION . '/js/autofocus.js" type="text/javascript"></script>'. "\n";
+		$flux .= '
+		<style type="text/css">
+		#page #entete a.encours, #page #entete a.encours #nom_site_spip, 
+		#page #conteneur a.encours, #page #pied a.encours, #stopper a.encours,
+		body .spip-admin-float a.encours{
+			background:#660000 !important;
+			color:#FFF !important;
+		}
+		#staticbuttons{
+			z-index:200;
+			border:1px solid #000;
+			background-color: #CCC;
+		}
+
+		#stopper{
+			z-index:200;
+			background-color: #333;
+			font-size:82%;
+			width:200px;
+			border:1px solid #000;
+			overflow:hidden;
+		}
+		#stopper a{
+			color:#FFF;
+			text-decoration:none;
+		}
+		</style>
+		'. "\n";
 		break;
 		}		
 	}

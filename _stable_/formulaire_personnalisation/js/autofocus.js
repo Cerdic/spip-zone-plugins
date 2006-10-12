@@ -111,6 +111,32 @@ function deleteClassName(oNode,className) {
     oNode.className = trim((" "+oNode.className+" ").replace(" "+className+" "," "));
 }
 
+/*
+	read cookie function
+*/
+
+function getCookieVal(offset)
+{
+var endstr=document.cookie.indexOf (";", offset);
+if (endstr==-1) endstr=document.cookie.length;
+return unescape(document.cookie.substring(offset, endstr));
+}
+function LireCookie(nom)
+{
+var arg=nom+"=";
+var alen=arg.length;
+var clen=document.cookie.length;
+var i=0;
+while (i<clen)
+{
+var j=i+alen;
+if (document.cookie.substring(i, j)==arg) return getCookieVal(j);
+i=document.cookie.indexOf(" ",i)+1;
+if (i==0) break;
+
+}
+return null;
+}
 
 /*
 	autofocus function - Aurelien Levy - http://www.fairytells.net - licence LGPL
@@ -149,7 +175,7 @@ function stopautofocus(){
 	domEl('br','','',ex,0);
 	domEl('a','Descendre',[['href','javascript:'],['onclick','descendre(100);return false;']],ex,0);
 	ex.firstChild.focus();
-	totallinks=getElementsByTagNames('a');
+	totallinks=document.links;
 	meslinks = new Array();
 	for(i=0;i<totallinks.length;i++){
 		if (totallinks[i].parentNode.id=='stopper'){
@@ -178,7 +204,7 @@ function loadautofocus(){
 	domEl('','','',ex.getElementsByTagName('a'),1);
 	domEl('','','',ex.getElementsByTagName('br'),1);
 	domEl('a','Arrêter le défilement',[['href','javascript:'],['onclick','stopautofocus();return false;']],ex,0);	
-	totallinks=getElementsByTagNames('a');
+	totallinks=document.links;
 	meslinks = new Array();
 	for(i=0;i<totallinks.length;i++){
 		if (!/#[0-9a-zA-Z]*/.test(totallinks[i].href)){
@@ -266,7 +292,7 @@ function init() {
 
 	// do stuff
 	domEl('div',[domEl('a','Arrêter le défilement',[['href','javascript:'],['onclick','stopautofocus();return false;']])],[['id','stopper'],['style','position:absolute;']],document.body,0);
-	totallinks=getElementsByTagNames('a');
+	totallinks=document.links;
 	meslinks = new Array();
 	for(i=0;i<totallinks.length;i++){
 		if (!/#[0-9a-zA-Z]*/.test(totallinks[i].href)){
