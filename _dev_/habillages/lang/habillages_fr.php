@@ -52,6 +52,15 @@ Si vous ne voulez pas donner la possibilit&eacute; de personnaliser s&eacute;par
 * Les logos de vos rubriques et articles<br />
 - Les logos de vos rubriques<br />
 - Les logos de vos articles<br /><br />',
+'titre_logos_themes' => 'Choix de vos logos par th&egrave;mes',
+'texte_logos_themes' => 'Vous pouvez s&eacute;lectionner un th&egrave;me ci-dessous, et les logos de ce th&egrave;me iront se placer l&agrave; o&ugrave; il faut. Si vous souhaitez choisir un logo de site d\'un autre th&egrave;me que le logo des rubriques, lequelle est issue d\'un th&egrave;me diff&eacute;rent du logo des articles, choisissez vos logos ci-dessous.',
+'titre_logos_secteurs' => 'Choix de vos logos par site, rubriques, et articles s&eacute;par&eacute;ment.',
+'titre_logos_site' => 'Choix du logo de votre site',
+'texte_logos_site' => 'Choisissez un logo ci-dessous. Si vraiment aucun ne vous plait, il vous reste la possibilit&eacute; d\'en t&eacute;l&eacute;charger un &agrave; partir de votre ordinateur.',
+'titre_logos_rubrique' => 'Choix du logo de vos rubriques',
+'texte_logos_rubrique' => 'Choisissez un logo ci-dessous. Si vraiment aucun ne vous plait, il vous reste la possibilit&eacute; d\'en t&eacute;l&eacute;charger un &agrave; partir de votre ordinateur.',
+'titre_logos_article' => 'Choix du logo de vos articles',
+'texte_logos_article' => 'Choisissez un logo ci-dessous. Si vraiment aucun ne vous plait, il vous reste la possibilit&eacute; d\'en t&eacute;l&eacute;charger un &agrave; partir de votre ordinateur.',
 );
 
 

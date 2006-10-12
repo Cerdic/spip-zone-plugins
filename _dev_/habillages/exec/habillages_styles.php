@@ -33,7 +33,7 @@ function exec_habillages_styles() {
 		//ecrire_meta('habillages_styles', '');
 		ecrire_metas;
 		lire_metas();
-		$lire_meta_styles_modifs = _request('statusplug');
+		$lire_meta_styles_modifs = array(_request('statusplug'));
 		ecrire_plugin_actifs($lire_meta_styles_modifs,'',$operation='ajoute');
 		ecrire_meta('habillages_styles', _request('statusplug'));
 		ecrire_metas;

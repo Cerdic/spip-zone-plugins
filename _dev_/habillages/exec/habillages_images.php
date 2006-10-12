@@ -145,8 +145,46 @@ EOF;
 
 	global $couleur_foncee;
 
-	ecrire_meta('habillages_logo_site', 'toto_site.png');
-	ecrire_metas;
+	# Dans un premier temps, on ne change que le logo du site, celui de toutes les rubriques
+	# et celui de tous les articles. On verra pour sectoriser ensuite. On classe tout ca par 
+	# themes sur une page d'accueil mais on laisse la possibilite de choisir logo de site,
+	# logo de rubrique, et celui d'article s'eparement.
+	debut_boite_info();
+	echo "<strong>"._T('habillages:titre_logos_themes')."</strong>";
+	echo "<br /><br />";
+	echo _T('habillages:texte_logos_themes');
+	fin_boite_info();
+	echo "<br /><br />";
+	echo "Faire des pages separees<br />";
+	echo "<strong>"._T('habillages:titre_logos_secteurs')."</strong>";
+	echo "<br />";
+	
+	debut_boite_info();
+	echo "<strong>"._T('habillages:titre_logos_site')."</strong>";
+	echo "<br /><br />";
+	echo _T('habillages:texte_logos_site');
+	fin_boite_info();
+	debut_boite_info();
+	echo "<strong>"._T('habillages:titre_logos_rubrique')."</strong>";
+	echo "<br /><br />";
+	echo _T('habillages:texte_logos_rubrique');
+	fin_boite_info();
+	debut_boite_info();
+	echo "<strong>"._T('habillages:titre_logos_article')."</strong>";
+	echo "<br /><br />";
+	echo _T('habillages:texte_logos_article');
+	fin_boite_info();
+	
+	# Logo general du site siteon0.* et siteoff0.*
+	//ecrire_meta('habillages_logo_site', 'siteon0');
+	
+	# Logo general de toutes les rubriques rubon0.* et ruboff0.*
+	//ecrire_meta('habillages_logo_rubriques', 'rubon0');
+	
+	# Logo general de toutes les rubriques arton0.* et artoff0.*
+	//ecrire_meta('habillages_logo_articles', 'arton0');
+	
+	//ecrire_metas;
 	
 	echo "<br />";
 
