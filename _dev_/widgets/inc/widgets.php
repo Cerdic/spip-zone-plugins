@@ -21,10 +21,10 @@ function post_widgets() {
 		if (md5($_POST['content_'.$widget]) <> $_POST['md5_'.$widget]) {
 
 			if (!isset($_POST['secu_'.$widget]))
-				$results[] = array($name, $content, true);
+				$results[] = array($name, $content, $_POST['md5_'.$widget]);
 
 			elseif (verif_secu($name, $_POST['secu_'.$widget]))
-				$results[] = array($name, $content, true);
+				$results[] = array($name, $content, $_POST['md5_'.$widget]);
 			else
 				return false; // erreur secu
 		}

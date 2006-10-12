@@ -32,10 +32,8 @@ function action_widgets_html_dist() {
 					// Enregistrer dans la base
 					if ($m[2]
 					AND autoriser_modifs('article', $regs[3])
-					// TODO: on pourrait tester aussi le md5 envoye contre celui
-					// qui correspond a la base actuelle : dans ce cas avertir
-					// que "le contenu a ete modifie entre temps", et renvoyer
-					// un formulaire ad-hoc.
+					AND (md5(valeur_colonne_table($regs[1], $regs[2], $regs[3]))
+							== $m[2])
 					) {
 						include_spip('action/editer_article');
 						revisions_articles($regs[3], false,
