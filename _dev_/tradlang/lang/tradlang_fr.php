@@ -4,6 +4,8 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+				       'ajouterlangue' => 'Ajouter une langue',
+				       'ajoutercode' => 'Ajouter',
 				       'aucunmodule' => 'Aucun module.',
 
 				       'changerrepertoire' => 'Changer',
@@ -14,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 				       'creertables' => 'Cr&eacute;er les tables.',
 
 				       'demandeadmin' => 'Vous devez demander &agrave; un administrateur du site de cr&eacute;er les tables.',
+				       'entrerlangue' => 'Ajouter un code langue',
 
 				       'gestion_des_traductions' => 'Gestion des traductions',
 
@@ -28,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 				       
 				       'lancerimport' => 'Lancer import',
 				       'languemere' => 'Langue m&egrave;re',
+				       'languesdispo' => 'Langues disponibles',
 
 				       'moduletitre' => 'Modules disponibles',
 				       'modulespresents' => 'Fichiers langue pr&eacute;sents dans ce r&eacute;pertoire :',
@@ -39,7 +43,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 				       'repertoirelangue2' => 'R&eacute;pertoire langue',
 
 				       'tablenoncreee' => 'Les tables sp&eacute;cifiques &agrave; l\'utilisation de ce module ne sont pas cr&eacute;&eacute;es dans la base de donn&eacute;es.',
-				       'tradlang' => 'Trad-Lang'
+				       'tradlang' => 'Trad-Lang',
+				       'traductions' => 'Traductions',
+
+				       'visumodule' => 'R&eacute;sum&eacute; du module'
        
 );
 

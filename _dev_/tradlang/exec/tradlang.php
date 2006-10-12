@@ -90,12 +90,6 @@ function exec_tradlang() {
   fin_page();
 }
 
-function tradlang_visumodule()
-{
-  debut_cadre_relief("", false, "", _T('tradlang:visumodule'));
-  echo propre("... non encore impl&eacute;ment&eacute;.");
-  fin_cadre_relief();
-}
 
 
 // importer un module 1ere etape
@@ -255,7 +249,92 @@ function tradlang_importermodule3()
 }
 
 
+function tradlang_visumodule()
+{
+  global $module;
 
+  if (!isset($module) || empty($module))
+    return false;
+
+  $modules = tradlang_getmodules_base();
+  if (!isset($modules[$module]))
+    return;
+  $modok = $modules[$module];
+
+  debut_cadre_relief("", false, "", _T('tradlang:visumodule'));
+
+  echo "<table cellspacing=0 cellpadding=2 border=0>\n";
+  echo "<tr>\n";
+  echo "<td valign=top><span style='float:left;width:150px;padding-left:10px;'>".propre(_T('tradlang:nommodule'))."</span></td>";  	
+  echo "<td><b>".propre($modok["nom_module"])."</b></td>";
+  echo "</tr><tr>";
+
+  echo "<td valign=top><span style='float:left;width:150px;padding-left:10px;'>".propre(_T('tradlang:repertoirelangue2'))."</span></td>";
+  echo "<td>".propre($modok["dir_lang"])."</td>";  	
+  echo "</tr><tr>";
+
+  echo "<td valign=top><span style='float:left;width:150px;padding-left:10px;'>".propre(_T('tradlang:idmodule'))."</span></td>";  	
+  echo "<td>".propre($modok["nom_mod"])."</td>";
+  echo "</tr><tr>";
+
+  echo "<td valign=top><span style='float:left;width:150px;padding-left:10px;'>".propre(_T('tradlang:languemere'))."</span></td>";  	
+  echo "<td>".propre($modok["lang_mere"])."</td>";
+  echo "</tr><tr>";
+
+  echo "<td valign=top><span style='float:left;width:150px;padding-left:10px;'>".propre(_T('tradlang:languesdispo'))."</span></td>";  	
+  $lgs = " ( ";
+  foreach($modok as $cle=>$item)
+    {
+      if (strncmp($cle, "langue_", 7) == 0)
+	$lgs .= substr($cle,7)." ";
+    }
+  $lgs .= " ) ";
+  echo "<td>".propre($lgs)."</td>";
+  echo "</tr>";
+
+  echo "<tr>";
+  echo "<td><form action='".generer_url_ecrire("tradlang")."' method='post' name='tradlang'>\n";
+  echo "<input type='hidden' name='operation' value='ajouterlangue' />\n";
+  echo "<input type='hidden' name='module' value='".$module."' />\n";
+  echo "<span style='float:left;width:150px;padding-left:10px;'>".propre(_T('tradlang:entrerlangue'))."</span></td>";  	
+  echo "<td><input type='text' size='8' name='codelangue' value='' />\n";
+  echo "<input type='submit' class='fondo' value='"._T("tradlang:ajoutercode")."'>";
+  echo "</form></td></tr>";
+
+  echo "</table>";
+  fin_cadre_relief();
+
+  debut_cadre_relief("", false, "", _T('tradlang:traductions'));
+  fin_cadre_relief();
+  /*
+  echo "<span style='float:left;width:150px;padding-left:10px;'>".propre(_T('tradlang:languemere'))."</span>";  	
+  echo "<select name='languemere'>\n";
+  $opts = array();
+  foreach($modok as $cle=>$item)
+    {
+      if (strncmp($cle, "langue_", 7) == 0)
+	{
+	  $sel = "";
+	  $lg = substr($cle,7);
+	  if ($lg == "fr")
+	    $sel = " selected ";
+	  $opts[] =  "<option  value='".$lg."' ".$sel.">".traduire_nom_langue($lg)."</option>\n";
+	}      
+    }
+  sort($opts);
+  echo implode("", $opts);
+  echo "</select>\n";
+  echo "<br>\n";
+  echo "<br>\n";
+  */
+
+
+  return true;
+}
+
+
+// cree un module dans la base de donnee
+// (lit les fichiers langues et importe dans la base)
 function tradlang_renseignebase($module)
 {
   $prefix = $GLOBALS['table_prefix'];
@@ -361,6 +440,9 @@ function tradlang_getmodules_fics($rep)
   return $ret;
 }
 
+
+// verifie si le fichier passe en param
+// est bien un fichier de langue
 function tradlang_verif($fic)
 {
   include($fic);
@@ -380,18 +462,34 @@ function tradlang_getmodules_base()
   $prefix = $GLOBALS['table_prefix'];
   $ret = array();
 
+  // recup. des modules
   $req = "SELECT * FROM ".$prefix."_tradlang_modules;";
   $res = spip_query($req);
   if ($res)
     {
       while($row=spip_fetch_array($res))
-	$ret[$row["nom_mod"]] = $row;
+	{
+	  $nom_mod = $row["nom_mod"];
+	  $ret[$nom_mod] = $row;
+	  
+	  // recup des langues pour le module
+	  $req2 = " SELECT DISTINCT lang FROM ".$prefix."_tradlang WHERE module='".$nom_mod."'";
+	  $res2 = spip_query($req2);
+	  while($row2=spip_fetch_array($res2))
+	    {
+	      $lg = $row2["lang"];
+	      // calcul du nom fichier langue
+	      $ret[$nom_mod]["langue_".$lg] = $row["lang_prefix"]."_".$lg.".php";
+	    }	  
+	}
     }
   
   return $ret;
 }
 
 
+// teste si les table liees au module
+// sont presentes dans la base
 function tradlang_tablesabsentes()
 {
   $prefix = $GLOBALS['table_prefix'];
@@ -405,6 +503,8 @@ function tradlang_tablesabsentes()
   return true;
 }
 
+
+// gestion de la cinematique "tables absentes"
 function tradlang_gere_tablesabsentes()
 {
   global $connect_statut;
@@ -465,6 +565,8 @@ function tradlang_gere_tablesabsentes()
   return true;
 }
 
+
+// creation des tables
 function tradlang_creertables()
 {
   // creation des tables tradlang
@@ -481,6 +583,8 @@ function tradlang_creertables()
   return true;
 }
 
+
+// requere mysql pour creer les tables
 function tradlang_req()
 {
   $prefix = $GLOBALS['table_prefix'];  
