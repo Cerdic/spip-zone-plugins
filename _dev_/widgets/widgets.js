@@ -88,7 +88,7 @@ $.fn.activatewidget = function() {
 	        $(me)
 	        .find("img.widget-searching")
 	          .remove();
-	        $(".bouton-mobile", me).show();
+	        $(".widgets_boutons", me).show();
 	        return false;
         }
         $(me)

@@ -88,15 +88,15 @@ function action_widgets_html_dist() {
 			echo <<<FIN_FORM
 
 <form method="post" action="{$widgetsAction}"
-	onkeyup="$(&quot;.bouton-mobile&quot;, this).show();"
-	onsubmit="$(&quot;.bouton-mobile&quot;, this).hide();">
+	onkeyup="$(&quot;.widgets_boutons&quot;, this).show();"
+	onsubmit="$(&quot;.widgets_boutons&quot;, this).hide();">
   {$n->code()}
   {$n->input($type, $inputAttrs)}
-  <div style="float:right; width:150px">
+  <div class="widgets_boutons">
   <div style="position:absolute;">
-  <input type="submit" value="ok" class="bouton-mobile" style="display:none;" />
-  <input class="cancel_widget bouton-mobile" type="button" value="cancel" style="display:none;" />
-  <input class="hide_widget bouton-mobile" type="button" value="hide" style="display:none;" />
+  <input type="submit" value="ok" class="bouton-mobile" />
+  <input class="cancel_widget bouton-mobile" type="button" value="cancel" />
+  <input class="hide_widget bouton-mobile" type="button" value="hide" />
   </div>
   </div>
 </form>

@@ -12,3 +12,8 @@ img.widget-edit {
 .widget-autorise:hover, .widget-hover {
 	background-color: #e3eeee;
 }
+.widgets_boutons {
+	float: right;
+	width: 150px;
+	display: none;
+}
