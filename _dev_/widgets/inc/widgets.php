@@ -71,21 +71,26 @@ class Widget {
 		.'" value="'.$this->md5().'" />'."\n";
 	}
 
-	function input($type = 'ligne') {
+	function input($type = 'ligne', $attrs = array()) {
 		switch ($type) {
 			case 'texte':
-				return '<textarea class="widget-active"'
+				$return = '<textarea class="widget-active"'
 				. ' name="content_'.$this->key.'">'
 				. entites_html($this->text)
 				. '</textarea>'."\n";
+				break;
 			case 'ligne':
 			default:
-				return '<input class="widget-active" type="text"'
+				$return = '<input class="widget-active" type="text"'
 				. ' name="content_'.$this->key.'"'
 				. ' value="'
 				. entites_html($this->text)
 				. '" />'."\n";
 		}
+		foreach ($attrs as $attr=>$val) {
+			$return = inserer_attribut($return, $attr, $val);
+		}
+		return $return;
 	}
 }
 
