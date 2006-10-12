@@ -151,7 +151,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			}
 		}
 
-	} elseif ($droits_modif) { // appels ulterieurs
+	} elseif ($droits_modif || ($insert && !$id_agenda)) { // appels ulterieurs
 		// gestion des requetes de mises à jour dans la base
 		$id_agenda = intval(_request('id_agenda'));
 		$supp_evenement = _request('supp_evenement');
@@ -291,7 +291,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 				// regler les entites si il en reste
 				$mess_iso = strtr($mess_iso, $trans_tbl);
 				
-				if ($id_message!=0){
+				if ($id_message!=0 && is_array($id_invites) && count($id_invites)){
 					foreach($id_invites as $value){
 						$id_dest=spip_abstract_quote($value);
 						spip_query("INSERT INTO spip_auteurs_messages (id_message, id_auteur, vu) VALUES ($id_message, $id_dest,'non');");
