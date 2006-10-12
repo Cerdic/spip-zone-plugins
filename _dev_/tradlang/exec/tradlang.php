@@ -297,7 +297,7 @@ function tradlang_renseignebase($module)
       while(list($id, $str) = each($chs))
 	{
 	  $quer = "INSERT INTO ".$prefix."_tradlang (id, module, str, lang, orig, status) ".
-	    "VALUES ('".$id."', '".$nom_nmod."', '".
+	    "VALUES ('".$id."', '".$nom_mod."', '".
 	    mysql_escape_string($str)."', '".$lg."', ".$orig.", '') ";
 	  
 	  $res = spip_query($quer);      
