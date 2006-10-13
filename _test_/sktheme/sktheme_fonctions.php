@@ -56,7 +56,7 @@ function sktheme_affichage_final($texte){
       AND ($GLOBALS['meta']['sktheme_switcher_activated']=="yes")) {
     if ($html) {
 		
-      // Doit-on afficher le seleecteur de squelette ? (Fonctionnalite restreinte aux seuls administrateurs ?)
+      // Doit-on afficher le selecteur de squelette ? (Fonctionnalite restreinte aux seuls administrateurs ?)
       $afficherSelecteur=TRUE;
       if (isset($GLOBALS['meta']['sktheme_switcher_admin_only']) 
 	  AND ($GLOBALS['meta']['sktheme_switcher_admin_only']=="yes") 

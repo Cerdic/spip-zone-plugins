@@ -48,7 +48,7 @@ function exec_sktheme_doc() {
     $contenu = str_replace("<", "&lt;", $contenu);
     $contenu = str_replace(">", "&gt;", $contenu);
     $contenu = str_replace(" ", "&nbsp;", $contenu);
-    $contenu = str_replace("//", "<br>", $contenu);
+    $contenu = str_replace("//", "<br />", $contenu);
     echo $contenu;
   } else {
     echo _T('sktheme:to_be_done');
@@ -60,9 +60,9 @@ function exec_sktheme_doc() {
     lire_fichier ($todo,$contenu);
     $list = split('\/\/',$contenu);
     foreach ($list as $lign) {
-      echo "$lign<br>";
+      echo "$lign<br />";
     }
-    echo "<br>";
+    echo "<br />";
   } else {
     echo _T('sktheme:to_be_done');
   }

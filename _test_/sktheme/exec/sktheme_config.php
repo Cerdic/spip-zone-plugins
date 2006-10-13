@@ -58,22 +58,22 @@ function exec_sktheme_config() {
   }
   
   // Set directories
-  echo '<FORM ACTION="'.generer_url_ecrire("sktheme_config", "sktheme_action=set_dir").'" METHOD="POST">';
+  echo '<form action="'.generer_url_ecrire("sktheme_config", "sktheme_action=set_dir").'" method="post">';
   
   // Set squelettes_public_dir
   debut_cadre_gris_clair();
-  echo '<strong>'._T('sktheme:squelettes_public_dir').' : </strong><INPUT TYPE=TEXT  NAME="squelettes_public_dir" SIZE=25 VALUE="'.
+  echo '<strong>'._T('sktheme:squelettes_public_dir').' : </strong><input type="text" name="squelettes_public_dir" size="25" value="'.
     $GLOBALS['meta']['sktheme_squelettes_public_dir'].'">';
   fin_cadre_gris_clair();
   
   // Set habillages_public_dir
   debut_cadre_couleur();
-  echo '<strong>'._T('sktheme:habillages_public_dir').' : </strong><INPUT TYPE=TEXT  NAME="habillages_public_dir" SIZE=25 VALUE="'.
+  echo '<strong>'._T('sktheme:habillages_public_dir').' : </strong><input type="text" name="habillages_public_dir" size="25" value="'.
     $GLOBALS['meta']['sktheme_habillages_public_dir'].'">';
   fin_cadre_couleur(); 
   
-  echo '<P><DIV ALIGN="RIGHT"><INPUT TYPE=SUBMIT VALUE="'._T('sktheme:save_public_directories').'"></DIV></P>';
-  echo '</FORM>';
+  echo '<div><div style="text-align:right"><input type="submit" value="'._T('sktheme:save_public_directories').'" /></div></div>';
+  echo '</form>';
  
   fin_cadre_trait_couleur();  
   
@@ -98,57 +98,57 @@ function exec_sktheme_config() {
   }
   debut_cadre_trait_couleur('', false, "sktheme_config", _T('sktheme:themes_switcher'));
   
-  echo '<FORM ACTION="'.generer_url_ecrire("sktheme_config", "sktheme_action=set_switcher").'" METHOD="POST">';
+  echo '<form action="'.generer_url_ecrire("sktheme_config", "sktheme_action=set_switcher").'" method="post">';
   
   // Set sktheme_switcher_activated
   debut_cadre_gris_clair();
   echo '<strong>'._T('sktheme:switcher_activated').' : </strong>';
-  echo '<INPUT TYPE=RADIO  NAME="switcher_activated"  VALUE="yes" ';
+  echo '<input type="radio" name="switcher_activated"  value="yes" ';
   if (isset($GLOBALS['meta']['sktheme_switcher_activated']) AND ($GLOBALS['meta']['sktheme_switcher_activated']=="yes")) {
-    echo " CHECKED ";
+    echo ' checked="checked" ';
   }
-  echo '>'._T('sktheme:yes');
-  echo '<INPUT TYPE=RADIO  NAME="switcher_activated"  VALUE="no" ';
+  echo ' />'._T('sktheme:yes');
+  echo '<input type="radio" name="switcher_activated" value="no" ';
   if (isset($GLOBALS['meta']['sktheme_switcher_activated']) AND ($GLOBALS['meta']['sktheme_switcher_activated']=="no")) {
-    echo " CHECKED ";
+    echo ' checked="checked" ';
   }
-  echo '>'._T('sktheme:no');
+  echo ' />'._T('sktheme:no');
   fin_cadre_gris_clair();
   
   // Set sktheme_switcher_admin_only
   debut_cadre_couleur();
   echo '<strong>'._T('sktheme:switcher_admin_only').' : </strong>';
-  echo '<INPUT TYPE=RADIO  NAME="switcher_admin_only"  VALUE="yes" ';
+  echo '<input type="radio" name="switcher_admin_only"  value="yes" ';
   if (isset($GLOBALS['meta']['sktheme_switcher_admin_only']) AND ($GLOBALS['meta']['sktheme_switcher_admin_only']=="yes")) {
-    echo " CHECKED ";
+    echo ' checked="checked" ';
   }
-  echo '>'._T('sktheme:yes');
-  echo '<INPUT TYPE=RADIO  NAME="switcher_admin_only"  VALUE="no" ';
+  echo ' />'._T('sktheme:yes');
+  echo '<input type="radio" name="switcher_admin_only"  value="no" ';
   if (isset($GLOBALS['meta']['sktheme_switcher_admin_only']) AND ($GLOBALS['meta']['sktheme_switcher_admin_only']=="no")) {
-    echo " CHECKED ";
+    echo ' checked="checked" ';
   }
-  echo '>'._T('sktheme:no');
+  echo ' />'._T('sktheme:no');
   fin_cadre_couleur(); 
   
   // Set theme_switcher_style
   debut_cadre_gris_clair();
   echo '<strong>'._T('sktheme:theme_switcher_style').' : </strong>';
-  echo "<br>";
-  echo '<TEXTAREA  COLS="50" ROWS="8" NAME="theme_switcher_style">';
-  echo $GLOBALS['meta']['sktheme_theme_switcher_style'].'</TEXTAREA>';  
+  echo "<br />";
+  echo '<textarea  cols="50" rows="8" name="theme_switcher_style">';
+  echo $GLOBALS['meta']['sktheme_theme_switcher_style'].'</textarea>';  
   fin_cadre_gris_clair();
   
   // Set habillage_switcher_style
   debut_cadre_couleur();
   echo '<strong>'._T('sktheme:habillage_switcher_style').' : </strong>';
-  echo "<br>";
-  echo '<TEXTAREA  COLS="50" ROWS="8" NAME="habillage_switcher_style">';
-  echo $GLOBALS['meta']['sktheme_habillage_switcher_style'].'</TEXTAREA>';  
+  echo "<br />";
+  echo '<textarea  cols="50" rows="8" name="habillage_switcher_style">';
+  echo $GLOBALS['meta']['sktheme_habillage_switcher_style'].'</textarea>';  
   fin_cadre_couleur(); 
   
     
-  echo '<P><DIV ALIGN="RIGHT"><INPUT TYPE=SUBMIT VALUE="'._T('sktheme:save_switcher_options').'"></DIV></P>';
-  echo '</FORM>';
+  echo '<div><div style="text-align:right"><input type="submit" value="'._T('sktheme:save_switcher_options').'" /></div></div>';
+  echo '</form>';
   
   fin_cadre_trait_couleur();  
   

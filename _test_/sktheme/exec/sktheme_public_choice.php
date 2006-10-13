@@ -74,7 +74,7 @@ function exec_sktheme_public_choice() {
   
   // Save if needed
   if ($sktheme_action=="set_squelette") {
-    echo _T('sktheme:update_squelette_to') . $squelette_public_name. "<br>";
+    echo _T('sktheme:update_squelette_to') . $squelette_public_name. "<br />";
     ecrire_meta('sktheme_squelette_public_name',$squelette_public_name);
     // Set habillage to the original one when squelette is changed
     ecrire_meta('sktheme_habillage_public_name',$original);
@@ -84,33 +84,33 @@ function exec_sktheme_public_choice() {
   }
   	
   echo '<br />';
-  echo '<FORM ACTION="'.generer_url_ecrire("sktheme_public_choice", "sktheme_action=set_squelette").'" METHOD="POST">';
+  echo '<form action="'.generer_url_ecrire("sktheme_public_choice", "sktheme_action=set_squelette").'" method="post">';
   foreach( $squelettes_list as $key => $value) {
     $s_info = sktheme_xml_get_infos($value,"squelette");
     echo debut_cadre_gris_clair();
     echo $s_info['extra_img_puce'];
     if ($squelette_public_name==$key) {
-      echo '<INPUT TYPE=RADIO  NAME="squelette_public_name" VALUE="'.$key.'" CHECKED >';
+      echo '<input type="radio" name="squelette_public_name" value="'.$key.'" checked="checked" />';
       $o_info = $s_info;
     } else {
-      echo '<INPUT TYPE=RADIO  NAME="squelette_public_name" VALUE="'.$key.'">';
+      echo '<input type="radio" name="squelette_public_name" value="'.$key.'" />';
     }
     echo bouton_block_invisible("$key");
     echo "<strong>$key</strong>";
     echo debut_block_invisible("$key");
-    echo _T('version') .' '.  $s_info['version'] . " | <strong>".$s_info['extra_titre_etat']."</strong><br/>";
+    echo _T('version') .' '.  $s_info['version'] . " | <strong>".$s_info['extra_titre_etat']."</strong><br />";
     if (isset($s_info['description']))
-      echo "<hr/>" . propre($s_info['description']) . "<br/>";
+      echo "<hr />" . propre($s_info['description']) . "<br />";
     if (isset($s_info['auteur']))
-      echo "<hr/>" . _T('auteur') .' '. propre($s_info['auteur']) . "<br/>";
+      echo "<hr />" . _T('auteur') .' '. propre($s_info['auteur']) . "<br />";
     if (isset($s_info['lien']))
-      echo "<hr/>" . _T('info_url') .' '. propre($s_info['lien']) . "<br/>";
+      echo "<hr />" . _T('info_url') .' '. propre($s_info['lien']) . "<br />";
     echo fin_block();
     echo fin_cadre_gris_clair();
   }
   echo '<br />';
-  echo '<P><DIV ALIGN="RIGHT"><INPUT TYPE=SUBMIT VALUE="'._T('sktheme:save_squelette').'"></DIV></P>';
-  echo '</FORM>';
+  echo '<div><div style="text-align:right"><input type="submit" value="'._T('sktheme:save_squelette').'"></div></div>';
+  echo '</form>';
   
   
   fin_cadre_trait_couleur();
@@ -138,7 +138,7 @@ function exec_sktheme_public_choice() {
   
   // Save habillage if needed
   if ($sktheme_action=="set_habillage") {
-    echo _T('sktheme:update_habillage_to') . $habillage_public_name . "<br>";
+    echo _T('sktheme:update_habillage_to') . $habillage_public_name . "<br />";
     ecrire_meta('sktheme_habillage_public_name',$habillage_public_name);
     ecrire_metas();
   } else {
@@ -146,7 +146,7 @@ function exec_sktheme_public_choice() {
   }
     
   echo '<br />';
-  echo '<FORM ACTION="'.generer_url_ecrire("sktheme_public_choice", "sktheme_action=set_habillage").'" METHOD="POST">';
+  echo '<form action="'.generer_url_ecrire("sktheme_public_choice", "sktheme_action=set_habillage").'" method="post">';
   foreach( $habillages_list as $key => $value) {
     $h_info = sktheme_xml_get_infos($value,"habillage");
 
@@ -174,32 +174,32 @@ function exec_sktheme_public_choice() {
 	echo $h_info['extra_img_puce'];
       }
       if ($habillage_public_name==$key) {
-	echo '<INPUT TYPE=RADIO  NAME="habillage_public_name" VALUE="'.$key.'" CHECKED >';
+	echo '<input type=radio  name="habillage_public_name" value="'.$key.'" checked="checked" />';
       } else {
-	echo '<INPUT TYPE=RADIO  NAME="habillage_public_name" VALUE="'.$key.'">';
+	echo '<input type=radio  name="habillage_public_name" value="'.$key.'" />';
       }
       echo bouton_block_invisible("$key");
       if ($key == $original) {
 	echo "<strong><i>$key (".$o_info['nom'].")</i></strong>";
 	echo debut_block_invisible("$key");
-	echo _T('version') .' '.  $o_info['version'] . " | <strong>".$o_info['extra_titre_etat']."</strong><br/>";
+	echo _T('version') .' '.  $o_info['version'] . " | <strong>".$o_info['extra_titre_etat']."</strong><br />";
 	if (isset($o_info['description']))
-	  echo "<hr/>" . propre($o_info['description']) . "<br/>";
+	  echo "<hr />" . propre($o_info['description']) . "<br />";
 	if (isset($o_info['auteur']))
-	  echo "<hr/>" . _T('auteur') .' '. propre($o_info['auteur']) . "<br/>";
+	  echo "<hr />" . _T('auteur') .' '. propre($o_info['auteur']) . "<br />";
 	if (isset($o_info['lien']))
-	  echo "<hr/>" . _T('info_url') .' '. propre($o_info['lien']) . "<br/>";
+	  echo "<hr />" . _T('info_url') .' '. propre($o_info['lien']) . "<br />";
 
       } else {
 	echo "<strong>$key</strong>";
 	echo debut_block_invisible("$key");
-	echo _T('version') .' '.  $h_info['version'] . " | <strong>".$h_info['extra_titre_etat']."</strong><br/>";
+	echo _T('version') .' '.  $h_info['version'] . " | <strong>".$h_info['extra_titre_etat']."</strong><br />";
 	if (isset($h_info['description']))
-	  echo "<hr/>" . propre($h_info['description']) . "<br/>";
+	  echo "<hr />" . propre($h_info['description']) . "<br />";
 	if (isset($h_info['auteur']))
-	  echo "<hr/>" . _T('auteur') .' '. propre($h_info['auteur']) . "<br/>";
+	  echo "<hr />" . _T('auteur') .' '. propre($h_info['auteur']) . "<br />";
 	if (isset($h_info['lien']))
-	  echo "<hr/>" . _T('info_url') .' '. propre($h_info['lien']) . "<br/>";
+	  echo "<hr />" . _T('info_url') .' '. propre($h_info['lien']) . "<br />";
       }
       echo fin_block();
       echo fin_cadre_gris_clair();
@@ -207,8 +207,8 @@ function exec_sktheme_public_choice() {
   }
     
   echo '<br />';
-  echo '<P><DIV ALIGN="RIGHT"><INPUT TYPE=SUBMIT VALUE="'._T('sktheme:save_habillage').'"></DIV></P>';
-  echo '</FORM>';
+  echo '<div><div align="right"><input type="submit" value="'._t('sktheme:save_habillage').'"></div></div>';
+  echo '</form>';
   
   fin_cadre_trait_couleur();
   

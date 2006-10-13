@@ -25,25 +25,26 @@ $GLOBALS[$GLOBALS['idx_lang']] =
 
 	  // C
 	  "configuration" => "Configuration avanc&eacute;e",
-	  "config_doc_directories" => "<b>R&eacute;pertoires</b>:<br> 
+	  "config_doc_directories" => "<b>R&eacute;pertoires</b>:<br /> 
 	  Il est possible de red&eacute;finir les r&eacute;pertoires de stockage 
 	  de vos <i>'squelettes'</i> et de vos <i>'habillages'</i>, par 
 	  d&eacute;faut il s'agit de <i>'themes/squelettes'</i> et de 
 	  <i>'themes/habillages'</i>, les r&eacute;pertoires sont toujours 
 	  relatifs &agrave; la racine de votre site SPIP 
 	  ",
-	  "config_doc_switcher" => "<b>Switcher</b>:<br>
-	  Le 'switcher' de th&egrave;mes permet de faire apparaitre une liste de
-	  selection de th&egrave;mes dans l'espace public et ainsi tester
+	  "config_doc_switcher" => "<b>Switcher</b>:<br />
+	  Le 'switcher' de th&egrave;mes permet de faire appara&icirc;tre une liste de
+	  s&eacute;lection de th&egrave;mes dans l'espace public et ainsi tester
 	  les diff&eacute;rents th&egrave;mes plus rapidement. Il est possible
-	  de ne donner cette possibilit&eacute; qu'aux administrateurs<br>
-	  De plus vous pouvez changer le style de votre selecteur de
+	  de ne donner cette possibilit&eacute; qu'aux administrateurs<br />
+	  De plus vous pouvez changer le style de votre s&eacute;lecteur de
 	  th&egrave;mes ici.
 	  <br>
 	  <br>
-	  Il existe &eacute;galement une balise <b>#SKTHEME_HABILLAGES_SWITCHER</b>
+	  Il existe &eacute;galement une balise <br />
+	  <b><small>#SKTHEME_HABILLAGES_SWITCHER</small></b><br />
 	  qu'il est possible d'int&eacute;grer &agrave; vos squelettes pour disposer
-	  cette fois d'un selectionneur d'habillage correspondant &agrave; votre
+	  cette fois d'un s&eacute;lecteur d'habillage correspondant &agrave; votre
 	  choix de squelette. Une fois encore vous pouvez en modifier le style si besoin.
 	  ",
 	  // D
@@ -86,20 +87,20 @@ $GLOBALS[$GLOBALS['idx_lang']] =
 	  "public_choice" => "Choix th&egrave;me public",
 	  "public_theme_choice" => "Choix du th&egrave;me de l'espace public",
 	  "public_themes_config" => "Configuration pour les th&egrave;mes publics",
-	  "public_theme_doc_squelette" => "<b>Choix du squelette :</b><br>
+	  "public_theme_doc_squelette" => "<b>Choix du squelette :</b><br />
 	  Chaque fois que vous choisirez un squelette (plus exactement une
 	  distribution de squelettes) la liste des habillages disponibles se
 	  mettra &agrave; jour. Le petit carr&eacute;s indique l'&eacute;stat de
-	  la distribution de squelette, stable, test, experimentale ...<br>
+	  la distribution de squelette, stable, test, experimentale ...<br />
 	  Pour plus de d&eacute;tail sur une distribution cliquez sur la
 	  fl&egrave;che noire.
 	  Il est possible de trouver un r&eacute;pertoire de th&egrave;mes exemple
 	  sur http:skedus.free.fr
 	  ",
-	  "public_theme_doc_habillage" => "<b>Choix de l'habillage :</b><br>
+	  "public_theme_doc_habillage" => "<b>Choix de l'habillage :</b><br />
 	  Les habillages permettent de modifier les couleurs et l'aspect
 	  graphique de votre distribution de squelettes. Il s'agit de CSS et/ou d'images
-	  etc ...<br> 
+	  etc ...<br /> 
 	  Une distribution de squelette contient toujours une
 	  pr&eacute;sentation graphique par d&eacute;faut, ceci correspond
 	  &agrave; l'habillage nomm&eacute; <b>Original</b>.
