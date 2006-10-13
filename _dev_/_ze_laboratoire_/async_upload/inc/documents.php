@@ -196,7 +196,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
           .parent()
           .parent()
           .after(
-            $("body",this.contentDocument.documentElement)
+            $("body",this.contentDocument.documentElement).html()
           );
         });
       }
