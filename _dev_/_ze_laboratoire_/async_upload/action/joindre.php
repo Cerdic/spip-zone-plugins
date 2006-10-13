@@ -80,7 +80,7 @@ function action_joindre_dist()
      }
 
 	if(_request("iframe") == 'iframe') {
-		$redirect = "ecrire/?exec=documents_colonne&id=$id&type=$type&id_document=".array_shift($documents_actifs);
+		$redirect = "ecrire/?exec=documents_colonne&id=$id&type=$type&id_document=".join(',',$documents_actifs)."&iframe=iframe";
 	}
 
 	redirige_par_entete($redirect);

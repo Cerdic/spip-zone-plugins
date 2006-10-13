@@ -207,7 +207,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
             var cont;
             //add a class to new documents
             res.
-            find(">div")
+            find(">div[@class]")
               .addClass("documents_added")
             .end();
             if (jForm.find("input[@name='arg']").val().search("vignette")!=-1)
@@ -220,8 +220,10 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
             find("div.documents_added")
               .removeClass("documents_added")
               .hide()
-              .show("normal",function(){\$(this).overflow("visible")})
-              .overflow("visible");
+              .show("normal",function(){
+                \$(this).css({"height":"","overflow":""});
+              })
+              .overflow("");
           }
           //upload_error
           if(res.is(".upload_error")) {
