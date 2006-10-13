@@ -25,12 +25,13 @@
 	
 	// Demande-t-on un cookie de squelette ?
 	if (isset($_GET['var_skel'])) {
+		include_spip('inc/cookie');
 		// S'il est valide on le pose
 		if (isset($squelettes_alternatifs[$_GET['var_skel']]))
-			setcookie('spip_skel', $_COOKIE['spip_skel'] = $_GET['var_skel'], NULL, '/');
+			spip_setcookie('spip_skel', $_COOKIE['spip_skel'] = $_GET['var_skel'], NULL, '/');
 		// S'il est invalide on supprime un eventuel cookie
 		else
-			setcookie('spip_skel', $_COOKIE['spip_skel'] = '', -24*3600, '/');
+			spip_setcookie('spip_skel', $_COOKIE['spip_skel'] = '', -24*3600, '/');
 	}
 
 	// Porte-t-on un cookie de squelette ?
