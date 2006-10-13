@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_documents_colonne_dist()
 {
-	global $id, $type;
+	global $id, $type, $id_document;
 	$id = intval($id);
 
 	if (!($type == 'article' 
@@ -27,7 +27,11 @@ function exec_documents_colonne_dist()
 
 	include_spip("inc/documents");
 	include_spip("inc/presentation");
-	ajax_retour(afficher_documents_colonne($id, $type, true));
+
+	// TODO: return au lieu de echo
+	ajax_retour(
+	afficher_case_document($id_document, $id, $script, $type, $deplier = true)
+	);
 }
 
 ?>

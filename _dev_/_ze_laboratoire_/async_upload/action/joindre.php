@@ -78,8 +78,11 @@ function action_joindre_dist()
 	include_spip('inc/rubriques');
 	calculer_rubriques();
      }
-     
-  if(_request("iframe")) return;
+
+	if(_request("iframe") == 'iframe') {
+		$redirect = "ecrire/?exec=documents_colonne&id=$id&type=$type&id_document=".array_shift($documents_actifs);
+	}
+
 	redirige_par_entete($redirect);
      ## redirection a supprimer si on veut poster dans l'espace prive directement (UPLOAD_DIRECT)
 }
