@@ -17,6 +17,7 @@
 	<prefix> 
 	portfolio
 	</prefix>
+	<fonctions>portfolio_fonctions.php</fonctions>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>portfolio_pipeline.php</inclure>

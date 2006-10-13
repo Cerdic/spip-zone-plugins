@@ -17,7 +17,8 @@
 	#SET{nombre_pages,#GRAND_TOTAL}
 	#SET{derniere, #GET{page_courante}|plus{#GET{max}}|moins{1}|min{#GET{nombre_pages}}}
 	#SET{item, #COMPTEUR_BOUCLE|moins{1}}
-	#SET{texte,#LOGO_DOCUMENT||image_reduire{0,50}}
+	#SET{recadre,#LARGEUR|min{#HAUTEUR}}
+	#SET{texte,#LOGO_DOCUMENT||image_recadre{#GET{recadre},#GET{recadre}}|image_reduire{50}}
 	[<span class="imagette">(#INCLURE{fond=modeles/paginationitem}{num=#COMPTEUR_BOUCLE}{texte=#GET{texte}}{separateur=#GET{separateur}}{url=#GET{url}|parametre_url{#GET{debut},#GET{item}}|ancre_url{#GET{ancre}}}{page_courante=#GET{page_courante}}{derniere=#GET{derniere}})</span>]
 </BOUCLE_imagettes>
 </span>
