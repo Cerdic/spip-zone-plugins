@@ -205,11 +205,23 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
           //upload_document_added
           if(res.is(".upload_document_added")) {
             var cont;
+            //add a class to new documents
+            res.
+            find(">div")
+              .addClass("documents_added")
+            .end();
             if (jForm.find("input[@name='arg']").val().search("vignette")!=-1)
               cont = $("#liste_images").prepend(res.html());
             else
               cont = $("#liste_documents").prepend(res.html());
-            cont.find("div").eq(0).hide().show("normal",function(){\$(this).overflow("visible")}).overflow("visible");
+            //find added documents, remove label and show them nicely
+            //set overflow to visible to completely show the overlay icon
+            cont.
+            find("div.documents_added")
+              .removeClass("documents_added")
+              .hide()
+              .show("normal",function(){\$(this).overflow("visible")})
+              .overflow("visible");
           }
           //upload_error
           if(res.is(".upload_error")) {
@@ -217,7 +229,13 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
           } 
           //upload_zip_list
           if(res.is(".upload_zip_list")) {
-            jForm.after(res.html());            
+            var zip_form = $("<div>").append(res.html());
+            zip_form
+            .find("form")
+              .attr("target","upload_frame")
+              .append("<input type='hidden' name='iframe' value='iframe'>")
+            .end();
+            jForm.after(zip_form.html());       
           }
         });
       
