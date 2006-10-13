@@ -71,7 +71,7 @@ function habillages_affichage_squelettes($fichier_plugin_xml) {
 	fin_boite_info();
 }
 
-function habillages_affichage_couleurs($fichier_plugin_xml) {
+function habillages_affichage_themes($fichier_plugin_xml) {
 	global $couleur_claire;
 	global $couleur_foncee;
 	

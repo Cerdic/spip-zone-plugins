@@ -12,7 +12,7 @@ include_spip('inc/actions');
 include_spip('inc/habillages_plugins');
 
 // http://doc.spip.org/@exec_admin_plugin
-function exec_habillages_squelettes() {
+function exec_habillages_themes() {
 	global $connect_statut;
 	global $connect_toutes_rubriques;
 	global $spip_lang_right;
@@ -28,22 +28,20 @@ function exec_habillages_squelettes() {
 	
 	if (_request('changer_plugin')=='oui'){
 		lire_metas();
-		$lire_meta_squelettes = array($GLOBALS['meta']['habillages_squelettes']);
-		ecrire_plugin_actifs($lire_meta_squelettes,'',$operation='enleve');
-		ecrire_meta('habillages_themes', 'defaut');
+		$lire_meta_styles = array($GLOBALS['meta']['habillages_themes']);
+		ecrire_plugin_actifs($lire_meta_styles,'',$operation='enleve');
 		ecrire_metas;
 		lire_metas();
-		$lire_meta_squelettes_modifs = array(_request('statusplug'));
-		ecrire_plugin_actifs($lire_meta_squelettes_modifs,'',$operation='ajoute');
-		ecrire_meta('habillages_squelettes', _request('statusplug'));
+		$lire_meta_styles_modifs = array(_request('statusplug'));
+		ecrire_plugin_actifs($lire_meta_styles_modifs,'',$operation='ajoute');
+		ecrire_meta('habillages_themes', _request('statusplug'));
 		ecrire_metas;
 	}
 
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
 	global $couleur_claire;
-	global $couleur_foncee;
-	debut_page(_T('habillages:icone_config_habillages'), "configuration", "habillages");
+	debut_page(_T('habillages:icone_habillages_styles'), "configuration", "styles");
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
 div.cadre-padding ul li {
@@ -103,39 +101,40 @@ EOF;
 
 	echo "<br/><br/>";
 	
-	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_squelettes-48.png">';
-	gros_titre(_T('habillages:icone_habillages_squelettes'));
+	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_themes-48.png">';
+	gros_titre(_T('habillages:icone_habillages_styles'));
 
 	barre_onglets("habillages", "");
 	
 	debut_gauche();
+	
 	debut_boite_info();
-		echo "<table><tr>";
+	echo "<table><tr>";
 	echo "<td colspan='2'>";
 	echo _T('habillages:accueil_commentaire');
 	echo "</td>";
 	echo "<tr>";
-	echo "<td colspan='2' class='used'>";
+	echo "<td colspan='2' class='bold_just'>";
 	echo _T('habillages:accueil_squelettes');
 	echo "</td>";
 	echo "</tr>";
 	echo "<tr>";
 	echo "<td>";
-	echo '<img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/habillages_squelettes_bw-22.png">';
+	echo '<img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/habillages_squelettes-22.png">';
 	echo "</td>";
-	echo "<td class='used'>";
-	echo _T('habillages:lien_squelettes_off');
+	echo "<td class='bold_just'>";
+	echo "<a href='".generer_url_ecrire('habillages_squelettes')."'>"._T('habillages:lien_squelettes_on')."</a>";
 	echo "</td>";
 	echo "</tr>";
-	echo "<td colspan='2' class='bold_just'>";
+	echo "<td colspan='2' class='used'>";
 	echo _T('habillages:accueil_styles');
 	echo "</td>";
 	echo "</tr>";
 	echo "<td>";
-	echo '<img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/habillages_themes-22.png">';
+	echo '<img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/habillages_themes_bw-22.png">';
 	echo "</td>";
-	echo "<td class='bold_just'>";
-	echo "<a href='".generer_url_ecrire('habillages_styles')."'>"._T('habillages:lien_styles_on')."</a>";
+	echo "<td class='used'>";
+	echo _T('habillages:lien_styles_off');
 	echo "</td>";
 	echo "</tr>";
 	echo "<td colspan='2' class='bold_just'>";
@@ -157,26 +156,59 @@ EOF;
 	debut_cadre_relief();
 
 	global $couleur_foncee;
+	
 	echo "<table border='0' cellspacing='0' cellpadding='5' width='100%'>";
 	echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
-	echo _T('habillages:squelettes_titre')."</font></b></td></tr>";
+	echo _T('habillages:styles_titre')."</font></b></td></tr>";
 	echo "<tr><td class='serif' colspan=4>";
-	echo _T('habillages:squelettes_intro');
+	echo generer_url_post_ecrire("habillages_themes");
+		# Lire le squelette choisi.
+		lire_metas();
+		$lire_meta_squelettes = $GLOBALS['meta']['habillages_squelettes'];
+		# Aller chercher le theme.xml du squelette selectionne, le lire...
+		$theme_squelettes = _DIR_PLUGINS.$lire_meta_squelettes."/theme.xml";
+		lire_fichier($theme_squelettes, $texte_squelettes);
+		# ...et relever le prefixe.
+		$arbre = parse_plugin_xml($texte_squelettes);
+		$arbre = $arbre['theme'][0];
+		$prefixe_theme = trim(applatit_arbre($arbre['prefixe']));
+		
 		# Chercher les fichiers theme.xml.
 		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
+			
+			echo "<ul>";
+			debut_boite_info();
+			echo "<div style='background-color:$couleur_claire'>";
+			echo "<input type='radio' name='statusplug' value=''";
+			lire_metas();
+			if ($GLOBALS['meta']['habillages_themes']=="defaut") {
+				echo " checked='checked'";
+				}
+			echo ">";
+			echo "<strong>Habillage par defaut</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+			echo "<div style='float:right';><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/capture.png' alt=description' class='preview' /></div>";
+			# Ajouter : si theme.xml ne contient pas de theme.xml, on prend la description de plugin.xml. 
+			# Il est necessaire que theme.xml puisse definir les caracteristiques d'un squelette, d'un style, 
+			# d'un jeu d'images.
+			echo "<small>Cet style est d'origine sur SPIP.</small><br /><br /><hr>";
+			echo "<div class='auteur'>Collectif</div><hr>";
+			echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/stable.png' />";
+			echo "&nbsp;<small><strong><font COLOR='#".$couleur_txt."'>".$titre_etat."</font></strong></small><br />";
+			fin_boite_info();
+			echo "</ul>";
 		
 		# Pour chaque fichier theme.xml trouve, on releve le <type> et on ne garde que 
-		# les squelettes pour les lister.
+		# les styles pour les lister.
 		foreach ($fichier_theme as $fichier){
+			$arbre = "";
 			lire_fichier($fichier, $texte);
 			$arbre = parse_plugin_xml($texte);
 			$arbre = $arbre['theme'][0];
 			$type_theme = trim(applatit_arbre($arbre['type']));
+			$squelettes_theme = array(trim(applatit_arbre($arbre['squelettes'])));
 			$nom_dossier_theme = dirname ($fichier);
 			$fichier_plugin_xml = $nom_dossier_theme."/plugin.xml";
-			
-			echo generer_url_post_ecrire("habillages_squelettes");
 			
 				if (!is_file($fichier_plugin_xml)) {
 					# Mettre dans la construction du dossier habillages-data (lorsque les themes se
@@ -187,10 +219,10 @@ EOF;
 					# dans le dossier de theme.
 					spip_log("Le dossier ".$nom_dossier_theme." ne contient pas de fichier plugin.xml. Le plugin habillages ne peut pas gerer les elements de ce dossier.");
 				}
-				
-				if ($type_theme=="squelettes" && is_file($fichier_plugin_xml)) {
+
+				if ($type_theme=="themes" && $prefixe_theme == $squelettes_theme[0] && is_file($fichier_plugin_xml)) {
 					echo "<ul>";
-					habillages_affichage_squelettes($fichier_plugin_xml);
+					habillages_affichage_themes($fichier_plugin_xml);
 					echo "</ul>";
 				}
 				
