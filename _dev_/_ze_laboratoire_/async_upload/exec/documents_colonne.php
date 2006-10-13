@@ -29,8 +29,9 @@ function exec_documents_colonne_dist()
 	include_spip("inc/presentation");
 
 	// TODO: return au lieu de echo
-	ajax_retour(
-	afficher_case_document($id_document, $id, $script, $type, $deplier = true)
+	ajax_retour("<div class='upload_answer upload_document_added'>".
+	afficher_case_document($id_document, $id, $script, $type, $deplier = true).
+	"</div>"
 	);
 }
 

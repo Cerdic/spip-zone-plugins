@@ -118,7 +118,6 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 
 	// seuls cas connus : exec=articles_edit ou breves_edit
 	$script = $type.'s_edit';
-	$ret = '<div id="documents_colonne">';
 
 	/// Ajouter nouvelle image
 	$ret .= "<a name='images'></a>\n";
@@ -149,14 +148,14 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	//// Images sans documents
 	$images_liees = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l "."WHERE l.id_".$type."=$id AND l.id_document=docs.id_document ".$docs_exclus."AND docs.mode='vignette' ORDER BY docs.id_document");
 
-	$ret .= "\n<p />";
+	$ret .= "\n<p></p><div id='liste_images'>";
 	while ($doc = spip_fetch_array($images_liees)) {
 		$id_document = $doc['id_document'];
 		$ret .= afficher_case_document($id_document, $id, $script, $type, $id_doc_actif == $id_document);
 	}
 
 	/// Ajouter nouveau document
-	$ret .= "<p>&nbsp;</p>\n<a name='documents'></a>\n<a name='portfolio'></a>\n";
+	$ret .= "</div><p>&nbsp;</p>\n<a name='documents'></a>\n<a name='portfolio'></a>\n";
 	if ($type == "article") {
 		if ($GLOBALS['meta']["documents_article"] != 'non') {
 			$titre_cadre = _T('bouton_ajouter_document').aide("ins_doc");
@@ -166,13 +165,13 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 		}
 
 		// Afficher les documents lies
-		$ret .= "<p />\n";
+		$ret .= "<p></p><div id='liste_documents'>\n";
 
 		foreach($documents_lies as $doc) {
 			$ret .= afficher_case_document($doc, $id, $script, $type, $id_doc_actif == $doc);
 		}
+		$ret .= "</div>";
 	}
-	$ret .=  "</div>";
 
 	$ret .= <<<EOF
   <script type="text/javascript">
@@ -181,25 +180,47 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
         return do_async_upload(this);
       });
 
-    var iframe_set = 0;
+    var iframe;
     function do_async_upload(form) {
-      $(form)
-      .attr("target","upload_frame")
-      .find("input[@name='redirect']").val("")
-      .append("<input type='hidden' name='iframe' value='iframe'>");
-
-      if (!iframe_set++) {
-        $("<iframe id='upload_frame' name='upload_frame' frameborder='0' marginwidth='0' marginheight='0' scrolling='yes' style='position:absolute'></iframe>")
-        .appendTo("body")
-        .bind('load', function() {
-          $(form)
-          .parent()
-          .parent()
-          .after(
-            $("body",this.contentDocument.documentElement).html()
-          );
-        });
+      var jForm = $(form)
+      if(!form.async_init) {
+        form.async_init = true
+        jForm
+        .attr("target","upload_frame")
+        .append("<input type='hidden' name='iframe' value='iframe'>")
+        .find("input[@name='redirect']")
+          .val("")
+        .end();
       }
+
+      if (!iframe) {
+        iframe = $("<iframe id='upload_frame' name='upload_frame' frameborder='0' marginwidth='0' marginheight='0' scrolling='yes' style='position:absolute'></iframe>")
+        .appendTo("body");
+      }
+      //onload should trigger the action on the current form
+      iframe.unbind('load')
+      .bind('load', function() {
+          var res = $(".upload_answer",this.contentDocument);
+          //possible classes 
+          //upload_document_added
+          if(res.is(".upload_document_added")) {
+            var cont;
+            if (jForm.find("input[@name='arg']").val().search("vignette")!=-1)
+              cont = $("#liste_images").prepend(res.html());
+            else
+              cont = $("#liste_documents").prepend(res.html());
+            cont.find("div").eq(0).hide().show("normal",function(){\$(this).overflow("visible")}).overflow("visible");
+          }
+          //upload_error
+          if(res.is(".upload_error")) {
+            jForm.after(res.html());
+          } 
+          //upload_zip_list
+          if(res.is(".upload_zip_list")) {
+            jForm.after(res.html());            
+          }
+        });
+      
       return true;
     }
     

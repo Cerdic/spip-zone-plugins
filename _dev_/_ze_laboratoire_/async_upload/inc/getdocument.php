@@ -132,8 +132,8 @@ function check_upload_error($error, $msg='') {
 
 	spip_log ("erreur upload $error");
 
-  if(_request("iframe")) {
-    echo $msg;
+  if(_request("iframe")=="iframe") {
+    echo "<div class='upload_answer upload_error'>$msg</div>";
     exit;
   }
   
@@ -546,6 +546,18 @@ function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash,
 					 'hash' => $hash,
 					 'chemin' => $zip,
 					 'arg' => $arg)));
+	
+	if(_request("iframe")=="iframe") {
+    echo "<div class='upload_answer upload_zip_list'><p>" .
+		_T('upload_fichier_zip_texte') .
+	  "</p><p>" .
+		_T('upload_fichier_zip_texte2') .
+	  "</p>" .
+	  $action.
+	  "</div>";
+    exit;
+  }
+  				 
 	minipres(_T('upload_fichier_zip'),
 	  "<p>" .
 		_T('upload_fichier_zip_texte') .
