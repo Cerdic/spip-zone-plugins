@@ -37,6 +37,7 @@ $.fn.openwidget = function() {
         + '&class=' + encodeURIComponent(me.className)
        ,
         function (c) {
+	      eval('c = ' + c.responseText + ';');dump(c);
           $(me)
           .find("img.widget-searching")
             .remove()
@@ -44,7 +45,7 @@ $.fn.openwidget = function() {
           .hide()
           .addClass('has-widget')
           .next()
-            .html(c)
+            .html(c.valeur)
             .show() // animate
             .activatewidget();
         }
@@ -83,18 +84,19 @@ $.fn.activatewidget = function() {
     $(me)
     .find('form')
       .ajaxForm(function(d){
-        d = $(d.responseText);
-        $('error',d)
-        .each(function() {
-          alert(configWidgets.txtErrInterdit + $(this).text());
+//        alert(d.responseText);
+        eval('d = ' + d.responseText + ';');
+        dump(d);
+        if (widgets_return.error) {
+          alert(configWidgets.txtErrInterdit + d.valeur);
           $(me).find("img.widget-searching").remove();
           $(".widgets_boutons", me).show();
           return false;
-        });
+        };
         $(me)
         .prev()
           .html(
-            $('valeur',d).html()
+            d.valeur
           )
           .prepend(ICONCLICK)
           .show()

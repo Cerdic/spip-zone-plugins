@@ -13,11 +13,11 @@ function valeur_colonne_table($table, $col, $id) {
 }
 
 function ecco_widgets($texte, $status=null) {
-	$return = '<widgets><valeur>' . $texte . '</valeur>';
+	$return = '{ "valeur":"' . addslashes($texte) . '"';
 	if ($status) {
-		$return .= '<error>' . $status . '.</error>';
+		$return .= ', "error":' . $status ;
 	}
-	die($return . '</widgets>');
+	die($return . '}');
 }
 
 function action_widgets_html_dist() {
