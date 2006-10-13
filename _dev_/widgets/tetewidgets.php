@@ -82,7 +82,7 @@ function Widgets_preparer_page($page, $droits) {
 </script >
 EOH;
 
-	return substr_replace($page, $incHead, stripos($page, '</head>'), 0);
+	return substr_replace($page, $incHead, strpos($page, '</head>'), 0);
 }
 
 ?>
