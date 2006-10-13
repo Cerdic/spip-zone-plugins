@@ -93,13 +93,15 @@ function action_widgets_html_dist() {
 		if ($valeur !== false) {
 			$n = new Widget($regs[0], $valeur);
 			$widgetsAction = self();
+			$widgetsCode = $n->code();
+			$widgetsInput = $n->input($type, $inputAttrs);
 			ecco_widgets( <<<FIN_FORM
 
 <form method="post" action="{$widgetsAction}"
 	onkeyup="$(&quot;.widgets_boutons&quot;, this).show();"
 	onsubmit="$(&quot;.widgets_boutons&quot;, this).hide();">
-  {$n->code()}
-  {$n->input($type, $inputAttrs)}
+  {$widgetsCode}
+  {$widgetsInput}
   <div class="widgets_boutons">
   <div style="position:absolute;">
   <input type="submit" value="ok" class="bouton-mobile" />
