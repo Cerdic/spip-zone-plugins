@@ -37,7 +37,7 @@ $.fn.openwidget = function() {
         + '&class=' + encodeURIComponent(me.className)
        ,
         function (c) {
-	      eval('c = ' + c.responseText + ';');dump(c);
+	      c = eval('(' + c.responseText + ')');dump(c);
           $(me)
           .find("img.widget-searching")
             .remove()
@@ -85,7 +85,7 @@ $.fn.activatewidget = function() {
     .find('form')
       .ajaxForm(function(d){
 //        alert(d.responseText);
-        eval('d = ' + d.responseText + ';');
+        d=eval('(' + d.responseText + ')');
         dump(d);
         if (widgets_return.error) {
           alert(configWidgets.txtErrInterdit + d.valeur);
