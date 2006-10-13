@@ -29,7 +29,7 @@
 	<div class="spip_documents portfolio_document" id="document_actif">
 	<span class='pagination'>#PAGINATION{precedent_suivant}</span>
 	<BOUCLE_portfolio(DOCUMENTS) {id_article} {extension IN png,jpg,gif}{pagination 1}{par num titre, id_document} >
-		[(#URL_DOCUMENT||image_reduire{300,0}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})]
+		[<a href='#URL_DOCUMENT' title='<:bouton_telecharger:>'  type="#MIME_TYPE">(#URL_DOCUMENT||image_reduire{300,0}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
 		[<div class="spip_doc_titre">(#TITRE)</div>]
 		[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
 	</div>
