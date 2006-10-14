@@ -30,6 +30,7 @@ function exec_documents_colonne_dist()
 
 	// TODO: return au lieu de echo
 	$documents = explode(",",$id_document);
+	$script = $type."s_edit";
 	$res = "";
 	foreach($documents as $doc) {
     $res .= afficher_case_document($doc, $id, $script, $type, $deplier = true);
