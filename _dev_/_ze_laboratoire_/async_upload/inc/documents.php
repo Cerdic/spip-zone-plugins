@@ -182,7 +182,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 
     var iframe;
     function do_async_upload(form) {
-      var jForm = $(form)
+      var jForm = \$(form);
       if(!form.async_init) {
         form.async_init = true
         jForm
@@ -200,6 +200,8 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
       //onload should trigger the action on the current form
       iframe.unbind('load')
       .bind('load', function() {
+          //remove the previous message
+          \$("#upload_message").remove();
           var res = $(".upload_answer",this.contentDocument);
           //possible classes 
           //upload_document_added
@@ -227,17 +229,19 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
           }
           //upload_error
           if(res.is(".upload_error")) {
-            jForm.after(res.html());
+            var msg = $("<div id='upload_message'>")
+            .append(res.html())
+            jForm.after(msg[0]);
           } 
           //upload_zip_list
           if(res.is(".upload_zip_list")) {
-            var zip_form = $("<div>").append(res.html());
+            var zip_form = $("<div id='upload_message'>").append(res.html());
             zip_form
             .find("form")
               .attr("target","upload_frame")
               .append("<input type='hidden' name='iframe' value='iframe'>")
             .end();
-            jForm.after(zip_form.html());       
+            jForm.after(zip_form[0]);  
           }
         });
       
