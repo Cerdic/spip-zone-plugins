@@ -30,14 +30,13 @@ $.fn.openwidget = function() {
       $(this)
       .append(SEARCHING); // icone d'attente
       var me=this;
-      $.get(url_widgets_html
-        + '&w=' + $(this).width()
-        + '&h=' + $(this).height()
-        + '&em=' + $(this).css('fontSize')
-        + '&class=' + encodeURIComponent(me.className)
+      $.getJSON(url_widgets_html,
+        {w : $(this).width(),
+        h : $(this).height(),
+        em : $(this).css('fontSize'),
+        "class" : me.className}
        ,
         function (c) {
-          eval('c=' + c + ';');
           $(me)
           .find("img.widget-searching")
             .remove()
