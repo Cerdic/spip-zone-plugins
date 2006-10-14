@@ -13,7 +13,7 @@ $.blocpagination = function() {
 				var url = this.href.split('#');
 				url[0] += (url[0].indexOf("?")>0 ? '&':'?')+'var_fragment='+blocfrag.id;
 				$(this).click(function(){
-					var placeholder=$('.searching_placeholder',divpagi);
+					var placeholder=$('.searching_placeholder',blocfrag);
 					if (placeholder.length) placeholder.prepend('<div class="ahah_searching_right">&nbsp;</div>');
 					else $(divpagi).before('<div class="ahah_searching_right">&nbsp;</div>');
 					$(blocfrag).load(url[0],null,function(){
