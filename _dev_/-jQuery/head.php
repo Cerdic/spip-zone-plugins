@@ -7,6 +7,9 @@ function JQuery_insert_head($flux){
 			$js = '<script src="'.find_in_path('jquery-1.0.2.js').'" type="text/javascript"></script>';
 
 			$js .= '<script src="'.find_in_path('form.js').'" type="text/javascript"></script>';
+			
+			$js .= '<script src="'.find_in_path('jq-corner.js').'" type="text/javascript"></script>';
+
 		if (strpos($flux,'<head')!==FALSE)
 			return preg_replace('/(<head[^>]*>)/i', "\n\$1".$js, $flux, 1);
 		else 

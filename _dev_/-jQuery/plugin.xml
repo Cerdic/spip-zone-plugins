@@ -3,16 +3,16 @@
 	jQuery
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	Librairie javascript par [John Resig->http://jquery.com], mis en plugin par BoOz.
+	Librairie javascript par John Resig pour [jquery.js->http://jquery.com] et Dave Methvin pour [jq-corner.js->http://methvin.com/jquery/jq-corner-demo.html], mis en plugin par BoOz.
 	</auteur>
 	<version>
-	1.0.1
+	1.0.2
 	</version>
 	<etat>
 	stable
 	</etat>
 	<description>
-	ajoute l'appel &agrave; jquery.js dans l'entete (fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>)
+	ajoute l'appel &agrave; {{jquery.js}} et {{jq-corner.js}} dans l'entete (fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>)
 	</description>
 	<prefix>
 	JQuery
