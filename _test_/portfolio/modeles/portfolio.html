@@ -13,7 +13,7 @@
 <h3>#GET{titre}</h3>
 <a name='#GET{ancre}' id='#GET{ancre}'></a>
 <span class='pagination pagination_portfolio'>
-<BOUCLE_imagettes(DOCUMENTS) {id_article} {extension IN png,jpg,gif}{pagination #GET{max}}{par num titre, id_document}>
+<BOUCLE_imagettes(DOCUMENTS) {id_rubrique?}{id_article?}{id_mot?}{id_breve?}{extension IN png,jpg,gif}{pagination #GET{max}}{par num titre, id_document}>
 	#SET{nombre_pages,#GRAND_TOTAL}
 	#SET{derniere, #GET{page_courante}|plus{#GET{max}}|moins{1}|min{#GET{nombre_pages}}}
 	#SET{item, #COMPTEUR_BOUCLE|moins{1}}
@@ -28,7 +28,7 @@
 	<B_portfolio>
 	<div class="spip_documents portfolio_document" id="document_actif">
 	<span class='pagination'>#PAGINATION{precedent_suivant}</span>
-	<BOUCLE_portfolio(DOCUMENTS) {id_article} {extension IN png,jpg,gif}{pagination 1}{par num titre, id_document} >
+	<BOUCLE_portfolio(DOCUMENTS) {id_rubrique?}{id_article?}{id_mot?}{id_breve?}{extension IN png,jpg,gif}{pagination 1}{par num titre, id_document} >
 		[<a href='#URL_DOCUMENT' title='<:bouton_telecharger:>'  type="#MIME_TYPE">(#URL_DOCUMENT||image_reduire{300,0}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
 		[<div class="spip_doc_titre">(#TITRE)</div>]
 		[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
