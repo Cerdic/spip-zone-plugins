@@ -1,1 +1,35 @@
-<plugin>  <nom> <!-- Nom du plugin -->  Spiip le plugin labo  </nom>  <auteur>        <!-- Auteur du plugin -->  collectif surement  </auteur>  <version>  0.1  </version>  <etat>  dev  </etat>  <description>  Le back office en squelettes.  <strong>WARNING: Need Boucles sans tables and jQuery plugin.</strong>  </description>  <options>  spiip_options.php  </options>  <prefix>  spiip  </prefix>  <fonctions>  spiip_fonctions.php  </fonctions>  <pipeline>  	<nom>header_prive</nom>  	<inclure>spiip_pipelines.php</inclure>  </pipeline>  <pipeline>  	<nom>insert_head</nom>  	<inclure>spiip_pipelines.php</inclure>  </pipeline></plugin>
+<plugin>
+  <nom> <!-- Nom du plugin -->
+  Spiip le plugin labo
+  </nom>
+  <auteur>        <!-- Auteur du plugin -->
+  collectif surement
+  </auteur>
+  <version>
+  0.1
+  </version>
+  <etat>
+  dev
+  </etat>
+  <description>
+  Le back office en squelettes.
+  <strong>WARNING: Need Boucles sans tables and jQuery plugin.</strong>
+  </description>
+  <options>
+  spiip_options.php
+  </options>
+  <prefix>
+  spiip
+  </prefix>
+  <fonctions>
+  spiip_fonctions.php
+  </fonctions>
+  <pipeline>
+  	<nom>header_prive</nom>
+  	<inclure>spiip_pipelines.php</inclure>
+  </pipeline>
+  <pipeline>
+  	<nom>insert_head</nom>
+  	<inclure>spiip_pipelines.php</inclure>
+  </pipeline>
+</plugin>
