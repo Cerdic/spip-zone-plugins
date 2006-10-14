@@ -226,6 +226,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
                 \$(this).css({"height":"","overflow":""});
               })
               .overflow("");
+            verifForm(cont);
           }
           //upload_error
           if(res.is(".upload_error")) {
