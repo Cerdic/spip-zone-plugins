@@ -11,9 +11,9 @@ function valeur_colonne_table($table, $col, $id) {
 	}
 	return false;
 }
-
 function ecco_widgets($texte, $status=null) {
-	$return = '{ "valeur":"' . addslashes($texte) . '"';
+	$return = '{ "valeur":"' . strtr($texte, 
+		array('\\'=>'\\\\', "\n"=>'\n', "\r"=>'\r', '"'=>'\"')) . '"';
 	if ($status) {
 		$return .= ', "error":' . $status ;
 	}
