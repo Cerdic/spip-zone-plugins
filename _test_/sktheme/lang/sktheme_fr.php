@@ -88,10 +88,10 @@ $GLOBALS[$GLOBALS['idx_lang']] =
 	  "public_theme_choice" => "Choix du th&egrave;me de l'espace public",
 	  "public_themes_config" => "Configuration pour les th&egrave;mes publics",
 	  "public_theme_doc_squelette" => "<b>Choix du squelette :</b><br />
-	  Chaque fois que vous choisirez un squelette (plus exactement une
-	  distribution de squelettes) la liste des habillages disponibles se
-	  mettra &agrave; jour. Le petit carr&eacute;s indique l'&eacute;stat de
-	  la distribution de squelette, stable, test, experimentale ...<br />
+	  Chaque fois que vous s&eacute;lectionnez un squelette (plus exactement une
+	  distribution de squelettes) la liste des habillages disponibles est mise &agrave; 
+	  jour. Le petit carr&eacute;s indique l'&eacute;tat de
+	  la distribution de squelette, stable, test, experimental ...<br />
 	  Pour plus de d&eacute;tail sur une distribution cliquez sur la
 	  fl&egrave;che noire.
 	  Il est possible de trouver un r&eacute;pertoire de th&egrave;mes exemple
@@ -99,7 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] =
 	  ",
 	  "public_theme_doc_habillage" => "<b>Choix de l'habillage :</b><br />
 	  Les habillages permettent de modifier les couleurs et l'aspect
-	  graphique de votre distribution de squelettes. Il s'agit de CSS et/ou d'images
+	  graphique d'une distribution de squelettes. Il s'agit de CSS et/ou d'images
 	  etc ...<br /> 
 	  Une distribution de squelette contient toujours une
 	  pr&eacute;sentation graphique par d&eacute;faut, ceci correspond
