@@ -338,9 +338,7 @@ function getPageSize(){
 //
 // init
 //
-// note: $(document).load() si on veut que ca marche dans l'espace prive
-// (a cause des document_write() qu'il y a en pagaille...)
 var imageArray = [];
 if(typeof TB_chemin_css == 'undefined') { TB_chemin_css = 'thickbox.css'; }
 if(typeof TB_chemin_animation == 'undefined') { TB_chemin_animation = 'circle_animation.gif'; }
-$(document).load(TB_init);
+$(TB_init);

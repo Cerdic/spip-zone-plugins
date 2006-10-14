@@ -13,7 +13,7 @@ _ 2006 - Distribue sous licence GPL
 	test
 	</etat>
 	<description>
-	Popup de gestion des abonements a une liste mailman
+	Popup de gestion des abonnements a une liste mailman
 _ s'utilise par une url spip.php?page=mailman_inscriptions&liste=test&lang=fr
 	</description>
 	<prefix> 
