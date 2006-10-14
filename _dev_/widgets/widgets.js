@@ -37,7 +37,7 @@ $.fn.openwidget = function() {
         + '&class=' + encodeURIComponent(me.className)
        ,
         function (c) {
-	      eval('c=' + c + ';');
+          eval('c=' + c + ';');
           $(me)
           .find("img.widget-searching")
             .remove()
@@ -188,16 +188,18 @@ $.fn.initwidget = function(){
 
 // demarrage
 $(document).ready(function() {
-  if (!configWidgets.droits) return;
+  if (!configWidgets.droits) {alert(3);return;}
   var c = configWidgets.droits.split('|');
   url_widgets_html = 'spip.php?action=widgets_html';
   SEARCHING = "<img class='widget-searching' src='" + configWidgets.imgPath + "/searching.gif' style='float:right;' />";
   ICONCLICK = "<span style='float:right;z-index:100;'><img class='widget-edit' onclick='event.stopPropagation();$(this).parent().parent().openwidget();' style='position:absolute;border:0;' src='" + configWidgets.imgPath + "/edit.gif' title='" + configWidgets.txtEditer + "' /></span>";
 
+  var selecteur=[];
   for (var i=0; i<c.length; i++) {
-    $(".widget."+c[i])
-    .initwidget();
+    selecteur[i] = ".widget."+c[i];
   }
+  $(selecteur.join(','))
+  .initwidget();
 
   // fermer tous les widgets ouverts
   $("html")

@@ -4,6 +4,7 @@
  *  Widgets plugin for spip (c) Fil 2006 -- licence GPL
  */
 
+define('_PREG_WIDGET', ',widget\b[^<>\'"]+\b((article)-(\w+)-(\d+))\b,');
 
 // Dire rapidement si ca vaut le coup de chercher des droits
 function analyse_droits_rapide() {
@@ -40,16 +41,20 @@ function Widgets_affichage_final($page) {
 	if (!strpos($page, 'widget'))
 		return $page;
 
-	if (!preg_match_all(
-',\b(article)-(titre|surtitre|soustitre|descriptif|chapo|texte|ps)-(\d+)\b,',
+	// voire un peu plus precisement lesquelles
+	if (!preg_match_all(_PREG_WIDGET,
 	$page, $regs, PREG_SET_ORDER))
 		return $page;
 
+	// calculer les droits sur ces widgets
 	$droits = array();
 	foreach ($regs as $reg) {
-		if (autoriser_modifs('article', $reg[3]))
-			$droits[$reg[0]]++;
+		list(,$widget,$type,$champ,$id) = $reg;
+		if (autoriser_modifs($type, $id))
+			$droits[$widget]++;
 	}
+
+	// et les signaler dans la page
 	if ($droits)
 		$page = Widgets_preparer_page($page, join('|', array_keys($droits)));
 
