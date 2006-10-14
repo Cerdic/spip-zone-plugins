@@ -56,7 +56,8 @@ function Widgets_affichage_final($page) {
 
 	// et les signaler dans la page
 	if ($droits)
-		$page = Widgets_preparer_page($page, join('|', array_keys($droits)));
+		$page = Widgets_preparer_page($page,
+			'[".' . join('",".', array_keys($droits)). '"]');
 
 	return $page;
 }
@@ -79,7 +80,7 @@ function Widgets_preparer_page($page, $droits) {
 <script src="{$jsFile}" type="text/javascript"></script>
 <script type="text/javascript">
 	var configWidgets = new configWidgets({
-		'droits':'{$droits}',
+		'droits':{$droits},
 		'imgPath':'{$imgPath}',
 		'txtEditer':'{$txtEditer}',
 		'txtErrInterdit':'{$txtErrInterdit}'
