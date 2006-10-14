@@ -183,6 +183,8 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
     var iframe;
     function do_async_upload(form) {
       var jForm = \$(form);
+      var par = $(jForm).parent();
+       \$("div.upload_message",par).remove();
       if(!form.async_init) {
         form.async_init = true
         jForm
@@ -201,7 +203,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
       iframe.unbind('load')
       .bind('load', function() {
           //remove the previous message
-          \$("#upload_message").remove();
+          \$("div.upload_message",par).remove();
           var res = $(".upload_answer",this.contentDocument);
           //possible classes 
           //upload_document_added
@@ -230,13 +232,13 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
           }
           //upload_error
           if(res.is(".upload_error")) {
-            var msg = $("<div id='upload_message'>")
+            var msg = $("<div class='upload_message'>")
             .append(res.html())
             jForm.after(msg[0]);
           } 
           //upload_zip_list
           if(res.is(".upload_zip_list")) {
-            var zip_form = $("<div id='upload_message'>").append(res.html());
+            var zip_form = $("<div class='upload_message'>").append(res.html());
             zip_form
             .find("form")
               .attr("target","upload_frame")
@@ -246,6 +248,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
           }
         });
       
+      jForm.before($("<div class='upload_message'>").append(ajax_image_searching)[0]);
       return true;
     }
     
