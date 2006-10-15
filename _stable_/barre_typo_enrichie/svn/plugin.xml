@@ -55,9 +55,9 @@ $GLOBALS['fin_intertitre'] = '</h2>';
 $GLOBALS['debut_intertitre_2'] = '<h3 class="spip">';
 $GLOBALS['fin_intertitre_2'] = '</h3>';
 $GLOBALS['debut_intertitre_3'] = '<h4 class="spip">';
-$GLOBALS['fin_intertitre_3'] = '</h4 class="spip">';
+$GLOBALS['fin_intertitre_3'] = '</h4>';
 $GLOBALS['debut_intertitre_4'] = '<h5 class="spip">';
-$GLOBALS['fin_intertitre_4'] = '</h5 class="spip">';
+$GLOBALS['fin_intertitre_4'] = '</h5>';
 $GLOBALS['debut_intertitre_5'] = '<h6 class="spip">';
 $GLOBALS['fin_intertitre_5'] = '</h6>';</cadre>
 	</description>
