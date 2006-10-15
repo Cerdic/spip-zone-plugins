@@ -37,10 +37,12 @@ $.fn.openwidget = function() {
         "class" : me.className}
        ,
         function (c) {
+			$(me).find("img.widget-searching").remove();
+	        if (c.erreur) {
+	          alert(c.valeur);
+	          return false;
+	        }
           $(me)
-          .find("img.widget-searching")
-            .remove()
-          .end()
           .hide()
           .addClass('has-widget')
           .next()
@@ -84,12 +86,12 @@ $.fn.activatewidget = function() {
     .find('form')
       .ajaxForm(function(d){
         eval('d=' + d.responseText + ';');
-        if (d.error) {
+        if (d.erreur) {
           alert(configWidgets.txtErrInterdit + d.valeur);
           $(me).find("img.widget-searching").remove();
           $(".widgets_boutons", me).show();
           return false;
-        };
+        }
         $(me)
         .prev()
           .html(

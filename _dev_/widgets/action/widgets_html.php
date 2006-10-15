@@ -63,7 +63,7 @@ function var2js( $var)
 function ecco_widgets($texte, $status=null) {
 	$return = array('valeur' => $texte);
 	if ($status) {
-		$return['error'] = $status ;
+		$return['erreur'] = $status ;
 	}
 	return var2js($return);
 }
@@ -145,6 +145,9 @@ function action_widgets_html_dist() {
 	// sinon on affiche le formulaire demande
 	else if (preg_match(_PREG_WIDGET, $_GET['class'], $regs)) {
 		list(,$widget,$type,$champ,$id) = $regs;
+		if (!autoriser_modifs($type, $id)) {
+			die(ecco_widgets(_T('widgets:non_autorise'), 2));
+		}
 		$f = charger_fonction($type.'_'.$champ, 'controleurs', true)
 		OR $f = charger_fonction($champ, 'controleurs', true)
 		OR $f = 'controleur_dist';
