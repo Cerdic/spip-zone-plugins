@@ -36,21 +36,21 @@ function BarreTypoEnrichie_pre_propre($texte) {
 	// remplace les fausses listes à puce par de vraies
 	// (recherche en début de lignes - suivi d'un ou plusieurs caractères blancs, en mode multiligne)
 	// Mettre $GLOBALS['barre_typo_preserve_puces'] = true; dans mes_options.php pour ne pas avoir ce comportement
-	if (!isset($GLOBALS['barre_typo_preserve_puces']))
+	if ($GLOBALS['barre_typo_pas_de_fausses_puces'] === true)
 		$texte =  preg_replace('/^-\s+/m','-* ',$texte);
 
 	// tous les elements block doivent etre introduits ici
 	// pour etre pris en charge par paragrapher
 
 	// Definition des différents intertitres possibles, si pas deja definies
-	tester_variable('debut_intertitre', '<h2 class="spip">');
-	tester_variable('fin_intertitre', '</h2>');
-	tester_variable('debut_intertitre_2', '<h3 class="spip">');
-	tester_variable('fin_intertitre_2', '</h3>');
-	tester_variable('debut_intertitre_3', '<h4 class="spip">');
-	tester_variable('fin_intertitre_3', '</h4 class="spip">');
-	tester_variable('debut_intertitre_4', '<h5 class="spip">');
-	tester_variable('fin_intertitre_4', '</h5 class="spip">');
+	tester_variable('debut_intertitre', '<h3 class="spip">');
+	tester_variable('fin_intertitre', '</h3>');
+	tester_variable('debut_intertitre_2', '<h4 class="spip">');
+	tester_variable('fin_intertitre_2', '</h4>');
+	tester_variable('debut_intertitre_3', '<h5 class="spip">');
+	tester_variable('fin_intertitre_3', '</h5>');
+	tester_variable('debut_intertitre_4', '<h6 class="spip">');
+	tester_variable('fin_intertitre_4', '</h6>');
 	tester_variable('debut_intertitre_5', '<h6 class="spip">');
 	tester_variable('fin_intertitre_5', '</h6>');
 
