@@ -31,7 +31,7 @@
 	  L'url depuis l'article serait 
 
         &lt;div style="float: right">
-        &lt;a href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV&#123;id_article&#125;" title="voir le code de article" class="spip_in">Voir le code de l'article&lt;/a>
+        &lt;a href="#URL_SITE_SPIP/spip.php?page=lecode&amp;id_article=#ENV&#123;id_article&#125;" title="voir le code de article" class="spip_in">Voir le code de l'article&lt;/a>
         &lt;/div>	  
 	  [en]
 	  Syntax higlighting of code placed in SPIP articles.
