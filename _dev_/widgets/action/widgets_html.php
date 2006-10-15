@@ -216,7 +216,7 @@ FIN_FORM;
 
 	}
 	else {
-		$html = "$type $id $champ" . _T('widgets:pas_de_valeur');
+		$html = "$type $id $champ: " . _T('widgets:pas_de_valeur');
 		$status = 6;
 	}
 
