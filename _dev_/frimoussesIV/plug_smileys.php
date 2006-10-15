@@ -5,7 +5,7 @@ define('_DIR_PLUGIN_FRIMOUSSESIV',(_DIR_PLUGINS.end($p)));
 
 function smileys_liste_smileys() {
   
-  /*Listes des images à associer aux smileys*/
+  /*Listes des images ï¿½ associer aux smileys*/
 
   $les_smileys = array();
   $les_smileys[':-)*'] = 'face13.png';
@@ -80,7 +80,7 @@ function smileys_pre_propre($chaine) {
 	  $alt = htmlentities($smiley);
 	}
 	$smiley = preg_quote($smiley,'/');
-	$chaine = preg_replace('/(^'.$smiley.'\s|\s'.$smiley.'\s|\s'.$smiley.'$)/', "<html><img src=\""._DIR_PLUGIN_FRIMOUSSESIV.'/smileys/'.$file.'" alt="'.$alt.'" class="smiley"/></html>', $chaine);
+	$chaine = preg_replace('/(^'.$smiley.'\s|\s'.$smiley.'\s|\s'.$smiley.'$)/', "<html>&nbsp;<img src=\""._DIR_PLUGIN_FRIMOUSSESIV.'/smileys/'.$file.'" alt="'.$alt.'" class="smiley" /></html>', $chaine);	
   }
   return echappe_html($chaine);
 }
@@ -94,7 +94,7 @@ function balise_SMILEY_DISPO($p) {
 	if(!$alt) {
 	  $alt = htmlentities(texte_script($smiley),ENT_QUOTES);
 	}
-	$p->code .= "<li class=\\\"un_smiley\\\"><span class=\\\"smiley_nom\\\">$smiley</span><img  class=\\\"smiley_image\\\" src=\\\""._DIR_PLUGIN_FRIMOUSSESIV."/smileys/$file\\\"  alt=\\\"$alt\\\"/><span class=\\\"smiley_alt\\\">$alt</span></li>\n";
+	$p->code .= "<li class=\\\"un_smiley\\\"><span class=\\\"smiley_nom\\\">$smiley</span><img  class=\\\"smiley_image\\\" src=\\\""._DIR_PLUGIN_FRIMOUSSESIV."/smileys/$file\\\"  alt=\\\"$alt\\\"/><span class=\\\"smiley_alt\\\" />$alt</span></li>\n";
   }
   $p->code .= '</ul>"';
   $p->type = 'html';
