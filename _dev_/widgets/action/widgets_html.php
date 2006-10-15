@@ -131,24 +131,21 @@ function action_widgets_html_dist() {
 			// VUE
 			// chercher vues/article_toto.html
 			// sinon vues/toto.html
-			if (find_in_path(
-			($fond = 'vues/'.$type.'_'.$champ).'.html')
-			OR find_in_path(
-			($fond = 'vues/'.$champ).'.html')
-			) {
+			if (find_in_path( ($fond = 'vues/' . $type . '_' . $champ) . '.html')
+			 || find_in_path( ($fond = 'vues/' . $champ) .'.html') ) {
 				$contexte = array(
-					'id_'.$type => $id,
+					'id_' . $type => $id,
 					'lang' => $GLOBALS['spip_lang']
 				);
 				include_spip('public/assembler');
 				echo ecco_widgets(recuperer_fond($fond, $contexte));
 			}
 			// vues par defaut
-			else
-			if (in_array($champ, array('chapo', 'texte', 'descriptif', 'ps')))
+			elseif (in_array($champ, array('chapo', 'texte', 'descriptif', 'ps'))) {
 				echo ecco_widgets(propre($valeur));
-			else
+			} else {
 				echo ecco_widgets(typo($valeur));
+			}
 		}
 	}
 
