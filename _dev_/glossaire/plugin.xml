@@ -8,4 +8,4 @@
  <description> Ce plugin est un glossaire bas&eacute; sur la [contrib de Francois Schreuer->http://www.spip-contrib.net/Un-glossaire-interne], il a &eacute;t&eacute; modifi&eacute; pour supporter la pr&eacute;sence des mots dans les liens et en ne prenant la chaine de caractere que si elle est entouree de deux espaces.
  Il est distribu&eacute; sous licence GNU/GPL</description>
 </plugin>
-<fonctions>glossaire-allergie.php</fonctions>
+<fonctions>glossaire.php</fonctions>
