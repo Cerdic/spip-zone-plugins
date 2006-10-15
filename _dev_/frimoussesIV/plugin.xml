@@ -10,7 +10,7 @@
 	  0.1
 	</version>
 	<etat>
-	  dev
+	  stable
 	</etat>
 	<description>
 	remplace les codes ASCII pour les frimousses par des petites images.
