@@ -4,37 +4,21 @@
  *  Widgets plugin for spip (c) Fil 2006 -- licence GPL
  */
 
-define('_PREG_WIDGET', ',widget\b[^<>\'"]+\b((article)-(\w+)-(\d+))\b,');
+define('_PREG_WIDGET', ',widget\b[^<>\'"]+\b((\w+)-(\w+)-(\d+))\b,');
 
 // Dire rapidement si ca vaut le coup de chercher des droits
-function analyse_droits_rapide() {
+function analyse_droits_rapide_dist() {
 	if ($GLOBALS['auteur_session']['statut'] != '0minirezo')
 		return false;
 	else
 		return true;
 }
 
-// fonction d'API manquante a SPIP...
-function autoriser_modifs($quoi = 'article', $id = 0) {
-	if ($quoi != 'article') {
-		echo "pas implemente";
-		return false;
-	}
-
-	global $connect_id_auteur, $connect_statut;
-	$connect_id_auteur = intval($GLOBALS['auteur_session']['id_auteur']);
-	$connect_statut = $GLOBALS['auteur_session']['statut'];
-	include_spip('inc/auth');
-	auth_rubrique($GLOBALS['auteur_session']['id_auteur'], $GLOBALS['auteur_session']['statut']);
-	return acces_article($id);
-}
-
-
 // Le pipeline affichage_final, execute a chaque hit sur toute la page
 function Widgets_affichage_final($page) {
 
 	// ne pas se fatiguer si le visiteur n'a aucun droit
-	if (!analyse_droits_rapide())
+	if (!(function_exists('analyse_droits_rapide')?analyse_droits_rapide():analyse_droits_rapide_dist()))
 		return $page;
 
 	// sinon regarder rapidement si la page a des classes widget
@@ -42,15 +26,16 @@ function Widgets_affichage_final($page) {
 		return $page;
 
 	// voire un peu plus precisement lesquelles
-	if (!preg_match_all(_PREG_WIDGET,
-	$page, $regs, PREG_SET_ORDER))
+	if (!preg_match_all(_PREG_WIDGET, $page, $regs, PREG_SET_ORDER))
 		return $page;
+
+	$autoriser_modifs= charger_fonction('autoriser_modifs', 'inc');
 
 	// calculer les droits sur ces widgets
 	$droits = array();
 	foreach ($regs as $reg) {
 		list(,$widget,$type,$champ,$id) = $reg;
-		if (autoriser_modifs($type, $id))
+		if ($autoriser_modifs($type, $champ, $id))
 			$droits[$widget]++;
 	}
 

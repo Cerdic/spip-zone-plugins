@@ -76,6 +76,8 @@ function action_widgets_html_dist() {
 
 	header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
 
+	$autoriser_modifs= charger_fonction('autoriser_modifs', 'inc');
+
 	// Est-ce qu'on a recu des donnees ?
 	if (isset($_POST['widgets'])) {
 		$modifs = post_widgets();
@@ -86,7 +88,7 @@ function action_widgets_html_dist() {
 		foreach($modifs as $m) {
 			if ($m[2] && preg_match(_PREG_WIDGET, 'widget '.$m[0], $regs)) {
 				list(,$widget,$type,$champ,$id) = $regs;
-				if (!autoriser_modifs($type, $id)) {
+				if (!$autoriser_modifs($type, $champ, $id)) {
 					die(ecco_widgets("$type $id: " . _T('widgets:non_autorise'), 2));
 				}
 
@@ -153,7 +155,7 @@ function action_widgets_html_dist() {
 	// sinon on affiche le formulaire demande
 	else if (preg_match(_PREG_WIDGET, $_GET['class'], $regs)) {
 		list(,$widget,$type,$champ,$id) = $regs;
-		if (!autoriser_modifs($type, $id)) {
+		if (!$autoriser_modifs($type, $champ, $id)) {
 			die(ecco_widgets("$type $id: " . _T('widgets:non_autorise'), 2));
 		}
 		$f = charger_fonction($type.'_'.$champ, 'controleurs', true)
