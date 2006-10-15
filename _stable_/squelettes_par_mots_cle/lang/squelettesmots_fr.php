@@ -19,7 +19,6 @@ Les auteurs n\'ont alors plus qu\'&agrave; associer un mot du groupe &agrave; l\
 									   'groupe' => 'Groupe:',
 									   'type' => 'Type:',
 									   'possibilites' => '@total_actif@ squelette(s).',
-									   'utiliserasquelette' => 'Cet article utilisera le squelette @squelette@',
-									   'creergroupes' => 'Vous devez d\'abord <a href="@url@">cr&eacute;er</a> des groupes de mots clefs.'
+									   'utiliserasquelette' => 'Cet article utilisera le squelette @squelette@'
 );
 ?>

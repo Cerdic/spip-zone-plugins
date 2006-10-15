@@ -19,7 +19,6 @@ Gli autori devono allora solamente associare la parola chiave corretta all\'elem
 									   'groupe' => 'Gruppo:',
 									   'type' => 'Tipo:',
 									   'possibilites' => '@total_actif@ modello(i).',
-									   'utiliserasquelette' => 'Questo articolo utilizzer&agrave; il modello @squelette@',
-									   'creergroupes' => 'Prima dove <a href="@url@">creare</a> gruppi di parole chiave.'
+									   'utiliserasquelette' => 'Questo articolo utilizzer&agrave; il modello @squelette@'
 );
 ?>

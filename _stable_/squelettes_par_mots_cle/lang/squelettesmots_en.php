@@ -18,8 +18,6 @@ The author then only have to add a keyword from the right group to select the te
 									   'fond' => 'Fond:',
 									   'groupe' => 'Group:',
 									   'type' => 'Type:',
-									   'possibilites' => '@total_actif@ template(s) availlable.',
-									   'creergroupes' => 'You should first <a href="@url@">create</a> keyword groups.'
-									   
+									   'possibilites' => '@total_actif@ template(s) availlable.'
 );
 ?>
