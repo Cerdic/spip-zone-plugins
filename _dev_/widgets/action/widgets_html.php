@@ -82,7 +82,7 @@ function action_widgets_html_dist() {
 		if (!is_array($modifs)) {
 			die(ecco_widgets(_T('widgets:donnees_mal_formatees'), 1));
 		}
-		$anamod = array();
+		$anamod = $anaupd = array();
 		foreach($modifs as $m) {
 			if ($m[2] && preg_match(_PREG_WIDGET, 'widget '.$m[0], $regs)) {
 				list(,$widget,$type,$champ,$id) = $regs;
@@ -98,25 +98,35 @@ function action_widgets_html_dist() {
 						_T('widgets:modifie_par_ailleurs'), 3));
 				}
 				$anamod[] = array($widget,$type,$champ,$id,$champtable,$m[1]);
+				if (!isset($anaupd[$type])) {
+					$anaupd[$type] = array();
+				}
+				if (!isset($anaupd[$type][$id])) {
+					$anaupd[$type][$id] = array();
+				}
+				$anaupd[$type][$id][$champtable] = $m[1];
 			}
 		}
 		if (!$anamod) {
 			die(ecco_widgets(_T('widgets:pas_de_modification'), 4));
 		}
+		foreach($anaupd as $type => $idschamps) {
+			foreach($idschamps as $id => $champsvaleurs) {
+
+				// Enregistrer dans la base
+				// MODELE
+				switch($type) {
+					case 'article':
+						include_spip('action/editer_article');
+						revisions_articles($id, false, $champsvaleurs);
+						break;
+					default :
+						die(ecco_widgets("$type: " . _T('widgets:non_implemente'), 5));
+				}
+			}
+		}
 		foreach($anamod as $m) {
 			list($widget,$type,$champ,$id,$champtable,$valeur) = $m;
-
-			// Enregistrer dans la base
-			// MODELE
-			switch($type) {
-				case 'article':
-					include_spip('action/editer_article');
-					revisions_articles($id, false,
-						array($champtable => $valeur));
-					break;
-				default :
-					die(ecco_widgets("$type: " . _T('widgets:non_implemente'), 5));
-			}
 
 			// VUE
 			// chercher vues/article_toto.html
