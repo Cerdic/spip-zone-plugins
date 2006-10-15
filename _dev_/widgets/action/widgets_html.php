@@ -87,14 +87,15 @@ function action_widgets_html_dist() {
 			if ($m[2] && preg_match(_PREG_WIDGET, 'widget '.$m[0], $regs)) {
 				list(,$widget,$type,$champ,$id) = $regs;
 				if (!autoriser_modifs($type, $id)) {
-					die(ecco_widgets(_T('widgets:non_autorise'), 2));
+					die(ecco_widgets("$type $id: " . _T('widgets:non_autorise'), 2));
 				}
 
 				// alias temporaire pour titreurl, en attendant un modele
 				if ($champ == 'titreurl') $champtable = 'titre';
 				else $champtable = $champ;
 				if (md5(valeur_colonne_table($type, $champtable, $id)) != $m[2]) {
-					die(ecco_widgets(_T('widgets:modifie_par_ailleurs'), 3));
+					die(ecco_widgets("$type $id $champtable: " .
+						_T('widgets:modifie_par_ailleurs'), 3));
 				}
 				$anamod[] = array($widget,$type,$champ,$id,$champtable,$m[1]);
 			}
@@ -114,7 +115,7 @@ function action_widgets_html_dist() {
 						array($champtable => $valeur));
 					break;
 				default :
-					die(ecco_widgets(_T('widgets:non_implemente'), 4));
+					die(ecco_widgets(_T("$type: " . 'widgets:non_implemente'), 5));
 			}
 
 			// VUE
@@ -146,7 +147,7 @@ function action_widgets_html_dist() {
 	else if (preg_match(_PREG_WIDGET, $_GET['class'], $regs)) {
 		list(,$widget,$type,$champ,$id) = $regs;
 		if (!autoriser_modifs($type, $id)) {
-			die(ecco_widgets(_T('widgets:non_autorise'), 2));
+			die(ecco_widgets("$type $id: " . _T('widgets:non_autorise'), 2));
 		}
 		$f = charger_fonction($type.'_'.$champ, 'controleurs', true)
 		OR $f = charger_fonction($champ, 'controleurs', true)
@@ -155,7 +156,7 @@ function action_widgets_html_dist() {
 		echo ecco_widgets($html, $status);
 		exit;
 	} else {
-		die ("euh ?");
+		die(ecco_widgets(_T('widgets:donnees_mal_formatees'), 1));
 	}
 
 }
@@ -215,8 +216,8 @@ FIN_FORM;
 
 	}
 	else {
-		$html = "$type-$champ n'a pas de contr&ocirc;leur";
-		$status = 3;
+		$html = "$type $id $champ" . _T('widgets:pas_de_valeur');
+		$status = 6;
 	}
 
 	return array($html,$status);
