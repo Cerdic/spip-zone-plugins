@@ -96,18 +96,14 @@ function action_widgets_html_dist() {
 				if (md5(valeur_colonne_table($type, $champtable, $id)) != $m[2]) {
 					die(ecco_widgets(_T('widgets:modifie_par_ailleurs'), 3));
 				}
-				$anamod[] = array($widget,$type,$champ,$id,$m[1]);
+				$anamod[] = array($widget,$type,$champ,$id,$champtable,$m[1]);
 			}
 		}
 		if (!$anamod) {
 			die(ecco_widgets(_T('widgets:pas_de_modification'), 4));
 		}
 		foreach($anamod as $m) {
-			list($widget,$type,$champ,$id,$valeur) = $m;
-
-			// alias temporaire pour titreurl, en attendant un modele
-			if ($champ == 'titreurl') $champtable = 'titre';
-			else $champtable = $champ;
+			list($widget,$type,$champ,$id,$champtable,$valeur) = $m;
 
 			// Enregistrer dans la base
 			// MODELE
