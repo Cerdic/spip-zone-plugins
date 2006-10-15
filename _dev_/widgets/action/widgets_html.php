@@ -115,7 +115,7 @@ function action_widgets_html_dist() {
 						array($champtable => $valeur));
 					break;
 				default :
-					die(ecco_widgets(_T("$type: " . 'widgets:non_implemente'), 5));
+					die(ecco_widgets("$type: " . _T('widgets:non_implemente'), 5));
 			}
 
 			// VUE
