@@ -87,7 +87,7 @@ $.fn.activatewidget = function() {
       .ajaxForm(function(d){
         eval('d=' + d.responseText + ';');
         if (d.erreur) {
-          alert(configWidgets.txtErrInterdit + d.valeur);
+          alert(d.valeur);
           $(me).find("img.widget-searching").remove();
           $(".widgets_boutons", me).show();
           return false;

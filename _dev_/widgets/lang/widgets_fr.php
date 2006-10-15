@@ -4,7 +4,6 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'editer' => 'Editer',
-'erreur_ou_interdit' => 'Erreur ou interdit !',
 'donnees_mal_formatees' => 'Donnees mal formatees', // 1
 'non_autorise' => 'Non autorise', // 2
 'modifie_par_ailleurs' => 'Modifie par ailleurs', // 3
