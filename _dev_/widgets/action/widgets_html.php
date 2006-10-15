@@ -97,7 +97,7 @@ function action_widgets_html_dist() {
 					die(ecco_widgets("$type $id $champtable: " .
 						_T('widgets:modifie_par_ailleurs'), 3));
 				}
-				$anamod[] = array($widget,$type,$champ,$id,$champtable,$m[1]);
+				$anamod[] = array($widget,$type,$champ,$id,$m[1]);
 				if (!isset($anaupd[$type])) {
 					$anaupd[$type] = array();
 				}
@@ -126,7 +126,7 @@ function action_widgets_html_dist() {
 			}
 		}
 		foreach($anamod as $m) {
-			list($widget,$type,$champ,$id,$champtable,$valeur) = $m;
+			list($widget,$type,$champ,$id,$valeur) = $m;
 
 			// VUE
 			// chercher vues/article_toto.html
