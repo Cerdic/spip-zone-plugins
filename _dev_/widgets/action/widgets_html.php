@@ -79,59 +79,69 @@ function action_widgets_html_dist() {
 	// Est-ce qu'on a recu des donnees ?
 	if (isset($_POST['widgets'])) {
 		$modifs = post_widgets();
-		if (is_array($modifs)
-		AND count($modifs) >= 1) { // normalement, un seul pour l'instant...
-			foreach($modifs as $m) {
-				if (preg_match(_PREG_WIDGET, 'widget '.$m[0], $regs)) {
-					list(,$widget,$type,$champ,$id) = $regs;
-
-					// alias temporaire pour titreurl, en attendant un modele
-					if ($champ == 'titreurl') $champtable = 'titre';
-					else $champtable = $champ;
-
-					// Enregistrer dans la base
-					if ($m[2] // cle md5
-					AND autoriser_modifs($type, $id)
-					AND (md5(valeur_colonne_table($type, $champtable, $id)) == $m[2])
-					) {
-						// MODELE
-						switch($type) {
-							case 'article':
-								include_spip('action/editer_article');
-								revisions_articles($id, false,
-									array($champtable => $m[1]));
-								break;
-						}
-
-						// VUE
-						// chercher vues/article_toto.html
-						// sinon vues/toto.html
-						if (find_in_path(
-						($fond = 'vues/'.$type.'_'.$champ).'.html')
-						OR find_in_path(
-						($fond = 'vues/'.$champ).'.html')
-						) {
-							$contexte = array(
-								'id_'.$type => $id,
-								'lang' => $GLOBALS['spip_lang']
-							);
-							include_spip('public/assembler');
-							echo ecco_widgets(recuperer_fond($fond, $contexte));
-						}
-						// vues par defaut
-						else
-						if (in_array($champ,
-						array('chapo', 'texte', 'descriptif', 'ps')))
-							echo ecco_widgets(propre($m[1]));
-						else
-							echo ecco_widgets(typo($m[1]));
-					} else {
-						echo ecco_widgets('erreur diverses', 1);
-					}
+		if (!is_array($modifs)) {
+			die(ecco_widgets(_T('widgets:donnees_mal_formatees'), 1));
+		}
+		$anamod = array();
+		foreach($modifs as $m) {
+			if ($m[2] && preg_match(_PREG_WIDGET, 'widget '.$m[0], $regs)) {
+				list(,$widget,$type,$champ,$id) = $regs;
+				if (!autoriser_modifs($type, $id)) {
+					die(ecco_widgets(_T('widgets:non_autorise'), 2));
 				}
+
+				// alias temporaire pour titreurl, en attendant un modele
+				if ($champ == 'titreurl') $champtable = 'titre';
+				else $champtable = $champ;
+				if (md5(valeur_colonne_table($type, $champtable, $id)) != $m[2]) {
+					die(ecco_widgets(_T('widgets:modifie_par_ailleurs'), 3));
+				}
+				$anamod[] = array($widget,$type,$champ,$id,$m[1]);
 			}
-		} else if ($modifs === false) {
-			echo ecco_widgets("erreur", 2);
+		}
+		if (!$anamod) {
+			die(ecco_widgets(_T('widgets:pas_de_modification'), 4));
+		}
+		foreach($anamod as $m) {
+			list($widget,$type,$champ,$id,$valeur) = $m;
+
+			// alias temporaire pour titreurl, en attendant un modele
+			if ($champ == 'titreurl') $champtable = 'titre';
+			else $champtable = $champ;
+
+			// Enregistrer dans la base
+			// MODELE
+			switch($type) {
+				case 'article':
+					include_spip('action/editer_article');
+					revisions_articles($id, false,
+						array($champtable => $valeur));
+					break;
+				default :
+					die(ecco_widgets(_T('widgets:non_implemente'), 4));
+			}
+
+			// VUE
+			// chercher vues/article_toto.html
+			// sinon vues/toto.html
+			if (find_in_path(
+			($fond = 'vues/'.$type.'_'.$champ).'.html')
+			OR find_in_path(
+			($fond = 'vues/'.$champ).'.html')
+			) {
+				$contexte = array(
+					'id_'.$type => $id,
+					'lang' => $GLOBALS['spip_lang']
+				);
+				include_spip('public/assembler');
+				echo ecco_widgets(recuperer_fond($fond, $contexte));
+			}
+			// vues par defaut
+			else
+			if (in_array($champ, array('chapo', 'texte', 'descriptif', 'ps')))
+				echo ecco_widgets(propre($valeur));
+			else
+				echo ecco_widgets(typo($valeur));
 		}
 	}
 
