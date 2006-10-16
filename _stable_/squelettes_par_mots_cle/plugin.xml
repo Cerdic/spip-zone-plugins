@@ -12,7 +12,7 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	  Pierre Andrews (Mortimer), d'apr&232;s un code propos&233; par D&233;esse A.
+	  Pierre Andrews (Mortimer), d'apr&#232;s un code propos&#233; par D&#233;esse A.
 	</auteur>
 	<version>
 	  0.1
@@ -28,12 +28,12 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	[fr]
 	  Permet de choisir le squelette en fonction d'un mot clef.
 	  
-      La page de configuration permet de cr&eacute;er des r&egrave;gles liant:
--* un type d'&233;l&233;ment, 
--* un groupe de mot clef sp&233;cifiant le squelette 
+      La page de configuration permet de cr&#233;er des r&egrave;gles liant:
+-* un type d'&#233;l&#233;ment, 
+-* un groupe de mot clef sp&#233;cifiant le squelette 
 -* un fond.
 
-	  Ainsi, les auteurs n'ont plus qu'&232; associ&233; le bon mot clef &224;
+	  Ainsi, les auteurs n'ont plus qu'&#232; associ&#233; le bon mot clef &#224;
 	   leur article (par exemple) pour selection sa mise en page.
 	[en]
 	  This plugin provides selection of template using keywords.
