@@ -101,10 +101,10 @@ function exec_csv2spip() {
 		}				 
 		debut_droite();
     if ($_FILES['userfile']['name'] != '') {  
-        debut_cadre_trait_couleur("csv2spip-24.gif", false, "", _T('csvspip:resultat_fichier').$_FILES['userfile']['name']);       
+//        debut_cadre_trait_couleur("../"._DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif", false, "", _T('csvspip:resultat_fichier').$_FILES['userfile']['name']);       
 								
- 		 		debut_cadre_couleur();
-				echo "<h2>"._T('csvspip:titre_etape1')."</h2>";
+ 		 		debut_cadre_couleur("../"._DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif", false, "", _T('csvspip:titre_etape1').$_FILES['userfile']['name']);
+//				echo "<h2>"._T('csvspip:titre_etape1')."</h2>";
 				if ($_FILES['userfile']['error'] != 0) { 
 				 		echo "<br><span class=\"Cerreur\">"._T('csvspip:err_etape1.1_debut').$_FILES['userfile']['tmp_name']._T('csvspip:err_etape1.1_fin').$_FILES['userfile']['error']."</span>";				 							 
   	 				fin_cadre_couleur();
@@ -121,8 +121,8 @@ function exec_csv2spip() {
 				
 
 // étape 2 : passage des données du fichier dans la base temporaire			
-    		debut_cadre_couleur();
-				echo "<h2>"._T('csvspip:titre_etape2')."</h2>";
+    		debut_cadre_couleur("../"._DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif", false, "", _T('csvspip:titre_etape2'));
+//				echo "<h2>"._T('csvspip:titre_etape2')."</h2>";
 				spip_query("DROP TABLE IF EXISTS tmp_auteurs");
     		if (!spip_query("CREATE TABLE tmp_auteurs (id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, nom TEXT NOT NULL, prenom TEXT NOT NULL, groupe TEXT NOT NULL, ss_groupe TEXT NOT NULL, mdp TEXT NOT NULL, pseudo_spip TEXT NOT NULL, mel TEXT NOT NULL, id_spip INT(11) NOT NULL)") ) {  
 					 echo "<br><span class=\"Cerreur\">"._T('csvspip:err_etape2.1')."</span>";
@@ -206,8 +206,8 @@ function exec_csv2spip() {
 // étape 3 : si nécessaire création des rubriques de disciplines
 				$_POST['groupe_admins'] != '' ? $groupe_admins = strtolower($_POST['groupe_admins']) : $groupe_admins = '-1';
 	 		 	if ($_POST['rub_prof'] == 1 AND $groupe_admins != '-1') {
-					 debut_cadre_couleur();
-					 echo "<h2>"._T('csvspip:titre_etape3')."</h2>";
+					 debut_cadre_couleur("../"._DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif", false, "", _T('csvspip:titre_etape3'));
+//					 echo "<h2>"._T('csvspip:titre_etape3')."</h2>";
 					 $Terr_rub = array();
 					 $date_rub_ec = date("Y-m-j H:i:s");
 					 $Tch_rub = explode(',', $_POST['rub_parent']);
@@ -429,8 +429,8 @@ function exec_csv2spip() {
 						spip_query("OPTIMIZE TABLE $Tauteurs, $Tarticles, $Tauteurs_articles");
 				}		
 				 
-				debut_cadre_couleur();
-				echo "<h2>"._T('csvspip:titre_etape4')."</h2>";
+				debut_cadre_couleur("../"._DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif", false, "", _T('csvspip:titre_etape4'));
+//				echo "<h2>"._T('csvspip:titre_etape4')."</h2>";
 			  echo "<h3>"._T('csvspip:etape4.1')."</h3>";
  			  if (count($Terr_nvx) > 0) {		
 					 echo "<span class=\"Cerreur\">"._T('csvspip:err_redac');
@@ -539,8 +539,8 @@ function exec_csv2spip() {
 											}
 									 }
 						 }
-						 debut_cadre_couleur();
-						 echo "<h2>"._T('csvspip:titre_etape5')."</h2>";
+						 debut_cadre_couleur("../"._DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif", false, "", _T('csvspip:titre_etape5'));
+//						 echo "<h2>"._T('csvspip:titre_etape5')."</h2>";
 					   if (count($Terr_adm_rub) > 0) {
 						 		echo "<span class=\"Cerreur\">"._T('csvspip:err_admin_rubrique');
 							  foreach ($Terr_adm_rub as $ear) { 
@@ -581,8 +581,8 @@ function exec_csv2spip() {
     									 }
 									 }
 						 }
-						 debut_cadre_couleur();
-						 echo "<h3>"._T('csvspip:titre_etape6')."</h3>";
+						 debut_cadre_couleur("../"._DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif", false, "", _T('csvspip:titre_etape6'));
+//						 echo "<h3>"._T('csvspip:titre_etape6')."</h3>";
  					   if (count($Terr_art_rub) > 0) {
 						 		echo "<span class=\"Cerreur\">"._T('csvspip:err_article');
 							  foreach ($Terr_art_rub as $eart) { 
@@ -593,7 +593,8 @@ function exec_csv2spip() {
 							}
 							else {
 									 echo _T('csvspip:ok_etape6').count($Tres_art_rub)."<br>";
-							}						  
+							}
+							fin_cadre_couleur();
   				}
 			
 // suppression de la table temporaire
@@ -601,7 +602,7 @@ function exec_csv2spip() {
 //						 mysql_query("DROP TABLE tmp_auteurs");
 					}
 					
-					fin_cadre_trait_couleur();
+//					fin_cadre_trait_couleur();
     }
 // FIN TRAITEMENT DES DONNEES
 
@@ -618,44 +619,44 @@ echo "								 this.checked = 'checked'; ";
 echo "				}";
 echo "</script>";
 
-         debut_cadre_trait_couleur("csv2spip-24.gif", false, "", _T('csvspip:titre_form'));       
-    
-      	 echo "\r\n<form style=\"background-color: #DDDDDD; padding: 15px;\" enctype=\"multipart/form-data\" action=\"".basename($_SERVER['PHP_SELF'])."\" method=\"post\" onsubmit=\"return (verifSaisie());\">";
-    		 debut_cadre_couleur();
-    		 echo "<h2>"._T('csvspip:titre_choix_fichier')."</h2>";
-         echo _T('csvspip:choix_fichier')."<input name=\"userfile\" type=\"file\">";
+//         debut_cadre_formulaire();
+      	 echo "\r\n<form enctype=\"multipart/form-data\" action=\"".$PHP_SELF."?exec=csv2spip\" method=\"post\" onsubmit=\"return (verifSaisie());\">";
+    		 debut_cadre_couleur("cal-today.gif", false, "", _T('csvspip:titre_choix_fichier'));
+//    		 echo "<h3>"._T('csvspip:titre_choix_fichier')."</h3>";
+         echo "<strong>"._T('csvspip:choix_fichier')."</strong><input name=\"userfile\" type=\"file\">";
 				 fin_cadre_couleur();
-				 debut_cadre_couleur();
-         echo _T('csvspip:options_maj')."<br>";
-    		 echo _T('csvspip:maj_mdp'); 
-    		 echo "<input type=\"radio\" name=\"maj_mdp\" value=\"1\"  checked=\"checked\">"._T('csvspip:oui'); 
+				 debut_cadre_couleur("mot-cle-24.gif", false, "", _T('csvspip:options_maj'));
+//         echo "<h3>"._T('csvspip:options_maj')."</h3>";
+    		 echo "<strong>"._T('csvspip:maj_mdp')."</strong>"; 
+    		 echo _T('csvspip:oui')."<input type=\"radio\" name=\"maj_mdp\" value=\"1\"  checked=\"checked\">"; 
     		 echo "<input type=\"radio\" name=\"maj_mdp\" value=\"0\">"._T('csvspip:non');
 				 fin_cadre_couleur();
-				 debut_cadre_couleur();
-    		 echo _T('csvspip:suppr_redac');
-    		 echo "<input type=\"radio\" name=\"eff_abs\" value=\"1\" onClick=\"aff_masq('archi', 1);\">"._T('csvspip:oui');
+				 debut_cadre_couleur("../"._DIR_PLUGIN_CSV2SPIP."/img_pack/supprimer_utilisateurs-24.gif", false, "", _T('csvspip:suppr_absents'));
+//    		 echo "<h3>"._T('csvspip:suppr_redac')."</h3>";
+    		 echo "<strong>"._T('csvspip:suppr_redac')."</strong>";
+				 echo _T('csvspip:oui')."<input type=\"radio\" name=\"eff_abs\" value=\"1\" onClick=\"aff_masq('archi', 1);\">";
     		 echo "<input type=\"radio\" name=\"eff_abs\" value=\"0\" checked=\"checked\" onClick=\"aff_masq('archi', 0);\">"._T('csvspip:non'); 
-    		 echo "<br><span style=\"font-size: 12px;\">"._T('csvspip:help_suppr_redac')."</span><br>"; 
-    		 echo "<div style=\"display: none\" id=\"archi\" class=\"cadre\">"._T('csvspip:suprr_articles');
-         echo "<input type=\"radio\" name=\"supprimer_articles\" value=\"1\" onClick=\"aff_masq('transfert', 0);\">"._T('csvspip:oui');   
+    		 echo "<br><span style=\"font-size: 10px;\">"._T('csvspip:help_suppr_redac')."</span><br>"; 
+    		 echo "<div style=\"display: none\" id=\"archi\" class=\"cadre\"><strong>"._T('csvspip:suprr_articles')."</strong>";
+         echo _T('csvspip:oui')."<input type=\"radio\" name=\"supprimer_articles\" value=\"1\" onClick=\"aff_masq('transfert', 0);\">";   
          echo "<input type=\"radio\" name=\"supprimer_articles\" value=\"0\" checked=\"checked\" onClick=\"aff_masq('transfert', 1);\">"._T('csvspip:non'); 
-         echo "<br><div id=\"transfert\" class=\"cadre\">"._T('csvspip:transfert_archive');
+         echo "<div id=\"transfert\" class=\"cadre\"><br><strong>"._T('csvspip:transfert_archive')."</strong>";
        	 echo "<input type=\"radio\" name=\"archivage\" value=\"1\" checked=\"checked\" onClick=\"aff_masq('rub_transfert', 1);\">"._T('csvspip:oui');   
          echo "<input type=\"radio\" name=\"archivage\" value=\"0\" onClick=\"aff_masq('rub_transfert', 0);\">"._T('csvspip:non'); 
-         echo "<br><div id=\"rub_transfert\" class=\"cadre\">";
-         $sql9 = mysql_query("SELECT COUNT(*) AS nb_rubriques FROM $Trubriques");
-				 $data9 = mysql_fetch_array($sql9);
+         echo "<div id=\"rub_transfert\" class=\"cadre\"><br>";
+         $sql9 = spip_query("SELECT COUNT(*) AS nb_rubriques FROM $Trubriques");
+				 $data9 = spip_fetch_array($sql9);
 				 $nb_rubriques = $data9['nb_rubriques'];
 				 $annee = date("Y"); 
-		     echo _T('csvspip:nom_rubrique_archives');
-				 echo "<input type=\"text\" name=\"rub_archivage\" value=\"Archives année ".($annee - 1).'-'.$annee."\" style=\"width: 250px;\">";
-		  	 echo "<br>";
+		     echo "<strong>"._T('csvspip:nom_rubrique_archives')."</strong>";
+				 echo "<input type=\"text\" name=\"rub_archivage\" value=\"Archives année ".($annee - 1).'-'.$annee."\" style=\"width: 200px;\">";
+		  	 echo "";
 			   if ($nb_rubriques > 0) {   		
-		  	    echo"<br>"._T('choix_parent_archive'); 
+		  	    echo"<br><br><strong>"._T('csvspip:choix_parent_archive')."</strong>"; 
         		echo "<select name=\"rub_parent_archivage\">";
         		echo "<option value=\"0,0\" selected=\"selected\">"._T('csvspip:racine_site')."</option>";
-				    $sql10 = mysql_query("SELECT id_rubrique, titre, id_secteur FROM $Trubriques ORDER BY id_rubrique");
-				 		while ($data10 = mysql_fetch_array($sql10)) { 
+				    $sql10 = spip_query("SELECT id_rubrique, titre, id_secteur FROM $Trubriques ORDER BY id_rubrique");
+				 		while ($data10 = spip_fetch_array($sql10)) { 
 				 			     echo "<option value=\"".$data10['id_rubrique'].",".$data10['id_secteur']."\">".$data10['titre']."</option>";
 			 		  }				 						
 		     	  echo "</select><br>";
@@ -664,27 +665,28 @@ echo "</script>";
 		        echo "<br>"._T('csvspip:pas_de_rubriques')."<br>";
 			 }  		
 			 echo "</div></div>";
-    	 echo "<br>"._T('csvspip:traitement_supprimes')."<br>";
+    	 echo "<br><br><strong>"._T('csvspip:traitement_supprimes')."</strong><br>";
     	 echo "<input type=\"radio\" name=\"auteurs_poubelle\" value=\"1\">"._T('csvspip:auteurs_poubelle')."  <br>"; 
     	 echo "<input type=\"radio\" name=\"auteurs_poubelle\" value=\"0\" checked=\"checked\">"._T('csvspip:attribuer_articles'); 
     	 echo "<input type=\"text\" name=\"nom_auteur_archives\" value=\"archives".($annee - 1)."-".$annee."\">"._T('csvspip:passe_egale_login');
 			 echo "</div>";
 			 fin_cadre_couleur();
-			 debut_cadre_couleur();
-			 echo "<h2>"._T('csvspip:creation_rubriques')."</h3>";
-			 echo _T('csvspip:rubrique_ss_groupes'); 
-			 echo "<input type=\"radio\" name=\"rub_prof\" value=\"1\" checked=\"checked\" onClick=\"aff_masq('rub_adm', 1);\">"._T('csvspip:oui');   
+			 debut_cadre_couleur("rubrique-24.gif", false, "", _T('csvspip:creation_rubriques'));
+//			 echo "<h3>"._T('csvspip:creation_rubriques')."</h3>";
+			 echo "<strong>"._T('csvspip:rubrique_ss_groupes')."</strong>"; 
+			 echo _T('csvspip:oui')."<input type=\"radio\" name=\"rub_prof\" value=\"1\" checked=\"checked\" onClick=\"aff_masq('rub_adm', 1);\">";   
 			 echo "<input type=\"radio\" name=\"rub_prof\" value=\"0\" onClick=\"aff_masq('rub_adm', 0);\">"._T('csvspip:non');
-			 echo "<br><span style=\"font-size: 12px;\">"._T('csvspip:profs_admins')."</span>";
-			 echo "<div id=\"rub_adm\" class=\"cadre\">"._T('csvspip:article_rubrique'); 
-       echo "<input type=\"radio\" name=\"art_rub\" value=\"1\">"._T('csvspip:oui');   
-       echo "<input type=\"radio\" name=\"art_rub\" value=\"0\" checked=\"checked\">"._T('csvspip:non')."<br>";
+			 echo "<br><span style=\"font-size: 10px;\">"._T('csvspip:profs_admins')."</span>";
+			 echo "<br /><br /><div id=\"rub_adm\" class=\"cadre\"><strong>"._T('csvspip:article_rubrique')."</strong>"; 
+       echo _T('csvspip:oui')."<input type=\"radio\" name=\"art_rub\" value=\"1\">";   
+       echo "<input type=\"radio\" name=\"art_rub\" value=\"0\" checked=\"checked\">"._T('csvspip:non');
+			 echo "<br><span style=\"font-size: 10px;\">"._T('csvspip:help_articles')."</span>";
  			 if ($nb_rubriques > 0) {   		
-				  echo "<br>"._T('csvspip:choix_parent_rubriques'); 
+				  echo "<br><br /><strong>"._T('csvspip:choix_parent_rubriques')."</strong>"; 
       		echo "<select name=\"rub_parent\">";
       		echo "<option value=\"0,0\" selected=\"selected\">"._T('csvspip:racine_site')."</option>";
-				  $sql10 = mysql_query("SELECT id_rubrique, titre, id_secteur FROM $Trubriques ORDER BY id_rubrique");
-					while ($data10 = mysql_fetch_array($sql10)) { 
+				  $sql10 = spip_query("SELECT id_rubrique, titre, id_secteur FROM $Trubriques ORDER BY id_rubrique");
+					while ($data10 = spip_fetch_array($sql10)) { 
 				 			  echo "<option value=\"".$data10['id_rubrique'].",".$data10['id_secteur']."\">".$data10['titre']."</option>";
 			 		}  	
 		      echo "</select><br>";
@@ -692,16 +694,16 @@ echo "</script>";
 		 	 else {  
 				  	echo "<br>"._T('csvspip:pas_de_rubriques')."<br>";
 			 } 		
-			 echo "<br>"._T('csvspip:nom_groupe_admin')."<input type=\"text\" name=\"groupe_admins\" value=\"PROFS\">";
-       echo "<br><span style=\"font-size: 12px;\">"._T('csvspip:help_nom_groupe_admin')."</span>";		
+			 echo "<br><br /><strong>"._T('csvspip:nom_groupe_admin')."</strong><input type=\"text\" name=\"groupe_admins\" value=\"PROFS\">";
+       echo "<br><span style=\"font-size: 10px;\">"._T('csvspip:help_nom_groupe_admin')."</span>";		
 			 echo "</div>";
 			 fin_cadre_couleur();
     	 echo "<input type=\"submit\" value=\""._T('csvspip:lancer')."\" style=\"background-color: #FF8000; font-weight: bold; font-size: 14px;\">";
-  		 echo "</form>";
+  		 echo "</form><br><br />";
 
-			 fin_cadre_trait_couleur();
+//			 fin_cadre_trait_couleur();
 			 
-			 debut_cadre_trait_couleur("csv2spip-24.gif", false, "", _T('csvspip:titre_help')); 
+			 debut_cadre_trait_couleur("fiche-perso-24.gif", false, "", _T('csvspip:titre_help')); 
 		// inclure le fichier help de la langue
 			 include(_DIR_PLUGIN_CSV2SPIP.'/lang/csvspip_help_'.$GLOBALS['langue_site'].'.php');
 			 echo "<a href=\""._DIR_PLUGIN_CSV2SPIP."/csv2spip_modele.csv\">csv2spip_modele.csv</a>";
@@ -710,107 +712,12 @@ echo "</script>";
 			 fin_cadre_trait_couleur();
 
 		} 
-	  fin_cadre_trait_couleur();
+		
+//		fin_cadre_formulaire();
 				
 		fin_page();
 }
 		 
 		 
-		 
-/*
-
-
-		include_once ("inc_version.php3");
-		$prefix_tables_SPIP = $table_prefix;	 // $table_prefix définie dans ecrire/inc_version.php3 (qui appelle mes_options.php3 s'il existe)
-    
-    include ("inc.php3");
-    include_ecrire ("inc_acces.php3");
-		
-	  if ($connect_statut != '0minirezo') {	?>
-<script language="JavaScript">
-				alert("Cet outil est réservé aux administrateurs\nVeuillez vous reconnecter avec un compte adapté";
-				document.location.href = "auteurs.php3";
-</script>
-<?  		exit();
-	  }			
-    if ($visiteurs == "oui") {
-    	 debut_page(_T('titre_page_auteurs'),"documents","redacteurs");
-    	 $retour .= '&visiteurs=oui';
-    } 
-    else {
-    		 debut_page(_T('info_auteurs_par_tri', array('partri' => $partri)),"documents","redacteurs");
-    }		 ?>
-
-</center>		<!-- ça c'est pour etre OK avec le <center> ouvert en fin inc_presentation.php			 -->
-
-<? 	
-				
-		function raw2hex($s){
-             for ($i = 0; $i < strlen($s); $i++){
-               	 $op .= str_pad(dechex(ord($s[$i])),2,"0",STR_PAD_LEFT);
-             }
-             return $op;
-		}
-		
-?>	 
-
-
-<style type="text/css">
-  body, form, h1, h2, h3, h4, span  { 
-		font-family: Arial;
-		text-align: left;
-	}
-	body {
-			 font-size: 14px;
-	}
-	h1 {
-		 background-color: #DDDDDD;
-		 border: solid 1px #000000;
-		 text-align: center;
-		 font-size: 22px;
-		 padding: 10px;
-	}
-	h2 {
-		 font-size: 20px;
-	}
-	h3 {
-		 clear: both;
-		 font-size: 18px;
-	}
-	h3, h2 {
-		 padding-bottom: 0px;
-		 margin: 0px;
-		 margin-top: 10px;
-	}
-	h4 {
-		 padding-bottom: 0px;
-		 margin: 0px;
-		 font-size: 16px;		 
-	}
-	.Cerreur {
-			background-color: #FF0000;
-			display: block;
-			padding: 10px;
-	}
-	.Cok {
-			width: 47%;
-			background-color: #DDDDDD;
-			display: block;
-			padding: 10px;
-	}
-	div {
-			padding-left: 20px;
-			padding-right: 20px
-	}
-	.cadre {
-	}
-</style>	 
-<div>
-		<h1><span style="float: left; font-size: 150%; padding: 0px;">csv2spip</span>
-		<span style="float: right; font-size: 75%; padding: 10px;">v 2.2</span>
-Création de comptes auteurs et de rubriques à partir d'un fichier CSV<br></h1>
-		 
-
-*/
 
 ?>
