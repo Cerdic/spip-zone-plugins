@@ -1,3 +1,10 @@
+function deplie_arbre(){
+	$('#myTree ul').show();
+}
+function plie_arbre(){
+	$('#myTree ul').hide();
+}
+
 $(document).ready(
 	function()
 	{
@@ -79,6 +86,7 @@ $(document).ready(
 						$(this).after('<ul></ul>');
 						subbranch = $('ul', this.parentNode);
 					}
+					subbranch.eq(0).show();
 					oldParent = dropped.parentNode;
 					subbranch.eq(0).append(dropped);
 					oldBranches = $('li', oldParent);

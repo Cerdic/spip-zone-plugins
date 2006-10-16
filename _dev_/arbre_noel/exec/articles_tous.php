@@ -270,15 +270,13 @@ function couche_formulaire_tous($first_couche, $last_couche)
 
 	echo "<div>&nbsp;</div>";
 	echo "<b class='verdana3'>";
-	echo "<a href=\"javascript:";
-	echo "manipuler_couches('ouvrir','$spip_lang_rtl',$first_couche,$last_couche, '" . _DIR_IMG_PACK . "')\">";
+	echo "<a href=\"javascript:deplie_arbre()\">";
 	echo _T('lien_tout_deplier');
 	echo "</a>";
 	echo "</b>";
 	echo " | ";
 	echo "<b class='verdana3'>";
-	echo "<a href=\"javascript:";
-	echo "manipuler_couches('fermer','$spip_lang_rtl',$first_couche,$last_couche, '" . _DIR_IMG_PACK . "')\">";
+	echo "<a href=\"javascript:plie_arbre()\">";
 	echo _T('lien_tout_replier');
 	echo "</a>";
 	echo "</b>";
