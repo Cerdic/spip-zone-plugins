@@ -1,0 +1,22 @@
+<plugin>
+  <nom> <!-- Nom du plugin -->
+  HTML Purifier (Remplacement de Safe HTML)
+  </nom>
+  <auteur>        <!-- Auteur du plugin -->
+  Jacques PYRAT
+  </auteur>
+  <version>
+  0.1
+  </version>
+  <etat>
+  test
+  </etat>
+  <description>
+  Test du remplacement de SafeHTML par [HTML Purifier->http://hp.jpsband.org/]
+  </description>
+  <options>
+  </options>
+  <prefix>
+  htmlpurifier
+  </prefix>
+</plugin>
