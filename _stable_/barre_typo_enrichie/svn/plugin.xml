@@ -46,7 +46,8 @@ _ Et aussi sur les entr&eacute;es de glossaire <code>[?GPL|Gnu Public Licence]</
 {{Param&eacute;trage}} : vous pouvez modifier le fonctionnement du plugin par votre fichier ecrire/mes_options.php :
 
 Exemple :
-<cadre>// Pour que les fausses puces soient transformees en vraie listes a puces
+<code>
+// Pour que les fausses puces soient transformees en vraie listes a puces
 $GLOBALS['barre_typo_pas_de_fausses_puces'] = true;
 
 // Pour commencer la titraille a h2 (et non h3 comme par defaut dans SPIP -- pour des raisons historiques)
@@ -59,7 +60,8 @@ $GLOBALS['fin_intertitre_3'] = '</h4>';
 $GLOBALS['debut_intertitre_4'] = '<h5 class="spip">';
 $GLOBALS['fin_intertitre_4'] = '</h5>';
 $GLOBALS['debut_intertitre_5'] = '<h6 class="spip">';
-$GLOBALS['fin_intertitre_5'] = '</h6>';</cadre>
+$GLOBALS['fin_intertitre_5'] = '</h6>';
+</code>
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
