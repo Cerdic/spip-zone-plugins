@@ -121,6 +121,9 @@ li.rubrique {
 .puce_statut{
 float:$spip_lang_left;
 }
+ul#myTree, ul#myTree ul {
+	list-style: none;
+}
 EOF;
 	echo "</style>";
 	 

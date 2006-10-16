@@ -18,7 +18,7 @@ $(document).ready(
 				}
 			}
 		);
-		$('img.expandImage', tree.get(0)).click(
+		$('img.expandImage', tree).click(
 			function()
 			{
 				if (this.src.indexOf('spacer') == -1) {
