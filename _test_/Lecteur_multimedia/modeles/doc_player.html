@@ -13,6 +13,8 @@
 
 
 <BOUCLE_doc (DOCUMENTS) {id_document}>
+#SET{player,#ENV{player,#CONFIG{player,'neoplayer'}}}
+
 <div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 [(#TYPE_DOCUMENT|=={MP3}|?{
 [<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
@@ -23,7 +25,6 @@
 ''
 })]
 [
-#SET{player,#ENV{player,#CONFIG{player,'neoplayer'}}}
 <dt class='spip_doc_titre'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
 <dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF)#NOTES</dd>]
 </dl>

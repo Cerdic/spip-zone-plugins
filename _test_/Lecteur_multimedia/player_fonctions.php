@@ -2,12 +2,12 @@
 
 if (!defined('_DIR_PLUGIN_PLAYER')){ // defini automatiquement par SPIP 1.9.2
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	define('_DIR_PLUGIN_PLAYER',(_DIR_PLUGINS.end($p)));
+	define('_DIR_PLUGIN_PLAYER',(_DIR_PLUGINS.end($p)."/"));
 }
 
 function Player_insert_head($flux){
 	$flux .="<script type='text/javascript'>var musicplayerurl='"._DIR_PLUGIN_PLAYER."musicplayer.swf'</script>\n";
-	$flux .= 	'<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'player_enclosure.js"></script>';
+	$flux .= 	'<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'/player_enclosure.js"></script>';
 	return $flux;
 }
 
