@@ -196,15 +196,15 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
       }
 
       if (!iframe) {
-        iframe = $("<iframe id='upload_frame' name='upload_frame' frameborder='0' marginwidth='0' marginheight='0' scrolling='yes' style='position:absolute'></iframe>")
+        iframe = $("<iframe id='upload_frame' name='upload_frame' frameborder='0' marginwidth='0' marginheight='0' scrolling='yes' style='position:absolute' onload='this.iframeload()'></iframe>")
         .appendTo("body");
       }
-      //onload should trigger the action on the current form
-      iframe.unbind('load')
-      .bind('load', function() {
+      
+      //IE apparently do not write anything in an iframe onload event handler 
+      iframe[0].iframeload = function() {
           //remove the previous message
           \$("div.upload_message",par).remove();
-          var res = $(".upload_answer",this.contentDocument);
+          var res = $(".upload_answer",this.contentDocument || document.frames("upload_frame").document.body);
           //possible classes 
           //upload_document_added
           if(res.is(".upload_document_added")) {
@@ -225,7 +225,9 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
               .removeClass("documents_added")
               .hide()
               .show("normal",function(){
-                \$(this).css({"height":"","overflow":""});
+                var anim =\$(this).css({"height":"","overflow":""});
+                //bug explorer
+                if(jQuery.browser.msie) anim.width(anim.width()-2); 
               })
               .overflow("");
             verifForm(cont);
@@ -246,7 +248,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
             .end();
             jForm.after(zip_form[0]);  
           }
-        });
+      };
       
       jForm.before($("<div class='upload_message'>").append(ajax_image_searching)[0]);
       return true;

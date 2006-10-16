@@ -35,10 +35,10 @@ function exec_documents_colonne_dist()
 	foreach($documents as $doc) {
     $res .= afficher_case_document($doc, $id, $script, $type, $deplier = true);
   }
-  ajax_retour("<div class='upload_answer upload_document_added'>".
+  
+  echo "<div class='upload_answer upload_document_added'>".
 	$res.
-	"</div>"
-	);
+	"</div>";
 }
 
 ?>
