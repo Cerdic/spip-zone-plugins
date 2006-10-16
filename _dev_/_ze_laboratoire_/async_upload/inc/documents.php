@@ -114,7 +114,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 
 // http://doc.spip.org/@afficher_documents_colonne
 function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
-	global $connect_id_auteur, $connect_statut, $options, $id_doc_actif;
+	global $connect_id_auteur, $connect_statut, $options;
 
 	// seuls cas connus : exec=articles_edit ou breves_edit
 	$script = $type.'s_edit';
@@ -151,7 +151,8 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	$ret .= "\n<p></p><div id='liste_images'>";
 	while ($doc = spip_fetch_array($images_liees)) {
 		$id_document = $doc['id_document'];
-		$ret .= afficher_case_document($id_document, $id, $script, $type, $id_doc_actif == $id_document);
+		$deplier = $id_document_actif==$id_document;
+		afficher_case_document($id_document, $id, $script, $type, $deplier);
 	}
 
 	/// Ajouter nouveau document
@@ -182,9 +183,10 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 
     var iframe;
     function do_async_upload(form) {
-      var jForm = \$(form);
+      var jForm = $(form);
       var par = $(jForm).parent();
-       \$("div.upload_message",par).remove();
+      $("div.upload_message",par)
+      .remove();
       if(!form.async_init) {
         form.async_init = true
         jForm
@@ -215,9 +217,11 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
               .addClass("documents_added")
             .end();
             if (jForm.find("input[@name='arg']").val().search("vignette")!=-1)
-              cont = $("#liste_images").prepend(res.html());
+              cont = $("#liste_images");
             else
-              cont = $("#liste_documents").prepend(res.html());
+              cont = $("#liste_documents");
+            cont
+            .prepend(res.html());
             //find added documents, remove label and show them nicely
             //set overflow to visible to completely show the overlay icon
             cont.
@@ -288,14 +292,14 @@ function est_inclus($id_document) {
 //
 // Afficher un document sous forme de ligne depliable (pages xxx_edit)
 //
+// TODO: il y a du code a factoriser avec inc/documenter
 
 // http://doc.spip.org/@afficher_case_document
-function afficher_case_document($id_document, $id, $script, $type, $deplier = false) {
+function afficher_case_document($id_document, $id, $script, $type, $deplier=false) {
 	global $connect_id_auteur, $connect_statut;
 	global $options, $couleur_foncee, $spip_lang_left, $spip_lang_right;
 
 	charger_generer_url();
-	$flag_deplie = teste_doc_deplie($id_document);
 
 	$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
 
@@ -325,7 +329,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier = fa
 	//
 	// Afficher un document
 	//
-  $ret = "";
+	$ret = "";
 	if ($mode == 'document') {
 		if ($options == "avancees") {
 			# 'extension', a ajouter dans la base quand on supprimera spip_types_documents
@@ -370,13 +374,13 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier = fa
 
 			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
 				$ret .= "<div style='padding:2px; font-size: 10px; font-family: arial,helvetica,sans-serif'>";
-				$ret .= "<b>"._T('info_inclusion_directe')."</b></br>";
+				$ret .= "<b>"._T('info_inclusion_directe')."</b><br />";
 				$ret .= "<div style='color: 333333'>"
 				. affiche_raccourci_doc('emb', $id_document, 'left')
 				. affiche_raccourci_doc('emb', $id_document, 'center')
 				. affiche_raccourci_doc('emb', $id_document, 'right')
 				. "</div>\n";
-				$ret .= "</div></div>";
+				$ret .= "</div>";
 			}
 		} else {
 			$ret .= "<div style='padding:2px;'><font size='1' face='arial,helvetica,sans-serif'>".
@@ -385,7 +389,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier = fa
 		}
 
 		$f = charger_fonction('legender', 'inc');
-		$ret .= $f($id_document, $document, $script, $type, $id, "document$id_document");
+		$ret .= $f($id_document, $document, $script, $type, $id, "document$id_document", $deplier);
 
 		$ret .= fin_cadre_enfonce(true);
 		}
@@ -439,14 +443,4 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier = fa
 	return $ret;
 }
 
-// http://doc.spip.org/@teste_doc_deplie
-function teste_doc_deplie($id_document) {
-	global $show_docs;
-	static $deplies;
-
-	if (!$deplies)
-		$deplies = split('-',$show_docs);
-
-	return in_array($id_document, $deplies);
-}
 ?>
