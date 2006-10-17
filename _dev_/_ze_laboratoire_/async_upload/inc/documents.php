@@ -215,6 +215,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
             res.
             find(">div[@class]")
               .addClass("documents_added")
+              .css("display","none")
             .end();
             if (jForm.find("input[@name='arg']").val().search("vignette")!=-1)
               cont = $("#liste_images");
@@ -227,11 +228,10 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
             cont.
             find("div.documents_added")
               .removeClass("documents_added")
-              .hide()
-              .show("normal",function(){
-                var anim =\$(this).css({"height":"","overflow":""});
-                //bug explorer
-                if(jQuery.browser.msie) anim.width(anim.width()-2); 
+              .show("slow",function(){
+                  var anim =\$(this).css({"height":"","overflow":""});
+                  //bug explorer-opera-safari
+                  if(!jQuery.browser.mozilla) anim.width(this.orig.width-2); 
               })
               .overflow("");
             verifForm(cont);
