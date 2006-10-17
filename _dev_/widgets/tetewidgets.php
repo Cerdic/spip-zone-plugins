@@ -52,7 +52,7 @@ function Widgets_preparer_page($page, $droits) {
 
 	$jsFile = find_in_path('widgets.js');
 	$cssFile = find_in_path('widgets.css');
-	$imgPath = dirname(find_in_path('images/edit.gif'));
+	$imgPath = dirname(find_in_path('images/penwrite-20.png'));
 
 	$txtEditer = addslashes(html2unicode(_T(
 		'widgets:editer')));
