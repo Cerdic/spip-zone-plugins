@@ -36,7 +36,7 @@ function(i) {
 	}
 	}
 
-$(this).before('<span class="player"><object style="margin-left:0.1em" ' +
+$(this).before('<span class="player"><object style="margin-right:0.1em" ' +
 	'classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" ' +
 	'codebase="' +
 	'http://fpdownload.macromedia.com/pub/shockwave/cabs/'+
