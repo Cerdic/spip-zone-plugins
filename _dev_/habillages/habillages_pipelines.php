@@ -28,13 +28,13 @@ function habillages_ajouter_onglets($flux) {
 	$flux['data']['squelettes']= new Bouton(
 	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_squelettes-22.png', 'Squelettes', generer_url_ecrire("habillages_squelettes"));
 	$flux['data']['themes']= new Bouton(
-	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_themes-22.png', 'Themes', generer_url_ecrire("habillages_themes"));
-	$flux['data']['logotheque']= new Bouton(
-	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_images-22.png', 'Logoth&egrave;que', generer_url_ecrire("habillages_images"));
-	$flux['data']['icones']= new Bouton(
-	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_icones_prive-22.png', 'Ic&#244;nes', generer_url_ecrire("habillages_icones"));
+	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_themes-22.png', 'Th&egrave;mes', generer_url_ecrire("habillages_themes"));
 	$flux['data']['extras']= new Bouton(
 	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_extras-22.png', 'Extras', generer_url_ecrire("habillages_extras"));
+	$flux['data']['logotheque']= new Bouton(
+	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_logos-22.png', 'Logoth&egrave;que', generer_url_ecrire("habillages_logos"));
+	$flux['data']['icones']= new Bouton(
+	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_icones-22.png', 'Ic&#244;nes', generer_url_ecrire("habillages_icones"));
 	$flux['data']['aide']= new Bouton(
 	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_aide-22.png', 'Aide', generer_url_ecrire("habillages_aide")); 
 }

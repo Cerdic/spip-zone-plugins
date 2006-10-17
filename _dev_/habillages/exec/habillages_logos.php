@@ -13,7 +13,7 @@ include_spip('inc/iconifier');
 include_spip('inc/habillages_iconifier');
 
 // http://doc.spip.org/@exec_admin_plugin
-function exec_habillages_images() {
+function exec_habillages_logos() {
 	global $connect_statut;
 	global $connect_toutes_rubriques;
 	global $spip_lang_right;

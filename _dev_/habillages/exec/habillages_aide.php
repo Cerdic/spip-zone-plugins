@@ -9,6 +9,7 @@ include_spip('inc/plugin');
 include_spip('inc/presentation');
 include_spip('inc/layer');
 include_spip('inc/actions');
+include_spip('inc/habillages_presentation');
 
 // http://doc.spip.org/@exec_admin_plugin
 function exec_habillages_aide() {
@@ -95,7 +96,9 @@ EOF;
 	
 	debut_gauche();
 	debut_boite_info();
-	echo "Navigation rapide dans l'aide";
+	
+	habillages_menu_navigation();
+	
 	fin_boite_info();
 
 	debut_droite();

@@ -10,6 +10,7 @@ include_spip('inc/presentation');
 include_spip('inc/layer');
 include_spip('inc/actions');
 include_spip('inc/habillages_plugins');
+include_spip('inc/habillages_presentation');
 
 // http://doc.spip.org/@exec_admin_plugin
 function exec_habillages_squelettes() {
@@ -37,6 +38,8 @@ function exec_habillages_squelettes() {
 		ecrire_plugin_actifs($lire_meta_squelettes_modifs,'',$operation='ajoute');
 		ecrire_meta('habillages_squelettes', _request('statusplug'));
 		ecrire_metas;
+		lire_metas();
+		echo $GLOBALS['meta']['plugin'];
 	}
 
 	if (isset($_GET['surligne']))
@@ -110,46 +113,9 @@ EOF;
 	
 	debut_gauche();
 	debut_boite_info();
-		echo "<table><tr>";
-	echo "<td colspan='2'>";
-	echo _T('habillages:accueil_commentaire');
-	echo "</td>";
-	echo "<tr>";
-	echo "<td colspan='2' class='used'>";
-	echo _T('habillages:accueil_squelettes');
-	echo "</td>";
-	echo "</tr>";
-	echo "<tr>";
-	echo "<td>";
-	echo '<img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/habillages_squelettes_bw-22.png">';
-	echo "</td>";
-	echo "<td class='used'>";
-	echo _T('habillages:lien_squelettes_off');
-	echo "</td>";
-	echo "</tr>";
-	echo "<td colspan='2' class='bold_just'>";
-	echo _T('habillages:accueil_styles');
-	echo "</td>";
-	echo "</tr>";
-	echo "<td>";
-	echo '<img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/habillages_themes-22.png">';
-	echo "</td>";
-	echo "<td class='bold_just'>";
-	echo "<a href='".generer_url_ecrire('habillages_styles')."'>"._T('habillages:lien_styles_on')."</a>";
-	echo "</td>";
-	echo "</tr>";
-	echo "<td colspan='2' class='bold_just'>";
-	echo _T('habillages:accueil_logos');
-	echo "</td>";
-	echo "</tr>";
-	echo "<td>";
-	echo '<img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/habillages_images-22.png">';
-	echo "</td>";
-	echo "<td class='bold_just'>";
-	echo "<a href='".generer_url_ecrire('habillages_images')."'>"._T('habillages:lien_logos_on')."</a>";
-	echo "</td>";
-	echo "</tr>";
-	echo "</table>";
+	
+	habillages_menu_navigation();
+	
 	fin_boite_info();
 
 	debut_droite();
@@ -163,6 +129,9 @@ EOF;
 	echo _T('habillages:squelettes_titre')."</font></b></td></tr>";
 	echo "<tr><td class='serif' colspan=4>";
 	echo _T('habillages:squelettes_intro');
+	
+	echo generer_url_post_ecrire("habillages_squelettes");
+				
 		# Chercher les fichiers theme.xml.
 		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
 		
@@ -175,8 +144,6 @@ EOF;
 			$type_theme = trim(applatit_arbre($arbre['type']));
 			$nom_dossier_theme = dirname ($fichier);
 			$fichier_plugin_xml = $nom_dossier_theme."/plugin.xml";
-			
-			echo generer_url_post_ecrire("habillages_squelettes");
 			
 				if (!is_file($fichier_plugin_xml)) {
 					# Mettre dans la construction du dossier habillages-data (lorsque les themes se
