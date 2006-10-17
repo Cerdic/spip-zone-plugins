@@ -27,15 +27,17 @@ function exec_habillages_themes() {
 	}
 	
 	if (_request('changer_plugin')=='oui'){
+		//lire_metas();
+		//$lire_meta_themes = array($GLOBALS['meta']['habillages_themes']);
+		//ecrire_plugin_actifs($lire_meta_themes,'',$operation='enleve');
+		//ecrire_metas;
 		lire_metas();
-		$lire_meta_styles = array($GLOBALS['meta']['habillages_themes']);
-		ecrire_plugin_actifs($lire_meta_styles,'',$operation='enleve');
-		ecrire_metas;
-		lire_metas();
-		$lire_meta_styles_modifs = array(_request('statusplug'));
-		ecrire_plugin_actifs($lire_meta_styles_modifs,'',$operation='ajoute');
+		$zozo = "test";
+		ecrire_plugin_actifs($zozo,'',$operation='ajoute');
 		ecrire_meta('habillages_themes', _request('statusplug'));
 		ecrire_metas;
+		lire_metas();
+		echo $GLOBALS['meta']['plugin'];
 	}
 
 	if (isset($_GET['surligne']))
