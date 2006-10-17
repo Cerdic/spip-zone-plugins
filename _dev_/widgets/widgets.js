@@ -190,9 +190,10 @@ $.fn.initwidget = function(){
 // demarrage
 $(document).ready(function() {
   if (!configWidgets.droits) return;
+  if (!jQuery.getJSON) return; // jquery >= 1.0.2
   url_widgets_html = 'spip.php?action=widgets_html';
   SEARCHING = "<img class='widget-searching' src='" + configWidgets.imgPath + "/searching.gif' style='float:right;' />";
-  ICONCLICK = "<span style='float:right;z-index:100;'><img class='widget-edit' onclick='event.stopPropagation();$(this).parent().parent().openwidget();' style='position:absolute;border:0;' src='" + configWidgets.imgPath + "/edit.gif' title='" + configWidgets.txtEditer + "' /></span>";
+  ICONCLICK = "<span style='float:right;z-index:100;'><img class='widget-edit' onclick='event.stopPropagation();$(this).parent().parent().openwidget();' style='position:absolute;border:0;' src='" + configWidgets.imgPath + "/crayon.png' title='" + configWidgets.txtEditer + "' /></span>";
 
   $(".widget")
   .filter(configWidgets.droits)
