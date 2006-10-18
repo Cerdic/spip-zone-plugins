@@ -60,14 +60,6 @@ function var2js( $var)
     return false;
 }
 
-function ecco_widgets($texte, $status=null) {
-	$return = array('valeur' => $texte);
-	if ($status) {
-		$return['erreur'] = $status ;
-	}
-	return var2js($return);
-}
-
 function action_widgets_html_dist() {
 	include_spip('inc/widgets');
 	include_spip('inc/texte');
@@ -77,52 +69,67 @@ function action_widgets_html_dist() {
 	header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
 
 	$autoriser_modifs= charger_fonction('autoriser_modifs', 'inc');
+	$return = array('$erreur'=>'');
 
 	// Est-ce qu'on a recu des donnees ?
 	if (isset($_POST['widgets'])) {
 		$modifs = post_widgets();
-		if (!is_array($modifs)) {
-			die(ecco_widgets(_T('widgets:donnees_mal_formatees'), 1));
-		}
 		$anamod = $anaupd = array();
-		foreach($modifs as $m) {
-			if ($m[2] && preg_match(_PREG_WIDGET, 'widget '.$m[0], $regs)) {
-				list(,$widget,$type,$champ,$id) = $regs;
-				if (!$autoriser_modifs($type, $champ, $id)) {
-					die(ecco_widgets("$type $id: " . _T('widgets:non_autorise'), 2));
-				}
-
-				// alias temporaire pour titreurl, en attendant un modele
-				if ($champ == 'titreurl') $champtable = 'titre';
-				else $champtable = $champ;
-				if (md5(valeur_colonne_table($type, $champtable, $id)) != $m[2]) {
-					die(ecco_widgets("$type $id $champtable: " .
-						_T('widgets:modifie_par_ailleurs'), 3));
-				}
-				$anamod[] = array($widget,$type,$champ,$id,$m[1]);
-				if (!isset($anaupd[$type])) {
-					// MODELE
-					switch($type) {
-						case 'article':
-							include_spip('action/editer_article');
-							$fun = 'revisions_articles';
-							break;
-						default :
-							die(ecco_widgets("$type: " . _T('widgets:non_implemente'), 5));
+		if (!is_array($modifs)) {
+			$return['$erreur'] = _T('widgets:donnees_mal_formatees');
+		} else {
+			foreach($modifs as $m) {
+				if ($m[2] && preg_match(_PREG_WIDGET, 'widget '.$m[0], $regs)) {
+					list(,$widget,$type,$champ,$id) = $regs;
+					$wid = $m[3];
+					if (!$autoriser_modifs($type, $champ, $id)) {
+						$return['$erreur'] =
+							"$type $id: " . _T('widgets:non_autorise');
+						break;
 					}
-					$anaupd[$type] = array('fun'=>$fun, 'ids'=>array());
+
+					// alias temporaire pour titreurl, en attendant un modele
+					if ($champ == 'titreurl') $champtable = 'titre';
+					else $champtable = $champ;
+
+					if (md5(valeur_colonne_table($type, $champtable, $id)) != $m[2]) {
+						$return['$erreur'] = "$type $id $champtable: " .
+							_T('widgets:modifie_par_ailleurs');
+						break;
+					}
+					$anamod[] = array($wid,$type,$champ,$id,$m[1]);
+					if (!isset($anaupd[$type])) {
+						// MODELE
+						switch($type) {
+							case 'article':
+								include_spip('action/editer_article');
+								$fun = 'revisions_articles';
+								break;
+							default :
+						$return['$erreur'] =
+							"$type: " . _T('widgets:non_implemente');
+						break 2;
+						}
+						$anaupd[$type] = array('fun'=>$fun, 'ids'=>array());
+					}
+					if (!isset($anaupd[$type]['ids'][$id])) {
+						$anaupd[$type]['ids'][$id] = array('wdg'=>array(), 'chval'=>array());
+					}
+					// pour réaffecter le retour d'erreur sql au cas où
+					$anaupd[$type]['ids'][$id]['wdg'][] = $wid;
+					$anaupd[$type]['ids'][$id]['chval'][$champtable] = $m[1];
 				}
-				if (!isset($anaupd[$type]['ids'][$id])) {
-					$anaupd[$type]['ids'][$id] = array('wdg'=>array(), 'chval'=>array());
-				}
-				// pour réaffecter le retour d'erreur sql au cas où
-				$anaupd[$type]['ids'][$id]['wdg'][] = $widget;
-				$anaupd[$type]['ids'][$id]['chval'][$champtable] = $m[1];
 			}
 		}
 		if (!$anamod) {
-			die(ecco_widgets(_T('widgets:pas_de_modification'), 4));
+			$return['$erreur'] = _T('widgets:pas_de_modification');
 		}
+
+		// une quelquonque erreur ... ou rien ==> on ne fait rien !
+		if ($return['$erreur']) {
+			return var2js($return);
+		}
+
 		foreach($anaupd as $type => $idschamps) {
 			foreach($idschamps['ids'] as $id => $champsvaleurs) {
 
@@ -132,7 +139,7 @@ function action_widgets_html_dist() {
 			}
 		}
 		foreach($anamod as $m) {
-			list($widget,$type,$champ,$id,$valeur) = $m;
+			list($wid,$type,$champ,$id,$valeur) = $m;
 
 			// VUE
 			// chercher vues/article_toto.html
@@ -144,13 +151,13 @@ function action_widgets_html_dist() {
 					'lang' => $GLOBALS['spip_lang']
 				);
 				include_spip('public/assembler');
-				echo ecco_widgets(recuperer_fond($fond, $contexte));
+				$return[$wid] = recuperer_fond($fond, $contexte);
 			}
 			// vues par defaut
 			elseif (in_array($champ, array('chapo', 'texte', 'descriptif', 'ps'))) {
-				echo ecco_widgets(propre($valeur));
+				$return[$wid] = propre($valeur);
 			} else {
-				echo ecco_widgets(typo($valeur));
+				$return[$wid] = typo($valeur);
 			}
 		}
 	}
@@ -160,18 +167,24 @@ function action_widgets_html_dist() {
 	else if (preg_match(_PREG_WIDGET, $_GET['class'], $regs)) {
 		list(,$widget,$type,$champ,$id) = $regs;
 		if (!$autoriser_modifs($type, $champ, $id)) {
-			die(ecco_widgets("$type $id: " . _T('widgets:non_autorise'), 2));
+			$return['$erreur'] = "$type $id: " . _T('widgets:non_autorise');
+		} else {
+			$f = charger_fonction($type.'_'.$champ, 'controleurs', true)
+			OR $f = charger_fonction($champ, 'controleurs', true)
+			OR $f = 'controleur_dist';
+			list($html,$status) = $f($regs);
+			if ($status) {
+				$return['$erreur'] = $html;
+			} else {
+				$return['$html'] = $html;
+			}
 		}
-		$f = charger_fonction($type.'_'.$champ, 'controleurs', true)
-		OR $f = charger_fonction($champ, 'controleurs', true)
-		OR $f = 'controleur_dist';
-		list($html,$status) = $f($regs);
-		echo ecco_widgets($html, $status);
-		exit;
 	} else {
-		die(ecco_widgets(_T('widgets:donnees_mal_formatees'), 1));
+		$return['$erreur'] = _T('widgets:donnees_mal_formatees');
 	}
 
+	echo var2js($return);
+	exit;
 }
 
 

@@ -21,16 +21,16 @@ function post_widgets() {
 		if (md5($_POST['content_'.$widget]) <> $_POST['md5_'.$widget]) {
 
 			if (!isset($_POST['secu_'.$widget]))
-				$results[] = array($name, $content, $_POST['md5_'.$widget]);
+				$results[] = array($name, $content, $_POST['md5_'.$widget], $widget);
 
 			elseif (verif_secu($name, $_POST['secu_'.$widget]))
-				$results[] = array($name, $content, $_POST['md5_'.$widget]);
+				$results[] = array($name, $content, $_POST['md5_'.$widget], $widget);
 			else
 				return false; // erreur secu
 		}
 		// cas inchange
 		else
-			$results[] = array($name, $content, false);
+			$results[] = array($name, $content, false, $widget);
 	}
 
 	return $results;
@@ -65,7 +65,7 @@ class Widget {
 
 	function code() {
 		return
-		'<input type="hidden" name="widgets[]" value="'.$this->key.'" />'."\n"
+		'<input type="hidden" class="widget_id" name="widgets[]" value="'.$this->key.'" />'."\n"
 		. '<input type="hidden" name="name_'.$this->key.'" value="'.$this->name.'" />'."\n"
 		. '<input type="hidden" name="md5_'.$this->key
 		.'" value="'.$this->md5().'" />'."\n";
