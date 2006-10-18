@@ -29,36 +29,6 @@ function choix_couleur() {
 	}
 }
 
-//
-// affiche un bouton imessage
-//
-// http://doc.spip.org/@bouton_imessage
-function bouton_imessage($destinataire, $row = '') {
-	// si on passe "force" au lieu de $row, on affiche l'icone sans verification
-	global $connect_id_auteur;
-	global $spip_lang_rtl;
-
-	// verifier que ce n'est pas un auto-message
-	if ($destinataire == $connect_id_auteur)
-		return;
-	// verifier que le destinataire a un login
-	if ($row != "force") {
-		$login_req = spip_query("SELECT login, messagerie FROM spip_auteurs where id_auteur=$destinataire AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 DAY)");
-		$row = spip_fetch_array($login_req);
-
-		if (($row['login'] == "") OR ($row['messagerie'] == "non")) {
-			return;
-		}
-	}
-
-	if ($destinataire) $title = _T('info_envoyer_message_prive');
-	else $title = _T('info_ecire_message_prive');
-
-	$texte_bouton = http_img_pack("m_envoi$spip_lang_rtl.gif", "m&gt;", "width='14' height='7'", $title);
-		
-	return "<a href='". generer_url_ecrire("message_edit","new=oui&dest=$destinataire&type=normal"). "' title=\"$title\">$texte_bouton</a>";
-}
-
 // Faux HR, avec controle de couleur
 
 // http://doc.spip.org/@hr
@@ -382,6 +352,7 @@ function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $
 // La boite des raccourcis
 // Se place a droite si l'ecran est en mode panoramique.
 
+// http://doc.spip.org/@bloc_des_raccourcis
 function bloc_des_raccourcis($bloc) {
 	global $spip_display;
 
@@ -487,7 +458,7 @@ function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $url='', $nb_a
 		else {
 			$script = parametre_url($self, $tmp_var, $deb-1);
 			if ($url) {
-				$on = "\nonClick=\"return charger_id_url('"
+				$on = "\nonclick=\"return charger_id_url('"
 				. $url
 				. "&"
 				. $tmp_var
@@ -512,7 +483,7 @@ function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $url='', $nb_a
 	} else {
 			$script = parametre_url($self, $tmp_var, -1);
 			if ($url) {
-				$on = "\nonClick=\"return charger_id_url('"
+				$on = "\nonclick=\"return charger_id_url('"
 				. $url
 				. "&"
 				. $tmp_var
@@ -823,9 +794,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			echo "<div id='$tmp_var'>";
 
 	}
-		
-	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
-		
 
 	//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 	echo afficher_liste_debut_tableau(), $tranches;
@@ -833,8 +801,11 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 
 	$table = array();
+	$formater_article = charger_fonction('formater_article', 'inc');
 	while ($row = spip_fetch_array($result)) {
-		$table[]= afficher_articles_boucle($row, $tous_id, $afficher_auteurs, $afficher_langue, $langue_defaut, $voir_logo);
+	  	$id = $row['id_article'];
+		$tous_id[]= $id;
+		$table[]= $formater_article($id, $row, $afficher_auteurs, $afficher_langue, $langue_defaut);
 	}
 	spip_free_result($result);
 
@@ -871,94 +842,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	return $tous_id;
 }
-
-// http://doc.spip.org/@afficher_articles_boucle
-function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_langue, $langue_defaut, $voir_logo)
-{
-  global $connect_id_auteur, $dir_lang, $options, $spip_lang_right;
-
-	$vals = '';
-
-	$id_article = $row['id_article'];
-	$tous_id[] = $id_article;
-	$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
-	$id_rubrique = $row['id_rubrique'];
-	$date = $row['date'];
-	$statut = $row['statut'];
-	if ($lang = $row['lang']) changer_typo($lang);
-	$descriptif = $row['descriptif'];
-	if ($descriptif) $descriptif = ' title="'.attribut_html(typo($descriptif)).'"';
-	$petition = $row['petition'];
-
-	if ($afficher_auteurs) {
-		$les_auteurs = "";
-		$result_auteurs = spip_query("SELECT auteurs.id_auteur, nom, messagerie, login, bio FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$id_article AND auteurs.id_auteur=lien.id_auteur");
-
-
-		while ($row = spip_fetch_array($result_auteurs)) {
-			$id_auteur = $row['id_auteur'];
-			$nom_auteur = typo($row['nom']);
-			$auteur_messagerie = $row['messagerie'];
-
-			if ($bio = texte_backend(supprimer_tags(couper($row['bio'],50))))
-				$bio = " title=\"$bio\"";
-
-
-			$les_auteurs .= ", <a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'$bio>$nom_auteur</a>";
-			if ($id_auteur != $connect_id_auteur AND $auteur_messagerie != "non"
-			AND $bouton = bouton_imessage($id_auteur, $row)) {
-				$les_auteurs .= "&nbsp;".$bouton;
-			}
-		}
-		$les_auteurs = substr($les_auteurs, 2);
-	}
-
-	// La petite puce de changement de statut
-	$vals[] = puce_statut_article($id_article, $statut, $id_rubrique);
-
-	// Le titre (et la langue)
-	$s = "<div>";
-
-	if (acces_restreint_rubrique($id_rubrique))
-		$s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
-
-	$s .= "<a href='" . generer_url_ecrire("articles","id_article=$id_article") .
-		"'$descriptif$dir_lang style=\"display:block;\">";
-
-	if ($voir_logo) {
-		$logo_f = charger_fonction('chercher_logo', 'inc');
-		if ($logo = $logo_f($id_article, 'id_article', 'on')) {
-			list($fid, $dir, $nom, $format) = $logo;
-			$logo = ratio_image($fid, $nom, $format, 26, 20, "alt=''");
-			if ($logo)
-				$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
-		}
-	}
-
-	$s .= typo($titre);
-	if ($afficher_langue AND $lang != $langue_defaut)
-		$s .= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
-	if ($petition) $s .= " <font size=1 color='red'>"._T('lien_petitions')."</font>";
-	$s .= "</a>";
-	$s .= "</div>";
-	
-	$vals[] = $s;
-
-	// Les auteurs
-	if ($afficher_auteurs) $vals[] = $les_auteurs;
-
-	// La date
-	$vals[] = affdate_jourcourt($date);
-
-	// Le numero (moche)
-	if ($options == "avancees") {
-		$vals[] = "<b>"._T('info_numero_abbreviation')."$id_article</b>";
-	}
-	
-
-	return $vals;
-}
-
 
 // http://doc.spip.org/@afficher_articles_trad
 function afficher_articles_trad($titre_table, $requete, $afficher_visites = false, $afficher_auteurs = true,
@@ -1057,7 +940,8 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 
 	$table = array();
 	while ($row = spip_fetch_array($result)) {
-		$table[]=afficher_articles_trad_boucle($row, $tous_id, $afficher_langue, $langue_defaut, $langues_site);
+	  	$tous_id[] = $row['id_article'];
+		$table[]=afficher_articles_trad_boucle($row, $afficher_langue, $langue_defaut, $langues_site);
 	}
 	spip_free_result($result);
 
@@ -1078,14 +962,13 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 }
 
 // http://doc.spip.org/@afficher_articles_trad_boucle
-function afficher_articles_trad_boucle($row, &$tous_id, $afficher_langue, $langue_defaut, $langues_site)
+function afficher_articles_trad_boucle($row, $afficher_langue, $langue_defaut, $langues_site)
 {
 	global $dir_lang,  $spip_lang_right;
 
 	$vals = '';
 
 	$id_article = $row['id_article'];
-	$tous_id[] = $id_article;
 	$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 	$id_rubrique = $row['id_rubrique'];
 	$date = $row['date'];
@@ -1378,7 +1261,7 @@ function afficher_auteurs ($titre_table, $requete) {
 			echo "<p><table width='100%' cellpadding='0' cellspacing='0' border='0' background=''>";
 			echo "<tr><td width='100%' background=''>";
 			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
-			echo "<tr bgcolor='#333333'><td width='100%' colspan='2'><font face='Verdana,Arial,Sans,sans-serif' size=3 color='#FFFFFF'>";
+			echo "<tr bgcolor='#333333'><td width='100%' colspan='5'><font face='Verdana,Arial,Sans,sans-serif' size=3 color='#FFFFFF'>";
 			echo "<b>$titre_table</b></font></td></tr>";
 		}
 	else {
@@ -1391,36 +1274,20 @@ function afficher_auteurs ($titre_table, $requete) {
 
 	$table = array();
 	while ($row = spip_fetch_array($result)) {
-		$table[]= affiche_auteur_boucle($row, $tous_id);
+		$tous_id[] = $row['id_auteur'];
+		$formater_auteur = charger_fonction('formater_auteur', 'inc');
+		$table[]= $formater_auteur($row['id_auteur']);
 	}
 	spip_free_result($result);
-	$largeurs = array('');
-	$styles = array('arial2');
+	$largeurs = array(20, 20, 200, 20, 50);
+	$styles = array('','','arial2','arial1','arial1');
 	echo afficher_liste($largeurs, $table, $styles);
 
-	if ($titre_table) echo "</TABLE></TD></TR>";
-	echo "</TABLE>";
+	if ($titre_table) echo "</table></td></tr>";
+	echo "</table>";
 	fin_cadre_relief();
 
 	return $tous_id;
-}
-
-// http://doc.spip.org/@affiche_auteur_boucle
-function affiche_auteur_boucle($row, &$tous_id)
-{
-	$vals = '';
-
-	$id_auteur = $row['id_auteur'];
-	$tous_id[] = $id_auteur;
-	$nom = $row['nom'];
-
-	$s = bonhomme_statut($row);
-	$s .= "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'>";
-	$s .= typo($nom);
-	$s .= "</a>";
-	$vals[] = $s;
-
-	return $vals;
 }
 
 //
@@ -1492,7 +1359,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	$res = "<a id='$id_forum'></a>";
 
 	if ($spip_display == 4) {
-		$res .= "<li>".typo($titre)."<br>";
+		$res .= "<li>".typo($titre)."<br />";
 	} else {
 
 		$titre_boite = '';
@@ -1525,18 +1392,14 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 		$res .= "<div style='border: 1px solid yellow; padding: 5px;'>";
 	}
 		
-	$res .= "<span class='arial2'>". date_interface($date_heure) . "</span> ";
-
-	if ($id_auteur)
-		$res .= "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'>".typo($auteur)."</a>";
-	else if ($email_auteur)
-		$res .= "<a href='mailto:$email_auteur'>".typo($auteur)."</a>";
-	else	$res .= typo($auteur);
+	$res .= "<span class='arial2'>". date_interface($date_heure) . "</span>&nbsp;&nbsp;";
 
 	if ($id_auteur) {
-		$bouton = bouton_imessage($id_auteur);
-		if ($bouton) $res .= "&nbsp;".$bouton;
-	}
+		$formater_auteur = charger_fonction('formater_auteur', 'inc');
+		$res .= join(' ',$formater_auteur($id_auteur));
+	} else if ($email_auteur)
+		$res .= "<a href='mailto:$email_auteur'>".typo($auteur)."</a>";
+	else	$res .= typo($auteur);
 
 	// boutons de moderation
 	if ($controle_id_article)
@@ -1640,32 +1503,32 @@ function envoi_link($nom_site_spip) {
 	// CSS de secours en cas de non fonct de la suivante
 	$res = '<link rel="stylesheet" type="text/css" href="'
 	. find_in_path('style_prive_defaut.css')
-	. '" >'  . "\n"
+	. '" />'  . "\n"
 	
 	// CSS espace prive : la vraie
 	. '<link rel="stylesheet" type="text/css" href="'
-	. generer_url_public('style_prive', $args) .'" >' . "\n"
+	. generer_url_public('style_prive', $args) .'" />' . "\n"
 
 	// CSS calendrier
 	. '<link rel="stylesheet" type="text/css" href="'
-	. find_in_path('agenda.css') .'" >' . "\n"
+	. find_in_path('agenda.css') .'" />' . "\n"
 
 	// CSS imprimante (masque des trucs, a completer)
 	. '<link rel="stylesheet" type="text/css" href="'
 	. find_in_path('spip_style_print.css')
-	. '" media="print" >' . "\n"
+	. '" media="print" />' . "\n"
 
 	// CSS "visible au chargement" differente selon js actif ou non
 	. '<link rel="stylesheet" type="text/css" href="'
 	. find_in_path('spip_style_'
 		. (($_COOKIE['spip_accepte_ajax'] != -1) ? 'invisible' : 'visible')
 		. '.css')
-	.' " >' . "\n"
+	.' " />' . "\n"
 
 	// favicon.ico
 	. '<link rel="shortcut icon" href="'
 	. url_absolue(find_in_path('favicon.ico'))
-	. "\" >\n";
+	. "\" />\n";
 	$js = debut_javascript($connect_toutes_rubriques,
 			($GLOBALS['meta']["activer_statistiques"] != 'non'));
 
@@ -1674,16 +1537,16 @@ function envoi_link($nom_site_spip) {
 	$nom = entites_html($nom_site_spip);
 
 	$res .= "<link rel='alternate' type='application/rss+xml' title=\"$nom\" href='"
-			. generer_url_public('backend') . "' >\n";
+			. generer_url_public('backend') . "' />\n";
 	$res .= "<link rel='help' type='text/html' title=\""._T('icone_aide_ligne') . 
 			"\" href='"
 			. generer_url_ecrire('aide_index',"var_lang=$spip_lang")
-			."' >\n";
+			."' />\n";
 	if ($GLOBALS['meta']["activer_breves"] != "non")
 		$res .= "<link rel='alternate' type='application/rss+xml' title=\""
 			. $nom
 			. " ("._T("info_breves_03")
-			. ")\" href='" . generer_url_public('backend-breves') . "' >\n";
+			. ")\" href='" . generer_url_public('backend-breves') . "' />\n";
 
 	return $res . $js;
 }
@@ -1747,14 +1610,14 @@ function debut_onglet(){
 
 	echo "\n\n";
 	echo "<div style='padding: 7px;'><table cellpadding='0' cellspacing='0' border='0' align='center'>";
-			if (_request('exec')!='rangement_plugin'){
+	if (_request('exec')!='rangement_plugin'){
 		echo "<tr>";
 	}
 }
 
 // http://doc.spip.org/@fin_onglet
 function fin_onglet(){
-		if (_request('exec')!='rangement_plugin'){
+	if (_request('exec')!='rangement_plugin'){
 		echo "<tr>";
 	}
 	echo "</table></div>\n\n";
@@ -1764,7 +1627,7 @@ function fin_onglet(){
 function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	global $spip_display, $spip_lang_left ;
 
-	if (_request('exec')=='rangement_plugin'){
+if (_request('exec')=='rangement_plugin'){
 		echo "</tr>";
 	}
 	echo "<td>";
@@ -1803,7 +1666,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 		echo "</div>";
 	}
 	echo "</td>";
-		if (_request('exec')=='rangement_plugin'){
+	if (_request('exec')=='rangement_plugin'){
 		echo "</tr>";
 	}
 }
@@ -1848,6 +1711,7 @@ function largeur_icone_bandeau_principal($texte) {
 	return $largeur;
 }
 
+// http://doc.spip.org/@bandeau_principal
 function bandeau_principal($rubrique, $sous_rubrique, $largeur)
 {
 	$res = '';
@@ -1912,7 +1776,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	$class_select = ($sous_rubrique_icone == $sous_rubrique) ? " class='selection'" : '';
 
 	if (eregi("^javascript:",$lien)) {
-		$a_href = "\nonClick=\"$lien; return false;\" href='$lien_noscript' target='spip_aide'$class_select";
+		$a_href = "\nonclick=\"$lien; return false;\" href='$lien_noscript' target='spip_aide'$class_select";
 	}
 	else {
 		$a_href = "\nhref=\"$lien\"$class_select";
@@ -2039,15 +1903,23 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	if ($spip_display != 3){
 		$icone .= "<span>$texte</span>";
 	}
-	$icone = "\n<table cellpadding='0' class='pointeur' cellspacing='0' border='0' width='$largeur'" .
-	  ((strlen($align) > 2) ? " align='$align' " : '') .
-	">\n<tr><td class='icone36$style' style='text-align:center;'><a
-	href='$lien'>$icone</a></td>\n</tr></table>";
 
-	if ($afficher == 'oui')
-		echo $icone;
-	else
-		return $icone;
+	// cas d'ajax_action_auteur: faut defaire le boulot 
+	// (il faudrait fusionner avec le cas $javascript)
+	if (preg_match(",^<a\shref='([^']*)'([^>]*)>(.*)</a>$,i",$lien,$r))
+	  list($x,$lien,$atts,$texte)= $r;
+	else $atts = '';
+	$lien = "\nhref='$lien'$atts";
+
+	$icone = "\n<table cellpadding='0' class='pointeur' cellspacing='0' border='0' width='$largeur'"
+	. ((strlen($align) > 2) ? " align='$align' " : '')
+	. ">\n<tr><td class='icone36$style' style='text-align:center;'><a"
+	. $lien
+	. '>'
+	. $icone
+	. "</a></td></tr></table>\n";
+
+	if ($afficher == 'oui')	echo $icone; else return $icone;
 }
 
 // http://doc.spip.org/@icone_horizontale
@@ -2068,14 +1940,14 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 		if ($spip_display != 1) {
 			$retour .= "\n<table class='cellule-h-table' cellpadding='0' valign='middle'>"
 			. "\n<tr><td><a $javascript$lien class='cellule-h'>"
-			. "<div class='cell-i'>" ;
+			. "<span class='cell-i'>" ;
 			if ($fonction){
 				$retour .= http_img_pack($fonction, "", http_style_background($fond, "center center no-repeat"));
 			}
 			else {
 				$retour .= http_img_pack($fond, "", "");
 			}
-			$retour .= "</div></a></td>"
+			$retour .= "</span></a></td>"
 			. "\n<td class='cellule-h-lien'><a $javascript$lien class='cellule-h'>"
 			. $texte
 			. "</a></td></tr></table>\n";
@@ -2115,19 +1987,20 @@ function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accuei
 
 	include_spip('inc/headers');
 	http_no_cache();
-	echo init_entete($titre, $rubrique);
+	echo init_entete($titre, $id_rubrique);
 	init_body($rubrique, $sous_rubrique, $onLoad, $id_rubrique);
 
 	echo "<center onmouseover='recherche_desesperement()'>", // ????
 		avertissement_messagerie(),
 		(($rubrique == "messagerie")
-		 OR ($GLOBALS['changer_config']!="oui")) 
+		 OR (_request('changer_config')!="oui")) 
 		? auteurs_recemment_connectes() : '';
 }
 
 // envoi du doctype et du <head><title>...</head> 
 // http://doc.spip.org/@init_entete
-function init_entete($titre='', $rubrique='') {
+function init_entete($titre='', $id_rubrique=0) {
+  include_spip('inc/gadgets');
 
 	if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
 		$nom_site_spip=  _T('info_mon_site_spip');
@@ -2140,7 +2013,20 @@ function init_entete($titre='', $rubrique='') {
 			"; charset=$c" : '')
 		. "' />\n"
 		. envoi_link($nom_site_spip);
-	
+
+	// anciennement verifForm
+	$head .= '
+	<script type="text/javascript"><!--
+	$(document).ready(function(){
+		verifForm();
+	'
+	.
+	repercuter_gadgets($id_rubrique)
+	.'
+	});
+	// --></script>
+	';
+
 	return _DOCTYPE_ECRIRE
 	. html_lang_attributes()
 	. "<head>\n"
@@ -2150,18 +2036,16 @@ function init_entete($titre='', $rubrique='') {
 
 // fonction envoyant la double serie d'icones de redac
 // http://doc.spip.org/@init_body
-function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $id_rubrique='') {
+function init_body($rubrique='accueil', $sous_rubrique='accueil', $load='', $id_rubrique='') {
 	global $couleur_foncee, $couleur_claire;
 	global $connect_id_auteur, $connect_toutes_rubriques;
 	global $auth_can_disconnect;
 	global $options, $spip_display, $spip_ecran;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
-	global $browser_verifForm;
-	include_spip('inc/gadgets');
 
 	definir_barre_boutons();
-	if ($load = "$browser_verifForm$onLoad" . repercuter_gadgets($id_rubrique))
-		$load = " onLoad=\"$load\"";
+	if ($load)
+		$load = " onload=\"$load\"";
 
 	echo pipeline('body_prive',"<body ". _ATTRIBUTES_BODY
 		.$load
@@ -2288,7 +2172,7 @@ if (true /*$bandeau_colore*/) {
 
 		if (!($connect_toutes_rubriques)) {
 			echo http_img_pack("rien.gif", " ", "width='10'");
-			echo "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur") . "' class='icone26' onmouseover=\"changestyle('bandeauinfoperso','visibility','visible');\">" .
+			echo "<a href='" . generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur&initial=-1") . "' class='icone26' onmouseover=\"changestyle('bandeauinfoperso','visibility','visible');\">" .
 			  http_img_pack("fiche-perso.png", "", "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"");
 			echo "</a>";
 		}
@@ -2383,6 +2267,7 @@ if (true /*$bandeau_colore*/) {
 }
 
 
+// http://doc.spip.org/@avertissement_messagerie
 function avertissement_messagerie() {
 	global $couleur_foncee;
 	global $connect_id_auteur;
@@ -2399,20 +2284,21 @@ function avertissement_messagerie() {
 }
 
 
+// http://doc.spip.org/@auteurs_recemment_connectes
 function auteurs_recemment_connectes()
 {	
 	global $connect_id_auteur;
 	$res = '';
-	$result_auteurs = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE) AND statut IN ('0minirezo','1comite')");
+	$result_auteurs = spip_query("SELECT id_auteur FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE) AND statut IN ('0minirezo','1comite')");
 
 	if (spip_num_rows($result_auteurs)) {
-
-		$res = "<b>"._T('info_en_ligne')."</b>";
+		$formater_auteur = charger_fonction('formater_auteur', 'inc');
+		$res = "<b>"._T('info_en_ligne'). "&nbsp;</b>";
 		while ($row = spip_fetch_array($result_auteurs)) {
-			$id_auteur = $row["id_auteur"];
-			$nom_auteur = typo($row["nom"]);
-			$res .= " &nbsp; ".bouton_imessage($id_auteur,$row)."&nbsp;<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "' style='color: #666666;'>$nom_auteur</a>";
+			list($s, $mail, $nom, $w, $p) = $formater_auteur($row['id_auteur']);
+			$res .= "$mail&nbsp;$nom, ";
 		}
+		$res = substr($res,0,-2);
 	}
 
 	return "<div class='messages' style='color: #666666;'>$res</div>";
@@ -2458,15 +2344,16 @@ function fin_grand_cadre($return=false){
 // Cadre formulaires
 
 // http://doc.spip.org/@debut_cadre_formulaire
-function debut_cadre_formulaire($style=''){
-	echo "\n<div class='cadre-formulaire'" .
+function debut_cadre_formulaire($style='', $return=false){
+	$x = "\n<div class='cadre-formulaire'" .
 	  (!$style ? "" : " style='$style'") .
 	   ">";
+	if ($return) return  $x; else echo $x;
 }
 
 // http://doc.spip.org/@fin_cadre_formulaire
-function fin_cadre_formulaire(){
-	echo "</div>\n";
+function fin_cadre_formulaire($return=false){
+	if ($return) return  "</div>\n"; else echo "</div>\n";
 }
 
 
@@ -2594,6 +2481,7 @@ function debut_droite($rubrique="", $return= false) {
 	if ($return) return $res; else echo $res;
 }
 
+// http://doc.spip.org/@liste_articles_bloques
 function liste_articles_bloques()
 {
 	global $connect_id_auteur, $couleur_foncee;
@@ -2669,12 +2557,11 @@ function debloquer_article($arg, $texte) {
 	  "</a>";
 }
 
-
+// http://doc.spip.org/@meme_rubrique
 function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
 {
 	global $spip_lang_right, $spip_lang_left, $options;
 
-spip_log("option mr $options");
 	if ($options != "avancees") return '';
 
 	$table = $type . 's';
@@ -2695,7 +2582,7 @@ spip_log("option mr $options");
 		. "' style='font-size: 10px;' href='"
 		  . generer_url_ecrire($table,"$key=$ze")
 		. "'>"
-		. "<div class='arial1' style='$style'><b>$numero$ze</b></div>"
+		. "<span class='arial1' style='$style'><b>$numero$ze</b></span>"
 		. typo($row['titre'])
 		. "</a>";
 	}
