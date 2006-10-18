@@ -1,0 +1,78 @@
+<plugin>
+	<nom> <!-- Coloration code , geshi -->
+	  <multi>
+		[fr]Coloration Code
+		[en]Code higlighting
+		[it]Colorazione del codice
+		</multi>
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	  Pierre Andrews (Mortimer) &amp; ARNO*
+	</auteur>
+	<version>
+	  0.2
+	</version>
+	<etat>
+	  stable
+	</etat>
+	<description>
+	<multi>
+	[fr]
+	  Coloration syntaxique du code source dans SPIP
+
+	  il suffit de mettre le code entre {{&lt;code class="langage">...&lt;/code>}} ou {{&lt;cadre class="langage">...&lt;/cadre>}}.
+	  Les langages support&eacute;s sont ceux fournis par [->http://sourceforge.net/projects/geshi/].
+	  
+	  Vous pouvez aussi utiliser coloration_code comme un filtre , voir exemple lecode.html
+	  
+	  L'url depuis l'article serait 
+<![CDATA[	  
+        <div style="float: right">
+        <a href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}" title="voir le code de article" class="spip_in">Voir le code de l'article</a>
+        </div>	  
+]]>
+	  [en]
+	  Syntax higlighting of code placed in SPIP articles.
+
+	  You just have to put it between the tags:{{&lt;code class="language">...&lt;/code>}} or  ou {{&lt;cadre class="langage">...&lt;/cadre>}}.
+	  The possible languages are the ones supported by [->http://sourceforge.net/projects/geshi/].
+	  
+	  You may also use coloration_code as a filter , see example lecode.html
+	  
+	  From article url would be 
+<![CDATA[	  
+        <div style="float: right">
+        <a href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}" title="view article's code" class="spip_in">View article's code</a>
+        </div>	  
+]]>
+	[it]
+	Colorazione sintattica del codice utilizzato nel testo.
+
+	Dovete solo utilizzare il segnaposto:  {{&lt;code class="linguaggio">...&lt;/code>}},  o {{&lt;cadre class="langage">...&lt;/cadre>}}.
+	&Egrave; compatibile con i linguaggi di [->http://sourceforge.net/projects/geshi/].
+	  
+	Potete utilizzare coloration_code anche come un filtro , vedete l'esempio lecode.html
+	  
+	L'url per vedere il codice dell'articolo dalla sua stessa pagina sarà:
+<![CDATA[	  
+        <div style="float: right">
+        <a href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}" title="vedi il codice dell'articolo" class="spip_in">Vedi il codice dell'articolo</a>
+        </div>
+]]>
+	  </multi>
+	</description>
+    <fonctions> <!-- charge a chaque recalul de page , donc filtre -->
+        coloration_code.php
+    </fonctions>
+	<prefix> 
+	  coloration_code
+	</prefix>
+	<!--
+Lors de pre typo , on va passer le texte a travers de coloration_code_echappe() (prefix+action)
+	-->
+	<pipeline>
+		<nom>pre_typo</nom>
+		<action>echappe</action>
+		<inclure>coloration_code.php</inclure>
+	</pipeline>
+</plugin>
