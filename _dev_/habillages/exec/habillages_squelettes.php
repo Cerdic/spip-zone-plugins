@@ -150,7 +150,7 @@ EOF;
 		# site par defaut, surtout si le squelette a ete personnalise.
 		lire_metas();
 		$squelettes = $GLOBALS['meta']['habillages_squelettes'];
-		if ($squelettes == "" || $squelettes == "defaut") {
+		if ($squelettes == "" || $squelettes == "defaut" || $squelettes == "dist") {
 			$defaut_checked = " checked='checked'";
 		}
 		echo "<ul>";
@@ -159,6 +159,13 @@ EOF;
 		echo "<input type='radio' name='statusplug' value='defaut'$defaut_checked>";
 		echo "<strong>"._T('habillages:squelettes_defaut_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
 		echo "<small>"._T('habillages:squelettes_defaut_description')."</small><br /><br /><hr>";
+		fin_boite_info();
+		debut_boite_info();
+		echo "<div style='background-color:$couleur_claire'>";
+		echo "<input type='radio' name='statusplug' value='dist'$defaut_checked>";
+		echo "<strong>"._T('habillages:squelettes_dist_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+		echo "<small>"._T('habillages:squelettes_dist_description')."</small><br /><br /><hr>";
+		echo "<div class='auteur'>Collectif.<br />&copy; 2001 - 2006 - Distribue sous licence GNU/GPL</div><hr>";
 		fin_boite_info();
 		echo "</ul>";
 	
@@ -251,9 +258,46 @@ EOF;
 	echo "</form></tr></table>\n";
 	
 	echo "<br />";
-
+	
 	fin_page();
 
+	# Si il y chagement de squelettes, chercher si le squelette a des themes associes. si oui,
+	# renseigner un champs meta pour afficher l'onglet "themes".
+	if (_request('changer_plugin')=='oui'){
+		
+		if (_request('statusplug') == "dist") {
+			ecrire_meta('habillages_is_themes', 'oui');
+			ecrire_metas;
+		}
+		else {
+		lire_metas();
+		$choix_squelettes = $GLOBALS['meta']['habillages_squelettes'];
+		$xml_squelette = _DIR_PLUGINS.$choix_squelettes."/theme.xml";
+		lire_fichier($xml_squelette, $texte_xml);
+		$arbre_xml = parse_plugin_xml($texte_xml);
+		$arbre_xml = $arbre_xml['theme'][0];
+		$nom_theme = applatit_arbre($arbre_xml['prefixe']);
+
+		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
+		
+		foreach ($fichier_theme as $fichier){
+			lire_fichier($fichier, $texte);
+			$arbre = parse_plugin_xml($texte);
+			$arbre = $arbre['theme'][0];
+			$squelettes_theme = applatit_arbre($arbre['squelettes']);
+			
+			if ($nom_theme == $squelettes_theme) {
+				ecrire_meta('habillages_is_themes', 'oui');
+				ecrire_metas;
+			}
+			else {
+				ecrire_meta('habillages_is_themes', 'non');
+				ecrire_metas;
+			}
+		}
+	}
+}
+	
 }
 
 ?>
