@@ -22,7 +22,7 @@ function habillages_ajouter_boutons($boutons_admin) {
 	}
 
 function habillages_ajouter_onglets($flux) {
-	if (_request('exec')=='config_habillages' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_extras' || _request('exec')=='habillages_images' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_aide' || _request('exec')=='habillages_themes') {
+	if (_request('exec')=='config_habillages' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_extras' || _request('exec')=='habillages_logos' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_aide' || _request('exec')=='habillages_themes') {
 		$flux['data']['accueil']= new Bouton(
 	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_icone-22.png', 'Accueil', generer_url_ecrire("config_habillages"));
 	$flux['data']['squelettes']= new Bouton(
@@ -42,7 +42,7 @@ return $flux;
 }
 
 function habillages_header_prive($flux) {
-	if (_request('exec')=='config_habillages' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_themes' || _request('exec')=='habillages_images' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_images') {
+	if (_request('exec')=='config_habillages' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_themes' || _request('exec')=='habillages_logos' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_images') {
 		$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_HABILLAGES.'img_pack/habillages_habillages.css" type="text/css" >'."\n";
 		}
 		
