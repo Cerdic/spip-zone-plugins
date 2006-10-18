@@ -101,30 +101,34 @@ function action_widgets_html_dist() {
 				}
 				$anamod[] = array($widget,$type,$champ,$id,$m[1]);
 				if (!isset($anaupd[$type])) {
-					$anaupd[$type] = array();
+					// MODELE
+					switch($type) {
+						case 'article':
+							include_spip('action/editer_article');
+							$fun = 'revisions_articles';
+							break;
+						default :
+							die(ecco_widgets("$type: " . _T('widgets:non_implemente'), 5));
+					}
+					$anaupd[$type] = array('fun'=>$fun, 'ids'=>array());
 				}
-				if (!isset($anaupd[$type][$id])) {
-					$anaupd[$type][$id] = array();
+				if (!isset($anaupd[$type]['ids'][$id])) {
+					$anaupd[$type]['ids'][$id] = array('wdg'=>array(), 'chval'=>array());
 				}
-				$anaupd[$type][$id][$champtable] = $m[1];
+				// pour réaffecter le retour d'erreur sql au cas où
+				$anaupd[$type]['ids'][$id]['wdg'][] = $widget;
+				$anaupd[$type]['ids'][$id]['chval'][$champtable] = $m[1];
 			}
 		}
 		if (!$anamod) {
 			die(ecco_widgets(_T('widgets:pas_de_modification'), 4));
 		}
 		foreach($anaupd as $type => $idschamps) {
-			foreach($idschamps as $id => $champsvaleurs) {
+			foreach($idschamps['ids'] as $id => $champsvaleurs) {
 
 				// Enregistrer dans la base
-				// MODELE
-				switch($type) {
-					case 'article':
-						include_spip('action/editer_article');
-						revisions_articles($id, false, $champsvaleurs);
-						break;
-					default :
-						die(ecco_widgets("$type: " . _T('widgets:non_implemente'), 5));
-				}
+				// $updok = ... quand on aura un retour
+				$idschamps['fun']($id, false, $champsvaleurs['chval']);
 			}
 		}
 		foreach($anamod as $m) {
