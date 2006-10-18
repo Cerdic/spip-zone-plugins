@@ -104,9 +104,12 @@ $.fn.activatewidget = function() {
         .hide()
         .html('');
       }).onesubmit(function(){
-        $("form", me)
-        .append(SEARCHING); // icone d'attente
-      })
+        $(this)
+        .append(SEARCHING) // icone d'attente
+        .children(".widgets_boutons").hide(); // boutons de validation
+      }).keyup(function(){
+        $(this).children(".widgets_boutons").show();
+	  })
       .find(".widget-active")
         .css('font', 'inherit') // pour safari
         .css({

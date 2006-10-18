@@ -206,9 +206,7 @@ function controleur_dist($regs) {
 		$html =
 		<<<FIN_FORM
 
-<form method="post" action="{$widgetsAction}"
-	onkeyup="$(&quot;.widgets_boutons&quot;, this).show();"
-	onsubmit="$(&quot;.widgets_boutons&quot;, this).hide();">
+<form method="post" action="{$widgetsAction}">
   {$widgetsCode}
   {$widgetsInput}
   <div class="widgets_boutons">
