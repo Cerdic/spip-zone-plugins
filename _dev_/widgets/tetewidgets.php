@@ -56,6 +56,8 @@ function Widgets_preparer_page($page, $droits) {
 
 	$txtEditer = addslashes(html2unicode(_T(
 		'widgets:editer')));
+	$txtChanged = addslashes(html2unicode(_T(
+		'widgets:deja_modifie')));
 //	$txtErrInterdit = addslashes(unicode_to_javascript(html2unicode(_T(
 //		'widgets:erreur_ou_interdit'))));
 
@@ -67,7 +69,8 @@ function Widgets_preparer_page($page, $droits) {
 	var configWidgets = new configWidgets({
 		'droits':{$droits},
 		'imgPath':'{$imgPath}',
-		'txtEditer':'{$txtEditer}'
+		'txtEditer':'{$txtEditer}',
+		'txtChanged':'{$txtChanged}'
 	});
 </script >
 EOH;
