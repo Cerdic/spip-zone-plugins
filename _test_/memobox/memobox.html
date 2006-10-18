@@ -1,0 +1,89 @@
+#CACHE{24*3600,cache-client}
+#HTTP_HEADER{Content-Type: text/javascript}
+/*
+ * memobox for SPIP
+ *
+ * Copyright (c) 2006 Renato Formato (renatoformato@virgilio.it)
+ * Licensed under the GPL License:
+ *   http://www.gnu.org/licenses/gpl.html
+ *
+ */
+//CSS style selector to match the draggables
+var DRAGGABLES_SEL = '.titre>a';
+//CSS style selector to match the element you want to append the drop box to
+var MEMOBOX_CONTAINER = "#navigation";
+var MEMOBOX_ITEM = '<li> <a href="#" class="memobox_delete" title="<:memobox:anchor_delete_title:>"><span><:memobox:anchor_delete_text:></span></a></li>';
+var MEMOBOX_LINK = '<a class="memobox_link" href="#" title="<:memobox:anchor_add_title:>"><:memobox:anchor_add_text:></a>';
+var MEMOBOX_MODE = 'link'; //can be link or drag
+var heading_text = MEMOBOX_MODE=="link"?"<:memobox:link:>":"<:memobox:drag_drop:>"; 
+var MEMOBOX_HEADER = '<p id="memobox_heading">'+heading_text+'</p>';
+
+var memobox_ul,memobox;
+
+$(document).ready(function(){
+	$(MEMOBOX_CONTAINER).append('<div id="memobox"></div>');
+	memobox = $('#memobox').append(MEMOBOX_HEADER).append('<ul></ul>');
+	if(MEMOBOX_MODE=='drag') {
+		memobox.Droppable({accept:'memobox_drag',tolerance:'intersect',ondrop:memobox_dropit});
+		$(DRAGGABLES_SEL).addClass('memobox_drag').Draggable({ghosting:true,revert:true,insideParent:true,zIndex:1,opacity:0.8});
+	} else if(MEMOBOX_MODE=='link') {
+		$(DRAGGABLES_SEL).after(MEMOBOX_LINK).next().click(function(){
+				memobox_dropit(this.previousSibling);
+		});
+	}
+	memobox_ul = $('ul',memobox);
+	memobox_init();
+})
+
+function memobox_dropit(drag) {
+	memobox_addItem.apply(memobox_ul.append(MEMOBOX_ITEM),[drag.cloneNode(true)]);
+	memobox_createCookieString();
+}
+
+function memobox_addItem(node) {
+	this.find('>li:last-child a').click(memobox_delItem).parent().prepend(node).end().end();	
+}
+
+function memobox_delItem() {
+	$(this).parent().remove();
+	memobox_createCookieString();
+}
+
+function memobox_createCookieString() {
+	var c='';
+	memobox_ul.find('li>a:first-child').each(function(){
+		c+=this.href+'|'+this.title+'|'+$(this).text()+',';
+	}).end();
+	memobox_createCookie('memobox',c,365);
+}
+
+function memobox_init() {
+	var cookie = memobox_readCookie('memobox');
+	var items = cookie ? cookie.split(',') : [];
+	for(var i=0;i<items.length-1;i++) {
+		var args = items[i].split('|'); 
+		memobox_addItem.apply(memobox_ul.append(MEMOBOX_ITEM),['<a href="'+args[0]+'" title="'+args[1]+'">'+args[2]+'</a>']);
+	}
+}
+
+// http://www.quirksmode.org/js/cookies.html 
+function memobox_createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function memobox_readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
