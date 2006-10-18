@@ -61,6 +61,7 @@ $.fn.cancelwidget = function() {
   .filter('.has-widget')
   .show()
   .removeClass('has-widget')
+  .removeClass('widget-changed')
   .next()
     .html('')
     .hide();
@@ -97,6 +98,7 @@ $.fn.activatewidget = function() {
           .html(
             d.valeur
           )
+		  .removeClass('widget-changed')
           .prepend(ICONCLICK)
           .show()
           .removeClass('has-widget')
@@ -109,6 +111,7 @@ $.fn.activatewidget = function() {
         .children(".widgets_boutons").hide(); // boutons de validation
       }).keyup(function(){
         $(this).children(".widgets_boutons").show();
+        $(me).prev().addClass('widget-changed');
 	  })
       .find(".widget-active")
         .css('font', 'inherit') // pour safari
@@ -196,7 +199,7 @@ $(document).ready(function() {
   if (!jQuery.getJSON) return; // jquery >= 1.0.2
   url_widgets_html = 'spip.php?action=widgets_html';
   SEARCHING = "<img class='widget-searching' src='" + configWidgets.imgPath + "/searching.gif' style='float:right;' />";
-  ICONCLICK = "<span style='float:right;z-index:100;'><img class='widget-edit' onclick='event.stopPropagation();$(this).parent().parent().openwidget();' style='position:absolute;border:0;' src='" + configWidgets.imgPath + "/crayon.png' title='" + configWidgets.txtEditer + "' /></span>";
+  ICONCLICK = "<span style='float:right;z-index:100;'><img class='widget-edit' onclick='event.stopPropagation();$(this).parent().parent().openwidget();' src='" + configWidgets.imgPath + "/crayon.png' title='" + configWidgets.txtEditer + "' /><img class='widget-changed' src='" + configWidgets.imgPath + "/changed.png' title='" + configWidgets.txtEditer + "' /></span>";
 
   $(".widget")
   .filter(configWidgets.droits)
