@@ -72,6 +72,10 @@ div.portfolio_galerie .pagination_galerie {
 	text-decoration: none;
 	color: #ffffff;
 }
+.pagination .on {
+	text-decoration: none;
+	color: #888888;
+}
 
 .pagination a:hover {
 	text-decoration: none;
