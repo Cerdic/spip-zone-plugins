@@ -229,9 +229,10 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
             find("div.documents_added")
               .removeClass("documents_added")
               .show("slow",function(){
-                  var anim =\$(this).css({"height":"","overflow":""});
+                  var anim = $(this).css({"height":"","overflow":""});
                   //bug explorer-opera-safari
-                  if(!jQuery.browser.mozilla) anim.width(this.orig.width-2); 
+                  if(!jQuery.browser.mozilla) anim.width(this.orig.width-2);
+                  $(anim).find("img[@onclick]").get(0).onclick();
               })
               .overflow("");
             verifForm(cont);
