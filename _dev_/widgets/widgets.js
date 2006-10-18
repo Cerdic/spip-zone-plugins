@@ -108,9 +108,9 @@ $.fn.activatewidget = function() {
       }).onesubmit(function(){
         $(this)
         .append(SEARCHING) // icone d'attente
-        .children(".widgets_boutons").hide(); // boutons de validation
+        .find(".widgets_boutons").hide(); // boutons de validation
       }).keyup(function(){
-        $(this).children(".widgets_boutons").show();
+        $(this).find(".widgets_boutons").show();
         $(me).prev().addClass('widget-changed');
 	  })
       .find(".widget-active")
