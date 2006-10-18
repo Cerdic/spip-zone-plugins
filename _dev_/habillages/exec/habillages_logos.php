@@ -10,7 +10,8 @@ include_spip('inc/presentation');
 include_spip('inc/layer');
 include_spip('inc/actions');
 include_spip('inc/iconifier');
-include_spip('inc/habillages_iconifier');
+include_spip('inc/habillages_plugins');
+include_spip('inc/habillages_presentation');
 
 // http://doc.spip.org/@exec_admin_plugin
 function exec_habillages_logos() {
@@ -97,46 +98,7 @@ EOF;
 	
 	debut_gauche();
 	debut_boite_info();
-	echo "<table><tr>";
-	echo "<td colspan='2'>";
-	echo _T('habillages:accueil_commentaire');
-	echo "</td>";
-	echo "<tr>";
-	echo "<td colspan='2' class='bold_just'>";
-	echo _T('habillages:accueil_squelettes');
-	echo "</td>";
-	echo "</tr>";
-	echo "<tr>";
-	echo "<td>";
-	echo '<img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/habillages_squelettes-22.png">';
-	echo "</td>";
-	echo "<td class='bold_just'>";
-	echo "<a href='".generer_url_ecrire('habillages_squelettes')."'>"._T('habillages:lien_squelettes_on')."</a>";
-	echo "</td>";
-	echo "</tr>";
-	echo "<td colspan='2' class='bold_just'>";
-	echo _T('habillages:accueil_styles');
-	echo "</td>";
-	echo "</tr>";
-	echo "<td>";
-	echo '<img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/habillages_styles-22.png">';
-	echo "</td>";
-	echo "<td class='bold_just'>";
-	echo "<a href='".generer_url_ecrire('habillages_styles')."'>"._T('habillages:lien_styles_on')."</a>";
-	echo "</td>";
-	echo "</tr>";
-	echo "<td colspan='2' class='used'>";
-	echo _T('habillages:accueil_logos');
-	echo "</td>";
-	echo "</tr>";
-	echo "<td>";
-	echo '<img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/habillages_images_bw-22.png">';
-	echo "</td>";
-	echo "<td class='used'>";
-	echo _T('habillages:lien_logos_off');
-	echo "</td>";
-	echo "</tr>";
-	echo "</table>";
+	habillages_menu_navigation();
 	fin_boite_info();
 
 	debut_droite();

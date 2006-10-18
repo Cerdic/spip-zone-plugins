@@ -131,6 +131,8 @@ EOF;
 	echo "<br />";
 	echo "<br />";
 	
+	echo "<a href='".generer_url_ecrire('admin_lang', 'module=habillages')."'>Modifier les textes</a>";
+	
 	fin_page();
 
 }

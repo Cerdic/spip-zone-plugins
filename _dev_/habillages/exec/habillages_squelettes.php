@@ -9,7 +9,6 @@ include_spip('inc/plugin');
 include_spip('inc/presentation');
 include_spip('inc/layer');
 include_spip('inc/actions');
-include_spip('inc/habillages_plugins');
 include_spip('inc/habillages_presentation');
 
 // http://doc.spip.org/@exec_admin_plugin
@@ -128,10 +127,42 @@ EOF;
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
 	echo _T('habillages:squelettes_titre')."</font></b></td></tr>";
 	echo "<tr><td class='serif' colspan=4>";
-	echo _T('habillages:squelettes_intro');
+	# Message d'inroduction.
+	debut_boite_info();
+	echo "<div class='intro'>";
+	echo _T('habillages:squelettes_intro')."<br /><br />";
+	echo "<div class='intro_titre'>";
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
+	echo _T('habillages:squelettes_debutant_titre')."</div>";
+	echo _T('habillages:squelettes_debutant')."<br /><br />";
+	echo "<div class='intro_titre'>";
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
+	echo _T('habillages:squelettes_avance_titre')."</div>";
+	echo _T('habillages:squelettes_avance')."<br />";
+	echo "</div>";
+	fin_boite_info();
 	
 	echo generer_url_post_ecrire("habillages_squelettes");
-				
+		
+		# Squelettes par defaut. On laisse la dist ou le squelette personnalise
+		# de l'auteur du site prendre le dessus. Mettre une interface bateau, mais
+		# essayer ensuite d'adapter l'interface au squelette qui est actif sur le
+		# site par defaut, surtout si le squelette a ete personnalise.
+		lire_metas();
+		$squelettes = $GLOBALS['meta']['habillages_squelettes'];
+		if ($squelettes == "" || $squelettes == "defaut") {
+			$defaut_checked = " checked='checked'";
+		}
+		echo "<ul>";
+		debut_boite_info();
+		echo "<div style='background-color:$couleur_claire'>";
+		echo "<input type='radio' name='statusplug' value='defaut'$defaut_checked>";
+		echo "<strong>"._T('habillages:squelettes_defaut_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+		echo "<small>"._T('habillages:squelettes_defaut_description')."</small><br /><br /><hr>";
+		fin_boite_info();
+		echo "</ul>";
+	
 		# Chercher les fichiers theme.xml.
 		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
 		
@@ -141,9 +172,18 @@ EOF;
 			lire_fichier($fichier, $texte);
 			$arbre = parse_plugin_xml($texte);
 			$arbre = $arbre['theme'][0];
+			$nom_theme = applatit_arbre($arbre['nom']);
+			$auteur_theme = applatit_arbre($arbre['auteur']);
+			$etat_theme = applatit_arbre($arbre['etat']);
+			$version_theme = applatit_arbre($arbre['version']);
+			$description_theme = applatit_arbre($arbre['description']);
 			$type_theme = trim(applatit_arbre($arbre['type']));
+			$niveau_theme = trim(applatit_arbre($arbre['niveau']));
+			
 			$nom_dossier_theme = dirname ($fichier);
 			$fichier_plugin_xml = $nom_dossier_theme."/plugin.xml";
+			$chemin_plugin_complet = dirname($fichier_plugin_xml);
+			$chemin_plugin_court = substr($chemin_plugin_complet, strlen(_DIR_PLUGINS));
 			
 				if (!is_file($fichier_plugin_xml)) {
 					# Mettre dans la construction du dossier habillages-data (lorsque les themes se
@@ -157,7 +197,42 @@ EOF;
 				
 				if ($type_theme=="squelettes" && is_file($fichier_plugin_xml)) {
 					echo "<ul>";
-					habillages_affichage_squelettes($fichier_plugin_xml);
+					
+					# Si le niveau de difficulte d'installation du squelette est renseigne, mettre les
+					# icones de difficulte.
+					if ($niveau_theme == "1") {
+						$niveau = "<div style='float:right';><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' /><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' /></div>";
+					}
+					
+					if ($niveau_theme == "0" || $niveau_theme == "") {
+						$niveau = "<div style='float:right';><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' /></div>";
+					}
+					
+					if (_request('exec')=='habillages_squelettes'){
+						lire_metas();
+						$lire_meta_habillages = array($GLOBALS['meta']['habillages_squelettes']);
+					}
+			
+					if ($lire_meta_habillages[0] == $chemin_plugin_court) {
+						$checked = " checked='checked'";
+					}
+					else {
+						$checked = "";
+					}
+						
+					debut_boite_info();
+					echo "<div style='background-color:$couleur_claire'>";
+					echo "<input type='radio' name='statusplug' value='$chemin_plugin_court'$checked>";
+					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.")".$niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+					# Laisser la possibilite de definir le nom et le chemin de la capure ecran
+					# dans theme.xml.
+					echo '<div style="float:right";><img src="'.$chemin_plugin_complet.'/captureBW.png" alt="" class="preview" /></div>';
+					echo "<small>".propre($description_theme)."</small><br /><br /><hr>";
+					echo "<div class='auteur'>".propre($auteur_theme)."</div><hr>";
+					echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";
+					echo "&nbsp;<small><strong><font COLOR='#".$couleur_txt."'>".$titre_etat."</font></strong></small><br />";
+					fin_boite_info();
+					//habillages_affichage_squelettes($fichier_plugin_xml);
 					echo "</ul>";
 				}
 				

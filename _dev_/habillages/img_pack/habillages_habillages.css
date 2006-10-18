@@ -16,3 +16,12 @@
 	font-weight: none;
 	text-align: justify;
 }
+
+.intro {
+	text-align: justify;
+}
+
+.intro_titre {
+	font-variant: small-caps;
+	font-weight: bold;
+}

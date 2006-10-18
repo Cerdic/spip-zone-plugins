@@ -107,6 +107,21 @@ EOF;
 
 	global $couleur_foncee;
 	
+	debut_boite_info();
+	echo "<div style='background-color:$couleur_claire'>";
+	echo "<strong>"._T('habillages:aide_debutant_titre')."</strong><br />&nbsp;";
+	echo "</div>";
+	echo "- "._T('habillages:aide_debutant_un')."<br />";
+	echo "- "._T('habillages:aide_debutant_deux')."<br /><br />";
+	fin_boite_info();
+	
+	debut_boite_info();
+	echo "<div style='background-color:$couleur_claire'>";
+	echo "<strong>"._T('habillages:aide_avance_titre')."</strong><br />&nbsp;";
+	echo "</div>";
+	echo "- "._T('habillages:aide_avance_un')."<br />";
+	echo "- "._T('habillages:aide_avance_deux')."<br />";
+	fin_boite_info();
 	echo _T('habillages:aide');
 
 	fin_page();
