@@ -35,6 +35,7 @@ function habillages_ajouter_onglets($flux) {
 	$flux['data']['themes']= new Bouton(
 	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_themes-22.png', 'Th&egrave;mes', generer_url_ecrire("habillages_themes"));
 	}
+	
 	$flux['data']['extras']= new Bouton(
 	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_extras-22.png', 'Extras', generer_url_ecrire("habillages_extras"));
 	$flux['data']['logotheque']= new Bouton(

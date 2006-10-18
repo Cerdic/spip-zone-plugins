@@ -11,7 +11,6 @@ include_spip('inc/layer');
 include_spip('inc/actions');
 include_spip('inc/habillages_presentation');
 
-// http://doc.spip.org/@exec_admin_plugin
 function exec_habillages_squelettes() {
 	global $connect_statut;
 	global $connect_toutes_rubriques;
@@ -38,6 +37,44 @@ function exec_habillages_squelettes() {
 		ecrire_meta('habillages_squelettes', _request('statusplug'));
 		ecrire_metas;
 		lire_metas();
+		
+		# Si il y chagement de squelettes, chercher si le squelette a des themes associes. si oui,
+		# renseigner un champs meta pour afficher l'onglet "themes".
+		if (_request('statusplug') == "dist") {
+			ecrire_meta('habillages_is_themes', 'oui');
+			ecrire_meta('habillages_prefixe_squel', 'dist');
+			ecrire_metas;
+		}
+		else {
+		lire_metas();
+		$choix_squelettes = $GLOBALS['meta']['habillages_squelettes'];
+		$xml_squelette = _DIR_PLUGINS.$choix_squelettes."/theme.xml";
+		lire_fichier($xml_squelette, $texte_xml);
+		$arbre_xml = parse_plugin_xml($texte_xml);
+		$arbre_xml = $arbre_xml['theme'][0];
+		$nom_theme = applatit_arbre($arbre_xml['prefixe']);
+
+		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
+		
+		foreach ($fichier_theme as $fichier){
+			lire_fichier($fichier, $texte);
+			$arbre = parse_plugin_xml($texte);
+			$arbre = $arbre['theme'][0];
+			$squelettes_theme = applatit_arbre($arbre['squelettes']);
+			$prefixe_theme = applatit_arbre($arbre['prefixe']);
+			
+			if ($nom_theme == $squelettes_theme) {
+				ecrire_meta('habillages_is_themes', 'oui');
+				ecrire_meta('habillages_prefixe_squel', $prefixe_theme);
+				ecrire_metas;
+			}
+			else {
+				ecrire_meta('habillages_is_themes', 'non');
+				ecrire_meta('habillages_prefixe_squel', '');
+				ecrire_metas;
+			}
+		}
+		}
 	}
 
 	if (isset($_GET['surligne']))
@@ -126,7 +163,7 @@ EOF;
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
 	echo _T('habillages:squelettes_titre')."</font></b></td></tr>";
 	echo "<tr><td class='serif' colspan=4>";
-	# Message d'inroduction.
+	# Message d'introduction.
 	debut_boite_info();
 	echo "<div class='intro'>";
 	echo _T('habillages:squelettes_intro')."<br /><br />";
@@ -160,10 +197,15 @@ EOF;
 		echo "<strong>"._T('habillages:squelettes_defaut_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
 		echo "<small>"._T('habillages:squelettes_defaut_description')."</small><br /><br /><hr>";
 		fin_boite_info();
+		echo "<br />";
+		# Attention : si l'utilisateur a personnalise un squelette (dans "squelettes" ou autre) ce ne sera
+		# pas la dist qui s'affichera. A modifier donc pour que la dist s'affiche comme squelette par defaut
+		# quand ce bouton est coche et si elle existe.
 		debut_boite_info();
 		echo "<div style='background-color:$couleur_claire'>";
 		echo "<input type='radio' name='statusplug' value='dist'$defaut_checked>";
 		echo "<strong>"._T('habillages:squelettes_dist_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+		echo '<div style="float:right";><img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/capture_dist_bw.png" alt="" class="preview" /></div>';
 		echo "<small>"._T('habillages:squelettes_dist_description')."</small><br /><br /><hr>";
 		echo "<div class='auteur'>Collectif.<br />&copy; 2001 - 2006 - Distribue sous licence GNU/GPL</div><hr>";
 		fin_boite_info();
@@ -232,7 +274,7 @@ EOF;
 					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.")".$niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
 					# Laisser la possibilite de definir le nom et le chemin de la capure ecran
 					# dans theme.xml.
-					echo '<div style="float:right";><img src="'.$chemin_plugin_complet.'/captureBW.png" alt="" class="preview" /></div>';
+					echo '<div style="float:right";>&nbsp;<br /><img src="'.$chemin_plugin_complet.'/capture.png" alt="" class="preview" /></div>';
 					echo "<small>".propre($description_theme)."</small><br /><br /><hr>";
 					echo "<div class='auteur'>".propre($auteur_theme)."</div><hr>";
 					echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";
@@ -259,45 +301,7 @@ EOF;
 	
 	echo "<br />";
 	
-	fin_page();
-
-	# Si il y chagement de squelettes, chercher si le squelette a des themes associes. si oui,
-	# renseigner un champs meta pour afficher l'onglet "themes".
-	if (_request('changer_plugin')=='oui'){
-		
-		if (_request('statusplug') == "dist") {
-			ecrire_meta('habillages_is_themes', 'oui');
-			ecrire_metas;
-		}
-		else {
-		lire_metas();
-		$choix_squelettes = $GLOBALS['meta']['habillages_squelettes'];
-		$xml_squelette = _DIR_PLUGINS.$choix_squelettes."/theme.xml";
-		lire_fichier($xml_squelette, $texte_xml);
-		$arbre_xml = parse_plugin_xml($texte_xml);
-		$arbre_xml = $arbre_xml['theme'][0];
-		$nom_theme = applatit_arbre($arbre_xml['prefixe']);
-
-		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
-		
-		foreach ($fichier_theme as $fichier){
-			lire_fichier($fichier, $texte);
-			$arbre = parse_plugin_xml($texte);
-			$arbre = $arbre['theme'][0];
-			$squelettes_theme = applatit_arbre($arbre['squelettes']);
-			
-			if ($nom_theme == $squelettes_theme) {
-				ecrire_meta('habillages_is_themes', 'oui');
-				ecrire_metas;
-			}
-			else {
-				ecrire_meta('habillages_is_themes', 'non');
-				ecrire_metas;
-			}
-		}
-	}
-}
-	
+	fin_page();	
 }
 
 ?>

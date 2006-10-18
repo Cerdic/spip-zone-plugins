@@ -9,10 +9,8 @@ include_spip('inc/plugin');
 include_spip('inc/presentation');
 include_spip('inc/layer');
 include_spip('inc/actions');
-include_spip('inc/habillages_plugins');
 include_spip('inc/habillages_presentation');
 
-// http://doc.spip.org/@exec_admin_plugin
 function exec_habillages_themes() {
 	global $connect_statut;
 	global $connect_toutes_rubriques;
@@ -29,17 +27,16 @@ function exec_habillages_themes() {
 	
 	if (_request('changer_plugin')=='oui'){
 		lire_metas();
-		$lire_meta_squelettes = array($GLOBALS['meta']['habillages_squelettes']);
-		ecrire_plugin_actifs($lire_meta_squelettes,'',$operation='enleve');
-		ecrire_meta('habillages_themes', 'defaut');
+		$lire_meta_themes = array($GLOBALS['meta']['habillages_themes']);
+		ecrire_plugin_actifs($lire_meta_themes,'',$operation='enleve');
+		ecrire_meta('habillages_themes', '');
 		ecrire_metas;
 		lire_metas();
-		$lire_meta_squelettes_modifs = array(_request('statusplug'));
-		ecrire_plugin_actifs($lire_meta_squelettes_modifs,'',$operation='ajoute');
-		ecrire_meta('habillages_squelettes', _request('statusplug'));
+		$lire_meta_themes_modifs = array(_request('statusplug'));
+		ecrire_plugin_actifs($lire_meta_themes_modifs,'',$operation='ajoute');
+		ecrire_meta('habillages_themes', _request('statusplug'));
 		ecrire_metas;
 		lire_metas();
-		echo $GLOBALS['meta']['plugin'];
 	}
 
 	if (isset($_GET['surligne']))
@@ -106,8 +103,8 @@ EOF;
 
 	echo "<br/><br/>";
 	
-	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_squelettes-48.png">';
-	gros_titre(_T('habillages:icone_habillages_squelettes'));
+	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_themes-48.png">';
+	gros_titre(_T('habillages:icone_habillages_themes'));
 
 	barre_onglets("habillages", "");
 	
@@ -126,26 +123,71 @@ EOF;
 	echo "<table border='0' cellspacing='0' cellpadding='5' width='100%'>";
 	echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
-	echo _T('habillages:squelettes_titre')."</font></b></td></tr>";
+	echo _T('habillages:themes_titre')."</font></b></td></tr>";
 	echo "<tr><td class='serif' colspan=4>";
-	echo _T('habillages:squelettes_intro');
+	# Message d'introduction.
+	debut_boite_info();
+	echo "<div class='intro'>";
+	echo _T('habillages:themes_intro')."<br /><br />";
+	echo "<div class='intro_titre'>";
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
+	echo _T('habillages:squelettes_debutant_titre')."</div>";
+	echo _T('habillages:squelettes_debutant')."<br /><br />";
+	echo "<div class='intro_titre'>";
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
+	echo _T('habillages:squelettes_avance_titre')."</div>";
+	echo _T('habillages:squelettes_avance')."<br />";
+	echo "</div>";
+	fin_boite_info();
 	
 	echo generer_url_post_ecrire("habillages_themes");
+		
+		# Squelettes par defaut. On laisse la dist ou le squelette personnalise
+		# de l'auteur du site prendre le dessus. Mettre une interface bateau, mais
+		# essayer ensuite d'adapter l'interface au squelette qui est actif sur le
+		# site par defaut, surtout si le squelette a ete personnalise.
+		lire_metas();
+		$squelettes = $GLOBALS['meta']['habillages_themes'];
+		if ($squelettes == "" || $squelettes == "defaut") {
+			$defaut_checked = " checked='checked'";
+		}
+		echo "<ul>";
+		debut_boite_info();
+		echo "<div style='background-color:$couleur_claire'>";
+		echo "<input type='radio' name='statusplug' value='defaut'$defaut_checked>";
+		echo "<strong>"._T('habillages:themes_defaut_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+		echo "<small>"._T('habillages:themes_defaut_description')."</small><br /><br /><hr>";
+		fin_boite_info();
+		echo "</ul>";
 	
 		# Chercher les fichiers theme.xml.
 		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
 		
 		# Pour chaque fichier theme.xml trouve, on releve le <type> et on ne garde que 
-		# les squelettes pour les lister.
+		# les themes pour les lister.
 		foreach ($fichier_theme as $fichier){
 			lire_fichier($fichier, $texte);
 			$arbre = parse_plugin_xml($texte);
 			$arbre = $arbre['theme'][0];
+			$nom_theme = applatit_arbre($arbre['nom']);
+			$auteur_theme = applatit_arbre($arbre['auteur']);
+			$etat_theme = applatit_arbre($arbre['etat']);
+			$version_theme = applatit_arbre($arbre['version']);
+			$description_theme = applatit_arbre($arbre['description']);
 			$type_theme = trim(applatit_arbre($arbre['type']));
+			$niveau_theme = trim(applatit_arbre($arbre['niveau']));
+			$squelettes_theme = trim(applatit_arbre($arbre['squelettes']));
+			
 			$nom_dossier_theme = dirname ($fichier);
 			$fichier_plugin_xml = $nom_dossier_theme."/plugin.xml";
+			$chemin_plugin_complet = dirname($fichier_plugin_xml);
+			$chemin_plugin_court = substr($chemin_plugin_complet, strlen(_DIR_PLUGINS));
 			
-				if (!is_file($fichier_plugin_xml)) {
+			lire_metas();
+			$prefixe_squelettes = $GLOBALS['meta']['habillages_prefixe_squel'];
+			
+				if ($squelettes_theme == $prefixe_squelettes && !is_file($fichier_plugin_xml)) {
 					# Mettre dans la construction du dossier habillages-data (lorsque les themes se
 					# telechargeront adopter le meme principe sur les dossiers telecharges) un refus
 					# de telechargement/copie des dossiers qui n'ont pas de theme.xml *ni* de plugin.xml.
@@ -155,9 +197,44 @@ EOF;
 					spip_log("Le dossier ".$nom_dossier_theme." ne contient pas de fichier plugin.xml. Le plugin habillages ne peut pas gerer les elements de ce dossier.");
 				}
 				
-				if ($type_theme=="squelettes" && is_file($fichier_plugin_xml)) {
+				if ($type_theme=="themes" && $squelettes_theme == $prefixe_squelettes && is_file($fichier_plugin_xml)) {
 					echo "<ul>";
-					habillages_affichage_themes($fichier_plugin_xml);
+					
+					# Si le niveau de difficulte d'installation du squelette est renseigne, mettre les
+					# icones de difficulte.
+					if ($niveau_theme == "1") {
+						$niveau = "<div style='float:right';><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' /><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' /></div>";
+					}
+					
+					if ($niveau_theme == "0" || $niveau_theme == "") {
+						$niveau = "<div style='float:right';><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' /></div>";
+					}
+					
+					if (_request('exec')=='habillages_themes'){
+						lire_metas();
+						$lire_meta_habillages = array($GLOBALS['meta']['habillages_themes']);
+					}
+			
+					if ($lire_meta_habillages[0] == $chemin_plugin_court) {
+						$checked = " checked='checked'";
+					}
+					else {
+						$checked = "";
+					}
+						
+					debut_boite_info();
+					echo "<div style='background-color:$couleur_claire'>";
+					echo "<input type='radio' name='statusplug' value='$chemin_plugin_court'$checked>";
+					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.")".$niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+					# Laisser la possibilite de definir le nom et le chemin de la capure ecran
+					# dans theme.xml.
+					echo '<div style="float:right";><img src="'.$chemin_plugin_complet.'/captureBW.png" alt="" class="preview" /></div>';
+					echo "<small>".propre($description_theme)."</small><br /><br /><hr>";
+					echo "<div class='auteur'>".propre($auteur_theme)."</div><hr>";
+					echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";
+					echo "&nbsp;<small><strong><font COLOR='#".$couleur_txt."'>".$titre_etat."</font></strong></small><br />";
+					fin_boite_info();
+					//habillages_affichage_squelettes($fichier_plugin_xml);
 					echo "</ul>";
 				}
 				
@@ -177,7 +254,7 @@ EOF;
 	echo "</form></tr></table>\n";
 	
 	echo "<br />";
-
+	
 	fin_page();
 
 }
