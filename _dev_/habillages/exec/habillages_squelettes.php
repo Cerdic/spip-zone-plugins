@@ -38,7 +38,6 @@ function exec_habillages_squelettes() {
 		ecrire_meta('habillages_squelettes', _request('statusplug'));
 		ecrire_metas;
 		lire_metas();
-		echo $GLOBALS['meta']['plugin'];
 	}
 
 	if (isset($_GET['surligne']))
