@@ -3,16 +3,21 @@
 	Portfolio
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	&copy; 2006 Cedric Morin [notre-ville.net->http://www.notre-ville.net]
+	&copy; 2006 Cedric Morin & Mathieu Drouet [notre-ville.net->http://www.notre-ville.net]
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
 	test
 	</etat>
 	<description>
-	Portfolio images a utiliser en combinaison avec le plugin pagination ahah
+	Portfolio images a utiliser en combinaison avec les plugins pagination ahah, jsquery, thickbox, ajax_callback.
+
+ Usage : 
+- dans le squelette : <code>[(#MODELE{article_portfolio,id_article})]</code>.<br />
+- dans le  texe : <code><articlexx|portfolio></code>
+
 	</description>
 	<prefix> 
 	portfolio
