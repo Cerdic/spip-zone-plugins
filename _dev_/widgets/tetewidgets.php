@@ -1,7 +1,7 @@
 <?php
 /* insert le css et le js externes pour Widgets dans le <head>
  *
- *  Widgets plugin for spip (c) Fil 2006 -- licence GPL
+ *  Widgets plugin for spip (c) Fil & Toggg 2006 -- licence GPL
  */
 
 define('_PREG_WIDGET', ',widget\b[^<>\'"]+\b((\w+)-(\w+)-(\d+))\b,');
