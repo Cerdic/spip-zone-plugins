@@ -304,6 +304,40 @@ function afficher_liste_auteurs($choses,$nb_aff=20) {
   echo afficher_liste_fin_tableau();
 }
 
+function afficher_liste_groupes_mots($choses, $nb_aff=20) {
+  $rez = spip_abstract_select(
+							  array('id_groupe','titre','descriptif'),
+							  array('spip_groupes_mots'),
+							  array('id_groupe IN ('.calcul_in($choses).')')
+							  );
+
+  echo afficher_liste_debut_tableau();
+  $table = array();
+  $i = 0;
+  $table[] = array('','<b>ID</b>','<b>Titre</b>','<b>Descriptif</b>');
+  while($row = spip_abstract_fetch($rez)) {
+	$i++;
+	$id_groupe = $row['id_groupe'];
+	$vals = array();
+	$vals[] = "<input type='checkbox' name='choses[]' value='$id_groupe' id='id_chose$i'/>";
+	$vals[] = $id_groupe;
+	$vals[] = $row['titre'];
+	$vals[] = $row['descriptif'];
+		
+	$table[] = $vals;
+	
+  }
+  spip_abstract_free($rez);
+  $largeurs = array(2, 2, 26, 70);
+  $styles = array('','arial1','arial2', 'arial1');
+  echo afficher_liste($largeurs, $table, $styles);
+  
+  echo afficher_liste_fin_tableau();
+
+  
+
+}
+
 
 //=============================MOTS=========================================
 /*

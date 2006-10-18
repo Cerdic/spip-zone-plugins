@@ -162,6 +162,19 @@ $choses_possibles['auteurs'] = array(
 															   )
 									  );
 
+
+$choses_possibles['groupes_mots'] = array(
+									  'titre_chose' => 'groupes_mots',
+									  'id_chose' => 'id_groupe',
+									  'table_principale' => 'spip_groupes_mots',
+									  'tables_limite' => array(
+															   'mots' => array(
+																				   'table' => 'spip_mots',
+																				   'nom_id' => 'id_mot'),
+															   )
+									  );
+
+
 //=============================MOTS=========================================
 /*
 on ne peut pas vraiment mettre de mots sur les mots comme c'est fait maintenant :(
