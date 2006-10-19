@@ -33,7 +33,7 @@ function action_joindre_dist()
 
 	$redirect = _request('redirect');
 	$iframe_redirect = _request('iframe_redirect');
-	if (!preg_match(',^(\d+)\D(\d+)\D(\w+)/(\w+)$,',_request('arg'),$r)) {
+	if (!preg_match(',^(-?\d+)\D(\d+)\D(\w+)/(\w+)$,',_request('arg'),$r)) {
 	  spip_log("action_joindre_dist incompris: " . _request('arg'));
 	  redirige_par_entete(urldecode($redirect));
 	}

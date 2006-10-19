@@ -152,7 +152,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	while ($doc = spip_fetch_array($images_liees)) {
 		$id_document = $doc['id_document'];
 		$deplier = $id_document_actif==$id_document;
-		afficher_case_document($id_document, $id, $script, $type, $deplier);
+		$ret .= afficher_case_document($id_document, $id, $script, $type, $deplier);
 	}
 
 	/// Ajouter nouveau document
