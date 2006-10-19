@@ -150,13 +150,21 @@ function check_upload_error($error, $msg='') {
 // depuis qu'on est sortis de spip_image.php, apparemment).
 function erreur_upload_trop_gros() {
 	include_spip('inc/filtres');
-	minipres(_T('pass_erreur'),
-		"<p>"
+	
+	$msg = 		"<p>"
 		.taille_en_octets($_SERVER["CONTENT_LENGTH"])
 		.'<br />'
 		._T('upload_limit',
 		array('max' => ini_get('upload_max_filesize')))
-		."</p>");
+		."</p>";
+	
+  if(_request("iframe")=="iframe") {
+    echo "<div class='upload_answer upload_error'>"
+    ."<strong>"._T('pass_erreur')."</strong><br />$msg</div>";
+    exit;
+  }
+  
+  minipres(_T('pass_erreur'),$msg);
 	exit;
 }
 
