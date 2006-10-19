@@ -386,7 +386,7 @@ if ($submit) {
 				 } 
 		 		 $trans = get_html_translation_table(HTML_ENTITIES);
 				 $trad = strtr($trad, $trans);
-				 $trad = addslashes($trad); 
+				 //$trad = addslashes($trad); 
 				
 			$any_line[$ctr] = "'$item' => '$trad $target_to_change',";
 			if ($display_debug) {
