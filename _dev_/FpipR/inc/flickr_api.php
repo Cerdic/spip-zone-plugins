@@ -38,7 +38,8 @@ function flickr_api_call($method, $params=array(), $auth_token='', $force_sign=f
 
   $args = substr($args,1);
 
-  return unserialize(file_get_contents("http://www.flickr.com/services/rest/?$args"));
+  include_spip('inc/distant');
+  return unserialize(recuperer_page("http://www.flickr.com/services/rest/?$args"));
 }
 
 function flickr_check_error($resp) {
