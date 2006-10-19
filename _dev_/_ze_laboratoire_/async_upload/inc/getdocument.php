@@ -158,13 +158,7 @@ function erreur_upload_trop_gros() {
 		array('max' => ini_get('upload_max_filesize')))
 		."</p>";
 	
-  if(_request("iframe")=="iframe") {
-    echo "<div class='upload_answer upload_error'>"
-    ."<strong>"._T('pass_erreur')."</strong><br />$msg</div>";
-    exit;
-  }
-  
-  minipres(_T('pass_erreur'),$msg);
+  minipres(_T('pass_erreur'),"<div class='upload_answer upload_error'>".$msg."</div>");
 	exit;
 }
 
