@@ -24,6 +24,7 @@ function habillages_ajouter_boutons($boutons_admin) {
 function habillages_ajouter_onglets($flux) {
 	lire_metas();
 	$habillages_is_theme = $GLOBALS['meta']['habillages_is_themes'];
+	$habillages_is_extras = $GLOBALS['meta']['habillages_is_extras'];
 	
 	if (_request('exec')=='config_habillages' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_extras' || _request('exec')=='habillages_logos' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_aide' || _request('exec')=='habillages_themes') {
 		$flux['data']['accueil']= new Bouton(
@@ -35,9 +36,10 @@ function habillages_ajouter_onglets($flux) {
 	$flux['data']['themes']= new Bouton(
 	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_themes-22.png', 'Th&egrave;mes', generer_url_ecrire("habillages_themes"));
 	}
-	
+	if ($habillages_is_extras == "oui") {
 	$flux['data']['extras']= new Bouton(
 	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_extras-22.png', 'Extras', generer_url_ecrire("habillages_extras"));
+	}
 	$flux['data']['logotheque']= new Bouton(
 	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_logos-22.png', 'Logoth&egrave;que', generer_url_ecrire("habillages_logos"));
 	$flux['data']['icones']= new Bouton(

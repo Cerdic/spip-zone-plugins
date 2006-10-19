@@ -43,6 +43,7 @@ function exec_habillages_squelettes() {
 		# renseigner un champs meta pour afficher l'onglet "themes".
 		if (_request('statusplug') == "dist") {
 			ecrire_meta('habillages_is_themes', 'oui');
+			ecrire_meta('habillages_is_extras', 'oui');
 			ecrire_meta('habillages_prefixe_squel', 'dist');
 			ecrire_metas;
 		}
@@ -53,7 +54,7 @@ function exec_habillages_squelettes() {
 		lire_fichier($xml_squelette, $texte_xml);
 		$arbre_xml = parse_plugin_xml($texte_xml);
 		$arbre_xml = $arbre_xml['theme'][0];
-		$nom_theme = applatit_arbre($arbre_xml['prefixe']);
+		$nom_theme = trim(applatit_arbre($arbre_xml['prefixe']));
 
 		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
 		
@@ -61,16 +62,18 @@ function exec_habillages_squelettes() {
 			lire_fichier($fichier, $texte);
 			$arbre = parse_plugin_xml($texte);
 			$arbre = $arbre['theme'][0];
-			$squelettes_theme = applatit_arbre($arbre['squelettes']);
-			$prefixe_theme = applatit_arbre($arbre['prefixe']);
+			$squelettes_theme = trim(applatit_arbre($arbre['squelettes']));
+			$prefixe_theme = trim(applatit_arbre($arbre['prefixe']));
 			
 			if ($nom_theme == $squelettes_theme) {
 				ecrire_meta('habillages_is_themes', 'oui');
+				ecrire_meta('habillages_is_extras', 'oui');
 				ecrire_meta('habillages_prefixe_squel', $prefixe_theme);
 				ecrire_metas;
 			}
 			else {
 				ecrire_meta('habillages_is_themes', 'non');
+				ecrire_meta('habillages_is_extras', 'non');
 				ecrire_meta('habillages_prefixe_squel', '');
 				ecrire_metas;
 			}
