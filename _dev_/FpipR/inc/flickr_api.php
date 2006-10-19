@@ -38,8 +38,7 @@ function flickr_api_call($method, $params=array(), $auth_token='', $force_sign=f
 
   $args = substr($args,1);
 
-  include_spip('inc/distant');
-  return unserialize(recuperer_page("http://www.flickr.com/services/rest/?$args"));
+  return unserialize(file_get_contents("http://www.flickr.com/services/rest/?$args"));
 }
 
 function flickr_check_error($resp) {
@@ -79,9 +78,11 @@ function flickr_authenticate_end($id_auteur,$frob) {
   $frob = flickr_check_error($resp);
   $nsid='';
   $token = '';
+
   if(isset($frob['auth'])) {
-	$nisd = $frob['auth']['user']['nsid'];
+	$nsid = $frob['auth']['user']['nsid'];
 	$token = $frob['auth']['token']['_content'];
+
 	if(isset($token) && isset($nsid))	{
 	  include_spip('base/abstract_sql');
 	  global $table_prefix;
