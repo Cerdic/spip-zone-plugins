@@ -80,6 +80,8 @@ function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect
 	. "<textarea name='bio' class='forml' rows='4' cols='40'>"
 	. entites_html($auteur['bio'])
 	. "</textarea><br />\n"
+	. "<b>"._T('auteurscomplets:entree_organisation')."</b>"
+	. "<br><input type='text' name='organisation' class='formo' value=\"".entites_html($auteur['organisation'])."\" size='40'>\n<p>\n"
 	. "<b>"._T('auteurscomplets:entree_telephone')."</b>"
 	. "<br><input type='text' name='telephone' class='formo' value=\"".entites_html($auteur['telephone'])."\" size='40'>\n<p>\n"
 	. "<b>"._T('auteurscomplets:entree_fax')."</b>"
@@ -255,6 +257,7 @@ function legender_auteur_voir($auteur, $redirect)
 	$id_auteur=$auteur['id_auteur'];
 	$nom=$auteur['nom'];
 	$bio=$auteur['bio'];
+	$organisation=$auteur['organisation'];
 	$telephone=$auteur['telephone'];
 	$fax=$auteur['fax'];
 	$adresse=$auteur['adresse'];

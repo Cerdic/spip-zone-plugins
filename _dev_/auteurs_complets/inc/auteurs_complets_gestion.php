@@ -11,7 +11,7 @@ function auteurs_complets_uninstall(){
 }
 
 function auteurs_complets_verifier_base(){
-	$version_base = 0.03;
+	$version_base = 0.04;
 	$current_version = 0.0;
 
 	if (   (!isset($GLOBALS['meta']['auteurs_complets_base_version']) )
@@ -26,8 +26,10 @@ function auteurs_complets_verifier_base(){
 		include_spip('base/abstract_sql');
 		creer_base();
 		$desc = spip_abstract_showtable("spip_auteurs", '', true);
+		if (!isset($desc['field']['organisation'])){
+			spip_query("ALTER TABLE spip_auteurs ADD `organisation` TEXT NOT NULL AFTER `email`");}
 		if (!isset($desc['field']['telephone'])){
-			spip_query("ALTER TABLE spip_auteurs ADD `telephone` TEXT NOT NULL AFTER `email`");}
+			spip_query("ALTER TABLE spip_auteurs ADD `telephone` TEXT NOT NULL AFTER `organisation`");}
 		if (!isset($desc['field']['fax'])){
 			spip_query("ALTER TABLE spip_auteurs ADD `fax` TEXT NOT NULL AFTER `telephone`");}
 		if (!isset($desc['field']['skype'])){
@@ -54,6 +56,12 @@ function auteurs_complets_verifier_base(){
 			spip_query("ALTER TABLE spip_auteurs ADD `skype` TEXT NOT NULL AFTER `fax`");}
 		ecrire_meta('auteurs_complets_base_version',$current_version=0.03);
 	}
+	if ($current_version<0.04){
+		$desc = spip_abstract_showtable("spip_auteurs", '', true);
+		if (!isset($desc['field']['organisation'])){
+			spip_query("ALTER TABLE spip_auteurs ADD `organisation` TEXT NOT NULL AFTER `email`");}
+		ecrire_meta('auteurs_complets_base_version',$current_version=0.04);
+	}
 	ecrire_metas();
 }
 
@@ -68,6 +76,7 @@ $auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteu
 if (!$auteur) exit;
 }
 
+	$organisation=$auteur['organisation'];
 	$telephone=$auteur['telephone'];
 	$fax=$auteur['fax'];
 	$adresse=$auteur['adresse'];
@@ -86,7 +95,8 @@ if (!$auteur) exit;
 	echo "<tr>";
 
 	echo "<td valign='top' width='100%'>";
-	
+
+	if (strlen($organisation) > 2){ echo "<div>"._T('auteurscomplets:affiche_organisation')." $organisation </div>";}
 	if (strlen($telephone) > 2){ echo "<div>"._T('auteurscomplets:affiche_telephone')." $telephone </div>";}
 	if (strlen($fax) > 2){ echo "<div>"._T('auteurscomplets:affiche_fax')." $fax </div>";}
 	if (strlen($skype) > 2){ echo "<div>"._T('auteurscomplets:affiche_skype')." $skype </div><hr />";}

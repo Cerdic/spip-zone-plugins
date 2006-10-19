@@ -36,7 +36,7 @@ function action_legender_auteur()
 // http://doc.spip.org/@action_legender_post
 function action_legender_post($r)
 {
-	global $auteur_session, $bio, $telephone, $fax, $skype, $adresse, $codepostal, $ville, $pays, $latitude, $longitude,
+	global $auteur_session, $bio, $organisation, $telephone, $fax, $skype, $adresse, $codepostal, $ville, $pays, $latitude, $longitude,
 	  $champs_extra,
 	  $auteur_session,
 	  $email,
@@ -147,6 +147,7 @@ function action_legender_post($r)
 
 	// variables sans probleme
 	$auteur['bio'] = corriger_caracteres($bio);
+	$auteur['organisation'] = corriger_caracteres($organisation);
 	$auteur['telephone'] = corriger_caracteres($telephone);
 	$auteur['fax'] = corriger_caracteres($fax);
 	$auteur['adresse'] = corriger_caracteres($adresse);
@@ -190,6 +191,7 @@ function action_legender_post($r)
 		login=" . spip_abstract_quote($auteur['login']) . ",
 		bio=" . spip_abstract_quote($auteur['bio']) . ",
 		email=" . spip_abstract_quote($auteur['email']) . ",
+		organisation=" . spip_abstract_quote($auteur['organisation']) . ",
 		telephone=" . spip_abstract_quote($auteur['telephone']) . ",
 		fax=" . spip_abstract_quote($auteur['fax']) . ",
 		skype=" . spip_abstract_quote($auteur['skype']) . ",

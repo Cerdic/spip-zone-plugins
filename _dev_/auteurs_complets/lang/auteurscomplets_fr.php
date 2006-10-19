@@ -11,6 +11,7 @@
      **/
 
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
+	'entree_organisation' => 'Votre organisation / entreprise / association',
 	'entree_telephone' => 'Votre num&eacute;ro de t&eacute;l&eacute;phone',
 	'entree_fax' => 'Votre num&eacute;ro de fax',
 	'entree_skype' => 'Votre contact Skype',
@@ -21,6 +22,7 @@
 	'entree_latitude' => 'Votre latitude (en valeur num&eacute;raire ex: 92.8)',
 	'entree_longitude' => 'Votre longitude (en valeur num&eacute;raire ex: 15.324)',
 	'coordonnees_sup' => 'COORDONN&Eacute;ES SUPPL&Eacute;MENTAIRES',
+	'affiche_organisation' => 'Organisation : ',
 	'affiche_telephone' => 'T&eacute;l&eacute;phone : ',
 	'affiche_fax' => 'Fax : ',
 	'affiche_skype' => 'Contact Skype : ',
