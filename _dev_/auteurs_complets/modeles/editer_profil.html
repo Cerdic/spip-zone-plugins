@@ -1,2 +1,28 @@
 #CACHE{0}
+<BOUCLE_AUTEUR(AUTEURS){id_auteur=#SESSION{id_auteur}}>
+<div class="vcard">
+	[<div class="Buddy" style="float:right">
+		<a href="#URL_SITE"><img src="(#LOGO_AUTEUR||image_reduire{48,48}|extraire_attribut{src})" alt="#NOM" class="logo" height="48" width="48"></a>
+	</div>]
+	<b><span class="fn">#NOM</span></b>
+	<p><span class="adr">
+	<span class="street-address">#ADRESSE</span><br />
+	<span class="postal-code">#CODEPOSTAL</span>
+	<span class="locality">#VILLE</span><br />
+	<span class="country-name">#PAYS</span>
+	</span></p>
+
+	[<p><span class="geo">
+		Lat : <abbr class="latitude" title="#LATITUDE">(#LATITUDE)</abbr>
+		[Long : <abbr class="longitude" title="#LONGITUDE">(#LONGITUDE)</abbr>]
+	</span></p>]
+	<hr />
+	<h4>CONTACTS :</h4>
+	Email : <a class="email" href="mailto:#EMAIL">#EMAIL</a><br />
+	Tel : <span class="tel">#TELEPHONE</span><br />
+	[Fax : <span class="fax">(#FAX)</span><br />]
+	Website : <a href="#URL_SITE" class="url" rel="me">#NOM_SITE</a>
+</div>
+
 #FORMULAIRE_PROFILE
+</BOUCLE_AUTEUR>

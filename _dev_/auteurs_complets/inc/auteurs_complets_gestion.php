@@ -62,7 +62,7 @@ function auteurs_complets_ajouts()
 	global
 	$connect_id_auteur,
 	$id_auteur;
-
+	
 if ($id_auteur) {
 $auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 if (!$auteur) exit;
