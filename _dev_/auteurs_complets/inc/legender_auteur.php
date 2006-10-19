@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
+include_spip('inc/auteurs_complets_gestion');
 
 // http://doc.spip.org/@inc_legender_auteur_dist
 function inc_legender_auteur_dist($id_auteur, $auteur, $mode, $echec='', $redirect='')
@@ -26,8 +26,9 @@ function inc_legender_auteur_dist($id_auteur, $auteur, $mode, $echec='', $redire
 }
 
 // http://doc.spip.org/@legender_auteur_saisir
-function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect='')
-{
+function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect=''){
+
+	auteurs_complets_install();
 	global $options, $connect_statut, $connect_id_auteur, $connect_toutes_rubriques;
 	$corps = '';
 
