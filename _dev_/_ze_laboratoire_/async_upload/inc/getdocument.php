@@ -480,7 +480,7 @@ function traite_svg($file)
 //
 
 // http://doc.spip.org/@examiner_les_fichiers
-function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $redirect, &$actifs)
+function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $redirect, &$actifs, $iframe_redirect)
 {
 	if (function_exists('gzopen') 
 	AND !($mode == 'distant')
@@ -504,7 +504,7 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 			if ($archive) {
 			  $valables = verifier_compactes($archive);
 			  if ($valables) {
-			    liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash, $redirect, $zip);
+			    liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash, $redirect, $zip, $iframe_redirect);
 			    exit;
 			  }
 			}
@@ -521,7 +521,7 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 // Afficher un formulaire de choix: decompacter et/ou garder tel quel.
 // Passer ca en squelette un de ces jours.
 
-function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash, $redirect, $zip)
+function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash, $redirect, $zip, $iframe_redirect)
 {
 	$arg = (intval($id) .'/' .intval($id_document) . "/$mode/$type");
 	$texte =
@@ -543,6 +543,7 @@ function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash,
 		  "'></div>";
 	$action = (construire_upload($texte, array(
 					 'redirect' => $redirect,
+					 'iframe_redirect' => $iframe_redirect,
 					 'hash' => $hash,
 					 'chemin' => $zip,
 					 'arg' => $arg)));

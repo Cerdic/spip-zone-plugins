@@ -125,7 +125,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 
 	$joindre = charger_fonction('joindre', 'inc');
 	$ret .= debut_cadre_relief("image-24.gif", true, "creer.gif", $titre_cadre);
-	$ret .= $joindre($script, "id_$type=$id", $id, _T('info_telecharger'),'vignette',$type);
+	$ret .= $joindre($script, "id_$type=$id", $id, _T('info_telecharger'),'vignette',$type,'',0,generer_url_ecrire("documents_colonne","id=$id&type=$type",true));
 
 	$ret .= fin_cadre_relief(true);
 
@@ -161,7 +161,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 		if ($GLOBALS['meta']["documents_article"] != 'non') {
 			$titre_cadre = _T('bouton_ajouter_document').aide("ins_doc");
 			$ret .= debut_cadre_enfonce("doc-24.gif", true, "creer.gif", $titre_cadre);
-			$ret .= $joindre($script, "id_$type=$id", $id, _T('info_telecharger_ordinateur'), 'document',$type);
+			$ret .= $joindre($script, "id_$type=$id", $id, _T('info_telecharger_ordinateur'), 'document',$type,'',0,generer_url_ecrire("documents_colonne","id=$id&type=$type",true));
 			$ret .= fin_cadre_enfonce(true);
 		}
 

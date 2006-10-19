@@ -19,7 +19,8 @@ include_spip('base/abstract_sql');
 // Construire un formulaire pour telecharger un fichier
 //
 
-function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='', $ancre='', $id_document=0) {
+// http://doc.spip.org/@inc_joindre_dist
+function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='', $ancre='', $id_document=0,$iframe_script='') {
 	global $spip_lang_right;
 	$vignette_de_doc = ($mode == 'vignette' AND $id_document>0);
 	$distant = ($mode == 'document' AND $type);
@@ -36,6 +37,12 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 		else
 			$dir_ftp = '';
 	}
+  
+  // Add the redirect url when uploading via iframe
+
+  $iframe = "";
+  if($iframe_script)
+    $iframe = "<input type='hidden' name='iframe_redirect' value='".rawurlencode($iframe_script)."' />\n";
 
 	// Un menu depliant si on a une possibilite supplementaire
 
@@ -75,7 +82,7 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 	return generer_action_auteur('joindre',
 		(intval($id) .'/' .intval($id_document) . "/$mode/$type"),
 		generer_url_ecrire($script, $args, true),
-		"$debut$intitule$res$dir_ftp$distant$fin",
+		"$iframe$debut$intitule$res$dir_ftp$distant$fin",
 		" method='post' enctype='multipart/form-data' style='border: 0px; margin: 0px;' class='form_upload'");
 }
 

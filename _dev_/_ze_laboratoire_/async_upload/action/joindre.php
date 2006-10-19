@@ -32,6 +32,7 @@ function action_joindre_dist()
 	$var_f();
 
 	$redirect = _request('redirect');
+	$iframe_redirect = _request('iframe_redirect');
 	if (!preg_match(',^(\d+)\D(\d+)\D(\w+)/(\w+)$,',_request('arg'),$r)) {
 	  spip_log("action_joindre_dist incompris: " . _request('arg'));
 	  redirige_par_entete(urldecode($redirect));
@@ -54,7 +55,7 @@ function action_joindre_dist()
 
      if (function_exists($sousaction))
        $type_image = $sousaction($path, $mode, $type, $id, $id_document, 
-				 $hash, $redirect, $documents_actifs);
+				 $hash, $redirect, $documents_actifs, $iframe_redirect);
 
      else spip_log("spip_action: sousaction inconnue $sousaction");
 
@@ -80,7 +81,7 @@ function action_joindre_dist()
      }
 
 	if(_request("iframe") == 'iframe') {
-		$redirect = "ecrire/?exec=documents_colonne&id=$id&type=$type&id_document=".join(',',$documents_actifs)."&iframe=iframe";
+		$redirect = urldecode($iframe_redirect)."&id_document=".join(',',$documents_actifs)."&iframe=iframe";
 	}
 
 	redirige_par_entete($redirect);
@@ -91,19 +92,19 @@ function action_joindre_dist()
 // Cas d'un document distant reference sur internet
 
 // http://doc.spip.org/@spip_action_joindre2
-function spip_action_joindre2($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
+function spip_action_joindre2($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	return examiner_les_fichiers(array(
 				   array('name' => basename($path),
 					 'tmp_name' => $path)
 				   ), 'distant', $type, $id, $id_document,
-			     $hash, $redirect, $actifs);
+			     $hash, $redirect, $actifs, $iframe_redirect);
 }
 
 // Cas d'un fichier transmis
 
 // http://doc.spip.org/@spip_action_joindre1
-function spip_action_joindre1($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
+function spip_action_joindre1($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	$files = array();
 	if (is_array($path))
@@ -113,13 +114,13 @@ function spip_action_joindre1($path, $mode, $type, $id, $id_document,$hash, $red
 	}
 
 	return examiner_les_fichiers($files, $mode, $type, $id, $id_document,
-			     $hash, $redirect, $actifs);
+			     $hash, $redirect, $actifs, $iframe_redirect);
 } 
 
 // copie de tout ou partie du repertoire upload
 
 // http://doc.spip.org/@spip_action_joindre3
-function spip_action_joindre3($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
+function spip_action_joindre3($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	if (!$path || strstr($path, '..')) return;
 	    
@@ -142,13 +143,13 @@ function spip_action_joindre3($path, $mode, $type, $id, $id_document,$hash, $red
 	  }
 	}
 
-	return examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $redirect, $actifs);
+	return examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $redirect, $actifs, $iframe_redirect);
 }
 
 //  Zip avec confirmation "tel quel"
 
 // http://doc.spip.org/@spip_action_joindre5
-function spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
+function spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	return ajouter_un_document($path, basename($path), $type, $id, $mode, $id_document, $actifs);
 }
@@ -156,7 +157,7 @@ function spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $red
 // Zip a deballer.
 
 // http://doc.spip.org/@spip_action_joindre6
-function spip_action_joindre6($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
+function spip_action_joindre6($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	$x = joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 	//  suppression de l'archive en zip
@@ -166,7 +167,7 @@ function spip_action_joindre6($path, $mode, $type, $id, $id_document,$hash, $red
 
 // Zip avec les 2 options a la fois
 
-function spip_action_joindre4($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
+function spip_action_joindre4($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 	return spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
