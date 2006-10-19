@@ -22,6 +22,7 @@ function flickr_api_call($method, $params=array(), $auth_token='', $force_sign=f
   global $FLICKR_API_KEY;
   spip_log("Flickr api call: $method");
   $params['api_key'] = $FLICKR_API_KEY;
+  $params['format'] = 'php_serial';
   if($auth_token) {
 	$params['auth_token'] = $auth_token;
   }
@@ -37,18 +38,14 @@ function flickr_api_call($method, $params=array(), $auth_token='', $force_sign=f
 
   $args = substr($args,1);
 
-  return file_get_contents("http://www.flickr.com/services/rest/?$args");
+  return unserialize(file_get_contents("http://www.flickr.com/services/rest/?$args"));
 }
 
 function flickr_check_error($resp) {
-  include_spip('inc/plugin');
-  $xml = parse_plugin_xml($resp);
-  if(isset($xml['rsp stat="ok"'])) {
-	return $xml['rsp stat="ok"'][0];
-  } else if(isset($xml['rsp stat="fail"'])) {
-	foreach(array_keys($xml['rsp stat="fail"'][0]) as $k) {
-	  spip_log('Flickr Error: '.preg_replace('/err/','',$k));
-	}
+  if($resp['stat'] == 'ok') {
+	return $resp;
+  } else if($resp['stat'] == 'fail') {
+	  spip_log('Flickr Error: '.$resp['message'].'('.$resp['code'].')');
 	return false;
   } else return 'cannot understand response';
 }
@@ -62,7 +59,7 @@ function flickr_authenticate_get_frob() {
   $frob = flickr_check_error(flickr_api_call('flickr.auth.getFrob',array(),false,true));
   if(isset($frob['frob'])) {
 	$params['api_key'] = $FLICKR_API_KEY;
-	$params['frob'] = $frob['frob'][0];
+	$params['frob'] = $frob['frob']['_content'];
 	$params['perms'] = 'read';
 	$params['api_sig'] = flickr_sign($params);
   
@@ -71,7 +68,7 @@ function flickr_authenticate_get_frob() {
 	  $args .= '&'.$k.'='.$v;
 	}
 	$args = substr($args,1);
-	return array('url'=>"http://flickr.com/services/auth/?$args",'frob'=>$frob['frob'][0]);
+	return array('url'=>"http://flickr.com/services/auth/?$args",'frob'=>$frob['frob']['_content']);
   }
   return '';
 }
@@ -82,11 +79,8 @@ function flickr_authenticate_end($id_auteur,$frob) {
   $nsid='';
   $token = '';
   if(isset($frob['auth'])) {
-	foreach ($frob['auth'][0] as $k => $v) {
-	  if((strpos($k,'user') === 0) && preg_match('#nsid="(.*?)"#', $k, $matches)) 
-		$nsid = $matches[1];
-	  else if($k == 'token') $token = $v[0];
-	}
+	$nisd = $frob['auth']['user']['nsid'];
+	$token = $frob['auth']['token']['_content'];
 	if(isset($token) && isset($nsid))	{
 	  include_spip('base/abstract_sql');
 	  global $table_prefix;
@@ -106,15 +100,15 @@ function flickr_auth_checkToken($token) {
 	<user nsid="12037949754@N01" username="Bees" fullname="Cal H" />
 </auth>*/
   $check = flickr_check_error(flickr_api_call('flickr.auth.checkToken',array('auth_token'=>$token),false,true));
-  if($check) {
+  if(isset($check['auth'])) {
 	$auth_info = array();
-	foreach($check as $t => $v) {
-	  if(strpos($t,'user')) {		
-		if(preg_match_all('#(nsid|fullname|username)="(.*?)"#',$photo,$matches,PREG_SET_ORDER)) {
-		  foreach($matches as $m) $auth_info['user_'.$m[1]] = $m[2];
-		}
+	foreach($check['auth'] as $t => $v) {
+	  if($t == 'user') {		
+		$auth_info['user_fullname'] = $t['fullname'];
+		$auth_info['user_nsid'] = $t['nsid'];
+		$auth_info['user_username'] = $t['username'];
 	  } else {
-		$auth_info[$t] = $v[0];
+		$auth_info[$t] = $v['_content'];
 	  }
 	}
 	return $auth_info;
@@ -155,6 +149,7 @@ class FlickrPhotoDetails {
   var $date_lastupdate;
   var $comments;
   var $tags;
+  var $notes;
   var $urls;
   
     /*
@@ -274,21 +269,15 @@ function flickr_photos_search(
 
   $photos =  flickr_check_error(flickr_api_call('flickr.photos.search',$params,$auth_token));
   $resp = new FlickrPhotos;
-  if($photos) {
-	$rez = array_keys($photos);
-	$photos = array_keys($photos[$rez[0]][0]);
+  if($photos = $photos['photos']) {
+	$resp->page = $photos['page'];
+	$resp->pages = $photos['pages'];
+	$resp->perpage = $photos['perpage'];
+	$resp->total = $photos['total'];
 
-	if(preg_match_all('#(page|pages|perpage|total)="([0-9]+)"#',$rez[0],$matches,PREG_SET_ORDER)) {
-	  foreach($matches as $m) $resp->$m[1] = $m[2];
-	}
-
-
-	foreach($photos as $photo) {
+	foreach($photos['photo'] as $photo) {
 	  $new_p = new FlickrPhoto;
-	  if(preg_match_all('#([a-zA-Z_]+)="(.*?)"#',$photo,$matches,PREG_SET_ORDER)) {
-		foreach($matches as $m) $new_p->$m[1] = $m[2];
-	  }
-
+	  foreach($photo as $key => $value) $new_p->$key = $value;
 	  $resp->photos[] = $new_p;
 	}
   }  
@@ -312,21 +301,18 @@ function flickr_photosets_getList($user_id,$auth_token='') {
 
   $photosets =  flickr_check_error(flickr_api_call('flickr.photosets.getList',array('user_id'=>$user_id),$auth_token));
   $resp = array();
-  if($photosets) {
-	$rez = array_keys($photosets);
-	$photosets = $photosets[$rez[0]][0];
-
-	foreach($photosets as $set => $data) {
+  if($photosets = $photosets['photosets']) {
+	foreach($photosets['photoset'] as $set) {
 	  $new_p = new FlickrPhotoSet;
 	  $new_p->owner = $user_id;
-	  if(preg_match_all('#([a-zA-Z_]+)="(.*?)"#',$set,$matches,PREG_SET_ORDER)) {
-		foreach($matches as $m) {
-		  $new_p->$m[1] = $m[2];
-		}
+
+	  foreach($set as $key => $value) {
+		if(is_array($value))
+		  $new_p->$key = $value['_content'];
+		else
+		  $new_p->$key = $value;
 	  }
-	  foreach($data[0] as $k => $v) {
-		$new_p->$k = $v[0];
-	  }
+
 	  $resp[] = $new_p;
 	}
   }  
@@ -343,16 +329,17 @@ function flickr_photosets_getPhotos($photoset_id,$extras='',$privacy_filter='',$
 
   $photos =  flickr_check_error(flickr_api_call('flickr.photosets.getPhotos',$params,$auth_token));
   $resp = array();
-  if($photos) {
-	$rez = array_keys($photos);
-	$photos = array_keys($photos[$rez[0]][0]);
-
-	foreach($photos as $photo) {
+  if($photos = $photos['photoset']) {
+	foreach($photos['photo'] as $photo) {
 	  $new_p = new FlickrPhoto;
-	  if(preg_match_all('#([a-zA-Z_]+)="(.*?)"#',$photo,$matches,PREG_SET_ORDER)) {
-		foreach($matches as $m)
-		  $new_p->$m[1] = $m[2];
+	  
+	  foreach($photo as $key => $value) {
+		if(is_array($value))
+		  $new_p->$key = $value['_content'];
+		else
+		  $new_p->$key = $value;
 	  }
+
 	  $resp[] = $new_p;
 	}
   }  
@@ -366,58 +353,38 @@ function flickr_photos_getInfo($photo_id,$secret,$auth_token='') {
   $photo =  flickr_check_error(flickr_api_call('flickr.photos.getInfo',$params,$auth_token));
   $resp = new FlickrPhotoDetails;
   if($photo) {
-	$rez = array_keys($photo);
-	//	$details = array_keys($photo[$rez[0]][0]);
-
-
-	if(preg_match_all('#(id|secret|server|isfavorite|license|rotation|originalformat)="(.*?)"#',$rez[0],$matches,PREG_SET_ORDER)) {
-	  foreach($matches as $m) $resp->$m[1] = $m[2];
-	}
-
-	foreach($photo[$rez[0]][0] as $tag => $v) {
-	  if(strpos($tag,'title') === 0 || strpos($tag,'description') === 0 || strpos($tag,'comments')===0) {
-		$resp->$tag = $v[0];
-	  } else if(strpos($tag,'owner') === 0) {
-		if(preg_match_all('#([a-zA-Z_]+)="(.*?)"#',$tag,$matches,PREG_SET_ORDER)) {
-		  foreach($matches as $m) {
-			$name = 'owner_'.$m[1];
-			$resp->$name = $m[2];
-		  }
-		}
-	  } else if(strpos($tag,'dates') === 0) {
-		if(preg_match_all('#([a-zA-Z_]+)="(.*?)"#',$tag,$matches,PREG_SET_ORDER)) {
-		  foreach($matches as $m) {
-			$name = 'date_'.$m[1];
-			$resp->$name = $m[2];
-		  }
-		}
-	  } else if(strpos($tag,'visibility') === 0) {
-		if(preg_match_all('#([a-zA-Z_]+)="(.*?)"#',$tag,$matches,PREG_SET_ORDER)) {
-		  foreach($matches as $m) {
-			$name = $m[1];
-			$resp->$name = $m[2];
-		  }
-		}
-	  } else if(strpos($tag,'tags') === 0) {
-		foreach($v[0] as $taginfo => $tag) { 
+	foreach($photo['photo'] as $key => $value) {
+	  if($key == 'tags') {
+		foreach($value['tag'] as $tag) { 
 		  $t = new FlickrTag;
-		  $t->safe = $tag[0];
-		  if(preg_match_all('#(id|raw|author)="(.*?)"#',$taginfo,$matches,PREG_SET_ORDER)) {
-			foreach($matches as $m) {
-			  $t->$m[1] = $m[2];
-			}
-		  }
+		  $t->safe = $tag['_content'];
+		  $t->id = $tag['id'];
+		  $t->raw = $tag['raw'];
+		  $t->author = $tag['author'];
+		  
 		  $resp->tags[] = $t;
 		}
-	  } else if(strpos($tag,'urls') === 0) {
-		foreach($v[0] as $urltype => $url) { 
-		  if(preg_match('#type="(.*?)"#',$urltype,$matches)) {
-			$resp->urls[$matches[1]] = $url[0];
-		  }
+	  } else if($key == 'notes') {
+		$resp->notes = $value['note'];
+	  } else if($key == 'urls') {
+		foreach($value['url'] as $urldata)
+		  $resp->urls[$urldate['type']] = $urldata['_content'];
+	  } else if(is_array($value)) {
+		foreach($value as $attr => $content) {
+		  if(is_array($content)) 
+			$resp->$key = $content['_content'];
+		  else {
+			$k = $key.'_'.$attr;
+			$resp->$k = $content;
+		  }			  
 		}
-	  } 
-	}
-  }  
+	  } else {
+		$resp->$key = $value;
+
+	  }
+	}		
+  }
+
   return $resp;
 
   /*
@@ -452,15 +419,13 @@ function flickr_photos_licenses_getInfo() {
   $licenses =  flickr_check_error(flickr_api_call('flickr.photos.licenses.getInfo',array()));
   $larray = array();
   if($licenses = $licenses['licenses']) {
-	foreach(array_keys($licenses[0]) as $l) {
-	  if(preg_match_all('#(name|url|id)="(.*?)"#',$l,$matches,PREG_SET_ORDER)) {
-		$lic = new FlickrLicense;
-		foreach($matches as $m) {
-		  $lic->$m[1] = $m[2];
-		}
-		$larray[$lic->id] = $lic;
+	foreach($licenses as $l) {
+	  $lic = new FlickrLicense;
+	  foreach($l as $k => $v) {
+		$lic->$k = $v;
 	  }
-	}
+	  $larray[$lic->id] = $lic;
+	}	
   }
   return $larray;
   /*<licenses>

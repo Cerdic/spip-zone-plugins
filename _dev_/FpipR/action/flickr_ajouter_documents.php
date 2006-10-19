@@ -64,6 +64,7 @@ function action_flickr_ajouter_documents() {
 			  if($photo_details->date_taken) $q .=", date= '".$photo_details->date_taken."'";
 			  $q .=" WHERE id_document=".$doc_row['id_document'];
 			  spip_query($q);
+			  include_spip('inc/plugin');
 			  if(in_array('tag-machine',liste_plugin_actifs())) {
 				include_spip('inc/tag-machine');
 				foreach($photo_details->tags as $tag) {
@@ -81,7 +82,7 @@ function action_flickr_ajouter_documents() {
 		}
 	  }
 
-	  redirige_par_entete(urldecode($redirect));
+	  	  redirige_par_entete(urldecode($redirect));
 	}
   }
 }
