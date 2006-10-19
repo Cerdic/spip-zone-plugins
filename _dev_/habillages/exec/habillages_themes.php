@@ -129,15 +129,6 @@ EOF;
 	debut_boite_info();
 	echo "<div class='intro'>";
 	echo _T('habillages:themes_intro')."<br /><br />";
-	echo "<div class='intro_titre'>";
-	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
-	echo _T('habillages:squelettes_debutant_titre')."</div>";
-	echo _T('habillages:squelettes_debutant')."<br /><br />";
-	echo "<div class='intro_titre'>";
-	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
-	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
-	echo _T('habillages:squelettes_avance_titre')."</div>";
-	echo _T('habillages:squelettes_avance')."<br />";
 	echo "</div>";
 	fin_boite_info();
 	
@@ -228,7 +219,7 @@ EOF;
 					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.")".$niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
 					# Laisser la possibilite de definir le nom et le chemin de la capure ecran
 					# dans theme.xml.
-					echo '<div style="float:right";><img src="'.$chemin_plugin_complet.'/captureBW.png" alt="" class="preview" /></div>';
+					echo '<div style="float:right";><img src="'.$chemin_plugin_complet.'/capture.png" alt="" class="preview" /></div>';
 					echo "<small>".propre($description_theme)."</small><br /><br /><hr>";
 					echo "<div class='auteur'>".propre($auteur_theme)."</div><hr>";
 					echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";
