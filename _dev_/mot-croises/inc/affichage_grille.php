@@ -52,7 +52,7 @@ function affichage_grille($tableau_grille,$solution=false){
             		
             		$grille.='<label for="col'.$colonne.'lig'.$ligne.'">'._T('motscroises:ligne',Array('n'=>lettre($ligne))).';'._T('motscroises:colonne',Array('n'=>$colonne)).'</label>';
                     
-                    if (isset($GLOBALS['col'.$colonne.'lig'.$ligne])) //: test l'existence de la variable global correpsonte à cette cellule
+                    if (isset($GLOBALS['col'.$colonne.'lig'.$ligne]) and $GLOBALS['col'.$colonne.'lig'.$ligne]!='') //: test l'existence de la variable global correpsonte à cette cellule
                         {
                         
                         $grille.='<input type="text" maxlength="1" value="'.$GLOBALS['col'.$colonne.'lig'.$ligne].'" name="col'.$colonne.'lig'.$ligne.'" id="col'.$colonne.'lig'.$ligne."\" />";
