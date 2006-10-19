@@ -236,12 +236,14 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
               })
               .overflow("");
             verifForm(cont);
+            return true;
           }
           //upload_error
           if(res.is(".upload_error")) {
             var msg = $("<div class='upload_message'>")
             .append(res.html())
             jForm.after(msg[0]);
+            return true;
           } 
           //upload_zip_list
           if(res.is(".upload_zip_list")) {
@@ -251,7 +253,8 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
               .attr("target","upload_frame")
               .append("<input type='hidden' name='iframe' value='iframe'>")
             .end();
-            jForm.after(zip_form[0]);  
+            jForm.after(zip_form[0]);
+            return true;  
           }
       };
       
