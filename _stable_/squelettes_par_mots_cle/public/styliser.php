@@ -42,6 +42,7 @@ function public_styliser($fond, $id_rubrique, $lang, $contexte) {
 	// supprimer le ".html" pour pouvoir affiner par id_rubrique ou par langue
 	$squelette = substr($base, 0, - strlen(".$ext"));
   $trouve = false;
+  $id_rubrique = intval($id_rubrique);
   $id_rub_init = $id_rubrique;
   
 	// On selectionne, dans l'ordre :
@@ -69,7 +70,7 @@ function public_styliser($fond, $id_rubrique, $lang, $contexte) {
 		if (is_array($fonds) && (list($id_groupe,$table,$id_table) = $fonds[$fond])) {
 		  $trouve = false;
 		  $stop = false;
-		  if (($id = $contexte[$id_table]) && ($n = sql_mot_squelette($id,$id_groupe,$table,$id_table))) {
+		  if (($id = intval($contexte[$id_table])) && ($n = sql_mot_squelette($id,$id_groupe,$table,$id_table))) {
 			if ($squel = find_in_path("$fond=$n.$ext")) {
 			  $squelette = substr($squel, 0, - strlen(".$ext"));
 			  $trouve = true;
