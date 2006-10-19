@@ -1,7 +1,7 @@
 <?php
 
 function FpipR_affiche_milieu($flux) {
-  if($flux['args']['exec'] == 'auteurs_edit') {
+  if($flux['args']['exec'] == 'auteur_infos') {
 	global $table_prefix, $connect_id_auteur;
 
 	include_spip('base/abstract_sql');
