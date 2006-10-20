@@ -70,7 +70,7 @@ include_spip("inc/forms");
 			$active_langs = "";
 		$flux .= "<script src='".find_in_path('forms_lang.js')."' type='text/javascript'></script>\n". 
 		"<script type='text/javascript'>\n".
-		"var forms_def_lang='".$GLOBALS["spip_lang"]."';var forms_avail_langs=[$active_langs];\n".
+		"var forms_def_lang='".$GLOBALS['meta']['langue_site']."';var forms_avail_langs=[$active_langs];\n".
 		"$(forms_init_lang);\n".
 		"</script>\n";
 		
