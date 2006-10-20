@@ -2,6 +2,7 @@
 
 include_spip('inc/texte');
 include_spip('inc/presentation');
+include_spip('inc/acces');
 
 function auteurs_complets_install(){
 	auteurs_complets_verifier_base();
@@ -67,47 +68,20 @@ function auteurs_complets_verifier_base(){
 
 function auteurs_complets_ajouts()
 {
-	global
-	$connect_id_auteur,
-	$id_auteur;
+	global $id_auteur, $redirect, $echec, $initial,
+	  $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
 	
-if ($id_auteur) {
-$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
-if (!$auteur) exit;
-}
+	$id_auteur = intval($id_auteur);
 
-	$organisation=$auteur['organisation'];
-	$telephone=$auteur['telephone'];
-	$fax=$auteur['fax'];
-	$adresse=$auteur['adresse'];
-	$codepostal=$auteur['codepostal'];
-	$ville=$auteur['ville'];
-	$pays=$auteur['pays'];
-	$latitude=$auteur['latitude'];
-	$longitude=$auteur["longitude"];
-	$skype = $auteur["skype"];
+	$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
+	
+	$legender_auteur_supp = charger_fonction('legender_auteur_supp', 'inc');
+	$legender_auteur_supp = $legender_auteur_supp($id_auteur, $auteur, $initial, $echec, $redirect);
+
+	if (_request('var_ajaxcharset')) ajax_retour($legender_auteur_supp);
 
 	echo "<br />";
-	gros_titre(_T('auteurscomplets:coordonnees_sup'));
-	echo "<br />";
-	echo "<table width='100%' cellpadding='0' border='0' cellspacing='0'>";
-	
-	echo "<tr>";
-
-	echo "<td valign='top' width='100%'>";
-
-	if (strlen($organisation) > 2){ echo "<div>"._T('auteurscomplets:affiche_organisation')." $organisation </div>";}
-	if (strlen($telephone) > 2){ echo "<div>"._T('auteurscomplets:affiche_telephone')." $telephone </div>";}
-	if (strlen($fax) > 2){ echo "<div>"._T('auteurscomplets:affiche_fax')." $fax </div>";}
-	if (strlen($skype) > 2){ echo "<div>"._T('auteurscomplets:affiche_skype')." $skype </div><hr />";}
-	if ((strlen($latitude) > 2) || (strlen($longitude) >2))  echo "<div><b>"._T('auteurscomplets:affiche_coordonnees_geo')."</b></div>";
-	if (strlen($latitude) > 2){ echo "<div>"._T('auteurscomplets:affiche_latitude')." $latitude </div>";}
-	if (strlen($longitude) > 2){ echo "<div>"._T('auteurscomplets:affiche_longitude')." $longitude </div><hr />";}
-	if ((strlen($adresse) > 2) || (strlen($codepostal) >2) || (strlen($ville) > 2) || (strlen($pays) > 2))  echo "<div><b>"._T('auteurscomplets:affiche_adresse')."</b></div>";
-	if (strlen($adresse) > 2) echo "<div> $adresse </div>";
-	if (strlen($codepostal) > 2) echo "<div> $codepostal ";
-	if (strlen($ville) > 2) echo "$ville </div>";
-	if (strlen($pays) > 2){ echo "<div> $pays </div>";}
-	echo "</td></tr></table>";
+	echo   debut_cadre("redacteurs-24.gif", true),
+	$legender_auteur_supp;
 }
 ?>
