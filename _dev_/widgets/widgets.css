@@ -1,7 +1,7 @@
-img.widget-changed {
+img.widget-img-changed {
 	visibility: hidden;
 }
-.widget-changed img.widget-changed {
+.widget-changed img.widget-img-changed {
 	visibility: visible;
 }
 img.widget-edit {
@@ -15,6 +15,32 @@ img.widget-edit {
 }
 .widgets_boutons {
 	float: right;
-	width: 150px;
+	width: 200px;
 	display: none;
+}
+
+/* recopie de spip_admin.css faute d'imagination */
+.widgets_boutons a,.widgets_boutons input {
+	border-top: 1px solid #CECECE;
+	border-bottom: 2px solid #4A4A4A;
+	border-left: 1px solid #CECECE;
+	border-right: 1px solid #CECECE;
+	text-decoration: none;
+	text-align: center;
+	margin: 0;
+	padding: 1px .5em;
+	font-family: helvetica,arial,sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	background-color: #FFF;
+	color: #0C479D;
+}
+
+.widgets_boutons a:hover,.widgets_boutons input:hover {
+	background-color: #fc3;
+	border-bottom: 2px solid #36F;
+}
+.widgets_boutons a:active,.widgets_boutons input:active {
+	background-color: #CCC;
+	border-bottom: 2px solid #f00;
 }

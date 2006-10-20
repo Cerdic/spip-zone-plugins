@@ -228,11 +228,13 @@ function controleur_dist($regs) {
   {$widgetsInput}
   <div class="widgets_boutons">
   <div style="position:absolute;">
-  <input type="submit" value="ok" class="bouton-mobile" />
-  <input class="cancel_widget bouton-mobile" type="button" value="cancel" />
-  <input class="hide_widget bouton-mobile" type="button" value="hide" />
+    <input class="submit_widget" type="submit" value="ok" />
+    <a class="cancel_widget">cancel</a>
+    <a class="hide_widget">hide</a>
+    <a href="ecrire/?exec=articles_edit&amp;id_article=$id"
+      class="full_widget">editer $type $id</a>
   </div>
-  </div>
+</div>
 </form>
 
 FIN_FORM;

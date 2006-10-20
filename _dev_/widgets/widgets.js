@@ -31,17 +31,20 @@ $.fn.openwidget = function() {
       .append(SEARCHING); // icone d'attente
       var me=this;
       $.getJSON(url_widgets_html,
-        {w : $(this).width(),
-        h : $(this).height(),
-        em : $(this).css('fontSize'),
-        "class" : me.className}
-       ,
+        {
+          'w': $(this).width(),
+          'h': $(this).height(),
+          'em': $(this).css('fontSize'),
+          'class': me.className
+        },
         function (c) {
-			$(me).find("img.widget-searching").remove();
-	        if (c.erreur) {
-	          alert(c.erreur);
-	          return false;
-	        }
+          $(me)
+          .find("img.widget-searching")
+            .remove();
+          if (c.erreur) {
+            alert(c.erreur);
+            return false;
+          }
           $(me)
           .hide()
           .addClass('has-widget')
@@ -77,6 +80,18 @@ $.fn.hidewidget = function() {
     .removeClass('widget-hover');
 }
 
+// soumet le widget
+/*
+$.fn.submitwidget = function() {
+  return this
+  .next()
+  .find('form')
+  .each(function(){
+    this.submit();
+  });
+}
+*/
+
 // active un widget qui vient d'etre charge
 $.fn.activatewidget = function() {
   return this
@@ -98,7 +113,7 @@ $.fn.activatewidget = function() {
           .html(
             d[$('form', me).find('.widget_id').val()]
           )
-		  .removeClass('widget-changed')
+          .removeClass('widget-changed')
           .prepend(ICONCLICK)
           .show()
           .removeClass('has-widget')
@@ -112,7 +127,7 @@ $.fn.activatewidget = function() {
       }).keyup(function(){
         $(this).find(".widgets_boutons").show();
         $(me).prev().addClass('widget-changed');
-	  })
+      })
       .find(".widget-active")
         .css('font', 'inherit') // pour safari
         .css({
@@ -129,6 +144,14 @@ $.fn.activatewidget = function() {
             .prev()
             .cancelwidget();
           }
+        })
+      .end()
+      .find(".submit_widget")
+        .click(function(e){
+          e.stopPropagation();
+          $(me)
+          .prev()
+          .submitwidget();
         })
       .end()
       .find(".cancel_widget")
@@ -203,10 +226,10 @@ $(document).ready(function() {
 
   // sortie, demander pour sauvegarde si oubli
   $(window).unload(function(e) {
-	var chg = $(".widget-changed");
-	if (chg.length && confirm("Sauvegarder les modifications ?")) {
-		chg.next().find('form').submit();
-	}
+    var chg = $(".widget-changed");
+    if (chg.length && confirm("Sauvegarder les modifications ?")) {
+      chg.next().find('form').submit();
+    }
   });
 
   $(".widget")
