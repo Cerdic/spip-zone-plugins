@@ -156,6 +156,7 @@ function action_legender_post($r)
 	$auteur['skype'] = corriger_caracteres($skype);
 	$auteur['pays'] = corriger_caracteres($pays);
 	$auteur['latitude'] = corriger_caracteres($latitude);
+	$auteur['longitude'] = corriger_caracteres($longitude);
 	$auteur['pgp'] = corriger_caracteres($pgp);
 	$auteur['nom_site'] = corriger_caracteres($nom_site_auteur); // attention mix avec $nom_site_spip ;(
 	$auteur['url_site'] = vider_url($url_site, false);
