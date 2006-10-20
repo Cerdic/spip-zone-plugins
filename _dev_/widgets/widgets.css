@@ -19,7 +19,7 @@ img.widget-edit {
 	display: none;
 }
 
-/* recopie de spip_admin.css faute d'imagination */
+/* a remplacer par des images picto + title */
 .widgets_boutons a,.widgets_boutons input {
 	border-top: 1px solid #CECECE;
 	border-bottom: 2px solid #4A4A4A;

@@ -230,7 +230,7 @@ function controleur_dist($regs) {
   <div style="position:absolute;">
     <input class="submit_widget" type="submit" value="ok" />
     <a class="cancel_widget">cancel</a>
-    <a class="hide_widget">hide</a>
+    <!-- <a class="hide_widget">hide</a> -->
     <a href="ecrire/?exec=articles_edit&amp;id_article=$id"
       class="full_widget">editer $type $id</a>
   </div>
