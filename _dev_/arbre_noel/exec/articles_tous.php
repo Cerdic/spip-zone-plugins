@@ -14,12 +14,35 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
+function gerer_deplacements($deplacements){
+	$liste_dep = explode("\n",$deplacements);
+	if (count($liste_dep)){
+		foreach ($liste_dep as $dep){
+			$mouvement=explode(":",$dep);
+			$quoi=explode("-",$mouvement[0]);
+			$cible=explode("-",$mouvement[1]);
+			if (in_array($quoi[0],array('article','rubrique')) && $cible[0]=='rubrique'){
+				$id_quoi=intval($quoi[1]);$id_cible=intval($cible[1]);
+				if ($quoi[0]=='article')
+					spip_query("UPDATE spip_articles SET id_rubrique=".spip_abstract_quote($id_cible)." WHERE id_article=".spip_abstract_quote($id_quoi));
+				if ($quoi[0]=='rubrique')
+					spip_query("UPDATE spip_rubriques SET id_parent=".spip_abstract_quote($id_cible)." WHERE id_rubrique=".spip_abstract_quote($id_quoi));
+			}
+		}
+		include_spip('inc/rubriques');
+		propager_les_secteurs();
+	}
+}
+
 // http://doc.spip.org/@exec_articles_tous_dist
 function exec_articles_tous_dist()
 {
-	global $aff_art, $sel_lang, $article, $enfant, $text_article;
+	global $aff_art, $sel_lang, $article, $enfant, $text_article,$connect_toutes_rubriques;
 	global $connect_id_auteur, $connect_statut, $spip_dir_lang, $spip_lang, $browser_layer;
-
+	
+	if (($connect_toutes_rubriques) && _request('deplacements')!==NULL)
+		gerer_deplacements(_request('deplacements'));
+	
 	changer_typo(); // pour definir $dir_lang
 	if (!is_array($aff_art)) $aff_art = array('prop','publie');
 
@@ -27,14 +50,14 @@ function exec_articles_tous_dist()
 	list($enfant, $first_couche, $last_couche) = arbo_articles_tous();
 	debut_page(_T('titre_page_articles_tous'), "accueil", "tout-site");
 	debut_gauche();
-
+	
 	if (($GLOBALS['meta']['multi_rubriques'] == 'oui' OR $GLOBALS['meta']['multi_articles'] == 'oui') AND $GLOBALS['meta']['gerer_trad'] == 'oui') 
 		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
 	else	$langues = array();  
 
 	$sel_lang[$spip_lang] = $spip_lang;
 
-	if ($connect_statut == "0minirezo") 
+	if ($connect_statut == "0minirezo")
 		$result = spip_query("SELECT id_article, titre, statut, id_rubrique, lang, id_trad, date_modif FROM spip_articles ORDER BY date DESC");
 	else 
 		$result = spip_query("SELECT articles.id_article, articles.titre, articles.statut, articles.id_rubrique, articles.lang, articles.id_trad, articles.date_modif FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) GROUP BY id_article ORDER BY articles.date DESC");
@@ -102,28 +125,42 @@ function exec_articles_tous_dist()
 
 	$secteur24=http_wrapper("secteur-24.gif");
 	$rubrique24=http_wrapper("rubrique-24.gif");
-	global $spip_lang_left,$couleur_claire;
+	$article24=http_wrapper("article-24.gif");
+	global $spip_lang_left,$couleur_claire,$couleur_foncee;
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
-li.secteur {
+ul#myTree li {clear:both;}
+ul#myTree li.secteur {
 	padding-top: 5px; 
 	padding-bottom: 5px; 
-	padding-$spip_lang_left: 28px; 
-	background: url($secteur24) $spip_lang_left top no-repeat;
 	background-color: $couleur_claire;
 }
-li.rubrique {
-	padding-top: 5px; 
-	padding-bottom: 5px; 
-	padding-$spip_lang_left: 28px; 
-	background: url($rubrique24) $spip_lang_left top no-repeat;
+ul#myTree li.secteur ul{	background-color: white;}
+ul#myTree li span.icone {
+	display:block;
+	float:$spip_lang_left;
+	width:28px;
+	height:24px;
 }
+li.secteur span.icone {	background: url($secteur24) $spip_lang_left bottom no-repeat;}
+li.secteur ul{display:none;}
+ul#myTree li.rubrique {	background-color: white;}
+li.rubrique ul{display:none;}
+li.rubrique span.icone {	background: url($rubrique24) $spip_lang_left top no-repeat;}
+li.article span.icone {	background: url($article24) $spip_lang_left top no-repeat;}
+
 .puce_statut{
 float:$spip_lang_left;
 }
 ul#myTree, ul#myTree ul {
 	list-style: none;
 }
+ul#myTree .expandImage{
+	position:relative;
+	left:-14px;
+	float:left;
+}
+.selected { background-color:$couleur_foncee;border:2px solid $couleur_foncee;}
 EOF;
 	echo "</style>";
 	 
@@ -261,6 +298,15 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 
 	fin_boite_info();
 	echo "</form>";
+	
+	debut_boite_info();
+	echo _L("D&eacute;placements");
+	echo generer_url_post_ecrire('articles_tous');
+	echo "<textarea id='deplacements' style='display:none;' name='deplacements'></textarea>";
+	echo "\n<div id='apply' style='display:none;text-align:$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."'></div>";
+	echo "</form>";
+	fin_boite_info();
+
 }
 
 // http://doc.spip.org/@couche_formulaire_tous
@@ -294,17 +340,21 @@ function afficher_rubriques_filles($id_parent, $flag_trad) {
 
 	$decal = $decal + 1;
 
-	if ($id_parent==0)
-		echo "<ul id='myTree'>\n";
+	if ($id_parent==0){
+		$titre = "Racine";
+		echo "<ul id='myTree'><li class='treeItem racine'>",
+		"<span class='textHolder icone'>&nbsp;</span>$titre",
+		"\n<ul class='plan-rubrique'>\n";
+	}
 	while (list($id_rubrique, $titre) = each($enfant[$id_parent]) ) {
 			
 		$lesarticles = isset($article[$id_rubrique]);
 		$lesenfants = ($lesarticles OR isset($enfant[$id_rubrique]));
 
-		echo "<li class='treeItem ",
+		echo "<li id='rubrique-$id_rubrique' class='treeItem ",
 			($id_parent==0)?"secteur":"rubrique",
 			"'>",
-		  "<span class='textHolder'>$titre</span>";
+		  "<span class='textHolder icone'>&nbsp;</span>$titre";
 		   
 		if ($lesenfants) {
 			echo "\n<ul class='plan-rubrique'>\n";
@@ -317,7 +367,7 @@ function afficher_rubriques_filles($id_parent, $flag_trad) {
 		echo "</li>\n";
 	}
 	if ($id_parent==0)
-		echo "</ul>\n";
+		echo "</ul></li></ul>\n";
 }
 
 // http://doc.spip.org/@article_tous_rubrique
@@ -334,7 +384,7 @@ function article_tous_rubrique($tous, $id_rubrique, $flag_trad)
 		OR $attarticle["id_trad"] == $zarticle) {
 			$auteurs = trouve_auteurs_articles($zarticle);
 
-			$res .= "\n<li class='treeItem tr_liste'>";
+			$res .= "\n<li id='article-$zarticle' class='treeItem article tr_liste'>";
 			if (count($attarticle["trad"]) > 0) {
 				ksort($attarticle["trad"]);
 				$res .= "\n<span class='trad_float'>" 
@@ -342,6 +392,7 @@ function article_tous_rubrique($tous, $id_rubrique, $flag_trad)
 				.  "</span>";
 			}
 			$res .= "\n"
+				. "<span class='icone'>&nbsp;</span>"
 			  . "<span class='puce_statut'>".puce_statut_article($zarticle, $attarticle["statut"], $id_rubrique)."</span>"
 			  . ($flag_trad ? "<span class='lang_base'>$zelang</span> " : '')
 			  . "<span>"

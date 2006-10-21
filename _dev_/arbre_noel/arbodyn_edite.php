@@ -7,6 +7,7 @@ var img_deplierbas = "'._DIR_IMG_PACK.'deplierbas.gif";
 //--></script>';
 	$flux .= '<script src="'.find_in_path('dragdrop_interface.js').'" type="text/javascript"></script>';
 	$flux .= '<script src="'.find_in_path('tree_edite.js').'" type="text/javascript"></script>';
+	$flux .= '<script src="'.find_in_path('pause.js').'" type="text/javascript"></script>';
 
 	return $flux;
 }
