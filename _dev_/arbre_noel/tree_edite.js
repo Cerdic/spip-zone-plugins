@@ -36,7 +36,7 @@ $(document).ready(
 				}
 			}
 		);
-		$('span.textHolder').Droppable(
+		$('.textHolder').Droppable(
 			{
 				accept			: 'treeItem',
 				hoverclass		: 'none',

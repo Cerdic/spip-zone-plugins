@@ -363,7 +363,7 @@ function afficher_rubriques_filles($id_parent, $flag_trad) {
 		echo "<li id='rubrique-$id_rubrique' class='treeItem ",
 			($id_parent==0)?"secteur":"rubrique",
 			"'>",
-		  "<span class='textHolder icone'>&nbsp;</span><p class='",
+		  "<span class='icone'>&nbsp;</span><p class='textHolder ",
 		  ($id_parent==0)?"secteur":"rubrique",
 		  "'><b class='verdana2'><a href='",
 		   generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"),
