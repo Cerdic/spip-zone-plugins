@@ -52,6 +52,17 @@ function personnalisation_insert_head($flux) {
 		case "autolink":
 		$flux .= '<script src="' ._DIR_PLUGIN_FORMULAIRE_PERSONNALISATION . '/js/autolink.js" type="text/javascript"></script>'. "\n";
 		$flux .= '<script type="text/javascript">imgPath = "' ._DIR_PLUGIN_FORMULAIRE_PERSONNALISATION . '/img/";</script>'. "\n";
+        $flux .= '
+		<style type="text/css">
+		#staticbuttons{
+			z-index:200;
+			border:1px solid #000;
+			background-color: #CCC;
+            position:absolute;
+            width:50px;
+		}
+		</style>
+		'. "\n";        
 		break;
 
 		case "autofocus":
@@ -64,12 +75,6 @@ function personnalisation_insert_head($flux) {
 			background:#660000 !important;
 			color:#FFF !important;
 		}
-		#staticbuttons{
-			z-index:200;
-			border:1px solid #000;
-			background-color: #CCC;
-		}
-
 		#stopper{
 			z-index:200;
 			background-color: #333;
@@ -96,6 +101,17 @@ function personnalisation_insert_head($flux) {
 		case "autolink":
 		$flux .= '<script src="' ._DIR_PLUGIN_FORMULAIRE_PERSONNALISATION . '/js/autolink.js" type="text/javascript"></script>'. "\n";
 		$flux .= '<script type="text/javascript">imgPath = "' ._DIR_PLUGIN_FORMULAIRE_PERSONNALISATION . '/img/";</script>'. "\n";
+        $flux .= '
+		<style type="text/css">
+		#staticbuttons{
+			z-index:200;
+			border:1px solid #000;
+			background-color: #CCC;
+            position:absolute;
+            width:50px;            
+		}
+		</style>
+		'. "\n"; 
 		break;
 
 		case "autofocus":
@@ -108,12 +124,6 @@ function personnalisation_insert_head($flux) {
 			background:#660000 !important;
 			color:#FFF !important;
 		}
-		#staticbuttons{
-			z-index:200;
-			border:1px solid #000;
-			background-color: #CCC;
-		}
-
 		#stopper{
 			z-index:200;
 			background-color: #333;
