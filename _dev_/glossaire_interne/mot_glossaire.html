@@ -1,0 +1,22 @@
+#CACHE{2592000}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head><title>Glossaire</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+<link rel="stylesheet" href="#CHEMIN{glossaire.css}" media="screen" type="text/css" />
+<script type="text/javascript" src="#CHEMIN{glossaire.js}"></script>
+</head>
+<body>
+
+<BOUCLE_mot_principal(MOTS) {id_mot} {doublons}>
+<h2 class="texte_gloss">#TITRE</h2>
+<br />
+[<div class="texte_gloss">(#TEXTE|lier_au_glossaire)</div>]
+</BOUCLE_mot_principal>
+
+<br />
+<div class="navgloss"><a href="javascript:history.back(1)" title="Item pr&eacute;c&eacute;dent" style="float: left;">retour</a><a href="javascript:self.close()" style="float: right;">fermer</a></div>
+<br />
+
+</body>
+</html>
