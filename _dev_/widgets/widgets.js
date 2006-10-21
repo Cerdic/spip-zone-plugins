@@ -149,9 +149,9 @@ $.fn.activatewidget = function() {
       .find(".submit_widget")
         .click(function(e){
           e.stopPropagation();
-          $(me)
-          .prev()
-          .submitwidget();
+          $(this)
+          .ancestors("form")
+          .submit();
         })
       .end()
       .find(".cancel_widget")
