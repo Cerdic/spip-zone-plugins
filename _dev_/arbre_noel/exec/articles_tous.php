@@ -130,21 +130,27 @@ function exec_articles_tous_dist()
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
 ul#myTree li {clear:both;}
-ul#myTree li.secteur {
-	padding-top: 5px; 
-	padding-bottom: 5px; 
+ul#myTree p.secteur {
+	padding: 0px; 
 	background-color: $couleur_claire;
+	height:24px;
 }
-ul#myTree li.secteur ul{	background-color: white;}
-ul#myTree li span.icone {
+ul#myTree p.rubrique {
+	margin:0px;
+	margin-bottom:5px;
+	padding: 0px; 
+	height:24px;
+}
+span.icone {
 	display:block;
 	float:$spip_lang_left;
 	width:28px;
 	height:24px;
 }
+span.textHolder {
+}
 li.secteur span.icone {	background: url($secteur24) $spip_lang_left bottom no-repeat;}
 li.secteur ul{display:none;}
-ul#myTree li.rubrique {	background-color: white;}
 li.rubrique ul{display:none;}
 li.rubrique span.icone {	background: url($rubrique24) $spip_lang_left top no-repeat;}
 li.article span.icone {	background: url($article24) $spip_lang_left top no-repeat;}
@@ -152,15 +158,18 @@ li.article span.icone {	background: url($article24) $spip_lang_left top no-repea
 .puce_statut{
 float:$spip_lang_left;
 }
-ul#myTree, ul#myTree ul {
+ul {
 	list-style: none;
 }
-ul#myTree .expandImage{
-	position:relative;
-	left:-14px;
-	float:left;
+.expandImage{
 }
-.selected { background-color:$couleur_foncee;border:2px solid $couleur_foncee;}
+ul#myTree .expandImage{
+display:block;
+float:left;
+position:relative;
+	left:-14px;
+}
+.selected { border:2px solid $couleur_foncee;}
 EOF;
 	echo "</style>";
 	 
@@ -354,7 +363,13 @@ function afficher_rubriques_filles($id_parent, $flag_trad) {
 		echo "<li id='rubrique-$id_rubrique' class='treeItem ",
 			($id_parent==0)?"secteur":"rubrique",
 			"'>",
-		  "<span class='textHolder icone'>&nbsp;</span>$titre";
+		  "<span class='textHolder icone'>&nbsp;</span><p class='",
+		  ($id_parent==0)?"secteur":"rubrique",
+		  "'><b class='verdana2'><a href='",
+		   generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"),
+		   "'>",
+		   $titre,
+		   "</a></b></p>";
 		   
 		if ($lesenfants) {
 			echo "\n<ul class='plan-rubrique'>\n";
@@ -363,7 +378,7 @@ function afficher_rubriques_filles($id_parent, $flag_trad) {
 			afficher_rubriques_filles($id_rubrique,$flag_trad);
 			echo "</ul>\n";
 		}
-			
+
 		echo "</li>\n";
 	}
 	if ($id_parent==0)
@@ -395,9 +410,15 @@ function article_tous_rubrique($tous, $id_rubrique, $flag_trad)
 				. "<span class='icone'>&nbsp;</span>"
 			  . "<span class='puce_statut'>".puce_statut_article($zarticle, $attarticle["statut"], $id_rubrique)."</span>"
 			  . ($flag_trad ? "<span class='lang_base'>$zelang</span> " : '')
+			  . "<span><a"
+			  . ($auteurs ? (' title="' . htmlspecialchars($auteurs). '"') :'')
+			  . "\nhref='"
+			  . generer_url_ecrire("articles","id_article=$zarticle")
+			  . "'>"
+			  . ($flag_trad ? "<span class='lang_base'>$zelang</span> " : '')
 			  . "<span>"
 			  . $attarticle["titre"]
-			  . "</span>"
+			  . "</span></a>"
 			  . "</li>";
 		}
 	}

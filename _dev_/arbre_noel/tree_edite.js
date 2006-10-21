@@ -39,7 +39,7 @@ $(document).ready(
 		$('span.textHolder').Droppable(
 			{
 				accept			: 'treeItem',
-				hoverclass		: 'nothing',
+				hoverclass		: 'none',
 				activeclass		: 'fakeClass',
 				tollerance		: 'pointer',
 				onhover			: function(dragged)
