@@ -140,6 +140,59 @@ function redirecturlencours(urlencours){
    window.location=urlencours;
 }
 
+function gosubmit(){
+	monform = document.getElementById("personnalisation");
+	if(monform=!'undefined'){
+   		for (var j=0;j<monform.elements["duree"].length;j++) {
+       		if (monform.elements["duree"][j].checked) {
+           		duree = monform.elements["duree"][j].value;
+           		break;
+       		}
+   		}
+   	}else{
+   		duree=LireCookie("spip_personnalisation_duree");
+   	}
+ 	formencours=this.form;
+	retardateur2 = setTimeout("submitform(formencours);",duree);
+}
+
+function stopsubmit(){
+ 	clearTimeout(retardateur2);
+}
+
+
+function submitform(formencours){
+   formencours.submit();
+}
+
+function goradio(){
+	monform = document.getElementById("personnalisation");
+	if(monform=!'undefined'){
+   		for (var j=0;j<monform.elements["duree"].length;j++) {
+       		if (monform.elements["duree"][j].checked) {
+           		duree = monform.elements["duree"][j].value;
+           		break;
+       		}
+   		}
+   	}else{
+   		duree=LireCookie("spip_personnalisation_duree");
+   	}
+    if ( document.all ) monid = this.getAttribute('htmlFor');
+    else monid = this.getAttribute('for');
+    champencours = document.getElementById(monid);
+	retardateur3 = setTimeout("radiobox(champencours);",duree);
+}
+
+function stopradio(){
+ 	clearTimeout(retardateur3);
+}
+
+
+function radiobox(champencours){
+   champencours.checked = true;
+}
+
+
 //Page Scroller (aka custom scrollbar)- By Dynamic Drive
 //For full source code and more DHTML scripts, visit http://www.dynamicdrive.com
 //This credit MUST stay intact for use
@@ -216,6 +269,28 @@ function init() {
 	links[i].onmouseout = stopgotolink;
 	}
 	}
+    
+    var inputs=document.getElementsByTagName("input");
+	for (j=0;j<inputs.length;j++){
+	if(inputs[j].getAttribute('type')=='submit'){
+	inputs[j].onmouseover = gosubmit;
+	inputs[j].onmouseout = stopsubmit;
+	}
+	}
+    
+    var labels=document.getElementsByTagName("label");
+	for (k=0;k<labels.length;k++){
+	if ( labels[k].getAttribute("htmlFor") || labels[k].getAttribute("for") ) {
+        if ( document.all ) monid = labels[k].getAttribute('htmlFor');
+        else monid = labels[k].getAttribute('for');
+        monchamp = document.getElementById(monid);
+        if(monchamp.getAttribute('type')=='radio'){
+        labels[k].onmouseover = goradio;
+	    labels[k].onmouseout = stopradio;
+        }
+	}
+	}
+    
 	cross_obj=document.all? document.all.staticbuttons : document.getElementById? document.getElementById("staticbuttons") : document.staticbuttons
 	if (document.all||document.getElementById||document.layers)
 	montimer2=setInterval("initializeIT()",20);
