@@ -163,7 +163,7 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 	 	_T('texte_modifier_article') .
 		gros_titre($gros_titre,'',false) . 
 		"</td></tr></table><p><hr />\n<p>" .
-	  generer_action_auteur("editer_article", $new ? $new : $id_article, $redirect, $form, " method='post' name='formulaire' onchange='disable_other_forms(this);'");
+	  generer_action_auteur("editer_article", $new ? $new : $id_article, $redirect, $form, " method='post' name='formulaire'");
 
 }
 
