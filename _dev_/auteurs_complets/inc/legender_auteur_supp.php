@@ -16,7 +16,7 @@ include_spip('inc/auteurs_complets_gestion');
 // http://doc.spip.org/@inc_legender_auteur_dist
 function inc_legender_auteur_supp_dist($id_auteur, $auteur, $mode, $echec='', $redirect='')
 {
-	$corps_supp = (($mode < 0) OR !statut_modifiable_auteur($id_auteur, $auteur))
+	$corps_supp = (($mode < 0) OR !statut_modifiable_auteur_supp($id_auteur, $auteur))
 	? legender_auteur_supp_voir($auteur, $redirect)
 	: legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec, $redirect);
 	
@@ -27,27 +27,26 @@ function inc_legender_auteur_supp_dist($id_auteur, $auteur, $mode, $echec='', $r
 
 // http://doc.spip.org/@legender_auteur_saisir
 function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $redirect=''){
-	
 
 	global $options, $connect_statut, $connect_id_auteur, $connect_toutes_rubriques;
 
 	$corps_supp = '';
 
-	if ($echec){
-
-		foreach (split('@@@',$echec) as $e)
-			$corps_supp .= '<p>' . _T($e) . "</p>\n";
-		
-		$corps_supp = debut_cadre_relief('', true)
-		.  http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='left'")
-		.  "<div style='color: red; left-margin: 5px'>"
-		. $corps_supp
-		. "<p>"
-		.  _T('info_recommencer')
-		.  "</p></div>\n"
-		. fin_cadre_relief(true)
-		.  "\n<p>";
-	}
+	// 	if ($echec){
+	// 
+	// 		foreach (split('@@@',$echec) as $e)
+	// 			$corps_supp .= '<p>' . _T($e) . "</p>\n";
+	// 		
+	// 		$corps_supp = debut_cadre_relief('', true)
+	// 		.  http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='left'")
+	// 		.  "<div style='color: red; left-margin: 5px'>"
+	// 		. $corps_supp
+	// 		. "<p>"
+	// 		.  _T('info_recommencer')
+	// 		.  "</p></div>\n"
+	// 		. fin_cadre_relief(true)
+	// 		.  "\n<p>";
+	// 	}
 
 	$corps_supp .= "<b>"._T('auteurscomplets:entree_organisation')."</b>"
 	. "<br><input type='text' name='organisation' class='formo' value=\"".entites_html($auteur['organisation'])."\" size='40'>\n<p>\n"
@@ -72,15 +71,13 @@ function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $red
 
 	$corps_supp .= "<p />"
 	. "\n<div align='right'>"
-	. (!$setconnecte ? '' : apparait_auteur_infos($id_auteur, $auteur))
 	. "\n<input type='submit' class='fondo' value='"
 	. _T('bouton_enregistrer')
 	. "'></div>";
 
 	$arg = intval($id_auteur) . '/';
 
-	return '<div>&nbsp;</div>'
-	. "\n<div class='serif'>"
+	return "\n<div class='serif'>"
 	. debut_cadre_relief("fiche-perso-24.gif", true, "", _T("auteurscomplets:coordonnees_sup"))
 	. ($redirect
 	     ? generer_action_auteur('legender_auteur_supp', $arg, $redirect, $corps_supp)
@@ -128,7 +125,7 @@ function legender_auteur_supp_voir($auteur, $redirect)
 	$res .= "</td>"
 	.  "<td>";
 
-	if (statut_modifiable_auteur($id_auteur, $auteur)) {
+	if (statut_modifiable_auteur_supp($id_auteur, $auteur)) {
 		$ancre = "legender_auteur_supp-$id_auteur";
 		$clic = _T("admin_modifier_auteur_supp");
 		$h = generer_url_ecrire("auteur_infos_supp","id_auteur=$id_auteur&initial=0");
@@ -142,5 +139,18 @@ function legender_auteur_supp_voir($auteur, $redirect)
 	$res .= "</td></tr></table>";
 
 	return $res;
+}
+
+function statut_modifiable_auteur_supp($id_auteur, $auteur)
+{
+	global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
+
+// on peut se changer soi-meme
+	  return  (($connect_id_auteur == $id_auteur) ||
+  // sinon on doit etre admin
+  // et pas admin restreint pour changer un autre admin ou creer qq
+		(($connect_statut == "0minirezo") &&
+		 ($connect_toutes_rubriques OR 
+		  ($id_auteur AND ($auteur['statut'] != "0minirezo")))));
 }
 ?>

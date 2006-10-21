@@ -20,17 +20,4 @@ function exec_auteur_infos_supp_dist()
 
 	return $legender_auteur_supp;
 }
-
-function statut_modifiable_auteur($id_auteur, $auteur)
-{
-	global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
-
-// on peut se changer soi-meme
-	  return  (($connect_id_auteur == $id_auteur) ||
-  // sinon on doit etre admin
-  // et pas admin restreint pour changer un autre admin ou creer qq
-		(($connect_statut == "0minirezo") &&
-		 ($connect_toutes_rubriques OR 
-		  ($id_auteur AND ($auteur['statut'] != "0minirezo")))));
-}
 ?>
