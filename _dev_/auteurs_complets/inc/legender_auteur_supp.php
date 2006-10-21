@@ -27,7 +27,7 @@ function inc_legender_auteur_supp_dist($id_auteur, $auteur, $mode, $echec='', $r
 
 // http://doc.spip.org/@legender_auteur_saisir
 function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $redirect=''){
-	auteurs_complets_install();
+	
 
 	global $options, $connect_statut, $connect_id_auteur, $connect_toutes_rubriques;
 
@@ -71,8 +71,8 @@ function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $red
 	. "<br><input type='text' name='longitude' class='formo' value=\"".entites_html($auteur['longitude'])."\" size='40'>\n<p>\n";
 
 	$corps_supp .= "<p />"
-	. "\n<div align='right'>"	. 
-	(!$setconnecte ? '' : apparait_auteur_infos($id_auteur, $auteur))
+	. "\n<div align='right'>"
+	. (!$setconnecte ? '' : apparait_auteur_infos($id_auteur, $auteur))
 	. "\n<input type='submit' class='fondo' value='"
 	. _T('bouton_enregistrer')
 	. "'></div>";
@@ -81,10 +81,10 @@ function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $red
 
 	return '<div>&nbsp;</div>'
 	. "\n<div class='serif'>"
-	. debut_cadre_relief("fiche-perso-24.gif", true, "", _T("icone_informations_personnelles2"))
+	. debut_cadre_relief("fiche-perso-24.gif", true, "", _T("auteurscomplets:coordonnees_sup"))
 	. ($redirect
 	     ? generer_action_auteur('legender_auteur_supp', $arg, $redirect, $corps_supp)
-	   : ajax_action_auteur('legender_auteur_supp', $arg, 'auteur_infos', "id_auteur=$id_auteur&initial=-1&retour=$redirect", $corps_supp))
+	   : ajax_action_auteur('legender_auteur_supp', $arg, 'auteur_infos_supp', "id_auteur=$id_auteur&initial=-1&retour=$redirect", $corps_supp))
 	. fin_cadre_relief(true)
 	. '</div>';
 
@@ -131,7 +131,7 @@ function legender_auteur_supp_voir($auteur, $redirect)
 	if (statut_modifiable_auteur($id_auteur, $auteur)) {
 		$ancre = "legender_auteur_supp-$id_auteur";
 		$clic = _T("admin_modifier_auteur_supp");
-		$h = generer_url_ecrire("auteur_infos","id_auteur=$id_auteur&initial=0");
+		$h = generer_url_ecrire("auteur_infos_supp","id_auteur=$id_auteur&initial=0");
 		if (($_COOKIE['spip_accepte_ajax'] == 1 ) AND !$redirect) {
 		  $evt .= "\nonclick=" . ajax_action_declencheur($h,$ancre);
 		  $h = "<a\nhref='$h$a'$evt>$clic</a>";
@@ -142,6 +142,5 @@ function legender_auteur_supp_voir($auteur, $redirect)
 	$res .= "</td></tr></table>";
 
 	return $res;
-
 }
 ?>

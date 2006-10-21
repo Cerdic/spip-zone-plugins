@@ -37,6 +37,7 @@ function action_legender_auteur_supp()
 function action_legender_post_supp($r)
 {
 	global 
+	  $nom,
 	  $auteur_session,
 	  $organisation,
 	  $telephone,
@@ -57,35 +58,39 @@ function action_legender_post_supp($r)
 // si id_auteur est hors table, c'est une creation sinon une modif
 //
 	  $auteur = array();
+	  $auteur_supp = array();
 	  if ($id_auteur) {
 		$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
+		$auteur_supp = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs_supp WHERE id_auteur=$id_auteur"));
 	  }
 
 	  $acces = ($id_auteur == $auteur_session['id_auteur']) ? true : " a voir ";
 
 	// variables sans probleme
-	$auteur['organisation'] = corriger_caracteres($organisation);
-	$auteur['telephone'] = corriger_caracteres($telephone);
-	$auteur['fax'] = corriger_caracteres($fax);
-	$auteur['adresse'] = corriger_caracteres($adresse);
-	$auteur['codepostal'] = corriger_caracteres($codepostal);
-	$auteur['ville'] = corriger_caracteres($ville);
-	$auteur['skype'] = corriger_caracteres($skype);
-	$auteur['pays'] = corriger_caracteres($pays);
-	$auteur['latitude'] = corriger_caracteres($latitude);
-	$auteur['longitude'] = corriger_caracteres($longitude);
+	$auteur['nom'] = corriger_caracteres($nom);
+	$auteur_supp['organisation'] = corriger_caracteres($organisation);
+	$auteur_supp['telephone'] = corriger_caracteres($telephone);
+	$auteur_supp['fax'] = corriger_caracteres($fax);
+	$auteur_supp['adresse'] = corriger_caracteres($adresse);
+	$auteur_supp['codepostal'] = corriger_caracteres($codepostal);
+	$auteur_supp['ville'] = corriger_caracteres($ville);
+	$auteur_supp['skype'] = corriger_caracteres($skype);
+	$auteur_supp['pays'] = corriger_caracteres($pays);
+	$auteur_supp['latitude'] = corriger_caracteres($latitude);
+	$auteur_supp['longitude'] = corriger_caracteres($longitude);
 
-		$n = spip_query("UPDATE spip_auteurs SET $query_pass
-		organisation=" . spip_abstract_quote($auteur['organisation']) . ",
-		telephone=" . spip_abstract_quote($auteur['telephone']) . ",
-		fax=" . spip_abstract_quote($auteur['fax']) . ",
-		skype=" . spip_abstract_quote($auteur['skype']) . ",
-		adresse=" . spip_abstract_quote($auteur['adresse']) . ",
-		codepostal=" . spip_abstract_quote($auteur['codepostal']) . ",
-		ville=" . spip_abstract_quote($auteur['ville']) . ",
-		pays=" . spip_abstract_quote($auteur['pays']) . ",
-		latitude=" . spip_abstract_quote($auteur['latitude']) . ",
-		longitude=" . spip_abstract_quote($auteur['longitude']) . " WHERE id_auteur=".$auteur['id_auteur']);
+		$n = spip_query("UPDATE spip_auteurs_supp SET
+		nom=" . spip_abstract_quote($auteur['nom']) . ",
+		organisation=" . spip_abstract_quote($auteur_supp['organisation']) . ",
+		telephone=" . spip_abstract_quote($auteur_supp['telephone']) . ",
+		fax=" . spip_abstract_quote($auteur_supp['fax']) . ",
+		skype=" . spip_abstract_quote($auteur_supp['skype']) . ",
+		adresse=" . spip_abstract_quote($auteur_supp['adresse']) . ",
+		codepostal=" . spip_abstract_quote($auteur_supp['codepostal']) . ",
+		ville=" . spip_abstract_quote($auteur_supp['ville']) . ",
+		pays=" . spip_abstract_quote($auteur_supp['pays']) . ",
+		latitude=" . spip_abstract_quote($auteur_supp['latitude']) . ",
+		longitude=" . spip_abstract_quote($auteur_supp['longitude']) . " WHERE id_auteur=".$auteur['id_auteur']);
 		if (!$n) die('UPDATE');
 	}
 
@@ -93,7 +98,7 @@ function action_legender_post_supp($r)
 	if ($nom OR $statut) {
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
-			marquer_indexer('spip_auteurs', $id_auteur);
+			marquer_indexer('spip_auteurs_supp', $id_auteur);
 		}
 	// ..et mettre a jour les fichiers .htpasswd et .htpasswd-admin
 		ecrire_acces();
@@ -111,11 +116,11 @@ function action_legender_post_supp($r)
 		$ret = !$redirect ? '' 
 		  : ('&redirect=' . rawurlencode(rawurldecode($redirect)));
 
-		$redirect = generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur&initial=$init$echec$ret",true);
+		$redirect = generer_url_ecrire("auteur_infos_supp", "id_auteur=$id_auteur&initial=$init$echec$ret",true);
 	} else {
 	  // modif: renvoyer le resultat ou a nouveau le formulaire si erreur
 		  if (!$redirect) {
-		    $redirect = generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur", true, true);
+		    $redirect = generer_url_ecrire("auteur_infos_supp", "id_auteur=$id_auteur", true, true);
 		    $ancre = '';
 		  } else 
 		    list($redirect,$anc) = split('#',rawurldecode($redirect));
