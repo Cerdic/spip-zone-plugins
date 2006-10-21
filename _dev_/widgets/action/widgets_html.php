@@ -219,6 +219,7 @@ function controleur_dist($regs) {
 		$widgetsAction = self();
 		$widgetsCode = $n->code();
 		$widgetsInput = $n->input($mode, $inputAttrs);
+		$widgetsImgPath = dirname(find_in_path('images/cancel.png'));
 
 		$html =
 		<<<FIN_FORM
@@ -228,8 +229,12 @@ function controleur_dist($regs) {
   {$widgetsInput}
   <div class="widgets_boutons">
   <div style="position:absolute;">
-    <input class="submit_widget" type="submit" value="ok" />
-    <a class="cancel_widget">cancel</a>
+    <a class="submit_widget" title="OK">
+      <img src="{$widgetsImgPath}/ok.png" width="20" height="20" />
+    </a>
+    <a class="cancel_widget" title="Cancel">
+      <img src="{$widgetsImgPath}/cancel.png" width="20" height="20" />
+    </a>
     <!-- <a class="hide_widget">hide</a> -->
     <a href="ecrire/?exec=articles_edit&amp;id_article=$id"
       class="full_widget">editer $type $id</a>
