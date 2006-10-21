@@ -118,7 +118,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	.	boite_info_articles($id_article, $statut_article, $visites, $id_version)
 
-	.	(!$iconifier ? '' : $iconifier('id_article', $id_article,'articles'))
+	.	(!$iconifier ? '' : $iconifier('id_article', $id_article,'articles','iconifier'))
 
 	.	boites_de_config_articles($id_article, $flag_editable)
 	.	boite_article_virtuel($id_article, $virtuel, $flag_editable) 

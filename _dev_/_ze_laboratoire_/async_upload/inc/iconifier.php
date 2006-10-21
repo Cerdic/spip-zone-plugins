@@ -15,14 +15,22 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 
 // http://doc.spip.org/@inc_iconifier_dist
-function inc_iconifier_dist($id_objet, $id,  $script) {
+function inc_iconifier_dist($id_objet, $id,  $script, $iframe_script='') {
 
 	$texteon = $GLOBALS['logo_libelles'][($id OR $id_objet != 'id_rubrique') ? $id_objet : 'id_racine'];
 
 	$logo_f = charger_fonction('chercher_logo', 'inc');
 	
+	// Add the redirect url when uploading via iframe
+
+  $iframe = "";
+  if($iframe_script) {
+    $iframe_script = generer_url_ecrire($iframe_script,"type=$id_objet&$id_objet=$id&script=$script",true);
+    $iframe = "<input type='hidden' name='iframe_redirect' value='".rawurlencode($iframe_script)."' />\n";
+  }
+	
 	if (!$logo = $logo_f($id, $id_objet, 'on')) {
-		$masque = indiquer_logo($texteon, $id_objet, 'on', $id, $script);
+		$masque = indiquer_logo($texteon, $id_objet, 'on', $id, $script, $iframe);
 		$res = block_parfois_visible('on', "<b>$texteon</b>", $masque);
 	} else {
 		list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script);
@@ -40,7 +48,7 @@ function inc_iconifier_dist($id_objet, $id,  $script) {
 
 			$res .= "<center>$masque</center>";
 		} else {
-		  $masque = indiquer_logo($texteoff, $id_objet, 'off', $id, $script);
+		  $masque = indiquer_logo($texteoff, $id_objet, 'off', $id, $script, $iframe);
 		  $res .= block_parfois_visible('off', "<b>$texteoff</b>", $masque);
 		}
 	}
@@ -66,7 +74,7 @@ $logo_libelles = array(
 		       );
 
 // http://doc.spip.org/@indiquer_logo
-function indiquer_logo($titre, $id_objet, $mode, $id, $script) {
+function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 
 	global $formats_logos;
 	$dir_ftp = determine_upload();
@@ -107,11 +115,29 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script) {
 			$afficher;
 
 		$type = $GLOBALS['table_logos'][$id_objet];
-		return generer_action_auteur('iconifier',
+		$ret = generer_action_auteur('iconifier',
 			"$id+$type$mode$id",
 			generer_url_ecrire($script, "$id_objet=$id", true), 
-			$afficher,
-			" method='post' enctype='multipart/form-data'");
+			$iframe_script.$afficher,
+			" method='post' enctype='multipart/form-data' class='form_upload_icon'");
+		if(_request("iframe")!="iframe") {
+      $ret .= "<script src='".find_in_path("async_upload.js")."' type='text/javascript'></script>\n";
+  		$ret .= <<<EOF
+      <script type='text/javascript'>
+      $(".form_upload_icon").async_upload(upload_complete);
+      function upload_complete(res) {
+        res.find(">div").each(function(){
+          var cont = $("#"+this.id);
+          verifForm(cont.html($(this).html()));
+          $(".form_upload_icon").async_upload(upload_complete);
+        });
+        return true;                     
+      }
+      </script>
+EOF;
+    }
+
+  return $ret;
 }
 
 // http://doc.spip.org/@decrire_logo

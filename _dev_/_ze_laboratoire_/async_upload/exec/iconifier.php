@@ -23,7 +23,7 @@ function exec_iconifier_dist()
 	$script = _request("script");
 	$type = _request("type");
 	$id = intval(_request($type));
-
+  
 	if (!preg_match('/^\w+$/', "$type$script"))
 		die(_T('info_acces_interdit'));
 
@@ -48,6 +48,12 @@ function exec_iconifier_dist()
 	}
 
 	$iconifier = charger_fonction('iconifier', 'inc');
-	ajax_retour($iconifier($type, $id, $script));
+	
+	$ret = $iconifier($type, $id, $script,self());
+	
+	if(_request("iframe")=="iframe") {
+    $ret = "<div class='upload_answer upload_document_added'>$ret</div>";
+  }
+  ajax_retour($ret);
 }
 ?>
