@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_documents_colonne_dist()
 {
-	global $id, $type, $id_document;
+	global $id, $type, $show_docs;
 	$id = intval($id);
 
 	if (!($type == 'article' 
@@ -29,7 +29,7 @@ function exec_documents_colonne_dist()
 	include_spip("inc/presentation");
 
 	// TODO: return au lieu de echo
-	$documents = explode(",",$id_document);
+	$documents = explode(",",$show_docs);
 	$script = $type."s_edit";
 	$res = "";
 	foreach($documents as $doc) {
