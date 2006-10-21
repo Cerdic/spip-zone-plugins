@@ -1,26 +1,67 @@
 /*
-	domEl() function - painless DOM manipulation
-	written by Pawel Knapik  //  pawel.saikko.com
-*/
+Copyright (c) 2006 Dan Webb
 
-var domEl = function(e,c,a,p,x) {
-if(e||c) {
-	c=(typeof c=='string'||(typeof c=='object'&&!c.length))?[c]:c;	
-	e=(!e&&c.length==1)?document.createTextNode(c[0]):e;	
-	var n = (typeof e=='string')?document.createElement(e) : !(e&&e===c[0])?e.cloneNode(false):e.cloneNode(true);	
-	if(e.nodeType!=3) {
-		c[0]===e?c[0]='':'';
-		for(var i=0,j=c.length;i<j;i++) typeof c[i]=='string'?n.appendChild(document.createTextNode(c[i])):n.appendChild(c[i].cloneNode(true));
-		if(a) {for(var i=(a.length-1);i>=0;i--) a[i][0]=='class'?n.className=a[i][1]:n.setAttribute(a[i][0],a[i][1]);}
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
+the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
+and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial 
+portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
+TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
+CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+IN THE SOFTWARE.
+*/
+DomBuilder = {
+  IE_TRANSLATIONS : {
+    'class' : 'className',
+    'for' : 'htmlFor'
+  },
+  ieAttrSet : function(a, i, el) {
+    var trans;
+    if (trans = this.IE_TRANSLATIONS[i]) el[trans] = a[i];
+    else if (i == 'style') el.style.cssText = a[i];
+    else if (i.match(/^on/)) el[i] = new Function(a[i]);
+    else el.setAttribute(i, a[i]);
+  },
+	apply : function(o) { 
+	  o = o || {};
+		var els = ("p|div|span|strong|em|img|table|tr|td|th|thead|tbody|tfoot|pre|code|" + 
+					   "h1|h2|h3|h4|h5|h6|ul|ol|li|form|input|textarea|legend|fieldset|" + 
+					   "select|option|blockquote|cite|br|hr|dd|dl|dt|address|a|button|abbr|acronym|" +
+					   "script|link|style|bdo|ins|del|object|param|col|colgroup|optgroup|caption|" + 
+					   "label|dfn|kbd|samp|var").split("|");
+    var el, i=0;
+		while (el = els[i++]) o[el.toUpperCase()] = DomBuilder.tagFunc(el);
+		return o;
+	},
+	tagFunc : function(tag) {
+	  return function() {
+	    var a = arguments, at, ch; a.slice = [].slice; if (a.length>0) { 
+	    if (a[0].nodeName || typeof a[0] == "string") ch = a; 
+	    else { at = a[0]; ch = a.slice(1); } }
+	    return DomBuilder.elem(tag, at, ch);
+	  }
+  },
+	elem : function(e, a, c) {
+		a = a || {}; c = c || [];
+		var isIE = navigator.userAgent.match(/MSIE/)
+		var el = document.createElement((isIE && a.name)?"<" + e + " name=" + a.name + ">":e);
+		for (var i in a) {
+		  if (typeof a[i] != 'function') {
+		    if (isIE) this.ieAttrSet(a, i, el);
+		    else el.setAttribute(i, a[i]);
+		  }
+	  }
+		for (var i=0; i<c.length; i++) {
+			if (typeof c[i] == 'string') c[i] = document.createTextNode(c[i]);
+			el.appendChild(c[i]);
+		} 
+		return el;
 	}
-}
-	if(!p)return n;
-	p=(typeof p=='object'&&!p.length)?[p]:p;
-	for(var i=(p.length-1);i>=0;i--) {
-		if(x){while(p[i].firstChild)p[i].removeChild(p[i].firstChild);
-			if(!e&&!c&&p[i].parentNode)p[i].parentNode.removeChild(p[i]);}
-		if(n) p[i].appendChild(n.cloneNode(true));
-	}	
 }
 
 /*
@@ -168,12 +209,21 @@ function stopautofocus(){
 		deleteClassName(mesafocus[j],"encours");
    	}
 	ex = document.getElementById('stopper');
-	domEl('','','',ex.getElementsByTagName('a'),1);
-	domEl('a','Reprendre le défilement',[['href','javascript:'],['onclick','loadautofocus();return false;']],ex,0);
-	domEl('br','','',ex,0);
-	domEl('a','Monter',[['href','javascript:'],['onclick','monter(100);return false;']],ex,0);
-	domEl('br','','',ex,0);
-	domEl('a','Descendre',[['href','javascript:'],['onclick','descendre(100);return false;']],ex,0);
+    exchild = ex.childNodes;
+    while(ex.hasChildNodes()==true){
+        var Enfant=exchild.item(0);
+        ex.removeChild(Enfant);
+    }
+    var ctrlZone1 = A({'href': 'javascript','onclick': 'loadautofocus();return false;'},'Reprendre le défilement');
+    var ctrlZone2 = BR();
+    var ctrlZone3 = A({'href': 'javascript','onclick': 'monter(100);return false;'},'Monter');
+    var ctrlZone4 = BR();
+    var ctrlZone5 = A({'href': 'javascript','onclick': 'descendre(100);return false;'},'Descendre');
+    ex.appendChild(ctrlZone1);
+    ex.appendChild(ctrlZone2);
+    ex.appendChild(ctrlZone3);
+    ex.appendChild(ctrlZone4);
+    ex.appendChild(ctrlZone5);    
 	ex.firstChild.focus();
 	totallinks=document.links;
 	meslinks = new Array();
@@ -201,9 +251,13 @@ function stopautofocus(){
 function loadautofocus(){
 	clearInterval(montimer);
 	ex = document.getElementById('stopper');
-	domEl('','','',ex.getElementsByTagName('a'),1);
-	domEl('','','',ex.getElementsByTagName('br'),1);
-	domEl('a','Arrêter le défilement',[['href','javascript:'],['onclick','stopautofocus();return false;']],ex,0);	
+    exchild = ex.childNodes;
+    while(ex.hasChildNodes()==true){
+        var Enfant=exchild.item(0);
+        ex.removeChild(Enfant);
+    }
+    var ctrlZone1 = A({'href': 'javascript','onclick': 'stopautofocus();return false;'},'Arrêter le défilement');
+    ex.appendChild(ctrlZone1);
 	totallinks=document.links;
 	meslinks = new Array();
 	for(i=0;i<totallinks.length;i++){
@@ -291,7 +345,11 @@ function init() {
 	if (_timer) clearInterval(_timer);
 
 	// do stuff
-	domEl('div',[domEl('a','Arrêter le défilement',[['href','javascript:'],['onclick','stopautofocus();return false;']])],[['id','stopper'],['style','position:absolute;']],document.body,0);
+    
+    DomBuilder.apply(window);
+	var ctrlZone = DIV({'id': 'stopper', 'style': 'position:absolute'},A({'href': 'javascript','onclick': 'stopautofocus();return false;'},'Arrêter le défilement'));
+    document.body.appendChild(ctrlZone);
+    
 	totallinks=document.links;
 	meslinks = new Array();
 	for(i=0;i<totallinks.length;i++){
