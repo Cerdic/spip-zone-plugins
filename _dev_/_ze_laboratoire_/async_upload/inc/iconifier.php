@@ -59,7 +59,26 @@ function inc_iconifier_dist($id_objet, $id,  $script, $iframe_script='') {
 	. "</div>"
 	. fin_cadre_relief(true);
 
-	return ajax_action_greffe("iconifier-$id", $res);
+  $js = "";
+  if(_request("iframe")!="iframe") {
+      $js .= "<script src='".find_in_path("async_upload.js")."' type='text/javascript'></script>\n";
+  		$js .= <<<EOF
+      <script type='text/javascript'>
+      $(".form_upload_icon").async_upload(upload_complete);
+      function upload_complete(res) {
+        res.find(">div").each(function(){
+          var cont = $("#"+this.id);
+          verifForm(cont.html($(this).html()));
+          $(".form_upload_icon").async_upload(upload_complete);
+        });
+        return true;                     
+      }
+      </script>
+EOF;
+    }
+
+  	return ajax_action_greffe("iconifier-$id", $res).$js;
+
 }
 
 global $logo_libelles;
@@ -115,29 +134,11 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 			$afficher;
 
 		$type = $GLOBALS['table_logos'][$id_objet];
-		$ret = generer_action_auteur('iconifier',
+		return generer_action_auteur('iconifier',
 			"$id+$type$mode$id",
 			generer_url_ecrire($script, "$id_objet=$id", true), 
 			$iframe_script.$afficher,
 			" method='post' enctype='multipart/form-data' class='form_upload_icon'");
-		if(_request("iframe")!="iframe") {
-      $ret .= "<script src='".find_in_path("async_upload.js")."' type='text/javascript'></script>\n";
-  		$ret .= <<<EOF
-      <script type='text/javascript'>
-      $(".form_upload_icon").async_upload(upload_complete);
-      function upload_complete(res) {
-        res.find(">div").each(function(){
-          var cont = $("#"+this.id);
-          verifForm(cont.html($(this).html()));
-          $(".form_upload_icon").async_upload(upload_complete);
-        });
-        return true;                     
-      }
-      </script>
-EOF;
-    }
-
-  return $ret;
 }
 
 // http://doc.spip.org/@decrire_logo
@@ -157,7 +158,7 @@ function decrire_logo($id_objet, $mode, $id, $width, $height, $img, $titre="", $
 			"<font size='1'>" .
 		     $taille .
 		     "\n<br />[" .
-		     ajax_action_auteur("iconifier", "$id-$nom.$format", $script, "$id_objet=$id&type=$id_objet", array(_T('lien_supprimer'))) .
+		     ajax_action_auteur("iconifier", "$id-$nom.$format", $script, "$id_objet=$id&type=$id_objet", array(_T('lien_supprimer')),'',"function(r,noeud) {noeud.innerHTML = r; \$('.form_upload_icon',noeud).async_upload(upload_complete);}") .
 		     "]</font>");
 }
 ?>
