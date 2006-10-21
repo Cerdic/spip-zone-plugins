@@ -55,7 +55,7 @@ jQuery.fn.async_upload = function(add_function) {
         }
     };
     
-    jForm.before($("<div class='upload_message'>").append(ajax_image_searching)[0]);
+    jForm.before($("<div class='upload_message' style='height:1%'>").append(ajax_image_searching)[0]);
     return true;
   }
 }

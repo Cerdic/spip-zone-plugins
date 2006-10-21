@@ -174,8 +174,8 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 		$ret .= "</div>";
 	}
 
-  $res .= "<script src='".find_in_path("async_upload.js")."' type='text/javascript'></script>\n";
-  $res .= <<<EOF
+  $ret .= "<script src='".find_in_path("async_upload.js")."' type='text/javascript'></script>\n";
+  $ret .= <<<EOF
     <script type='text/javascript'>
     $(".form_upload").async_upload(function(res,jForm){
       var cont;
