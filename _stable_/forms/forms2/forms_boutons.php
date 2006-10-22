@@ -1,17 +1,20 @@
 <?php
 /*
  * forms
- * version plug-in de spip_form
+ * Gestion de formulaires editables dynamiques
  *
- * Auteur :
+ * Auteurs :
  * Antoine Pitrou
- * adaptation en 182e puis plugin par cedric.morin@yterium.com
+ * Cedric Morin
+ * Renato
  * © 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end($p)));
+if (!defined('_DIR_PLUGIN_FORMS')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end($p)));
+}
 
 	function Forms_ajouterBoutons($boutons_admin) {
 		// si on est admin

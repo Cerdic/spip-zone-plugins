@@ -2,11 +2,12 @@
 
 /*
  * forms
- * version plug-in de spip_form
+ * Gestion de formulaires editables dynamiques
  *
- * Auteur :
+ * Auteurs :
  * Antoine Pitrou
- * adaptation en 182e puis plugin par cedric.morin@yterium.com
+ * Cedric Morin
+ * Renato
  * © 2005,2006 - Distribue sous licence GNU/GPL
  *
  */

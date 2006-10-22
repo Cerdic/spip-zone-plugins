@@ -1,4 +1,15 @@
 <?php
+/*
+ * forms
+ * Gestion de formulaires editables dynamiques
+ *
+ * Auteurs :
+ * Antoine Pitrou
+ * Cedric Morin
+ * Renato
+ * © 2005,2006 - Distribue sous licence GNU/GPL
+ *
+ */
 
 include_spip('inc/forms');
 
