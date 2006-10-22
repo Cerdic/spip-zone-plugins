@@ -102,6 +102,49 @@
 		return $cookie_utilise;
 	}
 
+	function Forms_extraire_reponse($id_reponse){
+		// Lire les valeurs entrees
+		$result = spip_query("SELECT * FROM spip_reponses_champs AS r JOIN spip_forms_champs AS ch ON ch.champ=r.champ WHERE r.id_reponse=".spip_abstract_quote($id_reponse)." ORDER BY ch.cle");
+		$valeurs = array();
+		$retour = urlencode(self());
+		$libelles = array();
+		$values = array();
+		$url = array();
+		while ($row = spip_fetch_array($result)) {
+			$cle = $row['cle'];
+			$libelles[$cle]=$row['titre'];
+			$champ = $row['champ'];
+			$type = $row['type'];
+			if ($type == 'fichier') {
+				$values[$cle][] = $row['valeur'];
+				$url[$cle][] = generer_url_ecrire("forms_telecharger","id_reponse=$id_reponse&champ=$champ&retour=$retour");
+			}
+			else if (in_array($type,array('select','multiple'))) {
+				if ($row3=spip_fetch_array(spip_query("SELECT * FROM spip_forms_champs_choix WHERE cle=$cle AND choix=".spip_abstract_quote($row['valeur']))))
+					$values[$cle][]=$row3['titre'];
+				else
+					$values[$cle][]= $row['valeur'];
+				$url[$cle][] = '';
+			}
+			else if ($type == 'mot') {
+				$id_groupe = intval($row['id_groupe']);
+				$id_mot = intval($row['valeur']);
+				if ($row3 = spip_fetch_array(spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe=$id_groupe AND id_mot=".spip_abstract_quote($id_mot)))){
+					$values[$cle][]=$row3['titre'];
+					$url[$cle][]= generer_url_ecrire("mots_edit","id_mot=$id_mot");
+				}
+				else {
+					$values[$cle][]= $row['valeur'];
+					$url[$cle][] = '';
+				}
+			}
+			else {
+				$values[$cle][] = $row['valeur'];
+				$url[$cle][] = '';
+			}
+		}
+		return array($libelles,$values,$url);
+	}
 	//
 	// Afficher un pave formulaires dans la colonne de gauche
 	// (edition des articles)

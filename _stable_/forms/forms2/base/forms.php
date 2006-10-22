@@ -70,7 +70,8 @@ $formschamp_field = array(
 		"id_groupe" => "bigint(21) NOT NULL",
 );
 $formschamp_key = array(
-	"PRIMARY KEY"	=> "id_form, cle"
+	"PRIMARY KEY"	=> "id_form, cle",
+	"KEY" => "champ"
 );
 
 $tables_principales['spip_forms_champs'] =

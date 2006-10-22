@@ -28,7 +28,6 @@ function exec_forms_reponses(){
 		if ($row = spip_fetch_array($result)) {
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
-			$structure = unserialize($row['structure']);
 			$sondage = $row['sondage'];
 		}
 	}
@@ -124,12 +123,12 @@ function exec_forms_reponses(){
 	//
 	$trans = array();
 	$types = array();
-	$structures = array();
 	$form_unique = $id_form;
 
-	$query = "SELECT r.*, a.nom FROM spip_reponses AS r LEFT JOIN spip_auteurs AS a USING (id_auteur) ".
-		"$where r.statut='valide' AND r.date > DATE_SUB(NOW(), INTERVAL 6 MONTH) ".
-		"ORDER BY r.date DESC LIMIT $debut, $tranche";
+	$query = "SELECT r.*, a.nom, f.titre FROM spip_reponses AS r LEFT JOIN spip_auteurs AS a USING (id_auteur) 
+		JOIN spip_forms AS f ON r.id_form=f.id_form
+		$where r.statut='valide' AND r.date > DATE_SUB(NOW(), INTERVAL 6 MONTH)
+		ORDER BY r.date DESC LIMIT $debut, $tranche";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) {
 		$id_form = $row['id_form'];
@@ -140,62 +139,19 @@ function exec_forms_reponses(){
 		$url = $row['url'];
 		$id_auteur = $row['id_auteur'];
 		$nom_auteur = $row['nom'];
-
-		// Preparer la table de traduction code->valeur
-		$query_form = "SELECT titre, structure FROM spip_forms WHERE id_form=$id_form";
-		/*$row_form = spip_fetch_array(spip_query($query_form));
-		$structure = unserialize($row_form['structure']);
-		$titre_form = $row_form['titre'];*/
-		list($titre_form, $structure) = spip_fetch_array(spip_query($query_form),SPIP_NUM);
-		$structure = unserialize($structure);
-		if (!$trans[$id_form]) {
-			foreach ($structure as $index => $t) {
-				$code = $t['code'];
-				$type = $t['type'];
-				$type_ext = $t['type_ext'];
-				$types[$id_form][$code] = $type;
-				$trans[$id_form][$code] = array();
-
-				if ($type == 'select' || $type == 'multiple') {
-					$trans[$id_form][$code] = array_map('typo', $t['type_ext']);
-				}
-				else if ($type == 'mot') {
-					$id_groupe = intval($t['type_ext']['id_groupe']);
-					$query_mot = "SELECT id_mot, titre FROM spip_mots WHERE id_groupe=$id_groupe";
-					$result_mot = spip_query($query_mot);
-					while ($row2 = spip_fetch_array($result_mot)) {
-						$id_mot = $row2['id_mot'];
-						$titre = $row2['titre'];
-						$trans[$id_form][$code][$id_mot] = "<a href='".generer_url_ecrire("mots_edit","id_mot=$id_mot")."'>".typo($titre)."</a>";
-					}
-				}
-			}
-		}
-
-		// Lire les valeurs entrees
-		$query2 = "SELECT * FROM spip_reponses_champs WHERE id_reponse=$id_reponse";
-		$result2 = spip_query($query2);
-		$valeurs = array();
-		$retour = urlencode(self());
-		while ($row2 = spip_fetch_array($result2)) {
-			$champ = $row2['champ'];
-			if ($types[$id_form][$champ] == 'fichier') {
-				$valeurs[$champ][] = "<a href='".generer_url_ecrire("forms_telecharger","id_reponse=$id_reponse&champ=$champ&retour=$retour")."'>".
-					$row2['valeur']."</a>";
-			}
-			else if (isset($trans[$id_form][$champ][$row2['valeur']]))
-				$valeurs[$champ][] = $trans[$id_form][$champ][$row2['valeur']];
-			else
-				$valeurs[$champ][] = propre($row2['valeur']);
-		}
+		$titre_form = $row['titre'];
 
 		echo "<br />\n";
-
 		debut_cadre_relief("../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png");
 
 		$link=parametre_url(self(),'supp_reponse', $id_reponse);
 		icone(_T("forms:supprimer_reponse"), $link,"../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "supprimer.gif", "right");
 		
+		if ($id_article_export!=0){
+			$row=spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE id_article=".spip_abstract_quote($id_article_export)));
+			if (!$row OR ($row['statut']=='poubelle'))
+				$id_article_export = 0;
+		}
 		if ($id_article_export==0){
 			icone(_T("forms:exporter_article"), generer_action_auteur('forms_exporte_reponse_article',"$id_reponse",self()),"article-24.gif", "creer.gif", "right");
 		}
@@ -219,19 +175,21 @@ function exec_forms_reponses(){
 		
 		echo "<br />\n";
 
-		foreach ($structure as $index => $t) {
-			$nom = $t['nom'];
-			$code = $t['code'];
-			$type = $t['type'];
-			if (!$v = $valeurs[$code]) continue;
-			$n = count($v);
-			if ($n > 1) {
-				$s = join(', ', $v)."\n";
+		list($lib,$values,$urls) = 	Forms_extraire_reponse($id_reponse);
+
+		foreach ($lib as $cle => $titre) {
+			$s = '';
+			foreach ($values[$cle] as $id=>$valeur){
+				$valeur = typo($valeur);
+				if(strlen($s)) $s .= ", ";
+				if ($lien = $urls[$cle][$id])
+					$s .= "<a href='$lien'>$valeur</a>";
+				else
+					$s .= $valeur;
 			}
-			else $s = join('', $v);
 			echo "<span class='verdana1' style='text-transform: uppercase; font-weight: bold; color: #404040;'>";
-			echo propre($nom)." :</span>";
-			echo "&nbsp; ".$s;
+			echo typo($titre)."&nbsp;:</span>";
+			echo " ".$s;
 			echo "<br />\n";
 		}
 
