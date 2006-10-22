@@ -104,7 +104,7 @@
 
 	function Forms_extraire_reponse($id_reponse){
 		// Lire les valeurs entrees
-		$result = spip_query("SELECT * FROM spip_reponses_champs AS r JOIN spip_forms_champs AS ch ON ch.champ=r.champ WHERE r.id_reponse=".spip_abstract_quote($id_reponse)." ORDER BY ch.cle");
+		$result = spip_query("SELECT * FROM spip_reponses_champs AS r JOIN spip_forms_champs AS ch ON ch.champ=r.champ WHERE r.id_reponse="._q($id_reponse)." ORDER BY ch.cle");
 		$valeurs = array();
 		$retour = urlencode(self());
 		$libelles = array();
@@ -120,7 +120,7 @@
 				$url[$cle][] = generer_url_ecrire("forms_telecharger","id_reponse=$id_reponse&champ=$champ&retour=$retour");
 			}
 			else if (in_array($type,array('select','multiple'))) {
-				if ($row3=spip_fetch_array(spip_query("SELECT * FROM spip_forms_champs_choix WHERE cle=$cle AND choix=".spip_abstract_quote($row['valeur']))))
+				if ($row3=spip_fetch_array(spip_query("SELECT * FROM spip_forms_champs_choix WHERE cle=$cle AND choix="._q($row['valeur']))))
 					$values[$cle][]=$row3['titre'];
 				else
 					$values[$cle][]= $row['valeur'];
@@ -129,7 +129,7 @@
 			else if ($type == 'mot') {
 				$id_groupe = intval($row['id_groupe']);
 				$id_mot = intval($row['valeur']);
-				if ($row3 = spip_fetch_array(spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe=$id_groupe AND id_mot=".spip_abstract_quote($id_mot)))){
+				if ($row3 = spip_fetch_array(spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe=$id_groupe AND id_mot="._q($id_mot)))){
 					$values[$cle][]=$row3['titre'];
 					$url[$cle][]= generer_url_ecrire("mots_edit","id_mot=$id_mot");
 				}
@@ -151,7 +151,7 @@
 		if ($duplique && Forms_form_administrable($duplique)){
 			include_spip('base/abstract_sql');
 			// creation
-			$result = spip_query("SELECT * FROM spip_forms WHERE id_form=".spip_abstract_quote($duplique));
+			$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($duplique));
 			$names = "";
 			$values = "";
 			if ($row = spip_fetch_array($result)) {
@@ -159,7 +159,7 @@
 					if ($nom=='titre') $valeur = _T("forms:formulaires_copie",array('nom'=>$valeur));
 					if ($nom!='id_form'){
 						$names .= "$nom,";
-						$values .= spip_abstract_quote($valeur).",";
+						$values .= _q($valeur).",";
 					}
 				}
 				$names = substr($names,0,strlen($names)-1);
@@ -167,28 +167,28 @@
 				spip_abstract_insert('spip_forms',"($names)","($values)");
 				$id_form = spip_insert_id();
 				if ($id_form){
-					$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form=".spip_abstract_quote($duplique));
+					$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($duplique));
 					while($row = spip_fetch_array($res)) {
 						$names = "id_form,";
 						$values = "$id_form,";
 						foreach($row as $nom=>$valeur){
 							if ($nom!='id_form'){
 								$names .= "$nom,";
-								$values .= spip_abstract_quote($valeur).",";
+								$values .= _q($valeur).",";
 							}
 						}
 						$names = substr($names,0,strlen($names)-1);
 						$values = substr($values,0,strlen($values)-1);
 						spip_query("REPLACE INTO spip_forms_champs ($names) VALUES ($values)");
 					}
-					$res = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form=".spip_abstract_quote($duplique));
+					$res = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($duplique));
 					while($row = spip_fetch_array($res)) {
 						$names = "id_form,";
 						$values = "$id_form,";
 						foreach($row as $nom=>$valeur){
 							if ($nom!='id_form'){
 								$names .= "$nom,";
-								$values .= spip_abstract_quote($valeur).",";
+								$values .= _q($valeur).",";
 							}
 						}
 						$names = substr($names,0,strlen($names)-1);
@@ -304,13 +304,13 @@
 			$mailconfirm = "";
 			
 			// recuperer l'email de confirmation
-			$result2 = spip_query("SELECT * FROM spip_reponses_champs WHERE id_reponse='$id_reponse' AND champ=".spip_abstract_quote($champconfirm));
+			$result2 = spip_query("SELECT * FROM spip_reponses_champs WHERE id_reponse='$id_reponse' AND champ="._q($champconfirm));
 			if ($row2 = spip_fetch_array($result2)) {
 				$mailconfirm = $row2['valeur'];
 			}
 
 			// recuperer l'email d'admin
-			$result2 = spip_query("SELECT * FROM spip_reponses_champs WHERE id_reponse='$id_reponse' AND champ=".spip_abstract_quote($email['route']));
+			$result2 = spip_query("SELECT * FROM spip_reponses_champs WHERE id_reponse='$id_reponse' AND champ="._q($email['route']));
 			if ($row2 = spip_fetch_array($result2)) {
 				if (isset($email[$row2['valeur']]))
 					$email_dest = $email[$row2['valeur']];
@@ -436,7 +436,7 @@
 			// D'abord creer la reponse dans la base de donnees
 			if ($ok) {
 				$query = "INSERT INTO spip_reponses (id_form, id_auteur, date, ip, url, statut, cookie) ".
-					"VALUES ($id_form, '$id_auteur', NOW(), '$ip', ".spip_abstract_quote($url).", '$statut', '$cookie')";
+					"VALUES ($id_form, '$id_auteur', NOW(), '$ip', "._q($url).", '$statut', '$cookie')";
 				spip_query($query);
 				$id_reponse = spip_insert_id();
 				if (!$id_reponse) {

@@ -313,7 +313,7 @@ function forms_update(){
 	
 	// mettre a jour les tables de replication pour les boucles
 	include_spip("base/forms");
-	if ($row=spip_fetch_array(spip_query("SELECT * FROM spip_forms WHERE id_form=".spip_abstract_quote($id_form))))
+	if ($row=spip_fetch_array(spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form))))
 		forms_structure2table($row,true);
 	return array($id_form,$champ_visible,$nouveau_champ);
 }

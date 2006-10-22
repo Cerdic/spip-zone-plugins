@@ -31,7 +31,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $class='', $script_vali
 	$url = str_replace("&amp;","&",$url);
 	if ($retour=='') $retour = $url;
 
-	$res = spip_query("SELECT * FROM spip_forms WHERE id_form=".spip_abstract_quote($id_form));
+	$res = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 	if (!$row = spip_fetch_array($res)) return;
 		
 	$erreur = array();

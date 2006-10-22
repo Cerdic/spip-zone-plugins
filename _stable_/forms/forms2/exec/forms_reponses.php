@@ -148,7 +148,7 @@ function exec_forms_reponses(){
 		icone(_T("forms:supprimer_reponse"), $link,"../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "supprimer.gif", "right");
 		
 		if ($id_article_export!=0){
-			$row=spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE id_article=".spip_abstract_quote($id_article_export)));
+			$row=spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE id_article="._q($id_article_export)));
 			if (!$row OR ($row['statut']=='poubelle'))
 				$id_article_export = 0;
 		}

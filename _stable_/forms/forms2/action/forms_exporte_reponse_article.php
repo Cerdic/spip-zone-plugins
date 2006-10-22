@@ -22,7 +22,7 @@ function action_forms_exporte_reponse_article(){
 	if (verifier_action_auteur("forms_exporte_reponse_article-$id_reponse",$hash,$id_auteur)==TRUE){
 		// preparer l'article
 		$id_article = 0;
-		$res = spip_query("SELECT * FROM spip_reponses AS r LEFT JOIN spip_forms AS f ON f.id_form = r.id_form WHERE r.id_reponse=".spip_abstract_quote($id_reponse));
+		$res = spip_query("SELECT * FROM spip_reponses AS r LEFT JOIN spip_forms AS f ON f.id_form = r.id_form WHERE r.id_reponse="._q($id_reponse));
 		if ($row=spip_fetch_array($res)){
 			$id_form = $row['id_form'];
 			$titre = _T("forms:reponse",array('id_reponse'=>$id_reponse));
@@ -30,7 +30,7 @@ function action_forms_exporte_reponse_article(){
 			$date = $row['date'];
 			list($lib,$values,$urls) = 	Forms_extraire_reponse($id_reponse);
 			$texte = "";
-			$res = spip_query("SELECT * FROM spip_forms_champs AS forms WHERE id_form=".spip_abstract_quote($id_form)." ORDER BY cle");
+			$res = spip_query("SELECT * FROM spip_forms_champs AS forms WHERE id_form="._q($id_form)." ORDER BY cle");
 			while ($row = spip_fetch_array($res)){
 				$titre = $row['titre'];
 				$champ = $row['champ'];
@@ -67,10 +67,10 @@ function action_forms_exporte_reponse_article(){
 			include_spip('base/abstract_sql');
 			$id_article = spip_abstract_insert("spip_articles",
 			"(titre,soustitre,texte,date,statut)",
-			"(".spip_abstract_quote($titre).",".spip_abstract_quote($soustitre).",".spip_abstract_quote($texte).",".spip_abstract_quote($date).",'prepa')");
+			"("._q($titre).","._q($soustitre).","._q($texte).","._q($date).",'prepa')");
 			
 			if ($id_article!=0){
-				spip_query("UPDATE spip_reponses SET id_article_export=$id_article WHERE id_reponse=".spip_abstract_quote($id_reponse));
+				spip_query("UPDATE spip_reponses SET id_article_export=$id_article WHERE id_reponse="._q($id_reponse));
 			}
 		}
 		if ($id_article!=0)

@@ -22,8 +22,7 @@
 		$r = '';
 		$id_form = intval($id_form);
 	
-		$query = "SELECT * FROM spip_forms WHERE id_form=$id_form";
-		$result = spip_query($query);
+		$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 		if (!$row = spip_fetch_array($result)) return '';
 	
 		$sondage = $row['sondage'];
@@ -36,14 +35,15 @@
 		}
 	
 		$r .= "<div class='spip_sondage'>\n";
-	
-		// Compter les reponses pour chaque champ de type choix (unique / multiple / mot-cle)
-		foreach ($champs as $t) {
+		
+		$res2 = spip_query("SELECT * FROM spip_forms_champs AS champs
+		WHERE id_form="._q($id_form)." AND type IN ('select','multiple','mot') ORDER BY cle");
+		while ($row2 = spip_fetch_array($res2)) {
 			// On recompte le nombre total de reponses reelles 
 			// car les champs ne sont pas forcement obligatoires
 			$query = "SELECT COUNT(DISTINCT c.id_reponse) AS num ".
 				"FROM spip_reponses AS r LEFT JOIN spip_reponses_champs AS c USING (id_reponse) ".
-				"WHERE r.id_form=$id_form AND r.statut='valide' AND c.champ='".addslashes($t['code'])."'";
+				"WHERE r.id_form=$id_form AND r.statut='valide' AND c.champ="._q($row2['champ']);
 			$result = spip_query($query);
 			list ($total_reponses) = spip_fetch_array($result,SPIP_NUM);
 			if (!$total_reponses) continue;

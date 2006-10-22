@@ -70,7 +70,7 @@ function exec_forms_telecharger(){
 	$champ = _request('champ');
 
 	if ($id_reponse = intval($id_reponse) AND $champ) {
-		$result = spip_query("SELECT id_form FROM spip_reponses WHERE id_reponse=".spip_abstract_quote($id_reponse));
+		$result = spip_query("SELECT id_form FROM spip_reponses WHERE id_reponse="._q($id_reponse));
 		if ($row = spip_fetch_array($result)) {
 			$id_form = $row['id_form'];
 		}
