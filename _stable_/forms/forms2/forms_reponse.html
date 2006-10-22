@@ -1,0 +1,50 @@
+<?php if (!isset($GLOBALS['auteur_session']) OR $GLOBALS['auteur_session']['statut']!=='0minirezo') exit; ?>
+<BOUCLE_reponses(REPONSES){id_reponse}>
+	<BOUCLE_form2(FORMS){id_form=2}>
+	Reponse No #ID_REPONSE<br/>
+	du #DATE<br/>
+	par #IP <BOUCLE_nom(AUTEURS){id_auteur}>(#NOM)</BOUCLE_nom> <br/>
+	statut #STATUT<br/>
+	<ul><li>
+		<BOUCLE_repchamps(REPONSES_CHAMPS){id_reponse}>
+			
+				<BOUCLE_champsnom(FORMS_CHAMPS){id_form}{champ}>[</li><li>(#TITRE|unique):]</BOUCLE_champsnom>
+				
+				[(#REM) Regarder si le champ est du type select ou multiple, car dans ce cas il faut
+				decoder la reponse avec la structure du formulaire]
+				<BOUCLE_champsselectmulti(FORMS_CHAMPS){id_form}{champ}{type IN select,multiple}>
+					<B_champschoix>
+					<ul>
+						<BOUCLE_champschoix(FORMS_CHAMPS_CHOIX){id_form}{cle}{choix=#VALEUR}>
+						<li>#TITRE</li>
+						</BOUCLE_champschoix>
+					</ul>
+					</B_champschoix>
+				</BOUCLE_champsselectmulti>
+				</B_champsselectmulti>
+				
+					[(#REM) Regarder si le champ est du type mot cle, car dans ce cas il faut
+					recuperer le titre du mot cle au lieu de l'id]
+					<BOUCLE_champsmot(FORMS_CHAMPS){id_form}{champ}{type=mot}>
+						<B_champstitre>
+						<ul>
+							<BOUCLE_champstitre(MOTS){id_mot=#VALEUR}>
+							<li>#TITRE</li>
+							</BOUCLE_champstitre>
+						</ul>
+						</B_champstitre>
+					</BOUCLE_champsmot>
+					</li>
+					</B_champsmot>
+					
+						[(#REM) C'est finalement un champ normal]
+						#VALEUR
+
+					<//B_champsmot>
+					
+				<//B_champsselectmulti>
+		</BOUCLE_repchamps>
+	</li>
+	</ul>
+	</BOUCLE_form2>
+</BOUCLE_reponses>
