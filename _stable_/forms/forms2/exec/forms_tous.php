@@ -13,39 +13,6 @@
 
 include_spip('inc/forms');
 
-function Forms_duplique_form(){
-	$duplique = intval(_request('duplique_form'));
-	if ($duplique && Forms_form_administrable($duplique)){
-		// creation
-			$structure = array();
-			spip_query("INSERT INTO spip_forms (structure) VALUES ('".
-				addslashes(serialize($structure))."')");
-			$id_form = spip_insert_id();
-		$query = "SELECT * FROM spip_forms WHERE id_form=$duplique";
-		$result = spip_query($query);
-		if ($row = spip_fetch_array($result)) {
-			$titre = $row['titre'];
-			$descriptif = $row['descriptif'];
-			$sondage = $row['sondage'];
-			$structure = $row['structure'];
-			$email = $row['email'];
-			$champconfirm = $row['champconfirm'];
-			$texte = $row['texte'];
-
-			$query = "UPDATE spip_forms SET ".
-				"titre='"._T('forms:formulaires_copie').addslashes($titre)."', ".
-				"descriptif='".addslashes($descriptif)."', ".
-				"sondage='".addslashes($sondage)."', ".
-				"structure='".addslashes($structure)."', ".
-				"email='".addslashes($email)."', ".
-				"champconfirm='".addslashes($champconfirm)."', ".
-				"texte='".addslashes($texte)."' ".
-				"WHERE id_form=$id_form";
-			$result = spip_query($query);
-		}
-	}	
-}
-
 function exec_forms_tous(){
 	//global $clean_link;
   include_spip("inc/presentation");

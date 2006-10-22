@@ -145,6 +145,60 @@
 		}
 		return array($libelles,$values,$url);
 	}
+	
+	function Forms_duplique_form(){
+		$duplique = intval(_request('duplique_form'));
+		if ($duplique && Forms_form_administrable($duplique)){
+			include_spip('base/abstract_sql');
+			// creation
+			$result = spip_query("SELECT * FROM spip_forms WHERE id_form=".spip_abstract_quote($duplique));
+			$names = "";
+			$values = "";
+			if ($row = spip_fetch_array($result)) {
+				foreach($row as $nom=>$valeur){
+					if ($nom=='titre') $valeur = _T("forms:formulaires_copie",array('nom'=>$valeur));
+					if ($nom!='id_form'){
+						$names .= "$nom,";
+						$values .= spip_abstract_quote($valeur).",";
+					}
+				}
+				$names = substr($names,0,strlen($names)-1);
+				$values = substr($values,0,strlen($values)-1);
+				spip_abstract_insert('spip_forms',"($names)","($values)");
+				$id_form = spip_insert_id();
+				if ($id_form){
+					$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form=".spip_abstract_quote($duplique));
+					while($row = spip_fetch_array($res)) {
+						$names = "id_form,";
+						$values = "$id_form,";
+						foreach($row as $nom=>$valeur){
+							if ($nom!='id_form'){
+								$names .= "$nom,";
+								$values .= spip_abstract_quote($valeur).",";
+							}
+						}
+						$names = substr($names,0,strlen($names)-1);
+						$values = substr($values,0,strlen($values)-1);
+						spip_query("REPLACE INTO spip_forms_champs ($names) VALUES ($values)");
+					}
+					$res = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form=".spip_abstract_quote($duplique));
+					while($row = spip_fetch_array($res)) {
+						$names = "id_form,";
+						$values = "$id_form,";
+						foreach($row as $nom=>$valeur){
+							if ($nom!='id_form'){
+								$names .= "$nom,";
+								$values .= spip_abstract_quote($valeur).",";
+							}
+						}
+						$names = substr($names,0,strlen($names)-1);
+						$values = substr($values,0,strlen($values)-1);
+						spip_query("REPLACE INTO spip_forms_champs_choix ($names) VALUES ($values)");
+					}
+				}
+			}
+		}
+	}	
 	//
 	// Afficher un pave formulaires dans la colonne de gauche
 	// (edition des articles)
