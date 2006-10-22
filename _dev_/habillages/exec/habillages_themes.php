@@ -145,7 +145,7 @@ EOF;
 		}
 		echo "<ul>";
 		debut_boite_info();
-		echo "<div style='background-color:$couleur_claire'>";
+		echo "<div style='background-color:$couleur_claire' class='titre_un'>";
 		echo "<input type='radio' name='statusplug' value='defaut'$defaut_checked>";
 		echo "<strong>"._T('habillages:themes_defaut_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
 		echo "<small>"._T('habillages:themes_defaut_description')."</small><br /><br /><hr>";
@@ -214,7 +214,7 @@ EOF;
 					}
 						
 					debut_boite_info();
-					echo "<div style='background-color:$couleur_claire'>";
+					echo "<div style='background-color:$couleur_claire' class='titre_un'>";
 					echo "<input type='radio' name='statusplug' value='$chemin_plugin_court'$checked>";
 					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.")".$niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
 					# Laisser la possibilite de definir le nom et le chemin de la capure ecran

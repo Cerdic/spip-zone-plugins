@@ -196,7 +196,7 @@ EOF;
 		}
 		echo "<ul>";
 		debut_boite_info();
-		echo "<div style='background-color:$couleur_claire'>";
+		echo "<div style='background-color:$couleur_claire' class='titre_un'>";
 		echo "<input type='radio' name='statusplug' value='defaut'$defaut_checked>";
 		echo "<strong>"._T('habillages:squelettes_defaut_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
 		echo "<small>"._T('habillages:squelettes_defaut_description')."</small><br /><br /><hr>";
@@ -206,7 +206,7 @@ EOF;
 		# pas la dist qui s'affichera. A modifier donc pour que la dist s'affiche comme squelette par defaut
 		# quand ce bouton est coche et si elle existe.
 		debut_boite_info();
-		echo "<div style='background-color:$couleur_claire'>";
+		echo "<div style='background-color:$couleur_claire' class='titre_un'>";
 		echo "<input type='radio' name='statusplug' value='dist'$defaut_checked>";
 		echo "<strong>"._T('habillages:squelettes_dist_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
 		echo '<div style="float:right";><img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/capture_dist_bw.png" alt="" class="preview" /></div>';
@@ -273,9 +273,9 @@ EOF;
 					}
 						
 					debut_boite_info();
-					echo "<div style='background-color:$couleur_claire'>";
+					echo "<div style='background-color:$couleur_claire' class='titre_un'>";
 					echo "<input type='radio' name='statusplug' value='$chemin_plugin_court'$checked>";
-					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.")".$niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.")".$niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label></div>";
 					# Laisser la possibilite de definir le nom et le chemin de la capure ecran
 					# dans theme.xml.
 					echo '<div style="float:right";>&nbsp;<br /><img src="'.$chemin_plugin_complet.'/capture.png" alt="" class="preview" /></div>';
