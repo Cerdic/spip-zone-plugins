@@ -39,6 +39,7 @@ function action_legender_post_supp($r)
 	$nom,
 	$auteur_session,
 	$organisation,
+	$url_organisation,
 	$telephone,
 	$fax,
 	$skype,
@@ -65,6 +66,7 @@ function action_legender_post_supp($r)
 	$auteur['id_auteur'] = corriger_caracteres($id_auteur);
 	$auteur['nom'] = corriger_caracteres($nom);
 	$auteur['organisation'] = corriger_caracteres($organisation);
+	$auteur['url_organisation'] = corriger_caracteres($url_organisation);
 	$auteur['telephone'] = corriger_caracteres($telephone);
 	$auteur['fax'] = corriger_caracteres($fax);
 	$auteur['adresse'] = corriger_caracteres($adresse);
@@ -76,7 +78,7 @@ function action_legender_post_supp($r)
 	$auteur['longitude'] = corriger_caracteres($longitude);
 
 // La requete SQL à passer dans la base
-	$n = spip_query("UPDATE spip_auteurs SET organisation=" . spip_abstract_quote($auteur['organisation']) . ", telephone=" . spip_abstract_quote($auteur['telephone']) . ", fax=" . spip_abstract_quote($auteur['fax']) . ", skype=" . spip_abstract_quote($auteur['skype']) . ", adresse=" . spip_abstract_quote($auteur['adresse']) . ", codepostal=" . spip_abstract_quote($auteur['codepostal']) . ", ville=" . spip_abstract_quote($auteur['ville']) . ", pays=" . spip_abstract_quote($auteur['pays']) . ", latitude=" . spip_abstract_quote($auteur['latitude']) . ", longitude=" . spip_abstract_quote($auteur['longitude']) . " WHERE id_auteur=".$auteur['id_auteur']);
+	$n = spip_query("UPDATE spip_auteurs SET organisation=" . spip_abstract_quote($auteur['organisation']) . ", url_organisation=" . spip_abstract_quote($auteur['url_organisation']) . ", telephone=" . spip_abstract_quote($auteur['telephone']) . ", fax=" . spip_abstract_quote($auteur['fax']) . ", skype=" . spip_abstract_quote($auteur['skype']) . ", adresse=" . spip_abstract_quote($auteur['adresse']) . ", codepostal=" . spip_abstract_quote($auteur['codepostal']) . ", ville=" . spip_abstract_quote($auteur['ville']) . ", pays=" . spip_abstract_quote($auteur['pays']) . ", latitude=" . spip_abstract_quote($auteur['latitude']) . ", longitude=" . spip_abstract_quote($auteur['longitude']) . " WHERE id_auteur=".$auteur['id_auteur']);
 		if (!$n) die('UPDATE');
 	}
 	return $n;

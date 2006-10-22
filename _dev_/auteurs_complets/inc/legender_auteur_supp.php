@@ -32,6 +32,8 @@ function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $red
 // Le formulaire en lui meme...
 	$corps_supp .= "<b>"._T('auteurscomplets:entree_organisation')."</b>"
 	. "<br><input type='text' name='organisation' class='formo' value=\"".entites_html($auteur['organisation'])."\" size='40'>\n<p>\n"
+	. "<b>"._T('auteurscomplets:entree_url_organisation')."</b>"
+	. "<br><input type='text' name='url_organisation' class='formo' value=\"".entites_html($auteur['url_organisation'])."\" size='40'>\n<p>\n"
 	. "<b>"._T('auteurscomplets:entree_telephone')."</b>"
 	. "<br><input type='text' name='telephone' class='formo' value=\"".entites_html($auteur['telephone'])."\" size='40'>\n<p>\n"
 	. "<b>"._T('auteurscomplets:entree_fax')."</b>"
@@ -77,6 +79,7 @@ function legender_auteur_supp_voir($auteur, $redirect)
 
 // On récupère ce qui nous intéresse...
 	$organisation=$auteur['organisation'];
+	$url_organisation=$auteur['url_organisation'];
 	$telephone=$auteur['telephone'];
 	$fax=$auteur['fax'];
 	$adresse=$auteur['adresse'];
@@ -96,7 +99,11 @@ function legender_auteur_supp_voir($auteur, $redirect)
 	. "<div>&nbsp;</div>";
 
 // N'affichons que ce qui existe...
-	if (strlen($organisation) > 2){ $res .= "<div>"._T('auteurscomplets:affiche_organisation')." $organisation </div>";}
+	if ($url_organisation) {
+		if (!$organisation) $organisation = _T('auteurscomplets:affiche_organisation');
+		$res .= propre(_T('auteurscomplets:affiche_organisation')." [{{".$organisation."}}->".$url_organisation."]");
+	}
+	if ((strlen($organisation) > 2) && !$url_organisation){ $res .= "<div>"._T('auteurscomplets:affiche_organisation')." $organisation </div>";}
 	if (strlen($telephone) > 2){ $res .= "<div>"._T('auteurscomplets:affiche_telephone')." $telephone </div>";}
 	if (strlen($fax) > 2){ $res .= "<div>"._T('auteurscomplets:affiche_fax')." $fax </div>";}
 	if (strlen($skype) > 2){ $res .= "<div>"._T('auteurscomplets:affiche_skype')." $skype </div><hr />";}
@@ -111,10 +118,10 @@ function legender_auteur_supp_voir($auteur, $redirect)
 	$res .= "</td>"
 	.  "<td>";
 
-//Afficher le bouton d'affichage du formulaire...
+// Afficher le bouton d'affichage du formulaire...
 	if (statut_modifiable_auteur_supp($id_auteur, $auteur)) {
 		$ancre = "legender_auteur_supp-$id_auteur";
-		$clic = _T("admin_modifier_auteur_supp");
+		$clic = _T("auteurscomplets:infos_supp");
 		$h = generer_url_ecrire("auteur_infos_supp","id_auteur=$id_auteur&initial=0");
 		if (($_COOKIE['spip_accepte_ajax'] == 1 ) AND !$redirect) {
 			$evt .= "\nonclick=" . ajax_action_declencheur($h,$ancre);

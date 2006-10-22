@@ -12,6 +12,7 @@
 
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_organisation' => 'Votre organisation / entreprise / association',
+	'entree_url_organisation' => 'URL de votre organisation / entreprise / association',
 	'entree_telephone' => 'Votre num&eacute;ro de t&eacute;l&eacute;phone',
 	'entree_fax' => 'Votre num&eacute;ro de fax',
 	'entree_skype' => 'Votre contact Skype',
@@ -21,6 +22,7 @@
 	'entree_pays' => 'Votre pays',
 	'entree_latitude' => 'Votre latitude (en valeur num&eacute;raire ex: 92.8)',
 	'entree_longitude' => 'Votre longitude (en valeur num&eacute;raire ex: 15.324)',
+	'infos_supp' => 'Infos suppl&eacute;mentaires',
 	'coordonnees_sup' => 'COORDONN&Eacute;ES SUPPL&Eacute;MENTAIRES',
 	'affiche_organisation' => 'Organisation : ',
 	'affiche_telephone' => 'T&eacute;l&eacute;phone : ',
@@ -32,6 +34,19 @@
 	'affiche_adresse' => 'Adresse',
 	'paramprofil' => 'Modifier vos param&egrave;tres',
 	'localisation' => 'Localisation',
+
+// Pour le modele id_card
+	'id_card' => 'CARTE D\'IDENTIT&Eacute; :',
+	'lat' => 'Lat :',
+	'long' => 'Long :',
+	'contacts' => 'Contacts :',
+	'organisation' => 'Organisation / Entreprise / Association :',
+	'email' => 'Email :',
+	'tel' => 'Tel :',
+	'fax' => 'Fax :',
+	'website' => 'Website :',
+	'vos_articles' => 'Vos Articles :',
+
 	'Z' => 'ZZzZZzzz'
 
 );

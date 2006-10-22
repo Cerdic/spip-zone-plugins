@@ -1,0 +1,67 @@
+#CACHE{0}
+<BOUCLE_auteur_principal(AUTEURS) {id_auteur}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[(#NOM|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#BIO|couper{150}|textebrut)" />]
+	<INCLURE{fond=inc-head}>
+
+</head>
+
+<body class="page_auteur">
+
+<INCLURE{fond=inc-top}>
+
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; (#NOM|couper{80})]</div>
+
+	<div id="conteneur">
+
+		[(#REM) Contenu principal : affichage de l'auteur ]
+		<div id="contenu">
+
+			[<div class="texte">(#BIO)</div><br />]
+			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+
+			[(#MODELE{editer_profil}{id_auteur=#SESSION{id_auteur}})]
+			<!--<br class="nettoyeur" />-->
+
+		</div><!-- fin contenu -->
+
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}>
+	
+			[(#REM) Autres auteurs ]
+			<B_auteurs>
+			<div class="forums">
+				#ANCRE_PAGINATION
+				<h2 class="menu-titre"><:info_auteurs:></h2>
+				[<p class="pagination">(#PAGINATION)</p>]
+				<ul>
+					<BOUCLE_auteurs(AUTEURS) {par nom} {pagination 20}>
+					<li><a href="#URL_AUTEUR"[ class="(#EXPOSE)"]>[(#NOM|couper{80})]</a></li>
+					</BOUCLE_auteurs>
+				</ul>
+			</div>
+			</B_auteurs>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_auteur_principal>

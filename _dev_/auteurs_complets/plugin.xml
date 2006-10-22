@@ -4,11 +4,10 @@
 	</nom>
 	<auteur>
 	Quentin Drouet
-_ Sur la base de plusieurs autres plugins et du code interne de spip...
 _ &copy; 2006 - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
 	experimental
@@ -16,7 +15,7 @@ _ &copy; 2006 - Distribu&eacute; sous licence GPL
 	<description>
 	Rajout de champs pour les auteurs...
 	De nouvelles balises ainsi disponibles pour la boucle auteur :
-_ #TELEPHONE #FAX #SKYPE #ADRESSE #CODE_POSTAL #VILLE #PAYS #LATITUDE #LONGITUDE
+_ #ORGANISATION #URL_ORGANISATION #TELEPHONE #FAX #SKYPE #ADRESSE #CODE_POSTAL #VILLE #PAYS #LATITUDE #LONGITUDE
 
 Par la m&ecirc;me occasion, un formulaire pour l'espace public pour que le visiteur g&egrave;re lui m&ecirc; ses propres infos...
 _ {{Attention}} : le plugin BALISE_SESSION est obligatoire pour cela.

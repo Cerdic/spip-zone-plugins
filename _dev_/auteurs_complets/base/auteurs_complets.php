@@ -14,6 +14,7 @@ $spip_auteurs = array(
 		"bio"	=> "text NOT NULL",
 		"email"	=> "tinytext NOT NULL",
 		"organisation"	=> "text NOT NULL",
+		"url_organisation" => "text NOT NULL",
 		"telephone"	=> "text NOT NULL",
 		"fax"	=> "text NOT NULL",
 		"skype"	=> "text NOT NULL",

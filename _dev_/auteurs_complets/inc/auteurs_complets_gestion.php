@@ -13,7 +13,7 @@ function auteurs_complets_uninstall(){
 
 // La fonction qui modifie la base de donnée
 function auteurs_complets_verifier_base(){
-	$version_base = 0.04;
+	$version_base = 0.05;
 	$current_version = 0.0;
 
 	if (   (!isset($GLOBALS['meta']['auteurs_complets_base_version']) )
@@ -31,8 +31,10 @@ function auteurs_complets_verifier_base(){
 		$desc = spip_abstract_showtable("spip_auteurs", '', true);
 		if (!isset($desc['field']['organisation'])){
 			spip_query("ALTER TABLE spip_auteurs ADD `organisation` TEXT NOT NULL AFTER `email`");}
+		if (!isset($desc['field']['url_organisation'])){
+			spip_query("ALTER TABLE spip_auteurs ADD `url_organisation` TEXT NOT NULL AFTER `organisation`");}
 		if (!isset($desc['field']['telephone'])){
-			spip_query("ALTER TABLE spip_auteurs ADD `telephone` TEXT NOT NULL AFTER `organisation`");}
+			spip_query("ALTER TABLE spip_auteurs ADD `telephone` TEXT NOT NULL AFTER `url_organisation`");}
 		if (!isset($desc['field']['fax'])){
 			spip_query("ALTER TABLE spip_auteurs ADD `fax` TEXT NOT NULL AFTER `telephone`");}
 		if (!isset($desc['field']['skype'])){
@@ -67,6 +69,12 @@ function auteurs_complets_verifier_base(){
 			spip_query("ALTER TABLE spip_auteurs ADD `organisation` TEXT NOT NULL AFTER `email`");}
 		ecrire_meta('auteurs_complets_base_version',$current_version=0.04);
 	}
+	if ($current_version<0.05){
+		$desc = spip_abstract_showtable("spip_auteurs", '', true);
+		if (!isset($desc['field']['url_organisation'])){
+			spip_query("ALTER TABLE spip_auteurs ADD `url_organisation` TEXT NOT NULL AFTER `organisation`");}
+		ecrire_meta('auteurs_complets_base_version',$current_version=0.05);
+	}
 
 // On écris dans les champs meta le numéro de base qui nous permettra d'upgrader le plugin par la suite
 	ecrire_metas();
@@ -74,7 +82,6 @@ function auteurs_complets_verifier_base(){
 
 function auteurs_complets_ajouts()
 {
-
 // A chaque appel on vérifie si la base est correctement installée...
 	auteurs_complets_install();
 
@@ -98,5 +105,4 @@ function auteurs_complets_ajouts()
 // On balance ce dont on a besoin
 	return $legender_auteur_supp_total;
 }
-
 ?>

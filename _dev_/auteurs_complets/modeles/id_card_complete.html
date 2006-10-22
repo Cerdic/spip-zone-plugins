@@ -1,7 +1,7 @@
 #CACHE{0}
 <BOUCLE_AUTEUR(AUTEURS){id_auteur}>
 <div class="vcard">
-<h3>IDENTITY CARD</h3>
+<h3><:auteurscomplets:id_card:></h3>
 	[<div class="Buddy" style="float:right">
 		<a href="#URL_SITE"><img src="(#LOGO_AUTEUR||image_reduire{48,48}|extraire_attribut{src})" alt="#NOM" class="logo" height="48" width="48"></a>
 	</div>]
@@ -14,11 +14,12 @@
 	</span></p>]
 
 	[<p><span class="geo">
-		Lat : <abbr class="latitude" title="#LATITUDE">(#LATITUDE)</abbr>
-		[Long : <abbr class="longitude" title="#LONGITUDE">(#LONGITUDE)</abbr>]
+		<:auteurscomplets:lat:> <abbr class="latitude" title="#LATITUDE">(#LATITUDE)</abbr>
+		[<:auteurscomplets:long:> <abbr class="longitude" title="#LONGITUDE">(#LONGITUDE)</abbr>]
 	</span></p>]
 	<hr />
-	<h4>CONTACTS :</h4>
-	[Email : <a class="email" href="mailto:#EMAIL">(#EMAIL)</a><br />][Tel : <span class="tel">(#TELEPHONE)</span><br />][Fax : <span class="fax">(#FAX)</span><br />][Website : <a href="#URL_SITE" class="url" rel="me">(#NOM_SITE)</a>]
+	<h4><:auteurscomplets:contacts:></h4>
+	[<:auteurscomplets:organisation:> <a class="org" href="#URL_ORGANISATION">(#ORGANISATION)</a>]<br />
+	[<:auteurscomplets:email:> <a class="email" href="mailto:#EMAIL">(#EMAIL)</a><br />][<:auteurscomplets:tel:> <span class="tel">(#TELEPHONE)</span><br />][<:auteurscomplets:fax:> <span class="fax">(#FAX)</span><br />][<:auteurscomplets:website:> <a href="#URL_SITE" class="url" rel="me">(#NOM_SITE)</a>]
 </div>
 </BOUCLE_AUTEUR>

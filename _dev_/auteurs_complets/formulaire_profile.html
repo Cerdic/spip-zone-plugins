@@ -1,5 +1,5 @@
-<form action='[(#ENV{self})]' method='post' name="formulaire_profile" id="formulaire_profile">
-	[(#ENV*{previsu_auteur})]
+<form action='[(#ENV{self})]' method='post' name="formulaire_profile" id="formulaire_profile" class="formulaire_spip">
+	[(#ENV*{previsualiser_auteur})]
 	<fieldset>
 	<legend><:auteurscomplets:paramprofil:></legend>
 <BOUCLE_AUTEUR(AUTEURS){id_auteur=#SESSION{id_auteur}}>
@@ -7,21 +7,26 @@
 	<input type='hidden' name='modif' value="1">
 
 	<div>
+	<h4><:entree_infos_perso:></h4>
 	<label><:entree_nom_pseudo:></label><br/>
 	<span><input type='text' name='nom' class='fondl' value="[(#NOM)]" size='40'></span><br/>
 	<label><:entree_adresse_email:></label><br/>
 	<span><input type='text' name='email' class='fondl' value="[(#EMAIL)]" size='40'></span><br/>
 	<label><:auteurscomplets:entree_telephone:></label><br/>
-	<span><input type='text' name='telephone' class='fondl' value="[(#TELEPHONE)]" size='40'></span><br/>
+	<span><input type='text' name='telephone' class='fondl' value="[(#TELEPHONE)]" size='40'></span><br/><br />
 	<label><:auteurscomplets:entree_fax:></label><br/>
 	<span><input type='text' name='fax' class='fondl' value="[(#FAX)]" size='40'></span><br/>
 	<label><:auteurscomplets:entree_skype:></label><br/>
 	<span><input type='text' name='skype' class='fondl' value="[(#SKYPE)]" size='40'></span><br/><br/>
 
-	<h3><:entree_infos_perso:></h3><hr />
+	<label><:auteurscomplets:entree_organisation:></label><br/>
+	<span><input type='text' name='organisation' class='fondl' value="[(#ORGANISATION)]" size='40'></span><br/>
+	<label><:auteurscomplets:entree_url_organisation:></label><br/>
+	<span><input type='text' name='url_organisation' class='fondl' value="[(#URL_ORGANISATION)]" size='40'></span><br/><br/>
+
 	<label><:entree_biographie:></label><br/>
 	<textarea name='bio' class='forml' rows='4' cols='40'>[(#BIO*)]</textarea>
-	<br />
+	<br /><br />
 
 	<input type='hidden' name='pgp' value="[(#PGP)]">
 
@@ -30,7 +35,7 @@
 	<label><:entree_url:></label><br/>
 	<span><input type='text' name='url_site' class='fondl' value="[(#URL_SITE)]" size='40'></span><br/><br/>
 
-	<h3><:auteurscomplets:localisation:></h3><hr />
+	<h4><:auteurscomplets:localisation:></h4>
 	<label><:auteurscomplets:entree_adresse:></label><br/>
 	<span><input type='text' name='adresse' class='fondl' value="[(#ADRESSE)]" size='40'></span><br/>
 	<label><:auteurscomplets:entree_codepostal:></label><br/>
@@ -50,7 +55,8 @@
 	<span><input type='password' name='new_pass' class='fondl' value="" size='40'></span><br/>
 	<label><:info_confirmer_passe:></label><br />
 	<span><input type='password' name='new_pass2' class='fondl' value="" size='40'></span><br/>
-	<div style="float:right"><input type="submit" name="previsualiser_auteur" class="spip_bouton" value="<:previsualiser:>" /></div>
+	<div class="spip_bouton"><input type="submit" name="valider_auteur" value="<:previsualiser:>" /></div>
 </BOUCLE_AUTEUR>
 	</div>
+	</fieldset>
 </form>

@@ -35,6 +35,8 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 	$telephone = _request('telephone');
 	$fax = _request('fax');
 	$skype = _request('skype');
+	$organisation = _request('organisation');
+	$url_organisation = _request('url_organisation');
 
 	$statut = _request('statut');
 	$login = _request('login');
@@ -59,7 +61,7 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 	$previsualiser_auteur= _request('previsualiser_auteur');
 	$valider_auteur= _request('valider_auteur');
 	
-	$previsu_auteur = '';
+	$previsu = '';
 	$bouton= '';
 	$erreur= '';
 
@@ -67,67 +69,73 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 	$id_auteur_session=$auteur_session['id_auteur'];
 	$auteur=unserialize(get_auteur_infos($id_auteur_session));
 
-	if($valider_auteur)
-		{
-		// integrer a la base de donnee
-	$nom2= _request('nom2');
-	$bio2= _request('bio2');
-	$email2= _request('email2');
-	$telephone2 = _request('telephone2');
-	$fax2 = _request('fax2');
-	$skype2 = _request('skype2');
-	$adresse2 = _request('adresse2');
-	$codepostal2 = _request('codepostal2');
-	$ville2 = _request('ville2');
-	$pays2 = _request('pays2');
-	$latitude2 = _request('latitude2');
-	$longitude2 = _request('longitude2');
-	$nom_site2= _request('nom_site2');
-	$url_site2= _request('url_site2');
-	$query_pass2 = _request('pass');
-
+	if($valider_auteur){
+		// Récupération des variables à integrer a la base de donnee
+// 		$nom2= _request('nom2');
+// 		$bio2= _request('bio2');
+// 		$email2= _request('email2');
+// 		$organisation2= _request('organisation2');
+// 		$url_organisation2= _request('url_organisation2');
+// 		$telephone2 = _request('telephone2');
+// 		$fax2 = _request('fax2');
+// 		$skype2 = _request('skype2');
+// 		$adresse2 = _request('adresse2');
+// 		$codepostal2 = _request('codepostal2');
+// 		$ville2 = _request('ville2');
+// 		$pays2 = _request('pays2');
+// 		$latitude2 = _request('latitude2');
+// 		$longitude2 = _request('longitude2');
+// 		$nom_site2= _request('nom_site2');
+// 		$url_site2= _request('url_site2');
+// 		$query_pass2 = _request('pass');
 
 		// Modifier l'auteur dans la base
 		$query = "UPDATE spip_auteurs SET $query_pass2
-			nom='".addslashes($nom2)."',
-			bio='".addslashes($bio2)."',
-			email='".addslashes($email2)."',
-			telephone='".addslashes($telephone2)."',
-			fax='".addslashes($fax2)."',
-			skype='".addslashes($skype2)."',
-			adresse='".addslashes($adresse2)."',
-			codepostal='".addslashes($codepostal2)."',
-			ville='".addslashes($ville2)."',
-			pays='".addslashes($pays2)."',
-			latitude='".addslashes($latitude2)."',
-			longitude='".addslashes($longitude2)."',
-			nom_site='".addslashes($nom_site2)."',
-			url_site='".addslashes($url_site2)."'
+			nom='".addslashes($nom)."',
+			bio='".addslashes($bio)."',
+			email='".addslashes($email)."',
+			organisation='".addslashes($organisation)."',
+			url_organisation='".addslashes($url_organisation)."',
+			telephone='".addslashes($telephone)."',
+			fax='".addslashes($fax)."',
+			skype='".addslashes($skype)."',
+			adresse='".addslashes($adresse)."',
+			codepostal='".addslashes($codepostal)."',
+			ville='".addslashes($ville)."',
+			pays='".addslashes($pays)."',
+			latitude='".addslashes($latitude)."',
+			longitude='".addslashes($longitude)."',
+			nom_site='".addslashes($nom_site)."',
+			url_site='".addslashes($url_site)."'
 			$add_extra
 			WHERE id_auteur=".$id_auteur;
 
 		spip_query($query) OR die($query);
 
-	return array('formulaire_profile', 0,
-		array(
-				'previsu_auteur' => $previsu_auteur,
-				'id_auteur' => $id_auteur,
-				'nom' => $nom,
-				'email' => $email,
-				'telephone' => $telephone,
-				'fax' => $fax,
-				'skype' => $skype,
-				'adresse' => $adresse,
-				'codepostal' => $codepostal,
-				'ville' => $ville,
-				'pays' => $pays,
-				'latitude' => $latitude,
-				'longitude' => $longitude,
-				'url_site' => $url_site,
-				'nom_site' => $nom_site,
-				'pgp' => $pgp,
-				'bio' => $bio
-			));	
+// 	return array('formulaire_profile', 0,
+// 		array(
+// 				'previsu' => $previsu,
+// 				'id_auteur' => $id_auteur,
+// 				'nom' => $nom,
+// 				'email' => $email,
+// 				'organisation' => $organisation,
+// 				'url_organisation' => $url_organisation,
+// 				'telephone' => $telephone,
+// 				'fax' => $fax,
+// 				'skype' => $skype,
+// 				'adresse' => $adresse,
+// 				'codepostal' => $codepostal,
+// 				'ville' => $ville,
+// 				'pays' => $pays,
+// 				'latitude' => $latitude,
+// 				'longitude' => $longitude,
+// 				'url_site' => $url_site,
+// 				'nom_site' => $nom_site,
+// 				'pgp' => $pgp,
+// 				'bio' => $bio
+// 			));
+
+		return header("Location: ".$_SERVER['HTTP_REFERER']) ;
 		}
 
 	else{
@@ -170,14 +178,16 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 			$bouton= _T('form_prop_confirmer');
 		}
 
-		$previsu_auteur = inclure_balise_dynamique(
+		$previsu = inclure_balise_dynamique(
 			array(
 				'formulaire_profile_previsu', 0,
 			array(
-				'previsu_auteur' => $previsu_auteur,
+				'previsu' => $previsu,
 				'id_auteur' => $id_auteur,
 				'nom' => $nom,
 				'email' => $email,
+				'organisation' => $organisation,
+				'url_organisation' => $url_organisation,
 				'telephone' => $telephone,
 				'fax' => $fax,
 				'skype' => $skype,
@@ -203,6 +213,8 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 				'id_auteur' => $id_auteur,
 				'nom' => $nom,
 				'email' => $email,
+				'organisation' => $organisation,
+				'url_organisation' => $url_organisation,
 				'telephone' => $telephone,
 				'fax' => $fax,
 				'skype' => $skype,
@@ -219,9 +231,8 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 				'url_site' => $url_site,
 				'pgp' => $pgp,
 				'bio' => $bio
-			));
+			)
+		);
 	}
 }
-
-
 ?>

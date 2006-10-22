@@ -1,28 +1,45 @@
 #CACHE{0}
 <BOUCLE_AUTEUR(AUTEURS){id_auteur=#SESSION{id_auteur}}>
 <div class="vcard">
+<h3><:auteurscomplets:id_card:></h3>
 	[<div class="Buddy" style="float:right">
 		<a href="#URL_SITE"><img src="(#LOGO_AUTEUR||image_reduire{48,48}|extraire_attribut{src})" alt="#NOM" class="logo" height="48" width="48"></a>
 	</div>]
 	<b><span class="fn">#NOM</span></b>
-	<p><span class="adr">
-	<span class="street-address">#ADRESSE</span><br />
-	<span class="postal-code">#CODEPOSTAL</span>
-	<span class="locality">#VILLE</span><br />
-	<span class="country-name">#PAYS</span>
-	</span></p>
+	[<p><span class="adr">
+	[<span class="street-address">(#ADRESSE)</span><br />]
+	[<span class="postal-code">(#CODEPOSTAL)</span>]
+	[<span class="locality">(#VILLE)</span><br />]
+	<span class="country-name">(#PAYS)</span>
+	</span></p>]
 
 	[<p><span class="geo">
-		Lat : <abbr class="latitude" title="#LATITUDE">(#LATITUDE)</abbr>
-		[Long : <abbr class="longitude" title="#LONGITUDE">(#LONGITUDE)</abbr>]
+		<:auteurscomplets:lat:> <abbr class="latitude" title="#LATITUDE">(#LATITUDE)</abbr>
+		[<:auteurscomplets:long:> <abbr class="longitude" title="#LONGITUDE">(#LONGITUDE)</abbr>]
 	</span></p>]
-	<hr />
-	<h4>CONTACTS :</h4>
-	Email : <a class="email" href="mailto:#EMAIL">#EMAIL</a><br />
-	Tel : <span class="tel">#TELEPHONE</span><br />
-	[Fax : <span class="fax">(#FAX)</span><br />]
-	Website : <a href="#URL_SITE" class="url" rel="me">#NOM_SITE</a>
-</div>
+	<h4><:auteurscomplets:contacts:></h4>
+	[<:auteurscomplets:organisation:> <a class="org" href="#URL_ORGANISATION">(#ORGANISATION)</a>]<br />
+	[<:auteurscomplets:email:> <a class="email" href="mailto:#EMAIL">(#EMAIL)</a><br />][<:auteurscomplets:tel:> <span class="tel">(#TELEPHONE)</span><br />][<:auteurscomplets:fax:> <span class="fax">(#FAX)</span><br />][<:auteurscomplets:website:> <a href="#URL_SITE" class="url" rel="me">(#NOM_SITE)</a>]
 
+	[(#REM) Articles de l'auteur ]
+	<B_articles>
+	<div>
+	<h4><:auteurscomplets:vos_articles:></h4>
+		<div class="liste-articles">
+			#ANCRE_PAGINATION
+			<h2 class="invisible"><:articles_auteur:></h2>
+			<ul>
+				<BOUCLE_articles(ARTICLES) {id_auteur} {par date}{inverse} {pagination 10}>
+				<li>
+					<h5><a href="#URL_ARTICLE">#TITRE</a></h5>
+					<small>[(#DATE|affdate)]</small>
+					</li>
+				</BOUCLE_articles>
+			</ul>
+		[<p class="pagination">(#PAGINATION)</p>]
+		</div>
+	</div><!-- fin contre-encart -->
+	</B_articles>
+</div>
 #FORMULAIRE_PROFILE
 </BOUCLE_AUTEUR>
