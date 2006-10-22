@@ -81,17 +81,26 @@ texte d'inscription en tant que visiteur
 		[(#ENV{mode_login}|?{' ',''})
 		<div style="font-size:100%;font-weight:bold">Format</div>
 		<ul style="clear:both; width:100%;list-style-type:none;margin:0;padding:0">
-		<li><input name="suppl_abo" value="html"  type="radio" checked="checked" /><label><:spiplistes:html:></label></li>
-		<li><input name="suppl_abo" value="texte" type="radio" /><label><:spiplistes:texte:></label></li>
-		<li><input name="suppl_abo" value="non"   type="radio" /><label><:spiplistes:desabonnement:></label></li>
+			<li>
+				<input name="suppl_abo" id="suppl_abo_html" value="html"  type="radio" checked="checked" />
+				<label for="suppl_abo_html"><:spiplistes:html:></label>
+			</li>
+			<li>
+				<input name="suppl_abo" id="suppl_abo_texte" value="texte" type="radio" />
+				<label for="suppl_abo_texte"><:spiplistes:texte:></label>
+			</li>
+			<li>
+				<input name="suppl_abo" id="suppl_abo_non" value="non" type="radio" />
+				<label for="suppl_abo_non"><:spiplistes:desabonnement:></label>
+			</li>
 		</ul>
 
 			[(#ENV{acces_membres}|=={oui}|?{' ',''})
-				<div style="margin-top:5px"><label style="font-weight:bold;"><:form_pet_votre_nom:></label></div>
-				<input type="text" class="forml" style="width:12em" name="nom_inscription_" value="" size="30" style="clear:both;" />
+				<div style="margin-top:5px"><label for="nom_inscription_" style="font-weight:bold;"><:form_pet_votre_nom:></label></div>
+				<input type="text" class="forml" style="width:12em" name="nom_inscription_" id="nom_inscription_" value="" size="30" style="clear:both;" />
 				]
-			<div style="margin-top:5px"><label style="font-weight:bold;"><:form_pet_votre_email:></label></div>
-			<input type="text" class="forml" style="width:12em;clear:both;" name="mail_inscription_" value="" size="30" />
+			<div style="margin-top:5px"><label for="mail_inscription_" style="font-weight:bold;"><:form_pet_votre_email:></label></div>
+			<input type="text" class="forml" style="width:12em;clear:both;" name="mail_inscription_" id="mail_inscription_" value="" size="30" />
 		<div class="spip_bouton" style="text-align:right"><input type="submit" name="Valider" value="<:bouton_valider:>" />
 		</div></fieldset></form>]
 </div>
