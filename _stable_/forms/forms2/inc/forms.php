@@ -127,7 +127,7 @@
 				$url[$cle][] = '';
 			}
 			else if ($type == 'mot') {
-				$id_groupe = intval($row['id_groupe']);
+				$id_groupe = intval($row['extra_info']);
 				$id_mot = intval($row['valeur']);
 				if ($row3 = spip_fetch_array(spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe=$id_groupe AND id_mot="._q($id_mot)))){
 					$values[$cle][]=$row3['titre'];
@@ -374,15 +374,13 @@
 		$champconfirm = $row['champconfirm'];
 		$mailconfirm = '';
 	
-		$structure = unserialize($row['structure']);
-		// Ici on parcourt les valeurs entrees pour les champs demandes
-		foreach ($structure as $index => $t) {
-			$code = $t['code'];
-			$type = $t['type'];
-			$type_ext = $t['type_ext'];
-			$val = $GLOBALS[$code];
+		$res2 = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form));
+		while($row2 = spip_fetch_array($res2)){
+			$code = $row2['champ'];
+			$type = $row2['type'];
+			$val = _request($code);
 			if (!$val || ($type == 'fichier' && !$_FILES[$code]['tmp_name'])) {
-				if ($t['obligatoire'] == 'oui')
+				if ($row2['obligatoire'] == 'oui')
 					$erreur[$code] = _T("forms:champ_necessaire");
 				continue;
 			}
@@ -393,7 +391,7 @@
 				}
 			}
 			if ($type == 'url') {
-				if ($t['verif'] == 'oui') {
+				if ($row2['verif'] == 'oui') {
 					include_spip("inc/sites");
 					if (!recuperer_page($val)) {
 						$erreur[$code] = _T("forms:site_introuvable");
@@ -404,7 +402,7 @@
 				if (!$taille = $_FILES[$code]['size']) {
 					$erreur[$code] = _T("forms:echec_upload");
 				}
-				else if ($type_ext['taille'] && $taille > ($type_ext['taille'] * 1024)) {
+				else if ($row2['extra_info'] && $taille > ($row2['extra_info'] * 1024)) {
 					$erreur[$code] = _T("forms:fichier_trop_gros");
 				}
 				else if (!Forms_type_fichier_autorise($_FILES[$code]['name'])) {

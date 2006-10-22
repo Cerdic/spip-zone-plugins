@@ -336,43 +336,73 @@ function fin_block_route(){
 					</noscript>";
 }
 
+function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$form_link,$retour){
+	global $spip_lang_right;
+	$out = "";
+	if ($nb_reponses){
+			$out .= "<p><strong>"._T("forms:attention")."</strong> ";
+			$out .= _T("forms:info_supprimer_formulaire_reponses")."</p>\n";
+	}
+	else{
+		$out .= "<p>";
+		$out .= _T("forms:info_supprimer_formulaire")."</p>\n";
+	}
+	$link = generer_action_auteur('forms_supprime',"$id_form",generer_url_ecrire('forms_tous'));
+	$out .= "<form method='POST' action='$link' >";
+	$out .= "<div style='text-align:$spip_lang_right'>";
+	$out .= "<input type='submit' name='supp_confirme' value=\""._T('item_oui')."\" class='fondo'>";
+	$out .= "</div>";
+	$out .= "</form>\n";
+
+	$out .= "<form method='POST' action='$form_link'>\n";
+	$out .= "<input type='hidden' name='id_form' value='$id_form' />\n";
+	$out .= "<input type='hidden' name='retour' value='$retour' />\n";
+	$out .= "<div style='text-align:$spip_lang_right'>";
+	$out .= "<input type='submit' name='supp_rejet' value=\""._T('item_non')."\" class='fondo'>";
+	$out .= "</div>";
+	$out .= "</form><br />\n";
+
+	return $out;
+}
+
 function exec_forms_edit(){
 	global $spip_lang_right;
+	$retour = _request('retour');
+
 	$id_form = intval(_request('id_form'));
 	$new = _request('new');
 	$supp_form = intval(_request('supp_form'));
-	$modif_champ = _request('modif_champ');
-	$ajout_champ = _request('ajout_champ');
-	$retour = _request('retour');
+	$supp_rejet = _request('supp_rejet');
+
 	$titre = _request('titre');
 	$descriptif = _request('descriptif');
 	$email = _request('email');
 	$champconfirm = _request('champconfirm');
 	$texte = _request('texte');
 	$sondage = _request('sondage');
+	
 	$nom_champ = _request('nom_champ');
 	$champ_obligatoire = _request('champ_obligatoire');
+	$modif_champ = _request('modif_champ');
+	$ajout_champ = _request('ajout_champ');
+	$supp_champ = _request('supp_champ');
+
+	$supp_choix = _request('supp_choix');
+
 	$monter = _request('monter');
 	$descendre = _request('descendre');
-	$supp_choix = _request('supp_choix');
-	$supp_champ = _request('supp_champ');
-	$supp_confirme = _request('supp_confirme');
-	$supp_rejet = _request('supp_rejet');
-
 	
-  Forms_install();
+	Forms_install();
 
 	if ($retour)
 		$retour = urldecode($retour);
   include_spip("inc/presentation");
 	include_spip("inc/config");
 
-	if ($id_form) {
-		$query = "SELECT COUNT(*) FROM spip_reponses WHERE id_form=$id_form AND statut='valide'";
-		$result = spip_query($query);
-		list($nb_reponses) = spip_fetch_array($result,SPIP_NUM);
-	}
-	else $nb_reponses = 0;
+	$nb_reponses = 0;
+	if ($id_form)
+		if ($row = spip_fetch_array(spip_query("SELECT COUNT(*) AS num FROM spip_reponses WHERE id_form="._q($id_form)." AND statut='valide'")))
+			$nb_reponses = $row['num'];
 
 	$clean_link = parametre_url(self(),'new','');
 	$form_link = generer_url_ecrire('forms_edit');
@@ -381,19 +411,7 @@ function exec_forms_edit(){
 	if ($retour) 
 		$form_link = parametre_url($form_link,"retour",urlencode($retour));
 
-	if (Forms_form_administrable($id_form)) {
-		if ($supp_form = intval($supp_form) AND $supp_confirme AND !$supp_rejet) {
-			$result = spip_query("DELETE FROM spip_forms WHERE id_form=$supp_form");
-			$result = spip_query("DELETE FROM spip_forms_champs WHERE id_form=$supp_form");
-			$result = spip_query("DELETE FROM spip_forms_champs_choix WHERE id_form=$supp_form");
-			if ($retour) {
-				$retour = urldecode($retour);
-				Header("Location: $retour");
-				exit;
-			}
-		}
-	}
-	
+
 	//
 	// Affichage de la page
 	//
@@ -458,31 +476,10 @@ function exec_forms_edit(){
 		fin_boite_info();
 	}
 
-
-
 	debut_droite();
 
-	if ($supp_form && $supp_confirme==NULL && $supp_rejet==NULL) {
-		if ($nb_reponses){
-			echo "<p><strong>"._T("forms:attention")."</strong> ";
-			echo _T("forms:info_supprimer_formulaire_reponses")."</p>\n";
-		}
-		else{
-			echo "<p>";
-			echo _T("forms:info_supprimer_formulaire")."</p>\n";
-		}
-		$link = parametre_url($clean_link,'supp_form', $supp_form);
-		echo "<form method='POST' action='"
-			. $link
-			. "' style='border: 0px; margin: 0px;'>";
-		echo "<div style='text-align:$spip_lang_right'>";
-		echo "<input type='submit' name='supp_confirme' value=\""._T('item_oui')."\" class='fondo'>";
-		echo " &nbsp; ";
-		echo "<input type='submit' name='supp_rejet' value=\""._T('item_non')."\" class='fondo'>";
-		echo "</div>";
-		echo "</form><br />\n";
-	}
-
+	if ($supp_form && $supp_rejet==NULL)
+		echo Forms_formulaire_confirm_suppression($id_form,$nb_reponses,$form_link,$retour);
 
 	if ($id_form) {
 		debut_cadre_relief("../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png");
@@ -521,9 +518,8 @@ function exec_forms_edit(){
 			}
 		}
 
-		if (count($structure)) {
+		if (spip_fetch_array(spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)))) {
 			echo "<br />";
-
 			echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
 			echo bouton_block_invisible("preview_form");
 			echo "<strong class='verdana3' style='text-transform: uppercase;'>"
@@ -532,16 +528,15 @@ function exec_forms_edit(){
 
 			echo debut_block_invisible("preview_form");
 			echo _T("forms:info_apparence")."<p>\n";
-			//echo "<div class='spip_forms'>";
-			echo propre("<form$id_form>");
-			//echo "</div>\n";
+			//echo propre("<form$id_form>");
+			include_spip('public/assembler');
+			echo inclure_modele('form',$id_form,'','');
 			echo fin_block();
-
 		}
 
 		afficher_articles(_T("forms:articles_utilisant"),
 			array('FROM' => 'spip_articles AS articles, spip_forms_articles AS lien',
-			'WHERE' => "lien.id_article=articles.id_article AND id_form=$id_form AND statut!='poubelle'",
+			'WHERE' => "lien.id_article=articles.id_article AND id_form="._q($id_form)." AND statut!='poubelle'",
 			'ORDER BY' => "titre"));
 
 		fin_cadre_relief();
@@ -602,37 +597,37 @@ function exec_forms_edit(){
 		$jshide = "";
 		$s = "";
 		$options = "";
-		if (is_array($structure)){
-			foreach ($structure as $index => $t) {
-				if ($t['type'] == 'select'){
-					$visible = false;
-					$code = $t['code'];
-					$options .= "<option value='$code'";
-					if ($email['route'] == $code){
-						$options .= " selected='selected'";
-						$email_route_known = $visible = true;
-					}
-					$options .= ">" . $t['nom'] . "</option>\n";
-					$s .= debut_block_route("bock_email_route_$code",$visible);
-					$jshide .=  "cacher_email_route('bock_email_route_$code');\n";
-					
-					$s .= "<table id ='email_route_$code'>\n";
-					$s .= "<tr><th>".$t['nom']."</th><th>";
-					$s .= "<strong><label for='email_route_$code'>"._T('email_2')."</label></strong>";
-					$s .= "</th></tr>\n";
-					$js = "";
-					$type_ext = $t['type_ext'];
-					foreach ($type_ext as $code_choix => $nom_choix) {
-						$s .= "<tr><td>$nom_choix</td><td>";
-						$s .= "<input type='text' name='email[$code_choix]' value=\"";
-						$s .= isset($email[$code_choix])?entites_html($email[$code_choix]):"";
-						$s .= "\" class='fondl verdana2' size='20'$js>";
-						$s .= "</td></tr>";
-					}
-					$s .="</table>";
-					$s .= fin_block_route("bock_email_route_$code",$visible);
-				}
+		$res2 = spip_query("SELECT * FROM spip_forms_champs WHERE type='select' AND id_form="._q($id_form));
+		while ($row2 = spip_fetch_array($res2)) {
+			$visible = false;
+			$code = $$row2['champ'];
+			$options .= "<option value='$code'";
+			if ($email['route'] == $code){
+				$options .= " selected='selected'";
+				$email_route_known = $visible = true;
 			}
+			$options .= ">" . $row2['titre'] . "</option>\n";
+			$s .= debut_block_route("bock_email_route_$code",$visible);
+			$jshide .=  "cacher_email_route('bock_email_route_$code');\n";
+			
+			$s .= "<table id ='email_route_$code'>\n";
+			$s .= "<tr><th>".$row2['titre']."</th><th>";
+			$s .= "<strong><label for='email_route_$code'>"._T('email_2')."</label></strong>";
+			$s .= "</th></tr>\n";
+			$js = "";
+
+			$res3 = spip_query("SELECT * FROM spip_forms_champs_choiw WHERE id_form="._q($id_form)." AND cle="._q($row2['cle']));
+			while($row3 = spip_fetch_array($res3)){
+				$s .= "<tr><td>".$row3['titre']."</td><td>";
+				$s .= "<input type='text' name='email[".$row3['choix']."]' value=\"";
+				$s .= isset($email[$row3['choix']])?entites_html($email[$row3['choix']]):"";
+				$s .= "\" class='fondl verdana2' size='20'$js>";
+				$s .= "</td></tr>";
+			}
+			$s .="</table>";
+			$s .= fin_block_route("bock_email_route_$code",$visible);
+		}
+		if (strlen($s)){
 			$jshide = "<script type='text/javascript'><!--
 			function montrer_email_route(obj) {
 				layer = findObj(obj);
@@ -680,17 +675,16 @@ function exec_forms_edit(){
 		if ($champconfirm=='') echo " selected='selected'";
 		echo ">"._T('forms:pas_mail_confirmation')."</option>\n";
 		$champconfirm_known = false;
-		foreach ($structure as $index => $t) {
-			if ($t['type'] == 'email'){
-				echo "<option value='" . $t['code'] . "'";
-				if ($champconfirm == $t['code']){
-					echo " selected='selected'";
-					$champconfirm_known = true;
-				}
-				echo ">" . $t['nom'] . "</option>\n";
+		$res2 = spip_query("SELECT * FROM spip_forms_champs WHERE type='email' AND id_form="._q($id_form));
+		while ($row2 = spip_fetch_array($res2)) {
+			echo "<option value='" . $row2['champ'] . "'";
+			if ($champconfirm == $row2['champ']){
+				echo " selected='selected'";
+				$champconfirm_known = true;
 			}
+			echo ">" . $row2['titre'] . "</option>\n";
 		}
-	 	echo "</select><br />\n";
+		echo "</select><br />\n";
 	 	if ($champconfirm_known == true){
 			echo "<strong><label for='texte_form'>"._T('info_texte')."</label></strong>";
 			echo "<br />";

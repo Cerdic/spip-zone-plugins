@@ -26,10 +26,11 @@
 			$type = $val['type'];
 			$obligatoire = $val['obligatoire'];
 			$type_ext = $val['type_ext'];
-			$id_groupe= isset($type_ext['id_groupe']) ? $type_ext['id_groupe']:0;
+			$extra_info = isset($type_ext['id_groupe']) ? $type_ext['id_groupe']:0;
+			$extra_info = isset($type_ext['taille']) ? $type_ext['taille']:$extra_info;
 			$obligatoire = $val['obligatoire'];
-			spip_query("INSERT INTO spip_forms_champs (id_form,cle,champ,titre,type,obligatoire,id_groupe) 
-				VALUES("._q($id_form).","._q($cle).","._q($champ).","._q($titre).","._q($type).","._q($obligatoire).","._q($id_groupe).")");
+			spip_query("INSERT INTO spip_forms_champs (id_form,cle,champ,titre,type,obligatoire,extra_info) 
+				VALUES("._q($id_form).","._q($cle).","._q($champ).","._q($titre).","._q($type).","._q($obligatoire).","._q($extra_info).")");
 			if ($type=='select' OR $type=='multiple'){
 				foreach($type_ext as $choix=>$titre){
 					spip_query("INSERT INTO spip_forms_champs_choix (id_form,cle,choix,titre) 
@@ -104,8 +105,8 @@
 		if ($current_version<0.15){
 			spip_query("ALTER TABLE spip_reponses ADD `url` VARCHAR(255) NOT NULL AFTER `id_article_export` ");
 			ecrire_meta('forms_base_version',$current_version=0.15);
-		}
-		if ($current_version<0.16){
+		}/*
+		if ($current_version<0.17){
 			// virer les tables temporaires crees manuellement sur les serveurs ou ca foirait
 			spip_query("DROP TABLE spip_forms_champs");
 			spip_query("DROP TABLE spip_forms_champs_choix");
@@ -114,8 +115,9 @@
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			creer_base();
-			ecrire_meta('forms_base_version',$current_version=0.16);
-		}
+			forms_allstructure2table();
+			ecrire_meta('forms_base_version',$current_version=0.17);
+		}*/
 		ecrire_metas();
 	}
 	
