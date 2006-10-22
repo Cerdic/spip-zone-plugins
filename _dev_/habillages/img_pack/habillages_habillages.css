@@ -21,12 +21,17 @@
 	text-align: justify;
 }
 
+.intro_grotitre {
+	font-size: medium;
+	font-weight: bold;
+	text-align: center;
+}
+
 .intro_titre {
 	font-variant: small-caps;
 	font-weight: bold;
 }
 
-.titre_un{
-	font-weight: bold;
-	font-size: medium;
+.titre_un {
+	font-size: normal;
 }

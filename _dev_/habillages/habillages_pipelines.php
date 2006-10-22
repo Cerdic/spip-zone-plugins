@@ -50,7 +50,7 @@ function habillages_ajouter_onglets($flux) {
 			}
 	}
 	
-	if ($logos_is_gestionnaire == "oui" || $logos_is_gestionnaire == "") {
+	if ($logos_is_gestionnaire == "oui") {
 		$flux['data']['logotheque']= new Bouton(
 		_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_logos-22.png', 'Logoth&egrave;que', generer_url_ecrire("habillages_logos"));
 	}

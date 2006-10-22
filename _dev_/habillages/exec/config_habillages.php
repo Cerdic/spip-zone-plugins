@@ -157,34 +157,32 @@ EOF;
 
 	global $couleur_foncee;
 	
-	lire_metas();
-	$habillages_squelettes = basename($GLOBALS['meta']['habillages_squelettes']);
-	$habillages_styles = basename($GLOBALS['meta']['habillages_couleurs']);
-	//$habillages_logos = basename($GLOBALS['meta']['habillages_logos']);
-	
-	echo _T('habillages:accueil_general');
-	if ($habillages_squelettes != "") {
-	echo "<br />";
-	echo "<br />";
-	echo _T('habillages:accueil_general_squelettes')." ".$habillages_squelettes." [Capture]";
-	echo "&nbsp;<a href='".generer_url_ecrire('habillages_squelettes')."'>Modifier</a>";
-	}
-	if ($habillages_styles != "") {
-	echo "<br />";
-	echo "<br />";
-	echo _T('habillages:accueil_general_styles')." ".$habillages_styles." [Capture]";
-	echo "&nbsp;<a href='".generer_url_ecrire('habillages_styles')."'>Modifier</a>";
-	}
-	echo "<br />";
-	echo "<br />";
-	echo _T('habillages:accueil_general_logos');
-	echo "<br />";
-	echo "<br />";
-	echo _T('habillages:accueil_general_maintenance');
-	echo "<br />";
-	echo "<br />";
-	
-	echo "<a href='".generer_url_ecrire('admin_lang', 'module=habillages')."'>Modifier les textes</a><br /><br />";
+// 	lire_metas();
+// 	$habillages_squelettes = basename($GLOBALS['meta']['habillages_squelettes']);
+// 	$habillages_styles = basename($GLOBALS['meta']['habillages_couleurs']);
+// 	//$habillages_logos = basename($GLOBALS['meta']['habillages_logos']);
+// 	
+ 	echo _T('habillages:accueil_general')."<br />";
+// 	if ($habillages_squelettes != "") {
+// 	echo "<br />";
+// 	echo "<br />";
+// 	echo _T('habillages:accueil_general_squelettes')." ".$habillages_squelettes." [Capture]";
+// 	echo "&nbsp;<a href='".generer_url_ecrire('habillages_squelettes')."'>Modifier</a>";
+// 	}
+// 	if ($habillages_styles != "") {
+// 	echo "<br />";
+// 	echo "<br />";
+// 	echo _T('habillages:accueil_general_styles')." ".$habillages_styles." [Capture]";
+// 	echo "&nbsp;<a href='".generer_url_ecrire('habillages_styles')."'>Modifier</a>";
+// 	}
+// 	echo "<br />";
+// 	echo "<br />";
+// 	echo _T('habillages:accueil_general_logos');
+// 	echo "<br />";
+// 	echo "<br />";
+// 	echo _T('habillages:accueil_general_maintenance');
+// 	echo "<br />";
+// 	echo "<br />";
 	
 	# Etablir les cases qui sont checkees.
 	lire_metas();
@@ -192,6 +190,8 @@ EOF;
 	$checked_skel = "";
 	$able_themes = " disabled";
 	$able_extras = " disabled";
+	$classe = "used";
+	
 	}
 	else {
 	$checked_skel = " checked='checked'";
@@ -228,15 +228,19 @@ EOF;
 	
 	echo generer_url_post_ecrire("config_habillages");
 	debut_boite_info();
-	echo "<div style='background-color:$couleur_claire' class='titre_un'>";
+	echo "<div style='background-color:$couleur_claire' class='titre_un'><br /><strong>";
 	echo _T('habillages:manager_plugin');
-	echo "</div>";
+	echo "</strong><br />&nbsp;</div><br />";
+	echo _T('habillages:intro_select_gestionnaire')."<br /><br />";
 	echo "<input type='checkbox' name='".$gestion_squelettes."' value='".$gestion_squelettes."'$checked_skel> "._T('habillages:squelettes_base_acc')."<br />";
 	echo "<ul>";
-	echo "<input type='checkbox' name='".$gestion_themes."' value='".$gestion_themes."'$checked_themes$able_themes> "._T('habillages:themes_base_acc')."<br />";
-	echo "<input type='checkbox' name='".$gestion_extras."' value='".$gestion_extras."'$checked_extras$able_extras> "._T('habillages:extras_base_acc')."<br />";
+	echo "<div class='".$classe."'>";
+	echo "<input type='checkbox' name='".$gestion_themes."' value='".$gestion_themes."'$checked_themes$able_themes> "._T('habillages:themes_base_acc')."</div>";
+	echo "<div class='".$classe."'>";
+	echo "<input type='checkbox' name='".$gestion_extras."' value='".$gestion_extras."'$checked_extras$able_extras> "._T('habillages:extras_base_acc')."</div>";
 	echo "</ul>";
-	echo "<input type='checkbox' name='".$gestion_logos."' value='".$gestion_logos."'$checked_logos> "._T('habillages:logos_base_acc')."<br />";
+	echo "<div class='used'>";
+	echo "<input type='checkbox' name='".$gestion_logos."' value='".$gestion_logos."'$checked_logos disabled> "._T('habillages:logos_base_acc')."</div>";
 	echo "<input type='checkbox' name='".$gestion_icones."' value='".$gestion_icones."'$checked_icones> "._T('habillages:icones_base_acc')."<br />";
 	fin_boite_info();
 	
@@ -250,6 +254,8 @@ EOF;
 	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
 	echo "</div>";
 	echo "</form>";
+	
+	echo "<a href='".generer_url_ecrire('admin_lang', 'module=habillages')."'>Modifier les textes</a><br /><br />";
 	fin_page();
 
 }

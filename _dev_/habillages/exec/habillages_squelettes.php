@@ -39,7 +39,7 @@ function exec_habillages_squelettes() {
 		ecrire_metas;
 		lire_metas();
 		
-		# Si il y chagement de squelettes, chercher si le squelette a des themes associes. si oui,
+		# Si il y changement de squelettes, chercher si le squelette a des themes associes. si oui,
 		# renseigner un champs meta pour afficher l'onglet "themes".
 		if (_request('statusplug') == "dist") {
 			ecrire_meta('habillages_is_themes', 'oui');
@@ -64,7 +64,28 @@ function exec_habillages_squelettes() {
 			$arbre = $arbre['theme'][0];
 			$squelettes_theme = trim(applatit_arbre($arbre['squelettes']));
 			$prefixe_theme = trim(applatit_arbre($arbre['prefixe']));
+			$prefixe_type = trim(applatit_arbre($arbre['type']));
 			
+			# Si il y a des themes disponibles, on entre le squelettes (qui est aussi egal a son prefixe)
+			# dans une liste de themes dispos afin de pouvoir mettre des icones sur la page squelettes.
+			if ($prefixe_type == "themes") {
+				lire_metas();
+				$liste_themes_meta = $GLOBALS['meta']['habillages_liste_themes'];
+				if (!eregi($squelettes_theme, $liste_themes_meta)) {
+				ecrire_meta('habillages_liste_themes', $liste_themes_meta.",".$squelettes_theme);
+				ecrire_metas;
+				}
+			}
+			# Si il y a des extras disponibles, on entre le squelettes (qui est aussi egal a son prefixe)
+			# dans une liste d'extras dispos afin de pouvoir mettre des icones sur la page squelettes.
+			if ($prefixe_type == "extras") {
+				lire_metas();
+				$liste_extras_meta = $GLOBALS['meta']['habillages_liste_extras'];
+				if (!eregi($squelettes_theme, $liste_extras_meta)) {
+				ecrire_meta('habillages_liste_themes', $liste_extras_meta.",".$squelettes_theme);
+				ecrire_metas;
+				}
+			}
 			if ($nom_theme == $squelettes_theme) {
 				ecrire_meta('habillages_is_themes', 'oui');
 				ecrire_meta('habillages_is_extras', 'oui');
@@ -153,7 +174,27 @@ EOF;
 	debut_gauche();
 	debut_boite_info();
 	
-	habillages_menu_navigation();
+	echo "<div class='intro_grotitre'>";
+	echo _T('habillages:squelettes_titre_boitinfo')."</div><br />";
+	
+	echo "<div class='intro'>";
+	echo _T('habillages:squelettes_intro')."<br /><br />";
+	
+	echo "<div class='intro_titre'>";
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/avance.png' />";
+	echo _T('habillages:squelettes_avance_titre')."</div>";
+	echo _T('habillages:squelettes_avance')."<br /><br />";
+	
+	echo "<div class='intro_titre'>";
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_themes-22.png' />";
+	echo _T('habillages:squelettes_themes_titre')."</div>";
+	echo _T('habillages:squelettes_themes')."<br /><br />";
+	
+	echo "<div class='intro_titre'>";
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_extras-22.png' />";
+	echo _T('habillages:squelettes_extras_titre')."</div>";
+	echo _T('habillages:squelettes_extras')."<br />";
+	echo "</div>";
 	
 	fin_boite_info();
 
@@ -166,23 +207,7 @@ EOF;
 	echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
 	echo _T('habillages:squelettes_titre')."</font></b></td></tr>";
-	echo "<tr><td class='serif' colspan=4>";
-	# Message d'introduction.
-	debut_boite_info();
-	echo "<div class='intro'>";
-	echo _T('habillages:squelettes_intro')."<br /><br />";
-	echo "<div class='intro_titre'>";
-	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
-	echo _T('habillages:squelettes_debutant_titre')."</div>";
-	echo _T('habillages:squelettes_debutant')."<br /><br />";
-	echo "<div class='intro_titre'>";
-	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
-	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
-	echo _T('habillages:squelettes_avance_titre')."</div>";
-	echo _T('habillages:squelettes_avance')."<br />";
-	echo "</div>";
-	fin_boite_info();
-	
+	echo "<tr><td class='serif' colspan=4>";	
 	echo generer_url_post_ecrire("habillages_squelettes");
 		
 		# Squelettes par defaut. On laisse la dist ou le squelette personnalise
@@ -208,7 +233,7 @@ EOF;
 		debut_boite_info();
 		echo "<div style='background-color:$couleur_claire' class='titre_un'>";
 		echo "<input type='radio' name='statusplug' value='dist'$defaut_checked>";
-		echo "<strong>"._T('habillages:squelettes_dist_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+		echo "<strong>"._T('habillages:squelettes_dist_titre')."</strong><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/avance.png' /> | <img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_themes-22.png' /> | <img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_extras-22.png' /><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
 		echo '<div style="float:right";><img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/capture_dist_bw.png" alt="" class="preview" /></div>';
 		echo "<small>"._T('habillages:squelettes_dist_description')."</small><br /><br /><hr>";
 		echo "<div class='auteur'>Collectif.<br />&copy; 2001 - 2006 - Distribue sous licence GNU/GPL</div><hr>";
@@ -231,6 +256,7 @@ EOF;
 			$description_theme = applatit_arbre($arbre['description']);
 			$type_theme = trim(applatit_arbre($arbre['type']));
 			$niveau_theme = trim(applatit_arbre($arbre['niveau']));
+			$prefixe_theme = trim(applatit_arbre($arbre['prefixe']));
 			
 			$nom_dossier_theme = dirname ($fichier);
 			$fichier_plugin_xml = $nom_dossier_theme."/plugin.xml";
@@ -253,29 +279,41 @@ EOF;
 					# Si le niveau de difficulte d'installation du squelette est renseigne, mettre les
 					# icones de difficulte.
 					if ($niveau_theme == "1") {
-						$niveau = "<div style='float:right';><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' /><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' /></div>";
+						$niveau = "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/avance.png' />";
 					}
 					
 					if ($niveau_theme == "0" || $niveau_theme == "") {
-						$niveau = "<div style='float:right';><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' /></div>";
+						$niveau = "";
 					}
 					
 					if (_request('exec')=='habillages_squelettes'){
 						lire_metas();
 						$lire_meta_habillages = array($GLOBALS['meta']['habillages_squelettes']);
 					}
-			
+					
 					if ($lire_meta_habillages[0] == $chemin_plugin_court) {
 						$checked = " checked='checked'";
 					}
 					else {
 						$checked = "";
 					}
-						
+					
 					debut_boite_info();
 					echo "<div style='background-color:$couleur_claire' class='titre_un'>";
 					echo "<input type='radio' name='statusplug' value='$chemin_plugin_court'$checked>";
-					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.")".$niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label></div>";
+					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.") ";
+					
+					lire_metas();
+					$liste_themes = $GLOBALS['meta']['habillages_liste_themes'];
+					if (eregi($prefixe_theme, $liste_themes)) {
+						echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_themes-22.png' /> | ";
+					}
+					$liste_extras = $GLOBALS['meta']['habillages_liste_extras'];
+					if (eregi($prefixe_theme, $liste_extras)) {
+						echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_extras-22.png' /> | ";
+					}
+					
+					echo $niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label></div>";
 					# Laisser la possibilite de definir le nom et le chemin de la capure ecran
 					# dans theme.xml.
 					echo '<div style="float:right";>&nbsp;<br /><img src="'.$chemin_plugin_complet.'/capture.png" alt="" class="preview" /></div>';
@@ -284,7 +322,6 @@ EOF;
 					echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";
 					echo "&nbsp;<small><strong><font COLOR='#".$couleur_txt."'>".$titre_etat."</font></strong></small><br />";
 					fin_boite_info();
-					//habillages_affichage_squelettes($fichier_plugin_xml);
 					echo "</ul>";
 				}
 				

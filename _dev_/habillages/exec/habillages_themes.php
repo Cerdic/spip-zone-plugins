@@ -194,11 +194,11 @@ EOF;
 					# Si le niveau de difficulte d'installation du squelette est renseigne, mettre les
 					# icones de difficulte.
 					if ($niveau_theme == "1") {
-						$niveau = "<div style='float:right';><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' /><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' /></div>";
+						$niveau = "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' /><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
 					}
 					
 					if ($niveau_theme == "0" || $niveau_theme == "") {
-						$niveau = "<div style='float:right';><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' /></div>";
+						$niveau = "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
 					}
 					
 					if (_request('exec')=='habillages_themes'){
@@ -216,7 +216,7 @@ EOF;
 					debut_boite_info();
 					echo "<div style='background-color:$couleur_claire' class='titre_un'>";
 					echo "<input type='radio' name='statusplug' value='$chemin_plugin_court'$checked>";
-					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.")".$niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.") ".$niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
 					# Laisser la possibilite de definir le nom et le chemin de la capure ecran
 					# dans theme.xml.
 					echo '<div style="float:right";><img src="'.$chemin_plugin_complet.'/capture.png" alt="" class="preview" /></div>';
