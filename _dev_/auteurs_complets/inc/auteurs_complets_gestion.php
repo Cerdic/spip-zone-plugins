@@ -2,13 +2,16 @@
 
 include_spip('inc/presentation');
 
+// La fonction qui en appelle une autre et qui va nous modifier notre base de donnee comme on en a envie...
 function auteurs_complets_install(){
 	auteurs_complets_verifier_base();
 }
 
+// La fonction qui désinstallera le plugin proprement... n'existe pas encore...
 function auteurs_complets_uninstall(){
 }
 
+// La fonction qui modifie la base de donnée
 function auteurs_complets_verifier_base(){
 	$version_base = 0.04;
 	$current_version = 0.0;
@@ -16,9 +19,10 @@ function auteurs_complets_verifier_base(){
 	if (   (!isset($GLOBALS['meta']['auteurs_complets_base_version']) )
 		&& (($current_version = $GLOBALS['meta']['auteurs_complets_base_version'])==$version_base))
 	return;
-	
-	// ajout des champs additionnels a la table spip_auteurs
-	// si pas deja existant
+
+// ajout des champs additionnels a la table spip_auteurs
+
+// si pas deja existant
 
 	if ($current_version==0.0){
 		include_spip('base/create');
@@ -47,6 +51,8 @@ function auteurs_complets_verifier_base(){
 			spip_query("ALTER TABLE spip_auteurs ADD `longitude` TEXT NOT NULL AFTER `latitude`");}
 			ecrire_meta('auteurs_complets_base_version',$current_version=$version_base);
 	}
+
+// Si la base existe déjà on la modifie en fonction de la version déjà installée...
 	if ($current_version<0.03){
 		$desc = spip_abstract_showtable("spip_auteurs", '', true);
 		if (!isset($desc['field']['pays'])){
@@ -61,26 +67,36 @@ function auteurs_complets_verifier_base(){
 			spip_query("ALTER TABLE spip_auteurs ADD `organisation` TEXT NOT NULL AFTER `email`");}
 		ecrire_meta('auteurs_complets_base_version',$current_version=0.04);
 	}
+
+// On écris dans les champs meta le numéro de base qui nous permettra d'upgrader le plugin par la suite
 	ecrire_metas();
 }
 
 function auteurs_complets_ajouts()
 {
+
+// A chaque appel on vérifie si la base est correctement installée...
 	auteurs_complets_install();
 
+// On récupère les globales nécessaires
 	global $id_auteur, $redirect, $echec, $initial,
 	  $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
 	
 	$id_auteur = intval($id_auteur);
 
+// On crée un array des données associées à un auteur...
 	$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
-	
+
+// On récupère le fichier qui contient ce dont on a besoin
 	$legender_auteur_supp = charger_fonction('legender_auteur_supp', 'inc');
-	$legender_auteur_supp = $legender_auteur_supp($id_auteur, $auteur, $initial, $echec, $redirect);
 
-	if (_request('var_ajaxcharset')) ajax_retour($legender_auteur_supp);
+// On lui passe en paramètre ce qui nous est nécessaire
+	$legender_auteur_supp_total = $legender_auteur_supp($id_auteur, $auteur, $initial, $echec, $redirect);
 
-	return $legender_auteur_supp;
+	if (_request('var_ajaxcharset')) ajax_retour($legender_auteur_supp_total);
+
+// On balance ce dont on a besoin
+	return $legender_auteur_supp_total;
 }
 
 ?>

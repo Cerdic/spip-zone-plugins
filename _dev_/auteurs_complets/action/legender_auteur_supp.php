@@ -11,7 +11,6 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
 include_spip('inc/filtres');
 include_spip('inc/actions');
 include_spip('inc/acces');
@@ -57,13 +56,12 @@ function action_legender_post_supp($r)
 
 	$auteur = array();
 
+
 	if ($id_auteur) {
 		$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 	}
 
-	  $acces = ($id_auteur == $auteur_session['id_auteur']) ? true : " a voir ";
-
-	// variables sans probleme
+// Récupération des variables nécessaires...
 	$auteur['id_auteur'] = corriger_caracteres($id_auteur);
 	$auteur['nom'] = corriger_caracteres($nom);
 	$auteur['organisation'] = corriger_caracteres($organisation);
@@ -77,19 +75,18 @@ function action_legender_post_supp($r)
 	$auteur['latitude'] = corriger_caracteres($latitude);
 	$auteur['longitude'] = corriger_caracteres($longitude);
 
-		$n = spip_query("UPDATE spip_auteurs SET organisation=" . spip_abstract_quote($auteur['organisation']) . ", telephone=" . spip_abstract_quote($auteur['telephone']) . ", fax=" . spip_abstract_quote($auteur['fax']) . ", skype=" . spip_abstract_quote($auteur['skype']) . ", adresse=" . spip_abstract_quote($auteur['adresse']) . ", codepostal=" . spip_abstract_quote($auteur['codepostal']) . ", ville=" . spip_abstract_quote($auteur['ville']) . ", pays=" . spip_abstract_quote($auteur['pays']) . ", latitude=" . spip_abstract_quote($auteur['latitude']) . ", longitude=" . spip_abstract_quote($auteur['longitude']) . " WHERE id_auteur=".$auteur['id_auteur']);
+// La requete SQL à passer dans la base
+	$n = spip_query("UPDATE spip_auteurs SET organisation=" . spip_abstract_quote($auteur['organisation']) . ", telephone=" . spip_abstract_quote($auteur['telephone']) . ", fax=" . spip_abstract_quote($auteur['fax']) . ", skype=" . spip_abstract_quote($auteur['skype']) . ", adresse=" . spip_abstract_quote($auteur['adresse']) . ", codepostal=" . spip_abstract_quote($auteur['codepostal']) . ", ville=" . spip_abstract_quote($auteur['ville']) . ", pays=" . spip_abstract_quote($auteur['pays']) . ", latitude=" . spip_abstract_quote($auteur['latitude']) . ", longitude=" . spip_abstract_quote($auteur['longitude']) . " WHERE id_auteur=".$auteur['id_auteur']);
 		if (!$n) die('UPDATE');
 	}
-// 	return $n;
+	return $n;
 
-// Si on modifie la fiche auteur, reindexer
+// Si on modifie les données on lance la reindexation
 	if ($nom OR $statut) {
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
 			marquer_indexer('spip_auteurs', $id_auteur);
 		}
-	// ..et mettre a jour les fichiers .htpasswd et .htpasswd-admin
-		ecrire_acces();
 	}
 
 	if ($echec) $echec = '&echec=' . join('@@@', $echec);

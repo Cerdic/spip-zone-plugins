@@ -11,7 +11,6 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_spip('inc/auteurs_complets_gestion');
 
 // http://doc.spip.org/@inc_legender_auteur_dist
 function inc_legender_auteur_supp_dist($id_auteur, $auteur, $mode, $echec='', $redirect='')
@@ -19,35 +18,18 @@ function inc_legender_auteur_supp_dist($id_auteur, $auteur, $mode, $echec='', $r
 	$corps_supp = (($mode < 0) OR !statut_modifiable_auteur_supp($id_auteur, $auteur))
 	? legender_auteur_supp_voir($auteur, $redirect)
 	: legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec, $redirect);
-	
-	return  $redirect ? $corps_supp :
-	  ajax_action_greffe("legender_auteur_supp-$id_auteur", $corps_supp);
 
+	return  $redirect ? $corps_supp : ajax_action_greffe("legender_auteur_supp-$id_auteur", $corps_supp);
 }
 
-// http://doc.spip.org/@legender_auteur_saisir
+// La partie affichage du formulaire...
 function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $redirect=''){
 
 	global $options, $connect_statut, $connect_id_auteur, $connect_toutes_rubriques;
 
 	$corps_supp = '';
 
-	// 	if ($echec){
-	// 
-	// 		foreach (split('@@@',$echec) as $e)
-	// 			$corps_supp .= '<p>' . _T($e) . "</p>\n";
-	// 		
-	// 		$corps_supp = debut_cadre_relief('', true)
-	// 		.  http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='left'")
-	// 		.  "<div style='color: red; left-margin: 5px'>"
-	// 		. $corps_supp
-	// 		. "<p>"
-	// 		.  _T('info_recommencer')
-	// 		.  "</p></div>\n"
-	// 		. fin_cadre_relief(true)
-	// 		.  "\n<p>";
-	// 	}
-
+// Le formulaire en lui meme...
 	$corps_supp .= "<b>"._T('auteurscomplets:entree_organisation')."</b>"
 	. "<br><input type='text' name='organisation' class='formo' value=\"".entites_html($auteur['organisation'])."\" size='40'>\n<p>\n"
 	. "<b>"._T('auteurscomplets:entree_telephone')."</b>"
@@ -69,6 +51,7 @@ function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $red
 	. "<b>"._T('auteurscomplets:entree_longitude')."</b>"
 	. "<br><input type='text' name='longitude' class='formo' value=\"".entites_html($auteur['longitude'])."\" size='40'>\n<p>\n";
 
+// Le bouton de validation...
 	$corps_supp .= "<p />"
 	. "\n<div align='right'>"
 	. "\n<input type='submit' class='fondo' value='"
@@ -77,6 +60,7 @@ function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $red
 
 	$arg = intval($id_auteur) . '/';
 
+// Affichage du formulaire en Ajax qui reprend ce qu'il y a avant ...
 	return "\n<div class='serif'>"
 	. debut_cadre_relief("fiche-perso-24.gif", true, "", _T("auteurscomplets:coordonnees_sup"))
 	. ($redirect
@@ -84,14 +68,14 @@ function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $red
 	   : ajax_action_auteur('legender_auteur_supp', $arg, 'auteur_infos_supp', "id_auteur=$id_auteur&initial=-1&retour=$redirect", $corps_supp))
 	. fin_cadre_relief(true)
 	. '</div>';
-
 }
 
-// http://doc.spip.org/@legender_auteur_voir
+// L'affichage des infos supplémentaires...
 function legender_auteur_supp_voir($auteur, $redirect)
 {
 	global $connect_toutes_rubriques, $connect_statut, $connect_id_auteur, $options,$spip_lang_right ;
 
+// On récupère ce qui nous intéresse...
 	$organisation=$auteur['organisation'];
 	$telephone=$auteur['telephone'];
 	$fax=$auteur['fax'];
@@ -104,12 +88,14 @@ function legender_auteur_supp_voir($auteur, $redirect)
 	$skype = $auteur["skype"];
 	$id_auteur=$auteur['id_auteur'];
 
-	$res .= "<table width='100%' cellpadding='0' border='0' cellspacing='0'>"
+//Debut de l'affichage des données...
+	$res = "<table width='100%' cellpadding='0' border='0' cellspacing='0'>"
 	. "<tr>"
 	. "<td valign='top' width='100%'>"
 	. gros_titre(_T('auteurscomplets:coordonnees_sup'),'',false)
 	. "<div>&nbsp;</div>";
 
+// N'affichons que ce qui existe...
 	if (strlen($organisation) > 2){ $res .= "<div>"._T('auteurscomplets:affiche_organisation')." $organisation </div>";}
 	if (strlen($telephone) > 2){ $res .= "<div>"._T('auteurscomplets:affiche_telephone')." $telephone </div>";}
 	if (strlen($fax) > 2){ $res .= "<div>"._T('auteurscomplets:affiche_fax')." $fax </div>";}
@@ -125,19 +111,22 @@ function legender_auteur_supp_voir($auteur, $redirect)
 	$res .= "</td>"
 	.  "<td>";
 
+//Afficher le bouton d'affichage du formulaire...
 	if (statut_modifiable_auteur_supp($id_auteur, $auteur)) {
 		$ancre = "legender_auteur_supp-$id_auteur";
 		$clic = _T("admin_modifier_auteur_supp");
 		$h = generer_url_ecrire("auteur_infos_supp","id_auteur=$id_auteur&initial=0");
 		if (($_COOKIE['spip_accepte_ajax'] == 1 ) AND !$redirect) {
-		  $evt .= "\nonclick=" . ajax_action_declencheur($h,$ancre);
-		  $h = "<a\nhref='$h$a'$evt>$clic</a>";
+			$evt .= "\nonclick=" . ajax_action_declencheur($h,$ancre);
+			$h = "<a\nhref='$h$a'$evt>$clic</a>";
 		}
 	  $res .= icone($clic, $h, "redacteurs-24.gif", "edit.gif", '', '',true);
 	}
 
+// Fermons tout ca...
 	$res .= "</td></tr></table>";
 
+//Allez on balance tout...
 	return $res;
 }
 
@@ -146,11 +135,11 @@ function statut_modifiable_auteur_supp($id_auteur, $auteur)
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
 
 // on peut se changer soi-meme
-	  return  (($connect_id_auteur == $id_auteur) ||
-  // sinon on doit etre admin
-  // et pas admin restreint pour changer un autre admin ou creer qq
-		(($connect_statut == "0minirezo") &&
-		 ($connect_toutes_rubriques OR 
-		  ($id_auteur AND ($auteur['statut'] != "0minirezo")))));
+	return  (($connect_id_auteur == $id_auteur) ||
+// sinon on doit etre admin
+// et pas admin restreint pour changer un autre admin ou creer qq
+	(($connect_statut == "0minirezo") &&
+	($connect_toutes_rubriques OR 
+	($id_auteur AND ($auteur['statut'] != "0minirezo")))));
 }
 ?>
