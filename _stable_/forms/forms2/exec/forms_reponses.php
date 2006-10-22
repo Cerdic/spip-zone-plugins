@@ -17,7 +17,7 @@ function exec_forms_reponses(){
 	global $supp_reponse;
 	$debut = _request('debut');
   include_spip("inc/presentation");
-  Forms_verifier_base();
+  Forms_install();
 
 	$id_form = intval($id_form);
 

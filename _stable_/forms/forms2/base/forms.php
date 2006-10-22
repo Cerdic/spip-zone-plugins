@@ -10,8 +10,9 @@
  *
  */
 //
-// Formulaires : inc_serialbase
+// Formulaires : tables principales
 //
+global $tables_principales;
 
 $spip_forms = array(
 	"id_form" 	=> "bigint(21) NOT NULL",
@@ -47,7 +48,7 @@ $spip_reponses_key = array(
 	"KEY id_auteur" => "id_auteur",
 	"KEY statut" 	=> "statut, id_form");
 
-global $tables_principales;
+
 $tables_principales['spip_forms'] = array(
 	'field' => &$spip_forms,
 	'key' => &$spip_forms_key);
@@ -56,8 +57,40 @@ $tables_principales['spip_reponses'] = array(
 	'field' => &$spip_reponses,
 	'key' => &$spip_reponses_key);
 
+// Boucle FORMS_CHAMPS
+$formschamp_field = array(
+		"id_form"	=> "bigint(21) NOT NULL",
+		"cle" => "bigint(21) NOT NULL",
+		"champ" => "varchar(100)",
+		"titre" => "text",
+		"type" => "varchar(100)",
+		"obligatoire" => "varchar(3)",
+		"id_groupe" => "bigint(21) NOT NULL",
+);
+$formschamp_key = array(
+	"PRIMARY KEY"	=> "id_form, cle"
+);
+
+$tables_principales['spip_forms_champs'] =
+	array('field' => &$formschamp_field, 'key' => &$formschamp_key);
+
+// Boucle FORMS_CHAMPS_CHOIX
+$formschampchoix_field = array(
+		"id_form"	=> "bigint(21) NOT NULL",
+		"cle" => "bigint(21) NOT NULL",
+		"choix" => "varchar(100) NOT NULL DEFAULT ''",
+		"titre" => "text"
+);
+$formschampchoix_key = array(
+	"PRIMARY KEY"	=> "id_form, cle, choix",
+	"KEY" => "choix"
+);
+
+$tables_principales['spip_forms_champs_choix'] =
+	array('field' => &$formschampchoix_field, 'key' => &$formschampchoix_key);
+
 //
-// Formulaires : inc_aux_base
+// Formulaires : tables auxiliaires
 //
 
 $spip_reponses_champs = array(
@@ -96,5 +129,6 @@ $table_des_tables['forms']='forms';
 $table_des_tables['reponses']='reponses';
 $table_des_tables['reponses_champs']='reponses_champs';
 $table_des_tables['forms_articles']='forms_articles';
-
+$table_des_tables['forms_champs'] = 'forms_champs';
+$table_des_tables['forms_champs_choix'] = 'forms_champs_choix';
 ?>

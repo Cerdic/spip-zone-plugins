@@ -60,9 +60,4 @@ foreach($_COOKIE as $cookie=>$value){
 	}
 }
 
-function forms_creer_tables_temporaires_boucles(){
-	include_spip('base/forms_temporaire');
-	forms_creer_tables_temporaires();
-}
-
 ?>

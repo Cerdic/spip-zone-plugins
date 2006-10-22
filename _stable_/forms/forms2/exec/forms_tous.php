@@ -40,7 +40,7 @@ function exec_forms_tous(){
   include_spip("inc/presentation");
 	include_spip('public/assembler');
 
-  Forms_verifier_base();
+  Forms_install();
 	Forms_duplique_form();
 	
 	debut_page(_T("forms:tous_formulaires"), "documents", "forms");

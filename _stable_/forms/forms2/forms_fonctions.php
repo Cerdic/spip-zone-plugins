@@ -11,7 +11,7 @@
  *
  */
 
-	include_spip('base/forms_temporaire');
+	include_spip('base/forms');
 	
 	//
 	// Afficher le diagramme de resultats d'un sondage
@@ -109,17 +109,6 @@ function balise_RESULTATS_SONDAGE($p) {
 	$p->statut = 'html';
 	return $p;
 }
-
-/*function boucle_FORMS_dist($id_boucle, &$boucles) {
-	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] =  "spip_forms";
-	$boucle->hash = '
-	// CREER les table temporaire forms_champs et forms_champs_choix
-	forms_creer_tables_temporaires_boucles();
-';
-	return calculer_boucle($id_boucle, $boucles); 
-}*/
 
 function forms_valeur($tableserialisee,$cle,$defaut=''){
 	$t = unserialize($tableserialisee);
