@@ -23,7 +23,7 @@ function gerer_deplacements($deplacements){
 			$cible=explode("-",$mouvement[1]);
 			if (in_array($quoi[0],array('article','rubrique')) && $cible[0]=='rubrique'){
 				$id_quoi=intval($quoi[1]);$id_cible=intval($cible[1]);
-				if ($quoi[0]=='article')
+				if (($quoi[0]=='article')&&($id_cible!=0))
 					spip_query("UPDATE spip_articles SET id_rubrique=".spip_abstract_quote($id_cible)." WHERE id_article=".spip_abstract_quote($id_quoi));
 				if ($quoi[0]=='rubrique')
 					spip_query("UPDATE spip_rubriques SET id_parent=".spip_abstract_quote($id_cible)." WHERE id_rubrique=".spip_abstract_quote($id_quoi));
@@ -351,7 +351,7 @@ function afficher_rubriques_filles($id_parent, $flag_trad) {
 
 	if ($id_parent==0){
 		$titre = "Racine";
-		echo "<ul id='myTree'><li class='treeItem racine'>",
+		echo "<ul id='myTree'><li id='rubrique-0' class='treeItem racine'>",
 		"<span class='textHolder icone'>&nbsp;</span>$titre",
 		"\n<ul class='plan-rubrique'>\n";
 	}

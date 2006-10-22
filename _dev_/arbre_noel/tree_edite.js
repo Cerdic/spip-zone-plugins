@@ -11,6 +11,7 @@ jQuery.fn.deplie = function(){
 	$(this).show();
 	$('img.expandImage',$(this).parent()).eq(0).attr('src',img_deplierbas);
 	recall = true;
+							jQuery.recallDroppables();
 }
 
 $(document).ready(
@@ -41,7 +42,7 @@ $(document).ready(
 				accept			: 'treeItem',
 				hoverclass		: 'none',
 				activeclass		: 'fakeClass',
-				tollerance		: 'pointer',
+				tollerance		: 'intersect',
 				onhover			: function(dragged)
 				{
 					$(this).parent().addClass('selected');
@@ -60,7 +61,6 @@ $(document).ready(
 						subbranch=$('ul', this.parentNode).eq(0);
 						subbranch.unpause();
 						if (recall){
-							jQuery.recallDroppables();
 							recall=false;
 						}
 					}
@@ -101,7 +101,9 @@ $(document).ready(
 		);
 		$('li.treeItem').Draggable(
 			{
-				revert		: true
+				revert		: true,
+				ghosting : true,
+				autoSize : true
 			}
 		);
 	}
