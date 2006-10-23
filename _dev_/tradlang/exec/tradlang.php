@@ -187,6 +187,7 @@ function tradlang_importermodule2()
   echo "<span style='float:left;width:150px;padding-left:10px;'>".propre(_T('tradlang:languemere'))."</span>";  	
   echo "<select name='languemere'>\n";
   $opts = array();
+  $ficnok = array();
   foreach($modok as $cle=>$item)
     {
       if (strncmp($cle, "langue_", 7) == 0)
@@ -196,11 +197,25 @@ function tradlang_importermodule2()
 	  if ($lg == "fr")
 	    $sel = " selected ";
 	  $opts[] =  "<option  value='".$lg."' ".$sel.">".traduire_nom_langue($lg)."</option>\n";
+
+	  // test si fichier inscriptible
+	  $fic = $modok["dir_lang"]."/".$item;
+	  if (!$fd = @fopen($fic, "a"))
+	    $ficnok[] = $fic;
+	  else
+	    fclose($fd);
 	}      
     }
-  sort($opts);
   echo implode("", $opts);
   echo "</select>\n";
+
+  if (count($ficnok))
+    {
+      echo "<br><br>\n";
+      echo propre(_T("tradlang:attentionimport"));
+      echo "<br><br>".implode("<br>", $ficnok)."\n";
+    }
+
   echo "<br>\n";
   echo "<br>\n";
 
@@ -400,6 +415,7 @@ function tradlang_renseignebase($module)
       if ($lg == $lang_mere)
 	$orig = 1;
 
+      // sauvegarde le fichier dans la base
       echo propre(_T('tradlang:insertionlangue')." : ".$lg."...");
       $nom_fichier = $dir_lang."/".$fichier;
       include($nom_fichier);
@@ -423,6 +439,14 @@ function tradlang_renseignebase($module)
       ob_flush();
 
       unset($GLOBALS[$GLOBALS['idx_lang']]);
+
+      // si le fichier est inscriptible, on sauvegarde le
+      // fichier depuis la base afin de tagguer le timestamp
+      if ($fd = @fopen($nom_fichier, "a"))
+	{
+	  fclose($fd);
+	  tradlang_sauvegarde($module, $lg);
+	}
     }
 
   return true;

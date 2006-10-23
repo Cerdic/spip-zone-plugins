@@ -37,25 +37,26 @@
  */
 function tradlang_lirelang($module, $langue, $type="")
 {
+  $prefix = $GLOBALS['table_prefix'];
   $ret = array();
 
   if ($type=="md5")
     {
-      $quer = "SELECT id,md5 FROM trad_lang ".
+      $quer = "SELECT id,md5 FROM ".$prefix."_tradlang ".
 	"WHERE module='".$nom_mod."' AND lang='".$lang_orig."' AND !ISNULL(md5)";
-      $res = mysql_query($quer);
-      while($row = mysql_fetch_assoc($res))
+      $res = spip_query($quer);
+      while($row = spip_fetch_array($res))
 	$ret[$row["id"]] = $row["md5"];
     }
   else
     {
       $nom_mod = $module["nom_mod"];
       
-      $quer = "SELECT id,str,status FROM trad_lang ".
+      $quer = "SELECT id,str,status FROM ".$prefix."_tradlang ".
 	"WHERE module = '".$nom_mod."' AND lang='".$langue."' ORDER BY id";
 
       $res = spip_query($quer);
-      while($row = spip_fetch_row($res))
+      while($row = spip_fetch_array($res))
 	{
 	  if ($row["status"] != "")
 	    $statut = "<".$row["status"].">";
@@ -63,6 +64,15 @@ function tradlang_lirelang($module, $langue, $type="")
 	    $statut = "";
 	  $ret[$row["id"]] = $statut.$row["str"];
 	}
+
+      // initialise la chaine de tag timestamp sauvegarde
+      $quer = "SELECT MAX(ts) as ts FROM ".$prefix."_tradlang ".
+	"WHERE module = '".$nom_mod."' AND lang='".$langue."'";
+      $res = spip_query($quer);
+      $row = spip_fetch_array($res);
+      $ts = $row["ts"];
+
+      $ret["zz_timestamp_nepastraduire"] = $ts;
     }
 
   return $ret;
@@ -74,15 +84,16 @@ function tradlang_lirelang($module, $langue, $type="")
 // sauver doivent etre passes en parametre
 function tradlang_sauvegarde($module, $langue)
 {
+  $prefix = $GLOBALS['table_prefix'];
+
   // Debut du fichier de langue
   $lang_prolog = "<"."?php\n\n// This is a SPIP language file  --  Ceci est un fichier langue de SPIP\n\n";
   // Fin du fichier de langue
   $lang_epilog = "\n\n?".">\n";
 
-  $fic_exp = $module["dir_lang"]."/".$module["langue_".$langue];
-
+  $fic_exp = $module["dir_lang"]."/".$module["langue_".$langue].".toto";
   $tab = array();
-  $conflit = array();  // A CHANGER
+  $conflit = array();  
   $tab = tradlang_lirelang($module, $langue);
 
   ksort($tab);

@@ -6,6 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 				       'ajouterlangue' => 'Ajouter une langue',
 				       'ajoutercode' => 'Ajouter',
+				       'attentionimport' => 'Attention ! Les fichiers suivants doivent &ecirc;tre accessibles en &eacute;criture. S\'ils ne le sont pas, l\'import fonctionnera mais vous ne pourrez pas les resynchroniser plus tard (vous pouvez cependant ne les rendre inscriptible qu\'au moment de la synchronisation).',
 				       'aucunmodule' => 'Aucun module.',
 
 				       'changerrepertoire' => 'Changer',
@@ -42,8 +43,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 				       'repertoirelangue' => 'Choix du r&eacute;pertoire langue',
 				       'repertoirelangue2' => 'R&eacute;pertoire langue',
 
+				       'synchro' => 'Synchro ?',
+				       
 				       'tablenoncreee' => 'Les tables sp&eacute;cifiques &agrave; l\'utilisation de ce module ne sont pas cr&eacute;&eacute;es dans la base de donn&eacute;es.',
 				       'tradlang' => 'Trad-Lang',
+				       'traducok' => 'Trd. OK',
+				       'traducnok' => 'Trd. NOK',
 				       'traductions' => 'Traductions',
 
 				       'visumodule' => 'R&eacute;sum&eacute; du module'
