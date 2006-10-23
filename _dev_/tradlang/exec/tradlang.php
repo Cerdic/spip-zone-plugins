@@ -305,23 +305,56 @@ function tradlang_visumodule()
   fin_cadre_relief();
 
   debut_cadre_relief("", false, "", _T('tradlang:traductions'));
-  fin_cadre_relief();
-  /*
-  echo "<span style='float:left;width:150px;padding-left:10px;'>".propre(_T('tradlang:languemere'))."</span>";  	
-  echo "<select name='languemere'>\n";
-  $opts = array();
-  foreach($modok as $cle=>$item)
+
+  // recupere la liste des traductions dans la base
+  // et sur le disque
+  $modules2 = tradlang_getmodules_fics($modok["dir_lang"]);
+  $modok2 = $modules2[$module];
+
+  // union entre modok et modok2
+   foreach($modok2 as $cle=>$item)
     {
       if (strncmp($cle, "langue_", 7) == 0)
 	{
 	  $sel = "";
 	  $lg = substr($cle,7);
-	  if ($lg == "fr")
-	    $sel = " selected ";
-	  $opts[] =  "<option  value='".$lg."' ".$sel.">".traduire_nom_langue($lg)."</option>\n";
+	  if (!array_key_exists($lg, $modok))
+	    {
+	      $modok["langue_".$lg] = $item;
+	    }
 	}      
     }
-  sort($opts);
+   
+   // imprime la table des langues
+  echo "<table cellspacing=2 cellpadding=3 border=0>\n";
+  echo "<tr>";
+  echo "<th>&nbsp;</th>\n";
+  echo "<th style='border:1px solid black;'>".propre(_T('tradlang:synchro'))."</th>\n";
+  echo "<th style='border:1px solid black;'>".propre(_T('tradlang:traducok'))."</th>\n";
+  echo "<th style='border:1px solid black;'>".propre(_T('tradlang:traducnok'))."</th>\n";
+  echo "</tr>\n";
+   foreach($modok as $cle=>$item)
+     {
+       if (strncmp($cle, "langue_", 7) == 0)
+	 {
+	   $sel = "";
+	   $lg = substr($cle,7);	  
+	   echo "<tr>\n";
+	   echo "<td><a href='.'>".traduire_nom_langue($lg)." ($lg) </a></td>";
+	   echo "<td style='border:1px solid black;'>&nbsp;</td>\n";
+	   echo "<td style='border:1px solid black;'>&nbsp;</td>\n";
+	   echo "<td style='border:1px solid black;'>&nbsp;</td>\n";
+	   echo "</tr>\n";	  
+	 }
+     }
+   echo "</table>";
+     
+  fin_cadre_relief();
+  /*
+  echo "<span style='float:left;width:150px;padding-left:10px;'>".propre(_T('tradlang:languemere'))."</span>";  	
+  echo "<select name='languemere'>\n";
+  $opts = array();
+y  sort($opts);
   echo implode("", $opts);
   echo "</select>\n";
   echo "<br>\n";
