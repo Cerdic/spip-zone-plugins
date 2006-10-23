@@ -8,8 +8,10 @@
 
 	<div>
 	<h4><:entree_infos_perso:></h4>
-	<label><:entree_nom_pseudo:></label><br/>
-	<span><input type='text' name='nom' class='fondl' value="[(#NOM)]" size='40'></span><br/>
+	<label><:auteurscomplets:entree_nom_famille:></label><br/>
+	<span><input type='text' name='nom_famille' class='fondl' value="[(#NOM_FAMILLE)]" size='40'></span><br/>
+	<label><:auteurscomplets:entree_prenom:></label><br/>
+	<span><input type='text' name='prenom' class='fondl' value="[(#PRENOM)]" size='40'></span><br/>
 	<label><:entree_adresse_email:></label><br/>
 	<span><input type='text' name='email' class='fondl' value="[(#EMAIL)]" size='40'></span><br/>
 	<label><:auteurscomplets:entree_telephone:></label><br/>
@@ -55,7 +57,7 @@
 	<span><input type='password' name='new_pass' class='fondl' value="" size='40'></span><br/>
 	<label><:info_confirmer_passe:></label><br />
 	<span><input type='password' name='new_pass2' class='fondl' value="" size='40'></span><br/>
-	<div class="spip_bouton"><input type="submit" name="valider_auteur" value="<:previsualiser:>" /></div>
+	<div class="spip_bouton"><input type="submit" name="valider_auteur" value="<:valider:>" /></div>
 </BOUCLE_AUTEUR>
 	</div>
 	</fieldset>

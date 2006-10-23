@@ -30,7 +30,8 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 	$auteur=unserialize(get_auteur_infos($id_auteur_session));
 
 	$id_auteur = _request('id_auteur');
-	$nom = _request('nom');
+	$nom_famille = _request('nom_famille');
+	$prenom = _request('prenom');
 	$email = _request('email');
 	$telephone = _request('telephone');
 	$fax = _request('fax');
@@ -91,9 +92,11 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 
 		// Modifier l'auteur dans la base
 		$query = "UPDATE spip_auteurs SET $query_pass2
-			nom='".addslashes($nom)."',
+			nom='".addslashes($prenom)." ".addslashes($nom_famille)."',
 			bio='".addslashes($bio)."',
 			email='".addslashes($email)."',
+			nom_famille='".addslashes($nom_famille)."',
+			prenom='".addslashes($prenom)."',
 			organisation='".addslashes($organisation)."',
 			url_organisation='".addslashes($url_organisation)."',
 			telephone='".addslashes($telephone)."',
@@ -184,7 +187,8 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 			array(
 				'previsu' => $previsu,
 				'id_auteur' => $id_auteur,
-				'nom' => $nom,
+				'nom_famille' => $nom_famille,
+				'prenom' => $prenom,
 				'email' => $email,
 				'organisation' => $organisation,
 				'url_organisation' => $url_organisation,
@@ -211,7 +215,8 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 		return array('formulaire_profile', 0,
 		array(
 				'id_auteur' => $id_auteur,
-				'nom' => $nom,
+				'nom_famille' => $nom_famille,
+				'prenom' => $prenom,
 				'email' => $email,
 				'organisation' => $organisation,
 				'url_organisation' => $url_organisation,

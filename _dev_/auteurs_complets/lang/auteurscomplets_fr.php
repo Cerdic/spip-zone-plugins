@@ -11,6 +11,8 @@
      **/
 
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
+	'entree_nom_famille' => 'Votre nom de famille',
+	'entree_prenom' => 'Votre pr&eacute;nom',
 	'entree_organisation' => 'Votre organisation / entreprise / association',
 	'entree_url_organisation' => 'URL de votre organisation / entreprise / association',
 	'entree_telephone' => 'Votre num&eacute;ro de t&eacute;l&eacute;phone',

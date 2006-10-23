@@ -13,7 +13,7 @@ function auteurs_complets_uninstall(){
 
 // La fonction qui modifie la base de donnée
 function auteurs_complets_verifier_base(){
-	$version_base = 0.05;
+	$version_base = 0.06;
 	$current_version = 0.0;
 
 	if (   (!isset($GLOBALS['meta']['auteurs_complets_base_version']) )
@@ -29,8 +29,12 @@ function auteurs_complets_verifier_base(){
 		include_spip('base/abstract_sql');
 		creer_base();
 		$desc = spip_abstract_showtable("spip_auteurs", '', true);
+		if (!isset($desc['field']['nom_famille'])){
+			spip_query("ALTER TABLE spip_auteurs ADD `nom_famille` TEXT NOT NULL AFTER `email`");}
+		if (!isset($desc['field']['prenom'])){
+			spip_query("ALTER TABLE spip_auteurs ADD `prenom` TEXT NOT NULL AFTER `nom_famille`");}
 		if (!isset($desc['field']['organisation'])){
-			spip_query("ALTER TABLE spip_auteurs ADD `organisation` TEXT NOT NULL AFTER `email`");}
+			spip_query("ALTER TABLE spip_auteurs ADD `organisation` TEXT NOT NULL AFTER `prenom`");}
 		if (!isset($desc['field']['url_organisation'])){
 			spip_query("ALTER TABLE spip_auteurs ADD `url_organisation` TEXT NOT NULL AFTER `organisation`");}
 		if (!isset($desc['field']['telephone'])){
@@ -74,6 +78,14 @@ function auteurs_complets_verifier_base(){
 		if (!isset($desc['field']['url_organisation'])){
 			spip_query("ALTER TABLE spip_auteurs ADD `url_organisation` TEXT NOT NULL AFTER `organisation`");}
 		ecrire_meta('auteurs_complets_base_version',$current_version=0.05);
+	}
+	if ($current_version<0.06){
+		$desc = spip_abstract_showtable("spip_auteurs", '', true);
+		if (!isset($desc['field']['nom_famille'])){
+			spip_query("ALTER TABLE spip_auteurs ADD `nom_famille` TEXT NOT NULL AFTER `email`");}
+		if (!isset($desc['field']['prenom'])){
+			spip_query("ALTER TABLE spip_auteurs ADD `prenom` TEXT NOT NULL AFTER `nom_famille`");}
+		ecrire_meta('auteurs_complets_base_version',$current_version=0.06);
 	}
 
 // On écris dans les champs meta le numéro de base qui nous permettra d'upgrader le plugin par la suite

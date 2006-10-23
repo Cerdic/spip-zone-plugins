@@ -30,7 +30,11 @@ function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $red
 	$corps_supp = '';
 
 // Le formulaire en lui meme...
-	$corps_supp .= "<b>"._T('auteurscomplets:entree_organisation')."</b>"
+	$corps_supp .= "<b>"._T('auteurscomplets:entree_nom_famille')."</b>"
+	. "<br><input type='text' name='nom_famille' class='formo' value=\"".entites_html($auteur['nom_famille'])."\" size='40'>\n<p>\n"
+	. "<b>"._T('auteurscomplets:entree_prenom')."</b>"
+	. "<br><input type='text' name='prenom' class='formo' value=\"".entites_html($auteur['prenom'])."\" size='40'>\n<p>\n"
+	. "<b>"._T('auteurscomplets:entree_organisation')."</b>"
 	. "<br><input type='text' name='organisation' class='formo' value=\"".entites_html($auteur['organisation'])."\" size='40'>\n<p>\n"
 	. "<b>"._T('auteurscomplets:entree_url_organisation')."</b>"
 	. "<br><input type='text' name='url_organisation' class='formo' value=\"".entites_html($auteur['url_organisation'])."\" size='40'>\n<p>\n"
@@ -78,6 +82,8 @@ function legender_auteur_supp_voir($auteur, $redirect)
 	global $connect_toutes_rubriques, $connect_statut, $connect_id_auteur, $options,$spip_lang_right ;
 
 // On récupère ce qui nous intéresse...
+	$nom_famille=$auteur['nom_famille'];
+	$prenom=$auteur['prenom'];
 	$organisation=$auteur['organisation'];
 	$url_organisation=$auteur['url_organisation'];
 	$telephone=$auteur['telephone'];
@@ -99,6 +105,10 @@ function legender_auteur_supp_voir($auteur, $redirect)
 	. "<div>&nbsp;</div>";
 
 // N'affichons que ce qui existe...
+	if ($prenom || $nom) $res .= "<div>";
+	if (strlen($prenom) > 2){ $res .= "<div>"._T('auteurscomplets:affiche_nom_complet')." $prenom";}
+	if (strlen($nom_famille) > 2){ $res .= " $nom_famille </div>";}
+	if ($prenom || $nom) $res .= "</div>";
 	if ($url_organisation) {
 		if (!$organisation) $organisation = _T('auteurscomplets:affiche_organisation');
 		$res .= propre(_T('auteurscomplets:affiche_organisation')." [{{".$organisation."}}->".$url_organisation."]");
