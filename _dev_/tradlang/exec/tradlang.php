@@ -1,5 +1,8 @@
 <?php
 
+$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+define('_DIR_PLUGIN_TRADLANG',(_DIR_PLUGINS.end($p)));
+
 include_spip("inc/presentation");
 include("tradlang_popup.php");
 
@@ -360,7 +363,10 @@ function tradlang_visumodule()
 	   $lg = substr($cle,7);	  
 	   echo "<tr>\n";
 	   echo "<td><a href='.'>".traduire_nom_langue($lg)." ($lg) </a></td>";
-	   echo "<td style='border:1px solid black;'>&nbsp;</td>\n";
+	   if (tradlang_testesynchro($modok, $lg))
+	     echo "<td style='border:1px solid black;'><img src='"._DIR_PLUGIN_TRADLANG."/../img_pack/vert.gif'></td>\n";
+	   else
+	     echo "<td style='border:1px solid black;'><img src='"._DIR_PLUGIN_TRADLANG."/../img_pack/rouge.gif'></td>\n";
 	   echo "<td style='border:1px solid black;'>&nbsp;</td>\n";
 	   echo "<td style='border:1px solid black;'>&nbsp;</td>\n";
 	   echo "</tr>\n";	  
@@ -382,6 +388,35 @@ y  sort($opts);
 
 
   return true;
+}
+
+
+// teste la synchro de la langue pour le module
+// regarde si le timestamp max dans la base est
+// egal a celui du fichier
+function tradlang_testesynchro($module, $langue)
+{
+  $prefix = $GLOBALS['table_prefix'];
+
+  $nom_module = $module["nom_module"];
+  $nom_mod = $module["nom_mod"];
+  $dir_lang = $module["dir_lang"];
+
+  // lit le timestamp fichier
+  $fic = $dir_lang."/".$module["langue_".$langue];
+  include($fic);
+  $chs = $GLOBALS[$GLOBALS['idx_lang']];
+  $tsf = $chs["zz_timestamp_nepastraduire"];
+  unset($GLOBALS[$GLOBALS['idx_lang']]);
+
+  // lit le timestamp  base
+  $quer = "SELECT MAX(ts) as ts FROM ".$prefix."_tradlang ".
+    "WHERE module = '".$nom_mod."' AND lang='".$langue."'";
+  $res = spip_query($quer);
+  $row = spip_fetch_array($res);
+  $tsb = $row["ts"];
+
+  return ($tsb == $tsf);
 }
 
 
