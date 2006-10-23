@@ -5,7 +5,7 @@
 	[<div class="Buddy" style="float:right">
 		<a href="#URL_SITE"><img src="(#LOGO_AUTEUR||image_reduire{48,48}|extraire_attribut{src})" alt="#NOM" class="logo" height="48" width="48"></a>
 	</div>]
-	<strong><span class="fn"><span class="given-name">#PRENOM</span> <span class="family-name" >#NOM_FAMILLE</span></span></strong>
+	[<strong><span class="fn">(#NOM_FAMILLE|?{' ',#NOM})<strong><span class="fn"><span class="given-name">#PRENOM</span> <span class="family-name" >#NOM_FAMILLE</span></span></strong></span></strong>]
 	[<p><span class="adr">
 	[<span class="street-address">(#ADRESSE)</span><br />]
 	[<span class="postal-code">(#CODEPOSTAL)</span>]

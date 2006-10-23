@@ -1,11 +1,11 @@
 #CACHE{0}
-<BOUCLE_AUTEUR(AUTEURS){id_auteur}>
+<BOUCLE_AUTEUR(AUTEURS){tout}{id_auteur}>
 <div class="vcard">
 <h3><:auteurscomplets:id_card:></h3>
 	[<div class="Buddy" style="float:right">
 		<a href="#URL_SITE"><img src="(#LOGO_AUTEUR||image_reduire{48,48}|extraire_attribut{src})" alt="#NOM" class="logo" height="48" width="48"></a>
 	</div>]
-	<strong><span class="fn"><span class="given-name">#PRENOM</span> <span class="family-name" >#NOM_FAMILLE</span></span></strong>
+	[<strong><span class="fn">(#NOM_FAMILLE|?{' ',#NOM})<strong><span class="fn"><span class="given-name">#PRENOM</span> <span class="family-name" >#NOM_FAMILLE</span></span></strong></span></strong>]
 	[<p><span class="adr">
 	[<span class="street-address">(#ADRESSE)</span><br />]
 	[<span class="postal-code">(#CODEPOSTAL)</span>]

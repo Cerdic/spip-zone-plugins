@@ -49,6 +49,9 @@
 	'website' => 'Website :',
 	'vos_articles' => 'Vos Articles :',
 
+// Pour le formulaire profil
+	'error_bad_user' => 'Vous ne correspondez pas &agrave; cet auteur, vous ne pouvez donc pas le modifier ...',
+
 	'Z' => 'ZZzZZzzz'
 
 );

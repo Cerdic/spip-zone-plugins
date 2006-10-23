@@ -1,5 +1,5 @@
 #CACHE{0}
-<BOUCLE_auteur_principal(AUTEURS) {id_auteur}>
+<BOUCLE_auteur_principal(AUTEURS){tout}{id_auteur}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
@@ -28,8 +28,8 @@
 
 			[<div class="texte">(#BIO)</div><br />]
 			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
-
-			[(#MODELE{editer_profil}{id_auteur=#SESSION{id_auteur}}{cache=0})]
+			[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' '})[(#MODELE{editer_profil}{id_auteur=#SESSION{id_auteur}}{cache=0})]]
+			[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{'',' '})[(#MODELE{id_card_complete}{id_auteur})]<br /><:auteurscomplets:error_bad_user:>]
 
 		</div><!-- fin contenu -->
 
