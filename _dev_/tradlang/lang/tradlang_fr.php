@@ -50,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 				       'traducok' => 'Trd. OK',
 				       'traducnok' => 'Trd. NOK',
 				       'traductions' => 'Traductions',
+				       'traduire' => 'Traduire',
 
 				       'visumodule' => 'R&eacute;sum&eacute; du module'
        

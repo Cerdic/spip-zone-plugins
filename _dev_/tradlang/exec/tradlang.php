@@ -260,6 +260,10 @@ function tradlang_importermodule3()
 
   tradlang_renseignebase($modok);
 
+  echo "<br><form action='".generer_url_ecrire("tradlang")."&operation=visumodule&module=".$modok["nom_mod"]."' method='post' name='tradlang2'>\n";
+  echo "<input type='submit' class='fondo' value='"._T("tradlang:traduire")."'>";
+  echo "</form>";
+      
   fin_cadre_relief();
 }
 
