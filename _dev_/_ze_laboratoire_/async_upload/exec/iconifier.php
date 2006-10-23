@@ -53,6 +53,8 @@ function exec_iconifier_dist()
 	
 	if(_request("iframe")=="iframe") {
     $ret = "<div class='upload_answer upload_document_added'>$ret</div>";
+    echo $ret;
+    die;
   }
   ajax_retour($ret);
 }
