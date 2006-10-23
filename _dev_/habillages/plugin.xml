@@ -17,6 +17,9 @@ _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	dev
 	</etat>
+	<options>
+	habillages_options.php
+	</options>
 	<description>
 Gestionnaire d'habillages SPIP.
 	</description>
