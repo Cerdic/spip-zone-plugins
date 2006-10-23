@@ -62,16 +62,16 @@ $tables_principales['spip_reponses'] = array(
 // Boucle FORMS_CHAMPS
 $formschamp_field = array(
 		"id_form"	=> "bigint(21) NOT NULL",
-		"cle" => "bigint(21) NOT NULL",
 		"champ" => "varchar(100)",
+		"cle" => "bigint(21) NOT NULL",
 		"titre" => "text",
 		"type" => "varchar(100)",
 		"obligatoire" => "varchar(3)",
-		"id_groupe" => "bigint(21) NOT NULL",
+		"extra_info" => "text", // une info supplementaire par champ a utiliser librement ex : type mot->id_groupe, type url->verif, type fichier -> taille
 );
 $formschamp_key = array(
-	"PRIMARY KEY"	=> "id_form, cle",
-	"KEY" => "champ"
+	"PRIMARY KEY"	=> "id_form, champ",
+	"KEY" => "cle"
 );
 
 $tables_principales['spip_forms_champs'] =
@@ -80,12 +80,12 @@ $tables_principales['spip_forms_champs'] =
 // Boucle FORMS_CHAMPS_CHOIX
 $formschampchoix_field = array(
 		"id_form"	=> "bigint(21) NOT NULL",
-		"cle" => "bigint(21) NOT NULL",
+		"champ" => "varchar(100)",
 		"choix" => "varchar(100) NOT NULL DEFAULT ''",
 		"titre" => "text"
 );
 $formschampchoix_key = array(
-	"PRIMARY KEY"	=> "id_form, cle, choix",
+	"PRIMARY KEY"	=> "id_form, champ, choix",
 	"KEY" => "choix"
 );
 

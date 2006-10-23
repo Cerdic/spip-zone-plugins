@@ -259,6 +259,16 @@
 		return $s;
 	}
 
+	function Forms_liste_types_champs(){
+		return array('ligne', 'texte', 'email', 'url', 'select', 'multiple', 'fichier', 'mot','separateur','textestatique');
+	}
+	function Forms_type_champ_autorise($type) {
+		static $t;
+		if (!$t) {
+			$t = array_flip(Forms_liste_types_champs());
+		}
+		return isset($t[$type]);
+	}
 	function Forms_nom_type_champ($type) {
 		static $noms;
 		if (!$noms) {
@@ -276,14 +286,6 @@
 			);
 		}
 		return ($s = $noms[$type]) ? $s : $type;
-	}
-
-	function Forms_types_champs_autorises($type = '') {
-		static $t;
-		if (!$t) {
-			$t = array_flip(array('ligne', 'texte', 'url', 'email', 'select', 'multiple', 'fichier', 'mot','separateur','textestatique'));
-		}
-		return $type ? isset($t[$type]) : $t;
 	}
 
 	function Forms_generer_mail_reponse_formulaire($id_form, $id_reponse, $env){
@@ -391,7 +393,7 @@
 				}
 			}
 			if ($type == 'url') {
-				if ($row2['verif'] == 'oui') {
+				if ($row2['extra_info'] == 'oui') {
 					include_spip("inc/sites");
 					if (!recuperer_page($val)) {
 						$erreur[$code] = _T("forms:site_introuvable");
