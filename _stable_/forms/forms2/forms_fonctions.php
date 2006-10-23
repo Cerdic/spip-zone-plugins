@@ -42,7 +42,7 @@
 			// Construire la liste des valeurs autorisees pour le champ
 			$liste = array();
 			if ($row2['type'] != 'mot'){
-				$res3 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE cle="._q($row2['cle']));
+				$res3 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE champ="._q($row2['champ']));
 				while ($row3=spip_fetch_array($res3))
 					$liste[$row3['choix']] = $row3['titre'];
 			}

@@ -40,7 +40,7 @@ function Forms_bloc_routage_mail($id_form,$email){
 		$res2 = spip_query("SELECT * FROM spip_forms_champs WHERE type='select' AND id_form="._q($id_form));
 		while ($row2 = spip_fetch_array($res2)) {
 			$visible = false;
-			$code = $$row2['champ'];
+			$code = $row2['champ'];
 			$options .= "<option value='$code'";
 			if ($email['route'] == $code){
 				$options .= " selected='selected'";
@@ -314,61 +314,67 @@ function Forms_bloc_edition_champ($row, $link) {
 	return $out;
 }
 
-function modif_edition_champ($t) {
-	$type = $t['type'];
-	$type_ext = &$t['type_ext'];
-	$code = $t['code'];
-	
-	if ($type == 'url') {
-		global $champ_verif;
-		if ($champ_verif) $t['verif'] = $champ_verif;
-		else unset($t['verif']);
-	}
-	if ($type == 'select' || $type == 'multiple') {
-		global $ajout_choix, $supp_choix;
-		if ($ajout_choix) {
-			$n = 1;
-			$code_choix = $code.'_'.$n;
-			while (isset($type_ext[$code_choix]))
-				$code_choix = $code.'_'.(++$n);
-			$type_ext[$code_choix] = _T("forms:nouveau_choix");
-			include_spip('inc/charset');
-			$type_ext[$code_choix] = unicode2charset(html2unicode($type_ext[$code_choix]));
-			$ajout_choix = $code_choix;
-		}
-		foreach ($type_ext as $code_choix => $nom_choix) {
-			if (isset($GLOBALS[$code_choix]))
-				$type_ext[$code_choix] = $GLOBALS[$code_choix];
-		}
-		/*if ($supp_choix) {
-			unset($type_ext[$supp_choix]);
-		}*/
-	}
+function Forms_modif_edition_champ($id_form,$champ) {
+	$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($champ));
+	$type = $row['type'];
+	$extra_info = "";
+	if ($type == 'url')
+		if ($champ_verif=_request('champ_verif')) $extra_info = $champ_verif;
 	if ($type == 'mot') {
-		if ($id_groupe = intval($GLOBALS['groupe_champ']))
-			$type_ext['id_groupe'] = $id_groupe;
+		if ($id_groupe = intval(_request('groupe_champ')))
+			$extra_info = $id_groupe;
 	}
 	if ($type == 'fichier') {
-		$type_ext['taille'] = intval($GLOBALS['taille_champ']);
+		$extra_info = intval(_request('taille_champ'));
 	}
-	
-	return $t;
-}
-
-function code_nouveau_champ($structure,$type){
-	$n = 1;
-	$code = $type.'_'.strval($n);
-	foreach ($structure as $t) {
-		list($letype, $lenumero) = split('_', $t['code'] );
-		if ($type == $letype)
-		{
-			$lenumero = intval($lenumero);
-			if ($lenumero>= $n)
-				$n=$lenumero+1;
-			$code = $type.'_'.strval($n);
+	spip_query("UPDATE spip_forms_champs SET extra_info="._q($extra_info)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
+	if ($type == 'select' || $type == 'multiple') {
+		if (_request('ajout_choix')) {
+			$n = 1;
+			$res2 = spip_query("SELECT choix FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
+			while ($row2 = spip_fetch_array($res2)){
+				$lenumero = split('_', $row2['choix']);
+				$lenumero = intval(end($lenumero));
+				if ($lenumero>= $n) $n=$lenumero+1;
+			}
+			$choix = $champ.'_'.$n;
+			$titre = _T("forms:nouveau_choix");
+			include_spip('inc/charset');
+			$titre = unicode2charset(html2unicode($titre));
+			spip_abstract_insert("spip_forms_champs_choix","(id_form,champ,choix,titre)","("._q($id_form).","._q($champ).","._q($choix).","._q($titre).")");
+		}
+		$res2 = spip_query("SELECT choix FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
+		while ($row2 = spip_fetch_array($res2)){
+			if ($titre = _request($row2['choix']))
+				spip_query("UPDATE spip_forms_champs_choix SET titre="._q($titre)." WHERE id_form="._q($id_form)." AND champ="._q($row2['champ']));
 		}
 	}
-	return $code;
+}
+function Forms_nouveau_champ($id_form,$type){
+	$res = spip_query("SELECT champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND type="._q($type));
+	$n = 1;
+	$champ = $type.'_'.strval($n);
+	while ($row = spip_fetch_array($res)){
+		$lenumero = split('_', $row['champ'] );
+		$lenumero = intval(end($lenumero));
+		if ($lenumero>= $n) $n=$lenumero+1;
+	}
+	$champ = $type.'_'.strval($n);
+	return $champ;
+}
+function Forms_insere_nouveau_champ($id_form,$type,$titre){
+	$champ = Forms_nouveau_champ($id_form,$type);
+	$cle = 0;
+	$res = spip_query("SELECT max(cle) AS clemax FROM spip_forms_champs WHERE id_form="._q($id_form));
+	if ($row = spip_fetch_array($res))
+		$cle = $row['cle'];
+	$cle++;
+	spip_abstract_insert(
+		'spip_forms_champs',
+		'(id_form,champ,cle,titre,type,obligatoire,extra_info',
+		'('._q($id_form).','._q($champ).','._q($cle).','._q($titre).','.q($type).",'non','')");
+
+	return $champ;
 }
 
 function forms_update(){
@@ -398,114 +404,74 @@ function forms_update(){
 	//
 	
 	$nouveau_champ = $champ_visible = NULL;
-
-	$structure = array();
 	if (Forms_form_editable($id_form)) {
 		// creation
 		if ($new == 'oui' && $titre) {
-			$structure = array();
-			spip_query("INSERT INTO spip_forms (structure) VALUES ('".
-				addslashes(serialize($structure))."')");
+			spip_query("INSERT INTO spip_forms (titre) VALUES ("._q($titre).")");
 			$id_form = spip_insert_id();
-			unset($new);
 		}
 		// maj
 		if ($id_form && $titre) {
 			$query = "UPDATE spip_forms SET ".
-				"titre='".addslashes($titre)."', ".
-				"descriptif='".addslashes($descriptif)."', ".
-				"sondage='".addslashes($sondage)."', ".
-				"email='".addslashes(serialize($email))."', ".
-				"champconfirm='".addslashes($champconfirm)."', ".
-				"texte='".addslashes($texte)."' ".
-				"WHERE id_form=$id_form";
+				"descriptif="._q($descriptif).", ".
+				"sondage="._q($sondage).", ".
+				"email="._q(serialize($email)).", ".
+				"champconfirm="._q($champconfirm).", ".
+				"texte="._q($texte)." ".
+				"WHERE id_form="._q($id_form);
 			$result = spip_query($query);
 		}
 		// lecture
-		$query = "SELECT * FROM spip_forms WHERE id_form=$id_form";
-		$result = spip_query($query);
+		$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 		if ($row = spip_fetch_array($result)) {
 			$id_form = $row['id_form'];
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
 			$sondage = $row['sondage'];
-			$structure = unserialize($row['structure']);
 			$email = unserialize($row['email']);
 			$champconfirm = $row['champconfirm'];
 			$texte = $row['texte'];
 		}
-	}	
-	
+	}
+
 	if ($id_form && Forms_form_editable($id_form)) {
-		$modif_structure = false;
 		$champ_visible = NULL;
 		// Ajout d'un champ
 		if (($type = $ajout_champ) && Forms_type_champ_autorise($type)) {
-			$code = code_nouveau_champ($structure,$type);
-			$nom = _T("forms:nouveau_champ");
+			$titre = _T("forms:nouveau_champ");
 			include_spip('inc/charset');
-			$nom = unicode2charset(html2unicode($nom));
-			$structure[] = array('code' => $code, 'nom' => $nom, 'type' => $type, 'type_ext' => array());
-			$champ_visible = $nouveau_champ = $code;
-			$modif_structure = true;
+			$titre = unicode2charset(html2unicode($titre));
+			$champ = Forms_insere_nouveau_champ($id_form,$type,$titre);
+			$champ_visible = $nouveau_champ = $champ;
 		}
 		// Modif d'un champ
-		if ($code = $modif_champ) {
-			unset($index);
-			foreach ($structure as $index => $t) {
-				if ($code == $t['code']) break;
-			}
-			if (isset($index)) {
+		if ($champ = $modif_champ) {
+			if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($champ)))) {
 				// switch select to multi ou inversement
-				if (isset($_POST['switch_select_multi'])){
-					if ($t['type']=='select') $newtype = 'multiple';
-					if ($t['type']=='multiple') $newtype = 'select';
-					
-					$newcode = code_nouveau_champ($structure,$newtype);
-					$t['type'] = $newtype;
-					$new_type_ext = array();
-					foreach($t['type_ext'] as $key=>$type_ext)
-						$new_type_ext[str_replace($t['code'],$newcode,$key)] = $type_ext;
-					$t['code'] = $newcode;
-					$t['type_ext'] = $new_type_ext;
+				if (_request('switch_select_multi')){
+					if ($row['type']=='select') $newtype = 'multiple';
+					if ($row['type']=='multiple') $newtype = 'select';
+					$newchamp = Forms_nouveau_champ($id_form,$newtype);
+					spip_query("UPDATE spip_forms_champs SET type="._q($newtype).", champ="._q($newchamp)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
+					spip_query("UPDATE spip_forms_champs_choix SET champ="._q($newchamp)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
+					$champ = $newchamp;
 				}
-				$t['nom'] = $nom_champ;
-				$t['obligatoire'] = $champ_obligatoire;
-				$t = modif_edition_champ($t);
-				if (!$t['type_ext']) $t['type_ext'] = array();
-				$structure[$index] = $t;
-				$modif_structure = true;
+				spip_query("UPDATE spip_forms_champs SET titre="._q($nom_champ).", obligatoire="._q($champ_obligatoire)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
+				Forms_modif_edition_champ($id_form, $champ);
+				$champ_visible = $champ;
 			}
-			$champ_visible = $code;
 		}
 		// Cas particulier : suppression d'un choix
-		if ($code_choix = $supp_choix) {
-			foreach ($structure as $index => $t) {
-				if (is_array($t['type_ext']) && isset($t['type_ext'][$supp_choix])) {
-					unset($t['type_ext'][$supp_choix]);
-					if (!$t['type_ext']) $t['type_ext'] = array();
-					$champ_visible = $t['code'];
-					$structure[$index] = $t;
-				}
-			}
-			$modif_structure = true;
-		}
+		if ($choix = $supp_choix)
+			spip_query("DELETE FROM spip_forms_champs_choix WHERE choix="._q($choix)." AND id_form="._q($id_form)." AND champ="._q($champ));
 		// Suppression d'un champ
-		if ($code = $supp_champ) {
-			unset($index);
-			foreach ($structure as $index => $t) {
-				if ($code == $t['code']) break;
-			}
-			if (isset($index)&&($structure[$index]['code']==$code)){
-				unset($structure[$index]);
-				if (!$structure) $structure = array();
-				$modif_structure = true;
-			}
+		if ($champ = $supp_champ) {
+			spip_query("DELETE FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
+			spip_query("DELETE FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($champ));
 		}
 
 		// Monter / descendre un champ
-		if (isset($monter) && $monter > 0) {
-
+		/*if (isset($monter) && $monter > 0) {
 			$monter = intval($monter);
 			$n = $monter;
 			while (--$n) if ($structure[$n]) break;			
@@ -527,21 +493,8 @@ function forms_update(){
 				$champ_visible = $structure[$n]['code'];
 			}
 			$modif_structure = true;
-		}
-		if ($id_form && Forms_form_editable($id_form)) {
-			if ($modif_structure) {
-				ksort($structure);
-				$query = "UPDATE spip_forms SET `structure`='".addslashes(serialize($structure))."' ".
-					"WHERE id_form=$id_form";
-				spip_query($query);
-			}
-		}
+		}*/
 	}
-	
-	// mettre a jour les tables de replication pour les boucles
-	include_spip("base/forms");
-	if ($row=spip_fetch_array(spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form))))
-		forms_structure2table($row,true);
 	return array($id_form,$champ_visible,$nouveau_champ);
 }
 
@@ -627,7 +580,6 @@ function exec_forms_edit(){
 		$titre = unicode2charset(html2unicode($titre));
 		$descriptif = "";
 		$sondage = "non";
-		$structure = array();
 		$email = array();
 		$champconfirm = "";
 		$texte = "";
@@ -645,7 +597,6 @@ function exec_forms_edit(){
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
 			$sondage = $row['sondage'];
-			$structure = unserialize($row['structure']);
 			$email = unserialize($row['email']);
 			$champconfirm = $row['champconfirm'];
 			$texte = $row['texte'];
@@ -703,11 +654,10 @@ function exec_forms_edit(){
 			$champconfirm_known = false;
 			echo "<div align='left' border: 1px dashed #aaaaaa;'>";
 			echo "<strong class='verdana2'>"._T('forms:confirmer_reponse')."</strong> ";
-			foreach ($structure as $index => $t) {
-				if (($t['type'] == 'email') && ($champconfirm == $t['code'])) {
-					echo $t['nom'] . " ";
-					$champconfirm_known = true;
-				}
+			$res2 = spip_query("SELECT titre FROM spip_forms_champs WHERE type='email' AND id_form="._q($id_form)." AND champ="._q($champconfirm));
+			if ($row2 = spip_fetch_array($res2)){
+				echo $row2['nom'] . " ";
+				$champconfirm_known = true;
 			}
 			echo "</div>\n";
 			if (($champconfirm_known == true) && ($texte)) {

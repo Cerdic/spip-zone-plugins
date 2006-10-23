@@ -11,7 +11,7 @@
  *
  */
 	
-	function forms_structure2table($row,$clean=false){
+	function Forms_structure2table($row,$clean=false){
 		$id_form=$row[id_form];
 		// netoyer la structure precedente en table
 		if ($clean){
@@ -33,16 +33,16 @@
 				VALUES("._q($id_form).","._q($cle).","._q($champ).","._q($titre).","._q($type).","._q($obligatoire).","._q($extra_info).")");
 			if ($type=='select' OR $type=='multiple'){
 				foreach($type_ext as $choix=>$titre){
-					spip_query("INSERT INTO spip_forms_champs_choix (id_form,cle,choix,titre) 
-						VALUES("._q($id_form).","._q($cle).","._q($choix).","._q($titre).")");
+					spip_query("INSERT INTO spip_forms_champs_choix (id_form,champ,choix,titre) 
+						VALUES("._q($id_form).","._q($champ).","._q($choix).","._q($titre).")");
 				}
 			}
 		}
 	}
-	function forms_allstructure2table($clean=false){
+	function Forms_allstructure2table($clean=false){
 		$res = spip_query("SELECT * FROM spip_forms");
 		while ($row=spip_fetch_array($res))
-			forms_structure2table($row,$clean);
+			Forms_structure2table($row,$clean);
 	}
 
 	function Forms_upgrade(){
@@ -105,7 +105,7 @@
 		if ($current_version<0.15){
 			spip_query("ALTER TABLE spip_reponses ADD `url` VARCHAR(255) NOT NULL AFTER `id_article_export` ");
 			ecrire_meta('forms_base_version',$current_version=0.15);
-		}/*
+		}
 		if ($current_version<0.17){
 			// virer les tables temporaires crees manuellement sur les serveurs ou ca foirait
 			spip_query("DROP TABLE spip_forms_champs");
@@ -115,9 +115,9 @@
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			creer_base();
-			forms_allstructure2table();
-			ecrire_meta('forms_base_version',$current_version=0.17);
-		}*/
+			Forms_allstructure2table();
+			//ecrire_meta('forms_base_version',$current_version=0.17);
+		}
 		ecrire_metas();
 	}
 	
