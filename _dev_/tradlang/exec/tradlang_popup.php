@@ -91,7 +91,7 @@ function tradlang_sauvegarde($module, $langue)
   // Fin du fichier de langue
   $lang_epilog = "\n\n?".">\n";
 
-  $fic_exp = $module["dir_lang"]."/".$module["langue_".$langue].".toto";
+  $fic_exp = $module["dir_lang"]."/".$module["langue_".$langue];
   $tab = array();
   $conflit = array();  
   $tab = tradlang_lirelang($module, $langue);
