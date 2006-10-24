@@ -28,7 +28,7 @@ function exec_forms_reponses(){
 		if ($row = spip_fetch_array($result)) {
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
-			$sondage = $row['sondage'];
+			$type_form = $row['type_form'];
 		}
 	}
 
@@ -67,10 +67,10 @@ function exec_forms_reponses(){
 	}
 
 
-	if ($id_reponse = intval($supp_reponse)) {
-		$query = "DELETE FROM spip_reponses WHERE id_reponse=$id_reponse";
+	if ($id_donnee = intval($supp_reponse)) {
+		$query = "DELETE FROM spip_forms_donnees WHERE id_donnee=$id_donnee";
 		$result = spip_query($query);
-		$query = "DELETE FROM spip_reponses_champs WHERE id_reponse=$id_reponse";
+		$query = "DELETE FROM spip_forms_donnees_champs WHERE id_donnee=$id_donnee";
 		$result = spip_query($query);
 	}
 
@@ -83,7 +83,7 @@ function exec_forms_reponses(){
 	// Sondage : afficher les cumuls
 	//
 
-	if ($id_form && $sondage != 'non') {
+	if ($id_form && in_array($type_form,array('sondage-public','sondage-prot'))) {
 		echo "<br />\n";
 		debut_cadre_enfonce("statistiques-24.gif");
 		include_spip('forms_fonctions');
@@ -97,7 +97,7 @@ function exec_forms_reponses(){
 	$debut = intval($debut);
 	$tranche = 10;
 
-	$query = "SELECT COUNT(*) AS cnt FROM spip_reponses ".
+	$query = "SELECT COUNT(*) AS cnt FROM spip_forms_donnees ".
 		"$where statut='valide' AND date > DATE_SUB(NOW(), INTERVAL 6 MONTH)";
 	$result = spip_query($query);
 	list($total) = spip_fetch_array($result,SPIP_NUM);
@@ -125,14 +125,14 @@ function exec_forms_reponses(){
 	$types = array();
 	$form_unique = $id_form;
 
-	$query = "SELECT r.*, a.nom, f.titre FROM spip_reponses AS r LEFT JOIN spip_auteurs AS a USING (id_auteur) 
+	$query = "SELECT r.*, a.nom, f.titre FROM spip_forms_donnees AS r LEFT JOIN spip_auteurs AS a USING (id_auteur) 
 		JOIN spip_forms AS f ON r.id_form=f.id_form
 		$where r.statut='valide' AND r.date > DATE_SUB(NOW(), INTERVAL 6 MONTH)
 		ORDER BY r.date DESC LIMIT $debut, $tranche";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) {
 		$id_form = $row['id_form'];
-		$id_reponse = $row['id_reponse'];
+		$id_donnee = $row['id_donnee'];
 		$id_article_export = $row['id_article_export'];
 		$date = $row['date'];
 		$ip = $row['ip'];
@@ -144,7 +144,7 @@ function exec_forms_reponses(){
 		echo "<br />\n";
 		debut_cadre_relief("../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png");
 
-		$link=parametre_url(self(),'supp_reponse', $id_reponse);
+		$link=parametre_url(self(),'supp_reponse', $id_donnee);
 		icone(_T("forms:supprimer_reponse"), $link,"../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "supprimer.gif", "right");
 		
 		if ($id_article_export!=0){
@@ -153,7 +153,7 @@ function exec_forms_reponses(){
 				$id_article_export = 0;
 		}
 		if ($id_article_export==0){
-			icone(_T("forms:exporter_article"), generer_action_auteur('forms_exporte_reponse_article',"$id_reponse",self()),"article-24.gif", "creer.gif", "right");
+			icone(_T("forms:exporter_article"), generer_action_auteur('forms_exporte_reponse_article',"$id_donnee",self()),"article-24.gif", "creer.gif", "right");
 		}
 		else 
 			icone(_T("forms:voir_article"), generer_url_ecrire('articles',"id_article=".$row['id_article_export']),"article-24.gif", "", "right");
@@ -175,7 +175,7 @@ function exec_forms_reponses(){
 		
 		echo "<br />\n";
 
-		list($lib,$values,$urls) = 	Forms_extraire_reponse($id_reponse);
+		list($lib,$values,$urls) = 	Forms_extraire_reponse($id_donnee);
 
 		foreach ($lib as $champ => $titre) {
 			$s = '';

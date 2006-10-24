@@ -13,22 +13,22 @@
 include_spip('inc/forms');
 
 function action_forms_exporte_reponse_article(){
-	$id_reponse = _request('arg');
+	$id_donnee = _request('arg');
 	$hash = _request('hash');
 	$id_auteur = _request('id_auteur');
 	$redirect = _request('redirect');
 	if ($redirect==NULL) $redirect="";
 	include_spip("inc/actions");
-	if (verifier_action_auteur("forms_exporte_reponse_article-$id_reponse",$hash,$id_auteur)==TRUE){
+	if (verifier_action_auteur("forms_exporte_reponse_article-$id_donnee",$hash,$id_auteur)==TRUE){
 		// preparer l'article
 		$id_article = 0;
-		$res = spip_query("SELECT * FROM spip_reponses AS r LEFT JOIN spip_forms AS f ON f.id_form = r.id_form WHERE r.id_reponse="._q($id_reponse));
+		$res = spip_query("SELECT * FROM spip_forms_donnees AS r LEFT JOIN spip_forms AS f ON f.id_form = r.id_form WHERE r.id_donnee="._q($id_donnee));
 		if ($row=spip_fetch_array($res)){
 			$id_form = $row['id_form'];
-			$titre = _T("forms:reponse",array('id_reponse'=>$id_reponse));
+			$titre = _T("forms:reponse",array('id_reponse'=>$id_donnee));
 			$soustitre = $row['titre'];
 			$date = $row['date'];
-			list($lib,$values,$urls) = 	Forms_extraire_reponse($id_reponse);
+			list($lib,$values,$urls) = 	Forms_extraire_reponse($id_donnee);
 			$texte = "";
 			$res = spip_query("SELECT * FROM spip_forms_champs AS forms WHERE id_form="._q($id_form)." ORDER BY rang");
 			while ($row = spip_fetch_array($res)){
@@ -69,7 +69,7 @@ function action_forms_exporte_reponse_article(){
 			"("._q($titre).","._q($soustitre).","._q($texte).","._q($date).",'prepa')");
 			
 			if ($id_article!=0){
-				spip_query("UPDATE spip_reponses SET id_article_export=$id_article WHERE id_reponse="._q($id_reponse));
+				spip_query("UPDATE spip_forms_donnees SET id_article_export=$id_article WHERE id_donnee="._q($id_donnee));
 			}
 		}
 		if ($id_article!=0)

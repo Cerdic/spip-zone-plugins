@@ -1,0 +1,16 @@
+- suppression du champ structure de la table spip_forms et gestion directe des tables spip_forms_champs et spip_forms_champs_choix pour l'implementation de la structure du formulaire
+- champ sondage de spip_forms (qui valait 'non','public',ou 'prot') devient type ('', 'sondage-public','sondage-prot' ...)
+- ajout du champ 'moderation' a spip_forms
+- renomage des tables spip_reponses en spip_forms_donnees et spip_reponses_champs en spip_forms_donnees_champs ; id_reponse devient id_donnee
+
+- ajout de la table spip_forms_donnees_articles permettant de lier toute donnee a un article
+
+- ajout des champs sur la table spip_forms_champs
+	'specifiant' => oui/non permet de definir un champ d'une table comme signifiant pour un tri ou un filtre dans l'affichage public
+	'public' => oui/non permet de definir qu'un champ sera visible ou non dans l'affichage de la table dans l'espac epublic
+	'aide' => aide contextuelle lors de la saisie du formulaire
+	'html_wrap' => wrapper du champ lors de son affichage dans l'espace public (utilisable manuellement ou surtout avec les 'formettes'
+
+- la boucle FORMS_CHAMPS_DONNEES ne retourne par defaut que les donnes des champs public, sauf si le critere {tout} est utilise
+- la chaine de langue forms:sondage disparait et est remplacee par forms:type_form
+- ajout des chaines de langue forms:moderation_donnees, forms:champ_specifiant, forms:champ_public, forms:aide_contextuelle,forms:html_wrapper

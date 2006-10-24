@@ -71,7 +71,7 @@ function Forms_formater_les_reponses($id_form, $format, $separateur, $head=true,
 	// Forms_formater_ligne_xxx avec xxx le nom du format
 	//
 	$nb_reponses = 0;
-	$row = spip_fetch_array(spip_query("SELECT COUNT(*) AS tot FROM spip_reponses WHERE id_form="._q($id_form)." AND statut='valide'"));
+	$row = spip_fetch_array(spip_query("SELECT COUNT(*) AS tot FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND statut='valide'"));
 	if ($row)	$nb_reponses = $row['tot'];
 
 	if (!$id_form || !Forms_form_administrable($id_form))
@@ -81,7 +81,7 @@ function Forms_formater_les_reponses($id_form, $format, $separateur, $head=true,
 	if ($row = spip_fetch_array($result)) {
 		$titre = $row['titre'];
 		$descriptif = $row['descriptif'];
-		$sondage = $row['sondage'];
+		$type_form = $row['type_form'];
 	}
 
 	$charset = $GLOBALS['meta']['charset'];
@@ -136,16 +136,16 @@ function Forms_formater_les_reponses($id_form, $format, $separateur, $head=true,
 
 	// Ensuite les reponses
 	$fichier = array();
-	$id_reponse = 0;
-	$result = spip_query("SELECT r.id_reponse, r.date,r.url, c.champ, c.valeur ".
-		"FROM spip_reponses AS r LEFT JOIN spip_reponses_champs AS c USING (id_reponse) ".
-		"WHERE id_form="._q($id_form)." AND statut='valide' AND c.id_reponse IS NOT NULL ".
-		"ORDER BY date, r.id_reponse");
+	$id_donnee = 0;
+	$result = spip_query("SELECT r.id_donnee, r.date,r.url, c.champ, c.valeur ".
+		"FROM spip_forms_donnees AS r LEFT JOIN spip_forms_donnees_champs AS c USING (id_donnee) ".
+		"WHERE id_form="._q($id_form)." AND statut='valide' AND c.id_donnee IS NOT NULL ".
+		"ORDER BY date, r.id_donnee");
 	while ($row = spip_fetch_array($result)) {
-		if ($id_reponse != $row['id_reponse']) {
-			if ($id_reponse)
+		if ($id_donnee != $row['id_donnee']) {
+			if ($id_donnee)
 				$s .= Forms_formater_reponse($ligne,$valeurs,$structure,$format,$separateur);
-			$id_reponse = $row['id_reponse'];
+			$id_donnee = $row['id_donnee'];
 			$date = $row['date'];
 			$ligne = array();
 			$ligne[] = jour($date).'/'.mois($date).'/'.annee($date);
@@ -166,7 +166,7 @@ function Forms_formater_les_reponses($id_form, $format, $separateur, $head=true,
 	}
 
 	// Ne pas oublier la derniere reponse
-	if ($id_reponse)
+	if ($id_donnee)
 		$s .= Forms_formater_reponse($ligne,$valeurs,$structure,$format,$separateur);
 	return $s;
 }
@@ -186,12 +186,12 @@ function acces_interdit() {
 // Telechargement d'un fichier particulier
 //
 function exec_forms_telecharger(){
-	$id_reponse = _request('id_reponse');
+	$id_donnee = _request('id_donnee');
 	$id_form = _request('id_form');
 	$champ = _request('champ');
 
-	if ($id_reponse = intval($id_reponse) AND $champ) {
-		$res = spip_query("SELECT id_form FROM spip_reponses WHERE id_reponse="._q($id_reponse));
+	if ($id_donnee = intval($id_donnee) AND $champ) {
+		$res = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
 		if ($row = spip_fetch_array($res))
 			$id_form = $row['id_form'];
 		if (!$id_form || !Forms_form_administrable($id_form))
@@ -199,7 +199,7 @@ function exec_forms_telecharger(){
 		$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)." AND type='fichier' AND champ="._q($champ));
 		if (!$row = spip_fetch_array($res))
 			acces_interdit();
-		$row = spip_fetch_array(spip_query("SELECT valeur FROM spip_reponses_champs WHERE id_reponse="._q($id_reponse)." AND champ="._q($champ)));
+		$row = spip_fetch_array(spip_query("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champ)));
 		if (!$row)	acces_interdit();
 		
 		$fichier = $row['valeur'];

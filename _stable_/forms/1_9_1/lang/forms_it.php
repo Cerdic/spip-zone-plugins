@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'format_fichier' => "Formato del file:",
 'formulaire' => "Form",
 'formulaire_aller' => "Vai al form",
-'formulaires_copie' => "Copia di ",
+'formulaires_copie' => "Copia di @nom@",
 'formulaires_sondages' => "Form e sondaggi",
 
 'nombre_reponses'=>"@nombre@ risposte",

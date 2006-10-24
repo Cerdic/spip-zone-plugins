@@ -35,7 +35,6 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $class='', $script_vali
 	if (!$row = spip_fetch_array($res)) return;
 		
 	$erreur = array();
-	$valide_sondage = '';
 	$reponse = '';
 	$formok = '';
 	$valeurs = array('0'=>'0');
@@ -59,7 +58,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $class='', $script_vali
 				$valeurs[$key] = interdire_scripts($val);
 		}
 	}
-	if ($row['sondage'] == 'public'){
+	if ($row['type_form'] == 'sondage-public'){
 		include_spip('inc/forms');
 		if ((Forms_verif_cookie_sondage_utilise($id_form)==true)&&(_DIR_RESTREINT!=""))
 			$affiche_sondage=' ';

@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'formulaire' => "Formulaire",
 'formulaire_aller' => "Aller au formulaire",
 'formulaires_sondages' => "Formulaires et sondages",
-'formulaires_copie' => "Copie de ", 
+'formulaires_copie' => "Copie de @nom@", 
 
 'nombre_reponses'=>"@nombre@ r&eacute;ponses",
 'nouveau_champ' => "Nouveau champ",

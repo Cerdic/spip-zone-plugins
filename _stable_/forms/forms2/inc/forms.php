@@ -95,16 +95,16 @@
 				//$cookie = creer_uniqid();
 			}
 		}
-		$query = "SELECT id_reponse FROM spip_reponses ".
+		$query = "SELECT id_donnee FROM spip_forms_donnees ".
 			"WHERE id_form=$id_form AND cookie='".addslashes($cookie)."'";
 		if (!spip_num_rows(spip_query($query)))
 		  $cookie_utilise=false;  // cet utilisateur n'a pas deja repondu !
 		return $cookie_utilise;
 	}
 
-	function Forms_extraire_reponse($id_reponse){
+	function Forms_extraire_reponse($id_donnee){
 		// Lire les valeurs entrees
-		$result = spip_query("SELECT * FROM spip_reponses_champs AS r JOIN spip_forms_champs AS ch ON ch.champ=r.champ WHERE r.id_reponse="._q($id_reponse)." ORDER BY ch.rang");
+		$result = spip_query("SELECT * FROM spip_forms_donnees_champs AS r JOIN spip_forms_champs AS ch ON ch.champ=r.champ WHERE r.id_donnee="._q($id_donnee)." ORDER BY ch.rang");
 		$valeurs = array();
 		$retour = urlencode(self());
 		$libelles = array();
@@ -117,7 +117,7 @@
 			$type = $row['type'];
 			if ($type == 'fichier') {
 				$values[$champ][] = $row['valeur'];
-				$url[$champ][] = generer_url_ecrire("forms_telecharger","id_reponse=$id_reponse&champ=$champ&retour=$retour");
+				$url[$champ][] = generer_url_ecrire("forms_telecharger","id_donnee=$id_donnee&champ=$champ&retour=$retour");
 			}
 			else if (in_array($type,array('select','multiple'))) {
 				if ($row3=spip_fetch_array(spip_query("SELECT * FROM spip_forms_champs_choix WHERE champ=$champ AND choix="._q($row['valeur']))))
@@ -331,7 +331,7 @@
 		}
 		return $erreur;
 	}
-	function Forms_insertions_reponse_post($id_form,$id_reponse,&$erreur,&$ok){
+	function Forms_insertions_reponse_post($id_form,$id_donnee,&$erreur,&$ok){
 		$inserts = array();
 		$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form));
 		while($row = spip_fetch_array($row)){
@@ -351,7 +351,7 @@
 						$ok = false;
 					}
 					else {
-						$inserts[] = "("._q($id_reponse).","._q($champ).","._q($dest).")";
+						$inserts[] = "("._q($id_donnee).","._q($champ).","._q($dest).")";
 					}
 				}
 			}
@@ -359,9 +359,9 @@
 				// Choix multiples : enregistrer chaque valeur separement
 				if (is_array($val))
 					foreach ($val as $v)
-						$inserts[] = "("._q($id_reponse).","._q($champ).","._q($v).")";
+						$inserts[] = "("._q($id_donnee).","._q($champ).","._q($v).")";
 				else
-					$inserts[] = "("._q($id_reponse).","._q($champ).","._q($val).")";
+					$inserts[] = "("._q($id_donnee).","._q($champ).","._q($val).")";
 			}
 		}
 		return $inserts;
@@ -391,7 +391,7 @@
 			$url = parametre_url(self(),'id_form','');
 			$ok = true;
 			
-			if ($row['sondage'] != 'non') {
+			if (in_array($row['type_form'],array('sondage-public','sondage-prot'))) {
 				$statut = 'attente';
 				$cookie = addslashes($GLOBALS['cookie_form']);
 				$nom_cookie = Forms_nom_cookie_form($id_form);
@@ -402,38 +402,38 @@
 			}
 			// D'abord creer la reponse dans la base de donnees
 			if ($ok) {
-				spip_query("INSERT INTO spip_reponses (id_form, id_auteur, date, ip, url, statut, cookie) ".
+				spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, statut, cookie) ".
 					"VALUES ($id_form, '$id_auteur', NOW(), '$ip', "._q($url).", '$statut', '$cookie')");
-				$id_reponse = spip_insert_id();
-				if (!$id_reponse) {
+				$id_donnee = spip_insert_id();
+				if (!$id_donnee) {
 					$erreur['@'] = _T("forms:probleme_technique");
 					$ok = false;
 				}
 			}
 			// Puis enregistrer les differents champs
 			if ($ok) {
-				$inserts = Forms_insertions_reponse_post($id_form,$id_reponse,$erreur,$ok);
+				$inserts = Forms_insertions_reponse_post($id_form,$id_donnee,$erreur,$ok);
 				if (!count($inserts)) {
 					// Reponse vide => annuler
 					$erreur['@'] = _T("forms:remplir_un_champ");
-					spip_query("DELETE FROM spip_reponses WHERE id_reponse="._q($id_reponse));
+					spip_query("DELETE FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
 					$ok = false;
 				}
 			}
 			if ($ok) {
-				spip_query("INSERT INTO spip_reponses_champs (id_reponse, champ, valeur) ".
+				spip_query("INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
 					"VALUES ".join(',', $inserts));
-				if ($row['sondage'] != 'non') {
-					$hash = calculer_action_auteur("forms valide reponse sondage $id_reponse");
-					$url = generer_url_public($script_validation,"verif_cookie=oui&id_reponse=$id_reponse&hash=$hash".($script_args?"&$script_args":""));
+				if (in_array($row['type_form'],array('sondage-public','sondage-prot'))) {
+					$hash = calculer_action_auteur("forms valide reponse sondage $id_donnee");
+					$url = generer_url_public($script_validation,"verif_cookie=oui&id_donnee=$id_donnee&hash=$hash".($script_args?"&$script_args":""));
 					$r = $url;
 				}
 				if ($champconfirm)
-					if ($row=spip_fetch_array(spip_query("SELECT * FROM spip_reponses_champs WHERE id_reponse="._q($id_reponse)." AND champ="._q($champconfirm))))
+					if ($row=spip_fetch_array(spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champconfirm))))
 						$mailconfirm = $row['valeur'];
 				if (($email) || ($mailconfirm)) {
-					$hash = calculer_action_auteur("forms confirme reponse $id_reponse");
-					$url = generer_url_public($script_validation,"mel_confirm=oui&id_reponse=$id_reponse&hash=$hash".($script_args?"&$script_args":""));
+					$hash = calculer_action_auteur("forms confirme reponse $id_donnee");
+					$url = generer_url_public($script_validation,"mel_confirm=oui&id_donnee=$id_donnee&hash=$hash".($script_args?"&$script_args":""));
 					$r = $url;
 				}
 			}
@@ -442,7 +442,7 @@
 		return $r;
 	}
 
-	function Forms_generer_mail_reponse_formulaire($id_form, $id_reponse, $env){
+	function Forms_generer_mail_reponse_formulaire($id_form, $id_donnee, $env){
 		if (!is_array($env)) $env=array();
 		$modele_mail = 'form_reponse_email';
 		if (isset($env['modele']))
@@ -452,21 +452,21 @@
 			$modele = "modeles/$modele_mail";
 			if ($f = find_in_path(($m = "$modele-$id_form").".html"))
 				$modele = $m;
-			$corps_mail = recuperer_fond($modele,array_merge($env,array('id_reponse'=>$id_reponse)));
-			$corps_mail_admin = recuperer_fond($modele,array_merge($env,array('id_reponse'=>$id_reponse,'mail_admin'=>'oui')));
+			$corps_mail = recuperer_fond($modele,array_merge($env,array('id_donnee'=>$id_donnee)));
+			$corps_mail_admin = recuperer_fond($modele,array_merge($env,array('id_donnee'=>$id_donnee,'mail_admin'=>'oui')));
 			$champconfirm = $row['champconfirm'];
 			$email = unserialize($row['email']);
 			$email_dest = $email['defaut'];
 			$mailconfirm = "";
 			
 			// recuperer l'email de confirmation
-			$result2 = spip_query("SELECT * FROM spip_reponses_champs WHERE id_reponse='$id_reponse' AND champ="._q($champconfirm));
+			$result2 = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee='$id_donnee' AND champ="._q($champconfirm));
 			if ($row2 = spip_fetch_array($result2)) {
 				$mailconfirm = $row2['valeur'];
 			}
 
 			// recuperer l'email d'admin
-			$result2 = spip_query("SELECT * FROM spip_reponses_champs WHERE id_reponse='$id_reponse' AND champ="._q($email['route']));
+			$result2 = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee='$id_donnee' AND champ="._q($email['route']));
 			if ($row2 = spip_fetch_array($result2)) {
 				if (isset($email[$row2['valeur']]))
 					$email_dest = $email[$row2['valeur']];

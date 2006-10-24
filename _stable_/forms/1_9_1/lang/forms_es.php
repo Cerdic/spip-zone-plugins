@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'format_fichier' => "Formato del fichero&nbsp;:",
 'formulaire_aller' => "Ir al formulario ",
 'formulaires_sondages' => "Formularios y encuestas",
-'formulaires_copie' => "Copia de ", 
+'formulaires_copie' => "Copia de @nom@", 
 
 'icone_creer_formulaire' => "Crear un nuevo formulario",
 'info_apparence' => "He aqu&iacute; una previsualizaci&oacute;n del formulario tal como aparecer&aacute; a los visitantes del sitio p&uacute;blico.",

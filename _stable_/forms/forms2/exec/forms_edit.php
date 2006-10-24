@@ -116,6 +116,10 @@ function Forms_bloc_edition_champ($row, $link) {
 	$titre = $row['titre'];
 	$obligatoire = $row['obligatoire'];
 	$extra_info = $row['extra_info'];
+	$specifiant = $row['specifiant'];
+	$public = $row['public'];
+	$aide = $row['aide'];
+	$html_wrap = $row['html_wrap'];
 	
 	$out = "";
 
@@ -124,7 +128,16 @@ function Forms_bloc_edition_champ($row, $link) {
 		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_obligatoire' value='oui' id='obli_$champ'$checked> ";
 		$out .= "<label for='obli_$champ'>"._T("forms:edit_champ_obligatoire")."</label>";
 		$out .= "<br />\n";
+		
+		$checked = ($specifiant == 'oui') ? " checked='checked'" : "";
+		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_specifiant' value='oui' id='spec_$champ'$checked> ";
+		$out .= "<label for='spec_$champ'>"._T("forms:champ_specifiant")."</label>";
+		$out .= "<br />\n";
 	}
+	$checked = ($public == 'oui') ? " checked='checked'" : "";
+	$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_public' value='oui' id='public_$champ'$checked> ";
+	$out .= "<label for='public_$champ'>"._T("forms:champ_public")."</label>";
+	$out .= "<br />\n";
 
 	if ($type == 'url') {
 		$checked = ($extra_info == 'oui') ? " checked='checked'" : "";
@@ -184,6 +197,14 @@ function Forms_bloc_edition_champ($row, $link) {
 		$out .= "<input type='text' name='taille_champ' value='$taille' id='taille_$champ' class='fondo verdana2'>\n";
 		$out .= "<br />\n";
 	}
+	$out .= "<label for='aide_$champ'>"._T("forms:aide_contextuelle")."</label> :<br/>";
+	$out .= " &nbsp;<textarea name='aide' id='aide_$champ'  class='verdana2' style='width:100%;height:3em;' >".
+		entites_html($aide)."</textarea><br />\n";
+		
+	$out .= "<label for='wrap_$champ'>"._T("forms:html_wrapper")."</label> :<br/>";
+	$out .= " &nbsp;<textarea name='html_wrap' id='wrap_$champ'  class='verdana2' style='width:100%;height:3em;' >".
+		entites_html($html_wrap)."</textarea><br />\n";
+
 	return $out;
 }
 
@@ -396,26 +417,26 @@ function Forms_update_edition_champ($id_form,$champ) {
 }
 
 function Forms_update(){
-	$id_form = intval(_request('id_form'));
-	$new = _request('new');
-	$supp_form = intval(_request('supp_form'));
-	$modif_champ = _request('modif_champ');
-	$ajout_champ = _request('ajout_champ');
 	$retour = _request('retour');
+	$new = _request('new');
+	$id_form = intval(_request('id_form'));
 	$titre = _request('titre');
 	$descriptif = _request('descriptif');
 	$email = _request('email');
 	$champconfirm = _request('champconfirm');
 	$texte = _request('texte');
-	$sondage = _request('sondage');
+	$moderation = _request('moderation');
+	$type_form = _request('type_form');
+
+	$modif_champ = _request('modif_champ');
+	$ajout_champ = _request('ajout_champ');
 	$nom_champ = _request('nom_champ');
 	$champ_obligatoire = _request('champ_obligatoire');
-	$monter = _request('monter');
-	$descendre = _request('descendre');
 	$supp_choix = _request('supp_choix');
 	$supp_champ = _request('supp_champ');
-	$supp_confirme = _request('supp_confirme');
-	$supp_rejet = _request('supp_rejet');
+	
+	$monter = _request('monter');
+	$descendre = _request('descendre');
 
 	//
 	// Modifications des donnees de base du formulaire
@@ -432,10 +453,11 @@ function Forms_update(){
 		if ($id_form && $titre) {
 			$query = "UPDATE spip_forms SET ".
 				"descriptif="._q($descriptif).", ".
-				"sondage="._q($sondage).", ".
+				"type_form="._q($type_form).", ".
 				"email="._q(serialize($email)).", ".
 				"champconfirm="._q($champconfirm).", ".
 				"texte="._q($texte)." ".
+				"moderation="._q($moderation)." ".
 				"WHERE id_form="._q($id_form);
 			$result = spip_query($query);
 		}
@@ -445,7 +467,7 @@ function Forms_update(){
 			$id_form = $row['id_form'];
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
-			$sondage = $row['sondage'];
+			$type_form = $row['type_form'];
 			$email = unserialize($row['email']);
 			$champconfirm = $row['champconfirm'];
 			$texte = $row['texte'];
@@ -552,7 +574,7 @@ function exec_forms_edit(){
 	$email = _request('email');
 	$champconfirm = _request('champconfirm');
 	$texte = _request('texte');
-	$sondage = _request('sondage');
+	$type_form = _request('type_form');
 	
 	Forms_install();
 
@@ -563,7 +585,7 @@ function exec_forms_edit(){
 
 	$nb_reponses = 0;
 	if ($id_form)
-		if ($row = spip_fetch_array(spip_query("SELECT COUNT(*) AS num FROM spip_reponses WHERE id_form="._q($id_form)." AND statut='valide'")))
+		if ($row = spip_fetch_array(spip_query("SELECT COUNT(*) AS num FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND statut='valide'")))
 			$nb_reponses = $row['num'];
 
 	$clean_link = parametre_url(self(),'new','');
@@ -589,10 +611,11 @@ function exec_forms_edit(){
 		include_spip('inc/charset');
 		$titre = unicode2charset(html2unicode($titre));
 		$descriptif = "";
-		$sondage = "non";
+		$type_form = _request('type_form')?_request('type_form'):""; // possibilite de passer un type par defaut dans l'url de creation
 		$email = array();
 		$champconfirm = "";
 		$texte = "";
+		$moderation = "priori";
 		$js_titre = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 	}
 	else {
@@ -606,10 +629,11 @@ function exec_forms_edit(){
 			$id_form = $row['id_form'];
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
-			$sondage = $row['sondage'];
+			$type_form = $row['type_form'];
 			$email = unserialize($row['email']);
 			$champconfirm = $row['champconfirm'];
 			$texte = $row['texte'];
+			$moderation = $row['moderation'];
 		}
 		$js_titre = "";
 	}
@@ -780,18 +804,28 @@ function exec_forms_edit(){
 			echo "<input type='hidden' name='texte' value=\"" . entites_html($texte);
 			echo "\" />\n";
 	 	}
+	 	
+		echo "<strong><label for='moderation'>"._T('forms:moderation_donnees')."</label></strong>";
+	 	echo "<br />";
+		echo bouton_radio("moderation", "posteriori", _T('bouton_radio_publication_immediate'), $moderation == "posteriori", "");
+		echo "<br />";
+		echo bouton_radio("moderation", "priori", _T('bouton_radio_moderation_priori'), $moderation == "priori", "");
+		echo "<br />";
 
-
-		debut_cadre_enfonce("statistiques-24.gif");
-		echo "<strong>"._T("forms:sondage")."</strong> : ";
-		echo _T("forms:info_sondage");
-		echo "<br /><br />";
-		afficher_choix('sondage', $sondage, array(
-			'non' => _T("forms:sondage_non"),
-			'public' => _T("forms:sondage_pub"),
-			'prot' => _T("forms:sondage_prot")
-		));
-		fin_cadre_enfonce();
+	 	if (in_array($type_form,array('','sondage-public','sondage-prot'))){
+			debut_cadre_enfonce("statistiques-24.gif");
+			echo "<strong>"._T("forms:type_form")."</strong> : ";
+			echo _T("forms:info_sondage");
+			echo "<br /><br />";
+			afficher_choix('type_form', $type_form, array(
+				'' => _T("forms:sondage_non"),
+				'sondage-public' => _T("forms:sondage_pub"),
+				'sondage-prot' => _T("forms:sondage_prot")
+			));
+			fin_cadre_enfonce();
+	 	}
+	 	else 
+	 		echo "<input type='hidden' name='type_form' value='$type_form' />";
 
 		echo "<div align='right'>";
 		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";

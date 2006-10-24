@@ -83,7 +83,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'probleme_technique_upload'=>"Probl&egrave;me technique. Le transfert du fichier a &eacute;chou&eacute;.",
 
 'site_introuvable'=>"Ce site n'a pas &eacute;t&eacute; trouv&eacute;.",
-'sondage'=>"Sondage",
 'sondage_non'=>"Ce formulaire n'est pas un sondage",
 'sondage_pub'=>"Ce formulaire est un sondage public. Les r&eacute;sultats seront accessibles aux visiteurs du site.",
 'sondage_prot'=>"Ce formulaire est un sondage prot&eacute;g&eacute;. Les r&eacute;sultats ne seront accessibles que depuis l'interface priv&eacute;e.",
@@ -94,6 +93,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'supprimer_choix' => "supprimer ce choix",
 'supprimer_formulaire' => "Supprimer ce formulaire",
 'supprimer_reponse' => "Supprimer cette r&eacute;ponse",
+
+'type_form'=>"Type de formulaire",
 
 'remplir_un_champ'=>"Veuillez remplir au moins un champ.",
 'reponse_enregistree'=>"Votre r&eacute;ponse a &eacute;t&eacute; enregistr&eacute;e.",

@@ -13,8 +13,8 @@
 <div class='pagination'>(#PAGINATION)</div>
 </td>
 </tr>]
-<BOUCLE_forms(FORMS){sondage=non}{pagination}>
-<BOUCLE_rep(REPONSES){id_form}></BOUCLE_rep>#SET{reponses,#TOTAL_BOUCLE}<//B_rep>
+<BOUCLE_forms(FORMS){type_form=''}{pagination}>
+<BOUCLE_rep(FORMS_DONNEES){id_form}></BOUCLE_rep>#SET{reponses,#TOTAL_BOUCLE}<//B_rep>
 #SET{lien_edite,(#URL_ECRIRE{forms_edit,id_form=#ID_FORM}|parametre_url{retour,#URL_ECRIRE{forms_tous}})}
 <tr class='tr_liste'>
 <td class="arial11">
@@ -51,8 +51,8 @@
 <div class='pagination'>(#PAGINATION)</div>
 </td>
 </tr>]
-<BOUCLE_sondpub(FORMS){sondage=public}{pagination}>
-<BOUCLE_rep2(REPONSES){id_form}></BOUCLE_rep2>#SET{reponses,#TOTAL_BOUCLE}<//B_rep2>
+<BOUCLE_sondpub(FORMS){type_form=sondage-public}{pagination}>
+<BOUCLE_rep2(FORMS_DONNEES){id_form}></BOUCLE_rep2>#SET{reponses,#TOTAL_BOUCLE}<//B_rep2>
 #SET{lien_edite,(#URL_ECRIRE{forms_edit,id_form=#ID_FORM}|parametre_url{retour,#URL_ECRIRE{forms_tous}})}
 <tr class='tr_liste'>
 <td class="arial11">
@@ -89,8 +89,8 @@
 <div class='pagination'>(#PAGINATION)</div>
 </td>
 </tr>]
-<BOUCLE_sondprot(FORMS){sondage=prot}{pagination}>
-<BOUCLE_rep3(REPONSES){id_form}></BOUCLE_rep3>#SET{reponses,#TOTAL_BOUCLE}<//B_rep3>
+<BOUCLE_sondprot(FORMS){type_form=sondage-prot}{pagination}>
+<BOUCLE_rep3(FORMS_DONNEES){id_form}></BOUCLE_rep3>#SET{reponses,#TOTAL_BOUCLE}<//B_rep3>
 #SET{lien_edite,(#URL_ECRIRE{forms_edit,id_form=#ID_FORM}|parametre_url{retour,#URL_ECRIRE{forms_tous}})}
 <tr class='tr_liste'>
 <td class="arial11">

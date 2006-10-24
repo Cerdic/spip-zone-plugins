@@ -118,6 +118,24 @@
 			include_spip('base/abstract_sql');
 			creer_base();
 			Forms_allstructure2table();
+
+			spip_query("ALTER TABLE spip_forms CHANGE sondage type_form VARCHAR(255) NOT NULL");
+			spip_query("UPDATE spip_forms SET type_form='sondage-public' WHERE type_form='public'");
+			spip_query("UPDATE spip_forms SET type_form='sondage-prot' WHERE type_form='prot'");
+			spip_query("UPDATE spip_forms SET type_form='' WHERE type_form='non'");
+			spip_query("ALTER TABLE spip_forms ADD moderation VARCHAR(10) DEFAULT 'posteriori' NOT NULL AFTER texte");
+			spip_query("ALTER TABLE spip_reponses RENAME spip_forms_donnees");
+			spip_query("ALTER TABLE spip_forms_donnees CHANGE id_reponse id_donnee BIGINT( 21 ) NOT NULL AUTO_INCREMENT");
+			spip_query("ALTER TABLE spip_reponses_champs RENAME spip_forms_donnees_champs");
+			spip_query("ALTER TABLE spip_reponses_champs CHANGE id_reponse id_donnee BIGINT( 21 ) NOT NULL");
+			spip_query("ALTER TABLE spip_reponses_champs DROP INDEX id_reponse ,ADD INDEX id_donnee (id_donnee) ");
+
+			spip_query("ALTER TABLE spip_forms_champs ADD specifiant ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER extra_info");
+			spip_query("ALTER TABLE spip_forms_champs ADD public ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER specifiant");
+			spip_query("ALTER TABLE spip_forms_champs ADD aide text AFTER public");
+			spip_query("ALTER TABLE spip_forms_champs ADD html_wrap text AFTER aide");
+			spip_query("UPDATE spip_forms_champs SET specifiant='non', public='non'"); // par securite
+
 			//ecrire_meta('forms_base_version',$current_version=0.17);
 		}
 		ecrire_metas();
