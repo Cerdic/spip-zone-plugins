@@ -1,5 +1,7 @@
 <?php
 
+ob_start();
+
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 define('_DIR_PLUGIN_TRADLANG',(_DIR_PLUGINS.end($p)));
 
@@ -83,6 +85,10 @@ function exec_tradlang() {
 	  break;
 	case "creermodule":
 	  break;
+	case "popup":
+	  ob_clean();
+	  include("tradlang_popup.php");
+	  exit;
 	}
     }
   else
@@ -362,7 +368,7 @@ function tradlang_visumodule()
 	   $sel = "";
 	   $lg = substr($cle,7);	  
 	   echo "<tr>\n";
-	   echo "<td><a href='.'>".traduire_nom_langue($lg)." ($lg) </a></td>";
+	   echo "<td><a href='#' onclick='window.open (\"".generer_url_ecrire("tradlang")."&operation=popup&module=".$modok["nom_mod"]."&etape=droits&lang_orig=fr&lang_cible=".$lg."\", \"trad_lang\", config=\"height=500, width=700, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no\");return false;'>".traduire_nom_langue($lg)." ($lg) </a></td>";
 	   if (tradlang_testesynchro($modok, $lg))
 	     echo "<td style='border:1px solid black;'><img src='"._DIR_PLUGIN_TRADLANG."/../img_pack/vert.gif'></td>\n";
 	   else

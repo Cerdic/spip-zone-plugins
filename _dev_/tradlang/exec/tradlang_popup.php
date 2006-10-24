@@ -26,6 +26,14 @@
 
 //print_r($_GET);
 
+if ($connect_statut != "0minirezo") 
+     exit;
+
+$prefix = $GLOBALS['table_prefix'];
+$etape = $_GET["etape"];
+$nom_mod = $_GET["module"];
+$module = $_GET["module"];
+
 ini_set(memory_limit, "32M");
 
 $home = "..";
@@ -37,29 +45,6 @@ $delais=10000000;
 $flag_preserver=true;	// pas de bouton "recalculer cette page"
 
 
-if (!isset($spip_lang))
-  $spip_lang='fr';
-
-// on sauvegarde la valeur de 
-// spip lang pour eviter les
-// interferences avec SPIP
-$spip_lang_sv = $spip_lang;
-
-//include('./inc-public.php3');  
-
-include("ecrire/inc_version.php3");
-include("ecrire/inc_lang.php3");
-include("ecrire/inc_filtres.php3");
-include("ecrire/inc_charsets.php3");
-include("ecrire/inc_texte.php3");
-include_ecrire('inc_presentation.php3');
-
-$spip_actif = (file_exists("ecrire/inc_connect.php3"));
-if (!$spip_actif) {
-  echo "SPIP n'est pas activé.";
-  exit;
-}
-
 $spip_lang = $spip_lang_sv;
 
 // redefinition de la fonction _T de
@@ -70,22 +55,7 @@ function _TT($text, $args = '')
   return traduire_chaine($text, $args);
 }
 
-include_ecrire('inc_session.php3');
-verifier_visiteur();
-if (!$auteur_session)
-{
-  //echo _TT('ts:texte_avis_enregistrer');
-  Header("Location: ../spip_login.php3?var_url=.%2Ftrad-lang%2Ftrad_lang.php");
-  exit;
-}
 
-$admin_ok = false;
-if ($auteur_session['statut'] == '0minirezo') 
-  $admin_ok = true;
-
-//include_ecrire('inc_filtres.php3');
-//include_ecrire("inc_connect.php3");
-include("./trad-lang/inc_connect.php3");
 
 // securite & uniformisation en minuscules (et _) des codes de langue
 $lang_orig  = strtolower(eregi_replace("[^a-z0-9_]", "", $lang_orig));
@@ -103,12 +73,6 @@ if ($direction=="rtl")
     $right="left";
   }
     
-// recuperation des ref. sur
-// les modules
-if ($module=="")
-  $module = "spip";
-$modules = get_modules();
-include($modules[$module]["fichier"]);
 
 
 function get_dir($lg)
@@ -179,16 +143,6 @@ function get_modules()
 }
 
 
-function get_langues_interface()
-{
-  // recuperation des langues utilisees par l'interface
-  // de traduction
-
-  global $modules;
-  include($modules["ts"]["fichier"]);
-
-  return get_langues($nom_mod);
-}
 
 
 /*
@@ -222,11 +176,11 @@ function get_id_get($ids)
  */
 function get_dates($lang_cible)
 {
-  global $nom_mod;
+  global $nom_mod, $prefix;
 
   $arr_date = array();
 
-  $quer = "SELECT id,date_modif FROM trad_lang ".
+  $quer = "SELECT id,date_modif FROM ".$prefix."_tradlang ".
     "WHERE module = '".$nom_mod."' AND lang='".$lang_cible."'";
 
   $res = mysql_query($quer);
@@ -245,11 +199,12 @@ function get_dates($lang_cible)
  */
 function cherche_occurence($chaine, $lang_or, $lang_dst)
 {
+  global $prefix;
   $ret = array();
 
   $chaine = supp_ltgt(entites_html_local($chaine));
 
-  $quer = "SELECT t1.id,t1.str,t2.str FROM trad_lang t1,trad_lang t2 ".
+  $quer = "SELECT t1.id,t1.str,t2.str FROM ".$prefix."_tradlang t1,".$prefix."_tradlang t2 ".
     "WHERE t1.str like '%".$chaine."%' AND t1.lang='".$lang_or."' ".
     " AND t1.id=t2.id AND t2.lang='".$lang_dst."'";
 
@@ -549,7 +504,8 @@ function recherche($table_reponse, $type, $langue, $filtre, $date, $id,
 
 function test_module($nom_mod)
 {
-  $quer = "SELECT id FROM trad_lang WHERE module='".
+  global $prefix;
+  $quer = "SELECT id FROM ".$prefix."_tradlang WHERE module='".
     $nom_mod."' LIMIT 0,1";
   $res = mysql_query($quer);
   if (mysql_num_rows($res)>0)
@@ -564,13 +520,13 @@ function test_module($nom_mod)
  */
 function lire_lang($lang_orig, $lang_str, $type="")
 {
-  global $nom_mod;
+  global $nom_mod, $prefix;
 
   $lang_str = array();
 
   if ($type=="md5")
     {
-      $quer = "SELECT id,md5 FROM trad_lang ".
+      $quer = "SELECT id,md5 FROM ".$prefix."_tradlang ".
 	"WHERE module='".$nom_mod."' AND lang='".$lang_orig."' AND !ISNULL(md5)";
       $res = mysql_query($quer);
       while($row = mysql_fetch_assoc($res))
@@ -578,7 +534,7 @@ function lire_lang($lang_orig, $lang_str, $type="")
     }
   else
     {
-      $quer = "SELECT id,str,status FROM trad_lang ".
+      $quer = "SELECT id,str,status FROM ".$prefix."_tradlang ".
 	"WHERE module = '".$nom_mod."' AND lang='".$lang_orig."' ORDER BY id";
       $res = mysql_query($quer);
       while($row = mysql_fetch_assoc($res))
@@ -595,7 +551,9 @@ function lire_lang($lang_orig, $lang_str, $type="")
 
 function get_comment($id, $lang, $module)
 {
-  $quer = "SELECT comm FROM trad_lang WHERE id='".$id."' AND ".
+  global $prefix;
+
+  $quer = "SELECT comm FROM ".$prefix."_tradlang WHERE id='".$id."' AND ".
     "lang='".$lang."' AND module='".$module."';";
 
   $res = mysql_query($quer);
@@ -605,7 +563,9 @@ function get_comment($id, $lang, $module)
 
 function enregistre_comment($id, $lang, $module, $comm)
 {
-  $quer = "UPDATE trad_lang SET comm='".texte_script($comm)."' WHERE ".
+  global $prefix;
+
+  $quer = "UPDATE ".$prefix."_tradlang SET comm='".texte_script($comm)."' WHERE ".
     "id='".$id."' AND lang='".$lang."' AND module='".$module."';";
 
   $res = mysql_query($quer);
@@ -613,7 +573,9 @@ function enregistre_comment($id, $lang, $module, $comm)
 
 function test_item($nom_mod, $codelg, $key)
 {
-  $quer = "SELECT id FROM trad_lang ". 
+  global $prefix;
+
+  $quer = "SELECT id FROM ".$prefix."_tradlang ". 
     "WHERE id = '".$key."' AND module = '".$nom_mod."' ".
     "AND lang='".$codelg."'";
   $res = mysql_query($quer);
@@ -641,7 +603,9 @@ function extrait_statut($chaine, $statut)
 
 function effacer_item($nom_mod, $key)
 {
-  $quer = "DELETE FROM trad_lang WHERE module='".$nom_mod."' AND id='".$key."'";
+  global $prefix;
+
+  $quer = "DELETE FROM ".$prefix."_tradlang WHERE module='".$nom_mod."' AND id='".$key."'";
   $res = mysql_query($quer);  
 }
 
@@ -650,10 +614,10 @@ function effacer_item($nom_mod, $key)
 // la langue origine
 function get_val_orig($id)
 {
-  global $nom_mod, $lang_mere;
+  global $nom_mod, $lang_mere, $prefix;
 
   $ret = "";
-  $quer = "SELECT str FROM trad_lang WHERE module='".$nom_mod."' AND lang='".$lang_mere."'".
+  $quer = "SELECT str FROM ".$prefix."_tradlang WHERE module='".$nom_mod."' AND lang='".$lang_mere."'".
     " AND id='".$id."'";
   $res = mysql_query($quer);  
   if ($res)
@@ -671,7 +635,7 @@ function get_val_orig($id)
  */
 function ecrire_item($codelg, $id, $chaine, $type="")
 {
-  global $nom_mod, $lang_mere;
+  global $nom_mod, $lang_mere, $prefix;
 
   $orig = 0;
   if ($codelg == $lang_mere)
@@ -692,12 +656,12 @@ function ecrire_item($codelg, $id, $chaine, $type="")
   if (test_item($nom_mod, $codelg, $id))
     {
       if ($type == "debut")  // pas de remise a jour de date_modif ou md5
-	$quer = "UPDATE trad_lang SET str='".$chaine."'".
+	$quer = "UPDATE ".$prefix."_tradlang SET str='".$chaine."'".
 	  ",status='".$statut."' WHERE id='".$id."' AND lang='".$codelg."' AND ".
 	  " module='".$nom_mod."'";
 
       else
-	$quer = "UPDATE trad_lang SET str='".$chaine."'".
+	$quer = "UPDATE ".$prefix."_tradlang SET str='".$chaine."'".
 	  ",status='".$statut."', date_modif=NOW()".$dummy." WHERE ".
 	  "id='".$id."' AND lang='".$codelg."' AND ".
 	  " module='".$nom_mod."'";
@@ -705,11 +669,11 @@ function ecrire_item($codelg, $id, $chaine, $type="")
   else
     {
       if ($dummy != "")
-	$quer = "INSERT INTO trad_lang (id,module,lang,status,str,orig,md5) ".
+	$quer = "INSERT INTO ".$prefix."_tradlang (id,module,lang,status,str,orig,md5) ".
 	  "VALUES ('".$id."','".$nom_mod."','".$codelg."','".$statut."','".
 	  $chaine."',".$orig.",'".$md5."')";
       else
-	$quer = "INSERT INTO trad_lang (id,module,lang,status,str,orig) ".
+	$quer = "INSERT INTO ".$prefix."_tradlang (id,module,lang,status,str,orig) ".
 	  "VALUES ('".$id."','".$nom_mod."','".$codelg."','".$statut."','".
 	  $chaine."',".$orig.")";
     }
@@ -828,7 +792,7 @@ function fin_html_ts()
 function debut_table($titre_table, $retour="./trad_lang.php")
 {
   global $left,$right;
-  global $spip_lang, $module, $admin_ok;
+  global $spip_lang, $module;
   echo " <table border=0 cellspacing=2 cellpadding=5 bgcolor=#cccccc ";
   echo "class=window align=center width=700>";
   echo "<tr> ";
@@ -842,8 +806,6 @@ function debut_table($titre_table, $retour="./trad_lang.php")
   echo "</td>";
 
   echo "<td align='$right' width='15%'>";
-  if ($admin_ok == true)
-    echo "<font color='white'>"._TT("ts:item_admin")."</font>";
   echo "</td>";
 
   echo "<td align='$right' width='5%'>";
@@ -890,7 +852,9 @@ function erreur($texte, $action)
 
 function get_langues($nom_mod, $excl="")
 {
-  $quer = "SELECT distinct lang FROM trad_lang WHERE module='".$nom_mod."'";
+  global $prefix;
+
+  $quer = "SELECT distinct lang FROM ".$prefix."_tradlang WHERE module='".$nom_mod."'";
   $res = mysql_query($quer);
 
   $ret = array();
@@ -900,226 +864,6 @@ function get_langues($nom_mod, $excl="")
 	$ret[] = $row["lang"];
     }
   return $ret;
-}
-
-/*
- * Premier ecran : choix de selection des langues
- */
-if (!$source AND !$etape) {
-  
-  $langues = get_langues($nom_mod);
-  $langues_c = get_langues($nom_mod, $lang_mere);
-  $langues_ihm = get_langues_interface();
-  debut_html_ts();
-
-  debut_table(_TT('ts:texte_interface2')."<br>&nbsp;", "..");
-
-  echo "<tr><td align=$left colspan=2 class=line>";
-  echo "<table width=100% border=0 cellspacing=0 cellpadding=0>";
-
-  echo "<FORM ACTION='./trad_lang.php' METHOD='POST' NAME='langue'>";
-  echo "<tr>";    
-
-  echo "<td width=100>";
-  echo _TT("ts:texte_langue");
-  echo "</td>";
-
-  echo "<td width=100 align=$left class=window>";
-  echo "<SELECT NAME='spip_lang' OnChange='langue.submit()'>\n";
-  asort($langues_ihm);
-  while (list(,$lg) = each($langues_ihm))
-    {
-      $option = "";
-      if ($lg == $spip_lang)
-	$option = " selected";
-      echo "<OPTION STYLE='width:200px' VALUE='$lg'$option>".traduire_nom_langue($lg)." ($lg)\n";
-    }
-  echo "</SELECT>\n";
-  echo "</td>";
-
-  echo "<td align=$right>";
-  echo "&nbsp;";
-  echo "</td>";
-
-  echo "</tr> </FORM>";
-  echo "</table>";
-  echo "</td></tr>";
-
-
-  echo "<tr><td class=line_pres colspan=2 bgcolor=#f0f0f0 align=".$left.">";
-
-  echo "<p>"._TT('ts:texte_selectionner');
-  echo "<p><UL><LI><b>"._TT('ts:texte_module')."</b>";
-
-  echo "<LI>"._TT('ts:texte_langue_origine');
-  echo _TT('ts:texte_langue_origine2');
-
-  echo "<LI>"._TT('ts:texte_langue_cible')."</UL>";
-
-  echo "<p>"._TT('ts:texte_explication_langue_cible', array('module' => $module));
-  
-  echo "</td></tr>";
-
-  echo "<tr bgcolor=#f0f0f0><td class=line_pres width=300 align=".$left.">";
-  echo "<FORM NAME='choix' ACTION='trad_lang.php' METHOD='POST'>\n";
-  echo "<INPUT TYPE='hidden' NAME='etape' VALUE='droits'>\n";
-  echo "<INPUT TYPE='hidden' NAME='spip_lang' VALUE='".$spip_lang."'>\n";
-  echo "<b>"._TT('ts:texte_module_traduire')." </b>";
-  echo "</td><td align=$right>\n";
-
-  echo "<SELECT NAME='module' OnChange='choix.etape.value=\"\";choix.submit()'>\n";
-  reset($modules);
-  while (list($nom,$def) = each($modules))
-    {
-      $option = "";
-      if ($nom == $module)
-	$option = " selected";
-      echo "<OPTION STYLE='width:200px' VALUE='".$nom."'$option>".$def["nom"]."\n";
-    }
-  echo "</SELECT>\n";
-  echo "</td></tr>\n";
-
-  echo "<tr bgcolor=#f0f0f0><td class=line_pres align=".$left.">";
-  echo "<b>"._TT('ts:item_langue_origine')." </b>";
-  echo "</td><td align=$right>\n";
-
-  echo "<SELECT NAME='lang_orig'>\n";
-  asort($langues);
-  while (list(,$lg) = each($langues))
-    {
-      $option = "";
-      if ($lg == 'fr')
-	$option = " selected";
-      echo "<OPTION STYLE='width:200px' VALUE='$lg'$option>".traduire_nom_langue($lg)." ($lg)\n";
-    }
-  echo "</SELECT>\n";
-  echo "</td></tr>\n";
-
-  echo "<tr bgcolor=#f0f0f0><td class=line_pres align=".$left.">";
-  echo "<b>"._TT('ts:item_langue_cible');
-  echo "<br>"._TT('ts:item_nouveau_code')."</b>";
-  echo "</td><td align=$right>";
-  echo "<SELECT NAME='lang_cible'>\n";
-  echo "<OPTION VALUE=''>--\n";
-  sort($langues_c);
-  reset($langues_c);
-  while (list(,$lg) = each($langues_c))
-      echo "<OPTION STYLE='width:200px' VALUE='$lg'>".traduire_nom_langue($lg)." ($lg)\n";
-  echo "</SELECT>";
-  echo "<br><INPUT TYPE='text' NAME='nouv_lang_cible' VALUE='' SIZE='3'>\n";
-
-  echo "</td></tr>\n";
-
-  echo "<tr><td class=line align=$right colspan=2>";
-
-  if ($admin_ok)
-    echo "<INPUT TYPE='submit' NAME='Administrer' VALUE=\""._TT("ts:bouton_administrer")."\">&nbsp;&nbsp;";
-
-  echo "<INPUT TYPE='submit' NAME='Valider' VALUE=\""._TT('ts:bouton_continuer')."\">";
-
-  echo "</td></tr>";
-  echo "</FORM>";
-  fin_table();
-
-  fin_html_ts();
-  exit;
-}
-
-
-/*
- * bilan
- */
-if ($etape == 'bilan')
-{
-  $langues = get_langues($nom_mod);
-  debut_html_ts();
-  echo "<P><B>"._TT('ts:lien_bilan')."</B>\n";
-
-  // chiffres langue originale
-
-  $lang_str_fr = array();
-  lire_lang($lang_mere, &$lang_str_fr);
-  $total_fr = sizeof($lang_str_fr);
-
-  $lang_buff=array();
-  $lang_score=array();
-
-  reset($langues);
-  while(list(,$lg) = each($langues))
-    {
-      $lang_str = array();
-      lire_lang($lg, &$lang_str);
-      $buff = "";
-
-      $cpt = 0;
-      $cpt_non_traduit = 0;
-      $cpt_conflit = 0;
-      $cpt_modifie = 0;      
-
-      $buff .= "<center>";
-      $buff .= "<p><table bgcolor='#f0f0f0' cellspacing='0' cellpadding='4' style='border: ".
-	"1px solid black; padding: 2px;' width='60%'>\n";
-
-      reset($lang_str);
-      while(list($str,$ch) = each($lang_str))
-	{
-	  if (ereg("^<NEW>(.*)", $ch))
-	    $cpt_non_traduit += 1;
-	  else if (ereg("^<MODIF>(.*)", $ch))
-	    $cpt_modifie += 1;
-	  else if(!$lang_str_fr[$str]) // conflit
-	    $cpt_conflit += 1;
-
-	  $cpt += 1;
-	}
-
-      $cpt_traduit = $cpt-$cpt_non_traduit-$cpt_conflit-$cpt_modifie;
-      $cpt_non_traduit_total = $total_fr - $cpt + $cpt_non_traduit;
-
-      $prt = 100.0;
-      $prt_non_traduit = sprintf("%.02f", ($cpt_non_traduit_total/$total_fr) * 100);
-      $prt_traduit = sprintf("%.02f", (($cpt_traduit)/$total_fr) * 100);
-      $prt_conflit = sprintf("%.02f", (($cpt_conflit)/$total_fr) * 100);
-      $prt_modifie = sprintf("%.02f", (($cpt_modifie)/$total_fr) * 100);
-      
-      $contact = $lang_str['0_mainteneur'];
-
-      $buff .="<tr><td width='30%'><b>"._TT('ts:texte_langue')."</b></td><td><b>".$lang_str["0_langue"]."</b>&nbsp;</td></tr>\n";
-      $buff .="<tr><td>"._TT('ts:texte_fichier')."</td><td>".$nf."</td></tr>\n";
-      $buff .="<tr><td>"._TT('ts:texte_contact')."</td><td>".$contact."</td></tr>\n";
-      $buff .="<tr><td>"._TT('ts:texte_total_chaine')." </td><td>".$cpt."</td></tr>\n";
-      $buff .="<tr><td>"._TT('ts:texte_total_chaine_non_traduite')." </td><td><font color='orange'>".$cpt_non_traduit_total." <b>(".$prt_non_traduit." %)</b></font></td></tr>\n";
-      $buff .="<tr><td>"._TT('ts:texte_total_chaine_traduite')." </td><td><font color='green'>".$cpt_traduit." <b>(".$prt_traduit." %)</b></font></td></tr>\n";
-      $buff .="<tr><td>"._TT('ts:texte_total_chaine_modifie')." </td><td><font color='red'>".$cpt_modifie." <b>(".$prt_modifie." %)</b></font></td></tr>\n";
-      $buff .="<tr><td>"._TT('ts:texte_total_chaine_conflit')." </td><td><font color='red'>".$cpt_conflit." <b>(".$prt_conflit." %)</b></font></td></tr>\n";
-      $buff .="<tr><td></td><td></td></tr>\n";
-
-      $buff .="<tr><td></td><td align='$right'>";
-      if ($lg!='fr')
-	$buff .= "<A HREF='./trad_lang.php?etape=droits&spip_lang=".
-	  $spip_lang."&module=".$module."&lang_orig=fr&lang_cible=".
-	  $lg."'>[Traduire]</A>\n";          
-      $buff .="<A HREF='./'>".
-	_TT('ts:lien_telecharger')."</A></td></tr>\n";      
-      
-      $buff .="</table>\n";    
-      $buff .="</center>";
-
-      $lang_buff[$lg] = $buff;
-      $lang_score[$lg] = $prt_traduit;
-
-      //unset($GLOBALS[$GLOBALS['idx_lang']]);
-    }
-
-  arsort($lang_score);
-  for (reset($lang_score); $key=key($lang_score); next($lang_score))
-    echo $lang_buff[$key];
-
-  echo "<p align='center'><a href='trad_lang.php?spip_lang=".
-    $spip_lang."&module=".$module."'>"._TT('ts:lien_revenir_traduction')."</p>\n";
-
-  fin_html_ts();
-  exit;
 }
 
 
@@ -1136,23 +880,10 @@ if ($etape == 'droits')
       if ((!isset($nouv_lang_cible) || ($nouv_lang_cible==''))
 	  && ($lang_cible==''))
 	{
-	  @header("Location: trad_lang.php?spip_lang=".
+	  @header("Location: ".generer_url_ecrire("tradlang")."&operation=popup&spip_lang=".
 		  $spip_lang."&module=".$module);
 	  exit;
 	}
-    }
-
-  else if (isset($Administrer))
-    {
-      $lang_orig = $lang_mere;
-      $operation = "administration";
-    }
-
-  else
-    {
-       @header("Location: trad_lang.php?spip_lang=".
-	       $spip_lang."&module=".$module);
-       exit;
     }
 
   $erreur = 0; 
@@ -1185,18 +916,19 @@ if ($etape == 'droits')
       switch($erreur)
 	{
 	case 1:
-	  erreur("<p>"._TT('ts:lien_code_langue')."</p>", "trad_lang.php?spip_lang=".$spip_lang."&module=".$module);
+	  erreur("<p>"._TT('ts:lien_code_langue')."</p>", generer_url_ecrire("tradlang")."&operation=popup&spip_lang=".$spip_lang."&module=".$module);
+
 	  break;
 	case 2:
 	  erreur("<p>"._TT('ts:texte_langues_differentes').
-		 "</p>", "trad_lang.php?spip_lang=".$spip_lang."&module=".$module);
+		 "</p>", generer_url_ecrire("tradlang")."&operation=popup&spip_lang=".$spip_lang."&module=".$module);
 	  break;
 	case 3:
 	  erreur("<p>"."xxs:module_inexistant".
-		 "</p>", "trad_lang.php?spip_lang=".$spip_lang."&module=".$module);
+		 "</p>", generer_url_ecrire("tradlang")."&operation=popup&spip_lang=".$spip_lang."&module=".$module);
 	case 4:
 	  erreur("<p>"."xxs:langue_cible_invalide".
-		 "</p>", "trad_lang.php?spip_lang=".$spip_lang."&module=".$module);
+		 "</p>", generer_url_ecrire("tradlang")."&operation=popup&spip_lang=".$spip_lang."&module=".$module);
 	  break;
 	}
            
@@ -1271,9 +1003,9 @@ if ($etape == 'droits')
 	  ecrire_lang($lang_modif, $lang_cible, array(), "debut");  
 	}
 
-      Header("Location: trad_lang.php?spip_lang=".$spip_lang."&module=".$module.
+echo "Location: ".generer_url_ecrire("tradlang")."&operation=popup&spip_lang=".$spip_lang."&module=".$module.
 	     "&etape=".$operation."&type=revise&lang_orig=".$lang_orig."&lang_cible=".
-	     $lang_cible."&nouv_lang_cible=".$nouv_lang_cible);
+	     $lang_cible."&nouv_lang_cible=".$nouv_lang_cible;
       exit;
 
     }
@@ -1288,6 +1020,8 @@ if ($etape == 'droits')
  */
 if ($etape == 'traduction')
 {
+echo __LINE__;
+exit;
   debut_html_ts();
 
   $save_lang_cible = $lang_cible;
@@ -1890,192 +1624,6 @@ if (($etape == 'sauvegarde') || ($etape=='sauvegarde_adm'))
     }
 }
 
-
-/*
- * administration
- */
-if ($etape == 'administration')
-{
-  debut_html_ts();
-
-  if ($admin_ok == false)
-    {
-      erreur(_TT("ts:texte_seul_admin"), "trad_lang.php?spip_lang=".$spip_lang."&module=".$module);
-      fin_html_ts();
-      exit;
-    }
-
-  if ( (isset($ajout) && ($nouveau!='')) ||
-       isset($effacer) ||
-       isset($modifier) )
-    {  // ajout nouvelle chaine
-
-      $lang_str_orig = array();
-      $lang_modif = array();
-
-      lire_lang($lang_orig, &$lang_str_orig);
-      
-      if (isset($ajout))
-	{
-	  $nouveau = strtolower($nouveau);
-	  if (!array_key_exists($nouveau, $lang_str_orig))
-	    $lang_modif[$nouveau] = "";
-	  $id = $nouveau;
-
-	  ecrire_lang($lang_modif, $lang_orig, array(), "debut");  
-	}
-
-      else if (isset($modifier))
-	{
-	  $item = recup_modif($texte);
-	  $lang_modif[$id] = $item;
-
-	  ecrire_lang($lang_modif, $lang_orig, array(), "debut");  
-	}
-	  
-      else if (isset($effacer))
-	{
-	  effacer_item($nom_mod, $id);
-	}
-    }
-
-  //non utilise dans le cas admin
-  $type = 'tous';
-
-  $cpt=0.0;
-  $lang_orig_aff = "";
-  $lang_cible_aff = "";  // non utilise, mais initialise poru la fonction rech.
-
-  $table_rech=array();
-  $res_date = array();
-  recherche(&$table_rech, $type, $langue, $filtre, "-", array($id), &$cpt, 
-     &$lang_orig_aff, &$lang_cible_aff, 3, &$res_date);
-
-  if (!isset($id) || !array_key_exists($id, $table_rech))
-    $id = key($table_rech);
-
-  $titre_table = _TT("ts:texte_admin")."<b>".$lang_orig_aff."</b><br>".
-    _TT('ts:lien_traduction_module')."(".$modules[$module]["nom"].")</b> ";
-
-  debut_table($titre_table);
-  
-  // toolbar
-  
-  echo "<tr><td align=$left colspan=2 class=line>";
-  echo "<table width=100% border=0 cellspacing=0 cellpadding=0>";
-
-  echo "<tr>";    
-
-  echo "<FORM ACTION=\"./trad_lang.php?spip_lang=".$spip_lang."&langue=".$langue."&date=".$date."&filtre=".$filtre."&module=".$module."&etape=sauvegarde_adm&type=".$type."&lang_orig=".$lang_orig."&lang_cible=".$lang_orig."&nouv_lang_cible=".$nouv_lang_cible."\" METHOD=\"POST\" name=\"sloc\">";
-
-  echo "<td width=8>&nbsp;</td>";
-  echo "<td width=32 class=window onMouseOver=\"this.style.backgroundColor='#eeee87'\"  onMouseOut=\"this.style.backgroundColor=''\">";
-  echo "<input ALT=\""._TT('ts:lien_export')."\" title=\""._TT('ts:lien_export')."\" type=\"image\" value=\"Exporter\" HSPACE=0 border=0 src=\"./images/save_loc.gif\" name=\"exporter\" OnClick=\"if (confirm('".addslashes(_TT('ts:lien_confirm_export', array('fichier'=>$fic_cible)))."')) sloc.submit(); else return false;\">";   
-  echo "</td>";
-
-  echo "</form>";
-
-  echo "<FORM ACTION=\"./trad_lang.php?spip_lang=".$spip_lang."&langue=".$langue."&date=".$date."&filtre=".$filtre."&telech=1&module=".$module."&etape=sauvegarde_adm&type=".$type."&lang_orig=".$lang_orig."&lang_cible=".$lang_orig."&nouv_lang_cible=".$nouv_lang_cible."\" METHOD=\"POST\" name=\"sauvegarder\">";
-
-  echo "<td width=8>&nbsp;</td>";
-  echo "<td width=32 class=window onMouseOver=\"this.style.backgroundColor='#eeee87'\"  onMouseOut=\"this.style.backgroundColor=''\">";
-  echo "<input ALT=\""._TT('ts:lien_export_net')."\" title=\""._TT('ts:lien_export_net')."\" type=\"image\" value=\"Exporter\" HSPACE=0 border=0 src=\"./images/save_net.gif\" name=\"exporter\" OnClick=\"sauvegarder.submit();\">";   
-  echo "</td>";
-
-  echo "<td align=$right>";
-  echo "&nbsp";
-  echo "</td>";
-
-  echo "</tr> </FORM>";
-  echo "</table>";
-
-  echo "</td></tr>";
-  // fin toolbar
-
-  echo "<FORM NAME='chfiltre' ACTION='trad_lang.php' METHOD='POST'>\n";
-  echo "<tr bgcolor=#f0f0f0><td align=$left class=line>";
-  echo "<b>"._TT('ts:texte_filtre')."</b>";
-  echo "</td><td align=$right class=line nowrap>";
-  echo "<INPUT TYPE='hidden' NAME='etape' VALUE='administration'>";
-  echo "<INPUT TYPE='hidden' NAME='type' VALUE='".$type."'>";
-  echo "<INPUT TYPE='hidden' NAME='id' VALUE='".$id."'>";
-  echo "<INPUT TYPE='hidden' NAME='module' VALUE='".$module."'>";
-  echo "<INPUT TYPE='hidden' NAME='spip_lang' VALUE='".$spip_lang."'>";
-  echo "<INPUT TYPE='hidden' NAME='lang_orig' VALUE='".$lang_orig."'>";
-  echo "<INPUT TYPE='text' VALUE='".$filtre."' NAME='filtre' SIZE='30'>";
-  echo "&nbsp;<INPUT TYPE='submit' NAME='chercher' STYLE='width:20%' VALUE='"._TT("ts:bouton_chercher")."'>";
-  echo "</td> </tr>";
-  echo "</FORM>\n";
-
-  echo "<FORM NAME='ajout' ACTION='trad_lang.php' METHOD='POST'>\n";
-  echo "<tr bgcolor=#f0f0f0><td align=$left class=line>";
-  echo "<b>"._TT("ts:item_nouveau")."</b>";
-  echo "</td><td align=$right class=line nowrap>";
-  echo "<INPUT TYPE='hidden' NAME='etape' VALUE='administration'>";
-  echo "<INPUT TYPE='hidden' NAME='type' VALUE='".$type."'>";
-  echo "<INPUT TYPE='hidden' NAME='id' VALUE='".$id."'>";
-  echo "<INPUT TYPE='hidden' NAME='module' VALUE='".$module."'>";
-  echo "<INPUT TYPE='hidden' NAME='spip_lang' VALUE='".$spip_lang."'>";
-  echo "<INPUT TYPE='hidden' NAME='lang_orig' VALUE='".$lang_orig."'>";
-  echo "<INPUT TYPE='hidden' NAME='filtre' VALUE='".$filtre."'>";
-  echo "<INPUT TYPE='text' VALUE='".$nouveau."' NAME='nouveau' SIZE='30'>";
-  echo "&nbsp;<INPUT TYPE='submit' NAME='ajout' STYLE='width:20%' VALUE='"._TT("ts:bouton_ajouter")."'>";
-  echo "</td> </tr>";
-  echo "</FORM>\n";
-
-  echo "<tr bgcolor=#f0f0f0>";
-  echo "<td align=$left class=line colspan=2>";
-
-  echo "<FORM NAME='returnable' ACTION='trad_lang.php' METHOD='POST'>\n";
-  echo "<INPUT TYPE='hidden' NAME='langue' VALUE='".$langue."'>\n";
-  echo "<INPUT TYPE='hidden' NAME='filtre' VALUE='".$filtre."'>\n";
-
-  echo "<INPUT TYPE='hidden' NAME='etape' VALUE='administration'>\n";
-  echo "<INPUT TYPE='hidden' NAME='module' VALUE='".$module."'>\n";
-  echo "<INPUT TYPE='hidden' NAME='spip_lang' VALUE='".$spip_lang."'>";
-  echo "<INPUT TYPE='hidden' NAME='lang_orig' VALUE='".$lang_orig."'>\n";
-  echo "<INPUT TYPE='hidden' NAME='type' VALUE='".$type."'>\n";
-  echo "<CENTER>\n";
-  echo "<P><SELECT STYLE='width:100%' NAME='id' SIZE='10' ORDERED OnChange='returnable.submit()'>\n";
-  while (list($idl,$val) = each($table_rech))
-    {
-      $opt = "";
-      if ($idl == $id)
-	$opt = "SELECTED";
-      echo "<OPTION VALUE='".$idl."' ".$opt.">".$idl."\n";
-    }
-  echo "</SELECT>\n";
-  echo "</CENTER>\n";
-  echo "</td>";
-
-  echo "<tr>";
-  echo "<td align=$left class=line colspan=2>";
-  echo "<b>".$id."</b>&nbsp;&nbsp;";
-
-  echo "<input ALT=\""._TT('ts:lien_commentaire')."\" title=\""._TT('ts:lien_commentaire')."\" type=\"image\" value=\"Commenter\" HSPACE=0 border=0 src=\"./images/comment.gif\" name=\"commenter\" OnClick=\"ouvrirfen(300,180,'./trad_lang.php?spip_lang=$spip_lang&etape=commenter&affmodif=oui&lang_orig=$lang_orig&id=$id&nommodule=$nom_mod');return false;\">";   
-  echo "&nbsp;".get_comment($id, $lang_orig, $nom_mod);
-
-  echo "</td></tr>";
-
-  reset($table_rech);
-
-  echo "<tr><td align=$right colspan=2>";
-  $item = affiche_modif($table_rech[$id]);
-  $nbrows = calc_nb_row($item);
-  echo "<TEXTAREA STYLE='width:100%' ROWS='".$nbrows."' COLS='45' WRAP='soft' NAME='texte'>".
-    $item."</TEXTAREA>";
-  echo "</td></tr>";
-
-  echo "<tr><td align=$right colspan=2>";
-  echo "<INPUT TYPE=\"submit\" NAME=\"effacer\" VALUE=\""._TT("ts:item_effacer")."\" OnClick=\"if (confirm('".addslashes(_TT("ts:confirmer_effacer", array("chaine"=>$id)))."')) effacer.submit(); else return false;\">\n";
-  echo "&nbsp;&nbsp;<INPUT TYPE='submit' NAME='modifier' VALUE='"._TT("ts:bouton_modifier")."' >\n";
-  echo "</FORM>\n";
-  echo "</td></tr>";
-
-  fin_table();
-  fin_html_ts();
-  exit;
-}
 
 
 exit;
