@@ -4,7 +4,7 @@ $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FI
 define('_DIR_PLUGIN_TRADLANG',(_DIR_PLUGINS.end($p)));
 
 include_spip("inc/presentation");
-include("tradlang_popup.php");
+include("tradlang_inc.php");
 
 function exec_tradlang() {
 
