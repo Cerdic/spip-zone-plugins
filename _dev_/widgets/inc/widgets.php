@@ -65,7 +65,7 @@ class Widget {
 
 	function code() {
 		return
-		'<input type="hidden" class="widget_id" name="widgets[]" value="'.$this->key.'" />'."\n"
+		'<input type="hidden" class="widget-id" name="widgets[]" value="'.$this->key.'" />'."\n"
 		. '<input type="hidden" name="name_'.$this->key.'" value="'.$this->name.'" />'."\n"
 		. '<input type="hidden" name="md5_'.$this->key
 		.'" value="'.$this->md5().'" />'."\n";

@@ -105,13 +105,13 @@ $.fn.activatewidget = function() {
         if (d.$erreur > '') {
           alert(d.$erreur);
           $(me).find("img.widget-searching").remove();
-          $(".widgets_boutons", me).show();
+          $(".widget-boutons", me).show();
           return false;
         }
         $(me)
         .prev()
           .html(
-            d[$('form', me).find('.widget_id').val()]
+            d[$('form', me).find('.widget-id').val()]
           )
           .removeClass('widget-changed')
           .prepend(ICONCLICK)
@@ -123,9 +123,9 @@ $.fn.activatewidget = function() {
       }).onesubmit(function(){
         $(this)
         .append(SEARCHING) // icone d'attente
-        .find(".widgets_boutons").hide(); // boutons de validation
+        .find(".widget-boutons").hide(); // boutons de validation
       }).keyup(function(){
-        $(this).find(".widgets_boutons").show();
+        $(this).find(".widget-boutons").show();
         $(me).prev().addClass('widget-changed');
       })
       .find(".widget-active")
