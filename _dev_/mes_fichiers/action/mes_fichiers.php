@@ -17,7 +17,12 @@ function action_mes_fichiers() {
 		exit;
 	}
 	include_spip('inc/pclzip');
-	$liste = array('IMG/', 'squelettes/', 'ecrire/mes_options.php');
+	$mes_options = defined('_FILE_OPTIONS') ? _FILE_OPTIONS : 'ecrire/mes_options';
+	$IMG = defined('_DIR_IMG') ? _DIR_IMG: 'IMG/';
+	$liste = array();
+	if(@is_dir($IMG)) $liste[] = $IMG;
+	if(@is_dir('squelettes/')) $liste[] = 'squelettes/';
+	if(@is_readable($mes_options)) $liste[] = $mes_options;
 	$mes_fichiers = new PclZip('mes_fichiers.zip');
 	$erreur = $mes_fichiers->create($liste, PCLZIP_OPT_ADD_PATH, "spip");
 	if ($erreur == 0) {
