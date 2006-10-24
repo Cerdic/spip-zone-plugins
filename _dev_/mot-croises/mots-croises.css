@@ -14,18 +14,17 @@ table.grille label{display:none}
 
 .horizontal ol{list-style-type:upper-alpha}
 
-.vertical, .horizontal{float:right;
+.vertical, .horizontal{float:left;
 font-size:90%;
-width:25%;
+max-width:49%;
+width:auto;
 
-max-width:25%;
-margin-left:1%}
-
-#texte >.vertical,#texte >.horizontal  {margin-top:-3ex}
+margin-left:5%}
+//.horizontal .vertical {float:left}
 
 form.grille{float:left;
 clear:both;
-max-width:49%;
+
 padding:0;
 padding-right:2%;
 margin:0; 
