@@ -22,34 +22,155 @@ function csv_champ($champ) {
 	return '"'.$champ.'"';
 }
 
-function csv_ligne($ligne,$delim=',') {
-	return join($delim, array_map('csv_champ', $ligne))."\r\n";
+function Forms_formater_ligne_csv($ligne,$delim=',') {
+	$out = "";
+	foreach($ligne as $val){
+		if (is_array($val))
+			foreach($val as $v) $out .= csv_champ($v).$delim;
+		else
+			$out .= csv_champ($val).$delim;
+	}
+	$out = substr($out,0,strlen($out)-strlen($delim))."\r\n";
+	return $out;
 }
 
-function formater_reponse($ligne, $structure, $valeurs,$delim=',') {
-	static $groupes, $mots;
+function Forms_formater_ligne($ligne,$format,$separateur){
+	if (function_exists($f = "Forms_formater_ligne_$format"))
+		return $f($ligne,$separateur);
+	else
+		return Forms_formater_ligne_csv($ligne,$separateur);
+}
 
+function Forms_formater_reponse($ligne, $valeurs, $structure,$format,$separateur) {
 	// Prendre les differents champs dans l'ordre
-	foreach ($structure as $index => $t) {
-		if (!$v = $valeurs[$t['code']]) {
-			$ligne[] = "";
+	foreach ($structure as $champ => $t) {
+		if (!isset($valeurs[$champ])) {
+			$ligne[$champ] = "";
 		}
 		else{
+			$v = $valeurs[$champ];
 			if ($t['type']=='multiple'){
 				// pour un choix multiple on cree une colonne par reponse potentielle
-				$type_ext = $t['type_ext'];
-				foreach($type_ext as $choix)
+				foreach($t['choix'] as $choix=>$titre)
 					if (in_array($choix,$v))
-						$ligne[] = strval($choix);
+						$ligne[$champ][$choix] = strval($titre);
 					else
-						$ligne[] = "";
+						$ligne[$champ][$choix] = "";
 			}
 			else
 				$ligne[] = strval(join(', ', $v));
 		}
 	}
-	return csv_ligne($ligne,$delim);
+	return Forms_formater_ligne($ligne,$format,$separateur);
 }
+
+function Forms_formater_les_reponses($id_form, $format, $separateur, $head=true, $traduit=true){
+	//
+	// Telechargement du tableau de reponses au format CSV ou autre
+	// le support d'un autre format ne necessite que l'implementation de la fonction
+	// Forms_formater_ligne_xxx avec xxx le nom du format
+	//
+	$nb_reponses = 0;
+	$row = spip_fetch_array(spip_query("SELECT COUNT(*) AS tot FROM spip_reponses WHERE id_form="._q($id_form)." AND statut='valide'"));
+	if ($row)	$nb_reponses = $row['tot'];
+
+	if (!$id_form || !Forms_form_administrable($id_form))
+		acces_interdit();
+
+	$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
+	if ($row = spip_fetch_array($result)) {
+		$titre = $row['titre'];
+		$descriptif = $row['descriptif'];
+		$sondage = $row['sondage'];
+	}
+
+	$charset = $GLOBALS['meta']['charset'];
+	$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo($titre))));
+
+	$s = '';
+
+	// Preparer la table de traduction code->valeur & mise en table de la structure pour eviter des requettes
+	// a chaque ligne
+	$structure = array();
+	$trans = array();
+	$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)." ORDER BY rang");
+	while ($row = spip_fetch_array($res)){
+		$type = $row['type'];
+		$champ = $row['champ'];
+		$structure[$champ]=array('type'=>$row['type'],'titre'=>$row['titre']);
+		if (($type=='select') OR ($type='multiple')){
+			$res2 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ)." ORDER BY rang");
+			while ($row2 = spip_fetch_array($res2))
+				$structure[$champ]['choix'][$row2['choix']] = trim(textebrut(typo($row2['titre'])));
+		}
+		else if ($type == 'mot') {
+			$id_groupe = intval($row['extra_info']);
+			$res2 = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe="._q($id_groupe));
+			while ($row2 = spip_fetch_array($res2)) {
+				$structure[$champ]['choix'][$row2['id_mot']] = trim(textebrut(typo($row2['titre'])));
+			}
+		}
+	}
+
+	if ($head) {
+		// Une premiere ligne avec les noms de champs
+		$ligne = array();
+		$ligne[] = _T("forms:date");
+		$ligne[] = _T("forms:page");
+		foreach ($structure as $champ => $t) {
+			$ligne1[] = $champ;
+			$ligne2[] = textebrut(typo($t['titre']));
+			if ($t['type']=='multiple'){
+				// pour un choix multiple on cree une colonne par reponse potentielle
+				$choix = $t['choix'];
+				foreach($t['choix'] as $choix=> $v){
+					$ligne1[] = $choix;
+					$ligne2[] = textebrut(typo($v));
+				}
+			}
+		}
+		$s .= Forms_formater_ligne($ligne1,$format,$separateur);
+		if ($traduit)
+			$s .= Forms_formater_ligne($ligne2,$format,$separateur);
+	}
+
+	// Ensuite les reponses
+	$fichier = array();
+	$id_reponse = 0;
+	$result = spip_query("SELECT r.id_reponse, r.date,r.url, c.champ, c.valeur ".
+		"FROM spip_reponses AS r LEFT JOIN spip_reponses_champs AS c USING (id_reponse) ".
+		"WHERE id_form="._q($id_form)." AND statut='valide' AND c.id_reponse IS NOT NULL ".
+		"ORDER BY date, r.id_reponse");
+	while ($row = spip_fetch_array($result)) {
+		if ($id_reponse != $row['id_reponse']) {
+			if ($id_reponse)
+				$s .= Forms_formater_reponse($ligne,$valeurs,$structure,$format,$separateur);
+			$id_reponse = $row['id_reponse'];
+			$date = $row['date'];
+			$ligne = array();
+			$ligne[] = jour($date).'/'.mois($date).'/'.annee($date);
+			$ligne[] = str_replace("&amp;","&",$row['url']);
+			$valeurs = array();
+		}
+		$champ = $row['champ'];
+		if ($structure[$champ]['type'] == 'fichier') {
+			$fichiers[] = $row['valeur'];
+			$valeurs[$champ][] = 'fichiers/'.basename($row['valeur']);
+		}
+		else {
+			$v = $row['valeur'];
+			if ($traduit AND isset($structure[$champ][$v])) $v = $structure[$champ][$v];
+			else if ($traduit AND isset($structure[$champ]['choix'][$v])) $v = $structure[$champ]['choix'][$v];
+			$valeurs[$champ][] = $v;
+		}
+	}
+
+	// Ne pas oublier la derniere reponse
+	if ($id_reponse)
+		$s .= Forms_formater_reponse($ligne,$valeurs,$structure,$format,$separateur);
+	return $s;
+}
+
 
 function acces_interdit() {
 	debut_page(_T('avis_acces_interdit'), "documents", "forms");
@@ -70,48 +191,33 @@ function exec_forms_telecharger(){
 	$champ = _request('champ');
 
 	if ($id_reponse = intval($id_reponse) AND $champ) {
-		$result = spip_query("SELECT id_form FROM spip_reponses WHERE id_reponse="._q($id_reponse));
-		if ($row = spip_fetch_array($result)) {
+		$res = spip_query("SELECT id_form FROM spip_reponses WHERE id_reponse="._q($id_reponse));
+		if ($row = spip_fetch_array($res))
 			$id_form = $row['id_form'];
-		}
-		if (!$id_form || !Forms_form_administrable($id_form)) {
+		if (!$id_form || !Forms_form_administrable($id_form))
 			acces_interdit();
-		}
-		$query = "SELECT structure FROM spip_forms WHERE id_form=$id_form";
-		$result = spip_query($query);
-		if ($row = spip_fetch_array($result)) {
-			$structure = unserialize($row['structure']);
-		}
-		$ok = false;
-		foreach ($structure as $index => $t) {
-			if ($t['code'] == $champ) {
-				$ok = ($t['type'] == 'fichier');
-				break;
-			}
-		}
-		if (!$ok) {
+		$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)." AND type='fichier' AND champ="._q($champ));
+		if (!$row = spip_fetch_array($res))
 			acces_interdit();
-		}
-		$result = spip_fetch_array(spip_query("SELECT valeur FROM spip_reponses_champs WHERE id_reponse=$id_reponse AND champ='$champ'"));
-		$fichier = $result['valeur'];
-		if (is_int(strpos($fichier, "..")) || !preg_match(',^IMG/,', $fichier)) {
+		$row = spip_fetch_array(spip_query("SELECT valeur FROM spip_reponses_champs WHERE id_reponse="._q($id_reponse)." AND champ="._q($champ)));
+		if (!$row)	acces_interdit();
+		
+		$fichier = $row['valeur'];
+		if ((strpos($fichier, "..")!==FALSE) || !preg_match(',^IMG/,', $fichier))
 			acces_interdit();
-		}
+
 		$filename = basename($fichier);
 		$mimetype = "";
 		if (preg_match(',\.([^\.]+)$,', $fichier, $r)) {
 			$ext = $r[1];
-			$query = "SELECT * FROM spip_types_documents WHERE extension='".addslashes($ext)."'";
-			$result = spip_query($query);
-			if ($row = spip_fetch_array($result)) {
+			$result = spip_query("SELECT * FROM spip_types_documents WHERE extension="._q($ext));
+			if ($row = spip_fetch_array($result))
 				$mimetype = $row['mime_type'];
-			}
 		}
 		if (!$mimetype) $mimetype = "application/octet-stream";
 		$chemin = "../".$fichier;
-		if (!is_file($chemin)) {
+		if (!is_file($chemin))
 			acces_interdit();
-		}
 
 		Header("Content-Type: $mimetype");
 		Header("Content-Disposition: inline; filename=$filename");
@@ -158,7 +264,6 @@ function exec_forms_telecharger(){
 	
 		fin_cadre_relief();
 	
-	
 		//
 		// Icones retour
 		//
@@ -170,116 +275,9 @@ function exec_forms_telecharger(){
 		}
 		fin_page();
 		exit;
-	
-	}
-	
-	//
-	// Telechargement du tableau de reponses au format CSV
-	//
-	$id_form = intval($id_form);
-	if ($id_form) {
-		$query = "SELECT COUNT(*) FROM spip_reponses WHERE id_form=$id_form AND statut='valide'";
-		$result = spip_query($query);
-		list($nb_reponses) = spip_fetch_array($result,SPIP_NUM);
-	}
-	else $nb_reponses = 0;
-
-	if (!$id_form || !Forms_form_administrable($id_form)) {
-		acces_interdit();
 	}
 
-	$query = "SELECT * FROM spip_forms WHERE id_form=$id_form";
-	$result = spip_query($query);
-	if ($row = spip_fetch_array($result)) {
-		$id_form = $row['id_form'];
-		$titre = $row['titre'];
-		$descriptif = $row['descriptif'];
-		$sondage = $row['sondage'];
-		$structure = unserialize($row['structure']);
-	}
-
-	$charset = $GLOBALS['meta']['charset'];
-	$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo($titre))));
-
-	$s = '';
-
-	// Preparer la table de traduction code->valeur
-	$trans = array();
-	$types = array();
-	foreach ($structure as $index => $t) {
-		$code = $t['code'];
-		$type = $t['type'];
-		$types[$code] = $type;
-		$trans[$code] = array();
-
-		if ($type == 'select' || $type == 'multiple') {
-			$trans[$code] = $t['type_ext'];
-		}
-		else if ($type == 'mot') {
-			$id_groupe = intval($t['type_ext']['id_groupe']);
-			$query = "SELECT id_mot, titre FROM spip_mots WHERE id_groupe=$id_groupe";
-			$result = spip_query($query);
-			while ($row = spip_fetch_array($result)) {
-				$id_mot = $row['id_mot'];
-				$titre = $row['titre'];
-				$trans[$code][$id_mot] = trim(textebrut(typo($titre)));
-			}
-		}
-	}
-
-	// Une premiere ligne avec les noms de champs
-	$ligne = array();
-	$ligne[] = _T("forms:date");
-	$ligne[] = _T("forms:page");
-	foreach ($structure as $index => $t) {
-		$ligne[] = textebrut(typo($t['nom']));
-		if ($t['type']=='multiple'){
-			// pour un choix multiple on cree une colonne par reponse potentielle
-			$type_ext = $t['type_ext'];
-			array_pop($type_ext);
-			foreach($type_ext as $choix)
-				$ligne[] = "";
-		}
-	}
-	$s .= csv_ligne($ligne,$delim);
-
-
-	// Ensuite les reponses
-	$fichier = array();
-	$id_reponse = 0;
-	$query = "SELECT r.id_reponse, r.date,r.url, c.champ, c.valeur ".
-		"FROM spip_reponses AS r LEFT JOIN spip_reponses_champs AS c USING (id_reponse) ".
-		"WHERE id_form=$id_form AND statut='valide' AND c.id_reponse IS NOT NULL ".
-		"ORDER BY date, r.id_reponse";
-	$result = spip_query($query);
-	while ($row = spip_fetch_array($result)) {
-		if ($id_reponse != $row['id_reponse']) {
-			if ($id_reponse) {
-				$s .= formater_reponse($ligne, $structure, $valeurs,$delim);
-			}
-			$id_reponse = $row['id_reponse'];
-			$ligne = array();
-			$valeurs = array();
-			$date = $row['date'];
-			$ligne[] = jour($date).'/'.mois($date).'/'.annee($date);
-			$ligne[] = str_replace("&amp;","&",$row['url']);
-		}
-		$champ = $row['champ'];
-		if ($types[$champ] == 'fichier') {
-			$fichiers[] = $row['valeur'];
-			//$valeurs[$champ][] = $GLOBALS['meta']['adresse_site']."/ecrire/forms_telecharger.php?id_reponse=$id_reponse&champ=$champ";
-			$valeurs[$champ][] = 'fichiers/'.basename($row['valeur']);
-		}
-		else if ($v = $trans[$champ][$row['valeur']])
-			$valeurs[$champ][] = $v;
-		else
-			$valeurs[$champ][] = $row['valeur'];
-	}
-
-	// Ne pas oublier la derniere reponse
-	if ($id_reponse) {
-		$s .= formater_reponse($ligne, $structure, $valeurs,$delim);
-	}
+	$out = Forms_formater_les_reponses($id_form, "csv", $delim, $head=true, $traduit=true);
 
 	// Excel ?
 	if ($delim == ',')
@@ -288,7 +286,7 @@ function exec_forms_telecharger(){
 		$extension = 'xls';
 		# Excel n'accepte pas l'utf-8 ni les entites html... on fait quoi?
 		include_spip('inc/charsets');
-		$s = unicode2charset(charset2unicode($s), 'iso-8859-1');
+		$out = unicode2charset(charset2unicode($s), 'iso-8859-1');
 		$charset = 'iso-8859-1';
 	}
 
@@ -297,38 +295,36 @@ function exec_forms_telecharger(){
 		Header("Content-Disposition: attachment; filename=$filename.$extension");
 		//Header("Content-Type: text/plain; charset=$charset");
 		Header("Content-Length: ".strlen($s));
-		echo $s;
-		exit;
+		echo $out;
+	} 
+	else {
+		//
+		// S'il y a des fichiers joints, creer un ZIP
+		//
+		include_spip("inc/pclzip");
+		include_spip("inc/session");
+	
+		$zip = _DIR_TMP."form".$id_form."_".rand().".zip";
+		$csv = _DIR_TMP."$filename.$extension";
+	
+		$f = fopen($csv, "wb");
+		fwrite($f, $out);
+		fclose($f);
+	
+		$chemin = _DIR_RACINE;
+		$fichiers = $chemin.join(",$chemin", $fichiers);
+	
+		$archive = new PclZip($zip);
+		$archive->add($csv, PCLZIP_OPT_REMOVE_ALL_PATH, PCLZIP_OPT_ADD_PATH, $filename);
+		$archive->add($fichiers, PCLZIP_OPT_REMOVE_ALL_PATH, PCLZIP_OPT_ADD_PATH, $filename.'/fichiers');
+	
+		Header("Content-Type: application/zip");
+		Header("Content-Disposition: attachment; filename=$filename.zip");
+		Header("Content-Length: ".filesize($zip));
+		readfile($zip);
+	
+		@unlink($csv);
+		@unlink($zip);
 	}
-
-	//
-	// S'il y a des fichiers joints, creer un ZIP
-	//
-	include_spip("inc/pclzip");
-	include_spip("inc/session");
-
-	$zip = "data/form".$id_form."_".rand().".zip";
-	$csv = "data/$filename.$extension";
-
-	$f = fopen($csv, "wb");
-	fwrite($f, $s);
-	fclose($f);
-
-	$chemin = "../";
-	$fichiers = $chemin.join(",$chemin", $fichiers);
-
-	$archive = new PclZip($zip);
-	$archive->add($csv, PCLZIP_OPT_REMOVE_ALL_PATH, PCLZIP_OPT_ADD_PATH, $filename);
-	$archive->add($fichiers, PCLZIP_OPT_REMOVE_ALL_PATH, PCLZIP_OPT_ADD_PATH, $filename.'/fichiers');
-
-	Header("Content-Type: application/zip");
-	Header("Content-Disposition: attachment; filename=$filename.zip");
-	Header("Content-Length: ".filesize($zip));
-	readfile($zip);
-
-	@unlink($csv);
-	@unlink($zip);
-
-	exit;
 }
 ?>

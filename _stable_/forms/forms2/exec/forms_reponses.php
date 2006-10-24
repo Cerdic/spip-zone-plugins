@@ -177,12 +177,12 @@ function exec_forms_reponses(){
 
 		list($lib,$values,$urls) = 	Forms_extraire_reponse($id_reponse);
 
-		foreach ($lib as $cle => $titre) {
+		foreach ($lib as $champ => $titre) {
 			$s = '';
-			foreach ($values[$cle] as $id=>$valeur){
+			foreach ($values[$champ] as $id=>$valeur){
 				$valeur = typo($valeur);
 				if(strlen($s)) $s .= ", ";
-				if ($lien = $urls[$cle][$id])
+				if ($lien = $urls[$champ][$id])
 					$s .= "<a href='$lien'>$valeur</a>";
 				else
 					$s .= $valeur;

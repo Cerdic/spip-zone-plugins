@@ -63,7 +63,7 @@ $tables_principales['spip_reponses'] = array(
 $formschamp_field = array(
 		"id_form"	=> "bigint(21) NOT NULL",
 		"champ" => "varchar(100)",
-		"cle" => "bigint(21) NOT NULL",
+		"rang" => "bigint(21) NOT NULL",
 		"titre" => "text",
 		"type" => "varchar(100)",
 		"obligatoire" => "varchar(3)",
@@ -71,7 +71,7 @@ $formschamp_field = array(
 );
 $formschamp_key = array(
 	"PRIMARY KEY"	=> "id_form, champ",
-	"KEY" => "cle"
+	"KEY" => "rang"
 );
 
 $tables_principales['spip_forms_champs'] =
@@ -82,7 +82,8 @@ $formschampchoix_field = array(
 		"id_form"	=> "bigint(21) NOT NULL",
 		"champ" => "varchar(100)",
 		"choix" => "varchar(100) NOT NULL DEFAULT ''",
-		"titre" => "text"
+		"titre" => "text",
+		"rang" => "bigint(21) NOT NULL"
 );
 $formschampchoix_key = array(
 	"PRIMARY KEY"	=> "id_form, champ, choix",

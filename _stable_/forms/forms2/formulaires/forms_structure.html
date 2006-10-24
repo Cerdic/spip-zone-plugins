@@ -1,6 +1,6 @@
 <BOUCLE_form(FORMS){id_form=#ENV{id_form}}>
 #SET{need_fieldset,1}
-<BOUCLE_champs(FORMS_CHAMPS){id_form}>
+<BOUCLE_champs(FORMS_CHAMPS){id_form}{par rang}>
 [(#ENV{affiche_sondage}) #RESULTATS_SONDAGE]
 [(#ENV{affiche_sondage}|?{'',' '})
 	[[(#GET{need_fieldset}|?{'','</fieldset>'})]<fieldset><legend>(#TYPE|=={separateur}|?{#TITRE,''})</legend> #SET{need_fieldset,0}]
@@ -50,10 +50,10 @@
 						onblur="this.className='[(#OBLIGATOIRE|=={oui}|?{forml,formo})]'" size='40' />
 				]
 				[(#TYPE|=={select}|?{' ',''})
-					<INCLURE{fond=formulaires/forms_champ_select}{id_form}{cle}{valeur=#ENV**{valeurs}}>
+					<INCLURE{fond=formulaires/forms_champ_select}{id_form}{champ}{valeur=#ENV**{valeurs}}>
 				]
 				[(#TYPE|=={multiple}|?{' ',''})
-					<INCLURE{fond=formulaires/forms_champ_multiple}{id_form}{cle}{valeur=#ENV**{valeurs}}>
+					<INCLURE{fond=formulaires/forms_champ_multiple}{id_form}{champ}{valeur=#ENV**{valeurs}}>
 				]
 				[(#TYPE|=={mot}|?{' ',''})
 					<INCLURE{fond=formulaires/forms_select_mot}{id_groupe=#EXTRA_INFO}{champ}{valeur=#ENV**{valeurs}}>

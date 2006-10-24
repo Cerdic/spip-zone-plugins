@@ -30,13 +30,12 @@ function action_forms_exporte_reponse_article(){
 			$date = $row['date'];
 			list($lib,$values,$urls) = 	Forms_extraire_reponse($id_reponse);
 			$texte = "";
-			$res = spip_query("SELECT * FROM spip_forms_champs AS forms WHERE id_form="._q($id_form)." ORDER BY cle");
+			$res = spip_query("SELECT * FROM spip_forms_champs AS forms WHERE id_form="._q($id_form)." ORDER BY rang");
 			while ($row = spip_fetch_array($res)){
 				$titre = $row['titre'];
 				$champ = $row['champ'];
-				$cle = $row['cle'];
 				$type = $row['type'];
-				if (!isset($values[$cle])){
+				if (!isset($values[$champ])){
 					switch ($type){
 						case 'textestatique':	$texte .= "\n{{{$titre}}}\n\n";	break;
 						case 'separateur':	$texte .= "\n{{{{$titre}}}}\n\n";	break;
@@ -44,11 +43,11 @@ function action_forms_exporte_reponse_article(){
 				}
 				else {
 					$s = '';
-					if (count($values[$cle])>1) $s = "\n-* ";
-					foreach ($values[$cle] as $id=>$valeur){
+					if (count($values[$champ])>1) $s = "\n-* ";
+					foreach ($values[$champ] as $id=>$valeur){
 						$valeur = typo($valeur);
 						if(strlen($s)) $s .= "\n-* ";
-						if ($lien = $urls[$cle][$id])
+						if ($lien = $urls[$champ][$id])
 							$s .= "[$valeur -> $lien]";
 						else
 							$s .= $valeur;

@@ -20,6 +20,7 @@
 		}
 		
 		$structure = unserialize($row['structure']);
+		$rang = 1;
 		foreach($structure as $cle=>$val){
 			$champ = $val['code'];
 			$titre = $val['nom'];
@@ -29,12 +30,13 @@
 			$extra_info = isset($type_ext['id_groupe']) ? $type_ext['id_groupe']:0;
 			$extra_info = isset($type_ext['taille']) ? $type_ext['taille']:$extra_info;
 			$obligatoire = $val['obligatoire'];
-			spip_query("INSERT INTO spip_forms_champs (id_form,cle,champ,titre,type,obligatoire,extra_info) 
-				VALUES("._q($id_form).","._q($cle).","._q($champ).","._q($titre).","._q($type).","._q($obligatoire).","._q($extra_info).")");
+			spip_query("INSERT INTO spip_forms_champs (id_form,rang,champ,titre,type,obligatoire,extra_info) 
+				VALUES("._q($id_form).","._q($rang++).","._q($champ).","._q($titre).","._q($type).","._q($obligatoire).","._q($extra_info).")");
 			if ($type=='select' OR $type=='multiple'){
+				$rangchoix = 1;
 				foreach($type_ext as $choix=>$titre){
-					spip_query("INSERT INTO spip_forms_champs_choix (id_form,champ,choix,titre) 
-						VALUES("._q($id_form).","._q($champ).","._q($choix).","._q($titre).")");
+					spip_query("INSERT INTO spip_forms_champs_choix (id_form,champ,choix,titre,rang) 
+						VALUES("._q($id_form).","._q($champ).","._q($choix).","._q($titre).","._q($rangchoix++).")");
 				}
 			}
 		}
@@ -46,7 +48,7 @@
 	}
 
 	function Forms_upgrade(){
-		$version_base = 0.16;
+		$version_base = 0.17;
 		$current_version = 0.0;
 		if (   (isset($GLOBALS['meta']['forms_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['forms_base_version'])==$version_base))

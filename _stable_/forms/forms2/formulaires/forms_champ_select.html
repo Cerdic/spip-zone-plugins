@@ -1,11 +1,11 @@
 <BOUCLE_f(FORMS){id_form}>
-<BOUCLE_champs(FORMS_CHAMPS){id_form}{cle}>
+<BOUCLE_champs(FORMS_CHAMPS){id_form}{champ}>
 <B_choix>
 [(#TOTAL_BOUCLE|>{6}|?{' ',''})
 <select name='#CHAMP' id='#CHAMP' 
 	class='[(#OBLIGATOIRE|=={oui}|?{fondl,fondo})]'>
 	<option value=''></option>]
-	<BOUCLE_choix(FORMS_CHAMPS_CHOIX){id_form}{cle}{par titre}>
+	<BOUCLE_choix(FORMS_CHAMPS_CHOIX){id_form}{champ}{par rang}>
 [(#TOTAL_BOUCLE|>{6}|?{' ',''})
 	<option value='#CHOIX' [(#CHOIX|=={[(#ENV**{valeur}|forms_valeur{#CHAMP})]}|?{'selected="selected"',''})]>
 		&nbsp;&nbsp;&nbsp;[(#TITRE|supprimer_numero)]
