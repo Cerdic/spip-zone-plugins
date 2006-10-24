@@ -8,7 +8,7 @@ function action_flickr_ajouter_documents() {
 
   $hash = _request('hash');
   $id = intval(_request('id'));
-  $type = _request('type');
+  $type = addslashes(_request('type'));
   $action = _request('action');
   $arg = _request('arg');
   $redirect = _request('redirect');

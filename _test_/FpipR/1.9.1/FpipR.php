@@ -13,7 +13,7 @@ function FpipR_affiche_milieu($flux) {
 	  ecrire_meta('FpipR:installe',serialize(true)); //histoire de pas faire une recherche dans la base à chaque coup
 	  ecrire_metas();
 	}
-	if($connect_id_auteur == $flux['args']['id_auteur']) {
+	if($connect_id_auteur == intval($flux['args']['id_auteur'])) {
 
 	  include_spip('inc/presentation');
 
@@ -31,7 +31,7 @@ function FpipR_affiche_milieu($flux) {
 
 	  $from = array('spip_auteurs');
 	  $select = array('flickr_token','flickr_nsid');
-	  $where = array('id_auteur='.$flux['args']['id_auteur']);
+	  $where = array('id_auteur='.intval($flux['args']['id_auteur']));
 	  $rez = spip_abstract_select($select,$from,$where);
 	  $row = spip_abstract_fetch($rez);
 	  $wrong = false;
@@ -54,7 +54,7 @@ function FpipR_affiche_milieu($flux) {
 		  _T('fpipr:identifie_etape1',array('url'=>$infos['url'])).
 		  '</li>
 <li>'.
-		  _T('fpipr:identifie_etape2',array('form'=>generer_action_auteur('flickr_authenticate_end',$infos['frob'], generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur),'<button type="submit">'._T('fpipr:terminer').'</button>'))).
+		  _T('fpipr:identifie_etape2',array('form'=>generer_action_auteur('flickr_authenticate_end',$infos['frob'], generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur,true),'<button type="submit">'._T('fpipr:terminer').'</button>'))).
 		  '</li></ol>';
 	  }
 	  spip_abstract_free($rez);
@@ -72,13 +72,13 @@ function FpipR_affiche_gauche($flux) {
 	include_spip('base/abstract_sql');
 	if($flux['args']['exec'] == 'articles') {
 	  $type = 'article';
-	  $id = _request('id_article');
+	  $id = intval(_request('id_article'));
 	  $row = spip_abstract_fetsel(array('statut','id_rubrique'),array('spip_articles'),array("id_article=$id"));
 	  $cnt = spip_abstract_fetsel(array('count(*) as cnt'),array('spip_auteurs_articles'),array("id_article=$id",'id_auteur='.$connect_id_auteur));
 	  $acces = acces_rubrique($row['id_rubrique']) || acces_restreint_rubrique($row['id_rubrique']) || (($row['statut'] == 'prepa' || $row['statut'] == 'prop' || $row['statut'] == 'poubelle') && $cnt['cnt'] > 0);
 	} else if($flux['args']['exec'] == 'naviguer') {
 	  $type = 'rubrique';
-	  $id = _request('id_rubrique');
+	  $id = intval(_request('id_rubrique'));
 	  $acces = acces_rubrique($id_rubrique);
 	} /*else if($flux['args']['exec'] == 'breves_edit') {
 	  $type = 'breve';

@@ -10,7 +10,7 @@ function exec_flickr_bookmarklet_photo() {
   pipeline('exec_init',array('args'=>array('exec'=>'flickr_bookmarklet_photo'),'data'=>''));
 
 
-  $id = _request('id');
+  $id = intval(_request('id'));
   $secret = _request('secret');
 
   $photo_details = flickr_photos_getInfo($id,$secret);

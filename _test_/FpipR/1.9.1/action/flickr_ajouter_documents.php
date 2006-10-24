@@ -7,12 +7,12 @@ function action_flickr_ajouter_documents() {
 
 
   $hash = _request('hash');
-  $id = _request('id');
-  $type = _request('type');
+  $id = intval(_request('id'));
+  $type = addslashes(_request('type'));
   $action = _request('action');
   $arg = _request('arg');
   $redirect = _request('redirect');
-  $id_auteur =  $GLOBALS['auteur_session']['id_auteur'];
+  $id_auteur =  intval($GLOBALS['auteur_session']['id_auteur']);
 
   if (!verifier_action_auteur("$action-$arg", $hash,$id_auteur)) {
 	include_spip('inc/minipres');
@@ -40,6 +40,7 @@ function action_flickr_ajouter_documents() {
 	  include_spip('inc/getdocument');
 	  foreach($photos as $info) {
 		list($id_photo,$secret) = split('@#@',$info);
+		$id_photo = intval($id_photo);
 		$photo_details = flickr_photos_getInfo($id_photo,$secret,$row['auth_token']);
 		if($photo_details->id) {
 		  $empty = array();
