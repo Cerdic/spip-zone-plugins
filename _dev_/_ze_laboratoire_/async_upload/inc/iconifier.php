@@ -60,7 +60,7 @@ function inc_iconifier_dist($id_objet, $id,  $script, $iframe_script='') {
 	. fin_cadre_relief(true);
 
   $js = "";
-  if(_request("iframe")!="iframe") {
+  if(_request("exec")!="iconifier") {
       $js .= "<script src='".find_in_path("async_upload.js")."' type='text/javascript'></script>\n";
   		$js .= <<<EOF
       <script type='text/javascript'>
@@ -69,6 +69,7 @@ function inc_iconifier_dist($id_objet, $id,  $script, $iframe_script='') {
         res.find(">div").each(function(){
           var cont = $("#"+this.id);
           verifForm(cont.html($(this).html()));
+          cont.find("img[@onclick]").each(function(){this.onclick();})
           $(".form_upload_icon").async_upload(upload_complete);
         });
         return true;                     
