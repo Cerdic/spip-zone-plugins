@@ -14,7 +14,7 @@
 //
 
 // Boucle XML
-$xml_field = array(
+$fpipr_field = array(
 "id_photo"  => "bigint(21) NOT NULL",
 "owner" => "varchar(100)", //"47058503995@N01" 
 "secret"=> "varchar(100)", //"a123456"
@@ -22,9 +22,10 @@ $xml_field = array(
 "title"	=> "text DEFAULT '' NOT NULL",
 "ispublic"=> "ENUM (0,1) NOT NULL",
 "isfriend"=> "ENUM (0,1) NOT NULL",
-"isfamily"=> "ENUM (0,1) NOT NULL"
+"isfamily"=> "ENUM (0,1) NOT NULL",
+"originalformat" => "char(4) DEFAULT 'jpg'"
 );
-$xml_key = array(
+$fpipr_key = array(
 	"PRIMARY KEY" => "id_photo",
 	"KEY" => "owner",
 	"KEY" => "ispublic",
@@ -33,7 +34,7 @@ $xml_key = array(
 );
 
 $GLOBALS['tables_principales']['spip_fpipr_photos'] =
-	array('field' => &$xml_field, 'key' => &$xml_key);
+	array('field' => &$fpipr_field, 'key' => &$fpipr_key);
 //TODO vraiment pas sur de ce qu'il faut mettre la??
 $GLOBALS['table_des_tables']['flickr_photos_search'] = 'fpipr_photos';
 
@@ -57,6 +58,25 @@ function FpipR_creer_tables_temporaires($method){
 function FpipR_fill_table($method,$arguments){
   include_spip('inc/flickr_api');
   //Faire le query API flickr
-  //TODO remplire la table
+  switch($method){
+	case 'flickr.photos.search':
+	  $photos = flickr_photos_search(
+									 $arguments['par_page'],$arguments['page'],
+									 $arguments['user_id'], $arguments['tags'], $arguments['tag_mode'],
+									 $arguments['text'], $arguments['min_upload_date'],
+									 $arguments['max_upload_date'], $arguments['min_taken_date'],
+									 $arguments['max_taken_date'], $arguments['license'],
+									 $arguments['sort'], $arguments['privacy_filter'],
+									 $arguments['extras'], $arguments['auth_token']
+									 );
+	  foreach($photos as $photo) {
+		spip_abstract_insert('spip_fpipr_photos',
+							 "(id_photo,owner,secret,server,title,ispublic,isfriend,isfamily,originalformat)",
+							 "(".intvalue($photo->id).','.spip_abstract_quote($photo->owner).','.spip_abstract_quote($photo->secret).','.intvalue($photo->server).','.spip_abstract_quote($photo->title).','.spip_abstract_quote($photo->originalformat).")");
+	  }
+	  break;
+	default: 
+	  return;
+  }
 }
 ?>
