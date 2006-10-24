@@ -24,8 +24,8 @@ include_spip('inc/sktheme_balises');
 // Set a default configuration - each values can be modify 
 // in the private area
 if (!isset($GLOBALS['meta']['sktheme_squelettes_public_dir'])){
-  ecrire_meta('sktheme_squelettes_public_dir',"themes/squelettes");
-  ecrire_meta('sktheme_habillages_public_dir',"themes/habillages");
+  ecrire_meta('sktheme_squelettes_public_dir',"_squelettes_");
+  ecrire_meta('sktheme_habillages_public_dir',"_themes_");
   ecrire_meta('sktheme_squelette_public_name',"dist");
   ecrire_meta('sktheme_habillage_public_name',"");
   ecrire_meta('sktheme_theme_switcher_style',"font-size: 10px;background-color: #FFF;color: #0C479D;border-top: 1px solid #CECECE; border-bottom: 2px solid #4A4A4A; border-left: 1px solid #CECECE; border-right: 1px solid #CECECE;margin:2px .5em;");

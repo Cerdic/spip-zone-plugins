@@ -46,7 +46,7 @@ function sktheme_list() {
     if ($dh = opendir($h_dir)) {
       while (($file = readdir($dh)) !== false) {
 	if ( (is_dir($h_dir."/".$file)) AND ($file[0]!=".") ) {
-	  $habillages_list[$file] = sktheme_xml_get_infos($h_dir."/".$file,"habillage");
+	  $habillages_list[$file] = sktheme_xml_get_infos($h_dir."/".$file,"theme");
 	}
       }
       closedir($dh);
@@ -67,14 +67,14 @@ function sktheme_list() {
 	array_push($sktheme_list,$s_key."::".$h_key);
       } else {
 	$squelette_ok = false;
-	if (is_array($h_info['squelette'])) {
-	  foreach ($h_info['squelette'] as $sq){
+	if (is_array($h_info['squelettes'])) {
+	  foreach ($h_info['squelettes'] as $sq){
 	    if ($sq == $s_key) {
 	      $squelette_ok = true;
 	    }
 	  }
 	} else {
-	  if ($h_info['squelette'] == $s_key) {
+	  if ($h_info['squelettes'] == $s_key) {
 	    $squelette_ok = true;
 	  }
 	}
@@ -104,7 +104,7 @@ function sktheme_habillage_list() {
     if ($dh = opendir($h_dir)) {
       while (($file = readdir($dh)) !== false) {
 	if ( (is_dir($h_dir."/".$file)) AND ($file[0]!=".") ) {
-	  $habillages_list[$file] = sktheme_xml_get_infos($h_dir."/".$file,"habillage");
+	  $habillages_list[$file] = sktheme_xml_get_infos($h_dir."/".$file,"theme");
 	}
       }
       closedir($dh);
@@ -122,14 +122,14 @@ function sktheme_habillage_list() {
       array_push($sktheme_habillage_list,$h_key);
     } else {
       $squelette_ok = false;
-      if (is_array($h_info['squelette'])) {
-	foreach ($h_info['squelette'] as $sq){
+      if (is_array($h_info['squelettes'])) {
+	foreach ($h_info['squelettes'] as $sq){
 	  if ($sq == $squelette_name) {
 	    $squelette_ok = true;
 	  }
 	}
       } else {
-	if ($h_info['squelette'] == $squelette_name) {
+	if ($h_info['squelettes'] == $squelette_name) {
 	  $squelette_ok = true;
 	}
       }

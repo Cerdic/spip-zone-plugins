@@ -55,8 +55,8 @@ function sktheme_xml_get_infos($xml_dir,$xml_type){
       $ret['pipeline'] = $arbre['pipeline'];
     if (isset($arbre['erreur']))
       $ret['erreur'] = $arbre['erreur'];
-    if (isset($arbre['squelette'])) {
-      $ret['squelette'] = $arbre['squelette'];
+    if (isset($arbre['squelettes'])) {
+      $ret['squelettes'] = $arbre['squelettes'];
     }
 
     // Compute extra values

@@ -86,7 +86,7 @@ function exec_sktheme_public_choice() {
   echo '<br />';
   echo '<form action="'.generer_url_ecrire("sktheme_public_choice", "sktheme_action=set_squelette").'" method="post">';
   foreach( $squelettes_list as $key => $value) {
-    $s_info = sktheme_xml_get_infos($value,"squelette");
+    $s_info = sktheme_xml_get_infos($value,"theme");
     echo debut_cadre_gris_clair();
     echo $s_info['extra_img_puce'];
     if ($squelette_public_name==$key) {
@@ -148,20 +148,20 @@ function exec_sktheme_public_choice() {
   echo '<br />';
   echo '<form action="'.generer_url_ecrire("sktheme_public_choice", "sktheme_action=set_habillage").'" method="post">';
   foreach( $habillages_list as $key => $value) {
-    $h_info = sktheme_xml_get_infos($value,"habillage");
+    $h_info = sktheme_xml_get_infos($value,"theme");
 
     // Check if habillage is available for this squelette selection
     // probably better way to do it in php (such grep perl function ? but its
     // works anyway)
     $squelette_ok = false;
-    if (is_array($h_info['squelette'])) {
-      foreach ($h_info['squelette'] as $sq){
+    if (is_array($h_info['squelettes'])) {
+      foreach ($h_info['squelettes'] as $sq){
 	if ($sq == $squelette_public_name) {
 	  $squelette_ok = true;
 	}
       }
     } else {
-      if ($h_info['squelette'] == $squelette_public_name) {
+      if ($h_info['squelettes'] == $squelette_public_name) {
 	$squelette_ok = true;
       }
     }
