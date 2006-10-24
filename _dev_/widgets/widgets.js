@@ -19,7 +19,7 @@ $.fn.openwidget = function() {
       return;
 
     // voir si je dispose deja du widget comme voisin
-    if ($(this).is('.has-widget')) {
+    if ($(this).is('.widget-has')) {
       $(this)
       .hide()
       .next()
@@ -47,7 +47,7 @@ $.fn.openwidget = function() {
           }
           $(me)
           .hide()
-          .addClass('has-widget')
+          .addClass('widget-has')
           .next()
             .html(c.$html)
             .show() // animate
@@ -61,9 +61,9 @@ $.fn.openwidget = function() {
 // annule le widget ouvert
 $.fn.cancelwidget = function() {
   return this
-  .filter('.has-widget')
+  .filter('.widget-has')
   .show()
-  .removeClass('has-widget')
+  .removeClass('widget-has')
   .removeClass('widget-changed')
   .next()
     .html('')
@@ -73,7 +73,7 @@ $.fn.cancelwidget = function() {
 // masque le widget ouvert
 $.fn.hidewidget = function() {
   return this
-  .filter('.has-widget')
+  .filter('.widget-has')
   .show()
   .next()
     .hide()
@@ -116,7 +116,7 @@ $.fn.activatewidget = function() {
           .removeClass('widget-changed')
           .prepend(ICONCLICK)
           .show()
-          .removeClass('has-widget')
+          .removeClass('widget-has')
         .next()
         .hide()
         .html('');
@@ -146,7 +146,7 @@ $.fn.activatewidget = function() {
           }
         })
       .end()
-      .find(".submit_widget")
+      .find(".widget-submit")
         .click(function(e){
           e.stopPropagation();
           $(this)
@@ -154,7 +154,7 @@ $.fn.activatewidget = function() {
           .submit();
         })
       .end()
-      .find(".cancel_widget")
+      .find(".widget-cancel")
         .click(function(e){
           e.stopPropagation();
           $(me)
@@ -162,7 +162,7 @@ $.fn.activatewidget = function() {
           .cancelwidget();
         })
       .end()
-      .find(".hide_widget")
+      .find(".widget-hide")
         .click(function(e){
           e.stopPropagation();
           $(me)
@@ -239,7 +239,7 @@ $(document).ready(function() {
   // fermer tous les widgets ouverts
   $("html")
   .click(function() {
-    $(".widget.has-widget:hidden")
+    $(".widget.widget-has:hidden")
     .hidewidget();
   });
 });

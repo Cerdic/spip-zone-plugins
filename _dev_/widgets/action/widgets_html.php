@@ -229,15 +229,15 @@ function controleur_dist($regs) {
   {$widgetsInput}
   <div class="widgets_boutons">
   <div style="position:absolute;">
-    <a class="submit_widget" title="OK">
+    <a class="widget-submit" title="OK">
       <img src="{$widgetsImgPath}/ok.png" width="20" height="20" />
     </a>
-    <a class="cancel_widget" title="Cancel">
+    <a class="widget-cancel" title="Cancel">
       <img src="{$widgetsImgPath}/cancel.png" width="20" height="20" />
     </a>
-    <!-- <a class="hide_widget">hide</a> -->
+    <!-- <a class="widget-hide">hide</a> -->
     <a href="ecrire/?exec=articles_edit&amp;id_article=$id"
-      class="full_widget">editer $type $id</a>
+      class="widget-full">editer $type $id</a>
   </div>
 </div>
 </form>
