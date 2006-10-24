@@ -14,6 +14,7 @@ function action_flickr_authenticate_end() {
   } else {
 	include_spip('inc/flickr_api');
 	flickr_authenticate_end($id_auteur,$arg);
+
 	redirige_par_entete(urldecode($redirect));
   }
 }

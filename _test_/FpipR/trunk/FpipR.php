@@ -1,7 +1,7 @@
 <?php
 
 function FpipR_affiche_milieu($flux) {
-  if($flux['args']['exec'] == 'auteur_infos') {
+  if($flux['args']['exec'] == 'auteur_infos' && _request('initial') < 0) {
 	global $table_prefix, $connect_id_auteur;
 
 	include_spip('base/abstract_sql');
@@ -54,7 +54,7 @@ function FpipR_affiche_milieu($flux) {
 		  _T('fpipr:identifie_etape1',array('url'=>$infos['url'])).
 		  '</li>
 <li>'.
-		  _T('fpipr:identifie_etape2',array('form'=>generer_action_auteur('flickr_authenticate_end',$infos['frob'], generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur),'<button type="submit">'._T('fpipr:terminer').'</button>'))).
+		  _T('fpipr:identifie_etape2',array('form'=>generer_action_auteur('flickr_authenticate_end',$infos['frob'], generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur,true),'<button type="submit">'._T('fpipr:terminer').'</button>'))).
 		  '</li></ol>';
 	  }
 	  spip_abstract_free($rez);
