@@ -65,6 +65,10 @@
 					. substr($letexte,$b+strlen('('.$num.')'));
 			}
 
+			$suite = trim(substr($lesnotes,$a));
+			if (strlen($suite))
+				$letexte.= '[[<> '.$suite.' ]]';
+
 			if (isset($debut)) {
 				return (strlen($debut)?"\n\n[[<>$debut ]]":'') . $letexte;
 			}
