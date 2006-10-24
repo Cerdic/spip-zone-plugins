@@ -17,7 +17,7 @@ function action_mes_fichiers() {
 		exit;
 	}
 	include_spip('inc/pclzip');
-	$mes_options = defined('_FILE_OPTIONS') ? _FILE_OPTIONS : 'ecrire/mes_options';
+	$mes_options = defined('_FILE_OPTIONS') ? _FILE_OPTIONS : 'ecrire/mes_options.php';
 	$IMG = defined('_DIR_IMG') ? _DIR_IMG: 'IMG/';
 	$liste = array();
 	if(@is_dir($IMG)) $liste[] = $IMG;
