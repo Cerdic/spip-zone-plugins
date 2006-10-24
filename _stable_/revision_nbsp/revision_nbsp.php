@@ -8,6 +8,10 @@
  * Auteur : fil@rezo.net
  * © 2005-2006 - Distribue sous licence GNU/GPL
  *
+ * l'icone <edit-find-replace.png> est tiree de Tango Desktop Project
+ * http://tango.freedesktop.org/Tango_Desktop_Project -- sous licence
+ * http://creativecommons.org/licenses/by-sa/2.5/
+ *
  */
 
 
@@ -22,11 +26,18 @@
 
 	function RevisionNbsp_ajoute_bouton_corriger_les_notes($x) {
 		if ($GLOBALS['auteur_session']['statut'] == '0minirezo')
-		if (is_array($x) AND $x['args']['exec'] == 'articles') {
+		if ($x['args']['exec'] == 'articles') {
 			$id_article = intval($x['args']['id_article']);
 			$t = spip_fetch_array(spip_query("SELECT texte FROM spip_articles WHERE id_article=$id_article"));
 			if ($c = notes_automatiques($t['texte'])) {
-				$x['data'] .= '<a href="'.generer_url_action('corriger_notes', 'id_article='.$id_article).'">Transformer les notes de cet article.</a>';
+				$x['data'] .= "<br />\n"
+				.debut_boite_info(true)
+				.icone_horizontale(
+					'Transformer les notes de cet article.',
+					generer_url_action('corriger_notes', 'id_article='.$id_article),
+						"../../plugins/revision_nbsp/edit-find-replace.png",  # grml!!
+						"rien.gif", false)
+				.fin_boite_info(true);
 			}
 #			else $x['data'] .= "<div>pas de notes a corriger</div>";
 		}
