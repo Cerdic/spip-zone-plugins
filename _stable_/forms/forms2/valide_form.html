@@ -26,7 +26,7 @@ function valide_sondage()
 	$renvoyer_image = false;
 
 	if ($verif_cookie == 'oui' AND ($id_donnee = intval($id_donnee))) {
-		$query = "SELECT * FROM spip_forms_donnees WHERE id_donnee=$id_donnee AND statut='attente'";
+		$query = "SELECT * FROM spip_forms_donnees WHERE id_donnee=$id_donnee AND confirmation='attente'";
 		$result = spip_query($query);
 		if ($row = spip_fetch_array($result)) {
 			$id_form = $row['id_form'];
@@ -40,7 +40,7 @@ function valide_sondage()
 				$query = "SELECT id_donnee FROM spip_forms_donnees ".
 					"WHERE id_form=$id_form AND id_donnee!=$id_donnee AND cookie='".addslashes($cookie)."'";
 				if (!spip_num_rows(spip_query($query))) {
-					$query = "UPDATE spip_forms_donnees SET statut='valide' WHERE id_donnee=$id_donnee";
+					$query = "UPDATE spip_forms_donnees SET confirmation='valide' WHERE id_donnee=$id_donnee";
 					spip_query($query);
 				}
 			}

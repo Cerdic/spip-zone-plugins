@@ -9,13 +9,17 @@
 </div>
 <table width='100%' cellpadding='5' cellspacing='0' border='0'>
 [<tr style='background-color: #dddddd;'>
-<td class="arial1" style='border-bottom: 1px solid #444444;' colspan="6">
+<td class="arial1" style='border-bottom: 1px solid #444444;' colspan="10">
 <div class='pagination'>(#PAGINATION)</div>
 </td>
 </tr>]
 <BOUCLE_forms(FORMS){type_form=''}{pagination}>
 <BOUCLE_rep(FORMS_DONNEES){id_form}></BOUCLE_rep>#SET{reponses,#TOTAL_BOUCLE}<//B_rep>
 #SET{lien_edite,(#URL_ECRIRE{forms_edit,id_form=#ID_FORM}|parametre_url{retour,#URL_ECRIRE{forms_tous}})}
+#SET{lien_affiche,(#URL_ECRIRE{forms_reponses,id_form=#ID_FORM}|parametre_url{retour,#URL_ECRIRE{forms_tous}})}
+#SET{lien_duplique,#SELF|parametre_url{duplique_form,#ID_FORM}}
+#SET{lien_vider,'#'}
+#SET{lien_supprimer,(#URL_ECRIRE{forms_edit,supp_form=#ID_FORM}|parametre_url{retour,#URL_ECRIRE{forms_tous}})}
 <tr class='tr_liste'>
 <td class="arial11">
 <img src='#EVAL{_DIR_IMG_PACK}puce-[(#GET{reponses}|?{'verte','orange'})]-breve.gif' width='7' height='7' border='0' alt='puce'>&nbsp;&nbsp;
@@ -28,8 +32,11 @@
 </td>
 <td class="arial1">[(#EVAL{ _T("forms:nombre_reponses",array("nombre"=>[(#GET{reponses})])) })]
 </td>
-<td class="arial1"><a href='[(#SELF|parametre_url{duplique_form,#ID_FORM})]'><:forms:dupliquer:></a>
-</td>
+<td class="arial1"><a href='#GET{lien_affiche}' title='<:forms:afficher:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/b_browse.png' width='16' height='16' alt='<:forms:afficher:>' /></a></td>
+<td class="arial1"><a href='#GET{lien_edite}' title='<:forms:editer:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/b_props.png' width='16' height='16' alt='<:forms:editer:>' /></a></td>
+<td class="arial1"><a href='#GET{lien_duplique}' title='<:forms:dupliquer:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/b_insrow.png' width='16' height='16' alt='<:forms:dupliquer:>' /></a></td>
+<td class="arial1"><a href='#GET{lien_vider}' title='<:forms:vider:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/b_empty.png' width='16' height='16' alt='<:forms:vider:>' /></a></td>
+<td class="arial1"><a href='#GET{lien_supprimer}' title='<:forms:supprimer:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/b_drop.png' width='16' height='16' alt='<:forms:supprimer:>' /></a></td>
 <td>&nbsp;
 </td>
 </tr>
@@ -51,7 +58,7 @@
 <div class='pagination'>(#PAGINATION)</div>
 </td>
 </tr>]
-<BOUCLE_sondpub(FORMS){type_form=sondage-public}{pagination}>
+<BOUCLE_sondpub(FORMS){type_form=sondage}{public=oui}{pagination}>
 <BOUCLE_rep2(FORMS_DONNEES){id_form}></BOUCLE_rep2>#SET{reponses,#TOTAL_BOUCLE}<//B_rep2>
 #SET{lien_edite,(#URL_ECRIRE{forms_edit,id_form=#ID_FORM}|parametre_url{retour,#URL_ECRIRE{forms_tous}})}
 <tr class='tr_liste'>
@@ -89,7 +96,7 @@
 <div class='pagination'>(#PAGINATION)</div>
 </td>
 </tr>]
-<BOUCLE_sondprot(FORMS){type_form=sondage-prot}{pagination}>
+<BOUCLE_sondprot(FORMS){type_form=sondage}{public=non}{pagination}>
 <BOUCLE_rep3(FORMS_DONNEES){id_form}></BOUCLE_rep3>#SET{reponses,#TOTAL_BOUCLE}<//B_rep3>
 #SET{lien_edite,(#URL_ECRIRE{forms_edit,id_form=#ID_FORM}|parametre_url{retour,#URL_ECRIRE{forms_tous}})}
 <tr class='tr_liste'>

@@ -104,7 +104,10 @@
 
 	function Forms_extraire_reponse($id_donnee){
 		// Lire les valeurs entrees
-		$result = spip_query("SELECT * FROM spip_forms_donnees_champs AS r JOIN spip_forms_champs AS ch ON ch.champ=r.champ WHERE r.id_donnee="._q($id_donnee)." ORDER BY ch.rang");
+		$result = spip_query("SELECT * FROM spip_forms_donnees_champs AS r 
+			JOIN spip_forms_champs AS ch ON ch.champ=r.champ 
+			JOIN spip_forms_donnees AS d ON d.id_donnee = r.id_donnee
+			WHERE d.id_form = ch.id_form AND r.id_donnee="._q($id_donnee)." ORDER BY ch.rang");
 		$valeurs = array();
 		$retour = urlencode(self());
 		$libelles = array();
@@ -375,6 +378,7 @@
 		if (!$row = spip_fetch_array($result)) {
 			$erreur['@'] = _T("forms:probleme_technique");
 		}
+		$moderation = $row['moderation'];
 		// Extraction des donnees pour l'envoi des mails eventuels
 		//   accuse de reception et forward webmaster
 		$email = unserialize($row['email']);
@@ -391,19 +395,23 @@
 			$url = parametre_url(self(),'id_form','');
 			$ok = true;
 			
-			if (in_array($row['type_form'],array('sondage-public','sondage-prot'))) {
-				$statut = 'attente';
-				$cookie = addslashes($GLOBALS['cookie_form']);
+			if ($row['type_form']=='sondage') {
+				$confirmation = 'attente';
+				$cookie = $GLOBALS['cookie_form'];
 				$nom_cookie = Forms_nom_cookie_form($id_form);
 			}
 			else {
-				$statut = 'valide';
+				$confirmation = 'valide';
 				$cookie = '';
 			}
+			if ($moderation = 'posteriori') 
+				$statut='publie';
+			else 
+				$statut = 'propose';
 			// D'abord creer la reponse dans la base de donnees
 			if ($ok) {
-				spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, statut, cookie) ".
-					"VALUES ($id_form, '$id_auteur', NOW(), '$ip', "._q($url).", '$statut', '$cookie')");
+				spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie) ".
+					"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($ip).","._q($url).", '$confirmation', '$statut',"._q($cookie).")");
 				$id_donnee = spip_insert_id();
 				if (!$id_donnee) {
 					$erreur['@'] = _T("forms:probleme_technique");
@@ -423,7 +431,7 @@
 			if ($ok) {
 				spip_query("INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
 					"VALUES ".join(',', $inserts));
-				if (in_array($row['type_form'],array('sondage-public','sondage-prot'))) {
+				if ($row['type_form']=='sondage') {
 					$hash = calculer_action_auteur("forms valide reponse sondage $id_donnee");
 					$url = generer_url_public($script_validation,"verif_cookie=oui&id_donnee=$id_donnee&hash=$hash".($script_args?"&$script_args":""));
 					$r = $url;

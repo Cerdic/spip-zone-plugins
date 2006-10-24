@@ -3,6 +3,7 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+'aide_contextuelle'=>'Aide contextuelle',
 'adresse_invalide'=>"Cette adresse n'est pas valide.",
 'ajouter_champ' => "Ajouter un champ",
 'ajouter_champ_type' => "Cr&eacute;er un champ de type&nbsp;:",
@@ -47,11 +48,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'date' => "Date",
 'dupliquer' => "Dupliquer",
+'donnees_pub'=>"Formulaire public. Les donn&eacute;es enregitr&eacute;es seront accessibles aux visiteurs du site.",
+'donnees_prot'=>"Formulaire prot&eacute;g&eacute;. Les donn&eacute;es enregitr&eacute;es ne seront accessibles que depuis l'interface priv&eacute;e.",
 
 'echec_upload'=>"Le transfert du fichier a &eacute;chou&eacute;.",
 'edit_champ_obligatoire' => 'ce champ est obligatoire',
 'email_independant' => 'Email independant de la reponse',
 'exporter_article' => 'Exporter dans un article',
+
+'html_wrapper'=> 'Encapsuler le champ dans le code html',
 
 'icone_creer_formulaire' => "Cr&eacute;er un nouveau formulaire",
 'info_apparence' => "Voici une pr&eacute;visualisation du formulaire tel qu'il appara&icirc;tra aux visiteurs du site public.",
@@ -84,8 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'site_introuvable'=>"Ce site n'a pas &eacute;t&eacute; trouv&eacute;.",
 'sondage_non'=>"Ce formulaire n'est pas un sondage",
-'sondage_pub'=>"Ce formulaire est un sondage public. Les r&eacute;sultats seront accessibles aux visiteurs du site.",
-'sondage_prot'=>"Ce formulaire est un sondage prot&eacute;g&eacute;. Les r&eacute;sultats ne seront accessibles que depuis l'interface priv&eacute;e.",
+'sondage_oui'=>"Ce formulaire est un sondage.",
 'suivi_formulaire' => "Suivi du formulaire",
 'suivi_formulaires' => "Suivi des formulaires",
 'suivi_reponses' => "Suivi des r&eacute;ponses",

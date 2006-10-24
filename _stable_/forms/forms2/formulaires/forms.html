@@ -9,7 +9,7 @@
 		 onkeypress="javascript:window.open(this.href, 'spip_sondage', 'scrollbars=yes,resizable=yes, width=450, height=300'); return false;"><:forms:voir_resultats:></a>
 ]
 [<p class='spip_form_ok'>(#ENV{formok})
-	[(#TYPE_FORM|match{^(sondage-public|sondage-prot)$}|?{' ',''})	<a href='#ENV{self}#form#ID_FORM'><:forms:valider:></a>]
+	[(#TYPE_FORM|=={sondage}|?{' ',''})	<a href='#ENV{self}#form#ID_FORM'><:forms:valider:></a>]
 	[<span class='spip_form_ok_confirmation'>(#ENV{reponse})</span>]
 </p>]
 [<p class='spip_form_erreur'>(#ENV{erreur_message})</p>]
@@ -26,7 +26,7 @@
 		
 		<input type='hidden' name='retour_form' value='#ENV{url_retour}' />
 		
-		[(#TYPE_FORM|match{^(sondage-public|sondage-prot)$}|?{'',' '})<input type='hidden' name='ajout_cookie_form' value='oui' />]
+		[(#TYPE_FORM|=={sondage}|?{'',' '})<input type='hidden' name='ajout_cookie_form' value='oui' />]
 		</div>
 			<INCLURE{fond=#ENV{class}}{id_form}{affiche_sondage}{erreur}{valeurs=#ENV**{valeurs}}>
 	[(#ENV{formactif})

@@ -75,7 +75,7 @@ function exec_forms_reponses(){
 	}
 
 	if ($id_form)
-		$where = "WHERE id_form=$id_form AND ";
+		$where = "WHERE r.id_form="._q($id_form)." AND ";
 	else
 		$where = "WHERE ";
 
@@ -83,7 +83,7 @@ function exec_forms_reponses(){
 	// Sondage : afficher les cumuls
 	//
 
-	if ($id_form && in_array($type_form,array('sondage-public','sondage-prot'))) {
+	if ($id_form && ($type_form=='sondage')) {
 		echo "<br />\n";
 		debut_cadre_enfonce("statistiques-24.gif");
 		include_spip('forms_fonctions');
@@ -98,7 +98,7 @@ function exec_forms_reponses(){
 	$tranche = 10;
 
 	$query = "SELECT COUNT(*) AS cnt FROM spip_forms_donnees ".
-		"$where statut='valide' AND date > DATE_SUB(NOW(), INTERVAL 6 MONTH)";
+		"$where confirmation='valide' AND date > DATE_SUB(NOW(), INTERVAL 6 MONTH)";
 	$result = spip_query($query);
 	list($total) = spip_fetch_array($result,SPIP_NUM);
 
@@ -117,7 +117,6 @@ function exec_forms_reponses(){
 	}
 	echo "<br />\n";
 
-
 	//
 	// Afficher les reponses
 	//
@@ -127,7 +126,7 @@ function exec_forms_reponses(){
 
 	$query = "SELECT r.*, a.nom, f.titre FROM spip_forms_donnees AS r LEFT JOIN spip_auteurs AS a USING (id_auteur) 
 		JOIN spip_forms AS f ON r.id_form=f.id_form
-		$where r.statut='valide' AND r.date > DATE_SUB(NOW(), INTERVAL 6 MONTH)
+		$where r.confirmation='valide' AND r.date > DATE_SUB(NOW(), INTERVAL 6 MONTH)
 		ORDER BY r.date DESC LIMIT $debut, $tranche";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) {
@@ -176,7 +175,7 @@ function exec_forms_reponses(){
 		echo "<br />\n";
 
 		list($lib,$values,$urls) = 	Forms_extraire_reponse($id_donnee);
-
+		
 		foreach ($lib as $champ => $titre) {
 			$s = '';
 			foreach ($values[$champ] as $id=>$valeur){

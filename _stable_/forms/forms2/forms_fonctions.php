@@ -14,12 +14,43 @@
 
 	include_spip('base/forms');
 	//
-	// <BOUCLE(FORMS_CHAMPS_DONNEES)>
+	// <BOUCLE(FORMS)>
 	//
-	function boucle_FORMS_CHAMPS_DONNEES_dist($id_boucle, &$boucles) {
+	/*function boucle_FORMS_dist($id_boucle, &$boucles) {
 		$boucle = &$boucles[$id_boucle];
-		$boucle->from[$id_table] =  "spip_forms_champs_donnnees";
 		$id_table = $boucle->id_table;
+		$boucle->from[$id_table] =  "spip_forms";
+	
+		if (!isset($boucle->modificateur['tout'])){
+			$boucle->where[]= array("'='", "'$id_table.public'", "'oui'");
+			$boucle->group[] = $boucle->id_table . '.champ'; // ?  
+		}
+		return calculer_boucle($id_boucle, $boucles); 
+	}*/
+	
+	//
+	// <BOUCLE(FORMS_DONNEES)>
+	//
+	function boucle_FORMS_DONNEES_dist($id_boucle, &$boucles) {
+		$boucle = &$boucles[$id_boucle];
+		$id_table = $boucle->id_table;
+		$boucle->from[$id_table] =  "spip_forms_donnees";
+	
+		if (!isset($boucle->modificateur['tout'])){
+			$boucle->where[]= array("'='", "'$id_table.confirmation'", "'\"valide\"'");
+			$boucle->where[]= array("'='", "'$id_table.statut'", "'\"publie\"'");
+		}
+	
+		return calculer_boucle($id_boucle, $boucles); 
+	}
+
+	//
+	// <BOUCLE(FORMS_DONNEES_CHAMPS)>
+	//
+	function boucle_FORMS_DONNEES_CHAMPS_dist($id_boucle, &$boucles) {
+		$boucle = &$boucles[$id_boucle];
+		$id_table = $boucle->id_table;
+		$boucle->from[$id_table] =  "spip_forms_donnees_champs";
 	
 		if (!isset($boucle->modificateur['tout'])){
 			$boucle->from["champs"] =  "spip_forms_champs";
@@ -55,7 +86,7 @@
 			// car les champs ne sont pas forcement obligatoires
 			$row3=spip_fetch_array(spip_query("SELECT COUNT(DISTINCT c.id_donnee) AS num ".
 				"FROM spip_forms_donnees AS r LEFT JOIN spip_forms_donnees_champs AS c USING (id_donnee) ".
-				"WHERE r.id_form=$id_form AND r.statut='valide' AND c.champ="._q($row2['champ'])));
+				"WHERE r.id_form=$id_form AND r.confirmation='valide' AND r.statut='publie' AND c.champ="._q($row2['champ'])));
 			if (!$row3 OR !($total_reponses=$row3['num']))
 				continue;
 	
@@ -76,7 +107,7 @@
 			// Nombre de reponses pour chaque valeur autorisee
 			$query = "SELECT c.valeur, COUNT(*) AS num ".
 				"FROM spip_forms_donnees AS r LEFT JOIN spip_forms_donnees_champs AS c USING (id_donnee) ".
-				"WHERE r.id_form=$id_form AND r.statut='valide' ".
+				"WHERE r.id_form=$id_form AND r.confirmation='valide' AND r.statut='publie' ".
 				"AND c.champ="._q($row2['champ'])." GROUP BY c.valeur";
 			$result = spip_query($query);
 			$chiffres = array();
@@ -102,7 +133,7 @@
 		}
 	
 		$query = "SELECT COUNT(*) AS num FROM spip_forms_donnees ".
-			"WHERE id_form=$id_form AND statut='valide'";
+			"WHERE id_form=$id_form AND confirmation='valide' AND r.statut='publie'";
 		$result = spip_query($query);
 		list($num) = spip_fetch_array($result,SPIP_NUM);
 		$r .= "<strong>"._T("forms:total_votes")." : $num</strong>";

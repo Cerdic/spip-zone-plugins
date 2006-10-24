@@ -197,13 +197,6 @@ function Forms_bloc_edition_champ($row, $link) {
 		$out .= "<input type='text' name='taille_champ' value='$taille' id='taille_$champ' class='fondo verdana2'>\n";
 		$out .= "<br />\n";
 	}
-	$out .= "<label for='aide_$champ'>"._T("forms:aide_contextuelle")."</label> :<br/>";
-	$out .= " &nbsp;<textarea name='aide' id='aide_$champ'  class='verdana2' style='width:100%;height:3em;' >".
-		entites_html($aide)."</textarea><br />\n";
-		
-	$out .= "<label for='wrap_$champ'>"._T("forms:html_wrapper")."</label> :<br/>";
-	$out .= " &nbsp;<textarea name='html_wrap' id='wrap_$champ'  class='verdana2' style='width:100%;height:3em;' >".
-		entites_html($html_wrap)."</textarea><br />\n";
 
 	return $out;
 }
@@ -297,6 +290,13 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $fo
 				entites_html($row['titre'])."\" class='fondo verdana2' size='30'$js><br />\n";
 			$out .= Forms_bloc_edition_champ($row, $form_link);
 		}
+		$out .= "<label for='aide_$champ'>"._T("forms:aide_contextuelle")."</label> :";
+		$out .= " &nbsp;<textarea name='aide_champ' id='aide_$champ'  class='verdana2' style='width:90%;height:3em;' >".
+			entites_html($row['aide'])."</textarea><br />\n";
+			
+		$out .= "<label for='wrap_$champ'>"._T("forms:html_wrapper")."</label> :";
+		$out .= " &nbsp;<textarea name='wrap_champ' id='wrap_$champ'  class='verdana2' style='width:90%;height:2em;' >".
+			entites_html($row['html_wrap'])."</textarea><br />\n";
 
 		$out .= "<div align='right'>";
 		$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo verdana2'></div>\n";
@@ -425,13 +425,16 @@ function Forms_update(){
 	$email = _request('email');
 	$champconfirm = _request('champconfirm');
 	$texte = _request('texte');
-	$moderation = _request('moderation');
 	$type_form = _request('type_form');
+	$moderation = _request('moderation');
+	$public = _request('public');
 
 	$modif_champ = _request('modif_champ');
 	$ajout_champ = _request('ajout_champ');
 	$nom_champ = _request('nom_champ');
 	$champ_obligatoire = _request('champ_obligatoire');
+	$aide_champ = _request('aide_champ');
+	$wrap_champ = _request('wrap_champ');
 	$supp_choix = _request('supp_choix');
 	$supp_champ = _request('supp_champ');
 	
@@ -456,8 +459,9 @@ function Forms_update(){
 				"type_form="._q($type_form).", ".
 				"email="._q(serialize($email)).", ".
 				"champconfirm="._q($champconfirm).", ".
-				"texte="._q($texte)." ".
-				"moderation="._q($moderation)." ".
+				"texte="._q($texte).", ".
+				"moderation="._q($moderation).", ".
+				"public="._q($public)." ".
 				"WHERE id_form="._q($id_form);
 			$result = spip_query($query);
 		}
@@ -468,6 +472,8 @@ function Forms_update(){
 			$titre = $row['titre'];
 			$descriptif = $row['descriptif'];
 			$type_form = $row['type_form'];
+			$moderation = $row['moderation'];
+			$public = $row['public'];
 			$email = unserialize($row['email']);
 			$champconfirm = $row['champconfirm'];
 			$texte = $row['texte'];
@@ -496,7 +502,7 @@ function Forms_update(){
 					spip_query("UPDATE spip_forms_champs_choix SET champ="._q($newchamp)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
 					$champ = $newchamp;
 				}
-				spip_query("UPDATE spip_forms_champs SET titre="._q($nom_champ).", obligatoire="._q($champ_obligatoire)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
+				spip_query("UPDATE spip_forms_champs SET titre="._q($nom_champ).", obligatoire="._q($champ_obligatoire).", aide="._q($aide_champ).", html_wrap="._q($wrap_champ)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
 				Forms_update_edition_champ($id_form, $champ);
 				$champ_visible = $champ;
 			}
@@ -575,17 +581,21 @@ function exec_forms_edit(){
 	$champconfirm = _request('champconfirm');
 	$texte = _request('texte');
 	$type_form = _request('type_form');
+	$public = _request('public');
+	$moderation = _request('moderation');
 	
 	Forms_install();
 
 	if ($retour)
 		$retour = urldecode($retour);
+	else 
+		$retour = generer_url_ecrire('forms_tous');
   include_spip("inc/presentation");
 	include_spip("inc/config");
 
 	$nb_reponses = 0;
 	if ($id_form)
-		if ($row = spip_fetch_array(spip_query("SELECT COUNT(*) AS num FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND statut='valide'")))
+		if ($row = spip_fetch_array(spip_query("SELECT COUNT(*) AS num FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND confirmation='valide'")))
 			$nb_reponses = $row['num'];
 
 	$clean_link = parametre_url(self(),'new','');
@@ -616,6 +626,7 @@ function exec_forms_edit(){
 		$champconfirm = "";
 		$texte = "";
 		$moderation = "priori";
+		$public = "non";
 		$js_titre = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 	}
 	else {
@@ -634,6 +645,7 @@ function exec_forms_edit(){
 			$champconfirm = $row['champconfirm'];
 			$texte = $row['texte'];
 			$moderation = $row['moderation'];
+			$public = $row['public'];
 		}
 		$js_titre = "";
 	}
@@ -718,7 +730,7 @@ function exec_forms_edit(){
 			echo fin_block();
 		}
 
-		afficher_articles(_T("forms:articles_utilisant"),
+		echo afficher_articles(_T("forms:articles_utilisant"),
 			array('FROM' => 'spip_articles AS articles, spip_forms_articles AS lien',
 			'WHERE' => "lien.id_article=articles.id_article AND id_form="._q($id_form)." AND statut!='poubelle'",
 			'ORDER BY' => "titre"));
@@ -805,28 +817,38 @@ function exec_forms_edit(){
 			echo "\" />\n";
 	 	}
 	 	
-		echo "<strong><label for='moderation'>"._T('forms:moderation_donnees')."</label></strong>";
-	 	echo "<br />";
-		echo bouton_radio("moderation", "posteriori", _T('bouton_radio_publication_immediate'), $moderation == "posteriori", "");
-		echo "<br />";
-		echo bouton_radio("moderation", "priori", _T('bouton_radio_moderation_priori'), $moderation == "priori", "");
-		echo "<br />";
-
-	 	if (in_array($type_form,array('','sondage-public','sondage-prot'))){
+	 	if (in_array($type_form,array('','sondage'))){
 			debut_cadre_enfonce("statistiques-24.gif");
 			echo "<strong>"._T("forms:type_form")."</strong> : ";
 			echo _T("forms:info_sondage");
 			echo "<br /><br />";
 			afficher_choix('type_form', $type_form, array(
 				'' => _T("forms:sondage_non"),
-				'sondage-public' => _T("forms:sondage_pub"),
-				'sondage-prot' => _T("forms:sondage_prot")
+				'sondage' => _T("forms:sondage_oui"),
 			));
 			fin_cadre_enfonce();
 	 	}
 	 	else 
 	 		echo "<input type='hidden' name='type_form' value='$type_form' />";
 
+		debut_cadre_enfonce("");
+		echo "<strong><label for='moderation'>"._T('forms:publication_donnees')."</label></strong>";
+	 	echo "<br />";
+		echo bouton_radio("public", "oui", _T('forms:donnees_pub'), $public == "oui", "");
+		echo "<br />";
+		echo bouton_radio("public", "non", _T('forms:donnees_prot'), $public == "non", "");
+		echo "<br />";
+		fin_cadre_enfonce();
+		
+		debut_cadre_enfonce("");
+		echo "<strong><label for='moderation'>"._T('forms:moderation_donnees')."</label></strong>";
+	 	echo "<br />";
+		echo bouton_radio("moderation", "posteriori", _T('bouton_radio_publication_immediate'), $moderation == "posteriori", "");
+		echo "<br />";
+		echo bouton_radio("moderation", "priori", _T('bouton_radio_moderation_priori'), $moderation == "priori", "");
+		echo "<br />";
+		fin_cadre_enfonce();
+		
 		echo "<div align='right'>";
 		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
 

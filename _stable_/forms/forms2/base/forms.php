@@ -21,11 +21,11 @@ $spip_forms = array(
 	"titre" 	=> "varchar(255) NOT NULL",
 	"descriptif" 	=> "text",
 	"type_form" 	=> "varchar(255) NOT NULL",
-	"structure" 	=> "text",
 	"email" => "text",
 	"champconfirm" => "varchar(255) NOT NULL",
 	"texte" 	=> "text",
 	"moderation"	=> "VARCHAR(10) DEFAULT 'posteriori'",
+	"public" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 	"maj" 		=> "TIMESTAMP");
 
 $spip_forms_key = array(
@@ -87,7 +87,8 @@ $spip_forms_donnees = array(
 	"id_auteur"	=> "bigint(21) NOT NULL",
 	"id_article_export"	=> "bigint(21) NOT NULL",
 	"url" => "VARCHAR(255) NOT NULL",
-	"statut" 	=> "VARCHAR(255) NOT NULL",
+	"confirmation" 	=> "VARCHAR(10) NOT NULL",
+	"statut"	=> "VARCHAR(10) NOT NULL",
 	"cookie"	=> "VARCHAR(255) NOT NULL",
 	"maj" 		=> "TIMESTAMP");
 
@@ -134,16 +135,12 @@ $tables_principales['spip_forms_articles'] = array(
 	'field' => &$spip_forms_articles,
 	'key' => &$spip_forms_articles_key);
 	
-$tables_principales['spip_forms_articles'] = array(
-	'field' => &$spip_forms_articles,
-	'key' => &$spip_forms_articles_key);
-
 $spip_forms_donnees_articles = array(
 	"id_donnee" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
 	"id_article" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
 
 $spip_forms_donnees_articles_key = array(
-	"KEY id_form_donnee" 	=> "id_form",
+	"KEY id_donnee" 	=> "id_donnee",
 	"KEY id_article" => "id_article");
 
 $tables_principales['spip_forms_donnees_articles'] = array(
