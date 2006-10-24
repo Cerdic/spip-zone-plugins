@@ -12,8 +12,9 @@ var img_deplierbas = "'._DIR_IMG_PACK.'deplierbas.gif";
 	return $flux;
 }
 	
-function arbodyn_affiche_droite(){
-	return $flux.arbodyn_edite();
+function arbodyn_affiche_droite($flux){
+	$flux['data'].=arbodyn_edite();
+	return $flux;
 }
 function arbodyn_edite(){
 	$out = "";
