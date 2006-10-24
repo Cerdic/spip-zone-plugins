@@ -10,7 +10,7 @@ function exec_flickr_bookmarklet_photo() {
   pipeline('exec_init',array('args'=>array('exec'=>'flickr_bookmarklet_photo'),'data'=>''));
 
 
-  $id = _request('id');
+  $id = intval(_request('id'));
   $secret = _request('secret');
 
   $photo_details = flickr_photos_getInfo($id,$secret);
@@ -219,7 +219,7 @@ function flickr_afficher_articles_boucle($row, $langue_defaut, $voir_logo)
 	$vals[] = affdate_jourcourt($date);
 
 	$input .= '<input type="radio" name="id" value="'.$id_article.'"/>';
-	$input .= '<input type="hidden" name="redirect" value="'.generer_url_ecrire('articles',"id_article=$id_article").'"/>';
+	$input .= '<input type="hidden" name="redirect" value="'.generer_url_ecrire('articles',"id_article=$id_article",true).'"/>';
 
 	$vals[] = $input;
 

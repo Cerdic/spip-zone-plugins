@@ -103,8 +103,8 @@ function FpipR_affiche_gauche($flux) {
 		</div>';
 	  $to_ret .= '<div class="plan-articles">';
 
-	  $to_ret .= '<a class="thickbox" href="'.generer_url_ecrire('flickr_choix_photos',"type=$type&id=$id").'">'._T('fpipr:ajouter_photos').'</a>';
-	  $to_ret .= '<a class="thickbox" href="'.generer_url_ecrire('flickr_choix_sets',"type=$type&id=$id").'">'._T('fpipr:ajouter_sets').'</a>';
+	  $to_ret .= '<a class="thickbox" href="'.generer_url_ecrire('flickr_choix_photos',"type=$type&id=$id",true).'">'._T('fpipr:ajouter_photos').'</a>';
+	  $to_ret .= '<a class="thickbox" href="'.generer_url_ecrire('flickr_choix_sets',"type=$type&id=$id",true).'">'._T('fpipr:ajouter_sets').'</a>';
 	  $to_ret .= '</div>';
 	  $to_ret .= '</div></div>';
 

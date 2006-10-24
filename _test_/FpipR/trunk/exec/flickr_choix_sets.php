@@ -29,7 +29,7 @@ function exec_flickr_choix_sets() {
 	$check = flickr_auth_checkToken($row['flickr_token']);
 	if($check) {
 	  echo _T('fpipr:info_sets');
-	  $page = _request('page')?_request('page'):1;
+	  $page = intval(_request('page'))?intval(_request('page')):1;
 	  $photosets = flickr_photosets_getList($row['flickr_nsid'],$row['flickr_token']);
 	  
 	  $html = '<input type="hidden" name="flickr_nsid" value="'.$row['flickr_nsid'].'">';
@@ -57,17 +57,17 @@ function exec_flickr_choix_sets() {
 	  $html .= '<br clear="both">';
 	  $html .= '<div align="right"><button type="submit">'._T('spip:bouton_valider')."</button></div>\n";
 	  $html .= '<input type="hidden" name="type" value="'._request('type').'"/>'."\n";
-	  $html .= '<input type="hidden" name="id" value="'._request('id').'"/>'."\n";
+	  $html .= '<input type="hidden" name="id" value="'.intval(_request('id')).'"/>'."\n";
 	  $html .= '<input type="hidden" name="set" value="oui"/>'."\n";
 
 
 	  include_spip('inc/actions');
 	  if(_request('type') == 'article') {
-		echo generer_action_auteur('flickr_ajouter_documents',_request('id'), generer_url_ecrire('articles','id_article='._request('id')),$html);
+		echo generer_action_auteur('flickr_ajouter_documents',intval(_request('id')), generer_url_ecrire('articles','id_article='.intval(_request('id')),true),$html);
 	  } else if(_request('type') == 'rubrique') {
-		echo generer_action_auteur('flickr_ajouter_documents',_request('id'), generer_url_ecrire('naviguer','id_rubrique='._request('id')),$html);
+		echo generer_action_auteur('flickr_ajouter_documents',intval(_request('id')), generer_url_ecrire('naviguer','id_rubrique='.intval(_request('id')),true),$html);
 	  } else {
-		echo generer_action_auteur('flickr_ajouter_documents',_request('id'), generer_url_ecrire('breves_edit','id_breve='._request('id')),$html);
+		echo generer_action_auteur('flickr_ajouter_documents',intval(_request('id')), generer_url_ecrire('breves_edit','id_breve='.intval(_request('id')),true),$html);
 	  }
 	  
 	} else {
@@ -81,11 +81,11 @@ function exec_flickr_choix_sets() {
   }
   echo '<br/>';
   if(_request('type') == 'article') {
-	echo '<a href="'.generer_url_ecrire('articles','id_article='._request('id')).'">'._T('fpipr:retour').'</a>';
+	echo '<a href="'.generer_url_ecrire('articles','id_article='.intval(_request('id'))).'">'._T('fpipr:retour').'</a>';
   } else if(_request('type') == 'rubrique') {
-	  echo '<a href="'.generer_url_ecrire('naviguer','id_rubrique='._request('id')).'">'._T('fpipr:retour').'</a>';
+	  echo '<a href="'.generer_url_ecrire('naviguer','id_rubrique='.intval(_request('id'))).'">'._T('fpipr:retour').'</a>';
   } else {
-	  echo '<a href="'.generer_url_ecrire('breves_edit','id_breve='._request('id')).'">'._T('fpipr:retour').'</a>';
+	  echo '<a href="'.generer_url_ecrire('breves_edit','id_breve='.intval(_request('id'))).'">'._T('fpipr:retour').'</a>';
   }
   echo '</body></html>';  
 }
