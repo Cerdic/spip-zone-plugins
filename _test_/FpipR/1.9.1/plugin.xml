@@ -29,6 +29,6 @@
 	  <inclure>FpipR.php</inclure>
 	</pipeline>
 	<options>
-	  options.php
+	  FpipR_options.php
 	</options>
 </plugin>
