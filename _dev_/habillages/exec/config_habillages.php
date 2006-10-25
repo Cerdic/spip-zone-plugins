@@ -162,7 +162,7 @@ EOF;
 // 	$habillages_styles = basename($GLOBALS['meta']['habillages_couleurs']);
 // 	//$habillages_logos = basename($GLOBALS['meta']['habillages_logos']);
 // 	
- 	echo _T('habillages:accueil_general')."<br />";
+ 	echo _T('habillages:accueil_general')."<br /><br />";
 // 	if ($habillages_squelettes != "") {
 // 	echo "<br />";
 // 	echo "<br />";
