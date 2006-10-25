@@ -130,7 +130,7 @@ EOF;
 	echo generer_url_post_ecrire("habillages_extras");
 	
 		# Chercher les fichiers theme.xml.
-		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
+		$fichier_theme = preg_files('../',"/theme[.]xml$");
 		
 		# Pour chaque fichier theme.xml trouve, on releve le <type> et on ne garde que 
 		# les themes pour les lister.

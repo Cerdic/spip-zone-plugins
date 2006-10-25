@@ -210,15 +210,14 @@ EOF;
 	echo "<tr><td class='serif' colspan=4>";	
 	echo generer_url_post_ecrire("habillages_squelettes");
 		
-		# Squelettes par defaut. On laisse la dist ou le squelette personnalise
-		# de l'auteur du site prendre le dessus. Mettre une interface bateau, mais
-		# essayer ensuite d'adapter l'interface au squelette qui est actif sur le
-		# site par defaut, surtout si le squelette a ete personnalise.
+		
 		lire_metas();
 		$squelettes = $GLOBALS['meta']['habillages_squelettes'];
+		# Squelettes par defaut choisi ou si le plugin vient d'etre active. 
 		if ($squelettes == "" || $squelettes == "defaut") {
 			$checked_defaut = " checked='checked'";
 		}
+		# Dist choisie. 
 		else if ($squelettes == "dist") {
 			$checked_dist = " checked='checked'";
 		}
@@ -231,9 +230,6 @@ EOF;
 		echo "<small>"._T('habillages:squelettes_defaut_description')."</small><br /><br /><hr>";
 		fin_boite_info();
 		echo "<br />";
-		# Attention : si l'utilisateur a personnalise un squelette (dans "squelettes" ou autre) ce ne sera
-		# pas la dist qui s'affichera. A modifier donc pour que la dist s'affiche comme squelette par defaut
-		# quand ce bouton est coche et si elle existe.
 		debut_boite_info();
 		echo "<div style='background-color:$couleur_claire' class='titre_un'>";
 		echo "<input type='radio' name='statusplug' value='dist'$checked_dist>";
@@ -245,7 +241,7 @@ EOF;
 		echo "</ul>";
 	
 		# Chercher les fichiers theme.xml.
-		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
+		$fichier_theme = preg_files('../',"/theme[.]xml$");
 		
 		# Pour chaque fichier theme.xml trouve, on releve le <type> et on ne garde que 
 		# les squelettes pour les lister.
