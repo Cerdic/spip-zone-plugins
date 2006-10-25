@@ -27,7 +27,7 @@
 			$type = $val['type'];
 			$obligatoire = $val['obligatoire'];
 			$type_ext = $val['type_ext'];
-			$extra_info = isset($type_ext['id_groupe']) ? $type_ext['id_groupe']:0;
+			$extra_info = isset($type_ext['id_groupe']) ? $type_ext['id_groupe']:'';
 			$extra_info = isset($type_ext['taille']) ? $type_ext['taille']:$extra_info;
 			$obligatoire = $val['obligatoire'];
 			spip_query("INSERT INTO spip_forms_champs (id_form,rang,champ,titre,type,obligatoire,extra_info) 

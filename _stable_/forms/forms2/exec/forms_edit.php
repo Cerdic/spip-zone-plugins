@@ -12,6 +12,8 @@
  */
 
 include_spip('inc/forms');
+include_spip('inc/forms_edit');
+include_spip('inc/forms_type_champs'); // gestion des types de champs
 
 function debut_block_route($id,$visible){
 	$display = $visible?'block':'none';
@@ -256,7 +258,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $fo
 		$out .= $visible ? bouton_block_visible("champ_$champ") : bouton_block_invisible("champ_$champ");
 		$out .= "<strong id='titre_nom_$champ'>".typo($row['titre'])."</strong>";
 		$out .= "<br /></div>";
-		$out .= "(".Forms_nom_type_champ($row['type']).")\n";
+		$out .= "(".typo(Forms_nom_type_champ($row['type'])).")\n";
 		$out .= $visible ? debut_block_visible("champ_$champ") : debut_block_invisible("champ_$champ");
 
 		// Modifier un champ
@@ -328,7 +330,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $fo
 	$types = Forms_liste_types_champs();
 	$out .= "<select name='ajout_champ' value='' class='fondo'>\n";
 	foreach ($types as $type) {
-		$out .= "<option value='$type'>".Forms_nom_type_champ($type)."</option>\n";
+		$out .= "<option value='$type'>".typo(Forms_nom_type_champ($type))."</option>\n";
 	}
 	$out .= "</select>\n";
 	$out .= " &nbsp; <input type='submit' name='valider' id='ajout_champ' VALUE='"._T('bouton_ajouter')."' class='fondo'>";
@@ -337,53 +339,6 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $fo
 	return $out;
 }
 
-function Forms_nouveau_champ($id_form,$type){
-	$res = spip_query("SELECT champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND type="._q($type));
-	$n = 1;
-	$champ = $type.'_'.strval($n);
-	while ($row = spip_fetch_array($res)){
-		$lenumero = split('_', $row['champ'] );
-		$lenumero = intval(end($lenumero));
-		if ($lenumero>= $n) $n=$lenumero+1;
-	}
-	$champ = $type.'_'.strval($n);
-	return $champ;
-}
-function Forms_insere_nouveau_champ($id_form,$type,$titre){
-	$champ = Forms_nouveau_champ($id_form,$type);
-	$rang = 0;
-	$res = spip_query("SELECT max(rang) AS rangmax FROM spip_forms_champs WHERE id_form="._q($id_form));
-	if ($row = spip_fetch_array($res))
-		$rang = $row['rang'];
-	$rang++;
-	spip_abstract_insert(
-		'spip_forms_champs',
-		'(id_form,champ,rang,titre,type,obligatoire,extra_info',
-		'('._q($id_form).','._q($champ).','._q($rang).','._q($titre).','.q($type).",'non','')");
-
-	return $champ;
-}
-function Forms_nouveau_choix($id_form,$champ){
-	$n = 1;
-	$res = spip_query("SELECT choix FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
-	while ($row = spip_fetch_array($res)){
-		$lenumero = split('_', $row['choix']);
-		$lenumero = intval(end($lenumero));
-		if ($lenumero>= $n) $n=$lenumero+1;
-	}
-	$choix = $champ.'_'.$n;
-	return $choix;
-}
-function Forms_insere_nouveau_choix($id_form,$champ,$titre){
-	$choix = Forms_nouveau_choix($id_form,$champ);
-	$rang = 0;
-	$res = spip_query("SELECT max(rang) AS rangmax FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
-	if ($row = spip_fetch_array($res))
-		$rang = $row['rang'];
-	$rang++;
-	spip_abstract_insert("spip_forms_champs_choix","(id_form,champ,choix,titre,rang)","("._q($id_form).","._q($champ).","._q($choix).","._q($titre).","._q($rang).")");
-	return $choix;
-}
 
 function Forms_update_edition_champ($id_form,$champ) {
 	$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($champ));
@@ -419,7 +374,7 @@ function Forms_update_edition_champ($id_form,$champ) {
 function Forms_update(){
 	$retour = _request('retour');
 	$new = _request('new');
-	$id_form = intval(_request('id_form'));
+	$id_form = intval(_request('supp_form')?_request('supp_form'):_request('id_form'));
 	$titre = _request('titre');
 	$descriptif = _request('descriptif');
 	$email = _request('email');
@@ -585,6 +540,8 @@ function exec_forms_edit(){
 	$moderation = _request('moderation');
 	
 	Forms_install();
+	if ($supp_form)
+		$id_form = $supp_form;
 
 	if ($retour)
 		$retour = urldecode($retour);
@@ -673,7 +630,7 @@ function exec_forms_edit(){
 	debut_droite();
 
 	if ($supp_form && $supp_rejet==NULL)
-		echo Forms_formulaire_confirm_suppression($id_form,$nb_reponses,$form_link,$retour);
+		echo Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$form_link,$retour);
 
 	//
 	// Cartouche

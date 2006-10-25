@@ -14,7 +14,7 @@
 include_spip('inc/forms');
 
 function exec_forms_tous(){
-	//global $clean_link;
+	global $spip_lang_right;
   include_spip("inc/presentation");
 	include_spip('public/assembler');
 
@@ -25,6 +25,18 @@ function exec_forms_tous(){
 	debut_gauche();
 	debut_boite_info();
 	echo _T("forms:boite_info");
+	echo "<p>";
+	$link = generer_action_auteur('forms_importe',"form",generer_url_ecrire('forms_tous'));
+	echo "<form action='$link' method='POST' enctype='multipart/form-data'>";
+	echo form_hidden($link);
+	echo "<strong><label for='file_name'>"._T("forms:importer_form")."</label></strong> ";
+	echo "<br />";
+	echo "<input type='file' name='fichier_xml' id='file_name' class='formo'>";
+	echo "<div style='text-align:$spip_lang_right'>";
+	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
+	echo "</div>";
+	echo "</form></p>\n";
+	
 	fin_boite_info();
 	
 	debut_droite();

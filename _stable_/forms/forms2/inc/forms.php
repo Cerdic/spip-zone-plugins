@@ -201,7 +201,53 @@
 				}
 			}
 		}
-	}	
+	}
+	
+	function Forms_importe_form($id_form_target,$source){
+		include_spip('inc/plugin');
+		include_spip('base/forms');
+		include_spip('base/abstract_sql');
+		include_spip('inc/forms_edit');
+		$contenu = "";
+		lire_fichier($source,$contenu);
+		$formtree=parse_plugin_xml($contenu);
+		if (isset($formtree['forms']))
+			foreach($formtree['forms'] as $forms){
+				foreach($forms['form'] as $form){
+					// si c'est une creation, creer le formulaire avec les infos d'entete
+					if (!($id_form=intval($id_form_target))){
+						$names = array();
+						$values = array();
+						foreach (array_keys($GLOBALS['tables_principales']['spip_forms']['field']) as $key)
+							if (!in_array($key,array('id_form','maj')) AND isset($form[$key])){
+								$names[] = $key;
+								$values[] = _q(trim(applatit_arbre($form[$key])));
+							}
+						spip_abstract_insert('spip_forms',"(".implode(",",$names).")","(".implode(",",$values).")");
+						$id_form = spip_insert_id();
+					}
+					if ($id_form AND isset($form['fields'])){
+						foreach($form['fields'] as $fields)
+								foreach($fields['field'] as $field){
+									$champ = trim(applatit_arbre($field['champ']));
+									$type = trim(applatit_arbre($field['type']));
+									$titre = trim(applatit_arbre($field['titre']));
+									$champ = Forms_insere_nouveau_champ($id_form,$type,$titre,($id_form==$id_form_target)?$champ:"");
+									$set = "";
+									foreach (array_keys($GLOBALS['tables_principales']['spip_forms_champs']['field']) as $key)
+										if (!in_array($key,array('id_form','champ','rang','titre','type')) AND isset($field[$key])){
+											$set .= "$key="._q(trim(applatit_arbre($form[$key]))).", ";
+										}
+									if (strlen($set)){
+										$set = substr($set,0,strlen($set)-2);
+										spip_query("UPDATE spip_forms_champs SET $set WHERE id_form="._q($id_form)." AND champ="._q($champ));
+									}
+								}
+					}
+				}
+			}
+		
+	}
 	//
 	// Afficher un pave formulaires dans la colonne de gauche
 	// (edition des articles)
@@ -262,78 +308,6 @@
 		return $s;
 	}
 
-	function Forms_liste_types_champs(){
-		return array('ligne', 'texte', 'email', 'url', 'select', 'multiple', 'fichier', 'mot','separateur','textestatique');
-	}
-	function Forms_type_champ_autorise($type) {
-		static $t;
-		if (!$t) {
-			$t = array_flip(Forms_liste_types_champs());
-		}
-		return isset($t[$type]);
-	}
-	function Forms_nom_type_champ($type) {
-		static $noms;
-		if (!$noms) {
-			$noms = array(
-				'ligne' => _T("forms:champ_type_ligne"),
-				'texte' => _T("forms:champ_type_texte"),
-				'url' => _T("forms:champ_type_url"),
-				'email' => _T("forms:champ_type_email"),
-				'select' => _T("forms:champ_type_select"),
-				'multiple' => _T("forms:champ_type_multiple"),
-				'fichier' => _T("forms:champ_type_fichier"),
-				'mot' => _T("forms:champ_type_mot"),
-				'separateur' => _T("forms:champ_type_separateur"),
-				'textestatique' => _T("forms:champ_type_textestatique")
-			);
-		}
-		return ($s = $noms[$type]) ? $s : $type;
-	}
-	
-	function Forms_valide_reponse_post($id_form){
-		$erreur = '';
-		$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form));
-		while($row = spip_fetch_array($res)){
-			$champ = $row['champ'];
-			$type = $row['type'];
-			$val = _request($champ);
-			if (!$val || ($type == 'fichier' && !$_FILES[$champ]['tmp_name'])) {
-				if ($row['obligatoire'] == 'oui')
-					$erreur[$champ] = _T("forms:champ_necessaire");
-				continue;
-			}
-			// Verifier la conformite des donnees entrees
-			if ($type == 'email') {
-				if (!strpos($val, '@') || !email_valide($val)) {
-					$erreur[$champ] = _T("forms:adresse_invalide");
-				}
-			}
-			if ($type == 'url') {
-				if ($row['extra_info'] == 'oui') {
-					include_spip("inc/sites");
-					if (!recuperer_page($val)) {
-						$erreur[$champ] = _T("forms:site_introuvable");
-					}
-				}
-			}
-			if ($type == 'fichier') {
-				if (!$taille = $_FILES[$champ]['size']) {
-					$erreur[$champ] = _T("forms:echec_upload");
-				}
-				else if ($row['extra_info'] && $taille > ($row['extra_info'] * 1024)) {
-					$erreur[$champ] = _T("forms:fichier_trop_gros");
-				}
-				else if (!Forms_type_fichier_autorise($_FILES[$champ]['name'])) {
-					$erreur[$champ] = _T("fichier_type_interdit");
-				}
-				if ($erreur[$champ]) {
-					supprimer_fichier($_FILES[$champ]['tmp_name']);
-				}
-			}
-		}
-		return $erreur;
-	}
 	function Forms_insertions_reponse_post($id_form,$id_donnee,&$erreur,&$ok){
 		$inserts = array();
 		$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form));
@@ -385,7 +359,8 @@
 		$champconfirm = $row['champconfirm'];
 		$mailconfirm = '';
 
-		$erreur = Forms_valide_reponse_post($id_form);
+		include_spip("inc/forms_type_champs");
+		$erreur = Forms_valide_champs_reponse_post($id_form);
 	
 		// Si tout est bon, enregistrer la reponse
 		if (!$erreur) {

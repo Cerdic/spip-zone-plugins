@@ -9,7 +9,7 @@
 </div>
 <table width='100%' cellpadding='5' cellspacing='0' border='0'>
 [<tr style='background-color: #dddddd;'>
-<td class="arial1" style='border-bottom: 1px solid #444444;' colspan="10">
+<td class="arial1" style='border-bottom: 1px solid #444444;' colspan="11">
 <div class='pagination'>(#PAGINATION)</div>
 </td>
 </tr>]
@@ -18,6 +18,7 @@
 #SET{lien_edite,(#URL_ECRIRE{forms_edit,id_form=#ID_FORM}|parametre_url{retour,#URL_ECRIRE{forms_tous}})}
 #SET{lien_affiche,(#URL_ECRIRE{forms_reponses,id_form=#ID_FORM}|parametre_url{retour,#URL_ECRIRE{forms_tous}})}
 #SET{lien_duplique,#SELF|parametre_url{duplique_form,#ID_FORM}}
+#SET{lien_exporte,#URL_ECRIRE{forms_exporter,id_form=#ID_FORM}}
 #SET{lien_vider,'#'}
 #SET{lien_supprimer,(#URL_ECRIRE{forms_edit,supp_form=#ID_FORM}|parametre_url{retour,#URL_ECRIRE{forms_tous}})}
 <tr class='tr_liste'>
@@ -30,15 +31,14 @@
 </td>
 <td class="arial1">&nbsp;
 </td>
-<td class="arial1">[(#EVAL{ _T("forms:nombre_reponses",array("nombre"=>[(#GET{reponses})])) })]
-</td>
 <td class="arial1"><a href='#GET{lien_affiche}' title='<:forms:afficher:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/b_browse.png' width='16' height='16' alt='<:forms:afficher:>' /></a></td>
+<td class="arial1">[(#EVAL{ _T("forms:nombre_reponses",array("nombre"=>[(#GET{reponses})])) })]</td>
 <td class="arial1"><a href='#GET{lien_edite}' title='<:forms:editer:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/b_props.png' width='16' height='16' alt='<:forms:editer:>' /></a></td>
 <td class="arial1"><a href='#GET{lien_duplique}' title='<:forms:dupliquer:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/b_insrow.png' width='16' height='16' alt='<:forms:dupliquer:>' /></a></td>
+<td class="arial1"><a href='#GET{lien_exporte}' title='<:forms:exporter:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/b_export.png' width='16' height='16' alt='<:forms:exporter:>' /></a></td>
+<td>&nbsp;</td>
 <td class="arial1"><a href='#GET{lien_vider}' title='<:forms:vider:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/b_empty.png' width='16' height='16' alt='<:forms:vider:>' /></a></td>
 <td class="arial1"><a href='#GET{lien_supprimer}' title='<:forms:supprimer:>'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/b_drop.png' width='16' height='16' alt='<:forms:supprimer:>' /></a></td>
-<td>&nbsp;
-</td>
 </tr>
 </BOUCLE_forms>
 </table></div>
