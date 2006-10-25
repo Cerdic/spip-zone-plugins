@@ -8,6 +8,10 @@
 
 include_spip('base/FpipR_temporaire');
 
+function critere_tags($idb, &$boucles, $crit) {
+  spip_log("M8_:BLABLA");
+}
+
 /** boucle FLICKR_PHOTOS_SEARCH
 Voir la doc de l'API: http://flickr.com/services/api/flickr.photos.search.html
 user_id 
@@ -46,10 +50,14 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 	}*/
 
 	//on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
-	foreach($boucle->where as $w){
+	for($i=0;$i < count($boucle->where);$i++){
+	  $w = $boucle->where[$i];
 	  $key = str_replace("'",'',$w[1]);
-          $key = str_replace("$id_table.",'',$key);
-  	  if ($w[0]=="'='" && in_array($key,$possible_args)){
+	  $key = str_replace("$id_table.",'',$key);
+	  if($key == 'tags') {
+		$arguments['tags'] = str_replace("'",'',$w[2]);
+		//		unset($boucle->where[$i]);
+	  } else  if (in_array($key,$possible_args)){
 		  switch($w[0]) {
 			case "'='":
 				$val = str_replace("'",'',$w[2]);

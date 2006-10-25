@@ -84,7 +84,7 @@ function FpipR_fill_table($method,$arguments){
 
 	 $not_id = '';
 	  foreach($photos->photos as $photo) {
-		$query = "INSERT IGNORE INTO spip_fpipr_photos (id_photo,user_id,secret,server,title,ispublic,isfriend,isfamily,originalformat,license,date_upload,date_taken,owner_name,icon_server,original_format,last_update,longitude,latitude,accuracy)";
+		$query = "INSERT IGNORE INTO spip_fpipr_photos (id_photo,user_id,secret,server,title,ispublic,isfriend,isfamily,originalformat,license,date_upload,date_taken,owner_name,icon_server,last_update,longitude,latitude,accuracy)";
 		$query .= " VALUES (".intval($photo->id).','.spip_abstract_quote($photo->owner).','.spip_abstract_quote($photo->secret).','.intval($photo->server).','.spip_abstract_quote($photo->title).','.intval($photo->idpublic).','.intval($photo->isfriend).','.intval($photo->isfamily).','.spip_abstract_quote($photo->originalformat).','.intval($photo->license).','.spip_abstract_quote($photo->dateupload).','.intval($photo->datetaken).','.spip_abstract_quote($photo->ownername).','.intval($photo->iconserver).','.intval($photo->lastupdate).','.floatval($photo->longitude).','.floatval($photo->latitude).','.intval($photo->accuracy).")";
 		spip_query($query);
 		$not_id .= ','.intval($photo->id);
