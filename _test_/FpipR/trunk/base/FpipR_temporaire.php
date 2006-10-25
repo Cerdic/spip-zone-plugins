@@ -23,8 +23,7 @@ $fpipr_field = array(
 	"ispublic"=> "ENUM ('0','1') NOT NULL",
 	"isfriend"=> "ENUM ('0','1') NOT NULL",
 	"isfamily"=> "ENUM ('0','1') NOT NULL",
-	"originalformat" => "char(4) DEFAULT 'jpg'",
-	"counter_usage" => "int NOT NULL DEFAULT 0"
+	"originalformat" => "char(4) DEFAULT 'jpg'"
 );
 
 $fpipr_key = array(
@@ -81,8 +80,8 @@ function FpipR_fill_table($method,$arguments){
 		$not_id .= ','.intval($photo->id);
 	  }
 	  $not_id = substr($not_id,1);
-          $query = "UPDATE spip_fpipr_photos SET counter_usage=counter_usage+1 WHERE id_photo IN ($not_id)";
-	  //TODO effacer les lignes avec un petit compteur et pas dans $not_id
+	  $query = "DELETE FROM spip_fpipr_photos WHERE id_photo NOT IN ($not_id)";
+	  spip_query($query);
 	  break;
 	default: 
 	  return;
