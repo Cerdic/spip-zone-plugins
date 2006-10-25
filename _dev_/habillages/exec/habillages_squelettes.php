@@ -216,13 +216,17 @@ EOF;
 		# site par defaut, surtout si le squelette a ete personnalise.
 		lire_metas();
 		$squelettes = $GLOBALS['meta']['habillages_squelettes'];
-		if ($squelettes == "" || $squelettes == "defaut" || $squelettes == "dist") {
-			$defaut_checked = " checked='checked'";
+		if ($squelettes == "" || $squelettes == "defaut") {
+			$checked_defaut = " checked='checked'";
 		}
+		else if ($squelettes == "dist") {
+			$checked_dist = " checked='checked'";
+		}
+		
 		echo "<ul>";
 		debut_boite_info();
 		echo "<div style='background-color:$couleur_claire' class='titre_un'>";
-		echo "<input type='radio' name='statusplug' value='defaut'$defaut_checked>";
+		echo "<input type='radio' name='statusplug' value='defaut'$checked_defaut>";
 		echo "<strong>"._T('habillages:squelettes_defaut_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
 		echo "<small>"._T('habillages:squelettes_defaut_description')."</small><br /><br /><hr>";
 		fin_boite_info();
@@ -232,7 +236,7 @@ EOF;
 		# quand ce bouton est coche et si elle existe.
 		debut_boite_info();
 		echo "<div style='background-color:$couleur_claire' class='titre_un'>";
-		echo "<input type='radio' name='statusplug' value='dist'$defaut_checked>";
+		echo "<input type='radio' name='statusplug' value='dist'$checked_dist>";
 		echo "<strong>"._T('habillages:squelettes_dist_titre')."</strong><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/avance.png' /> | <img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_themes-22.png' /> | <img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_extras-22.png' /><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
 		echo '<div style="float:right";><img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/capture_dist_bw.png" alt="" class="preview" /></div>';
 		echo "<small>"._T('habillages:squelettes_dist_description')."</small><br /><br /><hr>";
