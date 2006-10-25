@@ -28,7 +28,7 @@ function action_forms_supprime(){
 			$result = spip_query("DELETE FROM spip_forms_champs_choix WHERE id_form="._q($id_form));
 		//}
 	}
-	redirige_par_entete($redirect);
+	redirige_par_entete(urldecode($redirect));
 }
 
 ?>

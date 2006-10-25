@@ -31,6 +31,7 @@ function Forms_insere_nouveau_champ($id_form,$type,$titre,$champs=""){
 	if ($row = spip_fetch_array($res))
 		$rang = $row['rangmax'];
 	$rang++;
+	include_spip('base/abstract_sql');
 	spip_abstract_insert(
 		'spip_forms_champs',
 		'(id_form,champ,rang,titre,type,obligatoire,extra_info)',

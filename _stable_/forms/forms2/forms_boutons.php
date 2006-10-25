@@ -11,12 +11,12 @@
  *
  */
 
-if (!defined('_DIR_PLUGIN_FORMS')){
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end($p)));
-}
+	if (!defined('_DIR_PLUGIN_FORMS')){
+		$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+		define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end($p)));
+	}
 
-	function Forms_ajouterBoutons($boutons_admin) {
+	function Forms_ajouter_boutons($boutons_admin) {
 		// si on est admin
 		if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]
 		AND $GLOBALS["options"]=="avancees" 
@@ -27,20 +27,8 @@ if (!defined('_DIR_PLUGIN_FORMS')){
 			"../"._DIR_PLUGIN_FORMS."/img_pack/form-24.gif",  // icone
 			_T("forms:formulaires_sondages") //titre
 			);
-
-		  // on voit le bouton dans la barre "forum_admin"
-			$boutons_admin['forum']->sousmenu["forms_reponses"]= new Bouton(
-			"../"._DIR_PLUGIN_FORMS."/img_pack/form-24.gif",  // icone
-			_T("forms:suivi_reponses") //titre
-			);
 		}
 		return $boutons_admin;
-	}
-
-	/* public static */
-	function Forms_ajouterOnglets($flux) {
-		$rubrique = $flux['args'];
-		return $flux;
 	}
 
 ?>

@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'attention' => "Attention :",
 'avis_message_confirmation'=>"Un message de confirmation est envoy&eacute; &agrave; @mail@",
 
-'boite_info' => "Cliquez sur un formulaire pour le modifier ou le visualiser avant suppression.",
+'boite_info' => "Cliquez sur les icones pour voir les donn&eacute;es associ&eacute;es a un formulaire, l'editer, le dupliquer, l'exporter, vider les donn&eacute;es ou le supprimer.",
 
 'champ_type_ligne'=>"ligne de texte",
 'champ_type_texte'=>"texte",
@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'html_wrapper'=> 'Encapsuler le champ dans le code html',
 
 'icone_creer_formulaire' => "Cr&eacute;er un nouveau formulaire",
+'importer_form' => "Importer un formulaire",
 'info_apparence' => "Voici une pr&eacute;visualisation du formulaire tel qu'il appara&icirc;tra aux visiteurs du site public.",
 'info_champs_formulaire' => "Vous pouvez ici cr&eacute;er et modifier les champs que les visiteurs pourront remplir.",
 'info_obligatoire_02' => '[Obligatoire]',

@@ -15,12 +15,12 @@
 </tr>]
 <BOUCLE_forms(FORMS){type_form=''}{pagination}>
 <BOUCLE_rep(FORMS_DONNEES){id_form}></BOUCLE_rep>#SET{reponses,#TOTAL_BOUCLE}<//B_rep>
-#SET{lien_edite,(#URL_ECRIRE{forms_edit,id_form=#ID_FORM}|parametre_url{retour,#URL_ECRIRE{forms_tous}})}
-#SET{lien_affiche,(#URL_ECRIRE{forms_reponses,id_form=#ID_FORM}|parametre_url{retour,#URL_ECRIRE{forms_tous}})}
-#SET{lien_duplique,#SELF|parametre_url{duplique_form,#ID_FORM}}
+#SET{lien_edite,(#URL_ECRIRE{forms_edit,id_form=#ID_FORM}|parametre_url{retour,#SELF|urlencode})}
+#SET{lien_affiche,(#URL_ECRIRE{forms_reponses,id_form=#ID_FORM}|parametre_url{retour,#SELF|urlencode})}
+#SET{lien_duplique,#URL_ACTION_AUTEUR{forms_duplique,#ID_FORM,#EVAL{_DIR_RESTREINT_ABS}|concat{#SELF}|urlencode}}
 #SET{lien_exporte,#URL_ECRIRE{forms_exporter,id_form=#ID_FORM}}
 #SET{lien_vider,'#'}
-#SET{lien_supprimer,(#URL_ECRIRE{forms_edit,supp_form=#ID_FORM}|parametre_url{retour,#URL_ECRIRE{forms_tous}})}
+#SET{lien_supprimer,(#URL_ECRIRE{forms_edit,supp_form=#ID_FORM}|parametre_url{retour,#SELF|urlencode})}
 <tr class='tr_liste'>
 <td class="arial11">
 <img src='#EVAL{_DIR_IMG_PACK}puce-[(#GET{reponses}|?{'verte','orange'})]-breve.gif' width='7' height='7' border='0' alt='puce'>&nbsp;&nbsp;

@@ -243,6 +243,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $fo
 			$out .= "<div class='verdana1' style='float: right; font-weight: bold;'>";
 			if ($aff_min) {
 				$link = parametre_url($form_link,'monter', $champ);
+				$link = parametre_url($link,"time",time());
 				$out .= "<a href='".$link."#champs'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0' alt='"._T("forms:champ_monter")."'></a>";
 			}
 			if ($aff_min && $aff_max) {
@@ -250,6 +251,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $fo
 			}
 			if ($aff_max) {
 				$link = parametre_url($form_link,'descendre', $champ);
+				$link = parametre_url($link,"time",time());
 				$out .= "<a href='".$link."#champs'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0' alt='"._T("forms:champ_descendre")."'></a>";
 			}
 			$out .= "</div>\n";
@@ -388,6 +390,8 @@ function Forms_update(){
 	$ajout_champ = _request('ajout_champ');
 	$nom_champ = _request('nom_champ');
 	$champ_obligatoire = _request('champ_obligatoire');
+	$champ_public = _request('champ_public');
+	$champ_specifiant = _request('champ_specifiant');
 	$aide_champ = _request('aide_champ');
 	$wrap_champ = _request('wrap_champ');
 	$supp_choix = _request('supp_choix');
@@ -457,7 +461,9 @@ function Forms_update(){
 					spip_query("UPDATE spip_forms_champs_choix SET champ="._q($newchamp)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
 					$champ = $newchamp;
 				}
-				spip_query("UPDATE spip_forms_champs SET titre="._q($nom_champ).", obligatoire="._q($champ_obligatoire).", aide="._q($aide_champ).", html_wrap="._q($wrap_champ)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
+				spip_query("UPDATE spip_forms_champs SET titre="._q($nom_champ).", obligatoire="._q($champ_obligatoire)
+					.", specifiant="._q($champ_specifiant).", public="._q($champ_public)
+					.", aide="._q($aide_champ).", html_wrap="._q($wrap_champ)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
 				Forms_update_edition_champ($id_form, $champ);
 				$champ_visible = $champ;
 			}
@@ -481,7 +487,7 @@ function Forms_update(){
 				$rang1 = intval($row['rang']);
 				if ($monter) $order = "rang<$rang1 ORDER BY rang DESC";
 				else $order = "rang>$rang1 ORDER BY rang";
-				if (($row = spip_fetch_array(spip_query("SELECT rang FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND $order LIMIT 0,1")))){
+				if (($row = spip_fetch_array(spip_query("SELECT rang FROM spip_forms_champs WHERE id_form="._q($id_form)." AND $order LIMIT 0,1")))){
 					$rang2 = intval($row['rang']);
 					spip_query("UPDATE spip_forms_champs SET rang=$rang1+$rang2-rang WHERE id_form="._q($id_form)." AND rang IN ($rang1,$rang2)");
 				}
@@ -502,7 +508,7 @@ function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$form_link,
 		$out .= "<p>";
 		$out .= _T("forms:info_supprimer_formulaire")."</p>\n";
 	}
-	$link = generer_action_auteur('forms_supprime',"$id_form",generer_url_ecrire('forms_tous'));
+	$link = generer_action_auteur('forms_supprime',"$id_form",_DIR_RESTREINT_ABS.($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('forms_tous',"",false,true)));
 	$out .= "<form method='POST' action='$link' >";
 	$out .= "<div style='text-align:$spip_lang_right'>";
 	$out .= "<input type='submit' name='supp_confirme' value=\""._T('item_oui')."\" class='fondo'>";
