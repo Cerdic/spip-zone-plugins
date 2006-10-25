@@ -6,12 +6,12 @@
 <BOUCLE_form(FORMS){id_form=#ENV{id_form}}>
 <form>
 	<id_form>#ID_FORM</id_form>
-	<titre>#TITRE</titre>
-	<descriptif>#DESCRIPTIF</descriptif>
+	<titre>#TITRE*</titre>
+	<descriptif>#DESCRIPTIF*</descriptif>
 	<type_form>#TYPE_FORM</type_form>
 	<email>#EMAIL</email>
 	<champconfirm>#CHAMCONFIRM</champconfirm>
-	<texte>#TEXTE</texte>
+	<texte>#TEXTE*</texte>
 	<moderation>#MODERATION</moderation>
 	<public>#PUBLIC</public>
 	<B_champs>
@@ -20,7 +20,7 @@
 		<field>
 			<champ>#CHAMP</champ>
 			<rang>#RANG</rang>
-			<titre>#TITRE</titre>
+			<titre>#TITRE*</titre>
 			<type>#TYPE</type>
 			<obligatoire>#OBLIGATOIRE</obligatoire>
 			<extra_info>#EXTRA_INFO</extra_info>
@@ -28,6 +28,17 @@
 			<public>#PUBLIC</public>
 			<aide>#AIDE</aide>
 			<html_wrap>#HTML_WRAP</html_wrap>
+			<B_choix>
+			<les_choix>
+				<BOUCLE_choix(FORMS_CHAMPS_CHOIS{id_form}{champ}{par rang}
+				<un_choix>
+					<choix>#CHOIX</choix>
+					<titre>#TITRE*</titre>
+					<rang>#RANG</rang>
+				</un_choix>
+				</BOUCLE_choix>
+			</les_choix>
+			</B_choix>
 		</field>
 		</BOUCLE_champs>
 	</fields>

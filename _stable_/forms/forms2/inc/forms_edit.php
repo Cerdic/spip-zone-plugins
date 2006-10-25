@@ -23,8 +23,8 @@ function Forms_nouveau_champ($id_form,$type){
 	$champ = $type.'_'.strval($n);
 	return $champ;
 }
-function Forms_insere_nouveau_champ($id_form,$type,$titre,$champs=""){
-	if (!strlen($champs))
+function Forms_insere_nouveau_champ($id_form,$type,$titre,$champ=""){
+	if (!strlen($champ))
 		$champ = Forms_nouveau_champ($id_form,$type);
 	$rang = 0;
 	$res = spip_query("SELECT max(rang) AS rangmax FROM spip_forms_champs WHERE id_form="._q($id_form));
@@ -36,7 +36,6 @@ function Forms_insere_nouveau_champ($id_form,$type,$titre,$champs=""){
 		'spip_forms_champs',
 		'(id_form,champ,rang,titre,type,obligatoire,extra_info)',
 		'('._q($id_form).','._q($champ).','._q($rang).','._q($titre).','._q($type).",'non','')");
-
 	return $champ;
 }
 function Forms_nouveau_choix($id_form,$champ){

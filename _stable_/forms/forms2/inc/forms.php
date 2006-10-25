@@ -149,60 +149,6 @@
 		return array($libelles,$values,$url);
 	}
 	
-	function Forms_duplique_form(){
-		$duplique = intval(_request('duplique_form'));
-		if ($duplique && Forms_form_administrable($duplique)){
-			include_spip('base/abstract_sql');
-			// creation
-			$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($duplique));
-			$names = "";
-			$values = "";
-			if ($row = spip_fetch_array($result)) {
-				foreach($row as $nom=>$valeur){
-					if ($nom=='titre') $valeur = _T("forms:formulaires_copie",array('nom'=>$valeur));
-					if ($nom!='id_form'){
-						$names .= "$nom,";
-						$values .= _q($valeur).",";
-					}
-				}
-				$names = substr($names,0,strlen($names)-1);
-				$values = substr($values,0,strlen($values)-1);
-				spip_abstract_insert('spip_forms',"($names)","($values)");
-				$id_form = spip_insert_id();
-				if ($id_form){
-					$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($duplique));
-					while($row = spip_fetch_array($res)) {
-						$names = "id_form,";
-						$values = "$id_form,";
-						foreach($row as $nom=>$valeur){
-							if ($nom!='id_form'){
-								$names .= "$nom,";
-								$values .= _q($valeur).",";
-							}
-						}
-						$names = substr($names,0,strlen($names)-1);
-						$values = substr($values,0,strlen($values)-1);
-						spip_query("REPLACE INTO spip_forms_champs ($names) VALUES ($values)");
-					}
-					$res = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($duplique));
-					while($row = spip_fetch_array($res)) {
-						$names = "id_form,";
-						$values = "$id_form,";
-						foreach($row as $nom=>$valeur){
-							if ($nom!='id_form'){
-								$names .= "$nom,";
-								$values .= _q($valeur).",";
-							}
-						}
-						$names = substr($names,0,strlen($names)-1);
-						$values = substr($values,0,strlen($values)-1);
-						spip_query("REPLACE INTO spip_forms_champs_choix ($names) VALUES ($values)");
-					}
-				}
-			}
-		}
-	}
-	
 	function Forms_importe_form($id_form_target,$source){
 		include_spip('inc/plugin');
 		include_spip('base/forms');
@@ -232,7 +178,7 @@
 									$champ = trim(applatit_arbre($field['champ']));
 									$type = trim(applatit_arbre($field['type']));
 									$titre = trim(applatit_arbre($field['titre']));
-									$champ = Forms_insere_nouveau_champ($id_form,$type,$titre,($id_form==$id_form_target)?$champ:"");
+									$champ = Forms_insere_nouveau_champ($id_form,$type,$titre,($id_form==$id_form_target)?"":$champ);
 									$set = "";
 									foreach (array_keys($GLOBALS['tables_principales']['spip_forms_champs']['field']) as $key)
 										if (!in_array($key,array('id_form','champ','rang','titre','type')) AND isset($field[$key])){
@@ -240,7 +186,7 @@
 										}
 									if (strlen($set)){
 										$set = substr($set,0,strlen($set)-2);
-										spip_query("UPDATE spip_forms_champs SET $set WHERE id_form="._q($id_form)." AND champ="._q($champ));
+										$res = spip_query("UPDATE spip_forms_champs SET $set WHERE id_form="._q($id_form)." AND champ="._q($champ));
 									}
 								}
 					}

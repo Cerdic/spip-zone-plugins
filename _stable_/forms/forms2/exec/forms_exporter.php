@@ -28,7 +28,7 @@ function exec_forms_exporter(){
 	}
 
 	include_spip('public/assembler');
-	$out = recuperer_fond('exec/forms_exporter',array('id_form'=>$id_form));
+	$out = recuperer_fond('snippets/forms_exporter',array('id_form'=>$id_form));
 	$out = preg_replace(",\n[\s]*(?=\n),","",$out);
 
 	$row = spip_fetch_array(spip_query("SELECT titre FROM spip_forms WHERE id_form="._q($id_form)));

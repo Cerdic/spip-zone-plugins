@@ -633,6 +633,9 @@ function exec_forms_edit(){
 		fin_boite_info();
 	}
 
+	creer_colonne_droite();
+	include_spip('inc/snippets');
+	echo boite_snippets('forms',$id_form);
 	debut_droite();
 
 	if ($supp_form && $supp_rejet==NULL)

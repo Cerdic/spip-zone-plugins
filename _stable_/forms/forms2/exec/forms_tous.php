@@ -19,19 +19,18 @@ function exec_forms_tous(){
 	include_spip('public/assembler');
 
   Forms_install();
-	Forms_duplique_form();
 	
 	debut_page(_T("forms:tous_formulaires"), "documents", "forms");
 	debut_gauche();
 	debut_boite_info();
 	echo _T("forms:boite_info");
 	echo "<p>";
-	$link = generer_action_auteur('forms_importe',"form",generer_url_ecrire('forms_tous'));
+	$link = generer_action_auteur('snippet_importe',"forms-forms",generer_url_ecrire('forms_tous'));
 	echo "<form action='$link' method='POST' enctype='multipart/form-data'>";
 	echo form_hidden($link);
 	echo "<strong><label for='file_name'>"._T("forms:importer_form")."</label></strong> ";
 	echo "<br />";
-	echo "<input type='file' name='fichier_xml' id='file_name' class='formo'>";
+	echo "<input type='file' name='snippet_xml' id='file_name' class='formo'>";
 	echo "<div style='text-align:$spip_lang_right'>";
 	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
 	echo "</div>";
