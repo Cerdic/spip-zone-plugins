@@ -41,8 +41,8 @@ $.fn.openwidget = function() {
           $(me)
           .find("img.widget-searching")
             .remove();
-          if (c.erreur) {
-            alert(c.erreur);
+          if (c.$erreur) {
+            alert(c.$erreur);
             return false;
           }
           $(me)
