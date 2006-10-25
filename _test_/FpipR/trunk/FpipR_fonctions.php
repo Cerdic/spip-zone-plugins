@@ -49,9 +49,19 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 	foreach($boucle->where as $w){
 	  $key = str_replace("'",'',$w[1]);
           $key = str_replace("$id_table.",'',$key);
-	  if ($w[0]=="'='" && in_array($key,$possible_args)){
-		$val = str_replace("'",'',$w[2]);
-		$arguments[$key] = $val;
+  	  if ($w[0]=="'='" && in_array($key,$possible_args)){
+		  switch($w[0]) {
+			case "'='":
+				$val = str_replace("'",'',$w[2]);
+				$arguments[$key] = $val;
+			break;
+			case "'<'":
+			break;
+			case "'>'":
+			break;
+			case "'IN'":
+			break;
+	 	  }
 	  }
 	}
 	$boucle->hash = "// CREER la table temporaire flickr_photos et la peupler avec le resultat de la query

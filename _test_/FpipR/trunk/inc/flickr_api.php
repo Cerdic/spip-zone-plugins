@@ -47,7 +47,11 @@ function flickr_check_error($resp) {
   } else if($resp['stat'] == 'fail') {
 	  spip_log('Flickr Error: '.$resp['message'].'('.$resp['code'].')');
 	return false;
-  } else return 'cannot understand response';
+  } else {
+	spip_log('cannot understand response');
+	spip_log($resp);
+	return false;
+  }
 }
 
 //======================================================================
@@ -176,9 +180,18 @@ class FlickrPhoto {
   var $title;
   var $ispublic;
   var $isfriend;
-  var $isfamilly;
+  var $isfamily;
   var $originalformat;
-  
+  var $license='';
+  var $dateupload='';
+  var $datetaken='';
+  var $ownername='';
+  var $iconserver='';
+  var $lastupdate='';
+  var $longitude='';
+  var $latitude='';
+  var $accuracy='';
+
   /*
    s	small square 75x75
    t	thumbnail, 100 on longest side
