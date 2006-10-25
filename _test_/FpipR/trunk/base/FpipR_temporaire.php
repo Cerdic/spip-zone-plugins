@@ -23,7 +23,8 @@ $fpipr_field = array(
 	"ispublic"=> "ENUM ('0','1') NOT NULL",
 	"isfriend"=> "ENUM ('0','1') NOT NULL",
 	"isfamily"=> "ENUM ('0','1') NOT NULL",
-	"originalformat" => "char(4) DEFAULT 'jpg'"
+	"originalformat" => "char(4) DEFAULT 'jpg'",
+	"counter_usage" => "int NOT NULL DEFAULT 0"
 );
 
 $fpipr_key = array(
@@ -40,6 +41,7 @@ $GLOBALS['tables_principales']['spip_fpipr_photos'] =
 $GLOBALS['table_des_tables']['flickr_photos_search'] = 'fpipr_photos';
 
 function FpipR_creer_tables_temporaires($method){
+	//TODO, elle n'est plus temporaire, verifier qu'on ne l'a pas deja cree.
 	static $ok=NULL;
 	if ($ok==NULL){
 		$ok=true;
@@ -52,7 +54,7 @@ function FpipR_creer_tables_temporaires($method){
 		}
 		$champs = $GLOBALS['tables_principales'][$nom]['field'];
 		$cles = $GLOBALS['tables_principales'][$nom]['key'];
-		spip_create_table($nom, $champs, $cles, true, true);		
+		spip_create_table($nom, $champs, $cles, false, false);		
 	}
 }
 
@@ -70,11 +72,17 @@ function FpipR_fill_table($method,$arguments){
 									 $arguments['sort'], $arguments['privacy_filter'],
 									 $arguments['extras'], $arguments['auth_token']
 									 );
+	 $not_id = '';
 	  foreach($photos->photos as $photo) {
-		spip_abstract_insert('spip_fpipr_photos',
-							 "(id_photo,user_id,secret,server,title,ispublic,isfriend,isfamily,originalformat)",
-							 "(".intval($photo->id).','.spip_abstract_quote($photo->owner).','.spip_abstract_quote($photo->secret).','.intval($photo->server).','.spip_abstract_quote($photo->title).','.spip_abstract_quote($photo->originalformat).")");
+		$query = "INSERT IGNORE INTO spip_fpipr_photos (id_photo,user_id,secret,server,title,ispublic,isfriend,isfamily,originalformat)";
+		$query .= " VALUES (".intval($photo->id).','.spip_abstract_quote($photo->owner).','.spip_abstract_quote($photo->secret).','.intval($photo->server).','.spip_abstract_quote($photo->title).','.intval($photo->idpublic).','.intval($photo->isfriend).','.intval($photo->isfamily).','.spip_abstract_quote($photo->originalformat).")";
+//		$query .= ' ON DUPLICATE KEY UPDATE counter_usage=counter_usage+1';
+		spip_query($query);
+		$not_id .= ','.intval($photo->id);
 	  }
+	  $not_id = substr($not_id,1);
+          $query = "UPDATE spip_fpipr_photos SET counter_usage=counter_usage+1 WHERE id_photo IN ($not_id)";
+	  //TODO effacer les lignes avec un petit compteur et pas dans $not_id
 	  break;
 	default: 
 	  return;

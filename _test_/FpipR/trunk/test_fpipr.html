@@ -5,10 +5,11 @@ BOUCLE Flickr
 </title>
 <body>
 <h1>Photos by Mortimer</h1>
-<BOUCLE_photos(FLICKR_PHOTOS_SEARCH) {user_id=71651012@N00}>
-#ID_PHOTO
+<BOUCLE_photos(FLICKR_PHOTOS_SEARCH) {user_id=71651012@N00} {"<br/>"}>
+#TITLE
+<img src="http://static.flickr.com/#SERVER/[(#ID_PHOTO)]_[(#SECRET)]_t.jpg"/>
 </BOUCLE_photos>
 pas de photos
-</B_photos>
+<//B_photos>
 </body>
 </html>
