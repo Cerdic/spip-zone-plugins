@@ -15,16 +15,17 @@
 
 // Boucle XML
 $fpipr_field = array(
-"id_photo"  => "bigint(21) NOT NULL",
-"owner" => "varchar(100)", //"47058503995@N01" 
-"secret"=> "varchar(100)", //"a123456"
-"server"=> "int NOT NULL" //"2"
-"title"	=> "text DEFAULT '' NOT NULL",
-"ispublic"=> "ENUM (0,1) NOT NULL",
-"isfriend"=> "ENUM (0,1) NOT NULL",
-"isfamily"=> "ENUM (0,1) NOT NULL",
-"originalformat" => "char(4) DEFAULT 'jpg'"
+	"id_photo"  => "bigint(21) NOT NULL",
+	"user_id" => "varchar(100)", //"47058503995@N01" 
+	"secret"=> "varchar(100)", //"a123456"
+	"server"=> "int NOT NULL", //"2"
+	"title"	=> "text DEFAULT '' NOT NULL",
+	"ispublic"=> "ENUM ('0','1') NOT NULL",
+	"isfriend"=> "ENUM ('0','1') NOT NULL",
+	"isfamily"=> "ENUM ('0','1') NOT NULL",
+	"originalformat" => "char(4) DEFAULT 'jpg'"
 );
+
 $fpipr_key = array(
 	"PRIMARY KEY" => "id_photo",
 	"KEY" => "owner",
@@ -69,14 +70,15 @@ function FpipR_fill_table($method,$arguments){
 									 $arguments['sort'], $arguments['privacy_filter'],
 									 $arguments['extras'], $arguments['auth_token']
 									 );
-	  foreach($photos as $photo) {
+	  foreach($photos->photos as $photo) {
 		spip_abstract_insert('spip_fpipr_photos',
-							 "(id_photo,owner,secret,server,title,ispublic,isfriend,isfamily,originalformat)",
-							 "(".intvalue($photo->id).','.spip_abstract_quote($photo->owner).','.spip_abstract_quote($photo->secret).','.intvalue($photo->server).','.spip_abstract_quote($photo->title).','.spip_abstract_quote($photo->originalformat).")");
+							 "(id_photo,user_id,secret,server,title,ispublic,isfriend,isfamily,originalformat)",
+							 "(".intval($photo->id).','.spip_abstract_quote($photo->owner).','.spip_abstract_quote($photo->secret).','.intval($photo->server).','.spip_abstract_quote($photo->title).','.spip_abstract_quote($photo->originalformat).")");
 	  }
 	  break;
 	default: 
 	  return;
   }
 }
+
 ?>
