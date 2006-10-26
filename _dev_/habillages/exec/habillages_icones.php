@@ -13,7 +13,6 @@ include_spip('inc/habillages_presentation');
 # Changer les fonctions xml (cf. inc/xml).
 include_spip('inc/vieilles_defs');
 
-// http://doc.spip.org/@exec_admin_plugin
 function exec_habillages_icones() {
 	global $connect_statut;
 	global $connect_toutes_rubriques;
@@ -117,15 +116,18 @@ EOF;
 	global $couleur_foncee;
 
 	echo '<form action="'.generer_url_ecrire('habillages_icones').'" method="post">';
- 	 	
- 	echo "<a name='access-c' href='#access-c' accesskey='c'></a><div class='cadre-r'><div style='position: relative;'><div class='cadre-titre' style='margin: 0px;'>";
+ 	 
+	echo "<ul>";
+	debut_boite_info();
+	echo "<div style='background-color:$couleur_claire' class='titre_un'>";
  	echo '<INPUT type=radio name="theme" value=""';
  	if ($GLOBALS['meta']['habillages_icones'] == "")
 	 		echo "checked='checked'";
  	echo ">";
- 	echo "<strong>Revenir &agrave; l'habillage d'origine</strong>";
- 	echo '</div></div><div class="cadre-padding" style="overflow:hidden;">';
-	echo "</div></div><div style='height: 5px;'></div>";
+ 	echo "<strong>"._T('habillages:icones_defaut_titre')."</strong>";
+ 	echo "</div>";
+ 	fin_boite_info();
+ 	echo "<br />";
 
 	# Chercher les fichiers theme.xml.
 		$fichier_theme = preg_files(_DIR_PLUGINS,"/theme[.]xml$");
@@ -145,20 +147,22 @@ EOF;
 			$c = dirname ($fichier)."/img_pack/";
 				
 				if ($type_theme=="icones_prive") {
-					echo "<a name='access-c' href='#access-c' accesskey='c'></a><div class='cadre-r'><div style='position: relative;'><div class='cadre-titre' style='margin: 0px;'>";
+					debut_boite_info();
+					echo "<div style='background-color:$couleur_claire' class='titre_un'>";
     				echo '<INPUT type=radio name="theme" value="'.$c.'"';
 		 			if ($GLOBALS['meta']['habillages_icones'] == $c)
 			 		echo "checked='checked'";
     				echo ">";
     				
-    				echo '<strong>'.$nom_theme.'</strong> version '.$theme_version.'</div></div><div class="cadre-padding" style="overflow:hidden;">';
-					echo '<i><medium>Auteur : '.$auteur_theme.'</medium></i><br />';
-					echo '<small>'.$description_theme.'</small>';
-    				echo "</div></div><div style='height: 5px;'></div>";
+    				echo '<strong>'.$nom_theme.'</strong> version '.$theme_version.'</div><div class="cadre-padding" style="overflow:hidden;">';
+    				echo "<small>".propre($description_theme)."</small><br /><br /><hr>";
+					echo "<div class='auteur'>".propre($auteur_theme)."</div><hr>";
+    				echo "</div></div><br />";
 				}
 				
 		}
 
+	echo "</ul>";
 	echo '<input type="submit" value="'._T('valider').'"/>';
 	echo '</form>';
 
