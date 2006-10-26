@@ -8,8 +8,6 @@
 
 include_spip('base/FpipR_temporaire');
 
-$GLOBALS['tables_principales']['spip_auteurs']['field']['flickr_nsid'] = "TINYTEXT DEFAULT NULL";
-
 function critere_tags($idb, &$boucles, $crit) {
 }
 

@@ -13,6 +13,12 @@
 // Definition des tables temporaires pour permettre la squeletisation de l'API Flickr
 //
 
+/*Les nouvelles colonne de l'auteur*/
+include_spip('base/serial');
+$GLOBALS['tables_principales']['spip_auteurs']['field']['flickr_nsid'] = "TINYTEXT DEFAULT NULL";
+$GLOBALS['tables_principales']['spip_auteurs']['field']['flickr_token'] = "TINYTEXT DEFAULT NULL";
+
+
 // Boucle XML
 $fpipr_field = array(
 	"id_photo"  => "bigint(21) NOT NULL",
