@@ -10,6 +10,8 @@ include_spip('inc/presentation');
 include_spip('inc/layer');
 include_spip('inc/actions');
 include_spip('inc/habillages_presentation');
+# Changer les fonctions xml (cf. inc/xml).
+include_spip('inc/vieilles_defs');
 
 // http://doc.spip.org/@exec_admin_plugin
 function exec_habillages_icones() {
