@@ -7,7 +7,9 @@ if (!defined('_DIR_PLUGIN_PLAYER')){ // defini automatiquement par SPIP 1.9.2
 
 function Player_insert_head($flux){
 	$flux .="<script type='text/javascript'>var musicplayerurl='"._DIR_PLUGIN_PLAYER."musicplayer.swf'</script>\n";
+	$flux .= 	'<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'AFLAX/aflax.js"></script>';
 	$flux .= 	'<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'player_enclosure.js"></script>';
+	$flux .=	'<script type="text/javascript">aflax.insertFlash(1, 1, "#FFFFFF", "go", false);<!--  // --></script>';
 	return $flux;
 }
 
