@@ -142,6 +142,7 @@ function(i) {
 						$(this).html('play');
 
 						$("#musicplayer").html('');
+						soundObj.stop(); 
 
 						}
 						
