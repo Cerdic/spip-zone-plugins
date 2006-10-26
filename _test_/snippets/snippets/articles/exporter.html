@@ -1,0 +1,31 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
+<?php echo '<' ?>?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<articles>
+	<BOUCLE_article(ARTICLES){id_article=#ENV{id}}{tout}>
+	<article>
+		<id_article>#ID_ARTICLE</id_article>
+		<surtitre>#SURTITRE**</surtitre>
+		<titre>#TITRE**</titre>
+		<soustitre>#SOUSTITRE**</soustitre>
+		<id_rubrique>#ID_RUBRIQUE</id_rubrique>
+		<descriptif>#DESCRIPTIF**</descriptif>
+		<chapo>#CHAPO**</chapo>
+		<texte>#TEXTE**</texte>
+		<ps>#PS**</ps>
+		<date>#DATE**</date>
+		<statut>#STATUT**</statut>
+		<id_secteur>#ID_SECTEUR*</id_secteur>
+		<date_redac>#DATE_REDAC*</date_redac>
+		<accepter_forum>#ACCEPTER_FORUM*</accepter_forum>
+		<date_modif>#DATE_MODIF*</date_modif>
+		<lang>#LANG*</lang>
+		<langue_choisie>#LANGUE_CHOISIE*</langue_choisie>
+		<id_trad>#ID_TRAD*</id_trad>
+		<extra>#EXTRA*</extra>
+		<nom_site>#NOM_SITE*</nom_site>
+		<url_site>#URL_SITE*</url_site>
+		<url_propre>#URL_PROPRE*</url_propre>
+	</article>
+	</BOUCLE_article>
+</articles>

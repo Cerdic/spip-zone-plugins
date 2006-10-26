@@ -1,0 +1,24 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Snippets
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	&copy; 2006 Cedric Morin [notre-ville.net->http://www.notre-ville.net]  Distribue sous licence GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Import/Export XML g&eacute;n&eacute;ralis&eacute; de contenus
+	</description>
+	<prefix> 
+	snippets
+	</prefix>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>snippets_pipeline.php</inclure>
+	</pipeline>
+</plugin>
