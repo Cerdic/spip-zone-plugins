@@ -1,0 +1,25 @@
+<plugin>
+  <nom>
+	Boutons dans le Texte
+  </nom>
+  <auteur>
+	bertrand Gugger http://toggg.com/
+  </auteur>
+  <version>
+	0.0.1
+  </version>
+  <etat>
+	stable
+  </etat>
+  <description>
+	Rajoute des boutons pour l'affichage des textes comme augmenter/diminuer police
+	ATTENTION: Necessite jQuery et la balise <code>#INSERT_HEAD</code> dans les squelettes
+  </description>
+  <prefix>
+	boutonstexte
+  </prefix>
+  <pipeline>
+	  <nom>insert_head</nom>
+	  <inclure>teteboutonstexte.php</inclure>
+  </pipeline>
+</plugin>
