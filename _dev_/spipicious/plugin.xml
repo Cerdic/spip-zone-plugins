@@ -1,0 +1,32 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	spip.icio.us
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	[erational->http://www.erational.org]	
+	</auteur>
+	<lien>-</lien>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description><multi>
+	  [fr]Permet aux visiteurs authentifi&eacute;s d'ajouter des tags (mots-cl&eacute;s) sur les articles de SPIP &agrave; la fa&ccedil;on d'un [del.icio.us->http://del.icio.us/]
+
+- Les mots-cl&eacute;s sont ajout&eacute;s dans un groupe d&eacute;di&eacute; {{- tags -}}
+- voir les fichiers exemples pour voir les nouvelles balises et boucles
+	  [en] A suspicous tag allowing visitors to tag SPIP articles</multi> 
+	</description>
+	<prefix>spipicious</prefix>	
+	<options>spipicious_options.php</options>
+  <fonctions>spipicious_fonctions.php</fonctions>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>spipicious_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+     <nom>header_prive</nom>
+     <inclure>spipicious_fonctions.php</inclure>
+  </pipeline>
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>

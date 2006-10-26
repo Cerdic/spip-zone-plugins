@@ -1,0 +1,94 @@
+#CACHE{86400}
+<BOUCLE_article_principal(ARTICLES) {id_article}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+<style type="text/css">
+<!--
+a { text-decoration: underline;}
+a:hover { background:#eee; }
+.tag_0 {font-size: 60%;} 
+.tag_1 {font-size: 70%;} 
+.tag_2 {font-size: 80%;} 
+.tag_3 {font-size: 85%;} 
+.tag_4 {font-size: 90%;} 
+.tag_5 {font-size: 95%;} 
+.tag_6 {font-size: 100%;} 
+.tag_7 {font-size: 110%;} 
+.tag_8 {font-size: 120%;} 
+#form_spipicious { background:yellow;position:absolute; top: 4px;left:4px;width:300px;}
+-->
+</style>
+</head>
+
+<body class="page_article">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
+
+
+	<div id="conteneur">
+	
+	<!-----extra SPIPICIOUS ---->
+	  #FORMULAIRE_SPIPICIOUS	
+    
+    <div style='background:pink;margin:10px 0'>
+    <h1>balise NUAGE_TAGS_ARTICLE</h1><hr />   
+    #NUAGE_TAGS_ARTICLE
+    </div>
+    
+    <div style='background:lightgreen;margin:10px 0'>
+    <h1>balise NUAGE_TAGS_ARTICLE_DETAILS</h1><hr />   
+    #NUAGE_TAGS_ARTICLE_DETAILS
+    </div>
+    
+    <div style='background:lightblue'>
+  	<h1>BOUCLE SPIPICIOUS</h1><hr /> 
+  	<BOUCLE_f(SPIPICIOUS){id_article}>id_article:#ID_ARTICLE - mot: #ID_MOT  - auteur:#ID_AUTEUR<br /></BOUCLE_f>
+  	</div>
+    
+    <!----- extra SPIPICIOUS ---->
+
+		[(#REM) Contenu principal : contenu de l'article ]
+		<div id="contenu">
+
+			<div class="cartouche">
+				<h1 class="titre">#TITRE</h1>
+				[<p class="soustitre">(#SOUSTITRE)</p>]
+
+
+				<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
+
+
+			</div>
+			
+			#DEBUT_SURLIGNE
+			[<div class="chapo">(#CHAPO)</div>]
+			<br class="nettoyeur" />
+			[<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+			[<div class="texte">(#TEXTE|image_reduire{520,0})</div>]
+			#FIN_SURLIGNE
+
+
+
+		</div><!-- fin contenu -->
+
+
+			
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_article_principal>
