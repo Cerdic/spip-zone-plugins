@@ -20,7 +20,7 @@ function flickr_sign($params) {
 //lance une requette à flickr. $method est le nom de la méthode à appeler (flickr.auth.getToken par exemple) $params est un tableau de paramétres nom => valeur. Retourne le xml renvoye par Flickr 
 function flickr_api_call($method, $params=array(), $auth_token='', $force_sign=false) {
   global $FLICKR_API_KEY;
-  spip_log("Flickr api call: $method");
+  spip_log("Flickr api call: $method.");
   $params['api_key'] = $FLICKR_API_KEY;
   $params['format'] = 'php_serial';
   if($auth_token) {
@@ -37,6 +37,8 @@ function flickr_api_call($method, $params=array(), $auth_token='', $force_sign=f
   }
 
   $args = substr($args,1);
+
+  var_dump($args);
 
   return unserialize(file_get_contents("http://www.flickr.com/services/rest/?$args"));
 }
@@ -252,35 +254,41 @@ class FlickrTag {
 //======================================================================
 
 function flickr_photos_search(
-							  $per_page='',$page='',
-							  $user_id = '', 
-							  $tags = '', $tag_mode='',
-							  $text = '',
-							  $min_upload_date = '',$max_upload_date = '',
-							  $min_taken_date = '',$max_taken_date = '',
-							  $license = '',
-							  $sort = '',
-							  $privacy_filter = '',
-							  $extras = '',
-							  $auth_token = ''
+							  $per_page=NULL,$page=NULL,
+							  $user_id = NULL, 
+							  $tags = NULL, $tag_mode=NULL,
+							  $text = NULL,
+							  $min_upload_date = NULL,$max_upload_date = NULL,
+							  $min_taken_date = NULL,$max_taken_date = NULL,
+							  $license = NULL,
+							  $sort = NULL,
+							  $privacy_filter = NULL,
+							  $extras = NULL,
+							  $bbox = NULL,
+							  $accuracy = NULL,
+							  $auth_token = NULL
 							  ) {
   $params = array();
 
-  if($per_page) $params['per_page'] = $per_page;
-  if($page) $params['page'] = $page;
-  if($user_id) $params['user_id'] = $user_id;
-  if($tags) $params['tags'] = $tags;
-  if($tag_mode) $params['tag_mode'] = $tag_mode;
-  if($text) $params['text'] = $text;
-  if($min_upload_date) $params['min_upload_date'] = $min_upload_date;
-  if($max_upload_date) $params['max_upload_date'] = $max_upload_date;
-  if($min_taken_date) $params['min_taken_date'] = $min_taken_date;
-  if($max_taken_date) $params['max_taken_date'] = $max_taken_date;
-  if($license) $params['license'] = $license;
-  if($sort) $params['sort'] = $sort;
-  if($privacy_filter ) $params['privacy_filter '] = $privacy_filter ;
-  if($extras) $params['extras'] = "original_format,$extras"; 
+  if($per_page!= NULL) $params['per_page'] = $per_page;
+  if($page!= NULL) $params['page'] = $page;
+  if($user_id!= NULL) $params['user_id'] = $user_id;
+  if($tags!= NULL) $params['tags'] = $tags;
+  if($tag_mode!= NULL) $params['tag_mode'] = $tag_mode;
+  if($text!= NULL) $params['text'] = $text;
+  if($min_upload_date!= NULL) $params['min_upload_date'] = $min_upload_date;
+  if($max_upload_date!= NULL) $params['max_upload_date'] = $max_upload_date;
+  if($min_taken_date!= NULL) $params['min_taken_date'] = $min_taken_date;
+  if($max_taken_date!= NULL) $params['max_taken_date'] = $max_taken_date;
+  if($license != NULL) $params['license'] = $license;
+  if($sort!= NULL) $params['sort'] = $sort;
+  if($privacy_filter != NULL) $params['privacy_filter'] = $privacy_filter ;
+
+  if($extras!= NULL) $params['extras'] = "original_format,$extras"; 
   else $params['extras'] = "original_format";
+
+  if($bbox != NULL) $params['bbox'] = $bbox ;
+  if($accuracy != NULL) $params['accuracy'] = $accuracy ;
 
   $photos =  flickr_check_error(flickr_api_call('flickr.photos.search',$params,$auth_token));
   $resp = new FlickrPhotos;

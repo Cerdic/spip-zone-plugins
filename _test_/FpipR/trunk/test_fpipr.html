@@ -13,7 +13,7 @@ NSID Flickr: #FLICKR_NSID
 <B_photos>
 <div>
 <ul>
-<BOUCLE_photos(FLICKR_PHOTOS_SEARCH) {user_id=#FLICKR_NSID} {"<br/>"} {tags #ENV{tags}}>
+<BOUCLE_photos(FLICKR_PHOTOS_SEARCH) {user_id=#FLICKR_NSID} {"<br/>"} {bbox -0.17:51.48:-0.08:51.53} {accuracy 16}>
 <li>
 #TITLE
 <img src="http://static.flickr.com/#SERVER/[(#ID_PHOTO)]_[(#SECRET)]_t.jpg"/>

@@ -64,6 +64,9 @@ function FpipR_fill_table_temporaire_boucle($method,$arguments){
 
 function FpipR_traiter_argument($key, $val){
   $val = str_replace("'",'',$val);
+  if(!$val) $val = '0';
+  if($key == 'bbox')
+   $val = str_replace(':',',',$val);
   return $val;
 }
 

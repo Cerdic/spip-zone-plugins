@@ -30,7 +30,7 @@ $fpipr_field = array(
 	"isfriend"=> "ENUM ('0','1') NOT NULL",
 	"isfamily"=> "ENUM ('0','1') NOT NULL",
 	"originalformat" => "char(4) DEFAULT 'jpg'",
-	"license" => "ENUM ('1','2','3','4','5','6')", //http://flickr.com/services/api/flickr.photos.licenses.getInfo.html
+	"license" => "INT", //http://flickr.com/services/api/flickr.photos.licenses.getInfo.html
 	"upload_date" => "DATETIME", 
 	"taken_date" => "INT", 
 	"owner_name" => "text DEFAULT '' NOT NULL",
@@ -77,6 +77,7 @@ function FpipR_fill_table($method,$arguments){
   //Faire le query API flickr
   switch($method){
 	case 'flickr.photos.search':
+	  var_dump($arguments);
 	  $photos = flickr_photos_search(
 									 $arguments['par_page'],$arguments['page'],
 									 $arguments['user_id'], $arguments['tags'], $arguments['tag_mode'],
@@ -85,8 +86,8 @@ function FpipR_fill_table($method,$arguments){
 									 $arguments['max_taken_date'], $arguments['license'],
 									 $arguments['sort'], $arguments['privacy_filter'],
 									 "license,date_upload,date_taken,owner_name,icon_server,original_format,last_update,geo",//on recupere tous les extras possibles
- $arguments['auth_token']);
-
+									 $arguments['bbox'],$arguments['accuracy'],
+									 $arguments['auth_token']);
 	  $not_id = '';
 	  foreach($photos->photos as $photo) {
 		$query = "REPLACE INTO spip_fpipr_photos (id_photo,user_id,secret,server,title,ispublic,isfriend,isfamily,originalformat,license,upload_date,taken_date,owner_name,icon_server,last_update,longitude,latitude,accuracy)";
@@ -94,11 +95,12 @@ function FpipR_fill_table($method,$arguments){
 		spip_query($query);
 		$not_id .= ','.intval($photo->id);
 	  }
+	  $query = "DELETE FROM spip_fpipr_photos";
 	  if($not_id) {
 		  $not_id = substr($not_id,1);
-		  $query = "DELETE FROM spip_fpipr_photos WHERE id_photo NOT IN ($not_id)";
-		  spip_query($query);
+		  $query .= " WHERE id_photo NOT IN ($not_id)";
 	  }
+	  spip_query($query);
 	  break;
 	default: 
 	  return;
