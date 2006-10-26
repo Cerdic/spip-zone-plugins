@@ -41,7 +41,14 @@ function exec_habillages_squelettes() {
 		
 		# Si il y changement de squelettes, chercher si le squelette a des themes associes. si oui,
 		# renseigner un champs meta pour afficher l'onglet "themes".
-		if (_request('statusplug') == "dist") {
+		if (_request('statusplug') == "defaut") {
+			ecrire_meta('habillages_is_themes', 'non');
+			ecrire_meta('habillages_is_extras', 'non');
+			ecrire_meta('habillages_prefixe_squel', '');
+			ecrire_metas;
+		}
+		
+		else if (_request('statusplug') == "dist") {
 			ecrire_meta('habillages_is_themes', 'oui');
 			ecrire_meta('habillages_is_extras', 'oui');
 			ecrire_meta('habillages_prefixe_squel', 'dist');

@@ -148,7 +148,12 @@ EOF;
 	
 	debut_gauche();
 	debut_boite_info();
-	echo _T('habillages:accueil_infos');
+	echo "<div class='intro_grotitre'>";
+	echo _T('habillages:accueil_infos_titre')."</div><br />";
+	echo "<div class='intro'>";
+	echo _T('habillages:accueil_infos')."<br /><br />";
+	echo _T('habillages:accueil_infos_deux');
+	echo "</div>";
 	fin_boite_info();
 
 	debut_droite();
