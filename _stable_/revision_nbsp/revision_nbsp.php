@@ -67,7 +67,7 @@
 				$lanote = preg_replace(
 				',[(]'.($num+1).'[)].*,s', '',$lanote
 				);
-
+				$lesnotes = substr($lesnotes, $a+strlen('('.$num.')')+strlen($lanote));
 				$lanote = trim($lanote);
 				$lanote = (strlen($lanote) ? '[[ '.$lanote.' ]]' : '');
 
@@ -76,8 +76,7 @@
 					. substr($letexte,$b+strlen('('.$num.')'));
 			}
 
-			$suite = trim(substr($lesnotes,$a));
-			if (strlen($suite))
+			if (strlen($suite = trim($lesnotes)))
 				$letexte.= '[[<> '.$suite.' ]]';
 
 			if (isset($debut)) {
