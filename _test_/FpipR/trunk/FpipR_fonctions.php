@@ -73,6 +73,8 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 	$possible_criteres = array('tags','tag_mode','text','privacy_filter',
 					  'bbox','accuracy');
 
+	$possible_extras = array('license, owner_name, icon_server, original_format, last_update');
+
 	$arguments = '';
 
 
@@ -90,34 +92,47 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 		$arguments[$crit->op] = $val;
 	  }
 	}
+	$extras = array();
 	foreach($boucle->where as $w) {
 	  $key = str_replace("'",'',$w[1]);
 	  $key = str_replace("$id_table.",'',$key);
 	  $val = $w[2];
 	  if (in_array($key,$possible_args)){
+		if(in_array($key,$possible_extras)) $extras[] = $key; 
+		else if($key == 'upload_date') $extras[] = 'date_upload';
+		else if($key == 'taken_date') $extras[] ='$date_taken';
 		//TODO upload_date doit être en timestamp/1000
-		  switch($w[0]) {
-			case "'='":
-			  if($key == 'taken_date' || $key == 'upload_date') {
-				$arguments['min_'.$key] = $val;
-				$arguments['max_'.$key] = $val;
-			  } else {
-				$arguments[$key] = $val;
-			  }
-			  break;
-			case "'<'":
-			  if($key == 'taken_date' || $key == 'upload_date') {
-				$arguments['min_'.$key] = $val;
-			  }
-			  break;
-			case "'>'":
-			  if($key == 'taken_date' || $key == 'upload_date') {
-				$arguments['max_'.$key] = $val;
-			  }
-			  break;
-	 	  }
+		switch($w[0]) {
+		  case "'='":
+			if($key == 'taken_date' || $key == 'upload_date') {
+			  $arguments['min_'.$key] = $val;
+			  $arguments['max_'.$key] = $val;
+			} else {
+			  $arguments[$key] = $val;
+			}
+			break;
+		  case "'<'":
+			if($key == 'taken_date' || $key == 'upload_date') {
+			  $arguments['min_'.$key] = $val;
+			}
+			break;
+		  case "'>'":
+			if($key == 'taken_date' || $key == 'upload_date') {
+			  $arguments['max_'.$key] = $val;
+			}
+			break;
+		}
 	  }
-	  }
+	}
+	foreach($boucle->select as $w) {
+	  $key = str_replace("'",'',$w);
+	  $key = str_replace("$id_table.",'',$key);
+	  if(in_array($key,$possible_extras)) $extras[] = $key; 
+	  else if($key == 'upload_date') $extras[] = 'date_upload';
+	  else if($key == 'taken_date') $extras[] ='date_taken';
+	  else if($key == 'longitude' || $key == 'latitude') $extras[] = 'geo';
+	}
+	$arguments['extras'] = "'".join(',',$extras)."'";
 	$boucle->hash = "// CREER la table temporaire flickr_photos et la peupler avec le resultat de la query
 \$arguments = '';\n";
 	$bbox = '';

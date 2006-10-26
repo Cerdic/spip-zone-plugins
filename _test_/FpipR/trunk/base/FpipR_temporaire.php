@@ -85,7 +85,7 @@ function FpipR_fill_table($method,$arguments){
 									 $arguments['max_upload_date'], $arguments['min_taken_date'],
 									 $arguments['max_taken_date'], $arguments['license'],
 									 $arguments['sort'], $arguments['privacy_filter'],
-									 "license,date_upload,date_taken,owner_name,icon_server,original_format,last_update,geo",//on recupere tous les extras possibles
+									 $arguments['extras'],
 									 $arguments['bbox'],$arguments['accuracy'],
 									 $arguments['auth_token']);
 	  $not_id = '';
