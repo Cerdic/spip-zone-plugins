@@ -61,5 +61,10 @@ function FpipR_fill_table_temporaire_boucle($method,$arguments){
 	FpipR_fill_table($method,$arguments);
 }
 
+function FpipR_traiter_argument($key, $val){
+  $val = str_replace("'",'',$val);
+  return $val;
+}
+
 
 ?>

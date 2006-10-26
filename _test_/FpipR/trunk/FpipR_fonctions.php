@@ -36,11 +36,13 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 	$id_table = $boucle->id_table;
 	$boucle->from[$id_table] =  "spip_fpipr_photos";
 
-	$possible_args = array('user_id','tags','tag_mode','text','min_upload_date','max_upload_date',
-					  'min_taken_date','max_taken_date','license','sort','privacy_filter',
+	$possible_args = array('user_id','license','upload_date','taken_date');
+
+	$possible_criteres = array('tags','tag_mode','text','sort','privacy_filter',
 					  'bbox','accuracy','extras','per_page','page');
 
 	$arguments = '';
+
 
 	//on regarde dans le contexte si les arguments possible sont dispo.
 /*	foreach($possible_args as $key) {
@@ -50,25 +52,37 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 	}*/
 
 	//on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
-	for($i=0;$i < count($boucle->where);$i++){
-	  $w = $boucle->where[$i];
+	foreach($boucle->criteres as $crit) {
+	  if (in_array($crit->op,$possible_criteres)){
+		$val = !isset($crit->param[0]) ? "" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+		$arguments[$crit->op] = $val;
+	  }
+	}
+	foreach($boucle->where as $w) {
 	  $key = str_replace("'",'',$w[1]);
 	  $key = str_replace("$id_table.",'',$key);
-	  if($key == 'tags') {
-		$arguments['tags'] = str_replace("'",'',$w[2]);
-		//		unset($boucle->where[$i]);
-	  } else  if (in_array($key,$possible_args)){
+	  $val = $w[2];
+	  if (in_array($key,$possible_args)){
+		//TODO upload_date doit être en timestamp/1000
 		  switch($w[0]) {
 			case "'='":
-				$val = str_replace("'",'',$w[2]);
+			  if($key == 'taken_date' || $key == 'upload_date') {
+				$arguments['min_'.$key] = $val;
+				$arguments['max_'.$key] = $val;
+			  } else {
 				$arguments[$key] = $val;
-			break;
+			  }
+			  break;
 			case "'<'":
-			break;
+			  if($key == 'taken_date' || $key == 'upload_date') {
+				$arguments['min_'.$key] = $val;
+			  }
+			  break;
 			case "'>'":
-			break;
-			case "'IN'":
-			break;
+			  if($key == 'taken_date' || $key == 'upload_date') {
+				$arguments['max_'.$key] = $val;
+			  }
+			  break;
 	 	  }
 	  }
 	}
@@ -76,10 +90,11 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 \$arguments = '';\n";
 	foreach($arguments as $key => $val) {
 	  if($val) {
-	  	$boucle->hash .= "\$arguments['$key']=$val;\n";
+	  	$boucle->hash .= "\$v=$val;\n";
+	  	$boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument($key,\$v);\n";
 	  }
 	}
-	$boucle->hash .= "fpipr_fill_table_temporaire_boucle('flickr.photos.search',\$arguments);";
+	$boucle->hash .= "FpipR_fill_table_temporaire_boucle('flickr.photos.search',\$arguments);";
 	return calculer_boucle($id_boucle, $boucles); 
 
 }

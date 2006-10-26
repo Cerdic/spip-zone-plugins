@@ -33,7 +33,7 @@ function flickr_api_call($method, $params=array(), $auth_token='', $force_sign=f
   
   $args = '';
   foreach($params as $k => $v) {
-	$args .= '&'.$k.'='.$v;
+	$args .= '&'.urlencode($k).'='.urlencode($v);
   }
 
   $args = substr($args,1);
@@ -69,7 +69,7 @@ function flickr_authenticate_get_frob() {
   
 	$args = '';
 	foreach($params as $k => $v) {
-	  $args .= '&'.$k.'='.$v;
+	  $args .= '&'.urlencode($k).'='.urlencode($v);
 	}
 	$args = substr($args,1);
 	return array('url'=>"http://flickr.com/services/auth/?$args",'frob'=>$frob['frob']['_content']);
@@ -125,7 +125,7 @@ function flickr_auth_checkToken($token) {
 
 class FlickrPhotos {
   var $page;
-  var $per_page;
+  var $perpage;
   var $total;
   var $pages;
 
@@ -384,6 +384,11 @@ function flickr_photos_getInfo($photo_id,$secret,$auth_token='') {
 	  } else if($key == 'urls') {
 		foreach($value['url'] as $urldata)
 		  $resp->urls[$urldate['type']] = $urldata['_content'];
+	  } else if ($key == 'dates'){
+		foreach($value as $attr => $content) {
+		  $k = $attr.'date';
+		  $resp->$k = $content;
+		}
 	  } else if(is_array($value)) {
 		foreach($value as $attr => $content) {
 		  if(is_array($content)) 
