@@ -20,7 +20,7 @@ $GLOBALS['tables_principales']['spip_auteurs']['field']['flickr_token'] = "TINYT
 
 
 // Boucle XML
-$fpipr_field = array(
+$fpipr_photos_field = array(
 	"id_photo"  => "bigint(21) NOT NULL",
 	"user_id" => "varchar(100)", //"47058503995@N01" 
 	"secret"=> "varchar(100)", //"a123456"
@@ -41,7 +41,7 @@ $fpipr_field = array(
 	"accuracy" => "smallint NOT NULL"
 );
 
-$fpipr_key = array(
+$fpipr_photos_key = array(
 	"PRIMARY KEY" => "id_photo",
 	"KEY" => "owner",
 	"KEY" => "ispublic",
@@ -50,7 +50,13 @@ $fpipr_key = array(
 );
 
 $GLOBALS['tables_principales']['spip_fpipr_photos'] =
-	array('field' => &$fpipr_field, 'key' => &$fpipr_key);
+	array('field' => &$fpipr_photos_field, 'key' => &$fpipr_photos_key);
+//les clefs pour trier, pas vraiment dans la table
+$GLOBALS['tables_principales']['spip_fpipr_photos']['field']['date_posted'];
+$GLOBALS['tables_principales']['spip_fpipr_photos']['field']['date_taken'];
+$GLOBALS['tables_principales']['spip_fpipr_photos']['field']['interestingness'];
+$GLOBALS['tables_principales']['spip_fpipr_photos']['field']['relevance'];
+
 //TODO vraiment pas sur de ce qu'il faut mettre la??
 $GLOBALS['table_des_tables']['flickr_photos_search'] = 'fpipr_photos';
 
@@ -66,8 +72,10 @@ function FpipR_creer_tables_temporaires($method){
 		  default:
 		  return;
 		}
-		$champs = $GLOBALS['tables_principales'][$nom]['field'];
-		$cles = $GLOBALS['tables_principales'][$nom]['key'];
+		$field_n = $nom.'_field';
+		$key_n = $nom.'_key';
+		$champs = $$field_n;
+		$cles = $$key_n;
 		spip_create_table($nom, $champs, $cles, false, false);		
 	}
 }
@@ -77,9 +85,8 @@ function FpipR_fill_table($method,$arguments){
   //Faire le query API flickr
   switch($method){
 	case 'flickr.photos.search':
-	  var_dump($arguments);
 	  $photos = flickr_photos_search(
-									 $arguments['par_page'],$arguments['page'],
+									 $arguments['per_page'],$arguments['page'],
 									 $arguments['user_id'], $arguments['tags'], $arguments['tag_mode'],
 									 $arguments['text'], $arguments['min_upload_date'],
 									 $arguments['max_upload_date'], $arguments['min_taken_date'],

@@ -75,6 +75,8 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 
 	$possible_extras = array('license, owner_name, icon_server, original_format, last_update');
 
+	$possible_sort = array('date_posted','date_taken','interestingness','relevance');
+
 	$arguments = '';
 
 
@@ -85,14 +87,38 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 		$arguments[$key] = calculer_liste(array($champ),array(), $boucles, $boucle->$id_boucle);
 	}*/
 
-	//on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
 	foreach($boucle->criteres as $crit) {
 	  if (in_array($crit->op,$possible_criteres)){
 		$val = !isset($crit->param[0]) ? "" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 		$arguments[$crit->op] = $val;
 	  }
 	}
+
+	//on calcul le nombre de page d'apres {0,10}
+	list($debut,$pas) = split(',',$boucle->limit);
+	$page = $debut/$pas;
+	if($page <= 0) $page = 1;
+	$arguments['page'] = intval($page);
+	$arguments['per_page'] = $pas>0?$pas:100;
+	$boucle->limit = NULL;
+
+	if(isset($boucle->order[0])) {
+	  list($sort,$desc) = split(' . ',str_replace("'",'',$boucle->order[0]));
+	  if(in_array($sort,$possible_sort)) {
+		$sort = str_replace('_','-',$sort);
+		if($sort != 'relevance' && isset($desc)) 
+		  $sort .= '-desc';
+		else
+		  $sort .= '-asc';
+		$boucle->order = NULL;
+		$arguments['sort'] = "'".$sort."'";
+	  }
+	}
+	
+
 	$extras = array();
+
+	//on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
 	foreach($boucle->where as $w) {
 	  $key = str_replace("'",'',$w[1]);
 	  $key = str_replace("$id_table.",'',$key);
