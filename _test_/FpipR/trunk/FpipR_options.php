@@ -1,5 +1,6 @@
 <?php
 
+
 function generer_url_document_flickr($id_document, $statut='') {
 	if (intval($id_document) <= 0) 
 		return '';

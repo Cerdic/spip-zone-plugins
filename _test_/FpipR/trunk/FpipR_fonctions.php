@@ -8,8 +8,9 @@
 
 include_spip('base/FpipR_temporaire');
 
+$GLOBALS['tables_principales']['spip_auteurs']['field']['flickr_nsid'] = "TINYTEXT DEFAULT NULL";
+
 function critere_tags($idb, &$boucles, $crit) {
-  spip_log("M8_:BLABLA");
 }
 
 /** boucle FLICKR_PHOTOS_SEARCH
@@ -45,7 +46,7 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 
 
 	//on regarde dans le contexte si les arguments possible sont dispo.
-/*	foreach($possible_args as $key) {
+/*	Foreach($possible_args as $key) {
 		$champ = new Champ;
 		$champ->nom_champ = $key;
 		$arguments[$key] = calculer_liste(array($champ),array(), $boucles, $boucle->$id_boucle);
@@ -92,9 +93,9 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 	  if($val) {
 	  	$boucle->hash .= "\$v=$val;\n";
 	  	$boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument($key,\$v);\n";
-	  }
-	}
-	$boucle->hash .= "FpipR_fill_table_temporaire_boucle('flickr.photos.search',\$arguments);";
+	  }}
+
+ $boucle->hash .= "FpipR_fill_table_temporaire_boucle('flickr.photos.search',\$arguments);";
 	return calculer_boucle($id_boucle, $boucles); 
 
 }
