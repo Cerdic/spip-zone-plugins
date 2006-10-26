@@ -152,7 +152,12 @@ EOF;
 	echo _T('habillages:accueil_infos_titre')."</div><br />";
 	echo "<div class='intro'>";
 	echo _T('habillages:accueil_infos')."<br /><br />";
-	echo _T('habillages:accueil_infos_deux');
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_squelettes-22.png' />&nbsp;";
+	echo "<strong>"._T('habillages:accueil_titre_public')."</strong>";
+	echo _T('habillages:accueil_infos_deux')."<br /><br />";
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_icones-22.png' />&nbsp;";
+	echo "<strong>"._T('habillages:accueil_titre_prive')."</strong>";
+	echo _T('habillages:accueil_infos_trois');
 	echo "</div>";
 	fin_boite_info();
 

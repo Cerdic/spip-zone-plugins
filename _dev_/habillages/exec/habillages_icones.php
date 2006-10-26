@@ -104,9 +104,11 @@ EOF;
 	
 	debut_gauche();
 	debut_boite_info();
-	
-	habillages_menu_navigation();
-	
+	echo "<div class='intro_grotitre'>";
+	echo _T('habillages:icones_infos_titre')."</div><br />";
+	echo "<div class='intro'>";
+	echo _T('habillages:icones_infos')."<br />";
+	echo "</div>";
 	fin_boite_info();
 
 	debut_droite();
@@ -145,6 +147,7 @@ EOF;
 			$description_theme = applatit_arbre($arbre['description']);
 			
 			$c = dirname ($fichier)."/img_pack/";
+			$cc  = dirname ($fichier);
 				
 				if ($type_theme=="icones_prive") {
 					debut_boite_info();
@@ -155,6 +158,7 @@ EOF;
     				echo ">";
     				
     				echo '<strong>'.$nom_theme.'</strong> version '.$theme_version.'</div><div class="cadre-padding" style="overflow:hidden;">';
+    				echo '<div style="float:right";>&nbsp;<br /><img src="'.$cc.'/capture.png" alt="" class="preview" /></div>';
     				echo "<small>".propre($description_theme)."</small><br /><br /><hr>";
 					echo "<div class='auteur'>".propre($auteur_theme)."</div><hr>";
     				echo "</div></div><br />";
