@@ -58,6 +58,9 @@ function sktheme_xml_get_infos($xml_dir,$xml_type){
     if (isset($arbre['squelettes'])) {
       $ret['squelettes'] = $arbre['squelettes'];
     }
+    if (isset($arbre['type'])) {
+      $ret['type'] =  applatit_arbre($arbre['type']);
+    }
 
     // Compute extra values
     $etat = 'dev';

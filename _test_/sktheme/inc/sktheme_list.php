@@ -27,9 +27,16 @@ function sktheme_list() {
   $squelettes_list = array('dist' => '' );
   if (is_dir($s_dir)) {
     if ($dh = opendir($s_dir)) {
-      while (($file = readdir($dh)) !== false) {
-	if ( (is_dir($s_dir."/".$file)) AND ($file[0]!=".") ) {
-	  $squelettes_list[$file]=$s_dir."/".$file;
+      while (($dir = readdir($dh)) !== false) {
+	if ( (is_dir($s_dir."/".$dir)) AND ($dir[0]!=".") ) {
+	  // Check if a theme.xml exists and if the type is squelettes
+	  if (is_file($s_dir."/".$dir."/theme.xml")) {
+	    $s_info = sktheme_xml_get_infos($s_dir."/".$dir,"theme");
+	    $type = (isset($s_info['type'])) ? propre($s_info['type']) : "";
+	    if ($type == 'squelettes') {
+	      $squelettes_list[$dir]=$s_dir."/".$dir;
+	    }
+	  }
 	}
       }
       closedir($dh);
@@ -44,9 +51,16 @@ function sktheme_list() {
   $habillages_list = array($original => '');
   if (is_dir($h_dir)) {
     if ($dh = opendir($h_dir)) {
-      while (($file = readdir($dh)) !== false) {
-	if ( (is_dir($h_dir."/".$file)) AND ($file[0]!=".") ) {
-	  $habillages_list[$file] = sktheme_xml_get_infos($h_dir."/".$file,"theme");
+      while (($dir = readdir($dh)) !== false) {
+	if ( (is_dir($h_dir."/".$dir)) AND ($dir[0]!=".") ) {
+	  // Check if a theme.xml exists and if the type is themes
+	  if (is_file($h_dir."/".$dir."/theme.xml")) {
+	    $h_info = sktheme_xml_get_infos($h_dir."/".$dir,"theme");
+	    $type = (isset($h_info['type'])) ? propre($h_info['type']) : "";
+	    if ($type == 'themes') {
+	      $habillages_list[$dir] = sktheme_xml_get_infos($h_dir."/".$dir,"theme");
+	    }
+	  }
 	}
       }
       closedir($dh);
