@@ -78,11 +78,12 @@ function FpipR_creer_tables($method){
 		$cles = $GLOBALS['FpipR_tables'][$key_n];
 
 	$version_table = lire_meta("FpipR_$nom");
+
 	if($version_table && $version_table != $GLOBALS['FpipR_versions'][$nom]) {
-	   $version_table = NULL;
+	   $version_table = '';
 	   spip_query("DROP TABLE $nom");
 	}
-        if($version_table == NULL) {
+        if(!$version_table) {
 		spip_create_table($nom, $champs, $cles, false, false);		
 		ecrire_meta("FpipR_$nom",$GLOBALS['FpipR_versions'][$nom]);
 		ecrire_metas();

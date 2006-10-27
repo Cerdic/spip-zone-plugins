@@ -183,7 +183,7 @@ function flickr_afficher_articles_boucle($row, $langue_defaut, $voir_logo)
   include_spip('inc/presentation');
 	$vals = '';
 
-	$id_article = $row['id_article'];
+	$id_article = intval($row['id_article']);
 	$tous_id[] = $id_article;
 	$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 	$id_rubrique = $row['id_rubrique'];
