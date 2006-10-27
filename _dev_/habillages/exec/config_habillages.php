@@ -149,7 +149,7 @@ EOF;
 	debut_gauche();
 	debut_boite_info();
 	echo "<div class='intro_grotitre'>";
-	echo _T('habillages:accueil_infos_titre')."</div><br />";
+	echo gros_titre(_T('habillages:accueil_infos_titre'))."</div><br />";
 	echo "<div class='intro'>";
 	echo _T('habillages:accueil_infos')."<br /><br />";
 	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_squelettes-22.png' />&nbsp;";
@@ -172,7 +172,8 @@ EOF;
 // 	$habillages_styles = basename($GLOBALS['meta']['habillages_couleurs']);
 // 	//$habillages_logos = basename($GLOBALS['meta']['habillages_logos']);
 // 	
- 	echo _T('habillages:accueil_general')."<br /><br />";
+ 	echo gros_titre(_T('habillages:tdb_titre'));
+	echo _T('habillages:accueil_general')."<br /><br />";
 // 	if ($habillages_squelettes != "") {
 // 	echo "<br />";
 // 	echo "<br />";
@@ -238,9 +239,9 @@ EOF;
 	
 	echo generer_url_post_ecrire("config_habillages");
 	debut_boite_info();
-	echo "<div style='background-color:$couleur_claire' class='titre_un'><br /><strong>";
+	echo "<div style='background-color:$couleur_claire' class='titre_un'>";
 	echo _T('habillages:manager_plugin');
-	echo "</strong><br />&nbsp;</div><br />";
+	echo "</div><br />";
 	echo _T('habillages:intro_select_gestionnaire')."<br /><br />";
 	echo "<input type='checkbox' name='".$gestion_squelettes."' value='".$gestion_squelettes."'$checked_skel> "._T('habillages:squelettes_base_acc')."<br />";
 	echo "<ul>";
