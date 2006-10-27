@@ -19,7 +19,7 @@ NSID Flickr: #FLICKR_NSID
 <B_photos>
 <div>
 <ul>
-<BOUCLE_photos(FLICKR_PHOTOS_SEARCH) {user_id=#FLICKR_NSID} {"<br/>"} {!par date_posted} {0,10} {taken_date > 2006-09-10 00:00:00}>
+<BOUCLE_photos(FLICKR_PHOTOS_SEARCH) {user_id=#FLICKR_NSID} {"<br/>"} {!par date_posted} {0,10} {upload_date < 2006-09-10 00:00:00} {upload_date > 2006-08-01 00:00:00} {par title}>
 <li>
 #COMPTEUR_BOUCLE - #TITLE
 <img src="http://static.flickr.com/#SERVER/[(#ID_PHOTO)]_[(#SECRET)]_m.jpg"/>

@@ -67,6 +67,9 @@ function FpipR_traiter_argument($key, $val){
   if(!$val) $val = '0';
   if($key == 'bbox')
    $val = str_replace(':',',',$val);
+  else if(strpos($key,'upload_date') !== false) {
+	return strtotime($val);
+  }
   return $val;
 }
 

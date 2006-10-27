@@ -102,16 +102,18 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 	$arguments['per_page'] = $pas>0?$pas:100;
 	$boucle->limit = NULL;
 
-	if(isset($boucle->order[0])) {
-	  list($sort,$desc) = split(' . ',str_replace("'",'',$boucle->order[0]));
+	if(is_array($boucle->order)) {
+	  for($i=0;$i<count($boucle->order);$i++) {
+	  list($sort,$desc) = split(' . ',str_replace("'",'',$boucle->order[$i]));
 	  if(in_array($sort,$possible_sort)) {
 		$sort = str_replace('_','-',$sort);
 		if($sort != 'relevance' && isset($desc)) 
 		  $sort .= '-desc';
 		else
 		  $sort .= '-asc';
-		$boucle->order = NULL;
+		$boucle->order[$i] = "'fpipr_photos.rang'";
 		$arguments['sort'] = "'".$sort."'";
+}
 	  }
 	}
 	
@@ -130,7 +132,6 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 		if(in_array($key,$possible_extras)) $extras[] = $key; 
 		else if($key == 'upload_date') $extras[] = 'date_upload';
 		else if($key == 'taken_date') $extras[] ='date_taken';
-		//TODO upload_date doit être en timestamp/1000
 		switch($w[0]) {
 		  case "'='":
 			if($key == 'taken_date' || $key == 'upload_date') {
