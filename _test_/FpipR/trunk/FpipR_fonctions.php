@@ -120,9 +120,12 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 
 	//on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
 	foreach($boucle->where as $w) {
+	if($w[0] == "'?'") {
+	  $w = $w[2];
+} 
 	  $key = str_replace("'",'',$w[1]);
-	  $key = str_replace("$id_table.",'',$key);
 	  $val = $w[2];
+	  $key = str_replace("$id_table.",'',$key);
 	  if (in_array($key,$possible_args)){
 		if(in_array($key,$possible_extras)) $extras[] = $key; 
 		else if($key == 'upload_date') $extras[] = 'date_upload';
