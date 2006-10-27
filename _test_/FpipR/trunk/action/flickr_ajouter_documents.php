@@ -77,8 +77,10 @@ function action_flickr_ajouter_documents() {
 			  }
 			}
 		  } else {
-			
-			spip_abstract_insert('spip_documents_'.$type.'s',"(id_$type,id_document)","($id,".$cnt['id_document'].')');
+		  $cnt =spip_abstract_fetsel(array('id_document,id_article'),array('spip_documents_'.$type.'s'),array("id_$type=$id","id_document=".$cnt['id_document']));
+		  if(!$cnt) {
+				spip_abstract_insert('spip_documents_'.$type.'s',"(id_$type,id_document)","($id,".$cnt['id_document'].')');
+}
 		  }
 		}
 	  }
