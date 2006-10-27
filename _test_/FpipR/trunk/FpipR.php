@@ -108,7 +108,7 @@ function FpipR_affiche_gauche($flux) {
 	  $to_ret .= '</div>';
 	  $to_ret .= '</div></div>';
 
-  $flux['data'] .= $to_ret;
+	  $flux['data'] .= $to_ret;
 
 	}
   }

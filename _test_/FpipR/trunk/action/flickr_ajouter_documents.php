@@ -77,18 +77,18 @@ function action_flickr_ajouter_documents() {
 			  }
 			}
 		  } else {
-		  $cnt =spip_abstract_fetsel(array('id_document,id_article'),array('spip_documents_'.$type.'s'),array("id_$type=$id","id_document=".$cnt['id_document']));
-		  if(!$cnt) {
-				spip_abstract_insert('spip_documents_'.$type.'s',"(id_$type,id_document)","($id,".$cnt['id_document'].')');
-}
+			$cnt =spip_abstract_fetsel(array('id_document,id_article'),array('spip_documents_'.$type.'s'),array("id_$type=$id","id_document=".$cnt['id_document']));
+			if(!$cnt) {
+			  spip_abstract_insert('spip_documents_'.$type.'s',"(id_$type,id_document)","($id,".$cnt['id_document'].')');
+			}
 		  }
 		}
 	  }
 
-	if(!$redirect) {
+	  if(!$redirect) {
 		$redirect = generer_url_ecrire($type.'s',"id_$type=$id",true);
-        }
-	  	  redirige_par_entete(urldecode($redirect));
+	  }
+	  redirige_par_entete(urldecode($redirect));
 	}
   }
 }

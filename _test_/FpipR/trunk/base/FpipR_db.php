@@ -21,37 +21,37 @@ $GLOBALS['tables_principales']['spip_auteurs']['field']['flickr_token'] = "TINYT
 
 // Boucle XML
 $GLOBALS['FpipR_tables']['spip_fpipr_photos_field'] = array(
-	"id_photo"  => "bigint(21) NOT NULL",
-	"user_id" => "varchar(100)", //"47058503995@N01" 
-	"secret"=> "varchar(100)", //"a123456"
-	"server"=> "int NOT NULL", //"2"
-	"title"	=> "text DEFAULT '' NOT NULL",
-	"ispublic"=> "ENUM ('0','1') NOT NULL",
-	"isfriend"=> "ENUM ('0','1') NOT NULL",
-	"isfamily"=> "ENUM ('0','1') NOT NULL",
-	"originalformat" => "char(4) DEFAULT 'jpg'",
-	"license" => "smallint", //http://flickr.com/services/api/flickr.photos.licenses.getInfo.html
-	"upload_date" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",	
-	"taken_date" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-	"owner_name" => "text DEFAULT '' NOT NULL",
-	"icon_server" => "int NOT NULL",
-	"last_update" => "INT",
-	"latitude" => "DOUBLE",
-	"longitude" => "DOUBLE",
-	"accuracy" => "smallint NOT NULL",
-	"rang" => "int"
-);
+															"id_photo"  => "bigint(21) NOT NULL",
+															"user_id" => "varchar(100)", //"47058503995@N01" 
+															"secret"=> "varchar(100)", //"a123456"
+															"server"=> "int NOT NULL", //"2"
+															"title"	=> "text DEFAULT '' NOT NULL",
+															"ispublic"=> "ENUM ('0','1') NOT NULL",
+															"isfriend"=> "ENUM ('0','1') NOT NULL",
+															"isfamily"=> "ENUM ('0','1') NOT NULL",
+															"originalformat" => "char(4) DEFAULT 'jpg'",
+															"license" => "smallint", //http://flickr.com/services/api/flickr.photos.licenses.getInfo.html
+															"upload_date" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",	
+															"taken_date" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+															"owner_name" => "text DEFAULT '' NOT NULL",
+															"icon_server" => "int NOT NULL",
+															"last_update" => "INT",
+															"latitude" => "DOUBLE",
+															"longitude" => "DOUBLE",
+															"accuracy" => "smallint NOT NULL",
+															"rang" => "int"
+															);
 
 $GLOBALS['FpipR_tables']['spip_fpipr_photos_key'] = array(
-	"PRIMARY KEY" => "id_photo",
-	"KEY" => "owner",
-	"KEY" => "rang"
-);
+														  "PRIMARY KEY" => "id_photo",
+														  "KEY" => "owner",
+														  "KEY" => "rang"
+														  );
 
 $GLOBALS['FpipR_versions']['spip_fpipr_photos'] = '0.1';
 
 $GLOBALS['tables_principales']['spip_fpipr_photos'] =
-	array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_photos_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_photos_key']);
+array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_photos_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_photos_key']);
 //les clefs pour trier, pas vraiment dans la table
 $GLOBALS['tables_principales']['spip_fpipr_photos']['field']['date_posted'];
 $GLOBALS['tables_principales']['spip_fpipr_photos']['field']['date_taken'];
@@ -62,31 +62,31 @@ $GLOBALS['tables_principales']['spip_fpipr_photos']['field']['relevance'];
 $GLOBALS['table_des_tables']['flickr_photos_search'] = 'fpipr_photos';
 
 function FpipR_creer_tables($method){
-	static $ok=NULL;
-	if ($ok==NULL){
-		$ok=true;
-		switch($method) {
-		  case 'flickr.photos.search':
-			$nom = 'spip_fpipr_photos';
-			break;
-		  default:
-		  return;
-		}
-		$field_n = $nom.'_field';
-		$key_n = $nom.'_key';
-		$champs = $GLOBALS['FpipR_tables'][$field_n];
-		$cles = $GLOBALS['FpipR_tables'][$key_n];
+  static $ok=NULL;
+  if ($ok==NULL){
+	$ok=true;
+	switch($method) {
+	  case 'flickr.photos.search':
+		$nom = 'spip_fpipr_photos';
+		break;
+	  default:
+		return;
+	}
+	$field_n = $nom.'_field';
+	$key_n = $nom.'_key';
+	$champs = $GLOBALS['FpipR_tables'][$field_n];
+	$cles = $GLOBALS['FpipR_tables'][$key_n];
 
 	$version_table = lire_meta("FpipR_$nom");
 
 	if($version_table && $version_table != $GLOBALS['FpipR_versions'][$nom]) {
-	   $version_table = '';
-	   spip_query("DROP TABLE $nom");
+	  $version_table = '';
+	  spip_query("DROP TABLE $nom");
 	}
 	spip_create_table($nom, $champs, $cles, false, false);		
 	ecrire_meta("FpipR_$nom",$GLOBALS['FpipR_versions'][$nom]);
 	ecrire_metas();
-	}
+  }
 }
 
 function FpipR_fill_table($method,$arguments){
@@ -114,8 +114,8 @@ function FpipR_fill_table($method,$arguments){
 	  }
 	  $query = "DELETE FROM spip_fpipr_photos";
 	  if($not_id) {
-		  $not_id = substr($not_id,1);
-		  $query .= " WHERE id_photo NOT IN ($not_id)";
+		$not_id = substr($not_id,1);
+		$query .= " WHERE id_photo NOT IN ($not_id)";
 	  }
 	  spip_query($query);
 	  break;

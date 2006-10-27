@@ -1,10 +1,10 @@
 <?php
 /*
-* BOUCLEs Flickr API
-* 
-* Auteur: Mortimer (Pierre Andrews)
-* (c) 2006 - Distribue sous license GNU/GPL
-*/
+ * BOUCLEs Flickr API
+ * 
+ * Auteur: Mortimer (Pierre Andrews)
+ * (c) 2006 - Distribue sous license GNU/GPL
+ */
 
 include_spip('base/FpipR_db');
 
@@ -50,60 +50,60 @@ license: V
 	<license id="5" name="Attribution-ShareAlike License"
 		url="http://creativecommons.org/licenses/by-sa/2.0/" /> 
 privacy_filter X
-    * 1 public photos
-    * 2 private photos visible to friends
-    * 3 private photos visible to family
-    * 4 private photos visible to friends & family
-    * 5 completely private photos
+* 1 public photos
+* 2 private photos visible to friends
+* 3 private photos visible to family
+* 4 private photos visible to friends & family
+* 5 completely private photos
 bbox min_lon:min_lat:max_lon:max_lat V
 accuracy V
-    * World level is 1
-    * Country is ~3
-    * Region is ~6
-    * City is ~11
-    * Street is ~16
+* World level is 1
+* Country is ~3
+* Region is ~6
+* City is ~11
+* Street is ~16
 */
 function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
-	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table;
-	$boucle->from[$id_table] =  "spip_fpipr_photos";
+  $boucle = &$boucles[$id_boucle];
+  $id_table = $boucle->id_table;
+  $boucle->from[$id_table] =  "spip_fpipr_photos";
 
-	$possible_args = array('user_id','license','upload_date','taken_date');
+  $possible_args = array('user_id','license','upload_date','taken_date');
 
-	$possible_criteres = array('tags','tag_mode','text','privacy_filter',
-					  'bbox','accuracy');
+  $possible_criteres = array('tags','tag_mode','text','privacy_filter',
+							 'bbox','accuracy');
 
-	$possible_extras = array('license, owner_name, icon_server, original_format, last_update');
+  $possible_extras = array('license, owner_name, icon_server, original_format, last_update');
 
-	$possible_sort = array('date_posted','date_taken','interestingness','relevance');
+  $possible_sort = array('date_posted','date_taken','interestingness','relevance');
 
-	$arguments = '';
+  $arguments = '';
 
 
-	//on regarde dans le contexte si les arguments possible sont dispo.
-/*	Foreach($possible_args as $key) {
+  //on regarde dans le contexte si les arguments possible sont dispo.
+  /*	Foreach($possible_args as $key) {
 		$champ = new Champ;
 		$champ->nom_champ = $key;
 		$arguments[$key] = calculer_liste(array($champ),array(), $boucles, $boucle->$id_boucle);
 	}*/
 
-	foreach($boucle->criteres as $crit) {
-	  if (in_array($crit->op,$possible_criteres)){
-		$val = !isset($crit->param[0]) ? "" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
-		$arguments[$crit->op] = $val;
-	  }
+  foreach($boucle->criteres as $crit) {
+	if (in_array($crit->op,$possible_criteres)){
+	  $val = !isset($crit->param[0]) ? "" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	  $arguments[$crit->op] = $val;
 	}
+  }
 
-	//on calcul le nombre de page d'apres {0,10}
-	list($debut,$pas) = split(',',$boucle->limit);
-	$page = $debut/$pas;
-	if($page <= 0) $page = 1;
-	$arguments['page'] = intval($page);
-	$arguments['per_page'] = $pas>0?$pas:100;
-	$boucle->limit = NULL;
+  //on calcul le nombre de page d'apres {0,10}
+  list($debut,$pas) = split(',',$boucle->limit);
+  $page = $debut/$pas;
+  if($page <= 0) $page = 1;
+  $arguments['page'] = intval($page);
+  $arguments['per_page'] = $pas>0?$pas:100;
+  $boucle->limit = NULL;
 
-	if(is_array($boucle->order)) {
-	  for($i=0;$i<count($boucle->order);$i++) {
+  if(is_array($boucle->order)) {
+	for($i=0;$i<count($boucle->order);$i++) {
 	  list($sort,$desc) = split(' . ',str_replace("'",'',$boucle->order[$i]));
 	  if(in_array($sort,$possible_sort)) {
 		$sort = str_replace('_','-',$sort);
@@ -113,67 +113,67 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 		  $sort .= '-asc';
 		$boucle->order[$i] = "'fpipr_photos.rang'";
 		$arguments['sort'] = "'".$sort."'";
-}
 	  }
 	}
+  }
 	
 
-	$extras = array();
+  $extras = array();
 
-	//on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
-	foreach($boucle->where as $w) {
+  //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
+  foreach($boucle->where as $w) {
 	if($w[0] == "'?'") {
 	  $w = $w[2];
-} 
-	  $key = str_replace("'",'',$w[1]);
-	  $val = $w[2];
-	  $key = str_replace("$id_table.",'',$key);
-	  if (in_array($key,$possible_args)){
-		if(in_array($key,$possible_extras)) $extras[] = $key; 
-		else if($key == 'upload_date') $extras[] = 'date_upload';
-		else if($key == 'taken_date') $extras[] ='date_taken';
-		switch($w[0]) {
-		  case "'='":
-			if($key == 'taken_date' || $key == 'upload_date') {
-			  $arguments['min_'.$key] = $val;
-			  $arguments['max_'.$key] = $val;
-			} else {
-			  $arguments[$key] = $val;
-			}
-			break;
-		  case "'<'":
-			if($key == 'taken_date' || $key == 'upload_date') {
-			  $arguments['max_'.$key] = $val;
-			}
-			break;
-		  case "'>'":
-			if($key == 'taken_date' || $key == 'upload_date') {
-			  $arguments['min_'.$key] = $val;
-			}
-			break;
-		}
-	  }
-	}
-	foreach($boucle->select as $w) {
-	  $key = str_replace("'",'',$w);
-	  $key = str_replace("$id_table.",'',$key);
+	} 
+	$key = str_replace("'",'',$w[1]);
+	$val = $w[2];
+	$key = str_replace("$id_table.",'',$key);
+	if (in_array($key,$possible_args)){
 	  if(in_array($key,$possible_extras)) $extras[] = $key; 
 	  else if($key == 'upload_date') $extras[] = 'date_upload';
 	  else if($key == 'taken_date') $extras[] ='date_taken';
-	  else if($key == 'longitude' || $key == 'latitude') $extras[] = 'geo';
+	  switch($w[0]) {
+		case "'='":
+		  if($key == 'taken_date' || $key == 'upload_date') {
+			$arguments['min_'.$key] = $val;
+			$arguments['max_'.$key] = $val;
+		  } else {
+			$arguments[$key] = $val;
+		  }
+		  break;
+		case "'<'":
+		  if($key == 'taken_date' || $key == 'upload_date') {
+			$arguments['max_'.$key] = $val;
+		  }
+		  break;
+		case "'>'":
+		  if($key == 'taken_date' || $key == 'upload_date') {
+			$arguments['min_'.$key] = $val;
+		  }
+		  break;
+	  }
 	}
-	$arguments['extras'] = "'".join(',',$extras)."'";
-	$boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
+  }
+  foreach($boucle->select as $w) {
+	$key = str_replace("'",'',$w);
+	$key = str_replace("$id_table.",'',$key);
+	if(in_array($key,$possible_extras)) $extras[] = $key; 
+	else if($key == 'upload_date') $extras[] = 'date_upload';
+	else if($key == 'taken_date') $extras[] ='date_taken';
+	else if($key == 'longitude' || $key == 'latitude') $extras[] = 'geo';
+  }
+  $arguments['extras'] = "'".join(',',$extras)."'";
+  $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
 \$arguments = '';\n";
-	$bbox = '';
-	foreach($arguments as $key => $val) {
-	  if($val) {
-	  	$boucle->hash .= "\$v=$val;\n";
-	  	$boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument('$key',\$v);\n";
-	  }}
+  $bbox = '';
+  foreach($arguments as $key => $val) {
+	if($val) {
+	  $boucle->hash .= "\$v=$val;\n";
+	  $boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument('$key',\$v);\n";
+	}}
 
-	$boucle->hash .= "FpipR_fill_table_boucle('flickr.photos.search',\$arguments);";
-	return calculer_boucle($id_boucle, $boucles); 
+  $boucle->hash .= "FpipR_fill_table_boucle('flickr.photos.search',\$arguments);";
+  return calculer_boucle($id_boucle, $boucles); 
 }
 
 

@@ -1,7 +1,7 @@
 <?php
 
 
-  //Attention, cette api_key est seulement pour les utilisations non commerciale. Si vous avez besoin d'utiliser ce plugin avec un site commercial, vous devrez demander votre propre clef (et secret) à Flickr.
+//Attention, cette api_key est seulement pour les utilisations non commerciale. Si vous avez besoin d'utiliser ce plugin avec un site commercial, vous devrez demander votre propre clef (et secret) à Flickr.
 $GLOBALS['FLICKR_API_KEY'] = "7356b4277d182c151e676903c064edec";
 $GLOBALS['FLICKR_SECRET'] = "8dd0abb691ff659d";
 
@@ -45,7 +45,7 @@ function flickr_check_error($resp) {
   if($resp['stat'] == 'ok') {
 	return $resp;
   } else if($resp['stat'] == 'fail') {
-	  spip_log('Flickr Error: '.$resp['message'].'('.$resp['code'].')');
+	spip_log('Flickr Error: '.$resp['message'].'('.$resp['code'].')');
 	return false;
   } else {
 	spip_log('cannot understand response');
@@ -158,7 +158,7 @@ class FlickrPhotoDetails {
   var $notes;
   var $urls;
   
-    /*
+  /*
    s	small square 75x75
    t	thumbnail, 100 on longest side
    m	small, 240 on longest side
@@ -219,7 +219,7 @@ class FlickrPhotoSet {
   var $title;
   var $description;
 
-    /*
+  /*
    s	small square 75x75
    t	thumbnail, 100 on longest side
    m	small, 240 on longest side
