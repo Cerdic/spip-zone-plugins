@@ -56,9 +56,9 @@ function balise_URL_DOCUMENT($p) {
 ***********************************************************************/
 
 /*Copie du plugin boucles_xml*/
-function FpipR_fill_table_temporaire_boucle($method,$arguments){
+function FpipR_fill_table_boucle($method,$arguments){
 	include_spip('base/FpipR_db');
-	FpipR_creer_tables_temporaires($method);
+	FpipR_creer_tables($method);
 	FpipR_fill_table($method,$arguments);
 }
 

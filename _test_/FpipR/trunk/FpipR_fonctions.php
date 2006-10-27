@@ -172,7 +172,7 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 	  	$boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument('$key',\$v);\n";
 	  }}
 
-	$boucle->hash .= "FpipR_fill_table_temporaire_boucle('flickr.photos.search',\$arguments);";
+	$boucle->hash .= "FpipR_fill_table_boucle('flickr.photos.search',\$arguments);";
 	return calculer_boucle($id_boucle, $boucles); 
 }
 

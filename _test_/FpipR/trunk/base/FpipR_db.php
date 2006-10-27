@@ -10,7 +10,7 @@
  *
  */
 
-// Definition des tables temporaires pour permettre la squeletisation de l'API Flickr
+// Definition des tables pour permettre la squeletisation de l'API Flickr
 //
 
 /*Les nouvelles colonne de l'auteur*/
@@ -20,7 +20,7 @@ $GLOBALS['tables_principales']['spip_auteurs']['field']['flickr_token'] = "TINYT
 
 
 // Boucle XML
-$GLOBALS['spip_fpipr_photos_field'] = array(
+$GLOBALS['FpipR_tables']['spip_fpipr_photos_field'] = array(
 	"id_photo"  => "bigint(21) NOT NULL",
 	"user_id" => "varchar(100)", //"47058503995@N01" 
 	"secret"=> "varchar(100)", //"a123456"
@@ -42,14 +42,16 @@ $GLOBALS['spip_fpipr_photos_field'] = array(
 	"rang" => "int"
 );
 
-$GLOBALS['spip_fpipr_photos_key'] = array(
+$GLOBALS['FpipR_tables']['spip_fpipr_photos_key'] = array(
 	"PRIMARY KEY" => "id_photo",
 	"KEY" => "owner",
 	"KEY" => "rang"
 );
 
+$GLOBALS['FpipR_versions']['spip_fpipr_photos'] = '0.1';
+
 $GLOBALS['tables_principales']['spip_fpipr_photos'] =
-	array('field' => &$GLOBALS['spip_fpipr_photos_field'], 'key' => &$GLOBALS['spip_fpipr_photos_key']);
+	array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_photos_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_photos_key']);
 //les clefs pour trier, pas vraiment dans la table
 $GLOBALS['tables_principales']['spip_fpipr_photos']['field']['date_posted'];
 $GLOBALS['tables_principales']['spip_fpipr_photos']['field']['date_taken'];
@@ -59,8 +61,7 @@ $GLOBALS['tables_principales']['spip_fpipr_photos']['field']['relevance'];
 //TODO vraiment pas sur de ce qu'il faut mettre la??
 $GLOBALS['table_des_tables']['flickr_photos_search'] = 'fpipr_photos';
 
-function FpipR_creer_tables_temporaires($method){
-	//TODO, elle n'est plus temporaire, verifier qu'on ne l'a pas deja cree.
+function FpipR_creer_tables($method){
 	static $ok=NULL;
 	if ($ok==NULL){
 		$ok=true;
@@ -73,9 +74,19 @@ function FpipR_creer_tables_temporaires($method){
 		}
 		$field_n = $nom.'_field';
 		$key_n = $nom.'_key';
-		$champs = $GLOBALS[$field_n];
-		$cles = $GLOBALS[$key_n];
-	spip_create_table($nom, $champs, $cles, false, false);		
+		$champs = $GLOBALS['FpipR_tables'][$field_n];
+		$cles = $GLOBALS['FpipR_tables'][$key_n];
+
+	$version_table = lire_meta("FpipR_$nom");
+	if($version_table && $version_table != $GLOBALS['FpipR_versions'][$nom]) {
+	   $version_table = NULL;
+	   spip_query("DROP TABLE $nom");
+	}
+        if($version_table == NULL) {
+		spip_create_table($nom, $champs, $cles, false, false);		
+		ecrire_meta("FpipR_$nom",$GLOBALS['FpipR_versions'][$nom]);
+		ecrire_metas();
+	}
 	}
 }
 
