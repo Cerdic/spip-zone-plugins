@@ -1,10 +1,16 @@
 #CACHE{24*3600}
 <html>
 <head>
+#INSERT_HEAD
 <title>
 BOUCLE Flickr
 </title>
+</head>
 <body>
+
+<INCLURE{fond=FpipRbox}>
+
+
 <h1>Photos on Flickr</h1>
 <BOUCLE_auteurs(AUTEURS) {flickr_nsid != ''}>
 <h2>#NOM</h2>
