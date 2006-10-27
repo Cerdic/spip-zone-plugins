@@ -47,49 +47,50 @@ function balise_FORMULAIRE_SPIPICIOUS_dyn($id_article,$page) {
   $id_groupe_tags = $groupe_tags['id_groupe'];
   $type_groupe_tags = $groupe_tags['titre'];
   
-  // action ?   
-  if ($tags && $auteur_id) {
+  // action ? 
+  if ($auteur_id) 
+      spip_query("DELETE FROM {$table_pref}_spipicious WHERE id_auteur='$auteur_id' AND id_article='$id_article' "); // on efface les anciens triplets de cet auteur sur cet article 
+    
+  if ($tags && $auteur_id) { 
+  
     $tableau_tags = explode(" ",$tags); 
     if (is_array($tableau_tags)) { 
-     foreach ($tableau_tags as $k=>$tag) {  
-  
-      // doit on creer un nouveau tag ? 
-      $tag = strtolower(trim($tag));  
-      $result = spip_query("SELECT id_mot FROM {$table_pref}_mots WHERE titre='$tag' AND id_groupe=$id_groupe_tags");
-      if (spip_num_rows($result) == 0) { // creation tag
-        $sql = "INSERT INTO {$table_pref}_mots (titre,id_groupe,type,idx) VALUES('".addslashes($tag)."',$id_groupe_tags,'oui','$type_groupe_tags')";  // FIXME a securiser + verifier encodage caractere
-        $result = spip_query($sql);
-        $id_tag = spip_insert_id();
-      } else {  // on recupere l'id du tag 
-        while($row=spip_fetch_array($result)){
-          $id_tag = $row['id_mot'];
+     $tag_analysed = array(); 
+     foreach ($tableau_tags as $k=>$tag) { 
+      $tag = strtolower(trim($tag));
+            
+      if ($tag!="" && !in_array($tag,$tag_analysed)) {   //  EXTRA verifier si ce tag n'est pas blackliste  
+        
+        // doit on creer un nouveau tag ?      
+        $result = spip_query("SELECT id_mot FROM {$table_pref}_mots WHERE titre='$tag' AND id_groupe=$id_groupe_tags");
+        if (spip_num_rows($result) == 0) { // creation tag
+          $sql = "INSERT INTO {$table_pref}_mots (titre,id_groupe,type,idx) VALUES('".addslashes($tag)."',$id_groupe_tags,'oui','$type_groupe_tags')";  // FIXME a securiser + verifier encodage caractere
+          $result = spip_query($sql);
+          $id_tag = spip_insert_id();
+        } else {  // on recupere l'id du tag 
+          while($row=spip_fetch_array($result)){
+            $id_tag = $row['id_mot'];
+          }
         }
+    
+        // on lie le mot au couple article (uniquement si pas deja fait)
+        $result = spip_query("SELECT id_mot FROM {$table_pref}_mots_articles WHERE id_mot=$id_tag AND id_article=$id_article");
+        if (spip_num_rows($result) == 0) {
+           spip_query("INSERT INTO {$table_pref}_mots_articles(id_mot,id_article) VALUES('$id_tag','$id_article')");     
+        }      
+      
+        // auteur identifie:  on enregistre le couple (mot / article / auteur) ds la table spipicious
+        // FIXME verifier si table installe      
+        spip_query("INSERT INTO {$table_pref}_spipicious(id_mot,id_auteur,id_article) VALUES('$id_tag','$auteur_id','$id_article')");     
       }
-    
-      // on lie le mot au couple article (uniquement si pas deja fait)
-      $result = spip_query("SELECT id_mot FROM {$table_pref}_mots_articles WHERE id_mot=$id_tag AND id_article=$id_article");
-      if (spip_num_rows($result) == 0) {
-         spip_query("INSERT INTO {$table_pref}_mots_articles(id_mot,id_article) VALUES('$id_tag','$id_article')");     
-      }      
-      
-      // auteur identifie:  on enregistre le couple (mot / article / auteur) ds la table spipicious
-      // FIXME verifier si table installe
-      // ajout uniquement si pas deja tague  ?
-      $result = spip_query("SELECT id_mot FROM {$table_pref}_spipicious WHERE id_mot='$id_tag' AND id_auteur='$auteur_id' AND id_article='$id_article' ");
-      $msg .="SELECT id_mot FROM {$table_pref}_spipicious WHERE id_mot='$id_tag' AND id_auteur='$auteur_id' AND id_article='$id_article'";
-      if (spip_num_rows($result) == 0) {
-              spip_query("INSERT INTO {$table_pref}_spipicious(id_mot,id_auteur,id_article) VALUES('$id_tag','$auteur_id','$id_article')"); 
-              $msg .="\nINSERT INTO {$table_pref}_spipicious(id_mot,id_auteur,id_article) VALUES('$id_tag','$auteur_id','$id_article')\n";
-       }
-     
-      
+      $tag_analysed[] = $tag;
      }
-    }
-    
+    }  
     
   }
-
-    
+  
+  spipicious_maintenance_nuage_article($id_article);  
+      
   // retour sur le formulaire  
   return array('formulaires/formulaire_spipicious', $GLOBALS['delais'],
 				   array('self' => $url,

@@ -42,10 +42,10 @@ function spipicious_header_prive($texte) {
 function spipicious_verifier_base() {
 		$info_plugin_spipicious = plugin_get_infos(_NOM_PLUGIN_SPIPICIOUS);
 		$version_plugin = $info_plugin_spipicious['version'];
-		if (!isset($GLOBALS['meta']['spip_spipicious_version'])) {
+		if (!isset($GLOBALS['meta']['spip_spipicious_version'])) {	
 			creer_base();
 			ecrire_meta('spip_spipicious_version', $version_plugin);
-			ecrire_metas();
+			ecrire_metas(); 
 		} else {
 			$version_base = $GLOBALS['meta']['spip_spipicious_version'];
 		}
@@ -82,4 +82,21 @@ function calcul_POPULARITE_TAG($id_mot,$id_article) {
   return spip_num_rows($result);
 
 } 
+
+//
+// Verifie le article est encore lie un tag (synchronisation spip_mots_articles et spip_spipicious)
+// 
+function spipicious_maintenance_nuage_article($id_article) {
+    $table_pref = 'spip';
+    if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
+    
+    $result = spip_query("SELECT id_mot FROM {$table_pref}_mots_articles WHERE id_article=$id_article");
+    while($row=spip_fetch_array($result)){
+      $current_id_mot = $row['id_mot'];
+      $result2 = spip_query("SELECT id_mot FROM {$table_pref}_spipicious WHERE id_article=$id_article AND id_mot=$current_id_mot LIMIT 1");
+      if (spip_num_rows($result2) == 0) {
+             spip_query("DELETE FROM {$table_pref}_mots_articles WHERE id_article=$id_article AND id_mot=$current_id_mot LIMIT 1");     
+      }
+    }      
+}
 ?>
