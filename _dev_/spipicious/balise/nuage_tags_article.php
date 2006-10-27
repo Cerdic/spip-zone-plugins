@@ -32,6 +32,7 @@ _request() cherche dans les valeurs post.
 */
 
 function balise_NUAGE_TAGS_ARTICLE_dyn($id_article,$page) {
+  include_spip('spipicious_fonctions');
   $groupe_tags = spipicious_get_idgroup_tags(); 
   $id_groupe_tags = $groupe_tags['id_groupe'];   // pour recuper ds squelette le groupe - tags - 
   

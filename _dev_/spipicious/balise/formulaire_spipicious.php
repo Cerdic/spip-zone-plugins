@@ -53,8 +53,7 @@ function balise_FORMULAIRE_SPIPICIOUS_dyn($id_article,$page) {
     
   if ($tags && $auteur_id) {     
     $tableau_tags = explode(" ",$tags); 
-    if (is_array($tableau_tags)) { 
-     //$tableau_tags = array_reverse($tableau_tags); 
+    if (is_array($tableau_tags)) {      
      $position = 0;
      $tag_analysed = array(); 
      foreach ($tableau_tags as $k=>$tag) { 
@@ -65,7 +64,7 @@ function balise_FORMULAIRE_SPIPICIOUS_dyn($id_article,$page) {
         // doit on creer un nouveau tag ?      
         $result = spip_query("SELECT id_mot FROM {$table_pref}_mots WHERE titre='$tag' AND id_groupe=$id_groupe_tags");
         if (spip_num_rows($result) == 0) { // creation tag
-          $sql = "INSERT INTO {$table_pref}_mots (titre,id_groupe,type,idx) VALUES(".spip_abstract_quote(corriger_caracteres($tag)).",$id_groupe_tags,'oui','$type_groupe_tags')"; // FIXME encodage caractère ?
+          $sql = "INSERT INTO {$table_pref}_mots (titre,id_groupe,type,idx) VALUES(".spip_abstract_quote(corriger_caracteres($tag)).",$id_groupe_tags,'$type_groupe_tags', 'oui')"; // FIXME encodage caractère ?
           $result = spip_query($sql);
           $id_tag = spip_insert_id();
         } else {  // on recupere l'id du tag 

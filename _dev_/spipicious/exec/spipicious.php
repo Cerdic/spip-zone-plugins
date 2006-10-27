@@ -28,7 +28,7 @@ function exec_spipicious() {
     $result = spip_query("SELECT id_groupe FROM `{$table_pref}_groupes_mots` WHERE titre = '- tags -'"); // creation du groupe de mots cles uniquement si n'existe pas
 		if (spip_num_rows($result) == 0) {
       spip_query("INSERT INTO {$table_pref}_groupes_mots (id_groupe, titre, descriptif, texte, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum , maj )
-                                           VALUES ('', '- tags -', '', '', 'non', 'non', 'oui', 'non', 'non', 'non', 'non', 'non', 'non', NOW( ));");
+                                                  VALUES ('',  '- tags -', '', '', '', '', 'oui', '', 'non', '', 'oui', 'non', 'non', NOW( ));");
     }   
     
     // Affichage 
