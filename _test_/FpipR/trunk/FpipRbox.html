@@ -6,14 +6,14 @@ Necessite le plugin splikrbox et d'etre inclus dans un squelette avec la balise 
 </div>
 
 			<B_flickr>
-			<table cellpadding="0" cellspacing="0"><tr>
-			<BOUCLE_flickr(FLCIKR_PHOTOS_SEARCH){tags spip}{!par date_taken}{0,12}>
+			<table cellpadding="0" cellspacing="0"><tr style="margin:0;padding:0;">
+			<BOUCLE_flickr(FLICKR_PHOTOS_SEARCH){tags spip}{!par date_taken}{0,12}>
 			<td class="image">
-			 <a href="http://static.flickr.com/#SERVER/[(#ID_PHOTO)]_[(#SECRET)]_m.jpg" rel="lightbox[diap]">
-<img src="http://static.flickr.com/#SERVER/[(#ID_PHOTO)]_[(#SECRET)]_t.jpg"/>			 
+			 <a href="http://www.flickr.com/photos/#USER_ID/#ID_PHOTO/" rel="lightbox[diap]">
+<img src="http://static.flickr.com/#SERVER/[(#ID_PHOTO)]_[(#SECRET)]_s.jpg" style="width:35px;height:35px;border:0;margin:0;"/>			 
 </a>
 			 </td>
-			[(#COMPTEUR_BOUCLE|alterner{'','',</tr><tr>})]
+			[(#COMPTEUR_BOUCLE|alterner{'','',</tr><tr style="margin:0;padding:0;">})]
 			</BOUCLE_flickr>
 			</tr></table>
 			</B_flickr>
