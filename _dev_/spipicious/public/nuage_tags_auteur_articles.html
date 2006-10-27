@@ -7,6 +7,6 @@
   <?php $last_item = 0; ?>
   <BOUCLE_tagAut(SPIPICIOUS){id_auteur}{par id_article}{inverse}><?php if ($last_item != '#ID_ARTICLE') { ?> 
         <BOUCLE_getTitreArt(ARTICLES){id_article}><a href="#URL_ARTICLE">#TITRE</a></BOUCLE_getTitreArt>
-        <:spipicious:to:> <BOUCLE_tagAutArt(SPIPICIOUS){id_auteur}{id_article}><BOUCLE_getArtAut(MOTS){id_mot}><a href="#URL_MOT">#TITRE</a></BOUCLE_getArtAut> </BOUCLE_tagAutArt><br />  
+        <:spipicious:to:> <BOUCLE_tagAutArt(SPIPICIOUS){id_auteur}{id_article}{par position}><BOUCLE_getArtAut(MOTS){id_mot}><a href="#URL_MOT">#TITRE</a></BOUCLE_getArtAut> </BOUCLE_tagAutArt><br />  
   <?php } $last_item = "#ID_ARTICLE"; ?></BOUCLE_tagAut>
 </div>

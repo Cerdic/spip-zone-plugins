@@ -48,13 +48,14 @@ function balise_FORMULAIRE_SPIPICIOUS_dyn($id_article,$page) {
   $type_groupe_tags = $groupe_tags['titre'];
   
   // action ? 
-  if ($auteur_id) 
+  if (_request('add_tags')&& $auteur_id) 
       spip_query("DELETE FROM {$table_pref}_spipicious WHERE id_auteur='$auteur_id' AND id_article='$id_article' "); // on efface les anciens triplets de cet auteur sur cet article 
     
-  if ($tags && $auteur_id) { 
-  
+  if ($tags && $auteur_id) {     
     $tableau_tags = explode(" ",$tags); 
     if (is_array($tableau_tags)) { 
+     //$tableau_tags = array_reverse($tableau_tags); 
+     $position = 0;
      $tag_analysed = array(); 
      foreach ($tableau_tags as $k=>$tag) { 
       $tag = strtolower(trim($tag));
@@ -81,7 +82,8 @@ function balise_FORMULAIRE_SPIPICIOUS_dyn($id_article,$page) {
       
         // auteur identifie:  on enregistre le couple (mot / article / auteur) ds la table spipicious
         // FIXME verifier si table installe      
-        spip_query("INSERT INTO {$table_pref}_spipicious(id_mot,id_auteur,id_article) VALUES('$id_tag','$auteur_id','$id_article')");     
+        spip_query("INSERT INTO {$table_pref}_spipicious(id_mot,id_auteur,id_article,position) VALUES('$id_tag','$auteur_id','$id_article','$position')");
+        $position++;     
       }
       $tag_analysed[] = $tag;
      }
