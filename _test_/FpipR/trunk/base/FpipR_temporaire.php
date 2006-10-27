@@ -99,7 +99,6 @@ function FpipR_fill_table($method,$arguments){
 	  foreach($photos->photos as $photo) {
 		$query = "REPLACE INTO spip_fpipr_photos (id_photo,user_id,secret,server,title,ispublic,isfriend,isfamily,originalformat,license,upload_date,taken_date,owner_name,icon_server,last_update,longitude,latitude,accuracy)";
 		$query .= " VALUES (".intval($photo->id).','.spip_abstract_quote($photo->owner).','.spip_abstract_quote($photo->secret).','.intval($photo->server).','.spip_abstract_quote($photo->title).','.intval($photo->idpublic).','.intval($photo->isfriend).','.intval($photo->isfamily).','.spip_abstract_quote($photo->originalformat).','.intval($photo->license).','.intval($photo->dateupload).','.spip_abstract_quote($photo->datetaken).','.spip_abstract_quote($photo->ownername).','.intval($photo->iconserver).','.intval($photo->lastupdate).','.floatval($photo->longitude).','.floatval($photo->latitude).','.intval($photo->accuracy).")";
-	var_dump($query);
 		spip_query($query);
 		$not_id .= ','.intval($photo->id);
 	  }
