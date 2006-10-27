@@ -57,7 +57,7 @@ function var2js( $var)
 	            return $ret ."]\n";
             }
     }
-    return false;
+    return 'null';
 }
 
 function action_widgets_html_dist() {
@@ -74,7 +74,7 @@ function action_widgets_html_dist() {
 	// Est-ce qu'on a recu des donnees ?
 	if (isset($_POST['widgets'])) {
 		$modifs = post_widgets();
-		$anamod = $anaupd = array();
+		$anamod = $anaupd = array();  # TODO: expliciter les noms de variables
 		if (!is_array($modifs)) {
 			$return['$erreur'] = _T('widgets:donnees_mal_formatees');
 		} else {
@@ -115,7 +115,7 @@ function action_widgets_html_dist() {
 					if (!isset($anaupd[$type]['ids'][$id])) {
 						$anaupd[$type]['ids'][$id] = array('wdg'=>array(), 'chval'=>array());
 					}
-					// pour réaffecter le retour d'erreur sql au cas où
+					// pour reaffecter le retour d'erreur sql au cas ou
 					$anaupd[$type]['ids'][$id]['wdg'][] = $wid;
 					$anaupd[$type]['ids'][$id]['chval'][$champtable] = $m[1];
 				}
@@ -125,16 +125,21 @@ function action_widgets_html_dist() {
 			$return['$erreur'] = _T('widgets:pas_de_modification');
 		}
 
-		// une quelquonque erreur ... ou rien ==> on ne fait rien !
+		// une quelconque erreur ... ou rien ==> on ne fait rien !
 		if ($return['$erreur']) {
-			return var2js($return);
+			echo var2js($return);
+			return;
 		}
 
+		// sinon on bosse
 		foreach($anaupd as $type => $idschamps) {
 			foreach($idschamps['ids'] as $id => $champsvaleurs) {
 
 				// Enregistrer dans la base
 				// $updok = ... quand on aura un retour
+
+				// TODO: compatibilite charset autre que utf8
+
 				$idschamps['fun']($id, false, $champsvaleurs['chval']);
 			}
 		}
@@ -235,9 +240,11 @@ function controleur_dist($regs) {
     <a class="widget-cancel" title="Cancel">
       <img src="{$widgetsImgPath}/cancel.png" width="20" height="20" />
     </a>
-    <!-- <a class="widget-hide">hide</a> -->
     <a href="ecrire/?exec=articles_edit&amp;id_article=$id"
-      class="widget-full">editer $type $id</a>
+    title="editer $type $id"
+    class="widget-full">
+      <img src="{$widgetsImgPath}/edit.png" width="20" height="20" />
+    </a>
   </div>
 </div>
 </form>

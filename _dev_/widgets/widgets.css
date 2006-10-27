@@ -13,27 +13,8 @@ img.widget-edit {
 .widget-autorise:hover, .widget-hover {
 	background-color: #f0f0f0;
 }
-.widgets_boutons {
+.widget-boutons {
 	float: right;
-	width: 200px;
-	display: none;
+	width: 75px;
 }
 
-/* a remplacer par des images picto + title */
-.widgets_boutons a,.widgets_boutons input {
-	border-top: 1px solid #CECECE;
-	border-bottom: 2px solid #4A4A4A;
-	border-left: 1px solid #CECECE;
-	border-right: 1px solid #CECECE;
-	margin: 1px;
-	padding: 1px;
-}
-
-.widgets_boutons a:hover,.widgets_boutons input:hover {
-	background-color: #fc3;
-	border-bottom: 2px solid #36F;
-}
-.widgets_boutons a:active,.widgets_boutons input:active {
-	background-color: #CCC;
-	border-bottom: 2px solid #f00;
-}
