@@ -184,10 +184,19 @@ EOF;
 	debut_boite_info();
 	
 	echo "<div class='intro_grotitre'>";
-	echo _T('habillages:squelettes_titre_boitinfo')."</div><br />";
+	echo gros_titre(_T('habillages:squelettes_titre_boitinfo'))."</div><br />";
 	
 	echo "<div class='intro'>";
-	echo _T('habillages:squelettes_intro')."<br /><br />";
+	
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/stable.png' />";
+	echo _T('habillages:squelettes_stable')."<br />";
+	
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/test.png' />";
+	echo _T('habillages:squelettes_test')."<br />";
+	
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/dev.png' />";
+	echo _T('habillages:squelettes_dev')."<br /><br />";
+	
 	
 	echo "<div class='intro_titre'>";
 	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/avance.png' />";
@@ -218,7 +227,7 @@ EOF;
 	echo _T('habillages:squelettes_titre')."</font></b></td></tr>";
 	echo "<tr><td class='serif' colspan=4>";	
 	echo generer_url_post_ecrire("habillages_squelettes");
-		
+	echo _T('habillages:squelettes_intro')."<br /><br />";
 		
 		lire_metas();
 		$squelettes = $GLOBALS['meta']['habillages_squelettes'];
@@ -246,11 +255,11 @@ EOF;
 		debut_boite_info();
 		echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
 		echo "<tr><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+		echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/stable.png' alt='Stable' />";
+		echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
 		echo "<input type='radio' name='statusplug' value='dist'$checked_dist>";
 		echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
 		echo _T('habillages:squelettes_dist_titre');
-		echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
-		echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/stable.png' alt='Stable' />";
 		echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
 		echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
 		echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_themes-22.png' />";
@@ -347,11 +356,12 @@ EOF;
 					debut_boite_info();
 					echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
 					echo "<tr><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+					echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";
+					echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
 					echo "<input type='radio' name='statusplug' value='$chemin_plugin_court'$checked>";
 					echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
 					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.") ";
 					echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
-					echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";
 
 					lire_metas();
 					$liste_themes = $GLOBALS['meta']['habillages_liste_themes'];
@@ -370,11 +380,10 @@ EOF;
 					echo "</table>";
 					# Laisser la possibilite de definir le nom et le chemin de la capure ecran
 					# dans theme.xml.
-					echo '<div style="float:right";>&nbsp;<br /><img src="'.$chemin_plugin_complet.'/capture.png" alt="" class="preview" /></div>';
+					echo '<div style="float:right";><img src="'.$chemin_plugin_complet.'/capture.png" alt="" class="preview" /></div>';
+					echo "<small><strong><font COLOR='#".$couleur_txt."'>".$titre_etat."</font></strong></small><br /><hr><br />";
 					echo "<small>".propre($description_theme)."</small><br /><br /><hr>";
 					echo "<div class='auteur'>".propre($auteur_theme)."</div><hr>";
-					echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";
-					echo "&nbsp;<small><strong><font COLOR='#".$couleur_txt."'>".$titre_etat."</font></strong></small><br />";
 					fin_boite_info();
 					echo "</ul>";
 				}
