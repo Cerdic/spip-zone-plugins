@@ -219,7 +219,6 @@ function flickr_afficher_articles_boucle($row, $langue_defaut, $voir_logo)
 	$vals[] = affdate_jourcourt($date);
 
 	$input .= '<input type="radio" name="id" value="'.$id_article.'"/>';
-	$input .= '<input type="hidden" name="redirect" value="'.generer_url_ecrire('articles',"id_article=$id_article",true).'"/>';
 
 	$vals[] = $input;
 

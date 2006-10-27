@@ -83,6 +83,9 @@ function action_flickr_ajouter_documents() {
 		}
 	  }
 
+	if(!$redirect) {
+		$redirect = generer_url_ecrire($type.'s',"id_$type=$id",true);
+        }
 	  	  redirige_par_entete(urldecode($redirect));
 	}
   }
