@@ -38,7 +38,7 @@ function balise_FORMULAIRE_SPIPICIOUS_dyn($id_article,$page) {
   $msg = "** testing **";
   
   //recuperation des variables utiles  
-  $tags = _request('tags');
+  $tags = strip_tags(_request('tags'));  // FIXME traitement encodage ? 
   //$id_article = _request('id_article');
   
   $table_pref = 'spip';
@@ -64,7 +64,7 @@ function balise_FORMULAIRE_SPIPICIOUS_dyn($id_article,$page) {
         // doit on creer un nouveau tag ?      
         $result = spip_query("SELECT id_mot FROM {$table_pref}_mots WHERE titre='$tag' AND id_groupe=$id_groupe_tags");
         if (spip_num_rows($result) == 0) { // creation tag
-          $sql = "INSERT INTO {$table_pref}_mots (titre,id_groupe,type,idx) VALUES('".addslashes($tag)."',$id_groupe_tags,'oui','$type_groupe_tags')";  // FIXME a securiser + verifier encodage caractere
+          $sql = "INSERT INTO {$table_pref}_mots (titre,id_groupe,type,idx) VALUES(".spip_abstract_quote(corriger_caracteres($tag)).",$id_groupe_tags,'oui','$type_groupe_tags')"; // FIXME encodage caractère ?
           $result = spip_query($sql);
           $id_tag = spip_insert_id();
         } else {  // on recupere l'id du tag 
