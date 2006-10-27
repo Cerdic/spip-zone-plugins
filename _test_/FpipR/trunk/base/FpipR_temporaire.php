@@ -20,7 +20,7 @@ $GLOBALS['tables_principales']['spip_auteurs']['field']['flickr_token'] = "TINYT
 
 
 // Boucle XML
-$fpipr_photos_field = array(
+$GLOBALS['spip_fpipr_photos_field'] = array(
 	"id_photo"  => "bigint(21) NOT NULL",
 	"user_id" => "varchar(100)", //"47058503995@N01" 
 	"secret"=> "varchar(100)", //"a123456"
@@ -30,18 +30,18 @@ $fpipr_photos_field = array(
 	"isfriend"=> "ENUM ('0','1') NOT NULL",
 	"isfamily"=> "ENUM ('0','1') NOT NULL",
 	"originalformat" => "char(4) DEFAULT 'jpg'",
-	"license" => "INT", //http://flickr.com/services/api/flickr.photos.licenses.getInfo.html
-	"upload_date" => "DATETIME", 
-	"taken_date" => "INT", 
+	"license" => "smallint", //http://flickr.com/services/api/flickr.photos.licenses.getInfo.html
+	"upload_date" => "INT", 
+	"taken_date" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 	"owner_name" => "text DEFAULT '' NOT NULL",
 	"icon_server" => "int NOT NULL",
 	"last_update" => "INT",
-	"latitude" => "FLOAT",
-	"longitude" => "FLOAT",
+	"latitude" => "DOUBLE",
+	"longitude" => "DOUBLE",
 	"accuracy" => "smallint NOT NULL"
 );
 
-$fpipr_photos_key = array(
+$GLOBALS['spip_fpipr_photos_key'] = array(
 	"PRIMARY KEY" => "id_photo",
 	"KEY" => "owner",
 	"KEY" => "ispublic",
@@ -50,7 +50,7 @@ $fpipr_photos_key = array(
 );
 
 $GLOBALS['tables_principales']['spip_fpipr_photos'] =
-	array('field' => &$fpipr_photos_field, 'key' => &$fpipr_photos_key);
+	array('field' => &$GLOBALS['spip_fpipr_photos_field'], 'key' => &$GLOBALS['spip_fpipr_photos_key']);
 //les clefs pour trier, pas vraiment dans la table
 $GLOBALS['tables_principales']['spip_fpipr_photos']['field']['date_posted'];
 $GLOBALS['tables_principales']['spip_fpipr_photos']['field']['date_taken'];
@@ -74,9 +74,9 @@ function FpipR_creer_tables_temporaires($method){
 		}
 		$field_n = $nom.'_field';
 		$key_n = $nom.'_key';
-		$champs = $$field_n;
-		$cles = $$key_n;
-		spip_create_table($nom, $champs, $cles, false, false);		
+		$champs = $GLOBALS[$field_n];
+		$cles = $GLOBALS[$key_n];
+	spip_create_table($nom, $champs, $cles, false, false);		
 	}
 }
 
@@ -99,6 +99,7 @@ function FpipR_fill_table($method,$arguments){
 	  foreach($photos->photos as $photo) {
 		$query = "REPLACE INTO spip_fpipr_photos (id_photo,user_id,secret,server,title,ispublic,isfriend,isfamily,originalformat,license,upload_date,taken_date,owner_name,icon_server,last_update,longitude,latitude,accuracy)";
 		$query .= " VALUES (".intval($photo->id).','.spip_abstract_quote($photo->owner).','.spip_abstract_quote($photo->secret).','.intval($photo->server).','.spip_abstract_quote($photo->title).','.intval($photo->idpublic).','.intval($photo->isfriend).','.intval($photo->isfamily).','.spip_abstract_quote($photo->originalformat).','.intval($photo->license).','.intval($photo->dateupload).','.spip_abstract_quote($photo->datetaken).','.spip_abstract_quote($photo->ownername).','.intval($photo->iconserver).','.intval($photo->lastupdate).','.floatval($photo->longitude).','.floatval($photo->latitude).','.intval($photo->accuracy).")";
+	var_dump($query);
 		spip_query($query);
 		$not_id .= ','.intval($photo->id);
 	  }

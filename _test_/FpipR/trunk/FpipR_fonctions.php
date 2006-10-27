@@ -129,7 +129,7 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 	  if (in_array($key,$possible_args)){
 		if(in_array($key,$possible_extras)) $extras[] = $key; 
 		else if($key == 'upload_date') $extras[] = 'date_upload';
-		else if($key == 'taken_date') $extras[] ='$date_taken';
+		else if($key == 'taken_date') $extras[] ='date_taken';
 		//TODO upload_date doit être en timestamp/1000
 		switch($w[0]) {
 		  case "'='":
@@ -142,12 +142,12 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 			break;
 		  case "'<'":
 			if($key == 'taken_date' || $key == 'upload_date') {
-			  $arguments['min_'.$key] = $val;
+			  $arguments['max_'.$key] = $val;
 			}
 			break;
 		  case "'>'":
 			if($key == 'taken_date' || $key == 'upload_date') {
-			  $arguments['max_'.$key] = $val;
+			  $arguments['min_'.$key] = $val;
 			}
 			break;
 		}
