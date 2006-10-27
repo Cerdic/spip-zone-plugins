@@ -6,7 +6,7 @@
 * (c) 2006 - Distribue sous license GNU/GPL
 */
 
-include_spip('base/FpipR_temporaire');
+include_spip('base/FpipR_db');
 
 function critere_tags($idb, &$boucles, $crit) {
 }
@@ -163,7 +163,7 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 	  else if($key == 'longitude' || $key == 'latitude') $extras[] = 'geo';
 	}
 	$arguments['extras'] = "'".join(',',$extras)."'";
-	$boucle->hash = "// CREER la table temporaire flickr_photos et la peupler avec le resultat de la query
+	$boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
 \$arguments = '';\n";
 	$bbox = '';
 	foreach($arguments as $key => $val) {
