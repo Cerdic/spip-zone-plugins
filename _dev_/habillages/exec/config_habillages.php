@@ -239,9 +239,11 @@ EOF;
 	
 	echo generer_url_post_ecrire("config_habillages");
 	debut_boite_info();
-	echo "<div style='background-color:$couleur_claire' class='titre_un'>";
+	echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
+	echo "<tr><td style='background-color:$couleur_claire' class='titre_un'>";
 	echo _T('habillages:manager_plugin');
-	echo "</div><br />";
+	echo "</td></tr>";
+	echo "</table>";
 	echo _T('habillages:intro_select_gestionnaire')."<br /><br />";
 	echo "<input type='checkbox' name='".$gestion_squelettes."' value='".$gestion_squelettes."'$checked_skel> "._T('habillages:squelettes_base_acc')."<br />";
 	echo "<ul>";

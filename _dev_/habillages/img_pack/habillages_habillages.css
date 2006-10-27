@@ -1,5 +1,5 @@
 IMG {
-behavior: url("win_png.htc");
+	behavior: url("win_png.htc");
 }
 
 .commentaires { 
@@ -38,7 +38,18 @@ behavior: url("win_png.htc");
 }
 
 .titre_un {
-	font-size: normal;
+	font-weight: bold;
 	height: 30px;
 	padding: 2px;
+	vertical-align: middle;
+}
+
+.habinput {
+	width: 1%;
+	vertical-align: middle;
+}
+
+
+#plaintab {
+	width: 100%;
 }

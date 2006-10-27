@@ -233,16 +233,32 @@ EOF;
 		
 		echo "<ul>";
 		debut_boite_info();
-		echo "<div style='background-color:$couleur_claire' class='titre_un'>";
+		echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
+		echo "<tr><td style='background-color:$couleur_claire' class='titre_un habinput'>";
 		echo "<input type='radio' name='statusplug' value='defaut'$checked_defaut>";
-		echo "<strong>"._T('habillages:squelettes_defaut_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+		echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
+		echo "<strong>"._T('habillages:squelettes_defaut_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
+		echo "</td></tr>";
+		echo "</table>";
 		echo "<small>"._T('habillages:squelettes_defaut_description')."</small><br /><br /><hr>";
 		fin_boite_info();
 		echo "<br />";
 		debut_boite_info();
-		echo "<div style='background-color:$couleur_claire' class='titre_un'>";
+		echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
+		echo "<tr><td style='background-color:$couleur_claire' class='titre_un habinput'>";
 		echo "<input type='radio' name='statusplug' value='dist'$checked_dist>";
-		echo "<strong>"._T('habillages:squelettes_dist_titre')."</strong><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/avance.png' /> | <img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_themes-22.png' /> | <img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_extras-22.png' /><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+		echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
+		echo _T('habillages:squelettes_dist_titre');
+		echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+		echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/stable.png' alt='Stable' />";
+		echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+		echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+		echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_themes-22.png' />";
+		echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+		echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_extras-22.png' />";
+		echo "<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
+		echo "</td></tr>";
+		echo "</table>";
 		echo '<div style="float:right";><img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/capture_dist_bw.png" alt="" class="preview" /></div>';
 		echo "<small>"._T('habillages:squelettes_dist_description')."</small><br /><br /><hr>";
 		echo "<div class='auteur'>Collectif.<br />&copy; 2001 - 2006 - Distribue sous licence GNU/GPL</div><hr>";
@@ -260,7 +276,7 @@ EOF;
 			$arbre = $arbre['theme'][0];
 			$nom_theme = applatit_arbre($arbre['nom']);
 			$auteur_theme = applatit_arbre($arbre['auteur']);
-			$etat_theme = applatit_arbre($arbre['etat']);
+			$etat_theme = trim(applatit_arbre($arbre['etat']));
 			$version_theme = applatit_arbre($arbre['version']);
 			$description_theme = applatit_arbre($arbre['description']);
 			$type_theme = trim(applatit_arbre($arbre['type']));
@@ -307,22 +323,51 @@ EOF;
 						$checked = "";
 					}
 					
-					debut_boite_info();
-					echo "<div style='background-color:$couleur_claire' class='titre_un'>";
-					echo "<input type='radio' name='statusplug' value='$chemin_plugin_court'$checked>";
-					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.") ";
+				if (isset($etat_theme))
+				$etat = $etat_theme;
+					switch ($etat) {
+						case 'experimental':
+							$couleur_txt = "CA2F2F";
+							$titre_etat = _T('habillages:plugin_etat_experimental');
+							break;
+						case 'test':
+							$couleur_txt = "E85600";
+							$titre_etat = _T('habillages:plugin_etat_test');
+							break;
+						case 'stable':
+							$couleur_txt = "149E06";
+							$titre_etat = _T('habillages:plugin_etat_stable');
+							break;
+						default:
+							$couleur_txt = "900B06";
+							$titre_etat = _T('habillages:plugin_etat_developpement');
+							break;
+					}
 					
+					debut_boite_info();
+					echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
+					echo "<tr><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+					echo "<input type='radio' name='statusplug' value='$chemin_plugin_court'$checked>";
+					echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
+					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.") ";
+					echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+					echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";
+
 					lire_metas();
 					$liste_themes = $GLOBALS['meta']['habillages_liste_themes'];
 					if (eregi($prefixe_theme, $liste_themes)) {
-						echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_themes-22.png' /> | ";
+						echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+						echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_themes-22.png' />";
 					}
 					$liste_extras = $GLOBALS['meta']['habillages_liste_extras'];
 					if (eregi($prefixe_theme, $liste_extras)) {
-						echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_extras-22.png' /> | ";
+						echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+						echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_extras-22.png' />";
 					}
 					
-					echo $niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label></div>";
+					echo $niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
+					echo "</td></tr>";
+					echo "</table>";
 					# Laisser la possibilite de definir le nom et le chemin de la capure ecran
 					# dans theme.xml.
 					echo '<div style="float:right";>&nbsp;<br /><img src="'.$chemin_plugin_complet.'/capture.png" alt="" class="preview" /></div>';
