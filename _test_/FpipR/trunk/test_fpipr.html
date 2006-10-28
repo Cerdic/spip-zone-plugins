@@ -18,12 +18,23 @@ NSID Flickr: #FLICKR_NSID
 <ul>
 <BOUCLE_photos(FLICKR_PHOTOS_SEARCH) {user_id=#FLICKR_NSID} {"<br/>"} {!par date_posted} {0,10} {taken_date > 2006-09-01 00:00:00}>
 <li>
-#COMPTEUR_BOUCLE - #TITLE
+#TITLE
 <a href="#URL_PHOTO">#LOGO_PHOTO{s}</a>
 <a href="#URL_OWNER">#LOGO_OWNER</a>
+<BOUCLE_details(FLICKR_PHOTOS_GETINFO) {id_photo} {secret}>
+<BOUCLE_tags(FLICKR_PHOTO_TAGS) {id_photo}{','}>
+  #RAW
+</BOUCLE_tags>
+<br/>
+<BOUCLE_urls(FLICKR_PHOTO_URLS) {id_photo}{','}>
+  #TYPE:#URL
+</BOUCLE_urls>
+<br/>
+<BOUCLE_notes(FLICKR_PHOTO_NOTES) {id_photo}{"<br/>"}>
+  #X,#Y: #TEXTE
+</BOUCLE_notes>
+</BOUCLE_details>
 
-#LONGITUDE,#LATITUDE
-[(#LAST_UPDATE|affdate)]
 </li>
 </BOUCLE_photos>
 </ul>
@@ -33,6 +44,8 @@ NSID Flickr: #FLICKR_NSID
 pas de photos
 </div>
 <//B_photos>
+
+
 
 </hr>
 </BOUCLE_auteurs>

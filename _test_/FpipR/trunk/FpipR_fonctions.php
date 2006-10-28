@@ -211,6 +211,62 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
   return calculer_boucle($id_boucle, $boucles); 
 }
 
+function boucle_FLICKR_PHOTOS_GETINFO_dist($id_boucle, &$boucles) {
+  $boucle = &$boucles[$id_boucle];
+  $id_table = $boucle->id_table;
+  $boucle->from[$id_table] =  "spip_fpipr_photo_details";
+
+  $possible_args = array('id_photo','secret');
+
+  $arguments = '';
+  //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
+  foreach($boucle->where as $w) {
+	if($w[0] == "'?'") {
+	  $w = $w[2];
+	} 
+	$key = str_replace("'",'',$w[1]);
+	$val = $w[2];
+	$key = str_replace("$id_table.",'',$key);
+	if (in_array($key,$possible_args)){
+	  $arguments[$key] = $val;
+	}
+  }
+  $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
+	  \$arguments = '';\n";
+  foreach($arguments as $key => $val) {
+	if($val) {
+	  $boucle->hash .= "\$v=$val;\n";
+	  $boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument('$key',\$v);\n";
+	}}
+
+  $boucle->hash .= "FpipR_fill_table_boucle('flickr.photos.getInfo',\$arguments);";
+  return calculer_boucle($id_boucle, $boucles); 
+}
+
+
+function boucle_FLICKR_PHOTO_TAGS_dist($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$boucle->from[$id_table] =  "spip_fpipr_tags";
+
+	return calculer_boucle($id_boucle, $boucles); 
+}
+
+function boucle_FLICKR_PHOTO_NOTES_dist($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$boucle->from[$id_table] =  "spip_fpipr_notes";
+
+	return calculer_boucle($id_boucle, $boucles); 
+}
+
+function boucle_FLICKR_PHOTO_URLS_dist($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$boucle->from[$id_table] =  "spip_fpipr_urls";
+
+	return calculer_boucle($id_boucle, $boucles); 
+}
 
 
 ?>

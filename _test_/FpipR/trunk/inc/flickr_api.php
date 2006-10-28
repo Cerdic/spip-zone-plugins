@@ -146,9 +146,9 @@ class FlickrPhotoDetails {
   var $owner_location;
   var $title;
   var $description;
-  var $ispublic;
-  var $isfriend;
-  var $isfamily;
+  var $visibility_ispublic;
+  var $visibility_isfriend;
+  var $visibility_isfamily;
   var $date_posted;
   var $date_taken;
   var $date_takengranularity;
@@ -157,6 +157,10 @@ class FlickrPhotoDetails {
   var $tags;
   var $notes;
   var $urls;
+
+  var $location_latitude;
+  var $location_longitude;
+  var $location_accuracy;
   
   /*
    s	small square 75x75
@@ -368,7 +372,7 @@ function flickr_photosets_getPhotos($photoset_id,$extras='',$privacy_filter='',$
 
 }
 
-function flickr_photos_getInfo($photo_id,$secret,$auth_token='') {
+function flickr_photos_getInfo($photo_id,$secret='',$auth_token='') {
   $params = array('photo_id'=>$photo_id,'secret'=>$secret);
 
   $photo =  flickr_check_error(flickr_api_call('flickr.photos.getInfo',$params,$auth_token));
@@ -392,9 +396,11 @@ function flickr_photos_getInfo($photo_id,$secret,$auth_token='') {
 		  $resp->urls[$urldata['type']] = $urldata['_content'];
 	  } else if ($key == 'dates'){
 		foreach($value as $attr => $content) {
-		  $k = $attr.'date';
+		  $k = 'date_'.$attr;
 		  $resp->$k = $content;
 		}
+	  } else if ($key == 'title' || $key == 'description' || $key == 'comments'){
+		$resp->$key = $value['_content'];
 	  } else if(is_array($value)) {
 		foreach($value as $attr => $content) {
 		  if(is_array($content)) 
