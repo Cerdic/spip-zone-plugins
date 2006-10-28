@@ -28,6 +28,41 @@ function critere_accuracy($idb, &$boucles, $crit) {
 }
 
 
+function balise_URL_PHOTO($p) {
+  $user_id = champ_sql('user_id',$p);
+  $id_photo = champ_sql('id_photo',$p);
+  $p->code = "'http://www.flickr.com/photos/'.$user_id.'/'.$id_photo.'/'";
+  return $p;
+}
+
+
+function balise_URL_OWNER($p) {
+  $user_id = champ_sql('user_id',$p);
+  $p->code = "'http://www.flickr.com/photos/'.$user_id.'/'";
+  return $p;
+}
+
+function balise_LOGO_PHOTO($p) {
+  $server = champ_sql('server',$p);
+  $id_photo = champ_sql('id_photo',$p);
+  $secret = champ_sql('secret',$p);
+  $originalformat = champ_sql('originalformat',$p);
+  $taille =  calculer_liste($p->param[0][1],
+									$p->descr,
+									$p->boucles,
+									$p->id_boucle);
+  $p->code = "FpipR_logo_photo($id_photo,$server,$secret,$taille,$originalformat)";	
+  return $p;
+}
+
+function balise_LOGO_OWNER($p) {
+  $user_id = champ_sql('user_id',$p);
+  $server = champ_sql('icon_server',$p);
+  $p->code = "FpipR_logo_owner($user_id,$server)";	
+  return $p;
+}
+
+
 /** boucle FLICKR_PHOTOS_SEARCH
  Voir la doc de l'API: http://flickr.com/services/api/flickr.photos.search.html
  user_id V
@@ -175,6 +210,7 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
   $boucle->hash .= "FpipR_fill_table_boucle('flickr.photos.search',\$arguments);";
   return calculer_boucle($id_boucle, $boucles); 
 }
+
 
 
 ?>

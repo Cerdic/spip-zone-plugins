@@ -74,4 +74,18 @@ function FpipR_traiter_argument($key, $val){
 }
 
 
+function FpipR_logo_owner($user_id,$server = '') {
+  $url = 'http://www.flickr.com/images/buddyicon.jpg';
+  if($server) {
+	$url ="http://static.flickr.com/$server/buddyicons/$user_id.jpg";
+  }
+  return '<img src="'.$url.'" width="48" height="48"/>';
+}
+
+
+function FpipR_logo_photo($id_photo,$server,$secret,$taille='',$originalformat) {
+	return '<img src="http://static.flickr.com/'.$server."/".$id_photo."_".$secret.($taille?"_$taille":'').'.'.(($taille=='o')?$originalformat:'jpg').'"/>';
+}
+
+
 ?>

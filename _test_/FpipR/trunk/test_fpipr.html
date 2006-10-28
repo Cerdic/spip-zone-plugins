@@ -8,9 +8,6 @@ BOUCLE Flickr
 </head>
 <body>
 
-[(#REM)[(#MODELE{fpiprbox}{user_id}{tags})]]
-
-
 <h1>Photos on Flickr</h1>
 <BOUCLE_auteurs(AUTEURS) {flickr_nsid != ''}>
 <h2>#NOM</h2>
@@ -22,9 +19,11 @@ NSID Flickr: #FLICKR_NSID
 <BOUCLE_photos(FLICKR_PHOTOS_SEARCH) {user_id=#FLICKR_NSID} {"<br/>"} {!par date_posted} {0,10} {taken_date > 2006-09-01 00:00:00}>
 <li>
 #COMPTEUR_BOUCLE - #TITLE
-<img src="http://static.flickr.com/#SERVER/[(#ID_PHOTO)]_[(#SECRET)]_m.jpg"/>
+<a href="#URL_PHOTO">#LOGO_PHOTO{s}</a>
+<a href="#URL_OWNER">#LOGO_OWNER</a>
+
 #LONGITUDE,#LATITUDE
-#LAST_UPDATE
+[(#LAST_UPDATE|affdate)]
 </li>
 </BOUCLE_photos>
 </ul>

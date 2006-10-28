@@ -24,6 +24,8 @@ On peut utiliser cette fonction pour faire un article à propos d'une photo, ou d
 2- suivez les instructions pour vous identifier sur Flickr
 3- vous pouvez ensuite aller sur un de vos articles/rubriques et cliquer sur le liens dans la colonne de gauche pour choisir des images de flickr.
 
+----------------
+
 {{{Ajout de nouvelles Boucles}}}
 
 Depuis la version 0.2, le plugin offre la possibilité d'acceder aux methodes de l'API flickr (voir http://www.flickr.com/services/api) à travers le système de BOUCLE de SPIP.
@@ -69,22 +71,45 @@ Les criteres suivant peuvent être specifié pour les tri:
 
 {{Balises}}
 
-#ID_PHOTO
-#USER_ID
-#SECRET
-#SERVER
-#TITLE
-#ISPUBLIC
-#ISFRIEND
-#ISFAMILY
-#ORIGINALFORMAT
-#LICENSE
-#UPLOAD_DATE
-#TAKEN_DATE
-#ONWER_NAME
-#ICON_SERVER
-#LAST_UPDATE
-#LONGITUDE
+#ID_PHOTO id de la photo
+#USER_ID nsid de l'utilisateur
+#SECRET secret de la photo pour construire l'url et obtenir plus d'info
+#SERVER le server où la photo se trouve
+#TITLE le titre de la photo
+#ISPUBLIC 1 si la photo est publique, 0 sinon
+#ISFRIEND 1 si la photo est accessible aux amis, 0 sinon
+#ISFAMILY 1 si la photo est accessible à la famille, 0 sinon
+#ORIGINALFORMAT l'extension du fichier original
+#LICENSE la license (voir les valeurs là http://www.flickr.com/services/api/flickr.photos.licenses.getInfo.html)
+#UPLOAD_DATE quand la photo a été postée sur Flickr
+#TAKEN_DATE quand la photo a été prise, si dispo dans les infos EXIF
+#ONWER_NAME le nom de l'utilisateur
+#ICON_SERVER le serveur où trouver l'icone de l'utilisateur
+#LAST_UPDATE date de derniere modification des donnees de la photo
+#LONGITUDE 
 #LATITUDE
-#ACCURACY
+#ACCURACY la precision de l'info geographique:
+    * 1 niveau global
+    * ~3 niveau d'un pays
+    * ~6 niveau d'une region
+    * ~11 niveau d'une ville
+    * ~16 niveau de la rue
+
+{{Balises Calculées}}
+
+(c.f. http://www.flickr.com/services/api/misc.urls.html
+et http://www.flickr.com/services/api/misc.buddyicons.html)
+
+#URL_PHOTO l'url de la photo
+#URL_OWNER l'url du photographe
+#LOGO_PHOTO retourne l'image taille moyenne (500px sur le côté le plus long), sauf si on lui passe un parametre:
+s	petit carre 75x75
+t	vignette, 100px sur le côté le plus long 
+m	petite, 240px sur le côté le plus long 
+b	large, 1024px sur le côté le plus long (seulement si o est tres large)
+o	image originale, jpg, png ou gif en fonction de #ORIGINALFORMAT
+#LOGO_OWNER le logo du photographe
+
+-------------
+
 
