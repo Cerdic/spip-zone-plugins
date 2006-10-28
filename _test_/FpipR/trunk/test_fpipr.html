@@ -13,37 +13,12 @@ BOUCLE Flickr
 <h2>#NOM</h2>
 NSID Flickr: #FLICKR_NSID
 
-<B_photos>
-<div>
-<ul>
-<BOUCLE_photos(FLICKR_PHOTOS_SEARCH) {user_id=#FLICKR_NSID} {"<br/>"} {!par date_posted} {0,10} {taken_date > 2006-09-01 00:00:00}>
-<li>
+<BOUCLE_sets(FLICKR_PHOTOSETS_GETLIST) {user_id=#FLICKR_NSID}{"<hr/>"}>
 #TITLE
-<a href="#URL_PHOTO">#LOGO_PHOTO{s}</a>
-<a href="#URL_OWNER">#LOGO_OWNER</a>
-<BOUCLE_details(FLICKR_PHOTOS_GETINFO) {id_photo} {secret}>
-<BOUCLE_tags(FLICKR_PHOTO_TAGS) {id_photo}{','}>
-  #RAW
-</BOUCLE_tags>
 <br/>
-<BOUCLE_urls(FLICKR_PHOTO_URLS) {id_photo}{','}>
-  #TYPE:#URL
-</BOUCLE_urls>
-<br/>
-<BOUCLE_notes(FLICKR_PHOTO_NOTES) {id_photo}{"<br/>"}>
-  #X,#Y: #TEXTE
-</BOUCLE_notes>
-</BOUCLE_details>
-
-</li>
-</BOUCLE_photos>
-</ul>
-</div>
-</B_photos>
-<div>
-pas de photos
-</div>
-<//B_photos>
+#DESCRIPTION
+#LOGO_PHOTOSET{s}
+</BOUCLE_sets>
 
 
 

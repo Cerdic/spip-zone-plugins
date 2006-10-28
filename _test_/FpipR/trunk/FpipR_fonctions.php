@@ -211,6 +211,8 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
   return calculer_boucle($id_boucle, $boucles); 
 }
 
+//======================================================================
+
 function boucle_FLICKR_PHOTOS_GETINFO_dist($id_boucle, &$boucles) {
   $boucle = &$boucles[$id_boucle];
   $id_table = $boucle->id_table;
@@ -268,5 +270,50 @@ function boucle_FLICKR_PHOTO_URLS_dist($id_boucle, &$boucles) {
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
+//======================================================================
+
+function balise_LOGO_PHOTOSET($p) {
+  $server = champ_sql('server',$p);
+  $id_photo = champ_sql('primary_photo',$p);
+  $secret = champ_sql('secret',$p);
+  $taille =  calculer_liste($p->param[0][1],
+									$p->descr,
+									$p->boucles,
+									$p->id_boucle);
+  $p->code = "FpipR_logo_photo($id_photo,$server,$secret,$taille,'jpg')";	
+  return $p;
+}
+
+function boucle_FLICKR_PHOTOSETS_GETLIST_dist($id_boucle,&$boucles) {
+  $boucle = &$boucles[$id_boucle];
+  $id_table = $boucle->id_table;
+  $boucle->from[$id_table] =  "spip_fpipr_photosets";
+
+  $possible_args = array('user_id');
+
+  $arguments = '';
+  //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
+  foreach($boucle->where as $w) {
+	if($w[0] == "'?'") {
+	  $w = $w[2];
+	} 
+	$key = str_replace("'",'',$w[1]);
+	$val = $w[2];
+	$key = str_replace("$id_table.",'',$key);
+	if (in_array($key,$possible_args)){
+	  $arguments[$key] = $val;
+	}
+  }
+  $boucle->hash = "// CREER la table flickr_photosets et la peupler avec le resultat de la query
+	  \$arguments = '';\n";
+  foreach($arguments as $key => $val) {
+	if($val) {
+	  $boucle->hash .= "\$v=$val;\n";
+	  $boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument('$key',\$v);\n";
+	}}
+
+  $boucle->hash .= "FpipR_fill_table_boucle('flickr.photosets.getList',\$arguments);";
+  return calculer_boucle($id_boucle, $boucles); 
+}
 
 ?>
