@@ -1,4 +1,4 @@
-###  README --- 
+###  LISEZMOI --- 
 ## Copyright 2006 Pierre Andrews
 ##
 ## Author: mortimer.pa@free.fr
@@ -27,7 +27,7 @@ On peut utiliser cette fonction pour faire un article à propos d'une photo, ou d
 == Telechargement ==
 
 la version 0.1 est dispo en '''TEST''' ici:
-http://trac.rezo.net/files/spip-zone/FpipR.zip
+http://trac.rezo.net/files/spip-zone/FpipR_1_9_1.zip
 
 ----------------
 
@@ -39,9 +39,9 @@ On peut ainsi faire ses propres squelettes pour faire des diaporamas Flickr, etc
 
 == Telechargement ==
 
-la version 0.2 est en '''DEV''' et disponible sur le svn de la zone:
+la version 0.2 est en '''TEST''' et disponible sur la zone (Ne fonctionne qu'avec la SVN de SPIP):
+http://trac.rezo.net/files/spip-zone/FpipR_svn.zip
 
-http://trac.rezo.net/trac/spip-zone/browser/_plugins_/_test_/FpipR/trunk
 
 == Boucles '''AUTEURS''' ==
 
@@ -106,7 +106,7 @@ Les criteres suivant peuvent être specifié pour les tri:
     * ~11 niveau d'une ville
     * ~16 niveau de la rue
 
-''' Balises Calculées''' 
+=== Balises Calculées ===
 
 (c.f. http://www.flickr.com/services/api/misc.urls.html
 et http://www.flickr.com/services/api/misc.buddyicons.html)
@@ -120,6 +120,160 @@ et http://www.flickr.com/services/api/misc.buddyicons.html)
     * b	large, 1024px sur le côté le plus long (seulement si o est tres large)
     * o	image originale, jpg, png ou gif en fonction de #ORIGINALFORMAT
  * {{{ #LOGO_OWNER }}} le logo du photographe
+
+== Boucle FLICKR_PHOTOS_GETINFO ==
+
+retourne des informations complementaires sur une photo.
+(voir: http://www.flickr.com/services/api/flickr.photos.getInfo.html)
+
+== Criteres ==
+
+ * On doit absolument specifier le critere {{{ {id_photo} }}}
+ * On peut aussi specifier le critere {{{ {secret} }}}
+
+== Balises ==
+
+ * {{{ #ID_PHOTO }}}
+ * {{{ #SECRET }}}
+ * {{{ #SERVER }}}
+ * {{{ #ISFAVORITE }}}
+ * {{{ #LICENSE }}}
+ * {{{ #ROTATION }}} la rotation effectue automatiquement sur l'image
+ * {{{ #ORIGINALFORMAT }}}
+ * {{{ #USER_ID }}}
+ * {{{ #OWNER_USERNAME }}} le username flickr du photographe
+ * {{{ #OWNER_REALNAME }}} le nom réel du photographe
+ * {{{ #OWNER_LOCATION }}} où le photographe vit
+ * {{{ #TITLE }}}
+ * {{{ #DESCRIPTION }}}
+ * {{{ #ISPUBLIC }}}
+ * {{{ #ISFRIEND }}}
+ * {{{ #ISFAMILY }}}
+ * {{{ #DATE_POSTED }}}
+ * {{{ #DATE_TAKEN }}}
+ * {{{ #DATE_LASTUPDATE }}}
+ * {{{ #COMMENTS }}} Le nombre de commentaires sur la photo
+ * {{{ #LATITUDE }}}
+ * {{{ #LONGITUDE }}}
+ * {{{ #ACCURACY }}}
+
+
+=== Balises Calculées ===
+
+identiques à la boucle precedente
+
+== Boucle FLICKR_PHOTO_TAGS ==
+
+CETTE BOUCLE N'EST DISPONIBLE QUE DANS UNE BOUCLE FLICKR_PHOTOS_GETINFO
+
+Retourne la liste de tag d'une photo
+
+=== Critere ===
+
+pas de criteres specifique
+
+=== Balises ===
+
+ * {{{ #ID_TAG }}}
+ * {{{ #AUTHOR }}} le nsid de l'auteur qui a ajouté le tag sur la photo
+ * {{{ #RAW }}} la version normale du tag (avec espace, caractères speciaux etc.)
+ * {{{ #SAFE }}} une version "sûre" du tag, qu'on peut utiliser dans des urls, etc.
+ * {{{ #ID_PHOTO }}}
+
+== Boucle FLICKR_PHOTO_NOTES ==
+
+CETTE BOUCLE N'EST DISPONIBLE QUE DANS UNE BOUCLE FLICKR_PHOTOS_GETINFO
+
+Retourne la liste des notes sur une photo
+
+=== Critere ===
+
+pas de criteres specifique
+
+=== Balises ===
+
+ * {{{ #ID_NOTE }}}
+ * {{{ #AUTHOR }}} le nsid de l'auteur qui a ajouté la note sur la photo
+ * {{{ #AUTHOR_NAME }}} le username de l'auteur qui a ajouté la note sur la photo
+ * {{{ #X #Y }}} les coordonnées du coint en haut à gauche
+ * {{{ #WIDTH #HEIGHT }}} Les dimensions de la not
+ * {{{ #TEXTE }}} le texte de la note
+ * {{{ #ID_PHOTO }}}
+
+== Boucle FLICKR_PHOTO_URLS ==
+
+CETTE BOUCLE N'EST DISPONIBLE QUE DANS UNE BOUCLE FLICKR_PHOTOS_GETINFO
+
+Retourne la liste des urls d'une photo
+
+=== Critere ===
+
+pas de criteres specifique
+
+=== Balises ===
+
+ * {{{ #TYPE }}} le type de l'url
+ * {{{ #URL }}} l'url
+ * {{{ #ID_PHOTO }}}
+
+
+== Boucle FLICKR_PHOTOSETS_GETLIST ==
+
+Retourne la liste des sets d'un utilisateur
+
+=== Critere ===
+
+ * {{{ {user_id} }}} l'identifiant flickr (nsid) de l'utilisateur
+
+=== Balises ===
+
+ * {{{ #ID_PHOTOSET }}}
+ * {{{ #USER_ID }}} le nsid de l'auteur qui a ajouté le tag sur la photo
+ * {{{ #PRIMARY_PHOTO }}} l'id de la photo illustrant le set
+ * {{{ #SECRET }}} le secret de cette photo
+ * {{{ #SERVER }}} le serveur de cette photo
+ * {{{ #PHOTOS }}} le nombre de photos dans le set
+ * {{{ #TITLE }}}
+ * {{{ #DESCRIPTION }}}
+
+=== Balises calculées ===
+
+ * {{{ #LOGO_PHOTOSET }}} le logo du photoset (la "primary" image, prend les mm paramètre que la balise {{{ #LOGO_PHOTO }}} sauf 'o')
+ * {{{ #URL_PHOTOSET }}} 
+
+== Boucle FLICKR_PHOTOSETS_GETPHOTOS == 
+
+retourne les photos dans un set
+
+=== Criteres ===
+
+ * {{{ {id_photoset} }}} l'id du photoset
+ * {{{ {privacy_filter} }}} pas testé
+
+=== Balises ===
+
+un sous set des balises de FLICKR_PHOTOS_SEARCH, mais on peut imbriquer une boucle FLICKR_PHOTOS_GETINFO à l'interieur pour avoir plus de details.
+
+ * {{{ #ID_PHOTO }}}
+ * {{{ #SECRET }}}
+ * {{{ #SERVER }}}
+ * {{{ #LICENSE }}}
+ * {{{ #DATE_UPLOAD }}}
+ * {{{ #DATE_TAKEN }}}
+ * {{{ #OWNER_NAME }}}
+ * {{{ #ICON_SERVER }}}
+ * {{{ #ORIGINAL_FORMAT }}}
+ * {{{ #LAST_UPDATE }}}
+
+=== Balises Calculées ===
+
+ * {{{ #URL_PHOTO }}} l'url de la photo
+ * {{{ #LOGO_PHOTO }}} retourne l'image taille moyenne (500px sur le côté le plus long), sauf si on lui passe un parametre:
+    * s	petit carre 75x75
+    * t	vignette, 100px sur le côté le plus long 
+    * m	petite, 240px sur le côté le plus long 
+    * b	large, 1024px sur le côté le plus long (seulement si o est tres large)
+    * o	image originale, jpg, png ou gif en fonction de #ORIGINALFORMAT
 
 -------------
 
