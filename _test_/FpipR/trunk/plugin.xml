@@ -19,6 +19,9 @@ _ La version 0.2 ajoute des boucles pour acceder &agrave; l'API Flickr depuis vo
 _ version 0.2 introduces SPIP loops to access Flickr's API from your templates.
 	  </multi>
 	</description>
+	<lien>
+	  http://trac.rezo.net/trac/spip-zone/wiki/FpipR
+	</lien>
 	<prefix> 
 	  FpipR
 	</prefix>
