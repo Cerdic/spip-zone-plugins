@@ -1,5 +1,4 @@
-###  README --- /Users/pandrews/dev/spip-zone/_plugins_/_contenu_editorial_/FpipR/
-
+###  README --- 
 ## Copyright 2006 Pierre Andrews
 ##
 ## Author: mortimer.pa@free.fr
@@ -13,13 +12,68 @@ THIS PLUGIN CANNOT BE USED FOR COMMERCIAL SITES. IF YOU WANT TO USE IT ON A COMM
 
 Ce plugin permet d'associer des images de votre compte flickr a vos articles et rubriques.
 
-Utilisation:
+{{{Ajout de photos flickr à vos articles}}}
+
+Depuis la version 0.1, on peut utiliser ce plugin pour associer des photos flickr à ses articles comme des documents distant "standarts".
+
+On peut utiliser cette fonction pour faire un article à propos d'une photo, ou d'un set de photos, etc...
+
+
+{{Utilisation:}}
 1- aller sur la page de gestion de votre profil SPIP
 2- suivez les instructions pour vous identifier sur Flickr
 3- vous pouvez ensuite aller sur un de vos articles/rubriques et cliquer sur le liens dans la colonne de gauche pour choisir des images de flickr.
 
+{{{Ajout de nouvelles Boucles}}}
+
+Depuis la version 0.2, le plugin offre la possibilité d'acceder aux methodes de l'API flickr (voir http://www.flickr.com/services/api) à travers le système de BOUCLE de SPIP.
+
+On peut ainsi faire ses propres squelettes pour faire des diaporamas Flickr, etc.. etc..
+
+{{Boucles AUTEURS}}
+
+Le plugin ajout une nouvelle balise à cette boucle:
+
+{{#FLICKR_NSID}} retournera (pour les auteurs authentifié sur Flickr) l'id flickr unique (nsid) de cet auteur.
+On peut ensuite l'utiliser dans les boucles Flickr pour limiter les recherches à cet utilisateur.
+
+{{Boucle FLICKR_PHOTOS_SEARCH}}
+
+Cette boucle implemente la méthode: http://www.flickr.com/services/api/flickr.photos.search.html
+On peut l'utiliser pour chercher des photos.
+ATTENTION, il faut absolument specifier au moins un critere precisant la recherche si on veut que la boucle retourne des resultats.
 
 
+{{Criteres}}
 
+Les criteres correspondent aux parametres de la methode Flickr.
 
+Les criteres suivant peuvent être utilisés comme les criteres standard de SPIP: {user_id=#FLICKR_NSID} ou {upload_date < #DATE} par exemple. Ils peuvent aussi être utiliser dans des tris
+
+{user_id}
+{license}
+{upload_date}
+{taken_date}
+
+Les criteres suivant sont "special" et prennent leur parametre directement: {tags spip,gateau} par exemple
+
+{tags}
+{tag_mode}
+{text}
+{privacy_filter} NE MARCHE PAS
+{bbox} limitation geographique de la recherche, separé par des :, longitude minimum, latitude minimum, longitude max, latitude max
+{accuracy}
+
+Les criteres suivant peuvent être specifié pour les tri:
+{par date_posted},{par date_taken},{par interestingness},{par relevance} (dans le cas d'une recherche).
+
+{{Balises}}
+
+#ID_PHOTO
+#SECRET
+#SERVER
+#ONWER_NAME
+#LONGITUDE
+#LATITUDE
+#USER_ID
 
