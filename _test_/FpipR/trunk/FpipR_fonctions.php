@@ -1,10 +1,10 @@
 <?php
-/*
- * BOUCLEs Flickr API
- * 
- * Auteur: Mortimer (Pierre Andrews)
- * (c) 2006 - Distribue sous license GNU/GPL
- */
+  /*
+   * BOUCLEs Flickr API
+   * 
+   * Auteur: Mortimer (Pierre Andrews)
+   * (c) 2006 - Distribue sous license GNU/GPL
+   */
 
 include_spip('base/FpipR_db');
 
@@ -29,40 +29,40 @@ function critere_accuracy($idb, &$boucles, $crit) {
 
 
 /** boucle FLICKR_PHOTOS_SEARCH
-Voir la doc de l'API: http://flickr.com/services/api/flickr.photos.search.html
-user_id V
-tags V
-tag_mode V
-text V
-upload_date
-taken_date
-license: V
-    <license id="4" name="Attribution License"
-		url="http://creativecommons.org/licenses/by/2.0/" /> 
-	<license id="6" name="Attribution-NoDerivs License"
-		url="http://creativecommons.org/licenses/by-nd/2.0/" /> 
-	<license id="3" name="Attribution-NonCommercial-NoDerivs License"
-		url="http://creativecommons.org/licenses/by-nc-nd/2.0/" /> 
-	<license id="2" name="Attribution-NonCommercial License"
-		url="http://creativecommons.org/licenses/by-nc/2.0/" /> 
-	<license id="1" name="Attribution-NonCommercial-ShareAlike License"
-		url="http://creativecommons.org/licenses/by-nc-sa/2.0/" /> 
-	<license id="5" name="Attribution-ShareAlike License"
-		url="http://creativecommons.org/licenses/by-sa/2.0/" /> 
-privacy_filter X
-* 1 public photos
-* 2 private photos visible to friends
-* 3 private photos visible to family
-* 4 private photos visible to friends & family
-* 5 completely private photos
-bbox min_lon:min_lat:max_lon:max_lat V
-accuracy V
-* World level is 1
-* Country is ~3
-* Region is ~6
-* City is ~11
-* Street is ~16
-*/
+ Voir la doc de l'API: http://flickr.com/services/api/flickr.photos.search.html
+ user_id V
+ tags V
+ tag_mode V
+ text V
+ upload_date
+ taken_date
+ license: V
+ <license id="4" name="Attribution License"
+ url="http://creativecommons.org/licenses/by/2.0/" /> 
+ <license id="6" name="Attribution-NoDerivs License"
+ url="http://creativecommons.org/licenses/by-nd/2.0/" /> 
+ <license id="3" name="Attribution-NonCommercial-NoDerivs License"
+ url="http://creativecommons.org/licenses/by-nc-nd/2.0/" /> 
+ <license id="2" name="Attribution-NonCommercial License"
+ url="http://creativecommons.org/licenses/by-nc/2.0/" /> 
+ <license id="1" name="Attribution-NonCommercial-ShareAlike License"
+ url="http://creativecommons.org/licenses/by-nc-sa/2.0/" /> 
+ <license id="5" name="Attribution-ShareAlike License"
+ url="http://creativecommons.org/licenses/by-sa/2.0/" /> 
+ privacy_filter X
+ * 1 public photos
+ * 2 private photos visible to friends
+ * 3 private photos visible to family
+ * 4 private photos visible to friends & family
+ * 5 completely private photos
+ bbox min_lon:min_lat:max_lon:max_lat V
+ accuracy V
+ * World level is 1
+ * Country is ~3
+ * Region is ~6
+ * City is ~11
+ * Street is ~16
+ */
 function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
   $boucle = &$boucles[$id_boucle];
   $id_table = $boucle->id_table;
@@ -82,10 +82,10 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 
   //on regarde dans le contexte si les arguments possible sont dispo.
   /*	Foreach($possible_args as $key) {
-		$champ = new Champ;
-		$champ->nom_champ = $key;
-		$arguments[$key] = calculer_liste(array($champ),array(), $boucles, $boucle->$id_boucle);
-	}*/
+   $champ = new Champ;
+   $champ->nom_champ = $key;
+   $arguments[$key] = calculer_liste(array($champ),array(), $boucles, $boucle->$id_boucle);
+   }*/
 
   foreach($boucle->criteres as $crit) {
 	if (in_array($crit->op,$possible_criteres)){
@@ -120,43 +120,6 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 
   $extras = array();
 
-<<<<<<< .mine
-	//on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
-	foreach($boucle->where as $w) {
-	  $key = str_replace("'",'',$w[1]);
-	  $key = str_replace("$id_table.",'',$key);
-	  $val = $w[2];
-	  if (in_array($key,$possible_args)){
-		if(in_array($key,$possible_extras)) $extras[] = $key; 
-		else if($key == 'upload_date') $extras[] = 'date_upload';
-		else if($key == 'taken_date') $extras[] ='date_taken';
-		//TODO upload_date doit être en timestamp/1000
-		switch($w[0]) {
-		  case "'='":
-			if($key == 'taken_date' || $key == 'upload_date') {
-			  $arguments['min_'.$key] = $val;
-			  $arguments['max_'.$key] = $val;
-			} else {
-			  $arguments[$key] = $val;
-			}
-			break;
-		  case "'<'":
-			if($key == 'taken_date' || $key == 'upload_date') {
-			  $arguments['min_'.$key] = $val;
-			}
-			break;
-		  case "'>'":
-			if($key == 'taken_date' || $key == 'upload_date') {
-			  $arguments['max_'.$key] = $val;
-			}
-			break;
-		}
-	  }
-	}
-	foreach($boucle->select as $w) {
-	  $key = str_replace("'",'',$w);
-	  $key = str_replace("$id_table.",'',$key);
-=======
   //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
   foreach($boucle->where as $w) {
 	if($w[0] == "'?'") {
@@ -166,7 +129,6 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 	$val = $w[2];
 	$key = str_replace("$id_table.",'',$key);
 	if (in_array($key,$possible_args)){
->>>>>>> .r6694
 	  if(in_array($key,$possible_extras)) $extras[] = $key; 
 	  else if($key == 'upload_date') $extras[] = 'date_upload';
 	  else if($key == 'taken_date') $extras[] ='date_taken';
@@ -202,7 +164,7 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
   }
   $arguments['extras'] = "'".join(',',$extras)."'";
   $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
-\$arguments = '';\n";
+	  \$arguments = '';\n";
   $bbox = '';
   foreach($arguments as $key => $val) {
 	if($val) {
