@@ -344,13 +344,15 @@ function flickr_photosets_getList($user_id,$auth_token='') {
   return $resp;
 }
 
-function flickr_photosets_getPhotos($photoset_id,$extras='',$privacy_filter='',$auth_token='') {
+function flickr_photosets_getPhotos($photoset_id,$extras='',$per_page='',$page='',$privacy_filter='',$auth_token='') {
 
   $params = array();
   $params['photoset_id'] = $photoset_id;
   if($privacy_filter) $params['privacy_filter'] = $privacy_filter;
   if($extras) $params['extras'] = "original_format,$extras"; 
   else $params['extras'] = "original_format";
+  if($per_page) $params['per_page'] = $per_page;
+  if($page) $params['page'] = $page;
 
   $photos =  flickr_check_error(flickr_api_call('flickr.photosets.getPhotos',$params,$auth_token));
   $resp = array();

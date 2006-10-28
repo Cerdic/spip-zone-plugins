@@ -31,14 +31,14 @@ function critere_accuracy($idb, &$boucles, $crit) {
 function balise_URL_PHOTO($p) {
   $user_id = champ_sql('user_id',$p);
   $id_photo = champ_sql('id_photo',$p);
-  $p->code = "'http://www.flickr.com/photos/'.$user_id.'/'.$id_photo.'/'";
+  $p->code = "FpipR_generer_url_photo($user_id,$id_photo)";
   return $p;
 }
 
 
 function balise_URL_OWNER($p) {
   $user_id = champ_sql('user_id',$p);
-  $p->code = "'http://www.flickr.com/photos/'.$user_id.'/'";
+  $p->code = "FpipR_generer_url_owner($user_id)";
   return $p;
 }
 
@@ -283,7 +283,7 @@ function balise_LOGO_PHOTOSET($p) {
 function balise_URL_PHOTOSET($p) {
   $user_id = champ_sql('user_id',$p);
   $id_photoset = champ_sql('id_photoset',$p);
-  $p->code = "'http://www.flickr.com/photos/'.$user_id.'/'.$id_photoset.'/'";
+  $p->code = "FpipR_generer_url_photoset($user_id,$id_photoset)";
   return $p;
 }
 

@@ -83,8 +83,28 @@ function FpipR_logo_owner($user_id,$server = '') {
 }
 
 
-function FpipR_logo_photo($id_photo,$server,$secret,$taille='',$originalformat) {
-	return '<img src="http://static.flickr.com/'.$server."/".$id_photo."_".$secret.($taille?"_$taille":'').'.'.(($taille=='o')?$originalformat:'jpg').'"/>';
+function FpipR_logo_photo($id_photo,$server,$secret,$taille='',$originalformat='jpg') {
+  if($id_photo && $server)
+	return '<img src="http://static.flickr.com/'.$server."/".$id_photo."_".$secret.($taille?"_$taille":'').'.'.(($taille=='o')?$originalformat:'jpg').'" />';
+  return '';
+}
+
+function FpipR_generer_url_photo($user_id,$id_photo) {
+  if($user_id && $id_photo)
+	return "http://www.flickr.com/photos/$user_id/$id_photo/";
+  else if($id_photo)
+	return "http://www.flickr.com/photo.gne?id=$id_photo";
+  return '';
+}
+
+function FpipR_generer_url_owner($user_id) {
+  if($user_id) return 'http://www.flickr.com/photos/'.$user_id.'/';
+  return '';
+}
+function FpipR_generer_url_photoset($user_id,$id_photoset) {
+  if($user_id && $id_photoset)
+	return 'http://www.flickr.com/photos/'.$user_id.'/sets/'.$id_photoset.'/';
+  return '';
 }
 
 

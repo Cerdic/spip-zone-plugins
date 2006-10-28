@@ -71,7 +71,7 @@ $GLOBALS['table_des_tables']['flickr_photos_search'] = 'fpipr_photos';
 
 //Les tables pour les details de photos
 
-$GLOBALS['FpipR_versions']['spip_fpipr_photo_details'] = '0.2';
+$GLOBALS['FpipR_versions']['spip_fpipr_photo_details'] = '0.3';
 
 $GLOBALS['FpipR_tables']['spip_fpipr_photo_details_field'] = array(
 																   'id_photo' => 'bigint(21) NOT NULL',
@@ -81,7 +81,7 @@ $GLOBALS['FpipR_tables']['spip_fpipr_photo_details_field'] = array(
 																   'license' => 'smallint',
 																   'rotation' => 'smallint',
 																   'originalformat' => "char(4) DEFAULT 'jpg'",
-																   'owner_nsid' => 'varchar(100)',
+																   'user_id' => 'varchar(100)',
 																   'owner_username' => "text DEFAULT '' NOT NULL",
 																   'owner_realname' => "text DEFAULT '' NOT NULL",
 																   'owner_location' => "text DEFAULT '' NOT NULL",
@@ -286,7 +286,7 @@ function FpipR_flickr_photos_getinfo_dist($arguments) {
 	spip_query($query);
 	//on insere la ligne unique de detail
 	spip_abstract_insert('spip_fpipr_photo_details',
-						 '(id_photo,secret,server,isfavorite,license,rotation,originalformat,owner_nsid,owner_username,owner_realname,owner_location,title,description,ispublic,isfriend,isfamily,date_posted,date_taken,date_lastupdate,comments,latitude,longitude,accuracy)',						   
+						 '(id_photo,secret,server,isfavorite,license,rotation,originalformat,user_id,owner_username,owner_realname,owner_location,title,description,ispublic,isfriend,isfamily,date_posted,date_taken,date_lastupdate,comments,latitude,longitude,accuracy)',						   
 						 '('._q($details->id).','._q($details->secret).','._q($details->server).','._q($details->isfavorite).','._q($details->license).','._q($details->rotation).','._q($details->originalformat).','._q($details->owner_nsid).','._q($details->owner_username).','._q($details->owner_realname).','._q($details->owner_location).','._q($details->title).','._q($details->description).','._q($details->visibility_ispublic).','._q($details->visibility_isfriend).','._q($details->visibility_isfamily).','._q(date('Y-m-d H:i:s',$details->date_posted+0)).','._q($details->date_taken).','._q(date('Y-m-d H:i:s',$details->date_lastupdate+0)).','._q($details->comments).','._q($details->location_latitude).','._q($details->location_longitude).','._q($details->location_accuracy).')'
 						 );	  
 	//on insere les tags
@@ -345,6 +345,8 @@ function FpipR_flickr_photosets_getphotos_dist($arguments) {
   include_spip('inc/flickr_api');
   $photos = flickr_photosets_getPhotos($arguments['id_photoset'],
 									   $arguments['extras'],
+									   $arguments['per_page'],
+									   $arguments['page'],
 									   $arguments['privacy_filter']);
   FpipR_fill_photos_table($photos,array(
 										'id_photoset' => $arguments['id_photoset']

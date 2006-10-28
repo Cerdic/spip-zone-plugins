@@ -13,7 +13,7 @@ BOUCLE Flickr
 <h2>#NOM</h2>
 NSID Flickr: #FLICKR_NSID
 
-<BOUCLE_sets(FLICKR_PHOTOSETS_GETLIST) {user_id=#FLICKR_NSID}{"<hr/>"}>
+<BOUCLE_sets(FLICKR_PHOTOSETS_GETLIST) {user_id=#FLICKR_NSID}{"<hr/>"} {0,2}>
 #TITLE
 <br/>
 #DESCRIPTION
@@ -23,6 +23,7 @@ NSID Flickr: #FLICKR_NSID
 </BOUCLE_photos>
 </BOUCLE_sets>
 
+[(#MODELE{fpiprsetbox}{id=72157594230473349})]
 </hr>
 </BOUCLE_auteurs>
 </body>
