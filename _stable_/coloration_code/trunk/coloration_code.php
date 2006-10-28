@@ -48,7 +48,7 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 	if ($telecharge) {
 		// Gerer le fichier contenant le code au format texte
 		$nom_fichier = md5($code);
-		$dossier = sous_repertoire(_DIR_IMG, 'cache-code');
+		$dossier = sous_repertoire(_DIR_VAR, 'cache-code');
 		$fichier = "$dossier$nom_fichier.txt";
 
 		if (!file_exists($fichier)) {
