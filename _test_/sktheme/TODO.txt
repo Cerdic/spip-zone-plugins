@@ -1,17 +1,11 @@
-// <b>DONE</b>: create a 'habillage.xml' file to specify squelette dependances
-//       (a 'habillage' could not fit all the available 'squelettes' :)
-//       This file could contained description such in plugin.xml 
-//       dependance <squelette>S_Name</squelette>
-// <b>DONE</b>: create a 'squelette.xml' for description/copyright/author ...
-// <b>DONE</b>: Improve text language in the interface
-// <b>DONE</b>: Add a filter to show only available habillages for a given squelette
-// <b>DONE</b>: Add an original habillage for the default squelette one
-// <b>DONE</b>: Include a 'switcher' possibility based on 'switcher' plugin
-// <b>DONE</b>: Add a 'balise' for habillage possibilities #SKTHEME_HABILLAGES
-//
-// <b>TODO</b>: probably add some tests to be sure that 'dossier_squelettes' is not used already.
-// <b>TODO</b>: Add online user documentation
-// <b>TODO</b>: Create some icons for the private area
-// <b>TODO</b>: Download a squelette or habillage zip distribution trough the net and install it.
-// <b>TODO</b>: Create a real process for private area theme (see Franck ideas)
-//
+// <b>TODO</b>: Utiliser 'trim' pour parser plus liberalement le fichier theme.xml (de Frank).
+// <b>TODO</b>: Use 'trim' to parse more liberaly theme.xml (de Frank).
+// 
+// <b>TODO</b>: Probablemnt ajouter des tests pour detecter l'usage de 'dossier_squelettes'.
+// <b>TODO</b>: Probably add some tests to detect the usage of 'dossier_squelettes'.
+// 
+// <b>TODO</b>: Ameliorer la documentation pour les utilisateurs.
+// <b>TODO</b>: More finishing in the user documentation.
+// 
+// <b>TODO</b>: Telecharger un squelette ou un theme distribue par internet et l'installer.
+// <b>TODO</b>: Download a whole squelette or theme zip distribution trough the net and install it.
