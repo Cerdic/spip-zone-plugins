@@ -45,6 +45,7 @@ Une nouvelle fen&ecirc;tre sera ouverte, suivez les instructions qui y sont four
 									   'warning_copyright_5' => 'Attention, cette photo est prot&eacute;g&eacute;e par une license: <strong><a href="http://creativecommons.org/licenses/by-sa/2.0/deed.fr">"CC Paternité - Partage des Conditions Initiales à l\'Identique 2.0</a>"</strong>. Avant de poster la photo sur ce site, verifiez de bien respecter cette license et demander l\'autorisation &agrave; l\'auteur si besoin.',
 									   'warning_copyright_6' => 'Attention, cette photo est prot&eacute;g&eacute;e par une license: <strong><a href="http://creativecommons.org/licenses/by-nd/2.0/deed.fr">"CC Paternité - Pas de Modification 2.0</a>"</strong>. Avant de poster la photo sur ce site, verifiez de bien respecter cette license et demander l\'autorisation &agrave; l\'auteur si besoin.',
 									   'mauvaisop' => "Vous ne pouvez pas utiliser l'operateur @op@ sur le critere @critere@"
+									   'mauvaise_imbrication' => "Une boucle FLICKR_PHOTO_@boucle@ ne peut se trouver que dans une boucle FLICKR_PHOTOS_GETINFO"
 );
 
 ?>

@@ -117,7 +117,7 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 
   foreach($boucle->criteres as $crit) {
 	if (in_array($crit->op,$possible_criteres)){
-	  $val = !isset($crit->param[0]) ? "" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	  $val = !isset($crit->param[0]) ? "" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$id_boucle]->id_parent);
 	  $arguments[$crit->op] = $val;
 	}
   }
@@ -247,6 +247,10 @@ function boucle_FLICKR_PHOTO_TAGS_dist($id_boucle, &$boucles) {
 	$id_table = $boucle->id_table;
 	$boucle->from[$id_table] =  "spip_fpipr_tags";
 
+	if($boucles[$boucle->id_parent]->id_table != 'fpipr_photo_details') 
+	  erreur_squelette(_T('fpipr:mauvaise_imbrication',array('boucle'=>'TAGS')), $id_boucle);
+	  
+
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
@@ -255,6 +259,9 @@ function boucle_FLICKR_PHOTO_NOTES_dist($id_boucle, &$boucles) {
 	$id_table = $boucle->id_table;
 	$boucle->from[$id_table] =  "spip_fpipr_notes";
 
+	if($boucles[$boucle->id_parent]->id_table != 'fpipr_photo_details') 
+	  erreur_squelette(_T('fpipr:mauvaise_imbrication',array('boucle'=>'NOTES')), $id_boucle);
+
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
@@ -262,6 +269,9 @@ function boucle_FLICKR_PHOTO_URLS_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$boucle->from[$id_table] =  "spip_fpipr_urls";
+
+	if($boucles[$boucle->id_parent]->id_table != 'fpipr_photo_details') 
+	  erreur_squelette(_T('fpipr:mauvaise_imbrication',array('boucle'=>'URLS')), $id_boucle);
 
 	return calculer_boucle($id_boucle, $boucles); 
 }
@@ -336,7 +346,7 @@ function boucle_FLICKR_PHOTOSETS_GETPHOTOS_dist($id_boucle, &$boucles) {
 
   foreach($boucle->criteres as $crit) {
 	if (in_array($crit->op,$possible_criteres)){
-	  $val = !isset($crit->param[0]) ? "" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	  $val = !isset($crit->param[0]) ? "" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$id_boucle]->id_parent);
 	  $arguments[$crit->op] = $val;
 	}
   }
