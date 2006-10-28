@@ -25,7 +25,7 @@ $GLOBALS['tables_principales']['spip_auteurs']['field']['flickr_token'] = "TINYT
 // La table pour une liste de photos
 //La version du schema de table
 
-$GLOBALS['FpipR_versions']['spip_fpipr_photos'] = '0.4';
+$GLOBALS['FpipR_versions']['spip_fpipr_photos'] = '0.5';
 
 $GLOBALS['FpipR_tables']['spip_fpipr_photos_field'] = array(
 															"id_photo"  => "bigint(21) NOT NULL",
@@ -46,13 +46,15 @@ $GLOBALS['FpipR_tables']['spip_fpipr_photos_field'] = array(
 															"latitude" => "DOUBLE",
 															"longitude" => "DOUBLE",
 															"accuracy" => "smallint NOT NULL",
-															"rang" => "int"
+															"rang" => "int",
+															"id_photoset" =>  "bigint(21) DEFAULT 0 NOT NULL" //pour le cas ou on cherche les photos dans un set
 															);
 
 $GLOBALS['FpipR_tables']['spip_fpipr_photos_key'] = array(
 														  "PRIMARY KEY" => "id_photo",
 														  "KEY" => "user_id",
-														  "KEY" => "rang"
+														  "KEY" => "rang",
+														  'KEY' => "id_photoset"
 														  );
 $GLOBALS['tables_principales']['spip_fpipr_photos'] =
   array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_photos_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_photos_key']);
@@ -158,30 +160,33 @@ $GLOBALS['table_des_tables']['flickr_photo_urls'] = 'fpipr_urls';
 //pour les sets
 
 
-$GLOBALS['FpipR_versions']['spip_fpipr_photosets'] = '0.2';
+$GLOBALS['FpipR_versions']['spip_fpipr_photosets'] = '0.3';
 $GLOBALS['FpipR_tables']['spip_fpipr_photosets_field'] = array(
-														  "id_set" => "bigint(21) NOT NULL",
-														  "user_id" => 'varchar(100)',
-														  'primary_photo' => "bigint(21) NOT NULL",
-														  "secret"=> "varchar(100)", //"a123456"
-														  "server"=> "int NOT NULL", //"2"
-														  'photos' => 'int',
-														  "title"	=> "text DEFAULT '' NOT NULL",
-														  "description" => "text DEFAULT '' NOT NULL"
-														  );
-$GLOBALS['FpipR_tables']['spip_fpipr_photosets_key'] = array("PRIMARY KEY" => "id_set");
+															   "id_photoset" => "bigint(21) NOT NULL",
+															   "user_id" => 'varchar(100)',
+															   'primary_photo' => "bigint(21) NOT NULL",
+															   "secret"=> "varchar(100)", //"a123456"
+															   "server"=> "int NOT NULL", //"2"
+															   'photos' => 'int',
+															   "title"	=> "text DEFAULT '' NOT NULL",
+															   "description" => "text DEFAULT '' NOT NULL"
+															   );
+$GLOBALS['FpipR_tables']['spip_fpipr_photosets_key'] = array("PRIMARY KEY" => "id_photoset");
 
 
 $GLOBALS['tables_principales']['spip_fpipr_photosets'] =
   array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_photosets_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_photosets_key']);
 $GLOBALS['table_des_tables']['flickr_photosets_getlist'] = 'fpipr_photosets';
 
+$GLOBALS['table_des_tables']['flickr_photosets_getphotos'] = 'fpipr_photos';
+
+
 //======================================================================
 
 function FpipR_creer_tables($method){
-   $fct = str_replace('.','_',$method);
-   $f=charger_fonction('create_'.$fct, 'FpipR');
-   $f();
+  $fct = str_replace('.','_',$method);
+  $f=charger_fonction('create_'.$fct, 'FpipR');
+  $f();
 }
 
 function FpipR_make_table($nom) {
@@ -205,104 +210,114 @@ function FpipR_make_table($nom) {
 }
 
 function FpipR_fill_table($method,$arguments){
-   //Faire le query API flickr
-   $fct = str_replace('.','_',$method);
-   $f=charger_fonction($fct, 'FpipR');
-   $f($arguments);
+  //Faire le query API flickr
+  $fct = str_replace('.','_',$method);
+  $f=charger_fonction($fct, 'FpipR');
+  $f($arguments);
 }
 
 //======================================================================
 
 
 function FpipR_create_flickr_photos_search_dist() {
-	  FpipR_make_table('spip_fpipr_photos');
+  FpipR_make_table('spip_fpipr_photos');
 }
 
 function FpipR_flickr_photos_search_dist($arguments) {
-     include_spip('inc/flickr_api');
-	  $photos = flickr_photos_search(
-									 $arguments['per_page'],$arguments['page'],
-									 $arguments['user_id'], $arguments['tags'], $arguments['tag_mode'],
-									 $arguments['text'], $arguments['min_upload_date'],
-									 $arguments['max_upload_date'], $arguments['min_taken_date'],
-									 $arguments['max_taken_date'], $arguments['license'],
-									 $arguments['sort'], $arguments['privacy_filter'],
-									 $arguments['extras'],
-									 $arguments['bbox'],$arguments['accuracy'],
-									 $arguments['auth_token']);
-	  $not_id = '';
-	  $cnt = 0;
-	  foreach($photos->photos as $photo) {
-		$query = "REPLACE INTO spip_fpipr_photos (id_photo,user_id,secret,server,title,ispublic,isfriend,isfamily,originalformat,license,upload_date,taken_date,owner_name,icon_server,last_update,longitude,latitude,accuracy,rang)";
-		$query .= " VALUES ("._q($photo->id).','.spip_abstract_quote($photo->owner).','.spip_abstract_quote($photo->secret).','._q($photo->server).','.spip_abstract_quote($photo->title).','._q($photo->idpublic).','._q($photo->isfriend).','._q($photo->isfamily).','.spip_abstract_quote($photo->originalformat).','._q($photo->license).','.spip_abstract_quote(date('Y-m-d H:i:s',$photo->dateupload+0)).','.spip_abstract_quote($photo->datetaken).','.spip_abstract_quote($photo->ownername).','._q($photo->iconserver).','.spip_abstract_quote(date('Y-m-d H:i:s',$photo->lastupdate+0)).','.floatval($photo->longitude).','.floatval($photo->latitude).','._q($photo->accuracy).','.$cnt++.")";
-		spip_query($query);
-		$not_id .= ','._q($photo->id);
+  include_spip('inc/flickr_api');
+  $photos = flickr_photos_search(
+								 $arguments['per_page'],$arguments['page'],
+								 $arguments['user_id'], $arguments['tags'], $arguments['tag_mode'],
+								 $arguments['text'], $arguments['min_upload_date'],
+								 $arguments['max_upload_date'], $arguments['min_taken_date'],
+								 $arguments['max_taken_date'], $arguments['license'],
+								 $arguments['sort'], $arguments['privacy_filter'],
+								 $arguments['extras'],
+								 $arguments['bbox'],$arguments['accuracy'],
+								 $arguments['auth_token']);
+  FpipR_fill_photos_table($photos->photos);
+}
+
+function FpipR_fill_photos_table($photos,$add='') {
+  $cnt = 0;
+  $query = "DELETE FROM spip_fpipr_photos";
+  spip_query($query);
+  $col = '(id_photo,user_id,secret,server,title,ispublic,isfriend,isfamily,originalformat,license,upload_date,taken_date,owner_name,icon_server,last_update,longitude,latitude,accuracy,rang';
+
+  if($add)
+	foreach($add as $name=>$val) {
+	  $col.=",$name";
+	  $vals .= ','._q($val);
+	}
+  foreach($photos as $photo) {
+	$vals = "("._q($photo->id).','._q($photo->owner).','._q($photo->secret).','._q($photo->server).','._q($photo->title).','._q($photo->idpublic).','._q($photo->isfriend).','._q($photo->isfamily).','._q($photo->originalformat).','._q($photo->license).','._q(date('Y-m-d H:i:s',$photo->dateupload+0)).','._q($photo->datetaken).','._q($photo->ownername).','._q($photo->iconserver).','._q(date('Y-m-d H:i:s',$photo->lastupdate+0)).','._q($photo->longitude).','._q($photo->latitude).','._q($photo->accuracy).','.$cnt++;
+	if($add)
+	  foreach($add as $name=>$val) {
+		$vals .= ','._q($val);
 	  }
-	  $query = "DELETE FROM spip_fpipr_photos";
-	  if($not_id) {
-		$not_id = substr($not_id,1);
-		$query .= " WHERE id_photo NOT IN ($not_id)";
-	  }
-	  spip_query($query);
+	spip_abstract_insert('spip_fpipr_photos',
+						 $col.')',
+						 $vals.")");
+  }
 }
 
 //======================================================================
 
 function FpipR_create_flickr_photos_getinfo_dist() {
-	  FpipR_make_table('spip_fpipr_photo_details');
-	  FpipR_make_table('spip_fpipr_tags');
-	  FpipR_make_table('spip_fpipr_notes');
-	  FpipR_make_table('spip_fpipr_urls');
+  FpipR_make_table('spip_fpipr_photo_details');
+  FpipR_make_table('spip_fpipr_tags');
+  FpipR_make_table('spip_fpipr_notes');
+  FpipR_make_table('spip_fpipr_urls');
 }
 
 function FpipR_flickr_photos_getinfo_dist($arguments) {
-     include_spip('inc/flickr_api');
-	  $details = flickr_photos_getInfo($arguments['id_photo'],$arguments['secret']);
-	  $id_photo = intval($details->id);
-	  if($id_photo) {
-		//on vide les tables
-		$query = "DELETE FROM spip_fpipr_photo_details";
-		spip_query($query);
-		$query = "DELETE FROM spip_fpipr_tags";
-		spip_query($query);
-		$query = "DELETE FROM spip_fpipr_notes";
-		spip_query($query);
-		$query = "DELETE FROM spip_fpipr_urls";
-		spip_query($query);
-		//on insere la ligne unique de detail
-		spip_abstract_insert('spip_fpipr_photo_details',
-							 '(id_photo,secret,server,isfavorite,license,rotation,originalformat,owner_nsid,owner_username,owner_realname,owner_location,title,description,ispublic,isfriend,isfamily,date_posted,date_taken,date_lastupdate,comments,latitude,longitude,accuracy)',						   
-							 '('._q($details->id).','._q($details->secret).','._q($details->server).','._q($details->isfavorite).','._q($details->license).','.floatval($details->rotation).','._q($details->originalformat).','._q($details->owner_nsid).','._q($details->owner_username).','._q($details->owner_realname).','._q($details->owner_location).','._q($details->title).','._q($details->description).','._q($details->visibility_ispublic).','._q($details->visibility_isfriend).','._q($details->visibility_isfamily).','._q(date('Y-m-d H:i:s',$details->date_posted+0)).','._q($details->date_taken).','._q(date('Y-m-d H:i:s',$details->date_lastupdate+0)).','._q($details->comments).','.floatval($details->location_latitude).','.floatval($details->location_longitude).','._q($details->location_accuracy).')'
-							 );	  
-		//on insere les tags
-		foreach($details->tags as $tag) {
-		  spip_abstract_insert('spip_fpipr_tags',
-							   '(id_tag,author,raw,safe,id_photo)',
-							   '('._q($tag->id).','._q($tag->author).','._q($tag->raw).','._q($tag->safe).','._q($id_photo).')'
-							   );
-		}
-		//on insere les notes
-		foreach($details->notes as $n) {
-		  spip_abstract_insert('spip_fpipr_notes',
-							   '(id_note,id_photo,author,authorname,x,y,width,height,texte)',
-							   '('._q($n['id']).','._q($id_photo).','._q($n['author']).','._q($n['authorname']).','.floatval($n['x']).','.floatval($n['y']).','.floatval($n['w']).','.floatval($n['h']).','._q($n['_content']).')'
-							   );
-		}
-		//on insere les urls
-		foreach($details->urls as $k=>$u) {
-		  spip_abstract_insert('spip_fpipr_urls',
-							   '(type,id_photo,url)',
-							   '('._q($k).','._q($id_photo).','._q($u).')'
-							   );
-		}
-	  }
+  include_spip('inc/flickr_api');
+  $details = flickr_photos_getInfo($arguments['id_photo'],$arguments['secret']);
+  $id_photo = intval($details->id);
+  if($id_photo) {
+	//on vide les tables
+	$query = "DELETE FROM spip_fpipr_photo_details";
+	spip_query($query);
+	$query = "DELETE FROM spip_fpipr_tags";
+	spip_query($query);
+	$query = "DELETE FROM spip_fpipr_notes";
+	spip_query($query);
+	$query = "DELETE FROM spip_fpipr_urls";
+	spip_query($query);
+	//on insere la ligne unique de detail
+	spip_abstract_insert('spip_fpipr_photo_details',
+						 '(id_photo,secret,server,isfavorite,license,rotation,originalformat,owner_nsid,owner_username,owner_realname,owner_location,title,description,ispublic,isfriend,isfamily,date_posted,date_taken,date_lastupdate,comments,latitude,longitude,accuracy)',						   
+						 '('._q($details->id).','._q($details->secret).','._q($details->server).','._q($details->isfavorite).','._q($details->license).','._q($details->rotation).','._q($details->originalformat).','._q($details->owner_nsid).','._q($details->owner_username).','._q($details->owner_realname).','._q($details->owner_location).','._q($details->title).','._q($details->description).','._q($details->visibility_ispublic).','._q($details->visibility_isfriend).','._q($details->visibility_isfamily).','._q(date('Y-m-d H:i:s',$details->date_posted+0)).','._q($details->date_taken).','._q(date('Y-m-d H:i:s',$details->date_lastupdate+0)).','._q($details->comments).','._q($details->location_latitude).','._q($details->location_longitude).','._q($details->location_accuracy).')'
+						 );	  
+	//on insere les tags
+	foreach($details->tags as $tag) {
+	  spip_abstract_insert('spip_fpipr_tags',
+						   '(id_tag,author,raw,safe,id_photo)',
+						   '('._q($tag->id).','._q($tag->author).','._q($tag->raw).','._q($tag->safe).','._q($id_photo).')'
+						   );
+	}
+	//on insere les notes
+	foreach($details->notes as $n) {
+	  spip_abstract_insert('spip_fpipr_notes',
+						   '(id_note,id_photo,author,authorname,x,y,width,height,texte)',
+						   '('._q($n['id']).','._q($id_photo).','._q($n['author']).','._q($n['authorname']).','._q($n['x']).','._q($n['y']).','._q($n['w']).','._q($n['h']).','._q($n['_content']).')'
+						   );
+	}
+	//on insere les urls
+	foreach($details->urls as $k=>$u) {
+	  spip_abstract_insert('spip_fpipr_urls',
+						   '(type,id_photo,url)',
+						   '('._q($k).','._q($id_photo).','._q($u).')'
+						   );
+	}
+  }
 }
 
 //======================================================================
 
 
-function FpipR_create_flickr_photosets_getList() {
-	  FpipR_make_table('spip_fpipr_photosets');
+function FpipR_create_flickr_photosets_getList_dist() {
+  FpipR_make_table('spip_fpipr_photosets');
 }
 
 function FpipR_flickr_photosets_getlist_dist($arguments) {
@@ -313,12 +328,29 @@ function FpipR_flickr_photosets_getlist_dist($arguments) {
   
   $photosets = flickr_photosets_getList($arguments['user_id']);
   foreach($photosets as $set) {
-	 spip_abstract_insert('spip_fpipr_photosets',
-							   '(id_set,user_id,primary_photo,secret,server,photos,title,description)',
-							   '('._q($set->id).','._q($set->owner).','._q($set->primary).','._q($set->secret).','._q($set->server).','._q($set->photos).','._q($set->title).','._q($set->description).')'
-							   );	
+	spip_abstract_insert('spip_fpipr_photosets',
+						 '(id_photoset,user_id,primary_photo,secret,server,photos,title,description)',
+						 '('._q($set->id).','._q($set->owner).','._q($set->primary).','._q($set->secret).','._q($set->server).','._q($set->photos).','._q($set->title).','._q($set->description).')'
+						 );	
   }
 }
+
+//======================================================================
+
+function FpipR_create_flickr_photosets_getphotos_dist() {
+  FpipR_make_table('spip_fpipr_photos');
+}
+
+function FpipR_flickr_photosets_getphotos_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $photos = flickr_photosets_getPhotos($arguments['id_photoset'],
+									   $arguments['extras'],
+									   $arguments['privacy_filter']);
+  FpipR_fill_photos_table($photos,array(
+										'id_photoset' => $arguments['id_photoset']
+										));
+}
+
 
 //======================================================================
 
