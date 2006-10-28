@@ -35,7 +35,7 @@ $GLOBALS['FpipR_tables']['spip_fpipr_photos_field'] = array(
 															"taken_date" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 															"owner_name" => "text DEFAULT '' NOT NULL",
 															"icon_server" => "int NOT NULL",
-															"last_update" => "INT",
+															"last_update" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 															"latitude" => "DOUBLE",
 															"longitude" => "DOUBLE",
 															"accuracy" => "smallint NOT NULL",
@@ -48,7 +48,7 @@ $GLOBALS['FpipR_tables']['spip_fpipr_photos_key'] = array(
 														  "KEY" => "rang"
 														  );
 
-$GLOBALS['FpipR_versions']['spip_fpipr_photos'] = '0.1';
+$GLOBALS['FpipR_versions']['spip_fpipr_photos'] = '0.2';
 
 $GLOBALS['tables_principales']['spip_fpipr_photos'] =
 array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_photos_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_photos_key']);
@@ -108,7 +108,7 @@ function FpipR_fill_table($method,$arguments){
 	  $cnt = 0;
 	  foreach($photos->photos as $photo) {
 		$query = "REPLACE INTO spip_fpipr_photos (id_photo,user_id,secret,server,title,ispublic,isfriend,isfamily,originalformat,license,upload_date,taken_date,owner_name,icon_server,last_update,longitude,latitude,accuracy,rang)";
-		$query .= " VALUES (".intval($photo->id).','.spip_abstract_quote($photo->owner).','.spip_abstract_quote($photo->secret).','.intval($photo->server).','.spip_abstract_quote($photo->title).','.intval($photo->idpublic).','.intval($photo->isfriend).','.intval($photo->isfamily).','.spip_abstract_quote($photo->originalformat).','.intval($photo->license).','.spip_abstract_quote(date('Y-m-d H:i:s',$photo->dateupload)).','.spip_abstract_quote($photo->datetaken).','.spip_abstract_quote($photo->ownername).','.intval($photo->iconserver).','.intval($photo->lastupdate).','.floatval($photo->longitude).','.floatval($photo->latitude).','.intval($photo->accuracy).','.$cnt++.")";
+		$query .= " VALUES (".intval($photo->id).','.spip_abstract_quote($photo->owner).','.spip_abstract_quote($photo->secret).','.intval($photo->server).','.spip_abstract_quote($photo->title).','.intval($photo->idpublic).','.intval($photo->isfriend).','.intval($photo->isfamily).','.spip_abstract_quote($photo->originalformat).','.intval($photo->license).','.spip_abstract_quote(date('Y-m-d H:i:s',$photo->dateupload)).','.spip_abstract_quote($photo->datetaken).','.spip_abstract_quote($photo->ownername).','.intval($photo->iconserver).','.spip_abstract_quote(date('Y-m-d H:i:s',$photo->lastupdate)).','.floatval($photo->longitude).','.floatval($photo->latitude).','.intval($photo->accuracy).','.$cnt++.")";
 		spip_query($query);
 		$not_id .= ','.intval($photo->id);
 	  }

@@ -120,6 +120,43 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 
   $extras = array();
 
+<<<<<<< .mine
+	//on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
+	foreach($boucle->where as $w) {
+	  $key = str_replace("'",'',$w[1]);
+	  $key = str_replace("$id_table.",'',$key);
+	  $val = $w[2];
+	  if (in_array($key,$possible_args)){
+		if(in_array($key,$possible_extras)) $extras[] = $key; 
+		else if($key == 'upload_date') $extras[] = 'date_upload';
+		else if($key == 'taken_date') $extras[] ='date_taken';
+		//TODO upload_date doit être en timestamp/1000
+		switch($w[0]) {
+		  case "'='":
+			if($key == 'taken_date' || $key == 'upload_date') {
+			  $arguments['min_'.$key] = $val;
+			  $arguments['max_'.$key] = $val;
+			} else {
+			  $arguments[$key] = $val;
+			}
+			break;
+		  case "'<'":
+			if($key == 'taken_date' || $key == 'upload_date') {
+			  $arguments['min_'.$key] = $val;
+			}
+			break;
+		  case "'>'":
+			if($key == 'taken_date' || $key == 'upload_date') {
+			  $arguments['max_'.$key] = $val;
+			}
+			break;
+		}
+	  }
+	}
+	foreach($boucle->select as $w) {
+	  $key = str_replace("'",'',$w);
+	  $key = str_replace("$id_table.",'',$key);
+=======
   //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
   foreach($boucle->where as $w) {
 	if($w[0] == "'?'") {
@@ -129,6 +166,7 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 	$val = $w[2];
 	$key = str_replace("$id_table.",'',$key);
 	if (in_array($key,$possible_args)){
+>>>>>>> .r6694
 	  if(in_array($key,$possible_extras)) $extras[] = $key; 
 	  else if($key == 'upload_date') $extras[] = 'date_upload';
 	  else if($key == 'taken_date') $extras[] ='date_taken';
