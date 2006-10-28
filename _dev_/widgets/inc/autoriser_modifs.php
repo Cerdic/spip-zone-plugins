@@ -1,4 +1,6 @@
 <?php
+// pour les recherches de classes "widget"
+define('_PREG_WIDGET', ',widget\b[^<>\'"]+\b((\w+)-(\w+)-(\d+))\b,');
 
 // retourne vrai si l'utilisateur courant a le droit de modifier un champ
 // de l'objet du type et d'id donnes

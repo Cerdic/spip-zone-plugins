@@ -4,8 +4,6 @@
  *  Widgets plugin for spip (c) Fil & Toggg 2006 -- licence GPL
  */
 
-define('_PREG_WIDGET', ',widget\b[^<>\'"]+\b((\w+)-(\w+)-(\d+))\b,');
-
 // Dire rapidement si ca vaut le coup de chercher des droits
 function analyse_droits_rapide_dist() {
 	if ($GLOBALS['auteur_session']['statut'] != '0minirezo')
@@ -25,11 +23,11 @@ function Widgets_affichage_final($page) {
 	if (!strpos($page, 'widget'))
 		return $page;
 
+	$autoriser_modifs= charger_fonction('autoriser_modifs', 'inc');
+
 	// voire un peu plus precisement lesquelles
 	if (!preg_match_all(_PREG_WIDGET, $page, $regs, PREG_SET_ORDER))
 		return $page;
-
-	$autoriser_modifs= charger_fonction('autoriser_modifs', 'inc');
 
 	// calculer les droits sur ces widgets
 	$droits = array();

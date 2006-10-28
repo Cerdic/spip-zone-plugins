@@ -64,7 +64,6 @@ function action_widgets_html_dist() {
 	include_spip('inc/widgets');
 	include_spip('inc/texte');
 	include_spip('inc/rubriques');
-	include_spip('tetewidgets'); # pour la fonction de droits, a isoler...
 
 	header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
 
