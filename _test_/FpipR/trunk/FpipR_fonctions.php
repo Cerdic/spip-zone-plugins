@@ -179,6 +179,8 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 			$arguments['min_'.$key] = $val;
 		  }
 		  break;
+		default:
+		  erreur_squelette(_T('fpipr:mauvaisop',array('critere'=>$key,'op'=>$w[0])), $id_boucle);
 	  }
 	}
   }
@@ -222,9 +224,10 @@ function boucle_FLICKR_PHOTOS_GETINFO_dist($id_boucle, &$boucles) {
 	$key = str_replace("'",'',$w[1]);
 	$val = $w[2];
 	$key = str_replace("$id_table.",'',$key);
-	if (in_array($key,$possible_args)){
+	if ($w[0] = "'='" && in_array($key,$possible_args)){
 	  $arguments[$key] = $val;
-	}
+	} else 
+	  erreur_squelette(_T('fpipr:mauvaisop',array('critere'=>$key,'op'=>$w[0])), $id_boucle);
   }
   $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
@@ -300,9 +303,10 @@ function boucle_FLICKR_PHOTOSETS_GETLIST_dist($id_boucle,&$boucles) {
 	$key = str_replace("'",'',$w[1]);
 	$val = $w[2];
 	$key = str_replace("$id_table.",'',$key);
-	if (in_array($key,$possible_args)){
+	if ($w[0] == "'='" && in_array($key,$possible_args)){
 	  $arguments[$key] = $val;
-	}
+	} else 
+	  erreur_squelette(_T('fpipr:mauvaisop',array('critere'=>$key,'op'=>$w[0])), $id_boucle);
   }
   $boucle->hash = "// CREER la table flickr_photosets et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
@@ -348,7 +352,8 @@ function boucle_FLICKR_PHOTOSETS_GETPHOTOS_dist($id_boucle, &$boucles) {
 	  else if($key == 'taken_date') $extras[] ='date_taken';
 	if ($w[0] == "'='" && $key == 'id_photoset'){
 	  $arguments[$key] = $val;
-	}
+	} else
+	  erreur_squelette(_T('fpipr:mauvaisop',array('critere'=>$key,'op'=>$w[0])), $id_boucle);
   }
 
   //on calcul le nombre de page d'apres {0,10}

@@ -46,6 +46,7 @@ A new window will open, please follow the instructions it will provide.',
 									   'warning_copyright_4' => 'Beware, this photo is protected by a license: <strong><a href="http://creativecommons.org/licenses/by/2.0/">"Attribution"</a></strong>. Get more information and ask the author of the photo if needed.',
 									   'warning_copyright_5' => 'Beware, this photo is protected by a license: <strong><a href="http://creativecommons.org/licenses/by-sa/2.0/">"Attribution -  ShareAlike"</a></strong>. Get more information and ask the author of the photo if needed.',
 									   'warning_copyright_6' => 'Beware, this photo is protected by a license: <strong><a href="http://creativecommons.org/licenses/by-nd/2.0/">"CC Attribution - NoDerivs"</a></strong>. Get more information and ask the author of the photo if needed.',
+									   'mauvaisop' => "You cannot use the operator @op@ on the criterion @critere@"
 );
 
 ?>
