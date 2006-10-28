@@ -18,7 +18,7 @@ NSID Flickr: #FLICKR_NSID
 <br/>
 #DESCRIPTION
 <a href="#URL_PHOTOSET">#LOGO_PHOTOSET{s}</a>
-<BOUCLE_photos(FLICKR_PHOTOSETS_GETPHOTOS) {id_photoset} {0,10}>
+<BOUCLE_photos(FLICKR_PHOTOSETS_GETPHOTOS) {id_photoset} {0,10} {"<br/>"}>
 #LOGO_PHOTO{s}
 <BOUCLE_info(FLICKR_PHOTOS_GETINFO) {id_photo}>
 <BOUCLE_tags(FLICKR_PHOTO_TAGS) {","}>
@@ -26,6 +26,7 @@ NSID Flickr: #FLICKR_NSID
 </BOUCLE_tags>
 </BOUCLE_info>
 </BOUCLE_photos>
+
 </BOUCLE_sets>
 
 [(#MODELE{fpiprsetbox}{id=72157594230473349})]
