@@ -25,7 +25,7 @@ $GLOBALS['tables_principales']['spip_auteurs']['field']['flickr_token'] = "TINYT
 // La table pour une liste de photos
 //La version du schema de table
 
-$GLOBALS['FpipR_versions']['spip_fpipr_photos'] = '0.5';
+$GLOBALS['FpipR_versions']['spip_fpipr_photos'] = '0.6';
 
 $GLOBALS['FpipR_tables']['spip_fpipr_photos_field'] = array(
 															"id_photo"  => "bigint(21) NOT NULL",
@@ -47,7 +47,9 @@ $GLOBALS['FpipR_tables']['spip_fpipr_photos_field'] = array(
 															"longitude" => "DOUBLE",
 															"accuracy" => "smallint NOT NULL",
 															"rang" => "int",
-															"id_photoset" =>  "bigint(21) DEFAULT 0 NOT NULL" //pour le cas ou on cherche les photos dans un set
+															"id_photoset" =>  "bigint(21) DEFAULT 0 NOT NULL", //pour le cas ou on cherche les photos dans un set
+															"id_group" => "varchar(100)", //"47058503995@N01" 
+															"added_date" =>  "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 															);
 
 $GLOBALS['FpipR_tables']['spip_fpipr_photos_key'] = array(
@@ -179,6 +181,7 @@ $GLOBALS['tables_principales']['spip_fpipr_photosets'] =
 $GLOBALS['table_des_tables']['flickr_photosets_getlist'] = 'fpipr_photosets';
 
 $GLOBALS['table_des_tables']['flickr_photosets_getphotos'] = 'fpipr_photos';
+$GLOBALS['table_des_tables']['flickr_groups_pools_getphotos'] = 'fpipr_photos';
 
 //======================================================================
 //pour le contexte
@@ -265,7 +268,7 @@ function FpipR_fill_photos_table($photos,$add='') {
   $cnt = 0;
   $query = "DELETE FROM spip_fpipr_photos";
   spip_query($query);
-  $col = '(id_photo,user_id,secret,server,title,ispublic,isfriend,isfamily,originalformat,license,upload_date,taken_date,owner_name,icon_server,last_update,longitude,latitude,accuracy,rang';
+  $col = '(id_photo,user_id,secret,server,title,ispublic,isfriend,isfamily,originalformat,license,upload_date,taken_date,owner_name,icon_server,last_update,longitude,latitude,accuracy,rang,added_date';
 
   if($add)
 	foreach($add as $name=>$val) {
@@ -273,7 +276,7 @@ function FpipR_fill_photos_table($photos,$add='') {
 	  $vals .= ','._q($val);
 	}
   foreach($photos as $photo) {
-	$vals = "("._q($photo->id).','._q($photo->owner).','._q($photo->secret).','._q($photo->server).','._q($photo->title).','._q($photo->idpublic).','._q($photo->isfriend).','._q($photo->isfamily).','._q($photo->originalformat).','._q($photo->license).','._q(date('Y-m-d H:i:s',$photo->dateupload+0)).','._q($photo->datetaken).','._q($photo->ownername).','._q($photo->iconserver).','._q(date('Y-m-d H:i:s',$photo->lastupdate+0)).','._q($photo->longitude).','._q($photo->latitude).','._q($photo->accuracy).','.$cnt++;
+	$vals = "("._q($photo->id).','._q($photo->owner).','._q($photo->secret).','._q($photo->server).','._q($photo->title).','._q($photo->idpublic).','._q($photo->isfriend).','._q($photo->isfamily).','._q($photo->originalformat).','._q($photo->license).','._q(date('Y-m-d H:i:s',$photo->dateupload+0)).','._q($photo->datetaken).','._q($photo->ownername).','._q($photo->iconserver).','._q(date('Y-m-d H:i:s',$photo->lastupdate+0)).','._q($photo->longitude).','._q($photo->latitude).','._q($photo->accuracy).','.$cnt++.','._q(date('Y-m-d H:i:s',$photo->dateadded+0));
 	if($add)
 	  foreach($add as $name=>$val) {
 		$vals .= ','._q($val);
@@ -418,4 +421,20 @@ function FpipR_flickr_interestingness_getlist_dist($arguments) {
 
 //======================================================================
 
+function FpipR_create_flickr_groups_pools_getphotos_dist() {
+  FpipR_make_table('spip_fpipr_photos');
+}
+
+function FpipR_flickr_groups_pools_getphotos_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $photos = flickr_groups_pools_getPhotos($arguments['id_group'],
+										   $arguments['tags'],
+										   $arguments['user_id'],
+										   $arguments['extras'],
+										   $arguments['per_page'],
+										   $arguments['page']);
+  FpipR_fill_photos_table($photos->photos,array('id_group'=>$arguments['id_group']));
+}
+
+//======================================================================
 ?>

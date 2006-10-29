@@ -195,6 +195,7 @@ class FlickrPhoto {
   var $longitude='';
   var $latitude='';
   var $accuracy='';
+  var $dateadded = ''; //seulement quand on vient d'un groupe
 
   /*
    s	small square 75x75
@@ -520,6 +521,21 @@ function flickr_interestingness_getList($date,$extras,$per_page,$page,$auth_toke
   if($page) $params['page'] = $page;
 
   $photos =  flickr_check_error(flickr_api_call('flickr.interestingness.getList',$params,$auth_token));
+  return flickr_utils_createPhotos($photos);
+}
+
+function flickr_groups_pools_getPhotos($group_id, $tags, $user_id, $extras, $per_page, $page, $auth_token='') {
+  $params = array();
+  if($group_id) $params['group_id'] = $group_id;
+  else return false;
+  if($tags) $params['tags'] = $tags;
+  if($user_id) $params['user_id'] = $user_id;
+  if($extras) $params['extras'] = "original_format,$extras"; 
+  else $params['extras'] = "original_format";
+  if($per_page) $params['per_page'] = $per_page;
+  if($page) $params['page'] = $page;
+
+  $photos =  flickr_check_error(flickr_api_call('flickr.groups.pools.getPhotos',$params,$auth_token));
   return flickr_utils_createPhotos($photos);
 }
 
