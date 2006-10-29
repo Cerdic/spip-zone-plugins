@@ -34,8 +34,8 @@ function switcher_affichage_final($texte){
 			}
 
 			
-		// On rajoute le code du selecteur de squelettes après la balise <body *>
-		$texte=eregi_replace("<body([^>]*)>","<body \\1>$code",$texte);
+		// On rajoute le code du selecteur de squelettes avant la balise </body>
+		$texte=eregi_replace("</body>","$code</body>",$texte);
 	}
 	return($texte);
 }
