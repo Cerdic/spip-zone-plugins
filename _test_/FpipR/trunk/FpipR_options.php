@@ -108,4 +108,14 @@ function FpipR_generer_url_photoset($user_id,$id_photoset) {
 }
 
 
+function FpipR_photos_getContext($id_photo,$tag,$attr) {
+  static $contexts;
+  if(!$contexts[$id_photo]) { 
+	include_spip('inc/flickr_api');
+	$contexts[$id_photo] = flickr_photos_getContext($id_photo);
+  }
+  return $contexts[$id_photo][$tag][$attr];
+}
+
+
 ?>

@@ -478,6 +478,14 @@ function flickr_photos_licenses_getInfo() {
 		</licenses>*/
 }
 
+function flickr_photos_getContext($photo_id,$auth_token='') {
+  $params= array(
+				 'photo_id' => $photo_id
+				 );
+  $photos =  flickr_check_error(flickr_api_call('flickr.photos.getContext',$params,$auth_token));
+  return $photos;
+}
+
 //======================================================================
 
 function flickr_bookmarklet_info() {

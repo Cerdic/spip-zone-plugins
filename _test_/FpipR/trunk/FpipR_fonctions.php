@@ -397,5 +397,99 @@ function boucle_FLICKR_PHOTOSETS_GETPHOTOS_dist($id_boucle, &$boucles) {
   return calculer_boucle($id_boucle, $boucles); 
 }
 
+//======================================================================
+// pour flickr.photos.getContext
+// on ne fait que des balises
+//======================================================================
+
+/*<count>809</count>
+<prevphoto id="268856369" secret="042e926016" server="113" farm="1" title="Thistle" url="/photos/mortimer/268856369/in/photostream/" thumb="http://static.flickr.com/113/268856369_042e926016_s.jpg"/>
+<nextphoto id="269373997" secret="8c5632b520" server="84" farm="1" title="" url="/photos/mortimer/269373997/in/photostream/" thumb="http://static.flickr.com/84/269373997_8c5632b520_s.jpg"/>*/
+
+function balise_PHOTOS_COUNT_dist($p) {
+  $photo_id = champ_sql('id_photo',$p);
+  $p->code = 'FpipR_photos_getContext('.$photo_id.',"count","_content")';
+  return $p;
+}
+
+function balise_PREVPHOTO_ID_dist($p) {
+  $photo_id = champ_sql('id_photo',$p);
+  $p->code = 'FpipR_photos_getContext('.$photo_id.',"prevphoto","id")';
+  return $p;  
+}
+function balise_PREVPHOTO_SECRET_dist($p) {
+  $photo_id = champ_sql('id_photo',$p);
+  $p->code = 'FpipR_photos_getContext('.$photo_id.',"prevphoto","secret")';
+  return $p;  
+}
+function balise_PREVPHOTO_SERVER_dist($p) {
+  $photo_id = champ_sql('id_photo',$p);
+  $p->code = 'FpipR_photos_getContext('.$photo_id.',"prevphoto","server")';
+  return $p;  
+}
+function balise_PREVPHOTO_TITLE_dist($p) {
+  $photo_id = champ_sql('id_photo',$p);
+  $p->code = 'FpipR_photos_getContext('.$photo_id.',"prevphoto","title")';
+  return $p;  
+}
+function balise_URL_PREVPHOTO_dist($p) {
+  $photo_id = champ_sql('id_photo',$p);
+  $p->code = 'FpipR_photos_getContext('.$photo_id.',"prevphoto","url")';
+  return $p;  
+}
+function balise_PREVPHOTO_THUMB_dist($p) {
+  $photo_id = champ_sql('id_photo',$p);
+  $p->code = 'FpipR_photos_getContext('.$photo_id.',"prevphoto","thumb")';
+  return $p;  
+}
+function balise_LOGO_PREVPHOTO_dist($p) {
+  $id_photo = champ_sql('id_photo',$p);
+  $taille =  calculer_liste($p->param[0][1],
+									$p->descr,
+									$p->boucles,
+									$p->id_boucle);
+  $p->code = "FpipR_logo_photo(FpipR_photos_getContext($id_photo,'prevphoto','id'),FpipR_photos_getContext($id_photo,'prevphoto','server'),FpipR_photos_getContext($id_photo,'prevphoto','secret'),$taille,'jpg')";	
+  return $p;
+}
+
+function balise_NEXTPHOTO_ID_dist($p) {
+  $photo_id = champ_sql('id_photo',$p);
+  $p->code = 'FpipR_photos_getContext('.$photo_id.',"nextphoto","id")';
+  return $p;  
+}
+function balise_NEXTPHOTO_SECRET_dist($p) {
+  $photo_id = champ_sql('id_photo',$p);
+  $p->code = 'FpipR_photos_getContext('.$photo_id.',"nextphoto","secret")';
+  return $p;  
+}
+function balise_NEXTPHOTO_SERVER_dist($p) {
+  $photo_id = champ_sql('id_photo',$p);
+  $p->code = 'FpipR_photos_getContext('.$photo_id.',"nextphoto","server")';
+  return $p;  
+}
+function balise_NEXTPHOTO_TITLE_dist($p) {
+  $photo_id = champ_sql('id_photo',$p);
+  $p->code = 'FpipR_photos_getContext('.$photo_id.',"nextphoto","title")';
+  return $p;  
+}
+function balise_URL_NEXTPHOTO_dist($p) {
+  $photo_id = champ_sql('id_photo',$p);
+  $p->code = 'FpipR_photos_getContext('.$photo_id.',"nextphoto","url")';
+  return $p;  
+}
+function balise_NEXTPHOTO_THUMB_dist($p) {
+  $photo_id = champ_sql('id_photo',$p);
+  $p->code = 'FpipR_photos_getContext('.$photo_id.',"nextphoto","thumb")';
+  return $p;  
+}
+function balise_LOGO_NEXTPHOTO_dist($p) {
+  $id_photo = champ_sql('id_photo',$p);
+  $taille =  calculer_liste($p->param[0][1],
+									$p->descr,
+									$p->boucles,
+									$p->id_boucle);
+  $p->code = "FpipR_logo_photo(FpipR_photos_getContext($id_photo,'nextphoto','id'),FpipR_photos_getContext($id_photo,'nextphoto','server'),FpipR_photos_getContext($id_photo,'nextphoto','secret'),$taille,'jpg')";	
+  return $p;
+}
 
 ?>

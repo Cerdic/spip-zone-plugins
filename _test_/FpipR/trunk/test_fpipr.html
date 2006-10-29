@@ -19,12 +19,16 @@ NSID Flickr: #FLICKR_NSID
 #DESCRIPTION
 <a href="#URL_PHOTOSET">#LOGO_PHOTOSET{s}</a>
 <BOUCLE_photos(FLICKR_PHOTOSETS_GETPHOTOS) {id_photoset} {0,10} {"<br/>"}>
-#LOGO_PHOTO{s}
+#LOGO_PREVPHOTO{t}
+#LOGO_PHOTO{m} 
+#LOGO_NEXTPHOTO{t}
+<small>
 <BOUCLE_info(FLICKR_PHOTOS_GETINFO) {id_photo}>
 <BOUCLE_tags(FLICKR_PHOTO_TAGS) {","}>
 #RAW
 </BOUCLE_tags>
 </BOUCLE_info>
+</small>
 </BOUCLE_photos>
 
 </BOUCLE_sets>
