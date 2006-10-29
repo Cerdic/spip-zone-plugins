@@ -16,9 +16,16 @@ function post_widgets() {
 		$name = $_POST['name_'.$widget];
 		$content = $_POST['content_'.$widget];
 
+		// Compatibilite charset autre que utf8 ; en effet on recoit
+		// obligatoirement les donnees en utf-8, par la magie d'ajax
+		if ($GLOBALS['meta']['charset']!='utf-8') {
+			include_spip('inc/charsets');
+			$content = importer_charset($content, 'utf-8');
+		}
+
 		// Si les donnees POSTees ne correspondent pas a leur md5,
 		// il faut les traiter
-		if (md5($_POST['content_'.$widget]) <> $_POST['md5_'.$widget]) {
+		if (md5($content) <> $_POST['md5_'.$widget]) {
 
 			if (!isset($_POST['secu_'.$widget]))
 				$results[] = array($name, $content, $_POST['md5_'.$widget], $widget);

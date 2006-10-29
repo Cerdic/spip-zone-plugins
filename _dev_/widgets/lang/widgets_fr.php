@@ -3,12 +3,12 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'editer' => 'Editer',
-'donnees_mal_formatees' => 'Donnees mal formatees', // 1
-'non_autorise' => 'Non autorise', // 2
-'modifie_par_ailleurs' => 'Modifie par ailleurs', // 3
-'pas_de_modification' => 'Pas de modification', // 4
-'non_implemente' => 'Non implemente', // 5
-'pas_de_valeur' => 'Pas de valeur' // 6
-);
+	'editer' => '&Eacute;diter',
+	'donnees_mal_formatees' => 'Donn&eacute;es mal format&eacute;es',
+	'non_autorise' => 'Non autoris&eacute;',
+	'modifie_par_ailleurs' => 'Modifi&eacute; par ailleurs',
+	'pas_de_modification' => 'Pas de modification',
+	'non_implemente' => 'Non impl&eacute;ment&eacute;',
+	'pas_de_valeur' => 'Pas de valeur'
+	);
 ?>

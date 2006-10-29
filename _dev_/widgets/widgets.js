@@ -34,6 +34,7 @@ $.fn.openwidget = function() {
         {
           'w': $(this).width(),
           'h': $(this).height(),
+          'wh': window.innerHeight,
           'em': $(this).css('fontSize'),
           'class': me.className
         },
@@ -104,8 +105,14 @@ $.fn.activatewidget = function() {
         eval('d=' + d.responseText + ';');
         if (d.$erreur > '') {
           alert(d.$erreur);
-          $(me).find("img.widget-searching").remove();
-          $(".widget-boutons", me).show();
+          $(me)
+          .prev()
+            .cancelwidget()
+          .next()
+          .find("img.widget-searching")
+            .remove();
+          $(".widget-boutons", me)
+          .show();
           return false;
         }
         $(me)
@@ -123,10 +130,15 @@ $.fn.activatewidget = function() {
       }).onesubmit(function(){
         $(this)
         .append(SEARCHING) // icone d'attente
-        .find(".widget-boutons").hide(); // boutons de validation
+        .find(".widget-boutons")
+          .hide(); // boutons de validation
       }).keyup(function(){
-        $(this).find(".widget-boutons").show();
-        $(me).prev().addClass('widget-changed');
+        $(this)
+        .find(".widget-boutons")
+          .show();
+        $(me)
+        .prev()
+          .addClass('widget-changed');
       })
       .find(".widget-active")
         .css('font', 'inherit') // pour safari

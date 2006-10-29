@@ -14,50 +14,49 @@ function valeur_colonne_table($table, $col, $id) {
 
 
 /**
-    * Transform a variable into its javascript equivalent (recursive)
-    * @access private
-    * @param mixed the variable
-    * @return string js script | boolean false if error
-    */
-function var2js( $var)
-{
+	* Transform a variable into its javascript equivalent (recursive)
+	* @access private
+	* @param mixed the variable
+	* @return string js script | boolean false if error
+	*/
+function var2js($var) {
 	$asso = false;
-    switch (true) {
-        case is_null($var) :
-            return 'null';
-        case is_string($var) :
-            return '"' . addcslashes($var, "\"\\\n\r") . '"';
-        case is_bool($var) :
-            return $var ? 'true' : 'false';
-        case is_scalar($var) :
-            return $var;
-	    case is_object( $var) :
-	        $var = get_object_vars($var);
-	        $asso = true;
-        case is_array($var) :
-		    $keys = array_keys($var);
-		    $ikey = count($keys);
-		    while (!$asso && $ikey--) {
-		    	$asso = $ikey !== $keys[$ikey];
-		    }
-            $sep = '';
-		    if ($asso) {
-	            $ret = '{';
-	            foreach ($var as $key => $elt) {
-	                $ret .= $sep . '"' . $key . '":' . var2js($elt);
-	                $sep = ',';
-	            }
-	            return $ret ."}\n";
-		    } else {
-	            $ret = '[';
-	            foreach ($var as $elt) {
-	                $ret .= $sep . var2js($elt);
-	                $sep = ',';
-	            }
-	            return $ret ."]\n";
-            }
-    }
-    return 'null';
+	switch (true) {
+		case is_null($var) :
+			return 'null';
+		case is_string($var) :
+			return '"' . addcslashes($var, "\"\\\n\r") . '"';
+		case is_bool($var) :
+			return $var ? 'true' : 'false';
+		case is_scalar($var) :
+			return $var;
+		case is_object( $var) :
+			$var = get_object_vars($var);
+			$asso = true;
+		case is_array($var) :
+			$keys = array_keys($var);
+			$ikey = count($keys);
+			while (!$asso && $ikey--) {
+				$asso = $ikey !== $keys[$ikey];
+			}
+			$sep = '';
+			if ($asso) {
+				$ret = '{';
+				foreach ($var as $key => $elt) {
+					$ret .= $sep . '"' . $key . '":' . var2js($elt);
+					$sep = ',';
+				}
+				return $ret ."}\n";
+			} else {
+				$ret = '[';
+				foreach ($var as $elt) {
+					$ret .= $sep . var2js($elt);
+					$sep = ',';
+				}
+				return $ret ."]\n";
+			}
+	}
+	return 'null';
 }
 
 function action_widgets_html_dist() {
@@ -104,6 +103,14 @@ function action_widgets_html_dist() {
 								include_spip('action/editer_article');
 								$fun = 'revisions_articles';
 								break;
+							case 'rubrique':
+								include_spip('action/editer_rubrique');
+								$fun = 'revisions_rubriques';
+								break;
+							case 'breve':
+								include_spip('action/editer_breve');
+								$fun = 'revisions_breves';
+								break;
 							default :
 						$return['$erreur'] =
 							"$type: " . _T('widgets:non_implemente');
@@ -120,7 +127,7 @@ function action_widgets_html_dist() {
 				}
 			}
 		}
-		if (!$anamod) {
+		if (!$anamod AND !$return['$erreur']) {
 			$return['$erreur'] = _T('widgets:pas_de_modification');
 		}
 
@@ -136,10 +143,8 @@ function action_widgets_html_dist() {
 
 				// Enregistrer dans la base
 				// $updok = ... quand on aura un retour
-
-				// TODO: compatibilite charset autre que utf8
-
-				$idschamps['fun']($id, false, $champsvaleurs['chval']);
+				// -- revisions_articles($id_article, $c) --
+				$idschamps['fun']($id, $champsvaleurs['chval']);
 			}
 		}
 		foreach($anamod as $m) {
@@ -158,10 +163,18 @@ function action_widgets_html_dist() {
 				$return[$wid] = recuperer_fond($fond, $contexte);
 			}
 			// vues par defaut
-			elseif (in_array($champ, array('chapo', 'texte', 'descriptif', 'ps'))) {
-				$return[$wid] = propre($valeur);
-			} else {
-				$return[$wid] = typo($valeur);
+			else {
+				// Par precaution on va rechercher la valeur
+				// dans la base de donnees (meme si a priori la valeur est
+				// ce qu'on vient d'envoyer, il y a nettoyage des caracteres et
+				// eventuellement d'autres filtres de saisie...)
+				$valeur = valeur_colonne_table($type, $champ, $id);
+				if (in_array($champ,
+				array('chapo', 'texte', 'descriptif', 'ps'))) {
+					$return[$wid] = propre($valeur);
+				} else {
+					$return[$wid] = typo($valeur);
+				}
 			}
 		}
 	}
@@ -196,7 +209,8 @@ function controleur_dist($regs) {
 	list(,$widget,$type,$champ,$id) = $regs;
 
 	// type du widget
-	if (in_array($champ, array('chapo', 'texte', 'descriptif', 'ps')))
+	if (in_array($champ,
+	array('chapo', 'texte', 'descriptif', 'ps')))
 		$mode = 'texte';
 	else
 		$mode = 'ligne';
@@ -204,6 +218,7 @@ function controleur_dist($regs) {
 	// taille du widget
 	$w = intval($_GET['w']);
 	$h = intval($_GET['h']);
+	$wh = intval($_GET['wh']); // window height
 	if ($w<100) $w=100;
 	if ($w>700) $w=700;
 	if ($mode == 'texte') {
@@ -212,7 +227,9 @@ function controleur_dist($regs) {
 	else // ligne, hauteur naturelle
 		$h='';#$hx = htmlspecialchars($_GET['em']);
 
-	if ($h>700) $h=700; // hauteur maxi d'un textarea -- pas assez ? trop ?
+	// hauteur maxi d'un textarea -- pas assez ? trop ?
+	$maxheight = min(max($wh-50,400), 700);
+	if ($h>$maxheight) $h=$maxheight;
 
 	$inputAttrs = array(
 		'style' => "width:${w}px;" . ($h ? " height:${h}px;" : ''));
@@ -225,6 +242,12 @@ function controleur_dist($regs) {
 		$widgetsInput = $n->input($mode, $inputAttrs);
 		$widgetsImgPath = dirname(find_in_path('images/cancel.png'));
 
+		// title des boutons
+		$OK = texte_backend(_T('bouton_enregistrer'));
+		$Cancel = texte_backend(_L('Annuler'));
+		$Editer = texte_backend(_L("&Eacute;diter $type $id"));
+		$url_edit = "ecrire/?exec={$type}s_edit&amp;id_{$type}=$id";
+
 		$html =
 		<<<FIN_FORM
 
@@ -233,15 +256,13 @@ function controleur_dist($regs) {
   {$widgetsInput}
   <div class="widget-boutons">
   <div style="position:absolute;">
-    <a class="widget-submit" title="OK">
+    <a class="widget-submit" title="{$OK}">
       <img src="{$widgetsImgPath}/ok.png" width="20" height="20" />
     </a>
-    <a class="widget-cancel" title="Cancel">
+    <a class="widget-cancel" title="{$Cancel}">
       <img src="{$widgetsImgPath}/cancel.png" width="20" height="20" />
     </a>
-    <a href="ecrire/?exec=articles_edit&amp;id_article=$id"
-    title="editer $type $id"
-    class="widget-full">
+    <a href="{$url_edit}" title="{$Editer}" class="widget-full">
       <img src="{$widgetsImgPath}/edit.png" width="20" height="20" />
     </a>
   </div>
