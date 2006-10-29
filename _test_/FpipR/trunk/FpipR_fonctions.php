@@ -743,6 +743,40 @@ function boucle_FLICKR_GROUPS_POOLS_GETPHOTOS_dist($id_boucle, &$boucles) {
 
 //======================================================================
 
+function boucle_FLICKR_TAGS_GETLISTPHOTO_dist($id_boucle, &$boucles) {
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$boucle->from[$id_table] =  "spip_fpipr_tags";
+
+	foreach($boucle->where as $w) {
+	  if($w[0] == "'?'") {
+		$w = $w[2];
+	  } 
+	  $key = str_replace("'",'',$w[1]);
+	  $val = $w[2];
+	  $key = str_replace("$id_table.",'',$key);
+	  if ($w[0] = "'='" && $key == 'id_photo'){
+		$arguments[$key] = $val;
+	  } else 
+		erreur_squelette(_T('fpipr:mauvaisop',array('critere'=>$key,'op'=>$w[0])), $id_boucle);
+	}
+
+	$boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
+	  \$arguments = '';\n";
+	$bbox = '';
+	foreach($arguments as $key => $val) {
+	  if($val) {
+		$boucle->hash .= "\$v=$val;\n";
+		$boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument('$key',\$v);\n";
+	  }}
+	
+	$boucle->hash .= "FpipR_fill_table_boucle('flickr.tags.getListPhoto',\$arguments);";
+
+	return calculer_boucle($id_boucle, $boucles); 
+}
+
+//======================================================================
+
 function FpipR_utils_calcul_limit(&$boucle,&$arguments) {
   //on calcul le nombre de page d'apres {0,10}
     list($debut,$pas) = split(',',$boucle->limit);

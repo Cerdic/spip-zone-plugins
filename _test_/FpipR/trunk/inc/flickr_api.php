@@ -539,6 +539,25 @@ function flickr_groups_pools_getPhotos($group_id, $tags, $user_id, $extras, $per
   return flickr_utils_createPhotos($photos);
 }
 
+function flickr_tags_getListPhoto($photo_id,$auth_token='') {
+  $params = array();
+  if($photo_id) $params['photo_id'] = $photo_id;
+  else return false;
+  $p = flickr_check_error(flickr_api_call('flickr.tags.getListPhoto',$params,$auth_token));
+  
+  $tags = array();
+  foreach($p['photo']['tags']['tag'] as $tag) { 
+	$t = new FlickrTag;
+	$t->safe = $tag['_content'];
+	$t->id = $tag['id'];
+	$t->raw = $tag['raw'];
+	$t->author = $tag['author'];
+		  
+	$tags[] = $t;
+  }
+  return $tags;
+}
+
 //======================================================================
 
 function flickr_bookmarklet_info() {

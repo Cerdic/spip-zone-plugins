@@ -124,6 +124,7 @@ $GLOBALS['FpipR_tables']['spip_fpipr_tags_key'] = array("PRIMARY KEY" => "id_tag
 $GLOBALS['tables_principales']['spip_fpipr_tags'] =
   array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_tags_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_tags_key']);
 $GLOBALS['table_des_tables']['flickr_photo_tags'] = 'fpipr_tags';
+$GLOBALS['table_des_tables']['flickr_tags_getlistphoto'] = 'fpipr_tags';
 
 $GLOBALS['FpipR_versions']['spip_fpipr_notes'] = '0.3';
 $GLOBALS['FpipR_tables']['spip_fpipr_notes_field'] = array(
@@ -434,6 +435,22 @@ function FpipR_flickr_groups_pools_getphotos_dist($arguments) {
 										   $arguments['per_page'],
 										   $arguments['page']);
   FpipR_fill_photos_table($photos->photos,array('id_group'=>$arguments['id_group']));
+}
+
+//======================================================================
+function FpipR_create_flickr_tags_getlistphoto_dist() {
+  FpipR_make_table('spip_fpipr_tags');
+}
+
+function FpipR_flickr_tags_getlistphoto_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $tags = flickr_tags_getListPhoto($arguments['id_photo']);
+  foreach($tags as $tag) {
+	spip_abstract_insert('spip_fpipr_tags',
+						 '(id_tag,author,raw,safe,id_photo)',
+						 '('._q($tag->id).','._q($tag->author).','._q($tag->raw).','._q($tag->safe).','._q($arguments['id_photo']).')'
+						 );
+  }
 }
 
 //======================================================================
