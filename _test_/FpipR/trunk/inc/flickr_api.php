@@ -293,20 +293,7 @@ function flickr_photos_search(
   if($accuracy != NULL) $params['accuracy'] = $accuracy ;
 
   $photos =  flickr_check_error(flickr_api_call('flickr.photos.search',$params,$auth_token));
-  $resp = new FlickrPhotos;
-  if($photos = $photos['photos']) {
-	$resp->page = $photos['page'];
-	$resp->pages = $photos['pages'];
-	$resp->perpage = $photos['perpage'];
-	$resp->total = $photos['total'];
-
-	foreach($photos['photo'] as $photo) {
-	  $new_p = new FlickrPhoto;
-	  foreach($photo as $key => $value) $new_p->$key = $value;
-	  $resp->photos[] = $new_p;
-	}
-  }  
-  return $resp;
+  return flickr_utils_createPhotos($photos);
 }
 
 function flickr_photosets_getList($user_id,$auth_token='') {
@@ -355,23 +342,29 @@ function flickr_photosets_getPhotos($photoset_id,$extras='',$per_page='',$page='
   if($page) $params['page'] = $page;
 
   $photos =  flickr_check_error(flickr_api_call('flickr.photosets.getPhotos',$params,$auth_token));
-  $resp = array();
-  if($photos = $photos['photoset']) {
+  return flickr_utils_createPhotos($photos);
+}
+
+function flickr_utils_createPhotos($photos) {
+  $resp = new FlickrPhotos;
+  if($photos = $photos['photos']) {
+	$resp->page = $photos['page'];
+	$resp->pages = $photos['pages'];
+	$resp->perpage = $photos['perpage'];
+	$resp->total = $photos['total'];
+	
 	foreach($photos['photo'] as $photo) {
 	  $new_p = new FlickrPhoto;
-	  
 	  foreach($photo as $key => $value) {
 		if(is_array($value))
 		  $new_p->$key = $value['_content'];
 		else
 		  $new_p->$key = $value;
 	  }
-
-	  $resp[] = $new_p;
+	  $resp->photos[] = $new_p;
 	}
   }  
   return $resp;
-
 }
 
 function flickr_photos_getInfo($photo_id,$secret='',$auth_token='') {
@@ -515,6 +508,21 @@ function flickr_groups_pools_getContext($photo_id,$group_id,$auth_token='') {
   $photos =  flickr_check_error(flickr_api_call('flickr.groups.pools.getContext',$params,$auth_token));
   return $photos;
 }
+
+//http://www.flickr.com/services/api/flickr.interestingness.getList.html
+//retourne un FlickrPhotos
+function flickr_interestingness_getList($date,$extras,$per_page,$page,$auth_token='') {
+  $params = array();
+  if($date) $params['date'] = $date;
+  if($extras) $params['extras'] = "original_format,$extras"; 
+  else $params['extras'] = "original_format";
+  if($per_page) $params['per_page'] = $per_page;
+  if($page) $params['page'] = $page;
+
+  $photos =  flickr_check_error(flickr_api_call('flickr.interestingness.getList',$params,$auth_token));
+  return flickr_utils_createPhotos($photos);
+}
+
 //======================================================================
 
 function flickr_bookmarklet_info() {

@@ -29,7 +29,7 @@ function action_flickr_ajouter_documents() {
 		$sets = _request('sets');
 		foreach($sets as $s) {
 		  $allphotos = flickr_photosets_getPhotos($s,'','',$row['auth_token']);
-		  foreach($allphotos as $photo) {
+		  foreach($allphotos->photos as $photo) {
 			$photos[] = $photo->id.'@#@'.$photo->secret;
 		  }
 		}

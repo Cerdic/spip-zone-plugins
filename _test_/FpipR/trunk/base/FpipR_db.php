@@ -200,6 +200,11 @@ $GLOBALS['tables_principales']['spip_fpipr_contextes'] =
 $GLOBALS['table_des_tables']['flickr_photos_getallcontexts'] = 'fpipr_contextes';
 
 //======================================================================
+//interestingness
+
+$GLOBALS['table_des_tables']['flickr_interestingness_getlist'] = 'fpipr_photos';
+
+//======================================================================
 
 function FpipR_creer_tables($method){
   $fct = str_replace('.','_',$method);
@@ -366,7 +371,7 @@ function FpipR_flickr_photosets_getphotos_dist($arguments) {
 									   $arguments['per_page'],
 									   $arguments['page'],
 									   $arguments['privacy_filter']);
-  FpipR_fill_photos_table($photos,array(
+  FpipR_fill_photos_table($photos->photos,array(
 										'id_photoset' => $arguments['id_photoset']
 										));
 }
@@ -395,6 +400,21 @@ function FpipR_flickr_photos_getallcontexts_dist($arguments) {
   } 
 }
 
+
+//======================================================================
+
+function FpipR_create_flickr_interestingness_getlist_dist() {
+  FpipR_make_table('spip_fpipr_photos');
+}
+
+function FpipR_flickr_interestingness_getlist_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $photos = flickr_interestingness_getList($arguments['date'],
+										   $arguments['extras'],
+										   $arguments['per_page'],
+										   $arguments['page']);
+  FpipR_fill_photos_table($photos->photos);
+}
 
 //======================================================================
 
