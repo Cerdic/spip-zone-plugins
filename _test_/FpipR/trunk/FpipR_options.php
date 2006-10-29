@@ -119,7 +119,7 @@ function FpipR_photos_getContext($id_photo,$id_photoset='',$id_group='',$tag,$at
   } else if($id_group) {
 	if(!$contexts["$id_photo-$id_group"]) { 
 	  include_spip('inc/flickr_api');
-	  $contexts["$id_photo-$id_group"] = flickr_groups_getContext($id_photo,$id_group);
+	  $contexts["$id_photo-$id_group"] = flickr_groups_pools_getContext($id_photo,$id_group);
 	}
 	return $contexts["$id_photo-$id_group"][$tag][$attr];
 	} else {

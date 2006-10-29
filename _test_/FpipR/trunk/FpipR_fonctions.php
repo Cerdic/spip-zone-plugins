@@ -408,58 +408,97 @@ function boucle_FLICKR_PHOTOSETS_GETPHOTOS_dist($id_boucle, &$boucles) {
 
 function balise_PHOTOS_COUNT_dist($p) {
   $photo_id = champ_sql('id_photo',$p);
-  $photoset_id = champ_sql('id_photoset',$p);
-  $group_id = champ_sql('id_group',$p);
+  
+  $type = champ_sql('type',$p);
+  $id = champ_sql('id_contexte',$p);
+
+  $photoset_id = "(($type == 'set')?$id:".champ_sql('id_photoset',$p).')';
+  $group_id = "(($type == 'pool')?$id:".champ_sql('id_group',$p).')';
   $p->code = 'FpipR_photos_getContext('.$photo_id.','.$photoset_id.','.$group_id.',"count","_content")';
   return $p;
 }
 
 function balise_PREVPHOTO_ID_dist($p) {
   $photo_id = champ_sql('id_photo',$p);
-  $photoset_id = champ_sql('id_photoset',$p);
-  $group_id = champ_sql('id_group',$p);
+
+  $type = champ_sql('type',$p);
+  $id = champ_sql('id_contexte',$p);
+
+  $photoset_id = "(($type == 'set')?$id:".champ_sql('id_photoset',$p).')';
+  $group_id = "(($type == 'pool')?$id:".champ_sql('id_group',$p).')';
+
   $p->code = 'FpipR_photos_getContext('.$photo_id.','.$photoset_id.','.$group_id.',"prevphoto","id")';
   return $p;  
 }
 function balise_PREVPHOTO_SECRET_dist($p) {
   $photo_id = champ_sql('id_photo',$p);
-  $photoset_id = champ_sql('id_photoset',$p);
-  $group_id = champ_sql('id_group',$p);
+
+   $type = champ_sql('type',$p);
+  $id = champ_sql('id_contexte',$p);
+
+  $photoset_id = "(($type == 'set')?$id:".champ_sql('id_photoset',$p).')';
+  $group_id = "(($type == 'pool')?$id:".champ_sql('id_group',$p).')';
+
   $p->code = 'FpipR_photos_getContext('.$photo_id.','.$photoset_id.','.$group_id.',"prevphoto","secret")';
   return $p;  
 }
 function balise_PREVPHOTO_SERVER_dist($p) {
   $photo_id = champ_sql('id_photo',$p);
-  $photoset_id = champ_sql('id_photoset',$p);
-  $group_id = champ_sql('id_group',$p);
+
+    $type = champ_sql('type',$p);
+  $id = champ_sql('id_contexte',$p);
+
+$photoset_id = "(($type == 'set')?$id:".champ_sql('id_photoset',$p).')';
+  $group_id = "(($type == 'pool')?$id:".champ_sql('id_group',$p).')';
+
   $p->code = 'FpipR_photos_getContext('.$photo_id.','.$photoset_id.','.$group_id.',"prevphoto","server")';
   return $p;  
 }
 function balise_PREVPHOTO_TITLE_dist($p) {
   $photo_id = champ_sql('id_photo',$p);
-  $photoset_id = champ_sql('id_photoset',$p);
-  $group_id = champ_sql('id_group',$p);
+
+  $type = champ_sql('type',$p);
+  $id = champ_sql('id_contexte',$p);
+
+  $photoset_id = "(($type == 'set')?$id:".champ_sql('id_photoset',$p).')';
+  $group_id = "(($type == 'pool')?$id:".champ_sql('id_group',$p).')';
+
   $p->code = 'FpipR_photos_getContext('.$photo_id.','.$photoset_id.','.$group_id.',"prevphoto","title")';
   return $p;  
 }
 function balise_URL_PREVPHOTO_dist($p) {
   $photo_id = champ_sql('id_photo',$p);
-  $photoset_id = champ_sql('id_photoset',$p);
-  $group_id = champ_sql('id_group',$p);
+
+  $type = champ_sql('type',$p);
+  $id = champ_sql('id_contexte',$p);
+
+  $photoset_id = "(($type == 'set')?$id:".champ_sql('id_photoset',$p).')';
+  $group_id = "(($type == 'pool')?$id:".champ_sql('id_group',$p).')';
+
   $p->code = 'FpipR_photos_getContext('.$photo_id.','.$photoset_id.','.$group_id.',"prevphoto","url")';
   return $p;  
 }
 function balise_PREVPHOTO_THUMB_dist($p) {
   $photo_id = champ_sql('id_photo',$p);
-  $photoset_id = champ_sql('id_photoset',$p);
-  $group_id = champ_sql('id_group',$p);
+
+  $type = champ_sql('type',$p);
+  $id = champ_sql('id_contexte',$p);
+
+  $photoset_id = "(($type == 'set')?$id:".champ_sql('id_photoset',$p).')';
+  $group_id = "(($type == 'pool')?$id:".champ_sql('id_group',$p).')';
+
   $p->code = 'FpipR_photos_getContext('.$photo_id.','.$photoset_id.','.$group_id.',"prevphoto","thumb")';
   return $p;  
 }
 function balise_LOGO_PREVPHOTO_dist($p) {
   $id_photo = champ_sql('id_photo',$p);
-  $photoset_id = champ_sql('id_photoset',$p);
-  $group_id = champ_sql('id_group',$p);
+
+  $type = champ_sql('type',$p);
+  $id = champ_sql('id_contexte',$p);
+
+  $photoset_id = "(($type == 'set')?$id:".champ_sql('id_photoset',$p).')';
+  $group_id = "(($type == 'pool')?$id:".champ_sql('id_group',$p).')';
+
   $taille =  calculer_liste($p->param[0][1],
 									$p->descr,
 									$p->boucles,
@@ -470,50 +509,85 @@ function balise_LOGO_PREVPHOTO_dist($p) {
 
 function balise_NEXTPHOTO_ID_dist($p) {
   $photo_id = champ_sql('id_photo',$p);
-  $photoset_id = champ_sql('id_photoset',$p);
-  $group_id = champ_sql('id_group',$p);
+
+  $type = champ_sql('type',$p);
+  $id = champ_sql('id_contexte',$p);
+
+  $photoset_id = "(($type == 'set')?$id:".champ_sql('id_photoset',$p).')';
+  $group_id = "(($type == 'pool')?$id:".champ_sql('id_group',$p).')';
+
   $p->code = 'FpipR_photos_getContext('.$photo_id.','.$photoset_id.','.$group_id.',"nextphoto","id")';
   return $p;  
 }
 function balise_NEXTPHOTO_SECRET_dist($p) {
   $photo_id = champ_sql('id_photo',$p);
-  $photoset_id = champ_sql('id_photoset',$p);
-  $group_id = champ_sql('id_group',$p);
+
+  $type = champ_sql('type',$p);
+  $id = champ_sql('id_contexte',$p);
+
+  $photoset_id = "(($type == 'set')?$id:".champ_sql('id_photoset',$p).')';
+  $group_id = "(($type == 'pool')?$id:".champ_sql('id_group',$p).')';
+
   $p->code = 'FpipR_photos_getContext('.$photo_id.','.$photoset_id.','.$group_id.',"nextphoto","secret")';
   return $p;  
 }
 function balise_NEXTPHOTO_SERVER_dist($p) {
   $photo_id = champ_sql('id_photo',$p);
-  $photoset_id = champ_sql('id_photoset',$p);
-  $group_id = champ_sql('id_group',$p);
+
+  $type = champ_sql('type',$p);
+  $id = champ_sql('id_contexte',$p);
+
+  $photoset_id = "(($type == 'set')?$id:".champ_sql('id_photoset',$p).')';
+  $group_id = "(($type == 'pool')?$id:".champ_sql('id_group',$p).')';
+
   $p->code = 'FpipR_photos_getContext('.$photo_id.','.$photoset_id.','.$group_id.',"nextphoto","server")';
   return $p;  
 }
 function balise_NEXTPHOTO_TITLE_dist($p) {
   $photo_id = champ_sql('id_photo',$p);
-  $photoset_id = champ_sql('id_photoset',$p);
-  $group_id = champ_sql('id_group',$p);
+
+  $type = champ_sql('type',$p);
+  $id = champ_sql('id_contexte',$p);
+
+  $photoset_id = "(($type == 'set')?$id:".champ_sql('id_photoset',$p).')';
+  $group_id = "(($type == 'pool')?$id:".champ_sql('id_group',$p).')';
+
   $p->code = 'FpipR_photos_getContext('.$photo_id.','.$photoset_id.','.$group_id.',"nextphoto","title")';
   return $p;  
 }
 function balise_URL_NEXTPHOTO_dist($p) {
   $photo_id = champ_sql('id_photo',$p);
-  $photoset_id = champ_sql('id_photoset',$p);
-  $group_id = champ_sql('id_group',$p);
+
+  $type = champ_sql('type',$p);
+  $id = champ_sql('id_contexte',$p);
+
+  $photoset_id = "(($type == 'set')?$id:".champ_sql('id_photoset',$p).')';
+  $group_id = "(($type == 'pool')?$id:".champ_sql('id_group',$p).')';
+
   $p->code = 'FpipR_photos_getContext('.$photo_id.','.$photoset_id.','.$group_id.',"nextphoto","url")';
   return $p;  
 }
 function balise_NEXTPHOTO_THUMB_dist($p) {
   $photo_id = champ_sql('id_photo',$p);
-  $photoset_id = champ_sql('id_photoset',$p);
-  $group_id = champ_sql('id_group',$p);
+
+  $type = champ_sql('type',$p);
+  $id = champ_sql('id_contexte',$p);
+
+  $photoset_id = "(($type == 'set')?$id:".champ_sql('id_photoset',$p).')';
+  $group_id = "(($type == 'pool')?$id:".champ_sql('id_group',$p).')';
+
   $p->code = 'FpipR_photos_getContext('.$photo_id.','.$photoset_id.','.$group_id.',"nextphoto","thumb")';
   return $p;  
 }
 function balise_LOGO_NEXTPHOTO_dist($p) {
   $id_photo = champ_sql('id_photo',$p);
-  $photoset_id = champ_sql('id_photoset',$p);
-  $group_id = champ_sql('id_group',$p);
+
+  $type = champ_sql('type',$p);
+  $id = champ_sql('id_contexte',$p);
+
+  $photoset_id = "(($type == 'set')?$id:".champ_sql('id_photoset',$p).')';
+  $group_id = "(($type == 'pool')?$id:".champ_sql('id_group',$p).')';
+
   $taille =  calculer_liste($p->param[0][1],
 									$p->descr,
 									$p->boucles,

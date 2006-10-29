@@ -506,6 +506,15 @@ function flickr_photosets_getContext($photo_id,$photoset_id,$auth_token='') {
   return $photos;
 }
 
+//retourne le tableau php de base Flickr
+function flickr_groups_pools_getContext($photo_id,$group_id,$auth_token='') {
+  $params= array(
+				 'photo_id' => $photo_id,
+				 'group_id' => $group_id
+				 );
+  $photos =  flickr_check_error(flickr_api_call('flickr.groups.pools.getContext',$params,$auth_token));
+  return $photos;
+}
 //======================================================================
 
 function flickr_bookmarklet_info() {
