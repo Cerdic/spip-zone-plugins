@@ -275,6 +275,33 @@ un sous set des balises de FLICKR_PHOTOS_SEARCH, mais on peut imbriquer une bouc
     * b	large, 1024px sur le côté le plus long (seulement si o est tres large)
     * o	image originale, jpg, png ou gif en fonction de #ORIGINALFORMAT
 
+== Balises a utiliser quand #ID_PHOTO est disponible ==
+
+Voici des balises, correspondantes aux informations fournis par la methode: 
+http://www.flickr.com/services/api/flickr.photos.getContext.html
+Elles peuvent être utilisées dans n'importe quelle boucle qui fournit un {{{ #ID_PHOTO }}}
+
+ * {{{ #PHOTOS_COUNT }}} le total de photos de l'utilisateur possedant cette photo
+ * {{{ #PREVPHOTO_ID }}} l'id de la photo precedente dans le photostream
+ * {{{ #PREVPHOTO_SERVER }}} le serveur de la photo precedente dans le photostream
+ * {{{ #PREVPHOTO_SECRET }}} le secret de la photo precedente dans le photostream
+ * {{{ #PREVPHOTO_TITLE }}} le titre de la photo precedente dans le photostream
+ * {{{ #URL_PREVPHOTO }}} l'url de la page de la photo precedente dans le photostream
+ * {{{ #PREVPHOTO_THUMB }}} l'url de la vignette de la photo precedente dans le photostream
+ * {{{ #LOGO_PREVPHOTO }}} le logo de la photo precedente dans le photostream (prend un parametre comme les autres balises logo, sauf 'o')
+ * {{{ #NEXTPHOTO_ID }}} l'id de la photo suivante dans le photostream
+ * {{{ #NEXTPHOTO_SERVER }}} le serveur de la photo suivante dans le photostream
+ * {{{ #NEXTPHOTO_SECRET }}} le secret de la photo suivante dans le photostream
+ * {{{ #NEXTPHOTO_TITLE }}} le titre de la photo suivante dans le photostream
+ * {{{ #URL_NEXTPHOTO }}} l'url de la page de la photo suivante dans le photostream
+ * {{{ #NEXTPHOTO_THUMB }}} l'url de la vignette de la photo suivante dans le photostream
+ * {{{ #LOGO_NEXTPHOTO }}} le logo de la photo suivante dans le photostream (prend un parametre comme les autres balises logo, sauf 'o')
+
 -------------
 
+= Les Modeles =
+
+ * {{{ <fpiprbox|nsid=XXX> }}} ou {{{ <fpiprbox|tags=spip,gateau> }}} affiche 12 vignettes dans un tableau qui peut être "animé" si le plugin splickrbox est aussi activé (pour un effet similaire à le boite fournis par Flickr) (au moin un des deux paramètres doit être fournis)
+ * {{{ <fpiprboxXXXXX> }}} affiche le logo de la photo XXXXX et sa liste de tags. Ce modele est différent du fonctionement cité précedemment. En effet, l'image n'est jamais attaché à l'article ou stocké sur le site. Le logo et à chaque fois récupéré depuis Flickr (prend un parametre |taille=t pour specifier la taille du logo)
+ * {{{ <fpiprsetboxXXXX> }}} affiche 12 vignettes de photos dans le set XXXXXXX qui peuvent être "animées" si le plugin splickrbox est aussi activé.
 
