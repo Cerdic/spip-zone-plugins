@@ -180,6 +180,24 @@ $GLOBALS['table_des_tables']['flickr_photosets_getlist'] = 'fpipr_photosets';
 
 $GLOBALS['table_des_tables']['flickr_photosets_getphotos'] = 'fpipr_photos';
 
+//======================================================================
+//pour le contexte
+
+
+$GLOBALS['FpipR_versions']['spip_fpipr_contextes'] = '0.3';
+$GLOBALS['FpipR_tables']['spip_fpipr_contextes_field'] = array(
+															   "id_contexte" => "varchar(255) NOT NULL",
+															   "title"	=> "text DEFAULT '' NOT NULL",
+															   "type" => "ENUM('set','pool') NOT NULL",
+															   "id_photo" => 'bigint(21) NOT NULL'
+															   );
+$GLOBALS['FpipR_tables']['spip_fpipr_contextes_key'] = array("PRIMARY KEY" => "id_contexte",
+															"KEY" => 'type');
+
+
+$GLOBALS['tables_principales']['spip_fpipr_contextes'] =
+  array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_contextes_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_contextes_key']);
+$GLOBALS['table_des_tables']['flickr_photos_getallcontexts'] = 'fpipr_contextes';
 
 //======================================================================
 
@@ -356,5 +374,27 @@ function FpipR_flickr_photosets_getphotos_dist($arguments) {
 
 //======================================================================
 
+function FpipR_create_flickr_photos_getallcontexts_dist() {
+  FpipR_make_table('spip_fpipr_contextes');
+}
+
+function FpipR_flickr_photos_getallcontexts_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $query = "DELETE FROM spip_fpipr_contextes";
+  spip_query($query);
+  $id_photo = $arguments['id_photo'];
+  $contextes = flickr_photos_getAllContexts($id_photo);
+  foreach($contextes as $type => $cont) {
+	foreach ($cont as $c) {
+	  spip_abstract_insert('spip_fpipr_contextes',
+						   '(id_contexte,title,type,id_photo)',
+						   '('._q($c['id']).','._q($c['title']).','._q($type).','._q($id_photo).')'
+						   );  
+	}
+  } 
+}
+
+
+//======================================================================
 
 ?>

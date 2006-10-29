@@ -13,16 +13,18 @@ BOUCLE Flickr
 <h2>#NOM</h2>
 NSID Flickr: #FLICKR_NSID
 
-<BOUCLE_sets(FLICKR_PHOTOSETS_GETLIST) {user_id=#FLICKR_NSID}{"<hr/>"} {0,2}>
+<BOUCLE_sets(FLICKR_PHOTOSETS_GETLIST) {user_id=#FLICKR_NSID}{"<hr/>"} {0,1}>
 #TITLE
 <br/>
 #DESCRIPTION
 <a href="#URL_PHOTOSET">#LOGO_PHOTOSET{s}</a>
-<BOUCLE_photos(FLICKR_PHOTOSETS_GETPHOTOS) {id_photoset} {0,10} {"<br/>"}>
-#LOGO_PREVPHOTO{t}
-#LOGO_PHOTO{m} 
-#LOGO_NEXTPHOTO{t}
+#ID_PHOTOSET
+<BOUCLE_photos(FLICKR_PHOTOSETS_GETPHOTOS) {id_photoset} {0,1} {"<br/>"}>
+#LOGO_PHOTO{s} 
 <small>
+<BOUCLE_cont(FLICKR_PHOTOS_GETALLCONTEXTS) {id_photo} {"<br/>"}>
+#TYPE: #ID_CONTEXTE #TITLE s:#ID_PHOTOSET g:#ID_GROUP
+</BOUCLE_cont>
 <BOUCLE_info(FLICKR_PHOTOS_GETINFO) {id_photo}>
 <BOUCLE_tags(FLICKR_PHOTO_TAGS) {","}>
 #RAW
@@ -33,7 +35,6 @@ NSID Flickr: #FLICKR_NSID
 
 </BOUCLE_sets>
 
-[(#MODELE{fpiprsetbox}{id=72157594230473349})]
 </hr>
 </BOUCLE_auteurs>
 </body>

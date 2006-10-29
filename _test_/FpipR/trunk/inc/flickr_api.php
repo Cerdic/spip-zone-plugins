@@ -478,11 +478,31 @@ function flickr_photos_licenses_getInfo() {
 		</licenses>*/
 }
 
+//retourne le tableau php de base Flickr
 function flickr_photos_getContext($photo_id,$auth_token='') {
   $params= array(
 				 'photo_id' => $photo_id
 				 );
   $photos =  flickr_check_error(flickr_api_call('flickr.photos.getContext',$params,$auth_token));
+  return $photos;
+}
+//retourne un tableau php:
+function flickr_photos_getAllContexts($photo_id,$auth_token='') {
+    $params= array(
+				 'photo_id' => $photo_id
+				 );
+  $photos =  flickr_check_error(flickr_api_call('flickr.photos.getAllContexts',$params,$auth_token));
+  return $photos;
+}
+
+
+//retourne le tableau php de base Flickr
+function flickr_photosets_getContext($photo_id,$photoset_id,$auth_token='') {
+  $params= array(
+				 'photo_id' => $photo_id,
+				 'photoset_id' => $photoset_id
+				 );
+  $photos =  flickr_check_error(flickr_api_call('flickr.photosets.getContext',$params,$auth_token));
   return $photos;
 }
 

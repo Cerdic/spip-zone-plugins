@@ -108,13 +108,27 @@ function FpipR_generer_url_photoset($user_id,$id_photoset) {
 }
 
 
-function FpipR_photos_getContext($id_photo,$tag,$attr) {
+function FpipR_photos_getContext($id_photo,$id_photoset='',$id_group='',$tag,$attr) {
   static $contexts;
-  if(!$contexts[$id_photo]) { 
-	include_spip('inc/flickr_api');
-	$contexts[$id_photo] = flickr_photos_getContext($id_photo);
-  }
-  return $contexts[$id_photo][$tag][$attr];
+  if($id_photoset) {
+	if(!$contexts["$id_photo-$id_photoset"]) { 
+	  include_spip('inc/flickr_api');
+	  $contexts["$id_photo-$id_photoset"] = flickr_photosets_getContext($id_photo,$id_photoset);
+	}
+	return $contexts["$id_photo-$id_photoset"][$tag][$attr];
+  } else if($id_group) {
+	if(!$contexts["$id_photo-$id_group"]) { 
+	  include_spip('inc/flickr_api');
+	  $contexts["$id_photo-$id_group"] = flickr_groups_getContext($id_photo,$id_group);
+	}
+	return $contexts["$id_photo-$id_group"][$tag][$attr];
+	} else {
+	if(!$contexts[$id_photo]) { 
+	  include_spip('inc/flickr_api');
+	  $contexts[$id_photo] = flickr_photos_getContext($id_photo);
+	}
+	return $contexts[$id_photo][$tag][$attr];
+	}
 }
 
 
