@@ -33,7 +33,9 @@ function Agenda_memo_full($date_deb=0, $date_fin=0 , $titre='', $descriptif='', 
 			'SUMMARY' => $titre,
 			'LOCATION' => $lieu,
 			'URL' => $url);
-		$ts_startday1 += 24*3600; // le jour suivant
+		$ts_startday1 += 26*3600; // le jour suivant : +26 h pour gerer les changements d'heure
+		$ts_startday1 = mktime(0, 0, 0, date("m",$ts_startday1), 
+		date("d",$ts_startday1), date("Y",$ts_startday1)); // et remise a zero de l'heure	
 	}
 
 	// toujours retourner vide pour qu'il ne se passe rien
@@ -65,7 +67,9 @@ function Agenda_memo_evt_full($date_deb=0, $date_fin=0 , $titre='', $descriptif=
 			'SUMMARY' => $titre,
 			'LOCATION' => $lieu,
 			'URL' => $url);
-		$ts_startday1 += 24*3600; // le jour suivant
+		$ts_startday1 += 26*3600; // le jour suivant : +26 h pour gerer les changements d'heure
+		$ts_startday1 = mktime(0, 0, 0, date("m",$ts_startday1), 
+		date("d",$ts_startday1), date("Y",$ts_startday1)); // et remise a zero de l'heure	
 	}
 
 	// toujours retourner vide pour qu'il ne se passe rien
