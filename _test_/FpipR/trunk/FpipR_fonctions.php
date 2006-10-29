@@ -115,20 +115,8 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
   $arguments = '';
 
 
-  foreach($boucle->criteres as $crit) {
-	if (in_array($crit->op,$possible_criteres)){
-	  $val = !isset($crit->param[0]) ? "" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$id_boucle]->id_parent);
-	  $arguments[$crit->op] = $val;
-	}
-  }
-
-  //on calcul le nombre de page d'apres {0,10}
-  list($debut,$pas) = split(',',$boucle->limit);
-  $page = $debut/$pas;
-  if($page <= 0) $page = 1;
-  $arguments['page'] = intval($page);
-  $arguments['per_page'] = $pas>0?$pas:100;
-  $boucle->limit = NULL;
+  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres);
+  FpipR_utils_calcul_limit($boucle,$arguments);
 
   if(is_array($boucle->order)) {
 	for($i=0;$i<count($boucle->order);$i++) {
@@ -344,12 +332,8 @@ function boucle_FLICKR_PHOTOSETS_GETPHOTOS_dist($id_boucle, &$boucles) {
   $arguments = '';  
   $extras = array();
 
-  foreach($boucle->criteres as $crit) {
-	if (in_array($crit->op,$possible_criteres)){
-	  $val = !isset($crit->param[0]) ? "" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$id_boucle]->id_parent);
-	  $arguments[$crit->op] = $val;
-	}
-  }
+  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres);
+
   foreach($boucle->where as $w) {
 	if($w[0] == "'?'") {
 	  $w = $w[2];
@@ -366,13 +350,7 @@ function boucle_FLICKR_PHOTOSETS_GETPHOTOS_dist($id_boucle, &$boucles) {
 	  erreur_squelette(_T('fpipr:mauvaisop',array('critere'=>$key,'op'=>$w[0])), $id_boucle);
   }
 
-  //on calcul le nombre de page d'apres {0,10}
-  list($debut,$pas) = split(',',$boucle->limit);
-  $page = $debut/$pas;
-  if($page <= 0) $page = 1;
-  $arguments['page'] = intval($page);
-  $arguments['per_page'] = $pas>0?$pas:100;
-  $boucle->limit = NULL;
+  FpipR_utils_calcul_limit($boucle,$arguments);
 
   //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
   foreach($boucle->select as $w) {
@@ -663,12 +641,8 @@ function boucle_FLICKR_INTERESTINGNESS_GETLIST_dist($id_boucle, &$boucles) {
   $arguments = '';  
   $extras = array();
 
-  foreach($boucle->criteres as $crit) {
-	if (in_array($crit->op,$possible_criteres)){
-	  $val = !isset($crit->param[0]) ? "" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$id_boucle]->id_parent);
-	  $arguments[$crit->op] = $val;
-	}
-  }
+  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres);
+
   foreach($boucle->where as $w) {
 	if($w[0] == "'?'") {
 	  $w = $w[2];
@@ -682,13 +656,7 @@ function boucle_FLICKR_INTERESTINGNESS_GETLIST_dist($id_boucle, &$boucles) {
 
   }
 
-  //on calcul le nombre de page d'apres {0,10}
-  list($debut,$pas) = split(',',$boucle->limit);
-  $page = $debut/$pas;
-  if($page <= 0) $page = 1;
-  $arguments['page'] = intval($page);
-  $arguments['per_page'] = $pas>0?$pas:100;
-  $boucle->limit = NULL;
+  FpipR_utils_calcul_limit($boucle,$arguments);
 
   //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
   foreach($boucle->select as $w) {
@@ -713,5 +681,23 @@ function boucle_FLICKR_INTERESTINGNESS_GETLIST_dist($id_boucle, &$boucles) {
   return calculer_boucle($id_boucle, $boucles); 
 }
 
+function FpipR_utils_calcul_limit(&$boucle,&$arguments) {
+  //on calcul le nombre de page d'apres {0,10}
+    list($debut,$pas) = split(',',$boucle->limit);
+  $page = $debut/$pas;
+  if($page <= 0) $page = 1;
+  $arguments['page'] = intval($page);
+  $arguments['per_page'] = $pas>0?($pas+$debut):100;
+  //  $boucle->limit = NULL;
+}
+
+function FpipR_utils_search_criteres(&$boucle,&$arguments,$possible_criteres) {
+  foreach($boucle->criteres as $crit) {
+	if (in_array($crit->op,$possible_criteres)){
+	  $val = !isset($crit->param[0]) ? "" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$id_boucle]->id_parent);
+	  $arguments[$crit->op] = $val;
+	}
+  }
+}
 
 ?>
