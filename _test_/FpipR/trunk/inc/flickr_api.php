@@ -190,6 +190,7 @@ class FlickrPhoto {
   var $dateupload='';
   var $datetaken='';
   var $ownername='';
+  var $username = ''; //des fois, flickr envoi username et pas ownername
   var $iconserver='';
   var $lastupdate='';
   var $longitude='';
@@ -556,6 +557,21 @@ function flickr_tags_getListPhoto($photo_id,$auth_token='') {
 	$tags[] = $t;
   }
   return $tags;
+}
+
+function flickr_photos_getContactsPublicPhotos($user_id,$count,$just_friend,$single_photo,$include_self,$extras,$auth_token='') {
+  $params = array();
+  if($user_id) $params['user_id'] = $user_id;
+  else return false;
+  if($count) $params['count'] = ($count>50)?50:$count;
+  if($just_friend) $params['just_friend'] = 1;
+  if($single_photo) $params['single_photo'] = 1;
+  if($include_self) $params['include_self'] = 1;
+  if($extras) $params['extras'] = "original_format,$extras"; 
+  else $params['extras'] = "original_format";
+
+  $photos =  flickr_check_error(flickr_api_call('flickr.photos.getContactsPublicPhotos',$params,$auth_token));
+  return flickr_utils_createPhotos($photos);  
 }
 
 //======================================================================

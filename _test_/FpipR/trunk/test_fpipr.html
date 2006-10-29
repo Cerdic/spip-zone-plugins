@@ -7,11 +7,8 @@ BOUCLE Flickr
 </title>
 </head>
 
-  <BOUCLE_group(FLICKR_GROUPS_POOLS_GETPHOTOS) {id_group=38873539@N00} {0,10} {tags spselection} {user_id=82142592@N00}>
-	#LOGO_PHOTO{s}
-	<BOUCLE_tags(FLICKR_TAGS_GETLISTPHOTO) {id_photo} {","}>
-	  #RAW
-	</BOUCLE_tags>
+  <BOUCLE_group(FLICKR_PHOTOS_GETCONTACTSPUBLICPHOTOS) {nsid 82142592@N00} {just_friends} {single_photo}>
+	#OWNER_NAME #LOGO_OWNER #LOGO_PHOTO{s}
   </BOUCLE_group>
   RIEN
   <//B_group>

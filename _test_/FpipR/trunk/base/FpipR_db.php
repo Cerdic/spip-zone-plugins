@@ -183,6 +183,7 @@ $GLOBALS['table_des_tables']['flickr_photosets_getlist'] = 'fpipr_photosets';
 
 $GLOBALS['table_des_tables']['flickr_photosets_getphotos'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_groups_pools_getphotos'] = 'fpipr_photos';
+$GLOBALS['table_des_tables']['flickr_photos_getcontactspublicphotos'] = 'fpipr_photos';
 
 //======================================================================
 //pour le contexte
@@ -277,6 +278,7 @@ function FpipR_fill_photos_table($photos,$add='') {
 	  $vals .= ','._q($val);
 	}
   foreach($photos as $photo) {
+	$ownername = $photo->ownername?$photo->ownername:$photo->username;
 	$vals = "("._q($photo->id).','._q($photo->owner).','._q($photo->secret).','._q($photo->server).','._q($photo->title).','._q($photo->idpublic).','._q($photo->isfriend).','._q($photo->isfamily).','._q($photo->originalformat).','._q($photo->license).','._q(date('Y-m-d H:i:s',$photo->dateupload+0)).','._q($photo->datetaken).','._q($photo->ownername).','._q($photo->iconserver).','._q(date('Y-m-d H:i:s',$photo->lastupdate+0)).','._q($photo->longitude).','._q($photo->latitude).','._q($photo->accuracy).','.$cnt++.','._q(date('Y-m-d H:i:s',$photo->dateadded+0));
 	if($add)
 	  foreach($add as $name=>$val) {
@@ -451,6 +453,22 @@ function FpipR_flickr_tags_getlistphoto_dist($arguments) {
 						 '('._q($tag->id).','._q($tag->author).','._q($tag->raw).','._q($tag->safe).','._q($arguments['id_photo']).')'
 						 );
   }
+}
+//======================================================================
+
+function FpipR_create_flickr_photos_getcontactspublicphotos_dist() {
+  FpipR_make_table('spip_fpipr_photos');
+}
+
+function FpipR_flickr_photos_getcontactspublicphotos_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $photos = flickr_photos_getContactsPublicPhotos($arguments['nsid'],
+										   $arguments['count'],
+										   $arguments['just_friends'],
+										   $arguments['single_photo'],
+										   $arguments['include_self'],
+										   $arguments['extras']);
+  FpipR_fill_photos_table($photos->photos);
 }
 
 //======================================================================
