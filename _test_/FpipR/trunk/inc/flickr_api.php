@@ -626,6 +626,13 @@ function flickr_groups_getInfo($group_id,$auth_token='') {
   return flickr_check_error(flickr_api_call('flickr.groups.getInfo',$params,$auth_token));
 }
 
+function flickr_urls_lookupGroup($url,$auth_token='') {
+  $params = array();
+  if($url) $params['url'] = $url;
+  else return false;
+
+  return flickr_check_error(flickr_api_call('flickr.urls.lookupGroup',$params,$auth_token));
+}
 
 //======================================================================
 

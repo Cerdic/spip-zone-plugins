@@ -1062,6 +1062,33 @@ function balise_URL_GROUP_dist($p) {
   return $p;
 }
 
+function boucle_FLICKR_URLS_LOOKUPGROUP_dist($id_boucle, &$boucles) {
+  $boucle = &$boucles[$id_boucle];
+  $id_table = $boucle->id_table;
+  $boucle->from[$id_table] =  "spip_fpipr_groups";
+
+  $possible_criteres = array('url');
+
+  $arguments = '';  
+  $extras = array();
+
+  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres);
+
+
+  $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
+	  \$arguments = '';\n";
+  $bbox = '';
+  foreach($arguments as $key => $val) {
+	if($val) {
+	  $boucle->hash .= "\$v=$val;\n";
+	  $boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument('$key',\$v);\n";
+	}}
+
+  $boucle->hash .= "FpipR_fill_table_boucle('flickr.urls.lookupGroup',\$arguments);";
+  return calculer_boucle($id_boucle, $boucles); 
+}
+
+
 
 //======================================================================
 

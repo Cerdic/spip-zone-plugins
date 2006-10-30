@@ -14,7 +14,6 @@ favorites
 groups
 
     * flickr.groups.browse
-    * flickr.groups.getInfo
     * flickr.groups.search
 
 groups.pools
@@ -69,7 +68,6 @@ urls
     * flickr.urls.getGroup
     * flickr.urls.getUserPhotos
     * flickr.urls.getUserProfile
-    * flickr.urls.lookupGroup
     * flickr.urls.lookupUser
 
 //======================================================================

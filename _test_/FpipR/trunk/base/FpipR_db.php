@@ -259,6 +259,7 @@ $GLOBALS['FpipR_tables']['spip_fpipr_groups_key'] = array("PRIMARY KEY" => "id_g
 $GLOBALS['tables_principales']['spip_fpipr_groups'] =
   array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_groups_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_groups_key']);
 $GLOBALS['table_des_tables']['flickr_groups_getinfo'] = 'fpipr_groups';
+$GLOBALS['table_des_tables']['flickr_urls_lookupGroup'] = 'fpipr_groups';
 
 //======================================================================
 
@@ -588,11 +589,29 @@ function FpipR_flickr_groups_getinfo_dist($arguments) {
   $query = "DELETE FROM spip_fpipr_comments";
   spip_query($query);
   if($group = $group['group']) {
-  spip_abstract_insert('spip_fpipr_groups',
-					   '(id_group,iconserver,name,description,members,privacy,throttle_count,throttle_mode,throttle_remaining)',
-					   '('._q($group['id']).','._q($group['iconserver']).','._q($group['name']['_content']).','._q($group['description']['_content']).','._q($group['members']['_content']).','._q($group['privacy']['_content']).','._q($group['throttle']['count']).','._q($group['throttle']['mode']).','._q($group['throttle']['remaining']).')'
-					   );
-}									 
+	spip_abstract_insert('spip_fpipr_groups',
+						 '(id_group,iconserver,name,description,members,privacy,throttle_count,throttle_mode,throttle_remaining)',
+						 '('._q($group['id']).','._q($group['iconserver']).','._q($group['name']['_content']).','._q($group['description']['_content']).','._q($group['members']['_content']).','._q($group['privacy']['_content']).','._q($group['throttle']['count']).','._q($group['throttle']['mode']).','._q($group['throttle']['remaining']).')'
+						 );
+  }									 
+}
+
+function FpipR_create_flickr_urls_lookupGroup_dist() {
+  FpipR_make_table('spip_fpipr_groups');
+}
+
+function FpipR_flickr_urls_lookupGroup_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $group = flickr_urls_lookupGroup($arguments['url']);
+
+  $query = "DELETE FROM spip_fpipr_comments";
+  spip_query($query);
+  if($group = $group['group']) {
+	spip_abstract_insert('spip_fpipr_groups',
+						 '(id_group,name)',
+						 '('._q($group['id']).','._q($group['groupname']['_content'].')'
+						 );
+  }									 
 }
 
 //======================================================================
