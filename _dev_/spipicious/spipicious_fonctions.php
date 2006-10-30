@@ -75,12 +75,11 @@ function spipicious_get_idgroup_tags() {
 function calcul_POPULARITE_TAG($id_mot,$id_article) {
   $table_pref = 'spip';
   if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
-  
-  // a ameliorer 
-  // pour tenir compte des extremes et eviter trop de classes
+    
   $result = spip_query("SELECT id_mot FROM {$table_pref}_spipicious WHERE id_mot='$id_mot' AND id_article='$id_article'");
-  return spip_num_rows($result);
-
+  $nb = spip_num_rows($result);
+  if ($nb > 10) $nb = 10; // FIXME a ameliorer pour tenir compter extremes, au lieu compteur avoir echelle log
+  return $nb;
 } 
 
 //
