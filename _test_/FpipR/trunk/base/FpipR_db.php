@@ -125,6 +125,7 @@ $GLOBALS['tables_principales']['spip_fpipr_tags'] =
   array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_tags_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_tags_key']);
 $GLOBALS['table_des_tables']['flickr_photo_tags'] = 'fpipr_tags';
 $GLOBALS['table_des_tables']['flickr_tags_getlistphoto'] = 'fpipr_tags';
+$GLOBALS['table_des_tables']['flickr_tags_getlistuser'] = 'fpipr_tags';
 
 $GLOBALS['FpipR_versions']['spip_fpipr_notes'] = '0.3';
 $GLOBALS['FpipR_tables']['spip_fpipr_notes_field'] = array(
@@ -718,7 +719,26 @@ function FpipR_flickr_people_getinfo_dist($arguments) {
 						 );
   }									 
 }
+//======================================================================
 
+function FpipR_create_flickr_tags_getlistuser_dist() {
+  FpipR_make_table('spip_fpipr_tags');
+}
+
+function FpipR_flickr_tags_getlistuser_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $who = flickr_tags_getListUser($arguments['nsid']);
+
+  $query = "DELETE FROM spip_fpipr_tags";
+  spip_query($query);
+  if($who = $who['who']) {
+	foreach($who['tag'] as $t)
+	spip_abstract_insert('spip_fpipr_people',
+						 '(author,safe)',
+						 '('._q($arguments['nsid']).','._q($t['_content']).')'
+						 );
+  }									 
+}
 
 //======================================================================
 ?>
