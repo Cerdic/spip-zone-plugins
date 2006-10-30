@@ -44,9 +44,6 @@ photos
     * flickr.photos.getWithoutGeoData
     * flickr.photos.recentlyUpdated
 
-photos.comments
-
-    * flickr.photos.comments.getList
 
 photos.geo
 
@@ -60,10 +57,6 @@ photos.licenses
 photosets
 
     * flickr.photosets.getInfo
-
-photosets.comments
-
-    * flickr.photosets.comments.getList
 
 tags
 
