@@ -239,11 +239,11 @@ $GLOBALS['table_des_tables']['flickr_photosets_comments_getlist'] = 'fpipr_comme
 //======================================================================
 // pour les groupes
 
-$GLOBALS['FpipR_versions']['spip_fpipr_groups'] = '0.2';
+$GLOBALS['FpipR_versions']['spip_fpipr_groups'] = '0.3';
 $GLOBALS['FpipR_tables']['spip_fpipr_groups_field'] = array(
 															   "id_group" => "varchar(255) NOT NULL",
 															   "user_id" => 'varchar(100)', //cas où on recupere les groupes d'un utilisateur
-															   "iconserver" => "int default 1",
+															   "iconserver" => "int default 0",
 															   "name" => "text default ''",
 															   "description" => "text default ''",
 															   "members" => "int default 0",
@@ -260,6 +260,34 @@ $GLOBALS['tables_principales']['spip_fpipr_groups'] =
   array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_groups_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_groups_key']);
 $GLOBALS['table_des_tables']['flickr_groups_getinfo'] = 'fpipr_groups';
 $GLOBALS['table_des_tables']['flickr_urls_lookupgroup'] = 'fpipr_groups';
+
+//======================================================================
+//pour les peoples
+
+
+
+$GLOBALS['FpipR_versions']['spip_fpipr_people'] = '0.1';
+$GLOBALS['FpipR_tables']['spip_fpipr_people_field'] = array(
+															   "user_id" => 'varchar(100)', //cas où on recupere les groupes d'un utilisateur
+															   "isadmin" => "ENUM ('0','1') NOT NULL",
+															   "ispro" => "ENUM ('0','1') NOT NULL",
+															   "iconserver" => "int default 0",
+															   "username" => "text default ''",
+															   "realname" => "text default ''",
+															   "location" => "text default ''",
+															   "url_photos" => "text default ''",
+															   "url_profile" => "text default ''",
+															   "date_firstphoto" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+															   "date_taken_firstphoto" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+															   "photos_count" => "int"
+															   );
+$GLOBALS['FpipR_tables']['spip_fpipr_people_key'] = array("PRIMARY KEY" => "id_group",
+															"KEY" => 'user_id');
+
+
+$GLOBALS['tables_principales']['spip_fpipr_people'] =
+  array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_people_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_people_key']);
+$GLOBALS['table_des_tables']['flickr_people_getinfo'] = 'fpipr_people';
 
 //======================================================================
 
@@ -613,6 +641,27 @@ function FpipR_flickr_urls_lookupgroup_dist($arguments) {
 						 );
   }									 
 }
+
+//======================================================================
+
+function FpipR_create_flickr_people_getinfo_dist() {
+  FpipR_make_table('spip_fpipr_groups');
+}
+
+function FpipR_flickr_people_getinfo_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $person = flickr_people_getInfo($arguments['url']);
+
+  $query = "DELETE FROM spip_fpipr_people";
+  spip_query($query);
+  if($person = $person['person']) {
+	spip_abstract_insert('spip_fpipr_people',
+						 '(user_id,isadmin,ispro,iconserver,username,realname,location,url_photos,url_profile,date_firstphoto,date_taken_firstphoto,photos_count)',
+						 '('._q($person['nsid']).','._q($person['isadmin']).','._q($person['ispro']).','._q($person['iconserver']).','._q($person['username']['_content']).','._q($person['realname']['_content']).','._q($person['location'['_content']]).','._q($person['photosurl']['_content']).','._q($person['profileurl']['_content']).','._q($person['photos']['firstdate']['_content']).','._q($person['photos']['firstdatetaken']['_content']).','._q($person['photos']['count']['_content']).')'
+						 );
+  }									 
+}
+
 
 //======================================================================
 ?>
