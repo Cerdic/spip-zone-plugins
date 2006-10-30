@@ -56,6 +56,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'email_independant' => 'Email independant de la reponse',
 'exporter_article' => 'Exporter dans un article',
 
+'fichier_trop_gros'=>"Ce fichier est trop gros.",
+'fichier_type_interdit'=>"Ce type de fichier est interdit.",
+'form_erreur' => "Erreur&nbsp;:",
+'format_fichier' => "Format du fichier&nbsp;:",
+'formulaire' => "Formulaire",
+'formulaire_aller' => "Aller au formulaire",
+'formulaires_sondages' => "Formulaires et sondages",
+'formulaires_copie' => "Copie de @nom@", 
+
 'html_wrapper'=> 'Encapsuler le champ dans le code html',
 
 'icone_creer_formulaire' => "Cr&eacute;er un nouveau formulaire",
@@ -69,15 +78,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'liste_choix' => "Liste des choix propos&eacute;s",
 
-'fichier_trop_gros'=>"Ce fichier est trop gros.",
-'fichier_type_interdit'=>"Ce type de fichier est interdit.",
-'form_erreur' => "Erreur&nbsp;:",
-'format_fichier' => "Format du fichier&nbsp;:",
-'formulaire' => "Formulaire",
-'formulaire_aller' => "Aller au formulaire",
-'formulaires_sondages' => "Formulaires et sondages",
-'formulaires_copie' => "Copie de @nom@", 
-
 'nombre_reponses'=>"@nombre@ r&eacute;ponses",
 'nouveau_champ' => "Nouveau champ",
 'nouveau_choix' => "Nouveau choix",
@@ -87,6 +87,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pas_mail_confirmation'=>"Pas de mail confirmation",
 'probleme_technique'=>"Probl&egrave;me technique. Votre r&eacute;ponse n'a pas pu &ecirc;tre prise en compte.",
 'probleme_technique_upload'=>"Probl&egrave;me technique. Le transfert du fichier a &eacute;chou&eacute;.",
+
+'remplir_un_champ'=>"Veuillez remplir au moins un champ.",
+'reponse_enregistree'=>"Votre r&eacute;ponse a &eacute;t&eacute; enregistr&eacute;e.",
+'resultats' => 'R&eacute;sultats : ',
+'reponse' => 'Reponse @id_reponse@',
+'reponse_depuis' => 'Depuis la page ', 
+'reponse_envoyee' => 'R&eacute;ponse envoy&eacute;e le ',
+'reponse_envoyee_a' => '&agrave;', 
+'reponse_retrovez' => "Retrouvez cette r&eacute;ponse dans l'interface d'administration :",
+'reponses' => 'r&eacute;ponses',
 
 'site_introuvable'=>"Ce site n'a pas &eacute;t&eacute; trouv&eacute;.",
 'sondage_non'=>"Ce formulaire n'est pas un sondage",
@@ -100,17 +110,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'supprimer_reponse' => "Supprimer cette r&eacute;ponse",
 
 'type_form'=>"Type de formulaire",
-
-'remplir_un_champ'=>"Veuillez remplir au moins un champ.",
-'reponse_enregistree'=>"Votre r&eacute;ponse a &eacute;t&eacute; enregistr&eacute;e.",
-'resultats' => 'R&eacute;sultats : ',
-'reponse' => 'Reponse @id_reponse@',
-'reponse_depuis' => 'Depuis la page ', 
-'reponse_envoyee' => 'R&eacute;ponse envoy&eacute;e le ',
-'reponse_envoyee_a' => '&agrave;', 
-'reponse_retrovez' => "Retrouvez cette r&eacute;ponse dans l'interface d'administration :",
-'reponses' => 'r&eacute;ponses',
-
 'taille_max' => "Taille maximale (en ko)",
 'telecharger' => "T&eacute;l&eacute;charger",
 'telecharger_reponses' => "T&eacute;l&eacute;charger les r&eacute;ponses",
@@ -123,7 +122,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'valider'=>"Valider",
 'verif_web' => "v&eacute;rifier l'existence du site Web",
 'voir_article'=>"Voir l'article",
-'voir_resultats'=>"Voir les r&eacute;sultats",
+'voir_resultats'=>"Voir les r&eacute;sultats"
 );
 
 
