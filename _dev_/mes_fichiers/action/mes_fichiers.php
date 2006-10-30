@@ -23,6 +23,15 @@ function action_mes_fichiers() {
 	if(@is_dir($IMG)) $liste[] = $IMG;
 	if(@is_dir('squelettes/')) $liste[] = 'squelettes/';
 	if(@is_readable($mes_options)) $liste[] = $mes_options;
+	$dump = preg_files(_DIR_DUMP);
+	$fichier_dump = '';
+	$mtime = 0;
+	foreach($dump as $_fichier_dump)
+		if($_mtime = filemtime($_fichier_dump)>$mtime) {
+			$fichier_dump = $_fichier_dump;
+			$mtime = $_mtime;
+		}
+	if($fichier_dump) $liste[] = $fichier_dump;
 	$mes_fichiers = new PclZip('mes_fichiers.zip');
 	$erreur = $mes_fichiers->create($liste, PCLZIP_OPT_ADD_PATH, "spip");
 	if ($erreur == 0) {
