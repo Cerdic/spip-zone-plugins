@@ -61,10 +61,10 @@ $.fn.openwidget = function() {
 // annule le widget ouvert (fonction destructive)
 $.fn.cancelwidget = function() {
   return this.prev()
-	.filter('.widget-has')
-	.show()
-	.removeClass('widget-has')
-	.removeClass('widget-changed')
+  .filter('.widget-has')
+  .show()
+  .removeClass('widget-has')
+  .removeClass('widget-changed')
   .next()
     .remove();
 }
@@ -97,13 +97,13 @@ $.fn.activatewidget = function() {
         eval('d=' + d.responseText + ';');
         if (d.$erreur > '') {
           alert(d.$erreur);
-	      if (d.$annuler) {
-	          $(me)
-	            .cancelwidget();
+          if (d.$annuler) {
+            $(me)
+            .cancelwidget();
           } else {
-	          $(me)
-		        .find(".widget-boutons")
-        		  .show(); // boutons de validation
+            $(me)
+            .find(".widget-boutons")
+              .show(); // boutons de validation
           }
           return false;
         }
