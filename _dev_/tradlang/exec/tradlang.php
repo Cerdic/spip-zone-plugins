@@ -2,17 +2,21 @@
 
 ob_start();
 
-echo getcwd()."<br>";
-echo get_include_path();
 
 include_spip("inc/presentation");
-//include("../tradlang_inc.php");
+include("tradlang_inc.php");
 include("tradlang_fonctions.php");
+
+global $operation;
+if (!isset($operation) || empty($operation))
+  $operation = $_POST["operation"];
 
 function exec_tradlang() {
 
   global $connect_statut, $connect_toutes_rubriques;
   global $operation, $couleur_foncee;
+
+  echo "operation=".$operation;
 
   $tababs = tradlang_tablesabsentes();
 

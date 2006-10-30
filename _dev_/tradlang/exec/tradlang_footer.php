@@ -23,22 +23,8 @@
 
 */
 ?>
-<br>
-<font size="1">Trad-Lang <? echo $tlversion; ?> est un logiciel libre <a href="http://www.eledo.com/download/trad_lang" target="_blank"><b>distribu&eacute;</b></a> sous <b><a href="http://www.gnu.org/licenses/licenses.html" target="_blank">licence GPL</a></b>.</font>
 
-</CENTER>
+</div>
 
-</BODY>
-<script language="javascript">
-<!--
-if (window.document.returnable)
-{
-  if (window.document.returnable.id)
-    window.document.returnable.id.focus();
-  else if (window.document.returnable.Valider)
-    window.document.returnable.Valider.focus();
-}
--->
-</script>
-</HTML>
-
+</body>
+</html>
