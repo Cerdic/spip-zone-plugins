@@ -10,7 +10,6 @@ contacts
 favorites
 
     * flickr.favorites.getList
-    * flickr.favorites.getPublicList
 
 groups
 
@@ -81,3 +80,14 @@ urls
     * flickr.urls.getUserProfile
     * flickr.urls.lookupGroup
     * flickr.urls.lookupUser
+
+//======================================================================
+
+Ajouter la possibilité d'authentifié. Voir le code:
+
+          if (isset($auteur_session['id_auteur'])) {
+           $combins = $auteur_session['id_auteur'];
+             if (!isset($GLOBALS['marqueur'])) {
+				$GLOBALS['marqueur'] = "";
+		   }
+           $GLOBALS['marqueur'] .= ":FpipR $combins";
