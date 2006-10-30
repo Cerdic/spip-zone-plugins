@@ -6,10 +6,29 @@
 **/
 
 
+/*
+ * //parametrage */
+
+//exemple 
+
+// cote = 70px -> 35px
+// cote = 100px -> 50px
+// cote = 124px -> 62px
+
+var cote = 100 ;
+
+/*
+********/
+
+
+
+
+var petit_cote = cote/2 ;
+
 $(document).ready(function(){
 
-cptj =0;
 max = $("td.image img").size();
+cptj =0;
 
 //il faudrait essayer ce plugin .pause()
 // http://www.mythin.net/pause.js
@@ -27,10 +46,10 @@ setTimeout('$("td.image img").splicker('+cptj+');',1000);
 
 
 $.fn.splicker = function(i) {
-$("div#changeMe").css({
-width: "70px",
-height: "70px"
-});
+$("div#changeMe").css("width", cote + "px");
+$("div#changeMe").css("height", cote + "px");
+//alert($("div#changeMe").css("width"));
+
 image = this.get(i).cloneNode(true) ;
 image.style.width="100%";
 image.style.height="100%";
@@ -42,46 +61,45 @@ $("div#changeMe").append(image);
 $("div#changeMe img").wrap("<a href=\""+href+"\">","</a>").click(function(){showLightbox(href);});
 
 if(i%3 == 0){
-$("div#changeMe").css("left","35px");
-ll1="70";
+$("div#changeMe").css("left","0px");
+left1="0";
 }
 if(i%3 == 1){
-$("div#changeMe").css("left","35px");
-ll1="35";
+$("div#changeMe").css("left", petit_cote + "px");
+left1= petit_cote ;
 }
 if(i%3 == 2){
-$("div#changeMe").css("left","0px");
-ll1="0";
+$("div#changeMe").css("left", petit_cote + "px");
+left1= 2*petit_cote ;
 }
 
 if(i>=0 && i<=2){
-$("div#changeMe").css("top","70px");
-tt1="105";
+$("div#changeMe").css("top","0px");
+top1="0";
 }
 if(i>=3 && i<=5){
-$("div#changeMe").css("top","35px");
-tt1="70";
-
+$("div#changeMe").css("top","0px");
+top1=petit_cote;
 }
 if(i>=6 && i<=8){
-$("div#changeMe").css("top","0px");
-tt1="35";
+$("div#changeMe").css("top",2*petit_cote + "px");
+top1=2*petit_cote;
 }
 if(i>=9 && i<=11){
-$("div#changeMe").css("top","0px");
-tt1="0";
+$("div#changeMe").css("top", 2*petit_cote + "px");
+top1= 3*petit_cote ;
 }
 
-tt0 = $("div#changeMe").get(0).style.top;
-ll0 = $("div#changeMe").get(0).style.left;
-tt0 = tt0.replace(/px/,"");
-ll0 = ll0.replace(/px/,"");
+top0 = $("div#changeMe").get(0).style.top;
+left0 = $("div#changeMe").get(0).style.left;
+top0 = top0.replace(/px/,"");
+left0 = left0.replace(/px/,"");
 
-$("#statusMsg").html(tt0+'->'+ll0);
+$("#statusMsg").html(top0+'->'+left0);
 
 $("div#changeMe").fadeIn(2000);
 
-setTimeout('$("div#changeMe").resize_(1500,35,'+tt0+','+tt1+','+ll0+','+ll1+');',4000);
+setTimeout('$("div#changeMe").resize_(1500,'+petit_cote+','+top0+','+top1+','+left0+','+left1+');',4000);
 
 setTimeout('itere();$("div#changeMe img").remove();start()',7000);
 
