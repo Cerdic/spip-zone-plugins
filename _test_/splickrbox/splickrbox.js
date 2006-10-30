@@ -58,7 +58,17 @@ href = this.get(i).parentNode.href;
 
 $("div#changeMe").append(image);
 
-$("div#changeMe img").wrap("<a href=\""+href+"\">","</a>").click(function(){showLightbox(href);});
+$("div#changeMe img").css("cursor","pointer").click(function(){
+	//thickbox
+	if(typeof imageArray != 'undefined'){
+	TB_on();
+	TB_show('',href,'image');
+	}else{
+	window.document.location = href ;
+	}
+
+});
+
 
 if(i%3 == 0){
 $("div#changeMe").css("left","0px");
