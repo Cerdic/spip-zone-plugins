@@ -184,6 +184,7 @@ $GLOBALS['table_des_tables']['flickr_photosets_getlist'] = 'fpipr_photosets';
 $GLOBALS['table_des_tables']['flickr_photosets_getphotos'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_groups_pools_getphotos'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_photos_getcontactspublicphotos'] = 'fpipr_photos';
+$GLOBALS['table_des_tables']['flickr_favorites_getpubliclist'] = 'fpipr_photos';
 
 //======================================================================
 //pour le contexte
@@ -468,6 +469,21 @@ function FpipR_flickr_photos_getcontactspublicphotos_dist($arguments) {
 										   $arguments['single_photo'],
 										   $arguments['include_self'],
 										   $arguments['extras']);
+  FpipR_fill_photos_table($photos->photos);
+}
+
+//======================================================================
+
+function FpipR_create_flickr_favorites_getPublicList_dist() {
+  FpipR_make_table('spip_fpipr_photos');
+}
+
+function FpipR_flickr_favorites_getPublicList_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $photos = flickr_favorites_getPublicList($arguments['nsid'],
+										   $arguments['extras'],
+										   $arguments['per_page'],
+										   $arguments['page']);
   FpipR_fill_photos_table($photos->photos);
 }
 
