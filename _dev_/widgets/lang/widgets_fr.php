@@ -4,6 +4,9 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer' => '&Eacute;diter',
+	'deja_modifie' => 'D&eacute;j&agrave modifi&eacute;',
+	'svp_copier_coller' =>
+		'D&eacute;sol&eacute;, copiez/collez vos changements et recommencez',
 	'donnees_mal_formatees' => 'Donn&eacute;es mal format&eacute;es',
 	'non_autorise' => 'Non autoris&eacute;',
 	'modifie_par_ailleurs' => 'Modifi&eacute; par ailleurs',
