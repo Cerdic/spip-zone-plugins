@@ -649,6 +649,18 @@ function flickr_people_getInfo($user_id,$auth_token='') {
 
   return flickr_check_error(flickr_api_call('flickr.people.getInfo',$params,$auth_token));
 }
+
+
+function flickr_contacts_getPublicList($user_id,$page,$per_page,$auth_token='') {
+  $params = array();
+  if($user_id) $params['user_id'] = $user_id;
+  else return false;
+  if($per_page) $params['per_page'] = $per_page;
+  if($page) $params['page'] = $page;
+
+  return flickr_check_error(flickr_api_call('flickr.contacts.getPublicList',$params,$auth_token));
+}
+
 //======================================================================
 
 function flickr_bookmarklet_info() {

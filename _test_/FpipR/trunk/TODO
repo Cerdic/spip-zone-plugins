@@ -5,7 +5,6 @@ blogs
 contacts
 
     * flickr.contacts.getList
-    * flickr.contacts.getPublicList
 
 favorites
 
@@ -24,7 +23,6 @@ people
 
     * flickr.people.findByEmail
     * flickr.people.findByUsername
-    * flickr.people.getPublicGroups
     * flickr.people.getPublicPhotos
     * flickr.people.getUploadStatus
 

@@ -7,17 +7,12 @@ BOUCLE Flickr
 </title>
 </head>
 
+
+
 <BOUCLE_auteur(AUTEURS) {flickr_nsid!=''}>
-<BOUCLE_info(FLICKR_PEOPLE_GETINFO) {user_id=#FLICKR_NSID}>
+<BOUCLE_contacts(FLICKR_CONTACTS_GETPUBLICLIST) {user_id=#FLICKR_NSID} {0,10}>
 #NAME
-#REALNAME
-<BOUCLE_groups(FLICKR_PEOPLE_GETPUBLICGROUPS) {user_id}>
-<BOUCLE_info2(FLICKR_GROUPS_GETINFO) {id_group}>
-#NAME
-#LOGO_GROUP
-</BOUCLE_info2>
-</BOUCLE_groups>
-</BOUCLE_info>
+</BOUCLE_contacts>
 </BOUCLE_auteur>
 
 </body>
