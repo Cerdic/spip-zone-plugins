@@ -239,7 +239,7 @@ $GLOBALS['table_des_tables']['flickr_photosets_comments_getlist'] = 'fpipr_comme
 //======================================================================
 // pour les groupes
 
-$GLOBALS['FpipR_versions']['spip_fpipr_groups'] = '0.3';
+$GLOBALS['FpipR_versions']['spip_fpipr_groups'] = '0.4';
 $GLOBALS['FpipR_tables']['spip_fpipr_groups_field'] = array(
 															   "id_group" => "varchar(255) NOT NULL",
 															   "user_id" => 'varchar(100)', //cas où on recupere les groupes d'un utilisateur
@@ -357,7 +357,6 @@ function FpipR_fill_photos_table($photos,$add='') {
   if($add)
 	foreach($add as $name=>$val) {
 	  $col.=",$name";
-	  $vals .= ','._q($val);
 	}
   foreach($photos as $photo) {
 	$ownername = $photo->ownername?$photo->ownername:$photo->username;
@@ -651,18 +650,26 @@ function FpipR_create_flickr_people_getpublicgroups_dist() {
 function FpipR_flickr_people_getpublicgroups_dist($arguments) {
   include_spip('inc/flickr_api');
   $groups = flickr_people_getPublicGroups($arguments['user_id']);
-
-  FpipR_fill_groups_table($groups);
+  FpipR_fill_groups_table($groups,'groups',array('user_id'=>$arguments['user_id']));
 }
 
-function FpipR_fill_groups_table($groups,$key='groups') {
+function FpipR_fill_groups_table($groups,$key='groups',$add) {
   $query = "DELETE FROM spip_fpipr_groups";
   spip_query($query);			
-  if($groups = $group[$key]) {
-	foreach($groups as $g) {
+
+  if($groups = $groups[$key]) {
+$col = '(id_group,name,admin,eighteenplus';
+  if($add)
+	foreach($add as $name=>$val) {
+	  $col.=",$name";
+	}
+	foreach($groups['group'] as $g) {
+	$vals = '('._q($g['nsid']).','._q($g['name']).','._q($g['admin']).','._q($g['eighteenplus']);
+		  foreach($add as $name=>$val) {
+		$vals .= ','._q($val);
+	  }
 	spip_abstract_insert('spip_fpipr_groups',
-						 '(id_group,name,admin,eighteenplus)',
-						 '('._q($g['nsid']).','._q($g['name']).','._q($g['admin']).','._q($g['eighteenplus']).')'
+		$col.')',$vals.')'
 						 );
 	}
   }	
