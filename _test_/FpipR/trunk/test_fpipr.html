@@ -7,14 +7,13 @@ BOUCLE Flickr
 </title>
 </head>
 
-<BOUCLE_lookup(FLICKR_URLS_LOOKUPGROUP) {url http://www.flickr.com/groups/sciencegroup/}>
-#ID_GROUP
-<BOUCLE_group(FLICKR_GROUPS_GETINFO) {id_group}>
-#LOGO_GROUP
+<BOUCLE_auteur(AUTEURS) {flickr_nsid!=''}>
+<BOUCLE_info(FLICKR_PEOPLE_GETINFO) {user_id=#FLICKR_NSID}>
+#LOCATION
 #NAME
-</BOUCLE_group>
-
-</BOUCLE_lookup>
+#REALNAME
+</BOUCLE_info>
+</BOUCLE_auteur>
 
 </body>
 </html>
