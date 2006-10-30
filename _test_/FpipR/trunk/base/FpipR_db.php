@@ -281,8 +281,7 @@ $GLOBALS['FpipR_tables']['spip_fpipr_people_field'] = array(
 															   "date_taken_firstphoto" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 															   "photos_count" => "int"
 															   );
-$GLOBALS['FpipR_tables']['spip_fpipr_people_key'] = array("PRIMARY KEY" => "id_group",
-															"KEY" => 'user_id');
+$GLOBALS['FpipR_tables']['spip_fpipr_people_key'] = array("PRIMARY KEY" => "user_id");
 
 
 $GLOBALS['tables_principales']['spip_fpipr_people'] =
@@ -645,19 +644,19 @@ function FpipR_flickr_urls_lookupgroup_dist($arguments) {
 //======================================================================
 
 function FpipR_create_flickr_people_getinfo_dist() {
-  FpipR_make_table('spip_fpipr_groups');
+  FpipR_make_table('spip_fpipr_people');
 }
 
 function FpipR_flickr_people_getinfo_dist($arguments) {
   include_spip('inc/flickr_api');
-  $person = flickr_people_getInfo($arguments['url']);
+  $person = flickr_people_getInfo($arguments['user_id']);
 
   $query = "DELETE FROM spip_fpipr_people";
   spip_query($query);
   if($person = $person['person']) {
 	spip_abstract_insert('spip_fpipr_people',
 						 '(user_id,isadmin,ispro,iconserver,username,realname,location,url_photos,url_profile,date_firstphoto,date_taken_firstphoto,photos_count)',
-						 '('._q($person['nsid']).','._q($person['isadmin']).','._q($person['ispro']).','._q($person['iconserver']).','._q($person['username']['_content']).','._q($person['realname']['_content']).','._q($person['location'['_content']]).','._q($person['photosurl']['_content']).','._q($person['profileurl']['_content']).','._q($person['photos']['firstdate']['_content']).','._q($person['photos']['firstdatetaken']['_content']).','._q($person['photos']['count']['_content']).')'
+						 '('._q($person['nsid']).','._q($person['isadmin']).','._q($person['ispro']).','._q($person['iconserver']).','._q($person['username']['_content']).','._q($person['realname']['_content']).','._q($person['location']['_content']).','._q($person['photosurl']['_content']).','._q($person['profileurl']['_content']).','._q(date('Y-m-d H:i:s',$person['photos']['firstdate']['_content'])).','._q($person['photos']['firstdatetaken']['_content']).','._q($person['photos']['count']['_content']).')'
 						 );
   }									 
 }
