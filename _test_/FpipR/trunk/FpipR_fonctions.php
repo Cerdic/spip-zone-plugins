@@ -974,6 +974,8 @@ function boucle_FLICKR_PHOTOSETS_COMMENTS_GETLIST_dist($id_boucle,&$boucles) {
 
 //======================================================================
 
+/*
+Etrangement, on ne peut pas faire ca sans auth.
 function balise_ISPUBLIC_dist($p) {
   $ispublic = champ_sql('ispublic',$p);
   $id_photo = champ_sql('id_photo',$p);
@@ -991,7 +993,7 @@ function balise_ISFRIEND_dist($p) {
   $id_photo = champ_sql('id_photo',$p);
   $p->code = "(($isfriend)?$isfriend:FpipR_photos_getPerms($id_photo,'isfriend'))";
   return $p;
-}
+}*/
 
 //======================================================================
 

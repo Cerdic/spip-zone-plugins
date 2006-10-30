@@ -334,7 +334,6 @@ function flickr_photosets_getList($user_id,$auth_token='') {
 }
 
 function flickr_photosets_getPhotos($photoset_id,$extras='',$per_page='',$page='',$privacy_filter='',$auth_token='') {
-
   $params = array();
   $params['photoset_id'] = $photoset_id;
   if($privacy_filter) $params['privacy_filter'] = $privacy_filter;
@@ -344,12 +343,12 @@ function flickr_photosets_getPhotos($photoset_id,$extras='',$per_page='',$page='
   if($page) $params['page'] = $page;
 
   $photos =  flickr_check_error(flickr_api_call('flickr.photosets.getPhotos',$params,$auth_token));
-  return flickr_utils_createPhotos($photos);
+  return flickr_utils_createPhotos($photos,'photoset');
 }
 
-function flickr_utils_createPhotos($photos) {
+function flickr_utils_createPhotos($photos,$key='photos') {
   $resp = new FlickrPhotos;
-  if($photos = $photos['photos']) {
+  if($photos = $photos[$key]) {
 	$resp->page = $photos['page'];
 	$resp->pages = $photos['pages'];
 	$resp->perpage = $photos['perpage'];
@@ -603,7 +602,7 @@ function flickr_photosets_comments_getList($photoset_id,$auth_token='') {
   return flickr_check_error(flickr_api_call('flickr.photosets.comments.getList',$params,$auth_token));
 }
 
-function flickr_photos_geo_getPerms($photo_id,$auth_token='') {
+function flickr_photos_getPerms($photo_id,$auth_token='') {
   $params = array();
   if($photo_id) $params['photo_id'] = $photo_id;
   else return false;

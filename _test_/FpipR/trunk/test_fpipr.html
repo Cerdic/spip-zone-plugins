@@ -7,14 +7,19 @@ BOUCLE Flickr
 </title>
 </head>
 
-<BOUCLE_photo(FLICKR_PHOTOS_COMMENTS_GETLIST) {id_photo=269373373}{"<br/>"}>
-#TEXTE
-</BOUCLE_photo>
+<ul>
+<BOUCLE_p(FLICKR_PHOTOSETS_GETPHOTOS) {id_photoset=72157594156805837}{0,10}>
+<li>
+#LOGO_PHOTO{s}
+#ISPUBLIC
+#LATITUDE,#LONGITUDE
+</li>
+</BOUCLE_p>
+</ul>
+</B_p>
+RIEN
+<//B_p>
 
-<hr/>
-<BOUCLE_photoset(FLICKR_PHOTOSETS_COMMENTS_GETLIST) {id_photoset=72057594102682183}{"<br/>"}>
-#TEXTE
-</BOUCLE_photoset>
 
 </body>
 </html>

@@ -131,20 +131,21 @@ function FpipR_photos_getContext($id_photo,$id_photoset='',$id_group='',$tag,$at
 	}
 }
 
-function FpipR_photos_getPerms($id_photo,$perm) {
+/*function FpipR_photos_getPerms($id_photo,$perm) {
   static $perms;
   if(!$perms[$id_photo]) {
 	  include_spip('inc/flickr_api');
-	  $perms["$id_photo"] = flickr_photos_getPerms($id_photo);
+	  $perms[$id_photo] = flickr_photos_getPerms($id_photo);
+	var_dump($perms[$id_photo]);
   } 
   return $perms[$id_photo]['perms'][$perm];
-}
+}*/
 
 function FpipR_photos_geo_getLocation($id_photo,$location) {
   static $locations;
   if(!$locations[$id_photo]) {
 	  include_spip('inc/flickr_api');
-	  $locations["$id_photo"] = flickr_photos_geo_getLocation($id_photo);
+	  $locations[$id_photo] = flickr_photos_geo_getLocation($id_photo);
   } 
   return $locations[$id_photo]['location'][$location];
 }
