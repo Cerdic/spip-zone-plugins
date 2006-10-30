@@ -519,12 +519,14 @@ function FpipR_fill_comments_table($comments) {
   
   $query = "DELETE FROM spip_fpipr_comments";
   spip_query($query);
+  $comments = $comments['comments'];
   $photo_id = _q($comments['photo_id']);
   $photoset_id = _q($comments['photoset_id']);
   foreach($comments['comment'] as $com) {
 	spip_abstract_insert('spip_fpipr_comments',
 						 "(id_comment,user_id,authorname,date_create,permalink,texte,id_photo,id_photoset)",
-						 '('._q($com['id']).','._q($com['author']).','._q($com['authorname']).','._q(date('Y-m-d H:i:s',$com['date_create'])).','._q($com['permalink']).','._q($com['_content']).','.$photo_id.','.$photoset_id.')';
+		
+						 '('._q($com['id']).','._q($com['author']).','._q($com['authorname']).','._q(date('Y-m-d H:i:s',$com['date_create'])).','._q($com['permalink']).','._q($com['_content']).','.$photo_id.','.$photoset_id.')'
 						 );
   }
 }
