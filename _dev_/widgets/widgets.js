@@ -60,11 +60,11 @@ $.fn.openwidget = function() {
 
 // annule le widget ouvert (fonction destructive)
 $.fn.cancelwidget = function() {
-  this
-  .filter('.widget-has')
-  .show()
-  .removeClass('widget-has')
-  .removeClass('widget-changed')
+  return this.prev()
+	.filter('.widget-has')
+	.show()
+	.removeClass('widget-has')
+	.removeClass('widget-changed')
   .next()
     .remove();
 }
@@ -95,7 +95,6 @@ $.fn.activatewidget = function() {
         if (d.$erreur > '') {
           alert(d.$erreur);
           $(me)
-          .prev()
             .cancelwidget();
           return false;
         }
@@ -104,13 +103,9 @@ $.fn.activatewidget = function() {
           .html(
             d[$('form', me).find('.widget-id').val()]
           )
-          .removeClass('widget-changed')
-          .prepend(ICONCLICK)
-          .show()
-          .removeClass('widget-has')
-        .next()
-        .hide()
-        .html('');
+          .prepend(ICONCLICK);
+        $(me)
+          .cancelwidget();
       }).onesubmit(function(){
         $(this)
         .append(SEARCHING) // icone d'attente
@@ -140,7 +135,6 @@ $.fn.activatewidget = function() {
         .keypress(function(e){
           if (e.keyCode == 27) {
             $(me)
-            .prev()
             .cancelwidget();
           }
         })
@@ -157,7 +151,6 @@ $.fn.activatewidget = function() {
         .click(function(e){
           e.stopPropagation();
           $(me)
-          .prev()
           .cancelwidget();
         })
       .end()
