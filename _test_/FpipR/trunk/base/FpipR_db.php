@@ -243,6 +243,8 @@ $GLOBALS['FpipR_versions']['spip_fpipr_groups'] = '0.3';
 $GLOBALS['FpipR_tables']['spip_fpipr_groups_field'] = array(
 															   "id_group" => "varchar(255) NOT NULL",
 															   "user_id" => 'varchar(100)', //cas où on recupere les groupes d'un utilisateur
+															   "admin" => "ENUM ('0','1')",
+															   "eighteenplus" => "ENUM ('0','1')",
 															   "iconserver" => "int default 0",
 															   "name" => "text default ''",
 															   "description" => "text default ''",
@@ -260,6 +262,7 @@ $GLOBALS['tables_principales']['spip_fpipr_groups'] =
   array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_groups_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_groups_key']);
 $GLOBALS['table_des_tables']['flickr_groups_getinfo'] = 'fpipr_groups';
 $GLOBALS['table_des_tables']['flickr_urls_lookupgroup'] = 'fpipr_groups';
+$GLOBALS['table_des_tables']['flickr_people_getpublicgroups'] = 'fpipr_groups';
 
 //======================================================================
 //pour les peoples
@@ -639,6 +642,30 @@ function FpipR_flickr_urls_lookupgroup_dist($arguments) {
 						 '('._q($group['id']).','._q($group['groupname']['_content']).')'
 						 );
   }									 
+}
+
+function FpipR_create_flickr_people_getpublicgroups_dist() {
+  FpipR_make_table('spip_fpipr_groups');
+}
+
+function FpipR_flickr_people_getpublicgroups_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $groups = flickr_people_getPublicGroups($arguments['user_id']);
+
+  FpipR_fill_groups_table($groups);
+}
+
+function FpipR_fill_groups_table($groups,$key='groups') {
+  $query = "DELETE FROM spip_fpipr_groups";
+  spip_query($query);			
+  if($groups = $group[$key]) {
+	foreach($groups as $g) {
+	spip_abstract_insert('spip_fpipr_groups',
+						 '(id_group,name,admin,eighteenplus)',
+						 '('._q($g['nsid']).','._q($g['name']).','._q($g['admin']).','._q($g['eighteenplus']).')'
+						 );
+	}
+  }	
 }
 
 //======================================================================
