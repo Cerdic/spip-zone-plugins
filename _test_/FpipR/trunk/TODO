@@ -36,7 +36,6 @@ photos
     * flickr.photos.getCounts
     * flickr.photos.getExif
     * flickr.photos.getNotInSet
-    * flickr.photos.getPerms
     * flickr.photos.getRecent
     * flickr.photos.getSizes
     * flickr.photos.getUntagged
@@ -47,7 +46,6 @@ photos
 
 photos.geo
 
-    * flickr.photos.geo.getLocation
     * flickr.photos.geo.getPerms
 
 photos.licenses

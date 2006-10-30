@@ -974,6 +974,48 @@ function boucle_FLICKR_PHOTOSETS_COMMENTS_GETLIST_dist($id_boucle,&$boucles) {
 
 //======================================================================
 
+function balise_ISPUBLIC_dist($p) {
+  $ispublic = champ_sql('ispublic',$p);
+  $id_photo = champ_sql('id_photo',$p);
+  $p->code = "(($ispublic)?$ispublic:FpipR_photos_getPerms($id_photo,'ispublic'))";
+  return $p;
+}
+function balise_ISFAMILY_dist($p) {
+  $isfamily = champ_sql('isfamily',$p);
+  $id_photo = champ_sql('id_photo',$p);
+  $p->code = "(($isfamily)?$isfamily:FpipR_photos_getPerms($id_photo,'isfamily'))";
+  return $p;
+}
+function balise_ISFRIEND_dist($p) {
+  $isfriend = champ_sql('isfriend',$p);
+  $id_photo = champ_sql('id_photo',$p);
+  $p->code = "(($isfriend)?$isfriend:FpipR_photos_getPerms($id_photo,'isfriend'))";
+  return $p;
+}
+
+//======================================================================
+
+function balise_LATITUDE_dist($p) {
+  $latitude = champ_sql('latitude',$p);
+  $id_photo = champ_sql('id_photo',$p);
+  $p->code = "(($latitude)?$latitude:FpipR_photos_geo_getLocation($id_photo,'latitude'))";
+  return $p;
+}
+function balise_LONGITUDE_dist($p) {
+  $longitude = champ_sql('longitude',$p);
+  $id_photo = champ_sql('id_photo',$p);
+  $p->code = "(($longitude)?$longitude:FpipR_photos_geo_getLocation($id_photo,'longitude'))";
+  return $p;
+}
+function balise_ACCURACY_dist($p) {
+  $accuracy = champ_sql('accuracy',$p);
+  $id_photo = champ_sql('id_photo',$p);
+  $p->code = "(($accuracy)?$accuracy:FpipR_photos_geo_getLocation($id_photo,'accuracy'))";
+  return $p;
+}
+
+//======================================================================
+
 function FpipR_utils_calcul_limit(&$boucle,&$arguments) {
   //on calcul le nombre de page d'apres {0,10}
   list($debut,$pas) = split(',',$boucle->limit);
@@ -992,5 +1034,7 @@ function FpipR_utils_search_criteres(&$boucle,&$arguments,$possible_criteres) {
 	}
   }
 }
+
+
 
 ?>
