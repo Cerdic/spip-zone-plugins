@@ -91,11 +91,20 @@ $.fn.activatewidget = function() {
     $(me)
     .find('form')
       .ajaxForm(function(d){
+        $(me)
+          .find("img.widget-searching")
+            .remove();
         eval('d=' + d.responseText + ';');
         if (d.$erreur > '') {
           alert(d.$erreur);
-          $(me)
-            .cancelwidget();
+	      if (d.$annuler) {
+	          $(me)
+	            .cancelwidget();
+          } else {
+	          $(me)
+		        .find(".widget-boutons")
+        		  .show(); // boutons de validation
+          }
           return false;
         }
         $(me)

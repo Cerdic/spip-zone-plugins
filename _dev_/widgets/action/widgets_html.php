@@ -129,6 +129,7 @@ function action_widgets_html_dist() {
 		}
 		if (!$anamod AND !$return['$erreur']) {
 			$return['$erreur'] = _T('widgets:pas_de_modification');
+			$return['$annuler'] = true;
 		}
 
 		// une quelconque erreur ... ou rien ==> on ne fait rien !
