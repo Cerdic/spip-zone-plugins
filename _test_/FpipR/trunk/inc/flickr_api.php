@@ -685,6 +685,14 @@ function flickr_urls_getUserProfile($user_id,$auth_token='') {
   return flickr_check_error(flickr_api_call('flickr.urls.getUserProfile',$params,$auth_token));
 }
 
+function flickr_tags_getListUser($user_id,$auth_token='') {
+  $params = array();
+  if($user_id) $params['user_id'] = $user_id;
+  else return false;
+
+  return flickr_check_error(flickr_api_call('flickr.tags.getListUser',$params,$auth_token));
+}
+
 
 //======================================================================
 

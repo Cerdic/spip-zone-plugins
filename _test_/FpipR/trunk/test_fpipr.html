@@ -10,6 +10,10 @@ BOUCLE Flickr
 
 
 <BOUCLE_auteur(AUTEURS) {flickr_nsid!=''}>
+<BOUCLE_tags(FLICKR_TAGS_GETLISTUSER) {author=#FLICKR_NSID} {0,100} {","}>
+#SAFE
+</BOUCLE_tags>
+<br/>
 <BOUCLE_contacts(FLICKR_CONTACTS_GETPUBLICLIST) {nsid #FLICKR_NSID} {0,10}>
 #URL_USERPROFILE
 #USERNAME

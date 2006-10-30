@@ -110,7 +110,7 @@ $GLOBALS['tables_principales']['spip_fpipr_photo_details'] =
 $GLOBALS['table_des_tables']['flickr_photos_getinfo'] = 'fpipr_photo_details';
 
 
-$GLOBALS['FpipR_versions']['spip_fpipr_tags'] = '0.4';
+$GLOBALS['FpipR_versions']['spip_fpipr_tags'] = '0.6';
 $GLOBALS['FpipR_tables']['spip_fpipr_tags_field'] = array("id_tag" => 'varchar(255) NOT NULL',
 														  "author" => 'varchar(100)',
 														  "raw" => "text DEFAULT '' NOT NULL",
@@ -727,16 +727,18 @@ function FpipR_create_flickr_tags_getlistuser_dist() {
 
 function FpipR_flickr_tags_getlistuser_dist($arguments) {
   include_spip('inc/flickr_api');
-  $who = flickr_tags_getListUser($arguments['nsid']);
+  $who = flickr_tags_getListUser($arguments['author']);
 
   $query = "DELETE FROM spip_fpipr_tags";
   spip_query($query);
-  if($who = $who['who']) {
-	foreach($who['tag'] as $t)
-	spip_abstract_insert('spip_fpipr_people',
-						 '(author,safe)',
-						 '('._q($arguments['nsid']).','._q($t['_content']).')'
-						 );
+  $fake_id = 0;
+  if($who = $who['who']['tags']) {
+	foreach($who['tag'] as $t) {
+	  spip_abstract_insert('spip_fpipr_tags',
+						   '(id_tag,author,safe)',
+						   '('._q($fake_id++).','._q($arguments['author']).','._q($t['_content']).')'
+						   );
+	}
   }									 
 }
 

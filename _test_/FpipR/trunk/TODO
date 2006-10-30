@@ -55,7 +55,6 @@ photosets
 tags
 
     * flickr.tags.getHotList
-    * flickr.tags.getListUser
     * flickr.tags.getListUserPopular
     * flickr.tags.getListUserRaw
     * flickr.tags.getRelated

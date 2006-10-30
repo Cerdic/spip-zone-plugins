@@ -1199,6 +1199,38 @@ function balise_LOGO_CONTACT_dist($p) {
   $p->code = "FpipR_logo_owner($user_id,$server)";	
   return $p;
 }
+//======================================================================
+
+function boucle_FLICKR_TAGS_GETLISTUSER_dist($id_boucle,&$boucles) {
+ $boucle = &$boucles[$id_boucle];
+  $id_table = $boucle->id_table;
+  $boucle->from[$id_table] =  "spip_fpipr_tags";
+
+  $arguments = '';
+  //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
+  foreach($boucle->where as $w) {
+	if($w[0] == "'?'") {
+	  $w = $w[2];
+	} 
+	$key = str_replace("'",'',$w[1]);
+	$val = $w[2];
+	$key = str_replace("$id_table.",'',$key);
+	if ($w[0] == "'='" && $key == 'author'){
+	  $arguments[$key] = $val;
+	} else 
+	  erreur_squelette(_T('fpipr:mauvaisop',array('critere'=>$key,'op'=>$w[0])), $id_boucle);
+  }
+  $boucle->hash = "// CREER la table flickr_groups et la peupler avec le resultat de la query
+	  \$arguments = '';\n";
+  foreach($arguments as $key => $val) {
+	if($val) {
+	  $boucle->hash .= "\$v=$val;\n";
+	  $boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument('$key',\$v);\n";
+	}}
+
+  $boucle->hash .= "FpipR_fill_table_boucle('flickr.tags.getListUser',\$arguments);";
+  return calculer_boucle($id_boucle, $boucles); 
+}
 
 //======================================================================
 
