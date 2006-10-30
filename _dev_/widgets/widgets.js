@@ -81,18 +81,6 @@ $.fn.hidewidget = function() {
     .removeClass('widget-hover');
 }
 
-// soumet le widget
-/*
-$.fn.submitwidget = function() {
-  return this
-  .next()
-  .find('form')
-  .each(function(){
-    this.submit();
-  });
-}
-*/
-
 // active un widget qui vient d'etre charge
 $.fn.activatewidget = function() {
   return this
@@ -141,10 +129,13 @@ $.fn.activatewidget = function() {
           .addClass('widget-changed');
       })
       .find(".widget-active")
-        .css('font', 'inherit') // pour safari
         .css({
-            'fontSize': $(me).css('fontSize'),
-            'fontFamily': $(me).css('fontFamily')
+            'fontSize': $(me).prev().css('fontSize'),
+            'fontFamily': $(me).prev().css('fontFamily'),
+            'fontWeight': $(me).prev().css('fontWeight'),
+            'lineHeight': $(me).prev().css('lineHeight'),
+            'color': $(me).prev().css('color'),
+            'backgroundColor': $(me).prev().css('backgroundColor')
         })
         .each(function(n){
           if (n==0)
@@ -189,18 +180,10 @@ $.fn.activatewidget = function() {
 // initialise les widgets (cree le clone actif)
 $.fn.initwidget = function(){
   this
-  .each(function(){
-    $(this)
-    .after(
-      this.cloneNode(true)
-    );
-  })
+  .after("<div></div>")
   .addClass('widget-autorise')
   .next()
     .hide()
-    .html('')
-    .removeAttr('id') // necessaire ??
-    .removeClass('widget')
     .click(function(e){
       e.stopPropagation();
     })
