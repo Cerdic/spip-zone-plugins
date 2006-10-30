@@ -8,7 +8,7 @@
  */
 //CSS style selector to match the fading elements
 var FADINGROLLOVER_SEL = 'li';
-var FADINGROLLOVER_COLOR = '#FF0000';
+var FADINGROLLOVER_COLOR = '#D4D4D5';
 
 var init_f = function() {
 	$(FADINGROLLOVER_SEL,this).fadingRollover(FADINGROLLOVER_COLOR);
