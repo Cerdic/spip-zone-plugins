@@ -14,7 +14,9 @@ max = $("td.image img").size();
 //il faudrait essayer ce plugin .pause()
 // http://www.mythin.net/pause.js
 
+if(max>0){
 start();
+}
 
 });
 
