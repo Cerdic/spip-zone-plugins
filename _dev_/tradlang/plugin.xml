@@ -5,7 +5,6 @@
  <etat>dev</etat>
  <description>Un plugin pour g&eacute;rer directement les fichiers langues depuis l'interface priv&eacute;e.</description>
 
- <fonctions>tradlang_fonctions.php</fonctions>
  <options>tradlang_options.php</options>
 
  <pipeline>

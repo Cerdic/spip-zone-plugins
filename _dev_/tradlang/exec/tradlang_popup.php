@@ -26,6 +26,10 @@
 
 //print_r($_GET);
 
+$repplugin = getcwd()."../plugins/tradlang";
+echo getcwd()."<br>";
+echo $repplugin."/tradlang_inc.php";
+
 if ($connect_statut != "0minirezo") 
      exit;
 
@@ -504,7 +508,7 @@ function recherche($table_reponse, $type, $langue, $filtre, $date, $id,
 
 function test_module($nom_mod)
 {
-  global $prefix;
+  $prefix = $GLOBALS['table_prefix'];
   $quer = "SELECT id FROM ".$prefix."_tradlang WHERE module='".
     $nom_mod."' LIMIT 0,1";
   $res = mysql_query($quer);
@@ -778,14 +782,15 @@ function debut_html_ts($titre = "", $taille=550)
 
   if ($titre=='')
     $titre = _TT('ts:titre_traduction');
-  include("./trad-lang/trad_lang_header.php");
+echo getcwd();
+  include("./trad_lang_header.php");
 }
 
 
 function fin_html_ts() 
 {
   global $tlversion;
-  include("./trad-lang/trad_lang_footer.php");
+  include("./trad_lang_footer.php");
 }
 
 

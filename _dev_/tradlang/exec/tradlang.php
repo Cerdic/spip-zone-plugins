@@ -2,11 +2,12 @@
 
 ob_start();
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_TRADLANG',(_DIR_PLUGINS.end($p)));
+echo getcwd()."<br>";
+echo get_include_path();
 
 include_spip("inc/presentation");
-include("tradlang_inc.php");
+//include("../tradlang_inc.php");
+include("tradlang_fonctions.php");
 
 function exec_tradlang() {
 
