@@ -1019,7 +1019,7 @@ function balise_ACCURACY_dist($p) {
 //======================================================================
 
 function boucle_FLICKR_GROUPS_GETINFO_dist($id_boucle,&$boucles) {
-  $boucle = &$boucles[$id_boucle];
+ $boucle = &$boucles[$id_boucle];
   $id_table = $boucle->id_table;
   $boucle->from[$id_table] =  "spip_fpipr_groups";
 
@@ -1047,6 +1047,19 @@ function boucle_FLICKR_GROUPS_GETINFO_dist($id_boucle,&$boucles) {
 
   $boucle->hash .= "FpipR_fill_table_boucle('flickr.groups.getInfo',\$arguments);";
   return calculer_boucle($id_boucle, $boucles); 
+}
+
+function balise_LOGO_GROUP_dist($p) {
+  $id_group = champ_sql('id_group',$p);
+  $server = champ_sql('iconserver',$p);
+  $p->code = "FpipR_logo_owner($id_group,$server)";	
+  return $p;
+}
+
+function balise_URL_GROUP_dist($p) {
+  $id = champ_sql('id_group',$p);
+  $p->code = "FpipR_generer_url_group($id)";	
+  return $p;
 }
 
 

@@ -107,6 +107,11 @@ function FpipR_generer_url_photoset($user_id,$id_photoset) {
   return '';
 }
 
+function FpipR_generer_url_group($id) {
+  if($id)
+	return 'http://www.flickr.com/groups/'.$id;
+  return '';
+}
 
 function FpipR_photos_getContext($id_photo,$id_photoset='',$id_group='',$tag,$attr) {
   static $contexts;

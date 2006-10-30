@@ -239,18 +239,18 @@ $GLOBALS['table_des_tables']['flickr_photosets_comments_getlist'] = 'fpipr_comme
 //======================================================================
 // pour les groupes
 
-$GLOBALS['FpipR_versions']['spip_fpipr_groups'] = '0.1';
+$GLOBALS['FpipR_versions']['spip_fpipr_groups'] = '0.2';
 $GLOBALS['FpipR_tables']['spip_fpipr_groups_field'] = array(
 															   "id_group" => "varchar(255) NOT NULL",
 															   "user_id" => 'varchar(100)', //cas où on recupere les groupes d'un utilisateur
 															   "iconserver" => "int default 1",
 															   "name" => "text default ''",
 															   "description" => "text default ''",
-															   "members" => "longint default 0",
+															   "members" => "int default 0",
 															   "privacy" => "int", //???
 															   "throttle_count" => "int",
 															   "throttle_mode" => "varchar(100)",
-															   "remaining" => "int"
+															   "throttle_remaining" => "int"
 															   );
 $GLOBALS['FpipR_tables']['spip_fpipr_groups_key'] = array("PRIMARY KEY" => "id_group",
 															"KEY" => 'user_id');
@@ -577,11 +577,6 @@ function FpipR_flickr_photosets_comments_getlist_dist($arguments) {
 
 //======================================================================
 
-FpipR_fill_groups_table($groups) {
-  $query = "DELETE FROM spip_fpipr_comments";
-  spip_query($query);
-  
-}
 
 function FpipR_create_flickr_groups_getinfo_dist() {
   FpipR_make_table('spip_fpipr_groups');
@@ -592,11 +587,12 @@ function FpipR_flickr_groups_getinfo_dist($arguments) {
   $group = flickr_groups_getInfo($arguments['id_group']);
   $query = "DELETE FROM spip_fpipr_comments";
   spip_query($query);
+  if($group = $group['group']) {
   spip_abstract_insert('spip_fpipr_groups',
 					   '(id_group,iconserver,name,description,members,privacy,throttle_count,throttle_mode,throttle_remaining)',
 					   '('._q($group['id']).','._q($group['iconserver']).','._q($group['name']['_content']).','._q($group['description']['_content']).','._q($group['members']['_content']).','._q($group['privacy']['_content']).','._q($group['throttle']['count']).','._q($group['throttle']['mode']).','._q($group['throttle']['remaining']).')'
 					   );
-									 
+}									 
 }
 
 //======================================================================
