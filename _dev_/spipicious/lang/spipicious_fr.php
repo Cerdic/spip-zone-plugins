@@ -4,6 +4,9 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+   //
+   'add_tags' => 'Vos tags (ajout/ modification)',
+
   // B
   'by' => 'Par',
 

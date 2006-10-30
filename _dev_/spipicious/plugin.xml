@@ -3,11 +3,12 @@
 	spip.icio.us
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	[erational->http://www.erational.org]	
+	[erational->http://www.erational.org]
+_ &copy; 2006 - Licence GPL	
 	</auteur>
-	<lien>-</lien>
 	<version>0.1</version>
 	<etat>dev</etat>
+	<lien>[documentation spip.icio.us->http://trac.rezo.net/trac/spip-zone/wiki/SpipIcioUs]</lien>
 	<description><multi>
 	  [fr]Permet aux visiteurs authentifi&eacute;s d'ajouter des tags (mots-cl&eacute;s) sur les articles de SPIP &agrave; la fa&ccedil;on d'un [del.icio.us->http://del.icio.us/]
 
