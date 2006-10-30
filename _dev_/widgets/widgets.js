@@ -49,9 +49,8 @@ $.fn.openwidget = function() {
           $(me)
           .hide()
           .addClass('widget-has')
+          .after('<div>'+c.$html+'</div>')
           .next()
-            .html(c.$html)
-            .show() // animate
             .activatewidget();
         }
       );
@@ -59,16 +58,15 @@ $.fn.openwidget = function() {
   });
 }
 
-// annule le widget ouvert
+// annule le widget ouvert (fonction destructive)
 $.fn.cancelwidget = function() {
-  return this
+  this
   .filter('.widget-has')
   .show()
   .removeClass('widget-has')
   .removeClass('widget-changed')
   .next()
-    .html('')
-    .hide();
+    .remove();
 }
 
 // masque le widget ouvert
@@ -84,6 +82,9 @@ $.fn.hidewidget = function() {
 // active un widget qui vient d'etre charge
 $.fn.activatewidget = function() {
   return this
+  .click(function(e){
+    e.stopPropagation();
+  })
   .each(function(){
     var me = this;
     var w,h;
@@ -95,12 +96,7 @@ $.fn.activatewidget = function() {
           alert(d.$erreur);
           $(me)
           .prev()
-            .cancelwidget()
-          .next()
-          .find("img.widget-searching")
-            .remove();
-          $(".widget-boutons", me)
-          .show();
+            .cancelwidget();
           return false;
         }
         $(me)
@@ -180,14 +176,7 @@ $.fn.activatewidget = function() {
 // initialise les widgets (cree le clone actif)
 $.fn.initwidget = function(){
   this
-  .after("<div></div>")
   .addClass('widget-autorise')
-  .next()
-    .hide()
-    .click(function(e){
-      e.stopPropagation();
-    })
-  .prev()
   .prepend(ICONCLICK)
   .click(function(e){
     e.stopPropagation();
