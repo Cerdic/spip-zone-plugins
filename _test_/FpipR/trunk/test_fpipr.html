@@ -7,11 +7,14 @@ BOUCLE Flickr
 </title>
 </head>
 
-  <BOUCLE_group(FLICKR_FAVORITES_GETPUBLICLIST) {nsid 71651012@N00}>
-	#OWNER_NAME #LOGO_OWNER #LOGO_PHOTO{s}
-  </BOUCLE_group>
-  RIEN
-  <//B_group>
+<BOUCLE_photo(FLICKR_PHOTOS_COMMENTS_GETLIST) {id_photo=269373373}{"<br/>"}>
+#TEXTE
+</BOUCLE_photo>
+
+<hr/>
+<BOUCLE_photo(FLICKR_PHOTOSETS_COMMENTS_GETLIST) {id_photoset=72057594102682183}{"<br/>"}>
+#TEXTE
+</BOUCLE_photo>
 
 </body>
 </html>
