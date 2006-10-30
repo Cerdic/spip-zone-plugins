@@ -7,18 +7,10 @@ BOUCLE Flickr
 </title>
 </head>
 
-<ul>
-<BOUCLE_p(FLICKR_PHOTOSETS_GETPHOTOS) {id_photoset=72157594156805837}{0,10}>
-<li>
-#LOGO_PHOTO{s}
-#ISPUBLIC
-#LATITUDE,#LONGITUDE
-</li>
-</BOUCLE_p>
-</ul>
-</B_p>
-RIEN
-<//B_p>
+<BOUCLE_group(FLICKR_GROUPS_GETINFO) {id_group=11947580@N00}>
+#ID_GROUP
+#ICONSERVER
+</BOUCLE_group>
 
 
 </body>

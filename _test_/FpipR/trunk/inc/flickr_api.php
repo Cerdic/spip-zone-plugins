@@ -618,6 +618,15 @@ function flickr_photos_geo_getLocation($photo_id,$auth_token='') {
   return flickr_check_error(flickr_api_call('flickr.photos.geo.getLocation',$params,$auth_token));
 }
 
+function flickr_groups_getInfo($group_id,$auth_token='') {
+  $params = array();
+  if($group_id) $params['group_id'] = $group_id;
+  else return false;
+
+  return flickr_check_error(flickr_api_call('flickr.groups.getInfo',$params,$auth_token));
+}
+
+
 //======================================================================
 
 function flickr_bookmarklet_info() {

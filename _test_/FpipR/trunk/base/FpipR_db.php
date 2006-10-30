@@ -237,6 +237,30 @@ $GLOBALS['table_des_tables']['flickr_photos_comments_getlist'] = 'fpipr_comments
 $GLOBALS['table_des_tables']['flickr_photosets_comments_getlist'] = 'fpipr_comments';
 
 //======================================================================
+// pour les groupes
+
+$GLOBALS['FpipR_versions']['spip_fpipr_groups'] = '0.1';
+$GLOBALS['FpipR_tables']['spip_fpipr_groups_field'] = array(
+															   "id_group" => "varchar(255) NOT NULL",
+															   "user_id" => 'varchar(100)', //cas où on recupere les groupes d'un utilisateur
+															   "iconserver" => "int default 1",
+															   "name" => "text default ''",
+															   "description" => "text default ''",
+															   "members" => "longint default 0",
+															   "privacy" => "int", //???
+															   "throttle_count" => "int",
+															   "throttle_mode" => "varchar(100)",
+															   "remaining" => "int"
+															   );
+$GLOBALS['FpipR_tables']['spip_fpipr_groups_key'] = array("PRIMARY KEY" => "id_group",
+															"KEY" => 'user_id');
+
+
+$GLOBALS['tables_principales']['spip_fpipr_groups'] =
+  array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_groups_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_groups_key']);
+$GLOBALS['table_des_tables']['flickr_groups_getinfo'] = 'fpipr_groups';
+
+//======================================================================
 
 function FpipR_creer_tables($method){
   $fct = str_replace('.','_',$method);
@@ -549,6 +573,30 @@ function FpipR_flickr_photosets_comments_getlist_dist($arguments) {
   include_spip('inc/flickr_api');
   $comments = flickr_photosets_comments_getList($arguments['id_photoset']);
   FpipR_fill_comments_table($comments);
+}
+
+//======================================================================
+
+FpipR_fill_groups_table($groups) {
+  $query = "DELETE FROM spip_fpipr_comments";
+  spip_query($query);
+  
+}
+
+function FpipR_create_flickr_groups_getinfo_dist() {
+  FpipR_make_table('spip_fpipr_groups');
+}
+
+function FpipR_flickr_groups_getinfo_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $group = flickr_groups_getInfo($arguments['id_group']);
+  $query = "DELETE FROM spip_fpipr_comments";
+  spip_query($query);
+  spip_abstract_insert('spip_fpipr_groups',
+					   '(id_group,iconserver,name,description,members,privacy,throttle_count,throttle_mode,throttle_remaining)',
+					   '('._q($group['id']).','._q($group['iconserver']).','._q($group['name']['_content']).','._q($group['description']['_content']).','._q($group['members']['_content']).','._q($group['privacy']['_content']).','._q($group['throttle']['count']).','._q($group['throttle']['mode']).','._q($group['throttle']['remaining']).')'
+					   );
+									 
 }
 
 //======================================================================
