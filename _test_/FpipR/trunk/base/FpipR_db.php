@@ -211,6 +211,32 @@ $GLOBALS['table_des_tables']['flickr_photos_getallcontexts'] = 'fpipr_contextes'
 $GLOBALS['table_des_tables']['flickr_interestingness_getlist'] = 'fpipr_photos';
 
 //======================================================================
+//pour les commentaires
+
+
+
+$GLOBALS['FpipR_versions']['spip_fpipr_comments'] = '0.1';
+$GLOBALS['FpipR_tables']['spip_fpipr_comments_field'] = array(
+															   "id_comment" => "varchar(255) NOT NULL",
+															   "user_id" => 'varchar(100)',
+															   "authorname" => "text default ''",
+															   "date_create"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+															   "permalink" => "text DEFAULT '' NOT NULL",
+															   "texte" => "text DEFAULT '' NOT NULL",
+															   "id_photo" => 'bigint(21) NOT NULL',
+															   "id_photoset" => "bigint(21) NOT NULL"
+															   );
+$GLOBALS['FpipR_tables']['spip_fpipr_comments_key'] = array("PRIMARY KEY" => "id_comment",
+															"KEY" => 'id_photo',
+															"KEY" => 'id_photoset');
+
+
+$GLOBALS['tables_principales']['spip_fpipr_comments'] =
+  array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_comments_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_comments_key']);
+$GLOBALS['table_des_tables']['flickr_photos_comments_getlist'] = 'fpipr_comments';
+$GLOBALS['table_des_tables']['flickr_photosets_comments_getlist'] = 'fpipr_comments';
+
+//======================================================================
 
 function FpipR_creer_tables($method){
   $fct = str_replace('.','_',$method);
@@ -472,8 +498,8 @@ function FpipR_flickr_photos_getcontactspublicphotos_dist($arguments) {
   FpipR_fill_photos_table($photos->photos);
 }
 
-//======================================================================
 
+//======================================================================
 function FpipR_create_flickr_favorites_getPublicList_dist() {
   FpipR_make_table('spip_fpipr_photos');
 }
@@ -485,6 +511,42 @@ function FpipR_flickr_favorites_getPublicList_dist($arguments) {
 										   $arguments['per_page'],
 										   $arguments['page']);
   FpipR_fill_photos_table($photos->photos);
+}
+
+//======================================================================
+
+function FpipR_fill_comments_table($comments) {
+  
+  $query = "DELETE FROM spip_fpipr_comments";
+  spip_query($query);
+  $photo_id = _q($comments['photo_id']);
+  $photoset_id = _q($comments['photoset_id']);
+  foreach($comments['comment'] as $com) {
+	spip_abstract_insert('spip_fpipr_comments',
+						 "(id_comment,user_id,authorname,date_create,permalink,texte,id_photo,id_photoset)",
+						 '('._q($com['id']).','._q($com['author']).','._q($com['authorname']).','._q(date('Y-m-d H:i:s',$com['date_create'])).','._q($com['permalink']).','._q($com['_content']).','.$photo_id.','.$photoset_id.')';
+						 );
+  }
+}
+
+function FpipR_create_flickr_photos_comments_getlist_dist() {
+  FpipR_make_table('spip_fpipr_comments');
+}
+
+function FpipR_flickr_photos_comments_getlist_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $comments = flickr_photos_comments_getList($arguments['id_photo']);
+  FpipR_fill_comments_table($comments);
+}
+
+function FpipR_create_flickr_photosets_comments_getlist_dist() {
+  FpipR_make_table('spip_fpipr_comments');
+}
+
+function FpipR_flickr_photosets_comments_getlist_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $comments = flickr_photosets_comments_getList($arguments['id_photoset']);
+  FpipR_fill_comments_table($comments);
 }
 
 //======================================================================
