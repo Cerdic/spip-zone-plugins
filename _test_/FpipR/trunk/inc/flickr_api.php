@@ -661,6 +661,31 @@ function flickr_contacts_getPublicList($user_id,$page,$per_page,$auth_token='') 
   return flickr_check_error(flickr_api_call('flickr.contacts.getPublicList',$params,$auth_token));
 }
 
+function flickr_urls_getGroup($group_id,$auth_token='') {
+  $params = array();
+  if($group_id) $params['group_id'] = $group_id;
+  else return false;
+
+  return flickr_check_error(flickr_api_call('flickr.urls.getGroup',$params,$auth_token));
+}
+
+function flickr_urls_getUserPhotos($user_id,$auth_token='') {
+  $params = array();
+  if($user_id) $params['user_id'] = $user_id;
+  else return false;
+
+  return flickr_check_error(flickr_api_call('flickr.urls.getUserPhotos',$params,$auth_token));
+}
+
+function flickr_urls_getUserProfile($user_id,$auth_token='') {
+  $params = array();
+  if($user_id) $params['user_id'] = $user_id;
+  else return false;
+
+  return flickr_check_error(flickr_api_call('flickr.urls.getUserProfile',$params,$auth_token));
+}
+
+
 //======================================================================
 
 function flickr_bookmarklet_info() {

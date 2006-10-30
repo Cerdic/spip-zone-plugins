@@ -62,9 +62,6 @@ tags
 
 urls
 
-    * flickr.urls.getGroup
-    * flickr.urls.getUserPhotos
-    * flickr.urls.getUserProfile
     * flickr.urls.lookupUser
 
 //======================================================================

@@ -97,8 +97,24 @@ function FpipR_generer_url_photo($user_id,$id_photo) {
   return '';
 }
 
-function FpipR_generer_url_owner($user_id) {
-  if($user_id) return 'http://www.flickr.com/photos/'.$user_id.'/';
+function FpipR_generer_url_owner($user_id,$type) {
+  if($user_id) {
+	switch($type) {
+	  case 1: //photos
+		include_spip('inc/flickr_api');
+		$url = flickr_urls_getUserPhotos($user_id);
+		if($url) return $url['user']['url'];
+	  case 2: //profile
+		include_spip('inc/flickr_api');
+		$url = flickr_urls_getUserProfile($user_id);
+		include_spip('inc/flickr_api');
+		if($url) return $url['user']['url'];
+	  case 0:
+	  default:
+		return 'http://www.flickr.com/photos/'.$user_id.'/';
+		
+	}
+  } 
   return '';
 }
 function FpipR_generer_url_photoset($user_id,$id_photoset) {
@@ -108,8 +124,12 @@ function FpipR_generer_url_photoset($user_id,$id_photoset) {
 }
 
 function FpipR_generer_url_group($id) {
-  if($id)
+  if($id) {
+	include_spip('inc/flickr_api');
+	$url = flickr_urls_getGroup($id);
+	if($url)return $url['group']['url'];
 	return 'http://www.flickr.com/groups/'.$id;
+  }
   return '';
 }
 
