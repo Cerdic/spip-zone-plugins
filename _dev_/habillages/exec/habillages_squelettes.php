@@ -52,7 +52,7 @@ function exec_habillages_squelettes() {
 		
 		else if (_request('statusplug') == "dist") {
 			ecrire_meta('habillages_is_themes', 'oui');
-			ecrire_meta('habillages_is_extras', 'oui');
+			ecrire_meta('habillages_is_extras', 'non');
 			ecrire_meta('habillages_prefixe_squel', 'dist');
 			ecrire_metas;
 		}
@@ -222,7 +222,7 @@ EOF;
 
 	global $couleur_foncee;
 	echo "<table border='0' cellspacing='0' cellpadding='5' width='100%'>";
-	echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
+	echo "<tr><td colspan='4' style='background-color:$couleur_foncee' class='bandeau_smooth'><b>";
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
 	echo _T('habillages:squelettes_titre')."</font></b></td></tr>";
 	echo "<tr><td class='serif' colspan=4>";	
@@ -241,6 +241,7 @@ EOF;
 		}
 		
 		echo "<ul>";
+		# Encadre du squelette par defaut.
 		debut_boite_info();
 		echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
 		echo "<tr><td style='background-color:$couleur_claire' class='titre_un habinput'>";
@@ -252,6 +253,7 @@ EOF;
 		echo "<small>"._T('habillages:squelettes_defaut_description')."</small><br /><br /><hr>";
 		fin_boite_info();
 		echo "<br />";
+		# Encadre de la dist.
 		debut_boite_info();
 		echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
 		echo "<tr><td style='background-color:$couleur_claire' class='titre_un habinput'>";
@@ -263,12 +265,11 @@ EOF;
 		echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
 		echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
 		echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_themes-22.png' />";
-		echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
-		echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_extras-22.png' />";
 		echo "<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
 		echo "</td></tr>";
 		echo "</table>";
 		echo '<div style="float:right";><img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/capture_dist_bw.png" alt="" class="preview" /></div>';
+		echo "<small><strong><font COLOR='#149E06'>Cet habillage est stable.</font></strong></small><br /><hr><br />";
 		echo "<small>"._T('habillages:squelettes_dist_description')."</small><br /><br /><hr>";
 		echo "<div class='auteur'>Collectif.<br />&copy; 2001 - 2006 - Distribue sous licence GNU/GPL</div><hr>";
 		fin_boite_info();
@@ -390,7 +391,7 @@ EOF;
 				
 		}
 	
-	echo "</table></div>\n";
+	echo "</td></tr></table></div>\n";
 
 	echo "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />";
 	echo "\n<input type='hidden' name='hash' value='" . calculer_action_auteur("valide_plugin") . "'>";
@@ -403,9 +404,7 @@ EOF;
 	echo "</div>";
 	echo "</form></tr></table>\n";
 	
-	echo "<br />";
-	
-	fin_page();	
+	echo fin_page();	
 }
 
 ?>

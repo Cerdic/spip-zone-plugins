@@ -113,7 +113,27 @@ EOF;
 	debut_gauche();
 	debut_boite_info();
 	
-	habillages_menu_navigation();
+	echo "<div class='intro_grotitre'>";
+	echo gros_titre(_T('habillages:squelettes_titre_boitinfo'))."</div><br />";
+	
+	echo "<div class='intro'>";
+	
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/stable.png' />";
+	echo _T('habillages:squelettes_stable')."<br />";
+	
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/test.png' />";
+	echo _T('habillages:squelettes_test')."<br />";
+	
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/dev.png' />";
+	echo _T('habillages:squelettes_dev')."<br /><br />";
+	
+	
+	echo "<div class='intro_titre'>";
+	echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/avance.png' />";
+	echo _T('habillages:squelettes_avance_titre')."</div>";
+	echo _T('habillages:squelettes_avance')."<br /><br />";
+
+	echo "</div>";
 	
 	fin_boite_info();
 
@@ -123,16 +143,12 @@ EOF;
 
 	global $couleur_foncee;
 	echo "<table border='0' cellspacing='0' cellpadding='5' width='100%'>";
-	echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
+	echo "<tr><td colspan='4' style='background-color:$couleur_foncee' class='bandeau_smooth'><b>";
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
 	echo _T('habillages:themes_titre')."</font></b></td></tr>";
 	echo "<tr><td class='serif' colspan=4>";
 	# Message d'introduction.
-	debut_boite_info();
-	echo "<div class='intro'>";
 	echo _T('habillages:themes_intro')."<br /><br />";
-	echo "</div>";
-	fin_boite_info();
 	
 	echo generer_url_post_ecrire("habillages_themes");
 		
@@ -147,9 +163,13 @@ EOF;
 		}
 		echo "<ul>";
 		debut_boite_info();
-		echo "<div style='background-color:$couleur_claire' class='titre_un'>";
+		echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
+		echo "<tr><td style='background-color:$couleur_claire' class='titre_un habinput'>";
 		echo "<input type='radio' name='statusplug' value='defaut'$defaut_checked>";
-		echo "<strong>"._T('habillages:themes_defaut_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+		echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
+		echo "<strong>"._T('habillages:themes_defaut_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
+		echo "</td></tr>";
+		echo "</table>";
 		echo "<small>"._T('habillages:themes_defaut_description')."</small><br /><br /><hr>";
 		fin_boite_info();
 		echo "</ul>";
@@ -196,11 +216,11 @@ EOF;
 					# Si le niveau de difficulte d'installation du squelette est renseigne, mettre les
 					# icones de difficulte.
 					if ($niveau_theme == "1") {
-						$niveau = "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' /><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
+						$niveau = "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/avance.png' /><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
 					}
 					
 					if ($niveau_theme == "0" || $niveau_theme == "") {
-						$niveau = "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
+						$niveau = "";
 					}
 					
 					if (_request('exec')=='habillages_themes'){
@@ -214,18 +234,48 @@ EOF;
 					else {
 						$checked = "";
 					}
+					
+			if (isset($etat_theme))
+				$etat = $etat_theme;
+					switch ($etat) {
+						case 'experimental':
+							$couleur_txt = "CA2F2F";
+							$titre_etat = _T('habillages:plugin_etat_experimental');
+							break;
+						case 'test':
+							$couleur_txt = "E85600";
+							$titre_etat = _T('habillages:plugin_etat_test');
+							break;
+						case 'stable':
+							$couleur_txt = "149E06";
+							$titre_etat = _T('habillages:plugin_etat_stable');
+							break;
+						default:
+							$couleur_txt = "900B06";
+							$titre_etat = _T('habillages:plugin_etat_developpement');
+							break;
+			}
 						
 					debut_boite_info();
-					echo "<div style='background-color:$couleur_claire' class='titre_un'>";
+					echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
+					echo "<tr><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+					echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";
+					echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
 					echo "<input type='radio' name='statusplug' value='$chemin_plugin_court'$checked>";
-					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.") ".$niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+					echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
+					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.") ";
+					echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+					echo $niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
+					echo "</td></tr>";
+					echo "</table>";
 					# Laisser la possibilite de definir le nom et le chemin de la capure ecran
 					# dans theme.xml.
 					echo '<div style="float:right";><img src="'.$chemin_plugin_complet.'/capture.png" alt="" class="preview" /></div>';
+					echo "<small><strong><font COLOR='#".$couleur_txt."'>".$titre_etat."</font></strong></small><br /><hr><br />";
+
 					echo "<small>".propre($description_theme)."</small><br /><br /><hr>";
 					echo "<div class='auteur'>".propre($auteur_theme)."</div><hr>";
 					echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";
-					echo "&nbsp;<small><strong><font COLOR='#".$couleur_txt."'>".$titre_etat."</font></strong></small><br />";
 					fin_boite_info();
 					//habillages_affichage_squelettes($fichier_plugin_xml);
 					echo "</ul>";
@@ -248,7 +298,7 @@ EOF;
 	
 	echo "<br />";
 	
-	fin_page();
+	echo fin_page();
 
 }
 
