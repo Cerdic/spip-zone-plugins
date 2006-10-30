@@ -86,13 +86,10 @@ setTimeout('itere();$("div#changeMe img").remove();start()',7000);
 }
 
 
-$.fn.resize_ = function(a,w,t0,t1,l0,l1,o) {
-o = $.speed(a,o);
+jQuery.fn.resize_ = function(a,w,t0,t1,l0,l1,o) {
+o = jQuery.speed(a,o);
 return this.each(function(){
-(new fx.Top(this,o)).custom(t0,t1);
-(new fx.Left(this,o)).custom(l0,l1);
-(new fx.Width(this,o)).custom(70,w);
-(new fx.Height(this,o)).custom(70,w);
+jQuery(this).animate({top:t1,left:l1,width:w,height:w},o);
 });
 };
 
