@@ -259,7 +259,7 @@ $GLOBALS['FpipR_tables']['spip_fpipr_groups_key'] = array("PRIMARY KEY" => "id_g
 $GLOBALS['tables_principales']['spip_fpipr_groups'] =
   array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_groups_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_groups_key']);
 $GLOBALS['table_des_tables']['flickr_groups_getinfo'] = 'fpipr_groups';
-$GLOBALS['table_des_tables']['flickr_urls_lookupGroup'] = 'fpipr_groups';
+$GLOBALS['table_des_tables']['flickr_urls_lookupgroup'] = 'fpipr_groups';
 
 //======================================================================
 
@@ -586,7 +586,7 @@ function FpipR_create_flickr_groups_getinfo_dist() {
 function FpipR_flickr_groups_getinfo_dist($arguments) {
   include_spip('inc/flickr_api');
   $group = flickr_groups_getInfo($arguments['id_group']);
-  $query = "DELETE FROM spip_fpipr_comments";
+  $query = "DELETE FROM spip_fpipr_groups";
   spip_query($query);
   if($group = $group['group']) {
 	spip_abstract_insert('spip_fpipr_groups',
@@ -596,20 +596,20 @@ function FpipR_flickr_groups_getinfo_dist($arguments) {
   }									 
 }
 
-function FpipR_create_flickr_urls_lookupGroup_dist() {
+function FpipR_create_flickr_urls_lookupgroup_dist() {
   FpipR_make_table('spip_fpipr_groups');
 }
 
-function FpipR_flickr_urls_lookupGroup_dist($arguments) {
+function FpipR_flickr_urls_lookupgroup_dist($arguments) {
   include_spip('inc/flickr_api');
   $group = flickr_urls_lookupGroup($arguments['url']);
 
-  $query = "DELETE FROM spip_fpipr_comments";
+  $query = "DELETE FROM spip_fpipr_groups";
   spip_query($query);
   if($group = $group['group']) {
 	spip_abstract_insert('spip_fpipr_groups',
 						 '(id_group,name)',
-						 '('._q($group['id']).','._q($group['groupname']['_content'].')'
+						 '('._q($group['id']).','._q($group['groupname']['_content']).')'
 						 );
   }									 
 }

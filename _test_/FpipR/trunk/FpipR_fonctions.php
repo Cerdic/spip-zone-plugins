@@ -1088,6 +1088,8 @@ function boucle_FLICKR_URLS_LOOKUPGROUP_dist($id_boucle, &$boucles) {
   return calculer_boucle($id_boucle, $boucles); 
 }
 
+function critere_url_dist($idb, &$boucles, $crit) {
+}
 
 
 //======================================================================
