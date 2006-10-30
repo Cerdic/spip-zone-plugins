@@ -115,7 +115,7 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
   $arguments = '';
 
 
-  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres);
+  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
   FpipR_utils_calcul_limit($boucle,$arguments);
 
   if(is_array($boucle->order)) {
@@ -332,7 +332,7 @@ function boucle_FLICKR_PHOTOSETS_GETPHOTOS_dist($id_boucle, &$boucles) {
   $arguments = '';  
   $extras = array();
 
-  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres);
+  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
 
   foreach($boucle->where as $w) {
 	if($w[0] == "'?'") {
@@ -641,7 +641,7 @@ function boucle_FLICKR_INTERESTINGNESS_GETLIST_dist($id_boucle, &$boucles) {
   $arguments = '';  
   $extras = array();
 
-  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres);
+  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
 
   foreach($boucle->where as $w) {
 	if($w[0] == "'?'") {
@@ -696,7 +696,7 @@ function boucle_FLICKR_GROUPS_POOLS_GETPHOTOS_dist($id_boucle, &$boucles) {
   $arguments = '';  
   $extras = array();
 
-  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres);
+  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
 
   foreach($boucle->where as $w) {
 	if($w[0] == "'?'") {
@@ -802,7 +802,7 @@ function boucle_FLICKR_PHOTOS_GETCONTACTSPUBLICPHOTOS_dist($id_boucle, &$boucles
   $arguments = '';  
   $extras = array();
 
-  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres);
+  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
 
   if($boucle->limit) {
 	list($debut,$pas) = split(',',$boucle->limit);
@@ -863,7 +863,7 @@ function boucle_FLICKR_FAVORITES_GETPUBLICLIST_dist($id_boucle, &$boucles) {
   $arguments = '';  
   $extras = array();
 
-  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres);
+  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
 
   FpipR_utils_calcul_limit($boucle,$arguments);
 
@@ -1072,7 +1072,7 @@ function boucle_FLICKR_URLS_LOOKUPGROUP_dist($id_boucle, &$boucles) {
   $arguments = '';  
   $extras = array();
 
-  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres);
+  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
 
 
   $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
@@ -1163,20 +1163,9 @@ function boucle_FLICKR_CONTACTS_GETPUBLICLIST_dist($id_boucle,&$boucles) {
   $id_table = $boucle->id_table;
   $boucle->from[$id_table] =  "spip_fpipr_people";
 
-  $arguments = '';
-  //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
-  foreach($boucle->where as $w) {
-	if($w[0] == "'?'") {
-	  $w = $w[2];
-	} 
-	$key = str_replace("'",'',$w[1]);
-	$val = $w[2];
-	$key = str_replace("$id_table.",'',$key);
-	if ($w[0] == "'='" && $key == 'user_id'){
-	  $arguments[$key] = $val;
-	} else 
-	  erreur_squelette(_T('fpipr:mauvaisop',array('critere'=>$key,'op'=>$w[0])), $id_boucle);
-  }
+  $possible_criteres = array('nsid');
+
+  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
 
   FpipR_utils_calcul_limit($boucle,$arguments);
 
@@ -1192,6 +1181,12 @@ function boucle_FLICKR_CONTACTS_GETPUBLICLIST_dist($id_boucle,&$boucles) {
   return calculer_boucle($id_boucle, $boucles); 
 }
 
+function balise_LOGO_CONTACT_dist($p) {
+  $user_id = champ_sql('user_id',$p);
+  $server = champ_sql('iconserver',$p);
+  $p->code = "FpipR_logo_owner($user_id,$server)";	
+  return $p;
+}
 
 //======================================================================
 
@@ -1205,7 +1200,7 @@ function FpipR_utils_calcul_limit(&$boucle,&$arguments) {
   //  $boucle->limit = NULL;
 }
 
-function FpipR_utils_search_criteres(&$boucle,&$arguments,$possible_criteres) {
+function FpipR_utils_search_criteres(&$boucle,&$arguments,$possible_criteres,&$boucles,$id_boucle) {
   foreach($boucle->criteres as $crit) {
 	if (in_array($crit->op,$possible_criteres)){
 	  $val = !isset($crit->param[0]) ? "1" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$id_boucle]->id_parent);

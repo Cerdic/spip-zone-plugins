@@ -269,7 +269,7 @@ $GLOBALS['table_des_tables']['flickr_people_getpublicgroups'] = 'fpipr_groups';
 
 
 
-$GLOBALS['FpipR_versions']['spip_fpipr_people'] = '0.2';
+$GLOBALS['FpipR_versions']['spip_fpipr_people'] = '0.3';
 $GLOBALS['FpipR_tables']['spip_fpipr_people_field'] = array(
 															   "user_id" => 'varchar(100)', //cas où on recupere les groupes d'un utilisateur
 															   "isadmin" => "ENUM ('0','1')",
@@ -283,7 +283,7 @@ $GLOBALS['FpipR_tables']['spip_fpipr_people_field'] = array(
 															   "date_firstphoto" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 															   "date_taken_firstphoto" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 															   "photos_count" => "int",
-															   "ingored" => "ENUM ('0','1')"
+															   "ignored" => "ENUM ('0','1')"
 															   );
 $GLOBALS['FpipR_tables']['spip_fpipr_people_key'] = array("PRIMARY KEY" => "user_id");
 
@@ -685,16 +685,16 @@ function FpipR_create_flickr_contacts_getpubliclist_dist() {
 
 function FpipR_flickr_contacts_getpubliclist_dist($arguments) {
   include_spip('inc/flickr_api');
-  $contacts = flickr_contacts_getPublicList($arguments['user_id'],$arguments['page'],$arguments['per_page']);
-
+  $contacts = flickr_contacts_getPublicList($arguments['nsid'],$arguments['page'],$arguments['per_page']);
   $query = "DELETE FROM spip_fpipr_people";
   spip_query($query);
   if($contacts = $contacts['contacts']) {
 	foreach($contacts['contact'] as $c) {
 	  spip_abstract_insert('spip_fpipr_people',
 						   '(user_id,username,iconserver,ignored)',
-						   '('._q($c['id']).','._q($c['username']).','._q($c['iconserver']).','._q($c['ignored']).')',
+						   '('._q($c['nsid']).','._q($c['username']).','._q($c['iconserver']).','._q($c['ignored']).')'
 						   );
+
 	}
   }									 
 }
