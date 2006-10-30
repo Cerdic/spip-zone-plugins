@@ -90,9 +90,16 @@ function action_widgets_html_dist() {
 					if ($champ == 'titreurl') $champtable = 'titre';
 					else $champtable = $champ;
 
-					if (md5(valeur_colonne_table($type, $champtable, $id)) != $m[2]) {
-						$return['$erreur'] = "$type $id $champtable: " .
-							_T('widgets:modifie_par_ailleurs');
+					$md5 = md5(valeur_colonne_table($type, $champtable, $id));
+
+					// est-ce que le champ a ete modifie dans la base ?
+					if ($md5 != $m[2]) {
+						// si oui, la modif demandee correspond peut-etre
+						// a la nouvelle valeur ? dans ce cas on procede
+						// comme si "pas de modification", sinon erreur
+						if ($md5 != md5($m[1]))
+							$return['$erreur'] = "$type $id $champtable: " .
+								_T('widgets:modifie_par_ailleurs');
 						break;
 					}
 					$anamod[] = array($wid,$type,$champ,$id,$m[1]);
