@@ -1,14 +1,4 @@
 <?php
-
-function verif_secu($w, $secu) {
-    return (
-        $secu == md5($GLOBALS['meta']['alea_ephemere'].'='.$w)
-    OR
-        $secu == md5($GLOBALS['meta']['alea_ephemere_ancien'].'='.$w)
-    );
-}
-
-
 // Definition des widgets
 class Widget {
     var $name;

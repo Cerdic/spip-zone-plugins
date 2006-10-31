@@ -59,6 +59,14 @@ function var2js($var) {
     return 'null';
 }
 
+function verif_secu($w, $secu) {
+    return (
+        $secu == md5($GLOBALS['meta']['alea_ephemere'].'='.$w)
+    OR
+        $secu == md5($GLOBALS['meta']['alea_ephemere_ancien'].'='.$w)
+    );
+}
+
 function post_widgets() {
     $results = array();
 
