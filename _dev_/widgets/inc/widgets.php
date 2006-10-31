@@ -1,4 +1,99 @@
 <?php
+if (preg_match(_PREG_WIDGET, $_GET['class'], $regs)) {
+    list(,$widget,$type,$champ,$id) = $regs;
+    if (!$autoriser_modifs($type, $champ, $id)) {
+        $return['$erreur'] = "$type $id: " . _T('widgets:non_autorise');
+    } else {
+        $f = charger_fonction($type.'_'.$champ, 'controleurs', true)
+        OR $f = charger_fonction($champ, 'controleurs', true)
+        OR $f = 'controleur_dist';
+        list($html,$status) = $f($regs);
+        if ($status) {
+            $return['$erreur'] = $html;
+        } else {
+            $return['$html'] = $html;
+        }
+    }
+} else {
+    $return['$erreur'] = _T('widgets:donnees_mal_formatees');
+}
+
+function controleur_dist($regs) {
+    list(,$widget,$type,$champ,$id) = $regs;
+
+    // type du widget
+    if (in_array($champ,
+    array('chapo', 'texte', 'descriptif', 'ps')))
+        $mode = 'texte';
+    else
+        $mode = 'ligne';
+
+    // taille du widget
+    $w = intval($_GET['w']);
+    $h = intval($_GET['h']);
+    $wh = intval($_GET['wh']); // window height
+    if ($w<100) $w=100;
+    if ($w>700) $w=700;
+    if ($mode == 'texte') {
+        if ($h<36) $h=36; #ici on pourrait mettre minimum 3*$_GET['em']
+    }
+    else // ligne, hauteur naturelle
+        $h='';#$hx = htmlspecialchars($_GET['em']);
+
+    // hauteur maxi d'un textarea -- pas assez ? trop ?
+    $maxheight = min(max($wh-50,400), 700);
+    if ($h>$maxheight) $h=$maxheight;
+
+    $inputAttrs = array(
+        'style' => "width:${w}px;" . ($h ? " height:${h}px;" : ''));
+
+    $valeur = valeur_colonne_table($type, $champ, $id);
+    if ($valeur !== false) {
+        $n = new Widget($widget, $valeur);
+        $widgetsAction = self();
+        $widgetsCode = $n->code();
+        $widgetsInput = $n->input($mode, $inputAttrs);
+        $widgetsImgPath = dirname(find_in_path('images/cancel.png'));
+
+        // title des boutons
+        $OK = texte_backend(_T('bouton_enregistrer'));
+        $Cancel = texte_backend(_L('Annuler'));
+        $Editer = texte_backend(_L("&Eacute;diter $type $id"));
+        $url_edit = "ecrire/?exec={$type}s_edit&amp;id_{$type}=$id";
+
+        $html =
+        <<<FIN_FORM
+
+<form method="post" action="{$widgetsAction}">
+  {$widgetsCode}
+  {$widgetsInput}
+  <div class="widget-boutons">
+  <div style="position:absolute;">
+    <a class="widget-submit" title="{$OK}">
+      <img src="{$widgetsImgPath}/ok.png" width="20" height="20" />
+    </a>
+    <a class="widget-cancel" title="{$Cancel}">
+      <img src="{$widgetsImgPath}/cancel.png" width="20" height="20" />
+    </a>
+    <a href="{$url_edit}" title="{$Editer}" class="widget-full">
+      <img src="{$widgetsImgPath}/edit.png" width="20" height="20" />
+    </a>
+  </div>
+</div>
+</form>
+
+FIN_FORM;
+        $status = NULL;
+
+    }
+    else {
+        $html = "$type $id $champ: " . _T('widgets:pas_de_valeur');
+        $status = 6;
+    }
+
+    return array($html,$status);
+}
+
 // Definition des widgets
 class Widget {
     var $name;
@@ -26,6 +121,7 @@ class Widget {
     }
 
     function input($type = 'ligne', $attrs = array()) {
+        include_spip('inc/filtres');
         switch ($type) {
             case 'texte':
                 $return = '<textarea class="widget-active"'
