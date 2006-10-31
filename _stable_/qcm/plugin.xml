@@ -1,0 +1,63 @@
+<plugin>
+  <nom> <!-- Nom du plugin -->
+  Un QCM dans vos articles
+  </nom>
+  <auteur>        <!-- Auteur du plugin -->
+  <a href="mailto:patfr@ifrance.com">Patrice VANNEUFVILLE</a> (sur une id&eacute;e originale de Mathieu GIANNECCHINI)
+  </auteur>
+  <version>
+  0.1
+  </version>
+  <etat>
+  dev
+  </etat>
+  <description>
+Permet l'utilisation d'un QCM.<br/>
+Aucune archive. Simplement ludique.<br/>
+D&eacute;mo : <a href="http://www.ensemble-claudio-monteverdi.fr/article17" target="_blank">http://www.ensemble-claudio-monteverdi.fr/article17</a><br />
+Exemple de syntaxe : 
+<pre> &lt;qcm&gt;
+ T Un titre pour le QCM !
+ Q Une question bla bla
+ P1 Une proposition 1
+ P2 Une proposition 2
+ P3 Une proposition 3 (la bonne r&eacute;ponse !)
+ R3 (indique que la r&eacute;ponse 3 est la bonne)
+ &lt;/qcm&gt;
+ &lt;hr/&gt;
+ &lt;qcm&gt;
+ Q Une question encore
+ P1.2 Une proposition &agrave; 2 points ! (la bonne r&eacute;ponse !)
+ P2 Une proposition 2
+ R1
+ &lt;/qcm&gt;
+ &lt;hr/&gt;
+ &lt;qcm&gt;
+ Q Une question pour finir
+ P1 Une proposition 1|Un commentaire 1
+ P2 Une proposition 2|Un commentaire 2
+ P3.4 Une proposition &agrave; 4 points !|Effectivement !
+ P4 Une proposition 4|Un commentaire 4
+ P5 Une proposition 5|Un commentaire 5
+ P6 Une proposition 6|Un commentaire 6
+ R3
+ &lt;/qcm&gt;</pre>
+  </description>
+  <lien>http://www.spip-contrib.net/Filtre-QCM</lien> <!-- URI de documentation -->
+  <prefix>
+  qcm
+  </prefix>
+  <pipeline>
+  	<nom>insert_head</nom>
+  	<inclure>qcm_pipelines.php</inclure>
+  </pipeline>
+  <pipeline>
+  	<nom>header_prive</nom>
+  	<inclure>qcm_pipelines.php</inclure>
+  </pipeline>
+  <pipeline>
+  	<nom>pre_typo</nom>
+  	<inclure>qcm_pipelines.php</inclure>
+  </pipeline>
+
+</plugin>
