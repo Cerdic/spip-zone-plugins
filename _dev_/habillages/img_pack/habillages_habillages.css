@@ -2,6 +2,10 @@ IMG {
 	behavior: url("win_png.htc");
 }
 
+DIV {
+	behavior: url("win_png.htc");
+}
+
 .commentaires { 
 	color: #626262;
 }

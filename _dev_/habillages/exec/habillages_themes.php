@@ -275,7 +275,6 @@ EOF;
 
 					echo "<small>".propre($description_theme)."</small><br /><br /><hr>";
 					echo "<div class='auteur'>".propre($auteur_theme)."</div><hr>";
-					echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";
 					fin_boite_info();
 					//habillages_affichage_squelettes($fichier_plugin_xml);
 					echo "</ul>";

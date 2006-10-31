@@ -91,7 +91,7 @@ function exec_habillages_squelettes() {
 				lire_metas();
 				$liste_extras_meta = $GLOBALS['meta']['habillages_liste_extras'];
 				if (!eregi($squelettes_theme, $liste_extras_meta)) {
-				ecrire_meta('habillages_liste_themes', $liste_extras_meta.",".$squelettes_theme);
+				ecrire_meta('habillages_liste_extras', $liste_extras_meta.",".$squelettes_theme);
 				ecrire_metas;
 				}
 			}
@@ -371,7 +371,7 @@ EOF;
 						echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_themes-22.png' />";
 					}
 					$liste_extras = $GLOBALS['meta']['habillages_liste_extras'];
-					if (eregi($prefixe_theme, $liste_extras)) {
+					if (eregi($prefixe_theme, $liste_extras) || eregi('tous', $liste_extras)) {
 						echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
 						echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_extras-22.png' />";
 					}
