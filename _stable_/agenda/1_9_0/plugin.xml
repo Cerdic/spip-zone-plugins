@@ -17,6 +17,7 @@ _ &copy; 2006 - Licence GPL
 	Agenda Evenementiel
 _	{{Ce plugin necessite le plugin Widget Calendar}}
 	</description>
+	<lien>http://zone.spip.org/trac/spip-zone/wiki/AgenDa</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 	agenda_mes_options.php
 	</options>

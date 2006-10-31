@@ -17,6 +17,7 @@
 		[en] tool to add tags (keywords) (a bit of a mess right now)
 	  </multi>
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix>
 	  tag-machine
 	</prefix>

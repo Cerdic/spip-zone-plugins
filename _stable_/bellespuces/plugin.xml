@@ -14,6 +14,7 @@
         stable
 	</etat>
   <description>Remplace les puces - (tiret) des articles par des puces -* (&lt;li>...)</description>
+	<lien></lien> <!-- URI de documentation -->
   <prefix>bellespuces
 	</prefix>
 <!-- Definitions des fonctions qui s'inserent dans les pipelines -->  <pipeline>

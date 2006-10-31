@@ -4,8 +4,6 @@
 </nom>
 	<auteur>	<!-- Auteur du plugin -->
 	  Pierre Andrews (Mortimer) & IZO</auteur>
-<lien>[->http://www.spip-contrib.net/Portrait-ou-Paysage]</lien>
-
 	<version>
 	0.1
 	</version>
@@ -15,6 +13,7 @@
 	<description>
 Le plugin orientation ajoute les crit&egrave;res <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code> pour le classement des photos.
 	</description>
+	<lien>http://www.spip-contrib.net/Portrait-ou-Paysage</lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees

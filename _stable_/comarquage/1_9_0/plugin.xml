@@ -25,6 +25,7 @@ Ce plugin necessite la presence de libxslt sur votre serveur, utilisable en lign
 
 Necessite SPIP 1.9.0 minimum, compatible SPIP 1.9.1
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 	comarquage
 	</prefix>

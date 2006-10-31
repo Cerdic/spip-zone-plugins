@@ -15,6 +15,7 @@
 Formulaire et squelette de recherche dans la galaxye SPIP
 _ Necessite le plugin mnoGoSearch et un serveur de recherche mnoGoSearch
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 	galaxie
 	</prefix>

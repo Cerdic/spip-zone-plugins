@@ -15,8 +15,9 @@
 	  Introduit une nouvelle balise #FORMULAIRE_TAG_FORUM valide dans les boucles FORUMS
 	  et qui affiche un champ de texte et un bouton pour ajouter des tags en utilisant tag-machine. 
 
-	  Le groupe par défaut et FAQ, on peut le changer l40 du fichier php.
+	  Le groupe par d&eacute;faut et FAQ, on peut le changer l40 du fichier php.
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix>
 	  formulaire_tag_forum
 	</prefix>

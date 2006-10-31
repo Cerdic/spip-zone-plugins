@@ -18,6 +18,7 @@
 -- <code>$xhtml = 'tidy';</code> active le mode tidy
 -- <code>define('_TIDY_COMMAND', 'tidy');</code> d&eacute;finit le chemin du binaire
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix>
 	Tidy
 	</prefix>

@@ -15,6 +15,7 @@
 	<description>
 	utilise http://textism.com/article/683/textile (2.0 beta, attention) pour faire le rendu des textes dans SPIP.
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 	  fibres_propre
 	</prefix>

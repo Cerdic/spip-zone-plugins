@@ -23,6 +23,7 @@ _ &copy; 2006 - Licence GPL
 
 	Une page de test (<code>?page=acronymes_voir</code>) boucle sur l'ensemble des articles du site et rep&egrave;re tout ce qui ressemble de pr&egrave;s ou de loin a un accronyme. Elle permet de v&eacute;rifier la compl&egrave;tude de votre base.
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 	acronymes
 	</prefix>

@@ -6,6 +6,7 @@
 	<description>
 	Intégration de l'éditeur Tiny MCE sur SPIP
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<options> <!--Fichier charge a chaque hit -->
 	tinymce_mes_options.php	
 	</options>

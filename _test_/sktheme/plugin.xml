@@ -21,6 +21,7 @@ _ Activez ce plugin et g&eacute;r&eacute; les th&egrave;mes dans le menu configu
 _ Vous pouvez trouvez un exemple de r&eacute;pertoire theme sur [Skedus Land->http://skedus.free.fr]
 </multi>
 </description>
+	<lien></lien> <!-- URI de documentation -->
  <prefix>sktheme</prefix>
  <options>sktheme_options.php</options>
  <pipeline>

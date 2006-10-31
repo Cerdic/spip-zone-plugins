@@ -1,5 +1,3 @@
-<!-- En date du 17 fevrier 2006, des explications sur les plugins se trouvent ici :  
-http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 <plugin>
 	<nom> <!-- Nom du plugin -->
 	Flash Gordon
@@ -16,6 +14,7 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 	<description>
 	Fashons les url des mp3 pour etre a la mode
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 	mes_options.php
 	</options>

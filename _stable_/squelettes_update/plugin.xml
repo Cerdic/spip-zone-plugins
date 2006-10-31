@@ -19,6 +19,7 @@ ajouter en argument lors de la premiere utilisation &username=toto&password=toto
 _ Si les scripts php sont executes avec l'user apache, vous devez mettre votre dossier squelette en mode 777 pour qu'apache ait
 le droit d'updater le dossier avec subversion
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 	squelup
 	</prefix>	

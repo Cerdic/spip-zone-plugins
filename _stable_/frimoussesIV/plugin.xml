@@ -15,9 +15,8 @@
 	<description>
 	remplace les codes ASCII pour les frimousses par des petites images.
 	</description>
-	<lien>
-	http://www.spip-contrib.net/Smileys-III-Un-point-d-entree-pour
-	</lien>	
+	<lien>http://www.spip-contrib.net/Smileys-III-Un-point-d-entree-pour</lien>	 <!-- URI de documentation -->
+
 	<prefix> 
 	  smileys
 	</prefix>

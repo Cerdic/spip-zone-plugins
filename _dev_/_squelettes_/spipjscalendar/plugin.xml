@@ -19,6 +19,7 @@
 	Le code est documenté.
 	Nécessite Agenda et Widget Agenda.
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 	</options>
 	<fonctions> <!-- fichier charge a chaque recalcul -->

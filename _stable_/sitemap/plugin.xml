@@ -29,6 +29,7 @@ _ La presenza dei modelli article, breve... &egrave; verificata per ogni tipo di
 Modali&agrave; di utilizzo: dichiarare l'[URL della SiteMap->../spip.php?page=sitemap] in Google (inserendo direttamente /?page=sitemap la SiteMap non funzioner&agrave;).
 	</multi>
 	</description>
+	<lien>http://zone.spip.org/trac/spip-zone/wiki/SiteMap</lien> <!-- URI de documentation -->
 	<prefix> 
 	siteMap
 	</prefix>

@@ -14,6 +14,7 @@
 	<description>
 	ajoute l'appel &agrave; {{jquery.js}} et {{jq-corner.js}} dans l'entete (fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>)
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix>
 	JQuery
 	</prefix>

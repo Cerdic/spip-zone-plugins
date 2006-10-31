@@ -16,6 +16,7 @@
 	Tableau de bord de validation xhtml et accessibilit&eacute; du site
 _ Necessite le plugin Sitemap Google
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 	w3cgh
 	</prefix>

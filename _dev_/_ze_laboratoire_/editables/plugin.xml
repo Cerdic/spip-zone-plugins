@@ -5,6 +5,7 @@
 	<etat>dev</etat>
 	<description>balises editable
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<fonctions>editable.php</fonctions>
 	<prefix>editable</prefix>
 </plugin>

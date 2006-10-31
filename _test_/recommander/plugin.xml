@@ -29,6 +29,7 @@ sinon par d&eacute;faut c'est <code>"A lire sur #NOM_SITE -- #ENV{titre}"</code>
 
 Bonus : si {{jQuery}} est pr&eacute;sent, l'interface est en ahah.
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix>
 	recommander
 	</prefix>

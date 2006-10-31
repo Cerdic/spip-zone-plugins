@@ -14,6 +14,7 @@
 	<description>
 	Flashons les urls des mp3 pour &ecirc;tre a la mode !
 	</description>
+	<lien>http://www.guiderdoni.net/Le-plugin-dewplayer-pour-SPIP-un.html</lien> <!-- URI de documentation -->
 	<fonctions> <!-- fichier charge a chaque recalul de page -->
 	dew_player.php
 	</fonctions>

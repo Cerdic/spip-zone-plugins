@@ -11,5 +11,6 @@
  et en ne prenant la chaine de caractere que si elle est entouree de deux espaces.
  Il est distribu&eacute; sous licence GNU/GPL
  </description>
+	<lien></lien> <!-- URI de documentation -->
  <fonctions>glossaire.php</fonctions>
 </plugin>

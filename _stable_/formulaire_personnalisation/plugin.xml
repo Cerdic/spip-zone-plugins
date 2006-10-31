@@ -16,19 +16,20 @@
 	<description>
 	Panneau de personnalisation
 	
-	Ce plugin met à disposition du webmaster une balise #FORMULAIRE_PERSONNALISATION.
+	Ce plugin met &agrave; disposition du webmaster une balise #FORMULAIRE_PERSONNALISATION.
     
-	Une fois intégrée dans vos squelettes elle génère un formulaire proposant à vos visiteurs de choisir
-	parmis différent mode d'affichage (zoomer, inverse, etc) et parmis différent mode de navigation. 
-	Par défaut allez sur la partie publique de votre site à l'adresse ?page=panneau_perso pour tester tout cela.
+	Une fois int&eacute;gr&eacute;e dans vos squelettes elle g&eacute;n&eagrave;re un formulaire proposant &agrave; vos visiteurs de choisir
+	parmis diff&eacute;rent mode d'affichage (zoomer, inverse, etc) et parmis diff&eacute;rent mode de navigation. 
+	Par d&eacute;faut allez sur la partie publique de votre site &agrave; l'adresse ?page=panneau_perso pour tester tout cela.
     
-	A noter, par défaut ce plugin est lié à l'utilisation du squelette standard livrée sur spip 1.9.
-    Un lien d'accès au panneau de personnalisation est notamment accessible en bas de page dans ce cas là.
+	&Agrave; noter, par d&eacute;faut ce plugin est li&eacute; &agrave; l'utilisation du squelette standard livr&eacute;e avec spip 1.9.
+    Un lien d'acc&eacute;s au panneau de personnalisation est notamment accessible en bas de page dans ce cas l&aagave;.
 
-	Si vous avez un squelette personnalisé, vous devrez modifier les css zoom.css et inverse.css
+	Si vous avez un squelette personnalis&eacute;, vous devrez modifier les css zoom.css et inverse.css
 	dans le repertoire css de ce plugin ainsi qu'adapter votre inc-head pour que #INSERT_HEAD soit
-	dans un environnement en cache à zero.
+	dans un environnement en cache &agrave; z&eacute;ro.
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 	personnalisation_mes_options.php
 	</options>

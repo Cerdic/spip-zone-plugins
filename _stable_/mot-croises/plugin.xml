@@ -1,14 +1,14 @@
 <plugin>
-	<nom>Mot-croisé</nom>
+	<nom>Mot-crois&eacute;s</nom>
 	<etat>stable</etat>
 	<version>2.0 pour Spip 1.9.1 minimum.
 	
 	</version>
-	<auteur>Maïeul Rouquette
+	<auteur>Ma&#239;eul Rouquette
 	maieulrouquette@tele2.fr
 	[http://maieul.ouvaton.org->http://maieul.ouvaton.org]
 	</auteur>
-	<description>Des mots-croisés avec Spip !
+	<description>Des mots-crois&eacute;s avec Spip !
 	Exemple : <code><grille>
 
 |a|a|a|
@@ -29,6 +29,7 @@
 -#def 3
 </vertical></code>
 	</description>
+	<lien>http://www.spip-contrib.net/article1379.html</lien> <!-- URI de documentation -->
 	<fonctions>mot_croises_fonctions.php</fonctions>
 	<options>mot_croises_options.php</options>
 	<prefix>mot_croises</prefix>

@@ -4,6 +4,7 @@
  <prefix>tradlang</prefix>
  <etat>dev</etat>
  <description>Un plugin pour g&eacute;rer directement les fichiers langues depuis l'interface priv&eacute;e.</description>
+	<lien></lien> <!-- URI de documentation -->
 
  <options>tradlang_options.php</options>
 

@@ -40,6 +40,7 @@ _ <multi>
 	[en]	Managing documents chucked in the recycle bin.
 	</multi>
 	</description>
+	<lien>http://zone.spip.org/trac/spip-zone/wiki/CorbeilleAmelioree</lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees

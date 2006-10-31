@@ -18,6 +18,7 @@ _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	Si vous souhaitez modifier le nom du r&eacute;pertoire contenant les squelettes, &eacute;ditez le fichier <code>inc/switcher_config.php</code>. Il est &eacute;galement possible dans ce m&ecirc;me fichier de sp&eacute;cifier si les non administrateurs ont la possibilit&eacute; de jouer avec les jeux de squelettes en mettant a FALSE la variable <code>$afficherSeulementPourLesAdmins</code>.
 
 	Pour se faire une id&eacute;e, voir [d&eacute;mo->http://spiptest.africa-web.org/].
+	<lien>http://zine.spip.org/spip.php?article8</lien> <!-- URI de documentation -->
 	</description>
 	<prefix> 
 	switcher

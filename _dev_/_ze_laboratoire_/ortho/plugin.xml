@@ -5,6 +5,7 @@
 	<version>0.1</version>
 	<etat>dev</etat>
 	<description>Test d'une amelioration du verificateur d'orthographe
+	<lien></lien> <!-- URI de documentation -->
 	</description>
 	<prefix>ortho</prefix>
 </plugin>

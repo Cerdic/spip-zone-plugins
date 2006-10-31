@@ -6,6 +6,7 @@
 <description>
 Consente di indicizzare tabelle esterne a SPIP e consentire ricerche
 </description>
+	<lien></lien> <!-- URI de documentation -->
 <prefix>Ind_Tab_Agg</prefix>
 <pipeline>
 	<nom>ajouter_boutons</nom>

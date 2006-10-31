@@ -1,9 +1,15 @@
-<plugin> <nom>Glossaire interne</nom> <version>0.1</version> <prefix>Glossaire</prefix> <etat>experimental</etat> <auteur>Fran&ccedil;ois Schreuer ([francois.schreuer.org->http://francois.schreuer.org]).
+<plugin>
+ <nom>Glossaire interne</nom>
+ <version>0.1</version>
+ <prefix>Glossaire</prefix>
+ <etat>experimental</etat>
+ <auteur>Fran&ccedil;ois Schreuer ([francois.schreuer.org->http://francois.schreuer.org]).
 _ Plugin&eacute; par fred (homere1974[at]yahoo.fr)
 _ &copy; 2003 - Distribu&eacute; sous licence GNU/GPL</auteur>
 <description>Gestion d'un glossaire interne li&eacute; &agrave; un groupe de mots cl&eacute;s nomm&eacute; &quot;glossaire&quot;.
 _ Filtre lier_au_glossaire.
 _ Les squelettes doivent disposer de la balise <code>#INSERT_HEAD</code>.</description>
+	<lien></lien> <!-- URI de documentation -->
 <fonctions>glossaire_fonctions.php</fonctions>
 <pipeline>
 <nom>insert_head</nom>

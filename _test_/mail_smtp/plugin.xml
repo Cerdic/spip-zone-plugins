@@ -7,6 +7,7 @@
 _ Les param&egrave;tres du serveur SMTP sont configur&eacute;s dans la panneau de configuration des fonctions avanc&eacute;es.	
 _ Necessite SPIP 1.9.2
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix>smtp</prefix>
 	<pipeline>
 		<nom>affiche_milieu</nom>

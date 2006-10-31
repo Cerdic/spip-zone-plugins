@@ -23,6 +23,7 @@ _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	<description>
 Gestionnaire d'habillages SPIP.
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 	habillages
 	</prefix>

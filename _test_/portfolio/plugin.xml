@@ -19,6 +19,7 @@
 - dans le  texe : <code><articlexx|portfolio></code>
 
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 	portfolio
 	</prefix>

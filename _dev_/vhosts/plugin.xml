@@ -17,6 +17,7 @@ ce qui permet de tester differentes valeurs, meme si je nom de dommaine n'est pa
 - sinon, on regarde si le cookie existe
 - sinon, on teste le "host" pour fixer un "toto"
     </description>
+	<lien></lien> <!-- URI de documentation -->
     <options>vhosts_options.php</options>
 	<pipeline>
 		<nom>ajouter_onglets</nom>

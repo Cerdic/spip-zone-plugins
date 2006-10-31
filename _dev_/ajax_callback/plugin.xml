@@ -16,6 +16,7 @@
 	_ An alternative way to call $(document).ready() on the content loaded by an ajax request, made by whichever  
 	_ plugin, adding a custom function to the onAjaxLoad event.      
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix>
 	ajaxcallback
 	</prefix>

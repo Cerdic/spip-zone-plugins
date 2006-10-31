@@ -17,6 +17,7 @@ _ &copy; 2006 - Licence GPL
 	Gestion des Informations Personnelles : Agenda
 _	{{Ce plugin necessite le plugin Widget Calendar}}
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 	pim_agenda_mes_options.php
 	</options>

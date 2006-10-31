@@ -15,6 +15,7 @@ _ &copy; 2006 - Distribu&eacute; sous licence GPL
 	<description>
 	Ici decrivez plus ou moins longuement ce que fait votre plugin
 	</description>
+	<lien>http://www.spip.net/fr_article3448.html</lien> <!-- URI de documentation -->
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
 	template_options.php
 	</options>

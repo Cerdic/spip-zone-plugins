@@ -4,6 +4,7 @@
         <version>0.1</version>
         <etat>dev</etat>
         <description>Pr&eacute;visions m&eacute;t&eacute;o dans vos squelettes</description>
+	<lien></lien> <!-- URI de documentation -->
         <options>meteo_options.php</options>
         <fonctions>meteo_fonctions.php</fonctions>
         <prefix>meteo</prefix>

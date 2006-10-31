@@ -19,6 +19,7 @@ _ Para utilizarlo:
 -* Pon en esa carpeta los esqueletos que quieras, cada uno en una subcarpeta y a una ll&aacute;mala "predeterminada"
 -* Coloca la baliza #CAMBIAR_ESQUELETO donde quieras que aparezca el desplegable (cabecera del sitio, men&uacute; de navegaci&oacute;n,...)
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 		<prefix> 
 	cambiar_esqueleto
 	</prefix>

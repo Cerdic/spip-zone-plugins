@@ -1,5 +1,3 @@
-<!-- En date du 17 fevrier 2006, des explications sur les plugins se trouvent ici :  
-http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 <plugin>
 	<nom> <!-- Nom du plugin -->
 	  <multi>
@@ -44,6 +42,7 @@ Se avete una cartella {dossier_squelettes=mieimodelli}, allora potete creare una
 Se la cartella specifica non esiste, allora sar&agrave; utilizzata  la cartella di default.
 </multi>
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque recalul de page -->
 	  chercher_squelette.php
 	</options>

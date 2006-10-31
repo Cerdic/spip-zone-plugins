@@ -14,8 +14,9 @@ _ &copy; 2006 - GPL
 	stable
 	</etat>
 	<description>
-	Outil de Statisitique PHPmyVisites
+	Outil de Statisitique [PHPmyVisites->http://www.phpmyvisites.net
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 	phpmv
 	</prefix>

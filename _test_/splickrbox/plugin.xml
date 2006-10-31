@@ -15,6 +15,7 @@
 	Noisette pour afficher les dernieres photos à la Flickr (le "badge") , tout ca en javascript via <code>#INSERT_HEAD</code> et le plugin Jquery. <br /> Mettre <code><INCLURE{fond=inc-splickrbox}></code> dans un squelette, et hop :)
 
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix>
 	Splickr
 	</prefix>

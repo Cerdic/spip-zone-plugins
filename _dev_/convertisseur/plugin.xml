@@ -17,6 +17,7 @@ _ &copy; 2006 - Licence GPL
     	<multi>[fr]Convertit les formats de type wiki, phpBB en format SPIP et vice versa
     	[en]Converts various formats (wiki, phpBB) into SPIP format</multi>
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees

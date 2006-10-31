@@ -17,6 +17,7 @@
 Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>, ainsi que dans l'espace priv&eacute;.
 _ il n&eacute;cessite l'activation du plugin {{jQuery}}.
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix>
 	ThickBox1
 	</prefix>

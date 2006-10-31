@@ -17,6 +17,7 @@
 		[en] add photos and sets from your Flickr.com account to articles and sections. This plugin cannot be used on a commercial web site.
 	  </multi>
 	</description>
+	<lien>http://zone.spip.org/trac/spip-zone/wiki/FpipR</lien> <!-- URI de documentation -->
 	<prefix> 
 	  FpipR
 	</prefix>

@@ -17,6 +17,7 @@
 					Il permet aussi la suppression des utilisateurs qui ne seraient plus souhait&eacute;s avec &eacute;ventuellement la sauvegarde/gestion
 					de leurs articles.
         </description>
+	<lien></lien> <!-- URI de documentation -->
         <prefix>
           csv2spip
         </prefix>

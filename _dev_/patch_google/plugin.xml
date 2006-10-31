@@ -16,6 +16,7 @@
         
         Attention : il vous faut rajouter un champs "url_propre" &agrave; la table "syndic_articles". Je vais essayer de faire en sorte que le plugin le fasse tout seul, &ccedil;a doit bien &ecirc;tre possible... Je passe donc le plugin en dev pour cette raison seulement.
         </description>
+	<lien></lien> <!-- URI de documentation -->
         <prefix>
         patch_google
         </prefix>

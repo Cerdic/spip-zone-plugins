@@ -14,6 +14,7 @@
 	<description>
 	Affichage de la liste des modeles existants lors de l'edition d'un contenu
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 	modlist
 	</prefix>

@@ -27,6 +27,7 @@ xml au moyen des boucles spip. Les crit&egrave;res disponibles sont
 
 Les balises utilses sont #XPATH, #NOEUD, #ATTRIBUTS (sur laquelle on utilisera le filtre extraire_attributs), et #TEXTE pour les feuilles (vide pour les noeuds)
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 	xml_options.php
 	</options>

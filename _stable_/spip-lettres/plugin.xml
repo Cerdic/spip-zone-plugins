@@ -4,10 +4,10 @@
         <version>1.6</version>
         <etat>stable</etat>
         <description>Gestion de lettres d'information</description>
+	<lien>http://zone.spip.org/trac/spip-zone/wiki/SpipLettres</lien> <!-- URI de documentation -->
         <options>lettres.php</options>
         <fonctions>lettres.php</fonctions>
         <prefix>lettres</prefix>
-		<lien>[Documentation->http://trac.rezo.net/trac/spip-zone/wiki/SpipLettres]</lien>
         <pipeline>
                 <nom>ajouter_boutons</nom>
         </pipeline>

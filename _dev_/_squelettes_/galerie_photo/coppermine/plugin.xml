@@ -21,6 +21,7 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	Installation : consultez le fichier {{documentation.txt}}
 _ [D&eacute;mo->http://spiptest.africa-web.org/]
 	</description>
+	<lien>http://zone.spip.org/trac/spip-zone/wiki/CopperMine</lien> <!-- URI de documentation -->
 	<prefix> 
 	coppermine
 	</prefix>

@@ -19,6 +19,7 @@ _ [C&eacute;dric Morin->http://www.notre-ville.net]
 	Necessite GD2 sur votre serveur
 	Inserez la balise #ARTICLE_PDF dans votre squelette pour avoir un lien de telechargement de l'article au format PDF
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 	article_pdf_mes_options.php
 	</options>

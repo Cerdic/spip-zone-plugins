@@ -14,6 +14,7 @@ _ &copy; 2006 - Licence GPL
 	test
 	</etat>
 	<description>
+	<lien></lien> <!-- URI de documentation -->
 	Gestion de la messagerie interne entre auteurs dans les squelettes publics.
 _ Utiliser la balise <code>#FORMULAIRE_ECRIRE_MESSAGE</code> dans un squelette pour permettre &agrave; un utilisateur loggu&eacute; d'envoyer un nouveau message et consulter la liste des messages.
 _ Pour afficher un bandeau des messages sous forme de post-it : 

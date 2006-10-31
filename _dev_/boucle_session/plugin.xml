@@ -13,6 +13,7 @@
 
 	[Page de test->../spip.php?page=session]
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<fonctions>boucleSession.php</fonctions>
 	<prefix>boucleSession</prefix>
 </plugin>

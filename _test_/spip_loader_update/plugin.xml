@@ -23,6 +23,7 @@ _ <code>paquet url</code>
 _ Par exemple :
 _ <code>spip http://www.spip.net/spip-dev/DISTRIB/spip.zip</code>
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix>
 	spip_loader_update
 	</prefix>

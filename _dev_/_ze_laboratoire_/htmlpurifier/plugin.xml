@@ -14,6 +14,7 @@
   <description>
   Test du remplacement de SafeHTML par [HTML Purifier->http://hp.jpsband.org/]
   </description>
+	<lien></lien> <!-- URI de documentation -->
   <options>
   </options>
   <prefix>

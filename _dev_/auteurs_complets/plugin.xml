@@ -20,8 +20,9 @@ _ #ORGANISATION #URL_ORGANISATION #TELEPHONE #FAX #SKYPE #ADRESSE #CODE_POSTAL #
 Par la m&ecirc;me occasion, un formulaire pour l'espace public pour que le visiteur g&egrave;re lui m&ecirc; ses propres infos...
 _ {{Attention}} : le plugin BALISE_SESSION est obligatoire pour cela.
 
-{{Plus d'infos}} : [http://kent1.sklunk.net/spip.php?article67->http://kent1.sklunk.net/spip.php?article67]
+{{Plus d'infos}} : [http://kent1.sklunk.net/spip.php?article67->]
 	</description>
+	<lien>http://kent1.sklunk.net/spip.php?article67</lien> <!-- URI de documentation -->
 	<options>
 	auteurs_complets_options.php
 	</options>

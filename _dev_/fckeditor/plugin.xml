@@ -19,7 +19,7 @@
 -* Les fichiers envoy&eacute;s sur le serveur par l'interm&eacute;diaire de FCKeditor sont partag&eacute;s entre tous les utilisateurs. Il n'est pas possible de supprimer / renommer / les fichiers et dossiers. Il est possible de d&eacute;sactiver ces fonctionnalit&eacute;s &agrave; l'aide des fichiers de configuration,
 -* Les fichiers envoy&eacute;s par l'interm&eacute;diaire de FCKeditor ne sont pas utilisables par SPIP et r&eacute;ciproquement.
 	</description>
-
+	<lien></lien> <!-- URI de documentation -->
 	<prefix>fckeditor2</prefix>
 
 	<pipeline>

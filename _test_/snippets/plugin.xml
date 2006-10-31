@@ -14,6 +14,7 @@
 	<description>
 	Import/Export XML g&eacute;n&eacute;ralis&eacute; de contenus
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 	snippets
 	</prefix>

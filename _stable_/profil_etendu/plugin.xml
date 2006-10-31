@@ -5,6 +5,7 @@
 	<etat>test</etat>
 	<description>gestion d'un profil etendu
 	</description>
+	<lien>http://zone.spip.org/trac/spip-zone/wiki/ProfilEtendu</lien> <!-- URI de documentation -->
 	
 	<options>profil_etendu_options.php</options>
 	<fonctions>profil_etendu_fonctions.php</fonctions>

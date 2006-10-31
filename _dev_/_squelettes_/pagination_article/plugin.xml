@@ -14,6 +14,7 @@
   <description>
   Paginer les articles en les d&eacute;coupant selon les intertitres h3 et en pr&eacute;sentant les pages sous forme d'onglets
   </description>
+	<lien></lien> <!-- URI de documentation -->
   <fonctions>
   paginart_fonctions.php
   </fonctions>

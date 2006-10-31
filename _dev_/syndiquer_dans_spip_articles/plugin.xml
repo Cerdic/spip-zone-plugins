@@ -18,5 +18,6 @@
 
 	Ce plugin a &eacute;t&eacute; d&eacute;velopp&eacute; dans le cadre du projet de portail <a href="http://mouvements.be/">mouvements.be/</a>.
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix>syndiquer_dans_spip_articles</prefix>
 </plugin>

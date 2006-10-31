@@ -12,14 +12,15 @@
 	  dev
 	</etat>
 	<description>
-	  Librairies pour gérerer un formulaire d'édition d'un document
-	  Distribué sans garantie sous licence GPL.
-	  Bricolage (sale) à partir du code SPIP
+	  Librairies pour g&eacute;rerer un formulaire d'&eacute;dition d'un document
+	  Distribu&eacute; sans garantie sous licence GPL.
+	  Bricolage (sale) &aagrave; partir du code SPIP
 
 	  voir formulaires/inc_formulaire_document.php
 
 	  necessite le plugin tag-machine.
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix>
 	  getid3
 	</prefix>

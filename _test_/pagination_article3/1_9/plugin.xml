@@ -17,6 +17,7 @@
   correspondant au raccourci <code>{p{titre}p}</code> et en presentant les pages sous forme d'onglets.
   Ajoute egalement le bouton correspondant dans la barre typo extensible
   </description>
+	<lien></lien> <!-- URI de documentation -->
   <fonctions>
   paginart3_fonctions.php
   </fonctions>

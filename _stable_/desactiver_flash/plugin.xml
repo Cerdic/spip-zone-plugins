@@ -15,6 +15,7 @@ _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	<description>
 	Supprimer les objets flash des pages de votre site et les remplace par le contenu alternatif associé
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 	InhibeFlash
 	</prefix>

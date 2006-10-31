@@ -15,6 +15,7 @@ _ 2006 - Distribu&eacute; sous licence GPL
 	<description>
 	Un Widget Calendrier pret a l'emploi pour saisir vos dates
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<fonctions>
 	inc/calendar.php
 	</fonctions>

@@ -15,6 +15,7 @@ _ &copy; 2006 - GPL
 	<description>
 	Filtres version_texte et version_plein_texte pour transformer une page html
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 	verstexte
 	</prefix>

@@ -15,6 +15,7 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	<description>
 	Authentification des auteurs via une BD externe (mySQL ou autres si Pear DB present).
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
 	AuthBdExterne
 	</prefix>

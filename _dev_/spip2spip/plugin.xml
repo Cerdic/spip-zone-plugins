@@ -26,6 +26,7 @@ _ &copy; 2006 - Licence GPL
     </ul>
     </p>
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 	<fonctions>spiptospip_filtre.php</fonctions>
 	<prefix> 
 	spip2spip

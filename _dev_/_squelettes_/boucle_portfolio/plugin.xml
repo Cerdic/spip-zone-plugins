@@ -1,1 +1,27 @@
-<plugin>  <nom> <!-- Nom du plugin -->  Noisette Boucle Portfolio  </nom>  <auteur>        <!-- Auteur du plugin -->  cedric@notre-ville.net [notre-ville.net->http://www.notre-ville.net]  </auteur>  <version>  0.1  </version>  <etat>  test  </etat>  <description>  Un portfolio utilisant la pagination SPIP et des vignettes pour naviguer_ A utiliser avec la pagination ahah SPIP_ S'utilise par un <code><INCLURE{fond=inc-portfolio}{id_article}{nb_vignettes=5}{debut_afficher_document}{self=#SELF}></code>  </description>  <prefix>  boucleportfolio  </prefix>  <pipeline>  	<nom>insert_head</nom>  	<inclure>boucleportfolio_fonctions.php</inclure>  </pipeline></plugin>
+<plugin>
+  <nom> <!-- Nom du plugin -->
+  Noisette Boucle Portfolio
+  </nom>
+  <auteur>        <!-- Auteur du plugin -->
+  cedric@notre-ville.net [notre-ville.net->http://www.notre-ville.net]
+  </auteur>
+  <version>
+  0.1
+  </version>
+  <etat>
+  test
+  </etat>
+  <description>
+  Un portfolio utilisant la pagination SPIP et des vignettes pour naviguer
+_ A utiliser avec la pagination ahah SPIP
+_ S'utilise par un <code><INCLURE{fond=inc-portfolio}{id_article}{nb_vignettes=5}{debut_afficher_document}{self=#SELF}></code>
+  </description>
+	<lien></lien> <!-- URI de documentation -->
+  <prefix>
+  boucleportfolio
+  </prefix>
+  <pipeline>
+  	<nom>insert_head</nom>
+  	<inclure>boucleportfolio_fonctions.php</inclure>
+  </pipeline>
+</plugin>

@@ -1,1 +1,22 @@
-<plugin>  <nom> <!-- Nom du plugin -->  Phraseur args etendus  </nom>  <auteur>        <!-- Auteur du plugin -->  Renato Formato [->renatoformato@virgilio.it]  </auteur>  <version>  0.1  </version>  <etat>  dev  </etat>  <description>  A "Phraseur" that can process extended notation inside arguments of tags. _ 	EX : <code>#SET{val,[before(#ENV{test,0}|filter)after]}</code>  </description>  <prefix>  phraseur_args_etendus  </prefix></plugin>
+<plugin>
+  <nom> <!-- Nom du plugin -->
+  Phraseur args etendus
+  </nom>
+  <auteur>        <!-- Auteur du plugin -->
+  Renato Formato [->renatoformato@virgilio.it]
+  </auteur>
+  <version>
+  0.1
+  </version>
+  <etat>
+  dev
+  </etat>
+  <description>
+  A "Phraseur" that can process extended notation inside arguments of tags. 
+_ 	EX : <code>#SET{val,[before(#ENV{test,0}|filter)after]}</code>
+  </description>
+	<lien></lien> <!-- URI de documentation -->
+  <prefix>
+  phraseur_args_etendus
+  </prefix>
+</plugin>

@@ -6,4 +6,5 @@
 	[Cr&eacute;er ou Mettre &agrave; Jour->../spip.php?action=mes_fichiers]
 	[D&eacute;compresser mes fichiers->../spip.php?action=decompresser_mes_fichiers]
 	</description>
+	<lien></lien> <!-- URI de documentation -->
 </plugin>

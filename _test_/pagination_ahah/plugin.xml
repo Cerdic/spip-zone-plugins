@@ -1,1 +1,25 @@
-<plugin>  <nom> <!-- Nom du plugin -->  Pagination ahah  </nom>  <auteur>        <!-- Auteur du plugin -->  collectif  </auteur>  <version>  0.1  </version>  <etat>  dev  </etat>  <description>  Activer l'effet ahah aux boucles paginees ou qui utilisent le critere {fragment}  </description>  <prefix>  fragahah  </prefix>  <pipeline>  	<nom>insert_head</nom>  	<inclure>fragahah_pipelines.php</inclure>  </pipeline></plugin>
+<plugin>
+  <nom> <!-- Nom du plugin -->
+  Pagination ahah
+  </nom>
+  <auteur>        <!-- Auteur du plugin -->
+  collectif
+  </auteur>
+  <version>
+  0.1
+  </version>
+  <etat>
+  dev
+  </etat>
+  <description>
+  Activer l'effet ahah aux boucles paginees ou qui utilisent le critere {fragment}
+  </description>
+	<lien></lien> <!-- URI de documentation -->
+  <prefix>
+  fragahah
+  </prefix>
+  <pipeline>
+  	<nom>insert_head</nom>
+  	<inclure>fragahah_pipelines.php</inclure>
+  </pipeline>
+</plugin>

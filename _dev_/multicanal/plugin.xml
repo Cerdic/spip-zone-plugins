@@ -16,6 +16,7 @@ aux hits suivants
 
 a faire : gerer une liste de user-agent/look
     </description>
+	<lien></lien> <!-- URI de documentation -->
     <options>multicanal.php</options>
     <prefix>multicanal</prefix>
 </plugin>

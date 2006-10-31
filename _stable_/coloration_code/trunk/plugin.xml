@@ -67,9 +67,10 @@
         &lt;/div>
 	  </multi>
 	</description>
-    <fonctions> <!-- charge a chaque recalul de page , donc filtre et surrimpression de traiter_echap_code_dist-->
+	<lien></lien> <!-- URI de documentation -->
+  <fonctions> <!-- charge a chaque recalul de page , donc filtre et surrimpression de traiter_echap_code_dist-->
         coloration_code.php
-    </fonctions>
+  </fonctions>
 	<prefix> 
 	  coloration_code
 	</prefix>
