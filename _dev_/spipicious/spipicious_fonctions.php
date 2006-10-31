@@ -40,11 +40,13 @@ function spipicious_header_prive($texte) {
 //
 
 function spipicious_verifier_base() {
-		$info_plugin_spipicious = plugin_get_infos(_NOM_PLUGIN_SPIPICIOUS);
-		$version_plugin = $info_plugin_spipicious['version'];
+		$current_version= 0.0;
 		if (!isset($GLOBALS['meta']['spip_spipicious_version'])) {	
 			creer_base();
-			ecrire_meta('spip_spipicious_version', $version_plugin);
+			spip_query("ALTER TABLE spip_spipicious ADD INDEX ( `id_auteur` )");
+			spip_query("ALTER TABLE spip_spipicious ADD INDEX ( `id_article` )");
+			spip_query("ALTER TABLE spip_spipicious ADD INDEX ( `id_mot` )");
+			ecrire_meta('spip_spipicious_version', $current_version=0.02);
 			ecrire_metas(); 
 		} else {
 			$version_base = $GLOBALS['meta']['spip_spipicious_version'];
