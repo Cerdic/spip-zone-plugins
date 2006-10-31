@@ -1,6 +1,5 @@
 <?php
 
-
 function generer_url_document_flickr($id_document, $statut='') {
   if (intval($id_document) <= 0) 
 	return '';
@@ -59,6 +58,7 @@ function balise_URL_DOCUMENT($p) {
 function FpipR_fill_table_boucle($method,$arguments){
   include_spip('base/FpipR_db');
   FpipR_creer_tables($method);
+  $arguments['auth_token'] = FpipR_getAuthToken();
   FpipR_fill_table($method,$arguments);
 }
 
@@ -86,7 +86,7 @@ function FpipR_logo_owner($user_id,$server = '') {
 function FpipR_logo_photo($id_photo,$server,$secret,$taille='',$originalformat='jpg') {
   if($id_photo && $server)
 	return '<img src="http://static.flickr.com/'.$server."/".$id_photo."_".$secret.($taille?"_$taille":'').'.'.(($taille=='o')?$originalformat:'jpg').'" />';
-  return '';
+  return NULL;
 }
 
 function FpipR_generer_url_photo($user_id,$id_photo) {
@@ -94,7 +94,7 @@ function FpipR_generer_url_photo($user_id,$id_photo) {
 	return "http://www.flickr.com/photos/$user_id/$id_photo/";
   else if($id_photo)
 	return "http://www.flickr.com/photo.gne?id=$id_photo";
-  return '';
+  return NULL;
 }
 
 function FpipR_generer_url_owner($user_id,$type) {
@@ -115,12 +115,12 @@ function FpipR_generer_url_owner($user_id,$type) {
 		
 	}
   } 
-  return '';
+  return NULL;
 }
 function FpipR_generer_url_photoset($user_id,$id_photoset) {
   if($user_id && $id_photoset)
 	return 'http://www.flickr.com/photos/'.$user_id.'/sets/'.$id_photoset.'/';
-  return '';
+  return NULL;
 }
 
 function FpipR_generer_url_group($id) {
@@ -130,7 +130,7 @@ function FpipR_generer_url_group($id) {
 	if($url)return $url['group']['url'];
 	return 'http://www.flickr.com/groups/'.$id;
   }
-  return '';
+  return NULL;
 }
 
 function FpipR_photos_getContext($id_photo,$id_photoset='',$id_group='',$tag,$attr) {
@@ -156,15 +156,15 @@ function FpipR_photos_getContext($id_photo,$id_photoset='',$id_group='',$tag,$at
 	}
 }
 
-/*function FpipR_photos_getPerms($id_photo,$perm) {
+function FpipR_photos_getPerms($id_photo,$perm) {
   static $perms;
   if(!$perms[$id_photo]) {
 	  include_spip('inc/flickr_api');
-	  $perms[$id_photo] = flickr_photos_getPerms($id_photo);
-	var_dump($perms[$id_photo]);
+	  $auth_token = FpipR_getAuthToken();
+	  $perms[$id_photo] = flickr_photos_getPerms($id_photo,$auth_token);
   } 
   return $perms[$id_photo]['perms'][$perm];
-}*/
+}
 
 function FpipR_photos_geo_getLocation($id_photo,$location) {
   static $locations;
@@ -178,15 +178,37 @@ function FpipR_photos_geo_getLocation($id_photo,$location) {
 function FpipR_get_flickr_photo_id($fichier) {
   if(preg_match('#http://static.flickr.com/(.*?)/(.*?)_(.*?)(_[stmbo])\.(jpg|gif|png)#',$fichier,$matches))
 		return $matches[2];
-	return '';
+	return NULL;
 }
 
 function FpipR_get_flickr_photo_secret($fichier) {
   if(preg_match('#http://static.flickr.com/(.*?)/(.*?)_(.*?)(_[stmbo])\.(jpg|gif|png)#',$fichier,$matches))
 		return $matches[3];
-  return '';
+  return NULL;
 	
 }
 
+//======================================================================
+// Histoire d'authentification
+//======================================================================
+
+if (isset($auteur_session['id_auteur'])) {
+  $combins = $auteur_session['id_auteur'];
+  if (!isset($GLOBALS['marqueur'])) {
+	$GLOBALS['marqueur'] = "";
+  }
+  $GLOBALS['marqueur'] .= ":FpipR $combins";
+ }
+
+function FpipR_getAuthToken() {
+  global $auteur_session;
+  if(isset($auteur_session['id_auteur']) && (strpos($GLOBALS['marqueur'],':FpipR') >= 0)) {
+	$row = spip_fetch_array(spip_query("SELECT flickr_token FROM spip_auteurs WHERE id_auteur=".intval($auteur_session['id_auteur'])));
+	if ($row) {
+	  return $row['flickr_token'];
+	}
+  }
+  return NULL;
+}
 
 ?>

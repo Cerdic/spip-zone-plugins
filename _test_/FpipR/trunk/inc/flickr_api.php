@@ -586,6 +586,20 @@ function flickr_favorites_getPublicList($user_id,$extras,$per_page,$page,$auth_t
   return flickr_utils_createPhotos($photos);  
 }
 
+function flickr_favorites_getList($user_id,$extras,$per_page,$page,$auth_token='') {
+  $params = array();
+  if($user_id) $params['user_id'] = $user_id;
+  else return false;
+  if($per_page) $params['per_page'] = $per_page;
+  if($page) $params['page'] = $page;
+
+  if($extras) $params['extras'] = "original_format,$extras"; 
+  else $params['extras'] = "original_format";
+  $photos =  flickr_check_error(flickr_api_call('flickr.favorites.getList',$params,$auth_token));
+  return flickr_utils_createPhotos($photos);  
+}
+
+
 function flickr_photos_comments_getList($photo_id,$auth_token='') {
   $params = array();
   if($photo_id) $params['photo_id'] = $photo_id;
@@ -606,7 +620,6 @@ function flickr_photos_getPerms($photo_id,$auth_token='') {
   $params = array();
   if($photo_id) $params['photo_id'] = $photo_id;
   else return false;
-
   return flickr_check_error(flickr_api_call('flickr.photos.getPerms',$params,$auth_token));
 }
 
@@ -634,6 +647,15 @@ function flickr_urls_lookupGroup($url,$auth_token='') {
   return flickr_check_error(flickr_api_call('flickr.urls.lookupGroup',$params,$auth_token));
 }
 
+function flickr_urls_lookupUser($url,$auth_token='') {
+  $params = array();
+  if($url) $params['url'] = $url;
+  else return false;
+
+  return flickr_check_error(flickr_api_call('flickr.urls.lookupUser',$params,$auth_token));
+}
+
+
 function flickr_people_getPublicGroups($user_id,$auth_token='') {
   $params = array();
   if($user_id) $params['user_id'] = $user_id;
@@ -660,6 +682,18 @@ function flickr_contacts_getPublicList($user_id,$page,$per_page,$auth_token='') 
 
   return flickr_check_error(flickr_api_call('flickr.contacts.getPublicList',$params,$auth_token));
 }
+
+function flickr_contacts_getList($user_id,$filter,$page,$per_page,$auth_token='') {
+  $params = array();
+  if($user_id) $params['user_id'] = $user_id;
+  else return false;
+  if($filter) $params['filter'] = $filter;
+  if($per_page) $params['per_page'] = $per_page;
+  if($page) $params['page'] = $page;
+
+  return flickr_check_error(flickr_api_call('flickr.contacts.getList',$params,$auth_token));
+}
+
 
 function flickr_urls_getGroup($group_id,$auth_token='') {
   $params = array();

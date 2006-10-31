@@ -938,6 +938,64 @@ function boucle_FLICKR_FAVORITES_GETPUBLICLIST_dist($id_boucle, &$boucles) {
   return calculer_boucle($id_boucle, $boucles); 
 }
 
+function boucle_FLICKR_FAVORITES_GETLIST_dist($id_boucle, &$boucles) {
+  $boucle = &$boucles[$id_boucle];
+  $id_table = $boucle->id_table;
+  $boucle->from[$id_table] =  "spip_fpipr_photos";
+
+  $possible_criteres = array('nsid');
+
+  $possible_extras = array('license', 'owner_name', 'icon_server', 'original_format', 'last_update');
+
+  $arguments = '';  
+  $extras = array();
+
+  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
+
+  FpipR_utils_calcul_limit($boucle,$arguments);
+
+  foreach($boucle->where as $w) {
+	if($w[0] == "'?'") {
+	  $w = $w[2];
+	} 
+	$key = str_replace("'",'',$w[1]);
+	$val = $w[2];
+	$key = str_replace("$id_table.",'',$key);
+	if ($w[0] = "'='" && in_array($key,$possible_args)){
+	  $arguments[$key] = $val;
+	} else 
+	  erreur_squelette(_T('fpipr:mauvaisop',array('critere'=>$key,'op'=>$w[0])), $id_boucle);
+
+	if(in_array($key,$possible_extras)) $extras[] = $key; 
+	else if($key == 'upload_date') $extras[] = 'date_upload';
+	else if($key == 'taken_date') $extras[] ='date_taken';
+
+  }
+
+  //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
+  foreach($boucle->select as $w) {
+	$key = str_replace("'",'',$w);
+	$key = str_replace("$id_table.",'',$key);
+	if(in_array($key,$possible_extras)) $extras[] = $key; 
+	else if($key == 'upload_date') $extras[] = 'date_upload';
+	else if($key == 'taken_date') $extras[] ='date_taken';
+	else if($key == 'longitude' || $key == 'latitude') $extras[] = 'geo';
+  }
+  $arguments['extras'] = "'".join(',',$extras)."'";
+  $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
+	  \$arguments = '';\n";
+  $bbox = '';
+  foreach($arguments as $key => $val) {
+	if($val) {
+	  $boucle->hash .= "\$v=$val;\n";
+	  $boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument('$key',\$v);\n";
+	}}
+
+  $boucle->hash .= "FpipR_fill_table_boucle('flickr.favorites.getList',\$arguments);";
+  return calculer_boucle($id_boucle, $boucles); 
+}
+
+
 //======================================================================
 
 function boucle_FLICKR_PHOTOS_COMMENTS_GETLIST_dist($id_boucle,&$boucles) {
@@ -1004,8 +1062,6 @@ function boucle_FLICKR_PHOTOSETS_COMMENTS_GETLIST_dist($id_boucle,&$boucles) {
 
 //======================================================================
 
-/*
-Etrangement, on ne peut pas faire ca sans auth.
 function balise_ISPUBLIC_dist($p) {
   $ispublic = champ_sql('ispublic',$p);
   $id_photo = champ_sql('id_photo',$p);
@@ -1023,7 +1079,7 @@ function balise_ISFRIEND_dist($p) {
   $id_photo = champ_sql('id_photo',$p);
   $p->code = "(($isfriend)?$isfriend:FpipR_photos_getPerms($id_photo,'isfriend'))";
   return $p;
-}*/
+}
 
 //======================================================================
 
@@ -1118,6 +1174,33 @@ function boucle_FLICKR_URLS_LOOKUPGROUP_dist($id_boucle, &$boucles) {
   return calculer_boucle($id_boucle, $boucles); 
 }
 
+function boucle_FLICKR_URLS_LOOKUPUSER_dist($id_boucle, &$boucles) {
+  $boucle = &$boucles[$id_boucle];
+  $id_table = $boucle->id_table;
+  $boucle->from[$id_table] =  "spip_fpipr_people";
+
+  $possible_criteres = array('url');
+
+  $arguments = '';  
+  $extras = array();
+
+  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
+
+
+  $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
+	  \$arguments = '';\n";
+  $bbox = '';
+  foreach($arguments as $key => $val) {
+	if($val) {
+	  $boucle->hash .= "\$v=$val;\n";
+	  $boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument('$key',\$v);\n";
+	}}
+
+  $boucle->hash .= "FpipR_fill_table_boucle('flickr.urls.lookupUser',\$arguments);";
+  return calculer_boucle($id_boucle, $boucles); 
+}
+
+
 function critere_url_dist($idb, &$boucles, $crit) {
 }
 //======================================================================
@@ -1211,6 +1294,30 @@ function boucle_FLICKR_CONTACTS_GETPUBLICLIST_dist($id_boucle,&$boucles) {
   return calculer_boucle($id_boucle, $boucles); 
 }
 
+function boucle_FLICKR_CONTACTS_GETLIST_dist($id_boucle,&$boucles) {
+ $boucle = &$boucles[$id_boucle];
+  $id_table = $boucle->id_table;
+  $boucle->from[$id_table] =  "spip_fpipr_people";
+
+  $possible_criteres = array('nsid','filter');
+
+  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
+
+  FpipR_utils_calcul_limit($boucle,$arguments);
+
+  $boucle->hash = "// CREER la table flickr_people et la peupler avec le resultat de la query
+	  \$arguments = '';\n";
+  foreach($arguments as $key => $val) {
+	if($val) {
+	  $boucle->hash .= "\$v=$val;\n";
+	  $boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument('$key',\$v);\n";
+	}}
+
+  $boucle->hash .= "FpipR_fill_table_boucle('flickr.contacts.getList',\$arguments);";
+  return calculer_boucle($id_boucle, $boucles); 
+}
+
+
 function balise_LOGO_CONTACT_dist($p) {
   $user_id = champ_sql('user_id',$p);
   $server = champ_sql('iconserver',$p);
@@ -1271,7 +1378,15 @@ function FpipR_utils_search_criteres(&$boucle,&$arguments,$possible_criteres,&$b
   }
 }
 
+//======================================================================
+//question d'auth
+//======================================================================
 
+function balise_FLICKR_TOKEN_dist($p) {
+  $id = champ_sql('id_auteur',$p);
+  $p->code = "FpipR_getAuthToken($id)";
+  return $p;
+}
 
 
 

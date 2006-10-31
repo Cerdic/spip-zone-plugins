@@ -186,6 +186,7 @@ $GLOBALS['table_des_tables']['flickr_photosets_getphotos'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_groups_pools_getphotos'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_photos_getcontactspublicphotos'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_favorites_getpubliclist'] = 'fpipr_photos';
+$GLOBALS['table_des_tables']['flickr_favorites_getlist'] = 'fpipr_photos';
 
 //======================================================================
 //pour le contexte
@@ -270,7 +271,7 @@ $GLOBALS['table_des_tables']['flickr_people_getpublicgroups'] = 'fpipr_groups';
 
 
 
-$GLOBALS['FpipR_versions']['spip_fpipr_people'] = '0.3';
+$GLOBALS['FpipR_versions']['spip_fpipr_people'] = '0.4';
 $GLOBALS['FpipR_tables']['spip_fpipr_people_field'] = array(
 															   "user_id" => 'varchar(100)', //cas où on recupere les groupes d'un utilisateur
 															   "isadmin" => "ENUM ('0','1')",
@@ -284,7 +285,9 @@ $GLOBALS['FpipR_tables']['spip_fpipr_people_field'] = array(
 															   "date_firstphoto" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 															   "date_taken_firstphoto" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 															   "photos_count" => "int",
-															   "ignored" => "ENUM ('0','1')"
+															   "ignored" => "ENUM ('0','1')",
+															   "family" => "ENUM ('0','1')",
+															   "friend" => "ENUM ('0','1')"
 															   );
 $GLOBALS['FpipR_tables']['spip_fpipr_people_key'] = array("PRIMARY KEY" => "user_id");
 
@@ -293,6 +296,8 @@ $GLOBALS['tables_principales']['spip_fpipr_people'] =
   array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_people_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_people_key']);
 $GLOBALS['table_des_tables']['flickr_people_getinfo'] = 'fpipr_people';
 $GLOBALS['table_des_tables']['flickr_contacts_getpubliclist'] = 'fpipr_people';
+$GLOBALS['table_des_tables']['flickr_contacts_getlist'] = 'fpipr_people';
+$GLOBALS['table_des_tables']['flickr_urls_lookupuser'] = 'fpipr_people';
 
 //======================================================================
 
@@ -385,7 +390,7 @@ function FpipR_create_flickr_photos_getinfo_dist() {
 
 function FpipR_flickr_photos_getinfo_dist($arguments) {
   include_spip('inc/flickr_api');
-  $details = flickr_photos_getInfo($arguments['id_photo'],$arguments['secret']);
+  $details = flickr_photos_getInfo($arguments['id_photo'],$arguments['secret'],$arguments['auth_token']);
   $id_photo = intval($details->id);
   if($id_photo) {
 	//on vide les tables
@@ -439,7 +444,7 @@ function FpipR_flickr_photosets_getlist_dist($arguments) {
   $query = "DELETE FROM spip_fpipr_photosets";
   spip_query($query);
   
-  $photosets = flickr_photosets_getList($arguments['user_id']);
+  $photosets = flickr_photosets_getList($arguments['user_id'],$arguments['auth_token']);
   foreach($photosets as $set) {
 	spip_abstract_insert('spip_fpipr_photosets',
 						 '(id_photoset,user_id,primary_photo,secret,server,photos,title,description)',
@@ -460,7 +465,7 @@ function FpipR_flickr_photosets_getphotos_dist($arguments) {
 									   $arguments['extras'],
 									   $arguments['per_page'],
 									   $arguments['page'],
-									   $arguments['privacy_filter']);
+									   $arguments['privacy_filter'],$arguments['auth_token']);
   FpipR_fill_photos_table($photos->photos,array(
 										'id_photoset' => $arguments['id_photoset']
 										));
@@ -478,7 +483,7 @@ function FpipR_flickr_photos_getallcontexts_dist($arguments) {
   $query = "DELETE FROM spip_fpipr_contextes";
   spip_query($query);
   $id_photo = $arguments['id_photo'];
-  $contextes = flickr_photos_getAllContexts($id_photo);
+  $contextes = flickr_photos_getAllContexts($id_photo,$arguments['auth_token']);
   foreach($contextes as $type => $cont) {
 	if(($type == 'set' || $type == 'pool') && is_array($cont)) 
 	  foreach ($cont as $c) {
@@ -502,7 +507,7 @@ function FpipR_flickr_interestingness_getlist_dist($arguments) {
   $photos = flickr_interestingness_getList($arguments['date'],
 										   $arguments['extras'],
 										   $arguments['per_page'],
-										   $arguments['page']);
+										   $arguments['page'],$arguments['auth_token']);
   FpipR_fill_photos_table($photos->photos);
 }
 
@@ -519,7 +524,7 @@ function FpipR_flickr_groups_pools_getphotos_dist($arguments) {
 										   $arguments['user_id'],
 										   $arguments['extras'],
 										   $arguments['per_page'],
-										   $arguments['page']);
+										   $arguments['page'],$arguments['auth_token']);
   FpipR_fill_photos_table($photos->photos,array('id_group'=>$arguments['id_group']));
 }
 
@@ -530,7 +535,7 @@ function FpipR_create_flickr_tags_getlistphoto_dist() {
 
 function FpipR_flickr_tags_getlistphoto_dist($arguments) {
   include_spip('inc/flickr_api');
-  $tags = flickr_tags_getListPhoto($arguments['id_photo']);
+  $tags = flickr_tags_getListPhoto($arguments['id_photo'],$arguments['auth_token']);
   foreach($tags as $tag) {
 	spip_abstract_insert('spip_fpipr_tags',
 						 '(id_tag,author,raw,safe,id_photo)',
@@ -551,7 +556,7 @@ function FpipR_flickr_photos_getcontactspublicphotos_dist($arguments) {
 										   $arguments['just_friends'],
 										   $arguments['single_photo'],
 										   $arguments['include_self'],
-										   $arguments['extras']);
+										   $arguments['extras'],$arguments['auth_token']);
   FpipR_fill_photos_table($photos->photos);
 }
 
@@ -566,7 +571,20 @@ function FpipR_flickr_favorites_getPublicList_dist($arguments) {
   $photos = flickr_favorites_getPublicList($arguments['nsid'],
 										   $arguments['extras'],
 										   $arguments['per_page'],
-										   $arguments['page']);
+										   $arguments['page'],$arguments['auth_token']);
+  FpipR_fill_photos_table($photos->photos);
+}
+//======================================================================
+function FpipR_create_flickr_favorites_getList_dist() {
+  FpipR_make_table('spip_fpipr_photos');
+}
+
+function FpipR_flickr_favorites_getList_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $photos = flickr_favorites_getList($arguments['nsid'],
+										   $arguments['extras'],
+										   $arguments['per_page'],
+										   $arguments['page'],$arguments['auth_token']);
   FpipR_fill_photos_table($photos->photos);
 }
 
@@ -594,7 +612,7 @@ function FpipR_create_flickr_photos_comments_getlist_dist() {
 
 function FpipR_flickr_photos_comments_getlist_dist($arguments) {
   include_spip('inc/flickr_api');
-  $comments = flickr_photos_comments_getList($arguments['id_photo']);
+  $comments = flickr_photos_comments_getList($arguments['id_photo'],$arguments['auth_token']);
   FpipR_fill_comments_table($comments);
 }
 
@@ -604,7 +622,7 @@ function FpipR_create_flickr_photosets_comments_getlist_dist() {
 
 function FpipR_flickr_photosets_comments_getlist_dist($arguments) {
   include_spip('inc/flickr_api');
-  $comments = flickr_photosets_comments_getList($arguments['id_photoset']);
+  $comments = flickr_photosets_comments_getList($arguments['id_photoset'],$arguments['auth_token']);
   FpipR_fill_comments_table($comments);
 }
 
@@ -617,7 +635,7 @@ function FpipR_create_flickr_groups_getinfo_dist() {
 
 function FpipR_flickr_groups_getinfo_dist($arguments) {
   include_spip('inc/flickr_api');
-  $group = flickr_groups_getInfo($arguments['id_group']);
+  $group = flickr_groups_getInfo($arguments['id_group'],$arguments['auth_token']);
   $query = "DELETE FROM spip_fpipr_groups";
   spip_query($query);
   if($group = $group['group']) {
@@ -634,7 +652,7 @@ function FpipR_create_flickr_urls_lookupgroup_dist() {
 
 function FpipR_flickr_urls_lookupgroup_dist($arguments) {
   include_spip('inc/flickr_api');
-  $group = flickr_urls_lookupGroup($arguments['url']);
+  $group = flickr_urls_lookupGroup($arguments['url'],$arguments['auth_token']);
 
   $query = "DELETE FROM spip_fpipr_groups";
   spip_query($query);
@@ -646,13 +664,32 @@ function FpipR_flickr_urls_lookupgroup_dist($arguments) {
   }									 
 }
 
+function FpipR_create_flickr_urls_lookupuser_dist() {
+  FpipR_make_table('spip_fpipr_people');
+}
+
+function FpipR_flickr_urls_lookupuser_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $user = flickr_urls_lookupUser($arguments['url'],$arguments['auth_token']);
+
+  $query = "DELETE FROM spip_fpipr_people";
+  spip_query($query);
+  if($user = $user['user']) {
+	spip_abstract_insert('spip_fpipr_groups',
+						 '(user_id,username)',
+						 '('._q($group['id']).','._q($group['username']['_content']).')'
+						 );
+  }									 
+}
+
+
 function FpipR_create_flickr_people_getpublicgroups_dist() {
   FpipR_make_table('spip_fpipr_groups');
 }
 
 function FpipR_flickr_people_getpublicgroups_dist($arguments) {
   include_spip('inc/flickr_api');
-  $groups = flickr_people_getPublicGroups($arguments['user_id']);
+  $groups = flickr_people_getPublicGroups($arguments['user_id'],$arguments['auth_token']);
   FpipR_fill_groups_table($groups,'groups',array('user_id'=>$arguments['user_id']));
 }
 
@@ -686,7 +723,7 @@ function FpipR_create_flickr_contacts_getpubliclist_dist() {
 
 function FpipR_flickr_contacts_getpubliclist_dist($arguments) {
   include_spip('inc/flickr_api');
-  $contacts = flickr_contacts_getPublicList($arguments['nsid'],$arguments['page'],$arguments['per_page']);
+  $contacts = flickr_contacts_getPublicList($arguments['nsid'],$arguments['page'],$arguments['per_page'],$arguments['auth_token']);
   $query = "DELETE FROM spip_fpipr_people";
   spip_query($query);
   if($contacts = $contacts['contacts']) {
@@ -700,6 +737,28 @@ function FpipR_flickr_contacts_getpubliclist_dist($arguments) {
   }									 
 }
 
+function FpipR_create_flickr_contacts_getlist_dist() {
+  FpipR_make_table('spip_fpipr_people');
+}
+
+function FpipR_flickr_contacts_getlist_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $contacts = flickr_contacts_getList($arguments['nsid'],$arguments['filter'],$arguments['page'],$arguments['per_page'],$arguments['auth_token']);
+  $query = "DELETE FROM spip_fpipr_people";
+  spip_query($query);
+  if($contacts = $contacts['contacts']) {
+	foreach($contacts['contact'] as $c) {
+	  spip_abstract_insert('spip_fpipr_people',
+						   '(user_id,username,iconserver,ignored,friend,family,realname)',
+						   '('._q($c['nsid']).','._q($c['username']).','._q($c['iconserver']).','._q($c['ignored']).
+						   ','._q($c['friend']).','._q($c['family']).','._q($c['realname']).')'
+						   );
+
+	}
+  }									 
+}
+
+
 //======================================================================
 
 function FpipR_create_flickr_people_getinfo_dist() {
@@ -708,7 +767,7 @@ function FpipR_create_flickr_people_getinfo_dist() {
 
 function FpipR_flickr_people_getinfo_dist($arguments) {
   include_spip('inc/flickr_api');
-  $person = flickr_people_getInfo($arguments['user_id']);
+  $person = flickr_people_getInfo($arguments['user_id'],$arguments['auth_token']);
 
   $query = "DELETE FROM spip_fpipr_people";
   spip_query($query);
@@ -727,7 +786,7 @@ function FpipR_create_flickr_tags_getlistuser_dist() {
 
 function FpipR_flickr_tags_getlistuser_dist($arguments) {
   include_spip('inc/flickr_api');
-  $who = flickr_tags_getListUser($arguments['author']);
+  $who = flickr_tags_getListUser($arguments['author'],$arguments['auth_token']);
 
   $query = "DELETE FROM spip_fpipr_tags";
   spip_query($query);

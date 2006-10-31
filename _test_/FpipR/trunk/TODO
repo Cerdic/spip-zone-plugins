@@ -1,14 +1,6 @@
 blogs
 
-    * flickr.blogs.getList
-
-contacts
-
-    * flickr.contacts.getList
-
-favorites
-
-    * flickr.favorites.getList
+    A flickr.blogs.getList
 
 groups
 
@@ -17,7 +9,7 @@ groups
 
 groups.pools
 
-    * flickr.groups.pools.getGroups
+    A flickr.groups.pools.getGroups
 
 people
 
@@ -28,7 +20,7 @@ people
 
 photos
 
-    * flickr.photos.getContactsPhotos
+    A flickr.photos.getContactsPhotos
     * flickr.photos.getCounts
     * flickr.photos.getExif
     * flickr.photos.getNotInSet
@@ -38,7 +30,6 @@ photos
     * flickr.photos.getWithGeoData
     * flickr.photos.getWithoutGeoData
     * flickr.photos.recentlyUpdated
-
 
 photos.geo
 
@@ -59,17 +50,3 @@ tags
     * flickr.tags.getListUserRaw
     * flickr.tags.getRelated
 
-urls
-
-    * flickr.urls.lookupUser
-
-//======================================================================
-
-Ajouter la possibilité d'authentifié. Voir le code:
-
-          if (isset($auteur_session['id_auteur'])) {
-           $combins = $auteur_session['id_auteur'];
-             if (!isset($GLOBALS['marqueur'])) {
-				$GLOBALS['marqueur'] = "";
-		   }
-           $GLOBALS['marqueur'] .= ":FpipR $combins";

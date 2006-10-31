@@ -7,23 +7,16 @@ BOUCLE Flickr
 </title>
 </head>
 
-<BOUCLE_photo(DOCUMENTS) {id_article=129} {distant=oui} {0,10} {"<br/>"}>
-#LOGO_DOCUMENT
-#FLICKR_PHOTO_ID
-#FLICKR_PHOTO_SECRET
-</BOUCLE_photo>
 <hr/>
 <BOUCLE_auteur(AUTEURS) {flickr_nsid!=''}>
-<BOUCLE_tags(FLICKR_TAGS_GETLISTUSER) {author=#FLICKR_NSID} {0,100} {","}>
-#SAFE
-</BOUCLE_tags>
-<br/>
-<BOUCLE_contacts(FLICKR_CONTACTS_GETPUBLICLIST) {nsid #FLICKR_NSID} {0,10}>
-#URL_USERPROFILE
-#USERNAME
-#LOGO_CONTACT
-</BOUCLE_contacts>
+#NOM Tok: '[(#FLICKR_TOKEN|?{auth,"pas auth"})]';
+<BOUCLE_favs(FLICKR_CONTACTS_GETLIST) {nsid #FLICKR_NSID} {0,10}>
+#LOGO_CONTACT{s}
+</BOUCLE_favs>
+pas de resultats: are you logged?
+<//B_favs>
 </BOUCLE_auteur>
+<hr/>
 
 </body>
 </html>
