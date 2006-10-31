@@ -155,7 +155,7 @@ function qcm($chaine){
 
            $codeHTML.='<div class="spip_qcm_reponse">'.$introReponse
            		 .$choix[$i][$GLOBALS[$nomVarSelect]].'</div>'
-           		 .'<div class="spip_qcm_correction_juste">'.$reponseJuste.'</div>';
+           		 .'<div class="spip_qcm_correction_juste">'._T('qcm:reponseFausse').'</div>';
            if (isset($precision[$i][$GLOBALS[$nomVarSelect]]))
              $codeHTML.='<div align="center"><div class="spip_qcm_precision">'
 				 .$precision[$i][$GLOBALS[$nomVarSelect]]
@@ -167,7 +167,7 @@ function qcm($chaine){
           if(isset($GLOBALS[$nomVarSelect])){
            $score+=$points[$i][$GLOBALS[$nomVarSelect]];
            $codeHTML.='<div class="spip_qcm_reponse">'.$choix[$i][$GLOBALS[$nomVarSelect]].'</div>'
-           			  .'<div class="spip_qcm_correction_faux">'.$reponseFausse.'</div>';
+           			  .'<div class="spip_qcm_correction_faux">'._T('qcm:reponseFausse').'</div>';
            
            if (isset($precision[$i][$GLOBALS[$nomVarSelect]]))
              $codeHTML.='<div align="center"><div class="spip_qcm_precision">'
