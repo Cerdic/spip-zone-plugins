@@ -1,0 +1,6 @@
+#HTTP_HEADER{Content-Type:text/x-json}
+#CACHE{3600}
+[(#REM) cherche les mots de l'auteur qui commence par le titre passe en parametre
+]<B_defaut>{"propositions":[<BOUCLE_defaut(MOTS){type="- tags -"}{titre == ^(#ENV{titre}|dernier_mot)}{0,10}{par titre}>
+<BOUCLE_compte_defaut(SPIPICIOUS){id_mot}{id_auteur}> </BOUCLE_compte_defaut>{"PropositionPair":{"label":"#TITRE","info":" #TOTAL_BOUCLE"}},</B_compte_defaut></BOUCLE_defaut>
+{"PropositionPair":{"label":"","info":""}}]}</B_defaut>{"propositions":null}<//B_defaut>

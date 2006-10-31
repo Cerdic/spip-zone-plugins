@@ -100,4 +100,19 @@ function spipicious_maintenance_nuage_article($id_article) {
       }
     }      
 }
+
+//
+// filtres (pour les pages publiques)
+//
+
+//
+// filtre pour dernier mot d'un chaine 
+// ex. "berlin lille marseille" -> retourne "marseille"
+// 
+function dernier_mot($str) {
+    $pos = strrpos($str, " ");
+    if ($pos === false) return $str; // php4.03+
+    return substr($str,$pos+1); 
+}
+
 ?>

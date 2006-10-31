@@ -1,10 +1,9 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	spip.icio.us
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	[erational->http://www.erational.org]
-_ &copy; 2006 - Licence GPL	
+	<nom>spip.icio.us</nom>
+	<auteur>[erational->http://www.erational.org]
+_ &copy; 2006 - Licence GPL
+_ La partie Ajax est de Pierre Andrews sous licence GPL 
+_ Prototype est de Sam Stephenson (voir la licence) 
 	</auteur>
 	<version>0.1</version>
 	<etat>dev</etat>
