@@ -1150,6 +1150,7 @@ function boucle_FLICKR_PHOTOS_GETCONTACTSPHOTOS_dist($id_boucle, &$boucles) {
 
   FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
 
+
   if($boucle->limit) {
 	list($debut,$pas) = split(',',$boucle->limit);
 	$arguments['count'] = $pas;
@@ -1714,7 +1715,7 @@ function boucle_FLICKR_TAGS_GETLISTUSER_dist($id_boucle,&$boucles) {
 	} else 
 	  erreur_squelette(_T('fpipr:mauvaisop',array('critere'=>$key,'op'=>$w[0])), $id_boucle);
   }
-  $boucle->hash = "// CREER la table flickr_groups et la peupler avec le resultat de la query
+  $boucle->hash = "// CREER la table flickr_tags et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
   foreach($arguments as $key => $val) {
 	if($val) {
@@ -1725,6 +1726,113 @@ function boucle_FLICKR_TAGS_GETLISTUSER_dist($id_boucle,&$boucles) {
   $boucle->hash .= "FpipR_fill_table_boucle('flickr.tags.getListUser',\$arguments);";
   return calculer_boucle($id_boucle, $boucles); 
 }
+
+function boucle_FLICKR_TAGS_GETLISTUSERRAW_dist($id_boucle,&$boucles) {
+ $boucle = &$boucles[$id_boucle];
+  $id_table = $boucle->id_table;
+  $boucle->from[$id_table] =  "spip_fpipr_tags";
+
+  $arguments = '';
+
+  FpipR_utils_search_criteres($boucle,$arguments,array('tag'),$boucles,$id_boucle);
+
+  $boucle->hash = "// CREER la table flickr_tags et la peupler avec le resultat de la query
+	  \$arguments = '';\n";
+  foreach($arguments as $key => $val) {
+	if($val) {
+	  $boucle->hash .= "\$v=$val;\n";
+	  $boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument('$key',\$v);\n";
+	}}
+
+  $boucle->hash .= "FpipR_fill_table_boucle('flickr.tags.getListUserRaw',\$arguments);";
+  return calculer_boucle($id_boucle, $boucles); 
+}
+function boucle_FLICKR_TAGS_GETRELATED_dist($id_boucle,&$boucles) {
+ $boucle = &$boucles[$id_boucle];
+  $id_table = $boucle->id_table;
+  $boucle->from[$id_table] =  "spip_fpipr_tags";
+
+  $arguments = '';
+
+  FpipR_utils_search_criteres($boucle,$arguments,array('tag'),$boucles,$id_boucle);
+
+  $boucle->hash = "// CREER la table flickr_tags et la peupler avec le resultat de la query
+	  \$arguments = '';\n";
+  foreach($arguments as $key => $val) {
+	if($val) {
+	  $boucle->hash .= "\$v=$val;\n";
+	  $boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument('$key',\$v);\n";
+	}}
+
+  $boucle->hash .= "FpipR_fill_table_boucle('flickr.tags.getRelated',\$arguments);";
+  return calculer_boucle($id_boucle, $boucles); 
+}
+
+
+function critere_tag_dist($idb, &$boucles, $crit) {
+}
+
+function boucle_FLICKR_TAGS_GETLISTUSERPOPULAR_dist($id_boucle,&$boucles) {
+ $boucle = &$boucles[$id_boucle];
+  $id_table = $boucle->id_table;
+  $boucle->from[$id_table] =  "spip_fpipr_tags";
+
+  $arguments = '';
+  //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
+  foreach($boucle->where as $w) {
+	if($w[0] == "'?'") {
+	  $w = $w[2];
+	} 
+	$key = str_replace("'",'',$w[1]);
+	$val = $w[2];
+	$key = str_replace("$id_table.",'',$key);
+	if ($w[0] == "'='" && $key == 'author'){
+	  $arguments[$key] = $val;
+	} else 
+	  erreur_squelette(_T('fpipr:mauvaisop',array('critere'=>$key,'op'=>$w[0])), $id_boucle);
+  }
+  $boucle->hash = "// CREER la table flickr_tags et la peupler avec le resultat de la query
+	  \$arguments = '';\n";
+  foreach($arguments as $key => $val) {
+	if($val) {
+	  $boucle->hash .= "\$v=$val;\n";
+	  $boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument('$key',\$v);\n";
+	}}
+
+  $boucle->hash .= "FpipR_fill_table_boucle('flickr.tags.getListUserPopular',\$arguments);";
+  return calculer_boucle($id_boucle, $boucles); 
+}
+
+
+function critere_period_dist($idb, &$boucles, $crit) {
+}
+
+function boucle_FLICKR_TAGS_GETHOTLIST_dist($id_boucle,&$boucles) {
+ $boucle = &$boucles[$id_boucle];
+  $id_table = $boucle->id_table;
+  $boucle->from[$id_table] =  "spip_fpipr_tags";
+
+  $arguments = '';
+
+  if($boucle->limit) {
+	list($debut,$pas) = split(',',$boucle->limit);
+	$arguments['count'] = $pas;
+  }
+
+  FpipR_utils_search_criteres($boucle,$arguments,array('period'),$boucles,$id_boucle);
+
+  $boucle->hash = "// CREER la table flickr_tags et la peupler avec le resultat de la query
+	  \$arguments = '';\n";
+  foreach($arguments as $key => $val) {
+	if($val) {
+	  $boucle->hash .= "\$v=$val;\n";
+	  $boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument('$key',\$v);\n";
+	}}
+
+  $boucle->hash .= "FpipR_fill_table_boucle('flickr.tags.getHotList',\$arguments);";
+  return calculer_boucle($id_boucle, $boucles); 
+}
+
 
 //======================================================================
 

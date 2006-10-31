@@ -110,12 +110,14 @@ $GLOBALS['tables_principales']['spip_fpipr_photo_details'] =
 $GLOBALS['table_des_tables']['flickr_photos_getinfo'] = 'fpipr_photo_details';
 
 
-$GLOBALS['FpipR_versions']['spip_fpipr_tags'] = '0.6';
+$GLOBALS['FpipR_versions']['spip_fpipr_tags'] = '0.8';
 $GLOBALS['FpipR_tables']['spip_fpipr_tags_field'] = array("id_tag" => 'varchar(255) NOT NULL',
 														  "author" => 'varchar(100)',
 														  "raw" => "text DEFAULT '' NOT NULL",
 														  "safe" => "text DEFAULT '' NOT NULL",
-														  "id_photo" => 'bigint(21) NOT NULL' //la façon dont on recupere les tags, on a juste une photo par tag.
+														  "id_photo" => 'bigint(21) NOT NULL', //la façon dont on recupere les tags, on a juste une photo par tag.
+														  'score' => 'int',
+														  'count' => 'int'
 														  );
 $GLOBALS['FpipR_tables']['spip_fpipr_tags_key'] = array("PRIMARY KEY" => "id_tag",
 														"KEY id_photo" => "id_photo");
@@ -124,8 +126,12 @@ $GLOBALS['FpipR_tables']['spip_fpipr_tags_key'] = array("PRIMARY KEY" => "id_tag
 $GLOBALS['tables_principales']['spip_fpipr_tags'] =
   array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_tags_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_tags_key']);
 $GLOBALS['table_des_tables']['flickr_photo_tags'] = 'fpipr_tags';
+$GLOBALS['table_des_tables']['flickr_tags_getrelated'] = 'fpipr_tags';
 $GLOBALS['table_des_tables']['flickr_tags_getlistphoto'] = 'fpipr_tags';
 $GLOBALS['table_des_tables']['flickr_tags_getlistuser'] = 'fpipr_tags';
+$GLOBALS['table_des_tables']['flickr_tags_getlistuserraw'] = 'fpipr_tags';
+$GLOBALS['table_des_tables']['flickr_tags_getlistuserpopular'] = 'fpipr_tags';
+$GLOBALS['table_des_tables']['flickr_tags_gethotlist'] = 'fpipr_tags';
 
 $GLOBALS['FpipR_versions']['spip_fpipr_notes'] = '0.3';
 $GLOBALS['FpipR_tables']['spip_fpipr_notes_field'] = array(
@@ -938,6 +944,98 @@ function FpipR_flickr_tags_getlistuser_dist($arguments) {
 	}
   }									 
 }
+//======================================================================
+
+function FpipR_create_flickr_tags_getlistuserraw_dist() {
+  FpipR_make_table('spip_fpipr_tags');
+}
+
+function FpipR_flickr_tags_getlistuserraw_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $who = flickr_tags_getListUserRaw($arguments['tag'],$arguments['auth_token']);
+  $query = "DELETE FROM spip_fpipr_tags";
+  spip_query($query);
+  $fake_id = 0;
+  $user_id = $who['who']['id'];
+  if($who = $who['who']['tags']) {
+	foreach($who['tag'] as $t) {
+	  foreach($t['raw'] as $r) {
+		spip_abstract_insert('spip_fpipr_tags',
+							 '(id_tag,author,raw,safe)',
+							 '('._q($fake_id++).','._q($user_id).','._q($r['_content']).','._q($t['clean']).')'
+							 );
+	  }
+	}
+  }									 
+}
+
+function FpipR_create_flickr_tags_getrelated_dist() {
+  FpipR_make_table('spip_fpipr_tags');
+}
+
+function FpipR_flickr_tags_getrelated_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $who = flickr_tags_getRelated($arguments['tag'],$arguments['auth_token']);
+  $query = "DELETE FROM spip_fpipr_tags";
+  spip_query($query);
+  $fake_id = 0;
+  if($who = $who['tags']) {
+	foreach($who['tag'] as $r) {
+	  spip_abstract_insert('spip_fpipr_tags',
+						   '(id_tag,author,safe)',
+						   '('._q($fake_id++).','._q($user_id).','._q($r['_content']).')'
+						   );
+	}
+  }									 
+}
+
+
+//======================================================================
+
+function FpipR_create_flickr_tags_getlistuserpopular_dist() {
+  FpipR_make_table('spip_fpipr_tags');
+}
+
+function FpipR_flickr_tags_getlistuserpopular_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $who = flickr_tags_getListUserPopular($arguments['author'],$arguments['count'],$arguments['auth_token']);
+
+  $query = "DELETE FROM spip_fpipr_tags";
+  spip_query($query);
+  $fake_id = 0;
+  if($who = $who['who']['tags']) {
+	foreach($who['tag'] as $t) {
+	  spip_abstract_insert('spip_fpipr_tags',
+						   '(id_tag,author,safe,count)',
+						   '('._q($fake_id++).','._q($arguments['author']).','._q($t['_content']).','._q($t['count']).')'
+						   );
+	}
+  }									 
+}
+
+//======================================================================
+
+function FpipR_create_flickr_tags_gethotlist_dist() {
+  FpipR_make_table('spip_fpipr_tags');
+}
+
+function FpipR_flickr_tags_gethotlist_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $who = flickr_tags_getHotList($arguments['period'],$arguments['count'],$arguments['auth_token']);
+
+  $query = "DELETE FROM spip_fpipr_tags";
+  spip_query($query);
+  $fake_id = 0;
+  if($who = $who['hottags']) {
+	foreach($who['tag'] as $t) {
+	  spip_abstract_insert('spip_fpipr_tags',
+						   '(id_tag,score,safe)',
+						   '('._q($fake_id++).','._q($t['score']).','._q($t['_content']).')'
+						   );
+	}
+  }									 
+}
+
 
 //======================================================================
 ?>

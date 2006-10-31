@@ -9,10 +9,9 @@ BOUCLE Flickr
 
 <hr/>
 
-<BOUCLE_pgroups(FLICKR_PHOTOS_RECENTLYUPDATED){min_date 2006-05-05}{0,10}>
-#LOGO_OWNER
-#LOGO_PHOTO{m}
-</BOUCLE_pgroups>
+<BOUCLE_tags(FLICKR_TAGS_GETRELATED) {", "} {tag rome}>
+#SAFE
+</BOUCLE_tags>
 
 <hr/>
 

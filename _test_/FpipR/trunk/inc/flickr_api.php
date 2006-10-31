@@ -893,6 +893,40 @@ function flickr_tags_getListUser($user_id,$auth_token='') {
   return flickr_check_error(flickr_api_call('flickr.tags.getListUser',$params,$auth_token));
 }
 
+function flickr_tags_getListUserRaw($tag,$auth_token='') {
+  $params = array();
+  if($tag) $params['tag'] = $tag;
+
+  return flickr_check_error(flickr_api_call('flickr.tags.getListUserRaw',$params,$auth_token));
+}
+
+function flickr_tags_getRelated($tag,$auth_token='') {
+  $params = array();
+  if($tag) $params['tag'] = $tag;
+  else return false;
+
+  return flickr_check_error(flickr_api_call('flickr.tags.getRelated',$params,$auth_token));
+}
+
+function flickr_tags_getListUserPopular($user_id,$count,$auth_token='') {
+  $params = array();
+  if($user_id) $params['user_id'] = $user_id;
+  else return false;
+  if($count) $params['count'] = $count;
+
+  return flickr_check_error(flickr_api_call('flickr.tags.getListUserPopular',$params,$auth_token));
+}
+
+
+function flickr_tags_getHotList($period,$count,$auth_token='') {
+  $params = array();
+  if($period) $params['period'] = $period;
+  if($count) $params['count'] = $count;
+
+  return flickr_check_error(flickr_api_call('flickr.tags.getHotList',$params,$auth_token));
+}
+
+
 
 //======================================================================
 
