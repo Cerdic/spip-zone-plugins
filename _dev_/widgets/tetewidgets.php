@@ -31,14 +31,19 @@ function Widgets_affichage_final($page) {
 
     // calculer les droits sur ces widgets
     $droits = array();
+    $droits_accordes = 0;
     foreach ($regs as $reg) {
         list(,$widget,$type,$champ,$id) = $reg;
-        if ($autoriser_modifs($type, $champ, $id))
+        if ($autoriser_modifs($type, $champ, $id)) {
             $droits[$widget]++;
+            $droits_accordes ++;
+        }
     }
 
     // et les signaler dans la page
-    if ($droits)
+    if ($droits_accordes == count($regs))
+        $page = Widgets_preparer_page($page,"'*'");
+    else if ($droits)
         $page = Widgets_preparer_page($page,
             '[".' . join('",".', array_keys($droits)). '"]');
 
