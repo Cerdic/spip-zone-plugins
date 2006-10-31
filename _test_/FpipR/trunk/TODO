@@ -7,10 +7,6 @@ groups
     * flickr.groups.browse
     * flickr.groups.search
 
-groups.pools
-
-    A flickr.groups.pools.getGroups
-
 people
 
     * flickr.people.findByEmail
@@ -20,7 +16,6 @@ people
 
 photos
 
-    A flickr.photos.getContactsPhotos
     * flickr.photos.getCounts
     * flickr.photos.getExif
     * flickr.photos.getNotInSet

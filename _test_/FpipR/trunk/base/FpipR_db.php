@@ -185,6 +185,7 @@ $GLOBALS['table_des_tables']['flickr_photosets_getlist'] = 'fpipr_photosets';
 $GLOBALS['table_des_tables']['flickr_photosets_getphotos'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_groups_pools_getphotos'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_photos_getcontactspublicphotos'] = 'fpipr_photos';
+$GLOBALS['table_des_tables']['flickr_photos_getcontactsphotos'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_favorites_getpubliclist'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_favorites_getlist'] = 'fpipr_photos';
 
@@ -241,7 +242,7 @@ $GLOBALS['table_des_tables']['flickr_photosets_comments_getlist'] = 'fpipr_comme
 //======================================================================
 // pour les groupes
 
-$GLOBALS['FpipR_versions']['spip_fpipr_groups'] = '0.4';
+$GLOBALS['FpipR_versions']['spip_fpipr_groups'] = '0.5';
 $GLOBALS['FpipR_tables']['spip_fpipr_groups_field'] = array(
 															   "id_group" => "varchar(255) NOT NULL",
 															   "user_id" => 'varchar(100)', //cas où on recupere les groupes d'un utilisateur
@@ -254,7 +255,8 @@ $GLOBALS['FpipR_tables']['spip_fpipr_groups_field'] = array(
 															   "privacy" => "int", //???
 															   "throttle_count" => "int",
 															   "throttle_mode" => "varchar(100)",
-															   "throttle_remaining" => "int"
+															   "throttle_remaining" => "int",
+															   "photos" => 'int'
 															   );
 $GLOBALS['FpipR_tables']['spip_fpipr_groups_key'] = array("PRIMARY KEY" => "id_group",
 															"KEY" => 'user_id');
@@ -265,6 +267,7 @@ $GLOBALS['tables_principales']['spip_fpipr_groups'] =
 $GLOBALS['table_des_tables']['flickr_groups_getinfo'] = 'fpipr_groups';
 $GLOBALS['table_des_tables']['flickr_urls_lookupgroup'] = 'fpipr_groups';
 $GLOBALS['table_des_tables']['flickr_people_getpublicgroups'] = 'fpipr_groups';
+$GLOBALS['table_des_tables']['flickr_groups_pools_getgroups'] = 'fpipr_groups';
 
 //======================================================================
 //pour les peoples
@@ -560,6 +563,21 @@ function FpipR_flickr_photos_getcontactspublicphotos_dist($arguments) {
   FpipR_fill_photos_table($photos->photos);
 }
 
+function FpipR_create_flickr_photos_getcontactsphotos_dist() {
+  FpipR_make_table('spip_fpipr_photos');
+}
+
+function FpipR_flickr_photos_getcontactsphotos_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $photos = flickr_photos_getContactsPhotos(
+										   $arguments['count'],
+										   $arguments['just_friends'],
+										   $arguments['single_photo'],
+										   $arguments['include_self'],
+										   $arguments['extras'],$arguments['auth_token']);
+  FpipR_fill_photos_table($photos->photos);
+}
+
 
 //======================================================================
 function FpipR_create_flickr_favorites_getPublicList_dist() {
@@ -682,6 +700,16 @@ function FpipR_flickr_urls_lookupuser_dist($arguments) {
   }									 
 }
 
+function FpipR_create_flickr_groups_pools_getgroups_dist() {
+  FpipR_make_table('spip_fpipr_groups');
+}
+
+function FpipR_flickr_groups_pools_getgroups_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $groups = flickr_groups_pools_getGroups($arguments['page'],$arguments['per_page'],$arguments['auth_token']);
+  FpipR_fill_groups_table($groups,'groups');
+}
+
 
 function FpipR_create_flickr_people_getpublicgroups_dist() {
   FpipR_make_table('spip_fpipr_groups');
@@ -693,18 +721,19 @@ function FpipR_flickr_people_getpublicgroups_dist($arguments) {
   FpipR_fill_groups_table($groups,'groups',array('user_id'=>$arguments['user_id']));
 }
 
-function FpipR_fill_groups_table($groups,$key='groups',$add) {
+function FpipR_fill_groups_table($groups,$key='groups',$add='') {
   $query = "DELETE FROM spip_fpipr_groups";
   spip_query($query);			
 
   if($groups = $groups[$key]) {
-	$col = '(id_group,name,admin,eighteenplus';
+	$col = '(id_group,name,admin,eighteenplus,privacy,photos,iconserver';
 	if($add)
 	  foreach($add as $name=>$val) {
 		$col.=",$name";
 	  }
 	foreach($groups['group'] as $g) {
-	  $vals = '('._q($g['nsid']).','._q($g['name']).','._q($g['admin']).','._q($g['eighteenplus']);
+	  $vals = '('._q($g['nsid']).','._q($g['name']).','._q($g['admin']).','._q($g['eighteenplus']).
+		','._q($g['privacy']).','._q($g['photos']).','._q($g['iconserver']);
 	  foreach($add as $name=>$val) {
 		$vals .= ','._q($val);
 	  }
