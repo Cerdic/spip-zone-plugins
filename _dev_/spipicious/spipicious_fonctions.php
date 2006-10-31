@@ -11,22 +11,6 @@ include_spip('base/spipicious');
 include_spip('inc/plugin');
 
 //
-// espace prive:  ajout de bouton
-//
-function spipicious_ajouterBoutons($boutons_admin) {
-	// si on est admin
-	
-	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]) {
-	  // on voit le bouton dans la barre "naviguer"
-	  $boutons_admin['configuration']->sousmenu['spipicious']= new Bouton(
-		"../"._DIR_PLUGIN_SPIPICIOUS."/img_pack/spipicious.png",  // icone
-		_T('spipicious:spipicious')	// titre
-		);
-	}
-	return $boutons_admin;	
-}
-
-//
 //  base a jour ?
 //
 
@@ -42,10 +26,20 @@ function spipicious_header_prive($texte) {
 function spipicious_verifier_base() {
 		$current_version= 0.0;
 		if (!isset($GLOBALS['meta']['spip_spipicious_version'])) {	
-			creer_base();
+			creer_base();			
+			// ajout d'index
 			spip_query("ALTER TABLE spip_spipicious ADD INDEX ( `id_auteur` )");
 			spip_query("ALTER TABLE spip_spipicious ADD INDEX ( `id_article` )");
 			spip_query("ALTER TABLE spip_spipicious ADD INDEX ( `id_mot` )");
+			// creation groupe - tags - 
+			$table_pref = 'spip';
+  	  if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];  	
+      $result = spip_query("SELECT id_groupe FROM `{$table_pref}_groupes_mots` WHERE titre = '- tags -'"); // creation du groupe de mots cles uniquement si n'existe pas
+		  if (spip_num_rows($result) == 0) {
+        spip_query("INSERT INTO {$table_pref}_groupes_mots (id_groupe, titre, descriptif, texte, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum , maj )
+                                                    VALUES ('',  '- tags -', '', '', '', '', 'oui', '', 'non', '', 'oui', 'non', 'non', NOW( ));");
+      }		
+			
 			ecrire_meta('spip_spipicious_version', $current_version=0.02);
 			ecrire_metas(); 
 		} else {

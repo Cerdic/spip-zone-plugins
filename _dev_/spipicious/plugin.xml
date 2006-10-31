@@ -20,11 +20,6 @@ _ Prototype est de Sam Stephenson (voir la licence)
   <fonctions>spipicious_fonctions.php</fonctions>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouterBoutons</action>
-		<inclure>spipicious_fonctions.php</inclure>
-	</pipeline>
-	<pipeline>
      <nom>header_prive</nom>
      <inclure>spipicious_fonctions.php</inclure>
   </pipeline>

@@ -1,0 +1,34 @@
+#CACHE{0}
+<div id="form_spipicious_ajax">
+<BOUCLE_groupes(GROUPES_MOTS){par titre}><?php
+$current_auteur_id = (int) "#ENV{auteur_id}";
+if ('#TITRE'=='- tags -') { 
+  if ($current_auteur_id != 0) { ?>
+  <script  type='text/javascript' src="[(#CHEMIN{javascript/prototype/prototype.js})]"></script>
+  <script  type='text/javascript' src="[(#CHEMIN{javascript/ajaxTagMachine.js})]"></script>
+  <form action="[(#ENV{self})]" method="post">
+    <fieldset	class='spip_encadrer'>
+	  <legend><:spipicious:add_tags:></legend>
+	  <label for="tags">Tags:</label>
+	  <img id="wait" src="ecrire/img_pack/searching.gif"/>  	  
+	  <input autocomplete="off" type="text" size="35" id="tags" name="tags" value="<BOUCLE_tagA(SPIPICIOUS){id_article=#ENV{id}}{id_auteur=#ENV{auteur_id}}{par position}><BOUCLE_mot(MOTS){id_mot}>#TITRE </BOUCLE_mot></BOUCLE_tagA>" /><br />
+	  <div id="suggest" class="suggest_list"></div>
+    <input type="hidden" size="35" name="page" value="#SELF">	 
+    <input type="hidden" size="35" name="id_article" value="#ENV{id}">	
+	  <input type="submit" class="spip_bouton" name="add_tags" value="<:bouton_valider:>" /> 
+    </fieldset>
+  </form>  
+  <script  type='text/javascript'> <!--
+			groupe = new AjaxSuggestMenu('[(#URL_PAGE{ajax_spipicious_article})]', 'titre', 'tags','suggest');  
+      groupe.addVar('id_auteur','#ENV{auteur_id}');
+      groupe.setWaiting('wait');
+      groupe.setNbrLineVisible(10);
+      groupe.setScrollEnabled(false);
+      --></script>
+  <?php } else { ?>
+  <:spipicious:identifier:>
+  #LOGIN_PUBLIC
+<?php  }
+} ?>
+</BOUCLE_groupes>
+</div>
