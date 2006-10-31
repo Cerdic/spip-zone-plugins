@@ -59,7 +59,6 @@ function var2js($var) {
 }
 
 function action_widgets_html_dist() {
-    include_spip('inc/rubriques');
 
     header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
 
