@@ -1,20 +1,20 @@
 img.widget-img-changed {
-	visibility: hidden;
+    visibility: hidden;
 }
 .widget-changed img.widget-img-changed {
-	visibility: visible;
+    visibility: visible;
 }
 img.widget-edit {
-	visibility: hidden;
+    visibility: hidden;
 }
 .widget-autorise:hover img.widget-edit, .widget-hover img.widget-edit {
-	visibility: visible;
+    visibility: visible;
 }
 .widget-autorise:hover, .widget-hover {
-	background-color: #f0f0f0;
+    background-color: #f0f0f0;
 }
 .widget-boutons {
-	float: right;
-	width: 75px;
+    float: right;
+    width: 75px;
 }
 
