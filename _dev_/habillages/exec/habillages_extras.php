@@ -106,7 +106,12 @@ EOF;
 	debut_gauche();
 	debut_boite_info();
 	
-	habillages_menu_navigation();
+	echo "<div class='intro_grotitre'>";
+	echo gros_titre(_T('habillages:extras_titre_boitinfo'))."</div><br />";
+	
+	echo "<div class='intro'>";
+	echo _T('habillages:extras_definition')."</div>";
+	echo "</div>";
 	
 	fin_boite_info();
 
@@ -116,16 +121,12 @@ EOF;
 
 	global $couleur_foncee;
 	echo "<table border='0' cellspacing='0' cellpadding='5' width='100%'>";
-	echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
+	echo "<tr><td colspan='4' style='background-color:$couleur_foncee' class='bandeau_smooth'><b>";
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
 	echo _T('habillages:extras_titre')."</font></b></td></tr>";
 	echo "<tr><td class='serif' colspan=4>";
 	# Message d'introduction.
-	debut_boite_info();
-	echo "<div class='intro'>";
 	echo _T('habillages:extras_intro')."<br /><br />";
-	echo "</div>";
-	fin_boite_info();
 	
 	echo generer_url_post_ecrire("habillages_extras");
 	
@@ -140,7 +141,7 @@ EOF;
 			$arbre = $arbre['theme'][0];
 			$nom_theme = applatit_arbre($arbre['nom']);
 			$auteur_theme = applatit_arbre($arbre['auteur']);
-			$etat_theme = applatit_arbre($arbre['etat']);
+			$etat_theme = trim(applatit_arbre($arbre['etat']));
 			$version_theme = applatit_arbre($arbre['version']);
 			$description_theme = applatit_arbre($arbre['description']);
 			$type_theme = trim(applatit_arbre($arbre['type']));
@@ -165,17 +166,17 @@ EOF;
 					spip_log("Le dossier ".$nom_dossier_theme." ne contient pas de fichier plugin.xml. Le plugin habillages ne peut pas gerer les elements de ce dossier.");
 				}
 				
-				if ($type_theme=="extras" && $squelettes_theme == $prefixe_squelettes && is_file($fichier_plugin_xml)) {
+				if ($type_theme=="extras" && is_file($fichier_plugin_xml)) {
 					echo "<ul>";
 					
 					# Si le niveau de difficulte d'installation du squelette est renseigne, mettre les
 					# icones de difficulte.
 					if ($niveau_theme == "1") {
-						$niveau = "<div style='float:right';><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' /><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' /></div>";
+						$niveau = "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/avance.png' /><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' />";
 					}
 					
 					if ($niveau_theme == "0" || $niveau_theme == "") {
-						$niveau = "<div style='float:right';><img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/debutant.png' /></div>";
+						$niveau = "";
 					}
 					
 					if (_request('exec')=='habillages_extras'){
@@ -189,20 +190,48 @@ EOF;
 					else {
 						$checked = "";
 					}
-						
+
+					if (isset($etat_theme))
+				$etat = $etat_theme;
+					switch ($etat) {
+						case 'experimental':
+							$couleur_txt = "CA2F2F";
+							$titre_etat = _T('habillages:plugin_etat_experimental');
+							break;
+						case 'test':
+							$couleur_txt = "E85600";
+							$titre_etat = _T('habillages:plugin_etat_test');
+							break;
+						case 'stable':
+							$couleur_txt = "149E06";
+							$titre_etat = _T('habillages:plugin_etat_stable');
+							break;
+						default:
+							$couleur_txt = "900B06";
+							$titre_etat = _T('habillages:plugin_etat_developpement');
+							break;
+				}
+				
 					debut_boite_info();
-					echo "<div style='background-color:$couleur_claire'>";
-					echo "<input type='checkbox' name='statusplug' value='$chemin_plugin_court'$checked>";
-					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.")".$niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label><br /><br /></div>";
+					echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
+					echo "<tr><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+					echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";
+					echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
+					echo "<input type='radio' name='statusplug' value='$chemin_plugin_court'$checked>";
+					echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
+					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.") ";
+					echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+					echo $niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
+					echo "</td></tr>";
+					echo "</table>";
 					# Laisser la possibilite de definir le nom et le chemin de la capure ecran
 					# dans theme.xml.
 					echo '<div style="float:right";><img src="'.$chemin_plugin_complet.'/capture.png" alt="" class="preview" /></div>';
+					echo "<small><strong><font COLOR='#".$couleur_txt."'>".$titre_etat."</font></strong></small><br /><hr><br />";
+
 					echo "<small>".propre($description_theme)."</small><br /><br /><hr>";
 					echo "<div class='auteur'>".propre($auteur_theme)."</div><hr>";
-					echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";
-					echo "&nbsp;<small><strong><font COLOR='#".$couleur_txt."'>".$titre_etat."</font></strong></small><br />";
 					fin_boite_info();
-					//habillages_affichage_squelettes($fichier_plugin_xml);
 					echo "</ul>";
 				}
 				

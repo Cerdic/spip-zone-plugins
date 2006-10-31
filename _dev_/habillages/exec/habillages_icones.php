@@ -105,7 +105,8 @@ EOF;
 	debut_gauche();
 	debut_boite_info();
 	echo "<div class='intro_grotitre'>";
-	echo _T('habillages:icones_infos_titre')."</div><br />";
+	echo gros_titre(_T('habillages:icones_infos_titre'))."</div><br />";
+	
 	echo "<div class='intro'>";
 	echo _T('habillages:icones_infos')."<br />";
 	echo "</div>";
@@ -121,13 +122,16 @@ EOF;
  	 
 	echo "<ul>";
 	debut_boite_info();
-	echo "<div style='background-color:$couleur_claire' class='titre_un'>";
+	echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
+	echo "<tr><td style='background-color:$couleur_claire' class='titre_un habinput'>";
  	echo '<INPUT type=radio name="theme" value=""';
  	if ($GLOBALS['meta']['habillages_icones'] == "")
 	 		echo "checked='checked'";
  	echo ">";
+ 	echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
  	echo "<strong>"._T('habillages:icones_defaut_titre')."</strong>";
- 	echo "</div>";
+ 	echo "</td></tr>";
+	echo "</table>";
  	fin_boite_info();
  	echo "<br />";
 
@@ -151,24 +155,30 @@ EOF;
 				
 				if ($type_theme=="icones_prive") {
 					debut_boite_info();
-					echo "<div style='background-color:$couleur_claire' class='titre_un'>";
+					echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
+					echo "<tr><td style='background-color:$couleur_claire' class='titre_un habinput'>";
     				echo '<INPUT type=radio name="theme" value="'.$c.'"';
 		 			if ($GLOBALS['meta']['habillages_icones'] == $c)
 			 		echo "checked='checked'";
     				echo ">";
+    				echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
+    				echo '<strong>'.$nom_theme.'</strong> version '.$theme_version;
+    				echo "</td></tr>";
+					echo "</table>";
     				
-    				echo '<strong>'.$nom_theme.'</strong> version '.$theme_version.'</div><div class="cadre-padding" style="overflow:hidden;">';
-    				echo '<div style="float:right";>&nbsp;<br /><img src="'.$cc.'/capture.png" alt="" class="preview" /></div>';
+    				echo '<div style="float:right";><img src="'.$cc.'/capture.png" alt="" class="preview" /></div>';
     				echo "<small>".propre($description_theme)."</small><br /><br /><hr>";
 					echo "<div class='auteur'>".propre($auteur_theme)."</div><hr>";
-    				echo "</div></div><br />";
+				 	fin_boite_info();
+
 				}
 				
 		}
 
 	echo "</ul>";
+
 	echo '<input type="submit" value="'._T('valider').'"/>';
-	echo '</form>';
+	echo "</form>";
 
 	fin_page();
 

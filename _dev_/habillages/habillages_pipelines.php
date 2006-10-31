@@ -66,7 +66,7 @@ return $flux;
 }
 
 function habillages_header_prive($flux) {
-	if (_request('exec')=='config_habillages' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_themes' || _request('exec')=='habillages_logos' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_images') {
+	if (_request('exec')=='config_habillages' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_themes' || _request('exec')=='habillages_logos' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_extras') {
 		$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_HABILLAGES.'img_pack/habillages_habillages.css" type="text/css" >'."\n";
 		}
 		

@@ -185,7 +185,7 @@ EOF;
 			$arbre = $arbre['theme'][0];
 			$nom_theme = applatit_arbre($arbre['nom']);
 			$auteur_theme = applatit_arbre($arbre['auteur']);
-			$etat_theme = applatit_arbre($arbre['etat']);
+			$etat_theme = trim(applatit_arbre($arbre['etat']));
 			$version_theme = applatit_arbre($arbre['version']);
 			$description_theme = applatit_arbre($arbre['description']);
 			$type_theme = trim(applatit_arbre($arbre['type']));

@@ -52,7 +52,7 @@ function exec_habillages_squelettes() {
 		
 		else if (_request('statusplug') == "dist") {
 			ecrire_meta('habillages_is_themes', 'oui');
-			ecrire_meta('habillages_is_extras', 'non');
+			ecrire_meta('habillages_is_extras', 'oui');
 			ecrire_meta('habillages_prefixe_squel', 'dist');
 			ecrire_metas;
 		}
@@ -263,9 +263,10 @@ EOF;
 		echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
 		echo _T('habillages:squelettes_dist_titre');
 		echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
-		echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
 		echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_themes-22.png' />";
 		echo "<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
+		echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+		echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_extras-22.png' />";
 		echo "</td></tr>";
 		echo "</table>";
 		echo '<div style="float:right";><img src="'._DIR_PLUGIN_HABILLAGES.'/../img_pack/capture_dist_bw.png" alt="" class="preview" /></div>';
@@ -363,6 +364,7 @@ EOF;
 					echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
 					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.") ";
 					echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+					echo $niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
 
 					lire_metas();
 					$liste_themes = $GLOBALS['meta']['habillages_liste_themes'];
@@ -375,8 +377,7 @@ EOF;
 						echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
 						echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_extras-22.png' />";
 					}
-					
-					echo $niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
+
 					echo "</td></tr>";
 					echo "</table>";
 					# Laisser la possibilite de definir le nom et le chemin de la capure ecran
