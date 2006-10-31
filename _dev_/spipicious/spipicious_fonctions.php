@@ -84,13 +84,16 @@ function calcul_POPULARITE_TAG($id_mot,$id_article) {
 function spipicious_maintenance_nuage_article($id_article) {
     $table_pref = 'spip';
     if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix'];
+    $idgroup_tags = spipicious_get_idgroup_tags();
     
-    $result = spip_query("SELECT id_mot FROM {$table_pref}_mots_articles WHERE id_article=$id_article");
+    $result = spip_query("SELECT id_mot FROM {$table_pref}_mots_articles WHERE id_article=$id_article"); // ts les mots cles lies a l'article
     while($row=spip_fetch_array($result)){
-      $current_id_mot = $row['id_mot'];
-      $result2 = spip_query("SELECT id_mot FROM {$table_pref}_spipicious WHERE id_article=$id_article AND id_mot=$current_id_mot LIMIT 1");
-      if (spip_num_rows($result2) == 0) {
-             spip_query("DELETE FROM {$table_pref}_mots_articles WHERE id_article=$id_article AND id_mot=$current_id_mot LIMIT 1");     
+      $current_id_mot = $row['id_mot'];     
+      $result2 = spip_query("SELECT id_mot FROM {$table_pref}_mots WHERE id_mot=$current_id_mot AND id_groupe=$idgroup_tags");  // est ce que le mot appartient au groupe - tags - ?
+      if (spip_num_rows($result2) > 0) { // oui, est il encore lie a l'article (suite que non suite a la mise a jour) ? 
+            $result3 = spip_query("SELECT id_mot FROM {$table_pref}_spipicious WHERE id_article=$id_article AND id_mot=$current_id_mot LIMIT 1");
+            if (spip_num_rows($result3) == 0) 
+                     spip_query("DELETE FROM {$table_pref}_mots_articles WHERE id_article=$id_article AND id_mot=$current_id_mot LIMIT 1");     
       }
     }      
 }
