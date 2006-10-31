@@ -12,7 +12,6 @@ function valeur_colonne_table($table, $col, $id) {
     return false;
 }
 
-
 /**
     * Transform a variable into its javascript equivalent (recursive)
     * @access private
@@ -56,7 +55,7 @@ function var2js($var) {
                 return $ret ."]\n";
             }
     }
-    return 'null';
+    return false;
 }
 
 function verif_secu($w, $secu) {
