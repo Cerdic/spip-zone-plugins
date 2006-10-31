@@ -8,6 +8,24 @@
 
 include_spip('base/FpipR_db');
 
+//======================================================================
+//deviner si c'est un document flickr attache
+
+
+function balise_FLICKR_PHOTO_ID_dist($p) {
+  $fichier = champ_sql('fichier',$p);
+  $p->code = "FpipR_get_flickr_photo_id($fichier)";
+  return $p;
+}
+
+function balise_FLICKR_PHOTO_SECRET_dist($p) {
+  $fichier = champ_sql('fichier',$p);
+  $p->code = "FpipR_get_flickr_photo_secret($fichier)";
+  return $p;
+}
+
+//======================================================================
+
 function critere_tags_dist($idb, &$boucles, $crit) {
 }
 

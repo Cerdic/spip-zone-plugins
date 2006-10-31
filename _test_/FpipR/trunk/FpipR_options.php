@@ -175,4 +175,18 @@ function FpipR_photos_geo_getLocation($id_photo,$location) {
   return $locations[$id_photo]['location'][$location];
 }
 
+function FpipR_get_flickr_photo_id($fichier) {
+  if(preg_match('#http://static.flickr.com/(.*?)/(.*?)_(.*?)(_[stmbo])\.(jpg|gif|png)#',$fichier,$matches))
+		return $matches[2];
+	return '';
+}
+
+function FpipR_get_flickr_photo_secret($fichier) {
+  if(preg_match('#http://static.flickr.com/(.*?)/(.*?)_(.*?)(_[stmbo])\.(jpg|gif|png)#',$fichier,$matches))
+		return $matches[3];
+  return '';
+	
+}
+
+
 ?>

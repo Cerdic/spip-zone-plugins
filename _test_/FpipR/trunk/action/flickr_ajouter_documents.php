@@ -61,12 +61,13 @@ function action_flickr_ajouter_documents() {
 				$title = _T('fpipr:par',array('title'=>$title,'user'=>(($photo_details->owner_username)?$photo_details->owner_username:$photo_details->owner_nsid),'url'=>'http://www.flickr.com/people/'.$photo_details->owner_nsid));
 			  }
 			  include_spip('inc/filtres');
-			  $q = "UPDATE ".$table_prefix."_documents SET titre = '<html>".$title."</html>', descriptif = '<html>".filtrer_entites($photo_details->description)."</html>'";
-			  if($photo_details->date_taken) $q .=", date= '".$photo_details->date_taken."'";
+			  $q = "UPDATE ".$table_prefix."_documents SET titre = '<html>"._q($title)."</html>', descriptif = '<html>"._q(filtrer_entites($photo_details->description))."</html>'";
+			  if($photo_details->date_taken) $q .=", date= '"._q($photo_details->date_taken)."'";
 			  $q .=" WHERE id_document=".$doc_row['id_document'];
 			  spip_query($q);
 			  include_spip('inc/plugin');
-			  if(in_array('tag-machine',liste_plugin_actifs())) {
+			  //ATTENTION TODO, on s'attend a trouver tag-machine dans _dev_, mauvaise idee.
+			  if(in_array('_dev_/tag-machine',liste_plugin_actifs())) {
 				include_spip('inc/tag-machine');
 				foreach($photo_details->tags as $tag) {
 				  if($tag->raw) {
@@ -77,8 +78,8 @@ function action_flickr_ajouter_documents() {
 			  }
 			}
 		  } else {
-			$cnt =spip_abstract_fetsel(array('id_document,id_article'),array('spip_documents_'.$type.'s'),array("id_$type=$id","id_document=".$cnt['id_document']));
-			if(!$cnt) {
+			$link =spip_abstract_fetsel(array('id_document,id_article'),array('spip_documents_'.$type.'s'),array("id_$type=$id","id_document=".$cnt['id_document']));
+			if(!$link) {
 			  spip_abstract_insert('spip_documents_'.$type.'s',"(id_$type,id_document)","($id,".$cnt['id_document'].')');
 			}
 		  }

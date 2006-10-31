@@ -7,8 +7,12 @@ BOUCLE Flickr
 </title>
 </head>
 
-
-
+<BOUCLE_photo(DOCUMENTS) {id_article=129} {distant=oui} {0,10} {"<br/>"}>
+#LOGO_DOCUMENT
+#FLICKR_PHOTO_ID
+#FLICKR_PHOTO_SECRET
+</BOUCLE_photo>
+<hr/>
 <BOUCLE_auteur(AUTEURS) {flickr_nsid!=''}>
 <BOUCLE_tags(FLICKR_TAGS_GETLISTUSER) {author=#FLICKR_NSID} {0,100} {","}>
 #SAFE
