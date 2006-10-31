@@ -8,16 +8,9 @@ BOUCLE Flickr
 </head>
 
 <hr/>
-<BOUCLE_auteur(AUTEURS) {flickr_nsid!=''}>
-#NOM Tok: '[(#FLICKR_TOKEN|?{auth,"pas auth"})]';
-<BOUCLE_favs(FLICKR_CONTACTS_GETLIST) {nsid #FLICKR_NSID} {0,10}>
-#LOGO_CONTACT{s}
-</BOUCLE_favs>
-pas de resultats: are you logged?
-<//B_favs>
-</BOUCLE_auteur>
 
-<BOUCLE_pgroups(FLICKR_PHOTOS_GETCONTACTSPHOTOS)>
+<BOUCLE_pgroups(FLICKR_PHOTOS_GETNOTINSET){0,10}>
+#ID_PHOTO
 #LOGO_OWNER
 #LOGO_PHOTO{s}
 </BOUCLE_pgroups>

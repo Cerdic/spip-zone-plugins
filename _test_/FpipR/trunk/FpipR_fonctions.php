@@ -1441,6 +1441,87 @@ function boucle_FLICKR_TAGS_GETLISTUSER_dist($id_boucle,&$boucles) {
 
 //======================================================================
 
+function boucle_FLICKR_PHOTOS_GETNOTINSET_dist($id_boucle, &$boucles) {
+  $boucle = &$boucles[$id_boucle];
+  $id_table = $boucle->id_table;
+  $boucle->from[$id_table] =  "spip_fpipr_photos";
+
+  $possible_args = array('user_id','upload_date','taken_date');
+
+  $possible_criteres = array('privacy_filter');
+
+  $possible_extras = array('license', 'owner_name', 'icon_server', 'original_format', 'last_update');
+
+  $arguments = '';
+
+
+  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
+  FpipR_utils_calcul_limit($boucle,$arguments);
+	
+
+  $extras = array();
+
+  //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
+  foreach($boucle->where as $w) {
+	if($w[0] == "'?'") {
+	  $w = $w[2];
+	} 
+	$key = str_replace("'",'',$w[1]);
+	$val = $w[2];
+	$key = str_replace("$id_table.",'',$key);
+	if (in_array($key,$possible_args)){
+	  if(in_array($key,$possible_extras)) $extras[] = $key; 
+	  else if($key == 'upload_date') $extras[] = 'date_upload';
+	  else if($key == 'taken_date') $extras[] ='date_taken';
+	  switch($w[0]) {
+		case "'='":
+		  if($key == 'taken_date' || $key == 'upload_date') {
+			$arguments['min_'.$key] = $val;
+			$arguments['max_'.$key] = $val;
+		  } else {
+			$arguments[$key] = $val;
+		  }
+		  break;
+		case "'<'":
+		  if($key == 'taken_date' || $key == 'upload_date') {
+			$arguments['max_'.$key] = $val;
+		  }
+		  break;
+		case "'>'":
+		  if($key == 'taken_date' || $key == 'upload_date') {
+			$arguments['min_'.$key] = $val;
+		  }
+		  break;
+		default:
+		  erreur_squelette(_T('fpipr:mauvaisop',array('critere'=>$key,'op'=>$w[0])), $id_boucle);
+	  }
+	}
+  }
+  foreach($boucle->select as $w) {
+	$key = str_replace("'",'',$w);
+	$key = str_replace("$id_table.",'',$key);
+	if(in_array($key,$possible_extras)) $extras[] = $key; 
+	else if($key == 'upload_date') $extras[] = 'date_upload';
+	else if($key == 'taken_date') $extras[] ='date_taken';
+	else if($key == 'longitude' || $key == 'latitude') $extras[] = 'geo';
+  }
+  $arguments['extras'] = "'".join(',',$extras)."'";
+  $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
+	  \$arguments = '';\n";
+  $bbox = '';
+  foreach($arguments as $key => $val) {
+	if($val) {
+	  $boucle->hash .= "\$v=$val;\n";
+	  $boucle->hash .= "\$arguments['$key']=FpipR_traiter_argument('$key',\$v);\n";
+	}}
+
+  $boucle->hash .= "FpipR_fill_table_boucle('flickr.photos.getNotInSet',\$arguments);";
+  return calculer_boucle($id_boucle, $boucles); 
+}
+
+
+//======================================================================
+
 function FpipR_utils_calcul_limit(&$boucle,&$arguments) {
   //on calcul le nombre de page d'apres {0,10}
   list($debut,$pas) = split(',',$boucle->limit);

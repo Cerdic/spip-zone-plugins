@@ -18,7 +18,6 @@ photos
 
     * flickr.photos.getCounts
     * flickr.photos.getExif
-    * flickr.photos.getNotInSet
     * flickr.photos.getRecent
     * flickr.photos.getSizes
     * flickr.photos.getUntagged

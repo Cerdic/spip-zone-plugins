@@ -188,6 +188,7 @@ $GLOBALS['table_des_tables']['flickr_photos_getcontactspublicphotos'] = 'fpipr_p
 $GLOBALS['table_des_tables']['flickr_photos_getcontactsphotos'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_favorites_getpubliclist'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_favorites_getlist'] = 'fpipr_photos';
+$GLOBALS['table_des_tables']['flickr_photos_getnotinset'] = 'fpipr_photos';
 
 //======================================================================
 //pour le contexte
@@ -338,6 +339,22 @@ function FpipR_fill_table($method,$arguments){
 }
 
 //======================================================================
+
+function FpipR_create_flickr_photos_getnotinset_dist() {
+  FpipR_make_table('spip_fpipr_photos');
+}
+
+function FpipR_flickr_photos_getnotinset_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $photos = flickr_photos_getNotInSet(
+								 $arguments['per_page'],$arguments['page'],
+								 $arguments['min_upload_date'],
+								 $arguments['max_upload_date'], $arguments['min_taken_date'],
+								 $arguments['max_taken_date'], $arguments['privacy_filter'],
+								 $arguments['extras'],
+								 $arguments['auth_token']);
+  FpipR_fill_photos_table($photos->photos);
+}
 
 
 function FpipR_create_flickr_photos_search_dist() {

@@ -298,6 +298,33 @@ function flickr_photos_search(
   return flickr_utils_createPhotos($photos);
 }
 
+function flickr_photos_getNotInSet(
+							  $per_page=NULL,$page=NULL,
+							  $min_upload_date = NULL,$max_upload_date = NULL,
+							  $min_taken_date = NULL,$max_taken_date = NULL,
+							  $privacy_filter = NULL,
+							  $extras = NULL,
+							  $auth_token = NULL
+							  ) {
+  $params = array();
+
+  if($per_page!= NULL) $params['per_page'] = $per_page;
+  if($page!= NULL) $params['page'] = $page;
+  if($min_upload_date!= NULL) $params['min_upload_date'] = $min_upload_date;
+  if($max_upload_date!= NULL) $params['max_upload_date'] = $max_upload_date;
+  if($min_taken_date!= NULL) $params['min_taken_date'] = $min_taken_date;
+  if($max_taken_date!= NULL) $params['max_taken_date'] = $max_taken_date;
+  if($privacy_filter != NULL) $params['privacy_filter'] = $privacy_filter ;
+
+  if($extras!= NULL) $params['extras'] = "original_format,$extras"; 
+  else $params['extras'] = "original_format";
+
+  $photos =  flickr_check_error(flickr_api_call('flickr.photos.getNotInSet',$params,$auth_token));
+  return flickr_utils_createPhotos($photos);
+}
+
+
+
 function flickr_photosets_getList($user_id,$auth_token='') {
   /*<photosets cancreate="1">
 	<photoset id="5" primary="2483" secret="abcdef"
