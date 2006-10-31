@@ -97,9 +97,10 @@ function action_widgets_html_dist() {
 						// si oui, la modif demandee correspond peut-etre
 						// a la nouvelle valeur ? dans ce cas on procede
 						// comme si "pas de modification", sinon erreur
-						if ($md5 != md5($m[1]))
+						if ($md5 != md5($m[1])) {
 							$return['$erreur'] = "$type $id $champtable: " .
 								_T('widgets:modifie_par_ailleurs');
+							}
 						break;
 					}
 					$anamod[] = array($wid,$type,$champ,$id,$m[1]);
