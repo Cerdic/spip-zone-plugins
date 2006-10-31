@@ -186,7 +186,7 @@ function action_widgets_html_dist() {
         // une quelconque erreur ... ou rien ==> on ne fait rien !
         if ($return['$erreur']) {
             echo var2js($return);
-            return;
+            exit;
         }
 
         // sinon on bosse
