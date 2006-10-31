@@ -193,6 +193,7 @@ $GLOBALS['table_des_tables']['flickr_photos_getrecent'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_photos_getuntagged'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_photos_getwithgeodata'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_photos_getwithoutgeodata'] = 'fpipr_photos';
+$GLOBALS['table_des_tables']['flickr_photos_recentlyupdated'] = 'fpipr_photos';
 
 //======================================================================
 //pour le contexte
@@ -699,6 +700,20 @@ function FpipR_flickr_favorites_getList_dist($arguments) {
 										   $arguments['page'],$arguments['auth_token']);
   FpipR_fill_photos_table($photos->photos);
 }
+//======================================================================
+function FpipR_create_flickr_photos_recentlyupdated_dist() {
+  FpipR_make_table('spip_fpipr_photos');
+}
+
+function FpipR_flickr_photos_recentlyupdated_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $photos = flickr_photos_recentlyUpdated( $arguments['per_page'], $arguments['page'],
+										   $arguments['min_date'],
+										   $arguments['extras'],
+										   $arguments['auth_token']);
+  FpipR_fill_photos_table($photos->photos);
+}
+
 
 //======================================================================
 

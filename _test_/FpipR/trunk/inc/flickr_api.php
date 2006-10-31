@@ -354,6 +354,26 @@ function flickr_photos_getWithoutGeoData(
   return flickr_utils_createPhotos($photos);
 }
 
+function flickr_photos_recentlyUpdated(
+							  $per_page=NULL,$page=NULL,
+							  $min_date = NULL,
+							  $extras = NULL,
+							  $auth_token = NULL
+							  ) {
+  $params = array();
+
+  if($per_page!= NULL) $params['per_page'] = $per_page;
+  if($page!= NULL) $params['page'] = $page;
+  if($min_date!= NULL) $params['min_date'] = $min_date;
+
+  if($extras!= NULL) $params['extras'] = "original_format,$extras"; 
+  else $params['extras'] = "original_format";
+
+  $photos =  flickr_check_error(flickr_api_call('flickr.photos.recentlyUpdated',$params,$auth_token));
+  return flickr_utils_createPhotos($photos);
+}
+
+
 
 function flickr_photos_getUntagged(
 							  $per_page=NULL,$page=NULL,

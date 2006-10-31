@@ -20,8 +20,6 @@ photos
     * flickr.photos.getExif
     * flickr.photos.getSizes
 
-    * flickr.photos.recentlyUpdated
-
 photos.geo
 
     * flickr.photos.geo.getPerms
