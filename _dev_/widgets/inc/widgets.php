@@ -1,48 +1,5 @@
 <?php
 
-
-// Recuperation des donnees
-#var_dump($_POST);
-
-#$meta['alea_ephemere'] = $meta['alea_ephemere_ancien'] = 'x';
-
-
-function post_widgets() {
-    $results = array();
-
-    if (isset($_POST['widgets']) AND is_array($_POST['widgets']))
-    foreach ($_POST['widgets'] as $widget) {
-
-        $name = $_POST['name_'.$widget];
-        $content = $_POST['content_'.$widget];
-
-        // Compatibilite charset autre que utf8 ; en effet on recoit
-        // obligatoirement les donnees en utf-8, par la magie d'ajax
-        if ($GLOBALS['meta']['charset']!='utf-8') {
-            include_spip('inc/charsets');
-            $content = importer_charset($content, 'utf-8');
-        }
-
-        // Si les donnees POSTees ne correspondent pas a leur md5,
-        // il faut les traiter
-        if (md5($content) <> $_POST['md5_'.$widget]) {
-
-            if (!isset($_POST['secu_'.$widget]))
-                $results[] = array($name, $content, $_POST['md5_'.$widget], $widget);
-
-            elseif (verif_secu($name, $_POST['secu_'.$widget]))
-                $results[] = array($name, $content, $_POST['md5_'.$widget], $widget);
-            else
-                return false; // erreur secu
-        }
-        // cas inchange
-        else
-            $results[] = array($name, $content, false, $widget);
-    }
-
-    return $results;
-}
-
 function verif_secu($w, $secu) {
     return (
         $secu == md5($GLOBALS['meta']['alea_ephemere'].'='.$w)
