@@ -9,10 +9,9 @@ BOUCLE Flickr
 
 <hr/>
 
-<BOUCLE_pgroups(FLICKR_PHOTOS_GETNOTINSET){0,10}>
-#ID_PHOTO
+<BOUCLE_pgroups(FLICKR_PHOTOS_GETWITHOUTGEODATA){privacy_filter 4}{0,10}>
 #LOGO_OWNER
-#LOGO_PHOTO{s}
+#LOGO_PHOTO{m}
 </BOUCLE_pgroups>
 
 <hr/>

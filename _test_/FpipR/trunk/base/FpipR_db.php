@@ -189,6 +189,10 @@ $GLOBALS['table_des_tables']['flickr_photos_getcontactsphotos'] = 'fpipr_photos'
 $GLOBALS['table_des_tables']['flickr_favorites_getpubliclist'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_favorites_getlist'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_photos_getnotinset'] = 'fpipr_photos';
+$GLOBALS['table_des_tables']['flickr_photos_getrecent'] = 'fpipr_photos';
+$GLOBALS['table_des_tables']['flickr_photos_getuntagged'] = 'fpipr_photos';
+$GLOBALS['table_des_tables']['flickr_photos_getwithgeodata'] = 'fpipr_photos';
+$GLOBALS['table_des_tables']['flickr_photos_getwithoutgeodata'] = 'fpipr_photos';
 
 //======================================================================
 //pour le contexte
@@ -355,7 +359,40 @@ function FpipR_flickr_photos_getnotinset_dist($arguments) {
 								 $arguments['auth_token']);
   FpipR_fill_photos_table($photos->photos);
 }
+//======================================================================
 
+function FpipR_create_flickr_photos_getuntagged_dist() {
+  FpipR_make_table('spip_fpipr_photos');
+}
+
+function FpipR_flickr_photos_getuntagged_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $photos = flickr_photos_getUntagged(
+								 $arguments['per_page'],$arguments['page'],
+								 $arguments['min_upload_date'],
+								 $arguments['max_upload_date'], $arguments['min_taken_date'],
+								 $arguments['max_taken_date'], $arguments['privacy_filter'],
+								 $arguments['extras'],
+								 $arguments['auth_token']);
+  FpipR_fill_photos_table($photos->photos);
+}
+
+//======================================================================
+
+function FpipR_create_flickr_photos_getrecent_dist() {
+  FpipR_make_table('spip_fpipr_photos');
+}
+
+function FpipR_flickr_photos_getrecent_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $photos = flickr_photos_getRecent(
+								 $arguments['per_page'],$arguments['page'],
+								 $arguments['extras'],
+								 $arguments['auth_token']);
+  FpipR_fill_photos_table($photos->photos);
+}
+
+//======================================================================
 
 function FpipR_create_flickr_photos_search_dist() {
   FpipR_make_table('spip_fpipr_photos');
@@ -375,6 +412,46 @@ function FpipR_flickr_photos_search_dist($arguments) {
 								 $arguments['auth_token']);
   FpipR_fill_photos_table($photos->photos);
 }
+
+//======================================================================
+
+function FpipR_create_flickr_photos_getwithgeodata_dist() {
+  FpipR_make_table('spip_fpipr_photos');
+}
+
+function FpipR_flickr_photos_getwithgeodata_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $photos = flickr_photos_getWithGeoData(
+								 $arguments['per_page'],$arguments['page'],
+								 $arguments['min_upload_date'],
+								 $arguments['max_upload_date'], $arguments['min_taken_date'],
+								 $arguments['max_taken_date'],
+								 $arguments['sort'], $arguments['privacy_filter'],
+								 $arguments['extras'],
+								 $arguments['auth_token']);
+  FpipR_fill_photos_table($photos->photos);
+}
+
+//======================================================================
+
+function FpipR_create_flickr_photos_getwithoutgeodata_dist() {
+  FpipR_make_table('spip_fpipr_photos');
+}
+
+function FpipR_flickr_photos_getwithoutgeodata_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $photos = flickr_photos_getWithoutGeoData(
+								 $arguments['per_page'],$arguments['page'],
+								 $arguments['min_upload_date'],
+								 $arguments['max_upload_date'], $arguments['min_taken_date'],
+								 $arguments['max_taken_date'],
+								 $arguments['sort'], $arguments['privacy_filter'],
+								 $arguments['extras'],
+								 $arguments['auth_token']);
+  FpipR_fill_photos_table($photos->photos);
+}
+
+//======================================================================
 
 function FpipR_fill_photos_table($photos,$add='') {
   $cnt = 0;

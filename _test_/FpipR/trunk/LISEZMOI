@@ -73,7 +73,12 @@ Les criteres suivant sont "special" et prennent leur parametre directement: {{{ 
  * {{{ {tags} }}}
  * {{{ {tag_mode} }}}
  * {{{ {text} }}}
- * {{{ {privacy_filter} }}} NE MARCHE PAS
+ * {{{ {privacy_filter} }}} 
+    * 1 public photos
+    * 2 private photos visible to friends
+    * 3 private photos visible to family
+    * 4 private photos visible to friends & family
+    * 5 completely private photos
  * {{{ {bbox} }}} limitation geographique de la recherche, separé par des :, longitude minimum, latitude minimum, longitude max, latitude max
  * {{{ {accuracy} }}}
 
