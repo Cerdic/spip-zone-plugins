@@ -146,7 +146,7 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
 
 
   FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
-  FpipR_utils_calcul_limit($boucle,$arguments);
+
 
   if(is_array($boucle->order)) {
 	for($i=0;$i<count($boucle->order);$i++) {
@@ -213,6 +213,7 @@ function boucle_FLICKR_PHOTOS_SEARCH_dist($id_boucle, &$boucles) {
   $arguments['extras'] = "'".join(',',$extras)."'";
   $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
+  $boucle->hash .=   FpipR_utils_calcul_limit($boucle,$arguments);
   $bbox = '';
   foreach($arguments as $key => $val) {
 	if($val) {
@@ -243,7 +244,6 @@ function boucle_FLICKR_PHOTOS_GETWITHOUTGEODATA_dist($id_boucle, &$boucles) {
 
 
   FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
-  FpipR_utils_calcul_limit($boucle,$arguments);
 
   if(is_array($boucle->order)) {
 	for($i=0;$i<count($boucle->order);$i++) {
@@ -310,6 +310,7 @@ function boucle_FLICKR_PHOTOS_GETWITHOUTGEODATA_dist($id_boucle, &$boucles) {
   $arguments['extras'] = "'".join(',',$extras)."'";
   $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
+  $boucle->hash .=   FpipR_utils_calcul_limit($boucle,$arguments);
   $bbox = '';
   foreach($arguments as $key => $val) {
 	if($val) {
@@ -341,7 +342,6 @@ function boucle_FLICKR_PHOTOS_GETWITHGEODATA_dist($id_boucle, &$boucles) {
 
 
   FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
-  FpipR_utils_calcul_limit($boucle,$arguments);
 
   if(is_array($boucle->order)) {
 	for($i=0;$i<count($boucle->order);$i++) {
@@ -408,6 +408,7 @@ function boucle_FLICKR_PHOTOS_GETWITHGEODATA_dist($id_boucle, &$boucles) {
   $arguments['extras'] = "'".join(',',$extras)."'";
   $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
+  $boucle->hash .=   FpipR_utils_calcul_limit($boucle,$arguments);
   $bbox = '';
   foreach($arguments as $key => $val) {
 	if($val) {
@@ -576,8 +577,6 @@ function boucle_FLICKR_PHOTOSETS_GETPHOTOS_dist($id_boucle, &$boucles) {
 	  erreur_squelette(_T('fpipr:mauvaisop',array('critere'=>$key,'op'=>$w[0])), $id_boucle);
   }
 
-  FpipR_utils_calcul_limit($boucle,$arguments);
-
   //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
   foreach($boucle->select as $w) {
 	$key = str_replace("'",'',$w);
@@ -590,6 +589,7 @@ function boucle_FLICKR_PHOTOSETS_GETPHOTOS_dist($id_boucle, &$boucles) {
   $arguments['extras'] = "'".join(',',$extras)."'";
   $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
+  $boucle->hash .=   FpipR_utils_calcul_limit($boucle,$arguments);
   $bbox = '';
   foreach($arguments as $key => $val) {
 	if($val) {
@@ -882,7 +882,6 @@ function boucle_FLICKR_INTERESTINGNESS_GETLIST_dist($id_boucle, &$boucles) {
 
   }
 
-  FpipR_utils_calcul_limit($boucle,$arguments);
 
   //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
   foreach($boucle->select as $w) {
@@ -896,6 +895,7 @@ function boucle_FLICKR_INTERESTINGNESS_GETLIST_dist($id_boucle, &$boucles) {
   $arguments['extras'] = "'".join(',',$extras)."'";
   $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
+  $boucle->hash .=   FpipR_utils_calcul_limit($boucle,$arguments);
   $bbox = '';
   foreach($arguments as $key => $val) {
 	if($val) {
@@ -936,8 +936,6 @@ function boucle_FLICKR_PHOTOS_RECENTLYUPDATED_dist($id_boucle, &$boucles) {
 
   }
 
-  FpipR_utils_calcul_limit($boucle,$arguments);
-
   //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
   foreach($boucle->select as $w) {
 	$key = str_replace("'",'',$w);
@@ -950,6 +948,7 @@ function boucle_FLICKR_PHOTOS_RECENTLYUPDATED_dist($id_boucle, &$boucles) {
   $arguments['extras'] = "'".join(',',$extras)."'";
   $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
+  $boucle->hash .=   FpipR_utils_calcul_limit($boucle,$arguments);
   $bbox = '';
   foreach($arguments as $key => $val) {
 	if($val) {
@@ -1001,8 +1000,6 @@ function boucle_FLICKR_GROUPS_POOLS_GETPHOTOS_dist($id_boucle, &$boucles) {
 
   }
 
-  FpipR_utils_calcul_limit($boucle,$arguments);
-
   //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
   foreach($boucle->select as $w) {
 	$key = str_replace("'",'',$w);
@@ -1015,6 +1012,7 @@ function boucle_FLICKR_GROUPS_POOLS_GETPHOTOS_dist($id_boucle, &$boucles) {
   $arguments['extras'] = "'".join(',',$extras)."'";
   $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
+  $boucle->hash .=   FpipR_utils_calcul_limit($boucle,$arguments);
   $bbox = '';
   foreach($arguments as $key => $val) {
 	if($val) {
@@ -1213,7 +1211,6 @@ function boucle_FLICKR_FAVORITES_GETPUBLICLIST_dist($id_boucle, &$boucles) {
 
   FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
 
-  FpipR_utils_calcul_limit($boucle,$arguments);
 
   foreach($boucle->where as $w) {
 	if($w[0] == "'?'") {
@@ -1245,6 +1242,7 @@ function boucle_FLICKR_FAVORITES_GETPUBLICLIST_dist($id_boucle, &$boucles) {
   $arguments['extras'] = "'".join(',',$extras)."'";
   $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
+  $boucle->hash .=   FpipR_utils_calcul_limit($boucle,$arguments);
   $bbox = '';
   foreach($arguments as $key => $val) {
 	if($val) {
@@ -1270,8 +1268,6 @@ function boucle_FLICKR_FAVORITES_GETLIST_dist($id_boucle, &$boucles) {
 
   FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
 
-  FpipR_utils_calcul_limit($boucle,$arguments);
-
   foreach($boucle->where as $w) {
 	if($w[0] == "'?'") {
 	  $w = $w[2];
@@ -1302,6 +1298,7 @@ function boucle_FLICKR_FAVORITES_GETLIST_dist($id_boucle, &$boucles) {
   $arguments['extras'] = "'".join(',',$extras)."'";
   $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
+  $boucle->hash .=   FpipR_utils_calcul_limit($boucle,$arguments);
   $bbox = '';
   foreach($arguments as $key => $val) {
 	if($val) {
@@ -1591,10 +1588,9 @@ function boucle_FLICKR_GROUPS_POOLS_GETGROUPS_dist($id_boucle,&$boucles) {
   $id_table = $boucle->id_table;
   $boucle->from[$id_table] =  "spip_fpipr_groups";
 
-  FpipR_utils_calcul_limit($boucle,$arguments);
-
   $boucle->hash = "// CREER la table flickr_groups et la peupler avec le resultat de la query
-	  \$arguments = '';\n";
+	  \$arguments = '';\n";  
+  $boucle->hash .=   FpipR_utils_calcul_limit($boucle,$arguments);
   foreach($arguments as $key => $val) {
 	if($val) {
 	  $boucle->hash .= "\$v=$val;\n";
@@ -1616,10 +1612,9 @@ function boucle_FLICKR_CONTACTS_GETPUBLICLIST_dist($id_boucle,&$boucles) {
 
   FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
 
-  FpipR_utils_calcul_limit($boucle,$arguments);
-
   $boucle->hash = "// CREER la table flickr_people et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
+  $boucle->hash .=   FpipR_utils_calcul_limit($boucle,$arguments);
   foreach($arguments as $key => $val) {
 	if($val) {
 	  $boucle->hash .= "\$v=$val;\n";
@@ -1639,10 +1634,9 @@ function boucle_FLICKR_CONTACTS_GETLIST_dist($id_boucle,&$boucles) {
 
   FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
 
-  FpipR_utils_calcul_limit($boucle,$arguments);
-
   $boucle->hash = "// CREER la table flickr_people et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
+  $boucle->hash .=   FpipR_utils_calcul_limit($boucle,$arguments);
   foreach($arguments as $key => $val) {
 	if($val) {
 	  $boucle->hash .= "\$v=$val;\n";
@@ -1667,8 +1661,6 @@ function boucle_FLICKR_PHOTOS_GETRECENT_dist($id_boucle,&$boucles) {
   $id_table = $boucle->id_table;
   $boucle->from[$id_table] =  "spip_fpipr_photos";
 
-  FpipR_utils_calcul_limit($boucle,$arguments);
-
   $possible_extras = array('license', 'owner_name', 'icon_server', 'original_format', 'last_update');
   $extras = array();
 
@@ -1684,6 +1676,7 @@ function boucle_FLICKR_PHOTOS_GETRECENT_dist($id_boucle,&$boucles) {
 
   $boucle->hash = "// CREER la table flickr_people et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
+  $boucle->hash .=   FpipR_utils_calcul_limit($boucle,$arguments);
   foreach($arguments as $key => $val) {
 	if($val) {
 	  $boucle->hash .= "\$v=$val;\n";
@@ -1851,7 +1844,6 @@ function boucle_FLICKR_PHOTOS_GETNOTINSET_dist($id_boucle, &$boucles) {
 
 
   FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
-  FpipR_utils_calcul_limit($boucle,$arguments);
 	
 
   $extras = array();
@@ -1903,6 +1895,7 @@ function boucle_FLICKR_PHOTOS_GETNOTINSET_dist($id_boucle, &$boucles) {
   $arguments['extras'] = "'".join(',',$extras)."'";
   $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
+  $boucle->hash .=   FpipR_utils_calcul_limit($boucle,$arguments);
   $bbox = '';
   foreach($arguments as $key => $val) {
 	if($val) {
@@ -1931,8 +1924,6 @@ function boucle_FLICKR_PHOTOS_GETUNTAGGED_dist($id_boucle, &$boucles) {
 
 
   FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
-  FpipR_utils_calcul_limit($boucle,$arguments);
-	
 
   $extras = array();
 
@@ -1983,6 +1974,7 @@ function boucle_FLICKR_PHOTOS_GETUNTAGGED_dist($id_boucle, &$boucles) {
   $arguments['extras'] = "'".join(',',$extras)."'";
   $boucle->hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
+  $boucle->hash .=   FpipR_utils_calcul_limit($boucle,$arguments);
   $bbox = '';
   foreach($arguments as $key => $val) {
 	if($val) {
@@ -2030,14 +2022,19 @@ function boucle_FLICKR_PHOTOS_GETEXIF_dist($id_boucle,&$boucles) {
 
 //======================================================================
 
-function FpipR_utils_calcul_limit(&$boucle,&$arguments) {
+function FpipR_utils_calcul_limit(&$boucle) {
   //on calcul le nombre de page d'apres {0,10}
-  list($debut,$pas) = split(',',$boucle->limit);
-  $page = $debut/$pas;
-  if($page <= 0) $page = 1;
-  $arguments['page'] = intval($page);
-  $arguments['per_page'] = $pas>0?($pas+$debut):100;
-  //  $boucle->limit = NULL;
+  $deubt=0;$pas=1;
+  if($boucle->limit)
+	list($debut,$pas) = split(',',$boucle->limit);
+  else {
+	$debut = $boucle->partie;
+	$pas = $boucle->total_parties;
+  }
+  return "list(\$page,\$per_page) = FpipR_calcul_argument_page($debut,$pas);
+\$arguments['page'] = \$page;
+\$arguments['per_page'] = \$per_page;
+";
 }
 
 function FpipR_utils_search_criteres(&$boucle,&$arguments,$possible_criteres,&$boucles,$id_boucle) {

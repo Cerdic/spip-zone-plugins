@@ -188,6 +188,14 @@ function FpipR_get_flickr_photo_secret($fichier) {
 	
 }
 
+
+function FpipR_calcul_argument_page($debut,$pas) {
+  $page = $debut/$pas;
+  if($page <= 0) $page = 1;
+  return array(intval($page),$pas>0?($pas+$debut):100);
+}
+
+
 //======================================================================
 // Histoire d'authentification
 //======================================================================

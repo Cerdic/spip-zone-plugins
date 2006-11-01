@@ -339,7 +339,7 @@ $GLOBALS['table_des_tables']['flickr_photos_getexif'] = 'fpipr_exif';
 
 function FpipR_creer_tables($method){
   $fct = str_replace('.','_',$method);
-  $f=charger_fonction('create_'.$fct, 'FpipR');
+  $f=charger_fonction($fct, 'FpipR_create');
   $f();
 }
 
