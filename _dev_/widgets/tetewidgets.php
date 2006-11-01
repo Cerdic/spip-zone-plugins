@@ -57,14 +57,18 @@ function Widgets_preparer_page($page, $droits) {
 
     $jsFile = find_in_path('widgets.js');
     $cssFile = find_in_path('widgets.css');
-    $imgPath = dirname(find_in_path('images/crayon.png'));
+    $imgPath = "'" . dirname(find_in_path('images/crayon.png')) . "'";
 
-    $txtEditer = addslashes(html2unicode(_T(
-        'widgets:editer')));
-    $txtChanged = addslashes(html2unicode(_T(
-        'widgets:deja_modifie')));
-    $txtError = addslashes(html2unicode(_T(
-        'widgets:svp_copier_coller')));
+    $txt =
+      "{'edit':'" . addslashes(html2unicode(_T('widgets:editer'))) .
+      "','changed':'" . addslashes(html2unicode(_T('widgets:deja_modifie'))) .
+      "','error':'" . addslashes(html2unicode(_T('widgets:svp_copier_coller'))) .
+      "'}";
+	$img =
+      "{'searching':'searching.gif',
+        'edit':'crayon.png',
+        'changed':'changed.png'
+      }";
 //    $txtErrInterdit = addslashes(unicode_to_javascript(html2unicode(_T(
 //        'widgets:erreur_ou_interdit'))));
 
@@ -75,10 +79,9 @@ function Widgets_preparer_page($page, $droits) {
 <script type="text/javascript">
     var configWidgets = new cfgWidgets({
         'droits':{$droits},
-        'imgPath':'{$imgPath}',
-        'txtEditer':'{$txtEditer}',
-        'txtChanged':'{$txtChanged}',
-        'txtError':'{$txtError}'
+        'imgPath':{$imgPath},
+        'txt':{$txt},
+        'img':{$img}
     });
 </script >
 EOH;
