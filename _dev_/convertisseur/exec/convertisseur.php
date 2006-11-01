@@ -148,9 +148,15 @@ function exec_convertisseur(){
 	   if ($_FILES) {
 	   	$file = array_pop($_FILES);
 	   	$fname = $file['tmp_name'];
-	   	if ($fname
-	   	AND lire_fichier($fname, $tmp))
+	   	if ($fname) {
+	   	  include_spip('inc/getdocument');
+	   	  chdir('..'); ## dirty
+	   	  if (
+	   	  deplacer_fichier_upload($fname, 'tmp/convertisseur.tmp')
+                  AND lire_fichier('tmp/convertisseur.tmp', $tmp))
 		   	$conv_in = $tmp;
+                  chdir('ecrire/');
+                }
 	   }
 
      if (isset($_POST['format'])) {
@@ -172,6 +178,8 @@ function exec_convertisseur(){
 	            	ecrire_fichier(_DIR_TMP.'convertisseur.tmp', $conv_in);
 	            	$conv_out = $cv(_DIR_TMP.'convertisseur.tmp', $charset);
 	            	supprimer_fichier(_DIR_TMP.'convertisseur.tmp');
+	            	include_spip('inc/charsets');
+	            	$conv_out = importer_charset($conv_out, $charset);
 	            }
 				if ($cv AND !$conv_out)
 					$log = "<span style='color:red'>"._T("convertisseur:erreur_extracteur")."</span>";
@@ -195,7 +203,8 @@ function exec_convertisseur(){
 	echo $log;
 	echo "<form method='post' enctype='multipart/form-data'>\n";
 	if ($conv_out!="") {
-	   $conv_out = str_replace("</textarea>",'&lt;/textarea&gt;',$conv_out);
+	   $conv_out = entites_html($conv_out);
+#	   str_replace("</textarea>",'&lt;/textarea&gt;',$conv_out);
 	   echo "<div style='background-color:#E6ECF9;padding:8px 3px;margin-bottom:5px'>"._T("convertisseur:convertir_en");
 	   if (isset($conv_formats[$format])) echo "<strong>"._T("convertisseur:$format")."</strong>\n";
 	   echo "<textarea name='conv_out' cols='65' rows='12'>$conv_out</textarea><br />\n";
@@ -206,7 +215,8 @@ function exec_convertisseur(){
 
 	echo _L("Copiez-le ci-dessous :")."<br />\n";
 
-	$conv_in = str_replace("</textarea>",'&lt;/textarea&gt;',$conv_in);
+	$conv_in = entites_html(substr($conv_in,0,40000));
+#	str_replace("</textarea>",'&lt;/textarea&gt;',$conv_in);
 	echo "<textarea name='conv_in' cols='65' rows='12'>$conv_in</textarea><br />\n";
 	echo _T("convertisseur:from");
   echo "<select name='format'>\n"; 
