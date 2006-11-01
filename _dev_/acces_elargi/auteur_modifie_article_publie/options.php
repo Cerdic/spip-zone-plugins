@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Autoriser a modifier l'article $id
 // = publier_dans rubrique parente
 // = ou statut 'prop,prepa' et $qui est auteur
-function autoriser_modifier_article($faire, $type, $id, $qui, $opt) {
+function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 	$s = spip_query(
 	"SELECT id_rubrique,statut FROM spip_articles WHERE id_article="._q($id));
 	$r = spip_fetch_array($s);
