@@ -1021,89 +1021,89 @@ if ($etape == 'traduction')
   recherche(&$table_traduct, $type, "eo", $filtre, $date, $id, &$cpt, 
      &$lang_orig_aff, &$lang_cible_aff, 1, &$res_date);
 
-  $titre_table = _TT('tradlang:titre_traduction_de')."<b>".$lang_orig_aff."</b>"._TT('tradlang:lien_traduction_vers')."<b>".$lang_cible_aff."<br>"._TT('tradlang:lien_traduction_module')."(".$modules[$module]["nom"].")</b> ";
+  $titre_table = _TT('tradlang:titre_traduction_de')."<b>".$lang_orig_aff."</b>"._TT('tradlang:lien_traduction_vers')."<b>".$lang_cible_aff."<br>"._TT('tradlang:lien_traduction_module')."(".$modules[$module]["nom"].")</b> \n";
   debut_cadre_relief("", false, "", $titre_table);
   
- echo "<tr><td align=$left colspan=2 class=line>";
+ echo "<tr><td align=$left colspan=2 class=line>\n";
 
-  echo "<table width=100% border=0 cellspacing=0 cellpadding=0>";
+  echo "<table width=100% border=0 cellspacing=0 cellpadding=0>\n";
 
-  echo "<FORM ACTION=\"".generer_url_ecrire("tradlang")."&operation=popup&spip_lang=".$spip_lang."&langue=".$langue."&date=".$date."&filtre=".$filtre."&module=".$module."&etape=sauvegarde&type=".$type."&lang_orig=".$lang_orig."&lang_cible=".$save_lang_cible."&nouv_lang_cible=".$nouv_lang_cible.get_id_get($id)."\" METHOD=\"POST\" name=\"sauvegarder\">";
+  echo "<FORM ACTION=\"".generer_url_ecrire("tradlang")."&operation=popup&spip_lang=".$spip_lang."&langue=".$langue."&date=".$date."&filtre=".$filtre."&module=".$module."&etape=sauvegarde&type=".$type."&lang_orig=".$lang_orig."&lang_cible=".$save_lang_cible."&nouv_lang_cible=".$nouv_lang_cible.get_id_get($id)."\" METHOD=\"POST\" name=\"sauvegarder\">\n";
 
-  echo "<tr>";    
+  echo "<tr>\n";    
 
   // bouton "sauvegarder" supprime
-  echo "<!--td width=32 class=window onMouseOver=\"this.style.backgroundColor='#eeee87'\"  onMouseOut=\"this.style.backgroundColor=''\">";
-  echo "<input ALT=\""._TT('tradlang:lien_sauvegarder')."\" title='"._TT('tradlang:lien_sauvegarder')."' type=\"image\" value=\"Sauver\" HSPACE=0 border=0 src=\"./images/sauve.gif\" name=\"sauver\">";   
-  echo "</td-->";
+  echo "<!--td width=32 class=window onMouseOver=\"this.style.backgroundColor='#eeee87'\"  onMouseOut=\"this.style.backgroundColor=''\">\n";
+  echo "<input ALT=\""._TT('tradlang:lien_sauvegarder')."\" title='"._TT('tradlang:lien_sauvegarder')."' type=\"image\" value=\"Sauver\" HSPACE=0 border=0 src=\"./images/sauve.gif\" name=\"sauver\">\n";   
+  echo "</td-->\n";
 
   // sauvegarde locale supprimee (faite a chaque valider)
-  echo "<!--td width=8>&nbsp;</td>";
-  echo "<td width=32 class=window onMouseOver=\"this.style.backgroundColor='#eeee87'\"  onMouseOut=\"this.style.backgroundColor=''\">";
-  echo "<input ALT=\""._TT('tradlang:lien_export')."\" title=\""._TT('tradlang:lien_export')."\" type=\"image\" value=\"Exporter\" HSPACE=0 border=0 src=\"./images/save_loc.gif\" name=\"exporter\" OnClick=\"if (confirm('".addslashes(_TT('tradlang:lien_confirm_export', array('fichier'=>$fic_cible)))."')) exporter.submit(); else return false;\">";   
-  echo "</td-->";
+  echo "<!--td width=8>&nbsp;</td>\n";
+  echo "<td width=32 class=window onMouseOver=\"this.style.backgroundColor='#eeee87'\"  onMouseOut=\"this.style.backgroundColor=''\">\n";
+  echo "<input ALT=\""._TT('tradlang:lien_export')."\" title=\""._TT('tradlang:lien_export')."\" type=\"image\" value=\"Exporter\" HSPACE=0 border=0 src=\"./images/save_loc.gif\" name=\"exporter\" OnClick=\"if (confirm('".addslashes(_TT('tradlang:lien_confirm_export', array('fichier'=>$fic_cible)))."')) exporter.submit(); else return false;\">\n";   
+  echo "</td-->\n";
 
-  echo "<td width=8>&nbsp;</td>";
+  echo "<td width=8>&nbsp;</td>\n";
 
-  echo "</form>";
-  echo "<FORM ACTION=\"".generer_url_ecrire("tradlang")."&operation=popup&spip_lang=".$spip_lang."&telech=1&langue=".$langue."&date=".$date."&filtre=".$filtre."&module=".$module."&etape=sauvegarde&type=".$type."&lang_orig=".$lang_orig."&lang_cible=".$save_lang_cible."&nouv_lang_cible=".$nouv_lang_cible.get_id_get($id)."\" METHOD=\"POST\" name=\"sauvegarder\">";
+  echo "</form>\n";
+  echo "<FORM ACTION=\"".generer_url_ecrire("tradlang")."&operation=popup&spip_lang=".$spip_lang."&telech=1&langue=".$langue."&date=".$date."&filtre=".$filtre."&module=".$module."&etape=sauvegarde&type=".$type."&lang_orig=".$lang_orig."&lang_cible=".$save_lang_cible."&nouv_lang_cible=".$nouv_lang_cible.get_id_get($id)."\" METHOD=\"POST\" name=\"sauvegarder\">\n";
 
-  echo "<td width=32 class=window onMouseOver=\"this.style.backgroundColor='#eeee87'\"  onMouseOut=\"this.style.backgroundColor=''\">";
-  echo "<input ALT=\""._TT('tradlang:lien_export_net')."\" title=\""._TT('tradlang:lien_export_net')."\" type=\"image\" value=\"Exporter\" HSPACE=0 border=0 src=\"./images/save_net.gif\" name=\"exporter\" OnClick=\"exporter.submit();\">";   
-  echo "</td>";
+  echo "<td width=32 class=window onMouseOver=\"this.style.backgroundColor='#eeee87'\"  onMouseOut=\"this.style.backgroundColor=''\">\n";
+  echo "<input ALT=\""._TT('tradlang:lien_export_net')."\" title=\""._TT('tradlang:lien_export_net')."\" type=\"image\" value=\"Exporter\" HSPACE=0 border=0 src=\"./images/save_net.gif\" name=\"exporter\" OnClick=\"exporter.submit();\">\n";   
+  echo "</td>\n";
 
-  echo "<td align=$right>";
+  echo "<td align=$right>\n";
   $prt = sprintf("%.02f", $cpt);
-  echo _TT('tradlang:lien_proportion')."&nbsp;<font color=green><b>(".$prt." %)</b></font>";
-  echo "</td>";
+  echo _TT('tradlang:lien_proportion')."&nbsp;<font color=green><b>(".$prt." %)</b></font>\n";
+  echo "</td>\n";
 
-  echo "</tr> </FORM>";
-  echo "</table>";
+  echo "</tr> </FORM>\n";
+  echo "</table>\n";
 
-  echo "</td></tr>";
+  echo "</td></tr>\n";
 
-  echo "<FORM NAME='chtype' ACTION='".generer_url_ecrire("tradlang")."' METHOD='POST'>\n";
-  echo "<tr bgcolor=#f0f0f0> <td  align=$left class=line width=25%><b>"._TT('tradlang:type_messages')."</b>";
-  echo "</td><td align=$right class=line  nowrap>";
-  echo "<INPUT TYPE='hidden' NAME='operation' VALUE='popup'>";
-  echo "<INPUT TYPE='hidden' NAME='etape' VALUE='traduction'>";
-  echo "<INPUT TYPE='hidden' NAME='type' VALUE='".$type."'>";
-  echo "<INPUT TYPE='hidden' NAME='id' VALUE='".$id."'>";
-  echo "<INPUT TYPE='hidden' NAME='filtre' VALUE='".$filtre."'>";
-  echo "<INPUT TYPE='hidden' NAME='date' VALUE='".$date."'>";
-  echo "<INPUT TYPE='hidden' NAME='langue' VALUE='".$langue."'>";
-  echo "<INPUT TYPE='hidden' NAME='module' VALUE='".$module."'>";
-  echo "<INPUT TYPE='hidden' NAME='spip_lang' VALUE='".$spip_lang."'>";
-  echo "<INPUT TYPE='hidden' NAME='lang_orig' VALUE='".$lang_orig."'>";
-  echo "<INPUT TYPE='hidden' NAME='lang_cible' VALUE='".$save_lang_cible."'>\n";
+  echo "<FORM NAME='chtype' ACTION='".generer_url_ecrire("tradlang")."' METHOD='POST'>\n\n";
+  echo "<tr bgcolor=#f0f0f0> <td  align=$left class=line width=25%><b>"._TT('tradlang:type_messages')."</b>\n";
+  echo "</td><td align=$right class=line  nowrap>\n";
+  echo "<INPUT TYPE='hidden' NAME='operation' VALUE='popup'>\n";
+  echo "<INPUT TYPE='hidden' NAME='etape' VALUE='traduction'>\n";
+  echo "<INPUT TYPE='hidden' NAME='type' VALUE='".$type."'>\n";
+  echo "<INPUT TYPE='hidden' NAME='id' VALUE='".$id."'>\n";
+  echo "<INPUT TYPE='hidden' NAME='filtre' VALUE='".$filtre."'>\n";
+  echo "<INPUT TYPE='hidden' NAME='date' VALUE='".$date."'>\n";
+  echo "<INPUT TYPE='hidden' NAME='langue' VALUE='".$langue."'>\n";
+  echo "<INPUT TYPE='hidden' NAME='module' VALUE='".$module."'>\n";
+  echo "<INPUT TYPE='hidden' NAME='spip_lang' VALUE='".$spip_lang."'>\n";
+  echo "<INPUT TYPE='hidden' NAME='lang_orig' VALUE='".$lang_orig."'>\n";
+  echo "<INPUT TYPE='hidden' NAME='lang_cible' VALUE='".$save_lang_cible."'>\n\n";
   echo get_id_post($id);
-  echo "<INPUT TYPE='hidden' NAME='nouv_lang_cible' VALUE='".$nouv_lang_cible."'>";
-  echo "<SELECT NAME='type' ORDERED OnChange='chtype.submit()'>\n";
-  echo "<OPTION STYLE=\"width: 150px\" VALUE='revise' ".($type=='revise'?"SELECTED":"").">"._TT('tradlang:item_revise')."\n"; 
+  echo "<INPUT TYPE='hidden' NAME='nouv_lang_cible' VALUE='".$nouv_lang_cible."'>\n";
+  echo "<SELECT NAME='type' ORDERED OnChange='chtype.submit()'>\n\n";
+  echo "<OPTION STYLE=\"width: 150px\" VALUE='revise' ".($type=='revise'?"SELECTED":"").">"._TT('tradlang:item_revise')."\n\n"; 
   echo "<OPTION VALUE='tous' ".($type=='tous'?"SELECTED":"").">"._TT('tradlang:item_tous')."\n"; 
   echo "<OPTION VALUE='traduit' ".($type=='traduit'?"SELECTED":"").">"._TT('tradlang:item_traduit')."\n"; 
   echo "<OPTION VALUE='non_traduit' ".($type=='non_traduit'?"SELECTED":"").">"._TT('tradlang:item_non_traduit')."\n"; 
   echo "<OPTION VALUE='conflit' ".($type=='conflit'?"SELECTED":"").">"._TT('tradlang:item_conflit')."\n"; 
   echo "<OPTION VALUE='modifie' ".($type=='modifie'?"SELECTED":"").">"._TT('tradlang:item_modifie')."\n"; 
-  echo "</SELECT>";
-  echo "</td> </tr>";
+  echo "</SELECT>\n";
+  echo "</td> </tr>\n";
   echo "</FORM>\n";
  
   echo "<FORM NAME='chfiltre' ACTION='".generer_url_ecrire("tradlang")."' METHOD='POST'>\n";
-  echo "<tr bgcolor=#f0f0f0><td align=$left class=line>";
-  echo "<b>"._TT('tradlang:texte_filtre')."</b>";
-  echo "</td><td align=$right class=line nowrap>";
-  echo "<INPUT TYPE='hidden' NAME='operation' VALUE='popup'>";
-  echo "<INPUT TYPE='hidden' NAME='etape' VALUE='traduction'>";
-  echo "<INPUT TYPE='hidden' NAME='type' VALUE='".$type."'>";
-  echo "<INPUT TYPE='hidden' NAME='id' VALUE='".$id."'>";
-  echo "<INPUT TYPE='hidden' NAME='module' VALUE='".$module."'>";
-  echo "<INPUT TYPE='hidden' NAME='spip_lang' VALUE='".$spip_lang."'>";
-  echo "<INPUT TYPE='hidden' NAME='lang_orig' VALUE='".$lang_orig."'>";
-  echo "<INPUT TYPE='hidden' NAME='lang_cible' VALUE='".$save_lang_cible."'>\n";
+  echo "<tr bgcolor=#f0f0f0><td align=$left class=line>\n";
+  echo "<b>"._TT('tradlang:texte_filtre')."</b>\n";
+  echo "</td><td align=$right class=line nowrap>\n";
+  echo "<INPUT TYPE='hidden' NAME='operation' VALUE='popup'>\n";
+  echo "<INPUT TYPE='hidden' NAME='etape' VALUE='traduction'>\n";
+  echo "<INPUT TYPE='hidden' NAME='type' VALUE='".$type."'>\n";
+  echo "<INPUT TYPE='hidden' NAME='id' VALUE='".$id."'>\n";
+  echo "<INPUT TYPE='hidden' NAME='module' VALUE='".$module."'>\n";
+  echo "<INPUT TYPE='hidden' NAME='spip_lang' VALUE='".$spip_lang."'>\n";
+  echo "<INPUT TYPE='hidden' NAME='lang_orig' VALUE='".$lang_orig."'>\n";
+  echo "<INPUT TYPE='hidden' NAME='lang_cible' VALUE='".$save_lang_cible."'>\n\n";
   echo get_id_post($id);
-  echo "<INPUT TYPE='hidden' NAME='nouv_lang_cible' VALUE='".$nouv_lang_cible."'>";
-  echo "<SELECT NAME='date' OnChange='chfiltre.submit()'>\n";
+  echo "<INPUT TYPE='hidden' NAME='nouv_lang_cible' VALUE='".$nouv_lang_cible."'>\n";
+  echo "<SELECT NAME='date' OnChange='chfiltre.submit()'>\n\n";
   reset($res_date);
   sort($res_date);
   echo "<OPTION VALUE='-'>"._TT('tradlang:item_date')."</OPTION>\n";
@@ -1123,27 +1123,27 @@ if ($etape == 'traduction')
 	    }
 	}
     }
-  echo "</SELECT>";
+  echo "</SELECT>\n";
   echo "&nbsp;&nbsp;&nbsp;";
-  echo "<INPUT TYPE='text' VALUE='".$filtre."' NAME='filtre' SIZE='15' OnChange='chfiltre.submit()'>";
+  echo "<INPUT TYPE='text' VALUE='".$filtre."' NAME='filtre' SIZE='15' OnChange='chfiltre.submit()'>\n";
   echo "&nbsp;"._TT('tradlang:dans')." : "; 
-  echo "<SELECT NAME='langue' OnChange='chfiltre.submit()'>\n";
-  echo "<OPTION STYLE=\"width: 150px\" VALUE='origine'";
+  echo "<SELECT NAME='langue' OnChange='chfiltre.submit()'>\n\n";
+  echo "<OPTION STYLE=\"width: 150px\" VALUE='origine'\n";
   if ($langue=='origine') echo "SELECTED";
   echo ">"._TT('tradlang:sel_langue_origine')."\n";
   echo "<OPTION VALUE='cible'";
   if ($langue=='cible') echo "SELECTED";
   echo ">"._TT('tradlang:sel_langue_cible')."\n";
   echo "</SELECT>\n";
-  echo "</td> </tr>";
+  echo "</td> </tr>\n";
   echo "</FORM>\n";
 
   echo "<FORM ACTION='".generer_url_ecrire("tradlang")."' NAME='returnable' METHOD='POST'>\n";
   echo "<tr bgcolor=#f0f0f0><td align=$left class=line>";
-  echo "<b>"._TT('tradlang:texte_type_operation')."</b>";
-  echo "</td><td align=$right class=line nowrap>";
-  echo "<b>"._TT('tradlang:texte_tout_selectionner')."</b>";
-  echo "<INPUT TYPE='checkbox' NAME='tout' ".($tout=='on'?CHECKED:'').">";
+  echo "<b>"._TT('tradlang:texte_type_operation')."</b>\n";
+  echo "</td><td align=$right class=line nowrap>\n";
+  echo "<b>"._TT('tradlang:texte_tout_selectionner')."</b>\n";
+  echo "<INPUT TYPE='checkbox' NAME='tout' ".($tout=='on'?CHECKED:'').">\n";
   echo "&nbsp;&nbsp;&nbsp;&nbsp;";
   echo "&nbsp;&nbsp;&nbsp;&nbsp;";
   echo "<SELECT NAME='affichage'>\n";
@@ -1160,13 +1160,13 @@ if ($etape == 'traduction')
 
   echo "<tr bgcolor=#f0f0f0><td align=$left class=line colspan=2>";
 
-  echo "<INPUT TYPE='hidden' NAME='operation' VALUE='popup'>";
+  echo "<INPUT TYPE='hidden' NAME='operation' VALUE='popup'>\n";
   echo "<INPUT TYPE='hidden' NAME='langue' VALUE='".$langue."'>\n";
   echo "<INPUT TYPE='hidden' NAME='filtre' VALUE='".$filtre."'>\n";
-  echo "<INPUT TYPE='hidden' NAME='date' VALUE='".$date."'>";
+  echo "<INPUT TYPE='hidden' NAME='date' VALUE='".$date."'>\n";
   echo "<INPUT TYPE='hidden' NAME='etape' VALUE='traduction_id'>\n";
   echo "<INPUT TYPE='hidden' NAME='module' VALUE='".$module."'>\n";
-  echo "<INPUT TYPE='hidden' NAME='spip_lang' VALUE='".$spip_lang."'>";
+  echo "<INPUT TYPE='hidden' NAME='spip_lang' VALUE='".$spip_lang."'>\n";
   echo "<INPUT TYPE='hidden' NAME='lang_orig' VALUE='".$lang_orig."'>\n";
   echo "<INPUT TYPE='hidden' NAME='lang_cible' VALUE='".$save_lang_cible."'>\n";
   echo "<INPUT TYPE='hidden' NAME='nouv_lang_cible' VALUE='".$nouv_lang_cible."'>\n";
@@ -1177,11 +1177,11 @@ if ($etape == 'traduction')
     echo $val;
   echo "</SELECT>\n";
   echo "</CENTER>\n";
-  echo "</td></tr>";
+  echo "</td></tr>\n";
 
-  echo "<tr><td align=$right colspan=2>";
+  echo "<tr><td align=$right colspan=2>\n";
   echo "<INPUT TYPE='submit' NAME='Valider' VALUE=' >>> ' >\n";
-  echo "</td></tr>";
+  echo "</td></tr>\n";
   echo "</FORM>\n";
 
   fin_cadre_relief();
@@ -1216,28 +1216,28 @@ if ($etape == 'traduction_id')
       $titre_table = "<B>"._TT('tradlang:texte_saisie_informations')."</B><br>&nbsp;\n";
       debut_table($titre_table);
 
-      echo "<td colspan=2 align=$left class=line>";
+      echo "<td colspan=2 align=$left class=line>\n";
 
-      echo "<table cellspacing=0 cellpadding=0 border=0>";
+      echo "<table cellspacing=0 cellpadding=0 border=0>\n";
 
-      echo "<tr>";
+      echo "<tr>\n";
      
-      echo "<td width=8>&nbsp;</td>";
+      echo "<td width=8>&nbsp;</td>\n";
 
-      echo "<td width=32 class=window onMouseOver=\"this.style.backgroundColor='#eeee87'\"  onMouseOut=\"this.style.backgroundColor=''\">";
-      echo "<input ALT=\"Chercher\" title=\""._TT('tradlang:lien_chercher')."\" type=\"image\" value=\"Chercher\" HSPACE=0 border=0 src=\"./images/find.gif\" name=\"chercher\" OnClick=\"ouvrirfen(700,500,'./trad_lang.php?spip_lang=$spip_lang&etape=chercher&lang_orig=$lang_orig&lang_cible=$save_lang_cible');return false;\">";   
-      echo "</td>";
-      echo "<td width=30>&nbsp;</td>";
+      echo "<td width=32 class=window onMouseOver=\"this.style.backgroundColor='#eeee87'\"  onMouseOut=\"this.style.backgroundColor=''\">\n";
+      echo "<input ALT=\"Chercher\" title=\""._TT('tradlang:lien_chercher')."\" type=\"image\" value=\"Chercher\" HSPACE=0 border=0 src=\"./images/find.gif\" name=\"chercher\" OnClick=\"ouvrirfen(700,500,'./trad_lang.php?spip_lang=$spip_lang&etape=chercher&lang_orig=$lang_orig&lang_cible=$save_lang_cible');return false;\">\n";   
+      echo "</td>\n";
+      echo "<td width=30>&nbsp;</td>\n";
 
-      echo "<td>";
+      echo "<td>\n";
       $dollar = "$"; $circ = "^";
-      echo _TT('tradlang:texte_saisie_informations2', array('circ'=>$circ))."<br>";
+      echo _TT('tradlang:texte_saisie_informations2', array('circ'=>$circ))."<br>\n";
       echo _TT('tradlang:texte_saisie_informations3', array('dollar'=>$dollar));
-      echo "</td>";
+      echo "</td>\n";
 
-      echo "</tr></table>";
+      echo "</tr></table>\n";
       
-      echo "</td>";
+      echo "</td>\n";
 
     }
   else
@@ -1270,15 +1270,15 @@ if ($etape == 'traduction_id')
 
   if ($affichage=='modification')
     {
-      echo "<tr>";
-      echo "<td align=$left class=line>";
+      echo "<tr>\n";
+      echo "<td align=$left class=line>\n";
       echo "<b>".$lang_orig_aff."</b>\n";
       echo "</td>\n";
 
-      echo "<td align=$left class=line>";
+      echo "<td align=$left class=line>\n";
       echo "<b>".$lang_cible_aff."</b>\n";
-      echo "</td>";
-      echo "</tr>";
+      echo "</td>\n";
+      echo "</tr>\n";
     }
     
   if (!is_array($id))
@@ -1286,10 +1286,10 @@ if ($etape == 'traduction_id')
 
   if ((count($id) == 0) && ($tout!="on"))
     {
-      echo "<tr bgcolor=#f0f0f0>";
-      echo "<td colspan='2' class=line_pres align=center>";
-      echo "<b><p>"._TT('tradlang:texte_pas_de_reponse')."</b></td>";
-      echo "</tr>";
+      echo "<tr bgcolor=#f0f0f0>\n";
+      echo "<td colspan='2' class=line_pres align=center>\n";
+      echo "<b><p>"._TT('tradlang:texte_pas_de_reponse')."</b></td>\n";
+      echo "</tr>\n";
     }
   else
     {
@@ -1300,71 +1300,71 @@ if ($etape == 'traduction_id')
 	  if ((count($id)>0) && (!in_array($cle, $id)) && ($tout!="on"))
 	    continue;
 
-	  echo "<INPUT TYPE='hidden' VALUE='".$cle."' NAME='id[]'>";
+	  echo "<INPUT TYPE='hidden' VALUE='".$cle."' NAME='id[]'>\n";
 	  if ($affichage=='modification')
 	    {
-	      echo "<tr bgcolor=#f0f0f0>";
+	      echo "<tr bgcolor=#f0f0f0>\n";
 
-	      echo "<td align=$left class=line>";
+	      echo "<td align=$left class=line>\n";
 	      echo "<b>".$cle."</b>&nbsp;&nbsp;";
 
-	      echo "<input ALT=\""._TT('tradlang:lien_commentaire')."\" title=\""._TT('tradlang:lien_commentaire')."\" type=\"image\" value=\"Commenter\" HSPACE=0 border=0 src=\"./images/comment.gif\" name=\"commenter\" OnClick=\"ouvrirfen(300,180,'./trad_lang.php?spip_lang=$spip_lang&etape=commenter&lang_orig=$lang_orig&id=$cle&nommodule=$nom_mod');return false;\">";
+	      echo "<input ALT=\""._TT('tradlang:lien_commentaire')."\" title=\""._TT('tradlang:lien_commentaire')."\" type=\"image\" value=\"Commenter\" HSPACE=0 border=0 src=\"./images/comment.gif\" name=\"commenter\" OnClick=\"ouvrirfen(300,180,'./trad_lang.php?spip_lang=$spip_lang&etape=commenter&lang_orig=$lang_orig&id=$cle&nommodule=$nom_mod');return false;\">\n";
 	      echo "&nbsp;".get_comment($cle, $lang_orig, $nom_mod);
 
-	      echo "</td><td>";
+	      echo "</td><td>\n";
 
-	      echo "<input ALT=\""._TT('tradlang:lien_commentaire')."\" title=\""._TT('tradlang:lien_commentaire')."\" type=\"image\" value=\"Commenter\" HSPACE=0 border=0 src=\"./images/comment.gif\" name=\"commenter\" OnClick=\"ouvrirfen(300,180,'./trad_lang.php?spip_lang=$spip_lang&etape=commenter&affmodif=oui&lang_orig=$lang_cible&id=$cle&nommodule=$nom_mod');return false;\">";
+	      echo "<input ALT=\""._TT('tradlang:lien_commentaire')."\" title=\""._TT('tradlang:lien_commentaire')."\" type=\"image\" value=\"Commenter\" HSPACE=0 border=0 src=\"./images/comment.gif\" name=\"commenter\" OnClick=\"ouvrirfen(300,180,'./trad_lang.php?spip_lang=$spip_lang&etape=commenter&affmodif=oui&lang_orig=$lang_cible&id=$cle&nommodule=$nom_mod');return false;\">\n";
 	      echo "&nbsp;".get_comment($cle, $lang_orig, $nom_cible);
 
-	      echo "</td>";
-	      echo "<tr bgcolor=#f0f0f0>";
+	      echo "</td>\n";
+	      echo "<tr bgcolor=#f0f0f0>\n";
 	    }
 	  else
 	    {
-	      echo "<tr>";
-	      echo "<td align=$left width=20% class=line_aff>";
+	      echo "<tr>\n";
+	      echo "<td align=$left width=20% class=line_aff>\n";
 	      $val_aff = $cle;
 	      if (strlen($val_aff)>=21)
 		$val_aff = substr($val_aff, 0, 20)."...";
-	      echo $val_aff."</td>";
+	      echo $val_aff."</td>\n";
 	    }
 	  
 	  $nb_row = 0;
 	  if ($affichage=='modification')
 	    {
-	      echo "<td align=$left class=line width=50%>";
+	      echo "<td align=$left class=line width=50%>\n";
 	      $item = affiche_modif($val["orig"]);
 	      $nb_row = calc_nb_row($item);
 	      echo "<TEXTAREA STYLE='width:100%' ROWS='".$nb_row."' COLS='45' WRAP='soft' NAME='val_orig[]' dir='".get_dir($lang_orig)."'>".
 		$item."</TEXTAREA>\n";
-	      echo "</td>";
+	      echo "</td>\n";
 	    }
 	  else
 	    {
 	      if ($affichage=='consultation_html')
-		echo "<td class=line_aff>".$val["orig"]."</td>";
+		echo "<td class=line_aff>".$val["orig"]."</td>\n";
 	      else
-		echo "<td class=line_aff>".affiche_consult($val["orig"])."</td>";
+		echo "<td class=line_aff>".affiche_consult($val["orig"])."</td>\n";
 	    }
 	  
 	  if ($affichage=='modification')
 	    {
-	      echo "<td align=$left class=line width=50%>";
+	      echo "<td align=$left class=line width=50%>\n";
 	      $item = affiche_modif($val["cible"]);
 	      echo "<TEXTAREA STYLE='width:100%' ROWS='".$nb_row."' COLS='45' WRAP='soft' NAME='val_cible[".$idx."]' dir='".get_dir($lang_cible)."'>".
 		$item."</TEXTAREA>\n";	      	      
 	      echo "<INPUT TYPE='hidden' NAME='chk_cible[".$idx."]' VALUE='".md5($val["cible"])."'>";
-	      echo "</td>";
+	      echo "</td>\n";
 	    }
 	  else
 	    {
 	      if ($affichage=='consultation_html')
-		echo "<td class=line_aff>".$val["cible"]."</td>";
+		echo "<td class=line_aff>".$val["cible"]."</td>\n";
 	      else
 		echo "<td class=line_aff>".affiche_consult($val["cible"])."</td>\n";	
 	    }
 	  
-	  echo "</tr>\n";
+	  echo "</tr>\n\n";
 	  
 	  $idx ++;
 	}
@@ -1372,16 +1372,16 @@ if ($etape == 'traduction_id')
  
   if ($affichage=='modification')
     {
-      echo "<tr><td colspan=2 align=$right>";
+      echo "<tr><td colspan=2 align=$right>\n";
       echo "<INPUT TYPE='submit' NAME='annuler' VALUE='"._TT('tradlang:bouton_annuler')."'>\n";
       echo "&nbsp;&nbsp;&nbsp;<INPUT TYPE='submit' NAME='Valider' VALUE='"._TT('tradlang:bouton_valider')."'>\n";
-      echo "</td></tr>";
+      echo "</td></tr>\n";
     }
   else
     {
-      echo "<tr><td colspan=3 align=center>";
+      echo "<tr><td colspan=3 align=center>\n";
       echo "<INPUT TYPE='submit' NAME='annuler' VALUE='"._TT('tradlang:bouton_annuler')."'>\n";
-      echo "</td></tr>";
+      echo "</td></tr>\n";
     }
 
   echo "</FORM>\n";
@@ -1389,7 +1389,7 @@ if ($etape == 'traduction_id')
   if ($affichage=='modification')
     echo fin_table();
   else
-    echo "</table>";
+    echo "</table>\n";
 
   fin_html_ts();
   exit;
