@@ -22,7 +22,7 @@ function inc_autoriser_modifs_dist($type, $champ, $id) {
         case 'breve':
             $s = spip_query("SELECT id_rubrique FROM spip_breves WHERE id_breve=$id");
             $t = spip_fetch_array($s);
-            return acces_article($t['id_rubrique']);
+            return acces_rubrique($t['id_rubrique']);
 
         default:
             echo "pas implemente";

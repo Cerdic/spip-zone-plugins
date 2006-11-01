@@ -62,16 +62,20 @@ function action_widgets_html_dist() {
 
     header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
 
-    $autoriser_modifs= charger_fonction('autoriser_modifs', 'inc');
     $return = array('$erreur'=>'');
+
+    // cf. action/widgets_store
+    define('_PREG_WIDGET', ',widget\b[^<>\'"]+\b((\w+)-(\w+)-(\d+))\b,');
 
     // Est-ce qu'on a recu des donnees ?
     if (isset($_POST['widgets'])) {
-        require_once include_spip('action/widgets_store', false);
+        include_spip('action/widgets_store');
+        $return = traiter_les_widgets();
     } else {
         // CONTROLEUR
         // sinon on affiche le formulaire demande
-        require_once include_spip('inc/widgets', false);
+        include_spip('inc/widgets');
+        $return = affiche_controleur($_GET['class']);
     }
     echo var2js($return);
     exit;

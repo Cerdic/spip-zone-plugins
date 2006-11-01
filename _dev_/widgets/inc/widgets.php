@@ -1,7 +1,10 @@
 <?php
-if (preg_match(_PREG_WIDGET, $_GET['class'], $regs)) {
+
+function affiche_controleur($class) {
+  if (preg_match(_PREG_WIDGET, $class, $regs)) {
     list(,$widget,$type,$champ,$id) = $regs;
-    if (!$autoriser_modifs($type, $champ, $id)) {
+    include_spip('inc/autoriser');
+    if (!autoriser('modifier',$type, $id, NULL, array('champ'=>$champ))) {
         $return['$erreur'] = "$type $id: " . _T('widgets:non_autorise');
     } else {
         $f = charger_fonction($type.'_'.$champ, 'controleurs', true)
@@ -14,8 +17,10 @@ if (preg_match(_PREG_WIDGET, $_GET['class'], $regs)) {
             $return['$html'] = $html;
         }
     }
-} else {
+  } else {
     $return['$erreur'] = _T('widgets:donnees_mal_formatees');
+  }
+  return $return;
 }
 
 function controleur_dist($regs) {

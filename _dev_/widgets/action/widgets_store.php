@@ -1,4 +1,5 @@
 <?php
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function verif_secu($w, $secu) {
@@ -45,16 +46,20 @@ function post_widgets() {
     return $results;
 }
 
+
+function traiter_les_widgets() {
 $modifs = post_widgets();
 $anamod = $anaupd = array();  # TODO: expliciter les noms de variables
 if (!is_array($modifs)) {
     $return['$erreur'] = _T('widgets:donnees_mal_formatees');
 } else {
+    include_spip('inc/autoriser');
+
     foreach($modifs as $m) {
         if ($m[2] && preg_match(_PREG_WIDGET, 'widget '.$m[0], $regs)) {
             list(,$widget,$type,$champ,$id) = $regs;
             $wid = $m[3];
-            if (!$autoriser_modifs($type, $champ, $id)) {
+            if (!autoriser('modifier', $type, $id, NULL, array('champ'=>$champ))) {
                 $return['$erreur'] =
                     "$type $id: " . _T('widgets:non_autorise');
                 break;
@@ -162,5 +167,8 @@ foreach($anamod as $m) {
             $return[$wid] = typo($valeur);
         }
     }
+}
+
+return $return;
 }
 ?>
