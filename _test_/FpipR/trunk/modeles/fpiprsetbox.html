@@ -1,11 +1,7 @@
 [(#REM)
 Necessite le plugin splikrbox et d'etre inclus dans un squelette avec la balise #INSERT_HEAD
-]<div style="position:relative;">
-
-<div id="changeMe" style="position:absolute;left:0px;top:0px;width:70px;height:70px;">   
-</div>
-
-			<B_flickr>
+]			<B_flickr>
+  <div style="position:relative;" class="splikrbox">
 			<table cellpadding="0" cellspacing="0" style="margin:0;padding:0;"><tr style="margin:0;padding:0;">
 			<BOUCLE_flickr(FLICKR_PHOTOSETS_GETPHOTOS){id_photoset=#ENV{id}}{0,12}>
 			<td class="image" style="margin:0;padding:0;">
@@ -16,10 +12,7 @@ Necessite le plugin splikrbox et d'etre inclus dans un squelette avec la balise 
 			[(#COMPTEUR_BOUCLE|alterner{'','',</tr><tr style="margin:0;padding:0;">})]
 			</BOUCLE_flickr>
 			</tr></table>
+<div id="changeMe" style="position:absolute;left:0px;top:0px;width:70px;height:70px;">   
+</div>
+</div>
 			</B_flickr>
-<!--
-<div id="statusContainer" class="statusContainer">
-  <span class="statusMsg" id="statusMsg">x</span>
-</div>
-//-->
-</div>
