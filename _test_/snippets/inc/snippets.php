@@ -30,24 +30,24 @@ function snippets_liste_imports($table){
 	return $snippets;
 }
 
-function boite_snippets($table,$id,$retour = ""){
+function boite_snippets($table,$id,$contexte="",$retour = ""){
 	if (!strlen($retour))
 		$retour = _DIR_RESTREINT_ABS . self();
 	$out = debut_boite_info(true);
 	
-	if (intval($id) AND snippets_fond_exporter($table)){
-		$action = generer_action_auteur('snippet_exporte',"$table-$id",$retour);
+	if (intval($id) AND $f = snippets_fond_exporter($table)){
+		$action = generer_action_auteur('snippet_exporte',"$table:$id",$retour);
 		$out .= "<a href='$action' title='"._T('snippets:exporte')."'>"._T('snippets:exporte')."</a><hr/>";
 	}
 	
 	$liste = snippets_liste_imports($table);
 	foreach($liste as $snippet){
 		if (!_DIR_RESTREINT) $snippet = substr($snippet,strlen(_DIR_RACINE));
-		$action = generer_action_auteur('snippet_importe',"$table-$id-$snippet",$retour);
+		$action = generer_action_auteur('snippet_importe',"$table:$id:$contexte:$snippet",$retour);
 		$out .= "<a href='$action' title='"._T('snippets:importe')."'>".basename($snippet)."</a><br/>";
 	}
 
-	$action = generer_action_auteur('snippet_importe',"$table-$id",$retour);
+	$action = generer_action_auteur('snippet_importe',"$table:$id",$retour);
 	$out .= "<form action='$action' method='POST' enctype='multipart/form-data'>";
 	$out .= form_hidden($action);
 	$out .= "<strong><label for='file_name'>"._T("snippets:importer_fichier")."</label></strong> ";

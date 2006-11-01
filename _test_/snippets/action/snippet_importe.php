@@ -14,7 +14,7 @@ include_spip('inc/snippets');
 function action_snippet_importe(){
 	global $auteur_session;
 	$arg = _request('arg');
-	$args = explode("-",$arg);
+	$args = explode(":",$arg);
 	$hash = _request('hash');
 	$id_auteur = $auteur_session['id_auteur'];
 	$redirect = _request('redirect');
@@ -23,7 +23,8 @@ function action_snippet_importe(){
 	if (verifier_action_auteur("snippet_importe-$arg",$hash,$id_auteur)==TRUE) {
 		$table = $args[0];
 		$id = $args[1];
-		$source = substr($arg,strlen("$table-$id-"));
+		$contexte = $args[2];
+		$source = isset($args[3])?$args[3]:"";
 		$unlink = false;
 		if (!strlen($source)){
 			if (($val = $_FILES['snippet_xml']) AND (isset($val['tmp_name']))) {
@@ -33,8 +34,11 @@ function action_snippet_importe(){
 		}
 		if (($id==$table OR ($id=intval($id))) AND strlen($source)){
 			$f = snippets_fonction_importer($table);
-			if ($f)
-				$f($id,$source);
+			if ($f){
+				include_spip('inc/xml');
+				$arbre = spip_xml_load($source, false);
+				$f($id,$arbre,$contexte);
+			}
 		}
 		if ($unlink)
 			@unlink($source);

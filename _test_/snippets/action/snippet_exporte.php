@@ -14,7 +14,7 @@ include_spip('inc/snippets');
 function action_snippet_exporte(){
 	global $auteur_session;
 	$arg = _request('arg');
-	$args = explode("-",$arg);
+	$args = explode(":",$arg);
 	$hash = _request('hash');
 	$id_auteur = $auteur_session['id_auteur'];
 	$redirect = _request('redirect');
