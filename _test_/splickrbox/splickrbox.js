@@ -1,130 +1,133 @@
 /* Splickerbox - Code javascript
-*
-* Badge à la flickr, par BoOz booz AT rezo.net
-*
-* Fonctionne avec jQuery.
-**/
+ *
+ * Badge à la flickr, par BoOz booz AT rezo.net
+ *
+ * Fonctionne avec jQuery.
+ **/
+
+function getObjectMethodClosure(object, method) {
+	return function(arg) {
+		return object[method](arg); 
+	}
+}	
 
 
-/*
- * //parametrage */
-
-//exemple 
-
-// cote = 70px -> 35px
-// cote = 100px -> 50px
-// cote = 124px -> 62px
-
-var cote = 100 ;
-
-/*
-********/
-
-
-
-
-var petit_cote = cote/2 ;
 
 $(document).ready(function(){
+		$(".splickrbox").splicker();
+	});
 
-max = $("td.image img").size();
-cptj =0;
 
-//il faudrait essayer ce plugin .pause()
-// http://www.mythin.net/pause.js
 
-if(max>0){
-start();
+jQuery.fn.splicker = function() {
+	return this.each(function() {
+			var img_cnt = $(this).find('img').size();
+			if(img_cnt > 0) {
+				var size = $(this).find('img').css('width').replace('px',"");
+				var box = new jQuery.SplickerBox(this,img_cnt,$(this).find('.changeMe'),size);
+			}
+		});
 }
 
-});
-
-
-function start(){
-setTimeout('$("td.image img").splicker('+cptj+');',1000);
+jQuery.SplickerBox = function(e,m,changeMe,s) {
+	this.elt = e;
+	this.max = m;
+	this.c = changeMe;
+	this.cptj = 0;
+	this.left = this.top=0;
+	if(s == 0)
+		this.cote = 35;
+	else
+		this.cote = s;
+	this.init()
 }
 
 
-$.fn.splicker = function(i) {
-$("div#changeMe").css("width", cote + "px");
-$("div#changeMe").css("height", cote + "px");
-//alert($("div#changeMe").css("width"));
+jQuery.SplickerBox.prototype = {
+	itere: function() {
+		this.cptj = Math.round(Math.random()*this.max) % this.max;
+		$("#statusMsg").html("it"+this.cptj+"=?"+this.max);
+	},
+	init: function() {
+		$(this.elt).find('img').css({width:(this.cote/2) + "px",height:(this.cote/2) + "px", height: (this.cote/2) + "px",border:0});
+		$(this.c).css({width: this.cote + "px",height: this.cote + "px"});
+		this.start();
+	},
+	
+	start: function() {
+		setTimeout(getObjectMethodClosure(this,'doyourstuff'),(Math.random()*2)*1000);
+	},
 
-image = this.get(i).cloneNode(true) ;
-image.style.width="100%";
-image.style.height="100%";
+	postpone: function() {
+		this.itere();		
+		$(this.c).empty();
+		this.start();
+	},
 
-href = this.get(i).parentNode.href;
+	doyourstuff: function() {
 
-$("div#changeMe").append(image);
+		var or = $(this.elt).find('img').get(this.cptj);
+		var image = or.cloneNode(true);
+		image.style.width="100%";
+		image.style.height="100%";
 
-$("div#changeMe img").css("cursor","pointer").click(function(){
-	//thickbox
-	if(typeof imageArray != 'undefined'){
-	TB_on();
-	TB_show('',href,'image');
-	}else{
-	window.document.location = href ;
+		var href = or.parentNode.href;
+
+		$(image).css("cursor","pointer").click(function(){
+				//thickbox
+				if(typeof imageArray != 'undefined'){
+					TB_on();
+					TB_show('',href,'image');
+				}else{
+					window.document.location = href ;
+				}
+			});
+		
+		$(this.c).css('width',this.cote);
+		$(this.c).css('height',this.cote);
+		$(this.c).append(image);
+
+		if(this.cptj%3 == 0){
+			$(this.c).css("left","0px");
+			this.left="0";
+		}
+		if(this.cptj%3 == 1){
+			$(this.c).css("left", (this.cote/2) + "px");
+			this.left= this.cote/2 ;
+		}
+		if(this.cptj%3 == 2){
+			$(this.c).css("left", (this.cote/2) + "px");
+			this.left= this.cote ;
+		}
+		
+		if(this.cptj>=0 && this.cptj<=2){
+			$(this.c).css("top","0px");
+			this.top="0";
+		}
+		if(this.cptj>=3 && this.cptj<=5){
+			$(this.c).css("top","0px");
+			this.top=this.cote/2;
+		}
+		if(this.cptj>=6 && this.cptj<=8){
+			$(this.c).css("top",this.cote + "px");
+			this.top=this.cote;
+		}
+		if(this.cptj >=9 && this.cptj<=11){
+			$(this.c).css("top", this.cote + "px");
+			this.top= 3*(this.cote/2) ;
+		}
+		
+		$(this.c).fadeIn(2000);		
+
+
+		setTimeout(getObjectMethodClosure(this,'resize'),4000);
+
+		setTimeout(getObjectMethodClosure(this,'postpone'),7000);
+
+	},
+	resize: function() {
+		var t = new Number(this.top);
+		var l = new Number(this.left);
+		jQuery(this.c).animate({top:t,left:l,width:0,height:0},1500);
 	}
-
-});
-
-
-if(i%3 == 0){
-$("div#changeMe").css("left","0px");
-left1="0";
 }
-if(i%3 == 1){
-$("div#changeMe").css("left", petit_cote + "px");
-left1= petit_cote ;
-}
-if(i%3 == 2){
-$("div#changeMe").css("left", petit_cote + "px");
-left1= 2*petit_cote ;
-}
-
-if(i>=0 && i<=2){
-$("div#changeMe").css("top","0px");
-top1="0";
-}
-if(i>=3 && i<=5){
-$("div#changeMe").css("top","0px");
-top1=petit_cote;
-}
-if(i>=6 && i<=8){
-$("div#changeMe").css("top",2*petit_cote + "px");
-top1=2*petit_cote;
-}
-if(i>=9 && i<=11){
-$("div#changeMe").css("top", 2*petit_cote + "px");
-top1= 3*petit_cote ;
-}
-
-top0 = $("div#changeMe").get(0).style.top;
-left0 = $("div#changeMe").get(0).style.left;
-top0 = top0.replace(/px/,"");
-left0 = left0.replace(/px/,"");
-
-$("#statusMsg").html(top0+'->'+left0);
-
-$("div#changeMe").fadeIn(2000);
-
-setTimeout('$("div#changeMe").resize_(1500,'+petit_cote+','+top0+','+top1+','+left0+','+left1+');',4000);
-
-setTimeout('itere();$("div#changeMe img").remove();start()',7000);
-
-}
-
-
-jQuery.fn.resize_ = function(a,w,t0,t1,l0,l1,o) {
-o = jQuery.speed(a,o);
-return this.each(function(){
-jQuery(this).animate({top:t1,left:l1,width:w,height:w},o);
-});
-};
-
-
-function itere () {
-if(cptj == max-1){ cptj=0 ;}else{ cptj++ ;}	
-$("#statusMsg").html("it"+cptj+"=?"+max);
-};
