@@ -315,6 +315,27 @@ $GLOBALS['table_des_tables']['flickr_contacts_getlist'] = 'fpipr_people';
 $GLOBALS['table_des_tables']['flickr_urls_lookupuser'] = 'fpipr_people';
 
 //======================================================================
+//EXIF
+
+$GLOBALS['FpipR_versions']['spip_fpipr_exif'] = '0.2';
+$GLOBALS['FpipR_tables']['spip_fpipr_exif_field'] = array(
+														  'id_photo' => 'bigint(21) NOT NULL',
+														  'secret' => 'varchar(100)',
+														  'server' => 'int NOT NULL',
+														  'tagspace' => 'varchar(50)',
+														  'tagspaceid' => 'int',
+														  'tag' => 'int',
+														  'label' => "text DEFAULT ''",
+														  'raw' => "text DEFAULT ''",
+														  'clean' => "text DEFAULT ''",
+														  );
+$GLOBALS['FpipR_tables']['spip_fpipr_exif_key'] = array("PRIMARY KEY" => "tagspaceid",
+														"PRIMARY KEY" => "tag");
+$GLOBALS['tables_principales']['spip_fpipr_exif'] =
+  array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_exif_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_exif_key']);
+$GLOBALS['table_des_tables']['flickr_photos_getexif'] = 'fpipr_exif';
+
+//======================================================================
 
 function FpipR_creer_tables($method){
   $fct = str_replace('.','_',$method);
@@ -1036,6 +1057,44 @@ function FpipR_flickr_tags_gethotlist_dist($arguments) {
   }									 
 }
 
+//======================================================================
+/*
+<photo id="4424" secret="06b8e43bc7" server="2">
+	<exif tagspace="TIFF" tagspaceid="1" tag="271" label="Manufacturer">
+		<raw>Canon</raw>
+	</exif>
+	<exif tagspace="EXIF" tagspaceid="0" tag="33437" label="Aperture">
+		<raw>90/10</raw>
+		<clean>f/9</clean>
+	</exif>
+	<exif tagspace="GPS" tagspaceid="3" tag="4" label="Longitude">
+		<raw>64/1, 42/1, 4414/100</raw>
+		<clean>64° 42' 44.14"</clean>
+	</exif>
+</photo>
+*/
+function FpipR_create_flickr_photos_getexif_dist() {
+  FpipR_make_table('spip_fpipr_exif');
+}
+
+function FpipR_flickr_photos_getexif_dist($arguments) {
+  include_spip('inc/flickr_api');
+  $photo = flickr_photos_getExif($arguments['id_photo'],$arguments['secret'],$arguments['auth_token']);
+
+  $query = "DELETE FROM spip_fpipr_exif";
+  spip_query($query);
+  if($photo = $photo['photo']) {
+	$id = _q($photo['id']);
+	$secret = _q($photo['secret']);
+	$server = _q($photo['server']);
+	foreach($photo['exif'] as $e) {
+	  spip_abstract_insert('spip_fpipr_exif',
+						   '(id_photo,secret,server,tagspace,tagspaceid,tag,label,raw,clean)',
+						   '('.$id.','.$secret.','.$server.','._q($e['tagspace']).','._q($e['tagspaceid']).','._q($e['tag']).','._q($e['label']).','._q($e['raw']['_content']).','._q($e['clean']['_content']).')'
+						   );
+	}
+  }
+}
 
 //======================================================================
 ?>

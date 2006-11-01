@@ -7,11 +7,16 @@ BOUCLE Flickr
 </title>
 </head>
 
-<hr/>
+<BOUCLE_auteurs(AUTEURS) {flickr_nsid!=''}{"<hr/>"}>
+#NOM
+<BOUCLE_search(FLICKR_PHOTOS_SEARCH) {user_id=#FLICKR_NSID}{0,20} {"<br/>"}>
+#LOGO_PHOTO{s}
+<BOUCLE_exif(FLICKR_PHOTOS_GETEXIF) {id_photo} {"<br/>"}>
+#LABEL => [(#RAW|sinon{#CLEAN})]
+</BOUCLE_exif>
+</BOUCLE_search>
+</BOUCLE_auteurs>
 
-<BOUCLE_tags(FLICKR_TAGS_GETRELATED) {", "} {tag rome}>
-#SAFE
-</BOUCLE_tags>
 
 <hr/>
 

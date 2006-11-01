@@ -17,7 +17,6 @@ people
 photos
 
     * flickr.photos.getCounts
-    * flickr.photos.getExif
     * flickr.photos.getSizes
 
 photos.geo

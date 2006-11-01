@@ -926,7 +926,15 @@ function flickr_tags_getHotList($period,$count,$auth_token='') {
   return flickr_check_error(flickr_api_call('flickr.tags.getHotList',$params,$auth_token));
 }
 
+function flickr_photos_getExif($photo_id,$secret='',$auth_token='') {
+  $params = array();
+  if($photo_id) $params['photo_id'] = $photo_id;
+  else return false;
+  if($secret) $params['secret'] = $secret;
 
+  return flickr_check_error(flickr_api_call('flickr.photos.getExif',$params,$auth_token));
+
+}
 
 //======================================================================
 
