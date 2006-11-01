@@ -4,5 +4,6 @@
 	<prefix>AE2</prefix>
 	<description>Surcharge permettant aux r&eacute;dacteurs du site de mod&eacute;rer le forum public de leurs articles</description>
 	<lien></lien> <!-- URI de documentation -->
+	<options>options.php</options>
 	<etat>experimental</etat>
 </plugin>
