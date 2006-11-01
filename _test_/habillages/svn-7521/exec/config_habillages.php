@@ -268,7 +268,7 @@ EOF;
 	echo "</div>";
 	echo "</form>";
 	
-	echo "<a href='".generer_url_ecrire('admin_lang', 'module=habillages')."'>Modifier les textes</a><br /><br />";
+	//echo "<a href='".generer_url_ecrire('admin_lang', 'module=habillages')."'>Modifier les textes</a><br /><br />";
 	fin_page();
 
 }

@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Habillages du site
+	Habillages
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	Franck Ducas [Site personnel->http://franck.ducas.free.fr] pour la r&eacute;alisation et l'id&eacute;e originale.
@@ -12,16 +12,18 @@ _ Et tous les concepteurs et les conceptrices de squelettes, themes, et images (
 _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
-	0.5
+	1.0
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-	dev
+	test
 	</etat>
 	<options>
 	habillages_options.php
 	</options>
 	<description>
 Gestionnaire d'habillages SPIP.
+_ Pour la version compl&egrave; (avec les jeux de squelettes, les th&egrave;mes, les extras, et les icones), t&eacute;l&eacute;chargez-la [ici->http://spip.graphismes.free.fr/spip.php?article5].
+_ Ce plugin est compatible avec la version SPIP 1.9.2 alpha (7521 minimum) t&eacute;l&eacute;chargeable [ici->http://spip.graphismes.free.fr/spip.php?article5].
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
