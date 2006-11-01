@@ -73,7 +73,7 @@ function controleur_dist($regs) {
   {$widgetsCode}
   {$widgetsInput}
   <div class="widget-boutons">
-  <div style="position:absolute;">
+  <div>
     <a class="widget-submit" title="{$OK}">
       <img src="{$widgetsImgPath}/ok.png" width="20" height="20" />
     </a>

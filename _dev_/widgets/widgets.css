@@ -17,4 +17,18 @@ img.widget-edit {
     float: right;
     width: 75px;
 }
-
+.widget-boutons div {
+	position:absolute;
+}
+.widget-boutons a {
+	cursor: pointer;
+}
+.widget-icones {
+    float: right;
+}
+.widget-icones span {
+    position:absolute;
+}
+.widget-edit {
+	cursor: pointer;
+}
