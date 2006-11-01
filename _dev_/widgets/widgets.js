@@ -208,7 +208,7 @@ $(document).ready(function() {
   if (!configWidgets.droits) return;
   if (!jQuery.getJSON) return; // jquery >= 1.0.2
   url_widgets_html = 'spip.php?action=widgets_html';
-  SEARCHING = "<img class='widget-searching' src='" + configWidgets.imgPath + "/searching.gif' style='float:right;' />";
+  SEARCHING = "<img class='widget-searching' src='" + configWidgets.imgPath + "/searching.gif' />";
   ICONCLICK = "<span class='widget-icones'><span><img class='widget-edit' onclick='event.stopPropagation();$(this).parent().parent().parent().openwidget();' src='" + configWidgets.imgPath + "/crayon.png' title='" + configWidgets.txtEditer + "' /><img class='widget-img-changed' src='" + configWidgets.imgPath + "/changed.png' title='" + configWidgets.txtChanged + "' /></span></span>";
 
   // sortie, demander pour sauvegarde si oubli

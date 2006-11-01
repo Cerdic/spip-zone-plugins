@@ -13,8 +13,10 @@ img.widget-edit {
 .widget-autorise:hover, .widget-hover {
     background-color: #f0f0f0;
 }
-.widget-boutons {
+.widget-boutons, widget-searching {
     float: right;
+}
+.widget-boutons {
     width: 75px;
 }
 .widget-boutons div {
