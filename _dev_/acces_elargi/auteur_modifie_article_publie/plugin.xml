@@ -5,4 +5,5 @@
 	<description>Surcharge permettant aux r&eacute;dacteurs du site de modifier leurs articles apr&egrave;s leur publication</description>
 	<lien></lien> <!-- URI de documentation -->
 	<etat>experimental</etat>
+	<options>options.php</options>
 </plugin>
