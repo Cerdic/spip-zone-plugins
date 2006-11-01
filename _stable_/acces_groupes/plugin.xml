@@ -1,0 +1,44 @@
+<plugin>
+        <nom> <!-- Nom du plugin -->
+          Acc&egrave;s restreint par groupes
+        </nom>
+        <auteur>        <!-- Auteur du plugin -->
+          Coyote &amp; cy_altern _ 
+					merci à Cedric pour le concept initial du bridage de l'affichage des BOUCLES (plugin acces_restreint)
+        </auteur>
+        <version>
+          1.0
+        </version>
+        <etat>
+          stable
+        </etat>
+        <description>
+          Permet de g&eacute;rer l'acc&egrave;s restreint (parties publique et priv&eacute;e) &agrave; des rubriques 
+          en utilisant des groupes d'utilisateurs.<br />
+					Documentation : [->http://www.spip-contrib.net/Le-plugin-acces-restreint-par]<br /><br />
+					{{/!\ ATTENTION !}} <br />
+					- Ce plugin n'est {{PAS compatible}} avec le plugin {{acces_restreint}} ! Vous ne pouvez PAS utiliser les 2 simultanéments !<br />
+					- Si vous {{mettez &agrave; jour}} depuis une version 1.8* de SPIP qui utilisait la contrib {{"acc&egrave;s restreint par groupes"}} 
+					version 0.61 ou 0.7, vous {{DEVEZ}} proc&eacute;der &agrave; la mise &agrave; jour des tables de la base de donn&eacute;es
+					en utilisant le script [->../plugins/acces_groupes/maj_tables.php] {{AVANT}} d'activer ce plugin ! 
+					
+        </description>
+        <prefix>
+          accesgroupes
+        </prefix>
+				<!-- fichier charge a chaque hit -->
+      	<options> 
+      	  inc/accesgroupes_options.php
+      	</options>
+				<!-- fichier charge a chaque recalcul -->
+      	<fonctions> 
+      	   inc/accesgroupes_fonctions.php
+      	</fonctions>
+        <!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+        <pipeline>
+        		<nom>ajouter_boutons</nom>
+            <inclure>accesgroupes_pipelines.php</inclure>
+        </pipeline>
+</plugin>
+
+
