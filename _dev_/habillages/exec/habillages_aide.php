@@ -90,15 +90,18 @@ EOF;
 	echo "<br/><br/>";
 	
 	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_aide-48.png">';
-	gros_titre(_T('habillages:icone_habillages_icones'));
+	gros_titre(_T('habillages:aide_habillages_icones'));
 
 	barre_onglets("habillages", "");
 	
 	debut_gauche();
 	debut_boite_info();
+	echo "<div class='intro_grotitre'>";
+	echo gros_titre(_T('habillages:aide_infos_titre'))."</div><br />";
 	
-	habillages_menu_navigation();
-	
+	echo "<div class='intro'>";
+	echo _T('habillages:aide_infos')."<br />";
+	echo "</div>";
 	fin_boite_info();
 
 	debut_droite();
@@ -108,21 +111,28 @@ EOF;
 	global $couleur_foncee;
 	
 	debut_boite_info();
-	echo "<div style='background-color:$couleur_claire'>";
-	echo "<strong>"._T('habillages:aide_debutant_titre')."</strong><br />&nbsp;";
-	echo "</div>";
-	echo "- "._T('habillages:aide_debutant_un')."<br />";
-	echo "- "._T('habillages:aide_debutant_deux')."<br /><br />";
+	echo "<ul>";
+	echo "<li><a href='http://spip.graphismes.free.fr/spip.php?article14#INSTALLATION' target='_blank'>INSTALLATION</a></li>";
+	echo "<br />";
+	echo "<li><a href='http://spip.graphismes.free.fr/spip.php?article14#UTILISATION' target='_blank'>UTILISATION</a></li>";
+
+	echo "<li><a href='http://spip.graphismes.free.fr/spip.php?article14#Presentation-rapide-de-l-interface' target='_blank'> &nbsp;&nbsp;&nbsp;Pr&eacute;sentation rapide de l'interface</a></li>";
+	echo "<li><a href='http://spip.graphismes.free.fr/spip.php?article14#Avant-de-demarrer-choix-des' target='_blank'> &nbsp;&nbsp;&nbsp;Avant de d&eacute;marrer : choix des gestionnaires (facultatif)</a></li>";
+	echo "<li><a href='http://spip.graphismes.free.fr/spip.php?article14#Choisir-vos-squelettes' target='_blank'> &nbsp;&nbsp;&nbsp;Choisir vos squelettes</a></li>";
+	echo "<li><a href='http://spip.graphismes.free.fr/spip.php?article14#Choisir-vos-themes' target='_blank'> &nbsp;&nbsp;&nbsp;Choisir vos th&egrave;mes</a></li>";
+	echo "<li><a href='http://spip.graphismes.free.fr/spip.php?article14#Choisir-vos-extras' target='_blank'> &nbsp;&nbsp;&nbsp;Choisir vos extras</a></li>";
+
+	echo "<li><a href='http://spip.graphismes.free.fr/spip.php?article14#Choisir-les-icones-de-l-espace' target='_blank'> &nbsp;&nbsp;&nbsp;Choisir les ic&ocirc;nes de l'espace priv&eacute;</a></li>";
+	echo "<br />";
+	echo "<li><a href='http://spip.graphismes.free.fr/spip.php?article14#PERSONNALISATIONS' target='_blank'>PERSONNALISATIONS</a></li>";
+	echo "<li><a href='http://spip.graphismes.free.fr/spip.php?article14#Principes-generaux-et-communs-et' target='_blank'> &nbsp;&nbsp;&nbsp;Principes g&eacute;n&eacute;raux et communs et mises en garde</a></li>";
+	echo "<li><a href='http://spip.graphismes.free.fr/spip.php?article14#Personnaliser-vos-squelettes' target='_blank'> &nbsp;&nbsp;&nbsp;Personnaliser vos squelettes</a></li>";
+	echo "<li><a href='http://spip.graphismes.free.fr/spip.php?article14#Personnaliser-vos-themes' target='_blank'> &nbsp;&nbsp;&nbsp;Personnaliser vos th&egrave;mes</a></li>";
+
+	echo "<li><a href='http://spip.graphismes.free.fr/spip.php?article14#Personnaliser-vos-extras' target='_blank'> &nbsp;&nbsp;&nbsp;Personnaliser vos extras</a></li>";
+	echo "<li><a href='http://spip.graphismes.free.fr/spip.php?article14#Personnaliser-vos-icones' target='_blank'> &nbsp;&nbsp;&nbsp;Personnaliser vos ic&ocirc;nes</a></li>";
+	echo "</ul>";
 	fin_boite_info();
-	
-	debut_boite_info();
-	echo "<div style='background-color:$couleur_claire'>";
-	echo "<strong>"._T('habillages:aide_avance_titre')."</strong><br />&nbsp;";
-	echo "</div>";
-	echo "- "._T('habillages:aide_avance_un')."<br />";
-	echo "- "._T('habillages:aide_avance_deux')."<br />";
-	fin_boite_info();
-	echo _T('habillages:aide');
 
 	fin_page();
 

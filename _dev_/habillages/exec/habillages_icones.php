@@ -164,10 +164,14 @@ EOF;
     				echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
     				echo '<strong>'.$nom_theme.'</strong> version '.$theme_version;
     				echo "</td></tr>";
+    				echo "<tr>";
+					echo "<td colspan='2' class='cellule48' onmouseover='changestyle('bandeauaccueil', 'visibility', 'visible');'>";
+					echo "<a href='#'>";
+    				echo '<img src="'.$cc.'/capture.png" alt="" class="preview" />';
+    				echo "</a>";
+    				echo "</td></tr>";
 					echo "</table>";
-    				
-    				echo '<div style="float:right";><img src="'.$cc.'/capture.png" alt="" class="preview" /></div>';
-    				echo "<small>".propre($description_theme)."</small><br /><br /><hr>";
+       				echo "<small>".propre($description_theme)."</small><br /><br /><hr>";
 					echo "<div class='auteur'>".propre($auteur_theme)."</div><hr>";
 				 	fin_boite_info();
 
