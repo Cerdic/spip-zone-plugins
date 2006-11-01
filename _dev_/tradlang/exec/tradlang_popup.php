@@ -34,11 +34,35 @@ if ($connect_statut != "0minirezo")
 
 global $etape,$nom_mod,$module,$lang_cible,$lang_orig,$modules;
 
-$etape = $_GET["etape"];
-$nom_mod = $_GET["module"];
-$module = $_GET["module"];
-$lang_cible = $_GET["lang_cible"];
-$lang_orig = $_GET["lang_orig"];
+function tradlang_GETPOST($var)
+{
+  if (isset($_GET[$var]))
+    return $_GET[$var];
+  else if (isset($_POST[$var]))
+    return $_POST[$var];
+  return "";
+}
+
+$etape = tradlang_GETPOST("etape");
+$nom_mod = tradlang_GETPOST("module");
+$module = tradlang_GETPOST("module");
+$lang_cible = tradlang_GETPOST("lang_cible");
+$lang_orig = tradlang_GETPOST("lang_orig");
+
+$type = tradlang_GETPOST("type");
+$id = tradlang_GETPOST("id");
+$filtre = tradlang_GETPOST("filtre");
+$date = tradlang_GETPOST("date");
+$langue = tradlang_GETPOST("langue");
+$spip_lang = tradlang_GETPOST("spip_lang");
+$lang_orig = tradlang_GETPOST("lang_orig");
+$lang_cible = tradlang_GETPOST("lang_cible");
+$nouv_lang_cible = tradlang_GETPOST("nouv_lang_cible");
+
+$tout = tradlang_GETPOST("tout");
+$affichage = tradlang_GETPOST("affichage");
+$traduction_id = tradlang_GETPOST("traduction_id");
+$save_lang_cible = tradlang_GETPOST("save_lang_cible");
 
 $modules = tradlang_getmodules_base();
 
@@ -268,8 +292,8 @@ function get_idx_lang()
 //    3=fenetre administration)
 // $date_pos = reference sur une array qui contient au retour toutes
 //    les dates possibles
-function recherche($table_reponse, $type, $langue, $filtre, $date, $id, 
-   $cpt, $lgorig, $lgcible, $type_recherche, $date_pos)
+function recherche(&$table_reponse, $type, $langue, $filtre, $date, $id, 
+   &$cpt, &$lgorig, &$lgcible, $type_recherche, &$date_pos)
 {
   global $nom_mod, $lang_orig, $lang_suffix;
   global $lang_cible, $modules, $module;
@@ -277,14 +301,14 @@ function recherche($table_reponse, $type, $langue, $filtre, $date, $id,
   $lang_str_orig = array();
 
   $lang_str_orig = tradlang_lirelang($modules[$module], $lang_orig );
-  $lgorig = $lang_str_orig["0_langue"];
+  $lgorig = $lang_orig; //$lang_str_orig["0_langue"];
 
   if ($type_recherche != 3)
     { 
       $lang_str_cible = array();
       $lang_str_cible = tradlang_lirelang($modules[$module], $lang_cible);
 
-      $lgcible = $lang_str_cible["0_langue"];
+      $lgcible = $lang_cible; //$lang_str_cible["0_langue"];
       if (ereg("^<NEW>", $lgcible)) $lgcible = "nouveau [$lang_cible]";
     }
 
@@ -1018,52 +1042,17 @@ if ($etape == 'traduction')
   $table_traduct=array();
   $res_date = array();
 
-  recherche(&$table_traduct, $type, "eo", $filtre, $date, $id, &$cpt, 
-     &$lang_orig_aff, &$lang_cible_aff, 1, &$res_date);
+  recherche($table_traduct, $type, $langue, $filtre, $date, $id, $cpt, 
+     $lang_orig_aff, $lang_cible_aff, 1, $res_date);
 
-  $titre_table = _TT('tradlang:titre_traduction_de')."<b>".$lang_orig_aff."</b>"._TT('tradlang:lien_traduction_vers')."<b>".$lang_cible_aff."<br>"._TT('tradlang:lien_traduction_module')."(".$modules[$module]["nom"].")</b> \n";
+  $prt = sprintf("%.02f", $cpt);
+  $titre_table = _TT('tradlang:titre_traduction_de')."<b>".$lang_orig_aff."</b>"._TT('tradlang:lien_traduction_vers')."<b>".$lang_cible_aff." - "._TT('tradlang:lien_traduction_module')."(".$modules[$module]["nom_module"].")</b> - "._TT('tradlang:lien_proportion')."&nbsp;<font color=green><b>(".$prt." %)</b></font>\n";
   debut_cadre_relief("", false, "", $titre_table);
   
- echo "<tr><td align=$left colspan=2 class=line>\n";
-
-  echo "<table width=100% border=0 cellspacing=0 cellpadding=0>\n";
-
-  echo "<FORM ACTION=\"".generer_url_ecrire("tradlang")."&operation=popup&spip_lang=".$spip_lang."&langue=".$langue."&date=".$date."&filtre=".$filtre."&module=".$module."&etape=sauvegarde&type=".$type."&lang_orig=".$lang_orig."&lang_cible=".$save_lang_cible."&nouv_lang_cible=".$nouv_lang_cible.get_id_get($id)."\" METHOD=\"POST\" name=\"sauvegarder\">\n";
-
-  echo "<tr>\n";    
-
-  // bouton "sauvegarder" supprime
-  echo "<!--td width=32 class=window onMouseOver=\"this.style.backgroundColor='#eeee87'\"  onMouseOut=\"this.style.backgroundColor=''\">\n";
-  echo "<input ALT=\""._TT('tradlang:lien_sauvegarder')."\" title='"._TT('tradlang:lien_sauvegarder')."' type=\"image\" value=\"Sauver\" HSPACE=0 border=0 src=\"./images/sauve.gif\" name=\"sauver\">\n";   
-  echo "</td-->\n";
-
-  // sauvegarde locale supprimee (faite a chaque valider)
-  echo "<!--td width=8>&nbsp;</td>\n";
-  echo "<td width=32 class=window onMouseOver=\"this.style.backgroundColor='#eeee87'\"  onMouseOut=\"this.style.backgroundColor=''\">\n";
-  echo "<input ALT=\""._TT('tradlang:lien_export')."\" title=\""._TT('tradlang:lien_export')."\" type=\"image\" value=\"Exporter\" HSPACE=0 border=0 src=\"./images/save_loc.gif\" name=\"exporter\" OnClick=\"if (confirm('".addslashes(_TT('tradlang:lien_confirm_export', array('fichier'=>$fic_cible)))."')) exporter.submit(); else return false;\">\n";   
-  echo "</td-->\n";
-
-  echo "<td width=8>&nbsp;</td>\n";
-
-  echo "</form>\n";
-  echo "<FORM ACTION=\"".generer_url_ecrire("tradlang")."&operation=popup&spip_lang=".$spip_lang."&telech=1&langue=".$langue."&date=".$date."&filtre=".$filtre."&module=".$module."&etape=sauvegarde&type=".$type."&lang_orig=".$lang_orig."&lang_cible=".$save_lang_cible."&nouv_lang_cible=".$nouv_lang_cible.get_id_get($id)."\" METHOD=\"POST\" name=\"sauvegarder\">\n";
-
-  echo "<td width=32 class=window onMouseOver=\"this.style.backgroundColor='#eeee87'\"  onMouseOut=\"this.style.backgroundColor=''\">\n";
-  echo "<input ALT=\""._TT('tradlang:lien_export_net')."\" title=\""._TT('tradlang:lien_export_net')."\" type=\"image\" value=\"Exporter\" HSPACE=0 border=0 src=\"./images/save_net.gif\" name=\"exporter\" OnClick=\"exporter.submit();\">\n";   
-  echo "</td>\n";
-
-  echo "<td align=$right>\n";
-  $prt = sprintf("%.02f", $cpt);
-  echo _TT('tradlang:lien_proportion')."&nbsp;<font color=green><b>(".$prt." %)</b></font>\n";
-  echo "</td>\n";
-
-  echo "</tr> </FORM>\n";
-  echo "</table>\n";
-
-  echo "</td></tr>\n";
+  echo "<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=white>\n";
 
   echo "<FORM NAME='chtype' ACTION='".generer_url_ecrire("tradlang")."' METHOD='POST'>\n\n";
-  echo "<tr bgcolor=#f0f0f0> <td  align=$left class=line width=25%><b>"._TT('tradlang:type_messages')."</b>\n";
+  echo "<tr bgcolor=white> <td  align=$left class=line width=25%><b>"._TT('tradlang:type_messages')."</b>\n";
   echo "</td><td align=$right class=line  nowrap>\n";
   echo "<INPUT TYPE='hidden' NAME='operation' VALUE='popup'>\n";
   echo "<INPUT TYPE='hidden' NAME='etape' VALUE='traduction'>\n";
@@ -1090,7 +1079,7 @@ if ($etape == 'traduction')
   echo "</FORM>\n";
  
   echo "<FORM NAME='chfiltre' ACTION='".generer_url_ecrire("tradlang")."' METHOD='POST'>\n";
-  echo "<tr bgcolor=#f0f0f0><td align=$left class=line>\n";
+  echo "<tr bgcolor=white><td align=$left class=line>\n";
   echo "<b>"._TT('tradlang:texte_filtre')."</b>\n";
   echo "</td><td align=$right class=line nowrap>\n";
   echo "<INPUT TYPE='hidden' NAME='operation' VALUE='popup'>\n";
@@ -1139,7 +1128,7 @@ if ($etape == 'traduction')
   echo "</FORM>\n";
 
   echo "<FORM ACTION='".generer_url_ecrire("tradlang")."' NAME='returnable' METHOD='POST'>\n";
-  echo "<tr bgcolor=#f0f0f0><td align=$left class=line>";
+  echo "<tr bgcolor=white><td align=$left class=line>";
   echo "<b>"._TT('tradlang:texte_type_operation')."</b>\n";
   echo "</td><td align=$right class=line nowrap>\n";
   echo "<b>"._TT('tradlang:texte_tout_selectionner')."</b>\n";
@@ -1158,7 +1147,7 @@ if ($etape == 'traduction')
   echo ">"._TT('tradlang:texte_consulter_brut')."\n";
   echo "</SELECT></td></tr>\n";
 
-  echo "<tr bgcolor=#f0f0f0><td align=$left class=line colspan=2>";
+  echo "<tr bgcolor=white><td align=$left class=line colspan=2>";
 
   echo "<INPUT TYPE='hidden' NAME='operation' VALUE='popup'>\n";
   echo "<INPUT TYPE='hidden' NAME='langue' VALUE='".$langue."'>\n";
@@ -1251,8 +1240,8 @@ if ($etape == 'traduction_id')
   $cpt = 0.0;
   $table_ch=array();
   $res_date = array();
-  recherche(&$table_ch, $type, $langue, $filtre, $date, $id, &$cpt, 
-	    &$lang_orig_aff, &$lang_cible_aff, 2, &$res_date);
+  recherche($table_ch, $type, $langue, $filtre, $date, $id, $cpt, 
+	    $lang_orig_aff, $lang_cible_aff, 2, $res_date);
 
   echo "<FORM ACTION='trad_lang.php' NAME='returnable' METHOD='POST'>\n";
   echo "<INPUT TYPE='hidden' NAME='filtre' VALUE='".$filtre."'>\n";
