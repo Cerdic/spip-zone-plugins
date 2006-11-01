@@ -73,7 +73,7 @@ function Widgets_preparer_page($page, $droits) {
 <link rel="stylesheet" href="$cssFile" type="text/css" media="all" />
 <script src="{$jsFile}" type="text/javascript"></script>
 <script type="text/javascript">
-    var configWidgets = new configWidgets({
+    var configWidgets = new cfgWidgets({
         'droits':{$droits},
         'imgPath':'{$imgPath}',
         'txtEditer':'{$txtEditer}',

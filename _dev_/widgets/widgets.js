@@ -3,7 +3,7 @@
  */
 
 // le prototype configuration de Widgets
-function configWidgets(options)
+function cfgWidgets(options)
 {
     for (opt in options) {
         this[opt] = options[opt];
