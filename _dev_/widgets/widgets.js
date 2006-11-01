@@ -11,7 +11,10 @@ function configWidgets(options)
 }
 
 // ouvre un widget
-$.fn.openwidget = function() {
+$.fn.openwidget = function(evt) {
+  if (evt) {
+    evt.stopPropagation();
+  }
   return this
   .each(function(){
     // verifier que je suis un widget
@@ -185,8 +188,7 @@ $.fn.initwidget = function(){
     e.stopPropagation();
   })
   .dblclick(function(e){
-    e.stopPropagation();
-    $(this).openwidget();
+    $(this).openwidget(e);
   });
 
   // :hover pour MSIE
@@ -209,7 +211,7 @@ $(document).ready(function() {
   if (!jQuery.getJSON) return; // jquery >= 1.0.2
   url_widgets_html = 'spip.php?action=widgets_html';
   SEARCHING = "<img class='widget-searching' src='" + configWidgets.imgPath + "/searching.gif' />";
-  ICONCLICK = "<span class='widget-icones'><span><img class='widget-edit' onclick='event.stopPropagation();$(this).parent().parent().parent().openwidget();' src='" + configWidgets.imgPath + "/crayon.png' title='" + configWidgets.txtEditer + "' /><img class='widget-img-changed' src='" + configWidgets.imgPath + "/changed.png' title='" + configWidgets.txtChanged + "' /></span></span>";
+  ICONCLICK = "<span class='widget-icones'><span><img class='widget-edit' onclick='$(this).parent().parent().parent().openwidget(event);' src='" + configWidgets.imgPath + "/crayon.png' title='" + configWidgets.txtEditer + "' /><img class='widget-img-changed' src='" + configWidgets.imgPath + "/changed.png' title='" + configWidgets.txtChanged + "' /></span></span>";
 
   // sortie, demander pour sauvegarde si oubli
   $(window).unload(function(e) {
