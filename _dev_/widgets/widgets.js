@@ -5,9 +5,32 @@
 // le prototype configuration de Widgets
 function cfgWidgets(options)
 {
-    for (opt in options) {
-        this[opt] = options[opt];
-    }
+  this.url_widgets_html = 'spip.php?action=widgets_html';
+  this.img = {
+    'searching':'searching.gif',
+    'edit':'crayon.png',
+    'changed':'changed.png'
+  };
+  this.txt = {
+    'searching':'En attente du serveur ...',
+    'edit':'Editer',
+    'changed':'Deja modifie'
+  };
+  for (opt in options) {
+    this[opt] = options[opt];
+  }
+}
+cfgWidgets.prototype.mkimg = function(what) {
+  return '<img class="widget-' + what +
+    '" src="' + this.imgPath + '/' + this.img[what] +
+    '" title="' + this.txt[what] + '" />';
+}
+cfgWidgets.prototype.iconclick = function() {
+  return
+    "<span class='widget-icones'><span>" +
+      this.mkimg('edit') +
+      this.mkimg('changed') +
+    "</span></span>";
 }
 
 // ouvre un widget
@@ -31,9 +54,9 @@ $.fn.openwidget = function(evt) {
     // sinon charger le formulaire
     else {
       $(this)
-      .append(SEARCHING); // icone d'attente
+      .append(configWidgets.mkimg('searching')); // icone d'attente
       var me=this;
-      $.getJSON(url_widgets_html,
+      $.getJSON(configWidgets.url_widgets_html,
         {
           'w': $(this).width(),
           'h': $(this).height(),
@@ -121,7 +144,7 @@ $.fn.activatewidget = function() {
           .cancelwidget();
       }).onesubmit(function(){
         $(this)
-        .append(SEARCHING) // icone d'attente
+        .append(configWidgets.mkimg('searching')) // icone d'attente
         .find(".widget-boutons")
           .hide(); // boutons de validation
       }).keyup(function(){
@@ -182,7 +205,7 @@ $.fn.activatewidget = function() {
 // insere les icones dans l'element
 $.fn.iconewidget = function(){
   return this
-    .prepend(ICONCLICK)
+    .prepend(configWidgets.iconclick())
     .find('.widget-edit') // le crayon a clicker lui-meme
       .click(function(e){
         $(this).ancestors('.widget').openwidget(e);
@@ -219,9 +242,6 @@ $.fn.initwidget = function(){
 $(document).ready(function() {
   if (!configWidgets.droits) return;
   if (!jQuery.getJSON) return; // jquery >= 1.0.2
-  url_widgets_html = 'spip.php?action=widgets_html';
-  SEARCHING = "<img class='widget-searching' src='" + configWidgets.imgPath + "/searching.gif' />";
-  ICONCLICK = "<span class='widget-icones'><span><img class='widget-edit' src='" + configWidgets.imgPath + "/crayon.png' title='" + configWidgets.txtEditer + "' /><img class='widget-img-changed' src='" + configWidgets.imgPath + "/changed.png' title='" + configWidgets.txtChanged + "' /></span></span>";
 
   // sortie, demander pour sauvegarde si oubli
   $(window).unload(function(e) {
