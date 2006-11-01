@@ -130,23 +130,54 @@ function exec_convertisseur(){
         'url' => "\\1 (\\2)",       
       )      
   );
-  
+
+
+  $conv_formats['XPressTags'] = 'quark'; // function extract/
+  $conv_formats['Word'] = 'doc'; // function extract/
+  $conv_formats['RTF'] = 'rtf'; // function extract/
+  $conv_formats['PDF'] = 'pdf'; // function extract/
+
+
   // --------------------------------------------------------------------------- 
 	// Action ? 
 	// ---------------------------------------------------------------------------
 	if (isset($_POST['conv_in'])) {
 	   $conv_in = $_POST['conv_in'];
+	   
+	   // upload ?
+	   if ($_FILES) {
+	   	$file = array_pop($_FILES);
+	   	$fname = $file['tmp_name'];
+	   	if ($fname
+	   	AND lire_fichier($fname, $tmp))
+		   	$conv_in = $tmp;
+	   }
+
      if (isset($_POST['format'])) {
-        $conv_out = $_POST['conv_in'];
+        $conv_out = $conv_in;
         $format = trim(strip_tags($_POST['format']));        
-        if (isset($conv_formats[$format])) { 
+        if (is_array($conv_formats[$format])) {
           // on convertit (en avant les regex!)                   
           foreach($conv_formats[$format]['pattern'] as $key=>$pattern)  {
               $replacement = $conv_formats[$format]['replacement'][$key];              
               $conv_out = eregi_replace($pattern, $replacement, $conv_out);
           }                    
         } else {
-            $log = "<span style='color:red'>"._T("convertisseur:unknown_format")."</span>";
+        
+	        // c'est un nom de fonction : 'quark' par exemple
+	        if (is_string($conv_formats[$format])) {
+	            $cv = $conv_formats[$format];
+	            include_spip("extract/$cv");
+	            if ($cv = $GLOBALS['extracteur'][$cv]) {
+	            	ecrire_fichier(_DIR_TMP.'convertisseur.tmp', $conv_in);
+	            	$conv_out = $cv(_DIR_TMP.'convertisseur.tmp', $charset);
+	            	supprimer_fichier(_DIR_TMP.'convertisseur.tmp');
+	            }
+				if ($cv AND !$conv_out)
+					$log = "<span style='color:red'>"._T("convertisseur:erreur_extracteur")."</span>";
+			}
+			if (!$cv)
+	            $log = "<span style='color:red'>"._T("convertisseur:unknown_format")."</span>";
         }
      }	   
   }
@@ -161,8 +192,8 @@ function exec_convertisseur(){
 	fin_boite_info();
 	
 	debut_droite();
-	echo $log;	
-	echo "<form method='post'>\n";
+	echo $log;
+	echo "<form method='post' enctype='multipart/form-data'>\n";
 	if ($conv_out!="") {
 	   $conv_out = str_replace("</textarea>",'&lt;/textarea&gt;',$conv_out);
 	   echo "<div style='background-color:#E6ECF9;padding:8px 3px;margin-bottom:5px'>"._T("convertisseur:convertir_en");
@@ -170,6 +201,11 @@ function exec_convertisseur(){
 	   echo "<textarea name='conv_out' cols='65' rows='12'>$conv_out</textarea><br />\n";
 	   echo "</div>\n";
   }
+
+	echo "<h3>"._L("Votre texte &agrave; convertir :")."</h3>\n";
+
+	echo _L("Copiez-le ci-dessous :")."<br />\n";
+
 	$conv_in = str_replace("</textarea>",'&lt;/textarea&gt;',$conv_in);
 	echo "<textarea name='conv_in' cols='65' rows='12'>$conv_in</textarea><br />\n";
 	echo _T("convertisseur:from");
@@ -180,6 +216,12 @@ function exec_convertisseur(){
       echo "<option value='$k'$selected>"._T("convertisseur:$k")."</option>\n";
   }
   echo "</select>\n";	
+
+	echo "<div align='right'>";
+	echo _L("ou choisissez un fichier :")."<br />\n";
+	echo "<input type='file' name='upload' /><br />\n";
+	echo "</div>\n";
+
   echo "<input type='submit' value='". _T("convertisseur:convertir")."'>\n";  
   echo "</form>\n"; 
 
