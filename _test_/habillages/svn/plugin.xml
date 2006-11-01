@@ -49,4 +49,9 @@ _ Ce plugin est compatible avec la version SPIP 1.9.2 alpha (7521 minimum) t&eac
 			<action>affichage_final</action>
 			<inclure>habillages_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+			<nom>body_prive</nom>
+			<action>body_prive</action>
+			<inclure>habillages_pipelines.php</inclure>
+	</pipeline>
 </plugin>

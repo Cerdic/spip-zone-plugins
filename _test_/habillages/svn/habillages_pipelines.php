@@ -80,11 +80,8 @@ function habillages_header_prive($flux) {
 	return $flux;
 }
 
-function habillages_affichage_final($texte) {
-		lire_metas();
-		$lire_meta_logo_site = $GLOBALS['meta']['habillages_logo_site'];
-		
-		$texte = str_replace('alt="', 'alt="'.$lire_meta_logo_site, $texte);
+function habillages_body_prive($texte) {
+		$texte = str_replace('border-bottom', 'moncul', $texte);
 		return $texte;
 }
 	
