@@ -155,7 +155,7 @@ function qcm($chaine){
 
            $codeHTML.='<div class="spip_qcm_reponse">'.$introReponse
            		 .$choix[$i][$GLOBALS[$nomVarSelect]].'</div>'
-           		 .'<div class="spip_qcm_correction_juste">'._T('qcm:reponseFausse').'</div>';
+           		 .'<div class="spip_qcm_correction_juste">'._T('qcm:reponseJuste').'</div>';
            if (isset($precision[$i][$GLOBALS[$nomVarSelect]]))
              $codeHTML.='<div align="center"><div class="spip_qcm_precision">'
 				 .$precision[$i][$GLOBALS[$nomVarSelect]]

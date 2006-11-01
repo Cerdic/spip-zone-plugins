@@ -23,6 +23,7 @@
 					en utilisant le script [->../plugins/acces_groupes/maj_tables.php] {{AVANT}} d'activer ce plugin ! 
 					
         </description>
+	<lien>http://www.spip-contrib.net/Creer-des-groupes-limiter-l-acces</lien> <!-- URI de documentation --> 
         <prefix>
           accesgroupes
         </prefix>

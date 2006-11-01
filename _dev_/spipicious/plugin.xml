@@ -7,7 +7,6 @@ _ Prototype est de Sam Stephenson (voir la licence)
 	</auteur>
 	<version>0.1</version>
 	<etat>dev</etat>
-	<lien>[documentation spip.icio.us->http://trac.rezo.net/trac/spip-zone/wiki/SpipIcioUs]</lien>
 	<description><multi>
 	  [fr]Permet aux visiteurs authentifi&eacute;s d'ajouter des tags (mots-cl&eacute;s) sur les articles de SPIP &agrave; la fa&ccedil;on d'un [del.icio.us->http://del.icio.us/]
 
@@ -15,6 +14,7 @@ _ Prototype est de Sam Stephenson (voir la licence)
 - voir les fichiers exemples pour voir les nouvelles balises et boucles
 	  [en] A suspicous tag allowing visitors to tag SPIP articles</multi> 
 	</description>
+	<lien>http://trac.rezo.net/trac/spip-zone/wiki/SpipIcioUs</lien> <!-- URI de documentation --> 
 	<prefix>spipicious</prefix>	
 	<options>spipicious_options.php</options>
   <fonctions>spipicious_fonctions.php</fonctions>
