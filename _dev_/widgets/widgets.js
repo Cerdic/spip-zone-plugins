@@ -12,7 +12,7 @@ function configWidgets(options)
 
 // ouvre un widget
 $.fn.openwidget = function(evt) {
-  if (evt) {
+  if (evt.stopPropagation) {
     evt.stopPropagation();
   }
   return this
@@ -116,7 +116,7 @@ $.fn.activatewidget = function() {
           .html(
             d[$('form', me).find('.widget-id').val()]
           )
-          .prepend(ICONCLICK);
+          .iconewidget();
         $(me)
           .cancelwidget();
       }).onesubmit(function(){
@@ -179,17 +179,27 @@ $.fn.activatewidget = function() {
   });
 }
 
+// insere les icones dans l'element
+$.fn.iconewidget = function(){
+  return this
+    .prepend(ICONCLICK)
+    .find('.widget-edit') // le crayon a clicker lui-meme
+      .click(function(e){
+        $(this).ancestors('.widget').openwidget(e);
+      });
+}
+
 // initialise les widgets (cree le clone actif)
 $.fn.initwidget = function(){
   this
   .addClass('widget-autorise')
-  .prepend(ICONCLICK)
   .click(function(e){
     e.stopPropagation();
   })
   .dblclick(function(e){
     $(this).openwidget(e);
-  });
+  })
+  .iconewidget();
 
   // :hover pour MSIE
   if (jQuery.browser.msie) {
@@ -211,7 +221,7 @@ $(document).ready(function() {
   if (!jQuery.getJSON) return; // jquery >= 1.0.2
   url_widgets_html = 'spip.php?action=widgets_html';
   SEARCHING = "<img class='widget-searching' src='" + configWidgets.imgPath + "/searching.gif' />";
-  ICONCLICK = "<span class='widget-icones'><span><img class='widget-edit' onclick='$(this).ancestors(\".widget\").openwidget(event);' src='" + configWidgets.imgPath + "/crayon.png' title='" + configWidgets.txtEditer + "' /><img class='widget-img-changed' src='" + configWidgets.imgPath + "/changed.png' title='" + configWidgets.txtChanged + "' /></span></span>";
+  ICONCLICK = "<span class='widget-icones'><span><img class='widget-edit' src='" + configWidgets.imgPath + "/crayon.png' title='" + configWidgets.txtEditer + "' /><img class='widget-img-changed' src='" + configWidgets.imgPath + "/changed.png' title='" + configWidgets.txtChanged + "' /></span></span>";
 
   // sortie, demander pour sauvegarde si oubli
   $(window).unload(function(e) {
