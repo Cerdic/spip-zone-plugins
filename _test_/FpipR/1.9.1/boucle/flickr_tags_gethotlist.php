@@ -1,5 +1,5 @@
 <?php
-functionfunction boucle_FLICKR_TAGS_GETHOTLIST_dist($id_boucle,&$boucles) {
+function boucle_FLICKR_TAGS_GETHOTLIST_dist($id_boucle,&$boucles) {
   include_spip('inc/FpipR_boucle_utils');
   $boucle = &$boucles[$id_boucle];
   $id_table = $boucle->id_table;

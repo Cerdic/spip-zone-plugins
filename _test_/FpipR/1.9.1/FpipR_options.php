@@ -219,4 +219,9 @@ function FpipR_getAuthToken() {
   return NULL;
 }
 
+//en attendant la svn:
+function _q($string){
+  return spip_abstract_quote($string);
+}
+
 ?>
