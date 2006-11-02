@@ -55,9 +55,9 @@ function exec_clevermail_queue_process() {
 			$html = str_replace("(\r\n|\n|\n)", CM_NEWLINE, $html);
 
 			$template = array();
-			$template['@@ADDRESS@@'] = $subscriber['sub_email'];
+			$template['@@LETTRE@@'] = $list['lst_name'];
+			$template['@@DESCRIPTION@@'] = $list['lst_comment'];
 			$template['@@FORMAT@@'] = $mode;
-			$template['@@PROFILE@@'] = $GLOBALS['meta']['adresse_site'].'/profile.php?id='.$subscriber['sub_profile'];
 			$template['@@UNSUBSCRIBE@@'] = $GLOBALS['meta']['adresse_site'].'/rm.php?id='.$subscription['lsr_id'];
 			reset($template);
 			while (list($templateFrom, $templateTo) = each($template)) {

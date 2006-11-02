@@ -73,8 +73,9 @@ function exec_clevermail_lists_edit() {
 			echo '<br />';
 			debut_cadre_relief();
 				echo '<strong>'._T('clevermail:tags_specifiques').' :</strong><br />';
+				echo '@@LETTRE@@<br />';
 				echo '@@FORMAT@@<br />';
-				echo '@@ADDRESS@@<br />';
+				echo '@@ADRESSE@@<br />';
 				echo '@@URL@@<br />';
 			fin_cadre_relief();
 		debut_droite();
