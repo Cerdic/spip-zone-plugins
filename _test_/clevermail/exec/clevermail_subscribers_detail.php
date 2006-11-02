@@ -42,7 +42,7 @@ function exec_clevermail_subscribers_detail() {
 	debut_page("CleverMail Administration", 'configuration', 'cm_index');
 
 	debut_gauche();
-		include_spip("inc/cm_menu");
+		include_spip("inc/clevermail_menu");
 
 	debut_droite();
 

@@ -18,7 +18,7 @@ function exec_clevermail_posts() {
 
 	debut_page("CleverMail Administration", 'configuration', 'cm_index');
 		debut_gauche();
-        	include_spip("inc/cm_menu");
+        	include_spip("inc/clevermail_menu");
 
         	$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_posts p, cm_posts_queued q WHERE p.pst_id = q.pst_id AND p.lst_id=".$_GET['lst_id']));
 			if ($result['nb'] > 0) {

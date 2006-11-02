@@ -14,7 +14,7 @@ function exec_clevermail_index() {
 
 	debut_page("CleverMail Administration", 'configuration', 'cm_index');
 		debut_gauche();
-        	include_spip("inc/cm_menu");
+        	include_spip("inc/clevermail_menu");
 
 		debut_droite();
 			debut_cadre_relief();

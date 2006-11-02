@@ -15,7 +15,7 @@ function exec_clevermail_subscribers_new() {
 	debut_page("CleverMail Administration", 'configuration', 'cm_index');
 
 	debut_gauche();
-		include_spip("inc/cm_menu");
+		include_spip("inc/clevermail_menu");
 		echo '<br />';
 		debut_cadre_relief();
 			echo '<strong>CSV Format :</strong><br />';

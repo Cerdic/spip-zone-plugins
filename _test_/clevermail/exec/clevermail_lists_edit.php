@@ -69,7 +69,7 @@ function exec_clevermail_lists_edit() {
 
 	debut_page("CleverMail Administration", 'configuration', 'cm_index');
 		debut_gauche();
-        	include_spip("inc/cm_menu");
+        	include_spip("inc/clevermail_menu");
 			echo '<br />';
 			debut_cadre_relief();
 				echo '<strong>'._T('clevermail:tags_specifiques').' :</strong><br />';

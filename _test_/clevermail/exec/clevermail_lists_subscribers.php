@@ -48,9 +48,9 @@ function exec_clevermail_lists_subscribers() {
 	debut_page("CleverMail Administration", 'configuration', 'cm_index');
 
 		debut_gauche();
-			include_spip("inc/cm_menu");
+			include_spip("inc/clevermail_menu");
 			echo '<br />';
-			include_spip("inc/cm_search");
+			include_spip("inc/clevermail_search");
 		debut_droite();
 
 		debut_cadre_relief();

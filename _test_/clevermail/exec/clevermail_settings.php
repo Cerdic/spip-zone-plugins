@@ -19,7 +19,7 @@ function exec_clevermail_settings() {
 	debut_page("CleverMail Administration", 'configuration', 'cm_index');
 
 	debut_gauche();
-		include_spip("inc/cm_menu");
+		include_spip("inc/clevermail_menu");
 		echo '<br />';
 		debut_cadre_relief();
 			echo _T('clevermail:info_parametres');
