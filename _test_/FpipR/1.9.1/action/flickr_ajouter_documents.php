@@ -29,7 +29,7 @@ function action_flickr_ajouter_documents() {
 		$sets = _request('sets');
 		foreach($sets as $s) {
 		  $allphotos = flickr_photosets_getPhotos($s,'','',$row['auth_token']);
-		  foreach($allphotos as $photo) {
+		  foreach($allphotos->photos as $photo) {
 			$photos[] = $photo->id.'@#@'.$photo->secret;
 		  }
 		}
@@ -61,8 +61,8 @@ function action_flickr_ajouter_documents() {
 				$title = _T('fpipr:par',array('title'=>$title,'user'=>(($photo_details->owner_username)?$photo_details->owner_username:$photo_details->owner_nsid),'url'=>'http://www.flickr.com/people/'.$photo_details->owner_nsid));
 			  }
 			  include_spip('inc/filtres');
-			  $q = "UPDATE ".$table_prefix."_documents SET titre = '<html>".$title."</html>', descriptif = '<html>".filtrer_entites($photo_details->description)."</html>'";
-			  if($photo_details->date_taken) $q .=", date= '".$photo_details->date_taken."'";
+			  $q = "UPDATE ".$table_prefix."_documents SET titre = '<html>".spip_abstract_quote($title)."</html>', descriptif = '<html>".spip_abstract_quote(filtrer_entites($photo_details->description))."</html>'";
+			  if($photo_details->date_taken) $q .=", date= '".spip_abstract_quote($photo_details->date_taken)."'";
 			  $q .=" WHERE id_document=".$doc_row['id_document'];
 			  spip_query($q);
 			  include_spip('inc/plugin');
@@ -77,13 +77,18 @@ function action_flickr_ajouter_documents() {
 			  }
 			}
 		  } else {
-			
-			spip_abstract_insert('spip_documents_'.$type.'s',"(id_$type,id_document)","($id,".$cnt['id_document'].')');
+			$link =spip_abstract_fetsel(array('id_document,id_article'),array('spip_documents_'.$type.'s'),array("id_$type=$id","id_document=".$cnt['id_document']));
+			if(!$link) {
+			  spip_abstract_insert('spip_documents_'.$type.'s',"(id_$type,id_document)","($id,".$cnt['id_document'].')');
+			}
 		  }
 		}
 	  }
 
-	  	  redirige_par_entete(urldecode($redirect));
+	  if(!$redirect) {
+		$redirect = generer_url_ecrire($type.'s',"id_$type=$id",true);
+	  }
+	  redirige_par_entete(urldecode($redirect));
 	}
   }
 }

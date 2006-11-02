@@ -6,18 +6,22 @@
 	  Pierre Andrews (mortimer.pa@free.fr)
 	</auteur>
 	<version>
-	  0.1
+	  0.2
 	</version>
 	<etat>
-	  dev
+	test
 	</etat>
 	<description>
 	  <multi>
-		[fr] associer des photos et sets Flickr.com &agrave; vos articles et rubriques. voir le lisezmoi
-		[en] add photos and sets from your Flickr.com account to articles and sections. voir le lisezmoi
+		[fr] associer des photos et sets Flickr.com &agrave; vos articles et rubriques. voir le fichier lisezmoi
+_ La version 0.2 ajoute des boucles pour acceder &agrave; l'API Flickr depuis vos squelettes.
+		[en] add photos and sets from your Flickr.com account to articles and sections. see the lisezmoi file.
+_ version 0.2 introduces SPIP loops to access Flickr's API from your templates.
 	  </multi>
 	</description>
-	<lien>http://zone.spip.org/trac/spip-zone/wiki/FpipR</lien> <!-- URI de documentation -->
+	<lien>
+	  http://trac.rezo.net/trac/spip-zone/wiki/FpipR
+	</lien>
 	<prefix> 
 	  FpipR
 	</prefix>
@@ -32,4 +36,7 @@
 	<options>
 	  FpipR_options.php
 	</options>
+	<fonctions>
+	  FpipR_fonctions.php
+	</fonctions>
 </plugin>

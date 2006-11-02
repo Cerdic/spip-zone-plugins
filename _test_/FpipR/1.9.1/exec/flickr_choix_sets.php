@@ -83,9 +83,9 @@ function exec_flickr_choix_sets() {
   if(addslashes(_request('type')) == 'article') {
 	echo '<a href="'.generer_url_ecrire('articles','id_article='.intval(_request('id'))).'">'._T('fpipr:retour').'</a>';
   } else if(addslashes(_request('type')) == 'rubrique') {
-	  echo '<a href="'.generer_url_ecrire('naviguer','id_rubrique='.intval(_request('id'))).'">'._T('fpipr:retour').'</a>';
+	echo '<a href="'.generer_url_ecrire('naviguer','id_rubrique='.intval(_request('id'))).'">'._T('fpipr:retour').'</a>';
   } else {
-	  echo '<a href="'.generer_url_ecrire('breves_edit','id_breve='.intval(_request('id'))).'">'._T('fpipr:retour').'</a>';
+	echo '<a href="'.generer_url_ecrire('breves_edit','id_breve='.intval(_request('id'))).'">'._T('fpipr:retour').'</a>';
   }
   echo '</body></html>';  
 }

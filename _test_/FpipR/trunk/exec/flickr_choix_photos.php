@@ -59,13 +59,13 @@ function exec_flickr_choix_photos() {
 	  $html .= "</ul>\n";
 	  $html .= '<br clear="both"/>';
 	  $html .= '<button type="submit">'._T('spip:bouton_valider')."</button>\n";
-	  $html .= '<input type="hidden" name="type" value="'._request('type').'"/>'."\n";
+	  $html .= '<input type="hidden" name="type" value="'.addslashes(_request('type')).'"/>'."\n";
 	  $html .= '<input type="hidden" name="id" value="'.intval(_request('id')).'"/>'."\n";
 	  
 	  include_spip('inc/actions');
-	  if(_request('type') == 'article') {
+	  if(addslashes(_request('type')) == 'article') {
 		echo generer_action_auteur('flickr_ajouter_documents',intval(_request('id')), generer_url_ecrire('articles','id_article='.intval(_request('id')),true),$html);
-	  } else if(_request('type') == 'rubrique') {
+	  } else if(addslashes(_request('type')) == 'rubrique') {
 		echo generer_action_auteur('flickr_ajouter_documents',intval(_request('id')), generer_url_ecrire('naviguer','id_rubrique='.intval(_request('id')),true),$html);
 	  } else {
 		echo generer_action_auteur('flickr_ajouter_documents',intval(_request('id')), generer_url_ecrire('breves_edit','id_breve='.intval(_request('id')),true),$html);
@@ -74,7 +74,7 @@ function exec_flickr_choix_photos() {
 		echo '<hr/><h3>'._T('fpipr:pages').':</h3>';	  
 		for($i=1;$i <= $photos->pages;$i++) {
 		  if($i != $page) {
-			echo '<a href="'.generer_url_ecrire('flickr_choix_photos',"page=$i&type="._request('type')."&id=".intval(_request('id'))."&sort=$sort".(_request('text_search')?"&text_search="._request('text_search'):'')).'">';
+			echo '<a href="'.generer_url_ecrire('flickr_choix_photos',"page=$i&type=".addslashes(_request('type'))."&id=".intval(_request('id'))."&sort=$sort".(_request('text_search')?"&text_search="._request('text_search'):'')).'">';
 		  }
 		  echo $i;
 		  if($i != $page) {
@@ -88,7 +88,7 @@ function exec_flickr_choix_photos() {
 	  echo '<hr/><h3>'._T('fpipr:recherche').':</h3>';
 	  echo '<form id="recherche" method="get">';
 	  echo '<input type="hidden" name="exec" value="'._request('exec').'"/>';
-	  echo '<input type="hidden" name="type" value="'._request('type').'"/>';
+	  echo '<input type="hidden" name="type" value="'.addslashes(_request('type')).'"/>';
 	  echo '<input type="hidden" name="id" value="'.intval(_request('id')).'"/>';
 	  echo '<label for="text_search">'._T('fpipr:text_search').':</label>';
 	  echo '<input type="text" name="text_search" id="text_search" value="'._request('text_search').'"/>';
@@ -114,9 +114,9 @@ function exec_flickr_choix_photos() {
 	echo _T('fpipr:demande_authentification',array('url'=>generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur)));
   }
   echo '<hr/>';
-  if(_request('type') == 'article') {
+  if(addslashes(_request('type')) == 'article') {
 	echo '<a href="'.generer_url_ecrire('articles','id_article='.intval(_request('id'))).'">'._T('fpipr:retour').'</a>';
-  } else if(_request('type') == 'rubrique') {
+  } else if(addslashes(_request('type')) == 'rubrique') {
 	echo '<a href="'.generer_url_ecrire('naviguer','id_rubrique='.intval(_request('id'))).'">'._T('fpipr:retour').'</a>';
   } else {
 	echo '<a href="'.generer_url_ecrire('breves_edit','id_breve='.intval(_request('id'))).'">'._T('fpipr:retour').'</a>';
