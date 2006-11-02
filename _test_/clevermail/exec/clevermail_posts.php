@@ -33,10 +33,12 @@ function exec_clevermail_posts() {
 				echo gros_titre('CleverMail Administration');
 			fin_cadre_relief();
 
+			$list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id = ".$_GET['lst_id']));
+
 			$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_posts WHERE lst_id=".$_GET['lst_id']." AND pst_date_sent = 0"));
 			if ($result['nb'] > 0) {
 				debut_cadre_relief('../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/new.png');
-					echo '<h3>'._T('clevermail:nouveaux_messages').' :</h3>';
+					echo '<h3>'._T('clevermail:nouveaux_messages').' : '.$list['lst_name'].'</h3>';
 					echo '<p>'._T('clevermail:nouveaux_messages_text').' :</p>';
 
 				    $posts = spip_query("SELECT * FROM cm_posts WHERE lst_id=".$_GET['lst_id']." AND pst_date_sent = 0 ORDER BY pst_date_create DESC");
@@ -66,7 +68,7 @@ function exec_clevermail_posts() {
 			$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_posts p, cm_posts_queued q WHERE p.pst_id = q.pst_id AND p.lst_id=".$_GET['lst_id']));
 			if ($result['nb'] > 0) {
 				debut_cadre_relief('../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/queue.png');
-					echo '<h3>'._T('clevermail:messages_attentes').' :</h3>';
+					echo '<h3>'._T('clevermail:messages_attentes').' : '.$list['lst_name'].'</h3>';
 					echo '<p>'._T('clevermail:messages_attentes_text').' :</p>';
 
 				    $posts = spip_query("SELECT DISTINCT p.*, q.pst_id FROM cm_posts p, cm_posts_queued q WHERE p.pst_id = q.pst_id AND p.lst_id=".$_GET['lst_id']." ORDER BY p.pst_date_sent DESC");
@@ -101,7 +103,7 @@ function exec_clevermail_posts() {
 			$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_posts WHERE pst_date_sent!=0 AND lst_id=".$_GET['lst_id']));
 			if ($result['nb'] > 0) {
 				debut_cadre_relief('../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/sent.png');
-					echo '<h3>'._T('clevermail:messages_envoyes').' :</h3>';
+					echo '<h3>'._T('clevermail:messages_envoyes').' : '.$list['lst_name'].'</h3>';
 					echo '<p>'._T('clevermail:messages_envoyes_text').' :</p>';
 
 				    $posts = spip_query("SELECT * FROM cm_posts WHERE pst_date_sent!=0 AND lst_id=".$_GET['lst_id']);
