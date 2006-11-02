@@ -1,0 +1,32 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Image Ragged
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	 Copyright Arnaud Martin
+	 integre en plugin par Pierre Andrews (Mortimer)
+	</auteur>
+	<version>
+	  0.1
+	</version>
+	<etat>
+	  stable
+	</etat>
+	<description>
+ Filtre trouve sur paris-beyrouth:
+ http://www.paris-beyrouth.org/Un-habillage-irregulier-2
+
+
+Utilisation:
+-* <code><img234|ragged></code>
+-* <code><img234|ragged|left></code> pour specifier l'alignement (droite ou gauche)
+-* <code><img234|ragged|margin=100></code> pour specifier la marge autour de l'image
+-* <code><img234|ragged|couleur></code> pour specifier la couleur de fond à decouper. Si on n'en specifie pas, on detoure le transparent.
+	</description>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	image_ragged_filtre.php
+	</fonctions>
+	<prefix> 
+	  image_ragged
+	</prefix>
+</plugin>
