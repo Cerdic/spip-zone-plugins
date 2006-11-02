@@ -79,7 +79,7 @@
 		'prefixer_messages' => 'Pr&eacute;fixer les sujets des messages avec le nom de la lettre d\'information',
 		'confirmation_inscription' => 'Confirmation d\'une inscription envoy&eacute; par e-mail',
 		'confirmation_votre_inscription' => 'Confirmation de votre inscription',
-		'confirmation_votre_inscription_text' => "\nBonjour,\n\nVeuillez confirmer votre inscription en cliquant sur ce lien :\n\n @@URL_CONFIRMATION@@\n\nMerci\n",
+		'confirmation_votre_inscription_text' => "\nBonjour,\n\nPour confirmer votre inscription à la lettre d'information @@NOM_LETTRE@@ au format @@FORMAT_INSCRIPTION@@, veuillez confirmer votre inscription en cliquant sur ce lien :\n\n @@URL_CONFIRMATION@@\n\nMerci\n",
 		'confirmation_desinscription' => 'Confirmation d\'une d&eacute;sinscription envoy&eacute; par e-mail',
 		'confirmation_votre_desinscription' => 'Confirmation de votre d&eacute;sinscription',
 		'confirmation_votre_desinscription_text' => "\nBonjour,\n\nVeuillez confirmer votre d&eacute;sinscription en cliquant sur ce lien :\n\n @@URL_CONFIRMATION@@\n\nMerci\n",
