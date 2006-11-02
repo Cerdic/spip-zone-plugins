@@ -187,6 +187,7 @@ $GLOBALS['FpipR_tables']['spip_fpipr_photosets_key'] = array("PRIMARY KEY" => "i
 $GLOBALS['tables_principales']['spip_fpipr_photosets'] =
   array('field' => &$GLOBALS['FpipR_tables']['spip_fpipr_photosets_field'], 'key' => &$GLOBALS['FpipR_tables']['spip_fpipr_photosets_key']);
 $GLOBALS['table_des_tables']['flickr_photosets_getlist'] = 'fpipr_photosets';
+$GLOBALS['table_des_tables']['flickr_photosets_getinfo'] = 'fpipr_photosets';
 
 $GLOBALS['table_des_tables']['flickr_photosets_getphotos'] = 'fpipr_photos';
 $GLOBALS['table_des_tables']['flickr_groups_pools_getphotos'] = 'fpipr_photos';

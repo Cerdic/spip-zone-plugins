@@ -458,8 +458,11 @@ function flickr_photosets_getList($user_id,$auth_token='') {
 
 
   $photosets =  flickr_check_error(flickr_api_call('flickr.photosets.getList',array('user_id'=>$user_id),$auth_token));
+  return flickr_utils_createPhotoSets($photosets['photosets']);
+}
+
+function flickr_utils_createPhotoSets($photosets) {
   $resp = array();
-  if($photosets = $photosets['photosets']) {
 	foreach($photosets['photoset'] as $set) {
 	  $new_p = new FlickrPhotoSet;
 	  $new_p->owner = $user_id;
@@ -473,8 +476,14 @@ function flickr_photosets_getList($user_id,$auth_token='') {
 
 	  $resp[] = $new_p;
 	}
-  }  
-  return $resp;
+	return $resp;
+}
+
+function flickr_photosets_getInfo($photoset_id,$auth_token='') {
+  if(!$photoset_id) return false;
+  $photoset =  flickr_check_error(flickr_api_call('flickr.photosets.getInfo',array('photoset_id'=>$photoset_id),$auth_token));
+  $sets = flickr_utils_createPhotoSets($photoset);
+  return $sets[0];
 }
 
 function flickr_photosets_getPhotos($photoset_id,$extras='',$per_page='',$page='',$privacy_filter='',$auth_token='') {
