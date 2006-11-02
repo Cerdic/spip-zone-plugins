@@ -458,32 +458,33 @@ function flickr_photosets_getList($user_id,$auth_token='') {
 
 
   $photosets =  flickr_check_error(flickr_api_call('flickr.photosets.getList',array('user_id'=>$user_id),$auth_token));
-  return flickr_utils_createPhotoSets($photosets['photosets']);
+  return flickr_utils_createPhotoSets($photosets['photosets'],$user_id);
 }
 
-function flickr_utils_createPhotoSets($photosets) {
+function flickr_utils_createPhotoSets($photosets,$user_id='') {
   $resp = array();
-	foreach($photosets['photoset'] as $set) {
+	foreach($photosets['photoset'] as $set) {	
+	  $resp[] = flickr_utils_createOnePhotoSet($set,$user_id);
+	}
+	return $resp;
+}
+
+function flickr_utils_createOnePhotoSet($photoset,$user_id='') {
 	  $new_p = new FlickrPhotoSet;
 	  $new_p->owner = $user_id;
-
-	  foreach($set as $key => $value) {
+	  foreach($photoset as $key => $value) {
 		if(is_array($value))
 		  $new_p->$key = $value['_content'];
 		else
 		  $new_p->$key = $value;
 	  }
-
-	  $resp[] = $new_p;
-	}
-	return $resp;
+	return $new_p;
 }
 
 function flickr_photosets_getInfo($photoset_id,$auth_token='') {
   if(!$photoset_id) return false;
   $photoset =  flickr_check_error(flickr_api_call('flickr.photosets.getInfo',array('photoset_id'=>$photoset_id),$auth_token));
-  $sets = flickr_utils_createPhotoSets($photoset);
-  return $sets[0];
+  return  flickr_utils_createOnePhotoSet($photoset['photoset']);
 }
 
 function flickr_photosets_getPhotos($photoset_id,$extras='',$per_page='',$page='',$privacy_filter='',$auth_token='') {

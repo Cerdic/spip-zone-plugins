@@ -80,7 +80,7 @@ function FpipR_utils_calculer_hash($method, $arguments, $boucle=NULL) {
   return $hash;
 }
 
-function FpipR_utils_search_args($boucle,$possible_args,&$arguments) {
+function FpipR_utils_search_args($boucle,$id_table,$possible_args,&$arguments) {
   //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
   foreach($boucle->where as $w) {
 	if($w[0] == "'?'") {
