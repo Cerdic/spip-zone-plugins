@@ -45,10 +45,16 @@ http://trac.rezo.net/files/spip-zone/FpipR_svn.zip
 
 == Boucles '''AUTEURS''' ==
 
-Le plugin ajout une nouvelle balise à cette boucle:
+Le plugin ajout deux nouvelles balises à cette boucle:
 
-{{{#FLICKR_NSID}}}  retournera (pour les auteurs authentifié sur Flickr) l'id flickr unique (nsid) de cet auteur.
+* {{{#FLICKR_NSID}}}  retournera (pour les auteurs authentifié sur Flickr) l'id flickr unique (nsid) de cet auteur.
 On peut ensuite l'utiliser dans les boucles Flickr pour limiter les recherches à cet utilisateur.
+
+* {{{ #FLICKR_TOKEN }}} si l'utilisateur est logué dans spip et authentifié à SPIP, alors on a accés au token d'authentification. Attention, cette information est privée!!
+[br] Cette balise ne devrait être utilisée que pour tester que l'utilisateur est loguée:
+{{{ [(#FLICKR_TOKEN|?{'','pas logué'}Vos photos:}}}
+[br] Quand cette balise est disponible, alors toutes les boucles Flickr utilisent des appels authentifiés à l'API flickr. Le cache de la page html genérée est alors protégée et seulement accessible à cet utilisateur.
+
 
 == Boucle '''FLICKR_PHOTOS_SEARCH''' ==
 
@@ -302,10 +308,232 @@ Elles peuvent être utilisées dans n'importe quelle boucle qui fournit un {{{ #ID
  * {{{ #NEXTPHOTO_THUMB }}} l'url de la vignette de la photo suivante dans le photostream
  * {{{ #LOGO_NEXTPHOTO }}} le logo de la photo suivante dans le photostream (prend un parametre comme les autres balises logo, sauf 'o')
 
+= Toutes les boucles =
+
+Voir http://www.flickr.com/services/api/ pour les details. La plupart des boucles prennent les mm criteres que les methodes decrites dans ces pages.
+
+ * {{{ FLICKR_CONTACTS_GETLIST}}}
+ * {{{ FLICKR_CONTACTS_GETPUBLICLIST}}}
+ * {{{ FLICKR_FAVORITES_GETLIST}}}
+ * {{{ FLICKR_FAVORITES_GETPUBLICLIST}}}
+ * {{{ FLICKR_GROUPS_GETINFO}}}
+ * {{{ FLICKR_GROUPS_POOLS_GETGROUPS}}}
+ * {{{ FLICKR_GROUPS_POOLS_GETPHOTOS}}}
+ * {{{ FLICKR_INTERESTINGNESS_GETLIST}}}
+ * {{{ FLICKR_PEOPLE_GETINFO}}}
+ * {{{ FLICKR_PEOPLE_GETPUBLICGROUPS}}}
+ * {{{ FLICKR_PHOTO_NOTES}}}
+ * {{{ FLICKR_PHOTO_TAG}}}
+ * {{{ FLICKR_PHOTO_URLS}}}
+ * {{{ FLICKR_PHOTOS_COMMENTS_GETLIST}}}
+ * {{{ FLICKR_PHOTOS_GETALLCONTEXTS}}}
+ * {{{ FLICKR_PHOTOS_GETCONTACTSPHOTOS}}}
+ * {{{ FLICKR_PHOTOS_GETCONTACTSPUBLICPHOTOS}}}
+ * {{{ FLICKR_PHOTOS_GETEXIF}}}
+ * {{{ FLICKR_PHOTOS_GETINFO}}}
+ * {{{ FLICKR_PHOTOS_GETNOTINSET}}}
+ * {{{ FLICKR_PHOTOS_GETRECENT}}}
+ * {{{ FLICKR_PHOTOS_GETUNTAGGED}}}
+ * {{{ FLICKR_PHOTOS_GETWITHGEODATA}}}
+ * {{{ FLICKR_PHOTOS_GETWITHOUTGEODATA}}}
+ * {{{ FLICKR_PHOTOS_RECENTLYUPDATED}}}
+ * {{{ FLICKR_PHOTOS_SEARCH}}}
+ * {{{ FLICKR_PHOTOSETS_COMMENTS_GETLIST}}}
+ * {{{ FLICKR_PHOTOSETS_GETLIST}}}
+ * {{{ FLICKR_PHOTOSETS_GETPHOTOS}}}
+ * {{{ FLICKR_TAGS_GETHOTLIST}}}
+ * {{{ FLICKR_TAGS_GETLISTPHOTO}}}
+ * {{{ FLICKR_TAGS_GETLISTUSER}}}
+ * {{{ FLICKR_TAGS_GETLISTUSERPOPULAR}}}
+ * {{{ FLICKR_TAGS_GETLISTUSERRAW}}}
+ * {{{ FLICKR_TAGS_GETRELATED}}}
+ * {{{ FLICKR_URLS_LOOKUPGROUP}}}
+ * {{{ FLICKR_URLS_LOOKUPUSER }}}
+
+= Toutes les balises calculées =
+
+TODO: Il faut encore trier ces balises pour les associer aux bonnes boucles dans la doc
+
+ * {{{ #ACCURACY }}}
+ * {{{ #FLICKR_PHOTO_ID }}}
+ * {{{ #FLICKR_PHOTO_SECRET }}}
+ * {{{ #ID_GROUP }}}
+ * {{{ #ID_PHOTOSET }}}
+ * {{{ #ISFAMILY }}}
+ * {{{ #ISFRIEND }}}
+ * {{{ #ISPUBLIC }}}
+ * {{{ #LATITUDE }}}
+ * {{{ #LOGO_CONTACT }}}
+ * {{{ #LOGO_GROUP }}}
+ * {{{ #LOGO_NEXTPHOTO }}}
+ * {{{ #LOGO_OWNER }}}
+ * {{{ #LOGO_PHOTO }}}
+ * {{{ #LOGO_PHOTOSET }}}
+ * {{{ #LOGO_PREVPHOTO }}}
+ * {{{ #LONGITUDE }}}
+ * {{{ #NEXTPHOTO_ID }}}
+ * {{{ #NEXTPHOTO_SECRET }}}
+ * {{{ #NEXTPHOTO_SERVER }}}
+ * {{{ #NEXTPHOTO_THUMB }}}
+ * {{{ #NEXTPHOTO_TITLE }}}
+ * {{{ #PHOTOS_COUNT }}}
+ * {{{ #PREVPHOTO_ID }}}
+ * {{{ #PREVPHOTO_SECRET }}}
+ * {{{ #PREVPHOTO_SERVER }}}
+ * {{{ #PREVPHOTO_THUMB }}}
+ * {{{ #PREVPHOTO_TITLE }}}
+ * {{{ #URL_GROUP }}}
+ * {{{ #URL_NEXTPHOTO }}}
+ * {{{ #URL_OWNER }}}
+ * {{{ #URL_PHOTO }}}
+ * {{{ #URL_PHOTOSET }}}
+ * {{{ #URL_PREVPHOTO }}}
+ * {{{ #URL_USERPHOTOS }}}
+ * {{{ #URL_USERPROFILE }}}
+
+= Toutes les balises/criteres pour limiter dans les tables =
+
+TODO trier, expliquer
+
+ * {{{  {id_photo} / #ID_PHOTO }}}
+ * {{{ {user_id} / #USER_ID }}}
+ * {{{ {secret} / #SECRET }}}
+ * {{{ {server} / #SERVER }}}
+ * {{{ {title} / #TITLE }}}
+ * {{{ {ispublic} / #ISPUBLIC }}}
+ * {{{ {isfriend} / #ISFRIEND }}}
+ * {{{ {isfamily} / #ISFAMILY }}}
+ * {{{ {originalformat} / #ORIGINALFORMAT }}}
+ * {{{ {license} / #LICENSE }}}
+ * {{{ {upload_date} / #UPLOAD_DATE }}}
+ * {{{ {taken_date} / #TAKEN_DATE }}}
+ * {{{ {owner_name} / #OWNER_NAME }}}
+ * {{{ {icon_server} / #ICON_SERVER }}}
+ * {{{ {last_update} / #LAST_UPDATE }}}
+ * {{{ {latitude} / #LATITUDE }}}
+ * {{{ {longitude} / #LONGITUDE }}}
+ * {{{ {accuracy} / #ACCURACY }}}
+ * {{{ {rang} / #RANG }}}
+ * {{{ {id_photoset} / #ID_PHOTOSET }}}
+ * {{{ {id_group} / #ID_GROUP }}}
+ * {{{ {added_date} / #ADDED_DATE }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {id_photo} / #ID_PHOTO }}}
+ * {{{ {secret} / #SECRET }}}
+ * {{{ {server} / #SERVER }}}
+ * {{{ {isfavorite} / #ISFAVORITE }}}
+ * {{{ {license} / #LICENSE }}}
+ * {{{ {rotation} / #ROTATION }}}
+ * {{{ {originalformat} / #ORIGINALFORMAT }}}
+ * {{{ {user_id} / #USER_ID }}}
+ * {{{ {owner_username} / #OWNER_USERNAME }}}
+ * {{{ {owner_realname} / #OWNER_REALNAME }}}
+ * {{{ {owner_location} / #OWNER_LOCATION }}}
+ * {{{ {title} / #TITLE }}}
+ * {{{ {description} / #DESCRIPTION }}}
+ * {{{ {ispublic} / #ISPUBLIC }}}
+ * {{{ {isfriend} / #ISFRIEND }}}
+ * {{{ {isfamily} / #ISFAMILY }}}
+ * {{{ {date_posted} / #DATE_POSTED }}}
+ * {{{ {date_taken} / #DATE_TAKEN }}}
+ * {{{ {date_lastupdate} / #DATE_LASTUPDATE }}}
+ * {{{ {comments} / #COMMENTS }}}
+ * {{{ {latitude} / #LATITUDE }}}
+ * {{{ {longitude} / #LONGITUDE }}}
+ * {{{ {accuracy} / #ACCURACY }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {id_tag} / #ID_TAG }}}
+ * {{{ {author} / #AUTHOR }}}
+ * {{{ {raw} / #RAW }}}
+ * {{{ {safe} / #SAFE }}}
+ * {{{ {id_photo} / #ID_PHOTO }}}
+ * {{{ {score} / #SCORE }}}
+ * {{{ {count} / #COUNT }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {id_note} / #ID_NOTE }}}
+ * {{{ {id_photo} / #ID_PHOTO }}}
+ * {{{ {author} / #AUTHOR }}}
+ * {{{ {authorname} / #AUTHORNAME }}}
+ * {{{ {x} / #X }}}
+ * {{{ {y} / #Y }}}
+ * {{{ {width} / #WIDTH }}}
+ * {{{ {height} / #HEIGHT }}}
+ * {{{ {texte} / #TEXTE }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {type} / #TYPE }}}
+ * {{{ {id_photo} / #ID_PHOTO }}}
+ * {{{ {url} / #URL }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {id_photoset} / #ID_PHOTOSET }}}
+ * {{{ {user_id} / #USER_ID }}}
+ * {{{ {primary_photo} / #PRIMARY_PHOTO }}}
+ * {{{ {secret} / #SECRET }}}
+ * {{{ {server} / #SERVER }}}
+ * {{{ {photos} / #PHOTOS }}}
+ * {{{ {title} / #TITLE }}}
+ * {{{ {description} / #DESCRIPTION }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {id_contexte} / #ID_CONTEXTE }}}
+ * {{{ {title} / #TITLE }}}
+ * {{{ {type} / #TYPE }}}
+ * {{{ {id_photo} / #ID_PHOTO }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {id_comment} / #ID_COMMENT }}}
+ * {{{ {user_id} / #USER_ID }}}
+ * {{{ {authorname} / #AUTHORNAME }}}
+ * {{{ {date_create} / #DATE_CREATE }}}
+ * {{{ {permalink} / #PERMALINK }}}
+ * {{{ {texte} / #TEXTE }}}
+ * {{{ {id_photo} / #ID_PHOTO }}}
+ * {{{ {id_photoset} / #ID_PHOTOSET }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {id_group} / #ID_GROUP }}}
+ * {{{ {user_id} / #USER_ID }}}
+ * {{{ {admin} / #ADMIN }}}
+ * {{{ {eighteenplus} / #EIGHTEENPLUS }}}
+ * {{{ {iconserver} / #ICONSERVER }}}
+ * {{{ {name} / #NAME }}}
+ * {{{ {description} / #DESCRIPTION }}}
+ * {{{ {members} / #MEMBERS }}}
+ * {{{ {privacy} / #PRIVACY }}}
+ * {{{ {throttle_count} / #THROTTLE_COUNT }}}
+ * {{{ {throttle_mode} / #THROTTLE_MODE }}}
+ * {{{ {throttle_remaining} / #THROTTLE_REMAINING }}}
+ * {{{ {photos} / #PHOTOS }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {user_id} / #USER_ID }}}
+ * {{{ {isadmin} / #ISADMIN }}}
+ * {{{ {ispro} / #ISPRO }}}
+ * {{{ {iconserver} / #ICONSERVER }}}
+ * {{{ {username} / #USERNAME }}}
+ * {{{ {realname} / #REALNAME }}}
+ * {{{ {location} / #LOCATION }}}
+ * {{{ {url_photos} / #URL_PHOTOS }}}
+ * {{{ {url_profile} / #URL_PROFILE }}}
+ * {{{ {date_firstphoto} / #DATE_FIRSTPHOTO }}}
+ * {{{ {date_taken_firstphoto} / #DATE_TAKEN_FIRSTPHOTO }}}
+ * {{{ {photos_count} / #PHOTOS_COUNT }}}
+ * {{{ {ignored} / #IGNORED }}}
+ * {{{ {family} / #FAMILY }}}
+ * {{{ {friend} / #FRIEND }}}
+ * {{{ {field} / #FIELD }}}
+ * {{{ {id_photo} / #ID_PHOTO }}}
+ * {{{ {secret} / #SECRET }}}
+ * {{{ {server} / #SERVER }}}
+ * {{{ {tagspace} / #TAGSPACE }}}
+ * {{{ {tagspaceid} / #TAGSPACEID }}}
+ * {{{ {tag} / #TAG }}}
+ * {{{ {label} / #LABEL }}}
+ * {{{ {raw} / #RAW }}}
+ * {{{ {clean} / #CLEAN }}}
+ * {{{ {field} / #FIELD }}}
+
+
+ 
 -------------
-
+ 
 = Les Modeles =
-
+ 
  * {{{ <fpiprbox|nsid=XXX> }}} ou {{{ <fpiprbox|tags=spip,gateau> }}} affiche 12 vignettes dans un tableau qui peut être "animé" si le plugin splickrbox est aussi activé (pour un effet similaire à le boite fournis par Flickr) (au moin un des deux paramètres doit être fournis)
  * {{{ <fpiprboxXXXXX> }}} affiche le logo de la photo XXXXX et sa liste de tags. Ce modele est différent du fonctionement cité précedemment. En effet, l'image n'est jamais attaché à l'article ou stocké sur le site. Le logo et à chaque fois récupéré depuis Flickr (prend un parametre |taille=t pour specifier la taille du logo)
  * {{{ <fpiprsetboxXXXX> }}} affiche 12 vignettes de photos dans le set XXXXXXX qui peuvent être "animées" si le plugin splickrbox est aussi activé.
