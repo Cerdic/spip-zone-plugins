@@ -1,0 +1,14 @@
+<B_photo>
+<div>
+<BOUCLE_photo(FLICKR_PHOTOS_GETINFO) {id_photo=#ENV{id}}>
+#LOGO_PHOTO{#ENV{taille}}
+<B_tags>
+<div><strong>Tags:</strong>
+<BOUCLE_tags(FLICKR_PHOTO_TAGS) {id_photo}{','}>
+  #RAW
+</BOUCLE_tags>
+</div>
+</B_tags>
+</BOUCLE_photo>
+</div>
+</B_photo>
