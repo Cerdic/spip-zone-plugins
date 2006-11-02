@@ -81,7 +81,6 @@ function FpipR_utils_calculer_hash($method, $arguments, $boucle=NULL) {
 }
 
 function FpipR_utils_search_args($boucle,$id_table,$possible_args,&$arguments) {
-  //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
   foreach($boucle->where as $w) {
 	if($w[0] == "'?'") {
 	  $w = $w[2];
@@ -110,7 +109,6 @@ function FpipR_utils_search_extras($boucle,$id_table,$possible_extras,&$argument
   }
 
 
-  //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
   foreach($boucle->select as $w) {
 	$key = str_replace("'",'',$w);
 	$key = str_replace("$id_table.",'',$key);
@@ -131,17 +129,23 @@ function FpipR_utils_calcul_limit(&$boucle) {
 	$debut = $boucle->partie;
 	$pas = $boucle->total_parties;
   }
+if($debut && $pas) {
   return "list(\$page,\$per_page) = FpipR_calcul_argument_page($debut,$pas);
 \$arguments['page'] = \$page;
 \$arguments['per_page'] = \$per_page;
 ";
+}
+else return '';
 }
 
 
 function FpipR_utils_search_criteres(&$boucle,&$arguments,$possible_criteres,&$boucles,$id_boucle) {
   foreach($boucle->criteres as $crit) {
 	if (in_array($crit->op,$possible_criteres)){
-	  $val = !isset($crit->param[0]) ? "1" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$id_boucle]->id_parent);
+                 $c = array();
+                 foreach($crit->param as $p)
+                   $c[] = calculer_liste($p, array(), $boucles, $boucles[$id_boucle]->id_parent);
+		$val = join($c,".','.");
 	  $arguments[$crit->op] = $val;
 	}
   }
