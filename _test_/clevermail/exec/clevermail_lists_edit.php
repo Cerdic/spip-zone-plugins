@@ -75,6 +75,7 @@ function exec_clevermail_lists_edit() {
 				echo '<strong>'._T('clevermail:tags_specifiques').' :</strong><br />';
 				echo '@@LETTRE@@<br />';
 				echo '@@FORMAT@@<br />';
+				echo '@@DESCRIPTION@@<br />';
 				echo '@@ADRESSE@@<br />';
 				echo '@@URL_CONFIRMATION@@<br />';
 			fin_cadre_relief();
