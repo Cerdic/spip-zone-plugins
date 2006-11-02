@@ -7,12 +7,8 @@
  	[erational.org->http://www.erational.org]
 _ &copy; 2006 - Licence GPL
 	</auteur>
-	<version>
-	1.4
-	</version>
-	<etat>
-	test
-	</etat>
+	<version>1.5</version>
+	<etat>dev</etat>
 	<description>
     Migration de la [contribution SPIP2SPIP->http://www.a-brest.net/article2340.html] en plugin.
     <p>Permet de copier les articles de SPIP distant dans le SPIP sous forme d'articles. 
@@ -26,16 +22,15 @@ _ &copy; 2006 - Licence GPL
     </ul>
     </p>
 	</description>
-	<lien>http://trac.rezo.net/trac/spip-zone/wiki/SpipIcioUs</lien> <!-- URI de documentation --> 
+	<lien>http://trac.rezo.net/trac/spip-zone/wiki/SpipToSpip</lien> <!-- URI de documentation --> 
 	<fonctions>spiptospip_filtre.php</fonctions>
-	<prefix> 
-	spip2spip
-	</prefix>
+	<prefix>spip2spip</prefix>
+	<fonctions>spiptospip_fonctions.php</fonctions>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
-		<inclure>inc-spip2spip.php</inclure>
+    <inclure>spiptospip_fonctions.php</inclure>		
 	</pipeline>
 	<pipeline>
 		<nom>taches_generales_cron</nom>

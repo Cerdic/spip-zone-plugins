@@ -2,15 +2,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include(dirname(__FILE__).'/../inc-spip2spip.php');
+include(dirname(__FILE__).'/../spiptospip_fonctions.php');
 include_spip('inc/presentation');
-/*
-include ("inc.php");
-include_ecrire ("inc_sites.php");   
-include_ecrire ("inc_mail.php"); 
-include_ecrire ("inc_getdocument.php"); 
-include_ecrire ("inc-spip2spip.php");
-*/
 
 //------------------------------- 
 // Main
@@ -19,6 +12,7 @@ function exec_spip2spip_syndic(){
   include_spip("inc/distant"); 
   include_spip("inc/syndic"); 
   include_spip("inc/mail"); 
+  include_spip("inc/getdocument");   
   
   // Recupere la config
   global $table_prefix;
@@ -92,10 +86,11 @@ function exec_spip2spip_syndic(){
                     foreach($_documents as $_document) {                      
                         $id_distant = $_document['id'];
                         $source = $_document['url'];
-                        $titre = $_document['titre'];
+                        $titre = $_document['titre'];                        
                         $desc = $_document['desc'];                       
-                        // inspire de ajouter_un_document () de inc_getdocument.php ?
-                        if ($a = recuperer_infos_distantes($source)) {                         
+                        // inspire de ajouter_un_document () de inc/getdocument.php 
+                        if ($a = recuperer_infos_distantes($source)) {  
+                          $fichier = $a['fichier'];                       
                     			$id_type = $a['id_type'];
                     			$taille = $a['taille'];                  			
                     			$largeur = $a['largeur'];
@@ -105,6 +100,22 @@ function exec_spip2spip_syndic(){
                     
                     			$distant = 'oui';
                     			$mode = 'document';
+                    			
+                    			// FIXME verif secu (par rapport ext) 
+                    			
+                    			// extension
+                    			ereg("\.([^.]+)$", $nom_envoye, $match);
+		                      $ext = (corriger_extension(strtolower($match[1])));
+                           
+                          // Prevoir traitement specifique pour videos                      		
+                      		if ($ext != "mov" && $ext != "svg") {                      		 
+                      		  // Si c'est une image, recuperer sa taille et son type (detecte aussi swf)
+                      			if (!$size_image = @getimagesize($fichier)) 
+                      			   $size_image = @getimagesize($source); // si on arrive pas en local, on teste en distant                                                 			
+                      			$largeur = intval($size_image[0]);                      			
+                      			$hauteur = intval($size_image[1]);
+                      			$type_image = decoder_type_image($size_image[2]);
+                      		}  		                      
                           
                           $sql="INSERT INTO ".$table_prefix."_documents(id_type,titre,date,descriptif,fichier,taille,largeur,hauteur,mode,distant,idx) 
                                                                 VALUES ('$id_type',
@@ -120,7 +131,7 @@ function exec_spip2spip_syndic(){
                                                                         'oui'                                                                      
                                                                         )";
                           
-        				          spip_query($sql);
+        				          spip_query($sql);        				          
                           $id_nouveau_doc = spip_insert_id(); 
                           $documents_current_article[$id_distant] = $id_nouveau_doc;                   			
                     		}  

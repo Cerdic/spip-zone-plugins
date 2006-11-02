@@ -1,6 +1,6 @@
 <?php
 
-include(dirname(__FILE__).'/../inc-spip2spip.php');
+include(dirname(__FILE__).'/../spiptospip_fonctions.php');
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
@@ -13,7 +13,6 @@ function exec_spip2spip(){
   //include ("inc.php");
   //include_ecrire ("inc_acces.php");
   //include_ecrire ("inc_config.php");
-  //include_ecrire ("inc-spip2spip.php");
   //include_ecrire("inc_presentation");
   
   global $table_prefix;

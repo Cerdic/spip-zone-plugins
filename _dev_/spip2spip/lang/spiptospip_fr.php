@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 - attribuer les mots cl&eacute;s de ce groupe à vos <strong>rubriques</strong> dans lequel vous voulez importer les articles d\'autres sites utilisant spip2spip dont vous voulez importer à une th&eacute;matique donn&eacute;e.',
 
 // I
-'intro_spip2spip' => '<strong>SPIP 2 SPIP</strong><br /><p>Permet de recopier automatiquement des articles d\'un SPIP à l\'autre.</p><i>spip2spip v1.4</i>',
+'intro_spip2spip' => '<strong>SPIP 2 SPIP</strong><br /><p>Permet de recopier automatiquement des articles d\'un SPIP à l\'autre.</p><i>spip2spip v1.5</i>',
 'install_spip2spip' => 'Installation de SPIP2SPIP',
 'install_spip2spip_1' => 'Cr&eacute;ation de la table SQL',
 'install_spip2spip_2' => 'Ajout des flux backends',
