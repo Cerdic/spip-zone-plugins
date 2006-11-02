@@ -4,10 +4,6 @@
 ## Author: mortimer.pa@free.fr
 ## Licence: GPL, non commercial use
 
-__ATTENTION, CE PLUGIN EST DESTINE A UN USAGE NON COMMERCIAL. SI VOUS EN AVEZ BESOIN POUR UN SITE COMMERCIAL, VOUS DEVEZ OBTENIR VOTRE PROPRE CLEF CHEZ FLICKR.__
-
-__THIS PLUGIN CANNOT BE USED FOR COMMERCIAL SITES. IF YOU WANT TO USE IT ON A COMMERCIAL SITE, YOU HAVE TO GET YOUR OWN API KEY FROM FLICKR.__
-
 -----------------
 
 Ce plugin permet d'associer des images de votre compte flickr a vos articles et rubriques.
@@ -18,13 +14,28 @@ Depuis la version 0.1, on peut utiliser ce plugin pour associer des photos flick
 
 On peut utiliser cette fonction pour faire un article à propos d'une photo, ou d'un set de photos, etc...
 
-
 == Utilisation: == 
  1. aller sur la page de gestion de votre profil SPIP
  1. suivez les instructions pour vous identifier sur Flickr
  1. vous pouvez ensuite aller sur un de vos articles/rubriques et cliquer sur le liens dans la colonne de gauche pour choisir des images de flickr.
 
-== Telechargement ==
+= Clef Flickr =
+
+'''ATTENTION''' avant de pouvoir utiliser ce plugin, vous devez obtenir une clef chez flickr pour votre site. Pour cela:
+ 1. rendez vous sur:
+http://www.flickr.com/services/api/keys/
+ 1. demandez une clef de type: Desktop application.
+ 1. copiez la clef et le secret que Flickr vous donne
+ 1. dans votre fichier config/mes_options.php, ajoutez:
+{{{
+<?php
+$GLOBALS['FLICKR_API_KEY'] = "VOTRE_CLEF_FLICKR";
+$GLOBALS['FLICKR_SECRET'] = "VOTRE_SECRET";
+?>
+}}}
+
+
+= Telechargement =
 
 la version 0.1 est dispo en '''TEST''' ici:
 http://trac.rezo.net/files/spip-zone/FpipR_1_9_1.zip

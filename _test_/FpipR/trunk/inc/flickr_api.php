@@ -1,10 +1,5 @@
 <?php
 
-
-//Attention, cette api_key est seulement pour les utilisations non commerciale. Si vous avez besoin d'utiliser ce plugin avec un site commercial, vous devrez demander votre propre clef (et secret) à Flickr.
-$GLOBALS['FLICKR_API_KEY'] = "7356b4277d182c151e676903c064edec";
-$GLOBALS['FLICKR_SECRET'] = "8dd0abb691ff659d";
-
 //calcule la signature de la requette
 function flickr_sign($params) {
   global $FLICKR_SECRET;
