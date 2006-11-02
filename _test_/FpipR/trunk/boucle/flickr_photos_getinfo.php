@@ -8,7 +8,7 @@ function boucle_FLICKR_PHOTOS_GETINFO_dist($id_boucle, &$boucles) {
   $possible_args = array('id_photo','secret');
   $arguments = '';
 
-  FpipR_utils_search_args($boucle,$possible_args,$arguments);
+  FpipR_utils_search_args($boucle,$id_table,$possible_args,$arguments);
 
   $boucle->hash = FpipR_utils_calculer_hash('flickr.photos.getInfo',$arguments);
   return calculer_boucle($id_boucle, $boucles); 

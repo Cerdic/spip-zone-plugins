@@ -27,8 +27,4 @@ photos.licenses
 
     * flickr.photos.licenses.getInfo
 
-photosets
-
-    * flickr.photosets.getInfo
-
 
