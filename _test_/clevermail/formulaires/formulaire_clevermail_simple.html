@@ -1,0 +1,17 @@
+[<strong>(#ENV{retour})</strong>]
+
+<form action="#SELF" method="post" id="clevermailform">
+<legend><:cm:inscription_lettre:></legend>
+<input type="hidden" name="cm_sub_return" value="#SELF" />
+<fieldset class="email">
+<label for="email"><:cm:email:></label>
+<input type="text" id="email" class="text" name="cm_sub_address" size="12" maxlength="255" value="" />
+<input type="submit" class="submit" value="Ok" />
+<input type="hidden" name="cm_sub_list" value="[(#ENV{id_liste})]">
+</fieldset>
+<fieldset class="format">
+<:cm:version:>
+<input type="radio" name="cm_sub_mode" value="1" id="html" checked="checked" /> <label for="html">HTML</label>
+<input type="radio" name="cm_sub_mode" value="0 id="txt" /> <label for="txt">Texte</label><br />
+</fieldset>
+</form>

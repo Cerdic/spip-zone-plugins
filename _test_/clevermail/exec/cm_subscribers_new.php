@@ -1,0 +1,127 @@
+<?php
+	/**
+	 *
+	 * CleverMail : plugin de gestion de lettres d'information basé sur CleverMail
+	 * Author : Thomas Beaumanoir
+	 * Clever Age <http://www.clever-age.com>
+	 * Copyright (c) 2006
+	 *
+	 **/
+
+include_spip('inc/presentation');
+
+function exec_cm_subscribers_new() {
+
+	debut_page("CleverMail Administration", 'configuration', 'cm_index');
+
+	debut_gauche();
+		include_spip("inc/cm_menu");
+		echo '<br />';
+		debut_cadre_relief();
+			echo '<strong>CSV Format :</strong><br />';
+			echo 'user@example.com<br />user2@example.com';
+		fin_cadre_relief();
+	debut_droite();
+
+	debut_cadre_relief();
+		echo gros_titre('CleverMail Administration');
+	fin_cadre_relief();
+
+	debut_cadre_relief('../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/abonne.png');
+
+		echo '<h3>'._T('cm:ajouter_abonne').' :</h3>';
+
+		$data = array();
+		if (isset($_FILES['cm_file']) && is_uploaded_file($_FILES['cm_file']['tmp_name'])) {
+			$data = array_merge($data, file($_FILES['cm_file']['tmp_name']));
+		}
+
+		if (isset($_POST['cm_subs']) && strlen($_POST['cm_subs']) > 0) {
+			$subString = ereg_replace("(\n|\r)+", "#", $_POST['cm_subs']);
+			$subArray = explode('#', $subString);
+			$data = array_merge($data, $subArray);
+		}
+
+		if (count($data) > 0) {
+			if (isset($_POST['cm_lists']) && is_array($_POST['cm_lists'])) {
+				$lists = $_POST['cm_lists'];
+			}
+			$nbSub = 0;
+			foreach($data as $subscriber) {
+				if (ereg("^([^@ ]+@[^@ ]+\.[^@.; ]+)(;[^;]*)?(;[^;]*)?$", $subscriber, $regs)) {
+					// CSV format: user@example.com;
+					list($address, $firstName, $lastName) = explode(';', $subscriber);
+					$address = trim($regs[1]);
+
+					$result = spip_fetch_array(spip_query("SELECT sub_id FROM cm_subscribers WHERE sub_email='".$address."'"));
+				    if (!$recId = $result['sub_id']) {
+				        // New e-mail address
+				        spip_query("INSERT INTO cm_subscribers (sub_id, sub_email, sub_profile) VALUES ('', '".$address."', '')");
+				        $recId = spip_insert_id();
+				        spip_query("UPDATE cm_subscribers SET sub_profile = '".md5($recId.'#'.$address.'#'.time())."' WHERE sub_id='".$recId."'");
+						$nbSub++;
+			        }
+					if (isset($lists)) {
+						reset($lists);
+						foreach($lists as $listId) {
+							$list = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_lists_subscribers WHERE lst_id = ".$listId." AND sub_id = ".$recId));
+					        if ($list['nb'] == 0) {
+					            // New subscription
+					            $actionId = md5('subscribe#'.$listId.'#'.$recId.'#'.time());
+								spip_query("INSERT INTO cm_lists_subscribers (lst_id, sub_id, lsr_mode, lsr_id) VALUES (".$listId.", ".$recId.", ".$_POST['cm_mode'].", '".$actionId."')");
+					        }
+						}
+					}
+			    } elseif (trim($subscriber) != '') {
+					echo '<span class="error">'._T('cm:erreur').' : '.$subscriber.'</span><br />';
+				}
+			}
+			echo '<p class="noerror">';
+			if($nbSub == 0) {
+				echo _T('cm:aucun_abonne_ajoute');
+			} else {
+				echo $nbSub.' ';
+				if($nbSub > 1) {
+					echo _T('cm:abonnes_ajoutes');
+				} else {
+					echo _T('cm:abonne_ajoute');
+				}
+			}
+			echo '</p>';
+		}
+?>
+		<form enctype="multipart/form-data" action="<?php echo generer_url_ecrire('cm_subscribers_new',''); ?>" method="post">
+		<?php debut_cadre_formulaire() ?>
+			<label><?php echo _T('cm:a_partir_csv') ?></label>
+			<input type="file" name="cm_file" class="formo" /><br />
+
+			<label><?php echo _T('cm:emails') ?> :</label>
+			<textarea name="cm_subs" cols="50" rows="5" wrap="virtual" class="formo" ></textarea><br />
+
+			<label><?php echo _T('cm:abonne_lettres') ?> :</label>
+			<select name="cm_lists[]" multiple="multiple" class="formo" >
+				<?php
+				$lists = spip_query("SELECT lst_id, lst_name FROM cm_lists ORDER BY lst_name");
+				while ($list = spip_fetch_array($lists)) {
+					echo '<option value="'.$list['lst_id'].'">'.$list['lst_name'].'</option>';
+				}
+				?>
+			</select><br />
+			<?php echo _T('cm:mode') ?> :
+	        <input type="radio" name="cm_mode" value="1" checked="checked" id="html" />
+	        <label for="html" class="verdana1">HTML</label>
+	        <input type="radio" name="cm_mode" value="0" id="txt" />
+	        <label for="txt" class="verdana1">Text</label>
+		<?php fin_cadre_formulaire() ?>
+			<br />
+			<div style="text-align: right">
+				<input type="submit" value="<?php echo _T('cm:importer') ?>" class="fondo"  />
+			</div>
+		</form>
+<?php
+
+	fin_cadre_relief();
+
+	fin_page();
+}
+?>

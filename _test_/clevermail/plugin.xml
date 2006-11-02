@@ -1,0 +1,16 @@
+<plugin>
+	<nom>CleverMail</nom>
+	<auteur>Thomas Beaumanoir - [Clever Age->http://www.clever-age.com]</auteur>
+	<version>0.9</version>
+	<etat>test</etat>
+	<description>Gestion de lettres d'information bas&eacute; sur CleverMail</description>
+	<lien>[Clever Age->http://www.clever-age.com]</lien>
+	<options>clevermail.php</options>
+	<prefix>cm</prefix>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+	</pipeline>
+</plugin>
