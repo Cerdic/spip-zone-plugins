@@ -6,7 +6,7 @@
 	<description>Gestion de lettres d'information bas&eacute; sur CleverMail</description>
 	<lien>[Clever Age->http://www.clever-age.com]</lien>
 	<options>clevermail.php</options>
-	<prefix>cm</prefix>
+	<prefix>clevermail</prefix>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 	</pipeline>

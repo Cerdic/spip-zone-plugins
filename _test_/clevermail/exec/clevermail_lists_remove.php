@@ -10,7 +10,7 @@
 
 include_spip("inc/presentation");
 
-function exec_cm_lists_remove() {
+function exec_clevermail_lists_remove() {
 
 	if (isset($_GET['id'])) {
 	    $count = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_lists WHERE lst_id = ".$_GET['id']));
@@ -21,7 +21,7 @@ function exec_cm_lists_remove() {
 	        define('_ERROR', 'Impossible de supprimer une newsletter avec des abonn&eacute;s');
 	    } else {
 	        spip_query("DELETE FROM cm_lists WHERE lst_id = ".$_GET['id']);
-	        header('location: '.generer_url_ecrire('cm_index'));
+	        header('location: '.generer_url_ecrire('clevermail_index'));
 	        exit;
 	    }
 	}

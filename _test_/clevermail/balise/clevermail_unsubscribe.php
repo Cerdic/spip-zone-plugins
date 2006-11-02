@@ -10,11 +10,11 @@
 
 include_spip('phpmailer/class.phpmailer');
 
-function balise_CM_UNSUBSCRIBE($p) {
-	return calculer_balise_dynamique($p, 'CM_UNSUBSCRIBE', array());
+function balise_CLEVERMAIL_UNSUBSCRIBE($p) {
+	return calculer_balise_dynamique($p, 'CLEVERMAIL_UNSUBSCRIBE', array());
 }
 
-function balise_CM_UNSUBSCRIBE_dyn() {
+function balise_CLEVERMAIL_UNSUBSCRIBE_dyn() {
 	if (isset($_GET['id']) && $_GET['id'] != '') {
 		$result = spip_query("SELECT * FROM cm_lists_subscribers WHERE lsr_id = '".$_GET['id']."'");
 	    if (spip_num_rows($result)==1) {
@@ -34,8 +34,8 @@ function balise_CM_UNSUBSCRIBE_dyn() {
 		    $template = array();
 		    $template['@@ADDRESS@@'] = $recipient['sub_email'];
 		    $template['@@FORMAT@@']  = ($data['lsr_mode'] == 1 ? 'HTML' : 'texte');
-		    $template['@@URL@@']     = $GLOBALS['meta']['adresse_site'].'/spip.php?page=cm_do&id='.$actionId;
-		    $template['@@UNSUBSCRIBE@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=cm_rm&id='.$_GET['id'];
+		    $template['@@URL@@']     = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
+		    $template['@@UNSUBSCRIBE@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_rm&id='.$_GET['id'];
 		    $message = $list['lst_unsubscribe_text'];
 	        while (list($from, $to) = each($template)) {
 	            $message = str_replace($from, $to, $message);
@@ -51,9 +51,9 @@ function balise_CM_UNSUBSCRIBE_dyn() {
 			$mail->IsHTML(false);
 			$mail->Body = $message;
 			$mail->Send();
-			$return = '<p>'._T('cm:desinscription_confirmation_debut').' '.$list['lst_name'].' '._T('cm:desinscription_confirmation_fin').'</p>';
+			$return = '<p>'._T('clevermail:desinscription_confirmation_debut').' '.$list['lst_name'].' '._T('clevermail:desinscription_confirmation_fin').'</p>';
 		} else {
-		    $return = '<p>'._T('cm:aucune_inscription').'</p>';
+		    $return = '<p>'._T('clevermail:aucune_inscription').'</p>';
 	    }
 	}
 	return $return;

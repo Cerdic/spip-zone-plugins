@@ -8,7 +8,7 @@
 	 *
 	 **/
 
-function exec_cm_post() {
+function exec_clevermail_post() {
 
 	if (isset($_GET['pst_id'])) {
 		if (isset($_GET['mode'])) {

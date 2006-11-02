@@ -11,7 +11,7 @@
 $p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 define('_DIR_PLUGIN_CLEVERMAIL', (_DIR_PLUGINS.end($p)));
 
-include_spip('inc/cm_options');
-include_spip('inc/cm_header_prive');
+include_spip('inc/clevermail_options');
+include_spip('inc/clevermail_header_prive');
 
 ?>

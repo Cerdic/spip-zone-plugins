@@ -10,7 +10,7 @@
 
 include_spip('inc/presentation');
 
-function exec_cm_subscribers_detail() {
+function exec_clevermail_subscribers_detail() {
 
 	if(isset($_GET['sub_id'])) {
 		$sub_id = $_GET['sub_id'];
@@ -27,15 +27,15 @@ function exec_cm_subscribers_detail() {
 	        	spip_query("DELETE FROM cm_posts_queued WHERE sub_id = ".$sub_id);
 	        	spip_query("DELETE FROM cm_posts_done WHERE sub_id = ".$sub_id);
 
-	        	header('location: '.generer_url_ecrire('cm_index'));
+	        	header('location: '.generer_url_ecrire('clevermail_index'));
 			}
 			$abonne = spip_fetch_array(spip_query("SELECT sub_email FROM cm_subscribers WHERE sub_id = '".$sub_id."'"));
 			$list = spip_query("SELECT ls.lsr_mode, l.lst_id, l.lst_name FROM cm_lists_subscribers AS ls, cm_lists AS l WHERE ls.sub_id = '".$sub_id."' AND ls.lst_id = l.lst_id");
 		} else {
-			define('_ERROR', _T('cm:abonne_inconnu'));
+			define('_ERROR', _T('clevermail:abonne_inconnu'));
 		}
 	} else {
-		header('location: '.generer_url_ecrire('cm_index'));
+		header('location: '.generer_url_ecrire('clevermail_index'));
 	    exit;
 	}
 
@@ -52,7 +52,7 @@ function exec_cm_subscribers_detail() {
 
 	debut_cadre_relief('../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/abonne.png');
 
-		echo '<h3>'._T('cm:modifier_abonne').' : '.$abonne['sub_email'].'</h3>';
+		echo '<h3>'._T('clevermail:modifier_abonne').' : '.$abonne['sub_email'].'</h3>';
 
 		if (defined('_ERROR')) {
 		    echo '<p class="error">'._ERROR.'</p>';
@@ -61,9 +61,9 @@ function exec_cm_subscribers_detail() {
 		if(spip_num_rows($list)>0) {
 			echo '<table border="0" cellpadding="2" cellspacing="0" width="100%" class="arial2" style="border: 1px solid #aaaaaa;">';
 			echo '<tr style="background-color:#DBE1C5">';
-			echo '<th>'._T('cm:lettres_information').'</th>';
-			echo '<th>'._T('cm:mode').'</th>';
-			echo '<th>'._T('cm:actions').'</th>';
+			echo '<th>'._T('clevermail:lettres_information').'</th>';
+			echo '<th>'._T('clevermail:mode').'</th>';
+			echo '<th>'._T('clevermail:actions').'</th>';
 			echo '</tr>';
 			$nbrow = 0;
 			while($row = spip_fetch_array($list)) {
@@ -75,17 +75,17 @@ function exec_cm_subscribers_detail() {
 				echo ($row['lsr_mode']==1 ? 'HTML' : 'Text');
 				echo '</td>';
 				echo '<td class="arial1" style="border-top: 1px solid #CCC;">';
-				echo '<a href="'.generer_url_ecrire("cm_subscribers_detail","lst_id=".$row['lst_id']."&sub_id=".$sub_id).'">'._T('cm:desabonner').'</a>';
+				echo '<a href="'.generer_url_ecrire("clevermail_subscribers_detail","lst_id=".$row['lst_id']."&sub_id=".$sub_id).'">'._T('clevermail:desabonner').'</a>';
 				echo '</td>';
 				echo '<tr>';
 			}
 			echo '</table>';
 		} else {
-			echo _T('cm:abonne_aucune_lettre');
+			echo _T('clevermail:abonne_aucune_lettre');
 		}
 
 	fin_cadre_relief();
-		icone_horizontale(_T('cm:supprimer_abonne_base'), generer_url_ecrire("cm_subscribers_detail","lst_id=0&sub_id=".$sub_id), '../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/abonne.png', 'supprimer.gif');
+		icone_horizontale(_T('clevermail:supprimer_abonne_base'), generer_url_ecrire("clevermail_subscribers_detail","lst_id=0&sub_id=".$sub_id), '../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/abonne.png', 'supprimer.gif');
 
 	fin_page();
 }

@@ -10,11 +10,11 @@
 
 include_spip('phpmailer/class.phpmailer');
 
-function balise_CM_VALIDATION($p) {
-	return calculer_balise_dynamique($p, 'CM_VALIDATION', array());
+function balise_CLEVERMAIL_VALIDATION($p) {
+	return calculer_balise_dynamique($p, 'CLEVERMAIL_VALIDATION', array());
 }
 
-function balise_CM_VALIDATION_dyn() {
+function balise_CLEVERMAIL_VALIDATION_dyn() {
 	if (isset($_GET['id']) && $_GET['id'] != '') {
 		$result = spip_query("SELECT * FROM cm_pending WHERE pnd_action_id='".$_GET['id']."'");
 	    if (spip_num_rows($result)==1) {
@@ -24,10 +24,10 @@ function balise_CM_VALIDATION_dyn() {
 	            	$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_lists_subscribers WHERE lst_id = ".$action['lst_id']." AND sub_id = ".$action['sub_id']));
 	                if ($result['nb'] == 1) {
 	                    spip_query("UPDATE cm_lists_subscribers SET lsr_mode = ".$action['pnd_mode'].", lsr_id = '".$action['pnd_action_id']."' WHERE lst_id = ".$action['lst_id']." AND sub_id = ".$action['sub_id']);
-	                    $return = '<p>'._T('cm:deja_inscrit').'</p>';
+	                    $return = '<p>'._T('clevermail:deja_inscrit').'</p>';
 	                } else {
 	                    spip_query("INSERT INTO cm_lists_subscribers (lst_id, sub_id, lsr_mode, lsr_id) VALUES (".$action['lst_id'].", ".$action['sub_id'].", ".$action['pnd_mode'].", '".$action['pnd_action_id']."')");
-	                    $return = '<p>'._T('cm:inscription_validee').'</p>';
+	                    $return = '<p>'._T('clevermail:inscription_validee').'</p>';
 
 	                    $sub = spip_fetch_array(spip_query("SELECT * FROM cm_subscribers WHERE sub_id = ".$action['sub_id']));
 	                    $list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id = ".$action['lst_id']));
@@ -47,7 +47,7 @@ function balise_CM_VALIDATION_dyn() {
 		        	spip_query("DELETE FROM cm_pending WHERE sub_id = ".$action['sub_id']);
 		        	spip_query("DELETE FROM cm_posts_queued WHERE sub_id = ".$action['sub_id']);
 	                spip_query("DELETE FROM cm_lists_subscribers WHERE lst_id = ".$action['lst_id']." AND sub_id = ".$action['sub_id']);
-	                $return = '<p>'._T('cm:desinscription_validee').'</p>';
+	                $return = '<p>'._T('clevermail:desinscription_validee').'</p>';
 
                     $sub = spip_fetch_array(spip_query("SELECT * FROM cm_subscribers WHERE sub_id = ".$action['sub_id']));
                     $list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id = ".$action['lst_id']));
@@ -65,7 +65,7 @@ function balise_CM_VALIDATION_dyn() {
 	        }
 	        spip_query("DELETE FROM cm_pending WHERE pnd_action_id='".$_GET['id']."'");
 	    } else {
-	        $return = '<p>'._T('cm:deja_validee').'</p>';
+	        $return = '<p>'._T('clevermail:deja_validee').'</p>';
 	    }
 	}
 	return $return;

@@ -8,7 +8,7 @@
 	 *
 	 **/
 
-function exec_cm_post_queue() {
+function exec_clevermail_post_queue() {
 
 	$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_posts WHERE pst_id = ".$_GET['pst_id']." AND pst_date_sent = 0"));
 	if (isset($_GET['pst_id']) && $result['nb'] == 1) {
@@ -20,6 +20,6 @@ function exec_cm_post_queue() {
 		}
 		spip_query("UPDATE cm_posts SET pst_date_sent = ".time()." WHERE pst_id = ".$_GET['pst_id']);
 	}
-	header('Location: '.generer_url_ecrire('cm_posts','').'&lst_id='.$lst_id);
+	header('Location: '.generer_url_ecrire('clevermail_posts','').'&lst_id='.$lst_id);
 }
 ?>

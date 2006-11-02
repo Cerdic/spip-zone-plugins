@@ -8,10 +8,10 @@
 	 *
 	 **/
 
-function cm_header_prive($flux) {
+function clevermail_header_prive($flux) {
 	// On vérifie la présence des tables, le cas échéant on les crée
 	// (on doit pouvoir faire ca plus proprement mais j'ai pas trouvé ;)
-	cm_creer_table();
+	clevermail_creer_table();
 	// On ajoute un CSS et un JS pour le back-office
 	$flux .= "<script src=\""._DIR_PLUGIN_CLEVERMAIL."/js/functions.js\" type=\"text/javascript\"></script>";
 	$flux .= "<link rel=\"stylesheet\" type=\"text/css\" href=\""._DIR_PLUGIN_CLEVERMAIL."/css/styles.css\" />";

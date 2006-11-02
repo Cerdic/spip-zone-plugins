@@ -10,7 +10,7 @@
 
 include_spip("inc/presentation");
 
-function exec_cm_post_edit() {
+function exec_clevermail_post_edit() {
 
 	if (isset($_POST['pst_subject'])) {
 		$post = $_POST;
@@ -37,12 +37,12 @@ function exec_cm_post_edit() {
 					pst_id = ".$post['pst_id']);
 			}
 		} else {
-			define('_ERROR', _T('cm:sujet_vide'));
+			define('_ERROR', _T('clevermail:sujet_vide'));
 		}
 		if (defined('_ERROR')) {
 			$post = $_POST;
 		} else {
-			header('Location: '.generer_url_ecrire('cm_posts','').'&lst_id='.$post['lst_id']);
+			header('Location: '.generer_url_ecrire('clevermail_posts','').'&lst_id='.$post['lst_id']);
 			exit;
 		}
 	}
@@ -70,25 +70,25 @@ function exec_cm_post_edit() {
 				}
 
 				if ($post['pst_id'] == -1) {
-				    echo '<h3>'._T('cm:creer_message').' :</h3>';
+				    echo '<h3>'._T('clevermail:creer_message').' :</h3>';
 				} else {
-				    echo '<h3>'._T('cm:modifier_message').' :</h3>';
+				    echo '<h3>'._T('clevermail:modifier_message').' :</h3>';
 				}
 
 				if (defined('_ERROR')) {
 				    echo '<p class="error">'._ERROR.'</p>';
 				}
 ?>
-				<form action="<?php echo generer_url_ecrire('cm_post_edit',''); ?>" method="post">
+				<form action="<?php echo generer_url_ecrire('clevermail_post_edit',''); ?>" method="post">
 				<input type="hidden" name="pst_id" value="<?=$post['pst_id']?>" />
         		<input type="hidden" name="lst_id" value="<?=$post['lst_id']?>" />
 				<?php debut_cadre_formulaire(); ?>
-					<label><?php echo _T('cm:sujet_message') ?> :</label>
+					<label><?php echo _T('clevermail:sujet_message') ?> :</label>
 					<input type="text" name="pst_subject" value="<?=$post['pst_subject']?>" size="50" maxlength="255" class="formo" />
 				<?php fin_cadre_formulaire(); ?>
 				<br />
 				<div style="text-align: right">
-					<input type="submit" value="<?=($post['pst_id'] == -1 ? _T('cm:creer') : _T('cm:modifier_submit'))?>" class="fondo"  />
+					<input type="submit" value="<?=($post['pst_id'] == -1 ? _T('clevermail:creer') : _T('clevermail:modifier_submit'))?>" class="fondo"  />
 				</div>
 				</form>
 <?php

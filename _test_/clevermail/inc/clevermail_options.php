@@ -15,14 +15,14 @@
 define('CM_NEWLINE', "\n");
 
 // Ajoute le bouton du plugin dans l'interface du back-office
-function cm_ajouter_boutons($boutons_admin) {
+function clevermail_ajouter_boutons($boutons_admin) {
 	if ($GLOBALS['connect_statut'] == "0minirezo") {
 		$boutons_admin['configuration']->sousmenu['cm_index'] = new Bouton(_DIR_PLUGIN_CLEVERMAIL.'/img_pack/enveloppe.png', 'CleverMail');
 	}
 	return $boutons_admin;
 }
 
-function cm_creer_table() {
+function clevermail_creer_table() {
 spip_query("CREATE TABLE IF NOT EXISTS `cm_lists` (
   `lst_id` int(11) NOT NULL auto_increment,
   `lst_name` varchar(255) NOT NULL default '',

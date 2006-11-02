@@ -10,7 +10,7 @@
 
 include_spip("inc/presentation");
 
-function exec_cm_lists_edit() {
+function exec_clevermail_lists_edit() {
 
 	if (isset($_POST['lst_name'])) {
 		$list = $_POST;
@@ -54,15 +54,15 @@ function exec_cm_lists_edit() {
 		                lst_id = ".$list['lst_id']);
 		        }
 		    } else {
-		        define('_ERROR', _T('cm:lettre_meme_nom'));
+		        define('_ERROR', _T('clevermail:lettre_meme_nom'));
 		    }
 		} else {
-		    define('_ERROR', _T('cm:lettre_sans_nom'));
+		    define('_ERROR', _T('clevermail:lettre_sans_nom'));
 		}
 		if (defined('_ERROR')) {
 	        $list = $_POST;
 	    } else {
-	    	header('location: '.generer_url_ecrire('cm_index'));
+	    	header('location: '.generer_url_ecrire('clevermail_index'));
 	    	exit;
 	    }
 	}
@@ -72,7 +72,7 @@ function exec_cm_lists_edit() {
         	include_spip("inc/cm_menu");
 			echo '<br />';
 			debut_cadre_relief();
-				echo '<strong>'._T('cm:tags_specifiques').' :</strong><br />';
+				echo '<strong>'._T('clevermail:tags_specifiques').' :</strong><br />';
 				echo '@@FORMAT@@<br />';
 				echo '@@ADDRESS@@<br />';
 				echo '@@URL@@<br />';
@@ -91,11 +91,11 @@ function exec_cm_lists_edit() {
 					        'lst_comment' => '',
 					        'lst_moderation' => 'closed',
 							'lst_moderator_email' => '',
-					        'lst_subscribe_subject' => _T('cm:confirmation_votre_inscription'),
-					        'lst_subscribe_text' => _T('cm:confirmation_votre_inscription_text'),
+					        'lst_subscribe_subject' => _T('clevermail:confirmation_votre_inscription'),
+					        'lst_subscribe_text' => _T('clevermail:confirmation_votre_inscription_text'),
 					        'lst_subject' => '',
-					        'lst_unsubscribe_subject' => _T('cm:confirmation_votre_desinscription'),
-					        'lst_unsubscribe_text' => _T('cm:confirmation_votre_desinscription_text'),
+					        'lst_unsubscribe_subject' => _T('clevermail:confirmation_votre_desinscription'),
+					        'lst_unsubscribe_text' => _T('clevermail:confirmation_votre_desinscription_text'),
 					        'lst_subject_tag' => 1,
 					        'lst_url_html' => "http://",
 					        'lst_url_text' => "http://");
@@ -106,9 +106,9 @@ function exec_cm_lists_edit() {
 				    }
 				}
 				if ($list['lst_id'] == -1) {
-				   	echo '<h3>'._T('cm:creer_lettre').' :</h3>';
+				   	echo '<h3>'._T('clevermail:creer_lettre').' :</h3>';
 				} else {
-				    echo '<h3>'._T('cm:editer_lettre').' : '.$list['lst_name'].'</h3>';
+				    echo '<h3>'._T('clevermail:editer_lettre').' : '.$list['lst_name'].'</h3>';
 				}
 
 				if (defined('_ERROR')) {
@@ -117,25 +117,25 @@ function exec_cm_lists_edit() {
 
 				if (is_array($list)) {
 ?>
-					<form action="<?php echo generer_url_ecrire('cm_lists_edit',''); ?>" method="post">
+					<form action="<?php echo generer_url_ecrire('clevermail_lists_edit',''); ?>" method="post">
 				        <?php debut_cadre_formulaire() ?>
-				        	<h4><?php echo _T('cm:configuration_generale') ?></h4>
+				        	<h4><?php echo _T('clevermail:configuration_generale') ?></h4>
 				       		<input type="hidden" name="lst_id" value="<?=$list['lst_id']?>" />
 
-					        <label><?php echo _T('cm:nom') ?> :</label>
+					        <label><?php echo _T('clevermail:nom') ?> :</label>
 				            <input type="text" name="lst_name" value="<?=$list['lst_name']?>" size="50" maxlength="255" class="formo" /><br />
 
-				            <label><?php echo _T('cm:description') ?> :</label>
+				            <label><?php echo _T('clevermail:description') ?> :</label>
 				            <textarea name="lst_comment" cols="50" rows="5" wrap="virtual" class="formo"><?=$list['lst_comment']?></textarea><br />
 
-				            <label><?php echo _T('cm:moderation') ?> :</label>
+				            <label><?php echo _T('clevermail:moderation') ?> :</label>
 			                <select name="lst_moderation" class="formo">
 			                <?php
 			                $modes = array(
-			                    'open' => _T('cm:mod_open'),
-			                    'email' => _T('cm:mod_email'),
-			                    'mod' => _T('cm:mod_mod'),
-			                    'closed' => _T('cm:mod_closed'));
+			                    'open' => _T('clevermail:mod_open'),
+			                    'email' => _T('clevermail:mod_email'),
+			                    'mod' => _T('clevermail:mod_mod'),
+			                    'closed' => _T('clevermail:mod_closed'));
 			                while (list($value, $label) = each($modes)) {
 			                    echo '<option value="'.$value.'"';
 			                    if ($value == $list['lst_moderation']) echo ' selected="selected"';
@@ -144,49 +144,49 @@ function exec_cm_lists_edit() {
 			                ?>
 			                </select><br />
 
-				            <label><?php echo _T('cm:email_moderateur') ?> :</label>
+				            <label><?php echo _T('clevermail:email_moderateur') ?> :</label>
 				            <input type="text" name="lst_moderator_email" value="<?=$list['lst_moderator_email']?>" size="50" maxlength="255" class="formo" /><br />
 
 				            <input type="checkbox" value="1" name="lst_subject_tag" <?=($list['lst_subject_tag'] == 1 ? 'checked="checked"' : '')?>/>
-				            <label><?php echo _T('cm:prefixer_messages') ?></label>
+				            <label><?php echo _T('clevermail:prefixer_messages') ?></label>
 				        <?php fin_cadre_formulaire() ?>
 						<br />
 						<?php debut_cadre_formulaire() ?>
-					        <h4><?php echo _T('cm:confirmation_inscription') ?></h4>
+					        <h4><?php echo _T('clevermail:confirmation_inscription') ?></h4>
 
-					        <label><?php echo _T('cm:sujet') ?> :</label>
+					        <label><?php echo _T('clevermail:sujet') ?> :</label>
 					        <input type="text" name="lst_subscribe_subject" value="<?=$list['lst_subscribe_subject']?>" size="50" maxlength="255" class="formo" /><br />
 
-					        <label><?php echo _T('cm:description') ?> :</label>
+					        <label><?php echo _T('clevermail:description') ?> :</label>
 					        <textarea name="lst_subscribe_text" cols="50" rows="10" wrap="virtual" class="formo"><?=$list['lst_subscribe_text']?></textarea>
 						<?php fin_cadre_formulaire() ?>
 						<br />
 						<?php debut_cadre_formulaire() ?>
-					        <h4><?php echo _T('cm:confirmation_desinscription') ?></h4>
+					        <h4><?php echo _T('clevermail:confirmation_desinscription') ?></h4>
 
-					        <label><?php echo _T('cm:sujet') ?> :</label>
+					        <label><?php echo _T('clevermail:sujet') ?> :</label>
 					        <input type="text" name="lst_unsubscribe_subject" value="<?=$list['lst_unsubscribe_subject']?>" size="50" maxlength="255" class="formo" /><br />
 
-					        <label><?php echo _T('cm:description') ?> :</label>
+					        <label><?php echo _T('clevermail:description') ?> :</label>
 							<textarea name="lst_unsubscribe_text" cols="50" rows="10" wrap="virtual" class="formo"><?=$list['lst_unsubscribe_text']?></textarea>
 						<?php fin_cadre_formulaire() ?>
 						<br />
 						<?php debut_cadre_formulaire() ?>
-							<h4><?php echo _T('cm:url_templates') ?></strong></h4>
-							<label><?php echo _T('cm:version_html') ?> :</label>
+							<h4><?php echo _T('clevermail:url_templates') ?></strong></h4>
+							<label><?php echo _T('clevermail:version_html') ?> :</label>
 					        <input type="text" name="lst_url_html" value="<?=$list['lst_url_html']?>" size="50" maxlength="255" class="formo" /><br />
-					        <label><?php echo _T('cm:version_txt') ?> :</label>
+					        <label><?php echo _T('clevermail:version_txt') ?> :</label>
 					        <input type="text" name="lst_url_text" value="<?=$list['lst_url_text']?>" size="50" maxlength="255" class="formo" />
 						<?php fin_cadre_formulaire() ?>
 						<br />
 						<div style="text-align: right">
-							<input type="reset" value="<?php echo _T('cm:annuler') ?>" class="fondo" />
-							<input type="submit" value="<?=($list['lst_id'] == -1 ? _T('cm:creer') : _T('cm:modifier'))?>" class="fondo" />
+							<input type="reset" value="<?php echo _T('clevermail:annuler') ?>" class="fondo" />
+							<input type="submit" value="<?=($list['lst_id'] == -1 ? _T('clevermail:creer') : _T('clevermail:modifier'))?>" class="fondo" />
 						</div>
 					</form>
 <?php
 				} else {
-				    echo '<p class="error">'._T('cm:mauvais_identifiant_lettre').'</p>';
+				    echo '<p class="error">'._T('clevermail:mauvais_identifiant_lettre').'</p>';
 				}
 			fin_cadre_relief();
 	fin_page();

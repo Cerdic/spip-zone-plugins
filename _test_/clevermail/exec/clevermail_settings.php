@@ -10,7 +10,7 @@
 
 include_spip('inc/presentation');
 
-function exec_cm_settings() {
+function exec_clevermail_settings() {
 	if($_POST) {
 		spip_query("UPDATE cm_settings SET set_value = '".$_POST['CM_MAIL_ADMIN']."' WHERE set_name='CM_MAIL_ADMIN'");
 		spip_query("UPDATE cm_settings SET set_value = '".$_POST['CM_MAIL_FROM']."' WHERE set_name='CM_MAIL_FROM'");
@@ -22,7 +22,7 @@ function exec_cm_settings() {
 		include_spip("inc/cm_menu");
 		echo '<br />';
 		debut_cadre_relief();
-			echo _T('cm:info_parametres');
+			echo _T('clevermail:info_parametres');
 		fin_cadre_relief();
 	debut_droite();
 
@@ -36,20 +36,20 @@ function exec_cm_settings() {
 		$cm_mail_from = spip_fetch_array(spip_query("SELECT set_value FROM cm_settings WHERE set_name='CM_MAIL_FROM'"));
 		$cm_send_number = spip_fetch_array(spip_query("SELECT set_value FROM cm_settings WHERE set_name='CM_SEND_NUMBER'"));
 
-		echo '<h3>'._T('cm:parametres').' :</h3>';
+		echo '<h3>'._T('clevermail:parametres').' :</h3>';
 ?>
-		<form action="<?php echo generer_url_ecrire('cm_settings',''); ?>" method="post">
+		<form action="<?php echo generer_url_ecrire('clevermail_settings',''); ?>" method="post">
 			<?php debut_cadre_formulaire() ?>
-			<label><?php echo _T('cm:email_administrateur') ?> :</label><br />
+			<label><?php echo _T('clevermail:email_administrateur') ?> :</label><br />
 			<input type="text" name="CM_MAIL_ADMIN" value="<?php echo $cm_mail_admin['set_value'] ?>" class="formo" /><br />
-			<label><?php echo _T('cm:email_expediteur') ?> :</label><br />
+			<label><?php echo _T('clevermail:email_expediteur') ?> :</label><br />
 			<input type="text" name="CM_MAIL_FROM" value="<?php echo $cm_mail_from['set_value'] ?>" class="formo" /><br />
-			<label><?php echo _T('cm:nombre_messages') ?> :</label><br />
+			<label><?php echo _T('clevermail:nombre_messages') ?> :</label><br />
 			<input type="text" name="CM_SEND_NUMBER" value="<?php echo $cm_send_number['set_value'] ?>" class="formo" /><br />
 			<?php fin_cadre_formulaire() ?>
 			<br />
 			<div style="text-align: right">
-				<input type="submit" value="<?php echo _T('cm:modifier') ?>" class="fondo" />
+				<input type="submit" value="<?php echo _T('clevermail:modifier') ?>" class="fondo" />
 			</div>
 		</form>
 <?php

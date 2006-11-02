@@ -10,28 +10,21 @@
 
 include_spip('inc/presentation');
 
-function exec_cm_lists_subscribers() {
-
-	if (isset($_GET['id'])) {
-	    $listId = $_GET['id'];
-	} elseif (isset($_POST['id'])) {
-	    $listId = $_POST['id'];
-	}
+function exec_clevermail_subscribers() {
 
 	if (isset($_POST['remove']) && strlen($_POST['sub_ids']) > 0) {
         foreach(explode(';', $_POST['sub_ids']) as $subId) {
 			if ($subId != '') {
-				spip_query("DELETE FROM cm_lists_subscribers WHERE lst_id = ".$listId." AND sub_id = ".$subId);
+				spip_query("DELETE FROM cm_lists_subscribers WHERE sub_id = ".$subId);
+	        	spip_query("DELETE FROM cm_subscribers WHERE sub_id = ".$subId);
+	        	spip_query("DELETE FROM cm_pending WHERE sub_id = ".$subId);
+	        	spip_query("DELETE FROM cm_posts_queued WHERE sub_id = ".$subId);
+	        	spip_query("DELETE FROM cm_posts_done WHERE sub_id = ".$subId);
 			}
         }
-    } else if(isset($_GET['remove']) && $_GET['sub_id'] > 0) {
-    	spip_query("DELETE FROM cm_lists_subscribers WHERE lst_id = ".$listId." AND sub_id = ".$_GET['sub_id']);
     }
 
-	$result = spip_query("SELECT s.sub_id, s.sub_email, l.lsr_mode
-            FROM cm_subscribers s, cm_lists_subscribers l
-            WHERE s.sub_id = l.sub_id AND l.lst_id = ".$listId."
-            ORDER BY s.sub_email");
+	$result = spip_query("SELECT * FROM cm_subscribers ORDER BY sub_email");
 	$nombre_auteurs = spip_num_rows($result);
 
 	$max_par_page = 30;
@@ -40,7 +33,7 @@ function exec_cm_lists_subscribers() {
 		$debut = max(0,$nombre_auteurs - $max_par_page);
 
 	list($auteurs, $lettre)= lettres_d_abonnes($result, $debut, $max_par_page);
-	$res = abonnes_tranches(afficher_n_abonnes($auteurs), $debut, $lettre, $max_par_page, $nombre_auteurs, 1);
+	$res = abonnes_tranches(afficher_n_abonnes($auteurs), $debut, $lettre, $max_par_page, $nombre_auteurs);
 
 	if (_request('var_ajaxcharset')) ajax_retour($res);
 
@@ -57,18 +50,16 @@ function exec_cm_lists_subscribers() {
 			echo gros_titre('CleverMail Administration');
 		fin_cadre_relief();
 
-		echo '<form name="subscribers" action="'.generer_url_ecrire('cm_lists_subscribers','').'" method="post">'."\n";
-		echo '<input type="hidden" name="id" value="'.$listId.'" />'."\n";
+		echo '<form name="subscribers" action="'.generer_url_ecrire('clevermail_subscribers','').'" method="post">'."\n";
 		echo '<input type="hidden" name="sub_ids" value="" />'."\n";
 
 		debut_cadre_relief('../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/abonnes.png');
-			$result = spip_fetch_array(spip_query("SELECT lst_name FROM cm_lists WHERE lst_id = ".$listId));
-			echo '<h3>'._T('cm:liste_abonnes').' : '.$result['lst_name'].'</h3>';
+			echo '<h3>'._T('clevermail:liste_abonnes').' :</h3>';
 			echo '<div id="abonnes">'.$res. '</div>'."\n";
 		fin_cadre_relief();
 
 		echo '<input type="hidden" name="remove" value="1" />'."\n";
-		icone_horizontale(_T('cm:desabonner_abonnes'), 'javascript:if(confirm("'._T('cm:confirme_desabonnement_multiple_lettre').'")){checkbox2input(document.subscribers,"sub_id",document.subscribers.sub_ids);document.subscribers.submit();}', '../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/abonnes.png', 'supprimer.gif');
+		icone_horizontale(_T('clevermail:supprimer_abonnes'), 'javascript:if(confirm("'._T('clevermail:confirme_suppression_multiple_base').'")){checkbox2input(document.subscribers,"sub_id",document.subscribers.sub_ids);document.subscribers.submit();}', '../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/abonnes.png', 'supprimer.gif');
 		echo '</form>'."\n";
 
 	fin_page();
@@ -105,8 +96,8 @@ function abonnes_tranches($auteurs, $debut, $lettre, $max_par_page, $nombre_aute
 
 	$res .= '<tr style="background-color:#DBE1C5">'."\n";
 	$res .= '<th><input type="checkbox" onclick="toggle(document.subscribers, \'sub_id\')" /></th>'."\n";
-	$res .= '<th>'._T('cm:emails').'</th>'."\n";
-	$res .= '<th>'._T('cm:actions').'</th>'."\n";
+	$res .= '<th>'._T('clevermail:emails').'</th>'."\n";
+	$res .= '<th>'._T('clevermail:actions').'</th>'."\n";
 	$res .= '</tr>'."\n";
 
 	if ($nombre_auteurs > $max_par_page) {
@@ -117,7 +108,7 @@ function abonnes_tranches($auteurs, $debut, $lettre, $max_par_page, $nombre_aute
 			if ($j == $debut)
 				$pagination .= "<b>$j</b>";
 			else if ($j > 0)
-				$pagination .= abonnes_href($j, "id=".(isset($_GET['id']) ? $_GET['id']: $_POST['id'])."&debut=".$j);
+				$pagination .= abonnes_href($j, "debut=$j");
 			else
 				$pagination .= abonnes_href('0', "");
 			if ($debut > $j  AND $debut < $j+$max_par_page){
@@ -131,7 +122,7 @@ function abonnes_tranches($auteurs, $debut, $lettre, $max_par_page, $nombre_aute
 			if ($val == $debut)
 				$res .= "<b>$key</b>\n";
 			else
-				$res .= abonnes_href($key, "id=".(isset($_GET['id']) ? $_GET['id']: $_POST['id'])."&debut=".$val) . "\n";
+				$res .= abonnes_href($key, "debut=$val") . "\n";
 		}
 		$res .= "</td></tr>\n";
 	}
@@ -144,11 +135,11 @@ function abonnes_tranches($auteurs, $debut, $lettre, $max_par_page, $nombre_aute
 
 		if ($debut > 0) {
 			$debut_prec = max($debut - $max_par_page, 0);
-			$nav .= abonnes_href('&lt;&lt;&lt;',"id=".(isset($_GET['id']) ? $_GET['id']: $_POST['id'])."&debut=".$debut_prec);
+			$nav .= abonnes_href('&lt;&lt;&lt;',"debut=$debut_prec");
 		}
 		$nav .= "</td><td style='text-align: $spip_lang_right'>";
 		if ($debut_suivant < $nombre_auteurs) {
-			$nav .= abonnes_href('&gt;&gt;&gt;',"id=".(isset($_GET['id']) ? $_GET['id']: $_POST['id'])."&debut=".$debut_suivant);
+			$nav .= abonnes_href('&gt;&gt;&gt;',"debut=$debut_suivant");
 		}
 		$nav .= "</td></tr></table>\n";
 	}
@@ -167,17 +158,7 @@ function abonnes_tranches($auteurs, $debut, $lettre, $max_par_page, $nombre_aute
 
 function abonnes_href($clic, $args='', $att='')
 {
-	$h = generer_url_ecrire('cm_lists_subscribers', $args);
-	$a = 'abonnes';
-	if ($_COOKIE['spip_accepte_ajax'] == 1 )
-		$att .= ("\nonclick=" . ajax_action_declencheur($h,$a));
-
-	return "<a href='$h#$a'$att>$clic</a>";
-}
-
-function abonnes_href_suppression($clic, $args='', $att='')
-{
-	$h = generer_url_ecrire("cm_lists_subscribers",'remove=1&id='.(isset($_GET['id']) ? $_GET['id']: $_POST['id']).'&debut='.(isset($_GET['debut']) ? $_GET['debut']: $_POST['debut']).'&'.$args);
+	$h = generer_url_ecrire('clevermail_subscribers', $args);
 	$a = 'abonnes';
 	if ($_COOKIE['spip_accepte_ajax'] == 1 )
 		$att .= ("\nonclick=" . ajax_action_declencheur($h,$a));
@@ -197,8 +178,7 @@ function afficher_n_abonnes($auteurs) {
 		$res .= $row['sub_email'];
 		$res .= '</td>'."\n";
 		$res .= '<td class="arial1" style="border-top: 1px solid #CCC;">'."\n";
-		$res .= '<a href="'.generer_url_ecrire("cm_subscribers_detail","sub_id=".$row['sub_id']).'">'._T('cm:modifier').'</a>';
-		$res .= ' | '.abonnes_href_suppression(_T('cm:desabonner2'), 'sub_id='.$row['sub_id']);
+		$res .= '<a href="'.generer_url_ecrire("clevermail_subscribers_detail","sub_id=".$row['sub_id']).'">'._T('clevermail:modifier').'</a>';
 		$res .= '</td>'."\n";
 		$res .='</tr>'."\n";
 	}

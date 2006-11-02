@@ -10,7 +10,7 @@
 
 include_spip('inc/presentation');
 
-function exec_cm_subscribers_new() {
+function exec_clevermail_subscribers_new() {
 
 	debut_page("CleverMail Administration", 'configuration', 'cm_index');
 
@@ -29,7 +29,7 @@ function exec_cm_subscribers_new() {
 
 	debut_cadre_relief('../'._DIR_PLUGIN_CLEVERMAIL.'/img_pack/abonne.png');
 
-		echo '<h3>'._T('cm:ajouter_abonne').' :</h3>';
+		echo '<h3>'._T('clevermail:ajouter_abonne').' :</h3>';
 
 		$data = array();
 		if (isset($_FILES['cm_file']) && is_uploaded_file($_FILES['cm_file']['tmp_name'])) {
@@ -73,32 +73,32 @@ function exec_cm_subscribers_new() {
 						}
 					}
 			    } elseif (trim($subscriber) != '') {
-					echo '<span class="error">'._T('cm:erreur').' : '.$subscriber.'</span><br />';
+					echo '<span class="error">'._T('clevermail:erreur').' : '.$subscriber.'</span><br />';
 				}
 			}
 			echo '<p class="noerror">';
 			if($nbSub == 0) {
-				echo _T('cm:aucun_abonne_ajoute');
+				echo _T('clevermail:aucun_abonne_ajoute');
 			} else {
 				echo $nbSub.' ';
 				if($nbSub > 1) {
-					echo _T('cm:abonnes_ajoutes');
+					echo _T('clevermail:abonnes_ajoutes');
 				} else {
-					echo _T('cm:abonne_ajoute');
+					echo _T('clevermail:abonne_ajoute');
 				}
 			}
 			echo '</p>';
 		}
 ?>
-		<form enctype="multipart/form-data" action="<?php echo generer_url_ecrire('cm_subscribers_new',''); ?>" method="post">
+		<form enctype="multipart/form-data" action="<?php echo generer_url_ecrire('clevermail_subscribers_new',''); ?>" method="post">
 		<?php debut_cadre_formulaire() ?>
-			<label><?php echo _T('cm:a_partir_csv') ?></label>
+			<label><?php echo _T('clevermail:a_partir_csv') ?></label>
 			<input type="file" name="cm_file" class="formo" /><br />
 
-			<label><?php echo _T('cm:emails') ?> :</label>
+			<label><?php echo _T('clevermail:emails') ?> :</label>
 			<textarea name="cm_subs" cols="50" rows="5" wrap="virtual" class="formo" ></textarea><br />
 
-			<label><?php echo _T('cm:abonne_lettres') ?> :</label>
+			<label><?php echo _T('clevermail:abonne_lettres') ?> :</label>
 			<select name="cm_lists[]" multiple="multiple" class="formo" >
 				<?php
 				$lists = spip_query("SELECT lst_id, lst_name FROM cm_lists ORDER BY lst_name");
@@ -107,7 +107,7 @@ function exec_cm_subscribers_new() {
 				}
 				?>
 			</select><br />
-			<?php echo _T('cm:mode') ?> :
+			<?php echo _T('clevermail:mode') ?> :
 	        <input type="radio" name="cm_mode" value="1" checked="checked" id="html" />
 	        <label for="html" class="verdana1">HTML</label>
 	        <input type="radio" name="cm_mode" value="0" id="txt" />
@@ -115,7 +115,7 @@ function exec_cm_subscribers_new() {
 		<?php fin_cadre_formulaire() ?>
 			<br />
 			<div style="text-align: right">
-				<input type="submit" value="<?php echo _T('cm:importer') ?>" class="fondo"  />
+				<input type="submit" value="<?php echo _T('clevermail:importer') ?>" class="fondo"  />
 			</div>
 		</form>
 <?php

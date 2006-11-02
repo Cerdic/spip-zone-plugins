@@ -10,7 +10,7 @@
 
 include_spip('phpmailer/class.phpmailer');
 
-function exec_cm_queue_process() {
+function exec_clevermail_queue_process() {
 
 	if (isset($_GET['verbose'])) {
 		$verbose = $_GET['verbose'];

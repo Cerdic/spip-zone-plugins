@@ -50,14 +50,14 @@ function balise_FORMULAIRE_CLEVERMAIL_dyn($id_liste, $formulaire) {
 	            // Inscription à cette liste déjà présente
 	            // On met à jour pour éventuellement changer le mode
 	            spip_query("UPDATE cm_lists_subscribers SET lsr_mode=".$mode." WHERE lst_id = ".$listId." AND sub_id = ".$recId);
-	            $cm_sub = _T('cm:deja_inscrit');
+	            $cm_sub = _T('clevermail:deja_inscrit');
         	} else {
 				$list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id = ".$listId));
 				switch($list['lst_moderation']) {
 					case 'open':
 						$actionId = md5('subscribe#'.$listId.'#'.$recId.'#'.time());
 						spip_query("INSERT INTO cm_lists_subscribers (lst_id, sub_id, lsr_mode, lsr_id) VALUES (".$listId.", ".$recId.", ".$mode.", '$actionId')");
-	                    $cm_sub = _T('cm:inscription_validee');
+	                    $cm_sub = _T('clevermail:inscription_validee');
 					break;
 
 					case 'email':
@@ -91,9 +91,9 @@ function balise_FORMULAIRE_CLEVERMAIL_dyn($id_liste, $formulaire) {
 
 					     // Envoi du message
 					    if($mail->Send()) {
-					    	$cm_sub = _T('cm:ok');
+					    	$cm_sub = _T('clevermail:ok');
 					    } else {
-					    	$cm_sub = _T('cm:send_error');
+					    	$cm_sub = _T('clevermail:send_error');
 					    }
 					break;
 
@@ -127,20 +127,20 @@ function balise_FORMULAIRE_CLEVERMAIL_dyn($id_liste, $formulaire) {
 
 					     // Envoi du message
 					    if($mail->Send()) {
-					    	$cm_sub = _T('cm:mok');
+					    	$cm_sub = _T('clevermail:mok');
 					    } else {
-					    	$cm_sub = _T('cm:send_error');
+					    	$cm_sub = _T('clevermail:send_error');
 					    }
 					break;
 
 					case 'closed':
-						$cm_sub = _T('cm:nok');
+						$cm_sub = _T('clevermail:nok');
 					break;
 				}
         	}
 		} else {
 			// Email non valide
-			$cm_sub = _T('cm:email_non_valide');
+			$cm_sub = _T('clevermail:email_non_valide');
 		}
 	}
 
