@@ -34,7 +34,7 @@ function balise_CLEVERMAIL_UNSUBSCRIBE_dyn() {
 		    $template = array();
 		    $template['@@ADRESSE@@'] = $recipient['sub_email'];
 		    $template['@@FORMAT@@']  = ($data['lsr_mode'] == 1 ? 'HTML' : 'texte');
-		    $template['@@URL@@']     = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
+		    $template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
 		    $template['@@UNSUBSCRIBE@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_rm&id='.$_GET['id'];
 		    $message = $list['lst_unsubscribe_text'];
 	        while (list($from, $to) = each($template)) {

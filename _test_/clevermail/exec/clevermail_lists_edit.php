@@ -76,7 +76,7 @@ function exec_clevermail_lists_edit() {
 				echo '@@LETTRE@@<br />';
 				echo '@@FORMAT@@<br />';
 				echo '@@ADRESSE@@<br />';
-				echo '@@URL@@<br />';
+				echo '@@URL_CONFIRMATION@@<br />';
 			fin_cadre_relief();
 		debut_droite();
 			debut_cadre_relief();

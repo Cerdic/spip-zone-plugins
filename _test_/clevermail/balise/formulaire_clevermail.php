@@ -75,7 +75,7 @@ function balise_FORMULAIRE_CLEVERMAIL_dyn($id_liste, $formulaire) {
 				        $template['@@LETTRE@@'] = $list['lst_name'];
 				        $template['@@DESCRIPTION@@'] = $list['lst_comment'];
 				        $template['@@FORMAT@@']  = ($mode == 1 ? 'HTML' : 'texte');
-				        $template['@@URL@@']     = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
+				        $template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
 				        $template['@@UNSUBSCRIBE@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_rm&id='.$actionId;
 				        $message = $list['lst_subscribe_text'];
 			            while (list($from, $to) = each($template)) {
@@ -114,7 +114,7 @@ function balise_FORMULAIRE_CLEVERMAIL_dyn($id_liste, $formulaire) {
 				        $template['@@LETTRE@@'] = $list['lst_name'];
 				        $template['@@DESCRIPTION@@'] = $list['lst_comment'];
 				        $template['@@FORMAT@@']  = ($mode == 1 ? 'HTML' : 'texte');
-				        $template['@@URL@@']     = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
+				        $template['@@URL_CONFIRMATION@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_do&id='.$actionId;
 				        $template['@@UNSUBSCRIBE@@'] = $GLOBALS['meta']['adresse_site'].'/spip.php?page=clevermail_rm&id='.$actionId;
 				        $message = $list['lst_subscribe_text'];
 			            while (list($from, $to) = each($template)) {
