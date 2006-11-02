@@ -4,18 +4,20 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'titreQCM' => "Un QCM",
+'qcm_titre' => "Un QCM",
 
-'reponseJuste' => "La r&eacute;ponse est juste",
-'reponseFausse' => "La r&eacute;ponse est fausse",
-'reponseNulle' => "Vous n'avez pas r&eacute;pondu",
-'reinitialiser' => "R&eacute;initialiser le QCM",
+'qcm_reponseJuste' => "La r&eacute;ponse est juste",
+'qcm_reponseFausse' => "La r&eacute;ponse est fausse",
+'qcm_reponseNulle' => "Vous n'avez pas r&eacute;pondu",
+'qcm_reinitialiser' => "R&eacute;initialiser le QCM",
+'qcm_introReponse' => "Votre choix : ",
+'qcm_bravo' => "Bravo !",
 
-'corriger' => "Corriger",
-'score' => "Score&nbsp;:",
+'qcm_corriger' => "Corriger",
+'qcm_score' => "Score&nbsp;:",
 
-'point' => "&nbsp;pt",
-'points' => "&nbsp;pts"
+'qcm_point' => "&nbsp;pt",
+'qcm_points' => "&nbsp;pts"
 
 );
 
