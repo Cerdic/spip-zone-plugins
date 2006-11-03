@@ -67,7 +67,7 @@ function Widgets_preparer_page($page, $droits) {
 	$img =
       "{'searching':'searching.gif',
         'edit':'crayon.png',
-        'changed':'changed.png'
+        'img-changed':'changed.png'
       }";
 //    $txtErrInterdit = addslashes(unicode_to_javascript(html2unicode(_T(
 //        'widgets:erreur_ou_interdit'))));

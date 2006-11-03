@@ -14,7 +14,7 @@ function cfgWidgets(options)
   this.txt = {
     'searching':'En attente du serveur ...',
     'edit':'Editer',
-    'changed':'Deja modifie'
+    'img-changed':'Deja modifie'
   };
   for (opt in options) {
     this[opt] = options[opt];
@@ -28,7 +28,7 @@ cfgWidgets.prototype.mkimg = function(what) {
 cfgWidgets.prototype.iconclick = function() {
   return "<span class='widget-icones'><span>" +
       this.mkimg('edit') +
-      this.mkimg('changed') +
+      this.mkimg('img-changed') +
     "</span></span>";
 }
 
