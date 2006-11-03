@@ -27,7 +27,7 @@ cfgWidgets.prototype.mkimg = function(what) {
 }
 cfgWidgets.prototype.iconclick = function() {
   return "<span class='widget-icones'><span>" +
-      this.mkimg('edit') +
+      this.mkimg('edit') + '<br />' +
       this.mkimg('img-changed') +
     "</span></span>";
 }
