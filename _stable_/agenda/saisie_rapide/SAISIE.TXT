@@ -1,0 +1,35 @@
+Cette amelioration est destinee a ceux qui ont beaucoup d'evenements a placer dans l'agenda.
+un lien 'Saisie rapide' apparait a cote de 'Ajouter un evenement' lorsqu'on edite un article.
+un dialogue apparait, et on se laisse guider !
+
+Syntaxe : 
+	"jj/mm[/aaaa][-jj/mm[/aaaa]] [hh:mm[-hh:mm]] "Le titre" ["Le lieu" [ "La description"]] [REP=jj/mm/aaaa[,jj/mm/aaaa,etc]]
+
+Les crochets indiquent les éléments facultatifs. 
+Les répétitions de l'évènement sont indiquées par 'REP=' suivi d'une liste de dates séparées par des virgules. 
+Bien respecter les espaces entre les éléments et ne pas mettre de guillemets dans les textes. 
+
+Exemple 1 : 20/09/2006 19:30-22:00 "Répétition de rentrée" "Temple des Gobelins" "Reprise de contact, Duruflé, et mise au point des calendriers"
+	(programme un évènement précis à une date précise, et d'une durée précise)
+Exemple 2 : 17/08-23/08 "Stage d'été " "Les Salines" 
+	(programme un évènement cette année, sans description et sur plusieurs jours)
+Exemple 3 : 01/01/2007 "Bonne année à tous !" REP=01/01/2008,01/01/2009,01/01/2010
+	(programme un évènement sans horaire, sans lieu, à une date précise et répété sur 3 autres dates)
+
+Allez, voici comment j'ai saisi d'un coup tous les jours feries !!
+	01/01/2006 "Premier de l'an" "Jour Férié"
+	16/04/2006 "Pâques" "Jour Férié"
+	17/04/2006 "Lundi de Pâques" "Jour Férié"
+	01/05/2006 "Fête du travail" "Jour Férié"
+	08/05/2006 "Victoire 1945" "Jour Férié"
+	25/05/2006 "Ascension" "Jour Férié"
+	05/06/2006 "Pentecôte" "Jour Férié"
+	14/07/2006 "Fête nationale" "Jour Férié"
+	15/08/2006 "Assomption" "Jour Férié"
+	01/11/2006 "Toussaint" "Jour Férié"
+	11/11/2006 "Armistice" "Jour Férié"
+	25/12/2006 "Noël" "Jour Férié"
+
+Pour 2007, 2008, etc. ou meme les vacances scolaires jusqu'en 2010, ecrivez-moi !
+
+patrice.vanneufville@laposte.net
