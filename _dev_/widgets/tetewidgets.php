@@ -61,7 +61,7 @@ function Widgets_preparer_page($page, $droits) {
 
     $txt =
       "{'edit':'" . addslashes(html2unicode(_T('widgets:editer'))) .
-      "','changed':'" . addslashes(html2unicode(_T('widgets:deja_modifie'))) .
+      "','img-changed':'" . addslashes(html2unicode(_T('widgets:deja_modifie'))) .
       "','error':'" . addslashes(html2unicode(_T('widgets:svp_copier_coller'))) .
       "'}";
 	$img =
