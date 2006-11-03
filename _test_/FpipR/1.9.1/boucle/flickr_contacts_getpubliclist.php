@@ -8,7 +8,7 @@
   
    $possible_criteres = array('nsid');
    
-   FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
+   $arguments = FpipR_utils_search_criteres($boucle,$possible_criteres,$boucles,$id_boucle);
    
    $boucle->hash = FpipR_utils_calculer_hash('flickr.contacts.getPublicList',$arguments,$boucle);
    return calculer_boucle($id_boucle, $boucles); 

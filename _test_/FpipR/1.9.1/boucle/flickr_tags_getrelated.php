@@ -5,9 +5,7 @@ function boucle_FLICKR_TAGS_GETRELATED_dist($id_boucle,&$boucles) {
   $id_table = $boucle->id_table;
   $boucle->from[$id_table] =  "spip_fpipr_tags";
 
-  $arguments = '';
-
-  FpipR_utils_search_criteres($boucle,$arguments,array('tag'),$boucles,$id_boucle);
+  $arguments =  FpipR_utils_search_criteres($boucle,array('tag'),$boucles,$id_boucle);
   $boucle->hash = FpipR_utils_calculer_hash('flickr.tags.getRelated',$arguments,$boucle);
   return calculer_boucle($id_boucle, $boucles); 
   }

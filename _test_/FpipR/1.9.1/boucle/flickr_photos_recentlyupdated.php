@@ -9,10 +9,8 @@ function boucle_FLICKR_PHOTOS_RECENTLYUPDATED_dist($id_boucle, &$boucles) {
 
   $possible_extras = array('license', 'owner_name', 'icon_server', 'original_format', 'last_update');
 
-  $arguments = '';  
-
-  FpipR_utils_search_extras($boucle,$id_table,$possible_extras,$arguments);
-  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
+  $arguments = array_merge(FpipR_utils_search_extras($boucle,$id_table,$possible_extras),
+						   FpipR_utils_search_criteres($boucle,$possible_criteres,$boucles,$id_boucle));
 
   $boucle->hash = FpipR_utils_calculer_hash('flickr.photos.recentlyUpdated',$arguments,$boucle);
   return calculer_boucle($id_boucle, $boucles); 

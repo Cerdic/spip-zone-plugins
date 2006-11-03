@@ -7,9 +7,7 @@ function boucle_FLICKR_URLS_LOOKUPUSER_dist($id_boucle, &$boucles) {
 
   $possible_criteres = array('url');
 
-  $arguments = '';  
-
-  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
+  $arguments = FpipR_utils_search_criteres($boucle,$possible_criteres,$boucles,$id_boucle);
 
   $boucle->hash = FpipR_utils_calculer_hash('flickr.urls.lookupUser',$arguments);
   return calculer_boucle($id_boucle, $boucles); 
