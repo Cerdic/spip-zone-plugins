@@ -3,7 +3,9 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'Flickr' => 'Flickr',
-	'photos' => 'photos',
+									   'photos' => 'photos',
+									   'by' => 'by',
+									   'tags' => 'Tags',
 									   'ajouter_photos' => 'Add photos from Flickr',
 									   'ajouter_sets' => 'Add sets of photos from Flickr',
 									   'autorisation_titre' => 'Flickr Authorization',
