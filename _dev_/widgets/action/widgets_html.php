@@ -3,6 +3,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function affiche_controleur($class) {
+  $return = array('$erreur'=>'');
+
   if (preg_match(_PREG_WIDGET, $class, $regs)) {
     list(,$widget,$type,$champ,$id) = $regs;
     include_spip('inc/autoriser');
@@ -173,8 +175,6 @@ class SecureWidget extends Widget {
 function action_widgets_html_dist() {
 
     header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
-
-    $return = array('$erreur'=>'');
 
     // CONTROLEUR
     // on affiche le formulaire demande
