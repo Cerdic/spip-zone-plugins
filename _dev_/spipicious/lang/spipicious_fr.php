@@ -18,7 +18,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
     // T
   'to' => "avec", 
- 
+  
+  // W
+  'waiting' => 'recherche de vos tags',
   
 
  

@@ -90,7 +90,7 @@ function spipicious_maintenance_nuage_article($id_article) {
     while($row=spip_fetch_array($result)){
       $current_id_mot = $row['id_mot'];     
       $result2 = spip_query("SELECT id_mot FROM {$table_pref}_mots WHERE id_mot=$current_id_mot AND id_groupe=$idgroup_tags");  // est ce que le mot appartient au groupe - tags - ?
-      if (spip_num_rows($result2) > 0) { // oui, est il encore lie a l'article (suite que non suite a la mise a jour) ? 
+      if (spip_num_rows($result2) > 0) { // oui, est il encore lie a l'article (suite aux mises a jour) ? 
             $result3 = spip_query("SELECT id_mot FROM {$table_pref}_spipicious WHERE id_article=$id_article AND id_mot=$current_id_mot LIMIT 1");
             if (spip_num_rows($result3) == 0) 
                      spip_query("DELETE FROM {$table_pref}_mots_articles WHERE id_article=$id_article AND id_mot=$current_id_mot LIMIT 1");     

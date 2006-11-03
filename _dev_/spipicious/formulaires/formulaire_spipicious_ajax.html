@@ -10,11 +10,11 @@ if ('#TITRE'=='- tags -') {
     <fieldset	class='spip_encadrer'>
 	  <legend><:spipicious:add_tags:></legend>
 	  <label for="tags">Tags:</label>
-	  <img id="wait" src="ecrire/img_pack/searching.gif"/>  	  
-	  <input autocomplete="off" type="text" size="35" id="tags" name="tags" value="<BOUCLE_tagA(SPIPICIOUS){id_article=#ENV{id}}{id_auteur=#ENV{auteur_id}}{par position}><BOUCLE_mot(MOTS){id_mot}>#TITRE </BOUCLE_mot></BOUCLE_tagA>" /><br />
+	  <img id="wait" src="ecrire/img_pack/searching.gif" alt="<:spipicious:waiting:>" />  	  
+	  <input autocomplete="off" type="text" id="tags" name="tags" size="40" value="<BOUCLE_tagA(SPIPICIOUS){id_article=#ENV{id}}{id_auteur=#ENV{auteur_id}}{par position}><BOUCLE_mot(MOTS){id_mot}>#TITRE </BOUCLE_mot></BOUCLE_tagA>" /><br />
 	  <div id="suggest" class="suggest_list"></div>
-    <input type="hidden" size="35" name="page" value="#SELF">	 
-    <input type="hidden" size="35" name="id_article" value="#ENV{id}">	
+    <input type="hidden" name="page" value="#SELF">	 
+    <input type="hidden" name="id_article" value="#ENV{id}">	
 	  <input type="submit" class="spip_bouton" name="add_tags" value="<:bouton_valider:>" /> 
     </fieldset>
   </form>  

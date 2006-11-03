@@ -20,6 +20,10 @@
 .tag_9 {font-size: 150%;} 
 .tag_9 {font-size: 160%;}
 
+#tags {
+    /* width: 100%;  */  
+}
+
 
 /* classes pour le FORMULAIRE_SPIPICIOUS_AJAX */
 /*
