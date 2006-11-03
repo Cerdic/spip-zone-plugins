@@ -12,7 +12,7 @@ function boucle_DEFAUT($id_boucle, &$boucles) {
   $boucle = &$boucles[$id_boucle];
   $type = $boucle->type_requete;	
   
-  $f=charger_fonction($type, 'boucle');
+  $f=charger_fonction($type, 'boucle', true);
   if($f)
 	return $f($id_boucle,$boucles);
  

@@ -11,11 +11,9 @@ function boucle_FLICKR_FAVORITES_GETPUBLICLIST_dist($id_boucle, &$boucles) {
 
   $possible_extras = array('license', 'owner_name', 'icon_server', 'original_format', 'last_update');
 
-  $arguments = '';  
+  $arguments = FpipR_utils_search_criteres($boucle,$possible_criteres,$boucles,$id_boucle);
 
-  FpipR_utils_search_criteres($boucle,$arguments,$possible_criteres,$boucles,$id_boucle);
-
-  FpipR_utils_search_extras($boucle,$id_table,$possible_extras,$arguments);
+  $arguments = array_merge($arguments,FpipR_utils_search_extras($boucle,$id_table,$possible_extras));
 
   $boucle->hash = FpipR_utils_calculer_hash('flickr.favorites.getPublicList',$arguments,$boucle);
   return calculer_boucle($id_boucle, $boucles); 

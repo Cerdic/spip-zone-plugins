@@ -1,6 +1,7 @@
 <?php
 
-function FpipR_utils_search_order($boucle,$possible_sort,&$arguments) {
+function FpipR_utils_search_order($boucle,$possible_sort) {
+  $arguments = array();
   if(is_array($boucle->order)) {
 	for($i=0;$i<count($boucle->order);$i++) {
 	  list($sort,$desc) = split(' . ',str_replace("'",'',$boucle->order[$i]));
@@ -15,9 +16,11 @@ function FpipR_utils_search_order($boucle,$possible_sort,&$arguments) {
 	  }
 	}
   }
+  return $arguments;
   }
 
-function FpipR_utils_search_args_extras($boucle,$id_table,$possible_args,$possible_extras,&$arguments) {
+function FpipR_utils_search_args_extras($boucle,$id_table,$possible_args,$possible_extras) {
+  $arguments = array();
   $extras = array();
   //on regarde dans les Where (critere de la boucle) si les arguments sont dispo.
   foreach($boucle->where as $w) {
@@ -64,6 +67,7 @@ function FpipR_utils_search_args_extras($boucle,$id_table,$possible_args,$possib
 	else if($key == 'longitude' || $key == 'latitude') $extras[] = 'geo';
   }
   $arguments['extras'] = "'".join(',',$extras)."'";
+  return $arguments;
 }
 
 function FpipR_utils_calculer_hash($method, $arguments, $boucle=NULL) {
@@ -80,7 +84,8 @@ function FpipR_utils_calculer_hash($method, $arguments, $boucle=NULL) {
   return $hash;
 }
 
-function FpipR_utils_search_args($boucle,$id_table,$possible_args,&$arguments) {
+function FpipR_utils_search_args($boucle,$id_table,$possible_args) {
+  $arguments = array();
   foreach($boucle->where as $w) {
 	if($w[0] == "'?'") {
 	  $w = $w[2];
@@ -93,9 +98,11 @@ function FpipR_utils_search_args($boucle,$id_table,$possible_args,&$arguments) {
 	} else 
 	  erreur_squelette(_T('fpipr:mauvaisop',array('critere'=>$key,'op'=>$w[0])), $id_boucle);
   }
+  return $arguments;
 }
 
-function FpipR_utils_search_extras($boucle,$id_table,$possible_extras,&$arguments) {
+function FpipR_utils_search_extras($boucle,$id_table,$possible_extras) {
+  $arguments = array();
   foreach($boucle->where as $w) {
 	if($w[0] == "'?'") {
 	  $w = $w[2];
@@ -118,6 +125,7 @@ function FpipR_utils_search_extras($boucle,$id_table,$possible_extras,&$argument
 	else if($key == 'longitude' || $key == 'latitude') $extras[] = 'geo';
   }
   $arguments['extras'] = "'".join(',',$extras)."'";
+  return $arguments;
 }
 
 function FpipR_utils_calcul_limit(&$boucle) {
@@ -139,7 +147,8 @@ else return '';
 }
 
 
-function FpipR_utils_search_criteres(&$boucle,&$arguments,$possible_criteres,&$boucles,$id_boucle) {
+function FpipR_utils_search_criteres(&$boucle,$possible_criteres,&$boucles,$id_boucle) {
+  $arguments = array();
   foreach($boucle->criteres as $crit) {
 	if (in_array($crit->op,$possible_criteres)){
                  $c = array();
@@ -149,6 +158,7 @@ function FpipR_utils_search_criteres(&$boucle,&$arguments,$possible_criteres,&$b
 	  $arguments[$crit->op] = $val;
 	}
   }
+  return $arguments;
 }
 
 
