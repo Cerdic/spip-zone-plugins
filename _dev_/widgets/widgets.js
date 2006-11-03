@@ -26,8 +26,7 @@ cfgWidgets.prototype.mkimg = function(what) {
     '" title="' + this.txt[what] + '" />';
 }
 cfgWidgets.prototype.iconclick = function() {
-  return
-    "<span class='widget-icones'><span>" +
+  return "<span class='widget-icones'><span>" +
       this.mkimg('edit') +
       this.mkimg('changed') +
     "</span></span>";
@@ -127,7 +126,7 @@ $.fn.activatewidget = function() {
               $(me)
                 .cancelwidget();
           } else {
-              alert(d.$erreur+'\n'+configWidgets.txtError);
+              alert(d.$erreur+'\n'+configWidgets.txt.error);
               $(me)
                 .find(".widget-boutons")
                   .show(); // boutons de validation
