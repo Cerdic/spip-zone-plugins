@@ -264,7 +264,7 @@ $(document).ready(function() {
   // sortie, demander pour sauvegarde si oubli
   $(window).unload(function(e) {
     var chg = $(".widget-changed");
-    if (chg.length && uniConfirm("Sauvegarder les modifications ?")) {
+    if (chg.length && uniConfirm(configWidgets.txt.sauvegarder)) {
       chg.next().find('form').submit();
     }
   });

@@ -63,6 +63,7 @@ function Widgets_preparer_page($page, $droits) {
       "{'edit':'" . addslashes(html2unicode(_T('widgets:editer'))) .
       "','img-changed':'" . addslashes(html2unicode(_T('widgets:deja_modifie'))) .
       "','error':'" . addslashes(html2unicode(_T('widgets:svp_copier_coller'))) .
+      "','sauvegarder':'" . addslashes(html2unicode(_T('widgets:sauvegarder'))) .
       "'}";
 	$img =
       "{'searching':'searching.gif',
