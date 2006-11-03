@@ -13,8 +13,8 @@ if ('#TITRE'=='- tags -') {
 	  <img id="wait" src="ecrire/img_pack/searching.gif" alt="<:spipicious:waiting:>" />  	  
 	  <input autocomplete="off" type="text" id="tags" name="tags" size="40" value="<BOUCLE_tagA(SPIPICIOUS){id_article=#ENV{id}}{id_auteur=#ENV{auteur_id}}{par position}><BOUCLE_mot(MOTS){id_mot}>#TITRE </BOUCLE_mot></BOUCLE_tagA>" /><br />
 	  <div id="suggest" class="suggest_list"></div>
-    <input type="hidden" name="page" value="#SELF">	 
-    <input type="hidden" name="id_article" value="#ENV{id}">	
+    <input type="hidden" name="page" value="#SELF" />	 
+    <input type="hidden" name="id_article" value="#ENV{id}" />	
 	  <input type="submit" class="spip_bouton" name="add_tags" value="<:bouton_valider:>" /> 
     </fieldset>
   </form>  
