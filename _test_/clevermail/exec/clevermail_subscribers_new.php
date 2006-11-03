@@ -47,45 +47,59 @@ function exec_clevermail_subscribers_new() {
 				$lists = $_POST['cm_lists'];
 			}
 			$nbSub = 0;
-			foreach($data as $subscriber) {
-				if (ereg("^([^@ ]+@[^@ ]+\.[^@.; ]+)(;[^;]*)?(;[^;]*)?$", $subscriber, $regs)) {
-					// CSV format: user@example.com;
-					list($address, $firstName, $lastName) = explode(';', $subscriber);
-					$address = trim($regs[1]);
+			$nbMaj = 0;
+			if (isset($lists)) {
+				reset($lists);
+				foreach($data as $subscriber) {
+					if (ereg("^([^@ ]+@[^@ ]+\.[^@.; ]+)(;[^;]*)?(;[^;]*)?$", $subscriber, $regs)) {
+						// CSV format: user@example.com;
+						list($address, $firstName, $lastName) = explode(';', $subscriber);
+						$address = trim($regs[1]);
 
-					$result = spip_fetch_array(spip_query("SELECT sub_id FROM cm_subscribers WHERE sub_email='".$address."'"));
-				    if (!$recId = $result['sub_id']) {
-				        // New e-mail address
-				        spip_query("INSERT INTO cm_subscribers (sub_id, sub_email, sub_profile) VALUES ('', '".$address."', '')");
-				        $recId = spip_insert_id();
-				        spip_query("UPDATE cm_subscribers SET sub_profile = '".md5($recId.'#'.$address.'#'.time())."' WHERE sub_id='".$recId."'");
-						$nbSub++;
-			        }
-					if (isset($lists)) {
-						reset($lists);
+						$result = spip_fetch_array(spip_query("SELECT sub_id FROM cm_subscribers WHERE sub_email='".$address."'"));
+					    if (!$recId = $result['sub_id']) {
+					        // New e-mail address
+					        spip_query("INSERT INTO cm_subscribers (sub_id, sub_email, sub_profile) VALUES ('', '".$address."', '')");
+					        $recId = spip_insert_id();
+					        spip_query("UPDATE cm_subscribers SET sub_profile = '".md5($recId.'#'.$address.'#'.time())."' WHERE sub_id='".$recId."'");
+							$nbSub++;
+				        }
+
 						foreach($lists as $listId) {
 							$list = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_lists_subscribers WHERE lst_id = ".$listId." AND sub_id = ".$recId));
 					        if ($list['nb'] == 0) {
 					            // New subscription
 					            $actionId = md5('subscribe#'.$listId.'#'.$recId.'#'.time());
 								spip_query("INSERT INTO cm_lists_subscribers (lst_id, sub_id, lsr_mode, lsr_id) VALUES (".$listId.", ".$recId.", ".$_POST['cm_mode'].", '".$actionId."')");
+					        } else if($list['nb'] == 1) {
+					        	// Update subscription
+					        	$actionId = md5('subscribe#'.$listId.'#'.$recId.'#'.time());
+					        	spip_query("UPDATE cm_lists_subscribers SET lsr_mode = '".$_POST['cm_mode']."', lsr_id = '".$actionId."' WHERE lst_id = ".$listId." AND sub_id = ".$recId);
+					        	$nbMaj++;
 					        }
 						}
+				    } elseif (trim($subscriber) != '') {
+						echo '<span class="error">'._T('clevermail:erreur').' : '.$subscriber.'</span><br />';
 					}
-			    } elseif (trim($subscriber) != '') {
-					echo '<span class="error">'._T('clevermail:erreur').' : '.$subscriber.'</span><br />';
 				}
+			} else {
+				echo '<p class="error">'._T('aucune_liste').'</p>';
 			}
 			echo '<p class="noerror">';
 			if($nbSub == 0) {
-				echo _T('clevermail:aucun_abonne_ajoute');
+				echo _T('clevermail:aucun_abonne_ajoute').'<br />';
 			} else {
 				echo $nbSub.' ';
 				if($nbSub > 1) {
-					echo _T('clevermail:abonnes_ajoutes');
+					echo _T('clevermail:abonnes_ajoutes').'<br />';
 				} else {
-					echo _T('clevermail:abonne_ajoute');
+					echo _T('clevermail:abonne_ajoute').'<br />';
 				}
+			}
+			if($nbMaj == 1) {
+				echo $nbMaj.' '. _T('clevermail:maj_inscription');
+			} else if($nbMaj > 1) {
+				echo $nbMaj.' '. _T('clevermail:maj_inscriptions');
 			}
 			echo '</p>';
 		}
