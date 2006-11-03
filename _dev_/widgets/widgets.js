@@ -32,6 +32,25 @@ cfgWidgets.prototype.iconclick = function() {
     "</span></span>";
 }
 
+function entity2unicode(txt)
+{
+  var reg = txt.split(/&#(\d+);/i);
+  for (var i = 1; i < reg.length; i+=2) {
+  	reg[i] = String.fromCharCode(parseInt(reg[i]));
+  }
+  return reg.join('');
+}
+
+function uniAlert(txt)
+{
+  alert(entity2unicode(txt));
+}
+
+function uniConfirm(txt)
+{
+  confirm(entity2unicode(txt));
+}
+
 // ouvre un widget
 $.fn.openwidget = function(evt) {
   if (evt.stopPropagation) {
@@ -68,7 +87,7 @@ $.fn.openwidget = function(evt) {
           .find("img.widget-searching")
             .remove();
           if (c.$erreur) {
-            alert(c.$erreur);
+            uniAlert(c.$erreur);
             return false;
           }
           $(me)
@@ -122,11 +141,11 @@ $.fn.activatewidget = function() {
         eval('d=' + d.responseText + ';');
         if (d.$erreur > '') {
           if (d.$annuler) {
-              alert(d.$erreur);
+              uniAlert(d.$erreur);
               $(me)
                 .cancelwidget();
           } else {
-              alert(d.$erreur+'\n'+configWidgets.txt.error);
+              uniAlert(d.$erreur+'\n'+configWidgets.txt.error);
               $(me)
                 .find(".widget-boutons")
                   .show(); // boutons de validation
@@ -245,7 +264,7 @@ $(document).ready(function() {
   // sortie, demander pour sauvegarde si oubli
   $(window).unload(function(e) {
     var chg = $(".widget-changed");
-    if (chg.length && confirm("Sauvegarder les modifications ?")) {
+    if (chg.length && uniConfirm("Sauvegarder les modifications ?")) {
       chg.next().find('form').submit();
     }
   });
