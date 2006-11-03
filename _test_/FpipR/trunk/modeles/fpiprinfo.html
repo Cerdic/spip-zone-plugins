@@ -4,7 +4,7 @@
 #LOGO_PHOTO{#ENV{taille}}
 <B_tags>
 <div><strong>Tags:</strong>
-			<BOUCLE_tags(FLICKR_PHOTO_TAGS){id_photo}{","}>
+			<BOUCLE_tags(FLICKR_PHOTO_TAGS){","}>
 			  [(#RAW|sinon{#SAFE})]
 			</BOUCLE_tags>
 </div>
