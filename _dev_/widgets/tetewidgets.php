@@ -44,32 +44,34 @@ function Widgets_affichage_final($page) {
 
     // et les signaler dans la page
     if ($droits_accordes == count($regs))
-        $page = Widgets_preparer_page($page,"'*'");
+        $page = Widgets_preparer_page($page, '*');
     else if ($droits)
-        $page = Widgets_preparer_page($page,
-            '[".' . join('",".', array_keys($droits)). '"]');
+        $page = Widgets_preparer_page($page, array_keys($droits));
 
     return $page;
 }
 
 function Widgets_preparer_page($page, $droits) {
-    include_spip('inc/charsets');
+    include_spip('inc/widgets');
 
     $jsFile = find_in_path('widgets.js');
     $cssFile = find_in_path('widgets.css');
-    $imgPath = "'" . dirname(find_in_path('images/crayon.png')) . "'";
+    $config = var2js(array(
+		'imgPath' => dirname(find_in_path('images/crayon.png')),
+        'droits' => $droits,
 
-    $txt =
-      "{'edit':'" . addslashes(html2unicode(_T('widgets:editer'))) .
-      "','img-changed':'" . addslashes(html2unicode(_T('widgets:deja_modifie'))) .
-      "','error':'" . addslashes(html2unicode(_T('widgets:svp_copier_coller'))) .
-      "','sauvegarder':'" . addslashes(html2unicode(_T('widgets:sauvegarder'))) .
-      "'}";
-	$img =
-      "{'searching':'searching.gif',
-        'edit':'crayon.png',
-        'img-changed':'changed.png'
-      }";
+		'txt' => array(
+			'edit' => _U('widgets:editer'),
+			'img-changed' => _U('widgets:deja_modifie'),
+			'error' => _U('widgets:svp_copier_coller'),
+			'sauvegarder' => _U('widgets:sauvegarder'),
+		),
+		'img' => array(
+			'searching' => 'searching.gif',
+			'edit' => 'crayon.png',
+			'img-changed' => 'changed.png'
+		)
+	));
 //    $txtErrInterdit = addslashes(unicode_to_javascript(html2unicode(_T(
 //        'widgets:erreur_ou_interdit'))));
 
@@ -78,12 +80,7 @@ function Widgets_preparer_page($page, $droits) {
 <link rel="stylesheet" href="$cssFile" type="text/css" media="all" />
 <script src="{$jsFile}" type="text/javascript"></script>
 <script type="text/javascript">
-    var configWidgets = new cfgWidgets({
-        'droits':{$droits},
-        'imgPath':{$imgPath},
-        'txt':{$txt},
-        'img':{$img}
-    });
+    var configWidgets = new cfgWidgets({$config});
 </script >
 EOH;
 
