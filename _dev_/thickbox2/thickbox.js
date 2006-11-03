@@ -10,15 +10,19 @@
 //on page load call TB_init
 $(document).ready(TB_init);
 
-//add thickbox to href elements that have a class of .thickbox
-function TB_init(){
-	$("a.thickbox").click(function(){
-	var t = this.title || this.name || null;
-	var g = this.rel || false;
-	TB_show(t,this.href,g);
-	this.blur();
+function TB_image() {
+	var t = this.title || this.name ;
+	TB_show(t,this.href,'image');
 	return false;
-	});
+}
+
+//add thickbox to href elements that have a class of .thickbox
+function TB_init(root) {
+	$("a.thickbox",root).each(
+		function(i) {
+			this.onclick = TB_image;
+		}
+	);
 }
 
 function TB_show(caption, url, imageGroup) {//function called when the user clicks on a thickbox link
