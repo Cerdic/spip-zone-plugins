@@ -51,7 +51,7 @@ function traiter_les_widgets() {
 $modifs = post_widgets();
 $anamod = $anaupd = array();  # TODO: expliciter les noms de variables
 if (!is_array($modifs)) {
-    $return['$erreur'] = _T('widgets:donnees_mal_formatees');
+    $return['$erreur'] = _U('widgets:donnees_mal_formatees');
 } else {
     include_spip('inc/autoriser');
 
@@ -61,7 +61,7 @@ if (!is_array($modifs)) {
             $wid = $m[3];
             if (!autoriser('modifier', $type, $id, NULL, array('champ'=>$champ))) {
                 $return['$erreur'] =
-                    "$type $id: " . _T('widgets:non_autorise');
+                    "$type $id: " . _U('widgets:non_autorise');
                 break;
             }
 
@@ -78,7 +78,7 @@ if (!is_array($modifs)) {
                 // comme si "pas de modification", sinon erreur
                 if ($md5 != md5($m[1])) {
                     $return['$erreur'] = "$type $id $champtable: " .
-                        _T('widgets:modifie_par_ailleurs');
+                        _U('widgets:modifie_par_ailleurs');
                     }
                 break;
             }
@@ -100,7 +100,7 @@ if (!is_array($modifs)) {
                         break;
                     default :
                 $return['$erreur'] =
-                    "$type: " . _T('widgets:non_implemente');
+                    "$type: " . _U('widgets:non_implemente');
                 break 2;
                 }
                 $anaupd[$type] = array('fun'=>$fun, 'ids'=>array());
@@ -115,7 +115,7 @@ if (!is_array($modifs)) {
     }
 }
 if (!$anamod AND !$return['$erreur']) {
-    $return['$erreur'] = _T('widgets:pas_de_modification');
+    $return['$erreur'] = _U('widgets:pas_de_modification');
     $return['$annuler'] = true;
 }
 

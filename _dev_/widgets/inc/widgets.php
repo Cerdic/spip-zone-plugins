@@ -5,7 +5,7 @@ function affiche_controleur($class) {
     list(,$widget,$type,$champ,$id) = $regs;
     include_spip('inc/autoriser');
     if (!autoriser('modifier',$type, $id, NULL, array('champ'=>$champ))) {
-        $return['$erreur'] = "$type $id: " . _T('widgets:non_autorise');
+        $return['$erreur'] = "$type $id: " . _U('widgets:non_autorise');
     } else {
         $f = charger_fonction($type.'_'.$champ, 'controleurs', true)
         OR $f = charger_fonction($champ, 'controleurs', true)
@@ -18,7 +18,7 @@ function affiche_controleur($class) {
         }
     }
   } else {
-    $return['$erreur'] = _T('widgets:donnees_mal_formatees');
+    $return['$erreur'] = _U('widgets:donnees_mal_formatees');
   }
   return $return;
 }
@@ -92,7 +92,7 @@ FIN_FORM;
 
     }
     else {
-        $html = "$type $id $champ: " . _T('widgets:pas_de_valeur');
+        $html = "$type $id $champ: " . _U('widgets:pas_de_valeur');
         $status = 6;
     }
 

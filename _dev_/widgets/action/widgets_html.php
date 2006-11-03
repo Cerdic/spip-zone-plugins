@@ -58,6 +58,12 @@ function var2js($var) {
     return false;
 }
 
+function _U($texte)
+{
+    include_spip('inc/charsets');
+    return html2unicode(_T($texte));
+}
+
 function action_widgets_html_dist() {
 
     header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
