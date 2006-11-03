@@ -48,7 +48,7 @@ function uniAlert(txt)
 
 function uniConfirm(txt)
 {
-  confirm(entity2unicode(txt));
+  return confirm(entity2unicode(txt));
 }
 
 // ouvre un widget
