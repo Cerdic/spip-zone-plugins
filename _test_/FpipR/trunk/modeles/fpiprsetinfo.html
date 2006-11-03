@@ -4,7 +4,26 @@
 #LOGO_PHOTOSET{#ENV{taille,t}}
 #TITLE
 #DESCRIPTION
-<small>#PHOTOS <:photos:></small>
+<small></small>
 </BOUCLE_photoset>
 </div>
 </B_photoset>
+
+<BOUCLE_photoset(FLICKR_PHOTOSETS_GETINFO) {id_photoset=#ENV{id}}>
+<dl class="spip_document_#ENV{ID} spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok fpiprsetinfo" [ style="float:(#ENV{align}|match{left|right});"]>
+<dt>
+<a href="[(#ENV{lien}|sinon{#URL_PHOTOSET})]" [ class="(#ENV{lien_class})"] title="Flickr Photoset[ (#TITLE) ]">
+[(#LOGO_PHOTOSET{#ENV{taille}}|inserer_attribut{alt,Flickr Photoset[ (#TITLE) ]})]</a></dt>
+</dt>[
+<dt class="fpipr_photoset_titre spip_doc_titre">
+<strong>(#TITLE)</strong>
+</dt>]
+[
+<dd class="fpipr_photoset_descriptif spip_doc_descriptif">
+(#DESCRIPTION)
+</dd>]
+[<dd class="fpipr_photoset_photos spip_doc_descriptif">
+(#PHOTOS) <:fpipr:photos:>
+</dd>]
+</dl>
+</BOUCLE_photoset>
