@@ -16,29 +16,29 @@ jQuery.fn.deplie = function(){
 	jQuery.recallDroppables();
 }
 
+jQuery.fn.bascule = function() {
+	subbranch = $(this).siblings('ul').eq(0);
+	if (subbranch.is(':hidden')) {
+		subbranch.show();
+		$(this).attr('src',img_deplierbas);
+	} else {
+		subbranch.hide();
+		$(this).attr('src',img_deplierhaut);
+	}
+}
+
 $(document).ready(
 	function()
 	{
 		tree = $('#myTree');
 		//$('ul',tree).hide();
-		/*$('li[ul]',tree).each(function(){
+		$('li[ul]',tree).each(function(){
 			if ($('ul',this).eq(0).is(':hidden'))
-				$(this).prepend('<img src="'+img_deplierhaut+'" width="16" height="16" class="expandImage" />');
+				$(this).prepend('<img src="'+img_deplierhaut+'" class="expandImage" />');
 			else
-				$(this).prepend('<img src="'+img_deplierbas+'" width="16" height="16" class="expandImage" />');
-		});*/
-		$('img.expandImage', tree).click(
-			function() {
-				subbranch = $(this).siblings('ul').eq(0);
-				if (subbranch.is(':hidden')) {
-					subbranch.show();
-					this.src = img_deplierbas;
-				} else {
-					subbranch.hide();
-					this.src = img_deplierhaut;
-				}
-			}
-		);
+				$(this).prepend('<img src="'+img_deplierbas+'" class="expandImage" />');
+		});
+		$('img.expandImage', tree).click(function (){$(this).bascule();});
 		$('span.textHolder').Droppable(
 			{
 				accept			: 'treeItem',
@@ -77,7 +77,8 @@ $(document).ready(
 					this.expanded = false;
 					if (subbranch.size() == 0) {
 						$(this).parent().prepend('<img src="'+img_deplierbas+'" width="16" height="16" class="expandImage" />');
-						$(this).after('<ul></ul>');
+						$(this).parent().append('<ul></ul>');
+						$(this).siblings('img.expandImage').click(function (){$(this).bascule();});
 						subbranch = $(this).siblings('ul').eq(0);
 					}
 					if (subbranch.is(':hidden')){

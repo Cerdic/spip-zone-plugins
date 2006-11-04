@@ -129,17 +129,18 @@ function exec_articles_tous_dist()
 	global $spip_lang_left,$couleur_claire,$couleur_foncee;
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
-ul#myTree li {clear:both;}
-ul#myTree p.secteur {
+ul#myTree li {clear:both;font-weight:bold;}
+ul#myTree li.sec p {
 	padding: 0px; 
 	background-color: $couleur_claire;
 	height:24px;
 }
-ul#myTree p.rubrique {
+ul#myTree li.rub p {
 	margin:0px;
 	margin-bottom:5px;
 	padding: 0px; 
 	height:24px;
+	background-color: transparent;
 }
 span.icone {
 	display:block;
@@ -149,11 +150,11 @@ span.icone {
 }
 span.textHolder {
 }
-li.secteur span.icone {	background: url($secteur24) $spip_lang_left bottom no-repeat;}
-li.secteur ul{display:none;}
-li.rubrique ul{display:none;}
-li.rubrique span.icone {	background: url($rubrique24) $spip_lang_left top no-repeat;}
-li.article span.icone {	background: url($article24) $spip_lang_left top no-repeat;}
+li.sec span.icone {	background: url($secteur24) $spip_lang_left bottom no-repeat;}
+li.sec ul{display:none;}
+li.rub ul{display:none;}
+li.rub span.icone {	background: url($rubrique24) $spip_lang_left top no-repeat;}
+li.art span.icone {	background: url($article24) $spip_lang_left top no-repeat;}
 
 .puce_statut{
 float:$spip_lang_left;
@@ -162,6 +163,8 @@ ul {
 	list-style: none;
 }
 .expandImage{
+width:10px;
+height:10px;
 }
 ul#myTree .expandImage{
 display:block;
@@ -351,8 +354,8 @@ function afficher_rubriques_filles($id_parent, $flag_trad) {
 
 	if ($id_parent==0){
 		$titre = "Racine";
-		echo "<ul id='myTree'><li id='rubrique-0' class='treeItem racine'>",
-		'<img src="'._DIR_IMG_PACK.'deplierbas.gif" width="16" height="16" class="expandImage" />',
+		echo "<ul id='myTree'><li id='rubrique-0' class='treeItem racine verdana3'>",
+		//'<img src="'._DIR_IMG_PACK.'deplierbas.gif" class="expandImage" />',
 		"<span class='textHolder icone'>&nbsp;</span>$titre",
 		"\n<ul class='plan-rubrique'>\n";
 	}
@@ -362,16 +365,14 @@ function afficher_rubriques_filles($id_parent, $flag_trad) {
 		$lesenfants = ($lesarticles OR isset($enfant[$id_rubrique]));
 
 		echo "<li id='rubrique-$id_rubrique' class='treeItem ",
-			($id_parent==0)?"secteur":"rubrique",
+			($id_parent==0)?"sec":"rub",
 			"'>",
-			$lesenfants?'<img src="'._DIR_IMG_PACK.'deplierhaut.gif" width="16" height="16" class="expandImage" />':'',
-		  "<span class='textHolder icone'>&nbsp;</span><p class='",
-		  ($id_parent==0)?"secteur":"rubrique",
-		  "'><b class='verdana2'><a href='",
+			//$lesenfants?'<img src="'._DIR_IMG_PACK.'deplierhaut.gif" class="expandImage" />':'',
+		  "<span class='textHolder icone'>&nbsp;</span><p><a href='",
 		   generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"),
 		   "'>",
 		   $titre,
-		   "</a></b></p>";
+		   "</a></p>";
 		   
 		if ($lesenfants) {
 			echo "\n<ul class='plan-rubrique'>\n";
@@ -401,7 +402,7 @@ function article_tous_rubrique($tous, $id_rubrique, $flag_trad)
 		OR $attarticle["id_trad"] == $zarticle) {
 			$auteurs = trouve_auteurs_articles($zarticle);
 
-			$res .= "\n<li id='article-$zarticle' class='treeItem article tr_liste'>";
+			$res .= "\n<li id='article-$zarticle' class='treeItem art tr_liste'>";
 			if (count($attarticle["trad"]) > 0) {
 				ksort($attarticle["trad"]);
 				$res .= "\n<span class='trad_float'>" 
@@ -410,7 +411,7 @@ function article_tous_rubrique($tous, $id_rubrique, $flag_trad)
 			}
 			$res .= "\n"
 				. "<span class='icone'>&nbsp;</span>"
-			  . "<span class='puce_statut'>".puce_statut_article($zarticle, $attarticle["statut"], $id_rubrique)."</span>"
+			  //. "<span class='puce_statut'>".puce_statut_article($zarticle, $attarticle["statut"], $id_rubrique)."</span>"
 			  . ($flag_trad ? "<span class='lang_base'>$zelang</span> " : '')
 			  . "<span><a"
 			  . ($auteurs ? (' title="' . htmlspecialchars($auteurs). '"') :'')
