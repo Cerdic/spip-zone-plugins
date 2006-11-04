@@ -1,6 +1,6 @@
 <?php
 
-function FpipR_utils_search_order($boucle,$possible_sort) {
+function FpipR_utils_search_order(&$boucle,$possible_sort) {
   $arguments = array();
   if(is_array($boucle->order)) {
 	for($i=0;$i<count($boucle->order);$i++) {
