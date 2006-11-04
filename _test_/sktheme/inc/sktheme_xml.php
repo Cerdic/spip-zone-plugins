@@ -59,7 +59,7 @@ function sktheme_xml_get_infos($xml_dir,$xml_type){
       $ret['squelettes'] = $arbre['squelettes'];
     }
     if (isset($arbre['type'])) {
-      $ret['type'] =  applatit_arbre($arbre['type']);
+      $ret['type'] =  trim(applatit_arbre($arbre['type']));
     }
 
     // Compute extra values

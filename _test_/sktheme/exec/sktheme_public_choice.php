@@ -191,6 +191,7 @@ function exec_sktheme_public_choice() {
     $squelette_ok = false;
     if (is_array($h_info['squelettes'])) {
       foreach ($h_info['squelettes'] as $sq){
+	$sq = trim($sq);
 	if ($sq == $squelette_public_name) {
 	  $squelette_ok = true;
 	}
