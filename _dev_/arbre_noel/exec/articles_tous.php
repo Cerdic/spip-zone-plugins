@@ -352,6 +352,7 @@ function afficher_rubriques_filles($id_parent, $flag_trad) {
 	if ($id_parent==0){
 		$titre = "Racine";
 		echo "<ul id='myTree'><li id='rubrique-0' class='treeItem racine'>",
+		'<img src="'._DIR_IMG_PACK.'deplierbas.gif" width="16" height="16" class="expandImage" />',
 		"<span class='textHolder icone'>&nbsp;</span>$titre",
 		"\n<ul class='plan-rubrique'>\n";
 	}
@@ -363,6 +364,7 @@ function afficher_rubriques_filles($id_parent, $flag_trad) {
 		echo "<li id='rubrique-$id_rubrique' class='treeItem ",
 			($id_parent==0)?"secteur":"rubrique",
 			"'>",
+			$lesenfants?'<img src="'._DIR_IMG_PACK.'deplierhaut.gif" width="16" height="16" class="expandImage" />':'',
 		  "<span class='textHolder icone'>&nbsp;</span><p class='",
 		  ($id_parent==0)?"secteur":"rubrique",
 		  "'><b class='verdana2'><a href='",
