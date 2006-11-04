@@ -1,11 +1,12 @@
+// <b>VOUS POUVEZ AJOUTER DES ELEMENTS A CETTE LISTE</b>
 // <b>TODO</b>: Utiliser 'trim' pour parser plus liberalement le fichier theme.xml (de Frank).
-// <b>TODO</b>: Use 'trim' to parse more liberaly theme.xml (de Frank).
-// 
-// <b>TODO</b>: Probablemnt ajouter des tests pour detecter l'usage de 'dossier_squelettes'.
-// <b>TODO</b>: Probably add some tests to detect the usage of 'dossier_squelettes'.
-// 
-// <b>TODO</b>: Ameliorer la documentation pour les utilisateurs.
-// <b>TODO</b>: More finishing in the user documentation.
-// 
+// <b>TODO</b>: Probablement ajouter des tests pour detecter l'usage de 'dossier_squelettes'.
 // <b>TODO</b>: Telecharger un squelette ou un theme distribue par internet et l'installer.
+// <b>TODO</b>: Afficher les fichiers capture.png si ils existent
+//
+// <b>YOU CAN ADD ITEM TO THIS LIST AS YOU WISH</b>
+// <b>TODO</b>: Use 'trim' to parse more liberaly theme.xml (de Frank).
+// <b>TODO</b>: Probably add some tests to detect the usage of 'dossier_squelettes'.
 // <b>TODO</b>: Download a whole squelette or theme zip distribution trough the net and install it.
+// <b>TODO</b>: Display capture.png files if exist
+
