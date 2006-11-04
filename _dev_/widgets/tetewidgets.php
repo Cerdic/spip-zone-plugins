@@ -4,9 +4,6 @@
  *  Widgets plugin for spip (c) Fil & Toggg 2006 -- licence GPL
  */
 
-// cf. action/widgets_html
-define('_PREG_WIDGET', ',widget\b[^<>\'"]+\b((\w+)-(\w+)-(\d+))\b,');
-
 // Dire rapidement si ca vaut le coup de chercher des droits
 function analyse_droits_rapide_dist() {
     if ($GLOBALS['auteur_session']['statut'] != '0minirezo')
@@ -27,6 +24,7 @@ function Widgets_affichage_final($page) {
         return $page;
 
     // voire un peu plus precisement lesquelles
+    include_spip('inc/widgets');
     if (!preg_match_all(_PREG_WIDGET, $page, $regs, PREG_SET_ORDER))
         return $page;
 
@@ -52,7 +50,6 @@ function Widgets_affichage_final($page) {
 }
 
 function Widgets_preparer_page($page, $droits) {
-    include_spip('inc/widgets');
 
     $jsFile = find_in_path('widgets.js');
     $cssFile = find_in_path('widgets.css');
