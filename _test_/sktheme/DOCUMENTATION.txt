@@ -5,34 +5,33 @@
 // This is only for the public theme
 // 
 // themes/ 
-//   squelettes/
 //      <squelette_dir1>
-//         squelette.xml
+//         theme.xml
 //        <files ... >
 //      <squelette_dir2>
-//         squelette.xml
+//         theme.xml
 //        <files ... >
 //      <...>
-//   habillages/
 //      <habillage_dir1>
-//         habillage.xml
+//         theme.xml
 //        <files ...>
 //      <habillage_dir2>
-//         habillage.xml
+//         theme.xml
 //        <files ...>
 //
 // Theme = Squelette [+ Habillage]
 // Habillage is optional, because default 'habillage' could be in the
 // 'squelette' directory itself (such 'dist').
 //
-// Available 'squelettes' are in 'squelettes' directory
-// Available 'habillages' are in 'habillages' directory
-//   
+// Available 'squelettes' or 'habillage' can be now stored in the same
+// directory but you still have the possibility to have 2 differents 
+// directories
 //
 // ---------------------------------------------------------------------------
-// habillage.xml (use to give a description in the interface and to select it
-//                with <squelette> name)
-//    <habillage>
+// Habillage
+// theme.xml (use to give a description in the interface and to select it
+//                with <squelettes> name)
+//    <theme>
 // 	<nom>name_of_the_habillage</nom>
 // 	<auteur>
 // 	author of the habillage
@@ -46,17 +45,18 @@
 // 	<description>
 // 	...
 // 	</description>
-// 	<squelette>dist</squelette>
-// 	<squelette>SarkaSpip</squelette>
-//    </habillage>
+//      <type>themes</type>
+// 	<squelettes>dist</squelettes>
+// 	<squelettes>SarkaSpip</squelettes>
+//    </theme>
 //
-// You can define several dependances <squelette></squelette>
+// You can define several dependances <squelettes></squelettes>
 // 
 // ---------------------------------------------------------------------------
-// squelette.xml (use to give description in the interface)
-// 
-// <pre>
-//    <habillage>
+// Squelette
+// theme.xml (use to give description in the interface)
+//
+//    <theme>
 // 	<nom>name_of_the_squelette</nom>
 // 	<auteur>
 // 	author of the squelette
@@ -67,10 +67,10 @@
 // 	<etat>
 // 	stable
 // 	</etat>
+//      <type>squelettes</type>
 // 	<description>
 // 	...
 // 	</description>
-//    </squelette>
-// </pre>
+//    </theme>
 //
 // ---------------------------------------------------------------------------

@@ -27,8 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] =
 	  "configuration" => "Advanced configuration",
 	  "config_doc_directories" => "<b>R&eacute;pertoires</b>:<br>
 	  It is possible to re-defined default directories locations of yours
-	  <i>squelettes/habillages</i> distributions.Default is  <i>'themes/squelettes'</i>
-	   and <i>'themes/habillages'</i>, directories are always relatives to
+	  <i>squelettes/habillages</i> distributions.Default is  the <i>'themes'</i>
+	   directory, directories are always relatives to
 	  your SPIP root site.
 	  ",
 	  "config_doc_switcher" => "<b>Switcher</b>:<br>

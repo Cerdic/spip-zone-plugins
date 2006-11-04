@@ -47,6 +47,27 @@ function exec_sktheme_public_choice() {
   sktheme_public_choice_onglets();
   
   debut_gauche();
+
+  // download a squelette distribution
+//  debut_cadre_gris_clair();
+//  echo '<form action="' . generer_url_action("sktheme_install") .'" method="post">';
+//  echo       '<strong>'._T('sktheme:zip_squelette_url').' : </strong>';
+//  echo       '<input type="text" name="zip_url" size="25" value="http://">';
+//  echo       '<input type="hidden" name="zip_type" value="squelette" />';
+//  echo	     '<input type="submit" value="Download" />';
+//  echo	'</form>';
+//  fin_cadre_gris_clair();
+
+  // download a habillage distribution
+// debut_cadre_gris_clair();
+// echo '<form action="' . generer_url_action("sktheme_install") .'" method="post">';
+// echo       '<strong>'._T('sktheme:zip_habillage_url').' : </strong>';
+// echo       '<input type="text" name="zip_url" size="25" value="http://">';
+// echo       '<input type="hidden" name="zip_type" value="habillage" />';
+// echo	     '<input type="submit" value="Download" />';
+// echo	'</form>';
+// fin_cadre_gris_clair();
+
   // Include 'raccourcis'
   sktheme_public_theme_doc_box();
   

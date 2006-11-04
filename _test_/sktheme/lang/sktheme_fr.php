@@ -28,8 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] =
 	  "config_doc_directories" => "<b>R&eacute;pertoires</b>:<br /> 
 	  Il est possible de red&eacute;finir les r&eacute;pertoires de stockage 
 	  de vos <i>'squelettes'</i> et de vos <i>'habillages'</i>, par 
-	  d&eacute;faut il s'agit de <i>'themes/squelettes'</i> et de 
-	  <i>'themes/habillages'</i>, les r&eacute;pertoires sont toujours 
+	  d&eacute;faut il s'agit du r&eacute;pertoire <i>'themes'</i>, les r&eacute;pertoires sont toujours 
 	  relatifs &agrave; la racine de votre site SPIP 
 	  ",
 	  "config_doc_switcher" => "<b>Switcher</b>:<br />
