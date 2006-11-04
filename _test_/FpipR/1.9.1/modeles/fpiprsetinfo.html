@@ -1,14 +1,3 @@
-<B_photoset>
-<div>
-<BOUCLE_photoset(FLICKR_PHOTOSETS_GETINFO) {id_photoset=#ENV{id}}>
-#LOGO_PHOTOSET{#ENV{taille,t}}
-#TITLE
-#DESCRIPTION
-<small></small>
-</BOUCLE_photoset>
-</div>
-</B_photoset>
-
 <BOUCLE_photoset(FLICKR_PHOTOSETS_GETINFO) {id_photoset=#ENV{id}}>
 <dl class="spip_document_#ENV{ID} spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok fpiprsetinfo" [ style="float:(#ENV{align}|match{left|right});"]>
 <dt>
