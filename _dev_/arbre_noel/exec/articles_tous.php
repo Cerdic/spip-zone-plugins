@@ -139,11 +139,11 @@ ul#myTree li.rub a {
 }
 ul#myTree li.art  {
 	height:24px;
-	font-weight:normal;
 }
 ul#myTree li.art a {
 	display:inline;
 	background-color: transparent;
+	font-weight:normal;
 }
 span.icone {
 	display:block;
@@ -170,7 +170,7 @@ ul#myTree .expandImage{
 	width:20px;
 	height:20px;
 }
-.selected { border:2px solid $couleur_foncee;}
+.selected {background-color: $couleur_claire;}
 EOF;
 	echo "</style>";
 	 
