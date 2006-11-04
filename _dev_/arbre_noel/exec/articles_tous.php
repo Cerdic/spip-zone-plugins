@@ -14,26 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-function gerer_deplacements($deplacements){
-	$liste_dep = explode("\n",$deplacements);
-	if (count($liste_dep)){
-		foreach ($liste_dep as $dep){
-			$mouvement=explode(":",$dep);
-			$quoi=explode("-",$mouvement[0]);
-			$cible=explode("-",$mouvement[1]);
-			if (in_array($quoi[0],array('article','rubrique')) && $cible[0]=='rubrique'){
-				$id_quoi=intval($quoi[1]);$id_cible=intval($cible[1]);
-				if (($quoi[0]=='article')&&($id_cible!=0))
-					spip_query("UPDATE spip_articles SET id_rubrique=".spip_abstract_quote($id_cible)." WHERE id_article=".spip_abstract_quote($id_quoi));
-				if ($quoi[0]=='rubrique')
-					spip_query("UPDATE spip_rubriques SET id_parent=".spip_abstract_quote($id_cible)." WHERE id_rubrique=".spip_abstract_quote($id_quoi));
-			}
-		}
-		include_spip('inc/rubriques');
-		propager_les_secteurs();
-	}
-}
-
 // http://doc.spip.org/@exec_articles_tous_dist
 function exec_articles_tous_dist()
 {
@@ -43,9 +23,6 @@ function exec_articles_tous_dist()
 	global $article, $enfant, $text_article;
 	global $connect_toutes_rubriques,$connect_id_auteur, $connect_statut;
 	global $spip_dir_lang, $spip_lang, $browser_layer;
-	
-	if (($connect_toutes_rubriques) && _request('deplacements')!==NULL)
-		gerer_deplacements(_request('deplacements'));
 	
 	changer_typo(); // pour definir $dir_lang
 	if (!is_array($aff_art)) $aff_art = array('prop','publie');
@@ -335,7 +312,9 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 	
 	$out .= debut_boite_info(true);
 	$out .= _L("D&eacute;placements");
-	$out .= generer_url_post_ecrire('articles_tous');
+	$action = generer_action_auteur("reorganiser","",generer_url_ecrire('articles_tous'));
+	$out .= "<form action='$action' method='post'>";
+	$out .= form_hidden($action);
 	$out .= "<textarea id='deplacements' style='display:none;' name='deplacements'></textarea>";
 	$out .= "\n<div id='apply' style='display:none;text-align:$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."'></div>";
 	$out .= "</form>";
