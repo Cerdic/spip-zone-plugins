@@ -25,7 +25,7 @@ function balise_SKTHEME_THEMES_SWITCHER ($p) {
   $code.='<form action="" method="post">';
   $code.='<select name="selecteurTheme" style="'.$GLOBALS['meta']['sktheme_theme_switcher_style'].'" onchange="sktheme_gotof(this.options[this.selectedIndex].value)">';
   $code.='<option selected="selected" value="">'._T('themes').'</option>';
-  foreach( $sktheme_list as $value )	$code.='<option value="'.parametre_url(self(),'sktheme',$value).'">&nbsp;-> '.$value.'</option>';
+  foreach( $sktheme_list as $value )	$code.='<option value="'.parametre_url(self(),'var_sktheme',$value).'">&nbsp;-> '.$value.'</option>';
   $code.='</select>';
   $code.='</form>';  
   
@@ -40,7 +40,7 @@ function balise_SKTHEME_HABILLAGES_SWITCHER ($p) {
   $code.='<select name="selecteurHabillage" style="'.$GLOBALS['meta']['sktheme_habillage_switcher_style'].'" onchange="sktheme_gotof(this.options[this.selectedIndex].value)">';
   $code.='<option selected="selected" value="">'._T('habillages').'</option>';
   foreach( $sktheme_habillage_list as $value )	{
-    $code.='<option value="'.parametre_url(self(),'sktheme',"__current::".$value).'">&nbsp;-> '.$value.'</option>';
+    $code.='<option value="'.parametre_url(self(),'var_sktheme',"__current::".$value).'">&nbsp;-> '.$value.'</option>';
   }
   $code.='</select>';
   $code.='</form>';  

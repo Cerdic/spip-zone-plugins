@@ -45,7 +45,7 @@ $h_dir = $GLOBALS['meta']['sktheme_habillages_public_dir'].'/'.$GLOBALS['meta'][
 // Contrib de Fil : voir http://trac.rezo.net/trac/spip-zone/browser/_contribs_/switcher/switcher.php
 // --------------------------------------------------------------------------------------------------
 // Ask sktheme 
-if (isset($_GET['sktheme'])) {
+if (isset($_GET['var_sktheme'])) {
   
   // sktheme format : 
   // for theme           = squelette_name::habillage_name
@@ -60,10 +60,9 @@ if (isset($_GET['sktheme'])) {
     
   $s_dir = $GLOBALS['meta']['sktheme_squelettes_public_dir'].'/'.$squelette;
   $h_dir = $GLOBALS['meta']['sktheme_habillages_public_dir'].'/'.$habillage;
-    
   if (is_dir(_DIR_RACINE.$s_dir)) {
     // theme exist put a cookie
-    setcookie('spip_sktheme', $_COOKIE['spip_sktheme'] = $_GET['sktheme'], NULL, '/');
+    setcookie('spip_sktheme', $_COOKIE['spip_sktheme'] = $_GET['var_sktheme'], NULL, '/');
   } else {
     // not valid remove cookie
     setcookie('spip_sktheme', $_COOKIE['spip_sktheme'] = '', -24*3600, '/');
