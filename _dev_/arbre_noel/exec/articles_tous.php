@@ -427,7 +427,7 @@ function article_tous_rubrique($tous, $id_rubrique, $flag_trad)
 			}
 			$res .= "\n"
 				. "<span class='icone'> </span>"
-			  //. "<span class='puce_statut'>".puce_statut_article($zarticle, $attarticle["statut"], $id_rubrique)."</span>"
+			  . "<span class='puce_statut'>".puce_statut_article($zarticle, $attarticle["statut"], $id_rubrique)."</span>"
 			  . ($flag_trad ? "<span class='lang_base'>$zelang</span> " : '')
 			  . "<span><a"
 			  . ($auteurs ? (' title="' . htmlspecialchars($auteurs). '"') :'')
