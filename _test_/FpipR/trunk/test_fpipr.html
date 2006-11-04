@@ -8,8 +8,9 @@ BOUCLE Flickr
 </head>
 [(#MODELE{fpiprsetinfo}{id=72157594230473349})]
 
-<BOUCLE_info(FLICKR_PHOTOS_SEARCH) {tags spip-party,spip-party:165}{tag_mode all}>
-#LOGO_PHOTO{s}
+<BOUCLE_info(FLICKR_PHOTOS_SEARCH) {tags spip-party,spip-party:165}{tag_mode all}{par date_posted}>
+#LOGO_PHOTO{m}
+[(#WIDTH_PHOTO{m})]x[(#HEIGHT_PHOTO{m})]
 #TITLE
 #DESCRIPTION
 </BOUCLE_info>

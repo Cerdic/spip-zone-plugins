@@ -941,6 +941,14 @@ function flickr_photos_getExif($photo_id,$secret='',$auth_token='') {
 
 }
 
+function flickr_photos_getSizes($photo_id,$auth_token=''){
+  $params = array();
+  if($photo_id) $params['photo_id'] = $photo_id;
+  else return false;
+
+  return flickr_check_error(flickr_api_call('flickr.photos.getSizes',$params,$auth_token));
+}
+
 //======================================================================
 
 function flickr_bookmarklet_info() {

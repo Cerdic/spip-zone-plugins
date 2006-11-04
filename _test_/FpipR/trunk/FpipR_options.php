@@ -98,15 +98,16 @@ function FpipR_generer_url_photo($user_id,$id_photo) {
 }
 
 function FpipR_generer_url_owner($user_id,$type) {
-  if($user_id) {
+  if($user_id) {  
+	$auth_token = FpipR_getAuthToken();
 	switch($type) {
 	  case 1: //photos
 		include_spip('inc/flickr_api');
-		$url = flickr_urls_getUserPhotos($user_id);
+		$url = flickr_urls_getUserPhotos($user_id,$auth_token);
 		if($url) return $url['user']['url'];
 	  case 2: //profile
 		include_spip('inc/flickr_api');
-		$url = flickr_urls_getUserProfile($user_id);
+		$url = flickr_urls_getUserProfile($user_id,$auth_token);
 		include_spip('inc/flickr_api');
 		if($url) return $url['user']['url'];
 	  case 0:
@@ -125,32 +126,77 @@ function FpipR_generer_url_photoset($user_id,$id_photoset) {
 
 function FpipR_generer_url_group($id) {
   if($id) {
+	$auth_token = FpipR_getAuthToken();
 	include_spip('inc/flickr_api');
-	$url = flickr_urls_getGroup($id);
+	$url = flickr_urls_getGroup($id,$auth_token);
 	if($url)return $url['group']['url'];
 	return 'http://www.flickr.com/groups/'.$id;
   }
   return NULL;
 }
 
+function FpipR_taille_photo($id_photo,$taille='',$type) {
+  static $tailles = array();
+  if(!$tailles[$id_photo]) {
+	$auth_token = FpipR_getAuthToken();
+	$tailles[$id_photo] = flickr_photos_getSizes($id_photo,$auth_token);
+  } 
+  /*
+   s	small square 75x75
+   t	thumbnail, 100 on longest side
+   m	small, 240 on longest side
+   -	medium, 500 on longest side
+   b	large, 1024 on longest side (only exists for very large original images)
+   o	original image, either a jpg, gif or png, depending on source format
+  */
+  switch($taille) {
+	case 's':
+	  $t = 'Square';
+	  break;
+	case 't':
+	  $t = 'Thumbnail';
+	  break;
+	case 'm':
+	  $t = 'Small';
+	  break;
+	case 'b':
+	  $t = 'Large';
+	  break;
+	case 'o':
+	  $t = 'Original';
+	  break;
+	default:
+	  $t = 'Medium';
+  }
+  foreach($tailles[$id_photo]['sizes']['size'] as $size) {
+	if($size['label'] == $t) {
+	  return $size[$type];
+	}
+  }
+  return '';
+}
+
 function FpipR_photos_getContext($id_photo,$id_photoset='',$id_group='',$tag,$attr) {
-  static $contexts;
+  static $contexts = array();
   if($id_photoset) {
 	if(!$contexts["$id_photo-$id_photoset"]) { 
 	  include_spip('inc/flickr_api');
-	  $contexts["$id_photo-$id_photoset"] = flickr_photosets_getContext($id_photo,$id_photoset);
+	  $auth_token = FpipR_getAuthToken();
+	  $contexts["$id_photo-$id_photoset"] = flickr_photosets_getContext($id_photo,$id_photoset,$auth_token);
 	}
 	return $contexts["$id_photo-$id_photoset"][$tag][$attr];
   } else if($id_group) {
 	if(!$contexts["$id_photo-$id_group"]) { 
 	  include_spip('inc/flickr_api');
-	  $contexts["$id_photo-$id_group"] = flickr_groups_pools_getContext($id_photo,$id_group);
+	  $auth_token = FpipR_getAuthToken();
+	  $contexts["$id_photo-$id_group"] = flickr_groups_pools_getContext($id_photo,$id_group,$auth_token);
 	}
 	return $contexts["$id_photo-$id_group"][$tag][$attr];
 	} else {
 	if(!$contexts[$id_photo]) { 
 	  include_spip('inc/flickr_api');
-	  $contexts[$id_photo] = flickr_photos_getContext($id_photo);
+	  $auth_token = FpipR_getAuthToken();
+	  $contexts[$id_photo] = flickr_photos_getContext($id_photo,$auth_token);
 	}
 	return $contexts[$id_photo][$tag][$attr];
 	}
@@ -169,8 +215,9 @@ function FpipR_photos_getPerms($id_photo,$perm) {
 function FpipR_photos_geo_getLocation($id_photo,$location) {
   static $locations;
   if(!$locations[$id_photo]) {
-	  include_spip('inc/flickr_api');
-	  $locations[$id_photo] = flickr_photos_geo_getLocation($id_photo);
+	include_spip('inc/flickr_api');
+	$auth_token = FpipR_getAuthToken();
+	$locations[$id_photo] = flickr_photos_geo_getLocation($id_photo,$auth_token);
   } 
   return $locations[$id_photo]['location'][$location];
 }
