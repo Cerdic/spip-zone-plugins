@@ -31,15 +31,11 @@ $(document).ready(
 	function()
 	{
 		tree = $('#myTree');
-		//$('ul',tree).hide();
-		$('li[ul]',tree).each(function(){
-			if ($('ul',this).eq(0).is(':hidden'))
-				$(this).prepend('<img src="'+img_deplierhaut+'" class="expandImage" />');
-			else
-				$(this).prepend('<img src="'+img_deplierbas+'" class="expandImage" />');
-		});
+		$('ul:hidden',tree).parent().prepend('<img src="'+img_deplierhaut+'" class="expandImage" />');
+		$('ul:visible',tree).parent().prepend('<img src="'+img_deplierbas+'" class="expandImage" />');
+		
 		$('img.expandImage', tree).click(function (){$(this).bascule();});
-		$('span.textHolder').Droppable(
+		$('span.holder').Droppable(
 			{
 				accept			: 'treeItem',
 				hoverclass		: 'none',

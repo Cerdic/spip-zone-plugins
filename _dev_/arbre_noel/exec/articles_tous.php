@@ -129,17 +129,34 @@ function exec_articles_tous_dist()
 	global $spip_lang_left,$couleur_claire,$couleur_foncee;
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
-ul#myTree li {clear:both;font-weight:bold;}
-ul#myTree li.sec p {
+	
+ul#myTree,ul#myTree ul {
+	list-style: none;
+}
+ul#myTree li {clear:both;}
+ul#myTree li.sec a {
+	display:block;
+	font-weight:bold;
 	padding: 0px; 
 	background-color: $couleur_claire;
 	height:24px;
+	margin-bottom:0.25em;
 }
-ul#myTree li.rub p {
+ul#myTree li.rub a {
+	display:block;
+	font-weight:bold;
 	margin:0px;
 	margin-bottom:5px;
 	padding: 0px; 
 	height:24px;
+	background-color: transparent;
+}
+ul#myTree li.art  {
+	height:24px;
+	font-weight:normal;
+}
+ul#myTree li.art a {
+	display:inline;
 	background-color: transparent;
 }
 span.icone {
@@ -148,7 +165,7 @@ span.icone {
 	width:28px;
 	height:24px;
 }
-span.textHolder {
+span.holder {
 }
 li.sec span.icone {	background: url($secteur24) $spip_lang_left bottom no-repeat;}
 li.sec ul{display:none;}
@@ -159,18 +176,13 @@ li.art span.icone {	background: url($article24) $spip_lang_left top no-repeat;}
 .puce_statut{
 float:$spip_lang_left;
 }
-ul {
-	list-style: none;
-}
-.expandImage{
-width:10px;
-height:10px;
-}
 ul#myTree .expandImage{
-display:block;
-float:left;
-position:relative;
+	display:block;
+	float:left;
+	position:relative;
 	left:-14px;
+	width:10px;
+	height:10px;
 }
 .selected { border:2px solid $couleur_foncee;}
 EOF;
@@ -354,9 +366,9 @@ function afficher_rubriques_filles($id_parent, $flag_trad) {
 
 	if ($id_parent==0){
 		$titre = "Racine";
-		echo "<ul id='myTree'><li id='rubrique-0' class='treeItem racine verdana3'>",
+		echo "<ul id='myTree'><li id='rubrique-0' class='treeItem racine verdana2'>",
 		//'<img src="'._DIR_IMG_PACK.'deplierbas.gif" class="expandImage" />',
-		"<span class='textHolder icone'>&nbsp;</span>$titre",
+		"<span class='holder icone'>&nbsp;</span>$titre",
 		"\n<ul class='plan-rubrique'>\n";
 	}
 	while (list($id_rubrique, $titre) = each($enfant[$id_parent]) ) {
@@ -368,11 +380,11 @@ function afficher_rubriques_filles($id_parent, $flag_trad) {
 			($id_parent==0)?"sec":"rub",
 			"'>",
 			//$lesenfants?'<img src="'._DIR_IMG_PACK.'deplierhaut.gif" class="expandImage" />':'',
-		  "<span class='textHolder icone'>&nbsp;</span><p><a href='",
+		  "<span class='holder icone'> </span><a href='",
 		   generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"),
 		   "'>",
 		   $titre,
-		   "</a></p>";
+		   "</a>";
 		   
 		if ($lesenfants) {
 			echo "\n<ul class='plan-rubrique'>\n";
@@ -410,7 +422,7 @@ function article_tous_rubrique($tous, $id_rubrique, $flag_trad)
 				.  "</span>";
 			}
 			$res .= "\n"
-				. "<span class='icone'>&nbsp;</span>"
+				. "<span class='icone'> </span>"
 			  //. "<span class='puce_statut'>".puce_statut_article($zarticle, $attarticle["statut"], $id_rubrique)."</span>"
 			  . ($flag_trad ? "<span class='lang_base'>$zelang</span> " : '')
 			  . "<span><a"
