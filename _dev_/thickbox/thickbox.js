@@ -182,7 +182,7 @@ function TB_show(caption, url, type) {//function called when the user clicks on 
 			$("#TB_closeWindowButton").click(TB_remove);
 			
 				if(url.indexOf('TB_inline') != -1){
-					$("#TB_ajaxContent").html($('#' + params['inlineId']).html());
+					$("#TB_ajaxContent").html($('*' + params['inlineId']).html());
 					TB_position();
 					$("#TB_load").remove();
 					$("#TB_window").slideDown();
