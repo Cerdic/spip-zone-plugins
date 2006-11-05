@@ -19,35 +19,35 @@ function controleurs_article_introduction_dist($regs) {
     $wh = intval($_GET['wh']); // window height
     $maxheight = min(max($wh-50,400), 700);
     if ($h>$maxheight) $h=$maxheight;
+    
+    $h = ceil($h/3);
+
+    $inputAttrs = array(
+        'style' => "width:${w}px;" . ($h ? " height:${h}px;" : ''));
+
+/*
     $hauteur = array('descriptif' => (int)ceil($h*2/13),
     				 'chapo' => (int)ceil($h*4/13),
     				 'texte' => (int)ceil($h*4/13));
+*/
+	$n = new Widget('article-introduction-' . $id, $t);
+        $widgetsAction = str_replace('widgets_html', 'widgets_store', self());
+        $widgetsCode = $n->code();
+        $widgetsInput = $n->input('texte', $inputAttrs);
+        $widgetsImgPath = dirname(find_in_path('images/cancel.png'));
 
-	foreach ($t as $champs => $valeur) {
-        $n = new Widget('article-introduction:' . $champs . '-' . $id, $valeur);
-        $widgetsCode[$champs] = $n->code();
-        $widgetsInput[$champs] = $n->input('texte', array(
-	        'style' => 'width:' . $w . 'px; height:' . $hauteur[$champs] . 'px;'));
-	}
+        // title des boutons
+        $OK = texte_backend(_T('bouton_enregistrer'));
+        $Cancel = texte_backend(_L('Annuler'));
+        $Editer = texte_backend(_L("&Eacute;diter $type $id"));
+        $url_edit = "ecrire/?exec={$type}s_edit&amp;id_{$type}=$id";
 
-    $widgetsAction = str_replace('widgets_html', 'widgets_store', self());
-    $widgetsImgPath = dirname(find_in_path('images/cancel.png'));
-
-    // title des boutons
-    $OK = texte_backend(_T('bouton_enregistrer'));
-    $Cancel = texte_backend(_L('Annuler'));
-    $Editer = texte_backend(_L("&Eacute;diter $type $id"));
-    $url_edit = "ecrire/?exec={$type}s_edit&amp;id_{$type}=$id";
-
-	return array(<<<FIN_FORM
+        $html =
+        <<<FIN_FORM
 
 <form method="post" action="{$widgetsAction}">
-  {$widgetsCode['descriptif']}
-  {$widgetsInput['descriptif']}
-  {$widgetsCode['chapo']}
-  {$widgetsInput['chapo']}
-  {$widgetsCode['texte']}
-  {$widgetsInput['texte']}
+  {$widgetsCode}
+  {$widgetsInput}
   <div class="widget-boutons">
   <div>
     <a class="widget-submit" title="{$OK}">
@@ -63,9 +63,10 @@ function controleurs_article_introduction_dist($regs) {
 </div>
 </form>
 
-FIN_FORM
+FIN_FORM;
+        $status = NULL;
 
-	, null);
+	return array($html, $status);
 }
 
 ?>

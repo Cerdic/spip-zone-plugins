@@ -17,19 +17,20 @@ function post_widgets() {
     foreach ($_POST['widgets'] as $widget) {
 
         $name = $_POST['name_'.$widget];
-        $content = $_POST['content_'.$widget];
-
-        // Compatibilite charset autre que utf8 ; en effet on recoit
-        // obligatoirement les donnees en utf-8, par la magie d'ajax
-        if ($GLOBALS['meta']['charset']!='utf-8') {
-            include_spip('inc/charsets');
-            $content = importer_charset($content, 'utf-8');
+        $content = array();
+        foreach(explode(',', $_POST['fields_'.$widget]) as $field) {
+            $content[$field] = $_POST['content_'.$widget.'_'.$field];
+            // Compatibilite charset autre que utf8 ; en effet on recoit
+            // obligatoirement les donnees en utf-8, par la magie d'ajax
+            if ($GLOBALS['meta']['charset']!='utf-8') {
+                include_spip('inc/charsets');
+                $content[$field] = importer_charset($content[$field], 'utf-8');
+            }
         }
 
         // Si les donnees POSTees ne correspondent pas a leur md5,
         // il faut les traiter
-        if (md5($content) <> $_POST['md5_'.$widget]) {
-
+        if (md5(serialize($content)) <> $_POST['md5_'.$widget]) {
             if (!isset($_POST['secu_'.$widget]))
                 $results[] = array($name, $content, $_POST['md5_'.$widget], $widget);
 
@@ -54,82 +55,48 @@ function action_widgets_store_dist() {
 
     $return = array('$erreur'=>'');
 
-// les brutes viennent du POST
-	$brutes = post_widgets();
-// modifs et updates c'est ce qu'on en tirera
-// modifs vérifie chaque changement
-// updates est rangé par table/id
-	$modifs = $updates = array();
-	if (!is_array($brutes)) {
+	$modifs = post_widgets();
+	$anamod = $anaupd = array();  # TODO: expliciter les noms de variables
+	if (!is_array($modifs)) {
 	    $return['$erreur'] = _U('widgets:donnees_mal_formatees');
 	} else {
 	    include_spip('inc/autoriser');
 
-	    foreach($brutes as $brute) {
-	        if ($brute[2] && preg_match(_PREG_WIDGET, 'widget '.$brute[0], $regs)) {
-	            list(,$widget,$type,$champ,$id) = $regs;
-	            $wid = $brute[3];
-	            if (!autoriser('modifier', $type, $id, NULL, array('champ'=>$champ))) {
+	    foreach($modifs as $i=>$m) {
+	    	$name = $m[0];
+	    	$content = $m[1];
+	        if ($content && preg_match(_PREG_WIDGET, 'widget '.$name, $regs)) {
+	            list(,$widget,$type,$modele,$id) = $regs;
+	            $wid = $m[3];
+	            if (!autoriser('modifier', $type, $id, NULL, array('modele'=>$modele))) {
 	                $return['$erreur'] =
 	                    "$type $id: " . _U('widgets:non_autorise');
 	                break;
 	            }
 
-	            // champ est vue:champ éventuellement
-	            if (count($champ = explode(':', $champ)) > 1) {
-					$champvue = $champ[0];
-	            	$champtable = $champ[1];
-	            } else {
-					$champvue = '';
-					$champtable = $champ[0];
-	            }
+				$data = array();
+				foreach ($content as $champtable => $val) {
+					$data[$champtable] = valeur_colonne_table($type, $champtable, $id);
+				}
+	            $md5 = md5(serialize($data));
 
-	            $md5 = md5(valeur_colonne_table($type, $champtable, $id));
-
-	            // est-ce que le champ a ete modifie dans la base ?
-	            if ($md5 != $brute[2]) {
+	            // est-ce que le champ a ete modifie dans la base entre-temps ?
+	            if ($md5 != $m[2]) {
 	                // si oui, la modif demandee correspond peut-etre
 	                // a la nouvelle valeur ? dans ce cas on procede
 	                // comme si "pas de modification", sinon erreur
-	                if ($md5 != md5($brute[1])) {
+	                if ($md5 != md5(serialize($content))) {
 	                    $return['$erreur'] = "$type $id $champtable: " .
 	                        _U('widgets:modifie_par_ailleurs');
 	                    }
 	                break;
 	            }
-	            $modifs[] = array($wid,$type,array($champtable, $champvue),$id,$brute[1]);
-	            if (!isset($updates[$type])) {
-	                // MODELE
-	                switch($type) {
-	                    case 'article':
-	                        include_spip('action/editer_article');
-	                        $fun = 'revisions_articles';
-	                        break;
-	                    case 'rubrique':
-	                        include_spip('action/editer_rubrique');
-	                        $fun = 'revisions_rubriques';
-	                        break;
-	                    case 'breve':
-	                        include_spip('action/editer_breve');
-	                        $fun = 'revisions_breves';
-	                        break;
-	                    default :
-	                $return['$erreur'] =
-	                    "$type: " . _U('widgets:non_implemente');
-	                break 2;
-	                }
-	                $updates[$type] = array('fun'=>$fun, 'ids'=>array());
-	            }
-	            if (!isset($updates[$type]['ids'][$id])) {
-	                $updates[$type]['ids'][$id] = array('wdg'=>array(), 'chval'=>array());
-	            }
-	            // pour reaffecter le retour d'erreur sql au cas ou
-	            $updates[$type]['ids'][$id]['wdg'][] = $wid;
-	            $updates[$type]['ids'][$id]['chval'][$champtable] = $brute[1];
+	            $anamod[] = array($type, $modele, $id, $content, $wid);
 	        }
 	    }
 	}
-	if (!$modifs AND !$return['$erreur']) {
+
+	if (!$anamod AND !$return['$erreur']) {
 	    $return['$erreur'] = _U('widgets:pas_de_modification');
 	    $return['$annuler'] = true;
 	}
@@ -140,27 +107,55 @@ function action_widgets_store_dist() {
 	    exit;
 	}
 
-	// sinon on bosse
-	foreach($updates as $type => $idschamps) {
-	    foreach($idschamps['ids'] as $id => $champsvaleurs) {
-
+	// sinon on bosse : toutes les modifs ont ete acceptees
+	foreach ($anamod as $modif) {
+		list($type, $modele, $id, $content, $wid) = $modif;
+		if (!isset($anaupd[$type])) {
+			// MODELE
+			switch($type) {
+				case 'article':
+				    include_spip('action/editer_article');
+				    $fun = 'revisions_articles';
+				    break;
+				case 'rubrique':
+				    include_spip('action/editer_rubrique');
+				    $fun = 'revisions_rubriques';
+				    break;
+				case 'breve':
+				    include_spip('action/editer_breve');
+				    $fun = 'revisions_breves';
+				    break;
+				default:
+				    $return['$erreur'] = "$type: " . _U('widgets:non_implemente');
+				    break 2;
+				    }
+				    $anaupd[$type] = array('fun'=>$fun, 'ids'=>array());
+				}
+				if (!isset($anaupd[$type]['ids'][$id])) {
+					$anaupd[$type]['ids'][$id] = array('wdg'=>array(), 'chval'=>array());
+			}
+			// pour reaffecter le retour d'erreur sql au cas ou
+			$anaupd[$type]['ids'][$id]['wdg'][] = $wid;
+			foreach ($content as $champtable => $val)
+				$anaupd[$type]['ids'][$id]['chval'][$champtable] = $val;
+		}
+		foreach($anaupd as $type => $idschamps) {
+			foreach($idschamps['ids'] as $id => $champsvaleurs) {
 	        // Enregistrer dans la base
 	        // $updok = ... quand on aura un retour
 	        // -- revisions_articles($id_article, $c) --
 	        $idschamps['fun']($id, $champsvaleurs['chval']);
 	    }
 	}
-	foreach($modifs as $modif) {
-	    list($wid,$type,$champ,$id,$valeur) = $modif;
+
+	foreach($anamod as $m) {
+		list($type, $modele, $id, $content, $wid) = $modif;
 
 	    // VUE
 	    // chercher vues/article_toto.html
 	    // sinon vues/toto.html
-	    if ((count($champ) > 1 &&
-		        find_in_path($fond = 'vues/' . $champ[1] .'.html')) ||
-		    (($champ = $champ[0]) &&
-	        (find_in_path( ($fond = 'vues/' . $type . '_' . $champ) . '.html')
-	        || find_in_path( ($fond = 'vues/' . $champ) .'.html') ))) {
+	    if (find_in_path( ($fond = 'vues/' . $type . '_' . $modele) . '.html')
+	    OR find_in_path( ($fond = 'vues/' . $modele) .'.html')) {
 	        $contexte = array(
 	            'id_' . $type => $id,
 	            'lang' => $GLOBALS['spip_lang']
@@ -174,11 +169,11 @@ function action_widgets_store_dist() {
 	        // dans la base de donnees (meme si a priori la valeur est
 	        // ce qu'on vient d'envoyer, il y a nettoyage des caracteres et
 	        // eventuellement d'autres filtres de saisie...)
-	        $valeur = valeur_colonne_table($type, $champ, $id);
+	        $valeur = valeur_colonne_table($type, $modele, $id);
 
 	        // seul spip core sait rendre les donnees
 	        include_spip('inc/texte');
-	        if (in_array($champ,
+	        if (in_array($modele,
 	        array('chapo', 'texte', 'descriptif', 'ps'))) {
 	            $return[$wid] = propre($valeur);
 	        } else {

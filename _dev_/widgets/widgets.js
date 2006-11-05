@@ -152,10 +152,11 @@ $.fn.activatewidget = function() {
           }
           return false;
         }
+
         $(me)
         .prev()
           .html(
-            d[$('form', me).find('.widget-id').val()]
+            d[$('input.widget-id', me).val()]
           )
           .iconewidget();
         $(me)

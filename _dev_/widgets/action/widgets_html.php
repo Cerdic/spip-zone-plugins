@@ -58,7 +58,7 @@ function controleur_dist($regs) {
 
     $valeur = valeur_colonne_table($type, $champ, $id);
     if ($valeur !== false) {
-        $n = new Widget($widget, $valeur);
+        $n = new Widget($widget, array($champ => $valeur));
         $widgetsAction = str_replace('widgets_html', 'widgets_store', self());
         $widgetsCode = $n->code();
         $widgetsInput = $n->input($mode, $inputAttrs);
@@ -106,48 +106,57 @@ FIN_FORM;
 // Definition des widgets
 class Widget {
     var $name;
-    var $text;
+    var $texts = array();
     var $key;
     var $md5;
     var $clean;
 
-    function Widget($name, $text='') {
+    function Widget($name, $texts = array()) {
         $this->name = $name;
-        $this->text = $text;
+        $this->texts = $texts;
         $this->key = strtr(uniqid('wid', true), '.', '_');
     }
 
     function md5() {
-        return md5($this->text);
+        return md5(serialize($this->texts));
     }
 
     function code() {
         return
-        '<input type="hidden" class="widget-id" name="widgets[]" value="'.$this->key.'" />'."\n"
-        . '<input type="hidden" name="name_'.$this->key.'" value="'.$this->name.'" />'."\n"
+         '<input type="hidden" class="widget-id" name="widgets[]"'
+        .' value="'.$this->key.'" />'."\n"
+        . '<input type="hidden" name="name_'.$this->key
+        .'" value="'.$this->name.'" />'."\n"
         . '<input type="hidden" name="md5_'.$this->key
-        .'" value="'.$this->md5().'" />'."\n";
+        .'" value="'.$this->md5().'" />'."\n"
+        . '<input type="hidden" name="fields_'.$this->key
+        .'" value="'.join(',',array_keys($this->texts)).'" />'
+        ."\n"
+        ;
     }
 
     function input($type = 'ligne', $attrs = array()) {
         include_spip('inc/filtres');
-        switch ($type) {
-            case 'texte':
-                $return = '<textarea class="widget-active"'
-                . ' name="content_'.$this->key.'">'
-                . entites_html($this->text)
-                . '</textarea>'."\n";
-                break;
-            case 'ligne':
-            default:
-                $return = '<input class="widget-active" type="text"'
-                . ' name="content_'.$this->key.'"'
-                . ' value="'
-                . entites_html($this->text)
-                . '" />'."\n";
-        }
-        foreach ($attrs as $attr=>$val) {
-            $return = inserer_attribut($return, $attr, $val);
+        $return = '';
+        foreach ($this->texts as $champ => $val) {
+            switch ($type) {
+                case 'texte':
+                    $input = '<textarea class="widget-active"'
+                    . ' name="content_'.$this->key.'_'.$champ.'">'
+                    . entites_html($val)
+                    . '</textarea>'."\n";
+                    break;
+                case 'ligne':
+                default:
+                    $input = '<input class="widget-active" type="text"'
+                    . ' name="content_'.$this->key.'_'.$champ.'"'
+                    . ' value="'
+                    . entites_html($val)
+                    . '" />'."\n";
+            }
+            foreach ($attrs as $attr=>$val)
+                $input = inserer_attribut($input, $attr, $val);
+            $return .= $input;
         }
         return $return;
     }
