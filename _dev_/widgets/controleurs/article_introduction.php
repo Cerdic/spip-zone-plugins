@@ -24,7 +24,7 @@ function controleurs_article_introduction_dist($regs) {
     				 'texte' => (int)ceil($h*4/13));
 
 	foreach ($t as $champs => $valeur) {
-        $n = new Widget('article-' . $champs . '-' . $id, $valeur);
+        $n = new Widget('article-introduction:' . $champs . '-' . $id, $valeur);
         $widgetsCode[$champs] = $n->code();
         $widgetsInput[$champs] = $n->input('texte', array(
 	        'style' => 'width:' . $w . 'px; height:' . $hauteur[$champs] . 'px;'));

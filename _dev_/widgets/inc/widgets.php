@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_PREG_WIDGET', ',widget\b[^<>\'"]+\b((\w+)-(\w+)-(\d+))\b,');
+define('_PREG_WIDGET', ',widget\b[^<>\'"]+\b((\w+)-(\w+(?::\w+)?)-(\d+))\b,');
 
 function valeur_colonne_table($table, $col, $id) {
     $s = spip_query(
