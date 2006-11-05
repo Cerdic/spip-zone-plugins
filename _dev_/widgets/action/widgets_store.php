@@ -54,17 +54,21 @@ function action_widgets_store_dist() {
 
     $return = array('$erreur'=>'');
 
-	$modifs = post_widgets();
-	$anamod = $anaupd = array();  # TODO: expliciter les noms de variables
-	if (!is_array($modifs)) {
+// les brutes viennent du POST
+	$brutes = post_widgets();
+// modifs et updates c'est ce qu'on en tirera
+// modifs vérifie chaque changement
+// updates est rangé par table/id
+	$modifs = $updates = array();
+	if (!is_array($brutes)) {
 	    $return['$erreur'] = _U('widgets:donnees_mal_formatees');
 	} else {
 	    include_spip('inc/autoriser');
 
-	    foreach($modifs as $m) {
-	        if ($m[2] && preg_match(_PREG_WIDGET, 'widget '.$m[0], $regs)) {
+	    foreach($brutes as $brute) {
+	        if ($brute[2] && preg_match(_PREG_WIDGET, 'widget '.$brute[0], $regs)) {
 	            list(,$widget,$type,$champ,$id) = $regs;
-	            $wid = $m[3];
+	            $wid = $brute[3];
 	            if (!autoriser('modifier', $type, $id, NULL, array('champ'=>$champ))) {
 	                $return['$erreur'] =
 	                    "$type $id: " . _U('widgets:non_autorise');
@@ -83,18 +87,18 @@ function action_widgets_store_dist() {
 	            $md5 = md5(valeur_colonne_table($type, $champtable, $id));
 
 	            // est-ce que le champ a ete modifie dans la base ?
-	            if ($md5 != $m[2]) {
+	            if ($md5 != $brute[2]) {
 	                // si oui, la modif demandee correspond peut-etre
 	                // a la nouvelle valeur ? dans ce cas on procede
 	                // comme si "pas de modification", sinon erreur
-	                if ($md5 != md5($m[1])) {
+	                if ($md5 != md5($brute[1])) {
 	                    $return['$erreur'] = "$type $id $champtable: " .
 	                        _U('widgets:modifie_par_ailleurs');
 	                    }
 	                break;
 	            }
-	            $anamod[] = array($wid,$type,array($champtable, $champvue),$id,$m[1]);
-	            if (!isset($anaupd[$type])) {
+	            $modifs[] = array($wid,$type,array($champtable, $champvue),$id,$brute[1]);
+	            if (!isset($updates[$type])) {
 	                // MODELE
 	                switch($type) {
 	                    case 'article':
@@ -114,18 +118,18 @@ function action_widgets_store_dist() {
 	                    "$type: " . _U('widgets:non_implemente');
 	                break 2;
 	                }
-	                $anaupd[$type] = array('fun'=>$fun, 'ids'=>array());
+	                $updates[$type] = array('fun'=>$fun, 'ids'=>array());
 	            }
-	            if (!isset($anaupd[$type]['ids'][$id])) {
-	                $anaupd[$type]['ids'][$id] = array('wdg'=>array(), 'chval'=>array());
+	            if (!isset($updates[$type]['ids'][$id])) {
+	                $updates[$type]['ids'][$id] = array('wdg'=>array(), 'chval'=>array());
 	            }
 	            // pour reaffecter le retour d'erreur sql au cas ou
-	            $anaupd[$type]['ids'][$id]['wdg'][] = $wid;
-	            $anaupd[$type]['ids'][$id]['chval'][$champtable] = $m[1];
+	            $updates[$type]['ids'][$id]['wdg'][] = $wid;
+	            $updates[$type]['ids'][$id]['chval'][$champtable] = $brute[1];
 	        }
 	    }
 	}
-	if (!$anamod AND !$return['$erreur']) {
+	if (!$modifs AND !$return['$erreur']) {
 	    $return['$erreur'] = _U('widgets:pas_de_modification');
 	    $return['$annuler'] = true;
 	}
@@ -137,7 +141,7 @@ function action_widgets_store_dist() {
 	}
 
 	// sinon on bosse
-	foreach($anaupd as $type => $idschamps) {
+	foreach($updates as $type => $idschamps) {
 	    foreach($idschamps['ids'] as $id => $champsvaleurs) {
 
 	        // Enregistrer dans la base
@@ -146,8 +150,8 @@ function action_widgets_store_dist() {
 	        $idschamps['fun']($id, $champsvaleurs['chval']);
 	    }
 	}
-	foreach($anamod as $m) {
-	    list($wid,$type,$champ,$id,$valeur) = $m;
+	foreach($modifs as $modif) {
+	    list($wid,$type,$champ,$id,$valeur) = $modif;
 
 	    // VUE
 	    // chercher vues/article_toto.html
