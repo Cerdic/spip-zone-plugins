@@ -318,6 +318,9 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 	$out .= "<textarea id='deplacements' style='display:none;' name='deplacements'></textarea>";
 	$out .= "\n<div id='apply' style='display:none;text-align:$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."'></div>";
 	$out .= "</form>";
+
+	$out .= "<a href='javascript:annuler_deplacement();' id='cancel' style='display:none;'>"._L("Annuler")."</a>";
+
 	$out .= fin_boite_info(true);
 	return $out;
 }

@@ -7,6 +7,20 @@ function plie_arbre(){
 	$('#myTree ul').hide();
 	$('img.expandImage', tree).attr('src',img_deplierhaut);
 }
+function annuler_deplacement(){
+	liste = $("#deplacements").text();
+	tableau = liste.split("\n");
+	if (tableau.length>0){
+		action = tableau[tableau.length-1];
+		tab = action.split(":");
+		$("#"+tab[2]).insertion(tab[0],$("#"+tab[0]).parent().id());
+		tableau.pop();
+		$("#deplacements").html(tableau.join("\n"));
+		if (tableau.length==0) $("#cancel").hide();
+		if (tableau.length==0) $("#apply").hide();
+	}
+}
+
 jQuery.fn.set_expandImage = function(){
 	$('ul:hidden',$(this)).parent().prepend('<img src="'+img_deplierhaut+'" class="expandImage" />');
 	$('ul:visible',$(this)).parent().prepend('<img src="'+img_deplierbas+'" class="expandImage" />');
@@ -49,7 +63,9 @@ jQuery.fn.insertion = function(dropped_id,origine_id){
 	subbranch = $(this).children('ul').eq(0);
 	if (subbranch.size() == 0) {
 		$(this).prepend('<img src="'+img_deplierbas+'" width="16" height="16" class="expandImage" />');
-		$(this).append('<ul></ul>');
+		id = $(this).id();
+		id = id.split("-"); id=id[1]
+		$(this).append("<ul id='ul"+id+"' ></ul>");
 		$(this).children('img.expandImage').click(function (){$(this).bascule();});
 		subbranch = $(this).children('ul').eq(0);
 	}
@@ -109,39 +125,13 @@ jQuery.fn.set_droppables = function(){
 					subbranch.unpause();
 				var target=$(this).parent().id();
 				var quoi=$(dropped).id();
-				var origine=$(dropped).parent().id();
-				action=quoi+":"+target;
+				var source=$(dropped).parent().parent().id(); // il faut stocker l'id du li car le ul peut avoir disparu au moment du cancel
+				action=quoi+":"+target+":"+source;
 				var dep = $("#deplacements");
 				dep.html(dep.text()+"\n"+action);
 				$("#apply").show();
-				$(this).parent().insertion(quoi,origine);
-				/*
-				$(this).parent().removeClass('selected');
-				subbranch = $(this).siblings('ul').eq(0);
-				if (this.expanded)
-					subbranch.unpause();
-				this.expanded = false;
-				if (subbranch.size() == 0) {
-					$(this).parent().prepend('<img src="'+img_deplierbas+'" width="16" height="16" class="expandImage" />');
-					$(this).parent().append('<ul></ul>');
-					$(this).siblings('img.expandImage').click(function (){$(this).bascule();});
-					subbranch = $(this).siblings('ul').eq(0);
-				}
-				if (subbranch.is(':hidden')){
-					subbranch.deplie();
-				}
-
-				oldParent = dropped.parentNode;
-				if(($(dropped).is('li.art')) && (subbranch.children('li.rub').length>0)){
-						subbranch.end().children('li.rub').eq(0).before(dropped);
-				}
-				else
-					subbranch.append(dropped);
-				oldBranches = $('li', oldParent);
-				if (oldBranches.size() == 0) {
-					$(oldParent).siblings('img.expandImage').remove();
-					$(oldParent).remove();
-				}*/
+				$("#cancel").show();
+				$(this).parent().insertion(quoi,$(dropped).parent().id());
 			}
 		}
 	);
