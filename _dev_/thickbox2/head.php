@@ -18,7 +18,7 @@ $flux .=
 // and "the ajaxed element" when called because of onAjaxLoad 
 var init_f = function() {
 	if ($("a.thickbox,a[@type=\'image/jpeg\'],a[@type=\'image/png\'],a[@type=\'image/gif\']",this).addClass("thickbox").size()) {
-		TB_chemin_animation = "'.url_absolue(find_in_path('loadingAnimation.gif')).'";
+		TB_load = "'.url_absolue(find_in_path('loadingAnimation.gif')).'"
 		TB_chemin_css = "'.url_absolue(find_in_path('thickbox.css')).'";
 		TB_init(this);
 	};
