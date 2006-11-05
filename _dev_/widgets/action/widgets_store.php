@@ -71,9 +71,14 @@ function action_widgets_store_dist() {
 	                break;
 	            }
 
-	            // alias temporaire pour titreurl, en attendant un modele
-	            if ($champ == 'titreurl') $champtable = 'titre';
-	            else $champtable = $champ;
+	            // champ est vue:champ éventuellement
+	            if (count($champ = explode(':', $champ)) > 1) {
+					$champvue = $champ[0];
+	            	$champtable = $champ[1];
+	            } else {
+					$champvue = '';
+					$champtable = $champ[0];
+	            }
 
 	            $md5 = md5(valeur_colonne_table($type, $champtable, $id));
 
@@ -88,7 +93,7 @@ function action_widgets_store_dist() {
 	                    }
 	                break;
 	            }
-	            $anamod[] = array($wid,$type,$champ,$id,$m[1]);
+	            $anamod[] = array($wid,$type,array($champtable, $champvue),$id,$m[1]);
 	            if (!isset($anaupd[$type])) {
 	                // MODELE
 	                switch($type) {
@@ -147,8 +152,11 @@ function action_widgets_store_dist() {
 	    // VUE
 	    // chercher vues/article_toto.html
 	    // sinon vues/toto.html
-	    if (find_in_path( ($fond = 'vues/' . $type . '_' . $champ) . '.html')
-	        || find_in_path( ($fond = 'vues/' . $champ) .'.html') ) {
+	    if ((count($champ) > 1 &&
+		        find_in_path($fond = 'vues/' . $champ[1] .'.html')) ||
+		    (($champ = $champ[0]) &&
+	        (find_in_path( ($fond = 'vues/' . $type . '_' . $champ) . '.html')
+	        || find_in_path( ($fond = 'vues/' . $champ) .'.html') ))) {
 	        $contexte = array(
 	            'id_' . $type => $id,
 	            'lang' => $GLOBALS['spip_lang']
