@@ -120,55 +120,53 @@ ul#myTree ul {
 	border-left: 1px dotted #888;
 }
 ul#myTree li {clear:both;}
-ul#myTree li.sec a {
-	display:block;
-	font-weight:bold;
-	padding: 0px; 
-	background-color: $couleur_claire;
-	height:24px;
-	margin-bottom:0.25em;
-}
-ul#myTree li.rub a {
+ul#myTree li.sec,ul#myTree li.rub {display:inline;}
+ul#myTree li.sec a, ul#myTree li.rub a {
 	display:block;
 	font-weight:bold;
 	margin:0px;
-	margin-bottom:5px;
 	padding: 0px; 
+	padding-top: 5px;
+	padding-left: 5px; 
+	margin-bottom:5px;
 	height:24px;
-	background-color: transparent;
 }
-ul#myTree li.art  {
-	height:24px;
-}
+ul#myTree li.art {display:block; height:24px;}
+ul#myTree li.sec a {background-color: $couleur_claire;}
+ul#myTree li.rub a {background-color: transparent;}
 ul#myTree li.art a {
 	display:inline;
 	background-color: transparent;
 	font-weight:normal;
-}
-span.icone {
-	display:block;
-	float:$spip_lang_left;
-	width:28px;
+	padding-left: 5px; 
+	padding-top: 5px;
 	height:24px;
 }
-span.holder {
+span.icone {
+	float:$spip_lang_left;
+	position:relative;
+	display:block;
+	width:28px;
+	height:24px;
+	margin-left:-14px;	
 }
+ul#myTree li.art span.icone {	margin-left:0px;}
+
+span.holder {}
 li.sec span.icone {	background: url($secteur24) $spip_lang_left bottom no-repeat;}
-li.sec ul{display:none;}
-li.rub ul{display:none;}
 li.rub span.icone {	background: url($rubrique24) $spip_lang_left top no-repeat;}
 li.art span.icone {	background: url($article24) $spip_lang_left top no-repeat;}
+li.sec ul{display:none;}
+li.rub ul{display:none;}
 
-.puce_statut{
-float:$spip_lang_left;
-}
+ul#myTree li.art .puce_statut{float:$spip_lang_left;	padding-top: 5px;}
 ul#myTree .expandImage{
 	display:block;
 	float:left;
 	position:relative;
 	left:-20px;
-	width:20px;
-	height:20px;
+	width:16px;
+	height:16px;
 }
 .selected {background-color: $couleur_claire;}
 EOF;
