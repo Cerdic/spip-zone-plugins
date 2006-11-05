@@ -119,7 +119,7 @@ ul#myTree ul {
 	padding-left: 12px;
 	border-left: 1px dotted #888;
 }
-ul#myTree li {clear:both;}
+ul#myTree ul {clear:both;}
 ul#myTree li.sec,ul#myTree li.rub {display:inline;}
 ul#myTree li.sec a, ul#myTree li.rub a {
 	display:block;
