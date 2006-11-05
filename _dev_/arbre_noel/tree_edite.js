@@ -44,6 +44,32 @@ jQuery.fn.bascule = function() {
 	}
 	return $(this);
 }
+jQuery.fn.insertion = function(dropped_id,origine_id){
+	dropped = $('#'+dropped_id);
+	subbranch = $(this).children('ul').eq(0);
+	if (subbranch.size() == 0) {
+		$(this).prepend('<img src="'+img_deplierbas+'" width="16" height="16" class="expandImage" />');
+		$(this).append('<ul></ul>');
+		$(this).children('img.expandImage').click(function (){$(this).bascule();});
+		subbranch = $(this).children('ul').eq(0);
+	}
+	if((dropped.is('li.art')) && (subbranch.children('li.rub').length>0)){
+		subbranch.end().children('li.rub').eq(0).before(dropped);
+	}
+	else
+		subbranch.end().append(dropped);
+
+	if (subbranch.is(':hidden')){
+		subbranch.deplie();
+	}
+
+	oldParent = $('#'+origine_id);
+	oldBranches = $('li', oldParent);
+	if (oldBranches.size() == 0) {
+		oldParent.siblings('img.expandImage').remove();
+		oldParent.end().remove();
+	}
+}
 
 jQuery.fn.set_droppables = function(){
 	$('span.holder',$(this)).Droppable(
@@ -81,6 +107,19 @@ jQuery.fn.set_droppables = function(){
 				subbranch = $(this).siblings('ul').eq(0);
 				if (this.expanded)
 					subbranch.unpause();
+				var target=$(this).parent().id();
+				var quoi=$(dropped).id();
+				var origine=$(dropped).parent().id();
+				action=quoi+":"+target;
+				var dep = $("#deplacements");
+				dep.html(dep.text()+"\n"+action);
+				$("#apply").show();
+				$(this).parent().insertion(quoi,origine);
+				/*
+				$(this).parent().removeClass('selected');
+				subbranch = $(this).siblings('ul').eq(0);
+				if (this.expanded)
+					subbranch.unpause();
 				this.expanded = false;
 				if (subbranch.size() == 0) {
 					$(this).parent().prepend('<img src="'+img_deplierbas+'" width="16" height="16" class="expandImage" />');
@@ -89,24 +128,20 @@ jQuery.fn.set_droppables = function(){
 					subbranch = $(this).siblings('ul').eq(0);
 				}
 				if (subbranch.is(':hidden')){
-					subbranch.show();
-					$(this).siblings('img.expandImage').eq(0).attr('src',img_deplierbas);
+					subbranch.deplie();
 				}
-				var target=$(this).parent().id();
-				var quoi=$(dropped).id();
-				action=quoi+":"+target;
-				//$("#debug").append(quoi+"-&gt;"+target+"<br/>");
-				var dep = $("#deplacements");
-				dep.html(dep.text()+"\n"+action);
-				$("#apply").show();
 
 				oldParent = dropped.parentNode;
-				subbranch.append(dropped);
+				if(($(dropped).is('li.art')) && (subbranch.children('li.rub').length>0)){
+						subbranch.end().children('li.rub').eq(0).before(dropped);
+				}
+				else
+					subbranch.append(dropped);
 				oldBranches = $('li', oldParent);
 				if (oldBranches.size() == 0) {
 					$(oldParent).siblings('img.expandImage').remove();
 					$(oldParent).remove();
-				}
+				}*/
 			}
 		}
 	);
