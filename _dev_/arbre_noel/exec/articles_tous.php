@@ -114,14 +114,15 @@ function exec_articles_tous_dist()
 ul#myTree,ul#myTree ul {
 	list-style: none;
 }
-ul#myTree ul {
+ ul {
 	margin-left: 10px;
 	padding-left: 12px;
 	border-left: 1px dotted #888;
 }
-ul#myTree ul {clear:both;}
-ul#myTree li.sec,ul#myTree li.rub {display:inline;}
-ul#myTree li.sec a, ul#myTree li.rub a {
+ ul,li {clear:both;}
+ li.sec, li.rub {display:inline;}
+ ul>li.sec,ul>li.rub {display:block;}
+ li.sec a.titre,  li.rub a.titre {
 	display:block;
 	font-weight:bold;
 	margin:0px;
@@ -131,10 +132,10 @@ ul#myTree li.sec a, ul#myTree li.rub a {
 	margin-bottom:5px;
 	height:24px;
 }
-ul#myTree li.art {display:block; height:24px;}
-ul#myTree li.sec a {background-color: $couleur_claire;}
-ul#myTree li.rub a {background-color: transparent;}
-ul#myTree li.art a {
+ li.art {display:block; height:24px;}
+ li.sec a.titre {background-color: $couleur_claire;}
+ li.rub a.titre {background-color: transparent;}
+ li.art a.titre {
 	display:inline;
 	background-color: transparent;
 	font-weight:normal;
@@ -150,7 +151,7 @@ span.icone {
 	height:24px;
 	margin-left:-14px;	
 }
-ul#myTree li.art span.icone {	margin-left:0px;}
+ li.art span.icone {	margin-left:0px;}
 
 span.holder {}
 li.sec span.icone {	background: url($secteur24) $spip_lang_left bottom no-repeat;}
@@ -159,8 +160,9 @@ li.art span.icone {	background: url($article24) $spip_lang_left top no-repeat;}
 li.sec ul{display:none;}
 li.rub ul{display:none;}
 
-ul#myTree li.art .puce_statut{float:$spip_lang_left;	padding-top: 5px;}
-ul#myTree .expandImage{
+.puce_statut{float:$spip_lang_left;	padding-top: 5px;}
+.puce_article_popup {padding:0px;}
+ .expandImage{
 	display:block;
 	float:left;
 	position:relative;
@@ -390,7 +392,7 @@ function afficher_rubriques_filles($id_parent, $flag_trad, $profondeur=-1) {
 			//$lesenfants?'<img src="'._DIR_IMG_PACK.'deplierhaut.gif" class="expandImage" />':'' .
 		  "<span class='holder icone'> </span><a href='" .
 		   generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") .
-		   "'>$titre</a>";
+		   "' class='titre'>$titre</a>";
 		
 		$lesenfants = afficher_contenu_rubrique($id_rubrique,$flag_trad,$profondeur);
 		if ($lesenfants)
@@ -431,7 +433,7 @@ function article_tous_rubrique($tous, $id_rubrique, $flag_trad)
 			  . ($auteurs ? (' title="' . htmlspecialchars($auteurs). '"') :'')
 			  . "\nhref='"
 			  . generer_url_ecrire("articles","id_article=$zarticle")
-			  . "'>"
+			  . "' class='titre'>"
 			  . ($flag_trad ? "<span class='lang_base'>$zelang</span> " : '')
 			  . "<span>"
 			  . $attarticle["titre"]
