@@ -20,7 +20,7 @@ function exec_articles_tous_dist()
 	$aff_art = _request('aff_art');
 	$sel_lang = _request('sel_lang');
 
-	global $article, $enfant, $text_article;
+	global $text_article;
 	global $connect_toutes_rubriques,$connect_id_auteur, $connect_statut;
 	global $spip_dir_lang, $spip_lang, $browser_layer;
 	
@@ -85,7 +85,12 @@ function exec_articles_tous_dist()
 					"<a class='$c' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$lang</a>";
 			}
 		}
-	if (_request('var_ajaxcharset')&&_request('id_rubrique')) ajax_retour(afficher_contenu_rubrique(_request('id_rubrique'),$flag_trad,2));
+
+	$flag_trad = (($GLOBALS['meta']['multi_rubriques'] == 'oui' 
+		OR $GLOBALS['meta']['multi_articles'] == 'oui') 
+		AND $GLOBALS['meta']['gerer_trad'] == 'oui');
+
+	if (_request('var_ajaxcharset')&&_request('id_rubrique')) ajax_retour(afficher_contenu_rubrique($article, $enfant, _request('id_rubrique'), $flag_trad, 2));
 
  	pipeline('exec_init',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
 	debut_page(_T('titre_page_articles_tous'), "accueil", "tout-site");
@@ -99,10 +104,6 @@ function exec_articles_tous_dist()
 
 	if ($enfant AND $browser_layer)
 		echo couche_formulaire_tous($first_couche, $last_couche);
-
-	$flag_trad = (($GLOBALS['meta']['multi_rubriques'] == 'oui' 
-		OR $GLOBALS['meta']['multi_articles'] == 'oui') 
-		AND $GLOBALS['meta']['gerer_trad'] == 'oui');
 
 	$secteur24=http_wrapper("secteur-24.gif");
 	$rubrique24=http_wrapper("rubrique-24.gif");
@@ -174,8 +175,13 @@ li.rub ul{display:none;}
 EOF;
 	echo "</style>";
 	 
-	echo afficher_rubriques_filles(0, $flag_trad,2);
-
+	$titre = _L("Racine");
+	$arbre .= "<ul id='myTree'><li id='rubrique-0' class='treeItem racine verdana2'>" .
+	"<span class='holder icone'>&nbsp;</span>$titre" .
+	"\n<ul class=''>\n";
+	$arbre .= afficher_rubriques_filles($article, $enfant, 0, $flag_trad, 2);
+	$arbre .= "</ul></li></ul>\n";
+	echo $arbre;
 
 	echo fin_page();
 }
@@ -349,15 +355,14 @@ function couche_formulaire_tous($first_couche, $last_couche)
 
 global $spip_lang_left, $spip_lang_right, $spip_lang, $couleur_claire;
 
-function afficher_contenu_rubrique($id_rubrique,$flag_trad,$profondeur){
+function afficher_contenu_rubrique(&$article, &$enfant, $id_rubrique, $flag_trad, $profondeur){
 	static $ajax_args=NULL;
-	global $enfant, $article;
 	$out = "";
 	if ($profondeur!=0){
 		if (isset($article[$id_rubrique]))
 			$out .= article_tous_rubrique($article[$id_rubrique], $id_rubrique, $flag_trad);
 		if (isset($enfant[$id_rubrique]))
-			$out .= afficher_rubriques_filles($id_rubrique,$flag_trad, $profondeur);
+			$out .= afficher_rubriques_filles($article, $enfant, $id_rubrique, $flag_trad, $profondeur);
 	}
 	else{
 		if ($ajax_args==NULL){
@@ -374,20 +379,12 @@ function afficher_contenu_rubrique($id_rubrique,$flag_trad,$profondeur){
 	return $out;
 }
 // http://doc.spip.org/@afficher_rubriques_filles
-function afficher_rubriques_filles($id_parent, $flag_trad, $profondeur=-1) {
-	global $enfant, $article;
+function afficher_rubriques_filles(&$article, &$enfant, $id_parent, $flag_trad, $profondeur=-1) {
 	$out = "";
 
 	if (!$enfant[$id_parent]) return;
 	$profondeur--;
 
-	if ($id_parent==0){
-		$titre = "Racine";
-		$out .= "<ul id='myTree'><li id='rubrique-0' class='treeItem racine verdana2'>" .
-		//'<img src="'._DIR_IMG_PACK.'deplierbas.gif" class="expandImage" />',
-		"<span class='holder icone'>&nbsp;</span>$titre" .
-		"\n<ul class=''>\n";
-	}
 	while (list($id_rubrique, $titre) = each($enfant[$id_parent]) ) {
 		$out .= "<li id='rubrique-$id_rubrique' class='treeItem " .
 			(($id_parent==0)?"sec":"rub") .
@@ -397,13 +394,11 @@ function afficher_rubriques_filles($id_parent, $flag_trad, $profondeur=-1) {
 		   generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") .
 		   "' class='titre'>$titre</a>";
 		
-		$lesenfants = afficher_contenu_rubrique($id_rubrique,$flag_trad,$profondeur);
+		$lesenfants = afficher_contenu_rubrique($article, $enfant, $id_rubrique, $flag_trad, $profondeur);
 		if ($lesenfants)
 			$out .= "\n<ul id='ul$id_rubrique'>\n$lesenfants</ul>\n";
 		$out .= "</li>\n";
 	}
-	if ($id_parent==0)
-		$out .= "</ul></li></ul>\n";
 	return $out;
 }
 
