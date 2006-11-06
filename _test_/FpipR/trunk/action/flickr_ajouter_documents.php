@@ -37,7 +37,7 @@ function action_flickr_ajouter_documents() {
 		$photos = _request('photos');
 	  }
 	  
-	  include_spip('inc/getdocument');
+	  include_spip('inc/ajouter_documents');
 	  foreach($photos as $info) {
 		list($id_photo,$secret) = split('@#@',$info);
 		$id_photo= intval($id_photo);
