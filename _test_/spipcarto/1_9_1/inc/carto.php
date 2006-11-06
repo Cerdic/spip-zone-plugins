@@ -307,30 +307,20 @@ function afficher_carte_interface($id_carte,$retour,$fichier,$callage, $id_img =
    <td colspan="7">&nbsp;</td>
   </tr>
   <tr>
-   <td> '._T("spipcarto:carte_draw").'
+   <td> '._T("spipcarto:carte_draw").'<br />
     <!--<input type="radio" name="tool" value="rectangle,submit,crossHair,zoom_in"  id="zoom_in" onclick="dhtmlBox.changeTool()" />
-          zoom_in<br />-->
-   </td>
-   <td>
-    <!--<input type="radio" name="tool" value="point,submit,crossHair,zoom_out"  id="zoom_out" onclick="dhtmlBox.changeTool()" />
+         zoom_in<br />-->
+     <!--<input type="radio" name="tool" value="point,submit,crossHair,zoom_out"  id="zoom_out" onclick="dhtmlBox.changeTool()" />
           zoom out<br />-->
-   </td>
-   <td>
     <!--<input type="radio" name="tool" value="pan,submit,move,pan"  id="pan" onclick="dhtmlBox.changeTool()" />
           pan<br />-->
-   </td>
-   <td>
     <!--<input type="radio" name="tool" value="rectangle,submit,help,query"  id="query" onclick="dhtmlBox.changeTool()" />
           Rectangle<br />-->
-   </td>
-   <td>
     <input type="radio" name="tool" value="point,submit,crossHair,point"   id="point" onclick="dhtmlBox.changeTool()" />
           '._T('spipcarto:carte_point').'<br />
-   </td>
-   <td>
-    <input type="radio" name="tool" value="line,submit,crossHair,line"   id="line" onclick="dhtmlBox.changeTool()" />
+   <input type="radio" name="tool" value="line,submit,crossHair,line"   id="line" onclick="dhtmlBox.changeTool()" />
           '._T('spipcarto:carte_line').'<br />
-   </td><td><input type="radio" name="tool" value="polygon,submit,crossHair,polygon"   checked="checked"  id="polygon" onclick="dhtmlBox.changeTool()" />
+<input type="radio" name="tool" value="polygon,submit,crossHair,polygon"   checked="checked"  id="polygon" onclick="dhtmlBox.changeTool()" />
           '._T('spipcarto:carte_polygon').'<br />
    </td>
   </tr>
