@@ -9,7 +9,7 @@ function Player_insert_head($flux){
 	$flux .="<script type='text/javascript'>var musicplayerurl='"._DIR_PLUGIN_PLAYER."musicplayer.swf'</script>\n";
 	$flux .= 	'<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'AFLAX/aflax.js"></script>';
 	$flux .= 	'<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'player_enclosure.js"></script>';
-	$flux .=	'<script type="text/javascript">aflax.insertFlash(1, 1, "#FFFFFF", "go", false);<!--  // --></script>';
+	//$flux .=	'<script type="text/javascript">aflax.insertFlash(1, 1, "#FFFFFF", "go", false);<!--  // --></script>';
 	return $flux;
 }
 
@@ -34,5 +34,31 @@ function Player_post_propre($texte) {
 	
 	return $texte;
 }
+
+function joli_titre($titre){
+$titre=basename($titre);
+$titre=ereg_replace('.mp3','',$titre);
+$titre=ereg_replace('^ ','',$titre);
+$titre = eregi_replace("_"," ", $titre );
+$titre = eregi_replace("'"," ",$titre );
+
+return $titre ;
+}
+
+
+function Player_affichage_final($texte){
+	
+	global 	$html;
+
+	if ($html) {
+	
+	$code='<script type="text/javascript">aflax.insertFlash(1, 1, "#FFFFFF", "go", false);</script>';
+	
+	// On rajoute le code du player aflax avant la balise </body>
+		$texte=eregi_replace("</body>","$code</body>",$texte);
+	}
+	return($texte);
+}
+
 
 ?>

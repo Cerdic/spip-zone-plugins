@@ -1,0 +1,46 @@
+[(#REM)
+
+	Modele pour <doc> modifié pour le plugin Lecteur Flash pour MP3
+	http://spip-zone.info/spip.php?article18
+	
+	afficher une playliste
+	
+
+]
+
+
+<B_doc>
+<style>
+.radiobox{
+margin:10px 0px 10px 0px;
+padding:0px;
+font-size:9px;
+background-color:#000;
+}
+.radiobox a{
+color:#ffffff;
+}
+.controles li{
+display:inline;
+background:#cccccc;
+color:#ffffff;
+border-left:1px solid black;
+cursor:hand;
+cursor:pointer;
+}
+</style>
+
+<div class="radiobox">
+<ul class="controles">
+<li onClick="player_prev()"><</li>
+<li onClick="soundObj.start()">Play</li>
+<li onClick="soundObj.stop()">stop</li>
+<li onClick="player_next()">></li></ul>
+<ul class="playliste">
+<BOUCLE_doc (DOCUMENTS) {extension==mp3}{!par date}{0,10}>
+<li><a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+</BOUCLE_doc>
+</ul>
+</B_doc>
+
+</div>

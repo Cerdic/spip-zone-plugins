@@ -22,6 +22,11 @@ mp3Array = new Array();
 setInterval("timer_()", 1000);
 
 $(document).ready(function(){
+
+//pas de chance le code ci dessous ne fonctionne pas, du coup on passe par le pipeline affichage final
+//$("body").append(eval('aflax.insertFlash(1, 1, "#FFFFFF", "go", false);'));
+//$("body").append(eval('alert(2+2);'));
+
 var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 
 var requiredVersion=new com.deconcept.PlayerVersion([8,0,0]);
@@ -148,8 +153,10 @@ function(i) {
 						
 		         );
 
-}
+//pas de boutons play dans la playliste
+$(".playliste").find("span").remove();
 
+}
 );
 
 	
