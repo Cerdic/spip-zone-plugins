@@ -30,10 +30,29 @@ function snippets_liste_imports($table){
 	return $snippets;
 }
 
-function boite_snippets($table,$id,$contexte="",$retour = ""){
+function boite_snippets($titre,$table,$id,$contexte="",$retour = ""){
+	include_spip('inc/autoriser');
 	if (!strlen($retour))
 		$retour = _DIR_RESTREINT_ABS . self();
 	$out = debut_boite_info(true);
+	
+	$auth = false;
+	$type = $table;
+	if (substr($type,-1)=="s") $type = substr($type,0,strlen($type)-1);
+	if (substr($type,0,5)=="spip_") $type = substr($type,5);
+	if (intval($id)==$id) {
+		$auth = autoriser('modifier',$type,$id);
+	}
+	else {
+		$auth = true;
+		if ( (count($t = explode('=',$contexte))==2) AND ($id_contexte=intval($t[1])) ) {
+			$type_contexte = $t[0];
+			if (substr($type_contexte,0,3)=="id_") $type_contexte = substr($type_contexte,3);
+			$auth = autoriser('modifier',$type_contexte,$id_contexte);
+		}
+		$auth &= autoriser('creer',$type,$id);
+	}
+	if (!$auth) return "";
 	
 	if (intval($id) AND $f = snippets_fond_exporter($table)){
 		$action = generer_action_auteur('snippet_exporte',"$table:$id",$retour);

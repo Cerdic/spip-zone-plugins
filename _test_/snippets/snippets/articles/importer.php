@@ -16,6 +16,7 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
 	include_spip('base/abstract_sql');
 	$champs_non_importables = array('id_article',"id_rubrique","id_secteur","maj","export","visites","referers","popularite","id_trad","idx","id_version","url_propre");
 	$champs_non_ajoutables = array('titre',"statut",'date','date_redac','lang');
+	$champs_defaut_values = array('statut'=>'redac');
 	$table = 'spip_articles';
 	$primary = 'id_article';
 	$fields = $GLOBALS['tables_principales']['spip_articles']['field'];
@@ -31,6 +32,8 @@ function snippets_articles_importer($id_target,$arbre,$contexte){
 					if (!in_array($key,$champs_non_importables) AND isset($objet[$key])){
 						$values[$key] = trim(applatit_arbre($objet[$key]));
 					}
+					else if (isset($champs_defaut_values[$key]))
+						$values[$key] = $champs_defaut_values[$key];
 				// si c'est une creation, creer le formulaire avec les infos d'entete
 				if (!($id_objet=intval($id_target))){
 					if (preg_match(",id_rubrique=([0-9]*),i",$contexte,$regs))
