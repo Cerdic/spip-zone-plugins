@@ -82,10 +82,9 @@ jQuery.SplickerBox.prototype = {
 					window.document.location = href ;
 				}
 			});
-		
-		$(this.c).css('width',this.cote);
-		$(this.c).css('height',this.cote);
+
 		$(this.c).append(image);
+		$(this.c).css({width:this.cote+'px',height:this.cote+'px'});
 
 		if(this.cptj%3 == 0){
 			$(this.c).css("left","0px");
