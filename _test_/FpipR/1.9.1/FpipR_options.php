@@ -1,4 +1,14 @@
 <?php
+  //
+	//on crée la colonne pour stoquer les frobs
+	$installe = unserialize(lire_meta('FpipR:installe'));
+	if(!$installe) {
+	  spip_query("ALTER TABLE `".$GLOBALS['table_prefix']."_auteurs` ADD (`flickr_token` TINYTEXT NULL, `flickr_nsid` TINYTEXT NULL);");
+	  ecrire_meta('FpipR:installe',serialize(true)); //histoire de pas faire une recherche dans la base à chaque coup
+	  ecrire_metas();
+	}
+
+  //
 function generer_url_document_flickr($id_document, $statut='') {
   if (intval($id_document) <= 0) 
 	return '';
@@ -263,10 +273,5 @@ function FpipR_getAuthToken() {
 	}
   }
   return NULL;
-}
-
-//en attendant la svn:
-function _q($string){
-  return spip_abstract_quote($string);
 }
 ?>
