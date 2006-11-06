@@ -1,0 +1,41 @@
+.map_point {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+}
+div.map_obj_div {
+	z-index:100;
+	position: absolute;
+}
+a.map_obj_logo {
+	position: absolute;
+	margin: 0px; 
+	padding: 0px;
+	border: 0px;
+}
+div.map_obj_on, 
+div.map_obj_div:hover {
+	z-index:101;
+	width:150px;
+	background-color:#eee;
+	padding:1.4em;
+	-moz-border-radius: 1.4em;
+	border-radius: 1.4em;
+	border:1px solid #00888D;
+}
+div.map_obj_div a {
+	color:#025964;
+	font-weight: bold;
+	text-decoration:none;
+}
+div.map_objdiv {
+	display:none;
+}
+div.map_obj_div:hover div.map_objdiv {
+	display:inline;
+}
+div.map_obj_div a img{
+float:left;
+position:relative;
+margin:0 5px 5px 0
+}
