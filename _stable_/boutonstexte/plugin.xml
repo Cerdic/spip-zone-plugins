@@ -15,7 +15,7 @@
 	Rajoute des boutons pour l'affichage des textes comme augmenter/diminuer police
 	ATTENTION: Necessite jQuery et la balise <code>#INSERT_HEAD</code> dans les squelettes
   </description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/ecrire/?exec=articles&amp;id_article=1474</lien>
   <prefix>
 	boutonstexte
   </prefix>

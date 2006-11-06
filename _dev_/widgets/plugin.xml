@@ -16,7 +16,7 @@
 Ce plugin fournit des fonctions d'&eacute;dition rapide depuis les pages publiques du site. Pour en b&eacute;n&eacute;ficier, il faut ajouter quelques <code>class</code> dans les squelettes. Par exemple, pour que le titre soit &eacute;ditable, remplacer <code><h1>#TITRE</h1></code> par :
 _ <code><h1 class="widget article-titre-#ID_ARTICLE">#TITRE</h1></code>.
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/ecrire/?exec=articles&amp;id_article=1475</lien>
 	<prefix>
 	Widgets
 	</prefix>
