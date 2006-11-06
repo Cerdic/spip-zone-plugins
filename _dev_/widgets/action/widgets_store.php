@@ -18,7 +18,7 @@ function post_widgets() {
 
         $name = $_POST['name_'.$widget];
         $content = array();
-        foreach(explode(',', $_POST['fields_'.$widget]) as $field) {
+        foreach (explode(',', $_POST['fields_'.$widget]) as $field) {
             $content[$field] = $_POST['content_'.$widget.'_'.$field];
             // Compatibilite charset autre que utf8 ; en effet on recoit
             // obligatoirement les donnees en utf-8, par la magie d'ajax
@@ -55,19 +55,19 @@ function action_widgets_store_dist() {
 
     $return = array('$erreur'=>'');
 
-	$modifs = post_widgets();
-	$anamod = $anaupd = array();  # TODO: expliciter les noms de variables
-	if (!is_array($modifs)) {
+	$postees = post_widgets();
+	$modifs = $updates = array();
+	if (!is_array($postees)) {
 	    $return['$erreur'] = _U('widgets:donnees_mal_formatees');
 	} else {
 	    include_spip('inc/autoriser');
 
-	    foreach($modifs as $i=>$m) {
-	    	$name = $m[0];
-	    	$content = $m[1];
+	    foreach ($postees as $postee) {
+	    	$name = $postee[0];
+	    	$content = $postee[1];
 	        if ($content && preg_match(_PREG_WIDGET, 'widget '.$name, $regs)) {
 	            list(,$widget,$type,$modele,$id) = $regs;
-	            $wid = $m[3];
+	            $wid = $postee[3];
 	            if (!autoriser('modifier', $type, $id, NULL, array('modele'=>$modele))) {
 	                $return['$erreur'] =
 	                    "$type $id: " . _U('widgets:non_autorise');
@@ -81,7 +81,7 @@ function action_widgets_store_dist() {
 	            $md5 = md5(serialize($data));
 
 	            // est-ce que le champ a ete modifie dans la base entre-temps ?
-	            if ($md5 != $m[2]) {
+	            if ($md5 != $postee[2]) {
 	                // si oui, la modif demandee correspond peut-etre
 	                // a la nouvelle valeur ? dans ce cas on procede
 	                // comme si "pas de modification", sinon erreur
@@ -91,12 +91,12 @@ function action_widgets_store_dist() {
 	                    }
 	                break;
 	            }
-	            $anamod[] = array($type, $modele, $id, $content, $wid);
+	            $modifs[] = array($type, $modele, $id, $content, $wid);
 	        }
 	    }
 	}
 
-	if (!$anamod AND !$return['$erreur']) {
+	if (!$modifs AND !$return['$erreur']) {
 	    $return['$erreur'] = _U('widgets:pas_de_modification');
 	    $return['$annuler'] = true;
 	}
@@ -108,9 +108,9 @@ function action_widgets_store_dist() {
 	}
 
 	// sinon on bosse : toutes les modifs ont ete acceptees
-	foreach ($anamod as $modif) {
+	foreach ($modifs as $modif) {
 		list($type, $modele, $id, $content, $wid) = $modif;
-		if (!isset($anaupd[$type])) {
+		if (!isset($updates[$type])) {
 			// MODELE
 			switch($type) {
 				case 'article':
@@ -129,17 +129,17 @@ function action_widgets_store_dist() {
 				    $return['$erreur'] = "$type: " . _U('widgets:non_implemente');
 				    break 2;
 				    }
-				    $anaupd[$type] = array('fun'=>$fun, 'ids'=>array());
+				    $updates[$type] = array('fun'=>$fun, 'ids'=>array());
 				}
-				if (!isset($anaupd[$type]['ids'][$id])) {
-					$anaupd[$type]['ids'][$id] = array('wdg'=>array(), 'chval'=>array());
+				if (!isset($updates[$type]['ids'][$id])) {
+					$updates[$type]['ids'][$id] = array('wdg'=>array(), 'chval'=>array());
 			}
 			// pour reaffecter le retour d'erreur sql au cas ou
-			$anaupd[$type]['ids'][$id]['wdg'][] = $wid;
+			$updates[$type]['ids'][$id]['wdg'][] = $wid;
 			foreach ($content as $champtable => $val)
-				$anaupd[$type]['ids'][$id]['chval'][$champtable] = $val;
+				$updates[$type]['ids'][$id]['chval'][$champtable] = $val;
 		}
-		foreach($anaupd as $type => $idschamps) {
+		foreach($updates as $type => $idschamps) {
 			foreach($idschamps['ids'] as $id => $champsvaleurs) {
 	        // Enregistrer dans la base
 	        // $updok = ... quand on aura un retour
@@ -148,7 +148,7 @@ function action_widgets_store_dist() {
 	    }
 	}
 
-	foreach($anamod as $m) {
+	foreach($modifs as $m) {
 		list($type, $modele, $id, $content, $wid) = $modif;
 
 	    // VUE
