@@ -1,18 +1,13 @@
 <?php
 
 function FpipR_affiche_milieu($flux) {
+  if(!isset($GLOBALS['FLICKR_API_KEY']) && !isset($GLOBALS['FLICKR_SECRET'])) return $flux;
+
   if($flux['args']['exec'] == 'auteur_infos' && _request('initial') < 0) {
 		global $table_prefix, $connect_id_auteur;
 	
 		include_spip('base/abstract_sql');
 	
-		//on crée la colonne pour stoquer les frobs
-		$installe = unserialize(lire_meta('FpipR:installe'));
-		if(!$installe) {
-		  spip_query("ALTER TABLE `".$table_prefix."_auteurs` ADD (`flickr_token` TINYTEXT NULL, `flickr_nsid` TINYTEXT NULL);");
-		  ecrire_meta('FpipR:installe',serialize(true)); //histoire de pas faire une recherche dans la base à chaque coup
-		  ecrire_metas();
-		}
 		if($connect_id_auteur == $flux['args']['id_auteur']) {
 	
 		  include_spip('inc/presentation');
@@ -67,6 +62,8 @@ function FpipR_affiche_milieu($flux) {
 
 function FpipR_affiche_gauche($flux) {
   global $connect_id_auteur;
+  if(!isset($GLOBALS['FLICKR_API_KEY']) && !isset($GLOBALS['FLICKR_SECRET'])) return $flux;
+
   //Verifier les droits des auteurs
   if((($flux['args']['exec'] == 'articles') && ($GLOBALS['meta']["documents_articles"] != 'non')) || (($flux['args']['exec'] == 'naviguer')&& ($GLOBALS['meta']["documents_rubriques"] != 'non')) || (($flux['args']['exec'] == 'breves_edit')&& ($GLOBALS['meta']["documents_breves"] != 'non'))) {
 	include_spip('base/abstract_sql');
