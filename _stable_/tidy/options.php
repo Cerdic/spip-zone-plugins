@@ -26,6 +26,4 @@ $xhtml = 'tidy';
 // par exemple :
 // define ('_TIDY_COMMAND', '/usr/local/bin/tidy');
 define ('_TIDY_COMMAND', 'tidy');
-
-
 ?>

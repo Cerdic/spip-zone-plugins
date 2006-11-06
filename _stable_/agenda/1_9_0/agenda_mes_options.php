@@ -77,6 +77,4 @@ function exec_calendrier()
 		$var_f();
 	}
 }
-
-
 ?>

@@ -1,6 +1,5 @@
 <?php
-
-  // ---------------------------------------------------------------------
+// ---------------------------------------------------------------------
   //
   // Sktheme : manage themes under SPIP (squelettes + habillages)
   //
@@ -88,6 +87,4 @@ if (isset($_COOKIE['spip_sktheme'])) {
 
 // So set only the 'dossier_squelettes' to the corresponding user choice
 $dossier_squelettes = $h_dir.':'.$s_dir;
-
-
 ?>

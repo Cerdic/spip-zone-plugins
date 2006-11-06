@@ -1,30 +1,30 @@
 <?php
-// MES_OPTIONS pour ACCESGROUPE : toutes les fonctions utilisées pour le controle d'accès espaces public / privé
+// MES_OPTIONS pour ACCESGROUPE : toutes les fonctions utilisÃ©es pour le controle d'accÃ¨s espaces public / privÃ©
 
 include_spip('base/accesgroupes_tables');
 
 
-// SURCHARGE des fonctions de l'espace privé
+// SURCHARGE des fonctions de l'espace privÃ©
 //   inclure les fichiers originaux de /ecrire/exec pour que toutes les fonctions natives du core soient disponibles
-//   mais ne le faire que si on est sur une page de l'espace privé le nécessitant
-//	 !!! EXCEPTION : breves_voir est surchargé par le fichier /exec/breves_voir.php puisque le bridage d'accès se fait dans 
+//   mais ne le faire que si on est sur une page de l'espace privÃ© le nÃ©cessitant
+//	 !!! EXCEPTION : breves_voir est surchargÃ© par le fichier /exec/breves_voir.php puisque le bridage d'accÃ¨s se fait dans 
 //	 la fonction afficher_breves_voir() et non pas la fonction exec_breves_voir() !!!
-//	 merci ESJ pour la subtilité du include() php à la place du inclure_spip()
-			$exec = _request('exec'); // si on est dans l'espace privé : intégrer le fichier concerné par la surcharge
+//	 merci ESJ pour la subtilitÃ© du include() php Ã  la place du inclure_spip()
+			$exec = _request('exec'); // si on est dans l'espace privÃ© : intÃ©grer le fichier concernÃ© par la surcharge
     	if (in_array($exec, array('naviguer','rubriques_edit','articles','articles_edit','breves_edit'))) {  // ,'breves_voir'
     	 // inclure uniquement le fichier exec dont a besoin ET utiliser un include() php et non pas include_spip() pour ne pas se faire couillonner par find_in_path()
     		 include('exec/'.$exec.'.php');
-       // appel du fichier contenant les fonctions exec_xxx() modifiées pour accesgroupes
+       // appel du fichier contenant les fonctions exec_xxx() modifiÃ©es pour accesgroupes
     	   include_spip('inc/accesgroupes_prive');
     	}
 
-// CACHE : nécessité d'un cache différencié selon les rubriques autorisées/restreintes 
+// CACHE : nÃ©cessitÃ© d'un cache diffÃ©renciÃ© selon les rubriques autorisÃ©es/restreintes 
 //   ajouter un marqueur de cache pour permettre de differencier le cache en fonction des rubriques autorisees
-// 	 potentiellement une version de cache differente par combinaison de rubriques autorisées pour un utilisateur + le cache de base sans autorisation
-//   merci Cedric pour la méthode (plugin acces_restreint) 
-			if ($exec == '') {  // si on on est dans l'espace public gérer le marqueur de cache
+// 	 potentiellement une version de cache differente par combinaison de rubriques autorisÃ©es pour un utilisateur + le cache de base sans autorisation
+//   merci Cedric pour la mÃ©thode (plugin acces_restreint) 
+			if ($exec == '') {  // si on on est dans l'espace public gÃ©rer le marqueur de cache
           if (isset($auteur_session['id_auteur'])) {
-//echo '<br>début cache';
+//echo '<br>dÃ©but cache';
 	           $combins = accesgroupes_combin();
           	 $combins = join("-",$combins);
           	 if (!isset($GLOBALS['marqueur'])) {
@@ -34,21 +34,21 @@ include_spip('base/accesgroupes_tables');
 	        }
 			}
 		
-// fct pour construire et renvoyer le tableau des rubriques à accès restreint dans la partie PUBLIQUE
+// fct pour construire et renvoyer le tableau des rubriques Ã  accÃ¨s restreint dans la partie PUBLIQUE
 // 		 clone de la fct accesgroupes_liste_rubriques_restreintes() de inc/accesgroupes_fonctions.php 
 	function accesgroupes_combin($id_parent = 0) {
 	  			 $id_parent = intval($id_parent); // securite					 
-  				 static $Trub_restreintes; // nécessaire pour que la suite ne soit éxécutée qu'une fois par hit (même si on à n BOUCLES)
+  				 static $Trub_restreintes; // nÃ©cessaire pour que la suite ne soit Ã©xÃ©cutÃ©e qu'une fois par hit (mÃªme si on Ã  n BOUCLES)
       		 if (!is_array($Trub_restreintes)) {
       			  $Trub_restreintes = array();
-    			// attaquer à la racine pour mettre tout de suite les éventuels secteurs restreints dans le tableau ce qui accélèrera la suite
+    			// attaquer Ã  la racine pour mettre tout de suite les Ã©ventuels secteurs restreints dans le tableau ce qui accÃ©lÃ¨rera la suite
         			$sql1 = "SELECT id_rubrique, id_parent, id_secteur FROM spip_rubriques";	
         			$result1 = spip_query($sql1);
         			while ($row1 = spip_fetch_array($result1)) {
         			 			 $rub_ec = $row1['id_rubrique'];
     								 $parent_ec = $row1['id_parent'];
     								 $sect_ec = $row1['id_secteur'];
-        					// si le parent ou le secteur est déja dans le tableau : vu le principe d'héritage pas la peine d'aller plus loin :)
+        					// si le parent ou le secteur est dÃ©ja dans le tableau : vu le principe d'hÃ©ritage pas la peine d'aller plus loin :)
 /*        						 if (in_array($parent_ec, $Trub_restreintes) OR in_array($sect_ec, $Trub_restreintes)) {
         						 		$Trub_restreintes[] = $rub_ec;								
         						 }
@@ -67,7 +67,7 @@ include_spip('base/accesgroupes_tables');
 
 			
 			
-// création de la boucle ACCESGROUPES
+// crÃ©ation de la boucle ACCESGROUPES
 $GLOBALS['tables_principales']['spip_accesgroupes'] = array('field' => array(), 'key' => array());
 $GLOBALS['table_des_tables']['accesgroupes'] = 'accesgroupes';
 
@@ -109,7 +109,7 @@ CODE;
 */
 
 
-// le filtre qui permet d'ajouter une img aux #TITRE des rubriques/articles/breves à accès restreint
+// le filtre qui permet d'ajouter une img aux #TITRE des rubriques/articles/breves Ã  accÃ¨s restreint
 function accesgroupes_visualise($texte, $id_rub = 0, $image = 'cadenas-24.gif') {
 				 if (accesgroupes_verif_acces($id_rub, 'public') == 1 OR accesgroupes_verif_acces($id_rub, 'public') == 2) {
 				 		return "<img src=\"ecrire/img_pack/".$image."\" alt=\""._T('accesgroupes:bloque_rubrique')."\" style=\"border: none; vertical-align: baseline;\"> ".$texte;
@@ -119,11 +119,11 @@ function accesgroupes_visualise($texte, $id_rub = 0, $image = 'cadenas-24.gif') 
 				 }
 }
 
-// le critère qui permet de ne pas afficher les rubriques à accès restreint
+// le critÃ¨re qui permet de ne pas afficher les rubriques Ã  accÃ¨s restreint
 function critere_accesgroupes_invisible($id_boucle, &$boucles, $crit) {
 				 global $Tjpk_groupes_acces;
 				 $boucle = &$boucles[$id_boucle];
-      // construit le tableau de toutes les rubriques à acces interdit (dans la partie publique) pour l'auteur en cours
+      // construit le tableau de toutes les rubriques Ã  acces interdit (dans la partie publique) pour l'auteur en cours
 				 $sql1 = "SELECT id_rubrique FROM $Tjpk_groupes_acces WHERE prive_public != 1";
          $result1 = spip_query($sql1);
          $Trub_interdites = array();
@@ -140,31 +140,31 @@ function critere_accesgroupes_invisible($id_boucle, &$boucles, $crit) {
 }
 
 
-// détermine si une rubrique $rub est restreinte ou non (en fct de la provenance $prive_public : prive | public)
-// retourne 0 : accès libre | 1 : accès restreint non-connecté | 2 : accès restreint non-autorisé | 3 accès retreint autorisé
+// dÃ©termine si une rubrique $rub est restreinte ou non (en fct de la provenance $prive_public : prive | public)
+// retourne 0 : accÃ¨s libre | 1 : accÃ¨s restreint non-connectÃ© | 2 : accÃ¨s restreint non-autorisÃ© | 3 accÃ¨s retreint autorisÃ©
 function accesgroupes_verif_acces($rub, $prive_public){
 //   		global $Tspip_rubriques, $Tspip_auteurs, $Tspip_auteurs_rubriques, $Tjpk_groupes_acces, $Tjpk_groupes_auteurs, $Tjpk_groupes;
       
       $aut = $GLOBALS['auteur_session']['login'];
-      // vérifie si la rubrique courante est privée
+      // vÃ©rifie si la rubrique courante est privÃ©e
       do{ // boucle tant que la rubrique n'est pas la racine du site et que le retour est vide
          if (accesgroupes_RubPrive($rub, $prive_public)) {
 //echo '<br>$aut = '.$aut;      
             if ($aut != "") {
                $aut = accesgroupes_IdAut($aut); // cherche l'id_auteur
                if (accesgroupes_GrpAcces($aut, $rub)){
-                 $retour = 3; // accès restreint : autorisé
+                 $retour = 3; // accÃ¨s restreint : autorisÃ©
                }
 							 else {
-                 $retour = 2; // accès restreint : non autorisé
+                 $retour = 2; // accÃ¨s restreint : non autorisÃ©
                }
             }
 						else {
-               $retour = 1; // accès restreint : non connecté
+               $retour = 1; // accÃ¨s restreint : non connectÃ©
             }
          }
 				 else {
-            $retour = 0; // accès libre - vérifier la rubrique parente
+            $retour = 0; // accÃ¨s libre - vÃ©rifier la rubrique parente
          }
          $sql = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique = $rub LIMIT 1"; // recherche la rubrique parente
          $result = spip_query($sql);
@@ -177,7 +177,7 @@ function accesgroupes_verif_acces($rub, $prive_public){
 }
 
 
-// retourne l'id_auteur à partir du login $aut
+// retourne l'id_auteur Ã  partir du login $aut
 function accesgroupes_IdAut($aut){
 //   		global $Tspip_rubriques, $Tspip_auteurs, $Tspip_auteurs_rubriques, $Tjpk_groupes_acces, $Tjpk_groupes_auteurs, $Tjpk_groupes;
       
@@ -191,7 +191,7 @@ function accesgroupes_IdAut($aut){
       return $aut;
 }
 
-// vérifie si la rubrique $rub est restreinte, en fct de la provenance $prive_public (prive | public)
+// vÃ©rifie si la rubrique $rub est restreinte, en fct de la provenance $prive_public (prive | public)
 function accesgroupes_RubPrive($rub, $prive_public){
 //   		global $Tspip_rubriques, $Tspip_auteurs, $Tspip_auteurs_rubriques, $Tjpk_groupes_acces, $Tjpk_groupes_auteurs, $Tjpk_groupes;
       $sql = "SELECT count(*) AS nb_acces
@@ -215,12 +215,12 @@ function accesgroupes_RubPrive($rub, $prive_public){
       }
 }
 
-// vérifie si l'auteur $aut est autorisé à accéder à la rubrique restreinte $rub
+// vÃ©rifie si l'auteur $aut est autorisÃ© Ã  accÃ©der Ã  la rubrique restreinte $rub
 function accesgroupes_GrpAcces($aut,$rub){
 //      global $Tspip_rubriques, $Tspip_auteurs, $Tspip_auteurs_rubriques, $Tjpk_groupes_acces, $Tjpk_groupes_auteurs, $Tjpk_groupes;
       
       $acces = 0;
-		// les admins restreints ont accès sans limitation à leur rubrique
+		// les admins restreints ont accÃ¨s sans limitation Ã  leur rubrique
 		  $sql507 = "SELECT COUNT(*) AS est_admin 
 								 FROM spip_auteurs_rubriques 
 								 WHERE id_auteur = $aut 
@@ -247,10 +247,10 @@ function accesgroupes_GrpAcces($aut,$rub){
          $acces = $row['NbAcces'];
       }
       if ($acces > 0){
-         return TRUE; // accès autorisé
+         return TRUE; // accÃ¨s autorisÃ©
       }
 			else {
-         // si pas d'accès direct pour l'auteur => test si les groupes auxquels il appartient ont un droit d'acces
+         // si pas d'accÃ¨s direct pour l'auteur => test si les groupes auxquels il appartient ont un droit d'acces
   				 $sql201 = "SELECT id_grpacces FROM spip_accesgroupes_auteurs WHERE id_auteur = $aut AND dde_acces = 0";
   				 $result201 = spip_query($sql201);
   				 while ($row = spip_fetch_array($result201)) {
@@ -258,7 +258,7 @@ function accesgroupes_GrpAcces($aut,$rub){
 								 		return TRUE;
 								 }
   				 }
-  			// si pas d'accès direct ou par groupes => test des groupes dans lesquels l'utilisateur est inclu par son statut
+  			// si pas d'accÃ¨s direct ou par groupes => test des groupes dans lesquels l'utilisateur est inclu par son statut
 					 $sql202 = "SELECT statut FROM spip_auteurs WHERE id_auteur = $aut LIMIT 1";
            $result202 = spip_query($sql202);
            if ($result202){
@@ -277,11 +277,11 @@ function accesgroupes_GrpAcces($aut,$rub){
       }
 }
 
-// test des accès par ss-groupe, récursivement dans toute l'ascendance du groupe testé
+// test des accÃ¨s par ss-groupe, rÃ©cursivement dans toute l'ascendance du groupe testÃ©
 function accesgroupes_ssGrpAcces($id_grpe, $rub) {
 //      	 global $Tspip_rubriques, $Tspip_auteurs, $Tspip_auteurs_rubriques, $Tjpk_groupes_acces, $Tjpk_groupes_auteurs, $Tjpk_groupes;
 
-         // si pas d'accès direct pour l'auteur => test si les groupes auxquels il appartient sont exonérés par prive_public
+         // si pas d'accÃ¨s direct pour l'auteur => test si les groupes auxquels il appartient sont exonÃ©rÃ©s par prive_public
 				 $sql202 = "SELECT COUNT(*) AS NbAcces FROM spip_accesgroupes_acces WHERE id_grpacces = $id_grpe AND id_rubrique = $rub";
 				 $result202 = spip_query($sql202);
 				 if ($row = spip_fetch_array($result202)) {
@@ -289,7 +289,7 @@ function accesgroupes_ssGrpAcces($id_grpe, $rub) {
 							 return TRUE;
 						}
   				  else {
-  				 		// test des groupes de l'ascendance du groupe testé
+  				 		// test des groupes de l'ascendance du groupe testÃ©
 								 $sql203 = "SELECT id_grpacces FROM spip_accesgroupes_auteurs WHERE id_ss_groupe = $id_grpe";
   							 $result203 = spip_query($sql203);
   							 while ($row = spip_fetch_array($result203)) {
@@ -303,15 +303,15 @@ function accesgroupes_ssGrpAcces($id_grpe, $rub) {
 				 return FALSE;
 }
 
-// détermine si une rubrique à accès restreint est contrôlée par (au moins) un groupe autorisant les demandes d'accès
+// dÃ©termine si une rubrique Ã  accÃ¨s restreint est contrÃ´lÃ©e par (au moins) un groupe autorisant les demandes d'accÃ¨s
 function accesgroupes_existe_demande_acces($rub) {
 //				 global $Tspip_rubriques, $Tspip_auteurs, $Tspip_auteurs_rubriques, $Tjpk_groupes_acces, $Tjpk_groupes_auteurs, $Tjpk_groupes;
-		// déterminer si c'est la rubrique en cours qui est restreinte
+		// dÃ©terminer si c'est la rubrique en cours qui est restreinte
 		 		 $sql333 = "SELECT COUNT(*) as nb_rub FROM spip_accesgroupes_acces WHERE id_rubrique = $rub";
 				 $result333 = spip_query($sql333);
 				 $row333 = spip_fetch_array($result333);
 				 $existe_rub = $row333['nb_rub'];
-		// si c'est la rubrique en cours qui est contrôlée, tester si le groupe autorise les demandes d'accès
+		// si c'est la rubrique en cours qui est contrÃ´lÃ©e, tester si le groupe autorise les demandes d'accÃ¨s
 				 if ($existe_rub > 0) {
     				 $sql303 = "SELECT COUNT(*) AS nb_demande_acces
     				 				 	  FROM spip_accesgroupes_acces
@@ -328,7 +328,7 @@ function accesgroupes_existe_demande_acces($rub) {
 									return FALSE;
     				 }
     		 }
-		// sinon tester si c'est son parent qui est la rubrique restreinte (récursivement)
+		// sinon tester si c'est son parent qui est la rubrique restreinte (rÃ©cursivement)
 				 else {
 				 			$sql374 = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique = $rub LIMIT 1";
 							$result374 = spip_query($sql374);
@@ -372,12 +372,12 @@ function accesgroupes_trouve_proprio_groupe($id_grpe) {
 				}
 }
 
-// fct pour gérer l'affichage en cas de rubrique/article/breve restreints 
-// dans l'espace privé gère info restreint + formulaire d'inscription / dans l'espace public ne gère que le formulaire d'inscription
+// fct pour gÃ©rer l'affichage en cas de rubrique/article/breve restreints 
+// dans l'espace privÃ© gÃ¨re info restreint + formulaire d'inscription / dans l'espace public ne gÃ¨re que le formulaire d'inscription
 function accesgroupes_affichage_acces_restreint() {
 				 $exec = _request('exec');
-			// trouver l'id_rubrique dans laquelle se trouve l'élément restreint en cours
-				 if ($exec != '') {  // si on est dans l'espace privé
+			// trouver l'id_rubrique dans laquelle se trouve l'Ã©lÃ©ment restreint en cours
+				 if ($exec != '') {  // si on est dans l'espace privÃ©
 						if ($exec == 'articles' OR $exec == 'articles_edit') {
 									 global $id_article;
 									 $sql2 = "SELECT id_rubrique FROM spip_articles WHERE id_article = $id_article LIMIT 1";
@@ -386,7 +386,7 @@ function accesgroupes_affichage_acces_restreint() {
 									 		$id_rubrique = $row2['id_rubrique'];
 									 }
 									 else {
-									 	  // si création d'un nouvel article en étant positionné dans une rubrique à accès interdit pour l'auteur
+									 	  // si crÃ©ation d'un nouvel article en Ã©tant positionnÃ© dans une rubrique Ã  accÃ¨s interdit pour l'auteur
 												if (isset($_GET['id_rubrique']) AND $_GET['id_rubrique']) {
 													 $id_rubrique = $_GET['id_rubrique'];
 												}
@@ -404,7 +404,7 @@ function accesgroupes_affichage_acces_restreint() {
 									 		$id_rubrique = $row2['id_rubrique'];
 									 }
 									 else {
-									 	  // si création d'une nouvelle brève en étant positionné dans une rubrique à accès interdit pour l'auteur
+									 	  // si crÃ©ation d'une nouvelle brÃ¨ve en Ã©tant positionnÃ© dans une rubrique Ã  accÃ¨s interdit pour l'auteur
 												if (isset($_GET['id_rubrique']) AND $_GET['id_rubrique']) {
 													 $id_rubrique = $_GET['id_rubrique'];
 												}
@@ -427,7 +427,7 @@ function accesgroupes_affichage_acces_restreint() {
 							$url_retour = 'index.php';
 				 }
 
-			// traitement des données envoyées par le formulaire
+			// traitement des donnÃ©es envoyÃ©es par le formulaire
     	   $msg_retour_form = '';
 				 if (isset($_POST['add_auteur']) AND isset($_POST['auteur']) AND $_POST['auteur'] != '' AND isset($_POST['groupe_demande_acces']) AND $_POST['groupe_demande_acces'] != '') {
     				 $auteur = $_POST['auteur'];
@@ -476,7 +476,7 @@ function accesgroupes_affichage_acces_restreint() {
     									 $sql28 = "INSERT INTO spip_auteurs_messages (id_auteur, id_message, vu) VALUES ($proprio, $id_forum, 'non')";
     									 spip_query($sql28);
     								}
-    								else {  // si le proprio est un admin total ($proprio == 0), envoyer le message à tous les admins
+    								else {  // si le proprio est un admin total ($proprio == 0), envoyer le message Ã  tous les admins
     										 $sql29 = "SELECT id_auteur FROM spip_auteurs WHERE statut = '0minirezo'";
     										 $result29 = spip_query($sql29);
     										 while ($rows29 = spip_fetch_array($result29)) {
@@ -492,7 +492,7 @@ function accesgroupes_affichage_acces_restreint() {
     										 }
     								}
     								if (mysql_error() == '') {
-    									// si tout s'est bien passé, stocker la valeur de $id_forum dans dde_acces de l'auteur pour effaçage automatique du message de demande d'accés par la suite 
+    									// si tout s'est bien passÃ©, stocker la valeur de $id_forum dans dde_acces de l'auteur pour effaÃ§age automatique du message de demande d'accÃ©s par la suite 
 											 $sql32 = "UPDATE spip_accesgroupes_auteurs 
 									 	   				 	 SET dde_acces = $id_forum
 																 WHERE id_auteur = $auteur
@@ -520,8 +520,8 @@ function accesgroupes_affichage_acces_restreint() {
 				 		$msg_retour_form .= '<br /><br /><a href="'.$url_retour.'">['._T('accesgroupes:retour_site').']</a><br />';
 				 }
 
-			// envoyer l'affichage de la restriction avec le formulaire si nécessaire
-				 if ($exec != '') {  // si on est dans l'espace privé
+			// envoyer l'affichage de la restriction avec le formulaire si nÃ©cessaire
+				 if ($exec != '') {  // si on est dans l'espace privÃ©
 						$provenance_prive_public = 'prive';
 						if ($exec == 'articles' OR $exec == 'articles_edit') {
 									 $info = 'info_numero_article';
@@ -559,7 +559,7 @@ function accesgroupes_affichage_acces_restreint() {
 				 			$provenance_prive_public = 'public';
 				 }
 
-      // affichage du formulaire de demande d'accès si au moins un groupe contrôlant la rubrique l'autorise
+      // affichage du formulaire de demande d'accÃ¨s si au moins un groupe contrÃ´lant la rubrique l'autorise
 			// !!! et si $id_rubrique est != 0 => plantage de la page sinon !!!
     		 if ($id_rubrique != 0 AND accesgroupes_existe_demande_acces($id_rubrique) == TRUE AND $msg_retour_form == '') {			
 						 echo "<form style=\"background: #eee; border: solid 1px #aaa; padding: 10px;\" name=\"accesgroupe\" method=\"post\" action=\"".basename($_SERVER['SCRIPT_FILENAME'])."?".$_SERVER['QUERY_STRING']."\">";
@@ -599,8 +599,4 @@ function accesgroupes_affichage_acces_restreint() {
 				 }
 					
 }
-
-
-
-
 ?>

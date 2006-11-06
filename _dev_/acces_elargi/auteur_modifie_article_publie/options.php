@@ -1,5 +1,4 @@
 <?php
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Autoriser a modifier l'article $id
@@ -20,7 +19,4 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 			AND spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
 		);
 }
-
-
-
 ?>

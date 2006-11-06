@@ -21,6 +21,4 @@ tester_variable('debut_intertitre_5', "\n<h5 class=\"spip\">");
 tester_variable('fin_intertitre_5', "</h5>");
 tester_variable('debut_intertitre_6', "\n<h6 class=\"spip\">");
 tester_variable('fin_intertitre_6', "</h6>");
-
-
 ?>

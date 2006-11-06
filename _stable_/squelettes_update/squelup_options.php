@@ -1,5 +1,4 @@
 <?php
-
 if (_DIR_RESTREINT AND $auteur_session['statut'] == '0minirezo') {
 
 	$GLOBALS['svn_up_dir_skel'] = "squelettes";
@@ -43,5 +42,4 @@ if (_request('var_svn')=='update') {
 }
 
 }
-
 ?>

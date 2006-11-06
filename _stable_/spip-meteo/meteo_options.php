@@ -1,6 +1,4 @@
 <?php
-
-
 	/**
 	 * SPIP-Météo : prévisions météo dans vos squelettes
 	 *
@@ -18,6 +16,4 @@
 	define('_NOM_PLUGIN_METEO', (end($p)));
 
 	include_spip('base/meteo');
-
-	
 ?>

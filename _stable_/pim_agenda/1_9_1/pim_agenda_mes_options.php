@@ -4,6 +4,4 @@ if (!defined('_DIR_PLUGIN_PIMAGENDA')){
 	define('_DIR_PLUGIN_PIMAGENDA',(_DIR_PLUGINS.end($p)));
 }
 include_spip('base/pim_agenda');
-
-
 ?>

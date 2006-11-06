@@ -1,5 +1,4 @@
 <?php
-
 /*
  * forms
  * version plug-in de spip_form
@@ -7,7 +6,7 @@
  * Auteur :
  * Antoine Pitrou
  * adaptation en 182e puis plugin par cedric.morin@yterium.com
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * ï¿½ 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 if (!defined('_DIR_PLUGIN_FORMS')){
@@ -64,5 +63,4 @@ function forms_creer_tables_temporaires_boucles(){
 	include_spip('base/forms_temporaire');
 	forms_creer_tables_temporaires();
 }
-
 ?>

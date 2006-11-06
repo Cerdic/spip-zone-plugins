@@ -1,5 +1,4 @@
 <?php
-
 function generer_url_document_flickr($id_document, $statut='') {
   if (intval($id_document) <= 0) 
 	return '';
@@ -270,5 +269,4 @@ function FpipR_getAuthToken() {
 function _q($string){
   return spip_abstract_quote($string);
 }
-
 ?>

@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * ï¿½ 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 if (!defined('_DIR_PLUGIN_FORMS')){
@@ -59,5 +59,4 @@ foreach($_COOKIE as $cookie=>$value){
 		}
 	}
 }
-
 ?>

@@ -1,5 +1,4 @@
 <?php
-
 include_spip('base/acces_restreint');
 include_spip('inc/acces_restreint');
 
@@ -13,5 +12,4 @@ if (isset($auteur_session['id_auteur'])){
 	if (!isset($GLOBALS['marqueur'])) $GLOBALS['marqueur']="";
 	$GLOBALS['marqueur'].=":zones_acces_autorises $zones";
 }
-
 ?>

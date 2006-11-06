@@ -1,5 +1,4 @@
 <?php
-
 /* Balise #CALENDRIER_MINI
    Auteur James (c) 2006
    Plugin pour spip 1.9
@@ -7,5 +6,4 @@
 */
 
 define(VAR_DATE, 'archives');
-
 ?>

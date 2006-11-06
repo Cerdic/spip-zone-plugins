@@ -1,6 +1,4 @@
 <?php
-
-
 function introduction ($type, $texte, $chapo='', $descriptif='') {
 
 
@@ -35,5 +33,4 @@ function pas_de_grille_introduction($texte)
 	$texte = preg_replace(',<(horizontal)>(.*)<\/\1>,UimsS','',$texte);
 	$texte = preg_replace(',<(vertical)>(.*)<\/\1>,UimsS','',$texte);
 	return $texte;}
-
 ?>

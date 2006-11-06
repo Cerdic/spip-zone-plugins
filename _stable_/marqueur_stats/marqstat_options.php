@@ -1,5 +1,4 @@
 <?php
-
 $GLOBALS['spip_pipelines']['insert_body'] = '';
 
 function marqstat_affichage_final($texte){
@@ -13,5 +12,4 @@ function marqstat_affichage_final($texte){
 	}
 	return $texte;
 }
-
 ?>

@@ -1,5 +1,4 @@
 <?php
-
 include_spip('inc/meta');
 
 lire_metas();

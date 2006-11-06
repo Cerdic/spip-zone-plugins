@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Recherche entendue
  * plug-in d'outils pour la recherche et l'indexation
@@ -11,7 +10,7 @@
  * Auteur :
  * cedric.morin@yterium.com
  * pdepaepe et Nicolas Steinmetz pour google_like
- * © 2005 - Distribue sous licence GNU/GPL
+ * ï¿½ 2005 - Distribue sous licence GNU/GPL
  *
  */
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));

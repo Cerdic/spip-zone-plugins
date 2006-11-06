@@ -130,5 +130,4 @@ function mnogo_checkresults($recherche, $debut, $nombre){
 	}
 	return true;
 }
-
 ?>

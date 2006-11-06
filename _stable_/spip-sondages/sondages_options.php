@@ -1,6 +1,4 @@
 <?php
-
-
 	/**
 	 * SPIP-Sondages : plugin de gestion de sondages
 	 *
@@ -18,6 +16,4 @@
 	define('_NOM_PLUGIN_SONDAGES', (end($p)));
 
 	include_spip('base/sondages');
-
-	
 ?>

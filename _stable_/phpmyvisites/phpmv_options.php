@@ -1,5 +1,4 @@
 <?php
-
 $GLOBALS['spip_pipelines']['insert_body'] = '';
 function phpmv_affichage_final($texte){
 	global $html;

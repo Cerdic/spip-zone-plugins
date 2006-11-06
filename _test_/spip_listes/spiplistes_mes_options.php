@@ -1,5 +1,4 @@
 <?php
-
 //
 // Creation / ajout du champ extra auteur pour l'abonnement
 //
@@ -60,5 +59,4 @@ function spiplistes_taches_generales_cron($taches_generales){
 $GLOBALS['spiplistes_version'] = "SPIP-listes 1.9b2";
 
 include_spip('inc/options_spip_listes');
-
 ?>
