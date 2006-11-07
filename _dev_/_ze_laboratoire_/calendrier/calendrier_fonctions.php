@@ -149,6 +149,7 @@ function http_calendrier_mois_unique($annee, $mois, $jour, $echelle, $partie_cal
 		$jour = date("d",$nom);
 		$jour_semaine = date("w",$nom);
 		$W = date("W",$nom);
+		$exception = ($jour_semaine==0 AND $jour_semaine_lang==0) ? 1 : 0;
 		$mois_en_cours = date("m",$nom);
 		$annee_en_cours = date("Y",$nom);
 		$amj = date("Y",$nom) . $mois_en_cours . $jour;
@@ -168,7 +169,7 @@ function http_calendrier_mois_unique($annee, $mois, $jour, $echelle, $partie_cal
 		else {
 			$evts = intval($jour);
 		}
-		$class = "semaine$W jour".(1+$jour_semaine);
+		$class = "semaine".($W+$exception)." jour".(1+$jour_semaine);
 		$class .= $amj == date("Ymd") ? ' today' : '';
 		$ligne .= "\n\t<td".($class ?" class=\"$class\"":'').">" . $evts . "\n\t</td>";
 	}
