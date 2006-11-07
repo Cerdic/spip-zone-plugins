@@ -35,7 +35,7 @@ jQuery.fn.splicker = function() {
 jQuery.SplickerBox = function(e,m,s) {
 	this.elt = e;
 	this.max = m;
-	$(this.elt).append('<div class="changeMe" style="position:absolute;left:0px;top:0px;"></div>');
+	$(this.elt).append('<div class="changeMe" style="position:absolute;left:0px;top:0px;background:white;"></div>');
 	this.c = $(this).find('.changeMe');
 	this.cptj = 0;
 	this.left = this.top=0;
