@@ -35,9 +35,10 @@ jQuery.fn.splicker = function() {
 jQuery.SplickerBox = function(e,m,s) {
 	this.elt = e;
 	this.max = m;
-	$(this.elt).append('<div class="changeMe" style="position:absolute;left:0px;top:0px;background:white;"></div>');
-	this.c = $(this).find('.changeMe');
+	$(this.elt).append('<div class="changeMe" style="position:absolute;left:0px;top:0px;"></div>');
+	this.c = $(this.elt).find('.changeMe');
 	this.cptj = 0;
+	this.last = 0;
 	this.left = this.top=0;
 	if(s == 0 || s == 'auto')
 		this.cote = 70;
@@ -51,6 +52,8 @@ jQuery.SplickerBox.prototype = {
 	//on choisit la prochaine image
 	itere: function() {
 		this.cptj = Math.round(Math.random()*this.max) % this.max;
+		if(this.cptj == this.last) this.cptj = (this.last+3)%this.max;
+		this.last = this.cptj;
 		$("#statusMsg").html("it"+this.cptj+"=?"+this.max);
 	},
 	//fixer la taille des images à la moitiée de la taille réelle
@@ -69,6 +72,7 @@ jQuery.SplickerBox.prototype = {
 	//iteration apres le timeout
 	postpone: function() {
 		this.itere();		
+		$(this.c).css('background-color','transparent');
 		$(this.c).empty();
 		this.start();
 	},
@@ -95,6 +99,9 @@ jQuery.SplickerBox.prototype = {
 
 		$(this.c).append(image);
 		$(this.c).css({width:this.cote+'px',height:this.cote+'px'});
+		var back = $(this.elt.parentNode).css('background-color');
+		if(!back) back = 'white';
+		$(this.c).css('background-color',back);
 
 		if(this.cptj%3 == 0){
 			$(this.c).css("left","0px");
@@ -122,6 +129,6 @@ jQuery.SplickerBox.prototype = {
 	resize: function() {
 		var t = new Number(this.top);
 		var l = new Number(this.left);
-		jQuery(this.c).animate({top:t,left:l,width:0,height:0},1500);
+		jQuery(this.c).animate({top:t,left:l,width:this.cote/2,height:this.cote/2},1500);
 	}
 }
