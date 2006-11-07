@@ -10,6 +10,7 @@ function Player_insert_head($flux){
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'AFLAX/aflax.js"></script>';
 	$flux .= '<script type="text/javascript">var aflax = new AFLAX("'._DIR_PLUGIN_PLAYER.'AFLAX/aflax.swf");</script>';
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'player_enclosure.js"></script>';
+	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_PLAYER.'player.css" type="text/css" media="projection, screen, tv" />';
 	return $flux;
 }
 

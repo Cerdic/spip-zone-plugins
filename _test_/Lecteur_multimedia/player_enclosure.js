@@ -15,28 +15,26 @@ var track_index = 0;
 var playa='';
 //afficher un player invisible
 aflax.insertFlash(1, 1, "#FFFFFF", "go", false);
-
+var requiredVersion=new com.deconcept.PlayerVersion([8,0,0]);
+var installedVersion=com.deconcept.FlashObjectUtil.getPlayerVersion();
+if(installedVersion.versionIsValid(requiredVersion)==true){
+var player_aflax_ok=true;
+}
 //tableau des mp3 de la page
 mp3Array = new Array();
 setInterval("timer_()", 1000);
 
 $(document).ready(function(){
 
-//pas de chance le code ci dessous ne fonctionne pas, du coup on passe par le pipeline affichage final
-//$("body").append(eval('aflax.insertFlash(1, 1, "#FFFFFF", "go", false);'));
-//$("body").append(eval('alert(2+2);'));
-
 var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 
-var requiredVersion=new com.deconcept.PlayerVersion([8,0,0]);
-var installedVersion=com.deconcept.FlashObjectUtil.getPlayerVersion();
-if(installedVersion.versionIsValid(requiredVersion)==true && aff > 0){
-var player_aflax_ok=true;
+
+if(player_aflax_ok==true && aff > 0){
 //$("body").css({background:"#00FF00"});
 //interface du player en html
 
 
-/**
+/*
 // Activer le player js
  
 playa  = '<form id="player_interface" style="background-color:#CFD4E6;padding:10px;margin-bottom:10px">' +		
@@ -45,8 +43,8 @@ playa  = '<form id="player_interface" style="background-color:#CFD4E6;padding:10
 		 
 		 '<div style="margin-top:5px">' +
 		 '<input type="text" id="etat" value="Loading..." style="float:right;width:100px" />' +
-			'<input type="button"  name="joe" id="play" onClick="soundObj.start()" value="Play" />' +
-			'<input type="button"  name="jack" onClick="soundObj.stop()" value="Stop" />' +
+			'<input type="button"  name="joe" id="play" onClick="player_play(0)" value="Play" />' +
+			'<input type="button"  name="jack" onClick="player_stop()" value="Stop" />' +
 			'<input type="button"  name="william"" id="next" onClick="player_prev()" value="<" />' +
 			'<input type="button"  name="avrell" id="next" onClick="player_next()" value=">" />' +
 		'</div>' +
@@ -73,10 +71,8 @@ $("#player_interface").hover(function(){ $(this).css({height:"60px"}); },functio
 
 //$("#player_interface").css({height:"1px",width:"1px",overflow:"hidden"});
 //setTimeout('$("#player_interface").hide();',7000);
+**/
 
-
-
-************/
 
 }else{
 //$("body").css({background:"#FF0000"});
@@ -122,31 +118,15 @@ $("span.play_").each(
 
 function(i) {
  
- $(this).css({background:"#E6ECFF", cursor:"pointer"});
-
 	$(this).toggle(
 		             function(e)
 		             {    
 		              
-						
-						$("#musicplayer").html('');
-
-						$("span.play_on").html('play');
-						$("span.play_on").css({background:"#E6ECFF", cursor:"pointer"});
-						$("span.play_on").removeClass("play_on");
-						
-						 $(this).css({background:"#FF0000", cursor:"pointer"});
-						 $(this).addClass('play_on');
-						 $(this).html('stop');
-						 player_play(i);
+						player_play(i);
 		              						
 						},function(e){
-						$(this).css({background:"#E6ECFF", cursor:"pointer"});
-						$("span.play_on").removeClass("play_on");
-						$(this).html('play');
-
-						$("#musicplayer").html('');
-						soundObj.stop(); 
+						
+						player_stop();
 
 						}
 						
@@ -155,13 +135,29 @@ function(i) {
 //pas de boutons play dans la playliste
 $(".playliste").find("span").remove();
 
+
+$(".playliste li").hover(function(){
+  $(this).addClass("over");
+},function(){
+  $(this).removeClass("over");
+});
+
+
 }
 );
 
 	
+
+
+});
+
+
 // .play() plugin jquery
 
 function player_play(i){
+	player_stop();
+	$("span.play_:eq("+i+")").html("stop").addClass("play_on");			
+	$(".playliste li:eq("+i+")").addClass("play_on");	
 	
 	//Si flash 8 et aflax OK
 	if(player_aflax_ok==true){
@@ -211,12 +207,16 @@ function player_play(i){
 	
 	}
 
-});
+function player_stop(){
 
-
-
-
-	
+						//reinit d'un autre play
+						$("span.play_on").html('play');
+						$("span.play_on").removeClass("play_on");
+						$(".playliste li").removeClass("play_on");
+						soundObj.stop();
+						//stop le musicplayer en flash < 8
+						$("#musicplayer").html('');
+}	
 
 // autres fonctions player
 
@@ -244,14 +244,9 @@ soundObj.onID3 = function(){
 */ 
     
 		soundObj.mapFunction("addEventHandler");		
-		
 		soundObj.addEventHandler("onLoad", "readyToPlay");
 		soundObj.addEventHandler("onSoundComplete", "finished");
 		
-		file1=(mp3Array[track_index].split("/"))[(mp3Array[i].split("/")).length-1];
-		$("#pos").html(file1) ;
-		soundObj.loadSound( mp3Array[track_index] , true);
-		soundObj.stop();
 	}
 	
 
@@ -266,21 +261,20 @@ soundObj.onID3 = function(){
 	function finished()
 	{
 		$('#aflaxlogger').html("Fini");	
-		track_index++;
-		file1=(mp3Array[track_index].split("/"))[(mp3Array[track_index].split("/")).length-1];
-		$("#pos").html(file1) ;
-		soundObj.loadSound( mp3Array[track_index] , true);
+		player_next();
 		
 	}
 	
 	function player_next()
 	{	
+		
 		track_index++;
+
 		$('#aflaxlogger').html("Lecture");	
 		$('#etat').val("Loading...");
 		file1=(mp3Array[track_index].split("/"))[(mp3Array[track_index].split("/")).length-1];
 		$("#pos").html(file1) ;
-		soundObj.loadSound( mp3Array[track_index] , true);
+		player_play(track_index);
 		
 	}
 	
@@ -288,10 +282,11 @@ soundObj.onID3 = function(){
 	
 	function player_prev()
 	{	
-		track_index--;
+		track_index--;	
+
 		file1=(mp3Array[track_index].split("/"))[(mp3Array[track_index].split("/")).length-1];
 		$("#pos").html(file1) ;
-		soundObj.loadSound( mp3Array[track_index] , true);
+		player_play(track_index);
 		
 	}
 
@@ -308,46 +303,6 @@ soundObj.onID3 = function(){
 	
 	
 	
-//ajouter un player une fois le tableau connu
-//a passer en .ajoute_musicplayer()	
-/*
-$("a[@rel='enclosure'][@href$=mp3]").each(
-
-function(i) {
-	playlist='';
-	deb=0;
-		for(j=i; j < mp3Array.length ; j++) {
-			if(deb > 0){
-			playlist = playlist + ',' + mp3Array[j];
-			}else{
-			playlist = mp3Array[j];
-			deb=1;
-			}
-		}
-
-$(this).before('<span class="player"><object style="margin-right:0.1em" ' +
-	'classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" ' +
-	'codebase="' +
-	'http://fpdownload.macromedia.com/pub/shockwave/cabs/'+
-	'flash/swflash.cab#version=6,0,0,0"' +
-	'width="18" height="18" align="middle">' +
-	'<param name="wmode" value="transparent" />' +
-	'<param name="allowScriptAccess" value="sameDomain" />' +
-	'<param name="flashVars" value="song_url='+playlist+'" />' +
-	'<param name="movie" value="'+musicplayerurl+'?autoplay=false" />' +
-	'<param name="quality" value="high" />' +
-	'<embed style="margin-left:0.1em" ' +
-	'src="'+musicplayerurl+'?autoplay=false" '+
-	'flashVars="song_url='+playlist+'"' +
-	'quality="high" wmode="transparent" width="18" height="18" name="player"' +
-	' allowScriptAccess="sameDomain" type="application/x-shockwave-flash"' +
-	' pluginspage="http://www.macromedia.com/go/getflashplayer" /></object></span>');
-
-}
-)
-
-*/
-//ajouter un player	(image ou flash dans iframe si flash 7)
 	
 //player one pix	
 

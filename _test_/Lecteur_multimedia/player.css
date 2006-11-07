@@ -1,0 +1,43 @@
+
+span.play_{
+background:#E6ECFF;
+cursor:hand;
+cursor:pointer;
+}
+
+span.play_on{
+background:#FF0000;
+cursor:hand;
+cursor:pointer;
+}
+
+
+.radiobox{
+margin:10px 0px 10px 0px;
+padding:0px;
+font-size:9px;
+background-color:#000000;
+}
+
+.radiobox a, .radiobox a:hover{
+color:#ffffff;
+text-decoration:none;
+}
+
+.radiobox li.over{
+background:#7A7582;
+}
+
+
+.radiobox li.play_on{
+background:#B4ACBF;
+}
+
+.controles li{
+display:inline;
+background:#cccccc;
+color:#ffffff;
+border-left:1px solid black;
+cursor:hand;
+cursor:pointer;
+}
