@@ -10,12 +10,11 @@
 
 
 
-
-var aflax = new AFLAX("plugins/Lecteur_multimedia/AFLAX/aflax.swf"); 
 var soundObj = null;
 var track_index = 0;
 var playa='';
-
+//afficher un player invisible
+aflax.insertFlash(1, 1, "#FFFFFF", "go", false);
 
 //tableau des mp3 de la page
 mp3Array = new Array();
