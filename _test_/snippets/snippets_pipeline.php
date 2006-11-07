@@ -15,15 +15,15 @@ function snippets_affiche_droite($flux){
 	$out = "";
 	$retour = _DIR_RESTREINT_ABS . self(false);
 	if ($args['exec']=='articles_tous') {
-		$out.=boite_snippets(_L('Article'),'articles','articles',"",$retour);
-		$out.=boite_snippets(_L('Rubrique'),'rubriques','rubriques',"",$retour);
+		$out.=boite_snippets(_L('Article'),'article-24.gif','articles','articles',"",$retour);
+		$out.=boite_snippets(_L('Rubrique'),'rubrique-24.gif','rubriques','rubriques',"",$retour);
 	}
 	if ($args['exec']=='articles') {
-		$out.=boite_snippets(_L('Article'),'articles',$args['id_article'],"",$retour);
+		$out.=boite_snippets(_L('Article'),'article-24.gif','articles',$args['id_article'],"",$retour);
 	}
 	if ($args['exec']=='naviguer') {
-		$out.=boite_snippets(_L('Article'),'articles','articles',"id_rubrique=".$args['id_rubrique'],$retour);
-		$out.=boite_snippets(_L('Rubrique'),'rubriques',$args['id_rubrique'],"",$retour);
+		$out.=boite_snippets(_L('Article'),'article-24.gif','articles','articles',"id_rubrique=".$args['id_rubrique'],$retour);
+		$out.=boite_snippets(_L('Rubrique'),'rubrique-24.gif','rubriques',$args['id_rubrique'],"",$retour);
 	}
 	$flux['data'].=$out;
 	return $flux;
