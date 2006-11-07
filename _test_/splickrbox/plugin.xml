@@ -22,6 +22,9 @@
 	<prefix>
 	Splickr
 	</prefix>
+	<fonctions>
+	Splickr_fonctions.php
+	</fonctions>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>head.php</inclure>
