@@ -109,7 +109,7 @@ jQuery.SplickerBox.prototype = {
 			this.left= this.cote ;
 		}
 		
-		this.top= ((this.cptj-(this.cptj%3))/3)* this.cote;
+		this.top= ((this.cptj-(this.cptj%3))/3)* this.cote/2;
 		$(this.c).css("top", this.top + "px");
 
 		
