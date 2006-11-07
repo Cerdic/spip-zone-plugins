@@ -209,7 +209,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $fo
 	$out .= "<a name='champs'></a>";
 	$out .= "<p><hr><p>\n";
 	$out .= "<div class='verdana3'>";
-	$out .= "<strong>"._T("forms:champs_formuaire")."</strong><br />\n";
+	$out .= "<strong>"._T("forms:champs_formulaire")."</strong><br />\n";
 	$out .= _T("forms:info_champs_formulaire");
 	$out .= "</div>\n";
 	$out .= "<div id='forms_lang'></div>";
@@ -634,8 +634,8 @@ function exec_forms_edit(){
 	}
 
 	creer_colonne_droite();
-	include_spip('inc/snippets');
-	echo boite_snippets('forms',$id_form);
+	if (include_spip('inc/snippets'))
+		echo boite_snippets(_T('forms:formulaire'),_DIR_PLUGIN_FORMS."img_pack/form-24.gif",'forms',$id_form);
 	debut_droite();
 
 	if ($supp_form && $supp_rejet==NULL)
