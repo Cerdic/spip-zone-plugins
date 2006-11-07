@@ -100,7 +100,7 @@ jQuery.SplickerBox.prototype = {
 		$(this.c).append(image);
 		$(this.c).css({width:this.cote+'px',height:this.cote+'px'});
 		var back = $(this.elt.parentNode).css('background-color');
-		if(!back) back = 'white';
+		if(!back || back=='transparent') back = 'white';
 		$(this.c).css('background-color',back);
 
 		if(this.cptj%3 == 0){
