@@ -6,7 +6,7 @@
  * Auteur :
  * Antoine Pitrou
  * adaptation en 182e puis plugin par cedric.morin@yterium.com
- * ï¿½ 2005,2006 - Distribue sous licence GNU/GPL
+ * © 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 if (!defined('_DIR_PLUGIN_FORMS')){
