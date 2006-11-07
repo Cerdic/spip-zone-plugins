@@ -4,7 +4,8 @@ ajout d'une fonctionnalite de saisie rapide au plugin agenda.
 c'est trop penible d'ajouter les evenements un par un qd yen a plus de trois...
 en gros, pour moi, ca me change trop la vie !
 
-j'attends l'avis des developpeurs pour l'inserer eventuellement plus tard au plugin s'ils le desirent
+j'attends l'avis des developpeurs pour l'inserer eventuellement plus tard au plugin s'ils le desirent.
+Cette extension est testee sous spip 1.9.2 et fonctionne probablement sous spip 1.9.1.
 
 fichiers à placer dans le repertoire plugins/agenda :
 	exec/saisie_rapide.php : dialogue de saisie rapide
@@ -33,15 +34,40 @@ Exemple 3 : 01/01/2007 "Bonne année à tous !" REP=01/01/2008,01/01/2009,01/01/20
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// essai d'intertionalisation...
+$test = _T('onchargelalangue');
+$GLOBALS[$GLOBALS['idx_lang']] += array(
+ 'saisie_rapide_merci' => "Merci, vos &eacute;v&egrave;nements ont bien &eacute;t&eacute; enregistr&eacute;s :", 
+ 'saisie_rapide_compiler' => "Compiler et v&eacute;rifier la liste",
+ 'saisie_rapide_enregistrer' => "Enregistrer ces &eacute;v&egrave;nements",
+ 'saisie_rapide_votre_liste' => "VOTRE LISTE D'EVENEMENTS",
+ 'saisie_rapide_votre_liste_infos' => "Indiquer un seul &eacute;v&egrave;nement (&eacute;ventuellement ses r&eacute;p&eacute;titions) par ligne :",
+ 'saisie_rapide_article' => "Article propri&eacute;taire : ",
+ 'saisie_rapide_compilation' => "COMPILATION DE LA LISTE",
+ 'saisie_rapide_compilation_infos' => "Voici votre liste interpr&eacute;t&eacute;e par le compilateur.<br>En absence d'erreur, enregistrez d&eacute;finitvement les &eacute;v&egrave;nements suivants :",
+ 'saisie_rapide_heure_id' => "Id.",
+ 'saisie_rapide_heure_debut' => "Heure de d&eacute;but",
+ 'saisie_rapide_heure_fin' => "Heure de fin",
+);
+// fin de l'essai !!
+
 global $spip_version_code;
-if ($spip_version_code<1.92) include_spip('inc/presentation'); else include_spip('inc/commencer_page');
+if ($spip_version_code<1.92) { 
+ include_spip('inc/presentation'); 
+ function set_request($var, $val = NULL) {
+	unset($_GET[$var]);
+	unset($_POST[$var]);
+	if ($val !== NULL) $_GET[$var] = $val;
+ }
+} else include_spip('inc/commencer_page');
+
 include_spip('inc/agenda_filtres');
 include_spip('inc/agenda_gestion');
 
-function affiche_enregistrement(&$t) {
+function affiche_et_enregistre(&$t) {
  global $result;
 
- debut_cadre_enfonce("../plugins/agenda/img_pack/agenda-24.png", false, "", "Merci, vos &eacute;v&egrave;nements ont bien &eacute;t&eacute; enregistr&eacute;s :"); 
+ debut_cadre_enfonce("../plugins/agenda/img_pack/agenda-24.png", false, "", _T('saisie_rapide_merci')); 
  foreach($t as $e=>$v) if ($t[$e]=="") unset($t[$e]); 
  affiche_table_evenements($t); 
  fin_cadre_enfonce();
@@ -91,13 +117,13 @@ function affiche_table_evenements(&$t) {
    <div class="liste liste-evenements"><table background="" border="0" cellpadding="2" cellspacing="2" width="100%">
    <tbody><tr class="tr_liste">
    <th>Id.</th>
-   <th>Date d&eacute;but</th>
-   <th>Date fin </th>
-   <th>Heure d&eacute;but </th>
-   <th>Heure fin </th>
-   <th>Titre</th>
-   <th>Lieu</th>
-   <th>Description</th>
+   <th><?=_T('agenda:evenement_date_debut')?></th>
+   <th><?=_T('agenda:evenement_date_fin')?></th>
+   <th><?=_T('saisie_rapide_heure_debut')?></th>
+   <th><?=_T('saisie_rapide_heure_fin')?></th>
+   <th><?=_T('agenda:evenement_titre')?></th>
+   <th><?=_T('agenda:evenement_lieu')?></th>
+   <th><?=_T('agenda:evenement_descriptif')?></th>
  </tr><?php $n=0;
  foreach($t as $e=>$v) {
   echo "<tr ><th>".++$n."</th>";
@@ -130,33 +156,32 @@ function affiche_table_evenements(&$t) {
  }
 
 function affiche_compilation(&$t) {
- debut_cadre_enfonce("../plugins/agenda/img_pack/agenda-24.png", false, "", "COMPILATION DE LA LISTE"); 
+ debut_cadre_enfonce("../plugins/agenda/img_pack/agenda-24.png", false, "", _T('saisie_rapide_compilation')); 
+ echo _T('saisie_rapide_compilation_infos');
  ?>
- Voici votre liste interpr&eacute;t&eacute;e
-  par le compilateur.<br>
-En absence d'erreur, enregistrez d&eacute;finitvement les &eacute;v&egrave;nements suivants :
   <form method="POST">
-  <input name='exec' type='hidden' value='pat_agenda' />
+  <input name='exec' type='hidden' value='saisie_rapide' />
   <input name='action' type='hidden' value='enregistre' />
   <input name='id_article' type='hidden' value='<?=_request('id_article')?>' />
-  <input name='liste_evenements' type='hidden' value="<?=htmlentities($_POST['liste_evenements'])?>" />
+  <input name='liste_evenements' type='hidden' value="<?=htmlentities(_request('liste_evenements'))?>" />
   <?php affiche_table_evenements($t); ?>
- <div align='right'><input class='fondo' type='submit' value='Enregistrer ces &eacute;v&egrave;nements'></div>
+ <div align='right'><input class='fondo' type='submit' value='<?=_T('saisie_rapide_enregistrer')?>'></div>
  </form>
  <?php
  fin_cadre_enfonce(); 
 }
 
 function affiche_formulaire() {
-  debut_cadre_enfonce("../plugins/agenda/img_pack/agenda-24.png", false, "", "VOTRE LISTE D'EVENEMENTS"); 
+  debut_cadre_enfonce("../plugins/agenda/img_pack/agenda-24.png", false, "", _T('saisie_rapide_votre_liste')); 
+  echo _T('saisie_rapide_votre_liste_infos');
   ?>
-  Indiquer un seul &eacute;v&egrave;nement (&eacute;ventuellement ses r&eacute;p&eacute;titions) par ligne :
+  
   <form method="POST">
-  <input name='exec' type='hidden' value='pat_agenda' />
+  <input name='exec' type='hidden' value='saisie_rapide' />
   <input name='action' type='hidden' value='compile' />
   <input name='id_article' type='hidden' value='<?=_request('id_article')?>' />
-  <textarea name="liste_evenements" style="width: 99%;" rows="10" class="forml" ><?=$_POST['liste_evenements']?></textarea>
-  <div align='right'><input class='fondo' type='submit' value='Compiler et v&eacute;rifier la liste'></div></form>
+  <textarea name="liste_evenements" style="width: 99%;" rows="10" class="forml" ><?=_request('liste_evenements')?></textarea>
+  <div align='right'><input class='fondo' type='submit' value='<?=_T('saisie_rapide_compiler')?>'></div></form>
   <?php fin_cadre_enfonce(); 
     debut_cadre_formulaire(); ?>
     <strong>Syntaxe</strong> : &quot;jj/mm[/aaaa][-jj/mm[/aaaa]] [hh:mm[-hh:mm]]
@@ -191,19 +216,18 @@ function exec_saisie_rapide_dist()
 
 	include_spip('inc/headers');
 	http_no_cache();
-	echo init_entete("L'agenda pour les experts");
+	echo init_entete("L'agenda pour les experts", 0);
 
 	echo "<body>";
 	$titre_defaut = "";
 	$res = spip_query("SELECT titre FROM spip_articles where id_article=".spip_abstract_quote(_request('id_article')));
 	if ($row = spip_fetch_array($res)) $titre_defaut = $row['titre'];
-	echo '<h3>Article propri&eacute;taire : '._request('id_article').". $titre_defaut</h3>";
-	
-    $t=split("\n",$_POST['liste_evenements']);
+	echo '<h3>'._T('saisie_rapide_article')._request('id_article').". $titre_defaut</h3>";
+    $t=split("\n",_request('liste_evenements'));
 	compile_t($t);
-	if  ($_POST['action']=='enregistre') affiche_enregistrement($t);
+	if  (_request('action')=='enregistre') affiche_et_enregistre($t);
 	else {
-		if ($_POST['liste_evenements']) affiche_compilation($t);
+		if (_request('liste_evenements')) affiche_compilation($t);
 		affiche_formulaire();
 		affiche_evenements_article();
 	}	
