@@ -109,22 +109,9 @@ jQuery.SplickerBox.prototype = {
 			this.left= this.cote ;
 		}
 		
-		if(this.cptj>=0 && this.cptj<=2){
-			$(this.c).css("top","0px");
-			this.top="0";
-		}
-		if(this.cptj>=3 && this.cptj<=5){
-			$(this.c).css("top","0px");
-			this.top=this.cote/2;
-		}
-		if(this.cptj>=6 && this.cptj<=8){
-			$(this.c).css("top",this.cote + "px");
-			this.top=this.cote;
-		}
-		if(this.cptj >=9 && this.cptj<=11){
-			$(this.c).css("top", this.cote + "px");
-			this.top= 3*(this.cote/2) ;
-		}
+		this.top= ((this.cptj-(this.cptj%3))/3)* this.cote;
+		$(this.c).css("top", this.top + "px");
+
 		
 		$(this.c).fadeIn(2000);		
 		setTimeout(getObjectMethodClosure(this,'resize'),4000); 
