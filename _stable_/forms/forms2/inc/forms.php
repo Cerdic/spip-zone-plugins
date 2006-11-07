@@ -70,13 +70,13 @@
 
 	// Fonction utilitaires
 	function Forms_form_editable($id_form = 0) {
-		global $connect_statut;
-		return $connect_statut == '0minirezo';
+		include_spip('inc/autoriser');
+		return autoriser('modifier','form',$id_form);
 	}
 	
 	function Forms_form_administrable($id_form = 0) {
-		global $connect_statut;
-		return $connect_statut == '0minirezo';
+		include_spip('inc/autoriser');
+		return autoriser('modifier','form',$id_form);
 	}
 
 	function Forms_nom_cookie_form($id_form) {
