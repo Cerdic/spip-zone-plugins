@@ -37,6 +37,8 @@ jQuery.SplickerBox = function(e,m,s) {
 	this.max = m;
 	$(this.elt).append('<div class="changeMe" style="position:absolute;left:0px;top:0px;"></div>');
 	this.c = $(this.elt).find('.changeMe');
+	this.rows = $('table',this.elt).get(0).rows.length-1;
+	this.cols = this.max/this.rows;
 	this.cptj = 0;
 	this.last = 0;
 	this.left = this.top=0;
@@ -52,7 +54,7 @@ jQuery.SplickerBox.prototype = {
 	//on choisit la prochaine image
 	itere: function() {
 		this.cptj = Math.round(Math.random()*this.max) % this.max;
-		if(this.cptj == this.last) this.cptj = (this.last+3)%this.max;
+		if(this.cptj == this.last) this.cptj = (this.last+this.cols)%this.max;
 		this.last = this.cptj;
 		$("#statusMsg").html("it"+this.cptj+"=?"+this.max);
 	},
@@ -99,29 +101,25 @@ jQuery.SplickerBox.prototype = {
 
 		$(this.c).append(image);
 		$(this.c).css({width:this.cote+'px',height:this.cote+'px'});
-		var back = $(this.elt.parentNode).css('background-color');
-		if(!back || back=='transparent') back = 'white';
-		$(this.c).css('background-color',back);
 
-		if(this.cptj%3 == 0){
-			$(this.c).css("left","0px");
-			this.left="0";
-		}
-		if(this.cptj%3 == 1){
-			$(this.c).css("left", (this.cote/2) + "px");
-			this.left= this.cote/2 ;
-		}
-		if(this.cptj%3 == 2){
-			$(this.c).css("left", (this.cote/2) + "px");
-			this.left= this.cote ;
-		}
+		var colonne = this.cptj%this.cols;
+		this.left = colonne*this.cote/2;
+		l = (colonne-(colonne%2));
+		if((colonne == this.cols-1) && this.cols%2 > 0) l = l-1;
+		l = l*this.cote/2;
+		$(this.c).css("left",l+"px");
 		
-		var t = (this.cptj-(this.cptj%3))/3;
-		this.top = t*this.cote/2;
-		t = (t - (t%2))* this.cote/2
+		var ligne = (this.cptj-(this.cptj%this.cols))/this.cols;
+		this.top = ligne*this.cote/2;
+		t = (ligne - (ligne%2));
+		if((ligne == this.rows-1) && (this.rows%2 > 0)) t = t-1;
+		t= t* this.cote/2
 		$(this.c).css("top",t + "px");
 
-		
+
+		var back = $(this.elt.parentNode).css('background-color');
+		if(!back || back=='transparent') back = 'white';
+		$(this.c).css('background-color',back);		
 		$(this.c).fadeIn(2000);		
 		setTimeout(getObjectMethodClosure(this,'resize'),4000); 
 		setTimeout(getObjectMethodClosure(this,'postpone'),7000);
