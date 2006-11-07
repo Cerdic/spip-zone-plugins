@@ -13,7 +13,7 @@
   <BOUCLE_objets2(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}{!doublons poly}>
   <BOUCLE_MOT1(MOTS){id_carto_objet}{par titre}{0,1}>
   <a class="map_obj_logo" style="[(#GEOMETRIE|wkt2coords{HTMLZONE,#CALLAGE,#URL_CARTE,'',#ENV{args}})]" 
-   title='[(#TITRE|texte_script)]'>
+ href="[(#URL_OBJET)]" title='[(#TITRE|texte_script)]'>
 	<img [onMouseOver="active_zone('[(#ID_CARTO_OBJET)]','IMG/(#LOGO_MOT_SURVOL|fichier)','IMG/[(#LOGO_MOT_NORMAL|fichier)]')" 
 		onMouseOut="desactive_zone('[(#ID_CARTO_OBJET)]','IMG/[(#LOGO_MOT_NORMAL|fichier)]')" ]
 		src="[IMG/(#LOGO_MOT_NORMAL|fichier)]" id="map_obj_[(#ID_CARTO_OBJET)]"
