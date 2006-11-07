@@ -6,10 +6,10 @@ Necessite le plugin splikrbox et d'etre inclus dans un squelette avec la balise 
 			<BOUCLE_flickr(FLICKR_PHOTOSETS_GETPHOTOS){id_photoset=#ENV{id}}{0,12}>
 			<td class="image" style="margin:0;padding:0;">
 				<a href="#URL_PHOTO" rel="lightbox[diap]">
-				  [(#LOGO_PHOTO{s}|inserer_attribut{'style','width:75px;height:75px;border:0;'})]
+				  [(#LOGO_PHOTO{s})]
 				</a>
 			 </td>
-			[(#COMPTEUR_BOUCLE|alterner{'','',</tr><tr style="margin:0;padding:0;">})]
+			[(#COMPTEUR_BOUCLE|Splickr_juste_a_x{#ENV{colonnes,3},</tr><tr style="margin:0;padding:0;">})]
 			</BOUCLE_flickr>
 			<td></td>
 			</tr></table>
