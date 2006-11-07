@@ -15,7 +15,7 @@ function snippets_affiche_droite($flux){
 	$out = "";
 	$retour = _DIR_RESTREINT_ABS . self(false);
 	if ($args['exec']=='articles_tous') {
-		$out.=boite_snippets(_L('Article'),'article-24.gif','articles','articles',"",$retour);
+		$out.=boite_snippets(_L('Article'),'article-24.gif','articles','articles',"id_rubrique=0",$retour);
 		$out.=boite_snippets(_L('Rubrique'),'rubrique-24.gif','rubriques','rubriques',"",$retour);
 	}
 	if ($args['exec']=='articles') {

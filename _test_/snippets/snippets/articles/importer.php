@@ -11,7 +11,6 @@
 
 
 function snippets_articles_importer($id_target,$arbre,$contexte){
-	include_spip('inc/forms');
 	include_spip('base/serial');
 	include_spip('base/abstract_sql');
 	$champs_non_importables = array('id_article',"id_rubrique","id_secteur","maj","export","visites","referers","popularite","id_trad","idx","id_version","url_propre");
