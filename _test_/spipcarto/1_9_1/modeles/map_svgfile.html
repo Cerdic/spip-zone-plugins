@@ -1,5 +1,6 @@
 [(#HTTP_HEADER{Content-type: image/svg+xml[; charset=(#CHARSET)]})]
 <?php echo '<'; ?>?xml version="1.0"[ encoding="(#CHARSET)"] standalone="no"?>
+<?php echo '<'; ?>?xml-stylesheet type="text/css" href="[(#CHEMIN{/css/carto_style.css})]"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/SVG/DTD/svg10.dtd">
 <BOUCLE_carte(CARTO_CARTES){id_carto_carte=#ID_MAP}>
 	<svg viewBox="[(#CALLAGE|worldfileLRX)] [(#CALLAGE|worldfileULY)] [(#CALLAGE|worldfileWidth)] [(#CALLAGE|worldfileHeight)]" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
@@ -9,8 +10,8 @@
 		  <stop offset="30%" style="stop-color:red"/>
 		  <stop offset="100%" style="stop-color:black"/>
 		 </linearGradient>
-		
-		<INCLURE(carto_style.css)>
+
+
 		<INCLURE(carto_symbol.xml)>
 
 		</defs>
