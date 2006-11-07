@@ -13,13 +13,13 @@ function critere_calendrier_dist($idb, &$boucles, $crit) {
 	$boucle->where[] = array(
 		'REGEXP',
 		$champ_date, 
-		"spip_abstract_quote(('^' . interdire_scripts(" .
+		"_q(('^' . interdire_scripts(" .
 		'_request("date'.$idb.'")'
 		. ")))"
 	);
 }
 
-function balise_CALENDRIER_dist($p, $liste='true') {
+function balise_CALENDRIER_dist($p, $bloc_cal='true') {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	$boucle = $p->boucles[$b];
 	$_type = $boucle->type_requete;
@@ -36,27 +36,30 @@ function balise_CALENDRIER_dist($p, $liste='true') {
 
 	$_modele = interprete_argument_balise(1,$p);
 	if(!$_modele) $_modele = "'$_type'";
+	$_periode = interprete_argument_balise(2,$p);
+	if(!$_periode) $_periode = "'mois'";
 
 	$p->code = "calcul_calendrier('$b',
-	$liste,
-	$_modele)";
+	$bloc_cal,
+	$_modele,
+	$_periode)";
 
 	return $p;
 }
 
 // N'afficher que l'ancre du calendrier (au-dessus, par exemple, alors
-// qu'on mettra les liens en-dessous de la liste paginee)
+// qu'on mettra le calendrier en-dessous de la liste paginee)
 function balise_ANCRE_CALENDRIER_dist($p) {
-	$p = balise_CALENDRIER_dist($p, $liste='false');
+	$p = balise_CALENDRIER_dist($p, $bloc_cal='false');
 	return $p;
 }
 
-function calcul_calendrier($nom, $liste = true, $modele = ''){
+function calcul_calendrier($nom, $bloc_cal = true, $modele = 'articles', $periode = 'mois'){
 	static $ancres = array();
 	$bloc_ancre = "";
 
 	if (function_exists("calendrier"))
-		return calendrier($nom, $liste, $modele);
+		return calendrier($nom, $bloc_cal, $modele, $periode);
 
 	$date = 'date'.$nom;
 	$ancre = 'calendrier'.$nom;
@@ -76,12 +79,10 @@ function calcul_calendrier($nom, $liste = true, $modele = ''){
 	);
 
 	// liste = false : on ne veut que l'ancre
-	if (!$liste)
+	if (!$bloc_cal)
 		return $bloc_ancre;
 
-	if ($modele) $modele = '_'.$modele;
-
-	return recuperer_fond("modeles/calendrier$modele",$calendrier);
+	return recuperer_fond("modeles/calendrier_${modele}_$periode",$calendrier);
 }
 
 function thead_calendrier($lang, $forme = 'abbr'){
@@ -90,36 +91,26 @@ function thead_calendrier($lang, $forme = 'abbr'){
 	if($lang == 'en') $debut = 1;
 	$forme = $forme ? '_'.$forme : '';
 	for($i=0;$i<7;$i++) {
-		$ret .= "\n\t\t\t\t".'<th'.($debut==1?' class="dimanche"':'').' scope="col"><abbr title="'._T('date_jour_'.$debut).'">' .
+		$ret .= '
+				<th class="jour'.$debut.'" scope="col"><abbr title="'._T('date_jour_'.$debut).'">' .
 		_T('date_jour_'.$debut.$forme) . '</abbr></th>';
 		$debut = $debut == 7 ? 1 : $debut+1;
 	}
-	return "\n\t\t".'<thead>
+	return '
+		<thead>
 			<tr>' .$ret. '
 			</tr>
 		</thead>'."\n";
 }
 
-function agenda_calendrier($i) {
-  $args = func_get_args();
-  $une_date = array_shift($args); // une date comme balise
-  $sinon = array_shift($args);
-  if (!$une_date) return $sinon;
-  $type = 'calendrier';
-  $agenda = agenda_memo(0);
-  $evt = array();
-  foreach (($args ? $args : array_keys($agenda)) as $k) {  
-      if (is_array($agenda[$k]))
-		foreach($agenda[$k] as $d => $v) { 
-		  $evt[$d] = $evt[$d] ? (array_merge($evt[$d], $v)) : $v;
-		}
-    }
-	$la_date = mktime(0, 0, 0, mois($une_date), 1, annee($une_date));
-    include_spip('inc/agenda');
-    return http_calendrier_init($la_date, $type, '', '', '', array('', $evt));
+function agenda_calendrier($date) {
+	set_request('jour', affdate($date, 'jour'));
+	set_request('mois', affdate($date, 'mois'));
+	set_request('annee', affdate($date, 'annee'));
+	return agenda_affiche(1, '', 'mois_unique');
 }
 
-function http_calendrier_calendrier($annee, $mois, $jour, $echelle, $partie_cal, $script, $ancre, $evt) {
+function http_calendrier_mois_unique($annee, $mois, $jour, $echelle, $partie_cal, $script, $ancre, $evt) {
 	list($sansduree, $evenements, $premier_jour, $dernier_jour) = $evt;
 
 	if ($sansduree)
@@ -137,15 +128,19 @@ function http_calendrier_calendrier($annee, $mois, $jour, $echelle, $partie_cal,
 	// affichage du debut de semaine hors periode
 	$lang = _request('lang')?_request('lang'):$GLOBALS['spip_lang'];
 	$ligne = '';
-	$debut = date("w",mktime(1,1,1,$mois,$premier_jour,$annee));
+	$nom = mktime(1,1,1,$mois,$premier_jour,$annee);
+	$debut = date("w", $nom);
+	$W = date("W",$nom);
 	$jour_semaine_lang=1; 
+	$_w = 2;
 	if($lang=='en') {
+		$_w = 1;
 		$debut=$debut+1;
 		if($debut==7) $debut=0;
 		$jour_semaine_lang=0;
 	} 
 	for ($i=$debut ? $debut : 7;$i>1;$i--) {
-		$ligne .= "\n\t<td class=\"horsperiode\">&nbsp;</td>";
+		$ligne .= "\n\t<td class=\"horsperiode semaine$W jour".$_w++."\">&nbsp;</td>";
 	}
 
 	$total = '';
@@ -153,6 +148,7 @@ function http_calendrier_calendrier($annee, $mois, $jour, $echelle, $partie_cal,
 		$nom = mktime(1,1,1,$mois,$j,$annee);
 		$jour = date("d",$nom);
 		$jour_semaine = date("w",$nom);
+		$W = date("W",$nom);
 		$mois_en_cours = date("m",$nom);
 		$annee_en_cours = date("Y",$nom);
 		$amj = date("Y",$nom) . $mois_en_cours . $jour;
@@ -164,22 +160,23 @@ function http_calendrier_calendrier($annee, $mois, $jour, $echelle, $partie_cal,
 
 		$evts = $evenements[$amj];
 		if ($evts) {
-			$title = '';
-			/*$title = $evts[0]['DESCRIPTION'] ?
+			$title = $evts[0]['DESCRIPTION'] ?
 			" title=\"".$evts[0]['DESCRIPTION']."\"":
-			'';*/
+			'';
 			$evts = "<a$title href=\"".$evts[0]['URL']."\">".$evts[0]['SUMMARY']."</a>";
 		}
 		else {
 			$evts = intval($jour);
 		}
-		$class = $debut == 1 ? 'dimanche' : '';
+		$class = "semaine$W jour".(1+$jour_semaine);
 		$class .= $amj == date("Ymd") ? ' today' : '';
 		$ligne .= "\n\t<td".($class ?" class=\"$class\"":'').">" . $evts . "\n\t</td>";
 	}
 	// affichage de la fin de semaine hors periode
+	$_w = $jour_semaine+1;
 	for($j=$jour_semaine ? $jour_semaine+(1-$jour_semaine_lang) : 7; $j<7; $j++) {
-		$ligne .= "\n\t<td class=\"horsperiode\">&nbsp;</td>";
+		$_w = ($_w == 7) ? 1 : $_w+=1;
+		$ligne .= "\n\t<td class=\"horsperiode semaine$W jour$_w\">&nbsp;</td>";
 	}
 
 	return $total . ($ligne ? "\n<tr>$ligne\n</tr>" : '');

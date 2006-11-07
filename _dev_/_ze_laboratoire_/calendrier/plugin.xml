@@ -1,14 +1,14 @@
 <plugin>
 	<nom>Calendrier</nom>
 	<auteur>James (james.at.rezo.net)
-_ &copy; 2006 - Licence GNU/GPL</auteur>
+_ &#169; 2006 - Licence GNU/GPL</auteur>
 	<version>0.4</version>
+	<etat>experimental</etat>
 	<description>Permet l'utilisation d'une balise #CALENDRIER.
 _ Cette balise affiche un calendrier au design issu de dotclear et donc compatible avec les styles issus de ce syst&egrave;me de blog.
 _ Lui sont adjoints d'autre elements, tels que balises, criteres, modeles...
 _ Support, questions/r&eacute;ponses via la liste de discussion [spip-zone@rezo.net->http://listes.rezo.net/mailman/listinfo/spip-zone]
 _ Une fois activ&eacute;, vous pouvez consulter le squelette d'exemple sur cette [d&eacute;monstration sur votre site->../spip.php?page=calendrier_demo].</description>
-	<lien></lien> <!-- URI de documentation -->
 	<fonctions>calendrier_fonctions.php</fonctions>
 	<prefix>Calendrier</prefix>
 </plugin>
