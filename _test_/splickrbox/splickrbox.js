@@ -59,7 +59,7 @@ jQuery.SplickerBox.prototype = {
 	//fixer la taille des images à la moitiée de la taille réelle
 	//l'image doit être carree
 	init: function() {
-		$(this.elt).find('img').css({width:(this.cote/2) + "px",height:(this.cote/2) + "px", height: (this.cote/2) + "px",border:0});
+		$(this.elt).find('img').css({display: 'block', width:(this.cote/2) + "px",height:(this.cote/2) + "px", height: (this.cote/2) + "px",border:0});
 		$(this.c).css({width: this.cote + "px",height: this.cote + "px"});
 		this.start();
 	},
@@ -116,8 +116,10 @@ jQuery.SplickerBox.prototype = {
 			this.left= this.cote ;
 		}
 		
-		this.top= ((this.cptj-(this.cptj%3))/3)* this.cote/2;
-		$(this.c).css("top", this.top + "px");
+		var t = (this.cptj-(this.cptj%3))/3;
+		this.top = t*this.cote/2;
+		t = (t - (t%2))* this.cote/2
+		$(this.c).css("top",t + "px");
 
 		
 		$(this.c).fadeIn(2000);		
