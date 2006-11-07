@@ -48,7 +48,7 @@
 
 	function Forms_liste_types_champs(){
 		$types_etendus = array_keys($GLOBALS['forms_types_champs_etendus']);
-		return array_merge(array('ligne', 'texte', 'email', 'url', 'select', 'multiple', 'fichier', 'mot','separateur','textestatique'),$types_etendus);
+		return array_merge(array('ligne', 'texte', 'date', 'email', 'url', 'select', 'multiple', 'fichier', 'mot','separateur','textestatique'),$types_etendus);
 	}
 	function Forms_type_champ_autorise($type) {
 		static $t;
@@ -63,6 +63,7 @@
 			$noms = array(
 				'ligne' => _T("forms:champ_type_ligne"),
 				'texte' => _T("forms:champ_type_texte"),
+				'date' => _T("forms:champ_type_date"),
 				'url' => _T("forms:champ_type_url"),
 				'email' => _T("forms:champ_type_email"),
 				'select' => _T("forms:champ_type_select"),
@@ -89,6 +90,15 @@
 				if ($row['obligatoire'] == 'oui')
 					$erreur[$champ] = _T("forms:champ_necessaire");
 				continue;
+			}
+			// Verifier la conformite des donnees entrees
+			if ($type == 'date') {
+				if (!preg_match(",^\s*([0-9]{1,2})/([0-9]{1,2})/([0-9]{2,4})\s*$,",$val,$regs)) {
+					$erreur[$champ] = _T("forms:date_invalide");
+				}
+				else 
+					if (!mktime(0,0,0,$reg[1],$regs[0],$regs[2]))
+						$erreur[$champ] = _T("forms:date_invalide");
 			}
 			// Verifier la conformite des donnees entrees
 			if ($type == 'email') {

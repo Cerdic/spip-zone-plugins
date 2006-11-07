@@ -139,7 +139,7 @@ div.spip_forms .spip_sondage .sondage_ligne > div {
 	white-space: nowrap;
 }
 div.spip_forms .forml, div.spip_forms .formo {
-	width:95%;
+	width:85%;
 	border-bottom:solid 1px #E2CEC1;
 	border-right:solid 1px #E2CEC1;
 	border-top:1px solid #AF896F;
@@ -150,12 +150,12 @@ div.spip_forms .forml, div.spip_forms .formo {
 div.spip_forms .forml, div.spip_forms .fondl {
 	background: #FFFDE7;
 	color:#4A4336;
-	width:95%;
+	width:85%;
 }
 div.spip_forms .formo, div.spip_forms .fondo {
 	background-color: white;
 	color:#4A4336;
-	width:95%;
+	width:85%;
 }
 div.spip_forms .champ_obli_oubli {
 	border:2px solid red;
@@ -170,7 +170,7 @@ div.spip_forms form .forml-focus, div.spip_forms form input.forml-focus:focus, d
 	font-weight:normal;
 	font-size:.9em;
 	padding:.5em;
-	width:95%;
+	width:85%;
 }
 div.spip_forms form .formo-focus, div.spip_forms form input.formo-focus:focus, div.spip_forms form textarea.formo-focus:focus, div.spip_forms .formo-focus {
 	border-bottom:solid 1px #C9AB97;
@@ -182,7 +182,7 @@ div.spip_forms form .formo-focus, div.spip_forms form input.formo-focus:focus, d
 	font-weight:normal;
 	font-size:.9em;
 	padding:.5em;
-	width:95%;
+	width:85%;
 }
 div.spip_forms form .champ_obli_oubli-focus, form input.champ_obli_oubli-focus:focus, form textarea.champ_obli_oubli-focus:focus {
 	border-top:solid 2px #980F1B;

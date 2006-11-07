@@ -630,12 +630,12 @@ function exec_forms_edit(){
 		icone_horizontale(_T("forms:telecharger_reponses"),
 			generer_url_ecrire('forms_telecharger',"id_form=$id_form&retour=$nretour"), "doc-24.gif", "rien.gif");
 
+		if (include_spip('inc/snippets'))
+			echo boite_snippets(_T('forms:formulaire'),_DIR_PLUGIN_FORMS."img_pack/form-24.gif",'forms',$id_form);
 		fin_boite_info();
 	}
 
 	creer_colonne_droite();
-	if (include_spip('inc/snippets'))
-		echo boite_snippets(_T('forms:formulaire'),_DIR_PLUGIN_FORMS."img_pack/form-24.gif",'forms',$id_form);
 	debut_droite();
 
 	if ($supp_form && $supp_rejet==NULL)
