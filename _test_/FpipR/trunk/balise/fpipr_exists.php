@@ -1,6 +1,6 @@
 <?php
-function balise_FPIPR_INSTALL_dist($p) {
-  $p->code = true;
+function balise_FPIPR_EXISTS_dist($p) {
+  $p->code = "' '";
   return $p;
 }
 ?>
