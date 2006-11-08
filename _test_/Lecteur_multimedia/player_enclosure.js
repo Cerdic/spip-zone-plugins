@@ -14,7 +14,7 @@ var soundObj = null;
 var track_index = 0;
 var playa='';
 //afficher un player invisible
-aflax.insertFlash(1, 1, "#FFFFFF", "go", false);
+aflax.insertFlash(1, 1, "#FFFFFF", "go", true, true);
 var requiredVersion=new com.deconcept.PlayerVersion([8,0,0]);
 var installedVersion=com.deconcept.FlashObjectUtil.getPlayerVersion();
 if(installedVersion.versionIsValid(requiredVersion)==true){
@@ -26,65 +26,69 @@ setInterval("timer_()", 1000);
 
 $(document).ready(function(){
 
+//mettre le player aflax en bas de page
+//$("#aflax_obj_0").appendTo("body");
+
+
 var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 
 
-if(player_aflax_ok==true && aff > 0){
-//$("body").css({background:"#00FF00"});
-//interface du player en html
-
-
-/*
-// Activer le player js
- 
-playa  = '<form id="player_interface" style="background-color:#CFD4E6;padding:10px;margin-bottom:10px">' +		
-		 '<input type="text" id="posi" style="float:right;width:100px" />' +
-		 '<div id="pos" style="width:160px;color : #FFFFFF"/></div>' +
-		 
-		 '<div style="margin-top:5px">' +
-		 '<input type="text" id="etat" value="Loading..." style="float:right;width:100px" />' +
-			'<input type="button"  name="joe" id="play" onClick="player_play(0)" value="Play" />' +
-			'<input type="button"  name="jack" onClick="player_stop()" value="Stop" />' +
-			'<input type="button"  name="william"" id="next" onClick="player_prev()" value="<" />' +
-			'<input type="button"  name="avrell" id="next" onClick="player_next()" value=">" />' +
-		'</div>' +
-		
-		'</form>';
-
-
-//Afficher l'interface du player dans la page
-
-if($('div#player').size() !='0')
-{
-$('div#player').html(playa);
-}else{
-$('body').prepend(playa);
-//$("body").css({background:"#FF0000"});
-
-}
-
-
-$("#player_interface").css({position:"fixed", bottom:"0%", right:"0%", background:"#000", width:"380px", margin:"0px", cursor:"pointer"});
-setTimeout('$("#player_interface").slideUp("slow");', 5000);
-setTimeout('$("#player_interface").toggle().css({height:"3px"})',6000);
-$("#player_interface").hover(function(){ $(this).css({height:"60px"}); },function(){ $(this).css({height:"3px"}); });
-
-//$("#player_interface").css({height:"1px",width:"1px",overflow:"hidden"});
-//setTimeout('$("#player_interface").hide();',7000);
-**/
-
-
-}else{
-//$("body").css({background:"#FF0000"});
-playa  = '<form id="player_interface" style="background-color:#CFD4E6;padding:5px;margin-bottom:10px">' +
-		  '<div id="musicplayer" style="float:right;width:30px">' +
-         '</div>' +
-		'</form>';
-		
-		$('div#player').html(playa);
-		$('div#player').css({height:"1px",width:"1px",background:"#FFFFFF",overflow:"hidden"});
-
-}
+	if(player_aflax_ok==true && aff > 0){
+	//$("body").css({background:"#00FF00"});
+	//interface du player en html
+	
+	
+	/*
+	// Activer le player js
+	 
+	playa  = '<form id="player_interface" style="background-color:#CFD4E6;padding:10px;margin-bottom:10px">' +		
+			 '<input type="text" id="posi" style="float:right;width:100px" />' +
+			 '<div id="pos" style="width:160px;color : #FFFFFF"/></div>' +
+			 
+			 '<div style="margin-top:5px">' +
+			 '<input type="text" id="etat" value="Loading..." style="float:right;width:100px" />' +
+				'<input type="button"  name="joe" id="play" onClick="player_play(0)" value="Play" />' +
+				'<input type="button"  name="jack" onClick="player_stop()" value="Stop" />' +
+				'<input type="button"  name="william"" id="next" onClick="player_prev()" value="<" />' +
+				'<input type="button"  name="avrell" id="next" onClick="player_next()" value=">" />' +
+			'</div>' +
+			
+			'</form>';
+	
+	
+	//Afficher l'interface du player dans la page
+	
+	if($('div#player').size() !='0')
+	{
+	$('div#player').html(playa);
+	}else{
+	$('body').prepend(playa);
+	//$("body").css({background:"#FF0000"});
+	
+	}
+	
+	
+	$("#player_interface").css({position:"fixed", bottom:"0%", right:"0%", background:"#000", width:"380px", margin:"0px", cursor:"pointer"});
+	setTimeout('$("#player_interface").slideUp("slow");', 5000);
+	setTimeout('$("#player_interface").toggle().css({height:"3px"})',6000);
+	$("#player_interface").hover(function(){ $(this).css({height:"60px"}); },function(){ $(this).css({height:"3px"}); });
+	
+	//$("#player_interface").css({height:"1px",width:"1px",overflow:"hidden"});
+	//setTimeout('$("#player_interface").hide();',7000);
+	**/
+	
+	
+	}else{
+	//$("body").css({background:"#FF0000"});
+	playa  = '<form id="player_interface" style="background-color:#CFD4E6;padding:5px;margin-bottom:10px">' +
+			  '<div id="musicplayer" style="float:right;width:30px">' +
+	         '</div>' +
+			'</form>';
+			
+			$('div#player').html(playa);
+			$('div#player').css({height:"1px",width:"1px",background:"#FFFFFF",overflow:"hidden"});
+	
+	}
 
 
 
@@ -105,48 +109,34 @@ playa  = '<form id="player_interface" style="background-color:#CFD4E6;padding:5p
 		         );
 		         //a passer en .ajoute_musicplayer()	
 				$(this).before('<span class="play_">play</span>&nbsp;');
-				//reperer les li
-				//$(this).parents("li").addClass("audio");
-		        //$(".liste-articles li[@class!='audio']").hide();
-		             
 		}
 	);
 
 
 
-$("span.play_").each(
-
-function(i) {
- 
-	$(this).toggle(
-		             function(e)
-		             {    
-		              
-						player_play(i);
-		              						
-						},function(e){
-						
-						player_stop();
-
-						}
-						
-		         );
-
-//pas de boutons play dans la playliste
-$(".playliste").find("span").remove();
-
-
-$(".playliste li").hover(function(){
-  $(this).addClass("over");
-},function(){
-  $(this).removeClass("over");
-});
-
-
-}
-);
-
+	$("span.play_").each(
+	function(i) {
+	 
+		$(this).toggle(
+			             function(e){ 
+			             player_play(i) 						
+						 },function(e){
+						 player_stop();
+						 }		
+			         );
 	
+	}
+	);
+
+
+	//pas de boutons play dans la playliste
+	$(".playliste").find("span").remove();
+
+	$(".playliste li").hover(function(){
+	  $(this).addClass("over");
+	},function(){
+	  $(this).removeClass("over");
+	});	
 
 
 });
@@ -210,9 +200,12 @@ function player_play(i){
 function player_stop(){
 
 						//reinit d'un autre play
+						
 						$("span.play_on").html('play');
 						$("span.play_on").removeClass("play_on");
-						$(".playliste li").removeClass("play_on");
+						
+						$(".playliste li.play_on").removeClass("play_on");
+						
 						soundObj.stop();
 						//stop le musicplayer en flash < 8
 						$("#musicplayer").html('');
