@@ -1,5 +1,5 @@
 /*
- *  widgets.js (c) Fil 2006 -- licence GPL
+ *  widgets.js (c) Fil , toggg 2006 -- licence GPL
  */
 
 // le prototype configuration de Widgets

@@ -1,7 +1,7 @@
 <?php
 /* insert le css et le js externes pour Widgets dans le <head>
  *
- *  Widgets plugin for spip (c) Fil 2006 -- licence GPL
+ *  Widgets plugin for spip (c) Fil , toggg 2006 -- licence GPL
  */
 
 // Dire rapidement si ca vaut le coup de chercher des droits
