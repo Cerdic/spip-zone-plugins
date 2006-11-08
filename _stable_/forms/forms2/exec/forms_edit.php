@@ -417,9 +417,9 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 			._T("forms:apparence_formulaire")."</strong>";
 		$out .= "</div>\n";
 
-		$out .= debut_block_visible("preview_form");
+		$out .= debut_block_visible("apercu");
 		$out .= _T("forms:info_apparence")."<p>\n";
-		$out .= $apercu;
+		$out .= "<div id='apercu'>$apercu</div>";
 		$out .= fin_block();
 	}
 
@@ -590,16 +590,18 @@ function exec_forms_edit(){
 		$action_link = generer_action_auteur("forms_update","$id_form",urlencode($redirect));
 	}
 
-	$ajax_charset = _request('ajax_charset');
+	$ajax_charset = _request('var_ajaxcharset');
 	$bloc = _request('bloc');
 	if ($ajax_charset && $bloc=='apercu') {
 		include_spip('public/assembler');
-		echo $apercu = inclure_modele('form',$id_form,'','');
+		$GLOBALS['var_mode']='calcul';
+		$apercu = recuperer_fond('modeles/form',array('id_form'=>$id_form,'var_mode'=>'calcul'));
 		ajax_retour($apercu);
 	}
 	if ($ajax_charset && $bloc=='resume') {
 		include_spip('public/assembler');
-		echo $apercu = inclure_modele('form',$id_form,'','');
+		$GLOBALS['var_mode']='calcul';
+		$apercu = recuperer_fond('modeles/form',array('id_form'=>$id_form,'var_mode'=>'calcul'));
 		ajax_retour(contenu_boite_resume($id_form, $row, $apercu));
 	}
 	if ($ajax_charset && $bloc=='proprietes') {
@@ -662,9 +664,10 @@ function exec_forms_edit(){
 	fin_boite_info();
 	
 	// gauche apercu ---------------------------------------------------------------
-	echo "<div id='forms-apercu-gauche'>";
+	echo "<div id='apercu_gauche'>";
 	include_spip('public/assembler');
-	echo $apercu = inclure_modele('form',$id_form,'','');
+	$GLOBALS['var_mode']='calcul';
+	echo $apercu = recuperer_fond('modeles/form',array('id_form'=>$id_form,'var_mode'=>'calcul'));
 	echo "</div>";
 	
 	
@@ -677,14 +680,14 @@ function exec_forms_edit(){
 		echo Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour);
 	
 	echo debut_onglet();
-	echo onglet(_L("Aper&ccedil;u"),ancre_url(self(),"apercu"),'','apercu');
+	echo onglet(_L("Aper&ccedil;u"),ancre_url(self(),"resume"),'','resume');
 	echo onglet(_L("Propri&eacute;t&eacute;s"),ancre_url(self(),"proprietes"),'','proprietes');
 	echo onglet(_L("Champs"),ancre_url(self(),"champs"),'','champs');
 	echo fin_onglet();
 
 	$out = "";
 	if ($id_form){
-		$out .= "<div id='apercu' name='apercu'>";
+		$out .= "<div id='resume' name='resume'>";
 		$out .= contenu_boite_resume($id_form, $row, $apercu);
 		$out .= "</div>";
 	}
@@ -721,6 +724,28 @@ jQuery.fn.active_onglet = function(hash) {
 	else
 		window.location.hash=ancre;
 }
+function refresh_bloc(r,bloc){
+	$(bloc).html(r).ajaxAction();
+}
+function refresh_apercu(r,bloc){
+	$('#apercu_gauche').html(r);
+	$('#apercu').html(r);
+}
+
+jQuery.fn.ajaxAction = function() {
+	var id=$(this).id();
+	$('#'+id+' a.ajaxAction').click(function(){
+		var action = $(this).href();
+		var url = (($(this).rel()).split('#'))[0];
+		url_id = url + "&bloc="+id;
+		url_ap = url + "&bloc=apercu";
+		$.get(action,function(data){
+			AjaxSqueeze(url_id, id, refresh_bloc);
+			AjaxSqueeze(url_ap, 'apercu_gauche',refresh_apercu);
+		});
+		return false;
+	});
+}
 
 $(document).ready(function(){
 	var hash = window.location.hash;
@@ -732,12 +757,7 @@ $(document).ready(function(){
 		$('.onglet').eq(0).active_onglet();
 
 	$('.onglet').click(function(){ $(this).active_onglet(); });
-	$('#champs a.ajaxAction').click(function(){
-		var action = $(this).href();
-		var url = (($(this).rel()).split('#'))[0]+"&bloc=champs";
-		$.get(action,function(data){ AjaxSqueeze(url, 'champs');});
-		return false;
-	});
+	$('#champs').ajaxAction();
 });
 // --></script>
 script;
