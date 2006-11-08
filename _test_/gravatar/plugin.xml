@@ -1,0 +1,9 @@
+<plugin>
+	<nom>Gravatar</nom>
+	<auteur>Thomas Beaumanoir - [Clever Age->http://www.clever-age.com]</auteur>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>Globally Recognized AVATAR</description>
+	<lien>[Gravatar->http://www.gravatar.com]</lien>
+	<prefix>gravatar</prefix>
+</plugin>
