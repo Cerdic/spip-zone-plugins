@@ -94,15 +94,15 @@ function FpipR_logo_owner($user_id,$server = '') {
 
 function FpipR_logo_photo($id_photo,$server,$secret,$taille='',$originalformat='jpg') {
   if($id_photo) {
-	$w = FpipR_taille_photo($id_photo,$taille,'width');
-	$h = FpipR_taille_photo($id_photo,$taille,'height');
+	$w = ($taille=='s')?75:FpipR_taille_photo($id_photo,$taille,'width');
+	$h = ($taille=='s')?75:FpipR_taille_photo($id_photo,$taille,'height');
 	if($server) {
-	return '<img src="http://static.flickr.com/'.$server."/".$id_photo."_".$secret.($taille?"_$taille":'').'.'.(($taille=='o')?$originalformat:'jpg').'" width="'.$w.'" height="'.$h.'" style="width:'.$w.';height:'.$h.'"/>';
+	  return '<img src="http://static.flickr.com/'.$server."/".$id_photo."_".$secret.($taille?"_$taille":'').'.'.(($taille=='o')?$originalformat:'jpg').'" width="'.$w.'" height="'.$h.'" style="width:'.$w.';height:'.$h.'"/>';
 	} else {
-	$src = FpipR_taille_photo($id_photo,$taille,'source');
-	return '<img src="'.$src.'" width="'.$w.'" height="'.$h.'" style="width:'.$w.';height:'.$h.'"/>';
+	  $src = FpipR_taille_photo($id_photo,$taille,'source');
+	  return '<img src="'.$src.'" width="'.$w.'" height="'.$h.'" style="width:'.$w.';height:'.$h.'"/>';
 	}
-	}
+  }
   return NULL;
 }
 
