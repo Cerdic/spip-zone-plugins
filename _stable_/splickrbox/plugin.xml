@@ -22,7 +22,7 @@
 -** <code><splickrbox|taille=24></code> permet de specifier le nombre de vignettes à afficher. Ce nombre devrais ètre un multiple du nombre de colonnes.
 -** <code><splickrbox|colonnes=10></code> permet de specifier le nombre de colonnes à afficher.
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://trac.rezo.net/trac/spip-zone/wiki/SplickrBox</lien> <!-- URI de documentation -->
 	<prefix>
 	Splickr
 	</prefix>
