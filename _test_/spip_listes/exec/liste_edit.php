@@ -444,7 +444,7 @@ echo "<p><HR><p>";
 	}
  */
 	if ($champs_extra) {
-		include_ecrire("inc_extra.php3");
+		include_spip('inc/extra');
 		extra_saisie($extra, 'articles', $id_secteur);
 	}
 

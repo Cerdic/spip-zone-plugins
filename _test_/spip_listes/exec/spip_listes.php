@@ -30,14 +30,14 @@ include_spip('inc/affichage');
 function exec_spip_listes()
 {
 
-include_ecrire ("inc_acces.php3");
-include_ecrire ("inc_filtres.php3");
-include_ecrire ("inc_config.php3");
-include_ecrire ("inc_barre.php3");
+include_spip ('inc/acces');
+include_spip ('inc/filtres');
+include_spip ('inc/config');
+include_spip ('inc/barre');
 
-include_ecrire ("inc_logos.php3");
-include_ecrire ("inc_mots.php3");
-include_ecrire ("inc_documents.php3");
+include_spip ('inc/logos');
+include_spip ('inc/mots');
+include_spip ('inc/documents');
 
 global $connect_statut;
 global $connect_toutes_rubriques;

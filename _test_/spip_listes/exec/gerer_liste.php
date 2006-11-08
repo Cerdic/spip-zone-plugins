@@ -185,7 +185,7 @@ function terminer_changement_statut() {
 	if ($ok_nouveau_statut) {
 		//calculer_rubriques();
 		if ($statut_nouv == 'publie' AND $statut_ancien != $statut_nouv) {
-			include_ecrire("inc_mail.php3");
+			include_spip('inc/mail');
 			envoyer_mail_publication($id_article);
 		}
 		
@@ -510,7 +510,7 @@ if($Valider_auto){
       
       }
 }
-	include_ecrire("inc_extra.php3");
+	include_spip('inc/extra');
   /*echo "ap" ;
   $ex = get_extra($id_article, 'article');
   extra_affichage(serialize($ex), "articles"); */
@@ -644,7 +644,7 @@ else {
 	}
 
 	if ($champs_extra AND $extra) {
-		include_ecrire("inc_extra.php3");
+		include_spip('inc/extra');
 		//extra_affichage($extra, "articles");
 	}
 }
@@ -932,7 +932,7 @@ if ($supp_auteur && $flag_editable) {
 	$query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$supp_auteur' AND id_article='$id_article'";
 	$result=spip_query($query);
 	if (lire_meta('activer_moteur') == 'oui') {
-		include_ecrire ("inc_index.php3");
+		include_spip ('inc/index");
 		indexer_article($id_article);
 	}
 }
@@ -1036,7 +1036,7 @@ if ($ajout_auteur && $flag_editable) {
 	}
 
 	if (lire_meta('activer_moteur') == 'oui') {
-		include_ecrire ("inc_index.php3");
+		include_spip ('inc/index');
 		indexer_article($id_article);
 	}
 }
