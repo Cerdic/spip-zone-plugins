@@ -88,7 +88,7 @@ function FpipR_logo_owner($user_id,$server = '') {
   if($server) {
 	$url ="http://static.flickr.com/$server/buddyicons/$user_id.jpg";
   }
-  return '<img src="'.$url.'" width="48" height="48"/>';
+  return '<img src="'.$url.'" width="48" height="48" />';
 }
 
 
@@ -97,10 +97,10 @@ function FpipR_logo_photo($id_photo,$server,$secret,$taille='',$originalformat='
 	$w = ($taille=='s')?75:FpipR_taille_photo($id_photo,$taille,'width');
 	$h = ($taille=='s')?75:FpipR_taille_photo($id_photo,$taille,'height');
 	if($server) {
-	  return '<img src="http://static.flickr.com/'.$server."/".$id_photo."_".$secret.($taille?"_$taille":'').'.'.(($taille=='o')?$originalformat:'jpg').'" width="'.$w.'" height="'.$h.'" style="width:'.$w.';height:'.$h.'"/>';
+	  return '<img src="http://static.flickr.com/'.$server."/".$id_photo."_".$secret.($taille?"_$taille":'').'.'.(($taille=='o')?$originalformat:'jpg').'" width="'.$w.'" height="'.$h.'" style="width:'.$w.';height:'.$h.'" />';
 	} else {
 	  $src = FpipR_taille_photo($id_photo,$taille,'source');
-	  return '<img src="'.$src.'" width="'.$w.'" height="'.$h.'" style="width:'.$w.';height:'.$h.'"/>';
+	  return '<img src="'.$src.'" width="'.$w.'" height="'.$h.'" style="width:'.$w.';height:'.$h.'" />';
 	}
   }
   return NULL;
