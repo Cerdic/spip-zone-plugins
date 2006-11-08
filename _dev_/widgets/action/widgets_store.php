@@ -114,6 +114,7 @@ function action_widgets_store_dist() {
 		list($type, $modele, $id, $content, $wid) = $modif;
 		if (!isset($updates[$type])) {
 			// MODELE
+			$fun = '';
 			switch($type) {
 				case 'article':
 				    include_spip('action/editer_article');
@@ -127,9 +128,10 @@ function action_widgets_store_dist() {
 				    include_spip('action/editer_breve');
 				    $fun = 'revisions_breves';
 				    break;
-				default:
-				    $return['$erreur'] = "$type: " . _U('widgets:non_implemente');
-				    break 2;
+			}
+			if (!$fun or !function_exists($fun)) {
+			    $return['$erreur'] = "$type: " . _U('widgets:non_implemente');
+			    break;
 			}
 			$updates[$type] = array('fun'=>$fun, 'ids'=>array());
 		}
