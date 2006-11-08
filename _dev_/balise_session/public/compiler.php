@@ -93,12 +93,18 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 	}
 
 	$l = argumenter_inclure($struct, $descr, $boucles, $id_boucle);
-
+	if(array_key_exists('session', $l)) {
+		$marqueur_avant = "\n\$tmp_marqueur = \$GLOBALS[\'marqueur\'];";
+		$marqueur_avant .= "\n\$GLOBALS[\'marqueur\'] .= \':session\'.\$GLOBALS[\'auteur_session\'][\'id_auteur\'];";
+		$marqueur_apres = "\n\$GLOBALS[\'marqueur\'] = \$tmp_marqueur;";
+	}
 	return "\n'<".
 		"?php\n\t\$contexte_inclus = array(" .
 		join(",\n\t",$l) .
 		");" .
+		(isset($marqueur_avant) ? $marqueur_avant : '') .
 		"\n\tinclude(\\'$path\\');" .
+		(isset($marqueur_apres) ? $marqueur_apres : '') .
 		"\n?'." . "'>'";
  }
 
