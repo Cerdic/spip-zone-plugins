@@ -20,20 +20,18 @@ function controleurs_article_introduction_dist($regs) {
     $maxheight = min(max($wh-50,400), 700);
     if ($h>$maxheight) $h=$maxheight;
     
-    $h = ceil($h/3);
-
     $inputAttrs = array(
-        'style' => "width:${w}px;" . ($h ? " height:${h}px;" : ''));
+    	'descriptif' => array('type' => 'texte', 'attrs' => array(
+	        'style' => "width:${w}px; height:" . (int)ceil($h*2/13) . "px;")),
+		'chapo' =>  array('type' => 'texte', 'attrs' => array(
+	        'style' => "width:${w}px; height:" . (int)ceil($h*4/13) . "px;")),
+		'texte' =>  array('type' => 'texte', 'attrs' => array(
+	        'style' => "width:${w}px; height:" . (int)ceil($h*4/13) . "px;")));
 
-/*
-    $hauteur = array('descriptif' => (int)ceil($h*2/13),
-    				 'chapo' => (int)ceil($h*4/13),
-    				 'texte' => (int)ceil($h*4/13));
-*/
 	$n = new Widget('article-introduction-' . $id, $t);
         $widgetsAction = str_replace('widgets_html', 'widgets_store', self());
         $widgetsCode = $n->code();
-        $widgetsInput = $n->input('texte', $inputAttrs);
+        $widgetsInput = $n->input($inputAttrs);
         $widgetsImgPath = dirname(find_in_path('images/cancel.png'));
 
         // title des boutons
