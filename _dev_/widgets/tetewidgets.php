@@ -58,15 +58,19 @@ function Widgets_preparer_page($page, $droits) {
         'droits' => $droits,
 
 		'txt' => array(
-			'edit' => _U('widgets:editer'),
-			'img-changed' => _U('widgets:deja_modifie'),
 			'error' => _U('widgets:svp_copier_coller'),
-			'sauvegarder' => _U('widgets:sauvegarder'),
+			'sauvegarder' => _U('widgets:sauvegarder')
 		),
 		'img' => array(
 			'searching' => 'searching.gif',
-			'edit' => 'crayon.png',
-			'img-changed' => 'changed.png'
+			'edit' => array(
+				'file' => 'crayon.png',
+				'txt' => _U('widgets:editer')
+			),
+			'img-changed' => array(
+				'file' => 'changed.png',
+				'txt' => _U('widgets:deja_modifie')
+			)
 		)
 	));
 //    $txtErrInterdit = addslashes(unicode_to_javascript(html2unicode(_T(

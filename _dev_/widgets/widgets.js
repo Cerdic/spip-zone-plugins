@@ -7,14 +7,11 @@ function cfgWidgets(options)
 {
   this.url_widgets_html = 'spip.php?action=widgets_html';
   this.img = {
-    'searching':'searching.gif',
-    'edit':'crayon.png',
-    'img-changed':'changed.png'
+    'searching':{'file':'searching.gif','txt':'En attente du serveur ...'},
+    'edit':{'file':'crayon.png','txt':'Editer'},
+    'img-changed':{'file':'changed.png','txt':'Deja modifie'}
   };
   this.txt = {
-    'searching':'En attente du serveur ...',
-    'edit':'Editer',
-    'img-changed':'Deja modifie'
   };
   for (opt in options) {
     this[opt] = options[opt];
@@ -22,8 +19,8 @@ function cfgWidgets(options)
 }
 cfgWidgets.prototype.mkimg = function(what) {
   return '<img class="widget-' + what +
-    '" src="' + this.imgPath + '/' + this.img[what] +
-    '" title="' + this.txt[what] + '" />';
+    '" src="' + this.imgPath + '/' + this.img[what].file +
+    '" title="' + this.img[what].txt + '" />';
 }
 cfgWidgets.prototype.iconclick = function() {
   return "<span class='widget-icones'><span>" +
