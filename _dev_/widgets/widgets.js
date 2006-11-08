@@ -9,7 +9,7 @@ function cfgWidgets(options)
   this.img = {
     'searching':'searching.gif',
     'edit':'crayon.png',
-    'changed':'changed.png'
+    'img-changed':'changed.png'
   };
   this.txt = {
     'searching':'En attente du serveur ...',
