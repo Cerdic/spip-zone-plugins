@@ -135,10 +135,17 @@ class Widget {
         ;
     }
 
-    function input($type = 'ligne', $attrs = array()) {
+/*
+ Fabriquer les balises du ou des champs
+	$spec est soit un scalaire 'ligne' ou 'texte' précisant le type de balise
+	soit un array($champ=>array('type'=>'...', 'attrs'=>array(attributs specifique du champs)))
+	$attrs est un tableau (attr=>val) d'attributs communs ou pour le champs unique
+*/
+    function input($spec = 'ligne', $attrs = array()) {
         include_spip('inc/filtres');
         $return = '';
         foreach ($this->texts as $champ => $val) {
+        	$type = is_array($spec) ? $spec[$champ]['type'] : $spec;
             switch ($type) {
                 case 'texte':
                     $input = '<textarea class="widget-active"'
@@ -154,8 +161,15 @@ class Widget {
                     . entites_html($val)
                     . '" />'."\n";
             }
-            foreach ($attrs as $attr=>$val)
+            if (is_array($spec) && isset($spec[$champ]['attrs'])) {
+	            foreach ($spec[$champ]['attrs'] as $attr=>$val) {
+	                $input = inserer_attribut($input, $attr, $val);
+	            }
+            }
+
+            foreach ($attrs as $attr=>$val) {
                 $input = inserer_attribut($input, $attr, $val);
+            }
             $return .= $input;
         }
         return $return;
