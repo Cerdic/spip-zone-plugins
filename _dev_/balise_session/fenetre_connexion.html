@@ -1,0 +1,29 @@
+[<h2 class="menu-titre">(#SESSION{id_auteur}|?{
+Bonjour
+})[(#SESSION{nom})]</h2>
+<ul>
+	<li><a href="#URL_LOGOUT"><:deconnexion:></a></li>[
+(#SESSION{statut}|=={0minirezo}|?{' '})
+	<li>
+		<a href="#URL_ECRIRE{admin_plugin}">
+			<:ecrire:icone_admin_plugin:>
+		</a>
+	</li>]
+]<BOUCLE_infos_persos(AUTEURS){tout}{id_auteur=#SESSION{id_auteur}}>
+	<li>
+		[(#LOGO_AUTEUR|#URL_AUTEUR|image_reduire{48})]
+		<a href="#URL_PAGE{profil,id_auteur=#SESSION{id_auteur}}"><:icone_informations_personnelles:></a>
+		<div class="texte">#BIO</div>
+		<br class="nettoyeur" />
+	</li>
+</BOUCLE_infos_persos>[
+(#SESSION{id_auteur}|?{' '})
+</ul>
+][
+(#SESSION{id_auteur}|?{'',
+<h2 class="menu-titre">Login public</h2>
+})
+#LOGIN_PUBLIC]
+
+[(#SESSION{id_auteur}|?{'', ' '})
+#FORMULAIRE_INSCRIPTION]
