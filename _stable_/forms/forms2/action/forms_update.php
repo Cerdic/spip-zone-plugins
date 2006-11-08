@@ -10,7 +10,9 @@
  * © 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
+include_spip('inc/forms');
 include_spip('inc/forms_edit');
+include_spip('inc/forms_type_champs');
 include_spip('inc/autoriser');
 // TODO : charger la bonne langue !
 
@@ -46,7 +48,6 @@ function Forms_update_edition_champ($id_form,$champ) {
 }
 
 function Forms_update($id_form){
-	$retour = _request('retour');
 	$titre = _request('titre');
 	$descriptif = _request('descriptif');
 	$email = _request('email');
@@ -103,13 +104,13 @@ function Forms_update($id_form){
 		$champconfirm = $row['champconfirm'];
 		$texte = $row['texte'];
 	}
-
+	
 	if ($id_form && Forms_form_editable($id_form)) {
 		$champ_visible = NULL;
 		// Ajout d'un champ
 		if (($type = $ajout_champ) && Forms_type_champ_autorise($type)) {
 			$titre = _T("forms:nouveau_champ");
-			include_spip('inc/charset');
+			include_spip('inc/charsets');
 			$titre = unicode2charset(html2unicode($titre));
 			$champ = Forms_insere_nouveau_champ($id_form,$type,$titre);
 			$champ_visible = $nouveau_champ = $champ;

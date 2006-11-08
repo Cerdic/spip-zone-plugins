@@ -122,7 +122,7 @@ function forms_multi_submit() {
 					count++;
 				}
 			});
-			this.value = count!=1?"<multi>"+value+"</multi>":value.replace('^\[[a-z_]+\]','');
+			this.value = count!=1?"<multi>"+value+"</multi>":value.replace(/^\[[a-z_]+\]/,'');
 		} 
 	});
 }

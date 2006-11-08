@@ -218,12 +218,10 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$index_min = $row['rangmin'];
 		$index_max = $row['rangmax'];
 	}
-	$action_link = generer_action_auteur("forms_update","$id_form",$redirect);
-
 	$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)."ORDER BY rang");
 	while ($row = spip_fetch_array($res)) {
 		$champ = $row['champ'];
-		$visible = ($champ == $champ_visible);
+		$visible = ($champ == $champ_visible)||($champ == $nouveau_champ);
 		$nouveau = ($champ == $nouveau_champ);
 		$obligatoire = $row['obligatoire'];
 		$rang = $row['rang'];
@@ -231,6 +229,8 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$aff_max = $rang < $index_max;
 		$type = $row['type'];
 
+		$redirect = ancre_url(parametre_url($redirect,'champ_visible',$champ),'champ_visible');
+		$action_link = generer_action_auteur("forms_update","$id_form",urlencode($redirect));
 		if ($nouveau) $out .= "<a name='nouveau_champ'></a>";
 		else if ($visible) $out .= "<a name='champ_visible'></a>";
 		$out .= "<p>\n";
@@ -242,10 +242,8 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$out .= "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
 		if ($aff_min || $aff_max) {
 			$out .= "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;'>";
-			$redirect = _DIR_RESTREINT_ABS. generer_url_ecrire('forms_edit',"id_form=$id_form&champ_visible=$champ#champ_visible",false,true);
-			if ($retour) $redirect = parametre_url($redirect,'retour',str_replace("&amp;","&",$retour));
 			if ($aff_min) {
-				$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-monter",$redirect);
+				$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-monter",urlencode($redirect));
 				$link = parametre_url($link,"time",time()); // pour avoir une url differente de l'actuelle
 				$out .= "<a href='$link'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0' alt='"._T("forms:champ_monter")."'></a>";
 			}
@@ -253,7 +251,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 				$out .= " | ";
 			}
 			if ($aff_max) {
-				$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-descendre",$redirect);
+				$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-descendre",urlencode($redirect));
 				$link = parametre_url($link,"time",time()); // pour avoir une url differente de l'actuelle
 				$out .= "<a href='$link'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0' alt='"._T("forms:champ_descendre")."'></a>";
 			}
@@ -322,6 +320,8 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 			$out .= fin_cadre_enfonce(true);
 	}
 
+	$redirect = ancre_url(parametre_url($redirect,'champ_visible',''),'');
+	$action_link = generer_action_auteur("forms_update","$id_form",urlencode($redirect));
 	// Ajouter un champ
 	$out .= "<p>";
 	$out .= debut_cadre_enfonce("", true);
@@ -398,7 +398,7 @@ function exec_forms_edit(){
 	if ($retour)
 		$retour = urldecode($retour);
 	else 
-		$retour = generer_url_ecrire('forms_tous');
+		$retour = generer_url_ecrire('forms_tous',"","",true);
   include_spip("inc/presentation");
 	include_spip("inc/config");
 
@@ -408,7 +408,7 @@ function exec_forms_edit(){
 			$nb_reponses = $row['num'];
 
 
-	$redirect = generer_url_ecrire('forms_edit');
+	$redirect = generer_url_ecrire('forms_edit',(intval($id_form)?"id_form=$id_form":""));
 	if ($retour) 
 		$redirect = parametre_url($redirect,"retour",urlencode($retour));
 		
@@ -433,10 +433,10 @@ function exec_forms_edit(){
 		$public = "non";
 		$js_titre = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 		
-		$action_link = generer_action_auteur("forms_update","new",$redirect);
+		$action_link = generer_action_auteur("forms_update","new",urlencode($redirect));
 	}
 	else {
-		$champs_visible = _request('champs_visible');
+		$champ_visible = _request('champ_visible');
 		$nouveau_champ = _request('nouveau_champ');
 		$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 		if ($row = spip_fetch_array($result)) {
@@ -451,7 +451,7 @@ function exec_forms_edit(){
 			$public = $row['public'];
 		}
 		$js_titre = "";
-		$action_link = generer_action_auteur("forms_update","$id_form",$redirect);
+		$action_link = generer_action_auteur("forms_update","$id_form",urlencode($redirect));
 	}
 
 

@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'champ_type_ligne'=>"ligne de texte",
 'champ_type_texte'=>"texte",
+'champ_type_date'=>"date",
 'champ_type_url'=>"adresse de site Web",
 'champ_type_email'=>"adresse e-mail",
 'champ_type_select'=>"choix unique",
