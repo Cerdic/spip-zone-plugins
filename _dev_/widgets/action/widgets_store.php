@@ -108,6 +108,8 @@ function action_widgets_store_dist() {
 	}
 
 	// sinon on bosse : toutes les modifs ont ete acceptees
+	// vérifier qu'on a tout ce qu'il faut pour mettre a jour la base
+	// et regrouper les mises à jour par type/id
 	foreach ($modifs as $modif) {
 		list($type, $modele, $id, $content, $wid) = $modif;
 		if (!isset($updates[$type])) {
@@ -128,19 +130,27 @@ function action_widgets_store_dist() {
 				default:
 				    $return['$erreur'] = "$type: " . _U('widgets:non_implemente');
 				    break 2;
-				    }
-				    $updates[$type] = array('fun'=>$fun, 'ids'=>array());
-				}
-				if (!isset($updates[$type]['ids'][$id])) {
-					$updates[$type]['ids'][$id] = array('wdg'=>array(), 'chval'=>array());
 			}
-			// pour reaffecter le retour d'erreur sql au cas ou
-			$updates[$type]['ids'][$id]['wdg'][] = $wid;
-			foreach ($content as $champtable => $val)
-				$updates[$type]['ids'][$id]['chval'][$champtable] = $val;
+			$updates[$type] = array('fun'=>$fun, 'ids'=>array());
 		}
-		foreach($updates as $type => $idschamps) {
-			foreach($idschamps['ids'] as $id => $champsvaleurs) {
+		if (!isset($updates[$type]['ids'][$id])) {
+			$updates[$type]['ids'][$id] = array('wdg'=>array(), 'chval'=>array());
+		}
+		// pour reaffecter le retour d'erreur sql au cas ou
+		$updates[$type]['ids'][$id]['wdg'][] = $wid;
+		foreach ($content as $champtable => $val) {
+			$updates[$type]['ids'][$id]['chval'][$champtable] = $val;
+		}
+	}
+
+	// il manque une fonction de mise à jour ==> on ne fait rien !
+	if ($return['$erreur']) {
+	    echo var2js($return);
+	    exit;
+	}
+	// hop ! mises à jour table par table et id par id
+	foreach ($updates as $type => $idschamps) {
+		foreach ($idschamps['ids'] as $id => $champsvaleurs) {
 	        // Enregistrer dans la base
 	        // $updok = ... quand on aura un retour
 	        // -- revisions_articles($id_article, $c) --
@@ -148,7 +158,8 @@ function action_widgets_store_dist() {
 	    }
 	}
 
-	foreach($modifs as $m) {
+	// et maintenant refaire l'affichage des widgets modifies
+	foreach ($modifs as $m) {
 		list($type, $modele, $id, $content, $wid) = $modif;
 
 	    // VUE
