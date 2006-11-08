@@ -1,0 +1,36 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Splickrbox
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	  BoOz (booz@rezo.net)
+	  Pierre Andrews (mortimer)
+	</auteur>
+	<version>
+	0.3
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+	Noisette pour afficher les dernieres photos à la Flickr (le "badge") , tout ca en javascript via <code>#INSERT_HEAD</code> et le plugin JQuery.
+
+-* On peut l'utiliser en modele avec <code><splickrbox></code>. en lui passant en option un parametre d'id pour limiter la boucle document,
+-* On peut l'utiliser dans les squelettes avec la balise <code>#MODELE{splickrbox}</code>
+-* On peut l'utiliser avec différent paramètres (qu'on peut aussi combiner):
+-** <code><splickrbox|right></code> et <code><splickrbox|left></code> pour les alignements
+-** <code><splickrbox|taille=24></code> permet de specifier le nombre de vignettes à afficher. Ce nombre devrais ètre un multiple du nombre de colonnes.
+-** <code><splickrbox|colonnes=10></code> permet de specifier le nombre de colonnes à afficher.
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+	<prefix>
+	Splickr
+	</prefix>
+	<fonctions>
+	Splickr_fonctions.php
+	</fonctions>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>head.php</inclure>
+	</pipeline>
+</plugin>
