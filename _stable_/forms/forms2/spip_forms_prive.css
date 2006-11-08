@@ -1,0 +1,12 @@
+#forms-apercu-gauche {
+	margin-top:0.5em;
+	font-size:xx-small;
+}
+
+#apercu .descriptif,
+#apercu .champconfirm,
+#apercu .email,
+#apercu .texte,
+ {
+	border: 1px dashed #aaaaaa;
+}

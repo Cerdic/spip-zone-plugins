@@ -206,8 +206,8 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	global $spip_lang_right;
 	$out = "";
 	if (!$id_form) return $out;
-	$out .= "<a name='champs'></a>";
-	$out .= "<p><hr><p>\n";
+	$out .= "<p>";
+	$out .= debut_cadre_formulaire('',true);
 	$out .= "<div class='verdana3'>";
 	$out .= "<strong>"._T("forms:champs_formulaire")."</strong><br />\n";
 	$out .= _T("forms:info_champs_formulaire");
@@ -245,7 +245,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 			if ($aff_min) {
 				$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-monter",urlencode($redirect));
 				$link = parametre_url($link,"time",time()); // pour avoir une url differente de l'actuelle
-				$out .= "<a href='$link'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0' alt='"._T("forms:champ_monter")."'></a>";
+				$out .= "<a href='$link' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0' alt='"._T("forms:champ_monter")."'></a>";
 			}
 			if ($aff_min && $aff_max) {
 				$out .= " | ";
@@ -253,7 +253,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 			if ($aff_max) {
 				$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-descendre",urlencode($redirect));
 				$link = parametre_url($link,"time",time()); // pour avoir une url differente de l'actuelle
-				$out .= "<a href='$link'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0' alt='"._T("forms:champ_descendre")."'></a>";
+				$out .= "<a href='$link' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0' alt='"._T("forms:champ_descendre")."'></a>";
 			}
 			$out .= "</div>\n";
 		}
@@ -310,7 +310,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		// Supprimer un champ
 		$link = parametre_url($action_link,'supp_champ', $champ);
 		$out .= "<div style='float: left;'>";
-		$out .= icone_horizontale(_T("forms:supprimer_champ"), $link."#champs","../"._DIR_PLUGIN_FORMS. "/img_pack/form-24.png", "supprimer.gif",false);
+		$out .= icone_horizontale('',"<a href='$link#champs' class='ajaxAction' rel='$redirect'>"._T("forms:supprimer_champ")."</a>","../"._DIR_PLUGIN_FORMS. "/img_pack/form-24.png", "supprimer.gif",false);
 		$out .= "</div>\n";
 
 		$out .= fin_block();
@@ -340,6 +340,8 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	$out .= " &nbsp; <input type='submit' name='valider' id='ajout_champ' VALUE='"._T('bouton_ajouter')."' class='fondo'>";
 	$out .= "</form>\n";
 	$out .= fin_cadre_enfonce(true);
+	$out .= fin_cadre_formulaire(true);
+	$out .= "</p>";
 	return $out;
 }
 
@@ -369,6 +371,160 @@ function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$
 	$out .= "</div>";
 	$out .= "</form><br />\n";
 
+	return $out;
+}
+
+function contenu_boite_resume($id_form, $row, &$apercu){
+	$out = "";
+
+	// centre resume ---------------------------------------------------------------
+	$out .= debut_cadre_relief("../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png",true);
+
+	$out .= gros_titre($row['titre'],'',false);
+
+	if ($row['descriptif']) {
+		$out .= "<div class='descriptif'><strong>"._T('info_descriptif')."</strong>";
+		$out .= propre($row['descriptif']);
+		$out .= "</div>\n";
+	}
+
+	if ($email = unserialize($row['email'])) {
+		$out .= "<div class='email'><strong>"._T('email_2')."</strong>";
+		$out .= $email['defaut'];
+		$out .= "</div>\n";
+	}
+	if ($row['champconfirm']){
+		$champconfirm_known = false;
+		$out .= "<div class='champconfirm'><strong>"._T('forms:confirmer_reponse')."</strong>";
+		$res2 = spip_query("SELECT titre FROM spip_forms_champs WHERE type='email' AND id_form="._q($id_form)." AND champ="._q($champconfirm));
+		if ($row2 = spip_fetch_array($res2)){
+			$out .= $row2['nom'] . " ";
+			$champconfirm_known = true;
+		}
+		$out .= "</div>\n";
+		if (($champconfirm_known == true) && ($row['texte'])) {
+			$out .= "<div class='texte'><strong>"._T('info_texte')."</strong>";
+			$out .= nl2br(entites_html($row['texte']));
+			$out .= "</div>\n";
+		}
+	}
+
+	if (spip_fetch_array(spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)))) {
+		$out .= "<br />";
+		$out .= "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
+		$out .= bouton_block_invisible("preview_form");
+		$out .= "<strong class='verdana3' style='text-transform: uppercase;'>"
+			._T("forms:apparence_formulaire")."</strong>";
+		$out .= "</div>\n";
+
+		$out .= debut_block_visible("preview_form");
+		$out .= _T("forms:info_apparence")."<p>\n";
+		$out .= $apercu;
+		$out .= fin_block();
+	}
+
+	$out .= afficher_articles(_T("forms:articles_utilisant"),
+		array('FROM' => 'spip_articles AS articles, spip_forms_articles AS lien',
+		'WHERE' => "lien.id_article=articles.id_article AND id_form="._q($id_form)." AND statut!='poubelle'",
+		'ORDER BY' => "titre"));
+
+	$out .= fin_cadre_relief(true);
+	return $out;
+}
+
+//
+// Edition des donnees du formulaire
+//
+function boite_proprietes($id_form, $row, $js_titre, $action_link) {
+	$out = "";
+	$out .= "<p>";
+	$out .= debut_cadre_formulaire('',true);
+
+	$out .= "<div class='verdana2'>";
+	$out .= "<form method='POST' action='$action_link' style='border: 0px; margin: 0px;'>";
+	$out .= form_hidden($action_link);
+
+	$titre = entites_html($row['titre']);
+	$descriptif = entites_html($row['descriptif']);
+	$texte = entites_html($row['texte']);
+	$email = unserialize($row['email']);
+
+	$out .= "<strong><label for='titre_form'>"._T("forms:titre_formulaire")."</label></strong> "._T('info_obligatoire_02');
+	$out .= "<br />";
+	$out .= "<input type='text' name='titre' id='titre_form' CLASS='formo' ".
+		"value=\"".entites_html($titre)."\" size='40'$js_titre><br />\n";
+
+	$out .= "<strong><label for='desc_form'>"._T('info_descriptif')."</label></strong>";
+	$out .= "<br />";
+	$out .= "<textarea name='descriptif' id='desc_form' class='forml' rows='4' cols='40' wrap='soft'>";
+	$out .= entites_html($descriptif);
+	$out .= "</textarea><br />\n";
+
+	$out .= Forms_bloc_routage_mail($id_form,$email);
+
+	$out .= "<strong><label for='confirm_form'>"._T('forms:confirmer_reponse')."</label></strong> ";
+	$out .= "<br />";
+	$out .= "<select name='champconfirm' id='confirm_form' class='forml'>\n";
+	$out .= "<option value=''>"._T('forms:pas_mail_confirmation')."</option>\n";
+	$champconfirm_known = false;
+	$res2 = spip_query("SELECT * FROM spip_forms_champs WHERE type='email' AND id_form="._q($id_form));
+	while ($row2 = spip_fetch_array($res2)) {
+		$out .= "<option value='" . $row2['champ'] . "'";
+		if ($row['champconfirm'] == $row2['champ']){
+			$out .= " selected='selected'";
+			$champconfirm_known = true;
+		}
+		$out .= ">" . $row2['titre'] . "</option>\n";
+	}
+	$out .= "</select><br />\n";
+ 	if ($champconfirm_known == true){
+		$out .= "<strong><label for='texte_form'>"._T('info_texte')."</label></strong>";
+		$out .= "<br />";
+		$out .= "<textarea name='texte' id='texte_form' class='formo' rows='4' cols='40' wrap='soft'>";
+		$out .= $texte;
+		$out .= "</textarea><br />\n";
+	}
+	else {
+		$out .= "<input type='hidden' name='texte' value=\"$texte\" />\n";
+ 	}
+ 	
+ 	if (in_array($row['type_form'],array('','sondage'))){
+		$out .= debut_cadre_enfonce("statistiques-24.gif",true);
+		$out .= "<strong>"._T("forms:type_form")."</strong> : ";
+		$out .= _T("forms:info_sondage");
+		$out .= "<br /><br />";
+		$out .= bouton_radio('type_form', '', _T("forms:sondage_non"), $type_form == '').'<br />';
+		$out .= bouton_radio('type_form', 'sondage', _T("forms:sondage_oui"), $type_form == 'sondage').'<br />';
+		$out .= fin_cadre_enfonce(true);
+ 	}
+ 	else 
+ 		$out .= "<input type='hidden' name='type_form' value='$type_form' />";
+
+	$out .= debut_cadre_enfonce("",true);
+	$out .= "<strong><label for='moderation'>"._T('forms:publication_donnees')."</label></strong>";
+ 	$out .= "<br />";
+	$out .= bouton_radio("public", "oui", _T('forms:donnees_pub'), $public == "oui", "");
+	$out .= "<br />";
+	$out .= bouton_radio("public", "non", _T('forms:donnees_prot'), $public == "non", "");
+	$out .= "<br />";
+	$out .= fin_cadre_enfonce(true);
+	
+	$out .= debut_cadre_enfonce("",true);
+	$out .= "<strong><label for='moderation'>"._T('forms:moderation_donnees')."</label></strong>";
+ 	$out .= "<br />";
+	$out .= bouton_radio("moderation", "posteriori", _T('bouton_radio_publication_immediate'), $moderation == "posteriori", "");
+	$out .= "<br />";
+	$out .= bouton_radio("moderation", "priori", _T('bouton_radio_moderation_priori'), $moderation == "priori", "");
+	$out .= "<br />";
+	$out .= fin_cadre_enfonce(true);
+	
+	$out .= "<div align='right'>";
+	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
+
+	$out .= "</form>";
+	$out .= "</div>";
+	$out .= fin_cadre_formulaire(true);
+	$out .= "</p>";
 	return $out;
 }
 
@@ -415,27 +571,7 @@ function exec_forms_edit(){
 	//
 	// Affichage de la page
 	//
-
-	debut_page("&laquo; $titre &raquo;", "documents", "forms","");
-	//
-	// Recupere les donnees
-	//
-	if ($new == 'oui' && !$titre) {
-		$titre = _T("forms:nouveau_formulaire");
-		include_spip('inc/charset');
-		$titre = unicode2charset(html2unicode($titre));
-		$descriptif = "";
-		$type_form = _request('type_form')?_request('type_form'):""; // possibilite de passer un type par defaut dans l'url de creation
-		$email = array();
-		$champconfirm = "";
-		$texte = "";
-		$moderation = "priori";
-		$public = "non";
-		$js_titre = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-		
-		$action_link = generer_action_auteur("forms_update","new",urlencode($redirect));
-	}
-	else {
+	if ($id_form){
 		$champ_visible = _request('champ_visible');
 		$nouveau_champ = _request('nouveau_champ');
 		$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
@@ -454,220 +590,159 @@ function exec_forms_edit(){
 		$action_link = generer_action_auteur("forms_update","$id_form",urlencode($redirect));
 	}
 
-
-	debut_gauche();
-	echo "<br /><br />\n";
+	$ajax_charset = _request('ajax_charset');
+	$bloc = _request('bloc');
+	if ($ajax_charset && $bloc=='apercu') {
+		include_spip('public/assembler');
+		echo $apercu = inclure_modele('form',$id_form,'','');
+		ajax_retour($apercu);
+	}
+	if ($ajax_charset && $bloc=='resume') {
+		include_spip('public/assembler');
+		echo $apercu = inclure_modele('form',$id_form,'','');
+		ajax_retour(contenu_boite_resume($id_form, $row, $apercu));
+	}
+	if ($ajax_charset && $bloc=='proprietes') {
+		ajax_retour(boite_proprietes($id_form, $row, $js_titre, $action_link));
+	}
+	if ($ajax_charset && $bloc=='champs') {
+		ajax_retour(Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ,$redirect));
+	}
 	
-	if (Forms_form_administrable($id_form) && $nb_reponses) {
-		debut_boite_info();
+	
+	debut_page("&laquo; $titre &raquo;", "documents", "forms","");
 
-		$nretour = urlencode(self());
-		icone_horizontale(_T("forms:suivi_reponses")."<br />".$nb_reponses." "._T("forms:reponses"),
-			generer_url_ecrire('forms_reponses',"id_form=$id_form"), "forum-public-24.gif", "rien.gif");
-		icone_horizontale(_T("forms:telecharger_reponses"),
-			generer_url_ecrire('forms_telecharger',"id_form=$id_form&retour=$nretour"), "doc-24.gif", "rien.gif");
+	// Recupere les donnees ---------------------------------------------------------------
+	if ($new == 'oui' && !$titre) {
+		$titre = _T("forms:nouveau_formulaire");
+		include_spip('inc/charset');
+		$titre = unicode2charset(html2unicode($titre));
+		$descriptif = "";
+		$type_form = _request('type_form')?_request('type_form'):""; // possibilite de passer un type par defaut dans l'url de creation
+		$email = array();
+		$champconfirm = "";
+		$texte = "";
+		$moderation = "priori";
+		$public = "non";
+		$js_titre = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+		
+		$action_link = generer_action_auteur("forms_update","new",urlencode($redirect));
+	}
+
+
+	// gauche raccourcis ---------------------------------------------------------------
+	debut_gauche();
+	
+	echo "<br /><br />\n";
+	debut_boite_info();
+	if ($retour) {
+		icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "rien.gif",'right');
+	}
+	if (Forms_form_administrable($id_form)) {
+		if ($nb_reponses){
+			$nretour = urlencode(self());
+			icone_horizontale(_T("forms:suivi_reponses")."<br />".$nb_reponses." "._T("forms:reponses"),
+				generer_url_ecrire('forms_reponses',"id_form=$id_form"), "forum-public-24.gif", "rien.gif");
+			icone_horizontale(_T("forms:telecharger_reponses"),
+				generer_url_ecrire('forms_telecharger',"id_form=$id_form&retour=$nretour"), "doc-24.gif", "rien.gif");
+		}
 
 		if (include_spip('inc/snippets'))
 			echo boite_snippets(_T('forms:formulaire'),_DIR_PLUGIN_FORMS."img_pack/form-24.gif",'forms',$id_form);
-		fin_boite_info();
-	}
 
-	creer_colonne_droite();
-	debut_droite();
-
-	if ($supp_form && $supp_rejet==NULL)
-		echo Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour);
-
-	//
-	// Cartouche
-	//
-	if ($id_form) {
-		debut_cadre_relief("../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png");
-
-		gros_titre($titre);
-
-		if ($descriptif) {
-			echo "<p /><div align='left' border: 1px dashed #aaaaaa;'>";
-			echo "<strong class='verdana2'>"._T('info_descriptif')."</strong> ";
-			echo propre($descriptif);
-			echo "</div>\n";
-		}
-
-		if ($email) {
-			echo "<p /><div align='left' border: 1px dashed #aaaaaa;'>";
-			echo "<strong class='verdana2'>"._T('email_2')."</strong> ";
-			echo $email['defaut'];
-			echo "</div>\n";
-		}
-		if ($champconfirm){
-			$champconfirm_known = false;
-			echo "<div align='left' border: 1px dashed #aaaaaa;'>";
-			echo "<strong class='verdana2'>"._T('forms:confirmer_reponse')."</strong> ";
-			$res2 = spip_query("SELECT titre FROM spip_forms_champs WHERE type='email' AND id_form="._q($id_form)." AND champ="._q($champconfirm));
-			if ($row2 = spip_fetch_array($res2)){
-				echo $row2['nom'] . " ";
-				$champconfirm_known = true;
-			}
-			echo "</div>\n";
-			if (($champconfirm_known == true) && ($texte)) {
-				echo "<div align='left' border: 1px dashed #aaaaaa;'>";
-				echo "<strong class='verdana2'>"._T('info_texte')."</strong> ";
-				echo nl2br(entites_html($texte));
-				echo "</div>\n";
-			}
-		}
-
-		if (spip_fetch_array(spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)))) {
-			echo "<br />";
-			echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
-			echo bouton_block_invisible("preview_form");
-			echo "<strong class='verdana3' style='text-transform: uppercase;'>"
-				._T("forms:apparence_formulaire")."</strong>";
-			echo "</div>\n";
-
-			echo debut_block_invisible("preview_form");
-			echo _T("forms:info_apparence")."<p>\n";
-			//echo propre("<form$id_form>");
-			include_spip('public/assembler');
-			echo inclure_modele('form',$id_form,'','');
-			echo fin_block();
-		}
-
-		echo afficher_articles(_T("forms:articles_utilisant"),
-			array('FROM' => 'spip_articles AS articles, spip_forms_articles AS lien',
-			'WHERE' => "lien.id_article=articles.id_article AND id_form="._q($id_form)." AND statut!='poubelle'",
-			'ORDER BY' => "titre"));
-
-		fin_cadre_relief();
-	}
-
-
-	//
-	// Icones retour et suppression
-	//
-	echo "<div style='text-align:$spip_lang_right'>";
-	if ($retour) {
-		icone(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "rien.gif",'right');
-	}
-	if ($id_form && Forms_form_administrable($id_form)) {
-		echo "<div style='float:$spip_lang_left'>";
 		$link = parametre_url(self(),'new','');
 		$link = parametre_url($link,'supp_form', $id_form);
 		if (!$retour) {
 			$link=parametre_url($link,'retour', urlencode(generer_url_ecrire('form_tous')));
 		}
-		icone(_T("forms:supprimer_formulaire"), $link, "../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "supprimer.gif");
-		echo "</div>";
-	}
-	echo "<div style='clear:both;'></div>";
-	echo "</div>";
-
-
-	//
-	// Edition des donnees du formulaire
-	//
-	if (Forms_form_editable($id_form)) {
 		echo "<p>";
-		debut_cadre_formulaire();
+		icone_horizontale(_T("forms:supprimer_formulaire"), $link, "../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "supprimer.gif");
+		echo "</p>";
+	}
+	fin_boite_info();
+	
+	// gauche apercu ---------------------------------------------------------------
+	echo "<div id='forms-apercu-gauche'>";
+	include_spip('public/assembler');
+	echo $apercu = inclure_modele('form',$id_form,'','');
+	echo "</div>";
+	
+	
 
-		echo "<div class='verdana2'>";
-		echo "<form method='POST' action='$action_link' style='border: 0px; margin: 0px;'>";
-		echo form_hidden($action_link);
+	// droite ---------------------------------------------------------------
+	creer_colonne_droite();
+	debut_droite();
 
-		$titre = entites_html($titre);
-		$descriptif = entites_html($descriptif);
-		$texte = entites_html($texte);
+	if ($supp_form && $supp_rejet==NULL)
+		echo Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour);
+	
+	echo debut_onglet();
+	echo onglet(_L("Aper&ccedil;u"),ancre_url(self(),"apercu"),'','apercu');
+	echo onglet(_L("Propri&eacute;t&eacute;s"),ancre_url(self(),"proprietes"),'','proprietes');
+	echo onglet(_L("Champs"),ancre_url(self(),"champs"),'','champs');
+	echo fin_onglet();
 
-		echo "<strong><label for='titre_form'>"._T("forms:titre_formulaire")."</label></strong> "._T('info_obligatoire_02');
-		echo "<br />";
-		echo "<input type='text' name='titre' id='titre_form' CLASS='formo' ".
-			"value=\"".entites_html($titre)."\" size='40'$js_titre><br />\n";
-
-		echo "<strong><label for='desc_form'>"._T('info_descriptif')."</label></strong>";
-		echo "<br />";
-		echo "<textarea name='descriptif' id='desc_form' class='forml' rows='4' cols='40' wrap='soft'>";
-		echo entites_html($descriptif);
-		echo "</textarea><br />\n";
-
-		echo Forms_bloc_routage_mail($id_form,$email);
-
-		echo "<strong><label for='confirm_form'>"._T('forms:confirmer_reponse')."</label></strong> ";
-		echo "<br />";
-		echo "<select name='champconfirm' id='confirm_form' class='forml'>\n";
-		echo "<option value=''";
-		if ($champconfirm=='') echo " selected='selected'";
-		echo ">"._T('forms:pas_mail_confirmation')."</option>\n";
-		$champconfirm_known = false;
-		$res2 = spip_query("SELECT * FROM spip_forms_champs WHERE type='email' AND id_form="._q($id_form));
-		while ($row2 = spip_fetch_array($res2)) {
-			echo "<option value='" . $row2['champ'] . "'";
-			if ($champconfirm == $row2['champ']){
-				echo " selected='selected'";
-				$champconfirm_known = true;
-			}
-			echo ">" . $row2['titre'] . "</option>\n";
-		}
-		echo "</select><br />\n";
-	 	if ($champconfirm_known == true){
-			echo "<strong><label for='texte_form'>"._T('info_texte')."</label></strong>";
-			echo "<br />";
-			echo "<textarea name='texte' id='texte_form' class='formo' rows='4' cols='40' wrap='soft'>";
-			echo entites_html($texte);
-			echo "</textarea><br />\n";
-		}
-		else {
-			echo "<input type='hidden' name='texte' value=\"" . entites_html($texte);
-			echo "\" />\n";
-	 	}
-	 	
-	 	if (in_array($type_form,array('','sondage'))){
-			debut_cadre_enfonce("statistiques-24.gif");
-			echo "<strong>"._T("forms:type_form")."</strong> : ";
-			echo _T("forms:info_sondage");
-			echo "<br /><br />";
-			afficher_choix('type_form', $type_form, array(
-				'' => _T("forms:sondage_non"),
-				'sondage' => _T("forms:sondage_oui"),
-			));
-			fin_cadre_enfonce();
-	 	}
-	 	else 
-	 		echo "<input type='hidden' name='type_form' value='$type_form' />";
-
-		debut_cadre_enfonce("");
-		echo "<strong><label for='moderation'>"._T('forms:publication_donnees')."</label></strong>";
-	 	echo "<br />";
-		echo bouton_radio("public", "oui", _T('forms:donnees_pub'), $public == "oui", "");
-		echo "<br />";
-		echo bouton_radio("public", "non", _T('forms:donnees_prot'), $public == "non", "");
-		echo "<br />";
-		fin_cadre_enfonce();
-		
-		debut_cadre_enfonce("");
-		echo "<strong><label for='moderation'>"._T('forms:moderation_donnees')."</label></strong>";
-	 	echo "<br />";
-		echo bouton_radio("moderation", "posteriori", _T('bouton_radio_publication_immediate'), $moderation == "posteriori", "");
-		echo "<br />";
-		echo bouton_radio("moderation", "priori", _T('bouton_radio_moderation_priori'), $moderation == "priori", "");
-		echo "<br />";
-		fin_cadre_enfonce();
-		
-		echo "<div align='right'>";
-		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
-
-		echo "</form>";
-
-		//
-		// Creer / modifier des champs
-		//
-		echo Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ,$redirect);
-		
-		echo "</div>\n";
-		fin_cadre_formulaire();
+	$out = "";
+	if ($id_form){
+		$out .= "<div id='apercu' name='apercu'>";
+		$out .= contenu_boite_resume($id_form, $row, $apercu);
+		$out .= "</div>";
 	}
 
+	// centre proprietes ---------------------------------------------------------------
+	$out .= "<div id='proprietes' name='proprietes'>";
+	$out .= boite_proprietes($id_form, $row, $js_titre, $action_link);
+	$out .= "</div>";
 
-	fin_page();
+	// edition des champs ---------------------------------------------------------------
+	$out .= "<div id='champs' name='champs'>";
+	$out .= Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ,$redirect);
+	$out .= "</div>\n";
+
+	echo $out;
+		
+	echo <<<script
+<script type='text/javascript'><!--
+jQuery.fn.desactive_onglet = function() {
+	var url = $(this).children('a').href();
+	var ancre = url.split('#'); ancre = ancre[1];
+	$('#'+ancre).hide();
+	$(this).removeClass('onglet_off');
+}
+
+jQuery.fn.active_onglet = function(hash) {
+	$('.onglet').each(function(){ $(this).desactive_onglet()});
+	var url = $(this).children('a').href();
+	var ancre = url.split('#'); ancre = ancre[1];
+	$(this).addClass('onglet_off');
+	$('#'+ancre).show();
+	if (hash)
+		window.location.hash=hash;
+	else
+		window.location.hash=ancre;
+}
+
+$(document).ready(function(){
+	var hash = window.location.hash;
+	if ((hash=='#champs')||(hash=='#champ_visible')||(hash=='#nouveau_champ'))
+		$('.onglet').eq(2).active_onglet(hash);
+	else if (window.location.hash=='proprietes')
+		$('.onglet').eq(2).active_onglet();
+	else
+		$('.onglet').eq(0).active_onglet();
+
+	$('.onglet').click(function(){ $(this).active_onglet(); });
+	$('#champs a.ajaxAction').click(function(){
+		var action = $(this).href();
+		var url = (($(this).rel()).split('#'))[0]+"&bloc=champs";
+		$.get(action,function(data){ AjaxSqueeze(url, 'champs');});
+		return false;
+	});
+});
+// --></script>
+script;
+
+	echo fin_page();
 }
 
 ?>
