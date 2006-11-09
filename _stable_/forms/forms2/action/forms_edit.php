@@ -156,7 +156,7 @@ function action_forms_edit(){
 	$hash = _request('hash');
 	$id_auteur = $auteur_session['id_auteur'];
 	$redirect = str_replace("&amp;","&",urldecode(_request('redirect')));
-	$redirect = parametre_url($redirect,'var_ajaxcharset',''); // si le redirect sert, pas d'ajax !
+	//$redirect = parametre_url($redirect,'var_ajaxcharset',''); // si le redirect sert, pas d'ajax !
 	if ($redirect==NULL) $redirect="";
 	include_spip("inc/actions");
 	if (verifier_action_auteur("forms_edit-$arg",$hash,$id_auteur)==TRUE) {

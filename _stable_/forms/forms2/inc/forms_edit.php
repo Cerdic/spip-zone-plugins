@@ -367,7 +367,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$formulaire .= "</div>\n";
 
 		$formulaire .= fin_block();
-		$formulaire = ajax_action_auteur('forms_edit', "$id_form-$champ","forms_edit",$args_redir, $formulaire, "$args_redir&bloc=champs&ajax_champ=$champ#champ_visible",'');
+		$formulaire = ajax_action_auteur('forms_edit', "$id_form-$champ","forms_edit","$args_redir#forms_edit-$id_form-$champ", $formulaire, "$args_redir&bloc=champs&ajax_champ=$champ#champ_visible",'');
 		
 		if ($ajax && ($champ == $ajax))
 			return $formulaire;
