@@ -277,6 +277,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 
 		$redirect = ancre_url(parametre_url($redirect,'champ_visible',$champ),'champ_visible');
 		$action_link = generer_action_auteur("forms_edit","$id_form",urlencode($redirect));
+		$action_link_noredir = parametre_url($action_link,'redirect','');
 		if ($nouveau) $out .= "<a name='nouveau_champ'></a>";
 		else if ($visible) $out .= "<a name='champ_visible'></a>";
 		$out .= "<p>\n";
@@ -304,7 +305,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		}
 
 		// Modifier un champ
-		$formulaire="";
+		$formulaire = "";
 		$formulaire .= "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
 		$formulaire .= $visible ? bouton_block_visible("champ_$champ") : bouton_block_invisible("champ_$champ");
 		$formulaire .= "<strong id='titre_nom_$champ'>".typo($row['titre'])."</strong>";
@@ -314,8 +315,6 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 
 		$formulaire .= "<div id='forms_lang_nom_$champ'></div>";
 		
-		//$out .= "<form class='forms_champ' method='POST' action='$action_link#champ_visible' style='border: 0px; margin: 0px;'>";
-		//$out .= form_hidden($action_link);
 		$formulaire .= "<input type='hidden' name='modif_champ' value='$champ' />";
 
 		$formulaire .= "<div class='verdana2'>";
@@ -354,38 +353,47 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$formulaire .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo verdana2'></div>\n";
 		$formulaire .= "</div>\n";
 		
-		$args_redir=parametre_url($redirect,'exec','','&');
-		$args_redir=explode("#",$args_redir);
-		$args_redir=explode("?",$args_redir[0]);
-		$args_redir="&".$args_redir[1];
-		//$out .= "</form>";
-	
 		// Supprimer un champ
 		$link = parametre_url($action_link,'supp_champ', $champ);
 		$formulaire .= "<div style='float: left;'>";
 		$formulaire .= icone_horizontale('',"<a href='$link#champs' class='ajaxAction' rel='$redirect'>"._T("forms:supprimer_champ")."</a>","../"._DIR_PLUGIN_FORMS. "/img_pack/form-24.png", "supprimer.gif",false);
 		$formulaire .= "</div>\n";
 
+		$args_redir=parametre_url($redirect,'exec','','&');
+		$args_redir=explode("#",$args_redir);
+		$args_redir=explode("?",$args_redir[0]);
+		$args_redir="&".$args_redir[1];
+
 		$formulaire .= fin_block();
-		$formulaire = ajax_action_auteur('forms_edit', "$id_form-$champ","forms_edit","$args_redir#forms_edit-$id_form-$champ", $formulaire, "$args_redir&bloc=champs&ajax_champ=$champ#champ_visible",'');
+		//$formulaire = ajax_action_auteur('forms_edit', "$id_form-$champ","forms_edit","$args_redir#forms_edit-$id_form-$champ", $formulaire, "$args_redir&bloc=champs&ajax_champ=$champ#champ_visible",'');
+		$formulaire = "<form class='ajaxAction' method='POST' action='$action_link_noredir'" .
+			" style='border: 0px; margin: 0px;'>" .
+			form_hidden($action_link_noredir) .
+			"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
+			$formulaire .
+			"</form>";
 		
 		if ($ajax && ($champ == $ajax))
 			return $formulaire;
-		$out .= "<div id='forms_edit-$id_form-$champ' class='forms_champs'>$formulaire</div>";
+		//$out .= "<div id='forms_edit-$id_form-$champ' class='forms_champs'>$formulaire</div>";
+		$out .= "<div id='champs-$id_form-$champ' class='forms_champs'>$formulaire</div>";
 		if (!in_array($type,array('separateur','textestatique')))
 			$out .= fin_cadre_relief(true);
 		else
 			$out .= fin_cadre_enfonce(true);
 	}
 
+	// Ajouter un champ
 	$redirect = ancre_url(parametre_url($redirect,'champ_visible',''),'');
 	$action_link = generer_action_auteur("forms_edit","$id_form",urlencode($redirect));
-	// Ajouter un champ
+	$action_link_noredir = parametre_url($action_link,'redirect','');
 	$out .= "<p>";
 	$out .= debut_cadre_enfonce("", true);
-	$out .= "<form method='POST' action='$action_link#nouveau_champ' style='border: 0px; margin: 0px;'>";
-	$out .= form_hidden($action_link);
-	$out .= "<strong>"._T("forms:ajouter_champ")."</strong><br />\n";
+	$out .= "<form class='ajaxAction' method='POST' action='$action_link_noredir' style='border: 0px; margin: 0px;'>" .
+		form_hidden($action_link_noredir) .
+		"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
+		"<input type='hidden' name='idtarget' value='champs' />"; // on target toute la boite, pas juste le div parent
+	$out .=	"<strong>"._T("forms:ajouter_champ")."</strong><br />\n";
 	$out .= _T("forms:ajouter_champ_type");
 	$out .= " \n";
 	
@@ -398,8 +406,10 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	$out .= " &nbsp; <input type='submit' name='valider' id='ajout_champ' VALUE='"._T('bouton_ajouter')."' class='fondo'>";
 	$out .= "</form>\n";
 	$out .= fin_cadre_enfonce(true);
+	$out .= "</p>";
 	$out .= fin_cadre_formulaire(true);
 	$out .= "</p>";
+	
 	return $out;
 }
 

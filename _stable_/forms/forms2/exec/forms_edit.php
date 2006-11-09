@@ -181,8 +181,9 @@ function exec_forms_edit(){
 	if ($ajax_charset && $bloc=='proprietes') {
 		ajax_retour(boite_proprietes($id_form, $row, $js_titre, $action_link));
 	}
-	if ($ajax_charset && $bloc=='champs') {
-		ajax_retour(Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ,$redirect,_request('ajax_champ')));
+	$bloc = explode("-",$bloc);
+	if ($ajax_charset && $bloc[0]=='champs') {
+		ajax_retour(Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ,$redirect,isset($bloc[2])?$bloc[2]:false));
 	}
 	
 	
@@ -318,6 +319,16 @@ jQuery.fn.ajaxAction = function() {
 			AjaxSqueeze(url_ap, 'apercu_gauche',refresh_apercu);
 		});
 		return false;
+	});
+	$('#'+id+' form.ajaxAction').submit(function(){
+		var idtarget = $(this).children('input[@name=idtarget]').val();
+		if (!idtarget) idtarget = $(this).parent().id();
+		var redir = $(this).children('input[@name=redirect]');
+		var url = (($(redir).val()).split('#'))[0];
+		$(redir).val(url + "&var_ajaxcharset=utf-8&bloc="+idtarget);
+		var res = AjaxSqueeze(this, idtarget, refresh_bloc);
+		AjaxSqueeze(url + "&bloc=apercu", 'apercu_gauche',refresh_apercu);
+		return res;
 	});
 }
 
