@@ -276,7 +276,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$type = $row['type'];
 
 		$redirect = ancre_url(parametre_url($redirect,'champ_visible',$champ),'champ_visible');
-		$action_link = generer_action_auteur("forms_update","$id_form",urlencode($redirect));
+		$action_link = generer_action_auteur("forms_edit","$id_form",urlencode($redirect));
 		if ($nouveau) $out .= "<a name='nouveau_champ'></a>";
 		else if ($visible) $out .= "<a name='champ_visible'></a>";
 		$out .= "<p>\n";
@@ -367,11 +367,11 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$formulaire .= "</div>\n";
 
 		$formulaire .= fin_block();
-		$formulaire = ajax_action_auteur('forms_update', "$id_form-$champ","forms_edit",$args_redir, $formulaire, "$args_redir&bloc=champs&ajax_champ=$champ",'');
+		$formulaire = ajax_action_auteur('forms_edit', "$id_form-$champ","forms_edit",$args_redir, $formulaire, "$args_redir&bloc=champs&ajax_champ=$champ#champ_visible",'');
 		
 		if ($ajax && ($champ == $ajax))
 			return $formulaire;
-		$out .= "<div id='forms_update-$id_form-$champ' class='forms_champs'>$formulaire</div>";
+		$out .= "<div id='forms_edit-$id_form-$champ' class='forms_champs'>$formulaire</div>";
 		if (!in_array($type,array('separateur','textestatique')))
 			$out .= fin_cadre_relief(true);
 		else
@@ -379,7 +379,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	}
 
 	$redirect = ancre_url(parametre_url($redirect,'champ_visible',''),'');
-	$action_link = generer_action_auteur("forms_update","$id_form",urlencode($redirect));
+	$action_link = generer_action_auteur("forms_edit","$id_form",urlencode($redirect));
 	// Ajouter un champ
 	$out .= "<p>";
 	$out .= debut_cadre_enfonce("", true);

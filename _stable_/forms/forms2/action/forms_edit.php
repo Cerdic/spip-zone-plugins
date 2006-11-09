@@ -150,15 +150,16 @@ function Forms_update($id_form){
 	return array($id_form,$champ_visible,$nouveau_champ);
 }
 
-function action_forms_update(){
+function action_forms_edit(){
 	global $auteur_session;
 	$arg = _request('arg');
 	$hash = _request('hash');
 	$id_auteur = $auteur_session['id_auteur'];
-	$redirect = urldecode(_request('redirect'));
+	$redirect = str_replace("&amp;","&",urldecode(_request('redirect')));
+	$redirect = parametre_url($redirect,'var_ajaxcharset',''); // si le redirect sert, pas d'ajax !
 	if ($redirect==NULL) $redirect="";
 	include_spip("inc/actions");
-	if (verifier_action_auteur("forms_update-$arg",$hash,$id_auteur)==TRUE) {
+	if (verifier_action_auteur("forms_edit-$arg",$hash,$id_auteur)==TRUE) {
 		$arg=explode("-",$arg);
 		$id_form = $arg[0];
 		if ((intval($id_form) && autoriser('modifier','form',$id_form))

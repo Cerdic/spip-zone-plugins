@@ -161,7 +161,7 @@ function exec_forms_edit(){
 			$public = $row['public'];
 		}
 		$js_titre = "";
-		$action_link = generer_action_auteur("forms_update","$id_form",urlencode($redirect));
+		$action_link = generer_action_auteur("forms_edit","$id_form",urlencode($redirect));
 	}
 
 	$ajax_charset = _request('var_ajaxcharset');
@@ -202,7 +202,7 @@ function exec_forms_edit(){
 		$public = "non";
 		$js_titre = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 		
-		$action_link = generer_action_auteur("forms_update","new",urlencode($redirect));
+		$action_link = generer_action_auteur("forms_edit","new",urlencode($redirect));
 	}
 
 
