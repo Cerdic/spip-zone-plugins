@@ -37,6 +37,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // essai d'intertionalisation...
 $test = _T('onchargelalangue');
 $GLOBALS[$GLOBALS['idx_lang']] += array(
+ 'saisie_rapide_entete' => "L'agenda pour les experts",
  'saisie_rapide_merci' => "Merci, vos &eacute;v&egrave;nements ont bien &eacute;t&eacute; enregistr&eacute;s :", 
  'saisie_rapide_compiler' => "Compiler et v&eacute;rifier la liste",
  'saisie_rapide_enregistrer' => "Enregistrer ces &eacute;v&egrave;nements",
@@ -45,9 +46,11 @@ $GLOBALS[$GLOBALS['idx_lang']] += array(
  'saisie_rapide_article' => "Article propri&eacute;taire : ",
  'saisie_rapide_compilation' => "COMPILATION DE LA LISTE",
  'saisie_rapide_compilation_infos' => "Voici votre liste interpr&eacute;t&eacute;e par le compilateur.<br>En absence d'erreur, enregistrez d&eacute;finitvement les &eacute;v&egrave;nements suivants :",
+ 'saisie_rapide_evenement_de' => "EVENEMENTS DE : ",
  'saisie_rapide_heure_id' => "Id.",
  'saisie_rapide_heure_debut' => "Heure de d&eacute;but",
  'saisie_rapide_heure_fin' => "Heure de fin",
+ 'saisie_rapide_fermer' => "Fermer",
 );
 // fin de l'essai !!
 
@@ -71,20 +74,23 @@ function affiche_et_enregistre(&$t) {
  foreach($t as $e=>$v) if ($t[$e]=="") unset($t[$e]); 
  affiche_table_evenements($t); 
  fin_cadre_enfonce();
- echo "<div align='center'><button class='fondo' onClick='javascript:window.close()'>Fermer</button></div>";
+ echo "<div align='center'><button class='fondo' onClick='javascript:window.close()'>"._T('saisie_rapide_fermer').'</button></div>';
  set_request('evenement_insert', 1);
  foreach ($result as $r) {
   foreach ($r as $r2=>$v) set_request($r2, $v);
   Agenda_action_formulaire_article(_request('id_article'));
  } 
  affiche_evenements_article();
+ echo "<script type=\"text/javascript\"><!--
+ window.opener.location.reload();
+ --></script>";
 }
 
 function affiche_evenements_article() {
  global $titre_defaut;
  //echo Agenda_formulaire_article(_request('id_article'), false);
  echo "<br>";
- debut_cadre_enfonce("../plugins/agenda/img_pack/agenda-24.png", false, "", "EVENEMENTS DE : $titre_defaut"); 
+ debut_cadre_enfonce("../plugins/agenda/img_pack/agenda-24.png", false, "", _T('saisie_rapide_evenement_de').$titre_defaut); 
   list($s, $les_evenements) = Agenda_formulaire_article_afficher_evenements(_request('id_article'), false);
   echo $s;
  fin_cadre_enfonce();
@@ -116,7 +122,7 @@ function affiche_table_evenements(&$t) {
  global $result; unset($result); global $result; ?>
    <div class="liste liste-evenements"><table background="" border="0" cellpadding="2" cellspacing="2" width="100%">
    <tbody><tr class="tr_liste">
-   <th>Id.</th>
+   <th><?=_T('saisie_rapide_heure_id')?></th>
    <th><?=_T('agenda:evenement_date_debut')?></th>
    <th><?=_T('agenda:evenement_date_fin')?></th>
    <th><?=_T('saisie_rapide_heure_debut')?></th>
@@ -216,7 +222,7 @@ function exec_saisie_rapide_dist()
 
 	include_spip('inc/headers');
 	http_no_cache();
-	echo init_entete("L'agenda pour les experts", 0);
+	echo init_entete(_T('saisie_rapide_entete'), 0);
 
 	echo "<body>";
 	$titre_defaut = "";
