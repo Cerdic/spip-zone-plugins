@@ -8,54 +8,46 @@
  
 include_spip('base/FpipR_db');
 
-/*function boucle_DEFAUT($id_boucle, &$boucles) {
-  $boucle = &$boucles[$id_boucle];
-  $type = $boucle->type_requete;	
-  
-  $f=charger_fonction($type, 'boucle');
-  if($f)
-	return $f($id_boucle,$boucles);
- 
-  return boucle_DEFAUT_dist($id_boucle,$boucles);
-}*/
 
-include_spip('boucle/flickr_contacts_getlist');
-include_spip('boucle/flickr_contacts_getpubliclist');
-include_spip('boucle/flickr_favorites_getlist');
-include_spip('boucle/flickr_favorites_getpubliclist');
-include_spip('boucle/flickr_groups_getinfo');
-include_spip('boucle/flickr_groups_pools_getgroups');
-include_spip('boucle/flickr_groups_pools_getphotos');
-include_spip('boucle/flickr_interestingness_getlist');
-include_spip('boucle/flickr_people_getinfo');
-include_spip('boucle/flickr_people_getpublicgroups');
-include_spip('boucle/flickr_photo_notes');
-include_spip('boucle/flickr_photo_tag');
-include_spip('boucle/flickr_photo_urls');
-include_spip('boucle/flickr_photos_comments_getlist');
-include_spip('boucle/flickr_photos_getallcontexts');
-include_spip('boucle/flickr_photos_getcontactsphotos');
-include_spip('boucle/flickr_photos_getcontactspublicphotos');
-include_spip('boucle/flickr_photos_getexif');
-include_spip('boucle/flickr_photos_getinfo');
-include_spip('boucle/flickr_photos_getnotinset');
-include_spip('boucle/flickr_photos_getrecent');
-include_spip('boucle/flickr_photos_getuntagged');
-include_spip('boucle/flickr_photos_getwithgeodata');
-include_spip('boucle/flickr_photos_getwithoutgeodata');
-include_spip('boucle/flickr_photos_recentlyupdated');
-include_spip('boucle/flickr_photos_search');
-include_spip('boucle/flickr_photosets_comments_getlist');
-include_spip('boucle/flickr_photosets_getlist');
-include_spip('boucle/flickr_photosets_getphotos');
-include_spip('boucle/flickr_tags_gethotlist');
-include_spip('boucle/flickr_tags_getlistphoto');
-include_spip('boucle/flickr_tags_getlistuser');
-include_spip('boucle/flickr_tags_getlistuserpopular');
-include_spip('boucle/flickr_tags_getlistuserraw');
-include_spip('boucle/flickr_tags_getrelated');
-include_spip('boucle/flickr_urls_lookupgroup');
-include_spip('boucle/flickr_urls_lookupuser');
+include_spip('balise/flickr_contacts_getlist');
+include_spip('balise/flickr_contacts_getpubliclist');
+include_spip('balise/flickr_favorites_getlist');
+include_spip('balise/flickr_favorites_getpubliclist');
+include_spip('balise/flickr_groups_getinfo');
+include_spip('balise/flickr_groups_pools_getgroups');
+include_spip('balise/flickr_groups_pools_getphotos');
+include_spip('balise/flickr_interestingness_getlist');
+include_spip('balise/flickr_people_getinfo');
+include_spip('balise/flickr_people_getpublicgroups');
+include_spip('balise/flickr_photo_notes');
+include_spip('balise/flickr_photo_tags');
+include_spip('balise/flickr_photo_urls');
+include_spip('balise/flickr_photos_comments_getlist');
+include_spip('balise/flickr_photos_getallcontexts');
+include_spip('balise/flickr_photos_getcontactsphotos');
+include_spip('balise/flickr_photos_getcontactspublicphotos');
+include_spip('balise/flickr_photos_getexif');
+include_spip('balise/flickr_photos_getinfo');
+include_spip('balise/flickr_photos_getnotinset');
+include_spip('balise/flickr_photos_getrecent');
+include_spip('balise/flickr_photos_getuntagged');
+include_spip('balise/flickr_photos_getwithgeodata');
+include_spip('balise/flickr_photos_getwithoutgeodata');
+include_spip('balise/flickr_photos_recentlyupdated');
+include_spip('balise/flickr_photos_search');
+include_spip('balise/flickr_photosets_comments_getlist');
+include_spip('balise/flickr_photosets_getinfo');
+include_spip('balise/flickr_photosets_getlist');
+include_spip('balise/flickr_photosets_getphotos');
+include_spip('balise/flickr_tags_gethotlist');
+include_spip('balise/flickr_tags_getlistphoto');
+include_spip('balise/flickr_tags_getlistuser');
+include_spip('balise/flickr_tags_getlistuserpopular');
+include_spip('balise/flickr_tags_getlistuserraw');
+include_spip('balise/flickr_tags_getrelated');
+include_spip('balise/flickr_urls_lookupgroup');
+include_spip('balise/flickr_urls_lookupuser');
+
 
 function critere_tags_dist($idb, &$boucles, $crit) {
 }
