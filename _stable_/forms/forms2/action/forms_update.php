@@ -152,13 +152,15 @@ function Forms_update($id_form){
 
 function action_forms_update(){
 	global $auteur_session;
-	$id_form = _request('arg');
+	$arg = _request('arg');
 	$hash = _request('hash');
 	$id_auteur = $auteur_session['id_auteur'];
 	$redirect = urldecode(_request('redirect'));
 	if ($redirect==NULL) $redirect="";
 	include_spip("inc/actions");
-	if (verifier_action_auteur("forms_update-$id_form",$hash,$id_auteur)==TRUE) {
+	if (verifier_action_auteur("forms_update-$arg",$hash,$id_auteur)==TRUE) {
+		$arg=explode("-",$arg);
+		$id_form = $arg[0];
 		if ((intval($id_form) && autoriser('modifier','form',$id_form))
 			|| (($id_form=='new') && (autoriser('creer','form'))) )
 			list($id_form,$champ_visible,$nouveau_champ) = Forms_update($id_form);
