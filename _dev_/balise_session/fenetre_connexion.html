@@ -12,8 +12,18 @@ Bonjour
 ]<BOUCLE_infos_persos(AUTEURS){tout}{id_auteur=#SESSION{id_auteur}}>
 	<li>
 		[(#LOGO_AUTEUR|#URL_AUTEUR|image_reduire{48})]
-		<a href="#URL_PAGE{profil,id_auteur=#SESSION{id_auteur}}"><:icone_informations_personnelles:></a>
-		<div class="texte">#BIO</div>
+		<div class="texte">
+			[<:signature:>&nbsp;:<br />
+			<div class="widget auteur-nom-#ID_AUTEUR">(#NOM)</div>]
+			[<:bio:>&nbsp;:<br />
+			<div class="widget auteur-bio-#ID_AUTEUR">(#BIO)</div>]
+			[<:pgp:>&nbsp;:<br />
+			<div class="widget auteur-pgp-#ID_AUTEUR">(#PGP)</div>]
+			[<:nom_site:>&nbsp;:<br />
+			<div class="widget auteur-nom_site-#ID_AUTEUR">(#NOM_SITE)</div>]
+			[<:lien_site:>&nbsp;:<br />
+			<div class="widget auteur-url_site-#ID_AUTEUR">(#URL_SITE)</div>]
+		</div>
 		<br class="nettoyeur" />
 	</li>
 </BOUCLE_infos_persos>[
