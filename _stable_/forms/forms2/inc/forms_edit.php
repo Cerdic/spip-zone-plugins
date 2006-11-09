@@ -286,23 +286,24 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		else
 			$out .= debut_cadre_enfonce("", true);
 		
-		if ($aff_min || $aff_max) {
-			$out .= "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;'>";
-			if ($aff_min) {
-				$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-monter",urlencode($redirect));
-				$link = parametre_url($link,"time",time()); // pour avoir une url differente de l'actuelle
-				$out .= "<a href='$link' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0' alt='"._T("forms:champ_monter")."'></a>";
-			}
-			if ($aff_min && $aff_max) {
-				$out .= " | ";
-			}
-			if ($aff_max) {
-				$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-descendre",urlencode($redirect));
-				$link = parametre_url($link,"time",time()); // pour avoir une url differente de l'actuelle
-				$out .= "<a href='$link' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0' alt='"._T("forms:champ_descendre")."'></a>";
-			}
-			$out .= "</div>\n";
+		$out .= "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;position:relative;display:inline;'>";
+		if ($aff_min) {
+			$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-monter",urlencode($redirect));
+			$link = parametre_url($link,"time",time()); // pour avoir une url differente de l'actuelle
+			$out .= "<a href='$link#champs' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0' alt='"._T("forms:champ_monter")."'></a>";
 		}
+		if ($aff_min && $aff_max) {
+			$out .= " | ";
+		}
+		if ($aff_max) {
+			$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-descendre",urlencode($redirect));
+			$link = parametre_url($link,"time",time()); // pour avoir une url differente de l'actuelle
+			$out .= "<a href='$link#champs' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0' alt='"._T("forms:champ_descendre")."'></a>";
+		}
+		// Supprimer un champ
+		$link = parametre_url($action_link,'supp_champ', $champ);
+		$out .= "<a href='$link#champs' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."supprimer.gif' style='border:0' alt='"._T("forms:supprimer_champ")."'></a>";
+		$out .= "</div>\n";
 
 		// Modifier un champ
 		$formulaire = "";
@@ -315,10 +316,14 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 
 		$formulaire .= "<div id='forms_lang_nom_$champ'></div>";
 		
-		$formulaire .= "<input type='hidden' name='modif_champ' value='$champ' />";
+		$formulaire .= "<form class='ajaxAction' method='POST' action='$action_link_noredir'" .
+			" style='border: 0px; margin: 0px;'>" .
+			form_hidden($action_link_noredir) .
+			"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
+			"<input type='hidden' name='idtarget' value='champs-$id_form-$champ' />" .
+			"<input type='hidden' name='modif_champ' value='$champ' />";
 
 		$formulaire .= "<div class='verdana2'>";
-		$formulaire .= "<p>";
 		if ($nouveau) {
 			$formulaire .= "<script type='text/javascript'><!-- \nvar antifocus_champ = false; // --></script>\n";
 			$js = " onfocus=\"if(!antifocus_champ){this.value='';antifocus_champ=true;}\"";
@@ -326,19 +331,19 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		else $js = "";
 		
 		if ($type=='separateur'){
-			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom_bloc")."</label> :";
+			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom_bloc")."</label>&nbsp;:";
 			$formulaire .= " &nbsp;<input type='text' name='nom_champ' id='nom_$champ' value=\"".
-				entites_html($row['titre'])."\" class='fondo verdana2' size='30'$js><br />\n";
+				entites_html($row['titre'])."\" class='fondo verdana2' size='30'$js /><br />\n";
 		}
 		else if ($type=='textestatique'){
-			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom_texte")."</label> :<br/>";
+			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom_texte")."</label>&nbsp;:<br/>";
 			$formulaire .= " &nbsp;<textarea name='nom_champ' id='nom_$champ'  class='verdana2' style='width:100%;height:5em;' $js>".
 				entites_html($row['titre'])."</textarea><br />\n";
 		}
 		else{
 			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom")."</label> :";
 			$formulaire .= " &nbsp;<input type='text' name='nom_champ' id='nom_$champ' value=\"".
-				entites_html($row['titre'])."\" class='fondo verdana2' size='30'$js><br />\n";
+				entites_html($row['titre'])."\" class='fondo verdana2' size='30'$js /><br />\n";
 			$formulaire .= Forms_bloc_edition_champ($row, $action_link);
 		}
 		$formulaire .= "<label for='aide_$champ'>"._T("forms:aide_contextuelle")."</label> :";
@@ -349,29 +354,29 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$formulaire .= " &nbsp;<textarea name='wrap_champ' id='wrap_$champ'  class='verdana2' style='width:90%;height:2em;' >".
 			entites_html($row['html_wrap'])."</textarea><br />\n";
 
-		$formulaire .= "<div align='right'>";
-		$formulaire .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo verdana2'></div>\n";
+		$formulaire .= "<div style='text-align:$spip_lang_right'>";
+		$formulaire .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo verdana2'>\n";
 		$formulaire .= "</div>\n";
-		
+
 		// Supprimer un champ
-		$link = parametre_url($action_link,'supp_champ', $champ);
-		$formulaire .= "<div style='float: left;'>";
-		$formulaire .= icone_horizontale('',"<a href='$link#champs' class='ajaxAction' rel='$redirect'>"._T("forms:supprimer_champ")."</a>","../"._DIR_PLUGIN_FORMS. "/img_pack/form-24.png", "supprimer.gif",false);
-		$formulaire .= "</div>\n";
+		/*$link = parametre_url($action_link,'supp_champ', $champ);
+		$formulaire .= icone_horizontale('',"<a href='$link#champs' class='ajaxAction' rel='$redirect'>"._T("forms:supprimer_champ")."</a>","../"._DIR_PLUGIN_FORMS. "/img_pack/form-24.png", "supprimer.gif",false);*/
 
 		$args_redir=parametre_url($redirect,'exec','','&');
 		$args_redir=explode("#",$args_redir);
 		$args_redir=explode("?",$args_redir[0]);
 		$args_redir="&".$args_redir[1];
 
+		$formulaire .= "</div>";
+		$formulaire .= "</form>";
 		$formulaire .= fin_block();
 		//$formulaire = ajax_action_auteur('forms_edit', "$id_form-$champ","forms_edit","$args_redir#forms_edit-$id_form-$champ", $formulaire, "$args_redir&bloc=champs&ajax_champ=$champ#champ_visible",'');
-		$formulaire = "<form class='ajaxAction' method='POST' action='$action_link_noredir'" .
+		/*$formulaire = "<form class='ajaxAction' method='POST' action='$action_link_noredir'" .
 			" style='border: 0px; margin: 0px;'>" .
 			form_hidden($action_link_noredir) .
 			"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
 			$formulaire .
-			"</form>";
+			"</form>";*/
 		
 		if ($ajax && ($champ == $ajax))
 			return $formulaire;
