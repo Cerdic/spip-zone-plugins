@@ -268,6 +268,8 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$out .= "<div id='forms_lang_nom_$champ'></div>";
 		$out .= "<form class='forms_champ' method='POST' action='$action_link#champ_visible' style='border: 0px; margin: 0px;'>";
 		$out .= form_hidden($action_link);
+		//$out .= ajax_action_auteur('forms_update', "$id_form","forms_edit","id_form=$id_form&champ_visible=$champ&bloc=", array(_T('lien_ajouter_auteur')));		
+
 		$out .= "<input type='hidden' name='modif_champ' value='$champ' />";
 
 		$out .= "<div class='verdana2'>";
