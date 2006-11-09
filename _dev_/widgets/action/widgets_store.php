@@ -120,6 +120,10 @@ function action_widgets_store_dist() {
 				    include_spip('action/editer_article');
 				    $fun = 'revisions_articles';
 				    break;
+				case 'auteur':
+				    include_spip('action/editer_auteurs');
+				    $fun = 'revisions_auteurs';
+				    break;
 				case 'rubrique':
 				    include_spip('action/editer_rubrique');
 				    $fun = 'revisions_rubriques';
