@@ -1,8 +1,8 @@
 <plugin>
  	<nom>Balise Session</nom>
 	<auteur>James, licence GNU/GPL</auteur>
-	<version>0.3</version>
-	<etat>experimental</etat>
+	<version>0.4</version>
+	<etat>test</etat>
 	<description>
 	Introduction d'une balise #SESSION
 	[Page de test->../spip.php?page=session]

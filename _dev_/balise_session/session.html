@@ -43,7 +43,7 @@
 						</code></p>
 						<h3 class="titre">Afficher des informations</h3>
 						<div class="texte">
-							<INCLURE{fond=affiche_infos}{session}>
+							<INCLURE(session.php){fond=affiche_infos}>
 						</div>
 						<br class="nettoyeur" />
 					</li>
@@ -56,7 +56,7 @@
 						</code></p>
 						<h3 class="titre">Conditionner un affichage</h3>
 						<div class="texte">
-							<INCLURE{fond=affiche_condition}{session}>
+							<INCLURE(session.php){fond=affiche_condition}>
 						</div>
 						<br class="nettoyeur" />
 					</li>
@@ -69,7 +69,7 @@
 						</code></p>
 						<h3 class="titre">Conditionner un affichage selon le satut</h3>
 						<div class="texte">
-							<INCLURE{fond=affiche_condition_status}{session}>
+							<INCLURE(session.php){fond=affiche_condition_status}>
 						</div>
 						<br class="nettoyeur" />
 					</li>
@@ -82,10 +82,10 @@
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
 			<div class="divers">
-				<INCLURE{fond=fenetre_connexion}{session}>
+				<INCLURE(session.php){fond=fenetre_connexion}>
 			</div>
 
-			<INCLURE{fond=info_session}{session}>
+			<INCLURE(session.php){fond=info_session}>
 		</div>
 
 	</div><!-- fin conteneur -->
