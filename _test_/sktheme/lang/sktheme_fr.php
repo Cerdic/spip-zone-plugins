@@ -3,7 +3,7 @@
   //
   // Sktheme : manage themes under SPIP (squelettes + habillages)
   //
-  // Copyright (c) 2006 - Jerome RICHARD
+  // Copyright (c) 2006 - Skedus
   //
   // This program is free software; you can redistribute it and/or modify
   // it under the terms of the GNU General Public License as published by
@@ -93,8 +93,6 @@ $GLOBALS[$GLOBALS['idx_lang']] =
 	  la distribution de squelette, stable, test, experimental ...<br />
 	  Pour plus de d&eacute;tail sur une distribution cliquez sur la
 	  fl&egrave;che noire.
-	  Il est possible de trouver un r&eacute;pertoire de th&egrave;mes exemple
-	  sur http:skedus.free.fr
 	  ",
 	  "public_theme_doc_habillage" => "<b>Choix de l'habillage :</b><br />
 	  Les habillages permettent de modifier les couleurs et l'aspect

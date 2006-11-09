@@ -3,7 +3,7 @@
   //
   // Sktheme : manage themes under SPIP (squelettes + habillages)
   //
-  // Copyright (c) 2006 - Jerome RICHARD
+  // Copyright (c) 2006 - Skedus
   //
   // This program is free software; you can redistribute it and/or modify
   // it under the terms of the GNU General Public License as published by
@@ -92,7 +92,6 @@ $GLOBALS[$GLOBALS['idx_lang']] =
 	  The small square represent the state of the distribution, stable,
 	  test, experimental, ...<br>
 	  Clic on the small black triangle to get more details about the distribution.
-	  You can find a theme directory exemple on http:skedus.free.fr
 	  ",
 	  "public_theme_doc_habillage" => "<b>Habillage choice:</b><br>
 	  An Habillage is modifing colors and graphical aspect of your squelettes.
