@@ -168,11 +168,11 @@ function action_forms_edit(){
 			|| (($id_form=='new') && (autoriser('creer','form'))) ) {
 			list($id_form,$champ_visible,$nouveau_champ) = Forms_update($id_form);
 			if ($redirect) $redirect = parametre_url($redirect,"id_form",$id_form);
-			if ($redirect && $champ_visible) $redirect = parametre_url($redirect,"champ_visible",$champ_visible,'&');
-			if ($redirect && $nouveau_champ) $redirect = parametre_url($redirect,"nouveau_champ",$nouveau_champ,'&');
+			if ($redirect && $champ_visible) $redirect = parametre_url($redirect,"champ_visible",$champ_visible);
+			if ($redirect && $nouveau_champ) $redirect = parametre_url($redirect,"nouveau_champ",$nouveau_champ);
 		}
 	}
-	redirige_par_entete($redirect);
+	redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));
 }
 
 ?>
