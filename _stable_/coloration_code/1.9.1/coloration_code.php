@@ -67,11 +67,11 @@ function coloration_code_echappe($texte) {
 		}
 	  }
 	 
-	  $rempl = coloration_code_color(trim($code),$regs[3], $regs[1]);
+	  $rempl = '<div class="coloration_code"><div class="spip_'.$regs[1].' '.$regs[3].'">'.coloration_code_color(trim($code),$regs[3], $regs[1]).'</div>';
 	 if(strpos($code, "\n")!==false) {
 	 	$rempl .= "<div class='".$regs[1]."_download' style='text-align: $spip_lang_right;'><a href='$fichier' style='font-family: verdana, arial, sans; font-weight: bold; font-style: normal;'>".
-	  		propre("<multi>Download[fr]T&eacute;l&eacute;charger</multi>").
-	  		"</a></div>";
+		  _T('colorationccode:telecharger').
+	  		"</a></div>"."</div>";
 	  }
 	  $texte = str_replace($regs[0],echappe_html("<html>$rempl</html>"),$texte);
 	}

@@ -61,10 +61,9 @@
 ]]>
 	  </multi>
 	</description>
-	<lien></lien> <!-- URI de documentation -->
-  <fonctions> <!-- charge a chaque recalul de page , donc filtre -->
+    <fonctions> <!-- charge a chaque recalul de page , donc filtre -->
         coloration_code.php
-  </fonctions>
+    </fonctions>
 	<prefix> 
 	  coloration_code
 	</prefix>
