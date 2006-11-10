@@ -72,7 +72,7 @@ jQuery.fn.ajaxAction = function() {
 			hoverclass : 	'sortablehover',
 			helperclass : 'sorthelper',
 			handle : '.sortableChoixHandle',
-			opacity: 		0.8,
+			/*opacity: 		0.8,*/
 			/*fx:				200,*/
 			revert:			true,
 			tolerance:		'intersect',

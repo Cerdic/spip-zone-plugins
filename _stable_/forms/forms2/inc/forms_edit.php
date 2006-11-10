@@ -67,7 +67,7 @@ function Forms_bloc_routage_mail($id_form,$email){
 		$defaut = true;
 		$s = "";
 		$options = "";
-		$res2 = spip_query("SELECT * FROM spip_forms_champs WHERE type='select' AND id_form="._q($id_form));
+		$res2 = spip_query("SELECT * FROM spip_forms_champs WHERE type='select' AND id_form="._q($id_form)." ORDER BY rang");
 		while ($row2 = spip_fetch_array($res2)) {
 			$display = 'none';
 			$code = $row2['champ'];
@@ -83,7 +83,7 @@ function Forms_bloc_routage_mail($id_form,$email){
 			$s .= "<strong><label for='email_route_$code'>"._T('email_2')."</label></strong>";
 			$s .= "</th></tr>\n";
 
-			$res3 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($row2['champ']));
+			$res3 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($row2['champ'])." ORDER BY rang");
 			while($row3 = spip_fetch_array($res3)){
 				$s .= "<tr><td>".$row3['titre']."</td><td>";
 				$s .= "<input type='text' name='email[".$row3['choix']."]' value=\"";
@@ -255,7 +255,6 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$action_link_noredir = parametre_url($action_link,'redirect','');
 		if ($nouveau) $out .= "<a name='nouveau_champ'></a>";
 		else if ($visible) $out .= "<a name='champ_visible'></a>";
-		$out .= "<p>\n";
 		if (!in_array($type,array('separateur','textestatique')))
 			$out .= debut_cadre_relief("", true);
 		else
