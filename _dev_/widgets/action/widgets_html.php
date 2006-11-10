@@ -106,15 +106,22 @@ FIN_FORM;
 // Definition des widgets
 class Widget {
     var $name;
+    var $type;
+    var $modele;
+    var $id;
     var $texts = array();
     var $key;
     var $md5;
     var $clean;
 
-    function Widget($name, $texts = array()) {
+    function Widget($name, $texts = array(), $options = array()) {
         $this->name = $name;
+    	list($this->type, $this->modele, $this->id) = explode('-', $this->name);
         $this->texts = $texts;
         $this->key = strtr(uniqid('wid', true), '.', '_');
+        foreach ($options as $opt=>$val) {
+        	$this->$opt = $val;
+        }
     }
 
     function md5() {
@@ -133,6 +140,34 @@ class Widget {
         .'" value="'.join(',',array_keys($this->texts)).'" />'
         ."\n"
         ;
+    }
+
+/*
+ Fabriquer les balises du ou des champs
+	$spec est soit un scalaire 'ligne' ou 'texte' précisant le type de balise
+	soit un array($champ=>array('type'=>'...', 'attrs'=>array(attributs specifique du champs)))
+	$attrs est un tableau (attr=>val) d'attributs communs ou pour le champs unique
+*/
+    function modele($contexte = array()) {
+	    if (!find_in_path(
+	     ($fond = 'controleurs/' . $this->type . '_' . $this->modele) . '.html')
+	    && !find_in_path(
+	     ($fond = 'controleurs/' . $this->modele) .'.html')) {
+			return '';
+	    }
+        include_spip('inc/filtres');
+        $contexte['id_' . $this->type] = $this->id;
+        $contexte['lang'] = $GLOBALS['spip_lang'];
+        $contexte['key'] = $this->key;
+        $contexte['largeur'] = $this->largeur;
+        $contexte['hauteur'] = $this->hauteur;
+        foreach ($this->texts as $champ => $val) {
+	        $contexte['att_' . $champ] =
+                ' class="widget-active" name="content_' .
+                	$this->key . '_' . $champ . '" ';
+        }
+        include_spip('public/assembler');
+        return recuperer_fond($fond, $contexte);
     }
 
 /*
