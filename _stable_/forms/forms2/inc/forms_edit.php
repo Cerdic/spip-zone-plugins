@@ -174,6 +174,7 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 			$focus='';
 			if ($ajout_choix == $choix) $focus='antifocus';
 			$out .= "<div class='sortableChoixItem' id='$champ-$choix'>";
+			$out .= "<img src='"._DIR_PLUGIN_FORMS."/img_pack/b_choix_handle.png' class ='sortableChoixHandle' />";
 			$out .= "<input type='text' id='nom_$choix' name='$choix' value=\"".entites_html($row2['titre'])."\" ".
 				"class='fondl verdana2 $focus' size='20' />";
 
