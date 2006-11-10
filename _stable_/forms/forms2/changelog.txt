@@ -12,7 +12,7 @@
 	'html_wrap' => wrapper du champ lors de son affichage dans l'espace public (utilisable manuellement ou surtout avec les 'formettes'
 
 - le champ statut de FORMS_DONNEES est renomme en 'confirmation' (attente/valide), il sert a confirmer un sondage pour eviter le spam par exemple
-- un champ statut de FORMS_DONNEES est ajouté, qui prend les valeurs propose/publie, pour gerer la moderation des reponses
+- un champ statut de FORMS_DONNEES est ajoute, qui prend les valeurs propose/publie, pour gerer la moderation des reponses
 
 - la boucle FORMS_DONNEES ne retourne par defaut que les donnees confirmee (confirmation=valide) et publiee (statut=publie) sauf si le critere {tout} est utilise
 - la boucle FORMS_CHAMPS_DONNEES ne retourne par defaut que les donnees des champs public, sauf si le critere {tout} est utilise
@@ -26,3 +26,7 @@
 - import xml d'un formulaire en tant que nouveau formulaire
 - ajout de la chaine de langue importer_form
 - modif de la chaine de langue boite_info
+
+- ajaxisation de toute la saisie des formulaires
+- ajout des chaines de langue format_liste_ou_radio, format_liste, format_radio
+- presentation des choix liste/radio configurable

@@ -61,43 +61,22 @@ function Forms_insere_nouveau_choix($id_form,$champ,$titre){
 	return $choix;
 }
 
-
-function debut_block_route($id,$visible){
-	$display = $visible?'block':'none';
-	return "<script type='text/javascript'><!--
-					document.write('<div id=\"$id\" style=\"display: $display; margin-top: 1;\">');
-					//--></script>
-					<noscript>
-					<div id='bock_email_route_$code' style='display: block;'>
-					</noscript>";	
-}
-function fin_block_route(){
-	return 	"<script type='text/javascript'><!--
-					document.write('<\/div>');
-					//--></script>
-					<noscript>
-						</div>
-					</noscript>";
-}
 function Forms_bloc_routage_mail($id_form,$email){
 		$out = "";
 		// Routage facultatif des emails en fonction d'un champ select
-		$email_route_known = false;
-		$jshide = "";
+		$defaut = true;
 		$s = "";
 		$options = "";
 		$res2 = spip_query("SELECT * FROM spip_forms_champs WHERE type='select' AND id_form="._q($id_form));
 		while ($row2 = spip_fetch_array($res2)) {
-			$visible = false;
+			$display = 'none';
 			$code = $row2['champ'];
 			$options .= "<option value='$code'";
 			if ($email['route'] == $code){
-				$options .= " selected='selected'";
-				$email_route_known = $visible = true;
+				$options .= " selected='selected'";$display='block';$defaut=false;
 			}
 			$options .= ">" . $row2['titre'] . "</option>\n";
-			$s .= debut_block_route("bock_email_route_$code",$visible);
-			$jshide .=  "cacher_email_route('bock_email_route_$code');\n";
+			$s .= "<div id='block_email_route_$code' class='block_email_route' style='display:$display'>";
 			
 			$s .= "<table id ='email_route_$code'>\n";
 			$s .= "<tr><th>".$row2['titre']."</th><th>";
@@ -110,54 +89,35 @@ function Forms_bloc_routage_mail($id_form,$email){
 				$s .= "<tr><td>".$row3['titre']."</td><td>";
 				$s .= "<input type='text' name='email[".$row3['choix']."]' value=\"";
 				$s .= isset($email[$row3['choix']])?entites_html($email[$row3['choix']]):"";
-				$s .= "\" class='fondl verdana2' size='20'$js>";
+				$s .= "\" class='fondl verdana2' size='20' />";
 				$s .= "</td></tr>";
 			}
 			$s .="</table>";
-			$s .= fin_block_route("bock_email_route_$code",$visible);
+			$s .= "</div>";
 		}
 		if (strlen($s)){
-			$jshide = "<script type='text/javascript'><!--
-			function montrer_email_route(obj) {
-				layer = findObj(obj);
-				if (layer)
-					layer.style.display = 'block';
-			}
-			function cacher_email_route(obj) {
-				layer = findObj(obj);
-				if (layer)
-					layer.style.display = 'none';
-			}
-			function update_email_route_visibility(obj){
-				$jshide
-				cacher_email_route('bock_email_route_');
-				montrer_email_route(obj);
-			}
-			//--></script>\n";
-			$out .= $jshide;
-
 			$out .= "<strong><label for='email_route_form'>"._T('forms:choisir_email')."</label></strong> ";
 			$out .= "<br />";
 			$out .= "<select name='email[route]' id='email_route_form' class='forml'";
-			$out .= "onchange='update_email_route_visibility(\"bock_email_route_\"+options[selectedIndex].value)' ";
+			$out .= "onchange=\"$('.block_email_route').hide();$('#block_email_route_'+options[selectedIndex].value).show();\" ";
 			$out .= ">\n";
 			$out .= "<option value=''>"._T('forms:email_independant')."</option>\n";
 			$out .= $options;
 		 	$out .= "</select><br />\n";
 		}
-	 	
-		$out .= debut_block_route("bock_email_route_",$email_route_known==false);
+	 	$display = $defaut?'block':'none';
+		$out .= "<div id='block_email_route_' class='block_email_route' style='display:$display'>";
 		$out .= "<strong><label for='email_form'>"._T('email_2')."</label></strong> ";
 		$out .= "<br />";
 		$out .= "<input type='text' name=\"email[defaut]\" id='email_form' class='forml' ".
-			"value=\"".entites_html($email['defaut'])."\" size='40'$js_titre>\n";
-		$out .= fin_block_route();
+			"value=\"".entites_html($email['defaut'])."\" size='40' />\n";
+		$out .= "</div>";
 	 	$out .= $s;
 		$out .= "<br/>";
 		return $out;
 }
 
-function Forms_bloc_edition_champ($row, $action_link, $redirect) {
+function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 	global $couleur_claire;
 
 	$id_form = $row['id_form'];
@@ -195,6 +155,14 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect) {
 		$out .= "<label for='verif_$champ'>"._T("forms:verif_web")."</label>";
 		$out .= "<br />\n";
 	}
+	if ($type == 'select') {
+		$out .= "<label for='format_liste_$champ'>"._T("forms:format_liste_ou_radio")."</label> :";
+		$out .= " &nbsp;<select name='format_liste' id='format_liste_$champ' class='fondo verdana2'>\n";
+		$out .= "<option value='liste'".($row['extra_info']=='liste'?"selected='selected'":"").">"._T("forms:format_liste")."</option>\n";
+		$out .= "<option value='radio'".($row['extra_info']=='radio'?"selected='selected'":"").">"._T("forms:format_radio")."</option>\n";
+		$out .= "</select>";
+		$out .= "<br />\n";
+	}
 	if ($type == 'select' || $type == 'multiple') {
 		global $ajout_choix;
 
@@ -210,10 +178,9 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect) {
 			else $js = "";
 			$out .= "<input type='text' id='nom_$choix' name='$choix' value=\"".entites_html($row2['titre'])."\" ".
 				"class='fondl verdana2' size='20'$js>";
-			// 
-			//$out .= " <input style='display: none;' type='submit' name='modif_choix' value=\""._T('bouton_modifier')."\" class='fondo verdana2'>";
+
 			$supp_link = parametre_url($action_link,'supp_choix', $choix);
-			$out .= " &nbsp; <span class='verdana1'>[<a href='".$supp_link."#champ_visible' class='ajaxAction' rel ='$redirect' >".
+			$out .= " &nbsp; <span class='verdana1'>[<a href='$supp_link#$idbloc' class='ajaxAction' rel ='$redirect' >".
 				_T("forms:supprimer_choix")."</a>]</span>";
 			$out .= "<br />\n";
 		}
@@ -224,13 +191,10 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect) {
 		
 		$switch_link = parametre_url($action_link,'switch_select_multi', '1');
 		$switch_link = parametre_url($switch_link,'modif_champ', $champ);
-		$out .= "<br /><span class='verdana1'>[<a href='".$switch_link."#champ_visible' class='ajaxAction' rel ='$redirect' >".
+		$out .= "<br /><span class='verdana1'>[<a href='$switch_link#champs' class='ajaxAction' rel ='$redirect' >".
 			(($type=='select')?_T("forms:changer_choix_multiple"):_T("forms:changer_choix_unique")) . 
 			"</a>]</span>";
-		/*if ($type=='select')
-			$out .= "<br /><input type='submit' name='switch_select_multi' value=\""._T("forms:changer_choix_multiple")."\" class='fondl verdana2'>";
-		if ($type=='multiple')
-			$out .= "<br /><input type='submit' name='switch_select_multi' value=\""._T("forms:changer_choix_unique")."\" class='fondl verdana2'>";*/
+
 		$out .= "<br />\n";
 	}
 	if ($type == 'mot') {
@@ -284,6 +248,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$aff_min = $rang > $index_min;
 		$aff_max = $rang < $index_max;
 		$type = $row['type'];
+		$id_bloc = "champs-$id_form-$champ";
 
 		$redirect = ancre_url(parametre_url($redirect,'champ_visible',$champ),'champ_visible');
 		$action_link = generer_action_auteur("forms_edit","$id_form",urlencode($redirect));
@@ -330,7 +295,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 			" style='border: 0px; margin: 0px;'>" .
 			form_hidden($action_link_noredir) .
 			"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
-			"<input type='hidden' name='idtarget' value='champs-$id_form-$champ' />" .
+			"<input type='hidden' name='idtarget' value='$id_bloc' />" .
 			"<input type='hidden' name='modif_champ' value='$champ' />";
 
 		$formulaire .= "<div class='verdana2'>";
@@ -354,7 +319,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom")."</label> :";
 			$formulaire .= " &nbsp;<input type='text' name='nom_champ' id='nom_$champ' value=\"".
 				entites_html($row['titre'])."\" class='fondo verdana2' size='30'$js /><br />\n";
-			$formulaire .= Forms_bloc_edition_champ($row, $action_link, $redirect);
+			$formulaire .= Forms_bloc_edition_champ($row, $action_link, $redirect, $id_bloc);
 		}
 		$formulaire .= "<label for='aide_$champ'>"._T("forms:aide_contextuelle")."</label> :";
 		$formulaire .= " &nbsp;<textarea name='aide_champ' id='aide_$champ'  class='verdana2' style='width:90%;height:3em;' >".
@@ -368,10 +333,6 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$formulaire .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo verdana2'>\n";
 		$formulaire .= "</div>\n";
 
-		// Supprimer un champ
-		/*$link = parametre_url($action_link,'supp_champ', $champ);
-		$formulaire .= icone_horizontale('',"<a href='$link#champs' class='ajaxAction' rel='$redirect'>"._T("forms:supprimer_champ")."</a>","../"._DIR_PLUGIN_FORMS. "/img_pack/form-24.png", "supprimer.gif",false);*/
-
 		$args_redir=parametre_url($redirect,'exec','','&');
 		$args_redir=explode("#",$args_redir);
 		$args_redir=explode("?",$args_redir[0]);
@@ -380,23 +341,17 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$formulaire .= "</div>";
 		$formulaire .= "</form>";
 		$formulaire .= fin_block();
-		//$formulaire = ajax_action_auteur('forms_edit', "$id_form-$champ","forms_edit","$args_redir#forms_edit-$id_form-$champ", $formulaire, "$args_redir&bloc=champs&ajax_champ=$champ#champ_visible",'');
-		/*$formulaire = "<form class='ajaxAction' method='POST' action='$action_link_noredir'" .
-			" style='border: 0px; margin: 0px;'>" .
-			form_hidden($action_link_noredir) .
-			"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
-			$formulaire .
-			"</form>";*/
-		
+
 		if ($ajax && ($champ == $ajax))
 			return $formulaire;
-		//$out .= "<div id='forms_edit-$id_form-$champ' class='forms_champs'>$formulaire</div>";
-		$out .= "<div id='champs-$id_form-$champ' class='forms_champs'>$formulaire</div>";
+		$out .= "<div id='$id_bloc' class='forms_champs'>$formulaire</div>";
 		if (!in_array($type,array('separateur','textestatique')))
 			$out .= fin_cadre_relief(true);
 		else
 			$out .= fin_cadre_enfonce(true);
 	}
+	if ($ajax)
+		return "Champ $ajax introuvable"; // erreur si l'on est encore ici
 
 	// Ajouter un champ
 	$redirect = ancre_url(parametre_url($redirect,'champ_visible',''),'');
@@ -432,14 +387,20 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 //
 // Edition des donnees du formulaire
 //
-function boite_proprietes($id_form, $row, $js_titre, $action_link) {
+function boite_proprietes($id_form, $row, $js_titre, $action_link, $redirect) {
 	$out = "";
 	$out .= "<p>";
 	$out .= debut_cadre_formulaire('',true);
 
+	$action_link_noredir = parametre_url($action_link,'redirect','');
 	$out .= "<div class='verdana2'>";
-	$out .= "<form method='POST' action='$action_link' style='border: 0px; margin: 0px;'>";
-	$out .= form_hidden($action_link);
+	//$out .= "<form method='POST' action='$action_link' style='border: 0px; margin: 0px;'>";
+	//$out .= form_hidden($action_link);
+	$out .= "<form class='ajaxAction' method='POST' action='$action_link_noredir'" .
+		" style='border: 0px; margin: 0px;'>" .
+		form_hidden($action_link_noredir) .
+		"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
+		"<input type='hidden' name='idtarget' value='proprietes' />" .
 
 	$titre = entites_html($row['titre']);
 	$descriptif = entites_html($row['descriptif']);
@@ -461,7 +422,9 @@ function boite_proprietes($id_form, $row, $js_titre, $action_link) {
 
 	$out .= "<strong><label for='confirm_form'>"._T('forms:confirmer_reponse')."</label></strong> ";
 	$out .= "<br />";
-	$out .= "<select name='champconfirm' id='confirm_form' class='forml'>\n";
+	$out .= "<select name='champconfirm' id='confirm_form' class='forml'";
+	$out .= "onchange=\"if (options[selectedIndex].value=='') $('#texte_confirm').hide(); else $('#texte_confirm').show();\" ";
+	$out .= ">\n";
 	$out .= "<option value=''>"._T('forms:pas_mail_confirmation')."</option>\n";
 	$champconfirm_known = false;
 	$res2 = spip_query("SELECT * FROM spip_forms_champs WHERE type='email' AND id_form="._q($id_form));
@@ -474,18 +437,16 @@ function boite_proprietes($id_form, $row, $js_titre, $action_link) {
 		$out .= ">" . $row2['titre'] . "</option>\n";
 	}
 	$out .= "</select><br />\n";
- 	if ($champconfirm_known == true){
-		$out .= "<strong><label for='texte_form'>"._T('info_texte')."</label></strong>";
-		$out .= "<br />";
-		$out .= "<textarea name='texte' id='texte_form' class='formo' rows='4' cols='40' wrap='soft'>";
-		$out .= $texte;
-		$out .= "</textarea><br />\n";
-	}
-	else {
-		$out .= "<input type='hidden' name='texte' value=\"$texte\" />\n";
- 	}
- 	
- 	if (in_array($row['type_form'],array('','sondage'))){
+ 	$display = $champconfirm_known?"block":"none";
+ 	$out .= "<div id='texte_confirm' style='display:$display'>";
+	$out .= "<strong><label for='texte_form'>"._T('info_texte')."</label></strong>";
+	$out .= "<br />";
+	$out .= "<textarea name='texte' id='texte_form' class='formo' rows='4' cols='40' wrap='soft'>";
+	$out .= $texte;
+	$out .= "</textarea><br />\n";
+	$out .= "</div>";
+
+	if (in_array($row['type_form'],array('','sondage'))){
 		$out .= debut_cadre_enfonce("statistiques-24.gif",true);
 		$out .= "<strong>"._T("forms:type_form")."</strong> : ";
 		$out .= _T("forms:info_sondage");
@@ -514,7 +475,7 @@ function boite_proprietes($id_form, $row, $js_titre, $action_link) {
 	$out .= bouton_radio("moderation", "priori", _T('bouton_radio_moderation_priori'), $moderation == "priori", "");
 	$out .= "<br />";
 	$out .= fin_cadre_enfonce(true);
-	
+		
 	$out .= "<div align='right'>";
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
 

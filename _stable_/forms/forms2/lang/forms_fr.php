@@ -65,7 +65,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'formulaire_aller' => "Aller au formulaire",
 'formulaires_sondages' => "Formulaires et sondages",
 'formulaires_copie' => "Copie de @nom@", 
-
+'format_liste_ou_radio' => 'Format de la liste',
+'format_liste' => 'd&eacute;roulante',
+'format_radio' => 'boutons radio',
 'html_wrapper'=> 'Encapsuler le champ dans le code html',
 
 'icone_creer_formulaire' => "Cr&eacute;er un nouveau formulaire",

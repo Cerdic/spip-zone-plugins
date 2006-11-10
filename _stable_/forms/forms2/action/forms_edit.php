@@ -30,6 +30,9 @@ function Forms_update_edition_champ($id_form,$champ) {
 		if ($type == 'fichier') {
 			$extra_info = intval(_request('taille_champ'));
 		}
+		if ($type=='select'){
+			$extra_info = _request('format_liste');
+		}
 		spip_query("UPDATE spip_forms_champs SET extra_info="._q($extra_info)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
 		if ($type == 'select' || $type == 'multiple') {
 			if (_request('ajout_choix')) {

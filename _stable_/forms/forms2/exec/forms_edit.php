@@ -179,7 +179,7 @@ function exec_forms_edit(){
 		ajax_retour(contenu_boite_resume($id_form, $row, $apercu));
 	}
 	if ($ajax_charset && $bloc=='proprietes') {
-		ajax_retour(boite_proprietes($id_form, $row, $js_titre, $action_link));
+		ajax_retour(boite_proprietes($id_form, $row, $js_titre, $action_link, $redirect));
 	}
 	$bloc = explode("-",$bloc);
 	if ($ajax_charset && $bloc[0]=='champs') {
@@ -253,12 +253,13 @@ function exec_forms_edit(){
 
 	if ($supp_form && $supp_rejet==NULL)
 		echo Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour);
-	
+	echo "<div id='barre_onglets'>";
 	echo debut_onglet();
 	echo onglet(_L("Aper&ccedil;u"),ancre_url(self(),"resume"),'','resume');
 	echo onglet(_L("Propri&eacute;t&eacute;s"),ancre_url(self(),"proprietes"),'','proprietes');
 	echo onglet(_L("Champs"),ancre_url(self(),"champs"),'','champs');
 	echo fin_onglet();
+	echo "</div>";
 
 	$out = "";
 	if ($id_form){
@@ -269,7 +270,7 @@ function exec_forms_edit(){
 
 	// centre proprietes ---------------------------------------------------------------
 	$out .= "<div id='proprietes' name='proprietes'>";
-	$out .= boite_proprietes($id_form, $row, $js_titre, $action_link);
+	$out .= boite_proprietes($id_form, $row, $js_titre, $action_link, $redirect);
 	$out .= "</div>";
 
 	// edition des champs ---------------------------------------------------------------
@@ -279,74 +280,7 @@ function exec_forms_edit(){
 
 	echo $out;
 		
-	echo <<<script
-<script type='text/javascript'><!--
-jQuery.fn.desactive_onglet = function() {
-	var url = $(this).children('a').href();
-	var ancre = url.split('#'); ancre = ancre[1];
-	$('#'+ancre).hide();
-	$(this).removeClass('onglet_off');
-}
-
-jQuery.fn.active_onglet = function(hash) {
-	$('.onglet').each(function(){ $(this).desactive_onglet()});
-	var url = $(this).children('a').href();
-	var ancre = url.split('#'); ancre = ancre[1];
-	$(this).addClass('onglet_off');
-	$('#'+ancre).show();
-	if (hash)
-		window.location.hash=hash;
-	else
-		window.location.hash=ancre;
-}
-function refresh_bloc(r,bloc){
-	$(bloc).html(r).ajaxAction();
-}
-function refresh_apercu(r,bloc){
-	$('#apercu_gauche').html(r);
-	$('#apercu').html(r);
-}
-
-jQuery.fn.ajaxAction = function() {
-	var id=$(this).id();
-	$('#'+id+' a.ajaxAction').click(function(){
-		var action = $(this).href();
-		var url = (($(this).rel()).split('#'))[0];
-		url_id = url + "&bloc="+id;
-		url_ap = url + "&bloc=apercu";
-		$.get(action,function(data){
-			AjaxSqueeze(url_id, id, refresh_bloc);
-			AjaxSqueeze(url_ap, 'apercu_gauche',refresh_apercu);
-		});
-		return false;
-	});
-	$('#'+id+' form.ajaxAction').each(function(){
-		var idtarget = $(this).children('input[@name=idtarget]').val();
-		if (!idtarget) idtarget = $(this).parent().id();
-		var redir = $(this).children('input[@name=redirect]');
-		var url = (($(redir).val()).split('#'))[0];
-		$(redir).val(url + "&var_ajaxcharset=utf-8&bloc="+idtarget);
-		$(this).ajaxForm('#'+idtarget, 
-			function(){ $('#'+idtarget).ajaxAction();$.get(url+"&var_ajaxcharset=utf-8&bloc=apercu",function(data){refresh_apercu(data,'');});},
-			function(){ $('#'+idtarget+",#apercu_gauche").prepend("<div>"+ajax_image_searching+"</div>");}
-			);
-	});
-}
-
-$(document).ready(function(){
-	var hash = window.location.hash;
-	if ((hash=='#champs')||(hash=='#champ_visible')||(hash=='#nouveau_champ'))
-		$('.onglet').eq(2).active_onglet(hash);
-	else if (window.location.hash=='proprietes')
-		$('.onglet').eq(2).active_onglet();
-	else
-		$('.onglet').eq(0).active_onglet();
-
-	$('.onglet').click(function(){ $(this).active_onglet(); });
-	$('#champs').ajaxAction();
-});
-// --></script>
-script;
+	echo "<script src='"._DIR_PLUGIN_FORMS."javascript/forms_edit.js' type='text/javascript'></script>";
 
 	echo fin_page();
 }
