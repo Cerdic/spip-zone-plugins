@@ -34,7 +34,7 @@ function Forms_update_edition_champ($id_form,$champ) {
 		if ($type == 'select' || $type == 'multiple') {
 			if (_request('ajout_choix')) {
 				$titre = _T("forms:nouveau_choix");
-				include_spip('inc/charset');
+				include_spip('inc/charsets');
 				$titre = unicode2charset(html2unicode($titre));
 				$choix = Forms_insere_nouveau_choix($id_form,$champ,$titre);
 			}
@@ -118,7 +118,6 @@ function Forms_update($id_form){
 		// Modif d'un champ
 		if ($champ = $modif_champ) {
 			if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($champ)))) {
-				// switch select to multi ou inversement
 				if (_request('switch_select_multi')){
 					if ($row['type']=='select') $newtype = 'multiple';
 					if ($row['type']=='multiple') $newtype = 'select';
@@ -126,19 +125,22 @@ function Forms_update($id_form){
 					spip_query("UPDATE spip_forms_champs SET type="._q($newtype).", champ="._q($newchamp)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
 					spip_query("UPDATE spip_forms_champs_choix SET champ="._q($newchamp)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
 					$champ = $newchamp;
+					$champ_visible = $champ;
 				}
-				spip_query("UPDATE spip_forms_champs SET titre="._q($nom_champ).", obligatoire="._q($champ_obligatoire)
-					.", specifiant="._q($champ_specifiant).", public="._q($champ_public)
-					.", aide="._q($aide_champ).", html_wrap="._q($wrap_champ)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
-				Forms_update_edition_champ($id_form, $champ);
-				$champ_visible = $champ;
+				else {
+					spip_query("UPDATE spip_forms_champs SET titre="._q($nom_champ).", obligatoire="._q($champ_obligatoire)
+						.", specifiant="._q($champ_specifiant).", public="._q($champ_public)
+						.", aide="._q($aide_champ).", html_wrap="._q($wrap_champ)." WHERE id_form="._q($id_form)." AND champ="._q($champ));
+					Forms_update_edition_champ($id_form, $champ);
+					// switch select to multi ou inversement, apres avoir fait les mises a jour
+				}
 			}
 		}
 		// Cas particulier : suppression d'un choix
+		// hum (id_form,choix) est il unique ?
 		if ($choix = $supp_choix){
 			if ($row = spip_fetch_array(spip_query("SELECT champ FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND choix="._q($choix)))) {
 				spip_query("DELETE FROM spip_forms_champs_choix WHERE choix="._q($choix)." AND id_form="._q($id_form)." AND champ="._q($row['champ']));
-				$champ_visible = $row['champ'];
 			}
 		}
 		// Suppression d'un champ
@@ -163,12 +165,14 @@ function action_forms_edit(){
 		$arg=explode("-",$arg);
 		$id_form = $arg[0];
 		if ((intval($id_form) && autoriser('modifier','form',$id_form))
-			|| (($id_form=='new') && (autoriser('creer','form'))) )
+			|| (($id_form=='new') && (autoriser('creer','form'))) ) {
 			list($id_form,$champ_visible,$nouveau_champ) = Forms_update($id_form);
 			if ($redirect) $redirect = parametre_url($redirect,"id_form",$id_form);
-			if ($redirect && $nouveau_champ) $redirect = parametre_url($redirect,"nouveau_champ",$nouveau_champ);
+			if ($redirect && $champ_visible) $redirect = parametre_url($redirect,"champ_visible",$champ_visible,'&');
+			if ($redirect && $nouveau_champ) $redirect = parametre_url($redirect,"nouveau_champ",$nouveau_champ,'&');
+		}
 	}
-	redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));
+	redirige_par_entete($redirect);
 }
 
 ?>

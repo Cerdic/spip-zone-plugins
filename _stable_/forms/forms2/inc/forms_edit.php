@@ -56,6 +56,7 @@ function Forms_insere_nouveau_choix($id_form,$champ,$titre){
 	if ($row = spip_fetch_array($res))
 		$rang = $row['rang'];
 	$rang++;
+	include_spip('base/abstract_sql');
 	spip_abstract_insert("spip_forms_champs_choix","(id_form,champ,choix,titre,rang)","("._q($id_form).","._q($champ).","._q($choix).","._q($titre).","._q($rang).")");
 	return $choix;
 }
@@ -156,9 +157,10 @@ function Forms_bloc_routage_mail($id_form,$email){
 		return $out;
 }
 
-function Forms_bloc_edition_champ($row, $action_link) {
+function Forms_bloc_edition_champ($row, $action_link, $redirect) {
 	global $couleur_claire;
 
+	$id_form = $row['id_form'];
 	$champ = $row['champ'];
 	$type = $row['type'];
 	$titre = $row['titre'];
@@ -198,7 +200,7 @@ function Forms_bloc_edition_champ($row, $action_link) {
 
 		$out .= "<div style='margin: 5px; padding: 5px; border: 1px dashed $couleur_claire;'>";
 		$out .= _T("forms:liste_choix")."&nbsp;:<br />\n";
-		$res2 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE champ="._q($champ));
+		$res2 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
 		while ($row2 = spip_fetch_array($res2)){
 			$choix = $row2['choix'];
 			if ($ajout_choix == $choix) {
@@ -209,19 +211,26 @@ function Forms_bloc_edition_champ($row, $action_link) {
 			$out .= "<input type='text' id='nom_$choix' name='$choix' value=\"".entites_html($row2['titre'])."\" ".
 				"class='fondl verdana2' size='20'$js>";
 			// 
-			$out .= " <input style='display: none;' type='submit' name='modif_choix' value=\""._T('bouton_modifier')."\" class='fondo verdana2'>";
+			//$out .= " <input style='display: none;' type='submit' name='modif_choix' value=\""._T('bouton_modifier')."\" class='fondo verdana2'>";
 			$supp_link = parametre_url($action_link,'supp_choix', $choix);
-			$out .= " &nbsp; <span class='verdana1'>[<a href='".$supp_link."#champ_visible'>".
+			$out .= " &nbsp; <span class='verdana1'>[<a href='".$supp_link."#champ_visible' class='ajaxAction' rel ='$redirect' >".
 				_T("forms:supprimer_choix")."</a>]</span>";
 			$out .= "<br />\n";
 		}
+		$ajout_choix = parametre_url($action_link,'ajout_choix', '1');
 		$out .= "<br /><input type='submit' name='ajout_choix' value=\""._T("forms:ajouter_choix")."\" class='fondo verdana2'>";
-
+			_T("forms:ajouter_choix")."</a>]</div>";
 		$out .= "</div>";
-		if ($type=='select')
+		
+		$switch_link = parametre_url($action_link,'switch_select_multi', '1');
+		$switch_link = parametre_url($switch_link,'modif_champ', $champ);
+		$out .= "<br /><span class='verdana1'>[<a href='".$switch_link."#champ_visible' class='ajaxAction' rel ='$redirect' >".
+			(($type=='select')?_T("forms:changer_choix_multiple"):_T("forms:changer_choix_unique")) . 
+			"</a>]</span>";
+		/*if ($type=='select')
 			$out .= "<br /><input type='submit' name='switch_select_multi' value=\""._T("forms:changer_choix_multiple")."\" class='fondl verdana2'>";
 		if ($type=='multiple')
-			$out .= "<br /><input type='submit' name='switch_select_multi' value=\""._T("forms:changer_choix_unique")."\" class='fondl verdana2'>";
+			$out .= "<br /><input type='submit' name='switch_select_multi' value=\""._T("forms:changer_choix_unique")."\" class='fondl verdana2'>";*/
 		$out .= "<br />\n";
 	}
 	if ($type == 'mot') {
@@ -264,6 +273,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$index_min = $row['rangmin'];
 		$index_max = $row['rangmax'];
 	}
+
 	$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form).($ajax?" AND champ="._q($ajax):"")." ORDER BY rang");
 	while ($row = spip_fetch_array($res)) {
 		$champ = $row['champ'];
@@ -344,7 +354,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom")."</label> :";
 			$formulaire .= " &nbsp;<input type='text' name='nom_champ' id='nom_$champ' value=\"".
 				entites_html($row['titre'])."\" class='fondo verdana2' size='30'$js /><br />\n";
-			$formulaire .= Forms_bloc_edition_champ($row, $action_link);
+			$formulaire .= Forms_bloc_edition_champ($row, $action_link, $redirect);
 		}
 		$formulaire .= "<label for='aide_$champ'>"._T("forms:aide_contextuelle")."</label> :";
 		$formulaire .= " &nbsp;<textarea name='aide_champ' id='aide_$champ'  class='verdana2' style='width:90%;height:3em;' >".

@@ -165,7 +165,7 @@ function exec_forms_edit(){
 	}
 
 	$ajax_charset = _request('var_ajaxcharset');
-	$bloc = _request('bloc');
+	$bloc = _request('bloc');//var_dump($ajax_charset);
 	if ($ajax_charset && $bloc=='apercu') {
 		include_spip('public/assembler');
 		$GLOBALS['var_mode']='calcul';
@@ -320,15 +320,16 @@ jQuery.fn.ajaxAction = function() {
 		});
 		return false;
 	});
-	$('#'+id+' form.ajaxAction').submit(function(){
+	$('#'+id+' form.ajaxAction').each(function(){
 		var idtarget = $(this).children('input[@name=idtarget]').val();
 		if (!idtarget) idtarget = $(this).parent().id();
 		var redir = $(this).children('input[@name=redirect]');
 		var url = (($(redir).val()).split('#'))[0];
 		$(redir).val(url + "&var_ajaxcharset=utf-8&bloc="+idtarget);
-		var res = AjaxSqueeze(this, idtarget, refresh_bloc);
-		AjaxSqueeze(url + "&bloc=apercu", 'apercu_gauche',refresh_apercu);
-		return res;
+		$(this).ajaxForm('#'+idtarget, 
+			function(){ $('#'+idtarget).ajaxAction();$.get(url+"&var_ajaxcharset=utf-8&bloc=apercu",function(data){refresh_apercu(data,'');});},
+			function(){ $('#'+idtarget+",#apercu_gauche").prepend("<div>"+ajax_image_searching+"</div>");}
+			);
 	});
 }
 
