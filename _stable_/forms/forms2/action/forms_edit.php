@@ -46,6 +46,21 @@ function Forms_update_edition_champ($id_form,$champ) {
 				if ($titre = _request($row2['choix']))
 					spip_query("UPDATE spip_forms_champs_choix SET titre="._q($titre)." WHERE id_form="._q($id_form)." AND champ="._q($champ)." AND choix="._q($row2['choix']));
 			}
+			if (strlen($ordre = _request('ordre'))){
+				$ordre = explode("&",$ordre);
+				$rang = 1;$ok = true;
+				$replace = "";
+				foreach($ordre as $item){
+					$item = explode("=",$item);
+					$item = explode("-",$item[1]);
+					if (($c=array_shift($item))!=$champ) $ok=false;
+					$choix = implode("-",$item);
+					$update[]="UPDATE spip_forms_champs_choix SET rang="._q($rang++)." WHERE id_form="._q($id_form)." AND champ="._q($champ)." AND choix="._q($choix);
+				}
+				if ($ok)
+					foreach($update as $q)
+						spip_query($q);
+			}
 		}
 	}
 }

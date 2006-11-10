@@ -54,7 +54,7 @@ function Forms_insere_nouveau_choix($id_form,$champ,$titre){
 	$rang = 0;
 	$res = spip_query("SELECT max(rang) AS rangmax FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
 	if ($row = spip_fetch_array($res))
-		$rang = $row['rang'];
+		$rang = $row['rangmax'];
 	$rang++;
 	include_spip('base/abstract_sql');
 	spip_abstract_insert("spip_forms_champs_choix","(id_form,champ,choix,titre,rang)","("._q($id_form).","._q($champ).","._q($choix).","._q($titre).","._q($rang).")");
@@ -82,7 +82,6 @@ function Forms_bloc_routage_mail($id_form,$email){
 			$s .= "<tr><th>".$row2['titre']."</th><th>";
 			$s .= "<strong><label for='email_route_$code'>"._T('email_2')."</label></strong>";
 			$s .= "</th></tr>\n";
-			$js = "";
 
 			$res3 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($row2['champ']));
 			while($row3 = spip_fetch_array($res3)){
@@ -168,22 +167,22 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 
 		$out .= "<div style='margin: 5px; padding: 5px; border: 1px dashed $couleur_claire;'>";
 		$out .= _T("forms:liste_choix")."&nbsp;:<br />\n";
-		$res2 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
+		$out .= "<div class='sortableChoix' id='ordre_choix_$champ' >";
+		$res2 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ)." ORDER BY rang");
 		while ($row2 = spip_fetch_array($res2)){
 			$choix = $row2['choix'];
-			if ($ajout_choix == $choix) {
-				$out .= "<script type='text/javascript'><!-- \nvar antifocus_choix= false; // --></script>\n";
-				$js = " onfocus=\"if(!antifocus_choix){this.value='';antifocus_choix=true;}\"";
-			}
-			else $js = "";
+			$focus='';
+			if ($ajout_choix == $choix) $focus='antifocus';
+			$out .= "<div class='sortableChoixItem' id='$champ-$choix'>";
 			$out .= "<input type='text' id='nom_$choix' name='$choix' value=\"".entites_html($row2['titre'])."\" ".
-				"class='fondl verdana2' size='20'$js>";
+				"class='fondl verdana2 $focus' size='20' />";
 
 			$supp_link = parametre_url($action_link,'supp_choix', $choix);
 			$out .= " &nbsp; <span class='verdana1'>[<a href='$supp_link#$idbloc' class='ajaxAction' rel ='$redirect' >".
 				_T("forms:supprimer_choix")."</a>]</span>";
-			$out .= "<br />\n";
+			$out .= "</div>\n";
 		}
+		$out .= "</div><input type='hidden' name='ordre' value='' />";
 		$ajout_choix = parametre_url($action_link,'ajout_choix', '1');
 		$out .= "<br /><input type='submit' name='ajout_choix' value=\""._T("forms:ajouter_choix")."\" class='fondo verdana2'>";
 			_T("forms:ajouter_choix")."</a>]</div>";
@@ -299,26 +298,23 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 			"<input type='hidden' name='modif_champ' value='$champ' />";
 
 		$formulaire .= "<div class='verdana2'>";
-		if ($nouveau) {
-			$formulaire .= "<script type='text/javascript'><!-- \nvar antifocus_champ = false; // --></script>\n";
-			$js = " onfocus=\"if(!antifocus_champ){this.value='';antifocus_champ=true;}\"";
-		}
-		else $js = "";
+		$focus="";
+		if ($nouveau) $focus='antifocus';
 		
 		if ($type=='separateur'){
 			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom_bloc")."</label>&nbsp;:";
 			$formulaire .= " &nbsp;<input type='text' name='nom_champ' id='nom_$champ' value=\"".
-				entites_html($row['titre'])."\" class='fondo verdana2' size='30'$js /><br />\n";
+				entites_html($row['titre'])."\" class='fondo verdana2 $focus' size='30' /><br />\n";
 		}
 		else if ($type=='textestatique'){
 			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom_texte")."</label>&nbsp;:<br/>";
-			$formulaire .= " &nbsp;<textarea name='nom_champ' id='nom_$champ'  class='verdana2' style='width:100%;height:5em;' $js>".
+			$formulaire .= " &nbsp;<textarea name='nom_champ' id='nom_$champ'  class='verdana2 $focus' style='width:100%;height:5em;' />".
 				entites_html($row['titre'])."</textarea><br />\n";
 		}
 		else{
 			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom")."</label> :";
 			$formulaire .= " &nbsp;<input type='text' name='nom_champ' id='nom_$champ' value=\"".
-				entites_html($row['titre'])."\" class='fondo verdana2' size='30'$js /><br />\n";
+				entites_html($row['titre'])."\" class='fondo verdana2 $focus' size='30' /><br />\n";
 			$formulaire .= Forms_bloc_edition_champ($row, $action_link, $redirect, $id_bloc);
 		}
 		$formulaire .= "<label for='aide_$champ'>"._T("forms:aide_contextuelle")."</label> :";
@@ -387,7 +383,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 //
 // Edition des donnees du formulaire
 //
-function boite_proprietes($id_form, $row, $js_titre, $action_link, $redirect) {
+function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out = "";
 	$out .= "<p>";
 	$out .= debut_cadre_formulaire('',true);
@@ -409,8 +405,8 @@ function boite_proprietes($id_form, $row, $js_titre, $action_link, $redirect) {
 
 	$out .= "<strong><label for='titre_form'>"._T("forms:titre_formulaire")."</label></strong> "._T('info_obligatoire_02');
 	$out .= "<br />";
-	$out .= "<input type='text' name='titre' id='titre_form' CLASS='formo' ".
-		"value=\"".entites_html($titre)."\" size='40'$js_titre><br />\n";
+	$out .= "<input type='text' name='titre' id='titre_form' class='formo $focus' ".
+		"value=\"".entites_html($titre)."\" size='40' /><br />\n";
 
 	$out .= "<strong><label for='desc_form'>"._T('info_descriptif')."</label></strong>";
 	$out .= "<br />";

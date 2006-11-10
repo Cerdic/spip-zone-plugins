@@ -160,7 +160,7 @@ function exec_forms_edit(){
 			$moderation = $row['moderation'];
 			$public = $row['public'];
 		}
-		$js_titre = "";
+		$focus = "";
 		$action_link = generer_action_auteur("forms_edit","$id_form",urlencode($redirect));
 	}
 
@@ -179,7 +179,7 @@ function exec_forms_edit(){
 		ajax_retour(contenu_boite_resume($id_form, $row, $apercu));
 	}
 	if ($ajax_charset && $bloc=='proprietes') {
-		ajax_retour(boite_proprietes($id_form, $row, $js_titre, $action_link, $redirect));
+		ajax_retour(boite_proprietes($id_form, $row, $focus, $action_link, $redirect));
 	}
 	$bloc = explode("-",$bloc);
 	if ($ajax_charset && $bloc[0]=='champs') {
@@ -201,7 +201,7 @@ function exec_forms_edit(){
 		$texte = "";
 		$moderation = "priori";
 		$public = "non";
-		$js_titre = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+		$focus = "antifocus";
 		
 		$action_link = generer_action_auteur("forms_edit","new",urlencode($redirect));
 	}
@@ -270,7 +270,7 @@ function exec_forms_edit(){
 
 	// centre proprietes ---------------------------------------------------------------
 	$out .= "<div id='proprietes' name='proprietes'>";
-	$out .= boite_proprietes($id_form, $row, $js_titre, $action_link, $redirect);
+	$out .= boite_proprietes($id_form, $row, $focus, $action_link, $redirect);
 	$out .= "</div>";
 
 	// edition des champs ---------------------------------------------------------------
@@ -280,6 +280,7 @@ function exec_forms_edit(){
 
 	echo $out;
 		
+	echo "<script src='"._DIR_PLUGIN_FORMS."javascript/interface.js' type='text/javascript'></script>";
 	echo "<script src='"._DIR_PLUGIN_FORMS."javascript/forms_edit.js' type='text/javascript'></script>";
 
 	echo fin_page();

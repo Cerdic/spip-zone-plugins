@@ -64,6 +64,24 @@ jQuery.fn.ajaxAction = function() {
 			function(){ $('#'+idtarget+",#apercu_gauche").prepend("<div>"+ajax_image_searching+"</div>");}
 			);
 	});
+	$('.antifocus').onefocus( function(){ this.value=''; } );
+	$('#'+id+' div.sortableChoix').Sortable(
+		{
+			accept : 			'sortableChoixItem',
+			activeclass : 'sortableactive',
+			hoverclass : 	'sortablehover',
+			helperclass : 'sorthelper',
+			opacity: 		0.8,
+			/*fx:				200,*/
+			revert:			true,
+			tolerance:		'intersect',
+			/*containment: 'parent',*/
+			onStop : function(){
+				serial = $.SortSerialize($(this).parent().id());
+				$(this).parent().siblings('input[@name=ordre]').val(serial.hash);
+			}
+		}
+	)	
 }
 
 $(document).ready(function(){
@@ -82,4 +100,6 @@ $(document).ready(function(){
 
 	$('#champs').ajaxAction();
 	$('#proprietes').ajaxAction();
+	
+
 });
