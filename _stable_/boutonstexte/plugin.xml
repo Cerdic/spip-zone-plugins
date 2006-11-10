@@ -3,7 +3,8 @@
 	Boutons dans le Texte
   </nom>
   <auteur>
-	bertrand Gugger http://toggg.com/
+	bertrand Gugger [->http://toggg.com/]
+	_ &copy; 2006 - Distribue sous licence LGPL
   </auteur>
   <version>
 	0.1.0
@@ -15,7 +16,9 @@
 	Rajoute des boutons pour l'affichage des textes comme augmenter/diminuer police
 	ATTENTION: Necessite jQuery et la balise <code>#INSERT_HEAD</code> dans les squelettes
   </description>
-	<lien>http://www.spip-contrib.net/ecrire/?exec=articles&amp;id_article=1474</lien>
+  <lien>
+	[Documentation->http://www.spip-contrib.net/ecrire/?exec=articles&amp;id_article=1474]
+  </lien>
   <prefix>
 	boutonstexte
   </prefix>
