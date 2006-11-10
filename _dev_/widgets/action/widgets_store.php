@@ -56,6 +56,7 @@ function action_widgets_store_dist() {
     $return = array('$erreur'=>'');
 
 	$postees = post_widgets();
+
 	$modifs = $updates = array();
 	if (!is_array($postees)) {
 	    $return['$erreur'] = _U('widgets:donnees_mal_formatees');

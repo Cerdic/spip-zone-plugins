@@ -162,9 +162,7 @@ class Widget {
         $contexte['largeur'] = $this->largeur;
         $contexte['hauteur'] = $this->hauteur;
         foreach ($this->texts as $champ => $val) {
-	        $contexte['att_' . $champ] =
-                ' class="widget-active" name="content_' .
-                	$this->key . '_' . $champ . '" ';
+	        $contexte['name_' . $champ] = 'content_' . $this->key . '_' . $champ;
         }
         include_spip('public/assembler');
         return recuperer_fond($fond, $contexte);

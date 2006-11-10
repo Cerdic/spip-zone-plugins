@@ -62,7 +62,10 @@ function Widgets_preparer_page($page, $droits) {
 			'sauvegarder' => _U('widgets:sauvegarder')
 		),
 		'img' => array(
-			'searching' => 'searching.gif',
+			'searching' => array(
+				'file' => 'searching.gif',
+				'txt' => _U('TODO:searching')
+			),
 			'edit' => array(
 				'file' => 'crayon.png',
 				'txt' => _U('widgets:editer')
