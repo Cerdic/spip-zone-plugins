@@ -30,7 +30,7 @@ function image_ragged ($img, $align, $margin=10, $coul=-1) {
   $dest = $image["fichier_dest"];
   $creer = $image["creer"];
 
-  if (!$placer_fond) $ret = "<div style='position: relative; float: $align; width: 0px; height: 0px;'><img src='$im' class='format_png' alt='' style='position: absolute; $align: 0px;' /></div>";
+  if (!$placer_fond) $ret = "<div style='position: relative; float: $align; width: 0px; height: 0px;'><img src='$im' class='format_png spip_ragged' alt='' style='position: absolute; $align: 0px;' /></div>";
 
   if ($creer) {
 	include_spip('inc/logos'); // bicoz presence reduire_image
