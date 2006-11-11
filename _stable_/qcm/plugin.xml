@@ -43,7 +43,7 @@ Exemple de syntaxe :
  R3
  &lt;/qcm&gt;</pre>
   </description>
-  <lien>http://www.spip-contrib.net/Filtre-QCM</lien> <!-- URI de documentation -->
+  <lien>[Article ayant servi de base &agrave; ce plugin->http://www.spip-contrib.net/Filtre-QCM]</lien> <!-- URI de documentation -->
   <prefix>
   qcm
   </prefix>
