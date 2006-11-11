@@ -66,4 +66,11 @@ function _U($texte)
     return html2unicode(_T($texte));
 }
 
+$prepare_wdgcfg = function_exists('widgets_config') ? widgets_config() : array();
+$wdgcfg = array();
+foreach (array('noMsgInchange', 'noMsgAbandon') as $prepare_wdgcfgi) {
+	if (isset($prepare_wdgcfg[$prepare_wdgcfgi])) {
+		$wdgcfg[$prepare_wdgcfgi] = $prepare_wdgcfg[$prepare_wdgcfgi];
+	}
+}
 ?>

@@ -42,22 +42,15 @@ function Widgets_affichage_final($page) {
 
     // et les signaler dans la page
     if ($droits_accordes == count($regs))
-        $page = Widgets_preparer_page($page, '*');
+        $page = Widgets_preparer_page($page, '*', $wdgcfg);
     else if ($droits)
-        $page = Widgets_preparer_page($page, array_keys($droits));
+        $page = Widgets_preparer_page($page, array_keys($droits), $wdgcfg);
 
     return $page;
 }
 
-function Widgets_preparer_page($page, $droits) {
+function Widgets_preparer_page($page, $droits, $wdgcfg = array()) {
 
-	$cfg = function_exists('widgets_config') ? widgets_config() : array();
-	$wdgcfg = array();
-	foreach (array('noMsgInchange', 'noMsgAbandon') as $cfgi) {
-		if (isset($cfg[$cfgi])) {
-			$wdgcfg[$cfgi] = $cfg[$cfgi];
-		}
-	}
     $jsFile = find_in_path('widgets.js');
     $cssFile = find_in_path('widgets.css');
     $config = var2js(array(
