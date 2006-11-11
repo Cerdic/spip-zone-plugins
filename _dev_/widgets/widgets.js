@@ -192,6 +192,16 @@ $.fn.activatewidget = function() {
         })
       .end()
       .find(".widget-submit")
+        .each(function(){
+          // rendre les boutons visibles (cf. plugin jquery/dimensions.js)
+          var buttonpos = this.parentNode.offsetTop || 0;
+          var scrolltop = window.pageYOffset || document.documentElement.scrollTop  || document.body.scrollTop || 0;
+          var scrollleft = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
+          var h = window.innerHeight;
+          if (buttonpos - h + 20 > scrolltop) {
+            window.scrollTo(scrollleft, buttonpos - h + 30);
+          }
+        })
         .click(function(e){
           e.stopPropagation();
           $(this)
