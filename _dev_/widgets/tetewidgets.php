@@ -51,6 +51,12 @@ function Widgets_affichage_final($page) {
 
 function Widgets_preparer_page($page, $droits) {
 
+	$cfg = function_exists('widgets_config') ? widgets_config() : array();
+	foreach (array() as $cfgi) {
+		if (isset($cfg[$cfgi])) {
+			$wdgcfg[$cfgi] = $cfg[$cfgi];
+		}
+	}
     $jsFile = find_in_path('widgets.js');
     $cssFile = find_in_path('widgets.css');
     $config = var2js(array(
@@ -76,12 +82,6 @@ function Widgets_preparer_page($page, $droits) {
 			)
 		)
 	));
-	$cfg = function_exists('widgets_config') ? widgets_config() : array();
-	foreach (array() as $cfgi) {
-		if (isset($cfg[$cfgi])) {
-			$this->cfg[$cfgi] = $cfg[$cfgi];
-		}
-	}
 //    $txtErrInterdit = addslashes(unicode_to_javascript(html2unicode(_T(
 //        'widgets:erreur_ou_interdit'))));
 
