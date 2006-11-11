@@ -52,7 +52,8 @@ function Widgets_affichage_final($page) {
 function Widgets_preparer_page($page, $droits) {
 
 	$cfg = function_exists('widgets_config') ? widgets_config() : array();
-	foreach (array() as $cfgi) {
+	$wdgcfg = array();
+	foreach (array('noMsgInchange', 'noMsgAbandon') as $cfgi) {
 		if (isset($cfg[$cfgi])) {
 			$wdgcfg[$cfgi] = $cfg[$cfgi];
 		}
@@ -80,7 +81,8 @@ function Widgets_preparer_page($page, $droits) {
 				'file' => 'changed.png',
 				'txt' => _U('widgets:deja_modifie')
 			)
-		)
+		),
+		'cfg' => $wdgcfg
 	));
 //    $txtErrInterdit = addslashes(unicode_to_javascript(html2unicode(_T(
 //        'widgets:erreur_ou_interdit'))));
