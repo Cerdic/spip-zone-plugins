@@ -27,6 +27,7 @@ function Widgets_affichage_final($page) {
     include_spip('inc/widgets');
     if (!preg_match_all(_PREG_WIDGET, $page, $regs, PREG_SET_ORDER))
         return $page;
+    $wdgcfg = wdgcfg();
 
     // calculer les droits sur ces widgets
     include_spip('inc/autoriser');
