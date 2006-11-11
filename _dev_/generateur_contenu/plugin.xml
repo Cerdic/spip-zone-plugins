@@ -12,7 +12,9 @@
           dev
         </etat>
         <description>
-          Permet de cloner une rubriques avec ses articles dans une autre rubrique
+          Permet de cloner en xx exemplaires une rubriques "source" avec ses articles vers une rubrique "cible"
+					<br />
+					N'oubliez pas de configurer les secteurs contenant les rubriques "sources" et "cibles" en tête du fichier /exec/gener_cont.php
         </description>
 				<url_doc>  
 						http://extranet-eze.dyndns.org/portail/spip_191/
