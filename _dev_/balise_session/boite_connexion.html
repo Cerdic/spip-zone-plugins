@@ -2,17 +2,12 @@
 Bonjour
 })[(#SESSION{nom})]</h2>
 <ul>
-	<li><a href="#URL_LOGOUT"><:deconnexion:></a></li>[
-(#SESSION{statut}|=={0minirezo}|?{' '})
-	<li>
-		<a href="#URL_ECRIRE{admin_plugin}">
-			<:ecrire:icone_admin_plugin:>
-		</a>
-	</li>]
 ]<BOUCLE_infos_persos(AUTEURS){tout}{id_auteur=#SESSION{id_auteur}}>
 	<li>
-		[(#LOGO_AUTEUR|#URL_AUTEUR|image_reduire{48})]
-		<div class="texte">
+		<div class="texte">[
+			(#LOGO_AUTEUR|right|#URL_AUTEUR|image_reduire{48})
+			][
+			(#EVAL{_DIR_PLUGIN_WIDGETS}|match{^plugins\/}|?{' '})
 			[<:signature:>&nbsp;:<br />
 			<div class="widget auteur-nom-#ID_AUTEUR">(#NOM)</div>]
 			[<:bio:>&nbsp;:<br />
@@ -23,13 +18,28 @@ Bonjour
 			<div class="widget auteur-nom_site-#ID_AUTEUR">(#NOM_SITE)</div>]
 			[<:lien_site:>&nbsp;:<br />
 			<div class="widget auteur-url_site-#ID_AUTEUR">(#URL_SITE)</div>]
+		][
+			(#EVAL{_DIR_PLUGIN_WIDGETS}|match{^plugins\/}|?{'',' '})
+			[<div><a href="(#URL_AUTEUR)"><:voir_en_ligne:></a></div>]
+			[<div>(#BIO)</div>]
+			[<div><a href="#URL_SITE">(#NOM_SITE)</a></div>]
+		]<br class="nettoyeur" />
 		</div>
-		<br class="nettoyeur" />
 	</li>
 </BOUCLE_infos_persos>[
+(#SESSION{statut}|=={0minirezo}|?{' '})
+	<li style="border-top: 1px solid white; padding-top: 2px; margin-top: 2px;">
+		<a href="#URL_ECRIRE{admin_plugin}">
+			<:ecrire:icone_admin_plugin:>
+		</a>
+	</li>][
 (#SESSION{id_auteur}|?{' '})
-</ul>
-][
+	<li style="border-top: 1px solid white; padding-top: 2px; margin-top: 2px;">
+		<a href="#URL_LOGOUT">
+			<:icone_deconnecter:>
+		</a>
+	</li>
+</ul>][
 (#SESSION{id_auteur}|?{'',
 <h2 class="menu-titre">Login public</h2>
 })

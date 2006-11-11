@@ -20,7 +20,12 @@ if (isset($_GET['fond']))
 
 if(isset($GLOBALS['auteur_session'])) {
 	$tmp_marqueur = $GLOBALS['marqueur'];
+	//faire un cache base sur l'id_auteur
 	$GLOBALS['marqueur'] .= ':session'.$GLOBALS['auteur_session']['id_auteur'];
+	//pour faire un cache base sur le statut des visiteurs, decommenter la ligne
+	//ci desous, et ajouter un # devant la ligne au dessus.
+	//vous pouvez aussi cloner ce fichier et le nommer statut.php
+	#$GLOBALS['marqueur'] .= ':'.$GLOBALS['auteur_session']['statut'];
 }
 # au travail...
 include _DIR_RESTREINT_ABS.'public.php';

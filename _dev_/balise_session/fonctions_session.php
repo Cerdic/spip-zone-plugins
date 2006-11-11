@@ -7,7 +7,7 @@ function balise_SESSION_dist($p) {
 		return balise_ENV_dist($p, '$GLOBALS["auteur_session"]');
 }
 
-//un filtre un peu fun pour la doc
+//un filtre un peu fun pour la doc en ligne
 function liste_ul_li($tableau) {
 	 $texte = '';
 		if(!empty($tableau))
