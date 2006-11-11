@@ -7,7 +7,7 @@ define('_PREG_WIDGET', ',widget\b[^<>\'"]+\b((\w+)-(\w+)-(\d+))\b,');
 function valeur_colonne_table($table, $col, $id) {
     $s = spip_query(
         'SELECT ' . $col .
-          ' AS val FROM spip_' . $table .'s    WHERE id_' . $table . '=' . $id);
+          ' AS val FROM spip_' . table_objet($table) .' WHERE ' . id_table_objet($table) . '=' . $id);
     if ($t = spip_fetch_array($s)) {
         return $t['val'];
     }

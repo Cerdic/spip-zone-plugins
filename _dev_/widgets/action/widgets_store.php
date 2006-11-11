@@ -133,6 +133,11 @@ function action_widgets_store_dist() {
 				    include_spip('action/editer_breve');
 				    $fun = 'revisions_breves';
 				    break;
+				case 'syndic':
+				case 'site':
+				    include_spip('action/editer_site');
+				    $fun = 'revisions_sites';
+				    break;
 			}
 			if (!$fun or !function_exists($fun)) {
 			    $return['$erreur'] = "$type: " . _U('widgets:non_implemente');
