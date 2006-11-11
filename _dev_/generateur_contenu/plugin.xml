@@ -1,0 +1,35 @@
+<plugin>
+        <nom>
+           generateur de contenu
+        </nom>
+        <auteur> 
+           cy_altern 
+        </auteur>
+        <version>
+        	 0.2
+        </version>
+        <etat>
+          dev
+        </etat>
+        <description>
+          Permet de cloner une rubriques avec ses articles dans une autre rubrique
+        </description>
+				<url_doc>  
+						http://extranet-eze.dyndns.org/portail/spip_191/
+				</url_doc>
+				<url_zip>
+				    http://extranet-eze.dyndns.org/portail/spip_191/
+				</url_zip>
+				<rss_maj>
+				    http://extranet-eze.dyndns.org/portail/spip_191/spip.php
+				</rss_maj>				
+				
+        <prefix>
+            gener_cont
+        </prefix>
+        <!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+        <pipeline>
+        		<nom>ajouter_boutons</nom>
+        		<inclure>gener_cont_pipelines.php</inclure>
+       	</pipeline>
+</plugin>
