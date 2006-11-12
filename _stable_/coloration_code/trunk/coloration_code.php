@@ -69,14 +69,14 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 	//
 	// And echo the result!
 	//
-	$rempl = $geshi->parse_code();
+	$rempl = '<div class="coloration_code"><div class="spip_'.$language.' '.$cadre.'">'.$geshi->parse_code().'</div>';
 
 	if ($telecharge) {
 		$rempl .= "<div class='" . $cadre . "_download'
 		style='text-align: $spip_lang_right;'>
 		<a href='$fichier'
 		style='font-family: verdana, arial, sans; font-weight: bold; font-style: normal;'>" .
-			propre("<multi>Download[fr]T&eacute;l&eacute;charger</multi>") .
+		  _T('colorationcode:telecharger') .
 				"</a></div>";
 	}
 	return $rempl;
