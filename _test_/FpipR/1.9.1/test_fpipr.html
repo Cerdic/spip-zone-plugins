@@ -7,31 +7,13 @@ BOUCLE Flickr
 </title>
 </head>
 
-<BOUCLE_au(AUTEURS)>
-#NOM
-<BOUCLE_info(FLICKR_PEOPLE_GETINFO) {user_id=#FLICKR_NSID}>
-#LOCATION
-</BOUCLE_info>
-</BOUCLE_au>
-<p>
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec tincidunt, sapien at consequat faucibus, nisl mi varius diam, eu interdum sapien nibh ac est. Phasellus ultrices vehicula nulla. Donec a justo cursus risus dapibus varius. Vestibulum tincidunt dui at quam. Aliquam urna augue, rutrum sit amet, fermentum eget, blandit eget, felis. Vivamus sed felis eu sapien ornare condimentum. Sed justo libero, rutrum vel, interdum in, volutpat feugiat, mauris. Quisque ante ipsum, gravida in, nonummy in, facilisis sit amet, sem. Etiam malesuada. Pellentesque tellus. Nullam ut diam. Maecenas augue nunc, condimentum non, gravida ac, pretium in, odio. Suspendisse bibendum tortor sit amet ipsum.</p>
-
-
-
-[(#MODELE{fpiprbox}{align=left}{user_id=71651012@N00}{tags=roma}{taille=24})]
-
-<p>
-Suspendisse potenti. Pellentesque a nibh in ipsum iaculis bibendum. Nam consequat felis nec ligula. Pellentesque est. Praesent iaculis diam vel ipsum. Etiam blandit pede et elit. Aenean porttitor, orci quis dictum dignissim, nunc est elementum dui, iaculis faucibus magna velit ut libero. Phasellus a lorem. Curabitur cursus, purus vitae sagittis cursus, diam nulla commodo ipsum, sit amet laoreet orci libero eget eros. Vivamus ipsum. Nunc eleifend, est quis pulvinar porta, lacus est commodo lorem, sed dictum dolor risus et elit. Curabitur rhoncus vehicula eros. Donec varius nisl non arcu. Aliquam erat volutpat.</p><p>
-Quisque vulputate, felis vel pellentesque ultricies, lorem tortor ornare nisl, a tincidunt nisl lectus eu tellus. Duis at velit eget sem sodales placerat. Nulla eleifend. Donec luctus. Donec pretium. Morbi quis metus. Quisque imperdiet adipiscing lorem. Aliquam semper mattis nibh. Phasellus eleifend arcu at ipsum. Sed non metus at felis posuere commodo. Nam nec massa. Phasellus vestibulum mollis nibh. Proin id ligula id nunc cursus egestas. Etiam vestibulum imperdiet tortor. Pellentesque eu leo non metus congue accumsan. Donec a odio. Etiam gravida, nibh eu sollicitudin luctus, neque nibh egestas lorem, a luctus neque est ultrices nibh. Cras ut libero. Nulla facilisi.</p>
-
-
-<p>
-Vestibulum suscipit molestie purus. Nam lectus velit, euismod vel, vehicula eu, sollicitudin ut, augue. Curabitur commodo sem vel tortor. Mauris ante. Pellentesque sed lectus. Curabitur mollis erat et purus. Ut viverra rhoncus purus. In vitae nulla. Cras pulvinar. Duis faucibus tortor scelerisque libero. Vestibulum cursus odio eget odio. Integer vitae orci ac enim dapibus pharetra. Vestibulum libero ligula, pharetra et, posuere eget, dictum in, sapien. Mauris tristique. Nulla convallis tempus turpis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-
-<p>
-Sed condimentum convallis elit. Aenean ac pede auctor odio ullamcorper elementum. Aenean fermentum purus id pede. Pellentesque ante. Nunc libero. Nam et sapien. Morbi ac massa. Integer dapibus mattis magna. Cras ac lorem. Vivamus at odio sit amet eros imperdiet consequat. Vivamus vitae nibh sit amet eros euismod fermentum. Etiam feugiat orci non velit. Curabitur a mi. Vestibulum auctor varius lorem. Donec vehicula viverra nisi. Integer vitae massa ac neque nonummy porttitor. Integer molestie hendrerit sapien. Praesent tristique dolor nec metus.</p>
-
-<hr/>
+<BOUCLE_pag(FLICKR_PHOTOS_SEARCH) {pagination} {tags spip}>
+#LOGO_PHOTO{s}
+</BOUCLE_pag>
+#PAGINATION_FLICKR
+</B_pag>
+rien
+<//B_pag>
 
 </body>
 </html>

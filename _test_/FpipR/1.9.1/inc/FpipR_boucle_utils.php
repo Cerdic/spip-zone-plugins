@@ -79,7 +79,7 @@ function FpipR_utils_calculer_hash($method, $arguments, $boucle=NULL) {
 	  $hash .= "\$v=$val;\n";
 	  $hash .= "\$arguments['$key']=FpipR_traiter_argument('$key',\$v);\n";
 	}}
-
+  if($boucle && $boucle->id_boucle) $hash .= '$Numrows[\''.$boucle->id_boucle.'\']["fpipr_grand_total"] = ';
   $hash .= "FpipR_fill_table_boucle('$method',\$arguments);";
   return $hash;
 }

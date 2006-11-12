@@ -68,7 +68,7 @@ function FpipR_fill_table_boucle($method,$arguments){
   include_spip('base/FpipR_db');
   FpipR_creer_tables($method);
   $arguments['auth_token'] = FpipR_getAuthToken();
-  FpipR_fill_table($method,$arguments);
+  return FpipR_fill_table($method,$arguments);
 }
 
 function FpipR_traiter_argument($key, $val){
