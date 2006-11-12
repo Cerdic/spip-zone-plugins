@@ -3,6 +3,8 @@ function switcher_affichage_final($texte){
 	
 	global 	$html;
 	global $squelettes_alternatifs;
+	global $styleListeSwitcher;
+	global $afficherSeulementPourLesAdmins;
 
 	if ($html) {
 	
