@@ -138,9 +138,11 @@ $.fn.activatewidget = function() {
         eval('d=' + d.responseText + ';');
         if (d.$erreur > '') {
           if (d.$annuler) {
+            if (d.$erreur > ' ') {
               uniAlert(d.$erreur);
-              $(me)
-                .cancelwidget();
+            }
+            $(me)
+              .cancelwidget();
           } else {
               uniAlert(d.$erreur+'\n'+configWidgets.txt.error);
               $(me)

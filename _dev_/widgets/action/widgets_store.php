@@ -51,6 +51,7 @@ function post_widgets() {
 function action_widgets_store_dist() {
 
     include_spip('inc/widgets');
+    $wdgcfg = wdgcfg();
     header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
 
     $return = array('$erreur'=>'');
@@ -98,7 +99,8 @@ function action_widgets_store_dist() {
 	}
 
 	if (!$modifs AND !$return['$erreur']) {
-	    $return['$erreur'] = _U('widgets:pas_de_modification');
+	    $return['$erreur'] = $wdgcfg['msgNoChange'] ?
+		     _U('widgets:pas_de_modification') : ' ';
 	    $return['$annuler'] = true;
 	}
 
