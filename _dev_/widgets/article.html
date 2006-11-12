@@ -60,8 +60,8 @@ Test widget titreurl: <div class="widget article-titreurl-#ID_ARTICLE">
 			<BOUCLE_afficher_document(DOCUMENTS) {id_document} {id_article} {mode=document}{extension IN png,jpg,gif}>
 			<div class="spip_documents spip_documents_center" id="document_actif">
 				#EMBED_DOCUMENT
-				[<div class="spip_doc_titre">(#TITRE)</div>]
-				[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+				[<div class="spip_doc_titre widget document-titre-#ID_DOCUMENT">(#TITRE)</div>]
+				[<div class="spip_doc_descriptif widget document-descriptif-#ID_DOCUMENT">(#DESCRIPTIF)</div>]
 			</div>
 			</BOUCLE_afficher_document>
 

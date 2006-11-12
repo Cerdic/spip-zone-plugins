@@ -133,6 +133,10 @@ function action_widgets_store_dist() {
 				    include_spip('action/editer_breve');
 				    $fun = 'revisions_breves';
 				    break;
+				case 'document':
+				    include_spip('inc/modifier');
+				    $fun = 'revision_document';
+				    break;
 				case 'syndic':
 				case 'site':
 				    include_spip('action/editer_site');
