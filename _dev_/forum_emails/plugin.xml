@@ -1,0 +1,23 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Suivi des forums
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	francois.vachon@iago.ca
+_ &copy; 2006 - Distribue sous licence GNU/GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Objectif&nbsp;: envoyer &agrave; chaque participant d'un fil de discussion d'un forum un message par courriel l'informant de la publication d'un nouveau message.
+	<br /><br />Voir: <a href="http://monsitespip.com/spip.php?article20" target="_blank">http://monsitespip.com/spip.php?article20</a>
+	</description>
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+	<prefix> 
+	forum
+	</prefix>
+</plugin>
