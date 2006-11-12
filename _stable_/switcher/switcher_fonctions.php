@@ -10,7 +10,7 @@ function switcher_affichage_final($texte){
 	
 	  
 		
-		// Doit-on afficher le sélecteur de squelette ? (Fonctionnalitée restreinte aux seuls administrateurs ?)
+		// Doit-on afficher le selecteur de squelette ? (Fonctionnalite restreinte aux seuls administrateurs ?)
 		$afficherSelecteur=TRUE;
 		if (($afficherSeulementPourLesAdmins) AND (!isset($_COOKIE['spip_admin']))) $afficherSelecteur=FALSE;
 		
@@ -24,7 +24,7 @@ function switcher_affichage_final($texte){
 						}//]]>
 						</script>';	  
 			
-			// Insertion du sélecteur de squelettes			
+			// Insertion du selecteur de squelettes			
 			$code.='<div id="plugin_switcher" style="top: 0;left: 20px; position: absolute; background-color: transparent;z-index: 100;">';
 			$code.='<form action="" method="post">';
 			$code.='<select name="selecteurSkel" style="'.$styleListeSwitcher.'" onchange="gotof(this.options[this.selectedIndex].value)">';
