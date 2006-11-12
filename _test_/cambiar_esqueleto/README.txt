@@ -3,6 +3,13 @@ CAMBIAR ESQUELETO/VISUALIZACION DE LA WEB
 Sistema de seleccion de esqueletos por menu desplegable.
 
 Para poder utilizarlo solo tienes que ir colocando en una carpeta llamada "esqueletos" todos los esqueletos que quieras, cada uno en una subcarpeta con todos sus elementos necesarios: los html, estilos, imagenes propias,... y una baliza #CAMBIAR_ESQUELETO donde quieras que aparezca el desplegable.
+
+Muestra en una lista los esqueletos que haya en las carpetas (si están en la raíz):
+- esqueletos
+- squelettes
+- squelettes-test
+- themes
+y los "dist" y "squelette".
 INSTALACION
 
 El plugin:
