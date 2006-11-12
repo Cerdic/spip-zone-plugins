@@ -122,8 +122,8 @@ function action_widgets_store_dist() {
 				    $fun = 'revisions_articles';
 				    break;
 				case 'auteur':
-				    include_spip('action/editer_auteurs');
-				    $fun = 'revisions_auteurs';
+				    include_spip('inc/modifier');
+				    $fun = 'revision_auteur';
 				    break;
 				case 'rubrique':
 				    include_spip('action/editer_rubrique');
