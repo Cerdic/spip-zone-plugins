@@ -30,7 +30,7 @@ function action_snippet_exporte(){
 			$out = recuperer_fond($f,array('id'=>intval($id)));
 			$out = preg_replace(",\n[\s]*(?=\n),","",$out);
 			
-			$filename=$arg;
+			$filename=str_replace(":","_",$arg);
 			if (preg_match(",<titre>(.*)</titre>,Uims",$out,$regs))
 				$filename = preg_replace(',[^-_\w]+,', '_', trim(translitteration(textebrut(typo($regs[1])))));
 			$extension = "xml";
