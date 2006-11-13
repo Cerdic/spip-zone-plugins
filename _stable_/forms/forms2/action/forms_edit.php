@@ -200,7 +200,7 @@ function action_forms_edit(){
 	$redirect = str_replace("&amp;","&",urldecode(_request('redirect')));
 	//$redirect = parametre_url($redirect,'var_ajaxcharset',''); // si le redirect sert, pas d'ajax !
 	if ($redirect==NULL) $redirect="";
-	include_spip("inc/actions");
+	include_spip("inc/securiser_action");
 	if (verifier_action_auteur("forms_edit-$arg",$hash,$id_auteur)==TRUE) {
 		$arg=explode("-",$arg);
 		$id_form = $arg[0];

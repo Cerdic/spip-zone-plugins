@@ -19,7 +19,7 @@ function action_forms_supprime(){
 	$id_auteur = $auteur_session['id_auteur'];
 	$redirect = _request('redirect');
 	if ($redirect==NULL) $redirect="";
-	include_spip("inc/actions");
+	include_spip("inc/securiser_action");
 	if (verifier_action_auteur("forms_supprime-$id_form",$hash,$id_auteur)==TRUE) {
 		//echo('ok');
 		//if (Forms_form_administrable($id_form)) {
