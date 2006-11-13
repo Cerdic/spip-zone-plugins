@@ -38,7 +38,7 @@ jQuery.fn.ajaxAction = function() {
 		if (!idtarget) idtarget = id;		
 		var url = (($(this).rel()).split('#'))[0];
 		var redir = url + "&var_ajaxcharset="+ajaxcharset+"&bloc="+idtarget;
-		action = action.replace(/redirect=[^&#]*/,'');
+		action = (action.split('#')[0]).replace(/&?redirect=[^&#]*/,''); // l'ancre perturbe IE ...
 		$('#'+idtarget+',#apercu_gauche').ajaxWait();
 		$('#'+idtarget).load(action,{redirect: redir}, function(){ $('#'+idtarget).ajaxAction();});
 		$.get( url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu" , function(data){refresh_apercu(data);} );
