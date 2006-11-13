@@ -19,6 +19,7 @@ img.widget-edit, img.widget-crayon {
 }
 .widget-boutons {
     width: 40px;
+    display: none;
 }
 .widget-boutons div {
 	position:absolute;
