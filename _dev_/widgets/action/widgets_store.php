@@ -127,10 +127,6 @@ function action_widgets_store_dist() {
 				    include_spip('inc/modifier');
 				    $fun = 'revision_auteur';
 				    break;
-				case 'rubrique':
-				    include_spip('action/editer_rubrique');
-				    $fun = 'revisions_rubriques';
-				    break;
 				case 'breve':
 				    include_spip('action/editer_breve');
 				    $fun = 'revisions_breves';
@@ -138,6 +134,14 @@ function action_widgets_store_dist() {
 				case 'document':
 				    include_spip('inc/modifier');
 				    $fun = 'revision_document';
+				    break;
+				case 'forum':
+				    include_spip('inc/modifier');
+				    $fun = 'revision_forum';
+				    break;
+				case 'rubrique':
+				    include_spip('action/editer_rubrique');
+				    $fun = 'revisions_rubriques';
 				    break;
 				case 'syndic':
 				case 'site':

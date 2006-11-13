@@ -12,6 +12,16 @@ function analyse_droits_rapide_dist() {
         return true;
 }
 
+// Modifier un forum ?
+// = un super-admin (ici, pour tests de widgets forum)
+if (!function_exists('autoriser_modifier_forum')) {
+	function autoriser_modifier_forum($faire, $type, $id, $qui, $opt) {
+		return
+			$qui['statut'] == '0minirezo'
+			AND !$qui['restreint'];
+	}
+}
+
 // Le pipeline affichage_final, execute a chaque hit sur toute la page
 function Widgets_affichage_final($page) {
 
