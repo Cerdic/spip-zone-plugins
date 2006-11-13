@@ -238,6 +238,12 @@ $.fn.iconewidget = function(){
     .find('.widget-crayon') // le crayon a clicker lui-meme
       .click(function(e){
         $(this).ancestors('.widget').openwidget(e);
+      })
+    .end().find('.widget-edit') // le + qui passe en prive pour editer tout
+      .click(function(e){
+      	var link = $(this).ancestors('.widget')[0].className.match(/\b(\w+)--(\d+)\b/);
+        document.location = 'ecrire/?exec=' + link[1] + 's_edit&id_'
+        									+ link[1] + '=' + link[2];
       });
 }
 
