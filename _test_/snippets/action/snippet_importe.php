@@ -19,7 +19,7 @@ function action_snippet_importe(){
 	$id_auteur = $auteur_session['id_auteur'];
 	$redirect = _request('redirect');
 	if ($redirect==NULL) $redirect="";
-	include_spip("inc/actions");
+	include_spip("inc/securiser_action");
 	if (verifier_action_auteur("snippet_importe-$arg",$hash,$id_auteur)==TRUE) {
 		$table = $args[0];
 		$id = $args[1];
