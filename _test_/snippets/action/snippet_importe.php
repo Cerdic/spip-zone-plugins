@@ -37,7 +37,8 @@ function action_snippet_importe(){
 			if ($f){
 				include_spip('inc/xml');
 				$arbre = spip_xml_load($source, false);
-				$f($id,$arbre,$contexte);
+				$translations = $f($id,$arbre,$contexte);
+				snippets_translate_raccourcis_modeles($translations);
 			}
 		}
 		if ($unlink)

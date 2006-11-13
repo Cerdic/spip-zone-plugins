@@ -29,6 +29,12 @@ function snippets_liste_imports($table){
 	$snippets = find_all_in_path("snippets/$table/",$pattern);
 	return $snippets;
 }
+function snippets_type_de_table($table){
+	$type = $table;
+	if (substr($type,-1)=="s") $type = substr($type,0,strlen($type)-1);
+	if (substr($type,0,5)=="spip_") $type = substr($type,5);
+	return $type;
+}
 
 function boite_snippets($titre,$icone,$table,$id,$contexte="",$retour = ""){
 	include_spip('inc/autoriser');
@@ -38,9 +44,7 @@ function boite_snippets($titre,$icone,$table,$id,$contexte="",$retour = ""){
 	
 	// verifier les droits
 	$auth = false;
-	$type = $table;
-	if (substr($type,-1)=="s") $type = substr($type,0,strlen($type)-1);
-	if (substr($type,0,5)=="spip_") $type = substr($type,5);
+	$type = snippets_type_de_table($table);
 	if (intval($id)==$id) {
 		$auth = autoriser('modifier',$type,$id);
 	}
@@ -97,5 +101,78 @@ function boite_snippets($titre,$icone,$table,$id,$contexte="",$retour = ""){
 	return $out;
 }
 
+function snippets_liste_raccourcis($table){
+	$type = snippets_type_de_table($table);
+	$l = array();
+	$rac_historiques = array(
+		'document' => '|doc|im|img|image|emb', 
+		'article' => '|art', 
+		'rubrique' => '|rub',
+		'auteur' => '|aut',
+		'breve' => '|br..?ve' # accents :(
+		);
+
+	// les modeles
+	$rac = $type;
+	if (isset($rac_historiques[$type]))
+		$rac .= $rac_historiques[$type];
+	
+	$l[",([^a-z])($type)%d([^0-9]),"] = "$1$2%d$3" ;
+	
+	return $l;
+}
+
+// $translations est un array de ($table, $id_objet_ancien, $id_objet_nouveau)
+function snippets_translate_raccourcis_modeles($translations){
+	$trans = array();
+	$liste = array();
+	foreach($translations as $translatation) {
+		$t = $translatation[0];
+		// recuperer la liste des raccourcis a changer pour ce type
+		// si necessaire
+		if (!isset($liste[$t])) $liste[$t] = snippets_liste_raccourcis($table);
+		// ajouter la liste des translations a faire pour ce type
+		foreach($liste as $f=>$r)
+			$trans[str_replace('%d',$translatation[1],$f)] = str_replace('%d',$translatation[2],$r);
+	}
+	$a_type = array();
+	$revision = array();
+	foreach($translations as $translatation){
+		$table = $translatation[0];
+		if (!isset($a_type[$table])){
+			$a_type[$table] = snippets_type_de_table($table);
+			$rev = $table;
+			if (substr($rev,0,5)=="spip_") $rev = substr($type,5);
+			$rev = "revision_$rev";
+			if (include_spip("action/editer_$type") && function_exists($rev))
+				$revision[$table] = $rev;
+		}
+		$type = $a_type[$table];
+		$id = $translatation[1];
+		$prim = "id_$type";
+		$row = spip_fetch_array(spip_query("SELECT * FROM $table WHERE $prim="._q($id)));
+		if ($row) {
+			foreach($row as $key => $val){
+				$val = preg_replace(array_keys($trans),$trans,$val);
+				if ($row[$key]!=$val)
+					$row[$key]=$val;
+				else
+					unset($row[$key]);
+			}
+			if (count($row)){
+				if (isset($revision[$table]))
+					$revision[$table]($id,$row);
+				else {
+					$set = "";
+					foreach($row as $key=>$val){
+						$set .= "$key="._q($val).", ";
+					}
+					$set = substr($set,0,strlen($set)-2);
+					spip_query("UPDATE $table SET $set WHERE $prim="._q($id));
+				}
+			}
+		}
+	}
+}
 
 ?>
