@@ -12,8 +12,8 @@
 	dev
 	</etat>
 	<description>
-	- Remplace automatiquement les liens vers un fichier de format mp3 par un lecteur mp3 en flash permettant d'écouter ce fichier.<br />
-	- Le modèle doc.html, fait la même chose en utilisant la balise permettant d'afficher la vignette du document.<br />
+	- Remplace automatiquement les liens vers un fichier de format mp3 par un lecteur mp3 en flash permettant d'&eacute;couter ce fichier.<br />
+	- Le mod&egrave;le doc.html, fait la m&ecirc;me chose en utilisant la balise permettant d'afficher la vignette du document.<br />
 	- Avec le plugin jQuery, et la balise #INSERT_HEAD, ajoute un lecteur devant les liens enclosures MP3<br />
 	- Avec <code>#MODELE{playliste}</code> vous pouvez afficher une playliste des derniers mp3
 _ <a href="?exec=player_admin">configurer le plugin</a> || 
