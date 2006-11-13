@@ -1,48 +1,15 @@
 <?php
 /*
   Nom du plugin      : 	Un QCM dans vos articles
-  Auteur             : 	Patrice VANNEUFVILLE
+  Auteur             : 	Patrice VANNEUFVILLE 
+  						patfr@ifrance.com
  						(sur une idee originale de Mathieu GIANNECCHINI, 2003) 
   Date               : 	30 octobre 2006
-  Fonction du plugin : 	Parse le code du QCM tape dans SPIP et stocke
+  Fonction du plugin : 	Parse le code du QCM tape dans SPIP, stocke
                        	les questions, reponses et commentaires
                        	dans un tableau et retourne le code HTML du QCM
-  Syntaxe 			 : 	Dans le texte de l’article, le code du qcm doit 
-  					   	se trouver entre les balises minuscules :
-							"<qcm>" et "</qcm>".
-  Entre ces balises  :					 
-						T Titre du qcm
-						Q Intitule de la question
-						P1 Texte de la proposition 1
-						P2 Texte de la proposition 2
-						...
-						Pn Texte de la proposition n
-						R suivi du numero de la proposition indique la bonne reponse. 
-						(Donc si la bonne réponse est la proposition 1 on indiquera "R1")
-						
-						On peut mettre plusieurs couples "<qcm>" et "</qcm>" 
-						dans le meme article et inserer des elements html 
-						entre ces couples.
-						Dans ce cas, on peut utiliser une balise particuliere 
-						pour le titre :
-							<qcm>
-							T Titre du qcm
-							</qcm>
-
-						Exemple de gestion des points attribues (positifs ou negatifs) :
-							P1.2 Texte de la proposition 1
-							P2.-1 Texte de la proposition 2
-							R1
-						Veuillez a ce que la bonne reponse attribue toujours
-						le nombre maximal de points
-						
-						Lors de la correction il est possible d'inserer un commentaire
-						en cas de reponse juste ou de reponse fausse :
-							Q Intitule de la question
-							P1 Proposition 1|Commentaire de la reponse fausse
-							P2 Proposition 2|Commentaire de la reponse juste
-							R2
- */
+  Mode d'emploi		 :	http://www.spip-contrib.net/Un-QCM-dans-vos-articles
+*/
  
  define(_QCM_DEBUT, '<qcm>');
  define(_QCM_FIN, '</qcm>');
