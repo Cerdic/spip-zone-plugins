@@ -22,10 +22,10 @@ cfgWidgets.prototype.mkimg = function(what) {
     '" src="' + this.imgPath + '/' + this.img[what].file +
     '" title="' + this.img[what].txt + '" />';
 }
-cfgWidgets.prototype.iconclick = function() {
+cfgWidgets.prototype.iconclick = function(elt) {
   return "<span class='widget-icones'><span>" +
       this.mkimg('crayon') + '<br />' +
-      this.mkimg('edit') + '<br />' +
+      (elt.className.match(/\b(\w+)--(\d+)\b/) ? this.mkimg('edit') + '<br />' : '') +
       this.mkimg('img-changed') +
     "</span></span>";
 }
@@ -234,7 +234,7 @@ $.fn.activatewidget = function() {
 // insere les icones dans l'element
 $.fn.iconewidget = function(){
   return this
-    .prepend(configWidgets.iconclick())
+    .prepend(configWidgets.iconclick(this[0]))
     .find('.widget-crayon') // le crayon a clicker lui-meme
       .click(function(e){
         $(this).ancestors('.widget').openwidget(e);
