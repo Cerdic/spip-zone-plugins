@@ -60,7 +60,7 @@ function Widgets_preparer_page($page, $droits, $wdgcfg = array()) {
 
 		'txt' => array(
 			'error' => _U('widgets:svp_copier_coller'),
-			'sauvegarder' => _U('widgets:sauvegarder')
+			'sauvegarder' => $wdgcfg[msgAbandon] ? _U('widgets:sauvegarder') : ''
 		),
 		'img' => array(
 			'searching' => array(

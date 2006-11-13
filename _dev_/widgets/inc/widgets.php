@@ -69,7 +69,7 @@ function _U($texte)
 function wdgcfg() {
 	$prepare_wdgcfg = function_exists('widgets_config') ? widgets_config() : array();
 	$wdgcfg = array();
-	foreach (array('msgNoChange' => false, 'msgAbandon' => false)
+	foreach (array('msgNoChange' => false, 'msgAbandon' => true)
 				as $prepare_wdgcfgi => $def) {
 		if (isset($prepare_wdgcfg[$prepare_wdgcfgi])) {
 			$wdgcfg[$prepare_wdgcfgi] = $prepare_wdgcfg[$prepare_wdgcfgi];
