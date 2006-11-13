@@ -23,9 +23,14 @@ cfgWidgets.prototype.mkimg = function(what) {
     '" title="' + this.img[what].txt + '" />';
 }
 cfgWidgets.prototype.iconclick = function(elt) {
+  // le + qui passe en prive pour editer tout si classe type--id
+  var link = elt.className.match(/\b(\w+)--(\d+)\b/);
+  link = link ? 
+    '<a href="ecrire/?exec=' + link[1] + 's_edit&id_' + link[1] + '=' + link[2] +
+    '">' + this.mkimg('edit') + '</a><br />' : '';
+
   return "<span class='widget-icones'><span>" +
-      this.mkimg('crayon') + '<br />' +
-      (elt.className.match(/\b(\w+)--(\d+)\b/) ? this.mkimg('edit') + '<br />' : '') +
+      this.mkimg('crayon') + '<br />' + link +
       this.mkimg('img-changed') +
     "</span></span>";
 }
@@ -233,18 +238,13 @@ $.fn.activatewidget = function() {
 
 // insere les icones dans l'element
 $.fn.iconewidget = function(){
-  return this
-    .prepend(configWidgets.iconclick(this[0]))
+  return this.each(function() {
+    $(this).prepend(configWidgets.iconclick(this))
     .find('.widget-crayon') // le crayon a clicker lui-meme
       .click(function(e){
         $(this).ancestors('.widget').openwidget(e);
-      })
-    .end().find('.widget-edit') // le + qui passe en prive pour editer tout
-      .click(function(e){
-      	var link = $(this).ancestors('.widget')[0].className.match(/\b(\w+)--(\d+)\b/);
-        document.location = 'ecrire/?exec=' + link[1] + 's_edit&id_'
-        									+ link[1] + '=' + link[2];
       });
+    });
 }
 
 // initialise les widgets (cree le clone actif)
