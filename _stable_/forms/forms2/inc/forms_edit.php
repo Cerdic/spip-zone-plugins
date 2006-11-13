@@ -222,7 +222,7 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 }
 
 function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $redirect,$ajax=false){
-	global $spip_lang_right,$couleur_claire;
+	global $spip_lang_right,$couleur_claire,$spip_lang_left;
 	$out = "";
 	if (!$id_form) return $out;
 	$out .= "<p>";
@@ -263,6 +263,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		else
 			$out .= debut_cadre_enfonce("", true);
 		
+		$out .= "<img src='"._DIR_PLUGIN_FORMS."/img_pack/b_choix_handle.png' class ='sortableChampsHandle' style='float:$spip_lang_left;position:relative;'/>";
 		$out .= "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;position:relative;display:inline;'>";
 		$out .= "<span class='boutons_ordonne'>";
 		if ($aff_min) {
@@ -286,7 +287,6 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		// Modifier un champ
 		$formulaire = "";
 		$formulaire .= "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
-		$formulaire .= "<img src='"._DIR_PLUGIN_FORMS."/img_pack/b_choix_handle.png' class ='sortableChampsHandle' />";
 		$formulaire .= $visible ? bouton_block_visible("champ_$champ") : bouton_block_invisible("champ_$champ");
 		$formulaire .= "<strong id='titre_nom_$champ'>".typo($row['titre'])."</strong>";
 		$formulaire .= "<br /></div>";
