@@ -84,9 +84,6 @@ function controleur_dist($regs) {
     <a class="widget-cancel" title="{$Cancel}">
       <img src="{$widgetsImgPath}/cancel.png" width="20" height="20" />
     </a>
-    <a href="{$url_edit}" title="{$Editer}" class="widget-full">
-      <img src="{$widgetsImgPath}/edit.png" width="20" height="20" />
-    </a>
   </div>
 </div>
 </form>
