@@ -23,7 +23,7 @@ Author : Cody Lindley
 /* ---------->>> jtip <<<---------------------------------------------------------------*/
 
 #JT_arrow_left{
-	background-image: url(../images/arrow_left.gif);
+	background-image: url(arrow_left.gif);
 	background-repeat: no-repeat;
 	background-position: left top;
 	position: absolute;
@@ -35,7 +35,7 @@ Author : Cody Lindley
 }
 
 #JT_arrow_right{
-	background-image: url(../images/arrow_right.gif);
+	background-image: url(arrow_right.gif);
 	background-repeat: no-repeat;
 	background-position: left top;
 	position: absolute;
@@ -58,7 +58,7 @@ Author : Cody Lindley
 }
 
 .JT_loader{
-	background-image: url(../images/loader.gif);
+	background-image: url(loader.gif);
 	background-repeat: no-repeat;
 	background-position: center center;
 	width:100%;
