@@ -12,6 +12,7 @@ function exec_aidejtip_aide(){
       case ("descriptif"): echo propre(_T('aidejtip:aide_descriptif')); break;
       case ("chapo"): echo propre(_T('aidejtip:aide_chapo')); break;
       case ("texte"): echo propre(_T('aidejtip:aide_texte')); break;
+      case ("ps"): echo propre(_T('aidejtip:aide_ps')); break;      
       default:  break;
    }
 }

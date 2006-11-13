@@ -37,7 +37,7 @@
 
 #JT {
 	position: absolute;
-	z-index:100;
+	z-index:200;
 	border: 2px solid #CCCCCC;
 	background-color: #fff;
 	font-size:12px;

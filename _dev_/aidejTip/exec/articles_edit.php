@@ -176,7 +176,7 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 			  _T('texte_sur_titre') .
 			  "</b>" .
 			  aide ("arttitre") .
-			  "<br />\n<a href='?exec=aidejtip_aide&width=375&champ=surtitre' class='jTip' id='help_1' name='fonction du champ surtitre'>?</a>
+			  "<br />\n<a href='?exec=aidejtip_aide&width=375&champ=surtitre' class='jTip' id='help_1' name='"._T('aidejtip:titre_aide_surtitre')."'>?</a>
 			  <input type='text' name='surtitre' class='forml' value=\"" .
 			  $surtitre .
 			  "\" size='40'" .
@@ -187,7 +187,7 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 		_T('texte_titre_obligatoire') .
 		aide ("arttitre") .
 		
-		"\n<br /><a href='?exec=aidejtip_aide&width=375&champ=titre' class='jTip' id='help_2' name='fonction du champ titre'>?</a>   
+		"\n<br /><a href='?exec=aidejtip_aide&width=375&champ=titre' class='jTip' id='help_2' name='"._T('aidejtip:titre_aide_titre')."'>?</a>   
 		<input type='text' name='titre' style='font-weight: bold; font-size: 13px;' CLASS='formo' VALUE=\"" .
 		$titre .
 		"\" size='40' " .
@@ -199,7 +199,7 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 		  _T('texte_sous_titre') .
 		  "</b>" .
 		  aide ("arttitre") .
-		  "\n<br /><a href='?exec=aidejtip_aide&width=375&champ=soustitre' class='jTip' id='help_3' name='fonction du champ soustitre'>?</a><input type='text' name='soustitre' class='forml' value=\"" .
+		  "\n<br /><a href='?exec=aidejtip_aide&width=375&champ=soustitre' class='jTip' id='help_3' name='"._T('aidejtip:titre_aide_soustitre')."'>?</a><input type='text' name='soustitre' class='forml' value=\"" .
 		  $soustitre .
 		  "\" size='40' /><br /><br />\n") :
 		 '') .
@@ -214,7 +214,7 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 		 ("\n<P><B>" ._T('texte_descriptif_rapide') ."</B>" .
 		  aide ("artdesc") .
 		  "</p>\n<br />" ._T('texte_contenu_article') ."<br />\n" .
-		  "<a href='?exec=aidejtip_aide&width=375&champ=descriptif' class='jTip' id='help_4' name='fonction du champ descriptif'>?</a>
+		  "<a href='?exec=aidejtip_aide&width=375&champ=descriptif' class='jTip' id='help_4' name='"._T('aidejtip:titre_aide_descriptif')."'>?</a>
 		  <textarea name='descriptif' class='forml' rows='2' cols='40' wrap=soft>" .
 		  $descriptif .
 		  "</textarea>\n") :
@@ -235,11 +235,13 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 		aide("raccourcis") .
 		$sup .
 		($spip_display==4 ? '' : afficher_barre('document.formulaire.texte')) .
-		"<a href='?exec=aidejtip_aide&width=375&champ=texte' class='jTip' id='help_5' name='fonction du champ texte'>?</a>
+		"<a href='?exec=aidejtip_aide&width=375&champ=texte' class='jTip' id='help_5' name='"._T('aidejtip:titre_aide_texte')."'>?</a>
 		<textarea id='text_area' name='texte'$att_text>$texte</textarea>\n" .
 
 		((($articles_ps AND $options == "avancees") OR strlen($ps)) ?
-		 ("\n<p><b>" . _T('info_post_scriptum') ."</b><br />" . "<textarea name='ps' class='forml' rows='5' cols='40' wrap=soft>" . $ps . "</textarea></p><p>\n") :
+		 ("\n<p><b>" . _T('info_post_scriptum') ."</b><br />" . 
+		 "<a href='?exec=aidejtip_aide&width=375&champ=ps' class='jTip' id='help_6' name='"._T('aidejtip:titre_aide_ps')."'>?</a>
+		 <textarea name='ps' class='forml' rows='5' cols='40' wrap=soft>" . $ps . "</textarea></p><p>\n") :
 		 '') .
 
 		(!$champs_extra ? '': extra_saisie($extra, 'articles', $id_secteur, false)) .
