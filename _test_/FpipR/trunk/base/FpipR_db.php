@@ -368,7 +368,7 @@ function FpipR_fill_table($method,$arguments){
   //Faire le query API flickr
   $fct = str_replace('.','_',$method);
   $f=charger_fonction($fct, 'FpipR_fill');
-  $f($arguments);
+  return $f($arguments);
 }
 
 function FpipR_fill_photos_table($photos,$add='') {

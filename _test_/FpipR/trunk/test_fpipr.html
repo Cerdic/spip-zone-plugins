@@ -6,14 +6,12 @@
 BOUCLE Flickr
 </title>
 </head>
-<BOUCLE_info(FLICKR_PHOTOS_SEARCH) {user_id=35059506@N00}>
-#LOGO_PHOTO{m}
-[(#WIDTH_PHOTO{m})]x[(#HEIGHT_PHOTO{m})]
-#TITLE
-#DESCRIPTION
-</BOUCLE_info>
-
-
-
+<BOUCLE_pag(FLICKR_PHOTOS_SEARCH) {pagination} {tags spip}>
+#LOGO_PHOTO{s}
+</BOUCLE_pag>
+#PAGINATION_FLICKR
+</B_pag>
+rien
+<//B_pag>
 </body>
 </html>

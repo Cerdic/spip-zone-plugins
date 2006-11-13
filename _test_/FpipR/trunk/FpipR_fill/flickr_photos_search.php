@@ -12,5 +12,6 @@ function FpipR_fill_flickr_photos_search_dist($arguments) {
 								 $arguments['bbox'],$arguments['accuracy'],
 								 $arguments['auth_token']);
   FpipR_fill_photos_table($photos->photos);
+  return $photos->total;
 }
 ?>
