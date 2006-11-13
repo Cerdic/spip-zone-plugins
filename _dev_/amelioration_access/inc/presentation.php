@@ -24,7 +24,7 @@ function choix_couleur() {
 	if ($couleurs_spip) {
 		foreach ($couleurs_spip as $key => $val) {
 			echo "<a href=\"".parametre_url(self(), 'set_couleur', $key)."\">" .
-				http_img_pack("rien.gif", " ", "width='8' height='8' style='margin: 1px; background-color: ".$val['couleur_claire'].";' onmouseover=\"changestyle('bandeauinterface','visibility', 'visible');\""). "</a>";
+				http_img_pack("rien.gif", "couleur $key", "width='8' height='8' style='margin: 1px; background-color: ".$val['couleur_claire'].";' onmouseover=\"changestyle('bandeauinterface','visibility', 'visible');\" onfocus=\"changestyle('bandeauinterface','visibility','visible');\" onblur=\"changestyle('bandeauinterface','visibility','hidden');\""). "</a>";
 		}
 	}
 }
@@ -648,7 +648,7 @@ function puce_statut_article($id, $statut, $id_rubrique) {
 	  $action = "onmouseover=\"montrer('statutdecalarticle$id');\"";
 	  $inser_puce = "\n<div class='puce_article' id='statut$id'$dir_lang>"
 			. "\n<div class='puce_article_fixe' $action>" .
-		  http_img_pack("$puce", "", "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>"
+		  http_img_pack("$puce", "$title", "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>"
 			. "\n<div class='puce_article_popup' id='statutdecalarticle$id' onmouseout=\"cacher('statutdecalarticle$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>\n"
 			. afficher_script_statut($id, 'article', -1, 'puce-blanche.gif', 'prepa', $titles['blanche'], $action)
 			. afficher_script_statut($id, 'article', -12, 'puce-orange.gif', 'prop', $titles['orange'], $action)
@@ -657,7 +657,7 @@ function puce_statut_article($id, $statut, $id_rubrique) {
 			. afficher_script_statut($id, 'article', -45, 'puce-poubelle.gif', 'poubelle', $titles['poubelle'], $action)
 		. "</div></div>";
 	} else {
-		$inser_puce = http_img_pack("$puce", "", "id='imgstatutarticle$id' style='margin: 1px;'");
+		$inser_puce = http_img_pack("$puce", "$title", "id='imgstatutarticle$id' style='margin: 1px;'");
 	}
 	return $inser_puce;
 }
@@ -695,7 +695,7 @@ function puce_statut_breve($id, $statut, $type, $droit) {
 	}
 
 	$type1 = "statut$type$id"; 
-	$inser_puce = http_img_pack($puce, "", "id='img$type1' style='margin: 1px;'");
+	$inser_puce = http_img_pack($puce, "$title", "id='img$type1' style='margin: 1px;'");
 
 	if (!$droit) return $inser_puce;
 	
@@ -726,6 +726,7 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
 		      "');",
 		      $img,
 			"title=\"".$title."\"",
+			$title,
 			'','','',
 		      $act);
 }
@@ -830,11 +831,11 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			echo "<div class='liste'>";
 
 			$id_img = "img_".$tmp_var;
-			$texte_img = http_img_pack("searching.gif", "*", "style='visibility: hidden; float: $spip_lang_right' id = '$id_img'");
+			$texte_img = http_img_pack("searching.gif", "", "style='visibility: hidden; float: $spip_lang_right' id = '$id_img'");
 
 			if ($afficher_trad) {
-				$texte_img .= http_img_pack("searching.gif", "*", "style='visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
-				$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"#\" onclick=\"return charger_id_url('" . generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax_trad"). "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-12.gif' /></a></div>";
+				$texte_img .= http_img_pack("searching.gif", "", "style='visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
+				$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"#\" onclick=\"return charger_id_url('" . generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax_trad"). "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-12.gif' alt='afficher les traductions' /></a></div>";
 			}
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -1054,11 +1055,11 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			echo "<div class='liste'>";
 
 			$id_img = "img_".$tmp_var;
-			$texte_img = http_img_pack("searching.gif", "*", "style='visibility: hidden; float: $spip_lang_right' id = '$id_img'");
+			$texte_img = http_img_pack("searching.gif", "", "style='visibility: hidden; float: $spip_lang_right' id = '$id_img'");
 			
-			$texte_img .= http_img_pack("searching.gif", "*", "style='visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
+			$texte_img .= http_img_pack("searching.gif", "", "style='visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
 
-			$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"#\" onclick=\"return charger_id_url('" . generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax_trad") . "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-off-12.gif' /></a></div>";
+			$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"#\" onclick=\"return charger_id_url('" . generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax_trad") . "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-off-12.gif' alt='masquer les traductions' /></a></div>";
 
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -1863,7 +1864,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		$alt = $texte;
 	}
 	else {
-		$alt = ' ';
+		$alt = '';
 	}
 	
 	if (!$menu_accesskey = intval($menu_accesskey)) $menu_accesskey = 1;
@@ -1888,13 +1889,13 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	$compteur_survol ++;
 
 	if ($spip_display != 1 AND $spip_display != 4) {
-		echo "<td class='cellule48' onmouseover=\"changestyle('bandeau$rubrique_icone', 'visibility', 'visible');\" width='$largeur'>$a_href" .
+		echo "<td class='cellule48' onmouseover=\"changestyle('bandeau$rubrique_icone', 'visibility', 'visible');\" onfocus=\"changestyle('bandeau$rubrique_icone','visibility','visible');\" onblur=\"changestyle('bandeau$rubrique_icone','visibility','hidden');\" width='$largeur'>$a_href" .
 		  http_img_pack("$fond", $alt, "$title width='48' height='48'");
 		if ($spip_display != 3) {
 			echo "<span>$texte</span>";
 		}
 	}
-	else echo "<td class='cellule-texte' onmouseover=\"changestyle('bandeau$rubrique_icone', 'visibility', 'visible');\" width='$largeur'>$a_href".$texte;
+	else echo "<td class='cellule-texte' onmouseover=\"changestyle('bandeau$rubrique_icone', 'visibility', 'visible');\"  onfocus=\"changestyle('bandeau$rubrique_icone','visibility','visible');\" onblur=\"changestyle('bandeau$rubrique_icone','visibility','hidden');\" width='$largeur'>$a_href".$texte;
 	echo "</a></td>\n";
 }
 
@@ -1923,7 +1924,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		//$hauteur = 68;
 		if (count(explode(" ", $texte)) > 1) $largeur = 80;
 		else $largeur = 70;
-		$alt = " ";
+		$alt = "";
 	}
 	if ($aide AND $spip_display != 3) {
 		$largeur += 50;
@@ -2039,10 +2040,10 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 			. "\n<tr><td><a$lien class='cellule-h'>"
 			. "<div class='cell-i'>" ;
 			if ($fonction){
-				$retour .= http_img_pack($fonction, "", http_style_background($fond, "center center no-repeat"));
+				$retour .= http_img_pack($fonction, $texte, http_style_background($fond, "center center no-repeat"));
 			}
 			else {
-				$retour .= http_img_pack($fond, "", "");
+				$retour .= http_img_pack($fond, $texte, "");
 			}
 			$retour .= "</a></div></td>"
 			. "\n<td class='cellule-h-lien'><a$lien class='cellule-h'>"
@@ -2073,7 +2074,7 @@ function bandeau_barre_verticale(){
 // http://doc.spip.org/@lien_change_var
 function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") {
 	$lien = parametre_url($lien, $set, $couleur);
-	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" alt=' ' $mouseOver>";
+	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" alt=\"$titre\" $mouseOver>";
 }
 
 //
@@ -2266,30 +2267,30 @@ if (true /*$bandeau_colore*/) {
 
 	echo "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>";
 
-	echo "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onmouseover=\"changestyle('bandeautoutsite','visibility','visible');\">",
-		  http_img_pack("tout-site.png", "", "width='26' height='20'") . "</a>";
-		if ($id_rubrique > 0) echo "<a href='" . generer_url_ecrire("brouteur","id_rubrique=$id_rubrique") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide','visibility','visible');\">" .
-		  http_img_pack("naviguer-site.png", "", "width='26' height='20'") ."</a>";
-		else echo "<a href='" . generer_url_ecrire("brouteur") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide','visibility','visible');\" >" .
-		  http_img_pack("naviguer-site.png", "", "width='26' height='20'") . "</a>";
+	echo "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onmouseover=\"changestyle('bandeautoutsite','visibility','visible');\" onfocus=\"changestyle('bandeautoutsite','visibility','visible');\" onblur=\"changestyle('bandeautoutsite','visibility','hidden');\">",
+		  http_img_pack("tout-site.png", _T('icone_site_entier'), "width='26' height='20'") . "</a>";
+		if ($id_rubrique > 0) echo "<a href='" . generer_url_ecrire("brouteur","id_rubrique=$id_rubrique") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide','visibility','visible'); \" onfocus=\"changestyle('bandeaunavrapide','visibility','visible');\" onblur=\"changestyle('bandeaunavrapide','visibility','hidden');\">" .
+		  http_img_pack("naviguer-site.png", _T('icone_brouteur'), "width='26' height='20'") ."</a>";
+		else echo "<a href='" . generer_url_ecrire("brouteur") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide','visibility','visible');\" onfocus=\"changestyle('bandeaunavrapide','visibility','visible');\" onblur=\"changestyle('bandeaunavrapide','visibility','hidden');\">" .
+		  http_img_pack("naviguer-site.png", _T('icone_brouteur'), "width='26' height='20'") . "</a>";
 
-		echo "<a href='" . generer_url_ecrire("recherche") . "' class='icone26' onmouseover=\"changestyle('bandeaurecherche','visibility','visible'); findObj('form_recherche').focus();\" >" .
-		  http_img_pack("loupe.png", "", "width='26' height='20'") ."</a>";
+		echo "<a href='" . generer_url_ecrire("recherche") . "' class='icone26' onmouseover=\"changestyle('bandeaurecherche','visibility','visible'); findObj('form_recherche').focus();\"  onfocus=\"changestyle('bandeaurecherche','visibility','visible');\" onblur=\"changestyle('bandeaurecherche','visibility','hidden');\" >" .
+		  http_img_pack("loupe.png", _T('info_rechercher'), "width='26' height='20'") ."</a>";
 
-		echo http_img_pack("rien.gif", " ", "width='10'");
+		echo http_img_pack("rien.gif", "", "width='10'");
 
-		echo "<a href='" . generer_url_ecrire("calendrier","type=semaine") . "' class='icone26' onmouseover=\"changestyle('bandeauagenda','visibility','visible');\">" .
-		  http_img_pack("cal-rv.png", "", "width='26' height='20'") ."</a>";
-		echo "<a href='" . generer_url_ecrire("messagerie") . "' class='icone26' onmouseover=\"changestyle('bandeaumessagerie','visibility','visible');\">" .
-		  http_img_pack("cal-messagerie.png", "", "width='26' height='20'") ."</a>";
-		echo "<a href='" . generer_url_ecrire("synchro") . "' class='icone26' onmouseover=\"changestyle('bandeausynchro','visibility','visible');\">" .
-		  http_img_pack("cal-suivi.png", "", "width='26' height='20'") . "</a>";
+		echo "<a href='" . generer_url_ecrire("calendrier","type=semaine") . "' class='icone26' onmouseover=\"changestyle('bandeauagenda','visibility','visible');\" onfocus=\"changestyle('bandeauagenda','visibility','visible');\" onblur=\"changestyle('bandeauagenda','visibility','hidden');\">" .
+		  http_img_pack("cal-rv.png", _T('icone_agenda'), "width='26' height='20'") ."</a>";
+		echo "<a href='" . generer_url_ecrire("messagerie") . "' class='icone26' onmouseover=\"changestyle('bandeaumessagerie','visibility','visible');\" onfocus=\"changestyle('bandeaumessagerie','visibility','visible');\" onblur=\"changestyle('bandeaumessagerie','visibility','hidden');\">" .
+		  http_img_pack("cal-messagerie.png", _T('icone_messagerie_personnelle'), "width='26' height='20'") ."</a>";
+		echo "<a href='" . generer_url_ecrire("synchro") . "' class='icone26' onmouseover=\"changestyle('bandeausynchro','visibility','visible');\" onfocus=\"changestyle('bandeausynchro','visibility','visible');\" onblur=\"changestyle('bandeausynchro','visibility','hidden');\">" .
+		  http_img_pack("cal-suivi.png", _T('icone_suivi_activite'), "width='26' height='20'") . "</a>";
 		
 
 		if (!($connect_statut == "0minirezo" AND $connect_toutes_rubriques)) {
-			echo http_img_pack("rien.gif", " ", "width='10'");
-			echo "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur") . "' class='icone26' onmouseover=\"changestyle('bandeauinfoperso','visibility','visible');\">" .
-			  http_img_pack("fiche-perso.png", "", "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"");
+			echo http_img_pack("rien.gif", "", "width='10'");
+			echo "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur") . "' class='icone26' onmouseover=\"changestyle('bandeauinfoperso','visibility','visible');\" onfocus=\"changestyle('bandeauinfoperso','visibility','visible');\" onblur=\"changestyle('bandeauinfoperso','visibility','hidden');\">" .
+			  http_img_pack("fiche-perso.png", _T('icone_informations_personnelles'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"");
 			echo "</a>";
 		}
 		
@@ -2315,28 +2316,30 @@ if (true /*$bandeau_colore*/) {
 			if ($options != "avancees") {
 				$lien = parametre_url(self(), 'set_options', 'avancees');
 				$icone = "interface-display-comp.png";
+				$alt =_T('icone_interface_complet');
 			} else {
 				$lien = parametre_url(self(), 'set_options', 'basiques');
 				$icone = "interface-display.png";
+				$alt =_T('icone_interface_simple');
 			}
-			echo "<a href='$lien' class='icone26' onmouseover=\"changestyle('bandeaudisplay','visibility', 'visible');\">" .
-			  http_img_pack("$icone", "", "width='26' height='20'")."</a>";
+			echo "<a href='$lien' class='icone26' onmouseover=\"changestyle('bandeaudisplay','visibility', 'visible');\" onfocus=\"changestyle('bandeaudisplay','visibility','visible');\" onblur=\"changestyle('bandeaudisplay','visibility','hidden');\">" .
+			  http_img_pack("$icone", "$alt", "width='26' height='20'")."</a>";
 
-			echo http_img_pack("rien.gif", " ", "width='10' height='1'");
-			echo http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", "abc", "class='format_png' valign='middle' width='59' height='15' usemap='#map_layout'");
+			echo http_img_pack("rien.gif", "", "width='10' height='1'");
+			echo http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", "choix  de l'interface", "class='format_png' valign='middle' width='59' height='15' usemap='#map_layout'");
 
 
-			echo http_img_pack("rien.gif", " ", "width='10' height='1'");
+			echo http_img_pack("rien.gif", "", "width='10' height='1'");
 			// grand ecran
 			if ($spip_ecran == "large") {
 				$i = _T('info_petit_ecran');
-				echo "<a href='". parametre_url(self(),'set_ecran', 'etroit') ."' class='icone26' onmouseover=\"changestyle('bandeauecran','visibility', 'visible');\" title=\"$i\">" .
+				echo "<a href='". parametre_url(self(),'set_ecran', 'etroit') ."' class='icone26' onmouseover=\"changestyle('bandeauecran','visibility', 'visible');\" onfocus=\"changestyle('bandeauecran','visibility','visible');\" onblur=\"changestyle('bandeauecran','visibility','hidden');\" title=\"$i\">" .
 				  http_img_pack("set-ecran-etroit.png", $i, "width='26' height='20'") . "</a>";
 				$ecran = "<div><a href='".parametre_url(self(),'set_ecran', 'etroit')."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
 			}
 			else {
 				$i = _T('info_grand_ecran');
-				echo "<a href='".parametre_url(self(),'set_ecran', 'large')."' class='icone26' onmouseover=\"changestyle('bandeauecran','visibility', 'visible');\" title=\"$i\">" .
+				echo "<a href='".parametre_url(self(),'set_ecran', 'large')."' class='icone26' onmouseover=\"changestyle('bandeauecran','visibility', 'visible');\"  onfocus=\"changestyle('bandeauecran','visibility','visible');\" onblur=\"changestyle('bandeauecran','visibility','hidden');\" title=\"$i\">" .
 				  http_img_pack("set-ecran.png", $i, "width='26' height='20'") ."</a>";
 				$ecran = "<div><b>"._T('info_petit_ecran')."</b>/<a href='".parametre_url(self(),'set_ecran', 'large')."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
 			}
@@ -2359,10 +2362,11 @@ if (true /*$bandeau_colore*/) {
 		echo "<td class='bandeau_couleur' style='text-align: $spip_lang_right; width: 28px;' valign='middle'>";
 
 		if ($auth_can_disconnect) {
+			$alt=_T('icone_deconnecter');
 			echo "<a href='",
 			  generer_url_action("logout","logout=prive"),
-			  "' class='icone26' onmouseover=\"changestyle('bandeaudeconnecter','visibility', 'visible');\">",
-			  http_img_pack("deconnecter-24.gif", "", ""),
+			  "' class='icone26' onmouseover=\"changestyle('bandeaudeconnecter','visibility', 'visible');\" onfocus=\"changestyle('bandeaudeconnecter','visibility','visible');\" onblur=\"changestyle('bandeaudeconnecter','visibility','hidden');\">",
+			  http_img_pack("deconnecter-24.gif", "$alt", ""),
 			  "</a>";
 			}
 		echo "</td>";

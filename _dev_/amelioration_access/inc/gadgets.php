@@ -136,7 +136,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 
 	$i = sizeof($arr_rub);
 	if ($i > 0 AND $zdecal < $zmax) {
-		$ret = "<div class='pos_r' style='z-index: $z;' onMouseOver=\"montrer('b_$id_rubrique');\" onMouseOut=\"cacher('b_$id_rubrique');\">";
+		$ret = "<div class='pos_r' style='z-index: $z;' onMouseOver=\"montrer('b_$id_rubrique');\" onMouseOut=\"cacher('b_$id_rubrique'); \">";
 		$ret .= '<div class="brt"><a href="' . generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique)
 		  . '" class="bandeau_rub"'.$image.'>'.supprimer_tags($titre_rubrique)."</a></div>\n"
 		  . '<div class="bandeau_rub" style="z-index: '.($z+1).';" id="b_'.$id_rubrique.'">';
