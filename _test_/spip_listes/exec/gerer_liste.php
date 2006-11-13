@@ -932,7 +932,7 @@ if ($supp_auteur && $flag_editable) {
 	$query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$supp_auteur' AND id_article='$id_article'";
 	$result=spip_query($query);
 	if (lire_meta('activer_moteur') == 'oui') {
-		include_spip ('inc/index");
+		include_spip ('inc/index');
 		indexer_article($id_article);
 	}
 }
