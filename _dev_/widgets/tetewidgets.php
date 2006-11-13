@@ -67,9 +67,13 @@ function Widgets_preparer_page($page, $droits, $wdgcfg = array()) {
 				'file' => 'searching.gif',
 				'txt' => _U('TODO:searching')
 			),
-			'edit' => array(
+			'crayon' => array(
 				'file' => 'crayon.png',
 				'txt' => _U('widgets:editer')
+			),
+			'edit' => array(
+				'file' => 'edit.png',
+				'txt' => _U('widgets:editer_tout')
 			),
 			'img-changed' => array(
 				'file' => 'changed.png',

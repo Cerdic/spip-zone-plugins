@@ -24,6 +24,7 @@ cfgWidgets.prototype.mkimg = function(what) {
 }
 cfgWidgets.prototype.iconclick = function() {
   return "<span class='widget-icones'><span>" +
+      this.mkimg('crayon') + '<br />' +
       this.mkimg('edit') + '<br />' +
       this.mkimg('img-changed') +
     "</span></span>";
@@ -234,7 +235,7 @@ $.fn.activatewidget = function() {
 $.fn.iconewidget = function(){
   return this
     .prepend(configWidgets.iconclick())
-    .find('.widget-edit') // le crayon a clicker lui-meme
+    .find('.widget-crayon') // le crayon a clicker lui-meme
       .click(function(e){
         $(this).ancestors('.widget').openwidget(e);
       });

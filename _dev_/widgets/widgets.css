@@ -4,10 +4,11 @@ img.widget-img-changed {
 .widget-changed img.widget-img-changed {
     visibility: visible;
 }
-img.widget-edit {
+img.widget-edit, img.widget-crayon {
     visibility: hidden;
 }
-.widget-autorise:hover img.widget-edit, .widget-hover img.widget-edit {
+.widget-autorise:hover img.widget-edit, .widget-hover img.widget-edit,
+.widget-autorise:hover img.widget-crayon, .widget-hover img.widget-crayon {
     visibility: visible;
 }
 .widget-autorise:hover, .widget-hover {
@@ -31,6 +32,6 @@ img.widget-edit {
 .widget-icones span {
     position:absolute;
 }
-.widget-edit {
+.widget-edit, .widget-crayon {
 	cursor: pointer;
 }
