@@ -15,6 +15,7 @@ cursor:pointer;
 .radiobox{
 margin:10px 0px 10px 0px;
 padding:0px;
+width:200px;
 font-size:9px;
 background-color:#000000;
 }
@@ -22,6 +23,7 @@ background-color:#000000;
 .radiobox a, .radiobox a:hover{
 color:#ffffff;
 text-decoration:none;
+font-familly:verdanna, sans-serif;
 }
 
 .radiobox li.over{

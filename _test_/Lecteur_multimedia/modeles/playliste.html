@@ -12,15 +12,19 @@
 <B_doc>
 <div class="radiobox">
 <ul class="controles">
+<!--
 <li onClick="player_prev()"><</li>
+//-->
 <li onClick="player_play(0)">Play</li>
 <li onClick="player_stop()">stop</li>
+<!--
 <li onClick="player_next()">></li>
+//-->
 </ul>
 
 <ul class="playliste">
 <BOUCLE_doc (DOCUMENTS) {extension==mp3}{!par date}{0,10}>
-<li><a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
+<li class="play_"><a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
 </BOUCLE_doc>
 </ul>
 </div>
