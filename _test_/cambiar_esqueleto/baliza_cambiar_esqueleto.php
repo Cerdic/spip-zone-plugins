@@ -31,10 +31,10 @@ if (file_exists("dist")){
 		}			
 }
 
-//comprobamos que exista el directorio "squelette"
-if (file_exists("squelette")){
-		if (!is_file("squelette")) {
-			$lista["squelette"]="squelette";
+//comprobamos que exista el directorio "squelettes"
+if (file_exists("squelettes")){
+		if (!is_file("squelettes")) {
+			$lista["squelettes"]="squelettes";
 		}			
 }
 
@@ -42,21 +42,6 @@ if (file_exists("squelette")){
 if (file_exists("esqueletos")){
 //definimos el path de acceso
 $path = "esqueletos";
-//abrimos el directorio
-$dir = opendir($path);
-while (false !== ($esqueleto = readdir($dir))) {
-		if (!is_file($esqueleto) and $esqueleto!="." and $esqueleto!="..") {
-			$lista[strtolower($esqueleto)]=$esqueleto;
-		}			
-}
-//Cerramos el directorio
-closedir($dir);
-}
-
-//comprobamos que exista el directorio "squelettes"
-if (file_exists("squelettes")){
-//definimos el path de acceso
-$path = "squelettes";
 //abrimos el directorio
 $dir = opendir($path);
 while (false !== ($esqueleto = readdir($dir))) {

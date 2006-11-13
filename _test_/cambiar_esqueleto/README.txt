@@ -6,10 +6,9 @@ Para poder utilizarlo solo tienes que ir colocando en una carpeta llamada "esque
 
 Muestra en una lista los esqueletos que haya en las carpetas (si están en la raíz):
 - esqueletos
-- squelettes
 - squelettes-test
 - themes
-y los "dist" y "squelette".
+y los "dist" y "squelettes".
 INSTALACION
 
 El plugin:
