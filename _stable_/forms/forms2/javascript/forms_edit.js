@@ -37,13 +37,13 @@ jQuery.fn.ajaxAction = function() {
 		var idtarget = action.split('#')[1];
 		if (!idtarget) idtarget = id;		
 		var url = (($(this).rel()).split('#'))[0];
-		var redir = url + "&var_ajaxcharset=utf-8&bloc="+idtarget;
+		var redir = url + "&var_ajaxcharset="+ajaxcharset+"&bloc="+idtarget;
 		action = action.replace(/redirect=[^&#]*/,'');
 		$('#'+idtarget+',#apercu_gauche').ajaxWait();
 		$('#'+idtarget).load(action,{redirect: redir}, function(){ $('#'+idtarget).ajaxAction();});
-		$.get( url+"&var_ajaxcharset=utf-8&bloc=apercu" , function(data){refresh_apercu(data);} );
+		$.get( url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu" , function(data){refresh_apercu(data);} );
 		if (idtarget!='proprietes')
-			$('#proprietes').load(url+"&var_ajaxcharset=utf-8&bloc=proprietes",function(){ $('#proprietes').ajaxAction(); });
+			$('#proprietes').load(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=proprietes",function(){ $('#proprietes').ajaxAction(); });
 		return false;
 	});
 	$('#'+id+' form.ajaxAction').each(function(){
@@ -51,14 +51,15 @@ jQuery.fn.ajaxAction = function() {
 		if (!idtarget) idtarget = $(this).parent().id();
 		var redir = $(this).children('input[@name=redirect]');
 		var url = (($(redir).val()).split('#'))[0];
-		$(redir).val(url + "&var_ajaxcharset=utf-8&bloc="+idtarget);
+		$(redir).val(url + "&var_ajaxcharset="+ajaxcharset+"&bloc="+idtarget);
+		$(redir).after("<input type='hidden' name='var_ajaxcharset' value='"+ajaxcharset+"' />");
 		$(this).ajaxForm('#'+idtarget, 
 			// apres
 			function(){ 
 				$('#'+idtarget).ajaxAction();
-				$.get(url+"&var_ajaxcharset=utf-8&bloc=apercu",function(data){refresh_apercu(data);});
+				$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu",function(data){refresh_apercu(data);});
 				if (idtarget!='proprietes')
-					$('#proprietes').load(url+"&var_ajaxcharset=utf-8&bloc=proprietes",function(){ $('#proprietes').ajaxAction(); });
+					$('#proprietes').load(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=proprietes",function(){ $('#proprietes').ajaxAction(); });
 			},
 			// avant
 			function(){ $('#'+idtarget+",#apercu_gauche").prepend("<div>"+ajax_image_searching+"</div>");}

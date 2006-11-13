@@ -27,17 +27,17 @@ function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$
 		$out .= _T("forms:info_supprimer_formulaire")."</p>\n";
 	}
 	$link = generer_action_auteur('forms_supprime',"$id_form",_DIR_RESTREINT_ABS.($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('forms_tous',"",false,true)));
-	$out .= "<form method='POST' action='$link' >";
+	$out .= "<form method='POST' action='$link' style='float:$spip_lang_right'>";
 	$out .= form_hidden($link);
 	$out .= "<div style='text-align:$spip_lang_right'>";
-	$out .= "<input type='submit' name='supp_confirme' value=\""._T('item_oui')."\" class='fondo'>";
+	$out .= "&nbsp;<input type='submit' name='supp_confirme' value=\""._T('item_oui')."\" class='fondo'>";
 	$out .= "</div>";
 	$out .= "</form>\n";
 
-	$out .= "<form method='POST' action='$redirect'>\n";
+	$out .= "<form method='POST' action='$redirect' style='float:$spip_lang_right'>\n";
 	$out .= form_hidden($redirect);
 	$out .= "<div style='text-align:$spip_lang_right'>";
-	$out .= "<input type='submit' name='supp_rejet' value=\""._T('item_non')."\" class='fondo'>";
+	$out .= "&nbsp;<input type='submit' name='supp_rejet' value=\""._T('item_non')."\" class='fondo'>";
 	$out .= "</div>";
 	$out .= "</form><br />\n";
 
@@ -165,7 +165,7 @@ function exec_forms_edit(){
 	}
 
 	$ajax_charset = _request('var_ajaxcharset');
-	$bloc = _request('bloc');//var_dump($ajax_charset);
+	$bloc = _request('bloc');
 	if ($ajax_charset && $bloc=='dummy') {
 		ajax_retour("");
 	}
@@ -286,7 +286,8 @@ function exec_forms_edit(){
 	$out .= "</div>\n";
 
 	echo $out;
-		
+
+	echo "<script type='text/javascript'><!--\n var ajaxcharset='utf-8';\n//--></script>";
 	echo "<script src='"._DIR_PLUGIN_FORMS."javascript/interface.js' type='text/javascript'></script>";
 	if (!_request('var_noajax'))
 		echo "<script src='"._DIR_PLUGIN_FORMS."javascript/forms_edit.js' type='text/javascript'></script>";
