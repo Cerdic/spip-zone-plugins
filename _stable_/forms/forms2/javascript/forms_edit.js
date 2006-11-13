@@ -82,6 +82,27 @@ jQuery.fn.ajaxAction = function() {
 				$(this).parent().siblings('input[@name=ordre]').val(serial.hash);
 			}
 		}
+	)
+	$('.boutons_ordonne').hide();
+	$('#'+id+' div#sortableChamps').Sortable(
+		{
+			accept : 			'sortableChampsItem',
+			activeclass : 'sortableactive',
+			hoverclass : 	'sortablehover',
+			helperclass : 'sorthelper',
+			handle : '.sortableChampsHandle',
+			/*opacity: 		0.8,*/
+			/*fx:				200,*/
+			revert:			true,
+			tolerance:		'intersect',
+			/*containment: 'parent',*/
+			onStop : function(arg){
+				serial = $.SortSerialize($(this).parent().id());
+				var form = $(this).parent().siblings('form.sortableChamps');
+				form.children('input[@name=ordre]').val(serial.hash);
+				form.end().children('input[@type=submit]').eq(0).each(function(){ this.click(); });
+			}
+		}
 	)	
 }
 

@@ -166,6 +166,9 @@ function exec_forms_edit(){
 
 	$ajax_charset = _request('var_ajaxcharset');
 	$bloc = _request('bloc');//var_dump($ajax_charset);
+	if ($ajax_charset && $bloc=='dummy') {
+		ajax_retour("");
+	}
 	if ($ajax_charset && $bloc=='apercu') {
 		include_spip('public/assembler');
 		$GLOBALS['var_mode']='calcul';

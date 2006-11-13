@@ -15,6 +15,24 @@ include_spip('inc/forms_edit');
 include_spip('inc/forms_type_champs');
 include_spip('inc/autoriser');
 // TODO : charger la bonne langue !
+function Forms_ordonne_champs($id_form){
+	if (strlen($ordre = _request('ordre'))){
+		$ordre = explode("&",$ordre);
+		$rang = 1;$ok = true;
+		$replace = "";
+		foreach($ordre as $item){
+			$item = explode("=",$item);
+			$item = explode("-",$item[1]);
+			array_shift($item);
+			if (($c=array_shift($item))!=$id_form) $ok=false;
+			$champ = implode("-",$item);
+			$update[]="UPDATE spip_forms_champs SET rang="._q($rang++)." WHERE id_form="._q($id_form)." AND champ="._q($champ);
+		}
+		if ($ok)
+			foreach($update as $q)
+				spip_query($q);
+	}
+}
 
 function Forms_update_edition_champ($id_form,$champ) {
 	$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($champ));
@@ -85,6 +103,7 @@ function Forms_update($id_form){
 	$wrap_champ = _request('wrap_champ');
 	$supp_choix = _request('supp_choix');
 	$supp_champ = _request('supp_champ');
+	$ordonne_champs = _request('ordonne_champs');
 	
 	//
 	// Modifications des donnees de base du formulaire
@@ -166,6 +185,9 @@ function Forms_update($id_form){
 			spip_query("DELETE FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
 			spip_query("DELETE FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($champ));
 		}
+		if ($id_form==intval($ordonne_champs)){
+			Forms_ordonne_champs($id_form);
+		}
 	}
 	return array($id_form,$champ_visible,$nouveau_champ);
 }
@@ -190,7 +212,8 @@ function action_forms_edit(){
 			if ($redirect && $nouveau_champ) $redirect = parametre_url($redirect,"nouveau_champ",$nouveau_champ);
 		}
 	}
-	redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));
+	if ($redirect)
+		redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));
 }
 
 ?>

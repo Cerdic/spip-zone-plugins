@@ -232,6 +232,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	$out .= _T("forms:info_champs_formulaire");
 	$out .= "</div>\n";
 	$out .= "<div id='forms_lang'></div>";
+	$out .= "<div id='sortableChamps'>";
 
 	if ($row = spip_fetch_array(spip_query("SELECT MAX(rang) AS rangmax, MIN(rang) AS rangmin FROM spip_forms_champs WHERE id_form="._q($id_form)))){
 		$index_min = $row['rangmin'];
@@ -253,6 +254,8 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$redirect = ancre_url(parametre_url($redirect,'champ_visible',$champ),'champ_visible');
 		$action_link = generer_action_auteur("forms_edit","$id_form",urlencode($redirect));
 		$action_link_noredir = parametre_url($action_link,'redirect','');
+
+		$out .= "<div id='order_$id_bloc' class='sortableChampsItem'>";
 		if ($nouveau) $out .= "<a name='nouveau_champ'></a>";
 		else if ($visible) $out .= "<a name='champ_visible'></a>";
 		if (!in_array($type,array('separateur','textestatique')))
@@ -261,19 +264,20 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 			$out .= debut_cadre_enfonce("", true);
 		
 		$out .= "<div class='verdana1' style='float: $spip_lang_right; font-weight: bold;position:relative;display:inline;'>";
+		$out .= "<span class='boutons_ordonne'>";
 		if ($aff_min) {
 			$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-monter",urlencode($redirect));
 			$link = parametre_url($link,"time",time()); // pour avoir une url differente de l'actuelle
 			$out .= "<a href='$link#champs' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0' alt='"._T("forms:champ_monter")."'></a>";
-		}
-		if ($aff_min && $aff_max) {
-			$out .= " | ";
+			if ($aff_max)
+				$out .= " | ";
 		}
 		if ($aff_max) {
 			$link = generer_action_auteur('forms_champs_deplace',"$id_form-$champ-descendre",urlencode($redirect));
 			$link = parametre_url($link,"time",time()); // pour avoir une url differente de l'actuelle
 			$out .= "<a href='$link#champs' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0' alt='"._T("forms:champ_descendre")."'></a>";
 		}
+		$out .= "</span>";
 		// Supprimer un champ
 		$link = parametre_url($action_link,'supp_champ', $champ);
 		$out .= "<a href='$link#champs' class='ajaxAction' rel='$redirect'><img src='"._DIR_IMG_PACK."supprimer.gif' style='border:0' alt='"._T("forms:supprimer_champ")."'></a>";
@@ -282,6 +286,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		// Modifier un champ
 		$formulaire = "";
 		$formulaire .= "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
+		$formulaire .= "<img src='"._DIR_PLUGIN_FORMS."/img_pack/b_choix_handle.png' class ='sortableChampsHandle' />";
 		$formulaire .= $visible ? bouton_block_visible("champ_$champ") : bouton_block_invisible("champ_$champ");
 		$formulaire .= "<strong id='titre_nom_$champ'>".typo($row['titre'])."</strong>";
 		$formulaire .= "<br /></div>";
@@ -345,11 +350,25 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 			$out .= fin_cadre_relief(true);
 		else
 			$out .= fin_cadre_enfonce(true);
+		$out .= '</div>';
 	}
 	if ($ajax)
 		return "Champ $ajax introuvable"; // erreur si l'on est encore ici
+	$out .= "</div>";
+	// Reordonner les champs ------------------------------------------------------------
+	$action_link = generer_action_auteur("forms_edit","$id_form",urlencode($redirect));
+	$action_link_noredir = parametre_url($action_link,'redirect','');
+	$out .= "<form class='ajaxAction sortableChamps' method='POST' action='$action_link_noredir' style='display:none;'>" .
+		form_hidden($action_link_noredir) .
+		"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
+		"<input type='hidden' name='idtarget' value='dummy' />". // on target un div vide
+		"<input type='hidden' name='ordonne_champs' value='$id_form' />";
+	$out .= "<input type='text' name='ordre' value='' />";
+	$out .= " &nbsp; <input type='submit' name='valider' value='"._T('bouton_valider')."' class='fondo'>";
+	$out .= "<div id='dummy'></div>";
+	$out .= "</form>\n";
 
-	// Ajouter un champ
+	// Ajouter un champ ------------------------------------------------------------------
 	$redirect = ancre_url(parametre_url($redirect,'champ_visible',''),'');
 	$action_link = generer_action_auteur("forms_edit","$id_form",urlencode($redirect));
 	$action_link_noredir = parametre_url($action_link,'redirect','');
@@ -369,7 +388,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$out .= "<option value='$type'>".typo(Forms_nom_type_champ($type))."</option>\n";
 	}
 	$out .= "</select>\n";
-	$out .= " &nbsp; <input type='submit' name='valider' id='ajout_champ' VALUE='"._T('bouton_ajouter')."' class='fondo'>";
+	$out .= " &nbsp; <input type='submit' name='valider' id='ajout_champ' value='"._T('bouton_ajouter')."' class='fondo'>";
 	$out .= "</form>\n";
 	$out .= fin_cadre_enfonce(true);
 	$out .= "</p>";
