@@ -48,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'csv_tab' => "CSV avec tabulations",
 
 'date' => "Date",
+'date_invalide' => "Format de la date invalide",
 'dupliquer' => "Dupliquer",
 'donnees_pub'=>"Formulaire public. Les donn&eacute;es enregitr&eacute;es seront accessibles aux visiteurs du site.",
 'donnees_prot'=>"Formulaire prot&eacute;g&eacute;. Les donn&eacute;es enregitr&eacute;es ne seront accessibles que depuis l'interface priv&eacute;e.",

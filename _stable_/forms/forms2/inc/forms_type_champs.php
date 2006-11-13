@@ -93,7 +93,7 @@
 			}
 			// Verifier la conformite des donnees entrees
 			if ($type == 'date') {
-				if (!preg_match(",^\s*([0-9]{1,2})/([0-9]{1,2})/([0-9]{2,4})\s*$,",$val,$regs)) {
+				if (!preg_match("#^\s*([0-9]{1,2})/([0-9]{1,2})/([0-9]{2,4})\s*$#",$val,$regs)) {
 					$erreur[$champ] = _T("forms:date_invalide");
 				}
 				else 

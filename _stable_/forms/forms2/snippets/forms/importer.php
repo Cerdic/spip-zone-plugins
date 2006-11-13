@@ -42,7 +42,7 @@ function snippets_forms_importer($id_form_target,$formtree,$contexte){
 								$set = "";
 								foreach (array_keys($GLOBALS['tables_principales']['spip_forms_champs']['field']) as $key)
 									if (!in_array($key,array('id_form','champ','rang','titre','type')) AND isset($field[$key])){
-										$set .= "$key="._q(trim(applatit_arbre($form[$key]))).", ";
+										$set .= "$key="._q(trim(applatit_arbre($field[$key]))).", ";
 									}
 								if (strlen($set)){
 									$set = substr($set,0,strlen($set)-2);

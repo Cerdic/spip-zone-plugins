@@ -50,7 +50,7 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 	// centre resume ---------------------------------------------------------------
 	$out .= debut_cadre_relief("../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png",true);
 
-	$out .= gros_titre($row['titre'],'',false);
+	//$out .= gros_titre($row['titre'],'',false);
 
 	if ($row['descriptif']) {
 		$out .= "<div class='descriptif'><strong>"._T('info_descriptif')."</strong>";
@@ -251,15 +251,19 @@ function exec_forms_edit(){
 	creer_colonne_droite();
 	debut_droite();
 
-	if ($supp_form && $supp_rejet==NULL)
-		echo Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour);
-	echo "<div id='barre_onglets'>";
-	echo debut_onglet();
-	echo onglet(_L("Aper&ccedil;u"),ancre_url(self(),"resume"),'','resume');
-	echo onglet(_L("Propri&eacute;t&eacute;s"),ancre_url(self(),"proprietes"),'','proprietes');
-	echo onglet(_L("Champs"),ancre_url(self(),"champs"),'','champs');
-	echo fin_onglet();
-	echo "</div>";
+	if (!$new){
+		echo gros_titre($row['titre'],'',false);
+	
+		if ($supp_form && $supp_rejet==NULL)
+			echo Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour);
+		echo "<div id='barre_onglets'>";
+		echo debut_onglet();
+		echo onglet(_L("Aper&ccedil;u"),ancre_url(self(),"resume"),'','resume');
+		echo onglet(_L("Propri&eacute;t&eacute;s"),ancre_url(self(),"proprietes"),'','proprietes');
+		echo onglet(_L("Champs"),ancre_url(self(),"champs"),'','champs');
+		echo fin_onglet();
+		echo "</div>";
+	}
 
 	$out = "";
 	if ($id_form){
@@ -281,7 +285,8 @@ function exec_forms_edit(){
 	echo $out;
 		
 	echo "<script src='"._DIR_PLUGIN_FORMS."javascript/interface.js' type='text/javascript'></script>";
-	echo "<script src='"._DIR_PLUGIN_FORMS."javascript/forms_edit.js' type='text/javascript'></script>";
+	if (!_request('var_noajax'))
+		echo "<script src='"._DIR_PLUGIN_FORMS."javascript/forms_edit.js' type='text/javascript'></script>";
 
 	echo fin_page();
 }

@@ -396,7 +396,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 		" style='border: 0px; margin: 0px;'>" .
 		form_hidden($action_link_noredir) .
 		"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
-		"<input type='hidden' name='idtarget' value='proprietes' />" .
+		"<input type='hidden' name='idtarget' value='proprietes' />" ;
 
 	$titre = entites_html($row['titre']);
 	$descriptif = entites_html($row['descriptif']);
@@ -406,12 +406,12 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out .= "<strong><label for='titre_form'>"._T("forms:titre_formulaire")."</label></strong> "._T('info_obligatoire_02');
 	$out .= "<br />";
 	$out .= "<input type='text' name='titre' id='titre_form' class='formo $focus' ".
-		"value=\"".entites_html($titre)."\" size='40' /><br />\n";
+		"value=\"".$titre."\" size='40' /><br />\n";
 
 	$out .= "<strong><label for='desc_form'>"._T('info_descriptif')."</label></strong>";
 	$out .= "<br />";
 	$out .= "<textarea name='descriptif' id='desc_form' class='forml' rows='4' cols='40' wrap='soft'>";
-	$out .= entites_html($descriptif);
+	$out .= $descriptif;
 	$out .= "</textarea><br />\n";
 
 	$out .= Forms_bloc_routage_mail($id_form,$email);
@@ -447,28 +447,28 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 		$out .= "<strong>"._T("forms:type_form")."</strong> : ";
 		$out .= _T("forms:info_sondage");
 		$out .= "<br /><br />";
-		$out .= bouton_radio('type_form', '', _T("forms:sondage_non"), $type_form == '').'<br />';
-		$out .= bouton_radio('type_form', 'sondage', _T("forms:sondage_oui"), $type_form == 'sondage').'<br />';
+		$out .= bouton_radio('type_form', '', _T("forms:sondage_non"), $row['type_form'] == '').'<br />';
+		$out .= bouton_radio('type_form', 'sondage', _T("forms:sondage_oui"), $row['type_form'] == 'sondage').'<br />';
 		$out .= fin_cadre_enfonce(true);
  	}
  	else 
- 		$out .= "<input type='hidden' name='type_form' value='$type_form' />";
+ 		$out .= "<input type='hidden' name='type_form' value='".$row['type_form']."' />";
 
 	$out .= debut_cadre_enfonce("",true);
 	$out .= "<strong><label for='moderation'>"._T('forms:publication_donnees')."</label></strong>";
  	$out .= "<br />";
-	$out .= bouton_radio("public", "oui", _T('forms:donnees_pub'), $public == "oui", "");
+	$out .= bouton_radio("public", "oui", _T('forms:donnees_pub'), $row['public'] == "oui", "");
 	$out .= "<br />";
-	$out .= bouton_radio("public", "non", _T('forms:donnees_prot'), $public == "non", "");
+	$out .= bouton_radio("public", "non", _T('forms:donnees_prot'), $row['public'] != "oui", "");
 	$out .= "<br />";
 	$out .= fin_cadre_enfonce(true);
 	
 	$out .= debut_cadre_enfonce("",true);
 	$out .= "<strong><label for='moderation'>"._T('forms:moderation_donnees')."</label></strong>";
  	$out .= "<br />";
-	$out .= bouton_radio("moderation", "posteriori", _T('bouton_radio_publication_immediate'), $moderation == "posteriori", "");
+	$out .= bouton_radio("moderation", "posteriori", _T('bouton_radio_publication_immediate'), $row['moderation'] != "priori", "");
 	$out .= "<br />";
-	$out .= bouton_radio("moderation", "priori", _T('bouton_radio_moderation_priori'), $moderation == "priori", "");
+	$out .= bouton_radio("moderation", "priori", _T('bouton_radio_moderation_priori'), $row['moderation'] == "priori", "");
 	$out .= "<br />";
 	$out .= fin_cadre_enfonce(true);
 		

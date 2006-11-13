@@ -28,5 +28,5 @@
 - modif de la chaine de langue boite_info
 
 - ajaxisation de toute la saisie des formulaires
-- ajout des chaines de langue format_liste_ou_radio, format_liste, format_radio
+- ajout des chaines de langue format_liste_ou_radio, format_liste, format_radio, date_invalide
 - presentation des choix liste/radio configurable

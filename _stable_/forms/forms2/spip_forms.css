@@ -84,7 +84,8 @@ div.spip_forms .spip_sondage {
 }
 
 div.spip_forms .spip_form_erreur {
-	display:none;
+	font-weight:bold;
+	color:red;
 }
 div.spip_forms .spip_form_ok {
 	font-weight: bold;

@@ -1,9 +1,8 @@
 #CACHE{0}
 [(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
 <?php echo '<' ?>?xml version="1.0"[ encoding="(#CHARSET)"]?>
-<B_form>
 <forms>
-<BOUCLE_form(FORMS){id_form=#ENV{id_form}}>
+<BOUCLE_form(FORMS){id_form=#ENV{id}}>
 <form>
 	<id_form>#ID_FORM</id_form>
 	<titre>#TITRE**</titre>
@@ -30,7 +29,7 @@
 			<html_wrap>#HTML_WRAP**</html_wrap>
 			<B_choix>
 			<les_choix>
-				<BOUCLE_choix(FORMS_CHAMPS_CHOIS{id_form}{champ}{par rang}
+				<BOUCLE_choix(FORMS_CHAMPS_CHOIX){id_form}{champ}{par rang}>
 				<un_choix>
 					<choix>#CHOIX**</choix>
 					<titre>#TITRE**</titre>
@@ -46,4 +45,3 @@
 </form>
 </BOUCLE_form>
 </forms>
-</B_form>

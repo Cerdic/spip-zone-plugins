@@ -212,7 +212,7 @@
 	function Forms_insertions_reponse_post($id_form,$id_donnee,&$erreur,&$ok){
 		$inserts = array();
 		$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form));
-		while($row = spip_fetch_array($row)){
+		while($row = spip_fetch_array($res)){
 			$champ = $row['champ'];
 			$type = $row['type'];
 			$val = _request($champ);
