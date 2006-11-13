@@ -176,7 +176,8 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 			  _T('texte_sur_titre') .
 			  "</b>" .
 			  aide ("arttitre") .
-			  "<br />\n<input type='text' name='surtitre' class='forml' value=\"" .
+			  "<br />\n<a href='?exec=aidejtip_aide&width=375&champ=surtitre' class='jTip' id='help_1' name='fonction du champ surtitre'>?</a>
+			  <input type='text' name='surtitre' class='forml' value=\"" .
 			  $surtitre .
 			  "\" size='40'" .
 // Pour faire fonctionner le onchange sur Safari il faudrait modifier
@@ -185,7 +186,9 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 			  " /><P>")) .
 		_T('texte_titre_obligatoire') .
 		aide ("arttitre") .
-		"\n<br /><input type='text' name='titre' style='font-weight: bold; font-size: 13px;' CLASS='formo' VALUE=\"" .
+		
+		"\n<br /><a href='?exec=aidejtip_aide&width=375&champ=titre' class='jTip' id='help_2' name='fonction du champ titre'>?</a>   
+		<input type='text' name='titre' style='font-weight: bold; font-size: 13px;' CLASS='formo' VALUE=\"" .
 		$titre .
 		"\" size='40' " .
 		$onfocus .
@@ -196,7 +199,7 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 		  _T('texte_sous_titre') .
 		  "</b>" .
 		  aide ("arttitre") .
-		  "\n<br /><input type='text' name='soustitre' class='forml' value=\"" .
+		  "\n<br /><a href='?exec=aidejtip_aide&width=375&champ=soustitre' class='jTip' id='help_3' name='fonction du champ soustitre'>?</a><input type='text' name='soustitre' class='forml' value=\"" .
 		  $soustitre .
 		  "\" size='40' /><br /><br />\n") :
 		 '') .
@@ -211,7 +214,8 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 		 ("\n<P><B>" ._T('texte_descriptif_rapide') ."</B>" .
 		  aide ("artdesc") .
 		  "</p>\n<br />" ._T('texte_contenu_article') ."<br />\n" .
-		  "<textarea name='descriptif' class='forml' rows='2' cols='40' wrap=soft>" .
+		  "<a href='?exec=aidejtip_aide&width=375&champ=descriptif' class='jTip' id='help_4' name='fonction du champ descriptif'>?</a>
+		  <textarea name='descriptif' class='forml' rows='2' cols='40' wrap=soft>" .
 		  $descriptif .
 		  "</textarea>\n") :
 		 '') .
@@ -231,7 +235,8 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 		aide("raccourcis") .
 		$sup .
 		($spip_display==4 ? '' : afficher_barre('document.formulaire.texte')) .
-		"<textarea id='text_area' name='texte'$att_text>$texte</textarea>\n" .
+		"<a href='?exec=aidejtip_aide&width=375&champ=texte' class='jTip' id='help_5' name='fonction du champ texte'>?</a>
+		<textarea id='text_area' name='texte'$att_text>$texte</textarea>\n" .
 
 		((($articles_ps AND $options == "avancees") OR strlen($ps)) ?
 		 ("\n<p><b>" . _T('info_post_scriptum') ."</b><br />" . "<textarea name='ps' class='forml' rows='5' cols='40' wrap=soft>" . $ps . "</textarea></p><p>\n") :
@@ -321,7 +326,8 @@ function exec_articles_edit_dist()
 	debut_cadre_formulaire();
 	echo formulaire_articles_edit($row, $lier_trad, $new, $GLOBALS['meta']);
 	fin_cadre_formulaire();
-
+	echo '<script type="text/javascript">JT_init();</script>';
 	fin_page();
+	
 }
 ?>
