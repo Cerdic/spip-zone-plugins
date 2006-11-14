@@ -223,12 +223,6 @@ class Widget {
         		"ecrire/?exec={$this->type}s_edit&amp;id_{$this->type}={$this->id}");
         }
 
-        // title des boutons
-        $OK = texte_backend(_T('bouton_enregistrer'));
-        $Cancel = texte_backend(_L('Annuler'));
-        $Editer = texte_backend(_L("&Eacute;diter $type $id"));
-        $url_edit = "ecrire/?exec={$type}s_edit&amp;id_{$type}=$id";
-
         $html = '<div class="widget-boutons"><div>';
         foreach ($boutons as $bnam => $bdef) if ($bdef) {
         	$html .= '<a class="widget-' . $bnam .
