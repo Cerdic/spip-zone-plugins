@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'non_implemente' => 'Non implementato',
     'pas_de_modification' => 'Nessun cambiamento',
     'pas_de_valeur' => 'Nessun valore',
-    'sauvegarder' => 'Salvare le modifiche?'
+    'sauvegarder' => 'Salvare le modifiche?',
     'svp_copier_coller' => 'Spiacente, copia ed incolla le tue modifiche e ricomincia',
     'veuillez_patienter'=>'Attendere prego...'
     );
