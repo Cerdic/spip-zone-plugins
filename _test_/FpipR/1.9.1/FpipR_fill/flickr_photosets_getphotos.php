@@ -10,5 +10,6 @@ function FpipR_fill_flickr_photosets_getphotos_dist($arguments) {
   FpipR_fill_photos_table($photos->photos,array(
 										'id_photoset' => $arguments['id_photoset']
 										));
+  return $photos->total;
 }
 ?>

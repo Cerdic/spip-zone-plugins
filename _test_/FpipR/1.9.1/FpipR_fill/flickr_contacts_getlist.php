@@ -14,7 +14,9 @@ function FpipR_fill_flickr_contacts_getlist_dist($arguments) {
 						   );
 
 	}
-  }									 
+	return $contacts['total'];
+  }	
+  return 0;
 }
 
 ?>
