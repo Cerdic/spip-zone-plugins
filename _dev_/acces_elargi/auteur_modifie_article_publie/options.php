@@ -9,7 +9,7 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 	"SELECT id_rubrique,statut FROM spip_articles WHERE id_article="._q($id));
 	$r = spip_fetch_array($s);
 	return
-		autoriser('publier_dans', 'rubrique', $r['id_rubrique'], $qui, $opt)
+		autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
 		OR (
 			in_array($qui['statut'], array('0minirezo', '1comite'))
 /*
