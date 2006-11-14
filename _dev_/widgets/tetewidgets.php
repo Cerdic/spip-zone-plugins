@@ -75,7 +75,7 @@ function Widgets_preparer_page($page, $droits, $wdgcfg = array()) {
 		'img' => array(
 			'searching' => array(
 				'file' => 'searching.gif',
-				'txt' => _U('TODO:searching')
+				'txt' => _U('widgets:veuillez_patienter')
 			),
 			'crayon' => array(
 				'file' => 'crayon.png',
