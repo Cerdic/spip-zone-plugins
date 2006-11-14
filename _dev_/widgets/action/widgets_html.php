@@ -102,29 +102,45 @@ FIN_FORM;
 
 // Definition des widgets
 class Widget {
+	// le nom du widget "type-modele-id" comme "article-introduction-237"
     var $name;
+    // type, a priori une table, extrait du nom
     var $type;
+    // modele, un champ comme "texte" ou un modele, extrait du nom
     var $modele;
+    // l'identificateur dans le type, comme un numero d'article
     var $id;
+    // la ou les valeurs des champs du widget, tableau associatif champ => valeur
     var $texts = array();
+    // une cle unique pour chaque widget demande
     var $key;
+    // un md5 associe aux valeurs pour verifier et detecter si elles changent
     var $md5;
-    var $clean;
 
+	// le constructeur du widget
+	// $name : son nom
+	// $texts : tableau associatif des valeurs ou valeur unique si widget monochamp
+	// $options : options directes du widget (développement)
     function Widget($name, $texts = array(), $options = array()) {
         $this->name = $name;
     	list($this->type, $this->modele, $this->id) = explode('-', $this->name);
+    	if (is_scalar($texts)) {
+    		$texts = array($this->modele => $texts);
+    	}
         $this->texts = $texts;
         $this->key = strtr(uniqid('wid', true), '.', '_');
+        $this->md5 = $this->md5();
         foreach ($options as $opt=>$val) {
         	$this->$opt = $val;
         }
     }
 
+	// calcul du md5 associe aux valeurs
     function md5() {
         return md5(serialize($this->texts));
     }
 
+	// balises input type hidden d'identification du widget
     function code() {
         return
          '<input type="hidden" class="widget-id" name="widgets[]"'
@@ -132,7 +148,7 @@ class Widget {
         . '<input type="hidden" name="name_'.$this->key
         .'" value="'.$this->name.'" />'."\n"
         . '<input type="hidden" name="md5_'.$this->key
-        .'" value="'.$this->md5().'" />'."\n"
+        .'" value="'.$this->md5.'" />'."\n"
         . '<input type="hidden" name="fields_'.$this->key
         .'" value="'.join(',',array_keys($this->texts)).'" />'
         ."\n"
@@ -140,10 +156,8 @@ class Widget {
     }
 
 /*
- Fabriquer les balises du ou des champs
-	$spec est soit un scalaire 'ligne' ou 'texte' précisant le type de balise
-	soit un array($champ=>array('type'=>'...', 'attrs'=>array(attributs specifique du champs)))
-	$attrs est un tableau (attr=>val) d'attributs communs ou pour le champs unique
+ Fabriquer les balises des champs d'apres un modele controleurs/(type_)modele.html
+	$contexte est un tableau (nom=>valeur) qui sera enrichi puis passe à recuperer_fond
 */
     function modele($contexte = array()) {
 	    if (!find_in_path(
