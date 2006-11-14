@@ -76,7 +76,7 @@
 			<div id="archives" class="rubriques">
 				<h2 class="menu-titre"><:archives|ucfirst:></h2>
 				<ul>
-					<BOUCLE_archives_mensuelles(ARTICLES){par date}{inverse}>[
+					<BOUCLE_archives_mensuelles(ARTICLES){lang_select=non}{par date}{inverse}>[
 					<li[ class="(#ENV{date_archives}|match{^[(#DATE|affdate{'Y-m'})]}|?{on})"]>
 					<a href="[(#SELF|parametre_url{lang,''}|parametre_url{id_rubrique,''}|parametre_url{date_archives,[(#DATE|affdate{'Y-m'})]})]">(#DATE|affdate{'Y-m'}|unique|affdate_mois_annee)</a>
 					</li>
