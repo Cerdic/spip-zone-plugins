@@ -48,7 +48,7 @@ function exec_forms_tous(){
 		echo "</div>";
 	}
 	
-	fin_page();
+	echo fin_page();
 }
 
 ?>

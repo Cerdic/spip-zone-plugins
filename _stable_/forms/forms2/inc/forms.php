@@ -301,6 +301,7 @@
 				}
 			}
 			if ($ok) {
+				include_spip('inc/securiser_action');
 				spip_query("INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
 					"VALUES ".join(',', $inserts));
 				if ($row['type_form']=='sondage') {
