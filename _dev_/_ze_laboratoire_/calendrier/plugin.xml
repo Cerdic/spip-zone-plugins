@@ -3,7 +3,7 @@
 	<auteur>James (james.at.rezo.net)
 _ &#169; 2006 - Licence GNU/GPL</auteur>
 	<version>0.4</version>
-	<etat>experimental</etat>
+	<etat>test</etat>
 	<description>Permet l'utilisation d'une balise #CALENDRIER.
 _ Cette balise affiche un calendrier au design issu de dotclear et donc compatible avec les styles issus de ce syst&egrave;me de blog.
 _ Lui sont adjoints d'autre elements, tels que balises, criteres, modeles...
