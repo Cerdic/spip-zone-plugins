@@ -155,7 +155,7 @@
 		$s = "";
 		// Ajouter un formulaire
 		$s .= "\n<p>";
-		$s .= debut_cadre_relief("../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", true);
+		$s .= debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", true);
 	
 		$s .= "<div style='padding: 2px; background-color: $couleur_claire; text-align: center; color: black;'>";
 		$s .= bouton_block_invisible("ajouter_form");
@@ -196,7 +196,7 @@
 			$s .= "\n<br />";
 			$link = generer_url_ecrire('forms_edit',"new=oui&retour=".urlencode(self()));
 			$s .= icone_horizontale(_T("forms:icone_creer_formulaire"),
-				$link, "../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "creer.gif", false);
+				$link, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "creer.gif", false);
 		}
 	
 		$s .= fin_block();

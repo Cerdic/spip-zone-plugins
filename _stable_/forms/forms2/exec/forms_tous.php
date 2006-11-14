@@ -44,7 +44,7 @@ function exec_forms_tous(){
 		echo "<div align='right'>";
 		$link=generer_url_ecrire('forms_edit', 'new=oui');
 		$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
-		icone(_T("forms:icone_creer_formulaire"), $link, "../"._DIR_PLUGIN_FORMS. "/img_pack/form-24.png", "creer.gif");
+		icone(_T("forms:icone_creer_formulaire"), $link, "../"._DIR_PLUGIN_FORMS. "img_pack/form-24.png", "creer.gif");
 		echo "</div>";
 	}
 	

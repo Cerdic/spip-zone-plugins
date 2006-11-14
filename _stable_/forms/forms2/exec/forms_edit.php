@@ -48,7 +48,7 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 	$out = "";
 
 	// centre resume ---------------------------------------------------------------
-	$out .= debut_cadre_relief("../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png",true);
+	$out .= debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/form-24.png",true);
 
 	//$out .= gros_titre($row['titre'],'',false);
 
@@ -216,7 +216,7 @@ function exec_forms_edit(){
 	echo "<br /><br />\n";
 	debut_boite_info();
 	if ($retour) {
-		icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "rien.gif",'right');
+		icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "rien.gif",'right');
 	}
 	if (!include_spip('inc/autoriser'))
 		include_spip('inc/autoriser_compat');
@@ -238,7 +238,7 @@ function exec_forms_edit(){
 			$link=parametre_url($link,'retour', urlencode(generer_url_ecrire('form_tous')));
 		}
 		echo "<p>";
-		icone_horizontale(_T("forms:supprimer_formulaire"), $link, "../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "supprimer.gif");
+		icone_horizontale(_T("forms:supprimer_formulaire"), $link, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "supprimer.gif");
 		echo "</p>";
 	}
 	fin_boite_info();

@@ -240,7 +240,7 @@ function exec_forms_telecharger(){
 	
 	$titre = _T("forms:telecharger_reponses");
 	if (!$delim){
-		$icone = "../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png";
+		$icone = "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png";
 	
 		debut_page($titre, "documents", "forms");
 		debut_gauche();

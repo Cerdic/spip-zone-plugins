@@ -41,7 +41,7 @@ function exec_forms_reponses(){
 	if ($id_form) {
 		debut_boite_info();
 
-		icone_horizontale(_T("forms:formulaire_aller"), "?exec=forms_edit&id_form=$id_form", "../"._DIR_PLUGIN_FORMS. "/img_pack/form-24.png", "rien.gif");
+		icone_horizontale(_T("forms:formulaire_aller"), "?exec=forms_edit&id_form=$id_form", "../"._DIR_PLUGIN_FORMS. "img_pack/form-24.png", "rien.gif");
 
 		if (autoriser('administrer','form',$id_form)) {
 			$retour = urlencode(self());
@@ -143,10 +143,10 @@ function exec_forms_reponses(){
 		$titre_form = $row['titre'];
 
 		echo "<br />\n";
-		debut_cadre_relief("../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png");
+		debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/form-24.png");
 
 		$link=parametre_url(self(),'supp_reponse', $id_donnee);
-		icone(_T("forms:supprimer_reponse"), $link,"../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "supprimer.gif", "right");
+		icone(_T("forms:supprimer_reponse"), $link,"../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "supprimer.gif", "right");
 		
 		if ($id_article_export!=0){
 			$row=spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE id_article="._q($id_article_export)));
