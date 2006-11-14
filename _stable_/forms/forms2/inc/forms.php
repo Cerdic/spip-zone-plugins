@@ -10,7 +10,11 @@
  * © 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
-	
+
+	if (!function_exists('_q')){
+		function _q($arg) { return spip_abstract_quote($arg); }
+	}
+
 	function Forms_install(){
 		include_spip('base/forms_upgrade');
 		Forms_upgrade();
