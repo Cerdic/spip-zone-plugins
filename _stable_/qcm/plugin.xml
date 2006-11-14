@@ -14,13 +14,12 @@
   <description>
 Permet l'utilisation d'un QCM dans un article.<br />
 Aucun r&eacute;sultat archiv&eacute;. Simplement ludique.<br />
-Gestionnaire des points et des commentaires.<br />
+Gestionnaire de points et de commentaires<br />
 D&eacute;mo : [->http://www.ensemble-claudio-monteverdi.fr/article17]
   </description>
   <lien>[Mode d'emploi->http://www.spip-contrib.net/Un-QCM-dans-vos-articles]</lien> <!-- URI de documentation -->
-  <prefix>
-  qcm
-  </prefix>
+  <options>qcm_options.php</options>
+  <prefix>qcm</prefix>
   <pipeline>
   	<nom>insert_head</nom>
   	<inclure>qcm_pipelines.php</inclure>

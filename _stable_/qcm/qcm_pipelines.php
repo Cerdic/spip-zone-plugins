@@ -5,7 +5,7 @@
   						patfr@ifrance.com
  						(sur une idee originale de Mathieu GIANNECCHINI, 2003) 
   Date               : 	30 octobre 2006
-  Fonction du plugin : 	Parse le code du QCM tape dans SPIP, stocke
+  Fonction du plugin : 	Parse le code du QCM tape dans SPIP et stocke
                        	les questions, reponses et commentaires
                        	dans un tableau et retourne le code HTML du QCM
   Mode d'emploi		 :	http://www.spip-contrib.net/Un-QCM-dans-vos-articles
