@@ -25,11 +25,11 @@ include_spip('inc/presentation');
 
 
 // http://doc.spip.org/@inc_gadgets_dist
-function inc_gadgets_dist($id_rubrique, $gadget)
-{
-	$gadget = 'gadget_' . $gadget;
-	return  (function_exists($gadget)) ? $gadget($id_rubrique) : '';
-}
+function inc_gadgets_dist($id_rubrique, $gadget) 
+{ 
+ 	$gadget = 'gadget_' . $gadget; 
+ 	return  (function_exists($gadget)) ? $gadget($id_rubrique) : ''; 
+} 
 //
 // GADGET DES RUBRIQUES
 //
@@ -99,7 +99,7 @@ function gadget_rubriques() {
 
 			if ($count_lignes == $max_lignes) {
 				$count_lignes = 0;
-				$ret .= "</div></td><td valign='top' width='200'><div>&nbsp;</div><div class='bandeau_rubriques' style='z-index: 1;'>";
+				$ret .= "</div></td><td valign='top' width='200'><div>&nbsp;</div><div class='bandeau_rubriques' style='z-index: 1;'>"; 
 			}
 			$count_lignes ++;
 
@@ -142,7 +142,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 
 	$i = sizeof($arr_rub);
 	if ($i > 0 AND $zdecal < $zmax) {
-		$ret = "<div class='pos_r' style='z-index: $z;' onMouseOver=\"montrer('b_$id_rubrique');\" onMouseOut=\"cacher('b_$id_rubrique');\">";
+		$ret = "<div class='pos_r' style='z-index: $z;' onMouseOver=\"montrer('b_$id_rubrique');\" onMouseOut=\"cacher('b_$id_rubrique'); \">";
 		$ret .= '<div class="brt"><a href="' . generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique)
 		  . '" class="bandeau_rub"'.$image.'>'.supprimer_tags($titre_rubrique)."</a></div>\n"
 		  . '<div class="bandeau_rub" style="z-index: '.($z+1).';" id="b_'.$id_rubrique.'">';
@@ -213,7 +213,7 @@ function gadget_navigation($id_rubrique) {
 	if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus('./') . '<b>' . _T('info_articles_proposes') . '</b>', "article-24.gif", $couleur_foncee, 'white', false);
+			$gadget .= bandeau_titre_boite2(afficher_plus('./') . '<b>' . _T('info_articles_proposes') . '</b>', "article-24.gif", $couleur_foncee, 'white', false); 
 			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
@@ -230,7 +230,7 @@ function gadget_navigation($id_rubrique) {
 	if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire("breves")).'<b>' . _T('info_breves_valider') . '</b>', "breve-24.gif", "$couleur_foncee", "white", false);
+			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire("breves")).'<b>' . _T('info_breves_valider') . '</b>', "breve-24.gif", "$couleur_foncee", "white", false); 
 			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_breve = $row['id_breve'];
@@ -294,16 +294,16 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 
 	// GADGET Menu rubriques
 	. "\n<div id='bandeautoutsite' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 0px;'>"
-	. "<a href='"
-	. generer_url_ecrire("articles_tous")
-	. "' class='lien_sous'" 
-/* retire par la 7033 car bugge. a reintroduire ? 
-onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; charger_id_url_si_vide('" . generer_url_ecrire('rubriquer',"&var_ajax=1&id=$id_rubrique") . "','nav-recherche');\" */
-	. ">"
-	._T('icone_site_entier')
-	. "</a>"
-	. "<div id='nav-recherche'></div>"
-	. "<div id='gadget-rubriques'></div>"
+	. "<a href='" 
+ 	. generer_url_ecrire("articles_tous") 
+ 	. "' class='lien_sous'"  
+ 	/* retire par la 7033 car bugge. a reintroduire ?  
+ 	onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; charger_id_url_si_vide('" . generer_url_ecrire('rubriquer',"&var_ajax=1&id=$id_rubrique") . "','nav-recherche');\" */ 
+ 	. ">" 
+ 	._T('icone_site_entier') 
+ 	. "</a>" 
+ 	. "<div id='nav-recherche'></div>"
+ 	. "<div id='gadget-rubriques'></div>"
 	. "</div>";
 	// FIN GADGET Menu rubriques
 
@@ -316,16 +316,16 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 	// FIN GADGET Navigation rapide
 
 	// GADGET Recherche
-	// attribut non conforme ==> le generer dynamiquement
-	$js = 'this.setAttribute(\'autocomplete\', \'off\')';
-	$bandeau .= "<div id='bandeaurecherche' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 60px;'>"
-	. "<form method='get' style='margin: 0px; position: relative;' action='"
-	 . generer_url_ecrire("recherche")
-	. "'>"
+    // attribut non conforme ==> le generer dynamiquement 
+ 	$js = 'this.setAttribute(\'autocomplete\', \'off\')';
+	$bandeau .= "<div id='bandeaurecherche' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 60px;'>" 
+	. "<form method='get' style='margin: 0px; position: relative;' action='" 
+ 	. generer_url_ecrire("recherche") 
+ 	. "'>" 
 	. "<input type='hidden' name='exec' value='recherche' />"
-	. "<input type=\"text\" id=\"form_recherche\" style=\"width: 140px;\" size=\"10\" value=\""
-	. _T('info_rechercher')
-	. "\" name=\"recherche\" onkeypress=\"$js;t=window.setTimeout('lancer_recherche(\'form_recherche\',\'resultats_recherche\')', 200);\" class=\"formo\" accesskey=\"r\" />"
+	. "<input type=\"text\" id=\"form_recherche\" style=\"width: 140px;\" size=\"10\" value=\"" 
+ 	. _T('info_rechercher') 
+ 	. "\" name=\"recherche\" onkeypress=\"$js;t=window.setTimeout('lancer_recherche(\'form_recherche\',\'resultats_recherche\')', 200);\" class=\"formo\" accesskey=\"r\" />" 
 	. "</form>"
 	. "</div>";
 	// FIN GADGET recherche
@@ -355,7 +355,7 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 
 
 	// Suivi activite
-	$bandeau .= "<div id='bandeausynchro' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 160px;'>";
+	$bandeau .= "<div id='bandeausynchro' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 160px;'>"; 
 	$bandeau .= "<a href='" . generer_url_ecrire("synchro") . "' class='lien_sous'>";
 	$bandeau .= _T('icone_suivi_activite');
 	$bandeau .= "</a>";
@@ -381,13 +381,13 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 	$decal = 0;
 	$decal = $decal + 150;
 
-	$bandeau .= "<div id='bandeauinterface' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
+	$bandeau .= "<div id='bandeauinterface' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>"; 
 	$bandeau .= _T('titre_changer_couleur_interface');
 	$bandeau .= "</div>";
 		
 	$decal = $decal + 70;
 		
-	$bandeau .= "<div id='bandeauecran' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
+	$bandeau .= "<div id='bandeauecran' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>"; 
 	if ($spip_ecran == "large") 
 			$bandeau .= "<div><a href='".parametre_url(self(),'set_ecran', 'etroit')."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
 	else
@@ -398,7 +398,7 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 		
 	// En interface simplifiee, afficher en permanence l'indication de l'interface
 	if ($options != "avancees") {
-			$bandeau .= "<div id='displayfond' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right; visibility: visible; background-color: white; color: $couleur_foncee; z-index: -1000; border: 1px solid $couleur_claire; border-top: 0px;'>";
+			$bandeau .= "<div id='displayfond' class='bandeau bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right; visibility: visible; background-color: white; color: $couleur_foncee; z-index: -1000; border: 1px solid $couleur_claire; border-top: 0px;'>"; 
 			$bandeau .= "<b>"._T('icone_interface_simple')."</b>";
 			$bandeau .= "</div>";
 	}
@@ -479,22 +479,23 @@ function gadget_messagerie() {
 // http://doc.spip.org/@repercuter_gadgets
 function repercuter_gadgets($id_rubrique) {
 	if (isset($_COOKIE['spip_accepte_ajax']) && ($_COOKIE['spip_accepte_ajax'] == -1)) return '';
-
-	$rub = $id_rubrique ? "\\x26id_rubrique=$id_rubrique" : '';
-
-	return
-	 "
-	$('#gadget-rubriques')
-	.load('./?exec=gadgets\\x26gadget=rubriques');" #pas de $rub
-	."
-	$('#gadget-navigation')
-	.load('./?exec=gadgets\\x26gadget=navigation$rub');"
-	."
-	$('#gadget-agenda')
-	.load('./?exec=gadgets\\x26gadget=agenda$rub');"
-	."
-	$('#gadget-messagerie')
-	.load('./?exec=gadgets\\x26gadget=messagerie$rub');";
+	
+ 	$rub = $id_rubrique ? "\\x26id_rubrique=$id_rubrique" : '';  
+ 	
+ 	return
+ 	
+ 	 " 
+ 	$('#gadget-rubriques') 
+ 	.load('./?exec=gadgets\\x26gadget=rubriques');" #pas de $rub  
+ 	." 
+ 	$('#gadget-navigation') 
+ 	.load('./?exec=gadgets\\x26gadget=navigation$rub');" 
+ 	." 
+ 	$('#gadget-agenda') 
+ 	.load('./?exec=gadgets\\x26gadget=agenda$rub');" 
+ 	." 
+ 	$('#gadget-messagerie') 
+ 	.load('./?exec=gadgets\\x26gadget=messagerie$rub');"; 
 }
 
 ?>

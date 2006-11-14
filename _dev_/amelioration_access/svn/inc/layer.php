@@ -22,41 +22,41 @@ $compteur_block = rand(1,2500)*500;	// astuce idiote pour que les blocs ahah n'a
 
 // http://doc.spip.org/@block_parfois_visible
 function block_parfois_visible($nom, $invite, $masque, $style='', $visible=false)
-{
-	if (!$GLOBALS['browser_layer']) return '';
+{ 
+		if (!$GLOBALS['browser_layer']) return ''; 
+		
+		$bouton = $visible 
+		? bouton_block_visible($nom) 
+		: bouton_block_invisible($nom); 
 
-	$bouton = $visible
-	? bouton_block_visible($nom)
-	: bouton_block_invisible($nom);
+		$nom = 'Layer' . renomme_block($nom); 
 
-	$nom = 'Layer' . renomme_block($nom);
+		// initialement invisible, seulement si on sait rendre visible 
+		if (!$visible AND $_COOKIE['spip_accepte_ajax'] != -1) 
+				$visible = 'display:none;'; 
+		else    $visible = 'display:block;'; 
 
-	// initialement invisible, seulement si on sait rendre visible
-	if (!$visible AND $_COOKIE['spip_accepte_ajax'] != -1)
-		$visible = 'display:none;';
-	else 	$visible = 'display:block;';
-
-	return "\n"
-	. "<div style='$style'>"
-	. $bouton
-	. $invite
-	. '</div>'
-	. "<div id='$nom' style='$visible'>"
-	. $masque
-	. '<div style="clear: both;"></div></div>';
-}
+		return "\n" 
+		. "<div style='$style'>" 
+		. $bouton 
+		. $invite 
+		. '</div>' 
+		. "<div id='$nom' style='$visible'>" 
+		. $masque 
+		. '<div style="clear: both;"></div></div>'; 
+} 
 
 
-// http://doc.spip.org/@renomme_block
-function renomme_block($nom_block)
-{
-	global $numero_block, $compteur_block;
-	if (!isset($numero_block[$nom_block])){
-		$compteur_block++;
-		$numero_block[$nom_block] = $compteur_block;
-	}
-	return $numero_block["$nom_block"];
-}
+// http://doc.spip.org/@renomme_block 
+function renomme_block($nom_block) 
+{ 
+		global $numero_block, $compteur_block; 
+		if (!isset($numero_block[$nom_block])){ 
+				$compteur_block++; 
+				$numero_block[$nom_block] = $compteur_block; 
+		} 
+		return $numero_block["$nom_block"]; 
+} 
 
 // http://doc.spip.org/@debut_block_visible
 function debut_block_visible($nom_block){
@@ -68,14 +68,14 @@ function debut_block_visible($nom_block){
 
 // http://doc.spip.org/@debut_block_invisible
 function debut_block_invisible($nom_block){
-	global $browser_layer;
+	global $browser_layer; 
 	if (!$browser_layer) return '';
 
 	// si on n'accepte pas js, ne pas fermer
 	if ($_COOKIE['spip_accepte_ajax'] == -1)
-		return debut_block_visible($nom_block);
+		return debut_block_visible($nom_block); 
 
-	return "<div id='Layer".renomme_block($nom_block)."' style='display: none;'>";
+		return "<div id='Layer".renomme_block($nom_block)."' style='display: none;'>";
 }
 
 // http://doc.spip.org/@fin_block
@@ -132,7 +132,7 @@ function bouton_block_visible($nom_block){
 
 // http://doc.spip.org/@produire_acceder_couche
 function produire_acceder_couche($couches, $nom, $icone) {
-
+	
 	global $spip_lang_rtl;
 	// ne rien afficher si js desactive
 	if ($_COOKIE['spip_accepte_ajax'] == -1)
@@ -146,7 +146,7 @@ function produire_acceder_couche($couches, $nom, $icone) {
 			. $couche[1].');';
 
 	return 
-	'<img name="triangle'.$nom.'" src="'._DIR_IMG_PACK.$icone.'" alt="" title="'._T('info_deplier').'" border="0" height="10" width="10"
+	'<img name="triangle'.$nom.'" src="'._DIR_IMG_PACK.$icone.'" alt="'._T('info_deplier').'" title="'._T('info_deplier').'" border="0" height="10" width="10"
 onclick="'.join(' ',$onclick).'" />';
 
 }
@@ -169,7 +169,7 @@ function verif_butineur() {
 	if (!eregi("opera", $browser_description)&&eregi("opera", $browser_name)) {
 		$browser_name = "Opera";
 		$browser_version = $match[2];
-		$browser_layer = (($browser_version < 7) ? '' :  http_script('', _DIR_JAVASCRIPT . 'layer.js',''));
+		$browser_layer = (($browser_version < 7) ? '' :  http_script('', _DIR_JAVASCRIPT . 'layer.js','')); 
 		$browser_barre = ($browser_version >= 8.5); 
 	}
 	else if (eregi("opera", $browser_description)) {
@@ -246,9 +246,9 @@ onclick='storeCaret(this);'
 onkeyup='storeCaret(this);'
 ondblclick='storeCaret(this);'");
 
-	// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
-	// meme principe que le behavior win_width.htc pour MSIE
-$GLOBALS['browser_verifForm'] = (eregi("mozilla", $GLOBALS["browser_name"]) AND $GLOBALS["browser_rev"] >= 1.7) ?  "verifForm();" : "";
+		// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7 
+		// meme principe que le behavior win_width.htc pour MSIE 
+$GLOBALS['browser_verifForm'] = (eregi("mozilla", $GLOBALS["browser_name"]) AND $GLOBALS["browser_rev"] >= 1.7) ?  "verifForm();" : ""; 
 
 // http://doc.spip.org/@http_script
 function http_script($script, $src='', $noscript='') {

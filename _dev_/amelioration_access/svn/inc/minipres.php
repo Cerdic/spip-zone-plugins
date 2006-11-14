@@ -37,108 +37,108 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 		header('Content-Type: text/html; charset=utf-8');
 
 	echo  _DOCTYPE_ECRIRE ,
-		html_lang_attributes(),
-		"<head>\n",
-		"<title>",
-		textebrut($titre),
-		"</title>
-		<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n",
-		"body { background: #FFF; color: #000; }\n",
-		"h1 { color: #970038; margin-top: 50px; font-family: Verdana; font-weigth: bold; font-size: 18px }\n",
-		"h2 { font-family: Verdana,Arial,Sans,sans-serif; font-weigth: normal; font-size: 100%; }\n",
-		"a { color: #E86519; text-decoration: none; }\n",
-		"a:visited { color: #6E003A; }\n",
-		"a:active { color: #FF9900; }\n",
-		"img { border: 0; }\n",
-		"p { text-align: justify; }\n",
-		"ul { text-align: justify; list-style-type: none; }\n",
-		"fieldset, .fieldset { font-weigth: bold; text-align: justify; border: 1px solid #444; paddind: 10px; margin-top: 1em; }\n",
-		"legend { font-weight: bold; }\n",
-		"label {}\n",
-		"#minipres { width: 30em; text-align: center; margin-left: auto; margin-right: auto; }\n",
-		".petit-centre { font-family: Verdana,Arial,Sans,sans-serif; font-size: 10px; }\n",
-		".petit-centre p { text-align: center; }\n",
-		".suivant { text-align: $spip_lang_right; display: block; margin-top: 1em; }\n",
-		".fondl { padding: 3px; background-color: #eee; border: 1px solid #333; 
-	background-position: center bottom; 
-	font-size: 0.8em;
-	font-family: Verdana,Arial,Sans,sans-serif; }\n",
-		".formo { width: 100%; display: block; padding: 3px;
-	margin-top: 1em;
-	background-color: #FFF; 
-	border: 1px solid #333; 
-	background-position: center bottom; 
-	behavior: url(../dist/win_width.htc);
-	font-size: 0.8em;
-	font-family: Verdana,Arial,Sans,sans-serif; }\n",
+			html_lang_attributes(), 
+			"<head>\n", 
+			"<title>", 
+			textebrut($titre), 
+			"</title> 
+			<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n", 
+			"body { background: #FFF; color: #000; }\n", 
+			"h1 { color: #970038; margin-top: 50px; font-family: Verdana; font-weigth: bold; font-size: 18px }\n", 
+			"h2 { font-family: Verdana,Arial,Sans,sans-serif; font-weigth: normal; font-size: 100%; }\n",
+			"a { color: #E86519; text-decoration: none; }\n", 
+			"a:visited { color: #6E003A; }\n", 
+			"a:active { color: #FF9900; }\n", 
+			"img { border: 0; }\n",
+			"p { text-align: justify; }\n", 
+			"ul { text-align: justify; list-style-type: none; }\n", 
+			"fieldset, .fieldset { font-weigth: bold; text-align: justify; border: 1px solid #444; paddind: 10px; margin-top: 1em; }\n", 
+			"legend { font-weight: bold; }\n", 
+			"label {}\n", 
+			"#minipres { width: 30em; text-align: center; margin-left: auto; margin-right: auto; }\n", 
+			".petit-centre { font-family: Verdana,Arial,Sans,sans-serif; font-size: 10px; }\n", 
+			".petit-centre p { text-align: center; }\n", 
+			".suivant { text-align: $spip_lang_right; display: block; margin-top: 1em; }\n",			
+			".fondl { padding: 3px; background-color: #eee; border: 1px solid #333;  
+	background-position: center bottom;  
+	font-size: 0.8em; 
+	font-family: Verdana,Arial,Sans,sans-serif; }\n", 
+	".formo { width: 100%; display: block; padding: 3px; 
+	margin-top: 1em; 
+	background-color: #FFF;  
+	border: 1px solid #333;  
+	background-position: center bottom;  
+	behavior: url(../dist/win_width.htc); 
+	font-size: 0.8em; 
+	font-family: Verdana,Arial,Sans,sans-serif; }\n", 
 	  "\n\n]]>\n--></style>\n\n
 </head>
-<body".$onLoad.">
-	<div id='minipres'>
-	<h1>",
+<body".$onLoad.">  
+		<div id='minipres'> 
+		<h1>",
 	  $titre ,
-	  "</h1>
+	  "</h1> 
 	<div>\n";
 }
 
 // http://doc.spip.org/@install_fin_html
 function install_fin_html() {
-	echo "\n\t</div>\n\t</div>\n</body>\n</html>";
-}
+	echo "\n\t</div>\n\t</div>\n</body>\n</html>"; 
+} 
 
-// http://doc.spip.org/@info_etape
-function info_etape($titre, $complement = ''){
-	return "\n<h2>".$titre."</h2>\n" .
-	($complement ? "<p>".$complement."</p>\n":'');
+// http://doc.spip.org/@info_etape 
+function info_etape($titre, $complement = ''){ 
+		return "\n<h2>".$titre."</h2>\n" . 
+		($complement ? "<p>".$complement."</p>\n":''); 
 }
 
 // http://doc.spip.org/@fieldset
-function fieldset($legend, $champs = array()) {
-	$fieldset = "<fieldset>\n" .
-	($legend ? "<legend>".$legend."</legend>\n" : '');
-	foreach($champs as $nom => $contenu) {
-		$type = $contenu['hidden'] ? 'hidden' : (preg_match(',^pass,', $nom) ? 'password' : 'text');
-		$class = $contenu['hidden'] ? '' : "class='formo' size='40' ";
-		$fieldset .= "<label for='".$nom."'>".$contenu['label']."</label>\n";
-		$fieldset .= "<input ".$class."type='".$type."' name='".$nom."' value='".$contenu['valeur']."' />\n";
-	}
-	$fieldset .= "</fieldset>\n";
-	return $fieldset;
-}
+function fieldset($legend, $champs = array()) { 
+		$fieldset = "<fieldset>\n" . 
+		($legend ? "<legend>".$legend."</legend>\n" : ''); 
+		foreach($champs as $nom => $contenu) { 
+				$type = $contenu['hidden'] ? 'hidden' : (preg_match(',^pass,', $nom) ? 'password' : 'text'); 
+				$class = $contenu['hidden'] ? '' : "class='formo' size='40' "; 
+				$fieldset .= "<label for='".$nom."'>".$contenu['label']."</label>\n"; 
+				$fieldset .= "<input ".$class."type='".$type."' name='".$nom."' value='".$contenu['valeur']."' />\n"; 
+		} 
+		$fieldset .= "</fieldset>\n"; 
+		return $fieldset; 
+} 
 
 // http://doc.spip.org/@bouton_suivant
-function bouton_suivant($code = 'bouton_suivant') {
-	return "\n<span class='suivant'><input id='suivant' type='submit' class='fondl' value=\"" .
-		_T($code) .
-		" >>\" /></span>\n";
+function bouton_suivant($code = 'bouton_suivant') { 
+		return "\n<span class='suivant'><input id='suivant' type='submit' class='fondl' value=\"" .
+				_T($code) . 
+				" >>\" /></span>\n"; 
 }
 
 // http://doc.spip.org/@minipres
 function minipres($titre, $corps="")
 {
-	if (!$titre)
-		echo  _DOCTYPE_ECRIRE ,
-		  html_lang_attributes(),
-		  "<body>",
-		  $corps,
-		  '</body></html>';
-	else {
-		install_debut_html($titre);
-		echo $corps;
-		install_fin_html();
-	}
+	if (!$titre) 
+ 			echo  _DOCTYPE_ECRIRE , 
+ 			html_lang_attributes(), 
+ 			"<body>", 
+ 			$corps, 
+ 			'</body></html>'; 
+ 	else { 
+ 			install_debut_html($titre); 
+ 			echo $corps; 
+ 			install_fin_html(); 
+ 	} 
 	exit;
 }
 
 //
-// Aide. Surchargeable, et pas d'ereur fatale si pas disponible.
-//
+// Aide. Surchargeable, et pas d'ereur fatale si pas disponible. 
+// 
 
 // http://doc.spip.org/@aide
 function aide($aide='') {
-	$aider = charger_fonction('aider', 'inc', true);
-	return $aider ?  $aider($aide) : '';
-}
+		$aider = charger_fonction('aider', 'inc', true); 
+ 		return $aider ?  $aider($aide) : ''; 
+} 
 
 
 //
@@ -151,16 +151,16 @@ function version_svn_courante($dir) {
 
 	// version installee par SVN
 	if (lire_fichier($dir . '/.svn/entries', $c)
-	AND (
-	(preg_match_all(
-	',committed-rev="([0-9]+)",', $c, $r1, PREG_PATTERN_ORDER)
-	AND $v = max($r1[1])
-	)
-	OR
-	(preg_match(',^8.*dir[\r\n]+(\d+),ms', $c, $r1) # svn >= 1.4
-	AND $v = $r1[1]
-	)))
-		return -$v;
+	AND ( 
+ 	(preg_match_all( 
+ 	',committed-rev="([0-9]+)",', $c, $r1, PREG_PATTERN_ORDER) 
+ 	AND $v = max($r1[1]) 
+ 	) 
+ 	OR 
+ 	(preg_match(',^8.*dir[\r\n]+(\d+),ms', $c, $r1) # svn >= 1.4 
+ 	AND $v = $r1[1] 
+ 	))) 
+ 			return -$v; 
 
 	// version installee par paquet ZIP de SPIP-Zone
 	if (lire_fichier($dir.'/svn.revision', $c)
@@ -187,10 +187,10 @@ function info_copyright() {
 		. abs($svn_revision) . "</a>]";
 	}
 
-	return _T('info_copyright', 
+	return _T('info_copyright',
 		   array('spip' => "<b>SPIP $version</b> ",
 			 'lien_gpl' => 
-			 "<a href='". generer_url_ecrire("aide_index", "aide=licence&var_lang=$spip_lang") . "' target='spip_aide' onclick=\"javascript:window.open(this.href, 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"));
+			 "<a href='". generer_url_ecrire("aide_index", "aide=licence&var_lang=$spip_lang") . "' target='spip_aide' onclick=\"javascript:window.open(this.href, 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>")); 
 
 }
 
@@ -299,15 +299,15 @@ function http_wrapper($img){
 function http_img_pack($img, $alt, $att, $title='') {
 	return "<img src='" . http_wrapper($img)
 	  . ("'\nalt=\"" .
-	     ($alt ? str_replace('"','',$alt) : ($title ? $title : ereg_replace('\..*$','',$img)))
+	     ($alt ? str_replace('"','',$alt) : ($title ? $title : ''))
 	     . '" ')
 	  . ($title ? " title=\"$title\"" : '')
 	  . $att . " />";
 }
 
 // http://doc.spip.org/@http_href_img
-function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt='') {
-	return  http_href($href, http_img_pack($img, $title, $att), $title, $style, $class, $evt);
+function http_href_img($href, $img, $att, $alt, $title='', $style='', $class='', $evt='') {
+	return  http_href($href, http_img_pack($img, $alt, $att), $title, $style, $class, $evt);
 }
 
 
