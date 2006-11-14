@@ -1,6 +1,9 @@
 <?php
-function introduction ($type, $texte, $chapo='', $descriptif='') {
 
+// on ne sait jamais ! mais cette surcharge doit être étudiée...
+if (!function_exists("introduction")) {	
+
+  function introduction ($type, $texte, $chapo='', $descriptif='') {
 
 	switch ($type) {
 		case 'articles':
@@ -9,9 +12,7 @@ function introduction ($type, $texte, $chapo='', $descriptif='') {
 			else if (substr($chapo, 0, 1) == '=')	// article virtuel
 				return '';
 			else
-				
 				return PtoBR(propre(supprimer_tags(couper_intro(pas_de_grille_introduction($chapo."\n\n\n".$texte), 500))));
-				
 			break;
 		case 'breves':
 			return PtoBR(propre(supprimer_tags(couper_intro(pas_de_grille_introduction($texte), 300))));
@@ -26,11 +27,14 @@ function introduction ($type, $texte, $chapo='', $descriptif='') {
 				return PtoBR(propre(supprimer_tags(couper_intro(pas_de_grille_introduction($texte), 600))));
 			break;
 	}
-}
+	
+  }  // function introduction
+}	// if exists
 
-function pas_de_grille_introduction($texte)
-	{$texte = preg_replace(',<(grille)>(.*)<\/\1>,UimsS','',$texte);
+function pas_de_grille_introduction($texte) {
+	$texte = preg_replace(',<(grille)>(.*)<\/\1>,UimsS','',$texte);
 	$texte = preg_replace(',<(horizontal)>(.*)<\/\1>,UimsS','',$texte);
 	$texte = preg_replace(',<(vertical)>(.*)<\/\1>,UimsS','',$texte);
-	return $texte;}
+	return $texte;
+}
 ?>
