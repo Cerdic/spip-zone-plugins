@@ -10,6 +10,21 @@
  * © 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
+// compatibilite trans 1.9.1-1.9.2
+// Cadre formulaires
+// http://doc.spip.org/@debut_cadre_formulaire
+function Forms_debut_cadre_formulaire($style='', $return=false){
+	$x = "\n<div class='cadre-formulaire'" .
+	  (!$style ? "" : " style='$style'") .
+	   ">";
+	if ($return) return  $x; else echo $x;
+}
+
+// http://doc.spip.org/@fin_cadre_formulaire
+function Forms_fin_cadre_formulaire($return=false){
+	if ($return) return  "</div>\n"; else echo "</div>\n";
+}
+
 
 function Forms_nouveau_champ($id_form,$type){
 	$res = spip_query("SELECT champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND type="._q($type));
@@ -226,7 +241,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	$out = "";
 	if (!$id_form) return $out;
 	$out .= "<p>";
-	$out .= debut_cadre_formulaire('',true);
+	$out .= Forms_debut_cadre_formulaire('',true);
 	$out .= "<div class='verdana3'>";
 	$out .= "<strong>"._T("forms:champs_formulaire")."</strong><br />\n";
 	$out .= _T("forms:info_champs_formulaire");
@@ -392,7 +407,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	$out .= "</form>\n";
 	$out .= fin_cadre_enfonce(true);
 	$out .= "</p>";
-	$out .= fin_cadre_formulaire(true);
+	$out .= Forms_fin_cadre_formulaire(true);
 	$out .= "</p>";
 	
 	return $out;
@@ -405,7 +420,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out = "";
 	$out .= "<p>";
-	$out .= debut_cadre_formulaire('',true);
+	$out .= Forms_debut_cadre_formulaire('',true);
 
 	$action_link_noredir = parametre_url($action_link,'redirect','');
 	$out .= "<div class='verdana2'>";
@@ -496,7 +511,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 
 	$out .= "</form>";
 	$out .= "</div>";
-	$out .= fin_cadre_formulaire(true);
+	$out .= Forms_fin_cadre_formulaire(true);
 	$out .= "</p>";
 	return $out;
 }
