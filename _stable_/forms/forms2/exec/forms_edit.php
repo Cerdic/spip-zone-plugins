@@ -118,15 +118,7 @@ function exec_forms_edit(){
 	$new = _request('new');
 	$supp_form = intval(_request('supp_form'));
 	$supp_rejet = _request('supp_rejet');
-
 	$titre = _request('titre');
-	$descriptif = _request('descriptif');
-	$email = _request('email');
-	$champconfirm = _request('champconfirm');
-	$texte = _request('texte');
-	$type_form = _request('type_form');
-	$public = _request('public');
-	$moderation = _request('moderation');
 	
 	Forms_install();
 	if ($supp_form)
@@ -159,13 +151,6 @@ function exec_forms_edit(){
 		if ($row = spip_fetch_array($result)) {
 			$id_form = $row['id_form'];
 			$titre = $row['titre'];
-			$descriptif = $row['descriptif'];
-			$type_form = $row['type_form'];
-			$email = unserialize($row['email']);
-			$champconfirm = $row['champconfirm'];
-			$texte = $row['texte'];
-			$moderation = $row['moderation'];
-			$public = $row['public'];
 		}
 		$focus = "";
 		$action_link = generer_action_auteur("forms_edit","$id_form",urlencode($redirect));
@@ -215,15 +200,15 @@ function exec_forms_edit(){
 	if ($new == 'oui' && !$titre) {
 		$titre = _T("forms:nouveau_formulaire");
 		include_spip('inc/charset');
-		$titre = unicode2charset(html2unicode($titre));
-		$descriptif = "";
-		$type_form = _request('type_form')?_request('type_form'):""; // possibilite de passer un type par defaut dans l'url de creation
-		$email = array();
-		$champconfirm = "";
-		$texte = "";
-		$moderation = "priori";
-		$public = "non";
-		$focus = "antifocus";
+		$row['titre'] = $titre = unicode2charset(html2unicode($titre));
+		$row['descriptif'] = "";
+		$row['type_form'] = _request('type_form')?_request('type_form'):""; // possibilite de passer un type par defaut dans l'url de creation
+		$row['email'] = array();
+		$row['champconfirm'] = "";
+		$row['texte'] = "";
+		$row['moderation'] = "priori";
+		$row['public'] = "non";
+		$row['focus'] = "antifocus";
 		
 		$action_link = generer_action_auteur("forms_edit","new",urlencode($redirect));
 	}

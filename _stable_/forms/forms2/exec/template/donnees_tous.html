@@ -1,5 +1,5 @@
 #CACHE{0}
-#SET{colonnes_sans_tri,'-1'}
+#SET{colonnes_sans_tri,'0'}
 <BOUCLE_exclus(FORMS_CHAMPS){id_form}{type IN (separateur)}{doublons A}{doublons B}>#CHAMP</BOUCLE_exclus>
 <B_head>
 <div class='liste'>
@@ -12,6 +12,7 @@
 <table class="arial11" id='donnees' width='100%' cellpadding='5' cellspacing='0' border='0'>
 <thead>
 	<tr>
+		<th>id</th>
 		<th>Date</th>
 		<th>De</th>
 		<th>Page</th>
@@ -23,6 +24,7 @@
 <tbody>
 <BOUCLE_donnees(FORMS_DONNEES){id_form}{tout}>
 	<tr class='tr_liste'>
+		<td><a href='[(#URL_ECRIRE{table_donnee_edit,id_form=#ID_FORM}|parametre_url{id_donnee,#ID_DONNEE}|parametre_url{retour,#SELF})]'>#ID_DONNEE</a></td>
 		<td>#DATE</td>
 		<td><BOUCLE_auteur(AUTEURS){id_auteur}>#NOM</BOUCLE_auteur>#IP<//B_auteur></th>
 		<td>#URL</td>
@@ -73,12 +75,11 @@
 		height: auto;
 		padding:0px;
 		margin:0px;
-		padding-left: 15px;
 	}
-	#donnees th.neutre {		background-image: url(#EVAL{_DIR_PLUGIN_FORMS}img_pack/header.png);	}
-	#donnees th.header {		background-image: url(#EVAL{_DIR_PLUGIN_FORMS}img_pack/header-bg.png);	}
-	#donnees th.headerSortUp {		background-image: url(#EVAL{_DIR_PLUGIN_FORMS}img_pack/header-asc.png);	}
-	#donnees th.headerSortDown {	background-image: url(#EVAL{_DIR_PLUGIN_FORMS}img_pack/header-desc.png);}
+	#donnees th.neutre {padding-left: 0px;background-image: url(#EVAL{_DIR_PLUGIN_FORMS}img_pack/header.png);	}
+	#donnees th.header {padding-left: 15px;background-image: url(#EVAL{_DIR_PLUGIN_FORMS}img_pack/header-bg.png);	}
+	#donnees th.headerSortUp {padding-left: 15px;background-image: url(#EVAL{_DIR_PLUGIN_FORMS}img_pack/header-asc.png);	}
+	#donnees th.headerSortDown {padding-left: 15px;background-image: url(#EVAL{_DIR_PLUGIN_FORMS}img_pack/header-desc.png);}
 	#sorting div {
 		font-weight: bold;
 	}

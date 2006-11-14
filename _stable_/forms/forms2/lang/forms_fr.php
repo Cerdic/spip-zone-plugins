@@ -82,7 +82,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'liste_choix' => "Liste des choix propos&eacute;s",
 
-'nombre_reponses'=>"@nombre@ r&eacute;ponses",
+'aucune_reponse'=>"aucune donn&eacute;e",
+'une_reponse'=>"une donn&eacute;e",
+'nombre_reponses'=>"@nombre@ donn&eacute;es",
 'nouveau_champ' => "Nouveau champ",
 'nouveau_choix' => "Nouveau choix",
 'nouveau_formulaire' => "Nouveau formulaire",
@@ -122,6 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'tous_formulaires' => "Tous les formulaires",
 'tous_sondages_proteges' => "Tous les sondages prot&eacute;g&eacute;s",
 'tous_sondages_public' => "Tous les sondages publics",
+'tous_sondages' => "Tous les sondages",
 
 'valider'=>"Valider",
 'verif_web' => "v&eacute;rifier l'existence du site Web",

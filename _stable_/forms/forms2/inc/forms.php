@@ -241,11 +241,10 @@
 		return $inserts;
 	}
 
-	function Forms_enregistrer_reponse_formulaire($id_form, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='') {
+	function Forms_enregistrer_reponse_formulaire($id_form, $id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='') {
 		$r = '';
 	
-		$query = "SELECT * FROM spip_forms WHERE id_form=$id_form";
-		$result = spip_query($query);
+		$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 		if (!$row = spip_fetch_array($result)) {
 			$erreur['@'] = _T("forms:probleme_technique");
 		}
@@ -264,7 +263,7 @@
 			global $auteur_session;
 			$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
 			$ip = addslashes($GLOBALS['REMOTE_ADDR']);
-			$url = parametre_url(self(),'id_form','');
+			$url = (_DIR_RESTREINT==_DIR_RESTREINT_ABS)?parametre_url(self(),'id_form',''):_DIR_RESTREINT_ABS;
 			$ok = true;
 			
 			if ($row['type_form']=='sondage') {
@@ -282,9 +281,11 @@
 				$statut = 'propose';
 			// D'abord creer la reponse dans la base de donnees
 			if ($ok) {
-				spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie) ".
-					"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($ip).","._q($url).", '$confirmation', '$statut',"._q($cookie).")");
-				$id_donnee = spip_insert_id();
+				if (!$id_donnee){
+					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie) ".
+						"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($ip).","._q($url).", '$confirmation', '$statut',"._q($cookie).")");
+					$id_donnee = spip_insert_id();
+				}
 				if (!$id_donnee) {
 					$erreur['@'] = _T("forms:probleme_technique");
 					$ok = false;
@@ -302,6 +303,7 @@
 			}
 			if ($ok) {
 				include_spip('inc/securiser_action');
+				spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
 				spip_query("INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
 					"VALUES ".join(',', $inserts));
 				if ($row['type_form']=='sondage') {

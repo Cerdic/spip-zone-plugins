@@ -13,8 +13,8 @@
 
 include_spip('exec/template/tables_affichage');
 
-function exec_donnees_tous(){
-	echo affichage_donnees_tous('table',_T("forms:toutes_tables"),_T("forms:tables"),_T("forms:icone_ajouter_donnee"));
+function exec_tables_tous(){
+	echo afficher_tables_tous('table',_T("forms:toutes_tables"),_T("forms:tables"),_T("forms:icone_creer_table"));
 }
 
 ?>

@@ -15,17 +15,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 // Pas besoin de contexte de compilation
 global $balise_FORMS_collecte;
-$balise_FORMS_collecte = array('id_form','id_article');
+$balise_FORMS_collecte = array('id_form','id_article','id_donnee');
 
 function balise_FORMS ($p) {
-	return calculer_balise_dynamique($p,'FORMS', array('id_form', 'id_article', 'class'));
+	return calculer_balise_dynamique($p,'FORMS', array('id_form', 'id_article', 'id_donnee', 'class'));
 }
 
 function balise_FORMS_stat($args, $filtres) {
 	return $args;
 }
  
-function balise_FORMS_dyn($id_form = 0, $id_article = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation',$reponse_enregistree="forms:reponse_enregistree") {
+function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation',$reponse_enregistree="forms:reponse_enregistree") {
 	$url = self();
 	// nettoyer l'url qui est passee par htmlentities pour raison de securités
 	$url = str_replace("&amp;","&",$url);
@@ -39,12 +39,13 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $class='', $script_vali
 	$formok = '';
 	$valeurs = array('0'=>'0');
 	$affiche_sondage = '';
-	$formactif = (_DIR_RESTREINT==_DIR_RESTREINT_ABS)?' ':'';
-	
+	$formactif = (_DIR_RESTREINT==_DIR_RESTREINT_ABS || preg_match(',donnee_edit$,',_request('exec')))?' ':'';
+
+	$id_donnee = $id_donnee?$id_donnee:intval(_request('id_donnee'));
 	$flag_reponse = (_request('ajout_reponse') == 'oui' && _request('id_form') == $id_form) && _request('nobotnobot')=='';
 	if ($flag_reponse) {
 		include_spip('inc/forms');
-		$url_validation = Forms_enregistrer_reponse_formulaire($id_form, $erreur, $reponse, $script_validation, $id_article?"id_article=$id_article":"");
+		$url_validation = Forms_enregistrer_reponse_formulaire($id_form, $id_donnee, $erreur, $reponse, $script_validation, $id_article?"id_article=$id_article":"");
 		if (!$erreur) {
 			$formok = _T($reponse_enregistree);
 			if ($reponse)
@@ -58,7 +59,13 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $class='', $script_vali
 				$valeurs[$key] = interdire_scripts($val);
 		}
 	}
-	if ($row['type_form'] == 'sondage-public'){
+	elseif (!_DIR_RESTREINT && $id_donnee=_request('id_donnee')){
+		$res = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
+		while ($row2 = spip_fetch_array($res)){
+			$valeurs[$row2['champ']]= $row2['valeur'];
+		}
+	}
+	if ($row['type_form'] == 'sondage' && $row['public']=='oui'){
 		include_spip('inc/forms');
 		if ((Forms_verif_cookie_sondage_utilise($id_form)==true)&&(_DIR_RESTREINT!=""))
 			$affiche_sondage=' ';
