@@ -48,7 +48,7 @@
 	}
 
 	function Forms_upgrade(){
-		$version_base = 0.17;
+		$version_base = 0.18;
 		$current_version = 0.0;
 		if (   (isset($GLOBALS['meta']['forms_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['forms_base_version'])==$version_base))
@@ -147,6 +147,21 @@
 			spip_query("ALTER TABLE spip_forms_donnees ADD statut VARCHAR(10) NOT NULL AFTER confirmation");
 			spip_query("UPDATE spip_forms_donnees SET statut='publie'"); // par securite
 			ecrire_meta('forms_base_version',$current_version=0.17);
+		}
+		if ($current_version<0.18){
+			spip_query("ALTER TABLE spip_forms ADD linkable ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER public");
+			
+			// init la valeur par defaut de extra_info sur les champs select (aurait du etre fait en 0.17
+			$res = spip_query("SELECT * FROM spip_forms_champs WHERE type='select'");
+			while ($row = spip_fetch_array($res)){
+				if (!in_array($row['extra_info'],array('liste','radio'))){
+					$extra_info = 'liste';
+					$row2 = spip_fetch_array(spip_query("SELECT COUNT(choix) as n FROM spip_forms_champs_choix WHERE id_form="._q($row['id_form'])." AND champ="._q($row['champ'])));
+					if ($row2 && $row2['n']<6) $extra_info='radio';
+					spip_query("UPDATE spip_forms_champs SET extra_info='$extra_info' WHERE id_form="._q($row['id_form'])." AND champ="._q($row['champ']));
+				}
+			}
+			ecrire_meta('forms_base_version',$current_version=0.18);
 		}
 		ecrire_metas();
 	}

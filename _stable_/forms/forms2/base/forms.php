@@ -26,6 +26,7 @@ $spip_forms = array(
 	"texte" 	=> "text",
 	"moderation"	=> "VARCHAR(10) DEFAULT 'posteriori'",
 	"public" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
+	"linkable" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 	"maj" 		=> "TIMESTAMP");
 
 $spip_forms_key = array(

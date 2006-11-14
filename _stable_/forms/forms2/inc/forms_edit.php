@@ -336,14 +336,15 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 			$formulaire .= " &nbsp;<input type='text' name='nom_champ' id='nom_$champ' value=\"".
 				entites_html($row['titre'])."\" class='fondo verdana2 $focus' size='30' /><br />\n";
 			$formulaire .= Forms_bloc_edition_champ($row, $action_link, $redirect, $id_bloc);
-		}
-		$formulaire .= "<label for='aide_$champ'>"._T("forms:aide_contextuelle")."</label> :";
-		$formulaire .= " &nbsp;<textarea name='aide_champ' id='aide_$champ'  class='verdana2' style='width:90%;height:3em;' >".
-			entites_html($row['aide'])."</textarea><br />\n";
-			
-		$formulaire .= "<label for='wrap_$champ'>"._T("forms:html_wrapper")."</label> :";
-		$formulaire .= " &nbsp;<textarea name='wrap_champ' id='wrap_$champ'  class='verdana2' style='width:90%;height:2em;' >".
+
+			$formulaire .= "<label for='aide_$champ'>"._T("forms:aide_contextuelle")."</label> :";
+			$formulaire .= " &nbsp;<textarea name='aide_champ' id='aide_$champ'  class='verdana2' style='width:90%;height:3em;' >".
+				entites_html($row['aide'])."</textarea><br />\n";
+				
+			$formulaire .= "<label for='wrap_$champ'>"._T("forms:html_wrapper")."</label> :";
+			$formulaire .= " &nbsp;<textarea name='wrap_champ' id='wrap_$champ'  class='verdana2' style='width:90%;height:2em;' >".
 			entites_html($row['html_wrap'])."</textarea><br />\n";
+		}
 
 		$formulaire .= "<div style='text-align:$spip_lang_right'>";
 		$formulaire .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo verdana2'>\n";
