@@ -93,10 +93,17 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 		$out .= fin_block();
 	}
 
-	$out .= afficher_articles(_T("forms:articles_utilisant"),
+	if ($GLOBALS['spip_version_code']<1.92)		ob_start(); // des echo direct en 1.9.1
+	$liste = afficher_articles(_T("forms:articles_utilisant"),
 		array('FROM' => 'spip_articles AS articles, spip_forms_articles AS lien',
 		'WHERE' => "lien.id_article=articles.id_article AND id_form="._q($id_form)." AND statut!='poubelle'",
 		'ORDER BY' => "titre"));
+	if ($GLOBALS['spip_version_code']<1.92) {
+		$liste = ob_get_contents();
+		ob_end_clean();
+	}
+		
+	$out .= $liste;
 
 	$out .= fin_cadre_relief(true);
 	return $out;
