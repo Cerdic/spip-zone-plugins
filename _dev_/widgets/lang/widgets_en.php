@@ -4,12 +4,12 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Cancel',
-	'editer_@type@_@id@' => 'Edit @type@ @id@ as whole',
-	'deja_modifie' => 'Already changed the same',
-	'donnees_mal_formatees' => 'Request format is not correct',
+	'editer_@type@_@id@' => 'Edit the whole @type@ @id@',
+	'deja_modifie' => 'Already modified',
+	'donnees_mal_formatees' => 'Invalid request format',
 	'editer' => 'Edit',
 	'editer_tout' => 'Edit as a whole',
-	'modifie_par_ailleurs' => 'Was changed elsewhere in mean time',
+	'modifie_par_ailleurs' => 'Was changed elsewhere in the meantime',
 	'non_autorise' => 'Not allowed',
 	'non_implemente' => 'Not implemented',
 	'pas_de_modification' => 'No change',
