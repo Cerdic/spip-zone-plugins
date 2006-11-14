@@ -37,11 +37,11 @@ function ajouter_profil() {
   $final = array();
   foreach($dossiers as $d) {
 	if($d) {
-	  $final[] = "$d#$profil";
+	  $final[] = "$d=$profil";
 	  $final[] = $d;
 	}
   }
-  $final[] = "squelettes#$profil";
+  $final[] = "squelettes=$profil";
   creer_dossier_squelettes($final);
 }
 
