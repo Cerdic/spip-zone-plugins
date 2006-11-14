@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'modifie_par_ailleurs' => 'Wurde von jemand anderem bereits ge&auml;ndert',
     'pas_de_modification' => 'Keine &Auml;nderung',
     'non_implemente' => 'Nicht implementiert',
-    'pas_de_valeur' => 'Inhalt existiert nicht'
+    'pas_de_valeur' => 'Inhalt existiert nicht',
     'sauvegarder' => '&Auml;nderungen erfassen ?'
     );
 ?>
