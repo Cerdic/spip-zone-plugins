@@ -17,7 +17,7 @@ Ce plugin fournit des fonctions d'&eacute;dition rapide depuis les pages publiqu
 _ <code><h1 class="widget article-titre-#ID_ARTICLE">#TITRE</h1></code>.
 	</description>
 	<lien>
-	[Documentation->http://www.spip-contrib.net/ecrire/?exec=articles&amp;id_article=1475]
+	[Documentation->http://www.spip-contrib.net/?article1475]
 	</lien>
 	<prefix>
 	Widgets
