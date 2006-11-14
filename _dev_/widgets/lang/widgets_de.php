@@ -16,6 +16,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_valeur' => 'Inhalt existiert nicht',
 	'sauvegarder' => '&Auml;nderungen erfassen ?',
 	'svp_copier_coller' => 'Bitte, &auml;nderungen sicher stellen und wiederholen',
-	'veuillez_patienter'=>'Bitte warten ...',
+	'veuillez_patienter'=>'Bitte warten ...'
 	);
 ?>
