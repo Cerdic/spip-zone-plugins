@@ -62,13 +62,7 @@ function controleur_dist($regs) {
         $widgetsAction = str_replace('widgets_html', 'widgets_store', self());
         $widgetsCode = $n->code();
         $widgetsInput = $n->input($mode, $inputAttrs);
-        $widgetsImgPath = dirname(find_in_path('images/cancel.png'));
-
-        // title des boutons
-        $OK = texte_backend(_T('bouton_enregistrer'));
-        $Cancel = texte_backend(_L('Annuler'));
-        $Editer = texte_backend(_L("&Eacute;diter $type $id"));
-        $url_edit = "ecrire/?exec={$type}s_edit&amp;id_{$type}=$id";
+        $widgetsBoutons = $n->boutons(); // array('edit'=>'')
 
         $html =
         <<<FIN_FORM
@@ -76,23 +70,12 @@ function controleur_dist($regs) {
 <form method="post" action="{$widgetsAction}">
   {$widgetsCode}
   {$widgetsInput}
-  <div class="widget-boutons">
-  <div>
-    <a class="widget-submit" title="{$OK}">
-      <img src="{$widgetsImgPath}/ok.png" width="20" height="20" />
-    </a>
-    <a class="widget-cancel" title="{$Cancel}">
-      <img src="{$widgetsImgPath}/cancel.png" width="20" height="20" />
-    </a>
-  </div>
-</div>
+  {$widgetsBoutons}
 </form>
 
 FIN_FORM;
         $status = NULL;
-
-    }
-    else {
+    } else {
         $html = "$type $id $champ: " . _U('widgets:pas_de_valeur');
         $status = 6;
     }
@@ -218,6 +201,47 @@ class Widget {
         }
         return $return;
     }
+
+/*
+ Fabriquer les boutons par defaut du widget
+	$boutons: tableau optionnel des boutons à poser (class=>array(img,texte[,url]))
+	submit et cancel sont ajoutés par défaut, annullables comme 'cancel'=>''
+	le + "editer tout" n'y est pas, au contraire on peut le mettre avec 'edit'=>''
+*/
+    function boutons($boutons = array('ok', 'cancel')) {
+        $widgetsImgPath = dirname(find_in_path('images/cancel.png'));
+        if (!isset($boutons['ok'])) {
+        	$boutons['submit'] = array('ok', texte_backend(_T('bouton_enregistrer')));
+        }
+        if (!isset($boutons['cancel'])) {
+        	$boutons['cancel'] = array('cancel', texte_backend(_T('widgets:annuler')));
+        }
+        if (isset($boutons['edit']) && !$boutons['edit']) {
+        	$boutons['edit'] = array('edit',
+        		texte_backend(_T('widgets:editer_@type@_@id@',
+        					array('type'=>$this->type, 'id'=>$this->id))),
+        		"ecrire/?exec={$this->type}s_edit&amp;id_{$this->type}={$this->id}");
+        }
+
+        // title des boutons
+        $OK = texte_backend(_T('bouton_enregistrer'));
+        $Cancel = texte_backend(_L('Annuler'));
+        $Editer = texte_backend(_L("&Eacute;diter $type $id"));
+        $url_edit = "ecrire/?exec={$type}s_edit&amp;id_{$type}=$id";
+
+        $html = '<div class="widget-boutons"><div>';
+        foreach ($boutons as $bnam => $bdef) if ($bdef) {
+        	$html .= '<a class="widget-' . $bnam .
+        		'" title="' . $bdef[1] . '"';
+        	if (!empty($bdef[2])) {
+        		$html .= ' href="' . $bdef[2] . '"';
+        	}
+        	$html .= '><img src="' . $widgetsImgPath . '/' .
+        		$bdef[0] . '.png" width="20" height="20" /></a>';
+        }
+        $html .= '</div></div>';
+		return $html;
+	}
 }
 
 //

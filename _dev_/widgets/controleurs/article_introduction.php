@@ -42,14 +42,7 @@ function controleurs_article_introduction_dist($regs) {
         if (!($widgetsInput = $n->modele($contexte))) {
 	        $widgetsInput = $n->input($inputAttrs);
         }
-        $widgetsImgPath = dirname(find_in_path('images/cancel.png'));
-
-        // title des boutons
-        include_spip('inc/filtres');
-        $OK = texte_backend(_T('bouton_enregistrer'));
-        $Cancel = texte_backend(_L('Annuler'));
-        $Editer = texte_backend(_L("&Eacute;diter $type $id"));
-        $url_edit = "ecrire/?exec={$type}s_edit&amp;id_{$type}=$id";
+        $widgetsBoutons = $n->boutons(); // array('edit'=>'')
 
         $html =
         <<<FIN_FORM
@@ -57,16 +50,7 @@ function controleurs_article_introduction_dist($regs) {
 <form method="post" action="{$widgetsAction}">
   {$widgetsCode}
   {$widgetsInput}
-  <div class="widget-boutons">
-  <div>
-    <a class="widget-submit" title="{$OK}">
-      <img src="{$widgetsImgPath}/ok.png" width="20" height="20" />
-    </a>
-    <a class="widget-cancel" title="{$Cancel}">
-      <img src="{$widgetsImgPath}/cancel.png" width="20" height="20" />
-    </a>
-  </div>
-</div>
+  {$widgetsBoutons}
 </form>
 
 FIN_FORM;
