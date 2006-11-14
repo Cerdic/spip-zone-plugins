@@ -18,7 +18,9 @@ include_spip('inc/forms');
 //
 function exec_forms_exporter(){
 	$id_form = _request('id_form');
-	if (!Forms_form_administrable($id_form)){
+	if (!include_spip('inc/autoriser'))
+		include_spip('inc/autoriser_compat');
+	if (!autoriser('administrer','form',$id_form)) {
 		debut_page(_T('avis_acces_interdit'), "documents", "forms");
 		debut_gauche();
 		debut_droite();

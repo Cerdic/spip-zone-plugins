@@ -69,16 +69,6 @@
 	}
 
 	// Fonction utilitaires
-	function Forms_form_editable($id_form = 0) {
-		include_spip('inc/autoriser');
-		return autoriser('modifier','form',$id_form);
-	}
-	
-	function Forms_form_administrable($id_form = 0) {
-		include_spip('inc/autoriser');
-		return autoriser('modifier','form',$id_form);
-	}
-
 	function Forms_nom_cookie_form($id_form) {
 		return $GLOBALS['cookie_prefix'].'cookie_form_'.$id_form;
 	}
@@ -196,7 +186,9 @@
 		}
 	
 		// Creer un formulaire
-		if (Forms_form_editable()) {
+		if (!include_spip('inc/autoriser'))
+			include_spip('inc/autoriser_compat');
+		if (autoriser('creer','form')) {
 			$s .= "\n<br />";
 			$link = generer_url_ecrire('forms_edit',"new=oui&retour=".urlencode(self()));
 			$s .= icone_horizontale(_T("forms:icone_creer_formulaire"),

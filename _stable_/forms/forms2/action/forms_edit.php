@@ -13,7 +13,8 @@
 include_spip('inc/forms');
 include_spip('inc/forms_edit');
 include_spip('inc/forms_type_champs');
-include_spip('inc/autoriser');
+if (!include_spip('inc/autoriser'))
+	include_spip('inc/autoriser_compat');
 // TODO : charger la bonne langue !
 function Forms_ordonne_champs($id_form){
 	if (strlen($ordre = _request('ordre'))){
@@ -142,7 +143,7 @@ function Forms_update($id_form){
 		$texte = $row['texte'];
 	}
 	
-	if ($id_form && Forms_form_editable($id_form)) {
+	if ($id_form) {
 		$champ_visible = NULL;
 		// Ajout d'un champ
 		if (($type = $ajout_champ) && Forms_type_champ_autorise($type)) {
@@ -200,7 +201,8 @@ function action_forms_edit(){
 	$redirect = str_replace("&amp;","&",urldecode(_request('redirect')));
 	//$redirect = parametre_url($redirect,'var_ajaxcharset',''); // si le redirect sert, pas d'ajax !
 	if ($redirect==NULL) $redirect="";
-	include_spip("inc/securiser_action");
+	if (!include_spip("inc/securiser_action"))
+		include_spip("inc/actions");
 	if (verifier_action_auteur("forms_edit-$arg",$hash,$id_auteur)==TRUE) {
 		$arg=explode("-",$arg);
 		$id_form = $arg[0];

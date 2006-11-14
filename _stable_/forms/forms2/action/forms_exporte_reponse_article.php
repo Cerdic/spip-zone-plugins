@@ -18,7 +18,8 @@ function action_forms_exporte_reponse_article(){
 	$id_auteur = _request('id_auteur');
 	$redirect = _request('redirect');
 	if ($redirect==NULL) $redirect="";
-	include_spip("inc/securiser_action");
+	if (!include_spip("inc/securiser_action"))
+		include_spip("inc/actions");
 	if (verifier_action_auteur("forms_exporte_reponse_article-$id_donnee",$hash,$id_auteur)==TRUE){
 		// preparer l'article
 		$id_article = 0;

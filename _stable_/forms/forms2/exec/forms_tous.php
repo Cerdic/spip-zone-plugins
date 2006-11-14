@@ -38,7 +38,9 @@ function exec_forms_tous(){
 	
 	echo "<br />\n";
 	
-	if (Forms_form_editable()) {
+	if (!include_spip('inc/autoriser'))
+		include_spip('inc/autoriser_compat');
+	if (autoriser('creer','form')) {
 		echo "<div align='right'>";
 		$link=generer_url_ecrire('forms_edit', 'new=oui');
 		$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));

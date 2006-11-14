@@ -12,12 +12,14 @@
  */
 
 include_spip('inc/forms');
+include_spip("inc/presentation");
+if (!include_spip('inc/autoriser'))
+	include_spip('inc/autoriser_compat');
 
 function exec_forms_reponses(){
 	global $id_form;
 	global $supp_reponse;
 	$debut = _request('debut');
-  include_spip("inc/presentation");
   Forms_install();
 
 	$id_form = intval($id_form);
@@ -41,7 +43,7 @@ function exec_forms_reponses(){
 
 		icone_horizontale(_T("forms:formulaire_aller"), "?exec=forms_edit&id_form=$id_form", "../"._DIR_PLUGIN_FORMS. "/img_pack/form-24.png", "rien.gif");
 
-		if (Forms_form_administrable($id_form)) {
+		if (autoriser('administrer','form',$id_form)) {
 			$retour = urlencode(self());
 			icone_horizontale(_T("forms:telecharger_reponses"),
 				generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), "doc-24.gif", "rien.gif");
@@ -53,7 +55,7 @@ function exec_forms_reponses(){
 	debut_droite();
 
 
-	if (!Forms_form_administrable($id_form)) {
+	if (!autoriser('administrer','form',$id_form)) {
 		echo "<strong>"._T('avis_acces_interdit')."</strong>";
 		fin_page();
 		exit;

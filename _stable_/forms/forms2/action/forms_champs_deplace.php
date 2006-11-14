@@ -11,7 +11,8 @@
  *
  */
 include_spip('inc/forms');
-include_spip('inc/autoriser');
+if (!include_spip('inc/autoriser'))
+	include_spip('inc/autoriser_compat');
 
 function action_forms_champs_deplace(){
 	global $auteur_session;
@@ -20,7 +21,8 @@ function action_forms_champs_deplace(){
 	$id_auteur = $auteur_session['id_auteur'];
 	$redirect = _request('redirect');
 	if ($redirect==NULL) $redirect="";
-	include_spip("inc/securiser_action");
+	if (!include_spip("inc/securiser_action"))
+		include_spip("inc/actions");
 	if (verifier_action_auteur("forms_champs_deplace-$args",$hash,$id_auteur)==TRUE) {
 			$args = explode("-",$args);
 			$id_form = $args[0];

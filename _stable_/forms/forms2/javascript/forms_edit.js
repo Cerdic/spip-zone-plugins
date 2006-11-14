@@ -85,34 +85,35 @@ jQuery.fn.ajaxAction = function() {
 		}
 	)
 	$('#champs .boutons_ordonne').hide();
-	$('#champs div#sortableChamps').Sortable(
-		{
-			accept : 			'sortableChampsItem',
-			activeclass : 'sortableactive',
-			hoverclass : 	'sortablehover',
-			helperclass : 'sorthelper',
-			handle : '.sortableChampsHandle',
-			/*opacity: 		0.8,*/
-			/*fx:				200,*/
-			revert:			true,
-			tolerance:		'intersect',
-			/*containment: 'parent',*/
-			onStart : function(arg){
-				serial = $.SortSerialize($(this).parent().id());
-				var form = $(this).parent().siblings('form.sortableChamps');
-				form.children('input[@name=ordre]').val(serial.hash);
-			},
-			onStop : function(arg){
-				serial = $.SortSerialize($(this).parent().id());
-				var form = $(this).parent().siblings('form.sortableChamps');
-				var prev = form.children('input[@name=ordre]').val();
-				if (prev != serial.hash) {
-					form.end().children('input[@name=ordre]').val(serial.hash);
-					form.end().children('input[@type=submit]').eq(0).each(function(){ this.click(); });
+	if (id=='champs')
+		$('#champs div#sortableChamps').Sortable(
+			{
+				accept : 			'sortableChampsItem',
+				activeclass : 'sortableactive',
+				hoverclass : 	'sortablehover',
+				helperclass : 'sorthelper',
+				handle : '.sortableChampsHandle',
+				/*opacity: 		0.8,*/
+				/*fx:				200,*/
+				revert:			true,
+				tolerance:		'intersect',
+				/*containment: 'parent',*/
+				onStart : function(arg){
+					serial = $.SortSerialize($(this).parent().id());
+					var form = $(this).parent().siblings('form.sortableChamps');
+					form.children('input[@name=ordre]').val(serial.hash);
+				},
+				onStop : function(arg){
+					serial = $.SortSerialize($(this).parent().id());
+					var form = $(this).parent().siblings('form.sortableChamps');
+					var prev = form.children('input[@name=ordre]').val();
+					if (prev != serial.hash) {
+						form.end().children('input[@name=ordre]').val(serial.hash);
+						form.end().children('input[@type=submit]').eq(0).each(function(){ this.click(); });
+					}
 				}
 			}
-		}
-	)
+		)
 }
 
 $(document).ready(function(){

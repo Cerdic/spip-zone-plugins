@@ -15,6 +15,8 @@
 include_spip('inc/forms');
 include_spip("inc/charsets");
 include_spip("inc/presentation");
+if (!include_spip('inc/autoriser'))
+	include_spip('inc/autoriser_compat');
 
 function csv_champ($champ) {
 	$champ = preg_replace(',[\s]+,', ' ', $champ);
@@ -74,7 +76,7 @@ function Forms_formater_les_reponses($id_form, $format, $separateur, $head=true,
 	$row = spip_fetch_array(spip_query("SELECT COUNT(*) AS tot FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND confirmation='valide'"));
 	if ($row)	$nb_reponses = $row['tot'];
 
-	if (!$id_form || !Forms_form_administrable($id_form))
+	if (!$id_form || !autoriser('administrer','form',$id_form))
 		acces_interdit();
 
 	$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
@@ -194,7 +196,7 @@ function exec_forms_telecharger(){
 		$res = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
 		if ($row = spip_fetch_array($res))
 			$id_form = $row['id_form'];
-		if (!$id_form || !Forms_form_administrable($id_form))
+		if (!$id_form || !autoriser('administrer','form',$id_form))
 			acces_interdit();
 		$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)." AND type='fichier' AND champ="._q($champ));
 		if (!$row = spip_fetch_array($res))

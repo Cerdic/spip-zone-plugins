@@ -218,7 +218,9 @@ function exec_forms_edit(){
 	if ($retour) {
 		icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."/img_pack/form-24.png", "rien.gif",'right');
 	}
-	if (Forms_form_administrable($id_form)) {
+	if (!include_spip('inc/autoriser'))
+		include_spip('inc/autoriser_compat');
+	if (autoriser('administrer','form',$id_form)) {
 		if ($nb_reponses){
 			$nretour = urlencode(self());
 			icone_horizontale(_T("forms:suivi_reponses")."<br />".$nb_reponses." "._T("forms:reponses"),

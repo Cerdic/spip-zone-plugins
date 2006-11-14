@@ -16,6 +16,16 @@ if (!defined('_DIR_PLUGIN_FORMS')){
 }
 include_spip('base/forms');
 
+function autoriser_form($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
+	if ($type=='form')
+		if ($faire=='administrer'){
+			return ($qui['statut'] == '0minirezo');
+		}
+		else
+			return ($qui['statut'] == '0minirezo');
+	return false;
+}
+
 // Code a rapatrier dans inc-public et inc_forms
 // (NB : le reglage du cookie doit se faire avant l'envoi de tout HTML au client)
 function Forms_poser_cookie_sondage() {
@@ -59,4 +69,5 @@ foreach($_COOKIE as $cookie=>$value){
 		}
 	}
 }
+
 ?>
