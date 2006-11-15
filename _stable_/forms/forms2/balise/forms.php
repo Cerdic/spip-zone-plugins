@@ -82,6 +82,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 			'url_validation' => str_replace("&amp;","&",$url_validation),
 			'affiche_sondage' => $affiche_sondage,
 			'formok' => filtrer_entites($formok),
+			'formvisible' => $formok?(_DIR_RESTREINT!=_DIR_RESTREINT_ABS):true,
 			'formactif' => $formactif,
 			'class' => 'formulaires/'.($class?$class:'forms_structure')
 		));

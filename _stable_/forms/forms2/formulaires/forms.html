@@ -14,7 +14,7 @@
 </p>]
 [<p class='spip_form_erreur'>(#ENV{erreur_message})</p>]
 [<img src='(#ENV{url_validation})' width='1' height='1' alt='validation de la saisie' />]
-[(#ENV{formok}|?{'',' '})
+[(#ENV{formvisible}|?{' '})
 	[(#ENV{formactif})
 	<form method='post' action='#ENV{self}#form#ID_FORM'
 		enctype='multipart/form-data'>
