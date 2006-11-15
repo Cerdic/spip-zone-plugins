@@ -1,9 +1,9 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Template : un template de plugin vide pour servir de guide
+	Auteurs Complets
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
- 	collectif
+ 	Quentin Drouet
 _ &copy; 2006 - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
@@ -13,7 +13,7 @@ _ &copy; 2006 - Distribu&eacute; sous licence GPL
 	experimental
 	</etat>
 	<description>
-	Ici decrivez plus ou moins longuement ce que fait votre plugin
+	Rajout de champs pour les auteurs
 	</description>
 	<lien>http://www.spip.net/fr_article3448.html</lien> <!-- URI de documentation -->
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->

@@ -1,0 +1,35 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	SPIPmotion
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Quentin Drouet (kent1)
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	experimental
+	</etat>
+	<description>
+	<multi>
+	[fr] Faire un dailymotion sous spip? Premi&egrave;res infos [par ici->http://kent1.sklunk.net/spip.php?article71].
+	</multi>
+	</description>
+	<lien>http://kent1.sklunk.net/spip.php?article71</lien>
+	<options> <!-- fichier charge a chaque hit -->
+	spipmotion_options.php
+	</options>
+	<prefix>
+	spipmotion
+	</prefix>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	<pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<action>affiche_droite</action>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+</plugin>
