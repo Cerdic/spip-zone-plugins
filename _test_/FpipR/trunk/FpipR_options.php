@@ -253,9 +253,11 @@ function FpipR_get_flickr_photo_secret($fichier) {
 }
 
 function FpipR_calcul_argument_page($debut,$pas) {
-  $page = intval($debut/$pas);
-  if($page <= 0) $page = 1;
-  $pas = $pas+$debut-$page*$pas;
+  $page = intval($debut/$pas)+1;
+  if($page == 1)  {
+	$pas = $pas+$debut;
+  } else
+	$pas = $pas+$debut-($page-1)*$pas;
   return array($page,$pas>0?intval($pas):100);
 }
 

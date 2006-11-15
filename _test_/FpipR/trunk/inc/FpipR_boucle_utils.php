@@ -131,18 +131,20 @@ function FpipR_utils_search_extras($boucle,$id_table,$possible_extras) {
 function FpipR_utils_calcul_limit(&$boucle) {
   //on calcul le nombre de page d'apres {0,10}
   $deubt=0;$pas=1;
-  if($boucle->limit)
+  if($boucle->limit) {
 	list($debut,$pas) = split(',',$boucle->limit);
-  else {
+	$boucle->limit = ($debut%$pas).','.$pas;
+  } else {
 	$debut = $boucle->partie;
 	$pas = $boucle->total_parties;
+	$boucle->partie = "($debut)%($pas)";
   }
-if($debut && $pas) {
-  return "list(\$page,\$per_page) = FpipR_calcul_argument_page($debut,$pas);
+  if($debut && $pas) {
+	return "list(\$page,\$per_page) = FpipR_calcul_argument_page($debut,$pas);
 \$arguments['page'] = \$page;
 \$arguments['per_page'] = \$per_page;
 ";
-}
+  }
 else return '';
 }
 
