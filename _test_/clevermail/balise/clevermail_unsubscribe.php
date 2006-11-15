@@ -1,7 +1,7 @@
 <?php
 	/**
 	 *
-	 * CleverMail : plugin de gestion de lettres d'information basé sur CleverMail
+	 * CleverMail : plugin de gestion de lettres d'information basï¿½ sur CleverMail
 	 * Author : Thomas Beaumanoir
 	 * Clever Age <http://www.clever-age.com>
 	 * Copyright (c) 2006
@@ -16,7 +16,7 @@ function balise_CLEVERMAIL_UNSUBSCRIBE($p) {
 
 function balise_CLEVERMAIL_UNSUBSCRIBE_dyn() {
 	if (isset($_GET['id']) && $_GET['id'] != '') {
-		$result = spip_query("SELECT * FROM cm_lists_subscribers WHERE lsr_id = '".$_GET['id']."'");
+		$result = spip_query("SELECT * FROM cm_lists_subscribers WHERE lsr_id = '"._q($_GET['id'])."'");
 	    if (spip_num_rows($result)==1) {
 	    	$data = spip_fetch_array($result);
 
