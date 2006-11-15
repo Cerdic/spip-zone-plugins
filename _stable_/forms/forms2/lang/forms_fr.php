@@ -50,8 +50,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date' => "Date",
 'date_invalide' => "Format de la date invalide",
 'dupliquer' => "Dupliquer",
-'donnees_pub'=>"Formulaire public. Les donn&eacute;es enregitr&eacute;es seront accessibles aux visiteurs du site.",
-'donnees_prot'=>"Formulaire prot&eacute;g&eacute;. Les donn&eacute;es enregitr&eacute;es ne seront accessibles que depuis l'interface priv&eacute;e.",
+'donnees_pub'=>"Donn&eacute;es public. Les donn&eacute;es enregitr&eacute;es seront accessibles aux visiteurs du site.",
+'donnees_prot'=>"Donn&eacute;es prot&eacute;g&eacute;. Les donn&eacute;es enregitr&eacute;es ne seront accessibles que depuis l'interface priv&eacute;e.",
 
 'echec_upload'=>"Le transfert du fichier a &eacute;chou&eacute;.",
 'edit_champ_obligatoire' => 'ce champ est obligatoire',
@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_obligatoire_02' => '[Obligatoire]',
 'info_sondage' => "Si votre formulaire est un sondage, les r&eacute;sultats des champs de type &laquo; s&eacute;lection &raquo; seront additionn&eacute;s et affich&eacute;s.",
 'info_supprimer_formulaire' => "Voulez-vous vraiment supprimer ce formulaire ?",
-'info_supprimer_formulaire_reponses' => "Des r&eacute;ponses ont &eacute;t&eacute; faites &agrave; ce formulaire. Voulez-vous vraiment le supprimer ?",
+'info_supprimer_formulaire_reponses' => "Des donn&eacute;es sont associ&eacute;es &agrave; ce formulaire. Voulez-vous vraiment le supprimer ?",
 
 'liste_choix' => "Liste des choix propos&eacute;s",
 
@@ -91,11 +91,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'page'=>"Page",
 'pas_mail_confirmation'=>"Pas de mail confirmation",
-'probleme_technique'=>"Probl&egrave;me technique. Votre r&eacute;ponse n'a pas pu &ecirc;tre prise en compte.",
+'probleme_technique'=>"Probl&egrave;me technique. Votre saisie n'a pas pu &ecirc;tre prise en compte.",
 'probleme_technique_upload'=>"Probl&egrave;me technique. Le transfert du fichier a &eacute;chou&eacute;.",
 
 'remplir_un_champ'=>"Veuillez remplir au moins un champ.",
-'reponse_enregistree'=>"Votre r&eacute;ponse a &eacute;t&eacute; enregistr&eacute;e.",
+'reponse_enregistree'=>"Votre saisie a &eacute;t&eacute; enregistr&eacute;e.",
 'resultats' => 'R&eacute;sultats : ',
 'reponse' => 'Reponse @id_reponse@',
 'reponse_depuis' => 'Depuis la page ', 

@@ -71,7 +71,7 @@ jQuery.fn.ajaxAction = function() {
 			accept : 			'sortableChoixItem',
 			activeclass : 'sortableactive',
 			hoverclass : 	'sortablehover',
-			helperclass : 'sorthelper',
+			helperclass : 'sortChoixHelper',
 			handle : '.sortableChoixHandle',
 			/*opacity: 		0.8,*/
 			/*fx:				200,*/
@@ -91,7 +91,7 @@ jQuery.fn.ajaxAction = function() {
 				accept : 			'sortableChampsItem',
 				activeclass : 'sortableactive',
 				hoverclass : 	'sortablehover',
-				helperclass : 'sorthelper',
+				helperclass : 'sortChampsHelper',
 				handle : '.sortableChampsHandle',
 				/*opacity: 		0.8,*/
 				/*fx:				200,*/

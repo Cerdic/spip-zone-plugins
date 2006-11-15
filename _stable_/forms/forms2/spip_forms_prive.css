@@ -10,3 +10,14 @@
  {
 	border: 1px dashed #aaaaaa;
 }
+.sortChampsHelper{
+min-height:5em;
+margin:15px;
+border : 1px dashed grey;
+background:white;
+}
+.sortChoixHelper{
+min-height:2em;
+margin:15px;
+border : 1px dashed grey;
+}

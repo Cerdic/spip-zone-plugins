@@ -1,6 +1,5 @@
 #CACHE{0}
-#SET{colonnes_sans_tri,'0'}
-<BOUCLE_exclus(FORMS_CHAMPS){id_form}{type IN (separateur)}{doublons A}{doublons B}>#CHAMP</BOUCLE_exclus>
+#SET{colonnes_sans_tri,'0,1'}
 <B_head>
 <div class='liste'>
 <div style='position: relative;'>
@@ -12,12 +11,13 @@
 <table class="arial11" id='donnees' width='100%' cellpadding='5' cellspacing='0' border='0'>
 <thead>
 	<tr>
-		<th>id</th>
+		<th class='neutre'>id</th>
+		<th class='neutre'>&nbsp;</th>
 		<th>Date</th>
 		<th>De</th>
 		<th>Page</th>
-		<BOUCLE_head(FORMS_CHAMPS){id_form}{par rang}>
-		<th [(#SPECIFIANT|=={oui}|?{'','class="neutre"'})#SET{colonnes_sans_tri,#GET{colonnes_sans_tri}|concat{','}|concat{#COMPTEUR_BOUCLE|plus{2}}]>#TITRE</th>
+		<BOUCLE_head(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}>
+		<th [(#SPECIFIANT|=={oui}|?{'','class="neutre"'})#SET{colonnes_sans_tri,#GET{colonnes_sans_tri}|concat{','}|concat{#COMPTEUR_BOUCLE|plus{4}}]>#TITRE</th>
 		</BOUCLE_head>
 	</tr>
 </thead>
@@ -25,10 +25,11 @@
 <BOUCLE_donnees(FORMS_DONNEES){id_form}{tout}>
 	<tr class='tr_liste'>
 		<td><a href='[(#URL_ECRIRE{table_donnee_edit,id_form=#ID_FORM}|parametre_url{id_donnee,#ID_DONNEE}|parametre_url{retour,#SELF})]'>#ID_DONNEE</a></td>
+		<td><a href='[(#SELF|parametre_url{supp_donnee,#ID_DONNEE})]'><img src="#EVAL{_DIR_PLUGIN_FORMS}img_pack/supprimer-24.png" width='12' height='12' /></a></td>
 		<td>#DATE</td>
 		<td><BOUCLE_auteur(AUTEURS){id_auteur}>#NOM</BOUCLE_auteur>#IP<//B_auteur></th>
 		<td>#URL</td>
-		<BOUCLE_body(FORMS_CHAMPS){id_form}{par rang}>
+		<BOUCLE_body(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}>
 		<td>
 		<BOUCLE_rep(FORMS_DONNEES_CHAMPS){id_donnee}{champ}{tout}{'<br />'}>#VALEUR</BOUCLE_rep>
 		</td>

@@ -17,7 +17,7 @@ include_spip('inc/forms_type_champs'); // gestion des types de champs
 
 function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour){
 	global $spip_lang_right;
-	$out = "";
+	$out = "<div class='verdana3'>";
 	if ($nb_reponses){
 			$out .= "<p><strong>"._T("forms:attention")."</strong> ";
 			$out .= _T("forms:info_supprimer_formulaire_reponses")."</p>\n";
@@ -40,6 +40,7 @@ function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$
 	$out .= "&nbsp;<input type='submit' name='supp_rejet' value=\""._T('item_non')."\" class='fondo'>";
 	$out .= "</div>";
 	$out .= "</form><br />\n";
+	$out .= "</div>";
 
 	return $out;
 }
@@ -227,8 +228,8 @@ function exec_forms_edit(){
 	if (autoriser('administrer','form',$id_form)) {
 		if ($nb_reponses){
 			$nretour = urlencode(self());
-			icone_horizontale(_T("forms:suivi_reponses")."<br />".$nb_reponses." "._T("forms:reponses"),
-				generer_url_ecrire('forms_reponses',"id_form=$id_form"), "forum-public-24.gif", "rien.gif");
+			icone_horizontale(_T("forms:suivi_reponses")."<br />".(($nb_reponses==0)?_T("forms:aucune_reponse"):($nb_reponses==1)?_T("forms:une_reponse"):_T("forms:nombre_reponses",array('nombre'=>$nb_reponses))),
+				generer_url_ecrire('forms_reponses',"id_form=$id_form"), "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif");
 			icone_horizontale(_T("forms:telecharger_reponses"),
 				generer_url_ecrire('forms_telecharger',"id_form=$id_form&retour=$nretour"), "doc-24.gif", "rien.gif");
 		}
@@ -242,7 +243,7 @@ function exec_forms_edit(){
 			$link=parametre_url($link,'retour', urlencode(generer_url_ecrire('form_tous')));
 		}
 		echo "<p>";
-		icone_horizontale(_T("forms:supprimer_formulaire"), $link, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "supprimer.gif");
+		icone_horizontale(_T("forms:supprimer_formulaire"), $link, "../"._DIR_PLUGIN_FORMS."img_pack/supprimer-24.png", "rien.gif");
 		echo "</p>";
 	}
 	fin_boite_info();
