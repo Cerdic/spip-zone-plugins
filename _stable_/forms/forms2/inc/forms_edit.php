@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * ï¿½ 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 // compatibilite trans 1.9.1-1.9.2
@@ -478,7 +478,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out .= "</div>";
 
 	if (in_array($row['type_form'],array('','sondage'))){
-		$out .= debut_cadre_enfonce("statistiques-24.gif",true);
+		$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_FORMS."img_pack/sondage.png",true);
 		$out .= "<strong>"._T("forms:type_form")."</strong> : ";
 		$out .= _T("forms:info_sondage");
 		$out .= "<br /><br />";
