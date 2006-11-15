@@ -125,10 +125,12 @@ $(document).ready(function(){
 		.mouseout(function(){$(onglet_actif).addClass('onglet_on');});
 	if ((hash=='#champs')||(hash=='#champ_visible')||(hash=='#nouveau_champ'))
 		$(onglets).eq(2).active_onglet(hash);
-	else if (window.location.hash=='proprietes')
+	else if (hash=='#proprietes')
 		$(onglets).eq(1).active_onglet();
-	else
+	else if (hash=='#resume')
 		$(onglets).eq(0).active_onglet();
+	else
+		$(onglets).eq(2).active_onglet();
 
 	$('#champs').ajaxAction();
 	$('#proprietes').ajaxAction();
