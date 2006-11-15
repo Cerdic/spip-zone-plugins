@@ -5,6 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aide_contextuelle'=>'Aide contextuelle',
 'adresse_invalide'=>"Cette adresse n'est pas valide.",
+'afficher'=>'Afficher',
 'ajouter_champ' => "Ajouter un champ",
 'ajouter_champ_type' => "Cr&eacute;er un champ de type&nbsp;:",
 'ajouter_choix' => "Ajouter un choix",
@@ -54,8 +55,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'donnees_prot'=>"Donn&eacute;es prot&eacute;g&eacute;. Les donn&eacute;es enregitr&eacute;es ne seront accessibles que depuis l'interface priv&eacute;e.",
 
 'echec_upload'=>"Le transfert du fichier a &eacute;chou&eacute;.",
+'editer'=>'Editer',
 'edit_champ_obligatoire' => 'ce champ est obligatoire',
 'email_independant' => 'Email independant de la reponse',
+'exporter'=>'Exporter',
 'exporter_article' => 'Exporter dans un article',
 
 'fichier_trop_gros'=>"Ce fichier est trop gros.",
@@ -71,7 +74,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'format_radio' => 'boutons radio',
 'html_wrapper'=> 'Encapsuler le champ dans le code html',
 
+'icone_ajouter_donnee' => "Ajouter des donn&eacute;es",
 'icone_creer_formulaire' => "Cr&eacute;er un nouveau formulaire",
+'icone_creer_table' => "Cr&eacute;er une nouvelle table",
 'importer_form' => "Importer un formulaire",
 'info_apparence' => "Voici une pr&eacute;visualisation du formulaire tel qu'il appara&icirc;tra aux visiteurs du site public.",
 'info_champs_formulaire' => "Vous pouvez ici cr&eacute;er et modifier les champs que les visiteurs pourront remplir.",
@@ -114,8 +119,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'supprimer_choix' => "supprimer ce choix",
 'supprimer_formulaire' => "Supprimer ce formulaire",
 'supprimer_reponse' => "Supprimer cette r&eacute;ponse",
+'supprimer' => 'Supprimer',
 
-'type_form'=>"Type de formulaire",
+'tables'=> 'Tables',
 'taille_max' => "Taille maximale (en ko)",
 'telecharger' => "T&eacute;l&eacute;charger",
 'telecharger_reponses' => "T&eacute;l&eacute;charger les r&eacute;ponses",
@@ -125,9 +131,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'tous_sondages_proteges' => "Tous les sondages prot&eacute;g&eacute;s",
 'tous_sondages_public' => "Tous les sondages publics",
 'tous_sondages' => "Tous les sondages",
+'toutes_tables' => "Toutes les tables",
+'type_form'=>"Type de formulaire",
 
 'valider'=>"Valider",
 'verif_web' => "v&eacute;rifier l'existence du site Web",
+'vider' => 'Vider',
 'voir_article'=>"Voir l'article",
 'voir_resultats'=>"Voir les r&eacute;sultats"
 );

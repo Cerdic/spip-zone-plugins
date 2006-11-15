@@ -40,7 +40,8 @@ function exec_forms_reponses(){
 
 	if ($id_form) {
 		debut_boite_info();
-
+		if ($retour = urldecode(_request('retour')))
+			icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "rien.gif",'right');
 		icone_horizontale(_T("forms:formulaire_aller"), "?exec=forms_edit&id_form=$id_form", "../"._DIR_PLUGIN_FORMS. "img_pack/form-24.png", "rien.gif");
 
 		if (autoriser('administrer','form',$id_form)) {

@@ -93,6 +93,9 @@ function affichage_donnee_edit($type_form, $titre_page, $titre_type, $titre_ajou
 	include_spip('public/assembler');
 
   Forms_install();
+	$contexte = array('id_form'=>_request('id_form'),'id_donnee'=>_request('id_donnee'),'type_form'=>$type_form,'titre_liste'=>$titre_page,'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
+	$formulaire = recuperer_fond("modeles/form",$contexte);
+
 	
 	debut_page($titre_page, "documents", "forms");
 	debut_gauche();
@@ -108,11 +111,7 @@ function affichage_donnee_edit($type_form, $titre_page, $titre_type, $titre_ajou
 		echo boite_snippets($titre_type,_DIR_PLUGIN_FORMS."img_pack/$type_form-24.gif",'forms','forms');*/
 	
 	debut_droite();
-	echo "<div class='verdana2'>";
-	$contexte = array('id_form'=>_request('id_form'),'id_donnee'=>_request('id_donnee'),'type_form'=>$type_form,'titre_liste'=>$titre_page,'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
-	echo recuperer_fond("modeles/form",$contexte);
-	echo "</div>";
-	
+	echo "<div class='verdana2'>$formulaire</div>";
 	echo fin_page();
 }
 ?>

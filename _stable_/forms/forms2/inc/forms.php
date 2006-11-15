@@ -117,7 +117,7 @@
 				$url[$champ][] = generer_url_ecrire("forms_telecharger","id_donnee=$id_donnee&champ=$champ&retour=$retour");
 			}
 			else if (in_array($type,array('select','multiple'))) {
-				if ($row3=spip_fetch_array(spip_query("SELECT * FROM spip_forms_champs_choix WHERE champ=$champ AND choix="._q($row['valeur']))))
+				if ($row3=spip_fetch_array(spip_query("SELECT titre FROM spip_forms_champs_choix WHERE champ="._q($champ)." AND choix="._q($row['valeur']))))
 					$values[$champ][]=$row3['titre'];
 				else
 					$values[$champ][]= $row['valeur'];
@@ -126,7 +126,7 @@
 			else if ($type == 'mot') {
 				$id_groupe = intval($row['extra_info']);
 				$id_mot = intval($row['valeur']);
-				if ($row3 = spip_fetch_array(spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe=$id_groupe AND id_mot="._q($id_mot)))){
+				if ($row3 = spip_fetch_array(spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe="._q($id_groupe)." AND id_mot="._q($id_mot)))){
 					$values[$champ][]=$row3['titre'];
 					$url[$champ][]= generer_url_ecrire("mots_edit","id_mot=$id_mot");
 				}
