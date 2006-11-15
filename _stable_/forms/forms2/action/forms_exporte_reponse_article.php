@@ -11,6 +11,7 @@
  *
  */
 include_spip('inc/forms');
+include_spip('inc/texte');
 
 function action_forms_exporte_reponse_article(){
 	$id_donnee = _request('arg');
@@ -62,7 +63,6 @@ function action_forms_exporte_reponse_article(){
 					}
 				}
 			}
-				
 			// creer un article
 			include_spip('base/abstract_sql');
 			$id_article = spip_abstract_insert("spip_articles",
