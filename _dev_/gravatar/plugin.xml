@@ -2,7 +2,7 @@
 	<nom>Gravatar</nom>
 	<auteur>Thomas Beaumanoir - [Clever Age->http://www.clever-age.com]</auteur>
 	<version>0.2</version>
-	<etat>test</etat>
+	<etat>dev</etat>
 	<description>Globally Recognized AVATAR</description>
 	<lien>[Gravatar->http://www.gravatar.com]</lien>
 	<prefix>gravatar</prefix>
