@@ -330,7 +330,7 @@
 		$modele_mail = 'form_reponse_email';
 		if (isset($env['modele']))
 			$modele_mail = $env['modele'];
-		$result = spip_query("SELECT * FROM spip_forms WHERE id_form=$id_form");
+		$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 		if ($row = spip_fetch_array($result)) {
 			$modele = "modeles/$modele_mail";
 			if ($f = find_in_path(($m = "$modele-$id_form").".html"))
@@ -343,13 +343,13 @@
 			$mailconfirm = "";
 			
 			// recuperer l'email de confirmation
-			$result2 = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee='$id_donnee' AND champ="._q($champconfirm));
+			$result2 = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champconfirm));
 			if ($row2 = spip_fetch_array($result2)) {
 				$mailconfirm = $row2['valeur'];
 			}
 
 			// recuperer l'email d'admin
-			$result2 = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee='$id_donnee' AND champ="._q($email['route']));
+			$result2 = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($email['route']));
 			if ($row2 = spip_fetch_array($result2)) {
 				if (isset($email[$row2['valeur']]))
 					$email_dest = $email[$row2['valeur']];
