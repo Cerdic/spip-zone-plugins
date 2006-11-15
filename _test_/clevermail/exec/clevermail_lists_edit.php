@@ -9,6 +9,7 @@
 	 **/
 
 include_spip("inc/presentation");
+include_spip("inc/utils");
 
 function exec_clevermail_lists_edit() {
 
@@ -25,16 +26,13 @@ function exec_clevermail_lists_edit() {
 		if ($list['lst_name'] != '') {
 			$count = spip_fetch_array(spip_query("SELECT COUNT(*) AS nb FROM cm_lists WHERE lst_id != ".$_POST['lst_id']." AND lst_name = '".$_POST['lst_name']."'"));
 		    if ($count['nb'] == 0) {
-		        // add slashes to values before insert or update
-				if (!get_magic_quotes_gpc()) {
-					for (reset($list); list($k, $v) = each($list); $list[$k] = addslashes($v));
-				}
+				spip_desinfecte($list);
 
 		        if ($list['lst_id'] == -1) {
 		            spip_query("INSERT INTO cm_lists
 		                (lst_id, lst_name, lst_comment, lst_moderation, lst_moderator_email, lst_subscribe_subject, lst_subscribe_text, lst_subject, lst_unsubscribe_subject, lst_unsubscribe_text, lst_subject_tag, lst_url_html, lst_url_text)
 		                VALUES
-		                ('', '".$list['lst_name']."', '".$list['lst_comment']."', '".$list['lst_moderation']."', '".$list['lst_moderator_email']."', '".$list['lst_subscribe_subject']."', '".$list['lst_subscribe_text']."', '".$list['lst_subject']."', '".$list['lst_unsubscribe_subject']."', '".$list['lst_unsubscribe_text']."', ".$list['lst_subject_tag'].", '".$list['lst_url_html']."', '".$list['lst_url_text']."')");
+		                ('', '".$list['lst_name']."', '".$list['lst_comment']."', '".$list['lst_moderation']."', '".$list['lst_moderator_email']."', '".$list['lst_subscribe_subject']."', "._q($list['lst_subscribe_text']).", "._q($list['lst_subject']).", "._q($list['lst_unsubscribe_subject']).", "._q($list['lst_unsubscribe_text']).", ".$list['lst_subject_tag'].", '".$list['lst_url_html']."', '".$list['lst_url_text']."')");
 		        } else {
 		            spip_query("UPDATE cm_lists
 		                SET
