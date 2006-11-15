@@ -71,9 +71,9 @@ function exec_forms_reponses(){
 
 
 	if ($id_donnee = intval($supp_reponse)) {
-		$query = "DELETE FROM spip_forms_donnees WHERE id_donnee=$id_donnee";
+		$query = "DELETE FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee);
 		$result = spip_query($query);
-		$query = "DELETE FROM spip_forms_donnees_champs WHERE id_donnee=$id_donnee";
+		$query = "DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee);
 		$result = spip_query($query);
 	}
 
@@ -100,11 +100,10 @@ function exec_forms_reponses(){
 	$debut = intval($debut);
 	$tranche = 10;
 
-	$query = "SELECT COUNT(*) AS cnt FROM spip_forms_donnees ".
+	$query = "SELECT COUNT(*) AS cnt FROM spip_forms_donnees AS r ".
 		"$where confirmation='valide' AND date > DATE_SUB(NOW(), INTERVAL 6 MONTH)";
 	$result = spip_query($query);
 	list($total) = spip_fetch_array($result,SPIP_NUM);
-
 	if ($total > $tranche) {
 		echo "<br />";
 		for ($i = 0; $i < $total; $i = $i + $tranche){
@@ -114,7 +113,6 @@ function exec_forms_reponses(){
 			else {
 				$link=parametre_url(self(),'debut', strval($i));
 				echo "<a href='".$link."'>$i</a>";
-				
 			}
 		}
 	}
@@ -130,7 +128,7 @@ function exec_forms_reponses(){
 	$query = "SELECT r.*, a.nom, f.titre FROM spip_forms_donnees AS r LEFT JOIN spip_auteurs AS a USING (id_auteur) 
 		JOIN spip_forms AS f ON r.id_form=f.id_form
 		$where r.confirmation='valide' AND r.date > DATE_SUB(NOW(), INTERVAL 6 MONTH)
-		ORDER BY r.date DESC LIMIT $debut, $tranche";
+		ORDER BY r.date DESC LIMIT "._q($debut).", "._q($tranche);
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) {
 		$id_form = $row['id_form'];
@@ -144,10 +142,10 @@ function exec_forms_reponses(){
 		$titre_form = $row['titre'];
 
 		echo "<br />\n";
-		debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/form-24.png");
+		debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png");
 
 		$link=parametre_url(self(),'supp_reponse', $id_donnee);
-		icone(_T("forms:supprimer_reponse"), $link,"../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "supprimer.gif", "right");
+		icone(_T("forms:supprimer_reponse"), $link,"../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "supprimer.gif", "right");
 		
 		if ($id_article_export!=0){
 			$row=spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE id_article="._q($id_article_export)));
