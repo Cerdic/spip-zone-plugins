@@ -17,10 +17,6 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_COLORATION_CODE',(_DIR_PLUGINS.end($p)));
-
 // pour interdire globalement et optionnellement le téléchargement associé
 if (!defined('PLUGIN_COLORATION_CODE_TELECHARGE')) {
 	define('PLUGIN_COLORATION_CODE_TELECHARGE', true);
@@ -30,7 +26,7 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 
 	$params = explode(' ', $language);
 	$language = array_shift($params);
-	include_once _DIR_PLUGIN_COLORATION_CODE . '/geshi/geshi.php';
+	include_once _DIR_PLUGIN_COLORATION_CODE . '/../geshi/geshi.php';
 	//
 	// Create a GeSHi object
 	//
