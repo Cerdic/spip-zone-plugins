@@ -1,6 +1,6 @@
 [(#ENV**{bloc_ancre})
 ]<table summary="<:icone_calendrier:>">
-	<caption class="pagination"><BOUCLE_mois_precedent(ARTICLES){lang_select=non}{branche?}{mois_relatif>0}{n-1,1}>[
+	<caption class="pagination preload"><BOUCLE_mois_precedent(ARTICLES){lang_select=non}{branche?}{mois_relatif>0}{n-1,1}>[
 		<a
 			
 			href="(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE|affdate{'Y-m'})]})"
