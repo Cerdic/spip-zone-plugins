@@ -1,8 +1,10 @@
 /* CSS Document */
 
+/* uniquement pour la page de demonstration */
 #contenu .encart{
 	width: 12em; }
 
+/* habillage de la balise #CALENDRIER */
 div.calendrier{
 	/*border-top: 1px solid #F0F0F0;*/
 }
