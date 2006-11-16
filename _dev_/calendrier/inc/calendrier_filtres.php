@@ -3,7 +3,8 @@
 // surcharge de agenda_affiche pour le #CALENDRIER 
 // http://doc.spip.org/@agenda_calendrier
 function agenda_calendrier($date) {
-	set_request('jour', affdate($date, 'jour'));
+	$jour = affdate($date, 'jour');
+	set_request('jour', $jour?$jour:1);
 	set_request('mois', affdate($date, 'mois'));
 	set_request('annee', affdate($date, 'annee'));
 	return agenda_affiche(1, '', 'mois_unique');
