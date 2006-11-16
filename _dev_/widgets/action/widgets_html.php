@@ -116,7 +116,7 @@ class Widget {
         return '<form method="post" action="' .
         	str_replace('widgets_html', 'widgets_store', self()) . '">' .
         	$this->code() .
-        	(($widgetsInput = $this->modele($contexte)) ? $widgetsInput :
+        	(($widgetsInput = $this->fond($contexte)) ? $widgetsInput :
 		        $this->input($contexte, $inputAttrs)) .
         	$this->boutons() . // array('edit'=>'')
 			'</form>';
@@ -141,7 +141,7 @@ class Widget {
  Fabriquer les balises des champs d'apres un modele controleurs/(type_)modele.html
 	$contexte est un tableau (nom=>valeur) qui sera enrichi puis passe à recuperer_fond
 */
-    function modele($contexte = array()) {
+    function fond($contexte = array()) {
 	    if (!find_in_path(
 	     ($fond = 'controleurs/' . $this->type . '_' . $this->modele) . '.html')
 	    && !find_in_path(
