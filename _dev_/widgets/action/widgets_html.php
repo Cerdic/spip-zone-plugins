@@ -34,29 +34,21 @@ function controleur_dist($regs) {
 	    return array("$type $id $champ: " . _U('widgets:pas_de_valeur'), 6);
     }
 
+    $options = array();
     // type du widget
-    if (in_array($champ,
-    array('chapo', 'texte', 'descriptif', 'ps')))
+    if (in_array($champ, array('chapo', 'texte', 'descriptif', 'ps'))) {
+	    $options['hauteurMini'] = 36; // hauteur mini d'un textarea
         $mode = 'texte';
-    else
-        $mode = 'ligne';
-
-
-    // largeur du widget
-    $w = min(max(intval($_GET['w']), 100), 700);
-    // hauteur maxi d'un textarea selon wh: window height
-    if ($mode == 'texte') {
-	    $maxheight = min(max(intval($_GET['wh']) - 50, 400), 700);
-        // ici on pourrait mettre minimum 3*$_GET['em'] au lieu de 36
-	    $h = min(max(intval($_GET['h']), 36), $maxheight);
     } else { // ligne, hauteur naturelle
-        $h = '';
+	    $options['hauteurMaxi'] = 0;
+        $mode = 'ligne';
 	}
+    $n = new Widget($widget, array($champ => $valeur), $options);
 
     $inputAttrs = array(
-        'style' => "width:${w}px;" . ($h ? " height:${h}px;" : ''));
+        'style' => 'width:' . $n->largeur . 'px;' .
+         ($n->hauteur ? ' height:' . $n->hauteur . 'px;' : ''));
 
-    $n = new Widget($widget, array($champ => $valeur));
     $html = $n->formulaire($mode, $inputAttrs);
     $status = NULL;
 
@@ -79,6 +71,11 @@ class Widget {
     var $key;
     // un md5 associe aux valeurs pour verifier et detecter si elles changent
     var $md5;
+	// dimensions indicatives
+    var $largeurMini = 100;
+    var $largeurMaxi = 700;
+    var $hauteurMini = 36;
+    var $hauteurMaxi = 700;
 
 	// le constructeur du widget
 	// $name : son nom
@@ -96,11 +93,22 @@ class Widget {
         foreach ($options as $opt=>$val) {
         	$this->$opt = $val;
         }
+		$this->dimension();
     }
 
 	// calcul du md5 associe aux valeurs
     function md5() {
         return md5(serialize($this->texts));
+    }
+
+	// dimensions indicatives
+    function dimension() {
+	    // largeur du widget
+	    $this->largeur = min(max(intval($_GET['w']),
+	    			$this->largeurMini), $this->largeurMaxi);
+	    // hauteur maxi d'un textarea selon wh: window height
+	    $maxheight = min(max(intval($_GET['wh']) - 50, 400), $this->hauteurMaxi);
+	    $this->hauteur = min(max(intval($_GET['h']), $this->hauteurMini), $maxheight);
     }
 
 	// formulaire standard
