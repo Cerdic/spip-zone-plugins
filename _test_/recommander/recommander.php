@@ -54,12 +54,12 @@ if (typeof jQuery == "function") {
 		.prepend(
 			"<input name='action' value='fragment_recommander' type='hidden' />"
 		)
-		.ajaxForm("#formulaire_recommander",
-			recommander_js,
-			function() {
+		.ajaxForm({"target":"#formulaire_recommander",
+			"after":recommander_js,
+			"before":function() {
 				$("#formulaire_recommander").prepend(ajax_image_searching);
 			}
-		);
+		});
 	}
 	recommander_js();
 	$("#recommander>h2").click(function(){
