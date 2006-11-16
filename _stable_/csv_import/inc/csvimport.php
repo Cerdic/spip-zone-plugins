@@ -205,7 +205,8 @@ function csvimport_importcsv($file, $head = false, $delim = ",", $enclos = '"', 
 	if ($handle){
 		if ($head) {
 			$header = fgetcsv($handle, $len, $delim);
-			$header = array_map('csvimport_importcharset',$header);
+			if ($header)
+				$header = array_map('csvimport_importcharset',$header);
 		}
 		while (($data = fgetcsv($handle, $len, $delim)) !== FALSE) {
 			$data = array_map('csvimport_importcharset',$data);

@@ -12,6 +12,7 @@
 
 include_spip("inc/csvimport");
 include_spip("inc/presentation");
+include_spip('public/assembler');
 
 function csvimport_import_step3(&$step, &$erreur, $import_link, $import_form_link, $csvimport_replace_actif, $csvimport_add_actif){
 	$table = _request('table');	
@@ -236,8 +237,8 @@ function csvimport_import_step2(&$step, &$erreur, $import_link, $import_form_lin
 		  $erreur[$step][] = _L("Fichier vide");
 		  $step--;
 		}
-
-		$assoc_field=csvimport_field_associate($data, $table, $assoc_field);
+		if ($data && ($step==2))
+			$assoc_field=csvimport_field_associate($data, $table, $assoc_field);
 	}
 	if ($step==2){
 		$hidden['file_name'] = $file_name;
@@ -408,7 +409,13 @@ function exec_csvimport_import(){
 			debut_cadre_relief($icone);
 			gros_titre($titre);
 			// Extrait de la table en commençant par les dernieres maj
-			csvimport_table_visu_extrait($table,5);
+			if ($import_mode!='form')
+				csvimport_table_visu_extrait($table,5);
+			else {
+				$contexte = array('id_form'=>$id_form,'total'=>5);
+				$out = recuperer_fond("exec/template/tables_visu_extrait",$contexte);
+				echo $out;
+			}
 			fin_cadre_relief();
 	 	}	
 		//
