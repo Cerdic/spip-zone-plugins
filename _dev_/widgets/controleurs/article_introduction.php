@@ -7,16 +7,11 @@ function controleurs_article_introduction_dist($regs) {
 	    return array("$type $id $champ: " . _U('widgets:pas_de_valeur'), 6);
     }
 
-    // taille du widget
-    $w = intval($_GET['w']);
-    $w = $w<100 ? 100 : $w;
-    $w = $w>700 ? 700 : $w;
-    $h = intval($_GET['h']);
-    $h = $h<234 ? 234 : $h;
-    // hauteur maxi d'un textarea -- pas assez ? trop ?
-    $wh = intval($_GET['wh']); // window height
-    $maxheight = min(max($wh-50,400), 700);
-    if ($h>$maxheight) $h=$maxheight;
+    // largeur du widget
+    $w = min(max(intval($_GET['w']), 100), 700);
+    // hauteur maxi d'un textarea selon wh: window height
+    $maxheight = min(max(intval($_GET['wh']) - 50, 400), 700);
+    $h = min(max(intval($_GET['h']), 234), $maxheight);
     
 // en utilisant les inputs défauts
     $inputAttrs = array(
