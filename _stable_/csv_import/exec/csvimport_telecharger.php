@@ -33,7 +33,7 @@ function exec_csvimport_telecharger(){
 	
 	
 	if ((!$delim)&&($csvimport_export_actif)){
-		$icone = "../"._DIR_PLUGIN_CSVIMPORT."/img_pack/csvimport-24.png";
+		$icone = "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png";
 	
 		debut_page($titre, "documents", "csvimport");
 		debut_gauche();

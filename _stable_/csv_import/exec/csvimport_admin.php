@@ -168,7 +168,7 @@ function exec_csvimport_admin(){
 	$retour = _request('retour');
 	if (!$retour)
 		$retour = generer_url_ecrire('csvimport_tous');
-	$icone = "../"._DIR_PLUGIN_CSVIMPORT."/img_pack/csvimport-24.png";
+	$icone = "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png";
 		
 	//
 	// Icones retour

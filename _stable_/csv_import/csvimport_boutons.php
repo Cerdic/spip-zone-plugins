@@ -10,8 +10,10 @@
  *
  */
 
+if (!defined('_DIR_PLUGIN_CSVIMPORT')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	define('_DIR_PLUGIN_CSVIMPORT',(_DIR_PLUGINS.end($p)));
+	define('_DIR_PLUGIN_CSVIMPORT',(_DIR_PLUGINS.end($p))."/");
+}
 
 	function csvimport_ajouterBoutons($boutons_admin) {
 		// si on est admin
@@ -21,7 +23,7 @@
 
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['naviguer']->sousmenu["csvimport_tous"]= new Bouton(
-			"../"._DIR_PLUGIN_CSVIMPORT."/img_pack/csvimport-24.gif",  // icone
+			"../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.gif",  // icone
 			_L("Import CSV") //titre
 			);
 		}

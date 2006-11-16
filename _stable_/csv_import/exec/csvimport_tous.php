@@ -23,7 +23,7 @@ function exec_csvimport_tous(){
 	
 	debut_raccourcis();
 	echo "<p>";
-	icone_horizontale (_L('Administrer les tables'), generer_url_ecrire("csvimport_admin"), "../"._DIR_PLUGIN_CSVIMPORT."/img_pack/csvimport-24.png");
+	icone_horizontale (_L('Administrer les tables'), generer_url_ecrire("csvimport_admin"), "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png");
 	echo "</p>";
 	fin_raccourcis();
 	debut_droite();

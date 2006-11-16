@@ -10,8 +10,10 @@
  *
  */
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
-define('_DIR_PLUGIN_CSVIMPORT',(_DIR_PLUGINS.end($p)));
+if (!defined('_DIR_PLUGIN_CSVIMPORT')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_CSVIMPORT',(_DIR_PLUGINS.end($p))."/");
+}
 
 include_spip("base/db_mysql");
 include_spip("base/abstract_sql");
@@ -62,7 +64,7 @@ function csvimport_afficher_tables($titre_table, $icone = '') {
 	global $couleur_claire, $couleur_foncee;
 	global $connect_id_auteur;
 
-	if (!$icone) $icone = "../"._DIR_PLUGIN_CSVIMPORT."/img_pack/csvimport-24.png";
+	if (!$icone) $icone = "../"._DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png";
 
 	if (count($csvimport_tables_auth)) {
 		if ($titre_table) echo "<div style='height: 12px;'></div>";
@@ -159,7 +161,15 @@ function csvimport_afficher_tables($titre_table, $icone = '') {
 		echo "</table>";
 		echo "</div>\n";
 	}
-	else {
+	$out = "";
+	if (defined('_DIR_PLUGIN_FORMS')&&($GLOBALS['meta']['forms_base_version']>0.17)){
+		include_spip('public/assembler');
+		$contexte = array('type_form'=>'table','titre_liste'=>_T("forms:toutes_tables"),'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
+		$out .= "<br/>" . recuperer_fond("exec/template/tables_import_tous",$contexte);
+		echo $out;
+	}
+	
+	if (!count($csvimport_tables_auth) && !$out) {
 		echo _L("Pas de tables d&eacute;clar&eacute;es pour l'import CSV");
  	}
 }
