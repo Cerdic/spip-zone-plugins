@@ -98,6 +98,7 @@ function affiche_evenements_article() {
 
 function compile_t(&$t) {
  foreach($t as $e=>$v) {
+  $t[$e]=trim(str_replace("\t", " ", $t[$e]));
   if (ereg ("([0-9]{1,2})/([0-9]{1,2})/?([0-9]{4})?-?([0-9]{1,2})?/?([0-9]{1,2})?/?([0-9]{4})? +".
   			"([0-9]{1,2})?:?([0-9]{1,2})?-?([0-9]{1,2})?:?([0-9]{1,2})? *".
 			'" *([^ ^"][^"]*) *" *("([^"]*)")? *("([^"]*)")? *'.
@@ -195,7 +196,7 @@ function affiche_formulaire() {
 [&quot;Le lieu&quot; [ &quot;La description&quot;]] [REP=jj/mm/aaaa[,jj/mm/aaaa,etc]]<br>
  Les crochets indiquent les &eacute;l&eacute;ments facultatifs. <br>
  Les r&eacute;p&eacute;titions de l'&eacute;v&egrave;nement sont indiqu&eacute;es par  'REP=' suivi d'une liste de dates s&eacute;par&eacute;es par des virgules. <br>
- Bien respecter les espaces entre les &eacute;l&eacute;ments et ne pas mettre de guillemets dans les textes. <br>
+ Bien respecter les espaces (ou tabulations) entre les &eacute;l&eacute;ments et ne pas mettre de guillemets dans les textes. <br>
     <br>
 
     <em>Exemple 1</em> : 
