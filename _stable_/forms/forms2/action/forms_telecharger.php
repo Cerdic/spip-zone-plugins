@@ -26,7 +26,7 @@ function action_forms_telecharger(){
 		if (!include_spip('inc/autoriser'))
 			include_spip('inc/autoriser_compat');
 		if (autoriser('supprimer','form',$id_form)){
-			$id_form = $arg;
+			$id_form = intval($arg);
 			$delim = _request('delim');
 			if ($delim == 'TAB') $delim = "\t";
 			
@@ -49,7 +49,7 @@ function action_forms_telecharger(){
 				Header("Content-Type: text/comma-separated-values; charset=$charset");
 				Header("Content-Disposition: attachment; filename=$filename.$extension");
 				//Header("Content-Type: text/plain; charset=$charset");
-				Header("Content-Length: ".strlen($s));
+				Header("Content-Length: ".strlen($out));
 				echo $out;
 				exit();
 			} 

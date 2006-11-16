@@ -1,0 +1,24 @@
+#CACHE{0}
+<B_head>
+<table>
+<thead>
+	<tr>
+		<th class='neutre'>id_donnee</th>
+		<BOUCLE_head(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}>
+		<th>#TITRE</th>
+		</BOUCLE_head>
+	</tr>
+</thead>
+<tbody>
+<BOUCLE_donnees(FORMS_DONNEES){id_form}{tout}{par id_donnee}{0 #ENV{total,10}}>
+	<tr>
+		<td>#ID_DONNEE</td>
+		<BOUCLE_body(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}>
+		<td>
+		<BOUCLE_rep(FORMS_DONNEES_CHAMPS){id_donnee}{champ}{tout}{'<br />'}>#VALEUR</BOUCLE_rep>
+		</td>
+		</BOUCLE_body>
+</BOUCLE_donnees>
+</tbody>
+</table>
+</B_head>
