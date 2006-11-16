@@ -53,17 +53,17 @@ jQuery.fn.ajaxAction = function() {
 		var url = (($(redir).val()).split('#'))[0];
 		$(redir).val(url + "&var_ajaxcharset="+ajaxcharset+"&bloc="+idtarget);
 		$(redir).after("<input type='hidden' name='var_ajaxcharset' value='"+ajaxcharset+"' />");
-		$(this).ajaxForm('#'+idtarget, 
-			// apres
+		$(this).ajaxForm({"target":'#'+idtarget, 
+			"after":
 			function(){ 
 				$('#'+idtarget).ajaxAction();
 				$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu",function(data){refresh_apercu(data);});
 				if (idtarget!='proprietes')
 					$('#proprietes').load(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=proprietes",function(){ $('#proprietes').ajaxAction(); });
 			},
-			// avant
+			"before":
 			function(){ $('#'+idtarget+",#apercu_gauche").prepend("<div>"+ajax_image_searching+"</div>");}
-			);
+			});
 	});
 	$('.antifocus').onefocus( function(){ this.value=''; } );
 	$('#'+id+' div.sortableChoix').Sortable(

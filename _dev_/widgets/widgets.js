@@ -137,11 +137,11 @@ $.fn.activatewidget = function() {
     var w,h;
     $(me)
     .find('form')
-      .ajaxForm(function(d){
+      .ajaxForm({"dataType":"json",
+			"after":function(d){
         $(me)
           .find("img.widget-searching")
             .remove();
-        eval('d=' + d.responseText + ';');
         if (d.$erreur > '') {
           if (d.$annuler) {
             if (d.$erreur > ' ') {
@@ -166,7 +166,7 @@ $.fn.activatewidget = function() {
           .iconewidget();
         $(me)
           .cancelwidget();
-      }).onesubmit(function(){
+      }}).onesubmit(function(){
         $(this)
         .append(configWidgets.mkimg('searching')) // icone d'attente
         .find(".widget-boutons")
