@@ -24,7 +24,7 @@ function choix_couleur() {
 	if ($couleurs_spip) {
 		foreach ($couleurs_spip as $key => $val) {
 			echo "<a href=\"".parametre_url(self(), 'set_couleur', $key)."\">" .
-				http_img_pack("rien.gif", "couleur $key", "width='8' height='8' style='margin: 1px; background-color: ".$val['couleur_claire'].";' onmouseover=\"changestyle('bandeauinterface','visibility', 'visible');\" onfocus=\"changestyle('bandeauinterface','visibility','visible');\" onblur=\"changestyle('bandeauinterface','visibility','hidden');\""). "</a>";
+				http_img_pack("rien.gif", _T('amelioration_access:choix_couleur_interface').$key, "width='8' height='8' style='margin: 1px; background-color: ".$val['couleur_claire'].";' onmouseover=\"changestyle('bandeauinterface','visibility', 'visible');\" onfocus=\"changestyle('bandeauinterface','visibility','visible');\" onblur=\"changestyle('bandeauinterface','visibility','hidden');\""). "</a>";
 		}
 	}
 }
@@ -54,7 +54,7 @@ function bouton_imessage($destinataire, $row = '') {
 	if ($destinataire) $title = _T('info_envoyer_message_prive');
 	else $title = _T('info_ecire_message_prive');
 
-	$texte_bouton = http_img_pack("m_envoi$spip_lang_rtl.gif", "m&gt;", "width='14' height='7'", $title);
+	$texte_bouton = http_img_pack("m_envoi$spip_lang_rtl.gif", "$title", "width='14' height='7'", $title);
 		
 	return "<a href='". generer_url_ecrire("message_edit","new=oui&dest=$destinataire&type=normal"). "' title=\"$title\">$texte_bouton</a>";
 }
@@ -348,11 +348,11 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 	echo "<B>$titre</B></FONT></TD>";
 	if ($afficher_auteurs){
 		echo "<TD WIDTH='100'>";
-		echo http_img_pack("rien.gif", " ", "width='100' height='12'");
+		echo http_img_pack("rien.gif", "", "width='100' height='12'");
 		echo "</TD>";
 	}
 	echo "<TD WIDTH='90'>";
-	echo http_img_pack("rien.gif", " ", "width='90' height='12'");
+	echo http_img_pack("rien.gif", "", "width='90' height='12'");
 	echo "</TD>";
 	echo "</TR>";
 }
@@ -835,7 +835,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			if ($afficher_trad) {
 				$texte_img .= http_img_pack("searching.gif", "", "style='visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
-				$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"#\" onclick=\"return charger_id_url('" . generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax_trad"). "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-12.gif' alt='afficher les traductions' /></a></div>";
+				$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"#\" onclick=\"return charger_id_url('" . generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax_trad"). "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-12.gif' alt='"._T('amelioration_access:afficher_trad')."' /></a></div>";
 			}
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -939,7 +939,7 @@ function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_
 	$s = "<div>";
 
 	if (acces_restreint_rubrique($id_rubrique))
-		$s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
+		$s .= http_img_pack("admin-12.gif", _T('titre_image_admin_article'), "width='12' height='12'", _T('titre_image_admin_article'));
 
 	$s .= "<a href='" . generer_url_ecrire("articles","id_article=$id_article") .
 		"'$descriptif$dir_lang style=\"display:block;\">";
@@ -1059,7 +1059,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			
 			$texte_img .= http_img_pack("searching.gif", "", "style='visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
 
-			$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"#\" onclick=\"return charger_id_url('" . generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax_trad") . "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-off-12.gif' alt='masquer les traductions' /></a></div>";
+			$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"#\" onclick=\"return charger_id_url('" . generer_url_ecrire('memoriser',"id_ajax_fonc=$id_ajax_trad") . "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-off-12.gif' alt='"._T('amelioration_access:masquer_trad')."' /></a></div>";
 
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -1156,7 +1156,7 @@ function afficher_articles_trad_boucle($row, &$tous_id, $afficher_langue, $langu
 	$s .= "<div style='float: $spip_lang_right; margin-right: -10px;'>$l</div>";
 	
 	if (acces_restreint_rubrique($id_rubrique))
-		$s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
+		$s .= http_img_pack("admin-12.gif", _T('titre_image_admin_article'), "width='12' height='12'", _T('titre_image_admin_article'));
 
 	$s .= "<a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'$dir_lang style=\"display:block;\">";
 			
@@ -1300,7 +1300,7 @@ function afficher_rubriques_boucle($row, &$tous_id)
 	if ($id_parent == 0) $puce = "secteur-12.gif";
 	else $puce = "rubrique-12.gif";
 	
-	$s = http_img_pack($puce, '- ', "");
+	$s = http_img_pack($puce, '', "");
 	$vals[] = $s;
 	
 	$s = "<b><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>";
@@ -1326,20 +1326,20 @@ function bonhomme_statut($row) {
 
 	switch($row['statut']) {
 		case "0minirezo":
-			return http_img_pack("admin-12.gif", "", "",
+			return http_img_pack("admin-12.gif", _T('titre_image_administrateur'), "",
 					_T('titre_image_administrateur'));
 			break;
 		case "1comite":
 			if ($connect_statut == '0minirezo' AND ($row['source'] == 'spip' AND !($row['pass'] AND $row['login'])))
-			  return http_img_pack("visit-12.gif",'', "", _T('titre_image_redacteur'));
+			  return http_img_pack("visit-12.gif",_T('titre_image_redacteur'), "", _T('titre_image_redacteur'));
 			else
-			  return http_img_pack("redac-12.gif",'', "", _T('titre_image_redacteur_02'));
+			  return http_img_pack("redac-12.gif",_T('titre_image_redacteur_02'), "", _T('titre_image_redacteur_02'));
 			break;
 		case "5poubelle":
-		  return http_img_pack("poubelle.gif", '', "",_T('titre_image_auteur_supprime'));
+		  return http_img_pack("poubelle.gif", _T('titre_image_auteur_supprime'), "",_T('titre_image_auteur_supprime'));
 			break;
 		case "6forum":
-		  return http_img_pack("visit-12.gif", '', "",_T('titre_image_visiteur'));
+		  return http_img_pack("visit-12.gif", _T('titre_image_visiteur'), "",_T('titre_image_visiteur'));
 			break;
 		case "nouveau":
 		default:
@@ -1628,7 +1628,7 @@ function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 			$fleche="forum-droite$spip_lang_rtl.gif";
 		}
 		$res .= "<td width='10' valign='top' background=$fond[$j]>"
-		. http_img_pack($fleche, " ", "width='10' height='13'")
+		. http_img_pack($fleche, "", "width='10' height='13'")
 		. "</td>\n";
 	}
 	return $res . "\n<td width=100% valign='top'>";
@@ -2326,7 +2326,7 @@ if (true /*$bandeau_colore*/) {
 			  http_img_pack("$icone", "$alt", "width='26' height='20'")."</a>";
 
 			echo http_img_pack("rien.gif", "", "width='10' height='1'");
-			echo http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", "choix  de l'interface", "class='format_png' valign='middle' width='59' height='15' usemap='#map_layout'");
+			echo http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", _T('amelioration_access:choix_interface'), "class='format_png' valign='middle' width='59' height='15' usemap='#map_layout'");
 
 
 			echo http_img_pack("rien.gif", "", "width='10' height='1'");
