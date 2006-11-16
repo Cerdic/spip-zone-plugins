@@ -2,10 +2,8 @@
 
 function controleurs_article_introduction_dist($regs) {
     list(,$widget,$type,$champ,$id) = $regs;
-//    return array($widget, 0);
-    $s = spip_query(
-    'SELECT descriptif, chapo, texte FROM spip_articles WHERE id_article=' . $id);
-    if (!($t = spip_fetch_array($s))) {
+    $valeur = valeur_colonne_table($type, array('descriptif', 'chapo', 'texte'), $id);
+    if ($valeur === false) {
 	    return array("$type $id $champ: " . _U('widgets:pas_de_valeur'), 6);
     }
 
@@ -28,14 +26,14 @@ function controleurs_article_introduction_dist($regs) {
 	        'style' => "width:${w}px; height:" . (int)ceil($h*4/13) . "px;")),
 		'texte' =>  array('type' => 'texte', 'attrs' => array(
 	        'style' => "width:${w}px; height:" . (int)ceil($h*4/13) . "px;")));
-//	$n = new Widget('article-introduction-' . $id, $t);
+//	$n = new Widget('article-introduction-' . $id, $valeur);
 
 // pour la methode par modeles
     $contexte = array(
     	'h_descriptif' => (int)ceil($h*2/13),
 		'h_chapo' => (int)ceil($h*4/13),
 		'h_texte' => (int)ceil($h*4/13));
-	$n = new Widget('article-introduction-' . $id, $t,
+	$n = new Widget('article-introduction-' . $id, $valeur,
 			array('largeur'=>$w, 'hauteur'=>$h));
         $html = $n->formulaire($contexte);
         $status = NULL;
