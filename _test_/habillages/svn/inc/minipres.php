@@ -19,7 +19,7 @@ include_spip('inc/lang');
 //
 
 // http://doc.spip.org/@install_debut_html
-function install_debut_html($titre = 'AUTO') {
+function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	global $spip_lang_right;
 	
 	include_spip('inc/filtres');
@@ -73,7 +73,7 @@ function install_debut_html($titre = 'AUTO') {
 	font-family: Verdana,Arial,Sans,sans-serif; }\n",
 	  "\n\n]]>\n--></style>\n\n
 </head>
-<body>
+<body".$onLoad.">
 	<div id='minipres'>
 	<h1>",
 	  $titre ,
@@ -86,11 +86,13 @@ function install_fin_html() {
 	echo "\n\t</div>\n\t</div>\n</body>\n</html>";
 }
 
+// http://doc.spip.org/@info_etape
 function info_etape($titre, $complement = ''){
 	return "\n<h2>".$titre."</h2>\n" .
 	($complement ? "<p>".$complement."</p>\n":'');
 }
 
+// http://doc.spip.org/@fieldset
 function fieldset($legend, $champs = array()) {
 	$fieldset = "<fieldset>\n" .
 	($legend ? "<legend>".$legend."</legend>\n" : '');
@@ -104,8 +106,9 @@ function fieldset($legend, $champs = array()) {
 	return $fieldset;
 }
 
+// http://doc.spip.org/@bouton_suivant
 function bouton_suivant($code = 'bouton_suivant') {
-	return "\n<span class='suivant'><input type='submit' class='fondl' value=\"" .
+	return "\n<span class='suivant'><input id='suivant' type='submit' class='fondl' value=\"" .
 		_T($code) .
 		" >>\" /></span>\n";
 }
@@ -128,31 +131,15 @@ function minipres($titre, $corps="")
 }
 
 //
-// Aide
+// Aide. Surchargeable, et pas d'ereur fatale si pas disponible.
 //
-
-// en hebreu le ? ne doit pas etre inverse
-// http://doc.spip.org/@aide_lang_dir
-function aide_lang_dir($spip_lang,$spip_lang_rtl) {
-	return ($spip_lang<>'he') ? $spip_lang_rtl : '';
-}
 
 // http://doc.spip.org/@aide
 function aide($aide='') {
-	global $spip_lang, $spip_lang_rtl, $spip_display;
-
-	if (!$aide OR $spip_display == 4) return;
-
-	return "&nbsp;&nbsp;<a class='aide' href='" . generer_url_ecrire("aide_index", "aide=$aide&var_lang=$spip_lang")
-		. "' target=\"spip_aide\" "
-		. "onclick=\"javascript:window.open(this.href,"
-		. "'spip_aide', 'scrollbars=yes, resizable=yes, width=740, "
-		. "height=580'); return false;\">"
-		. http_img_pack("aide".aide_lang_dir($spip_lang,$spip_lang_rtl).".gif",
-			_T('info_image_aide'), "title=\""._T('titre_image_aide')
-			. "\" width=\"12\" height=\"12\" align=\"middle\"")
-		. "</a>";
+	$aider = charger_fonction('aider', 'inc', true);
+	return $aider ?  $aider($aide) : '';
 }
+
 
 //
 // Mention de la revision SVN courante de l'espace restreint standard
@@ -203,7 +190,7 @@ function info_copyright() {
 	return _T('info_copyright', 
 		   array('spip' => "<b>SPIP $version</b> ",
 			 'lien_gpl' => 
-			 "<a href='". generer_url_ecrire("aide_index", "aide=licence&var_lang=$spip_lang") . "' target='spip_aide' onClick=\"javascript:window.open(this.href, 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"));
+			 "<a href='". generer_url_ecrire("aide_index", "aide=licence&var_lang=$spip_lang") . "' target='spip_aide' onclick=\"javascript:window.open(this.href, 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"));
 
 }
 
@@ -225,6 +212,7 @@ function exec_test_ajax_dist() {
 		// on est appele par <noscript>
 		case -1:
 			spip_setcookie('spip_accepte_ajax', -1);
+			include_spip('inc/headers');
 			redirige_par_entete(_DIR_IMG_PACK.'puce-orange-anim.gif');
 			break;
 
@@ -316,15 +304,15 @@ function http_wrapper($img){
 function http_img_pack($img, $alt, $att, $title='') {
 	return "<img src='" . http_wrapper($img)
 	  . ("'\nalt=\"" .
-	     ($alt ? str_replace('"','',$alt) : ($title ? $title : ereg_replace('\..*$','',$img)))
+	     ($alt ? str_replace('"','',$alt) : ($title ? $title : ''))
 	     . '" ')
 	  . ($title ? " title=\"$title\"" : '')
 	  . $att . " />";
 }
 
 // http://doc.spip.org/@http_href_img
-function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt='') {
-	return  http_href($href, http_img_pack($img, $title, $att), $title, $style, $class, $evt);
+function http_href_img($href, $img, $att, $alt, $title='', $style='', $class='', $evt='') {
+	return  http_href($href, http_img_pack($img, $alt, $att), $title, $style, $class, $evt);
 }
 
 
