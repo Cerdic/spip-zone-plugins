@@ -9,7 +9,8 @@ function controleurs_article_introduction_dist($regs) {
     }
 
 	$n = new Widget('article-introduction-' . $id, $valeur,
-			array('hauteurMini' => 234));
+			array('hauteurMini' => 234,
+				  'controleur' => 'controleurs/article_introduction'));
     
     $contexte = array(
     	'h_descriptif' => (int)ceil($n->hauteur*2/13),
