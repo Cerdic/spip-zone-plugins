@@ -1,5 +1,6 @@
 <?php
-
+// un controleur php + html
+// html == avec un modele, controleurs/article_introduction.html)
 function controleurs_article_introduction_dist($regs) {
     list(,$widget,$type,$champ,$id) = $regs;
     $valeur = valeur_colonne_table($type, array('descriptif', 'chapo', 'texte'), $id);
@@ -10,19 +11,6 @@ function controleurs_article_introduction_dist($regs) {
 	$n = new Widget('article-introduction-' . $id, $valeur,
 			array('hauteurMini' => 234));
     
-/* en utilisant les inputs défauts
-    $inputAttrs = array(
-    	'descriptif' => array('type' => 'texte', 'attrs' => array(
-	        'style' => 'height:' . (int)ceil($n->hauteur*2/13) . 'px;')),
-		'chapo' =>  array('type' => 'texte', 'attrs' => array(
-	        'style' => 'height:' . (int)ceil($n->hauteur*4/13) . 'px;')),
-		'texte' =>  array('type' => 'texte', 'attrs' => array(
-	        'style' => 'height:' . (int)ceil($n->hauteur*4/13) . 'px;')));
-    $html = $n->formulaire($inputAttrs,
-    					array('style' => 'width:' . $n->largeur . 'px;'));
-*/
-
-// pour la methode par modeles
     $contexte = array(
     	'h_descriptif' => (int)ceil($n->hauteur*2/13),
 		'h_chapo' => (int)ceil($n->hauteur*4/13),
