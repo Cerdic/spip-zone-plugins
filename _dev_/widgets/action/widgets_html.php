@@ -59,21 +59,7 @@ function controleur_dist($regs) {
     $valeur = valeur_colonne_table($type, $champ, $id);
     if ($valeur !== false) {
         $n = new Widget($widget, array($champ => $valeur));
-        $widgetsAction = str_replace('widgets_html', 'widgets_store', self());
-        $widgetsCode = $n->code();
-        $widgetsInput = $n->input($mode, $inputAttrs);
-        $widgetsBoutons = $n->boutons(); // array('edit'=>'')
-
-        $html =
-        <<<FIN_FORM
-
-<form method="post" action="{$widgetsAction}">
-  {$widgetsCode}
-  {$widgetsInput}
-  {$widgetsBoutons}
-</form>
-
-FIN_FORM;
+        $html = $n->formulaire($mode, $inputAttrs);
         $status = NULL;
     } else {
         $html = "$type $id $champ: " . _U('widgets:pas_de_valeur');
@@ -121,6 +107,17 @@ class Widget {
 	// calcul du md5 associe aux valeurs
     function md5() {
         return md5(serialize($this->texts));
+    }
+
+	// formulaire standard
+    function formulaire($contexte = null, $inputAttrs = array()) {
+        return '<form method="post" action="' .
+        	str_replace('widgets_html', 'widgets_store', self()) . '">' .
+        	$this->code() .
+        	(($widgetsInput = $this->modele($contexte)) ? $widgetsInput :
+		        $this->input($contexte, $inputAttrs)) .
+        	$this->boutons() . // array('edit'=>'')
+			'</form>';
     }
 
 	// balises input type hidden d'identification du widget

@@ -37,23 +37,7 @@ function controleurs_article_introduction_dist($regs) {
 		'h_texte' => (int)ceil($h*4/13));
 	$n = new Widget('article-introduction-' . $id, $t,
 			array('largeur'=>$w, 'hauteur'=>$h));
-        $widgetsAction = str_replace('widgets_html', 'widgets_store', self());
-        $widgetsCode = $n->code();
-        if (!($widgetsInput = $n->modele($contexte))) {
-	        $widgetsInput = $n->input($inputAttrs);
-        }
-        $widgetsBoutons = $n->boutons(); // array('edit'=>'')
-
-        $html =
-        <<<FIN_FORM
-
-<form method="post" action="{$widgetsAction}">
-  {$widgetsCode}
-  {$widgetsInput}
-  {$widgetsBoutons}
-</form>
-
-FIN_FORM;
+        $html = $n->formulaire($contexte);
         $status = NULL;
 
 	return array($html, $status);
