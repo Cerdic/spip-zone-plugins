@@ -21,7 +21,8 @@
 					- Si vous {{mettez &agrave; jour}} depuis une version 1.8* de SPIP qui utilisait la contrib {{"acc&egrave;s restreint par groupes"}} 
 					version 0.61 ou 0.7, vous {{DEVEZ}} proc&eacute;der &agrave; la mise &agrave; jour des tables de la base de donn&eacute;es
 					en utilisant le script [->../plugins/acces_groupes/maj_tables.php] {{AVANT}} d'activer ce plugin ! 
-					
+					<br />
+					Ce plugin est compatible avec les versions <strong>1.9.0</strong> et <strong>1.9.1</strong> de spip. Il n’est <strong>pas compatible</strong> avec la version SVN spip 1.9.2 alpha.
         </description>
 	<lien>http://www.spip-contrib.net/Creer-des-groupes-limiter-l-acces</lien> <!-- URI de documentation --> 
         <prefix>
