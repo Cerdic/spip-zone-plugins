@@ -33,7 +33,7 @@ function controleur_dist($regs) {
 	if (($fichier = find_in_path(
      ($controleur = 'controleurs/' . $type . '_' . $champ) . '.html'))
     || ($fichier = find_in_path(
-     ($controleur = 'controleurs/' . $this->champ) .'.html'))) {
+     ($controleur = 'controleurs/' . $champ) .'.html'))) {
      	$fh = fopen($fichier, 'rb');
      	$controldata = '';
      	while (!feof($fh)) {
