@@ -47,7 +47,7 @@ function exec_forms_reponses(){
 		if (autoriser('administrer','form',$id_form)) {
 			$retour = urlencode(self());
 			icone_horizontale(_T("forms:telecharger_reponses"),
-				generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), "doc-24.gif", "rien.gif");
+				generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-exporter-24.png", "rien.gif");
 		}
 
 		fin_boite_info();
