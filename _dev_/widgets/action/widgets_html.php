@@ -29,27 +29,50 @@ function affiche_controleur($class) {
 
 function controleur_dist($regs) {
     list(,$widget,$type,$champ,$id) = $regs;
+    $options = array();
+	if (($fichier = find_in_path(
+     ($controleur = 'controleurs/' . $type . '_' . $champ) . '.html'))
+    || ($fichier = find_in_path(
+     ($controleur = 'controleurs/' . $this->champ) .'.html'))) {
+     	$fh = fopen($fichier, 'rb');
+     	$controldata = '';
+     	while (!feof($fh)) {
+            $controldata .= fread($fh, 8192);
+        }
+        if (preg_match_all('/\bname=(["\'])#ENV\{name_(\w+)\}\1/',
+       					$controldata, $matches, PREG_PATTERN_ORDER)) {
+	    	$champ = $matches[2];
+    	}
+    } else {
+		$controleur = '';
+    }
     $valeur = valeur_colonne_table($type, $champ, $id);
     if ($valeur === false) {
 	    return array("$type $id $champ: " . _U('widgets:pas_de_valeur'), 6);
     }
-
-    $options = array();
+    if (is_scalar($valeur)) {
+    	$valeur = array($champ => $valeur);
+    }
+//return array(print_r($valeur, true), 7);
     // type du widget
-    if (in_array($champ, array('chapo', 'texte', 'descriptif', 'ps'))) {
+    if ($controleur) {
+	    $options['hauteurMini'] = 36; // base de hauteur mini
+	    $options['controleur'] = $controleur;
+    } elseif (in_array($champ, array('chapo', 'texte', 'descriptif', 'ps'))) {
 	    $options['hauteurMini'] = 36; // hauteur mini d'un textarea
         $mode = 'texte';
     } else { // ligne, hauteur naturelle
 	    $options['hauteurMaxi'] = 0;
         $mode = 'ligne';
 	}
-    $n = new Widget($widget, array($champ => $valeur), $options);
+    $n = new Widget($widget, $valeur, $options);
 
     $inputAttrs = array(
         'style' => 'width:' . $n->largeur . 'px;' .
          ($n->hauteur ? ' height:' . $n->hauteur . 'px;' : ''));
 
-    $html = $n->formulaire($mode, $inputAttrs);
+    $html = $controleur ? $n->formulaire() :
+    				$n->formulaire($mode, $inputAttrs);
     $status = NULL;
 
     return array($html,$status);
@@ -76,6 +99,8 @@ class Widget {
     var $largeurMaxi = 700;
     var $hauteurMini = 36;
     var $hauteurMaxi = 700;
+    // eventuellement le fond modele pour le controleur
+    var $controleur = '';
 
 	// le constructeur du widget
 	// $name : son nom
@@ -112,12 +137,11 @@ class Widget {
     }
 
 	// formulaire standard
-    function formulaire($contexte = null, $inputAttrs = array()) {
+    function formulaire($contexte = array(), $inputAttrs = array()) {
         return '<form method="post" action="' .
         	str_replace('widgets_html', 'widgets_store', self()) . '">' .
         	$this->code() .
-        	(($widgetsInput = $this->fond($contexte)) ? $widgetsInput :
-		        $this->input($contexte, $inputAttrs)) .
+	        $this->input($contexte, $inputAttrs) .
         	$this->boutons() . // array('edit'=>'')
 			'</form>';
     }
@@ -142,12 +166,6 @@ class Widget {
 	$contexte est un tableau (nom=>valeur) qui sera enrichi puis passe à recuperer_fond
 */
     function fond($contexte = array()) {
-	    if (!find_in_path(
-	     ($fond = 'controleurs/' . $this->type . '_' . $this->modele) . '.html')
-	    && !find_in_path(
-	     ($fond = 'controleurs/' . $this->modele) .'.html')) {
-			return '';
-	    }
         include_spip('inc/filtres');
         $contexte['id_' . $this->type] = $this->id;
         $contexte['lang'] = $GLOBALS['spip_lang'];
@@ -158,7 +176,7 @@ class Widget {
 	        $contexte['name_' . $champ] = 'content_' . $this->key . '_' . $champ;
         }
         include_spip('public/assembler');
-        return recuperer_fond($fond, $contexte);
+        return recuperer_fond($this->controleur, $contexte);
     }
 
 /*
@@ -168,6 +186,9 @@ class Widget {
 	$attrs est un tableau (attr=>val) d'attributs communs ou pour le champs unique
 */
     function input($spec = 'ligne', $attrs = array()) {
+    	if ($this->controleur) {
+    		return $this->fond($spec);
+    	}
         include_spip('inc/filtres');
         $return = '';
         foreach ($this->texts as $champ => $val) {
