@@ -80,7 +80,7 @@ function affiche_et_enregistre(&$t) {
   foreach ($r as $r2=>$v) set_request($r2, $v);
   Agenda_action_formulaire_article(_request('id_article'));
  } 
- affiche_evenements_article();
+ // affiche_evenements_article(); // Peut-etre pas necessaire...
  echo "<script type=\"text/javascript\"><!--
  window.opener.location.reload();
  --></script>";
