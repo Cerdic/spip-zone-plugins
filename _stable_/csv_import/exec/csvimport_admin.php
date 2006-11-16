@@ -210,7 +210,7 @@ function exec_csvimport_admin(){
 	$res = spip_query("SHOW TABLES");
 	$liste_des_tables_spip=array();
 	$liste_des_tables_autres=array();
-	while ($row=spip_fetch_array($res)){
+	while ($row=spip_fetch_array($res,SPIP_NUM)){
 		$table = $row[0];
 		// on ne retient que les tables prefixees par spip_
 		// evite les melanges sur une base avec plusieurs spip installes
