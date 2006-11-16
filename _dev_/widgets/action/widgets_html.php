@@ -29,6 +29,10 @@ function affiche_controleur($class) {
 
 function controleur_dist($regs) {
     list(,$widget,$type,$champ,$id) = $regs;
+    $valeur = valeur_colonne_table($type, $champ, $id);
+    if ($valeur === false) {
+	    return array("$type $id $champ: " . _U('widgets:pas_de_valeur'), 6);
+    }
 
     // type du widget
     if (in_array($champ,
@@ -37,34 +41,24 @@ function controleur_dist($regs) {
     else
         $mode = 'ligne';
 
-    // taille du widget
-    $w = intval($_GET['w']);
-    $h = intval($_GET['h']);
-    $wh = intval($_GET['wh']); // window height
-    if ($w<100) $w=100;
-    if ($w>700) $w=700;
-    if ($mode == 'texte') {
-        if ($h<36) $h=36; #ici on pourrait mettre minimum 3*$_GET['em']
-    }
-    else // ligne, hauteur naturelle
-        $h='';#$hx = htmlspecialchars($_GET['em']);
 
-    // hauteur maxi d'un textarea -- pas assez ? trop ?
-    $maxheight = min(max($wh-50,400), 700);
-    if ($h>$maxheight) $h=$maxheight;
+    // largeur du widget
+    $w = min(max(intval($_GET['w']), 100), 700);
+    // hauteur maxi d'un textarea selon wh: window height
+    if ($mode == 'texte') {
+	    $maxheight = min(max(intval($_GET['wh']) - 50, 400), 700);
+        // ici on pourrait mettre minimum 3*$_GET['em'] au lieu de 36
+	    $h = min(max(intval($_GET['h']), 36), $maxheight);
+    } else { // ligne, hauteur naturelle
+        $h = '';
+	}
 
     $inputAttrs = array(
         'style' => "width:${w}px;" . ($h ? " height:${h}px;" : ''));
 
-    $valeur = valeur_colonne_table($type, $champ, $id);
-    if ($valeur !== false) {
-        $n = new Widget($widget, array($champ => $valeur));
-        $html = $n->formulaire($mode, $inputAttrs);
-        $status = NULL;
-    } else {
-        $html = "$type $id $champ: " . _U('widgets:pas_de_valeur');
-        $status = 6;
-    }
+    $n = new Widget($widget, array($champ => $valeur));
+    $html = $n->formulaire($mode, $inputAttrs);
+    $status = NULL;
 
     return array($html,$status);
 }
