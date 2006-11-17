@@ -8,6 +8,8 @@
 	padding: 0;
 	border: 1px transparent solid;
 	background-color: transparent;
+}
+.textsizeup, .textsizedown, .textonly {
 	cursor: pointer;
 }
 .boutonstexte button:hover {

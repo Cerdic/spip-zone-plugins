@@ -1,32 +1,59 @@
+/*
+ *  boutonstexte.js (c) toggg http://toggg.com 2006 -- licence LGPL
+ */
+
 // on dépend de jQuery (ou autre définissant $)
 if (typeof $ == 'function') {
 	$(document).ready(function(){
-		$("#contenu .texte").before(
-
-'<span class="boutonstexte">\
-<button class="textonly" onclick="boutonstexte.textOnly(this);" alt="' +
- boutonstexte.txtOnly + '" title="' +
- boutonstexte.txtOnly + '"><img src="' +
- boutonstexte.imgPath + '/textonly.png" /></button>\
-<button class="textsizeup" onclick="boutonstexte.fontBigger(this);" alt="' +
- boutonstexte.txtSizeUp + '" title="' +
- boutonstexte.txtSizeUp + '"><img src="' +
- boutonstexte.imgPath + '/fontsizeup.png" /></button>\
-<button class="textsizedown" onclick="boutonstexte.fontSmaller(this);" alt="' +
- boutonstexte.txtSizeDown + '" title="' +
- boutonstexte.txtSizeDown + '"><img src="' +
- boutonstexte.imgPath + '/fontsizedown.png"/></button></span>'
-
-		);
+		boutonstexte.tmp = '';
+		boutonstexte.fixedUp = $("img.textsizeup");
+		if (boutonstexte.fixedUp.length) {
+			boutonstexte.fixedUp
+			  .click(function() {boutonstexte.fontBigger();})
+			  .attr({'alt':boutonstexte.txtSizeUp, 'title':boutonstexte.txtSizeUp});
+		} else if (boutonstexte.txtSizeUp) {
+			boutonstexte.tmp +=
+			  '<button class="textsizeup"' +
+			  'onclick="boutonstexte.fontBigger(this);" alt="' +
+			  boutonstexte.txtSizeUp + '" title="' +
+			  boutonstexte.txtSizeUp + '"><img src="' +
+			  boutonstexte.imgPath + '/fontsizeup.png" /></button>';
+		}
+		boutonstexte.fixedDown = $("img.textsizedown");
+		if (boutonstexte.fixedDown.length) {
+			boutonstexte.fixedDown
+			  .click(function() {boutonstexte.fontSmaller();})
+			  .attr({'alt':boutonstexte.txtSizeDown, 'title':boutonstexte.txtSizeDown});
+		} else if (boutonstexte.txtSizeDown) {
+			boutonstexte.tmp +=
+			  '<button class="textsizedown"' +
+			  'onclick="boutonstexte.fontSmaller(this);" alt="' +
+			  boutonstexte.txtSizeDown + '" title="' +
+			  boutonstexte.txtSizeDown + '"><img src="' +
+			  boutonstexte.imgPath + '/fontsizedown.png" /></button>';
+		}
+		if (boutonstexte.txtOnly) {
+			boutonstexte.tmp +=
+			  '<button class="textonly"' +
+			  'onclick="boutonstexte.textOnly(this);" alt="' +
+			  boutonstexte.txtOnly + '" title="' +
+			  boutonstexte.txtOnly + '"><img src="' +
+			  boutonstexte.imgPath + '/textonly.png" /></button>';
+		}
+		if (boutonstexte.tmp) {
+			$(boutonstexte.selector).before(
+				'<span class="boutonstexte">' + boutonstexte.tmp + '</span>');
+		}
 	});
 } else {
-	alert('btc a besoin de jQuery !');
+	alert('boutonstexte a besoin de jQuery !');
 }
 
 // le prototype boutons du contenu
 function boutonsTexte(options)
 {
 	this.rate = 1.2;
+	this.selector = "#contenu .texte";
     for (opt in options) {
         this[opt] = options[opt];
     }
@@ -54,7 +81,8 @@ boutonsTexte.prototype.textOnly = function(elt)
 boutonsTexte.prototype.fontBigger = function(elt)
 {
 	var that = this;
-	$(elt).parent().next().each(function(){
+	var work = elt ? $(elt).parent().next() : $(this.selector);
+	work.each(function(){
 		var m = $(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
 		this.style.fontSize = (that.rate * parseFloat(m[1])) + m[2];
 	});
@@ -62,7 +90,8 @@ boutonsTexte.prototype.fontBigger = function(elt)
 boutonsTexte.prototype.fontSmaller = function(elt)
 {
 	var that = this;
-	$(elt).parent().next().each(function(){
+	var work = elt ? $(elt).parent().next() : $(this.selector);
+	work.each(function(){
 		var m = $(this).css('fontSize').match(/(\d+(?:\.\d+)?)(.*)/);
 		this.style.fontSize = (parseFloat(m[1]) / that.rate) + m[2];
 	});

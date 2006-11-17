@@ -7,13 +7,17 @@
 	_ &copy; 2006 - Distribue sous licence LGPL
   </auteur>
   <version>
-	0.1.0
+	0.2.0
   </version>
   <etat>
 	stable
   </etat>
   <description>
 	Rajoute des boutons pour l'affichage des textes comme augmenter/diminuer police
+	Les boutons sont rajout&eacute;s avant chaque div de classe texte du contenu
+	si ils ne sont pas d&eacute;j&agrave; pr&eacute;sents dans la page
+	(images de classe textsizeup , textsizedown ou textonly)
+	La configuration optionnelle se fait par javascript.
 	ATTENTION: Necessite jQuery et la balise <code>#INSERT_HEAD</code> dans les squelettes
   </description>
   <lien>
