@@ -12,6 +12,17 @@
  *
  */
 
+	// compatibilite 1.9.1
+	if ($GLOBALS['spip_version_code']<1.9.2){
+		// Concatener des chaines
+		// #TEXTE|concat{texte1,texte2,...}
+		// http://doc.spip.org/@concat
+		function concat(){
+			$args = func_get_args();
+			return join('', $args);
+		}	
+	}
+
 	include_spip('base/forms');
 	//
 	// <BOUCLE(FORMS)>
