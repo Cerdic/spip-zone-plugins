@@ -199,7 +199,7 @@ function csvimport_importcharset($texte){
 	return importer_charset($texte,'iso-8859-1');
 }
 
-function csvimport_importcsv($file, $head = false, $delim = ",", $enclos = '"', $len = 10000) {
+function csvimport_importcsv($file, $head = 0, $delim = ",", $enclos = '"', $len = 10000) {
 	$return = false;
 	$handle = fopen($file, "r");
 	if ($handle){
@@ -317,20 +317,14 @@ function csvimport_array_visu_extrait($data, $head, $nombre_lignes = 0){
 	return $output;
 }
 
-function csvimport_array_visu_assoc($data, $table, $assoc_field, $nombre_lignes = 0){
-	global $tables_principales;
-	$csvimport_tables_auth = csvimport_tables_auth();
-	if (isset($csvimport_tables_auth[$table]['field']))
-		$tablefield=$csvimport_tables_auth[$table]['field'];
-	else
-		$tablefield=array_keys($tables_principales[$table]['field']);
+function csvimport_array_visu_assoc($data, $table_fields, $assoc_field, $nombre_lignes = 0){
 	$assoc=array_flip($assoc_field);
 
 	$output = "";
 	$data_count = 0;
 	$output .= "<table>";
 	$output .= "<tr>";
-	foreach($tablefield as $value){
+	foreach($table_fields as $key=>$value){
 	  $output .= "<th>" . $value . "</th>";
 	}
 	$output .= "</tr>\n";
@@ -338,10 +332,10 @@ function csvimport_array_visu_assoc($data, $table, $assoc_field, $nombre_lignes 
 	if ($data!=false){
 		foreach($data as $key=>$ligne) {
 			$output .= "<tr>";
-			foreach($tablefield as $value){
+			foreach($table_fields as $key=>$value){
 			  $output .= "<td>";
-			  if ((isset($assoc[$value]))&&(isset($ligne[$assoc[$value]])))
-			    $output .= $ligne[$assoc[$value]];
+			  if ((isset($assoc[$key]))&&(isset($ligne[$assoc[$key]])))
+			    $output .= $ligne[$assoc[$key]];
 				else
 					$output .= "&nbsp;";
 				$output .= "</td>";
@@ -358,19 +352,12 @@ function csvimport_array_visu_assoc($data, $table, $assoc_field, $nombre_lignes 
 	return $output;
 }
 
-function csvimport_field_associate($data, $table, $assoc_field){
+function csvimport_field_associate($data, $table_fields, $assoc_field){
 	global $tables_principales;
-	$csvimport_tables_auth = csvimport_tables_auth();
 	$assoc=$assoc_field;
 	if (!is_array($assoc)) $assoc = array();
 	$csvfield=array_keys($data{1});
 	$csvfield=array_flip($csvfield);
-
-	if (isset($csvimport_tables_auth[$table]['field']))
-		$tablefield=$csvimport_tables_auth[$table]['field'];
-	else
-		$tablefield=array_keys($tables_principales[$table]['field']);
-	$tablefield=array_flip($tablefield);
 
 	// on enleve toutes les associations dont
 	// la cle n'est pas un csvfield
@@ -379,17 +366,17 @@ function csvimport_field_associate($data, $table, $assoc_field){
 	foreach ($assoc as $key=>$value){
 		$good_key = false;
 		$good_value = false;
-		if (array_key_exists($key,$csvfield)){
+		if (isset($csvfield[$key])){
 		  $good_key = true;
 		}
-		if ((array_key_exists($value,$tablefield))||($value==-1)){
+		if ((isset($table_fields[$value]))||($value==-1)){
 		  $good_value = true;
 		}
 		if (($good_key==false)||($good_value==false))
 		  unset($assoc[$key]);
 		else{
 			unset($csvfield[$key]);
-			if ($value!=-1) unset($tablefield[$value]);
+			if ($value!=-1) unset($table_fields[$value]);
 		}
 	}
 
@@ -397,33 +384,26 @@ function csvimport_field_associate($data, $table, $assoc_field){
 	$accents=array('é','è','ê','à','ù',"ô","ç","'");
 	$accents_rep=array('e','e','e','a','u',"o","c","_");
 	foreach(array_keys($csvfield) as $csvkey){
-		foreach(array_keys($tablefield) as $tablekey)
+		foreach(array_keys($table_fields) as $tablekey)
 		  if (strcasecmp(str_replace($accents,$accents_rep,$csvkey),$tablekey)==0){
 				$assoc[$csvkey]=$tablekey;
 				unset($csvfield[$csvkey]);
-				unset($tablefield[$tablekey]);
+				unset($table_fields[$tablekey]);
 			}
  	}
 	//assoc des autres dans l'ordre qui vient
-	$tablefield=array_keys($tablefield);
+	$table_fields=array_keys($table_fields);
 	foreach(array_keys($csvfield) as $csvkey){
-		$assoc[$csvkey]=array_shift($tablefield);
+		$assoc[$csvkey]=array_shift($table_fields);
 		if ($assoc[$csvkey]==NULL) $assoc[$csvkey]="-1";
 		unset($csvfield[$csvkey]);
 	}
 	return $assoc;
 }
 
-function csvimport_field_configure($data, $table, $assoc){
+function csvimport_field_configure($data, $table_fields, $assoc){
 	$output = "";
-	global $tables_principales;
-	$csvimport_tables_auth = csvimport_tables_auth();
-
 	$csvfield=array_keys($data{1});
-	if (isset($csvimport_tables_auth[$table]['field']))
-		$tablefield=$csvimport_tables_auth[$table]['field'];
-	else
-		$tablefield=array_keys($tables_principales[$table]['field']);
 
 	$output .= "<table><tr><td>"._L("Champ CSV")."</td><td>"._L("Champ Table")."</td></tr>";
 	foreach($csvfield as $csvkey){
@@ -431,11 +411,11 @@ function csvimport_field_configure($data, $table, $assoc){
 		$output .=  "<td>$csvkey</td>";
 		$output .= "<td><select name='assoc_field[".str_replace("'","_",$csvkey)."]'>\n";
 		$output .= "<option value='-1'>"._L("Ne pas importer")."</option>\n";
-		foreach($tablefield as $tablekey){
+		foreach($table_fields as $tablekey => $libelle){
 			$output .= "<option value='$tablekey'";
 			if ($assoc[$csvkey]==$tablekey)
 			  $output .= " selected='selected'";
-			$output .= ">$tablekey</option>\n";
+			$output .= ">$libelle</option>\n";
 		}
 		$output .= "</select></td></tr>";
 	}
@@ -445,8 +425,7 @@ function csvimport_field_configure($data, $table, $assoc){
 
 // vidange de la table
 function csvimport_vidange_table($table){
-	$query = "DELETE FROM $table";
-	$res = spip_query($query); // et voila ...
+	$res = spip_query("DELETE FROM $table"); // et voila ...
 }
 
 function csvimport_ajoute_table_csv($data, $table, $assoc_field, &$erreur){

@@ -14,6 +14,42 @@ include_spip("inc/csvimport");
 include_spip("inc/presentation");
 include_spip('public/assembler');
 
+function csvimport_visu_extrait($nombre,$import_mode,$table,$id_form){
+	// Extrait de la table en commençant par les dernieres maj
+	if ($import_mode!='form')
+		csvimport_table_visu_extrait($table,$nombre);
+	else {
+		$contexte = array('id_form'=>$id_form,'total'=>$nombre);
+		$out = recuperer_fond("exec/template/tables_visu_extrait",$contexte);
+		echo $out;
+	}
+}
+
+function csvimport_table_fields($mode,$table,$id_form){
+	$table_fields = array();
+	if ($mode=='table'){
+		$csvimport_tables_auth = csvimport_tables_auth();
+		if (isset($csvimport_tables_auth[$table]['field']))
+			$table_fields=$csvimport_tables_auth[$table]['field'];
+		else
+			$table_fields=array_keys($GLOBALS['tables_principales'][$table]['field']);
+		$table_fields=array_flip($table_fields);
+		foreach ($table_fields as $key=>$value) {
+			$table_fields[$key] = $key;
+		}
+		return $table_fields;
+	}
+	if ($mode=='form' && $id_form){
+		$table_fields['id_donnee'] = 'id_donnee';
+		$res = spip_query("SELECT * FROM spip_forms_champs WHERE type NOT IN ('separateur','textestatique') AND id_form="._q($id_form)." ORDER BY rang");
+		while ($row = spip_fetch_array($res)){
+			$table_fields[$row['champ']] = $row['titre'];
+		}
+		return $table_fields;
+	}
+	return $table_fields;
+}
+
 function csvimport_import_step3(&$step, &$erreur, $import_link, $import_form_link, $csvimport_replace_actif, $csvimport_add_actif){
 	$table = _request('table');	
 	$id_form = intval(_request('id_form'));
@@ -65,7 +101,8 @@ function csvimport_import_step3(&$step, &$erreur, $import_link, $import_form_lin
 		if ($data==false) {
 		  $erreur[$step][] = _L("Fichier vide");
 		}
-		$new_assoc=csvimport_field_associate($data, $table, $assoc_field);
+		$table_fields = csvimport_table_fields($import_mode,$table,$id_form);
+		$new_assoc=csvimport_field_associate($data, $table_fields, $assoc_field);
 		$test=array_diff($new_assoc,$assoc_field);
 		if (count($test)>0){
 			$erreur[$step][] = _L("Correspondances CSV-Table incompl&egrave;tes");
@@ -97,11 +134,11 @@ function csvimport_import_step3(&$step, &$erreur, $import_link, $import_form_lin
 			debut_cadre_relief($icone);
 			gros_titre($titre);
 			// Extrait de la table en commençant par les dernieres maj
-			csvimport_table_visu_extrait($table,5);
+			csvimport_visu_extrait(5,$import_mode,$table,$id_form);
 			fin_cadre_relief();
 
 			debut_cadre_enfonce();
-			echo csvimport_array_visu_assoc($data, $table, $assoc_field, 5);
+			echo csvimport_array_visu_assoc($data, $table_fields, $assoc_field, 5);
 			fin_cadre_enfonce();
 			echo "<div style='padding: 2px; color: black;'>&nbsp;";
 			echo _L("Cette op&eacute;ration va entra&icirc;ner la suppression de toutes les donn&eacute;es pr&eacute;sentes dans la table.");
@@ -120,11 +157,11 @@ function csvimport_import_step3(&$step, &$erreur, $import_link, $import_form_lin
 			debut_cadre_relief($icone);
 			gros_titre($titre);
 			// Extrait de la table en commençant par les dernieres maj
-			csvimport_table_visu_extrait($table,5);
+			csvimport_visu_extrait(5,$import_mode,$table,$id_form);
 			fin_cadre_relief();
 
 			debut_cadre_enfonce();
-			echo csvimport_array_visu_assoc($data, $table, $assoc_field, 5);
+			echo csvimport_array_visu_assoc($data, $table_fields, $assoc_field, 5);
 			fin_cadre_enfonce();
 			echo "<div style='padding: 2px; color: black;'>&nbsp;";
 			echo _L("Les donn&eacute;es du fichier CSV vont &ecirc;tre ajout&eacute;es &agrave; la table comme illustr&eacute; ci-dessus.");
@@ -138,17 +175,25 @@ function csvimport_import_step3(&$step, &$erreur, $import_link, $import_form_lin
 		else {
 			// vidange de la table
 			if (($remplacer)&&(_request('confirme_remplace'))){
-				csvimport_vidange_table($table);
+				if ($import_mode=='table')
+					csvimport_vidange_table($table);
+				elseif ($import_mode=='form')
+					if (include_spip('inc/forms'))
+						Forms_donnees_vide($id_form);
 			}
 			// le reste est identique que ce soit un ajout ou un remplace
 			if (($remplacer)||($ajouter)){
 				$err = array();
-				$out = csvimport_ajoute_table_csv($data, $table, $assoc_field,$err);
+				if ($import_mode=='table')
+					$out = csvimport_ajoute_table_csv($data, $table, $assoc_field,$err);
+				elseif ($import_mode=='form')
+					if (include_spip('inc/forms'))
+						Forms_csvimport_ajoute_table_csv($data, $id_form, $assoc_field, $err);
 
 				debut_cadre_relief($icone);
 				gros_titre($titre);
 				// Extrait de la table en commençant par les dernieres maj
-				csvimport_table_visu_extrait($table,10);
+				csvimport_visu_extrait(10,$import_mode,$table,$id_form);
 				fin_cadre_relief();
 
 				if (count($err)){
@@ -160,11 +205,6 @@ function csvimport_import_step3(&$step, &$erreur, $import_link, $import_form_lin
 				}
 				else
 					echo csvimport_show_erreurs($err);
-
-				//debut_cadre_enfonce();
-				// Extrait de la table en commençant par les dernieres maj
-				//csvimport_table_visu_extrait($table,10);
-				//fin_cadre_enfonce();
   		}
 		}
 	}
@@ -237,9 +277,10 @@ function csvimport_import_step2(&$step, &$erreur, $import_link, $import_form_lin
 		  $erreur[$step][] = _L("Fichier vide");
 		  $step--;
 		}
-		if ($data && ($step==2))
-			$assoc_field=csvimport_field_associate($data, $table, $assoc_field);
 	}
+	$table_fields = csvimport_table_fields($import_mode,$table,$id_form);
+	if ($data && ($step==2))
+		$assoc_field=csvimport_field_associate($data, $table_fields, $assoc_field);
 	if ($step==2){
 		$hidden['file_name'] = $file_name;
 		$hidden['tmp_name'] = $tmp_name;
@@ -273,13 +314,13 @@ function csvimport_import_step2(&$step, &$erreur, $import_link, $import_form_lin
 		echo "><br />";
 
 
-		echo csvimport_field_configure($data, $table, $assoc_field);
+		echo csvimport_field_configure($data, $table_fields, $assoc_field);
 
 		echo "</div><hr />\n";
 
 		echo "<div align='$spip_lang_left'>";
 
-		echo csvimport_array_visu_assoc($data, $table, $assoc_field, 5);
+		echo csvimport_array_visu_assoc($data, $table_fields, $assoc_field, 5);
 		echo "</div><hr />\n";
 
 		if ($csvimport_add_actif) {
@@ -409,13 +450,7 @@ function exec_csvimport_import(){
 			debut_cadre_relief($icone);
 			gros_titre($titre);
 			// Extrait de la table en commençant par les dernieres maj
-			if ($import_mode!='form')
-				csvimport_table_visu_extrait($table,5);
-			else {
-				$contexte = array('id_form'=>$id_form,'total'=>5);
-				$out = recuperer_fond("exec/template/tables_visu_extrait",$contexte);
-				echo $out;
-			}
+			csvimport_visu_extrait(5,$import_mode,$table,$id_form);
 			fin_cadre_relief();
 	 	}	
 		//
