@@ -25,6 +25,101 @@
 		include_spip('base/abstract_sql');
 	}
 	
+	function Forms_structure($id_form){
+		// Preparer la table de traduction code->valeur & mise en table de la structure pour eviter des requettes
+		// a chaque ligne
+		$structure = array();
+		$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)." ORDER BY rang");
+		while ($row = spip_fetch_array($res)){
+			$type = $row['type'];
+			$champ = $row['champ'];
+			$structure[$champ]=array('type'=>$row['type'],'titre'=>$row['titre']);
+			if (($type=='select') OR ($type='multiple')){
+				$res2 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ)." ORDER BY rang");
+				while ($row2 = spip_fetch_array($res2))
+					$structure[$champ]['choix'][$row2['choix']] = trim(textebrut(typo($row2['titre'])));
+			}
+			else if ($type == 'mot') {
+				$id_groupe = intval($row['extra_info']);
+				$res2 = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe="._q($id_groupe));
+				while ($row2 = spip_fetch_array($res2)) {
+					$structure[$champ]['choix'][$row2['id_mot']] = trim(textebrut(typo($row2['titre'])));
+				}
+			}
+		}
+		return $structure;
+	}
+	
+	function Forms_donnees_vide($id_form){
+		if (!include_spip('inc/autoriser'))
+			include_spip('inc/autoriser_compat');
+		if (autoriser('supprimerdonnee','form',$id_form)){
+			$res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form));
+			while ($row = spip_fetch_array($res)){
+				spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($row['id_donnee']));
+			}
+			spip_query("DELETE FROM spip_forms_donnees WHERE id_form="._q($id_form));
+		}
+	}
+
+	function Forms_csvimport_ajoute_table_csv($data, $id_form, $assoc_field, &$erreur){
+		$assoc = array_flip($assoc_field);
+		$res = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form)." AND type_form NOT IN ('','sondage')");
+		if (!$row = spip_fetch_array($res)) {
+			$erreur[0][] = _L("Table introuvable");
+			return;
+		}
+		
+		$structure = Forms_structure($id_form);
+		$cle = isset($assoc_field['id_donnee'])?$assoc_field['id_donnee']:false;
+		
+		$output = "";
+		if ($data!=false){
+			$count_lignes = 0;
+			foreach($data as $key=>$ligne) {
+	      $count_lignes ++;
+				// creation de la donnee si necessaire
+				$creation = true;
+				$id_donnee = 0;
+				if ($cle) {
+					$id_donnee = $ligne[$cle];
+					$res = spip_query("SELECT * FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee)." AND id_form="._q($id_form));
+					if ($row = spip_fetch_array($res)){
+						$creation = false;
+						$set = "";
+						foreach(array('date','url','ip','id_auteur') as $champ)
+							if (isset($assoc_field['$champ'])) $set .= "$champ="._q($ligne[$assoc_field['date']]).", ";
+						$set.=" maj=NOW()";
+						spip_query("UPDATE spip_forms_donnees $set WHERE id_donnee="._q($id_donnee)." AND id_form="._q($id_form));
+					}
+				}
+				if ($creation){
+					$id_auteur = $GLOBALS['auteur_session'] ? intval($GLOBALS['auteur_session']['id_auteur']) : 0;
+					$ip = $GLOBALS['REMOTE_ADDR'];
+					$url = _DIR_RESTREINT_ABS;
+					if ($cle){
+						if (intval($id_donnee))
+							spip_abstract_insert("spip_forms_donnees","(id_donnee,id_form,date,ip,id_auteur,url,confirmation,statut,maj)","("._q($id_donnee).","._q($id_form).", NOW(),"._q($ip).","._q($id_auteur).","._q($url).", 'valide', 'publie', NOW() )");
+					}
+					else
+						spip_abstract_insert("spip_forms_donnees","(id_form,date,ip,id_auteur,url,confirmation,statut,maj)","("._q($id_form).", NOW(),"._q($ip).","._q($id_auteur).","._q($url).", 'valide', 'publie', NOW() )");
+					$id_donnee = spip_insert_id();
+				}
+				if ($id_donnee){
+					foreach($structure as $champ=>$infos){
+					  if ((isset($assoc[$champ]))&&(isset($ligne[$assoc[$champ]]))){
+					  	if (!$creation)
+					  		spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champ));
+					  	spip_query("INSERT INTO spip_forms_donnees_champs (id_donnee,champ,valeur,maj) VALUES ("._q($id_donnee).","._q($champ).","._q($ligne[$assoc[$champ]]).", NOW() )");
+					  }
+			 		}
+				}
+				else 
+				  $erreur[$count_lignes][] = "ajout impossible ::id_donnee nul::<br />";
+			}
+		}
+	}
+	
 	function Forms_deplacer_fichier_form($source, $dest) {
 		include_spip('inc/getdocument');
 		if ($ok = deplacer_fichier_upload($source, $dest, true))

@@ -90,6 +90,7 @@ function Forms_formater_les_reponses($id_form, $format, $separateur, &$fichiers,
 
 	$s = '';
 
+	$structure = Forms_structure($id_form);
 	// Preparer la table de traduction code->valeur & mise en table de la structure pour eviter des requettes
 	// a chaque ligne
 	$structure = array();
@@ -115,9 +116,12 @@ function Forms_formater_les_reponses($id_form, $format, $separateur, &$fichiers,
 
 	if ($head) {
 		// Une premiere ligne avec les noms de champs
-		$ligne = array();
-		$ligne[] = _T("forms:date");
-		$ligne[] = _T("forms:page");
+		$ligne1 = $ligne2 = array();
+		$ligne1[] = $ligne2[] = 'id_donnee';
+		$ligne1[] = 'date';
+		$ligne2[] = _T("forms:date");
+		$ligne1[] = 'url';
+		$ligne1[] = $ligne2[] = _T("forms:page");
 		foreach ($structure as $champ => $t) {
 			$ligne1[] = $champ;
 			$ligne2[] = textebrut(typo($t['titre']));
@@ -149,6 +153,7 @@ function Forms_formater_les_reponses($id_form, $format, $separateur, &$fichiers,
 			$id_donnee = $row['id_donnee'];
 			$date = $row['date'];
 			$ligne = array();
+			$ligne[] = $id_donnee;
 			$ligne[] = jour($date).'/'.mois($date).'/'.annee($date);
 			$ligne[] = str_replace("&amp;","&",$row['url']);
 			$valeurs = array();
