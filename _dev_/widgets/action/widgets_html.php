@@ -228,9 +228,9 @@ class Widget {
 	submit et cancel sont ajoutés par défaut, annullables comme 'cancel'=>''
 	le + "editer tout" n'y est pas, au contraire on peut le mettre avec 'edit'=>''
 */
-    function boutons($boutons = array('ok', 'cancel')) {
+    function boutons($boutons = array()) {
         $widgetsImgPath = dirname(find_in_path('images/cancel.png'));
-        if (!isset($boutons['ok'])) {
+        if (!isset($boutons['submit'])) {
         	$boutons['submit'] = array('ok', texte_backend(_T('bouton_enregistrer')));
         }
         if (!isset($boutons['cancel'])) {
