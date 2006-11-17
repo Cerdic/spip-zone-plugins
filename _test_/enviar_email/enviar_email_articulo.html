@@ -1,19 +1,13 @@
 #CACHE{0}
 <BOUCLE_enviar_articulo(ARTICLES){id_article}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="#LANG_DIR" lang="#LANG">
+<html dir="#LANG_DIR" lang="#LANG" style="background-color:#ffebcd">
 
 <head>
-	<title>[Enviar artículo: (#TITRE|textebrut)]</title>
-	
-	<!-- Para los buscadores -->
-	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-	<meta name="robot" content="follow, index, all">
-	<meta name="revisit-after" content="1 days">
-	<meta name="generator" content="SPIP" />
-	[<meta name="description" content="(#INTRODUCTION|couper{150}|attribut_html)" />]
-	<meta name="keywords" content="">
 
+	<title>[Enviar artículo: (#TITRE|textebrut)]</title>
+	[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+	<INCLURE{fond=inc-head}>
 
 <style type="text/css">
 <!--
@@ -24,59 +18,60 @@ h2 {
 }
 
 .formulario {
-	background-color: white;
+	background-color:#ffebcd;
 	border: 0px solid silver;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size:75%;
+	font-size:90%;
 	margin-top:.9em;
 }
 	
 .campos {
 	width: 95%;
+	font-size:90%;
 	padding-left: 2px;
 	padding-right: 2px;
-	padding-top:1px;
-	padding-bottom:1px;
-	font-size: 110%;
-	color:#333333;
+	padding-top:2px;
+	padding-bottom:2px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color:#666666;
 	margin-bottom:.3em;
-	border:1px solid #B2BFCF;
+	border:1px solid silver;
 }
 	
-.spip_bouton {
+.boton {
 	padding: 0px;
-	border: 1px solid gray;
-	background-color: whitesmoke;
-	font-family: verdana,helvetica,arial,sans-serif;
+	border: 1px solid silver;
+	font-family:"Times New Roman",Times,serif;
 	color: #666666;
-	font-size: 100%;
 }
 -->
 </style>
 
 </head>
 
-<body style="border:0px; padding:0px; text-align:center">
-#NOM_SITE
+<body style="border:0px; padding:0px; text-align:center;background-color:#ffebcd;color: #727860;">
+
 <?php
+
 if (!$HTTP_POST_VARS){
 
 // MUESTRA EL FORMULARIO
 ?>
 
-<div style="width:95%; margin:auto;">
+<div style="width:90%; margin:auto;padding-top:.6em">
   <form action="<?php $phpself; ?>" method="POST" enctype="multipart/form-data" class="formulario">
-        <h2 style="text-align:center; margin-bottom:.2em"><span style="text-decoration:underline">#NOM_SITE_SPIP</span><div style="font-weight:normal; font-size:80%; margin-top:.6em;">Enviar [la referencia de "<span style="font-weight:bold; font-style: italic">(#TITRE)</span>" ]por correo electrónico</div></h2>
+
+<h2 style="text-align:center;"><span style="text-decoration:underline;color:#f28000">#NOM_SITE_SPIP</span><div style="font-weight:normal; font-size:80%; margin-top:.9em;margin-bottom:.9em">Enviar [referencia de <span style="font-weight:bold;font-style:italic">'(#TITRE)'</span> ]por correo electrónico</div></h2>
+
     <fieldset style="text-align:left; margin-bottom:.6em">
    <b>Enviar a la dirección:</b><div style="font-size:95%;color:#999999">(separa con comas si escribes más de una)</div><input name="destino" class="campos" value="" size="40"></fieldset>
        <fieldset style="text-align:left">
        <legend style="font-weight:bold">Datos opcionales</legend>
     Asunto <span style="font-size:95%;color:#999999">(título que quieres darle al mensaje)</span><br /><input name="asunto" class="campos" size="40" value=""><br/>
-      Tu nombre<br /><input name="nombre" class="campos" size="40" value=""><br/>
+Tu nombre<br /><input name="nombre" class="campos" size="40" value=""><br/>
      Tu dirección de correo electrónico<br /><input name="email" class="campos" size="40" value=""><br />
      Puedes añadir un texto en el mensaje<br /><textarea name="coment" class="campos" style="font-size:100%; font-family:verdana, arial, helvetica, sans-serif;" cols="40" rows="3"></textarea>
      <div style="text-align:center">
-      <input type="submit" name="enviar" class="spip_bouton" style="margin-top:.3em" value="Enviar">&nbsp;&nbsp;&nbsp;<input type="button"  class="spip_bouton" style="margin-top:.3em" value="Cancelar" onclick="window.close();"> 
+      <input type="submit" name="enviar" class="boton" style="margin-top:.3em" value="Enviar">&nbsp;&nbsp;&nbsp;<input type="button"  class="boton" style="margin-top:.3em" value="Cancelar" onclick="window.close();"> 
       </div>
       <input type="hidden" name="message" value="1">
       </fieldset>
@@ -87,23 +82,23 @@ if (!$HTTP_POST_VARS){
 }else{
 
 // REVISA QUE HAYA UN EMAIL PARA ENVIAR EL MENSAJE
-if (!$destino) { echo "<p style='color:red; font-size:90%'>Lo sentimos :-(, pero sin dirección de correo electrónico válida no podemos enviar el mensaje</p>";
+if (!$destino) { echo "<p style='color:red; font-size:90%'>Lo sentimos :-( pero sin dirección de correo electrónico válida<br />no podemos enviar el mensaje</p>";
 
 ?>
 
 <div style="width:90%; margin:auto;">
   <form action="<?php $phpself; ?>" method="POST" enctype="multipart/form-data" class="formulario">
-        <h2 style="text-align:center; margin-bottom:.2em"><span style="text-decoration:underline">#NOM_SITE_SPIP</span><div style="font-weight:normal; font-size:80%; margin-top:.6em;">Enviar [la referencia de "<span style="font-weight:bold; font-style: italic">(#TITRE)</span>" ]por correo electrónico</div></h2>
+        <h2 style="text-align:center; margin-bottom:.1em"><span style="text-decoration:underline">#NOM_SITE_SPIP</span><div style="font-weight:normal; font-size:80%; margin-top:1.2em">Enviar [referencia de <span style="font-weight:bold; font-style: italic">'(#TITRE)'</span> ]por correo electrónico</div></h2>
     <fieldset style="text-align:left; margin-bottom:.6em">
    <b>Enviar a la dirección:</b><div style="font-size:95%;color:#999999">(separa con comas si escribes más de una)</div><input name="destino" class="campos" value="" size="40"></fieldset>
        <fieldset style="text-align:left">
        <legend style="font-weight:bold">Datos opcionales</legend>
     Asunto <span style="font-size:95%;color:#999999">(título que quieres darle al mensaje)</span><br /><input name="asunto" class="campos" size="40" value=""><br/>
-      Tu nombre<br /><input name="nombre" class="campos" size="40" value=""><br/>
+Tu nombre<br /><input name="nombre" class="campos" size="40" value=""><br/>
      Tu dirección de correo electrónico<br /><input name="email" class="campos" size="40" value=""><br />
      Puedes añadir un texto en el mensaje<br /><textarea name="coment" class="campos" style="font-size:100%; font-family:verdana, arial, helvetica, sans-serif;" cols="40" rows="3"></textarea>
      <div style="text-align:center">
-      <input type="submit" name="enviar" class="spip_bouton" style="margin-top:.3em" value="Enviar">&nbsp;&nbsp;&nbsp;<input type="button"  class="spip_bouton" style="margin-top:.3em" value="Cancelar" onclick="window.close();"> 
+      <input type="submit" name="enviar" class="boton" style="margin-top:.3em" value="Enviar">&nbsp;&nbsp;&nbsp;<input type="button"  class="boton" style="margin-top:.3em" value="Cancelar" onclick="window.close();"> 
       </div>
       
       <input type="hidden" name="message" value="1">
@@ -111,10 +106,11 @@ if (!$destino) { echo "<p style='color:red; font-size:90%'>Lo sentimos :-(, pero
       </fieldset>
   </form> 
 </div>
-<?php
-}else {
 
-// ENVÍO DEL MENSAJE CON PHPMAILER
+<?php
+}
+
+// ENVIO DEL MENSAJE CON PHPMAILER
 
 include_spip("phpmailer/class.phpmailer");
 include_spip("phpmailer/class.smtp");	
@@ -123,30 +119,44 @@ $mail = new PHPMailer();
 
 $mail->IsSMTP();
 $mail->Mailer = "smtp"; 
-$mail->Host 	= "localhost"; // Servidor de SMTP 
+
+
+/*
+// SI EL SERVIDOR DE SMTP REQUIERE AUTENTICACION RELLENA ESTOS DATOS CON LOS TUYOS Y ACTIVALO
+
+//Asignamos a Host el nombre de nuestro servidor smtp
+  $mail->Host = "smtp.hotpop.com";
+
+  //Le indicamos que el servidor smtp requiere autenticación
+  $mail->SMTPAuth = true;
+
+  //Le decimos cual es nuestro nombre de usuario y password
+  $mail->Username = "micuenta@HotPOP.com"; 
+  $mail->Password = "mipassword";
+*/
+ 
+$mail->Host = "localhost"; // Servidor de SMTP 
 
 $mail->SetLanguage("es", "phpmailer/language/");
 $mail->CharSet	= lire_meta('charset');  // Juego de caracteres
 $mail->Timeout="20";
 
-$mail->WordWrap = "75";                                 // set word wrap to 50 characters
-//$mail->AddAttachment("/var/tmp/file.tar.gz");         // añadir archivos
-//$mail->AddAttachment("/tmp/image.jpg", "new.jpg");    // añadir archivos con nombre
+// $mail->WordWrap = "50";                                 // set word wrap to 50 characters
+// $mail->AddAttachment("/var/tmp/file.tar.gz");         // añadir archivos
 
-// VARIABLES
-
-$un_salto="\r\n";
-$dos_saltos="\r\n\r\n";
+$mail->AddAttachment("#DOSSIER_SQUELETTE/imagenes/logo_64.jpg", "logo_64.jpg");    // añadir archivos con nombre
 
 // PARTE COMÚN
 
-    //Estoy recibiendo los campos, compongo el cuerpo
+  //Asignamos asunto y cuerpo del mensaje
+  
+      //Estoy recibiendo los campos, compongo el cuerpo
+
+    if (!$HTTP_POST_VARS["nombre"]) { $remite= "No ha escrito su nombre"; } else { $remite= $HTTP_POST_VARS["nombre"]; }
+    $mail->FromName = $remite; // el nombre que queremos que vea
+    $mail->From = $HTTP_POST_VARS["email"]; // el email del nombre que se ve
     
-    if (!$HTTP_POST_VARS["nombre"]) { $remite= "Olvidó escribir su nombre"; } else { $remite= $HTTP_POST_VARS["nombre"]; }
-    $mail->FromName = $remite; // de nombre
-    $mail->From = $HTTP_POST_VARS["nombre"]; // de email
-    
-    	if (!$HTTP_POST_VARS["email"]) { $replica = "[(#EMAIL_WEBMASTER)]"; } else { $replica = $HTTP_POST_VARS["email"]; }
+if (!$HTTP_POST_VARS["email"]) { $replica = '[(#EMAIL_WEBMASTER)]'; } else { $replica = $HTTP_POST_VARS["email"]; }
 	$mail->AddReplyTo($replica); // reply
     
     $separar = explode(',',$destino);
@@ -157,91 +167,50 @@ $dos_saltos="\r\n\r\n";
     if (!$HTTP_POST_VARS["asunto"]) { $asunto="[(#TITRE|texte_script)]"; } else { $asunto=$HTTP_POST_VARS["asunto"]; }
     $mail->Subject = $asunto; // Asunto
 
-// COMIENZO PARTE TEXTO PLANO
-
-//Referencia al artículo para el texto plano
-?>
-
-<B_autores>
-<BOUCLE_autores(AUTEURS){id_article}{", "}>
-<?php $autores='#NOM'; ?>
-</BOUCLE_autores>
-<?php $autores="|de ".$autores; ?>
-</B_autores>
-
-<?php
-	$articulo= "::: [(#TITRE|attribut_html)] :::".$un_salto;
-	$articulo.= "[(#SURTITRE|attribut_html)|][(#SOUSTITRE|attribut_html)|][(#DATE|affdate)]".$autores.$dos_saltos;
-	$articulo.= "[(#INTRODUCTION|attribut_html|textebrut|couper{360})]".$dos_saltos;
-
-	if (!$HTTP_POST_VARS["coment"]) { $comentario="Hola. Quizás este artículo de #NOM_SITE_SPIP (#URL_SITE_SPIP) te pueda interesar."; } else { $comentario=$HTTP_POST_VARS["coment"]; }
-    $texto_plano .= $dos_saltos.$comentario.$dos_saltos."-------------------------------".$dos_saltos;
-    $texto_plano .= $articulo;
-    ?>
-<B_documents_plano>
-<?php 
-$texto_plano .="Si visitas el artículo podrás descargarte los siguientes documentos:".$un_salto;
-?>
-<BOUCLE_documents_plano(DOCUMENTS) {id_article} {mode=document} {doublons}>
-<?php
-$texto_plano .="[- #TITRE, (#TYPE_DOCUMENT - (#TAILLE|taille_en_octets))]".$dos_saltos;
-?>
-</BOUCLE_documents_plano>
-</B_documents_plano>
-
-<?php
-	$texto_plano.= "* leerlo completo: #URL_SITE_SPIP/#URL_ARTICLE".$un_salto;
-    $texto_plano .= $un_salto."-------------------------------".$un_salto."Mensaje enviado por: ".$remite." <".$replica.">".$un_salto;
-    $texto_plano .= "Fuente: #NOM_SITE_SPIP (#URL_SITE_SPIP)";
-    $texto_plano .= $un_salto."-------------------------------".$un_salto;
-    
-    $mail->AltBody = $texto_plano; //Cuerpo en TEXTO PLANO
-    
-// FIN PARTE TEXTO PLANO
-
 // COMIENZO PARTE HTML
 
-$texto_html .="<div style='margin:1.2em;background: #fff;font-family:\'Trebuchet MS\', Tahoma, Arial, Verdana,sans-serif;font-size: 0.9em;text-align: left;'>";
-	if (!$HTTP_POST_VARS["coment"]) { $comentario="Hola. Quizás este artículo de <a href='#URL_SITE_SPIP' style='text-decoration: none'>#NOM_SITE_SPIP</a> te pueda interesar."; } else { $comentario=$HTTP_POST_VARS["coment"]; }
-$texto_html .="<p>".$comentario."</p>";
-$texto_html .="<div style='border: 1px solid #ccc;padding: .5em;'>";
-$texto_html .="[<div style='font-size:1.1em;'><a href='#URL_SITE_SPIP/#URL_ARTICLE' style='text-decoration: none'>(#TITRE|supprimer_numero)</a></div>]";
-?>
+$sitio='[(#NOM_SITE_SPIP)]';
+$url_sitio='[(#URL_SITE_SPIP)]';
+$url_art='[(#URL_ARTICLE)]';
 
-<B_autores_html>
-<BOUCLE_autores_html(AUTEURS){id_article}{", "}>
-<?php $autores='[<a href="#URL_SITE_SPIP/#URL_AUTEUR" style="text-decoration:none">(#NOM)</a>]'; ?>
-</BOUCLE_autores_html>
-<?php $autores=" / de ".$autores; ?>
-</B_autores_html>
+$texto_html ="<div style='margin:1.2em;font-family:tahoma,verdana,arial,helvetica,sans-serif;background-color:#ffebcd;color:#727860;border:1px solid #f28000'>";
 
-<?php
-$texto_html .="<div style='color:#666666; font-size:90%;padding-bottom:.3em'>[(#SURTITRE|attribut_html) / ][(#SOUSTITRE|attribut_html) / ][(#DATE|affdate)]".$autores."</div>";
-$texto_html .="<div style='font-size:96%'>[(#INTRODUCTION|attribut_html|textebrut)]</div>";
-$texto_html .=" <div style='color:#999999; font-size:90%;'>[<a href='#URL_SITE_SPIP/#URL_ARTICLE' style='text-decoration: none'>... leer m&aacute;s &rsaquo;&rsaquo;&rsaquo;</a>]</div>";
-?>
-<B_documents>
-<?php 
-$texto_html .="<div style='margin-top:.6em;padding:.3em; padding-bottom:0px;border-top:1px solid #cccccc;color:#666666; font-size:85%;'>Si visitas el artículo podrás descargarte los siguientes documentos:<br />";
-?>
-<BOUCLE_documents(DOCUMENTS) {id_article} {mode=document} {doublons}>
-<?php
-$texto_html .="[&bull; #TITRE, (#TYPE_DOCUMENT - (#TAILLE|taille_en_octets))]";
-?>
-</BOUCLE_documents>
-<?php 
-$texto_html .="</div>"; 
-?>
-</B_documents>
-<?php
-$texto_html .="</div>";
-$texto_html .= "<div style='margin-top:.2em;margin-bottom:.9em;color:#666666; font-size:80%;text-align:right'>Mensaje enviado por: ".$remite." <".$replica.">";
-$texto_html .= " /// Fuente: <a href='#URL_SITE_SPIP' style='text-decoration: none'>#NOM_SITE_SPIP</a><br /></div>";
-$texto_html .="</div>";
+$texto_html.="<p style='padding:0px;margin:0px;text-align:left;font-size:120%;font-weight:bold;background-color:#f28000'><a href='$url_sitio' style='display:block;text-decoration:none;color:#edef9f;padding:.3em'><img src='logo_64.jpg' border='0' /> ".$sitio."</a></p>";
 
-$mail->Body    = $texto_html; //Cuerpo en HTML
+$texto_html.="<div style='padding:.9em;padding-top:0px'>";
 
-// FIN PARTE HTML
+if (!$HTTP_POST_VARS["coment"]) { $comentario="Hola. Quizás esta información te pueda interesar."; } else { $comentario=$HTTP_POST_VARS["coment"]; }
+$texto_html.="<p style='text-align:left'>".$comentario."</p>";
+
+$texto_html.="<div style='border: 1px solid silver;background-color:whitesmoke'>";
+$texto_html.="<div style='font-size:120%;padding:.3em;text-align:center;border-bottom:1px dotted silver'>".'[(#TITRE)]'."</div>";
+$texto_html.="<div style='padding:.9em;padding-bottom:.3em;font-size:95%;'>".'[(#TEXTE|couper{1200})]'."</div>";
+$texto_html.="<div style='font-size:90%;text-align:right;padding-bottom:.6em;padding-right:.9em'><a href='$url_sitio/$url_art'>leer más &rsaquo;&rsaquo;&rsaquo;</a></div>";
+$texto_html.="</div>";
+
+if (!$HTTP_POST_VARS["email"]) { $email_aut=""; } else { $email_aut=" (".$HTTP_POST_VARS["email"].")"; }
+$texto_html.="<div style='font-size:80%;color:#999999;text-align:left'>Envíado por: ".$remite.$email_aut."</div>";
+
+$texto_html.="</div></div>";
+
+$mail->Body = $texto_html;
+  
+// COMIENZO PARTE TEXTO PLANO 
+
+if (!$HTTP_POST_VARS["coment"]) { $comentario="Hola. Quizás esta información te pueda interesar."; } else { $comentario=$HTTP_POST_VARS["coment"]; }
+$texto_plano=$comentario."\n\n";
+$texto_plano.="-------------------------- \n";
+$texto_plano.='[(#NOM_SITE_SPIP)]'."\n".'[(#URL_SITE_SPIP)]'."\n\n";
+$texto_plano.='[(#TITRE)]'."\n\n";
+$texto_plano.='[(#TEXTE|couper{1200})]'."\n\n";
+$texto_plano.="leer más: ".$url_sitio."/".$url_art."\n\n";
+$texto_plano.="-------------------------- \n";
+$texto_plano.="Envíado por: ".$remite.$email_aut;
+
+
+  $mail->AltBody = $texto_plano;
+  
+// SE ENVÍA EL MENSAJE
 
 // Envío (5 intentos)
 $enviado = $mail->Send();
@@ -261,24 +230,23 @@ if ($mail->ErrorInfo=="SMTP Error: Data not accepted") { // soluciona un bug con
 
 if($enviado)
 {
-echo "<div style='margin-left:15px;margin-right:15px'><center><font color='#333366'><br /><br /><h2 style='text-align:center; font-weight:bold; margin-bottom:.3em'><span style='text-decoration:underline'>#NOM_SITE_SPIP</span></h2><br /><h1 style='text-align:center; font-size:90%'>La referencia de<i><b><div style='padding-top:.6em;padding-bottom:.6em'>\"[(#TITRE|texte_script)]\"</div></b></i>ya se ha enviado a ". $HTTP_POST_VARS["destino"] ."</h1></font></center></div>";
+echo "<div style='margin-left:15px;margin-right:15px'><center><br /><br /><h2 style='text-align:center; font-weight:bold; margin-bottom:.6em'><span style='text-decoration:underline;color:#f28000'>".'[(#NOM_SITE_SPIP)]'."</span></h2><br /><h1 style='text-align:center;font-size:95%'>La referencia de<i><b><div style='padding-top:.9em;padding-bottom:.9em;font-size:115%'>\"".'[(#TITRE|texte_script)]'."\"</div></b></i><div style='padding-bottom:.6em'>ya se ha enviado a:</div>";
+foreach($separar as $email_destino) { echo $email_destino."<br />"; }
+echo "</h1 />";
 }
 else{
-echo "<div style='margin-left:15px;margin-right:15px'><center><font color='red'><br /><br /><h2 style='text-align:center; font-weight:bold; margin-bottom:.3em'><span style='text-decoration:underline'>#NOM_SITE_SPIP</span></h2><br /><h1 style='text-align:center; font-size:90%'>Lo sentimos<br />Ha habido un problema y no se ha podido enviar el correo :-(</h1></font></center></div>";
+echo "<div style='margin-left:15px;margin-right:15px'><center><font color='red'><br /><br /><h2 style='text-align:center; font-weight:bold; margin-bottom:.3em'><span style='text-decoration:underline;color:#f28000'>".'[(#NOM_SITE_SPIP)]'."</span></h2><br /><h1 style='text-align:center;font-size:90%'>Lo sentimos<br />Ha habido un problema y no se ha podido enviar el correo :-(</h1></font></center></div>";
 }
-
-// Borro las direcciones de destino establecidas anteriormente
-    	$mail->ClearAddresses();
 
 ?>
 
-<div style="text-align:center; font-size:90%">
+<div style="text-align:center">
 <br />
-<input type="button"  class="spip_bouton" value="Cerrar" onclick="window.close();">
+<input type="button"  class="boton" value="Cerrar" onclick="window.close();">
 </div>
 
 <?php
-}
+
 }
 ?> 
 
