@@ -65,7 +65,7 @@ jQuery.fn.ajaxAction = function() {
 			function(){ $('#'+idtarget+",#apercu_gauche").prepend("<div>"+ajax_image_searching+"</div>");}
 			});
 	});
-	$('.antifocus').onefocus( function(){ this.value=''; } );
+	$('.antifocus').onefocus( function(){ this.value='';$(this).removeClass('antifocus'); } );
 	$('#'+id+' div.sortableChoix').Sortable(
 		{
 			accept : 			'sortableChoixItem',
@@ -119,21 +119,21 @@ jQuery.fn.ajaxAction = function() {
 $(document).ready(function(){
 	var hash = window.location.hash;
 	var onglets = $('#barre_onglets div.onglet');
-	$(onglets)
-		.each(function(){ $(this).desactive_onglet()})
-		.click(function(){ $(this).active_onglet(); })
-		.mouseout(function(){$(onglet_actif).addClass('onglet_on');});
-	if ((hash=='#champs')||(hash=='#champ_visible')||(hash=='#nouveau_champ'))
-		$(onglets).eq(2).active_onglet(hash);
-	else if (hash=='#proprietes')
-		$(onglets).eq(1).active_onglet();
-	else if (hash=='#resume')
-		$(onglets).eq(0).active_onglet();
-	else
-		$(onglets).eq(2).active_onglet();
-
-	$('#champs').ajaxAction();
+	if ($(onglets).length==3){
+		$(onglets)
+			.each(function(){ $(this).desactive_onglet()})
+			.click(function(){ $(this).active_onglet(); })
+			.mouseout(function(){$(onglet_actif).addClass('onglet_on');});
+		if ((hash=='#champs')||(hash=='#champ_visible')||(hash=='#nouveau_champ'))
+			$(onglets).eq(2).active_onglet(hash);
+		else if (hash=='#proprietes')
+			$(onglets).eq(1).active_onglet();
+		else if (hash=='#resume')
+			$(onglets).eq(0).active_onglet();
+		else
+			$(onglets).eq(2).active_onglet();
+		$('#champs').ajaxAction();
+	}
 	$('#proprietes').ajaxAction();
-	
 
 });

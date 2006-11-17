@@ -209,7 +209,7 @@ function exec_forms_edit(){
 		$row['texte'] = "";
 		$row['moderation'] = "priori";
 		$row['public'] = "non";
-		$row['focus'] = "antifocus";
+		$focus = "antifocus";
 		
 		$action_link = generer_action_auteur("forms_edit","new",urlencode($redirect));
 	}

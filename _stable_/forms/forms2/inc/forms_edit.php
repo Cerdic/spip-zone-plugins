@@ -178,7 +178,7 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 		$out .= "<br />\n";
 	}
 	if ($type == 'select' || $type == 'multiple') {
-		global $ajout_choix;
+		$ajout_choix = _request('ajout_choix');
 
 		$out .= "<div style='margin: 5px; padding: 5px; border: 1px dashed $couleur_claire;'>";
 		$out .= _T("forms:liste_choix")."&nbsp;:<br />\n";
