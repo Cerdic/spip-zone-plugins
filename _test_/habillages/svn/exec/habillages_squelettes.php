@@ -180,7 +180,7 @@ EOF;
 	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_squelettes-48.png">';
 	gros_titre(_T('habillages:icone_habillages_squelettes'));
 
-	barre_onglets("habillages", "");
+	echo barre_onglets("habillages", "");
 	
 	debut_gauche();
 	debut_boite_info();

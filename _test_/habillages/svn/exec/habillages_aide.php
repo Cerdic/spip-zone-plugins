@@ -92,7 +92,7 @@ EOF;
 	echo '<img src="' . _DIR_PLUGIN_HABILLAGES. '/../img_pack/habillages_aide-48.png">';
 	gros_titre(_T('habillages:aide_habillages_icones'));
 
-	barre_onglets("habillages", "");
+	echo barre_onglets("habillages", "");
 	
 	debut_gauche();
 	debut_boite_info();
