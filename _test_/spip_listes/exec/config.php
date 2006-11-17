@@ -34,7 +34,7 @@ function exec_config()
 
 global $connect_statut;
 global $connect_toutes_rubriques;
-global $connect_id_auteur;
+global $connect_id_auteur,$couleur_foncee;
 global $statut_abo,$reinitialiser_config, $Valider_reinit,$changer_config;
 global $_POST;
 
@@ -235,6 +235,34 @@ echo "</form>";
 		fin_cadre_trait_couleur();
 
 
+$deb = lire_meta('debut');
+//hum... !deb
+if ( !($deb) OR ($reinitialiser_config == 'oui' AND $Valider_reinit)) {
+spip_query("DELETE from spip_messages WHERE statut='encour'");
+ecrire_meta('debut', 0 ) ;
+ecrire_meta('lock' , 'non') ;
+ecrire_meta('total_auteurs' , 0) ;
+ecrire_metas();
+}
+
+debut_cadre_relief("redacteurs-24.gif", false, "", _T('spiplistes:tableau_bord'));
+
+echo "<form action='".generer_url_ecrire('config')."' method='post'>";
+echo "<input type='hidden' name='reinitialiser_config' value='oui'>";	
+
+	echo "<br />"._T('spiplistes:lock').lire_meta('lock') ;
+	echo "<br />"._T('spiplistes:mail_a_envoyer').lire_meta('total_auteurs') ;
+	echo "<br />"._T('spiplistes:mail_tache_courante').lire_meta('debut') ;
+	
+
+	
+echo "<input type='submit' name='Valider_reinit' value='"._T('spiplistes:reinitialiser')."' class='fondo' style='float:right'>";
+echo "<hr style='clear:both;visibility:hidden'>";
+echo "</form>";	
+fin_cadre_relief();
+
+// MODE CONFIG FIN -------------------------------------------------------------
+
 
 // SQUELETTES: visionner les patrons---------------------------------------
 //
@@ -244,8 +272,7 @@ echo "</form>";
 	debut_cadre_relief();
 
 	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
-	echo "<tr><td bgcolor='$couleur_foncee' background='img_pack/rien.gif'>
-	<b><font face='Verdana,Arial,Sans,sans-serif' size=3 COLOR='#FFFFFF'>"._T('spiplistes:definir_squel')."</font></b></td></tr>";
+	echo "<tr><td bgcolor='$couleur_foncee' background='img_pack/rien.gif'><b><font face='Verdana,Arial,Sans,sans-serif' size=3 COLOR='#FFFFFF'>"._T('spiplistes:definir_squel')."</font></b></td></tr>";
 	echo "<tr><td bgcolor='#FFFFFF' background='img_pack/rien.gif' >";
 	echo " </td></tr>";
 	echo "<tr><td bgcolor='#EEEECC' background='img_pack/rien.gif' >";
@@ -326,11 +353,13 @@ if (isset($_POST['patron'])) {
      echo _T('spiplistes:date_ref').": $date\n";
      echo "<h3>HTML</h3><a href=\"".generer_url_public('patron_switch',"patron=".$patron."&date=".$date)."\">(Plein &eacute;cran)</a><br /><br />\n";
      echo "<iframe width=\"100%\" height=\"500\" src=\"".generer_url_public('patron_switch',"patron=".$patron."&date=".$date)."\"></iframe>\n";
-     echo "<h3>"._T('spiplistes:val_texte')."</h3><a href=\"".generer_url_public('patron_switch',"patron=".$patron."&date=".$date."&format=texte")."\">(Plein &eacute;cran)</a><br /><br />\n";  
+  echo "<h3>"._T('spiplistes:val_texte')."</h3><br /><br />\n";  
     
-    echo generer_url_public('patron_switch',"patron=$patron&date=$date") ;
-$texte_patron = recuperer_page(generer_url_public('patron_switch',"patron=$patron",true)) ;
-echo $texte_patron.version_texte($texte_patron) ;
+// echo generer_url_public('patron_switch',"patron=$patron&date=$date") ;
+$texte_patron = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;
+echo "<textarea name='texte' rows='20' class='formo' cols='40' wrap=soft>";
+	echo version_texte($texte_patron);
+echo "</textarea><p>\n";
            
     }
 	// doit on visualiser un squelette ? - fin
@@ -339,35 +368,6 @@ echo $texte_patron.version_texte($texte_patron) ;
 
 // SQUELETTES FIN ---------------------------------------------------------
 
-
-
-$deb = lire_meta('debut');
-//hum... !deb
-if ( !($deb) OR ($reinitialiser_config == 'oui' AND $Valider_reinit)) {
-spip_query("DELETE from spip_messages WHERE statut='encour'");
-ecrire_meta('debut', 0 ) ;
-ecrire_meta('lock' , 'non') ;
-ecrire_meta('total_auteurs' , 0) ;
-ecrire_metas();
-}
-
-debut_cadre_relief("redacteurs-24.gif", false, "", _T('spiplistes:tableau_bord'));
-
-echo "<form action='".generer_url_ecrire('config')."' method='post'>";
-echo "<input type='hidden' name='reinitialiser_config' value='oui'>";	
-
-	echo "<br />"._T('spiplistes:lock').lire_meta('lock') ;
-	echo "<br />"._T('spiplistes:mail_a_envoyer').lire_meta('total_auteurs') ;
-	echo "<br />"._T('spiplistes:mail_tache_courante').lire_meta('debut') ;
-	
-
-	
-echo "<input type='submit' name='Valider_reinit' value='"._T('spiplistes:reinitialiser')."' class='fondo' style='float:right'>";
-echo "<hr style='clear:both;visibility:hidden'>";
-echo "</form>";	
-fin_cadre_relief();
-
-// MODE CONFIG FIN -------------------------------------------------------------
 
 //$spiplistes_version = "SPIP-listes 1.9b2";
 echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$GLOBALS['spiplistes_version']."<p>" ;
