@@ -60,6 +60,7 @@ function affichage_donnees_tous($type_form, $titre_page, $titre_type, $titre_ajo
 	echo debut_page($titre_page, "documents", "forms");
 	if (!$retour = _request('retour'))
 		$retour = generer_url_ecrire($type_form.'s_tous');
+	echo "<table><tr><td>";
 	echo "<div style='float:left;'>";
 	echo icone_horizontale(_T('icone_retour'), urldecode($retour), "../"._DIR_PLUGIN_FORMS."img_pack/$type_form-24.png", "rien.gif",false);
 	echo "</div>";
@@ -81,7 +82,7 @@ function affichage_donnees_tous($type_form, $titre_page, $titre_type, $titre_ajo
 	$contexte = array('id_form'=>_request('id_form'),'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
 	echo recuperer_fond("exec/template/donnees_tous",$contexte);
 	
-	echo "<br />\n";
+	echo "</td></tr></table><br />\n";
 	
 
 	echo fin_page();
