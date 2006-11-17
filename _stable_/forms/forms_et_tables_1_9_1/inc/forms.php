@@ -235,7 +235,7 @@
 				$url[$champ][] = generer_url_ecrire("forms_telecharger","id_donnee=$id_donnee&champ=$champ&retour=$retour");
 			}
 			else if (in_array($type,array('select','multiple'))) {
-				if ($row3=spip_fetch_array(spip_query("SELECT titre FROM spip_forms_champs_choix WHERE champ="._q($champ)." AND choix="._q($row['valeur']))))
+				if ($row3=spip_fetch_array(spip_query("SELECT titre FROM spip_forms_champs_choix WHERE id_form="._q($row['id_form'])." AND champ="._q($champ)." AND choix="._q($row['valeur']))))
 					$values[$champ][]=$row3['titre'];
 				else
 					$values[$champ][]= $row['valeur'];
