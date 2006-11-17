@@ -13,7 +13,7 @@
  */
 
 	// compatibilite 1.9.1
-	if ($GLOBALS['spip_version_code']<1.9.2){
+	if ($GLOBALS['spip_version_code']<1.92){
 		// Concatener des chaines
 		// #TEXTE|concat{texte1,texte2,...}
 		// http://doc.spip.org/@concat
