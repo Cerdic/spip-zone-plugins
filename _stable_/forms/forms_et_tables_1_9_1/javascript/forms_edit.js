@@ -60,6 +60,7 @@ jQuery.fn.ajaxAction = function() {
 				$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu",function(data){refresh_apercu(data);});
 				if (idtarget!='proprietes')
 					$('#proprietes').load(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=proprietes",function(){ $('#proprietes').ajaxAction(); });
+				forms_init_multi();					
 			},
 			"before":
 			function(){ $('#'+idtarget+",#apercu_gauche").prepend("<div>"+ajax_image_searching+"</div>");}
