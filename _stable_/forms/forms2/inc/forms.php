@@ -33,7 +33,8 @@
 		while ($row = spip_fetch_array($res)){
 			$type = $row['type'];
 			$champ = $row['champ'];
-			$structure[$champ]=array('type'=>$row['type'],'titre'=>$row['titre']);
+			foreach ($row as $k=>$v)
+				$structure[$champ][$k] = $v;
 			if (($type=='select') OR ($type='multiple')){
 				$res2 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ)." ORDER BY rang");
 				while ($row2 = spip_fetch_array($res2))
@@ -63,6 +64,7 @@
 	}
 
 	function Forms_csvimport_ajoute_table_csv($data, $id_form, $assoc_field, &$erreur){
+		include_spip('inc/forms_type_champs');
 		$assoc = array_flip($assoc_field);
 		$res = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form)." AND type_form NOT IN ('','sondage')");
 		if (!$row = spip_fetch_array($res)) {
@@ -81,41 +83,62 @@
 				// creation de la donnee si necessaire
 				$creation = true;
 				$id_donnee = 0;
-				if ($cle) {
-					$id_donnee = $ligne[$cle];
-					$res = spip_query("SELECT * FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee)." AND id_form="._q($id_form));
-					if ($row = spip_fetch_array($res)){
-						$creation = false;
-						$set = "";
-						foreach(array('date','url','ip','id_auteur') as $champ)
-							if (isset($assoc_field['$champ'])) $set .= "$champ="._q($ligne[$assoc_field['date']]).", ";
-						$set.=" maj=NOW()";
-						spip_query("UPDATE spip_forms_donnees $set WHERE id_donnee="._q($id_donnee)." AND id_form="._q($id_form));
+				// verifier la validite de l'import
+				$c = array();
+				foreach($structure as $champ=>$infos){
+					if ($infos['type'] != 'multiple'){
+						$c[$champ] = "";
+					  if ((isset($assoc[$champ]))&&(isset($ligne[$assoc[$champ]])))
+					  	$c[$champ] = $ligne[$assoc[$champ]];
 					}
-				}
-				if ($creation){
-					$id_auteur = $GLOBALS['auteur_session'] ? intval($GLOBALS['auteur_session']['id_auteur']) : 0;
-					$ip = $GLOBALS['REMOTE_ADDR'];
-					$url = _DIR_RESTREINT_ABS;
-					if ($cle){
-						if (intval($id_donnee))
-							spip_abstract_insert("spip_forms_donnees","(id_donnee,id_form,date,ip,id_auteur,url,confirmation,statut,maj)","("._q($id_donnee).","._q($id_form).", NOW(),"._q($ip).","._q($id_auteur).","._q($url).", 'valide', 'publie', NOW() )");
+					else {
+						$c[$champ] = array();
+						foreach($infos['choix'] as $choix=>$t)
+						  if ((isset($assoc[$choix]))&&(isset($ligne[$assoc[$choix]])))
+						  	if (strlen($ligne[$assoc[$choix]]))
+						  		$c[$champ][] = $choix;
 					}
-					else
-						spip_abstract_insert("spip_forms_donnees","(id_form,date,ip,id_auteur,url,confirmation,statut,maj)","("._q($id_form).", NOW(),"._q($ip).","._q($id_auteur).","._q($url).", 'valide', 'publie', NOW() )");
-					$id_donnee = spip_insert_id();
-				}
-				if ($id_donnee){
-					foreach($structure as $champ=>$infos){
-					  if ((isset($assoc[$champ]))&&(isset($ligne[$assoc[$champ]]))){
-					  	if (!$creation)
-					  		spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champ));
-					  	spip_query("INSERT INTO spip_forms_donnees_champs (id_donnee,champ,valeur,maj) VALUES ("._q($id_donnee).","._q($champ).","._q($ligne[$assoc[$champ]]).", NOW() )");
-					  }
-			 		}
-				}
-				else 
-				  $erreur[$count_lignes][] = "ajout impossible ::id_donnee nul::<br />";
+		 		}
+		 		$err = Forms_valide_champs_reponse_post($id_auteur, $c , $structure);
+		 		if (is_array($err) && count($err)) $erreur[$count_lignes] = $err;
+		 		else {
+					if ($cle) {
+						$id_donnee = $ligne[$cle];
+						$res = spip_query("SELECT * FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee)." AND id_form="._q($id_form));
+						if ($row = spip_fetch_array($res)){
+							$creation = false;
+							$set = "";
+							foreach(array('date','url','ip','id_auteur') as $champ)
+								if (isset($assoc_field['$champ'])) $set .= "$champ="._q($ligne[$assoc_field['date']]).", ";
+							$set.=" maj=NOW()";
+							spip_query("UPDATE spip_forms_donnees $set WHERE id_donnee="._q($id_donnee)." AND id_form="._q($id_form));
+						}
+					}
+					if ($creation){
+						$id_auteur = $GLOBALS['auteur_session'] ? intval($GLOBALS['auteur_session']['id_auteur']) : 0;
+						$ip = $GLOBALS['REMOTE_ADDR'];
+						$url = _DIR_RESTREINT_ABS;
+						if ($cle){
+							if (intval($id_donnee))
+								spip_abstract_insert("spip_forms_donnees","(id_donnee,id_form,date,ip,id_auteur,url,confirmation,statut,maj)","("._q($id_donnee).","._q($id_form).", NOW(),"._q($ip).","._q($id_auteur).","._q($url).", 'valide', 'publie', NOW() )");
+						}
+						else
+							spip_abstract_insert("spip_forms_donnees","(id_form,date,ip,id_auteur,url,confirmation,statut,maj)","("._q($id_form).", NOW(),"._q($ip).","._q($id_auteur).","._q($url).", 'valide', 'publie', NOW() )");
+						$id_donnee = spip_insert_id();
+					}
+					if ($id_donnee){
+						foreach($c as $champ=>$values){
+						  	if (!$creation)
+						  		spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champ));
+						  	if (!is_array($values)) $values = array($values);
+						  	foreach($values as $v)
+						  		if (strlen($v))
+						  			spip_query("INSERT INTO spip_forms_donnees_champs (id_donnee,champ,valeur,maj) VALUES ("._q($id_donnee).","._q($champ).","._q($v).", NOW() )");
+				 		}
+					}
+					else 
+					  $erreur[$count_lignes][] = "ajout impossible ::id_donnee nul::<br />";
+		 		}
 			}
 		}
 	}

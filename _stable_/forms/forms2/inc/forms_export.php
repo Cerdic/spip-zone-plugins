@@ -89,31 +89,8 @@ function Forms_formater_les_reponses($id_form, $format, $separateur, &$fichiers,
 	$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo($titre))));
 
 	$s = '';
-
 	$structure = Forms_structure($id_form);
-	// Preparer la table de traduction code->valeur & mise en table de la structure pour eviter des requettes
-	// a chaque ligne
-	$structure = array();
-	$trans = array();
-	$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)." ORDER BY rang");
-	while ($row = spip_fetch_array($res)){
-		$type = $row['type'];
-		$champ = $row['champ'];
-		$structure[$champ]=array('type'=>$row['type'],'titre'=>$row['titre']);
-		if (($type=='select') OR ($type='multiple')){
-			$res2 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ)." ORDER BY rang");
-			while ($row2 = spip_fetch_array($res2))
-				$structure[$champ]['choix'][$row2['choix']] = trim(textebrut(typo($row2['titre'])));
-		}
-		else if ($type == 'mot') {
-			$id_groupe = intval($row['extra_info']);
-			$res2 = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe="._q($id_groupe));
-			while ($row2 = spip_fetch_array($res2)) {
-				$structure[$champ]['choix'][$row2['id_mot']] = trim(textebrut(typo($row2['titre'])));
-			}
-		}
-	}
-
+	
 	if ($head) {
 		// Une premiere ligne avec les noms de champs
 		$ligne1 = $ligne2 = array();
@@ -121,7 +98,7 @@ function Forms_formater_les_reponses($id_form, $format, $separateur, &$fichiers,
 		$ligne1[] = 'date';
 		$ligne2[] = _T("forms:date");
 		$ligne1[] = 'url';
-		$ligne1[] = $ligne2[] = _T("forms:page");
+		$ligne2[] = _T("forms:page");
 		foreach ($structure as $champ => $t) {
 			$ligne1[] = $champ;
 			$ligne2[] = textebrut(typo($t['titre']));

@@ -79,15 +79,21 @@
 		return ($s = $noms[$type]) ? $s : $type;
 	}
 	
-	function Forms_valide_champs_reponse_post($id_form){
+	function Forms_valide_champs_reponse_post($id_form, $c = NULL, $structure = NULL){
 		$erreur = '';
-		$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form));
-		while($row = spip_fetch_array($res)){
-			$champ = $row['champ'];
-			$type = $row['type'];
-			$val = _request($champ);
+		if (!$structure){
+			include_spip("inc/forms");
+			$structure = Forms_structure($id_form);
+		}
+		foreach($structure as $champ=>$infos){
+			$type = $infos['type'];
+			if (!$c) 
+				$val = _request($champ);
+			else
+				$val = isset($c[$champ])?$c[$champ]:NULL;
+
 			if (!$val || ($type == 'fichier' && !$_FILES[$champ]['tmp_name'])) {
-				if ($row['obligatoire'] == 'oui')
+				if ($infos['obligatoire'] == 'oui')
 					$erreur[$champ] = _T("forms:champ_necessaire");
 				continue;
 			}
@@ -127,6 +133,18 @@
 				if ($erreur[$champ]) {
 					supprimer_fichier($_FILES[$champ]['tmp_name']);
 				}
+			}
+			if ($type=='select' or $type=='mot')
+				if (!isset($infos['choix'][$val]))
+					$erreur[$champ] = _T("forms:donnee_inattendue");
+			if ($type=='multiple')
+				foreach($val as $v)
+					if (!isset($infos['choix'][$v]))
+						$erreur[$champ] = _T("forms:donnee_inattendue");
+			if (isset($GLOBALS['forms_types_champs_etendus'][$type])){
+				$match = $GLOBALS['forms_types_champs_etendus'][$type]['match'];
+				if (strlen($match) && !preg_match($match,$val))
+					$erreur[$champ] = _T("forms:champs_perso_invalide");
 			}
 		}
 		return $erreur;

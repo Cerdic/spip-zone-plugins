@@ -40,10 +40,16 @@ function csvimport_table_fields($mode,$table,$id_form){
 		return $table_fields;
 	}
 	if ($mode=='form' && $id_form){
+		include_spip('inc/forms');
+		$structure = Forms_structure($id_form);
 		$table_fields['id_donnee'] = 'id_donnee';
-		$res = spip_query("SELECT * FROM spip_forms_champs WHERE type NOT IN ('separateur','textestatique') AND id_form="._q($id_form)." ORDER BY rang");
-		while ($row = spip_fetch_array($res)){
-			$table_fields[$row['champ']] = $row['titre'];
+		foreach ($structure as $champ=>$info){
+			if ($info['type']!='multiple')
+				$table_fields[$champ] = $info['titre'];
+			else 
+				foreach ($info['choix'] as $choix=>$value) {
+					$table_fields[$choix] = $value;
+				}
 		}
 		return $table_fields;
 	}

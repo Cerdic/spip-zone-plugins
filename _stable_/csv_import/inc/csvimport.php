@@ -229,8 +229,8 @@ function csvimport_show_erreurs($erreur){
 	if (count($erreur)>0){
 		$output .= "<div class='messages'>";
 		foreach($erreur as $steper=>$desc)
-			foreach($desc as $val)
-				$output .=  "<strong>$steper::$val</strong><br />";
+			foreach($desc as $key=>$val)
+				$output .=  "<strong>$steper::$key:$val</strong><br />";
 		$output .=  "</div>\n";
 	}
 	return $output;
