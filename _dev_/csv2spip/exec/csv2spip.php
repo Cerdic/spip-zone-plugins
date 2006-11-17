@@ -79,12 +79,7 @@ function exec_csv2spip() {
 				 
 // TRAITEMENT DES DONNEES ENVOYEES PAR LE FORMULAIRE DE SAISIE
 
-// Etape 0 : vérification que le préfixe des tables SPIP est OK et définition des noms de tables SPIP
-/*		if ($prefix_tables_SPIP == '') { 
-			 <p style="background-color: red;">Attention le système n'a pu déterminer le nom de la table des utilisateurs de SPIP, veuillez éditer le fichier <strong>csv2spip.php</strong> pour vérification des éléments configurés</p>
- 	     exit();
-		}
-*/
+// Etape 0 : définition des noms de tables SPIP
 		$Trubriques = 'spip_rubriques';
 		$Tauteurs = 'spip_auteurs';
 		$Tauteurs_rubriques = 'spip_auteurs_rubriques';
@@ -256,12 +251,15 @@ function exec_csv2spip() {
 				$_POST['ss_groupes_admin'] == 1 ? $ss_groupes_admin = 1 : $ss_groupes_admin = 0;
 				$_POST['ss_groupes_visit'] == 1 ? $ss_groupes_visit = 1 : $ss_groupes_visit = 0;
 				if ($ss_groupes_redac == 1 OR $ss_groupes_admin == 1 OR $ss_groupes_visit == 1) {
+/*
 					 $sql11 = spip_query("SELECT valeur FROM spip_meta WHERE nom = 'plugin' LIMIT 1");
     			 $result11 = spip_fetch_array($sql11);
     			 $ch_meta = $result11['valeur'];
     			 $Tch_meta = explode(',', $ch_meta);
+					 if (in_array('acces_groupes', $Tch_meta)) {			
+*/
     		// si le plugin acces_groupes est activé
-					 if (in_array('acces_groupes', $Tch_meta)) {					 
+					 if (defined(_DIR_PLUGIN_ACCESGROUPES)) {					 		 
 							 $Terr_acces_groupes = array();
 							 $Tres_acces_groupes = array();
 							 $Tgroupes_accesgroupes = array();
