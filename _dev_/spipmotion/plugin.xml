@@ -23,13 +23,18 @@
 	<prefix>
 	spipmotion
 	</prefix>
+	
 	<pipeline>
 		<nom>ajouter_onglets</nom>
 		<inclure>spipmotion_pipelines.php</inclure>
-	<pipeline>
+	</pipeline>
+	
 	<pipeline>
 		<nom>affiche_droite</nom>
 		<action>affiche_droite</action>
 		<inclure>spipmotion_pipelines.php</inclure>
 	</pipeline>
+	
+
+	
 </plugin>

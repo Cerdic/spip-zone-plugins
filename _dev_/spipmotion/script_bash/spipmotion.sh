@@ -37,8 +37,6 @@ Pour visualiser le manuel de spipmotion, faîtes : \"./spipmotion --help\""
 Pour visualiser le manuel de spipmotion, faîtes : \"./spipmotion --help\""
 		pasvideosortie="spipmotion : aucune vidéo de sortie n'a été spécifiée
 Pour visualiser le manuel de spipmotion, faîtes : \"./spipmotion --help\""
-		extractvid="Extraction de la vidéo"
-		extractson="Extraction de la bande son"
 		assemblage="Conversion en .flv"
 		titredejala="Fichier de sortie existant"
 		textedejala="Attention, le fichier de sortie que vous avez spécifié existe déjà. 
@@ -47,8 +45,6 @@ Si non, le fichier déjà présent sera renommé."
 		oui="oui"
 		non="non"
 		succes="Succès ! La vidéo a bien été convertie en flv !"
-		nonamr="Il apparaît que votre version de ffmpeg n'a pas été compilée avec le support d'AMR. Ce programme en a besoin pour fonctionner correctement
-Pour visualiser le manuel de spipmotion, faîtes : \"./spipmotion --help\""
 
 #################################################
 
@@ -92,6 +88,26 @@ esac
 
 case "$sortie" in
   "") "$sortie" = "$entree.flv"
+esac
+
+case "$size" in
+  "") size="320x240"
+esac
+
+case "$bitrate" in
+  "") bitrate="448"
+esac
+
+case "$audiobitrate" in
+  "") audiobitrate="64"
+esac
+
+case "$audiofreq" in
+  "") audiofreq="22050"
+esac
+
+case "$fps" in
+  "") fps="15"
 esac
 
 case "$chemin" in
