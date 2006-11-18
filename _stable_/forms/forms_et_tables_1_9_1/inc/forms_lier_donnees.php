@@ -16,13 +16,13 @@ include_spip("inc/layer");
 include_spip("base/forms");
 include_spip("inc/forms");
 
-function inc_forms_lier_donnees($id_article, $script){
+function inc_forms_lier_donnees($id_article, $script, $deplie=false){
   global $spip_lang_left, $spip_lang_right, $options;
 	global $connect_statut, $options,$connect_id_auteur, $couleur_claire ;
 	
 	$out = "";
 	$out .= "<a name='tables'></a>";
-	if (_request('cherche_donnee')){
+	if (_request('cherche_donnee') || $deplie){
 		$bouton = bouton_block_visible("tables_article");
 		$debut_block = 'debut_block_visible';
 	}
@@ -37,7 +37,7 @@ function inc_forms_lier_donnees($id_article, $script){
 	//
 	// Afficher les donnees liees, rangees par tables
 	//
-	list($s,$les_donnees) = Forms_formulaire_article_afficher_donnees($id_article);
+	list($s,$les_donnees) = Forms_formulaire_article_afficher_donnees($id_article,$script);
 	$out .= $s;
 	
 	$out .= $debut_block("tables_article",true);
@@ -53,20 +53,44 @@ function inc_forms_lier_donnees($id_article, $script){
 }
 
 function Forms_formulaire_article_chercher_donnee($id_article,$les_donnees, $script){
-  global $spip_lang_right;
+  global $spip_lang_right,$spip_lang_left,$couleur_claire,$couleur_foncee;
 	$out = "";
 	$recherche = _request('cherche_donnee');
 	
 	if (!include_spip("inc/securiser_action"))
 		include_spip("inc/actions");
 	$redirect = ancre_url(generer_url_ecrire($script,"id_article=$id_article"),'tables');
-	$action = generer_action_auteur("forms_lier_donnees","$id_article,ajouter",urlencode($redirect));
+	$action = generer_action_auteur("forms_lier_donnees","$id_article,ajouter");
 	
-	$out .= "<form action='$action' method='post'>";
+	$out .= "<form action='$action' method='post' class='ajaxAction' >";
 	$out .= form_hidden($action);
-	$out .= "<div style='text-align:$spip_lang_right'>";
-	$out .= "<input type='text' name='cherche_donnee' value='$recherche' />";
+	$out .= "<input type='hidden' name='redirect' value='$redirect' />";
+	$out .= "<input type='hidden' name='idtarget' value='forms_lier_donnees-$id_article' />";
+	$out .= "<input type='hidden' name='redirectajax' value='".generer_url_ecrire('forms_lier_donnees',"id_article=$id_article")."' />";
+	$out .= "<div style='text-align:$spip_lang_left'>";
+	$out .= "<input id ='autocompleteMe' type='text' name='cherche_donnee' value='$recherche' class='forml' />";
 	$out .= Forms_boite_selection_donnees($recherche,$les_donnees);
+	
+	$script_rech = generer_url_ecrire("recherche_donnees","id_article=$id_article",true);
+	$out .= "<input type='hidden' name='autocompleteUrl' value='$script_rech' />";
+
+	$out .= "<style type='text/css' media='all'>
+.autocompleter
+{
+	border: 1px solid $couleur_foncee;
+	width: 350px;
+	background-color: $couleur_claire;
+}
+.autocompleter ul li
+{
+	padding: 2px 10px;
+	white-space: nowrap;
+	font-size: 11px;
+}
+.selectAutocompleter
+{
+	background-color: $couleur_foncee;
+}</style>";
 	
 	$out .= "</div>";
 	$out .= "<div style='text-align:$spip_lang_right'>";
@@ -76,7 +100,7 @@ function Forms_formulaire_article_chercher_donnee($id_article,$les_donnees, $scr
 	return $out;
 }
 
-function Forms_formulaire_article_afficher_donnees($id_article, $les_donnees){
+function Forms_formulaire_article_afficher_donnees($id_article, $script){
 	$out = "";
 
 	$les_donnees = array();
@@ -109,7 +133,14 @@ function Forms_formulaire_article_afficher_donnees($id_article, $les_donnees){
 				$vals[] = $id_donnee;
 				$vals[] = "<a href='".generer_url_ecrire("table_donnee_edit","id_form=$id_form&id_donnee=$id_donnee&retour=".urlencode($retour))."'>"
 					.implode(", ",$champs)."</a>";
-				$vals[] = ajax_action_auteur('forms_lier_donnees', "$id_article,retirer,$id_donnee",'articles',"id_article=$id_article", array(_T('forms:lien_retirer_donnee')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'")));
+				//$vals[] = ajax_action_auteur('forms_lier_donnees', "$id_article,retirer,$id_donnee",'articles',"id_article=$id_article", array(_T('forms:lien_retirer_donnee')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'")));
+				$redirect = ancre_url(generer_url_ecrire($script,"id_article=$id_article"),'tables');
+				$action = generer_action_auteur("forms_lier_donnees","$id_article,retirer,$id_donnee",urlencode($redirect));
+				$action = ancre_url($action,"forms_lier_donnees-$id_article");
+				$redirajax = generer_url_ecrire("forms_lier_donnees","id_article=$id_article");
+				$vals[] = "<a href='$action' rel='$redirajax' class='ajaxAction' >"
+					. _T('forms:lien_retirer_donnee')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'")
+					. "</a>";
 				$table[] = $vals;
 			}
 		}
@@ -139,7 +170,7 @@ function Forms_boite_selection_donnees($recherche, $les_donnees){
 		$out .= "</select>";
 	}
 	else 
-		$out .= "<input type='hidden' name='id_donnee' value='' />";
+		$out .= "<input id='id_donnee' type='hidden' name='id_donnee' value='' />";
 	return $out;
 }
 

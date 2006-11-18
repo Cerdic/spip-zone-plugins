@@ -42,9 +42,9 @@
 		if ($exec=='articles'){
 			$id_article = $flux['args']['id_article'];
 			$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
-			$flux['data'] .= "<div id='forms_lier_donnees-$id_article'>";
+			$flux['data'] .= "<div id='forms_lier_donnees'><div id='forms_lier_donnees-$id_article'>";
 			$flux['data'] .= $forms_lier_donnees($id_article, $exec);
-			$flux['data'] .= "</div>";
+			$flux['data'] .= "</div></div>";
 		}
 		return $flux;
 	}

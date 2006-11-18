@@ -294,11 +294,6 @@ function exec_forms_edit(){
 
 	echo $out;
 
-	echo "<script type='text/javascript'><!--\n var ajaxcharset='utf-8';\n//--></script>";
-	echo "<script src='"._DIR_PLUGIN_FORMS."javascript/interface.js' type='text/javascript'></script>";
-	if (!_request('var_noajax'))
-		echo "<script src='"._DIR_PLUGIN_FORMS."javascript/forms_edit.js' type='text/javascript'></script>";
-
 	echo fin_page();
 }
 
