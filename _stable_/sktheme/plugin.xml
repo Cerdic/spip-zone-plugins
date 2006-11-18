@@ -12,11 +12,11 @@ _ &copy; September 2006 - distributed under GNU/GPL licence.
 <multi>
 Manage theme for SPIP
 _ WATCH OUT: You need to desactivate switcher plugin (quite incompatible because using same process - this means i copied it inside this plugin and i would like to thank  its authors Philippe Drouot and Fil for this nice switcher plugin)
-_ Activate this plugin and manage themes in the configuration menu.
+_ Activate this plugin and manage themes in the {{Configuration}} menu.
 [fr]
 Gestion des th&egrave;mes de SPIP
 _ ATTENTION: D&eacute;sactivez le plugin switcher (ils sont quelque peu incompatibles, car il est monstreusement copi&eacute; dans ce plugin, merci aux auteurs Philippe Drouot et Fil)
-_ Activez ce plugin et g&eacute;r&eacute; les th&egrave;mes dans le menu configuration.
+_ Activez ce plugin et g&eacute;rez les th&egrave;mes dans le menu {{Configuration}}.
 </multi>
 </description>
 	<lien>http://skedus.free.fr/spip/spip.php?article8</lien> <!-- URI de documentation -->
