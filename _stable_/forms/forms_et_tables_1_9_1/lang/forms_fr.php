@@ -9,12 +9,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ajouter_champ' => "Ajouter un champ",
 'ajouter_champ_type' => "Cr&eacute;er un champ de type&nbsp;:",
 'ajouter_choix' => "Ajouter un choix",
-'apparence_formulaire' => "Apparence du formulaire",
+'apparence_formulaire' => "Apparence du formulaire de saisie",
 'article_inserer_un_formulaire'=> "Ins&eacute;rer un formulaire",
 'article_inserer_un_formulaire_detail' => "Vous pouvez ins&eacute;rer des formulaires dans vos articles afin de permettre aux visiteurs d'entrer des informations. Choisissez un formulaire dans la liste ci-dessous et recopiez le raccourci dans le texte de l'article.",
 'article_recopier_raccourci' => "Recopiez ce raccourci dans le texte de l'article pour ins&eacute;rer ce formulaire",
 'articles_utilisant'=> "Articles utilisant ce formulaire",
 'attention' => "Attention :",
+'aucune_reponse'=>"aucune donn&eacute;e",
 'avis_message_confirmation'=>"Un message de confirmation est envoy&eacute; &agrave; @mail@",
 
 'boite_info' => "Cliquez sur les icones pour voir les donn&eacute;es associ&eacute;es a un formulaire, l'editer, le dupliquer, l'exporter, vider les donn&eacute;es ou le supprimer.",
@@ -43,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'changer_choix_multiple' => "Changer en choix multiple",
 'changer_choix_unique' => "Changer en choix unique",
 'choisir_email' => "Choisir l'email en fonction de",
-'confirmer_reponse' => "Confirmer la r&eacute;ponse par mail avec :",
+'confirmer_reponse' => "Envoyer un mail de confirmation avec :",
 'csv_classique' => "CSV classique (,)",
 'csv_excel' => "CSV pour Excel (;)",
 'csv_tab' => "CSV avec tabulations",
@@ -51,8 +52,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date' => "Date",
 'date_invalide' => "Format de la date invalide",
 'dupliquer' => "Dupliquer",
-'donnees_pub'=>"Donn&eacute;es public. Les donn&eacute;es enregitr&eacute;es seront accessibles aux visiteurs du site.",
-'donnees_prot'=>"Donn&eacute;es prot&eacute;g&eacute;. Les donn&eacute;es enregitr&eacute;es ne seront accessibles que depuis l'interface priv&eacute;e.",
+'donnees_pub'=>"Donn&eacute;es publiques. Les donn&eacute;es enregitr&eacute;es seront accessibles aux visiteurs du site.",
+'donnees_prot'=>"Donn&eacute;es prot&eacute;g&eacute;es. Les donn&eacute;es enregitr&eacute;es ne seront accessibles que depuis l'interface priv&eacute;e.",
 
 'echec_upload'=>"Le transfert du fichier a &eacute;chou&eacute;.",
 'editer'=>'Editer',
@@ -87,8 +88,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'liste_choix' => "Liste des choix propos&eacute;s",
 
-'aucune_reponse'=>"aucune donn&eacute;e",
-'une_reponse'=>"une donn&eacute;e",
+'moderation_donnees' => 'Valider les donn&eacute;es avant publication :',
+
 'nombre_reponses'=>"@nombre@ donn&eacute;es",
 'nouveau_champ' => "Nouveau champ",
 'nouveau_choix' => "Nouveau choix",
@@ -98,6 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pas_mail_confirmation'=>"Pas de mail confirmation",
 'probleme_technique'=>"Probl&egrave;me technique. Votre saisie n'a pas pu &ecirc;tre prise en compte.",
 'probleme_technique_upload'=>"Probl&egrave;me technique. Le transfert du fichier a &eacute;chou&eacute;.",
+'publication_donnees' => 'Publication des donn&eacute;es',
 
 'remplir_un_champ'=>"Veuillez remplir au moins un champ.",
 'reponse_enregistree'=>"Votre saisie a &eacute;t&eacute; enregistr&eacute;e.",
@@ -133,6 +135,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'tous_sondages' => "Tous les sondages",
 'toutes_tables' => "Toutes les tables",
 'type_form'=>"Type de formulaire",
+
+'une_reponse'=>"une donn&eacute;e",
 
 'valider'=>"Valider",
 'verif_web' => "v&eacute;rifier l'existence du site Web",

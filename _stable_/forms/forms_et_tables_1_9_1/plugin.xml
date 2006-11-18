@@ -60,7 +60,11 @@
 	</pipeline>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
-		<inclure>forms_boutons.php</inclure>
+		<inclure>forms_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>forms_pipeline.php</inclure>
 	</pipeline>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 </plugin>
