@@ -1,7 +1,7 @@
 <plugin>
  <nom>SkTheme</nom>
  <version>0.6</version>
- <etat>test</etat>
+ <etat>stable</etat>
  <auteur>Skedus
 <multi>
 _ &copy; September 2006 - distributed under GNU/GPL licence.
@@ -15,11 +15,11 @@ _ WATCH OUT: You need to desactivate switcher plugin (quite incompatible because
 _ Activate this plugin and manage themes in the configuration menu.
 [fr]
 Gestion des th&egrave;mes de SPIP
-_ ATTENTION: D&eacute;sactivez le plugin switcher (ils sont quelques peu incompatible, car il est monstreusement copi&eacute; dans ce plugin, merci aux auteurs Philippe Drouot et Fil)
-_ Activez ce plugin et g&eacute;r&eacute; les th&egrave;mes dans le menu configuration
+_ ATTENTION: D&eacute;sactivez le plugin switcher (ils sont quelque peu incompatibles, car il est monstreusement copi&eacute; dans ce plugin, merci aux auteurs Philippe Drouot et Fil)
+_ Activez ce plugin et g&eacute;r&eacute; les th&egrave;mes dans le menu configuration.
 </multi>
 </description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://skedus.free.fr/spip/spip.php?article8</lien> <!-- URI de documentation -->
  <prefix>sktheme</prefix>
  <options>sktheme_options.php</options>
  <pipeline>
