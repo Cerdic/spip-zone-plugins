@@ -134,7 +134,7 @@ $(document).ready(function(){
 		else
 			$(onglets).eq(2).active_onglet();
 		$('#champs').ajaxAction();
+		$('#proprietes').ajaxAction();
 	}
-	$('#proprietes').ajaxAction();
 
 });
