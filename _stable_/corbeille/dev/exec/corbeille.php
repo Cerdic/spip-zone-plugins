@@ -74,7 +74,7 @@ lescript;
 					$id = "id_breve"; 
 					$temps = "date_heure"; 
 					$page_voir = array("breves_voir",'id_breve');
-					$libelle = _L("Toutes les brèves dans la corbeille :");
+					$libelle = _L("Toutes les br&egrave;ves dans la corbeille :");
 					break;
 				case "articles" : 
 					$statut = "poubelle"; 
