@@ -19,9 +19,7 @@ function forms_init_lang() {
 	//create menu lang for the global form
 	forms_make_menu_lang(forms_containers);
 	//init fields
-	console.time("init");
 	forms_init_multi();
-	console.timeEnd("init");
 }
 
 function forms_make_menu_lang(container,target) {
@@ -39,13 +37,14 @@ function forms_change_lang(el,container,target) {
 	}).end();
 	lang = lang.slice(1,-1);
 	//store the fields inputs for later use (usefull for select)
-	if(!forms_fields[target]) forms_fields[target] = $('input[@id^="nom_"]',target);
+	var target_name = target!=forms_root?target[0].nom_champ.id:"undefined";
+	if(!forms_fields[target_name]) forms_fields[target_name] = $('input[@id^="nom_"]',target);
 	//save the current values
-	forms_fields[target].each(function(){forms_save_lang(this,forms_cur_lang)});
+	forms_fields[target_name].each(function(){forms_save_lang(this,forms_cur_lang)});
 	//change current lang
 	forms_cur_lang = lang;
 	//reinit fields to current lang
-	forms_fields[target].each(function(){forms_set_lang(this,lang)});
+	forms_fields[target_name].each(function(){forms_set_lang(this,lang)});
 }
 
 function forms_init_multi() {
@@ -56,13 +55,12 @@ function forms_init_multi() {
 	forms_fields["undefined"] = $('input[@id^="nom_"]',forms_forms).each(function() {forms_init_field(this,forms_def_lang)});
 	//create menu for each form. The menu is just before the form
 	forms_containers.filter("#forms_lang");
-	forms_forms.prev().each(function() {
+	forms_forms.prev().empty().each(function() {
 		var id = "#"+this.id;
 		//store all form containers to allow menu lang update on each container
 		//when it is triggered by global menu
 		forms_containers.add(id);
 		forms_make_menu_lang($(id),$(this).next());
-		
 	}).end();
 }
 
@@ -71,6 +69,8 @@ function forms_init_field(el,lang) {
 	//1)the title element of the field 
 	//2)boolean multi = the fields has a multi value
 	//3)various lang string
+	//if already inited just return
+	if(el.field_lang) return;
 	var langs;
 	var m = el.value.match(/<multi>(.*?)<\/multi>/m);
 	el.field_lang = {};
