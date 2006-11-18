@@ -60,10 +60,13 @@ jQuery.fn.ajaxAction = function() {
 				$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu",function(data){refresh_apercu(data);});
 				if (idtarget!='proprietes')
 					$('#proprietes').load(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=proprietes",function(){ $('#proprietes').ajaxAction(); });
-				forms_init_multi();					
+				if($('#'+idtarget).is('.forms_champs')) forms_init_multi();					
 			},
 			"before":
-			function(){ $('#'+idtarget+",#apercu_gauche").prepend("<div>"+ajax_image_searching+"</div>");}
+			function(param,form){ 
+				forms_multi_submit.apply(form[0],[param]);
+				$('#'+idtarget+",#apercu_gauche").prepend("<div>"+ajax_image_searching+"</div>");
+			}
 			});
 	});
 	$('.antifocus').onefocus( function(){ this.value='';$(this).removeClass('antifocus'); } );

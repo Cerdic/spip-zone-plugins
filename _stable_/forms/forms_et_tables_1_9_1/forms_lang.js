@@ -1,6 +1,6 @@
 var forms_containers={},forms_fields={},forms_forms,forms_menu_lang;
 var match_multi = /\[([a-z_]+)\](.*?)(?=\[[a-z_]+\]|$)/mig;
-var forms_cur_lang,forms_css_link,forms_css_cur_link={},forms_root;
+var forms_cur_lang={},forms_css_link,forms_css_cur_link={},forms_root;
 forms_css_link = {"cursor":"pointer","margin":"2px 5px","float":"left"};
 $.extend(forms_css_cur_link,forms_css_link);
 $.extend(forms_css_cur_link,{fontWeight:"bold"});
@@ -8,7 +8,7 @@ $.extend(forms_css_cur_link,{fontWeight:"bold"});
 function forms_init_lang() {
 	//Detect if we're on the right page and if multilinguism is activated. If not return.
 	if(window.location.search.indexOf("exec=forms_edit")==-1 || forms_avail_langs.length<=1) return;
-	forms_cur_lang = forms_def_lang;
+	forms_cur_lang["undefined"] = forms_def_lang;
 	forms_root = $("#champs");
 	forms_containers = $("#forms_lang",forms_root);
 	//create menu lang template 
@@ -40,16 +40,18 @@ function forms_change_lang(el,container,target) {
 	var target_name = target!=forms_root?target[0].nom_champ.id:"undefined";
 	if(!forms_fields[target_name]) forms_fields[target_name] = $('input[@id^="nom_"]',target);
 	//save the current values
-	forms_fields[target_name].each(function(){forms_save_lang(this,forms_cur_lang)});
+	if(!forms_cur_lang[target_name]) forms_cur_lang[target_name] = forms_def_lang;
+	forms_fields[target_name].each(function(){forms_save_lang(this,forms_cur_lang[target_name])});
 	//change current lang
-	forms_cur_lang = lang;
+	if(target_name=="undefined") forms_cur_lang = {};
+	forms_cur_lang[target_name] = lang;
 	//reinit fields to current lang
 	forms_fields[target_name].each(function(){forms_set_lang(this,lang)});
 }
 
 function forms_init_multi() {
 	//store all the fields forms
-	forms_forms = $("div.forms_champs form",forms_root).unsubmit(forms_multi_submit).submit(forms_multi_submit);
+	forms_forms = $("div.forms_champs form",forms_root);
 	//init the value of the field to current lang
 	forms_fields = {};
 	forms_fields["undefined"] = $('input[@id^="nom_"]',forms_forms).each(function() {forms_init_field(this,forms_def_lang)});
@@ -99,7 +101,7 @@ function forms_set_lang(el,lang) {
 
 function forms_save_lang(el,lang) {
 	//if the lang value is equal to the def lang do nothing
-	//else save value but if the filed is not empty, delete lang value
+	//else save value but if the field is not empty, delete lang value
 	if(el.field_lang[forms_def_lang]!=el.value) { 
 		if(!el.value) {
 			delete el.field_lang[lang];
@@ -110,11 +112,12 @@ function forms_save_lang(el,lang) {
 	}
 }
 
-//This func receives the forms that is going to be submitted
-function forms_multi_submit() {
+//This func receives the form that is going to be submitted
+function forms_multi_submit(params) {
+	var form = this;
 	$('input[@id^="nom_"]',this).each(function(){
 		//save data before submit
-		forms_save_lang(this,forms_cur_lang);
+		forms_save_lang(this,forms_cur_lang[form.nom_champ.id] || forms_def_lang);
 		//build the string value
 		var def_value = this.field_lang[forms_def_lang];
 		if(!this.multi) this.value = def_value;
@@ -131,4 +134,5 @@ function forms_multi_submit() {
 			this.value = count!=1?"<multi>"+value+"</multi>":value.replace(/^\[[a-z_]+\]/,'');
 		} 
 	});
+	$.extend(params,$(form).formToArray(false));
 }
