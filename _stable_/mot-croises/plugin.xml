@@ -28,6 +28,8 @@
 -#def 2
 -#def 3
 </vertical></code>
+Ce plugin fonctionne de fa&ccedil;on optimale sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>, ainsi que dans l'espace priv&eacute;.
+_ il n&eacute;cessite l'activation du plugin {{jQuery}} ou une version de spip sup&eacute;rieure à {{1.9.2}}.
 	</description>
 	<lien>http://www.spip-contrib.net/article1379.html</lien> <!-- URI de documentation -->
 	<fonctions>mot_croises_fonctions.php</fonctions>
