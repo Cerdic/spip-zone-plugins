@@ -47,7 +47,7 @@
 		$id_table = $boucle->id_table;
 		$boucle->from[$id_table] =  "spip_forms_donnees";
 	
-		if (!isset($boucle->modificateur['tout'])){
+		if (!isset($boucle->modificateur['tout']) && !$boucle->tout){
 			$boucle->where[]= array("'='", "'$id_table.confirmation'", "'\"valide\"'");
 			$boucle->where[]= array("'='", "'$id_table.statut'", "'\"publie\"'");
 		}
@@ -63,7 +63,7 @@
 		$id_table = $boucle->id_table;
 		$boucle->from[$id_table] =  "spip_forms_champs";
 	
-		if (!isset($boucle->modificateur['tout'])){
+		if (!isset($boucle->modificateur['tout']) && !$boucle->tout){
 			$boucle->where[]= array("'='", "'$id_table.public'", "'\"oui\"'");
 		}
 	
@@ -78,7 +78,7 @@
 		$id_table = $boucle->id_table;
 		$boucle->from[$id_table] =  "spip_forms_donnees_champs";
 	
-		if (!isset($boucle->modificateur['tout'])){
+		if (!isset($boucle->modificateur['tout']) && !$boucle->tout){
 			$boucle->from["champs"] =  "spip_forms_champs";
 			$boucle->from["donnees"] =  "spip_forms_donnees";
 			$boucle->where[]= array("'='", "'$id_table.id_donnee'", "'donnees.id_donnee'");
