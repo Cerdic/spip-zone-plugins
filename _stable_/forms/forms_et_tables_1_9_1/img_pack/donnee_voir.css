@@ -9,17 +9,17 @@ span.donnees{
 
 span.donnee-champ {
 	display: block;
+	clear: left;
 }
 span.donnee-champ-label {
 	width: 150px;
 	display: block;
 	float: left;
-	clear: left;
 }
 
 span.donnee-champ-data {
 	display: block;
-	margin-left: 150px;
+	margin-left: 160px;
 }
 span.nettoyeur{
 	clear: both;
