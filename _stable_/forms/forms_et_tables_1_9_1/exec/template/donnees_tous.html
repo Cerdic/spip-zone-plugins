@@ -1,5 +1,7 @@
 #CACHE{0}
 #SET{colonnes_sans_tri,'0,1'}
+	<link rel="stylesheet" type="text/css" href="#EVAL{_DIR_PLUGIN_FORMS}img_pack/donnees_tous.css" />
+	<script type="text/javascript" src="#EVAL{_DIR_PLUGIN_FORMS}javascript/jquery.tablesorter.dev.js"></script>
 <B_head>
 <div class='liste'>
 <div style='position: relative;'>
@@ -39,8 +41,8 @@
 </tbody>
 </table>
 </div>
-	<script type="text/javascript" src="#EVAL{_DIR_PLUGIN_FORMS}javascript/jquery.tablesorter.dev.js"></script>
-	<script type="text/javascript">
+</B_head>
+	<script type="text/javascript"><!--
 	var search_string='<:bouton_chercher:>';
 	var clear_string='<:info_tout_afficher:>';
 	var apply_string='<:bouton_valider:>';
@@ -61,66 +63,5 @@
 	}).sortStop(function(a){
 		$("div#sorting").hide();
 	});
+	// -->
 	</script>	
-	<style type="text/css">
-	div.liste { clear:both;width:auto; }
-	.highlight {
-		background-color: #3D3D3D;
-		font-weight: bold;
-	}
-	#donnees th {
-		vertical-align:top;
-		background-repeat: no-repeat;
-		border-left: 1px solid #FFF;
-		border-right: 1px solid #000;
-		border-top: 1px solid #FFF;
-		height: auto;
-		padding:0px;
-		margin:0px;
-		height:34px;
-	}
-	#donnees th.neutre {padding-left: 0px;background-image: url(#EVAL{_DIR_PLUGIN_FORMS}img_pack/header.png);	}
-	#donnees th.header {padding-left: 15px;background-image: url(#EVAL{_DIR_PLUGIN_FORMS}img_pack/header-bg.png);	}
-	#donnees th.headerSortUp {padding-left: 15px;background-image: url(#EVAL{_DIR_PLUGIN_FORMS}img_pack/header-asc.png);	}
-	#donnees th.headerSortDown {padding-left: 15px;background-image: url(#EVAL{_DIR_PLUGIN_FORMS}img_pack/header-desc.png);}
-	#sorting div {
-		font-weight: bold;
-	}
-	#filter {
-		text-align: left;
-		width: auto;
-		padding: 5px;
-		background-color: #ENV{couleur_claire};
-		border: 1px solid #ENV{couleur_foncee};
-		display: none;
-		float: right;
-	}
-	#filter input {
-	}
-	#filter p {
-		text-align: left;
-		padding: 5px;
-		margin:0px;
-		float: left;
-	}
-	#filter div {
-		text-align: center;
-		float: left;
-	}
-	
-	.filterIcon {
-		width: 20px;
-		height: 16px;
-		text-align: center;
-		background: url(#EVAL{_DIR_PLUGIN_FORMS}img_pack/filter.gif) no-repeat center left; 
-		float: right;
-		cursor: pointer;
-	}
-	.sorter {
-		padding-right: 10px;
-		text-decoration: underline;
-		cursor: pointer;
-		float:left;	
-	}
-	</style>
-</B_head>

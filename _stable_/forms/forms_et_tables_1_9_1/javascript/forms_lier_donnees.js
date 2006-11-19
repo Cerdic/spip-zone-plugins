@@ -42,10 +42,10 @@ jQuery.fn.ajaxAction = function() {
 				type: 'slide',
 				duration: 400
 			},*/
-			autofill: true,
+			autofill: false,
 			helperClass: 'autocompleter',
 			selectClass: 'selectAutocompleter',
-			minchars: 0,
+			minchars: 1,
 			onSelect : setDonnee,
 			/*onShow : fadeInSuggestion,
 			onHide : fadeOutSuggestion*/
@@ -59,7 +59,7 @@ var fadeOutSuggestion = function(suggestionBox, suggestionIframe){
 	$(suggestionBox).fadeTo(300,0);
 };*/
 var setDonnee = function(data) {
-	$('#id_donnee').val(data.id_donnee);
+	$('#_id_donnee').val(data.id_donnee);
 };
 
 $(document).ready(function(){

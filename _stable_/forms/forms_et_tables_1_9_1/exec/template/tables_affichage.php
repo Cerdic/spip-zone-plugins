@@ -95,7 +95,8 @@ function affichage_donnee_edit($type_form, $titre_page, $titre_type, $titre_ajou
 
   Forms_install();
   $id_form = intval(_request('id_form'));
-	$contexte = array('id_form'=>$id_form,'id_donnee'=>_request('id_donnee'),'type_form'=>$type_form,'titre_liste'=>$titre_page,'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
+  $id_donnee = intval(_request('id_donnee'));
+	$contexte = array('id_form'=>$id_form,'id_donnee'=>$id_donnee,'type_form'=>$type_form,'titre_liste'=>$titre_page,'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
 	$formulaire = recuperer_fond("modeles/form",$contexte);
 	$row = spip_fetch_array(spip_query("SELECT COUNT(id_donnee) AS n FROM spip_forms_donnees WHERE id_form="._q($id_form)));
 	$nb_reponses = intval($row['n']);
@@ -117,6 +118,20 @@ function affichage_donnee_edit($type_form, $titre_page, $titre_type, $titre_ajou
 	
 	debut_droite();
 	echo "<div class='verdana2'>$formulaire</div>";
+	
+	if ($id_donnee) {
+		if ($GLOBALS['spip_version_code']<1.92)		ob_start(); // des echo direct en 1.9.1
+		$liste = afficher_articles(_T("forms:info_articles_lies_donnee"),
+			array('FROM' => 'spip_articles AS articles, spip_forms_donnees_articles AS lien',
+			'WHERE' => "lien.id_article=articles.id_article AND id_donnee="._q($id_donnee)." AND statut!='poubelle'",
+			'ORDER BY' => "titre"));
+		if ($GLOBALS['spip_version_code']<1.92) {
+			$liste = ob_get_contents();
+			ob_end_clean();
+		}
+		echo $liste;
+	}
+
 	echo fin_page();
 }
 ?>

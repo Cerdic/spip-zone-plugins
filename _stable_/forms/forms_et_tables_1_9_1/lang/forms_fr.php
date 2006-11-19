@@ -76,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'html_wrapper'=> 'Encapsuler le champ dans le code html',
 
 'icone_ajouter_donnee' => "Ajouter des donn&eacute;es",
+'info_articles_lies_donnee' => 'Les articles li&eacute;s',
 'icone_creer_formulaire' => "Cr&eacute;er un nouveau formulaire",
 'icone_creer_table' => "Cr&eacute;er une nouvelle table",
 'importer_form' => "Importer un formulaire",
@@ -87,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_supprimer_formulaire_reponses' => "Des donn&eacute;es sont associ&eacute;es &agrave; ce formulaire. Voulez-vous vraiment le supprimer ?",
 
 'liste_choix' => "Liste des choix propos&eacute;s",
+'lien_retirer_donnee' =>"Retirer le lien",
 
 'moderation_donnees' => 'Valider les donn&eacute;es avant publication :',
 

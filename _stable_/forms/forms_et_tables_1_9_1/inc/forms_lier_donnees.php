@@ -169,8 +169,7 @@ function Forms_boite_selection_donnees($recherche, $les_donnees){
 		}
 		$out .= "</select>";
 	}
-	else 
-		$out .= "<input id='id_donnee' type='hidden' name='id_donnee' value='' />";
+	$out .= "<input id='_id_donnee' type='hidden' name='_id_donnee' value='' />";
 	return $out;
 }
 
@@ -180,6 +179,9 @@ function Forms_liste_recherche_donnees($recherche,$les_donnees){
 		include_spip('base/abstract_sql');
 		$in = calcul_mysql_in('id_donnee',$les_donnees,'NOT');
 		$res = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE $in AND valeur LIKE "._q("$recherche%")." GROUP BY id_donnee");
+		if (spip_num_rows($res)<10){
+			$res = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE $in AND valeur LIKE "._q("%$recherche%")." GROUP BY id_donnee");
+		}
 		while ($row = spip_fetch_array($res)){
 			list($id_form,$titreform,$t) = Forms_liste_decrit_donnee($row['id_donnee']);
 			if (count($t))

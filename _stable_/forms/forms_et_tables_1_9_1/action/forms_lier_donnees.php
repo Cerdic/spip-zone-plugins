@@ -22,6 +22,7 @@ function action_forms_lier_donnees(){
 	$redirect = urldecode(_request('redirect'));
 	$cherche_donnee = _request('cherche_donnee');
 	$id_donnee = intval(_request('id_donnee'));
+	if (!$id_donnee) $id_donnee = intval(_request('_id_donnee'));
 
 	if ($redirect==NULL) $redirect="";
 	if (!include_spip("inc/securiser_action"))
