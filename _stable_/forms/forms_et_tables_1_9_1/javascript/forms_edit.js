@@ -42,7 +42,7 @@ jQuery.fn.ajaxAction = function() {
 		$('#'+idtarget+',#apercu_gauche').ajaxWait();
 		$('#'+idtarget).load(action,{redirect: redir}, function(){ 
 			$('#'+idtarget).ajaxAction();
-			if($('#'+idtarget).is('.forms_champs')) forms_init_multi();
+			if($('#'+idtarget).is('.forms_champs')) forms_init_multi($('#'+idtarget).parent());
 			if($('#'+idtarget).is('#champs')) forms_init_lang();
 		});
 		$.get( url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu" , function(data){refresh_apercu(data);} );
@@ -62,7 +62,7 @@ jQuery.fn.ajaxAction = function() {
 			function(){ 
 				$('#'+idtarget).ajaxAction();
 				$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu",function(data){refresh_apercu(data);});
-				if($('#'+idtarget).is('.forms_champs')) forms_init_multi();
+				if($('#'+idtarget).is('.forms_champs')) forms_init_multi($('#'+idtarget).parent());
 				if($('#'+idtarget).is('#champs')) forms_init_lang();
 				if (idtarget!='proprietes')
 					$('#proprietes').load(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=proprietes",function(){ $('#proprietes').ajaxAction(); });

@@ -1,6 +1,6 @@
 var forms_containers={},forms_fields={},forms_forms,forms_menu_lang;
 var match_multi = /\[([a-z_]+)\](.*?)(?=\[[a-z_]+\]|$)/mig;
-var forms_cur_lang={},forms_css_link,forms_css_cur_link={},forms_root;
+var forms_css_link,forms_css_cur_link={},forms_root;
 forms_css_link = {"cursor":"pointer","margin":"2px 5px","float":"left"};
 $.extend(forms_css_cur_link,forms_css_link);
 $.extend(forms_css_cur_link,{fontWeight:"bold"});
@@ -8,7 +8,6 @@ $.extend(forms_css_cur_link,{fontWeight:"bold"});
 function forms_init_lang() {
 	//Detect if we're on the right page and if multilinguism is activated. If not return.
 	if(window.location.search.indexOf("exec=forms_edit")==-1 || forms_avail_langs.length<=1) return;
-	forms_cur_lang["undefined"] = forms_def_lang;
 	forms_root = $("#champs");
 	forms_containers = $("#forms_lang",forms_root);
 	//create menu lang template 
@@ -16,6 +15,8 @@ function forms_init_lang() {
 	$.each(forms_avail_langs,function() {
 		forms_menu_lang.append($("<a>").html("["+this+"]").css(this==forms_def_lang?forms_css_cur_link:forms_css_link)[0]);
 	});
+	//store all the fields forms
+	forms_forms = $("div.forms_champs form",forms_root);
 	//create menu lang for the global form
 	forms_make_menu_lang(forms_containers);
 	//init fields
@@ -23,7 +24,7 @@ function forms_init_lang() {
 }
 
 function forms_make_menu_lang(container,target) {
-	target = target || forms_root;
+	target = target || forms_forms;
 	$(forms_menu_lang).clone().find("a").click(function() {forms_change_lang(this,container,target)}).end().
 	append("<div style='clear:left'></div>").appendTo(container);
 }
@@ -37,31 +38,41 @@ function forms_change_lang(el,container,target) {
 	}).end();
 	lang = lang.slice(1,-1);
 	//store the fields inputs for later use (usefull for select)
-	var target_name = target!=forms_root?target[0].nom_champ.id:"undefined";
+	var target_name = target!=forms_forms?target[0].nom_champ.id:"undefined";
 	if(!forms_fields[target_name]) forms_fields[target_name] = $('input[@id^="nom_"]',target);
 	//save the current values
-	if(!forms_cur_lang[target_name]) forms_cur_lang[target_name] = forms_def_lang;
-	forms_fields[target_name].each(function(){forms_save_lang(this,forms_cur_lang[target_name])});
-	//change current lang
-	if(target_name=="undefined") forms_cur_lang = {};
-	forms_cur_lang[target_name] = lang;
+	forms_fields[target_name].each(function(){
+		forms_save_lang(this,this.form_ref.form_lang);
+	});
+	//change current lang	
+	target.each(function(){this.form_lang = lang});
 	//reinit fields to current lang
 	forms_fields[target_name].each(function(){forms_set_lang(this,lang)});
 }
 
-function forms_init_multi() {
-	//store all the fields forms
-	forms_forms = $("div.forms_champs form",forms_root);
-	//init the value of the field to current lang
+function forms_init_multi(target) {
+	//Update the list of form if this is an update
+	if(target) forms_forms.add($("div.forms_champs form",target).get());
 	forms_fields = {};
-	forms_fields["undefined"] = $('input[@id^="nom_"]',forms_forms).each(function() {forms_init_field(this,forms_def_lang)});
+	forms_fields["undefined"] = $('input[@id^="nom_"]',forms_forms);
+	//store the fields of the target if any
+	var init_forms = target?$("div.forms_champs form",target):forms_forms;
+	//init the value of the field to current lang
+	init_forms.each(function() {
+		var form = this;
+		form.form_lang = forms_def_lang;
+		$('input[@id^="nom_"]',this).each(function(){
+			this.form_ref = form;
+			forms_init_field(this,form.form_lang);
+		});
+	});
 	//create menu for each form. The menu is just before the form
-	forms_containers.filter("#forms_lang");
-	forms_forms.prev().empty().each(function() {
+	init_forms.prev().empty().each(function() {
 		var id = "#"+this.id;
 		//store all form containers to allow menu lang update on each container
 		//when it is triggered by global menu
-		forms_containers.add(id);
+		//in case of init of a single updated form switch the old lang container with new new one
+		forms_containers.not(id).add(id);
 		forms_make_menu_lang($(id),$(this).next());
 	}).end();
 }
@@ -116,9 +127,12 @@ function forms_save_lang(el,lang) {
 function forms_multi_submit(params) {
 	if(window.location.search.indexOf("exec=forms_edit")==-1 || forms_avail_langs.length<=1) return;
 	var form = this;
+	//remove the current form from the list of forms
+	forms_forms.not(this);
+	//build the input values
 	$('input[@id^="nom_"]',this).each(function(){
 		//save data before submit
-		forms_save_lang(this,forms_cur_lang[form.nom_champ.id] || forms_def_lang);
+		forms_save_lang(this,form.form_lang || forms_def_lang);
 		//build the string value
 		var def_value = this.field_lang[forms_def_lang];
 		if(!this.multi) this.value = def_value;
@@ -135,5 +149,6 @@ function forms_multi_submit(params) {
 			this.value = count!=1?"<multi>"+value+"</multi>":value.replace(/^\[[a-z_]+\]/,'');
 		} 
 	});
+	//save back the params
 	$.extend(params,$(form).formToArray(false));
 }
