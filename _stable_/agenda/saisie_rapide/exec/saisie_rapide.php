@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] += array(
  'saisie_rapide_heure_debut' => "Heure de d&eacute;but",
  'saisie_rapide_heure_fin' => "Heure de fin",
  'saisie_rapide_fermer' => "Fermer",
+ 'saisie_rapide_reset' => "Reset",
 );
 // fin de l'essai !!
 
@@ -188,6 +189,7 @@ function affiche_formulaire() {
   <input name='action' type='hidden' value='compile' />
   <input name='id_article' type='hidden' value='<?=_request('id_article')?>' />
   <textarea name="liste_evenements" style="width: 99%;" rows="10" class="forml" ><?=_request('liste_evenements')?></textarea>
+  <a href="<?=generer_url_ecrire("saisie_rapide", "id_article="._request("id_article"))?>"><?=_T('saisie_rapide_reset')?></a>
   <div align='right'><input class='fondo' type='submit' value='<?=_T('saisie_rapide_compiler')?>'></div></form>
   <?php fin_cadre_enfonce(); 
     debut_cadre_formulaire(); ?>
