@@ -40,7 +40,11 @@ jQuery.fn.ajaxAction = function() {
 		var redir = url + "&var_ajaxcharset="+ajaxcharset+"&bloc="+idtarget;
 		action = (action.split('#')[0]).replace(/&?redirect=[^&#]*/,''); // l'ancre perturbe IE ...
 		$('#'+idtarget+',#apercu_gauche').ajaxWait();
-		$('#'+idtarget).load(action,{redirect: redir}, function(){ $('#'+idtarget).ajaxAction();});
+		$('#'+idtarget).load(action,{redirect: redir}, function(){ 
+			$('#'+idtarget).ajaxAction();
+			if($('#'+idtarget).is('.forms_champs')) forms_init_multi();
+			if($('#'+idtarget).is('#champs')) forms_init_lang();
+		});
 		$.get( url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu" , function(data){refresh_apercu(data);} );
 		if (idtarget!='proprietes')
 			$('#proprietes').load(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=proprietes",function(){ $('#proprietes').ajaxAction(); });
