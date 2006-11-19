@@ -139,5 +139,7 @@ $(document).ready(function(){
 		$('#champs').ajaxAction();
 		$('#proprietes').ajaxAction();
 	}
+	else
+		$('.antifocus').onefocus( function(){ this.value='';$(this).removeClass('antifocus'); } );
 
 });
