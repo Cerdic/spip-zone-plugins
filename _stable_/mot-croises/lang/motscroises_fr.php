@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'solution'		=>'Solution',
 //'nombre_erreurs'	=>'@nbr@ erreurs',
 'aucune_erreur'		=>'Aucune erreur',
-'1erreur'		=>'Une erreur',
+//'1erreur'		=>'Une erreur',
 'table_summary'		=>'Grille de mots-crois&eacute;s de @largeur@ colonnes sur @hauteur@ lignes',
 'ligne'			=>'ligne @n@',
 'colonne'		=>'colonne @n@'
@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nombre_vides'		=> '@vid@ cases vides',
 'une_vide'			=> 'Une case vide',
 'bravo'			=> 'Bravo !'
+
 );
 
 
