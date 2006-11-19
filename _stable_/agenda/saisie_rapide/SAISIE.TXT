@@ -8,6 +8,7 @@ fichiers à placer dans le repertoire plugins/agenda :
 	SAISIE.TXT : les details.
 
 attention : aucune internationalisation pour l'instant !
+Compatibilité : 1.9.0, 1.9.1 et svn
 
 Syntaxe : 
 	"jj/mm[/aaaa][-jj/mm[/aaaa]] [hh:mm[-hh:mm]] "Le titre" ["Le lieu" [ "La description"]] [REP=jj/mm/aaaa[,jj/mm/aaaa,etc]]
