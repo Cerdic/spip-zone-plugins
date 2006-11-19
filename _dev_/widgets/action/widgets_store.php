@@ -143,6 +143,10 @@ function action_widgets_store_dist() {
 				    include_spip('action/editer_rubrique');
 				    $fun = 'revisions_rubriques';
 				    break;
+				case 'signature':
+				    include_spip('inc/modifier');
+				    $fun = 'revision_signature';
+				    break;
 				case 'syndic':
 				case 'site':
 				    include_spip('action/editer_site');
@@ -193,6 +197,7 @@ function action_widgets_store_dist() {
 	            'id_' . $type => $id,
 	            'lang' => $GLOBALS['spip_lang']
 	        );
+	        $contexte = array_merge($contexte, $content);
 	        include_spip('public/assembler');
 	        $return[$wid] = recuperer_fond($fond, $contexte);
 	    }

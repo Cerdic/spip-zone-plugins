@@ -1,0 +1,15 @@
+[(#REM)
+
+	Controleur pour le widget 'article-hyperlien' , uniquement html
+
+]
+#CACHE{0}
+<BOUCLE_a(ARTICLES){id_article}{statut==.}>
+<fieldset><legend>Hyperlien</legend>
+<label><:form_prop_nom_site:></label> <input class="widget-active" name="#ENV{name_nom_site}"
+ style="width:#ENV{largeur}px;" value="[(#NOM_SITE**|entites_html)]" />
+ <br />
+ <label><:forum_url:></label> <input class="widget-active" name="#ENV{name_url_site}"
+ style="width:#ENV{largeur}px;" value="[(#URL_SITE**|entites_html)]" />
+</fieldset>
+</BOUCLE_a>
