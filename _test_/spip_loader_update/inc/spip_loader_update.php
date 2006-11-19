@@ -27,4 +27,8 @@ function spip_loader_liste() {
 	return $spip_loader_liste;
 }
 
+function spip_loader_meta_paquets($paquet='', $date='') {
+	return $vide;
+}
+
 ?>
