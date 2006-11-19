@@ -29,13 +29,18 @@ function exec_spip_loader_update() {
 	debut_gauche();
 	debut_droite();
 
+	if($paquet = _request('paquet')) {
+		echo "<p>"._L("Vous venez de mettre le paquet \"".$paquet.
+			"\" &agrave; jour avec succ&egrave;s.")."</p>";
+	}
+
 	$spip_loader_liste = spip_loader_liste();
 
 	if (!empty($spip_loader_liste)) {
 
 		// Menu
 
-		echo _L("Choisir le paquet &agrave; mettre &agrave; jour&nbsp;: ");
+		echo "<p>"._L("Choisir le paquet &agrave; mettre &agrave; jour&nbsp;: ")."</p>";
 		echo "<form action='../spip.php?action=spip_loader' method='get'>
 		<input type='hidden' name='action' value='spip_loader' />
 		<select name='paquet'>

@@ -9,12 +9,16 @@ function action_spip_loader() {
 	$spip_loader_liste = spip_loader_liste();
 	
 	define(
+		'_NOM_PAQUET_ZIP',
+		strtoupper(_request('paquet'))
+	);
+	define(
 		'_URL_PAQUET_ZIP',
 		$spip_loader_liste[_request('paquet')]
 	);
 	define(
 		'_SPIP_LOADER_URL_RETOUR',
-		'ecrire/?exec=spip_loader_update'
+		'ecrire/?exec=spip_loader_update&paquet='._request('paquet')
 	);
 	define(
 		'_SPIP_LOADER_SCRIPT',

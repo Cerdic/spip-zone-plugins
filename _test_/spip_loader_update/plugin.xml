@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	spip_loader Update
+	Mise &agrave; jour (via spip_loader)
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	James, inspir&eacute; par les travaux de Cedric &amp; Fil
@@ -13,18 +13,21 @@ _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	test
 	</etat>
 	<description>
-	Un utilisateur (par defaut, l'administrateur numero 1) est autoris&eacute; &agrave; faire une mise &agrave; jour spip_loader du site ou de tout autre r&eacute;pertoire. Pour cela il doit se rendre sur la page [ecrire/?exec=spip_loader_update->./?exec=spip_loader_update] et s&eacute;lectionner les &eacute;l&eacute;ments &agrave; mettre &agrave; jour.
+	Un utilisateur (par d&#233;faut, l'administrateur num&#233;ro 1) est autoris&eacute; &agrave; faire une mise &agrave; jour du site (via spip_loader.php, qui doit donc &ecirc;tre pr&#233;sent à la racine de votre site) ou de tout autre contribution distribu&#233;e sur Internet. Pour cela il doit se rendre sur la page [Mise &agrave; jour->./?exec=spip_loader_update] du menu Configuration et s&eacute;lectionner les &eacute;l&eacute;ments &agrave; mettre &agrave; jour.
 
-La configuration se fait &agrave; deux emplacements :
+La configuration de ce plugin se fait &agrave; deux emplacements :
 - dans <code>config/mes_options.php</code>, on indique la liste des administrateurs autoris&eacute;s &agrave; proc&eacute;der aux mises &agrave; jour, par exemple avec :
 _ <code>define('_SPIP_LOADER_UPDATE_AUTEURS', '1:2:3');</code>
-- Dans le fichier <code>spip_loader_update_list.txt</code> (&agrave; recopier dans son r&eacute;pertoire config/), on indique la liste des r&eacute;pertoires concern&eacute;s, en donnant pour chacun une ligne :
+- Dans le fichier <code>spip_loader_update_list.txt</code> (&agrave; recopier dans son r&eacute;pertoire config/), on indique la liste des contributions concern&eacute;es, en donnant pour chacune une ligne :
 _ <code>paquet url</code>
 _ Par exemple :
 _ <code>spip http://www.spip.net/spip-dev/DISTRIB/spip.zip</code>
 	</description>
-	<lien></lien> <!-- URI de documentation -->
 	<prefix>
 	spip_loader_update
 	</prefix>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>spip_loader_update_fonctions.php</inclure>
+	</pipeline>
 </plugin>
