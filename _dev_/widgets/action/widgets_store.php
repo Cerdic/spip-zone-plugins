@@ -136,8 +136,8 @@ function action_widgets_store_dist() {
 				    $fun = 'revision_document';
 				    break;
 				case 'forum':
-				    include_spip('inc/modifier');
-				    $fun = 'revision_forum';
+				    include_spip('inc/forum');
+				    $fun = 'enregistre_et_modifie_forum';
 				    break;
 				case 'rubrique':
 				    include_spip('action/editer_rubrique');
