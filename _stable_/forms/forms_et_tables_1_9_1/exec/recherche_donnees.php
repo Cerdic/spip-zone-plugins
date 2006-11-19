@@ -18,7 +18,7 @@ function exec_recherche_donnees(){
 	include_spip("inc/forms_lier_donnees");
 	
 	// recuperer les donnees deja liees
-	list($s,$les_donnees) = Forms_formulaire_article_afficher_donnees($id_article);
+	list($s,$les_donnees) = Forms_formulaire_article_afficher_donnees($id_article,"");
 	
 	// recuperer les donnees que l'on peut lier
 	$liste = Forms_liste_recherche_donnees($recherche,$les_donnees);
