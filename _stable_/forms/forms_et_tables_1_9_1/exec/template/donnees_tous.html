@@ -18,7 +18,7 @@
 		<th>Date</th>
 		<th>De</th>
 		<th>Page</th>
-		<BOUCLE_head(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}>
+		<BOUCLE_head(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{tout}{par rang}>
 		<th [(#SPECIFIANT|=={oui}|?{'','class="neutre"'})#SET{colonnes_sans_tri,#GET{colonnes_sans_tri}|concat{','}|concat{#COMPTEUR_BOUCLE|plus{4}}]>#TITRE</th>
 		</BOUCLE_head>
 	</tr>
@@ -32,7 +32,7 @@
 		<td>#DATE</td>
 		<td><BOUCLE_auteur(AUTEURS){id_auteur}>#NOM</BOUCLE_auteur>#IP<//B_auteur></th>
 		<td>#URL</td>
-		<BOUCLE_body(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}>
+		<BOUCLE_body(FORMS_CHAMPS){id_form}{tout}{type !IN (separateur,textestatique)}{par rang}>
 		<td>
 		<BOUCLE_rep(FORMS_DONNEES_CHAMPS){id_donnee}{champ}{tout}{'<br />'}>#VALEUR</BOUCLE_rep>
 		</td>

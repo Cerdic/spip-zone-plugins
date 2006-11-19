@@ -56,6 +56,21 @@
 	}
 
 	//
+	// <BOUCLE(FORMS_CHAMPS)>
+	//
+	function boucle_FORMS_CHAMPS_dist($id_boucle, &$boucles) {
+		$boucle = &$boucles[$id_boucle];
+		$id_table = $boucle->id_table;
+		$boucle->from[$id_table] =  "spip_forms_champs";
+	
+		if (!isset($boucle->modificateur['tout'])){
+			$boucle->where[]= array("'='", "'$id_table.public'", "'\"oui\"'");
+		}
+	
+		return calculer_boucle($id_boucle, $boucles); 
+	}
+	
+	//
 	// <BOUCLE(FORMS_DONNEES_CHAMPS)>
 	//
 	function boucle_FORMS_DONNEES_CHAMPS_dist($id_boucle, &$boucles) {
@@ -153,7 +168,27 @@
 		
 		return $r;
 	}
-
+function wrap_split($wrap){
+	$wrap_start="";
+	$wrap_end="";
+	if (preg_match(",<([^>]*)>,Ui",$wrap,$regs)){
+		array_shift($regs);
+		foreach($regs as $w){
+			if ($w{0}=='/'){
+			 //$wrap_end .= "<$w>";
+			}
+			else {
+				if ($w{strlen($w)-1}=='/')
+					$w = strlen($w)-1;
+				$wrap_start .= "<$w>";
+				$w = explode(" ",$w);
+				if (is_array($w)) $w = $w[0];
+				$wrap_end = "</$w>" . $wrap_end;
+			}
+		}
+	}
+	return array($wrap_start,$wrap_end);
+}
 
 function balise_RESULTATS_SONDAGE($p) {
 	$_id_form = champ_sql('id_form', $p);
