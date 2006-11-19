@@ -58,9 +58,10 @@ jQuery.fn.ajaxAction = function() {
 			function(){ 
 				$('#'+idtarget).ajaxAction();
 				$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu",function(data){refresh_apercu(data);});
+				if($('#'+idtarget).is('.forms_champs')) forms_init_multi();
+				if($('#'+idtarget).is('#champs')) forms_init_lang();
 				if (idtarget!='proprietes')
 					$('#proprietes').load(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=proprietes",function(){ $('#proprietes').ajaxAction(); });
-				if($('#'+idtarget).is('.forms_champs')) forms_init_multi();					
 			},
 			"before":
 			function(param,form){ 
