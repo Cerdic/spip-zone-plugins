@@ -114,6 +114,7 @@ function forms_save_lang(el,lang) {
 
 //This func receives the form that is going to be submitted
 function forms_multi_submit(params) {
+	if(window.location.search.indexOf("exec=forms_edit")==-1 || forms_avail_langs.length<=1) return;
 	var form = this;
 	$('input[@id^="nom_"]',this).each(function(){
 		//save data before submit
