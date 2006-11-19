@@ -10,10 +10,9 @@ div.spip_forms {
 	margin: 0px;
 	margin-bottom: 16px;
 	padding: 6px;
-	border: 1px solid #a0a0a0;
-	background: #F8F7F6;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-weight: normal;
+	border-left: 3px solid #963;
 }
 div.spip_forms form {
 	border:0;
@@ -33,12 +32,16 @@ div.spip_forms legend {
 	padding:5px;
 }
 div.spip_forms .spip_form_champ {
-	margin-bottom:1em;
+	margin-bottom: 0;
+	display: block;
+	clear: both;
+	margin-top: 1em;
 }
 div.spip_forms .spip_form_label {
   	font-weight: bold;
   	text-align:left;
   	color:#494949;
+	display: block;
 }
 div.spip_forms .spip_form_label label,
 div.spip_forms .spip_form_label .label {
@@ -145,8 +148,8 @@ div.spip_forms .forml, div.spip_forms .formo {
 	border-right:solid 1px #E2CEC1;
 	border-top:1px solid #AF896F;
 	border-left:1px solid #AF896F;
-	padding:.5em;
-	font-size:.9em;
+	font-size:1em;
+	padding:.25em;
 }
 div.spip_forms .forml, div.spip_forms .fondl {
 	background: #FFFDE7;
@@ -169,8 +172,8 @@ div.spip_forms form .forml-focus, div.spip_forms form input.forml-focus:focus, d
 	background: #FFF2C8;
 	color:#433817;
 	font-weight:normal;
-	font-size:.9em;
-	padding:.5em;
+	font-size:1em;
+	padding:.25em;
 	width:85%;
 }
 div.spip_forms form .formo-focus, div.spip_forms form input.formo-focus:focus, div.spip_forms form textarea.formo-focus:focus, div.spip_forms .formo-focus {
@@ -181,8 +184,8 @@ div.spip_forms form .formo-focus, div.spip_forms form input.formo-focus:focus, d
 	background:#FFF9EE ;
 	color:#433817;
 	font-weight:normal;
-	font-size:.9em;
-	padding:.5em;
+	font-size:1em;
+	padding:.25em;
 	width:85%;
 }
 div.spip_forms form .champ_obli_oubli-focus, form input.champ_obli_oubli-focus:focus, form textarea.champ_obli_oubli-focus:focus {
@@ -193,8 +196,8 @@ div.spip_forms form .champ_obli_oubli-focus, form input.champ_obli_oubli-focus:f
 	background: #FFF2C8;
 	color:#4D161B;
 	font-weight:normal;
-	font-size:.9em;
-	padding:.3em;
+	font-size:1em;
+	padding:.25em;
 }
 div.spip_forms .spip_bouton input {
 	border: 1px solid #563033;
@@ -203,14 +206,17 @@ div.spip_forms .spip_bouton input {
 	background:#F0E6DC;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-weight:bold;
-	font-size:.9em;
+	font-size:1em;
 	width:100px ;
 	color:#4A4336;
 }
 div.spip_forms fieldset {
-	border:1px solid #8F8181;
-	padding:.4em;
+	border: 1px none #8F8181;
+	padding: .4em .4em .4em 1em;
 	margin:.5em 0 .5em 0;
+	border-top-style: dashed;
+	border-left: 6px solid #c96;
+	border-top-color: #c96;
 }
 div.spip_forms a.resultats_sondage {
 	display:block;
@@ -228,4 +234,7 @@ div.spip_forms a.resultats_sondage:hover {
 }
 div.spip_forms p.spip_form_ok, div.spip_forms p.spip_form_erreur, div.spip_forms form {
 	clear:both;
+}
+span.nettoyeur{
+	clear:both;line-height:1px;font-size:1px;display:block;
 }
