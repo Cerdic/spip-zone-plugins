@@ -23,6 +23,20 @@ function mot_croises_pre_propre($texte){
 				if ($GLOBALS["bouton_envoi"] == ''){$erreur='';}
 				else {
 					include_spip('inc/verification');
+					list($nbr_erreurs, $nbr_vides) = comparaison($tableau_php); 
+					$erreur = '<strong class="erreur">';
+					$erreur .= ($nbr_erreurs==0)?_T('motscroises:aucune_erreur'):(
+					 ($nbr_erreurs==1)?_T('motscroises:une_erreur'):_T("motscroises:nombre_erreurs", Array('err'=>$nbr_erreurs))
+					);
+					$erreur .= ($nbr_vides==0)?(($nbr_erreurs==0)?'. '._T('motscroises:bravo'):''):(
+					 ($nbr_vides==1)?' - '._T('motscroises:une_vide'):' - '._T("motscroises:nombre_vides", Array('vid'=>$nbr_vides))
+					);
+					$erreur.='</strong><br />';
+					}
+/*
+				if ($GLOBALS["bouton_envoi"] == ''){$erreur='';}
+				else {
+					include_spip('inc/verification');
 					
 						$nbr_erreur=comparaison($tableau_php); 
 						
@@ -32,6 +46,7 @@ function mot_croises_pre_propre($texte){
 						if ($nbr_erreur==1){$erreur.= _T('motscroises:1erreur');}
 					$erreur.='</strong>';
 					}
+*/					
 				//fin calcul erreur
 				
 				$tableau[$j] = code_echappement($echappeur.$erreur.affichage_grille($tableau_php).$echappeur);	
