@@ -7,10 +7,10 @@
 					merci à Cedric cedric.morin@yterium.com pour le concept initial du bridage de l'affichage des BOUCLES (plugin acces_restreint)
         </auteur>
         <version>
-          1.0_PR
+          1.1
         </version>
         <etat>
-          test
+          dev
         </etat>
         <description>
           Permet de g&eacute;rer l'acc&egrave;s restreint (parties publique et priv&eacute;e) &agrave; des rubriques 
@@ -22,6 +22,9 @@
 					version 0.61 ou 0.7, vous {{DEVEZ}} proc&eacute;der &agrave; la mise &agrave; jour des tables de la base de donn&eacute;es
 					en utilisant le script [->../plugins/acces_groupes/maj_tables.php] {{AVANT}} d'activer ce plugin ! 
 					
+					Version 1.1 : tentative de bridage de l'affichage des rubriques restreintes dans TOUT l'espace prive. 
+					Sans suite car trop couteux en suivi des versions de SPIP.
+					A revoir par filtrage des requêtes SQL comme dans l'espace public quand la squelettisation de l'espace privé sera OK (spip 1.9.2 ?)
         </description>
 	<lien>http://www.spip-contrib.net/Creer-des-groupes-limiter-l-acces</lien> <!-- URI de documentation --> 
         <prefix>
