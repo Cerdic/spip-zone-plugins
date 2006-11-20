@@ -4,6 +4,10 @@
 # plusieurs separer par des virgules
 define('_SPIP_LOADER_UPDATE_AUTEURS', '1');
 
+# source script
+define('_SPIP_LOADER_SOURCE_SCRIPT', 'http://www.spip.net/spip-dev/INSTALL/spip_loader.php.txt');
+define('_SPIP_LOADER_LOCAL_SCRIPT', _DIR_RACINE.'spip_loader.php');
+
 # fichier source
 define('_SPIP_LOADER_UPDATE_FILE',
 	(@is_readable($f = _DIR_ETC.'spip_loader_update_list.txt') ? $f :
