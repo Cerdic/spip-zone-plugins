@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //'1erreur'		=>'Une erreur',
 'table_summary'		=>'Grille de mots-crois&eacute;s de @largeur@ colonnes sur @hauteur@ lignes',
 'ligne'			=>'ligne @n@',
-'colonne'		=>'colonne @n@'
+'colonne'		=>'colonne @n@',
 
 //'horizontalement' 	=> 'Horizontalement&nbsp;:',
 //'verticalement'		=> 'Verticalement&nbsp;:',
