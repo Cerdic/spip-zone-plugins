@@ -117,4 +117,19 @@ EOH;
     return substr_replace($page, $incHead, strpos($page, '</head>'), 0);
 }
 
+
+// #EDIT{ps} pour appeler le widget ps ;
+// gros bug : si cette fonction est absente, ca affiche {ps} tout seul
+function balise_EDIT($p) {
+	$p->code = "' widget '. preg_replace(',^hierarchie$,', 'rubrique', preg_replace(',s$,', '', '"
+		. $p->type_requete
+		."')) .'-'."
+		. sinon(interprete_argument_balise(1,$p), "''")
+		.".'-'."
+		.champ_sql($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->primary, $p);
+
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 ?>

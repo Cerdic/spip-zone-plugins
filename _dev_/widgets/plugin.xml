@@ -25,6 +25,7 @@ _ <code><h1 class="widget article-titre-#ID_ARTICLE">#TITRE</h1></code>.
 	<prefix>
 	Widgets
 	</prefix>
+	<fonctions>tetewidgets.php</fonctions>
 	<pipeline>
 		<nom>affichage_final</nom>
 		<inclure>tetewidgets.php</inclure>
