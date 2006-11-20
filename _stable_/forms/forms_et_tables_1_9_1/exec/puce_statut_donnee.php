@@ -10,22 +10,22 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_instituer_forms_donnee_dist() {
+include_spip('inc/presentation');
+include_spip('inc/autoriser');
+include_spip('inc/forms');  // ajax_retour compatibilite 1.9.1
+include_spip('inc/instituer_forms_donnee');  // ajax_retour compatibilite 1.9.1
 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
+function exec_puce_statut_donnee_dist()
+{
+	$id = _request('id');
+	$s = spip_query(
+	"SELECT id_form,statut FROM spip_forms_donnees WHERE id_donnee="._q($id));
+	$r = spip_fetch_array($s);
 
-	$arg = _request('arg');
-
-	list($id_donnee, $statut) = preg_split('/\W/', $arg);
-	if (!$statut) $statut = _request('statut_nouv'); // cas POST
-	if (!$statut) return; // impossible mais sait-on jamais
-
-	$id_donnee = intval($id_donnee);
-	spip_query("UPDATE spip_forms_donnees SET statut="._q($statut)." WHERE id_donnee="._q($id_donnee));
-
+	ajax_retour(puce_statut_donnee($id,$r['statut'],$r['id_form'],true));
 }
 
 ?>

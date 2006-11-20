@@ -27,7 +27,8 @@
 <BOUCLE_donnees(FORMS_DONNEES){id_form}{tout}>
 #SET{lien_supp,#URL_ACTION_AUTEUR{forms_donnee_supprime,#ID_FORM:#ID_DONNEE,#EVAL{_DIR_RESTREINT_ABS}|concat{#SELF}|urlencode}}
 	<tr class='tr_liste'>
-		<td><a href='[(#URL_ECRIRE{table_donnee_edit,id_form=#ID_FORM}|parametre_url{id_donnee,#ID_DONNEE}|parametre_url{retour,#SELF})]'>#ID_DONNEE</a></td>
+		<td>[(#ID_DONNEE|forms_puce_statut_donnee{#STATUT,#ID_FORM})]
+		<a href='[(#URL_ECRIRE{table_donnee_edit,id_form=#ID_FORM}|parametre_url{id_donnee,#ID_DONNEE}|parametre_url{retour,#SELF})]'>#ID_DONNEE</a></td>
 		<td><a href='[(#GET{lien_supp})]'><img src="#EVAL{_DIR_PLUGIN_FORMS}img_pack/effacer-16.png" width='16' height='16' /></a></td>
 		<td>#DATE</td>
 		<td><BOUCLE_auteur(AUTEURS){id_auteur}>#NOM</BOUCLE_auteur>#IP<//B_auteur></th>

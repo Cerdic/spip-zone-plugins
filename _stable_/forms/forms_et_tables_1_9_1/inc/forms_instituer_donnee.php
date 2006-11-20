@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function inc_forms_instituer_donnee_dist($id_form, $id_donnee, $statut)
+function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut)
 {
 
 	$res =
@@ -41,9 +41,87 @@ function inc_forms_instituer_donnee_dist($id_form, $id_donnee, $statut)
 	 "</center>"
 	. '</div>';
   
-	return redirige_action_auteur('forms_instituer_donnee',$id_donnee,'table_donnee_edit', "id_form=$id_form&id_donnee=$id_donnee", $res, " method='post'");
+	return redirige_action_auteur('instituer_forms_donnee',$id_donnee,'table_donnee_edit', "id_form=$id_form&id_donnee=$id_donnee", $res, " method='post'");
 }
 
+// http://doc.spip.org/@puce_statut_article
+function puce_statut_donnee($id, $statut, $id_form, $ajax = false) {
+	global $spip_lang_left, $dir_lang, $connect_statut, $options;
+	static $script=NULL;
+	
+	switch ($statut) {
+	case 'publie':
+		$clip = 1;
+		$puce = 'verte';
+		$title = _T('info_article_publie');
+		break;
+	case 'prop':
+		$clip = 0;
+		$puce = 'orange';
+		$title = _T('info_article_propose');
+		break;
+	case 'refuse':
+		$clip = 2;
+		$puce = 'rouge';
+		$title = _T('info_article_refuse');
+		break;
+	case 'poubelle':
+		$clip = 3;
+		$puce = 'poubelle';
+		$title = _T('info_article_supprime');
+		break;
+	}
+	$puce = "puce-$puce.gif";
 
+	include_spip('inc/autoriser');
+	if (autoriser('publierdans', 'form', $id_form)) {
+	  // les versions de MSIE ne font pas toutes pareil sur alt/title
+	  // la combinaison suivante semble ok pour tout le monde.
+	  $titles = array(
+			  "orange" => _T('texte_statut_propose_evaluation'),
+			  "verte" => _T('texte_statut_publie'),
+			  "rouge" => _T('texte_statut_refuse'),
+			  "poubelle" => _T('texte_statut_poubelle'));
+		if ($ajax){
+		  $action = "onmouseover=\"montrer('statutdecaldonnee$id');\"";
+		  $inser_puce = 
+		  	// "\n<div class='puce_donnee' id='statut$id'$dir_lang>" .
+				"\n<div class='puce_donnee_fixe' $action>" .
+			  http_img_pack($puce, $title, "id='imgstatutdonnee$id' style='margin: 1px;'") ."</div>"
+				. "\n<div class='puce_donnee_popup' id='statutdecaldonnee$id' onmouseout=\"cacher('statutdecaldonnee$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>\n"
+				. afficher_script_statut($id, 'forms_donnee', -1, 'puce-orange.gif', 'prop', $titles['orange'], $action)
+				. afficher_script_statut($id, 'forms_donnee', -12, 'puce-verte.gif', 'publie', $titles['verte'], $action)
+				. afficher_script_statut($id, 'forms_donnee', -23, 'puce-rouge.gif', 'refuse', $titles['rouge'], $action)
+				. afficher_script_statut($id, 'forms_donnee', -34, 'puce-poubelle.gif', 'poubelle', $titles['poubelle'], $action)
+			. "</div>"
+			//. "</div>"
+			;
+		}
+		else{
+		  $inser_puce = "\n<div class='puce_donnee' id='statut$id'$dir_lang>".
+			  http_img_pack($puce, $title, "id='imgstatutdonnee$id' style='margin: 1px;'") ."</div>";
+			if ($script==NULL){
+				$action = "'".generer_url_ecrire('puce_statut_donnee',"id='+id",true);
+				$script = "<script type='text/javascript'><!--\n";
+				$script .= "$(document).ready(function(){
+					$('div.puce_donnee').onemouseover( function() {
+						id = $(this).id();
+						id = id.substr(6,id.length-1);
+						$('#statut'+id).load($action,function(){ 
+								$('#statutdecaldonnee'+id).show(); 
+								/*$('#statut'+id).mouseover(function(){ $(this).children('.puce_donnee_popup').show(); });*/
+							});
+						});
+					
+				})";
+				$script .= "//--></script>";
+				$inser_puce = $script . $inser_puce;
+			}
+		}
+	} else {
+		$inser_puce = http_img_pack($puce, $title, "id='imgstatutdonnee$id' style='margin: 1px;'");
+	}
+	return $inser_puce;
+}
 
 ?>

@@ -57,3 +57,31 @@ div.liste { clear:both;width:auto; }
 	cursor: pointer;
 	float:left;	
 }
+
+
+div.puce_donnee {
+	position: relative; 
+	height: 11px; 
+	width: 11px;
+}
+
+div.puce_donnee_fixe {
+	position: absolute;
+}
+
+div.puce_donnee_popup {
+	position: absolute;
+	visibility: hidden;
+	margin-top: -1px; top: 0; 
+	border: 1px solid #666; 
+	background-color: #ccc; z-index: 10; 
+	-moz-border-radius: 3px;
+}
+div.puce_donnee_popup img {
+	padding: 1px;
+	border: none;
+}
+
+div.puce_donnee_popup {
+	width: 45px; 
+}

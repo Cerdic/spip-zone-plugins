@@ -205,4 +205,9 @@ function forms_valeur($tableserialisee,$cle,$defaut=''){
 	return isset($t[$cle])?$t[$cle]:$defaut;
 }
 
+// http://doc.spip.org/@puce_statut_article
+function forms_puce_statut_donnee($id, $statut, $id_form, $ajax = false) {
+	include_spip('inc/instituer_forms_donnee');
+	return puce_statut_donnee($id,$statut,$id_form,$ajax);
+}
 ?>
