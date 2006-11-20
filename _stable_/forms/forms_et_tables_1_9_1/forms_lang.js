@@ -64,12 +64,10 @@ function forms_init_multi(target) {
 	});
 	//create menu for each form. The menu is just before the form
 	init_forms.prev().empty().each(function() {
-		var id = "#"+this.id;
 		//store all form containers to allow menu lang update on each container
 		//when it is triggered by global menu
-		//in case of init of a single updated form switch the old lang container with new new one
-		forms_containers.not(id).add(id);
-		forms_make_menu_lang($(id),$(this).next());
+		forms_containers.add(this);
+		forms_make_menu_lang($(this),$(this).next());
 	}).end();
 }
 
@@ -125,6 +123,8 @@ function forms_multi_submit(params) {
 	var form = this;
 	//remove the current form from the list of forms
 	forms_forms.not(this);
+	//remove the current menu lang container from the list
+	forms_containers.not($(this).prev());
 	//build the input values
 	$('input[@id^="nom_"]',this).each(function(){
 		//save data before submit
