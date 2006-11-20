@@ -83,12 +83,12 @@ function puce_statut_donnee($id, $statut, $id_form, $ajax = false) {
 			  "rouge" => _T('texte_statut_refuse'),
 			  "poubelle" => _T('texte_statut_poubelle'));
 		if ($ajax){
-		  $action = "onmouseover=\"montrer('statutdecaldonnee$id');\"";
+		  $action = "onmouseover=\"montrer('statutdecalforms_donnee$id');\"";
 		  $inser_puce = 
-		  	// "\n<div class='puce_donnee' id='statut$id'$dir_lang>" .
-				"\n<div class='puce_donnee_fixe' $action>" .
-			  http_img_pack($puce, $title, "id='imgstatutdonnee$id' style='margin: 1px;'") ."</div>"
-				. "\n<div class='puce_donnee_popup' id='statutdecaldonnee$id' onmouseout=\"cacher('statutdecaldonnee$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>\n"
+		  	// "\n<div class='puce_forms_donnee' id='statut$id'$dir_lang>" .
+				"\n<div class='puce_forms_donnee_fixe' $action>" .
+			  http_img_pack($puce, $title, "id='imgstatutforms_donnee$id' style='margin: 1px;'") ."</div>"
+				. "\n<div class='puce_forms_donnee_popup' id='statutdecalforms_donnee$id' onmouseout=\"cacher('statutdecalforms_donnee$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>\n"
 				. afficher_script_statut($id, 'forms_donnee', -1, 'puce-orange.gif', 'prop', $titles['orange'], $action)
 				. afficher_script_statut($id, 'forms_donnee', -12, 'puce-verte.gif', 'publie', $titles['verte'], $action)
 				. afficher_script_statut($id, 'forms_donnee', -23, 'puce-rouge.gif', 'refuse', $titles['rouge'], $action)
@@ -98,18 +98,18 @@ function puce_statut_donnee($id, $statut, $id_form, $ajax = false) {
 			;
 		}
 		else{
-		  $inser_puce = "\n<div class='puce_donnee' id='statut$id'$dir_lang>".
-			  http_img_pack($puce, $title, "id='imgstatutdonnee$id' style='margin: 1px;'") ."</div>";
+		  $inser_puce = "\n<div class='puce_forms_donnee' id='statut$id'$dir_lang>".
+			  http_img_pack($puce, $title, "id='imgstatutforms_donnee$id' style='margin: 1px;'") ."</div>";
 			if ($script==NULL){
-				$action = "'".generer_url_ecrire('puce_statut_donnee',"id='+id",true);
+				$action = "'".generer_url_ecrire('puce_statut_forms_donnee',"id='+id",true);
 				$script = "<script type='text/javascript'><!--\n";
 				$script .= "$(document).ready(function(){
-					$('div.puce_donnee').onemouseover( function() {
+					$('div.puce_forms_donnee').onemouseover( function() {
 						id = $(this).id();
 						id = id.substr(6,id.length-1);
 						$('#statut'+id).load($action,function(){ 
-								$('#statutdecaldonnee'+id).show(); 
-								/*$('#statut'+id).mouseover(function(){ $(this).children('.puce_donnee_popup').show(); });*/
+								$('#statutdecalforms_donnee'+id).show(); 
+								/*$('#statut'+id).mouseover(function(){ $(this).children('.puce_forms_donnee_popup').show(); });*/
 							});
 						});
 					
@@ -119,7 +119,7 @@ function puce_statut_donnee($id, $statut, $id_form, $ajax = false) {
 			}
 		}
 	} else {
-		$inser_puce = http_img_pack($puce, $title, "id='imgstatutdonnee$id' style='margin: 1px;'");
+		$inser_puce = http_img_pack($puce, $title, "id='imgstatutforms_donnee$id' style='margin: 1px;'");
 	}
 	return $inser_puce;
 }

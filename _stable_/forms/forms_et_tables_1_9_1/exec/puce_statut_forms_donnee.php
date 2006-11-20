@@ -18,7 +18,7 @@ include_spip('inc/autoriser');
 include_spip('inc/forms');  // ajax_retour compatibilite 1.9.1
 include_spip('inc/instituer_forms_donnee');  // ajax_retour compatibilite 1.9.1
 
-function exec_puce_statut_donnee_dist()
+function exec_puce_statut_forms_donnee_dist()
 {
 	$id = _request('id');
 	$s = spip_query(
