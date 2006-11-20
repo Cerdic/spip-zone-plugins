@@ -1882,6 +1882,7 @@ jQuery.extend({
 		
 		// Send the data
 		xml.send(data);
+		return xml;
 	},
 	
 	// Counter for holding the number of active queries
