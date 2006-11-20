@@ -66,11 +66,12 @@
 		if (!include_spip('inc/autoriser'))
 			include_spip('inc/autoriser_compat');
 		if (autoriser('supprimerdonnee','form',$id_form)){
-			$res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form));
+			spip_query("UPDATE spip_forms_donnees SET statut='poubelle' WHERE id_form="._q($id_form));
+			/*$res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form));
 			while ($row = spip_fetch_array($res)){
 				spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($row['id_donnee']));
 			}
-			spip_query("DELETE FROM spip_forms_donnees WHERE id_form="._q($id_form));
+			spip_query("DELETE FROM spip_forms_donnees WHERE id_form="._q($id_form));*/
 		}
 	}
 

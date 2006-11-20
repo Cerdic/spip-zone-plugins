@@ -104,7 +104,9 @@ function puce_statut_donnee($id, $statut, $id_form, $ajax = false) {
 				$action = "'".generer_url_ecrire('puce_statut_forms_donnee',"id='+id",true);
 				$script = "<script type='text/javascript'><!--\n";
 				$script .= "$(document).ready(function(){
-					$('div.puce_forms_donnee').onemouseover( function() {
+					$('div.puce_forms_donnee').mouseover( function() {
+						if (this.puce_loaded) return;
+						this.puce_loaded = true;
 						id = $(this).id();
 						id = id.substr(6,id.length-1);
 						$('#statut'+id).load($action,function(){ 
