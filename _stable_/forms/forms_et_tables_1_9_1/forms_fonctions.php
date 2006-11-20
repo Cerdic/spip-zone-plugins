@@ -47,10 +47,10 @@
 		$id_table = $boucle->id_table;
 		$boucle->from[$id_table] =  "spip_forms_donnees";
 	
-		if (!isset($boucle->modificateur['tout']) && !$boucle->tout){
+		if (!isset($boucle->modificateur['tout']) && !$boucle->tout)
 			$boucle->where[]= array("'='", "'$id_table.confirmation'", "'\"valide\"'");
+		if (!$boucle->statut && !isset($boucle->modificateur['tout']) && !$boucle->tout)
 			$boucle->where[]= array("'='", "'$id_table.statut'", "'\"publie\"'");
-		}
 	
 		return calculer_boucle($id_boucle, $boucles); 
 	}
@@ -87,7 +87,9 @@
 			$boucle->where[]= array("'='", "'champs.public'", "'\"oui\"'");
 			$boucle->group[] = $boucle->id_table . '.champ'; // ?  
 		}
-	
+		if (!$boucle->statut && !isset($boucle->modificateur['tout']) && !$boucle->tout)
+			$boucle->where[]= array("'='", "'donnees.statut'", "'\"publie\"'");
+
 		return calculer_boucle($id_boucle, $boucles); 
 	}
 	
