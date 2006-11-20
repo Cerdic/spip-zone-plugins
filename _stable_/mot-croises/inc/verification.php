@@ -1,20 +1,21 @@
 <?php
 
-function comparaison($tableau_grille){// compare les variables Post avec la valeau de la solution...
-    $erreurs=0;
+// compare les variables Post avec la valeau de la solution...
+function comparaison($tableau_grille){
+    $erreurs=0; $vides=0;
     foreach($tableau_grille as $ligne =>$contenu_ligne){
         $ligne++;
         foreach ($contenu_ligne as $colonne =>$cellule){
             $colonne++;
-            
-            if (strtoupper($GLOBALS["col".$colonne."lig".$ligne])!=strtoupper($cellule) and $cellule!='*') //compare les valeurs du tableau PHP avec les variables POST
-               {$erreurs++;
-               
-         		}
-         	
-               
-            }
-            }
-    return $erreurs;}
+			
+            //compare les valeurs du tableau PHP avec les variables POST
+			if ($cellule!='*') {
+	            if (trim($GLOBALS["col".$colonne."lig".$ligne])=='') $vides++;
+    	        elseif (strtoupper($GLOBALS["col".$colonne."lig".$ligne])!=strtoupper($cellule)) $erreurs++;
+			}	
+		}
+	}
+    return array($erreurs, $vides);
+}
 
 ?>

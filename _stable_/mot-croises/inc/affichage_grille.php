@@ -1,9 +1,13 @@
-<?php
-function lettre($texte) //return la lettre correpondant au chiffres
-{$alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
- return $alphabet[$texte-1];}
+﻿<?php
 
-function affichage_grille($tableau_grille,$solution=false){
+
+//retourne la lettre correpondant au chiffre
+function lettre_grille($texte) {
+	$alphabet="*ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	return $alphabet[$texte];
+}
+
+function affichage_grille($tableau_grille, $solution=false){
 	//affiche la grille de mot croisés, avec la solution au cas où
 	
 	// les variables de la grille
@@ -15,7 +19,7 @@ function affichage_grille($tableau_grille,$solution=false){
     
     (! $solution) ? $grille.="<form class=\"grille\" action=\"".$page."\" method=\"post\">\n" : $grille.="<div class=\"solution\"><h2 class=\"spip\">"._T('motscroises:Solution')." : </h2>" ;	// debut formulaire
     
-    $grille.="<table class=\"grille\" summary=\""._T('motscroises:table_summary',Array('hauteur'=>$hauteur,'largeur'=>$largeur))."\">\n
+    $grille.='<table class="grille" cellspacing="0" border="0" summary="'._T('motscroises:table_summary',Array('hauteur'=>$hauteur,'largeur'=>$largeur))."\">\n
     \t<tr>\n\t\t<td class=\"coin\"></td>\n";	// debut tableau + 1ere celule
 	
 	$increment_largeur=1;   //un iccrément pour les cellules d'entete
@@ -30,43 +34,31 @@ function affichage_grille($tableau_grille,$solution=false){
 	
 	//debut affichage des lignes
 	foreach($tableau_grille as $ligne =>$contenu_ligne){
-        $ligne++;
-        $grille=$grille."\t<tr>\n\t<th scope=\"row\">".lettre($ligne)."</th>\n";	//numeros de ligne
-        
-        foreach ($contenu_ligne as $colonne =>$cellule){
-            $colonne++;
-            //s'il s'agit d'un noir
-            if ($cellule=="*"){
-                    $grille.="\t\t<td class=\"noir\">*</td>\n";
-                    }
-                   	
-			else if ($solution){
-            	$grille.="\t\t<td>";
-            	$grille.=$cellule;
-            	$grille.= "</td>\n" ;
-            	}
-
-            else {  $grille.="\t\t<td>";
-            		
-            		
-            		
-            		$grille.='<label for="col'.$colonne.'lig'.$ligne.'">'._T('motscroises:ligne',Array('n'=>lettre($ligne))).';'._T('motscroises:colonne',Array('n'=>$colonne)).'</label>';
-                    
-                    if (isset($GLOBALS['col'.$colonne.'lig'.$ligne]) and $GLOBALS['col'.$colonne.'lig'.$ligne]!='') //: test l'existence de la variable global correpsonte à cette cellule
-                        {
-                        
-                        $grille.='<input type="text" maxlength="1" value="'.$GLOBALS['col'.$colonne.'lig'.$ligne].'" name="col'.$colonne.'lig'.$ligne.'" id="col'.$colonne.'lig'.$ligne."\" />";
-                        }
-                    else
-                        {
-                        
-                        $grille.='<input type="text" maxlength="1"  name="col'.$colonne.'lig'.$ligne.'" id="col'.$colonne.'lig'.$ligne."\" />";                        
-						}
+		$ligne++;
+		$grille=$grille."\t<tr>\n\t<th scope=\"row\">".lettre_grille($ligne)."</th>\n";	//numeros de ligne
+		
+		foreach ($contenu_ligne as $colonne =>$cellule){
+		    $colonne++;
+		    //s'il s'agit d'un noir
+		    if ($cellule == "*") 
+		    	$grille .= "\t\t<td class=\"noir\">*</td>\n";
+				else if ($solution)
+					$grille .= "\t\t<td>$cellule</td>\n" ;
+				else {
+					$grille .= "\t\t<td>"
+						.'<label for="col'.$colonne.'lig'.$ligne.'">'
+						._T('motscroises:ligne',Array('n'=>lettre_grille($ligne))).';'
+						._T('motscroises:colonne',Array('n'=>$colonne)).'</label>';
+						
+					// test l'existence de la variable global correpsonte à cette cellule	
+					if (isset($GLOBALS['col'.$colonne.'lig'.$ligne]) and $GLOBALS['col'.$colonne.'lig'.$ligne]!='') 
+						$grille.='<input type="text" maxlength="1" value="'.$GLOBALS['col'.$colonne.'lig'.$ligne].'" name="col'.$colonne.'lig'.$ligne.'" id="col'.$colonne.'lig'.$ligne."\" />";
+					else
+						$grille.='<input type="text" maxlength="1"  name="col'.$colonne.'lig'.$ligne.'" id="col'.$colonne.'lig'.$ligne."\" />";                        
 					
-					$grille.= "</td>\n" ;		//cloture de la cellule
-            
+					$grille .= "</td>\n" ;		//cloture de la cellule
 				}
-		}
+		} // foreach
                                                     
         $grille=$grille."\t</tr>\n";}		
 	
@@ -77,5 +69,6 @@ function affichage_grille($tableau_grille,$solution=false){
 	(!$solution) ? $grille.="<br /><input id=\"solution\" name=\"solution[]\" type=\"checkbox\"value=\"1\" /><label for=\"solution\" >"._T('motscroises:afficher_solution')."</label><br />\n
 <input type=\"submit\" value=\""._T('motscroises:verifier')."\" name=\"bouton_envoi\" /></form>\n" : $grille.="</div>";
 
-return $grille;}
+	return $grille;
+}
 ?>
