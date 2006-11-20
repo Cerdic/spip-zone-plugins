@@ -11,7 +11,7 @@ include_spip('base/accesgroupes_tables');
 //	 la fonction afficher_breves_voir() et non pas la fonction exec_breves_voir() !!!
 //	 merci ESJ pour la subtilité du include() php à la place du inclure_spip()
 			$exec = _request('exec'); // si on est dans l'espace privé : intégrer le fichier concerné par la surcharge
-    	if (in_array($exec, array('naviguer','rubriques_edit','articles','articles_edit','breves_edit'))) {  // ,'breves_voir'
+    	if (in_array($exec, array('naviguer','rubriques_edit','articles','articles_edit','articles_versions','breves_edit'))) {  // ,'breves_voir'
     	 // inclure uniquement le fichier exec dont a besoin ET utiliser un include() php et non pas include_spip() pour ne pas se faire couillonner par find_in_path()
     		 include('exec/'.$exec.'.php');
        // appel du fichier contenant les fonctions exec_xxx() modifiées pour accesgroupes
@@ -66,7 +66,7 @@ include_spip('base/accesgroupes_tables');
 	}
 
 			
-			
+/********************  OLD : la boucle de la v 0.7
 // création de la boucle ACCESGROUPES
 $GLOBALS['tables_principales']['spip_accesgroupes'] = array('field' => array(), 'key' => array());
 $GLOBALS['table_des_tables']['accesgroupes'] = 'accesgroupes';
@@ -103,10 +103,9 @@ function boucle_ACCESGROUPES($id_boucle, &$boucles) {
 CODE;
 	return $code;
 }
-/* pour info : syntaxe possible dans $code = <<<CODE
-				\$toto = '$txt';
-				return \$toto;
-*/
+// pour info : syntaxe possible dans $code = <<<CODE
+//				\$toto = '$txt';
+//				return \$toto;
 
 
 // le filtre qui permet d'ajouter une img aux #TITRE des rubriques/articles/breves à accès restreint
@@ -138,6 +137,8 @@ function critere_accesgroupes_invisible($id_boucle, &$boucles, $crit) {
 				 				 $boucle->where[] = ' id_rubrique != '.$id_rub_ec;
 				 }
 }
+
+*************************** FIN OLD */
 
 
 // détermine si une rubrique $rub est restreinte ou non (en fct de la provenance $prive_public : prive | public)
@@ -348,7 +349,7 @@ function accesgroupes_trouve_parent_restreint($rub, $prive_public, $retour = '')
 							 		$retour = $rub;
 							 }
 							 else {
-      				 			$sql374 = "SELECT id_parent FROM $Tspip_rubriques WHERE id_rubrique = $rub LIMIT 1";
+      				 			$sql374 = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique = $rub LIMIT 1";
       							$result374 = spip_query($sql374);
       							$row374 = spip_fetch_array($result374);
       							$id_parent = $row374['id_parent'];
@@ -378,7 +379,7 @@ function accesgroupes_affichage_acces_restreint() {
 				 $exec = _request('exec');
 			// trouver l'id_rubrique dans laquelle se trouve l'élément restreint en cours
 				 if ($exec != '') {  // si on est dans l'espace privé
-						if ($exec == 'articles' OR $exec == 'articles_edit') {
+						if ($exec == 'articles' OR $exec == 'articles_edit' OR $exec == 'articles_versions') {
 									 global $id_article;
 									 $sql2 = "SELECT id_rubrique FROM spip_articles WHERE id_article = $id_article LIMIT 1";
 									 $result2 = spip_query($sql2);
