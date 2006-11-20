@@ -18,8 +18,9 @@ include_once _DIR_RESTREINT_ABS.'inc_version.php';
 if (isset($_GET['fond']))
 	redirige_par_entete(generer_url_public($_GET['fond']));
 
+$tmp_marqueur = $GLOBALS['marqueur'];
+
 if(isset($GLOBALS['auteur_session'])) {
-	$tmp_marqueur = $GLOBALS['marqueur'];
 	//faire un cache base sur l'id_auteur
 	$GLOBALS['marqueur'] .= ':session'.$GLOBALS['auteur_session']['id_auteur'];
 	//pour faire un cache base sur le statut des visiteurs, decommenter la ligne
