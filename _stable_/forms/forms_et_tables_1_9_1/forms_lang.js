@@ -42,7 +42,7 @@ function forms_change_lang(el,container,target) {
 	if(!forms_fields[target_name]) forms_fields[target_name] = $('input[@id^="nom_"]',target);
 	//save the current values
 	forms_fields[target_name].each(function(){
-		forms_save_lang(this,this.form_ref.form_lang);
+		forms_save_lang(this,this.form.form_lang);
 	});
 	//change current lang	
 	target.each(function(){this.form_lang = lang});
@@ -58,13 +58,9 @@ function forms_init_multi(target) {
 	//store the fields of the target if any
 	var init_forms = target?$("div.forms_champs form",target):forms_forms;
 	//init the value of the field to current lang
-	init_forms.each(function() {
-		var form = this;
-		form.form_lang = forms_def_lang;
-		$('input[@id^="nom_"]',this).each(function(){
-			this.form_ref = form;
-			forms_init_field(this,form.form_lang);
-		});
+	init_forms.each(function() { this.form_lang = forms_def_lang; }); 
+	$('input[@id^="nom_"]',init_forms).each(function(){
+		forms_init_field(this,this.form.form_lang);
 	});
 	//create menu for each form. The menu is just before the form
 	init_forms.prev().empty().each(function() {
