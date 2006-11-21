@@ -37,4 +37,5 @@ function pas_de_grille_introduction($texte) {
 	$texte = preg_replace(',<(vertical)>(.*)<\/\1>,UimsS','',$texte);
 	return $texte;
 }
+
 ?>

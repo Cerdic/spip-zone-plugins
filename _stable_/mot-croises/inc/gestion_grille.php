@@ -1,5 +1,6 @@
 ﻿<?php
 
+define(_GRILLE_, '<!-- grille -->');
 
 //retourne la lettre correpondant au chiffre
 function lettre_grille($texte) {
@@ -71,4 +72,41 @@ function affichage_grille($tableau_grille, $solution=false){
 
 	return $grille;
 }
+
+// déchiffre le code source de la grille
+function calcul_tableau_grille($texte){
+	$texte = trim($texte);
+	$tableau = explode("\r", $texte);	
+
+	//ligne par ligne
+	$j =0;
+	foreach ($tableau as $i){	
+		$tableau[$j] = explode('|',trim($i));		//une cellule, c'est beau !
+		array_shift($tableau[$j]);
+		array_pop($tableau[$j]);
+		$j++;
+	}
+	
+	return $tableau;
+}
+
+
+// compare les variables Post avec les valeurs de la solution...
+function comparaison_grille($tableau_grille){
+    $erreurs=0; $vides=0;
+    foreach($tableau_grille as $ligne =>$contenu_ligne){
+        $ligne++;
+        foreach ($contenu_ligne as $colonne =>$cellule){
+            $colonne++;
+			
+            //compare les valeurs du tableau PHP avec les variables POST
+			if ($cellule!='*') {
+	            if (trim($GLOBALS["col".$colonne."lig".$ligne])=='') $vides++;
+    	        elseif (strtoupper($GLOBALS["col".$colonne."lig".$ligne])!=strtoupper($cellule)) $erreurs++;
+			}	
+		}
+	}
+    return array($erreurs, $vides);
+}
+
 ?>

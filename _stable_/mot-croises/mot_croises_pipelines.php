@@ -1,26 +1,27 @@
 ﻿<?php
 
-function mot_croises_pre_propre($texte){
+	//transforme les listes verticales/horizontale spip en html
+function mot_croises_listes ($texte){
+	$texte = preg_replace('/ *-#/','<li>',$texte);
+	$texte = implode("</li>\n", preg_split("/\n*\r*\n+\r*\n*/",$texte));
+	return "<ol>$texte</li></ol>"; 
+}
 	
-	if (! preg_match("/<grille>|<\/grille>/",$texte))
-		{return $texte;}
+function mot_croises_pre_propre($texte){ return $texte;
+	if (! preg_match("/<grille>|<\/grille>/",$texte)) return $texte;
 	
-	include_spip('inc/calculer_grille');
-	include_spip('inc/affichage_grille');
+	include_spip('inc/gestion_grille');
 	
 	$tableau = preg_split("/<grille>|<\/grille>/",$texte);					//sera uniquement le tableau spip, mais on attend pour le moment
 	$j =0;
 	
 	foreach ($tableau as $i){
-			if ($j!=0 and $j!=count($tableau)-1)	//pas les extremités du tableau
-				{
-				include_spip('inc/affichage_grille');
+			if ($j!=0 and $j!=count($tableau)-1){	//pas les extremités du tableau
 				$tableau_php = calcul_tableau_grille($tableau[$j]);
 			
 				//calcul erreur
 				if ($GLOBALS["bouton_envoi"] == '') $erreur='';
 				else {
-					include_spip('inc/verification');
 					list($nbr_erreurs, $nbr_vides) = comparaison($tableau_php); 
 					$erreur = '<strong class="erreur">';
 					$erreur .= ($nbr_erreurs==0)?_T('motscroises:aucune_erreur'):(
@@ -33,8 +34,7 @@ function mot_croises_pre_propre($texte){
 				}
 				//fin calcul erreur
 				
-				$tableau[$j] = code_echappement(_QCM_ECHAP.$erreur.affichage_grille($tableau_php)._QCM_ECHAP);	
-						
+				$tableau[$j] = code_echappement(_GRILLE_.$erreur.affichage_grille($tableau_php)._GRILLE_);	
 				}
 			
 			$j++;
@@ -42,52 +42,45 @@ function mot_croises_pre_propre($texte){
 	
 	$texte = implode($tableau);
 	
-	//debut def horizontalement
+	// definitions horizontales
 	$tableau = preg_split("/<horizontal>|<\/horizontal>/",$texte);
-	$j =0;
-	
+	$j = 0;
 	foreach ($tableau as $i){
-		
 		if ($j!=0 and $j!=count($tableau)-1)	//pas les extremités du tableau
-				$tableau[$j] = code_echappement(_QCM_ECHAP
+				$tableau[$j] = code_echappement(_GRILLE_
 					.'<div class="spip horizontal"><h4 class="spip grille">'
 					._T('motscroises:horizontalement')." :</h4>\n"
-					.liste_spip(trim($i))."</div>"._QCM_ECHAP);
+					.mot_croises_listes(trim($i))."</div>"._GRILLE_);
 		$j++;
 	}
 	$texte = implode($tableau);
 	
-	// fin def horizontal et debut-def-vertical
-	
+	// definitions verticales
 	$tableau = preg_split("/<vertical>|<\/vertical>/",$texte);
-	$j =0;
-	
+	$j = 0;
 	foreach ($tableau as $i){
-		
 		if ($j!=0 and $j!=count($tableau)-1)	//pas les extremités du tableau
-				$tableau[$j] = code_echappement(_QCM_ECHAP
+				$tableau[$j] = code_echappement(_GRILLE_
 					.'<div class="spip vertical"><h4 class="spip grille">'
 					._T('motscroises:verticalement')." :</h4>\n"
-					.liste_spip(trim($i))."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>"._QCM_ECHAP); // Bug IE ?
+					.mot_croises_listes(trim($i))."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>"._GRILLE_); // Bug IE ?
 		$j++;
 	}
 	$texte = implode($tableau);
 	
-	// fin def-vertical
-	
 	// solution
-	if ($GLOBALS["solution"][0] == 1) $texte .= code_echappement(_QCM_ECHAP.affichage_grille($tableau_php, true)._QCM_ECHAP);
+	if ($GLOBALS["solution"][0] == 1) $texte .= code_echappement(_GRILLE_.affichage_grille($tableau_php, true)._GRILLE_);
 
 	return $texte;
-	
 }
 
-function liste_spip ($texte){				//transforme les listes verticales/horizontale spip en html
-	
-	$texte = preg_replace('/-#/','<li>',$texte);
-	$texte = implode("</li>\n", preg_split("/\n*\r*\n+\r*\n*/",$texte));
-	
-	return "<ol>$texte</li></ol>"; 
+function mot_croises_header_prive($flux){
+	$flux .= '<link rel="stylesheet" type="text/css" href="'.direction_css(find_in_path('mots-croises-prive.css')).'" />';
+	$flux .='<script type="text/javascript" src="'.find_in_path("mots-croises.js").'"></script>';
+	return $flux;
 }
 
+function mot_croises_insert_head($flux){
+	return $flux."<link rel=\"stylesheet\" type=\"text/css\" href=\"".direction_css(find_in_path("mots-croises.css"))."\" />\n<script src=\"".find_in_path("mots-croises.js")."\" type=\"text/javascript\"></script>";
+}
 ?>

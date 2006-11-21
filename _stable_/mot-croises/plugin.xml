@@ -37,17 +37,17 @@ _ il n&eacute;cessite l'activation du plugin {{jQuery}} ou une version de spip s
 	<prefix>mot_croises</prefix>
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>mot_croises_insert_head.php</inclure>
+		<inclure>mot_croises_pipelines.php</inclure>
 		<action>insert_head</action>
 	</pipeline>
 	<pipeline>
 		<nom>pre_propre</nom>
-		<inclure>mot_croises_avant_propre.php</inclure>
+		<inclure>mot_croises_pipelines.php</inclure>
 		<action>pre_propre</action>
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>mot_croises_header_prive.php</inclure>
+		<inclure>mot_croises_pipelines.php</inclure>
 		<action>header_prive</action>
 	</pipeline>
 </plugin>
