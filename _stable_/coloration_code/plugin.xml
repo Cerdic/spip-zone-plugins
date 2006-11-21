@@ -18,47 +18,31 @@
 	<description>
 	<multi>
 	[fr]
-	  Coloration syntaxique du code source dans SPIP
+{{{Coloration syntaxique du code source dans SPIP}}}
 
-	  il suffit de mettre le code entre {{&lt;code class="langage">...&lt;/code>}} ou {{&lt;cadre class="langage">...&lt;/cadre>}}.
-	  Les langages support&eacute;s sont ceux fournis par [->http://sourceforge.net/projects/geshi/].
-	  
-	  Vous pouvez aussi utiliser coloration_code comme un filtre , voir exemple lecode.html
-	  
-	  L'url depuis l'article serait 
-<![CDATA[	  
-        <div style="float: right">
-        <a href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}" title="voir le code de article" class="spip_in">Voir le code de l'article</a>
-        </div>	  
-]]>
+Il suffit de mettre le code entre
+_ {{&lt;code class="langage">...&lt;/code>}}
+_ ou
+_ {{&lt;cadre class="langage">...&lt;/cadre>}}.
+_ Les langages support&eacute;s sont ceux fournis par [->http://sourceforge.net/projects/geshi/].
+_ Vous pouvez aussi utiliser {coloration_code_color} comme un filtre dans un squelette, voir exemple lecode.html. L'url depuis l'article serait &lt;a&nbsp;href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}" title="voir le code de article" class="spip_in"&gt;Voir le code de l'article&lt;/a&gt;
 	  [en]
-	  Syntax higlighting of code placed in SPIP articles.
-
-	  You just have to put it between the tags:{{&lt;code class="language">...&lt;/code>}} or  ou {{&lt;cadre class="langage">...&lt;/cadre>}}.
-	  The possible languages are the ones supported by [->http://sourceforge.net/projects/geshi/].
-	  
-	  You may also use coloration_code as a filter , see example lecode.html
-	  
-	  From article url would be 
-<![CDATA[	  
-        <div style="float: right">
-        <a href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}" title="view article's code" class="spip_in">View article's code</a>
-        </div>	  
-]]>
+{{{Syntax higlighting of code placed in SPIP articles.}}}
+You just have to put it between the tags:
+_ {{&lt;code class="language">...&lt;/code>}}
+_ or
+_ {{&lt;cadre class="langage">...&lt;/cadre>}}.
+_ The possible languages are the ones supported by [->http://sourceforge.net/projects/geshi/].
+_ You may also use {coloration_code_color} as a filter in a squelette, see example lecode.html. From article url would be &lt;a&nbsp;href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}" title="view article's code" class="spip_in"&gt;View article's code&lt;/a&gt;
 	[it]
-	Colorazione sintattica del codice utilizzato nel testo.
+{{{Colorazione sintattica del codice utilizzato nel testo.}}}
 
-	Dovete solo utilizzare il segnaposto:  {{&lt;code class="linguaggio">...&lt;/code>}},  o {{&lt;cadre class="langage">...&lt;/cadre>}}.
-	&Egrave; compatibile con i linguaggi di [->http://sourceforge.net/projects/geshi/].
-	  
-	Potete utilizzare coloration_code anche come un filtro , vedete l'esempio lecode.html
-	  
-	L'url per vedere il codice dell'articolo dalla sua stessa pagina sarà:
-<![CDATA[	  
-        <div style="float: right">
-        <a href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}" title="vedi il codice dell'articolo" class="spip_in">Vedi il codice dell'articolo</a>
-        </div>
-]]>
+Dovete solo utilizzare il segnaposto:
+_ {{&lt;code class="linguaggio">...&lt;/code>}}
+_ o
+_ {{&lt;cadre class="langage">...&lt;/cadre>}}
+_ &Egrave; compatibile con i linguaggi di [->http://sourceforge.net/projects/geshi/].
+_ Potete utilizzare {coloration_code_color} anche come un filtro in scheletro, vedete l'esempio lecode.html. L'url per vedere il codice dell'articolo dalla sua stessa pagina sarà: &lt;a&nbsp;href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}" title="vedi il codice dell'articolo" class="spip_in"&gt;Vedi il codice dell'articolo&lt;/a&gt;
 	  </multi>
 	</description>
     <fonctions> <!-- charge a chaque recalul de page , donc filtre -->
