@@ -46,7 +46,7 @@
 			$champ = $row['champ'];
 			foreach ($row as $k=>$v)
 				$structure[$champ][$k] = $v;
-			if (($type=='select') OR ($type='multiple')){
+			if (($type == 'select') OR ($type == 'multiple')){
 				$res2 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ)." ORDER BY rang");
 				while ($row2 = spip_fetch_array($res2))
 					$structure[$champ]['choix'][$row2['choix']] = trim(textebrut(typo($row2['titre'])));
