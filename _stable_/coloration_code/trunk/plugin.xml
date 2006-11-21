@@ -18,53 +18,44 @@
 	<description>
 	<multi>
 	[fr]
-	  Coloration syntaxique du code source dans SPIP
+{{{Coloration syntaxique du code source dans les articles SPIP}}}
+Il suffit de mettre le code entre
+_ {{&lt;code class="langage">...&lt;/code>}}
+_ ou avec un cadre
+_ {{&lt;cadre class="langage">...&lt;/cadre>}}.
+_ Les langages support&eacute;s sont ceux fournis par [->http://sourceforge.net/projects/geshi/] avec une classe supplementaire: "spip".
 
-	  il suffit de mettre le code entre {{&lt;code class="langage">...&lt;/code>}} ou {{&lt;cadre class="langage">...&lt;/cadre>}}.
-	  Les langages support&#233;s sont ceux fournis par [->http://sourceforge.net/projects/geshi/] avec une classe supplementaire: "spip".
+Par d&#233;faut, si le code mis en surbrillance fait plus d'une ligne, il est mis en cache sous forme textuelle et propos&#233; au t&#233;l&#233;chargement.
+Ce fonctionnement est control&#233; globalement par une constante PLUGIN_COLORATION_CODE_TELECHARGE d&#233;faut true.
+Il peut &#234;tre forc&#233; localement en rajoutant la classe "sans_telechargement" dans un sens ou "chargement" dans l'autre comme {{&lt;code class="php sans_telechargement">}}
 
-	  Par d&#233;faut, si le code mis en surbrillance fait plus d'une ligne, il est mis en cache sous forme textuelle et propos&#233; au t&#233;l&#233;chargement.
-	  Ce fonctionnement est control&#233; globalement par une constante PLUGIN_COLORATION_CODE_TELECHARGE d&#233;faut true.
-	  Il peut &#234;tre forc&#233; localement en rajoutant la classe "sans_telechargement" dans un sens ou "chargement" dans l'autre comme {{&lt;code class="php sans_telechargement">}}
-
-	  Vous pouvez aussi utiliser coloration_code comme un filtre "coloration_code_color" comme #TEXTE**|coloration_code_color&#123;spip,code&#125;: colore #TEXTE avec le language spip en format code (sans cadre), voir exemple lecode.html.
-	  L'url depuis l'article serait 
-
-        &lt;div style="float: right">
-        &lt;a href="#URL_SITE_SPIP/spip.php?page=lecode&amp;id_article=#ENV&#123;id_article&#125;" title="voir le code de article" class="spip_in">Voir le code de l'article&lt;/a>
-        &lt;/div>	  
+Vous pouvez aussi utiliser le filtre {coloration_code_color} dans un squelette comme #TEXTE**|coloration_code_color&#123;spip,code&#125;: colore #TEXTE avec le language spip en format code (sans cadre), voir exemple lecode.html. L'url depuis l'article serait &lt;a&nbsp;href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV#123;id_article#125;" title="voir le code de article" class="spip_in"&gt;Voir le code de l'article&lt;/a&gt;
 	  [en]
-	  Syntax higlighting of code placed in SPIP articles.
+{{{Syntax higlighting of code placed in SPIP articles.}}}
+You just have to put it between the tags:
+_ {{&lt;code class="language">...&lt;/code>}}
+_ or with a frame
+_ {{&lt;cadre class="langage">...&lt;/cadre>}}.
+_ The possible languages are the ones supported by [->http://sourceforge.net/projects/geshi/] with an extra class: "spip".
 
-	  You just have to put it between the tags:{{&lt;code class="language">...&lt;/code>}} or {{&lt;cadre class="langage">...&lt;/cadre>}}, "cadre" adding a frame.
-	  The possible languages are the ones supported by [->http://sourceforge.net/projects/geshi/] with an extra class: "spip".
+By default, when the highlighted code has more than one line, il will be put in cache as text and proposed to upload.
+This feature may be controlled globaly through the constant PLUGIN_COLORATION_CODE_TELECHARGE default true.
+It may also be forced locally by adding a class "sans_telechargement" in a way or "chargement" in the other as {{&lt;code class="php sans_telechargement">}}
 
-	  By default, when the highlighted code has more than one line, il will be put in cache as text and proposed to upload.
-	  This feature may be controlled globaly through the constant PLUGIN_COLORATION_CODE_TELECHARGE default true.
-	  It may also be forced locally by adding a class "sans_telechargement" in a way or "chargement" in the other as {{&lt;code class="php sans_telechargement">}}
-
-	  You may also use coloration_code as a filter "coloration_code_color" as #TEXTE**|coloration_code_color&#123;spip,code&#125;: highlights #TEXTE with langage "spip" in format code (without frame) , see example lecode.html.
-	  From article url would be 
-
-        &lt;div style="float: right">
-        &lt;a href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV&#123;id_article&#125;" title="view article's code" class="spip_in">View article's code&lt;/a>
-        &lt;/div>	  
+You may also use {coloration_code_color} as a filter in a squelette as #TEXTE**|coloration_code_color&#123;spip,code&#125;: highlights #TEXTE with langage "spip" in format code (without frame), see example lecode.html. From article url would be &lt;a&nbsp;href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV#123;id_article#125;" title="view article's code" class="spip_in"&gt;View article's code&lt;/a&gt;
 	[it]
-	Colorazione sintattica del codice utilizzato nel testo.
+{{{Colorazione sintattica del codice utilizzato nel testo.}}}
+Dovete solo utilizzare il segnaposto:
+_ {{&lt;code class="linguaggio">...&lt;/code>}}
+_ o con riquadro
+_ {{&lt;cadre class="linguaggio">...&lt;/cadre>}}
+_ Sono supportati tutti i linguaggi di [->http://sourceforge.net/projects/geshi/] ed in aggiunta la classe "spip".
 
-	Dovete solo utilizzare il segnaposto:  {{&lt;code class="linguaggio">...&lt;/code>}},  o {{&lt;cadre class="langage">...&lt;/cadre>}}.
-	Sono supportati tutti i linguaggi di [->http://sourceforge.net/projects/geshi/] ed in aggiunta la classe "spip".
+In maniera predefinita, Se il codice da colorare ha pi&#249; di una linea, sar&#224; salvato in cache sotto forma di testo semplice e disponibile per lo scaricamento.
+Questa impostazione pu&#242; essere modificata globalmente grazie alla costante PLUGIN_COLORATION_CODE_TELECHARGE, che normalmente &#232; impostata a true.
+Quest'ultima pu&#242; anche essere modificata localmente aggiugendo la classe "sans_telechargement" o "chargement", es: {{&lt;code class="php sans_telechargement">}}
 
-  In maniera predefinita, Se il codice da colorare ha pi&#249; di una linea, sar&#224; salvato in cache sotto forma di testo semplice e disponibile per lo scaricamento.
-  Questa impostazione pu&#242; essere modificata globalmente grazie alla costante PLUGIN_COLORATION_CODE_TELECHARGE, che normalmente &#232; impostata a true.
-	Quest'ultima pu&#242; anche essere modificata localmente aggiugendo la classe "sans_telechargement" o "chargement", es: {{&lt;code class="php sans_telechargement">}}
-
-  Potete utilizzare coloration_code anche come un filtro "coloration_code_color" in questo modo: #TEXTE**|coloration_code_color&#123;spip,code&#125;: colora #TEXTE con le regole del linguaggio "spip" in formato code (senza il riquadro) , vedi l'esempio lecode.html.
-  L'url per vedere il codice dell'articolo dalla sua stessa pagina sar&#224;:
-
-        &lt;div style="float: right">
-        &lt;a href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV&#123;id_article&#125;" title="vedi il codice dell'articolo" class="spip_in">Vedi il codice dell'articolo&lt;/a>
-        &lt;/div>
+_ Potete utilizzare {coloration_code_color} anche come un filtro in scheletro in questo modo: #TEXTE**|coloration_code_color&#123;spip,code&#125;: colora #TEXTE con le regole del linguaggio "spip" in formato code (senza il riquadro), vedi l'esempio lecode.html. L'url per vedere il codice dell'articolo dalla sua stessa pagina sarà: &lt;a&nbsp;href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV&#123;id_article&#125;" title="vedi il codice dell'articolo" class="spip_in"&gt;Vedi il codice dell'articolo&lt;/a&gt;
 	  </multi>
 	</description>
 	<lien></lien> <!-- URI de documentation -->
