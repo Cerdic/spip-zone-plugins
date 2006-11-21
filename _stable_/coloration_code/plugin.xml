@@ -1,9 +1,9 @@
 <plugin>
 	<nom> <!-- Coloration code , geshi -->
 	  <multi>
-		[fr]Coloration Code
-		[en]Code higlighting
-		[it]Colorazione del codice
+		[fr]Coloration Code pour 1.9.1
+		[en]Code higlighting for 1.9.1
+		[it]Colorazione del codice per 1.9.1
 		</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
