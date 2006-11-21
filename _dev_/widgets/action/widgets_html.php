@@ -34,11 +34,7 @@ function controleur_dist($regs) {
      ($controleur = 'controleurs/' . $type . '_' . $champ) . '.html'))
     || ($fichier = find_in_path(
      ($controleur = 'controleurs/' . $champ) .'.html'))) {
-     	$fh = fopen($fichier, 'rb');
-     	$controldata = '';
-     	while (!feof($fh)) {
-            $controldata .= fread($fh, 8192);
-        }
+     	if (!lire_fichier($fichier, $controldata)) die('erreur lecture controleur');
         if (preg_match_all('/\bname=(["\'])#ENV\{name_(\w+)\}\1/',
        					$controldata, $matches, PREG_PATTERN_ORDER)) {
 	    	$champ = $matches[2];
