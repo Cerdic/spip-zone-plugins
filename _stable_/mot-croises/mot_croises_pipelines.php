@@ -7,7 +7,7 @@ function mot_croises_listes ($texte){
 	return "<ol>$texte</li></ol>"; 
 }
 	
-function mot_croises_pre_propre($texte){ return $texte;
+function mot_croises_pre_propre($texte){ 
 	if (! preg_match("/<grille>|<\/grille>/",$texte)) return $texte;
 	
 	include_spip('inc/gestion_grille');
