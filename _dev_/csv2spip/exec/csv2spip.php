@@ -251,15 +251,16 @@ function exec_csv2spip() {
 				$_POST['ss_groupes_admin'] == 1 ? $ss_groupes_admin = 1 : $ss_groupes_admin = 0;
 				$_POST['ss_groupes_visit'] == 1 ? $ss_groupes_visit = 1 : $ss_groupes_visit = 0;
 				if ($ss_groupes_redac == 1 OR $ss_groupes_admin == 1 OR $ss_groupes_visit == 1) {
-/*
 					 $sql11 = spip_query("SELECT valeur FROM spip_meta WHERE nom = 'plugin' LIMIT 1");
     			 $result11 = spip_fetch_array($sql11);
     			 $ch_meta = $result11['valeur'];
     			 $Tch_meta = explode(',', $ch_meta);
+    		// si le plugin acces_groupes est activé
 					 if (in_array('acces_groupes', $Tch_meta)) {			
-*/
+/* ça fonctionne qu'en 1.9.2 ça... donc !!! attention au nom du rep qui contient acces_groupes !!!
     		// si le plugin acces_groupes est activé
 					 if (defined(_DIR_PLUGIN_ACCESGROUPES)) {					 		 
+*/
 							 $Terr_acces_groupes = array();
 							 $Tres_acces_groupes = array();
 							 $Tgroupes_accesgroupes = array();
@@ -1161,6 +1162,10 @@ echo "</script>";
 			 fin_cadre_couleur();
   		 debut_cadre_couleur("../"._DIR_PLUGIN_CSV2SPIP."/img_pack/groupe-24.png", false, "", _T('csvspip:acces_groupes'));
     	 echo "<strong>"._T('csvspip:option_acces_groupes')."</strong>"; 
+/*	ça fonctionne qu'en 1.9.2 ça... 
+		// si le plugin acces_groupes est activé
+		   if (defined(_DIR_PLUGIN_ACCESGROUPES)) {
+*/			 
 			 $sql11 = spip_query("SELECT valeur FROM spip_meta WHERE nom = 'plugin' LIMIT 1");
 			 $result11 = spip_fetch_array($sql11);
 			 $ch_meta = $result11['valeur'];
