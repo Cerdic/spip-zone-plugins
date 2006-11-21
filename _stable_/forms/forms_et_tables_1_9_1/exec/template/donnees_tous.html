@@ -1,5 +1,5 @@
 #CACHE{0}
-#SET{colonnes_sans_tri,'0,1,2'}
+#SET{colonnes_sans_tri,'0,1'}
 	<link rel="stylesheet" type="text/css" href="#EVAL{_DIR_PLUGIN_FORMS}img_pack/donnees_tous.css" />
 	<script type="text/javascript" src="#EVAL{_DIR_PLUGIN_FORMS}javascript/jquery.tablesorter.dev.js"></script>
 <B_head>
@@ -19,7 +19,7 @@
 		<th>De</th>
 		<th>Page</th>
 		<BOUCLE_head(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{tout}{par rang}>
-		<th [(#SPECIFIANT|=={oui}|?{'','class="neutre"'})#SET{colonnes_sans_tri,#GET{colonnes_sans_tri}|concat{','}|concat{#COMPTEUR_BOUCLE|plus{5}}]>#TITRE</th>
+		<th [(#SPECIFIANT|=={oui}|?{'','class="neutre"'})#SET{colonnes_sans_tri,#GET{colonnes_sans_tri}|concat{','}|concat{#COMPTEUR_BOUCLE|plus{4}}]>#TITRE</th>
 		</BOUCLE_head>
 	</tr>
 </thead>
