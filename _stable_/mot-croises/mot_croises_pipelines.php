@@ -22,7 +22,7 @@ function mot_croises_pre_propre($texte){
 				//calcul erreur
 				if ($GLOBALS["bouton_envoi"] == '') $erreur='';
 				else {
-					list($nbr_erreurs, $nbr_vides) = comparaison($tableau_php); 
+					list($nbr_erreurs, $nbr_vides) = comparaison_grille($tableau_php); 
 					$erreur = '<strong class="erreur">';
 					$erreur .= ($nbr_erreurs==0)?_T('motscroises:aucune_erreur'):(
 					 ($nbr_erreurs==1)?_T('motscroises:une_erreur'):_T("motscroises:nombre_erreurs", Array('err'=>$nbr_erreurs))
