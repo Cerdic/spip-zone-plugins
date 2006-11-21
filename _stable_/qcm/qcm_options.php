@@ -29,7 +29,7 @@ if (!function_exists("introduction")) {
 } 
 
 function pas_de_qcm_introduction($texte) {
-	$texte = preg_replace("/<qcm>[\s\n\t]*\nT\s+([^\n]*)/", "[\\1]\n<qcm>", $texte);
+	$texte = preg_replace("/<qcm>[\s\n\t\r]*T\s+([^\n]*)/", "[\\1]\n<qcm>", $texte);
 	$texte = preg_replace(',<(qcm)>(.*)<\/\1>,UimsS', '', $texte);
 	return $texte;
 } 
