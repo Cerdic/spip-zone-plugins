@@ -1,42 +1,22 @@
 <link rel="stylesheet" type="text/css" href="#CHEMIN{img_pack/donnee_voir.css}" />
 <B_data>
 <span id='donnee-#ID_DONNEE' class='donnees'>
+#SET{donnee,''}
 <BOUCLE_data(FORMS_DONNEES){id_donnee}>
+	#SET{wrap_prec,''}
+	#SET{tampon,''}
 	<BOUCLE_champs(FORMS_CHAMPS){id_form}{par rang}>
-		<B_repchamps>
-		<span class='donnee-champ'>
-			<span class='donnee-champ-label'>#TITRE : </span>
-			#SET{wrap,#HTML_WRAP|wrap_split}
-			<span class='donnee-champ-data'>
-			[(#GET{wrap}|array_shift)]
-			<BOUCLE_repchamps(FORMS_DONNEES_CHAMPS){id_donnee}{champ}>[
-				(#REM) Regarder si le champ est du type select ou multiple, car dans ce cas il faut
-				decoder la reponse avec la structure du formulaire
-				]
-				<BOUCLE_champsselectmulti(FORMS_CHAMPS){id_form}{champ}{type IN select,multiple}>
-					<BOUCLE_champschoix(FORMS_CHAMPS_CHOIX){id_form}{champ}{choix=#VALEUR}>
-					#TITRE
-					</BOUCLE_champschoix>
-				</BOUCLE_champsselectmulti>[
-					(#REM) Regarder si le champ est du type mot cle, car dans ce cas il faut
-					recuperer le titre du mot cle au lieu de l'id
-					]
-					<BOUCLE_champsmot(FORMS_CHAMPS){id_form}{champ}{type=mot}>
-						<BOUCLE_champstitre(MOTS){id_mot=#VALEUR}>#TITRE</BOUCLE_champstitre>
-					</BOUCLE_champsmot>[
-						(#REM) C'est finalement un champ normal
-						]#VALEUR
-						<BOUCLE_fichier(FORMS_CHAMPS){id_form}{champ}{type=fichier}>
-						[(#ENV{mail_admin}|=={'oui'}|?{' ',''}) #URL_ECRIRE{forms_telecharger,id_donnee=#ID_DONNEE&champ=#CHAMP} ]
-						</BOUCLE_fichier>
-					<//B_champsmot>
-				<//B_champsselectmulti>
-			</BOUCLE_repchamps>
-			[(#GET{wrap}|array_shift)]
-			</span>
-		</span>
-		</B_repchamps>
+		[(#TYPE|=={separateur}|?{' '})
+			#SET{donnee,#GET{donnee}|concat{#GET{tampon}|wrap_champ{#GET{wrap_prec}}}}
+			#SET{wrap_prec,#HTML_WRAP} #SET{tampon,''}
+		]
+		#SET{truc,#INCLURE{fond=modeles/donnee_champ_1}{id_donnee}{champ}{id_form}}
+		#SET{tampon,#GET{tampon}|concat{#GET{truc}}	}
 	</BOUCLE_champs>
+	#SET{donnee,#GET{donnee}|concat{#GET{tampon}|wrap_champ{#GET{wrap_prec}}}}
+	<BOUCLE_f(FORMS){id_form}>
+	[(#GET{donnee}|wrap_champ{#HTML_WRAP})]
+	</BOUCLE_f>
 </BOUCLE_data>
 <span class='nettoyeur'> </span>
 </span>

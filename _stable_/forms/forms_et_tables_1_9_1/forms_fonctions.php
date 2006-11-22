@@ -192,6 +192,17 @@ function wrap_split($wrap){
 	return array($wrap_start,$wrap_end);
 }
 
+function wrap_champ($texte,$wrap){
+	if (!strlen(trim($wrap)) || !strlen(trim($texte))) return $texte;
+	if (strpos($wrap,'$1')===FALSE){
+		$wrap = wrap_split($wrap);
+		$texte = array_shift($wrap).$texte.array_shift($wrap);
+	}
+	else 
+		$texte = str_replace('$1',trim($texte),$wrap);
+	return $texte;
+}
+
 function balise_RESULTATS_SONDAGE($p) {
 	$_id_form = champ_sql('id_form', $p);
 

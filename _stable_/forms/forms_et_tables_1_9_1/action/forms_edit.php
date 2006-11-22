@@ -87,6 +87,7 @@ function Forms_update($id_form){
 	$type_form = _request('type_form');
 	$moderation = _request('moderation');
 	$public = _request('public');
+	$html_wrap = _request('html_wrap');
 
 	$modif_champ = _request('modif_champ');
 	$ajout_champ = _request('ajout_champ');
@@ -119,7 +120,8 @@ function Forms_update($id_form){
 			"champconfirm="._q($champconfirm).", ".
 			"texte="._q($texte).", ".
 			"moderation="._q($moderation).", ".
-			"public="._q($public)." ".
+			"public="._q($public).", ".
+			"html_wrap="._q($html_wrap)." ".
 			"WHERE id_form="._q($id_form);
 		$result = spip_query($query);
 	}
@@ -134,6 +136,7 @@ function Forms_update($id_form){
 		$public = $row['public'];
 		$email = unserialize($row['email']);
 		$champconfirm = $row['champconfirm'];
+		$html_wrap = $row['html_wrap'];
 		$texte = $row['texte'];
 	}
 	

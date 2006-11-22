@@ -157,11 +157,15 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_specifiant' value='oui' id='spec_$champ'$checked> ";
 		$out .= "<label for='spec_$champ'>"._T("forms:champ_specifiant")."</label>";
 		$out .= "<br />\n";
+		
+		$checked = ($public == 'oui') ? " checked='checked'" : "";
+		$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_public' value='oui' id='public_$champ'$checked> ";
+		$out .= "<label for='public_$champ'>"._T("forms:champ_public")."</label>";
+		$out .= "<br />\n";
 	}
-	$checked = ($public == 'oui') ? " checked='checked'" : "";
-	$out .= "&nbsp; &nbsp; <input type='checkbox' name='champ_public' value='oui' id='public_$champ'$checked> ";
-	$out .= "<label for='public_$champ'>"._T("forms:champ_public")."</label>";
-	$out .= "<br />\n";
+	if ($type == 'separateur' || $type=='textestatique'){
+		$out = "<input type='hidden' name='champ_public' value='oui' />";
+	}
 
 	if ($type == 'url') {
 		$checked = ($extra_info == 'oui') ? " checked='checked'" : "";
@@ -325,11 +329,13 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom_bloc")."</label>&nbsp;:";
 			$formulaire .= " &nbsp;<input type='text' name='nom_champ' id='nom_$champ' value=\"".
 				entites_html($row['titre'])."\" class='fondo verdana2 $focus' size='30' /><br />\n";
+			$formulaire .= Forms_bloc_edition_champ($row, $action_link, $redirect, $id_bloc);
 		}
 		else if ($type=='textestatique'){
 			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom_texte")."</label>&nbsp;:<br/>";
 			$formulaire .= " &nbsp;<textarea name='nom_champ' id='nom_$champ'  class='verdana2 $focus' style='width:100%;height:5em;' />".
 				entites_html($row['titre'])."</textarea><br />\n";
+			$formulaire .= Forms_bloc_edition_champ($row, $action_link, $redirect, $id_bloc);
 		}
 		else{
 			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom")."</label> :";
@@ -341,10 +347,10 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 			$formulaire .= " &nbsp;<textarea name='aide_champ' id='aide_$champ'  class='verdana2' style='width:90%;height:3em;' >".
 				entites_html($row['aide'])."</textarea><br />\n";
 				
-			$formulaire .= "<label for='wrap_$champ'>"._T("forms:html_wrapper")."</label> :";
-			$formulaire .= " &nbsp;<textarea name='wrap_champ' id='wrap_$champ'  class='verdana2' style='width:90%;height:2em;' >".
-			entites_html($row['html_wrap'])."</textarea><br />\n";
 		}
+		$formulaire .= "<label for='wrap_$champ'>"._T("forms:html_wrapper")."</label> :";
+		$formulaire .= " &nbsp;<textarea name='wrap_champ' id='wrap_$champ'  class='verdana2' style='width:90%;height:3em;' >".
+		entites_html($row['html_wrap'])."</textarea><br />\n";
 
 		$formulaire .= "<div style='text-align:$spip_lang_right'>";
 		$formulaire .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo verdana2'>\n";
@@ -506,6 +512,10 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out .= bouton_radio("moderation", "priori", _T('bouton_radio_moderation_priori'), $row['moderation'] == "priori", "");
 	$out .= "<br />";
 	$out .= fin_cadre_enfonce(true);
+	
+	$out .= "<label for='wrap'>"._T("forms:html_wrapper")."</label> :";
+	$out .= " &nbsp;<textarea name='html_wrap' id='wrap'  class='verdana2' style='width:90%;height:3em;' >".
+	entites_html($row['html_wrap'])."</textarea><br />\n";
 		
 	$out .= "<div align='right'>";
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";

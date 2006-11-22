@@ -48,7 +48,7 @@
 	}
 
 	function Forms_upgrade(){
-		$version_base = 0.18;
+		$version_base = 0.19;
 		$current_version = 0.0;
 		if (   (isset($GLOBALS['meta']['forms_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['forms_base_version'])==$version_base))
@@ -162,6 +162,10 @@
 				}
 			}
 			ecrire_meta('forms_base_version',$current_version=0.18);
+		}
+		if ($current_version<0.19){
+			spip_query("ALTER TABLE spip_forms ADD html_wrap text AFTER linkable");
+			ecrire_meta('forms_base_version',$current_version=0.19);
 		}
 		ecrire_metas();
 	}
