@@ -1,7 +1,7 @@
 #CACHE{0}
 <BOUCLE_enviar_articulo(ARTICLES){id_article}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="#LANG_DIR" lang="#LANG" style="background-color:#ffebcd">
+<html dir="#LANG_DIR" lang="#LANG" style="background-color:#ffffff">
 
 <head>
 
@@ -18,7 +18,7 @@ h2 {
 }
 
 .formulario {
-	background-color:#ffebcd;
+	background-color:#ffffff;
 	border: 0px solid silver;
 	font-size:90%;
 	margin-top:.9em;
@@ -40,7 +40,6 @@ h2 {
 .boton {
 	padding: 0px;
 	border: 1px solid silver;
-	font-family:"Times New Roman",Times,serif;
 	color: #666666;
 }
 -->
@@ -48,7 +47,7 @@ h2 {
 
 </head>
 
-<body style="border:0px; padding:0px; text-align:center;background-color:#ffebcd;color: #727860;">
+<body style="border:0px; padding:0px; font-size:90%;text-align:center;background-color:#ffffff;color: #727860;">
 
 <?php
 
@@ -143,8 +142,7 @@ $mail->Timeout="20";
 
 // $mail->WordWrap = "50";                                 // set word wrap to 50 characters
 // $mail->AddAttachment("/var/tmp/file.tar.gz");         // añadir archivos
-
-$mail->AddAttachment("#DOSSIER_SQUELETTE/imagenes/logo_64.jpg", "logo_64.jpg");    // añadir archivos con nombre
+// $mail->AddAttachment("#DOSSIER_SQUELETTE/imagenes/logo_64.jpg", "logo_64.jpg");    // añadir archivos con nombre
 
 // PARTE COMÚN
 
@@ -164,7 +162,7 @@ if (!$HTTP_POST_VARS["email"]) { $replica = '[(#EMAIL_WEBMASTER)]'; } else { $re
 		$mail->AddAddress($email_destino); // para
 		};
         
-    if (!$HTTP_POST_VARS["asunto"]) { $asunto="[(#TITRE|texte_script)]"; } else { $asunto=$HTTP_POST_VARS["asunto"]; }
+    if (!$HTTP_POST_VARS["asunto"]) { $asunto='[(#TITRE|texte_script)]'; } else { $asunto=$HTTP_POST_VARS["asunto"]; }
     $mail->Subject = $asunto; // Asunto
 
 // COMIENZO PARTE HTML
@@ -173,7 +171,7 @@ $sitio='[(#NOM_SITE_SPIP)]';
 $url_sitio='[(#URL_SITE_SPIP)]';
 $url_art='[(#URL_ARTICLE)]';
 
-$texto_html ="<div style='margin:1.2em;font-family:tahoma,verdana,arial,helvetica,sans-serif;background-color:#ffebcd;color:#727860;border:1px solid #f28000'>";
+$texto_html ="<div style='margin:1.2em;font-family:tahoma,verdana,arial,helvetica,sans-serif;background-color:#ffffff;color:#727860;border:1px solid #f28000'>";
 
 $texto_html.="<p style='padding:0px;margin:0px;text-align:left;font-size:120%;font-weight:bold;background-color:#f28000'><a href='$url_sitio' style='display:block;text-decoration:none;color:#edef9f;padding:.3em'><img src='logo_64.jpg' border='0' /> ".$sitio."</a></p>";
 

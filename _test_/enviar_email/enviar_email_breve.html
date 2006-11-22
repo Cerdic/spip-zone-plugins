@@ -159,7 +159,7 @@ $dos_saltos="\r\n\r\n";
 		$mail->AddAddress($email_destino); // para
 		};
         
-    if (!$HTTP_POST_VARS["asunto"]) { $asunto="[(#TITRE|texte_script)]"; } else { $asunto=$HTTP_POST_VARS["asunto"]; }
+    if (!$HTTP_POST_VARS["asunto"]) { $asunto='[(#TITRE|texte_script)]'; } else { $asunto=$HTTP_POST_VARS["asunto"]; }
     $mail->Subject = $asunto; // Asunto
 
 // COMIENZO PARTE TEXTO PLANO
