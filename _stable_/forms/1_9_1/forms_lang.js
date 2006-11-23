@@ -35,28 +35,28 @@ function forms_change_lang(el,container,target) {
 	}).end();
 	lang = lang.slice(1,-1);
 	//store the fields inputs for later use (usefull for select)
-	if(!forms_fields[target]) forms_fields[target] = $('input[@id][@id^="nom_"]',target);
+	var target_name = target!=undefined?target[0].nom_champ.id:"undefined";
+	if(!forms_fields[target_name]) forms_fields[target_name] = $('input[@id^="nom_"]',target);
 	//save the current values
-	forms_fields[target].each(function(){forms_save_lang(this,forms_cur_lang)});
+	forms_fields[target_name].each(function(){forms_save_lang(this,this.form.form_lang)});
 	//change current lang
-	forms_cur_lang = lang;
+	forms_fields[target_name].each(function(){this.form.form_lang=lang;});
 	//reinit fields to current lang
-	forms_fields[target].each(function(){forms_set_lang(this,lang)});
+	forms_fields[target_name].each(function(){forms_set_lang(this,lang)});
 }
 
 function forms_init_multi() {
 	//store all the fields forms
-	forms_forms = $("form.forms_champ").submit(forms_multi_submit);
+	forms_forms = $("form.forms_champ").submit(forms_multi_submit).each(function(){this.form_lang=forms_def_lang;});
 	//init the value of the field to current lang
 	//bug of jquery 1.0.1 Error if attribute is not defined and matching its value
-	forms_fields["undefined"] = $('input[@id][@id^="nom_"]',forms_forms).each(function() {forms_init_field(this,forms_def_lang)});
+	forms_fields["undefined"] = $('input[@id^="nom_"]',forms_forms).each(function() {forms_init_field(this,forms_def_lang)});
 	//create menu for each form. The menu is just before the form
 	forms_forms.prev().each(function() {
-		var id = "#"+this.id;
 		//store all form containers to allow menu lang update on each container
 		//when it is triggered by global menu
-		forms_containers.add(id);
-		forms_make_menu_lang($(id),$(this).next())
+		forms_containers.add(this);
+		forms_make_menu_lang($(this),$(this).next())
 	}).end();
 }
 
@@ -106,9 +106,10 @@ function forms_save_lang(el,lang) {
 
 //This func receives the forms that is going to be submitted
 function forms_multi_submit() {
-	$('input[@id][@id^="nom_"]',this).each(function(){
+	var lang = this.form_lang;
+	$('input[@id^="nom_"]',this).each(function(){
 		//save data before submit
-		forms_save_lang(this,forms_cur_lang);
+		forms_save_lang(this,lang);
 		//build the string value
 		var def_value = this.field_lang[forms_def_lang];
 		if(!this.multi) this.value = def_value;
