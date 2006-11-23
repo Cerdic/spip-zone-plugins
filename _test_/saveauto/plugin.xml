@@ -1,9 +1,15 @@
 <plugin>
         <nom> <!-- Nom du plugin -->
-          sauvegarde automatique
+          <multi>
+					[fr]sauvegarde automatique
+					[it]Salvataggio automatico
+					</multi>
         </nom>
         <auteur>        <!-- Auteur du plugin -->
-          cy_altern d'apr&egrave;s une contrib de Silicium (silicium@japanim.net)
+          <multi>
+					[fr]cy_altern d'apr&egrave;s une contrib de Silicium (silicium@japanim.net)
+					[it]cy_altern - basato su un contrib di Silicium (silicium@japanim.net)
+					</multi>
         </auteur>
         <version>
         0.2
@@ -12,13 +18,22 @@
           test
         </etat>
         <description>
-          Permet de r&eacute;aliser une sauvegarde de toute la base de donn&eacute;es utilis&eacute;e par SPIP.
+        <multi>
+					[fr]Permet de r&eacute;aliser une sauvegarde de toute la base de donn&eacute;es utilis&eacute;e par SPIP.
           Le fichier .gz obtenu est stock&eacute; dans un r&eacute;pertoire (par d&eacute;faut ecrire/data, configurable)
           et peut &ecirc;tre envoy&eacute; par mail.<br />
           La sauvegarde est d&eacute;clench&eacute;e lors d'une visite dans l'espace priv&eacute; si le d&eacute;lais
           depuis la derni&egrave;re sauvegarde est sup&eacute;rieur &agrave; celui configur&eacute; comme fr&eacute;quence.
           Les sauvegardes stock&eacute;es consid&eacute;r&eacute;es comme obsol&egrave;tes (en fonction du param&egrave;tre de config correspondant)
           sont automatiquement d&eacute;truites.
+          [it]Consente di effettuare un salvataggio di tutta la base dati utilizzata da SPIP.
+          Il file .gz o .sql ottenuto &egrave; memorizzato all'interno di una cartella (in maniera predefinita ecrire/data, configurabile)
+          e pu&ograve; essere inviato per posta elettronica.<br />
+          Il salvataggio &egrave; effettuato al momento della visita della redazione se l'ultimo salvataggio &egrave;
+          pi&ugrave; vecchio della frequenza di salvataggio specificata nella configurazione.
+          I salvataggi memorizzati considerati obsoleti (in funzione del parametro di configurazione corrispondente)
+          vengono automaticamente cancellati.
+          </multi>
         </description>
 	<lien></lien> <!-- URI de documentation -->
         <prefix>

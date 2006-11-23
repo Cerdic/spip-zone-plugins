@@ -35,7 +35,9 @@ function saveauto_go() {
         			   setcookie("saveauto","ok");
         		  }
         		  if ($sauver_base) {
-        			   if (!$fin_sauvegarde_base) {
+        		  	 //to set the $ecrire_success value
+        			   include (_DIR_PLUGIN_SAVEAUTO."/inc/saveauto_conf.php");
+								 if (!$fin_sauvegarde_base) {
         				    echo _T('saveauto:probleme_sauve_base').$base."<br />";
         			   }
         			   if ($ecrire_succes && $fin_sauvegarde_base) {
