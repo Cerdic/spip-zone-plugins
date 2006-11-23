@@ -15,7 +15,7 @@ function console_code_flash($width='300',$height='600'){
 
 
 function console_lit_log($logname){
-	$files = preg_files(_DIR_SESSIONS,"$logname\.log(\.[0-9])?");
+	$files = preg_files(defined('_DIR_TMP')?_DIR_TMP:_DIR_SESSION ,"$logname\.log(\.[0-9])?");
 	krsort($files);
 
 	$log = "";
