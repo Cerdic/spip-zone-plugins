@@ -19,13 +19,20 @@ function saveauto_ajouter_boutons($boutons_admin) {
     		return $boutons_admin;				 
 }
 
+function saveauto_body_prive($flux) {
+	global $sauver_base,$saveauto_msg;
+	if($sauver_base) $flux .= $saveauto_msg; 	
+	return $flux;
+}
+
 
 $sauver_base = false;
 $fin_sauvegarde_base = false;
 
+
 function saveauto_go() {
         global $connect_statut;
-				global $fin_sauvegarde_base, $sauver_base;
+				global $fin_sauvegarde_base, $sauver_base,$saveauto_msg;
 				if (($connect_statut == "0minirezo") || ($connect_statut == "1comite")) {
         	 if (empty($HTTP_COOKIE_VARS["saveauto"]))	{
         		//sauver la base
@@ -38,10 +45,10 @@ function saveauto_go() {
         		  	 //to set the $ecrire_success value
         			   include (_DIR_PLUGIN_SAVEAUTO."/inc/saveauto_conf.php");
 								 if (!$fin_sauvegarde_base) {
-        				    echo _T('saveauto:probleme_sauve_base').$base."<br />";
+        				    $saveauto_msg = _T('saveauto:probleme_sauve_base').$base."<br />";
         			   }
         			   if ($ecrire_succes && $fin_sauvegarde_base) {
-        				    echo "<script language=\"javascript\">alert(\""._T('saveauto:sauvegarde_ok')."\", \""._T('saveauto:maintenance')."\");</script>";
+        				    $saveauto_msg = "<script language=\"javascript\">alert(\""._T('saveauto:sauvegarde_ok')."\", \""._T('saveauto:maintenance')."\");</script>";
         			   }
         		  }
         	 }

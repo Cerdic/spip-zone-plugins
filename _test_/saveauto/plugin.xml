@@ -44,6 +44,9 @@
         		<nom>ajouter_boutons</nom>
             <inclure>inc_saveauto.php</inclure>
         </pipeline>
+        <pipeline>
+        	<nom>body_prive</nom>
+        </pipeline>
 	
         <!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.        -->
 </plugin>
