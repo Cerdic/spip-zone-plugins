@@ -1,0 +1,2 @@
+V 0.1 : 23 Nov 2006 : version stable pour l'ajout des metas title, description, keywords sur les articles et les rubriques.
+

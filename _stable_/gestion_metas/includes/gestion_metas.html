@@ -1,0 +1,19 @@
+<BOUCLE_article (ARTICLES) {id_article}>
+<BOUCLE_metas_articles (EXT_SPIP_GESTION_METAS) {id_article}>
+	<title>[(#TITRE|supprimer_numero)][(#TITRE|=={''}|?{' ',''})[(#_article:TITRE|supprimer_numero)]] &mdash; #NOM_SITE_SPIP</title>
+	[<meta name="keywords" content="(#KEYWORDS|entites_html)">]
+	[<meta name="description" content="(#DESCRIPTION|entites_html)">]
+</BOUCLE_metas_articles>
+	<title>[(#TITRE|supprimer_numero)][(#TITRE|=={''}|?{' ',''})[(#_article:TITRE|supprimer_numero)]] &mdash; #NOM_SITE_SPIP</title>
+<//B_metas_articles>
+</BOUCLE_article>
+<BOUCLE_rubrique (RUBRIQUES) {id_rubrique}>
+<BOUCLE_metas_rubriques (EXT_SPIP_GESTION_METAS) {id_rubrique}>
+	<title>[(#TITRE|supprimer_numero)][(#TITRE|=={''}|?{' ',''})[(#_rubrique:TITRE|supprimer_numero)]] &mdash; #NOM_SITE_SPIP</title>
+	[<meta name="keywords" content="(#KEYWORDS|entites_html)">]
+	[<meta name="description" content="(#DESCRIPTION|entites_html)">]
+</BOUCLE_metas_rubriques>
+	<title>[(#TITRE|supprimer_numero)][(#TITRE|=={''}|?{' ',''})[(#_rubrique:TITRE|supprimer_numero)]] &mdash; #NOM_SITE_SPIP</title>
+<//B_metas_rubriques>
+</BOUCLE_rubrique>
+<//B_article>
