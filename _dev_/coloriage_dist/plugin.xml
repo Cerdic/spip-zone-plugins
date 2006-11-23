@@ -1,0 +1,43 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Coloriage du squelette dist
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	[erational->http://www.erational.org]
+_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+_ Le module de choix de couleur par [knallgrau->http://www.knallgrau.at/code/colorpicker] sous licence MIT
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	experimental
+	</etat>
+	<description>
+		<multi>
+	[fr] Permet de modifier les couleurs de l'habillage par d&eacute;faut (squelette dist) du site SPIP via une interface graphique sans &agrave; avoir &agrave; &eacute;diter le code
+  <p>A tester avec firefox... bug etrange sur IE</p> 
+	</multi>
+	</description>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+ <fonctions>
+	coloriagedist_fonctions.php
+	</fonctions>
+	<prefix> 
+	coloriagedist
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>insert_head</nom>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>coloriagedist_fonctions.php</inclure>
+	</pipeline>
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+</plugin>
