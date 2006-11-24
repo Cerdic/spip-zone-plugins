@@ -124,14 +124,14 @@ function GenerateTitlePage()
 	if ($DateMiseEnLigne) 
 	{
 		$this->SetXY(110,184);
-		$this->unhtmlentities($DateMiseEnLigne);
+		$DateMiseEnLigne = $this->unhtmlentities($DateMiseEnLigne);
 		$this->MultiCell(0,6,"Date de mise en ligne : $DateMiseEnLigne",0,'L',0);
 	}
 	
 	if ($DateParution) 
 	{
 		$this->SetXY(110,190);
-		$this->unhtmlentities($DateParution);
+		$DateParution = $this->unhtmlentities($DateParution);
 		$this->MultiCell(0,6,"Date de parution : $DateParution",0,'L',0);
 	}
 	
