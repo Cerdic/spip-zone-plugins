@@ -102,8 +102,8 @@ function formulaire_metas() {
 function create_GestionMetasTable($GestionMetasTable) {
 	$createTableQuery ='CREATE TABLE '.$GestionMetasTable.'
 						(id_meta INTEGER NOT NULL AUTO_INCREMENT, 
-						id_rubrique INTEGER,
-						id_article INTEGER,
+						id_rubrique INTEGER DEFAULT NULL,
+						id_article INTEGER DEFAULT NULL,
 						titre TEXT,
 						description TEXT,
 						keywords TEXT,

@@ -11,4 +11,4 @@ Ce squelette suppose que votre table s'apelle ext_spip_gestion_metas, MAIS, si v
 
 
 
-L'amélioration de ce plugin peut être faite par quiconque, *NEANMOINS*, merci de discuter de ces améliorations avec son auteur premier, Olivier G. (<o.gendrin@novactive.com> ou <olivier.gendrin@free.fr>) avant tout commit.
+L'amélioration de ce plugin peut être faite par quiconque, *NEANMOINS*, merci de discuter de ces améliorations avec son auteur premier, Olivier G. (<o.gendrin@novactive.com> ou <olivier.gendrin@free.fr>) avant tout commit. Vous devez aussi renseigner les fichiers todo.txt et changelog.txt.
