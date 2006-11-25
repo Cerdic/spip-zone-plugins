@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Edition WYSIWYG avec FCKeditor</nom>
 	<auteur>[Frank SAURET->http://electropol.free.fr] &copy; 2006 - Distribu&eacute; sous licence GNU/GPL</auteur>
-	<version>0.3 (pour spip 1.9.1)</version>
+	<version>0.3(pour spip 1.9.1)</version>
 	<etat>test</etat>
 	<description>
 {{Edition WYSIWYG avec FCKeditor}}
