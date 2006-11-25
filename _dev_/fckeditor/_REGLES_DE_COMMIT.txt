@@ -20,7 +20,10 @@ contactez moi à vincevg@free.fr.
           7. Ajouter la fonctionnalité note de bas de page, 
           8. Redim auto selon la taille d'écran,
           9. Mettre un bouton wysiwyg sur chapo, brève et autre,
-          10. Changer la langue selon celle de spip.
+          10. Changer la langue selon celle de spip,
+          11. Possibilité de lien auto sur wikipédia,
+          12. Texte de survol,
+          13. Intégrer les raccourcis Typo spip.
           
 B. Obligation de commenter les commits
 
