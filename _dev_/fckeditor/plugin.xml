@@ -1,25 +1,26 @@
 <plugin>
-	<nom>Edition des articles avec FCKeditor - 2&egrave;me solution</nom>
+	<nom>Edition WYSIWYG avec FCKeditor</nom>
 	<auteur>[Frank SAURET->http://electropol.free.fr] &copy; 2006 - Distribu&eacute; sous licence GNU/GPL</auteur>
-	<version>0.1</version>
-	<etat>dev</etat>
+	<version>1.0 (pour spip 1.9.1)</version>
+	<etat>test</etat>
 	<description>
-{{Edition des articles avec FCKeditor}}
-
+{{Edition WYSIWYG avec FCKeditor}}
+Cette version semble stable, n&eacute;anmoins, il se peut que certain firewall bloquent les scripts.
+<br><br>
 <u>Caract&eacute;ristiques :</u>
--* Seule la zone 'texte' est &eacute;ditable,
--* NON INTRUSIF (ne se substitue pas &agrave; la barre SPIP qui reste disponible),
--* G&eacute;n&egrave;re du HTML,
--* Bas&eacute; sur FCKeditor 2.2 modifi&eacute;,
--* Ajout d'une aide &agrave; l'utilisation en fran&ccedil;ais.
+-* - Seule la zone &laquo;texte&raquo; est &eacute;ditable,
+-* - Se substitue &agrave; la barre SPIP mais propose une option pour la r&eacute;&eacute;dition d'article initalement &eacute;cris avec l'&eacute;diteur SPIP,
+-* - G&eacute;n&egrave;re du HTML,
+-* - Bas&eacute; sur FCKeditor 2.2 modifi&eacute;,
+-* - Ajout d'une aide &agrave; l'utilisation en fran&ccedil;ais.
 
 <u>Limitations</u>
--* La fonction de d&eacute;coupe des gros articles est d&eacute;sactiv&eacute;e (non probl&eacute;matique sur les navigateurs r&eacute;cents),
--* Ne pas mixer pour un m&ecirc;me article l'&eacute;dition WYSIWYG et le code SPIP,
--* Les fichiers envoy&eacute;s sur le serveur par l'interm&eacute;diaire de FCKeditor sont partag&eacute;s entre tous les utilisateurs. Il n'est pas possible de supprimer / renommer / les fichiers et dossiers. Il est possible de d&eacute;sactiver ces fonctionnalit&eacute;s &agrave; l'aide des fichiers de configuration,
--* Les fichiers envoy&eacute;s par l'interm&eacute;diaire de FCKeditor ne sont pas utilisables par SPIP et r&eacute;ciproquement.
+-* - Ne pas mixer pour un m&ecirc;me article l'&eacute;dition WYSIWYG et le code SPIP,
+-* - Les fichiers envoy&eacute;s sur le serveur par l'interm&eacute;diaire de FCKeditor sont partag&eacute;s entre tous les utilisateurs. 
+-* - Il est possible de d&eacute;sactiver ces fonctionnalit&eacute;s &agrave; l'aide des fichiers de configuration,
+-* - Les fichiers envoy&eacute;s par l'interm&eacute;diaire de FCKeditor ne sont pas utilisables par SPIP et r&eacute;ciproquement.
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>[http://electropol.free.fr]</lien> <!-- URL de documentation -->
 	<prefix>fckeditor2</prefix>
 
 	<pipeline>

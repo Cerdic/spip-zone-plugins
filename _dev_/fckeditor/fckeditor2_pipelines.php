@@ -1,8 +1,8 @@
 <?php
 
 // ICI : Commenter l'une des deux lignes pour fixer l'éditeur par défaut
-//define('EDITEUR_PAR_DEFAUT', 'wysiwyg');
-define('EDITEUR_PAR_DEFAUT', 'text');
+define('EDITEUR_PAR_DEFAUT', 'wysiwyg');
+//define('EDITEUR_PAR_DEFAUT', 'text');
 
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\',/*'*/'/',realpath(dirname(__FILE__))));
 define('_DIR_PLUGIN_FCKEDITOR',(_DIR_PLUGINS.end($p)));
@@ -36,8 +36,10 @@ function fckeditor2_header_prive($flux) {
 		$code='
 	var oFCKeditor = new FCKeditor( \'text_area\' ) ;
 	oFCKeditor.BasePath = "'._DIR_PLUGIN_FCKEDITOR.'/FCKeditor/" ;
-	oFCKeditor.Height = "400";
-	oFCKeditor.ReplaceTextarea();
+	oFCKeditor.Height = "600";
+	oFCKeditor.ToolbarSet = "Default";   
+	oFCKeditor.Config["SkinPath"] ="../editor/skins/office2003/";
+  oFCKeditor.ReplaceTextarea();
 
 	$(".spip_barre").remove();
 ';
@@ -48,8 +50,10 @@ function fckeditor2_header_prive($flux) {
 		$code='
 	var oFCKeditor = new FCKeditor( \'texte\' ) ;
 	oFCKeditor.BasePath = "'._DIR_PLUGIN_FCKEDITOR.'/FCKeditor/" ;
-	oFCKeditor.Height = "400";
-	oFCKeditor.ReplaceTextarea();
+	oFCKeditor.Height = "600";
+	oFCKeditor.ToolbarSet = "Default";   
+	oFCKeditor.Config["SkinPath"] ="../editor/skins/office2003/";
+  oFCKeditor.ReplaceTextarea();
 
 	$(".spip_barre").remove();
 ';
