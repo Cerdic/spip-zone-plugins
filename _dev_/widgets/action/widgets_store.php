@@ -123,17 +123,9 @@ function action_widgets_store_dist() {
 				    include_spip('action/editer_article');
 				    $fun = 'revisions_articles';
 				    break;
-				case 'auteur':
-				    include_spip('inc/modifier');
-				    $fun = 'revision_auteur';
-				    break;
 				case 'breve':
 				    include_spip('action/editer_breve');
 				    $fun = 'revisions_breves';
-				    break;
-				case 'document':
-				    include_spip('inc/modifier');
-				    $fun = 'revision_document';
 				    break;
 				case 'forum':
 				    include_spip('inc/forum');
@@ -143,14 +135,19 @@ function action_widgets_store_dist() {
 				    include_spip('action/editer_rubrique');
 				    $fun = 'revisions_rubriques';
 				    break;
-				case 'signature':
-				    include_spip('inc/modifier');
-				    $fun = 'revision_signature';
-				    break;
 				case 'syndic':
 				case 'site':
 				    include_spip('action/editer_site');
 				    $fun = 'revisions_sites';
+				    break;
+				// cas geres de la maniere la plus standard
+				case 'auteur':
+				case 'document':
+				case 'mot':
+				case 'signature':
+				default:
+				    include_spip('inc/modifier');
+				    $fun = 'revision_'.$type;
 				    break;
 			}
 			if (!$fun or !function_exists($fun)) {

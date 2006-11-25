@@ -20,9 +20,9 @@
 <BOUCLE_signatures(SIGNATURES) {id_article} {par date}{inverse} {pagination 15}>
 		<tr>
 		<td class="signature-date">[(#DATE|affdate)]</td>
-		<td class="signature-nom"><div class="widget signature-nom_email-#ID_SIGNATURE">#NOM</div>[
-		<div class="widget signature-hyperlien-#ID_SIGNATURE"><a href="(#URL_SITE)" class="spip_out" style="font-size:small;">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></div>]</td>
-		[<td class="signature-message"><div class="widget signature-message-#ID_SIGNATURE">(#MESSAGE|PtoBR)</div></td>]
+		<td class="signature-nom"><div class="#EDIT{nom_email}">#NOM</div>[
+		<div class="#EDIT{hyperlien}"><a href="(#URL_SITE)" class="spip_out" style="font-size:small;">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></div>]</td>
+		[<td class="signature-message"><div class="#EDIT{message}">(#MESSAGE|PtoBR)</div></td>]
 		</tr>
 </BOUCLE_signatures>
 	</tbody>

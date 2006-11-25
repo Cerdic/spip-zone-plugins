@@ -24,15 +24,15 @@
 
 			<div class="cartouche">
 				[(#LOGO_AUTEUR||image_reduire{200,200})]
-				<h1 class="titre widget auteur-nom-#ID_AUTEUR">#NOM</h1>
+				<h1 class="titre #EDIT{nom}">#NOM</h1>
 				[<p class="soustitre"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 			</div>
 
-			[<div class="texte widget auteur-bio-#ID_AUTEUR">(#BIO)</div><br />]
+			[<div class="texte #EDIT{bio}">(#BIO)</div><br />]
 
 			<br class="nettoyeur" />
 
-			[<div class="encart widget auteur-email-#ID_AUTEUR">
+			[<div class="encart #EDIT{email}">
 			(#FORMULAIRE_ECRIRE_AUTEUR)
 			</div><!-- fin encart -->]
 
