@@ -10,6 +10,9 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/*
+	Modifications : James pour la balise #SESSION (2006)
+*/
 # ou est l'espace prive ?
 @define('_DIR_RESTREINT_ABS', 'ecrire/');
 include_once _DIR_RESTREINT_ABS.'inc_version.php';
