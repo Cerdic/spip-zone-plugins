@@ -1,7 +1,7 @@
 <cfsetting enablecfoutputonly="true" showdebugoutput="false">
 <!---
  * FCKeditor - The text editor for internet
- * Copyright (C) 2003-2005 Frederico Caldeira Knabben
+ * Copyright (C) 2003-2006 Frederico Caldeira Knabben
  * 
  * Licensed under the terms of the GNU Lesser General Public License:
  * 		http://www.opensource.org/licenses/lgpl-license.php
@@ -34,8 +34,7 @@
 
 <h1>FCKeditor - ColdFusion - Sample 1</h1>
 	
-This sample displays a normal HTML form with a FCKeditor with full features enabled; invoked by a ColdFusion Custom Tag / Module.<br>
-ColdFusion is a registered trademark and product of <a href="http://www.macromedia.com/software/coldfusion/" target="_blank">Macromedia, Inc</a>.
+This sample displays a normal HTML form with a FCKeditor with full features enabled; invoked by a ColdFusion Custom Tag / Module.
 <hr>
 <form method="POST" action="#cgi.script_name#">
 </cfoutput>

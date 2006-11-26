@@ -1,6 +1,6 @@
-﻿/*
+/*
  * FCKeditor - The text editor for internet
- * Copyright (C) 2003-2005 Frederico Caldeira Knabben
+ * Copyright (C) 2003-2006 Frederico Caldeira Knabben
  * 
  * Licensed under the terms of the GNU Lesser General Public License:
  * 		http://www.opensource.org/licenses/lgpl-license.php
@@ -63,6 +63,12 @@ function UpdateOriginal( resetSize )
 {
 	if ( !eImgPreview )
 		return ;
+	
+	if ( GetE('txtUrl').value.length == 0 )
+	{
+		oImageOriginal = null ;
+		return ;
+	}
 		
 	oImageOriginal = document.createElement( 'IMG' ) ;	// new Image() ;
 
@@ -111,13 +117,9 @@ function LoadSelection()
 {
 	if ( ! oImage ) return ;
 
-	var sUrl = GetAttribute( oImage, '_fcksavedurl', '' ) ;
-	if ( sUrl.length == 0 )
+	var sUrl = oImage.getAttribute( '_fcksavedurl' ) ;
+	if ( sUrl == null )
 		sUrl = GetAttribute( oImage, 'src', '' ) ;
-
-	// TODO: Wait stable version and remove the following commented lines.
-//	if ( sUrl.startsWith( FCK.BaseUrl ) )
-//		sUrl = sUrl.remove( 0, FCK.BaseUrl.length ) ;
 
 	GetE('txtUrl').value    = sUrl ;
 	GetE('txtAlt').value    = GetAttribute( oImage, 'alt', '' ) ;
@@ -168,8 +170,8 @@ function LoadSelection()
 
 	if ( oLink )
 	{
-		var sUrl = GetAttribute( oLink, '_fcksavedurl', '' ) ;
-		if ( sUrl.length == 0 )
+		var sUrl = oLink.getAttribute( '_fcksavedurl' ) ;
+		if ( sUrl == null )
 			sUrl = oLink.getAttribute('href',2) ;
 	
 		GetE('txtLnkUrl').value		= sUrl ;
@@ -424,7 +426,7 @@ function OnUploadCompleted( errorNumber, fileUrl, fileName, customMsg )
 	switch ( errorNumber )
 	{
 		case 0 :	// No errors
-			alert(FCKLang.AlertReussis) ;
+			alert( FCKLang.AlertReussis) ;
 			break ;
 		case 1 :	// Custom error
 			alert( customMsg ) ;
@@ -433,19 +435,18 @@ function OnUploadCompleted( errorNumber, fileUrl, fileName, customMsg )
 			alert( customMsg ) ;
 			break ;
 		case 201 :
-			alert( FCKLang.AlertMemeFichier + '"' + fileName + '"' ) ;
+			alert( FCKLang.AlertMemeFichier + '"' + fileName + '"') ;
 			break ;
 		case 202 :
 			alert( FCKLang.AlertTypeInvalide) ;
 			return ;
 		case 203 :
-			alert( FCKLang.AlertNonAutorise ) ;
+			alert( FCKLang.AlertNonAutorise  ) ;
 			return ;
 		default :
 			alert( FCKLang.AlertParDefaut + errorNumber ) ;
 			return ;
 	}
-
 	sActualBrowser = ''
 	SetUrl( fileUrl ) ;
 	GetE('frmUpload').reset() ;
@@ -460,7 +461,7 @@ function CheckUpload()
 	
 	if ( sFile.length == 0 )
 	{
-		alert(FCKLang.AlertPasDeFichier ) ;
+		alert( 'Please select a file to upload' ) ;
 		return false ;
 	}
 	

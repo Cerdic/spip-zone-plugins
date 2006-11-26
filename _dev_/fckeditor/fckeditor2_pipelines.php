@@ -37,7 +37,7 @@ function fckeditor2_header_prive($flux) {
 	var oFCKeditor = new FCKeditor( \'text_area\' ) ;
 	oFCKeditor.BasePath = "'._DIR_PLUGIN_FCKEDITOR.'/FCKeditor/" ;
 	oFCKeditor.Height = "600";
-	oFCKeditor.ToolbarSet = "Default";   
+	oFCKeditor.ToolbarSet = "SansFormulaire";   
 	oFCKeditor.Config["SkinPath"] ="../editor/skins/office2003/";
   oFCKeditor.ReplaceTextarea();
 
@@ -51,7 +51,7 @@ function fckeditor2_header_prive($flux) {
 	var oFCKeditor = new FCKeditor( \'texte\' ) ;
 	oFCKeditor.BasePath = "'._DIR_PLUGIN_FCKEDITOR.'/FCKeditor/" ;
 	oFCKeditor.Height = "600";
-	oFCKeditor.ToolbarSet = "Default";   
+	oFCKeditor.ToolbarSet = "SansFormulaire";   
 	oFCKeditor.Config["SkinPath"] ="../editor/skins/office2003/";
   oFCKeditor.ReplaceTextarea();
 

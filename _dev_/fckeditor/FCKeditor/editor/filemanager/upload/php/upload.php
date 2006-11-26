@@ -1,7 +1,7 @@
 <?php 
 /*
  * FCKeditor - The text editor for internet
- * Copyright (C) 2003-2005 Frederico Caldeira Knabben
+ * Copyright (C) 2003-2006 Frederico Caldeira Knabben
  * 
  * Licensed under the terms of the GNU Lesser General Public License:
  * 		http://www.opensource.org/licenses/lgpl-license.php
@@ -41,14 +41,25 @@ if ( !isset( $_FILES['NewFile'] ) || is_null( $_FILES['NewFile']['tmp_name'] ) |
 // Get the posted file.
 $oFile = $_FILES['NewFile'] ;
 
-// Get the uploaded file name and extension.
+// Get the uploaded file name extension.
 $sFileName = $oFile['name'] ;
+
+// Replace dots in the name with underscores (only one dot can be there... security issue).
+if ( $Config['ForceSingleExtension'] )
+	$sFileName = preg_replace( '/\\.(?![^.]*$)/', '_', $sFileName ) ;
+
 $sOriginalFileName = $sFileName ;
+
+// Get the extension.
 $sExtension = substr( $sFileName, ( strrpos($sFileName, '.') + 1 ) ) ;
 $sExtension = strtolower( $sExtension ) ;
 
-// The  file type (from the QueryString, by default 'File').
+// The the file type (from the QueryString, by default 'File').
 $sType = isset( $_GET['Type'] ) ? $_GET['Type'] : 'File' ;
+
+// Check if it is an allowed type.
+if ( !in_array( $sType, array('File','Image','Flash','Media') ) )
+    SendResults( 1, '', '', 'Invalid type specified' ) ;
 
 // Get the allowed and denied extensions arrays.
 $arAllowed	= $Config['AllowedExtensions'][$sType] ;
@@ -64,14 +75,19 @@ $sFileUrl		= '' ;
 // Initializes the counter used to rename the file, if another one with the same name already exists.
 $iCounter = 0 ;
 
-// The  target directory.
-$sServerDir = GetRootPath() . $Config["UserFilesPath"] ;
+// Get the target directory.
+if ( isset( $Config['UserFilesAbsolutePath'] ) && strlen( $Config['UserFilesAbsolutePath'] ) > 0 )
+	$sServerDir = $Config['UserFilesAbsolutePath'] ;
+else 
+	$sServerDir = GetRootPath() . $Config["UserFilesPath"] ;
+
+if ( $Config['UseFileType'] )
+	$sServerDir .= $sType . '/' ;
 
 while ( true )
 {
-	// Compose the file path.	
-	//Rajout de "/" . $sType ."/" . par Frank SAURET pour la cohérence
-	$sFilePath = $sServerDir . "/" . $sType ."/" . $sFileName ;
+	// Compose the file path.
+	$sFilePath = $sServerDir . $sFileName ;
 
 	// If a file with that name already exists.
 	if ( is_file( $sFilePath ) )
@@ -90,9 +106,11 @@ while ( true )
 			chmod( $sFilePath, 0777 ) ;
 			umask( $oldumask ) ;
 		}
-		//Rajout par Frank SAURET pour la cohérence	 
-		$sSlash="/";
-		$sFileUrl = $Config["UserFilesPath"] .  "\\"  . $sType . $sSlash . $sFileName;
+		
+		if ( $Config['UseFileType'] )
+			$sFileUrl = $Config["UserFilesPath"] . $sType . '/' . $sFileName ;
+		else
+			$sFileUrl = $Config["UserFilesPath"] . $sFileName ;
 
 		break ;
 	}
