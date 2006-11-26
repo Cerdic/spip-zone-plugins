@@ -1,53 +1,53 @@
 <plugin>
 	<nom>Mot-crois&eacute;s</nom>
 	<etat>stable</etat>
-	<version>2.0 pour Spip 1.9.1 minimum.
+	<version>3.0 pour Spip 1.9.1 minimum.
 	
 	</version>
 	<auteur>Ma&#239;eul Rouquette
 	maieulrouquette@tele2.fr
 	[http://maieul.ouvaton.org->http://maieul.ouvaton.org]
+	Soutien : Patrice Vanneufville
 	</auteur>
-	<description>Des mots-crois&eacute;s avec Spip !
-	Exemple : <code><grille>
+	<description>Des mots-crois&eacute;s dans vos articles avec Spip !<br>Exemple : 
+<code><mots-croises>
 
-|a|a|a|
-|b|*|g|
-|a|*|d|
+#HORIZONTAL
+Definition 1
+Definition 2. Definition 3
+Definition 4. Definition 5
 
-</grille>
+#VERTICAL
+Definition 1
+Definition 2
+Definition 3
 
-<horizontal>
--#def 1
--#def 2
--#def 3
-</horizontal>
+#SOLUTION
+aaa
+b*g
+a*d
 
-<vertical>
--#def 1
--#def 2
--#def 3
-</vertical></code>
+</mots-croises></code>
 Ce plugin fonctionne de fa&ccedil;on optimale sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>, ainsi que dans l'espace priv&eacute;.
 _ il n&eacute;cessite l'activation du plugin {{jQuery}} ou une version de spip sup&eacute;rieure à {{1.9.2}}.
 	</description>
 	<lien>http://www.spip-contrib.net/article1379.html</lien> <!-- URI de documentation -->
-	<fonctions>mot_croises_fonctions.php</fonctions>
-	<options>mot_croises_options.php</options>
-	<prefix>mot_croises</prefix>
+	<fonctions>mots_croises_fonctions.php</fonctions>
+	<options>mots_croises_options.php</options>
+	<prefix>mots_croises</prefix>
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>mot_croises_pipelines.php</inclure>
+		<inclure>mots_croises_pipelines.php</inclure>
 		<action>insert_head</action>
 	</pipeline>
 	<pipeline>
 		<nom>pre_propre</nom>
-		<inclure>mot_croises_pipelines.php</inclure>
+		<inclure>mots_croises_pipelines.php</inclure>
 		<action>pre_propre</action>
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>mot_croises_pipelines.php</inclure>
+		<inclure>mots_croises_pipelines.php</inclure>
 		<action>header_prive</action>
 	</pipeline>
 </plugin>

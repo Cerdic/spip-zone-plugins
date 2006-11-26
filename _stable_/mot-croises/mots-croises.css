@@ -1,4 +1,8 @@
-td.noir {background-color:#000000; color:#000000;}
+.grille td.noir {
+	background-color:#000000;
+	color:#000000;
+}
+
 table.grille input, table.grille th{min-width:1.5em;
 width:1.5em;
 text-align:center;
@@ -34,7 +38,11 @@ width:auto;
 
 p.spip {clear:both}
 
-h4.spip{margin:0;padding:0}                   
+h4.grille{
+	margin:0;
+	padding:0;
+	font-weight:bold;
+}
 
 .horizontal ol,.vertical ol{margin:0;
 list-style-position:inside;

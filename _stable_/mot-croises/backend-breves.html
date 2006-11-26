@@ -8,15 +8,15 @@
 
 <channel>
 
-	<title>[(#NOM_SITE_SPIP|pas_de_grille|texte_backend)]</title>
+	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
 	<link>#URL_SITE_SPIP/</link>
-	<description>[(#DESCRIPTIF_SITE_SPIP|pas_de_grille|texte_backend)]</description>
+	<description>[(#DESCRIPTIF_SITE_SPIP|pas_de_plugin|texte_backend)]</description>
 	<language>#LANG</language>
 	<generator>SPIP - www.spip.net</generator>
 
 [	<image>
-		<title>[(#NOM_SITE_SPIP|pas_de_grille|texte_backend)]</title>
-		<url>(#LOGO_SITE_SPIP||extraire_attribut{src}|url_absolue|pas_de_grille|texte_backend)</url>
+		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+		<url>(#LOGO_SITE_SPIP||extraire_attribut{src}|url_absolue|texte_backend)</url>
 		<link>#URL_SITE_SPIP/</link>
 		[<height>(#LOGO_SITE_SPIP||extraire_attribut{height})</height>]
 		[<width>(#LOGO_SITE_SPIP||extraire_attribut{width})</width>]
@@ -26,7 +26,7 @@
 <BOUCLE_breves(BREVES){id_rubrique ?}{lang ?}{id_mot ?}
 {par date}{inverse}{0,20}>
 	<item>
-		<title>[(#TITRE|supprimer_numero|pas_de_grille|texte_backend)]</title>
+		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
 		<link>[(#URL_BREVE|url_absolue)]</link>
 		[<guid isPermaLink="true">(#URL_BREVE|url_absolue)</guid>]
 		[<dc:date>(#DATE|date_iso)</dc:date>]
@@ -34,21 +34,21 @@
 		[<dc:language>(#LANG)</dc:language>]
 		[(#REM)
 			Le bloc qui suit diffuse diffuse la rubrique et les mots-cles a la mode RSS
-		]<BOUCLE_rubrique_rss(RUBRIQUES){id_rubrique}>[<category[ domain="(#URL_RUBRIQUE|url_absolue)"]>(#TITRE|supprimer_numero|pas_de_grille|texte_backend)</category>]</BOUCLE_rubrique_rss>
+		]<BOUCLE_rubrique_rss(RUBRIQUES){id_rubrique}>[<category[ domain="(#URL_RUBRIQUE|url_absolue)"]>(#TITRE|supprimer_numero|texte_backend)</category>]</BOUCLE_rubrique_rss>
 <BOUCLE_mots_rss(MOTS){id_breve}>
-		[<dc:subject>(#TITRE|pas_de_grille|texte_backend)</dc:subject>]</BOUCLE_mots_rss>
+		[<dc:subject>(#TITRE|texte_backend)</dc:subject>]</BOUCLE_mots_rss>
 
-		<description>[(#INTRODUCTION|pas_de_grille|texte_backend)]
+		<description>[(#INTRODUCTION|pas_de_plugin|texte_backend)]
 
 [(#REM)
 	Le bloc qui suit diffuse la rubrique et les mots-cles
 	sous forme de "microformats"
 
 ]<BOUCLE_rubrique_mf(RUBRIQUES){id_rubrique}>-
-[&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="directory"&gt;(#TITRE|supprimer_numero|pas_de_grille|texte_backend)&lt;/a&gt;]
+[&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="directory"&gt;(#TITRE|supprimer_numero|texte_backend)&lt;/a&gt;]
 </BOUCLE_rubrique_mf><B_mots_mf>
 / <BOUCLE_mots_mf(MOTS){id_breve}{", "}>
-[&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;(#TITRE|pas_de_grille|texte_backend)&lt;/a&gt;]</BOUCLE_mots_mf>
+[&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;(#TITRE|texte_backend)&lt;/a&gt;]</BOUCLE_mots_mf>
 
 		</description>
 
@@ -57,10 +57,10 @@
 	ce qui permet une syndication plus riche (mais plus "lourde").
 	Fonction desactivable depuis les reglages du site.
 ][
-(#CONFIG{syndication_integrale}|=={oui}|?{' ',''})<content:encoded>[(#LOGO_BREVE|right||pas_de_grille|texte_backend)
-		][&lt;div class='rss_texte'&gt;(#TEXTE|pas_de_grille|texte_backend)&lt;/div&gt;
+(#CONFIG{syndication_integrale}|=={oui}|?{' ',''})<content:encoded>[(#LOGO_BREVE|right||texte_backend)
+		][&lt;div class='rss_texte'&gt;(#TEXTE|pas_de_plugin|texte_backend)&lt;/div&gt;
 		][&lt;hr /&gt;
-		&lt;div class='rss_notes'&gt;(#NOTES|pas_de_grille|texte_backend)&lt;/div&gt;]
+		&lt;div class='rss_notes'&gt;(#NOTES|pas_de_plugin|texte_backend)&lt;/div&gt;]
 		</content:encoded>
 ]
 	</item>

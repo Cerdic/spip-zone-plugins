@@ -1,15 +1,16 @@
-ï»¿<?php
+<?php
 
+// vieille syntaxe, garde pour compatibilite
 define(_GRILLE_, '<!-- grille -->');
 
-//retourne la lettre correpondant au chiffre
+//retourne la lettre correspondant au chiffre
 function lettre_grille($texte) {
 	$alphabet="*ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	return $alphabet[$texte];
 }
 
 function affichage_grille($tableau_grille, $solution=false){
-	//affiche la grille de mot croisÃ©s, avec la solution au cas oÃ¹
+	//affiche la grille de mot croisés, avec la solution au cas où
 	
 	// les variables de la grille
 	(! $solution) ? $page=self() : pass ; 
@@ -23,15 +24,15 @@ function affichage_grille($tableau_grille, $solution=false){
     $grille.='<table class="grille" cellspacing="0" border="0" summary="'._T('motscroises:table_summary',Array('hauteur'=>$hauteur,'largeur'=>$largeur))."\">\n
     \t<tr>\n\t\t<td class=\"coin\"></td>\n";	// debut tableau + 1ere celule
 	
-	$increment_largeur=1;   //un iccrÃ©ment pour les cellules d'entete
+	$increment_largeur=1;   //un iccrément pour les cellules d'entete
 	
 	//les cellules d'entetes verticales
 	while ($increment_largeur<=$largeur){
         $grille.="\t\t<th scope=\"col\">".$increment_largeur."</th>\n";
         $increment_largeur++;}
-	// fin des cellules d'entÃªte verticale
+	// fin des cellules d'entête verticale
 	
-	$grille=$grille."\t</tr>\n";		//cloture de la ligne d'entÃªte
+	$grille=$grille."\t</tr>\n";		//cloture de la ligne d'entête
 	
 	//debut affichage des lignes
 	foreach($tableau_grille as $ligne =>$contenu_ligne){
@@ -51,7 +52,7 @@ function affichage_grille($tableau_grille, $solution=false){
 						._T('motscroises:ligne',Array('n'=>lettre_grille($ligne))).';'
 						._T('motscroises:colonne',Array('n'=>$colonne)).'</label>';
 						
-					// test l'existence de la variable global correpsonte Ã  cette cellule	
+					// test l'existence de la variable global correpsonte à cette cellule	
 					if (isset($GLOBALS['col'.$colonne.'lig'.$ligne]) and $GLOBALS['col'.$colonne.'lig'.$ligne]!='') 
 						$grille.='<input type="text" maxlength="1" value="'.$GLOBALS['col'.$colonne.'lig'.$ligne].'" name="col'.$colonne.'lig'.$ligne.'" id="col'.$colonne.'lig'.$ligne."\" />";
 					else
@@ -73,11 +74,17 @@ function affichage_grille($tableau_grille, $solution=false){
 	return $grille;
 }
 
-// dÃ©chiffre le code source de la grille
+// déchiffre le code source de la grille
 function calcul_tableau_grille($texte){
+	$tableau = explode("\r", trim($texte));	
+	foreach ($tableau as $i=>$v) $tableau[$i] = preg_split('//', trim($v), -1, PREG_SPLIT_NO_EMPTY);
+	return $tableau;
+}
+
+// déchiffre le code source de la grille
+function calcul_tableau_grille_vieille_syntaxe($texte){
 	$texte = trim($texte);
 	$tableau = explode("\r", $texte);	
-
 	//ligne par ligne
 	$j =0;
 	foreach ($tableau as $i){	
@@ -86,7 +93,6 @@ function calcul_tableau_grille($texte){
 		array_pop($tableau[$j]);
 		$j++;
 	}
-	
 	return $tableau;
 }
 
@@ -109,4 +115,19 @@ function comparaison_grille($tableau_grille){
     return array($erreurs, $vides);
 }
 
+// renvoie le nombre d'erreurs de de cases vides
+function calcul_erreurs_grille($solution) {
+	if ($GLOBALS["bouton_envoi"] == '') return '';
+	else {
+	  list($nbr_erreurs, $nbr_vides) = comparaison_grille($solution); 
+	  return '<strong class="erreur">'
+		. (($nbr_erreurs==0)?_T('motscroises:aucune_erreur'):(
+		 ($nbr_erreurs==1)?_T('motscroises:une_erreur'):_T("motscroises:nombre_erreurs", Array('err'=>$nbr_erreurs))
+		))
+		. (($nbr_vides==0)?(($nbr_erreurs==0)?'. '._T('motscroises:bravo'):''):(
+		 ($nbr_vides==1)?' - '._T('motscroises:une_vide'):' - '._T("motscroises:nombre_vides", Array('vid'=>$nbr_vides))
+		))
+		. '</strong><br />';
+	}
+}
 ?>

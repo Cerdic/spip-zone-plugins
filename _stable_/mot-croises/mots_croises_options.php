@@ -1,7 +1,7 @@
 <?php
-
-// on ne sait jamais ! mais cette surcharge doit être étudiée...
-if (!function_exists("introduction")) {	
+/*
+// méthode devenue obsolete, source de trop de bogues
+if (false) {//(!function_exists("introduction")) {	
 
   function introduction ($type, $texte, $chapo='', $descriptif='') {
 
@@ -37,5 +37,5 @@ function pas_de_grille_introduction($texte) {
 	$texte = preg_replace(',<(vertical)>(.*)<\/\1>,UimsS','',$texte);
 	return $texte;
 }
-
+*/
 ?>
