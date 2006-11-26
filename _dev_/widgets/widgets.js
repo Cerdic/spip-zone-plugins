@@ -242,7 +242,7 @@ $.fn.iconewidget = function(){
     $(this).prepend(configWidgets.iconclick(this))
     .find('.widget-crayon') // le crayon a clicker lui-meme
       .click(function(e){
-        $(this).ancestors('.widget').openwidget(e);
+        $(this).ancestors('.widget').eq(0).openwidget(e);
       });
     });
 }

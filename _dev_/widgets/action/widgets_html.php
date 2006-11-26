@@ -91,7 +91,7 @@ class Widget {
     // un md5 associe aux valeurs pour verifier et detecter si elles changent
     var $md5;
 	// dimensions indicatives
-    var $largeurMini = 100;
+    var $largeurMini = 170;
     var $largeurMaxi = 700;
     var $hauteurMini = 36;
     var $hauteurMaxi = 700;
