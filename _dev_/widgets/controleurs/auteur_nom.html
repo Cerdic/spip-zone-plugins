@@ -1,11 +1,11 @@
 [(#REM)
 
-	Controleur pour le widget 'auteur-nom', uniquement html
+	Controleur pour le widget 'auteur_nom', uniquement html
 
 ]
 #CACHE{0}
 
-<BOUCLE_a(AUTEURS){id_auteur}{statut==.}>
+<BOUCLE_a(AUTEURS){id_auteur}{tous}>
 <input class="widget-active" name="#ENV{name_nom}"
  style="width:#ENV{largeur}px;" value="[(#NOM**|entites_html)]" />
 </BOUCLE_a>

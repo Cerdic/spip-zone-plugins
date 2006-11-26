@@ -5,7 +5,7 @@
 ]
 #CACHE{0}
 
-<BOUCLE_a(AUTEURS){id_auteur}{statut==.}>
+<BOUCLE_a(AUTEURS){id_auteur}{tous}>
 <fieldset><legend>Hyperlien</legend>
 <label><:form_prop_nom_site:></label> <input class="widget-active" name="#ENV{name_nom_site}"
  style="width:#ENV{largeur}px;" value="[(#NOM_SITE**|entites_html)]" />
