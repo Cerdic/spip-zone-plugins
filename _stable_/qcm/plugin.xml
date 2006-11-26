@@ -18,7 +18,8 @@ Gestionnaire de points et de commentaires<br />
 D&eacute;mo : [->http://www.ensemble-claudio-monteverdi.fr/article17]
   </description>
   <lien>[Mode d'emploi->http://www.spip-contrib.net/Un-QCM-dans-vos-articles]</lien> <!-- URI de documentation -->
-  <options>qcm_options.php</options>
+  <fonctions>qcm_fonctions.php</fonctions>
+  <options></options>
   <prefix>qcm</prefix>
   <pipeline>
   	<nom>insert_head</nom>
@@ -29,7 +30,11 @@ D&eacute;mo : [->http://www.ensemble-claudio-monteverdi.fr/article17]
   	<inclure>qcm_pipelines.php</inclure>
   </pipeline>
   <pipeline>
-  	<nom>pre_typo</nom>
+  	<nom>pre_propre</nom>
+  	<inclure>qcm_pipelines.php</inclure>
+  </pipeline>
+  <pipeline>
+  	<nom>post_propre</nom>
   	<inclure>qcm_pipelines.php</inclure>
   </pipeline>
 

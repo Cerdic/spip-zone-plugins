@@ -9,10 +9,33 @@
                        	les questions, reponses et commentaires
                        	dans un tableau et retourne le code HTML du QCM
   Mode d'emploi		 :	http://www.spip-contrib.net/Un-QCM-dans-vos-articles
+  
+  Titre du QCM : 
+	- soit sur une ligne de la forme 'T Voici mon titre' placee entre les
+	  balises <qcm> et </qcm>
+  	- soit entre les balises <qcm-titre> et </qcm-titre>
+	- soit entre les balises <intro> et </intro>
+		(Spip s'en servira egalement en cas d'absence de descriptif pour 
+		calculer la balise #INTRODUCTION utilisee pour resumer l'article)
+
+  Calcul de #INTRODUCTION : si introduction() n'est pas surchargee, Spip cherche 
+  d'abord le descriptif, puis en cas d'echec, le contenu du texte situé entre 
+  les balises <intro> et </intro>. En dernier lieu, Spip utilise les 500 premiers 
+  caractères du chapeau suivi du texte.
+  Attention donc : pour ne pas faire apparaitre le contenu du QCM avec les 
+  reponses, il vaut mieux penser à bien définir :
+  	- soit le descriptif de l'article 
+	- soit une introduction placee entre les balises <intro> et </intro>
+		(utiliser dans ce cas les balises <qcm-titre> et </qcm-titre>
+		pour definir le titre du QCM)
+	- soit le titre du QCM place entre les balises <intro> et </intro>
+  
 */
  
  define(_QCM_DEBUT, '<qcm>');
  define(_QCM_FIN, '</qcm>');
+ define(_QCM_TITRE_DEBUT, '<qcm-titre>');
+ define(_QCM_TITRE_FIN, '</qcm-titre>');
  
 // cette fonction remplit le tableau $qcms sur la question $indexQCM
 function qcm_analyse_le_qcm($qcm, $indexQCM, &$titreQCM) {
@@ -23,7 +46,7 @@ function qcm_analyse_le_qcm($qcm, $indexQCM, &$titreQCM) {
     switch($li[0]){
       case 'T' : 
 	  	// On extrait le titre
-	  	$titreQCM=substr($li,1);
+	  	$titreQCM=propre(substr($li,1));
 		break;
 
       case 'Q' : 
@@ -77,7 +100,20 @@ function qcm_analyse_le_qcm($qcm, $indexQCM, &$titreQCM) {
   } // foreach
 } // function
 
-// cette fonction retourne true si un qcm est trouve, false dans le cas contraire
+// cette fonction retourne le texte entre deux balises si elles sont presentes
+// et false dans le cas contraire
+function qcm_recupere_le_titre(&$chaine, $ouvrant, $fermant) {
+  // si les balises ouvrantes et fermantes ne sont pas presentes, c'est mort
+  if (strpos($chaine, $ouvrant)===false || strpos($chaine, $fermant)===false) return false;
+  list($texteAvant, $suite) = explode($ouvrant, $chaine, 2); 
+  list($texte, $texteApres) = explode($fermant, $suite, 2); 
+  // on supprime les balises de l'affichage...
+  $chaine = $texteAvant.'<!QCM-DEBUT-#0>'.$texteApres;
+  return trim($texte);
+}
+
+
+// cette fonction modifie $chaine et retourne true si un qcm est trouve, false dans le cas contraire
 function qcm_recupere_une_question(&$chaine, &$indexQCM, &$titreQCM) {
   global $qcms;
   
@@ -179,9 +215,9 @@ function qcm_inserer_les_qcm(&$chaine, $gestionPoints) {
   if (ereg('<ATTENTE_QCM>([0-9]+)</ATTENTE_QCM>', $chaine, $eregResult)) {
 	$indexQCM = intval($eregResult[1]);
 	list($texteAvant, $texteApres) = explode($eregResult[0], $chaine, 2); 
-	$chaine = "$texteAvant<!-- QCM-DEBUT #$indexQCM -->\n"
+	$chaine = "$texteAvant<!QCM-DEBUT-#$indexQCM>\n"
 		. qcm_affiche_la_question($indexQCM, isset($_POST["var_correction"]), $gestionPoints)
-		. "<!-- QCM-FIN #$indexQCM -->\n"
+		. "<!QCM-FIN-#$indexQCM>\n"
 		. qcm_inserer_les_qcm($texteApres, $gestionPoints); 
   }
   return $chaine;
@@ -193,10 +229,11 @@ function qcm_qcm($chaine) {
 
   // initialisation  
   global $qcms, $qcm_score;
-  $titreQCM = _T('qcm:qcm_titre');
+  $titreQCM = false;
   $indexQCM =  $qcm_score = 0;
   $qcms['nbquestions'] = $qcms['totalscore'] = $qcms['totalpropositions'] = 0;
   
+  // on cherche les questions
   while (qcm_recupere_une_question($chaine, $indexQCM, $titreQCM)) {
     $qcms['totalpropositions'] +=  count($qcms[$indexQCM]['propositions']);
     $qcms['totalscore'] +=  $qcms[$indexQCM]['maxscore'];
@@ -206,6 +243,11 @@ function qcm_qcm($chaine) {
   // est-ce certaines questions ne valent pas 1 point ?
   $gestionPoints = $qcms['totalscore']<>$qcms['nbquestions'];
 
+  // trouver un titre, coute que coute...
+  if (!$titreQCM) $titreQCM = qcm_recupere_le_titre($chaine, _QCM_TITRE_DEBUT, _QCM_TITRE_FIN);
+  if (!$titreQCM) $titreQCM = qcm_recupere_le_titre($chaine, '<intro>', '</intro>');
+  if (!$titreQCM) $titreQCM = _T('qcm:qcm_titre');
+  
   // reinserer les qcms mis en forme
   $chaine = qcm_inserer_les_qcm($chaine, $gestionPoints);
 
@@ -223,13 +265,14 @@ function qcm_qcm($chaine) {
 				. ($qcm_score==$qcms['totalscore']?_T('qcm:qcm_bravo'):'').'</div></center>'
 				. '<div class="spip_qcm_bouton_corriger" align="right">[ <a href="'
 				. parametre_url(self(),'var_mode','recalcul').'">'._T('qcm:qcm_reinitialiser').'</a> ]</div>';
-     // unset($_POST["var_correction"]);
   }
-  $chaine = str_replace('<!-- QCM-DEBUT #0 -->', $tete.'<!-- QCM-DEBUT #0 -->', $chaine);
-  $chaine = str_replace('<!-- QCM-FIN #'.($indexQCM-1).' -->', $pied.'</div>', $chaine);
+  
+  // introduire l'entete et le pied
+  $chaine = preg_replace(',(<!QCM-DEBUT-#0>),', $tete."\\1", $chaine, 1);
+  $chaine = str_replace($temp='<!QCM-FIN-#'.($indexQCM-1).'>', $temp.$pied.'</div>', $chaine);
 
   unset($qcms);
-  return $chaine;
+  return "<!PLUGIN-DEBUT>$chaine<!PLUGIN-FIN>";
 }
 
 function qcm_qcm2($chaine){
@@ -261,8 +304,13 @@ function qcm_insert_head($flux){
 	. qcm_stylesheet_public('qcm.css');
 }
 
-function qcm_pre_typo($texte) {
+function qcm_pre_propre($texte) {
 	return qcm_qcm($texte);
 }	
+
+function qcm_post_propre($texte) { 
+	return preg_replace(',<!((QCM|PLUGIN)-(DEBUT|FIN)(-#[0-9]+)?)>,UimsS', '<!-- \\1 -->', $texte);
+}	
+
 
 ?>

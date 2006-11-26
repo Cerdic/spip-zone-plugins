@@ -4,7 +4,7 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'qcm_titre' => "Un QCM",
+'qcm_titre' => "Voici un QCM",
 
 'qcm_reponseJuste' => "La r&eacute;ponse est juste",
 'qcm_reponseFausse' => "La r&eacute;ponse est fausse",
