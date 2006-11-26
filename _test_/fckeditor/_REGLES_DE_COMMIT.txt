@@ -3,7 +3,7 @@ Projet : Plugin FCKEditor
 Auteur : Frank SAURET - 
 Contact : http://electropol.free.fr
 
-Voici les régles à suivre avant de commiter des modifications sur
+Voici les règles à suivre avant de commiter des modifications sur
 cette branche.
 
 A. Obligation de n'intervenir que dans le planning de travail. Pour le modifier
@@ -11,7 +11,7 @@ contactez moi à vincevg@free.fr.
 
           Planning de modification :
           
-          1. Faire le pluggin  à partir de la dernière version de FCKEditor (Terminé Frank SAURET),
+          1. Faire le plugin  à partir de la dernière version de FCKEditor (Terminé Frank SAURET),
           2. Intégrer l'aide (Terminé Frank SAURET),
           3. Faire une page de personnalisation dans la partie configuration, 
           (le style de la barre d'outils, choisir les boutons  …),
@@ -62,10 +62,10 @@ C.  Modification du code
 	
   
   
-A. Clarté du code.
+D. Clarté du code.
 
 Il n'y a actuellement pas de règles précises d'écriture correct du
-code. Il faut juste garder du code indenter (i.e indenter chaque
+code. Il faut juste garder du code indenter (i.e. indenter chaque
 fermeture sur une nouvelle ligne pour les gros blocs), en général,
 suivre la façon dont c'est fait dans les fichiers de bases.
 
