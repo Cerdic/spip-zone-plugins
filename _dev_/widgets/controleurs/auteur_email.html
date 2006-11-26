@@ -1,0 +1,11 @@
+[(#REM)
+
+	Controleur pour le widget 'auteur-email', uniquement html
+
+]
+#CACHE{0}
+
+<BOUCLE_a(AUTEURS){id_auteur}{statut==.}>
+<input class="widget-active" name="#ENV{name_email}"
+ style="width:#ENV{largeur}px;" value="[(#EMAIL**|entites_html)]" />
+</BOUCLE_a>

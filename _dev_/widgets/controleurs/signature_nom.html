@@ -1,0 +1,10 @@
+[(#REM)
+
+	Controleur pour le widget 'signature-nom', uniquement html
+]
+#CACHE{0}
+
+<BOUCLE_c(SIGNATURES){id_signature}{statut==.}>
+<input class="widget-active" name="#ENV{name_nom_email}"
+ style="width:#ENV{largeur}px;" value="[(#NOM**|entites_html)]" />
+</BOUCLE_c>

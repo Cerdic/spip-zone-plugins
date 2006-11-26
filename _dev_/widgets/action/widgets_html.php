@@ -30,6 +30,11 @@ function affiche_controleur($class) {
 function controleur_dist($regs) {
     list(,$widget,$type,$champ,$id) = $regs;
     $options = array();
+	// Si le controleur est un squelette html, on va chercher
+	// les champs qu'il lui faut dans la table demandee
+	// Attention, un controleur multi-tables ne fonctionnera
+	// que si les champs ont le meme nom dans toutes les tables
+	// (par exemple: hyperlien est ok, mais pas nom)
 	if (($fichier = find_in_path(
      ($controleur = 'controleurs/' . $type . '_' . $champ) . '.html'))
     || ($fichier = find_in_path(
@@ -42,6 +47,7 @@ function controleur_dist($regs) {
     } else {
 		$controleur = '';
     }
+
     $valeur = valeur_colonne_table($type, $champ, $id);
     if ($valeur === false) {
 	    return array("$type $id $champ: " . _U('widgets:pas_de_valeur'), 6);
