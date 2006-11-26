@@ -60,7 +60,7 @@ class HTMLPurifier_Config
      * @param $key String key
      */
     function get($namespace, $key) {
-        if (!isset($this->conf[$namespace][$key])) {
+        if (!isset($this->def->info[$namespace][$key])) {
             trigger_error('Cannot retrieve value of undefined directive',
                 E_USER_WARNING);
             return;
@@ -75,13 +75,16 @@ class HTMLPurifier_Config
      * @param $value Mixed value
      */
     function set($namespace, $key, $value) {
-        if (!isset($this->conf[$namespace][$key])) {
+        if (!isset($this->def->info[$namespace][$key])) {
             trigger_error('Cannot set undefined directive to value',
                 E_USER_WARNING);
             return;
         }
-        $value = $this->def->validate($value,
-                                      $this->def->info[$namespace][$key]->type);
+        $value = $this->def->validate(
+                    $value,
+                    $this->def->info[$namespace][$key]->type,
+                    $this->def->info[$namespace][$key]->allow_null
+                 );
         if (is_string($value)) {
             // resolve value alias if defined
             if (isset($this->def->info[$namespace][$key]->aliases[$value])) {
@@ -95,7 +98,7 @@ class HTMLPurifier_Config
                 }
             }
         }
-        if ($value === null) {
+        if ($this->def->isError($value)) {
             trigger_error('Value is of invalid type', E_USER_WARNING);
             return;
         }
@@ -122,6 +125,27 @@ class HTMLPurifier_Config
             $this->css_definition->setup($this);
         }
         return $this->css_definition;
+    }
+    
+    /**
+     * Loads configuration values from an array with the following structure:
+     * Namespace.Directive => Value
+     * @param $config_array Configuration associative array
+     */
+    function loadArray($config_array) {
+        foreach ($config_array as $key => $value) {
+            if (strpos($key, '.') !== false) {
+                // condensed form
+                list($namespace, $directive) = explode('.', $key);
+                $this->set($namespace, $directive, $value);
+            } else {
+                $namespace = $key;
+                $namespace_values = $value;
+                foreach ($namespace_values as $directive => $value) {
+                    $this->set($namespace, $directive, $value);
+                }
+            }
+        }
     }
     
 }

@@ -22,6 +22,19 @@ require_once 'HTMLPurifier/Generator.php';
 require_once 'HTMLPurifier/Token.php';
 require_once 'HTMLPurifier/TagTransform.php';
 
+HTMLPurifier_ConfigSchema::define(
+    'HTML', 'EnableAttrID', false, 'bool',
+    'Allows the ID attribute in HTML.  This is disabled by default '.
+    'due to the fact that without proper configuration user input can '.
+    'easily break the validation of a webpage by specifying an ID that is '.
+    'already on the surrounding HTML.  If you don\'t mind throwing caution to '.
+    'the wind, enable this directive, but I strongly recommend you also '.
+    'consider blacklisting IDs you use (%Attr.IDBlacklist) or prefixing all '.
+    'user supplied IDs (%Attr.IDPrefix).  This directive has been available '.
+    'since 1.2.0, and when set to true reverts to the behavior of pre-1.2.0 '.
+    'versions.'
+);
+
 /**
  * Defines the purified HTML type with large amounts of objects.
  * 
@@ -236,13 +249,13 @@ class HTMLPurifier_HTMLDefinition
         // info[]->type : defines the type of the element (block or inline)
         
         // reuses $e_Inline and $e_Block
-        
-        foreach ($e_Inline->elements as $name) {
+        foreach ($e_Inline->elements as $name => $bool) {
+            if ($name == '#PCDATA' || $name == '') continue;
             $this->info[$name]->type = 'inline';
         }
         
         $e_Block = new HTMLPurifier_ChildDef_Optional($e_block);
-        foreach ($e_Block->elements as $name) {
+        foreach ($e_Block->elements as $name => $bool) {
             $this->info[$name]->type = 'block';
         }
         
@@ -271,7 +284,6 @@ class HTMLPurifier_HTMLDefinition
         // which manually override these in their local definitions
         $this->info_global_attr = array(
             // core attrs
-            'id'    => new HTMLPurifier_AttrDef_ID(),
             'class' => new HTMLPurifier_AttrDef_Class(),
             'title' => $e_Text,
             'style' => new HTMLPurifier_AttrDef_CSS(),
@@ -280,6 +292,10 @@ class HTMLPurifier_HTMLDefinition
             'lang'  => new HTMLPurifier_AttrDef_Lang(),
             'xml:lang' => new HTMLPurifier_AttrDef_Lang(),
             );
+        
+        if ($config->get('HTML', 'EnableAttrID')) {
+            $this->info_global_attr['id'] = new HTMLPurifier_AttrDef_ID();
+        }
         
         // required attribute stipulation handled in attribute transformation
         $this->info['bdo']->attr = array(); // nothing else
@@ -335,11 +351,13 @@ class HTMLPurifier_HTMLDefinition
         $e_URI = new HTMLPurifier_AttrDef_URI();
         $this->info['a']->attr['href'] =
         $this->info['img']->attr['longdesc'] =
-        $this->info['img']->attr['src'] =
         $this->info['del']->attr['cite'] =
         $this->info['ins']->attr['cite'] =
         $this->info['blockquote']->attr['cite'] =
         $this->info['q']->attr['cite'] = $e_URI;
+        
+        // URI that causes HTTP request
+        $this->info['img']->attr['src'] = new HTMLPurifier_AttrDef_URI(true);
         
         //////////////////////////////////////////////////////////////////////
         // info_tag_transform : transformations of tags
@@ -396,6 +414,13 @@ class HTMLPurifier_HTMLDefinition
         // pre is applied before any validation is done, post is done after
         
         $this->info_attr_transform_post[] = new HTMLPurifier_AttrTransform_Lang();
+        
+        // protect against stdclasses floating around
+        foreach ($this->info as $key => $obj) {
+            if (is_a($obj, 'stdclass')) {
+                unset($this->info[$key]);
+            }
+        }
         
     }
     

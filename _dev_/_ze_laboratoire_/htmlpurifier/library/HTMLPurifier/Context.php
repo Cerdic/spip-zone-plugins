@@ -34,7 +34,8 @@ class HTMLPurifier_Context
         if (!isset($this->_storage[$name])) {
             trigger_error('Attempted to retrieve non-existent variable',
                           E_USER_ERROR);
-            return;
+            $var = null; // so we can return by reference
+            return $var;
         }
         return $this->_storage[$name];
     }
@@ -58,6 +59,16 @@ class HTMLPurifier_Context
      */
     function exists($name) {
         return isset($this->_storage[$name]);
+    }
+    
+    /**
+     * Loads a series of variables from an associative array
+     * @param $context_array Assoc array of variables to load
+     */
+    function loadArray(&$context_array) {
+        foreach ($context_array as $key => $discard) {
+            $this->register($key, $context_array[$key]);
+        }
     }
     
 }
