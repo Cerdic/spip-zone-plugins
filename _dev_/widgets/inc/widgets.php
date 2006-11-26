@@ -64,7 +64,7 @@ function var2js($var) {
 function _U($texte)
 {
     include_spip('inc/charsets');
-    return html2unicode(_T($texte));
+    return unicode2charset(html2unicode(_T($texte)));
 }
 
 function wdgcfg() {
