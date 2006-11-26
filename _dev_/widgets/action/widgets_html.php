@@ -140,7 +140,7 @@ class Widget {
 
 	// formulaire standard
     function formulaire($contexte = array(), $inputAttrs = array()) {
-        return '<form method="post" action="' .
+        return '<form class="formulaire_spip" method="post" action="' .
         	str_replace('widgets_html', 'widgets_store', self()) . '">' .
         	$this->code() .
 	        $this->input($contexte, $inputAttrs) .
