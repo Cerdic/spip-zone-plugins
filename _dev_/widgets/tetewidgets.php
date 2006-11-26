@@ -12,9 +12,13 @@ function analyse_droits_rapide_dist() {
         return true;
 }
 
+
+define('MODIFIER_FORUMS', false);
+define('MODIFIER_SIGNATURES', false);
+
 // Modifier un forum ?
 // = un super-admin (ici, pour tests de widgets forum)
-if (!function_exists('autoriser_modifier_forum')) {
+if (MODIFIER_FORUMS AND !function_exists('autoriser_modifier_forum')) {
 	function autoriser_modifier_forum($faire, $type, $id, $qui, $opt) {
 		return
 			$qui['statut'] == '0minirezo'
@@ -24,7 +28,7 @@ if (!function_exists('autoriser_modifier_forum')) {
 
 // Modifier une signature ?
 // = un super-admin (ici, pour tests de widgets forum)
-if (!function_exists('autoriser_modifier_signature')) {
+if (MODIFIER_SIGNATURES AND !function_exists('autoriser_modifier_signature')) {
 	function autoriser_modifier_signature($faire, $type, $id, $qui, $opt) {
 		return
 			$qui['statut'] == '0minirezo'
