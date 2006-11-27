@@ -206,7 +206,7 @@ $.fn.activatewidget = function() {
         .click(function(e){
           e.stopPropagation();
           $(this)
-          .ancestor("form")
+          .ancestors("form").eq(0)
           .submit();
         })
       .end()
@@ -245,7 +245,7 @@ $.fn.iconewidget = function(){
     $(this).prepend(configWidgets.iconclick(this))
     .find('.widget-crayon') // le crayon a clicker lui-meme
       .click(function(e){
-        $(this).ancestor('.widget').openwidget(e);
+        $(this).ancestors('.widget').eq(0).openwidget(e);
       });
     });
 }
