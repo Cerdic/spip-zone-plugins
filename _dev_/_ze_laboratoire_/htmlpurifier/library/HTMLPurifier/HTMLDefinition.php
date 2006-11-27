@@ -18,6 +18,12 @@ require_once 'HTMLPurifier/AttrTransform.php';
     require_once 'HTMLPurifier/AttrTransform/BdoDir.php';
     require_once 'HTMLPurifier/AttrTransform/ImgRequired.php';
 require_once 'HTMLPurifier/ChildDef.php';
+    require_once 'HTMLPurifier/ChildDef/Chameleon.php';
+    require_once 'HTMLPurifier/ChildDef/Empty.php';
+    require_once 'HTMLPurifier/ChildDef/Required.php';
+    require_once 'HTMLPurifier/ChildDef/Optional.php';
+    require_once 'HTMLPurifier/ChildDef/Table.php';
+    require_once 'HTMLPurifier/ChildDef/StrictBlockquote.php';
 require_once 'HTMLPurifier/Generator.php';
 require_once 'HTMLPurifier/Token.php';
 require_once 'HTMLPurifier/TagTransform.php';
@@ -33,6 +39,63 @@ HTMLPurifier_ConfigSchema::define(
     'user supplied IDs (%Attr.IDPrefix).  This directive has been available '.
     'since 1.2.0, and when set to true reverts to the behavior of pre-1.2.0 '.
     'versions.'
+);
+
+HTMLPurifier_ConfigSchema::define(
+    'HTML', 'Strict', false, 'bool',
+    'Determines whether or not to use Transitional (loose) or Strict rulesets. '.
+    'This directive has been available since 1.3.0.'
+);
+
+HTMLPurifier_ConfigSchema::define(
+    'HTML', 'BlockWrapper', 'p', 'string',
+    'String name of element to wrap inline elements that are inside a block '.
+    'context.  This only occurs in the children of blockquote in strict mode. '.
+    'Example: by default value, <code>&lt;blockquote&gt;Foo&lt;/blockquote&gt;</code> '.
+    'would become <code>&lt;blockquote&gt;&lt;p&gt;Foo&lt;/p&gt;&lt;/blockquote&gt;</code>. The '.
+    '<code>&lt;p&gt;</code> tags can be replaced '.
+    'with whatever you desire, as long as it is a block level element. '.
+    'This directive has been available since 1.3.0.'
+);
+
+HTMLPurifier_ConfigSchema::define(
+    'HTML', 'Parent', 'div', 'string',
+    'String name of element that HTML fragment passed to library will be '.
+    'inserted in.  An interesting variation would be using span as the '.
+    'parent element, meaning that only inline tags would be allowed. '.
+    'This directive has been available since 1.3.0.'
+);
+
+HTMLPurifier_ConfigSchema::define(
+    'HTML', 'AllowedElements', null, 'lookup/null',
+    'If HTML Purifier\'s tag set is unsatisfactory for your needs, you '.
+    'can overload it with your own list of tags to allow.  Note that this '.
+    'method is subtractive: it does its job by taking away from HTML Purifier '.
+    'usual feature set, so you cannot add a tag that HTML Purifier never '.
+    'supported in the first place (like embed).  If you change this, you '.
+    'probably also want to change %HTML.AllowedAttributes. '.
+    '<strong>Warning:</strong> If another directive conflicts with the '.
+    'elements here, <em>that</em> directive will win and override. '.
+    'This directive has been available since 1.3.0.'
+);
+
+HTMLPurifier_ConfigSchema::define(
+    'HTML', 'AllowedAttributes', null, 'lookup/null',
+    'IF HTML Purifier\'s attribute set is unsatisfactory, overload it! '.
+    'The syntax is \'tag.attr\' or \'*.attr\' for the global attributes '.
+    '(style, id, class, dir, lang, xml:lang).'.
+    '<strong>Warning:</strong> If another directive conflicts with the '.
+    'elements here, <em>that</em> directive will win and override. For '.
+    'example, %HTML.EnableAttrID will take precedence over *.id in this '.
+    'directive.  You must set that directive to true before you can use '.
+    'IDs at all. This directive has been available since 1.3.0.'
+);
+
+HTMLPurifier_ConfigSchema::define(
+    'Attr', 'DisableURI', false, 'bool',
+    'Disables all URIs in all forms. Not sure why you\'d want to do that '.
+    '(after all, the Internet\'s founded on the notion of a hyperlink). '.
+    'This directive has been available since 1.3.0.'
 );
 
 /**
@@ -69,10 +132,23 @@ class HTMLPurifier_HTMLDefinition
     
     /**
      * String name of parent element HTML will be going into.
-     * @todo Allow this to be overloaded by user config
      * @public
      */
     var $info_parent = 'div';
+    
+    /**
+     * Definition for parent element, allows parent element to be a
+     * tag that's not allowed inside the HTML fragment.
+     * @public
+     */
+    var $info_parent_def;
+    
+    /**
+     * String name of element used to wrap inline elements in block context
+     * @note This is rarely used except for BLOCKQUOTEs in strict mode
+     * @public
+     */
+    var $info_block_wrapper = 'p';
     
     /**
      * Associative array of deprecated tag name to HTMLPurifier_TagTransform
@@ -93,13 +169,24 @@ class HTMLPurifier_HTMLDefinition
     var $info_attr_transform_post = array();
     
     /**
+     * Lookup table of flow elements
+     * @public
+     */
+    var $info_flow_elements = array();
+    
+    /**
+     * Boolean is a strict definition?
+     * @public
+     */
+    var $strict;
+    
+    /**
      * Initializes the definition, the meat of the class.
      */
     function setup($config) {
         
-        // emulates the structure of the DTD
-        // these are condensed, however, with bad stuff taken out
-        // screening process was done by hand
+        // some cached config values
+        $this->strict = $config->get('HTML', 'Strict');
         
         //////////////////////////////////////////////////////////////////////
         // info[] : initializes the definition objects
@@ -111,12 +198,18 @@ class HTMLPurifier_HTMLDefinition
             array(
                 'ins', 'del', 'blockquote', 'dd', 'li', 'div', 'em', 'strong',
                 'dfn', 'code', 'samp', 'kbd', 'var', 'cite', 'abbr', 'acronym',
-                'q', 'sub', 'tt', 'sup', 'i', 'b', 'big', 'small', 'u', 's',
-                'strike', 'bdo', 'span', 'dt', 'p', 'h1', 'h2', 'h3', 'h4',
+                'q', 'sub', 'tt', 'sup', 'i', 'b', 'big', 'small',
+                'bdo', 'span', 'dt', 'p', 'h1', 'h2', 'h3', 'h4',
                 'h5', 'h6', 'ol', 'ul', 'dl', 'address', 'img', 'br', 'hr',
                 'pre', 'a', 'table', 'caption', 'thead', 'tfoot', 'tbody',
                 'colgroup', 'col', 'td', 'th', 'tr'
             );
+        
+        if (!$this->strict) {
+            $allowed_tags[] = 'u';
+            $allowed_tags[] = 's';
+            $allowed_tags[] = 'strike';
+        }
         
         foreach ($allowed_tags as $tag) {
             $this->info[$tag] = new HTMLPurifier_ElementDef();
@@ -124,6 +217,10 @@ class HTMLPurifier_HTMLDefinition
         
         //////////////////////////////////////////////////////////////////////
         // info[]->child : defines allowed children for elements
+        
+        // emulates the structure of the DTD
+        // however, these are condensed, with bad stuff taken out
+        // screening process was done by hand
         
         // entities: prefixed with e_ and _ replaces . from DTD
         // double underlines are entities we made up
@@ -148,11 +245,9 @@ class HTMLPurifier_HTMLDefinition
         $e_phrase_basic = 'em | strong | dfn | code | q | samp | kbd | var'.
           ' | cite | abbr | acronym';
         $e_phrase = "$e_phrase_basic | $e_phrase_extra";
-        $e_inline_forms = ''; // humor the dtd
         $e_misc_inline = 'ins | del';
         $e_misc = "$e_misc_inline";
-        $e_inline = "a | $e_special | $e_fontstyle | $e_phrase".
-          " | $e_inline_forms";
+        $e_inline = "a | $e_special | $e_fontstyle | $e_phrase";
         // pseudo-property we created for convenience, see later on
         $e__inline = "#PCDATA | $e_inline | $e_misc_inline";
         // note the casing
@@ -161,14 +256,14 @@ class HTMLPurifier_HTMLDefinition
         $e_lists = 'ul | ol | dl';
         $e_blocktext = 'pre | hr | blockquote | address';
         $e_block = "p | $e_heading | div | $e_lists | $e_blocktext | table";
+        $e_Block = new HTMLPurifier_ChildDef_Optional($e_block);
         $e__flow = "#PCDATA | $e_block | $e_inline | $e_misc";
         $e_Flow = new HTMLPurifier_ChildDef_Optional($e__flow);
         $e_a_content = new HTMLPurifier_ChildDef_Optional("#PCDATA".
-          " | $e_special | $e_fontstyle | $e_phrase | $e_inline_forms".
-          " | $e_misc_inline");
+          " | $e_special | $e_fontstyle | $e_phrase | $e_misc_inline");
         $e_pre_content = new HTMLPurifier_ChildDef_Optional("#PCDATA | a".
           " | $e_special_basic | $e_fontstyle_basic | $e_phrase_basic".
-          " | $e_inline_forms | $e_misc_inline");
+          " | $e_misc_inline");
         $e_form_content = new HTMLPurifier_ChildDef_Optional('');//unused
         $e_form_button_content = new HTMLPurifier_ChildDef_Optional('');//unused
         
@@ -176,10 +271,15 @@ class HTMLPurifier_HTMLDefinition
         $this->info['del']->child =
             new HTMLPurifier_ChildDef_Chameleon($e__inline, $e__flow);
         
-        $this->info['blockquote']->child=
         $this->info['dd']->child  =
         $this->info['li']->child  =
         $this->info['div']->child = $e_Flow;
+        
+        if ($this->strict) {
+            $this->info['blockquote']->child = new HTMLPurifier_ChildDef_StrictBlockquote();
+        } else {
+            $this->info['blockquote']->child = $e_Flow;
+        }
         
         $this->info['caption']->child   = 
         $this->info['em']->child   =
@@ -220,9 +320,13 @@ class HTMLPurifier_HTMLDefinition
         
         $this->info['dl']->child   = new HTMLPurifier_ChildDef_Required('dt|dd');
         
-        $this->info['address']->child =
-          new HTMLPurifier_ChildDef_Optional("#PCDATA | p | $e_inline".
-              " | $e_misc_inline");
+        if ($this->strict) {
+            $this->info['address']->child = $e_Inline;
+        } else {
+            $this->info['address']->child =
+              new HTMLPurifier_ChildDef_Optional("#PCDATA | p | $e_inline".
+                  " | $e_misc_inline");
+        }
         
         $this->info['img']->child  =
         $this->info['br']->child   =
@@ -250,13 +354,16 @@ class HTMLPurifier_HTMLDefinition
         
         // reuses $e_Inline and $e_Block
         foreach ($e_Inline->elements as $name => $bool) {
-            if ($name == '#PCDATA' || $name == '') continue;
+            if ($name == '#PCDATA') continue;
             $this->info[$name]->type = 'inline';
         }
         
-        $e_Block = new HTMLPurifier_ChildDef_Optional($e_block);
         foreach ($e_Block->elements as $name => $bool) {
             $this->info[$name]->type = 'block';
+        }
+        
+        foreach ($e_Flow->elements as $name => $bool) {
+            $this->info_flow_elements[$name] = true;
         }
         
         //////////////////////////////////////////////////////////////////////
@@ -348,16 +455,23 @@ class HTMLPurifier_HTMLDefinition
         $this->info['td']->attr['colspan'] =
         $this->info['th']->attr['colspan'] = $e__NumberSpan;
         
-        $e_URI = new HTMLPurifier_AttrDef_URI();
-        $this->info['a']->attr['href'] =
-        $this->info['img']->attr['longdesc'] =
-        $this->info['del']->attr['cite'] =
-        $this->info['ins']->attr['cite'] =
-        $this->info['blockquote']->attr['cite'] =
-        $this->info['q']->attr['cite'] = $e_URI;
+        if (!$config->get('Attr', 'DisableURI')) {
+            $e_URI = new HTMLPurifier_AttrDef_URI();
+            $this->info['a']->attr['href'] =
+            $this->info['img']->attr['longdesc'] =
+            $this->info['del']->attr['cite'] =
+            $this->info['ins']->attr['cite'] =
+            $this->info['blockquote']->attr['cite'] =
+            $this->info['q']->attr['cite'] = $e_URI;
+            
+            // URI that causes HTTP request
+            $this->info['img']->attr['src'] = new HTMLPurifier_AttrDef_URI(true);
+        }
         
-        // URI that causes HTTP request
-        $this->info['img']->attr['src'] = new HTMLPurifier_AttrDef_URI(true);
+        if (!$this->strict) {
+            $this->info['li']->attr['value'] = new HTMLPurifier_AttrDef_Integer();
+            $this->info['ol']->attr['start'] = new HTMLPurifier_AttrDef_Integer();
+        }
         
         //////////////////////////////////////////////////////////////////////
         // info_tag_transform : transformations of tags
@@ -422,6 +536,53 @@ class HTMLPurifier_HTMLDefinition
             }
         }
         
+        //////////////////////////////////////////////////////////////////////
+        // info_block_wrapper : wraps inline elements in block context
+        
+        $block_wrapper = $config->get('HTML', 'BlockWrapper');
+        if (isset($e_Block->elements[$block_wrapper])) {
+            $this->info_block_wrapper = $block_wrapper;
+        } else {
+            trigger_error('Cannot use non-block element as block wrapper.',
+                E_USER_ERROR);
+        }
+        
+        //////////////////////////////////////////////////////////////////////
+        // info_parent : parent element of the HTML fragment
+        
+        $parent = $config->get('HTML', 'Parent');
+        if (isset($this->info[$parent])) {
+            $this->info_parent = $parent;
+        } else {
+            trigger_error('Cannot use unrecognized element as parent.',
+                E_USER_ERROR);
+        }
+        $this->info_parent_def = $this->info[$this->info_parent];
+        
+        //////////////////////////////////////////////////////////////////////
+        // %HTML.Allowed(Elements|Attributes) : cut non-allowed elements
+        $allowed_elements = $config->get('HTML', 'AllowedElements');
+        if (is_array($allowed_elements)) {
+            // $allowed_elements[$this->info_parent] = true; // allow parent element
+            foreach ($this->info as $name => $d) {
+                if(!isset($allowed_elements[$name])) unset($this->info[$name]);
+            }
+        }
+        $allowed_attributes = $config->get('HTML', 'AllowedAttributes');
+        if (is_array($allowed_attributes)) {
+            foreach ($this->info_global_attr as $attr => $info) {
+                if (!isset($allowed_attributes["*.$attr"])) {
+                    unset($this->info_global_attr[$attr]);
+                }
+            }
+            foreach ($this->info as $tag => $info) {
+                foreach ($info->attr as $attr => $attr_info) {
+                    if (!isset($allowed_attributes["$tag.$attr"])) {
+                        unset($this->info[$tag]->attr[$attr]);
+                    }
+                }
+            }
+        }
     }
     
     function setAttrForTableElements($attr, $def) {

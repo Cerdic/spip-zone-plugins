@@ -247,11 +247,26 @@ class HTMLPurifier_ConfigSchema {
             case 'bool':
                 if (is_int($var) && ($var === 0 || $var === 1)) {
                     $var = (bool) $var;
+                } elseif (is_string($var)) {
+                    if ($var == 'on' || $var == 'true' || $var == '1') {
+                        $var = true;
+                    } elseif ($var == 'off' || $var == 'false' || $var == '0') {
+                        $var = false;
+                    } else {
+                        break;
+                    }
                 } elseif (!is_bool($var)) break;
                 return $var;
             case 'list':
             case 'hash':
             case 'lookup':
+                if (is_string($var)) {
+                    // simplistic string to array method that only works
+                    // for simple lists of tag names or alphanumeric characters
+                    $var = explode(',',$var);
+                    // remove spaces
+                    foreach ($var as $i => $j) $var[$i] = trim($j);
+                }
                 if (!is_array($var)) break;
                 $keys = array_keys($var);
                 if ($keys === array_keys($keys)) {
