@@ -285,6 +285,7 @@ function action_widgets_html_dist() {
 
     // CONTROLEUR
     // on affiche le formulaire demande
+    include_spip('tetewidgets');
     include_spip('inc/widgets');
     $return = affiche_controleur($_GET['class']);
 

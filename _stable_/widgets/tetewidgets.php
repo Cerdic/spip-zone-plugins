@@ -12,7 +12,6 @@ function analyse_droits_rapide_dist() {
         return true;
 }
 
-
 define('MODIFIER_FORUMS', false);
 define('MODIFIER_SIGNATURES', false);
 
