@@ -33,34 +33,34 @@ function habillages_ajouter_onglets($flux) {
 	
 	if (_request('exec')=='config_habillages' || _request('exec')=='habillages_squelettes' || _request('exec')=='habillages_extras' || _request('exec')=='habillages_logos' || _request('exec')=='habillages_icones' || _request('exec')=='habillages_aide' || _request('exec')=='habillages_themes') {
 		$flux['data']['accueil']= new Bouton(
-	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_icone-22.png', 'Accueil', generer_url_ecrire("config_habillages"));
+	_DIR_PLUGIN_HABILLAGES.'img_pack/habillages_icone-22.png', 'Accueil', generer_url_ecrire("config_habillages"));
 	
 	# Si l'utilisateur/trice a choisi le gestionnaire de squelette, on affiche ce dernier.
 	if ($squelettes_is_gestionnaire == "oui" || $squelettes_is_gestionnaire == "") {
 		$flux['data']['squelettes']= new Bouton(
-		_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_squelettes-22.png', 'Squelettes', generer_url_ecrire("habillages_squelettes"));
+		_DIR_PLUGIN_HABILLAGES.'img_pack/habillages_squelettes-22.png', 'Squelettes', generer_url_ecrire("habillages_squelettes"));
 	
 			if ($habillages_is_theme == "oui") {
 				$flux['data']['themes']= new Bouton(
-				_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_themes-22.png', 'Th&egrave;mes', generer_url_ecrire("habillages_themes"));
+				_DIR_PLUGIN_HABILLAGES.'img_pack/habillages_themes-22.png', 'Th&egrave;mes', generer_url_ecrire("habillages_themes"));
 			}
 			if ($habillages_is_extras == "oui") {
 				$flux['data']['extras']= new Bouton(
-				_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_extras-22.png', 'Extras', generer_url_ecrire("habillages_extras"));
+				_DIR_PLUGIN_HABILLAGES.'img_pack/habillages_extras-22.png', 'Extras', generer_url_ecrire("habillages_extras"));
 			}
 	}
 	
 	if ($logos_is_gestionnaire == "oui") {
 		$flux['data']['logotheque']= new Bouton(
-		_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_logos-22.png', 'Logoth&egrave;que', generer_url_ecrire("habillages_logos"));
+		_DIR_PLUGIN_HABILLAGES.'img_pack/habillages_logos-22.png', 'Logoth&egrave;que', generer_url_ecrire("habillages_logos"));
 	}
 	
 	if ($icones_is_gestionnaire == "oui" || $icones_is_gestionnaire == "") {
 		$flux['data']['icones']= new Bouton(
-		_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_icones-22.png', 'Ic&#244;nes', generer_url_ecrire("habillages_icones"));
+		_DIR_PLUGIN_HABILLAGES.'img_pack/habillages_icones-22.png', 'Ic&#244;nes', generer_url_ecrire("habillages_icones"));
 	}
 	$flux['data']['aide']= new Bouton(
-	_DIR_PLUGIN_HABILLAGES.'/img_pack/habillages_aide-22.png', 'Aide', generer_url_ecrire("habillages_aide")); 
+	_DIR_PLUGIN_HABILLAGES.'img_pack/habillages_aide-22.png', 'Aide', generer_url_ecrire("habillages_aide")); 
 }
 return $flux;
 }

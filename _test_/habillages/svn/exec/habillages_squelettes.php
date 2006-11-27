@@ -224,7 +224,7 @@ EOF;
 
 	global $couleur_foncee;
 	echo "<table border='0' cellspacing='0' cellpadding='5' width='100%'>";
-	echo "<tr><td colspan='4' style='background-color:$couleur_foncee' class='bandeau_smooth'><b>";
+	echo "<tr><td colspan='4' style='background-color:$couleur_foncee' class='bandeau_titre'><b>";
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
 	echo _T('habillages:squelettes_titre')."</font></b></td></tr>";
 	echo "<tr><td class='serif' colspan=4>";	
@@ -246,9 +246,9 @@ EOF;
 		# Encadre du squelette par defaut.
 		debut_boite_info();
 		echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
-		echo "<tr><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+		echo "<tr><td width=1% style='background-color:$couleur_claire' class='bandeau_stitre'>";
 		echo "<input type='radio' name='statusplug' value='defaut'$checked_defaut>";
-		echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
+		echo "</td><td width=99% style='background-color:$couleur_claire' class='bandeau_stitre'>";
 		echo "<strong>"._T('habillages:squelettes_defaut_titre')."</strong><label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
 		echo "</td></tr>";
 		echo "</table>";
@@ -258,16 +258,16 @@ EOF;
 		# Encadre de la dist.
 		debut_boite_info();
 		echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
-		echo "<tr><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+		echo "<tr><td style='background-color:$couleur_claire class='bandeau_stitre'>";
 		echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/stable.png' alt='Stable' />";
-		echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+		echo "</td><td style='background-color:$couleur_claire' class='bandeau_stitre'>";
 		echo "<input type='radio' name='statusplug' value='dist'$checked_dist>";
-		echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
+		echo "</td><td style='background-color:$couleur_claire' class='bandeau_stitre'>";
 		echo _T('habillages:squelettes_dist_titre');
-		echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+		echo "</td><td style='background-color:$couleur_claire' class='bandeau_stitre'>";
 		echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_themes-22.png' />";
 		echo "<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
-		echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+		echo "</td><td style='background-color:$couleur_claire' class='bandeau_stitre'>";
 		echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_extras-22.png' />";
 		echo "</td></tr>";
 		echo "</table>";
@@ -359,28 +359,27 @@ EOF;
 					
 					debut_boite_info();
 					echo "<table border='0' cellpadding='0' cellspacing='0' id='plaintab'>";
-					echo "<tr><td style='background-color:$couleur_claire' class='titre_un habinput'>";
+					echo "<tr><td width=1% style='background-color:$couleur_claire' class='bandeau_stitre'>";
 					echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/".$etat.".png' />";
-					echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
+					echo "</td><td width=1% style='background-color:$couleur_claire' class='bandeau_stitre'>";
 					echo "<input type='radio' name='statusplug' value='$chemin_plugin_court'$checked>";
-					echo "</td><td style='background-color:$couleur_claire' class='titre_un'>";
+					echo "</td><td width=95% style='background-color:$couleur_claire' class='bandeau_stitre'>";
 					echo "<strong>".$nom_theme."</strong>(version ".$version_theme.") ";
-					echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
-					echo $niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
+					echo "</td><td width=1% style='background-color:$couleur_claire' class='bandeau_stitre'>";
+					//echo $niveau."<label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
+					echo "<div style='float: right;'>";
 
 					lire_metas();
 					$liste_themes = $GLOBALS['meta']['habillages_liste_themes'];
 					if (eregi($prefixe_theme, $liste_themes)) {
-						echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
 						echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_themes-22.png' />";
 					}
 					$liste_extras = $GLOBALS['meta']['habillages_liste_extras'];
 					if (eregi($prefixe_theme, $liste_extras) || eregi('tous', $liste_extras)) {
-						echo "</td><td style='background-color:$couleur_claire' class='titre_un habinput'>";
 						echo "<img src='"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_extras-22.png' />";
 					}
 
-					echo "</td></tr>";
+					echo "</div></td></tr>";
 					echo "</table>";
 					# Laisser la possibilite de definir le nom et le chemin de la capure ecran
 					# dans theme.xml.
