@@ -13,7 +13,7 @@ function habillages_ajouter_boutons($boutons_admin) {
 	  		}
 	  		else {
 		  $boutons_admin['configuration']->sousmenu['config_habillages']= new Bouton(
-			"../"._DIR_PLUGIN_HABILLAGES."/img_pack/habillages_icone-22.png",  // icone
+			"../"._DIR_PLUGIN_HABILLAGES."/../img_pack/habillages_icone-22.png",  // icone
 			_L('Habillages')	// titre
 			);
 		}
@@ -81,7 +81,7 @@ function habillages_header_prive($flux) {
 }
 
 function habillages_body_prive($texte) {
-		$texte = str_replace('border-bottom', 'moncul', $texte);
+		$texte = str_replace('border-bottom', 'Oups', $texte);
 		return $texte;
 }
 	
