@@ -46,7 +46,7 @@ function mots_croises_recupere_le_titre(&$chaine, $ouvrant, $fermant) {
 //fonction principale
 function mots_croises($texte){ 
 	if (strpos($texte, '<horizontal>')!==false || strpos($texte, '<vertical>')!==false) {
-		include_spip('inc/compatibilite_syntaxe.php');
+		include('inc/compatibilite_syntaxe.php');
 		return mots_croises_vieille_syntaxe($texte);
 	}	
 	if (strpos($texte, _MC_DEBUT)===false || strpos($texte, _MC_FIN)===false) return $texte;
