@@ -29,8 +29,11 @@ cfgWidgets.prototype.iconclick = function(elt) {
     '<a href="ecrire/?exec=' + link[1] + 's_edit&id_' + link[1] + '=' + link[2] +
     '">' + this.mkimg('edit') + '</a><br />' : '';
 
+  var cray = elt.className.match(/\b\w+-\w+-\d+\b/);
+  cray = !cray ? '' : this.mkimg('crayon') + '<br />';
+
   return "<span class='widget-icones'><span>" +
-      this.mkimg('crayon') + '<br />' + link +
+      cray + link +
       this.mkimg('img-changed') +
     "</span></span>";
 }
