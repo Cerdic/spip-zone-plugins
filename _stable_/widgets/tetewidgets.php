@@ -18,8 +18,8 @@ define('MODIFIER_SIGNATURES', false);
 
 // Modifier un forum ?
 // = un super-admin (ici, pour tests de widgets forum)
-if (MODIFIER_FORUMS AND !function_exists('autoriser_modifier_forum')) {
-	function autoriser_modifier_forum($faire, $type, $id, $qui, $opt) {
+if (MODIFIER_FORUMS AND !function_exists('autoriser_forum_modifier')) {
+	function autoriser_forum_modifier($faire, $type, $id, $qui, $opt) {
 		return
 			$qui['statut'] == '0minirezo'
 			AND !$qui['restreint'];
@@ -28,8 +28,8 @@ if (MODIFIER_FORUMS AND !function_exists('autoriser_modifier_forum')) {
 
 // Modifier une signature ?
 // = un super-admin (ici, pour tests de widgets forum)
-if (MODIFIER_SIGNATURES AND !function_exists('autoriser_modifier_signature')) {
-	function autoriser_modifier_signature($faire, $type, $id, $qui, $opt) {
+if (MODIFIER_SIGNATURES AND !function_exists('autoriser_signature_modifier')) {
+	function autoriser_signature_modifier($faire, $type, $id, $qui, $opt) {
 		return
 			$qui['statut'] == '0minirezo'
 			AND !$qui['restreint'];
