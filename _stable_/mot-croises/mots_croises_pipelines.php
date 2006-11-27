@@ -6,7 +6,8 @@
 		(Spip s'en servira egalement en cas d'absence de descriptif pour 
 		calculer la balise #INTRODUCTION utilisee pour resumer l'article)
 
-  Calcul de #INTRODUCTION : si introduction() n'est pas surchargee, Spip cherche 
+  Calcul de #INTRODUCTION (vos sommaires, rubriques ou backends) : 
+  si la fonction introduction() n'est pas surchargee, Spip cherche 
   d'abord le descriptif, puis en cas d'echec, le contenu du texte situé entre 
   les balises <intro> et </intro>. En dernier lieu, Spip utilise les 500 premiers 
   caractères du chapeau suivi du texte.
@@ -46,7 +47,7 @@ function mots_croises_recupere_le_titre(&$chaine, $ouvrant, $fermant) {
 //fonction principale
 function mots_croises($texte){ 
 	if (strpos($texte, '<horizontal>')!==false || strpos($texte, '<vertical>')!==false) {
-		include('inc/compatibilite_syntaxe.php');
+		include_spip('inc/compatibilite_syntaxe');
 		return mots_croises_vieille_syntaxe($texte);
 	}	
 	if (strpos($texte, _MC_DEBUT)===false || strpos($texte, _MC_FIN)===false) return $texte;

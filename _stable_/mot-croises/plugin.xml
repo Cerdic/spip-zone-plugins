@@ -4,13 +4,13 @@
 	<version>3.0 pour Spip 1.9.1 minimum.
 	
 	</version>
-	<auteur>Ma&#239;eul Rouquette
-	maieulrouquette@tele2.fr
-	[http://maieul.ouvaton.org->http://maieul.ouvaton.org]
-	Soutien : Patrice Vanneufville
+	<auteur>Ma&#239;eul Rouquette - maieulrouquette@tele2.fr
+_ [http://maieul.ouvaton.org->http://maieul.ouvaton.org]
+_ Soutien : Patrice Vanneufville - patrice.vanneufville@laposte.net
 	</auteur>
-	<description>Des mots-crois&eacute;s dans vos articles avec Spip !<br>Exemple : 
-<code><mots-croises>
+	<description>Des mots-crois&eacute;s avec Spip !
+_ Exemple &agrave; ins&eacute;rer dans un article : 
+<quote><code><mots-croises>
 
 #HORIZONTAL
 Definition 1
@@ -27,11 +27,15 @@ aaa
 b*g
 a*d
 
-</mots-croises></code>
-Ce plugin fonctionne de fa&ccedil;on optimale sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>, ainsi que dans l'espace priv&eacute;.
-_ il n&eacute;cessite l'activation du plugin {{jQuery}} ou une version de spip sup&eacute;rieure à {{1.9.2}}.
+</mots-croises></code></quote>
+Ce plugin fonctionne de fa&ccedil;on optimale sur les squelettes disposant de la balise {{#INSERT_HEAD}}, ainsi que dans l'espace priv&eacute;.
+_ Il n&eacute;cessite l'activation du plugin {{jQuery}} ou une version de spip sup&eacute;rieure &agrave; {{1.9.2}}.
+
+{{Attention}} : afin d'&eacute;viter les mauvaises surprises de pr&eacute;sentation (sommaires, rubriques, backends, ...), pensez bien :
+- soit &agrave; placer une introduction dans votre article entre les balises &lt;intro&gt; et &lt;/intro&gt;
+- soit &agrave; remplir le descriptif de l'article.
 	</description>
-	<lien>http://www.spip-contrib.net/article1379.html</lien> <!-- URI de documentation -->
+	<lien>[http://www.spip-contrib.net/article1379.html]</lien> <!-- URI de documentation -->
 	<fonctions>mots_croises_fonctions.php</fonctions>
 	<options>mots_croises_options.php</options>
 	<prefix>mots_croises</prefix>
