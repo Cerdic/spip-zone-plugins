@@ -1,20 +1,22 @@
 <plugin>
   <nom> <!-- Nom du plugin -->
-  HTML Purifier (Remplacement de Safe HTML)
+  HTML Purifier (remplacement de Safe HTML : S&eacute;curit&eacute; accrue)
   </nom>
   <auteur>        <!-- Auteur du plugin -->
-  Jacques PYRAT
+  Edward Z. Yang (http://hp.jpsband.org/), Mise en plugin SPIP : RealET & Fil
   </auteur>
   <version>
-  0.1
+  1.3.0
   </version>
   <etat>
-  test
+  stable
   </etat>
   <description>
-  Test du remplacement de SafeHTML par [HTML Purifier->http://hp.jpsband.org/]
+  Remplacement de SafeHTML par [HTML Purifier->http://hp.jpsband.org/].
+  
+  C'est un peu plus lent, mais plus efficace contre les [?XSS].
   </description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>[->http://hp.jpsband.org/]</lien> <!-- URI de documentation -->
   <options>
   </options>
   <prefix>
