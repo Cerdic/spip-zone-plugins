@@ -11,20 +11,8 @@
  *
  */
 
-	if (!function_exists('_q')){
-		function _q($arg) { return spip_abstract_quote($arg); }
-	}
-	if ($GLOBALS['spip_version_code']<1.92 && !function_exists('ajax_retour')) {
-		// http://doc.spip.org/@ajax_retour
-		function ajax_retour($corps)
-		{
-			$c = $GLOBALS['meta']["charset"];
-			header('Content-Type: text/html; charset='. $c);
-			$c = '<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n";
-			echo $c, $corps;
-			exit;
-		}
-	}
+	if ($GLOBALS['spip_version_code']<1.92)
+		include_spip('inc/forms_compat_191');
 
 	function Forms_install(){
 		include_spip('base/forms_upgrade');
