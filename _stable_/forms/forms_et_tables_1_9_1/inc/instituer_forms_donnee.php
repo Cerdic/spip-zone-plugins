@@ -73,7 +73,8 @@ function puce_statut_donnee($id, $statut, $id_form, $ajax = false) {
 	}
 	$puce = "puce-$puce.gif";
 
-	include_spip('inc/autoriser');
+	if (!include_spip('inc/autoriser'))
+		include_spip('inc/autoriser_compat');
 	if (autoriser('publierdans', 'form', $id_form)) {
 	  // les versions de MSIE ne font pas toutes pareil sur alt/title
 	  // la combinaison suivante semble ok pour tout le monde.
