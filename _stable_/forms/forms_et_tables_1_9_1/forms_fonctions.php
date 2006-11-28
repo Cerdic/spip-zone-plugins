@@ -44,8 +44,19 @@
 			return $p;
 		}
 	}
-
-	
+	// compatibilite 1.9.1
+	if ($GLOBALS['spip_version_code']<1.92 && !function_exists('interprete_argument_balise')){
+		// http://doc.spip.org/@interprete_argument_balise
+		function interprete_argument_balise($n,$p){
+			if (($p->param) && (!$p->param[0][0]) && (count($p->param[0])>$n))
+				return calculer_liste($p->param[0][$n],
+											$p->descr,
+											$p->boucles,
+											$p->id_boucle);	
+			else 
+				return NULL;
+		}
+	}	
 
 	include_spip('base/forms');
 	//

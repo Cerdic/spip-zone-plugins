@@ -38,8 +38,11 @@ function action_forms_lier_donnees(){
 					spip_query("INSERT INTO spip_forms_donnees_articles (id_article,id_donnee) VALUES ("._q($id_article).","._q($id_donnee).")");
 				$redirect = parametre_url($redirect,'cherche_donnee','');
 			}
-			if ((!$id_donnee) && ($cherche_donnee))
-				$redirect = parametre_url($redirect,'cherche_donnee',$cherche_donnee);
+			if (!$id_donnee){
+				if ($cherche_donnee)
+					$redirect = parametre_url($redirect,'cherche_donnee',$cherche_donnee);
+				$redirect = parametre_url($redirect,'ajouter','1');
+			}
 		}
 		if ($faire='retirer'){
 			$id_donnee = intval($args[2]);

@@ -69,7 +69,8 @@ function Forms_formulaire_article_chercher_donnee($id_article,$les_donnees, $scr
 	$out .= "<input type='hidden' name='redirectajax' value='".generer_url_ecrire('forms_lier_donnees',"id_article=$id_article")."' />";
 	$out .= "<div style='text-align:$spip_lang_left'>";
 	$out .= "<input id ='autocompleteMe' type='text' name='cherche_donnee' value='$recherche' class='forml' />";
-	$out .= Forms_boite_selection_donnees($recherche,$les_donnees);
+
+	$out .= Forms_boite_selection_donnees($recherche?$recherche:((_request('ajouter')!==NULL)?"":$recherche),$les_donnees);
 	
 	$script_rech = generer_url_ecrire("recherche_donnees","id_article=$id_article",true);
 	$out .= "<input type='hidden' name='autocompleteUrl' value='$script_rech' />";
@@ -94,7 +95,7 @@ function Forms_formulaire_article_chercher_donnee($id_article,$les_donnees, $scr
 	
 	$out .= "</div>";
 	$out .= "<div style='text-align:$spip_lang_right'>";
-	$out .= "<input type='submit' value='"._T('bouton_ajouter')."' class='fondo' />";
+	$out .= "<input type='submit' name='ajouter' value='"._T('bouton_ajouter')."' class='fondo' />";
 	$out .= "</div>";
 	$out .= "</form>";
 	return $out;
@@ -133,7 +134,6 @@ function Forms_formulaire_article_afficher_donnees($id_article, $script){
 				$vals[] = $id_donnee;
 				$vals[] = "<a href='".generer_url_ecrire("table_donnee_edit","id_form=$id_form&id_donnee=$id_donnee&retour=".urlencode($retour))."'>"
 					.implode(", ",$champs)."</a>";
-				//$vals[] = ajax_action_auteur('forms_lier_donnees', "$id_article,retirer,$id_donnee",'articles',"id_article=$id_article", array(_T('forms:lien_retirer_donnee')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'")));
 				$redirect = ancre_url(generer_url_ecrire($script,"id_article=$id_article"),'tables');
 				$action = generer_action_auteur("forms_lier_donnees","$id_article,retirer,$id_donnee",urlencode($redirect));
 				$action = ancre_url($action,"forms_lier_donnees-$id_article");
@@ -178,19 +178,23 @@ function Forms_liste_recherche_donnees($recherche,$les_donnees){
 	if ($recherche!==NULL){
 		include_spip('base/abstract_sql');
 		$in = calcul_mysql_in('id_donnee',$les_donnees,'NOT');
-		$res = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE $in AND valeur LIKE "._q("$recherche%")." GROUP BY id_donnee");
-		if (spip_num_rows($res)<10){
-			$res = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE $in AND valeur LIKE "._q("%$recherche%")." GROUP BY id_donnee");
+		if (!strlen($recherche))
+			$res = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE $in GROUP BY id_donnee");
+		else {
+			$res = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE $in AND valeur LIKE "._q("$recherche%")." GROUP BY id_donnee");
+			if (spip_num_rows($res)<10){
+				$res = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE $in AND valeur LIKE "._q("%$recherche%")." GROUP BY id_donnee");
+			}
 		}
 		while ($row = spip_fetch_array($res)){
 			list($id_form,$titreform,$t) = Forms_liste_decrit_donnee($row['id_donnee']);
 			if (count($t))
 				$table[$titreform][$row['id_donnee']]=$t;
 		}
-		//var_dump($table);
 	}
 	return $table;
 }
+
 function Forms_liste_decrit_donnee($id_donee){
 	$t = array();$titreform="";
 	$res2 = spip_query("SELECT c.titre,dc.valeur,f.titre AS titreform,f.id_form FROM spip_forms_donnees_champs AS dc 
