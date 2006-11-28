@@ -3,7 +3,7 @@
   Un QCM dans vos articles
   </nom>
   <auteur>        <!-- Auteur du plugin -->
-  <a href="mailto:patfr@ifrance.com">Patrice VANNEUFVILLE</a> (sur une id&eacute;e originale de Mathieu GIANNECCHINI)
+  [Patrice VANNEUFVILLE->mailto:patrice.vanneufville@laposte.net] (sur une id&eacute;e originale de Mathieu GIANNECCHINI)
   </auteur>
   <version>
   0.1
@@ -12,10 +12,15 @@
   dev
   </etat>
   <description>
-Permet l'utilisation d'un QCM dans un article.<br />
-Aucun r&eacute;sultat archiv&eacute;. Simplement ludique.<br />
-Gestionnaire de points et de commentaires<br />
+Permet l'utilisation d'un QCM dans un article.
+
+Gestionnaire de points et de commentaires.
+
 D&eacute;mo : [->http://www.ensemble-claudio-monteverdi.fr/article17]
+
+{{Attention}} : afin d'&eacute;viter les mauvaises surprises de pr&eacute;sentation (sommaires, rubriques, backends, ...), pensez bien :
+- soit &agrave; placer une introduction dans votre article entre les balises &lt;intro&gt; et &lt;/intro&gt;
+- soit &agrave; remplir le descriptif de l'article.
   </description>
   <lien>[Mode d'emploi->http://www.spip-contrib.net/Un-QCM-dans-vos-articles]</lien> <!-- URI de documentation -->
   <fonctions>qcm_fonctions.php</fonctions>
