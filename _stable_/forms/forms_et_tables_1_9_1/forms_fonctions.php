@@ -22,6 +22,30 @@
 			return join('', $args);
 		}	
 	}
+	// compatibilite 1.9.1
+	if ($GLOBALS['spip_version_code']<1.92 && !function_exists('balise_URL_ACTION_AUTEUR_dist')){
+		//
+		// #URL_ACTION_AUTEUR{converser,arg,redirect} -> ecrire/?action=converser&arg=arg&hash=xxx&redirect=redirect
+		//
+		// http://doc.spip.org/@balise_URL_ACTION_AUTEUR_dist
+		function balise_URL_ACTION_AUTEUR_dist($p) {
+		
+			$p->code = interprete_argument_balise(1,$p);
+			$args = interprete_argument_balise(2,$p);
+			if ($args != "''" && $args!==NULL)
+				$p->code .= ".'\",\"'.".$args;
+			$redirect = interprete_argument_balise(3,$p);
+			if ($redirect != "''" && $redirect!==NULL)
+				$p->code .= ".'\",\"'.".$redirect;
+		
+			$p->code = "'<"."?php echo generer_action_auteur(\"'." . $p->code .".'\"); ?>'";
+		
+			$p->interdire_scripts = false;
+			return $p;
+		}
+	}
+
+	
 
 	include_spip('base/forms');
 	//
