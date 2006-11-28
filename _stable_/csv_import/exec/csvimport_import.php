@@ -169,6 +169,12 @@ function csvimport_import_step3(&$step, &$erreur, $import_link, $import_form_lin
 			debut_cadre_enfonce();
 			echo csvimport_array_visu_assoc($data, $table_fields, $assoc_field, 5);
 			fin_cadre_enfonce();
+			if ($import_mode=='form')
+				if (include_spip('inc/forms')){
+					Forms_csvimport_ajoute_table_csv($data, $id_form, $assoc_field, $err, true);
+					echo csvimport_show_erreurs($err);
+				}
+			
 			echo "<div style='padding: 2px; color: black;'>&nbsp;";
 			echo _L("Les donn&eacute;es du fichier CSV vont &ecirc;tre ajout&eacute;es &agrave; la table comme illustr&eacute; ci-dessus.");
 			echo $import_form_link;
