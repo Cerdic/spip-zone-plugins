@@ -59,7 +59,7 @@ function Widgets_affichage_final($page) {
     foreach ($regs as $reg) {
         list(,$widget,$type,$champ,$id) = $reg;
         if (autoriser('modifier', $type, $id, NULL, array('champ'=>$champ))) {
-            $droits[$widget]++;
+            $droits['.' . $widget]++;
             $droits_accordes ++;
         }
     }
