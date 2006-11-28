@@ -122,7 +122,7 @@ function csvimport_import_step3(&$step, &$erreur, $import_link, $import_form_lin
 		$hidden['type'] = $type;
 		$hidden['step'] = 3;
 		foreach($assoc_field as $key=>$value)
-			$hidden["assoc_field[".htmlentities($key,ENT_QUOTES)."]"] = $value;
+			$hidden["assoc_field[".csvimport_nettoie_key($key)."]"] = $value;
 		$hidden["delim"] = $delim;
 		$hidden["head"] = $head;
 
