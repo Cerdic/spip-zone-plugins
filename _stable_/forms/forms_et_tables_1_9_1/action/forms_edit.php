@@ -114,6 +114,7 @@ function Forms_update($id_form){
 	// maj
 	if (intval($id_form) && $titre) {
 		$query = "UPDATE spip_forms SET ".
+			"titre="._q($titre).", ".
 			"descriptif="._q($descriptif).", ".
 			"type_form="._q($type_form).", ".
 			"email="._q(serialize($email)).", ".
