@@ -242,9 +242,7 @@ $.fn.activatewidget = function() {
 
 // insere les icones dans l'element
 $.fn.iconewidget = function(){
-  var stop = false;
   return this.each(function() {
-    if (this == false || stop) return stop=true;
     $(this).prepend(configWidgets.iconclick(this.className))
     .find('.widget-crayon') // le crayon a clicker lui-meme
       .click(function(e){
@@ -294,9 +292,17 @@ $(document).ready(function() {
     });
   }
 
-  $(".widget")
-  .filter(configWidgets.droits)
-  .initwidget();
+  // .filter(array) fonctionne mal (jQuery 1.0.3), on le fait a la main
+  // $(".widget").filter(configWidgets.droits).initwidget();
+  $($.grep(
+    $(".widget"),
+    function(e) {
+      for (var i=0; i<configWidgets.droits.length; i++) {
+        if ($(e).is(configWidgets.droits[i])) return true;
+      }
+      return false;
+    }
+  )).initwidget();
 
   // fermer tous les widgets ouverts
   $("html")
