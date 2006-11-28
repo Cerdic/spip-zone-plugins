@@ -4,6 +4,29 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_PREG_WIDGET', ',widget\b[^<>\'"]+\b((\w+)-(\w+)-(\d+))\b,');
 
+define('MODIFIER_FORUMS', false);
+define('MODIFIER_SIGNATURES', false);
+
+// Modifier un forum ?
+// = un super-admin (ici, pour tests de widgets forum)
+if (MODIFIER_FORUMS AND !function_exists('autoriser_forum_modifier')) {
+	function autoriser_forum_modifier($faire, $type, $id, $qui, $opt) {
+		return
+			$qui['statut'] == '0minirezo'
+			AND !$qui['restreint'];
+	}
+}
+
+// Modifier une signature ?
+// = un super-admin (ici, pour tests de widgets forum)
+if (MODIFIER_SIGNATURES AND !function_exists('autoriser_signature_modifier')) {
+	function autoriser_signature_modifier($faire, $type, $id, $qui, $opt) {
+		return
+			$qui['statut'] == '0minirezo'
+			AND !$qui['restreint'];
+	}
+}
+
 function valeur_colonne_table($table, $col, $id) {
     $s = spip_query(
         'SELECT ' . (is_array($col) ? implode($col, ', ') : $col) .

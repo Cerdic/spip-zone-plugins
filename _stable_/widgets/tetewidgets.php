@@ -12,29 +12,6 @@ function analyse_droits_rapide_dist() {
         return true;
 }
 
-define('MODIFIER_FORUMS', false);
-define('MODIFIER_SIGNATURES', false);
-
-// Modifier un forum ?
-// = un super-admin (ici, pour tests de widgets forum)
-if (MODIFIER_FORUMS AND !function_exists('autoriser_forum_modifier')) {
-	function autoriser_forum_modifier($faire, $type, $id, $qui, $opt) {
-		return
-			$qui['statut'] == '0minirezo'
-			AND !$qui['restreint'];
-	}
-}
-
-// Modifier une signature ?
-// = un super-admin (ici, pour tests de widgets forum)
-if (MODIFIER_SIGNATURES AND !function_exists('autoriser_signature_modifier')) {
-	function autoriser_signature_modifier($faire, $type, $id, $qui, $opt) {
-		return
-			$qui['statut'] == '0minirezo'
-			AND !$qui['restreint'];
-	}
-}
-
 // Le pipeline affichage_final, execute a chaque hit sur toute la page
 function Widgets_affichage_final($page) {
 

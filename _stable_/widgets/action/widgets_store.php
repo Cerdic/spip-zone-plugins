@@ -49,7 +49,6 @@ function post_widgets() {
 
 
 function action_widgets_store_dist() {
-    include_spip('tetewidgets');
     include_spip('inc/widgets');
     $wdgcfg = wdgcfg();
     header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
