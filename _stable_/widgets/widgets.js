@@ -22,14 +22,15 @@ cfgWidgets.prototype.mkimg = function(what) {
     '" src="' + this.imgPath + '/' + this.img[what].file +
     '" title="' + this.img[what].txt + '" />';
 }
-cfgWidgets.prototype.iconclick = function(elt) {
+cfgWidgets.prototype.iconclick = function(c) {
+
   // le + qui passe en prive pour editer tout si classe type--id
-  var link = elt.className.match(/\b(\w+)--(\d+)\b/);
+  var link = c.match(/\b(\w+)--(\d+)\b/);
   link = link ? 
     '<a href="ecrire/?exec=' + link[1] + 's_edit&id_' + link[1] + '=' + link[2] +
     '">' + this.mkimg('edit') + '</a><br />' : '';
 
-  var cray = elt.className.match(/\b\w+-\w+-\d+\b/);
+  var cray = c.match(/\b\w+-\w+-\d+\b/);
   cray = !cray ? '' : this.mkimg('crayon') + '<br />';
 
   return "<span class='widget-icones'><span>" +
@@ -241,8 +242,10 @@ $.fn.activatewidget = function() {
 
 // insere les icones dans l'element
 $.fn.iconewidget = function(){
+  var stop = false;
   return this.each(function() {
-    $(this).prepend(configWidgets.iconclick(this))
+    if (this == false || stop) return stop=true;
+    $(this).prepend(configWidgets.iconclick(this.className))
     .find('.widget-crayon') // le crayon a clicker lui-meme
       .click(function(e){
         $(this).ancestors('.widget').eq(0).openwidget(e);
