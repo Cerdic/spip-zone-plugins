@@ -1,8 +1,8 @@
 img.widget-img-changed {
-    visibility: hidden;
+    display: none;
 }
 .widget-changed img.widget-img-changed {
-    visibility: visible;
+    display: inline;
 }
 img.widget-edit, img.widget-crayon {
     visibility: hidden;
