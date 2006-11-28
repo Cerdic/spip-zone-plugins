@@ -48,14 +48,17 @@
 				$structure[$champ][$k] = $v;
 			if (($type == 'select') OR ($type == 'multiple')){
 				$res2 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ)." ORDER BY rang");
-				while ($row2 = spip_fetch_array($res2))
-					$structure[$champ]['choix'][$row2['choix']] = trim(textebrut(typo($row2['titre'])));
+				while ($row2 = spip_fetch_array($res2)){
+					$structure[$champ]['choix'][$row2['choix']] = $c = trim(textebrut(typo($row2['titre'])));
+					$structure[$champ]['choixrev'][$c] = $row2['choix'];
+				}
 			}
 			else if ($type == 'mot') {
 				$id_groupe = intval($row['extra_info']);
 				$res2 = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe="._q($id_groupe));
 				while ($row2 = spip_fetch_array($res2)) {
-					$structure[$champ]['choix'][$row2['id_mot']] = trim(textebrut(typo($row2['titre'])));
+					$structure[$champ]['choix'][$row2['id_mot']] = $c = trim(textebrut(typo($row2['titre'])));
+					$structure[$champ]['choixrev'][$c] = $row2['id_mot'];
 				}
 			}
 		}
@@ -75,7 +78,7 @@
 		}
 	}
 
-	function Forms_csvimport_ajoute_table_csv($data, $id_form, $assoc_field, &$erreur){
+	function Forms_csvimport_ajoute_table_csv($data, $id_form, $assoc_field, &$erreur, $simu = false){
 		include_spip('inc/forms_type_champs');
 		$assoc = array_flip($assoc_field);
 		$res = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form)." AND type_form NOT IN ('','sondage')");
@@ -100,8 +103,11 @@
 				foreach($structure as $champ=>$infos){
 					if ($infos['type'] != 'multiple'){
 						$c[$champ] = "";
-					  if ((isset($assoc[$champ]))&&(isset($ligne[$assoc[$champ]])))
+					  if ((isset($assoc[$champ]))&&(isset($ligne[$assoc[$champ]]))){
 					  	$c[$champ] = $ligne[$assoc[$champ]];
+					  	if (isset($infos['choix']) && !isset($infos['choix'][$c[$champ]]) && isset($infos['choixrev'][$c[$champ]]))
+					  		$c[$champ] = $infos['choixrev'][$c[$champ]];
+					  }
 					}
 					else {
 						$c[$champ] = array();
@@ -113,7 +119,7 @@
 		 		}
 		 		$err = Forms_valide_champs_reponse_post($id_auteur, $c , $structure);
 		 		if (is_array($err) && count($err)) $erreur[$count_lignes] = $err;
-		 		else {
+		 		else if (!$simu) {
 					if ($cle) {
 						$id_donnee = $ligne[$cle];
 						$res = spip_query("SELECT * FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee)." AND id_form="._q($id_form));
