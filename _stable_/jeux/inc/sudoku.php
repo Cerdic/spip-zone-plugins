@@ -1,11 +1,5 @@
 <?php
 
-//retourne la lettre correspondant au chiffre
-function lettre_grille($texte) {
-	$alphabet="*ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	return $alphabet[$texte];
-}
-
 function affichage_grille($tableau_grille, $solution=false){
 	//affiche la grille de mot croisés, avec la solution au cas ou
 	
@@ -16,9 +10,9 @@ function affichage_grille($tableau_grille, $solution=false){
     $grille='';
     //fin variable de la grille
     
-    (! $solution) ? $grille.="<form class=\"grille\" action=\"".$page."\" method=\"post\">\n" : $grille.="<div class=\"solution\"><h2 class=\"spip\">"._T('motscroises:Solution')." : </h2>" ;	// debut formulaire
+    (! $solution) ? $grille.="<form class=\"grille\" action=\"".$page."\" method=\"post\">\n" : $grille.="<div class=\"solution\"><h2 class=\"spip\">"._T('sudoku:Solution')." : </h2>" ;	// debut formulaire
     
-    $grille.='<table class="grille" cellspacing="0" border="0" summary="'._T('motscroises:table_summary',Array('hauteur'=>$hauteur,'largeur'=>$largeur))."\">\n
+    $grille.='<table class="grille" cellspacing="0" border="0" summary="'._T('sudoku:table_summary',Array('hauteur'=>$hauteur,'largeur'=>$largeur))."\">\n
     \t<tr>\n\t\t<td class=\"coin\"></td>\n";	// debut tableau + 1ere celule
 	
 	$increment_largeur=1;   //un iccrément pour les cellules d'entete
@@ -46,8 +40,8 @@ function affichage_grille($tableau_grille, $solution=false){
 				else {
 					$grille .= "\t\t<td>"
 						.'<label for="col'.$colonne.'lig'.$ligne.'">'
-						._T('motscroises:ligne',Array('n'=>lettre_grille($ligne))).';'
-						._T('motscroises:colonne',Array('n'=>$colonne)).'</label>';
+						._T('sudoku:ligne',Array('n'=>lettre_grille($ligne))).';'
+						._T('sudoku:colonne',Array('n'=>$colonne)).'</label>';
 						
 					// test l'existence de la variable global correpsonte à cette cellule	
 					if (isset($GLOBALS['col'.$colonne.'lig'.$ligne]) and $GLOBALS['col'.$colonne.'lig'.$ligne]!='') 
@@ -65,8 +59,8 @@ function affichage_grille($tableau_grille, $solution=false){
 	
 	$grille.="</table>\n";
 	
-	(!$solution) ? $grille.="<br /><input id=\"solution\" name=\"solution[]\" type=\"checkbox\"value=\"1\" /><label for=\"solution\" >"._T('motscroises:afficher_solution')."</label><br />\n
-<input type=\"submit\" value=\""._T('motscroises:verifier')."\" name=\"bouton_envoi\" /></form>\n" : $grille.="</div>";
+	(!$solution) ? $grille.="<br /><input id=\"solution\" name=\"solution[]\" type=\"checkbox\"value=\"1\" /><label for=\"solution\" >"._T('sudoku:afficher_solution')."</label><br />\n
+<input type=\"submit\" value=\""._T('sudoku:verifier')."\" name=\"bouton_envoi\" /></form>\n" : $grille.="</div>";
 
 	return $grille;
 }
@@ -118,41 +112,40 @@ function calcul_erreurs_grille($solution) {
 	else {
 	  list($nbr_erreurs, $nbr_vides) = comparaison_grille($solution); 
 	  return '<strong class="erreur">'
-		. (($nbr_erreurs==0)?_T('motscroises:aucune_erreur'):(
-		 ($nbr_erreurs==1)?_T('motscroises:une_erreur'):_T("motscroises:nombre_erreurs", Array('err'=>$nbr_erreurs))
+		. (($nbr_erreurs==0)?_T('sudoku:aucune_erreur'):(
+		 ($nbr_erreurs==1)?_T('sudoku:une_erreur'):_T("sudoku:nombre_erreurs", Array('err'=>$nbr_erreurs))
 		))
-		. (($nbr_vides==0)?(($nbr_erreurs==0)?'. '._T('motscroises:bravo'):''):(
-		 ($nbr_vides==1)?' - '._T('motscroises:une_vide'):' - '._T("motscroises:nombre_vides", Array('vid'=>$nbr_vides))
+		. (($nbr_vides==0)?(($nbr_erreurs==0)?'. '._T('sudoku:bravo'):''):(
+		 ($nbr_vides==1)?' - '._T('sudoku:une_vide'):' - '._T("sudoku:nombre_vides", Array('vid'=>$nbr_vides))
 		))
 		. '</strong><br />';
 	}
 }
 
-// decode une grille de mots croises 
-function jeux_mots_croises($texte) {
-	$tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_HORIZONTAL.'|'._JEUX_VERTICAL.'|'._JEUX_SOLUTION.'|'._JEUX_HTML.')/', 
+// decode une grille de sudoku 
+function jeux_sudoku($texte) { return('SUDOKU : en cours de développement !!');
+	$tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_SUDOKU._JEUX_SOLUTION.'|'._JEUX_HTML.')/', 
 			trim(_JEUX_HTML.$texte), -1, PREG_SPLIT_DELIM_CAPTURE);
-	$titre = $horizontal = $vertical = $solution = $html = false;
+	$titre = $sudoku = $solution = $html = false;
 	foreach($tableau as $i => $v){
   	 $v = trim($v);
 	 if ($v==_JEUX_TITRE) $titre = trim($tableau[$i+1]);
-	  elseif ($v==_JEUX_HORIZONTAL) $horizontal = jeux_listes($tableau[$i+1]);
-	  elseif ($v==_JEUX_VERTICAL) $vertical = jeux_listes($tableau[$i+1]);
+	  elseif ($v==_JEUX_SUDOKU) $sudoku = jeux_listes($tableau[$i+1]);
 	  elseif ($v==_JEUX_SOLUTION) $solution = calcul_tableau_grille($tableau[$i+1]);
 	  elseif ($v==_JEUX_HTML) $html .= trim($tableau[$i+1]);
 	}
 
 	// trouver un titre, coute que coute...
 //	if (!$titre) $titre = jeux_recupere_le_titre($chaine, '<intro>', '</intro>');
-	if (!$titre) $titre = _T('motscroises:titre');
+	if (!$titre) $titre = _T('sudoku:titre');
 	
 	return calcul_erreurs_grille($solution)
 			. affichage_grille($solution)
 	// definitions	
 			. '<div class="spip horizontal"><h4 class="spip grille">'
-					._T('motscroises:horizontalement')."</h4>\n".$horizontal.'</div>'
+					._T('sudoku:horizontalement')."</h4>\n".$horizontal.'</div>'
 			. '<div class="spip vertical"><h4 class="spip grille">'
-					._T('motscroises:verticalement')."</h4>\n".$vertical.'</div>'
+					._T('sudoku:verticalement')."</h4>\n".$vertical.'</div>'
 	// solution
 			. (($GLOBALS["solution"][0] == 1)? affichage_grille($solution, true) : '');
 }

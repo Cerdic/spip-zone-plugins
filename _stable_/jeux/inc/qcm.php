@@ -36,17 +36,12 @@
  define(_QCM_TITRE_FIN, '</qcm-titre>');
  
 // cette fonction remplit le tableau $qcms sur la question $indexQCM
-function qcm_analyse_le_qcm($qcm, $indexQCM, &$titreQCM) {
+function qcm_analyse_le_qcm($qcm, $indexQCM) {
   global $qcms;
   $lignes = split("\n", $qcm);
   foreach ($lignes as $ligne) {
 	$li=trim($ligne); 
     switch($li[0]){
-      case 'T' : 
-	  	// On extrait le titre
-	  	$titreQCM=propre(substr($li,1));
-		break;
-
       case 'Q' : 
 	  	// On extrait la question
 		$qcms[$indexQCM]['question'] = trim(substr($li, 1));
@@ -116,11 +111,11 @@ function qcm_recupere_une_question(&$chaine, &$indexQCM, &$titreQCM) {
   global $qcms;
   
   // si les balises ouvrantes et fermantes ne sont pas presentes
-  if (strpos($chaine, _JEUX_DEBUT)===false || strpos($chaine, _JEUX_FIN)===false) return false;
+  // if (strpos($chaine, _JEUX_DEBUT)===false || strpos($chaine, _JEUX_FIN)===false) return false;
 
   // remplacement des qcm par : <ATTENTE_QCM>ii</ATTENTE_QCM>
-  list($texteAvant, $suite) = explode(_JEUX_DEBUT, $chaine, 2); 
-  list($qcm, $texteApres) = explode(_JEUX_FIN, $suite, 2); 
+  // list($texteAvant, $suite) = explode(_JEUX_DEBUT, $chaine, 2); 
+  // list($qcm, $texteApres) = explode(_JEUX_FIN, $suite, 2); 
   $chaine = "$texteAvant<ATTENTE_QCM>$indexQCM</ATTENTE_QCM>$texteApres";
  
   // On analyse le QCM
@@ -221,33 +216,47 @@ function qcm_inserer_les_qcm(&$chaine, $gestionPoints) {
   return $chaine;
 }
 
-function qcm($chaine) {
+function jeux_qcm($chaine) {
+  define(_JEUX_REM_DEBUT, code_echappement('<!-- '));
+  define(_JEUX_REM_FIN, code_echappement(' -->'));
 
   // initialisation  
   global $qcms, $qcm_score;
-  $titreQCM = false;
+  $titreQCM = false; 
   $indexQCM =  $qcm_score = 0;
   $qcms['nbquestions'] = $qcms['totalscore'] = $qcms['totalpropositions'] = 0;
-  
-  // on cherche les questions
-  while (qcm_recupere_une_question($chaine, $indexQCM, $titreQCM)) {
-    $qcms['totalpropositions'] +=  count($qcms[$indexQCM]['propositions']);
-    $qcms['totalscore'] +=  $qcms[$indexQCM]['maxscore'];
-  	$indexQCM++;
+  $tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_QCM.'|'._JEUX_HTML.')/', 
+			_JEUX_HTML.trim($chaine), -1, PREG_SPLIT_DELIM_CAPTURE);
+  $titre = $horizontal = $vertical = $solution = $html = false;
+
+  // parcourir toutes les #BALISES
+  foreach($tableau as $i => $v){
+  	 $v = trim($v);
+	 if ($v==_JEUX_TITRE) $titre = trim($tableau[$i+1]);
+	  elseif ($v==_JEUX_QCM) {
+		// remplacement des qcm par : <ATTENTE_QCM>ii</ATTENTE_QCM>
+		$html .= "<ATTENTE_QCM>$indexQCM</ATTENTE_QCM>";
+		// On analyse le QCM
+		qcm_analyse_le_qcm($tableau[$i+1], $indexQCM);
+	    $qcms['totalpropositions'] +=  count($qcms[$indexQCM]['propositions']);
+    	$qcms['totalscore'] +=  $qcms[$indexQCM]['maxscore'];
+	  	$indexQCM++;
+	  }
+	  elseif ($v==_JEUX_HTML) $html .= trim($tableau[$i+1]);
   }
-  
+
   // est-ce certaines questions ne valent pas 1 point ?
   $gestionPoints = $qcms['totalscore']<>$qcms['nbquestions'];
 
   // trouver un titre, coute que coute...
-  if (!$titreQCM) $titreQCM = qcm_recupere_le_titre($chaine, _QCM_TITRE_DEBUT, _QCM_TITRE_FIN);
-  if (!$titreQCM) $titreQCM = qcm_recupere_le_titre($chaine, '<intro>', '</intro>');
-  if (!$titreQCM) $titreQCM = _T('qcm:qcm_titre');
+//  if (!$titre) $titre = qcm_recupere_le_titre($chaine, _QCM_TITRE_DEBUT, _QCM_TITRE_FIN);
+//  if (!$titre) $titre = qcm_recupere_le_titre($chaine, '<intro>', '</intro>');
+  if (!$titre) $titre = _T('qcm:qcm_titre');
   
   // reinserer les qcms mis en forme
-  $chaine = qcm_inserer_les_qcm($chaine, $gestionPoints);
+  $chaine = qcm_inserer_les_qcm($html, $gestionPoints);
 
-  $tete = '<div class="spip_qcm"><div class="spip_qcm_titre">'.$titreQCM.'<hr /></div>';
+  $tete = '<div class="spip_qcm"><div class="spip_qcm_titre">'.$titre.'<hr /></div>';
   if (!isset($_POST["var_correction"])) { 
 	$tete .= '<form method="post" action="">';
 	$pied = '<br>
@@ -263,15 +272,11 @@ function qcm($chaine) {
 				. parametre_url(self(),'var_mode','recalcul').'">'._T('qcm:qcm_reinitialiser').'</a> ]</div>';
   }
   
-  // introduire l'entete et le pied
-  $chaine = preg_replace(',(<!QCM-DEBUT-#0>),', $tete."\\1", $chaine, 1);
-  $chaine = str_replace($temp='<!QCM-FIN-#'.($indexQCM-1).'>', $temp.$pied.'</div>', $chaine);
-
-  unset($qcms);
-  return "<!PLUGIN-DEBUT>$chaine<!PLUGIN-FIN>";
+  unset($qcms); unset($qcm_score);
+  return $tete.$html.$pied;
 }
 
-function qcm2($chaine){
+function jeux_qcm2($chaine){
  if (ereg(_QCM_DEBUT, $chaine)) {
 	ob_start();
 	$chaine = qcm($chaine);

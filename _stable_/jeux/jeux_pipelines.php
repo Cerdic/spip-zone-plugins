@@ -36,6 +36,7 @@ define(_JEUX_HORIZONTAL, '#HORIZONTAL');
 define(_JEUX_VERTICAL, '#VERTICAL');
 define(_JEUX_SOLUTION, '#SOLUTION');
 define(_JEUX_SUDOKU, '#SUDOKU');
+define(_JEUX_QCM, '#QCM');
 define(_JEUX_HTML, '#HTML'); // à faire !
 
 // transforme les listes verticales/horizontale listes html 
@@ -60,7 +61,7 @@ function jeux_recupere_le_titre(&$chaine, $ouvrant, $fermant) {
 
 //fonction principale
 function jeux($chaine){ 
-	if (strpos($chaine, _JEUX_DEBUT)===false || strpos($chaine, _JEUX_FIN)===false) return $texte;
+	if (strpos($chaine, _JEUX_DEBUT)===false || strpos($chaine, _JEUX_FIN)===false) return $chaine;
 
 	// isoler les jeux...
 	list($texteAvant, $suite) = explode(_JEUX_DEBUT, $chaine, 2); 
@@ -69,16 +70,19 @@ function jeux($chaine){
 	// ...et decoder le texte obtenu !
 	if (strpos($texte, _JEUX_HORIZONTAL)!=false || strpos($texte, _JEUX_FIN)!=false) {
 		include_spip('inc/mots_croises');
-		$texte = code_echappement($texteAvant.'<!-- PLUGIN-DEBUT -->')
-			.jeux_mots_croises($texte)
-			.code_echappement('<!-- PLUGIN-FIN -->').$texteApres;
+		$texte = jeux_mots_croises($texte);
 	}
-	if (strpos($chaine, "\nQ ")!=false && strpos($chaine, "\nP1 ")!=false) {
+	if (strpos($chaine, _JEUX_QCM)!=false) {
 		include_spip('inc/qcm');
-		$texte = qcm($chaine);
+		$texte = jeux_qcm($chaine);
+	}
+	if (strpos($chaine, _JEUX_SUDOKU)!=false) {
+		include_spip('inc/sudoku');
+		$texte = jeux_sudoku($chaine);
 	}
 
-	return $texte;
+	return $texteAvant.code_echappement('<!-- PLUGIN-DEBUT -->').$texte
+		.code_echappement('<!-- PLUGIN-FIN -->').$texteApres;
 }
 
 // a la place de jeux, pour le deboguage...
@@ -120,7 +124,8 @@ function jeux_insert_head($flux){
 }
 
 function jeux_post_propre($texte) { 
-	return preg_replace(',<!((QCM|PLUGIN)-(DEBUT|FIN)(-#[0-9]+)?)>,UimsS', '<!-- \\1 -->', $texte);
+	// a supprimer dans le futur...
+	return preg_replace(',<!(QCM-(DEBUT|FIN)(-#[0-9]+)?)>,UimsS', '<!-- \\1 -->', $texte);
 }	
 
 
