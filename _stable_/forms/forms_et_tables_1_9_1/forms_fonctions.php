@@ -14,77 +14,48 @@
 
 	if ($GLOBALS['spip_version_code']<1.92)
 		include_spip('inc/forms_compat_191');
+	include_spip('forms_filtres');
 
-	include_spip('base/forms');
-	//
-	// <BOUCLE(FORMS)>
-	//
-	/*function boucle_FORMS_dist($id_boucle, &$boucles) {
-		$boucle = &$boucles[$id_boucle];
-		$id_table = $boucle->id_table;
-		$boucle->from[$id_table] =  "spip_forms";
-	
-		if (!isset($boucle->modificateur['tout'])){
-			$boucle->where[]= array("'='", "'$id_table.public'", "'oui'");
-			$boucle->group[] = $boucle->id_table . '.champ'; // ?  
+	function forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $valeur, $id_form){
+		static $type_champ=array();
+		// s'assurer que l'on est bien sur une boucle forms, sinon retourner $valeur
+		$ok = $id_donnee && $champ;
+		$ok = $ok && in_array($type, array('forms_donnees_champs'));
+		// on recupere la valeur du champ si pas deja la
+		if ($ok && !$valeur){
+			$res = spip_query("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champ));
+			if ($row = spip_fetch_array($res))
+				$valeur = $row['valeur'];
+			else
+				$ok = false;
 		}
-		return calculer_boucle($id_boucle, $boucles); 
-	}*/
-	
-	//
-	// <BOUCLE(FORMS_DONNEES)>
-	//
-	function boucle_FORMS_DONNEES_dist($id_boucle, &$boucles) {
-		$boucle = &$boucles[$id_boucle];
-		$id_table = $boucle->id_table;
-		$boucle->from[$id_table] =  "spip_forms_donnees";
-	
-		if (!isset($boucle->modificateur['tout']) && !$boucle->tout)
-			$boucle->where[]= array("'='", "'$id_table.confirmation'", "'\"valide\"'");
-		if (!$boucle->statut && !isset($boucle->modificateur['tout']) && !$boucle->tout)
-			$boucle->where[]= array("'='", "'$id_table.statut'", "'\"publie\"'");
-	
-		return calculer_boucle($id_boucle, $boucles); 
-	}
-
-	//
-	// <BOUCLE(FORMS_CHAMPS)>
-	//
-	function boucle_FORMS_CHAMPS_dist($id_boucle, &$boucles) {
-		$boucle = &$boucles[$id_boucle];
-		$id_table = $boucle->id_table;
-		$boucle->from[$id_table] =  "spip_forms_champs";
-	
-		if (!isset($boucle->modificateur['tout']) && !$boucle->tout){
-			$boucle->where[]= array("'='", "'$id_table.public'", "'\"oui\"'");
+		// on recupere le type du champ si pas deja fait (une seule requete par table et par champ)
+		if ($ok && !isset($type_champ[$id_form][$champ])){
+			$res = spip_query("SELECT type FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($champ));
+			if ($row = spip_fetch_array($res))
+				$type_champ[$id_form][$champ] = $row['type'];
+			else 
+				$ok = false;
 		}
-	
-		return calculer_boucle($id_boucle, $boucles); 
-	}
-	
-	//
-	// <BOUCLE(FORMS_DONNEES_CHAMPS)>
-	//
-	function boucle_FORMS_DONNEES_CHAMPS_dist($id_boucle, &$boucles) {
-		$boucle = &$boucles[$id_boucle];
-		$id_table = $boucle->id_table;
-		$boucle->from[$id_table] =  "spip_forms_donnees_champs";
-	
-		if (!isset($boucle->modificateur['tout']) && !$boucle->tout){
-			$boucle->from["champs"] =  "spip_forms_champs";
-			$boucle->from["donnees"] =  "spip_forms_donnees";
-			$boucle->where[]= array("'='", "'$id_table.id_donnee'", "'donnees.id_donnee'");
-			$boucle->where[]= array("'='", "'$id_table.champ'", "'champs.champ'");
-			$boucle->where[]= array("'='", "'donnees.id_form'", "'champs.id_form'");
-			$boucle->where[]= array("'='", "'champs.public'", "'\"oui\"'");
-			$boucle->group[] = $boucle->id_table . '.champ'; // ?  
+		if ($ok) {
+			$t = $type_champ[$id_form][$champ];
+			if ($t == 'select' OR $type_champ == 'multiple'){
+				$res = spip_query("SELECT titre FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ)." AND choix="._q($valeur));
+				if ($row = spip_fetch_array($res)){
+					$valeur = typo($row['titre']);
+				}
+			}
+			elseif ($t == 'mot'){
+				$res = spip_query("SELECT titre FROM spip_mots WHERE id_mot="._q($valeur));
+				if ($row = spip_fetch_array($res)){
+					$valeur = typo($row['titre']);
+				}
+			}
+			/*else	$valeur = typo($valeur);*/
 		}
-		if (!$boucle->statut && !isset($boucle->modificateur['tout']) && !$boucle->tout)
-			$boucle->where[]= array("'='", "'donnees.statut'", "'\"publie\"'");
-
-		return calculer_boucle($id_boucle, $boucles); 
+		return $valeur;
 	}
-	
+		
 	//
 	// Afficher le diagramme de resultats d'un sondage
 	//
@@ -162,55 +133,5 @@
 		
 		return $r;
 	}
-function wrap_split($wrap){
-	$wrap_start="";
-	$wrap_end="";
-	if (preg_match(",<([^>]*)>,Ui",$wrap,$regs)){
-		array_shift($regs);
-		foreach($regs as $w){
-			if ($w{0}=='/'){
-			 //$wrap_end .= "<$w>";
-			}
-			else {
-				if ($w{strlen($w)-1}=='/')
-					$w = strlen($w)-1;
-				$wrap_start .= "<$w>";
-				$w = explode(" ",$w);
-				if (is_array($w)) $w = $w[0];
-				$wrap_end = "</$w>" . $wrap_end;
-			}
-		}
-	}
-	return array($wrap_start,$wrap_end);
-}
 
-function wrap_champ($texte,$wrap){
-	if (!strlen(trim($wrap)) || !strlen(trim($texte))) return $texte;
-	if (strpos($wrap,'$1')===FALSE){
-		$wrap = wrap_split($wrap);
-		$texte = array_shift($wrap).$texte.array_shift($wrap);
-	}
-	else 
-		$texte = str_replace('$1',trim($texte),$wrap);
-	return $texte;
-}
-
-function balise_RESULTATS_SONDAGE($p) {
-	$_id_form = champ_sql('id_form', $p);
-
-	$p->code = "Forms_afficher_reponses_sondage(" . $_id_form . ")";
-	$p->statut = 'html';
-	return $p;
-}
-
-function forms_valeur($tableserialisee,$cle,$defaut=''){
-	$t = unserialize($tableserialisee);
-	return isset($t[$cle])?$t[$cle]:$defaut;
-}
-
-// http://doc.spip.org/@puce_statut_article
-function forms_puce_statut_donnee($id, $statut, $id_form, $ajax = false) {
-	include_spip('inc/instituer_forms_donnee');
-	return puce_statut_donnee($id,$statut,$id_form,$ajax);
-}
 ?>

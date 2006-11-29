@@ -15,7 +15,7 @@
 				<BOUCLE_champsselectmulti(FORMS_CHAMPS){id_form}{champ}{type IN select,multiple}>
 					<B_champschoix>
 					<ul>
-						<BOUCLE_champschoix(FORMS_CHAMPS_CHOIX){id_form}{cle}{choix=#VALEUR}>
+						<BOUCLE_champschoix(FORMS_CHAMPS_CHOIX){id_form}{cle}{choix=#VALEUR*}>
 						<li>#TITRE</li>
 						</BOUCLE_champschoix>
 					</ul>
@@ -28,7 +28,7 @@
 					<BOUCLE_champsmot(FORMS_CHAMPS){id_form}{champ}{type=mot}>
 						<B_champstitre>
 						<ul>
-							<BOUCLE_champstitre(MOTS){id_mot=#VALEUR}>
+							<BOUCLE_champstitre(MOTS){id_mot=#VALEUR*}>
 							<li>#TITRE</li>
 							</BOUCLE_champstitre>
 						</ul>
@@ -38,7 +38,7 @@
 					</B_champsmot>
 					
 						[(#REM) C'est finalement un champ normal]
-						#VALEUR
+						#VALEUR*
 
 					<//B_champsmot>
 					

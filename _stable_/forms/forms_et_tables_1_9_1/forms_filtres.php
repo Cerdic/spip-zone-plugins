@@ -11,13 +11,14 @@
  *
  */
 
-include_spip("base/forms");
-include_spip("inc/forms");
+	include_spip("inc/forms");
 
-//
-// Formulaires
-//
-
+	function Forms_insert_head($flux){
+		$flux .= 	"<link rel='stylesheet' href='".find_in_path('spip_forms.css')."' type='text/css' media='all' />\n";
+		$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/date_picker.css' type='text/css' media='all' />\n";
+		$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/jtip.css' type='text/css' media='all' />\n";
+		return $flux;
+	}
 
 	// A reintegrer dans echapper_html()
 	function Forms_forms_avant_propre($texte) {
@@ -53,46 +54,48 @@ include_spip("inc/forms");
 		return Forms_afficher_reponses_sondage($id_form);
 	}
 
-	function Forms_affiche_droite($flux){
-		if (_request('exec')=='articles_edit'){
-			$flux['data'] .= Forms_afficher_insertion_formulaire($flux['arg']['id_article']);
+	function wrap_split($wrap){
+		$wrap_start="";
+		$wrap_end="";
+		if (preg_match(",<([^>]*)>,Ui",$wrap,$regs)){
+			array_shift($regs);
+			foreach($regs as $w){
+				if ($w{0}=='/'){
+				 //$wrap_end .= "<$w>";
+				}
+				else {
+					if ($w{strlen($w)-1}=='/')
+						$w = strlen($w)-1;
+					$wrap_start .= "<$w>";
+					$w = explode(" ",$w);
+					if (is_array($w)) $w = $w[0];
+					$wrap_end = "</$w>" . $wrap_end;
+				}
+			}
 		}
-		return $flux;
+		return array($wrap_start,$wrap_end);
 	}
-	function Forms_insert_head($flux){
-		$flux .= 	"<link rel='stylesheet' href='".find_in_path('spip_forms.css')."' type='text/css' media='all' />\n";
-		$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/date_picker.css' type='text/css' media='all' />\n";
-		$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/jtip.css' type='text/css' media='all' />\n";
-		return $flux;
-	}
-	function Forms_header_prive($flux){
-		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."spip_forms.css' type='text/css' media='all' />\n";
-		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/date_picker.css' type='text/css' media='all' />\n";
-		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/jtip.css' type='text/css' media='all' />\n";
-		$flux .= "<script type='text/javascript'><!--\n var ajaxcharset='utf-8';\n//--></script>";
-		if (_request('exec')=='articles'){
-			$flux .= "<script src='".find_in_path('javascript/iautocompleter.js')."' type='text/javascript'></script>\n"; 
-			$flux .= "<script src='".find_in_path('javascript/interface.js')."' type='text/javascript'></script>\n"; 
-			if (!_request('var_noajax'))
-				$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/forms_lier_donnees.js' type='text/javascript'></script>\n";
+	
+	function wrap_champ($texte,$wrap){
+		if (!strlen(trim($wrap)) || !strlen(trim($texte))) return $texte;
+		if (strpos($wrap,'$1')===FALSE){
+			$wrap = wrap_split($wrap);
+			$texte = array_shift($wrap).$texte.array_shift($wrap);
 		}
-		if (_request('exec')=='forms_edit'){
-			$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/interface.js' type='text/javascript'></script>";
-			if (!_request('var_noajax'))
-				$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/forms_edit.js' type='text/javascript'></script>";
-			$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."spip_forms_prive.css' type='text/css' media='all' />\n";
-		
-			if($GLOBALS['meta']['multi_rubriques']=="oui" || $GLOBALS['meta']['multi_articles']=="oui")
-				$active_langs = "'".str_replace(",","','",$GLOBALS['meta']['langues_multilingue'])."'";
-			else
-				$active_langs = "";
-			$flux .= "<script src='".find_in_path('forms_lang.js')."' type='text/javascript'></script>\n". 
-			"<script type='text/javascript'>\n".
-			"var forms_def_lang='".$GLOBALS["spip_lang"]."';var forms_avail_langs=[$active_langs];\n".
-			"$(forms_init_lang);\n".
-			"</script>\n";
-		}
-		return $flux;
+		else 
+			$texte = str_replace('$1',trim($texte),$wrap);
+		return $texte;
 	}
-
+	
+	function forms_valeur($tableserialisee,$cle,$defaut=''){
+		$t = unserialize($tableserialisee);
+		return isset($t[$cle])?$t[$cle]:$defaut;
+	}
+	
+	// http://doc.spip.org/@puce_statut_article
+	function forms_puce_statut_donnee($id, $statut, $id_form, $ajax = false) {
+		include_spip('inc/instituer_forms_donnee');
+		return puce_statut_donnee($id,$statut,$id_form,$ajax);
+	}
+	
 ?>

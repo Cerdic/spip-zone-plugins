@@ -36,6 +36,12 @@
 	<fonctions> <!-- fichier charge a chaque recalul de page -->
 	forms_fonctions.php
 	</fonctions>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	public/forms_boucles.php
+	</fonctions>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	public/forms_balises.php
+	</fonctions>
 	<prefix> 
 	Forms
 	</prefix>
@@ -46,17 +52,17 @@
 		<inclure>forms_filtres.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>affiche_droite</nom>
-		<action>affiche_droite</action>
-		<inclure>forms_filtres.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>forms_filtres.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>affiche_droite</nom>
+		<action>affiche_droite</action>
+		<inclure>forms_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>forms_filtres.php</inclure>
+		<inclure>forms_pipeline.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>ajouter_boutons</nom>

@@ -48,4 +48,40 @@
 		}
 		return $flux;
 	}
+	
+	function Forms_affiche_droite($flux){
+		if (_request('exec')=='articles_edit'){
+			$flux['data'] .= Forms_afficher_insertion_formulaire($flux['arg']['id_article']);
+		}
+		return $flux;
+	}
+	function Forms_header_prive($flux){
+		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."spip_forms.css' type='text/css' media='all' />\n";
+		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/date_picker.css' type='text/css' media='all' />\n";
+		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/jtip.css' type='text/css' media='all' />\n";
+		$flux .= "<script type='text/javascript'><!--\n var ajaxcharset='utf-8';\n//--></script>";
+		if (_request('exec')=='articles'){
+			$flux .= "<script src='".find_in_path('javascript/iautocompleter.js')."' type='text/javascript'></script>\n"; 
+			$flux .= "<script src='".find_in_path('javascript/interface.js')."' type='text/javascript'></script>\n"; 
+			if (!_request('var_noajax'))
+				$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/forms_lier_donnees.js' type='text/javascript'></script>\n";
+		}
+		if (_request('exec')=='forms_edit'){
+			$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/interface.js' type='text/javascript'></script>";
+			if (!_request('var_noajax'))
+				$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/forms_edit.js' type='text/javascript'></script>";
+			$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."spip_forms_prive.css' type='text/css' media='all' />\n";
+		
+			if($GLOBALS['meta']['multi_rubriques']=="oui" || $GLOBALS['meta']['multi_articles']=="oui")
+				$active_langs = "'".str_replace(",","','",$GLOBALS['meta']['langues_multilingue'])."'";
+			else
+				$active_langs = "";
+			$flux .= "<script src='".find_in_path('forms_lang.js')."' type='text/javascript'></script>\n". 
+			"<script type='text/javascript'>\n".
+			"var forms_def_lang='".$GLOBALS["spip_lang"]."';var forms_avail_langs=[$active_langs];\n".
+			"$(forms_init_lang);\n".
+			"</script>\n";
+		}
+		return $flux;
+	}
 ?>

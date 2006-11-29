@@ -3,7 +3,7 @@
 	decoder la reponse avec la structure du formulaire
 	]
 	<BOUCLE_champsselectmulti(FORMS_CHAMPS){id_form}{champ}{type IN select,multiple}>
-		<BOUCLE_champschoix(FORMS_CHAMPS_CHOIX){id_form}{champ}{choix=#VALEUR}>
+		<BOUCLE_champschoix(FORMS_CHAMPS_CHOIX){id_form}{champ}{choix=#VALEUR*}>
 		#TITRE
 		</BOUCLE_champschoix>
 	</BOUCLE_champsselectmulti>[
@@ -11,10 +11,10 @@
 		recuperer le titre du mot cle au lieu de l'id
 		]
 		<BOUCLE_champsmot(FORMS_CHAMPS){id_form}{champ}{type=mot}>
-			<BOUCLE_champstitre(MOTS){id_mot=#VALEUR}>#TITRE</BOUCLE_champstitre>
+			<BOUCLE_champstitre(MOTS){id_mot=#VALEUR*}>#TITRE</BOUCLE_champstitre>
 		</BOUCLE_champsmot>[
 			(#REM) C'est finalement un champ normal
-			]#VALEUR
+			]#VALEUR*
 		<//B_champsmot>
 	<//B_champsselectmulti>
 </BOUCLE_repchamps>
