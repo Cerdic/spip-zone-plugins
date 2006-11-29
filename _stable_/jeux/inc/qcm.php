@@ -1,5 +1,47 @@
 <?php
 /*
+insere un QCM dans vos articles !
+---------------------------------
+
+balises : <jeux></jeux>
+separateurs obligatoires : #TITRE, #QCM
+separateurs optionnels   : #HTML
+
+Ensemble de syntaxe dans l'article :
+------------------------------------
+
+<jeux>
+	#TITRE
+	Un titre pour le QCM !
+
+	#QCM
+	Q Une question bla bla
+	P1 Une proposition 1
+	P2 Une proposition 2
+	P3 Une proposition 3 (la bonne réponse)
+	R3 (la réponse 3 est la bonne !)
+
+	#QCM
+	Q Une question encore
+	P1.2 Une proposition à 2 points (la bonne réponse)
+	P2 Une proposition 2
+	R1
+
+	#QCM
+	Q Une question pour finir
+	P1 Une proposition 1|Un commentaire 1
+	P2 Une proposition 2|Un commentaire 2
+	P3.4 Une proposition à 4 points !|Effectivement !
+	P4 Une proposition 4|Un commentaire 4
+	P5 Une proposition 5|Un commentaire 5
+	P6 Une proposition 6|Un commentaire 6
+	R3
+</jeux>
+
+*/
+
+/* à supprimer à terme...
+
   Nom du plugin      : 	Un QCM dans vos articles
   Auteur             : 	Patrice VANNEUFVILLE 
   						patfr@ifrance.com
