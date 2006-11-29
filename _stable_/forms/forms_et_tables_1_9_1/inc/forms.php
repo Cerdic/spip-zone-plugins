@@ -328,43 +328,75 @@
 		$s .= fin_cadre_relief(true);
 		return $s;
 	}
-
-	function Forms_insertions_reponse_post($id_form,$id_donnee,&$erreur,&$ok){
+	
+	function Forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,&$erreur,&$ok){
+		$inserts = array();
+		if ($type == 'fichier') {
+			if (($val = $_FILES[$champ]) AND ($val['tmp_name'])) {
+				// Fichier telecharge : deplacer dans IMG, stocker le chemin dans la base
+				$dir = sous_repertoire(_DIR_IMG, "protege");
+				$dir = sous_repertoire($dir, "form".$id_form);
+				$source = $val['tmp_name'];
+				$dest = $dir.Forms_nommer_fichier_form($val['name'], $dir);
+				if (!Forms_deplacer_fichier_form($source, $dest)) {
+					$erreur[$champ] = _T("forms:probleme_technique_upload");
+					$ok = false;
+				}
+				else {
+					$inserts[] = "("._q($id_donnee).","._q($champ).","._q($dest).")";
+				}
+			}
+		}
+		else if ($val) {
+			// Choix multiples : enregistrer chaque valeur separement
+			if (is_array($val))
+				foreach ($val as $v)
+					$inserts[] = "("._q($id_donnee).","._q($champ).","._q($v).")";
+			else
+				$inserts[] = "("._q($id_donnee).","._q($champ).","._q($val).")";
+		}
+		return $inserts;
+	}
+	
+	function Forms_insertions_reponse_post($id_form,$id_donnee,&$erreur,&$ok, $c = NULL){
 		$inserts = array();
 		$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form));
 		while($row = spip_fetch_array($res)){
 			$champ = $row['champ'];
 			$type = $row['type'];
-			$val = _request($champ);
-	
-			if ($type == 'fichier') {
-				if (($val = $_FILES[$champ]) AND ($val['tmp_name'])) {
-					// Fichier telecharge : deplacer dans IMG, stocker le chemin dans la base
-					$dir = sous_repertoire(_DIR_IMG, "protege");
-					$dir = sous_repertoire($dir, "form".$id_form);
-					$source = $val['tmp_name'];
-					$dest = $dir.Forms_nommer_fichier_form($val['name'], $dir);
-					if (!Forms_deplacer_fichier_form($source, $dest)) {
-						$erreur[$champ] = _T("forms:probleme_technique_upload");
-						$ok = false;
-					}
-					else {
-						$inserts[] = "("._q($id_donnee).","._q($champ).","._q($dest).")";
-					}
-				}
-			}
-			else if ($val) {
-				// Choix multiples : enregistrer chaque valeur separement
-				if (is_array($val))
-					foreach ($val as $v)
-						$inserts[] = "("._q($id_donnee).","._q($champ).","._q($v).")";
-				else
-					$inserts[] = "("._q($id_donnee).","._q($champ).","._q($val).")";
-			}
+			if (!$c) 
+				$val = _request($champ);
+			else
+				$val = isset($c[$champ])?$c[$champ]:NULL;
+			$ins = Forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,$erreur,$ok);
+			$inserts = $inserts + $ins;
 		}
 		return $inserts;
 	}
 
+	function Forms_revision_donnee($id_donnee,$c,&$erreur){
+		$result = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
+		if (!$row = spip_fetch_array($result)) {
+			$erreur['@'] = _T("forms:probleme_technique");
+		}
+		$id_form = $row['id_form'];
+		$structure = Forms_structure($id_form);
+		include_spip("inc/forms_type_champs");
+		$erreur = Forms_valide_champs_reponse_post($id_form, $c, $structure);
+		if (!$erreur) {
+			$champs_mod = array();
+			foreach($c as $champ=>$val){
+				$champs_mod[] = $champ;
+				$type = $structure[$champ]['type'];
+				$inserts = $inserts + Forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,$erreur,$ok);
+			}
+			$in_champs = calcul_mysql_in('champ',"(".implode(',',$champs_mod).")");
+			spip_query("DELETE FROM spip_forms_donnees_champs WHERE $in_champs AND id_donnee="._q($id_donnee));
+			spip_query("INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
+				"VALUES ".join(',', $inserts));
+		}
+	}
+	
 	function Forms_enregistrer_reponse_formulaire($id_form, $id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='') {
 		$r = '';
 	
