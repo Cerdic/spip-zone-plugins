@@ -17,9 +17,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 if ($GLOBALS['spip_version_code']<1.92)
-	include_spip('public/forms_criteres_191');
+	include_spip('inc/forms_texte_191');
 else {
-	include_once(_DIR_RESTREINT.'public/criteres.php');
+	include_once(_DIR_RESTREINT.'inc/texte.php');
 }
 
 ?>

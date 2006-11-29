@@ -52,6 +52,11 @@
 		<inclure>forms_filtres.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>post_propre</nom>
+		<action>forms_apres_propre</action>
+		<inclure>forms_filtres.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>forms_filtres.php</inclure>
 	</pipeline>

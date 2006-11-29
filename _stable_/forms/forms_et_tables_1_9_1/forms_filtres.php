@@ -48,6 +48,13 @@
 	
 		return $texte;
 	}
+	// compatibilite 1.9.1
+	function Forms_forms_apres_propre($texte){
+		// Reinserer le javascript de confiance (venant des modeles)
+		$a = isset($GLOBALS['auteur_session']['alea_actuel'])?$GLOBALS['auteur_session']['alea_actuel']:'forms';
+		$texte = echappe_retour($texte,"javascript".$a);
+		return $texte;
+	}
 
 	// Hack crade a cause des limitations du compilateur
 	function _Forms_afficher_reponses_sondage($id_form) {

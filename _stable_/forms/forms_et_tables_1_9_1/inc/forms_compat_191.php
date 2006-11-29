@@ -85,5 +85,12 @@
 				return NULL;
 		}
 	}
-	
+	// http://doc.spip.org/@protege_js_modeles
+	function forms_protege_js_modeles($t) {
+		$a = isset($GLOBALS['auteur_session']['alea_actuel'])?$GLOBALS['auteur_session']['alea_actuel']:'forms';
+		if (preg_match_all(',<script.*?($|</script.),isS', $t, $r, PREG_SET_ORDER))
+			foreach ($r as $regs)
+				$t = str_replace($regs[0],code_echappement($regs[0],'javascript'.$a),$t);
+		return $t;
+	}	
 ?>
