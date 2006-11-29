@@ -13,6 +13,51 @@
  */
 
 	include_spip('base/forms');
+	//$GLOBALS['exceptions_des_tables']['forms_donnees']['id_mot']=array('spip_forms_donnees_champs', 'valeur', 'forms_index_exception');
+	$GLOBALS['exceptions_des_jointures']['forms_donnees']['id_mot'] = array('spip_forms_donnees_champs', 'valeur', 'forms_calculer_critere_externe');
+	function forms_calculer_critere_externe(&$boucle, $joints, $col, $desc, $eg, $checkarrivee)
+	{
+		if ($checkarrivee!='spip_forms_donnees_champs' || $col!='valeur')
+			erreur_squelette(_T('zbug_info_erreur_squelette'),
+					_T('zbug_boucle') .
+					" $idb " .
+					_T('zbug_critere_inconnu', 
+					    array('critere' => $col)));
+		else {
+			$id_table = $boucle->id_table;
+			$boucle->select[] =  "donnees_champs.valeur AS id_mot";
+			$boucle->from["donnees_champs"] =  "spip_forms_donnees_champs";
+			$boucle->from["champs"] =  "spip_forms_champs";
+			$boucle->where[]= array("'='", "'$id_table.id_form'", "'champs.id_form'");
+			$boucle->where[]= array("'='", "'champs.type'", "'\"mot\"'");
+			$boucle->where[]= array("'='", "'donnees_champs.champ'", "'champs.champ'");
+			$boucle->where[]= array("'='", "'donnees_champs.id_donnee'", "'$id_table.id_donnee'");
+			$boucle->group[] = $id_table . '.id_donnee'; 
+	
+			$t = "donnees_champs";
+			return $t;
+		}
+	}
+
+	function forms_index_exception(&$boucle, $desc, $nom_champ, &$excep)
+	{
+		global $tables_des_serveurs_sql;
+		list($e, $x) = $excep;	#PHP4 affecte de gauche a droite
+		$excep = $x;		#PHP5 de droite a gauche !
+		if ($e!='spip_forms_donnees_champs' || $x!='valeur') return NULL; // on ne traite ici qu'un cas particulier
+		
+		//$boucle->from["mots"] =  "spip_mots";
+		$boucle->from["donnees_champs"] =  "spip_forms_donnees_champs";
+		$boucle->from["champs"] =  "spip_forms_champs";
+		$boucle->where[]= array("'='", "'$id_table.id_form'", "'champs.id_form'");
+		$boucle->where[]= array("'='", "'champs.type'", "'\"mot\"'");
+		$boucle->where[]= array("'='", "'donnees_champs.champ'", "'champs.champ'");
+		$boucle->where[]= array("'='", "'donnees_champs.id_donnee'", "'$id_table.id_donnee'");
+		$boucle->group[] = $boucle->id_table . '.id_donnee'; 
+
+		$t = "'donnees_champs.valeur'";
+		return $t;
+	}
 	//
 	// <BOUCLE(FORMS)>
 	//
@@ -35,6 +80,21 @@
 		$boucle = &$boucles[$id_boucle];
 		$id_table = $boucle->id_table;
 		$boucle->from[$id_table] =  "spip_forms_donnees";
+		
+		/*foreach($boucle->where as $k=>$where){
+			var_dump($where);
+			if ($where[2]=="'id_mot'"){
+				//$boucle->from["mots"] =  "spip_mots";
+				$boucle->from["donnees_champs"] =  "spip_forms_donnees_champs";
+				$boucle->from["champs"] =  "spip_forms_champs";
+				$boucle->where[]= array("'='", "'$id_table.id_form'", "'champs.id_form'");
+				$boucle->where[]= array("'='", "'champs.type'", "'\"mot\"'");
+				$boucle->where[]= array("'='", "'donnees_champs.champ'", "'champs.champ'");
+				$boucle->where[]= array("'='", "'donnees_champs.id_donnee'", "'$id_table.id_donnee'");
+				$boucle->where[$k][2] = "'donnees_champs.valeur'";
+				$boucle->group[] = $boucle->id_table . '.id_donnee'; 
+			}
+		}*/
 	
 		if (!isset($boucle->modificateur['tout']) && !$boucle->tout)
 			$boucle->where[]= array("'='", "'$id_table.confirmation'", "'\"valide\"'");
