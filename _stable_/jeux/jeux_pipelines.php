@@ -72,13 +72,13 @@ function jeux($chaine){
 		include_spip('inc/mots_croises');
 		$texte = jeux_mots_croises($texte);
 	}
-	if (strpos($chaine, _JEUX_QCM)!=false) {
+	if (strpos($texte, _JEUX_QCM)!=false) {
 		include_spip('inc/qcm');
-		$texte = jeux_qcm($chaine);
+		$texte = jeux_qcm($texte);
 	}
-	if (strpos($chaine, _JEUX_SUDOKU)!=false) {
+	if (strpos($texte, _JEUX_SUDOKU)!=false) {
 		include_spip('inc/sudoku');
-		$texte = jeux_sudoku($chaine);
+		$texte = jeux_sudoku($texte);
 	}
 
 	return $texteAvant.code_echappement('<!-- PLUGIN-DEBUT -->').$texte
@@ -124,7 +124,7 @@ function jeux_insert_head($flux){
 }
 
 function jeux_post_propre($texte) { 
-	// a supprimer dans le futur...
+	// a supprimer dans le futur...	
 	return preg_replace(',<!(QCM-(DEBUT|FIN)(-#[0-9]+)?)>,UimsS', '<!-- \\1 -->', $texte);
 }	
 

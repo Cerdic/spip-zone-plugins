@@ -8,18 +8,18 @@ $(document).ready(function(){
  // vérification de la présence d'une grille						    
  if ($('table.grille').length) {
 	// sens d'écriture basculé à 'h' (horizontal)
-	changeDir();
-	// gestion du clavier par function mykey()
-	$('table.grille tr td input').bind('keypress', mykey);
+	changeDeDirection();
+	// gestion du clavier par function clavierPourJeux()
+	$('table.grille tr td input').bind('keypress', clavierPourJeux);
 	// définition du bouton droit de la souris pour changer le sens de déplacement dans la grille
 	if ((jQuery.browser.safari) | (jQuery.browser.Konqueror))
-		$('form.grille').bind('contextmenu', changeDir);
+		$('form.grille').bind('contextmenu', changeDeDirection);
 	else
-		$('table.grille tr td input').bind('contextmenu', changeDir);	
+		$('table.grille tr td input').bind('contextmenu', changeDeDirection);	
  }
 });
 
-function changeDir(e) {
+function changeDeDirection(e) {
 	
 	if(sens_grille=='h') {
 		sens_grille='v';
@@ -32,9 +32,9 @@ function changeDir(e) {
 	return false;
 }
 
-function mykey(e) {
+function clavierPourJeux(e) {
 	//var key = e.keyCode ? e.keyCode : (e.which ? e.which: 0);
-	var m = this.name.match(/col(\d+)lig(\d+)/);
+	var m = this.name.match(/GR(\d+)x(\d+)/);
 	var x=m[1];
 	var y=m[2];
 	var retour = true;
@@ -56,7 +56,7 @@ function mykey(e) {
 			}
 	}
 
-	var newcell = '#col'+String(x)+'lig'+String(y);
+	var newcell = '#GR'+String(x)+'x'+String(y);
 	$(newcell).each(function(){ this.focus(); });
 	
 	return retour;
