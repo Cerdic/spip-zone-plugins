@@ -369,12 +369,13 @@
 			else
 				$val = isset($c[$champ])?$c[$champ]:NULL;
 			$ins = Forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,$erreur,$ok);
-			$inserts = $inserts + $ins;
+			$inserts = array_merge($inserts,$ins);
 		}
 		return $inserts;
 	}
 
 	function Forms_revision_donnee($id_donnee,$c,&$erreur){
+		$inserts = array();
 		$result = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
 		if (!$row = spip_fetch_array($result)) {
 			$erreur['@'] = _T("forms:probleme_technique");
@@ -388,7 +389,8 @@
 			foreach($c as $champ=>$val){
 				$champs_mod[] = $champ;
 				$type = $structure[$champ]['type'];
-				$inserts = $inserts + Forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,$erreur,$ok);
+				$ins = Forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,$erreur,$ok);
+				$inserts = array_merge($inserts,$ins);
 			}
 			$in_champs = calcul_mysql_in('champ',"(".implode(',',$champs_mod).")");
 			spip_query("DELETE FROM spip_forms_donnees_champs WHERE $in_champs AND id_donnee="._q($id_donnee));
