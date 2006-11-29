@@ -374,7 +374,7 @@
 		return $inserts;
 	}
 
-	function Forms_revision_donnee($id_donnee,$c,&$erreur){
+	function Forms_revision_donnee($id_donnee, $c = NULL, &$erreur){
 		$inserts = array();
 		$result = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
 		if (!$row = spip_fetch_array($result)) {
@@ -386,11 +386,14 @@
 		$erreur = Forms_valide_champs_reponse_post($id_form, $c, $structure);
 		if (!$erreur) {
 			$champs_mod = array();
-			foreach($c as $champ=>$val){
-				$champs_mod[] = $champ;
-				$type = $structure[$champ]['type'];
-				$ins = Forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,$erreur,$ok);
-				$inserts = array_merge($inserts,$ins);
+			foreach($structure as $champ=>$infos){
+				$val = _request($champ,$c);
+				if ($val!==NULL){
+					$champs_mod[] = $champ;
+					$type = $infos['type'];
+					$ins = Forms_insertions_reponse_un_champ($id_form,$id_donnee,$champ,$type,$val,$erreur,$ok);
+					$inserts = array_merge($inserts,$ins);
+				}
 			}
 			$in_champs = calcul_mysql_in('champ',"(".implode(',',$champs_mod).")");
 			spip_query("DELETE FROM spip_forms_donnees_champs WHERE $in_champs AND id_donnee="._q($id_donnee));
