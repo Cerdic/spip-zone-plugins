@@ -19,7 +19,7 @@
 		<td><a href='[(#SELF|parametre_url{id_donnee,#ID_DONNEE}|ancre_url{donnees-#ENV{id_table}})]'>#ID_DONNEE</a></td>
 		<BOUCLE_body(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}{specifiant=oui}>
 		<td>
-		<BOUCLE_rep(FORMS_DONNEES_CHAMPS){id_donnee}{champ}{'<br />'}>#VALEUR</BOUCLE_rep>
+		#LESVALEURS{'<br />'}
 		</td>
 		</BOUCLE_body>
 </BOUCLE_donnees>

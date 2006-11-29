@@ -7,14 +7,6 @@
 <:forms:reponse_envoyee:> [(#DATE|affdate)]
 <:forms:reponse_depuis:> [(#URL|url_absolue)]
 <BOUCLE_champs(FORMS_CHAMPS){tout}{id_form}{par rang}><B_repchamps>
-#TITRE : <BOUCLE_repchamps(FORMS_DONNEES_CHAMPS){id_donnee}{champ}{tout}>[
-	(#REM) Regarder si le champ est du type select ou multiple, car dans ce cas il faut
-	decoder la reponse avec la structure du formulaire
-	]<BOUCLE_champsselectmulti(FORMS_CHAMPS){id_form}{tout}{champ}{type IN select,multiple}><BOUCLE_champschoix(FORMS_CHAMPS_CHOIX){id_form}{champ}{choix=#VALEUR*}>#TITRE </BOUCLE_champschoix></BOUCLE_champsselectmulti>[
-	(#REM) Regarder si le champ est du type mot cle, car dans ce cas il faut
-	recuperer le titre du mot cle au lieu de l'id
-	]<BOUCLE_champsmot(FORMS_CHAMPS){id_form}{champ}{tout}{type=mot}><BOUCLE_champstitre(MOTS){id_mot=#VALEUR*}>#TITRE</BOUCLE_champstitre></BOUCLE_champsmot>[
-	(#REM) C'est finalement un champ normal
-	]#VALEUR*<BOUCLE_fichier(FORMS_CHAMPS){id_form}{champ}{tout}{type=fichier}>[(#ENV{mail_admin}|=={'oui'}|?{' ',''}) #URL_ECRIRE{forms_telecharger,id_donnee=#ID_DONNEE&champ=#CHAMP} ]</BOUCLE_fichier><//B_champsmot><//B_champsselectmulti></BOUCLE_repchamps></BOUCLE_champs>
+#TITRE : #LESVALEURS{','} [(#TYPE|=={fichier}|?{' '})	[(#ENV{mail_admin}|=={'oui'}|?{' ',''}) #URL_ECRIRE{forms_telecharger,id_donnee=#ID_DONNEE&champ=#CHAMP} ] ]
 </BOUCLE_form>
 </BOUCLE_reponses>

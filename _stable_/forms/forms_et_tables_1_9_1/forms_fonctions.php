@@ -15,12 +15,20 @@
 	if ($GLOBALS['spip_version_code']<1.92)
 		include_spip('inc/forms_compat_191');
 	include_spip('forms_filtres');
+	function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separateur=" "){
+		$lesvaleurs = array();
+		$res = spip_query("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champ));
+		while ($row = spip_fetch_array($res)){
+			$lesvaleurs[] = forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $row['valeur'], $id_form);
+		}
+		return implode($separateur,$lesvaleurs);
+	}
 
 	function forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $valeur, $id_form){
 		static $type_champ=array();
 		// s'assurer que l'on est bien sur une boucle forms, sinon retourner $valeur
 		$ok = $id_donnee && $champ;
-		$ok = $ok && in_array($type, array('forms_donnees_champs'));
+		$ok = $ok && in_array($type, array('forms_donnees_champs','forms_champs'));
 		// on recupere la valeur du champ si pas deja la
 		if ($ok && !$valeur){
 			$res = spip_query("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champ));
