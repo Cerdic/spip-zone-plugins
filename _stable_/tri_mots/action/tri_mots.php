@@ -29,8 +29,12 @@ function action_tri_mots() {
   $id_mot = intval($id_mot);
   $id_table = addslashes($id_table);
   $table = addslashes($table);
+  
+  $hash = _request('hash');
+	$id_auteur = _request('id_auteur');
 
-  include_spip("inc/sessions");
+  //include_spip("inc/sessions");
+  include_spip('inc/actions');
   if (!verifier_action_auteur("tri_mots $table $id_table $id_mot", $hash, $id_auteur)) {
 	include_spip('inc/minipres');
 	minipres(_T('info_acces_interdit'));
