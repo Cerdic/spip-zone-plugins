@@ -297,9 +297,6 @@ $(document).ready(function() {
   $($.grep(
     $(".widget"),
     function(e) {
-      if (configWidgets.droits == '*') {
-        return true;
-      }
       for (var i=0; i<configWidgets.droits.length; i++) {
         if ($(e).is(configWidgets.droits[i])) return true;
       }

@@ -43,7 +43,7 @@ function Widgets_affichage_final($page) {
 
     // et les signaler dans la page
     if ($droits_accordes == count($regs))
-        $page = Widgets_preparer_page($page, '*', $wdgcfg);
+        $page = Widgets_preparer_page($page, array('*'), $wdgcfg);
     else if ($droits)
         $page = Widgets_preparer_page($page, array_keys($droits), $wdgcfg);
 
