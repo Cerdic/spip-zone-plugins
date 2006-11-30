@@ -67,4 +67,38 @@ Exemple de syntaxe dans l'article :
 
 */
 
+// guillemets simples : “ et ”
+define(_GUILLEMET_OUVRANT, '&#8220;'); 
+define(_GUILLEMET_FERMANT, '&#8221;');
+
+// guillemets doubles : « et »
+define(_GUILLEMET_OUVRANT, '&laquo;');
+define(_GUILLEMET_FERMANT, '&raquo;');
+
+function jeux_textes($chaine, $indexJeux) {
+
+  // initialiser  
+  $tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_POESIE.'|'._JEUX_CITATION.'|'._JEUX_AUTEUR.'|'._JEUX_RECUEIL.'|'._JEUX_TEXTE.')/', 
+			_JEUX_TEXTE.trim($chaine), -1, PREG_SPLIT_DELIM_CAPTURE);
+  $titre = $citation = $poesie = $auteur = $recueil = false;
+
+  // parcourir toutes les #BALISES
+  foreach($tableau as $i => $v){
+  	 $v = trim($v);
+	 if ($v==_JEUX_TITRE) $titre = trim($tableau[$i+1]);
+	  elseif ($v==_JEUX_POESIE) $poesie = '<poesie>'.trim($tableau[$i+1]).'</poesie>';
+	  elseif ($v==_JEUX_CITATION) $citation = _GUILLEMET_OUVRANT.trim($tableau[$i+1])._GUILLEMET_FERMANT;
+	  elseif ($v==_JEUX_AUTEUR) $auteur = trim($tableau[$i+1]);
+	  elseif ($v==_JEUX_RECUEIL) $recueil = trim($tableau[$i+1]);
+  }
+  
+  return 
+      ($titre?"<span class=\"textes_titre\">$titre</span><br />":'')
+  	. ( $poesie?"<span class=\"textes_poesie\">$poesie</span>":
+		 ($citation?"<span class=\"textes_citation\">$citation</span>":
+		 '')
+	  ) 
+	. ($auteur?"<br /><span class=\"textes_auteur\">$auteur</span>":'')
+	. ($recueil?"<br /><span class=\"textes_recueil\">$recueil</span>":'');
+}
 ?>

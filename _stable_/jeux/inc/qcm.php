@@ -150,27 +150,8 @@ function qcm_recupere_le_titre(&$chaine, $ouvrant, $fermant) {
   list($texteAvant, $suite) = explode($ouvrant, $chaine, 2); 
   list($texte, $texteApres) = explode($fermant, $suite, 2); 
   // on supprime les balises de l'affichage...
-  $chaine = $texteAvant.'<!QCM-DEBUT-#0>'.$texteApres;
+  $chaine = $texteAvant.jeux_rem('QCM-DEBUT', 0).$texteApres;
   return trim($texte);
-}
-
-
-// cette fonction modifie $chaine et retourne true si un qcm est trouve, false dans le cas contraire
-function qcm_recupere_une_question(&$chaine, &$indexQCM, &$titreQCM) {
-  global $qcms;
-  
-  // si les balises ouvrantes et fermantes ne sont pas presentes
-  // if (strpos($chaine, _JEUX_DEBUT)===false || strpos($chaine, _JEUX_FIN)===false) return false;
-
-  // remplacement des qcm par : <ATTENTE_QCM>ii</ATTENTE_QCM>
-  // list($texteAvant, $suite) = explode(_JEUX_DEBUT, $chaine, 2); 
-  // list($qcm, $texteApres) = explode(_JEUX_FIN, $suite, 2); 
-  $chaine = "$texteAvant<ATTENTE_QCM>$indexQCM</ATTENTE_QCM>$texteApres";
- 
-  // On analyse le QCM
-  qcm_analyse_le_qcm($qcm, $indexQCM, $titreQCM);
-  
-  return true;
 }
 
 function qcm_les_points($phrase, $points) {
@@ -257,22 +238,19 @@ function qcm_inserer_les_qcm(&$chaine, $indexJeux, $gestionPoints) {
   if (ereg('<ATTENTE_QCM>([0-9]+)</ATTENTE_QCM>', $chaine, $eregResult)) {
 	$indexQCM = intval($eregResult[1]);
 	list($texteAvant, $texteApres) = explode($eregResult[0], $chaine, 2); 
-	$chaine = "$texteAvant<!QCM-DEBUT-#$indexQCM>\n"
+	$chaine = $texteAvant.jeux_rem('QCM-DEBUT', $indexQCM)
 		. qcm_affiche_la_question($indexQCM, isset($_POST["var_correction_".$indexJeux]), $gestionPoints)
-		. "<!QCM-FIN-#$indexQCM>\n"
+		. jeux_rem('QCM-FIN', $indexQCM)
 		. qcm_inserer_les_qcm($texteApres, $indexJeux, $gestionPoints); 
   }
   return $chaine;
 }
 
 function jeux_qcm($chaine, $indexJeux) {
-  define(_JEUX_REM_DEBUT, code_echappement('<!-- '));
-  define(_JEUX_REM_FIN, code_echappement(' -->'));
 
   // initialisation  
   global $qcms, $qcm_score;
-  $titreQCM = false; 
-  $indexQCM =  $qcm_score = 0;
+  $indexQCM = $qcm_score = 0;
   $qcms['nbquestions'] = $qcms['totalscore'] = $qcms['totalpropositions'] = 0;
   $tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_QCM.'|'._JEUX_TEXTE.')/', 
 			_JEUX_TEXTE.trim($chaine), -1, PREG_SPLIT_DELIM_CAPTURE);
