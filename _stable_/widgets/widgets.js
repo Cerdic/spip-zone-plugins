@@ -201,6 +201,14 @@ $.fn.activatewidget = function() {
             $(me)
             .cancelwidget();
           }
+          var maxh = this.className.match(/\bmaxheight(\d+)?\b/);
+          if (maxh) {
+            maxh = maxh[1] ? parseInt(maxh[1]) : 200;
+            maxh = this.scrollHeight < maxh ? this.scrollHeight : maxh;
+            if (maxh > this.clientHeight) {
+            	$(this).css('height', maxh + 'px');
+            }
+          }
         })
       .end()
       .find(".widget-submit")
