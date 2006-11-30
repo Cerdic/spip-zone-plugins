@@ -19,7 +19,7 @@ function affichage_grille($tableau_grille, $solution=false){
     $grille='';
     //fin variable de la grille
     
-    (! $solution) ? $grille.="<form class=\"grille\" action=\"".$page."\" method=\"post\">\n" : $grille.="<div class=\"solution\"><h2 class=\"spip\">"._T('motscroises:Solution')." : </h2>" ;	// debut formulaire
+    (! $solution) ? $grille.="<form class=\"grille\" action=\"".$page."\" method=\"post\">\n" : $grille.="<div class=\"solution\"><h2 class=\"spip\">"._T('motscroises:solution')." : </h2>" ;	// debut formulaire
     
     $grille.='<table class="grille" cellspacing="0" border="0" summary="'._T('motscroises:table_summary',Array('hauteur'=>$hauteur,'largeur'=>$largeur))."\">\n
     \t<tr>\n\t\t<td class=\"coin\"></td>\n";	// debut tableau + 1ere celule
@@ -80,22 +80,6 @@ function calcul_tableau_grille($texte){
 	foreach ($tableau as $i=>$v) $tableau[$i] = preg_split('//', trim($v), -1, PREG_SPLIT_NO_EMPTY);
 	return $tableau;
 }
-
-// déchiffre le code source de la grille
-function calcul_tableau_grille_vieille_syntaxe($texte){
-	$texte = trim($texte);
-	$tableau = explode("\r", $texte);	
-	//ligne par ligne
-	$j =0;
-	foreach ($tableau as $i){	
-		$tableau[$j] = explode('|',trim($i));		//une cellule, c'est beau !
-		array_shift($tableau[$j]);
-		array_pop($tableau[$j]);
-		$j++;
-	}
-	return $tableau;
-}
-
 
 // compare les variables Post avec les valeurs de la solution...
 function comparaison_grille($tableau_grille){

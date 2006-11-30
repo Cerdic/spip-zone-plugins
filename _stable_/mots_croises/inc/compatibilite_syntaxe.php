@@ -1,25 +1,41 @@
 <?php
 // on garde tout ca pour compatibilite avec l'ancienne syntaxe
 
-//transforme les listes verticales/horizontale spip en html
+// transforme les listes verticales/horizontale spip en html
 function mots_croises_listes_vieille_syntaxe($texte) {
 	$texte = preg_replace('/ *-#/','<li>',$texte);
 	$texte = implode("</li>\n", preg_split("/\n*\r*\n+\r*\n*/",$texte));
 	return "<ol>$texte</li></ol>"; 
 }
 
+// déchiffre le code source de la grille
+function calcul_tableau_grille_vieille_syntaxe($texte){
+	$texte = trim($texte);
+	$tableau = explode("\r", $texte);	
+	//ligne par ligne
+	$j =0;
+	foreach ($tableau as $i){	
+		$tableau[$j] = explode('|',trim($i));	// une cellule, c'est beau !
+		array_shift($tableau[$j]);
+		array_pop($tableau[$j]);
+		$j++;
+	}
+	return $tableau;
+}
+
+
 //fonction principale
 function mots_croises_vieille_syntaxe($texte) {	
 	if (! preg_match("/<grille>|<\/grille>/",$texte)) return $texte;
 	include_spip('inc/gestion_grille');
-	$tableau = preg_split("/<grille>|<\/grille>/",$texte);	//sera uniquement le tableau spip, mais on attend pour le moment
+	$tableau = preg_split("/<grille>|<\/grille>/",$texte);	// sera uniquement le tableau spip, mais on attend pour le moment
 	$j =0;
 	
 	foreach ($tableau as $i){
-			if ($j!=0 and $j!=count($tableau)-1){	//pas les extremités du tableau
+			if ($j!=0 and $j!=count($tableau)-1){	// pas les extremites du tableau
 				$tableau_php = calcul_tableau_grille_vieille_syntaxe($tableau[$j]);
 			
-				//calcul erreur
+				// calcul erreur
 				if ($GLOBALS["bouton_envoi"] == '') $erreur='';
 				else {
 					list($nbr_erreurs, $nbr_vides) = comparaison_grille($tableau_php); 
@@ -46,7 +62,7 @@ function mots_croises_vieille_syntaxe($texte) {
 	$tableau = preg_split("/<horizontal>|<\/horizontal>/",$texte);
 	$j = 0;
 	foreach ($tableau as $i){
-		if ($j!=0 and $j!=count($tableau)-1)	//pas les extremités du tableau
+		if ($j!=0 and $j!=count($tableau)-1)	// pas les extremites du tableau
 				$tableau[$j] = code_echappement(_GRILLE_.'<div class="spip horizontal"><h4 class="spip grille">'
 					._T('motscroises:horizontalement')."</h4>\n".mots_croises_listes_vieille_syntaxe(trim($i))."</div>"._GRILLE_);
 		$j++;
@@ -57,7 +73,7 @@ function mots_croises_vieille_syntaxe($texte) {
 	$tableau = preg_split("/<vertical>|<\/vertical>/",$texte);
 	$j = 0;
 	foreach ($tableau as $i){
-		if ($j!=0 and $j!=count($tableau)-1)	//pas les extremités du tableau
+		if ($j!=0 and $j!=count($tableau)-1)	// pas les extremites du tableau
 				$tableau[$j] = code_echappement(_GRILLE_.'<div class="spip vertical"><h4 class="spip grille">'
 					._T('motscroises:verticalement')."</h4>\n"
 					.mots_croises_listes_vieille_syntaxe(trim($i))."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>"._GRILLE_); // Bug IE ?
