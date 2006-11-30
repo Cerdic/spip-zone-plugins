@@ -300,7 +300,7 @@ function jeux_qcm($chaine, $indexJeux) {
 
   // reinserer les qcms mis en forme
   $chaine = qcm_inserer_les_qcm($html, $indexJeux, $gestionPoints);
-echo "toto$indexJeux:",$_POST["var_correction_".$indexJeux],"<br>";
+
   $tete = '<div class="spip_qcm"><div class="spip_qcm_titre">'.$titre.'<hr /></div>';
   if (!isset($_POST["var_correction_".$indexJeux])) { 
 	$tete .= "\n".'<form method="post" action="">';
