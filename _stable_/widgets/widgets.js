@@ -229,8 +229,12 @@ $.fn.activatewidget = function() {
       .each(function(){
         // rendre les boutons visibles (cf. plugin jquery/dimensions.js)
         var buttonpos = (this.offsetTop || 0) + $(this).height();
-        var scrolltop = window.pageYOffset || document.documentElement.scrollTop  || document.body.scrollTop || 0;
-        var scrollleft = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
+        var scrolltop = window.pageYOffset ||
+          jQuery.boxModel && document.documentElement.scrollTop  ||
+          document.body.scrollTop || 0;
+        var scrollleft = window.pageXOffset || 
+          jQuery.boxModel && document.documentElement.scrollLeft ||
+          document.body.scrollLeft || 0;
         var h = window.innerHeight;
         if (buttonpos - h + 20 > scrolltop) {
           window.scrollTo(scrollleft, buttonpos - h + 30);
