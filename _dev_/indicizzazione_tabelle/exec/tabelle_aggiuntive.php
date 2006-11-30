@@ -12,7 +12,7 @@
 
 
 include_spip('inc/presentation');
-
+include_spip('inc/actions');
 
 function exec_tabelle_aggiuntive_dist() {
 	
@@ -81,7 +81,6 @@ if($tabelle_db) {
 			if(array_key_exists($tab[0],$tables_auxiliaires)) continue;
 			if(!array_key_exists($tab[0],$tabelle_definite)) {
 				$stato = "nodef";
-				//$tabelle_standard[$tab[0]] = spip_abstract_showtable($tab[0],'',"true");
 			} else
 			if(in_array($tab[0],$INDEX_tables_interdites)) {
 				$stato = "vietata";
@@ -96,21 +95,20 @@ if($tabelle_db) {
 				$stato = "noind";
 			}
 
-		switch($stato) {
-			
+			switch($stato) {
 			case "nodef": 
-				$idx = "<span style='color:red'>tabella non definita in spip</span>";
+				$idx = "<div style='color:red'>tabella non definita in spip</div>";
 				//$azioni ="<a href='#'>definisci</a>";
 				$azioni = "";
 				break;
 			case "vietata":
-				$idx = "<span style='color:red'>tabella esclusa dall'indicizzazione</span>";
+				$idx = "<div style='color:red'>tabella esclusa dall'indicizzazione</div>";
 				$azioni ="";
 				break;
 			case "noind":
-				$idx = "<span style='color:red'>tabella non indicizzata</span>";
+				$idx = "<div style='color:red'>tabella non indicizzata</div>";
 				//if (!array_key_exists($tab[0],$tabelle_standard)) $azioni ="<a href='".generer_url_ecrire("indicizza_tabella","tabella=".rawurlencode($tab[0]))."'>indicizza</a>";
-				$azioni ="<a href='".generer_url_ecrire("indicizza_tabella","tabella=".rawurlencode($tab[0]))."&amp;action=indicizza'>indicizza</a>";
+				$azioni ="<a href='".generer_url_ecrire("indicizza_tabella","tabella=".rawurlencode($tab[0]))."'>indicizza</a>";
 				break;
 			case "nocampiind":
 				$idx = "nessun campo indicizzato";
@@ -119,7 +117,7 @@ if($tabelle_db) {
 			case "ind":
 				$idx = "tabella indicizzata";
 				//if (!array_key_exists($tab[0],$tabelle_standard)) $azioni ="<a href='#'>elimina indice</a>";
-				$azioni ="<a href='".generer_url_ecrire("indicizza_tabella","tabella=".rawurlencode($tab[0]))."&amp;action=non_indicizza'>elimina indice</a>";
+				$azioni ="<a href='".generer_action_auteur("indicizza","-".rawurlencode($tab[0]))."'>elimina indice</a>";
 				break;
 		}
 		
