@@ -32,12 +32,12 @@ function indicizza_tabella($tabella,$mode='') {
 	include_spip("inc/indexation");
 	include_spip("inc/texte");
 
+	$tabella = interdire_scripts($tabella);
 	//Verifiche di congruenza azioni
 	if(!$mode) {
 		if(in_array($tabella,liste_index_tables())) {
 			include_spip('inc/minipres');
 			minipres(_L("La tabella $tabella &egrave; gi&agrave; indicizzata"));
-			die();
 		} else {
 			//recupera descrizione tabella	
 			$descr = $tables_principales[$tabella];
@@ -52,8 +52,6 @@ function indicizza_tabella($tabella,$mode='') {
 			} else {
 				indicizza_tabelle_add_idx_field($tabella);
 				indicizza_tabelle_set_points_fields($tabella,$campi);
-				include_spip('inc/headers'); 
-				redirige_par_entete(generer_url_ecrire("tabelle_aggiuntive"));					
 			}		
 		}
 	} else
@@ -61,12 +59,8 @@ function indicizza_tabella($tabella,$mode='') {
 		if(!in_array($tabella,liste_index_tables())) {
 			include_spip('inc/minipres');
 			minipres(_L("La tabella $tabella non &egrave; indicizzata"));
-			die();
 		} else {
 			indicizza_tabelle_remove_idx_field($tabella);
-			//serve?
-			include_spip('inc/headers'); 
-			redirige_par_entete(generer_url_ecrire("tabelle_aggiuntive"));									
 		}
 	}
 }

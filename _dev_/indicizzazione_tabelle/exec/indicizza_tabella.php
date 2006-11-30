@@ -66,13 +66,12 @@ function exec_indicizza_tabella_dist() {
 	foreach($descr as $campo) {
 		$tabelle[] = array($campo,"<input type='text' name='campo[$campo]' value='5' />");
 	}
-	$tabelle[] = array("test","<input type='text' name='campo[test]' value='5' />");
 	
 	$tabelle = afficher_liste_debut_tableau().afficher_liste(array('60%','40%'),$tabelle).afficher_liste_fin_tableau();
 
 	$tabelle .= "<input type='submit' value='Invia' name='invia' />";
 	
-	echo generer_action_auteur("indicizza",$tabella,'',$tabelle);
+	echo redirige_action_auteur("indicizza",$tabella,'tabelle_aggiuntive','',$tabelle);
 	
 	indicizza_tabelle_fin_page();
 			

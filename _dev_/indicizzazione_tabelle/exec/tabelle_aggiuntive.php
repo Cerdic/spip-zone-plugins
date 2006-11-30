@@ -47,9 +47,9 @@ echo "<li><strong>Nessun campo indicizzato</strong>: la tabella &egrave; indiciz
 echo "<li><strong>Tabella indicizzata</strong>: la tabella &egrave; indicizzata regolarmente</li></ul>";
 
 echo "<h3>Legenda Azioni</h3>";
-echo "<ul style='margin:0;padding:10px;'><li><strong>Definisci</strong>: rende la tabella utilizzabile in un ciclo</li>";
-echo "<ul><li><strong>Indicizza</strong>: Indicizza la tabella</li>";
-echo "<li><strong>Aggiungi campi</strong>: definisce i campi da incidizzare per la tabella</li>";
+//echo "<ul style='margin:0;padding:10px;'><li><strong>Definisci</strong>: rende la tabella utilizzabile in un ciclo</li>";
+echo "<ul style='margin:0;padding:10px;'><li><strong>Indicizza</strong>: Indicizza la tabella</li>";
+echo "<li><strong>Modifica campi</strong>: definisce i campi da incidizzare per la tabella</li>";
 echo "<li><strong>Elimina indice</strong>: Non indicizza la tabella e ne elimina i dati di indicizzazione</li></ul>";
 
 
@@ -117,7 +117,7 @@ if($tabelle_db) {
 			case "ind":
 				$idx = "tabella indicizzata";
 				//if (!array_key_exists($tab[0],$tabelle_standard)) $azioni ="<a href='#'>elimina indice</a>";
-				$azioni ="<a href='".generer_action_auteur("indicizza","-".rawurlencode($tab[0]))."'>elimina indice</a>";
+				$azioni ="<a href='".redirige_action_auteur("indicizza","-".rawurlencode($tab[0]),"tabelle_aggiuntive")."'>elimina indice</a>";
 				break;
 		}
 		
