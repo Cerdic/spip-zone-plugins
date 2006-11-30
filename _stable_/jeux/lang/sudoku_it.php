@@ -4,12 +4,12 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'afficher_solution' 	=>'Visualizza la soluzione (in fondo alla pagina)',
-'verifier' 		=> 'Controlla',
+'afficher_solution' 	=>'Visualizza la soluzione',
+'verifier' 		=> 'Controlla la validità', 
 'solution'		=>'Soluzione',
-'aucune_erreur'		=>'Nessun errore',
-'titre'		=>'Schema di parole crociate',
-'table_summary'		=>'Schema di parole crociate di @largeur@ colonne e @hauteur@ righe',
+'aucune_erreur'		=>'Lo schema è valido', //'Nessun errore'
+'titre'		=>'Schema di sudoku',
+'table_summary'		=>'Schema di sudoku di @largeur@ colonne e @hauteur@ righe',
 'ligne'			=>'riga @n@',
 'colonne'		=>'colonna @n@',
 

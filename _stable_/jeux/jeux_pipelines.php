@@ -1,8 +1,8 @@
 <?php
 
-#------ filtres pas_de_plugin ----------------------#
-#  Filtres : jeux                                   #
-#  Auteurs : Patrice Vanneufville, 2006             #
+#---------------------------------------------------#
+#  Plugin  : jeux                                   #
+#  Auteur  : Patrice Vanneufville, 2006             #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GPL                                    #
 #---------------------------------------------------#
@@ -37,7 +37,7 @@ define(_JEUX_VERTICAL, '#VERTICAL');
 define(_JEUX_SOLUTION, '#SOLUTION');
 define(_JEUX_SUDOKU, '#SUDOKU');
 define(_JEUX_QCM, '#QCM');
-define(_JEUX_HTML, '#HTML'); // à faire !
+define(_JEUX_HTML, '#HTML');
 
 // transforme les listes verticales/horizontale listes html 
 function jeux_listes($texte) {
@@ -47,49 +47,37 @@ function jeux_listes($texte) {
 	return "<ol>$texte</ol>"; 
 }
 
-// cette fonction retourne le texte entre deux balises si elles sont presentes
-// et false dans le cas contraire
-function jeux_recupere_le_titre(&$chaine, $ouvrant, $fermant) {
-  // si les balises ouvrantes et fermantes ne sont pas presentes, c'est mort
-  if (strpos($chaine, $ouvrant)===false || strpos($chaine, $fermant)===false) return false;
-  list($texteAvant, $suite) = explode($ouvrant, $chaine, 2); 
-  list($texte, $texteApres) = explode($fermant, $suite, 2); 
-  // on supprime les balises de l'affichage...
-  // $chaine = $texteAvant.$texteApres;
-  return trim($texte);
-}
-
-//fonction principale
-function jeux($chaine){ 
+// fonction principale
+function jeux($chaine, $indexJeux){ 
 	if (strpos($chaine, _JEUX_DEBUT)===false || strpos($chaine, _JEUX_FIN)===false) return $chaine;
 
-	// isoler les jeux...
+	// isoler le jeu...
 	list($texteAvant, $suite) = explode(_JEUX_DEBUT, $chaine, 2); 
 	list($texte, $texteApres) = explode(_JEUX_FIN, $suite, 2); 
 	
-	// ...et decoder le texte obtenu !
-	if (strpos($texte, _JEUX_HORIZONTAL)!=false || strpos($texte, _JEUX_FIN)!=false) {
+	// ...et decoder le texte obtenu en fonction des signatures
+	if (strpos($texte, _JEUX_HORIZONTAL)!==false || strpos($texte, _JEUX_FIN)!==false) {
 		include_spip('inc/mots_croises');
-		$texte = jeux_mots_croises($texte);
+		$texte = jeux_mots_croises($texte, $indexJeux);
 	}
-	if (strpos($texte, _JEUX_QCM)!=false) {
+	if (strpos($texte, _JEUX_QCM)!==false) {
 		include_spip('inc/qcm');
-		$texte = jeux_qcm($texte);
+		$texte = jeux_qcm($texte, $indexJeux);
 	}
-	if (strpos($texte, _JEUX_SUDOKU)!=false) {
+	if (strpos($texte, _JEUX_SUDOKU)!==false) {
 		include_spip('inc/sudoku');
-		$texte = jeux_sudoku($texte);
+		$texte = jeux_sudoku($texte, $indexJeux);
 	}
 
-	return $texteAvant.code_echappement('<!-- PLUGIN-DEBUT -->').$texte
-		.code_echappement('<!-- PLUGIN-FIN -->').$texteApres;
+	return $texteAvant.code_echappement("<!-- PLUGIN-DEBUT-$indexJeux -->").$texte
+		.code_echappement("<!-- PLUGIN-FIN-$indexJeux -->").jeux($texteApres, ++$indexJeux);
 }
 
 // a la place de jeux, pour le deboguage...
-function jeux2($chaine){
- if (strpos($chaine, _JEUX_DEBUT)!==false || strpos($chaine, '<horizontal>')!==false) {
+function jeux2($chaine, $indexJeux){
+ if (strpos($chaine, _JEUX_DEBUT)!==false && strpos($chaine, _JEUX_FIN)!==false) {
 	ob_start();
-	$chaine = jeux($chaine);
+	$chaine = jeux($chaine, $indexJeux);
 	$data = ob_get_contents();
 	ob_end_clean();
 	$chaine = nl2br(str_replace("\t",'&nbsp;&nbsp;&nbsp;&nbsp;',$data)).$chaine;
@@ -98,7 +86,7 @@ function jeux2($chaine){
 }
 
 function jeux_pre_propre($texte) { 
-	return jeux($texte);
+	return jeux($texte, 1);
 }
 
 function jeux_stylesheet_public($b) {

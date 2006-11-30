@@ -1,13 +1,22 @@
 <?php
+#---------------------------------------------------#
+#  Plugin  : jeux                                   #
+#  Auteur  : Patrice Vanneufville, 2006             #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
+#  Licence : GPL                                    #
+#---------------------------------------------------#
 /*
-insere une grille de mots croises dans vos articles !
------------------------------------------------------
 
-balises : <jeux></jeux>
+ Insere une grille de mots croises dans vos articles !
+------------------------------------------------------
+ Idee originale de Maieul ROUQUETTE
+------------------------------------------------------
+
+balises du plugin : <jeux></jeux>
 separateurs obligatoires : #HORIZONTAL, #VERTICAL, #SOLUTION
 separateurs optionnels   : #TITRE, #HTML
 
-Esemble de syntaxe dans l'article :
+Exemple de syntaxe dans l'article :
 -----------------------------------
 
 <jeux>
@@ -36,7 +45,7 @@ function lettre_grille($texte) {
 }
 
 //affiche la grille de mot croises, avec la solution au cas ou
-function affichage_grille($tableau_grille, $solution=false){
+function affichage_grille_mc($tableau_grille, $indexJeux, $solution=false){
 	
 	// les variables de la grille
 	$hauteur = sizeof($tableau_grille);
@@ -52,13 +61,13 @@ function affichage_grille($tableau_grille, $solution=false){
 	
 	
 	//les cellules d'entetes verticales
-	for($i = 1; $i<=$largeur; $i++) $grille .= "\t\t<th scope=\"GR\">$i</th>\n";
+	for($i = 1; $i<=$largeur; $i++) $grille .= "\t\t<th scope=\"col\">$i</th>\n";
 	$grille .= "\t</tr>\n";		
 	
 	//debut affichage des lignes
 	foreach($tableau_grille as $ligne =>$contenu_ligne){
 		$ligne++;
-		$grille .= "\t<tr>\n\t<th scope=\"row\">".lettre_grille($ligne)."</th>\n";	//numeros de ligne
+		$grille .= "\t<tr>\n\t<th scope=\"row\">".lettre_grille($ligne)."</th>\n";	// numeros de ligne
 		
 		foreach ($contenu_ligne as $colonne =>$cellule){
 		    $colonne++;
@@ -68,24 +77,20 @@ function affichage_grille($tableau_grille, $solution=false){
 				else if ($solution)
 					$grille .= "\t\t<td>$cellule</td>\n" ;
 				else {
-					$grille .= "\t\t<td>"
-						.'<label for="GR'.$colonne.'x'.$ligne.'">'
-						._T('motscroises:ligne',Array('n'=>lettre_grille($ligne))).';'
-						._T('motscroises:colonne',Array('n'=>$colonne)).'</label>';
-						
-					// test l'existence de la variable global correpsonte à cette cellule	
-					if (isset($GLOBALS['GR'.$colonne.'x'.$ligne]) and $GLOBALS['GR'.$colonne.'x'.$ligne]!='') 
-						$grille.='<input type="text" maxlength="1" value="'.$GLOBALS['GR'.$colonne.'x'.$ligne].'" name="GR'.$colonne.'x'.$ligne.'" id="GR'.$colonne.'x'.$ligne."\" />";
-					else
-						$grille.='<input type="text" maxlength="1"  name="GR'.$colonne.'x'.$ligne.'" id="GR'.$colonne.'x'.$ligne."\" />";                        
-					
-					$grille .= "</td>\n" ;		//cloture de la cellule
+					$name = 'GR'.$indexJeux.'x'.$colonne.'x'.$ligne;
+					$grille .= "\t\t<td><label for=\"".$name.'">'
+						. _T('motscroises:ligne',Array('n'=>lettre_grille($ligne))).';'
+						. _T('motscroises:colonne',Array('n'=>$colonne)).'</label>'
+						. '<input type="text" maxlength="1" '
+						. ((isset($GLOBALS[$name]) and $GLOBALS[$name]!='')? 'value="'.$GLOBALS[$name]:'')
+						.'" name="'.$name.'" id="'.$name.'" />'
+						. "</td>\n" ;
 				}
 		} // foreach
                                                     
         $grille = $grille."\t</tr>\n";}		
 	
-	//fin affichage des lignes
+	// fin affichage des lignes
 	
 	$grille.="</table>\n";
 	
@@ -102,24 +107,8 @@ function calcul_tableau_grille($texte){
 	return $tableau;
 }
 
-// déchiffre le code source de la grille
-function calcul_tableau_grille_vieille_syntaxe($texte){
-	$texte = trim($texte);
-	$tableau = explode("\r", $texte);	
-	//ligne par ligne
-	$j =0;
-	foreach ($tableau as $i){	
-		$tableau[$j] = explode('|',trim($i));		//une cellule, c'est beau !
-		array_shift($tableau[$j]);
-		array_pop($tableau[$j]);
-		$j++;
-	}
-	return $tableau;
-}
-
-
 // compare les variables Post avec les valeurs de la solution...
-function comparaison_grille($tableau_grille){
+function comparaison_grille($tableau_grille, $indexJeux){
     $erreurs=0; $vides=0;
     foreach($tableau_grille as $ligne =>$contenu_ligne){
         $ligne++;
@@ -128,8 +117,9 @@ function comparaison_grille($tableau_grille){
 			
             //compare les valeurs du tableau PHP avec les variables POST
 			if ($cellule!='*') {
-	            if (trim($GLOBALS["GR".$colonne."x".$ligne])=='') $vides++;
-    	        elseif (strtoupper($GLOBALS["GR".$colonne."x".$ligne])!=strtoupper($cellule)) $erreurs++;
+				$input = trim($GLOBALS['GR'.$indexJeux.'x'.$colonne.'x'.$ligne]);
+	            if ($input=='') $vides++;
+    	         elseif (strtoupper($input)!=strtoupper($cellule)) $erreurs++;
 			}	
 		}
 	}
@@ -137,10 +127,10 @@ function comparaison_grille($tableau_grille){
 }
 
 // renvoie le nombre d'erreurs de de cases vides
-function calcul_erreurs_grille($solution) {
+function calcul_erreurs_grille($solution, $indexJeux) {
 	if ($GLOBALS["bouton_envoi"] == '') return '';
 	else {
-	  list($nbr_erreurs, $nbr_vides) = comparaison_grille($solution); 
+	  list($nbr_erreurs, $nbr_vides) = comparaison_grille($solution, $indexJeux); 
 	  return '<strong class="erreur">'
 		. (($nbr_erreurs==0)?_T('motscroises:aucune_erreur'):(
 		 ($nbr_erreurs==1)?_T('motscroises:une_erreur'):_T("motscroises:nombre_erreurs", Array('err'=>$nbr_erreurs))
@@ -153,10 +143,12 @@ function calcul_erreurs_grille($solution) {
 }
 
 // decode une grille de mots croises 
-function jeux_mots_croises($texte) {
+function jeux_mots_croises($texte, $indexJeux) {
 	$tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_HORIZONTAL.'|'._JEUX_VERTICAL.'|'._JEUX_SOLUTION.'|'._JEUX_HTML.')/', 
 			trim(_JEUX_HTML.$texte), -1, PREG_SPLIT_DELIM_CAPTURE);
-	$titre = $horizontal = $vertical = $solution = $html = false;
+	$horizontal = $vertical = $solution = $html = false;
+	$titre = _T('motscroises:titre');
+	
 	foreach($tableau as $i => $v){
   	 $v = trim($v);
 	 if ($v==_JEUX_TITRE) $titre = trim($tableau[$i+1]);
@@ -166,17 +158,14 @@ function jeux_mots_croises($texte) {
 	  elseif ($v==_JEUX_HTML) $html .= trim($tableau[$i+1]);
 	}
 
-	// un titre, coute que coute...
-	if (!$titre) $titre = _T('motscroises:titre');
-	
-	return calcul_erreurs_grille($solution)
-			. affichage_grille($solution)
+	return calcul_erreurs_grille($solution, $indexJeux)
+			. affichage_grille_mc($solution, $indexJeux)
 	// definitions	
 			. '<div class="spip horizontal"><h4 class="spip grille">'
 					._T('motscroises:horizontalement')."</h4>\n".$horizontal.'</div>'
 			. '<div class="spip vertical"><h4 class="spip grille">'
 					._T('motscroises:verticalement')."</h4>\n".$vertical.'</div>'
 	// solution
-			. (($GLOBALS["solution"][0] == 1)? affichage_grille($solution, true) : '');
+			. (($GLOBALS["solution"][0] == 1)? affichage_grille_mc($solution, $indexJeux, true) : '');
 }
 ?>

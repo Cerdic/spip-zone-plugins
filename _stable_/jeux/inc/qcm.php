@@ -1,13 +1,22 @@
 <?php
+#---------------------------------------------------#
+#  Plugin  : jeux                                   #
+#  Auteur  : Patrice Vanneufville, 2006             #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
+#  Licence : GPL                                    #
+#---------------------------------------------------#
 /*
-insere un QCM dans vos articles !
----------------------------------
 
-balises : <jeux></jeux>
+ Insere un QCM dans vos articles !
+---------------------------------------
+ Idee originale de Mathieu GIANNECCHINI
+---------------------------------------
+
+balises du plugin : <jeux></jeux>
 separateurs obligatoires : #TITRE, #QCM
 separateurs optionnels   : #HTML
 
-Ensemble de syntaxe dans l'article :
+Exemple de syntaxe dans l'article :
 ------------------------------------
 
 <jeux>
@@ -74,8 +83,6 @@ Ensemble de syntaxe dans l'article :
   
 */
  
- define(_QCM_TITRE_DEBUT, '<qcm-titre>');
- define(_QCM_TITRE_FIN, '</qcm-titre>');
  
 // cette fonction remplit le tableau $qcms sur la question $indexQCM
 function qcm_analyse_le_qcm($qcm, $indexQCM) {
@@ -245,20 +252,20 @@ function qcm_affiche_la_question($indexQCM, $corrigee, $gestionPoints) {
   return $codeHTML;
 }
 
-function qcm_inserer_les_qcm(&$chaine, $gestionPoints) {
+function qcm_inserer_les_qcm(&$chaine, $indexJeux, $gestionPoints) {
   global $qcms;
   if (ereg('<ATTENTE_QCM>([0-9]+)</ATTENTE_QCM>', $chaine, $eregResult)) {
 	$indexQCM = intval($eregResult[1]);
 	list($texteAvant, $texteApres) = explode($eregResult[0], $chaine, 2); 
 	$chaine = "$texteAvant<!QCM-DEBUT-#$indexQCM>\n"
-		. qcm_affiche_la_question($indexQCM, isset($_POST["var_correction"]), $gestionPoints)
+		. qcm_affiche_la_question($indexQCM, isset($_POST["var_correction_".$indexJeux]), $gestionPoints)
 		. "<!QCM-FIN-#$indexQCM>\n"
-		. qcm_inserer_les_qcm($texteApres, $gestionPoints); 
+		. qcm_inserer_les_qcm($texteApres, $indexJeux, $gestionPoints); 
   }
   return $chaine;
 }
 
-function jeux_qcm($chaine) {
+function jeux_qcm($chaine, $indexJeux) {
   define(_JEUX_REM_DEBUT, code_echappement('<!-- '));
   define(_JEUX_REM_FIN, code_echappement(' -->'));
 
@@ -269,7 +276,8 @@ function jeux_qcm($chaine) {
   $qcms['nbquestions'] = $qcms['totalscore'] = $qcms['totalpropositions'] = 0;
   $tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_QCM.'|'._JEUX_HTML.')/', 
 			_JEUX_HTML.trim($chaine), -1, PREG_SPLIT_DELIM_CAPTURE);
-  $titre = $horizontal = $vertical = $solution = $html = false;
+  $horizontal = $vertical = $solution = $html = false;
+  $titre = _T('qcm:qcm_titre');
 
   // parcourir toutes les #BALISES
   foreach($tableau as $i => $v){
@@ -290,19 +298,14 @@ function jeux_qcm($chaine) {
   // est-ce certaines questions ne valent pas 1 point ?
   $gestionPoints = $qcms['totalscore']<>$qcms['nbquestions'];
 
-  // trouver un titre, coute que coute...
-//  if (!$titre) $titre = qcm_recupere_le_titre($chaine, _QCM_TITRE_DEBUT, _QCM_TITRE_FIN);
-//  if (!$titre) $titre = qcm_recupere_le_titre($chaine, '<intro>', '</intro>');
-  if (!$titre) $titre = _T('qcm:qcm_titre');
-  
   // reinserer les qcms mis en forme
-  $chaine = qcm_inserer_les_qcm($html, $gestionPoints);
-
+  $chaine = qcm_inserer_les_qcm($html, $indexJeux, $gestionPoints);
+echo "toto$indexJeux:",$_POST["var_correction_".$indexJeux],"<br>";
   $tete = '<div class="spip_qcm"><div class="spip_qcm_titre">'.$titre.'<hr /></div>';
-  if (!isset($_POST["var_correction"])) { 
-	$tete .= '<form method="post" action="">';
+  if (!isset($_POST["var_correction_".$indexJeux])) { 
+	$tete .= "\n".'<form method="post" action="">';
 	$pied = '<br>
-	<input type="hidden" name="var_correction" value="yes">
+	<input type="hidden" name="var_correction_'.$indexJeux.'" value="yes">
 	<div align="center"><input type="submit" value="'._T('qcm:qcm_corriger').'" class="spip_qcm_bouton_corriger"></div>
 	</form>';
   } else {
@@ -317,17 +320,5 @@ function jeux_qcm($chaine) {
   unset($qcms); unset($qcm_score);
   return $tete.$html.$pied;
 }
-
-function jeux_qcm2($chaine){
- if (ereg(_QCM_DEBUT, $chaine)) {
-	ob_start();
-	$chaine = qcm($chaine);
-	$data = ob_get_contents();
-	ob_end_clean();
-	$chaine = nl2br(str_replace("\t",'&nbsp;&nbsp;&nbsp;&nbsp;',$data)).$chaine;
- }
- return $chaine;
-}
-
 
 ?>

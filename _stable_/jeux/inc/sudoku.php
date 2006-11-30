@@ -1,13 +1,20 @@
 <?php
+#---------------------------------------------------#
+#  Plugin  : jeux                                   #
+#  Auteur  : Patrice Vanneufville, 2006             #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
+#  Licence : GPL                                    #
+#---------------------------------------------------#
 /*
-insere une grille de mots croises dans vos articles !
+
+Insere une grille de mots croises dans vos articles !
 -----------------------------------------------------
 
-balises : <jeux></jeux>
+balises du plugin : <jeux></jeux>
 separateurs obligatoires : #HORIZONTAL, #VERTICAL, #SOLUTION
 separateurs optionnels   : #TITRE, #HTML
 
-Esemble de syntaxe dans l'article :
+Exemple de syntaxe dans l'article :
 -----------------------------------
 
 <jeux>
@@ -36,7 +43,7 @@ Esemble de syntaxe dans l'article :
 
 */
 //affiche la grille de sudoku, en format solution au cas ou
-function affichage_sudoku($tableau_sudoku, $solution=false){
+function affichage_sudoku($tableau_sudoku, $indexJeux, $solution=false){
 	
 	// les variables de la grille
 	$hauteur =sizeof($tableau_sudoku);
@@ -49,41 +56,37 @@ function affichage_sudoku($tableau_sudoku, $solution=false){
     $grille .= '<table class="grille" cellspacing="0" border="0" summary="'
 		. _T('sudoku:table_summary',Array('hauteur'=>$hauteur,'largeur'=>$largeur)) . "\">\n";
     
-	//debut affichage des lignes
+	// debut affichage des lignes
 	foreach($tableau_sudoku as $ligne => $contenu_ligne){
 		$ligne++;
 		$grille .= "\t<tr>\n\t";
 		
 		foreach ($contenu_ligne as $colonne =>$cellule){
 		    $colonne++;
-		    //s'il s'agit pas d'un espace
+		    // s'il s'agit pas d'un espace
 		    if ($cellule != "-") 
 		    	$grille .= "\t\t<td><strong>$cellule</strong></td>\n";
 				else if ($solution)
 					$grille .= "\t\t<td>$cellule</td>\n" ;
 				else {
-					$grille .= "\t\t<td>"
-						.'<label for="GR'.$colonne.'x'.$ligne.'">'
+					$name = 'GR'.$indexJeux.'x'.$colonne.'x'.$ligne;
+					$grille .= "\t\t<td><label for=\"".$name.'">'
 						._T('sudoku:ligne',Array('n'=>$ligne)).';'
-						._T('sudoku:colonne',Array('n'=>$colonne)).'</label>';
-						
-					// test l'existence de la variable global correpsonte à cette cellule	
-					if (isset($GLOBALS['GR'.$colonne.'x'.$ligne]) and $GLOBALS['GR'.$colonne.'x'.$ligne]!='') 
-						$grille.='<input type="text" maxlength="1" value="'.$GLOBALS['GR'.$colonne.'x'.$ligne].'" name="GR'.$colonne.'x'.$ligne.'" id="GR'.$colonne.'x'.$ligne."\" />";
-					else
-						$grille.='<input type="text" maxlength="1"  name="GR'.$colonne.'x'.$ligne.'" id="GR'.$colonne.'x'.$ligne."\" />";                        
-					
-					$grille .= "</td>\n" ;		//cloture de la cellule
+						._T('sudoku:colonne',Array('n'=>$colonne)).'</label>'
+						. '<input type="text" maxlength="1" '
+						. ((isset($GLOBALS[$name]) and $GLOBALS[$name]!='')? 'value="'.$GLOBALS[$name]:'')
+						.'" name="'.$name.'" id="'.$name.'" />'
+						. "</td>\n" ;
 				}
 		} // foreach
                                                     
         $grille = $grille."\t</tr>\n";}		
 	
-	//fin affichage des lignes
+	// fin affichage des lignes
 	
 	$grille.="</table>\n";
 	
-	(!$solution) ? $grille.="<br /><input id=\"solution\" name=\"solution[]\" type=\"checkbox\"value=\"1\" /><label for=\"solution\" >"._T('sudoku:afficher_solution')."</label><br />\n
+	(!$solution) ? $grille .= "<br /><input id=\"affiche_solution_$indexJeux\" name=\"affiche_solution_{$indexJeux}[]\" type=\"checkbox\"value=\"1\" /><label for=\"affiche_solution_$indexJeux\" >"._T('sudoku:afficher_solution')."</label><br />\n
 <input type=\"submit\" value=\""._T('sudoku:verifier')."\" name=\"bouton_envoi\" /></form>\n" : $grille.="</div>";
 
 	return $grille;
@@ -97,16 +100,16 @@ function calcul_tableau_sudoku($texte){
 }
 
 // compare les variables Post avec les valeurs de la solution...
-function comparaison_sudoku($tableau_sudoku){
+function comparaison_sudoku($tableau_sudoku, $indexJeux){
     $erreurs=0; $vides=0;
-    foreach($tableau_sudoku as $ligne =>$contenu_ligne){
+    foreach($tableau_sudoku as $ligne => $contenu_ligne){
         $ligne++;
-        foreach ($contenu_ligne as $colonne =>$cellule){
+        foreach ($contenu_ligne as $colonne => $cellule){
             $colonne++;
 			
-            //compare les valeurs du tableau PHP avec les variables POST
-			if ($cellule!='*') {
-				$input = trim($GLOBALS["GR".$colonne."x".$ligne]);
+            // compare les valeurs du tableau PHP avec les variables POST
+			if ($cellule!='*') { 
+				echo $input = trim($GLOBALS['GR'.$indexJeux.'x'.$colonne.'x'.$ligne]);
 	            if ($input=='') $vides++;
     	         elseif (strtoupper($input)!=strtoupper($cellule)) $erreurs++;
 			}	
@@ -116,10 +119,10 @@ function comparaison_sudoku($tableau_sudoku){
 }
 
 // renvoie le nombre d'erreurs de de cases vides
-function calcul_erreurs_sudoku($solution) {
+function calcul_erreurs_sudoku($solution, $indexJeux) {
 	if ($GLOBALS["bouton_envoi"] == '') return '';
 	else {
-	  list($nbr_erreurs, $nbr_vides) = comparaison_sudoku($solution); 
+	  list($nbr_erreurs, $nbr_vides) = comparaison_sudoku($solution, $indexJeux); 
 	  return '<strong class="erreur">'
 		. (($nbr_erreurs==0)?_T('sudoku:aucune_erreur'):(
 		 ($nbr_erreurs==1)?_T('sudoku:une_erreur'):_T("sudoku:nombre_erreurs", Array('err'=>$nbr_erreurs))
@@ -132,26 +135,23 @@ function calcul_erreurs_sudoku($solution) {
 }
 
 // decode une grille de sudoku 
-function jeux_sudoku($texte) { 
+function jeux_sudoku($texte, $indexJeux) { 
 	$tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_SUDOKU.'|'._JEUX_SOLUTION.'|'._JEUX_HTML.')/', 
 			trim(_JEUX_HTML.$texte), -1, PREG_SPLIT_DELIM_CAPTURE);
-	$titre = $sudoku = $solution = $html = false;
+	$sudoku = $solution = $html = false;
+	$titre = _T('sudoku:titre');
+
 	foreach($tableau as $i => $v){
 	 $v = trim($v);
-//  	 echo "$i. ", trim($v), '<br>';
 	 if ($v==_JEUX_TITRE) $titre = trim($tableau[$i+1]);
 	  elseif ($v==_JEUX_SUDOKU) $sudoku = calcul_tableau_sudoku($tableau[$i+1]);
-	  elseif ($v==_JEUX_SOLUTION)$solution = calcul_tableau_sudoku($tableau[$i+1]);
+	  elseif ($v==_JEUX_SOLUTION) $solution = calcul_tableau_sudoku($tableau[$i+1]);
 	  elseif ($v==_JEUX_HTML) $html .= trim($tableau[$i+1]);
 	}
-// print_r($tableau);
-	// trouver un titre, coute que coute...
-//	if (!$titre) $titre = jeux_recupere_le_titre($chaine, '<intro>', '</intro>');
-	if (!$titre) $titre = _T('sudoku:titre');
 	
-	return calcul_erreurs_sudoku($solution)
-			. affichage_sudoku($sudoku)
+	return calcul_erreurs_sudoku($solution, $indexJeux)
+			. affichage_sudoku($sudoku, $indexJeux)
 	// solution
-			. (($GLOBALS["solution"][0] == 1)? affichage_sudoku($solution, true) : '');
+			. (($GLOBALS["affiche_solution_".$indexJeux][0] == 1)? affichage_sudoku($solution, $indexJeux, true) : '');
 }
 ?>

@@ -34,9 +34,9 @@ function changeDeDirection(e) {
 
 function clavierPourJeux(e) {
 	//var key = e.keyCode ? e.keyCode : (e.which ? e.which: 0);
-	var m = this.name.match(/GR(\d+)x(\d+)/);
-	var x=m[1];
-	var y=m[2];
+	var m = this.name.match(/GR(\d+)x(\d+)x(\d+)/);
+	var x=m[2];
+	var y=m[3];
 	var retour = true;
 	
 	switch(e.keyCode) {
@@ -56,7 +56,7 @@ function clavierPourJeux(e) {
 			}
 	}
 
-	var newcell = '#GR'+String(x)+'x'+String(y);
+	var newcell = '#GR'+m[1]+'x'+String(x)+'x'+String(y);
 	$(newcell).each(function(){ this.focus(); });
 	
 	return retour;
