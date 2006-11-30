@@ -109,7 +109,7 @@ function comparaison_sudoku($tableau_sudoku, $indexJeux){
 			
             // compare les valeurs du tableau PHP avec les variables POST
 			if ($cellule!='*') { 
-				echo $input = trim($GLOBALS['GR'.$indexJeux.'x'.$colonne.'x'.$ligne]);
+				$input = trim($GLOBALS['GR'.$indexJeux.'x'.$colonne.'x'.$ligne]);
 	            if ($input=='') $vides++;
     	         elseif (strtoupper($input)!=strtoupper($cellule)) $erreurs++;
 			}	
