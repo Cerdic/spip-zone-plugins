@@ -1,9 +1,33 @@
-#DEVINETTE
-Comment appelle t-on un patron de la nouvelle économie ?
-#SOLUTION
-Un e-responsable
+<?php
 
-#DEVINETTE
-Quel est le point commun entre un contrôleur des impôts et un spermatozoïde ?
-#SOLUTION
-Tous les 2 ont 1 chance sur 3 millions de devenir un jour un être humain.
+# le code de ce fichier php reste encore à ecrire...
+
+#---------------------------------------------------#
+#  Plugin  : jeux                                   #
+#  Auteur  : Patrice Vanneufville, 2006             #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
+#  Licence : GPL                                    #
+#---------------------------------------------------#
+/*
+
+Insere un rebus dans vos articles !
+-----------------------------------------------------
+
+balises du plugin : <jeux></jeux>
+separateurs obligatoires : #DEVINETTE, #REPONSE
+separateurs optionnels   : #TITRE, #TEXTE
+
+Exemple de syntaxe dans l'article :
+-----------------------------------
+
+<jeux>
+	#DEVINETTE
+	Comment appelle t-on un patron de la nouvelle économie ?
+	#REPONSE
+	Un e-responsable
+	
+	#DEVINETTE
+	Quel est le point commun entre un contrôleur des impôts et un spermatozoïde ?
+	#REPONSE
+	Tous les 2 ont 1 chance sur 3 millions de devenir un jour un être humain.
+</jeux>

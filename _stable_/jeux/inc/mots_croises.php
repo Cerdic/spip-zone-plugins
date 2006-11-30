@@ -14,7 +14,7 @@
 
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : #HORIZONTAL, #VERTICAL, #SOLUTION
-separateurs optionnels   : #TITRE, #HTML
+separateurs optionnels   : #TITRE, #TEXTE
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
@@ -144,8 +144,8 @@ function calcul_erreurs_grille($solution, $indexJeux) {
 
 // decode une grille de mots croises 
 function jeux_mots_croises($texte, $indexJeux) {
-	$tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_HORIZONTAL.'|'._JEUX_VERTICAL.'|'._JEUX_SOLUTION.'|'._JEUX_HTML.')/', 
-			trim(_JEUX_HTML.$texte), -1, PREG_SPLIT_DELIM_CAPTURE);
+	$tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_HORIZONTAL.'|'._JEUX_VERTICAL.'|'._JEUX_SOLUTION.'|'._JEUX_TEXTE.')/', 
+			trim(_JEUX_TEXTE.$texte), -1, PREG_SPLIT_DELIM_CAPTURE);
 	$horizontal = $vertical = $solution = $html = false;
 	$titre = _T('motscroises:titre');
 	
@@ -155,7 +155,7 @@ function jeux_mots_croises($texte, $indexJeux) {
 	  elseif ($v==_JEUX_HORIZONTAL) $horizontal = jeux_listes($tableau[$i+1]);
 	  elseif ($v==_JEUX_VERTICAL) $vertical = jeux_listes($tableau[$i+1]);
 	  elseif ($v==_JEUX_SOLUTION) $solution = calcul_tableau_grille($tableau[$i+1]);
-	  elseif ($v==_JEUX_HTML) $html .= trim($tableau[$i+1]);
+	  elseif ($v==_JEUX_TEXTE) $html .= trim($tableau[$i+1]);
 	}
 
 	return calcul_erreurs_grille($solution, $indexJeux)

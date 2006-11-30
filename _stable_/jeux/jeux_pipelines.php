@@ -37,7 +37,7 @@ define(_JEUX_VERTICAL, '#VERTICAL');
 define(_JEUX_SOLUTION, '#SOLUTION');
 define(_JEUX_SUDOKU, '#SUDOKU');
 define(_JEUX_QCM, '#QCM');
-define(_JEUX_HTML, '#HTML');
+define(_JEUX_TEXTE, '#TEXTE');
 
 // transforme les listes verticales/horizontale listes html 
 function jeux_listes($texte) {

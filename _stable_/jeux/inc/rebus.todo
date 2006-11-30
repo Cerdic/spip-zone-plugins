@@ -1,4 +1,37 @@
-#REBUS
-A.1.2.C.4.
-#SOLUTION
-à un de ces quatre !
+<?php
+
+# le code de ce fichier php reste encore à ecrire...
+
+#---------------------------------------------------#
+#  Plugin  : jeux                                   #
+#  Auteur  : Patrice Vanneufville, 2006             #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
+#  Licence : GPL                                    #
+#---------------------------------------------------#
+/*
+
+Insere un rebus dans vos articles !
+-----------------------------------------------------
+
+balises du plugin : <jeux></jeux>
+separateurs obligatoires : #REBUS, #SOLUTION
+separateurs optionnels   : #TITRE, #TEXTE
+
+Exemple de syntaxe dans l'article :
+-----------------------------------
+
+<jeux>
+	#REBUS
+	A.1.2.C.4.
+	#SOLUTION
+	à un de ces quatre !
+
+	#REBUS
+	<img4>
+	#SOLUTION
+	devinez !
+</jeux>
+
+*/
+
+?>

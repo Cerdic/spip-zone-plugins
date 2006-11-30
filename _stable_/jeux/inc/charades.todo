@@ -1,46 +1,73 @@
-chouette article :
-http://banska.alliance.free.fr/CHARADE.HTM
+<?php
 
-#TITRE
-Charade 1
-#CHARADE
-Mon premier est le mâle de la poule,
-On utilise mon deuxième pour couper le bois,
-Mon troisième est la quatorzième lettre de l’alphabet,
-Mon quatrième aide les oiseaux à voler,
-Et mon tout est un insecte souvent appelé « la bête à Bon Dieu ».
-#REPONSE
-Cocq - Scie - N - Aile (La coccinelle)
+# chouette article :
+# http://banska.alliance.free.fr/CHARADE.HTM
 
-#TITRE
-Charade 2
-#CHARADE
-Mon premier est un oiseau bavard,
-Mon deuxième est un rongeur,
-Mon troisième fait grossir,
-Mon quatrième est un nombre pair,
-Et mon tout est un monument d'Egypte.
-#REPONSE
-Pie - Rat - Mie - Deux (Pyramide)
+# le code de ce fichier php reste encore à ecrire...
 
-#CHARADE
-Mon premier est un métal précieux,
-Mon dernier se trouve dans les cieux,
-Et mon entier est un fruit délicieux.
-#REPONSE
-Or - Ange (Orange)
+#---------------------------------------------------#
+#  Plugin  : jeux                                   #
+#  Auteur  : Patrice Vanneufville, 2006             #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
+#  Licence : GPL                                    #
+#---------------------------------------------------#
+/*
 
-#CHARADE
-L'amateur de la musique, connaît fort bien mon premier,
-L'amateur de botanique, connaît fort bien mon dernier,
-Et tout bon lévrier se pique de prendre au mieux mon entier.
-#REPONSE
-La - Pin (Lapin)
+Insere une charade dans vos articles !
+--------------------------------------
 
-#CHARADE
-Mon premier est un époux,
-Mon deuxième parle de nous,
-Mon troisième est propre,
-Et mon tout gesticule.
-#REPONSE
-Mari - On - Net (Marionnette)
+balises du plugin : <jeux></jeux>
+separateurs obligatoires : #CHARADE, #REPONSE
+separateurs optionnels   : #TITRE, #TEXTE
+
+Exemple de syntaxe dans l'article :
+-----------------------------------
+
+<jeux>
+	#TITRE
+	Charade 1
+	#CHARADE
+	Mon premier est le mâle de la poule,
+	On utilise mon deuxième pour couper le bois,
+	Mon troisième est la quatorzième lettre de l’alphabet,
+	Mon quatrième aide les oiseaux à voler,
+	Et mon tout est un insecte souvent appelé « la bête à Bon Dieu ».
+	#REPONSE
+	Cocq - Scie - N - Aile (La coccinelle)
+	
+	#TITRE
+	Charade 2
+	#CHARADE
+	Mon premier est un oiseau bavard,
+	Mon deuxième est un rongeur,
+	Mon troisième fait grossir,
+	Mon quatrième est un nombre pair,
+	Et mon tout est un monument d'Egypte.
+	#REPONSE
+	Pie - Rat - Mie - Deux (Pyramide)
+	
+	#CHARADE
+	Mon premier est un métal précieux,
+	Mon dernier se trouve dans les cieux,
+	Et mon entier est un fruit délicieux.
+	#REPONSE
+	Or - Ange (Orange)
+	
+	#CHARADE
+	L'amateur de la musique, connaît fort bien mon premier,
+	L'amateur de botanique, connaît fort bien mon dernier,
+	Et tout bon lévrier se pique de prendre au mieux mon entier.
+	#REPONSE
+	La - Pin (Lapin)
+	
+	#CHARADE
+	Mon premier est un époux,
+	Mon deuxième parle de nous,
+	Mon troisième est propre,
+	Et mon tout gesticule.
+	#REPONSE
+	Mari - On - Net (Marionnette)
+</jeux>
+*/
+
+?>

@@ -1,0 +1,70 @@
+<?php
+
+# il s'agit ici d'améliorer la balise <poesie> de spip.
+# à voir : ajouter des lettrines
+#          inserer le texte dans un cadre sympa
+#          possibilité d'inérer une image...
+
+# le code de ce fichier php reste encore à ecrire...
+
+#---------------------------------------------------#
+#  Plugin  : jeux                                   #
+#  Auteur  : Patrice Vanneufville, 2006             #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
+#  Licence : GPL                                    #
+#---------------------------------------------------#
+/*
+
+Insere un texte mis en forme dans vos articles !
+------------------------------------------------
+
+balises du plugin : <jeux></jeux>
+separateurs obligatoires : #POESIE ou #CITATION
+separateurs optionnels   : #TITRE, #AUTEUR, #RECUEIL
+
+Exemple de syntaxe dans l'article :
+-----------------------------------
+
+<jeux>
+	#TITRE
+	Messieurs les petits oiseaux
+	#POESIE
+	Messieurs les petits oiseaux,
+	On vide ici les assiettes ;
+	Venez donc manger les miettes,
+	Les chats n'auront que les os.
+	
+	Messieurs les petits oiseaux sont priés
+	De vider les écuelles,
+	Et mesdames les souris
+	Voudront bien rester chez elles.
+	
+	C'est le temps des grandes eaux,
+	Le pain est dans la mangeoire,
+	Venez donc manger et boire,
+	Messieurs les petits oiseaux.
+	#AUTEUR
+	Victor HUGO
+	#RECUEIL
+	L'art d'être grand père, 1877
+</jeux>
+
+<jeux>
+	#CITATION
+	Chaque homme doit inventer son chemin.
+	#AUTEUR
+	Jean-Paul Sartre
+	#RECUEIL
+	Les Mouches
+</jeux>
+
+<jeux>
+	#CITATION
+	L'amour est aveugle, il faut donc toucher.
+	#AUTEUR
+	Proverbe brésilien
+</jeux>
+
+*/
+
+?>

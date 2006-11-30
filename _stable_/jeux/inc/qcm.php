@@ -14,7 +14,7 @@
 
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : #TITRE, #QCM
-separateurs optionnels   : #HTML
+separateurs optionnels   : #TEXTE
 
 Exemple de syntaxe dans l'article :
 ------------------------------------
@@ -274,8 +274,8 @@ function jeux_qcm($chaine, $indexJeux) {
   $titreQCM = false; 
   $indexQCM =  $qcm_score = 0;
   $qcms['nbquestions'] = $qcms['totalscore'] = $qcms['totalpropositions'] = 0;
-  $tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_QCM.'|'._JEUX_HTML.')/', 
-			_JEUX_HTML.trim($chaine), -1, PREG_SPLIT_DELIM_CAPTURE);
+  $tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_QCM.'|'._JEUX_TEXTE.')/', 
+			_JEUX_TEXTE.trim($chaine), -1, PREG_SPLIT_DELIM_CAPTURE);
   $horizontal = $vertical = $solution = $html = false;
   $titre = _T('qcm:qcm_titre');
 
@@ -292,7 +292,7 @@ function jeux_qcm($chaine, $indexJeux) {
     	$qcms['totalscore'] +=  $qcms[$indexQCM]['maxscore'];
 	  	$indexQCM++;
 	  }
-	  elseif ($v==_JEUX_HTML) $html .= trim($tableau[$i+1]);
+	  elseif ($v==_JEUX_TEXTE) $html .= trim($tableau[$i+1]);
   }
 
   // est-ce certaines questions ne valent pas 1 point ?

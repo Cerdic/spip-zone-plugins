@@ -12,7 +12,7 @@ Insere une grille de mots croises dans vos articles !
 
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : #HORIZONTAL, #VERTICAL, #SOLUTION
-separateurs optionnels   : #TITRE, #HTML
+separateurs optionnels   : #TITRE, #TEXTE
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
@@ -136,8 +136,8 @@ function calcul_erreurs_sudoku($solution, $indexJeux) {
 
 // decode une grille de sudoku 
 function jeux_sudoku($texte, $indexJeux) { 
-	$tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_SUDOKU.'|'._JEUX_SOLUTION.'|'._JEUX_HTML.')/', 
-			trim(_JEUX_HTML.$texte), -1, PREG_SPLIT_DELIM_CAPTURE);
+	$tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_SUDOKU.'|'._JEUX_SOLUTION.'|'._JEUX_TEXTE.')/', 
+			trim(_JEUX_TEXTE.$texte), -1, PREG_SPLIT_DELIM_CAPTURE);
 	$sudoku = $solution = $html = false;
 	$titre = _T('sudoku:titre');
 
@@ -146,7 +146,7 @@ function jeux_sudoku($texte, $indexJeux) {
 	 if ($v==_JEUX_TITRE) $titre = trim($tableau[$i+1]);
 	  elseif ($v==_JEUX_SUDOKU) $sudoku = calcul_tableau_sudoku($tableau[$i+1]);
 	  elseif ($v==_JEUX_SOLUTION) $solution = calcul_tableau_sudoku($tableau[$i+1]);
-	  elseif ($v==_JEUX_HTML) $html .= trim($tableau[$i+1]);
+	  elseif ($v==_JEUX_TEXTE) $html .= trim($tableau[$i+1]);
 	}
 	
 	return calcul_erreurs_sudoku($solution, $indexJeux)
