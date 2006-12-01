@@ -36,12 +36,12 @@ function CreateFolder()
 	
 	while ( true ) 
 	{
-		sFolderName = prompt( 'Type the name of the new folder:', '' ) ;
+		sFolderName = prompt( 'Entrez le nom du nouveau répertoire :', '' ) ;
 	
 		if ( sFolderName == null )
 			return ;
 		else if ( sFolderName.length == 0 )
-			alert( 'Please type the folder name' ) ;
+			alert( 'SVP, entrez le nom du nouveau répertoire !' ) ;
 		else
 			break ;
 	}
@@ -98,7 +98,7 @@ window.onload = function()
 							<tr>
 								<td><img height="16" alt="" src="images/Folder.gif" width="16"></td>
 								<td>&nbsp;</td>
-								<td nowrap>Create New Folder</td>
+								<td nowrap>Créer un dossier</td>
 							</tr>
 						</table>
 					</button>

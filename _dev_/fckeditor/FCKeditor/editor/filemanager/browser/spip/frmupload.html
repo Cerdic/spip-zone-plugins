@@ -36,12 +36,12 @@ function OnSubmit()
 {
 	if ( document.getElementById('NewFile').value.length == 0 )
 	{
-		alert( 'Please select a file from your computer' ) ;
+		alert( 'SVP, sélectionneé un fichier sur votre ordinateur !' ) ;
 		return false ;
 	}
 
 	// Set the interface elements.
-	document.getElementById('eUploadMessage').innerHTML = 'Upload a new file in this folder (Upload in progress, please wait...)' ;
+	document.getElementById('eUploadMessage').innerHTML = 'Envoye le document dans ce répertoire ... Merci de patienter ...' ;
 	document.getElementById('btnUpload').disabled = true ;
 	
 	return true ;
@@ -59,7 +59,7 @@ function OnUploadCompleted( errorNumber, data )
 		document.getElementById('frmUpload').reset() ;
 	
 	// Reset the interface elements.
-	document.getElementById('eUploadMessage').innerHTML = 'Upload a new file in this folder' ;
+	document.getElementById('eUploadMessage').innerHTML = 'Envoye le document dans ce répertoire.' ;
 	document.getElementById('btnUpload').disabled = false ;
 	
 	switch ( errorNumber )
@@ -72,14 +72,15 @@ function OnUploadCompleted( errorNumber, data )
 			break ;
 		case 201 :
 			window.parent.frames['frmResourcesList'].Refresh() ;
-			alert( 'A file with the same name is already available. The uploaded file has been renamed to "' + data + '"' ) ;
+			alert( 'Un fichier avec le même nom existe déjà. Je l´ai donc renommé en : "' + data + '"' ) ;
 			break ;
 		case 202 :
-			alert( 'Invalid file' ) ;
+			alert( 'Fichier invalide' ) ;
 			break ;
 		default :
-			alert( 'Error on file upload. Error number: ' + errorNumber ) ;
+			alert( 'Erreur eu téléchargement N° : ' + errorNumber ) ;
 			break ;
+
 	}
 }
 
@@ -94,11 +95,11 @@ window.onload = function()
 			<table height="100%" cellspacing="0" cellpadding="0" width="100%" border="0">
 				<tr>
 					<td nowrap="nowrap">
-						<span id="eUploadMessage">Upload a new file in this folder</span><br>
+						<span id="eUploadMessage">Envoyer un nouveau fichier dans ce dossier</span><br>
 						<table cellspacing="0" cellpadding="0" width="100%" border="0">
 							<tr>
 								<td width="100%"><input id="NewFile" name="NewFile" style="WIDTH: 100%" type="file"></td>
-								<td nowrap="nowrap">&nbsp;<input id="btnUpload" type="submit" value="Upload"></td>
+								<td nowrap="nowrap">&nbsp;<input id="btnUpload" type="submit" value="Envoyer"></td>
 							</tr>
 						</table>
 					</td>

@@ -89,19 +89,19 @@ oConnector.CheckError = function( responseXml )
 				alert( oErrorNode.attributes.getNamedItem('text').value ) ;
 				break ;
 			case 101 :
-				alert( 'Folder already exists' ) ;
+				alert( 'Répertoire dèjà existant' ) ;
 				break ;
 			case 102 :
-				alert( 'Invalid folder name' ) ;
+				alert( 'Nom de répertoire invalide' ) ;
 				break ;
 			case 103 :
-				alert( 'You have no permissions to create the folder' ) ;
+				alert( 'Vous n´avez pas la permissionde créer un répetoire.' ) ;
 				break ;
 			case 110 :
-				alert( 'Unknown error creating folder' ) ;
+				alert( 'Erreur inconnue lors de la création du répertoire' ) ;
 				break ;
 			default :
-				alert( 'Error on your request. Error number: ' + iErrorNumber ) ;
+				alert( 'Erreur N° : ' + iErrorNumber ) ;
 				break ;
 		}
 	}
