@@ -95,7 +95,7 @@ function affichage_sudoku($tableau_sudoku, $indexJeux, $solution=false){
 // dechiffre le code source de la grille
 function calcul_tableau_sudoku($texte){
 	$tableau = explode("\r", trim($texte));	
-	foreach ($tableau as $i=>$v) $tableau[$i] = preg_split('//', trim($v), -1, PREG_SPLIT_NO_EMPTY);
+	foreach ($tableau as $i=>$valeur) $tableau[$i] = preg_split('//', trim($valeur), -1, PREG_SPLIT_NO_EMPTY);
 	return $tableau;
 }
 
@@ -136,17 +136,15 @@ function calcul_erreurs_sudoku($solution, $indexJeux) {
 
 // decode une grille de sudoku 
 function jeux_sudoku($texte, $indexJeux) { 
-	$tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_SUDOKU.'|'._JEUX_SOLUTION.'|'._JEUX_TEXTE.')/', 
-			trim(_JEUX_TEXTE.$texte), -1, PREG_SPLIT_DELIM_CAPTURE);
 	$sudoku = $solution = $html = false;
 	$titre = _T('sudoku:titre');
 
-	foreach($tableau as $i => $v){
-	 $v = trim($v);
-	 if ($v==_JEUX_TITRE) $titre = trim($tableau[$i+1]);
-	  elseif ($v==_JEUX_SUDOKU) $sudoku = calcul_tableau_sudoku($tableau[$i+1]);
-	  elseif ($v==_JEUX_SOLUTION) $solution = calcul_tableau_sudoku($tableau[$i+1]);
-	  elseif ($v==_JEUX_TEXTE) $html .= trim($tableau[$i+1]);
+	$tableau = jeux_split_texte('sudoku', $texte);
+	foreach($tableau as $i => $valeur){
+	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
+	  elseif ($valeur==_JEUX_SUDOKU) $sudoku = calcul_tableau_sudoku($tableau[$i+1]);
+	  elseif ($valeur==_JEUX_SOLUTION) $solution = calcul_tableau_sudoku($tableau[$i+1]);
+	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
 	}
 	
 	return calcul_erreurs_sudoku($solution, $indexJeux)

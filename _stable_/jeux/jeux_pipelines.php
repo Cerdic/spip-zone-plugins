@@ -7,46 +7,50 @@
 #  Licence : GPL                                    #
 #---------------------------------------------------#
 
-/*
-  Titre du jeu : 
-  	- soit après la balise #TITRE du jeu
-	- soit entre les balises <intro> et </intro>
-		(Spip s'en servira egalement en cas d'absence de descriptif pour 
-		calculer la balise #INTRODUCTION utilisee pour resumer l'article)
+// balises du plugin a inserer dans les articles
+define('_JEUX_DEBUT', '<jeux>');
+define('_JEUX_FIN', '</jeux>');
 
-  Calcul de #INTRODUCTION (vos sommaires, rubriques ou backends) : 
-  si la fonction introduction() n'est pas surchargee, Spip cherche 
-  d'abord le descriptif, puis en cas d'echec, le contenu du texte situé entre 
-  les balises <intro> et </intro>. En dernier lieu, Spip utilise les 500 premiers 
-  caractères du chapeau suivi du texte.
-  Attention donc : pour ne pas faire apparaitre le contenu des jeux avec 
-  les reponses, il vaut mieux penser à bien définir :
-  	- soit le descriptif de l'article 
-	- soit une introduction placee entre les balises <intro> et </intro>
-		(utiliser dans ce cas la balise #TITRE du jeu
-		pour definir le titre de la grille)
-	- soit le titre du jeu place entre les balises <intro> et </intro>
+// separateurs utilisables a l'interieur des balises ci-dessus
+define('_JEUX_TITRE', '#TITRE');
+define('_JEUX_HORIZONTAL', '#HORIZONTAL');
+define('_JEUX_VERTICAL', '#VERTICAL');
+define('_JEUX_SOLUTION', '#SOLUTION');
+define('_JEUX_SUDOKU', '#SUDOKU');
+define('_JEUX_KAKURO', '#KAKURO');
+define('_JEUX_QCM', '#QCM');
+define('_JEUX_CHARADE', '#CHARADE');
+define('_JEUX_DEVINETTE', '#DEVINETTE');
+define('_JEUX_REPONSE', '#REPONSE');
+define('_JEUX_TROU', '#TROU');
+define('_JEUX_TEXTE', '#TEXTE');
+define('_JEUX_POESIE', '#POESIE');
+define('_JEUX_CITATION', '#CITATION');
+define('_JEUX_AUTEUR', '#AUTEUR');
+define('_JEUX_RECUEIL', '#RECUEIL');
 
-*/
+global $jeux_separateurs;
+$jeux_separateurs = array(
+	'sudoku' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_SUDOKU, _JEUX_SOLUTION),
+	'kakuro' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_KAKURO, _JEUX_SOLUTION),
+	'mots_croises' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_HORIZONTAL, _JEUX_VERTICAL, _JEUX_SOLUTION),
+	'qcm' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_QCM),
+	'textes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_POESIE, _JEUX_CITATION, _JEUX_AUTEUR, _JEUX_RECUEIL),
+	'trous' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_TROU),
+);
 
-define(_JEUX_DEBUT, '<jeux>');
-define(_JEUX_FIN, '</jeux>');
-define(_JEUX_TITRE, '#TITRE');
-define(_JEUX_HORIZONTAL, '#HORIZONTAL');
-define(_JEUX_VERTICAL, '#VERTICAL');
-define(_JEUX_SOLUTION, '#SOLUTION');
-define(_JEUX_SUDOKU, '#SUDOKU');
-define(_JEUX_QCM, '#QCM');
-define(_JEUX_TEXTE, '#TEXTE');
-define(_JEUX_POESIE, '#POESIE');
-define(_JEUX_CITATION, '#CITATION');
-define(_JEUX_AUTEUR, '#AUTEUR');
-define(_JEUX_RECUEIL, '#RECUEIL');
+// splitte le texte du jeu avec les separateurs concernes
+function jeux_split_texte($jeu, &$texte) {
+  global $jeux_separateurs;
+  $tableau = preg_split('/('.join('|', $jeux_separateurs[$jeu]).')/', trim(_JEUX_TEXTE.$texte), -1, PREG_SPLIT_DELIM_CAPTURE);
+  foreach($tableau as $i => $valeur) $tableau[$i] = trim($valeur);
+  return $tableau;
+}  
 
-// transforme les listes verticales/horizontale listes html 
+// transforme un texte en listes html 
 function jeux_listes($texte) {
 	$tableau = explode("\r", trim($texte));	
-	foreach ($tableau as $i=>$v) if (($v=trim($v))!='') $tableau[$i] = "<li>$v</li>\n";
+	foreach ($tableau as $i=>$valeur) if (($valeur=trim($valeur))!='') $tableau[$i] = "<li>$valeur</li>\n";
 	$texte = implode('', $tableau);
 	return "<ol>$texte</ol>"; 
 }
@@ -75,6 +79,7 @@ function jeux($chaine, $indexJeux){
 		include_jeux('mots_croises', $chaine, $indexJeux);
 	if (strpos($chaine, _JEUX_QCM)!==false) include_jeux('qcm', $chaine, $indexJeux);
 	if (strpos($chaine, _JEUX_SUDOKU)!==false) include_jeux('sudoku', $chaine, $indexJeux);
+	if (strpos($chaine, _JEUX_TROU)!==false) include_jeux('trous', $chaine, $indexJeux);
 
 	return $texteAvant.jeux_rem('PLUGIN-DEBUT', $indexJeux).$chaine
 		.jeux_rem('PLUGIN-FIN', $indexJeux).jeux($texteApres, ++$indexJeux);

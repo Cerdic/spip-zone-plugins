@@ -68,28 +68,24 @@ Exemple de syntaxe dans l'article :
 */
 
 // guillemets simples : “ et ”
-define(_GUILLEMET_OUVRANT, '&#8220;'); 
-define(_GUILLEMET_FERMANT, '&#8221;');
+define('_GUILLEMET_OUVRANT', '&#8220;'); 
+define('_GUILLEMET_FERMANT', '&#8221;');
 
 // guillemets doubles : « et »
-define(_GUILLEMET_OUVRANT, '&laquo;');
-define(_GUILLEMET_FERMANT, '&raquo;');
+define('_GUILLEMET_OUVRANT', '&laquo;');
+define('_GUILLEMET_FERMANT', '&raquo;');
 
-function jeux_textes($chaine, $indexJeux) {
-
-  // initialiser  
-  $tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_POESIE.'|'._JEUX_CITATION.'|'._JEUX_AUTEUR.'|'._JEUX_RECUEIL.'|'._JEUX_TEXTE.')/', 
-			_JEUX_TEXTE.trim($chaine), -1, PREG_SPLIT_DELIM_CAPTURE);
+function jeux_textes($texte, $indexJeux) {
   $titre = $citation = $poesie = $auteur = $recueil = false;
 
-  // parcourir toutes les #BALISES
-  foreach($tableau as $i => $v){
-  	 $v = trim($v);
-	 if ($v==_JEUX_TITRE) $titre = trim($tableau[$i+1]);
-	  elseif ($v==_JEUX_POESIE) $poesie = '<poesie>'.trim($tableau[$i+1]).'</poesie>';
-	  elseif ($v==_JEUX_CITATION) $citation = _GUILLEMET_OUVRANT.trim($tableau[$i+1])._GUILLEMET_FERMANT;
-	  elseif ($v==_JEUX_AUTEUR) $auteur = trim($tableau[$i+1]);
-	  elseif ($v==_JEUX_RECUEIL) $recueil = trim($tableau[$i+1]);
+  // parcourir tous les #SEPARATEURS
+  $tableau = jeux_split_texte('textes', $texte);
+  foreach($tableau as $i => $valeur){
+	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
+	  elseif ($valeur==_JEUX_POESIE) $poesie = '<poesie>'.$tableau[$i+1].'</poesie>';
+	  elseif ($valeur==_JEUX_CITATION) $citation = _GUILLEMET_OUVRANT.$tableau[$i+1]._GUILLEMET_FERMANT;
+	  elseif ($valeur==_JEUX_AUTEUR) $auteur = $tableau[$i+1];
+	  elseif ($valeur==_JEUX_RECUEIL) $recueil = $tableau[$i+1];
   }
   
   return 

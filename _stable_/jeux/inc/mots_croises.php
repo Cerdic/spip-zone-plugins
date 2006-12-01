@@ -103,7 +103,7 @@ function affichage_grille_mc($tableau_grille, $indexJeux, $solution=false){
 // dechiffre le code source de la grille
 function calcul_tableau_grille($texte){
 	$tableau = explode("\r", trim($texte));	
-	foreach ($tableau as $i=>$v) $tableau[$i] = preg_split('//', trim($v), -1, PREG_SPLIT_NO_EMPTY);
+	foreach ($tableau as $i=>$valeur) $tableau[$i] = preg_split('//', trim($valeur), -1, PREG_SPLIT_NO_EMPTY);
 	return $tableau;
 }
 
@@ -144,18 +144,17 @@ function calcul_erreurs_grille($solution, $indexJeux) {
 
 // decode une grille de mots croises 
 function jeux_mots_croises($texte, $indexJeux) {
-	$tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_HORIZONTAL.'|'._JEUX_VERTICAL.'|'._JEUX_SOLUTION.'|'._JEUX_TEXTE.')/', 
-			trim(_JEUX_TEXTE.$texte), -1, PREG_SPLIT_DELIM_CAPTURE);
 	$horizontal = $vertical = $solution = $html = false;
 	$titre = _T('motscroises:titre');
 	
-	foreach($tableau as $i => $v){
-  	 $v = trim($v);
-	 if ($v==_JEUX_TITRE) $titre = trim($tableau[$i+1]);
-	  elseif ($v==_JEUX_HORIZONTAL) $horizontal = jeux_listes($tableau[$i+1]);
-	  elseif ($v==_JEUX_VERTICAL) $vertical = jeux_listes($tableau[$i+1]);
-	  elseif ($v==_JEUX_SOLUTION) $solution = calcul_tableau_grille($tableau[$i+1]);
-	  elseif ($v==_JEUX_TEXTE) $html .= trim($tableau[$i+1]);
+  // parcourir tous les #SEPARATEURS
+	$tableau = jeux_split_texte('mots_croises', $texte);
+	foreach($tableau as $i => $valeur){
+	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
+	  elseif ($valeur==_JEUX_HORIZONTAL) $horizontal = jeux_listes($tableau[$i+1]);
+	  elseif ($valeur==_JEUX_VERTICAL) $vertical = jeux_listes($tableau[$i+1]);
+	  elseif ($valeur==_JEUX_SOLUTION) $solution = calcul_tableau_grille($tableau[$i+1]);
+	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
 	}
 
 	return calcul_erreurs_grille($solution, $indexJeux)

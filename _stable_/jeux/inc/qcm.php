@@ -183,15 +183,15 @@ function qcm_affiche_la_question($indexQCM, $corrigee, $gestionPoints) {
       // Si il ya plus de 5 choix, on utilise une liste
       if(count($qcms[$indexQCM]['propositions'])>5){
         $codeHTML.='<select name="'.$nomVarSelect.'" class="spip_qcm_select">';
-		foreach($qcms[$indexQCM]['propositions'] as $i=>$v) $codeHTML.="<option value=\"$i\">$v</option>";
+		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) $codeHTML.="<option value=\"$i\">$valeur</option>";
 		$codeHTML.='</select>';
       }
       // Sinon des radio boutons
       else {
-		foreach($qcms[$indexQCM]['propositions'] as $i=>$v) 
+		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) 
           $codeHTML.='<input type="radio" name="'.$nomVarSelect
 		  	. '" value="'.$i.'" id="'.$nomVarSelect.$i.'"><label for="'.$nomVarSelect.$i.'">'
-          	. $v.'</label><br />';
+          	. $valeur.'</label><br />';
        }
        $codeHTML.="</div><br />";
        
@@ -246,22 +246,21 @@ function qcm_inserer_les_qcm(&$chaine, $indexJeux, $gestionPoints) {
   return $chaine;
 }
 
-function jeux_qcm($chaine, $indexJeux) {
+function jeux_qcm($texte, $indexJeux) {
 
   // initialisation  
   global $qcms, $qcm_score;
   $indexQCM = $qcm_score = 0;
   $qcms['nbquestions'] = $qcms['totalscore'] = $qcms['totalpropositions'] = 0;
-  $tableau = preg_split('/('._JEUX_TITRE.'|'._JEUX_QCM.'|'._JEUX_TEXTE.')/', 
-			_JEUX_TEXTE.trim($chaine), -1, PREG_SPLIT_DELIM_CAPTURE);
+  $tableau = jeux_split_texte('qcm', $texte);
   $horizontal = $vertical = $solution = $html = false;
   $titre = _T('qcm:qcm_titre');
 
-  // parcourir toutes les #BALISES
-  foreach($tableau as $i => $v){
-  	 $v = trim($v);
-	 if ($v==_JEUX_TITRE) $titre = trim($tableau[$i+1]);
-	  elseif ($v==_JEUX_QCM) {
+  // parcourir tous les #SEPARATEURS
+  $tableau = jeux_split_texte('qcm', $texte);
+  foreach($tableau as $i => $valeur){
+	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
+	  elseif ($valeur==_JEUX_QCM) {
 		// remplacement des qcm par : <ATTENTE_QCM>ii</ATTENTE_QCM>
 		$html .= "<ATTENTE_QCM>$indexQCM</ATTENTE_QCM>";
 		// On analyse le QCM
@@ -270,14 +269,14 @@ function jeux_qcm($chaine, $indexJeux) {
     	$qcms['totalscore'] +=  $qcms[$indexQCM]['maxscore'];
 	  	$indexQCM++;
 	  }
-	  elseif ($v==_JEUX_TEXTE) $html .= trim($tableau[$i+1]);
+	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
   }
 
   // est-ce certaines questions ne valent pas 1 point ?
   $gestionPoints = $qcms['totalscore']<>$qcms['nbquestions'];
 
   // reinserer les qcms mis en forme
-  $chaine = qcm_inserer_les_qcm($html, $indexJeux, $gestionPoints);
+  $texte = qcm_inserer_les_qcm($html, $indexJeux, $gestionPoints);
 
   $tete = '<div class="spip_qcm"><div class="spip_qcm_titre">'.$titre.'<hr /></div>';
   if (!isset($_POST["var_correction_".$indexJeux])) { 
@@ -296,7 +295,7 @@ function jeux_qcm($chaine, $indexJeux) {
   }
   
   unset($qcms); unset($qcm_score);
-  return $tete.$html.$pied;
+  return $tete.$texte.$pied;
 }
 
 ?>
