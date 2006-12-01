@@ -12,22 +12,23 @@ define('_JEUX_DEBUT', '<jeux>');
 define('_JEUX_FIN', '</jeux>');
 
 // separateurs utilisables a l'interieur des balises ci-dessus
-define('_JEUX_TITRE', '[titre]');
-define('_JEUX_HORIZONTAL', '[horizontal]');
-define('_JEUX_VERTICAL', '[vertical]');
-define('_JEUX_SOLUTION', '[solution]');
-define('_JEUX_SUDOKU', '[sudoku]');
-define('_JEUX_KAKURO', '[kakuro]');
-define('_JEUX_QCM', '[qcm]');
-define('_JEUX_CHARADE', '[charade]');
-define('_JEUX_DEVINETTE', '[devinette]');
-define('_JEUX_REPONSE', '[reponse]');
-define('_JEUX_TROU', '[trou]');
-define('_JEUX_TEXTE', '[texte]');
-define('_JEUX_POESIE', '[poesie]');
-define('_JEUX_CITATION', '[citation]');
-define('_JEUX_AUTEUR', '[auteur]');
-define('_JEUX_RECUEIL', '[recueil]');
+// selon le format : [separateur]
+define('_JEUX_TITRE', 'titre');
+define('_JEUX_HORIZONTAL', 'horizontal');
+define('_JEUX_VERTICAL', 'vertical');
+define('_JEUX_SOLUTION', 'solution');
+define('_JEUX_SUDOKU', 'sudoku');
+define('_JEUX_KAKURO', 'kakuro');
+define('_JEUX_QCM', 'qcm');
+define('_JEUX_CHARADE', 'charade');
+define('_JEUX_DEVINETTE', 'devinette');
+define('_JEUX_REPONSE', 'reponse');
+define('_JEUX_TROU', 'trou');
+define('_JEUX_TEXTE', 'texte');
+define('_JEUX_POESIE', 'poesie');
+define('_JEUX_CITATION', 'citation');
+define('_JEUX_AUTEUR', 'auteur');
+define('_JEUX_RECUEIL', 'recueil');
 
 global $jeux_separateurs;
 $jeux_separateurs = array(
@@ -56,7 +57,7 @@ function jeux($chaine, $indexJeux){
 		include_jeux('mots_croises', $chaine, $indexJeux);
 	if (strpos($chaine, _JEUX_QCM)!==false) include_jeux('qcm', $chaine, $indexJeux);
 	if (strpos($chaine, _JEUX_SUDOKU)!==false) include_jeux('sudoku', $chaine, $indexJeux);
-	if (strpos($chaine, _JEUX_TROU)!==false) include_jeux('trous', $chaine, $indexJeux);
+	if (strpos($chaine, '['._JEUX_TROU.']')!==false) include_jeux('trous', $chaine, $indexJeux);
 
 	return $texteAvant.jeux_rem('PLUGIN-DEBUT', $indexJeux).$chaine
 		.jeux_rem('PLUGIN-FIN', $indexJeux).jeux($texteApres, ++$indexJeux);

@@ -9,8 +9,10 @@
 // splitte le texte du jeu avec les separateurs concernes
 function jeux_split_texte($jeu, &$texte) {
   global $jeux_separateurs;
-  $tableau = preg_split('/('.join('|', $jeux_separateurs[$jeu]).')/', trim(_JEUX_TEXTE.$texte), -1, PREG_SPLIT_DELIM_CAPTURE);
-  foreach($tableau as $i => $valeur) $tableau[$i] = trim($valeur);
+  $texte = '['._JEUX_TEXTE.']'.trim($texte);
+  $expr = '/(\['.join('\]|\[', $jeux_separateurs[$jeu]).'\])/';
+  $tableau = preg_split($expr, $texte, -1, PREG_SPLIT_DELIM_CAPTURE);
+  foreach($tableau as $i => $valeur) $tableau[$i] = preg_replace('/^\[(.*)\]$/', '\\1', trim($valeur));
   return $tableau;
 }  
 

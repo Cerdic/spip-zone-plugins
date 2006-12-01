@@ -18,17 +18,17 @@ _ Mettez une touche &eacute;ducative et ludique &agrave; votre site !
 Exemple de mots crois&eacute;s &agrave; ins&eacute;rer dans un article : 
 <quote><code><jeux>
 
-#HORIZONTAL
+[horizontal]
 Definition 1
 Definition 2. Definition 3
 Definition 4. Definition 5
 
-#VERTICAL
+[vertical]
 Definition 1
 Definition 2
 Definition 3
 
-#SOLUTION
+[solution]
 aaa
 b*g
 a*d
