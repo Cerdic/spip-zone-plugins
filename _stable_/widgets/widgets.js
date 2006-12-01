@@ -304,17 +304,7 @@ $(document).ready(function() {
     });
   }
 
-  // .filter(array) fonctionne mal (jQuery 1.0.3), on le fait a la main
-  // $(".widget").filter(configWidgets.droits).initwidget();
-  $($.grep(
-    $(".widget"),
-    function(e) {
-      for (var i=0; i<configWidgets.droits.length; i++) {
-        if ($(e).is(configWidgets.droits[i])) return true;
-      }
-      return false;
-    }
-  )).initwidget();
+  $(".widget").filter(configWidgets.droits).initwidget();
 
   // fermer tous les widgets ouverts
   $("html")
