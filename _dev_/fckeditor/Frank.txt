@@ -1,0 +1,1 @@
+Traduction du browser fichiers fckeditor\FCKeditor\editor\filemanager\browser\default\*.*
