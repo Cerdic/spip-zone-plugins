@@ -56,11 +56,6 @@ _ Il n&eacute;cessite l'activation du plugin {{jQuery}} ou une version de spip s
 		<action>pre_propre</action>
 	</pipeline>
 	<pipeline>
-		<nom>post_propre</nom>
-		<inclure>jeux_pipelines.php</inclure>
-		<action>post_propre</action>
-	</pipeline>
-	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>jeux_pipelines.php</inclure>
 		<action>header_prive</action>

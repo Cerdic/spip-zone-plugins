@@ -38,6 +38,10 @@ define(_JEUX_SOLUTION, '#SOLUTION');
 define(_JEUX_SUDOKU, '#SUDOKU');
 define(_JEUX_QCM, '#QCM');
 define(_JEUX_TEXTE, '#TEXTE');
+define(_JEUX_POESIE, '#POESIE');
+define(_JEUX_CITATION, '#CITATION');
+define(_JEUX_AUTEUR, '#AUTEUR');
+define(_JEUX_RECUEIL, '#RECUEIL');
 
 // transforme les listes verticales/horizontale listes html 
 function jeux_listes($texte) {
@@ -47,30 +51,33 @@ function jeux_listes($texte) {
 	return "<ol>$texte</ol>"; 
 }
 
+function include_jeux($jeu, &$texte, $indexJeux) {
+	include_spip('inc/'.$jeu);
+	if (function_exists($f = 'jeux_'.$jeu)) $texte = $f($texte, $indexJeux);
+}	
+
+function jeux_rem($rem, $index=false) {
+ return code_echappement("\n<!-- ".$rem.($index!==false?'-#'.$index:'')." -->\n");
+}
+
 // fonction principale
 function jeux($chaine, $indexJeux){ 
 	if (strpos($chaine, _JEUX_DEBUT)===false || strpos($chaine, _JEUX_FIN)===false) return $chaine;
-
+	
 	// isoler le jeu...
 	list($texteAvant, $suite) = explode(_JEUX_DEBUT, $chaine, 2); 
-	list($texte, $texteApres) = explode(_JEUX_FIN, $suite, 2); 
+	list($chaine, $texteApres) = explode(_JEUX_FIN, $suite, 2); 
 	
 	// ...et decoder le texte obtenu en fonction des signatures
-	if (strpos($texte, _JEUX_HORIZONTAL)!==false || strpos($texte, _JEUX_FIN)!==false) {
-		include_spip('inc/mots_croises');
-		$texte = jeux_mots_croises($texte, $indexJeux);
-	}
-	if (strpos($texte, _JEUX_QCM)!==false) {
-		include_spip('inc/qcm');
-		$texte = jeux_qcm($texte, $indexJeux);
-	}
-	if (strpos($texte, _JEUX_SUDOKU)!==false) {
-		include_spip('inc/sudoku');
-		$texte = jeux_sudoku($texte, $indexJeux);
-	}
+	if (strpos($chaine, _JEUX_POESIE)!==false || strpos($chaine, _JEUX_CITATION)!==false)
+		include_jeux('textes', $chaine, $indexJeux);
+	if (strpos($chaine, _JEUX_HORIZONTAL)!==false || strpos($chaine, _JEUX_VERTICAL)!==false)
+		include_jeux('mots_croises', $chaine, $indexJeux);
+	if (strpos($chaine, _JEUX_QCM)!==false) include_jeux('qcm', $chaine, $indexJeux);
+	if (strpos($chaine, _JEUX_SUDOKU)!==false) include_jeux('sudoku', $chaine, $indexJeux);
 
-	return $texteAvant.code_echappement("<!-- PLUGIN-DEBUT-$indexJeux -->").$texte
-		.code_echappement("<!-- PLUGIN-FIN-$indexJeux -->").jeux($texteApres, ++$indexJeux);
+	return $texteAvant.jeux_rem('PLUGIN-DEBUT', $indexJeux).$chaine
+		.jeux_rem('PLUGIN-FIN', $indexJeux).jeux($texteApres, ++$indexJeux);
 }
 
 // a la place de jeux, pour le deboguage...
@@ -110,11 +117,5 @@ function jeux_insert_head($flux){
 		. jeux_stylesheet_public('jeux')
 		. '<script type="text/javascript" src="'.find_in_path("jeux.js").'"></script>';
 }
-
-function jeux_post_propre($texte) { 
-	// a supprimer dans le futur...	
-	return preg_replace(',<!(QCM-(DEBUT|FIN)(-#[0-9]+)?)>,UimsS', '<!-- \\1 -->', $texte);
-}	
-
 
 ?>
