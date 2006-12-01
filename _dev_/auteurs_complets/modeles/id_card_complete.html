@@ -3,23 +3,23 @@
 <div class="vcard">
 <h3><:auteurscomplets:id_card:></h3>
 	[<div class="Buddy" style="float:right">
-		<a href="#URL_SITE"><img src="(#LOGO_AUTEUR||image_reduire{48,48}|extraire_attribut{src})" alt="#NOM" class="logo" height="48" width="48"></a>
+		<a href="#URL_SITE"><img src="(#LOGO_AUTEUR||image_reduire{48,48}|extraire_attribut{src})" title="#NOM" class="logo" height="48" width="48"></a>
 	</div>]
-	[<strong><span class="fn">(#NOM_FAMILLE|?{' ',#NOM})<strong><span class="fn"><span class="given-name">#PRENOM</span> <span class="family-name" >#NOM_FAMILLE</span></span></strong></span></strong>]
+	<strong><a href="#URL_AUTEUR" class="spip_in" title="#NOM"><span class="fn">[(#NOM_FAMILLE*|?{' ',#NOM*})<strong><span class="fn"><span class="given-name #EDIT{prenom}">#PRENOM*</span> <span class="family-name widget #EDIT{nom_famille}" >#NOM_FAMILLE*</span></span></strong>]</span></a></strong>
 	[<p><span class="adr">
-	[<span class="street-address">(#ADRESSE)</span><br />]
-	[<span class="postal-code">(#CODEPOSTAL)</span>]
-	[<span class="locality">(#VILLE)</span><br />]
-	<span class="country-name">(#PAYS)</span>
+	[<span class="street-address #EDIT{adresse}">(#ADRESSE*)</span><br />]
+	[<span class="postal-code #EDIT{codepostal}">(#CODEPOSTAL*)</span>]
+	[<span class="locality #EDIT{ville}">(#VILLE*)</span><br />]
+	<span class="country-name #EDIT{pays}">(#PAYS*)</span>
 	</span></p>]
 
 	[<p><span class="geo">
-		<:auteurscomplets:lat:> <abbr class="latitude" title="#LATITUDE">(#LATITUDE)</abbr>
-		[<:auteurscomplets:long:> <abbr class="longitude" title="#LONGITUDE">(#LONGITUDE)</abbr>]
+		<:auteurscomplets:lat:> <abbr class="latitude #EDIT{latitude}" title="#LATITUDE">(#LATITUDE*)</abbr>
+		[<:auteurscomplets:long:> <abbr class="longitude #EDIT{longitude}" title="#LONGITUDE">(#LONGITUDE*)</abbr>]
 	</span></p>]
-	<hr />
+
 	<h4><:auteurscomplets:contacts:></h4>
-	[<:auteurscomplets:organisation:> <a class="org" href="#URL_ORGANISATION">(#ORGANISATION)</a>]<br />
-	[<:auteurscomplets:email:> <a class="email" href="mailto:#EMAIL">(#EMAIL)</a><br />][<:auteurscomplets:tel:> <span class="tel">(#TELEPHONE)</span><br />][<:auteurscomplets:fax:> <span class="fax">(#FAX)</span><br />][<:auteurscomplets:website:> <a href="#URL_SITE" class="url" rel="me">(#NOM_SITE)</a>]
+	[<:auteurscomplets:organisation:> <a class="org" href="#URL_ORGANISATION">(#ORGANISATION*)</a>]<br />
+	[<:auteurscomplets:email:> <span class="#EDIT{email}"><a class="email" href="mailto:#EMAIL">(#EMAIL*)</a></span><br />][<:auteurscomplets:tel:> <span class="tel #EDIT{telephone}">(#TELEPHONE*)</span><br />][<:auteurscomplets:fax:> <span class="fax #EDIT{fax}">(#FAX*)</span><br />][<:auteurscomplets:website:> <span class="#EDIT{hyperlien}"><a href="#URL_SITE" class="url" rel="me">(#NOM_SITE*)</a></span>]
 </div>
 </BOUCLE_AUTEUR>

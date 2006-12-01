@@ -12,65 +12,62 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/filtres');
-include_spip('inc/actions');
 include_spip('inc/acces');
+include_spip('inc/actions');
 include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@action_legender_auteur
 function action_legender_auteur_supp()
 {
-        $var_f = charger_fonction('controler_action_auteur', 'inc');
-        $var_f();
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+        $securiser_action();
 
         $arg = _request('arg');
 
 	$echec = array();
 
-        if (!preg_match(",^(\d+)\D(\d*)(\D?)(.*)$,", $arg, $r)) {
-		$r = "action_legender_auteur_supp_dist $arg pas compris";
+	if (!preg_match(",^(\d+)\D(\d*)(\D(\w*)\D(.*))?$,", $arg, $r)) {
+		$r = "action_legender_auteur_dist $arg pas compris";
 		spip_log($r);
-        } else action_legender_post_supp($r);
+        } else 	redirige_par_entete(action_legender_auteur_post_supp($r));
 }
 
 // http://doc.spip.org/@action_legender_post
-function action_legender_post_supp($r)
-{
-	global 
-	$nom,
-	$auteur_session,
-	$nom_famille,
-	$prenom,
-	$organisation,
-	$url_organisation,
-	$telephone,
-	$fax,
-	$skype,
-	$adresse,
-	$codepostal,
-	$ville,
-	$pays,
-	$latitude,
-	$longitude,
-	$id_auteur,
-	$redirect,
-	$statut;
+function action_legender_auteur_post_supp($r){
+	global $auteur_session, $id_auteur;
 
-	list($tout, $id_auteur, $ajouter_id_article,$s, $n) = $r;
+	$prenom = _request('prenom');
+	$nom_famille = _request('nom_famille');
+	$organisation = _request('organisation');
+	$url_organisation = _request('url_organisation');
+	$telephone = _request('telephone');
+	$fax = _request('fax');
+	$skype = _request('skype');
+	$adresse = _request('adresse');
+	$codepostal = _request('codepostal');
+	$ville = _request('ville');
+	$pays = _request('pays');
+	$latitude = _request('latitude');
+	$longitude = _request('longitude');
+// 	$id_auteur = _request('arg');
+	$redirect = _request('redirect');
+	$statut = _request('statut');
+
+	list($tout, $id_auteur, $ajouter_id_article,$x,$s, $n) = $r;
 
 	$auteur = array();
-
-
 	if ($id_auteur) {
 		$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 	}
 
+	 $acces = ($id_auteur == $auteur_session['id_auteur']) ? true : " a voir ";
+
 // Récupération des variables nécessaires...
 	$auteur['id_auteur'] = corriger_caracteres($id_auteur);
-	$auteur['nom'] = corriger_caracteres($nom);
 	$auteur['nom_famille'] = corriger_caracteres($nom_famille);
 	$auteur['prenom'] = corriger_caracteres($prenom);
 	$auteur['organisation'] = corriger_caracteres($organisation);
-	$auteur['url_organisation'] = corriger_caracteres($url_organisation);
+	$auteur['url_organisation'] = vider_url($url_organisation, false);
 	$auteur['telephone'] = corriger_caracteres($telephone);
 	$auteur['fax'] = corriger_caracteres($fax);
 	$auteur['adresse'] = corriger_caracteres($adresse);
@@ -82,10 +79,9 @@ function action_legender_post_supp($r)
 	$auteur['longitude'] = corriger_caracteres($longitude);
 
 // La requete SQL à passer dans la base
-	$n = spip_query("UPDATE spip_auteurs SET nom_famille=" . spip_abstract_quote($auteur['nom_famille']) . ", prenom=" . spip_abstract_quote($auteur['prenom']) . ", organisation=" . spip_abstract_quote($auteur['organisation']) . ", url_organisation=" . spip_abstract_quote($auteur['url_organisation']) . ", telephone=" . spip_abstract_quote($auteur['telephone']) . ", fax=" . spip_abstract_quote($auteur['fax']) . ", skype=" . spip_abstract_quote($auteur['skype']) . ", adresse=" . spip_abstract_quote($auteur['adresse']) . ", codepostal=" . spip_abstract_quote($auteur['codepostal']) . ", ville=" . spip_abstract_quote($auteur['ville']) . ", pays=" . spip_abstract_quote($auteur['pays']) . ", latitude=" . spip_abstract_quote($auteur['latitude']) . ", longitude=" . spip_abstract_quote($auteur['longitude']) . " WHERE id_auteur=".$auteur['id_auteur']);
+	$n = spip_query("UPDATE spip_auteurs SET nom_famille=" . _q($auteur['nom_famille']) . ", prenom=" . _q($auteur['prenom']) . ", organisation=" . _q($auteur['organisation']) . ", url_organisation=" . _q($auteur['url_organisation']) . ", telephone=" . _q($auteur['telephone']) . ", fax=" . _q($auteur['fax']) . ", skype=" . _q($auteur['skype']) . ", adresse=" . _q($auteur['adresse']) . ", codepostal=" . _q($auteur['codepostal']) . ", ville=" . _q($auteur['ville']) . ", pays=" . _q($auteur['pays']) . ", latitude=" . _q($auteur['latitude']) . ", longitude=" . _q($auteur['longitude']) . " WHERE id_auteur=".$auteur['id_auteur']);
 		if (!$n) die('UPDATE');
-	}
-	return $n;
+// 	return $n;
 
 // Si on modifie les données on lance la reindexation
 	if ($nom OR $statut) {
@@ -93,35 +89,17 @@ function action_legender_post_supp($r)
 			include_spip("inc/indexation");
 			marquer_indexer('spip_auteurs', $id_auteur);
 		}
+		ecrire_acces();
 	}
 
 	if ($echec) $echec = '&echec=' . join('@@@', $echec);
 
 	// il faudrait rajouter OR $echec mais il y a conflit avec Ajax
 
-	if (($init = ($tout[0]=='0'))) {
-	  // tout nouveau. envoyer le formulaire de saisie du reste
-	  // en transmettant le retour eventuel
-	  // decode / encode car encode pas necessairement deja fait.
-
-	$ret = !$redirect ? '' 
-		  : ('&redirect=' . rawurlencode(rawurldecode($redirect)));
-
-	$redirect = generer_url_ecrire("legender_auteur_supp", "id_auteur=$id_auteur&initial=$init$echec$ret",true);
-	} else {
-	  // modif: renvoyer le resultat ou a nouveau le formulaire si erreur
-		  if (!$redirect) {
-		    $redirect = generer_url_ecrire("legender_auteur_supp", "id_auteur=$id_auteur", true, true);
-		    $ancre = '';
-		  } else 
-		    list($redirect,$anc) = split('#',rawurldecode($redirect));
-
-		if (!$echec)
-		  $redirect .= '&initial=-1' . $anc;
-		else  {
-		  $redirect .= $echec . '&initial=0' . $anc;
-		}
+	$redirect = generer_url_ecrire("auteur_infos_supp", "id_auteur=$id_auteur", true, true);
+	$anc = '';
+	$redirect .= '&initial=-1' . $anc;
+	return $redirect;
 	}
 
-	redirige_par_entete($redirect);
 ?>

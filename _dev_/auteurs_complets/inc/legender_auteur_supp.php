@@ -27,6 +27,9 @@ function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $red
 
 	global $options, $connect_statut, $connect_id_auteur, $connect_toutes_rubriques;
 
+
+	$setconnecte = ($connect_id_auteur == $id_auteur);
+
 	$corps_supp = '';
 
 // Le formulaire en lui meme...
@@ -67,7 +70,8 @@ function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $red
 	$arg = intval($id_auteur) . '/';
 
 // Affichage du formulaire en Ajax qui reprend ce qu'il y a avant ...
-	return "\n<div class='serif'>"
+	return '<div>&nbsp;</div>'
+	. "\n<div class='serif'>"
 	. debut_cadre_relief("fiche-perso-24.gif", true, "", _T("auteurscomplets:coordonnees_sup"))
 	. ($redirect
 	     ? generer_action_auteur('legender_auteur_supp', $arg, $redirect, $corps_supp)
@@ -79,7 +83,7 @@ function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $red
 // L'affichage des infos supplémentaires...
 function legender_auteur_supp_voir($auteur, $redirect)
 {
-	global $connect_toutes_rubriques, $connect_statut, $connect_id_auteur, $options,$spip_lang_right ;
+	global $connect_toutes_rubriques, $connect_statut, $connect_id_auteur, $spip_lang_right ;
 
 // On récupère ce qui nous intéresse...
 	$nom_famille=$auteur['nom_famille'];
@@ -106,8 +110,8 @@ function legender_auteur_supp_voir($auteur, $redirect)
 
 // N'affichons que ce qui existe...
 	if ($prenom || $nom) $res .= "<div>";
-	if (strlen($prenom) > 2){ $res .= "<div>"._T('auteurscomplets:affiche_nom_complet')." $prenom";}
-	if (strlen($nom_famille) > 2){ $res .= " $nom_famille </div>";}
+	if (strlen($prenom) > 2){ $res .= "$prenom";}
+	if (strlen($nom_famille) > 2){ $res .= " $nom_famille";}
 	if ($prenom || $nom) $res .= "</div>";
 	if ($url_organisation) {
 		if (!$organisation) $organisation = _T('auteurscomplets:affiche_organisation');
@@ -124,7 +128,7 @@ function legender_auteur_supp_voir($auteur, $redirect)
 	if (strlen($adresse) > 2){ $res .= "<div> $adresse </div>";}
 	if (strlen($codepostal) > 2){ $res .= "<div> $codepostal ";}
 	if (strlen($ville) > 2){ $res .= "$ville </div>";}
-	if (strlen($pays) > 2){ $res .= "<div> $pays </div>";}
+	if (strlen($pays) > 2){ $res .= "<div>".propre($pays)."</div>";}
 	$res .= "</td>"
 	.  "<td>";
 
@@ -133,9 +137,9 @@ function legender_auteur_supp_voir($auteur, $redirect)
 		$ancre = "legender_auteur_supp-$id_auteur";
 		$clic = _T("auteurscomplets:infos_supp");
 		$h = generer_url_ecrire("auteur_infos_supp","id_auteur=$id_auteur&initial=0");
-		if (($_COOKIE['spip_accepte_ajax'] == 1 ) AND !$redirect) {
+		if ((_SPIP_AJAX === 1 ) AND !$redirect) {
 			$evt .= "\nonclick=" . ajax_action_declencheur($h,$ancre);
-			$h = "<a\nhref='$h$a'$evt>$clic</a>";
+			 $h = "<a\nhref='$h#$ancre'$evt>$clic</a>";
 		}
 	  $res .= icone($clic, $h, "redacteurs-24.gif", "edit.gif", '', '',true);
 	}
