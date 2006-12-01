@@ -1,0 +1,34 @@
+<plugin>
+	<nom>
+	<multi>
+	[fr]Mot cles multilanguage
+	[en]Multilanguage keywords
+	[it]Parole chiave multilingua
+	</multi>
+	</nom>
+	<auteur>
+ 	[Renato Formato->renatoformato@virgilio.it]
+_ &copy; 2006 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	<multi>
+	[en]
+	Create a language menu and automatically builds a multi tag
+	[it]
+	Crea un men&ugrave; di lingue e costruisce automaticamente un tag multi
+	</multi>
+	</description>
+	<prefix> 
+	multilang_mot_cles
+	</prefix>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>multilang_mot_cles.php</inclure>
+	</pipeline>
+</plugin>
