@@ -106,7 +106,7 @@ function balise_EDIT($p) {
 		."')) .'-'."
 		. sinon(interprete_argument_balise(1,$p), "''")
 		.".'-'."
-		.champ_sql($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->primary, $p);
+		.champ_sql($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->primary, $p).".' '";
 
 	$p->interdire_scripts = false;
 	return $p;
