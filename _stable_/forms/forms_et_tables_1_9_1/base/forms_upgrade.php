@@ -48,7 +48,7 @@
 	}
 
 	function Forms_upgrade(){
-		$version_base = 0.19;
+		$version_base = 0.20;
 		$current_version = 0.0;
 		if (   (isset($GLOBALS['meta']['forms_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['forms_base_version'])==$version_base))
@@ -166,6 +166,15 @@
 		if ($current_version<0.19){
 			spip_query("ALTER TABLE spip_forms ADD html_wrap text AFTER linkable");
 			ecrire_meta('forms_base_version',$current_version=0.19);
+		}
+		if ($current_version<0.20){
+			spip_query("ALTER TABLE spip_forms_champs CHANGE champ champ varchar(100) NOT NULL");
+			spip_query("ALTER TABLE spip_forms_champs_choix CHANGE champ champ varchar(100) NOT NULL");
+			// on rappelle creer base car la creation de forms_champs et forms_champs_choix a pu echouer sur mysql 3.23
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			creer_base();
+			ecrire_meta('forms_base_version',$current_version=0.20);
 		}
 		ecrire_metas();
 	}
