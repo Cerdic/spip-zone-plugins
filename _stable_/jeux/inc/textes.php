@@ -19,16 +19,16 @@ Insere un texte mis en forme dans vos articles !
 ------------------------------------------------
 
 balises du plugin : <jeux></jeux>
-separateurs obligatoires : #POESIE ou #CITATION
-separateurs optionnels   : #TITRE, #AUTEUR, #RECUEIL
+separateurs obligatoires : [poesie] ou [citation]
+separateurs optionnels   : [titre], [auteur], [recueil]
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
 
 <jeux>
-	#TITRE
+	[titre]
 	Messieurs les petits oiseaux
-	#POESIE
+	[poesie]
 	Messieurs les petits oiseaux,
 	On vide ici les assiettes ;
 	Venez donc manger les miettes,
@@ -43,25 +43,25 @@ Exemple de syntaxe dans l'article :
 	Le pain est dans la mangeoire,
 	Venez donc manger et boire,
 	Messieurs les petits oiseaux.
-	#AUTEUR
+	[auteur]
 	Victor HUGO
-	#RECUEIL
+	[recueil]
 	L'art d'être grand père, 1877
 </jeux>
 
 <jeux>
-	#CITATION
+	[citation]
 	Chaque homme doit inventer son chemin.
-	#AUTEUR
+	[auteur]
 	Jean-Paul Sartre
-	#RECUEIL
+	[recueil]
 	Les Mouches
 </jeux>
 
 <jeux>
-	#CITATION
+	[citation]
 	L'amour est aveugle, il faut donc toucher.
-	#AUTEUR
+	[auteur]
 	Proverbe brésilien
 </jeux>
 

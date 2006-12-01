@@ -13,30 +13,30 @@
 ---------------------------------------
 
 balises du plugin : <jeux></jeux>
-separateurs obligatoires : #TITRE, #QCM
-separateurs optionnels   : #TEXTE
+separateurs obligatoires : [titre], [qcm]
+separateurs optionnels   : [texte]
 
 Exemple de syntaxe dans l'article :
 ------------------------------------
 
 <jeux>
-	#TITRE
+	[titre]
 	Un titre pour le QCM !
 
-	#QCM
+	[qcm]
 	Q Une question bla bla
 	P1 Une proposition 1
 	P2 Une proposition 2
 	P3 Une proposition 3 (la bonne réponse)
 	R3 (la réponse 3 est la bonne !)
 
-	#QCM
+	[qcm]
 	Q Une question encore
 	P1.2 Une proposition à 2 points (la bonne réponse)
 	P2 Une proposition 2
 	R1
 
-	#QCM
+	[qcm]
 	Q Une question pour finir
 	P1 Une proposition 1|Un commentaire 1
 	P2 Une proposition 2|Un commentaire 2

@@ -11,14 +11,14 @@ Insere une grille de mots croises dans vos articles !
 -----------------------------------------------------
 
 balises du plugin : <jeux></jeux>
-separateurs obligatoires : #HORIZONTAL, #VERTICAL, #SOLUTION
-separateurs optionnels   : #TITRE, #TEXTE
+separateurs obligatoires : [horizontal], [vertical], [solution]
+separateurs optionnels   : [titre], [texte]
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
 
 <jeux>
-	#SUDOKU
+	[sudoku]
 	98-4----3
 	64-3-----
 	--3--5--1
@@ -29,7 +29,7 @@ Exemple de syntaxe dans l'article :
 	-----6-38
 	5----2-94
 	
-	#SOLUTION
+	[solution]
 	985421673
 	641378952
 	723965481

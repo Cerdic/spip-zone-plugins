@@ -25,7 +25,7 @@ Insere un jeu de Shanghai dans vos articles !
 
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : #SHANGAI, euh ?
-separateurs optionnels   : #TITRE
+separateurs optionnels   : [titre]
 
 Exemple de syntaxe dans l'article :
 -----------------------------------

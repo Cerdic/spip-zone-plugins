@@ -19,14 +19,14 @@ Insere un demineur dans vos articles !
 --------------------------------------
 
 balises du plugin : <jeux></jeux>
-separateurs obligatoires : #DEMINEUR
-separateurs optionnels   : #TITRE
+separateurs obligatoires : [demineur]
+separateurs optionnels   : [titre]
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
 
 <jeux>
-	#DEMINEUR
+	[demineur]
 	10x10x10
 </jeux>
 

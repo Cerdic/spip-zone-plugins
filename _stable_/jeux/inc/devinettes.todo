@@ -14,20 +14,20 @@ Insere un rebus dans vos articles !
 -----------------------------------------------------
 
 balises du plugin : <jeux></jeux>
-separateurs obligatoires : #DEVINETTE, #REPONSE
-separateurs optionnels   : #TITRE, #TEXTE
+separateurs obligatoires : [devinette], [reponse]
+separateurs optionnels   : [titre], [texte]
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
 
 <jeux>
-	#DEVINETTE
+	[devinette]
 	Comment appelle t-on un patron de la nouvelle économie ?
-	#REPONSE
+	[reponse]
 	Un e-responsable
 	
-	#DEVINETTE
+	[devinette]
 	Quel est le point commun entre un contrôleur des impôts et un spermatozoïde ?
-	#REPONSE
+	[reponse]
 	Tous les 2 ont 1 chance sur 3 millions de devenir un jour un être humain.
 </jeux>

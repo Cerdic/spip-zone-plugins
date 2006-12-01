@@ -13,24 +13,24 @@
 ------------------------------------------------------
 
 balises du plugin : <jeux></jeux>
-separateurs obligatoires : #HORIZONTAL, #VERTICAL, #SOLUTION
-separateurs optionnels   : #TITRE, #TEXTE
+separateurs obligatoires : [horizontal], [vertical], [solution]
+separateurs optionnels   : [titre], [texte]
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
 
 <jeux>
-	#HORIZONTAL
+	[horizontal]
 	Definition 1
 	Definition 2. Definition 3
 	Definition 4. Definition 5
 	
-	#VERTICAL
+	[vertical]
 	Definition 1
 	Definition 2
 	Definition 3
 	
-	#SOLUTION
+	[solution]
 	aaa
 	b*g
 	a*d

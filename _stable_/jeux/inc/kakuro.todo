@@ -17,14 +17,14 @@ Insere un kakuro dans vos articles !
 -----------------------------------------------------
 
 balises du plugin : <jeux></jeux>
-separateurs obligatoires : #KAKURO, #SOLUTION
-separateurs optionnels   : #TITRE
+separateurs obligatoires : [kakuro], [solution]
+separateurs optionnels   : [titre]
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
 
 <jeux>
-	#KAKURO
+	[kakuro]
 	--(19)(9)(25)
 	-(22\14)---
 	(\29)-----
@@ -32,7 +32,7 @@ Exemple de syntaxe dans l'article :
 	(\25)-----
 	-(\10)---
 	
-	#SOLUTION
+	[solution]
 	*743*
 	96581
 	61*94

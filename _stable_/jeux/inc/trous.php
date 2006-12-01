@@ -17,31 +17,31 @@ Insere un test de closure dans vos articles !
 ---------------------------------------------
 
 balises du plugin : <jeux></jeux>
-separateurs obligatoires : #TEXTE, #TROU
-separateurs optionnels   : #TITRE
+separateurs obligatoires : [texte], [trou]
+separateurs optionnels   : [titre]
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
 
 <jeux>
-	#TEXTE
+	[texte]
 	Ceci est un simple test de closure (exercice à trous).
 	L'utilisateur entre ses réponses dans les espaces vides, 
 	presse ensuite le bouton "Contrôle"
-	#TROU
+	[trou]
 	pour
-	#TEXTE
+	[texte]
 	découvrir ce qui est correct dans sa réponse et obtenir un score.
 	Pour chaque mot manquant, jusqu'à quatre réponses correctes 
-	#TROU
+	[trou]
 	peuvent
-	#TEXTE
+	[texte]
 	être acceptées. Par exemple, ce  
-	#TROU
+	[trou]
 	trou
 	vide
 	blanc
-	#TEXTE
+	[texte]
 	autorise les réponses "trou", "vide" ou "blanc".
 </jeux>
 

@@ -12,22 +12,22 @@ define('_JEUX_DEBUT', '<jeux>');
 define('_JEUX_FIN', '</jeux>');
 
 // separateurs utilisables a l'interieur des balises ci-dessus
-define('_JEUX_TITRE', '#TITRE');
-define('_JEUX_HORIZONTAL', '#HORIZONTAL');
-define('_JEUX_VERTICAL', '#VERTICAL');
-define('_JEUX_SOLUTION', '#SOLUTION');
-define('_JEUX_SUDOKU', '#SUDOKU');
-define('_JEUX_KAKURO', '#KAKURO');
-define('_JEUX_QCM', '#QCM');
-define('_JEUX_CHARADE', '#CHARADE');
-define('_JEUX_DEVINETTE', '#DEVINETTE');
-define('_JEUX_REPONSE', '#REPONSE');
-define('_JEUX_TROU', '#TROU');
-define('_JEUX_TEXTE', '#TEXTE');
-define('_JEUX_POESIE', '#POESIE');
-define('_JEUX_CITATION', '#CITATION');
-define('_JEUX_AUTEUR', '#AUTEUR');
-define('_JEUX_RECUEIL', '#RECUEIL');
+define('_JEUX_TITRE', '[titre]');
+define('_JEUX_HORIZONTAL', '[horizontal]');
+define('_JEUX_VERTICAL', '[vertical]');
+define('_JEUX_SOLUTION', '[solution]');
+define('_JEUX_SUDOKU', '[sudoku]');
+define('_JEUX_KAKURO', '[kakuro]');
+define('_JEUX_QCM', '[qcm]');
+define('_JEUX_CHARADE', '[charade]');
+define('_JEUX_DEVINETTE', '[devinette]');
+define('_JEUX_REPONSE', '[reponse]');
+define('_JEUX_TROU', '[trou]');
+define('_JEUX_TEXTE', '[texte]');
+define('_JEUX_POESIE', '[poesie]');
+define('_JEUX_CITATION', '[citation]');
+define('_JEUX_AUTEUR', '[auteur]');
+define('_JEUX_RECUEIL', '[recueil]');
 
 global $jeux_separateurs;
 $jeux_separateurs = array(

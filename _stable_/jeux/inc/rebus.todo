@@ -14,8 +14,8 @@ Insere un rebus dans vos articles !
 -----------------------------------------------------
 
 balises du plugin : <jeux></jeux>
-separateurs obligatoires : #REBUS, #SOLUTION
-separateurs optionnels   : #TITRE, #TEXTE
+separateurs obligatoires : #REBUS, [solution]
+separateurs optionnels   : [titre], [texte]
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
@@ -23,12 +23,12 @@ Exemple de syntaxe dans l'article :
 <jeux>
 	#REBUS
 	A.1.2.C.4.
-	#SOLUTION
+	[solution]
 	à un de ces quatre !
 
 	#REBUS
 	<img4>
-	#SOLUTION
+	[solution]
 	devinez !
 </jeux>
 
