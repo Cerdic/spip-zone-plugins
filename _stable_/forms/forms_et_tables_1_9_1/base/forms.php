@@ -42,7 +42,7 @@ $tables_principales['spip_forms'] = array(
 // Boucle FORMS_CHAMPS
 $formschamp_field = array(
 		"id_form"	=> "bigint(21) NOT NULL",
-		"champ" => "varchar(100)",
+		"champ" => "varchar(100) NOT NULL",
 		"rang" => "bigint(21) NOT NULL",
 		"titre" => "text",
 		"type" => "varchar(100)",
@@ -65,7 +65,7 @@ $tables_principales['spip_forms_champs'] =
 // Boucle FORMS_CHAMPS_CHOIX
 $formschampchoix_field = array(
 		"id_form"	=> "bigint(21) NOT NULL",
-		"champ" => "varchar(100)",
+		"champ" => "varchar(100) NOT NULL",
 		"choix" => "varchar(100) NOT NULL DEFAULT ''",
 		"titre" => "text",
 		"rang" => "bigint(21) NOT NULL"
