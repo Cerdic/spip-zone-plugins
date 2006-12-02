@@ -70,6 +70,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 		if ((Forms_verif_cookie_sondage_utilise($id_form)==true)&&(_DIR_RESTREINT!=""))
 			$affiche_sondage=' ';
 	}
+	include_spip('inc/filtres');
 	return array('formulaires/forms', 0, 
 		array(
 			'erreur_message'=>isset($erreur['@'])?$erreur['@']:'',

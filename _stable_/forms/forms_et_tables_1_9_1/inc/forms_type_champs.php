@@ -108,6 +108,7 @@
 			}
 			// Verifier la conformite des donnees entrees
 			if ($type == 'email') {
+				include_spip('inc/filtres');
 				if (!strpos($val, '@') || !email_valide($val)) {
 					$erreur[$champ] = _T("forms:adresse_invalide");
 				}

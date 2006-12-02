@@ -374,7 +374,8 @@
 		return $inserts;
 	}
 
-	function Forms_revision_donnee($id_donnee, $c = NULL, &$erreur){
+	function Forms_revision_donnee($id_donnee, $c = NULL) {
+		include_spip('base/abstract_sql');
 		$inserts = array();
 		$result = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
 		if (!$row = spip_fetch_array($result)) {
@@ -395,11 +396,12 @@
 					$inserts = array_merge($inserts,$ins);
 				}
 			}
-			$in_champs = calcul_mysql_in('champ',"(".implode(',',$champs_mod).")");
+			$in_champs = calcul_mysql_in('champ',join(',',array_map('_q', $champs_mod)));
 			spip_query("DELETE FROM spip_forms_donnees_champs WHERE $in_champs AND id_donnee="._q($id_donnee));
 			spip_query("INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
 				"VALUES ".join(',', $inserts));
 		}
+		return $erreur;
 	}
 	
 	function Forms_enregistrer_reponse_formulaire($id_form, $id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='') {
@@ -423,7 +425,6 @@
 		if (!$erreur) {
 			global $auteur_session;
 			$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
-			$ip = addslashes($GLOBALS['REMOTE_ADDR']);
 			$url = (_DIR_RESTREINT==_DIR_RESTREINT_ABS)?parametre_url(self(),'id_form',''):_DIR_RESTREINT_ABS;
 			$ok = true;
 			
@@ -444,7 +445,7 @@
 			if ($ok) {
 				if (!$id_donnee){
 					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie) ".
-						"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($ip).","._q($url).", '$confirmation', '$statut',"._q($cookie).")");
+						"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","._q($url).", '$confirmation', '$statut',"._q($cookie).")");
 					$id_donnee = spip_insert_id();
 				}
 				if (!$id_donnee) {
