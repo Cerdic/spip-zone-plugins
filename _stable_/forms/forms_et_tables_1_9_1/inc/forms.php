@@ -384,6 +384,10 @@
 		$id_form = $row['id_form'];
 		$structure = Forms_structure($id_form);
 		include_spip("inc/forms_type_champs");
+		
+		// NOTE ici il y a un bug: la presence d'un champ obligatoire
+		// dans la structure interdit de *modifier* un autre champ, donc
+		// interdit aux widgets de fonctionner partout...
 		$erreur = Forms_valide_champs_reponse_post($id_form, $c, $structure);
 		if (!$erreur) {
 			$champs_mod = array();
@@ -401,6 +405,9 @@
 			spip_query("INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
 				"VALUES ".join(',', $inserts));
 		}
+		else
+			spip_log("erreur: ".serialize($erreur));
+
 		return $erreur;
 	}
 	
