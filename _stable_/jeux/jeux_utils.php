@@ -24,13 +24,46 @@ function jeux_listes($texte) {
 	return "<ol>$texte</ol>"; 
 }
 
+// ajoute un module jeu a la bibliotheque
 function include_jeux($jeu, &$texte, $indexJeux) {
-	include_spip('inc/'.$jeu);
-	if (function_exists($f = 'jeux_'.$jeu)) $texte = $f($texte, $indexJeux);
+	$fonc = 'jeux_'.$jeu;
+	if (!function_exists($fonc)) include_spip('inc/'.$jeu);
+	// on est jamais trop prudent !!
+	if (function_exists($fonc)) $texte = $fonc($texte, $indexJeux);
 }	
 
+// inclut et decode les jeux, si le module inc/lejeu.php est present
+function jeux_inclure_et_decoder(&$texte, $indexJeux) {
+	global $jeux_signatures;
+	foreach($jeux_signatures as $jeu=>$signatures) {
+		$ok = false;
+		foreach($signatures as $s) $ok |= (strpos($texte, "[$s]")!==false);
+		if ($ok) include_jeux($jeu, $texte, $indexJeux);
+	}
+}
+
+// pour placer des commentaires
 function jeux_rem($rem, $index=false) {
  return code_echappement("\n<!-- ".$rem.($index!==false?'-#'.$index:'')." -->\n");
+}
+
+// pour inserer un css en public
+function jeux_stylesheet_public($b) {
+ $f = find_in_path("styles/$b.css");
+ return $f?'<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="projection, screen" />'."\n":'';
+}
+
+// pour inserer un css en prive
+function jeux_stylesheet_prive($b) {
+ $f = find_in_path("styles/$b.css");
+ return $f?'<link rel="stylesheet" href="'.$f.'" type="text/css" media="projection, screen" />'."\n":'';
+// return '<link rel="stylesheet" href="'._DIR_PLUGIN_JEUX."styles/$b.css\" type=\"text/css\" media=\"projection, screen\" />\n";
+}
+
+// pour inserer un js
+function jeux_javascript($b) {
+ $f = find_in_path("javascript/$b.js");
+ return $f?'<script type="text/javascript" src="'.$f.'"></script>'."\n":'';
 }
 
 ?>

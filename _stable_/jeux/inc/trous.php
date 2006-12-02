@@ -47,7 +47,7 @@ Exemple de syntaxe dans l'article :
 
 */
 
-function trous_inserer_le_trou($indexTrou, $corrige) {
+function trous_inserer_le_trou($indexTrou, $corriger) {
   global $propositionsTROUS;
   /*
   global $qcms, $qcm_score;
@@ -64,7 +64,7 @@ function trous_inserer_le_trou($indexTrou, $corrige) {
   } else $pointsQ = 1;
 
   $codeHTML = "<div class=\"spip_qcm_question\">".definir_puce().$question.'</div>';
-  if (!$corrigee){
+  if (!$corriger){
     // affichage sans correction :
      $codeHTML.="\n<div class=\"spip_qcm_proposition\">";
 

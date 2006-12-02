@@ -35,7 +35,7 @@ a*d
 
 </jeux></code></quote>
 Ce plugin fonctionne de fa&ccedil;on optimale sur les squelettes disposant de la balise {{#INSERT_HEAD}} et peut &eacute;galement être test&eacute; dans l'espace priv&eacute;.
-_ Il n&eacute;cessite l'activation du plugin {{jQuery}} ou une version de spip sup&eacute;rieure &agrave; {{1.9.2}}.
+_ Pour certains jeux, il n&eacute;cessite l'activation du plugin {{jQuery}} ou une version de spip sup&eacute;rieure &agrave; {{1.9.2}}.
 
 {{Attention}} : afin d'&eacute;viter les mauvaises surprises de pr&eacute;sentation (sommaires, rubriques, backends, ...), pensez bien :
 - soit &agrave; placer une introduction dans votre article entre les balises &lt;intro&gt; et &lt;/intro&gt;
