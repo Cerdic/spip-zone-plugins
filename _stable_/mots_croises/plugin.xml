@@ -6,23 +6,23 @@
 	</version>
 	<auteur>Ma&#239;eul Rouquette - maieulrouquette@tele2.fr
 _ [http://maieul.ouvaton.org->http://maieul.ouvaton.org]
-_ Soutien : Patrice Vanneufville - patrice.vanneufville@laposte.net
+_ Patrice Vanneufville - patrice.vanneufville@laposte.net
 	</auteur>
 	<description>Des mots-crois&eacute;s avec Spip !
 _ Exemple &agrave; ins&eacute;rer dans un article : 
 <quote><code><mots-croises>
 
-#HORIZONTAL
+[horizontal]
 Definition 1
 Definition 2. Definition 3
 Definition 4. Definition 5
 
-#VERTICAL
+[vertical]
 Definition 1
 Definition 2
 Definition 3
 
-#SOLUTION
+[solution]
 aaa
 b*g
 a*d

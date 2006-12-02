@@ -1,7 +1,7 @@
 <?php
 /*
   Titre de la grille des mots croisés : 
-  	- soit après la balise #TITRE des mots croisés
+  	- soit après le séparateur [titre] des mots croisés
 	- soit entre les balises <intro> et </intro>
 		(Spip s'en servira egalement en cas d'absence de descriptif pour 
 		calculer la balise #INTRODUCTION utilisee pour resumer l'article)
@@ -15,7 +15,7 @@
   les reponses, il vaut mieux penser à bien définir :
   	- soit le descriptif de l'article 
 	- soit une introduction placee entre les balises <intro> et </intro>
-		(utiliser dans ce cas la balise #TITRE des mots croisés
+		(utiliser dans ce cas la séparateur [titre] des mots croisés
 		pour definir le titre de la grille)
 	- soit le titre des mots croises place entre les balises <intro> et </intro>
 
@@ -55,16 +55,15 @@ function mots_croises($texte){
 	// isoler les mots-croises...
 	list($texteAvant, $suite) = explode(_MC_DEBUT, $texte, 2); 
 	list($texte, $texteApres) = explode(_MC_FIN, $suite, 2); 
-	
 	// ...et decoder le texte obtenu !
 	include_spip('inc/gestion_grille');
-	$tableau = preg_split("/(#TITRE|#HORIZONTAL|#VERTICAL|#SOLUTION)/", trim($texte), -1, PREG_SPLIT_DELIM_CAPTURE);
+	$tableau = preg_split("/(\[titre\]|\[horizontal\]|\[vertical\]|\[solution\])/", trim($texte), -1, PREG_SPLIT_DELIM_CAPTURE);
 	$titre = $horizontal = $vertical = $solution = false;
 	foreach($tableau as $i => $v){
-	 if ($v=='#TITRE') $titre = trim($tableau[$i+1]);
-	  elseif ($v=='#HORIZONTAL') $horizontal = mots_croises_listes($tableau[$i+1]);
-	  elseif ($v=='#VERTICAL') $vertical = mots_croises_listes($tableau[$i+1]);
-	  elseif ($v=='#SOLUTION') $solution = calcul_tableau_grille($tableau[$i+1]);
+	 if ($v=='[titre]') $titre = trim($tableau[$i+1]);
+	  elseif ($v=='[horizontal]') $horizontal = mots_croises_listes($tableau[$i+1]);
+	  elseif ($v=='[vertical]') $vertical = mots_croises_listes($tableau[$i+1]);
+	  elseif ($v=='[solution]') $solution = calcul_tableau_grille($tableau[$i+1]);
 	}
 
 	// trouver un titre, coute que coute...
