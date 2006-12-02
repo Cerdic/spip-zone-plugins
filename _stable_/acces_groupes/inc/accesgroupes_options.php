@@ -140,6 +140,18 @@ function critere_accesgroupes_invisible($id_boucle, &$boucles, $crit) {
 
 *************************** FIN OLD */
 
+// le filtre qui permet d'ajouter une img aux #TITRE des rubriques/articles/breves à accès restreint
+function accesgroupes_visualise($texte, $id_rub = 0, $image = 'ecrire/img_pack/cadenas-24.gif') {
+//echo '_DIR_SQUELETTE = '._DIR_SQUELETTE;		 
+				 if (accesgroupes_verif_acces($id_rub, 'public') == 1 OR accesgroupes_verif_acces($id_rub, 'public') == 2) {
+				 		return "<img src=\"".$image."\" alt=\""._T('accesgroupes:bloque_rubrique')."\" style=\"border: none; vertical-align: baseline;\"> ".$texte;
+				 }
+				 else {
+				 			return $texte;
+				 }
+}
+
+
 
 // détermine si une rubrique $rub est restreinte ou non (en fct de la provenance $prive_public : prive | public)
 // retourne 0 : accès libre | 1 : accès restreint non-connecté | 2 : accès restreint non-autorisé | 3 accès retreint autorisé

@@ -7,7 +7,7 @@
 					merci à Cedric pour le concept initial du bridage de l'affichage des BOUCLES (plugin acces_restreint)
         </auteur>
         <version>
-          1.0.1
+          1.0.2
         </version>
         <etat>
           stable
@@ -21,10 +21,14 @@
 					- Si vous {{mettez &agrave; jour}} depuis une version 1.8* de SPIP qui utilisait la contrib {{"acc&egrave;s restreint par groupes"}} 
 					version 0.61 ou 0.7, vous {{DEVEZ}} proc&eacute;der &agrave; la mise &agrave; jour des tables de la base de donn&eacute;es
 					en utilisant le script [->../plugins/acces_groupes/maj_tables.php] {{AVANT}} d'activer ce plugin ! 
-					
-					v 1.0.1 : support de exec=articles_versions pour le filtrage de l'espace privé
 					<br />
-					Ce plugin est compatible avec les versions <strong>1.9.0</strong> et <strong>1.9.1</strong> de spip. Il n’est <strong>pas compatible</strong> avec la version SVN spip 1.9.2 alpha.
+					v 1.0.1 : support de exec=articles_versions pour le filtrage de l'espace priv&eacute;
+					<br />
+					v 1.0.2 : impl&eacute;mentation du crit&egrave;re {{tout_voir}} et du filtre {{accesgroupes_visualise}}
+					pour afficher les contenus restreints aux utilisateurs n'ayant pas acc&egrave;s dans les squelettes
+					<br />
+					Ce plugin est compatible avec les versions <strong>1.9.0</strong> et <strong>1.9.1</strong> de spip. 
+					Il n’est <strong>pas compatible</strong> avec la version SVN spip 1.9.2 alpha.
         </description>
 	<lien>http://www.spip-contrib.net/Creer-des-groupes-limiter-l-acces</lien> <!-- URI de documentation --> 
         <prefix>
