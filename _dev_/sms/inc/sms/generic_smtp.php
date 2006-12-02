@@ -1,4 +1,5 @@
 <?php
+// ATTENTION ! Genere avec makeSMSinc.sh et patch_SMS.php, NE PAS EDITER !
 /**
  * Generic e-mail based SMS driver
  *
@@ -10,7 +11,7 @@
  * This driver interfaces with the email-to-sms gateways provided by many
  * carriers, particularly those based in the U.S.
  *
- * $Horde: framework/Net_SMS/SMS/generic_smtp.php,v 1.10 2006/01/01 21:10:07 jan Exp $
+ * $Horde: framework/Net_SMS/SMS/generic_smtp.php,v 1.13 2006/08/28 09:39:09 jan Exp $
  *
  * @category   Networking
  * @package    Net_SMS
@@ -89,7 +90,7 @@ class Net_SMS_generic_smtp extends Net_SMS {
     {
         return array(
             'name' => _("Email-to-SMS Gateway"),
-            'desc' => _("EMail-to-SMS gateway driver, for carriers which provide this service.")
+            'desc' => _("This driver allows sending of messages through an email-to-SMS gateway, for carriers which provide this service.")
         );
     }
 
@@ -102,7 +103,7 @@ class Net_SMS_generic_smtp extends Net_SMS {
     {
         return array(
             'carrier'     => array('label' => _("Carrier"), 'type' => 'text'),
-            'mailBackend' => array('label' => _("PEAR::Mail backend"), 'type' => 'text')
+            'mailBackend' => array('label' => _("c_PEAR::Mail backend"), 'type' => 'text')
         );
     }
 
@@ -116,17 +117,18 @@ class Net_SMS_generic_smtp extends Net_SMS {
      * @access private
      *
      * @param array $message  Message to send.
-     * @param string $to      Destination phone number.
+     * @param string $to      The recipient.
      *
      * @return array  An array with the success status and additional
      *                information.
      */
-    function _send(&$message, $to)
+    function _send($message, $to)
     {
         $response = array();
         $destemail = $this->_getDest($to);
-        require_once 'Mail.php';
-        $m = Mail::factory($this->_params['mailBackend'], $this->_params['mailParams']);
+        include_spip('inc/c_mail');
+        $m = &c_Mail::factory($this->_params['mailBackend'],
+                            $this->_params['mailParams']);
 
         if (isset($message['carrier'])) {
             $dest = $this->_getDest($to, $message['carrier']);
@@ -134,14 +136,12 @@ class Net_SMS_generic_smtp extends Net_SMS {
             $dest = $this->_getDest($to);
         }
 
-        $res =& $m->send($dest, $this->_params['mailHeaders'], $message['text']);
-        if (PEAR::isError($res)) {
-            $response[$to] = array(0, $res->getMessage());
+        $res = $m->send($dest, $this->_params['mailHeaders'], $message['text']);
+        if (c_PEAR::isError($res)) {
+            return array(0, $res->getMessage());
         } else {
-            $response[$to] = array(1, null);
+            return array(1, null);
         }
-
-        return $response;
     }
 
     /**
@@ -186,4 +186,15 @@ class Net_SMS_generic_smtp extends Net_SMS {
     {
         $this->_carriers[$name] = $addr;
     }
+
+    /**
+     * Returns a list of parameters specific for this driver.
+     *
+     * @return array Default sending parameters.
+     */
+    function getDefaultSendParams()
+    {
+        return array();
+    }
+
 }

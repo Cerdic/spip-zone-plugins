@@ -1,4 +1,14 @@
 <?php
+// ATTENTION ! Genere avec makeSMSinc.sh et patch_SMS.php, NE PAS EDITER !
+/**
+ * @package Net_SMS
+ */
+
+/**
+ * HTTP_Request class.
+ */
+include_spip('inc/c_http_request');
+
 /**
  * Net_SMS_sms2email_http Class implements the HTTP API for accessing the
  * sms2email (www.sms2email.com) SMS gateway.
@@ -8,7 +18,7 @@
  * See the enclosed file COPYING for license information (LGPL). If you did
  * not receive this file, see http://www.fsf.org/copyleft/lgpl.html.
  *
- * $Horde: framework/Net_SMS/SMS/sms2email_http.php,v 1.33 2006/01/01 21:10:07 jan Exp $
+ * $Horde: framework/Net_SMS/SMS/sms2email_http.php,v 1.37 2006/08/28 09:06:22 jan Exp $
  *
  * @author Marko Djukic <marko@oblo.com>
  * @package Net_SMS
@@ -46,12 +56,12 @@ class Net_SMS_sms2email_http extends Net_SMS {
      *
      * @param array $message  The array containing the message and its send
      *                        parameters.
-     * @param string $to      The destination string.
+     * @param array $to       The recipients.
      *
      * @return array  An array with the success status and additional
      *                information.
      */
-    function _send(&$message, $to)
+    function _send($message, $to)
     {
         /* Set up the sending url. */
         $url = sprintf('postmsg.php?username=%s&password=%s&message=%s',
@@ -280,7 +290,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
         /* Check that the full address book list has been received. */
         $length = substr($response, 19);
         if (strlen($contacts_str) != $length) {
-            return PEAR::raiseError(_("Could not fetch complete address book."));
+            return c_PEAR::raiseError(_("Could not fetch complete address book."));
         }
         $contacts_lines = explode("\n", $contacts_str);
         $contacts = array();
@@ -443,7 +453,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
         /* Check that the full list of distribution lists has been received. */
         $length = substr($response, 22);
         if (strlen($lists_str) != $length) {
-            return PEAR::raiseError(_("Could not fetch the complete list of distribution lists."));
+            return c_PEAR::raiseError(_("Could not fetch the complete list of distribution lists."));
         }
         $lists_lines = explode("\n", $lists_str);
         $lists = array();
@@ -490,7 +500,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
         /* Check that the full list of distribution lists has been received. */
         $length = substr($response, 22);
         if (strlen($list_str) != $length) {
-            return PEAR::raiseError(_("Could not fetch complete distribution list."));
+            return c_PEAR::raiseError(_("Could not fetch complete distribution list."));
         }
         $list_str = trim($list_str);
         list($count, $numbers) = explode('","', $list_str);
@@ -511,10 +521,10 @@ class Net_SMS_sms2email_http extends Net_SMS {
      */
     function getInfo()
     {
-        $info['name'] = _("sms2email via HTTP");
-        $info['desc'] = _("This driver allows sending of messages through the sms2email (http://sms2email.com) gateway, using the HTTP API");
-
-        return $info;
+        return array(
+            'name' => _("sms2email via HTTP"),
+            'desc' => _("This driver allows sending of messages through the sms2email (http://sms2email.com) gateway, using the HTTP API"),
+        );
     }
 
     /**
@@ -564,10 +574,10 @@ class Net_SMS_sms2email_http extends Net_SMS {
             'type' => 'enum',
             'params' => array(array('now' => _("immediate"), 'user' => _("user select"))));
 
-        $types = array('SMS_TEXT' => 'SMS_TEXT', 'SMS_FLASH' => 'SMS_FLASH');
+        $types = array('SMS_TEXT' => _("Standard"), 'SMS_FLASH' => _("Flash"));
         $params['msg_type'] = array(
             'label' => _("Message type"),
-            'type' => 'multienum',
+            'type' => 'keyval_multienum',
             'params' => array($types));
 
         return $params;
@@ -647,7 +657,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
         if (empty($error_text)) {
             return $errors[$error];
         } else {
-            return PEAR::raiseError(sprintf($error_text, $errors[$error]));
+            return c_PEAR::raiseError(sprintf($error_text, $errors[$error]));
         }
     }
 
@@ -668,13 +678,10 @@ class Net_SMS_sms2email_http extends Net_SMS {
 
         $url = (empty($this->_params['ssl']) ? 'http://' : 'https://') . $this->_base_url . $url;
 
-        if (!@include_once 'HTTP/Request.php') {
-            return PEAR::raiseError(_("Missing PEAR package HTTP_Request."));
-        }
-        $http = &new HTTP_Request($url, $options);
+        $http = new HTTP_Request($url, $options);
         @$http->sendRequest();
         if ($http->getResponseCode() != 200) {
-            return PEAR::raiseError(sprintf(_("Could not open %s."), $url));
+            return c_PEAR::raiseError(sprintf(_("Could not open %s."), $url));
         }
 
         return $http->getResponseBody();

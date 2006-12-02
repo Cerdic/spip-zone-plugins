@@ -1,4 +1,14 @@
 <?php
+// ATTENTION ! Genere avec makeSMSinc.sh et patch_SMS.php, NE PAS EDITER !
+/**
+ * @package Net_SMS
+ */
+
+/**
+ * HTTP_Request class.
+ */
+include_spip('inc/c_http_request');
+
 /**
  * Net_SMS_clickatell_http Class implements the HTTP API for accessing the
  * Clickatell (www.clickatell.com) SMS gateway.
@@ -8,7 +18,7 @@
  * See the enclosed file COPYING for license information (LGPL). If you did
  * not receive this file, see http://www.fsf.org/copyleft/lgpl.html.
  *
- * $Horde: framework/Net_SMS/SMS/clickatell_http.php,v 1.20 2006/01/01 21:10:07 jan Exp $
+ * $Horde: framework/Net_SMS/SMS/clickatell_http.php,v 1.25 2006/08/28 09:06:22 jan Exp $
  *
  * @author Marko Djukic <marko@oblo.com>
  * @package Net_SMS
@@ -64,7 +74,7 @@ class Net_SMS_clickatell_http extends Net_SMS {
         /* Do the HTTP authentication and get the response. */
         $response = Net_SMS_clickatell_http::_callURL($url);
         if (is_a($response, 'PEAR_Error')) {
-            return PEAR::raiseError(sprintf(_("Authentication failed. %s"), $response->getMessage()));
+            return c_PEAR::raiseError(sprintf(_("Authentication failed. %s"), $response->getMessage()));
         }
 
         /* Split up the response. */
@@ -84,12 +94,12 @@ class Net_SMS_clickatell_http extends Net_SMS {
      *
      * @param array $message  The array containing the message and its send
      *                        parameters.
-     * @param string $to      The destination string.
+     * @param array $to       The recipients.
      *
      * @return array  An array with the success status and additional
      *                information.
      */
-    function _send(&$message, $to)
+    function _send($message, $to)
     {
         /* Set up the http sending url. */
         $url = sprintf('sendmsg?session_id=%s&text=%s',
@@ -181,10 +191,10 @@ class Net_SMS_clickatell_http extends Net_SMS {
      */
     function getInfo()
     {
-        $info['name'] = _("Clickatell via HTTP");
-        $info['desc'] = _("This driver allows sending of messages through the Clickatell (http://clickatell.com) gateway, using the HTTP API");
-
-        return $info;
+        return array(
+            'name' => _("Clickatell via HTTP"),
+            'desc' => _("This driver allows sending of messages through the Clickatell (http://clickatell.com) gateway, using the HTTP API"),
+        );
     }
 
     /**
@@ -194,12 +204,11 @@ class Net_SMS_clickatell_http extends Net_SMS {
      */
     function getParams()
     {
-        $params = array();
-        $params['user']     = array('label' => _("Username"), 'type' => 'text');
-        $params['password'] = array('label' => _("Password"), 'type' => 'text');
-        $params['api_id']   = array('label' => _("API ID"), 'type' => 'text');
-
-        return $params;
+        return array(
+            'user' => array('label' => _("Username"), 'type' => 'text'),
+            'password' => array('label' => _("Password"), 'type' => 'text'),
+            'api_id' => array('label' => _("API ID"), 'type' => 'text'),
+        );
     }
 
     /**
@@ -222,10 +231,10 @@ class Net_SMS_clickatell_http extends Net_SMS {
             'type' => 'enum',
             'params' => array(array('now' => _("immediate"), 'user' => _("user select"))));
 
-        $types = array('SMS_TEXT' => 'SMS_TEXT', 'SMS_FLASH' => 'SMS_FLASH');
+        $types = array('SMS_TEXT' => _("Standard"), 'SMS_FLASH' => _("Flash"));
         $params['msg_type'] = array(
             'label' => _("Message type"),
-            'type' => 'multienum',
+            'type' => 'keyval_multienum',
             'params' => array($types));
 
         return $params;
@@ -317,7 +326,7 @@ class Net_SMS_clickatell_http extends Net_SMS {
         if (empty($error_text)) {
             return $errors[$error];
         } else {
-            return PEAR::raiseError(sprintf($error_text, $errors[$error]));
+            return c_PEAR::raiseError(sprintf($error_text, $errors[$error]));
         }
     }
 
@@ -332,17 +341,14 @@ class Net_SMS_clickatell_http extends Net_SMS {
      */
     function _callURL($url)
     {
-        $options['method'] = 'POST';
+        $options['method'] = 'GET';
         $options['timeout'] = 5;
         $options['allowRedirects'] = true;
 
-        if (!@include_once 'HTTP/Request.php') {
-            return PEAR::raiseError(_("Missing PEAR package HTTP_Request."));
-        }
-        $http = &new HTTP_Request($this->_base_url . $url, $options);
+        $http = new HTTP_Request($this->_base_url . $url, $options);
         @$http->sendRequest();
         if ($http->getResponseCode() != 200) {
-            return PEAR::raiseError(sprintf(_("Could not open %s."), $url));
+            return c_PEAR::raiseError(sprintf(_("Could not open %s."), $url));
         }
 
         return $http->getResponseBody();

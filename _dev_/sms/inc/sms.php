@@ -1,6 +1,7 @@
 <?php
+// ATTENTION ! Genere avec makeSMSinc.sh et patch_SMS.php, NE PAS EDITER !
 
-require_once 'PEAR.php';
+include_spip('inc/c_pear');
 
 /**
  * Net_SMS Class
@@ -10,7 +11,7 @@ require_once 'PEAR.php';
  * See the enclosed file COPYING for license information (LGPL). If you did
  * not receive this file, see http://www.fsf.org/copyleft/lgpl.html.
  *
- * $Horde: framework/Net_SMS/SMS.php,v 1.19 2006/01/01 21:10:07 jan Exp $
+ * $Horde: framework/Net_SMS/SMS.php,v 1.20 2006/08/28 09:06:22 jan Exp $
  *
  * @author  Marko Djukic <marko@oblo.com>
  * @package Net_SMS
@@ -78,7 +79,7 @@ class Net_SMS {
             return $info[$gateway];
         }
 
-        require_once 'Net/SMS/' . $gateway . '.php';
+        include_spip('inc/sms/' . $gateway);
         $class = 'Net_SMS_' . $gateway;
         $info[$gateway] = call_user_func(array($class, 'getInfo'));
 
@@ -101,7 +102,7 @@ class Net_SMS {
             return $params[$gateway];
         }
 
-        require_once 'Net/SMS/' . $gateway . '.php';
+        include_spip('inc/sms/' . $gateway);
         $class = 'Net_SMS_' . $gateway;
         $params[$gateway] = call_user_func(array($class, 'getParams'));
 
@@ -126,7 +127,7 @@ class Net_SMS {
             return $params[$gateway];
         }
 
-        require_once 'Net/SMS/' . $gateway . '.php';
+        include_spip('inc/sms/' . $gateway);
         $class = 'Net_SMS_' . $gateway;
         $params[$gateway] = call_user_func(array($class, 'getDefaultSendParams'));
 
@@ -179,7 +180,7 @@ class Net_SMS {
      *
      * @return mixed  True on success or PEAR Error on failure.
      */
-    function send(&$message)
+    function send($message)
     {
         /* Authenticate. */
         if (is_a($this->authenticate(), 'PEAR_Error')) {
@@ -286,12 +287,12 @@ class Net_SMS {
      */
     function &factory($driver, $params = array())
     {
-        include_once 'Net/SMS/' . $driver . '.php';
+        include_spip('inc/sms/' . $driver);
         $class = 'Net_SMS_' . $driver;
         if (class_exists($class)) {
             $sms = &new $class($params);
         } else {
-            $sms = PEAR::raiseError(sprintf(_("Class definition of %s not found."), $driver));
+            $sms = c_PEAR::raiseError(sprintf(_("Class definition of %s not found."), $driver));
         }
 
         return $sms;

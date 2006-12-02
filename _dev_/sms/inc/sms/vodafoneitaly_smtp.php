@@ -1,4 +1,5 @@
 <?php
+// ATTENTION ! Genere avec makeSMSinc.sh et patch_SMS.php, NE PAS EDITER !
 /**
  * Net_SMS_vodafoneitaly_smtp Class implements the SMTP API for accessing the
  * Vodafone Italy SMS gateway. Use of this gateway requires an email account
@@ -10,7 +11,7 @@
  * See the enclosed file COPYING for license information (LGPL). If you did not
  * receive this file, see http://www.fsf.org/copyleft/lgpl.html.
  *
- * $Horde: framework/Net_SMS/SMS/vodafoneitaly_smtp.php,v 1.18 2006/01/01 21:10:07 jan Exp $
+ * $Horde: framework/Net_SMS/SMS/vodafoneitaly_smtp.php,v 1.20 2006/08/28 09:06:22 jan Exp $
  *
  * @author Marko Djukic <marko@oblo.com>
  * @author Matteo Zambelli <mmzambe@hotmail.com>
@@ -47,22 +48,19 @@ class Net_SMS_vodafoneitaly_smtp extends Net_SMS {
      *
      * @param array $message  The array containing the message and its send
      *                        parameters.
-     * @param string $to      The destination string.
+     * @param string $to      The recipient.
      *
      * @return array  An array with the success status and additional
      *                information.
      */
-    function _send(&$message, $to)
+    function _send($message, $to)
     {
-        if (!@include_once 'Mail.php') {
-            return PEAR::raiseError(_("Missing required PEAR package Mail."));
-        }
-        $mailer = Mail::factory('mail');
-
         /* Since this only works for Italian numbers, this is hardcoded. */
         if (preg_match('/^.*?<?(\+?39)?(\d{10})>?/', $to, $matches)) {
             $headers['From'] = $this->_params['user'];
             $to = $matches[2] . '@sms.vodafone.it';
+
+            $mailer = c_Mail::factory('mail');
             $result = $mailer->send($to, $headers, $message['text']);
             if (is_a($result, 'PEAR_Error')) {
                 return array(0, $result->getMessage());
@@ -81,10 +79,10 @@ class Net_SMS_vodafoneitaly_smtp extends Net_SMS {
      */
     function getInfo()
     {
-        $info['name'] = _("Vodafone Italy via SMTP");
-        $info['desc'] = _("This driver allows sending of messages via SMTP through the Vodafone Italy gateway, only to Vodafone numbers. It requires an email account with Vodafone Italy (http://www.190.it).");
-
-        return $info;
+        return array(
+            'name' => _("Vodafone Italy via SMTP"),
+            'desc' => _("This driver allows sending of messages via SMTP through the Vodafone Italy gateway, only to Vodafone numbers. It requires an email account with Vodafone Italy (http://www.190.it)."),
+        );
     }
 
     /**
@@ -94,11 +92,8 @@ class Net_SMS_vodafoneitaly_smtp extends Net_SMS {
      */
     function getParams()
     {
-        $params = array();
-        $params['user']       = array('label'  => _("Username"),
-                                      'type'   => 'text');
-
-        return $params;
+        return array('user' => array('label' => _("Username"),
+                                     'type' => 'text'));
     }
 
     /**

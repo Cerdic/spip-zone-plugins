@@ -1,4 +1,14 @@
 <?php
+// ATTENTION ! Genere avec makeSMSinc.sh et patch_SMS.php, NE PAS EDITER !
+/**
+ * @package Net_SMS
+ */
+
+/**
+ * HTTP_Request class.
+ */
+include_spip('inc/c_http_request');
+
 /**
  * Net_SMS_win_http Class implements the HTTP API for accessing the WIN
  * (www.winplc.com) SMS gateway.
@@ -8,7 +18,7 @@
  * See the enclosed file COPYING for license information (LGPL). If you did not
  * receive this file, see http://www.fsf.org/copyleft/lgpl.html.
  *
- * $Horde: framework/Net_SMS/SMS/win_http.php,v 1.10 2006/01/01 21:10:07 jan Exp $
+ * $Horde: framework/Net_SMS/SMS/win_http.php,v 1.13 2006/08/28 09:06:22 jan Exp $
  *
  * @author Marko Djukic <marko@oblo.com>
  * @package Net_SMS
@@ -46,12 +56,12 @@ class Net_SMS_win_http extends Net_SMS {
      *
      * @param array $message  The array containing the message and its send
      *                        parameters.
-     * @param string $to      The destination string.
+     * @param array $to       The destination string.
      *
      * @return array  An array with the success status and additional
      *                information.
      */
-    function _send(&$message, $to)
+    function _send($message, $to)
     {
         /* Start the XML. */
         $xml = '<SMSMESSAGE><TEXT>' . $message['text'] . '</TEXT>';
@@ -130,10 +140,10 @@ class Net_SMS_win_http extends Net_SMS {
      */
     function getInfo()
     {
-        $info['name'] = _("WIN via HTTP");
-        $info['desc'] = _("This driver allows sending of messages through the WIN (http://winplc.com) gateway, using the HTTP API");
-
-        return $info;
+        return array(
+            'name' => _("WIN via HTTP"),
+            'desc' => _("This driver allows sending of messages through the WIN (http://winplc.com) gateway, using the HTTP API"),
+        );
     }
 
     /**
@@ -224,7 +234,7 @@ class Net_SMS_win_http extends Net_SMS {
         if (empty($error_text)) {
             return $errors[$error];
         } else {
-            return PEAR::raiseError(sprintf($error_text, $errors[$error]));
+            return c_PEAR::raiseError(sprintf($error_text, $errors[$error]));
         }
     }
 
@@ -246,10 +256,7 @@ class Net_SMS_win_http extends Net_SMS {
         /* Wrap the xml with the standard tags. */
         $xml = '<?xml version="1.0" standalone="no"?><!DOCTYPE WIN_DELIVERY_2_SMS SYSTEM "winbound_messages_v1.dtd"><WIN_DELIVERY_2_SMS>' . $xml . '</WIN_DELIVERY_2_SMS>';
 
-        if (!@include_once 'HTTP/Request.php') {
-            return PEAR::raiseError(_("Missing PEAR package HTTP_Request."));
-        }
-        $http = &new HTTP_Request($this->_base_url, $options);
+        $http = new HTTP_Request($this->_base_url, $options);
 
         /* Add the authentication values to POST. */
         $http->addPostData('User', $this->_params['user']);
@@ -259,7 +266,7 @@ class Net_SMS_win_http extends Net_SMS {
         $http->addPostData('WIN_XML', $xml);
         @$http->sendRequest();
         if ($http->getResponseCode() != 200) {
-            return PEAR::raiseError(sprintf(_("Could not open %s."), $this->_base_url));
+            return c_PEAR::raiseError(sprintf(_("Could not open %s."), $this->_base_url));
         }
 
         return $http->getResponseBody();
