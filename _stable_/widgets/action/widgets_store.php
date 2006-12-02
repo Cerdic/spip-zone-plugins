@@ -75,6 +75,13 @@ function action_widgets_store_dist() {
 	                break;
 	            }
 
+				// recuperer l'existant pour calculer son md5 et verifier
+				// qu'il n'a pas ete modifie entre-temps
+
+				// on fait une exception pour forms_donnees, on verra plus tard
+				// comment faire ca de maniere generique
+				if ($type != 'forms_donnees') {
+
 				$data = array();
 				foreach ($content as $champtable => $val) {
 					$data[$champtable] = valeur_colonne_table($type, $champtable, $id);
@@ -92,6 +99,8 @@ function action_widgets_store_dist() {
 	                    }
 	                break;
 	            }
+				} // fin exception
+
 	            $modifs[] = array($type, $modele, $id, $content, $wid);
 	        }
 	    }
@@ -139,6 +148,13 @@ function action_widgets_store_dist() {
 				    include_spip('action/editer_site');
 				    $fun = 'revisions_sites';
 				    break;
+				
+				# plugin forms&tables
+				case 'forms_donnees':
+					include_spip('inc/forms');
+					$fun = 'Forms_revision_donnee';
+					break;
+
 				// cas geres de la maniere la plus standard
 				case 'auteur':
 				case 'document':
@@ -181,6 +197,7 @@ function action_widgets_store_dist() {
 	}
 
 	// et maintenant refaire l'affichage des widgets modifies
+	include_spip('inc/texte');
 	foreach ($modifs as $m) {
 		list($type, $modele, $id, $content, $wid) = $modif;
 
@@ -198,6 +215,15 @@ function action_widgets_store_dist() {
 	        $return[$wid] = recuperer_fond($fond, $contexte);
 	    }
 	    // vues par defaut
+	    else
+	    
+	    // cas de forms
+	    if ($type == 'forms_donnees') {
+	    	$q = "SELECT valeur FROM spip_forms_donnees_champs WHERE champ="._q($modele)." AND id_donnee="._q($id);
+			$s = spip_query($q);
+			if ($t = spip_fetch_array($s))
+				$return[$wid] = typo($t['valeur']);
+	    }
 	    else {
 	        // Par precaution on va rechercher la valeur
 	        // dans la base de donnees (meme si a priori la valeur est
@@ -206,7 +232,6 @@ function action_widgets_store_dist() {
 	        $valeur = valeur_colonne_table($type, $modele, $id);
 
 	        // seul spip core sait rendre les donnees
-	        include_spip('inc/texte');
 	        if (in_array($modele,
 	        array('chapo', 'texte', 'descriptif', 'ps'))) {
 	            $return[$wid] = propre($valeur);

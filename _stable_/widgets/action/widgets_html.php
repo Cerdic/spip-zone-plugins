@@ -13,6 +13,7 @@ function affiche_controleur($class) {
     } else {
         $f = charger_fonction($type.'_'.$champ, 'controleurs', true)
         OR $f = charger_fonction($champ, 'controleurs', true)
+        OR $f = charger_fonction($type, 'controleurs', true)
         OR $f = 'controleur_dist';
         list($html,$status) = $f($regs);
         if ($status) {
