@@ -78,77 +78,96 @@
 		}
 		return ($s = $noms[$type]) ? $s : $type;
 	}
-	
+
 	function Forms_valide_champs_reponse_post($id_form, $c = NULL, $structure = NULL){
-		$erreur = '';
+		$erreur = array();
 		if (!$structure){
 			include_spip("inc/forms");
 			$structure = Forms_structure($id_form);
 		}
 		foreach($structure as $champ=>$infos){
 			$type = $infos['type'];
-			if (!$c) 
-				$val = _request($champ);
-			else
-				$val = isset($c[$champ])?$c[$champ]:NULL;
+			$val = _request($champ, $c);
 
+			// verifier la presence des champs obligatoires
 			if (!$val || ($type == 'fichier' && !$_FILES[$champ]['tmp_name'])) {
 				if ($infos['obligatoire'] == 'oui')
 					$erreur[$champ] = _T("forms:champ_necessaire");
 				continue;
 			}
-			// Verifier la conformite des donnees entrees
-			if ($type == 'date') {
-				if (!preg_match("#^\s*([0-9]{1,2})/([0-9]{1,2})/([0-9]{2,4})\s*$#",$val,$regs)) {
+		}
+
+		$erreur = array_merge($erreur,
+			Forms_valide_conformite_champs_reponse_post($id_form, $c, $structure));
+
+		return $erreur;
+	}
+
+
+	function Forms_valide_conformite_champs_reponse_post($id_form, $c = NULL, $structure = NULL){
+		$erreur = array();
+		if (!$structure){
+			include_spip("inc/forms");
+			$structure = Forms_structure($id_form);
+		}
+		foreach($structure as $champ=>$infos){
+			$type = $infos['type'];
+			if (NULL !== ($val = _request($champ, $c))) {
+
+				// Verifier la conformite des donnees entrees
+				if ($type == 'date') {
+					if (!preg_match("#^\s*([0-9]{1,2})/([0-9]{1,2})/([0-9]{2,4})\s*$#",$val,$regs)) {
 					$erreur[$champ] = _T("forms:date_invalide");
+					}
+					else 
+						if (!mktime(0,0,0,$reg[1],$regs[0],$regs[2]))
+							$erreur[$champ] = _T("forms:date_invalide");
 				}
-				else 
-					if (!mktime(0,0,0,$reg[1],$regs[0],$regs[2]))
-						$erreur[$champ] = _T("forms:date_invalide");
-			}
-			// Verifier la conformite des donnees entrees
-			if ($type == 'email') {
-				include_spip('inc/filtres');
-				if (!strpos($val, '@') || !email_valide($val)) {
-					$erreur[$champ] = _T("forms:adresse_invalide");
-				}
-			}
-			if ($type == 'url') {
-				if ($row['extra_info'] == 'oui') {
-					include_spip("inc/sites");
-					if (!recuperer_page($val)) {
-						$erreur[$champ] = _T("forms:site_introuvable");
+				// Verifier la conformite des donnees entrees
+				if ($type == 'email') {
+					include_spip('inc/filtres');
+					if (!strpos($val, '@') || !email_valide($val)) {
+						$erreur[$champ] = _T("forms:adresse_invalide");
 					}
 				}
-			}
-			if ($type == 'fichier') {
-				if (!$taille = $_FILES[$champ]['size']) {
-					$erreur[$champ] = _T("forms:echec_upload");
+				if ($type == 'url') {
+					if ($row['extra_info'] == 'oui') {
+						include_spip("inc/sites");
+						if (!recuperer_page($val)) {
+							$erreur[$champ] = _T("forms:site_introuvable");
+						}
+					}
 				}
-				else if ($row['extra_info'] && $taille > ($row['extra_info'] * 1024)) {
+				if ($type == 'fichier') {
+					if (!$taille = $_FILES[$champ]['size']) {
+						$erreur[$champ] = _T("forms:echec_upload");
+					}
+					else if ($row['extra_info'] && $taille > ($row['extra_info'] * 1024)) {
 					$erreur[$champ] = _T("forms:fichier_trop_gros");
+					}
+					else if (!Forms_type_fichier_autorise($_FILES[$champ]['name'])) {
+						$erreur[$champ] = _T("fichier_type_interdit");
+					}
+					if ($erreur[$champ]) {
+						supprimer_fichier($_FILES[$champ]['tmp_name']);
+					}
 				}
-				else if (!Forms_type_fichier_autorise($_FILES[$champ]['name'])) {
-					$erreur[$champ] = _T("fichier_type_interdit");
-				}
-				if ($erreur[$champ]) {
-					supprimer_fichier($_FILES[$champ]['tmp_name']);
-				}
-			}
-			if ($type=='select' or $type=='mot')
-				if (!isset($infos['choix'][$val]))
-					$erreur[$champ] = _T("forms:donnee_inattendue");
-			if ($type=='multiple')
-				foreach($val as $v)
-					if (!isset($infos['choix'][$v]))
+				if ($type=='select' or $type=='mot')
+					if (!isset($infos['choix'][$val]))
 						$erreur[$champ] = _T("forms:donnee_inattendue");
-			if (isset($GLOBALS['forms_types_champs_etendus'][$type])){
-				$match = $GLOBALS['forms_types_champs_etendus'][$type]['match'];
-				if (strlen($match) && !preg_match($match,$val))
-					$erreur[$champ] = _T("forms:champs_perso_invalide");
+				if ($type=='multiple')
+					foreach($val as $v)
+						if (!isset($infos['choix'][$v]))
+							$erreur[$champ] = _T("forms:donnee_inattendue");
+				if (isset($GLOBALS['forms_types_champs_etendus'][$type])){
+					$match = $GLOBALS['forms_types_champs_etendus'][$type]['match'];
+					if (strlen($match) && !preg_match($match,$val))
+						$erreur[$champ] = _T("forms:champs_perso_invalide");
+				}
 			}
 		}
 		return $erreur;
 	}
+
 
 ?>

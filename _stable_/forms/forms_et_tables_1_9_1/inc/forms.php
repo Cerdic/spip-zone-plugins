@@ -385,10 +385,7 @@
 		$structure = Forms_structure($id_form);
 		include_spip("inc/forms_type_champs");
 		
-		// NOTE ici il y a un bug: la presence d'un champ obligatoire
-		// dans la structure interdit de *modifier* un autre champ, donc
-		// interdit aux widgets de fonctionner partout...
-		$erreur = Forms_valide_champs_reponse_post($id_form, $c, $structure);
+		$erreur = Forms_valide_conformite_champs_reponse_post($id_form, $c, $structure);
 		if (!$erreur) {
 			$champs_mod = array();
 			foreach($structure as $champ=>$infos){
