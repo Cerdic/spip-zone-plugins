@@ -9,32 +9,41 @@
  
 var multilang_containers={},forms_fields={},multilang_forms,multilang_menu_lang;
 var match_multi = /(?:\[([a-z_]+)\]|^[\s\n]*)((?:.|\n)*?)(?=\[[a-z_]+\]|$)/ig;
-var multilang_css_link,multilang_css_cur_link={},multilang_root,multilang_fields_selector;
+var multilang_css_link,multilang_css_cur_link={},multilang_root,multilang_fields_selector,multilang_menu_selector;
 multilang_css_link = {"cursor":"pointer","margin":"2px 5px","float":"left"};
 $.extend(multilang_css_cur_link,multilang_css_link);
 $.extend(multilang_css_cur_link,{fontWeight:"bold"});
 
-function multilang_init_lang(page,root,main_menu,forms,fields) {
+/* options is a hash having the following values:
+ * - page (mandatory): a string to be searched in the current url. if found the plugin is applied. 
+ * - fields (mandatory): a jQuery selector to set the fields that have to be internationalized.
+ * - root (optional): the root element of all processing. Default value is 'document'.
+ * - forms (optional): a jQuery selector to set the forms that have to be  internationalized. Default value is 'form'.
+ * - main_menu (optional): a jQuery selector to set the container for the main menu to control all the selected forms.
+ * - form_menu (optional): a jQuery selector to set the container for the form menus.
+ */     
+function multilang_init_lang(options) {
 	//Detect if we're on the right page and if multilinguism is activated. If not return.
-	if(window.location.search.indexOf("exec=mots_edit")==-1 || multilang_avail_langs.length<=1) return;
+	if(window.location.search.indexOf(options.page)==-1 || multilang_avail_langs.length<=1) return;
 	//set the root element of all processing
-	root = root || document;
+	var root = options.root || document;
 	multilang_root = $(root);
 	//set the main menu element
-	multilang_containers = main_menu ? $(main_menu,multilang_root) : $("empty");
+	multilang_containers = options.main_menu ? $(options.main_menu,multilang_root) : $("empty");
 	//create menu lang template 
 	multilang_menu_lang =$("<div>");
 	$.each(multilang_avail_langs,function() {
 		multilang_menu_lang.append($("<a>").html("["+this+"]").css(this==multilang_def_lang?multilang_css_cur_link:multilang_css_link)[0]);
 	});
 	//store all the fields forms
-	forms = forms || "form";
+	var forms = options.forms || "form";
 	multilang_forms = $(forms,multilang_root).submit(forms_multi_submit);
 	//create menu lang for the global form
 	if(multilang_containers.size()) forms_make_menu_lang(multilang_containers);
 	//init fields
-	multilang_fields_selector = fields;
-	forms_init_multi({"forms_selector":forms,"fields_selector":fields});
+	multilang_fields_selector = options.fields;
+	multilang_menu_selector = options.form_menu;
+	forms_init_multi({"forms_selector":forms,"fields_selector":multilang_fields_selector});
 }
 
 function forms_make_menu_lang(container,target) {
@@ -74,21 +83,22 @@ function forms_init_multi(options) {
 	//store the fields of the target if any
 	var init_forms = target?$(forms,target):multilang_forms;
 	//init the value of the field to current lang
-	//add a container for the language menu before the form
+	//add a container for the language menu inside the form
 	init_forms.each(function() { 
 		this.form_lang = multilang_def_lang;
-		$(this).before("<div>"); 
+		var container = multilang_menu_selector ? $(multilang_menu_selector,this) : $(this);
+		container.prepend("<div class='menu_lang'>"); 
 	}); 
 	$(multilang_fields_selector,init_forms).each(function(){
 		forms_init_field(this,this.form.form_lang);
 	});
 	//create menu for each form. The menu is just before the form
-	init_forms.prev().empty().each(function() {
+	$("div.menu_lang",init_forms).empty().each(function() {
 		//store all form containers to allow menu lang update on each container
 		//when it is triggered by global menu
 		multilang_containers.add(this);
-		forms_make_menu_lang($(this),$(this).next());
-	}).end();
+		forms_make_menu_lang($(this),$(this).parents("form"));
+	});
 }
 
 function forms_init_field(el,lang) {
@@ -144,7 +154,7 @@ function forms_multi_submit(params) {
 	//remove the current form from the list of forms
 	multilang_forms.not(this);
 	//remove the current menu lang container from the list
-	multilang_containers.not($(this).prev());
+	multilang_containers.not("div.menu_lang",$(this));
 	//build the input values
 	$(multilang_fields_selector,this).each(function(){
 		//save data before submit

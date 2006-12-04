@@ -14,7 +14,10 @@ function multilang_mot_cles_header_prive($flux) {
 		$flux .= "<script type='text/javascript' src='".find_in_path("multilang_mots.js")."'></script>\n".
 		"<script type='text/javascript'>\n".
 		"var multilang_def_lang='".$GLOBALS["spip_lang"]."';var multilang_avail_langs=[$active_langs];\n".
-		"$(function(){multilang_init_lang('exec=mots_edit','.cadre-formulaire','','','input[@name=\'titre\'],textarea')});\n".
+		"$(function(){\n".
+		"multilang_init_lang({'page':'exec=mots_edit','root':'.cadre-formulaire','fields':'input[@name=\'titre\'],textarea'});\n".
+		"multilang_init_lang({'page':'exec=mots_type','root':'#page','form_menu':'div.cadre-formulaire:eq(0)','fields':'input[@name=\'change_type\'],textarea'});\n".
+		"});\n".
 		"</script>\n";
 	}
 	return $flux;
