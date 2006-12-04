@@ -1,0 +1,38 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Plugin Install&#233;
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Pierre Andrews (Mortimer)
+_ &copy; 2006 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+	0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	test
+	</etat>
+	<description>
+	<multi>[fr]	
+Ce plugin fournit une balise <code>#PLUGIN_PAS_INSTALLE</code> pour tester qu'un plugin est install&eacute;. Ainsi, on peut utiliser une inclusion conditionelle dans le squelette:
+  <code>
+[(#PLUGIN_PAS_INSTALLE{'monplugin'}|?{'',' '})<INCLURE{fond=squelette_plugin}>]
+  </code>
+Pour que ce test ne fasse pas l'inclusion quand ce plugin n'est pas install&eacute;, le test de la balise est "invers&eacute": on test donc qu'un plugin n'est pas install&eacute;
+[en]
+This plugin provides a new tag <code>#PLUGIN_PAS_INSTALLE</code> that allows you to test if a plugin is installed or not. This way, you can do a conditional inclusion:
+  <code>
+[(#PLUGIN_PAS_INSTALLE{'monplugin'}|?{'',' '})<INCLURE{fond=squelette_plugin}>]
+  </code>
+For this test to fail when this plugin is not installed, the test is inverted. Therefore, the tag test if a plugin is NOT installed.
+</multi>
+	</description>
+	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
+		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : template_ma_fonction() par exemple)
+		C'est par ailleurs conseille pour les noms de fichier
+		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
+		-->
+	<prefix> 
+	pi
+	</prefix>
+</plugin>
