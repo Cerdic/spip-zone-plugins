@@ -1184,7 +1184,7 @@ function exec_accesgroupes_admin() {
         }   // fin du else extra-long (affichage interface gestion si groupe déterminé)
 				
 				
-        fin_page();
+        echo fin_page();
         
         
 }  // fin fct exec_accesgroupes_admin
