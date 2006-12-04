@@ -32,7 +32,8 @@ if (@is_readable(_DIR_SESSIONS."charger_plugins_fonctions.php")){
 
 $tabelle_definite = $tables_principales;//array_merge($tables_principales,$tables_auxiliaires);
 
-debut_page(_L('Indicizzazione tabelle esterne'), "administration", "");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_L('Indicizzazione tabelle esterne'), "administration", "");
 
 debut_gauche();
 
@@ -130,7 +131,7 @@ echo afficher_liste_debut_tableau().afficher_liste(array('40%','40%','20%'),$tab
 
 fin_cadre_trait_couleur();
 
-fin_page();
+echo fin_page();
 
 }
 

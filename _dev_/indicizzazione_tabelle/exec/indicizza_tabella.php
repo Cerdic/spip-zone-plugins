@@ -80,7 +80,8 @@ function exec_indicizza_tabella_dist() {
 function indicizza_tabelle_debut_page() {
 	include_spip('inc/presentation');
 
-	debut_page(_L('Indicizzazione tabelle esterne'), "administration", "");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_L('Indicizzazione tabelle esterne'), "administration", "");
 	
 	debut_gauche();
 	
@@ -102,7 +103,7 @@ function indicizza_tabelle_fin_page() {
 
 	fin_cadre_trait_couleur();
 	
-	fin_page();
+	echo fin_page();
 
 }
 ?>
