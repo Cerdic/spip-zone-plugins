@@ -23,7 +23,6 @@
 function pi_test_plugin_pas_installe($plugin) {
   include_spip('inc/plugin');
   $arr = preg_grep('#^.*'.preg_quote($plugin).'/?$#i',liste_plugin_actifs());
-  var_dump($arr);
   return !count($arr);
 }
 
