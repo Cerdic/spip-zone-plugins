@@ -295,7 +295,7 @@ function exec_gener_cont() {
 </form>
 <?  }
 
-		fin_page();
+		echo fin_page();
 		
 }
  ?>
