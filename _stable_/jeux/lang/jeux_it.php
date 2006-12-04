@@ -4,18 +4,19 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'votre_choix'		=> "Votre choix : ",	// TODO
-'bravo'				=> "Bravo !",
+'votre_choix'		=> "La tua risposta: ",
+'bravo'				=> "Complimenti!",
 
-'corriger'		=> "Corriger",	// TODO
+'corriger'		=> 'Controlla',	
 'verifier' 		=> 'Controlla',
 'solution'		=>'Soluzione',
 'score'			=> "Score&nbsp;:",	// TODO
 
-'point'		=> "&nbsp;pt",		// TODO
-'points'	=> "&nbsp;pts"		// TODO
+'point'		=> "punto",
+'points'	=> "punti",
 
-'reinitialiser'		=> "R&eacute;initialiser",		// TODO
+'reinitialiser'		=> "Ricarica",
+// 'qcm_reinitialiser' => "Ricarica il questionario",
 
 'aucune_erreur'		=> 'Nessun errore',
 'une_erreur'		=> 'Un errore',
