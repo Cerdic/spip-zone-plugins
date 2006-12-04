@@ -1,0 +1,171 @@
+/*
+.grille td.noir {
+	background-color:#000000;
+	color:#000000;
+}
+
+table.grille input, table.grille th{min-width:1.5em;
+width:1.5em;
+text-align:center;
+vertical-align:middle;
+height:1.5em;}
+table.grille td{border:1px solid black;text-align:center}
+.grille td.coin,table.grille input,.grille th{border:0px solid black}
+.erreur{float:left;}
+
+table.grille label{display:none}
+
+
+
+.horizontal ol{list-style-type:upper-alpha}
+
+.vertical, .horizontal{float:left;
+font-size:90%;
+max-width:49%;
+width:auto;
+margin-right:5%;
+margin-left:5%}
+//.horizontal .vertical {float:left}
+
+form.grille{float:left;
+clear:both;
+
+padding:0;
+padding-right:2%;
+margin:0; 
+
+width:auto;
+}
+
+p.spip {clear:both}
+
+h4.grille{
+	margin:0;
+	padding:0;
+	font-weight:bold;
+}
+
+.horizontal ol,.vertical ol{margin:0;
+list-style-position:inside;
+}
+.horizontal >ol, .vertical > ol{list-style-position:outside;}
+
+
+.grille{margin:0;padding:0}
+
+.solution{clear:both}
+
+*/
+td.noir {
+	background-color:#000000; 
+	color:#000000;
+}
+
+table.motscroises0 {
+	border:0; 
+	padding:0;
+	width:100%;
+	text-align:left;
+}	
+
+table.grille {
+	border:0; 
+	padding:0;
+}	
+
+table.grille input, table.grille th{
+	min-width:1.5em;
+	width:1.5em;
+	text-align:center;
+	vertical-align:middle;
+	height:1.5em;
+	border:0;
+}
+
+table.grille td{
+	border:1px solid black;
+	text-align:center;
+	margin:0;
+	padding:0;
+}
+
+.grille td.coin{
+	border:0px;
+}
+
+table.grille label{
+	display:none 
+}
+
+.vertical, .horizontal{
+	float:left;
+	font-size:90%;
+	text-align:left;
+	
+/*
+	min-width:18em;
+	width:18em;
+	margin-right:0.8em;
+	margin-left:0.8em;
+*/
+	max-width:42%;
+	width:42%;
+	margin-right:3%;
+	margin-left:3%;
+}
+
+.horizontal li{
+	list-style-type:upper-alpha; 
+}
+
+.vertical li{
+	list-style-type:decimal; 
+}
+
+/*.horizontal .vertical {float:left}*/
+
+form.grille{
+	float:left;
+	clear:both;
+	padding:0;
+	padding-right:2%;
+	margin:0;
+	width:auto;
+}
+/*
+p.spip {
+	clear:both
+}
+*/
+
+h4.grille{
+	margin:0.8em;
+	padding:0;
+	font-weight:bold
+}
+
+
+.horizontal ol, .vertical ol{
+	margin:0;
+	list-style-position:inside;
+}
+
+.horizontal > ol, .vertical > ol{
+	list-style-position:outside;
+}
+
+.grille{
+	margin:0;
+	padding:0;
+}
+
+.solution{
+	clear:both;
+}
+
+
+.erreur{
+/*	float:left;*/
+	clear:both;
+	text-align:left;
+}

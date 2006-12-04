@@ -13,8 +13,8 @@
 ---------------------------------------
 
 balises du plugin : <jeux></jeux>
-separateurs obligatoires : [titre], [qcm]
-separateurs optionnels   : [texte]
+separateurs obligatoires : [qcm] // TODO : le titre optionnel...
+separateurs optionnels   : [titre], [texte]
 
 Exemple de syntaxe dans l'article :
 ------------------------------------
@@ -155,7 +155,7 @@ function qcm_recupere_le_titre(&$chaine, $ouvrant, $fermant) {
 }
 
 function qcm_les_points($phrase, $points) {
-    $pointsHTML = '<span class="spip_qcm_point"> ('.$points. _T('qcm:qcm_point'.($points>1?'s':'')).')</span>';
+    $pointsHTML = '<span class="jeux_point"> ('.$points. _T('jeux:point'.($points>1?'s':'')).')</span>';
   	if (ereg('^(.*)( ?:)( *)$', $phrase, $eregResult)) $phrase = $eregResult[1].$pointsHTML.$eregResult[2].$eregResult[3];
 	  else $phrase .= $pointsHTML;
 	return $phrase;  
@@ -175,14 +175,14 @@ function qcm_affiche_la_question($indexQCM, $corrigee, $gestionPoints) {
 	$question = qcm_les_points($question, $pointsQ);
   } else $pointsQ = 1;
 
-  $codeHTML = "<div class=\"spip_qcm_question\">".definir_puce().$question.'</div>';
+  $codeHTML = "<div class=\"qcm_question\">".definir_puce().$question.'</div>';
   if (!$corrigee){
     // affichage sans correction :
-     $codeHTML.="\n<div class=\"spip_qcm_proposition\">";
+     $codeHTML.="\n<div class=\"qcm_proposition\">";
 
       // Si il ya plus de 5 choix, on utilise une liste
       if(count($qcms[$indexQCM]['propositions'])>5){
-        $codeHTML.='<select name="'.$nomVarSelect.'" class="spip_qcm_select">';
+        $codeHTML.='<select name="'.$nomVarSelect.'" class="qcm_select">';
 		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) $codeHTML.="<option value=\"$i\">$valeur</option>";
 		$codeHTML.='</select>';
       }
@@ -205,8 +205,8 @@ function qcm_affiche_la_question($indexQCM, $corrigee, $gestionPoints) {
 		$pointsR = $qcms[$indexQCM]['points'][$_POST[$nomVarSelect]];
 		
 		// la reponse donnee & precision des points eventuels de la mauvaise reponse...
-		$codeHTML.='<div class="spip_qcm_reponse">'
-			 .((($pointsR==$pointsQ) || ($pointsR==0))?_T('qcm:qcm_introReponse'):qcm_les_points(_T('qcm:qcm_introReponse'), $pointsR))
+		$codeHTML.='<div class="qcm_reponse">'
+			 .((($pointsR==$pointsQ) || ($pointsR==0))?_T('jeux:votre_choix'):qcm_les_points(_T('jeux:votre_choix'), $pointsR))
 			 .$qcms[$indexQCM]['propositions'][$_POST[$nomVarSelect]].'</div>';
 
 		// on donne les points de la reponse quoiqu'il arrive
@@ -214,18 +214,18 @@ function qcm_affiche_la_question($indexQCM, $corrigee, $gestionPoints) {
 		
         if ($qcms[$indexQCM]['bonnereponse']==$_POST[$nomVarSelect]) 
         // Si c'est juste
-			$codeHTML .= '<div class="spip_qcm_correction_juste">'._T('qcm:qcm_reponseJuste').'</div>';
+			$codeHTML .= '<div class="qcm_correction_juste">'._T('qcm:qcm_reponseJuste').'</div>';
         // Si c'est faux
-         else $codeHTML .= '<div class="spip_qcm_correction_faux">'._T('qcm:qcm_reponseFausse').'</div>';
+         else $codeHTML .= '<div class="qcm_correction_faux">'._T('qcm:qcm_reponseFausse').'</div>';
            
         // les precisions eventuelles
         if ($qcms[$indexQCM]['precisions'][$_POST[$nomVarSelect]]<>"")
-             $codeHTML.='<div align="center"><div class="spip_qcm_precision">'
+             $codeHTML.='<div align="center"><div class="qcm_precision">'
 				 .$qcms[$indexQCM]['precisions'][$_POST[$nomVarSelect]]
 	     	 	 .'</div></div>';
 
 	// pas de reponse postee...
-	} else $codeHTML.='<div class="spip_qcm_correction_null">'._T('qcm:qcm_reponseNulle').'</div>';
+	} else $codeHTML.='<div class="qcm_correction_null">'._T('qcm:qcm_reponseNulle').'</div>';
 	   
 	$codeHTML.='<br />';
      
@@ -252,8 +252,7 @@ function jeux_qcm($texte, $indexJeux) {
   global $qcms, $qcm_score;
   $indexQCM = $qcm_score = 0;
   $qcms['nbquestions'] = $qcms['totalscore'] = $qcms['totalpropositions'] = 0;
-  $tableau = jeux_split_texte('qcm', $texte);
-  $horizontal = $vertical = $solution = $html = false;
+	  $horizontal = $vertical = $solution = $html = false;
   $titre = _T('qcm:qcm_titre');
 
   // parcourir tous les #SEPARATEURS
@@ -278,20 +277,20 @@ function jeux_qcm($texte, $indexJeux) {
   // reinserer les qcms mis en forme
   $texte = qcm_inserer_les_qcm($html, $indexJeux, $gestionPoints);
 
-  $tete = '<div class="spip_qcm"><div class="spip_qcm_titre">'.$titre.'<hr /></div>';
+  $tete = '<div class="spip_qcm"><div class="jeux_titre">'.$titre.'<hr /></div>';
   if (!isset($_POST["var_correction_".$indexJeux])) { 
 	$tete .= "\n".'<form method="post" action="">';
 	$pied = '<br>
 	<input type="hidden" name="var_correction_'.$indexJeux.'" value="yes">
-	<div align="center"><input type="submit" value="'._T('qcm:qcm_corriger').'" class="spip_qcm_bouton_corriger"></div>
+	<div align="center"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton_corriger"></div>
 	</form>';
   } else {
       // On ajoute le score final
-      $pied = '<center><div class="spip_qcm_score">'._T('qcm:qcm_score')
+      $pied = '<center><div class="jeux_score">'._T('jeux:score')
 	  			. "&nbsp;$qcm_score&nbsp;/&nbsp;".$qcms['totalscore'].'<br>'
-				. ($qcm_score==$qcms['totalscore']?_T('qcm:qcm_bravo'):'').'</div></center>'
-				. '<div class="spip_qcm_bouton_corriger" align="right">[ <a href="'
-				. parametre_url(self(),'var_mode','recalcul').'">'._T('qcm:qcm_reinitialiser').'</a> ]</div>';
+				. ($qcm_score==$qcms['totalscore']?_T('jeux:bravo'):'').'</div></center>'
+				. '<div class="jeux_bouton_corriger" align="right">[ <a href="'
+				. parametre_url(self(),'var_mode','recalcul').'">'._T('jeux:reinitialiser').'</a> ]</div>';
   }
   
   unset($qcms); unset($qcm_score);

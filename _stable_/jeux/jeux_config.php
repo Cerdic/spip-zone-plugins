@@ -5,6 +5,11 @@
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GPL                                    #
 #---------------------------------------------------#
+# exemples de jeux avec les mots :
+# http://www.cc-concarneaucornouaille.fr/net_bibli/portail/jouer%20avec%20les%20mots.htm
+# http://d.ch.free.fr/index.html
+# jeux musicaux :
+# http://www.metronimo.com/fr/jeux/
 
 // balises du plugin a inserer dans les articles
 define('_JEUX_DEBUT', '<jeux>');
@@ -28,6 +33,7 @@ define('_JEUX_POESIE', 'poesie');
 define('_JEUX_CITATION', 'citation');
 define('_JEUX_AUTEUR', 'auteur');
 define('_JEUX_RECUEIL', 'recueil');
+define('_JEUX_PENDU', 'pendu');
 
 // liste des separateurs autorises dans les jeux.
 // tous les jeux doivent etre listes ci-apres.
@@ -40,6 +46,7 @@ $jeux_separateurs = array(
 	'qcm' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_QCM),
 	'textes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_POESIE, _JEUX_CITATION, _JEUX_AUTEUR, _JEUX_RECUEIL),
 	'trous' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_TROU),
+//	'pendu' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_PENDU),
 );
 
 // liste des signatures caracteristiques d'un jeu.
@@ -57,17 +64,18 @@ $jeux_signatures = array(
 	'qcm' => array(_JEUX_QCM),
 	'textes' => array(_JEUX_POESIE, _JEUX_CITATION),
 	'trous' => array(_JEUX_TROU),
+//	'pendu' => array(_JEUX_PENDU),
 );
 
 // liste des css a placer dans le header public
 // dossier jeux/style/
 global $jeux_header_public;
-$jeux_header_public = array('jeux','qcm');
+$jeux_header_public = array('jeux','qcm', 'mots_croises');
 
 // liste des css a placer dans le header prive
 // dossier jeux/style/
 global $jeux_header_prive;
-$jeux_header_prive = array('jeux-prive','qcm');
+$jeux_header_prive = array('jeux','qcm', 'mots_croises-prive');
 
 // liste des js a placer dans le header prive
 // dossier jeux/javascript/

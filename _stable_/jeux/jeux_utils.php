@@ -24,6 +24,18 @@ function jeux_listes($texte) {
 	return "<ol>$texte</ol>"; 
 }
 
+// retourne un tableau de mots ou d'expressions a partir d'un texte
+function jeux_liste_mots($texte) {
+		$texte = filtrer_entites($texte);
+		$texte = preg_replace("/[,;\.\|\s\t\n\r]+/", " ", $texte);
+		$split = split('"', $texte);
+		$c = count($split);
+		for($i=0; $i<$c; $i++) if ($i & 1) $split[$i] = str_replace(' ','+', $split[$i]);
+		$texte = join('', $split);
+		$texte = str_replace(" ","\t", $texte);
+		$texte = str_replace("+"," ", $texte);
+		return array_unique(split("\t", $texte));
+}
 // ajoute un module jeu a la bibliotheque
 function include_jeux($jeu, &$texte, $indexJeux) {
 	$fonc = 'jeux_'.$jeu;

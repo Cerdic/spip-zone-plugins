@@ -1,56 +1,36 @@
-.grille td.noir {
-	background-color:#000000;
-	color:#000000;
+.jeux_titre{ 
+  text-align : center;
+  font-size : 14;
+  font-weight : bold;
+  color :  #3F5264;
 }
 
-table.grille input, table.grille th{min-width:1.5em;
-width:1.5em;
-text-align:center;
-vertical-align:middle;
-height:1.5em;}
-table.grille td{border:1px solid black;text-align:center}
-.grille td.coin,table.grille input,.grille th{border:0px solid black}
-.erreur{float:left;}
-
-table.grille label{display:none}
-
-
-
-.horizontal ol{list-style-type:upper-alpha}
-
-.vertical, .horizontal{float:left;
-font-size:90%;
-max-width:49%;
-width:auto;
-margin-right:5%;
-margin-left:5%}
-//.horizontal .vertical {float:left}
-
-form.grille{float:left;
-clear:both;
-
-padding:0;
-padding-right:2%;
-margin:0; 
-
-width:auto;
+.jeux_bouton_corriger{ 
+ color :  #3F5264;
+ font-size : 10;  
+ font-weight : bold;
+ background-color : #FFEADE;
 }
 
-p.spip {clear:both}
-
-h4.grille{
-	margin:0;
-	padding:0;
-	font-weight:bold;
+.jeux_score{   
+  text-align:center;
+  width:20%;
+  font-family : arial, helvetica, sans-serif;
+  color :  red;
+  font-size : 12;
+  font-weight : bold;
+  border: 2px solid green;
+  padding: 3px; 
 }
 
-.horizontal ol,.vertical ol{margin:0;
-list-style-position:inside;
+.jeux_point{ 
+  font-size : 10;
+  font-weight : normal;
+  color :  #3F5264;
 }
-.horizontal >ol, .vertical > ol{list-style-position:outside;}
 
-
-.grille{margin:0;padding:0}
-
-.solution{clear:both}
-
+.jeux_erreur{ 
+  font-family : arial, helvetica, sans-serif;
+  color :  red;
+  font-size : 14;
+}

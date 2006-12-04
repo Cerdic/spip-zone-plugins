@@ -54,7 +54,7 @@ function affichage_grille_mc($tableau_grille, $indexJeux, $solution=false){
 
     // entetes : formulaire + grille
     $grille .= (!$solution)? "<form class=\"grille\" action=\"".self()."\" method=\"post\">\n" 
-		: "<div class=\"solution\"><h2 class=\"spip\">"._T('motscroises:solution')." : </h2>" ;
+		: "<div class=\"solution\"><h2 class=\"spip\">"._T('jeux:solution')." : </h2>" ;
     $grille .= '<table class="grille" cellspacing="0" border="0" summary="'
 		. _T('motscroises:table_summary',Array('hauteur'=>$hauteur,'largeur'=>$largeur))
 		. "\">\n\t<tr>\n\t\t<td class=\"coin\"></td>\n";
@@ -95,7 +95,7 @@ function affichage_grille_mc($tableau_grille, $indexJeux, $solution=false){
 	$grille.="</table>\n";
 	
 	(!$solution) ? $grille.="<br /><input id=\"solution\" name=\"solution[]\" type=\"checkbox\"value=\"1\" /><label for=\"solution\" >"._T('motscroises:afficher_solution')."</label><br />\n
-<input type=\"submit\" value=\""._T('motscroises:verifier')."\" name=\"bouton_envoi\" /></form>\n" : $grille.="</div>";
+<input type=\"submit\" value=\""._T('jeux:verifier')."\" name=\"bouton_envoi\" /></form>\n" : $grille.="</div>";
 
 	return $grille;
 }
@@ -132,10 +132,10 @@ function calcul_erreurs_grille($solution, $indexJeux) {
 	else {
 	  list($nbr_erreurs, $nbr_vides) = comparaison_grille($solution, $indexJeux); 
 	  return '<strong class="erreur">'
-		. (($nbr_erreurs==0)?_T('motscroises:aucune_erreur'):(
-		 ($nbr_erreurs==1)?_T('motscroises:une_erreur'):_T("motscroises:nombre_erreurs", Array('err'=>$nbr_erreurs))
+		. (($nbr_erreurs==0)?_T('jeux:aucune_erreur'):(
+		 ($nbr_erreurs==1)?_T('jeux:une_erreur'):_T("jeux:nombre_erreurs", Array('err'=>$nbr_erreurs))
 		))
-		. (($nbr_vides==0)?(($nbr_erreurs==0)?'. '._T('motscroises:bravo'):''):(
+		. (($nbr_vides==0)?(($nbr_erreurs==0)?'. '._T('jeux:bravo'):''):(
 		 ($nbr_vides==1)?' - '._T('motscroises:une_vide'):' - '._T("motscroises:nombre_vides", Array('vid'=>$nbr_vides))
 		))
 		. '</strong><br />';
