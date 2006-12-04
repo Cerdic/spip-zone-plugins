@@ -1,0 +1,21 @@
+[(#REM)
+
+	Vue pour le crayon 'qui'
+
+]
+#CACHE{0}
+
+<BOUCLE_a(AUTEURS){id_auteur}{tous}>
+[<a title="(#EMAIL|texte_backend)">][(#NOM|sinon{#EMAIL})][(#EMAIL|?{</a>})]
+</BOUCLE_a>
+
+<BOUCLE_c(SIGNATURES){id_signature}{statut==.}>
+[<a title="(#EMAIL|texte_backend)">][(#NOM|sinon{#EMAIL})][(#EMAIL|?{</a>})]
+</BOUCLE_c>
+
+<BOUCLE_d(FORUMS){id_forum}{statut==.}>
+[<a title="(#EMAIL|texte_backend)">][(#NOM|sinon{#EMAIL})][(#EMAIL|?{</a>})]
+</BOUCLE_d>
+
+<//B_c>
+<//B_a>

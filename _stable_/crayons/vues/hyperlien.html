@@ -1,0 +1,8 @@
+[(#REM)
+
+	Vue pour le crayon 'hyperlien'
+
+]
+#CACHE{0}
+[(#ENV{id_article}|?{' '})<:voir_en_ligne:>&nbsp;:]
+[<a href="(#ENV{url_site})" class="spip_out">[(#ENV*{nom_site}|typo|sinon{[(#ENV{url_site}|couper{80})]})]</a>]

@@ -1,0 +1,38 @@
+img.crayon-img-changed {
+    display: none;
+}
+.crayon-changed img.crayon-img-changed {
+    display: inline;
+}
+img.crayon-edit, img.crayon-pencil {
+    visibility: hidden;
+}
+.crayon-autorise:hover img.crayon-edit, .crayon-hover img.crayon-edit,
+.crayon-autorise:hover img.crayon-pencil, .crayon-hover img.crayon-pencil {
+    visibility: visible;
+}
+.crayon-autorise:hover, .crayon-hover {
+/*    background-color: #f0f0f0; */
+}
+.crayon-boutons, .crayon-searching {
+    float: right;
+}
+.crayon-boutons {
+    width: 40px;
+    display: none;
+}
+.crayon-boutons div {
+	position:absolute;
+}
+.crayon-boutons a {
+	cursor: pointer;
+}
+.crayon-icones {
+    float: right;
+}
+.crayon-icones span {
+    position:absolute;
+}
+.crayon-edit, .crayon-pencil {
+	cursor: pointer;
+}
