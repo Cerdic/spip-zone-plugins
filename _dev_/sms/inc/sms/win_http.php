@@ -101,7 +101,7 @@ class Net_SMS_win_http extends Net_SMS {
 
         /* Send this message. */
         $response = $this->_post($xml);
-        if (is_a($response, 'PEAR_Error')) {
+        if (is_a($response, 'c_Error')) {
             return array(0, $response->getMessage());
         }
 
@@ -256,7 +256,7 @@ class Net_SMS_win_http extends Net_SMS {
         /* Wrap the xml with the standard tags. */
         $xml = '<?xml version="1.0" standalone="no"?><!DOCTYPE WIN_DELIVERY_2_SMS SYSTEM "winbound_messages_v1.dtd"><WIN_DELIVERY_2_SMS>' . $xml . '</WIN_DELIVERY_2_SMS>';
 
-        $http = new HTTP_Request($this->_base_url, $options);
+        $http = new c_HTTP_Request($this->_base_url, $options);
 
         /* Add the authentication values to POST. */
         $http->addPostData('User', $this->_params['user']);

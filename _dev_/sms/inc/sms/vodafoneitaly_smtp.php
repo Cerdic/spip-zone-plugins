@@ -62,7 +62,7 @@ class Net_SMS_vodafoneitaly_smtp extends Net_SMS {
 
             $mailer = c_Mail::factory('mail');
             $result = $mailer->send($to, $headers, $message['text']);
-            if (is_a($result, 'PEAR_Error')) {
+            if (is_a($result, 'c_Error')) {
                 return array(0, $result->getMessage());
             } else {
                 return array(1, null);

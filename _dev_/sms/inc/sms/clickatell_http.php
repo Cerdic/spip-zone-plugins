@@ -73,7 +73,7 @@ class Net_SMS_clickatell_http extends Net_SMS {
 
         /* Do the HTTP authentication and get the response. */
         $response = Net_SMS_clickatell_http::_callURL($url);
-        if (is_a($response, 'PEAR_Error')) {
+        if (is_a($response, 'c_Error')) {
             return c_PEAR::raiseError(sprintf(_("Authentication failed. %s"), $response->getMessage()));
         }
 
@@ -345,7 +345,7 @@ class Net_SMS_clickatell_http extends Net_SMS {
         $options['timeout'] = 5;
         $options['allowRedirects'] = true;
 
-        $http = new HTTP_Request($this->_base_url . $url, $options);
+        $http = new c_HTTP_Request($this->_base_url . $url, $options);
         @$http->sendRequest();
         if ($http->getResponseCode() != 200) {
             return c_PEAR::raiseError(sprintf(_("Could not open %s."), $url));

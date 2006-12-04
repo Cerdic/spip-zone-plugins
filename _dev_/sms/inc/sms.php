@@ -183,7 +183,7 @@ class Net_SMS {
     function send($message)
     {
         /* Authenticate. */
-        if (is_a($this->authenticate(), 'PEAR_Error')) {
+        if (is_a($this->authenticate(), 'c_Error')) {
             return $this->_auth;
         }
 
@@ -261,7 +261,7 @@ class Net_SMS {
     function getBalance()
     {
         /* Authenticate. */
-        if (is_a($this->authenticate(), 'PEAR_Error')) {
+        if (is_a($this->authenticate(), 'c_Error')) {
             return $this->_auth;
         }
 

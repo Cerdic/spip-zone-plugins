@@ -107,7 +107,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
         /* Append the recipients of this message and call the url. */
         $url .= '&to_num=' . $to;
         $response = $this->_callURL($url);
-        if (is_a($response, 'PEAR_Error')) {
+        if (is_a($response, 'c_Error')) {
             return array(0, $response->getMessage());
         }
 
@@ -153,7 +153,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
                        urlencode($this->_params['user']),
                        urlencode($this->_params['password']));
         $response = $this->_callURL($url);
-        if (is_a($response, 'PEAR_Error')) {
+        if (is_a($response, 'c_Error')) {
             return $response;
         }
 
@@ -185,7 +185,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
                        urlencode($name),
                        $number);
         $response = $this->_callURL($url);
-        if (is_a($response, 'PEAR_Error')) {
+        if (is_a($response, 'c_Error')) {
             return $response;
         }
 
@@ -218,7 +218,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
                        urlencode($name),
                        $number);
         $response = $this->_callURL($url);
-        if (is_a($response, 'PEAR_Error')) {
+        if (is_a($response, 'c_Error')) {
             return $response;
         }
 
@@ -245,7 +245,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
                        urlencode($this->_params['password']),
                        $id);
         $response = $this->_callURL($url);
-        if (is_a($response, 'PEAR_Error')) {
+        if (is_a($response, 'c_Error')) {
             return $response;
         }
 
@@ -275,7 +275,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
                        urlencode($this->_params['user']),
                        urlencode($this->_params['password']));
         $response = $this->_callURL($url);
-        if (is_a($response, 'PEAR_Error')) {
+        if (is_a($response, 'c_Error')) {
             return $response;
         }
 
@@ -323,7 +323,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
                        urlencode($name),
                        implode(',', $numbers));
         $response = $this->_callURL($url);
-        if (is_a($response, 'PEAR_Error')) {
+        if (is_a($response, 'c_Error')) {
             return $response;
         }
 
@@ -355,7 +355,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
                        urlencode($this->_params['password']),
                        $id);
         $response = $this->_callURL($url);
-        if (is_a($response, 'PEAR_Error')) {
+        if (is_a($response, 'c_Error')) {
             return $response;
         }
 
@@ -395,7 +395,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
         }
 
         $response = $this->_callURL($url);
-        if (is_a($response, 'PEAR_Error')) {
+        if (is_a($response, 'c_Error')) {
             return $response;
         }
 
@@ -438,7 +438,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
                        urlencode($this->_params['user']),
                        urlencode($this->_params['password']));
         $response = $this->_callURL($url);
-        if (is_a($response, 'PEAR_Error')) {
+        if (is_a($response, 'c_Error')) {
             return $response;
         }
 
@@ -485,7 +485,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
                        urlencode($this->_params['password']),
                        $id);
         $response = $this->_callURL($url);
-        if (is_a($response, 'PEAR_Error')) {
+        if (is_a($response, 'c_Error')) {
             return $response;
         }
 
@@ -678,7 +678,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
 
         $url = (empty($this->_params['ssl']) ? 'http://' : 'https://') . $this->_base_url . $url;
 
-        $http = new HTTP_Request($url, $options);
+        $http = new c_HTTP_Request($url, $options);
         @$http->sendRequest();
         if ($http->getResponseCode() != 200) {
             return c_PEAR::raiseError(sprintf(_("Could not open %s."), $url));
