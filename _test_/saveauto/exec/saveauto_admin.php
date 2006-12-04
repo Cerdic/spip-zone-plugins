@@ -224,7 +224,7 @@ function exec_saveauto_admin() {
 				 echo _T('saveauto:help_restauration');
          fin_cadre_trait_couleur();
 				 
-        fin_page();
+        echo fin_page();
 
 }
 ?>
