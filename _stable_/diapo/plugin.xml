@@ -1,0 +1,28 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Diapo
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	[bill->spipcarto@gmail.com]
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+	modele diapo
+	</description>
+	<options> <!-- fichier charge a chaque hit -->
+	diapo_options.php
+	</options>
+  <pipeline>
+  	<nom>insert_head</nom>
+  	<inclure>diapo_fonctions.php</inclure>
+  </pipeline>
+	<prefix> 
+	diapo
+	</prefix>
+
+</plugin>
