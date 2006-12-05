@@ -1,0 +1,19 @@
+[(#REM)
+
+	Fond pour le plugin envoi_SMS
+
+]
+#CACHE{0}
+<form>
+<input name='exec' type='hidden' value='envoi_sms' />
+<fieldset><legend>Identification</legend>
+<label><:SMS:Prestataire:></label><input type="text" name="prestataire" value="#ENV{prestataire}"
+ />
+<label><:SMS:Compte:></label><input type="text" name="message" value="#ENV{compte}"
+ />
+</fieldset>
+<fieldset><legend><:SMS:Message:></legend>
+<textarea name="message">[(#ENV{message}|entites_html)]</textarea>
+</fieldset>
+<input type="submit" name="envoi" value="<:SMS:Envoyer:>" />
+</form>

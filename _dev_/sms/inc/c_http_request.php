@@ -3,9 +3,21 @@
  * c_HTTP_Request minimal compat Class
  */
 class c_HTTP_Request {
+	var $_url = '';
+// seules certaines options sont supportees par rapport à l'original
+	var $_method = 'GET';
+	var $_timeout = null;
+	var $_allowRedirects = false;
 	var $_postData = array();
+    var $_responseCode = null;
+    var $_responseBody = null;
+
 	function c_HTTP_Request($url = '', $params = array())
 	{
+		$this->_url = $url;
+        foreach ($params as $key => $value) {
+            $this->{'_' . $key} = $value;
+        }
 	}
     function addPostData($name, $value, $preencoded = false)
     {
@@ -29,6 +41,16 @@ class c_HTTP_Request {
     }
     function sendRequest($saveBody = true)
     {
+    	include_spip('inc/distant');
+    	$page = recuperer_page($this->_url, false, false, 1048576, $this->_postData);
+    	if ($page === false) {
+    		$this->_responseCode = 0;
+    		return;
+    	}
+		$this->_responseCode = 200;
+		if ($saveBody) {
+			$this->_responseBody = page;
+		}
     }
     function getResponseCode()
     {
