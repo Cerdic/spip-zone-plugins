@@ -118,7 +118,7 @@
 				$val = _request($champ);
 			else
 				$val = _request($champ, $c);
-			if (NULL !== $val ) {
+			if ( $val!=NULL && strlen($val) ) {
 
 				// Verifier la conformite des donnees entrees
 				if ($type == 'date') {
