@@ -149,7 +149,7 @@ function jeux_mots_croises($texte, $indexJeux) {
 	
   // parcourir tous les #SEPARATEURS
 	$tableau = jeux_split_texte('mots_croises', $texte);
-	foreach($tableau as $i => $valeur){
+	foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
 	  elseif ($valeur==_JEUX_HORIZONTAL) $horizontal = jeux_listes($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_VERTICAL) $vertical = jeux_listes($tableau[$i+1]);

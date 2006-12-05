@@ -24,14 +24,14 @@ Insere un jeu de Shanghai dans vos articles !
 --------------------------------------------
 
 balises du plugin : <jeux></jeux>
-separateurs obligatoires : #SHANGAI, euh ?
+separateurs obligatoires : [shanghai], euh ?
 separateurs optionnels   : [titre]
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
 
 <jeux>
-	#SHANGAI
+	[shanghai]
 	
 </jeux>
 

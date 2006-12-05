@@ -4,7 +4,7 @@
 .qcm
 {  
   text-align:left;
-  font-size: 80%;
+  font-size: 90%;
   font-family            : arial, helvetica, sans-serif;
   color :  #3F5264;
   font-size : 12;
@@ -15,19 +15,22 @@
 }
 
 .qcm_question{ 
+  font-size: 80%;
   font-size : 12;
   font-weight : bold;
-  color :  #3F5264;
+/*  color :  #3F5264;*/
  }
 
 .qcm_proposition{ 
+  font-size: 80%;
   font-size : 10;
-  color :  #3F5264;
+/*  color :  #3F5264;*/
  }
 
 .qcm_reponse{ 
-  font-size : 10;
-  color :  #3F5264;
+   font-size: 80%;
+ font-size : 10;
+/*  color :  #3F5264;*/
  }
 
 .qcm_precision{
@@ -76,4 +79,9 @@
   color :  #3F5264;
   font-size : 10;  
   background-color : #F3EEEA;
+}
+
+.qcm_radio{
+  margin:1pt;
+  padding:1pt;
 }

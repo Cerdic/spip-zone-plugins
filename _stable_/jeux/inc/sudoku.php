@@ -140,7 +140,7 @@ function jeux_sudoku($texte, $indexJeux) {
 	$titre = _T('sudoku:titre');
 
 	$tableau = jeux_split_texte('sudoku', $texte);
-	foreach($tableau as $i => $valeur){
+	foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
 	  elseif ($valeur==_JEUX_SUDOKU) $sudoku = calcul_tableau_sudoku($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_SOLUTION) $solution = calcul_tableau_sudoku($tableau[$i+1]);

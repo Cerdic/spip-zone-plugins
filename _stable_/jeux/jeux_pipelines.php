@@ -10,6 +10,9 @@
 include_spip('jeux_config');
 include_spip('jeux_utils');
 
+// tableau de parametres exploitables par les plugins
+global $jeux_config;
+
 // fonction principale
 function jeux($chaine, $indexJeux){ 
 	if (strpos($chaine, _JEUX_DEBUT)===false || strpos($chaine, _JEUX_FIN)===false) return $chaine;

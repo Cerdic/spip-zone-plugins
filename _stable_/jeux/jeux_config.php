@@ -19,6 +19,7 @@ define('_JEUX_FIN', '</jeux>');
 // format à utiliser dans la redaction : [separateur]
 define('_JEUX_TITRE', 'titre');		// separateur indiquant le titre du jeu
 define('_JEUX_TEXTE', 'texte');		// separateur indiquant un contenu a garder telquel
+define('_JEUX_CONFIG', 'config');	// separateur permettant de passer des parametres au jeu
 define('_JEUX_REPONSE', 'reponse');
 define('_JEUX_SOLUTION', 'solution');
 define('_JEUX_HORIZONTAL', 'horizontal');
@@ -45,7 +46,7 @@ $jeux_separateurs = array(
 	'mots_croises' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_HORIZONTAL, _JEUX_VERTICAL, _JEUX_SOLUTION),
 	'qcm' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_QCM),
 	'textes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_POESIE, _JEUX_CITATION, _JEUX_AUTEUR, _JEUX_RECUEIL),
-	'trous' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_TROU),
+	'trous' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_TROU, _JEUX_CONFIG),
 //	'pendu' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_PENDU),
 );
 

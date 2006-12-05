@@ -189,13 +189,13 @@ function qcm_affiche_la_question($indexQCM, $corrigee, $gestionPoints) {
       // Sinon des radio boutons
       else {
 		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) 
-          $codeHTML.='<input type="radio" name="'.$nomVarSelect
+          $codeHTML.='<input type="radio" class="qcm_radio" name="'.$nomVarSelect
 		  	. '" value="'.$i.'" id="'.$nomVarSelect.$i.'"><label for="'.$nomVarSelect.$i.'">'
           	. $valeur.'</label><br />';
        }
        $codeHTML.="</div><br />";
        
-    }	//Fin du cas sans correction
+    }	// fin du cas sans correction
 
   // Sinon on affiche la correction
   else {
@@ -229,7 +229,7 @@ function qcm_affiche_la_question($indexQCM, $corrigee, $gestionPoints) {
 	   
 	$codeHTML.='<br />';
      
-  } //Fin du cas avec correction
+  } // fin du cas avec correction
   return $codeHTML;
 }
 
@@ -257,7 +257,7 @@ function jeux_qcm($texte, $indexJeux) {
 
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('qcm', $texte);
-  foreach($tableau as $i => $valeur){
+  foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
 	  elseif ($valeur==_JEUX_QCM) {
 		// remplacement des qcm par : <ATTENTE_QCM>ii</ATTENTE_QCM>
@@ -277,7 +277,8 @@ function jeux_qcm($texte, $indexJeux) {
   // reinserer les qcms mis en forme
   $texte = qcm_inserer_les_qcm($html, $indexJeux, $gestionPoints);
 
-  $tete = '<div class="spip_qcm"><div class="jeux_titre">'.$titre.'<hr /></div>';
+  // calcul des extremes
+  $tete = '<div class="jeux qcm"><div class="jeux_titre">'.$titre.'<hr /></div>';
   if (!isset($_POST["var_correction_".$indexJeux])) { 
 	$tete .= "\n".'<form method="post" action="">';
 	$pied = '<br>
@@ -285,12 +286,8 @@ function jeux_qcm($texte, $indexJeux) {
 	<div align="center"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton_corriger"></div>
 	</form>';
   } else {
-      // On ajoute le score final
-      $pied = '<center><div class="jeux_score">'._T('jeux:score')
-	  			. "&nbsp;$qcm_score&nbsp;/&nbsp;".$qcms['totalscore'].'<br>'
-				. ($qcm_score==$qcms['totalscore']?_T('jeux:bravo'):'').'</div></center>'
-				. '<div class="jeux_bouton_corriger" align="right">[ <a href="'
-				. parametre_url(self(),'var_mode','recalcul').'">'._T('jeux:reinitialiser').'</a> ]</div>';
+      $pied = jeux_afficher_score($qcm_score, $qcms['totalscore'])
+  			. jeux_bouton_reinitialiser();
   }
   
   unset($qcms); unset($qcm_score);

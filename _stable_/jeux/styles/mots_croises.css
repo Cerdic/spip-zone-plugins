@@ -71,6 +71,7 @@ table.motscroises0 {
 table.grille {
 	border:0; 
 	padding:0;
+	margin:0pt;
 }	
 
 table.grille input, table.grille th{
@@ -80,6 +81,8 @@ table.grille input, table.grille th{
 	vertical-align:middle;
 	height:1.5em;
 	border:0;
+	margin:0;
+	padding:0;
 }
 
 table.grille td{

@@ -80,7 +80,7 @@ function jeux_textes($texte, $indexJeux) {
 
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('textes', $texte);
-  foreach($tableau as $i => $valeur){
+  foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
 	  elseif ($valeur==_JEUX_POESIE) $poesie = '<poesie>'.$tableau[$i+1].'</poesie>';
 	  elseif ($valeur==_JEUX_CITATION) $citation = _GUILLEMET_OUVRANT.$tableau[$i+1]._GUILLEMET_FERMANT;

@@ -10,12 +10,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'corriger'		=> 'Controlla',	
 'verifier' 		=> 'Controlla',
 'solution'		=>'Soluzione',
-'score'			=> "Score&nbsp;:",	// TODO
+'indices'		=> 'Indizii:',
+'score'			=> "Risultato:",	// TODO
 
 'point'		=> "punto",
 'points'	=> "punti",
 
-'reinitialiser'		=> "Ricarica",
+'reinitialiser'		=> 'Ricarica',
+'recommencer'		=> 'Ricomincia',
+
 // 'qcm_reinitialiser' => "Ricarica il questionario",
 
 'aucune_erreur'		=> 'Nessun errore',

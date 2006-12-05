@@ -18,7 +18,7 @@ Insere un test de closure dans vos articles !
 
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : [texte], [trou]
-separateurs optionnels   : [titre]
+separateurs optionnels   : [titre], [config]
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
@@ -37,6 +37,9 @@ Exemple de syntaxe dans l'article :
 	trou, vide, blanc
 	[texte]
 	autorise les réponses "trou", "vide" ou "blanc".
+	[config]
+	aide = oui
+	indices = oui
 </jeux>
 
 La liste des mots a placer apres [trou] peut accepter 
@@ -55,40 +58,16 @@ function trous_inserer_le_trou($indexJeux, $indexTrou, $size, $corriger) {
   // Initialisation du code a retourner
   $nomVarSelect = "var{$indexJeux}_T{$indexTrou}";
   $mots = $propositionsTROUS[$indexTrou];
+  $prop = strtolower($_POST[$nomVarSelect] = trim($_POST[$nomVarSelect]));
   
-  if (!$corriger){
-    // affichage sans correction :
-     $codeHTML = " <input name=\"trou$indexTrou\" size=\"$size\" onfocus=\"TrackFocus($indexTrou)\" type=\"text\"> "
-	 ." (".join('|', $mots).")";
-  }
+  $codeHTML = " <input name=\"$nomVarSelect\" class=\"jeux_input\" size=\"$size\" onfocus=\"TrackFocus('$nomVarSelect')\" type=\"text\""
+	  . ($prop?" value=\"{$_POST[$nomVarSelect]}\"":'') . "> "
+	 ;// . " (".join('|', $mots).")";
 
-  // Sinon on affiche la correction
-  else {
- /*
-	 if ($_POST[$nomVarSelect]) {
-		// les points de la reponse donnee...
-		$pointsR = $qcms[$indexQCM]['points'][$_POST[$nomVarSelect]];
-		
-		// la reponse donnee & precision des points eventuels de la mauvaise reponse...
-		$codeHTML.='<div class="qcm_reponse">'
-			 .((($pointsR==$pointsQ) || ($pointsR==0))?_T('jeux:votre_choix'):qcm_les_points(_T('jeux:votre_choix'), $pointsR))
-			 .$qcms[$indexQCM]['propositions'][$_POST[$nomVarSelect]].'</div>';
-
-		// on donne les points de la reponse quoiqu'il arrive
-		$qcm_score += $pointsR;
-		
-        if ($qcms[$indexQCM]['bonnereponse']==$_POST[$nomVarSelect]) 
-        // Si c'est juste
-			$codeHTML .= '<div class="qcm_correction_juste">'._T('qcm:qcm_reponseJuste').'</div>';
-        // Si c'est faux
-         else $codeHTML .= '<div class="qcm_correction_faux">'._T('qcm:qcm_reponseFausse').'</div>';
-           
-	// pas de reponse postee...
-	} else $codeHTML.='<div class="qcm_correction_null">'._T('qcm:qcm_reponseNulle').'</div>';
-	   
-	$codeHTML.='<br />';
-*/     
-  } //Fin du cas avec correction
+  if ($corriger){
+   if ($prop!='' && in_array($prop, $mots)) ++$scoreTROUS;
+   
+  } // Fin du cas avec correction
 
   return $codeHTML;
 }
@@ -109,20 +88,32 @@ function trous_inserer_les_trous($chaine, $indexJeux) {
   return $chaine;
 }
 
+// afficher l'ensemble des solutions dans le desordre...
+// si plusieurs solutions sont possibles, seule la premiere est retenue
+function trous_afficher_indices() {
+ global $propositionsTROUS;
+ foreach ($propositionsTROUS as $prop) $indices[] = $prop[0];
+ shuffle($indices);
+ return '<br>&nbsp;<br>'._T('jeux:indices').'&nbsp;'
+// return '<br><center><table border="1" cellpadding="10" align="center"><tbody><tr><td><b>&nbsp;&nbsp;&nbsp;'
+ 	. join(' -&nbsp;', $indices)
+;//	. '</b></td></tr></tbody></table></center>';
+}
+
 function jeux_trous($texte, $indexJeux) {
-  global $propositionsTROUS;
+  global $propositionsTROUS, $scoreTROUS;
   $titre = $html = false;
-  $indexTrou = 0;
+  $indexTrou = $scoreTROUS = 0;
 
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('trous', $texte); 
-  foreach($tableau as $i => $valeur){
+  foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
 	  elseif ($valeur==_JEUX_TROU) {
 		// remplacement des trous par : <ATTENTE_TROU>ii</ATTENTE_TROU>
 		$html .= "<ATTENTE_TROU>$indexTrou</ATTENTE_TROU>";
-		$propositionsTROUS[$indexTrou] = jeux_liste_mots($tableau[$i+1]);
+		$propositionsTROUS[$indexTrou] = jeux_liste_mots_min($tableau[$i+1]);
 		$indexTrou++;
 	  }
   }
@@ -131,23 +122,20 @@ function jeux_trous($texte, $indexJeux) {
   $texte = trous_inserer_les_trous($html, $indexJeux);
 
   $tete = '<div class="jeux">' . ($titre?'<div class="jeux_titre">'.$titre.'<hr /></div>':'');
+  $pied = jeux_config('indices')?trous_afficher_indices():'';
+  
   if (!isset($_POST["var_correction_".$indexJeux])) { 
 	$tete .= "\n".'<form method="post" action="">';
-	$pied = '<br>
-	<input type="hidden" name="var_correction_'.$indexJeux.'" value="yes">
+	$pied .= '<br><input type="hidden" name="var_correction_'.$indexJeux.'" value="yes">
 	<div align="center"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton_corriger"></div>
 	</form>';
   } else {
       // On ajoute le score final
-      $pied = '<center><div class="jeux_score">'._T('jeux:jeux_score')
-	  			. "&nbsp;$qcm_score&nbsp;/&nbsp;".$qcms['totalscore'].'<br>'
-				. ($qcm_score==$qcms['totalscore']?_T('jeux:bravo'):'').'</div></center>'
-				. '<div class="jeux_bouton_corriger" align="right">[ <a href="'
-				. parametre_url(self(),'var_mode','recalcul').'">'._T('trous:trous_reinitialiser').'</a> ]</div>';
+      $pied .= jeux_afficher_score($scoreTROUS, $indexTrou)
+  			. jeux_bouton_recommencer();
   }
   
-  unset($propositionsTROUS);
-  
-  return $tete.$texte.$pied;
+  unset($propositionsTROUS); unset($scoreTROUS);
+  return $tete.$texte.$pied.'</div>';
 }
 ?>

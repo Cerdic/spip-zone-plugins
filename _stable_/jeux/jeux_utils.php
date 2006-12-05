@@ -6,13 +6,34 @@
 #  Licence : GPL                                    #
 #---------------------------------------------------#
 
+// 3 fonctions pour traiter la valeur du parametre de configuration place apres le separateur [config]
+global $jeux_config;
+function jeux_config($param) {
+  global $jeux_config;
+  return in_array($jeux_config[$param], array('oui', 'yes', '1', 'si', 'ja', strtolower(_T('item_oui'))));
+}
+function jeux_config_set($param, $valeur) {
+  global $jeux_config;
+  if ($param!='') $jeux_config[$param] = $valeur;
+}
+function jeux_config_init($texte) {
+ $lignes = split("\n", $texte);
+ foreach ($lignes as $ligne)
+  if (preg_match('/([^=]+)=(.+)/', $ligne, $regs)) jeux_config_set(trim($regs[1]), trim($regs[2]));
+}
+
 // splitte le texte du jeu avec les separateurs concernes
+// et traite les parametres de config
 function jeux_split_texte($jeu, &$texte) {
   global $jeux_separateurs;
-  $texte = '['._JEUX_TEXTE.']'.trim($texte);
+  $texte = '['._JEUX_TEXTE.']'.trim($texte).' ';
   $expr = '/(\['.join('\]|\[', $jeux_separateurs[$jeu]).'\])/';
   $tableau = preg_split($expr, $texte, -1, PREG_SPLIT_DELIM_CAPTURE);
-  foreach($tableau as $i => $valeur) $tableau[$i] = preg_replace('/^\[(.*)\]$/', '\\1', trim($valeur));
+//  foreach($tableau as $i => $valeur) $tableau[$i] = preg_replace('/^\[(.*)\]$/', '\\1', trim($valeur));
+  foreach($tableau as $i => $valeur) if (($i & 1) && preg_match('/^\[(.*)\]$/', trim($valeur), $reg)) {
+   $tableau[$i] = strtolower(trim($reg[1]));
+   if ($reg[1]==_JEUX_CONFIG && $i+1<count($tableau)) jeux_config_init($tableau[$i+1]); 
+  }
   return $tableau;
 }  
 
@@ -26,16 +47,40 @@ function jeux_listes($texte) {
 
 // retourne un tableau de mots ou d'expressions a partir d'un texte
 function jeux_liste_mots($texte) {
-		$texte = filtrer_entites($texte);
-		$texte = preg_replace("/[,;\.\|\s\t\n\r]+/", " ", $texte);
-		$split = split('"', $texte);
-		$c = count($split);
-		for($i=0; $i<$c; $i++) if ($i & 1) $split[$i] = str_replace(' ','+', $split[$i]);
-		$texte = join('', $split);
-		$texte = str_replace(" ","\t", $texte);
-		$texte = str_replace("+"," ", $texte);
-		return array_unique(split("\t", $texte));
+	$texte = filtrer_entites(trim($texte));
+	$texte = preg_replace("/[,;\.\|\s\t\n\r]+/", " ", $texte);
+	$split = split('"', $texte);
+	$c = count($split);
+	for($i=0; $i<$c; $i++) if ($i & 1) $split[$i] = str_replace(' ','+', $split[$i]);
+	$texte = join('', $split);
+	$texte = str_replace(" ","\t", $texte);
+	$texte = str_replace("+"," ", $texte);
+	return (array_unique(split("\t", $texte)));
 }
+function jeux_liste_mots_maj($texte) {
+	return jeux_liste_mots(strtoupper($texte));
+}
+function jeux_liste_mots_min($texte) {
+	return jeux_liste_mots(strtolower($texte));
+}
+
+// retourne la boite de score
+function jeux_afficher_score($score, $total) {
+	return '<center><div class="jeux_score">'._T('jeux:score')
+	  			. "&nbsp;$score&nbsp;/&nbsp;".$total.'<br>'
+				. ($score==$total?_T('jeux:bravo'):'').'</div></center>';
+}
+
+// fonctions qui retournent des boutons
+function jeux_bouton_reinitialiser() {
+	return '<div class="jeux_bouton_corriger" align="right">[ <a href="'
+	 . parametre_url(self(),'var_mode','recalcul').'">'._T('jeux:reinitialiser').'</a> ]</div>';
+}
+function jeux_bouton_recommencer() {
+	return '<div class="jeux_bouton_corriger" align="right">[ <a href="'
+	 . parametre_url(self(),'var_mode','recalcul').'">'._T('jeux:recommencer').'</a> ]</div>';
+}
+
 // ajoute un module jeu a la bibliotheque
 function include_jeux($jeu, &$texte, $indexJeux) {
 	$fonc = 'jeux_'.$jeu;

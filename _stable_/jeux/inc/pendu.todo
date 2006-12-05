@@ -22,6 +22,11 @@ balises du plugin : <jeux></jeux>
 separateurs obligatoires : [pendu]
 separateurs optionnels   : [titre], [texte]
 
+Règles du jeu :
+- Vous devez choisir une lettre à chaque essai.
+- Si la lettre existe dans le mot, elle apparaît à la bonne place.
+- La tête, un bras, une jambe... A chaque erreur, vous êtes un peu plus pendu. Vous avez droit à 6 erreurs. Bonne chance!
+
 Exemple de syntaxe dans l'article :
 -----------------------------------
 
