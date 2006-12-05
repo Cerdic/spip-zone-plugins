@@ -16,7 +16,7 @@ contactez moi à vincevg@free.fr.
           3. Faire une page de personnalisation dans la partie configuration, 
           (le style de la barre d'outils, choisir les boutons  …),
           4. Permettre le basculement entre l'éditeur spip et fckeditor,
-          5. Intégrer les liens vers d'autres articles, 
+          5. Intégrer les liens vers d'autres articles (Terminé Valérian), 
           6. Prévoir un loader, 
           7. Ajouter la fonctionnalité note de bas de page, 
           8. Redim auto selon la taille d'écran,
@@ -26,6 +26,7 @@ contactez moi à vincevg@free.fr.
           12. Texte de survol,
           13. Intégrer les raccourcis Typo spip,
           14. Faire du vrai wywiwyg en attribuant à la fenêtre fck la feuille du squelette.
+          15. Intégrer l'insertion de fichiers uploadés par SPIP (liens et intégration) (Terminé Valérian)
           
 B. Obligation de commenter les commits
 
