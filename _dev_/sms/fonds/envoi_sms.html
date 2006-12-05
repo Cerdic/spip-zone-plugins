@@ -4,16 +4,36 @@
 
 ]
 #CACHE{0}
-<form>
-<input name='exec' type='hidden' value='envoi_sms' />
+<div>
+<form method="post">
+<input name="hash" type="hidden" value="#ENV{hash}" />
+<input name="arg" type="hidden" value="#ENV{arg}" />
+<input name="exec" type="hidden" value="envoi_sms" />
 <fieldset><legend>Identification</legend>
-<label><:SMS:Prestataire:></label><input type="text" name="prestataire" value="#ENV{prestataire}"
- />
-<label><:SMS:Compte:></label><input type="text" name="message" value="#ENV{compte}"
- />
+<label>*<:SMS:prestataire:></label><select name="prestataire">
+<option value="clickatell_http"
+	[(#ENV{prestataire}|=={clickatell_http}|?{selected="selected"})]>
+	Clickatell</option>
+<option value="sms2email_http"
+	[(#ENV{prestataire}|=={sms2email_http}|?{selected="selected"})]>
+	sms2email</option>
+</select>
+<label>*<:SMS:compte:></label>
+<input type="text" name="user" value="#ENV{user}" size="10" />
+<label>*<:SMS:mot_de_passe:>
+</label><input type="password" name="password" value="#ENV{password}" size="10" />
+<label><:SMS:api_id:></label>
+<input type="text" name="api_id" value="#ENV{api_id}" size="8" />
 </fieldset>
 <fieldset><legend><:SMS:Message:></legend>
-<textarea name="message">[(#ENV{message}|entites_html)]</textarea>
+<label>*<:SMS:destinataire:></label>
+<input type="text" name="to" value="#ENV{to}" size="15" />
+<label><:SMS:de:></label>
+<input type="text" name="from" value="#ENV{from}" size="15" />
+<label><:SMS:id:></label>
+<input type="text" name="id" value="#ENV{id}" size="5" />
+<textarea name="text" rows="5" style="width:100%">[(#ENV{text}|entites_html)]</textarea>
 </fieldset>
 <input type="submit" name="envoi" value="<:SMS:Envoyer:>" />
 </form>
+</div>
