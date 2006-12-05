@@ -40,7 +40,28 @@ function transmet_prestataire(&$contexte)
 {
 	include_spip('inc/sms');
 	$contexte['resultat'] = '';
-	$contexte['resultat'] = print_r($contexte, true);
+//	$contexte['resultat'] = print_r($contexte, true);
+
+    $sender =& Net_SMS::factory($contexte['prestataire'],
+                         array(	'user' => $contexte['user'],
+								'password' => $contexte['password'],
+								'api_id' => $contexte['api_id'] ));
+    if (c_pear::isError($sender))   {
+		$contexte['resultat'] = _L('factory SMS failed') . '<br />' .
+			print_r($sender, true);
+		return $contexte['resultat'];
+    }
+	//send message and return result
+	$msg = array('to'=>$contexte['to'],
+	             'from'=>$contexte['from'],
+				 'id'=>$contexte['id'],
+				 'text'=>$contexte['text']);
+	$e = $sender->send($msg);
+    if (c_pear::isError($e))   {
+		$contexte['resultat'] = _L('transmission_loupee') .
+		   '<br />' . print_r($msg, true) .
+		   '<br />' . print_r($e, true);
+    }
 	return $contexte['resultat'];
 }
 
@@ -48,7 +69,8 @@ function transmet_prestataire(&$contexte)
  Fabriquer les balises des champs d'apres un modele fonds/envoi_sms.html
 	$contexte est un tableau (nom=>valeur) qui sera enrichi puis passe à recuperer_fond
 */
-function envoi_sms_fond($contexte = array()) {
+function envoi_sms_fond($contexte = array())
+{
     $contexte['lang'] = $GLOBALS['spip_lang'];
     $contexte['arg'] = 'envoi_sms-0.1.0';
     $contexte['hash'] =  calculer_action_auteur('-' . $contexte['arg']);
@@ -57,7 +79,8 @@ function envoi_sms_fond($contexte = array()) {
     return recuperer_fond('fonds/envoi_sms', $contexte);
 }
 
-function envoi_sms_debut_page($message = '') {
+function envoi_sms_debut_page($message = '')
+{
 	include_spip('inc/presentation');
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
