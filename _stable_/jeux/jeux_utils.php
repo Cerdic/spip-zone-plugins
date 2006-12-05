@@ -6,7 +6,7 @@
 #  Licence : GPL                                    #
 #---------------------------------------------------#
 
-// 3 fonctions pour traiter la valeur du parametre de configuration place apres le separateur [config]
+// 4 fonctions pour traiter la valeur du parametre de configuration place apres le separateur [config]
 global $jeux_config;
 function jeux_config($param) {
   global $jeux_config;
@@ -21,11 +21,16 @@ function jeux_config_init($texte) {
  foreach ($lignes as $ligne)
   if (preg_match('/([^=]+)=(.+)/', $ligne, $regs)) jeux_config_set(trim($regs[1]), trim($regs[2]));
 }
+function jeux_config_reset() {
+  global $jeux_config;
+  $jeux_config = false;
+}
 
 // splitte le texte du jeu avec les separateurs concernes
 // et traite les parametres de config
 function jeux_split_texte($jeu, &$texte) {
   global $jeux_separateurs;
+  jeux_config_reset();
   $texte = '['._JEUX_TEXTE.']'.trim($texte).' ';
   $expr = '/(\['.join('\]|\[', $jeux_separateurs[$jeu]).'\])/';
   $tableau = preg_split($expr, $texte, -1, PREG_SPLIT_DELIM_CAPTURE);

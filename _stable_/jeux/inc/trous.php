@@ -38,7 +38,6 @@ Exemple de syntaxe dans l'article :
 	[texte]
 	autorise les réponses "trou", "vide" ou "blanc".
 	[config]
-	aide = oui
 	indices = oui
 </jeux>
 

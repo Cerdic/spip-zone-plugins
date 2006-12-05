@@ -89,9 +89,9 @@ function jeux_textes($texte, $indexJeux) {
   }
   
   return 
-      ($titre?"<span class=\"textes_titre\">$titre</span><br />":'')
+      ($titre?"<span class=\"jeux_titre textes_titre\">$titre</span><br />":'')
   	. ( $poesie?"<span class=\"textes_poesie\">$poesie</span>":
-		 ($citation?"<span class=\"textes_citation\">$citation</span>":
+		 ($citation?"<span class=\"	textes_citation\">$citation</span>":
 		 '')
 	  ) 
 	. ($auteur?"<br /><span class=\"textes_auteur\">$auteur</span>":'')

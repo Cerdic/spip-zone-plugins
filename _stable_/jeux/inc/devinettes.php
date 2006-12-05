@@ -15,7 +15,7 @@ Insere des devinettes ou charades dans vos articles !
 
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : [devinette] ou [charade]
-separateurs optionnels   : [reponse], [titre], [texte]
+separateurs optionnels   : [reponse], [titre], [texte], [config]
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
@@ -25,11 +25,12 @@ Exemple de syntaxe dans l'article :
 	Comment appelle t-on un patron de la nouvelle économie ?
 	[reponse]
 	Un e-responsable
-	
 	[devinette]
 	Quel est le point commun entre un contrôleur des impôts et un spermatozoïde ?
 	[reponse]
 	Tous les 2 ont 1 chance sur 3 millions de devenir un jour un être humain.
+	[config]
+	reponse = oui
 </jeux>
 <jeux>
 	[titre]
@@ -39,18 +40,19 @@ Exemple de syntaxe dans l'article :
 	Mon deuxième est la moitié d'un cheveux.
 	Mon tout vit à la ferme.
 	[reponse]
-	la vache
+	La vache
 </jeux>
 
 */
 function devinettes_devinette($texte) {
- return $texte?"<span class=\"jeux_texte devinettes_devinette\">$texte</span>":'';
+ return $texte?"<p class=\"jeux_question devinettes_devinette\">$texte</p>":'';
 }
 function devinettes_charade($texte) {
  $texte = "<poesie>$texte</poesie>";
- return $texte?"<span class=\"jeux_texte devinettes_charade\">$texte</span>":'';
+ return $texte?"<p class=\"jeux_question devinettes_charade\">$texte</p>":'';
 }
 function devinettes_reponse($texte) {
+ if (!jeux_config('reponse')) return '';
  include_spip('inc/filtrer');
  $image = image_typo($texte, 'taille=10');
  $image = aligner_droite(filtrer('image_flip_vertical', filtrer('image_flip_horizontal', $image)));

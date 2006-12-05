@@ -19,6 +19,14 @@
 /*  color :  #3F5264; */
 }
 
+.qcm_question{ 
+  font-size: 80%;
+  font-size : 12;
+  font-weight : bold;
+/*  color :  #3F5264;*/
+ }
+
+
 .jeux_bouton_corriger{ 
  color :  #3F5264;
  font-size: 80%;

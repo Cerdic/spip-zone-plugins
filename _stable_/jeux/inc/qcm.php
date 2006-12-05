@@ -153,7 +153,7 @@ function qcm_affiche_la_question($indexQCM, $corrigee, $gestionPoints) {
 	$question = qcm_les_points($question, $pointsQ);
   } else $pointsQ = 1;
 
-  $codeHTML = "<div class=\"qcm_question\">".definir_puce().$question.'</div>';
+  $codeHTML = "<div class=\"jeux_question\">".definir_puce().$question.'</div>';
   if (!$corrigee){
     // affichage sans correction :
      $codeHTML.="\n<div class=\"qcm_proposition\">";
