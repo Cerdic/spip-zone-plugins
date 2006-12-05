@@ -158,13 +158,12 @@
 						supprimer_fichier($_FILES[$champ]['tmp_name']);
 					}
 				}
-				if ($type=='select' or $type=='mot')
-					if (!isset($infos['choix'][$val]))
-						$erreur[$champ] = _T("forms:donnee_inattendue");
-				if ($type=='multiple')
+				if ($type=='multiple' or $type=='select' or $type=='mot'){
+					if (!is_array($val)) $val = array($val);
 					foreach($val as $v)
 						if (!isset($infos['choix'][$v]))
 							$erreur[$champ] = _T("forms:donnee_inattendue");
+				}
 				if (isset($GLOBALS['forms_types_champs_etendus'][$type])){
 					$match = $GLOBALS['forms_types_champs_etendus'][$type]['match'];
 					if (strlen($match) && !preg_match($match,$val))
