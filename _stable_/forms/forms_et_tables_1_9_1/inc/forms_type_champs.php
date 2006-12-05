@@ -87,13 +87,15 @@
 		}
 		foreach($structure as $champ=>$infos){
 			$type = $infos['type'];
-			$val = _request($champ, $c);
+			if ($GLOBALS['spip_version_code']<1.92)
+				$val = _request($champ);
+			else
+				$val = _request($champ, $c);
 
 			// verifier la presence des champs obligatoires
 			if (!$val || ($type == 'fichier' && !$_FILES[$champ]['tmp_name'])) {
 				if ($infos['obligatoire'] == 'oui')
 					$erreur[$champ] = _T("forms:champ_necessaire");
-				continue;
 			}
 		}
 
@@ -112,7 +114,11 @@
 		}
 		foreach($structure as $champ=>$infos){
 			$type = $infos['type'];
-			if (NULL !== ($val = _request($champ, $c))) {
+			if ($GLOBALS['spip_version_code']<1.92)
+				$val = _request($champ);
+			else
+				$val = _request($champ, $c);
+			if (NULL !== $val ) {
 
 				// Verifier la conformite des donnees entrees
 				if ($type == 'date') {
