@@ -145,7 +145,7 @@ function BarreTypoEnrichie_post_propre($texte) {
 
 		);
 		$texte = preg_replace($cherche1, $remplace1, $texte);
-		$texte = paragrapher($texte); // il faut reparagrapher a cause des raccourcis typo que l'on a ajoute (block div)
+		$texte = paragrapher($texte,$GLOBALS['toujours_paragrapher']); // il faut reparagrapher a cause des raccourcis typo que l'on a ajoute (block div)
 	return $texte;
 }
 
