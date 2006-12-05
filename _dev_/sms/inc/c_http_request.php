@@ -41,8 +41,15 @@ class c_HTTP_Request {
     }
     function sendRequest($saveBody = true)
     {
+    	$url = $this->_url;
+    	if ($this->_method == 'GET') {
+    		foreach ($this->_postData as $c => $v) {
+    			$url = parametre_url($url, $c, $v);
+    		}
+    		$this->_postData = '';
+    	}
     	include_spip('inc/distant');
-    	$page = recuperer_page($this->_url, false, false, 1048576, $this->_postData);
+    	$page = recuperer_page($url, false, false, 1048576, $this->_postData);
     	if ($page === false) {
     		$this->_responseCode = 0;
     		return;
