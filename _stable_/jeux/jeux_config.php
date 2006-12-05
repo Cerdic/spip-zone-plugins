@@ -46,6 +46,7 @@ $jeux_separateurs = array(
 	'mots_croises' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_HORIZONTAL, _JEUX_VERTICAL, _JEUX_SOLUTION),
 	'qcm' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_QCM),
 	'textes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_POESIE, _JEUX_CITATION, _JEUX_AUTEUR, _JEUX_RECUEIL),
+	'devinettes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_DEVINETTE, _JEUX_CHARADE, _JEUX_REPONSE),
 	'trous' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_TROU, _JEUX_CONFIG),
 //	'pendu' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_PENDU),
 );
@@ -64,6 +65,7 @@ $jeux_signatures = array(
 	'mots_croises' => array(_JEUX_HORIZONTAL, _JEUX_VERTICAL),
 	'qcm' => array(_JEUX_QCM),
 	'textes' => array(_JEUX_POESIE, _JEUX_CITATION),
+	'devinettes' => array(_JEUX_DEVINETTE, _JEUX_CHARADE),
 	'trous' => array(_JEUX_TROU),
 //	'pendu' => array(_JEUX_PENDU),
 );

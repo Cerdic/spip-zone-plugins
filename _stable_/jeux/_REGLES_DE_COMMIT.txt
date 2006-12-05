@@ -12,8 +12,8 @@ A. Observer le planning de travail. Pour le modifier, proposez-nous vos idées !
           
           1. Prévoir Plusieurs jeux dans une page (en cours...)
           2. Meilleur css
-          3. AJAX
-          4. Ajouter des langues
+          3. AJAX/jQuery
+          4. Traductions et ajouts de langues
           5. Statistiques des performances et des timings
           6. Sauvegarde des jeux en cours (utilisateurs identifiés)
           7. D'autres jeux, encore et encore !

@@ -53,33 +53,11 @@ Exemple de syntaxe dans l'article :
 
   Nom du plugin      : 	Un QCM dans vos articles
   Auteur             : 	Patrice VANNEUFVILLE 
-  						patfr@ifrance.com
  						(sur une idee originale de Mathieu GIANNECCHINI, 2003) 
   Date               : 	30 octobre 2006
   Fonction du plugin : 	Parse le code du QCM tape dans SPIP et stocke
                        	les questions, reponses et commentaires
                        	dans un tableau et retourne le code HTML du QCM
-  Mode d'emploi		 :	http://www.spip-contrib.net/Un-QCM-dans-vos-articles
-  
-  Titre du QCM : 
-	- soit sur une ligne de la forme 'T Voici mon titre' placee entre les
-	  balises <qcm> et </qcm>
-  	- soit entre les balises <qcm-titre> et </qcm-titre>
-	- soit entre les balises <intro> et </intro>
-		(Spip s'en servira egalement en cas d'absence de descriptif pour 
-		calculer la balise #INTRODUCTION utilisee pour resumer l'article)
-
-  Calcul de #INTRODUCTION : si introduction() n'est pas surchargee, Spip cherche 
-  d'abord le descriptif, puis en cas d'echec, le contenu du texte situé entre 
-  les balises <intro> et </intro>. En dernier lieu, Spip utilise les 500 premiers 
-  caractères du chapeau suivi du texte.
-  Attention donc : pour ne pas faire apparaitre le contenu du QCM avec les 
-  reponses, il vaut mieux penser à bien définir :
-  	- soit le descriptif de l'article 
-	- soit une introduction placee entre les balises <intro> et </intro>
-		(utiliser dans ce cas les balises <qcm-titre> et </qcm-titre>
-		pour definir le titre du QCM)
-	- soit le titre du QCM place entre les balises <intro> et </intro>
   
 */
  

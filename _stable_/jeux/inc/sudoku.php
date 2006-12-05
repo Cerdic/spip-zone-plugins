@@ -11,7 +11,7 @@ Insere une grille de mots croises dans vos articles !
 -----------------------------------------------------
 
 balises du plugin : <jeux></jeux>
-separateurs obligatoires : [horizontal], [vertical], [solution]
+separateurs obligatoires : [sudoku], [solution]
 separateurs optionnels   : [titre], [texte]
 
 Exemple de syntaxe dans l'article :
@@ -25,7 +25,7 @@ Exemple de syntaxe dans l'article :
 	8-4---365
 	2-6---8-9
 	159---2-7
-	3--8--1--
+	3 --8--1--
 	-----6-38
 	5----2-94
 	
@@ -42,7 +42,7 @@ Exemple de syntaxe dans l'article :
 </jeux>
 
 */
-//affiche la grille de sudoku, en format solution au cas ou
+// affiche la grille de sudoku, en format solution au cas ou
 function affichage_sudoku($tableau_sudoku, $indexJeux, $solution=false){
 	
 	// les variables de la grille
