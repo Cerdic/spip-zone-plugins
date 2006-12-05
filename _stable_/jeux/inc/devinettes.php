@@ -31,12 +31,23 @@ Exemple de syntaxe dans l'article :
 	[reponse]
 	Tous les 2 ont 1 chance sur 3 millions de devenir un jour un être humain.
 </jeux>
+<jeux>
+	[titre]
+	Pour les enfants...
+	[charade]
+	Mon premier se dirige quelque part.
+	Mon deuxième est la moitié d'un cheveux.
+	Mon tout vit à la ferme.
+	[reponse]
+	la vache
+</jeux>
 
 */
 function devinettes_devinette($texte) {
  return $texte?"<span class=\"jeux_texte devinettes_devinette\">$texte</span>":'';
 }
 function devinettes_charade($texte) {
+ $texte = "<poesie>$texte</poesie>";
  return $texte?"<span class=\"jeux_texte devinettes_charade\">$texte</span>":'';
 }
 function devinettes_reponse($texte) {
