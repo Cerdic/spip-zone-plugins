@@ -32,6 +32,7 @@ define('_JEUX_DEVINETTE', 'devinette');
 define('_JEUX_TROU', 'trou');
 define('_JEUX_POESIE', 'poesie');
 define('_JEUX_CITATION', 'citation');
+define('_JEUX_BLAGUE', 'blague');
 define('_JEUX_AUTEUR', 'auteur');
 define('_JEUX_RECUEIL', 'recueil');
 define('_JEUX_PENDU', 'pendu');
@@ -45,7 +46,7 @@ $jeux_separateurs = array(
 	'kakuro' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_KAKURO, _JEUX_SOLUTION),
 	'mots_croises' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_HORIZONTAL, _JEUX_VERTICAL, _JEUX_SOLUTION),
 	'qcm' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_QCM),
-	'textes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_POESIE, _JEUX_CITATION, _JEUX_AUTEUR, _JEUX_RECUEIL),
+	'textes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_POESIE, _JEUX_CITATION, _JEUX_BLAGUE, _JEUX_AUTEUR, _JEUX_RECUEIL),
 	'devinettes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_DEVINETTE, _JEUX_CHARADE, _JEUX_REPONSE, _JEUX_CONFIG),
 	'trous' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_TROU, _JEUX_CONFIG),
 //	'pendu' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_PENDU),
@@ -64,7 +65,7 @@ $jeux_signatures = array(
 	'kakuro' => array(_JEUX_KAKURO),
 	'mots_croises' => array(_JEUX_HORIZONTAL, _JEUX_VERTICAL),
 	'qcm' => array(_JEUX_QCM),
-	'textes' => array(_JEUX_POESIE, _JEUX_CITATION),
+	'textes' => array(_JEUX_POESIE, _JEUX_CITATION, _JEUX_BLAGUE),
 	'devinettes' => array(_JEUX_DEVINETTE, _JEUX_CHARADE),
 	'trous' => array(_JEUX_TROU),
 //	'pendu' => array(_JEUX_PENDU),
@@ -83,6 +84,6 @@ $jeux_header_prive = array('jeux','qcm', 'mots_croises-prive');
 // liste des js a placer dans le header prive
 // dossier jeux/javascript/
 global $jeux_javascript;
-$jeux_javascript = array('mots_croises');
+$jeux_javascript = array('mots_croises', 'layer');
 
 ?>

@@ -1,67 +1,72 @@
-.jeux
-{  
-  text-align:left;
-  font-size: 90%;
-  /*font-family            : arial, helvetica, sans-serif;*/
-  color :  #3F5264;
-  /*font-size : 12;*/
-  border: 1px solid #F78C54;
-  padding: 3px; 
-  marging: 3px; 
-  background-color : #FFEADE;
-  width:100%;
+* {
+ margin:0pt;
+ padding:0pt;
+}
+
+.jeux { 
+ text-align:left;
+ font-size: 90%;
+ /*font-family     : arial, helvetica, sans-serif;*/
+ color: #3F5264;
+ /*font-size: 12;*/
+ border: 1px solid #F78C54;
+ padding: 3px; 
+ marging: 3px; 
+ background-color: #FFEADE;
+ width:100%;
 }
 
 .jeux_titre{ 
-  text-align : center;
-  font-size : 14;
-  font-weight : bold;
-/*  color :  #3F5264; */
+/* text-align: center;*/
+ font-size: 14;
+ font-weight: bold;
+/* color: #3F5264; */
 }
 
 .qcm_question{ 
-  font-size: 80%;
-  font-size : 12;
-  font-weight : bold;
-/*  color :  #3F5264;*/
+ font-size: 80%;
+ font-size: 12;
+ font-weight: bold;
+/* color: #3F5264;*/
  }
 
 
-.jeux_bouton_corriger{ 
- color :  #3F5264;
+.jeux_bouton{ 
+ color: #3F5264;
  font-size: 80%;
-/* font-size : 10;  */
- font-weight : bold;
- background-color : #FFEADE;
+/* font-size: 10; */
+ font-weight: bold;
+ background-color: #FFEADE;
+ padding: 2px; 
 }
 
 .jeux_input{ 
- color :  #3F5264;
-/* font-size : 10;  
- font-weight : bold; */
- background-color : #FFEADE;
- border:1px solid;
+ color: #3F5264;
+/* font-size: 10; 
+ font-weight: bold; */
+ background-color: #FFEADE;
+ border: 1px solid;
 }
 
-.jeux_score{   
-  text-align:center;
-  width:20%;
-  font-family : arial, helvetica, sans-serif;
-  color :  red;
-  font-size : 12;
-  font-weight : bold;
-  border: 2px solid green;
-  padding: 3px; 
+.jeux_score{  
+ text-align:center;
+ width:20%;
+ font-family: arial, helvetica, sans-serif;
+ color: red;
+ font-size: 12;
+ font-weight: bold;
+ border: 2px solid green;
+ padding: 3px; 
 }
 
 .jeux_point{ 
-/*  font-size : 10;*/
-  font-weight : normal;
-/*  color :  #3F5264;*/
+/* font-size: 10;*/
+ font-weight: normal;
+/* color: #3F5264;*/
 }
 
 .jeux_erreur{ 
-  font-family : arial, helvetica, sans-serif;
-  color :  red;
-  font-size : 14;
+ font-family: arial, helvetica, sans-serif;
+ color: red;
+ font-size: 14;
 }

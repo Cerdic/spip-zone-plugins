@@ -65,7 +65,7 @@ Exemple de syntaxe dans l'article :
 // cette fonction remplit le tableau $qcms sur la question $indexQCM
 function qcm_analyse_le_qcm($qcm, $indexQCM) {
   global $qcms;
-  $lignes = split("\n", $qcm);
+  $lignes = preg_split("/\r?\n/", $qcm);
   foreach ($lignes as $ligne) {
 	$li=trim($ligne); 
     switch($li[0]){
@@ -168,7 +168,7 @@ function qcm_affiche_la_question($indexQCM, $corrigee, $gestionPoints) {
       else {
 		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) 
           $codeHTML.='<input type="radio" class="qcm_radio" name="'.$nomVarSelect
-		  	. '" value="'.$i.'" id="'.$nomVarSelect.$i.'"><label for="'.$nomVarSelect.$i.'">'
+		  	. '" value="'.$i.'" id="'.$nomVarSelect.$i.'"><label for="'.$nomVarSelect.$i.'">&nbsp;'
           	. $valeur.'</label><br />';
        }
        $codeHTML.="</div><br />";
@@ -256,12 +256,12 @@ function jeux_qcm($texte, $indexJeux) {
   $texte = qcm_inserer_les_qcm($html, $indexJeux, $gestionPoints);
 
   // calcul des extremes
-  $tete = '<div class="jeux qcm"><div class="jeux_titre">'.$titre.'<hr /></div>';
+  $tete = '<div class="jeux qcm"><div class="jeux_titre qcm_titre">'.$titre.'<hr /></div>';
   if (!isset($_POST["var_correction_".$indexJeux])) { 
 	$tete .= "\n".'<form method="post" action="">';
 	$pied = '<br>
 	<input type="hidden" name="var_correction_'.$indexJeux.'" value="yes">
-	<div align="center"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton_corriger"></div>
+	<div align="center"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton"></div>
 	</form>';
   } else {
       $pied = jeux_afficher_score($qcm_score, $qcms['totalscore'])

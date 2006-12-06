@@ -17,7 +17,7 @@ function jeux_config_set($param, $valeur) {
   if ($param!='') $jeux_config[$param] = $valeur;
 }
 function jeux_config_init($texte) {
- $lignes = split("\n", $texte);
+ $lignes = preg_split("/\r?\n/", $texte);
  foreach ($lignes as $ligne)
   if (preg_match('/([^=]+)=(.+)/', $ligne, $regs)) jeux_config_set(trim($regs[1]), trim($regs[2]));
 }
@@ -126,6 +126,15 @@ function jeux_stylesheet_prive($b) {
 function jeux_javascript($b) {
  $f = find_in_path("javascript/$b.js");
  return $f?'<script type="text/javascript" src="'.$f.'"></script>'."\n":'';
+}
+
+// deux fonctions qui utilisent inc/layer.php
+function jeux_block_init() {
+  include_spip('inc/layer');
+  verif_butineur();
+}
+function jeux_block_invisible($id, $texte, $block) {
+ return $texte?bouton_block_invisible($id).$texte.debut_block_invisible($id).$block.fin_block():'';
 }
 
 ?>
