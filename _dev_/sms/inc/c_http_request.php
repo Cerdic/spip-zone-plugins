@@ -56,7 +56,7 @@ class c_HTTP_Request {
     	}
 		$this->_responseCode = 200;
 		if ($saveBody) {
-			$this->_responseBody = page;
+			$this->_responseBody = $page;
 		}
     }
     function getResponseCode()
