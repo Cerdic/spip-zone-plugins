@@ -24,7 +24,7 @@ function exec_indicizza_tabella_dist() {
 
 	include_spip("inc/texte");
 
-	$tabella = interdire_scripts(_request("tabella"));
+	$tabella = _request("tabella");
 	//Controlli di sicurezza, tabella non specificata
 	if(!$tabella) {
 		indicizza_tabelle_debut_page();
@@ -32,6 +32,8 @@ function exec_indicizza_tabella_dist() {
 		indicizza_tabelle_fin_page();
 		die();
 	}
+	$tabella = corriger_caracteres($tabella);
+
 
 	//Verifiche esistenza definizione tabella e tabelle vietate
 	include_spip("inc/indexation");

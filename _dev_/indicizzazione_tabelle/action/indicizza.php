@@ -32,7 +32,7 @@ function indicizza_tabella($tabella,$mode='') {
 	include_spip("inc/indexation");
 	include_spip("inc/texte");
 
-	$tabella = interdire_scripts($tabella);
+	$tabella = corriger_caracteres($tabella);
 	//Verifiche di congruenza azioni
 	if(!$mode) {
 		if(in_array($tabella,liste_index_tables())) {
@@ -79,6 +79,7 @@ function indicizza_tabelle_verify_fields($tabella,&$campi,$descr) {
 		} else
 		//Verifica che ogni campo sia effettivamente nella tabella di origine
 		foreach($campi as $nome => $val) {
+			nome = corriger_caracteres($nome);
 			if(!in_array($nome,$descr)) {
 				$ok = false;
 				$campi =  "Campo ".interdire_scripts($nome)." inesistente";
