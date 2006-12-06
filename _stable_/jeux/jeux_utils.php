@@ -139,7 +139,7 @@ function jeux_block_init() {
 function jeux_block_invisible($id, $texte, $block) {
  global $spip_version_code;
  if (!$texte) return '';
- return $spip_version_code<1.92?
+ return $spip_version_code<1.92?									// compatibilite avec 1.9.1
 	bouton_block_visible($id).$texte.debut_block_visible($id).$block.fin_block()
 	:bouton_block_invisible($id).$texte.debut_block_invisible($id).$block.fin_block();
 }

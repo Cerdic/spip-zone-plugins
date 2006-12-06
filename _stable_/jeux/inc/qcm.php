@@ -13,7 +13,7 @@
 ---------------------------------------
 
 balises du plugin : <jeux></jeux>
-separateurs obligatoires : [qcm] // TODO : le titre optionnel...
+separateurs obligatoires : [qcm], oui [quiz] // TODO : le titre optionnel...
 separateurs optionnels   : [titre], [texte]
 
 Exemple de syntaxe dans l'article :
@@ -120,18 +120,6 @@ function qcm_analyse_le_qcm($qcm, $indexQCM) {
   } // foreach
 } // function
 
-// cette fonction retourne le texte entre deux balises si elles sont presentes
-// et false dans le cas contraire
-function qcm_recupere_le_titre(&$chaine, $ouvrant, $fermant) {
-  // si les balises ouvrantes et fermantes ne sont pas presentes, c'est mort
-  if (strpos($chaine, $ouvrant)===false || strpos($chaine, $fermant)===false) return false;
-  list($texteAvant, $suite) = explode($ouvrant, $chaine, 2); 
-  list($texte, $texteApres) = explode($fermant, $suite, 2); 
-  // on supprime les balises de l'affichage...
-  $chaine = $texteAvant.jeux_rem('QCM-DEBUT', 0).$texteApres;
-  return trim($texte);
-}
-
 function qcm_les_points($phrase, $points) {
     $pointsHTML = '<span class="jeux_point"> ('.$points. _T('jeux:point'.($points>1?'s':'')).')</span>';
   	if (ereg('^(.*)( ?:)( *)$', $phrase, $eregResult)) $phrase = $eregResult[1].$pointsHTML.$eregResult[2].$eregResult[3];
@@ -177,8 +165,7 @@ function qcm_affiche_la_question($indexQCM, $corrigee, $gestionPoints) {
 
   // Sinon on affiche la correction
   else {
- 
-	 if ($_POST[$nomVarSelect]) {
+ 	 if ($_POST[$nomVarSelect]) {
 		// les points de la reponse donnee...
 		$pointsR = $qcms[$indexQCM]['points'][$_POST[$nomVarSelect]];
 		
@@ -225,19 +212,17 @@ function qcm_inserer_les_qcm(&$chaine, $indexJeux, $gestionPoints) {
 }
 
 function jeux_qcm($texte, $indexJeux) {
-
   // initialisation  
   global $qcms, $qcm_score;
   $indexQCM = $qcm_score = 0;
   $qcms['nbquestions'] = $qcms['totalscore'] = $qcms['totalpropositions'] = 0;
-	  $horizontal = $vertical = $solution = $html = false;
-  $titre = _T('qcm:qcm_titre');
+  $titre = $horizontal = $vertical = $solution = $html = false;
 
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('qcm', $texte);
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
-	  elseif ($valeur==_JEUX_QCM) {
+	  elseif ($valeur==_JEUX_QCM || $valeur==_JEUX_QUIZ) {
 		// remplacement des qcm par : <ATTENTE_QCM>ii</ATTENTE_QCM>
 		$html .= "<ATTENTE_QCM>$indexQCM</ATTENTE_QCM>";
 		// On analyse le QCM
@@ -256,7 +241,7 @@ function jeux_qcm($texte, $indexJeux) {
   $texte = qcm_inserer_les_qcm($html, $indexJeux, $gestionPoints);
 
   // calcul des extremes
-  $tete = '<div class="jeux qcm"><div class="jeux_titre qcm_titre">'.$titre.'<hr /></div>';
+  $tete = '<div class="jeux qcm">'.($titre?'<div class="jeux_titre qcm_titre">'.$titre.'<hr /></div>':'');
   if (!isset($_POST["var_correction_".$indexJeux])) { 
 	$tete .= "\n".'<form method="post" action="">';
 	$pied = '<br>

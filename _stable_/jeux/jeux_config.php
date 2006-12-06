@@ -27,6 +27,7 @@ define('_JEUX_VERTICAL', 'vertical');
 define('_JEUX_SUDOKU', 'sudoku');
 define('_JEUX_KAKURO', 'kakuro');
 define('_JEUX_QCM', 'qcm');
+define('_JEUX_QUIZ', 'quiz');
 define('_JEUX_CHARADE', 'charade');
 define('_JEUX_DEVINETTE', 'devinette');
 define('_JEUX_TROU', 'trou');
@@ -45,7 +46,7 @@ $jeux_separateurs = array(
 	'sudoku' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_SUDOKU, _JEUX_SOLUTION),
 	'kakuro' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_KAKURO, _JEUX_SOLUTION),
 	'mots_croises' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_HORIZONTAL, _JEUX_VERTICAL, _JEUX_SOLUTION),
-	'qcm' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_QCM),
+	'qcm' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_QCM, _JEUX_QUIZ),
 	'textes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_POESIE, _JEUX_CITATION, _JEUX_BLAGUE, _JEUX_AUTEUR, _JEUX_RECUEIL),
 	'devinettes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_DEVINETTE, _JEUX_CHARADE, _JEUX_REPONSE, _JEUX_CONFIG),
 	'trous' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_TROU, _JEUX_CONFIG),
@@ -64,7 +65,7 @@ $jeux_signatures = array(
 	'sudoku' => array(_JEUX_SUDOKU),
 	'kakuro' => array(_JEUX_KAKURO),
 	'mots_croises' => array(_JEUX_HORIZONTAL, _JEUX_VERTICAL),
-	'qcm' => array(_JEUX_QCM),
+	'qcm' => array(_JEUX_QCM, _JEUX_QUIZ),
 	'textes' => array(_JEUX_POESIE, _JEUX_CITATION, _JEUX_BLAGUE),
 	'devinettes' => array(_JEUX_DEVINETTE, _JEUX_CHARADE),
 	'trous' => array(_JEUX_TROU),
