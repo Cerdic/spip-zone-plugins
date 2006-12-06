@@ -125,16 +125,23 @@ function jeux_stylesheet_prive($b) {
 // pour inserer un js
 function jeux_javascript($b) {
  $f = find_in_path("javascript/$b.js");
+ if (!$f && @is_readable($s = _DIR_IMG_PACK .$b.'.js')) $f = $s;		// compatibilite avec 1.9.1
  return $f?'<script type="text/javascript" src="'.$f.'"></script>'."\n":'';
 }
 
 // deux fonctions qui utilisent inc/layer.php
 function jeux_block_init() {
+  global $spip_version_code;
+  if ($spip_version_code<1.92) { $temp = _DIR_IMG_PACK; define(_DIR_IMG_PACK, 'ecrire/'._DIR_IMG_PACK);	}	// compatibilite avec 1.9.1
   include_spip('inc/layer');
-  //verif_butineur();
+  if ($spip_version_code<1.92) define(_DIR_IMG_PACK, $temp);		// compatibilite avec 1.9.1
 }
 function jeux_block_invisible($id, $texte, $block) {
- return $texte?bouton_block_invisible($id).$texte.debut_block_invisible($id).$block.fin_block():'';
+ global $spip_version_code;
+ if (!$texte) return '';
+ return $spip_version_code<1.92?
+	bouton_block_visible($id).$texte.debut_block_visible($id).$block.fin_block()
+	:bouton_block_invisible($id).$texte.debut_block_invisible($id).$block.fin_block();
 }
 
 ?>
