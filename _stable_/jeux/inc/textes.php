@@ -19,7 +19,7 @@ Insere un texte mis en forme dans vos articles !
 ------------------------------------------------
 
 balises du plugin : <jeux></jeux>
-separateurs obligatoires : [poesie], [citation] ou [blague]
+separateurs obligatoires : [poesie] ou [citation] ou [blague]
 separateurs optionnels   : [titre], [auteur], [recueil]
 
 Exemple de syntaxe dans l'article :
@@ -78,7 +78,8 @@ function textes_titre($texte) {
  return $texte?"<p class=\"jeux_titre textes_titre\">$texte</p>":'';
 }
 function textes_blague($texte) {
- return $texte?"<p class=\"jeux_question textes_blagues\">$texte</p>":'';
+ $texte = _GUILLEMET_OUVRANT.$texte._GUILLEMET_FERMANT;
+ return $texte?"<p class=\"jeux_question textes_blague\">$texte</p>":'';
 }
 function textes_citation($texte) {
  $texte = _GUILLEMET_OUVRANT.$texte._GUILLEMET_FERMANT;
@@ -110,13 +111,6 @@ function jeux_textes($texte, $indexJeux) {
 	  elseif ($valeur==_JEUX_RECUEIL) $html .= textes_recueil($tableau[$i+1]);
   }
   
-  return 
-      ($titre?"<span class=\"jeux_titre textes_titre\">$titre</span><br />":'')
-  	. ( $poesie?"<span class=\"textes_poesie\">$poesie</span>":
-		 ($citation?"<span class=\"	textes_citation\">$citation</span>":
-		 '')
-	  ) 
-	. ($auteur?"<br /><span class=\"textes_auteur\">$auteur</span>":'')
-	. ($recueil?"<br /><span class=\"textes_recueil\">$recueil</span>":'');
+  return $html;
 }
 ?>
