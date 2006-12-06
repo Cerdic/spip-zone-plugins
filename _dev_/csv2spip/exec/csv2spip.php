@@ -1,8 +1,8 @@
 <?  
-/* csv2spip est un plugin pour créer/modifier les rédacteurs et administrateurs restreints d'un SPIP à partir de fichiers CSV
+/* csv2spip est un plugin pour créer/modifier les visiteurs, rédacteurs et administrateurs restreints d'un SPIP à partir de fichiers CSV
 *	 					VERSION : 2.3 => plugin pour spip 1.9
 *
-* Auteur : cy_altern (cy_altern@yahoo.fr)
+* Auteur : cy_altern
 *  
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 *  
@@ -21,7 +21,6 @@ function csv2spip_crypt_md5($input) {
 
 function exec_csv2spip() {
 	 			 include_spip("inc/presentation");
-				 include_ecrire ("inc_index.php3");
 						 
 			// définir comme constante le chemin du répertoire du plugin
          $p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
@@ -49,6 +48,21 @@ function exec_csv2spip() {
 									  $stop_prochain = 1;
 								 }
 				 }
+				 
+			// le plugin acces_groupes est il installé/activé ?
+					 $plugin_accesgroupes = 0;
+					 $sql11 = spip_query("SELECT valeur FROM spip_meta WHERE nom = 'plugin' LIMIT 1");
+    			 $result11 = spip_fetch_array($sql11);
+    			 $ch_meta = $result11['valeur'];
+    			 $Tch_meta = explode(',', $ch_meta);
+					 if (in_array('acces_groupes', $Tch_meta)) {			
+/*
+    		// version compatible >= 1.9.2... nettement plus sure : on teste la présence de la constante chemin_du_plugin 
+				// et non pas le nom du dossier de plugin stocké dans spip_meta
+					 if (defined(_DIR_PLUGIN_ACCESGROUPES)) {					 		 
+*/
+							 $plugin_accesgroupes = 1;
+					 }			
 				 
 			// début affichage
          debut_page(_T('csvspip:csv2spip'));
@@ -121,7 +135,17 @@ function exec_csv2spip() {
     		debut_cadre_couleur("../"._DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif", false, "", _T('csvspip:titre_etape2'));
 //				echo "<h2>"._T('csvspip:titre_etape2')."</h2>";
 				spip_query("DROP TABLE IF EXISTS tmp_auteurs");
-    		if (!spip_query("CREATE TABLE tmp_auteurs (id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, nom TEXT NOT NULL, prenom TEXT NOT NULL, groupe TEXT NOT NULL, ss_groupe TEXT NOT NULL, mdp TEXT NOT NULL, pseudo_spip TEXT NOT NULL, mel TEXT NOT NULL, id_spip INT(11) NOT NULL)") ) {  
+    		if (!spip_query("CREATE TABLE tmp_auteurs (
+					 											id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+																nom TEXT NOT NULL, 
+																prenom TEXT NOT NULL, 
+																groupe TEXT NOT NULL, 
+																ss_groupe TEXT NOT NULL, 
+																mdp TEXT NOT NULL, 
+																pseudo_spip TEXT NOT NULL, 
+																mel TEXT NOT NULL, 
+																id_spip INT(11) NOT NULL)"
+												) ) {  
 					 echo "<br><span class=\"Cerreur\">"._T('csvspip:err_etape2.1')."</span>";
 					 fin_cadre_couleur();
 	 	    	 exit();
@@ -151,7 +175,7 @@ function exec_csv2spip() {
 										}
 //echo '<br><br>$Tchamps = ';
 //print_r($Tchamps);					
-										if (count($Tchamps) != 7) {
+										if (count($Tchamps) < 7) {
 											 $Tvides = array();
 											 foreach ($Tref_champs as $cref) {
 											 				 if (!in_array($cref, $Tchamps)) {
@@ -214,22 +238,24 @@ function exec_csv2spip() {
 					 $Tch_rub = explode(',', $_POST['rub_parent']);
 					 $rubrique_parent = $Tch_rub[0];
 					 $secteur = $Tch_rub[1];
-					 $sql8 = spip_query("SELECT ss_groupe FROM tmp_auteurs WHERE groupe = '$groupe_admins' GROUP BY ss_groupe");
+					 $sql8 = spip_query("SELECT ss_groupe FROM tmp_auteurs WHERE LOWER(groupe) = '$groupe_admins' GROUP BY ss_groupe");
 					 if (isset($sql8)) {
     					 while ($data8 = spip_fetch_array($sql8)) {
     					 			 $rubrique_ec = $data8['ss_groupe']; 
-    								 $sql7 = spip_query("SELECT COUNT(*) AS rub_existe FROM $Trubriques WHERE titre = '$rubrique_ec' LIMIT 1");
-    								 $data7 = spip_fetch_array($sql7);
-    								 if ($data7['rub_existe'] > 0) {
+										 if ($rubrique_ec != '') {
+        								 $sql7 = spip_query("SELECT COUNT(*) AS rub_existe FROM $Trubriques WHERE titre = '$rubrique_ec' LIMIT 1");
+        								 $data7 = spip_fetch_array($sql7);
+        								 if ($data7['rub_existe'] > 0) {
 //print '<br>etape3 : rubrique '.$rubrique_ec.' existe';
-    								 		continue;
-    								 }
-    								 spip_query("INSERT INTO $Trubriques (id_rubrique, id_parent, titre, id_secteur, statut, date) VALUES ('', '$rubrique_parent', '$rubrique_ec', '$secteur', 'publie', '$date_rub_ec')" );
-      			 				 if (mysql_error() != '') {
-      							 		$Terr_rub[] = array('ss_groupe' => $rubrique_ec, 'erreur' => mysql_error());
-      							 }
-										 else {
-										 			$Tres_rub[] = $rubrique_ec;
+        								 		continue;
+        								 }
+        								 spip_query("INSERT INTO $Trubriques (id_rubrique, id_parent, titre, id_secteur, statut, date) VALUES ('', '$rubrique_parent', '$rubrique_ec', '$secteur', 'publie', '$date_rub_ec')" );
+          			 				 if (mysql_error() != '') {
+          							 		$Terr_rub[] = array('ss_groupe' => $rubrique_ec, 'erreur' => mysql_error());
+          							 }
+    										 else {
+    										 			$Tres_rub[] = $rubrique_ec;
+    										 }
 										 }
     					 }
 					 }		
@@ -245,22 +271,56 @@ function exec_csv2spip() {
   			 				echo "<br>"._T('csvspip:ok_etape3.1_debut').count($Tres_rub)._T('csvspip:ok_etape3.1_fin')."<br>";
   			   }
 				}
+		// gestion de la rubrique par défaut des admins restreints
+				if ($groupe_admins != '-1') {
+					// faut-il créer la rubrique par défaut?
+					  $cree_rub_adm_defaut = 0;
+						if ($_POST['rub_prof'] == 0) {
+							 $sql20 = spip_query("SELECT COUNT(*) AS nb_admins FROM tmp_auteurs WHERE LOWER(groupe) = '$groupe_admins'");
+							 $rows20 = spip_fetch_array($sql20);
+							 if ($rows20['nb_admins'] > 0) {
+							 		$cree_rub_adm_defaut = 1;
+							 }							 
+						}
+						else {
+    						$sql19 = spip_query("SELECT COUNT(*) AS nb_sans_ssgrpe FROM tmp_auteurs WHERE LOWER(groupe) = '$groupe_admins' AND ss_groupe = ''");
+    						$rows19 = spip_fetch_array($sql19);
+    						if ($rows19['nb_sans_ssgrpe'] > 0) {
+    							 $cree_rub_adm_defaut = 1;
+    						}
+						}
+					// création de la rubrique par défaut
+						if ($cree_rub_adm_defaut == 1) {
+    					 $date_rub_defaut = date("Y-m-j H:i:s");
+    					 $Tch_rub_defaut = explode(',', $_POST['rub_parent_admin_defaut']);
+    					 $rubrique_parent_defaut = $Tch_rub_defaut[0];
+    					 $secteur_defaut = $Tch_rub_defaut[1];
+  			 			 $rubrique_defaut = ($_POST['rub_admin_defaut'] != '' ? $_POST['rub_admin_defaut'] : _T('csvspip:nom_rub_admin_defaut') ); 
+  						 $sq21 = spip_query("SELECT COUNT(*) AS rub_existe FROM $Trubriques WHERE titre = '$rubrique_defaut' LIMIT 1");
+  						 $rows21 = spip_fetch_array($sq21);
+  						 if ($rows21['rub_existe'] < 1) {
+  						 		spip_query("INSERT INTO $Trubriques (id_rubrique, id_parent, titre, id_secteur, statut, date) 
+														  VALUES ('', '$rubrique_parent_defaut', '$rubrique_defaut', '$secteur_defaut', 'prive', '$date_rub_defaut')" );
+  			 				  if (mysql_error() != '') {
+  							 		 echo "<br><span class=\"Cerreur\">"._T('csvspip:err_cree_rub_defaut').mysql_error()."</span>";
+										 $err_total ++;
+  							  }
+        				  else {
+        				 			 echo "<br>"._T('csvspip:ok_cree_rub_defaut').$rubrique_defaut."<br />";
+											 $id_rub_admin_defaut = mysql_insert_id();
+        				  }
+							 }
+							 
+						}
+				}
 
 	 // étape 3.2 : création des groupes pour le plugin acces_groupes				
 				$_POST['ss_groupes_redac'] == 1 ? $ss_groupes_redac = 1 : $ss_groupes_redac = 0;
 				$_POST['ss_groupes_admin'] == 1 ? $ss_groupes_admin = 1 : $ss_groupes_admin = 0;
 				$_POST['ss_groupes_visit'] == 1 ? $ss_groupes_visit = 1 : $ss_groupes_visit = 0;
 				if ($ss_groupes_redac == 1 OR $ss_groupes_admin == 1 OR $ss_groupes_visit == 1) {
-					 $sql11 = spip_query("SELECT valeur FROM spip_meta WHERE nom = 'plugin' LIMIT 1");
-    			 $result11 = spip_fetch_array($sql11);
-    			 $ch_meta = $result11['valeur'];
-    			 $Tch_meta = explode(',', $ch_meta);
-    		// si le plugin acces_groupes est activé
-					 if (in_array('acces_groupes', $Tch_meta)) {			
-/* ça fonctionne qu'en 1.9.2 ça... donc !!! attention au nom du rep qui contient acces_groupes !!!
-    		// si le plugin acces_groupes est activé
-					 if (defined(_DIR_PLUGIN_ACCESGROUPES)) {					 		 
-*/
+     		// si le plugin acces_groupes est activé
+					 if ($plugin_accesgroupes == 1) {					 		 
 							 $Terr_acces_groupes = array();
 							 $Tres_acces_groupes = array();
 							 $Tgroupes_accesgroupes = array();
@@ -269,11 +329,11 @@ function exec_csv2spip() {
     					 $date_grpe_ec = date("Y-m-j H:i:s");							 
 							 $sql_sup = '';
 							 $sql_liaison = " WHERE ";
-							 $ss_groupes_admin != 1 ? $sql_sup .= $sql_liaison." LOWER groupe != '$groupe_admins'" : $sql_sup .= "";
+							 $ss_groupes_admin != 1 ? $sql_sup .= $sql_liaison." LOWER(groupe) != '$groupe_admins'" : $sql_sup .= "";
 							 $sql_sup != '' ? $sql_liaison = " AND " : $sql_liaison = " WHERE ";
-							 $ss_groupes_visit != 1 ? $sql_sup .= $sql_liaison." LOWER groupe != '$groupe_visits'" : $sql_sup .= "";
+							 $ss_groupes_visit != 1 ? $sql_sup .= $sql_liaison." LOWER(groupe) != '$groupe_visits'" : $sql_sup .= "";
 							 $sql_sup != '' ? $sql_liaison = " AND " : $sql_liaison = " WHERE ";
-							 $ss_groupes_redac != 1 ? $sql_sup .= $sql_liaison." LOWER groupe != '$groupe_redacs'" : $sql_sup .= "";
+							 $ss_groupes_redac != 1 ? $sql_sup .= $sql_liaison." LOWER(groupe) != '$groupe_redacs'" : $sql_sup .= "";
 //echo '<br>$ch_sql = '."SELECT ss_groupe FROM tmp_auteurs ".$sql_sup." GROUP BY ss_groupe";							 
     					 $sql18= spip_query("SELECT ss_groupe FROM tmp_auteurs ".$sql_sup." GROUP BY ss_groupe");
 //echo '<br>mysql_error $sql18 = '.mysql_error();							 
@@ -299,8 +359,9 @@ function exec_csv2spip() {
 												}
 												continue;
     								 }
+										 $desc_grpe_csv2spip = _T('csvspip:grpe_csv2spip');
     								 spip_query("INSERT INTO $Taccesgroupes_groupes (id_grpacces, nom, description, actif, proprio, demande_acces) 
-										 						 VALUES ('', '$grpe_ec', 'groupe cr&eacute;&eacute, par csv2spip', 1, 0, 0)" );
+										 						 VALUES ('', '$grpe_ec', '$desc_grpe_csv2spip', 1, 0, 0)" );
       			 				 $id_grpacces_new = mysql_insert_id();
 										 if (mysql_error() != '') {
       							 		$Terr_acces_groupes[] = array('ss_groupe' => $grpe_ec, 'erreur' => mysql_error());
@@ -409,10 +470,8 @@ function exec_csv2spip() {
   										spip_query("INSERT INTO $Tauteurs (id_auteur, nom, email, login, pass, statut) VALUES ('', '$nom', '$mel', '$login', '$pass', '$statut')");
   										$id_spip = mysql_insert_id();
   										if (mysql_error() == '') {
-//	if (lire_meta('activer_moteur') == 'oui') {
-//		include_ecrire ("inc_index.php3");
-										 		 marquer_indexer('auteur', $id_auteur);
-//	}
+										 		 include_spip("inc/indexation");
+												 marquer_indexer('spip_auteurs', $id_auteur);
                   	// Mettre a jour les fichiers .htpasswd et .htpasswd-admin
                   	     ecrire_acces();
 												 
@@ -958,26 +1017,27 @@ function exec_csv2spip() {
 // fin effacer les absents V 2.3
 				fin_cadre_couleur();			
 		
-// étape 5 : si nécessaire intégration des admins comme administrateurs restreints à la rubrique de leur sous-groupe
-	 			if ($_POST['rub_prof'] == 1 AND $groupe_admins != '-1') {
+// étape 5 : si nécessaire intégration des admins comme administrateurs restreints de la rubrique de leur sous-groupe
+//$id_rub_admin_defaut
+	 			if ($groupe_admins != '-1') {
   					 $Terr_adm_rub = array();
   					 $Tres_adm_rub = array();
-						 $sql54 = spip_query("SELECT ss_groupe, nom, id_spip FROM tmp_auteurs WHERE groupe = '$groupe_admins' AND ss_groupe != '' ORDER BY ss_groupe");
+						 $sql54 = spip_query("SELECT ss_groupe, nom, id_spip FROM tmp_auteurs WHERE LOWER(groupe) = '$groupe_admins'");
 						 while ($data54 = spip_fetch_array($sql54)) {
 						 			 $login_adm_ec = strtolower($data54['nom']);
 									 $id_adm_ec = $data54['id_spip'];
-									 $ss_grpe_ec = $data54['ss_groupe'];
-									 $sql55 = spip_query("SELECT id_rubrique FROM $Trubriques WHERE titre = '$ss_grpe_ec' LIMIT 1");
-									 $data55 = spip_fetch_array($sql55);
-									 $id_rubrique_adm_ec = $data55['id_rubrique'];
-//									 $sql56 = spip_query("SELECT id_auteur FROM $Tauteurs WHERE login = '$login_adm_ec' AND statut = '0minirezo' LIMIT 1");
-//									 $data56 = spip_fetch_array($sql56);
-//									 $id_adm_ec = $data56['id_auteur'];
-
+									 if ($_POST['rub_prof'] == 1 AND $data54['ss_groupe'] != '') {
+    									 $ss_grpe_ec = $data54['ss_groupe'];
+    									 $sql55 = spip_query("SELECT id_rubrique FROM $Trubriques WHERE titre = '$ss_grpe_ec' LIMIT 1");
+    									 $data55 = spip_fetch_array($sql55);
+    									 $id_rubrique_adm_ec = $data55['id_rubrique'];									 		
+									 }
+									 else {
+									 			$id_rubrique_adm_ec = $id_rub_admin_defaut;
+									 }
 									 $sql57 = spip_query("SELECT COUNT(*) AS existe_adm_rub FROM $Tauteurs_rubriques WHERE id_auteur = '$id_adm_ec' AND id_rubrique = '$id_rubrique_adm_ec' LIMIT 1");
 									 $data57 = spip_fetch_array($sql57);
-									 $nb57  = $data57['existe_adm_rub']; 
-									 if ($nb57 == 0) {
+									 if ($data57['existe_adm_rub'] == 0) {
 //print '<br>rubrique $ss_grpe_ec = '.$ss_grpe_ec.' $id_rubrique_adm_ec = '.$id_rubrique_adm_ec.'$id_adm_ec = '.$id_adm_ec;								 
 									 		spip_query("INSERT INTO $Tauteurs_rubriques (id_auteur, id_rubrique) VALUES ('$id_adm_ec', '$id_rubrique_adm_ec')");
 									 		if (mysql_error() != '') {
@@ -1061,7 +1121,6 @@ function exec_csv2spip() {
 
 // Formulaire de saisie du fichier CSV et des options de config		
 		else {
-				 $_SESSION['csv2spip_err'] = ''; 
 echo "<script language=\"JavaScript\"> ";
 echo "				function aff_masq(id_elem, vis) { ";
 echo "								 vis == 0 ? s_vis = 'none' : s_vis = 'block'; ";
@@ -1141,37 +1200,55 @@ echo "</script>";
 			 echo _T('csvspip:oui')."<input type=\"radio\" name=\"rub_prof\" value=\"1\" checked=\"checked\" onClick=\"aff_masq('rub_adm', 1);\">";   
 			 echo "<input type=\"radio\" name=\"rub_prof\" value=\"0\" onClick=\"aff_masq('rub_adm', 0);\">"._T('csvspip:non');
 			 echo "<br><span style=\"font-size: 10px;\">"._T('csvspip:profs_admins')."</span>";
-			 echo "<br /><br /><div id=\"rub_adm\" class=\"cadre\"><strong>"._T('csvspip:article_rubrique')."</strong>"; 
-       echo _T('csvspip:oui')."<input type=\"radio\" name=\"art_rub\" value=\"1\">";   
-       echo "<input type=\"radio\" name=\"art_rub\" value=\"0\" checked=\"checked\">"._T('csvspip:non');
-			 echo "<br><span style=\"font-size: 10px;\">"._T('csvspip:help_articles')."</span>";
+			 echo "<br /><div id=\"rub_adm\" class=\"cadre\">";
  			 if ($nb_rubriques > 0) {   		
-				  echo "<br><br /><strong>"._T('csvspip:choix_parent_rubriques')."</strong>"; 
+				  echo "<br /><strong>"._T('csvspip:choix_parent_rubriques')."</strong>"; 
       		echo "<select name=\"rub_parent\">";
       		echo "<option value=\"0,0\" selected=\"selected\">"._T('csvspip:racine_site')."</option>";
 				  $sql10 = spip_query("SELECT id_rubrique, titre, id_secteur FROM $Trubriques ORDER BY id_rubrique");
 					while ($data10 = spip_fetch_array($sql10)) { 
 				 			  echo "<option value=\"".$data10['id_rubrique'].",".$data10['id_secteur']."\">".$data10['titre']."</option>";
 			 		}  	
-		      echo "</select><br>";
+		      echo "</select>";
+			 }
+		 	 else {  
+				  	echo "<br>"._T('csvspip:pas_de_rubriques');
+			 } 		
+			 echo "<br /><br /><strong>"._T('csvspip:article_rubrique')."</strong>"; 
+       echo _T('csvspip:oui')."<input type=\"radio\" name=\"art_rub\" value=\"1\">";   
+       echo "<input type=\"radio\" name=\"art_rub\" value=\"0\" checked=\"checked\">"._T('csvspip:non');
+			 echo "<br><span style=\"font-size: 10px;\">"._T('csvspip:help_articles')."</span>";
+			 echo "<br /></div>";
+			 echo "<br /><div id=\"rub_adm_defaut\">";
+			 echo "<strong>"._T('csvspip:choix_rub_admin_defaut')."</strong>";
+			 echo "<input type=\"text\" name=\"rub_admin_defaut\" value=\""._T('csvspip:nom_rub_admin_defaut')."\" style=\"width: 200px;\">";
+			 echo "<br><span style=\"font-size: 10px;\">"._T('csvspip:help_rub_admin_defaut')."</span>";
+ 			 if ($nb_rubriques > 0) {   		
+				  echo "<br/><br/><strong>"._T('csvspip:choix_parent_rub_admin_defaut')."</strong>"; 
+      		echo "<select name=\"rub_parent_admin_defaut\">";
+      		echo "<option value=\"0,0\" selected=\"selected\">"._T('csvspip:racine_site')."</option>";
+				  $sql108 = spip_query("SELECT id_rubrique, titre, id_secteur FROM $Trubriques ORDER BY id_rubrique");
+					while ($data108 = spip_fetch_array($sql108)) { 
+				 			  echo "<option value=\"".$data108['id_rubrique'].",".$data108['id_secteur']."\">".$data108['titre']."</option>";
+			 		}  	
+		      echo "</select><br />";
 			 }
 		 	 else {  
 				  	echo "<br>"._T('csvspip:pas_de_rubriques')."<br>";
 			 } 		
-			 echo "</div>";
+			 echo "</div>"; 
 			 fin_cadre_couleur();
   		 debut_cadre_couleur("../"._DIR_PLUGIN_CSV2SPIP."/img_pack/groupe-24.png", false, "", _T('csvspip:acces_groupes'));
     	 echo "<strong>"._T('csvspip:option_acces_groupes')."</strong>"; 
-/*	ça fonctionne qu'en 1.9.2 ça... 
-		// si le plugin acces_groupes est activé
-		   if (defined(_DIR_PLUGIN_ACCESGROUPES)) {
-*/			 
+/*
 			 $sql11 = spip_query("SELECT valeur FROM spip_meta WHERE nom = 'plugin' LIMIT 1");
 			 $result11 = spip_fetch_array($sql11);
 			 $ch_meta = $result11['valeur'];
 			 $Tch_meta = explode(',', $ch_meta);
 		// si le plugin acces_groupes est activé
 			 if (in_array('acces_groupes', $Tch_meta)) {
+*/			 
+			 if ($plugin_accesgroupes == 1) {
       		 echo "<ul style=\"padding: 0px; margin: 0px 0px 0px 30px;\">";
   				 echo "<li style=\"list-style-image: url('img_pack/redac-12.gif');\">"._T('csvspip:ss_groupes_redac')." ";
   				 echo _T('csvspip:oui')."<input type=\"radio\" name=\"ss_groupes_redac\" value=\"1\">";
@@ -1215,7 +1292,7 @@ echo "</script>";
 		
 //		fin_cadre_formulaire();
 				
-		fin_page();
+		echo fin_page();
 }
 		 
 		 

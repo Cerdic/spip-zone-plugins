@@ -1,12 +1,12 @@
 <?php
-/* csv2spip est un plugin pour créer/modifier les rédacteurs et administrateurs restreints d'un SPIP à partir de fichiers CSV
+/* csv2spip est un plugin pour créer/modifier les visiteurs, rédacteurs et administrateurs restreints d'un SPIP à partir de fichiers CSV
+*	 					VERSION : 2.3 => plugin pour spip 1.9
 *
 * Auteur : cy_altern (cy_altern@yahoo.fr)
 *  
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 *  
 **/
-//echo "<br>depart fichier de langue...";
 
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
 //			'csv2spip' => 'csv2spip',
@@ -34,7 +34,10 @@
 			'err_etape3.1' => '<strong>Etape 3.1 :</strong> erreur(s) lors de la création des rubriques des sous-groupes d\'administrateurs : ',
 			'ok_etape3.1_debut' => '<strong>Etape 3.1 :</strong> création des rubriques admins = OK ',
 			'ok_etape3.1_fin' => ' rubriques créées',
+			'err_cree_rub_defaut' => 'Erreur lors de la création de la rubrique par défaut des admins restreints : ',
+			'ok_cree_rub_defaut' => 'Création de la rubrique par défaut : ',
 			'etape3.2' => '<strong>Etape 3.2 :</strong> création des groupes pour le plugin acces_groupes',
+			'grpe_csv2spip' => 'groupe cr&eacute;&eacute, par csv2spip',
 			'err_etape3.2' => '<strong>Etape 3.2 :</strong> erreur(s) lors de la création des groupes d\'acces : ',
 			'ok_etape3.2_debut' => '<strong>Etape 3.2 :</strong> création des groupes pour le plugin acces_groupes = OK : ',		
 			'ok_etape3.2_fin' => ' groupes créés',
@@ -96,7 +99,7 @@
 			'nom_groupe_visit' => 'Nom du groupe des visiteurs : ',
 			'help_nom_groupe_admin' => '(colonne "<strong>groupe</strong>" du fichier CSV, si ces champs sont vides, tous les utilisateurs seront simples rédacteurs)',
 			'choix_fichier' => 'Fichier CSV à importer : ',
-			'maj_mdp' => 'Mise à jour des infos pour ',
+			'maj_mdp' => 'Mise à jour des infos pour les utilisateurs existant : ',
 			'options_maj' => 'Mise à jour des mots de passe, mails, sous-groupes... : ',
 			'suppr_absents' => 'Suppression des absents:',
 			'suppr_utilis' => 'Supprimer les utilisateurs absents du fichier CSV',
@@ -116,10 +119,17 @@
 			'passe_egale_login' => '(mot de passe idem login)',
 			'creation_rubriques' => 'Création de rubriques pour les sous-groupes administrateurs: ',
 			'rubrique_ss_groupes' => 'Créer une rubrique par sous-groupe d\'admins: ',
-			'profs_admins' => '(IACA : les profs d\'une discipline seront administrateurs de leur rubrique)',
+			'profs_admins' => '(crée une rubrique pour chaque <strong>ss_groupe</strong> d\'admins et affecte l\'utilisateur comme admin de celle-ci.<br />
+										 		  IACA : les profs d\'une discipline seront administrateurs de leur rubrique)',
 			'article_rubrique' => 'Créer un article dans chaque rubrique admin: ',
 			'help_articles' => '(permet de rendre visibles ces rubriques dans la partie publique)',
 			'choix_parent_rubriques' => 'Rubrique parent des rubriques à créer: ',
+			'choix_rub_admin_defaut' => 'Rubrique par défaut des admins restreints: ',
+			'nom_rub_admin_defaut' => 'rubrique des admins CSV2SPIP',
+			'choix_parent_rub_admin_defaut' => 'Rubrique parent de la rubrique par défaut: ',
+			'help_rub_admin_defaut' => '(pour tous les admins restreints qui n\'ont pas de sous-groupe défini ou si la génération des rubriques par sous-groupes n\'est pas activée.
+																  <strong>Attention!</strong> si vous supprimez cette rubrique, <strong>tous</strong> les administrateurs restreints sans sous-groupe deviennent administrateurs de <strong>toutes</strong> les rubriques !)',
+//																  afin que ces admins ne soient pas des admins généraux, il faut leur attribuer une rubrique à administrer)',
 			'acces_groupes' => 'Connexion avec le plugin acces_groupes',
 			'option_acces_groupes' => 'Créer un groupe de contrôle d\'accès par sous-groupe : ',
 			'help_acces_groupes' => '(permet de créer un groupe (nom = colonne "ss_groupe"), utilisable dans le plugin acces_groupes, pour chacun des sous-groupes)',
