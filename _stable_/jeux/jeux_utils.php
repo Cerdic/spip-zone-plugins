@@ -131,7 +131,7 @@ function jeux_javascript($b) {
 // deux fonctions qui utilisent inc/layer.php
 function jeux_block_init() {
   include_spip('inc/layer');
-  verif_butineur();
+  //verif_butineur();
 }
 function jeux_block_invisible($id, $texte, $block) {
  return $texte?bouton_block_invisible($id).$texte.debut_block_invisible($id).$block.fin_block():'';

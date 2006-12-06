@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'verifier' 		=> 'V&eacute;rifier',
 'solution'		=>'Solution',
 'reponse'		=>'Answer',
-'indices'		=> 'Clues:',
+'indices'		=> 'Clues',
 'score'			=> 'Score:',
 
 'point' => "&nbsp;pt",

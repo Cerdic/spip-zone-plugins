@@ -89,20 +89,18 @@ function trous_inserer_les_trous($chaine, $indexJeux) {
 
 // afficher l'ensemble des solutions dans le desordre...
 // si plusieurs solutions sont possibles, seule la premiere est retenue
-function trous_afficher_indices() {
+function trous_afficher_indices($indexJeux) {
  global $propositionsTROUS;
  foreach ($propositionsTROUS as $prop) $indices[] = $prop[0];
  shuffle($indices);
- return '<br>&nbsp;<br>'._T('jeux:indices').'&nbsp;'
-// return '<br><center><table border="1" cellpadding="10" align="center"><tbody><tr><td><b>&nbsp;&nbsp;&nbsp;'
- 	. join(' -&nbsp;', $indices)
-;//	. '</b></td></tr></tbody></table></center>';
+ return '<br/>'.jeux_block_invisible('trous_indices_'.$indexJeux, _T('jeux:indices'), '<center>'.join(' -&nbsp;', $indices).'</center>');
 }
 
 function jeux_trous($texte, $indexJeux) {
   global $propositionsTROUS, $scoreTROUS;
   $titre = $html = false;
   $indexTrou = $scoreTROUS = 0;
+  jeux_block_init();
 
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('trous', $texte); 
@@ -121,7 +119,7 @@ function jeux_trous($texte, $indexJeux) {
   $texte = trous_inserer_les_trous($html, $indexJeux);
 
   $tete = '<div class="jeux">' . ($titre?'<div class="jeux_titre">'.$titre.'<hr /></div>':'');
-  $pied = jeux_config('indices')?trous_afficher_indices():'';
+  $pied = jeux_config('indices')?trous_afficher_indices($indexJeux):'';
   
   if (!isset($_POST["var_correction_".$indexJeux])) { 
 	$tete .= "\n".'<form method="post" action="">';
