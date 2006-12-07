@@ -107,5 +107,6 @@ $(document).ready(function(){
 	$("#diapo_icones a").diapo_mode();
 	$("div.diapo_menu a.lien_pagination").diapo_pagination();
 	$("div.diapo_vignette a").diapo_vignette();
-	center=!($("#diapo_grand").css("display")=="none");
+	diapogrand=$("#diapo_grand").get(0);
+	if (diapogrand) center=!($("#diapo_grand").css("display")=="none");
 });
