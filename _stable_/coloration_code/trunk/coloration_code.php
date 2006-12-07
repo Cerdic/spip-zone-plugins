@@ -75,7 +75,7 @@ function coloration_code_color($code, $language, $cadre='cadre') {
 		  _T('colorationcode:telecharger') .
 				"</a></div>";
 	}
-	return $rempl;
+	return $rempl.'</div>';
 }
 
 function cadre_ou_code($regs) {
