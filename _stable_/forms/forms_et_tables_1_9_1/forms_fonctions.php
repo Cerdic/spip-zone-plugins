@@ -47,7 +47,7 @@
 		}
 		if ($ok) {
 			$t = $type_champ[$id_form][$champ];
-			if ($t == 'select' OR $type_champ == 'multiple'){
+			if ($t == 'select' OR $t == 'multiple'){
 				$res = spip_query("SELECT titre FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ)." AND choix="._q($valeur));
 				if ($row = spip_fetch_array($res)){
 					$valeur = typo($row['titre']);
