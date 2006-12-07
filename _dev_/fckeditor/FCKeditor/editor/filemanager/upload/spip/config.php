@@ -24,7 +24,11 @@ global $Config ;
 $Config['Enabled'] = true ;
 
 // Path to uploaded files relative to the document root.
-$Config['UserFilesPath'] = '/IMG/' ;
+$chemin = split("/", $_SERVER["PHP_SELF"]);
+$chemin_final = "";
+if($chemin[1]!="plugins") $chemin_final .= "/".$chemin[1];
+$chemin_final .= "/IMG/";
+$Config['UserFilesPath'] = $chemin_final ;
 
 $Config['AllowedExtensions']['File']	= array() ;
 $Config['DeniedExtensions']['File']	= array('php','php2','php3','php4','php5','phtml','pwml','inc','asp','aspx','ascx','jsp','cfm','cfc','pl','bat','exe','com','dll','vbs','js','reg','cgi') ;
