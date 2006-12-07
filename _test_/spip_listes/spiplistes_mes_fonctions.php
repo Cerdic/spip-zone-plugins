@@ -23,7 +23,7 @@ function boucle_MESSAGES($id_boucle, &$boucles) {
         $boucle = &$boucles[$id_boucle];
         $id_table = $boucle->id_table;
         $boucle->from[] =  "spip_messages AS $id_table";
-        $boucle->where[] = "type='nl'";
+        $boucle->where[] = array("'='","'type'","'\"nl\"'");
         return calculer_boucle($id_boucle, $boucles);
 }
 
