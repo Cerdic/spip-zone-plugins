@@ -12,7 +12,6 @@
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 		<link rel="stylesheet" type="text/css" href="<?php echo $chemin; ?>spip.php?page=style_prive&amp;couleur_claire=C0CAD4&amp;couleur_foncee=85909A&amp;ltr=left" >
 		<script type='text/javascript'><!--
 			var admin = 0;
