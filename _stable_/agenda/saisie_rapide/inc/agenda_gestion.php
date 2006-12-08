@@ -568,11 +568,16 @@ function Agenda_action_formulaire_article($id_article){
 
 function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="", $titre_defaut=""){
 	global $spip_lang_right;
-//	$out = "";
-	$out = '<div align="right"><span class="verdana1"><strong><a href="'
+	$out = "";
+	// *************** début Modif Patrice ******************** //
+	if (_request('id_article') && ($neweven || !$id_evenement)) 
+	  $out .= '<div align="right"><span class="verdana1"><strong><a href="'
 		.generer_url_ecrire('saisie_rapide','id_article='._request('id_article'))
-		.'" onclick="javascript:window.open(this.href,\'spip_pat\', \'scrollbars=yes, resizable=yes, width=740, height=580\'); return false;" target=spip_pat'
-		.'>(Saisie rapide)</a><br></strong><br></span></div>';			// Modif Patrice
+		.'" onclick="javascript:window.open(this.href,\'saisie_pat\', \'scrollbars=yes, resizable=yes, width=740, height=580\'); return false;" target=saisie_pat'
+		.'>('._T('Saisie rapide').')</a><br /></strong><br /></span></div>';			
+	// ******************************************************** //
+	// A placer dans les fichiers de langue : 'Saisie rapide'   //
+	// *************** fin Modif Patrice ********************** //
 	// inits
 	$ftitre=$titre_defaut;
 	$flieu='';
