@@ -3,7 +3,7 @@
 	SMS
 	</nom>
 	<auteur>toggg
-	_ &copy; 2006 - Distribu&#233; sous licence GNU/GPL
+	_ &copy; 2006 - Distribu&#233; sous licence GNU/LGPL
 	</auteur>
 	<version>
 	0.1.0
@@ -12,7 +12,9 @@
 	dev
 	</etat>
 	<description>
-Ce plugin permet d'envoyer des SMS, il n&eacute;cessite d'avoir un compte chez un prestataire comme Clickatell ou sms2email.
+CE CODE N&#034;EST PAS FONCTIONNEL !
+_ VOUS NE DEVEZ PAS L&#034;INSTALLER.
+_ Ce plugin permet d'envoyer des SMS, il n&eacute;cessite d'avoir un compte chez un prestataire comme Clickatell ou sms2email.
 	</description>
 	<lien>
 	</lien>
