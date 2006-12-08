@@ -264,7 +264,7 @@ function affiche_formulaire() {
     debut_cadre_formulaire(); ?>
     <strong>Syntaxe</strong> : &quot;jj/mm[/aaaa][-jj/mm[/aaaa]] [hh:mm[-hh:mm]]
     &quot;Le titre&quot;
-[&quot;Le lieu&quot; [ &quot;La description&quot;]] [REP=jj/mm/aaaa[,jj/mm/aaaa,etc.]] [MOTS=[groupe1:]mot1[,[groupe2:]mot2,etc.]]<br />
+[&quot;Le lieu&quot; [&quot;La description&quot;]] [REP=jj/mm/aaaa[,jj/mm/aaaa,etc.]] [MOTS=[groupe1:]mot1[,[groupe2:]mot2,etc.]]<br />
 <br />
 <strong>Notes</strong> : Les crochets indiquent les &eacute;l&eacute;ments facultatifs. <br />
 Les r&eacute;p&eacute;titions de l'&eacute;v&egrave;nement sont indiqu&eacute;es par  'REP=' suivi d'une liste de dates s&eacute;par&eacute;es par des virgules.<br />
