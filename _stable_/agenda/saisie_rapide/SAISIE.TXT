@@ -7,22 +7,24 @@ fichiers à placer dans le repertoire plugins/agenda :
 	inc/agenda_gestion.php : fichier d'origine modifie
 	SAISIE.TXT : les details.
 
-attention : aucune internationalisation pour l'instant !
+attention : aucune internationalisation pour l'instant, mais le code est prêt pour les traducteurs.
 Compatibilité : 1.9.0, 1.9.1 et svn
 
 Syntaxe : 
-	"jj/mm[/aaaa][-jj/mm[/aaaa]] [hh:mm[-hh:mm]] "Le titre" ["Le lieu" [ "La description"]] [REP=jj/mm/aaaa[,jj/mm/aaaa,etc]]
+	"jj/mm[/aaaa][-jj/mm[/aaaa]] [hh:mm[-hh:mm]] "Le titre" ["Le lieu" [ "La description"]] [REP=jj/mm/aaaa[,jj/mm/aaaa,etc.]] [MOTS=[groupe1:]mot1[,[groupe2:]mot2,etc.]]
 
-Les crochets indiquent les éléments facultatifs. 
-Les répétitions de l'évènement sont indiquées par 'REP=' suivi d'une liste de dates séparées par des virgules. 
-Bien respecter les espaces entre les éléments et ne pas mettre de guillemets dans les textes. 
+Notes : 
+	Les crochets indiquent les éléments facultatifs.
+	Les répétitions de l'évènement sont indiquées par 'REP=' suivi d'une liste de dates séparées par des virgules.
+	Les mots-clés de l'évènement sont indiqués par 'MOTS=' suivi d'une liste de mots (éventuellement précédés de leur groupe) séparés par des virgules. Attention aux majuscules/minuscules.
+	Respectez bien les espaces (ou tabulations) entre les éléments et ne mettez pas de guillemets à l'intérieur des textes. 
 
-Exemple 1 : 20/09/2006 19:30-22:00 "Répétition de rentrée" "Temple des Gobelins" "Reprise de contact, Duruflé, et mise au point des calendriers"
-	(programme un évènement précis à une date précise, et d'une durée précise)
-Exemple 2 : 17/08-23/08 "Stage d'été " "Les Salines" 
-	(programme un évènement cette année, sans description et sur plusieurs jours)
+Exemple 1 : 20/09/2006 19:30-22:00 "Répétition de rentrée" "Temple des Gobelins" "Reprise de contact"
+	(ajoute un évènement précis à une date précise, et d'une durée précise)
+Exemple 2 : 17/08-23/08 "Stage d'été " "Les Salines" MOTS=photos, Agenda:privé
+	(ajoute un évènement cette année, sans description et sur plusieurs jours en ajoutant deux mots-clés)
 Exemple 3 : 01/01/2007 "Bonne année à tous !" REP=01/01/2008,01/01/2009,01/01/2010
-	(programme un évènement sans horaire, sans lieu, à une date précise et répété sur 3 autres dates)
+	(ajoute un évènement sans horaire, sans lieu, à une date précise et répété sur 3 autres dates)
 
 Allez, voici comment j'ai saisi d'un coup tous les jours feries !!
 	01/01/2006 "Premier de l'an" "Jour Férié"
