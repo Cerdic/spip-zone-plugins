@@ -29,7 +29,7 @@ function exec_indicizza_tabella_dist() {
 	//Controlli di sicurezza, tabella non specificata
 	if(!$tabella) {
 		echo indicizza_tabelle_debut_page().
-		     _L("Errore: tabella non specificata. ").
+		     _T("indicizzazione:err_nessuna_tabella").
 		     indicizza_tabelle_fin_page();
 		die();
 	}
@@ -50,7 +50,7 @@ function exec_indicizza_tabella_dist() {
 		}
 		if(!$trovata) {
 			echo indicizza_tabelle_debut_page().
-			     _L("Tabella ".interdire_scripts($tabella)." non trovata").
+			     _T("indicizzazione:err_tabella_non_trovata",array('tabella' => interdire_scripts($tabella))).
 			     indicizza_tabelle_fin_page();
 			die();
 		}
@@ -59,10 +59,10 @@ function exec_indicizza_tabella_dist() {
 	$res = indicizza_tabelle_debut_page();
 	$tabelle = array();
 	$tabelle[] = array(
-		"<strong>"._L("Nome Campo")."</strong>",
-		"<strong>"._L("Importanza")."</strong>",
-		"<strong>"._L("Lungh. minima")."</strong>",
-		"<strong>"._L("Filtri")."</strong>",
+		"<strong>"._T("indicizzazione:nome_campo")."</strong>",
+		"<strong>"._T("indicizzazione:importanza")."</strong>",
+		"<strong>"._T("indicizzazione:min_lungh")."</strong>",
+		"<strong>"._T("indicizzazione:filtri")."</strong>",
 	);
 			
 	//recupera descrizione tabella	
@@ -73,14 +73,12 @@ function exec_indicizza_tabella_dist() {
 	$descr = array_diff(array_keys($descr["field"]),$chiavi);
 	//recupera parametri di indicizzazione
 	//$config_indice["nome_campo"] = array(importanza oppure array(importanza,lungh_minima),"filtri")
-	//var_dump($INDEX_elements_objet[$tabella]);
 	$config_indice = array();
 	if($INDEX_elements_objet[$tabella])
 		foreach($INDEX_elements_objet[$tabella] as $nome => $val) {
 			$params = explode('|',$nome,2);
 			$config_indice[$params[0]] = array('valori' => $val,'filtri' => $params[1]); 
 		}
-	//var_dump($config_indice);
 	
 	$valore_predefinito = $aggiungi_indice=='oui'?'5':'0';
 	
@@ -124,20 +122,20 @@ function indicizza_tabelle_debut_page() {
 	include_spip('inc/presentation');
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	$ret = $commencer_page(_L('Indicizzazione tabelle esterne'), "administration", "");
+	$ret = $commencer_page(_T('indicizzazione:indicizzazione_tabelle'), "administration", "");
 	
 	$ret .= debut_gauche('',true);
 	
 	$ret .= debut_boite_info(true);
-	$ret .= propre(_L('Questa pagina permette di indicizzare una tabella.'));
+	$ret .= _T('indicizzazione:info_configurazione');
 	
 	$ret .= fin_boite_info(true);
 	
 	$ret .= debut_droite('',true);
 	
-	$ret .= gros_titre(_L("Indicizzazione tabelle"),'',false);
+	$ret .= gros_titre(_T("indicizzazione:indicizzazione_tabelle"),'',false);
 	
-	$ret .= debut_cadre_trait_couleur('',true,'',_L("Indicizza tabella ").interdire_scripts($tabella));
+	$ret .= debut_cadre_trait_couleur('',true,'',_T("indicizzazione:configura_campi",array('tabella' => interdire_scripts($tabella))));
 	
 	return $ret;
 }

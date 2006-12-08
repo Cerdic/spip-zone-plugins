@@ -37,7 +37,7 @@ function indicizza_tabella($tabella,$mode='') {
 	if($mode!="-") {
 		if($mode=="+" && in_array($tabella,liste_index_tables())) {
 			include_spip('inc/minipres');
-			minipres(_L("La tabella ".interdire_scripts($tabella)." &egrave; gi&agrave; indicizzata"));
+			minipres(_T("indicizzazione:err_tabella_indicizzata",array('tabella' => interdire_scripts($tabella))));
 		} else {
 			//recupera descrizione tabella	
 			$descr = $tables_principales[$tabella];
@@ -48,7 +48,7 @@ function indicizza_tabella($tabella,$mode='') {
 			//verifica che tutti i campi siano validi e restituisce 
 			if(!indicizza_tabelle_verify_fields($campi,$descr)) {
 				include_spip('inc/minipres');
-				minipres(_L("Errore nella definizione dei campi"));
+				minipres(_T("indicizzazione:err_definizione_campi"));
 			} else {
 				if($mode=="+") indicizza_tabelle_add_idx_field($tabella);
 				indicizza_tabelle_set_points_fields($tabella,$campi);
@@ -58,7 +58,7 @@ function indicizza_tabella($tabella,$mode='') {
 	if($mode=="-") {
 		if(!in_array($tabella,liste_index_tables())) {
 			include_spip('inc/minipres');
-			minipres(_L("La tabella ".interdire_scripts($tabella)." non &egrave; indicizzata"));
+			minipres(_T("indicizzazione:err_tabella_non_indicizzata",array('tabella' => interdire_scripts($tabella))));
 		} else {
 			indicizza_tabelle_remove_idx_field($tabella);
 			indicizza_tabelle_remove_points_fields($tabella);
@@ -77,14 +77,14 @@ function indicizza_tabelle_verify_fields(&$conf,$descr) {
 			//verifica che $campi sia un array
 			if(!is_array($campi)) {
 					$ok = false;
-					$campi = "Errore";			
+					$campi = _T("indicizzazione:err");			
 			} else
 			//Verifica che ogni campo sia effettivamente nella tabella di origine
 			foreach($campi as $nome => $val) {
 				$nome = corriger_caracteres($nome);
 				if(!in_array($nome,$descr)) {
 					$ok = false;
-					$campi =  "Campo ".interdire_scripts($nome)." inesistente";
+					$campi =  _T("indicizzazione:campo_inesistente",array('campo' => interdire_scripts($nome)));
 					break;
 				} else {
 					$campi[$nome] = $val;
