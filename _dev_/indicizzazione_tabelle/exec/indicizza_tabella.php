@@ -25,6 +25,7 @@ function exec_indicizza_tabella_dist() {
 	include_spip("inc/texte");
 
 	$tabella = _request("tabella");
+	$aggiungi_indice = _request("new"); 
 	//Controlli di sicurezza, tabella non specificata
 	if(!$tabella) {
 		echo indicizza_tabelle_debut_page().
@@ -57,23 +58,59 @@ function exec_indicizza_tabella_dist() {
 	
 	$res = indicizza_tabelle_debut_page();
 	$tabelle = array();
-	$tabelle[] = array("<strong>"._L("Nome Campo")."</strong>","<strong>"._L("Importanza")."</strong>");
+	$tabelle[] = array(
+		"<strong>"._L("Nome Campo")."</strong>",
+		"<strong>"._L("Importanza")."</strong>",
+		"<strong>"._L("Lungh. minima")."</strong>",
+		"<strong>"._L("Filtri")."</strong>",
+	);
 			
 	//recupera descrizione tabella	
 	$descr = $tables_principales[$tabella];	
-	//Elimina chiave primaria
+	//Elimina chiave primaria e campo indice
 	$chiavi = explode(",",$descr["key"]["PRIMARY KEY"]);
+	$chiavi[] = 'idx';
 	$descr = array_diff(array_keys($descr["field"]),$chiavi);
-
+	//recupera parametri di indicizzazione
+	//$config_indice["nome_campo"] = array(importanza oppure array(importanza,lungh_minima),"filtri")
+	//var_dump($INDEX_elements_objet[$tabella]);
+	$config_indice = array();
+	if($INDEX_elements_objet[$tabella])
+		foreach($INDEX_elements_objet[$tabella] as $nome => $val) {
+			$params = explode('|',$nome,2);
+			$config_indice[$params[0]] = array('valori' => $val,'filtri' => $params[1]); 
+		}
+	//var_dump($config_indice);
+	
+	$valore_predefinito = $aggiungi_indice=='oui'?'5':'0';
+	
 	foreach($descr as $campo) {
-		$tabelle[] = array($campo,"<input type='text' name='campo[$campo]' value='5' />");
+		$config_campo = $config_indice[$campo];
+		if(is_array($config_campo['valori'])) {
+			$importanza = $config_campo['valori'][0];
+			$lungh_minima = $config_campo['valori'][1];
+		} else if($config_campo['valori']) {
+			$importanza = $config_campo['valori'];
+			$lungh_minima = 0;
+		} else {
+			$importanza = $valore_predefinito;
+			$lungh_minima = 0;		
+		}
+		$filtri = $config_campo['filtri'];
+		 
+		$tabelle[] = array(
+			$campo,
+			"<input type='text' size='3' name='importanza[$campo]' value='$importanza' />",
+			"<input type='text' size='3' name='lungh_min[$campo]' value='$lungh_minima' />",
+			"<input type='text' name='filtri[$campo]' value='$filtri' />",
+		);
 	}
 	
-	$tabelle = afficher_liste_debut_tableau().afficher_liste(array('60%','40%'),$tabelle).afficher_liste_fin_tableau();
+	$tabelle = afficher_liste_debut_tableau().afficher_liste(array('40%','20%','20%','20%'),$tabelle).afficher_liste_fin_tableau();
 
 	$tabelle .= "<input type='submit' value='"._T("bouton_valider")."' name='invia' />";
 	
-	$res .= redirige_action_auteur("indicizza",$tabella,'tabelle_aggiuntive','',$tabelle);
+	$res .= redirige_action_auteur("indicizza",($aggiungi_indice=='oui'?'+':'*').rawurlencode($tabella),'tabelle_aggiuntive','',$tabelle);
 	
 	$res .= indicizza_tabelle_fin_page();
 			
@@ -82,6 +119,8 @@ function exec_indicizza_tabella_dist() {
 }
 
 function indicizza_tabelle_debut_page() {
+	global $tabella;
+	
 	include_spip('inc/presentation');
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -96,10 +135,9 @@ function indicizza_tabelle_debut_page() {
 	
 	$ret .= debut_droite('',true);
 	
-	$ret .= gros_titre(_L("Indicizzazione tabelle esterne"),'',false);
+	$ret .= gros_titre(_L("Indicizzazione tabelle"),'',false);
 	
-	
-	$ret .= debut_cadre_trait_couleur('',true,'',_L("Indicizza tabella"));
+	$ret .= debut_cadre_trait_couleur('',true,'',_L("Indicizza tabella ").interdire_scripts($tabella));
 	
 	return $ret;
 }

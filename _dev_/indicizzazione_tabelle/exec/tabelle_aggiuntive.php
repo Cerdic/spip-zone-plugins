@@ -108,16 +108,17 @@ function exec_tabelle_aggiuntive_dist() {
 				case "noind":
 					$idx = "<div style='color:red'>"._L("tabella non indicizzata")."</div>";
 					//if (!array_key_exists($tab[0],$tabelle_standard)) $azioni ="<a href='".generer_url_ecrire("indicizza_tabella","tabella=".rawurlencode($tab[0]))."'>indicizza</a>";
-					$azioni ="<a href='".generer_url_ecrire("indicizza_tabella","tabella=".rawurlencode($tab[0]))."'>"._L("indicizza")."</a>";
+					$azioni ="<a href='".generer_url_ecrire("indicizza_tabella","tabella=".rawurlencode($tab[0])."&new=oui")."'>"._L("indicizza")."</a>";
 					break;
 				case "nocampiind":
 					$idx = _L("nessun campo indicizzato");
-					$azioni ="<a href='#'>"._L("aggiungi campi")."</a>";
+					$azioni ="<a href='".generer_url_ecrire("indicizza_tabella","tabella=".rawurlencode($tab[0]))."'>"._L("definisci campi")."</a>";
 					break;
 				case "ind":
 					$idx = _L("tabella indicizzata");
 					//if (!array_key_exists($tab[0],$tabelle_standard)) $azioni ="<a href='#'>elimina indice</a>";
-					$azioni ="<a href='".redirige_action_auteur("indicizza","-".rawurlencode($tab[0]),"tabelle_aggiuntive")."'>"._L("elimina indice")."</a>";
+					$azioni ="<a href='".generer_url_ecrire("indicizza_tabella","tabella=".rawurlencode($tab[0]))."'>"._L("modifica campi")."</a><br />";
+					$azioni .="<a href='".redirige_action_auteur("indicizza","-".rawurlencode($tab[0]),"tabelle_aggiuntive")."'>"._L("elimina indice")."</a>";
 					break;
 			}
 			

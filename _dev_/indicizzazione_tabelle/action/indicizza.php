@@ -19,8 +19,8 @@ function action_indicizza() {
 
 	$arg = _request('arg');
 
-	if (!preg_match(",^(-?)(.*)$,", $arg, $r))
-		spip_log("action_indicizza ".interdire_scripts($arg)." non corretta");
+	if (!preg_match(",^([-+*])(.*)$,", $arg, $r))
+		spip_log("action_indicizza $arg non corretta");
 	else indicizza_tabella($r[2],$r[1]);
 	
 }
@@ -34,8 +34,8 @@ function indicizza_tabella($tabella,$mode='') {
 
 	$tabella = corriger_caracteres($tabella);
 	//Verifiche di congruenza azioni
-	if(!$mode) {
-		if(in_array($tabella,liste_index_tables())) {
+	if($mode!="-") {
+		if($mode=="+" && in_array($tabella,liste_index_tables())) {
 			include_spip('inc/minipres');
 			minipres(_L("La tabella ".interdire_scripts($tabella)." &egrave; gi&agrave; indicizzata"));
 		} else {
@@ -44,13 +44,13 @@ function indicizza_tabella($tabella,$mode='') {
 			//Elimina chiave primaria
 			$chiavi = explode(",",$descr["key"]["PRIMARY KEY"]);
 			$descr = array_diff(array_keys($descr["field"]),$chiavi);
-			$campi = _request("campo");
+			$campi = array('importanza' => _request("importanza"),'lungh_min' => _request("lungh_min"),'filtri' => _request("filtri"));
 			//verifica che tutti i campi siano validi e restituisce 
-			if(!indicizza_tabelle_verify_fields($tabella,$campi,$descr)) {
+			if(!indicizza_tabelle_verify_fields($campi,$descr)) {
 				include_spip('inc/minipres');
-				minipres(_L("$campi"));
+				minipres(_L("Errore nella definizione dei campi"));
 			} else {
-				indicizza_tabelle_add_idx_field($tabella);
+				if($mode=="+") indicizza_tabelle_add_idx_field($tabella);
 				indicizza_tabelle_set_points_fields($tabella,$campi);
 			}		
 		}
@@ -61,6 +61,7 @@ function indicizza_tabella($tabella,$mode='') {
 			minipres(_L("La tabella ".interdire_scripts($tabella)." non &egrave; indicizzata"));
 		} else {
 			indicizza_tabelle_remove_idx_field($tabella);
+			indicizza_tabelle_remove_points_fields($tabella);
 		}
 	}
 }
@@ -70,23 +71,24 @@ function indicizza_tabelle_remove_idx_field($tabella) {
 		update_index_tables();		
 }
 
-function indicizza_tabelle_verify_fields($tabella,&$campi,$descr) {
+function indicizza_tabelle_verify_fields(&$conf,$descr) {
 		$ok = true;
-		//verifica che $campi sia un array
-		if(!is_array($campi)) {
-				$ok = false;
-				$campi = "Errore";			
-		} else
-		//Verifica che ogni campo sia effettivamente nella tabella di origine
-		foreach($campi as $nome => $val) {
-			$nome = corriger_caracteres($nome);
-			if(!in_array($nome,$descr)) {
-				$ok = false;
-				$campi =  "Campo ".interdire_scripts($nome)." inesistente";
-				break;
-			} else {
-				//evita sql injections
-				$campi[$nome] = intval($val);
+		foreach($conf as $campi) {
+			//verifica che $campi sia un array
+			if(!is_array($campi)) {
+					$ok = false;
+					$campi = "Errore";			
+			} else
+			//Verifica che ogni campo sia effettivamente nella tabella di origine
+			foreach($campi as $nome => $val) {
+				$nome = corriger_caracteres($nome);
+				if(!in_array($nome,$descr)) {
+					$ok = false;
+					$campi =  "Campo ".interdire_scripts($nome)." inesistente";
+					break;
+				} else {
+					$campi[$nome] = $val;
+				}
 			}
 		}
 		return $ok; 		
@@ -101,11 +103,36 @@ function indicizza_tabelle_set_points_fields($tabella,$campi) {
 		global $INDEX_elements_objet;
 
 		include_spip('inc/meta');
-		$INDEX_elements_objet["$tabella"] = $campi;
+		//preparo la configurazione da salvare 
+		$conf = array();
+		foreach($campi['importanza'] as $nome => $val) { 
+			//elimino campi da non indicizzare
+			if(!$val) { 
+				unset($campi[$nome]);
+			}	else {
+				if($campi['lungh_min'][$nome]) $val = array($val,$campi['lungh_min'][$nome]);
+				if($campi['filtri'][$nome]) $nome .= "|".$campi['filtri'][$nome];
+				$conf[$nome] = $val;
+			}
+		}
+		//memorizzo parametri indicizzazione
+		$INDEX_elements_objet[$tabella] = $conf;
 		ecrire_meta('INDEX_elements_objet',serialize($INDEX_elements_objet));
 		ecrire_metas();			
 		
 		//Aggiorna tabella spip_index e meta index_table per indicizzazione
 		update_index_tables();
+}
+
+function indicizza_tabelle_remove_points_fields($tabella) {
+		global $INDEX_elements_objet;
+
+		include_spip('inc/meta');
+		unset($INDEX_elements_objet["$tabella"]);
+		ecrire_meta('INDEX_elements_objet',serialize($INDEX_elements_objet));
+		ecrire_metas();			
+		
+		//Aggiorna tabella spip_index e meta index_table per indicizzazione
+		update_index_tables();	
 }
 ?>
