@@ -20,7 +20,7 @@ function action_indicizza() {
 	$arg = _request('arg');
 
 	if (!preg_match(",^(-?)(.*)$,", $arg, $r))
-		spip_log("action_indicizza $arg non corretta");
+		spip_log("action_indicizza ".interdire_scripts($arg)." non corretta");
 	else indicizza_tabella($r[2],$r[1]);
 	
 }
@@ -37,7 +37,7 @@ function indicizza_tabella($tabella,$mode='') {
 	if(!$mode) {
 		if(in_array($tabella,liste_index_tables())) {
 			include_spip('inc/minipres');
-			minipres(_L("La tabella $tabella &egrave; gi&agrave; indicizzata"));
+			minipres(_L("La tabella ".interdire_scripts($tabella)." &egrave; gi&agrave; indicizzata"));
 		} else {
 			//recupera descrizione tabella	
 			$descr = $tables_principales[$tabella];
@@ -58,7 +58,7 @@ function indicizza_tabella($tabella,$mode='') {
 	if($mode=="-") {
 		if(!in_array($tabella,liste_index_tables())) {
 			include_spip('inc/minipres');
-			minipres(_L("La tabella $tabella non &egrave; indicizzata"));
+			minipres(_L("La tabella ".interdire_scripts($tabella)." non &egrave; indicizzata"));
 		} else {
 			indicizza_tabelle_remove_idx_field($tabella);
 		}
@@ -79,7 +79,7 @@ function indicizza_tabelle_verify_fields($tabella,&$campi,$descr) {
 		} else
 		//Verifica che ogni campo sia effettivamente nella tabella di origine
 		foreach($campi as $nome => $val) {
-			nome = corriger_caracteres($nome);
+			$nome = corriger_caracteres($nome);
 			if(!in_array($nome,$descr)) {
 				$ok = false;
 				$campi =  "Campo ".interdire_scripts($nome)." inesistente";

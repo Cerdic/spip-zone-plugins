@@ -27,9 +27,9 @@ function exec_indicizza_tabella_dist() {
 	$tabella = _request("tabella");
 	//Controlli di sicurezza, tabella non specificata
 	if(!$tabella) {
-		indicizza_tabelle_debut_page();
-		echo _L("Errore: tabella non specificata. ");
-		indicizza_tabelle_fin_page();
+		echo indicizza_tabelle_debut_page().
+		     _L("Errore: tabella non specificata. ").
+		     indicizza_tabelle_fin_page();
 		die();
 	}
 	$tabella = corriger_caracteres($tabella);
@@ -48,14 +48,14 @@ function exec_indicizza_tabella_dist() {
 			}
 		}
 		if(!$trovata) {
-			indicizza_tabelle_debut_page();
-			echo _L("Tabella $tabella non trovata");
-			indicizza_tabelle_fin_page();
+			echo indicizza_tabelle_debut_page().
+			     _L("Tabella ".interdire_scripts($tabella)." non trovata").
+			     indicizza_tabelle_fin_page();
 			die();
 		}
 	}
 	
-	indicizza_tabelle_debut_page();
+	$res = indicizza_tabelle_debut_page();
 	$tabelle = array();
 	$tabelle[] = array("<strong>"._L("Nome Campo")."</strong>","<strong>"._L("Importanza")."</strong>");
 			
@@ -71,41 +71,46 @@ function exec_indicizza_tabella_dist() {
 	
 	$tabelle = afficher_liste_debut_tableau().afficher_liste(array('60%','40%'),$tabelle).afficher_liste_fin_tableau();
 
-	$tabelle .= "<input type='submit' value='Invia' name='invia' />";
+	$tabelle .= "<input type='submit' value='"._T("bouton_valider")."' name='invia' />";
 	
-	echo redirige_action_auteur("indicizza",$tabella,'tabelle_aggiuntive','',$tabelle);
+	$res .= redirige_action_auteur("indicizza",$tabella,'tabelle_aggiuntive','',$tabelle);
 	
-	indicizza_tabelle_fin_page();
+	$res .= indicizza_tabelle_fin_page();
 			
+	echo $res;
+	
 }
 
 function indicizza_tabelle_debut_page() {
 	include_spip('inc/presentation');
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_L('Indicizzazione tabelle esterne'), "administration", "");
+	$ret = $commencer_page(_L('Indicizzazione tabelle esterne'), "administration", "");
 	
-	debut_gauche();
+	$ret .= debut_gauche('',true);
 	
-	debut_boite_info();
-	echo propre(_L('Questa pagina permette di indicizzare una tabella.'));
+	$ret .= debut_boite_info(true);
+	$ret .= propre(_L('Questa pagina permette di indicizzare una tabella.'));
 	
-	fin_boite_info();
+	$ret .= fin_boite_info(true);
 	
-	debut_droite();
+	$ret .= debut_droite('',true);
 	
-	gros_titre(_L("Indicizzazione tabelle esterne"));
+	$ret .= gros_titre(_L("Indicizzazione tabelle esterne"),'',false);
 	
 	
-	debut_cadre_trait_couleur('','','',_L("Indicizza tabella"));
-
+	$ret .= debut_cadre_trait_couleur('',true,'',_L("Indicizza tabella"));
+	
+	return $ret;
 }
 
 function indicizza_tabelle_fin_page() {
 
-	fin_cadre_trait_couleur();
+	$ret = fin_cadre_trait_couleur(true);
 	
-	echo fin_page();
+	$ret .= fin_page();
+	
+	return $ret;
 
 }
 ?>
