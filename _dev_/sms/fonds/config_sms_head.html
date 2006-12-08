@@ -1,0 +1,13 @@
+[(#REM)
+
+	Tete de fond pour la configuration du plugin SMS
+
+]
+<div>
+<form method="post">
+<input name="hash" type="hidden" value="#ENV{hash}" />
+<input name="arg" type="hidden" value="#ENV{arg}" />
+<input name="exec" type="hidden" value="config_sms" />
+<fieldset><legend><:SMS:parametres_pour_compte</legend>
+<input type="text" name="compte" value="#ENV{compte}" size="15" />
+</fieldset>

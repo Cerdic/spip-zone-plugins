@@ -1,0 +1,18 @@
+[(#REM)
+
+	Fond pour la configuration "clickatell" du plugin SMS
+
+]
+#CACHE{0}
+<INCLURE{fond=config_sms_head}{hash}{arg}{compte=1}>
+
+<fieldset><legend>Identification</legend>
+<label>*<:SMS:compte:></label>
+<input type="text" name="user" value="#ENV{user}" size="10" />
+<label>*<:SMS:mot_de_passe:>
+</label><input type="password" name="password" value="#ENV{password}" size="10" />
+<label><:SMS:api_id:></label>
+<input type="text" name="api_id" value="#ENV{api_id}" size="8" />
+</fieldset>
+
+<INCLURE{fond=config_sms_foot}>
