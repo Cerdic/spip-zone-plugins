@@ -1,0 +1,149 @@
+<!-- debut de form_ahah.html cache à 0 pour le ahah ??? dans le doute... -->
+#CACHE{0}
+
+<div id="form_ahah">  <!-- conteneur général pour tout le ahah -->
+
+			 <script language="JavaScript" type="text/javascript">
+/*  le code de la doc
+			 				 $(document).ready(function() {
+                 $("a.load").click(function() {
+                   $("#code").hide();
+                   $.get(this.href,
+                     function (c) {
+                       $("#code")
+                       .html(c.replace(/</mg,'&lt;'))
+                       .fadeIn('slow');
+                     }
+                   );
+                   return false;  
+                 });
+                });
+*/
+
+		// appliquer les modifs de submit pour OK en ahah
+		// pour cela il faut passer la fonction dist2ahah() sur le html envoyé par login_public
+		// histoire d'être générique, et pour être + - tranquille que même si login_public évolue/est bidouillé, ça fonctionnera... 		 
+      // prend toutes les données du formulaire id_form et les passe dans l'url pour utilisation en ahah
+			// retourne false pour que le onsubmit du formulaire échoue... puisqu'on veut du ahah ;)
+  		function post2get() {
+  					url_ahah = "";
+				// passage des $_POST en $_GET
+					 champs_form = ['input','textarea', 'select'];
+					 for (i in champs_form) {
+					 		 $("#[(#ENV{id_form})]").find(champs_form[i]).each(function() {
+							 					  url_ahah += "&amp;" + this.name + "=" + this.value;
+					     });
+					 }
+					 return url_ahah;
+  		}
+
+  	 // laver plus blanc le submit des form : passage de toutes les valeurs des champs du form comme param de l'url
+		 // un petit bricolage générique pour les input uniquement...
+  	 // TODO : boucler aussi sur les selects, les listes, les selects multiples...
+$(document).ready(function() {
+			$("form").each(function() {
+							 $("#form_ahah").hide();
+  					// passage des valeurs des input en $_GET
+            		url_get = "spip.php?page=form_ahah" + post2get("[(#ENV{id_form})]");
+            // envoi du ahah avec les valeurs du form dans l'url
+               $.get(url_get, function (c) {
+                     $("#form_ahah").fadeIn('slow');   //  html(c.replace(/</mg,'&lt;')).
+               });
+               return false;  
+      });
+		// mettre tous les action= sur l'url de la page en cours
+			$("form").attr({ action: "spip.php?page=form_ahah" });
+});			          
+
+	 </script>
+
+<?php  
+// si pseudo post d'infos passer les $_GET en $_POST 
+       if (count($_GET) > 0) {
+					 foreach ($_GET as $cle => $valeur) {
+					 				 $_POST[$cle] = $valeur;
+					 }
+			 }
+// si identifié 
+			 if ($auteur_session) { ?>
+<?php     // si fichier téléchargé : on arrive de l'iframe
+					 if ($_FILES['userfile']['name'] != '') {  ?>
+		<!-- début de userfile{name} !={''} = un fichier uploadé arrive-->
+				 <span class="retourFichier">
+<!-- include du fichier #ENV{prefix_traitement}.php de traitement des fichiers plugin.xml uploadés
+           => le nom de votre fichier PHP de traitement du formulaire envoyé 
+           on en profite pour l'appeler par le compilo : ça laisse toutes les options pour continuer à jouer avec les boucles, jQuery... ;)  
+		 puis appel par env de la fonction eponyme qui traite le (pseudo) post ahah   -->
+				 <!-- normalement ça devrait faire la même chose que :  -->
+<?php				 
+				 			
+							include_once ('squelettes/mag_maj/editer_mag_maj.php');
+							echo editer_mag_maj(); 
+?>							
+			<!--				le tout en boucles...  -->
+				 </span>
+<?php      } // fin si fichier upoaldé   ?>
+<!--	inclure le fichier de formulaires 	-->
+		 <!-- le hack du feignant part 1 : charger l'ensemble du fichier modèle inc_form_ahah.html puis démasquer le formulaire passé en paramètre id_form -->
+				 <div style="display: none;" id="conteneur_modele">
+				     <INCLURE{fond=inc_form_ahah}{id_form=(#ENV{id_form})}>
+				 </div>
+			<!-- le hack du feignant part 2 : préparer un iframe invisible qui sera utilisé si le formulaire comprend un champ file  -->
+    				 <iframe src="#" name="iframe_upload" id="iframe_upload" class="iframeUpload" style="display: none;">
+    				 </iframe>
+<!--			le modele est chargé dans le form ahah ou le iframe selon qu'il y a ou non un input de type "file" dans le formulaire -->
+<script language="JavaScript" type="text/javascript">
+// scanner le formulaire id_form du fichier squelette inc_form_ahah.html et si il contient un champ upload 
+// gérer le transfert du formulaire dans cet iframe avec jquery (paramètre id_form)
+    $(document).ready(function() {  //  début gestion passage form => ahah
+		    transfert_iframe = false;
+				// s'assurer que les form modeles sont tous à display: none 
+				$("#conteneur_modele").find("form").css({ display: "none" });
+				// le scan du formulaire du squelette utilisé 
+				$("#[(#ENV{id_form})]").find("input").each(function() { 
+					 	// s'il existe un champ upload de fichier au moins, basculer sur l'iframe et charger le form id_form dedans
+							 if (this.type == 'file') {
+							 		transfert_iframe = true;
+									return;  // pas besoin d'aller plus loin : 1 seul champ upload suffit à f.... le b... !
+							 }
+				});
+		// passer la src de l'iframe sur le fichier inc_form_ahah.html, rendre visible id_form dedans, afficher l'iframe
+				if (transfert_iframe === true) {
+    				 
+					 $("#iframe_upload").attr({ src: "spip.php?page=inc_form_ahah" });
+//					 $("#iframe_upload").load("spip.php?page=form_ahah&id_form=[(#ENV{id_form})]");
+
+					 $("#iframe_upload").find("#[(#ENV{id_form})]").css({ display: "block" });
+					 $("#iframe_upload").css({ display: "block" });
+//					 $("#iframe_upload").addClass("iframeUpload");
+					 $("#conteneur_modele").css({ display: "none" });    
+					 
+				// s'assurer que le action de id_form est sur la bonne url...
+				   $("#iframe_upload").find("#[(#ENV{id_form})]").attr("action", "spip.php?page=form_ahah");
+
+				// méchant hack pour pas afficher les boutons admins dans l'iframe
+					 $("#iframe_upload").find("spip-admin-float").css({ display: "none" });
+				}
+				else {  // pas de champ upload pour emm... la vie ? => rendre visible id_form et supprimer l'iframe
+					 	 $("#iframe_upload").remove();
+						 $("#[(#ENV{id_form})]").css({ display: "block" });
+						 $("#conteneur_modele").css({ display: "block" });
+				}
+		} );   // <!-- fin gestion passage form => ahah	  -->
+</script>		
+
+
+<?php  } 
+			 else { ?><!--  fin statut connecté -->
+<?php	//</div> }  
+		// si pas identifié => refiler l'affaire à LOGIN_PUBLIC... 
+		// en ressortant sur ce fichier pour passer au formulaire après
+				  // gérer le passage de login_public en ahah  ?>
+
+			#LOGIN_PUBLIC
+			
+<?php  }  // fin du else pas identifié ?>			 
+
+</div>  <!-- fin du div form_ahah  -->
+
+<!-- fin de form_ahah.html-->

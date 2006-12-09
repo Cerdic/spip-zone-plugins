@@ -1,0 +1,152 @@
+#CACHE{0}
+
+<BOUCLE_article_principal(ARTICLES) {id_article}>
+			#SET{nom_secteur, #ID_SECTEUR|nom_secteur}
+			#SET{version_ec, #SURTITRE}
+
+<BOUCLE_rubrique_principal(RUBRIQUES) {id_rubrique}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>[Plugin : (#TITRE|textebrut) [(v.(#GET{version_ec}) )] - ][(#GET{nom_secteur}|textebrut)]</title>
+	[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+	<INCLURE{fond=inc-head}>
+
+	[(#REM) Lien vers le flux RSS de la rubrique ]
+	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+</head>
+<body class="page_rubrique">
+	<link rel="stylesheet" href="[(#CHEMIN{mag_maj.css})]">
+
+<div id="page">
+
+<div id="entete">
+
+  [(#REM) Afficher le logo ou le titre du site ]
+  <a rel="start" href="#URL_SITE_SPIP/spip.php?">
+   <span id="nom_site_spip"><img src="[(#CHEMIN{/img_pack/mag_maj.png})]">[(#GET{nom_secteur})]<img src="[(#CHEMIN{/img_pack/zone.png})]"></span>
+  </a>
+  
+  
+  		 			#FORMULAIRE_RECHERCHE
+  
+  
+<br class="nettoyeur" />
+</div>
+
+	[(#REM) Fil d'Ariane ]
+		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>
+
+      <form class="mag_maj" id="mag_maj" name="mag_maj" enctype="multipart/form-data" action="#SELF&var_mode=recalcul" method="post"> <!-- onsubmit="return (verifSaisie());" -->
+<?php  if ($auteur_session) { ?>
+			   <span class="retourFichier">
+				 			 <INCLURE(editer_mag_maj.php)>
+<? //        include_once(_DIR_PLUGIN_MAG_MAJ.'/exec/editer_mag_maj.php');
+   	 			 if ($_FILES['userfile']['name'] != '') {  
+   	 			 		echo editer_mag_maj();
+	         }
+//		 			 echo '<br>$auteur_session = '.$auteur_session;
+	 ?>
+				 </span>
+				 Ajouter un fichier plugin.xml : 
+   			 <input name="userfile" type="file" classe="telech" >
+        <input type="submit" name="valide_generateur" id="valide_generateur" value="envoyer">
+     </form>
+<?php  }
+			 else {	?>		 
+			 <a href="#" onclick="document.getElementById('login_p').style.display = (document.getElementById('login_p').style.display == 'none' ? 'inline' : 'none');">Vous devez vous identifier pour poster les fichiers plugin.xml 
+			 <div id="login_p">
+			 #LOGIN_PUBLIC
+			 </div>
+			 
+<?     } ?>			 
+	</div>
+			<div class="intro1 autresPlugins">
+
+		#SET{txt_info,#TEXTE|propre}  
+		#SET{desc_info,#DESCRIPTIF|propre}
+    		<div class="titreItem">Plugins :</div>
+    		<BOUCLE_type_plugin(RUBRIQUES){id_parent=41}>
+				   [(#COMPTEUR_BOUCLE|=={1}|?{ #SET{logo_test_pt,#LOGO_RUBRIQUE||image_reduire{16,16}}, 
+					 														 #SET{logo_stable_pt,#LOGO_RUBRIQUE||image_reduire{16,16}}
+																			 }
+					 )]
+    			 <div class="autresPluginsType">[(#LOGO_RUBRIQUE||image_reduire{20,20})] [(#TITRE|propre)]</div>
+    			  <ul class="petiteListe">
+					 <BOUCLE_petite_liste(RUBRIQUES){id_parent}>
+								<BOUCLE_dernier_article_plugin(ARTICLES){id_rubrique}{par date}{inverse}{0,1}>
+								       #SET{id_article_plugin, #ID_ARTICLE}
+								</BOUCLE_dernier_article_plugin>
+    						<li>
+									 <a href="spip.php[?article(#GET{id_article_plugin})]">[(#LOGO_RUBRIQUE||image_reduire{16,16})] [(#TITRE|propre)]</a>
+								</li>
+    			 </BOUCLE_petite_liste>
+    				</ul>
+    		</BOUCLE_type_plugin>
+			</div>		
+    				[(#REM) Articles de la rubrique ]
+    				<B_articles>
+    				<div class="blocVersions">
+    					#ANCRE_PAGINATION
+    					<span class="titreItem">Autres versions :</span>
+							<ul class="">
+    						<BOUCLE_articles(ARTICLES) {id_rubrique} {par date}{inverse} {pagination} {doublons}>
+								     #SET{titre_plugin_pl,#SURTITRE|propre}
+										 #SET{logo_etat_plugin, #PS|=={test}|?{ #GET{logo_test_pt} , #GET{logo_stable_pt} } }
+    						</BOUCLE_articles>
+    						<li class="titre">
+    							<a href="#URL_ARTICLE"><span class="version"> [(#GET{logo_etat_plugin})] [[v. (#GET{titre_plugin_pl})]]</span> #TITRE</a>
+    							<small>[(#DATE)]</small>
+    						</li>
+    					</ul>
+    					[<p class="pagination">(#PAGINATION)</p>]
+							</div>
+    				</B_articles>
+  #SET{titre_plugin_pr,#TITRE|propre}
+	
+	
+	
+  <BOUCLE_presentation(ARTICLES){id_article}>
+	<div class="tArticle">
+			[<span class=""><a href="(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})"><img src="dist/images/feed.png"></a></>]
+			 [(#LOGO_RUBRIQUE||image_reduire{200,200})] [(#GET{titre_plugin_pr})] 
+			 <BOUCLE_v_en_cours(ARTICLES){id_rubrique}{par date}{inverse}{0,1}>
+			    <span class="vEncours #PS">[derniere maj : <a href=" #URL_ARTICLE" class="version">v.(#SURTITRE|propre) ] | etat : [(#PS|=={test}|? {#GET{logo_test_pt} , #GET{logo_stable_pt} })]</a> </span>
+			 </BOUCLE_v_en_cours>
+	</div>
+	<div id="conteneurA">
+			<div class="contre-encart blocArticle">
+    			<div class="cartouche">
+   						 		  [<div class="lien_plugin"> <a href="(#URL_SITE|mag_maj_url_plugin{svn})">svn<br><img src="[(#CHEMIN{/img_pack/zone.png})]"></a> </div>]
+    								[<div class="lien_plugin"><a href="(#URL_SITE|mag_maj_url_plugin{zip})">zip<br><img src="dist/images/synchro-24.gif"></a></div>]
+    								
+										[<div class="itemDescription"><span class="titreItem">Nom :</span><span class="nomPlugin">(#TITRE|propre)</span></div>]
+										[<div class="itemDescription"><span class="titreItem">Version :</span><span class="nomPlugin"><span class="version">v.(#SURTITRE|propre)</span></span>
+										<br><small>maj du [(#DATE)][, <:par_auteur:> (#LESAUTEURS|propre)]</small></div>]
+            				[<div class="itemDescription"><span class="titreItem">Etat : <img class="" src="(#CHEMIN{/img_pack/plugin_#PS-24.png})"></span></div>]
+										[<div class="itemDescription"><span class="titreItem">La documentation : </span> <a class="lienDoc" href="[(#URL_SITE|mag_maj_url_plugin{doc})]">(#URL_SITE|mag_maj_url_plugin{doc}|couper{40})</a></div>]
+										[<div class="itemDescription"><span class="titreItem">Auteur :</span> (#CHAPO|propre)</div>]
+										[<div class="itemDescription"><span class="titreItem">Description :</span> (#DESCRIPTIF|propre)</div>]
+										[<div class="itemDescription"><span class="titreItem">Fichier options :</span> (#NOM_SITE|propre)</div>]
+										[<div class="itemDescription"><span class="titreItem">Fichier fonctions :</span> (#EXTRA|propre)</div>]
+										[<div class="itemDescription"><code><span class="titreItem">Pipelines :</span> (#TEXTE|propre)</code></div>]
+    
+    
+    			</div>  <!-- fin du div cartouche -->
+			</div> <!-- fin div contre-encart -->
+			</BOUCLE_liste_plugins>
+		</div>   <!-- fin de div contenu -->
+		</BOUCLE_type_plugin>
+
+	</div><!-- fin conteneurA -->
+  </BOUCLE_presentation>
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_rubrique_principal>
+
+</BOUCLE_article_principal>

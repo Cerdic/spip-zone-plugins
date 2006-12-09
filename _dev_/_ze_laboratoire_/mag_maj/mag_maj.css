@@ -1,0 +1,76 @@
+code { font-size: 14px !important; background-color: #ddd; margin: 5px; padding 5px; }
+
+.cartouche img { float: left !important; }
+.cartouche .titreP { font-variant: small-caps; font-size: 3em; }
+.cartouche .titreP img{ margin-top: 25px; }
+.cartouche .titre { padding-left: 0px; margin-left: -15px; }
+.cartouche div { margin-left: 15px; }
+.cartouche .urls { font-size: 0.7em; float: right; display: block; width: 120px;}
+.cartouche .lien_plugin { padding: 0px 0px 0px 5px;  display: inline; margin: 5px;}
+.contre-encart { border: solid 1px #777; background-color: #ddd; margin-bottom: 15px; padding: 10px;}
+.contenu { width: 42%; float: left; padding: 15px; font-size: 0.8em; }
+.liste-articles { padding: 0px; margin: 15px 0px 0px 0px; }
+.titreItem, .debutVersion {  font-weight: bold;  font-size: 0.75em;}
+.titreItem img { float: none !important; }
+.listeVersions { padding: 0px; margin: 0px; }
+.listeVersions li { padding: 5px 5px 5px 25px; margin: 10px 0px 0px 0px; display: block; }
+.listeVersions li:hover { background-color: #eee; }
+.version { color:  rgb(246, 75, 0); font-weight: bold; white-space: nowrap; text-align: middle; }
+.itemDescription { margin-top: 10px; font-size: 0.7m; }
+.lienDoc  { color:  rgb(246, 75, 0); }
+.blocVersions { width: 220px; float: right; padding: 0px 10px; font-size: 0.7em; margin: 0px 0px 10px 15px;}
+.blocVersions ul {  }
+.blocVersions li { padding: 5px 5px 5px 5px; margin: 5px; display: block; }
+.blocVersions .titreItem {  margin-left: 50px;  }
+.blocVersions .titre a {  font-weight: bold; }
+.blocVersions li, .listeVersions li {  background-color: #ccc; border: dashed #777 1px; }
+.lien_plugin { display: inline; float: right; width: 20px;}
+.lien_plugin a { display: block; }
+.lien_plugin img { padding: 0px; margin: 0px 0px 0px -5px; }
+.intro {  display: block; width: 100%; padding: 0px 10px; font-size: 0.7em;}
+.introGenerale {background: #eee; font-size: 0.8em; border: solid 1px #777; padding: 5px; margin-bottom: 15px; }
+/*h2 a { margin: 0px 0px 0px 30px; padding: 0px; }*/
+.titrePlugin { margin: 0px; padding: 0px; font-size: 1.2em;}
+.petiteListe, .introGenerale, .intro1, .intro2  {  list-style-type: none; font-size: 0.7em; padding: 2px; display: block;}
+.petiteListe li {padding: 2px; margin: 3px;  border: 1px solid #777; background: #eee; padding: 5px;}
+.petiteListe img { margin: 0px; padding: 0px; float: right; display: inline; margin: 0px; padding :0px; }
+.blocVersions li:hover, .petiteListe li:hover, .cartouche .lien_plugin:hover, .blocUpload:hover { background-color: #ddd; }
+.intro1, .intro2 { width: 120px; text-align: justify; padding: 0px 10px; font-size: 0.7em;}
+.intro1 {float: left; margin-left: -120px;}
+.intro2 {float: right; margin-right: -120px; }
+
+.mag_maj {   display: inline; font-size: 0.62em; float: right;  padding: 0px 5px; margin: 2px 50px 0px 0px; }
+.mag_maj input {  font-size: 0.62em; }
+.retour { background-color: #eee; border: 1px dashed #777; padding: 5px;}
+.titreP a { float: right; }
+.titreP .version {  font-size: 0.6em; }
+.tArticle {  font-size: 1.6em;  margin-bottom: 10px;}
+.tArticle .version {  font-size: 0.7em; }
+.tArticle img { margin-top: 5px; }
+.nomPlugin {  font-size: 1.2em; }
+.blocArticle { }
+.autresPlugins {  }
+.autresPluginsType { font-weight; bold; vertical-align: baseline; margin-top: 10px; }
+.descPluginSommaire {  font-size: 0.6em; text-align: justify;}
+.tPlugin { font-size: 1.6em; white-space: nowrap; }
+.itemDescription .tPlugin { font-size: 1.4em; white-space: normal; }
+.noWrap { white-space: nowrap; }
+.feedTotal {  float: right;  display: inline; }
+.vEncours {  font-size: 0.2em; }
+.vEncours img {  }
+.blocUpload {background: no-repeat #eee; background-position:  2px 2px; border: dashed #777 1px; padding: 5px 5px 8px 30px; margin: 5px; font-size: 0.7em; }
+.ariane { float: left; font-size: 0.7em;  }
+.iframeUpload {   border: none; position: relative; top: 0px; left: 0px; display: block; }
+
+.pageS {  }
+
+#type_1 { }
+#type_2 { border-left: 2px #000 solid; text-align: left; }
+#conteneurA {   width: 550px; margin: 0px 0px 0px 10px;}
+#valide_generateur { background-color: #FF8000; font-weight: bold; }
+/*#depot {  display: inline; float: right;  padding: 0px 5px; margin: 0px; clear: right; }*/
+#login_p { display: none; float: right; }
+#rech { float: right; }
+#rech input { font-size: 0.8em; margin-top: 5px;}
+#form_ahah, #conteneur_modele, #modele_iframe, .iframeUpload {  width: 350px; height: 100px;  }
+#conteneur { width: 800px; margin: 0px 0px 0px 170px; }

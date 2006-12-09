@@ -1,0 +1,38 @@
+<plugin>
+        <nom> <!-- titre -->
+          spip-magazine maj plugins
+        </nom>
+        <auteur> <!-- sous-titre -->
+          cy_altern
+        </auteur>
+        <version> <!-- sur-titre -->
+           0.2
+        </version>
+        <etat>  <!-- PS -->
+          test
+        </etat>
+        <description>  <!-- description -->
+          Cr&eacute;e un fil RSS pour tous les plugins &agrave; partir de leur fichier plugin.xml
+        </description>
+				<url_doc>  <!-- Lien hypertexte -->
+						http://extranet-eze.dyndns.org/portail/spip_SVN/
+				</url_doc>
+				<url_zip>
+				    http://extranet-eze.dyndns.org/portail/spip_SVN/  <!-- extra -->
+				</url_zip>
+				<rss_maj>   <!-- titre lien hypertexte -->
+				    http://extranet-eze.dyndns.org/portail/spip_SVN/spip.php
+				</rss_maj>
+        <prefix>   <!-- chapo -->
+            mag_maj
+        </prefix>
+				<fonctions>
+						inc/mag_maj_fonctions.php
+				</fonctions>				
+        <pipeline>    <!-- texte -->
+        		<nom>ajouter_boutons</nom>
+            <inclure>mag_maj_pipelines.php</inclure>
+        </pipeline>
+	
+        <!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.        -->
+</plugin>
