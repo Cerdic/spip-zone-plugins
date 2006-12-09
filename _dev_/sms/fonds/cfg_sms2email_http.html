@@ -10,8 +10,8 @@
 <input name="driver" type="hidden" value="sms2email_http" />
 <label>*<:SMS:login:></label>
 <input type="text" name="user" value="#ENV{user}" size="10" />
-<label>*<:SMS:mot_de_passe:>
-</label><input type="password" name="password" value="#ENV{password}" size="10" />
+<label>*<:SMS:mot_de_passe:></label>
+<input type="password" name="password" value="#ENV{password}" size="10" />
 </fieldset>
 
 [(#INCLURE{fond=fonds/config_sms_foot}{lang}{hash}{arg})]
