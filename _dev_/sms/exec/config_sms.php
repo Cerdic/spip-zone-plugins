@@ -18,10 +18,8 @@ function exec_config_sms_dist()
 		$contexte['was_compte'] = _request('was_compte');
 	}
 
-	foreach (champs($contexte['driver']) as $champ) {
-	    $contexte[$champ] = _request($champ);
-    }
-	$result = $message = null;
+	$result = null;
+	$message = champs($contexte);
 /*	if (_request('envoi')) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$securiser_action();
@@ -67,18 +65,23 @@ function cherche_prestataires()
     return $drivers;
 }
 
-function champs($driver = '')
+function champs($contexte)
 {
-	$champs = array();
-	$fichier = find_in_path('fonds/cfg_' . $driver .'.html');
+	if (empty($contexte['driver'])) {
+		return _L('creer_un_compte');
+	}
+	$fichier = find_in_path($nom = 'fonds/cfg_' . $contexte['driver'] .'.html');
 	if (!lire_fichier($fichier, $controldata)) {
-		die('erreur lecture fonds' . ' fonds/cfg_' . $driver .'.html');
+		return _L('erreur_lecture_') . $nom;
 	}
-	if (preg_match_all('/<input type="(?:text|password)" name="(\w+)" .+>/',
+	if (!preg_match_all('/<input type="(?:text|password)" name="(\w+)" .+>/',
 					$controldata, $matches, PREG_PATTERN_ORDER)) {
-		$champs = $matches[1];
+		return _L('pas_de_champs_dans_') . $nom;
 	}
-    return $champs;
+	foreach ($matches[1] as $champ) {
+	    $contexte[$champ] = _request($champ);
+    }
+    return '';
 }
 
 function boite_liste($titre = "", $elements = array())
@@ -122,6 +125,9 @@ function creer_nouveau()
 */
 function config_sms_fond($contexte = array())
 {
+    if (empty($contexte['driver'])) {
+    	return _L('configuration_vide');
+    }
     $contexte['lang'] = $GLOBALS['spip_lang'];
     $contexte['arg'] = 'config_sms-0.1.0';
     $contexte['hash'] =  calculer_action_auteur('-' . $contexte['arg']);
