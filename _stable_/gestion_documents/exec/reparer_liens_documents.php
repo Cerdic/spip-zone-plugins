@@ -28,7 +28,7 @@ function exec_reparer_liens_documents(){
 	// Recupere les donnees
 	//
 
-	debut_page(_L("Reparer les liens"), "documents", "documents");
+	debut_page(_T('gestdoc:reparer_liens'), "documents", "documents");
 	debut_gauche();
 
 
@@ -38,12 +38,12 @@ function exec_reparer_liens_documents(){
 
 	debut_boite_info();
 
-	echo propre(_L('Cette page reconstitue les liens entre documents et articles dans lequel ils sont ins&eacutes;r&eacute;s par un tag <imgxx> <docxx> ou <embxx>'));
+	echo propre(_T('gestdoc:info_reparer'));
 
 	fin_boite_info();
 
 	debut_raccourcis();
-	icone_horizontale (_L('Portfolio'), 
+	icone_horizontale (_T('gestdoc:portfolio'), 
 		generer_url_ecrire('portfolio'),
 		"../"._DIR_PLUGIN_GESTIONDOCUMENTS."/img_pack/stock_broken_image.png");
 	fin_raccourcis();
@@ -89,14 +89,14 @@ function exec_reparer_liens_documents(){
 			}
 			if (count($liste_doc)){
 				foreach($liste_doc as $id_document=>$dummy){
-					echo "lien (id_document=$id_document,$primary=$id_objet) ajout&eacute; <br/>";
+					echo _T("gestdoc:lien_ajoute")." (id_document=$id_document,$primary=$id_objet) <br/>";
 					spip_abstract_insert($lien,"(id_document,$primary)","(".spip_abstract_quote($id_document).",".spip_abstract_quote($id_objet).")");
 				}
 			}
 		}
 	}
 	
-	echo _L("Liens mis a jour");
+	echo _T("gestdoc:mis_jour_liens");
 	fin_page();
 }
 

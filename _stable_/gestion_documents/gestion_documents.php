@@ -23,7 +23,7 @@ if (!defined('_DIR_PLUGIN_GESTIONDOCUMENTS')){
 		  // on voit les bouton dans la barre "accueil"
 			$boutons_admin['naviguer']->sousmenu["portfolio"]= new Bouton(
 			"../"._DIR_PLUGIN_GESTIONDOCUMENTS."/img_pack/stock_broken_image.png",  // icone
-			_L("Tous vos documents") //titre
+			_T("gestdoc:tous_doc") //titre
 			);
 		}
 		return $boutons_admin;

@@ -1,6 +1,10 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
+	<multi>[fr]
 	Gestion de documents
+	[it]
+	Gestione dei documenti
+	</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Cedric MORIN
@@ -12,7 +16,11 @@
 	stable
 	</etat>
 	<description>
+	<multi>[fr]
 	Outils de gestion des documents : une page r&eacute;capitulative de tous les documents.
+	[it]
+	Utility di gestione dei documenti : una pagina che mostra tutti i documenti.
+	</multi>
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction-->

@@ -38,7 +38,7 @@ function exec_portfolio(){
 	// Recupere les donnees
 	//
 
-	debut_page(_L("Tous les Documents"), "documents", "documents");
+	debut_page(_T("gestdoc:tous_docs"), "documents", "documents");
 	debut_gauche();
 
 
@@ -48,7 +48,7 @@ function exec_portfolio(){
 
 	debut_boite_info();
 
-	echo propre(_L('Cette page r&eacute;capitule la liste de tous vos documents. Pour modifier les informations de chaque document, suivez le lien vers la page de sa rubrique.'));
+	echo propre(_T('gestdoc:info_doc'));
 
 	fin_boite_info();
 
@@ -119,7 +119,7 @@ function exec_portfolio(){
 		$filtre=addslashes(_request('filtre'));
 		if (!isset($_POST['filtre'])) $_POST['filtre']=_request('filtre');
 	}
-	$titre_table=_L("Tous les Documents");
+	$titre_table=_T("gestdoc:tous_docs");
 	if (!$icone) $icone = "../"._DIR_PLUGIN_GESTIONDOCUMENTS."/img_pack/stock_broken_image.png";
 
 	$table_type=array();
@@ -280,7 +280,7 @@ function exec_portfolio(){
 				$res2=spip_query($query2);
 				if ($row2 = spip_fetch_array($res2)){
 					$url = generer_url_ecrire("rubriques_edit","id_rubrique=".$row2['id_rubrique']);
-					$link_title = _L("Rubrique ")." ".$row2['id_rubrique'];
+					$link_title = _T("gestdoc:info_rubrique")." ".$row2['id_rubrique'];
 					$utile = true;
 			 	}
 			 	else {
@@ -288,7 +288,7 @@ function exec_portfolio(){
 					$res2=spip_query($query2);
 					if ($row2 = spip_fetch_array($res2)){
 						$url = generer_url_ecrire("breves_edit","id_breve=".$row2['id_breve']);
-						$link_title = _L("Breve ")." ".$row2['id_breve'];
+						$link_title = _T("gestdoc:info_breve")." ".$row2['id_breve'];
 						$utile = true;
 					}
 				 	else {
@@ -296,7 +296,7 @@ function exec_portfolio(){
 						$res2=spip_query($query2);
 						if ($row2 = spip_fetch_array($res2)){
 							$url = generer_url_ecrire("sites_edit","id_syndic=".$row2['id_syndic']);
-							$link_title = _L("Site ")." ".$row2['id_syndic'];
+							$link_title = _T("ecrire:info_site")." ".$row2['id_syndic'];
 							$utile = true;
 						}
 					}
@@ -332,7 +332,7 @@ function exec_portfolio(){
 			}
 
 			if ($alt == "")
-				$doc['info'] .= _L("Pas de balise alt ?? ").htmlentities($montexte);
+				$doc['info'] .= _T("gestdoc:attr_alt").htmlentities($montexte);
 			else {
 				if ($altgood == true)
 					$doc['info'] .= "<span style='background : #00FF00;'>";
@@ -393,19 +393,19 @@ function exec_portfolio(){
 		debut_raccourcis();
 
 		if ($table_need_update){
-			icone_horizontale (_L('Mettre les tailles a jour'), 
+			icone_horizontale (_T('gestdoc:mis_jour_tailles'), 
 				generer_url_ecrire('portfolio',"updatetable=oui&".generer_query_string($conteneur,$id_type,$nb_aff,$filtre)),
 				"administration-24.gif");
 		}
-		icone_horizontale (_L('Reparer les liens'), generer_url_ecrire('reparer_liens_documents'),"../"._DIR_PLUGIN_GESTIONDOCUMENTS."/img_pack/stock_broken_image.png");
+		icone_horizontale (_T('gestdoc:reparer_liens'), generer_url_ecrire('reparer_liens_documents'),"../"._DIR_PLUGIN_GESTIONDOCUMENTS."/img_pack/stock_broken_image.png");
 
 		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string($conteneur,"",$nb_aff,$filtre))."' method='post'><div>\n";
-		echo _L('Type :') . "<br /><select name='id_type'";
+		echo _T('gestdoc:type') . "<br /><select name='id_type'";
 		echo "onchange=\"document.location.href='";
 		echo generer_url_ecrire('portfolio',generer_query_string($conteneur,"",$nb_aff,$filtre).'id_type=')."'+this.options[this.selectedIndex].value\"";
 		echo " class='forml' >" . "\n";
 		$s=spip_query('SELECT * FROM spip_types_documents');
-		echo "<option value=''>Tous</option>";
+		echo "<option value=''>"._T("gestdoc:tous")."</option>";
 		while ($row=spip_fetch_array($s)){
 			echo "<option value='".$row['id_type']."'";
 			if ($row['id_type'] == $id_type)
@@ -419,15 +419,15 @@ function exec_portfolio(){
 		echo "</form>\n";
 
 		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string("",$id_type,$nb_aff,$filtre))."' method='post'><div>\n";
-		echo _L('Conteneur :') . "<br /><select name='conteneur'";
+		echo _T('gestdoc:conteneur') . "<br /><select name='conteneur'";
 		echo "onchange=\"document.location.href='";
 		echo generer_url_ecrire('portfolio',generer_query_string("",$id_type,$nb_aff,$filtre).'conteneur=')."'+this.options[this.selectedIndex].value\"";
 		echo " class='forml' >" . "\n";
-		echo "<option value=''>Tous</option>";
-		echo "<option value='rubriques'".($conteneur=='rubriques'?(" selected='selected'"):"").">Rubriques</option>";
-		echo "<option value='articles'".($conteneur=='articles'?(" selected='selected'"):"").">Articles</option>";
-		echo "<option value='breves'".($conteneur=='breves'?(" selected='selected'"):"").">Breves</option>";
-		echo "<option value='syndic'".($conteneur=='syndic'?(" selected='selected'"):"").">Syndication</option>";
+		echo "<option value=''>"._T("gestdoc:tous")."</option>";
+		echo "<option value='rubriques'".($conteneur=='rubriques'?(" selected='selected'"):"").">"._T("ecrire:info_rubriques")."</option>";
+		echo "<option value='articles'".($conteneur=='articles'?(" selected='selected'"):"").">"._T("ecrire:info_articles_2")."</option>";
+		echo "<option value='breves'".($conteneur=='breves'?(" selected='selected'"):"").">"._T("gestdoc:info_breves")."</option>";
+		echo "<option value='syndic'".($conteneur=='syndic'?(" selected='selected'"):"").">"._T("gestdoc:info_syndication")."</option>";
 		echo "</select>";
 		echo "<noscript><div>";
 		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
@@ -435,14 +435,14 @@ function exec_portfolio(){
 		echo "</form>\n";
 
 		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,$nb_aff,""))."' method='post'><div>\n";
-		echo _L('Filtrer :') . "<br /><select name='filtre'";
+		echo _T('gestdoc:filtrer') . "<br /><select name='filtre'";
 		echo "onchange=\"document.location.href='";
 		echo generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,$nb_aff,"").'filtre=')."'+this.options[this.selectedIndex].value\"";
 		echo " class='forml' >" . "\n";
-		echo "<option value=''>Tous</option>";
-		echo "<option value='notitle'".($filtre=='notitle'?(" selected='selected'"):"").">Sans titre ni descriptif</option>";
-		echo "<option value='nofile'".($filtre=='nofile'?(" selected='selected'"):"").">Fichier introuvable</option>";
-		echo "<option value='badsize'".($filtre=='badsize'?(" selected='selected'"):"").">Taille erron&eacute;e</option>";
+		echo "<option value=''>"._T("gestdoc:tous")."</option>";
+		echo "<option value='notitle'".($filtre=='notitle'?(" selected='selected'"):"").">"._T("gestdoc:sans_titre_descriptif")."</option>";
+		echo "<option value='nofile'".($filtre=='nofile'?(" selected='selected'"):"").">"._T("gestdoc:fichier_introuvable")."</option>";
+		echo "<option value='badsize'".($filtre=='badsize'?(" selected='selected'"):"").">"._T("gestdoc:taille_erronee")."</option>";
 		echo "</select>";
 		echo "<noscript><div>";
 		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
@@ -450,14 +450,14 @@ function exec_portfolio(){
 		echo "</form>\n";
 	
 		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,"",$filtre))."' method='post'><div>\n";
-		echo _L('Affichage :') . "<br /><select name='nb_aff'";
+		echo _T('gestdoc:affichage') . "<br /><select name='nb_aff'";
 		echo "onchange=\"document.location.href='";
 		echo generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,"",$filtre).'nb_aff=')."'+this.options[this.selectedIndex].value\"";
 		echo " class='forml' >" . "\n";
-		echo "<option value='12'>Par 12</option>";
-		echo "<option value='24'".($nb_aff=='24'?(" selected='selected'"):"").">Par 24</option>";
-		echo "<option value='48'".($nb_aff=='48'?(" selected='selected'"):"").">Par 48</option>";
-		echo "<option value='96'".($nb_aff=='96'?(" selected='selected'"):"").">Par 96</option>";
+		echo "<option value='12'>"._T("gestdoc:par",array("numero" => 12))."</option>";
+		echo "<option value='24'".($nb_aff=='24'?(" selected='selected'"):"").">"._T("gestdoc:par",array("numero" => 24))."</option>";
+		echo "<option value='48'".($nb_aff=='48'?(" selected='selected'"):"").">"._T("gestdoc:par",array("numero" => 48))."</option>";
+		echo "<option value='96'".($nb_aff=='96'?(" selected='selected'"):"").">"._T("gestdoc:par",array("numero" => 96))."</option>";
 		echo "</select>";
 		echo "<noscript><div>";
 		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
