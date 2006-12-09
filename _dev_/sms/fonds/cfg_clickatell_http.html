@@ -4,13 +4,14 @@
 
 ]
 #CACHE{0}
-[(#INCLURE{fond=fonds/config_sms_head}{lang}{base_url}{hash}{arg}{compte=1})]
+[(#INCLURE{fond=fonds/config_sms_head}{lang}{base_url}{hash}{arg}{compte})]
 
 <fieldset><legend><:Identification:> Clickatell</legend>
+<input name="driver" type="hidden" value="clickatell_http" />
 <label>*<:SMS:login:></label>
 <input type="text" name="user" value="#ENV{user}" size="10" />
-<label>*<:SMS:mot_de_passe:>
-</label><input type="password" name="password" value="#ENV{password}" size="10" />
+<label>*<:SMS:mot_de_passe:></label>
+<input type="password" name="password" value="#ENV{password}" size="10" />
 <label>*<:SMS:api_id:></label>
 <input type="text" name="api_id" value="#ENV{api_id}" size="8" />
 </fieldset>

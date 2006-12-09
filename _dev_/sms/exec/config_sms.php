@@ -12,11 +12,13 @@ function exec_config_sms_dist()
 	$contexte = array('base_url' => generer_url_ecrire('config_sms', ''));
 	if (($addDriver = _request('adddriver'))) {
 		$contexte['driver'] = $addDriver;
+	} else  {
+		$contexte['driver'] = _request('driver');
+		$contexte['compte'] = _request('compte');
+		$contexte['was_compte'] = _request('was_compte');
 	}
 
-	$champs = array('prestataire', 'user', 'password', 'api_id',
-					'text', 'from', 'to', 'id');
-	foreach ($champs as $champ) {
+	foreach (champs($contexte['driver']) as $champ) {
 	    $contexte[$champ] = _request($champ);
     }
 	$result = $message = null;
@@ -65,6 +67,20 @@ function cherche_prestataires()
     return $drivers;
 }
 
+function champs($driver = '')
+{
+	$champs = array();
+	$fichier = find_in_path('fonds/cfg_' . $driver .'.html');
+	if (!lire_fichier($fichier, $controldata)) {
+		die('erreur lecture fonds' . ' fonds/cfg_' . $driver .'.html');
+	}
+	if (preg_match_all('/<input type="(?:text|password)" name="(\w+)" .+>/',
+					$controldata, $matches, PREG_PATTERN_ORDER)) {
+		$champs = $matches[1];
+	}
+    return $champs;
+}
+
 function boite_liste($titre = "", $elements = array())
 {
 	if (!$elements) {
@@ -97,7 +113,7 @@ function creer_nouveau()
 			generer_url_ecrire('config_sms', 'adddriver=' . $driver ) . '">' .
 			$info['name'] . '</a><br />' . $info['desc'];
 	}
-	return boite_liste(_L('creer_nouveau_compte'), $liste);
+	return boite_liste(_L('creer_un_nouveau_compte'), $liste);
 }
 
 /*

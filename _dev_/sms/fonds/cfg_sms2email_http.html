@@ -4,9 +4,10 @@
 
 ]
 #CACHE{0}
-[(#INCLURE{fond=fonds/config_sms_head}{lang}{base_url}{hash}{arg}{compte=1})]
+[(#INCLURE{fond=fonds/config_sms_head}{lang}{base_url}{hash}{arg}{compte})]
 
 <fieldset><legend><:Identification:> sms2email</legend>
+<input name="driver" type="hidden" value="sms2email_http" />
 <label>*<:SMS:login:></label>
 <input type="text" name="user" value="#ENV{user}" size="10" />
 <label>*<:SMS:mot_de_passe:>
