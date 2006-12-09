@@ -1,6 +1,6 @@
 <?php
 /*
- * Envoi de sms
+ * Config du plugin sms pour Net_SMS de Horde
  *
  * Auteur : bertrand@toggg.com
  * © 2006 - Distribue sous licence LGPL
@@ -9,6 +9,11 @@
 
 function exec_config_sms_dist()
 {
+	$contexte = array('base_url' => generer_url_ecrire('config_sms', ''));
+	if (($addDriver = _request('adddriver'))) {
+		$contexte['driver'] = $addDriver;
+	}
+
 	$champs = array('prestataire', 'user', 'password', 'api_id',
 					'text', 'from', 'to', 'id');
 	foreach ($champs as $champ) {
@@ -25,8 +30,7 @@ function exec_config_sms_dist()
 	$message = print_r(cherche_prestataires(), true);
 */
 	config_sms_debut_page($message);
-// pour developpement, fixe clickatell
-	$contexte['driver'] = 'clickatell_http';
+
 	echo config_sms_fond($contexte);
 	
 	config_sms_fin_page();

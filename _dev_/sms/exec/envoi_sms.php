@@ -9,6 +9,7 @@
 
 function exec_envoi_sms_dist()
 {
+	$contexte = array('base_url' => generer_url_ecrire('envoi_sms'));
 	$champs = array('prestataire', 'user', 'password', 'api_id',
 					'text', 'from', 'to', 'id');
 	foreach ($champs as $champ) {
