@@ -15,58 +15,89 @@ function exec_config_sms_dist()
 	    $contexte[$champ] = _request($champ);
     }
 	$result = $message = null;
-	if (_request('envoi')) {
+/*	if (_request('envoi')) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$securiser_action();
 		$resultat = transmet_prestataire($contexte);
 		$message = $resultat ? _L('erreur') . ':<br />'. $resultat
 							: _L('envoi_correct_pour') . ' ' . $contexte['to'];
 	}
-	include_spip("inc/texte");
+	$message = print_r(cherche_prestataires(), true);
+*/
 	config_sms_debut_page($message);
-
+// pour developpement, fixe clickatell
+	$contexte['driver'] = 'clickatell_http';
 	echo config_sms_fond($contexte);
 	
 	config_sms_fin_page();
 			
 }
 
-/*
- Vérifier les parametre et faire la requete d'envoi du sms
-	$contexte est un tableau (nom=>valeur) qui sera enrichi
-	Retourne '' si tou s'est bien passé , message d'erreur sinon
-*/
-function transmet_prestataire(&$contexte)
+/**
+    * Retourne une liste des prestataires disponibles driver=>(name=>...,desc=>...)
+    *
+    * @return array  An array of available drivers.
+    */
+function cherche_prestataires()
 {
+    static $drivers = array();
+    if (!empty($drivers)) {
+        return $drivers;
+    }
 	include_spip('inc/sms');
-	$contexte['resultat'] = '';
-//	$contexte['resultat'] = print_r($contexte, true);
+    $preg = '#^cfg_(\w+)\.html$#';
 
-    $sender =& Net_SMS::factory($contexte['prestataire'],
-                         array(	'user' => $contexte['user'],
-								'password' => $contexte['password'],
-								'api_id' => $contexte['api_id'] ));
-    if (c_pear::isError($sender))   {
-		$contexte['resultat'] = _L('factory SMS failed') . '<br />' .
-			print_r($sender, true);
-		return $contexte['resultat'];
+    if ($driver_dir = opendir(dirname(__FILE__) . '/../fonds/')) {
+        while (false !== ($file = readdir($driver_dir))) {
+            /* ne garder que les cfg_xxx.html */
+            if (preg_match($preg, $file, $matches)) {
+                $driver = $matches[1];
+                $drivers[$driver] = Net_SMS::getGatewayInfo($driver);
+            }
+        }
+        closedir($driver_dir);
     }
-	//send message and return result
-	$msg = array('to'=>$contexte['to'],
-	             'from'=>$contexte['from'],
-				 'id'=>$contexte['id'],
-				 'text'=>$contexte['text']);
-	$e = $sender->send($msg);
-    if (c_pear::isError($e))   {
-		$contexte['resultat'] = _L('transmission_loupee') .
-		   '<br />' . print_r($msg, true) .
-		   '<br />' . print_r($e, true);
-    }
-	return $contexte['resultat'];
+
+    return $drivers;
+}
+
+function boite_liste($titre = "", $elements = array())
+{
+	if (!$elements) {
+		return '';
+	}
+	$dedans = debut_boite_info(true);
+	if ($titre) {
+		$dedans .= '<h4>' . _L($titre) . '</h4>';
+	}
+	if (is_string($elements)) {
+		return $dedans . $elements;
+	}
+	$dedans .= '<ul>';
+	foreach ($elements as $elt) {
+		$dedans .= '<li>' . $elt . '</li>';
+	}
+	$dedans .= '</ul>' . fin_boite_info(true);
+	return $dedans;
+}
+
+function liste_existants()
+{
+}
+
+function creer_nouveau()
+{
+	$liste = array();
+	foreach (cherche_prestataires() as $driver => $info) {
+		$liste[] = '<a href="' .
+			generer_url_ecrire('config_sms', 'adddriver=' . $driver ) . '">' .
+			$info['name'] . '</a><br />' . $info['desc'];
+	}
+	return boite_liste(_L('creer_nouveau_compte'), $liste);
 }
 
 /*
- Fabriquer les balises des champs d'apres un modele fonds/config_sms.html
+ Fabriquer les balises des champs d'apres un modele fonds/cfg_<driver>.html
 	$contexte est un tableau (nom=>valeur) qui sera enrichi puis passe à recuperer_fond
 */
 function config_sms_fond($contexte = array())
@@ -76,7 +107,7 @@ function config_sms_fond($contexte = array())
     $contexte['hash'] =  calculer_action_auteur('-' . $contexte['arg']);
 
     include_spip('public/assembler');
-    return recuperer_fond('config_clickatell', $contexte);
+    return recuperer_fond('fonds/cfg_' . $contexte['driver'], $contexte);
 }
 
 function config_sms_debut_page($message = '')
@@ -84,12 +115,12 @@ function config_sms_debut_page($message = '')
 	include_spip('inc/presentation');
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_L('Envoi de SMS'), 'sms', 'config_sms');
+	echo $commencer_page(_L('Configuration SMS'), 'sms', 'config_sms');
 	
 	debut_gauche();
 	
 	debut_boite_info();
-	echo propre(_L('Vous pouvez envoyer des SMS depuis cette page'));
+	echo propre(_L('Cette page permet de configurer vos prestataires SMS'));
 	fin_boite_info();
 	
 	if ($message) {
@@ -98,12 +129,14 @@ function config_sms_debut_page($message = '')
 		fin_boite_info();
 	}
 	
+	echo creer_nouveau();
+	
 	debut_droite();
 	
-	gros_titre(_L("Envoi de SMS"));
+	gros_titre(_L("Configuration SMS"));
 	
 	
-	debut_cadre_trait_couleur('','','',_L("Parametres d'envoi"));
+	debut_cadre_trait_couleur('','','',_L("Parametres comptes SMS"));
 
 }
 
