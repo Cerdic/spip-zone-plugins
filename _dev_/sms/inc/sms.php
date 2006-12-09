@@ -51,7 +51,7 @@ class Net_SMS {
 
         $drivers = array();
 
-        if ($driver_dir = opendir(dirname(__FILE__) . '/SMS/')) {
+        if ($driver_dir = opendir(dirname(__FILE__) . '/sms/')) {
             while (false !== ($file = readdir($driver_dir))) {
                 /* Hide dot files and non .php files. */
                 if (substr($file, 0, 1) != '.' && substr($file, -4) == '.php') {
