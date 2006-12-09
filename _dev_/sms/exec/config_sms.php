@@ -65,7 +65,7 @@ function cherche_prestataires()
     return $drivers;
 }
 
-function champs($contexte)
+function champs(&$contexte)
 {
 	if (empty($contexte['driver'])) {
 		return _L('creer_un_compte');
