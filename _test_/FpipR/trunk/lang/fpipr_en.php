@@ -50,7 +50,9 @@ A new window will open, please follow the instructions it will provide.',
 									   'warning_copyright_5' => 'Beware, this photo is protected by a license: <strong><a href="http://creativecommons.org/licenses/by-sa/2.0/">"Attribution -  ShareAlike"</a></strong>. Get more information and ask the author of the photo if needed.',
 									   'warning_copyright_6' => 'Beware, this photo is protected by a license: <strong><a href="http://creativecommons.org/licenses/by-nd/2.0/">"CC Attribution - NoDerivs"</a></strong>. Get more information and ask the author of the photo if needed.',
 									   'mauvaisop' => "You cannot use the operator @op@ on the criterion @critere@",
-									   'mauvaise_imbrication' => "The loop FLICKR_PHOTO_@boucle@ should only be inside a loop FLICKR_PHOTOS_GETINFO"
+									   'mauvaise_imbrication' => "The loop FLICKR_PHOTO_@boucle@ should only be inside a loop FLICKR_PHOTOS_GETINFO",
+									   'revoke' => 'Revoke Rights',
+									   'revoke_info' => 'You can revoke the rights for this site to connect to you Flickr account by clicking this button and going to <a href="http://flickr.com/services/auth/list.gne">Flickr Authentication List</a>'
 );
 
 ?>

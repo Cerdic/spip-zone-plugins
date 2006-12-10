@@ -1,6 +1,6 @@
 <?php
 
-function action_flickr_authenticate_end() {
+function action_flickr_revoke_auth() {
   $redirect = _request('redirect');
   $hash = _request('hash');
   $id_auteur =  intval($GLOBALS['auteur_session']['id_auteur']);
@@ -12,9 +12,9 @@ function action_flickr_authenticate_end() {
 	include_spip('inc/minipres');
 	minipres(_T('info_acces_interdit'));
   } else {
-	include_spip('inc/flickr_api');
-	flickr_authenticate_end($id_auteur,$arg);
-
+	include_spip('base/abstract_sql');
+	global $table_prefix;
+   spip_query("UPDATE ".$table_prefix."_auteurs SET flickr_nsid = '', flickr_token = '' WHERE id_auteur=$id_auteur");
 	redirige_par_entete(urldecode($redirect));
   }
 }

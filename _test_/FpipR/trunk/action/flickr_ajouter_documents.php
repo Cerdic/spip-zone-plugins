@@ -3,7 +3,7 @@
 function action_flickr_ajouter_documents() {
   include_spip('base/abstract_sql'); 
   include_spip('inc/flickr_api'); 
-  include_spip('inc/actions');
+  include_spip('inc/securiser_action');
 
 
   $hash = _request('hash');
