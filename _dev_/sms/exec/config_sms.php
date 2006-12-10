@@ -65,6 +65,30 @@ function cherche_prestataires()
     return $drivers;
 }
 
+function lire_config_sms()
+{
+    global $meta;
+    if (!($meta['config_sms'])) {
+    	return array();
+    }
+    return unserialize($meta['config_sms']);
+}
+
+function ecrire_config_sms($compte = '', $data = array())
+{
+    $cfg = lire_config_sms();
+    if ($data) {
+    	$cfg[$compte] = $data;
+    } else {
+    	unset($cfg[$compte]);
+    }
+    if (count($cfg)) {
+	    ecrire_meta('config_sms', serialize($cfg));
+    } else {
+	    effacer_meta('config_sms');
+    }
+}
+
 function champs(&$contexte)
 {
 	if (empty($contexte['driver'])) {
