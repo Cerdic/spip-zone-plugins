@@ -17,6 +17,9 @@ function multilang_mot_cles_header_prive($flux) {
 		"$(function(){\n".
 		"multilang_init_lang({'page':'exec=mots_edit','root':'.cadre-formulaire','fields':'input[@name=\'titre\'],textarea'});\n".
 		"multilang_init_lang({'page':'exec=mots_type','root':'#page','form_menu':'div.cadre-formulaire:eq(0)','fields':'input[@name=\'change_type\'],textarea'});\n".
+		"multilang_init_lang({'page':'exec=articles_edit','root':'#page','forms':'#liste_images form,#liste_documents form','fields':'input,textarea'});\n".
+		"multilang_init_lang({'page':'exec=articles','root':'#portfolio,#documents','fields':'input,textarea'});\n".
+		"onAjaxLoad(function(){forms_init_multi({'target':this})});\n".
 		"});\n".
 		"</script>\n";
 	}

@@ -9,7 +9,7 @@
  
 var multilang_containers={},forms_fields={},multilang_forms,multilang_menu_lang;
 var match_multi = /(?:\[([a-z_]+)\]|^[\s\n]*)((?:.|\n)*?)(?=\[[a-z_]+\]|$)/ig;
-var multilang_css_link,multilang_css_cur_link={},multilang_root,multilang_fields_selector,multilang_menu_selector;
+var multilang_css_link,multilang_css_cur_link={},multilang_root,multilang_fields_selector,multilang_menu_selector,multilang_forms_selector;
 multilang_css_link = {"cursor":"pointer","margin":"2px 5px","float":"left"};
 $.extend(multilang_css_cur_link,multilang_css_link);
 $.extend(multilang_css_cur_link,{fontWeight:"bold"});
@@ -17,8 +17,8 @@ $.extend(multilang_css_cur_link,{fontWeight:"bold"});
 /* options is a hash having the following values:
  * - page (mandatory): a string to be searched in the current url. if found the plugin is applied. 
  * - fields (mandatory): a jQuery selector to set the fields that have to be internationalized.
- * - root (optional): the root element of all processing. Default value is 'document'.
- * - forms (optional): a jQuery selector to set the forms that have to be  internationalized. Default value is 'form'.
+ * - root (optional): the root element of all processing. Default value is 'document'. To speed up search
+ * - forms (optional): a jQuery selector to set the forms that have to be internationalized. Default value is 'form'.
  * - main_menu (optional): a jQuery selector to set the container for the main menu to control all the selected forms.
  * - form_menu (optional): a jQuery selector to set the container for the form menus.
  */     
@@ -35,15 +35,15 @@ function multilang_init_lang(options) {
 	$.each(multilang_avail_langs,function() {
 		multilang_menu_lang.append($("<a>").html("["+this+"]").css(this==multilang_def_lang?multilang_css_cur_link:multilang_css_link)[0]);
 	});
-	//store all the fields forms
-	var forms = options.forms || "form";
-	multilang_forms = $(forms,multilang_root).submit(forms_multi_submit);
+	//store all the internationalized forms
+	multilang_forms_selector = options.forms || "form";
+	multilang_forms = $(multilang_forms_selector,multilang_root);
 	//create menu lang for the global form
 	if(multilang_containers.size()) forms_make_menu_lang(multilang_containers);
 	//init fields
 	multilang_fields_selector = options.fields;
 	multilang_menu_selector = options.form_menu;
-	forms_init_multi({"forms_selector":forms,"fields_selector":multilang_fields_selector});
+	forms_init_multi();
 }
 
 function forms_make_menu_lang(container,target) {
@@ -74,14 +74,21 @@ function forms_change_lang(el,container,target) {
 }
 
 function forms_init_multi(options) {
-	var target = options.target;
-	var forms = options.forms_selector;
+	var target = options?options.target:null;
+	var init_forms;
 	//Update the list of form if this is an update
-	if(target) multilang_forms.add($(forms,target).get());
+	if(target) {
+		//Verify the target is really a form to be internationalized (in case of an ajax request fired by onAjaxLoad)
+		init_forms = $(target).find('form');
+		if(!init_forms.length || !in_set(init_forms,$(multilang_forms_selector,multilang_root))) return;
+		multilang_forms.add(init_forms.each(forms_attach_submit).get());
+	} else {
+		//attach multi processing to submit event 
+		init_forms = multilang_forms; 
+		multilang_forms.each(forms_attach_submit);
+	}
 	forms_fields = {};
 	forms_fields["undefined"] = $(multilang_fields_selector,multilang_forms);
-	//store the fields of the target if any
-	var init_forms = target?$(forms,target):multilang_forms;
 	//init the value of the field to current lang
 	//add a container for the language menu inside the form
 	init_forms.each(function() { 
@@ -99,6 +106,13 @@ function forms_init_multi(options) {
 		multilang_containers.add(this);
 		forms_make_menu_lang($(this),$(this).parents("form"));
 	});
+}
+
+function forms_attach_submit() {
+	var oldsubmit = this.onsubmit;
+	this.onsubmit = "";
+	if(oldsubmit) $(this).submit(function(){forms_multi_submit.apply(this);return oldsubmit.apply(this);})
+	else $(this).submit(forms_multi_submit);
 }
 
 function forms_init_field(el,lang) {
@@ -177,4 +191,16 @@ function forms_multi_submit(params) {
 	});
 	//save back the params
 	if(params) $.extend(params,$(form).formToArray(false));
+}
+
+function in_set(find,set) {
+	var result = $.grep(set,function(i){
+		var elements = find.get();
+		var found = false;
+		$.each(elements,function(){
+			if(this==i) found=true; 
+		})
+		return found;
+	});
+	return result.length;
 }
