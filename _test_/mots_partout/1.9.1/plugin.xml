@@ -26,6 +26,9 @@
 	<prefix> 
 	  MotsPartout
 	</prefix>
+	<options>
+	  motspartout_options.php
+	</options>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_boutons</nom>

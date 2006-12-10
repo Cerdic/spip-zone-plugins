@@ -24,7 +24,13 @@ function exec_mots_tous()
 //	$choses= array('articles', 'breves', 'rubriques', 'syndic');
 // - ceux du plugin
 //	include(_DIR_PLUGIN_MOTS_PARTOUT."/mots_partout_choses.php");
-	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
+	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));	
+	if (!$tables_installees){
+	  $tables_installees=array("articles"=>true,"rubriques"=>true,"breves"=>true,"forum"=>true,"syndic"=>true);
+	  ecrire_meta('MotsPartout:tables_installees',serialize($tables_installees));
+	  ecrire_metas();
+	}
+	
 	foreach($tables_installees as $chose => $m) { $choses[]= $chose; }
 ///////////////////
 
@@ -272,7 +278,13 @@ function calculer_liens_mots()
 //////////////////////////
 //MODIFICATION
 //////////////////////////
-	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
+	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));	
+	if (!$tables_installees){
+		$tables_installees=array("articles"=>true,"rubriques"=>true,"breves"=>true,"forum"=>true,"syndic"=>true);
+		ecrire_meta('MotsPartout:tables_installees',serialize($tables_installees));
+	  	ecrire_metas();
+	  }
+	
 	foreach($tables_installees as $chose => $m) { $choses[]= $chose; }
 	
 	global $choses_possibles;
@@ -430,7 +442,13 @@ function afficher_groupe_mots_boucle($row, $occurrences)
 	$texte['rubriques']['2'] = _T('info_rubriques_02');
 //TODO : documenter syntaxe : info_1_xxxs et info_xxxs pour xxxs1
 
-	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
+	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));	
+	if (!$tables_installees){
+		$tables_installees=array("articles"=>true,"rubriques"=>true,"breves"=>true,"forum"=>true,"syndic"=>true);
+		ecrire_meta('MotsPartout:tables_installees',serialize($tables_installees));
+	  	ecrire_metas();
+	  }
+	
 	foreach($tables_installees as $chose => $m) { $choses[]= $chose; }
 	$nb_total=0;
 	$param="conf_mot=".$id_mot;

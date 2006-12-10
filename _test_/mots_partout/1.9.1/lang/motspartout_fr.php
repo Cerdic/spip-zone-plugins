@@ -33,6 +33,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									   'item_mots_cles_association_auteurs' => 'aux auteurs',
 									   'item_mots_cles_association_documents' => 'aux documents',
 									   'item_mots_cles_association_messages' => 'aux messages',
+									   'item_mots_cles_association_articles' => 'aux articles',
+									   'item_mots_cles_association_rubriques' => 'aux rubriques',
+									   'item_mots_cles_association_breves' => 'aux breves',
+									   'item_mots_cles_association_syndic' => 'aux sites syndiqu&eacute;s',
 
 									   'info_auteurs_lies_mot' => 'Les auteurs li&eacute;s &agrave; ce mot clef',
 									   );

@@ -353,6 +353,11 @@ global $choses_possibles;
 <tr class=\'tr_liste\'>
 <td colspan=2><select name="nom_chose">';
   $tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
+  if (!$tables_installees){
+	$tables_installees=array("articles"=>true,"rubriques"=>true,"breves"=>true,"forum"=>true,"syndic"=>true);
+	ecrire_meta('MotsPartout:tables_installees',serialize($tables_installees));
+	ecrire_metas();
+  }
   foreach($choses_possibles as $cho => $m) {
 	  if($tables_installees[$cho]) {
 		echo "<option value=\"$cho\"".(($cho == $nom_chose)?'selected':'').'>'._T($m['titre_chose']).'</option>';

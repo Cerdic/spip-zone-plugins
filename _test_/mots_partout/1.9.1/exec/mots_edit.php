@@ -197,7 +197,13 @@ if ($id_mot) {
 //////////////////////////
 //MODIFICATION
 //////////////////////////
-	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));
+	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));	
+	if (!$tables_installees){
+		$tables_installees=array("articles"=>true,"rubriques"=>true,"breves"=>true,"forum"=>true,"syndic"=>true);
+		ecrire_meta('MotsPartout:tables_installees',serialize($tables_installees));
+	  	ecrire_metas();
+	  }
+	
 	foreach($tables_installees as $chose => $m) { $choses[]= $chose; }
 	
 	global $choses_possibles;
