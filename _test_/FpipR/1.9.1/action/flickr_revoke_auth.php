@@ -7,7 +7,7 @@ function action_flickr_revoke_auth() {
   $arg = _request('arg');
   $action = _request('action');
    
-  include_spip('inc/securiser_action');
+  include_spip('inc/actions');
   if (!verifier_action_auteur("$action-$arg", $hash,$id_auteur)) {
 	include_spip('inc/minipres');
 	minipres(_T('info_acces_interdit'));
