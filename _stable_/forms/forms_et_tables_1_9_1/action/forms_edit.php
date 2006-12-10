@@ -220,7 +220,7 @@ function action_forms_edit(){
 		}
 	}
 	if ($redirect)
-		redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));
+		redirige_par_entete(str_replace("&amp;","&",$redirect));
 }
 
 ?>

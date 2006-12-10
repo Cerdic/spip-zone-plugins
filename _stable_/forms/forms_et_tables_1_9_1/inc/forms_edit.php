@@ -242,12 +242,19 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 
 function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $redirect,$ajax=false){
 	global $spip_lang_right,$couleur_claire,$spip_lang_left;
+	$res = spip_query("SELECT type_form FROM spip_forms WHERE id_form="._q($id_form));
+	$row = spip_fetch_array($res);
+	$prefixei18n = 'forms';
+	$is_form = 	in_array($row['type_form'],array('','sondage'));
+	if (!$is_form)
+		$prefixei18n = $row['type_form'];
+	
 	$out = "";
 	if (!$id_form) return $out;
 	$out .= "<p>";
 	$out .= Forms_debut_cadre_formulaire('',true);
 	$out .= "<div class='verdana3'>";
-	$out .= "<strong>"._T("forms:champs_formulaire")."</strong><br />\n";
+	$out .= "<strong>"._T("$prefixei18n:champs_formulaire")."</strong><br />\n";
 	$out .= _T("forms:info_champs_formulaire");
 	$out .= "</div>\n";
 	$out .= "<div id='forms_lang'></div>";
@@ -425,6 +432,11 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 // Edition des donnees du formulaire
 //
 function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
+	$prefixei18n = 'forms';
+	$is_form = 	in_array($row['type_form'],array('','sondage'));
+	if (!$is_form)
+		$prefixei18n = $row['type_form'];
+	
 	$out = "";
 	$out .= "<p>";
 	$out .= Forms_debut_cadre_formulaire('',true);
@@ -444,7 +456,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$texte = entites_html($row['texte']);
 	$email = unserialize($row['email']);
 
-	$out .= "<strong><label for='titre_form'>"._T("forms:titre_formulaire")."</label></strong> "._T('info_obligatoire_02');
+	$out .= "<strong><label for='titre_form'>"._T("$prefixei18n:titre_formulaire")."</label></strong> "._T('info_obligatoire_02');
 	$out .= "<br />";
 	$out .= "<input type='text' name='titre' id='titre_form' class='formo $focus' ".
 		"value=\"".$titre."\" size='40' /><br />\n";

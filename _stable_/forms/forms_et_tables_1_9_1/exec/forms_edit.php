@@ -15,16 +15,16 @@ include_spip('inc/forms');
 include_spip('inc/forms_edit');
 include_spip('inc/forms_type_champs'); // gestion des types de champs
 
-function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour){
+function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour,$prefixei18n='forms'){
 	global $spip_lang_right;
 	$out = "<div class='verdana3'>";
 	if ($nb_reponses){
 			$out .= "<p><strong>"._T("forms:attention")."</strong> ";
-			$out .= _T("forms:info_supprimer_formulaire_reponses")."</p>\n";
+			$out .= _T("$prefixei18n:info_supprimer_formulaire_reponses")."</p>\n";
 	}
 	else{
 		$out .= "<p>";
-		$out .= _T("forms:info_supprimer_formulaire")."</p>\n";
+		$out .= _T("$prefixei18n:info_supprimer_formulaire")."</p>\n";
 	}
 	$link = generer_action_auteur('forms_supprime',"$id_form",_DIR_RESTREINT_ABS.($retour?(str_replace('&amp;','&',$retour)):generer_url_ecrire('forms_tous',"",false,true)));
 	$out .= "<form method='POST' action='$link' style='float:$spip_lang_right'>";
@@ -46,6 +46,11 @@ function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$
 }
 
 function contenu_boite_resume($id_form, $row, &$apercu){
+	$prefixei18n = 'forms';
+	$is_form = 	in_array($row['type_form'],array('','sondage'));
+	if (!$is_form)
+		$prefixei18n = $row['type_form'];
+
 	$out = "";
 
 	// centre resume ---------------------------------------------------------------
@@ -95,7 +100,7 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 	}
 
 	if ($GLOBALS['spip_version_code']<1.92)		ob_start(); // des echo direct en 1.9.1
-	$liste = afficher_articles(_T("forms:articles_utilisant"),
+	$liste = afficher_articles(_T("$prefixei18n:articles_utilisant"),
 		array('FROM' => 'spip_articles AS articles, spip_forms_articles AS lien',
 		'WHERE' => "lien.id_article=articles.id_article AND id_form="._q($id_form)." AND statut!='poubelle'",
 		'ORDER BY' => "titre"));
@@ -187,11 +192,17 @@ function exec_forms_edit(){
 
 	// Recupere les donnees ---------------------------------------------------------------
 	if ($new == 'oui' && !$titre) {
-		$titre = _T("forms:nouveau_formulaire");
+		$row['type_form'] = _request('type_form')?_request('type_form'):""; // possibilite de passer un type par defaut dans l'url de creation
+		$prefixei18n = 'forms';
+		$is_form = 	in_array($row['type_form'],array('','sondage'));
+		if (!$is_form)
+			$prefixei18n = $row['type_form'];
+		
+		$titre = _T("$prefixei18n:nouveau_formulaire");
 		include_spip('inc/charset');
 		$row['titre'] = $titre = unicode2charset(html2unicode($titre));
 		$row['descriptif'] = "";
-		$row['type_form'] = _request('type_form')?_request('type_form'):""; // possibilite de passer un type par defaut dans l'url de creation
+		
 		$row['email'] = array();
 		$row['champconfirm'] = "";
 		$row['texte'] = "";
@@ -201,6 +212,10 @@ function exec_forms_edit(){
 		
 		$action_link = generer_action_auteur("forms_edit","new",urlencode($redirect));
 	}
+	$prefixei18n = 'forms';
+	$is_form = 	in_array($row['type_form'],array('','sondage'));
+	if (!$is_form)
+		$prefixei18n = $row['type_form'];
 
 
 	// gauche raccourcis ---------------------------------------------------------------
@@ -223,7 +238,7 @@ function exec_forms_edit(){
 		}
 
 		if (include_spip('inc/snippets'))
-			echo boite_snippets(_T('forms:formulaire'),_DIR_PLUGIN_FORMS."img_pack/form-24.gif",'forms',$id_form);
+			echo boite_snippets(_T("$prefixei18n:formulaire"),_DIR_PLUGIN_FORMS."img_pack/form-24.gif",'forms',$id_form);
 
 		$link = parametre_url(self(),'new','');
 		$link = parametre_url($link,'supp_form', $id_form);
@@ -231,7 +246,7 @@ function exec_forms_edit(){
 			$link=parametre_url($link,'retour', urlencode(generer_url_ecrire('form_tous')));
 		}
 		echo "<p>";
-		icone_horizontale(_T("forms:supprimer_formulaire"), $link, "../"._DIR_PLUGIN_FORMS."img_pack/supprimer-24.png", "rien.gif");
+		icone_horizontale(_T("$prefixei18n:supprimer_formulaire"), $link, "../"._DIR_PLUGIN_FORMS."img_pack/supprimer-24.png", "rien.gif");
 		echo "</p>";
 	}
 	fin_boite_info();
@@ -253,7 +268,7 @@ function exec_forms_edit(){
 		echo gros_titre($row['titre'],'',false);
 	
 		if ($supp_form && $supp_rejet==NULL)
-			echo Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour);
+			echo Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$retour,$prefixei18n);
 		echo "<div id='barre_onglets'>";
 		echo debut_onglet();
 		echo onglet(_L("Aper&ccedil;u"),ancre_url(self(),"resume"),'','resume');
