@@ -48,7 +48,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'warning_copyright_5' => 'Attention, cette photo est prot&eacute;g&eacute;e par une license: <strong><a href="http://creativecommons.org/licenses/by-sa/2.0/deed.fr">"CC Paternité - Partage des Conditions Initiales à l\'Identique 2.0</a>"</strong>. Avant de poster la photo sur ce site, verifiez de bien respecter cette license et demander l\'autorisation &agrave; l\'auteur si besoin.',
 	'warning_copyright_6' => 'Attention, cette photo est prot&eacute;g&eacute;e par une license: <strong><a href="http://creativecommons.org/licenses/by-nd/2.0/deed.fr">"CC Paternité - Pas de Modification 2.0</a>"</strong>. Avant de poster la photo sur ce site, verifiez de bien respecter cette license et demander l\'autorisation &agrave; l\'auteur si besoin.',
 	'mauvaisop' => "Vous ne pouvez pas utiliser l'operateur @op@ sur le critere @critere@",
-	'mauvaise_imbrication' => "Une boucle FLICKR_PHOTO_@boucle@ ne peut se trouver que dans une boucle FLICKR_PHOTOS_GETINFO"
+	'mauvaise_imbrication' => "Une boucle FLICKR_PHOTO_@boucle@ ne peut se trouver que dans une boucle FLICKR_PHOTOS_GETINFO",
+	'revoke' => 'R&eacute;voquer les droits',
+	'revoke_info' => 'Vous pouvez r&eacute;voquer les droits de ce site &agrave; se connecter &agrave; votre compte Flickr en cliquant ce bouton puis en allant sur <a href="http://flickr.com/services/auth/list.gne">Flickr Authentication List</a>'
 );
 
 ?>
