@@ -37,6 +37,7 @@ define('_JEUX_BLAGUE', 'blague');
 define('_JEUX_AUTEUR', 'auteur');
 define('_JEUX_RECUEIL', 'recueil');
 define('_JEUX_PENDU', 'pendu');
+define('_JEUX_diag_echecs', 'diag_echecs');
 
 // liste des separateurs autorises dans les jeux.
 // tous les jeux doivent etre listes ci-apres.
@@ -50,7 +51,8 @@ $jeux_separateurs = array(
 	'textes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_POESIE, _JEUX_CITATION, _JEUX_BLAGUE, _JEUX_AUTEUR, _JEUX_RECUEIL),
 	'devinettes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_DEVINETTE, _JEUX_CHARADE, _JEUX_REPONSE, _JEUX_CONFIG),
 	'trous' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_TROU, _JEUX_CONFIG),
-//	'pendu' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_PENDU),
+	'pendu' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_PENDU),
+	'diag_echecs' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_diag_echecs, _JEUX_CONFIG),
 );
 
 // liste des signatures caracteristiques d'un jeu.
@@ -69,7 +71,8 @@ $jeux_signatures = array(
 	'textes' => array(_JEUX_POESIE, _JEUX_CITATION, _JEUX_BLAGUE),
 	'devinettes' => array(_JEUX_DEVINETTE, _JEUX_CHARADE),
 	'trous' => array(_JEUX_TROU),
-//	'pendu' => array(_JEUX_PENDU),
+	'pendu' => array(_JEUX_PENDU),
+	'diag_echecs' => array(_JEUX_diag_echecs),
 );
 
 // liste des css a placer dans le header public

@@ -123,7 +123,7 @@ function jeux_trous($texte, $indexJeux) {
   
   if (!isset($_POST["var_correction_".$indexJeux])) { 
 	$tete .= "\n".'<form method="post" action="">';
-	$pied .= '<br><input type="hidden" name="var_correction_'.$indexJeux.'" value="yes">
+	$pied .= '<br /><input type="hidden" name="var_correction_'.$indexJeux.'" value="yes">
 	<div align="center"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton"></div>
 	</form>';
   } else {

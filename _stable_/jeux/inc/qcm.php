@@ -244,7 +244,7 @@ function jeux_qcm($texte, $indexJeux) {
   $tete = '<div class="jeux qcm">'.($titre?'<div class="jeux_titre qcm_titre">'.$titre.'<hr /></div>':'');
   if (!isset($_POST["var_correction_".$indexJeux])) { 
 	$tete .= "\n".'<form method="post" action="">';
-	$pied = '<br>
+	$pied = '<br />
 	<input type="hidden" name="var_correction_'.$indexJeux.'" value="yes">
 	<div align="center"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton"></div>
 	</form>';

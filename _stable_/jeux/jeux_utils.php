@@ -10,16 +10,26 @@
 global $jeux_config;
 function jeux_config($param) {
   global $jeux_config;
-  return in_array($jeux_config[$param], array('oui', 'yes', '1', 'si', 'ja', strtolower(_T('item_oui'))));
+  $p = trim($jeux_config[$param]);
+  if (in_array($p, array('true', 'vrai', 'oui', 'yes', '1', 'si', 'ja', strtolower(_T('item_oui'))))) return true;
+  if (in_array($p, array('false', 'faux', 'non', 'no', '0', 'nein', strtolower(_T('item_non'))))) return false;
+  return $p;
 }
 function jeux_config_set($param, $valeur) {
   global $jeux_config;
   if ($param!='') $jeux_config[$param] = $valeur;
 }
-function jeux_config_init($texte) {
+function jeux_config_init($texte, $ecrase) {
+ global $jeux_config;
  $lignes = preg_split("/\r?\n/", $texte);
- foreach ($lignes as $ligne)
-  if (preg_match('/([^=]+)=(.+)/', $ligne, $regs)) jeux_config_set(trim($regs[1]), trim($regs[2]));
+ foreach ($lignes as $ligne) {
+  $ligne = preg_replace(',\/\*(.*)\*\/,','', $ligne);
+  $ligne = preg_replace(',\/\/(.*)$,','', $ligne);
+  if (preg_match('/([^=]+)=(.+)/', $ligne, $regs)) {
+    list($p, $v) = array(trim($regs[1]), trim($regs[2]));
+	if ($ecrase || ($jeux_config[$p]=='')) $jeux_config[$p] = $v;
+  }
+ }
 }
 function jeux_config_reset() {
   global $jeux_config;
@@ -37,14 +47,14 @@ function jeux_split_texte($jeu, &$texte) {
 //  foreach($tableau as $i => $valeur) $tableau[$i] = preg_replace('/^\[(.*)\]$/', '\\1', trim($valeur));
   foreach($tableau as $i => $valeur) if (($i & 1) && preg_match('/^\[(.*)\]$/', trim($valeur), $reg)) {
    $tableau[$i] = strtolower(trim($reg[1]));
-   if ($reg[1]==_JEUX_CONFIG && $i+1<count($tableau)) jeux_config_init($tableau[$i+1]); 
+   if ($reg[1]==_JEUX_CONFIG && $i+1<count($tableau)) jeux_config_init($tableau[$i+1], true); 
   }
   return $tableau;
 }  
 
 // transforme un texte en listes html 
 function jeux_listes($texte) {
-	$tableau = explode("\r", trim($texte));	
+	$tableau = preg_split("/\r?\n/", trim($texte));	
 	foreach ($tableau as $i=>$valeur) if (($valeur=trim($valeur))!='') $tableau[$i] = "<li>$valeur</li>\n";
 	$texte = implode('', $tableau);
 	return "<ol>$texte</ol>"; 
@@ -60,7 +70,7 @@ function jeux_liste_mots($texte) {
 	$texte = join('', $split);
 	$texte = str_replace(" ","\t", $texte);
 	$texte = str_replace("+"," ", $texte);
-	return (array_unique(split("\t", $texte)));
+	return array_unique(split("\t", trim($texte)));
 }
 function jeux_liste_mots_maj($texte) {
 	return jeux_liste_mots(strtoupper($texte));
