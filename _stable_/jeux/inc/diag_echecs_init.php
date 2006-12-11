@@ -6,7 +6,6 @@
 /* Couleur des cases "blanches" */
 /* Couleurs prédéfinies : */
 /* white,black,grey,green,blue,brown,lightyellow,lightbrown */
-/* Pour définir d'autres couleurs, éditer le fichier includes.inc.php */
 
 /* Code de la police utilisée pour les coordonnées */
 /* Entier compris entre 1 et 5, à modifier éventuellement */
@@ -40,11 +39,11 @@ $diag_echecs_globales = Array(
 	'hjaune' => array(255,255,102), 
 	// diverses initialisations
 	'colonnes' => "abcdefgh",
-	'english' => array("r"=>"k", "d"=>"q", "t"=>"r", "f"=>"b", "c"=>"n", "p"=>"p"),
-	'letter2number' => array("a"=>1, "b"=>2, "c"=>3, "d"=>4, "e"=>5, "f"=>6, "g"=>7, "h"=>8),
-	'number2letter' => array(1=>"a", 2=>"b", 3=>"c", 4=>"d", 5=>"e", 6=>"f", 7=>"g", 8=>"h"),
-	'english2french' => array("K"=>"r", "Q"=>"d", "R"=>"t", "B"=>"f", "N"=>"c", "P"=>"p", 
-  		"k"=>"r", "q"=>"d", "r"=>"t", "b"=>"f", "n"=>"c", "p"=>"p"),
+	'english' => array("r"=>"k", "d"=>"q", "t"=>"r", "f"=>"b", ""=>"n", "p"=>"p"),
+	'letter2number' => array("a"=>1, "b"=>2, ""=>3, "d"=>4, "e"=>5, "f"=>6, "g"=>7, "h"=>8),
+	'number2letter' => array(1=>"a", 2=>"b", 3=>"", 4=>"d", 5=>"e", 6=>"f", 7=>"g", 8=>"h"),
+	'english2french' => array("K"=>"r", "Q"=>"d", "R"=>"t", "B"=>"f", "N"=>"", "P"=>"p", 
+  		"k"=>"r", "q"=>"d", "r"=>"t", "b"=>"f", "n"=>"", "p"=>"p"),
 /*
 	Language     Piece letters (pawn knight bishop rook queen king)
 	----------   --------------------------------------------------
@@ -54,16 +53,16 @@ $diag_echecs_globales = Array(
 	English      P N B R Q K	en
 	Estonian     P R O V L K
 	Finnish      P R L T D K
-	French       P C F T D R	fr
+	French       P  F T D R	fr
 	German       B S L T D K	de
 	Hungarian    G H F B V K
 	Icelandic    P R B H D K
-	Italian      P C A T D R	it
+	Italian      P  A T D R	it
 	Norwegian    B S L T D K
 	Polish       P S G W H K
-	Portuguese   P C B T D R
-	Romanian     P C N T D R
-	Spanish      P C A T D R
+	Portuguese   P  B T D R
+	Romanian     P  N T D R
+	Spanish      P  A T D R
 	Swedish      B S L T D K
 */
 );
@@ -79,7 +78,6 @@ function diag_echecs_config_default() {
 		police=5		// Code de la police utilisée pour les coordonnées (1 à 5)
 		flip=non		// Faut-il retourner l'echiquier ?
 		coords=oui		// Afficher les coordonnées ?
-
 	", false);
 }
 
@@ -99,7 +97,7 @@ function diag_echecs_config_supplementaire() {
 /*
 Format F.E.N.
 
-FEN correspond à "Forsyth-Edwards Notation". C'est un standard de description d'une position aux échecs. Ce standard utilise la norme ASCII (caractère) pour représenter une position.
+FEN correspond à "Forsyth-Edwards Notation". 'est un standard de description d'une position aux échecs. Ce standard utilise la norme ASCII (caractère) pour représenter une position.
 
 Une codification FEN s'identifie par une chaîne de caractères composée de 6 zones séparées par un caractère "espace"
 

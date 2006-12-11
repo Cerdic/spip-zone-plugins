@@ -1,7 +1,10 @@
 <?php
 
 # A lire :  http://www.spip-contrib.net/Afficher-des-diagrammes-d-echecs
+#			http://diagol.ajec-echecs.org/diagol.html
+#			http://www.dmi.usherb.ca/laboratoires/documentations-logiciels/Perl/lib/Games/Chess/PGN.html#16_1_FEN
 #			http://www.iechecs.com/notation.htm
+#			http://www.enpassant.dk/chess/palview/index.htm
 
 #---------------------------------------------------#
 #  Plugin  : jeux , diagrammes d'echecs             #
@@ -10,19 +13,15 @@
 #  Licence : GPL                                    #
 #---------------------------------------------------#
 
-
-/*************************************************/
-/*   Auteur initial : Olivier Bouverot           */
-/*          <webmaster@ajec-echecs.org>          */
-/*                                               */
-/*  Patch (prise en compte de la notation FEN) : */
-/*                Patrice Pillot                 */
-/*              <p.pillot@free.fr>               */
-/*************************************************/
-
 /*
 
 Insere un diagramme de positions d’échecs dans vos articles !
+-------------------------------------------------------------
+ Module base sur les travaux de:
+	 François SCHREUER (plugin)
+	 Olivier BOUVEROT (DIAGOL)
+	 Patrice PILLOT (notation FEN)
+	 Andrew TEMPLETON (figures)
 -------------------------------------------------------------
 
 balises du plugin : <jeux></jeux>
@@ -32,26 +31,51 @@ separateurs optionnels   : [titre], [texte], [config]
 Attention :
 - La librairie GD doit être installée sur le serveur.
 
-Exemple de syntaxe dans l'article :
------------------------------------
+La position doit être décrite sous forme de notation FEN, ou bien en utilisant la forme "classique".
+Exemples :
+	classique : B:Rg1,Dd1,Ta1,e1,Pa2,f6/N:Rb8,Pa6,f5
+	FEN       : r1bqkbnr/pp2pppp/2n5/2p1P3/3p4/2P2N2/PP1P1PPP/RNBQKB1R
 
-<jeux>
-	[diag_echecs]
-	B:Rg1,Dd1,Ta1,e1,Pa2,f6/N:Rb8,Pa6,f5
-</jeux>
-<jeux>
-	[diag_echecs]
-	r1bqkbnr/pp2pppp/2n5/2p1P3/3p4/2P2N2/PP1P1PPP/RNBQKB1R
-	[config]
-	taille=35
-</jeux>
-<jeux>
-	[diag_echecs]
-	B:Rb6,pa3,Fh2/N:Rc8/sr:a8/sb:g3,f4,e5,d6,c7,b8
-	[config]
-	taille=35
-	noirs=bleu
-</jeux>
+Notation "classique" : la description de la position blanche commence par "B:", celle de la position noire par "N:", et les deux sont séparées par un "/".
+Il est possible de n'indiquer qu'une couleur (B ou N) pour la description. L'ordre dans cette dernière est indifférent.
+Les majuscules ne sont pas non plus obligatoires
+
+Cases en surbrillance : on peut utiliser "/sv" pour mettre du vert, "/sb" pour du bleu, "/sj" pour du jaune et "/sr" pour du rouge.
+Attention : pour utiliser cette fonctionnalité, il faut obligatoirement utiliser la notation "classique".
+
+Retournement de l'échiquier : C'est automatique en utilisant la notation FEN (et si bien entendu le trait est aux Noirs), sinon il suffit d'ajouter "/r" à la description "classique".
+
+Exemples de syntaxe dans l'article :
+------------------------------------
+	<jeux>
+		[diag_echecs]
+		B:Rg1,Dd1,Ta1,e1,Pa2,f6/N:Rb8,Pa6,f5
+	</jeux>
+	<jeux>
+		[diag_echecs]
+		r1bqkbnr/pp2pppp/2n5/2p1P3/3p4/2P2N2/PP1P1PPP/RNBQKB1R
+		[config]
+		taille=35
+	</jeux>
+	<jeux>
+		[diag_echecs]
+		B:Rb6,pa3,Fh2/N:Rc8/sr:a8/sb:g3,f4,e5,d6,c7,b8
+		[config]
+		taille=35
+		noirs=bleu
+	</jeux>
+
+Parametres [config] definis par defaut :
+----------------------------------------
+	taille=29		// Taille des images en pixels (29 ou 35)
+	blancs=blanc	// Couleur des cases 'blanches'
+	noirs=brun		// Couleur des cases 'noires'
+	fond=blanc		// Couleur de fond de la page web
+	bordure=2		// Epaisseur de la bordure de l'échiquier, en pixels
+	police=5		// Code de la police utilisée pour les coordonnées (1 à 5)
+	flip=non		// Faut-il retourner l'echiquier ?
+	coords=oui		// Afficher les coordonnées ?
+
 */
 require("diag_echecs_init.php");
 require("diag_echecs_inc.php");
@@ -69,17 +93,10 @@ function calcul_diagramme_echecs($position, $indexJeux) {
 	$img = jeux_config('img_img');
 	
 	// dechiffre le code source du diagramme place dans $position
-	// $position = "B:Rf1/N:Pb2,c3,d4,e5/SV:e4/SR:a2";
-	// $position = "B:Rg1,Dd1,Ta1,e1,Pa2,f6/N:Rb8,Pa6,f5";
-	// $position = "r1bqkbnr/pp2pppp/2n5/2p1P3/3p4/2P2N2/PP1P1PPP/RNBQKB1R";
-	$c = preg_replace("/\s*[\r\n]+\s*/", '/', trim($position));
-	//$tableau = split("/\t/", trim($position));
-	//foreach ($tableau as $i=>$valeur) $tableau[$i] = preg_split('//', trim($valeur), -1, PREG_SPLIT_NO_EMPTY);
+	$position = preg_replace("/\s*[\r\n]+\s*/", '/', trim($position));
+	$position = preg_replace(",\/+,", '/', trim($position));
 
-	//$position = ereg_replace("[\n\r]","",$position);
-	
-	/* l'heuristique est faible mais bon... */
-	//if ( substr_count($position, "/") == 7 ) {
+	// quelle est la notation !?	
 	$masque=',(([a-zA-Z1-8]+)\/([a-zA-Z1-8]+)\/([a-zA-Z1-8]+)\/([a-zA-Z1-8]+)\/([a-zA-Z1-8]+)\/([a-zA-Z1-8]+)\/([a-zA-Z1-8]+)\/([a-zA-Z1-8]+)) *(.*),';
 	if ( preg_match($masque, $position, $table) ) {
 	  $position = FEN2classic($position);			// FEN
@@ -90,15 +107,19 @@ function calcul_diagramme_echecs($position, $indexJeux) {
 	  $table = explode("/",$position);
 	  if (count($table)<2) return "Erreur dans la syntaxe [explode table classic]";
 	}
-//echo '<br>table : '; print_r($table); echo '<br>';
+	
+	// image en cache
 	$fichier_dest = sous_repertoire(_DIR_VAR, "cache-jeux") . 'echiq_'.md5($position) . jeux_config('img_suffix');
 	$image = "<img src=\"$fichier_dest\" alt=\"$position\" border=\"0\"/><br>\n";
-	//if (file_exists($fichier_dest)) return $image;
+	// pas de recalcul de l'image pendant 12 heures si le fichier existe déjà
+	if (file_exists($fichier_dest) AND ($GLOBALS['var_mode'] != 'recalcul') AND (time()-@filemtime($fichier_dest) < 12*3600))
+		 return $image;
 
 	$chessboard = image_echiquier();
 
 // *********************	
-	for ($i=0 ; $i<count($table) ; $i++)  if ( $table[$i] == "r" ) $flip = true;
+	//for ($i=0 ; $i<count($table) ; $i++)  if ( $table[$i] == "r" ) $flip = true;
+	if (in_array('r', $table)) $flip = true;
 	
 	for ($i=0 ; $i<count($table) ; $i++) {
 	  $sub_table = split("[:,]",$table[$i]);
