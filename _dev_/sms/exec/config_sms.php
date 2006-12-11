@@ -39,7 +39,8 @@ function exec_config_sms_dist()
 						($supprimer = _request('delete')))) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$securiser_action();
-		if ($supprimer || $contexte['compte'] != $contexte['was_compte']) {
+		if ($supprimer ||
+		 (!_request('copier') && $contexte['compte'] != $contexte['was_compte'])) {
 			$config = meta_config_sms($contexte['was_compte']);
 		}
 		if ($supprimer) {
