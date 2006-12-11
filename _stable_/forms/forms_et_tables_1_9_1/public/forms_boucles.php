@@ -119,7 +119,7 @@
 			
 			// recoller les conditions du critere id_mot dans la boucle
 			foreach($boucle->modificateur['crit_id_mot']['select'] as $cond)		$boucle->select[]=$cond;
-			foreach($boucle->modificateur['crit_id_mot']['from'] as $cond)			$boucle->from[]=$cond;
+			foreach($boucle->modificateur['crit_id_mot']['from'] as $key=>$cond)			$boucle->from[$key]=$cond;
 			foreach($boucle->modificateur['crit_id_mot']['where'] as $cond)			$boucle->where[]=$cond;
 			foreach($boucle->modificateur['crit_id_mot']['group'] as $cond)			$boucle->group[]=$cond;
 		}
