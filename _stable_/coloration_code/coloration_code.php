@@ -83,7 +83,7 @@ function coloration_code_echappe($texte) {
 		  _T('colorationcode:telecharger').
 	  		"</a></div>";
 	  }
-	  $remp .= "</div>";
+	  $rempl .= "</div>";
 	  $texte = str_replace($regs[0],echappe_html("<html>$rempl</html>"),$texte);
 	}
   return $texte;
