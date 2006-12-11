@@ -292,7 +292,7 @@ class Net_SMS {
         if (class_exists($class)) {
             $sms = &new $class($params);
         } else {
-            $sms = c_PEAR::raiseError(sprintf(_("Class definition of %s not found."), $driver));
+            $sms = c_PEAR::raiseError(sprintf(_L("Class definition of %s not found."), $driver));
         }
 
         return $sms;

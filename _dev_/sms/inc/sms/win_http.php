@@ -78,7 +78,7 @@ class Net_SMS_win_http extends Net_SMS {
                     $to[$key] = $matches[1];
                 } else {
                     /* If a recipient is invalid stop all further sending. */
-                    return array(0, sprintf(_("Invalid recipient: \"%s\""), $val));
+                    return array(0, sprintf(_L("Invalid recipient: \"%s\""), $val));
                 }
             }
 
@@ -87,7 +87,7 @@ class Net_SMS_win_http extends Net_SMS {
             if (preg_match('/^.*?<?(\+?\d{7,})(>|$)/', $to, $matches)) {
                 $to = $matches[1];
             } else {
-                return array(0, sprintf(_("Invalid recipient: \"%s\""), $to));
+                return array(0, sprintf(_L("Invalid recipient: \"%s\""), $to));
             }
         }
         $xml .= '<DESTINATION_ADDR>' . $to . '</DESTINATION_ADDR>';
@@ -141,8 +141,8 @@ class Net_SMS_win_http extends Net_SMS {
     function getInfo()
     {
         return array(
-            'name' => _("WIN via HTTP"),
-            'desc' => _("This driver allows sending of messages through the WIN (http://winplc.com) gateway, using the HTTP API"),
+            'name' => _L("WIN via HTTP"),
+            'desc' => _L("This driver allows sending of messages through the WIN (http://winplc.com) gateway, using the HTTP API"),
         );
     }
 
@@ -157,8 +157,8 @@ class Net_SMS_win_http extends Net_SMS {
     function getParams()
     {
         $params = array();
-        $params['user']     = array('label' => _("Username"), 'type' => 'text');
-        $params['password'] = array('label' => _("Password"), 'type' => 'text');
+        $params['user']     = array('label' => _L("Username"), 'type' => 'text');
+        $params['password'] = array('label' => _L("Password"), 'type' => 'text');
 
         return $params;
     }
@@ -173,11 +173,11 @@ class Net_SMS_win_http extends Net_SMS {
     {
         $params = array();
         $params['from'] = array(
-            'label' => _("Source address"),
+            'label' => _L("Source address"),
             'type' => 'text');
 
         $params['cost_id'] = array(
-            'label' => _("Cost ID"),
+            'label' => _L("Cost ID"),
             'type' => 'int');
 
         return $params;
@@ -196,13 +196,13 @@ class Net_SMS_win_http extends Net_SMS {
     {
         if (empty($params['from'])) {
             $params['from'] = array(
-                'label' => _("Source address"),
+                'label' => _L("Source address"),
                 'type' => 'text');
         }
 
         if (empty($params['cost_id'])) {
             $params['deliv_time'] = array(
-                'label' => _("Cost ID"),
+                'label' => _L("Cost ID"),
                 'type' => 'int');
         }
 
@@ -228,8 +228,8 @@ class Net_SMS_win_http extends Net_SMS {
 
         /* An array of error codes returned by the gateway. */
         $errors = array(
-            'AQSMS-NOAUTHDETAILS'        => _("No username and/or password sent."),
-            'AQSMS-DISTLISTUPDATEERROR'  => _("There was an error updating the distribution list. Please try again later."));
+            'AQSMS-NOAUTHDETAILS'        => _L("No username and/or password sent."),
+            'AQSMS-DISTLISTUPDATEERROR'  => _L("There was an error updating the distribution list. Please try again later."));
 
         if (empty($error_text)) {
             return $errors[$error];
@@ -266,7 +266,7 @@ class Net_SMS_win_http extends Net_SMS {
         $http->addPostData('WIN_XML', $xml);
         @$http->sendRequest();
         if ($http->getResponseCode() != 200) {
-            return c_PEAR::raiseError(sprintf(_("Could not open %s."), $this->_base_url));
+            return c_PEAR::raiseError(sprintf(_L("Could not open %s."), $this->_base_url));
         }
 
         return $http->getResponseBody();

@@ -84,8 +84,8 @@ class Net_SMS_generic_smpp extends Net_SMS {
     function getInfo()
     {
         return array(
-            'name' => _("SMPP Gateway"),
-            'desc' => _("This driver allows sending of messages through an SMPP gateway.")
+            'name' => _L("SMPP Gateway"),
+            'desc' => _L("This driver allows sending of messages through an SMPP gateway.")
         );
     }
 
@@ -98,13 +98,13 @@ class Net_SMS_generic_smpp extends Net_SMS {
     {
         return array(
             'host' => array(
-                'label' => _("Host"), 'type' => 'text'),
+                'label' => _L("Host"), 'type' => 'text'),
             'port' => array(
-                'label' => _("Port"), 'type' => 'int'),
+                'label' => _L("Port"), 'type' => 'int'),
 //             'bindParams' => array(
-//                 'label' => _('bind_transmitter paramaters'), 'type' => 'array'),
+//                 'label' => _L('bind_transmitter paramaters'), 'type' => 'array'),
 //             'submitParams' => array(
-//                 'label' => _('submit_sm parameters'), 'type' => 'array'
+//                 'label' => _L('submit_sm parameters'), 'type' => 'array'
 //             )
         );
     }
@@ -137,15 +137,15 @@ class Net_SMS_generic_smpp extends Net_SMS {
 
         // Error sending?
         if ($res === false) {
-            return array(0, _("Error sending PDU"));
+            return array(0, _L("Error sending PDU"));
         }
 
         $resp =& $this->_client->readPDU();
         if ($resp === false) {
-            return array(0, _("Could not read response PDU"));
+            return array(0, _L("Could not read response PDU"));
         }
         if ($resp->isError()) {
-            return array(0, sprintf(_("Sending failed: %s") . $resp->statusDesc()));
+            return array(0, sprintf(_L("Sending failed: %s") . $resp->statusDesc()));
         }
 
         // Success!

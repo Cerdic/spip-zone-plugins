@@ -74,7 +74,7 @@ class Net_SMS_clickatell_http extends Net_SMS {
         /* Do the HTTP authentication and get the response. */
         $response = Net_SMS_clickatell_http::_callURL($url);
         if (is_a($response, 'c_Error')) {
-            return c_PEAR::raiseError(sprintf(_("Authentication failed. %s"), $response->getMessage()));
+            return c_PEAR::raiseError(sprintf(_L("Authentication failed. %s"), $response->getMessage()));
         }
 
         /* Split up the response. */
@@ -83,7 +83,7 @@ class Net_SMS_clickatell_http extends Net_SMS {
             $this->_session_id = trim($response[1]);
             return true;
         } else {
-            return $this->getError($response[1], _("Authentication failed. %s"));
+            return $this->getError($response[1], _L("Authentication failed. %s"));
         }
     }
 
@@ -180,7 +180,7 @@ class Net_SMS_clickatell_http extends Net_SMS {
         if ($response[0] == 'Credit') {
             return trim($response[1]);
         } else {
-            return $this->getError($response[1], _("Could not check balance. %s"));
+            return $this->getError($response[1], _L("Could not check balance. %s"));
         }
     }
 
@@ -192,8 +192,8 @@ class Net_SMS_clickatell_http extends Net_SMS {
     function getInfo()
     {
         return array(
-            'name' => _("Clickatell via HTTP"),
-            'desc' => _("This driver allows sending of messages through the Clickatell (http://clickatell.com) gateway, using the HTTP API"),
+            'name' => _L("Clickatell via HTTP"),
+            'desc' => _L("This driver allows sending of messages through the Clickatell (http://clickatell.com) gateway, using the HTTP API"),
         );
     }
 
@@ -205,9 +205,9 @@ class Net_SMS_clickatell_http extends Net_SMS {
     function getParams()
     {
         return array(
-            'user' => array('label' => _("Username"), 'type' => 'text'),
-            'password' => array('label' => _("Password"), 'type' => 'text'),
-            'api_id' => array('label' => _("API ID"), 'type' => 'text'),
+            'user' => array('label' => _L("Username"), 'type' => 'text'),
+            'password' => array('label' => _L("Password"), 'type' => 'text'),
+            'api_id' => array('label' => _L("API ID"), 'type' => 'text'),
         );
     }
 
@@ -223,17 +223,17 @@ class Net_SMS_clickatell_http extends Net_SMS {
     {
         $params = array();
         $params['from'] = array(
-            'label' => _("Source address"),
+            'label' => _L("Source address"),
             'type' => 'text');
 
         $params['deliv_time'] = array(
-            'label' => _("Delivery time"),
+            'label' => _L("Delivery time"),
             'type' => 'enum',
-            'params' => array(array('now' => _("immediate"), 'user' => _("user select"))));
+            'params' => array(array('now' => _L("immediate"), 'user' => _L("user select"))));
 
-        $types = array('SMS_TEXT' => _("Standard"), 'SMS_FLASH' => _("Flash"));
+        $types = array('SMS_TEXT' => _L("Standard"), 'SMS_FLASH' => _L("Flash"));
         $params['msg_type'] = array(
-            'label' => _("Message type"),
+            'label' => _L("Message type"),
             'type' => 'keyval_multienum',
             'params' => array($types));
 
@@ -253,20 +253,20 @@ class Net_SMS_clickatell_http extends Net_SMS {
     {
         if (empty($params['from'])) {
             $params['from'] = array(
-                'label' => _("Source address"),
+                'label' => _L("Source address"),
                 'type' => 'text');
         }
 
         if ($params['deliv_time'] == 'user') {
             $params['deliv_time'] = array(
-                'label' => _("Delivery time"),
+                'label' => _L("Delivery time"),
                 'type' => 'int',
-                'desc' => _("Value in minutes from now."));
+                'desc' => _L("Value in minutes from now."));
         }
 
         if (count($params['msg_type']) > 1) {
             $params['msg_type'] = array(
-                'label' => _("Message type"),
+                'label' => _L("Message type"),
                 'type' => 'enum',
                 'params' => array($params['msg_type']));
         } else {
@@ -296,32 +296,32 @@ class Net_SMS_clickatell_http extends Net_SMS {
         $error = trim($error);
 
         /* An array of error codes returned by the gateway. */
-        $errors = array('001' => _("Authentication failed"),
-                        '002' => _("Unknown username or password."),
-                        '003' => _("Session ID expired."),
-                        '004' => _("Account frozen."),
-                        '005' => _("Missing session ID."),
-                        '007' => _("IP lockdown violation."),
-                        '101' => _("Invalid or missing parameters."),
-                        '102' => _("Invalid UDH. (User Data Header)."),
-                        '103' => _("Unknown apimsgid (API Message ID)."),
-                        '104' => _("Unknown climsgid (Client Message ID)."),
-                        '105' => _("Invalid destination address."),
-                        '106' => _("Invalid source address."),
-                        '107' => _("Empty message."),
-                        '108' => _("Invalid or missing api_id."),
-                        '109' => _("Missing message ID."),
-                        '110' => _("Error with email message."),
-                        '111' => _("Invalid protocol."),
-                        '112' => _("Invalid msg_type."),
-                        '113' => _("Max message parts exceeded."),
-                        '114' => _("Cannot route message to specified number."),
-                        '115' => _("Message expired."),
-                        '116' => _("Invalid unicode data."),
-                        '201' => _("Invalid batch ID."),
-                        '202' => _("No batch template."),
-                        '301' => _("No credit left."),
-                        '302' => _("Max allowed credit."));
+        $errors = array('001' => _L("Authentication failed"),
+                        '002' => _L("Unknown username or password."),
+                        '003' => _L("Session ID expired."),
+                        '004' => _L("Account frozen."),
+                        '005' => _L("Missing session ID."),
+                        '007' => _L("IP lockdown violation."),
+                        '101' => _L("Invalid or missing parameters."),
+                        '102' => _L("Invalid UDH. (User Data Header)."),
+                        '103' => _L("Unknown apimsgid (API Message ID)."),
+                        '104' => _L("Unknown climsgid (Client Message ID)."),
+                        '105' => _L("Invalid destination address."),
+                        '106' => _L("Invalid source address."),
+                        '107' => _L("Empty message."),
+                        '108' => _L("Invalid or missing api_id."),
+                        '109' => _L("Missing message ID."),
+                        '110' => _L("Error with email message."),
+                        '111' => _L("Invalid protocol."),
+                        '112' => _L("Invalid msg_type."),
+                        '113' => _L("Max message parts exceeded."),
+                        '114' => _L("Cannot route message to specified number."),
+                        '115' => _L("Message expired."),
+                        '116' => _L("Invalid unicode data."),
+                        '201' => _L("Invalid batch ID."),
+                        '202' => _L("No batch template."),
+                        '301' => _L("No credit left."),
+                        '302' => _L("Max allowed credit."));
 
         if (empty($error_text)) {
             return $errors[$error];
@@ -348,7 +348,7 @@ class Net_SMS_clickatell_http extends Net_SMS {
         $http = new c_HTTP_Request($this->_base_url . $url, $options);
         @$http->sendRequest();
         if ($http->getResponseCode() != 200) {
-            return c_PEAR::raiseError(sprintf(_("Could not open %s."), $url));
+            return c_PEAR::raiseError(sprintf(_L("Could not open %s."), $url));
         }
 
         return $http->getResponseBody();

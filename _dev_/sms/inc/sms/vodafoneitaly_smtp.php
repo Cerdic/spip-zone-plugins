@@ -68,7 +68,7 @@ class Net_SMS_vodafoneitaly_smtp extends Net_SMS {
                 return array(1, null);
             }
         } else {
-            return array(0, _("You need to provide an Italian phone number"));
+            return array(0, _L("You need to provide an Italian phone number"));
         }
     }
 
@@ -80,8 +80,8 @@ class Net_SMS_vodafoneitaly_smtp extends Net_SMS {
     function getInfo()
     {
         return array(
-            'name' => _("Vodafone Italy via SMTP"),
-            'desc' => _("This driver allows sending of messages via SMTP through the Vodafone Italy gateway, only to Vodafone numbers. It requires an email account with Vodafone Italy (http://www.190.it)."),
+            'name' => _L("Vodafone Italy via SMTP"),
+            'desc' => _L("This driver allows sending of messages via SMTP through the Vodafone Italy gateway, only to Vodafone numbers. It requires an email account with Vodafone Italy (http://www.190.it)."),
         );
     }
 
@@ -92,7 +92,7 @@ class Net_SMS_vodafoneitaly_smtp extends Net_SMS {
      */
     function getParams()
     {
-        return array('user' => array('label' => _("Username"),
+        return array('user' => array('label' => _L("Username"),
                                      'type' => 'text'));
     }
 

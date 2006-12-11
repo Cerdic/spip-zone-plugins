@@ -89,8 +89,8 @@ class Net_SMS_generic_smtp extends Net_SMS {
     function getInfo()
     {
         return array(
-            'name' => _("Email-to-SMS Gateway"),
-            'desc' => _("This driver allows sending of messages through an email-to-SMS gateway, for carriers which provide this service.")
+            'name' => _L("Email-to-SMS Gateway"),
+            'desc' => _L("This driver allows sending of messages through an email-to-SMS gateway, for carriers which provide this service.")
         );
     }
 
@@ -102,8 +102,8 @@ class Net_SMS_generic_smtp extends Net_SMS {
     function getParams()
     {
         return array(
-            'carrier'     => array('label' => _("Carrier"), 'type' => 'text'),
-            'mailBackend' => array('label' => _("c_PEAR::Mail backend"), 'type' => 'text')
+            'carrier'     => array('label' => _L("Carrier"), 'type' => 'text'),
+            'mailBackend' => array('label' => _L("c_PEAR::Mail backend"), 'type' => 'text')
         );
     }
 

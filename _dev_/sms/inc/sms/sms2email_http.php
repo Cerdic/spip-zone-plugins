@@ -100,7 +100,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
             if (preg_match('/^.*?<?\+?(\d{7,})(>|$)/', $to, $matches)) {
                 $to = $matches[1];
             } else {
-                return array(0, sprintf(_("Invalid recipient: \"%s\""), $to));
+                return array(0, sprintf(_L("Invalid recipient: \"%s\""), $to));
             }
         }
 
@@ -163,7 +163,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
         if ($lines[0] == 'AQSMS-CREDIT') {
             return $lines[1];
         } else {
-            return $this->getError($lines[0], _("Could not check balance. %s"));
+            return $this->getError($lines[0], _L("Could not check balance. %s"));
         }
     }
 
@@ -191,7 +191,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
 
         /* Check if there was an error response. */
         if (substr($response, 0, 17) != 'AQSMS-CONTACTIDOK') {
-            return $this->getError($response, _("Could not add contact. %s"));
+            return $this->getError($response, _L("Could not add contact. %s"));
         }
 
         /* Split up the response. */
@@ -226,7 +226,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
         if ($response == 'AQSMS-OK') {
             return true;
         } else {
-            return $this->getError($response, _("Could not update contact. %s"));
+            return $this->getError($response, _L("Could not update contact. %s"));
         }
     }
 
@@ -253,7 +253,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
         if ($response == 'AQSMS-OK') {
             return true;
         } else {
-            return $this->getError($response, _("Could not delete contact. %s"));
+            return $this->getError($response, _L("Could not delete contact. %s"));
         }
     }
 
@@ -281,7 +281,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
 
         /* Check if there was an error response. */
         if (substr($response, 0, 19) != 'AQSMS-ADDRESSBOOKOK') {
-            return $this->getError($response, _("Could not retrieve address book. %s"));
+            return $this->getError($response, _L("Could not retrieve address book. %s"));
         }
 
         /* Parse the response and construct the array. */
@@ -290,7 +290,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
         /* Check that the full address book list has been received. */
         $length = substr($response, 19);
         if (strlen($contacts_str) != $length) {
-            return c_PEAR::raiseError(_("Could not fetch complete address book."));
+            return c_PEAR::raiseError(_L("Could not fetch complete address book."));
         }
         $contacts_lines = explode("\n", $contacts_str);
         $contacts = array();
@@ -329,7 +329,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
 
         /* Check if there was an error response. */
         if (substr($response, 0, 16) != 'AQSMS-DISTITEMID') {
-            return $this->getError($response, _("Could not create distribution list. %s"));
+            return $this->getError($response, _L("Could not create distribution list. %s"));
         }
 
         /* Parse the response and get the distribution list ID. */
@@ -363,7 +363,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
         if ($response == 'AQSMS-OK') {
             return true;
         } else {
-            return $this->getError($response, _("Could not delete distribution list. %s"));
+            return $this->getError($response, _L("Could not delete distribution list. %s"));
         }
     }
 
@@ -403,7 +403,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
         if ($response == 'AQSMS-OK') {
             return true;
         } else {
-            return $this->getError($response, _("Could not update distribution list. %s"));
+            return $this->getError($response, _L("Could not update distribution list. %s"));
         }
     }
 
@@ -444,7 +444,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
 
         /* Check if there was an error response. */
         if (substr($response, 0, 22) != 'AQSMS-DISTRIBUTIONLIST') {
-            return $this->getError($response, _("Could not retrieve distribution lists. %s"));
+            return $this->getError($response, _L("Could not retrieve distribution lists. %s"));
         }
 
         /* Parse the response and construct the array. */
@@ -453,7 +453,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
         /* Check that the full list of distribution lists has been received. */
         $length = substr($response, 22);
         if (strlen($lists_str) != $length) {
-            return c_PEAR::raiseError(_("Could not fetch the complete list of distribution lists."));
+            return c_PEAR::raiseError(_L("Could not fetch the complete list of distribution lists."));
         }
         $lists_lines = explode("\n", $lists_str);
         $lists = array();
@@ -491,7 +491,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
 
         /* Check if there was an error response. */
         if (substr($response, 0, 22) != 'AQSMS-DISTRIBUTIONLIST') {
-            return $this->getError($response, _("Could not retrieve distribution list. %s"));
+            return $this->getError($response, _L("Could not retrieve distribution list. %s"));
         }
 
         /* Parse the response and construct the array. */
@@ -500,7 +500,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
         /* Check that the full list of distribution lists has been received. */
         $length = substr($response, 22);
         if (strlen($list_str) != $length) {
-            return c_PEAR::raiseError(_("Could not fetch complete distribution list."));
+            return c_PEAR::raiseError(_L("Could not fetch complete distribution list."));
         }
         $list_str = trim($list_str);
         list($count, $numbers) = explode('","', $list_str);
@@ -522,8 +522,8 @@ class Net_SMS_sms2email_http extends Net_SMS {
     function getInfo()
     {
         return array(
-            'name' => _("sms2email via HTTP"),
-            'desc' => _("This driver allows sending of messages through the sms2email (http://sms2email.com) gateway, using the HTTP API"),
+            'name' => _L("sms2email via HTTP"),
+            'desc' => _L("This driver allows sending of messages through the sms2email (http://sms2email.com) gateway, using the HTTP API"),
         );
     }
 
@@ -543,12 +543,12 @@ class Net_SMS_sms2email_http extends Net_SMS {
     function getParams()
     {
         $params = array();
-        $params['user']     = array('label' => _("Username"), 'type' => 'text');
-        $params['password'] = array('label' => _("Password"), 'type' => 'text');
-        $params['ssl']      = array('label'    => _("Use SSL"),
+        $params['user']     = array('label' => _L("Username"), 'type' => 'text');
+        $params['password'] = array('label' => _L("Password"), 'type' => 'text');
+        $params['ssl']      = array('label'    => _L("Use SSL"),
                                     'type'     => 'boolean',
                                     'required' => false);
-        $params['delivery_report'] = array('label'    => _("URL for your script delivery status report"),
+        $params['delivery_report'] = array('label'    => _L("URL for your script delivery status report"),
                                            'type'     => 'text',
                                            'required' => false);
 
@@ -566,17 +566,17 @@ class Net_SMS_sms2email_http extends Net_SMS {
     {
         $params = array();
         $params['from'] = array(
-            'label' => _("Source address"),
+            'label' => _L("Source address"),
             'type' => 'text');
 
         $params['deliv_time'] = array(
-            'label' => _("Delivery time"),
+            'label' => _L("Delivery time"),
             'type' => 'enum',
-            'params' => array(array('now' => _("immediate"), 'user' => _("user select"))));
+            'params' => array(array('now' => _L("immediate"), 'user' => _L("user select"))));
 
-        $types = array('SMS_TEXT' => _("Standard"), 'SMS_FLASH' => _("Flash"));
+        $types = array('SMS_TEXT' => _L("Standard"), 'SMS_FLASH' => _L("Flash"));
         $params['msg_type'] = array(
-            'label' => _("Message type"),
+            'label' => _L("Message type"),
             'type' => 'keyval_multienum',
             'params' => array($types));
 
@@ -596,20 +596,20 @@ class Net_SMS_sms2email_http extends Net_SMS {
     {
         if (empty($params['from'])) {
             $params['from'] = array(
-                'label' => _("Source address"),
+                'label' => _L("Source address"),
                 'type' => 'text');
         }
 
         if ($params['deliv_time'] == 'user') {
             $params['deliv_time'] = array(
-                'label' => _("Delivery time"),
+                'label' => _L("Delivery time"),
                 'type' => 'int',
-                'desc' => _("Value in minutes from now."));
+                'desc' => _L("Value in minutes from now."));
         }
 
         if (count($params['msg_type']) > 1) {
             $params['msg_type'] = array(
-                'label' => _("Message type"),
+                'label' => _L("Message type"),
                 'type' => 'enum',
                 'params' => array($params['msg_type']));
         } else {
@@ -638,21 +638,21 @@ class Net_SMS_sms2email_http extends Net_SMS {
 
         /* An array of error codes returned by the gateway. */
         $errors = array(
-            'AQSMS-NOAUTHDETAILS'        => _("No username and/or password sent."),
-            'AQSMS-AUTHERROR'            => _("Incorrect username and/or password."),
-            'AQSMS-NOMSG'                => _("No message supplied."),
-            'AQSMS-NODEST'               => _("No destination supplied."),
-            'AQSMS-NOCREDIT'             => _("Insufficient credit."),
-            'AQSMS-NONAMESUPPLIED'       => _("No name specified."),
-            'AQSMS-NONUMBERSUPPLIED'     => _("No number specified."),
-            'AQSMS-ADDRESSBOOKERROR'     => _("There was an error performing the specified address book function. Please try again later."),
-            'AQSMS-CONTACTIDERROR'       => _("The contact ID number was not specified, left blank or was not found in the database."),
-            'AQSMS-CONTACTUPDATEERROR'   => _("There was an error updating the contact details. Please try again later."),
-            'AQSMS-DISTIDERROR'          => _("The distribution list ID was either not specified, left blank or not found in the database."),
-            'AQSMS-NODISTLISTSUPPLIED'   => _("The distribution list was not specified."),
-            'AQSMS-INSUFFICIENTCREDITS'  => _("Insufficient credit to send to the distribution list."),
-            'AQSMS-NONUMBERLISTSUPPLIED' => _("Numbers not specified for updating in distribution list."),
-            'AQSMS-DISTLISTUPDATEERROR'  => _("There was an error updating the distribution list. Please try again later."));
+            'AQSMS-NOAUTHDETAILS'        => _L("No username and/or password sent."),
+            'AQSMS-AUTHERROR'            => _L("Incorrect username and/or password."),
+            'AQSMS-NOMSG'                => _L("No message supplied."),
+            'AQSMS-NODEST'               => _L("No destination supplied."),
+            'AQSMS-NOCREDIT'             => _L("Insufficient credit."),
+            'AQSMS-NONAMESUPPLIED'       => _L("No name specified."),
+            'AQSMS-NONUMBERSUPPLIED'     => _L("No number specified."),
+            'AQSMS-ADDRESSBOOKERROR'     => _L("There was an error performing the specified address book function. Please try again later."),
+            'AQSMS-CONTACTIDERROR'       => _L("The contact ID number was not specified, left blank or was not found in the database."),
+            'AQSMS-CONTACTUPDATEERROR'   => _L("There was an error updating the contact details. Please try again later."),
+            'AQSMS-DISTIDERROR'          => _L("The distribution list ID was either not specified, left blank or not found in the database."),
+            'AQSMS-NODISTLISTSUPPLIED'   => _L("The distribution list was not specified."),
+            'AQSMS-INSUFFICIENTCREDITS'  => _L("Insufficient credit to send to the distribution list."),
+            'AQSMS-NONUMBERLISTSUPPLIED' => _L("Numbers not specified for updating in distribution list."),
+            'AQSMS-DISTLISTUPDATEERROR'  => _L("There was an error updating the distribution list. Please try again later."));
 
         if (empty($error_text)) {
             return $errors[$error];
@@ -681,7 +681,7 @@ class Net_SMS_sms2email_http extends Net_SMS {
         $http = new c_HTTP_Request($url, $options);
         @$http->sendRequest();
         if ($http->getResponseCode() != 200) {
-            return c_PEAR::raiseError(sprintf(_("Could not open %s."), $url));
+            return c_PEAR::raiseError(sprintf(_L("Could not open %s."), $url));
         }
 
         return $http->getResponseBody();
