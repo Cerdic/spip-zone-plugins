@@ -81,8 +81,9 @@ function coloration_code_echappe($texte) {
 	  if ($telecharge) {
 	 	$rempl .= "<div class='".$regs[1]."_download' style='text-align: $spip_lang_right;'><a href='$fichier' style='font-family: verdana, arial, sans; font-weight: bold; font-style: normal;'>".
 		  _T('colorationcode:telecharger').
-	  		"</a></div>"."</div>";
+	  		"</a></div>";
 	  }
+	  $remp .= "</div>";
 	  $texte = str_replace($regs[0],echappe_html("<html>$rempl</html>"),$texte);
 	}
   return $texte;
