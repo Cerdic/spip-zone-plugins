@@ -88,13 +88,13 @@
 			$boucle->where[]= array("'='", "'$id_table.statut'", "'\"publie\"'");
 			
 		if (isset($boucle->modificateur['crit_id_mot'])){
+      $init = ($init = $boucles[$id_boucle]->doublons) ? ("\n\t$init = array();") : '';
+      $boucles[$id_boucle]->doublons = false;
 			// calculer la requete sans prise en compte du critere id_mot
 			// car il n'est pas certain que la table possede un champ mot cle
       $corps = calculer_boucle_nonrec($id_boucle, $boucles);
       // attention, ne calculer la requete que maintenant
       // car la fonction precedente appelle index_pile qui influe dessus
-      $init = ($init = $boucles[$id_boucle]->doublons) ? ("\n\t$init = array();") : '';
-      $boucles[$id_boucle]->doublons = false;
       $req =	calculer_requete_sql($boucles[$id_boucle]);
 			
 			// construire la requete pour rechercher un champ de type mot
@@ -112,10 +112,10 @@
 			$verif->where[] = array("'='","'forms_champs.type'","'\"mot\"'");
 			$reqverif = calculer_requete_sql($verif);
 			$boucle->hash="$reqverif $init
-var_dump(spip_abstract_count(\$result,'".$verif->sql_serveur."'));
-	if (spip_num_rows(\$result)==0)
+
+	if (spip_abstract_count(\$result,'".$verif->sql_serveur."')==0){
 	$req
-	else";
+	} else";
 			
 			// recoller les conditions du critere id_mot dans la boucle
 			foreach($boucle->modificateur['crit_id_mot']['select'] as $cond)		$boucle->select[]=$cond;
