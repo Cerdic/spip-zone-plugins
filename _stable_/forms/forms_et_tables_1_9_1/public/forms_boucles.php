@@ -25,14 +25,15 @@
 					    array('critere' => $col)));
 		else {
 			$id_table = $boucle->id_table;
-			$boucle->select[] =  "donnees_champs.valeur AS id_mot";
-			$boucle->from["donnees_champs"] =  "spip_forms_donnees_champs";
-			$boucle->from["champs"] =  "spip_forms_champs";
-			$boucle->where[]= array("'='", "'$id_table.id_form'", "'champs.id_form'");
-			$boucle->where[]= array("'='", "'champs.type'", "'\"mot\"'");
-			$boucle->where[]= array("'='", "'donnees_champs.champ'", "'champs.champ'");
-			$boucle->where[]= array("'='", "'donnees_champs.id_donnee'", "'$id_table.id_donnee'");
-			$boucle->group[] = $id_table . '.id_donnee'; 
+			$boucle->modificateur['crit_id_mot']=array();
+			$boucle->modificateur['crit_id_mot']['select'][] =  "donnees_champs.valeur AS id_mot";
+			$boucle->modificateur['crit_id_mot']['from']["donnees_champs"] =  "spip_forms_donnees_champs";
+			$boucle->modificateur['crit_id_mot']['from']["champs"] =  "spip_forms_champs";
+			$boucle->modificateur['crit_id_mot']['where'][]= array("'='", "'$id_table.id_form'", "'champs.id_form'");
+			$boucle->modificateur['crit_id_mot']['where'][]= array("'='", "'champs.type'", "'\"mot\"'");
+			$boucle->modificateur['crit_id_mot']['where'][]= array("'='", "'donnees_champs.champ'", "'champs.champ'");
+			$boucle->modificateur['crit_id_mot']['where'][]= array("'='", "'donnees_champs.id_donnee'", "'$id_table.id_donnee'");
+			$boucle->modificateur['crit_id_mot']['group'][] = $id_table . '.id_donnee'; 
 	
 			$t = "donnees_champs";
 			return $t;
@@ -80,26 +81,48 @@
 		$boucle = &$boucles[$id_boucle];
 		$id_table = $boucle->id_table;
 		$boucle->from[$id_table] =  "spip_forms_donnees";
-		
-		/*foreach($boucle->where as $k=>$where){
-			var_dump($where);
-			if ($where[2]=="'id_mot'"){
-				//$boucle->from["mots"] =  "spip_mots";
-				$boucle->from["donnees_champs"] =  "spip_forms_donnees_champs";
-				$boucle->from["champs"] =  "spip_forms_champs";
-				$boucle->where[]= array("'='", "'$id_table.id_form'", "'champs.id_form'");
-				$boucle->where[]= array("'='", "'champs.type'", "'\"mot\"'");
-				$boucle->where[]= array("'='", "'donnees_champs.champ'", "'champs.champ'");
-				$boucle->where[]= array("'='", "'donnees_champs.id_donnee'", "'$id_table.id_donnee'");
-				$boucle->where[$k][2] = "'donnees_champs.valeur'";
-				$boucle->group[] = $boucle->id_table . '.id_donnee'; 
-			}
-		}*/
-	
+
 		if (!isset($boucle->modificateur['tout']) && !$boucle->tout)
 			$boucle->where[]= array("'='", "'$id_table.confirmation'", "'\"valide\"'");
 		if (!$boucle->statut && !isset($boucle->modificateur['tout']) && !$boucle->tout)
 			$boucle->where[]= array("'='", "'$id_table.statut'", "'\"publie\"'");
+			
+		if (isset($boucle->modificateur['crit_id_mot'])){
+			// calculer la requete sans prise en compte du critere id_mot
+			// car il n'est pas certain que la table possede un champ mot cle
+      $corps = calculer_boucle_nonrec($id_boucle, $boucles);
+      // attention, ne calculer la requete que maintenant
+      // car la fonction precedente appelle index_pile qui influe dessus
+      $init = ($init = $boucles[$id_boucle]->doublons) ? ("\n\t$init = array();") : '';
+      $boucles[$id_boucle]->doublons = false;
+      $req =	calculer_requete_sql($boucles[$id_boucle]);
+			
+			// construire la requete pour rechercher un champ de type mot
+			$verif = new Boucle;
+			$verif->id_table = 'forms_champs';
+			$verif->sql_serveur = $boucle->sql_serveur;
+			$verif->from['forms_champs']='spip_forms_champs';
+			$verif->select[]='champ';
+			foreach($boucle->where as $cond){
+				if ($cond[1] == "'$id_table.id_form'"){
+					$cond[1] = "'forms_champs.id_form'";
+					$verif->where[] = $cond;
+				}
+			}
+			$verif->where[] = array("'='","'forms_champs.type'","'\"mot\"'");
+			$reqverif = calculer_requete_sql($verif);
+			$boucle->hash="$reqverif $init
+var_dump(spip_abstract_count(\$result,'".$verif->sql_serveur."'));
+	if (spip_num_rows(\$result)==0)
+	$req
+	else";
+			
+			// recoller les conditions du critere id_mot dans la boucle
+			foreach($boucle->modificateur['crit_id_mot']['select'] as $cond)		$boucle->select[]=$cond;
+			foreach($boucle->modificateur['crit_id_mot']['from'] as $cond)			$boucle->from[]=$cond;
+			foreach($boucle->modificateur['crit_id_mot']['where'] as $cond)			$boucle->where[]=$cond;
+			foreach($boucle->modificateur['crit_id_mot']['group'] as $cond)			$boucle->group[]=$cond;
+		}
 	
 		return calculer_boucle($id_boucle, $boucles); 
 	}
