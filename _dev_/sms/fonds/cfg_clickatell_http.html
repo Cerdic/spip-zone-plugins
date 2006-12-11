@@ -9,11 +9,11 @@
 <fieldset><legend><:Identification:> Clickatell</legend>
 <input name="driver" type="hidden" value="clickatell_http" />
 <label>*<:SMS:login:></label>
-<input type="text" name="user" value="#ENV{user}" size="10" />
+<input type="text" name="user" class="type_id" value="#ENV{user}" size="10" />
 <label>*<:SMS:mot_de_passe:></label>
-<input type="password" name="password" value="#ENV{password}" size="10" />
+<input type="password" name="password" class="type_pwd" value="#ENV{password}" size="10" />
 <label>*<:SMS:api_id:></label>
-<input type="text" name="api_id" value="#ENV{api_id}" size="8" />
+<input type="text" name="api_id" class="type_idnum" value="#ENV{api_id}" size="8" />
 </fieldset>
 
 [(#INCLURE{fond=fonds/config_sms_foot}{lang}{hash}{arg})]
