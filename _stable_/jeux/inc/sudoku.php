@@ -156,20 +156,6 @@ function sudoku_validite($tableau_sudoku, $solution, $indexJeux) {
     return array(sudoku_valide_grille($tableau_sudoku), $vides);
 }
 
-// compare les variables Post avec les valeurs de la solution... (fonction inutilisée...)
-function comparaison_sudoku($tableau_sudoku, $indexJeux) {
-    $erreurs=0; $vides=0;
-    foreach($tableau_sudoku as $ligne => $contenu_ligne) {
-        foreach ($contenu_ligne as $colonne => $cellule) {
-            // compare les valeurs du tableau PHP avec les variables POST
-			$input = trim($GLOBALS['GR'.$indexJeux.'x'.++$colonne.'x'.++$ligne]);
-			if ($input=='') $vides++;
-			 elseif (strtoupper($input)!=strtoupper($cellule)) $erreurs++;
-		}
-	}
-    return array($erreurs, $vides);
-}
-
 // renvoie la validite et le nombre de cases vides
 function calcul_erreurs_sudoku($tableau_sudoku, $solution, $indexJeux) {
 	if ($GLOBALS["bouton_envoi_$indexJeux"] == '') return '';

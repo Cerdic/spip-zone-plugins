@@ -1,7 +1,5 @@
 <?php
 
-# le code de ce fichier php reste encore à ecrire...
-
 #---------------------------------------------------#
 #  Plugin  : jeux                                   #
 #  Auteur  : Patrice Vanneufville, 2006             #
@@ -16,6 +14,8 @@ Insere des devinettes ou charades dans vos articles !
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : [devinette] ou [charade]
 separateurs optionnels   : [reponse], [titre], [texte], [config]
+paramètres de configurations par defaut :
+	reponse=oui	// Afficher de la solution ?
 attention : module GD obligatoire pour obtenir ses reponses
 affichees a l'envers.
 
@@ -31,8 +31,6 @@ Exemple de syntaxe dans l'article :
 	Quel est le point commun entre un contrôleur des impôts et un spermatozoïde ?
 	[reponse]
 	Tous les 2 ont 1 chance sur 3 millions de devenir un jour un être humain.
-	[config]
-	reponse = oui
 </jeux>
 <jeux>
 	[titre]
@@ -43,6 +41,8 @@ Exemple de syntaxe dans l'article :
 	Mon tout vit à la ferme.
 	[reponse]
 	La vache
+	[config]
+	reponse = non
 </jeux>
 
 */
@@ -74,6 +74,9 @@ function jeux_devinettes($texte, $indexJeux) {
   
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('devinettes', $texte);
+  jeux_config_init("
+		reponse=oui	// Afficher de la reponse ?
+  ", false);
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $html .= devinettes_titre($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_DEVINETTE) $html .= devinettes_devinette($tableau[$i+1]);

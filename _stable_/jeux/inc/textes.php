@@ -1,11 +1,9 @@
 <?php
 
-# il s'agit ici d'améliorer la balise <poesie> de spip.
-# à voir : ajouter des lettrines
+#   TODO : ajouter des lettrines
 #          inserer le texte dans un cadre sympa
 #          possibilité d'inérer une image...
 
-# le code de ce fichier php reste encore à ecrire...
 
 #---------------------------------------------------#
 #  Plugin  : jeux                                   #

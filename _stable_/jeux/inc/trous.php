@@ -1,7 +1,6 @@
 <?php
 
-# il s'agit ici simplement de textes à trous.
-# lien à voir : http://ecolestjeanb.free.fr/hot_potatoes/tutor3.htm
+# il s'agit ici de proposer des textes à trous.
 
 # le code de ce fichier php reste encore à ecrire...
 

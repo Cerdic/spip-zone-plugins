@@ -1,12 +1,5 @@
 <?php
 
-# A lire :  http://www.spip-contrib.net/Afficher-des-diagrammes-d-echecs
-#			http://diagol.ajec-echecs.org/diagol.html
-#			http://www.dmi.usherb.ca/laboratoires/documentations-logiciels/Perl/lib/Games/Chess/PGN.html#16_1_FEN
-#			http://www.iechecs.com/notation.htm
-#			http://www.enpassant.dk/chess/palview/index.htm
-#			http://www.nao-cc.com/naocc/vpgn/sanalyse/nataflobach/lautier_abergel.htm
-
 #---------------------------------------------------#
 #  Plugin  : jeux , diagrammes d'echecs             #
 #  Auteur  : Patrice Vanneufville, 2006             #
