@@ -207,12 +207,12 @@
 		$cookie = $_COOKIE[Forms_nom_cookie_form($id_form)];
 		$q="SELECT id_donnee FROM spip_forms_donnees " .
 			"WHERE statut='publie' AND id_form=".intval($id_form)." ";
-		if ($id_auteur)
-			if ($cookie) $q.="AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).")";
-			else $q.="AND id_auteur=".$id_auteur;
+		if ($cookie) $q.="AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).")";
 		else
-			if ($cookie) $q.="AND (cookie="._q($cookie)."' OR id_auteur="._q($id_auteur).")";
-			else return false;
+			if ($id_auteur)
+				$q.="AND id_auteur=".$id_auteur;
+			else 
+				return false;
 		//On retourne les donnees si auteur ou cookie
 		$res = spip_query($q);
 		return (spip_num_rows($res)>0);

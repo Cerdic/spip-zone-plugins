@@ -54,12 +54,13 @@ if (isset($GLOBALS['ajout_reponse']) && $GLOBALS['ajout_reponse'] == 'oui' &&
 foreach($_COOKIE as $cookie=>$value){
 	if (preg_match(",".$GLOBALS['cookie_prefix']."cookie_form_([0-9]+),",$cookie)){
 		$idf = preg_replace(",".$GLOBALS['cookie_prefix']."cookie_form_([0-9]+),","\\1",$cookie);
-		$res = spip_query("SELECT id_article FROM spip_forms_articles WHERE id_form=$idf");
+		$res = spip_query("SELECT id_article FROM spip_forms_articles WHERE id_form="._q($idf));
 		while($row=spip_fetch_array($res)){
 			$ida = $row['id_article'];
 			if (
 						(isset($GLOBALS['article'])&&($GLOBALS['article']==$ida))
 					||(isset($GLOBALS['id_article'])&&($GLOBALS['id_article']==$ida))
+					||(isset($GLOBALS["article$ida"]))
 					||(isset($GLOBALS['contexte_inclus']['id_article'])&&($GLOBALS['contexte_inclus']['id_article']==$ida)) ){
 					// un article qui utilise le form va etre rendu
 					// il faut utiliser le marquer cache pour ne pas polluer la page commune
