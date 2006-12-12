@@ -52,6 +52,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date' => "Date",
 'date_invalide' => "Format de la date invalide",
 'dupliquer' => "Dupliquer",
+'donnees_modifiable'=>"Donn&eacute;es modifiables par l'utilisateur.",
+'donnees_multiple'=>"R&eacute;ponses multiples.",
+'donnees_nonmodifiable'=>"Donn&eacute;es non modifiables par l'utilisateur.",
+'donnees_nonmultiple'=>"R&eacute;ponse unique.",
 'donnees_pub'=>"Donn&eacute;es publiques. Les donn&eacute;es enregitr&eacute;es seront accessibles aux visiteurs du site.",
 'donnees_prot'=>"Donn&eacute;es prot&eacute;g&eacute;es. Les donn&eacute;es enregitr&eacute;es ne seront accessibles que depuis l'interface priv&eacute;e.",
 
@@ -91,6 +95,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_retirer_donnee' =>"Retirer le lien",
 
 'moderation_donnees' => 'Valider les donn&eacute;es avant publication :',
+'modifiable_donnees'=>"R&eacute;ponses Modifiables.",
+'multiple_donnees'=>"Type de formulaire.",
 
 'nombre_reponses'=>"@nombre@ donn&eacute;es",
 'nouveau_champ' => "Nouveau champ",

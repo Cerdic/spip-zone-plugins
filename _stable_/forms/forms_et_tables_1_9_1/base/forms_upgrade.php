@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * ??? 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 	
@@ -175,6 +175,12 @@
 			include_spip('base/abstract_sql');
 			creer_base();
 			ecrire_meta('forms_base_version',$current_version=0.20);
+		}
+		if ($current_version<0.21){
+			spip_query("ALTER TABLE spip_forms ADD forms_obligatoires VARCHAR(255) DEFAULT '' AFTER type_form");
+			spip_query("ALTER TABLE spip_forms ADD modifiable ENUM('non', 'oui') DEFAULT 'non' AFTER type_form");
+			spip_query("ALTER TABLE spip_forms ADD multiple ENUM('non', 'oui') DEFAULT 'non' AFTER type_form");
+			ecrire_meta('forms_base_version',$current_version=0.21);
 		}
 		ecrire_metas();
 	}

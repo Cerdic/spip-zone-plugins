@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -202,22 +202,24 @@
 	}
 
 	function Forms_verif_cookie_sondage_utilise($id_form) {
-		//var_dump($_COOKIE);
-		$cookie_utilise=true;
-		$nom_cookie = Forms_nom_cookie_form($id_form);
-		// Ne generer un nouveau cookie que s'il n'existe pas deja
-		if (!$cookie = addslashes($GLOBALS['cookie_form'])){
-			if (!$cookie = $_COOKIE[$nom_cookie]) {
-		  	$cookie_utilise=false;  // pas de cookie a l'horizon donc pas de reponse presumée
-				//include_spip("inc/session");
-				//$cookie = creer_uniqid();
-			}
-		}
-		$query = "SELECT id_donnee FROM spip_forms_donnees ".
-			"WHERE id_form=$id_form AND cookie='".addslashes($cookie)."'";
-		if (!spip_num_rows(spip_query($query)))
-		  $cookie_utilise=false;  // cet utilisateur n'a pas deja repondu !
-		return $cookie_utilise;
+		/////////////////////
+		//MODIFICATION
+		/////////////////////
+		global $auteur_session;
+		$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
+		$cookie = $_COOKIE[Forms_nom_cookie_form($id_form)];
+		$q="SELECT id_donnee FROM spip_forms_donnees " .
+			"WHERE statut='publie' AND id_form=".intval($id_form)." ";
+		if ($id_auteur)
+			if ($cookie) $q.="AND (cookie='".addslashes($cookie)."' OR id_auteur=".$id_auteur.")";
+			else $q.="AND id_auteur=".$id_auteur;
+		else
+			if ($cookie) $q.="AND (cookie='".addslashes($cookie)."' OR id_auteur=".$id_auteur.")";
+			else return false;
+		//On retourne les donnees si auteur ou cookie
+		$res = spip_query($q);
+		return (spip_num_rows($res)>0);
+		/////////////////////
 	}
 
 	function Forms_extraire_reponse($id_donnee){
@@ -447,8 +449,37 @@
 				$statut = 'propose';
 			// D'abord creer la reponse dans la base de donnees
 			if ($ok) {
-				if (!$id_donnee){
-					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie) ".
+				/////////////////////
+				//MODIFICATION
+				/////////////////////
+				$dejareponse=Forms_verif_cookie_sondage_utilise($id_form);
+				if ($row['modifiable'] == 'oui' && $dejareponse) {
+					$q = "SELECT id_donnee FROM spip_forms_donnees WHERE id_form=".$id_form.
+						" AND (cookie='".addslashes($cookie)."' OR id_auteur=".$id_auteur.")";
+					if ($id_auteur)
+						if ($cookie) $q.="AND (cookie='".addslashes($cookie)."' OR id_auteur=".$id_auteur.")";
+						else $q.="AND id_auteur=".$id_auteur;
+					else
+						if ($cookie) $q.="AND (cookie='".addslashes($cookie)."' OR id_auteur=".$id_auteur.")";
+					//si unique, ignorer id_donnee, si pas id_donnee, ne renverra rien
+					if ($row['multiple']=='oui') $q.=" AND donnees_champs.id_donnee="._q($id_donnee);
+					$r=spip_query($q);
+					if ($r=spip_fetch_array($r)){
+						$id_donnee = $r['id_donnee'];
+						$q2 = "UPDATE spip_forms_donnees SET date=NOW(), ip="._q($GLOBALS['ip']).", url="._q($url).", '$confirmation', statut="._q($statut).", cookie="._q($cookie)." ".
+							"WHERE id_donnee=".$id_donnee;
+						spip_query($q2);
+						$q3 = "DELETE FROM spip_forms_donnees_champs WHERE id_donnee=".$id_donnee;
+						spip_query($q3);
+					} else {
+						$q2="INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie) ".
+							"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","._q($url).", '$confirmation', '$statut',"._q($cookie).")";
+						spip_query($q2);
+						$id_donnee = spip_insert_id();
+					}
+				} elseif (!$id_donnee && !($dejareponse && $row['multiple']=='non')) {
+				/////////////////////
+						spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie) ".
 						"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","._q($url).", '$confirmation', '$statut',"._q($cookie).")");
 					$id_donnee = spip_insert_id();
 				}
@@ -562,5 +593,25 @@
 		 	}
 		}
 	}
-
+function Forms_obligatoire($row,$forms_obligatoires){
+	$returned=$row;
+	global $auteur_session;
+	$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
+	$form_tab=explode(',',$forms_obligatoires);
+	$chercher=true;
+	$i=0;
+	while ($chercher && $i<count($form_tab)){
+		$form_id=$form_tab[$i];
+		$cookie = $_COOKIE[Forms_nom_cookie_form($form_id)];
+		$q="SELECT id_form FROM spip_forms_donnees WHERE statut='publie' AND id_form="._q($form_id)." AND (id_auteur="._q($form_id)." OR cookie="._q($cookie).")";
+		$res=spip_query($q);
+		if (!spip_fetch_array($res)){
+			$res2 = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($form_id));
+			$returned = spip_fetch_array($res2);
+			$chercher=false;
+		}
+		$i++;	
+	}
+	return $returned;	
+}
 ?>

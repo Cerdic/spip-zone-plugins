@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * � 2005,2006 - Distribue sous licence GNU/GPL
+ * 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 // compatibilite trans 1.9.1-1.9.2
@@ -507,6 +507,36 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
  	else 
  		$out .= "<input type='hidden' name='type_form' value='".$row['type_form']."' />";
 
+	///////////////////////
+	//MODIFICATION
+	///////////////////////
+	$out .= debut_cadre_enfonce("",true);
+	$out .= "<strong><label for='modifiable'>"._T('forms:modifiable_donnees')."</label></strong>";
+ 	$out .= "<br />";
+	$out .= bouton_radio("modifiable", "oui", _T('forms:donnees_modifiable'), $row['modifiable'] == "oui", "");
+	$out .= "<br />";
+	$out .= bouton_radio("modifiable", "non", _T('forms:donnees_nonmodifiable'), $row['modifiable'] != "oui", "");
+	$out .= "<br />";
+	$out .= fin_cadre_enfonce(true);
+	
+	$out .= debut_cadre_enfonce("",true);
+	$out .= "<strong><label for='multiple'>"._T('forms:multiple_donnees')."</label></strong>";
+ 	$out .= "<br />";
+	$out .= bouton_radio("multiple", "oui", _T('forms:donnees_multiple'), $row['multiple'] == "oui", "");
+	$out .= "<br />";
+	$out .= bouton_radio("multiple", "non", _T('forms:donnees_nonmultiple'), $row['multiple'] != "oui", "");
+	$out .= "<br />";
+	$out .= fin_cadre_enfonce(true);
+	
+	$out .= debut_cadre_enfonce("",true);
+	$out .= "<strong><label for='forms_obligatoires'>"._T('forms:forms_obligatoires')."</label></strong>";
+ 	$out .= "<br />";
+	$out .= "<input type='text' name='forms_obligatoires' id='forms_obligatoires_form' class='formo $focus' ".
+		"value=\"".$row['forms_obligatoires']."\" size='40' /><br />\n";
+	$out .= "<br />";
+	$out .= fin_cadre_enfonce(true);
+	///////////////////////
+	
 	$out .= debut_cadre_enfonce("",true);
 	$out .= "<strong><label for='moderation'>"._T('forms:publication_donnees')."</label></strong>";
  	$out .= "<br />";
