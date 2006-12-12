@@ -33,21 +33,16 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 
 	$res = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 	if (!$row = spip_fetch_array($res)) return;
-	/////////////////
-	//MODIFICATION
-	/////////////////
 	else {
-		if ($forms_obligatoires!='')
-			if ($row['forms_obligatoires']!='') $forms_obligatoires=$forms_obligatoires.','.$row['forms_obligatoires'];
-			else $forms_obligatoires=$row['forms_obligatoires'];
-		else
-			if ($row['forms_obligatoires']!='') $forms_obligatoires=$row['forms_obligatoires'];
-		if ($forms_obligatoires){
+		if ($forms_obligatoires!='' && $row['forms_obligatoires']!='') $forms_obligatoires .= ",";
+		$forms_obligatoires .= $row['forms_obligatoires'];
+		// substituer le formulaire obligatoire pas rempli si necessaire
+		if (strlen($forms_obligatoires)){
 			$row=Forms_obligatoire($row,$forms_obligatoires);
 			$id_form=$row['id_form'];
 		}
 	}
-	/////////////////	
+
 	$erreur = array();
 	$reponse = '';
 	$formok = '';
@@ -79,9 +74,6 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 			$valeurs[$row2['champ']]= $row2['valeur'];
 		}
 	}
-	///////////////////////////
-	//MODIFICATION
-	///////////////////////////
 	elseif (_DIR_RESTREINT!="" && $row['modifiable']=='oui'){
 		global $auteur_session;
 		$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
@@ -90,14 +82,14 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 		$q = "SELECT donnees_champs.* " .
 			"FROM spip_forms_donnees_champs AS donnees_champs, spip_forms_donnees AS donnees " .
 			"WHERE donnees.id_donnee=donnees_champs.id_donnee " .
-			"AND donnees.id_form=".$id_form." ".
+			"AND donnees.id_form="._q($id_form)." ".
 			"AND donnees.statut='publie' ";
-		if ($id_auteur)
-			if ($cookie) $q.="AND (cookie='".addslashes($cookie)."' OR id_auteur=".$id_auteur.") ";
-			else $q.="AND id_auteur=".$id_auteur." ";
+		if ($cookie) $q.="AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).") ";
 		else
-			if ($cookie) $q.="AND (cookie='".addslashes($cookie)."' OR id_auteur=".$id_auteur.") ";
-			else $q.="AND 0=1 ";
+			if ($id_auteur)
+				$q.="AND id_auteur="._q($id_auteur)." ";
+			else
+				$q.="AND 0=1 ";
 		//si unique, ignorer id_donnee, si pas id_donnee, ne renverra rien
 		if ($row['multiple']=='oui' && $id_donnee) $q.="AND donnees_champs.id_donnee="._q($id_donnee);
 		$res = spip_query($q);
@@ -105,7 +97,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 			$valeurs[$row2['champ']]= $row2['valeur'];
 		}
 	}
-	///////////////////////////
+
 	if ($row['type_form'] == 'sondage' && $row['public']=='oui'){
 		include_spip('inc/forms');
 		if ((Forms_verif_cookie_sondage_utilise($id_form)==true)&&(_DIR_RESTREINT!=""))
@@ -119,11 +111,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 			'reponse'=>filtrer_entites($reponse),
 			'id_article' => $id_article,
 			'id_form' => $id_form,
-			///////////////////////////
-			//MODIFICATION
-			///////////////////////////
-			'id_donnee' => $id_donnee,
-			///////////////////////////
+			'id_donnee' => $id_donnee?$id_donnee:'',
 			'self' => $url,
 			'valeurs' => serialize($valeurs),
 			'url_validation' => str_replace("&amp;","&",$url_validation),

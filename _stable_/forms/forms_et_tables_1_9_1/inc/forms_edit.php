@@ -495,7 +495,7 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out .= "</textarea><br />\n";
 	$out .= "</div>";
 
-	if (in_array($row['type_form'],array('','sondage'))){
+	if ($is_form){
 		$out .= debut_cadre_enfonce("../"._DIR_PLUGIN_FORMS."img_pack/sondage-24.png",true);
 		$out .= "<strong>"._T("forms:type_form")."</strong> : ";
 		$out .= _T("forms:info_sondage");
@@ -507,9 +507,6 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
  	else 
  		$out .= "<input type='hidden' name='type_form' value='".$row['type_form']."' />";
 
-	///////////////////////
-	//MODIFICATION
-	///////////////////////
 	$out .= debut_cadre_enfonce("",true);
 	$out .= "<strong><label for='modifiable'>"._T('forms:modifiable_donnees')."</label></strong>";
  	$out .= "<br />";
@@ -527,15 +524,15 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out .= bouton_radio("multiple", "non", _T('forms:donnees_nonmultiple'), $row['multiple'] != "oui", "");
 	$out .= "<br />";
 	$out .= fin_cadre_enfonce(true);
-	
-	$out .= debut_cadre_enfonce("",true);
-	$out .= "<strong><label for='forms_obligatoires'>"._T('forms:forms_obligatoires')."</label></strong>";
- 	$out .= "<br />";
-	$out .= "<input type='text' name='forms_obligatoires' id='forms_obligatoires_form' class='formo $focus' ".
-		"value=\"".$row['forms_obligatoires']."\" size='40' /><br />\n";
-	$out .= "<br />";
-	$out .= fin_cadre_enfonce(true);
-	///////////////////////
+	if ($is_form){
+		$out .= debut_cadre_enfonce("",true);
+		$out .= "<strong><label for='forms_obligatoires'>"._T('forms:forms_obligatoires')."</label></strong>";
+	 	$out .= "<br />";
+		$out .= "<input type='text' name='forms_obligatoires' id='forms_obligatoires_form' class='formo $focus' ".
+			"value=\"".$row['forms_obligatoires']."\" size='40' /><br />\n";
+		$out .= "<br />";
+		$out .= fin_cadre_enfonce(true);
+	}
 	
 	$out .= debut_cadre_enfonce("",true);
 	$out .= "<strong><label for='moderation'>"._T('forms:publication_donnees')."</label></strong>";

@@ -69,6 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'fichier_trop_gros'=>"Ce fichier est trop gros.",
 'fichier_type_interdit'=>"Ce type de fichier est interdit.",
 'form_erreur' => "Erreur&nbsp;:",
+'forms_obligatoires' => "Formulaires obligatoires pour la saisie de celui-ci&nbsp;:",
 'format_fichier' => "Format du fichier&nbsp;:",
 'formulaire' => "Formulaire",
 'formulaire_aller' => "Aller au formulaire",
@@ -95,8 +96,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_retirer_donnee' =>"Retirer le lien",
 
 'moderation_donnees' => 'Valider les donn&eacute;es avant publication :',
-'modifiable_donnees'=>"R&eacute;ponses Modifiables.",
-'multiple_donnees'=>"Type de formulaire.",
+'modifiable_donnees'=>"Donn&eacute;s modifiables dans l'espace public&nbsp;:",
+'multiple_donnees'=>"Saisie des donn&eacute;es dans l'espace public&nbsp;:",
 
 'nombre_reponses'=>"@nombre@ donn&eacute;es",
 'nouveau_champ' => "Nouveau champ",

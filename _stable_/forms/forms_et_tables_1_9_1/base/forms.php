@@ -21,13 +21,9 @@ $spip_forms = array(
 	"titre" 	=> "varchar(255) NOT NULL",
 	"descriptif" 	=> "text",
 	"type_form" 	=> "varchar(255) NOT NULL",
-	//////////////////////////
-	//MODIFICATION
-	//////////////////////////
 	"modifiable" 	=> "ENUM('non', 'oui') DEFAULT 'non'",
 	"multiple" 	=> "ENUM('non', 'oui') DEFAULT 'non'",
 	"forms_obligatoires" => "varchar(255) NOT NULL DEFAULT ''",
-	//////////////////////////
 	"email" => "text",
 	"champconfirm" => "varchar(255) NOT NULL",
 	"texte" 	=> "text",

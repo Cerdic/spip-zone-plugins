@@ -202,13 +202,9 @@ function exec_forms_edit(){
 		include_spip('inc/charset');
 		$row['titre'] = $titre = unicode2charset(html2unicode($titre));
 		$row['descriptif'] = "";
-		///////////////////////
-		//MODIFICATION
-		///////////////////////
 		$row['modifiable'] = 'non';
 		$row['multiple'] = 'non';
 		$row['forms_obligatoires'] = "";
-		///////////////////////
 		$row['email'] = array();
 		$row['champconfirm'] = "";
 		$row['texte'] = "";

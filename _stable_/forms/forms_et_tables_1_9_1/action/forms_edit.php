@@ -85,13 +85,9 @@ function Forms_update($id_form){
 	$champconfirm = _request('champconfirm');
 	$texte = _request('texte');
 	$type_form = _request('type_form');
-	///////////////////////
-	//MODIFICATION
-	///////////////////////
 	$modifiable = _request('modifiable');
 	$multiple = _request('multiple');
 	$forms_obligatoires = _request('forms_obligatoires');
-	///////////////////////
 	$moderation = _request('moderation');
 	$public = _request('public');
 	$html_wrap = _request('html_wrap');
@@ -124,13 +120,9 @@ function Forms_update($id_form){
 			"titre="._q($titre).", ".
 			"descriptif="._q($descriptif).", ".
 			"type_form="._q($type_form).", ".
-			///////////////////////
-			//MODIFICATION
-			///////////////////////
 			"modifiable="._q($modifiable).", ".
 			"multiple="._q($multiple).", ".
 			"forms_obligatoires="._q($forms_obligatoires).", ".
-	///////////////////////
 			"email="._q(serialize($email)).", ".
 			"champconfirm="._q($champconfirm).", ".
 			"texte="._q($texte).", ".
@@ -147,13 +139,9 @@ function Forms_update($id_form){
 		$titre = $row['titre'];
 		$descriptif = $row['descriptif'];
 		$type_form = $row['type_form'];
-		///////////////////////
-		//MODIFICATION
-		///////////////////////
 		$modifiable = $row['modifiable'];
 		$multiple = $row['multiple'];
 		$forms_obligatoires = $row['forms_obligatoires'];
-		///////////////////////
 		$moderation = $row['moderation'];
 		$public = $row['public'];
 		$email = unserialize($row['email']);

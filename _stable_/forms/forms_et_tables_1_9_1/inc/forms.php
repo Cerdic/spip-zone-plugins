@@ -202,24 +202,20 @@
 	}
 
 	function Forms_verif_cookie_sondage_utilise($id_form) {
-		/////////////////////
-		//MODIFICATION
-		/////////////////////
 		global $auteur_session;
 		$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
 		$cookie = $_COOKIE[Forms_nom_cookie_form($id_form)];
 		$q="SELECT id_donnee FROM spip_forms_donnees " .
 			"WHERE statut='publie' AND id_form=".intval($id_form)." ";
 		if ($id_auteur)
-			if ($cookie) $q.="AND (cookie='".addslashes($cookie)."' OR id_auteur=".$id_auteur.")";
+			if ($cookie) $q.="AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).")";
 			else $q.="AND id_auteur=".$id_auteur;
 		else
-			if ($cookie) $q.="AND (cookie='".addslashes($cookie)."' OR id_auteur=".$id_auteur.")";
+			if ($cookie) $q.="AND (cookie="._q($cookie)."' OR id_auteur="._q($id_auteur).")";
 			else return false;
 		//On retourne les donnees si auteur ou cookie
 		$res = spip_query($q);
 		return (spip_num_rows($res)>0);
-		/////////////////////
 	}
 
 	function Forms_extraire_reponse($id_donnee){
@@ -449,36 +445,29 @@
 				$statut = 'propose';
 			// D'abord creer la reponse dans la base de donnees
 			if ($ok) {
-				/////////////////////
-				//MODIFICATION
-				/////////////////////
 				$dejareponse=Forms_verif_cookie_sondage_utilise($id_form);
-				if ($row['modifiable'] == 'oui' && $dejareponse) {
-					$q = "SELECT id_donnee FROM spip_forms_donnees WHERE id_form=".$id_form.
-						" AND (cookie='".addslashes($cookie)."' OR id_auteur=".$id_auteur.")";
+				if (($row['modifiable'] == 'oui' || !_DIR_RESTREINT) && $dejareponse) {
+					$q = "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form).
+						" AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).")";
 					if ($id_auteur)
-						if ($cookie) $q.="AND (cookie='".addslashes($cookie)."' OR id_auteur=".$id_auteur.")";
-						else $q.="AND id_auteur=".$id_auteur;
+						if ($cookie) $q.="AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).")";
+						else $q.="AND id_auteur="._q($id_auteur);
 					else
-						if ($cookie) $q.="AND (cookie='".addslashes($cookie)."' OR id_auteur=".$id_auteur.")";
+						if ($cookie) $q.="AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).")";
 					//si unique, ignorer id_donnee, si pas id_donnee, ne renverra rien
-					if ($row['multiple']=='oui') $q.=" AND donnees_champs.id_donnee="._q($id_donnee);
+					if ($row['multiple']=='oui' || !_DIR_RESTREINT) $q.=" AND donnees_champs.id_donnee="._q($id_donnee);
 					$r=spip_query($q);
 					if ($r=spip_fetch_array($r)){
 						$id_donnee = $r['id_donnee'];
-						$q2 = "UPDATE spip_forms_donnees SET date=NOW(), ip="._q($GLOBALS['ip']).", url="._q($url).", '$confirmation', statut="._q($statut).", cookie="._q($cookie)." ".
-							"WHERE id_donnee=".$id_donnee;
-						spip_query($q2);
-						$q3 = "DELETE FROM spip_forms_donnees_champs WHERE id_donnee=".$id_donnee;
-						spip_query($q3);
+						spip_query("UPDATE spip_forms_donnees SET date=NOW(), ip="._q($GLOBALS['ip']).", url="._q($url).", '$confirmation', statut="._q($statut).", cookie="._q($cookie)." ".
+							"WHERE id_donnee="._q($id_donnee));
+						spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
 					} else {
-						$q2="INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie) ".
-							"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","._q($url).", '$confirmation', '$statut',"._q($cookie).")";
-						spip_query($q2);
+						spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie) ".
+						"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","._q($url).", '$confirmation', '$statut',"._q($cookie).")");
 						$id_donnee = spip_insert_id();
 					}
-				} elseif (!$id_donnee && !($dejareponse && $row['multiple']=='non')) {
-				/////////////////////
+				} elseif (!$id_donnee && (!_DIR_RESTREINT || !($dejareponse && $row['multiple']=='non'))) {
 						spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie) ".
 						"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","._q($url).", '$confirmation', '$statut',"._q($cookie).")");
 					$id_donnee = spip_insert_id();
