@@ -54,10 +54,13 @@
 				[(#TYPE|=={mot}|?{' ',''}) #SET{afficher,0}
 					<INCLURE{fond=formulaires/forms_select_mot}{id_groupe=#EXTRA_INFO}{champ}{valeur=#ENV**{valeurs}}>
 				]
+				[(#TYPE|=={articles_mot}|?{' ',''}) #SET{afficher,0}
+					<INCLURE{fond=formulaires/forms_select_article_mot}{id_mot=#EXTRA_INFO}{champ}{valeur=#ENV**{valeurs}}>
+				]
 				[(#REM) tous les autres types sont affiches ici]
 				[(#GET{afficher}|?{' ',''})
 					<input type='text' name='#CHAMP' id='#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
-						class='[(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
+						class='[(#TYPE) ][(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
 						size='40' />
 				]
 				[<span class='erreur'>(#ENV**{erreur}|forms_valeur{#CHAMP})</span>]
@@ -84,7 +87,7 @@ $('input.formo').bind('blur',function(){$(this).removeClass('formo-focus').addCl
 $('input.forml').bind('focus',function(){$(this).removeClass('forml').addClass('forml-focus');});
 $('input.forml').bind('blur',function(){$(this).removeClass('forml-focus').addClass('forml');});
 [(#GET{date-picker}|?{' '})
-	$.datePicker.setDateFormat('dd/mm/yyyy');}
+	$.datePicker.setDateFormat('ddmmyyyy','/');
 	[(#INCLURE{fond=formulaires/date_picker_init}|charset2unicode{html}|unicode2charset)]
 	$('input.date-picker').datePicker({startDate:'01/01/1900'});
 ]
