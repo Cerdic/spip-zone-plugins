@@ -93,7 +93,7 @@ jQuery.fn.ajaxAction = function() {
 			}
 		}
 	)
-	//$('#champs .boutons_ordonne').hide();
+	$('#champs .boutons_ordonne').hide();
 	if (id=='champs')
 		$('#champs div#sortableChamps').Sortable(
 			{
