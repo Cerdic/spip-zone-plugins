@@ -65,6 +65,15 @@ Sinon, utiliser le comportemant normal.
 [<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
 </object>
 ]
+
+[(#GET{player}|=={eraplayer}|?{' ',''})
+<object id="audioplayer#ID_DOCUMENT" type="application/x-shockwave-flash" data="#EVAL{_DIR_PLUGIN_PLAYER}eraplayer.swf" width="20" height="20">
+	<param name="wmode" value="transparent" />
+	<param name="movie" value="#EVAL{_DIR_PLUGIN_PLAYER}eraplayer.swf" />
+	<param name="FlashVars" value="mp3=#URL_DOCUMENT" />
+	[<span><a href='(#URL_DOCUMENT)' rel='enclosure'>#URL_DOCUMENT</a></span>]
+</object>
+]
 ,
 ''
 })]
