@@ -492,17 +492,17 @@
 				spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
 				spip_query("INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
 					"VALUES ".join(',', $inserts));
-				if ($row['type_form']=='sondage') {
-					$hash = calculer_action_auteur("forms valide reponse sondage $id_donnee");
-					$url = generer_url_public($script_validation,"verif_cookie=oui&id_donnee=$id_donnee&hash=$hash".($script_args?"&$script_args":""));
-					$r = $url;
-				}
 				if ($champconfirm)
 					if ($row=spip_fetch_array(spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champconfirm))))
 						$mailconfirm = $row['valeur'];
 				if (($email) || ($mailconfirm)) {
 					$hash = calculer_action_auteur("forms confirme reponse $id_donnee");
 					$url = generer_url_public($script_validation,"mel_confirm=oui&id_donnee=$id_donnee&hash=$hash".($script_args?"&$script_args":""));
+					$r = $url;
+				}
+				if ($row['type_form']=='sondage') {
+					$hash = calculer_action_auteur("forms valide reponse sondage $id_donnee");
+					$url = generer_url_public($script_validation,"verif_cookie=oui&id_donnee=$id_donnee&hash=$hash".($script_args?"&$script_args":""));
 					$r = $url;
 				}
 			}

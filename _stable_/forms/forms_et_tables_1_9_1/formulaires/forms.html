@@ -26,8 +26,7 @@
 		[<input type='hidden' name='id_donnee' value='(#ENV{id_donnee})' />]
 		
 		<input type='hidden' name='retour_form' value='#ENV{url_retour}' />
-		
-		[(#TYPE_FORM|=={sondage}|?{'',' '})<input type='hidden' name='ajout_cookie_form' value='oui' />]
+		[(#TYPE_FORM|=={sondage}|?{' '})<input type='hidden' name='ajout_cookie_form' value='oui' />]
 		</div>
 			<INCLURE{fond=#ENV{class}}{id_form}{affiche_sondage}{erreur}{valeurs=#ENV**{valeurs}}>
 	[(#ENV{formactif})

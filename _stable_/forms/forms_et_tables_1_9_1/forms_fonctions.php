@@ -79,20 +79,20 @@
 		$r .= "<div class='spip_sondage'>\n";
 		
 		$res2 = spip_query("SELECT * FROM spip_forms_champs AS champs
-		WHERE id_form="._q($id_form)." AND type IN ('select','multiple','mot') ORDER BY cle");
+		WHERE id_form="._q($id_form)." AND type IN ('select','multiple','mot') ORDER BY champ");
 		while ($row2 = spip_fetch_array($res2)) {
 			// On recompte le nombre total de reponses reelles 
 			// car les champs ne sont pas forcement obligatoires
 			$row3=spip_fetch_array(spip_query("SELECT COUNT(DISTINCT c.id_donnee) AS num ".
 				"FROM spip_forms_donnees AS r LEFT JOIN spip_forms_donnees_champs AS c USING (id_donnee) ".
-				"WHERE r.id_form=$id_form AND r.confirmation='valide' AND r.statut='publie' AND c.champ="._q($row2['champ'])));
+				"WHERE r.id_form="._q($id_form)." AND r.confirmation='valide' AND r.statut='publie' AND c.champ="._q($row2['champ'])));
 			if (!$row3 OR !($total_reponses=$row3['num']))
 				continue;
 	
 			// Construire la liste des valeurs autorisees pour le champ
 			$liste = array();
 			if ($row2['type'] != 'mot'){
-				$res3 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE champ="._q($row2['champ']));
+				$res3 = spip_query("SELECT * FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($row2['champ']));
 				while ($row3=spip_fetch_array($res3))
 					$liste[$row3['choix']] = $row3['titre'];
 			}
@@ -106,7 +106,7 @@
 			// Nombre de reponses pour chaque valeur autorisee
 			$query = "SELECT c.valeur, COUNT(*) AS num ".
 				"FROM spip_forms_donnees AS r LEFT JOIN spip_forms_donnees_champs AS c USING (id_donnee) ".
-				"WHERE r.id_form=$id_form AND r.confirmation='valide' AND r.statut='publie' ".
+				"WHERE r.id_form="._q($id_form)." AND r.confirmation='valide' AND r.statut='publie' ".
 				"AND c.champ="._q($row2['champ'])." GROUP BY c.valeur";
 			$result = spip_query($query);
 			$chiffres = array();
@@ -116,7 +116,8 @@
 			}
 			
 			// Afficher les resultats
-			$r .= "<strong>".propre($row2['nom'])." :</strong><br />\n";
+			$r .= ($t=typo($row2['nom']))?"<strong>$t :</strong>":"";
+			$r .= "<br />\n";
 			$r .= "<div class='sondage_table'>";
 			foreach ($liste as $valeur => $nom) {
 				$r .= "<div class='sondage_ligne'>";
@@ -132,7 +133,7 @@
 		}
 	
 		$query = "SELECT COUNT(*) AS num FROM spip_forms_donnees ".
-			"WHERE id_form=$id_form AND confirmation='valide' AND r.statut='publie'";
+			"WHERE id_form="._q($id_form)." AND confirmation='valide' AND statut='publie'";
 		$result = spip_query($query);
 		list($num) = spip_fetch_array($result,SPIP_NUM);
 		$r .= "<strong>"._T("forms:total_votes")." : $num</strong>";
