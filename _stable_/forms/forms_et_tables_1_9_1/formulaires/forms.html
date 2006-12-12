@@ -12,7 +12,7 @@
 	[(#TYPE_FORM|=={sondage}|?{' ',''})	<a href='#ENV{self}#form#ID_FORM'><:forms:valider:></a>]
 	[<span class='spip_form_ok_confirmation'>(#ENV{reponse})</span>]
 </p>]
-[<p class='spip_form_erreur'>(#ENV{erreur_message})</p>]
+[<p class='spip_form_erreur'>(#ENV*{erreur_message})</p>]
 [<img src='(#ENV{url_validation})' width='1' height='1' alt='validation de la saisie' />]
 [(#ENV{formvisible}|?{' '})
 	[(#ENV{formactif})
