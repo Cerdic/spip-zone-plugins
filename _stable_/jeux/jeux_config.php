@@ -44,9 +44,9 @@ define('_JEUX_diag_echecs', 'diag_echecs');
 // monjeu est le jeu traite dans le fichier inc/monjeu.php
 global $jeux_separateurs;
 $jeux_separateurs = array(
-	'sudoku' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_SUDOKU, _JEUX_SOLUTION),
-	'kakuro' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_KAKURO, _JEUX_SOLUTION),
-	'mots_croises' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_HORIZONTAL, _JEUX_VERTICAL, _JEUX_SOLUTION),
+	'sudoku' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_SUDOKU, _JEUX_SOLUTION, _JEUX_CONFIG),
+	'kakuro' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_KAKURO, _JEUX_SOLUTION, _JEUX_CONFIG),
+	'mots_croises' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_HORIZONTAL, _JEUX_VERTICAL, _JEUX_SOLUTION, _JEUX_CONFIG),
 	'qcm' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_QCM, _JEUX_QUIZ),
 	'textes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_POESIE, _JEUX_CITATION, _JEUX_BLAGUE, _JEUX_AUTEUR, _JEUX_RECUEIL),
 	'devinettes' => array(_JEUX_TITRE, _JEUX_TEXTE, _JEUX_DEVINETTE, _JEUX_CHARADE, _JEUX_REPONSE, _JEUX_CONFIG),
@@ -78,12 +78,13 @@ $jeux_signatures = array(
 // liste des css a placer dans le header public
 // dossier jeux/style/
 global $jeux_header_public;
-$jeux_header_public = array('jeux','qcm', 'mots_croises');
+$jeux_header_public = array('jeux', 'qcm', 'mots_croises', 'sudoku');
+
 
 // liste des css a placer dans le header prive
 // dossier jeux/style/
 global $jeux_header_prive;
-$jeux_header_prive = array('jeux','qcm', 'mots_croises-prive');
+$jeux_header_prive = array('jeux','qcm', 'mots_croises', 'sudoku');		//, 'mots_croises-prive');
 
 // liste des js a placer dans le header prive
 // dossier jeux/javascript/

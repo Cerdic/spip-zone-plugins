@@ -1,19 +1,19 @@
 /*
-.grille td.noir {
+.jeux_grille td.noir {
 	background-color:#000000;
 	color:#000000;
 }
 
-table.grille input, table.grille th{min-width:1.5em;
+table.jeux_grille input, table.jeux_grille th{min-width:1.5em;
 width:1.5em;
 text-align:center;
 vertical-align:middle;
 height:1.5em;}
-table.grille td{border:1px solid black;text-align:center}
-.grille td.coin,table.grille input,.grille th{border:0px solid black}
+table.jeux_grille td{border:1px solid black;text-align:center}
+.jeux_grille td.coin,table.jeux_grille input,.jeux_grille th{border:0px solid black}
 .erreur{float:left;}
 
-table.grille label{display:none}
+table.jeux_grille label{display:none}
 
 
 
@@ -27,7 +27,7 @@ margin-right:5%;
 margin-left:5%}
 //.horizontal .vertical {float:left}
 
-form.grille{float:left;
+form.jeux_grille{float:left;
 clear:both;
 
 padding:0;
@@ -39,7 +39,7 @@ width:auto;
 
 p.spip {clear:both}
 
-h4.grille{
+h4.jeux_grille{
 	margin:0;
 	padding:0;
 	font-weight:bold;
@@ -51,15 +51,11 @@ list-style-position:inside;
 .horizontal >ol, .vertical > ol{list-style-position:outside;}
 
 
-.grille{margin:0;padding:0}
+.jeux_grille{margin:0;padding:0}
 
 .solution{clear:both}
 
 */
-td.noir {
-	background-color:#000000; 
-	color:#000000;
-}
 
 table.motscroises0 {
 	border:0; 
@@ -68,36 +64,13 @@ table.motscroises0 {
 	text-align:left;
 }	
 
-table.grille {
-	border:0; 
-	padding:0;
-	margin:0pt;
-}	
-
-table.grille input, table.grille th{
-	min-width:1.5em;
-	width:1.5em;
-	text-align:center;
-	vertical-align:middle;
-	height:1.5em;
-	border:0;
-	margin:0;
-	padding:0;
+.jeux_grille td.noir {
+	background-color:#000000; 
+	color:#000000;
 }
 
-table.grille td{
-	border:1px solid black;
-	text-align:center;
-	margin:0;
-	padding:0;
-}
-
-.grille td.coin{
+.jeux_grille td.coin{
 	border:0px;
-}
-
-table.grille label{
-	display:none 
 }
 
 .vertical, .horizontal{
@@ -127,21 +100,14 @@ table.grille label{
 
 /*.horizontal .vertical {float:left}*/
 
-form.grille{
-	float:left;
-	clear:both;
-	padding:0;
-	padding-right:2%;
-	margin:0;
-	width:auto;
-}
+
 /*
 p.spip {
 	clear:both
 }
 */
 
-h4.grille{
+h4.jeux_grille{
 	margin:0.8em;
 	padding:0;
 	font-weight:bold
@@ -157,18 +123,3 @@ h4.grille{
 	list-style-position:outside;
 }
 
-.grille{
-	margin:0;
-	padding:0;
-}
-
-.solution{
-	clear:both;
-}
-
-
-.erreur{
-/*	float:left;*/
-	clear:both;
-	text-align:left;
-}

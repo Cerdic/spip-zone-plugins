@@ -4,8 +4,8 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'titre'		=>'Grille de sudoku',
-'table_summary'		=>'Grille de sudoku de @largeur@ colonnes sur @hauteur@ lignes',
+'titre'		=>'Sudoku puzzle',
+'table_summary'		=>'Sudoku puzzle with @largeur@ columns and @hauteur@ rows',
 
 );
 

@@ -5,10 +5,12 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'votre_choix'	=> "Your answer: ",
-'bravo'			=> "Congratulation !",
 
 'corriger'		=> "Check",
-'verifier' 		=> 'V&eacute;rifier',
+'verifier' 		=> 'Check',
+'verifier_validite' 	=> 'Check the validity ',
+
+'afficher_solution' 	=>'Show the solution',
 'solution'		=>'Solution',
 'reponse'		=>'Answer',
 'indices'		=> 'Clues',
@@ -17,13 +19,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'point' => "&nbsp;pt",
 'points' => "&nbsp;pts",
 
+'ligne_n'		=>'row @n@',
+'colonne_n'		=>'column @n@',
+
 'reinitialiser'		=> 'Reset',
 'recommencer'		=> 'Restart',
 
+'grille_valide'		=>'The grid is valid',
+'grille_invalide'	=>'The grid is invalid',
 'aucune_erreur'		=>'No error',
 'une_erreur'		=> 'An error',
-'nombre_erreurs'	=> '@err@ errors',
+'n_erreurs'	=> '@n@ errors',
+'n_vides'		=> '@n@ empty cells',
+'une_vide'			=> 'One empty cell',
+'bravo'			=> "Congratulation !",
 
+'erreur_taille_grille'	=> "Error: invalid size",
 );
 
 

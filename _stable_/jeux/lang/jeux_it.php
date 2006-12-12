@@ -4,11 +4,13 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'votre_choix'		=> "La tua risposta: ",
-'bravo'				=> "Complimenti!",
+'votre_choix' => "La tua risposta: ",
 
 'corriger'		=> 'Controlla',	
 'verifier' 		=> 'Controlla',
+'verifier_validite' 	=> 'Controlla la validità', 
+
+'afficher_solution' 	=>'Visualizza la soluzione',
 'solution'		=>'Soluzione',
 'reponse'		=>'Risposta',
 'indices'		=> 'Indizii',
@@ -17,14 +19,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'point'		=> "punto",
 'points'	=> "punti",
 
-'reinitialiser'		=> 'Ricarica',
+'ligne_n'		=>'riga @n@',
+'colonne_n'		=>'colonna @n@',
+
+'reinitialiser'		=> 'Ricarica', // 'qcm_reinitialiser' => "Ricarica il questionario",
 'recommencer'		=> 'Ricomincia',
 
-// 'qcm_reinitialiser' => "Ricarica il questionario",
-
+'grille_valide'		=>'Lo schema è valido',
+'grille_invalide'		=>'Lo schema è invalido',
 'aucune_erreur'		=> 'Nessun errore',
 'une_erreur'		=> 'Un errore',
-'nombre_erreurs'	=> '@err@ errori',
+'n_erreurs'	=> '@n@ errori',
+'n_vides'		=> '@n@ caselle bianche',
+'une_vide'			=> 'Una casella bianca',
+'bravo'				=> "Complimenti!",
+
+'erreur_taille_grille'	=> "Errore: invalid size",
 
 );
 

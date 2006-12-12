@@ -18,14 +18,14 @@
 
 .jeux_titre{ 
 /* text-align: center;*/
- font-size: 14;
+ font-size:120%;
  font-weight: bold;
 /* color: #3F5264; */
 }
 
-.qcm_question{ 
+.jeux_question{ 
  font-size: 80%;
- font-size: 12;
+/* font-size: 12;*/
  font-weight: bold;
 /* color: #3F5264;*/
  }
@@ -53,7 +53,7 @@
  width:20%;
  font-family: arial, helvetica, sans-serif;
  color: red;
- font-size: 12;
+ /*font-size: 12;*/
  font-weight: bold;
  border: 2px solid green;
  padding: 3px; 
@@ -68,5 +68,70 @@
 .jeux_erreur{ 
  font-family: arial, helvetica, sans-serif;
  color: red;
- font-size: 14;
+ font-size: 90%;
+ font-weight:bold;
+ font-style:italic;
+/*	float:left;*/
+	clear:both;
+	text-align:left;
+ 
+}
+
+.jeux_cocher  {
+	margin-right:2pt;
+}
+
+.jeux_solution  {
+/* font-size: 14;*/
+ font-weight: bold;
+ padding: 4pt 0 0 0;
+ clear:both;
+}
+
+.jeux_grille{
+	margin:0;
+	padding:0;
+}
+
+form.jeux_grille{
+	float:left;
+	clear:both;
+	padding:0 4pt 0 0;
+	margin:0;
+	width:auto;
+}
+
+table.jeux_grille label{
+	display:none 
+}
+
+table.jeux_grille {
+	border:0; 
+	padding:0;
+	margin:4pt;
+}	
+
+table.jeux_grille input, table.jeux_grille th, table.jeux_grille td{
+	min-width:1.5em;
+	width:1.5em;
+	height:1.5em;
+	min-height:1.5em;
+	text-align:center;
+	vertical-align:middle;
+	border:0;
+	margin:0;
+	padding:0;
+}
+
+table.jeux_grille td{
+	border-top:1px solid black;
+	border-left:1px solid black;
+}
+
+.jeux_grille td.droite{
+	border-right:1px solid black;
+}
+
+.jeux_grille td.bas{
+	border-bottom:1px solid black;
 }

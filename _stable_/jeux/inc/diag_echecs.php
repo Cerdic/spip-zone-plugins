@@ -5,6 +5,7 @@
 #			http://www.dmi.usherb.ca/laboratoires/documentations-logiciels/Perl/lib/Games/Chess/PGN.html#16_1_FEN
 #			http://www.iechecs.com/notation.htm
 #			http://www.enpassant.dk/chess/palview/index.htm
+#			http://www.nao-cc.com/naocc/vpgn/sanalyse/nataflobach/lautier_abergel.htm
 
 #---------------------------------------------------#
 #  Plugin  : jeux , diagrammes d'echecs             #
@@ -50,8 +51,6 @@ Exemples de syntaxe dans l'article :
 	<jeux>
 		[diag_echecs]
 		B:Rg1,Dd1,Ta1,e1,Pa2,f6/N:Rb8,Pa6,f5
-	</jeux>
-	<jeux>
 		[diag_echecs]
 		r1bqkbnr/pp2pppp/2n5/2p1P3/3p4/2P2N2/PP1P1PPP/RNBQKB1R
 		[config]
