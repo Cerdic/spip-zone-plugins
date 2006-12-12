@@ -5,22 +5,21 @@ var sens_curseur = ($('html').attr('dir') == 'rtl')?'w-resize':'e-resize';
 
 // dès que le DOM est prêt...
 $(document).ready(function(){
- // vérification de la présence d'une grille						    
- if ($('table.grille').length) {
+ // vérification de la présence d'une grille	
+ if ($('table.jeux_grille').length) {
 	// sens d'écriture basculé à 'h' (horizontal)
 	changeDeDirection();
 	// gestion du clavier par function clavierPourJeux()
-	$('table.grille tr td input').bind('keypress', clavierPourJeux);
+	$('table.jeux_grille tr td input').bind('keypress', clavierPourJeux);
 	// définition du bouton droit de la souris pour changer le sens de déplacement dans la grille
 	if ((jQuery.browser.safari) | (jQuery.browser.Konqueror))
-		$('form.grille').bind('contextmenu', changeDeDirection);
+		$('form.jeux_grille').bind('contextmenu', changeDeDirection);
 	else
-		$('table.grille tr td input').bind('contextmenu', changeDeDirection);	
+		$('table.jeux_grille tr td input').bind('contextmenu', changeDeDirection);	
  }
 });
 
 function changeDeDirection(e) {
-	
 	if(sens_grille=='h') {
 		sens_grille='v';
 		style='s-resize';
@@ -28,7 +27,7 @@ function changeDeDirection(e) {
 		sens_grille='h';
 		style=sens_curseur;
 	}
-	$('table.grille tr td input').css('cursor', style);
+	$('table.jeux_grille tr td input').css('cursor', style);
 	return false;
 }
 
@@ -38,7 +37,7 @@ function clavierPourJeux(e) {
 	var x=m[2];
 	var y=m[3];
 	var retour = true;
-	
+
 	switch(e.keyCode) {
 		case 40: y++; break; 
 		case 38: y--; break;
