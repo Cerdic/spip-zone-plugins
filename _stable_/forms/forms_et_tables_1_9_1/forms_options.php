@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * ï¿½ 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 if (!defined('_DIR_PLUGIN_FORMS')){
@@ -54,7 +54,7 @@ if (isset($GLOBALS['ajout_reponse']) && $GLOBALS['ajout_reponse'] == 'oui' &&
 foreach($_COOKIE as $cookie=>$value){
 	if (preg_match(",".$GLOBALS['cookie_prefix']."cookie_form_([0-9]+),",$cookie)){
 		$idf = preg_replace(",".$GLOBALS['cookie_prefix']."cookie_form_([0-9]+),","\\1",$cookie);
-		$res = spip_query("SELECT id_article FROM spip_forms_articles WHERE id_form="._q($idf));
+		$res = spip_query("SELECT id_article FROM spip_forms_articles WHERE id_form=".intval($idf));
 		while($row=spip_fetch_array($res)){
 			$ida = $row['id_article'];
 			if (
