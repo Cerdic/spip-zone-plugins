@@ -68,21 +68,16 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 				$valeurs[$key] = interdire_scripts($val);
 		}
 	}
-	elseif (!_DIR_RESTREINT && $id_donnee=_request('id_donnee')){
-		$res = spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
-		while ($row2 = spip_fetch_array($res)){
-			$valeurs[$row2['champ']]= $row2['valeur'];
-		}
-	}
+	elseif (!_DIR_RESTREINT && $id_donnee=_request('id_donnee'))
+		$valeurs = Forms_valeurs($id_form,$id_donnee);
 	elseif (_DIR_RESTREINT!="" && $row['modifiable']=='oui'){
 		global $auteur_session;
 		$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
 		$cookie = $_COOKIE[Forms_nom_cookie_form($id_form)];
 		//On retourne les donnees si auteur ou cookie
-		$q = "SELECT donnees_champs.* " .
-			"FROM spip_forms_donnees_champs AS donnees_champs, spip_forms_donnees AS donnees " .
-			"WHERE donnees.id_donnee=donnees_champs.id_donnee " .
-			"AND donnees.id_form="._q($id_form)." ".
+		$q = "SELECT donnees.id_donnee " .
+			"FROM spip_forms_donnees AS donnees " .
+			"WHERE donnees.id_form="._q($id_form)." ".
 			"AND donnees.statut='publie' ";
 		if ($cookie) $q.="AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).") ";
 		else
@@ -91,10 +86,10 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 			else
 				$q.="AND 0=1 ";
 		//si unique, ignorer id_donnee, si pas id_donnee, ne renverra rien
-		if ($row['multiple']=='oui' && $id_donnee) $q.="AND donnees_champs.id_donnee="._q($id_donnee);
+		if ($row['multiple']=='oui' && $id_donnee) $q.="AND donnees.id_donnee="._q($id_donnee);
 		$res = spip_query($q);
-		while ($row2 = spip_fetch_array($res)){
-			$valeurs[$row2['champ']]= $row2['valeur'];
+		if($row2 = spip_fetch_array($res)){
+			$valeurs = Forms_valeurs($id_form,$row2['id_donnee']);
 		}
 	}
 
@@ -103,7 +98,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 		if ((Forms_verif_cookie_sondage_utilise($id_form)==true)&&(_DIR_RESTREINT!=""))
 			$affiche_sondage=' ';
 	}
-	include_spip('inc/filtres');
+	include_spip('inc/filtres');var_dump($valeurs);
 	return array('formulaires/forms', 0, 
 		array(
 			'erreur_message'=>isset($erreur['@'])?$erreur['@']:'',

@@ -52,6 +52,30 @@
 		}
 		return $structure;
 	}
+	function Forms_valeurs($id_form,$id_donnee){
+		static $unseul = array();
+		$valeurs = array();
+		$res = spip_query("SELECT * FROM spip_forms_donnees_champs AS d JOIN spip_forms_champs AS c ON c.champ=d.champ AND c.id_form="._q($id_form)." WHERE id_donnee="._q($id_donnee));
+		while ($row = spip_fetch_array($res)){
+			if ($row['type']=='multiple')
+				$valeurs[$row2['champ']][]= $row2['valeur'];
+			elseif ($row['type']=='mot'){
+				$id_groupe = intval($row['extra_info']);
+				if (!isset($unseul[$id_groupe])){
+					$res2 = spip_query("SELECT unseul FROM spip_groupes_mots WHERE id_groupe="._q($id_groupe));
+					$row2=spip_fetch_array($res2);
+					$unseul[$id_groupe] = $row2['unseul'];
+				}
+				if ($unseul[$id_groupe]=='oui')
+					$valeurs[$row2['champ']]= $row2['valeur'];
+				else
+					$valeurs[$row2['champ']][]= $row2['valeur'];
+			}
+			else
+				$valeurs[$row2['champ']]= $row2['valeur'];
+		}
+		return $valeurs;
+	}
 	
 	function Forms_donnees_vide($id_form){
 		if (!include_spip('inc/autoriser'))
