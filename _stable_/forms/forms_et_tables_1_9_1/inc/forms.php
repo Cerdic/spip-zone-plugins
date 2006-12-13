@@ -483,7 +483,7 @@
 					$r=spip_query($q);
 					if ($r=spip_fetch_array($r)){
 						$id_donnee = $r['id_donnee'];
-						spip_query("UPDATE spip_forms_donnees SET date=NOW(), ip="._q($GLOBALS['ip']).", url="._q($url).", '$confirmation', statut="._q($statut).", cookie="._q($cookie)." ".
+						spip_query("UPDATE spip_forms_donnees SET date=NOW(), ip="._q($GLOBALS['ip']).", url="._q($url).", confirmation='$confirmation', statut="._q($statut).", cookie="._q($cookie)." ".
 							"WHERE id_donnee="._q($id_donnee));
 						spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
 					} else {
