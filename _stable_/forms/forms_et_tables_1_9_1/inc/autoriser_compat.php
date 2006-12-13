@@ -24,7 +24,30 @@ if (!function_exists('autoriser')) {
 		return call_user_func_array('autoriser_dist', $args);
 	}
 }
+function auth_rubrique_compat($id_auteur, $statut)
+{
+	if ($statut != '0minirezo') return $statut;
 
+	$result = spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$id_auteur AND id_rubrique!='0'");
+
+	if (!spip_num_rows($result)) {
+		$GLOBALS['connect_toutes_rubriques'] = true;
+		return 0;
+	}
+
+	$rubriques = array();
+	for (;;) {
+		$r = array();
+		while ($row = spip_fetch_array($result)) {
+			$id_rubrique = $row['id_rubrique'];
+			$r[]= $rubriques[$id_rubrique] = $id_rubrique;
+		}
+		if (!$r) return $rubriques;
+		$r = join(',', $r);
+
+		$result = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($r) AND id_rubrique NOT IN ($r)");
+	}
+}
 
 // API pour une fonction generique d'autorisation :
 // $qui est : vide (on prend alors auteur_session)
@@ -48,10 +71,6 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 			$qui = spip_fetch_array(spip_query(
 			"SELECT * FROM spip_auteurs WHERE id_auteur=".$qui));
 		} else {
-			if (!is_array($GLOBALS['auteur_session'])){
-				$var_auth = charger_fonction('auth', 'inc');
-				$var_auth = $var_auth();
-			}
 			$qui = $GLOBALS['auteur_session'];
 		}
 	}
@@ -64,7 +83,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	AND !isset($qui['restreint'])) {
 		if (!isset($restreint[$qui['id_auteur']])) {
 			include_spip('inc/auth'); # pour auth_rubrique
-			$restreint[$qui['id_auteur']] = auth_rubrique($qui['id_auteur'], $qui['statut']);
+			$restreint[$qui['id_auteur']] = auth_rubrique_compat($qui['id_auteur'], $qui['statut']);
 		}
 		$qui['restreint'] = $restreint[$qui['id_auteur']];
 	}
