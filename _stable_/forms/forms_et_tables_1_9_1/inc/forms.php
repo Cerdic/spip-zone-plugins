@@ -58,7 +58,7 @@
 		$res = spip_query("SELECT * FROM spip_forms_donnees_champs AS d JOIN spip_forms_champs AS c ON c.champ=d.champ AND c.id_form="._q($id_form)." WHERE id_donnee="._q($id_donnee));
 		while ($row = spip_fetch_array($res)){
 			if ($row['type']=='multiple')
-				$valeurs[$row2['champ']][]= $row2['valeur'];
+				$valeurs[$row['champ']][]= $row['valeur'];
 			elseif ($row['type']=='mot'){
 				$id_groupe = intval($row['extra_info']);
 				if (!isset($unseul[$id_groupe])){
@@ -67,12 +67,12 @@
 					$unseul[$id_groupe] = $row2['unseul'];
 				}
 				if ($unseul[$id_groupe]=='oui')
-					$valeurs[$row2['champ']]= $row2['valeur'];
+					$valeurs[$row['champ']]= $row['valeur'];
 				else
-					$valeurs[$row2['champ']][]= $row2['valeur'];
+					$valeurs[$row['champ']][]= $row['valeur'];
 			}
 			else
-				$valeurs[$row2['champ']]= $row2['valeur'];
+				$valeurs[$row['champ']]= $row['valeur'];
 		}
 		return $valeurs;
 	}
