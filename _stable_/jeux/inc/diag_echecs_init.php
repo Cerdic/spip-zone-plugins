@@ -39,11 +39,10 @@ $diag_echecs_globales = Array(
 	'hjaune' => array(255,255,102), 
 	// diverses initialisations
 	'colonnes' => "abcdefgh",
-	'english' => array("r"=>"k", "d"=>"q", "t"=>"r", "f"=>"b", ""=>"n", "p"=>"p"),
-	'letter2number' => array("a"=>1, "b"=>2, ""=>3, "d"=>4, "e"=>5, "f"=>6, "g"=>7, "h"=>8),
-	'number2letter' => array(1=>"a", 2=>"b", 3=>"", 4=>"d", 5=>"e", 6=>"f", 7=>"g", 8=>"h"),
-	'english2french' => array("K"=>"r", "Q"=>"d", "R"=>"t", "B"=>"f", "N"=>"", "P"=>"p", 
-  		"k"=>"r", "q"=>"d", "r"=>"t", "b"=>"f", "n"=>"", "p"=>"p"),
+	'english' => array("r"=>"k", "d"=>"q", "t"=>"r", "f"=>"b", "c"=>"n", "p"=>"p"),
+	'letter2number' => array("a"=>1, "b"=>2, "c"=>3, "d"=>4, "e"=>5, "f"=>6, "g"=>7, "h"=>8),
+	'number2letter' => array(1=>"a", 2=>"b", 3=>"c", 4=>"d", 5=>"e", 6=>"f", 7=>"g", 8=>"h"),
+	'english2french' => array("k"=>"r", "q"=>"d", "r"=>"t", "b"=>"f", "n"=>"c", "p"=>"p"),
 /*
 	Language     Piece letters (pawn knight bishop rook queen king)
 	----------   --------------------------------------------------
@@ -53,7 +52,7 @@ $diag_echecs_globales = Array(
 	English      P N B R Q K	en
 	Estonian     P R O V L K
 	Finnish      P R L T D K
-	French       P  F T D R	fr
+	French       P C F T D R	fr
 	German       B S L T D K	de
 	Hungarian    G H F B V K
 	Icelandic    P R B H D K

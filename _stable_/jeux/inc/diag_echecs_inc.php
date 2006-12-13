@@ -24,7 +24,7 @@ function FEN2classic($fen) {
         if (strlen($w)>2) {
           $w.=",";
         }
-        $w .= ($diag_echecs_globales['english2french'][$fen[$i][$j]] . ($diag_echecs_globales['colonnes'][$col++]) . (8 - $i));
+        $w .= ($diag_echecs_globales['english2french'][strtolower($fen[$i][$j])] . ($diag_echecs_globales['colonnes'][$col++]) . (8 - $i));
       }
       elseif ( ereg("[kqbnrp]", $fen[$i][$j] ) ) {
         if (strlen($b)>2) {
@@ -87,7 +87,6 @@ function diag_echecs_put_piece($chessboard,$side,$name,$square,$flip) {
   if ((!(ereg("[a-h]",$letter,$match1))) or (!(ereg("[1-8]",$number,$match2))))
 	die("Erreur dans la syntaxe (diag_echecs_put_piece)!");
 
-  $url = jeux_config('base_url').$side.$diag_echecs_globales['english'][$name].jeux_config('img_suffix');
   $img_create = jeux_config('img_create');
   $file = $img_create($url);
   if (!$flip) {
