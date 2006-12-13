@@ -87,6 +87,7 @@ function diag_echecs_put_piece($chessboard,$side,$name,$square,$flip) {
   if ((!(ereg("[a-h]",$letter,$match1))) or (!(ereg("[1-8]",$number,$match2))))
 	die("Erreur dans la syntaxe (diag_echecs_put_piece)!");
 
+  $url = jeux_config('base_url').$side.$diag_echecs_globales['english'][$name].jeux_config('img_suffix');
   $img_create = jeux_config('img_create');
   $file = $img_create($url);
   if (!$flip) {
