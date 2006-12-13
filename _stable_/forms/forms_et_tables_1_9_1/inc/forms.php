@@ -473,11 +473,6 @@
 				if (($row['modifiable'] == 'oui' || !_DIR_RESTREINT) && $dejareponse) {
 					$q = "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form).
 						" AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).")";
-					if ($id_auteur)
-						if ($cookie) $q.="AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).")";
-						else $q.="AND id_auteur="._q($id_auteur);
-					else
-						if ($cookie) $q.="AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).")";
 					//si unique, ignorer id_donnee, si pas id_donnee, ne renverra rien
 					if ($row['multiple']=='oui' || !_DIR_RESTREINT) $q.=" AND donnees_champs.id_donnee="._q($id_donnee);
 					$r=spip_query($q);
