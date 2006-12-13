@@ -48,6 +48,10 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 			$qui = spip_fetch_array(spip_query(
 			"SELECT * FROM spip_auteurs WHERE id_auteur=".$qui));
 		} else {
+			if (!is_array($GLOBALS['auteur_session'])){
+				$var_auth = charger_fonction('auth', 'inc');
+				$var_auth = $var_auth();
+			}
 			$qui = $GLOBALS['auteur_session'];
 		}
 	}
