@@ -592,7 +592,13 @@ function Forms_obligatoire($row,$forms_obligatoires){
 	while ($chercher && $i<count($form_tab)){
 		$form_id=$form_tab[$i];
 		$cookie = $_COOKIE[Forms_nom_cookie_form($form_id)];
-		$q="SELECT id_form FROM spip_forms_donnees WHERE statut='publie' AND id_form="._q($form_id)." AND (id_auteur="._q($form_id)." OR cookie="._q($cookie).")";
+		$q="SELECT id_form FROM spip_forms_donnees WHERE statut='publie' AND id_form="._q($form_id)." ";
+		if ($cookie) $q.="AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).") ";
+		else
+			if ($id_auteur)
+				$q.="AND id_auteur="._q($id_auteur)." ";
+			else
+				$q.="AND 0=1 ";
 		$res=spip_query($q);
 		if (!spip_fetch_array($res)){
 			$res2 = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($form_id));
