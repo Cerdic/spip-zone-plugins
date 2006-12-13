@@ -52,10 +52,11 @@ function Forms_formater_reponse($ligne, $valeurs, $structure,$format,$separateur
 		else{
 			$v = $valeurs[$champ];
 			if ($t['type']=='multiple'){
-				// pour un choix multiple on cree une colonne par reponse potentielle
+				// pour un choix multiple on cree une colonne par reponse potentielle, plus une vide avant
+				$ligne[$champ][] = "";
 				foreach($t['choix'] as $choix=>$titre)
-					if (in_array($choix,$v))
-						$ligne[$champ][$choix] = strval($titre);
+					if (isset($v[$choix]))
+						$ligne[$champ][$choix] = $v[$choix];
 					else
 						$ligne[$champ][$choix] = "";
 			}
@@ -142,9 +143,15 @@ function Forms_formater_les_reponses($id_form, $format, $separateur, &$fichiers,
 		}
 		else {
 			$v = $row['valeur'];
-			if ($traduit AND isset($structure[$champ][$v])) $v = $structure[$champ][$v];
-			else if ($traduit AND isset($structure[$champ]['choix'][$v])) $v = $structure[$champ]['choix'][$v];
-			$valeurs[$champ][] = $v;
+			if (isset($structure[$champ]['choix'][$v])){
+				$vt = $v;
+				if ($traduit) $vt = $structure[$champ]['choix'][$v];
+				$valeurs[$champ][$v] = $vt;
+			}
+			else{
+				if ($traduit AND isset($structure[$champ][$v])) $v = $structure[$champ][$v];
+				$valeurs[$champ][] = $v;
+			}
 		}
 	}
 
