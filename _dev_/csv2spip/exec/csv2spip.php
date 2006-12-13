@@ -417,9 +417,9 @@ function exec_csv2spip() {
   			$Terr_eff = array();
 				$Tres_poub = array();
 				$Terr_poub = array();
-				$Tres_ss_grpe = array();
-				$Terr_ss_grpe = array();
-				$Terr_eff_accesgroupes = array();
+				$TresR_ss_grpe = array();
+				$TerrR_ss_grpe = array();
+				$TerrR_eff_accesgroupes = array();
 				
 		// admins
 				$TresA_nvx = array();
@@ -431,6 +431,7 @@ function exec_csv2spip() {
 				$TresA_ss_grpe = array();
 				$TerrA_ss_grpe = array();
 				$TerrA_eff_accesgroupes = array();
+				$TerrA_eff_rub_admins = array();
 				
 		// visiteurs
 				$TresV_nvx = array();
@@ -442,6 +443,12 @@ function exec_csv2spip() {
 				$TresV_ss_grpe = array();
 				$TerrV_ss_grpe = array();
 				$TerrV_eff_accesgroupes = array();
+				
+		// communs
+			  $Tres_maj_grpacces[] = array();
+				$Terr_maj_grpacces[] = array();
+				$Tres_maj_rub_admin[] = array();
+				$Terr_maj_rub_admin[] = array();
 				
   			$sql157 = spip_query("SELECT * FROM tmp_auteurs");
   			while ($data157 = spip_fetch_array($sql157)) {
@@ -462,7 +469,7 @@ function exec_csv2spip() {
 					 		 $groupe != $groupe_admins ? ($groupe != $groupe_visits ? $statut = '1comite' : $statut = '6forum') : $statut = '0minirezo';
 							 
   						 $sql423 = spip_query("SELECT COUNT(*) AS nb_user FROM $Tauteurs WHERE LOWER(login) = '$login_minuscules' LIMIT 1");
-  						 $data423 = spip_fetch_array($sql423);
+  						 $data423 = spip_fetch_array($sql423);							 
   						 $nb_user = $data423['nb_user'];	
 // 4.1 : l'utilisateur n'est pas inscrit dans la base spip_auteurs
 							 if ($nb_user < 1) {
@@ -474,8 +481,7 @@ function exec_csv2spip() {
 												 marquer_indexer('spip_auteurs', $id_auteur);
                   	// Mettre a jour les fichiers .htpasswd et .htpasswd-admin
                   	     ecrire_acces();
-												 
-										// maj de l'id_spip dans la base tmp
+										// insertion de l'id_spip dans la base tmp
 												 spip_query("UPDATE tmp_auteurs SET id_spip = '$id_spip' WHERE LOWER(nom) = '$login_minuscules' LIMIT 1");
 												 $groupe != $groupe_admins ? ($groupe != $groupe_visits ? $Tres_nvx[] = $login: $TresV_nvx[] = $login) : $TresA_nvx[] = $login;
   										}
@@ -484,24 +490,51 @@ function exec_csv2spip() {
 											}
 							 }
 							 else {
-// 4.2 : l'utilisateur est déja inscrit dans la base spip_auteurs => maj des infos = OK
+// 4.2 : l'utilisateur est déja inscrit dans la base spip_auteurs
 								// trouver l'id_auteur spip
 										$sql44 = spip_query("SELECT id_auteur FROM $Tauteurs WHERE LOWER(login) = '$login_minuscules' LIMIT 1");
 									  if (spip_num_rows($sql44) > 0) {
 									 		 $result44 = spip_fetch_array($sql44);
 											 $id_spip = $result44['id_auteur'];
+  										 spip_query("UPDATE tmp_auteurs SET id_spip = '$id_spip' WHERE LOWER(nom) = '$login_minuscules' LIMIT 1");											 
 									  } 
-								// faire la maj des infos si nécessaire
-  									if ($_POST['maj_mdp'] == 1) {
-  										 $pass = csv2spip_crypt_md5($pass);
-  										 spip_query("UPDATE $Tauteurs SET nom = '$nom', email = '$mel', statut = '$statut', pass = '$pass', alea_actuel = '' WHERE id_auteur = $id_spip LIMIT 1");
-  										 if (mysql_error() == '') {
-    											 $groupe != $groupe_admins ? ($groupe != $groupe_visits ? $Tres_maj[] = $login : $TresV_maj[] = $login) : $TresA_maj[] = $login;
-      								 }
-      								 else {
-      											 $groupe != $groupe_admins ? ($groupe != $groupe_visits ? $Terr_maj[] = array('login' => $login, 'erreur' => mysql_error()) : $TerrV_maj[] = array('login' => $login, 'erreur' => mysql_error())) : $TerrA_maj[] = array('login' => $login, 'erreur' => mysql_error());
-      								 }
-  									}
+								// faut il faire la maj des existants ?
+  									if ($_POST['maj_gene'] == 1) {
+    								// 4.2.1 faire la maj des infos perso si nécessaire
+												if ($_POST['maj_mdp'] == 1) {
+      										 $pass = csv2spip_crypt_md5($pass);
+      										 spip_query("UPDATE $Tauteurs SET nom = '$nom', email = '$mel', statut = '$statut', pass = '$pass', alea_actuel = '' WHERE id_auteur = $id_spip LIMIT 1");
+      										 if (mysql_error() == '') {
+        											 $groupe != $groupe_admins ? ($groupe != $groupe_visits ? $Tres_maj[] = $login : $TresV_maj[] = $login) : $TresA_maj[] = $login;
+          								 }
+          								 else {
+          											 $groupe != $groupe_admins ? ($groupe != $groupe_visits ? $Terr_maj[] = array('login' => $login, 'erreur' => mysql_error()) : $TerrV_maj[] = array('login' => $login, 'erreur' => mysql_error())) : $TerrA_maj[] = array('login' => $login, 'erreur' => mysql_error());
+          								 }
+      									}
+										// 4.2.2 réinitialisation des groupes acces_groupes si nécessaire
+											  if ( ($_POST['maj_grpes_redac'] == 1 AND $statut == '1comite') 
+													 	  OR ($_POST['maj_grpes_admin'] == 1 AND $statut == '0minirezo')
+															OR ($_POST['maj_grpes_visit'] == 1 AND $statut == '6forum')
+														) {
+														spip_query("DELETE FROM $Taccesgroupes_auteurs WHERE id_auteur = $id_spip");
+														if (mysql_error() == '') {
+        											 $Tres_maj_grpacces[] = $login;
+          								  }
+          								  else {
+          											 $Terr_maj_grpacces[] = array('login' => $login, 'erreur' => mysql_error());
+          								  }
+												}
+										// 4.2.3 suppression des droits sur les rubriques administrées si nécessaire
+											  if ($_POST['maj_rub_adm'] == 1 AND $statut == '0minirezo') {
+													 spip_query("DELETE FROM $Tauteurs_rubriques WHERE id_auteur = $id_spip");
+													 if (mysql_error() == '') {
+        											 $Tres_maj_rub_admin[] = $login;
+          								  }
+          								  else {
+          											 $Terr_maj_rub_admin[] = array('login' => $login, 'erreur' => mysql_error());
+          								  }
+												}
+										}
 							 }
 												 
 // 4.3 : intégrer l'auteur dans son ss-groupe acces_groupes si nécessaire 
@@ -514,10 +547,10 @@ function exec_csv2spip() {
 													spip_query("INSERT INTO $Taccesgroupes_auteurs (id_grpacces, id_auteur, dde_acces, proprio)
   																		VALUES ($id_grpacces_ec, $id_spip, 0, 0)");
   												if (mysql_error() == '') {
-  													 $groupe != $groupe_admins ? ($groupe != $groupe_visits ? $Tres_ss_grpe[] = $login : $TresV_ss_grpe[] = $login) : $TresA_ss_grpe[] = $login;
+  													 $groupe != $groupe_admins ? ($groupe != $groupe_visits ? $TresR_ss_grpe[] = $login : $TresV_ss_grpe[] = $login) : $TresA_ss_grpe[] = $login;
   												}
   												else {
-  														 $groupe != $groupe_admins ? ($groupe != $groupe_visits ? $Terr_ss_grpe[] = array('login' => $login, 'erreur' => mysql_error()) : $TerrV_ss_grpe[] = array('login' => $login, 'erreur' => mysql_error()) ) :  $TerrA_ss_grpe[] = array('login' => $login, 'erreur' => mysql_error());
+  														 $groupe != $groupe_admins ? ($groupe != $groupe_visits ? $TerrR_ss_grpe[] = array('login' => $login, 'erreur' => mysql_error()) : $TerrV_ss_grpe[] = array('login' => $login, 'erreur' => mysql_error()) ) :  $TerrA_ss_grpe[] = array('login' => $login, 'erreur' => mysql_error());
   												}
 										  }
   								}
@@ -700,7 +733,7 @@ function exec_csv2spip() {
     																// effacer toutes les références à ce visiteur dans acces_groupes
     																   spip_query("DELETE FROM $Taccesgroupes_auteurs WHERE id_auteur = $id_auteur_ec");
     																	 if (mysql_error() != '') {
-    																		 $Terr_eff_accesgroupes[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
+    																		 $TerrR_eff_accesgroupes[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
     																	 }
                   									}
     																else {
@@ -789,10 +822,14 @@ function exec_csv2spip() {
 																	 if (mysql_error() != '') {
 																		 $TerrA_eff_accesgroupes[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
 																	 }
-																	 
+              								 // virer l'administation de toutes les rubriques pour cet admin
+																	 spip_query("DELETE FROM $Tauteurs_rubriques WHERE id_auteur = $id_auteur_ec");
+																	 if (mysql_error() != '') {
+																		 $TerrA_eff_rub_admins[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
+																	 }
               									 }
               									 else {
-              												 $TerrA_eff[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
+																		  $TerrA_eff[] = array('id_auteur' => $id_auteur_ec, 'erreur' => mysql_error());
               									 }
     												}
     												else {
@@ -859,43 +896,85 @@ function exec_csv2spip() {
 			 			echo "<br>"._T('csvspip:creation').count($TresA_nvx)._T('csvspip:comptes_admin_ok')."<br>";					 			
 			  }
 
-			  if ($_POST['maj_mdp'] == 1) { 					
-			 		echo "<br>"._T('csvspip:etape4.2')."<br>";
-      		if (count($TerrV_maj) > 0) {
-    					echo "<span class=\"Cerreur\">"._T('csvspip:err_visit');
-      			  foreach ($TerrV_maj as $Vem) { 
-    	 		 						echo _T('csvspip:visit').$Vem['login']._T('csvspip: erreur').$Vem['erreur']."<br>";
-    				  }		
-    					echo "</span>";
-    		 		  $err_total ++;
-    			}
-    			else {
-    						 echo "<br />"._T('csvspip:ok_etape4.2').count($TresA_maj)._T('csvspip:comptes_visit_ok')."<br>";
-    			}  					
-		 			if (count($Terr_maj) > 0) {		
-						 echo "<span class=\"Cerreur\">"._T('csvspip:err_redac');
-						 foreach ($Terr_maj as $em) { 
-					 		 		 	 echo _T('csvspip:redac').$em['login']._T('csvspip: erreur').$em['erreur']."<br>";
-						 }		 
-						 echo "</span>";
-				 		 $err_total ++;
-    			}
-    			else {
-    					 echo "<br>"._T('csvspip:ok_etape4.2').count($Tres_maj)._T('csvspip:comptes_redac_ok')."<br>";							
-    			} 
-      		if (count($TerrA_maj) > 0) {
-    					echo "<span class=\"Cerreur\">"._T('csvspip:err_admin');
-      			  foreach ($TerrA_maj as $Pem) { 
-    	 		 						echo _T('csvspip:admin').$Pem['login']._T('csvspip: erreur').$Pem['erreur']."<br>";
-    				  }		
-    					echo "</span>";
-    		 		  $err_total ++;
-    			}
-    			else {
-    						 echo "<br />"._T('csvspip:ok_etape4.2').count($TresA_maj)._T('csvspip:comptes_admin_ok')."<br>";
-    			}  					
-			  }
+		// 4.2 résultats maj des existants
+				if ($_POST['maj_gene'] == 1) {
+    			  echo "<br>"._T('csvspip:etape4.2')."<br>";
+						if ($_POST['maj_mdp'] == 1) { 					
+          		echo "<br>"._T('csvspip:etape4.2.1')."<br>";
+							if (count($TerrV_maj) > 0) {
+        					echo "<span class=\"Cerreur\">"._T('csvspip:err_visit');
+          			  foreach ($TerrV_maj as $Vem) { 
+        	 		 						echo _T('csvspip:visit').$Vem['login']._T('csvspip: erreur').$Vem['erreur']."<br>";
+        				  }		
+        					echo "</span>";
+        		 		  $err_total ++;
+        			}
+        			else {
+        						 echo "<br />"._T('csvspip:ok_etape4.2.1').count($TresA_maj)._T('csvspip:comptes_visit_ok')."<br>";
+        			}  					
+    		 			if (count($Terr_maj) > 0) {		
+    						 echo "<span class=\"Cerreur\">"._T('csvspip:err_redac');
+    						 foreach ($Terr_maj as $em) { 
+    					 		 		 	 echo _T('csvspip:redac').$em['login']._T('csvspip: erreur').$em['erreur']."<br>";
+    						 }		 
+    						 echo "</span>";
+    				 		 $err_total ++;
+        			}
+        			else {
+        					 echo "<br>"._T('csvspip:ok_etape4.2.1').count($Tres_maj)._T('csvspip:comptes_redac_ok')."<br>";							
+        			} 
+          		if (count($TerrA_maj) > 0) {
+        					echo "<span class=\"Cerreur\">"._T('csvspip:err_admin');
+          			  foreach ($TerrA_maj as $Pem) { 
+        	 		 						echo _T('csvspip:admin').$Pem['login']._T('csvspip: erreur').$Pem['erreur']."<br>";
+        				  }		
+        					echo "</span>";
+        		 		  $err_total ++;
+        			}
+        			else {
+        						 echo "<br />"._T('csvspip:ok_etape4.2.1').count($TresA_maj)._T('csvspip:comptes_admin_ok')."<br>";
+        			}  					
+    			  }
+						if ($_POST['maj_grpes_redac'] == 1 OR $_POST['maj_grpes_admin'] == 1 OR $_POST['maj_grpes_visit'] == 1) {
+							 echo "<br>"._T('csvspip:etape4.2.2')."<br>";
+							 if (count($Terr_maj_grpacces) > 0) {
+							 		echo "<span class=\"Cerreur\">"._T('csvspip:err_maj_grpacces');
+          			  foreach ($Terr_maj_grpacces as $Peg) { 
+        	 		 						echo _T('csvspip:utilisateur').$Peg['login']._T('csvspip: erreur').$Peg['erreur']."<br>";
+        				  }		
+        					echo "</span>";
+        		 		  $err_total ++;
+							 }
+							 else {
+							 			echo "<br />"._T('csvspip:ok_maj_grpacces').count($Tres_maj_grpacces)._T('csvspip:utilisateurs')."<br>";
+							 }
+						}
+						if ($_POST['maj_rub_adm'] == 1) {
+							 echo "<br>"._T('csvspip:etape4.2.3')."<br>";
+							 if (count($Terr_maj_grpacces) > 0) {
+							 		echo "<span class=\"Cerreur\">"._T('csvspip:err_maj_rub_adm');
+          			  foreach ($Terr_maj_rub_admin as $Pera) { 
+        	 		 						echo _T('csvspip:utilisateur').$Pera['login']._T('csvspip: erreur').$Pera['erreur']."<br>";
+        				  }		
+        					echo "</span>";
+        		 		  $err_total ++;
+							 }
+							 else {
+							 			echo "<br />"._T('csvspip:ok_maj_rub_adm').count($Tres_maj_rub_admin)._T('csvspip:utilisateurs')."<br>";
+							 }
+						}
+				}
 				
+		// 4.3 résultats intégration des utilisateurs dans les groupes acces_groupes
+		    if ($_POST['ss_groupes_redac'] == 1 OR $_POST['ss_groupes_admin'] == 1 OR $_POST['ss_groupes_visit'] == 1) {
+					 echo "<br />"._T('csvspip:etape4.3')."<br>";
+					 
+				}
+				
+		// 4.4 résultats effacer les absents
+		    if ($eff_absv == 1 OR $eff_absr == 1 OR $eff_absa == 1) {
+					 echo "<br />"._T('csvspip:etape4.4')."<br>";
+				}
 		// résultats effacer les visiteurs
 				if ($eff_absv == 1) {  					
 					 echo "<br />"._T('csvspip:etape4.4.1')."<br>";
@@ -995,6 +1074,22 @@ function exec_csv2spip() {
 					 if ($supprimer_articlesa == 1) {
 					 		echo "<br />"._T('csvspip:suppression_debut').$cteur_articles_supprimesA._T('csvspip:suppression_fin')."<br>";
 					 }
+					 if (count ($TerrA_eff_accesgroupes) > 0) {
+					 		echo "<span class=\"Cerreur\">"._T('csvspip:suppr_redac');
+							foreach ($TerrA_eff_accesgroupes as $Aec) { 
+											echo _T('csvspip:err_eff_adm_accesgroupes').$Aec['login']._T('csvspip: erreur').$Aec['erreur'];
+							}
+							echo "</span>";
+							$err_total ++;
+					 }
+					 if (count ($TerrA_eff_rub_admins) > 0) {
+					 		echo "<span class=\"Cerreur\">"._T('csvspip:suppr_redac');
+							foreach ($TerrA_eff_rub_admins as $Aer) { 
+											echo _T('csvspip:err_eff_adm_rub').$Aer['login']._T('csvspip: erreur').$Aer['erreur'];
+							}
+							echo "</span>";
+							$err_total ++;					 		
+					 }
 /*
 							if ($ch_ssgrpe == 3 AND $extra_sup != 0 AND $extraa != 0) {  ?>					
 			<h3>Etape 4.3.3.1 : suppression des références aux administrateurs supprimés dans la table supplémentaire :</h3>
@@ -1027,10 +1122,15 @@ function exec_csv2spip() {
 						 			 $login_adm_ec = strtolower($data54['nom']);
 									 $id_adm_ec = $data54['id_spip'];
 									 if ($_POST['rub_prof'] == 1 AND $data54['ss_groupe'] != '') {
-    									 $ss_grpe_ec = $data54['ss_groupe'];
-    									 $sql55 = spip_query("SELECT id_rubrique FROM $Trubriques WHERE titre = '$ss_grpe_ec' LIMIT 1");
-    									 $data55 = spip_fetch_array($sql55);
-    									 $id_rubrique_adm_ec = $data55['id_rubrique'];									 		
+//    									 if ($data54['ss_groupe'] != '') {
+											 		$ss_grpe_ec = $data54['ss_groupe'];
+      									  $sql55 = spip_query("SELECT id_rubrique FROM $Trubriques WHERE titre = '$ss_grpe_ec' LIMIT 1");
+      									  $data55 = spip_fetch_array($sql55);
+      									  $id_rubrique_adm_ec = $data55['id_rubrique'];									 		
+//											 }
+//											 else {
+//											 			$id_rubrique_adm_ec = $id_rub_admin_defaut;
+//											 }
 									 }
 									 else {
 									 			$id_rubrique_adm_ec = $id_rub_admin_defaut;
@@ -1125,7 +1225,7 @@ echo "<script language=\"JavaScript\"> ";
 echo "				function aff_masq(id_elem, vis) { ";
 echo "								 vis == 0 ? s_vis = 'none' : s_vis = 'block'; ";
 echo "								 document.getElementById(id_elem).style.display = s_vis; ";
-echo "								 document.getElementById(id_elem).style.display = s_vis; ";
+//echo "								 document.getElementById(id_elem).style.display = s_vis; ";
 echo "								 this.checked = 'checked'; ";			 
 echo "				}";
 echo "</script>";
@@ -1141,9 +1241,35 @@ echo "</script>";
 				 
 				 fin_cadre_couleur();
 				 debut_cadre_couleur("mot-cle-24.gif", false, "", _T('csvspip:options_maj'));
-    		 echo "<strong>"._T('csvspip:maj_mdp')."</strong>"; 
+				 echo "<strong>"._T('csvspip:maj_utils')."</strong>";
+    		 echo _T('csvspip:oui')."<input type=\"radio\" name=\"maj_gene\" value=\"1\"  checked=\"checked\" onClick=\"aff_masq('maj_avance', 1);\">"; 
+    		 echo "<input type=\"radio\" name=\"maj_gene\" value=\"0\" onClick=\"aff_masq('maj_avance', 0);\">"._T('csvspip:non');
+         echo "<div id=\"maj_avance\" class=\"cadre\">";
+    		 echo "<br /><strong>"._T('csvspip:maj_mdp')."</strong>"; 
     		 echo _T('csvspip:oui')."<input type=\"radio\" name=\"maj_mdp\" value=\"1\"  checked=\"checked\">"; 
     		 echo "<input type=\"radio\" name=\"maj_mdp\" value=\"0\">"._T('csvspip:non');
+				 echo "<br /><br /><strong>"._T('csvspip:maj_grpes')."</strong>";
+				 echo "<ul style=\"padding: 0px; margin: 0px 0px 0px 30px;\">";
+				 echo "<li style=\"list-style-image: url('img_pack/redac-12.gif');\"><strong>"._T('csvspip:redacs').":</strong> ";
+				 echo _T('csvspip:oui')."<input type=\"radio\" name=\"maj_grpes_redac\" value=\"1\" checked=\"checked\">";
+				 echo "<input type=\"radio\" name=\"maj_grpes_redac\" value=\"0\">"._T('csvspip:non');
+				 echo "</li>";
+				 echo "<li style=\"list-style-image: url('img_pack/admin-12.gif');\"><strong>"._T('csvspip:admins').":</strong> ";
+				 echo _T('csvspip:oui')."<input type=\"radio\" name=\"maj_grpes_admin\" value=\"1\" checked=\"checked\">";
+				 echo "<input type=\"radio\" name=\"maj_grpes_admin\" value=\"0\">"._T('csvspip:non'); 
+				 echo "</li>";
+				 echo "<li style=\"list-style-image: url('img_pack/visit-12.gif');\"><strong>"._T('csvspip:visits').":</strong> ";
+				 echo _T('csvspip:oui')."<input type=\"radio\" name=\"maj_grpes_visit\" value=\"1\" checked=\"checked\" >";
+				 echo "<input type=\"radio\" name=\"maj_grpes_visit\" value=\"0\">"._T('csvspip:non');
+				 echo "</li>";				 
+    		 echo "</ul>";
+				 echo "<span style=\"font-size: 10px;\">"._T('csvspip:help_maj_grpes')."</span><br>"; 
+				 echo "<br /><img src=\"img_pack/admin-12.gif\" alt=\"admins uniquement\"> <strong>"._T('csvspip:maj_rub_adm')."</strong>";
+       	 echo "<input type=\"radio\" name=\"maj_rub_adm\" value=\"1\" checked=\"checked\">"._T('csvspip:oui');   
+         echo "<input type=\"radio\" name=\"maj_rub_adm\" value=\"0\">"._T('csvspip:non'); 
+				 echo "<br /><span style=\"font-size: 10px;\">"._T('csvspip:help_maj_rub_adm')."</span><br>"; 
+				 echo "</div>";				 
+				 
 				 fin_cadre_couleur();
 				 debut_cadre_couleur("../"._DIR_PLUGIN_CSV2SPIP."/img_pack/supprimer_utilisateurs-24.gif", false, "", _T('csvspip:suppr_absents'));
     		 echo "<strong>"._T('csvspip:suppr_utilis')."</strong><ul style=\"padding: 0px; margin: 0px 0px 0px 30px;\">";
