@@ -79,6 +79,7 @@ function forms_init_multi(options) {
 	//Update the list of form if this is an update
 	if(target) {
 		//Verify the target is really a form to be internationalized (in case of an ajax request fired by onAjaxLoad)
+		if(target==document) return;
 		init_forms = $(target).find('form');
 		if(!init_forms.length || !in_set(init_forms,$(multilang_forms_selector,multilang_root))) return;
 		multilang_forms.add(init_forms.each(forms_attach_submit).get());

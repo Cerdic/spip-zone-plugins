@@ -9,7 +9,8 @@
  */
 
 function multilang_mot_cles_header_prive($flux) {
-	if($GLOBALS['meta']['multi_rubriques']=="oui" || $GLOBALS['meta']['multi_articles']=="oui") {
+	$multi_lang = $GLOBALS['meta']['multi_rubriques']=="oui" || $GLOBALS['meta']['multi_articles']=="oui";
+	if($multi_lang) {
 		$active_langs = "'".str_replace(",","','",$GLOBALS['meta']['langues_multilingue'])."'";
 		$flux .= "<script type='text/javascript' src='".find_in_path("multilang_mots.js")."'></script>\n".
 		"<script type='text/javascript'>\n".
@@ -19,10 +20,18 @@ function multilang_mot_cles_header_prive($flux) {
 		"multilang_init_lang({'page':'exec=mots_type','root':'#page','form_menu':'div.cadre-formulaire:eq(0)','fields':'input[@name=\'change_type\'],textarea'});\n".
 		"multilang_init_lang({'page':'exec=articles_edit','root':'#page','forms':'#liste_images form,#liste_documents form','fields':'input,textarea'});\n".
 		"multilang_init_lang({'page':'exec=articles','root':'#portfolio,#documents','fields':'input,textarea'});\n".
-		"onAjaxLoad(function(){forms_init_multi({'target':this})});\n".
-		"});\n".
-		"</script>\n";
+		"onAjaxLoad(function(){forms_init_multi({'target':this})});\n";
 	}
+	
+	if($GLOBALS['meta']['multi_rubriques']!="oui") {
+		$flux .= "multilang_init_lang({'page':'exec=rubriques_edit','root':'div.cadre-formulaire','fields':'input[@name=\'titre\'],textarea'});\n";
+	}
+	
+	if($multi_lang) {
+		$flux .= "});\n".
+		"</script>\n";
+	}	
+	
 	return $flux;
 }
 
