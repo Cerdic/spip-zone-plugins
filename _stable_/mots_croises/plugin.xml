@@ -35,7 +35,7 @@ _ Il n&eacute;cessite l'activation du plugin {{jQuery}} ou une version de spip s
 - soit &agrave; placer une introduction dans votre article entre les balises &lt;intro&gt; et &lt;/intro&gt;
 - soit &agrave; remplir le descriptif de l'article.
 	</description>
-	<lien>[http://www.spip-contrib.net/article1379.html]</lien> <!-- URI de documentation -->
+	<lien>[->http://www.spip-contrib.net/article1379.html]</lien> <!-- URI de documentation -->
 	<fonctions>mots_croises_fonctions.php</fonctions>
 	<options>mots_croises_options.php</options>
 	<prefix>mots_croises</prefix>
