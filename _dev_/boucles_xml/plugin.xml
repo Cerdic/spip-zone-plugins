@@ -23,9 +23,10 @@ xml au moyen des boucles spip. Les crit&egrave;res disponibles sont
 -* <code>{id_parent}</code>
 -* <code>{statut=noeud} {statut=feuille}</code>
 -* <code>{noeud=MonElement}</code> pour acceder directement a un noeud independamment de son arborescence
+-* <code>{attributs==monAttr=['"]truc['"]}</code> pour acceder directement a un noeud dont l attribut monAttr vaut truc
 -* NIY <code>{id_enfant}</code>
 
-Les balises utilses sont #XPATH, #NOEUD, #ATTRIBUTS (sur laquelle on utilisera le filtre extraire_attributs), et #TEXTE pour les feuilles (vide pour les noeuds)
+Les balises utilses sont #XPATH, #NOEUD, #ATTRIBUTS (sur laquelle on utilisera le filtre <code>|extraire{}</code>), et #TEXTE pour les feuilles (vide pour les noeuds)
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
