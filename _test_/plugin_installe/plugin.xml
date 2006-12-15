@@ -18,7 +18,7 @@ Ce plugin fournit une balise <code>#PLUGIN_PAS_INSTALLE</code> pour tester qu'un
 
 {[(#PLUGIN_PAS_INSTALLE{'monplugin'}|?{'',' '})&lt;INCLURE{fond=squelette_plugin}&gt;]}
 
-Pour que ce test ne fasse pas l'inclusion quand ce plugin n'est pas install&eacute;, le test de la balise est "invers&eacute": on test donc qu'un plugin n'est pas install&eacute;
+Pour que ce test ne fasse pas l'inclusion quand ce plugin n'est pas install&eacute;, le test de la balise est "invers&eacute;": on test donc qu'un plugin n'est pas install&eacute;
 [en]
 This plugin provides a new tag <code>#PLUGIN_PAS_INSTALLE</code> that allows you to test if a plugin is installed or not. This way, you can do a conditional inclusion:
 
