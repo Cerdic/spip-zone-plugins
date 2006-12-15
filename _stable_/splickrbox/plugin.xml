@@ -15,7 +15,7 @@
 	<description>
 	Noisette pour afficher les dernieres photos à la Flickr (le "badge") , tout ca en javascript via <code>#INSERT_HEAD</code> et le plugin JQuery.
 
--* On peut l'utiliser en modele avec <code><splickrbox></code>. en lui passant en option un parametre d'id pour limiter la boucle document,
+-* On peut l'utiliser en modele avec {&lt;splickrbox>&gt;}. en lui passant en option un parametre d'id pour limiter la boucle document,
 -* On peut l'utiliser dans les squelettes avec la balise <code>#MODELE{splickrbox}</code>
 -* On peut l'utiliser avec différent paramètres (qu'on peut aussi combiner):
 -** <code><splickrbox|right></code> et <code><splickrbox|left></code> pour les alignements
