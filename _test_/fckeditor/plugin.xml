@@ -6,7 +6,7 @@
 	<description>
 {{Edition WYSIWYG avec FCKeditor}}
 Cette version semble stable, n&eacute;anmoins, il se peut que certain firewall bloquent les scripts.
-<br><br>
+<br /><br />
 <u>Caract&eacute;ristiques :</u>
 -* - Seule la zone &laquo;texte&raquo; est &eacute;ditable,
 -* - Se substitue &agrave; la barre SPIP mais propose une option pour la r&eacute;&eacute;dition d'article initalement &eacute;cris avec l'&eacute;diteur SPIP,
