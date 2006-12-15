@@ -16,7 +16,7 @@
 
  Usage : 
 - dans le squelette : <code>[(#MODELE{article_portfolio,id_article})]</code>.<br />
-- dans le  texe : <code><articlexx|portfolio></code>
+- dans le  texte : {&lt;articlexx|portfolio&gt;}
 
 	</description>
 	<lien></lien> <!-- URI de documentation -->
