@@ -40,9 +40,9 @@ Rajoute une barre typographique enrichie et les raccourcis typographiques corres
 -** L'insertion des caract&egrave;res sp&eacute;ciaux
 
 {{Remarque}} : <code>{3{</code> est donc un synonyme de <code>{{{</code>, l'intertitre standard de Spip 
-	correspondant par defaut a une balise <code><h3 class="spip"></code>.
+	correspondant par defaut a une balise <code><h3 class="spip"></h3></code>.
 <code>{4{</code> et <code>{5{</code>, pour les intertitres de niveau 2 et 3, generent donc 
-	par defaut des balises <code><h4 class="spip"></code> et <code><h5 class="spip"></code>.
+	par defaut des balises <code><h4 class="spip"></h4></code> et <code><h5 class="spip"></h5></code>.
 	Ces valeurs sont modifiables dans mes_options.php en definissant les variables globales
 	<code>$debut_intertitre, $debut_intertitre_1, $fin_intertitre_2 ... $debut_intertitre_6</code>
 
