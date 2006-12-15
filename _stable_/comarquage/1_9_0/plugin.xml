@@ -15,9 +15,9 @@ _ Licence GPL
 	<description>
 	Gestion du flux XML documentaion francaise et insertion du comarquage dans le site
 _	le flux s'insere dans un article au moyen du tag 
-_ {<comarquage>}.
+_ {&lt;comarquage&gt;}.
 _ Vous pouvez pr&eacute;ciser une page pr&eacute;cise en definissant les attributs xml et xsl de l'url :
-_ {<comarquage xml='N333.xml' xsl='Noeud.xsl'>}
+_ {&lt;comarquage xml='N333.xml' xsl='Noeud.xsl'&gt;}
 
 Les parametres de connexion a la documentation francaise sont ajustables a la page [ecrire/?exec=admin_comarquage-> index.php?exec=admin_comarquage]
 
