@@ -8,7 +8,7 @@
 l'acces par differents canaux (wap, imode ...) ou simplement selon
 le browser (texte only ou pas par exemple)
 
-- si on precise <code>&LOOK=toto</code>, on va chercher les squelettes dans
+- si on precise <code>&amp;LOOK=toto</code>, on va chercher les squelettes dans
 squelettes/toto et on fixe un cookie "LOOK" pour garder ce look
 aux hits suivants
 - sinon, on regarde si le cookie existe

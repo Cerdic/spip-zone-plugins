@@ -3,7 +3,7 @@
 	Orientation des images: portrait ou paysage
 </nom>
 	<auteur>	<!-- Auteur du plugin -->
-	  Pierre Andrews (Mortimer) & IZO</auteur>
+	  Pierre Andrews (Mortimer) &amp; IZO</auteur>
 	<version>
 	0.1
 	</version>

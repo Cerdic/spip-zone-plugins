@@ -10,7 +10,7 @@ noms derriere le meme site web, il est possible de choisir des squelettes en
 fonction de ces noms et donc faire comme s'il y avait plusieurs sites
 (graphiquement parlant)
 
-- si on precise <code>&HOST=toto</code>, on va chercher les squelettes dans
+- si on precise <code>&amp;HOST=toto</code>, on va chercher les squelettes dans
 squelettes/toto et on fixe un cookie "HOST" pour garder ce nom aux hits suivants,
 ce qui permet de tester differentes valeurs, meme si je nom de dommaine n'est pas
 "cable"

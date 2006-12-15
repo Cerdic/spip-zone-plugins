@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	R&eacute;vision typographique (ins&eacute;cables & notes)
+	R&eacute;vision typographique (ins&eacute;cables &amp; notes)
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	fil@rezo.net
