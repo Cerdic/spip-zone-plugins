@@ -13,8 +13,9 @@ Insere une grille de mots croises dans vos articles !
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : [sudoku], [solution]
 separateurs optionnels   : [titre], [texte], [config]
-paramètres de configurations par defaut :
+parametres de configurations par defaut :
 	solution=oui	// Afficher la solution ?
+	regle=non	// Afficher la regle du jeu ?
 
 Tailles de sudoku acceptees : 4x4, 6x6, 9x9
 
@@ -41,13 +42,13 @@ Exemple de syntaxe dans l'article :
 */
 // affiche la grille de sudoku, en format solution au cas ou...
 function affichage_sudoku($tableau_sudoku, $indexJeux, $solution=false){
-	
+
 	// les variables de la grille
 	$largeur = $hauteur = sizeof($tableau_sudoku);
 	switch ($largeur) {
-	 case 4 : $interh = $interv = '24'; break;
-	 case 6 : $interh = '36'; $interv = '246'; break;
-	 case 9 : $interh = $interv = '369'; break;
+	 case 4 : $interh = $interv = '24'; $li = $lj = 2; break;
+	 case 6 : $interh = '36'; $interv = '246'; $lj = 3; $li = 2; break;
+	 case 9 : $interh = $interv = '369'; $li = $lj = 3; break;
 	 default : return '<p class="jeux_erreur">'._T('jeux:erreur_taille_grille').' : </p>' ;
 	}
     $grille='';
@@ -90,9 +91,11 @@ function affichage_sudoku($tableau_sudoku, $indexJeux, $solution=false){
 	// fin affichage des lignes
 	
 	$grille.="</table>\n";
+
 	
 	if (!$solution) $grille .= 
-		(jeux_config('solution')?"<p><input id=\"affiche_solution_$indexJeux\" name=\"affiche_solution_{$indexJeux}[]\" type=\"checkbox\" class=\"jeux_cocher\" value=\"1\" /><label for=\"affiche_solution_$indexJeux\" >"._T('jeux:afficher_solution')."</label></p>\n":'')
+		(jeux_config('regle')?'<p class="jeux_regle">'.definir_puce()._T('sudoku:regle',Array('hauteur'=>$li,'largeur'=>$lj, 'max'=>$largeur)).'</p>' : '')
+		.(jeux_config('solution')?"<p><input id=\"affiche_solution_$indexJeux\" name=\"affiche_solution_{$indexJeux}[]\" type=\"checkbox\" class=\"jeux_cocher\" value=\"1\" /><label for=\"affiche_solution_$indexJeux\" >"._T('jeux:afficher_solution')."</label></p>\n":'')
 		.'<p><input type="submit" value="'._T('jeux:verifier_validite')."\" name=\"bouton_envoi_$indexJeux\" /></p></form>\n";
 
 	return $grille;
@@ -176,6 +179,7 @@ function jeux_sudoku($texte, $indexJeux) {
 	$tableau = jeux_split_texte('sudoku', $texte);
 	jeux_config_init("
 		solution=oui	// Afficher la solution ?
+		regle=non	// Afficher la regle ?
 	", false);
 	foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];

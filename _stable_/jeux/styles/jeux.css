@@ -74,7 +74,11 @@
 /*	float:left;*/
 	clear:both;
 	text-align:left;
- 
+ }
+
+.jeux_regle{
+ font-size: 75%;
+ font-style:italic;
 }
 
 .jeux_cocher, .jeux_radio {

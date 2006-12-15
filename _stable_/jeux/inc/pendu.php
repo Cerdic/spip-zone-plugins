@@ -14,9 +14,9 @@ Insere un jeu de pendu dans vos articles !
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : [pendu]
 separateurs optionnels   : [titre], [texte]
-paramètres de configurations par defaut :
+parametres de configurations par defaut :
+	pendu=1		// dessin du pendu à utiliser (voir : /jeux/img/pendu?)
 	regle=non	// Afficher la règle du jeu ?
-	pendu=1		// dessin du pendu à utiliser dans : /jeux/img/pendu?
 
 Règles du jeu :
 - Vous devez choisir une lettre à chaque essai.
@@ -46,7 +46,8 @@ function pendu_pendu($texte) {
  $mot = $mots[array_rand($mots)];
  $question = str_repeat('_ ', strlen($mot));
  for($i=1; $i<=7; $i++) $p .= affiche_un_pendu($i) . '<br>';
- $texte = $p . $mot . '<br>' . $question. '<br>' . affiche_un_clavier();
+ $texte = $p . $mot . '<br>' . $question. '<br>' . affiche_un_clavier()
+ 	.(jeux_config('regle')?'<p class="jeux_regle">'.definir_puce()._T('pendu:regle').'</p>' : '');
  return $texte;
  //return $p . ($texte?"<p class=\"jeux_question pendu_pendu\">$texte</p>":'');
 }
@@ -83,8 +84,8 @@ function jeux_pendu($texte, $indexJeux) {
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('pendu', $texte);
   jeux_config_init("
-	regle=non	// Afficher la règle du jeu ?
 	pendu=1		// dessin du pendu à utiliser dans : /jeux/img/pendu?
+	regle=non	// Afficher la règle du jeu ?
   ", false);
   jeux_config_set('base_img', $f = _DIR_PLUGIN_JEUX.'img/pendu'.jeux_config('pendu').'/');
   lire_fichier ($f.'config.ini', $images);
