@@ -31,7 +31,7 @@ function boucle_EVENEMENTS_dist($id_boucle, &$boucles) {
 				$boucle->from["articles"] =  "spip_articles";
 				$boucle->where[]= array("'='", "'articles.id_article'", "'$id_table.id_article'");
 				$boucle->where[]= array("'='", "'articles.statut'", "'\"publie\"'");
-				$boucle->group[] = $boucle->id_table . '.' . $boucle->primary;
+				$boucle->group[] = $boucle->id_table . '.' . $boucle->primary;  
 			}
 	}
 
