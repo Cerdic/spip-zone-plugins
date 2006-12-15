@@ -15,9 +15,9 @@ _ Licence GPL
 	<description>
 	Gestion du flux XML de la Documentation fran&ccedil;aise et insertion du comarquage dans le site
 _	le flux s'ins&egrave;re dans un article au moyen de la balise
-_ <code><comarquage></code>
+_ {<comarquage>}
 _ Vous pouvez pr&eacute;ciser une page pr&eacute;cise en definissant les attributs xml et xsl de l'url :
-_ <code><comarquage xml='N333.xml' xsl='Noeud.xsl'></code>
+_ {<comarquage xml='N333.xml' xsl='Noeud.xsl'>}
 
 Les param&egrave;tres de connexion &agrave; La Documentation fran&ccedil;aise sont ajustables depuis la page [ecrire/?exec=admin_comarquage-> index.php?exec=admin_comarquage]
 Ce plugin n&eacute;cessite le plugin boucles_xml
