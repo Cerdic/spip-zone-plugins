@@ -23,7 +23,7 @@
 	Par d&eacute;faut allez sur la partie publique de votre site &agrave; l'adresse ?page=panneau_perso pour tester tout cela.
     
 	&Agrave; noter, par d&eacute;faut ce plugin est li&eacute; &agrave; l'utilisation du squelette standard livr&eacute;e avec spip 1.9.
-    Un lien d'acc&eacute;s au panneau de personnalisation est notamment accessible en bas de page dans ce cas l&aagave;.
+    Un lien d'acc&eacute;s au panneau de personnalisation est notamment accessible en bas de page dans ce cas l&agrave;.
 
 	Si vous avez un squelette personnalis&eacute;, vous devrez modifier les css zoom.css et inverse.css
 	dans le repertoire css de ce plugin ainsi qu'adapter votre inc-head pour que #INSERT_HEAD soit
