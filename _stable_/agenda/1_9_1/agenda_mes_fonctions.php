@@ -22,7 +22,15 @@ function boucle_EVENEMENTS_dist($id_boucle, &$boucles) {
 	$boucle->from[$id_table] =  "spip_evenements";
 
 	// Restreindre aux elements publies
-	if (!$boucle->statut) {
+/* Modif Patrice : Commit SPIP 8062
+$boucle->statut devient deprecie et est remplacé par
+$boucle->modificateur['criteres']['statut']
+Il vous faut donc mettre a jour le code des boucles qui utilisent ce critere
+Pour avoir une compatibilité trans version il faut ecrire le test sous la forme :
+if ($boucle->statut OR $boucle->modificateur['criteres']['statut'])
+*/	
+$temp_statut = $boucle->statut OR $boucle->modificateur['criteres']['statut'];
+	if (!$temp_statut) {
 		// Si pas de lien avec un article, selectionner
 		// uniquement les auteurs d'un article publie
 		if (!$GLOBALS['var_preview'])
