@@ -24,7 +24,7 @@
 -# Page (cach&eacute;e: exec=update_date_exif) pour synchroniser les photos qui existent d&eacute;j&agrave; pour avoir la date exif dans la base &agrave; la place de la date de transfert,
 -# Les nouvelles photos transfer&eacute;es prendront automatiquement la date EXIF si elle est disponible,
 -# Quelques informations EXIF (commentaire, marque et mod&egrave;le de l'appareil photo) sont index&eacute;es par le moteur de recherche.
--# Un mod&egrave;le <code><doc1|exif></code> permet d'afficher la photo avec ses tags EXIF comme descriptif (stylage &agrave; revoir !)
+-# Un mod&egrave;le {&lt;doc1|exif&gt;} permet d'afficher la photo avec ses tags EXIF comme descriptif (stylage &agrave; revoir !)
 	  [en]
 -# New SPIP tag <code>#EXIF</code> to display [?EXIF] information from your image,
 -# <code>#EXIF{EXIF}</code> to display an EXIF data subfamily, <code>#EXIF{EXIF,ExposureTime}</code> to display a specific information;
