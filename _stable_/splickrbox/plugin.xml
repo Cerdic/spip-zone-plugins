@@ -18,9 +18,9 @@
 -* On peut l'utiliser en modele avec {&lt;splickrbox>&gt;}. en lui passant en option un parametre d'id pour limiter la boucle document,
 -* On peut l'utiliser dans les squelettes avec la balise <code>#MODELE{splickrbox}</code>
 -* On peut l'utiliser avec différent paramètres (qu'on peut aussi combiner):
--** <code><splickrbox|right></code> et <code><splickrbox|left></code> pour les alignements
--** <code><splickrbox|taille=24></code> permet de specifier le nombre de vignettes à afficher. Ce nombre devrais ètre un multiple du nombre de colonnes.
--** <code><splickrbox|colonnes=10></code> permet de specifier le nombre de colonnes à afficher.
+-** {&lt;splickrbox|right&gt;} et {&lt;splickrbox|left&gt;} pour les alignements
+-** {&lt;splickrbox|taille=24&gt;} permet de specifier le nombre de vignettes à afficher. Ce nombre devrais ètre un multiple du nombre de colonnes.
+-** {&lt;splickrbox|colonnes=10&gt;} permet de specifier le nombre de colonnes à afficher.
 	</description>
 	<lien>http://trac.rezo.net/trac/spip-zone/wiki/SplickrBox</lien> <!-- URI de documentation -->
 	<prefix>
