@@ -18,7 +18,7 @@
 	
 	Ce plugin met &agrave; disposition du webmaster une balise #FORMULAIRE_PERSONNALISATION.
     
-	Une fois int&eacute;gr&eacute;e dans vos squelettes elle g&eacute;n&eagrave;re un formulaire proposant &agrave; vos visiteurs de choisir
+	Une fois int&eacute;gr&eacute;e dans vos squelettes elle g&eacute;n&egrave;re un formulaire proposant &agrave; vos visiteurs de choisir
 	parmis diff&eacute;rent mode d'affichage (zoomer, inverse, etc) et parmis diff&eacute;rent mode de navigation. 
 	Par d&eacute;faut allez sur la partie publique de votre site &agrave; l'adresse ?page=panneau_perso pour tester tout cela.
     
