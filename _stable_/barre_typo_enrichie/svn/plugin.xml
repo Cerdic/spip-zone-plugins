@@ -27,9 +27,9 @@ Attention, la barre n&eacute;cessite que le plugin jquery soit lui aussi install
 -* Caract&egrave;res :
 -** {{Mise en &eacute;vidence}} <code>[*</code>texte en &eacute;vidence<code>*]</code>
 -** {{Mise en &eacute;vidence variante}} <code>[**</code>texte en &eacute;vidence (autre couleur)<code>*]</code>
--** {{Mise en exposant}} <code><sup></code>texte en exposant<code></sup></code>
--** {{Petites capitales}} <code><sc></code>texte en petite capitales<code></sc></code>
--** {{Biff&eacute;}} <code><del></code>texte biff&eacute;<code></del></code>
+-** {{Mise en exposant}} {&lt;sup&gt;}texte en exposant{&lt;/sup&gt;}
+-** {{Petites capitales}} {&lt;sc&gt;}texte en petite capitales{&lt;/sc&gt;}
+-** {{Biff&eacute;}} {&lt;del&gt;}texte biff&eacute;{&lt;/del&gt;}
 -** {{Bulle d'aide}} <code>[GPL|Gnu Public Licence]</code>
 _ Et aussi sur les entr&eacute;es de glossaire <code>[?GPL|Gnu Public Licence]</code>
 -** {{Lien avec bulle d'aide}} <code>[texte du lien|Le site officiel de SPIP->http://www.spip.net/]</code>
