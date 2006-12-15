@@ -14,7 +14,7 @@
   <description>
   Un portfolio utilisant la pagination SPIP et des vignettes pour naviguer
 _ A utiliser avec la pagination ahah SPIP
-_ S'utilise par un <code><INCLURE{fond=inc-portfolio}{id_article}{nb_vignettes=5}{debut_afficher_document}{self=#SELF}></code>
+_ S'utilise par un {&lt;INCLURE{fond=inc-portfolio}{id_article}{nb_vignettes=5}{debut_afficher_document}{self=#SELF}&gt;}
   </description>
 	<lien></lien> <!-- URI de documentation -->
   <prefix>
