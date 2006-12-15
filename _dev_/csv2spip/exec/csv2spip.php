@@ -238,11 +238,11 @@ function exec_csv2spip() {
 					 $Tch_rub = explode(',', $_POST['rub_parent']);
 					 $rubrique_parent = $Tch_rub[0];
 					 $secteur = $Tch_rub[1];
-					 $sql8 = spip_query("SELECT ss_groupe FROM tmp_auteurs WHERE LOWER(groupe) = '$groupe_admins' GROUP BY ss_groupe");
+					 $sql8 = spip_query("SELECT ss_groupe FROM tmp_auteurs WHERE LOWER(groupe) = '$groupe_admins' AND ss_groupe != '' GROUP BY ss_groupe");
 					 if (isset($sql8)) {
     					 while ($data8 = spip_fetch_array($sql8)) {
     					 			 $rubrique_ec = $data8['ss_groupe']; 
-										 if ($rubrique_ec != '') {
+//										 if (trim($rubrique_ec) != '') {
         								 $sql7 = spip_query("SELECT COUNT(*) AS rub_existe FROM $Trubriques WHERE titre = '$rubrique_ec' LIMIT 1");
         								 $data7 = spip_fetch_array($sql7);
         								 if ($data7['rub_existe'] > 0) {
@@ -256,7 +256,7 @@ function exec_csv2spip() {
     										 else {
     										 			$Tres_rub[] = $rubrique_ec;
     										 }
-										 }
+//										 }
     					 }
 					 }		
   				 if (count($Terr_rub) > 0) {  
@@ -338,27 +338,31 @@ function exec_csv2spip() {
     					 $sql18= spip_query("SELECT ss_groupe FROM tmp_auteurs ".$sql_sup." GROUP BY ss_groupe");
 //echo '<br>mysql_error $sql18 = '.mysql_error();							 
     					 while ($data18 = spip_fetch_array($sql18)) {
-    					 			 $grpe_ec = $data18['ss_groupe']; 										 
-    								 $sql17 = spip_query("SELECT id_grpacces FROM $Taccesgroupes_groupes WHERE nom = '$grpe_ec' LIMIT 1");
-//echo '<br>mysql_error $sql17 = '.mysql_error();											 
-    							// le groupe existe déja
-										 if (spip_num_rows($sql17) > 0) {
-    								 	// stocker l'id_grpacces du groupe dans $Tgrpes_accesgroupes[$nom_ss-grpe]
-												$data17 = spip_fetch_array($sql17);
-												$Tgroupes_accesgroupes[$grpe_ec] = $data17['id_grpacces'];
-										 // si nécessaire vider le groupe de ses utilisateurs
-										    if ($_POST['ss_grpes_reinitialiser'] == 1) {
-													 $id_grpacces_asupr = $data17['id_grpacces'];
-													 spip_query("DELETE FROM $Taccesgroupes_auteurs WHERE id_grpacces = $id_grpacces_asupr");
-													 if (mysql_error() != '') {
-													 		$Terr_vider_accesgroupes[] = array('ss_groupe' => $grpe_ec, 'erreur' => mysql_error());
-													 }
-													 else {
-													 			$Tres_vider_accesgroupes[] = $id_grpacces_asupr;
-													 }
-												}
-												continue;
-    								 }
+    					 		// créer les sous-groupes
+										 if ($data18['ss_groupe'] != '') {
+    										 $grpe_ec = $data18['ss_groupe']; 				
+echo '<br>$grpe_ec = _'.$grpe_ec.'_';
+        								 $sql17 = spip_query("SELECT id_grpacces FROM $Taccesgroupes_groupes WHERE nom = '$grpe_ec' LIMIT 1");
+    //echo '<br>mysql_error $sql17 = '.mysql_error();											 
+        							// le groupe existe déja
+    										 if (spip_num_rows($sql17) > 0) {
+        								 	// stocker l'id_grpacces du groupe dans $Tgrpes_accesgroupes[$nom_ss-grpe]
+    												$data17 = spip_fetch_array($sql17);
+    												$Tgroupes_accesgroupes[$grpe_ec] = $data17['id_grpacces'];
+    										 // si nécessaire vider le groupe de ses utilisateurs
+    										    if ($_POST['ss_grpes_reinitialiser'] == 1) {
+    													 $id_grpacces_asupr = $data17['id_grpacces'];
+    													 spip_query("DELETE FROM $Taccesgroupes_auteurs WHERE id_grpacces = $id_grpacces_asupr");
+    													 if (mysql_error() != '') {
+    													 		$Terr_vider_accesgroupes[] = array('ss_groupe' => $grpe_ec, 'erreur' => mysql_error());
+    													 }
+    													 else {
+    													 			$Tres_vider_accesgroupes[] = $id_grpacces_asupr;
+    													 }
+    												}
+    												continue;
+        								 }
+										 }
 										 $desc_grpe_csv2spip = _T('csvspip:grpe_csv2spip');
     								 spip_query("INSERT INTO $Taccesgroupes_groupes (id_grpacces, nom, description, actif, proprio, demande_acces) 
 										 						 VALUES ('', '$grpe_ec', '$desc_grpe_csv2spip', 1, 0, 0)" );
@@ -445,12 +449,13 @@ function exec_csv2spip() {
 				$TerrV_eff_accesgroupes = array();
 				
 		// communs
-			  $Tres_maj_grpacces[] = array();
-				$Terr_maj_grpacces[] = array();
-				$Tres_maj_rub_admin[] = array();
-				$Terr_maj_rub_admin[] = array();
+			  $Tres_maj_grpacces = array();
+				$Terr_maj_grpacces = array();
+				$Tres_maj_rub_admin = array();
+				$Terr_maj_rub_admin = array();
 				
-  			$sql157 = spip_query("SELECT * FROM tmp_auteurs");
+  	// LA boucle : gère 1 à 1 les utilisateurs de tmp_auteurs en fonction des options => TOUS !
+				$sql157 = spip_query("SELECT * FROM tmp_auteurs");
   			while ($data157 = spip_fetch_array($sql157)) {
   			 			 if ($data157['pseudo_spip'] != '') {
 							 		$nom = ucwords($data157['pseudo_spip']);
@@ -536,6 +541,7 @@ function exec_csv2spip() {
 												}
 										}
 							 }
+
 												 
 // 4.3 : intégrer l'auteur dans son ss-groupe acces_groupes si nécessaire 
   						 if (($ss_groupes_redac == 1 AND $statut == '1comite') OR ($ss_groupes_admin == 1 AND $statut == '0minirezo') OR ($ss_groupes_visit == 1 AND $statut == '6forum')) {
@@ -951,7 +957,7 @@ function exec_csv2spip() {
 						}
 						if ($_POST['maj_rub_adm'] == 1) {
 							 echo "<br>"._T('csvspip:etape4.2.3')."<br>";
-							 if (count($Terr_maj_grpacces) > 0) {
+							 if (count($Terr_maj_rub_admin) > 0) {
 							 		echo "<span class=\"Cerreur\">"._T('csvspip:err_maj_rub_adm');
           			  foreach ($Terr_maj_rub_admin as $Pera) { 
         	 		 						echo _T('csvspip:utilisateur').$Pera['login']._T('csvspip: erreur').$Pera['erreur']."<br>";
@@ -1302,9 +1308,10 @@ echo "</script>";
 		  	 echo "";
 			   if ($nb_rubriques > 0) {   		
 		  	    echo"<br><br><strong>"._T('csvspip:choix_parent_archive')."</strong>"; 
+				    $sql10 = spip_query("SELECT id_rubrique, titre, id_secteur FROM $Trubriques ORDER BY titre");
         		echo "<select name=\"rub_parent_archivage\">";
         		echo "<option value=\"0,0\" selected=\"selected\">"._T('csvspip:racine_site')."</option>";
-				    $sql10 = spip_query("SELECT id_rubrique, titre, id_secteur FROM $Trubriques ORDER BY id_rubrique");
+						
 				 		while ($data10 = spip_fetch_array($sql10)) { 
 				 			     echo "<option value=\"".$data10['id_rubrique'].",".$data10['id_secteur']."\">".$data10['titre']."</option>";
 			 		  }				 						
@@ -1331,7 +1338,7 @@ echo "</script>";
 				  echo "<br /><strong>"._T('csvspip:choix_parent_rubriques')."</strong>"; 
       		echo "<select name=\"rub_parent\">";
       		echo "<option value=\"0,0\" selected=\"selected\">"._T('csvspip:racine_site')."</option>";
-				  $sql10 = spip_query("SELECT id_rubrique, titre, id_secteur FROM $Trubriques ORDER BY id_rubrique");
+				  $sql10 = spip_query("SELECT id_rubrique, titre, id_secteur FROM $Trubriques ORDER BY titre");
 					while ($data10 = spip_fetch_array($sql10)) { 
 				 			  echo "<option value=\"".$data10['id_rubrique'].",".$data10['id_secteur']."\">".$data10['titre']."</option>";
 			 		}  	
@@ -1353,7 +1360,7 @@ echo "</script>";
 				  echo "<br/><br/><strong>"._T('csvspip:choix_parent_rub_admin_defaut')."</strong>"; 
       		echo "<select name=\"rub_parent_admin_defaut\">";
       		echo "<option value=\"0,0\" selected=\"selected\">"._T('csvspip:racine_site')."</option>";
-				  $sql108 = spip_query("SELECT id_rubrique, titre, id_secteur FROM $Trubriques ORDER BY id_rubrique");
+				  $sql108 = spip_query("SELECT id_rubrique, titre, id_secteur FROM $Trubriques ORDER BY titre");
 					while ($data108 = spip_fetch_array($sql108)) { 
 				 			  echo "<option value=\"".$data108['id_rubrique'].",".$data108['id_secteur']."\">".$data108['titre']."</option>";
 			 		}  	
