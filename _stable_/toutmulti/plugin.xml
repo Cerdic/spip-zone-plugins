@@ -13,7 +13,7 @@ _ &copy; 2005 - Distribu&eacute; sous licence GNU/GPL
 	test
 	</etat>
 	<description>
-	Introduit le raccourci <code><:texte:></code> pour introduire librement des blocs multi dans un flux de texte (via typo ou propre).
+	Introduit le raccourci {&lt;:texte:&gt;} pour introduire librement des blocs multi dans un flux de texte (via typo ou propre).
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
