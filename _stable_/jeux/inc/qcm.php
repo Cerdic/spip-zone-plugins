@@ -14,7 +14,9 @@
 
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : [qcm], oui [quiz]
-separateurs optionnels   : [titre], [texte]
+separateurs optionnels   : [titre], [texte], [config]
+paramètres de configurations par defaut :
+	trou=auto	// taille du trou affiche en cas de proposition unique
 
 Exemple de syntaxe dans l'article :
 ------------------------------------
@@ -125,10 +127,12 @@ function qcm_les_points($phrase, $points) {
 	return $phrase;  
 }
 
-function qcm_afficher_le_trou($nomVarSelect, $indexQCM) {
+function qcm_un_trou($nomVarSelect, $indexQCM) {
   global $qcms;
-  $sizeInput = 0;
-  foreach($qcms[$indexQCM]['propositions'] as $mot) $sizeInput = max($sizeInput, strlen($mot));
+  if (($sizeInput = intval(jeux_config('trou')))==0) {
+	$sizeInput = 0;
+	foreach($qcms[$indexQCM]['propositions'] as $mot) $sizeInput = max($sizeInput, strlen($mot));
+  }
   $prop = strtolower($_POST[$nomVarSelect] = trim($_POST[$nomVarSelect]));
   return " <input name=\"$nomVarSelect\" class=\"jeux_input\" size=\"$sizeInput\" type=\"text\"> ";
 }
@@ -158,9 +162,9 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corrigee, $gestionPoint
       // S'il y a plus de 5 choix, on utilise une liste
       // Sinon, entre 2 et 4 choix, des radio boutons
 	  if ($trou) {
-        $codeHTML.=qcm_afficher_le_trou($nomVarSelect, $indexQCM);
+        $codeHTML.=qcm_un_trou($nomVarSelect, $indexQCM);
       } elseif ($qcms[$indexQCM]['nbpropositions']>5) {
-        $codeHTML.='<select name="'.$nomVarSelect.'" class="qcm_select">';
+        $codeHTML.='<select name="'.$nomVarSelect.'" class="qcm_select"><option value="">'._T('jeux:votre_choix').'</option>';
 		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) $codeHTML.="<option value=\"$i\">$valeur</option>";
 		$codeHTML.='</select>';
       } else {
@@ -232,6 +236,9 @@ function jeux_qcm($texte, $indexJeux) {
 
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('qcm', $texte);
+  jeux_config_init("
+	trou=auto	// taille du trou affiche en cas de proposition unique
+  ", false);
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
 	  elseif ($valeur==_JEUX_QCM || $valeur==_JEUX_QUIZ) {

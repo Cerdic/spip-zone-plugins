@@ -18,6 +18,9 @@ Insere un test de closure dans vos articles !
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : [texte], [trou]
 separateurs optionnels   : [titre], [config]
+paramètres de configurations par defaut :
+	taille=auto	// taille des trous
+	indices=oui	// afficher les indices ?
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
@@ -73,8 +76,10 @@ function trous_inserer_les_trous($chaine, $indexJeux) {
 	$indexTROU = intval($eregResult[1]);
 	list($texteAvant, $texteApres) = explode($eregResult[0], $chaine, 2); 
 	$texteApres = trous_inserer_les_trous($texteApres, $indexJeux);
-	$sizeInput = 0;
-	foreach($propositionsTROUS as $trou) foreach($trou as $mot) $sizeInput = max($sizeInput, strlen($mot));
+	if (($sizeInput = intval(jeux_config('taille')))==0) {
+		$sizeInput = 0;
+		foreach($propositionsTROUS as $trou) foreach($trou as $mot) $sizeInput = max($sizeInput, strlen($mot));
+	}
 	$chaine = $texteAvant.jeux_rem('TROU-DEBUT', $indexTROU)
 		. trous_inserer_le_trou($indexJeux, $indexTROU, $sizeInput, isset($_POST["var_correction_".$indexJeux]))
 		. jeux_rem('TROU-FIN', $indexTROU)
@@ -100,6 +105,10 @@ function jeux_trous($texte, $indexJeux) {
 
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('trous', $texte); 
+  jeux_config_init("
+	taille=auto	// taille des trous
+	indices=oui	// afficher les indices ?
+  ", false);
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
