@@ -16,6 +16,8 @@ Insere un rebus dans vos articles !
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : [rebus], [solution]
 separateurs optionnels   : [titre], [texte]
+paramètres de configurations par defaut :
+	solution=oui	// Afficher la solution ?
 
 Exemple de syntaxe dans l'article :
 -----------------------------------

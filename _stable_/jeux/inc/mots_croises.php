@@ -16,7 +16,7 @@ balises du plugin : <jeux></jeux>
 separateurs obligatoires : [horizontal], [vertical], [solution]
 separateurs optionnels   : [titre], [texte], [config]
 paramètres de configurations par defaut :
-	solution=oui	// Afficher de la solution ?
+	solution=oui	// Afficher la solution ?
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
@@ -40,13 +40,13 @@ Exemple de syntaxe dans l'article :
 
 */
 
-//retourne la lettre correspondant au chiffre
-function lettre_grille($texte) {
-	$alphabet="*ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	return $alphabet[$texte];
+// retourne la lettre correspondant au chiffre
+function lettre_grille($chiffre) {
+	$alphabet = _T('jeux:alphabet');
+	return $alphabet[$chiffre-1];
 }
 
-//affiche la grille de mot croises, avec la solution au cas ou
+// affiche la grille de mot croises, avec la solution au cas ou
 function affichage_grille_mc($tableau_grille, $indexJeux, $solution=false){
 	
 	// les variables de la grille
@@ -152,7 +152,7 @@ function jeux_mots_croises($texte, $indexJeux) {
   // parcourir tous les #SEPARATEURS
 	$tableau = jeux_split_texte('mots_croises', $texte);
 	jeux_config_init("
-		solution=oui	// Afficher de la solution ?
+		solution=oui	// Afficher la solution ?
 	", false);
 	foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];

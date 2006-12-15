@@ -4,8 +4,10 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'votre_choix' => "La tua risposta: ",
+'alphabet'	=>	"ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 
+'votre_choix' => "La tua risposta: ",
+'votre_reponse' => "La tua risposta: ",
 'corriger'		=> 'Controlla',	
 'verifier' 		=> 'Controlla',
 'verifier_validite' 	=> 'Controlla la validità', 
@@ -35,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bravo'				=> "Complimenti!",
 
 'erreur_taille_grille'	=> "Errore: invalid size",
+'erreur_syntaxe'	=> "Errore di sintassi ",
 
 );
 

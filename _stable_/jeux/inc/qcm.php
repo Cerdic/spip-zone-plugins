@@ -8,12 +8,12 @@
 /*
 
  Insere un QCM dans vos articles !
----------------------------------------
+----------------------------------
  Idee originale de Mathieu GIANNECCHINI
 ---------------------------------------
 
 balises du plugin : <jeux></jeux>
-separateurs obligatoires : [qcm], oui [quiz] // TODO : le titre optionnel...
+separateurs obligatoires : [qcm], oui [quiz]
 separateurs optionnels   : [titre], [texte]
 
 Exemple de syntaxe dans l'article :
@@ -22,20 +22,17 @@ Exemple de syntaxe dans l'article :
 <jeux>
 	[titre]
 	Un titre pour le QCM !
-
 	[qcm]
 	Q Une question bla bla
 	P1 Une proposition 1
 	P2 Une proposition 2
 	P3 Une proposition 3 (la bonne réponse)
 	R3 (la réponse 3 est la bonne !)
-
 	[qcm]
 	Q Une question encore
 	P1.2 Une proposition à 2 points (la bonne réponse)
 	P2 Une proposition 2
 	R1
-
 	[qcm]
 	Q Une question pour finir
 	P1 Une proposition 1|Un commentaire 1
@@ -47,21 +44,27 @@ Exemple de syntaxe dans l'article :
 	R3
 </jeux>
 
+Cas particulier : lorsque l'utilisateur doit lui-meme taper la reponse :
+<jeux>
+[qcm]
+Q Citez une planete du systeme solaire :
+P mercure venus terre mars jupiter saturne uranus neptune
+</jeux>
+
+La liste des mots a placer apres "P" peut accepter 
+les separateurs usuels : 
+	retours à la ligne, tabulations, espaces
+	virgules, point-virgules, points
+Pour une expression comprenant des espaces, utiliser les 
+guillemets ou le signe + :
+	par ex. : "afin de" est equivalent a : afin+de
+Les minuscules ou majuscules peuvent etre utilisees indifferemment.
+La gestion des points et des précisions est toujours possible :
+	P.4 mercure venus terre mars jupiter saturne uranus neptune|saviez-vous que pluton n'est plus une planete ?
+
 */
 
-/* à supprimer à terme...
 
-  Nom du plugin      : 	Un QCM dans vos articles
-  Auteur             : 	Patrice VANNEUFVILLE 
- 						(sur une idee originale de Mathieu GIANNECCHINI, 2003) 
-  Date               : 	30 octobre 2006
-  Fonction du plugin : 	Parse le code du QCM tape dans SPIP et stocke
-                       	les questions, reponses et commentaires
-                       	dans un tableau et retourne le code HTML du QCM
-  
-*/
- 
- 
 // cette fonction remplit le tableau $qcms sur la question $indexQCM
 function qcm_analyse_le_qcm($qcm, $indexQCM) {
   global $qcms;
@@ -69,25 +72,19 @@ function qcm_analyse_le_qcm($qcm, $indexQCM) {
   foreach ($lignes as $ligne) {
 	$li=trim($ligne); 
     switch($li[0]){
-      case 'Q' : 
-	  	// On extrait la question
+      case 'Q' : 	  	// On extrait la question
 		$qcms[$indexQCM]['question'] = trim(substr($li, 1));
 		$qcms[$indexQCM]['maxscore'] = 0;
 		$qcms['nbquestions']++;
         break;
-
-      case 'P' : 
-	  	// On extrait une proposition
-		
-	  	// On extrait les precisions de la proposition
+      case 'P' : 	  	// On extrait une proposition
+	  	// Pour les precisions de la proposition...
 	 	list($reponse, $precision)=explode("|", $li);
-	
 		// On extrait le numero de la proposition et son contenu
-		ereg("^P([0-9]+)(.*)", $reponse, $eregResult);	
-		$indexProposition = $eregResult[1];
+		ereg("^P([0-9]*)(.*)", $reponse, $eregResult);	
+		$indexProposition = intval($eregResult[1]);
 		$suiteProposition = trim($eregResult[2]);
 		$qcms[$indexQCM]['nbpropositions']++;
-
         // On extrait les points eventuellement associes a chaque reponse
         if(ereg("^\.(-?[0-9]+)(.*)", $suiteProposition, $eregResult)){
           $qcms[$indexQCM]['points'][$indexProposition] = intval($eregResult[1]);
@@ -96,21 +93,22 @@ function qcm_analyse_le_qcm($qcm, $indexQCM) {
 		else {
           $qcms[$indexQCM]['points'][$indexProposition] = 0;
           $qcms[$indexQCM]['propositions'][$indexProposition] = $suiteProposition;
-        }     
-		
+        }
 		// la precision eventuelle...
        	$qcms[$indexQCM]['precisions'][$indexProposition] = trim($precision);
+		// cas d'un trou (ou d'une proposition non numerotee !)
+		if ($indexProposition==0) {
+			$qcms[$indexQCM]['maxscore'] = $qcms[$indexQCM]['points'][0] = max($qcms[$indexQCM]['points'][0], 1);
+			$qcms[$indexQCM]['propositions'] = jeux_liste_mots_min($qcms[$indexQCM]['propositions'][0]);
+			$qcms[$indexQCM]['nbpropositions'] = 1;
+		}
 		break;
-	
-      case 'R' :
-		// On recupere le numero et les points de la bonne reponse
+      case 'R' :		// On recupere le numero et les points de la bonne reponse
 		ereg("^R([0-9]+)", $li, $eregResult);	
 		$qcms[$indexQCM]['bonnereponse'] = $eregResult[1];
-
 		// au cas ou les points ne sont pas specifies pour la bonne reponse
 		if ($qcms[$indexQCM]['points'][$eregResult[1]]==0) 
 		  $qcms[$indexQCM]['points'][$eregResult[1]] = 1;
-
 		// total des points des bonnes reponses
 		$qcms[$indexQCM]['maxscore'] = $qcms[$indexQCM]['points'][$eregResult[1]];
 		break;
@@ -127,13 +125,23 @@ function qcm_les_points($phrase, $points) {
 	return $phrase;  
 }
 
-function qcm_affiche_la_question($indexQCM, $corrigee, $gestionPoints) {
-  global $qcms, $qcm_score;
-  if ($qcms[$indexQCM]['propositions']==0) return '';
+function qcm_afficher_le_trou($nomVarSelect, $indexQCM) {
+  global $qcms;
+  $sizeInput = 0;
+  foreach($qcms[$indexQCM]['propositions'] as $mot) $sizeInput = max($sizeInput, strlen($mot));
+  $prop = strtolower($_POST[$nomVarSelect] = trim($_POST[$nomVarSelect]));
+  return " <input name=\"$nomVarSelect\" class=\"jeux_input\" size=\"$sizeInput\" type=\"text\"> ";
+}
 
+function qcm_affiche_la_question($indexJeux, $indexQCM, $corrigee, $gestionPoints) {
+  global $qcms, $qcm_score;
+  if (!$qcms[$indexQCM]['nbpropositions'] || !$qcms[$indexQCM]['maxscore']) 
+  	return "<div class=\"jeux_question\">".definir_puce()._T('jeux:erreur_syntaxe').'</div><br />';
+//print_r($qcms[$indexQCM]);
   // Initialisation du code a retourner
-  $nomVarSelect = 'var_Q'.$indexQCM;
+  $nomVarSelect = "var{$indexJeux}_Q{$indexQCM}";
   $question = trim(str_replace('&nbsp;', ' ', $qcms[$indexQCM]['question']));
+  $trou = $qcms[$indexQCM]['nbpropositions']==1;
   
   // affichage des points dans la question
   if ($gestionPoints) {
@@ -146,16 +154,18 @@ function qcm_affiche_la_question($indexQCM, $corrigee, $gestionPoints) {
     // affichage sans correction :
      $codeHTML.="\n<div class=\"qcm_proposition\">";
 
-      // Si il ya plus de 5 choix, on utilise une liste
-      if(count($qcms[$indexQCM]['propositions'])>5){
+      // S'il n'y a qu'1 seul choix, on affiche un trou
+      // S'il y a plus de 5 choix, on utilise une liste
+      // Sinon, entre 2 et 4 choix, des radio boutons
+	  if ($trou) {
+        $codeHTML.=qcm_afficher_le_trou($nomVarSelect, $indexQCM);
+      } elseif ($qcms[$indexQCM]['nbpropositions']>5) {
         $codeHTML.='<select name="'.$nomVarSelect.'" class="qcm_select">';
 		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) $codeHTML.="<option value=\"$i\">$valeur</option>";
 		$codeHTML.='</select>';
-      }
-      // Sinon des radio boutons
-      else {
+      } else {
 		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) 
-          $codeHTML.='<input type="radio" class="qcm_radio" name="'.$nomVarSelect
+          $codeHTML.='<input type="radio" class="jeux_radio qcm_radio" name="'.$nomVarSelect
 		  	. '" value="'.$i.'" id="'.$nomVarSelect.$i.'"><label for="'.$nomVarSelect.$i.'">&nbsp;'
           	. $valeur.'</label><br />';
        }
@@ -167,27 +177,29 @@ function qcm_affiche_la_question($indexQCM, $corrigee, $gestionPoints) {
   else {
  	 if ($_POST[$nomVarSelect]) {
 		// les points de la reponse donnee...
-		$pointsR = $qcms[$indexQCM]['points'][$_POST[$nomVarSelect]];
+		$pointsR = $qcms[$indexQCM]['points'][$trou?0:$_POST[$nomVarSelect]];
 		
 		// la reponse donnee & precision des points eventuels de la mauvaise reponse...
+		$intro=$trou?_T('jeux:votre_reponse'):_T('jeux:votre_choix');
 		$codeHTML.='<div class="qcm_reponse">'
-			 .((($pointsR==$pointsQ) || ($pointsR==0))?_T('jeux:votre_choix'):qcm_les_points(_T('jeux:votre_choix'), $pointsR))
-			 .$qcms[$indexQCM]['propositions'][$_POST[$nomVarSelect]].'</div>';
+			 .((($pointsR==$pointsQ) || ($pointsR==0))?$intro:qcm_les_points($intro, $pointsR))
+			 .($trou?$_POST[$nomVarSelect]:$qcms[$indexQCM]['propositions'][$_POST[$nomVarSelect]])
+			 .'</div>';
 
-		// on donne les points de la reponse quoiqu'il arrive
-		$qcm_score += $pointsR;
-		
-        if ($qcms[$indexQCM]['bonnereponse']==$_POST[$nomVarSelect]) 
-        // Si c'est juste
+		// bonne reponse
+		$bonneReponse = ($trou && in_array($_POST[$nomVarSelect], $qcms[$indexQCM]['propositions']))
+			|| ($qcms[$indexQCM]['bonnereponse']==$_POST[$nomVarSelect]);
+
+		// si ce n'est pas un trou, on donne les points de la reponse quoiqu'il arrive
+		if (!$trou || $bonneReponse) $qcm_score += $pointsR;
+			
+        if ($bonneReponse)
 			$codeHTML .= '<div class="qcm_correction_juste">'._T('qcm:qcm_reponseJuste').'</div>';
-        // Si c'est faux
          else $codeHTML .= '<div class="qcm_correction_faux">'._T('qcm:qcm_reponseFausse').'</div>';
            
         // les precisions eventuelles
-        if ($qcms[$indexQCM]['precisions'][$_POST[$nomVarSelect]]<>"")
-             $codeHTML.='<div align="center"><div class="qcm_precision">'
-				 .$qcms[$indexQCM]['precisions'][$_POST[$nomVarSelect]]
-	     	 	 .'</div></div>';
+		$prec = $qcms[$indexQCM]['precisions'][$trou?0:$_POST[$nomVarSelect]];
+        if ($prec<>"") $codeHTML.="<div align=\"center\"><div class=\"qcm_precision\">$prec</div></div>";
 
 	// pas de reponse postee...
 	} else $codeHTML.='<div class="qcm_correction_null">'._T('qcm:qcm_reponseNulle').'</div>';
@@ -204,7 +216,7 @@ function qcm_inserer_les_qcm(&$chaine, $indexJeux, $gestionPoints) {
 	$indexQCM = intval($eregResult[1]);
 	list($texteAvant, $texteApres) = explode($eregResult[0], $chaine, 2); 
 	$chaine = $texteAvant.jeux_rem('QCM-DEBUT', $indexQCM)
-		. qcm_affiche_la_question($indexQCM, isset($_POST["var_correction_".$indexJeux]), $gestionPoints)
+		. qcm_affiche_la_question($indexJeux, $indexQCM, isset($_POST["var_correction_".$indexJeux]), $gestionPoints)
 		. jeux_rem('QCM-FIN', $indexQCM)
 		. qcm_inserer_les_qcm($texteApres, $indexJeux, $gestionPoints); 
   }
@@ -234,7 +246,7 @@ function jeux_qcm($texte, $indexJeux) {
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
   }
 
-  // est-ce certaines questions ne valent pas 1 point ?
+  // certaines questions ne valent-elles pas 1 point ?
   $gestionPoints = $qcms['totalscore']<>$qcms['nbquestions'];
 
   // reinserer les qcms mis en forme
@@ -254,7 +266,7 @@ function jeux_qcm($texte, $indexJeux) {
   }
   
   unset($qcms); unset($qcm_score);
-  return $tete.$texte.$pied;
+  return $tete.$texte.$pied.'</div>';
 }
 
 ?>

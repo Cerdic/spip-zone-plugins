@@ -52,21 +52,18 @@ guillemets ou le signe + :
 
 function trous_inserer_le_trou($indexJeux, $indexTrou, $size, $corriger) {
   global $propositionsTROUS, $scoreTROUS;
-
   // Initialisation du code a retourner
   $nomVarSelect = "var{$indexJeux}_T{$indexTrou}";
   $mots = $propositionsTROUS[$indexTrou];
   $prop = strtolower($_POST[$nomVarSelect] = trim($_POST[$nomVarSelect]));
-  
   $codeHTML = " <input name=\"$nomVarSelect\" class=\"jeux_input\" size=\"$size\" onfocus=\"TrackFocus('$nomVarSelect')\" type=\"text\""
 	  . ($prop?" value=\"{$_POST[$nomVarSelect]}\"":'') . "> "
 	 ;// . " (".join('|', $mots).")";
 
+  // en cas de correction
   if ($corriger){
    if ($prop!='' && in_array($prop, $mots)) ++$scoreTROUS;
-   
-  } // Fin du cas avec correction
-
+  }
   return $codeHTML;
 }
 

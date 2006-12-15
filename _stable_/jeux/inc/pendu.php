@@ -1,7 +1,5 @@
 <?php
 
-# le code de ce fichier php reste encore à ecrire...
-
 #---------------------------------------------------#
 #  Plugin  : jeux                                   #
 #  Auteur  : Patrice Vanneufville, 2006             #
@@ -16,11 +14,15 @@ Insere un jeu de pendu dans vos articles !
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : [pendu]
 separateurs optionnels   : [titre], [texte]
+paramètres de configurations par defaut :
+	regle=non	// Afficher la règle du jeu ?
+	pendu=1		// dessin du pendu à utiliser dans : /jeux/img/pendu?
 
 Règles du jeu :
 - Vous devez choisir une lettre à chaque essai.
 - Si la lettre existe dans le mot, elle apparaît à la bonne place.
-- La tête, un bras, une jambe... A chaque erreur, vous êtes un peu plus pendu. Vous avez droit à 6 erreurs. Bonne chance!
+- La tête, un bras, une jambe... A chaque erreur, vous êtes un peu plus pendu. 
+- Vous avez droit à 6 erreurs. Bonne chance!
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
@@ -35,6 +37,66 @@ Exemple de syntaxe dans l'article :
 </jeux>
 
 */
+// fonctions d'affichage
+function pendu_titre($texte) {
+ return $texte?"<p class=\"jeux_titre pendu_titre\">$texte</p>":'';
+}
+function pendu_pendu($texte) {
+ $mots = jeux_liste_mots_maj($texte);
+ $mot = $mots[array_rand($mots)];
+ $question = str_repeat('_ ', strlen($mot));
+ for($i=1; $i<=7; $i++) $p .= affiche_un_pendu($i) . '<br>';
+ $texte = $p . $mot . '<br>' . $question. '<br>' . affiche_un_clavier();
+ return $texte;
+ //return $p . ($texte?"<p class=\"jeux_question pendu_pendu\">$texte</p>":'');
+}
+function pendu_reponse($texte, $id) {
+ if (!jeux_config('reponse')) return '';
+ include_spip('inc/filtrer');
+ $image = image_typo($texte, 'taille=10');
+ $image = aligner_droite(filtrer('image_flip_vertical', filtrer('image_flip_horizontal', $image)));
+ $texte = jeux_block_invisible($id, _T('jeux:reponse'), $image);
+ return $texte?"<span class=\"pendu_reponse\">$texte</span>":'';
+}
+
+function affiche_un_pendu($etat) {
+ $img = preg_split('/\s*,\s*/', jeux_config($etat));
+ $debut = '<img src="'.jeux_config('base_img');
+ $fin = '">';
+//echo "<br>etat:$etat"; print_r($img);
+ return $debut.join($fin.'<br />'.$debut, $img).$fin;
+}
+
+function affiche_un_clavier() {
+ $clav = preg_split('//', _T('jeux:alphabet'), -1, PREG_SPLIT_NO_EMPTY);
+ $debut = '<a href="#">';
+ $fin = '</a>';
+//echo "<br>etat:$etat"; print_r($img);
+ return $debut.join($fin.'&nbsp;'.$debut, $clav).$fin;
+}
+
+// fonction principale 
+function jeux_pendu($texte, $indexJeux) {
+  $html = false;
+  jeux_block_init();
+  
+  // parcourir tous les #SEPARATEURS
+  $tableau = jeux_split_texte('pendu', $texte);
+  jeux_config_init("
+	regle=non	// Afficher la règle du jeu ?
+	pendu=1		// dessin du pendu à utiliser dans : /jeux/img/pendu?
+  ", false);
+  jeux_config_set('base_img', $f = _DIR_PLUGIN_JEUX.'img/pendu'.jeux_config('pendu').'/');
+  lire_fichier ($f.'config.ini', $images);
+  jeux_config_init($images, false);
+//global $jeux_config; print_r($jeux_config);
+  foreach($tableau as $i => $valeur) if ($i & 1) {
+	 if ($valeur==_JEUX_TITRE) $html .= pendu_titre($tableau[$i+1]);
+	  elseif ($valeur==_JEUX_PENDU) $html .= pendu_pendu($tableau[$i+1], "pendu_$indexJeux_$i");
+	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
+  }
+  return $html;
+}
 
 
 /*
@@ -57,3 +119,5 @@ adamo aubert aznavour balavoine barbara bashung becaud berger birkin bourvil bra
 
 
 */
+
+?>

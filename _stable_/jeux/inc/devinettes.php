@@ -15,7 +15,8 @@ balises du plugin : <jeux></jeux>
 separateurs obligatoires : [devinette] ou [charade]
 separateurs optionnels   : [reponse], [titre], [texte], [config]
 paramètres de configurations par defaut :
-	reponse=oui	// Afficher de la solution ?
+	reponse=oui	// Afficher la reponse ?
+	taille=10	// taille de la police utilisée
 attention : module GD obligatoire pour obtenir ses reponses
 affichees a l'envers.
 
@@ -61,7 +62,7 @@ function devinettes_charade($texte) {
 function devinettes_reponse($texte, $id) {
  if (!jeux_config('reponse')) return '';
  include_spip('inc/filtrer');
- $image = image_typo($texte, 'taille=10');
+ $image = image_typo($texte, 'taille='.jeux_config('taille'));
  $image = aligner_droite(filtrer('image_flip_vertical', filtrer('image_flip_horizontal', $image)));
  $texte = jeux_block_invisible($id, _T('jeux:reponse'), $image);
  return $texte?"<span class=\"devinettes_reponse\">$texte</span>":'';
@@ -75,7 +76,8 @@ function jeux_devinettes($texte, $indexJeux) {
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('devinettes', $texte);
   jeux_config_init("
-		reponse=oui	// Afficher de la reponse ?
+	reponse=oui	// Afficher la reponse ?
+	taille=10	// taille de la police utilisée
   ", false);
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $html .= devinettes_titre($tableau[$i+1]);

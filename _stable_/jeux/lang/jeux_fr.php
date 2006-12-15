@@ -4,8 +4,10 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'votre_choix' => "Votre choix : ",
+'alphabet'	=>	"ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 
+'votre_choix' => "Votre choix : ",
+'votre_reponse' => "Votre r&eacute;ponse : ",
 'corriger'		=> "Corriger",
 'verifier' 		=> 'V&eacute;rifier',
 'verifier_validite' 	=> 'V&eacute;rifier la validit&eacute;',
@@ -34,7 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'une_vide'			=> 'Une case vide',
 'bravo' => "Bravo !",
 
-'erreur_taille'	=> "Erreur : taille invalide",
+'erreur_taille_grille'	=> "Erreur : taille invalide",
+'erreur_syntaxe'	=> "Erreur de syntaxe",
 
 );
 

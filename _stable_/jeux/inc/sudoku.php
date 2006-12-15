@@ -14,7 +14,7 @@ balises du plugin : <jeux></jeux>
 separateurs obligatoires : [sudoku], [solution]
 separateurs optionnels   : [titre], [texte], [config]
 paramètres de configurations par defaut :
-	solution=oui	// Afficher de la solution ?
+	solution=oui	// Afficher la solution ?
 
 Tailles de sudoku acceptees : 4x4, 6x6, 9x9
 
@@ -48,7 +48,7 @@ function affichage_sudoku($tableau_sudoku, $indexJeux, $solution=false){
 	 case 4 : $interh = $interv = '24'; break;
 	 case 6 : $interh = '36'; $interv = '246'; break;
 	 case 9 : $interh = $interv = '369'; break;
-	 default : return '<p class="jeux_erreur">'._T('jeux:erreur_taille').' : </p>' ;
+	 default : return '<p class="jeux_erreur">'._T('jeux:erreur_taille_grille').' : </p>' ;
 	}
     $grille='';
 
@@ -175,7 +175,7 @@ function jeux_sudoku($texte, $indexJeux) {
 	$sudoku = $solution = $titre = $html = false;
 	$tableau = jeux_split_texte('sudoku', $texte);
 	jeux_config_init("
-		solution=oui	// Afficher de la solution ?
+		solution=oui	// Afficher la solution ?
 	", false);
 	foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
