@@ -29,7 +29,7 @@ Par d&#233;faut, si le code mis en surbrillance fait plus d'une ligne, il est mi
 Ce fonctionnement est control&#233; globalement par une constante PLUGIN_COLORATION_CODE_TELECHARGE d&#233;faut true.
 Il peut &#234;tre forc&#233; localement en rajoutant la classe "sans_telechargement" dans un sens ou "chargement" dans l'autre comme {{&lt;code class="php sans_telechargement">}}
 
-Vous pouvez aussi utiliser le filtre {coloration_code_color} dans un squelette comme #TEXTE**|coloration_code_color&#123;spip,code&#125;: colore #TEXTE avec le language spip en format code (sans cadre), voir exemple lecode.html. L'url depuis l'article serait &lt;a&nbsp;href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV#123;id_article#125;" title="voir le code de article" class="spip_in"&gt;Voir le code de l'article&lt;/a&gt;
+Vous pouvez aussi utiliser le filtre {coloration_code_color} dans un squelette comme #TEXTE**|coloration_code_color&#123;spip,code&#125;: colore #TEXTE avec le language spip en format code (sans cadre), voir exemple lecode.html. L'url depuis l'article serait &lt;a&nbsp;href="#URL_SITE_SPIP/spip.php?page=lecode&amp;id_article=#ENV#123;id_article#125;" title="voir le code de article" class="spip_in"&gt;Voir le code de l'article&lt;/a&gt;
 	  [en]
 {{{Syntax higlighting of code placed in SPIP articles.}}}
 You just have to put it between the tags:
@@ -42,7 +42,7 @@ By default, when the highlighted code has more than one line, il will be put in 
 This feature may be controlled globaly through the constant PLUGIN_COLORATION_CODE_TELECHARGE default true.
 It may also be forced locally by adding a class "sans_telechargement" in a way or "chargement" in the other as {{&lt;code class="php sans_telechargement">}}
 
-You may also use {coloration_code_color} as a filter in a squelette as #TEXTE**|coloration_code_color&#123;spip,code&#125;: highlights #TEXTE with langage "spip" in format code (without frame), see example lecode.html. From article url would be &lt;a&nbsp;href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV#123;id_article#125;" title="view article's code" class="spip_in"&gt;View article's code&lt;/a&gt;
+You may also use {coloration_code_color} as a filter in a squelette as #TEXTE**|coloration_code_color&#123;spip,code&#125;: highlights #TEXTE with langage "spip" in format code (without frame), see example lecode.html. From article url would be &lt;a&nbsp;href="#URL_SITE_SPIP/spip.php?page=lecode&amp;id_article=#ENV#123;id_article#125;" title="view article's code" class="spip_in"&gt;View article's code&lt;/a&gt;
 	[it]
 {{{Colorazione sintattica del codice utilizzato nel testo.}}}
 Dovete solo utilizzare il segnaposto:
@@ -55,7 +55,7 @@ In maniera predefinita, Se il codice da colorare ha pi&#249; di una linea, sar&#
 Questa impostazione pu&#242; essere modificata globalmente grazie alla costante PLUGIN_COLORATION_CODE_TELECHARGE, che normalmente &#232; impostata a true.
 Quest'ultima pu&#242; anche essere modificata localmente aggiugendo la classe "sans_telechargement" o "chargement", es: {{&lt;code class="php sans_telechargement">}}
 
-_ Potete utilizzare {coloration_code_color} anche come un filtro in scheletro in questo modo: #TEXTE**|coloration_code_color&#123;spip,code&#125;: colora #TEXTE con le regole del linguaggio "spip" in formato code (senza il riquadro), vedi l'esempio lecode.html. L'url per vedere il codice dell'articolo dalla sua stessa pagina sarà: &lt;a&nbsp;href="#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV&#123;id_article&#125;" title="vedi il codice dell'articolo" class="spip_in"&gt;Vedi il codice dell'articolo&lt;/a&gt;
+_ Potete utilizzare {coloration_code_color} anche come un filtro in scheletro in questo modo: #TEXTE**|coloration_code_color&#123;spip,code&#125;: colora #TEXTE con le regole del linguaggio "spip" in formato code (senza il riquadro), vedi l'esempio lecode.html. L'url per vedere il codice dell'articolo dalla sua stessa pagina sarà: &lt;a&nbsp;href="#URL_SITE_SPIP/spip.php?page=lecode&amp;id_article=#ENV&#123;id_article&#125;" title="vedi il codice dell'articolo" class="spip_in"&gt;Vedi il codice dell'articolo&lt;/a&gt;
 	  </multi>
 	</description>
 	<lien></lien> <!-- URI de documentation -->
