@@ -22,7 +22,7 @@ Pour que ce test ne fasse pas l'inclusion quand ce plugin n'est pas install&eacu
 [en]
 This plugin provides a new tag <code>#PLUGIN_PAS_INSTALLE</code> that allows you to test if a plugin is installed or not. This way, you can do a conditional inclusion:
 
-{[(#PLUGIN_PAS_INSTALLE{'monplugin'}|?{'',' '})<INCLURE{fond=squelette_plugin}>]}
+{[(#PLUGIN_PAS_INSTALLE{'monplugin'}|?{'',' '})&lt;INCLURE{fond=squelette_plugin}&gt;]}
 
 For this test to fail when this plugin is not installed, the test is inverted. Therefore, the tag test if a plugin is NOT installed.
 </multi>
