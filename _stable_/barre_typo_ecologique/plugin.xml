@@ -30,7 +30,7 @@ Rajoute une barre typographique enrichie et les raccourcis typographiques corres
 -** {{Biff&eacute;}} {&lt;del&gt;}texte biff&eacute;{&lt;/del&gt;}
 -** {{Bulle d'aide}} <code>[GPL|Gnu Public Licence]</code>
 -** {{Lien avec bulle d'aide}} <code>[texte du lien|Le site officiel de SPIP->http://www.spip.net/]</code>
--** {{Ancre et retour &agrave; l'ancre}} <code>[definition_ancre<-]</code> et <code>[retour </code>&agrave;<code> l'ancre->#definition_ancre]</code>
+-** {{Ancre et retour &agrave; l'ancre}} {[}definition_ancre&lt;-{]} et {[}retour &agrave; l'ancre-&gt;#definition_ancre{]}
 
 -* La barre est enrichie de plusieurs barres th&eacute;matiques pour:
 -** La gestion des tableaux
