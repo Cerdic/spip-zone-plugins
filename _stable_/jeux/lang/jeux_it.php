@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afficher_solution' 	=>'Visualizza la soluzione',
 'solution'		=>'Soluzione',
 'reponse'		=>'Risposta',
-'indices'		=> 'Indizii',
+'indices'		=> 'Indizi',
 'score'			=> "Risultato:",	// TODO
 
 'point'		=> "punto",
@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'recommencer'		=> 'Ricomincia',
 
 'grille_valide'		=>'Lo schema è valido',
-'grille_invalide'		=>'Lo schema è invalido',
+'grille_invalide'		=>'Lo schema non è valido',
 'aucune_erreur'		=> 'Nessun errore',
 'une_erreur'		=> 'Un errore',
 'n_erreurs'	=> '@n@ errori',
@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'une_vide'			=> 'Una casella bianca',
 'bravo'				=> "Complimenti!",
 
-'erreur_taille_grille'	=> "Errore: invalid size",
+'erreur_taille_grille'	=> "Errore: dimensioni errate",
 'erreur_syntaxe'	=> "Errore di sintassi ",
 
 );
