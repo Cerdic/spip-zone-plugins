@@ -15,10 +15,10 @@
 	</etat>
 	<description>
 Le filtre decoration permet aux redacteurs d'un site spip de d'appliquer les styles soulign&eacute;, barr&eacute;, au dessus, blink et fluo &agrave; une phrase, un mot, parapraphe.
--* <code><souligne></code>Lorem ipsum dolor sit amet<code></souligne></code>
--* <code><barre></code>Lorem ipsum dolor sit amet<code></barre></code>
--* <code><blink></code>Lorem ipsum dolor sit amet<code></blink></code>
--* <code><fluo></code>Lorem ipsum dolor sit amet<code></fluo></code>
+-* {&lt;souligne&gt;}Lorem ipsum dolor sit amet{&lt;/souligne&gt;}
+-* {&lt;barre&gt;}Lorem ipsum dolor sit amet{&lt;/barre&gt;}
+-* {&lt;blink&gt;}Lorem ipsum dolor sit amet{&lt;/blink&gt;}
+-* {&lt;fluo&gt;}Lorem ipsum dolor sit amet{&lt;/fluo&gt;}
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
