@@ -13,7 +13,7 @@
   test
   </etat>
   <description>
-  Paginer les articles en les decoupant selon les titres <code><h3 class="paginart3"></code> 
+  Paginer les articles en les decoupant selon les titres <code><h3 class="paginart3"></h3></code> 
   correspondant au raccourci <code>{p{titre}p}</code> et en presentant les pages sous forme d'onglets.
   Ajoute egalement le bouton correspondant dans la barre typo extensible
   </description>
