@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Agenda pour SPIP 1.9.1
+	Agenda pour SPIP 1.9.2
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Cedric MORIN
@@ -8,14 +8,14 @@
 _ &copy; 2006 - Licence GPL
 	</auteur>
 	<version>
-	0.12
+	0.13
 	</version>
 	<etat>
-	stable
+	test
 	</etat>
 	<description>
 	Agenda Evenementiel
-_	{{Ce plugin necessite le plugin Widget Calendar}}
+_ {{Ce plugin necessite le plugin Widget Calendar}}
 	</description>
 	<lien>http://www.spip-contrib.net/article1396.html</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
