@@ -23,7 +23,7 @@
 </ul>
 
 <ul class="playliste">
-<BOUCLE_doc (DOCUMENTS) {id_article ?} {extension==mp3}{!par date}{0,10}>
+<BOUCLE_doc (DOCUMENTS) {id_article ?} {extension==mp3}{!par date}{0,15}>
 <li class="play_"><a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|joli_titre|couper{30})]})]</a></li>
 </BOUCLE_doc>
 </ul>
