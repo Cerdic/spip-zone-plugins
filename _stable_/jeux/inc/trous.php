@@ -76,10 +76,8 @@ function trous_inserer_les_trous($chaine, $indexJeux) {
 	$indexTROU = intval($eregResult[1]);
 	list($texteAvant, $texteApres) = explode($eregResult[0], $chaine, 2); 
 	$texteApres = trous_inserer_les_trous($texteApres, $indexJeux);
-	if (($sizeInput = intval(jeux_config('taille')))==0) {
-		$sizeInput = 0;
+	if (($sizeInput = intval(jeux_config('taille')))==0)
 		foreach($propositionsTROUS as $trou) foreach($trou as $mot) $sizeInput = max($sizeInput, strlen($mot));
-	}
 	$chaine = $texteAvant.jeux_rem('TROU-DEBUT', $indexTROU)
 		. trous_inserer_le_trou($indexJeux, $indexTROU, $sizeInput, isset($_POST["var_correction_".$indexJeux]))
 		. jeux_rem('TROU-FIN', $indexTROU)

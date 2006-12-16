@@ -129,12 +129,10 @@ function qcm_les_points($phrase, $points) {
 
 function qcm_un_trou($nomVarSelect, $indexQCM) {
   global $qcms;
-  if (($sizeInput = intval(jeux_config('trou')))==0) {
-	$sizeInput = 0;
+  if (($sizeInput = intval(jeux_config('trou')))==0)
 	foreach($qcms[$indexQCM]['propositions'] as $mot) $sizeInput = max($sizeInput, strlen($mot));
-  }
   $prop = strtolower($_POST[$nomVarSelect] = trim($_POST[$nomVarSelect]));
-  return " <input name=\"$nomVarSelect\" class=\"jeux_input\" size=\"$sizeInput\" type=\"text\"> ";
+  return " &nbsp; &nbsp; &nbsp;<input name=\"$nomVarSelect\" class=\"jeux_input qcm_input\" size=\"$sizeInput\" type=\"text\"> ";
 }
 
 function qcm_affiche_la_question($indexJeux, $indexQCM, $corrigee, $gestionPoints) {
