@@ -2,7 +2,7 @@
 	<version>1.0</version>
 	<nom>Nuage</nom>
 	<prefix>nuage</prefix>
-	<auteur>Booz, Fil</auteur>
+	<auteur>(c)2005-2006 Booz, Fil Licence GPL</auteur>
 	<etat>stable</etat>
 	<lien>[Afficher les mots-clés en faisant varier la taille de la police->http://www.spip-contrib.net/Afficher-les-mots-cles-en-faisant]</lien>
 	<description>Version plugin avec modele, filtre, balise de la contrib nuage de tag (cf lien)</description>
