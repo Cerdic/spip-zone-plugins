@@ -48,3 +48,9 @@ cursor:pointer;
 font-variant:small-caps;
 font-weight:bold;
 }
+
+.playliste{
+list-style-type:none;
+padding:0;
+margin:0;
+}
