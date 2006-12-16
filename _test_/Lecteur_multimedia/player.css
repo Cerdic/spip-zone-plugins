@@ -1,4 +1,3 @@
-
 span.play_{
 background:#E6ECFF;
 cursor:hand;
@@ -17,13 +16,13 @@ margin:10px 0px 10px 0px;
 padding:0px;
 width:200px;
 font-size:9px;
-background-color:#000000;
+border: thin #c0c0c0 inset;
+-moz-border-radius: 15px;
 }
 
 .radiobox a, .radiobox a:hover{
-color:#ffffff;
 text-decoration:none;
-font-familly:verdanna, sans-serif;
+font-family:verdana, sans-serif;
 }
 
 .radiobox li.over{
@@ -37,9 +36,15 @@ background:#B4ACBF;
 
 .controles li{
 display:inline;
-background:#cccccc;
-color:#ffffff;
-border-left:1px solid black;
+background:#efefef;
+/*color:#ffffff;*/
+border: thin #c0c0c0 outset;
+padding:3px;
+margin:10px;
+-moz-border-radius: 5px;
+/*border-left:1px solid black;*/
 cursor:hand;
 cursor:pointer;
+font-variant:small-caps;
+font-weight:bold;
 }
