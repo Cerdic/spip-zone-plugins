@@ -17,6 +17,7 @@ function TinyMCE_header_prive($flux) {
 		$flux .= '<script language="javascript" type="text/javascript" src="'._DIR_PLUGIN_TINYMCE.'/jscripts/tiny_mce/tiny_mce.js"></script>'."\n";
 		$flux .= '<script language="javascript" type="text/javascript">'."\n";
 		$flux .= 'tinyMCE.init({
+			language: "fr",
 			mode: "exact",
 			elements: "text_area"
 		});
