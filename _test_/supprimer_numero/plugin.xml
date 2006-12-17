@@ -1,21 +1,21 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Supprimer le numéro
+	<nom>
+	Supprimer le num&eactute;ro
 	</nom>
-	<auteur>	<!-- Auteur du plugin -->
+	<auteur>
  	collectif 
 _ &copy; 2006 - Distribu&eacute; sous licence GPL
 	</auteur>
-	<version> <!-- Version du plugin -->
+	<version> 
 	0.1
 	</version>
-	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	<etat>
 	test
 	</etat>
 	<description>
-	Applique la fonction spip supprimer_numero à l'ensemble des titres du site, sans qu'elle soit présente dans les squelettes. 
+	Applique la fonction spip supprimer_numero &agrave; l'ensemble des titres du site, sans qu'elle soit pr&eactute;sente dans les squelettes. 
 	</description>
-	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
+	<options>
 	supprimer_numero_options.php
 	</options>
 	<prefix>
