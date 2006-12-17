@@ -18,4 +18,7 @@ _ &copy; 2006 - Distribu&eacute; sous licence GPL
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
 	supprimer_numero_options.php
 	</options>
+	<prefix>
+	supprimer_numero
+	</prefix>
 </plugin>
