@@ -1,5 +1,11 @@
 <?php
-//include_spip('inc/presentation');
+#---------------------------------------------------#
+#  Plugin  : Tweak SPIP                             #
+#  Auteur  : Patrice Vanneufville, 2006             #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
+#  Licence : GPL                                    #
+#---------------------------------------------------#
+
 include_spip('inc/texte');
 include_spip('inc/layer');
 
@@ -125,21 +131,15 @@ function exec_tweak_spip_admin() {
 
 	echo generer_url_post_ecrire("tweak_spip_admin");
 
-	echo "<ul>";
-	
-	foreach($temp = $tweaks as $tweak) {
-		echo "<li>";
-		echo ligne_tweak($tweak);
-		echo "</li>\n"; 
-	}
+	echo '<ul>';
+	foreach($temp = $tweaks as $tweak) echo '<li>' . ligne_tweak($tweak) . "</li>\n"; 
+	echo '</ul>';
 	
 //	echo "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />";
 //	echo "\n<input type='hidden' name='hash' value='" . calculer_action_auteur("valide_plugin") . "'>";
 	echo "\n<input type='hidden' name='changer_tweaks' value='oui'>";
 
-	echo "\n<p>";
-
-	echo "<div style='text-align:$spip_lang_right'>";
+	echo "\n<div style='text-align:$spip_lang_right'>";
 	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' onclick=\"alert('à faire, si vous trouvez un moyen simple de stocker l\'état des tweaks !')\">";
 	echo "</div>";
 
@@ -151,151 +151,20 @@ function exec_tweak_spip_admin() {
 
 	echo "</form></td></tr></table>\n";
 
-//	echo "<br />";
-
-/*
-	echo '<form action="'.generer_url_ecrire('config_chercher_squelettes_mots').'" method="post">';
-
-	$groupes_mots = '';
-	$select = array('id_groupe','titre');
-	$from = array('spip_groupes_mots');
-
-	//	include_ecrire('inc_filtres');
-	$rez = spip_abstract_select($select,$from);
-	while($row = spip_abstract_fetch($rez)) {
-	  $groupes_mots[$row['id_groupe']] = extraire_multi($row['titre']);
-	}
-	spip_abstract_free($rez);
-
-	//TODO: trouver automatiquement ces informations pour toutes les tables avec un jonction sur les mots
-	$id_tables = array('articles' => 'id_article',
-					   'rubriques' => 'id_rubrique',
-					   'breves' => 'id_breve',
-					   'sites' => 'id_site');
-	
-
-	$fonds = unserialize(lire_meta('SquelettesMots:fond_pour_groupe'));
-
-	$field_fonds = $_REQUEST['fonds'];
-	$id_groupes = $_REQUEST['tid_groupe'];
-	$types = $_REQUEST['type'];
-	$actif = $_REQUEST['actif'];
-	
-	// On transforme les _POST en jolie tableau
-	if($field_fonds) {
-	  $new_fonds = array();
-	  foreach($field_fonds as $index => $fond) {		
-		$index = intval($index);
-		$fond = addslashes($fond);
-		if($actif[$index]) {
-		  $id_groupe = intval($id_groupes[$index]);
-		  $type = addslashes($types[$index]);
-		  $new_fonds[$fond] = array($id_groupe,$type,$id_tables[$type]);
-		} 
-	  }
-	  $fonds = $new_fonds;
-	}
-	
-	$index = 0;
-	if (is_array($fonds))
-	foreach($fonds as $fond => $a) {
-	  list($id_groupe,$type,$id_table) = $a;
-	  $index++;
-	  echo '<fieldset class="regle">';
-	  echo '<legend>'._T('squelettesmots:reglei',array('id'=>$index)).'</legend>';
-	  echo '<div class="champs">';
-	  echo "<input type=\"checkbox\" class=\"actif\" name=\"actif[$index]\" checked=\"true\"/>";
-	  echo "<label for=\"fond_$index\" class=\"fond\">"._T('squelettesmots:fond')."</label>";
-	  echo "<input type=\"text\" name=\"fonds[$index]\" class=\"fond\" value=\"$fond\" id=\"fond_$index\"/>";
-	  echo "<label for=\"id_groupe_$index\" class=\"id_groupe\">"._T('squelettesmots:groupe')."</label>";
-	  echo "<select name=\"tid_groupe[$index]\" class=\"id_groupe\" id=\"id_groupe_$index\">";
-	  foreach($groupes_mots as $id => $titre) {
-		echo "<option value=\"$id\"".(($id_groupe == $id)?' selected="true"':'').">$titre</option>";
-	  }
-	  echo '</select>';
-	  echo "<label for=\"type_$index\" class=\"type\">"._T('squelettesmots:type')."</label>";
-	  echo "<select name=\"type[$index]\" class=\"type\" id=\"type_$index\">";
-	  foreach($id_tables as $t => $x) {
-		echo "<option value=\"$t\"".(($type == $t)?' selected="true"':'').">$t</option>";
-	  }
-	  echo '</select>';
-	  echo '</div>';
-	  $select1 = array('titre');
-	  $from1 = array('spip_mots AS mots');
-	  $where1 = array("id_groupe=$id_groupe");
-	  $rez =spip_abstract_select($select1,$from1,$where1);
-	  $liste_squel = '<ul>';
-	  $ext = 'html'; //On force a html, c'est pas beau, mais je vois pas la solution actuellement.
-	  $cnt_actif = 0;
-	  $cnt_inactif = 0;
-	  while ($r = spip_abstract_fetch($rez)) {
-		include_ecrire("inc_charsets");
-		$n = translitteration(preg_replace('/["\'.\s]/','_',extraire_multi($r['titre'])));
-		if ($squel = find_in_path("$fond-$n.$ext")) {
-		  $cnt_actif++;
-		  $liste_squel .= "<li><a href=\"$squel\">$fond-$n.$ext</a></li>";
-		} else {
-		  $cnt_inactif++;
- 		  $liste_squel .= "<li>$fond-$n.$ext</li>";
-		}
-		if ($squel = find_in_path("$fond=$n.$ext")) {
-		  $cnt_actif++;
-		  $liste_squel .= "<li><a href=\"$squel\">$fond=$n.$ext</a></li>";
-		} else {
-		  $cnt_inactif++;
- 		  $liste_squel .= "<li>$fond=$n.$ext</li>";
-		}
-	  }
-	  spip_abstract_free($rez);
-	  $liste_squel .= '</ul>';
-
-	  
-	  echo '<div class="possible">';
-	  if($cnt_actif+$cnt_inactif > 0) echo bouton_block_invisible("regle$index");
-	  echo _T('squelettesmots:possibilites',array('total_actif' => $cnt_actif, 'total_inactif'=>$cnt_inactif));
-	  if ($cnt_actif+$cnt_inactif > 0) {
-		echo debut_block_invisible("regle$index");
-		echo $liste_squel;
-		echo fin_block();
-	  }
-	  echo '</div>';
-
-	  echo '</fieldset>';
-	}
-	
-	$index++;
-	
-	echo '<hr/>';
-	echo '<fieldset class="nouvelle_regle">';
-	echo '<legend>'._T('squelettesmots:nouvelle_regle').'</legend>';
-	echo "<input type=\"checkbox\" class=\"actif\" name=\"actif[$index]\"/>";
-	echo "<label for=\"fond_$index\" class=\"fond\">"._T('squelettesmots:fond')."</label>";
-	echo "<input type=\"text\" name=\"fonds[$index]\" class=\"fond\" value=\"article\"/>";
-	echo "<label for=\"id_groupe_$index\" class=\"id_groupe\">"._T('squelettesmots:groupe')."</label>";
-	echo "<select name=\"tid_groupe[$index]\" class=\"id_groupe\" id=\"id_groupe_$index\">";
-	foreach($groupes_mots as $id => $titre) {
-	  echo "<option value=\"$id\">$titre</option>";
-	}
-	echo '</select>';
-	echo "<label for=\"type_$index\" class=\"type\">"._T('squelettesmots:type')."</label>";
-	echo "<select name=\"type[$index]\" class=\"type\" id=\"type_$index\">";
-	foreach($id_tables as $t => $x) {
-	  echo "<option value=\"$t\">$t</option>";
-	}
-	echo '</select>';
-	echo '</fieldset>';
-	
-	echo '<input type="submit" value="'._T('valider').'"/>';
-	echo '</form>';
-*/	
-  
 //  ecrire_meta('SquelettesMots:fond_pour_groupe',serialize($fonds));
 //  ecrire_metas();
   
-  fin_page();
+	echo fin_page();
   
 }
 
+// est-ce que $pipe est un pipeline ?
+function is_tweak_pipeline($pipe) {
+	global $tweak_exclude;
+	return !in_array($pipe, $tweak_exclude);
+}
+
+// affiche un tweak sur une ligne
 function ligne_tweak($tweak){
 	static $id_input=0;
 	$inc = $tweak['include'];
@@ -313,37 +182,12 @@ function ligne_tweak($tweak){
 			$s .= "/!\ $err <br/>";
 		$s .=  "</div>";
 	}
-
-	// puce d'etat du plugin
-	// <etat>dev|experimental|test|stable</etat>
-	$etat = 'dev';
-	if (isset($info['etat']))
-		$etat = $info['etat'];
-	switch ($etat) {
-		case 'experimental':
-			$puce = 'puce-rouge.gif';
-			$titre_etat = _T('plugin_etat_experimental');
-			break;
-		case 'test':
-			$puce = 'puce-orange.gif';
-			$titre_etat = _T('plugin_etat_test');
-			break;
-		case 'stable':
-			$puce = 'puce-verte.gif';
-			$titre_etat = _T('plugin_etat_stable');
-			break;
-		default:
-			$puce = 'puce-poubelle.gif';
-			$titre_etat = _T('plugin_etat_developpement');
-			break;
-	}
 */
 	$s .= "<img src='"._DIR_IMG_PACK."$puce' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;";
 
 	$s .= "<input type='checkbox' name='tweak_$inc' value='O' id='label_$id_input'";
 	$s .= $actif?" checked='checked'":"";
 	$s .= " onclick='verifchange.apply(this,[\"$inc\"])' /> <label for='label_$id_input' style='display:none'>"._T('tweak:activer_tweak')."</label>";
-	$id_input++;
 
 	$s .= bouton_block_invisible($tweak_id) . propre($tweak['nom']);
 
@@ -354,11 +198,14 @@ function ligne_tweak($tweak){
 	$s .= "\n<div class='detailplugin'>";
 	if (isset($tweak['description'])) $s .= propre($tweak['description']);
 	if (isset($tweak['auteur'])) $s .= "<br/><br/>" . _T('auteur') .' '. propre($tweak['auteur']) . "<hr/>";
-	$s .= _T('tweak:tweak') ." $inc.php | ". $tweak['pipeline'];
-	if (isset($tweak['fonction']))  $s .= " | " . $tweak['fonction'];
+	$s .= _T('tweak:tweak') ." $inc.php";
+	if ($tweak['options']) $s .= ' | options';
+	if ($tweak['fonctions']) $s .= ' | fonctions';
+	foreach ($tweak as $pipe=>$fonc) if(is_tweak_pipeline($pipe)) $s .= ' | '.$pipe;
 	$s .= "</div>";
 
 	$s .= fin_block();
+	$id_input++;
 
 	return $s;
 }

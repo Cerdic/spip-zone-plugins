@@ -1,4 +1,11 @@
 <?php
+#---------------------------------------------------#
+#  Plugin  : Tweak SPIP                             #
+#  Auteur  : Patrice Vanneufville, 2006             #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
+#  Licence : GPL                                    #
+#---------------------------------------------------#
+
 include_spip('tweak_spip_config');
 
 /*
@@ -7,30 +14,33 @@ paremetre $tableau : Array
 	'description' 	=> description du tweak
 	'auteur' 		=> auteur du tweak
 	'include' 		=> fichier inc/???.php à inclure
-	'pipeline' 		=> pipeline à utiliser
-	'fonction' 		=> function à utiliser
+	'options'		=> 1 si l'include doit etre place dans tweak_spip_options.php
+	'fonctions'		=> 1 si l'include doit etre place dans tweak_spip_fonctions.php
+sinon :	
+	'pipeline_1'	=> 'function à utiliser',
+	'pipeline_2'	=> 'function à utiliser',
+	etc.
 */
+
+// ajoute un tweak à $tweaks;
 function add_tweak($tableau) {
 	global $tweaks;
 	$tweaks[] = $tableau;
 }
 
-// $pipeline ici est egal à 'options' ou 'fonctions'
-function include_tweaks($pipeline) {
-	global $tweaks;
-	foreach ($temp=$tweaks as $tweak) if ($tweak['pipeline']==$pipeline && $tweak['actif'])
-		include_spip('inc/'.$tweak['include']);
+// $type ici est egal à 'options' ou 'fonctions'
+function include_tweaks($type) {
+	global $tweaks_pipelines;
+	foreach ($tweaks_pipelines[$type] as $inc) include_spip('inc/'.$inc);
 }
 
 
 // passe le $flux dans le $pipeline ...
 function tweak_pipeline($pipeline, $flux) {
-	global $tweaks;
-	foreach ($temp=$tweaks as $tweak) if ($tweak['pipeline']==$pipeline && $tweak['actif']) {
-//		include_once(_DIR_PLUGIN_TWEAK_SPIP.'inc/'.$tweak['include'].'.php');
-		include_spip('inc/'.$tweak['include']);
-		$fonc = $tweak['fonction'];
-		if (function_exists($fonc)) $flux = $fonc($flux);
+	global $tweaks, $tweaks_pipelines;
+	if (isset($tweaks_pipelines[$pipeline])) {
+		foreach ($tweaks_pipelines[$pipeline][0] as $inc) include_spip('inc/'.$inc);
+		foreach ($tweaks_pipelines[$pipeline][1] as $fonc) if (function_exists($fonc)) $flux = $fonc($flux);
 	}
 	return $flux;
 }

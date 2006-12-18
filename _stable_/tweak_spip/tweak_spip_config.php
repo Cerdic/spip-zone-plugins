@@ -1,6 +1,13 @@
 <?php
 
-global $tweaks, $tweaks_actifs;
+#---------------------------------------------------#
+#  Plugin  : Tweak SPIP                             #
+#  Auteur  : Patrice Vanneufville, 2006             #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
+#  Licence : GPL                                    #
+#---------------------------------------------------#
+
+global $tweaks, $tweaks_actifs, $tweaks_pipelines, $tweak_exclude;
 
 // cette liste enumere les tweaks inc/???.php a installer.
 // commenter les tweaks à ne pas activer...
@@ -25,15 +32,17 @@ add_tweak( array(
 	'description' 	=> 'Inhibition du cache de SPIP pour le d&eacute;veloppement du site.',
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'include' 		=> 'desactiver_cache',
-	'pipeline' 		=> 'options',
+	// a inserer dans les options
+	'options'		=> 1
 ));
 
 add_tweak( array(
 	'nom'			=> 'Supprimer le num&eacute;ro',
-	'description' 	=> "Applique la fonction spip supprimer_numero &agrave; l'ensemble des titres du site, sans qu'elle soit pr&eactute;sente dans les squelettes.",
+	'description' 	=> "Applique la fonction spip supprimer_numero() &agrave; l'ensemble des titres du site, sans qu'elle soit pr&eactute;sente dans les squelettes.",
 	'auteur' 		=> 'collectif',
 	'include' 		=> 'supprimer_numero_options',
-	'pipeline' 		=> 'options',
+	// a inserer dans les options
+	'options'		=> 1
 ));
 
 //-----------------------------------------------------------------------------//
@@ -42,20 +51,22 @@ add_tweak( array(
 
 add_tweak( array(
 	'nom'			=> 'Version texte',
-	'description' 	=> "2 Filtres : 
-_ version_texte {(extrait le contenu texte d'une page html &agrave; l'exclusion de quelques balises &eacute;l&eacute;mentaires)}
-_ version_plein_texte {(extrait le contenu texte d'une page html pour rendre du texte plein)}",
+	'description' 	=> "2 Filtres pour vos squelettes. 
+_ version_texte : extrait le contenu texte d'une page html &agrave; l'exclusion de quelques balises &eacute;l&eacute;mentaires
+_ version_plein_texte : extrait le contenu texte d'une page html pour rendre du texte plein",
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'include' 		=> 'verstexte_fonctions',
-	'pipeline' 		=> 'fonctions',
+	// a inserer dans les fonctions
+	'fonctions'		=> 1
 ));
 
 add_tweak( array(
 	'nom'			=> 'Orientation des images',
-	'description' 	=> "Le plugin orientation ajoute les crit&egrave;res <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code> pour le classement des photos. [->http://www.spip-contrib.net/Portrait-ou-Paysage]",
-	'auteur' 		=> 'Pierre Andrews (Mortimer) &amp; IZO ',
+	'description' 	=> "Le plugin orientation ajoute les crit&egrave;res <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code> dans vos squelettes pour le classement des photos. [Plus d'infos->http://www.spip-contrib.net/Portrait-ou-Paysage]",
+	'auteur' 		=> 'Pierre Andrews (Mortimer) &amp; IZO',
 	'include' 		=> 'orientation',
-	'pipeline' 		=> 'fonctions',
+	// a inserer dans les fonctions
+	'fonctions'		=> 1
 ));
 
 
@@ -67,11 +78,11 @@ add_tweak( array(
 add_tweak( array(
 	'nom'			=> 'D&eacute;sactiver les objects flash',
 	'description' 	=> 'Ce plugin supprime les objets flash des pages de votre site et les remplace par le contenu alternatif associ&eacute;.
-_ N&eacute;cessite jQuery.',
+_ N&eacute;cessite le plugin {jQuery} ou une version de SPIP sup&eacute;rieure à 1.9.2.',
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'include' 		=> 'desactiver_flash',
-	'pipeline' 		=> 'affichage_final',
-	'fonction' 		=> 'InhibeFlash_affichage_final',
+	// pipeline => fonction
+	'affichage_final' => 'InhibeFlash_affichage_final',
 ));
 
 //-----------------------------------------------------------------------------//
@@ -80,11 +91,13 @@ _ N&eacute;cessite jQuery.',
 
 add_tweak( array(
 	'nom'			=> 'Tout multi',
-	'description' 	=> 'Introduit le raccourci {&lt;:texte:&gt;} pour introduire librement des blocs multi dans un texte.',
+	'description' 	=> "Introduit le raccourci &lt;:un_texte:&gt; pour introduire librement des blocs multi-langues dans un article.
+_ La fonction SPIP utilis&eacute;e est : _T('un_texte', \$flux).
+_ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans les fichiers de langue",
 	'auteur' 		=> '',
 	'include' 		=> 'toutmulti',
-	'pipeline' 		=> 'pre_typo',
-	'fonction' 		=> 'ToutMulti_pre_typo',
+	// pipeline => fonction
+	'pre_typo'	=> 'ToutMulti_pre_typo',
 ));
 
 add_tweak( array(
@@ -92,8 +105,8 @@ add_tweak( array(
 	'description' 	=> 'Remplace les puces - (tiret) des articles par des puces -* (&lt;li>...)',
 	'auteur' 		=> '[J&eacute;r&ocirc;me Combaz->http://conseil-recherche-innovation.net/index.php/2000/07/08/72-jerome-combaz]',
 	'include' 		=> 'bellespuces',
-	'pipeline' 		=> 'pre_typo',
-	'fonction' 		=> 'bellespuces_pre_typo',
+	// pipeline => fonction
+	'pre_typo' => 'bellespuces_pre_typo',
 ));	
 
 add_tweak( array(
@@ -107,19 +120,33 @@ add_tweak( array(
 -* {&lt;fluo&gt;}Lorem ipsum dolor sit amet{&lt;/fluo&gt;}",
 	'auteur' 		=> '[izo@aucuneid.net->http://www.aucuneid.com/bones]',
 	'include' 		=> 'decoration',
-	'pipeline' 		=> 'pre_typo',
-	'fonction' 		=> 'decoration_pre_typo',
+	// pipeline => fonction
+	'pre_typo' => 'decoration_pre_typo',
 ));
 
 //-----------------------------------------------------------------------------//
 //                        activation des tweaks                                //
 //-----------------------------------------------------------------------------//
 
+// exclure ce qui n'est pas un pipeline...
+$tweak_exclude = array('nom', 'description', 'auteur', 'include', 'options', 'fonctions', 'actif');
 
-foreach ($tweaks as $i=>$tweak)
-	 $tweaks[$i]['actif'] = in_array($tweak['include'], $tweaks_actifs);
+foreach ($tweaks as $i=>$tweak) {
+	// insersion des parametres de $tweaks_actifs dans $tweaks;
+	$actif = $tweaks[$i]['actif'] = in_array($tweak['include'], $tweaks_actifs);
+	// stockage de la liste des fonctions par pipeline, si le tweak est actif...
+	if ($actif) {
+		foreach ($tweak as $pipe=>$fonc) if(!in_array($pipe, $tweak_exclude)) {
+			$tweaks_pipelines[$pipe][0][] = $tweak['include'];
+			$tweaks_pipelines[$pipe][1][] = $fonc;
+		}
+		if ($tweak['options']) $tweaks_pipelines['inc_options'][] = $tweak['include'];
+		if ($tweak['fonctions']) $tweaks_pipelines['inc_fonctions'][] = $tweak['include'];
+	}
+}
 
 //print_r($tweaks_actifs);
 //print_r($tweaks);
+//print_r($tweaks_pipelines);
 
 ?>
