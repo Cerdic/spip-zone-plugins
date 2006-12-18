@@ -1,0 +1,42 @@
+l'intégration des petits plugins existants est très simple :
+
+  - Les infos à placer dans tweak_spip_config.php sont tirées des plugin.xml
+  - Les fichiers *.php de l'ancien plugin sont placés sans aucune modification dans \tweak_spip\inc
+  - Il est donc toujours possible pour les auteurs de revenir sur leur code
+
+l'intégration de nouvelles fonctionnalités est donc tout aussi simple :
+
+  - Une citation dans $tweaks_actifs de tweak_spip_config.php (obligation bientôt dépréciée !)
+  - Un paragrahe add_tweak() à ajouter dans tweak_spip_config.php
+  - Un module à placer dans \tweak_spip\inc
+  - Une petite confirmation sur la page d'admin (ecrire/?exec=tweak_spip_admin)
+	et le tour est joué !
+  
+  
+Syntaxe des déclarations dans tweak_spip_config.php :
+-----------------------------------------------------
+
+	add_tweak( array(
+	 'nom'   => Nom du tweak
+	 'description'  => Description (et liens éventuels) du tweak
+	 'auteur'   => Auteur(s) du tweak
+	 'include'   => fichier inc/???.php à inclure
+	 'options'  => 1 si l'include doit etre place dans tweak_spip_options.php
+	 'fonctions'  => 1 si l'include doit etre place dans tweak_spip_fonctions.php
+	sinon :
+	 'pipeline_1' => 'function à utiliser',
+	 'pipeline_2' => 'function à utiliser',
+	 etc.
+	));
+
+Ca semble assez bien tenir la route pour l'instant...
+
+Exemple :
+
+	add_tweak( array(
+		'nom'			=> 'Belles puces',
+		'description' 	=> 'Remplace les puces - (tiret) des articles par des puces -* (&lt;li>...)',
+		'auteur' 		=> 'J&eacute;r&ocirc;me Combaz',
+		'include' 		=> 'bellespuces',
+		'pre_typo' => 'bellespuces_pre_typo',
+	));	
