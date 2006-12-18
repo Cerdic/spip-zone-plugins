@@ -26,6 +26,8 @@ function balise_FORMS_stat($args, $filtres) {
 }
  
 function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation',$reponse_enregistree="forms:reponse_enregistree",$forms_obligatoires="") {
+	if (!include_spip('inc/autoriser'))
+		include_spip('inc/autoriser_compat');
 	$url = self();
 	// nettoyer l'url qui est passee par htmlentities pour raison de securites
 	$url = str_replace("&amp;","&",$url);

@@ -15,6 +15,7 @@
 // Formulaires : Structure
 //
 global $tables_principales;
+global $tables_auxiliaires;
 
 $spip_forms = array(
 	"id_form" 	=> "bigint(21) NOT NULL",
@@ -152,6 +153,16 @@ $tables_principales['spip_forms_donnees_articles'] = array(
 	'field' => &$spip_forms_donnees_articles,
 	'key' => &$spip_forms_donnees_articles_key);
 
+$spip_documents_donnees = array(
+		"id_document"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+		"id_donnee"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+
+$spip_documents_donnees_key = array(
+		"PRIMARY KEY"		=> "id_donnee, id_document",
+		"KEY id_document"	=> "id_document");
+$tables_auxiliaires['spip_documents_donnees'] = array(
+	'field' => &$spip_documents_donnees,
+	'key' => &$spip_documents_donnees_key);
 
 //-- Relations ----------------------------------------------------
 global $tables_jointures;
@@ -168,5 +179,6 @@ $table_des_tables['forms_donnees']='forms_donnees';
 $table_des_tables['forms_donnees_champs']='forms_donnees_champs';
 $table_des_tables['forms_articles']='forms_articles';
 $table_des_tables['forms_donnees_articles']='forms_donnees_articles';
+$table_des_tables['documents_donnees']='documents_donnees';
 
 ?>

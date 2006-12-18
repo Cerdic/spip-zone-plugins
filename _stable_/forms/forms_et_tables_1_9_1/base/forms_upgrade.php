@@ -48,7 +48,7 @@
 	}
 
 	function Forms_upgrade(){
-		$version_base = 0.21;
+		$version_base = 0.22;
 		$current_version = 0.0;
 		if (   (isset($GLOBALS['meta']['forms_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['forms_base_version'])==$version_base))
@@ -181,6 +181,15 @@
 			spip_query("ALTER TABLE spip_forms ADD modifiable ENUM('non', 'oui') DEFAULT 'non' AFTER type_form");
 			spip_query("ALTER TABLE spip_forms ADD multiple ENUM('non', 'oui') DEFAULT 'non' AFTER type_form");
 			ecrire_meta('forms_base_version',$current_version=0.21);
+		}
+		if ($current_version<0.22){
+			// creer toutes la nouvelle table spip_documents_donnees
+			include_spip('base/forms');
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			creer_base();
+			ecrire_meta('documents_donnee','oui');
+			ecrire_meta('forms_base_version',$current_version=0.22);
 		}
 		ecrire_metas();
 	}

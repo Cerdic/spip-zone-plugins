@@ -96,6 +96,11 @@ function affichage_donnee_edit($type_form, $titre_page, $titre_type, $titre_ajou
   Forms_install();
   $id_form = intval(_request('id_form'));
   $id_donnee = intval(_request('id_donnee'));
+  if (!$id_form && $id_donnee){
+  	$res = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
+  	if ($row = spip_fetch_array($res))
+  		$id_form = $row['id_form'];
+  }
 	$contexte = array('id_form'=>$id_form,'id_donnee'=>$id_donnee,'type_form'=>$type_form,'titre_liste'=>$titre_page,'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
 	$formulaire = recuperer_fond("modeles/form",$contexte);
 	$row = spip_fetch_array(spip_query("SELECT COUNT(id_donnee) AS n FROM spip_forms_donnees WHERE id_form="._q($id_form)));
@@ -112,18 +117,20 @@ function affichage_donnee_edit($type_form, $titre_page, $titre_type, $titre_ajou
 	echo "<p>";
 	fin_boite_info();
 	
+	echo afficher_documents_colonne($id_donnee, "donnee", _request('exec'));
+	
 	creer_colonne_droite();
 	/*if (include_spip('inc/snippets'))
 		echo boite_snippets($titre_type,_DIR_PLUGIN_FORMS."img_pack/$type_form-24.gif",'forms','forms');*/
 	
 	debut_droite();
-	echo debut_cadre_relief();
 	if ($id_donnee){
+		echo debut_cadre_relief();
 		$instituer_forms_donnee = charger_fonction('instituer_forms_donnee','inc');
 		$row = spip_fetch_array(spip_query("SELECT statut FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee)));
 		echo $instituer_forms_donnee($id_form,$id_donnee,$row['statut']);
+		echo fin_cadre_relief();
 	}
-	echo fin_cadre_relief();
 
 	echo "<div class='verdana2'>$formulaire</div>";
 	
