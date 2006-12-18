@@ -1,6 +1,5 @@
 <?php
-
-global $tweaks;
+include_spip('tweak_spip_config');
 
 /*
 paremetre $tableau : Array
@@ -19,19 +18,20 @@ function add_tweak($tableau) {
 // $pipeline ici est egal à 'options' ou 'fonctions'
 function include_tweaks($pipeline) {
 	global $tweaks;
-	foreach ($tweaks as $tweak) if ($tweak['pipeline']==$pipeline)
+	foreach ($tweaks as $tweak) if ($tweak['pipeline']==$pipeline && $tweak['actif'])
 		include_spip('inc/'.$module);
 }
 
 
 // passe le $flux dans le $pipeline ...
-funtion tweak_pipeline($pipeline, &$flux) {
+function tweak_pipeline($pipeline, &$flux) {
 	global $tweaks;
-	foreach ($tweaks as $tweak) if ($tweak['pipeline']==$pipeline) {
+	foreach ($tweaks as $tweak) if ($tweak['pipeline']==$pipeline && $tweak['actif']) {
 		include_spip('inc/'.$tweak['include']);
 		$fonc = $tweak['fonction'];
-		return function_exists($fonc)?$fonc($flux):$flux;
+		if (function_exists($fonc)) $flux=$fonc($flux);
 	}
+	return $flux;
 }
 
 ?>
