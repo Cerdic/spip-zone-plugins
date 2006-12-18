@@ -16,7 +16,7 @@ if (!defined('_DIR_PLUGIN_FORMS')){
 }
 include_spip('base/forms');
 
-function autoriser_form($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
+function autoriser_form_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	if ($type=='form')
 		if ($faire=='administrer'){
 			return ($qui['statut'] == '0minirezo');
@@ -24,6 +24,35 @@ function autoriser_form($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 		else
 			return ($qui['statut'] == '0minirezo');
 	return false;
+}
+function autoriser_form_modifierdonnee_dist($faire, $type, $id_form, $qui, $opt) {
+	// un admin dans le back office a toujours le droit de modifier
+	if (($qui['statut'] == '0minirezo')&&!_DIR_RESTREINT) return true;
+	$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
+	if (!$row = spip_fetch_array($result)) return false;
+	if (!$opt['id_donnee']) return false;
+	$dejareponse=Forms_verif_cookie_sondage_utilise($id_form);
+	if (($row['modifiable'] == 'oui') && $dejareponse) {
+		$q = "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form).
+			" AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).")";
+		//si unique, ignorer id_donnee, si pas id_donnee, ne renverra rien
+		if ($row['multiple']=='oui' || !_DIR_RESTREINT) $q.=" AND id_donnee="._q($opt['id_donnee']);
+		$r=spip_query($q);
+		if ($r=spip_fetch_array($r)) return true;
+	}
+	return false;
+}
+function autoriser_form_insererdonnee_dist($faire, $type, $id_form, $qui, $opt) {
+	// un admin dans le back office a toujours le droit d'inserer
+	if (($qui['statut'] == '0minirezo')&&!_DIR_RESTREINT) return true;
+	$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
+	if (!$row = spip_fetch_array($result)) return false;
+	if ($row['multiple']=='oui') return true;
+	$dejareponse=Forms_verif_cookie_sondage_utilise($id_form);
+	if ($dejareponse) return false;
+	$r=spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).")");
+	if ($r=spip_fetch_array($r)) return false;
+	return true;
 }
 
 // Code a rapatrier dans inc-public et inc_forms

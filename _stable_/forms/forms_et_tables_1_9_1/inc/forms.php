@@ -174,11 +174,25 @@
 	}
 	
 	function Forms_deplacer_fichier_form($source, $dest) {
+		/* le core interdit l'upload depuis l'espace prive... pourquoi tant de haine ?
 		include_spip('inc/getdocument');
 		if ($ok = deplacer_fichier_upload($source, $dest, true))
 			if (file_exists($source)) // argument move pas pris en compte avant spip 1.9.2
-				@unlink($source);
-	
+				@unlink($source);*/
+		$ok = @rename($source, $dest);
+		if (!$ok) $ok = @move_uploaded_file($source, $dest);
+		if ($ok)
+			@chmod($dest, _SPIP_CHMOD & ~0111);
+		else {
+			$f = @fopen($dest,'w');
+			if ($f) {
+				fclose ($f);
+			} else {
+				include_spip('inc/headers');
+				redirige_par_entete(generer_url_action("test_dirs", "test_dir=". dirname($dest), true));
+			}
+			@unlink($dest);
+		}
 		return $ok;
 	}
 
@@ -432,6 +446,8 @@
 	
 	function Forms_enregistrer_reponse_formulaire($id_form, $id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='') {
 		$r = '';
+		if (!include_spip('inc/autoriser'))
+			include_spip('inc/autoriser_compat');
 	
 		$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 		if (!$row = spip_fetch_array($result)) {
@@ -469,26 +485,13 @@
 				$statut = 'propose';
 			// D'abord creer la reponse dans la base de donnees
 			if ($ok) {
-				$dejareponse=Forms_verif_cookie_sondage_utilise($id_form);
-				if (($row['modifiable'] == 'oui' || !_DIR_RESTREINT) && $dejareponse) {
-					$q = "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form).
-						" AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).")";
-					//si unique, ignorer id_donnee, si pas id_donnee, ne renverra rien
-					if ($row['multiple']=='oui' || !_DIR_RESTREINT) $q.=" AND donnees_champs.id_donnee="._q($id_donnee);
-					$r=spip_query($q);
-					if ($r=spip_fetch_array($r)){
-						$id_donnee = $r['id_donnee'];
-						spip_query("UPDATE spip_forms_donnees SET date=NOW(), ip="._q($GLOBALS['ip']).", url="._q($url).", confirmation="._q($confirmation).", statut="._q($statut).", cookie="._q($cookie)." ".
-							"WHERE id_donnee="._q($id_donnee));
-						spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
-					} else {
-						spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie) ".
-						"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","._q($url).", '$confirmation', '$statut',"._q($cookie).")");
-						$id_donnee = spip_insert_id();
-					}
-				} elseif (!$id_donnee && (!_DIR_RESTREINT || !($dejareponse && $row['multiple']=='non'))) {
-						spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie) ".
-						"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","._q($url).", '$confirmation', '$statut',"._q($cookie).")");
+				if (autoriser('modifierdonnee', 'form', $id_form, NULL, array('id_donnee'=>$id_donnee))){
+					spip_query("UPDATE spip_forms_donnees SET date=NOW(), ip="._q($GLOBALS['ip']).", url="._q($url).", confirmation="._q($confirmation).", statut="._q($statut).", cookie="._q($cookie)." ".
+						"WHERE id_donnee="._q($id_donnee));
+					spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
+				} elseif (autoriser('insererdonnee', 'form', $id_form, NULL, array('id_donnee'=>$id_donnee))){
+					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie) ".
+					"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","._q($url).", '$confirmation', '$statut',"._q($cookie).")");
 					$id_donnee = spip_insert_id();
 				}
 				if (!$id_donnee) {

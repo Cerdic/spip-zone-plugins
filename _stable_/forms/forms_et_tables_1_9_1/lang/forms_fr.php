@@ -136,6 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'taille_max' => "Taille maximale (en ko)",
 'telecharger' => "T&eacute;l&eacute;charger",
 'telecharger_reponses' => "T&eacute;l&eacute;charger les r&eacute;ponses",
+'texte_donnee_statut' => "Statut de cette donn&eacute;e",
 'titre_formulaire' => "Titre du formulaire",
 'total_votes' => "Total des votes",
 'tous_formulaires' => "Tous les formulaires",

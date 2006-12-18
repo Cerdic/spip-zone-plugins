@@ -117,11 +117,13 @@ function affichage_donnee_edit($type_form, $titre_page, $titre_type, $titre_ajou
 		echo boite_snippets($titre_type,_DIR_PLUGIN_FORMS."img_pack/$type_form-24.gif",'forms','forms');*/
 	
 	debut_droite();
+	echo debut_cadre_relief();
 	if ($id_donnee){
 		$instituer_forms_donnee = charger_fonction('instituer_forms_donnee','inc');
 		$row = spip_fetch_array(spip_query("SELECT statut FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee)));
 		echo $instituer_forms_donnee($id_form,$id_donnee,$row['statut']);
 	}
+	echo fin_cadre_relief();
 
 	echo "<div class='verdana2'>$formulaire</div>";
 	
