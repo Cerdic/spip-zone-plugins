@@ -1,3 +1,4 @@
+
 var diapo_on=false;
 var center=true;
 function diaposlide(timeout){
@@ -103,6 +104,9 @@ $.fn.diapo_vignette = function() {
 		return false;
     });
 };
+$.fn.diapo_center = function() {
+	return this.css("display")=="none";
+}
 $(document).ready(function(){
 	$("#diapo_icones a").diapo_mode();
 	$("div.diapo_menu a.lien_pagination").diapo_pagination();
