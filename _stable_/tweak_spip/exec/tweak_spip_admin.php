@@ -140,7 +140,7 @@ function exec_tweak_spip_admin() {
 	echo "\n<p>";
 
 	echo "<div style='text-align:$spip_lang_right'>";
-	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' onclick=\"alert('à faire, si vous trouvez un moyen simple de stocker l'état des tweaks !')\">";
+	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' onclick=\"alert('à faire, si vous trouvez un moyen simple de stocker l\'état des tweaks !')\">";
 	echo "</div>";
 
 # ce bouton est trop laid :-)

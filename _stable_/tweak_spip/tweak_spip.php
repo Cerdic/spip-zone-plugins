@@ -18,7 +18,7 @@ function add_tweak($tableau) {
 // $pipeline ici est egal à 'options' ou 'fonctions'
 function include_tweaks($pipeline) {
 	global $tweaks;
-	foreach ($tweaks as $tweak) if ($tweak['pipeline']==$pipeline && $tweak['actif'])
+	foreach ($temp=$tweaks as $tweak) if ($tweak['pipeline']==$pipeline && $tweak['actif'])
 		include_spip('inc/'.$tweak['include']);
 }
 
