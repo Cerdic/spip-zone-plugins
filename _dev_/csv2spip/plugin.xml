@@ -4,20 +4,22 @@
         </nom>
         <auteur>        <!-- Auteur du plugin -->
           cy_altern
+					(c) 2006 - Licence GPL
         </auteur>
         <version>
-         2.3
+         3.0
         </version>
         <etat>
-          dev
+          test
         </etat>
         <description>
-          Permet de r&eacute;aliser l'int&eacute;gration d'auteurs et administrateurs restreint &agrave; partir de fichiers CSV. 
-					Ce plugin g&egrave;re &eacute;galement la cr&eacute;ation de rubriques pour les admins restreints cr&eacute;&eacute;s.
+          Permet de r&eacute;aliser l'int&eacute;gration d'auteurs et administrateurs restreints &agrave; partir de fichiers CSV. 
+					Ce plugin g&egrave;re &eacute;galement la cr&eacute;ation de rubriques pour les admins restreints 
+					ainsi que la cr&eacute;ation de groupes pour les restrictions d'acc&egrave;s (plugin acces_groupes).
 					Il permet aussi la suppression des utilisateurs qui ne seraient plus souhait&eacute;s avec &eacute;ventuellement la sauvegarde/gestion
 					de leurs articles.
         </description>
-	<lien></lien> <!-- URI de documentation -->
+				<lien>http://www.spip-contrib.net/articles1550</lien> <!-- URI de documentation -->
         <prefix>
           csv2spip
         </prefix>

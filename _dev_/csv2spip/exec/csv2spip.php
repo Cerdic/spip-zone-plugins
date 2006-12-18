@@ -1,6 +1,6 @@
 <?  
 /* csv2spip est un plugin pour créer/modifier les visiteurs, rédacteurs et administrateurs restreints d'un SPIP à partir de fichiers CSV
-*	 					VERSION : 2.3 => plugin pour spip 1.9
+*	 					VERSION : 3.0 => plugin pour spip 1.9
 *
 * Auteur : cy_altern
 *  
@@ -341,7 +341,7 @@ function exec_csv2spip() {
     					 		// créer les sous-groupes
 										 if ($data18['ss_groupe'] != '') {
     										 $grpe_ec = $data18['ss_groupe']; 				
-echo '<br>$grpe_ec = _'.$grpe_ec.'_';
+//echo '<br>$grpe_ec = _'.$grpe_ec.'_';
         								 $sql17 = spip_query("SELECT id_grpacces FROM $Taccesgroupes_groupes WHERE nom = '$grpe_ec' LIMIT 1");
     //echo '<br>mysql_error $sql17 = '.mysql_error();											 
         							// le groupe existe déja
@@ -362,19 +362,19 @@ echo '<br>$grpe_ec = _'.$grpe_ec.'_';
     												}
     												continue;
         								 }
-										 }
-										 $desc_grpe_csv2spip = _T('csvspip:grpe_csv2spip');
-    								 spip_query("INSERT INTO $Taccesgroupes_groupes (id_grpacces, nom, description, actif, proprio, demande_acces) 
-										 						 VALUES ('', '$grpe_ec', '$desc_grpe_csv2spip', 1, 0, 0)" );
-      			 				 $id_grpacces_new = mysql_insert_id();
-										 if (mysql_error() != '') {
-      							 		$Terr_acces_groupes[] = array('ss_groupe' => $grpe_ec, 'erreur' => mysql_error());
-												$err_total ++;
-      							 }
-										 else {
-										 	 // stocker l'id_grpacces du groupe dans $Tgrpes_accesgroupes[$nom_ss-grpe]
-													$Tgroupes_accesgroupes[$grpe_ec] = $id_grpacces_new;
-													$Tres_acces_groupes[] = $grpe_ec;
+    										 $desc_grpe_csv2spip = _T('csvspip:grpe_csv2spip');
+        								 spip_query("INSERT INTO $Taccesgroupes_groupes (id_grpacces, nom, description, actif, proprio, demande_acces) 
+    										 						 VALUES ('', '$grpe_ec', '$desc_grpe_csv2spip', 1, 0, 0)" );
+          			 				 $id_grpacces_new = mysql_insert_id();
+    										 if (mysql_error() != '') {
+          							 		$Terr_acces_groupes[] = array('ss_groupe' => $grpe_ec, 'erreur' => mysql_error());
+    												$err_total ++;
+          							 }
+    										 else {
+    										 	 // stocker l'id_grpacces du groupe dans $Tgrpes_accesgroupes[$nom_ss-grpe]
+    													$Tgroupes_accesgroupes[$grpe_ec] = $id_grpacces_new;
+    													$Tres_acces_groupes[] = $grpe_ec;
+    										 }
 										 }
     					 }
 							 echo "<br />"._T('csvspip:etape3.2')."<br />";

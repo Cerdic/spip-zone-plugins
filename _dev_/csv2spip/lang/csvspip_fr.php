@@ -1,8 +1,8 @@
 <?php
 /* csv2spip est un plugin pour créer/modifier les visiteurs, rédacteurs et administrateurs restreints d'un SPIP à partir de fichiers CSV
-*	 					VERSION : 2.3 => plugin pour spip 1.9
+*	 					VERSION : 3.0 => plugin pour spip 1.9
 *
-* Auteur : cy_altern (cy_altern@yahoo.fr)
+* Auteur : cy_altern
 *  
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 *  
@@ -129,7 +129,7 @@
 			'suppr_visit' => '<strong>visiteurs</strong> absents : ',
 			'help_suppr_redac' => '(pour IACA, cela correspond à une "bascule année" des élèves/profs d\'un établissement)', // Pas de suppression automatique des administrateurs de rubriques !<br>
 			'suprr_articles' => 'Supprimer les articles des auteurs effacés :',
-			'transfert_archive' => 'Transférer les articles des rédacteurs supprimés dans une rubrique d\'archives: ',
+			'transfert_archive' => 'Transférer les articles supprimés dans une rubrique d\'archives: ',
 			'nom_rubrique_archives' => 'Nom de la rubrique d\'archives : ',
 			'choix_parent_archive' => 'Rubrique parent de la rubrique d\'archives :',
 			'racine_site' => 'racine du site',
@@ -140,7 +140,7 @@
 			'passe_egale_login' => '(mot de passe idem login)',
 			'creation_rubriques' => 'Création de rubriques pour les sous-groupes administrateurs: ',
 			'rubrique_ss_groupes' => 'Créer une rubrique par sous-groupe d\'admins: ',
-			'profs_admins' => '(crée une rubrique pour chaque <strong>ss_groupe</strong> d\'admins et affecte l\'utilisateur comme admin de celle-ci.<br />
+			'profs_admins' => '(crée une rubrique pour chaque <strong>ss_groupe</strong> d\'admins et affecte l\'utilisateur comme admin de celle-ci. 
 										 		  IACA : les profs d\'une discipline seront administrateurs de leur rubrique)',
 			'article_rubrique' => 'Créer un article dans chaque rubrique admin: ',
 			'help_articles' => '(permet de rendre visibles ces rubriques dans la partie publique)',

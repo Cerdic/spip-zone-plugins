@@ -1,7 +1,8 @@
 <?php
-/* csv2spip est un plugin pour créer/modifier les rédacteurs et administrateurs restreints d'un SPIP à partir de fichiers CSV
+/* csv2spip est un plugin pour créer/modifier les visiteurs, rédacteurs et administrateurs restreints d'un SPIP à partir de fichiers CSV
+*	 					VERSION : 3.0 => plugin pour spip 1.9
 *
-* Auteur : cy_altern (cy_altern@yahoo.fr)
+* Auteur : cy_altern
 *  
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
 *  
@@ -13,7 +14,7 @@
 		// si on est admin
 		if ($GLOBALS['connect_statut'] == "0minirezo") {
 		  // on voit le bouton comme  sous-menu de "auteurs"
-			$boutons_admin['auteurs']->sousmenu['csv2spip']= new Bouton("../"._DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.gif", _T('csvspip:module_titre') );
+			$boutons_admin['auteurs']->sousmenu['csv2spip']= new Bouton("../"._DIR_PLUGIN_CSV2SPIP."/img_pack/csv2spip-24.png", _T('csvspip:module_titre') );
 		}
 		return $boutons_admin;
 	}
