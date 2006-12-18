@@ -11,8 +11,8 @@ include_spip('tweak_spip_config');
 /*
 paremetre $tableau : Array
 	'nom' 	=> nom du tweak
-	'description' 	=> description du tweak
-	'auteur' 		=> auteur du tweak
+	'description' 	=> description (et liens éventuels) du tweak
+	'auteur' 		=> auteur(s) du tweak
 	'include' 		=> fichier inc/???.php à inclure
 	'options'		=> 1 si l'include doit etre place dans tweak_spip_options.php
 	'fonctions'		=> 1 si l'include doit etre place dans tweak_spip_fonctions.php

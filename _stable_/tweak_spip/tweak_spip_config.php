@@ -9,9 +9,10 @@
 
 global $tweaks, $tweaks_actifs, $tweaks_pipelines, $tweak_exclude;
 
-// cette liste enumere les tweaks inc/???.php a installer.
+// cette liste enumere les tweaks inc/???.php a inclure.
 // commenter les tweaks à ne pas activer...
-// une page en admin sera la bienvenue pour eviter de configurer le plugin ici...
+// quand la page d'admin sera pleinement fonctionnelle, les lignes suivantes ne seront plus nécessaires...
+// une option sera simplement à rajouter pour définir si le tweak est chargé par defaut ou non
 $tweaks_actifs = array(	
 //	'desactiver_cache', 
 	'supprimer_numero_options',
@@ -38,7 +39,7 @@ add_tweak( array(
 
 add_tweak( array(
 	'nom'			=> 'Supprimer le num&eacute;ro',
-	'description' 	=> "Applique la fonction spip supprimer_numero() &agrave; l'ensemble des titres du site, sans qu'elle soit pr&eactute;sente dans les squelettes.",
+	'description' 	=> "Applique la fonction SPIP supprimer_numero() &agrave; l'ensemble des titres du site, sans qu'elle soit pr&eactute;sente dans les squelettes.",
 	'auteur' 		=> 'collectif',
 	'include' 		=> 'supprimer_numero_options',
 	// a inserer dans les options
@@ -62,7 +63,8 @@ _ version_plein_texte : extrait le contenu texte d'une page html pour rendre du 
 
 add_tweak( array(
 	'nom'			=> 'Orientation des images',
-	'description' 	=> "Le plugin orientation ajoute les crit&egrave;res <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code> dans vos squelettes pour le classement des photos. [Plus d'infos->http://www.spip-contrib.net/Portrait-ou-Paysage]",
+	'description' 	=> "Le plugin orientation ajoute les crit&egrave;res <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code> dans vos squelettes pour le classement des photos.
+_ [Plus d'infos->http://www.spip-contrib.net/Portrait-ou-Paysage]",
 	'auteur' 		=> 'Pierre Andrews (Mortimer) &amp; IZO',
 	'include' 		=> 'orientation',
 	// a inserer dans les fonctions
