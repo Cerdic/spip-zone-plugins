@@ -29,7 +29,7 @@ add_tweak( array(
 ));
 
 add_tweak( array(
-	'nom'			=> 'Supprimer le num&eactute;ro',
+	'nom'			=> 'Supprimer le num&eacute;ro',
 	'description' 	=> "Applique la fonction spip supprimer_numero &agrave; l'ensemble des titres du site, sans qu'elle soit pr&eactute;sente dans les squelettes.",
 	'auteur' 		=> 'collectif',
 	'include' 		=> 'supprimer_numero_options',
@@ -42,7 +42,9 @@ add_tweak( array(
 
 add_tweak( array(
 	'nom'			=> 'Version texte',
-	'description' 	=> "Filtres version_texte (extrait le contenu texte d'une page html &agrave; l'exclusion de quelques balises &eacute;l&eacute;mentaires) et version_plein_texte (extrait le contenu texte d'une page html pour rendre du texte plein)",
+	'description' 	=> "2 Filtres : 
+_ version_texte {(extrait le contenu texte d'une page html &agrave; l'exclusion de quelques balises &eacute;l&eacute;mentaires)}
+_ version_plein_texte {(extrait le contenu texte d'une page html pour rendre du texte plein)}",
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'include' 		=> 'verstexte_fonctions',
 	'pipeline' 		=> 'fonctions',
@@ -64,7 +66,8 @@ add_tweak( array(
 // TODO : gestion du jQuery dans la fonction à revoir ?
 add_tweak( array(
 	'nom'			=> 'D&eacute;sactiver les objects flash',
-	'description' 	=> 'Supprimer les objets flash des pages de votre site et les remplace par le contenu alternatif associ&eacute;. N&eacute;cessite jQuery',
+	'description' 	=> 'Ce plugin supprime les objets flash des pages de votre site et les remplace par le contenu alternatif associ&eacute;.
+_ N&eacute;cessite jQuery.',
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'include' 		=> 'desactiver_flash',
 	'pipeline' 		=> 'affichage_final',
@@ -77,7 +80,7 @@ add_tweak( array(
 
 add_tweak( array(
 	'nom'			=> 'Tout multi',
-	'description' 	=> 'Propose le raccourci <code><:texte:></code> pour introduire librement des blocs multi dans un flux de texte (via typo ou propre)',
+	'description' 	=> 'Introduit le raccourci {&lt;:texte:&gt;} pour introduire librement des blocs multi dans un texte.',
 	'auteur' 		=> '',
 	'include' 		=> 'toutmulti',
 	'pipeline' 		=> 'pre_typo',
@@ -91,14 +94,16 @@ add_tweak( array(
 	'include' 		=> 'bellespuces',
 	'pipeline' 		=> 'pre_typo',
 	'fonction' 		=> 'bellespuces_pre_typo',
-));
+));	
 
 add_tweak( array(
 	'nom'			=> 'D&eacute;coration',
-	'description' 	=> "Le filtre decoration permet aux redacteurs d'un site spip de d'appliquer les styles soulign&eacute;, barr&eacute;, au dessus, blink et fluo &agrave; une phrase, un mot, parapraphe.
+	'description' 	=> "Ce filtre permet aux r&eacute;dacteurs d'un article d'appliquer les styles <sc>capitales</sc>, <souligne>soulign&eacute;</souligne>, <barre>barr&eacute;</barre>, <dessus>dessus</dessus>, <clignote>clignote</clignote> et <fluo>fluo</fluo> &agrave; un texte.
+-* {&lt;sc&gt;}Lorem ipsum dolor sit amet{&lt;/sc&gt;}
 -* {&lt;souligne&gt;}Lorem ipsum dolor sit amet{&lt;/souligne&gt;}
 -* {&lt;barre&gt;}Lorem ipsum dolor sit amet{&lt;/barre&gt;}
--* {&lt;blink&gt;}Lorem ipsum dolor sit amet{&lt;/blink&gt;}
+-* {&lt;dessus&gt;}Lorem ipsum dolor sit amet{&lt;/dessus&gt;}
+-* {&lt;clignote&gt;}Lorem ipsum dolor sit amet{&lt;/clignote&gt;}
 -* {&lt;fluo&gt;}Lorem ipsum dolor sit amet{&lt;/fluo&gt;}",
 	'auteur' 		=> '[izo@aucuneid.net->http://www.aucuneid.com/bones]',
 	'include' 		=> 'decoration',
@@ -110,7 +115,13 @@ add_tweak( array(
 //                        activation des tweaks                                //
 //-----------------------------------------------------------------------------//
 
-foreach ($tweaks as $i=>$tweak) $tweaks[$i]['actif']=in_array($tweak['include'], $tweaks_actifs);
+
+foreach ($tweaks as $i=>$tweak) {
+	 $tweaks[$i]['actif'] = in_array($tweak['include'], $tweaks_actifs);
+/*	 $tweaks[$i]['nom'] = propre($tweak['nom']);
+	 $tweaks[$i]['description'] = propre($tweak['description']);
+	 $tweaks[$i]['auteur'] = propre($tweak['auteur']);*/
+}
 
 //print_r($tweaks_actifs);
 //print_r($tweaks);
