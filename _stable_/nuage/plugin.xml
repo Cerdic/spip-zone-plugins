@@ -1,9 +1,15 @@
 <plugin>
-	<version>1.0</version>
+	<version>1.1</version>
 	<nom>Nuage</nom>
 	<prefix>nuage</prefix>
 	<auteur>(c)2005-2006 Booz, Fil Licence GPL</auteur>
 	<etat>stable</etat>
-	<lien>[Afficher les mots-clés en faisant varier la taille de la police->http://www.spip-contrib.net/Afficher-les-mots-cles-en-faisant]</lien>
-	<description>Version plugin avec modele, filtre, balise de la contrib nuage de tag (cf lien)</description>
+	<lien>[Afficher les mots-cl&eacute;s en faisant varier la taille de la police->http://www.spip-contrib.net/Afficher-les-mots-cles-en-faisant]</lien>
+	<description>Version plugin avec modele, filtre, balise de la contrib nuage de tag (cf lien). Une option permet d'am&eacute;liorer l'accessibilit&eacute; du plugin, cf. nuage_options.php.</description>
+	<options>nuage_options.php</options>
+	<pipeline>
+		<nom>insert_head</nom> 
+		<action>insert_head</action>
+		<inclure>nuage_pipelines_public.php</inclure>
+	</pipeline>
 </plugin>
