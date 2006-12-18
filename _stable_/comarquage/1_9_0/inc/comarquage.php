@@ -227,7 +227,7 @@ function comarquage_recuperer_page_xml($parametres){
 	include_spip('inc/distant');
 	$page = recuperer_page($url);
 	
-	if ($page===FALSE) return FALSE;
+	if ($page===FALSE || !strlen($page)) return FALSE;
 	
 	/* Return 20 if the file has been downloaded OK. */
 	ecrire_fichier($parametres['xml_full_path'],$page);
