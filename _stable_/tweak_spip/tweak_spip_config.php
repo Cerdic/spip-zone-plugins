@@ -116,12 +116,8 @@ add_tweak( array(
 //-----------------------------------------------------------------------------//
 
 
-foreach ($tweaks as $i=>$tweak) {
+foreach ($tweaks as $i=>$tweak)
 	 $tweaks[$i]['actif'] = in_array($tweak['include'], $tweaks_actifs);
-/*	 $tweaks[$i]['nom'] = propre($tweak['nom']);
-	 $tweaks[$i]['description'] = propre($tweak['description']);
-	 $tweaks[$i]['auteur'] = propre($tweak['auteur']);*/
-}
 
 //print_r($tweaks_actifs);
 //print_r($tweaks);
