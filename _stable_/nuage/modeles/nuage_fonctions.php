@@ -22,16 +22,18 @@ function nuage($id_mot, $titre = '', $url = '', $poids = 0){
 		$maxpop = empty($poids)?0:max($poids);
 		$totalpop = count($poids);
 		if($maxpop>0){
+			$texte .= '<ul class="nuage_frequence">'."\n";
 			foreach ($titre as $id => $t) {
 				$score = $poids[$id]/$maxpop; # entre 0 et 1
 				if($score > 0.05){
-					$s = ceil(30*$score);
-					$s = 10 + $s;
-					$l = "<span style='white-space:nowrap; font-size:".$s."px;'>$t<span class=\"nuage_frequence\"> (".$poids[$id]."/".$totalpop.")</span></span>";
-					$l = "<a href='".$url[$id]."'>$l</a>";
+					$l = "<span class=\"nuage_item_titre\" style=\"white-space:nowrap; font-size:".$s."em;\">$t<span class=\"nuage_frequence\"> (".$poids[$id]."/".$totalpop.")</span></span>";
+					$s = 0.02*ceil(75*$score);
+					$s = 0.75 + $s;
+					$l = "<li><a href='".$url[$id]."'>$l</a></li>";
 					$texte .= "$l\n";
 				}
 			}
+			$texte .= '</ul>'."\n";
 			$nuage = array();
 		}
 	}
