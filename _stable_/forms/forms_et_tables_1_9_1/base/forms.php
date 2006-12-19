@@ -97,6 +97,7 @@ $spip_forms_donnees = array(
 	"confirmation" 	=> "VARCHAR(10) NOT NULL",
 	"statut"	=> "VARCHAR(10) NOT NULL",
 	"cookie"	=> "VARCHAR(255) NOT NULL",
+	"rang" => "bigint(21) NOT NULL",
 	"maj" 		=> "TIMESTAMP");
 
 $spip_forms_donnees_key = array(

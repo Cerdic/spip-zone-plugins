@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut)
+function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut, $rang=NULL)
 {
 
 	$res =
@@ -34,8 +34,11 @@ function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut)
 	"</select>" .
 	" &nbsp; " .
 	http_img_pack("puce-".puce_statut($statut).'.gif', "", "border='0'") .
-	"  &nbsp;\n" .
-	"<span class='visible_au_chargement' id='valider_statut'>" .
+	"  &nbsp;\n";
+	if ($rang!==NULL){
+		$res .= "<input name='rang_nouv' size='4' class='fondl' value='$rang' onchange=\"setvisibility('valider_statut', 'visible');\" />";
+	}
+	$res .= "<span class='visible_au_chargement' id='valider_statut'>" .
 	"<input type='submit' value='"._T('bouton_valider')."' class='fondo' />" .
 	"</span>" .
 	 "</center>"

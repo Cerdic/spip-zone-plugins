@@ -444,6 +444,31 @@
 		return $erreur;
 	}
 	
+	function Forms_rang_prochain($id_form){
+		$rang = 1;
+		$res = spip_query("SELECT max(rang) AS rang_max FROM spip_forms_donnees WHERE id_form="._q($id_form));
+		if ($row = spip_fetch_array($res))
+			$rang = $row['rang_max']+1;
+		return $rang;
+	}
+	function Forms_rang_update($id_donnee,$rang_nouv){
+		$res = spip_query("SELECT id_form,rang FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
+		if (!$row = spip_fetch_array($res)) return;
+		$rang = $row['rang'];
+		$id_form = $row['id_form'];
+		
+		// incrementer tous ceux dont le rang est superieur a la cible pour faire une place
+		$ok = spip_query("UPDATE spip_forms_donnees SET rang=rang+1 WHERE id_form=$id_form AND rang>="._q($rang_nouv));
+		if (!$ok) return $rang;
+		// mettre a jour le rang de l'element demande
+		$ok = spip_query("UPDATE spip_forms_donnees SET rang="._q($rang_nouv)." WHERE id_donnee=$id_donnee");
+		if (!$ok) return $rang;
+		
+		// decrementer tous ceux dont le rang est superieur a l'ancien pour recuperer la place
+		spip_query("UPDATE spip_forms_donnees SET rang=rang-1 WHERE id_form=$id_form AND rang>$rang");
+		return $rang_nouv;
+	}
+	
 	function Forms_enregistrer_reponse_formulaire($id_form, $id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='') {
 		$r = '';
 		if (!include_spip('inc/autoriser'))
@@ -489,9 +514,10 @@
 					spip_query("UPDATE spip_forms_donnees SET date=NOW(), ip="._q($GLOBALS['ip']).", url="._q($url).", confirmation="._q($confirmation).", statut="._q($statut).", cookie="._q($cookie)." ".
 						"WHERE id_donnee="._q($id_donnee));
 					spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
-				} elseif ($a=autoriser('insererdonnee', 'form', $id_form, NULL, array('id_donnee'=>$id_donnee))){
-					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie) ".
-					"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","._q($url).", '$confirmation', '$statut',"._q($cookie).")");
+				} elseif (autoriser('insererdonnee', 'form', $id_form, NULL, array('id_donnee'=>$id_donnee))){
+					$rang = Forms_rang_prochain($id_form);
+					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie, rang) ".
+					"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","._q($url).", '$confirmation', '$statut',"._q($cookie).","._q($rang).")");
 					$id_donnee = spip_insert_id();
 					# cf. GROS HACK exec/template/tables_affichage
 					# rattrapper les documents associes a cette nouvelle donnee

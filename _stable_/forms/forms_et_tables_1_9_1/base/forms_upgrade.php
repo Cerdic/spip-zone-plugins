@@ -48,7 +48,7 @@
 	}
 
 	function Forms_upgrade(){
-		$version_base = 0.23;
+		$version_base = 0.24;
 		$current_version = 0.0;
 		if (   (isset($GLOBALS['meta']['forms_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['forms_base_version'])==$version_base))
@@ -194,6 +194,19 @@
 		if ($current_version<0.23){
 			spip_query("ALTER TABLE spip_forms ADD documents ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER linkable");
 			ecrire_meta('forms_base_version',$current_version=0.23);
+		}
+		if ($current_version<0.24){
+			spip_query("ALTER TABLE spip_forms_donnees ADD rang bigint(21) NOT NULL AFTER cookie");
+			$res = spip_query("SELECT id_form FROM spip_forms");
+			while ($row = spip_fetch_array($res)){
+				$res2 = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form=".$row['id_form']." ORDER BY id_donnee");
+				$rang=1;
+				while ($row2 = spip_fetch_array($res2)){
+					spip_query("UPDATE spip_forms_donnees SET rang=$rang WHERE id_donnee=".$row2['id_donnee']);
+					$rang++;
+				}
+			}
+			ecrire_meta('forms_base_version',$current_version=0.24);
 		}
 		ecrire_metas();
 	}

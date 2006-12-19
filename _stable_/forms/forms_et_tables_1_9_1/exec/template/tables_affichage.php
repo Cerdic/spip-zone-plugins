@@ -149,8 +149,8 @@ function affichage_donnee_edit($type_form, $titre_page, $titre_type, $titre_ajou
 	if ($id_donnee){
 		echo debut_cadre_relief();
 		$instituer_forms_donnee = charger_fonction('instituer_forms_donnee','inc');
-		$row = spip_fetch_array(spip_query("SELECT statut FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee)));
-		echo $instituer_forms_donnee($id_form,$id_donnee,$row['statut']);
+		$row = spip_fetch_array(spip_query("SELECT statut,rang FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee)));
+		echo $instituer_forms_donnee($id_form,$id_donnee,$row['statut'],$row['rang']);
 		echo fin_cadre_relief();
 	}
 

@@ -33,6 +33,11 @@ function action_instituer_forms_donnee_dist() {
 			include_spip('inc/forms_compat_191');
 		$id_donnee = intval($id_donnee);
 		spip_query("UPDATE spip_forms_donnees SET statut="._q($statut)." WHERE id_donnee="._q($id_donnee));
+		
+		if ($rang_nouv = intval(_request('rang_nouv'))){
+			include_spip("inc/forms");
+			Forms_rang_update($id_donnee,$rang_nouv);
+		}
 	}
 }
 
