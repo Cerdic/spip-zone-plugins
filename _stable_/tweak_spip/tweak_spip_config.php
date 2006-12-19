@@ -42,7 +42,6 @@ add_tweak( array(
 add_tweak( array(
 	'nom'			=> 'Supprimer le num&eacute;ro',
 	'description' 	=> "Applique la fonction SPIP supprimer_numero() &agrave; l'ensemble des titres du site, sans qu'elle soit pr&eactute;sente dans les squelettes.",
-	'auteur' 		=> 'collectif',
 	'include' 		=> 'supprimer_numero',
 	// tweak a inserer dans les options
 	'options'		=> 1
@@ -51,7 +50,6 @@ add_tweak( array(
 add_tweak( array(
 	'nom'			=> 'Paragrapher',
 	'description' 	=> "Applique la fonction SPIP paragrapher() aux textes qui sont d&eacute;pourvus de paragraphes en insérant des balises &lt;p&gt;.",
-	'auteur' 		=> 'collectif',
 	'include' 		=> 'paragrapher',
 	// tweak a inserer dans les options
 	'options'		=> 1

@@ -206,8 +206,8 @@ function ligne_tweak($tweak){
 
 	$s .= "\n<div class='detailplugin'>";
 	if (isset($tweak['description'])) $s .= propre($tweak['description']);
-	if (isset($tweak['auteur'])) $s .= "<p>" . _T('auteur') .' '. propre($tweak['auteur']) . "</p><hr/>";
-	$s .= _T('tweak:tweak') ." $inc.php";
+	if (isset($tweak['auteur'])) $s .= "<p>" . _T('auteur') .' '. propre($tweak['auteur']) . "</p>";
+	$s .= "<hr/>" . _T('tweak:tweak') . " $inc.php";
 	if ($tweak['options']) $s .= ' | options';
 	if ($tweak['fonctions']) $s .= ' | fonctions';
 	foreach ($tweak as $pipe=>$fonc) if(is_tweak_pipeline($pipe)) $s .= ' | '.$pipe;
