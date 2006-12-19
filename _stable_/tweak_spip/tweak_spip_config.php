@@ -139,7 +139,7 @@ add_tweak( array(
 
 add_tweak( array(
 	'nom'			=> 'Mises en exposant',
-	'description' 	=> "Am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {M{m}e} devient {Mme} et en corrigeant les erreurs courantes {2{&egrave;}me} ou  {2{m}e}, par exemple, deviennent {2e}, seule abr&eacute;viation correcte).
+	'description' 	=> "Textes fran&ccedil;ais : am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {M{m}e} devient {Mme} et en corrigeant les erreurs courantes {2{&egrave;}me} ou  {2{m}e}, par exemple, deviennent {2e}, seule abr&eacute;viation correcte).
 
 Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie nationale telles qu'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l'Imprimerie nationale, Paris, 2002).",
 	'auteur' 		=> 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',

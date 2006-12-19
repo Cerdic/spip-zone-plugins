@@ -1,10 +1,10 @@
 <?php
-// Filtre typographique exposants
-// Cette fonction emprunte les expressions régulières publiées par Raphaël Meyssen
+// Filtre typographique exposants pour langue francaise
+// Cette fonction emprunte les expressions régulières publiees par Raphaël Meyssen
 // sur <http://www.spip-contrib.net/Filtre-typographique-exposants>.
 
-function typo_exposants($texte){
-
+// cette fonction ne fonctionne que pour le francais
+function typo_exposants_fr($texte){
 	$trouve = array(
 		'/(\\bM)(elle|lle)\\b/', // Mlle(s), Mme(s) et erreurs Melle(s)
 		'/(\\bM)(elles|lles)\\b/',
@@ -22,7 +22,6 @@ function typo_exposants($texte){
 		'/(\\b[1I])(res?)\\b/', // 1re(s)
 		'/(\\b[0-9IVX]+)(er?s?)\\b/' // 1er(s), 2e(s), IIIe(s)...
 	);
-
 	$remplace = array(
 		'M<small><sup>lle</sup></small>', // Mlle(s), Mme(s)
 		'M<small><sup>lles</sup></small>',
@@ -42,8 +41,16 @@ function typo_exposants($texte){
 
 	);
 
-	$texte=preg_replace($trouve, $remplace, $texte);
+	return preg_replace($trouve, $remplace, $texte);
+}
 
-	return $texte;
+function typo_exposants($texte){
+	if (!$lang = $GLOBALS['lang_objet']) $lang = $GLOBALS['spip_lang'];
+	switch (lang_typo($lang)) {
+		case 'fr':
+			return typo_exposants_fr($texte);
+		default:
+			return $texte;
+	}
 }
 ?>
