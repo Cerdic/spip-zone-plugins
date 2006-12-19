@@ -54,6 +54,8 @@ function exec_forms_tous(){
 		echo "</div>";
 	}
 	
+	if ($GLOBALS['spip_version_code']>=1.9203)
+		echo fin_gauche();
 	echo fin_page();
 }
 

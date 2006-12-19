@@ -210,6 +210,8 @@ function exec_forms_edit(){
 		$row['texte'] = "";
 		$row['moderation'] = "priori";
 		$row['public'] = "non";
+		$row['linkable'] = "non";
+		$row['documents'] = "non";
 		$focus = "antifocus";
 		
 		$action_link = generer_action_auteur("forms_edit","new",urlencode($redirect));
@@ -299,6 +301,8 @@ function exec_forms_edit(){
 
 	echo $out;
 
+	if ($GLOBALS['spip_version_code']>=1.9203)
+		echo fin_gauche();
 	echo fin_page();
 }
 

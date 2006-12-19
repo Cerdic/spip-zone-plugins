@@ -201,7 +201,7 @@ function Forms_liste_decrit_donnee($id_donee){
 	JOIN spip_forms_donnees AS d ON d.id_donnee=dc.id_donnee
 	JOIN spip_forms_champs AS c ON c.champ=dc.champ AND c.id_form=d.id_form
 	JOIN spip_forms AS f ON f.id_form=d.id_form
-	WHERE c.specifiant='oui' AND dc.id_donnee="._q($id_donee)." ORDER BY c.rang");
+	WHERE c.specifiant='oui' AND dc.id_donnee="._q($id_donee)." AND f.linkable='oui' ORDER BY c.rang");
 	/*var_dump("SELECT c.titre,dc.valeur FROM spip_forms_donnees_champs AS dc 
 	JOIN spip_forms_donnees AS d ON d.id_donnee=dc.id_donnee
 	JOIN spip_forms_champs AS c ON c.champ=dc.champ AND c.id_form=d.id_form

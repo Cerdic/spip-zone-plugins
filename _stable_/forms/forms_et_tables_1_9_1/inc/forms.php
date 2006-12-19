@@ -489,10 +489,14 @@
 					spip_query("UPDATE spip_forms_donnees SET date=NOW(), ip="._q($GLOBALS['ip']).", url="._q($url).", confirmation="._q($confirmation).", statut="._q($statut).", cookie="._q($cookie)." ".
 						"WHERE id_donnee="._q($id_donnee));
 					spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
-				} elseif (autoriser('insererdonnee', 'form', $id_form, NULL, array('id_donnee'=>$id_donnee))){
+				} elseif ($a=autoriser('insererdonnee', 'form', $id_form, NULL, array('id_donnee'=>$id_donnee))){
 					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie) ".
 					"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","._q($url).", '$confirmation', '$statut',"._q($cookie).")");
 					$id_donnee = spip_insert_id();
+					# cf. GROS HACK exec/template/tables_affichage
+					# rattrapper les documents associes a cette nouvelle donnee
+					# ils ont un id = 0-id_auteur
+					spip_query("UPDATE spip_documents_donnees SET id_donnee = $id_donnee WHERE id_donnee = ".(0-$GLOBALS['auteur_session']['id_auteur']));
 				}
 				if (!$id_donnee) {
 					$erreur['@'] = _T("forms:probleme_technique");

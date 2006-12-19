@@ -552,6 +552,21 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out .= "<br />";
 	$out .= fin_cadre_enfonce(true);
 	
+	$out .= debut_cadre_enfonce("",true);
+	$out .= "<input type='checkbox' name='linkable' id='linkable' value='oui'";
+	if ($row['linkable']=='oui') $out .= "checked='checked' /><label for='linkable'><b>";
+	else $out .=" /><label for='linkable'>";
+	$out .= _T("forms:lier_articles");
+	if ($row['linkable']=='oui') $out .= "</b>";
+	$out .= "</label><br />";
+	$out .= "<input type='checkbox' name='documents' id='documents' value='oui'";
+	if ($row['documents']=='oui') $out .= "checked='checked' /><label for='documents'><b>";
+	else $out .=" /><label for='documents'>";
+	$out .= _T("forms:lier_documents");
+	if ($row['documents']=='oui') $out .= "</b>";
+	$out .= "</label><br />";
+	$out .= fin_cadre_enfonce(true);
+	
 	$out .= "<label for='wrap'>"._T("forms:html_wrapper")."</label> :";
 	$out .= " &nbsp;<textarea name='html_wrap' id='wrap'  class='verdana2' style='width:90%;height:3em;' >".
 	entites_html($row['html_wrap'])."</textarea><br />\n";

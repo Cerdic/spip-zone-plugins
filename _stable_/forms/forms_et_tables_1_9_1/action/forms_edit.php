@@ -90,6 +90,8 @@ function Forms_update($id_form){
 	$forms_obligatoires = _request('forms_obligatoires');
 	$moderation = _request('moderation');
 	$public = _request('public');
+	$linkable = _request('linkable');
+	$documents = _request('documents');
 	$html_wrap = _request('html_wrap');
 
 	$modif_champ = _request('modif_champ');
@@ -128,6 +130,8 @@ function Forms_update($id_form){
 			"texte="._q($texte).", ".
 			"moderation="._q($moderation).", ".
 			"public="._q($public).", ".
+			"linkable="._q($linkable?$linkable:'non').", ".
+			"documents="._q($documents?$documents:'non').", ".
 			"html_wrap="._q($html_wrap)." ".
 			"WHERE id_form="._q($id_form);
 		$result = spip_query($query);
@@ -144,6 +148,8 @@ function Forms_update($id_form){
 		$forms_obligatoires = $row['forms_obligatoires'];
 		$moderation = $row['moderation'];
 		$public = $row['public'];
+		$linkable = $row['linkable'];
+		$documents = $row['documents'];
 		$email = unserialize($row['email']);
 		$champconfirm = $row['champconfirm'];
 		$html_wrap = $row['html_wrap'];

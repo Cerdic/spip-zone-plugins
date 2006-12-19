@@ -46,6 +46,8 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 		echo "</div>";
 	}
 	
+	if ($GLOBALS['spip_version_code']>=1.9203)
+		echo fin_gauche();
 	echo fin_page();
 }
 
@@ -85,6 +87,8 @@ function affichage_donnees_tous($type_form, $titre_page, $titre_type, $titre_ajo
 	echo "</td></tr></table><br />\n";
 	
 
+	if ($GLOBALS['spip_version_code']>=1.9203)
+		echo fin_gauche();
 	echo fin_page();
 }
 
@@ -117,7 +121,25 @@ function affichage_donnee_edit($type_form, $titre_page, $titre_type, $titre_ajou
 	echo "<p>";
 	fin_boite_info();
 	
-	echo afficher_documents_colonne($id_donnee, "donnee", _request('exec'));
+ 	$res = spip_query("SELECT documents FROM spip_forms WHERE id_form="._q($id_form));
+ 	$row = spip_fetch_array($res);
+ 	if ($row['documents']=='oui'){
+		if ($id_donnee){
+			# affichage sur le cote des pieces jointes, en reperant les inserees
+			# note : traiter_modeles($texte, true) repere les doublons
+			# aussi efficacement que propre(), mais beaucoup plus rapidement
+			echo afficher_documents_colonne($id_donnee, "donnee", _request('exec'));
+		} else {
+			# ICI GROS HACK
+			# -------------
+			# on est en new ; si on veut ajouter un document, on ne pourra
+			# pas l'accrocher a l'article (puisqu'il n'a pas d'id_article)...
+			# on indique donc un id_article farfelu (0-id_auteur) qu'on ramassera
+			# le moment venu, c'est-ˆ-dire lors de la creation de l'article
+			# dans editer_article.
+			echo afficher_documents_colonne(0-$GLOBALS['auteur_session']['id_auteur'], "donnee", _request('exec'));
+		}
+ 	}
 	
 	creer_colonne_droite();
 	/*if (include_spip('inc/snippets'))
@@ -146,7 +168,8 @@ function affichage_donnee_edit($type_form, $titre_page, $titre_type, $titre_ajou
 		}
 		echo $liste;
 	}
-
+	if ($GLOBALS['spip_version_code']>=1.9203)
+		echo fin_gauche();
 	echo fin_page();
 }
 ?>

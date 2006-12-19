@@ -48,7 +48,7 @@
 	}
 
 	function Forms_upgrade(){
-		$version_base = 0.22;
+		$version_base = 0.23;
 		$current_version = 0.0;
 		if (   (isset($GLOBALS['meta']['forms_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['forms_base_version'])==$version_base))
@@ -190,6 +190,10 @@
 			creer_base();
 			ecrire_meta('documents_donnee','oui');
 			ecrire_meta('forms_base_version',$current_version=0.22);
+		}
+		if ($current_version<0.23){
+			spip_query("ALTER TABLE spip_forms ADD documents ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER linkable");
+			ecrire_meta('forms_base_version',$current_version=0.23);
 		}
 		ecrire_metas();
 	}

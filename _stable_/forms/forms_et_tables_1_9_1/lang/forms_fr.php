@@ -94,6 +94,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'liste_choix' => "Liste des choix propos&eacute;s",
 'lien_retirer_donnee' =>"Retirer le lien",
+'lier_articles' => "Permettre d'associer les donn&eacute;es aux articles",
+'lier_documents' => "Permettre de joindre des documents aux donn&eacute;es",
 
 'moderation_donnees' => 'Valider les donn&eacute;es avant publication :',
 'modifiable_donnees'=>"Donn&eacute;s modifiables dans l'espace public&nbsp;:",

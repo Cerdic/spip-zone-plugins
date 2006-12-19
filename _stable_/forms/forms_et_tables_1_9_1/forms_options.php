@@ -27,10 +27,10 @@ function autoriser_form_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) 
 }
 function autoriser_form_modifierdonnee_dist($faire, $type, $id_form, $qui, $opt) {
 	// un admin dans le back office a toujours le droit de modifier
+	if (!$opt['id_donnee']) return false;
 	if (($qui['statut'] == '0minirezo')&&!_DIR_RESTREINT) return true;
 	$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 	if (!$row = spip_fetch_array($result)) return false;
-	if (!$opt['id_donnee']) return false;
 	$dejareponse=Forms_verif_cookie_sondage_utilise($id_form);
 	if (($row['modifiable'] == 'oui') && $dejareponse) {
 		$q = "SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form).
