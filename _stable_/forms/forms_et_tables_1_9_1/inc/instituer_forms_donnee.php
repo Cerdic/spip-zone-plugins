@@ -41,7 +41,7 @@ function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut)
 	 "</center>"
 	. '</div>';
   
-	return redirige_action_auteur('instituer_forms_donnee',$id_donnee,'table_donnee_edit', "id_form=$id_form&id_donnee=$id_donnee", $res, " method='post'");
+	return redirige_action_auteur('instituer_forms_donnee',$id_donnee,'donnees_edit', "id_form=$id_form&id_donnee=$id_donnee", $res, " method='post'");
 }
 
 // http://doc.spip.org/@puce_statut_article

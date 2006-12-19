@@ -132,7 +132,7 @@ function Forms_formulaire_article_afficher_donnees($id_article, $script){
 				$les_donnees[] = $id_donnee;
 				$vals = array();
 				$vals[] = $id_donnee;
-				$vals[] = "<a href='".generer_url_ecrire("table_donnee_edit","id_form=$id_form&id_donnee=$id_donnee&retour=".urlencode($retour))."'>"
+				$vals[] = "<a href='".generer_url_ecrire("donnees_edit","id_form=$id_form&id_donnee=$id_donnee&retour=".urlencode($retour))."'>"
 					.implode(", ",$champs)."</a>";
 				$redirect = ancre_url(generer_url_ecrire($script,"id_article=$id_article"),'tables');
 				$action = generer_action_auteur("forms_lier_donnees","$id_article,retirer,$id_donnee",urlencode($redirect));
