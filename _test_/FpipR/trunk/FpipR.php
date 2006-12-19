@@ -35,7 +35,7 @@ function FpipR_affiche_milieu($flux) {
 			if($check) {
 			  $html .= _T('fpipr:identifie_ok',array('user_id'=>'<a href="http://www.flickr.com/photos/'.$row['flickr_nsid'].'">'.$row['flickr_nsid'].'</a>'));
 			  $html .= _T('fpipr:revoke_info');
-			  $html .= generer_action_auteur('flickr_revoke_auth',$infos['frob'], generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur,true),'<button type="submit">'._T('fpipr:revoker').'</button>');
+			  $html .= generer_action_auteur('flickr_revoke_auth',$infos['frob'], generer_url_ecrire('auteurs_edit','id_auteur='.$connect_id_auteur,true),'<button type="submit">'._T('fpipr:revoke').'</button>');
 			  $html .= flickr_bookmarklet_info();
 			} else {
 			  include_spip('base/abstract_sql');
