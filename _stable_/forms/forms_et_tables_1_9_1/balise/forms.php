@@ -50,7 +50,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 	$formok = '';
 	$valeurs = array('0'=>'0');
 	$affiche_sondage = '';
-	$formactif = (_DIR_RESTREINT==_DIR_RESTREINT_ABS || preg_match(',donnee_edit$,',_request('exec')))?' ':'';
+	$formactif = (_DIR_RESTREINT==_DIR_RESTREINT_ABS || preg_match(',donnees_edit$,',_request('exec')))?' ':'';
 
 	$id_donnee = $id_donnee?$id_donnee:intval(_request('id_donnee'));
 	$flag_reponse = (_request('ajout_reponse') == 'oui' && _request('id_form') == $id_form) && _request('nobotnobot')=='';
@@ -61,6 +61,8 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 			$formok = _T($reponse_enregistree);
 			if ($reponse)
 			  $reponse = _T($message_confirm,array('mail'=>$reponse));
+			if (!_DIR_RESTREINT && $id_donnee=_request('id_donnee'))
+				$valeurs = Forms_valeurs($id_form,$id_donnee);
 		}
 		else {
 			// on reinjecte get et post dans $valeurs
