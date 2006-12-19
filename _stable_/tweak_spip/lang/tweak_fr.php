@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_tweak' => 'Activer le tweak',
 	'tweak'	=> 'Tweak :',
 	'tweaks_liste' => 'Liste des tweaks',
-	'texte_presente_tweaks' => "Cette page liste les tweaks disponibles. Vous pouvez activer les tweaks n&eacute;cessaires en cochant la case correspondante."
+	'texte_presente_tweaks' => "Cette page liste les tweaks disponibles.<br />Vous pouvez activer les tweaks n&eacute;cessaires en cochant la case correspondante."
 );
 
 

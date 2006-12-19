@@ -102,34 +102,37 @@ function exec_tweak_spip_admin() {
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
 */
-  debut_page(_T('tweak:titre'), 'configuration', 'tweak_spip');
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(v, "configuration", "v");
   tweak_styles();
 
-	echo '<br><br><br>';
-
+	echo "<br /><br /><br />";
 	gros_titre(_T('tweak:titre'));
+	echo barre_onglets("configuration", "tweak_spip");
 
-	/*Affichage*/
-	debut_gauche();	
-	
+//  debut_page(_T('tweak:titre'), 'configuration', 'tweak_spip');
+
+//	echo '<br><br><br>';
+//	gros_titre(_T('tweak:titre'));
+	debut_gauche();
 	debut_boite_info();
 	echo propre(_T('tweak:help'));
-	fin_boite_info();
-
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'tweak_spip_admin'),'data'=>''));
+	creer_colonne_droite();
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'tweak_spip_admin'),'data'=>''));
 	debut_droite();
+	lire_metas();
 
-	debut_cadre_relief();
+	echo generer_url_post_ecrire('tweak_spip_admin');
+
+//	debut_cadre_relief();
+	debut_cadre_trait_couleur('','','',_T('tweak:tweaks_liste'));
 
 	global $couleur_foncee;
-	echo "\n<table border='0' cellspacing='0' cellpadding='5' width='100%'>";
-	echo "<tr><td bgcolor='$couleur_foncee' background='' colspan='4'><b>";
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
-	echo _T('tweak:tweaks_liste')."</font></b></td></tr>";
+	echo "\n<table border='0' cellspacing='0' cellpadding='5' >";
 
-	echo "<tr><td class='serif' colspan=4>";
+	echo "<tr><td class='serif'>";
 	echo _T('tweak:texte_presente_tweaks');
-
-	echo generer_url_post_ecrire("tweak_spip_admin");
 
 	echo '<ul>';
 	foreach($temp = $tweaks as $tweak) echo '<li>' . ligne_tweak($tweak) . "</li>\n"; 
@@ -149,13 +152,19 @@ function exec_tweak_spip_admin() {
 #	echo "<input type='submit' name='desactive_tous' value='"._T('bouton_desactive_tout')."' class='fondl'>";
 #	echo "</div>";
 
-	echo "</form></td></tr></table>\n";
+	echo "</td></tr></table>\n";
 
 //  ecrire_meta('SquelettesMots:fond_pour_groupe',serialize($fonds));
 //  ecrire_metas();
-  
-	echo fin_page();
-  
+
+	fin_cadre_trait_couleur();
+//	fin_cadre_relief();
+
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'tweak_spip_admin'),'data'=>''));
+	echo "</form>";
+
+	echo fin_gauche(), fin_page();
+	
 }
 
 // est-ce que $pipe est un pipeline ?
@@ -197,7 +206,7 @@ function ligne_tweak($tweak){
 
 	$s .= "\n<div class='detailplugin'>";
 	if (isset($tweak['description'])) $s .= propre($tweak['description']);
-	if (isset($tweak['auteur'])) $s .= "<br/><br/>" . _T('auteur') .' '. propre($tweak['auteur']) . "<hr/>";
+	if (isset($tweak['auteur'])) $s .= "<p>" . _T('auteur') .' '. propre($tweak['auteur']) . "</p><hr/>";
 	$s .= _T('tweak:tweak') ." $inc.php";
 	if ($tweak['options']) $s .= ' | options';
 	if ($tweak['fonctions']) $s .= ' | fonctions';

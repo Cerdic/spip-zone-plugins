@@ -7,21 +7,22 @@
 #  Licence : GPL                                    #
 #---------------------------------------------------#
 
-global $tweaks, $tweaks_actifs, $tweaks_pipelines, $tweak_exclude;
+global $tweaks, $tweaks_actifs_a_l_installation, $tweaks_pipelines, $tweak_exclude;
 
-// cette liste enumere les tweaks inc/???.php a inclure.
+// cette liste enumere les tweaks inc/???.php a inclure lors de l'installation premiere du plugin.
 // commenter les tweaks à ne pas activer...
 // quand la page d'admin sera pleinement fonctionnelle, les lignes suivantes ne seront plus nécessaires...
 // une option sera simplement à rajouter pour définir si le tweak est chargé par defaut ou non
-$tweaks_actifs = array(	
+$tweaks_actifs_a_l_installation = array(	
 //	'desactiver_cache', 
-	'supprimer_numero_options',
+	'supprimer_numero',
 	'verstexte_fonctions',
 	'orientation',
 //	'desactiver_flash',
 	'toutmulti',
 	'bellespuces',
 	'decoration',
+	'typo_exposants'
 );
 	
 //-----------------------------------------------------------------------------//
@@ -33,7 +34,7 @@ add_tweak( array(
 	'description' 	=> 'Inhibition du cache de SPIP pour le d&eacute;veloppement du site.',
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'include' 		=> 'desactiver_cache',
-	// a inserer dans les options
+	// tweak a inserer dans les options
 	'options'		=> 1
 ));
 
@@ -41,8 +42,8 @@ add_tweak( array(
 	'nom'			=> 'Supprimer le num&eacute;ro',
 	'description' 	=> "Applique la fonction SPIP supprimer_numero() &agrave; l'ensemble des titres du site, sans qu'elle soit pr&eactute;sente dans les squelettes.",
 	'auteur' 		=> 'collectif',
-	'include' 		=> 'supprimer_numero_options',
-	// a inserer dans les options
+	'include' 		=> 'supprimer_numero',
+	// tweak a inserer dans les options
 	'options'		=> 1
 ));
 
@@ -57,7 +58,7 @@ _ version_texte : extrait le contenu texte d'une page html &agrave; l'exclusion 
 _ version_plein_texte : extrait le contenu texte d'une page html pour rendre du texte plein",
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'include' 		=> 'verstexte_fonctions',
-	// a inserer dans les fonctions
+	// tweak a inserer dans les fonctions
 	'fonctions'		=> 1
 ));
 
@@ -67,7 +68,7 @@ add_tweak( array(
 _ [Plus d'infos->http://www.spip-contrib.net/Portrait-ou-Paysage]",
 	'auteur' 		=> 'Pierre Andrews (Mortimer) &amp; IZO',
 	'include' 		=> 'orientation',
-	// a inserer dans les fonctions
+	// tweak a inserer dans les fonctions
 	'fonctions'		=> 1
 ));
 
@@ -126,6 +127,19 @@ add_tweak( array(
 	'pre_typo' => 'decoration_pre_typo',
 ));
 
+add_tweak( array(
+	'nom'			=> 'Mises en exposant',
+	'description' 	=> "Ce plugin am&eacute;liore le rendu typographique d'abr&eacute;viations fr&eacute;quentes, notamment par la mise en exposant de leurs &eacute;l&eacute;ments et/ou leur correction.
+_ Il se sert d'expressions r&eacute;guli&egrave;res publi&eacute;es sur  [Spip-Contrib.net->http://www.spip-contrib.net/Filtre-typographique-exposants] par Rapha&euml;l Meyssan. 
+_ Exemples : {M{elle} => Melle} - {2{&egrave;me} => 2me} - {IIi{&egrave;me} => IIme}
+
+Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie nationale telles qu'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l'Imprimerie nationale, Paris, 2002).",
+	'auteur' 		=> 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
+	'include' 		=> 'typo_exposants',
+	// pipeline => fonction
+	'post_typo'	=> 'typo_exposants',
+));
+
 //-----------------------------------------------------------------------------//
 //                        activation des tweaks                                //
 //-----------------------------------------------------------------------------//
@@ -134,8 +148,8 @@ add_tweak( array(
 $tweak_exclude = array('nom', 'description', 'auteur', 'include', 'options', 'fonctions', 'actif');
 
 foreach ($tweaks as $i=>$tweak) {
-	// insersion des parametres de $tweaks_actifs dans $tweaks;
-	$actif = $tweaks[$i]['actif'] = in_array($tweak['include'], $tweaks_actifs);
+	// insersion des parametres de $tweaks_actifs_a_l_installation dans $tweaks;
+	$actif = $tweaks[$i]['actif'] = in_array($tweak['include'], $tweaks_actifs_a_l_installation);
 	// stockage de la liste des fonctions par pipeline, si le tweak est actif...
 	if ($actif) {
 		foreach ($tweak as $pipe=>$fonc) if(!in_array($pipe, $tweak_exclude)) {
@@ -147,7 +161,7 @@ foreach ($tweaks as $i=>$tweak) {
 	}
 }
 
-//print_r($tweaks_actifs);
+//print_r($tweaks_actifs_a_l_installation);
 //print_r($tweaks);
 //print_r($tweaks_pipelines);
 
