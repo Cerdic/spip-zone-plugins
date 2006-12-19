@@ -139,9 +139,7 @@ add_tweak( array(
 
 add_tweak( array(
 	'nom'			=> 'Mises en exposant',
-	'description' 	=> "Ce plugin am&eacute;liore le rendu typographique d'abr&eacute;viations fr&eacute;quentes, notamment par la mise en exposant de leurs &eacute;l&eacute;ments et/ou leur correction.
-_ Il se sert d'expressions r&eacute;guli&egrave;res publi&eacute;es sur  [Spip-Contrib.net->http://www.spip-contrib.net/Filtre-typographique-exposants] par Rapha&euml;l Meyssan. 
-_ Exemples : {M{elle} => Melle} - {2{&egrave;me} => 2me} - {IIi{&egrave;me} => IIme}
+	'description' 	=> "Am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {M{m}e} devient {Mme} et en corrigeant les erreurs courantes {2{&egrave;}me} ou  {2{m}e}, par exemple, deviennent {2e}, seule abr&eacute;viation correcte).
 
 Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie nationale telles qu'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l'Imprimerie nationale, Paris, 2002).",
 	'auteur' 		=> 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',

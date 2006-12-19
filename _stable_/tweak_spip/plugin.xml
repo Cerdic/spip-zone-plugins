@@ -13,7 +13,7 @@ _ &copy; 2006 - Distribu&eacute; sous licence GPL
 	experimental
 	</etat>
 	<description>
-	R&eacute;unit en un seul plugin des fonctionnalit&eacute;s nouvelles et utiles am&eacute;liorant la gestion de vos sites SPIP.
+	R&eacute;unit en un seul plugin une liste de petites fonctionnalit&eacute;s nouvelles et utiles am&eacute;liorant la gestion de vos sites SPIP. Chacunes de ces fonctionnalités peut 
 	</description>
 	<lien>[->TODO.fr]</lien> <!-- URI de documentation -->
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
