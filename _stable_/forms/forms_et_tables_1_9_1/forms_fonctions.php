@@ -26,6 +26,7 @@
 
 	function forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $valeur, $id_form){
 		static $type_champ=array();
+		static $wrap_champ=array();
 		// s'assurer que l'on est bien sur une boucle forms, sinon retourner $valeur
 		$ok = $id_donnee && $champ;
 		$ok = $ok && in_array($type, array('forms_donnees_champs','forms_champs'));
@@ -38,10 +39,12 @@
 				$ok = false;
 		}
 		// on recupere le type du champ si pas deja fait (une seule requete par table et par champ)
-		if ($ok && !isset($type_champ[$id_form][$champ])){
-			$res = spip_query("SELECT type FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($champ));
-			if ($row = spip_fetch_array($res))
+		if ($ok && (!isset($type_champ[$id_form][$champ]) || !isset($wrap_champ[$id_form][$champ]))){
+			$res = spip_query("SELECT type,html_wrap FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($champ));
+			if ($row = spip_fetch_array($res)){
 				$type_champ[$id_form][$champ] = $row['type'];
+				$wrap_champ[$id_form][$champ] = $row['html_wrap'];
+			}
 			else 
 				$ok = false;
 		}
@@ -63,6 +66,7 @@
 				$valeur = propre($valeur);
 			else
 				$valeur = typo($valeur);
+			$valeur = wrap_champ($valeur,$wrap_champ[$id_form][$champ]);
 		}
 		return $valeur;
 	}

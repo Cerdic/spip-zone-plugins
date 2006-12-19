@@ -2,6 +2,8 @@
 	margin-top:0.5em;
 	font-size:xx-small;
 }
+#apercu_gauche .spip_barre{display:none;}
+#apercu_gauche textarea{height:4em;}
 
 #apercu .descriptif,
 #apercu .champconfirm,

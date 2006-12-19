@@ -171,6 +171,8 @@ $tables_jointures['spip_articles'][] = 'forms_articles';
 $tables_jointures['spip_forms'][] = 'forms_articles';
 $tables_jointures['spip_articles'][] = 'forms_donnees_articles';
 $tables_jointures['spip_forms_donnees'][] = 'forms_donnees_articles';
+$tables_jointures['spip_forms_donnees'][] = 'documents_donnees';
+$tables_jointures['spip_documents'][] = 'documents_donnees';
 
 global $table_des_tables;
 $table_des_tables['forms']='forms';
