@@ -4,7 +4,7 @@ function boutonstexte_insert_head($flux)
 {
 	$jsFile = find_in_path('boutonstexte.js');
 	$cssFile = find_in_path('boutonstexte.css');
-	$imgPath = dirname(find_in_path('img/fontsizeup.png'));
+	$imgPath = dirname(find_in_path('images/fontsizeup.png'));
 
 	$txtOnly = addslashes(unicode_to_javascript(html2unicode(_T(
 		'boutonstexte:texte_seulement'))));
