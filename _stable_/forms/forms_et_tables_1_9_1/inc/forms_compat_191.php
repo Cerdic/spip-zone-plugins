@@ -92,5 +92,17 @@
 			foreach ($r as $regs)
 				$t = str_replace($regs[0],code_echappement($regs[0],'javascript'.$a),$t);
 		return $t;
-	}	
+	}
+	// #RANG
+	// affiche le "numero de l'article" quand on l'a titre '1. Premier article';
+	// ceci est transitoire afin de preparer une migration vers un vrai systeme de
+	// tri des articles dans une rubrique (et plus si affinites)
+	// http://doc.spip.org/@balise_RANG_dist
+	function balise_RANG ($p) {
+		$_titre = champ_sql('titre', $p);
+		$_rang = champ_sql('rang', $p);
+		$p->code = "(($_rang)?($_rang):recuperer_numero($_titre))";
+		$p->interdire_scripts = false;
+		return $p;
+	}
 ?>
