@@ -146,4 +146,29 @@
 		return $r;
 	}
 
+
+	// construit une balise textarea avec la barre de raccourcis std de Spip.
+	// ATTENTION: cette barre injecte un script JS que le squelette doit accepter
+	// donc ce filtre doit IMPERATIVEMENT assurer la securite a sa place
+	
+	// http://doc.spip.org/@barre_textarea
+	function forms_textarea($texte, $rows, $cols, $name, $id='', $class='forml', $lang='') {
+		static $num_textarea = 0;
+		include_spip('inc/layer'); // definit browser_barre
+		if ($id=='') {$id="textarea_$num_textarea";$num_textarea++;}
+	
+		$texte = entites_html($texte);
+		if (!$GLOBALS['browser_barre'])
+			return "<textarea name='$name' rows='$rows' class='$class' cols='$cols'>$texte</textarea>";
+	
+		include_spip ('inc/barre');
+		return afficher_barre("document.getElementById('$id')", true, $lang) .
+		  "
+	<textarea name='$name' rows='$rows' class='$class' cols='$cols'
+	id='$id'
+	onselect='storeCaret(this);'
+	onclick='storeCaret(this);'
+	onkeyup='storeCaret(this);'
+	ondblclick='storeCaret(this);'>$texte</textarea>";
+	}
 ?>
