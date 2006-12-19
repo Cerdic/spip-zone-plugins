@@ -59,7 +59,10 @@
 					$valeur = typo($row['titre']);
 				}
 			}
-			/*else	$valeur = typo($valeur);*/
+			elseif ($t == 'texte')
+				$valeur = propre($valeur);
+			else
+				$valeur = typo($valeur);
 		}
 		return $valeur;
 	}
