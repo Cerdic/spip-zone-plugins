@@ -1,11 +1,11 @@
 <?php
 
-function balise_NUAGE($p){
-	$p->code = "nuage(0)";
+function balise_NUAGE_POP($p){
+	$p->code = "nuage_pop(0)";
 	return $p;
 }
 
-function nuage($id_mot, $titre = '', $url = '', $poids = 0){
+function nuage_pop($id_mot, $titre = '', $url = '', $poids = 0){
 	static $nuage;
 	$texte = '';
 	if($titre and $url){
@@ -24,13 +24,11 @@ function nuage($id_mot, $titre = '', $url = '', $poids = 0){
 		if($maxpop>0){
 			foreach ($titre as $id => $t) {
 				$score = $poids[$id]/$maxpop; # entre 0 et 1
-				if($score > 0.05){
-					$s = ceil(30*$score);
-					$s = 10 + $s;
-					$l = "<span style='white-space:nowrap; font-size:".$s."px;'>$t<span class=\"nuage_frequence\"> (".$poids[$id]."/".$totalpop.")</span></span>";
-					$l = "<a href='".$url[$id]."'>$l</a>";
-					$texte .= "$l\n";
-				}
+				$score = pow($score,1.5); # lissage
+				$s = ceil(15*$score);
+				$l = "<font style='white-space:nowrap;' size='$s'>$t<span class=\"nuage_frequence\"> (".$poids[$id]."/".$totalpop.")</span></font>";
+				$l = "<a href='".$url[$id]."'>$l</a>";
+				$texte .= "$l\n";
 			}
 			$nuage = array();
 		}
