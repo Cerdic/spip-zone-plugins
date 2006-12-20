@@ -41,7 +41,7 @@ add_tweak( array(
 
 add_tweak( array(
 	'nom'			=> 'Supprimer le num&eacute;ro',
-	'description' 	=> "Applique la fonction SPIP supprimer_numero() &agrave; l'ensemble des titres du site, sans qu'elle soit pr&eactute;sente dans les squelettes.",
+	'description' 	=> "Applique la fonction SPIP supprimer_numero() &agrave; l'ensemble des titres du site, sans qu'elle soit pr&eacute;sente dans les squelettes.",
 	'include' 		=> 'supprimer_numero',
 	// tweak a inserer dans les options
 	'options'		=> 1
@@ -61,7 +61,7 @@ add_tweak( array(
 
 add_tweak( array(
 	'nom'			=> 'Version texte',
-	'description' 	=> "2 Filtres pour vos squelettes. 
+	'description' 	=> "2 filtres pour vos squelettes. 
 _ version_texte : extrait le contenu texte d'une page html &agrave; l'exclusion de quelques balises &eacute;l&eacute;mentaires
 _ version_plein_texte : extrait le contenu texte d'une page html pour rendre du texte plein",
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
@@ -72,7 +72,7 @@ _ version_plein_texte : extrait le contenu texte d'une page html pour rendre du 
 
 add_tweak( array(
 	'nom'			=> 'Orientation des images',
-	'description' 	=> "Le plugin orientation ajoute les crit&egrave;res <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code> dans vos squelettes pour le classement des photos.
+	'description' 	=> "Ajoute les crit&egrave;res <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code> dans vos squelettes pour le classement des photos.
 _ [Plus d'infos->http://www.spip-contrib.net/Portrait-ou-Paysage]",
 	'auteur' 		=> 'Pierre Andrews (Mortimer) &amp; IZO',
 	'include' 		=> 'orientation',
@@ -88,7 +88,7 @@ _ [Plus d'infos->http://www.spip-contrib.net/Portrait-ou-Paysage]",
 // TODO : gestion du jQuery dans la fonction à revoir ?
 add_tweak( array(
 	'nom'			=> 'D&eacute;sactiver les objects flash',
-	'description' 	=> 'Ce plugin supprime les objets flash des pages de votre site et les remplace par le contenu alternatif associ&eacute;.
+	'description' 	=> 'Supprime les objets flash des pages de votre site et les remplace par le contenu alternatif associ&eacute;.
 _ N&eacute;cessite le plugin {jQuery} ou une version de SPIP sup&eacute;rieure à 1.9.2.',
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'include' 		=> 'desactiver_flash',
@@ -122,7 +122,7 @@ add_tweak( array(
 
 add_tweak( array(
 	'nom'			=> 'D&eacute;coration',
-	'description' 	=> "Ce filtre permet aux r&eacute;dacteurs d'un article d'appliquer les styles <sc>capitales</sc>, <souligne>soulign&eacute;</souligne>, <barre>barr&eacute;</barre>, <dessus>dessus</dessus>, <clignote>clignote</clignote> et <fluo>fluo</fluo> &agrave; un texte.
+	'description' 	=> "Permet aux r&eacute;dacteurs d'un article d'appliquer les styles <sc>capitales</sc>, <souligne>soulign&eacute;</souligne>, <barre>barr&eacute;</barre>, <dessus>dessus</dessus>, <clignote>clignote</clignote> et <fluo>fluo</fluo> &agrave; un texte.
 -* {&lt;sc&gt;}Lorem ipsum dolor sit amet{&lt;/sc&gt;}
 -* {&lt;souligne&gt;}Lorem ipsum dolor sit amet{&lt;/souligne&gt;}
 -* {&lt;barre&gt;}Lorem ipsum dolor sit amet{&lt;/barre&gt;}

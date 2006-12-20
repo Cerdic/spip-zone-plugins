@@ -90,20 +90,24 @@ function exec_tweak_spip_admin() {
   }
 /*
 	// mise a jour des donnees si envoi via formulaire
-	// sinon fait une passe de verif sur les plugin
+	// sinon fait une passe de verif sur les tweaks
 	if (_request('changer_tweaks')=='oui'){
-		enregistre_modif_plugin();
+		enregistre_modif_tweaks();
 		// pour la peine, un redirige, 
-		// que les plugin charges soient coherent avec la liste
-//		redirige_par_entete(generer_url_ecrire('tweak_spip_admin'));
+		// que les tweaks charges soient coherent avec la liste
+		redirige_par_entete(generer_url_ecrire('tweak_spip_admin'));
 	}
 	else
-		verif_plugin();
-	if (isset($_GET['surligne']))
-		$surligne = $_GET['surligne'];
+		verif_tweaks();
 */
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(v, "configuration", "v");
+	global $spip_version_code;
+	if ($spip_version_code<1.92) 
+  		debut_page(_T('tweak:titre'), 'configuration', 'tweak_spip');
+  	else {
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('tweak:titre'), "configuration", "tweak_spip");
+	}
+	
   tweak_styles();
 
 	echo "<br /><br /><br />";
@@ -124,9 +128,10 @@ function exec_tweak_spip_admin() {
 	lire_metas();
 
 	echo generer_url_post_ecrire('tweak_spip_admin');
+	echo "\n<input type='hidden' name='changer_tweaks' value='oui'>";
 
 //	debut_cadre_relief();
-	debut_cadre_trait_couleur('','','',_T('tweak:tweaks_liste'));
+	debut_cadre_trait_couleur('administration-24.gif','','',_T('tweak:tweaks_liste'));
 
 	global $couleur_foncee;
 	echo "\n<table border='0' cellspacing='0' cellpadding='5' >";
@@ -138,9 +143,6 @@ function exec_tweak_spip_admin() {
 	foreach($temp = $tweaks as $tweak) echo '<li>' . ligne_tweak($tweak) . "</li>\n"; 
 	echo '</ul>';
 	
-//	echo "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />";
-//	echo "\n<input type='hidden' name='hash' value='" . calculer_action_auteur("valide_plugin") . "'>";
-	echo "\n<input type='hidden' name='changer_tweaks' value='oui'>";
 
 	echo "\n<div style='text-align:$spip_lang_right'>";
 	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' onclick=\"alert('à faire, si vous trouvez un moyen simple de stocker l\'état des tweaks !')\">";
@@ -163,7 +165,7 @@ function exec_tweak_spip_admin() {
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'tweak_spip_admin'),'data'=>''));
 	echo "</form>";
 
-	echo fin_gauche(), fin_page();
+	echo $spip_version_code>=1.92?fin_gauche():'', fin_page();
 	
 }
 
