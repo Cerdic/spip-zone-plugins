@@ -3,7 +3,7 @@
 	Crayons
 	</nom>
 	<auteur>Fil , toggg
-	_ &copy; 2006 - Distribu&#233; sous licence GNU/GPL
+	&copy; 2006 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.4.0
@@ -13,11 +13,11 @@
 	</etat>
 	<description>
 
-Ce plugin fournit des fonctions d'&eacute;dition rapide depuis les pages publiques du site. Pour en b&eacute;n&eacute;ficier, il faut des squelettes
+Ce plugin {{disponible uniquement en 1.9.2 récente}} fournit des fonctions d'&eacute;dition rapide depuis les pages publiques du site. Pour en b&eacute;n&eacute;ficier, il faut des squelettes
 &#171;&#160;compatibles crayons&#160;&#187;.
 
-Pour cela, c'est tr&#232;s simple, il suffit d'ajouter une balise dans le squelette, &agrave; chaque endroit que l'on veut rendre &#233;ditable. Par exemple, pour que le titre soit &eacute;ditable, remplacer <code><h1>#TITRE</h1></code> par :
-_ <code><h1 class="#EDIT{titre}">#TITRE</h1></code>.
+Les squelettes récents de la dist/ 1.9.2 l'int&egrave;gre, il suffit d'avoir une balise {#EDIT&#123;machin&#125;} dans le squelette, &agrave; chaque endroit que l'on veut rendre &#233;ditable. Par exemple, pour que le titre soit &eacute;ditable:
+_ <code><h1 class="#EDIT{titre} autres_classes">#TITRE</h1></code>.
 	</description>
 	<lien>
 	[Documentation->http://www.spip-contrib.net/?article1475]
