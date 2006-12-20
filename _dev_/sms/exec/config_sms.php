@@ -56,11 +56,12 @@ function exec_config_sms_dist()
 //	$message .= print_r($champs, true);
 //	$message .= print_r($contexte, true);
 
-	config_sms_debut_page($message, $config);
+	echo
+		config_sms_debut_page($message, $config) .
 
-	echo config_sms_fond($contexte);
-	
-	config_sms_fin_page();
+		config_sms_fond($contexte) .
+		
+		config_sms_fin_page();
 			
 }
 
@@ -233,35 +234,36 @@ function config_sms_debut_page($message = '', $config = array())
 	include_spip('inc/presentation');
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_L('Configuration SMS'), 'sms', 'config_sms');
 	
-	debut_gauche();
+	return $commencer_page(_L('Configuration SMS'), 'sms', 'config_sms') .
 	
-	debut_boite_info();
-	echo propre(_L('Cette page permet de configurer vos prestataires SMS'));
-	fin_boite_info();
+		debut_gauche("accueil", true) .
 	
-	if ($message) {
-		debut_boite_info();
-		echo propre($message);
-		fin_boite_info();
-	}
+		debut_boite_info(true) .
+		propre(_L('Cette page permet de configurer vos prestataires SMS')) .
+		fin_boite_info(true) .
 	
-	echo liens_existants($config);
-	echo liens_nouveaux();
+		($message ? 
+			debut_boite_info(true) .
+			propre($message) .
+			fin_boite_info(true)
+		: '') .
 	
-	debut_droite();
+		liens_existants($config) .
+		liens_nouveaux() .
 	
-	gros_titre(_L("Configuration SMS"));
-	
-	debut_cadre_trait_couleur('','','',_L("Parametres comptes SMS"));
+		debut_droite("", true) .
+		
+		gros_titre(_L("Configuration SMS"), '', true) .
+		
+		debut_cadre_trait_couleur('', true, '', _L("Parametres comptes SMS"));
 }
 
 function config_sms_fin_page()
 {
-	fin_cadre_trait_couleur();
-	echo fin_gauche();
+	return fin_cadre_trait_couleur(true) .
+		fin_gauche() .
 	
-	echo fin_page();
+		fin_page();
 }
 ?>
