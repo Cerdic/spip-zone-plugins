@@ -260,6 +260,7 @@ function config_sms_debut_page($message = '', $config = array())
 function config_sms_fin_page()
 {
 	fin_cadre_trait_couleur();
+	echo fin_gauche();
 	
 	echo fin_page();
 }
