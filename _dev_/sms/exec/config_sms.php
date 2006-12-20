@@ -254,7 +254,7 @@ function config_sms_debut_page($message = '', $config = array())
 	
 		debut_droite("", true) .
 		
-		gros_titre(_L("Configuration SMS"), '', true) .
+		gros_titre(_L("Configuration SMS"), '', false) .
 		
 		debut_cadre_trait_couleur('', true, '', _L("Parametres comptes SMS"));
 }
