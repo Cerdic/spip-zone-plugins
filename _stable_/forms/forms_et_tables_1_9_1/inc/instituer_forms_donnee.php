@@ -16,7 +16,7 @@ function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut, $rang=NU
 {
 
 	$res =
-	"\n<div id='instituer_donnee-$id_donnee'>" .
+	"\n<div id='instituer_forms_donnee-$id_donnee'>" .
 	"\n<center>" . 
 	"<b>" .
 	_T('forms:texte_donnee_statut') .
@@ -44,7 +44,7 @@ function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut, $rang=NU
 	 "</center>"
 	. '</div>';
   
-	return redirige_action_auteur('instituer_forms_donnee',$id_donnee,'donnees_edit', "id_form=$id_form&id_donnee=$id_donnee", $res, " method='post'");
+	return ajax_action_auteur('instituer_forms_donnee',$id_donnee,'donnees_edit', "id_form=$id_form&id_donnee=$id_donnee", $res);
 }
 
 // http://doc.spip.org/@puce_statut_article

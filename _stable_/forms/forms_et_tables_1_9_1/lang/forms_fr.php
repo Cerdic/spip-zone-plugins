@@ -112,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'probleme_technique_upload'=>"Probl&egrave;me technique. Le transfert du fichier a &eacute;chou&eacute;.",
 'publication_donnees' => 'Publication des donn&eacute;es',
 
+'rang' => 'Rang',
 'remplir_un_champ'=>"Veuillez remplir au moins un champ.",
 'reponse_enregistree'=>"Votre saisie a &eacute;t&eacute; enregistr&eacute;e.",
 'resultats' => 'R&eacute;sultats : ',

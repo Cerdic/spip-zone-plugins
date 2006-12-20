@@ -28,7 +28,7 @@ function autoriser_form_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) 
 function autoriser_form_modifierdonnee_dist($faire, $type, $id_form, $qui, $opt) {
 	// un admin dans le back office a toujours le droit de modifier
 	if (!$opt['id_donnee']) return false;
-	if (($qui['statut'] == '0minirezo')&&!_DIR_RESTREINT) return true;
+	if (($qui['statut'] == '0minirezo')) return true;
 	$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 	if (!$row = spip_fetch_array($result)) return false;
 	$dejareponse=Forms_verif_cookie_sondage_utilise($id_form);
@@ -44,7 +44,7 @@ function autoriser_form_modifierdonnee_dist($faire, $type, $id_form, $qui, $opt)
 }
 function autoriser_form_insererdonnee_dist($faire, $type, $id_form, $qui, $opt) {
 	// un admin dans le back office a toujours le droit d'inserer
-	if (($qui['statut'] == '0minirezo')&&!_DIR_RESTREINT) return true;
+	if (($qui['statut'] == '0minirezo')) return true;
 	$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 	if (!$row = spip_fetch_array($result)) return false;
 	if ($row['multiple']=='oui') return true;

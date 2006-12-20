@@ -457,6 +457,9 @@
 		$rang = $row['rang'];
 		$id_form = $row['id_form'];
 		
+		if ($rang_nouv>$rang) $rang_nouv++; // il faut se decaler d'un car on est devant actuellement
+		$rang_nouv = min($rang_nouv,Forms_rang_prochain($id_form));
+		
 		// incrementer tous ceux dont le rang est superieur a la cible pour faire une place
 		$ok = spip_query("UPDATE spip_forms_donnees SET rang=rang+1 WHERE id_form=$id_form AND rang>="._q($rang_nouv));
 		if (!$ok) return $rang;
@@ -466,7 +469,9 @@
 		
 		// decrementer tous ceux dont le rang est superieur a l'ancien pour recuperer la place
 		spip_query("UPDATE spip_forms_donnees SET rang=rang-1 WHERE id_form=$id_form AND rang>$rang");
-		return $rang_nouv;
+		$res = spip_query("SELECT id_form,rang FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
+		if (!$row = spip_fetch_array($res)) return $rang_nouv;
+		return $row['rang'];
 	}
 	
 	function Forms_enregistrer_reponse_formulaire($id_form, $id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='') {

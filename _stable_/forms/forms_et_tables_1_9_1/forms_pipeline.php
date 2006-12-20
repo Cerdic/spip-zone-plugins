@@ -83,6 +83,12 @@
 			"$(forms_init_lang);\n".
 			"</script>\n";
 		}
+		if (_request('exec')=='donnees_edit'){
+			$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/donnees_edit.css' type='text/css' media='all' />\n";
+			$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/interface.js' type='text/javascript'></script>";
+			if (!_request('var_noajax'))
+				$flux .= "<script src='"._DIR_PLUGIN_FORMS."javascript/donnees_edit.js' type='text/javascript'></script>";
+		}
 		return $flux;
 	}
 ?>
