@@ -158,7 +158,7 @@ function exec_mots_tous_dist()
 		fin_cadre_enfonce();
 	}
 
-
+	echo fin_gauche();
 	echo fin_page();
 }
 
