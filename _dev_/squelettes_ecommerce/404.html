@@ -1,0 +1,104 @@
+<BOUCLE_article_principal(ARTICLES) {id_article}>
+
+<html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+<!-- 
+Ceci est la feuille de style par defaut pour les types internes a SPIP 
+-->
+<link rel="stylesheet" href="spip_style.css" type="text/css" />
+<!-- 
+Les feuilles de style specifiques aux presents squelettes 
+-->
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/typographie.css" type="text/css" />
+
+<!-- 
+media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage)
+-->
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/habillage.css" type="text/css" media="print, projection, screen, tv" />
+
+<!-- Lien vers le backend pour navigateurs eclaires -->
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="backend.php3" />
+
+<title>Il Salone : La boutique</title>
+</head>
+<body bgcolor="#57181B" leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" vlink="#57181B" alink="#57181B">
+<table bgcolor="#57181B" width="800px" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td rowspan="6"><img src="/IMG/boutique/frise_gauche.jpg"></td>
+		<td valign="top">
+			[(#LOGO_SITE)]
+					<B_bandeau_principal_images>
+						<BOUCLE_bandeau_principal_images(RUBRIQUES) {id_rubrique>1} {racine} {par titre}>
+							<div class ="agauche">
+								[(#LOGO_RUBRIQUE|center||reduire_image{300,300})]
+								<B_bandeau_secondaire_images>
+									<BOUCLE_bandeau_secondaire_images(RUBRIQUES) {id_parent} {par titre}>
+										<div class ="agauche">
+											[<a href="[(#URL_RUBRIQUE|parametre_url{id_boutique,1})]" [title="(#DESCRIPTIF|textebrut|entites_html)"]>(#TITRE)</a>]
+										</div>
+									</BOUCLE_bandeau_secondaire_images>
+								</B_bandeau_secondaire_images>
+							</div>
+						</BOUCLE_bandeau_principal_images>
+					</B_bandeau_principal_images>
+		</td>	
+		<td width="145" rowspan="6" align="center"; valign="top" bgcolor="DFF1FC">
+		</td>
+	</tr>
+	<B_zoom_articles>
+		<BOUCLE_zoom_articles(ARTICLES) {id_article} >
+			<tr>
+				<td align="center"; valign="top">
+					[(#LOGO_ARTICLE|||reduire_image{200})]
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table width="100%" border="0" cellspacing="0" cellpadding="3">
+						<tr>
+							<td width="150"><span class="Style2">R&eacute;f&eacute;rence article</span></td>
+							<td width="250"><span class="Style3">[(#TITRE)]</span></td>
+						</tr>
+						<tr>
+							<td><span class="Style2">Couleurs</span></td>
+							<td class="Style3">[(#DESCRIPTIF)]</td>
+						</tr>
+						<tr>
+							<td class="Style2">Description</td>
+							<td class="Style3">[(#TEXTE)]</td>
+						</tr>
+						<tr>
+							<td class="Style2">Pointure</td>
+							<td class="Style3">[(#PS)]</td>
+						</tr>
+						<tr>
+							<td class="Style2" valign="top">Prix </td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</BOUCLE_zoom_articles>
+	</B_zoom_articles>
+	<tr>
+		<td align="center" height="35"><span class="Style1">
+		4e Etage - 1, Place Broglie - Strasbourg - T&eacute;l. 33 (0)3 88 32 55 07 - <a href="mailto:boutique@ilsalone.com">boutique@ilsalone.com</a>
+		<br>
+	<a href="#URL_SITE_SPIP/spip.php?page=backend" title="Syndiquer tout le site"><img src="dist/feed.png" alt="Suivre la vie du site" width="16" height="16" class="format_png" />&nbsp;RSS&nbsp;2.0</a>
+<!--
+	| <a href="#URL_SITE_SPIP/spip.php?page=plan">Plan du site</a>
+-->
+	| <a href="ecrire/">Espace priv&eacute;</a>
+<!--
+	| <a href="http://www.spip.net/" title="Site r&eacute;alis&eacute; avec SPIP"><img src="dist/spip.png" alt="SPIP" width="48" height="16" class="format_png" /></a>
+	| <a href="" title="voir le squelette de cette page" rel="nofollow">squelette</a>
+-->
+		</span>
+		</td>
+	</tr>
+</table>
+</body>
+</html>
+</BOUCLE_article_principal>

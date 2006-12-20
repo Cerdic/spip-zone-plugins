@@ -1,0 +1,22 @@
+<plugin>
+	<nom>e-commerce</nom>
+	<version>1.0</version>
+	<prefix>demo</prefix>
+	<etat>dev</etat>
+	<auteur>Laurent RIEFFEL[contact->mailto:laurent.rieffel@laposte.net]
+	 _ [mon site->http://www.autodelta.fr]
+	</auteur>
+	<description>Ma boutique en ligne, Il est distribu&eacute; sous licence GNU/GPL</description>
+	<prefix> 
+	ecommerce
+	</prefix>
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	ecommerce_mes_fonctions.php
+	</fonctions>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>inc_ecommerce.php</inclure>
+	</pipeline>
+</plugin>

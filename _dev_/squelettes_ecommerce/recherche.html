@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>Garage GMV [Recherche]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+<link rel="stylesheet" href="spip_style.css" type="text/css" />
+
+<!-- Les feuilles de style specifiques aux presents squelettes -->
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/typographie.css" type="text/css" />
+
+<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/habillage.css" type="text/css" media="print, projection, screen, tv" />
+
+<!-- Lien vers le backend pour navigateurs eclaires -->
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="backend.php3" />
+</head>
+
+
+<!-- Entete de page html -->
+	<body bgcolor="#fffff0">
+	<table border="0" " cellspacing="0" cellpadding="0">
+	<tr bgcolor="2f4f4f">
+		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#f5f5f5">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="2" border="0" /></td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#6788B1">
+		<td colspan="5">
+			<div align="center" valign="center">
+			<img src="squelettes/enseignegmv.jpg">
+		</div>
+		</td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#f5f5f5">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="2" border="0" /></td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#FFFFCC">
+ 		<td colspan="1"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+		<td colspan="3">
+			<div id="navigation">
+			<div class="menu_principal">
+				<B_menu_principal>
+					<BOUCLE_menu_principal(RUBRIQUES) {id_rubrique=3} {par titre}>
+						<B_selection_menu_principal>
+							<BOUCLE_selection_menu_principal(RUBRIQUES) {id_secteur} {id_rubrique!==[3,4]} {tout} {par titre}>	
+								<div class="encart_menu_principal">
+<!--
+									[<div style="clear: both;"><b>(#TITRE)</b></div>]
+									[<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>(#LOGO_RUBRIQUE|center||reduire_image{50,50})</a>]
+-->
+									<div class="menu-titre">
+									[<div style="clear: both;"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>(#TITRE)</a></div>]
+									</div>
+<!--
+									<div style="clear: both;"></div>
+-->
+<!--
+									[<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>(#LOGO_RUBRIQUE|center||reduire_image{75,75})</a>]
+-->
+
+								</div>
+							</BOUCLE_selection_menu_principal>
+						</B_selection_menu_principal>
+					</BOUCLE_menu_principal>
+				</B_menu_principal>
+			</div>
+			</div>
+		</td>
+ 		<td colspan="1"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#f5f5f5">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="2" border="0" /></td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#6788B1">
+		<td valign="top"  colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="10" border="0" />
+		</td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#f5f5f5">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="2" border="0" /></td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="5"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+<!-- Fin Entete de page html -->
+<!-- colonne de gauche -->
+		<td valign="top"  colspan="1" align="left" width="0">
+		<table width="300">
+		<td>
+		<!-- Menu de navigation rubriques -->
+			<div id="navigation">
+			<div class="menu_secondaire">
+			<ul class="menu_secondaire">
+			<B_rubriques_menu>
+				<BOUCLE_rubriques_menu(RUBRIQUES) {racine} {par titre}>
+					<li>
+					<div class="menu-titre"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></div>
+					<B_sous_rubriques_menu>
+						<BOUCLE_sous_rubriques_menu(RUBRIQUES) {id_rubrique!=10} {id_parent} {par titre}>
+							<div class="menu-item">
+								<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a>	
+							      <BOUCLE_recursive(BOUCLE_sous_rubriques_menu)>
+							      </BOUCLE_recursive>
+							</div>
+						</BOUCLE_sous_rubriques_menu>
+					</B_sous_rubriques_menu>
+					</li>
+				</BOUCLE_rubriques_menu>
+			</B_rubriques_menu>
+			</ul>
+			</div>
+		<!-- Fin Menu de navigation rubriques -->
+		</td>
+		</table>
+		</td>
+<!-- Fin colonne de gauche -->
+		<td> </td>
+<!-- Colonne principale -->
+		<td valign="top" colspan="1" width="600px">
+		<table border="0" cellspacing="0" cellpadding="0" width="95%">
+			<div id="principal">
+			<div class="contenu">
+			<div class="cartouche">
+	<!-- Corps de l'article -->
+				<h1 class="surtitre"><:resultats_recherche:></h1>
+				[<h2 class="titre-texte">(#RECHERCHE)</h2>]
+				</div>
+				<div class="liste-articles">
+				<BOUCLE_articles(ARTICLES) {recherche} {par points} {inverse} {0,10}>
+					<h2><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></h2>
+					<div class="detail">
+					[(#DATE|nom_jour)] [(#DATE|affdate)]
+					<B_auteurs_articles><:par_auteur:> <BOUCLE_auteurs_articles(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_articles>
+					</div>
+					<br />
+				</BOUCLE_articles>
+
+	<!-- Fin Corps de l'article -->
+			</div>
+			</div>
+			</div>
+		</table>
+		</td>
+<!-- Fin Colonne principale -->
+		<td> </td>
+<!-- Colonne de droite -->
+	<td valign="top" bgcolor="#FFFFCC" width="0">
+	<table border="0" width="250px" cellspacing="1" cellpadding="1">
+	<td>
+		<div id="information">
+		<!-- Formulaire de recherche -->
+				<div class="recherche">
+					<div class="menu-titre">
+						<h1>Recherche</h1>
+					</div>
+			    		[(#FORMULAIRE_RECHERCHE)]
+				</div>
+		<!-- Fin Formulaire de recherche -->
+		<!-- Rubriques trouvees -->
+				<B_rubriques>
+					<div class="rubriques">
+					<ul class="rubriques" title="<:rubriques:>">
+					<li class="menu-titre"><:rubriques:></li>
+					<BOUCLE_rubriques(RUBRIQUES) {recherche} {par points} {inverse} {0,8}>
+						<li class="menu-item"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></li>
+					</BOUCLE_rubriques>
+					</ul>
+					</div>
+				</B_rubriques>
+		<!-- Fin Rubriques trouvees -->
+		<!-- Mots-cles trouves et articles associes-->
+				<B_mots>
+					<div class="articles">
+					<ul class="articles" title="<:mots_clefs:>">
+					<BOUCLE_mots(MOTS) {recherche} {par points} {inverse} {0,5}>
+						<li>
+						<div class="menu-titre"><a href="#URL_MOT" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></div>
+						<B_articles_mots>
+							<ul class="menu-liste">
+							<BOUCLE_articles_mots(ARTICLES) {id_mot} {par hasard} {0,8}>
+								<li class="menu-item"><a href="#URL_ARTICLE" title="[(#DESCRIPTIF|textebrut|entites_html)]">#TITRE</a></li>
+							</BOUCLE_articles_mots>
+							</ul>
+						</B_articles_mots>
+						</li>
+					</BOUCLE_mots>
+					</ul>
+					</div>
+				</B_mots>
+		<!-- Fin Mots-cles trouves et articles associes-->
+		<!-- Breves trouvees -->
+				<B_breves>
+					<div class="breves">
+					<div class="breves" title="<:breves:>">
+					<div class="menu-titre">
+					<:breves:>
+					</div>
+					<ul>
+					<BOUCLE_breves(BREVES) {recherche} {par points} {inverse} {0,8}>
+						<li class="menu-item">
+						<i>[(#DATE|affdate_court)]</i>:
+						<a href="#URL_BREVE">#TITRE</a>
+						</li>
+					</BOUCLE_breves>
+					</ul>
+					</div>
+					</div>
+				</B_breves>
+		<!-- Fin Breves trouvees -->
+		<!-- Messages trouves -->
+				<B_messages>
+					<div class="auteurs">
+					<div class="auteurs" title="<:messages_forum:>">
+					<div class="menu-titre">
+					<:messages_forum:>
+					</div>
+					<ul>
+					<BOUCLE_messages(FORUMS) {recherche} {par points} {inverse} {0,8}>
+						<li class="menu-item">
+						<a href="#URL_FORUM">#TITRE</a>
+						</li>
+					</BOUCLE_messages>
+					</ul>
+					</div>
+					</div>
+				</B_messages>
+		<!-- Fin Messages trouves -->
+		<!-- Sites Web trouves -->
+				<B_sites>
+					<div class="sites">
+					<div class="sites" title="Sites Web trouv&eacute;s">
+					<div class="menu-titre">
+					<:sites_web:>
+					</div>
+					<ul>
+					<BOUCLE_sites(SITES) {recherche} {par points} {inverse} {0,8}>
+						<li class="menu-item">
+						<a href="#URL_SITE" title="[(#DESCRIPTIF|textebrut|entites_html)]">#NOM_SITE</a>
+						</li>
+					</BOUCLE_sites>
+					</ul>
+					</div>
+					</div>
+				</B_sites>
+		<!-- Fin Sites Web trouves -->
+
+		</div>
+	</td>
+	</table>
+	</td>  
+<!-- Fin Colonne de droite -->
+		<td> </td>
+	<tr bgcolor="#2f4f4f">
+		<td colspan="6"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#f5f5f5">
+ 		<td colspan="6"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="2" border="0" /></td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="6"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#6788B1">
+		<td colspan="6"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="10" border="0" /></td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="6"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<tr bgcolor="#f5f5f5">
+ 		<td colspan="6"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="2" border="0" /></td>
+	</tr>
+	<tr bgcolor="#2f4f4f">
+ 		<td colspan="6"><img src="squelettes/mm_spacer.gif" alt="" width="1" height="1" border="0" /></td>
+	</tr>
+	<!-- Pied de page html -->
+		<tr>
+	     	<td width="300">
+			<div id="navigation">
+<!--
+			<h1><:navigation:></h1>
+-->
+		<!-- Menu de navigation general -->
+			<div class="private">
+				<ul class="private">
+				<li class="menu-titre">
+				[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><b>Garage GMV</b></a>]
+				</li>
+				<li class="menu-item">
+				<a href="rubrique.php3?id_rubrique=10" title="Informations légales">Informations légales</a>
+				</li>
+				<li class="menu-item">
+				<a href="plan.php3"><:plan_site:></a>
+				</li>
+				<li class="menu-item">
+				<a href="resume.php3" title="<:articles_populaires:>"><:en_resume:></a>
+				</li>
+				<li class="menu-item">
+				<a href="ecrire/"><:espace_prive:></a>
+				</li>
+				</ul>
+			</div>
+			</div>
+		</td>
+		<td width="50" colspan="5"></td>
+		</tr>
+	<!-- Fin Pied de page html -->
+</table>
+</div>
+</body>
+</html>

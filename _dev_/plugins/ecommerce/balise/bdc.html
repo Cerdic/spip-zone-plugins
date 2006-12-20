@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Document sans nom</title>
+<style type="text/css">
+<!--
+@import url("css/jhp-neisson.css");
+-->
+</style>
+</head>
+<body> 
+<script language=JavaScript src='javascript/scripts-jhp-neisson.js'></script> 
+<div id="conteneur"> 
+  <div id="header"> 
+    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="800" height="95"> 
+      <param name="movie" value="swf/header.swf" /> 
+      <param name="quality" value="high" /> 
+      <embed src="swf/header.swf" quality="high" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="800" height="95"></embed> 
+    </object> 
+  </div> 
+  <div style="border:1px solid white;"> 
+    <!-- DEBUT DU MENU HAUT --> 
+    <div id="menu-haut"> 
+      <ul id="nav"> 
+        <img src="images/coin-menu-jhp-neisson.gif" align="top" id="coin-gauche-menu" /> 
+        <li><a href="#">SELECTION DE VIN</a> 
+          <ul> 
+            <li><a href="vin-alsace-blanc.php">Vins d'Alsace</a> 
+            <li><a href="#">Vins de Bordeaux</a> 
+              <ul class="petit"> 
+                <li><a href="vin-bordeaux-blanc.php">Bordeaux Blancs</a></li> <li><a href="vin-bordeaux-rose.php">Bordeaux Rosés</a></li>
+                <li><a href="vin-bordeaux-rouge.php">Bordeaux Rouges</a></li> 
+              </ul> 
+            </li> 
+            <li><a href="#">Vins de Bourgogne</a> 
+              <ul class="petit"> 
+                <li><a href="vin-bourgogne-blanc.php">Bourgogne Blancs</a> </li> 
+                <li><a href="vin-bourgogne-rouge.php">Bourgogne Rouges</a> </li> 
+              </ul> 
+            </li> 
+            <li><a href="vin-vallee-loire-blanc.php">Vins de la vallée de la Loire</a></li> 
+            <li><a href="#">Vins de la vallée du Rhône</a> 
+              <ul id="petit"> 
+                <li><a href="vin-vallee-rhone-blanc-meridional.php">Vin Blanc Méridional</a></li> 
+                <li><a href="vin-vallee-rhone-rouge-meridional.php">Vins Rouges Méridionaux</a></li> 
+                <li><a href="vin-vallee-rhone-rose-meridional.php">Vins Rosés Méridionaux </a></li> 
+                <li><a href="vin-vallee-rhone-blanc-septentrional.php">Vins Blancs Septentrionaux</a></li> 
+                <li><a href="vin-vallee-rhone-rouge-septentrional.php">Vins Rouges Septentrionaux</a></li> 
+                <li><a href="vin-vallee-rhone-doux-naturel.php">Vin Doux Naturel</a></li> 
+              </ul> 
+            </li> 
+            <li><a href="vin-etranger-rouge.php">Vins Etrangers</a></li> 
+            <li><a href="#">Vins de Provence-Corse</a> 
+              <ul class="petit"> 
+                <li><a href="vin-provence-corse-roses.php">Vins rosés </a></li> 
+                <li><a href="vin-provence-corse-rouge.php">Vins Rouges </a></li> 
+              </ul> 
+            </li> 
+          </ul> 
+        </li> 
+      </ul> 
+      <ul id="suite-menu-haut"> 
+        <li><img src="images/green-dot.gif" width="11" height="6" border="0" align="bottom" /><a href="champagnes.php">CHAMPAGNES</a></li> 
+        <li><img src="images/green-dot.gif" width="11" height="6" border="0" align="bottom" /><a href="epicerie-fine.php">EPICERIE FINE</a></li> 
+        <li><img src="images/green-dot.gif" width="11" height="6" border="0" align="bottom" /><a href="#">LA SOCIETE</a></li> 
+      </ul> 
+    </div> 
+    <!-- FIN DU MENU HAUT --> 
+    <hr /> 
+    <div align="center"> 
+      <h2> Votre devis </h2> 
+      <B_bouteilles_validees> 
+      <form name="form1" method="post" action=""> 
+        <table width="739" border="0" cellpadding="0" cellspacing="0" class="ajoutTable"> 
+          <!--DWLayoutTable--> 
+          <tr> 
+            <td height="50" colspan="3" align="center" valign="middle"><!--DWLayoutEmptyCell-->&nbsp;</td> 
+            <td width="89" align="center" valign="middle">QTE</td> 
+            <td width="77" align="center" valign="middle">PRIX</td> 
+            <td width="132" align="center" valign="middle">TOTAL</td> 
+          </tr> 
+          <!-- #ENV{mes_ids,' '})$}> --> 
+          <BOUCLE_bouteilles_validees(ARTICLES){id_article == #ENV{mes_ids}}> 
+          <tr> 
+            <td width="73" height="128" align="center" valign="middle"><a href="bon-de-commande.php?id_item=#ID_ARTICLE&action=delete" style="color:white;">Supprimer</a></td> 
+            <td width="101" align="center" valign="middle"><img src="IMG/arton#ID_ARTICLE.jpg" width="80" height="120"></td> 
+            <td width="267" align="center" valign="middle">[(#TITRE)]<br /> 
+              [(#SURTITRE)] [(#DESCRIPTIF)].<br /> 
+              [(#SOUSTITRE)]</td> 
+            <td align="center" valign="middle"> <input name="#ID_ARTICLE" type="text" id="#ID_ARTICLE" style="text-align:center;" value="<?php print_r($_SESSION['bon-de-commande'][#ID_ARTICLE]); ?>" size="5" maxlength="5"> </td> 
+            <td align="center" valign="middle">#CHAPO &euro;</td> 
+            <td align="center" valign="middle"> <?php
+	  // Calcul du total pour cette bouteille
+	  $qte = $_SESSION['bon-de-commande'][#ID_ARTICLE];
+	  $prix = '#CHAPO';
+	  settype($prix, "integer");
+	  $total_ligne = $qte*$prix;
+	  $total_main = $total_ligne+ $total_main;
+	  echo $total_ligne;/**/
+	   ?> 
+&euro;</td> 
+          </tr> 
+          </BOUCLE_bouteilles_validees> 
+          <tr> 
+            <td height="19" colspan="5" align="right" valign="top">TOTAL T.T.C. : </td> 
+            <td align="center" valign="top"><?php echo $total_main;/**/?> &euro;</td> 
+          </tr> 
+          </B_bouteilles_validees> 
+          Votre bon de commande est vide
+          <//B_bouteilles_validees> 
+        </table> 
+        <input type="submit" name="update" value="Mettre à jour" /> 
+      </form> 
+      <!---------------------------------------------------------------------> 
+      <!-- AFFICHAGE DU BON DE COMMANDE --> 
+      <form name="form" id="form-dernier" method="post" action="bon-de-commande.php"> 
+        <input type="submit" name="detruire2" value="Vider entièrement le devis" /> 
+      </form> 
+      <form name="form-imprimer" id="form-imprimer" method="post" action="devis-print.php"> 
+        <input type="submit" name="print" value="Imprimer le devis" /> 
+      </form> 
+      <!---------------------------------------------------------------------> 
+    </div> 
+  </div> 
+</div> 
+</body>
+</html>

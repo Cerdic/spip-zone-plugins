@@ -1,0 +1,57 @@
+<BOUCLE_boutique_principal (SPIP_BOUTIQUE) {id_boutique}>
+<html>
+<head>
+<title>mon_panier</title>
+<style>
+<!--
+td { font-size: 9 px; font-family: arial }
+.Style1 {
+	color: #80461d;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.Style2 {
+	color: #61c5f0;
+	font-weight: bold;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.Style5 {
+	color: #80461d;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+}
+-->
+</style>
+</head>
+
+<body bgcolor="DFF1FC">
+	<B_tous_les_articles>
+		<BOUCLE_tous_les_articles (SPIP_PANIER) {id_boutique}>
+			<span class="Style5">#ID_ARTICLE</span>
+			<span class="Style1"><br>
+				<B_ref_article>
+					<BOUCLE_ref_article (ARTICLES) {id_article}>
+						Modèle n° #TITRE <br>
+					</BOUCLE_ref_article>
+				</B_ref_article>
+				Pointure : #POINTURE <br>
+				<B_prix_article>
+					<BOUCLE_prix_article (ARTICLES) {id_article}>
+						Prix : #CHAPO €
+					</BOUCLE_prix_article>
+				</B_prix_article>
+			</span>
+			<span class="Style2"><br>
+				Retirer de la liste<br>
+				<br>
+				<br>
+			</span>
+		</BOUCLE_tous_les_articles>
+	</B_tous_les_articles>
+	Le boutique est vide !!
+	<//B_tous_les_articles>
+</body>
+</html>
+</BOUCLE_boutique_principal>

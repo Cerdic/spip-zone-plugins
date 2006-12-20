@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Bon de Commande</title>
+</head>
+<body> 
+<div id="conteneur"> 
+  <div> 
+    <div align="center"> 
+      <h2> devis n&deg; <?php echo generer_key();?></h2> 
+      <B_bouteilles_validees> 
+      <form name="form1" method="post" action=""> 
+        <table width="631" border="0" cellpadding="0" cellspacing="0" class="ajoutTable"> 
+          <!--DWLayoutTable--> 
+          <tr> 
+            <td width="323" height="50" align="center" valign="middle"><!--DWLayoutEmptyCell-->&nbsp;</td> 
+            <td width="94" align="center" valign="middle" style="border:1px solid black;">QTE</td> 
+            <td width="82" align="center" valign="middle" style="border:1px solid black;">PRIX</td> 
+            <td width="132" align="center" valign="middle" style="border:1px solid black;">TOTAL</td> 
+          </tr> 
+          <BOUCLE_bouteilles_validees(ARTICLES){id_article == #ENV{mes_ids}}> 
+          <tr > 
+            <td align="center" valign="middle" style="border:1px solid black;">[(#TITRE)]<br /> 
+              [(#SURTITRE)] [(#DESCRIPTIF)].<br /> 
+            [(#SOUSTITRE)]</td> 
+            <td align="center" valign="middle" style="border:1px solid black;"><?php print_r($_SESSION['bon-de-commande'][#ID_ARTICLE]); ?>&nbsp;</td> 
+            <td align="center" valign="middle" style="border:1px solid black;">#CHAPO &euro;</td> 
+            <td align="center" valign="middle" style="border:1px solid black;"> <?php
+	  // Calcul du total pour cette bouteille
+	  $qte = $_SESSION['bon-de-commande'][#ID_ARTICLE];
+	  $prix = '#CHAPO';
+	  settype($prix, "integer");
+	  $total_ligne = $qte*$prix;
+	  $total_main = $total_ligne+ $total_main;
+	  echo $total_ligne;/**/
+	   ?> 
+&euro;</td> 
+          </tr> 
+          </BOUCLE_bouteilles_validees> 
+          <tr> 
+            <td height="21" colspan="3" align="right" valign="top" style="border:1px solid black;">TOTAL T.T.C. : </td> 
+            <td align="center" valign="top" style="border:1px solid black;"><?php echo $total_main;/**/?> &euro;</td> 
+          </tr>
+          </B_bouteilles_validees> 
+          Votre bon de commande est vide
+          <//B_bouteilles_validees> 
+        </table> 
+      </form>
+	  <p>Nom : .......................................................................................<br />
+      Adresse de Livraison : ...............................................................<br />
+	    Adresse de Facturation : ............................................................<br />
+	    <br />
+	    <br />
+        <!--------------------------------------------------------------------->
+        IL SALONE <br />
+         <br />
+        Tél.  - GSM : 
+        <!---------------------------------------------------------------------> 
+      </p>
+    </div> 
+  </div> 
+</div>
+ <script language="javascript">
+<!--
+ window.print();
+//-->
+</script>
+</body>
+</html>

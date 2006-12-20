@@ -1,0 +1,133 @@
+<html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>Il Salone</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+<link rel="stylesheet" href="spip_style.css" type="text/css" />
+
+<!-- Les feuilles de style specifiques aux presents squelettes -->
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/typographie.css" type="text/css" />
+
+<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/habillage.css" type="text/css" media="print, projection, screen, tv" />
+
+<!-- Lien vers le backend pour navigateurs eclaires -->
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="backend.php3" />
+</head>
+<body>
+	<table style="text-align: left; width: 858px; height: 650px; background-color: rgb(86, 185, 239);" cellpadding="1" cellspacing="1">
+	<tbody>
+		<tr>
+			<td style="height: 446px; width: 284px; background-color: rgb(87, 27, 27);">
+				<BOUCLE_article_principal_logo(ARTICLES) {id_article=1}>
+					[(#LOGO_ARTICLE|center||reduire_image{264,432})]
+				</BOUCLE_article_principal_logo>
+			</td>
+			<td style="height: 446px; width: 565px; background-color: rgb(87, 27, 27);">
+			<div class="text-ilsalone">
+
+
+
+     <h2> Ajouter au devis </h2> 
+      <div align="center"> 
+        <B_bouteille_a_ajouter>
+        <BOUCLE_bouteille_a_ajouter(ARTICLES){id_article=#ENV{id_dernier}}> 
+        <form name="form-dernier" id="form-dernier" method="post" action="bon-de-commande.php"> 
+          <table width="582" border="0" cellpadding="0" cellspacing="0" class="ajoutTable"> 
+            <!--DWLayoutTable--> 
+            <tr> 
+              <!-- AFFICHAGE DE LA BOUTEILLE A AJOUTER --> 
+              <td width="113" rowspan="2" align="center" valign="middle"><img src="IMG/arton#ID_ARTICLE.jpg" width="80" height="120" alt="[(#TITRE)] [(#SURTITRE)] [(#DESCRIPTIF)]"></td> 
+              <td width="217" rowspan="2" align="center" valign="middle">[(#TITRE)]<br /> 
+                [(#SURTITRE)] [(#DESCRIPTIF)].<br /> 
+                [(#SOUSTITRE)]</td> 
+              <td width="108" height="65" align="center" valign="middle">QTE</td> 
+              <td width="165" align="center" valign="middle">PRIX</td> 
+            </tr> 
+            <tr> 
+
+				<td align="center" valign="middle">
+				<input name="qte_dernier" type="text" value="1" size="5" maxlength="3" style="text-align:center;" /></td>
+				<td colspan="3" align="center" valign="middle">
+				<input name="id_dernier" type="hidden" id="id_dernier" value="195" />				
+				</td>
+
+
+
+
+
+              <td height="86" align="center" valign="top"> <input name="id_dernier" type="hidden" id="id_dernier" value="#ID_ARTICLE" /> 
+              <td align="center" valign="top">#CHAPO &euro;UROS</td> 
+              </BOUCLE_bouteille_a_ajouter> 
+            </tr> 
+          </table> 
+		<input type="submit" name="Ajouter cet article" value="Ajouter cet article" /> 
+        </form> 
+        </B_bouteille_a_ajouter> 
+        pas d'article
+		voici le env : [(#ENV{id_dernier})]
+        <//B_bouteille_a_ajouter> 
+      </div> 
+      <!------------------------------------------------> 
+      <!-- FIN AFFICHAGE DE LA BOUTEILLE A AJOUTER --> 
+      <!------------------------------------------------> 
+      <!-- Pour vider la variable de session --> 
+    </div> 
+
+
+
+
+
+			</div>
+				<B_menu_principal_texte>
+					<BOUCLE_menu_principal_texte(RUBRIQUES) {id_rubrique>1} {racine} {par titre}>
+						<div class="encart_menu_principal">
+							<div class="menu-titre">
+							[<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>(#LOGO_RUBRIQUE|center||reduire_image{300,300})</a>]
+							</div>
+						<div style="clear: both;"></div>
+						</div>
+					</BOUCLE_menu_principal_texte>
+				</B_menu_principal_texte>
+
+			</td>
+		</tr>
+		<tr>
+			<td style="height: 196px; width: 284px; background-color: rgb(87, 27, 27);">
+			<table style="text-align: left; width: 100%;" border="0" cellpadding="0" cellspacing="0">
+			<tbody>
+				<tr><td style="width: 95px;">
+				<BOUCLE_rubrique_principal_logo(RUBRIQUES) {id_rubrique=1}>
+					[(#LOGO_RUBRIQUE|center||reduire_image{89,177})]
+				</BOUCLE_rubrique_principal_logo>
+				</td>
+				<td style="width: 287px; color: rgb(93, 199, 239);"><span class="text-ilsalone">4ieme Etage</span><br class="text-ilsalone" style="font-weight: bold;">
+				<div class="text-ilsalone">
+					1 Place broglie
+					STRASBOURG
+					<a href="mailto:boutique@ilsalone.com">Notre mèl</a>
+					Du mardi au vendredi
+					10H-13H et 14H30-19H
+					Samedi
+					10H-19H
+				</div>
+				</tr>
+			</tbody>
+			</table><span class="text-ilsalone"></span><span class="text-ilsalone"><br>
+			</span></td>
+			<td style="height: 196px; width: 565px; background-color: rgb(87, 27, 27);">
+				<B_menu_principal_logo>
+					<BOUCLE_menu_principal_logo(RUBRIQUES) {id_rubrique>1} {racine} {par titre}>
+						<div class="encart_menu_principal">
+							<BOUCLE_articles_rubrique_logo(ARTICLES) {id_secteur} {par hasard} {0,1} >
+								[<a href="#URL_SITE_SPIP/rubrique.php3?id_rubrique=#ID_SECTEUR" [title="(#DESCRIPTIF|textebrut|entites_html)"]>(#LOGO_ARTICLE|center||reduire_image{300,300})</a>]
+							</BOUCLE_articles_rubrique_logo>
+						</div>
+					</BOUCLE_menu_principal_logo>
+				</B_menu_principal_logo>
+			</td>
+</tr></tbody>
+</table><br>
+</body></html>
