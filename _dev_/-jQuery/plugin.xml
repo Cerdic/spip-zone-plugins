@@ -4,6 +4,7 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Librairie javascript par John Resig pour [jquery.js->http://jquery.com] et Dave Methvin pour [jq-corner.js->http://methvin.com/jquery/jq-corner-demo.html], mis en plugin par BoOz.
+	NE PAS UTILISER A PARTIR DE SPIP 1.9.2 (la librairie est integree dans SPIP)
 	</auteur>
 	<version>
 	1.0.4
