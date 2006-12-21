@@ -160,11 +160,13 @@ function verif_butineur() {
 		eregi("Safari/([^;]*)", $browser_description, $match)) {
 		$browser_name = "Safari";
 		$browser_version = $match[1];
-		$browser_layer = http_script('', _DIR_IMG_PACK . 'layer.js','');
+		// deja inclus dans le head
+		//$browser_layer = http_script('', _DIR_IMG_PACK . 'layer.js','');
 		$browser_barre = ($browser_version >= 5.0);
 	}
 	else if (eregi("mozilla", $browser_name) AND $browser_version >= 5) {
-		$browser_layer = http_script('', _DIR_IMG_PACK . 'layer.js','');
+		// deja inclus dans le head
+		//$browser_layer = http_script('', _DIR_IMG_PACK . 'layer.js','');
 		// Numero de version pour Mozilla "authentique"
 		if (ereg("rv:([0-9]+\.[0-9]+)", $browser_description, $match))
 			$browser_rev = doubleval($match[1]);
