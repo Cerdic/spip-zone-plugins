@@ -5,7 +5,7 @@ function JQuery_insert_head($flux){
 			$js = '<script src="'.find_in_path('jquery-1.0.4.pack.js').'" type="text/javascript"></script>';
 		else
 			$js = '<script src="'.find_in_path('jquery-1.0.4.js').'" type="text/javascript"></script>';
-			$js .= '<script src="'.find_in_path('layer.js').'" type="text/javascript"></script>';
+			$js .= '<script src="'.find_in_path('img_pack/layer.js').'" type="text/javascript"></script>';
 			$js .= '<script src="'.find_in_path('ajaxCallback.js').'" type="text/javascript"></script>';
 
 			$js .= '<script src="'.find_in_path('form.js').'" type="text/javascript"></script>';
