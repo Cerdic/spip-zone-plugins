@@ -19,11 +19,13 @@
 
 
 function action_tri_auteurs() {
-  global $hash, $id_auteur, $id_article, $order;
+  $hash = intval(_request('hash'));
+  $id_article = intval(_request('id_article'));
 
-  $id_article = intval($id_article);
-  
-  include_spip("inc/sessions");
+  $id_auteur =  intval($GLOBALS['auteur_session']['id_auteur']);
+
+
+  include_spip("inc/actions");
   if (!verifier_action_auteur("tri_auteurs $id_article", $hash, $id_auteur)) {
 	include_spip('inc/minipres');
 	minipres(_T('info_acces_interdit'));
@@ -37,6 +39,7 @@ function action_tri_auteurs() {
 	for($i=0;$i<count($order);$i++) {  									
 	  spip_query("UPDATE ".$table_pref."_auteurs_articles SET rang = $i WHERE id_article=$id_article AND id_auteur=".intval($order[$i]));
 	}
+	echo 'done';
   }
 }
 
