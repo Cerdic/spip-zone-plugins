@@ -452,10 +452,28 @@
 		return $rang;
 	}
 	function Forms_rang_update($id_donnee,$rang_nouv){
+		$rang_min = $rang_max = 1;
+		// recuperer le rang et l'id_form de la donnee modifiee
 		$res = spip_query("SELECT id_form,rang FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
 		if (!$row = spip_fetch_array($res)) return;
 		$rang = $row['rang'];
 		$id_form = $row['id_form'];
+
+		// recuperer le min et le max des rangs en cours
+		$res = spip_query("SELECT min(rang) AS rang_min, max(rang) AS rang_max FROM spip_forms_donnees WHERE id_form="._q($id_form));
+		if ($row = spip_fetch_array($res)){
+			$rang_min = $row['rang_min'];
+			$rang_max = $row['rang_max'];
+		}
+	
+		// verifier si des donnees sont pas sans rang et les ramasser
+		$res = spip_query("SELECT id_donnee, rang FROM spip_forms_donnees WHERE (rang=NULL OR rang=0) AND id_form="._q($id_form));
+		while ($row = spip_fetch_array($res)){
+			$rang_max++;
+			spip_query("UPDATE spip_forms_donnees SET rang=$rang_max WHERE id_donnee="._q($row['id_donnee']));
+		}
+		// borner le rang
+		$rang_nouv = min(max($rang_nouv,$rang_min),$rang_max);
 		
 		if ($rang_nouv>$rang) $rang_nouv++; // il faut se decaler d'un car on est devant actuellement
 		$rang_nouv = min($rang_nouv,Forms_rang_prochain($id_form));
