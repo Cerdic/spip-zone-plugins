@@ -68,10 +68,12 @@ function sktheme_affichage_final($texte){
 	// Insertion du selecteur de squelettes			
 	$code.='<div id="sktheme_switcher" style="top: 0;left: 20px; position: absolute; background-color: transparent;z-index: 100;">';
 	$code.='<form action="" method="post">';
+	$code.='<fieldset>';
 	$code.='<select name="selecteurTheme" style="'.$GLOBALS['meta']['sktheme_theme_switcher_style'].'" onchange="sktheme_gotof(this.options[this.selectedIndex].value)">';
 	$code.='<option selected="selected" value="">Themes</option>';
 	foreach( $sktheme_list as $value )	$code.='<option value="'.parametre_url(self(),'var_sktheme',$value).'">&nbsp;-> '.$value.'</option>';
 	$code.='</select>';
+	$code.='</fieldset>';
 	$code.='</form>';
 	$code.='</div>';
       }
