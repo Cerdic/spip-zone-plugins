@@ -12,13 +12,15 @@
 <ul class="sortable verdana2" id="sort_table">
 <BOUCLE_donnees(FORMS_DONNEES){id_form}{statut!=poubelle}{par rang}{rang>=#GET{rang_deb}}{rang<#GET{rang_deb}|plus{#ENV{total,20}}}>
 	<li class="sortableitem [(#ID_DONNEE|=={#ENV{id_donnee}}|?{selected})]" id="#ID_DONNEE-#RANG">#RANG - 
+		#SET{texte,''}
 		<BOUCLE_body(FORMS_CHAMPS){id_form}{tout}{par rang}{specifiant='oui'}{0,2}>
-		#LESVALEURS{' '}
+		#SET{texte,#GET{texte}|concat{#LESVALEURS{' '},' '}}
 		</BOUCLE_body>
 			<BOUCLE_alt(FORMS_CHAMPS){id_form}{tout}{par rang}{type !IN (separateur,textestatique)}{0,2}>
-			#LESVALEURS{' '}
+			#SET{texte,#GET{texte}|concat{#LESVALEURS{' '},' '}}
 			</BOUCLE_alt>
 		<//B_body>
+		[(#GET{texte}|couper{50})]
 	</li>
 </BOUCLE_donnees>
 </ul>
