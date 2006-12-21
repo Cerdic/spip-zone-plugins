@@ -1,0 +1,42 @@
+<plugin>
+ <nom>Redac-Chef</nom>
+ <version>0.2 - spip.1-9-1</version>
+ <prefix>redacchef</prefix>
+ <etat>test</etat>
+<auteur>Florent Jugla [contact->mailto:florent.jugla@eledo.com]
+ Soci&eacute;t&eacute; [Eledo->http://www.eledo.com]</auteur>
+
+ <description>Ce plugin permet de g&eacute;rer le statut r&eacute;dacteurs-chef. Le r&eacute;dacteur-chef est interm&eacute;diaire entre administrateur et r&eacute;dacteur : il peut publier les articles, mais n'a pas acc&egrave;s aux fonctions d'administratation du site.
+
+Attention ! Bien lire le fichier INSTALL.TXT avant d'utiliser le module (l'installation du module n&eacute;c&eacute;ssite de patcher les sources de SPIP pour ajouter des points d'entr&eacute;es 'pipelines').
+
+Ce plugin a &eacute;t&eacute; d&eacute;velopp&eacute; par la soci&eacute;t&eacute; Eledo (http://www.eledo.com/) pour les besoins de la soci&eacute;t&eacute; Synapse Informatique (http://www.synapse-info.com/). Il est distribu&eacute; sous licence GPL par la soci&eacute;t&eacute; Eledo, en accord avec la soci&eacute;t&eacute; Synapse Informatique.
+ </description>
+
+ <pipeline>
+	<nom>ajouter_boutons</nom>
+	<action>ajouterBoutons</action>
+        <inclure>redacchef_boutons.php</inclure>
+ </pipeline>
+
+ <pipeline>
+	<nom>redacchef_affpubli</nom>
+	<action>affpubli_fct</action>
+        <inclure>exec/redacchef_pipelines.php</inclure>
+ </pipeline>
+
+ <pipeline>
+	<nom>redacchef_affpubli2</nom>
+	<action>affpubli2_fct</action>
+        <inclure>exec/redacchef_pipelines.php</inclure>
+ </pipeline>
+
+ <pipeline>
+	<nom>redacchef_ok</nom>
+	<action>ok_fct</action>
+        <inclure>exec/redacchef_pipelines.php</inclure>
+ </pipeline>
+
+
+
+</plugin>

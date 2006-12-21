@@ -1,0 +1,48 @@
+INSTALLATION du Plugin
+
+Ce plugin doit être installé sur un SPIP 1.9.1.
+
+L'installation se déroule en trois étapes :
+
+1. copie des fichiers dans l'arborescence SPIP
+2. patch des sources SPIP
+3. installation de la table dans la base
+
+Convention : la racine de l'arborescence SPIP est notée <SPIP> dans ce document. 
+
+===> 1. copie des fichiers dans l'arborescence SPIP
+
+Détarrer les fichiers dans un répertoire temporaire
+$ cd /tmp
+$ tar xzvf plugin-redacchef-0.1.tgz
+
+Cette opération doit créer un répertoire "redacchef"
+
+Se déplacer à la racine SPIP:
+$ cd <SPIP>
+
+Fabriquer le répertoire plugin si celui-ci n'existe pas
+$ mkdir plugins
+
+Y copier le plugin "redacchef"
+$ cd plugins
+$ cp -rf /tmp/redacchef .
+
+===> 2. patch des sources SPIP
+
+Il faut utiliser l'utilitaire "patch" pour patcher les sources de SPIP : se déplacer à la racine du site, et passer la commande. Il y a deux patchs à appliquer
+
+$ cd <SPIP>
+$ patch -p1 ./plugins/redacchef/1_9_1/diffs_spip/diff_exec
+patching file ecrire/exec/articles_tous.php
+patching file ecrire/exec/naviguer.php
+patching file ecrire/exec/rubriques_edit.php
+$ patch -p1 ./plugins/redacchef/1_9_1/diffs_spip/diff_inc
+patching file ecrire/inc/auth.php
+patching file ecrire/inc/presentation.php
+
+===> 3. installation de la table dans la base
+
+Le plugin est maintenant utilisable. Il suffit d'aller en admin sur l'interface privée de SPIP, dans la section "Configuration". Il faut activer le plugin "Redac-Chef". Une fois le plugin activé, il faut aller dans le bouton "Auteurs". Un nouvel item "Gérer les Rédacteurs chefs" est maintenant présent. Lors de la première utilisation, la table est automatiquement créée dans la base de données.
+
+
