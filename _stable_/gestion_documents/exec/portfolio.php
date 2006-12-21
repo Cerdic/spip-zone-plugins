@@ -225,7 +225,10 @@ function exec_portfolio(){
 
 	$deb_aff = intval(_request($tmp_var));
 	if ($cpt > 1.5*$nb_aff) {
-		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
+		if ($GLOBALS['spip_version_code']<1.92)
+			$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
+		else
+			$tranches = afficher_tranches_requete($cpt, $tmp_var, '', $nb_aff);
 		$limit = ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : "99999");
 	}
 	else $limit="99999";
