@@ -13,14 +13,15 @@ function typo_exposants_fr($texte){
 		//'/(\\bP)(rs?)\\b/',
 		//'/(\\bS)(te?s?)\\b/',
 		'/(\\bm)(2|3)\\b/', // m2, m3
-		'/(\\b[1I])(ier)\\b/', // Erreurs ier, iers, ère, ière, ères, ières
-		'/(\\b[1I])(iers)\\b/',
+		'/(\\b[1I])(er|ier)\\b/', // Erreurs ier, iers, ère, ière, ères, ières
+		'/(\\b[1I])(ers|iers)\\b/',
 		'/(\\b[1I])(ière|ère|i&egrave;re|&egrave;re)\\b/', 
 		'/(\\b[1I])(ières|ères|i&egrave;res|&egrave;res)\\b/',
 		'/(\\b[02-9IVX]+)(ième|ème|i&egrave;me|&egrave;me|me)\\b/', // Erreurs me, ème, ième, mes, èmes, ièmes
 		'/(\\b[02-9IVX]+)(ièmes|èmes|i&egrave;mes|&egrave;mes|mes)\\b/',
 		'/(\\b[1I])(res?)\\b/', // 1re(s)
-		'/(\\b[0-9IVX]+)(er?s?)\\b/' // 1er(s), 2e(s), IIIe(s)...
+//		'/(\\b[0-9IVX]+)(er?s?)\\b/' // 1er(s), 2e(s), IIIe(s)...
+		'/(\\b[0-9IVX]+)e\\b/' // 1e, 2e, IIIe...
 	);
 	$remplace = array(
 		'M<small><sup>lle</sup></small>', // Mlle(s), Mme(s)
@@ -37,7 +38,8 @@ function typo_exposants_fr($texte){
 		'\\1<small><sup>e</sup></small>', // Corrige 2e(s), IIIe(s)...
 		'\\1<small><sup>es</sup></small>',
 		'\\1<small><sup>\\2</sup></small>', // 1re(s)
-		'\\1<small><sup>\\2</sup></small>' // 1er(s), 2e(s), IIIe(s)...
+//		'\\1<small><sup>\\2</sup></small>' // 1er(s), 2e(s), IIIe(s)...
+		'\\1<small><sup>e</sup></small>' // 1e, 2e, IIIe...
 
 	);
 
