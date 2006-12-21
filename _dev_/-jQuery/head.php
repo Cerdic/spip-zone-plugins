@@ -2,9 +2,9 @@
 
 function JQuery_insert_head($flux){
 		if (!_request('jqdb'))
-			$js = '<script src="'.find_in_path('jquery-1.0.3.pack.js').'" type="text/javascript"></script>';
+			$js = '<script src="'.find_in_path('jquery-1.0.4.pack.js').'" type="text/javascript"></script>';
 		else
-			$js = '<script src="'.find_in_path('jquery-1.0.3.js').'" type="text/javascript"></script>';
+			$js = '<script src="'.find_in_path('jquery-1.0.4.js').'" type="text/javascript"></script>';
 
 			$js .= '<script src="'.find_in_path('form.js').'" type="text/javascript"></script>';
 			
