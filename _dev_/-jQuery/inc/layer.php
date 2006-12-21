@@ -138,6 +138,7 @@ function verif_butineur() {
 		$browser_version = $match[2];
 		// deja inclus dans le head
 		//$browser_layer = (($browser_version < 7) ? '' :  http_script('', _DIR_IMG_PACK . 'layer.js',''));
+		$browser_layer = " ";
 		$browser_barre = ($browser_version >= 8.5); 
 	}
 	else if (eregi("opera", $browser_description)) {
@@ -146,6 +147,7 @@ function verif_butineur() {
 		$browser_version = $match[1];
 		// deja inclus dans le head
 		//$browser_layer = (($browser_version < 7) ? '' :  http_script('', _DIR_IMG_PACK . 'layer.js',''));
+		$browser_layer = " ";
 		$browser_barre = ($browser_version >= 8.5); 
 	}
 	else if (eregi("msie", $browser_description)) {
@@ -154,6 +156,7 @@ function verif_butineur() {
 		$browser_version = $match[1];
 		// deja inclus dans le head
 		//$browser_layer = (($browser_version < 5) ? '' :  http_script('', _DIR_IMG_PACK . 'layer.js',''));
+		$browser_layer = " ";
 		$browser_barre = ($browser_version >= 5.5);
 	}
 	else if (eregi("KHTML", $browser_description) &&
@@ -162,11 +165,13 @@ function verif_butineur() {
 		$browser_version = $match[1];
 		// deja inclus dans le head
 		//$browser_layer = http_script('', _DIR_IMG_PACK . 'layer.js','');
+		$browser_layer = " ";
 		$browser_barre = ($browser_version >= 5.0);
 	}
 	else if (eregi("mozilla", $browser_name) AND $browser_version >= 5) {
 		// deja inclus dans le head
 		//$browser_layer = http_script('', _DIR_IMG_PACK . 'layer.js','');
+		$browser_layer = " ";
 		// Numero de version pour Mozilla "authentique"
 		if (ereg("rv:([0-9]+\.[0-9]+)", $browser_description, $match))
 			$browser_rev = doubleval($match[1]);
