@@ -1,4 +1,4 @@
-$(document).ready(function(){
+function init_sort_table(){
 	$('#sort_table').Sortable(
 		{
 			accept : 			'sortableitem',
@@ -20,4 +20,8 @@ $(document).ready(function(){
 			}
 		}
 	)
+}
+onAjaxLoad(init_sort_table);
+$(document).ready(function(){
+	init_sort_table();
 });

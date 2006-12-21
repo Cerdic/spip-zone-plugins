@@ -15,6 +15,10 @@
 		<BOUCLE_body(FORMS_CHAMPS){id_form}{tout}{par rang}{specifiant='oui'}{0,2}>
 		#LESVALEURS{' '}
 		</BOUCLE_body>
+			<BOUCLE_alt(FORMS_CHAMPS){id_form}{tout}{par rang}{type !IN (separateur,textestatique)}{0,2}>
+			#LESVALEURS{' '}
+			</BOUCLE_alt>
+		<//B_body>
 	</li>
 </BOUCLE_donnees>
 </ul>
