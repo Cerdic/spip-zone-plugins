@@ -27,7 +27,7 @@ function switcher_affichage_final($texte){
 			// Insertion du selecteur de squelettes			
 			$code.='<div id="plugin_switcher" style="top: 0;left: 20px; position: absolute; background-color: transparent;z-index: 100;">';
 			$code.='<form action="" method="post">';
-			$code.='<fieldset style="magin:0;padding:0;border:0">';
+			$code.='<fieldset style="margin:0;padding:0;border:0">';
 			$code.='<select name="selecteurSkel" style="'.$styleListeSwitcher.'" onchange="gotof(this.options[this.selectedIndex].value)">';
 			$code.='<option selected="selected" value="">Squelettes</option>';
 			foreach( $squelettes_alternatifs as $key => $value)	$code.='<option value="'.parametre_url(self(),'var_skel',$key).'">&nbsp;-> '.$key.'</option>';
