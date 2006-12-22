@@ -85,7 +85,7 @@ function affiche_evenements_agenda($flag_editable){
 			$stamp=time();
 		}
 		else { // date de l'evenement
-			$res = spip_query("SELECT date_debut FROM spip_evenements WHERE id_evenement=".spip_abstract_quote($id_evenement));
+			$res = spip_query("SELECT date_debut FROM spip_evenements WHERE id_evenement="._q($id_evenement));
 			if ($row = spip_fetch_array($res))
 				$stamp=strtotime($row['date_debut']);
 			else 
@@ -178,7 +178,7 @@ function visu_evenement_agenda($id_evenement,$flag_editable){
 	$del = _request('del');
 
 	if ($id_evenement!=NULL){
-		$res = spip_query("SELECT evenements.* FROM spip_evenements AS evenements WHERE evenements.id_evenement=".spip_abstract_quote($id_evenement));
+		$res = spip_query("SELECT evenements.* FROM spip_evenements AS evenements WHERE evenements.id_evenement="._q($id_evenement));
 		if ($row = spip_fetch_array($res)){
 			if (!isset($neweven)){
 				$fid_evenement=$row['id_evenement'];
@@ -193,7 +193,7 @@ function visu_evenement_agenda($id_evenement,$flag_editable){
 			}
 	 	}
 		$out .= "<div class='agenda-visu-evenement'>";
-		$res2 = spip_query("SELECT articles.* FROM spip_articles AS articles LEFT JOIN spip_evenements AS J ON J.id_article=articles.id_article WHERE J.id_evenement=".spip_abstract_quote($id_evenement));
+		$res2 = spip_query("SELECT articles.* FROM spip_articles AS articles LEFT JOIN spip_evenements AS J ON J.id_article=articles.id_article WHERE J.id_evenement="._q($id_evenement));
 		if ($row2 = spip_fetch_array($res2)){
 			$out .= "<div class='article-evenement'>";
 			$out .= "<a href='".generer_url_ecrire('articles',"id_article=".$row2['id_article'])."'>";
@@ -270,8 +270,8 @@ function visu_evenement_agenda($id_evenement,$flag_editable){
 			$row2 = spip_fetch_array(
 						spip_query("SELECT mots.titre FROM spip_mots_evenements AS mots_evenements
 								LEFT JOIN spip_mots AS mots ON mots.id_mot=mots_evenements.id_mot 
-								WHERE mots.id_groupe=".spip_abstract_quote($id_groupe).
-								" AND mots_evenements.id_evenement=".spip_abstract_quote($id_evenement)));
+								WHERE mots.id_groupe="._q($id_groupe).
+								" AND mots_evenements.id_evenement="._q($id_evenement)));
 			if ($row2){
 				$out .= $sep . supprimer_numero($row['titre'])."&nbsp;:&nbsp;".supprimer_numero($row2['titre']);
 				$sep = "\n, ";
@@ -286,7 +286,7 @@ function visu_evenement_agenda($id_evenement,$flag_editable){
 
 		$out .= "<div class='repetitions-calendrier'>";
 		$id_source = $fid_evenement_source?$fid_evenement_source:$id_evenement;
-		$res2 = spip_query("SELECT * FROM spip_evenements WHERE id_evenement=".spip_abstract_quote($id_source)." OR id_evenement_source=".spip_abstract_quote($id_source)." ORDER BY date_debut");
+		$res2 = spip_query("SELECT * FROM spip_evenements WHERE id_evenement="._q($id_source)." OR id_evenement_source="._q($id_source)." ORDER BY date_debut");
 		if (spip_num_rows($res2)>1){
 			$out .= _T('agenda:evenement_autres_occurences');
 			while($row2 = spip_fetch_array($res2)){
@@ -299,7 +299,7 @@ function visu_evenement_agenda($id_evenement,$flag_editable){
 		$out .= "</div>";
 	
 		if ($fid_evenement_source!=0){
-			$res2 = spip_query("SELECT evenements.* FROM spip_evenements AS evenements WHERE evenements.id_evenement=".spip_abstract_quote($fid_evenement_source));
+			$res2 = spip_query("SELECT evenements.* FROM spip_evenements AS evenements WHERE evenements.id_evenement="._q($fid_evenement_source));
 			if ($row2 = spip_fetch_array($res2)){
 				$url = parametre_url($url,'id_evenement',$row2['id_evenement']);
 			  $out .= "<div class='edition-bouton'>";
@@ -387,7 +387,7 @@ function exec_agenda_evenements_dist(){
 
 	$out .= "<div>";
 	if ($ajouter_id_article){
-		$res2 = spip_query("SELECT * FROM spip_articles AS articles WHERE id_article=".spip_abstract_quote($ajouter_id_article));
+		$res2 = spip_query("SELECT * FROM spip_articles AS articles WHERE id_article="._q($ajouter_id_article));
 		if ($row2 = spip_fetch_array($res2)){
 			$out .= "<div style=' width:750px; font-size: 18px; color: #9DBA00; font-weight: bold;text-align:left;'>";
 			$out .= "<a href='".generer_url_ecrire('articles',"id_article=".$row2['id_article'])."'>";

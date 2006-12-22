@@ -20,7 +20,7 @@ function balise_FORMULAIRE_EDITION_EVENEMENT_dyn($id_evenement = 0, $id_article 
 	$url = str_replace("&amp;","&",$url);
 	if ($retour=='') $retour = $url;
 
-	$res = spip_query("SELECT * FROM spip_articles WHERE id_article=".spip_abstract_quote($id_article));
+	$res = spip_query("SELECT * FROM spip_articles WHERE id_article="._q($id_article));
 	if (!spip_num_rows($res)) return;
 
 	$flag_modif = (_request('evenement_modif') && _request('id_evenement') == $id_evenement);
@@ -43,19 +43,19 @@ function balise_FORMULAIRE_EDITION_EVENEMENT_dyn($id_evenement = 0, $id_article 
 	$formulaire_actif = _request('ajout_evenement')!=NULL;
 	
 	// les champs
-	$res = spip_query("SELECT * FROM spip_evenements WHERE id_evenement=".spip_abstract_quote($id_evenement)." AND id_article=".spip_abstract_quote($id_article));
+	$res = spip_query("SELECT * FROM spip_evenements WHERE id_evenement="._q($id_evenement)." AND id_article="._q($id_article));
 	if ($row = spip_fetch_array($res,SPIP_ASSOC)){
 		$evenement_action='evenement_modif';
 		foreach($row as  $k=>$val){
 			$valeurs["evenement_$k"]=$val;
 		}
 		// les mots
-		$res = spip_query("SELECT * FROM spip_mots_evenements WHERE id_evenement=".spip_abstract_quote($id_evenement));
+		$res = spip_query("SELECT * FROM spip_mots_evenements WHERE id_evenement="._q($id_evenement));
 		while ($row=spip_fetch_array($res)){
 			$valeurs['mots'][]=$row['id_mot'];
 		}
 		
-		$res = spip_query("SELECT date_debut FROM spip_evenements WHERE id_evenement_source=".spip_abstract_quote($id_evenement));
+		$res = spip_query("SELECT date_debut FROM spip_evenements WHERE id_evenement_source="._q($id_evenement));
 		while ($row=spip_fetch_array($res)){
 			$valeurs['repetitions'][] = date('m/d/Y',strtotime($row['date_debut']));
 		}
