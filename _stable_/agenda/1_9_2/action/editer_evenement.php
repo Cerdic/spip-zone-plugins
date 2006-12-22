@@ -108,17 +108,14 @@ function Agenda_action_update_liste_mots($id_evenement,$liste_mots){
 }
 
 
-function Agenda_action_formulaire_article($id_article){
+function Agenda_action_formulaire_article($id_article,$id_evenement){
 	include_spip('base/abstract_sql');
 	// s'assurer que les tables sont crees
 	Agenda_install();
 	// gestion des requetes de mises à jour dans la base
-	$id_evenement = intval(_request('id_evenement'));
 	$insert = _request('evenement_insert');
 	$modif = _request('evenement_modif');
-	$supp_evenement = intval(_request('supp_evenement'));
-
-	if (($insert || $modif)&&(!$supp_evenement)){
+	if (($insert || $modif)){
 	
 		if ( ($insert) && (!$id_evenement) ){
 			$id_evenement = spip_abstract_insert("spip_evenements",
@@ -126,7 +123,7 @@ function Agenda_action_formulaire_article($id_article){
 				"('0',NOW())");
 			if ($id_evenement==0){
 				spip_log("agenda action formulaire article : impossible d'ajouter un evenement");
-				return;
+				return 0;
 			}
 	 	}
 		if ($id_article){
@@ -214,32 +211,42 @@ function Agenda_action_formulaire_article($id_article){
 			$repetitions = array();
 		Agenda_action_update_repetitions($id_evenement, $repetitions, $liste_mots);
 	}
-	else if ($supp_evenement){
-		$id_article = intval(_request('id_article'));
+	return $id_evenement;
+}
 
-		if (!$id_article)
-			$id_article = intval(_request('ajouter_id_article'));
-		$res = spip_query("SELECT * FROM spip_evenements WHERE id_article="._q($id_article)." AND id_evenement="._q($supp_evenement));
-		if ($row = spip_fetch_array($res)){
-			spip_query("DELETE FROM spip_mots_evenements WHERE id_evenement="._q($supp_evenement));
-			spip_query("DELETE FROM spip_evenements WHERE id_evenement="._q($supp_evenement));
-		}
-		Agenda_action_supprime_repetitions($supp_evenement);
+function Agenda_action_supprime_evenement($id_article,$supp_evenement){
+	$res = spip_query("SELECT * FROM spip_evenements WHERE id_article="._q($id_article)." AND id_evenement="._q($supp_evenement));
+	if ($row = spip_fetch_array($res)){
+		spip_query("DELETE FROM spip_mots_evenements WHERE id_evenement="._q($supp_evenement));
+		spip_query("DELETE FROM spip_evenements WHERE id_evenement="._q($supp_evenement));
 	}
-	return ;
+	Agenda_action_supprime_repetitions($supp_evenement);
+	$id_evenement = 0;
+	return $id_evenement;
 }
 
 function action_editer_evenement_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$securiser_action();
+	
+	$arg = explode('-',_request('arg'));
+	$id_article = $arg[0];
+	$action = $arg[1];
+	$id_evenement = $arg[2];
+	if ($action=='modifier')
+		//if (autoriser())
+		$id_evenement = Agenda_action_formulaire_article($id_article,$id_evenement);
+	elseif ($action=='supprimer')
+		//if (autoriser())
+		$id_evenement = Agenda_action_supprime_evenement($id_article,$id_evenement);
 
-	$id_article = intval(_request('arg'));
-	//if (autoriser())
-	Agenda_action_formulaire_article($id_article);
-
-	if ($redirect = urldecode(_request('redirect')))
-		redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));
+	if ($redirect = urldecode(_request('redirect'))){
+		if ($id_evenement)
+			$redirect = parametre_url($redirect,'id_evenement',$id_evenement,'&');
+		//var_dump($redirect);die();
+		redirige_par_entete($redirect);
+	}
 }
 
 ?>

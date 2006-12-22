@@ -45,7 +45,7 @@ function Agenda_affiche_milieu($flux) {
 		include_spip('inc/calendar');
 		include_spip('inc/agenda_gestion');
 		$id_article = $flux['args']['id_article'];
-		$flux['data'] .= Agenda_formulaire_article($id_article, article_editable($id_article));
+		$flux['data'] .= Agenda_formulaire_article($id_article, article_editable($id_article),'articles');
 	}
 	return $flux;
 }

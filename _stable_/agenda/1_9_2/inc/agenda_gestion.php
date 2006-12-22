@@ -161,7 +161,7 @@ function Agenda_afficher_date_evenement($date_debut, $date_fin, $horaire){
 	return $s;	
 }
 
-function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editable)
+function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editable, $script)
 {
 	global $connect_statut, $options,$connect_id_auteur;
 	$out = "";
@@ -215,11 +215,12 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 
 			
 			if ($flag_editable) {
-				$url = self();
+				/*$url = generer_url_ecrire($script);
 				$url = parametre_url($url,'id_article',$id_article);
 				$url = parametre_url($url,'id_evenement',$id_evenement);
 				$url = parametre_url($url,'edit',1);
-				$s = "<a href='$url'>".($titre ? $titre : '<em>('._T('info_sans_titre').')</em>')."</a>";
+				$s = "<a href='$url'>".($titre ? $titre : '<em>('._T('info_sans_titre').')</em>')."</a>";*/
+				$s = ajax_action_auteur('editer_evenement', "$id_article-editer-$id_evenement", $script, "id_article=$id_article&id_evenement=$id_evenement&edit=oui", array($titre ? $titre : '<em>('._T('info_sans_titre').')</em>',''));
 				$vals[] = $s;
 			}
 			else{
@@ -228,7 +229,8 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 			$vals[] = propre($descriptif);
 		
 			if ($flag_editable) {
-				$vals[] =  "<a href='" . generer_url_ecrire("articles","id_article=$id_article&supp_evenement=$id_evenement#agenda") . "'>"._T('agenda:lien_retirer_evenement')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</a>";
+				//$vals[] =  "<a href='" . generer_url_ecrire("articles","id_article=$id_article&supp_evenement=$id_evenement#agenda") . "'>"._T('agenda:lien_retirer_evenement')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</a>";
+				$vals[] = ajax_action_auteur('editer_evenement', "$id_article-supprimer-$id_evenement", $script, "id_article=$id_article", array(_T('agenda:lien_retirer_evenement')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'"),''),"&id_article=$id_article&supp_evenement=$id_evenement");
 			} else {
 				$vals[] = "";
 			}
@@ -252,7 +254,7 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 // Liste des evenements agenda de l'article
 //
 
-function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenements, $flag_editable){
+function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenements, $flag_editable, $script){
   global $spip_lang_left, $spip_lang_right, $options;
 	global $connect_statut, $options,$connect_id_auteur, $couleur_claire ;
 	$id_evenement = intval(_request('id_evenement'));
@@ -261,7 +263,7 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 	$out = "";
 	$out .= "<div style='clear: both;'></div>";
 	if ($flag_editable){
-		if ((in_array($id_evenement,explode(",",$les_evenements)) && $edit==1)||_request('neweven'))
+		if ((in_array($id_evenement,explode(",",$les_evenements)) && $edit)||_request('neweven'))
 			$out .=  debut_block_visible("evenementsarticle");
 		else
 			$out .=  debut_block_invisible("evenementsarticle");
@@ -271,7 +273,7 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 		$out .=  "<tr>";
 		$out .=  "<td>";
 	
-		if (in_array($id_evenement,explode(",",$les_evenements)) && $edit==1){
+		if (in_array($id_evenement,explode(",",$les_evenements)) && $edit){
 			$out .=  "<span class='verdana1'><strong>"._T('agenda:titre_cadre_modifier_evenement')."&nbsp; </strong></span>\n";
 		} else {
 			$out .=  "<span class='verdana1'><strong>"._T('agenda:titre_cadre_ajouter_evenement')."&nbsp; </strong></span>\n";
@@ -279,7 +281,7 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 		$out .=  "<div><input type='hidden' name='id_article' value=\"$id_article\">";
 
 		$bouton_ajout = false;
-		if (in_array($id_evenement,explode(",",$les_evenements)) && $edit==1){
+		if (in_array($id_evenement,explode(",",$les_evenements)) && $edit){
 			$form .= Agenda_formulaire_edition_evenement($id_evenement, false);
 			$bouton_ajout = true;
 		}
@@ -293,7 +295,7 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 			$form .= Agenda_formulaire_edition_evenement(NULL, true, '', $titre_defaut);
 			$id_evenement = 0;
 		}
-		$out .= ajax_action_auteur('editer_evenement',"$id_article-$id_evenement",'articles', "id_article=$id_article", $form);
+		$out .= ajax_action_auteur('editer_evenement',"$id_article-modifier-$id_evenement", $script, "id_article=$id_article&edit=1", $form);
 			
 		$out .= "</div>";
 		$out .=  "</td></tr></table>";
@@ -303,7 +305,8 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 			$url = parametre_url(self(),'edit','');
 			$url = parametre_url($url,'neweven','1');
 			$url = parametre_url($url,'id_evenement','');
-			$out .= icone_horizontale(_T("agenda:icone_creer_evenement"),$url , "../"._DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", "creer.gif",false);
+			//$out .= icone_horizontale(_T("agenda:icone_creer_evenement"),$url , "../"._DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", "creer.gif",false);
+			$out .= ajax_action_auteur('editer_evenement',"$id_article-creer-0", $script, "id_article=$id_article&neweven=1", array(http_img_pack(_DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", _T("agenda:icone_creer_evenement"), "width='24' height='24' border='0' align='middle'")."&nbsp;"._T("agenda:icone_creer_evenement"),''));
 		}
 
 		$out .= "</div>";
@@ -312,7 +315,7 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 	return $out;
 }
 
-function Agenda_formulaire_article($id_article, $flag_editable){
+function Agenda_formulaire_article($id_article, $flag_editable, $script){
 
   global $spip_lang_left, $spip_lang_right, $options;
 	global $connect_statut, $options,$connect_id_auteur, $couleur_claire ;
@@ -334,14 +337,14 @@ function Agenda_formulaire_article($id_article, $flag_editable){
 	// Afficher les evenements
 	//
 
-	list($s,$les_evenements) = Agenda_formulaire_article_afficher_evenements($id_article, $flag_editable);
+	list($s,$les_evenements) = Agenda_formulaire_article_afficher_evenements($id_article, $flag_editable, $script);
 	$out .= $s;
 	//
 	// Ajouter un evenements
 	//
 
 	if ($flag_editable)
-		$out .= Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenements, $flag_editable);
+		$out .= Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenements, $flag_editable, $script);
 
 
 	$out .= fin_cadre_enfonce(true);
