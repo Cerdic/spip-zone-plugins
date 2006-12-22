@@ -16,7 +16,7 @@ include_spip('inc/filtres');
 include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@action_instituer_groupe_mots_dist
-function action_instituer_groupe_mots_agenda_dist()
+function action_instituer_groupe_mots_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$securiser_action();
@@ -24,13 +24,13 @@ function action_instituer_groupe_mots_agenda_dist()
 	$arg = _request('arg');
 
 	if (!preg_match(",^(-?\d+)$,", $arg, $r)) {
-		 spip_log("action_instituer_groupe_mots_agenda_dist $arg pas compris");
-	} else action_instituer_groupe_mots_agenda_post($r);
+		 spip_log("action_instituer_groupe_mots_dist $arg pas compris");
+	} else action_instituer_groupe_mots_post($r);
 }
 
 
 // http://doc.spip.org/@action_instituer_groupe_mots_post
-function action_instituer_groupe_mots_agenda_post($r)
+function action_instituer_groupe_mots_post($r)
 {
 	global $acces_comite, $acces_forum, $acces_minirezo, $new, $articles, $breves, $change_type, $descriptif, $id_groupe, $obligatoire, $rubriques, $syndic, $evenements, $pim_agenda, $texte, $unseul;
 

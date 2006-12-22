@@ -382,10 +382,10 @@ function exec_agenda_evenements_dist(){
 		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
 	}
 
-  debut_page($titre, "redacteurs", "calendrier","",$css);
-	barre_onglets("calendrier", "evenements");
+  $out = debut_page($titre, "redacteurs", "calendrier","",$css);
+	$out .= barre_onglets("calendrier", "evenements");
 
-	$out = "<div>";
+	$out .= "<div>";
 	if ($ajouter_id_article){
 		$res2 = spip_query("SELECT * FROM spip_articles AS articles WHERE id_article=".spip_abstract_quote($ajouter_id_article));
 		if ($row2 = spip_fetch_array($res2)){
@@ -395,20 +395,20 @@ function exec_agenda_evenements_dist(){
 			$out .= entites_html(typo($row2['titre']))."</a></div>";
 		}
 	}
-	echo $out ."&nbsp;</div>" ;
+	$out .= "&nbsp;</div>" ;
 
-	echo affiche_evenements_agenda($flag_editable);
+	$out .= affiche_evenements_agenda($flag_editable);
 
 	if (($edit||$neweven)&&($flag_editable))	{ //---------------Edition RDV ------------------------------
 		$ndate = _request('ndate');
-		echo Agenda_formulaire_edition_evenement($id_evenement,$neweven,$ndate);
+		$out .= Agenda_formulaire_edition_evenement($id_evenement,$neweven,$ndate);
 	}
 	else
 		if ((isset($id_evenement))&&(isset($visu_evenements[$id_evenement]))){ //---------------Visualisation RDV ------------------------------
-			echo visu_evenement_agenda($id_evenement,$flag_editable);
+			$out .= visu_evenement_agenda($id_evenement,$flag_editable);
 		}
-	fin_page();
-
+	$out .= fin_page();
+	echo $out;
 }
 
 function http_calendrier_ics_message($annee, $mois, $jour, $large)
