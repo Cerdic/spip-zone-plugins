@@ -2,6 +2,10 @@
 
 include_spip('inc/texte');
 include_spip('inc/date');
+include_spip('inc/layer');
+include_spip('inc/presentation');
+include_spip('inc/minipres');
+include_spip('inc/calendar');
 include_spip('agenda_mes_fonctions');
 
 function Agenda_install(){
@@ -267,7 +271,6 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 		$out .=  "<tr>";
 		$out .=  "<td>";
 	
-		$out .=  generer_url_post_ecrire("articles", "id_article=$id_article");
 		if (in_array($id_evenement,explode(",",$les_evenements)) && $edit==1){
 			$out .=  "<span class='verdana1'><strong>"._T('agenda:titre_cadre_modifier_evenement')."&nbsp; </strong></span>\n";
 		} else {
@@ -275,15 +278,10 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 		}
 		$out .=  "<div><input type='hidden' name='id_article' value=\"$id_article\">";
 
+		$bouton_ajout = false;
 		if (in_array($id_evenement,explode(",",$les_evenements)) && $edit==1){
-			$out .= Agenda_formulaire_edition_evenement($id_evenement, false);
-			$out .= "</div>";
-			$out .=  "</td></tr></table>";
-			$out .= "<div style='clear: both;'></div>";
-			$url = parametre_url(self(),'edit','');
-			$url = parametre_url($url,'neweven','1');
-			$url = parametre_url($url,'id_evenement','');
-			$out .= icone_horizontale(_T("agenda:icone_creer_evenement"),$url , "../"._DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", "creer.gif",false);
+			$form .= Agenda_formulaire_edition_evenement($id_evenement, false);
+			$bouton_ajout = true;
 		}
 		else{
 			// recuperer le titre de l'article pour le mettre par defaut sur l'evenement
@@ -292,9 +290,20 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 			if ($row = spip_fetch_array($res))
 				$titre_defaut = $row['titre'];
 			
-			$out .= Agenda_formulaire_edition_evenement(NULL, true, '', $titre_defaut);
-			$out .= "</div>";
-			$out .=  "</td></tr></table>";
+			$form .= Agenda_formulaire_edition_evenement(NULL, true, '', $titre_defaut);
+			$id_evenement = 0;
+		}
+		$out .= ajax_action_auteur('editer_evenement',"$id_article-$id_evenement",'articles', "id_article=$id_article", $form);
+			
+		$out .= "</div>";
+		$out .=  "</td></tr></table>";
+		$out .= "<div style='clear: both;'></div>";
+
+		if ($bouton_ajout){
+			$url = parametre_url(self(),'edit','');
+			$url = parametre_url($url,'neweven','1');
+			$url = parametre_url($url,'id_evenement','');
+			$out .= icone_horizontale(_T("agenda:icone_creer_evenement"),$url , "../"._DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", "creer.gif",false);
 		}
 
 		$out .= "</div>";
@@ -308,10 +317,10 @@ function Agenda_formulaire_article($id_article, $flag_editable){
   global $spip_lang_left, $spip_lang_right, $options;
 	global $connect_statut, $options,$connect_id_auteur, $couleur_claire ;
 	
-	$out = "";
+	$out = "<div id='editer_evenement-$id_article'>";
 	$out .= "<a name='agenda'></a>";
 	if ($flag_editable) {
-		$out .= Agenda_action_formulaire_article($id_article);
+		//$out .= Agenda_action_formulaire_article($id_article);
 		if (_request('edit')||_request('neweven'))
 			$bouton = bouton_block_visible("evenementsarticle");
 		else
@@ -336,235 +345,9 @@ function Agenda_formulaire_article($id_article, $flag_editable){
 
 
 	$out .= fin_cadre_enfonce(true);
+	$out .= "</div>";
 	return $out;
 }
-
-
-function Agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots){
-	// evenement source
-	$res = spip_query("SELECT * FROM spip_evenements WHERE id_evenement="._q($id_evenement));
-	if ($row = spip_fetch_array(($res))){
-		$titre = $row['titre'];
-		$descriptif = $row['descriptif'];
-		$horaire = $row['horaire'];
-		$lieu = $row['lieu'];
-		$date_debut = strtotime($row['date_debut']);
-		$date_fin = strtotime($row['date_fin']);
-		$duree = $date_fin - $date_debut;
-		$id_evenement_source = $row['id_evenement_source'];
-		$id_article = $row['id_article'];
-		if ($id_evenement_source!=0)
-			return; // pas un evenement source donc rien a faire ici
-
-		$repetitions_updated = array();
-		// mettre a jour toutes les repetitions deja existantes ou les supprimer si plus lieu
-		$res = spip_query("SELECT id_evenement FROM spip_evenements WHERE id_evenement_source="._q($id_evenement));
-		while ($row = spip_fetch_array($res)){
-			$date = strtotime(date('Y-m-d',$row['date_debut']));
-			if (in_array($date,$repetitions)){
-				// il est maintenu, on l'update
-				$repetitions_updated[] = $date;
-				$update_date_debut = date('Y-m-d',$date)." ".date('H:i:s',$date_debut);
-				$update_date_fin = date('Y-m-d H:i:s',strtotime($update_date_debut)+$duree);
-				
-				// TODO : prendre en charge la mise a jour uniquement si conforme a l'original
-				$update_titre = $titre;
-				$update_descriptif = $descriptif;
-				$update_lieu = $lieu;
-				
-				// mettre a jour l'evenement
-				$res=spip_query("UPDATE spip_evenements SET `titre`="._q($update_titre)
-				. ",`descriptif`="._q($update_descriptif)
-				. ",`lieu`="._q($update_lieu)
-				. ",`horaire`="._q($horaire)
-				. ",`date_debut`="._q($update_date_debut)
-				. ",`date_fin`="._q($update_date_fin)
-				. ",`id_article`="._q($id_article)
-				. " WHERE `id_evenement` ="._q($row['id_evenement']));
-				Agenda_action_update_liste_mots($row['id_evenement'],$liste_mots);
-			}
-			else {
-				// il est supprime
-				spip_query("DELETE FROM spip_mots_evenements WHERE id_evenement=".$row['id_evenement']);
-				spip_query("DELETE FROM spip_evenements WHERE id_evenement=".$row['id_evenement']);
-			}
-			
-		}
-		// regarder les repetitions a ajouter
-		foreach($repetitions as $date){
-			if (!in_array($date,$repetitions_updated)){
-				$update_date_debut = date('Y-m-d',$date)." ".date('H:i:s',$date_debut);
-				$update_date_fin = date('Y-m-d H:i:s',strtotime($update_date_debut)+$duree);
-				$update_titre = $titre;
-				$update_descriptif = $descriptif;
-				$update_lieu = $lieu;
-
-				$id_evenement_new = spip_abstract_insert("spip_evenements",
-					"(id_evenement_source,maj)",
-					"("._q($id_evenement).",NOW())");
-				if ($id_evenement_new==0)
-					spip_log("agenda action formulaire article : impossible d'ajouter un evenement repete");
-				else {
-					// mettre a jour l'evenement
-					$res=spip_query("UPDATE spip_evenements SET `titre`="._q($update_titre)
-					. ",`descriptif`="._q($update_descriptif)
-					. ",`lieu`="._q($update_lieu)
-					. ",`horaire`="._q($horaire)
-					. ",`date_debut`="._q($update_date_debut)
-					. ",`date_fin`="._q($update_date_fin)
-					. ",`id_article`="._q($id_article)
-					. " WHERE `id_evenement` ="._q($id_evenement_new));
-					
-					Agenda_action_update_liste_mots($id_evenement_new,$liste_mots);
-				}
-			}
-		}
-	}
-}
-function Agenda_action_supprime_repetitions($supp_evenement){
-	$res = spip_query("SELECT * FROM spip_evenements WHERE id_evenement_source="._q($supp_evenement));
-	while ($row = spip_fetch_array($res)){
-		$id_evenement = $row['id_evenement'];
-		spip_query("DELETE FROM spip_mots_evenements WHERE id_evenement="._q($id_evenement));
-		spip_query("DELETE FROM spip_evenements WHERE id_evenement="._q($id_evenement));
-	}
-}
-
-function Agenda_action_update_liste_mots($id_evenement,$liste_mots){
-	// suppression des mots obsoletes
-	$cond_in = "";
-	if (count($liste_mots))
-		$cond_in = "AND " . calcul_mysql_in('id_mot', implode(",",$liste_mots), 'NOT');
-	spip_query("DELETE FROM spip_mots_evenements WHERE id_evenement="._q($id_evenement)." ".$cond_in);
-	// ajout/maj des nouveaux mots
-	foreach($liste_mots as $id_mot){
-		if (!spip_fetch_array(spip_query("SELECT * FROM spip_mots_evenements WHERE id_evenement="._q($id_evenement)." AND id_mot="._q($id_mot))))
-			spip_query("INSERT INTO spip_mots_evenements (id_mot,id_evenement) VALUES ("._q($id_mot).","._q($id_evenement).")");
-	}
-}
-
-
-function Agenda_action_formulaire_article($id_article){
-	include_spip('base/abstract_sql');
-	// s'assurer que les tables sont crees
-	Agenda_install();
-	// gestion des requetes de mises à jour dans la base
-	$id_evenement = intval(_request('id_evenement'));
-	$insert = _request('evenement_insert');
-	$modif = _request('evenement_modif');
-	$supp_evenement = intval(_request('supp_evenement'));
-
-	if (($insert || $modif)&&(!$supp_evenement)){
-	
-		if ( ($insert) && (!$id_evenement) ){
-			$id_evenement = spip_abstract_insert("spip_evenements",
-				"(id_evenement_source,maj)",
-				"('0',NOW())");
-			if ($id_evenement==0){
-				spip_log("agenda action formulaire article : impossible d'ajouter un evenement");
-				return;
-			}
-	 	}
-	 	if ($id_article){
-			// mettre a jour le lien evenement-article
-			spip_query("UPDATE spip_evenements SET id_article="._q($id_article)." WHERE id_evenement="._q($id_evenement));
-	 	}
-		$titre = _request('evenement_titre');
-		$descriptif = _request('evenement_descriptif');
-		$lieu = _request('evenement_lieu');
-		$horaire = _request('evenement_horaire');
-		if ($horaire!='oui') $horaire='non';
-	
-		// pour les cas ou l'utilisateur a saisi 29-30-31 un mois ou ca n'existait pas
-		$maxiter=4;
-		$st_date_deb=FALSE;
-		$jour_debut=_request('jour_evenement_debut');
-		// test <= car retour strtotime retourne -1 ou FALSE en cas d'echec suivant les versions
-		while(($st_date_deb<=FALSE)&&($maxiter-->0)) {
-			$date_deb=_request('annee_evenement_debut').'-'._request('mois_evenement_debut').'-'.($jour_debut--)
-				.' '._request('heure_evenement_debut').':'._request('minute_evenement_debut');
-			$st_date_deb=strtotime($date_deb);
-		}
-		$date_deb=format_mysql_date(date("Y",$st_date_deb),date("m",$st_date_deb),date("d",$st_date_deb),date("H",$st_date_deb),date("i",$st_date_deb), $s=0);
-	
-		// pour les cas ou l'utilisateur a saisi 29-30-31 un mois ou ca n'existait pas
-		$maxiter=4;
-		$st_date_fin=FALSE;
-		$jour_fin=_request('jour_evenement_fin');
-		// test <= car retour strtotime retourne -1 ou FALSE en cas d'echec suivant les versions
-		while(($st_date_fin<=FALSE)&&($maxiter-->0)) {
-			$st_date_fin=_request('annee_evenement_fin').'-'._request('mois_evenement_fin').'-'.($jour_fin--)
-				.' '._request('heure_evenement_fin').':'._request('minute_evenement_fin');
-			$st_date_fin=strtotime($st_date_fin);
-		}
-		$st_date_fin = max($st_date_deb,$st_date_fin);
-		$date_fin=format_mysql_date(date("Y",$st_date_fin),date("m",$st_date_fin),date("d",$st_date_fin),date("H",$st_date_fin),date("i",$st_date_fin), $s=0);
-	
-		// mettre a jour l'evenement
-		$res=spip_query("UPDATE spip_evenements SET `titre`="._q($titre)
-		. ",`descriptif`="._q($descriptif)
-		. ",`lieu`="._q($lieu)
-		. ",`horaire`="._q($horaire)
-		. ",`date_debut`="._q($date_deb)
-		. ",`date_fin`="._q($date_fin)
-		. " WHERE `id_evenement` ="._q($id_evenement));
-
-		// les mots cles : par groupes
-		$res = spip_query("SELECT * FROM spip_groupes_mots WHERE evenements='oui' ORDER BY titre");
-		$liste_mots = array();
-		while ($row = spip_fetch_array($res,SPIP_ASSOC)){
-			$id_groupe = $row['id_groupe'];
-			$id_mot_a = _request("evenement_groupe_mot_select_$id_groupe"); // un array
-			if (is_array($id_mot_a) && count($id_mot_a)){
-				if ($row['unseul']=='oui')
-					$liste_mots[] = intval(reset($id_mot_a));
-				else 
-					foreach($id_mot_a as $id_mot)
-						$liste_mots[] = intval($id_mot);
-			}				
-		}
-
-		Agenda_action_update_liste_mots($id_evenement,$liste_mots);
-				
-		// gestion des repetitions
-		if (($repetitions = _request('selected_date_repetitions'))!=NULL){
-			$repetitions = explode(',',$repetitions);
-			$rep = array();
-			foreach($repetitions as $key=>$date){
-				if (preg_match(",[0-9][0-9]?/[0-9][0-9]?/[0-9][0-9][0-9][0-9],",$date)){
-					$date = explode('/',$date);
-					$date = $date[2]."/".$date[0]."/".$date[1];
-					$date = strtotime($date);
-				}
-				else {
-					$date = preg_replace(",[0-2][0-9]:[0-6][0-9]:[0-6][0-9]\s*(UTC|GMT)(\+|\-)[0-9]{4},","",$date);
-					$date = explode(' ',$date);
-					$date = strtotime($date[2]." ".$date[1]." ".$date[3]);
-				}
-				if (!in_array($date,$repetitions))
-					$rep[] = $date;
-			}
-			$repetitions = $rep;
-		}
-		else 
-			$repetitions = array();
-		Agenda_action_update_repetitions($id_evenement, $repetitions, $liste_mots);
-	}
-	else if ($supp_evenement){
-		$id_article = intval(_request('id_article'));
-
-		if (!$id_article)
-			$id_article = intval(_request('ajouter_id_article'));
-		$res = spip_query("SELECT * FROM spip_evenements WHERE id_article="._q($id_article)." AND id_evenement="._q($supp_evenement));
-		if ($row = spip_fetch_array($res)){
-			spip_query("DELETE FROM spip_mots_evenements WHERE id_evenement="._q($supp_evenement));
-			spip_query("DELETE FROM spip_evenements WHERE id_evenement="._q($supp_evenement));
-		}
-		Agenda_action_supprime_repetitions($supp_evenement);
-	}
-	return "";
-}
-
 
 function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="", $titre_defaut=""){
 	global $spip_lang_right;
@@ -622,8 +405,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	$out .= "<div class='agenda-visu-evenement-bouton-fermer'>";
   $out .=	"<a href='$url'><img src='"._DIR_PLUGIN_AGENDA."/img_pack/croix.png' width='12' height='12' style='border:none;'></a>";
   $out .= "</div>\n";
-  $out .=  "<form name='edition_evenement' action='$url' method='post'>";
-  #$out .=  "<input type='hidden' name='redirect' value='$url' />\n";
+  //$out .=  "<form name='edition_evenement' action='$url' method='post'>";
 	if (!$neweven){
 	  $out .=  "<input type='hidden' name='id_evenement' value='$fid_evenement' />\n";
 	  $out .=  "<input type='hidden' name='evenement_modif' value='1' />\n";
@@ -743,7 +525,7 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 
   $out .=  "</div>";
 
-	$out .=  "</form>";
+	//$out .=  "</form>";
 	$out .=  "</div>\n";
 	return $out;
 }
