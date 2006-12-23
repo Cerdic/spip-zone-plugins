@@ -13,7 +13,9 @@ _ &copy; 2006 - Distribu&eacute; sous licence GPL
 	experimental
 	</etat>
 	<description>
-	R&eacute;unit en un seul plugin une liste de petites fonctionnalit&eacute;s nouvelles et utiles am&eacute;liorant la gestion de vos sites SPIP. Chacun de ces tweaks peut &ecirc;tre activ&eacute; ou non par l'utilisateur dans la page Configuration/Tweak SPIP.
+R&eacute;unit en un seul plugin une liste de petites fonctionnalit&eacute;s nouvelles et utiles am&eacute;liorant la gestion de vos sites SPIP. Chacun de ces tweaks peut &ecirc;tre activ&eacute; ou non par l'utilisateur dans la page Configuration/Tweak SPIP.
+
+Une activation des tweaks est n&eacute;cessaire sur la page d'administration du plugin : cf. {Configuration/Tweak SPIP}.
 	</description>
 	<lien>[->http://www.spip-contrib.net/ecrire/?exec=articles&id_article=1554]</lien> <!-- URI de documentation -->
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->

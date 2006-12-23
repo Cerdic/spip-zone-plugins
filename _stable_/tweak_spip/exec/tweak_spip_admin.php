@@ -100,7 +100,7 @@ function exec_tweak_spip_admin() {
 	global $connect_statut, $connect_toutes_rubriques;
 	global $spip_lang_right;
 	global $couleur_claire;
-	global $tweaks;
+	global $tweaks, $spip_version_code;
 	
 	include_spip('tweak_spip_config');
 	include_spip("inc/presentation");
@@ -118,6 +118,7 @@ function exec_tweak_spip_admin() {
 		enregistre_modif_tweaks();
 		// pour la peine, un redirige, 
 		// que les tweaks charges soient coherent avec la liste
+		if ($spip_version_code>=1.92) include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('tweak_spip_admin'));
 	}
 //	else
