@@ -7,25 +7,8 @@
 #  Licence : GPL                                    #
 #---------------------------------------------------#
 
-global $tweaks, $tweaks_actifs_a_l_installation, $tweaks_pipelines, $tweak_exclude;
+global $tweaks, $tweaks_pipelines, $tweak_exclude;
 
-// cette liste enumere les tweaks inc/???.php a inclure lors de l'installation premiere du plugin.
-// commenter les tweaks à ne pas activer...
-// quand la page d'admin sera pleinement fonctionnelle, les lignes suivantes ne seront plus nécessaires...
-// une option sera simplement à rajouter pour définir si le tweak est chargé par defaut ou non
-$tweaks_actifs_a_l_installation = array(	
-//	'desactiver_cache', 
-	'supprimer_numero',
-	'verstexte_fonctions',
-	'orientation',
-//	'desactiver_flash',
-	'toutmulti',
-	'bellespuces',
-	'decoration',
-	'typo_exposants',
-	'paragrapher',
-);
-	
 //-----------------------------------------------------------------------------//
 //                               options                                       //
 //-----------------------------------------------------------------------------//
@@ -36,7 +19,7 @@ add_tweak( array(
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'include' 		=> 'desactiver_cache',
 	// tweak a inserer dans les options
-	'options'		=> 1
+	'options'		=> 1,
 ));
 
 add_tweak( array(
@@ -62,12 +45,12 @@ add_tweak( array(
 add_tweak( array(
 	'nom'			=> 'Version texte',
 	'description' 	=> "2 filtres pour vos squelettes. 
-_ version_texte : extrait le contenu texte d'une page html &agrave; l'exclusion de quelques balises &eacute;l&eacute;mentaires
-_ version_plein_texte : extrait le contenu texte d'une page html pour rendre du texte plein",
+_ version_texte : extrait le contenu texte d'une page html &agrave; l'exclusion de quelques balises &eacute;l&eacute;mentaires.
+_ version_plein_texte : extrait le contenu texte d'une page html pour rendre du texte plein.",
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'include' 		=> 'verstexte_fonctions',
 	// tweak a inserer dans les fonctions
-	'fonctions'		=> 1
+	'fonctions'		=> 1,
 ));
 
 add_tweak( array(
@@ -77,7 +60,7 @@ _ [Plus d'infos->http://www.spip-contrib.net/Portrait-ou-Paysage]",
 	'auteur' 		=> 'Pierre Andrews (Mortimer) &amp; IZO',
 	'include' 		=> 'orientation',
 	// tweak a inserer dans les fonctions
-	'fonctions'		=> 1
+	'fonctions'		=> 1,
 ));
 
 
@@ -104,7 +87,7 @@ add_tweak( array(
 	'nom'			=> 'Tout multi',
 	'description' 	=> "Introduit le raccourci &lt;:un_texte:&gt; pour introduire librement des blocs multi-langues dans un article.
 _ La fonction SPIP utilis&eacute;e est : _T('un_texte', \$flux).
-_ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans les fichiers de langue",
+_ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans les fichiers de langue.",
 	'auteur' 		=> '',
 	'include' 		=> 'toutmulti',
 	// pipeline => fonction
@@ -153,21 +136,8 @@ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie 
 // exclure ce qui n'est pas un pipeline...
 $tweak_exclude = array('nom', 'description', 'auteur', 'include', 'options', 'fonctions', 'actif');
 
-foreach ($tweaks as $i=>$tweak) {
-	// insersion des parametres de $tweaks_actifs_a_l_installation dans $tweaks;
-	$actif = $tweaks[$i]['actif'] = in_array($tweak['include'], $tweaks_actifs_a_l_installation);
-	// stockage de la liste des fonctions par pipeline, si le tweak est actif...
-	if ($actif) {
-		foreach ($tweak as $pipe=>$fonc) if(!in_array($pipe, $tweak_exclude)) {
-			$tweaks_pipelines[$pipe][0][] = $tweak['include'];
-			$tweaks_pipelines[$pipe][1][] = $fonc;
-		}
-		if ($tweak['options']) $tweaks_pipelines['inc_options'][] = $tweak['include'];
-		if ($tweak['fonctions']) $tweaks_pipelines['inc_fonctions'][] = $tweak['include'];
-	}
-}
+tweaks_initialise_includes();
 
-//print_r($tweaks_actifs_a_l_installation);
 //print_r($tweaks);
 //print_r($tweaks_pipelines);
 

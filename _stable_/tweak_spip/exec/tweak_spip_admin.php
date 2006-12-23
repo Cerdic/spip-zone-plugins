@@ -12,7 +12,7 @@ include_spip('inc/layer');
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
 define('_DIR_PLUGIN_TWEAK_SPIP',(_DIR_PLUGINS.end($p)));
 
-function tweak_styles() {
+function tweak_styles_et_js() {
 	global $couleur_claire;
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
@@ -30,17 +30,17 @@ div.cadre-padding ul li li {
 	margin:0;
 	padding:0 0 0.25em 0;
 }
-div.cadre-padding ul li li div.nomplugin, div.cadre-padding ul li li div.nomplugin_on {
+div.cadre-padding ul li li div.nomtweak, div.cadre-padding ul li li div.nomtweak_on {
 	border:1px solid #AFAFAF;
 	padding:.3em .3em .6em .3em;
 	font-weight:normal;
 }
-div.cadre-padding ul li li div.nomplugin a, div.cadre-padding ul li li div.nomplugin_on a {
+div.cadre-padding ul li li div.nomtweak a, div.cadre-padding ul li li div.nomtweak_on a {
 	outline:0;
 	outline:0 !important;
 	-moz-outline:0 !important;
 }
-div.cadre-padding ul li li div.nomplugin_on {
+div.cadre-padding ul li li div.nomtweak_on {
 	background:$couleur_claire;
 	font-weight:bold;
 }
@@ -70,25 +70,48 @@ div.detailplugin hr {
 	}
 EOF;
 	echo "</style>";
+	echo "<script type=\"text/javascript\"><!--
+function verifchange(id) {
+ if(this.checked == true)
+	document.getElementById(id).className = 'nomtweak_on';
+ else document.getElementById(id).className = 'nomtweak';
+}
+//--></script>";
+}
+
+// mise à jour des données si envoi via formulaire
+// http://doc.spip.org/@enregistre_modif_plugin
+function enregistre_modif_tweaks(){
+	global $tweaks;
+	// recuperer les tweaks dans l'ordre des $_POST
+	$test = array();
+	foreach($tweaks as $tweak) $test["tweak_".$tweak['include']] = $tweak['include'];
+	$liste = array();
+	if (!isset($_POST['desactive_tous']))
+		foreach($_POST as $choix=>$val) if (isset($test[$choix])&&$val=='O') $liste[$test[$choix]]['actif'] = 1;
+	global $connect_id_auteur, $connect_login;
+	spip_log("Changement des tweaks actifs par auteur id=$connect_id_auteur :".implode(',',$liste));
+//	ecrire_plugin_actifs($liste);
+	ecrire_meta('tweaks',serialize($liste));
+	ecrire_metas();
 }
 
 function exec_tweak_spip_admin() {
-  global $connect_statut, $connect_toutes_rubriques;
-  global $spip_lang_right;
-  global $couleur_claire;
-  global $tweaks;
-
-  include_spip('tweak_spip_config');
-  include_spip("inc/presentation");
-//  include_spip ("base/abstract_sql");
-
-  if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-	debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
-	echo _T('avis_non_acces_page');
-	fin_page();
-	exit;
-  }
-/*
+	global $connect_statut, $connect_toutes_rubriques;
+	global $spip_lang_right;
+	global $couleur_claire;
+	global $tweaks;
+	
+	include_spip('tweak_spip_config');
+	include_spip("inc/presentation");
+	
+	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
+		echo _T('avis_non_acces_page');
+		fin_page();
+		exit;
+	}
+	
 	// mise a jour des donnees si envoi via formulaire
 	// sinon fait une passe de verif sur les tweaks
 	if (_request('changer_tweaks')=='oui'){
@@ -97,9 +120,25 @@ function exec_tweak_spip_admin() {
 		// que les tweaks charges soient coherent avec la liste
 		redirige_par_entete(generer_url_ecrire('tweak_spip_admin'));
 	}
-	else
-		verif_tweaks();
-*/
+//	else
+//		verif_tweaks();
+
+	lire_metas();
+	$metas_tweaks = unserialize($GLOBALS['meta']['tweaks']);
+	// incorporer l'activite lue dans les metas
+	foreach($temp = $tweaks as $i=>$tweak) {
+		$tweaks[$i]['actif'] = isset($metas_tweaks[$tweak['include']])?$metas_tweaks[$tweak['include']]['actif']:0;
+	}
+	ecrire_meta('tweaks', serialize($metas_tweaks));
+	ecrire_metas();
+	tweaks_initialise_includes();
+/*
+	echo' tweaks :'; var_dump($tweaks);
+	echo' metas_tweaks :'; var_dump($metas_tweaks);
+	echo' request :'; var_dump($_REQUEST);
+	echo 'metas :'; var_dump($GLOBALS['meta']['tweaks']);
+*/	
+
 	global $spip_version_code;
 	if ($spip_version_code<1.92) 
   		debut_page(_T('tweak:titre'), 'configuration', 'tweak_spip');
@@ -108,7 +147,7 @@ function exec_tweak_spip_admin() {
 		echo $commencer_page(_T('tweak:titre'), "configuration", "tweak_spip");
 	}
 	
-  tweak_styles();
+  tweak_styles_et_js();
 
 	echo "<br /><br /><br />";
 	gros_titre(_T('tweak:titre'));
@@ -143,21 +182,18 @@ function exec_tweak_spip_admin() {
 	foreach($temp = $tweaks as $tweak) echo '<li>' . ligne_tweak($tweak) . "</li>\n"; 
 	echo '</ul>';
 	
+	echo "</td></tr></table>\n";
 
 	echo "\n<div style='text-align:$spip_lang_right'>";
-	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' onclick=\"alert('à faire, si vous trouvez un moyen simple de stocker l\'état des tweaks !')\">";
-	echo "</div>";
+	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' ";
+//	echo "onclick=\"alert('à faire, si vous trouvez un moyen simple de stocker l\'état des tweaks !')";
+	echo "\"></div>";
 
 # ce bouton est trop laid :-)
 # a refaire en javascript, qui ne fasse que "decocher" les cases
 #	echo "<div style='text-align:$spip_lang_left'>";
 #	echo "<input type='submit' name='desactive_tous' value='"._T('bouton_desactive_tout')."' class='fondl'>";
 #	echo "</div>";
-
-	echo "</td></tr></table>\n";
-
-//  ecrire_meta('SquelettesMots:fond_pour_groupe',serialize($fonds));
-//  ecrire_metas();
 
 	fin_cadre_trait_couleur();
 //	fin_cadre_relief();
@@ -178,13 +214,12 @@ function is_tweak_pipeline($pipe) {
 // affiche un tweak sur une ligne
 function ligne_tweak($tweak){
 	static $id_input=0;
-	$inc = $tweak['include'];
+	$inc = $tweak_id = $tweak['include'];
 	$actif = $tweak['actif'];
 	$puce = $actif?'puce-verte.gif':'puce-rouge.gif';
 	$titre_etat = _T('tweak:'.($actif?'':'in').'actif');
-	$tweak_id = $inc.$id_input;
 	
-	$s = "<div id='$tweak_id' class='nomplugin".($actif?'_on':'')."'>";
+	$s = "<div id='$tweak_id' class='nomtweak".($actif?'_on':'')."'>";
 /*
 	if (isset($info['erreur'])){
 		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
@@ -198,7 +233,8 @@ function ligne_tweak($tweak){
 
 	$s .= "<input type='checkbox' name='tweak_$inc' value='O' id='label_$id_input'";
 	$s .= $actif?" checked='checked'":"";
-	$s .= " onclick='verifchange.apply(this,[\"$inc\"])' /> <label for='label_$id_input' style='display:none'>"._T('tweak:activer_tweak')."</label>";
+//	$s .= " onclick='verifchange.apply(this,[\"$inc\"])'";
+	$s .= "/> <label for='label_$id_input' style='display:none'>"._T('tweak:activer_tweak')."</label>";
 
 	$s .= bouton_block_invisible($tweak_id) . propre($tweak['nom']);
 

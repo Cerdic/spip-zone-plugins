@@ -45,4 +45,20 @@ function tweak_pipeline($pipeline, $flux) {
 	return $flux;
 }
 
+// met a jour $tweaks_pipelines
+function tweaks_initialise_includes() {
+  global $tweaks, $tweak_exclude, $tweaks_pipelines;
+  foreach ($tweaks as $i=>$tweak) {
+	// stockage de la liste des fonctions par pipeline, si le tweak est actif...
+	if ($tweak['actif']) {
+		foreach ($tweak as $pipe=>$fonc) if(!in_array($pipe, $tweak_exclude)) {
+			$tweaks_pipelines[$pipe][0][] = $tweak['include'];
+			$tweaks_pipelines[$pipe][1][] = $fonc;
+		}
+		if ($tweak['options']) $tweaks_pipelines['inc_options'][] = $tweak['include'];
+		if ($tweak['fonctions']) $tweaks_pipelines['inc_fonctions'][] = $tweak['include'];
+	}
+  }
+}
+
 ?>
