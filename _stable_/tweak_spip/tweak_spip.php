@@ -31,7 +31,7 @@ function add_tweak($tableau) {
 // $type ici est egal à 'options' ou 'fonctions'
 function include_tweaks($type) {
 	global $tweaks_pipelines;
-	foreach ($tweaks_pipelines[$type] as $inc) include_spip('inc/'.$inc);
+	foreach ($tweaks_pipelines['inc_'.$type] as $inc) include_spip('inc/'.$inc);
 }
 
 
@@ -59,6 +59,20 @@ function tweaks_initialise_includes() {
 		if ($tweak['fonctions']) $tweaks_pipelines['inc_fonctions'][] = $tweak['include'];
 	}
   }
+}
+
+// lire les metas et initialiser $tweaks_pipelines
+function tweak_lire_metas() {
+	global $tweaks, $tweaks_pipelines;
+	lire_metas();
+	$metas_tweaks = unserialize($GLOBALS['meta']['tweaks']);
+	// incorporer l'activite lue dans les metas
+	foreach($temp = $tweaks as $i=>$tweak) {
+		$tweaks[$i]['actif'] = isset($metas_tweaks[$tweak['include']])?$metas_tweaks[$tweak['include']]['actif']:0;
+	}
+	ecrire_meta('tweaks', serialize($metas_tweaks));
+	ecrire_metas();
+	tweaks_initialise_includes();
 }
 
 ?>

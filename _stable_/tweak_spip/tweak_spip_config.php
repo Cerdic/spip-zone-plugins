@@ -136,8 +136,8 @@ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie 
 // exclure ce qui n'est pas un pipeline...
 $tweak_exclude = array('nom', 'description', 'auteur', 'include', 'options', 'fonctions', 'actif');
 
-// initialiser $tweaks_pipelines
-tweaks_initialise_includes();
+// lire les metas et initialiser $tweaks_pipelines
+tweak_lire_metas();
 
 //print_r($tweaks);
 //print_r($tweaks_pipelines);

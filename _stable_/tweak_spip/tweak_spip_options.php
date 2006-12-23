@@ -2,6 +2,6 @@
 
 include_spip('tweak_spip');
 
-include_tweaks('options');
+include_tweaks('options'); 
 
 ?>

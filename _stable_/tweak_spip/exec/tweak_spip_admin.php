@@ -124,15 +124,7 @@ function exec_tweak_spip_admin() {
 //	else
 //		verif_tweaks();
 
-	lire_metas();
-	$metas_tweaks = unserialize($GLOBALS['meta']['tweaks']);
-	// incorporer l'activite lue dans les metas
-	foreach($temp = $tweaks as $i=>$tweak) {
-		$tweaks[$i]['actif'] = isset($metas_tweaks[$tweak['include']])?$metas_tweaks[$tweak['include']]['actif']:0;
-	}
-	ecrire_meta('tweaks', serialize($metas_tweaks));
-	ecrire_metas();
-	tweaks_initialise_includes();
+	tweak_lire_metas();
 /*
 	echo' tweaks :'; var_dump($tweaks);
 	echo' metas_tweaks :'; var_dump($metas_tweaks);
