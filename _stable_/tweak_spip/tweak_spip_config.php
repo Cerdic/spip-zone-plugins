@@ -7,7 +7,8 @@
 #  Licence : GPL                                    #
 #---------------------------------------------------#
 
-global $tweaks, $tweaks_pipelines, $tweak_exclude;
+global $tweaks, $tweaks_pipelines, $tweaks_css, $tweak_exclude;
+$tweaks = $tweaks_pipelines = $tweaks_css = $tweak_exclude = array();
 
 //-----------------------------------------------------------------------------//
 //                               options                                       //
@@ -129,6 +130,17 @@ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie 
 	'post_typo'	=> 'typo_exposants',
 ));
 
+add_tweak( array(
+	'nom'			=> 'Filets de S&eacute;paration ',
+	'description' 	=> "Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans le corps des textes, aussi bien pour les articles que pour les br&egrave;ves.
+_ La syntaxe est : &quot;__N__&quot;, o&ugrave; &quot;N&quot; repr&eacute;sente le num&eacute;ro d&rsquo;identification (de 0 &agrave; 9) du filet &agrave; ins&eacute;rer, en relation directe avec les styles correspondants.
+_ Attention : chaque balise doit &ecirc;tre plac&eacute;e seule et sur une ligne unique.",
+	'auteur' 		=> 'FredoMkb',
+	'include' 		=> 'filets_sep',
+	// pipeline => fonction
+	'pre_typo'	=> 'filets_sep',
+));
+
 //-----------------------------------------------------------------------------//
 //                        activation des tweaks                                //
 //-----------------------------------------------------------------------------//
@@ -136,7 +148,7 @@ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie 
 // exclure ce qui n'est pas un pipeline...
 $tweak_exclude = array('nom', 'description', 'auteur', 'include', 'options', 'fonctions', 'actif');
 
-// lire les metas et initialiser $tweaks_pipelines
+// lire les metas et initialiser : $tweaks_pipelines, $tweaks_css
 tweak_lire_metas();
 
 //print_r($tweaks);

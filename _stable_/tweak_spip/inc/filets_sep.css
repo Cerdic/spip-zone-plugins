@@ -1,0 +1,113 @@
+/*
+*	+----------------------------------+
+*	Nom du Filtre : Filets de Separation                                               
+*	Version : 1.2                                               
+*	Date : vendredi 8 septembre 2006
+*	Auteur : FredoMkb (fredomkbfr@yahoo.fr)                                      
+*	+-------------------------------------+
+*	Cette feuille de style est specialement dediee 
+*	au formatage des filets produits par le filtre 
+*	"Filets de Separation" ("filets_sep.php").
+*	+----------------------------------+
+*	Pour toute remarque ou suggestion, reportez-vous a l'article :
+*	<http://fredomkb.free.fr/spip/spip.php?article14>
+*	+-------------------------------------+ 
+*/
+
+
+/******************************************/
+/** Filets **/
+
+/* Filet plein long epais 4px gris pale */
+.filet_sep_0 {border-bottom: 4px solid #ccc; padding: 0; margin: 0;}
+
+/* Filet plein long fin 1px gris clair */
+.filet_sep_1 {border-bottom: 1px solid #999; padding: 0; margin: 0;}
+
+/* Filet tirets moyen fin 1px gris moyen */
+.filet_sep_2 {border-bottom: 1px dashed #666; padding: 0; margin: 0px 80px;}
+
+/* Filet pointille court fin 1px gris fonce */
+.filet_sep_3 {border-bottom: 1px dotted #333; padding: 0; margin: 0px 160px;}
+
+
+/******************************************/
+/** Blocs **/
+
+/* Bloc long fond jaune pale avec filet pointille rouge */
+.filet_sep_4 { 
+	padding: 0; 
+	margin: 0;
+	height: 4px;
+	background-color: lemonchiffon; /* #FFFACD */
+	border: 1px dotted maroon; /* #800000 */
+}
+
+/* Bloc moyen fond gris clair avec filets gauche-droite bleu */
+.filet_sep_5 { 
+	padding: 0; 
+	margin: 0 100px;
+	height: 5px;
+	background-color: silver; /* #C0C0C0 */
+	border-left: 25px solid navy; /* #000080 */
+	border-right: 25px solid navy; /* #000080 */
+}
+
+/* Bloc court fond bleu, filet haut rouge, filet bas orange */
+.filet_sep_6 { 
+	padding: 0; 
+	margin: 0 200px;
+	height: 6px;
+	background-color: blue; /* #0000FF */
+	border-top: 6px solid red; /* #FF0000 */
+	border-bottom: 6px solid darkorange; /* #FF8C00 */
+}
+
+
+/******************************************/
+/** Images **/
+
+/* Bloc long avec image d'un degrade de couleurs */
+.filet_sep_7 { 
+	padding: 0; 
+	margin: 0;
+	height: 10px;
+	background-image: url(../../plugins/tweak_spip/img/filet_degrade.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	border-style: none;
+}
+
+/* Bloc moyen avec image d'un motif floral, filets haut-bas noir */
+.filet_sep_8 { 
+	padding: 0;
+	margin: 0 50px;
+	height: 20px;
+	background-image: url(../../plugins/tweak_spip/img/filet_motif.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	border-top: 1px solid black; /* #000000 */
+	border-bottom: 1px solid black; /* #000000 */
+}
+
+/* Bloc avec image d'un ornement */
+.filet_sep_9 { 
+	padding: 0; 
+	margin: 0;
+	height: 30px;
+	background-image: url(../../plugins/tweak_spip/img/img/filet_ornement.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	border-style: none;
+}
+
+
+/******************************************/
+/** Anciens styles pour assurer une compatibilite descendente **/
+
+.filet_sep_long {border-bottom: 1px dotted #888; padding: 0; margin: 0;}
+
+.filet_sep_moyen {border-bottom: 1px dotted #888; padding: 0; margin: 0px 60px;}
+
+.filet_sep_court {border-bottom: 1px dotted #888; padding: 0; margin: 0px 120px;}
+

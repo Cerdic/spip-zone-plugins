@@ -6,6 +6,7 @@ function tweak_spip_affichage_final($flux){
 }
 
 function tweak_spip_insert_head($flux){
+	$flux .= tweak_insert_css();
 	return tweak_pipeline('insert_head', $flux);
 }
 

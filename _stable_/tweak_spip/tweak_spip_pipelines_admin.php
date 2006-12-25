@@ -42,6 +42,7 @@ function tweak_spip_exec_init($flux){
 	return tweak_pipeline('exec_init', $flux);
 }
 function tweak_spip_header_prive($flux){
+	$flux .= tweak_insert_css();
 	return tweak_pipeline('header_prive', $flux);
 }
 

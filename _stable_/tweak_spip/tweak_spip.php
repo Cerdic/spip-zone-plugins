@@ -34,7 +34,6 @@ function include_tweaks($type) {
 	foreach ($tweaks_pipelines['inc_'.$type] as $inc) include_spip('inc/'.$inc);
 }
 
-
 // passe le $flux dans le $pipeline ...
 function tweak_pipeline($pipeline, $flux) {
 	global $tweaks, $tweaks_pipelines;
@@ -45,9 +44,17 @@ function tweak_pipeline($pipeline, $flux) {
 	return $flux;
 }
 
-// met a jour $tweaks_pipelines
+// retourne les css utilises (en vue d'un insertion en head)
+function tweak_insert_css() {
+	global $tweaks_css;
+	$head = "\n<!-- CSS TWEAKS -->\n";
+	foreach ($tweaks_css as $css) $head .= $css;
+	return $head;
+}
+
+// met a jour : $tweaks_pipelines, $tweaks_css
 function tweaks_initialise_includes() {
-  global $tweaks, $tweak_exclude, $tweaks_pipelines;
+  global $tweaks, $tweak_exclude, $tweaks_pipelines, $tweaks_css;
   foreach ($tweaks as $i=>$tweak) {
 	// stockage de la liste des fonctions par pipeline, si le tweak est actif...
 	if ($tweak['actif']) {
@@ -55,6 +62,9 @@ function tweaks_initialise_includes() {
 			$tweaks_pipelines[$pipe][0][] = $tweak['include'];
 			$tweaks_pipelines[$pipe][1][] = $fonc;
 		}
+		$f = find_in_path('inc/'.$tweak['include'].'.css');
+		include_spip('inc/filtres');
+		if ($f) $tweaks_css[] = '<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="projection, screen" />';
 		if ($tweak['options']) $tweaks_pipelines['inc_options'][] = $tweak['include'];
 		if ($tweak['fonctions']) $tweaks_pipelines['inc_fonctions'][] = $tweak['include'];
 	}
