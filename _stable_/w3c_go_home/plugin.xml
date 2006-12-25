@@ -20,6 +20,7 @@ _ Necessite le plugin Sitemap Google
 	<prefix> 
 	w3cgh
 	</prefix>
+	<options>w3cgh_options.php</options>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<inclure>w3cgh_pipeline.php</inclure>
