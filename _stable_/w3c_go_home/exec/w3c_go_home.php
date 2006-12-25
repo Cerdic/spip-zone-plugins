@@ -28,9 +28,11 @@ function exec_w3c_go_home(){
 
 	if (isset($_GET['reset']))
 	{
+		include_spip('inc/meta');
 		effacer_meta('xhtml_access_compliance');
 		ecrire_metas();
 		$url=generer_url_ecrire("w3c_go_home");
+		include_spip('inc/headers');
 		redirige_par_entete($url);
 	}
 	
@@ -38,9 +40,8 @@ function exec_w3c_go_home(){
 	debut_gauche();
 	debut_droite();
 
-	$sitemappath=generer_url_public("sitemap");
-	include_spip('inc/distant');
-	$xml_sitemap=recuperer_page($sitemappath);
+	include_spip('public/assembler');
+	$xml_sitemap=recuperer_fond('sitemap');
 
 	include_spip('inc/plugin');
 	$sitemap=parse_plugin_xml($xml_sitemap);

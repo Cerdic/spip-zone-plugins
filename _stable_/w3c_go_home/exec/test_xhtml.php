@@ -8,22 +8,7 @@
  * © 2006 - Distribue sous licence GPL
  *
  */
-
-function exec_test_xhtml(){
-	global $connect_statut,$erreurs;
-	$url=urldecode(_request('url'));
-	if ($connect_statut != '0minirezo') {
-		exit;
-	}
-	$compliance = isset($GLOBALS['meta']['xhtml_w3c_compliance'])?unserialize($GLOBALS['meta']['xhtml_w3c_compliance']):false;
-	if (!$compliance)
-		$compliance = array();
-	$total_erreurs=0;
-	foreach($compliance as $url_verif=>$result)
-		$total_erreurs+=$result[0];
-	if (($total_erreurs>5)&&(!isset($compliance[$url])))
-		exit;
-
+function test_validator($url){
 	// validation xhtml validator
 	$w3cvalidator='http://validator.w3.org/check?uri=%s';
 	$urlvalidator=str_replace('%s',urlencode($url),$w3cvalidator);
@@ -50,7 +35,26 @@ function exec_test_xhtml(){
 		$ok = true;
 		$couleur="00cc00";
 		$texte = "OK";
+	}	
+	return array($texte,$couleur);
+}
+
+function exec_test_xhtml(){
+	global $connect_statut,$erreurs;
+	$url=urldecode(_request('url'));
+	if ($connect_statut != '0minirezo') {
+		exit;
 	}
+	$compliance = isset($GLOBALS['meta']['xhtml_w3c_compliance'])?unserialize($GLOBALS['meta']['xhtml_w3c_compliance']):false;
+	if (!$compliance)
+		$compliance = array();
+	$total_erreurs=0;
+	foreach($compliance as $url_verif=>$result)
+		$total_erreurs+=$result[0];
+	if (($total_erreurs>5)&&(!isset($compliance[$url])))
+		exit;
+
+	list($texte,$couleur) = test_validator($url);
 	
 	// enregistrer dans la meta
 	// on recharge d'abord car il y a pu avoir des validations concourantes
