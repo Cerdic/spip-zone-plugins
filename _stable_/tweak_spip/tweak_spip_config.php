@@ -143,7 +143,8 @@ _ Attention : chaque balise doit &ecirc;tre plac&eacute;e seule et sur une ligne
 
 add_tweak( array(
 	'nom'			=> 'Smileys',
-	'description' 	=> "Ins&egrave;re des smileys dans tous les textes o&ugrave; apparait un raccourcis du genre :{-}). Id&eacute;al pour les  forums.",
+	'description' 	=> "Ins&egrave;re des smileys dans tous les textes o&ugrave; apparait un raccourcis du genre :{-}). Id&eacute;al pour les  forums.
+_ Infos : [->http://www.spip-contrib.net/?article1561]",
 	'auteur' 		=> 'Sylvain',
 	'include' 		=> 'smileys',
 	// pipeline => fonction

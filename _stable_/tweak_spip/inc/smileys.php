@@ -4,7 +4,7 @@
 //
 // pour toute suggestion, remarque, proposition d'ajout d'un 
 // smileys, etc ; reportez vous au forum de l'article :
-// http://www.spip-contrib.net/?id_article=1561
+// http://www.spip-contrib.net/?article1561
 
 function tweak_smileys($chaine) {
 $chemin = dirname(find_in_path('img/smileys/diable.png')).'/';
