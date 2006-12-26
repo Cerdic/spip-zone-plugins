@@ -58,7 +58,7 @@ function filets_sep($texte) {
 // Il y a par defaut 10 filets possibles, de 0 a 9, mais on peut en ajouter d'autres au besoin.
 	
 	// On memorise le modele d'expression rationnelle a utiliser pour chercher les balises.
-	$modele = '#[\n\r]__(\d+)__[\n\r]#iU';
+	$modele = '#[\n\r]\s*__(\d+)__\s*[\n\r]#iU';
 	
 	// On verifie si des balises filets existent dans le texte fourni.
 	$test= preg_match($modele, $texte);
