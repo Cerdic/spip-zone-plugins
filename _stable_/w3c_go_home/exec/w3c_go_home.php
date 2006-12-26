@@ -30,6 +30,7 @@ function exec_w3c_go_home(){
 	{
 		include_spip('inc/meta');
 		effacer_meta('xhtml_access_compliance');
+		effacer_meta('xhtml_w3c_compliance');
 		ecrire_metas();
 		$url=generer_url_ecrire("w3c_go_home");
 		include_spip('inc/headers');
@@ -40,8 +41,12 @@ function exec_w3c_go_home(){
 	debut_gauche();
 	debut_droite();
 
-	include_spip('public/assembler');
-	$xml_sitemap=recuperer_fond('sitemap');
+	// utiliser un recuperer_page car sinon les url sont calculees depuis ecrire, avec des redirect
+	//include_spip('public/assembler');
+	//$xml_sitemap=recuperer_fond('sitemap');
+	$sitemap_url = generer_url_public('sitemap');
+	include_spip('inc/distant');
+	$xml_sitemap=recuperer_page($sitemap_url);
 
 	include_spip('inc/plugin');
 	$sitemap=parse_plugin_xml($xml_sitemap);
@@ -127,8 +132,13 @@ function exec_w3c_go_home(){
 
 
 		$s = "";
-		$url_w3c="http://validator.w3.org/check?uri=".urlencode($loc);
-		$s .= "<a href='$url_w3c'>$valide_xhtml</a>";
+		if ($GLOBALS['spip_version_code']<1.9203)
+			$url_validateur="http://validator.w3.org/check?uri=".urlencode($loc);
+		else {
+			$url_validateur = parametre_url($loc,'var_mode','debug');
+			$url_validateur = parametre_url($url_validateur,'var_mode_affiche','validation');
+		}
+		$s .= "<a href='$url_validateur'>$valide_xhtml</a>";
 		$vals[] = $s;
 
 		$table[] = $vals;
@@ -140,7 +150,11 @@ function exec_w3c_go_home(){
 	echo "</div>\n";
 	
 	echo "$cpt_ok_access/".count($sitemap)." pages conforme selon la verification accessibilit&eacute; automatis&eacute;e<br/>";
-	echo "$cpt_ok_xhtml/".count($sitemap)." pages conforme XHTML selon la validator.w3.org";
+	echo "$cpt_ok_xhtml/".count($sitemap)." pages conforme XHTML selon ";
+	if ($GLOBALS['spip_version_code']<1.9203)
+		echo "le validator.w3.org";
+	else 	
+		echo "le validateur interne SPIP";
 
 	fin_page();
 

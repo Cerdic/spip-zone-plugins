@@ -24,7 +24,7 @@ function exec_test_access(){
 	if (($total_erreurs>5)&&(!isset($compliance[$url])))
 		exit;
 
-	// validation accessibilité
+	// validation accessibilite
 	$_GET['urlAVerif']=$url;
 	include_spip('exec/test_apinc');
 	ob_start();
