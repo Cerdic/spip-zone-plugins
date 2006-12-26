@@ -143,12 +143,17 @@ _ Attention : chaque balise doit &ecirc;tre plac&eacute;e seule et sur une ligne
 
 add_tweak( array(
 	'nom'			=> 'Smileys',
-	'description' 	=> "Ins&egrave;re des smileys dans tous les textes o&ugrave; apparait un raccourcis du genre : :{-}). Id&eacute;al pour les  forums.",
+	'description' 	=> "Ins&egrave;re des smileys dans tous les textes o&ugrave; apparait un raccourcis du genre :{-}). Id&eacute;al pour les  forums.",
 	'auteur' 		=> 'Sylvain',
 	'include' 		=> 'smileys',
 	// pipeline => fonction
-	'post_typo'	=> 'smileys',
+	'post_typo'	=> 'tweak_smileys',
 ));
+
+// Idées d'ajouts :
+// http://www.spip-contrib.net/Citations
+// http://www.spip-contrib.net/la-balise-LESMOTS
+// http://www.spip-contrib.net/Ajouter-une-lettrine-aux-articles
 
 //-----------------------------------------------------------------------------//
 //                        activation des tweaks                                //
