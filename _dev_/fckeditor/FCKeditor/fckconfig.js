@@ -41,13 +41,14 @@ FCKConfig.PluginsPath = FCKConfig.BasePath + 'plugins/' ;
 
 // FCKConfig.Plugins.Add( 'autogrow' ) ;
 FCKConfig.AutoGrowMax = 400 ;
+FCKConfig.Plugins.Add( 'helppanel' , 'fr,en') ;
 
 // FCKConfig.ProtectedSource.Add( /<%[\s\S]*?%>/g ) ;	// ASP style server side code <%...%>
 // FCKConfig.ProtectedSource.Add( /<\?[\s\S]*?\?>/g ) ;	// PHP style server side code
 // FCKConfig.ProtectedSource.Add( /(<asp:[^\>]+>[\s|\S]*?<\/asp:[^\>]+>)|(<asp:[^\>]+\/>)/gi ) ;	// ASP.Net style tags <asp:control>
 
 FCKConfig.AutoDetectLanguage	= true ;
-FCKConfig.DefaultLanguage		= 'en' ;
+FCKConfig.DefaultLanguage	= 'fr' ;
 FCKConfig.ContentLangDirection	= 'ltr' ;
 
 FCKConfig.ProcessHTMLEntities	= true ;
@@ -99,7 +100,7 @@ FCKConfig.ToolbarSets["Default"] = [
 	'/',
 	['Style','FontFormat','FontName','FontSize'],
 	['TextColor','BGColor'],
-	['FitWindow','-','About']
+	['FitWindow','-','About','HelpPanel']
 ] ;
 
 FCKConfig.ToolbarSets["Basic"] = [
@@ -119,7 +120,7 @@ FCKConfig.ToolbarSets["SansFormulaire"] = [
 	['Style','FontFormat','FontName','FontSize'],
 	['Image','Flash','Table','Rule','Smiley','SpecialChar','PageBreak','UniversalKey'],
 	['TextColor','BGColor'],
-	['FitWindow','-','About']
+	['FitWindow','-','About','HelpPanel']
 ] ;
 
 FCKConfig.ContextMenu = ['Generic','Link','Anchor','Image','Flash','Select','Textarea','Checkbox','Radio','TextField','HiddenField','ImageButton','Button','BulletedList','NumberedList','Table','Form'] ;
