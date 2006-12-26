@@ -74,6 +74,7 @@ function tweaks_initialise_includes() {
 // lire les metas et initialiser $tweaks_pipelines
 function tweak_lire_metas() {
 	global $tweaks, $tweaks_pipelines;
+	include_spip('inc/meta');
 	lire_metas();
 	$metas_tweaks = unserialize($GLOBALS['meta']['tweaks']);
 	// incorporer l'activite lue dans les metas
