@@ -17,7 +17,7 @@ R&eacute;unit en un seul plugin une liste de petites fonctionnalit&eacute;s nouv
 
 Une activation des tweaks est n&eacute;cessaire sur la page d'administration du plugin : cf. {Configuration/Tweak SPIP}.
 	</description>
-	<lien>[->http://www.spip-contrib.net/ecrire/?exec=articles&id_article=1554]</lien> <!-- URI de documentation -->
+	<lien>[->http://www.spip-contrib.net/Tweak-SPIP]</lien> <!-- URI de documentation -->
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
 	tweak_spip_options.php
 	</options>
