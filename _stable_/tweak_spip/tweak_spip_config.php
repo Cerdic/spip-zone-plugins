@@ -131,7 +131,7 @@ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie 
 ));
 
 add_tweak( array(
-	'nom'			=> 'Filets de S&eacute;paration ',
+	'nom'			=> 'Filets de S&eacute;paration',
 	'description' 	=> "Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans le corps des textes, aussi bien pour les articles que pour les br&egrave;ves.
 _ La syntaxe est : &quot;__N__&quot;, o&ugrave; &quot;N&quot; repr&eacute;sente le num&eacute;ro d&rsquo;identification (de 0 &agrave; 9) du filet &agrave; ins&eacute;rer, en relation directe avec les styles correspondants.
 _ Attention : chaque balise doit &ecirc;tre plac&eacute;e seule et sur une ligne unique.",
@@ -139,6 +139,15 @@ _ Attention : chaque balise doit &ecirc;tre plac&eacute;e seule et sur une ligne
 	'include' 		=> 'filets_sep',
 	// pipeline => fonction
 	'pre_typo'	=> 'filets_sep',
+));
+
+add_tweak( array(
+	'nom'			=> 'Smileys',
+	'description' 	=> "Ins&egrave;re des smileys dans tous les textes o&ugrave; apparait un raccourcis du genre : :{-}). Id&eacute;al pour les  forums.",
+	'auteur' 		=> 'Sylvain',
+	'include' 		=> 'smileys',
+	// pipeline => fonction
+	'post_typo'	=> 'smileys',
 ));
 
 //-----------------------------------------------------------------------------//
