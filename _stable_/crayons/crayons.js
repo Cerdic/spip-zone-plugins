@@ -17,10 +17,10 @@ function cfgCrayons(options)
     this[opt] = options[opt];
   }
 }
-cfgCrayons.prototype.mkimg = function(what) {
+cfgCrayons.prototype.mkimg = function(what, extra) {
   return '<img class="crayon-' + what +
     '" src="' + this.imgPath + '/' + this.img[what].file +
-    '" title="' + this.img[what].txt + '" />';
+    '" title="' + this.img[what].txt + (extra ? extra : '') + '" />';
 }
 cfgCrayons.prototype.iconclick = function(c) {
 
@@ -28,14 +28,14 @@ cfgCrayons.prototype.iconclick = function(c) {
   var link = c.match(/\b(\w+)--(\d+)\b/);
   link = link ? 
     '<a href="ecrire/?exec=' + link[1] + 's_edit&id_' + link[1] + '=' + link[2] +
-    '">' + this.mkimg('edit') + '</a><br />' : '';
+    '">' + this.mkimg('edit', ' (' + link[1] + ' ' + link[2] + ')') + '</a><br />' : '';
 
-  var cray = c.match(/\b\w+-\w+-\d+\b/);
-  cray = !cray ? '' : this.mkimg('pencil') + '<br />';
+  var cray = c.match(/\b\w+-(\w+)-\d+\b/);
+  cray = !cray ? '' : this.mkimg('pencil', ' (' + cray[1] + ')') + '<br />';
 
   return "<span class='crayon-icones'><span>" +
       cray + link +
-      this.mkimg('img-changed') +
+      this.mkimg('img-changed', cray ? ' (' + cray[1] + ')': '') +
     "</span></span>";
 }
 
