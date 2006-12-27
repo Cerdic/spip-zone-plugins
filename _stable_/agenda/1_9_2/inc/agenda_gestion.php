@@ -220,7 +220,7 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 				$url = parametre_url($url,'id_evenement',$id_evenement);
 				$url = parametre_url($url,'edit',1);
 				$s = "<a href='$url'>".($titre ? $titre : '<em>('._T('info_sans_titre').')</em>')."</a>";*/
-				$s = ajax_action_auteur('editer_evenement', "$id_article-editer-$id_evenement", $script, "id_article=$id_article&id_evenement=$id_evenement&edit=oui", array($titre ? $titre : '<em>('._T('info_sans_titre').')</em>',''));
+				$s = ajax_action_auteur('editer_evenement', "$id_article-editer-$id_evenement", $script, "id_article=$id_article&id_evenement=$id_evenement&edit=oui", array($titre ? $titre : '<em>('._T('info_sans_titre').')</em>',''),'','wc_init');
 				$vals[] = $s;
 			}
 			else{
@@ -295,7 +295,7 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 			$form .= Agenda_formulaire_edition_evenement(NULL, true, '', $titre_defaut);
 			$id_evenement = 0;
 		}
-		$out .= ajax_action_auteur('editer_evenement',"$id_article-modifier-$id_evenement", $script, "id_article=$id_article&edit=1", $form);
+		$out .= ajax_action_auteur('editer_evenement',"$id_article-modifier-$id_evenement", $script, "id_article=$id_article&edit=1", $form,'','wc_init');
 			
 		$out .= "</div>";
 		$out .=  "</td></tr></table>";
@@ -306,7 +306,7 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 			$url = parametre_url($url,'neweven','1');
 			$url = parametre_url($url,'id_evenement','');
 			//$out .= icone_horizontale(_T("agenda:icone_creer_evenement"),$url , "../"._DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", "creer.gif",false);
-			$out .= ajax_action_auteur('editer_evenement',"$id_article-creer-0", $script, "id_article=$id_article&neweven=1", array(http_img_pack(_DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", _T("agenda:icone_creer_evenement"), "width='24' height='24' border='0' align='middle'")."&nbsp;"._T("agenda:icone_creer_evenement"),''));
+			$out .= ajax_action_auteur('editer_evenement',"$id_article-creer-0", $script, "id_article=$id_article&neweven=1", array(http_img_pack(_DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", _T("agenda:icone_creer_evenement"), "width='24' height='24' border='0' align='middle'")."&nbsp;"._T("agenda:icone_creer_evenement"),''),'','wc_init');
 		}
 
 		$out .= "</div>";
