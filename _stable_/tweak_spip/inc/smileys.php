@@ -37,7 +37,7 @@ $rempl =array(
  ':-O'	=> 'surpris.png',
 );
 
-foreach ($rempl as $smy=>$val) $chaine = str_replace($smy, '<img ALT="smiley" src="'.$chemin.$val.'">', $chaine);
+foreach ($rempl as $smy=>$val) $chaine = str_replace($smy, '<img alt="'.$smy.'" title="'.$smy.'" src="'.$chemin.$val.'">', $chaine);
 
 // $t="<table border=1 cellpadding=4 cellspacing=0><tr>";	foreach ($rempl as $smy=>$val) $t .= "<th align=\"center\" style=\"border:1px solid gray; padding: 2px;\">$smy</th>"; $t.="</tr><tr>";	foreach ($rempl as $smy=>$val) $t .= '<th align="center" style="border:1px solid gray; padding: 2px;"><img ALT="smiley" style="padding: 0px;" src="'.$chemin.$val.'"></th>'; $chaine=$t."</tr></table>";
 
