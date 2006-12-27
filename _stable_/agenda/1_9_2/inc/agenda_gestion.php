@@ -230,7 +230,7 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 		
 			if ($flag_editable) {
 				//$vals[] =  "<a href='" . generer_url_ecrire("articles","id_article=$id_article&supp_evenement=$id_evenement#agenda") . "'>"._T('agenda:lien_retirer_evenement')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</a>";
-				$vals[] = ajax_action_auteur('editer_evenement', "$id_article-supprimer-$id_evenement", $script, "id_article=$id_article", array(_T('agenda:lien_retirer_evenement')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'"),''),"&id_article=$id_article&supp_evenement=$id_evenement");
+				$vals[] = ajax_action_auteur('editer_evenement', "$id_article-supprimer-$id_evenement", $script, "id_article=$id_article", array(_T('agenda:lien_retirer_evenement')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'"),''),"&id_article=$id_article&supp_evenement=$id_evenement",'wc_init');
 			} else {
 				$vals[] = "";
 			}
