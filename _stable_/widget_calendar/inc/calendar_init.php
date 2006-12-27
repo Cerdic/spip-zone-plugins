@@ -11,7 +11,9 @@ function WCalendar_point_entree($suffixe){
 function WCalendar_body_prive($flux){
 	global $WCalendar_independants,$WCalendar_lies;
 	if (count($WCalendar_independants)+count($WCalendar_lies)){
-		$flux.= "<script type='text/javascript'>window.onload = init;</script>";
+		$flux.= "<script type='text/javascript'>";
+		$flux .= "window.onload = wc_init;";
+		$flux .= "</script>";
 		foreach($WCalendar_independants as $infos)
 			$flux .= WCalendar_point_entree($infos['suffixe']);
 		foreach($WCalendar_lies as $infos){
@@ -24,7 +26,7 @@ function WCalendar_body_prive($flux){
 
 function WCalendar_statique_jsinit($t, $s){
 	$vars = "
-			var cal$s;";
+			cal$s = undefined;";
 	$js_a = "";
 	$js_b = "
 			var selected$s = '';
@@ -32,6 +34,8 @@ function WCalendar_statique_jsinit($t, $s){
 			if (this.content$s){
 				selected$s=this.content$s.innerHTML;
 			}
+			if (cal$s != undefined) delete cal$s;
+			$('#container$s').html('');
 			cal$s = new SPIP.widget.Calendar2up_INT_multi('cal$s','container$s','',selected$s);
 			cal$s.title = '$t';
 			cal$s.sync();
@@ -69,7 +73,7 @@ function WCalendar_jsinit($t, $s){
 			";
 	$js_c = "
 		function showCalendar$s() {
-			hideall();
+			wc_hideall();
 			cal$s.outerContainer.style.top = (link$s.height-1+findPosY(link$s)) + 'px';
 			cal$s.outerContainer.style.left = (findPosX(link$s)) + 'px';
 			cal$s.outerContainer.style.display='block';
@@ -258,10 +262,10 @@ function WCalendar_header_prive($flux) {
 		global $init_functions;
 		$js .= "
 		$vars
-		function hideall(){
+		function wc_hideall(){
 			$js_a
 		}
-		function init() {
+		function wc_init() {
 			$init_functions
 			$js_b
 		}
