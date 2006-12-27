@@ -148,7 +148,7 @@ _ Infos : [->http://www.spip-contrib.net/?article1561]",
 	'auteur' 		=> 'Sylvain',
 	'include' 		=> 'smileys',
 	// pipeline => fonction
-	'post_typo'	=> 'tweak_smileys',
+	'pre_typo'	=> 'tweak_smileys',
 ));
 
 // Idées d'ajouts :

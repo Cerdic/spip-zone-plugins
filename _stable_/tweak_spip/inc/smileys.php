@@ -10,17 +10,18 @@ function tweak_smileys($chaine) {
 $chemin = dirname(find_in_path('img/smileys/diable.png')).'/';
 
 $rempl =array(
- ':->'	=> 'diable.png',
  ':-(('	=> 'en_colere.png',
- ':-('	=> 'pas_content.png',
  ':-))'	=> 'mort_de_rire.png',
  ':))'	=> 'mort_de_rire.png',
+ ":'-))"	=> 'pleure_de_rire.png',
+
+ ':->'	=> 'diable.png',
+ ':-('	=> 'pas_content.png',
  ':-D'	=> 'mort_de_rire.png',
  ':-)'	=> 'sourire.png',
  ':)'	=> 'sourire.png',
  '|-)'	=> 'rouge.png',
  '|)'	=> 'rouge.png',
- ":'-))"	=> 'pleure_de_rire.png',
  ":'-D"	=> 'pleure_de_rire.png',
  ":'-("	=> 'triste.png',
  ':o)'	=> 'rigolo.png',
@@ -37,7 +38,10 @@ $rempl =array(
  ':-O'	=> 'surpris.png',
 );
 
-foreach ($rempl as $smy=>$val) $chaine = str_replace($smy, '<img alt="'.$smy.'" title="'.$smy.'" src="'.$chemin.$val.'">', $chaine);
+//foreach ($rempl as $smy=>$val) {$r1[] = $smy; $r2[] = '<img alt="'.$smy.'" title="'.$smy.'" src="'.$chemin.$val.'">'; }
+//$chaine = str_replace($r1, $r2, $chaine);
+
+foreach ($rempl as $smy=>$val) $chaine = str_replace($smy, '<img alt="'.code_echappement($smy).'" title="'.code_echappement($smy).'" src="'.$chemin.$val.'">', $chaine);
 
 // $t="<table border=1 cellpadding=4 cellspacing=0><tr>";	foreach ($rempl as $smy=>$val) $t .= "<th align=\"center\" style=\"border:1px solid gray; padding: 2px;\">$smy</th>"; $t.="</tr><tr>";	foreach ($rempl as $smy=>$val) $t .= '<th align="center" style="border:1px solid gray; padding: 2px;"><img ALT="smiley" style="padding: 0px;" src="'.$chemin.$val.'"></th>'; $chaine=$t."</tr></table>";
 
