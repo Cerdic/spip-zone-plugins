@@ -185,11 +185,12 @@ function FpipR_taille_photo($id_photo,$taille='',$type) {
 	default:
 	  $t = 'Medium';
   }
-  foreach($tailles[$id_photo]['sizes']['size'] as $size) {
-	if($size['label'] == $t) {
-	  return $size[$type];
+  if(is_array($tailles[$id_photo]))
+	foreach($tailles[$id_photo]['sizes']['size'] as $size) {
+	  if($size['label'] == $t) {
+		return $size[$type];
+	  }
 	}
-  }
   return '';
 }
 
