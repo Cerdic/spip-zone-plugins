@@ -38,6 +38,7 @@ function action_flickr_ajouter_documents() {
 	  }
 	  
 	  include_spip('inc/ajouter_documents');
+	  $ajouter_document = charger_fonction('ajouter_documents', 'inc');
 	  foreach($photos as $info) {
 		list($id_photo,$secret) = split('@#@',$info);
 		$id_photo= intval($id_photo);
@@ -48,7 +49,7 @@ function action_flickr_ajouter_documents() {
 		  $cnt =spip_abstract_fetsel(array('id_document'),array('spip_documents'),array("fichier='$url'","distant='oui'"));
 		  if(!$cnt) {
 			$date = date('Y-m-d H:i:s');
-			ajouter_un_document($url,$photo_details->title,$type,$id,'distant',0,$empty);
+			$ajouter_document($url,$photo_details->title,$type,$id,'distant',0,$empty);
 			$date2 = date('Y-m-d H:i:s');
 			$from = array('spip_documents');
 			$select = array('id_document');
