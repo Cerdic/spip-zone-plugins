@@ -46,11 +46,23 @@ function typo_exposants_fr($texte){
 	return preg_replace($trouve, $remplace, $texte);
 }
 
+// evite les transformations dans les balises <cadre>, <code>, <acronym> et <cite>
+function typo_exposants_filtre($texte, $lang){ 
+//	echo $texte;
+	$t=preg_split(',<(\/?)(cadre|code|acronym|cite)>,', $texte, 3, PREG_SPLIT_DELIM_CAPTURE);
+//	print_r($t);
+	if ($t[2]=='' || $t[5]=='') return $texte;
+	$fonc = 'typo_exposants_' . $lang;
+	if ($t[1]=='' && $t[2]==$t[5] && $t[4]=='/') 
+		return $fonc($t[0]).'<'.$t[2].'>'.$t[3].'</'.$t[5].'>'.typo_exposants_filtre($t[6], $lang);
+	else 
+		return $fonc($t[0]).'<'.$t[1].$t[2].'>'.$t[3].typo_exposants_filtre('<'.$t[4].$t[5].'>'.$t[6], $lang);
+}
 function typo_exposants($texte){
 	if (!$lang = $GLOBALS['lang_objet']) $lang = $GLOBALS['spip_lang'];
 	switch (lang_typo($lang)) {
 		case 'fr':
-			return typo_exposants_fr($texte);
+			return typo_exposants_filtre($texte, 'fr');
 		default:
 			return $texte;
 	}

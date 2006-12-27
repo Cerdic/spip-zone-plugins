@@ -32,7 +32,7 @@ $rempl =array(
  ':-|'	=> 'bof.png',
  ':|'	=> 'bof.png',
  ':-/'	=> 'mouais.png',
- ':/'	=> 'mouais.png',
+// ':/'	=> 'mouais.png',	// conflit avec http:// par exemple
  ':-o'	=> 'surpris.png',
  ':-O'	=> 'surpris.png',
 );
