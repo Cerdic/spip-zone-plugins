@@ -1,16 +1,17 @@
 /*
 *	+----------------------------------+
-*	Nom du Filtre : Filets de Separation                                               
-*	Version : 1.2                                               
-*	Date : vendredi 8 septembre 2006
-*	Auteur : FredoMkb (fredomkbfr@yahoo.fr)                                      
+*	Nom du Tweak : Filets de Separation
+*	Version : 1.3
+*	Date : 27/12/2006
+*	Auteur : FredoMkb
+*	Adaptation et ameliorations pour Tweak SPIP : Patrice Vanneufville
 *	+-------------------------------------+
 *	Cette feuille de style est specialement dediee 
-*	au formatage des filets produits par le filtre 
+*	au formatage des filets produits par le tweak 
 *	"Filets de Separation" ("filets_sep.php").
 *	+----------------------------------+
 *	Pour toute remarque ou suggestion, reportez-vous a l'article :
-*	<http://fredomkb.free.fr/spip/spip.php?article14>
+*	<http://www.spip-contrib.net/> 
 *	+-------------------------------------+ 
 */
 
@@ -67,47 +68,11 @@
 /******************************************/
 /** Images **/
 
-/* Bloc long avec image d'un degrade de couleurs */
-.filet_sep_7 { 
+.filet_sep_image {
 	padding: 0; 
 	margin: 0;
-	height: 10px;
-	background-image: url(../../plugins/tweak_spip/img/filets/degrade.png);
+	height: 10px; /* hauteur par defaut */
 	background-position: center;
 	background-repeat: no-repeat;
 	border-style: none;
 }
-
-/* Bloc moyen avec image d'un motif floral, filets haut-bas noir */
-.filet_sep_8 { 
-	padding: 0;
-	margin: 0 50px;
-	height: 20px;
-	background-image: url(../../plugins/tweak_spip/img/filets/motif.png);
-	background-position: center;
-	background-repeat: no-repeat;
-	border-top: 1px solid black; /* #000000 */
-	border-bottom: 1px solid black; /* #000000 */
-}
-
-/* Bloc avec image d'un ornement */
-.filet_sep_9 { 
-	padding: 0; 
-	margin: 0;
-	height: 30px;
-	background-image: url(../../plugins/tweak_spip/img/img/filets/ornement.png);
-	background-position: center;
-	background-repeat: no-repeat;
-	border-style: none;
-}
-
-
-/******************************************/
-/** Anciens styles pour assurer une compatibilite descendente **/
-
-.filet_sep_long {border-bottom: 1px dotted #888; padding: 0; margin: 0;}
-
-.filet_sep_moyen {border-bottom: 1px dotted #888; padding: 0; margin: 0px 60px;}
-
-.filet_sep_court {border-bottom: 1px dotted #888; padding: 0; margin: 0px 120px;}
-
