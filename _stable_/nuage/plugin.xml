@@ -2,13 +2,12 @@
 	<version>1.2</version>
 	<nom>Nuage</nom>
 	<prefix>nuage</prefix>
-	<auteur>(c)2005-2006 Booz, Fil Licence GPL</auteur>
+	<auteur>(c)2005-2006 Booz, Fil. Licence GNU/GPL</auteur>
 	<etat>stable</etat>
-	<lien>[Afficher les mots-cl&eacute;s en faisant varier la taille de la police->http://www.spip-contrib.net/Afficher-les-mots-cles-en-faisant]</lien>
-	<description>Version plugin avec modeles, filtres et balises de la contrib nuage de tag (cf lien).</description>
+	<lien>[Afficher les mots-cl&#233;s en faisant varier la taille de la police->http://www.spip-contrib.net/Afficher-les-mots-cles-en-faisant]</lien>
+	<description>Version plugin avec modeles et filtres de la contrib nuage de tag (cf lien).</description>
 	<pipeline>
 		<nom>insert_head</nom> 
-		<action>insert_head</action>
 		<inclure>nuage_pipelines_public.php</inclure>
 	</pipeline>
 </plugin>
