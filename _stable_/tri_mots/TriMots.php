@@ -33,7 +33,7 @@ function TriMots_affiche_droite($arguments) {
 	else if($arguments['args']['exec'] == 'auteurs_edit') {
 	  $arguments['data'] .= TriMots_boite_tri_mots($arguments['args']['id_auteur'],'auteurs','id_auteur','auteurs_edit');
 	}
-	else if($arguments['args']['exec'] == 'mots_edit') {
+	else if(($arguments['args']['exec'] == 'mots_edit') && ($arguments['args']['new'] != 'oui')) {
 	  $arguments['data'] .= icone(_T('trimots:titre_page',array('objets' => _T('public:articles'))),generer_url_ecrire('tri_mots','objet=articles&ident_objet=id_article&id_mot='.$arguments['args']['id_mot'].'&retour='.urlencode(generer_url_ecrire('mots_edit',"id_mot=".$arguments['args']['id_mot']))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");
 	$arguments['data'] .= icone(_T('trimots:titre_page',array('objets' => _T('public:rubriques'))),generer_url_ecrire('tri_mots','objet=rubriques&ident_objet=id_rubrique&id_mot='.$arguments['args']['id_mot'].'&retour\
 ='.urlencode(generer_url_ecrire('mots_edit',"id_mot=".$arguments['args']['id_mot']))), '../'._DIR_PLUGIN_TRI_MOTS.'/img/updown.png', "rien.gif");

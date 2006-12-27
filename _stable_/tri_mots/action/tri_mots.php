@@ -19,19 +19,14 @@
 
 
 function action_tri_mots() {
-  global $redirect;
-  global $hash, $id_auteur;
-  global $order;
-  global $id_mot;
-  global $id_table;
-  global $table;
-  
-  $id_mot = intval($id_mot);
-  $id_table = addslashes($id_table);
-  $table = addslashes($table);
-  
+  $redirect = _request('redirect');
   $hash = _request('hash');
-	$id_auteur = _request('id_auteur');
+  $order = _request('order');
+  $id_mot = intval(_request('id_mot'));
+  $id_table = addslashes(_request('id_table'));
+  $table = addslashes(_request('table'));
+
+  $id_auteur =  intval($GLOBALS['auteur_session']['id_auteur']);
 
   //include_spip("inc/sessions");
   include_spip('inc/actions');

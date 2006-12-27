@@ -90,11 +90,11 @@ function exec_tri_mots() {
 	  if($table == 'auteurs') {
 		$select = array($id_table,'nom');
 	  } else 
-         	  $select = array($id_table,'titre');
-          if($table == 'auteurs') {
+		$select = array($id_table,'titre');
+	  if($table == 'auteurs') {
 		$where = array("nom REGEXP '^[0-9]+\\. '");
-          } else
-		  $where = array("titre REGEXP '^[0-9]+\\. '");
+	  } else
+		$where = array("titre REGEXP '^[0-9]+\\. '");
 	  $results = spip_abstract_select($select,$from,$where);
 	  while($row = spip_abstract_fetch($results)) {
 		$rang = substr($row['titre'],0,strpos($row['titre'],'.'));
@@ -152,12 +152,12 @@ function exec_tri_mots() {
   debut_droite();
 
   if($table == 'auteurs') 
-  $select = array("$table.nom", "$table.$id_table", 'lien.rang');
+	$select = array("$table.nom", "$table.$id_table", 'lien.rang');
   else
-  $select = array("$table.titre", "$table.$id_table", 'lien.rang');
+	$select = array("$table.titre", "$table.$id_table", 'lien.rang');
   $from = array("spip_mots_$table AS lien", "spip_$table AS $table");
   $where = array("$table.$id_table=lien.$id_table" , "lien.id_mot=$id_mot");
-	if($table != 'auteurs') $where[] = "$table.statut IN ('prop', 'publie')";
+  if($table != 'auteurs') $where[] = "$table.statut IN ('prop', 'publie')";
   $order = array('lien.rang');
 
   global $spip_lang_left;
@@ -173,9 +173,9 @@ function exec_tri_mots() {
   $result = spip_abstract_select($select,$from,$where,'',$order);
   while ($row = spip_abstract_fetch($result)) {
 	$id=$row[$id_table];
-        if($table == 'auteurs')
-	$titre=$row['nom'];
-        else $titre=$row['titre'];
+	if($table == 'auteurs')
+	  $titre=$row['nom'];
+	else $titre=$row['titre'];
 	$rang=$row['rang'];
 
 	echo "<li id='".$table."_$id'><span class=\"titre\">$titre</span><span class=\"lien\"><a href='" . generer_url_ecrire("$table","$id_table=$id") . "'>"._T('trimots:voir')."</a></span><span class=\"rang\">$rang</span></li>";
