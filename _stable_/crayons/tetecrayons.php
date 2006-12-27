@@ -52,7 +52,8 @@ function Crayons_affichage_final($page) {
 
 function Crayons_preparer_page($page, $droits, $wdgcfg = array()) {
 
-    $jsFile = find_in_path('crayons.js');
+    $jsFormFile = find_in_path('javascript/form.js');
+	$jsFile = find_in_path('crayons.js');
     $cssFile = find_in_path('crayons.css');
     $config = var2js(array(
 		'imgPath' => dirname(find_in_path('images/pencil.png')),
@@ -88,10 +89,11 @@ function Crayons_preparer_page($page, $droits, $wdgcfg = array()) {
     $incHead = <<<EOH
 
 <link rel="stylesheet" href="$cssFile" type="text/css" media="all" />
+<script src="{$jsFormFile}" type="text/javascript"></script>
 <script src="{$jsFile}" type="text/javascript"></script>
 <script type="text/javascript">
     var configCrayons = new cfgCrayons({$config});
-</script >
+</script>
 EOH;
 
     return substr_replace($page, $incHead, strpos($page, '</head>'), 0);
