@@ -5,46 +5,58 @@
 // pour toute suggestion, remarque, proposition d'ajout d'un 
 // smileys, etc ; reportez vous au forum de l'article :
 // http://www.spip-contrib.net/?article1561
+//
+// serieuse refonte 2006 : Patrice Vanneufville
 
-function tweak_smileys($chaine) {
-$chemin = dirname(find_in_path('img/smileys/diable.png')).'/';
 
-$rempl =array(
+define('_CHEMIN_SMILEYS', dirname(find_in_path('img/smileys/diable.png')).'/');
+
+global $smileys_rempl;
+$smileys_rempl = array(
+
+// les doubles :
  ':-(('	=> 'en_colere.png',
  ':-))'	=> 'mort_de_rire.png',
  ':))'	=> 'mort_de_rire.png',
- ":'-))"	=> 'pleure_de_rire.png',
+ ":'-))"=> 'pleure_de_rire.png',
 
+// les simples :
  ':->'	=> 'diable.png',
  ':-('	=> 'pas_content.png',
  ':-D'	=> 'mort_de_rire.png',
  ':-)'	=> 'sourire.png',
- ':)'	=> 'sourire.png',
  '|-)'	=> 'rouge.png',
- '|)'	=> 'rouge.png',
  ":'-D"	=> 'pleure_de_rire.png',
  ":'-("	=> 'triste.png',
  ':o)'	=> 'rigolo.png',
  'B-)'	=> 'lunettes.png',
  ';-)'	=> 'clin_d-oeil.png',
- ';)'	=> 'clin_d-oeil.png',
  ':-p'	=> 'tire_la_langue.png',
  ':-P'	=> 'tire_la_langue.png',
  ':-|'	=> 'bof.png',
- ':|'	=> 'bof.png',
  ':-/'	=> 'mouais.png',
-// ':/'	=> 'mouais.png',	// conflit avec http:// par exemple
  ':-o'	=> 'surpris.png',
  ':-O'	=> 'surpris.png',
+
+// les courts a tester...
+ ':)'	=> 'sourire.png',
+ ';)'	=> 'clin_d-oeil.png',
+ ':|'	=> 'bof.png',
+ '|)'	=> 'rouge.png',
+// ':/'	=> 'mouais.png',	// conflit avec 'http://' par exemple
 );
 
-//foreach ($rempl as $smy=>$val) {$r1[] = $smy; $r2[] = '<img alt="'.$smy.'" title="'.$smy.'" src="'.$chemin.$val.'">'; }
-//$chaine = str_replace($r1, $r2, $chaine);
+// cette fonction n'est pas appelee dans les balises html : cadre|code|acronym|cite
+function tweak_rempl_smileys($texte) {
+	global $smileys_rempl;
+	// accessibilite : protection de alt et title
+	foreach ($smileys_rempl as $smy=>$val) $texte = str_replace($smy, '<img alt="@@64@@'.base64_encode($smy).'@@65@@" title="@@64@@'.base64_encode($smy).'@@65@@" src="'._CHEMIN_SMILEYS.$val.'">', $texte);
+	// accessibilite : alt et title avec le smiley en texte
+	while(preg_match('`@@64@@([^@]*)@@65@@`', $texte, $regs)) $texte = str_replace('@@64@@'.$regs[1].'@@65@@', base64_decode($regs[1]), $texte);
+	return $texte;
+}
 
-foreach ($rempl as $smy=>$val) $chaine = str_replace($smy, '<img alt="'.code_echappement($smy).'" title="'.code_echappement($smy).'" src="'.$chemin.$val.'">', $chaine);
-
-// $t="<table border=1 cellpadding=4 cellspacing=0><tr>";	foreach ($rempl as $smy=>$val) $t .= "<th align=\"center\" style=\"border:1px solid gray; padding: 2px;\">$smy</th>"; $t.="</tr><tr>";	foreach ($rempl as $smy=>$val) $t .= '<th align="center" style="border:1px solid gray; padding: 2px;"><img ALT="smiley" style="padding: 0px;" src="'.$chemin.$val.'"></th>'; $chaine=$t."</tr></table>";
-
-return $chaine;
+function tweak_smileys($texte) {
+	return tweak_exclure_balises('cadre|code|acronym|cite', 'tweak_rempl_smileys', $texte);
 }
 ?>
