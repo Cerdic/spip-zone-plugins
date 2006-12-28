@@ -55,15 +55,17 @@ function Agenda_compile_texte_saisie_rapide($texte) {
 							$mots = array_merge($mots, Agenda_retourne_liste_mots($listes[$i+1]));
 					}
 			// todo : mettre les mots au format des select du formulaire normal
+			$mots_compiles = Agenda_verifie_les_mots_clefs($mots);
 			// mettre les repetitions au format du textarea du formulaire normal
 			$selected_rep = "";
-			foreach($rep as $r){
+			foreach($rep as $k=>$r){
 				$r =explode("/",$r);
 				$selected_rep .= ",".sprintf('%02d',$r[1])."/".sprintf('%02d',$r[0])."/".sprintf('%04d',$r[2]);
+				$rep[$k] = mktime($reg[7],$regs[8],null,$r[1],$r[0],$r[2]);
 			}
 			$selected_rep = substr($selected_rep,1);
 			// remise en forme en doubon : idem a un post ou idem a un spip_query
-			$t[$e]=array(
+			$t[$e]=array_merge(array(
 			'jour_evenement_debut' =>$regs[1],
 			'mois_evenement_debut' =>$regs[2],
 			'annee_evenement_debut' =>$regs[3],
@@ -78,10 +80,10 @@ function Agenda_compile_texte_saisie_rapide($texte) {
 			'evenement_titre' =>$regs[11],
 			'evenement_lieu' =>$regs[13],
 			'evenement_descriptif' =>$regs[15],
-			'evenement_groupe_mot_select' => $mots,
+			'evenement_groupe_mot_select' => $mots_compiles['echo'],
 			'evenement_repetitions' => $rep,
 			'selected_date_repetitions' => $selected_rep
-			);
+			),$mots_compiles['post']);
 		} 
 		else {
 			if ($t[$e]!="") $t[$e]=array(); else unset($t[$e]);
@@ -105,16 +107,19 @@ function Agenda_verifie_les_mots_clefs($mots_envoyes) {
 											'echo' => $titre.':'.$row2['titre']);
 		}
 	}
+	$mots_compiles = array('echo'=>array(),'post'=>array());
 	// on voit quels mots cles on retient...
-	foreach($mots_envoyes as $mot) { if (preg_match('/((([^:]+):)?(.*))/', $mot, $regs))
-	 foreach($les_mots_ok as $mot_ok=>$tab) 
-	 	if ($tab['titre_mot']==$regs[4] && ($regs[3]=='' || $regs[3]==$tab['titre_groupe'])) 
-			{ ++$les_mots_ok[$mot_ok]['nb']; break; }
-	}
-	// on renvoie le resultat !
-	foreach($les_mots_ok as $mot_ok=>$tab) if($tab['nb']) {
-		$mots_compiles['echo'][] = $tab['echo'];
-		$mots_compiles['post'][$tab['id_groupe']][] = $tab['id_mot'];
+	foreach($mots_envoyes as $mot) {
+		if (preg_match('/((([^:]+):)?(.*))/', $mot, $regs))
+			foreach($les_mots_ok as $mot_ok=>$tab){
+				$test_mot_ok = ($tab['titre_mot']==$regs[4]) || ($tab['id_mot']==$regs[4]);
+				$test_groupe_ok = (''==$regs[3]) || ($tab['titre_groupe']==$regs[3]) || ($tab['id_groupe']==$regs[3]);
+				if ($test_mot_ok && $test_groupe_ok) {
+					$mots_compiles['echo'][$tab['id_mot']] = $tab['echo'];
+					$mots_compiles['post']["evenement_groupe_mot_select_".$tab['id_groupe']][$tab['id_mot']] = $tab['id_mot'];
+					break;
+				}
+			}
 	}
 	return $mots_compiles;
 }
@@ -140,9 +145,10 @@ function Agenda_formulaire_saisie_rapide_previsu() {
 			$s_rep = "";
 			$count_rep = 0;
 			foreach($eve['evenement_repetitions'] as $rep){
-				$rep_date_debut = strtotime($rep);
+				$rep_date_debut = $rep;
 				$rep_date_fin = $rep_date_debut+$date_fin-$date_debut;
 				$s_rep .= Agenda_afficher_date_evenement($rep_date_debut,$rep_date_fin,$horaire)."<br/>";
+				//$s_rep .= $rep."<br/>";
 				$count_rep++;
 			}
 			if (strlen($s_rep)){
@@ -159,8 +165,11 @@ function Agenda_formulaire_saisie_rapide_previsu() {
 			$vals[] = $lieu;
 			
 			$vals[] = propre($descriptif);
+			
+			$vals[] = implode(", ",$eve['evenement_groupe_mot_select']);
 		
 			$table[] = $vals;
+			
 		}
 	
 		$largeurs = array('', '', '', '', '');

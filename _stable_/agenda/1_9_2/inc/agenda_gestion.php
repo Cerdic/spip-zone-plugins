@@ -276,36 +276,41 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 		$out .=  "<td>";
 	
 		if ($edit){
-			$out .=  "<span class='verdana1'><strong>"._T('agenda:titre_cadre_modifier_evenement')."&nbsp; </strong></span>\n";
 		} else {
-			$out .=  "<span class='verdana1'><strong>"._T('agenda:titre_cadre_ajouter_evenement')."&nbsp; </strong></span>\n";
 		}
-		$out .=  "<div><input type='hidden' name='id_article' value=\"$id_article\">";
 
 		$bouton_ajout = false;
 		if ($edit){
-			$form = Agenda_formulaire_edition_evenement($id_evenement, false);
+			$out .=  "<span class='verdana1'><strong>"._T('agenda:titre_cadre_modifier_evenement')."&nbsp; </strong></span>\n";
+			$form =  "<input type='hidden' name='id_article' value='$id_article' />";
+			$form .= Agenda_formulaire_edition_evenement($id_evenement, false);
 			$bouton_ajout = true;
 			$out .= ajax_action_auteur('editer_evenement',"$id_article-modifier-$id_evenement", $script, "id_article=$id_article&edit=1", $form,'','wc_init');
 		}
 		else{
 			if ($saisie_rapide){
+				$out .=  "<span class='verdana1'><strong>"._T('saisierapide:titre_cadre_ajouter_liste_evenement')."&nbsp; </strong></span>\n";
 				include_spip('inc/agenda_saisie_rapide');
-				$form = Agenda_formulaire_saisie_rapide_previsu();
-				if (strlen($form))
+				$form .= Agenda_formulaire_saisie_rapide_previsu();
+				if (strlen($form)){
+					$form .=  "<input type='hidden' name='id_article' value='$id_article' />";
 					$out .= ajax_action_auteur('editer_evenement',"$id_article-saisierapidecreer-0", $script, "id_article=$id_article&saisie_rapide=1", $form);
-				$form = Agenda_formulaire_saisie_rapide();
+				}
+				$form =  "<input type='hidden' name='id_article' value='$id_article' />";
+				$form .= Agenda_formulaire_saisie_rapide();
 				$out .= ajax_action_auteur('editer_evenement',"$id_article-saisierapidecompiler-0", $script, "id_article=$id_article&saisie_rapide=1", $form);
 				$bouton_ajout = true;
 			}
 			else {
+				$out .=  "<span class='verdana1'><strong>"._T('agenda:titre_cadre_ajouter_evenement')."&nbsp; </strong></span>\n";
 				// recuperer le titre de l'article pour le mettre par defaut sur l'evenement
 				$titre_defaut = "";
 				$res = spip_query("SELECT titre FROM spip_articles where id_article="._q($id_article));
 				if ($row = spip_fetch_array($res))
 					$titre_defaut = $row['titre'];
 				
-				$form = Agenda_formulaire_edition_evenement(NULL, true, '', $titre_defaut);
+				$form = "<input type='hidden' name='id_article' value='$id_article' />";
+				$form .= Agenda_formulaire_edition_evenement(NULL, true, '', $titre_defaut);
 				$id_evenement = 0;
 				$out .= ajax_action_auteur('editer_evenement',"$id_article-modifier-$id_evenement", $script, "id_article=$id_article&edit=1", $form,'','wc_init');
 			}
@@ -316,7 +321,8 @@ function Agenda_formulaire_article_ajouter_evenement($id_article, $les_evenement
 		$out .= "<div style='clear: both;'></div>";
 
 		if ($bouton_ajout)
-			$out .= ajax_action_auteur('editer_evenement',"$id_article-creer-0", $script, "id_article=$id_article&neweven=1", array(http_img_pack(_DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", _T("agenda:icone_creer_evenement"), "width='24' height='24' border='0' align='middle'")."&nbsp;"._T("agenda:icone_creer_evenement"),''),'','wc_init');
+			$out .= ajax_action_auteur('editer_evenement',"$id_article-creer-0", $script, "id_article=$id_article&neweven=1", array(http_img_pack(_DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", _T("agenda:icone_creer_evenement"), "width='24' height='24' border='0' align='middle'")."&nbsp;"._T("agenda:icone_creer_evenement"),''),'','wc_init')
+				. "&nbsp;";
 		if (!$saisie_rapide)
 			$out .= ajax_action_auteur('editer_evenement',"$id_article-creer-0", $script, "id_article=$id_article&saisie_rapide=1", array(http_img_pack(_DIR_PLUGIN_AGENDA."/img_pack/agenda-24.png", _T("saisierapide:icone_saisie_rapide"), "width='24' height='24' border='0' align='middle'")."&nbsp;"._T("saisierapide:icone_saisie_rapide"),''));
 
