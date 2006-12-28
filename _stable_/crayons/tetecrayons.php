@@ -91,7 +91,7 @@ function Crayons_preparer_page($page, $droits, $wdgcfg = array()) {
 <script src="{$jsFile}" type="text/javascript"></script>
 <script type="text/javascript">
     var configCrayons = new cfgCrayons({$config});
-</script >
+</script>
 EOH;
 
     return substr_replace($page, $incHead, strpos($page, '</head>'), 0);
