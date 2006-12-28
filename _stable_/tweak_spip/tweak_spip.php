@@ -79,7 +79,7 @@ function tweak_lire_metas() {
 // $fonction est la fonction de transformation typo
 // $texte est le texte d'origine
 function tweak_exclure_balises($balises, $fonction, $texte){
-	$t=preg_split(",<(\/?)($balises)>,", $texte, 3, PREG_SPLIT_DELIM_CAPTURE);
+	$t=preg_split(",<(\/?)($balises)[^>]*>,", $texte, 3, PREG_SPLIT_DELIM_CAPTURE);
 	if (count($t)==1) return $fonction($t[0]);
 	if ($t[2]=='' || $t[5]=='') return $texte;
 	if ($t[1]=='' && $t[4]=='/' && $t[2]==$t[5]) 
