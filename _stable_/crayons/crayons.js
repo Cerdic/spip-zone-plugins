@@ -293,6 +293,10 @@ jQuery(document).ready(function() {
     alert("version jquery < 1.0.2, Crayon ne peut pas fonctionner");
     return;
   }
+  if (!jQuery.fn.ajaxForm) {
+    alert("jQuery plugin form.js absent, Crayon ne peut pas fonctionner");
+    return;
+  }
 
   // sortie, demander pour sauvegarde si oubli
   if (configCrayons.txt.sauvegarder) {
