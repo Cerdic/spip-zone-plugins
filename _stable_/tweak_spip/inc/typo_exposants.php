@@ -1,9 +1,7 @@
 <?php
 // Filtre typographique exposants pour langue francaise
-// Cette fonction emprunte les expressions régulières publiees par Raphaël Meyssen
-// sur <http://www.spip-contrib.net/Filtre-typographique-exposants>.
-//
 // serieuse refonte 2006 : Patrice Vanneufville
+// Toutes les infos sur : http://www.spip-contrib.net/?article1564
 
 // cette fonction ne fonctionne que pour le francais
 // elle n'est pas appelee dans les balises html : cadre|code|acronym|cite

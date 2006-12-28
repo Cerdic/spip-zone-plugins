@@ -57,12 +57,12 @@ div.cadre-padding div.droite label {
 div.cadre-padding input {
 	cursor:pointer;
 }
-div.detailplugin {
+div.detailtweak {
 	border-top:1px solid #B5BECF;
 	padding:.6em;
 	background:#F5F5F5;
 }
-div.detailplugin hr {
+div.detailtweak hr {
 	border-top:1px solid #67707F;
 	border-bottom:0;
 	border-left:0;
@@ -80,7 +80,6 @@ function verifchange(id) {
 }
 
 // mise à jour des données si envoi via formulaire
-// http://doc.spip.org/@enregistre_modif_plugin
 function enregistre_modif_tweaks(){
 	global $tweaks;
 	// recuperer les tweaks dans l'ordre des $_POST
@@ -125,12 +124,6 @@ function exec_tweak_spip_admin() {
 //		verif_tweaks();
 
 	tweak_lire_metas();
-/*
-	echo' tweaks :'; var_dump($tweaks);
-	echo' metas_tweaks :'; var_dump($metas_tweaks);
-	echo' request :'; var_dump($_REQUEST);
-	echo 'metas :'; var_dump($GLOBALS['meta']['tweaks']);
-*/	
 
 	global $spip_version_code;
 	if ($spip_version_code<1.92) 
@@ -146,10 +139,6 @@ function exec_tweak_spip_admin() {
 	gros_titre(_T('tweak:titre'));
 	echo barre_onglets("configuration", "tweak_spip");
 
-//  debut_page(_T('tweak:titre'), 'configuration', 'tweak_spip');
-
-//	echo '<br><br><br>';
-//	gros_titre(_T('tweak:titre'));
 	debut_gauche();
 	debut_boite_info();
 	echo propre(_T('tweak:help'));
@@ -162,24 +151,26 @@ function exec_tweak_spip_admin() {
 	echo generer_url_post_ecrire('tweak_spip_admin');
 	echo "\n<input type='hidden' name='changer_tweaks' value='oui'>";
 
-//	debut_cadre_relief();
 	debut_cadre_trait_couleur('administration-24.gif','','',_T('tweak:tweaks_liste'));
 
 	global $couleur_foncee;
 	echo "\n<table border='0' cellspacing='0' cellpadding='5' >";
 
 	echo "<tr><td class='serif'>";
-	echo _T('tweak:texte_presente_tweaks');
+	echo '<p>'._T('tweak:presente_tweaks').'</p><br/>';
 
-	echo '<ul>';
-	foreach($temp = $tweaks as $tweak) echo '<li>' . ligne_tweak($tweak) . "</li>\n"; 
-	echo '</ul>';
+	foreach($temp = $tweaks as $tweak) $categ[$tweak['categorie']] = 1; ksort($categ);
+	foreach(array_keys($categ) as $c) {
+		echo '<p><strong>'._T('tweak:'.$c).'</strong></p>';
+		echo '<ul>';
+		foreach($temp = $tweaks as $tweak) if ($tweak['categorie']==$c) echo '<li>' . ligne_tweak($tweak) . "</li>\n"; 
+		echo '</ul>';
+	}
 	
 	echo "</td></tr></table>\n";
 
 	echo "\n<div style='text-align:$spip_lang_right'>";
 	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' ";
-//	echo "onclick=\"alert('à faire, si vous trouvez un moyen simple de stocker l\'état des tweaks !')";
 	echo "\"></div>";
 
 # ce bouton est trop laid :-)
@@ -235,7 +226,7 @@ function ligne_tweak($tweak){
 
 	$s .= debut_block_invisible($tweak_id);
 
-	$s .= "\n<div class='detailplugin'>";
+	$s .= "\n<div class='detailtweak'>";
 	if (isset($tweak['description'])) $s .= propre($tweak['description']);
 	if (isset($tweak['auteur'])) $s .= "<p>" . _T('auteur') .' '. propre($tweak['auteur']) . "</p>";
 	$s .= "<hr/>" . _T('tweak:tweak') . " $inc.php";

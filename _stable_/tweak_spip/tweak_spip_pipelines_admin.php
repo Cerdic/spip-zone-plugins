@@ -1,16 +1,6 @@
 <?php
 include_spip('tweak_spip');
 
-/*
- * Tweak SPIP
- *
- * interface de gestion des tweaks
- *
- * Auteur : Patrice Vanneufville
- * © 2006 - Distribue sous licence GPL
- *
- */
-
 if (!defined('_DIR_PLUGIN_TWEAK_SPIP')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	define('_DIR_PLUGIN_TWEAK_SPIP',(_DIR_PLUGINS.end($p)));

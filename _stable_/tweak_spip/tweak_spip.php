@@ -4,23 +4,10 @@
 #  Auteur  : Patrice Vanneufville, 2006             #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GPL                                    #
+#  Infos : http://www.spip-contrib.net/?article1554 #
 #---------------------------------------------------#
 
 include_spip('tweak_spip_config');
-
-/*
-paremetre $tableau : Array
-	'nom' 	=> nom du tweak
-	'description' 	=> description (et liens éventuels) du tweak
-	'auteur' 		=> auteur(s) du tweak
-	'include' 		=> fichier inc/???.php à inclure
-	'options'		=> 1 si l'include doit etre place dans tweak_spip_options.php
-	'fonctions'		=> 1 si l'include doit etre place dans tweak_spip_fonctions.php
-sinon :	
-	'pipeline_1'	=> 'function à utiliser',
-	'pipeline_2'	=> 'function à utiliser',
-	etc.
-*/
 
 // ajoute un tweak à $tweaks;
 function add_tweak($tableau) {
@@ -77,9 +64,10 @@ function tweak_lire_metas() {
 	include_spip('inc/meta');
 	lire_metas();
 	$metas_tweaks = unserialize($GLOBALS['meta']['tweaks']);
-	// incorporer l'activite lue dans les metas
+	// incorporer l'activite lue dans les metas et completer les categories
 	foreach($temp = $tweaks as $i=>$tweak) {
 		$tweaks[$i]['actif'] = isset($metas_tweaks[$tweak['include']])?$metas_tweaks[$tweak['include']]['actif']:0;
+		if (!isset($tweak['categorie'])) $tweaks[$i]['categorie'] = _T('tweak:divers');
 	}
 	ecrire_meta('tweaks', serialize($metas_tweaks));
 	ecrire_metas();

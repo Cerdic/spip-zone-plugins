@@ -1,13 +1,8 @@
 <?php
 
 // Tweak SMILEYS - 25 décembre 2006
-//
-// pour toute suggestion, remarque, proposition d'ajout d'un 
-// smileys, etc ; reportez vous au forum de l'article :
-// http://www.spip-contrib.net/?article1561
-//
 // serieuse refonte 2006 : Patrice Vanneufville
-
+// Toutes les infos sur : http://www.spip-contrib.net/?article1561
 
 define('_CHEMIN_SMILEYS', dirname(find_in_path('img/smileys/diable.png')).'/');
 

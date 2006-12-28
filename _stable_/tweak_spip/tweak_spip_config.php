@@ -5,6 +5,7 @@
 #  Auteur  : Patrice Vanneufville, 2006             #
 #  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
 #  Licence : GPL                                    #
+#  Infos : http://www.spip-contrib.net/?article1554 #
 #---------------------------------------------------#
 
 global $tweaks, $tweaks_pipelines, $tweaks_css, $tweak_exclude;
@@ -19,6 +20,7 @@ add_tweak( array(
 	'description' 	=> 'Inhibition du cache de SPIP pour le d&eacute;veloppement du site.',
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'include' 		=> 'desactiver_cache',
+	'categorie'		=> _T('tweak:admin'),
 	// tweak a inserer dans les options
 	'options'		=> 1,
 ));
@@ -27,6 +29,7 @@ add_tweak( array(
 	'nom'			=> 'Supprimer le num&eacute;ro',
 	'description' 	=> "Applique la fonction SPIP supprimer_numero() &agrave; l'ensemble des titres du site, sans qu'elle soit pr&eacute;sente dans les squelettes.",
 	'include' 		=> 'supprimer_numero',
+	'categorie'		=> _T('tweak:admin'),
 	// tweak a inserer dans les options
 	'options'		=> 1
 ));
@@ -35,6 +38,7 @@ add_tweak( array(
 	'nom'			=> 'Paragrapher',
 	'description' 	=> "Applique la fonction SPIP paragrapher() aux textes qui sont d&eacute;pourvus de paragraphes en insérant des balises &lt;p&gt;.",
 	'include' 		=> 'paragrapher',
+	'categorie'		=> _T('tweak:admin'),
 	// tweak a inserer dans les options
 	'options'		=> 1
 ));
@@ -76,6 +80,7 @@ add_tweak( array(
 _ N&eacute;cessite le plugin {jQuery} ou une version de SPIP sup&eacute;rieure à 1.9.2.',
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'include' 		=> 'desactiver_flash',
+	'categorie'		=> _T('tweak:admin'),
 	// pipeline => fonction
 	'affichage_final' => 'InhibeFlash_affichage_final',
 ));
@@ -91,6 +96,7 @@ _ La fonction SPIP utilis&eacute;e est : _T('un_texte', \$flux).
 _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans les fichiers de langue.",
 	'auteur' 		=> '',
 	'include' 		=> 'toutmulti',
+	'categorie'		=> _T('tweak:typo'),
 	// pipeline => fonction
 	'pre_typo'	=> 'ToutMulti_pre_typo',
 ));
@@ -100,6 +106,7 @@ add_tweak( array(
 	'description' 	=> 'Remplace les puces - (tiret) des articles par des puces -* (&lt;li>...)',
 	'auteur' 		=> '[J&eacute;r&ocirc;me Combaz->http://conseil-recherche-innovation.net/index.php/2000/07/08/72-jerome-combaz]',
 	'include' 		=> 'bellespuces',
+	'categorie'		=> _T('tweak:typo'),
 	// pipeline => fonction
 	'pre_typo' => 'bellespuces_pre_typo',
 ));	
@@ -116,6 +123,7 @@ add_tweak( array(
 Infos : [->http://www.spip-contrib.net/?article1552]",
 	'auteur' 		=> '[izo@aucuneid.net->http://www.aucuneid.com/bones]',
 	'include' 		=> 'decoration',
+	'categorie'		=> _T('tweak:typo'),
 	// pipeline => fonction
 	'pre_typo' => 'decoration_pre_typo',
 ));
@@ -126,6 +134,7 @@ add_tweak( array(
 _ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie nationale telles qu'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l'Imprimerie nationale, Paris, 2002).",
 	'auteur' 		=> 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
 	'include' 		=> 'typo_exposants',
+	'categorie'		=> _T('tweak:typo'),
 	// pipeline => fonction
 	'post_typo'	=> 'typo_exposants',
 ));
@@ -137,6 +146,7 @@ _ La syntaxe est : &quot;__N__&quot;, o&ugrave; &quot;N&quot; repr&eacute;sente 
 _ Infos : [->http://www.spip-contrib.net/?article1563]",
 	'auteur' 		=> 'FredoMkb',
 	'include' 		=> 'filets_sep',
+	'categorie'		=> _T('tweak:typo'),
 	// pipeline => fonction
 	'pre_typo'	=> 'filets_sep',
 ));
@@ -147,6 +157,7 @@ add_tweak( array(
 _ Infos : [->http://www.spip-contrib.net/?article1561]",
 	'auteur' 		=> 'Sylvain',
 	'include' 		=> 'smileys',
+	'categorie'		=> _T('tweak:typo'),
 	// pipeline => fonction
 	'pre_typo'	=> 'tweak_smileys',
 ));
@@ -161,12 +172,9 @@ _ Infos : [->http://www.spip-contrib.net/?article1561]",
 //-----------------------------------------------------------------------------//
 
 // exclure ce qui n'est pas un pipeline...
-$tweak_exclude = array('nom', 'description', 'auteur', 'include', 'options', 'fonctions', 'actif');
+$tweak_exclude = array('nom', 'description', 'auteur', 'categorie', 'include', 'options', 'fonctions', 'actif');
 
 // lire les metas et initialiser : $tweaks_pipelines, $tweaks_css
 tweak_lire_metas();
-
-//print_r($tweaks);
-//print_r($tweaks_pipelines);
 
 ?>
