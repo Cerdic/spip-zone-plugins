@@ -267,9 +267,6 @@ jQuery.fn.iconecrayon = function(){
 jQuery.fn.initcrayon = function(){
   this
   .addClass('crayon-autorise')
-  .click(function(e){
-    e.stopPropagation();
-  })
   .dblclick(function(e){
     jQuery(this).opencrayon(e);
   })
