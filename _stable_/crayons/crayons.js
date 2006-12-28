@@ -289,7 +289,10 @@ jQuery.fn.initcrayon = function(){
 // demarrage
 jQuery(document).ready(function() {
   if (!configCrayons.droits) return;
-  if (!jQuery.getJSON) return; // jquery >= 1.0.2
+  if (!jQuery.getJSON) {
+    alert("version jquery < 1.0.2, Crayon ne peut pas fonctionner");
+    return;
+  }
 
   // sortie, demander pour sauvegarde si oubli
   if (configCrayons.txt.sauvegarder) {
