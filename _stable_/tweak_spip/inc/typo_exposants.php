@@ -2,8 +2,11 @@
 // Filtre typographique exposants pour langue francaise
 // Cette fonction emprunte les expressions régulières publiees par Raphaël Meyssen
 // sur <http://www.spip-contrib.net/Filtre-typographique-exposants>.
+//
+// serieuse refonte 2006 : Patrice Vanneufville
 
 // cette fonction ne fonctionne que pour le francais
+// elle n'est pas appelee dans les balises html : cadre|code|acronym|cite
 function typo_exposants_fr($texte){
 	$trouve = array(
 		'/(\\bM)e?(lles?)\\b/',		// Mlle(s), Mme(s) et erreurs Melle(s)

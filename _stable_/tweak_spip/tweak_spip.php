@@ -86,4 +86,19 @@ function tweak_lire_metas() {
 	tweaks_initialise_includes();
 }
 
+// evite les transformations typo dans les balises $balise
+// par exemple pour <cadre>, <code>, <acronym> et <cite>, $balise = 'cadre|code|acronym|cite'
+// $fonction est la fonction de transformation typo
+// $texte est le texte d'origine
+function tweak_exclure_balises($balises, $fonction, $texte){
+	$t=preg_split(",<(\/?)($balises)>,", $texte, 3, PREG_SPLIT_DELIM_CAPTURE);
+	if (count($t)==1) return $fonction($t[0]);
+	if ($t[2]=='' || $t[5]=='') return $texte;
+	if ($t[1]=='' && $t[4]=='/' && $t[2]==$t[5]) 
+		return $fonction($t[0]).'<'.$t[2].'>'.$t[3].'</'.$t[5].'>'.tweak_exclure_balises($balises, $fonction, $t[6]);
+	else 
+		return $fonction($t[0]).'<'.$t[1].$t[2].'>'.$t[3].tweak_exclure_balises($balises, $fonction, '<'.$t[4].$t[5].'>'.$t[6]);
+}
+
+
 ?>

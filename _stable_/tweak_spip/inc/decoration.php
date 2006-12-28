@@ -4,6 +4,7 @@
    Ce tweak decoration permet aux redacteurs d'un site spip de d'appliquer les styles souligné, barré, au dessus aux textes SPIP
 */
 
+// cette fonction n'est pas appelee dans les balises html : cadre|code
 function decoration_rempl($texte) {
 	$texte = preg_replace("/(\<souligne\>)(.*?)(\<\/souligne\>)/", "<span style=\"text-decoration: underline;\">\\2</span>", $texte);
 	$texte = preg_replace("/(\<barre\>)(.*?)(\<\/barre\>)/", "<span style=\"text-decoration: line-through;\">\\2</span>", $texte);
