@@ -31,10 +31,10 @@ cfgCrayons.prototype.iconclick = function(c) {
     '">' + this.mkimg('edit', ' (' + link[1] + ' ' + link[2] + ')') + '</a><br />' : '';
 
   var cray = c.match(/\b\w+-(\w+)-\d+\b/);
-  cray = !cray ? '' : this.mkimg('pencil', ' (' + cray[1] + ')') + '<br />';
+  var boite = !cray ? '' : this.mkimg('pencil', ' (' + cray[1] + ')') + '<br />';
 
   return "<span class='crayon-icones'><span>" +
-      cray + link +
+      boite + link +
       this.mkimg('img-changed', cray ? ' (' + cray[1] + ')': '') +
     "</span></span>";
 }
