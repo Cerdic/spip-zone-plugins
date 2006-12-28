@@ -58,8 +58,8 @@ function trous_inserer_le_trou($indexJeux, $indexTrou, $size, $corriger) {
   // Initialisation du code a retourner
   $nomVarSelect = "var{$indexJeux}_T{$indexTrou}";
   $mots = $propositionsTROUS[$indexTrou];
-  $prop = strtolower($_POST[$nomVarSelect] = trim($_POST[$nomVarSelect]));
-  $codeHTML = " <input name=\"$nomVarSelect\" class=\"jeux_input\" size=\"$size\" onfocus=\"TrackFocus('$nomVarSelect')\" type=\"text\""
+  $prop = strtolower($_POST[$nomVarSelect] = trim($_POST[$nomVarSelect]));						  // function TrackFocus(BoxNumber){CurrentWord = BoxNumber;}
+  $codeHTML = " <input name=\"$nomVarSelect\" class=\"jeux_input\" size=\"$size\"  type=\"text\"" //onfocus=\"TrackFocus('$nomVarSelect')\"
 	  . ($prop?" value=\"{$_POST[$nomVarSelect]}\"":'') . "> "
 	 ;// . " (".join('|', $mots).")";
 
