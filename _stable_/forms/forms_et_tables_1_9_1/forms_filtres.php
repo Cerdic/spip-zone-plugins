@@ -15,7 +15,7 @@
 
 	function Forms_insert_head($flux){
 		$flux .= 	"<link rel='stylesheet' href='".find_in_path('spip_forms.css')."' type='text/css' media='all' />\n";
-		$flux .= 	"<link rel='stylesheet' href='".find_in_path('donnees_voir.css')."' type='text/css' media='all' />\n";
+		$flux .= 	"<link rel='stylesheet' href='".find_in_path('donnee_voir.css')."' type='text/css' media='all' />\n";
 		$flux .= 	"<link rel='stylesheet' href='".find_in_path('donnees_tous.css')."' type='text/css' media='all' />\n";
 		$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/date_picker.css' type='text/css' media='all' />\n";
 		$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/jtip.css' type='text/css' media='all' />\n";
