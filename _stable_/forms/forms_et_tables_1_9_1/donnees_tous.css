@@ -14,10 +14,10 @@ div.liste { clear:both;width:auto; }
 	margin:0px;
 	height:34px;
 }
-.donnees th.neutre {padding-left: 0px;background-image: url(header.png);	}
-.donnees th.header {padding-left: 15px;background-image: url(header-bg.png);	}
-.donnees th.headerSortUp {padding-left: 15px;background-image: url(header-asc.png);	}
-.donnees th.headerSortDown {padding-left: 15px;background-image: url(header-desc.png);}
+.donnees th.neutre {padding-left: 0px;background-image: url(img_pack/header.png);	}
+.donnees th.header {padding-left: 15px;background-image: url(img_pack/header-bg.png);	}
+.donnees th.headerSortUp {padding-left: 15px;background-image: url(img_pack/header-asc.png);	}
+.donnees th.headerSortDown {padding-left: 15px;background-image: url(img_pack/header-desc.png);}
 #sorting div {
 	font-weight: bold;
 }
