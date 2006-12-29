@@ -19,7 +19,7 @@ function nuage($id_mot, $titre = '', $url = '', $poids = -1){
 			foreach ($titre as $id => $t) {
 				$score = $poids[$id]/$max; # entre 0 et 1
 				if($score > 0.05){
-					$s = ($unite=floor($score += .500001)) . '.' . floor(10*($score - $unite));
+					$s = ($unite=floor($score += 0.900001)) . '.' . floor(10*($score - $unite));
 					$l = $t.'<span class="frequence"> ('.$poids[$id]."/".$max.")</span>";
 					$texte .= '<li><a rel="tag" href="'.$url[$id].'" style="font-size: '.$s.'em;">';
 					$texte .= $l.'</a></li>'."\n";
