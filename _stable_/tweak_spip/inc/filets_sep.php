@@ -9,7 +9,7 @@
 */
 
 // Fonction pour generer des filets de separation selon les balises presentes dans le texte fourni.
-// Cette fonction n'est pas appelee dans les balises html : cadre|code
+// Cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script
 function filets_sep_rempl($texte) {
 	
 	// On memorise les modeles d'expression rationnelle a utiliser pour chercher les balises.
@@ -42,6 +42,6 @@ function filets_sep_rempl($texte) {
 }
 
 function filets_sep($texte) {
-	return tweak_exclure_balises('cadre|code', 'filets_sep_rempl', $texte);
+	return tweak_exclure_balises('', 'filets_sep_rempl', $texte);
 }
 ?>

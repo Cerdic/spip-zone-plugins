@@ -60,8 +60,8 @@ _ version_plein_texte : extrait le contenu texte d'une page html pour rendre du 
 
 add_tweak( array(
 	'nom'			=> 'Orientation des images',
-	'description' 	=> "Ajoute les crit&egrave;res <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code> dans vos squelettes pour le classement des photos.
-_ [Plus d'infos->http://www.spip-contrib.net/Portrait-ou-Paysage]",
+	'description' 	=> "3 nouveauw crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&egrave;al pour le classement des photos en fonction de leur forme.
+_ Infos : [->http://www.spip-contrib.net/Portrait-ou-Paysage]",
 	'auteur' 		=> 'Pierre Andrews (Mortimer) &amp; IZO',
 	'include' 		=> 'orientation',
 	// tweak a inserer dans les fonctions
@@ -113,13 +113,15 @@ add_tweak( array(
 
 add_tweak( array(
 	'nom'			=> 'D&eacute;coration',
-	'description' 	=> "Permet aux r&eacute;dacteurs d'un article d'appliquer les styles <sc>capitales</sc>, <souligne>soulign&eacute;</souligne>, <barre>barr&eacute;</barre>, <dessus>dessus</dessus>, <clignote>clignote</clignote> et <fluo>fluo</fluo> &agrave; un texte.
+	'description' 	=> "7 nouveaux styles dans vos articles : <sc>capitales</sc>, <souligne>soulign&eacute;</souligne>, <barre>barr&eacute;</barre>, <dessus>dessus</dessus>, <clignote>clignote</clignote>, <surfluo>fluo</surfluo> et <surgris>gris&eacute;</surgris>. Utilisation :
 -* {&lt;sc&gt;}Lorem ipsum dolor sit amet{&lt;/sc&gt;}
 -* {&lt;souligne&gt;}Lorem ipsum dolor sit amet{&lt;/souligne&gt;}
 -* {&lt;barre&gt;}Lorem ipsum dolor sit amet{&lt;/barre&gt;}
 -* {&lt;dessus&gt;}Lorem ipsum dolor sit amet{&lt;/dessus&gt;}
 -* {&lt;clignote&gt;}Lorem ipsum dolor sit amet{&lt;/clignote&gt;}
--* {&lt;fluo&gt;}Lorem ipsum dolor sit amet{&lt;/fluo&gt;}
+-* {&lt;surfluo&gt;}Lorem ipsum dolor sit amet{&lt;/surfluo&gt;}
+-* {&lt;surgris&gt;}Lorem ipsum dolor sit amet{&lt;/surgris&gt;}
+
 Infos : [->http://www.spip-contrib.net/?article1552]",
 	'auteur' 		=> '[izo@aucuneid.net->http://www.aucuneid.com/bones]',
 	'include' 		=> 'decoration',
@@ -131,7 +133,8 @@ Infos : [->http://www.spip-contrib.net/?article1552]",
 add_tweak( array(
 	'nom'			=> 'Mises en exposant',
 	'description' 	=> "Textes fran&ccedil;ais : am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abr&eacute;viation correcte).
-_ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie nationale telles qu'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l'Imprimerie nationale, Paris, 2002).",
+_ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie nationale telles qu'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l'Imprimerie nationale, Paris, 2002).
+_ Infos : [->http://www.spip-contrib.net/?article1564]",
 	'auteur' 		=> 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
 	'include' 		=> 'typo_exposants',
 	'categorie'		=> _T('tweak:typo'),
@@ -142,7 +145,7 @@ _ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimeri
 add_tweak( array(
 	'nom'			=> 'Filets de S&eacute;paration',
 	'description' 	=> "Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans tous les textes de Spip.
-_ La syntaxe est : &quot;__N__&quot;, o&ugrave; &quot;N&quot; repr&eacute;sente le num&eacute;ro d&rsquo;identification (de 0 &agrave; 9) du filet &agrave; ins&eacute;rer, en relation directe avec les styles correspondants.
+_ La syntaxe est : &quot;__code__&quot;, o&ugrave; &quot;code&quot; repr&eacute;sente soit le num&eacute;ro d&rsquo;identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d'une image plac&eacute;e dans le dossier img/filets.
 _ Infos : [->http://www.spip-contrib.net/?article1563]",
 	'auteur' 		=> 'FredoMkb',
 	'include' 		=> 'filets_sep',
@@ -153,7 +156,7 @@ _ Infos : [->http://www.spip-contrib.net/?article1563]",
 
 add_tweak( array(
 	'nom'			=> 'Smileys',
-	'description' 	=> "Ins&egrave;re des smileys dans tous les textes o&ugrave; apparait un raccourcis du genre :{-}). Id&eacute;al pour les  forums.
+	'description' 	=> "Ins&egrave;re des smileys dans tous les textes o&ugrave; apparait un raccourci du genre <acronym>:-)</acronym>. Id&eacute;al pour les  forums.
 _ Infos : [->http://www.spip-contrib.net/?article1561]",
 	'auteur' 		=> 'Sylvain',
 	'include' 		=> 'smileys',

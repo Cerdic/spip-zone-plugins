@@ -4,7 +4,7 @@
 // Toutes les infos sur : http://www.spip-contrib.net/?article1564
 
 // cette fonction ne fonctionne que pour le francais
-// elle n'est pas appelee dans les balises html : cadre|code|acronym|cite
+// elle n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
 function typo_exposants_fr($texte){
 	$trouve = array(
 		'/(\\bM)e?(lles?)\\b/',		// Mlle(s), Mme(s) et erreurs Melle(s)
@@ -46,7 +46,7 @@ function typo_exposants($texte){
 	if (!$lang = $GLOBALS['lang_objet']) $lang = $GLOBALS['spip_lang'];
 	switch (lang_typo($lang)) {
 		case 'fr':
-			return tweak_exclure_balises('cadre|code|acronym|cite', 'typo_exposants_fr', $texte);
+			return tweak_exclure_balises('html|code|cadre|frame|script|acronym|cite', 'typo_exposants_fr', $texte);
 		default:
 			return $texte;
 	}

@@ -41,7 +41,7 @@ $smileys_rempl = array(
 // ':/'	=> 'mouais.png',	// conflit avec 'http://' par exemple
 );
 
-// cette fonction n'est pas appelee dans les balises html : cadre|code|acronym|cite
+// cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
 function tweak_rempl_smileys($texte) {
 	global $smileys_rempl;
 	// accessibilite : protection de alt et title
@@ -52,6 +52,6 @@ function tweak_rempl_smileys($texte) {
 }
 
 function tweak_smileys($texte) {
-	return tweak_exclure_balises('cadre|code|acronym|cite', 'tweak_rempl_smileys', $texte);
+	return tweak_exclure_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_smileys', $texte);
 }
 ?>

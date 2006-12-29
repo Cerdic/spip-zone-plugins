@@ -74,20 +74,15 @@ function tweak_lire_metas() {
 	tweaks_initialise_includes();
 }
 
-// evite les transformations typo dans les balises $balise
-// par exemple pour <cadre>, <code>, <acronym> et <cite>, $balise = 'cadre|code|acronym|cite'
-// $fonction est la fonction de transformation typo
+// evite les transformations typo dans les balises $balises
+// par exemple pour <html>, <cadre>, <code>, <frame>, <script>, <acronym> et <cite>, $balises = 'html|code|cadre|frame|script|acronym|cite'
+// $fonction est la fonction prevue pour transformer $texte
 // $texte est le texte d'origine
-// TODO : etudier echappe_html()
+// si $balises = '' alors la protection par defaut est : html|code|cadre|frame|script
 function tweak_exclure_balises($balises, $fonction, $texte){
-	$t=preg_split(",<(\/?)(($balises)[^>]*)>,", $texte, 3, PREG_SPLIT_DELIM_CAPTURE);
-	if (count($t)==1) return $fonction($t[0]);
-	if ($t[3]=='' || $t[7]=='') return $texte;
-	if ($t[1]=='' && $t[5]=='/' && $t[3]==$t[7]) 
-		return $fonction($t[0]).'<'.$t[2].'>'.$t[4].'</'.$t[6].'>'.tweak_exclure_balises($balises, $fonction, $t[8]);
-	else 
-		return $fonction($t[0]).'<'.$t[1].$t[2].'>'.$t[3].tweak_exclure_balises($balises, $fonction, '<'.$t[5].$t[6].'>'.$t[8]);
+	$balises = $balises==''?'':',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS';
+	$texte = echappe_retour($fonction(echappe_html($texte, 'TWEAKS', true, $balises)), 'TWEAKS');
+	return $texte;
 }
-
 
 ?>
