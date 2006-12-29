@@ -78,9 +78,11 @@ Sinon, utiliser le comportemant normal.
 ''
 })]
 [(#TYPE_DOCUMENT|=={Flash Video}|?{' '})
-<object type="application/x-shockwave-flash" data="#EVAL{_DIR_PLUGIN_PLAYER}player_flv.swf" width="[(#LARGEUR|=={0}|?{400,#LARGEUR})]" height="[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]">
+#SET{largeur,#ENV{largeur,#LARGEUR}}#SET{largeur,#GET{largeur}|?{#GET{largeur},400}}
+#SET{hauteur,#ENV{hauteur,#HAUTEUR}}#SET{hauteur,#GET{hauteur}|?{#GET{hauteur},300}}
+<object type="application/x-shockwave-flash" data="#EVAL{_DIR_PLUGIN_PLAYER}player_flv.swf" width="#GET{largeur}" height="#GET{hauteur}">
 <param name="movie" value="#EVAL{_DIR_PLUGIN_PLAYER}player_flv.swf" />
-<param name="FlashVars" value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=[(#LARGEUR|=={0}|?{400,#LARGEUR})]&amp;height=[(#HAUTEUR|=={0}|?{300,#HAUTEUR})]&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;title=[(#TITRE|urlencode)]&amp;startimage=[(#LOGO_DOCUMENT||extraire_attribut{src})]" />
+<param name="FlashVars" value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=#GET{largeur}&amp;height=#GET{hauteur}&amp;bgcolor1=ffffff&amp;bgcolor2=cccccc&amp;buttoncolor=999999&amp;buttonovercolor=0&amp;slidercolor1=cccccc&amp;slidercolor2=999999&amp;sliderovercolor=666666&amp;textcolor=0&amp;showstop=1&amp;title=[(#TITRE|urlencode)]&amp;startimage=[(#LOGO_DOCUMENT||extraire_attribut{src})]" />
 <param name="wmode" value="transparent" />
 [<span><a href="(#URL_DOCUMENT)" rel="enclosure">#URL_DOCUMENT</a></span>]
 </object>
