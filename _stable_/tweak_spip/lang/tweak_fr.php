@@ -12,9 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tweaks_liste' => 'Liste des tweaks',
 	'presente_tweaks' => "Cette page liste les tweaks disponibles.<br />Vous pouvez activer les tweaks n&eacute;cessaires en cochant la case correspondante.",
 // categories
-	'admin' => "Administration",
-	'typo' => "Typographie",
-	'divers' => "Divers",
+	'admin' => "1. Administration",
+	'typo' => "2. Typographie",
+	'divers' => "3. Divers",
 );
 
 
