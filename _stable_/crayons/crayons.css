@@ -13,6 +13,16 @@ img.crayon-edit, img.crayon-pencil {
 }
 .crayon-autorise:hover, .crayon-hover {
 /*    background-color: #f0f0f0; */
+	border:1px solid red;
+	margin:-1px !important;
+	position:relative;
+}
+* html .crayon-hover {
+	height:0;
+}
+*+html .crayon-hover {
+	height:auto;
+	zoom:1;
 }
 .crayon-boutons, .crayon-searching {
     float: right;
