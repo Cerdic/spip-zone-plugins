@@ -93,7 +93,7 @@ function _U($texte)
 function wdgcfg() {
 	$prepare_wdgcfg = function_exists('crayons_config') ? crayons_config() : array();
 	$wdgcfg = array();
-	foreach (array('msgNoChange' => false, 'msgAbandon' => true)
+	foreach (array('msgNoChange' => false, 'msgAbandon' => true, 'filet' => false, 'yellow_fade' => false)
 				as $prepare_wdgcfgi => $def) {
 		if (isset($prepare_wdgcfg[$prepare_wdgcfgi])) {
 			$wdgcfg[$prepare_wdgcfgi] = $prepare_wdgcfg[$prepare_wdgcfgi];

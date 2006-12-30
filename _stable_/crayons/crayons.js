@@ -286,7 +286,7 @@ jQuery.fn.initcrayon = function(){
   return this;
 }
 
-// Gestion du Yellow Fade
+// Gestion du Yellow Fade (fonctionnalite optionnelle)
 function easeInOut(minValue,maxValue,totalSteps,actualStep,powr) {
 	var delta = maxValue - minValue;
 	var stepp = minValue+(Math.pow(((1 / totalSteps)*actualStep),powr)*delta);
@@ -342,7 +342,39 @@ jQuery(document).ready(function() {
     .hidecrayon();
   });
   
-  // Activer le Yellow Fade pour les éléments éditables
-  $("div.crayon").hover(function(){doBGFade(this,[255,255,180],[255,255,255],'transparent',40,20,4);}, function(){});
+	if (configCrayons.cfg.yellow_fade) {
+		// Activer le Yellow Fade pour les elements editables
+		$("div.crayon").hover(function(){doBGFade(this,[255,255,180],[255,255,255],'transparent',40,20,4);}, function(){});
+	}
+  
+  if (configCrayons.cfg.filet) {
+  	// Modification du style pour permettre d'avoir un filet lors du hover
+		
+		var crayonBorder;
+		var crayonMargin;
+		
+		$('.crayon-autorise, .crayon-hover').hover(
+			function(){
+				crayonBorder = $(this).css('border');
+				crayonMargin = $(this).css('margin');
+		 		$('.crayon-icones img',this).css({
+					'padding':'2px',
+					'border':'2px solid #999',
+					'border-left':'0',
+					'background-color':'#FFF'
+				});
+				$(this).css({
+		  		'border':'1px solid red',
+		  		'margin':'-1px !important'
+	 			})
+			},
+			function(){
+				$(this).css({
+		  		'border':crayonBorder,
+		  		'margin':crayonMargin
+	 			})
+			}
+		);
+  }
   
 });
