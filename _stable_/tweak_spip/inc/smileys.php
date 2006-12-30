@@ -16,7 +16,8 @@ $smileys_rempl = array(
  ":'-))"=> 'pleure_de_rire.png',
 
 // les simples :
- ':->'	=> 'diable.png',
+// ':->'	=> 'diable.png',	// remplace par le suivant...
+ ':-&gt;' => 'diable.png',
  ':-('	=> 'pas_content.png',
  ':-D'	=> 'mort_de_rire.png',
  ':-)'	=> 'sourire.png',
@@ -33,7 +34,7 @@ $smileys_rempl = array(
  ':-o'	=> 'surpris.png',
  ':-O'	=> 'surpris.png',
 
-// les courts a tester...
+// les courts : tester a l'usage...
  ':)'	=> 'sourire.png',
  ';)'	=> 'clin_d-oeil.png',
  ':|'	=> 'bof.png',
@@ -44,6 +45,8 @@ $smileys_rempl = array(
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
 function tweak_rempl_smileys($texte) {
 	global $smileys_rempl;
+	// smileys a probleme :
+	$texte = str_replace(':->', ':-&gt;', $texte);
 	// accessibilite : protection de alt et title
 	foreach ($smileys_rempl as $smy=>$val) $texte = str_replace($smy, '<img alt="@@64@@'.base64_encode($smy).'@@65@@" title="@@64@@'.base64_encode($smy).'@@65@@" src="'._CHEMIN_SMILEYS.$val.'">', $texte);
 	// accessibilite : alt et title avec le smiley en texte
