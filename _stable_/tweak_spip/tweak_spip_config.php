@@ -50,12 +50,14 @@ add_tweak( array(
 add_tweak( array(
 	'id'	=> 'verstexte',
 	'auteur' 	=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
+	'categorie'	=> 'squel',
 	'fonctions'	=> 1,
 ));
 
 add_tweak( array(
 	'id'	=> 'orientation',
 	'auteur' 		=> 'Pierre Andrews (Mortimer) &amp; IZO',
+	'categorie'	=> 'squel',
 	'fonctions'		=> 1,
 ));
 

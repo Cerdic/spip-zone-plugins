@@ -18,7 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // categories
 	'admin' => "1. Administration",
 	'typo' => "2. Typographie",
-	'divers' => "3. Divers",
+	'squel' => "3. Squelettes",
+	'divers' => "4. Divers",
 	
 // Les tweaks
 	'desactive_cache:nom' => 'D&eacute;sactiver le cache',
@@ -36,7 +37,7 @@ _ version_texte : extrait le contenu texte d'une page html &agrave; l'exclusion 
 _ version_plein_texte : extrait le contenu texte d'une page html pour rendre du texte plein.",
 
 	'orientation:nom' => 'Orientation des images',
-	'orientation:description'	=> "3 nouveauw crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&egrave;al pour le classement des photos en fonction de leur forme.
+	'orientation:description'	=> "3 nouveaux crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&egrave;al pour le classement des photos en fonction de leur forme.
 _ Infos : [->http://www.spip-contrib.net/Portrait-ou-Paysage]",
 
 	'desactiver_flash:nom' => 'D&eacute;sactiver les objects flash',
