@@ -13,14 +13,14 @@ $tweaks = array();
 //-----------------------------------------------------------------------------//
 //                               options                                       //
 //-----------------------------------------------------------------------------//
-
+/*
 add_tweak( array(
 	'id'	=> 'revision_nbsp',
 	'code' 	=> '$GLOBALS["activer_revision_nbsp"] = true; $GLOBALS["test_i18n"] = true ;',
 	'categorie'	=> 'admin',
 	'options'	=> 1,
 ));
-
+*/
 add_tweak( array(
 	'id'	=> 'desactive_cache',
 	'code' 	=> '$_SERVER["REQUEST_METHOD"]="POST";',
