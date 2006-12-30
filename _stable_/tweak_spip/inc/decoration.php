@@ -2,6 +2,7 @@
 
 /*
    Ce tweak decoration permet aux redacteurs d'un site spip de d'appliquer les styles souligné, barré, au dessus aux textes SPIP
+   Attention : seules les balises en minuscules sont reconnues.
 */
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script

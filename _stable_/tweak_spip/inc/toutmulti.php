@@ -1,10 +1,8 @@
 <?php
 /*
-
  - toutmulti -
  introduit le raccourci <:texte:> pour introduire librement des
  blocs multi dans un flux de texte (via typo ou propre)
-
 */
 
 function ToutMulti_pre_typo($texte) {

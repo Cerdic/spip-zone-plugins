@@ -1,11 +1,10 @@
 <?php
-#---------------------------------------------------#
-#  Plugin  : Tweak SPIP                             #
-#  Auteur  : Patrice Vanneufville, 2006             #
-#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
-#  Licence : GPL                                    #
-#  Infos : http://www.spip-contrib.net/?article1554 #
-#---------------------------------------------------#
+#-----------------------------------------------------#
+#  Plugin  : Tweak SPIP - Licence : GPL               #
+#  Auteur  : Patrice Vanneufville, 2006               #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
+#  Infos : http://www.spip-contrib.net/?article1554   #
+#-----------------------------------------------------#
 
 include_spip('tweak_spip_config');
 
@@ -19,14 +18,15 @@ function add_tweak($tableau) {
 function include_tweaks($type) {
 	global $tweaks_pipelines;
 	foreach ($tweaks_pipelines['inc_'.$type] as $inc) include_spip('inc/'.$inc);
+	foreach ($tweaks_pipelines['code_'.$type] as $code) eval($code);
 }
 
 // passe le $flux dans le $pipeline ...
 function tweak_pipeline($pipeline, $flux) {
 	global $tweaks, $tweaks_pipelines;
 	if (isset($tweaks_pipelines[$pipeline])) {
-		foreach ($tweaks_pipelines[$pipeline][0] as $inc) include_spip('inc/'.$inc);
-		foreach ($tweaks_pipelines[$pipeline][1] as $fonc) if (function_exists($fonc)) $flux = $fonc($flux);
+		foreach ($tweaks_pipelines[$pipeline]['inclure'] as $inc) include_spip('inc/'.$inc);
+		foreach ($tweaks_pipelines[$pipeline]['fonction'] as $fonc) if (function_exists($fonc)) $flux = $fonc($flux);
 	}
 	return $flux;
 }
@@ -39,35 +39,45 @@ function tweak_insert_css() {
 	return $head;
 }
 
-// met a jour : $tweaks_pipelines, $tweaks_css
+// initialise : $tweaks_pipelines, $tweaks_css
 function tweaks_initialise_includes() {
   global $tweaks, $tweak_exclude, $tweaks_pipelines, $tweaks_css;
+  $tweaks_pipelines = $tweaks_css = false;
   foreach ($tweaks as $i=>$tweak) {
 	// stockage de la liste des fonctions par pipeline, si le tweak est actif...
 	if ($tweak['actif']) {
+		$inc = $tweak['id'];
 		foreach ($tweak as $pipe=>$fonc) if(!in_array($pipe, $tweak_exclude)) {
-			$tweaks_pipelines[$pipe][0][] = $tweak['include'];
-			$tweaks_pipelines[$pipe][1][] = $fonc;
+			$tweaks_pipelines[$pipe]['inclure'][] = $inc;
+			$tweaks_pipelines[$pipe]['fonction'][] = $fonc;
 		}
-		$f = find_in_path('inc/'.$tweak['include'].'.css');
-		include_spip('inc/filtres');
-		if ($f) $tweaks_css[] = '<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="projection, screen" />';
-		if ($tweak['options']) $tweaks_pipelines['inc_options'][] = $tweak['include'];
-		if ($tweak['fonctions']) $tweaks_pipelines['inc_fonctions'][] = $tweak['include'];
+		$f = find_in_path('inc/'.$inc.'.css');
+		if ($f) {
+			include_spip('inc/filtres');
+			$tweaks_css[] = '<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="projection, screen" />';
+		}
+		if (isset($tweak['code'])) { $inc = $tweak['code']; $prefixe = 'code_'; }
+			else $prefixe = 'inc_';
+		if ($tweak['options']) $tweaks_pipelines[$prefixe.'options'][] = $inc;
+		if ($tweak['fonctions']) $tweaks_pipelines[$prefixe.'fonctions'][] = $inc;
 	}
   }
 }
 
-// lire les metas et initialiser $tweaks_pipelines
-function tweak_lire_metas() {
-	global $tweaks, $tweaks_pipelines;
+// lit les metas et initialise $tweaks_pipelines et les includes
+function tweak_initialisation() {
+	global $tweaks;
 	include_spip('inc/meta');
 	lire_metas();
 	$metas_tweaks = unserialize($GLOBALS['meta']['tweaks']);
-	// incorporer l'activite lue dans les metas et completer les categories
+	// completer les variables manquantes et incorporer l'activite lue dans les metas
 	foreach($temp = $tweaks as $i=>$tweak) {
-		$tweaks[$i]['actif'] = isset($metas_tweaks[$tweak['include']])?$metas_tweaks[$tweak['include']]['actif']:0;
+		if (!isset($tweak['id'])) { $tweaks[$i]['id']='erreur'; $tweaks[$i]['nom'] = _T('tweak:erreur_id');	}
 		if (!isset($tweak['categorie'])) $tweaks[$i]['categorie'] = _T('tweak:divers');
+			else $tweaks[$i]['categorie'] = _T('tweak:'.$tweaks[$i]['categorie']);
+		if (!isset($tweak['nom'])) $tweaks[$i]['nom'] = _T('tweak:'.$tweak['id'].':nom');
+		if (!isset($tweak['description'])) $tweaks[$i]['nom'] = _T('tweak:'.$tweak['id'].':description');
+		$tweaks[$i]['actif'] = isset($metas_tweaks[$tweaks[$i]['id']])?$metas_tweaks[$tweaks[$i]['id']]['actif']:0;
 	}
 	ecrire_meta('tweaks', serialize($metas_tweaks));
 	ecrire_metas();
@@ -80,7 +90,7 @@ function tweak_lire_metas() {
 // $texte est le texte d'origine
 // si $balises = '' alors la protection par defaut est : html|code|cadre|frame|script
 function tweak_exclure_balises($balises, $fonction, $texte){
-	$balises = $balises==''?'':',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS';
+	$balises = strlen($balises)?'':',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS';
 	$texte = echappe_retour($fonction(echappe_html($texte, 'TWEAKS', true, $balises)), 'TWEAKS');
 	return $texte;
 }

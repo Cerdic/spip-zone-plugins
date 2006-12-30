@@ -1,10 +1,10 @@
 <?php
-#---------------------------------------------------#
-#  Plugin  : Tweak SPIP                             #
-#  Auteur  : Patrice Vanneufville, 2006             #
-#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net #
-#  Licence : GPL                                    #
-#---------------------------------------------------#
+#-----------------------------------------------------#
+#  Plugin  : Tweak SPIP - Licence : GPL               #
+#  Auteur  : Patrice Vanneufville, 2006               #
+#  Contact : patrice¡.!vanneufville¡@!laposte¡.!net   #
+#  Infos : http://www.spip-contrib.net/?article1554   #
+#-----------------------------------------------------#
 
 include_spip('inc/texte');
 include_spip('inc/layer');
@@ -84,7 +84,7 @@ function enregistre_modif_tweaks(){
 	global $tweaks;
 	// recuperer les tweaks dans l'ordre des $_POST
 	$test = array();
-	foreach($tweaks as $tweak) $test["tweak_".$tweak['include']] = $tweak['include'];
+	foreach($tweaks as $tweak) $test["tweak_".$tweak['id']] = $tweak['id'];
 	$liste = array();
 	if (!isset($_POST['desactive_tous']))
 		foreach($_POST as $choix=>$val) if (isset($test[$choix])&&$val=='O') $liste[$test[$choix]]['actif'] = 1;
@@ -123,8 +123,9 @@ function exec_tweak_spip_admin() {
 //	else
 //		verif_tweaks();
 
-	tweak_lire_metas();
-
+	tweak_initialisation();
+//	print_r($tweaks);global $tweaks_pipelines; print_r($tweaks_pipelines);
+	
 	global $spip_version_code;
 	if ($spip_version_code<1.92) 
   		debut_page(_T('tweak:titre'), 'configuration', 'tweak_spip');
@@ -133,8 +134,7 @@ function exec_tweak_spip_admin() {
 		echo $commencer_page(_T('tweak:titre'), "configuration", "tweak_spip");
 	}
 	
-  tweak_styles_et_js();
-
+	tweak_styles_et_js();
 	echo "<br /><br /><br />";
 	gros_titre(_T('tweak:titre'));
 	echo barre_onglets("configuration", "tweak_spip");
@@ -153,12 +153,9 @@ function exec_tweak_spip_admin() {
 
 	debut_cadre_trait_couleur('administration-24.gif','','',_T('tweak:tweaks_liste'));
 
-	global $couleur_foncee;
-	echo "\n<table border='0' cellspacing='0' cellpadding='5' >";
-
-	echo "<tr><td class='serif'>";
-	echo '<p>'._T('tweak:presente_tweaks').'</p><br/>';
-
+	echo "\n<table border='0' cellspacing='0' cellpadding='5' >",
+		"<tr><td class='serif'>",
+		'<p>'._T('tweak:presente_tweaks').'</p><br/>';
 	foreach($temp = $tweaks as $tweak) $categ[$tweak['categorie']] = 1; ksort($categ);
 	foreach(array_keys($categ) as $c) {
 		echo '<p><strong>'._T('tweak:'.$c).'</strong></p>';
@@ -166,12 +163,11 @@ function exec_tweak_spip_admin() {
 		foreach($temp = $tweaks as $tweak) if ($tweak['categorie']==$c) echo '<li>' . ligne_tweak($tweak) . "</li>\n"; 
 		echo '</ul>';
 	}
-	
-	echo "</td></tr></table>\n";
+	echo "</td></tr></table>\n",
 
-	echo "\n<div style='text-align:$spip_lang_right'>";
-	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' ";
-	echo "\"></div>";
+		"\n<div style='text-align:$spip_lang_right'>",
+		"<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' ",
+		"\"></div>";
 
 # ce bouton est trop laid :-)
 # a refaire en javascript, qui ne fasse que "decocher" les cases
@@ -198,7 +194,7 @@ function is_tweak_pipeline($pipe) {
 // affiche un tweak sur une ligne
 function ligne_tweak($tweak){
 	static $id_input=0;
-	$inc = $tweak_id = $tweak['include'];
+	$inc = $tweak_id = $tweak['id'];
 	$actif = $tweak['actif'];
 	$puce = $actif?'puce-verte.gif':'puce-rouge.gif';
 	$titre_etat = _T('tweak:'.($actif?'':'in').'actif');
