@@ -42,7 +42,7 @@ function tweak_insert_css() {
 // initialise : $tweaks_pipelines, $tweaks_css
 function tweaks_initialise_includes() {
   global $tweaks, $tweak_exclude, $tweaks_pipelines, $tweaks_css;
-  $tweaks_pipelines = $tweaks_css = false;
+  $tweaks_pipelines = $tweaks_css = array();
   foreach ($tweaks as $i=>$tweak) {
 	// stockage de la liste des fonctions par pipeline, si le tweak est actif...
 	if ($tweak['actif']) {
@@ -76,7 +76,7 @@ function tweak_initialisation() {
 		if (!isset($tweak['categorie'])) $tweaks[$i]['categorie'] = _T('tweak:divers');
 			else $tweaks[$i]['categorie'] = _T('tweak:'.$tweaks[$i]['categorie']);
 		if (!isset($tweak['nom'])) $tweaks[$i]['nom'] = _T('tweak:'.$tweak['id'].':nom');
-		if (!isset($tweak['description'])) $tweaks[$i]['nom'] = _T('tweak:'.$tweak['id'].':description');
+		if (!isset($tweak['description'])) $tweaks[$i]['description'] = _T('tweak:'.$tweak['id'].':description');
 		$tweaks[$i]['actif'] = isset($metas_tweaks[$tweaks[$i]['id']])?$metas_tweaks[$tweaks[$i]['id']]['actif']:0;
 	}
 	ecrire_meta('tweaks', serialize($metas_tweaks));
@@ -90,7 +90,7 @@ function tweak_initialisation() {
 // $texte est le texte d'origine
 // si $balises = '' alors la protection par defaut est : html|code|cadre|frame|script
 function tweak_exclure_balises($balises, $fonction, $texte){
-	$balises = strlen($balises)?'':',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS';
+	$balises = strlen($balises)?',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS':'';
 	$texte = echappe_retour($fonction(echappe_html($texte, 'TWEAKS', true, $balises)), 'TWEAKS');
 	return $texte;
 }

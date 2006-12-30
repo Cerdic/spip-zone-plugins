@@ -124,7 +124,6 @@ function exec_tweak_spip_admin() {
 //		verif_tweaks();
 
 	tweak_initialisation();
-//	print_r($tweaks);global $tweaks_pipelines; print_r($tweaks_pipelines);
 	
 	global $spip_version_code;
 	if ($spip_version_code<1.92) 
@@ -225,10 +224,10 @@ function ligne_tweak($tweak){
 	$s .= "\n<div class='detailtweak'>";
 	if (isset($tweak['description'])) $s .= propre($tweak['description']);
 	if (isset($tweak['auteur'])) $s .= "<p>" . _T('auteur') .' '. propre($tweak['auteur']) . "</p>";
-	$s .= "<hr/>" . _T('tweak:tweak') . " $inc.php";
+	$s .= "<hr/>" . _T('tweak:tweak') . (isset($tweak['code'])?" code":" $inc.php");
 	if ($tweak['options']) $s .= ' | options';
 	if ($tweak['fonctions']) $s .= ' | fonctions';
-	foreach ($tweak as $pipe=>$fonc) if(is_tweak_pipeline($pipe)) $s .= ' | '.$pipe;
+	foreach ($tweak as $pipe=>$fonc) if (is_tweak_pipeline($pipe)) $s .= ' | '.$pipe;
 	$s .= "</div>";
 
 	$s .= fin_block();
