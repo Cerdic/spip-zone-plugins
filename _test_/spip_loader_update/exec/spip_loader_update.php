@@ -17,7 +17,7 @@ function exec_spip_loader_update() {
 	$meta_paquet = unserialize($GLOBALS['meta']['spip_loader']);
 
 	debut_page(_L('Update Spip_Loader'), "configuration", "configuration");
-	echo "<br><br><br>";
+	echo "<br /><br /><br />";
 	gros_titre(_L('Update Spip_Loader'));
 
 
@@ -98,6 +98,7 @@ function exec_spip_loader_update() {
 
 		fin_boite_info();
 
+	creer_colonne_droite();
 	debut_droite();
 
 	if($le_paquet = _request('paquet')) {
@@ -152,7 +153,7 @@ function exec_spip_loader_update() {
 		echo "<ul>\n".$liste."</ul>\n";
 	}
 
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 
 }
 
