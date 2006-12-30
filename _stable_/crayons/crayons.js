@@ -344,7 +344,7 @@ jQuery(document).ready(function() {
   
 	if (configCrayons.cfg.yellow_fade) {
 		// Activer le Yellow Fade pour les elements editables
-		$("div.crayon").hover(function(){doBGFade(this,[255,255,180],[255,255,255],'transparent',40,20,4);}, function(){});
+		jQuery("div.crayon").hover(function(){doBGFade(this,[255,255,180],[255,255,255],'transparent',40,20,4);}, function(){});
 	}
   
   if (configCrayons.cfg.filet) {
@@ -353,25 +353,27 @@ jQuery(document).ready(function() {
 		var crayonBorder;
 		var crayonMargin;
 		
-		$('.crayon-autorise, .crayon-hover').hover(
+		jQuery('.crayon-autorise, .crayon-hover').hover(
 			function(){
-				crayonBorder = $(this).css('border');
-				crayonMargin = $(this).css('margin');
-		 		$('.crayon-icones img',this).css({
+				jQuery('.crayon-icones img',this).css({
 					'padding':'2px',
 					'border':'2px solid #999',
 					'border-left':'0',
 					'background-color':'#FFF'
 				});
-				$(this).css({
-		  		'border':'1px solid red',
-		  		'margin':'-1px !important'
-	 			})
+				jQuery(this).css({
+		  		'border':'1px solid red'
+	 			});
+	 			if (!jQuery.browser.msie) {
+					jQuery(this).css({
+			  		'margin':'-1px !important'
+		 			});
+				}
 			},
 			function(){
-				$(this).css({
-		  		'border':crayonBorder,
-		  		'margin':crayonMargin
+				jQuery(this).css({
+		  		'border':0,
+		  		'margin':0
 	 			})
 			}
 		);
