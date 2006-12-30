@@ -15,6 +15,13 @@ $tweaks = array();
 //-----------------------------------------------------------------------------//
 
 add_tweak( array(
+	'id'	=> 'revision_nbsp',
+	'code' 	=> '$GLOBALS["activer_revision_nbsp"] = true; $GLOBALS["test_i18n"] = true ;',
+	'categorie'	=> 'admin',
+	'options'	=> 1,
+));
+
+add_tweak( array(
 	'id'	=> 'desactive_cache',
 	'code' 	=> '$_SERVER["REQUEST_METHOD"]="POST";',
 	'auteur'	=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
@@ -94,6 +101,7 @@ add_tweak( array(
 ));
 
 // tweak specifiquement français. D'autres langues peuvent etre ajoutees dans inc/typo_exposants.php
+// TODO : le dire sur spip-contrib
 add_tweak( array(
 	'id'	=> 'typo_exposants',
 	'auteur' 		=> 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
@@ -122,6 +130,10 @@ add_tweak( array(
 // http://www.spip-contrib.net/Citations
 // http://www.spip-contrib.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
 // http://www.spip-contrib.net/Ajouter-une-lettrine-aux-articles
+// Les sommaires. voir :     
+//		$GLOBALS['debut_intertitre'] = "<h3 class='mon_style_h3'>";
+//		$GLOBALS['fin_intertitre'] = "</h3>";
+// http://www.spip-contrib.net/Generation-automatique-de
 
 //-----------------------------------------------------------------------------//
 //                        activation des tweaks                                //
