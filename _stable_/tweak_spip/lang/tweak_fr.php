@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'desactive_cache:nom' => 'D&eacute;sactiver le cache',
 	'desactive_cache:description'	=> 'Inhibition du cache de SPIP pour le d&eacute;veloppement du site.',
 
-	'supprimer_numero:nom' => 'Supprimer le num&eacute;ro',
+	'supprimer_numero:nom' => 'Supprimer le num&eacute;ro des titres',
 	'supprimer_numero:description'	=> "Applique la fonction SPIP supprimer_numero() &agrave; l'ensemble des {{titres}} du site, sans que le filtre supprimer_numero soit pr&eacute;sent dans les squelettes.",
 
 	'paragrapher:nom' => 'Paragrapher',
