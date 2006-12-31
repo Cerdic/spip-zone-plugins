@@ -1,7 +1,7 @@
 <?php
 /* insert le css et le js externes pour Crayons dans le <head>
  *
- *  Crayons plugin for spip (c) Fil , toggg 2006 -- licence GPL
+ *  Crayons plugin for spip (c) Fil, toggg 2006-2007 -- licence GPL
  */
 
 // Dire rapidement si ca vaut le coup de chercher des droits
@@ -23,7 +23,7 @@ function Crayons_affichage_final($page) {
     if (!strpos($page, 'crayon'))
         return $page;
 
-    // voire un peu plus precisement lesquelles
+    // voir un peu plus precisement lesquelles
     include_spip('inc/crayons');
     if (!preg_match_all(_PREG_CRAYON, $page, $regs, PREG_SET_ORDER))
         return $page;
@@ -42,9 +42,9 @@ function Crayons_affichage_final($page) {
     }
 
     // et les signaler dans la page
-    if ($droits_accordes == count($regs))
+    if ($droits_accordes == count($regs)) // tous les droits
         $page = Crayons_preparer_page($page, array('*'), $wdgcfg);
-    else if ($droits)
+    else if ($droits) // seulement certains droits, preciser lesquels
         $page = Crayons_preparer_page($page, array_keys($droits), $wdgcfg);
 
     return $page;
@@ -85,16 +85,30 @@ function Crayons_preparer_page($page, $droits, $wdgcfg = array()) {
 //    $txtErrInterdit = addslashes(unicode_to_javascript(html2unicode(_T(
 //        'crayons:erreur_ou_interdit'))));
 
+	$pos_head = strpos($page, '</head>');
+	if ($pos_head === false)
+		return $page;
+
+	// on inclut jquery s'il n'y est pas deja (s'il y est et qu'on ne l'a pas
+	// repere, ce n'est pas grave...)
+	if (!preg_match(',<script[^<>]*jquery,i', substr($page,0,$pos_head)))
+		$inclure_jquery = '<script src="'
+		. generer_url_public('jquery.js')
+		. '" type="text/javascript"></script>';
+	else
+		$inclure_jquery = '';
+
     $incHead = <<<EOH
 
-<link rel="stylesheet" href="$cssFile" type="text/css" media="all" />
+<link rel="stylesheet" href="{$cssFile}" type="text/css" media="all" />
+{$inclure_jquery}
 <script src="{$jsFile}" type="text/javascript"></script>
 <script type="text/javascript">
     var configCrayons = new cfgCrayons({$config});
 </script>
 EOH;
 
-    return substr_replace($page, $incHead, strpos($page, '</head>'), 0);
+    return substr_replace($page, $incHead, $pos_head, 0);
 }
 
 // #EDIT{ps} pour appeler le crayon ps ;
