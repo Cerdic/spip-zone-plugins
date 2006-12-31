@@ -273,7 +273,7 @@ jQuery.fn.initcrayon = function(){
   .iconecrayon();
 
   // :hover pour MSIE
-  if (jQuery.browser.msie) {
+  /*if (jQuery.browser.msie) {
     this.hover(
       function(){
         jQuery(this).addClass('crayon-hover');
@@ -281,7 +281,7 @@ jQuery.fn.initcrayon = function(){
         jQuery(this).removeClass('crayon-hover');
       }
     );
-  }
+  }*/
 
   return this;
 }
@@ -309,6 +309,19 @@ function doBGFade(elem,startRGB,endRGB,finalColor,steps,intervals,powr) {
 			}
 		}
 		,intervals)
+}
+
+function findPos(obj) {
+	var curleft = curtop = 0;
+	if (obj.offsetParent) {
+		curleft = obj.offsetLeft
+		curtop = obj.offsetTop
+		while (obj = obj.offsetParent) {
+			curleft += obj.offsetLeft
+			curtop += obj.offsetTop
+		}
+	}
+	return [curleft,curtop];
 }
 
 // demarrage
@@ -348,35 +361,61 @@ jQuery(document).ready(function() {
 	}
   
   if (configCrayons.cfg.filet) {
-  	// Modification du style pour permettre d'avoir un filet lors du hover
+		// on rajoute une div supplémentaire qui se cale avec la div courante 
+		// C'est elle qui va s'afficher lors du hover
+		$('body').append('<div id="survol" style="width:0;height:0"></div>');
 		
-		var crayonBorder;
-		var crayonMargin;
-		
-		jQuery('.crayon-autorise, .crayon-hover').hover(
+		// esthetique
+		jQuery('.crayon-icones img',this).css({
+			'padding':'2px',
+			'border':'2px solid #999',
+			'border-left':'0',
+			'background-color':'#FFF'
+		});
+			
+		jQuery('.crayon-autorise').hover(
 			function(){
-				jQuery('.crayon-icones img',this).css({
-					'padding':'2px',
-					'border':'2px solid #999',
-					'border-left':'0',
-					'background-color':'#FFF'
-				});
-				jQuery(this).css({
-		  		'border':'1px solid red'
-	 			});
-	 			if (!jQuery.browser.msie) {
-					jQuery(this).css({
-			  		'margin':'-1px !important'
-		 			});
-				}
+			  var me=this;
+				if (!$('#survol').width() || $('#survol').css('display')=='none') {
+			    var pos = findPos(me);
+					$('#survol')
+						.css('border','1px solid red')
+						.css('display','block')
+						.top(pos[1]+'px')
+						.position('absolute')
+						.left(pos[0]+'px')
+						.height(me.offsetHeight+'px')
+						.width((me.offsetWidth - 2)+'px');
+					if (jQuery.browser.msie) {
+				    $('#survol')
+							.left((pos[0]-me.offsetWidth)+'px')
+							.width(me.offsetWidth+'px');
+					}
+				  jQuery(me).addClass('crayon-hover');
+				} 
 			},
 			function(){
-				jQuery(this).css({
-		  		'border':0,
-		  		'margin':0
-	 			})
+				// IE considère que le hover est perdu uniquement lorsque la souris 
+				// n'est plus sur la zone délimitee par la div.
+				// Les autres navigateurs considèrent que c'est la nouvelle div (survol)
+				// qui a capture le focus. 
+				if (jQuery.browser.msie) {
+					jQuery(this).removeClass('crayon-hover');
+					$('#survol').hide();
+				}
 			}
 		);
+
+		if (!jQuery.browser.msie) {
+			jQuery('#survol').hover(
+				function(){
+				},
+				function(){
+					jQuery('.crayon-autorise').removeClass('crayon-hover');
+				  $(this).hide();
+				}
+			);
+		}
   }
   
 });
