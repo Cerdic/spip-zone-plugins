@@ -375,7 +375,16 @@ jQuery(document).ready(function() {
 		var test=0;
 		
 		jQuery('.crayon-autorise').each(
-		function(){
+			function(){
+				var contenu = $(this).html();
+				$(this)
+					.height(this.offsetHeight + 'px')
+					.html('<div></div>');
+				$(this)
+					.find('div')
+						.html(contenu)
+						.position('absolute')
+						.width(this.offsetWidth + 'px')
 				$(this)
 					.prepend('<div class="survol"></div>')
 					.find('.survol')
