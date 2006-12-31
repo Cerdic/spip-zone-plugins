@@ -273,7 +273,7 @@ jQuery.fn.initcrayon = function(){
   .iconecrayon();
 
   // :hover pour MSIE
-  /*if (jQuery.browser.msie) {
+  if (jQuery.browser.msie) {
     this.hover(
       function(){
         jQuery(this).addClass('crayon-hover');
@@ -281,7 +281,7 @@ jQuery.fn.initcrayon = function(){
         jQuery(this).removeClass('crayon-hover');
       }
     );
-  }*/
+  }
 
   return this;
 }
@@ -363,7 +363,6 @@ jQuery(document).ready(function() {
   if (configCrayons.cfg.filet) {
 		// on rajoute une div supplémentaire qui se cale avec la div courante 
 		// C'est elle qui va s'afficher lors du hover
-		$('body').append('<div id="survol" style="width:0;height:0"></div>');
 		
 		// esthetique
 		jQuery('.crayon-icones img',this).css({
@@ -373,49 +372,37 @@ jQuery(document).ready(function() {
 			'background-color':'#FFF'
 		});
 			
-		jQuery('.crayon-autorise').hover(
-			function(){
-			  var me=this;
-				if (!$('#survol').width() || $('#survol').css('display')=='none') {
-			    var pos = findPos(me);
-					$('#survol')
+		var test=0;
+		
+		jQuery('.crayon-autorise').each(
+		function(){
+				$(this)
+					.prepend('<div class="survol"></div>')
+					.find('.survol')
 						.css('border','1px solid red')
-						.css('display','block')
-						.top(pos[1]+'px')
+						.css('display','none')
 						.position('absolute')
-						.left(pos[0]+'px')
-						.height(me.offsetHeight+'px')
-						.width((me.offsetWidth - 2)+'px');
-					if (jQuery.browser.msie) {
-				    $('#survol')
-							.left((pos[0]-me.offsetWidth)+'px')
-							.width(me.offsetWidth+'px');
-					}
-				  jQuery(me).addClass('crayon-hover');
-				} 
-			},
-			function(){
-				// IE considère que le hover est perdu uniquement lorsque la souris 
-				// n'est plus sur la zone délimitee par la div.
-				// Les autres navigateurs considèrent que c'est la nouvelle div (survol)
-				// qui a capture le focus. 
+						.height((this.offsetHeight - 2) + 'px')
+						.width((this.offsetWidth - 2) + 'px');
 				if (jQuery.browser.msie) {
-					jQuery(this).removeClass('crayon-hover');
-					$('#survol').hide();
+			    $('#survol')
+						.width(this.offsetWidth + 'px')
+						.height(this.offsetHeight + 'px');
 				}
 			}
 		);
 
-		if (!jQuery.browser.msie) {
-			jQuery('#survol').hover(
-				function(){
-				},
-				function(){
-					jQuery('.crayon-autorise').removeClass('crayon-hover');
-				  $(this).hide();
-				}
-			);
-		}
-  }
-  
+		jQuery('.crayon-autorise').hover(
+			function(){
+				if (jQuery.browser.msie) jQuery(this).addClass('crayon-hover');
+				$('.survol', this).css('display','block');
+			},
+			function(){
+				if (jQuery.browser.msie) jQuery(this).removeClass('crayon-hover');
+				$('.survol', this).css('display','none');
+			}
+		);
+		
+	}
+
 });
