@@ -227,6 +227,30 @@ if($valider) {
            }
        }*/
 
+	// l'auteur demande une insertion dans l'agenda
+	if ($choix_agenda == "OK") {
+
+		// construction de la date complete
+		$tableau = split('[:]', $heure);
+		$heure = $tableau[0];
+		$minute = $tableau[1];
+
+		$date_complete = date('Y-m-d H:i:s',mktime($heure, $minute, 0, $mois, $jour, $annee));
+		// construction lien URL désactivé
+		//$lien_url = $url_site . 'spip.php?article' . $article;
+		$lien_url = '';
+
+		spip_abstract_insert('spip_breves', "(id_breve,date_heure,titre,texte,lien_url,statut,id_rubrique)", "(
+		" . intval($id_breve_op) .",
+		" . spip_abstract_quote($date_complete) . ",
+		" . spip_abstract_quote($titre) . ",
+		" . spip_abstract_quote($texte) . ",
+		" . spip_abstract_quote($lien_url) . ",
+		" . spip_abstract_quote($statut) . ",
+		" . spip_abstract_quote($rubrique_breve) . "
+		)");
+	}
+	else { // soit il s'agit d'un article, soit d'une breve. Les deux à la fois ne sont pas possible
 	/*
 	 * préparation de la mise en base de donnée
 	 */
@@ -275,29 +299,7 @@ if($valider) {
 		" . spip_abstract_quote($phone) . "
 		)");
 
-	// l'auteur demande aussi une insertion dans l'agenda
-	if ($choix_agenda == "OK") {
-
-		// construction de la date complete
-		$tableau = split('[:]', $heure);
-		$heure = $tableau[0];
-		$minute = $tableau[1];
-
-		$date_complete = date('Y-m-d H:i:s',mktime($heure, $minute, 0, $mois, $jour, $annee));
-		// construction lien URL
-		$lien_url = $url_site . 'spip.php?article' . $article;
-
-		spip_abstract_insert('spip_breves', "(id_breve,date_heure,titre,texte,lien_url,statut,id_rubrique)", "(
-		" . intval($id_breve_op) .",
-		" . spip_abstract_quote($date_complete) . ",
-		" . spip_abstract_quote($titre) . ",
-		" . spip_abstract_quote($texte) . ",
-		" . spip_abstract_quote($lien_url) . ",
-		" . spip_abstract_quote($statut) . ",
-		" . spip_abstract_quote($rubrique_breve) . "
-		)");
-	}
-
+	} // fin du else
 	// re-calcul du site
 	include_spip('inc/invalideur');
 	purger_repertoire(_DIR_CACHE, 0);
