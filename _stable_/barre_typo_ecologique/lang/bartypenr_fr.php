@@ -18,6 +18,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_ea_maj' => 'Ins&eacute;rer un E dans l\'A majuscule',
 'barre_c_cedille_maj' => 'Ins&eacute;rer un C c&eacute;dille majuscule',
 
+'barre_chercher' => 'Chercher Remplacer',
+'barre_tableau' => 'Ins&eacute;rer un tableau',
+'barre_glossaire' => 'Entr&eacute;e du [?glossaire] (Wikipedia)',
 
 'barre_caracteres' => 'Caract&egrave;res sp&eacute;ciaux',
 'barre_adresse' => 'Adresse',
@@ -33,5 +36,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_gestion_cr_casse' => 'Respecter la casse',
 'barre_gestion_cr_tout' => 'Tout remplacer',
 'barre_gestion_cr_entier' => 'Mot entier',
+
+'barre_ancres' => 'Gestion des ancres',
+'barre_gestion_anc_caption' => 'Gestion des ancres',
+'barre_gestion_anc_inserer' => 'Transformer en ancre',
+'barre_gestion_anc_nom' => 'Nom de l\'ancre',
+'barre_gestion_anc_pointer' => 'Pointer vers une ancre',
+'barre_gestion_anc_cible' => 'Ancre cible',
+'barre_gestion_anc_bulle' => 'Bulle d\'aide ancre',
+
+'barre_ancres' => 'Gestion des ancres',
+
 );
 ?>

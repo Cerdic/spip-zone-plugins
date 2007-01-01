@@ -131,16 +131,28 @@ function afficher_gestion_ancre($champ) {
 $tableau_formulaire = '
 <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
   <tr>
-    <td style="width:auto; text-align:center;"><strong>Gestion des ancres</strong></td>
-    <td style="width:auto;"><strong>Transformer en ancre</strong><br />
-    <label for="ancre_nom"><i>Nom de l\'ancre</i></label> <br />
+    <td style="width:auto; text-align:center;"><strong>'.
+_T('bartypenr:barre_gestion_anc_caption')
+.'</strong></td>
+    <td style="width:auto;"><strong>'.
+_T('bartypenr:barre_gestion_anc_inserer')
+.'</strong><br />
+    <label for="ancre_nom"><i>'.
+_T('bartypenr:barre_gestion_anc_nom')
+.'</i></label> <br />
       <input type="text" name="ancre_nom" id="ancre_nom" />
 	  
 	<input type="button" value="OK" class="fondo" onclick="javascript:barre_ancre(\'[\', \'<-\', \']\', ancre_nom.value, '.$champ.');" />
     </td>
-	<td style="width:auto;"><strong>Pointer vers une ancre</strong><br />
-    <label for="ancre_cible"><i>Ancre cible</i></label> <input type="text" name="ancre_cible" id="ancre_cible" /><br />
-	<label for="ancre_bulle"><i>Bulle d\'aide ancre</i></label> <input type="text" name="ancre_bulle" id="ancre_bulle" />
+	<td style="width:auto;"><strong>'.
+_T('bartypenr:barre_gestion_anc_pointer')
+.'</strong><br />
+    <label for="ancre_cible"><i>'.
+_T('bartypenr:barre_gestion_anc_cible')
+.'</i></label> <input type="text" name="ancre_cible" id="ancre_cible" /><br />
+	<label for="ancre_bulle"><i>'.
+_T('bartypenr:barre_gestion_anc_bulle')
+.'</i></label> <input type="text" name="ancre_bulle" id="ancre_bulle" />
 	<input type="button" value="OK" class="fondo" onclick="javascript:barre_demande(\'[\', \'->#\', \']\', ancre_cible.value, ancre_bulle.value, '.$champ.');" /> 
 </td>
   </tr> 
@@ -268,21 +280,21 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$ret .= bouton_barre_racc ("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);
 	}
 	if ($options == "avancees") {
-		$ret .= bouton_barre_racc ("barre_raccourci('[?',']',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/barre-wiki.png', "Entr&eacute;e du [?glossaire] (Wikipedia)", $champhelp);
+		$ret .= bouton_barre_racc ("barre_raccourci('[?',']',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/barre-wiki.png', _T('bartypenr:barre_glossaire'), $champhelp);
 
 
 //gestion des tableaux		
 		$ret .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_gestion']."','');",
-			_DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/barre-tableau.png', "Ins&eacute;rer un tableau",
+			_DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/barre-tableau.png', _T('bartypenr:barre_tableau'),
 			$champhelp);
 
 	$ret .= "&nbsp</td>\n<td>";
 
 // gestion du remplacement
-      $ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_remplacer']."','');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/chercher_remplacer.png", "Chercher Remplacer", $champhelp);
+      $ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_remplacer']."','');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/chercher_remplacer.png", _T('bartypenr:barre_chercher'), $champhelp);
 
 // gestion des ancres		
-		$ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_ancre']."','');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/ancre.png", 'Gestion des ancres', $champhelp);  
+		$ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_ancre']."','');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/ancre.png", _T('bartypenr:barre_ancres'), $champhelp);  
 
 }
 
