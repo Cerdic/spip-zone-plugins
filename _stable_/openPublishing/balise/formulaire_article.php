@@ -400,7 +400,6 @@ else
 
 			while ($row = mysql_fetch_array($tab_ext)) {
 				if (strcmp($row[0],$type_ext)==0) {
-					echo $row[0] . ' = ' . $type_ext . '<br />';
 					$ok = 1;
 				}
 			}
@@ -534,8 +533,12 @@ function op_liste_vignette($article)
 			else {
 				$tableau = split('[.]', $empla);
 				$ext = $tableau[1];
-				$empla = $url_site . 'squelettes/images/icones/'.$ext.'-dist.png';
-				echo '<td align="center"><img src="'.$empla.'" width="50" height="50" \><br />';
+				// ajout pour utiliser les vignettes spip pour documents
+				list($fic, $largeur, $hauteur) = vignette_par_defaut($ext);
+ 				$image = "<img src='$fic'\n\theight='$hauteur' width='$largeur' />";
+// 				$empla = $url_site . 'squelettes/images/icones/'.$ext.'-dist.png';
+//				echo '<td align="center"><img src="'.$empla.'" width="50" height="50" \><br />';
+				echo '<td align="center">'.$image.'<br />';
 				echo '<code>&lt;doc'.$id_doc.'|right&gt;</code><br />';
 				echo '<code>&lt;doc'.$id_doc.'|center&gt;</code><br />';
 				echo '<code>&lt;doc'.$id_doc.'|left&gt;</code><br />';
