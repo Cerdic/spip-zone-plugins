@@ -9,13 +9,21 @@
 		{{moteur d'open-publishing pour un site indym&eacute;dia.}} <br /> <br />
 		{{Ce plugin fourni :}} <br />
 		- un formulaire open-publishing <br />
-		- une nouvelle table dans la base de donn&#233;es (spip_op_auteurs) <br />
-		- deux nouvelles balises : #FORMUMLAIRE_ARTICLE et #SPIP_OP_AUTEURS (dans une boucle article) <br /><br />
+		- deux nouvelles tables dans la base de donn&#233;es (spip_op_auteurs spip_op_config) <br />
+		- plusieurs nouvelles balises : <br />
+		   - #FORMUMLAIRE_ARTICLE (affiche le formulaire de saisie d'un article) <br />
+		   - #CONTRIBUTIONS_LOCALES (donne le num&eacute;ro de la rubrique locale <br />
+		   - #CONTRIBUTIONS_NON_LOCALES (donne le num&eacute;ro de la rubrique non-locale <br />
+		   - #CONTRIBUTIONS_ANALYSES (donne le num&eacute;re de la rubrique analyse <br />
+		   - (#ID_ARTICLE|getAuteurOpName) : donne le nom de l'auteur op (dans une boucle article) <br />
+		   - (#ID_ARTICLE|getAuteurOpMail) : donne le mail de l'auteur op (dans une boucle article) <br />
+		   - (#ID_ARTICLE|getAuteurOpPhone) : donne le t&eacute;l&eacute;phone de l'auteur op (dans une boucle article) <br />
+		   - (#ID_ARTICLE|getAuteurOpGroup) : donne le groupe de l'auteur op (dans une boucle article) <br /><br />
 		
 		{{Procedure d'installation :}} <br />
 		- Activez ce plugin <br />
 		- Allez dans l'onglet de configuration open-publishing <br />
-		- Creez la nouvelle table dans la base de donn&#233;es <br /> <br />
+		- Creez les nouvelles tables dans la base de donn&#233;es <br /> <br />
 		
 		{{Procedure de d&#233;-installation : }} <br />
 		- Allez dans l'onglet de configuration open-publishing <br />
