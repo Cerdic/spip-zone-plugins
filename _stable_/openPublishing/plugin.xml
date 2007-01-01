@@ -1,6 +1,6 @@
 <plugin>
         <nom>Open-publishing</nom>
-	<version>0.2</version>
+	<version>0.1</version>
 	<etat>dev</etat>
 	<auteur>Collectif Indymedia Lille [contact->mailto:imc.lille@no-log.org] _ [site->http://lille.indymedia.org]</auteur>
 	<description>
@@ -21,7 +21,12 @@
 	</description>
 	<lien>[Documentation->http://lille.indymedia.org]</lien>
 	<prefix>op</prefix>
-
+	<options> <!-- fichier charge a chaque hit -->
+		op_options.php
+	</options>
+	<fonctions>
+		op_fonctions.php
+	</fonctions>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBouton</action>
