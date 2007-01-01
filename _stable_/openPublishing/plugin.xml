@@ -1,0 +1,35 @@
+<plugin>
+        <nom>Open-publishing</nom>
+	<version>0.2</version>
+	<etat>dev</etat>
+	<auteur>Collectif Indymedia Lille [contact->mailto:imc.lille@no-log.org] _ [site->http://lille.indymedia.org]</auteur>
+	<description>
+		{{moteur d'open-publishing pour un site indym&eacute;dia.}} <br /> <br />
+		{{Ce plugin fourni :}} <br />
+		- un formulaire open-publishing <br />
+		- une nouvelle table dans la base de donn&eacute;e (spip_op_auteurs) <br />
+		- deux nouvelles balises : #FORMUMLAIRE_ARTICLE et #SPIP_OP_AUTEURS (dans une boucle article) <br /><br />
+		
+		{{Procedure d'installation :}} <br />
+		- Activez ce plugin <br />
+		- Allez dans l'onglet de configuration open-publishing <br />
+		- Creez la nouvelle table dans la base de donn&eacute;e <br /> <br />
+		
+		{{Procedure de d&eacute;-installation : }} <br />
+		- Allez dans l'onglet de configuration open-publishing <br />
+		- Supprimez la table open-publishing de la base de donn&eacute;e <br />
+	</description>
+	<lien>[Documentation->http://lille.indymedia.org]</lien>
+	<prefix>op</prefix>
+
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBouton</action>
+		<inclure>op_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<action>ajouterOnglets</action>
+		<inclure>op_pipeline.php</inclure>
+	</pipeline>
+</plugin>

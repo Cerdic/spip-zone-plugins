@@ -1,0 +1,112 @@
+#CACHE{86400}
+
+<script language="javascript">
+
+/* Pour ouvrir une fenetre */
+<!--
+function ouvreFenetre(page, largeur, hauteur) {
+  window.open(page, "", "scrollbars=yes,menubar=no,toolbar=no,resizable=no,width="
+              + largeur + ",height=" + hauteur);
+-->
+}
+
+
+</script>
+
+<form action="[(#ENV{url})]" method="post" name="formulaire_article" id="Formulaire_article" enctype="multipart/form-data">
+
+	[(#ENV*{formulaire_previsu})]
+
+	<div style="text-align: center; color: red; font-style: bold;">[(#ENV*{mess_error})]</div>
+
+	<table>
+	<tr><td valign="top">
+	
+		<div id="block-center">
+		<div id="block-publie-titre"><b>&nbsp;&nbsp;<:publie_redaction:></b></div>
+		<div id="block-content">
+			
+			<p><label><:publie_titre:></label></p>
+			<p><input type="text" name="titre" value="[(#ENV**{titre})]"  size="50">
+			<input type="hidden" name="article" value="[(#ENV**{article})]"  size="50">
+			</p>
+
+			<p><label><:publie_texte:></label></p>
+			<p>[(#ENV**{texte}|barre_article{30,70})]</p>
+			<br>
+		
+		</div>
+		</div>
+
+		<br />
+
+		<div id="block-center">
+		<div id="block-publie-titre"><b>&nbsp;&nbsp;<:previsualisation:></b></div>
+		<div id="block-content"><small>
+
+		<p><:avant_publier:></p>
+		<div align="center"><input type="submit" name="previsualiser" class="spip_bouton" value="<:previsualiser:>" /></div>
+		<br />
+		
+		</div>
+		</div>
+	</td>
+
+
+
+	<td valign="top">
+
+		<div id="block-center">
+		<div id="block-publie-titre"><b>&nbsp;&nbsp;<:publie_identif_titre:></b></div>
+		
+		<div id="block-content">
+
+		<p><small><:publie_identif_info:></small></p>
+
+		<small>
+		<ul>
+
+		<li><:form_pet_votre_nom:>&nbsp;
+		<input class="nom_inscription" type="text" name="nom_inscription" value="[(#ENV*{nom_inscription})]" size="15"></li>
+
+		<li><:form_pet_votre_email:>&nbsp;
+		<input class="mail_inscription" type="text" name="mail_inscription" value="[(#ENV*{mail_inscription})]" size="15"></li>
+		
+		<li><:form_pet_votre_groupe:>&nbsp;
+		<input class="group_name" type="text" name="group_name" value="[(#ENV*{group_name})]" size="15"></li>
+		
+		<li><:form_pet_num_tel:>&nbsp;
+		<input class="phone" type="text" name="phone" value="[(#ENV*{phone})]" size="15"></li>
+
+		</ul>
+		</small>
+		
+		</div></div>
+		
+
+		<br />
+
+		<div id="block-center">
+		<div id="block-publie-titre"><b>&nbsp;&nbsp;<:aide:></b></div>
+		
+		<div id="block-content"><small>
+			<ul>
+			<li><a href="http://www.uzine.net/IMG/pdf/doc-273.pdf"><:memento_spip:></a></li>
+			<li><a href="javascript:ouvreFenetre('https://docs.indymedia.org/view/Local/ImcLilleCharteFr', 800, 600)"><:politique_editoriale_indy:></a></li>
+			<li><a href="javascript:ouvreFenetre('https://docs.indymedia.org/view/Local/ImcLilleLesContributions', 800, 600)"><:collectif_moderation:></a></li>
+			<li><a href="javascript:ouvreFenetre('http://lille.indymedia.org/spip.php?article7086', 800, 600">Publication de photos sur indym&eacute;dia</a></li>
+			</ul>
+		</small>
+		</div>
+		
+		</div>
+
+		<br />
+		[(#ENV*{formulaire_documents})]
+
+	</td>
+
+	</tr></table>
+	<br />
+
+</form>

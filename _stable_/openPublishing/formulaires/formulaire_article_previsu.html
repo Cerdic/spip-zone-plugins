@@ -1,0 +1,51 @@
+#CACHE{86400}
+
+<h2 class="previsualisation"><center><:previsualisation:></center></h2><br />
+
+<div id="block-center">
+[<div id="block-center-titre"><b>&nbsp;&nbsp;(#ENV*{titre})</b></div>]
+
+<div id="block-content">
+	<p>
+	<small>
+	[(#ENV*{texte}|image_reduire{800,0})]
+	[(#ENV*{erreur})]
+	</small>
+	</p>
+
+</div>
+<div id="block-footer">
+	<p>le&nbsp;[(#ENV*{date_redac}|affdate)][, <:par_auteur:> (#LESAUTEURS)]</p>
+</div>
+
+</div>
+
+<br />
+
+<div id="block-center">
+<div id="block-center-titre"><b>&nbsp;&nbsp;Validation et choix de la rubrique</b></div>
+
+<div id="block-content">
+
+	<p><:publie_rubrique:>
+	<select name="rubrique" value="[(#ENV**{id_rubrique})]">
+		<BOUCLE_rubrique(RUBRIQUES){id_rubrique IN #CONTRIBUTIONS_LOCALES,#CONTRIBUTIONS_NON_LOCALES,#CONTRIBUTIONS_ANALYSES}{tout}>
+			[<option value="#ID_RUBRIQUE">&nbsp;(#TITRE)</option>]
+		</BOUCLE_rubrique>
+	</select>
+	</p>	
+
+	<p><small><:publie_rubrique_info:></small></p>
+
+	[(#ENV*{formulaire_agenda})]
+	<br />
+
+	[<p><div style='text-align:center;'><input type='submit' name='valider' class='spip_bouton' value="(#ENV*{bouton})" /></div></p><br />]
+	
+</div>
+
+</div>	
+
+<br>
+<br>
+
