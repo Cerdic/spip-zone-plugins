@@ -98,7 +98,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 		}
 	}
 
-	if ($row['type_form'] == 'sondage' && $row['public']=='oui'){
+	if ($row['type_form'] == 'sondage'){
 		include_spip('inc/forms');
 		if ((Forms_verif_cookie_sondage_utilise($id_form)==true)&&(_DIR_RESTREINT!=""))
 			$affiche_sondage=' ';

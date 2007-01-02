@@ -515,7 +515,7 @@
 
 		include_spip("inc/forms_type_champs");
 		$erreur = Forms_valide_champs_reponse_post($id_form);
-	
+
 		// Si tout est bon, enregistrer la reponse
 		if (!$erreur) {
 			global $auteur_session;
