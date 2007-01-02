@@ -15,7 +15,7 @@
 	<span class='spip_form_choix_unique'>
 	&nbsp; <input type='radio' name='#CHAMP' value='#CHOIX' id='input-#ID_FORM-#CHOIX'
 	[(#CHOIX|=={[(#ENV**{valeur}|forms_valeur{#CHAMP})]}|?{'checked="checked"',''})] />
-	<label for='#CHOIX'>[(#TITRE|supprimer_numero)]</label>
+	<label for='input-#ID_FORM-#CHOIX'>[(#TITRE|supprimer_numero)]</label>
 	</span>
 ]
 	</BOUCLE_choix>
