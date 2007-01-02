@@ -84,14 +84,15 @@ if(!$connect_id_auteur) {
 
 // securite (additif spip_indy, peut-être toujour utile)
 // pour eviter qu'un article soit modifié apres avoir été publié
+// remarque : en entrée de script ce test ne sert à rien
 if($article) {
-	$query = "SELECT id_article FROM  spip_articles WHERE id_article=$id_article AND (statut='prepa' OR statut='creat')";
+	$query = "SELECT id_article FROM  spip_articles WHERE id_article=$article AND (statut='prepa' OR statut='creat')";
 	$result = spip_query($query);
 	if(!mysql_num_rows($result)) {
 		// warning , une erreur 404 serait peut etre mieux ?
 	 	die("<H3> D&eacute;sol&eacute;, sorry, lo siento : On ne peut pas modifier l'article demand&eacute;.</H3>");
 	}
-        $query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";
+        $query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$article AND id_auteur=$connect_id_auteur";
         $result_auteur = spip_query($query);
         $flag_auteur = (mysql_num_rows($result_auteur) > 0);
 	if(!$flag_auteur) {
@@ -255,10 +256,6 @@ if($valider) {
 	 * préparation de la mise en base de donnée
 	 */
 
-	// calcul de la date de redaction
-	$time=time();
-	$date=date('Y-m-d H:i:s',$time);
-				
 	// on recupere le secteur et la langue associée
 	$s = spip_query("SELECT id_secteur, lang FROM spip_rubriques WHERE id_rubrique = '$rubrique' ");
 	if ($r = spip_fetch_array($s)) {
@@ -267,21 +264,25 @@ if($valider) {
 	}
 
 	// L'article existe déjà, on fait donc un UPDATE, et non un INSERT
-	$query = "UPDATE spip_articles SET surtitre='$surtitre',
-					 titre='$titre',
-					 soustitre='$soustitre',
-					 id_rubrique='$rubrique',
-					 descriptif='$descriptif',
-					 chapo='$chapo',
-					 texte='$texte',
-					 ps='$ps',
-					 statut='$statut',
-					 date='$date',
-					 date_redac='$date'
-		 WHERE id_article='$article'";
+ 
+	$retour = spip_query('UPDATE spip_articles SET titre = ' . spip_abstract_quote($titre) .
+				',	id_rubrique = ' . spip_abstract_quote($rubrique) .
+				',	texte = ' . spip_abstract_quote($texte) .
+				',	statut = ' . spip_abstract_quote($statut) .
+				',	lang = ' . spip_abstract_quote($lang) .
+				',	id_secteur = ' . spip_abstract_quote($id_secteur) .
+				',	date = NOW()' .
+				',	date_redac = NOW()' .
+				',	date_modif = NOW()' .
+			 	' WHERE id_article = ' . spip_abstract_quote($article) );
 
-	$result = spip_query($query);
-
+	if ($retour == 1){ // tout c'est bien passé
+		$retour = '';
+	}
+	else{
+		$retour = "erreur lors de l'insertion de votre article dans la base de donnée, veuillez contactez les responsables du site";
+	}
+	
 	// on lie l'article à l'auteur anonymous
 	spip_abstract_insert('spip_auteurs', "(id_auteur,id_article)", "(
 		" . spip_abstract_quote($id_anonymous) .",
@@ -309,7 +310,8 @@ if($valider) {
 	$url_retour = $url_site . 'spip.php?page=indy-attente&var_mode=calcul';
 	$message = '<META HTTP-EQUIV="refresh" content="10; url='.$url_retour.'">';
 	$message = $message . "<center><b>Veuillez patientez ...</b><br />Votre contribution est enregistr&eacute;e. Elle va apparaitre dans la zone -En attente-.<br /> Lorsque qu'un mod&eacute;rateur l'aura valid&eacute;e, elle apparaitra dans la rubrique que vous avez choisis (locale, non-locale, ou analyse).";
-	$message = $message . "<br />La page -en attente- sera recharg&eacute;e dans 10 secondes.</center>";
+	$message = $message . '<br />La page -en attente- sera recharg&eacute;e dans 10 secondes.</center>';
+	$message = $message . $retour;
 
 	return $message;
 }
