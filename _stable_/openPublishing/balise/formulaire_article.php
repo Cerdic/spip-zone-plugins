@@ -329,18 +329,6 @@ else
 	if($previsualiser)
 	{
 
-		// Gestion de l'agenda
-		$formulaire_agenda = inclure_balise_dynamique(
-		array('formulaires/formulaire_agenda',	0,
-			array(
-				'annee' => $annee,
-				'mois' => $mois,
-				'jour' => $jour,
-				'heure' => $heure,
-				'choix_agenda' => $choix_agenda
-			)
-		), false);
-
 		// quelques petites vérifications
 		if (strlen($titre) < 3){$erreur .= _T('forum_attention_trois_caracteres');}
 		if(!$erreur){$bouton= _T('form_prop_confirmer_envoi');}
@@ -349,12 +337,10 @@ else
 		$formulaire_previsu = inclure_balise_dynamique(
 		array('formulaires/formulaire_article_previsu', 0,
 			array(
-				'formulaire_agenda' => $formulaire_agenda,
 				'date_redac' => $date_redac,
 				'titre' => interdire_scripts(typo($titre)),
 				'texte' => propre($texte),
 				'erreur' => $erreur,
-				'bouton' => $bouton,
 				'nom_inscription' => $nom_inscription,
 				'mail_inscription' => $mail_inscription,
 				'group_name' => $group_name,
@@ -418,7 +404,19 @@ else
 
 	}
 	// cas d'un nouvel article ou re-affichage du formulaire
-			
+
+	// Gestion de l'agenda
+	$formulaire_agenda = inclure_balise_dynamique(
+	array('formulaires/formulaire_agenda',	0,
+		array(
+			'annee' => $annee,
+			'mois' => $mois,
+			'jour' => $jour,
+			'heure' => $heure,
+			'choix_agenda' => $choix_agenda
+		)
+	), false);
+	
 	// Gestion des documents
 	$bouton= "Ajouter un nouveau document";
 	$formulaire_documents = inclure_balise_dynamique(
@@ -433,12 +431,18 @@ else
 	// Liste des documents associés à l'article
 	op_liste_vignette($article);
 
+	// le bouton valider
+	$bouton= _T('form_prop_confirmer_envoi');
+
 	// et on remplit le formulaire avec tout ça
 	return array('formulaires/formulaire_article', 0,
 		array(
 			'formulaire_documents' => $formulaire_documents,
 			'formulaire_previsu' => $formulaire_previsu,
+			'formulaire_agenda' => $formulaire_agenda,
+			'bouton' => $bouton,
 			'article' => $article,
+			'rubrique' => $rubrique,
 			'mess_error' => $mess_error,
 			'annee' => $annee,
 			'mois' => $mois,
@@ -468,13 +472,20 @@ function barre_article($texte, $rows, $cols, $lang='')
 	$num_formulaire++;
 
 	return afficher_barre("document.getElementById('formulaire_$num_formulaire')", true, $lang) .
-	  "
+	  "<br /><center>
 	<textarea name='texte' rows='$rows' class='forml' cols='$cols'
 	id='formulaire_$num_formulaire'
 	onselect='storeCaret(this);'
 	onclick='storeCaret(this);'
 	onkeyup='storeCaret(this);'
-	ondbclick='storeCaret(this);'>$texte</textarea>";
+	ondbclick='storeCaret(this);'>$texte</textarea></center>";
+}
+
+function selected_option($id_rubrique, $rubrique_boucle,$titre_rubrique)
+{
+	$selected = '';
+	if ($id_rubrique == $rubrique_boucle) $selected = "selected";
+	return "[<option value='$rubrique_boucle' $selected >&nbsp;$titre_rubrique</option>]";
 }
 
 // fonction qui cherche l'i de l'auteur anonymous

@@ -22,34 +22,50 @@ function ouvreFenetre(page, largeur, hauteur) {
 	<table>
 	<tr><td valign="top">
 	
+		[(#ENV*{formulaire_agenda})]
+		<br />
+
+		<div id="block-center">
+		<div id="block-center-titre"><b>&nbsp;&nbsp;Choix de la rubrique</b></div>
+
+		<div id="block-content">
+
+			<p><:publie_rubrique:>
+			<select name="rubrique" value="[(#ENV**{rubrique})]">
+				<BOUCLE_rubrique(RUBRIQUES){id_rubrique IN #CONTRIBUTIONS_LOCALES,#CONTRIBUTIONS_NON_LOCALES,#CONTRIBUTIONS_ANALYSES}{tout}>
+					[(#ENV**{rubrique}|selected_option{#ID_RUBRIQUE,#TITRE})]
+				</BOUCLE_rubrique>
+			</select>
+			</p>	
+
+			<p><small><:publie_rubrique_info:></small></p>
+	
+		</div>
+		</div>	
+		<br />
+
 		<div id="block-center">
 		<div id="block-publie-titre"><b>&nbsp;&nbsp;<:publie_redaction:></b></div>
 		<div id="block-content">
 			
 			<p><label><:publie_titre:></label></p>
-			<p><input type="text" name="titre" value="[(#ENV**{titre})]"  size="50">
+			<p><div style='text-align:center;'><input type="text" name="titre" value="[(#ENV**{titre})]"  size="50" maxlength="80">
 			<input type="hidden" name="article" value="[(#ENV**{article})]"  size="50">
-			</p>
+			</div></p>
 
 			<p><label><:publie_texte:></label></p>
-			<p>[(#ENV**{texte}|barre_article{30,70})]</p>
+			<p>[(#ENV**{texte}|barre_article{30,60})]</p>
 			<br>
+			[<p><div style='text-align:center;'>
+				<input type='submit' name='valider' class='spip_bouton' value="(#ENV*{bouton})" />
+				<input type="submit" name="previsualiser" class="spip_bouton" value="<:previsualiser:>" />
+			</div></p><br />]
 		
 		</div>
 		</div>
 
 		<br />
 
-		<div id="block-center">
-		<div id="block-publie-titre"><b>&nbsp;&nbsp;<:previsualisation:></b></div>
-		<div id="block-content"><small>
-
-		<p><:avant_publier:></p>
-		<div align="center"><input type="submit" name="previsualiser" class="spip_bouton" value="<:previsualiser:>" /></div>
-		<br />
-		
-		</div>
-		</div>
 	</td>
 
 
