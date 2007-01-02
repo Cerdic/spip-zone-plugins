@@ -78,6 +78,8 @@ Sinon, utiliser le comportemant normal.
 ''
 })]
 [(#TYPE_DOCUMENT|=={Flash Video}|?{' '})
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+<dt>
 #SET{largeur,#ENV{largeur,#LARGEUR}}#SET{largeur,#GET{largeur}|?{#GET{largeur},400}}
 #SET{hauteur,#ENV{hauteur,#HAUTEUR}}#SET{hauteur,#GET{hauteur}|?{#GET{hauteur},300}}
 <object type="application/x-shockwave-flash" data="#EVAL{_DIR_PLUGIN_PLAYER}player_flv.swf" width="#GET{largeur}" height="#GET{hauteur}">
@@ -86,8 +88,7 @@ Sinon, utiliser le comportemant normal.
 <param name="wmode" value="transparent" />
 [<span><a href="(#URL_DOCUMENT)" rel="enclosure">#URL_DOCUMENT</a></span>]
 </object>
-
-<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+</dt>
 [<dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF)#NOTES</dd>]]
 </dl>
 
