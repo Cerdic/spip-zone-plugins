@@ -126,6 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_introuvable'=>"Ce site n'a pas &eacute;t&eacute; trouv&eacute;.",
 'sondage_non'=>"Ce formulaire n'est pas un sondage",
 'sondage_oui'=>"Ce formulaire est un sondage.",
+'sondage_deja_repondu'=>"Vous avez d&eacute;j&agrave; r&eacute;pondu a ce sondage.",
 'suivi_formulaire' => "Suivi du formulaire",
 'suivi_formulaires' => "Suivi des formulaires",
 'suivi_reponses' => "Suivi des r&eacute;ponses",
