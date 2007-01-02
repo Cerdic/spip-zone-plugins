@@ -1,7 +1,7 @@
 <BOUCLE_form(FORMS){id_form=#ENV{id_form}}>
 #SET{need_fieldset,1} #SET{date-picker,0}
 <BOUCLE_champs(FORMS_CHAMPS){id_form}{tout}{par rang}>
-[(#ENV{affiche_sondage})[(#PUBLIC|=={oui}|?{#RESULTATS_SONDAGE})]]
+[(#ENV{affiche_sondage})[(#_form:PUBLIC|=={oui}|?{#RESULTATS_SONDAGE})]]
 [(#ENV{affiche_sondage}|?{'',' '})
 	[[(#GET{need_fieldset}|?{'','</fieldset>'})]<fieldset><legend>(#TYPE|=={separateur}|?{#TITRE,''})</legend> #SET{need_fieldset,0}]
 	[(#GET{need_fieldset}|?{' '})<fieldset><legend>#_form:TITRE</legend> #SET{need_fieldset,0}]
