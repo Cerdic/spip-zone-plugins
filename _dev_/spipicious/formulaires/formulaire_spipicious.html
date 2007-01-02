@@ -2,7 +2,7 @@
 <div id="form_spipicious">
 <BOUCLE_groupes(GROUPES_MOTS){par titre}><?php
 $current_auteur_id = (int) "#ENV{auteur_id}";
-if ('#TITRE'=='- tags -') { 
+if (('#TITRE'=='- tags -')||('#TITRE'=='-* tags -')) { 
   if ($current_auteur_id != 0) { ?>
   <form action="[(#ENV{self})]" method="post">
     <fieldset	class='spip_encadrer'>
