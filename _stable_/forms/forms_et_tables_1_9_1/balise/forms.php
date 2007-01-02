@@ -93,7 +93,8 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 		if ($row['multiple']=='oui' && $id_donnee) $q.="AND donnees.id_donnee="._q($id_donnee);
 		$res = spip_query($q);
 		if($row2 = spip_fetch_array($res)){
-			$valeurs = Forms_valeurs($id_form,$row2['id_donnee']);
+			$id_donnee=$row2['id_donnee'];
+			$valeurs = Forms_valeurs($id_form,$id_donnee);
 		}
 	}
 
