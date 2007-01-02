@@ -227,6 +227,7 @@ function exec_forms_edit(){
 	
 	echo "<br /><br />\n";
 	debut_boite_info();
+	echo "<div align='center' style='font-size:3em;font-weight:bold;'>$id_form</div>\n";
 	if ($retour) {
 		icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "rien.gif",'right');
 	}
