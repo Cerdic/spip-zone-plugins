@@ -1,7 +1,12 @@
 <BOUCLE_form(FORMS){id_form=#ENV{id_form}}>
 #SET{need_fieldset,1} #SET{date-picker,0}
 <BOUCLE_champs(FORMS_CHAMPS){id_form}{tout}{par rang}>
-[(#ENV{affiche_sondage})[(#_form:PUBLIC|=={oui}|?{#RESULTATS_SONDAGE})][(#_form:PUBLIC|=={non}|?{'',' '})#_form:TITRE <br/> <:forms:sondage_deja_repondu:>]]
+[(#ENV{affiche_sondage})
+<fieldset><legend>#_form:TITRE</legend>
+<:forms:sondage_deja_repondu:>
+[(#_form:PUBLIC|=={oui}|?{' '})#RESULTATS_SONDAGE]
+</fieldset>
+]
 [(#ENV{affiche_sondage}|?{'',' '})
 	[[(#GET{need_fieldset}|?{'','</fieldset>'})]<fieldset><legend>(#TYPE|=={separateur}|?{#TITRE,''})</legend> #SET{need_fieldset,0}]
 	[(#GET{need_fieldset}|?{' '})<fieldset><legend>#_form:TITRE</legend> #SET{need_fieldset,0}]
@@ -19,19 +24,19 @@
 				</span>
 				[<span class="formInfo"><a href="#URL_PAGE{forms_tip,id_form=#ID_FORM&champ=#CHAMP&width=200}" class="jTip" name="" id='aide_#ID_FORM_#CHAMP'>(#AIDE|?{'?'})</a></span>]
 				[(#TYPE|=={date}|?{' ',''}) #SET{afficher,0} #SET{date-picker,1}
-					<input type='text' name='#CHAMP' id='#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
+					<input type='text' name='#CHAMP' id='input_#ID_FORM_#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
 						class='[(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli] date-picker'
 						size='40' />
 				]
 				[(#TYPE|=={email}|?{' ',''}) #SET{afficher,0}
 					<span class='spip_form_label_details'><:forms:champ_email_details:></span>
-					<input type='text' name='#CHAMP' id='#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
+					<input type='text' name='#CHAMP' id='input_#ID_FORM_#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
 						class='[(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
 						size='40' />
 				]
 				[(#TYPE|=={url}|?{' ',''}) #SET{afficher,0}
 					<span class='spip_form_label_details'><:forms:champ_url_details:></span>
-					<input type='text' name='#CHAMP' id='#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
+					<input type='text' name='#CHAMP' id='input_#ID_FORM_#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
 						class='[(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
 						size='40' />
 				]
@@ -39,7 +44,7 @@
 					[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|forms_textarea{10,80,#CHAMP,#CHAMP,[(#OBLIGATOIRE|=={oui}|?{forml,formo}|concat{#ENV**{erreur}|forms_valeur{#CHAMP}|?{champ_obli_oubli}})] })]
 				]
 				[(#TYPE|=={fichier}|?{' ',''}) #SET{afficher,0}
-					<input type='file' name='#CHAMP' id='#CHAMP'
+					<input type='file' name='#CHAMP' id='input_#ID_FORM_#CHAMP'
 						class='[(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
 						size='40' />
 					[(#ENV**{valeurs}|forms_valeur{#CHAMP,''})]
@@ -58,7 +63,7 @@
 				]
 				[(#REM) tous les autres types sont affiches ici]
 				[(#GET{afficher}|?{' ',''})
-					<input type='text' name='#CHAMP' id='#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
+					<input type='text' name='#CHAMP' id='input_#ID_FORM_#CHAMP' value="[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|entites_html)]" 
 						class='[(#TYPE) ][(#OBLIGATOIRE|=={oui}|?{forml,formo})][(#ENV**{erreur}|forms_valeur{#CHAMP}|?{' ',''}) champ_obli_oubli]' 
 						size='40' />
 				]
@@ -69,11 +74,11 @@
 	]
 ]
 </BOUCLE_champs>
-</fieldset>
+[(#GET{need_fieldset}|?{'','</fieldset>'})]
 [(#ENV{affiche_sondage}|?{'',' '})
 	[(#REM) Piege a robots spammeurs ]
 	<p style='display:none;'><label for="nobotnobot"><:antispam_champ_vide:></label>
-	<input type="text" name="nobotnobot" id="nobotnobot" value="#ENV{nobotnobot}" size="10" /></p>
+	<input type="text" name="nobotnobot" id="#ID_FORM_nobotnobot" value="#ENV{nobotnobot}" size="10" /></p>
 	
 	<div style='text-align:#LANG_RIGHT' class='spip_bouton'><input type="submit" name='Valider' value="<:bouton_valider:>" /></div>
 ]
