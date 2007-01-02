@@ -522,6 +522,12 @@
 			$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
 			$url = (_DIR_RESTREINT==_DIR_RESTREINT_ABS)?parametre_url(self(),'id_form',''):_DIR_RESTREINT_ABS;
 			$ok = true;
+			$confirme = false;
+			if ($id = intval(_request("deja_enregistre_$id_form"))){
+				$id_donnee = $id;
+				$ok = false;
+				$confirme = true;
+			}
 			
 			if ($row['type_form']=='sondage') {
 				$confirmation = 'attente';
@@ -556,6 +562,9 @@
 					$erreur['@'] = _T("forms:probleme_technique");
 					$ok = false;
 				}
+				else {
+					$_GET["deja_enregistre_$id_form"] = $id_donnee;
+				}
 			}
 			// Puis enregistrer les differents champs
 			if ($ok) {
@@ -572,6 +581,8 @@
 				spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
 				spip_query("INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
 					"VALUES ".join(',', $inserts));
+			}
+			if ($ok || $confirme) {
 				if ($champconfirm)
 					if ($row=spip_fetch_array(spip_query("SELECT * FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champconfirm))))
 						$mailconfirm = $row['valeur'];
