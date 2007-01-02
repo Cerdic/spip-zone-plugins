@@ -251,9 +251,14 @@
 				$q.="AND id_auteur=".$id_auteur;
 			else 
 				return false;
-		//On retourne les donnees si auteur ou cookie
+		//On retourne le tableau des id_donnee de l'auteur ou false
 		$res = spip_query($q);
-		return (spip_num_rows($res)>0);
+		if ($res && spip_num_rows($res)>0) {
+			while ($row=spip_fetch_array($res))
+				$tab[]=$row['id_donnee'];
+			return $tab;
+		}
+		else return false;
 	}
 
 	function Forms_extraire_reponse($id_donnee){
