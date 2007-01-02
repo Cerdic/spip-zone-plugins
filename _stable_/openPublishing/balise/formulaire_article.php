@@ -67,7 +67,7 @@ function balise_FORMULAIRE_ARTICLE_dyn($id_machin) {
 global $_FILES, $_HTTP_POST_FILES; // ces variables sont indispensables pour récuperer les documents joints
 
 // ATTENTION ! il vous faudra trés certainement modifier ces variables pour adapter ce plugin à votre site
-$url_site = "http://lille.indymedia.org/"; // mettez l'url de votre site (n'oubliez pas le dernier "/"
+$url_site = "http://edd/"; // mettez l'url de votre site (n'oubliez pas le dernier "/"
 $rubrique_breve = 2; // mettez le numero de votre rubrique Agenda contenant les brèves
 
 // securite (additif spip_indy, peut-être toujour utile)
@@ -474,14 +474,13 @@ function barre_article($texte, $rows, $cols, $lang='')
 	
 	$num_formulaire++;
 
-	return afficher_barre("document.getElementById('formulaire_$num_formulaire')", true, $lang) .
-	  "<br /><center>
-	<textarea name='texte' rows='$rows' class='forml' cols='$cols'
+	return afficher_barre("document.getElementById('formulaire_$num_formulaire')", false,'',"avancees") .
+	  "<textarea name='texte' rows='$rows' class='forml' cols='$cols'
 	id='formulaire_$num_formulaire'
 	onselect='storeCaret(this);'
 	onclick='storeCaret(this);'
 	onkeyup='storeCaret(this);'
-	ondbclick='storeCaret(this);'>$texte</textarea></center>";
+	ondbclick='storeCaret(this);'>$texte</textarea>";
 }
 
 // pour garder la valeur lors d'un rechargement de page
