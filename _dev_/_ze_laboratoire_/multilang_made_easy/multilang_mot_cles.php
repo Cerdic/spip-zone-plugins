@@ -8,7 +8,7 @@
  *
  */
 
-function multilang_mot_cles_header_prive($flux) {
+function multilang_made_easy_header_prive($flux) {
 	$page = _request("exec");
   $active_langs = "'".str_replace(",","','",$GLOBALS['meta']['langues_multilingue'])."'"; 
 
