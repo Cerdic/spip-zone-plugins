@@ -31,6 +31,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'paragrapher:nom' => 'Paragrapher',
 	'paragrapher:description'	=> "Applique la fonction SPIP paragrapher() aux textes qui sont d&eacute;pourvus de paragraphes en insérant des balises &lt;p&gt; et &lt;/p&gt;. Utile pour visualiser tous les textes sans style.",
 
+	'forcer_langue:nom' => 'Forcer langue',
+	'forcer_langue:description'	=> "Force le contexte de langue pour les jeux de squelettes multilingues disposant d'un formulaire ou d'un menu de langues sachant g&eacute;rer le cookie de langues.",
+
 	'verstexte:nom' => 'Version texte',
 	'verstexte:description'	=> "2 filtres pour vos squelettes. 
 _ version_texte : extrait le contenu texte d'une page html &agrave; l'exclusion de quelques balises &eacute;l&eacute;mentaires.
