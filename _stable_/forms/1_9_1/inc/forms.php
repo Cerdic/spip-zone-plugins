@@ -407,7 +407,8 @@
 			}
 			else {
 				$statut = 'valide';
-				$cookie = '';
+				include_spip("inc/acces");
+				$cookie = creer_uniqid();
 			}
 			// D'abord creer la reponse dans la base de donnees
 			if ($ok) {
@@ -471,12 +472,16 @@
 					"VALUES ".join(',', $inserts);
 				spip_query($query);
 				if ($row['sondage'] != 'non') {
-					$hash = calculer_action_auteur("forms valide reponse sondage $id_reponse");
+					include_spip("inc/acces");
+					include_spip("inc/session");
+					$hash = md5("forms valide reponse sondage $id_reponse $cookie ".hash_env());
 					$url = generer_url_public($script_validation,"verif_cookie=oui&id_reponse=$id_reponse&hash=$hash".($script_args?"&$script_args":""));
 					$r = $url;
 				}
 				else if (($email) || ($mailconfirm)) {
-					$hash = calculer_action_auteur("forms confirme reponse $id_reponse");
+					include_spip("inc/acces");
+					include_spip("inc/session");
+					$hash = md5("forms confirme reponse $id_reponse $cookie ".hash_env());
 					$url = generer_url_public($script_validation,"mel_confirm=oui&id_reponse=$id_reponse&hash=$hash".($script_args?"&$script_args":""));
 					$r = $url;
 	
