@@ -1,5 +1,15 @@
 <?php
-	$chemin = "../../../../../../../";
+
+// détermination du chemin de base par rapport à la racine du serveur
+$dir_relatif_array = split('/', $_SERVER["PHP_SELF"]);
+$i = 0;
+while($dir_relatif_array[$i] != 'plugins') {
+	$dir_relatif .= $dir_relatif_array[$i];
+	$i++;
+}
+define('_DIR_ECRIRE',$dir_relatif.'/ecrire/');
+
+	$chemin = "../../../../../../";
 	$cheminEcrire = $chemin."ecrire/";
 	if (defined("_ECRIRE_INC_VERSION")) return;
 	define("_ECRIRE_INC_VERSION", "1");

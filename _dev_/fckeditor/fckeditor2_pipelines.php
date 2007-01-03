@@ -4,8 +4,18 @@
 define('EDITEUR_PAR_DEFAUT', 'wysiwyg');
 //define('EDITEUR_PAR_DEFAUT', 'text');
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\',/*'*/'/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_FCKEDITOR',(_DIR_PLUGINS.end($p)));
+//$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\',/*'*/'/',realpath(dirname(__FILE__))));
+//define('_DIR_PLUGIN_FCKEDITOR',(_DIR_PLUGINS.end($p)));
+
+// détermination du chemin de base par rapport à la racine du serveur
+$dir_relatif_array = split('/', $_SERVER["PHP_SELF"]);
+$i = 0;
+while($dir_relatif_array[$i] != 'ecrire') {
+	$dir_relatif .= $dir_relatif_array[$i];
+	$i++;
+}
+if($dir_relatif != '') $dir_relatif = "/".$dir_relatif;
+define('_DIR_PLUGIN_FCKEDITOR',$dir_relatif.'/plugins/fckeditor');
 
 function fckeditor2_header_prive($flux) {
 	global $exec;
@@ -34,15 +44,14 @@ function fckeditor2_header_prive($flux) {
 		 || (EDITEUR_PAR_DEFAUT=='wysiwyg' && $GLOBALS['wysiwyg']!='non') ) ) {
 
 		$code='
-	var oFCKeditor = new FCKeditor( \'text_area\' ) ;
-	oFCKeditor.BasePath = "'._DIR_PLUGIN_FCKEDITOR.'/FCKeditor/" ;
-	oFCKeditor.Height = "600";
-	oFCKeditor.ToolbarSet = "SansFormulaire";   
-	oFCKeditor.Config["SkinPath"] ="../editor/skins/office2003/";
-  oFCKeditor.ReplaceTextarea();
-
-	$(".spip_barre").remove();
-';
+			var oFCKeditor = new FCKeditor( "text_area" ) ;
+			oFCKeditor.BasePath = "'._DIR_PLUGIN_FCKEDITOR.'/FCKeditor/" ;
+			oFCKeditor.Config["CustomConfigurationsPath"] = "'._DIR_PLUGIN_FCKEDITOR.'/spip_fck/fckconfig.php?path='._DIR_PLUGIN_FCKEDITOR.'&" + ( new Date() * 1 ) ;
+			oFCKeditor.Height = "600";
+			oFCKeditor.ToolbarSet = "Spip";
+			oFCKeditor.ReplaceTextarea();
+			$(".spip_barre").remove();
+		';
 
 	} elseif($exec=='breves_edit' && ( $GLOBALS['wysiwyg']=='oui'
 		 || (EDITEUR_PAR_DEFAUT=='wysiwyg' && $GLOBALS['wysiwyg']!='non') ) ) {
@@ -51,9 +60,10 @@ function fckeditor2_header_prive($flux) {
 	var oFCKeditor = new FCKeditor( \'texte\' ) ;
 	oFCKeditor.BasePath = "'._DIR_PLUGIN_FCKEDITOR.'/FCKeditor/" ;
 	oFCKeditor.Height = "600";
+	
 	oFCKeditor.ToolbarSet = "SansFormulaire";   
 	oFCKeditor.Config["SkinPath"] ="../editor/skins/office2003/";
-  oFCKeditor.ReplaceTextarea();
+  	oFCKeditor.ReplaceTextarea();
 
 	$(".spip_barre").remove();
 ';

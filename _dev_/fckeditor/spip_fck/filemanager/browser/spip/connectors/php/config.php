@@ -20,7 +20,7 @@
 
 global $Config ;
 
-$cheminEcrire = "../../../../../../../../../ecrire/";
+$cheminEcrire = "../../../../../../../../ecrire/";
 if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 function spip_connect_db($host, $port, $login, $pass, $db) {
