@@ -186,6 +186,11 @@ $choix_date_debut = afficher_jour_mois_annee_h_m($date_debut, $heures, $minutes)
 $date_redac = $date_debut;
 */
 
+// on demande un nouvel identifiant
+	if (($previsualiser) || ($media) || ($valider)) {
+		if (!$article) $article=op_request_new_id($connect_id_auteur);
+	}
+
 // l'auteur demande la publication de son article
 if($valider) {
 
@@ -324,9 +329,6 @@ else
 {
 	// statut de l'article : en préparation
 	$statut="prepa";
-
-	// on demande un nouvel identifiant si premiere entrée dans le formulaire
-	if (!$article) $article=op_request_new_id($connect_id_auteur);
 	
 	// si l'auteur demande la prévisualisation
 	if($previsualiser)
