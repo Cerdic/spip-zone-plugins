@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2006                                                *
+ *  Copyright (c) 2001-2007                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/lang');
+include_spip('inc/texte');
 
 //
 // Presentation des pages d'installation et d'erreurs
@@ -36,33 +37,33 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	if (!headers_sent())
 		header('Content-Type: text/html; charset=utf-8');
 
-	echo  _DOCTYPE_ECRIRE ,
-		html_lang_attributes(),
-		"<head>\n",
-		"<title>",
-		textebrut($titre),
+	return  _DOCTYPE_ECRIRE.
+		html_lang_attributes().
+		"<head>\n".
+		"<title>".
+		textebrut($titre).
 		"</title>
-		<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n",
-		"body { background: #FFF; color: #000; }\n",
-		"h1 { color: #970038; margin-top: 50px; font-family: Verdana; font-weigth: bold; font-size: 18px }\n",
-		"h2 { font-family: Verdana,Arial,Sans,sans-serif; font-weigth: normal; font-size: 100%; }\n",
-		"a { color: #E86519; text-decoration: none; }\n",
-		"a:visited { color: #6E003A; }\n",
-		"a:active { color: #FF9900; }\n",
-		"img { border: 0; }\n",
-		"p { text-align: justify; }\n",
-		"ul { text-align: justify; list-style-type: none; }\n",
-		"fieldset, .fieldset { font-weigth: bold; text-align: justify; border: 1px solid #444; paddind: 10px; margin-top: 1em; }\n",
-		"legend { font-weight: bold; }\n",
-		"label {}\n",
-		"#minipres { width: 30em; text-align: center; margin-left: auto; margin-right: auto; }\n",
-		".petit-centre { font-family: Verdana,Arial,Sans,sans-serif; font-size: 10px; }\n",
-		".petit-centre p { text-align: center; }\n",
-		".suivant { text-align: $spip_lang_right; display: block; margin-top: 1em; }\n",
+		<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n".
+		"body { background: #FFF; color: #000; }\n".
+		"h1 { color: #970038; margin-top: 50px; font-family: Verdana; font-weigth: bold; font-size: 18px }\n".
+		"h2 { font-family: Verdana,Arial,Sans,sans-serif; font-weigth: normal; font-size: 100%; }\n".
+		"a { color: #E86519; text-decoration: none; }\n".
+		"a:visited { color: #6E003A; }\n".
+		"a:active { color: #FF9900; }\n".
+		"img { border: 0; }\n".
+		"p { text-align: justify; }\n".
+		"ul { text-align: justify; list-style-type: none; }\n".
+		"fieldset, .fieldset { font-weigth: bold; text-align: justify; border: 1px solid #444; paddind: 10px; margin-top: 1em; }\n".
+		"legend { font-weight: bold; }\n".
+		"label {}\n".
+		"#minipres { width: 30em; text-align: center; margin-left: auto; margin-right: auto; }\n".
+		".petit-centre { font-family: Verdana,Arial,Sans,sans-serif; font-size: 10px; }\n".
+		".petit-centre p { text-align: center; }\n".
+		".suivant { text-align: $spip_lang_right; display: block; margin-top: 1em; }\n".
 		".fondl { padding: 3px; background-color: #eee; border: 1px solid #333; 
 	background-position: center bottom; 
 	font-size: 0.8em;
-	font-family: Verdana,Arial,Sans,sans-serif; }\n",
+	font-family: Verdana,Arial,Sans,sans-serif; }\n".
 		".formo { width: 100%; display: block; padding: 3px;
 	margin-top: 1em;
 	background-color: #FFF; 
@@ -70,20 +71,22 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	background-position: center bottom; 
 	behavior: url(../dist/win_width.htc);
 	font-size: 0.8em;
-	font-family: Verdana,Arial,Sans,sans-serif; }\n",
+	font-family: Verdana,Arial,Sans,sans-serif; }\n".
 	  "\n\n]]>\n--></style>\n\n
+	<script type='text/javascript' src='"
+	  . _DIR_JAVASCRIPT . "spip_barre.js'></script>
 </head>
 <body".$onLoad.">
 	<div id='minipres'>
-	<h1>",
-	  $titre ,
+	<h1>".
+	  $titre .
 	  "</h1>
 	<div>\n";
 }
 
 // http://doc.spip.org/@install_fin_html
 function install_fin_html() {
-	echo "\n\t</div>\n\t</div>\n</body>\n</html>";
+	return "\n\t</div>\n\t</div>\n</body>\n</html>";
 }
 
 // http://doc.spip.org/@info_etape
@@ -93,41 +96,52 @@ function info_etape($titre, $complement = ''){
 }
 
 // http://doc.spip.org/@fieldset
-function fieldset($legend, $champs = array()) {
+function fieldset($legend, $champs = array(), $horchamps='') {
 	$fieldset = "<fieldset>\n" .
 	($legend ? "<legend>".$legend."</legend>\n" : '');
 	foreach($champs as $nom => $contenu) {
 		$type = $contenu['hidden'] ? 'hidden' : (preg_match(',^pass,', $nom) ? 'password' : 'text');
 		$class = $contenu['hidden'] ? '' : "class='formo' size='40' ";
 		$fieldset .= "<label for='".$nom."'>".$contenu['label']."</label>\n";
-		$fieldset .= "<input ".$class."type='".$type."' name='".$nom."' value='".$contenu['valeur']."' />\n";
+		if(is_array($contenu['alternatives'])) {
+			foreach($contenu['alternatives'] as $valeur => $label) {
+				$fieldset .= "<input type='radio' name='".$nom .
+				"'\nvalue='".$valeur."' ".($valeur==$contenu['valeur']?"checked='checked'":'')."/>\n";
+				$fieldset .= "<label for='".$valeur."'>".$label."</label>\n";
+			}
+			$fieldset .= "<br />\n";
+		}
+		else {
+			$fieldset .= "<input ".$class."type='".$type."' name='".$nom."'\nvalue='".$contenu['valeur']."' />\n";
+		}
 	}
-	$fieldset .= "</fieldset>\n";
+	$fieldset .= "$horchamps</fieldset>\n";
 	return $fieldset;
 }
 
 // http://doc.spip.org/@bouton_suivant
-function bouton_suivant($code = 'bouton_suivant') {
-	return "\n<span class='suivant'><input id='suivant' type='submit' class='fondl' value=\"" .
-		_T($code) .
+function bouton_suivant($code = '') {
+	if($code=='') $code = _T('bouton_suivant');
+	static $suivant = 0;
+	$id = 'suivant'.(($suivant>0)?strval($suivant):'');
+	$suivant +=1;
+	return "\n<span class='suivant'><input id='".$id."' type='submit' class='fondl'\nvalue=\"" .
+		$code .
 		" >>\" /></span>\n";
 }
 
 // http://doc.spip.org/@minipres
-function minipres($titre, $corps="")
+function minipres($titre='', $corps="", $onload='')
 {
-	if (!$titre)
-		echo  _DOCTYPE_ECRIRE ,
-		  html_lang_attributes(),
-		  "<body>",
-		  $corps,
-		  '</body></html>';
-	else {
-		install_debut_html($titre);
-		echo $corps;
-		install_fin_html();
+	if (!$titre) {
+		$titre = _T('info_acces_interdit');
+		$corps = _request(_DIR_RESTREINT ? 'action' : 'exec');
+		spip_log($GLOBALS['auteur_session']['nom'] . " $titre " . $_SERVER['REQUEST_URI']);
 	}
-	exit;
+
+	return install_debut_html($titre, $onload)
+	. $corps
+	. install_fin_html();
 }
 
 //
@@ -183,14 +197,14 @@ function info_copyright() {
 	if ($svn_revision = version_svn_courante(_DIR_RACINE)) {
 		$version .= ' ' . (($svn_revision < 0) ? 'SVN ':'')
 		. "[<a href='http://trac.rezo.net/trac/spip/changeset/"
-		. abs($svn_revision) . "' target='_blank'>"
+		. abs($svn_revision) . "' onclick=\"window.open(this.href); return false;\">"
 		. abs($svn_revision) . "</a>]";
 	}
 
 	return _T('info_copyright', 
 		   array('spip' => "<b>SPIP $version</b> ",
 			 'lien_gpl' => 
-			 "<a href='". generer_url_ecrire("aide_index", "aide=licence&var_lang=$spip_lang") . "' target='spip_aide' onclick=\"javascript:window.open(this.href, 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"));
+			 "<a href='". generer_url_ecrire("aide_index", "aide=licence&var_lang=$spip_lang") . "' onclick=\"window.open(this.href, 'spip_aide', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"));
 
 }
 
@@ -302,16 +316,19 @@ function http_wrapper($img){
 }
 // http://doc.spip.org/@http_img_pack
 function http_img_pack($img, $alt, $att, $title='') {
-	return "<img src='" . http_wrapper($img)
+
+	return  "<img src='" . http_wrapper($img)
 	  . ("'\nalt=\"" .
-	     ($alt ? str_replace('"','',$alt) : ($title ? $title : ''))
+	     str_replace('"','', textebrut($alt ? $alt : ($title ? $title : '')))
 	     . '" ')
-	  . ($title ? " title=\"$title\"" : '')
-	  . $att . " />";
+	  . ($title ? "title=\"$title\" " : '')
+	  . $att
+	  . " />";
 }
 
 // http://doc.spip.org/@http_href_img
 function http_href_img($href, $img, $att, $alt, $title='', $style='', $class='', $evt='') {
+	if (!$title) $title = $alt;
 	return  http_href($href, http_img_pack($img, $alt, $att), $title, $style, $class, $evt);
 }
 
