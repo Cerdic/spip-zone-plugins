@@ -75,7 +75,6 @@ div.puce_forms_donnee_popup {
 	margin-top: -1px; top: 0; 
 	border: 1px solid #666; 
 	background-color: #ccc; z-index: 10; 
-	-moz-border-radius: 3px;
 }
 div.puce_forms_donnee_popup img {
 	padding: 1px;
