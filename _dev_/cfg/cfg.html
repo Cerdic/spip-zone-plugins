@@ -1,0 +1,49 @@
+#CACHE{86400}
+<BOUCLE_article_principal(ARTICLES) {id_article=1}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>test cfg</title>
+<meta name="description" content="test cfg" />
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_cfg">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}{lang}>
+<a href="ecrire/?exec=config_sms" class="spip_in">changer cfg</a>
+	<div id="conteneur">
+
+		[(#REM) Contenu principal: test de cfg ]
+
+		<div id="contenu" style="width: 100%; ">
+
+<dl>
+	<dt>&#035;CONFIG</dt>
+	<dd>#CONFIG</dd>
+
+	<dt>&#035;CONFIG{descriptif_site}</dt>
+	<dd>#CONFIG{descriptif_site}</dd>
+
+	<dt>&#035;CONFIG{config_sms}</dt>
+	<dd>#CONFIG{config_sms}</dd>
+
+	<dt>&#035;CONFIG{config_sms/dudu/user}</dt>
+	<dd>[(#CONFIG{config_sms/dudu/user})]</dd>
+
+	<dt>[(&#035;REM|sinon{', '}|implode{&#035;CONFIG|unserialize|array_keys})]</dt>
+	<dd>[(#REM|sinon{', '}|implode{#CONFIG|unserialize|array_keys})]</dd>
+</dl>
+
+		</div><!-- fin contenu -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{lang}>
+
+</div><!-- fin page -->
+</body>
+</html>
+</BOUCLE_article_principal>

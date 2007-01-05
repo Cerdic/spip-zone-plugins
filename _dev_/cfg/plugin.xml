@@ -3,7 +3,7 @@
 	Config
 	</nom>
 	<auteur>toggg
-	_ &copy; 2006 - Distribu&#233; sous licence GNU/LGPL
+	_ &copy; 2007 - Distribu&#233; sous licence GNU/LGPL
 	</auteur>
 	<version>
 	0.1.0
@@ -12,15 +12,19 @@
 	dev
 	</etat>
 	<description>
-CE CODE N&#034;EST PAS FONCTIONNEL !
-_ VOUS NE DEVEZ PAS L&#034;INSTALLER.
+CE CODE N&#039;EST PAS FONCTIONNEL !
+_ VOUS NE DEVEZ PAS L&#039;INSTALLER.
 _ Ce plugin permet de g&eacute;rer des config, il est d&eacute;riv&eacute; de la config sms &agrave; formulaires variables.
 _ Le stockage existant est juste dans un cran de meta, il sera port&eacute; aux gateaux (cookies) et sql.
 _ Toute d&eacute;finition vient des fonds/
+_ Il fournit une balise #CONFIG &eacute;tendue.
 	</description>
 	<lien>
 	</lien>
 	<prefix>
 	cfg
 	</prefix>
+	<fonctions>
+	cfg_fonctions.php
+	</fonctions>
 </plugin>
