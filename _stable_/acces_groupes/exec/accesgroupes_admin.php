@@ -555,7 +555,7 @@ function exec_accesgroupes_admin() {
         echo "\r\n<tr><td colspan=\"2\" style=\"padding-top: 7px; font-weight: bold;\">"._T('accesgroupes:autoriser_demandes');
         echo " <span style=\"font-size: 10px; font-weight: normal;\">"._T('accesgroupes:help_inscriptions')."</span>\r\n</td></tr>";
         echo "\r\n<tr><td colspan=\"2\">";
-        echo _T('accesgroupes:oui')."<input name=\"demandes_acces\" value=\"1\" type=\"radio\" ".($demande_acces == 1 ? "checked=\"checked\"" : "")."\">";
+        echo _T('accesgroupes:oui')."<input name=\"demandes_acces\" value=\"1\" type=\"radio\" ".($demande_acces == 1 ? "checked=\"checked\"" : "").">";
         echo "&nbsp;&nbsp;<input name=\"demandes_acces\" value=\"0\" type=\"radio\" ".($demande_acces == 0 ? "checked=\"checked\"" : "")."\">"._T('accesgroupes:non');
         echo "\r\n</td>\r\n</tr>";
         
