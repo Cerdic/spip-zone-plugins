@@ -73,7 +73,15 @@ function Agenda_rendu_evenement($flux) {
 	
 	$url = $evenement['URL']; 
 	$texte = Agenda_rendu_boite($evenement['SUMMARY'],$evenement['DESCRIPTION'],$evenement['LOCATION'],$flux['args']['type']);
-	$texte = http_href(quote_amp($url), $texte, '', '', '', '');
+	if (is_string($url))
+		$texte = http_href(quote_amp($url), $texte, '', '', '', '');
+	else if (is_array($url))
+		$texte = ajax_action_auteur(
+			$url['action'], $url['id'], $url['script'], 
+			isset($url['args'])?$url['args']:'', 
+			array($texte,""),
+			isset($url['args_ajax'])?$url['args_ajax']:'', 
+			isset($url['fct_ajax'])?$url['fct_ajax']:'');
 	
 	$flux['data'] = $texte;
 	return $flux;

@@ -38,7 +38,7 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 		$url=parametre_url($url,'del','');
 		$url=parametre_url($url,'id_evenement','');
 
-		$out .= "<a href='$url' onclick=\"$('#voir_evenement').html('');return false;\">";
+		$out .= "<a href='$url' onclick=\"$('#voir_evenement-0').html('');return false;\">";
 		$out .= "<img src='"._DIR_PLUGIN_AGENDA."/img_pack/croix.png' width='12' height='12' style='border:none;'></a>";
 		$out .= "</div>\n";
 
@@ -137,26 +137,28 @@ function inc_voir_evenement_dist($id_evenement, $flag_editable){
 			$url=parametre_url($url,'neweven','');
 			$url=parametre_url($url,'del','');
 			$url=parametre_url($url,'id_evenement','');
+			$form = "";
 			if ($del==1)	{ //---------------Suppression RDV ------------------------------
-			  $out .= "<form name='edition_rdv' action='$url' method='post'>";
-			  //$out .= "<input type='hidden' name='redirect' value='$url' />\n";
-			  $out .= "<input type='hidden' name='id_evenement' value='$fid_evenement' />\n";
-			  $out .= "<input type='hidden' name='suppr' value='1' />\n";
-			  $out .= "<div class='edition-bouton'>";
-			  $out .= "<input type='submit' name='submit' value='Annuler' />";
-			  $out .= "<input type='submit' name='submit' value='Confirmer la suppression' />";
-			  $out .= "</div></form>";
+			  //$out .= "<form name='edition_rdv' action='$url' method='post'>";
+			  $form .= "<input type='hidden' name='id_evenement' value='$fid_evenement' />\n";
+			  $form .= "<input type='hidden' name='suppr' value='1' />\n";
+			  $form .= "<div class='edition-bouton'>";
+			  $form .= "<input type='submit' name='submit' value='Annuler' />";
+			  $form .= "<input type='submit' name='submit' value='Confirmer la suppression' />";
+			  $form .= "</div>";
+			  //$out .= "</form>";
 	  	}
 	  	else {
 				$url=parametre_url($url,'id_evenement',$id_evenement);
-			  $out .= "<form name='edition_rdv' action='$url' method='post'>";
-			  //$out .= "<input type='hidden' name='redirect' value='$url' />\n";
-			  $out .= "<input type='hidden' name='id_evenement' value='$fid_evenement' />\n";
-			  $out .= "<input type='hidden' name='edit' value='1' />\n";
-			  $out .= "<div class='edition-bouton'>";
-				$out .= "<div style='text-align:$spip_lang_right'><input type='submit' name='modifier' value='"._T('bouton_modifier')."' class='fondo'></div>";
-			  $out .= "</div></form>";
+				$url=parametre_url($url,'edit',1);
+			  //$out .= "<form name='edition_rdv' action='$url' method='post'>";
+			  $form .= "<div class='edition-bouton'>";
+				$form .= "<div style='text-align:$spip_lang_right'><input type='submit' name='modifier' value='"._T('bouton_modifier')."' class='fondo'></div>";
+			  $form .= "</div>";
+			  //$out .= "</form>";
 	  	}
+			$args = explode('?',parametre_url($url,'exec','','&'));
+	  	$out .= ajax_action_auteur('voir_evenement',"0-voir","calendrier",end($args),$form,'','wc_init');
 		}
 	}
 	$out .= "</div>";

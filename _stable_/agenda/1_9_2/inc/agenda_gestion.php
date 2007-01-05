@@ -215,11 +215,6 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 
 			
 			if ($flag_editable) {
-				/*$url = generer_url_ecrire($script);
-				$url = parametre_url($url,'id_article',$id_article);
-				$url = parametre_url($url,'id_evenement',$id_evenement);
-				$url = parametre_url($url,'edit',1);
-				$s = "<a href='$url'>".($titre ? $titre : '<em>('._T('info_sans_titre').')</em>')."</a>";*/
 				$s = ajax_action_auteur('editer_evenement', "$id_article-editer-$id_evenement", $script, "id_article=$id_article&id_evenement=$id_evenement&edit=oui", array($titre ? $titre : '<em>('._T('info_sans_titre').')</em>',''),'','wc_init');
 				$vals[] = $s;
 			}
@@ -229,7 +224,6 @@ function Agenda_formulaire_article_afficher_evenements($id_article, $flag_editab
 			$vals[] = propre($descriptif);
 		
 			if ($flag_editable) {
-				//$vals[] =  "<a href='" . generer_url_ecrire("articles","id_article=$id_article&supp_evenement=$id_evenement#agenda") . "'>"._T('agenda:lien_retirer_evenement')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</a>";
 				$vals[] = ajax_action_auteur('editer_evenement', "$id_article-supprimer-$id_evenement", $script, "id_article=$id_article", array(_T('agenda:lien_retirer_evenement')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'"),''),"&id_article=$id_article&supp_evenement=$id_evenement",'wc_init');
 			} else {
 				$vals[] = "";
@@ -423,9 +417,10 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	}
 	
 	$out .= "<div class='agenda-visu-evenement-bouton-fermer'>";
-  $out .=	"<a href='$url'><img src='"._DIR_PLUGIN_AGENDA."/img_pack/croix.png' width='12' height='12' style='border:none;'></a>";
-  $out .= "</div>\n";
-  //$out .=  "<form name='edition_evenement' action='$url' method='post'>";
+	$out .= "<a href='$url' onclick=\"$('#voir_evenement-0').html('');return false;\">";
+	$out .= "<img src='"._DIR_PLUGIN_AGENDA."/img_pack/croix.png' width='12' height='12' style='border:none;'></a>";
+	$out .= "</div>\n";
+
 	if (!$neweven){
 	  $out .=  "<input type='hidden' name='id_evenement' value='$fid_evenement' />\n";
 	  $out .=  "<input type='hidden' name='evenement_modif' value='1' />\n";
@@ -544,8 +539,6 @@ function Agenda_formulaire_edition_evenement($id_evenement, $neweven, $ndate="",
 	// $out .= "<script type='text/javascript' src='"._DIR_PLUGIN_AGENDA."/img_pack/multiselect.js'></script>";
 
   $out .=  "</div>";
-
-	//$out .=  "</form>";
 	$out .=  "</div>\n";
 	return $out;
 }

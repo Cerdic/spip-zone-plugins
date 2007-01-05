@@ -50,6 +50,9 @@ function ajoute_creneaux_horaires($urlbase,$ts_start,$ts_fin,$type,$partie_cal,$
 			$heure=date('H',$j);
 			if (($heure>=$heuremin)&&($heure<=$heuremax)){
 				$url=parametre_url($urlbase,'ndate',urlencode(date('Y-m-d H:i',$j)));
+				$args = explode('?',parametre_url($url,'exec',''));
+				// $url sous forme d'array pour appeler ajax_action_auteur
+				$url = array('action'=>'voir_evenement','id'=>"0-editer",'script'=>'calendrier','args'=>end($args),'fct_ajax'=>'wc_init');
 				$creneau=date('Y-m-d H:i:s',$j);
 				if (date('Y-m-d',$j)==$today)
 					Agenda_memo_full($creneau,$creneau,preg_replace(",\s+,","&nbsp;",date('H:i',$j)." "._T('agenda:ajouter_un_evenement')), " ", "", $url,'calendrier-creneau-today');
@@ -133,6 +136,9 @@ function affiche_evenements_agenda($flag_editable){
 
 		$url=parametre_url($urlbase,'id_evenement',$row['id_evenement']);
 		$url=parametre_url($url,'ajouter_id_article',$row['id_article']);
+		$args = explode('?',parametre_url($url,'exec',''));
+		// $url sous forme d'array pour appeler ajax_action_auteur
+		$url = array('action'=>'voir_evenement','id'=>"0-voir",'script'=>'calendrier','args'=>end($args));
 		
 		$titre = typo($row['titre']);
 		$descriptif = typo($row['descriptif']);
@@ -226,12 +232,14 @@ function exec_agenda_evenements_dist(){
 
 	$out .= affiche_evenements_agenda($flag_editable);
 
+	$out .= "<div id='voir_evenement-0'>";
 	if (($edit||$neweven)&&($flag_editable))	{ //---------------Edition RDV ------------------------------
 		$ndate = _request('ndate');
-		$out .= Agenda_formulaire_edition_evenement($id_evenement,$neweven,$ndate);
+		$form .= Agenda_formulaire_edition_evenement($id_evenement,$neweven,$ndate);
+		$args = explode('?',self());
+		$out .= ajax_action_auteur('voir_evenement',"0-modifier-$id_article-$id_evenement", 'calendrier', end($args), $form);
 	}
-	$out .= "<div id='voir_evenement'>";
-	if ((isset($id_evenement))&&(isset($visu_evenements[$id_evenement]))){ //---------------Visualisation RDV ------------------------------
+	elseif ((isset($id_evenement))&&(isset($visu_evenements[$id_evenement]))){ //---------------Visualisation RDV ------------------------------
 		$voir_evenement = charger_fonction('voir_evenement','inc');
 		$out .= $voir_evenement($id_evenement,$flag_editable);
 	}
