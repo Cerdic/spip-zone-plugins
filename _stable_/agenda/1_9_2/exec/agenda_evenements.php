@@ -30,15 +30,15 @@ function date_debut_fin($annee,$mois,$jour,$type){
 	return array($ts_start,$ts_fin);	
 }
 function ajoute_creneaux_horaires($urlbase,$ts_start,$ts_fin,$type,$partie_cal,$echelle){
-	if ($echelle<=120)
-		$freq_creneaux=30*60;
-	else
-		$freq_creneaux=60*60;
-
-	$today=date('Y-m-d');
 	// creneaux pour ajout uniquement si ajouter_id_article present
-	if (($type!='mois')&&($partie_cal!='sansheure'))
+	if (($type!='mois')&&($partie_cal!='sansheure')&&($partie_cal!=NULL))
 	{
+		if ($echelle<=120)
+			$freq_creneaux=30*60;
+		else
+			$freq_creneaux=60*60;
+	
+		$today=date('Y-m-d');
 		$heuremin='08';$heuremax='20';
 		if ($partie_cal=='matin'){
 			$heuremin='04';$heuremax='15';
@@ -63,7 +63,6 @@ function ajoute_creneaux_horaires($urlbase,$ts_start,$ts_fin,$type,$partie_cal,$
 			}
 		}
 	}
-	
 }
 
 function affiche_evenements_agenda($flag_editable){
