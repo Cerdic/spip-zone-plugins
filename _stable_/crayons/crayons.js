@@ -28,15 +28,14 @@ cfgCrayons.prototype.iconclick = function(c) {
   var link = c.match(/\b(\w+)--(\d+)\b/);
   link = link ? 
     '<a href="ecrire/?exec=' + link[1] + 's_edit&id_' + link[1] + '=' + link[2] +
-    '">' + this.mkimg('edit', ' (' + link[1] + ' ' + link[2] + ')') + '</a><br />' : '';
+    '">' + this.mkimg('edit', ' (' + link[1] + ' ' + link[2] + ')') + '</a>' : '';
 
   var cray = c.match(/\b\w+-(\w+)-\d+\b/);
-  var boite = !cray ? '' : this.mkimg('pencil', ' (' + cray[1] + ')') + '<br />';
+  var boite = !cray ? '' : this.mkimg('pencil', ' (' + cray[1] + ')');
 
-  return "<span class='crayon-icones'><span>" +
-      boite + link +
+  return "<span class='crayon-icones'><span>" + boite +
       this.mkimg('img-changed', cray ? ' (' + cray[1] + ')': '') +
-    "</span></span>";
+      link +"</span></span>";
 }
 
 function entity2unicode(txt)
@@ -224,14 +223,6 @@ jQuery.fn.activatecrayon = function() {
           e.stopPropagation();
           jQuery(me)
           .cancelcrayon();
-        })
-      .end()
-      .find(".crayon-hide")
-        .click(function(e){
-          e.stopPropagation();
-          jQuery(me)
-          .prev()
-          .hidecrayon();
         })
       .end()
       .each(function(){

@@ -4,6 +4,9 @@ img.crayon-img-changed {
 .crayon-changed img.crayon-img-changed {
     display: inline;
 }
+.crayon-changed img.crayon-pencil {
+    display: none;
+}
 img.crayon-edit, img.crayon-pencil {
     visibility: hidden;
 }
