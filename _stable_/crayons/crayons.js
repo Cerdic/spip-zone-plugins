@@ -256,7 +256,7 @@ jQuery.fn.activatecrayon = function() {
 jQuery.fn.iconecrayon = function(){
   return this.each(function() {
     jQuery(this).prepend(configCrayons.iconclick(this.className))
-    .find('.crayon-pencil') // le pencil a clicker lui-meme
+    .find('.crayon-pencil, .crayon-img-changed') // le pencil a clicker lui-meme et sa memoire
       .click(function(e){
         jQuery(this).ancestors('.crayon').eq(0).opencrayon(e);
       });

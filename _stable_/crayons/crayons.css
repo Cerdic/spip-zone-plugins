@@ -32,6 +32,6 @@ img.crayon-edit, img.crayon-pencil {
 .crayon-icones span {
     position:absolute;
 }
-.crayon-edit, .crayon-pencil {
+.crayon-edit, .crayon-pencil, .crayon-img-changed {
 	cursor: pointer;
 } 
