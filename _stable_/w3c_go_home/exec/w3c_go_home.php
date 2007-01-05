@@ -8,6 +8,8 @@
  * © 2006 - Distribue sous licence GPL
  *
  */
+include_spip('inc/validateur_api');
+
 function exec_w3c_go_home(){
 	global $connect_statut;
 	
@@ -26,17 +28,6 @@ function exec_w3c_go_home(){
 		exit;
 	}
 
-	if (isset($_GET['reset']))
-	{
-		include_spip('inc/meta');
-		effacer_meta('xhtml_access_compliance');
-		effacer_meta('xhtml_w3c_compliance');
-		ecrire_metas();
-		$url=generer_url_ecrire("w3c_go_home");
-		include_spip('inc/headers');
-		redirige_par_entete($url);
-	}
-	
 	debut_page(_L("Validation Site W3C"), "w3c", "w3c");
 	debut_gauche();
 	debut_droite();
@@ -45,77 +36,65 @@ function exec_w3c_go_home(){
 	//include_spip('public/assembler');
 	//$xml_sitemap=recuperer_fond('sitemap');
 	$sitemap_url = parametre_url(generer_url_public('sitemap'),'var_mode',_request('var_mode'));
-	include_spip('inc/distant');
-	$xml_sitemap=recuperer_page($sitemap_url);
+	include_spip('inc/xml');
+	$sitemap = spip_xml_load($sitemap_url);
 
-	include_spip('inc/plugin');
-	$sitemap=parse_plugin_xml($xml_sitemap);
 	$sitemap = reset($sitemap);
 	$sitemap = reset($sitemap);
-	if (isset($sitemap['url']))
+	if (isset($sitemap['url']) && is_array($sitemap['url']))
 		$sitemap=$sitemap['url'];
 	else
 		$sitemap=array();
 
-/*	$table_url[]=generer_url_public("recherche","recherche=conseil");	$urlcount++;
+	/*
+	$table_url[]=generer_url_public("recherche","recherche=conseil");	$urlcount++;
 	$table_url[]=generer_url_public("recherche","recherche=municipal"); $urlcount++;
 	$table_url[]=generer_url_public("recherche","recherche=ecole");	$urlcount++;
 	$table_url[]=generer_url_public("recherche","recherche=mairie");	$urlcount++;
 	$table_url[]=generer_url_public("recherche","recherche=permis");	$urlcount++;
-	$table_url[]=generer_url_public("article","id_article=6");	$urlcount++;*/
+	$table_url[]=generer_url_public("article","id_article=6");	$urlcount++;
+	*/
 		
 	$titre_table = _L("Conformit&eacute; du site");
 	$icone = "";
+	$validateurs = array('spip_xhtml_validator');
 	
 	echo "<div style='height: 12px;'></div>";
 	echo "<a href='".generer_url_ecrire('w3c_go_home','reset=1')."'>Reset</a><br/>";
 	echo "<div class='liste'>";
 	bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black");
 	echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
-	$table[] = array('','url',"<a href='http://validateur-accessibilite.apinc.org/'>apinc</a>","<a href='http://validator.w3.org/'>validator</a>");
-
-	$access_compliance = isset($GLOBALS['meta']['xhtml_access_compliance'])?unserialize($GLOBALS['meta']['xhtml_access_compliance']):false;
-	if (!$access_compliance)
-		$access_compliance = array();
-	$w3c_compliance = isset($GLOBALS['meta']['xhtml_w3c_compliance'])?unserialize($GLOBALS['meta']['xhtml_w3c_compliance']):false;
-	if (!$w3c_compliance)
-		$w3c_compliance = array();
+	
+	$vals[] = '';
+	$vals[] = 'url';
+	$largeurs = array('','');
+	$styles = array('arial11', 'arial11');
+	foreach($validateurs as $nom){
+		$vals[] = validateur_infos($nom);
+		$largeurs[] = '';
+		$styles[] = 'arial11';
+	}
+	$table[] = $vals;
 
 	if (is_array($sitemap) && count($sitemap)){
-		$cpt_ok_access=0;
-		$cpt_ok_xhtml=0;
-		$cpt=0;
+		$cpt_ok = 0;
+		$id_test = 0;
+		foreach($validateurs as $nom)
+			$compteur[$nom] = 0;
 		foreach($sitemap as $url) {
 			$lastmod = strtotime($url['lastmod'][0]);
 			$loc = $url['loc'][0];
-			$ok_access=false;
-			$url_access=generer_url_ecrire('test_access',"url=".urlencode($loc)."&time=".time()); // time pour echapper au cache du navigateur
-			$valide_access="<img src='$url_access' />";
-			if (isset($access_compliance[$loc])){
-				$res = $access_compliance[$loc];
-				if (($res[0]==0)&&($lastmod<$res[1])){
-					$valide_access=date("Y-m-d H:i",$res[1]);
-					$ok_access = true;
-					$cpt_ok_access++;
-				}
+			$ok=true;
+			foreach($validateurs as $nom){
+				$etat[$nom] = validateur_test_valide($nom,$loc,$lastmod);
+				if (!$etat[$nom]) $ok =false;
+				else $compteur[$nom]++;
 			}
-			$ok_xhtml=false;
-			$url_xhtml=generer_url_ecrire('test_xhtml',"url=".urlencode($loc)."&time=".time());  // time pour echapper au cache du navigateur
-			$valide_xhtml="<img src='$url_xhtml' />";
-			if (isset($w3c_compliance[$loc])){
-				$res = $w3c_compliance[$loc];
-				if (($res[0]==0)&&($lastmod<$res[1])){
-					$valide_xhtml=date("Y-m-d H:i",$res[1]);
-					$ok_xhtml = true;
-					$cpt_ok_xhtml++;
-				}
-			}
-	
+
 			$vals = '';
 			$vals[] = ++$cpt;
-			
 	
-			if ($ok_access&&$ok_xhtml){
+			if ($ok){
 				$cpt_ok++;
 				$puce = 'puce-verte-breve.gif';
 			}
@@ -126,38 +105,35 @@ function exec_w3c_go_home(){
 			$s .= "<a href='$loc'>".lignes_longues($loc,50)."</a>";
 			$vals[] = $s;
 			
-			$s = "";
-			$url_apinc=generer_url_ecrire('test_apinc',"urlAVerif=".urlencode($loc));
-			$s .= "<a href='$url_apinc'>$valide_access</a>";
-			$vals[] = $s;
-	
-	
-			$s = "";
-			if ($GLOBALS['spip_version_code']<1.9203)
-				$url_validateur="http://validator.w3.org/check?uri=".urlencode($loc);
-			else {
-				$url_validateur = parametre_url($loc,'var_mode','debug');
-				$url_validateur = parametre_url($url_validateur,'var_mode_affiche','validation');
+			foreach($validateurs as $nom){
+				$s = "";
+				$url_voir = "#";
+				$s .= "<a href='$url_voir'>";
+				if ($etat[$nom])
+					$s .= "OK (".date('d-m-Y H:i',$etat[$nom]).")</a>";
+				else {
+					$url_test = generer_url_ecrire('w3cgh_test',"nom=$nom&url=".urlencode($loc),true);
+					$s .= "<span id='test_$id_test'></span></a>";
+					if ($id_test<10)
+						$s .= "<script type='text/javascript'>$('#test_$id_test').append(ajax_image_searching).load('$url_test');</script>";
+					// ajouter la methode img en noscript
+					$id_test++;
+				}
+				$vals[] = $s;
 			}
-			$s .= "<a href='$url_validateur'>$valide_xhtml</a>";
-			$vals[] = $s;
-	
 			$table[] = $vals;
 		}
 	}
-	$largeurs = array('','','','','');
-	$styles = array('arial11', 'arial11', 'arial1', 'arial1','arial1');
 	echo afficher_liste($largeurs, $table, $styles);
 	echo "</table>";
 	echo "</div>\n";
 	
-	echo "$cpt_ok_access/".count($sitemap)." pages conforme selon la verification accessibilit&eacute; automatis&eacute;e<br/>";
-	echo "$cpt_ok_xhtml/".count($sitemap)." pages conforme XHTML selon ";
-	if ($GLOBALS['spip_version_code']<1.9203)
-		echo "le validator.w3.org";
-	else 	
-		echo "le validateur interne SPIP";
-
+	foreach($validateurs as $nom)
+		echo $compteur[$nom]."/$cpt pages conforme selon le validateur $nom<br/>";
+	
+	echo "$cpt_ok/$cpt pages totalement conforme";
 	fin_page();
 
 }
+
+?>
