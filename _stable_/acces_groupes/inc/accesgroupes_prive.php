@@ -142,7 +142,9 @@ function exec_articles() {
       // Liste des auteurs de l'article
       //
       
+       echo "\n<div id='editer_auteurs-$id_article'>";
        echo formulaire_editer_auteurs($cherche_auteur, $ids, $id_article,$flag_editable);
+       echo "</div>";
       
       //
       // Liste des mots-cles de l'article
