@@ -20,7 +20,7 @@ function exec_voir_evenement_dist()
 		$url = parametre_url($url,'edit','','&');
 		$url = parametre_url($url,'neweven','','&');
 		$args = explode('?',$url);
-		$res .= ajax_action_auteur('voir_evenement',"0-modifier-$id_article-$id_evenement", 'calendrier', end($args), $form);
+		$res .= ajax_action_auteur('voir_evenement',"0-modifier-$id_article-$id_evenement", 'calendrier', end($args), $form,'','reload_agenda');
 	}
 	else {
 		$voir_evenement = charger_fonction('voir_evenement','inc');
