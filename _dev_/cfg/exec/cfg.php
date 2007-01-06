@@ -152,7 +152,7 @@ class cfg
 		}
 		$contexte['base_url'] = generer_url_ecrire('cfg', $get);
 	    $contexte['lang'] = $GLOBALS['spip_lang'];
-	    $contexte['arg'] = 'config_sms-0.1.0';
+	    $contexte['arg'] = 'cfg0.0.0-' . $this->nom . '-' . $this->fond;
 	    $contexte['hash'] =  calculer_action_auteur('-' . $contexte['arg']);
 
 	    include_spip('public/assembler');
@@ -170,7 +170,7 @@ class cfg
 			$this->fin_page();
 				
 	}
-
+/*
 	function boite_liens($titre = "", $elements = array())
 	{
 		if (!$elements) {
@@ -216,7 +216,7 @@ class cfg
 		}
 		return boite_liens(_L('creer_un_nouveau_compte'), $liste);
 	}
-
+*/
 	function debut_page()
 	{
 		include_spip('inc/presentation');
