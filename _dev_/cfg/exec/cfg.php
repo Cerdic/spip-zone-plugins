@@ -57,11 +57,13 @@ class cfg
 	{
 	    effacer_meta($this->nom);
 	    $this->val = array();
+	    ecrire_metas();
 	}
 	
 	function modifier()
 	{
 	    ecrire_meta($this->nom, serialize($this->val));
+	    ecrire_metas();
 	}
 
 	function set_fond($fond)
