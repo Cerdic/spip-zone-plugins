@@ -32,6 +32,18 @@
 	<dt>&#035;CONFIG{config_sms/dudu/user}</dt>
 	<dd>[(#CONFIG{config_sms/dudu/user})]</dd>
 
+	<dt>&#035;CONFIG{config_sms,xxx}</dt>
+	<dd>#CONFIG{config_sms,xxx}</dd>
+
+	<dt>&#035;CONFIG{config_sms/dudu/user,yyy}</dt>
+	<dd>[(#CONFIG{config_sms/dudu/user,yyy})]</dd>
+
+	<dt>&#035;CONFIG{config_xxx,zzz}</dt>
+	<dd>#CONFIG{config_xxx,zzz}</dd>
+
+	<dt>&#035;CONFIG{config_sms/dudux/user,ttt}</dt>
+	<dd>[(#CONFIG{config_sms/dudux/user,ttt})]</dd>
+
 	<dt>[(&#035;REM|sinon{', '}|implode{&#035;CONFIG|unserialize|array_keys})]</dt>
 	<dd>[(#REM|sinon{', '}|implode{#CONFIG|unserialize|array_keys})]</dd>
 </dl>
