@@ -12,7 +12,11 @@ include_spip('inc/validateur_api');
 
 function exec_w3c_go_home(){
 	global $connect_statut;
-	$validateurs = array('spip_xhtml_validator');
+	
+	//$validateurs = array('spip_xhtml_validator');
+	$liste = find_all_in_path("validateur/","[.]php$");
+	foreach (array_keys($liste) as $nom)
+		$validateurs[] = basename($nom,'.php');
 	$out = "";
 	
 	include_spip ("inc/presentation");
@@ -31,11 +35,24 @@ function exec_w3c_go_home(){
 	}
 
 	debut_page(_L("Validation Site W3C"), "w3c", "w3c");
+	$out .= "<script type='text/javascript'><!--
+	function perform_tests(max){
+		var compteur=0;
+		$('.test').each(function(){
+			if ( (!$(this).html()) && (compteur<max)){
+				$(this).append(ajax_image_searching).load($(this).rel());
+				compteur++;
+			}
+		});
+	}
+	--></script>";
 	
 	$out .= debut_gauche('',true);
 	$out .= debut_boite_info(true);
 	$action = generer_action_auteur('w3cgh_reset_test',implode('-',$validateurs),generer_url_ecrire('w3c_go_home'));
 	$out .= "<a href='$action'>"._L("Tout Reinitialiser")."</a><br/>";
+	$out .= "<a href='#' onclick='perform_tests(10);'>"._L("10 Tests")."</a><br/>";
+	$out .= "<a href='#' onclick='perform_tests(100);'>"._L("100 Tests")."</a><br/>";
 	$out .= fin_boite_info(true);
 	
 	$out .= debut_droite('',true);
@@ -112,15 +129,17 @@ function exec_w3c_go_home(){
 			
 			foreach($validateurs as $nom){
 				$s = "";
-				$url_voir = "#";
-				$s .= "<a href='$url_voir'>";
-				if ($etat[$nom])
+				$url_voir = generer_url_ecrire('w3cgh_voir',"nom=$nom&url=".urlencode($loc),true);
+				if ($etat[$nom]){
+					$s .= "<a href='$url_voir'>";
 					$s .= "OK (".date('d-m-Y H:i',$etat[$nom]).")</a>";
+				}
 				else {
 					$url_test = generer_url_ecrire('w3cgh_test',"nom=$nom&url=".urlencode($loc),true);
-					$s .= "<span id='test_$id_test'></span></a>";
-					if ($id_test<10)
-						$s .= "<script type='text/javascript'>$('#test_$id_test').append(ajax_image_searching).load('$url_test');</script>";
+					$s .= "<a href='$url_voir' rel='$url_test' class='test'></a>";
+					//$s .= "<span class='test' name='$url_test'></span></a>";
+					//if ($id_test<10)
+					//	$s .= "<script type='text/javascript'>$('#test_$id_test').append(ajax_image_searching).load('$url_test');</script>";
 					// ajouter la methode img en noscript
 					$id_test++;
 				}

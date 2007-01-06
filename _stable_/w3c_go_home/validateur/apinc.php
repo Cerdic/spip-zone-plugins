@@ -32,16 +32,22 @@ function validateur_apinc_dist($action, $url= ""){
 	return false;
 }
 
+function getmicrotime(){
+ list($usec, $sec) = explode(" ", microtime());
+ return ((float)$usec + (float)$sec);
+}
 
 function test_apinc(){
-	?>
+	global $erreur1,$erreur2,$erreur3;
+	$css = find_in_path('validateur.css');
+echo <<<html1
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15" />
-<link rel="stylesheet" type="text/css" media="screen" href="<?php echo find_in_path('validateur.css');?>" />
+<link rel="stylesheet" type="text/css" media="screen" href="$css" />
 <title>Validateur d'accessibilité</title>
 <script type="text/javascript">
 <!--
@@ -74,8 +80,7 @@ Validateur
 <a href="http://validateur-accessibilite.apinc.org/validateur.zip">Téléchargement</a>
 </p>
 <h1>Vérification des règles d'accessibilité version 1</h1>
-
-<?php
+html1;
 
 //$formulaire=0;
 $logo='';
@@ -103,7 +108,6 @@ $lang='';
 $tabindexPasPartout='';
 
 $tab="1";
-include_once('valide_fonctions.php');
 $time_start = getmicrotime();
 
 /*	
@@ -127,7 +131,7 @@ if($_GET['urlAVerif']!='' && $_GET['urlAVerif']!='http://'){
 		}
 }
 //endif;
-
+$urlAverif = $_GET['urlAVerif'];
 $urlValide = @file ($_GET[urlAVerif]);
 if($formulaire=="necessaire"){
 
@@ -1079,7 +1083,7 @@ On affiche le nb d'erreurs et d'avertissements
 	}
 
 	echo "</p>";
-?>
+	echo <<<html2
 <p>
 En plus des points signalés directement dans le code, veuillez prendre garde à respecter les 
 <a href="valider_site.htm">points non vérifiables automatiquement</a>.
@@ -1091,12 +1095,11 @@ En plus des points signalés directement dans le code, veuillez prendre garde à r
 <label for="niveau2">Niveau 2 : </label><input type="radio" name="niveau" id="niveau2" value="niveau2" /><br />
 <label for="niveau3">Niveau 3 : </label><input type="radio" name="niveau" id="niveau3" value="niveau3" /><br />
 <label for="avert">Que les erreurs : </label><input type="checkbox" name="avert" id="avert" value="pasAvertissement" /><br />
-<input type="hidden" name="urlAVerif" id="urlAVerif" value="<?php echo $_GET['urlAVerif']?>" />
+<input type="hidden" name="urlAVerif" id="urlAVerif" value="$urlAverif" />
 <input type="submit" name="revalider" value="Revalider votre document" />
 </p>
 </form>
-
-<?php
+html2;
 /*
 On affiche le code avec les messages d'erreurs.
 */
@@ -1115,9 +1118,9 @@ $time = $time_end - $time_start;
 $time=number_format($time,3,","," ");
 //echo "<p>Page générée en $time secondes</p>";
 	}
-?>
+	echo <<<html3
 </body>
 </html>
-<?php
+html3;
 }
 ?>
