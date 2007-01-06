@@ -48,6 +48,16 @@ function snippets_forms_importer($id_form_target,$formtree,$contexte){
 									$set = substr($set,0,strlen($set)-2);
 									$res = spip_query("UPDATE spip_forms_champs SET $set WHERE id_form="._q($id_form)." AND champ="._q($champ));
 								}
+								if(isset($field['les_choix'])&&is_array($field['les_choix']))
+									foreach($field['les_choix'] as $les_choix)
+										foreach($les_choix['un_choix'] as $un_choix){
+											$titre = trim(applatit_arbre($un_choix['titre']));
+											$choix = Forms_insere_nouveau_choix($id_form,$champ,$titre);
+											if (isset($un_choix['rang'])){
+												$rang = trim(applatit_arbre($un_choix['rang']));
+												spip_query("UPDATE spip_forms_champs_choix SET rang="._q($rang)." WHERE id_form="._q($id_form)." AND champ="._q($champ)." AND choix="._q($choix));
+											}
+										}
 							}
 				}
 			}
