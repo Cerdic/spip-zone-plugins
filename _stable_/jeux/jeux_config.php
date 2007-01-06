@@ -14,6 +14,7 @@
 // balises du plugin a inserer dans les articles
 define('_JEUX_DEBUT', '<jeux>');
 define('_JEUX_FIN', '</jeux>');
+define('_JEUX_POST', '@@JEUX_POST@@');
 
 // separateurs utilisables a l'interieur des balises ci-dessus
 // format à utiliser dans la redaction : [separateur]
@@ -78,17 +79,17 @@ $jeux_signatures = array(
 // liste des css a placer dans le header public
 // dossier jeux/style/
 global $jeux_header_public;
-$jeux_header_public = array('jeux', 'qcm', 'mots_croises', 'sudoku');
+$jeux_header_public = array('jeux', 'qcm', 'mots_croises', 'sudoku', 'pendu');
 
 
 // liste des css a placer dans le header prive
 // dossier jeux/style/
 global $jeux_header_prive;
-$jeux_header_prive = array('jeux','qcm', 'mots_croises', 'sudoku');		//, 'mots_croises-prive');
+$jeux_header_prive = array('jeux','qcm', 'mots_croises', 'sudoku', 'pendu');		//, 'mots_croises-prive');
 
 // liste des js a placer dans le header prive
 // dossier jeux/javascript/
 global $jeux_javascript;
-$jeux_javascript = array('mots_croises', 'layer');
+$jeux_javascript = array('layer', 'pendu', 'mots_croises');
 
 ?>

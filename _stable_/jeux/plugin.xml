@@ -51,6 +51,11 @@ _
 		<action>pre_propre</action>
 	</pipeline>
 	<pipeline>
+		<nom>post_propre</nom>
+		<inclure>jeux_pipelines.php</inclure>
+		<action>post_propre</action>
+	</pipeline>
+	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>jeux_pipelines.php</inclure>
 		<action>header_prive</action>

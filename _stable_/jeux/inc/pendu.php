@@ -41,14 +41,23 @@ Exemple de syntaxe dans l'article :
 function pendu_titre($texte) {
  return $texte?"<p class=\"jeux_titre pendu_titre\">$texte</p>":'';
 }
-function pendu_pendu($texte) {
- $mots = jeux_liste_mots_maj($texte);
- $mot = $mots[array_rand($mots)];
- $question = str_repeat('_ ', strlen($mot));
- for($i=1; $i<=7; $i++) $p .= affiche_un_pendu($i) . '<br>';
- $texte = $p . $mot . '<br>' . $question. '<br>' . affiche_un_clavier()
- 	.(jeux_config('regle')?'<p class="jeux_regle">'.definir_puce()._T('pendu:regle').'</p>' : '');
- return $texte;
+function pendu_pendu($texte, $indexJeux) {
+
+  if (_request('etat')=='') set_request('etat', 1);
+  if (_request('mot')=='') {
+	$mots = jeux_liste_mots_maj($texte);
+  	set_request('mot', $mot1 = $mots[array_rand($mots)]);
+	set_request('mot2', str_repeat('_', strlen($mot1)));
+  }
+  
+ //$proposition = join(' ', preg_split('//', _request('mot2'), -1, PREG_SPLIT_NO_EMPTY));
+ $proposition = "\n<input class=\"pendu_cache\" type=\"button\" readonly=\"readonly\" value=\"$proposition\" name=\"cache\" \">";
+ //$jouees = join(' ', preg_split('//', _request('jouees'), -1, PREG_SPLIT_NO_EMPTY));
+ $jouees = "\n<input class=\"pendu_jouees\" type=\"button\" readonly=\"readonly\" value=\"$jouees\" name=\"jouees\" \">"; 
+ return affiche_un_pendu(intval(_request('etat'))) . '<br>'
+ 	. $proposition . '<br>' . affiche_un_clavier($indexJeux) . '<br>' . $jouees
+ 	. (jeux_config('regle')?'<p class="jeux_regle">'.definir_puce()._T('pendu:regle').'</p>' : '')
+	. '['._JEUX_POST."|pendu_javascript_post|$indexJeux|\"".join('","',jeux_liste_mots_maj($texte)).'"@@]';
  //return $p . ($texte?"<p class=\"jeux_question pendu_pendu\">$texte</p>":'');
 }
 function pendu_reponse($texte, $id) {
@@ -60,6 +69,30 @@ function pendu_reponse($texte, $id) {
  return $texte?"<span class=\"pendu_reponse\">$texte</span>":'';
 }
 
+function pendu_javascript_post($idJeux, $liste) {
+ return "<script type=\"text/javascript\"><!--
+Mots[$idJeux] = new Array($liste);
+//Cherche[$idJeux] = '"._request('mot')."' //new Array($liste);
+//Chaine[$idJeux]='"._request('mot2')."'; // Stocker le mot tiré
+NbMots=Mots[$idJeux].length; // Nb mots contenus dans la table Mots
+Tirage=Math.floor(Math.random()*NbMots); // Tirer aléatoirement un mot
+Cherche[$idJeux]=Mots[$idJeux][Tirage]; // Stocker le mot tiré
+//Chaine[$idJeux]=Cherche[$idJeux].substr(0,1); // Créer la chaine à afficher
+Long=Cherche[$idJeux].length; // Calculer la longueur du mot tiré
+Chaine[$idJeux]='';
+for(i=1;i<(Long-0);i++) Chaine[$idJeux]+='!'; // en mettant des . au milieu
+//Chaine+=Cherche.substr(Long-1,Long);
+//Long[$idJeux]=Cherche.length; // Calculer la longueur du mot tiré
+//var Chaine[$idJeux]=Cherche[$id].substr(0,1); // Créer la chaine à afficher
+//for(i=1;i<=(Long[$idJeux]-2);i++) Chaine[$idJeux]+=''; // en mettant des . au milieu
+//	Chaine+=Cherche[$id].substr(Long[$id]-1,Long[$id]);
+Propos[$idJeux]=''; // Lettres proposées
+NbErr[$idJeux]=0; // Nombre d'erreurs
+pendu_aff_mot($idJeux);
+//document.write(Cherche[$idJeux]);
+// --></script>";
+}
+
 function affiche_un_pendu($etat) {
  $img = preg_split('/\s*,\s*/', jeux_config($etat));
  $debut = '<img src="'.jeux_config('base_img');
@@ -68,12 +101,20 @@ function affiche_un_pendu($etat) {
  return $debut.join($fin.'<br />'.$debut, $img).$fin;
 }
 
-function affiche_un_clavier() {
+function affiche_un_clavier($indexJeux) {
  $clav = preg_split('//', _T('jeux:alphabet'), -1, PREG_SPLIT_NO_EMPTY);
- $debut = '<a href="#">';
- $fin = '</a>';
+ foreach ($clav as $i=>$lettre) $clav[$i] = "<input class=\"jeux_bouton pendu_clavier\" type=\"button\" name=\"$lettre\" value=\"$lettre\" onclick=\"pendu_trouve('$lettre', '$indexJeux');\">";
+ $i = floor(count($clav)/2);
 //echo "<br>etat:$etat"; print_r($img);
- return $debut.join($fin.'&nbsp;'.$debut, $clav).$fin;
+ return "\n<table class=\"pendu_clavier\" border=0><tr><td td class=\"pendu_clavier\" >".join('', array_slice($clav, 0, $i)).'<br>'.join('', array_slice($clav, $i)).'</td></tr></table>';
+}
+
+function affiche_un_clavier0($indexJeux) {
+ $clav = preg_split('//', _T('jeux:alphabet'), -1, PREG_SPLIT_NO_EMPTY);
+ foreach ($clav as $i=>$lettre) $clav[$i] = "<td><input class=\"jeux_bouton pendu_clavier\" type=\"button\" value=\"$lettre\" onclick=\"pendu_trouve('$lettre', 'pendu_$indexJeux');\"></td>";
+ $i = floor(count($clav)/2);
+//echo "<br>etat:$etat"; print_r($img);
+ return "\n<table class=\"pendu_clavier\"><tr>".join('', array_slice($clav, 0, $i)).'</tr><tr>'.join('', array_slice($clav, $i)).'</tr></table>';
 }
 
 // fonction principale 
@@ -93,10 +134,10 @@ function jeux_pendu($texte, $indexJeux) {
 //global $jeux_config; print_r($jeux_config);
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $html .= pendu_titre($tableau[$i+1]);
-	  elseif ($valeur==_JEUX_PENDU) $html .= pendu_pendu($tableau[$i+1], "pendu_$indexJeux_$i");
+	  elseif ($valeur==_JEUX_PENDU) $html .= pendu_pendu($tableau[$i+1], $indexJeux);
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
   }
-  return $html;
+  return "<form NAME=\"pendu$indexJeux\">$html</form>";
 }
 
 
