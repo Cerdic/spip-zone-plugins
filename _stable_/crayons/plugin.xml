@@ -26,7 +26,7 @@ _ <code><h1 class="#EDIT{titre} autres classes">#TITRE</h1></code>.
 	Crayons
 	</prefix>
 	<icon>
-	images/pencil.png
+	images/crayon.png
 	</icon>
 	<fonctions>tetecrayons.php</fonctions>
 	<pipeline>
