@@ -9,11 +9,17 @@ _ Cedric MORIN [notre-ville.net->http://www.notre-ville.net] pour l'aide techniq
 _ Pierre Andrews pour toutes les id&eacute;es.
 _ Tou(te)s les autres qui ont mis leur grain de sel dans ce projet sur la liste spip-zone notamment.
 _ Et tous les concepteurs et les conceptrices de squelettes, themes, et images (voir auteurs de chaque habillages).
-_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+_ &copy; 2006-2007 - Distribu&eacute; sous licence GNU/GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
-	1.0b
+	1.3
 	</version>
+	<icon>
+	img_pack/habillages_icone-48.png
+	</icon>
+	<lien>
+	http://spip.graphismes.free.fr
+	</lien>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	test
 	</etat>
@@ -22,8 +28,8 @@ _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	</options>
 	<description>
 Gestionnaire d'habillages SPIP.
-_ Pour la version compl&egrave; (avec les jeux de squelettes, les th&egrave;mes, les extras, et les icones), t&eacute;l&eacute;chargez-la [ici->http://spip.graphismes.free.fr/spip.php?article5].
-_ Ce plugin est compatible avec la version SPIP 1.9.2 alpha (7521 minimum) t&eacute;l&eacute;chargeable [ici->http://spip.graphismes.free.fr/spip.php?article5].
+_ Pour la version compl&egrave; (avec les jeux de squelettes, les th&egrave;mes, les extras, et les icones).
+_ Ce plugin est compatible avec la version SPIP 1.9.2 alpha 2 (7521 minimum).
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix> 
