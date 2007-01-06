@@ -10,7 +10,7 @@
 	<div style="margin-left:5px; margin-right: 15px; background-color: #8a5e99;">
 	<center>
 
-	<div id="block-footer"><b>R&eacute;digez votre article</b></div>
+	<div id="block-footer"><b><:opconfig:redigez_article:></b></div>
 	
 	<br />
 
@@ -21,30 +21,30 @@
 		<div id="block-center">
 		<div id="block-content">
 
-		<p><label><b><small><:publie_titre:> [obligatoire]</small></b></label></p>
+		<p><label><b><small><:opconfig:publie_titre:>&nbsp;[<:opconfig:obligatoire:>]</small></b></label></p>
 		<p><input type="text" name="titre" value="[(#ENV**{titre})]"  size="60" maxlength="80"></p>
 
 		<hr style="margin-left : 10px; margin-right : 10px;" />
 
-			<p><label><b><small><:publie_texte:></b></small></label></p>
+			<p><label><b><small><:opconfig:publie_texte:></b></small></label></p>
 			<p><div style="margin-left : 10px; margin-right : 10px;">[(#ENV**{texte}|barre_article{30,62})]</div></p>
 
 		<hr style="margin-left : 10px; margin-right : 10px;" />
 
-		<div style="font-size : 0.8em;">
+		<div style="font-size : 0.8em; margin-left : 10px; margin-bottom : 10px;">
 			<p>
-			<b>Identification [optionel]</b><br /><br />
+			<b><:opconfig:identification:>&nbsp;[<:opconfig:optionel:>]</b><br /><br />
 			<table cellspacing="0" cellpadding="0" border="0">
-			<tr><td><div style="font-size : 0.8em;">Votre nom ou pseudo :&nbsp;</div></td><td>
+			<tr><td><:opconfig:votre_nom:>&nbsp;:&nbsp;</td><td>
 			<input class="nom_inscription" type="text" name="nom_inscription" value="[(#ENV*{nom_inscription})]" size="25"></td></tr>
-			<tr><td><div style="font-size : 0.8em;">Votre email :&nbsp;</div></td><td>
+			<tr><td><:opconfig:votre_mail:>&nbsp;:&nbsp;</td><td>
 			<input class="mail_inscription" type="text" name="mail_inscription" value="[(#ENV*{mail_inscription})]" size="25"></td></tr>
-			<tr><td><div style="font-size : 0.8em;">Votre groupe éventuel :&nbsp;</div></td><td>
+			<tr><td><:opconfig:votre_groupe:>&nbsp;:&nbsp;</td><td>
 			<input class="group_name" type="text" name="group_name" value="[(#ENV*{group_name})]" size="25"></td></tr>
-			<tr><td><div style="font-size : 0.8em;">Votre numéro de tel :&nbsp;</div></td><td>
+			<tr><td><:opconfig:votre_phone:>&nbsp;:&nbsp;</td><td>
 			<input class="phone" type="text" name="phone" value="[(#ENV*{phone})]" size="25"></td></tr>
 			</table>
-			<p>
+			</p>
 		</div>
 
 		</div>
@@ -63,7 +63,7 @@
 
 	<div id="block-footer">
 		<p><div style='text-align:center;'>
-			&nbsp;&nbsp;<label><b><:publie_rubrique:></b></label>
+			&nbsp;&nbsp;<label><b><:opconfig:publie_rubrique:></b></label>
 			<select name="rubrique" value="[(#ENV**{rubrique})]">
 				<BOUCLE_rubrique(RUBRIQUES){id_rubrique IN #CONTRIBUTIONS_LOCALES,#CONTRIBUTIONS_NON_LOCALES,#CONTRIBUTIONS_ANALYSES}{tout}>
 					[(#ENV**{rubrique}|selected_option{#ID_RUBRIQUE,#TITRE})]
