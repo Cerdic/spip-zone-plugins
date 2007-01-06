@@ -1,18 +1,5 @@
 #CACHE{86400}
 
-<script language="javascript">
-
-/* Pour ouvrir une fenetre */
-<!--
-function ouvreFenetre(page, largeur, hauteur) {
-  window.open(page, "", "scrollbars=yes,menubar=no,toolbar=no,resizable=no,width="
-              + largeur + ",height=" + hauteur);
--->
-}
-
-
-</script>
-
 <form action="[(#ENV{url})]" method="post" name="formulaire_article" id="Formulaire_article" enctype="multipart/form-data">
 
 	<input type="hidden" name="article" value="[(#ENV**{article})]"  size="50">
@@ -20,121 +7,76 @@ function ouvreFenetre(page, largeur, hauteur) {
 	[(#ENV*{formulaire_previsu})]
 
 	<div style="text-align: center; color: red; font-style: bold;">[(#ENV*{mess_error})]</div>
+	<div style="margin-left:5px; margin-right: 15px; background-color: #8a5e99;">
 	<center>
+
+	<div id="block-footer"><b>R&eacute;digez votre article</b></div>
+	
+	<br />
+
+
 	<table>
 	<tr><td valign="top" width="200">
 	
 		<div id="block-center">
-		<div id="block-publie-titre"><b>&nbsp;&nbsp;<:publie_redaction:></b></div>
 		<div id="block-content">
-		<br />
-		<hr style="margin-left : 10px; margin-right : 10px;" />
 
-			<p><label><b><small><:publie_titre:> [obligatoire]</small></b></label></p>
-			<p><input type="text" name="titre" value="[(#ENV**{titre})]"  size="60" maxlength="80"></p>
+		<p><label><b><small><:publie_titre:> [obligatoire]</small></b></label></p>
+		<p><input type="text" name="titre" value="[(#ENV**{titre})]"  size="60" maxlength="80"></p>
 
 		<hr style="margin-left : 10px; margin-right : 10px;" />
 
 			<p><label><b><small><:publie_texte:></b></small></label></p>
 			<p><div style="margin-left : 10px; margin-right : 10px;">[(#ENV**{texte}|barre_article{30,62})]</div></p>
-			<br/>	
 
 		<hr style="margin-left : 10px; margin-right : 10px;" />
 
-		<table borser="0" cellspacing="0" cellpadding="0">
-		<tr>
-		<td width="50%" valign="top">
-		<div style="font-size : 0.7em;">
+		<div style="font-size : 0.8em;">
+			<p>
+			<b>Identification [optionel]</b><br /><br />
+			<table cellspacing="0" cellpadding="0" border="0">
+			<tr><td><div style="font-size : 0.8em;">Votre nom ou pseudo :&nbsp;</div></td><td>
+			<input class="nom_inscription" type="text" name="nom_inscription" value="[(#ENV*{nom_inscription})]" size="25"></td></tr>
+			<tr><td><div style="font-size : 0.8em;">Votre email :&nbsp;</div></td><td>
+			<input class="mail_inscription" type="text" name="mail_inscription" value="[(#ENV*{mail_inscription})]" size="25"></td></tr>
+			<tr><td><div style="font-size : 0.8em;">Votre groupe éventuel :&nbsp;</div></td><td>
+			<input class="group_name" type="text" name="group_name" value="[(#ENV*{group_name})]" size="25"></td></tr>
+			<tr><td><div style="font-size : 0.8em;">Votre numéro de tel :&nbsp;</div></td><td>
+			<input class="phone" type="text" name="phone" value="[(#ENV*{phone})]" size="25"></td></tr>
+			</table>
+			<p>
+		</div>
+
+		</div>
+		</div>
+
+	</td>
+	<td valign="top" width="300">
+
+		[(#ENV*{formulaire_documents})]
+		<br />
+		[(#ENV*{formulaire_agenda})]
+	</td>
+
+	</tr>
+	</table>
+
+	<div id="block-footer">
+		<p><div style='text-align:center;'>
 			&nbsp;&nbsp;<label><b><:publie_rubrique:></b></label>
 			<select name="rubrique" value="[(#ENV**{rubrique})]">
 				<BOUCLE_rubrique(RUBRIQUES){id_rubrique IN #CONTRIBUTIONS_LOCALES,#CONTRIBUTIONS_NON_LOCALES,#CONTRIBUTIONS_ANALYSES}{tout}>
 					[(#ENV**{rubrique}|selected_option{#ID_RUBRIQUE,#TITRE})]
 				</BOUCLE_rubrique>
 			</select>
-			<p><:publie_rubrique_info:></p>
-		</div>
-		</td>
-		<td width="50%" valign="top">
-
-		<div style="font-size : 0.7em;">
-			<b>Aide</b>
-			<ul>
-			<li><a href="http://www.uzine.net/IMG/pdf/doc-273.pdf"><:memento_spip:></a></li>
-			<li><a href="javascript:ouvreFenetre('https://docs.indymedia.org/view/Local/ImcLilleCharteFr', 800, 600)"><:politique_editoriale_indy:></a></li>
-			<li><a href="javascript:ouvreFenetre('https://docs.indymedia.org/view/Local/ImcLilleLesContributions', 800, 600)"><:collectif_moderation:></a></li>
-			<li><a href="javascript:ouvreFenetre('http://lille.indymedia.org/spip.php?article7086', 800, 600">Publication de photos sur indym&eacute;dia</a></li>
-			</ul>
-		</div>
-
-		</td>
-		</table>
-
-		<hr style="margin-left : 10px; margin-right : 10px;" />
-
-		<div style="font-size : 0.7em;">
-		<table cellspacing="10" cellpadding="0" border="0">
-		<tr>
-		<td width="40%" valign="top">
-		<p><b>identification [optionel]</b></p>		
-		<table cellspacing="0" cellpadding="0" border="0">
-		<tr><td>Nom :&nbsp;</td><td>
-		<input class="nom_inscription" type="text" name="nom_inscription" value="[(#ENV*{nom_inscription})]" size="15"></td></tr>
-		<tr><td>email :&nbsp;</td><td>
-		<input class="mail_inscription" type="text" name="mail_inscription" value="[(#ENV*{mail_inscription})]" size="15"></td></tr>
-		<tr><td>groupe :&nbsp;</td><td>
-		<input class="group_name" type="text" name="group_name" value="[(#ENV*{group_name})]" size="15"></td></tr>
-		<tr><td>tel :&nbsp;</td><td>
-		<input class="phone" type="text" name="phone" value="[(#ENV*{phone})]" size="15"></td></tr>
-		</table>
-		
-		</td>
-		<td width="60%" valign="top">
-			<p><:publie_identif_info:></p>
-		</td>
-		</tr>
-		</table>
-		</div>
-
-		
-		<br />
-
-		</div>
-		<div id="block-footer">
-			[<p><div style='text-align:center;'>
-				<input type='submit' name='valider' class='spip_bouton' value="(#ENV*{bouton})" />
-				<input type="submit" name="previsualiser" class="spip_bouton" value="<:previsualiser:>" />
-			</div></p>]
-		</div>
-		</div>
-
-		<br />
-
-	</td>
+			<input type='submit' name='valider' class='spip_bouton' value="#ENV*{bouton}" />
+			<input type="submit" name="previsualiser" class="spip_bouton" value="<:previsualiser:>" />
+		</div></p>
+	</div>
+	</div>
 
 
-
-	<td valign="top" width="100%">
-
-		[(#ENV*{formulaire_documents})]
-		<br />
-		[(#ENV*{formulaire_agenda})]
-
-		<br />
-		<div id="block-center">
-		<div id="block-publie-titre"><b>&nbsp;&nbsp;Information</b></div>
-		<div id="block-content">
-
-<div style="font-size : 0.7em;">
-<p>En créant votre information vous faites valoir une recherche qui vous est propre ; que ce soit sur un sujet d'actualité politique, culturelle ou autre ; ou que ce soit sur un thème qui mérite une analyse plus profonde. C'est l'espace pour cette information que propose indymedia afin de présenter des nouveaux points de vue ou perspectives que celles données par les médias institutionnels. Optez donc pour une présentation agréable, une argumentation solide, des sujets pertinents et des titres courts et attirants, de façon à ce que votre contribution soit réutilisable par plein de gens !</p>
-<p>Indymédia Lille tient à donner à ses utilisateur/trice un maximum de sécurité et d'anonymat. En conséquence nous précisons qu'aucune donnée personelle vous concernant (autre que celle que vous choisissez de diffuser) n'est stockée.</p>
-</div>
-		</div>
-		</div>
-		
-	</td>
-
-	</tr>
-	</table>
 	</center>
+	</div>
 
 </form>

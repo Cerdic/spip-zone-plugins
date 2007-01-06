@@ -4,28 +4,24 @@
 <div id="block-publie-titre"><b>&nbsp;&nbsp;<b><:document_joint:></b></b></div>
 <div id="block-content">
 
-<div style="font-size : 0.7em;">
+<div style="font-size : 0.8em;">
 
-	<p><:ajouter_un_document:></p>
-	
 	<p><b>Les extensions de fichier acceptés sont :</b></p>
 	<p><div style="background-color: #eee; text-style: justify; margin: 5px;">[(#ENV*{tab_ext}|afficher_tab)]</div></p>
 	<p><b>La taille limite d'upload est de 5 Mo</b></p>
 	<p><b><:telecharger_document:></b></p>
 	<small>
 	<p>
-	<input name='doc' type='file' class='fondl' style='font-size: 9px; width: 100%;'><br>
+	<input name='doc' type='file' class='fondl' style='width: 100%;'><br>
 	<input type=radio name="type" value="vignette">&nbsp;<:image_inclusion:><br>
 	<input type=radio name="type" value="document" checked>&nbsp;<:document_inclusion:><br>
 	</p>
 
 	<p>
-	<input name='media' type='submit' VALUE='#ENV*{bouton}' CLASS='spip_bouton' style='font-size: 9px;'>
+	<input name='media' type='submit' VALUE='#ENV*{bouton}' CLASS='spip_bouton'>
 	<input type="hidden" name="id_article" value="#ENV*{id_article}">
 	</p>
 	</small>
-	
-	<p><:attention_taille:></p>
 	<br>
 
 </div>
