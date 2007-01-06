@@ -55,7 +55,7 @@ function Crayons_preparer_page($page, $droits, $wdgcfg = array()) {
     $jsFile = find_in_path('crayons.js');
     $cssFile = find_in_path('crayons.css');
     $config = var2js(array(
-		'imgPath' => dirname(find_in_path('images/pencil.png')),
+		'imgPath' => dirname(find_in_path('images/crayon.png')),
         'droits' => $droits,
 
 		'txt' => array(
@@ -67,8 +67,8 @@ function Crayons_preparer_page($page, $droits, $wdgcfg = array()) {
 				'file' => 'searching.gif',
 				'txt' => _U('crayons:veuillez_patienter')
 			),
-			'pencil' => array(
-				'file' => 'pencil.png',
+			'crayon' => array(
+				'file' => 'crayon.png',
 				'txt' => _U('crayons:editer')
 			),
 			'edit' => array(

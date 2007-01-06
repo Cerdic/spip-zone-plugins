@@ -8,7 +8,7 @@ function cfgCrayons(options)
   this.url_crayons_html = 'spip.php?action=crayons_html';
   this.img = {
     'searching':{'file':'searching.gif','txt':'En attente du serveur ...'},
-    'edit':{'file':'pencil.png','txt':'Editer'},
+    'edit':{'file':'crayon.png','txt':'Editer'},
     'img-changed':{'file':'changed.png','txt':'Deja modifie'}
   };
   this.txt = {
@@ -31,7 +31,7 @@ cfgCrayons.prototype.iconclick = function(c) {
     '">' + this.mkimg('edit', ' (' + link[1] + ' ' + link[2] + ')') + '</a>' : '';
 
   var cray = c.match(/\b\w+-(\w+)-\d+\b/);
-  var boite = !cray ? '' : this.mkimg('pencil', ' (' + cray[1] + ')');
+  var boite = !cray ? '' : this.mkimg('crayon', ' (' + cray[1] + ')');
 
   return "<span class='crayon-icones'><span>" + boite +
       this.mkimg('img-changed', cray ? ' (' + cray[1] + ')': '') +
@@ -247,7 +247,7 @@ jQuery.fn.activatecrayon = function() {
 jQuery.fn.iconecrayon = function(){
   return this.each(function() {
     jQuery(this).prepend(configCrayons.iconclick(this.className))
-    .find('.crayon-pencil, .crayon-img-changed') // le pencil a clicker lui-meme et sa memoire
+    .find('.crayon-crayon, .crayon-img-changed') // le crayon a clicker lui-meme et sa memoire
       .click(function(e){
         jQuery(this).ancestors('.crayon').eq(0).opencrayon(e);
       });
