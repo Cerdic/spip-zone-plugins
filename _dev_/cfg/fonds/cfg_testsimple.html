@@ -1,0 +1,19 @@
+[(#REM) descriptif=Fond de test simple pour le plugin de configuration cfg
+<br /><a href="../?page=cfg&var_mode=recalcul" class="spip_in">retour test public</a>
+
+]
+[(#REM) titre=Test simple pour le plugin cfg]
+
+#CACHE{0}
+[(#INCLURE{fond=fonds/cfg_tete}{lang}{base_url}{hash}{arg}{compte})]
+
+<fieldset><legend><:Champs simple:></legend>
+<label>Type id</label>
+<input type="text" name="testid" class="type_id" value="#ENV{testid}" size="10" />
+<label>Type password</label>
+<input type="password" name="testpwd" class="type_pwd" value="#ENV{testpwd}" size="10" />
+<label>Type idnum</label>
+<input type="text" name="testidnum" class="type_idnum" value="#ENV{testidnum}" size="8" />
+</fieldset>
+
+[(#INCLURE{fond=fonds/cfg_pied}{lang}{hash}{arg})]

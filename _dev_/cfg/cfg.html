@@ -12,7 +12,7 @@
 
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}{lang}>
-<a href="ecrire/?exec=config_sms" class="spip_in">changer cfg</a>
+<a href="ecrire/?exec=cfg&cfg=testsimple" class="spip_in">changer test simple</a>
 	<div id="conteneur">
 
 		[(#REM) Contenu principal: test de cfg ]
@@ -20,29 +20,33 @@
 		<div id="contenu" style="width: 100%; ">
 
 <dl>
-	<dt>&#035;CONFIG</dt>
-	<dd>#CONFIG</dd>
+
+	<dt>&#035;CONFIG{cfg}</dt>
+	<dd>#CONFIG{cfg}</dd>
 
 	<dt>&#035;CONFIG{descriptif_site}</dt>
 	<dd>#CONFIG{descriptif_site}</dd>
 
-	<dt>&#035;CONFIG{config_sms}</dt>
-	<dd>#CONFIG{config_sms}</dd>
+	<dt>&#035;CONFIG{testsimple}</dt>
+	<dd>#CONFIG{testsimple}</dd>
 
-	<dt>&#035;CONFIG{config_sms/dudu/user}</dt>
-	<dd>[(#CONFIG{config_sms/dudu/user})]</dd>
+	<dt>&#035;CONFIG{testsimple/testid}</dt>
+	<dd>#CONFIG{testsimple/testid}</dd>
 
-	<dt>&#035;CONFIG{config_sms,xxx}</dt>
-	<dd>#CONFIG{config_sms,xxx}</dd>
+	<dt>&#035;CONFIG{testsimple/dudu/user}</dt>
+	<dd>[(#CONFIG{testsimple/dudu/user})]</dd>
 
-	<dt>&#035;CONFIG{config_sms/dudu/user,yyy}</dt>
-	<dd>[(#CONFIG{config_sms/dudu/user,yyy})]</dd>
+	<dt>&#035;CONFIG{testsimple,xxx}</dt>
+	<dd>#CONFIG{testsimple,xxx}</dd>
+
+	<dt>&#035;CONFIG{testsimple/dudu/user,yyy}</dt>
+	<dd>[(#CONFIG{testsimple/dudu/user,yyy})]</dd>
 
 	<dt>&#035;CONFIG{config_xxx,zzz}</dt>
 	<dd>#CONFIG{config_xxx,zzz}</dd>
 
-	<dt>&#035;CONFIG{config_sms/dudux/user,ttt}</dt>
-	<dd>[(#CONFIG{config_sms/dudux/user,ttt})]</dd>
+	<dt>&#035;CONFIG{testsimple/dudux/user,ttt}</dt>
+	<dd>[(#CONFIG{testsimple/dudux/user,ttt})]</dd>
 
 	<dt>[(&#035;REM|sinon{', '}|implode{&#035;CONFIG|unserialize|array_keys})]</dt>
 	<dd>[(#REM|sinon{', '}|implode{#CONFIG|unserialize|array_keys})]</dd>

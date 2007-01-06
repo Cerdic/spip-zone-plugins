@@ -1,0 +1,20 @@
+[(#REM)
+
+	Tete de fond pour le plugin de configuration cfg
+
+]
+<div>
+<form method="post" action="#ENV{base_url}">
+<input name="hash" type="hidden" value="#ENV{hash}" />
+<input name="arg" type="hidden" value="#ENV{arg}" />
+<input name="exec" type="hidden" value="config_sms" />
+
+[(#REM)
+<fieldset>
+<label for="compte">*<:SMS:compte:></label>
+<input type="text" name="compte" value="#ENV{compte}" size="15" />
+<label for="copier"><:SMS:copier_si_change:></label>
+<input type="checkbox" name="copier" />
+<input type="hidden" name="was_compte" value="#ENV{compte}" />
+</fieldset>
+]
