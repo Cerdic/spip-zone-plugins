@@ -1,0 +1,41 @@
+[(#REM) descriptif=
+<h4>Exp&eacute;rimental pour 1.9.2</h4>
+Ici vous pouvez configurer les boutons dans le texte qui servent à augmenter/diminuer la taille de police de l'affichage des textes.<br />
+Pour supprimer une fonctionnalit&eacute;, mettez <b>_</b> dans la valeur du texte * correspindant, vide fonctionne mais ram&egrave;ne le d&eacute;faut &agrave; la prochain mise "agrave; jour.
+<br /><a href="http://www.spip-contrib.net/?article1474" class="spip_out">Documentation sur contrib</a>
+
+]
+[(#REM) titre=Configuration du plugin boutonstexte]
+[(#REM)
+		'jsFile' => 'boutonstexte.js',
+		'cssFile' => 'boutonstexte.css',
+		'imgPath' => 'images/fontsizeup.png',
+]
+#CACHE{0}
+[(#INCLURE{fond=fonds/cfg_tete}{lang}{base_url}{hash}{arg})]
+
+<fieldset><legend><:Textes des bulles d'icones:></legend>
+<p>
+<label>* Texte seulement</label>
+<input type="text" name="txtOnly" class="type_txt" size="60"
+	value="#ENV{txtOnly,boutonstexte:texte_seulement}" />
+</p>
+<p>
+<label>Texte retour spip</label>
+<input type="text" name="txtBackSpip" class="type_txt" size="60"
+	value="#ENV{txtBackSpip,boutonstexte:retour_a_spip}" />
+</p>
+<p>
+<label>* Texte augmenter</label>
+<input type="text" name="txtOnly" class="type_txt" size="60"
+	value="#ENV{txtSizeUp,boutonstexte:augmenter_police}" />
+</p>
+<p>
+<label>* Texte diminuer</label>
+<input type="text" name="txtOnly" class="type_txt" size="60"
+	value="#ENV{txtSizeDown,boutonstexte:diminuer_police}" />
+</p>
+<p>* si <b>_</b> ou vide, supprime la fonctionnalit&eacute; (vide reviendra au d&eacute;faut)</p>
+</fieldset>
+
+[(#INCLURE{fond=fonds/cfg_pied}{lang}{hash}{arg})]
