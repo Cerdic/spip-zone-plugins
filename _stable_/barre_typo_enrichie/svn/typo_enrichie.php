@@ -147,9 +147,9 @@ function BarreTypoEnrichie_post_propre($texte) {
 
 		);
 		$remplace1 = array(
-			/* 15 */ 	"<div style=\"text-align:right;\" class=\"spip\">$1</div>",
-			/* 17 */ 	"<div style=\"text-align:center;\" class=\"spip\">$1</div>",
-			/* 19 */ 	"<div class=\"texteencadre-spip\">$1</div>",
+			/* 15 */ 	"<div class=\"spip\" style=\"text-align:right;\">$1</div>",
+			/* 17 */ 	"<div class=\"spip\" style=\"text-align:center;\">$1</div>",
+			/* 19 */ 	"<div class=\"texteencadre-spip spip\">$1</div>",
 			/* 21 */ 	"<strong class=\"caractencadre2-spip spip\">",
 			/* 21b */ 	"<strong class=\"caractencadre-spip spip\">",
 			/* 22 */	"</strong>",
@@ -187,7 +187,7 @@ function BarreTypoEnrichie_post_typo($texte) {
 	$texte = preg_replace('/@@@amp:([A-Za-z#0-9]*):amp@@@/','&\1;',$texte);
 	// Raccourci typographique <sc></sc>
 	$texte = str_replace("<sc>",
-		"<span style=\"font-variant: small-caps\" class=\"spip\">", $texte);
+		"<span class=\"spip\" style=\"font-variant: small-caps\">", $texte);
 	$texte = str_replace("</sc>", "</span>", $texte);
 	return $texte;
 }

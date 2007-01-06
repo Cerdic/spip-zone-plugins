@@ -11,8 +11,10 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_DIR_PLUGIN_BARRETYPOENRICHIE')){
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
-define('_DIR_PLUGIN_BARRE_TYPO',(_DIR_PLUGINS.end($p)));
+	define('_DIR_PLUGIN_BARRETYPOENRICHIE',(_DIR_PLUGINS.end($p)));
+}
 
 // construit un bouton (ancre) de raccourci avec icone et aide
 
@@ -129,16 +131,28 @@ function afficher_gestion_ancre($champ) {
 $tableau_formulaire = '
 <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
   <tr>
-    <td style="width:auto; text-align:center;"><strong>Gestion des ancres</strong></td>
-    <td style="width:auto;"><strong>Transformer en ancre</strong><br />
-    <label for="ancre_nom"><i>Nom de l\'ancre</i></label> <br />
+    <td style="width:auto; text-align:center;"><strong>'.
+_T('bartypenr:barre_gestion_anc_caption')
+.'</strong></td>
+    <td style="width:auto;"><strong>'.
+_T('bartypenr:barre_gestion_anc_inserer')
+.'</strong><br />
+    <label for="ancre_nom"><i>'.
+_T('bartypenr:barre_gestion_anc_nom')
+.'</i></label> <br />
       <input type="text" name="ancre_nom" id="ancre_nom" />
 	  
 	<input type="button" value="OK" class="fondo" onclick="javascript:barre_ancre(\'[\', \'<-\', \']\', ancre_nom.value, '.$champ.');" />
     </td>
-	<td style="width:auto;"><strong>Pointer vers une ancre</strong><br />
-    <label for="ancre_cible"><i>Ancre cible</i></label> <input type="text" name="ancre_cible" id="ancre_cible" /><br />
-	<label for="ancre_bulle"><i>Bulle d\'aide ancre</i></label> <input type="text" name="ancre_bulle" id="ancre_bulle" />
+	<td style="width:auto;"><strong>'.
+_T('bartypenr:barre_gestion_anc_pointer')
+.'</strong><br />
+    <label for="ancre_cible"><i>'.
+_T('bartypenr:barre_gestion_anc_cible')
+.'</i></label> <input type="text" name="ancre_cible" id="ancre_cible" /><br />
+	<label for="ancre_bulle"><i>'.
+_T('bartypenr:barre_gestion_anc_bulle')
+.'</i></label> <input type="text" name="ancre_bulle" id="ancre_bulle" />
 	<input type="button" value="OK" class="fondo" onclick="javascript:barre_demande(\'[\', \'->#\', \']\', ancre_cible.value, ancre_bulle.value, '.$champ.');" /> 
 </td>
   </tr> 
@@ -170,14 +184,14 @@ if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
 
 $reta .= bouton_barre_racc ("barre_inserer('&Agrave;',$champ)", _DIR_IMG_ICONES_BARRE."agrave-maj.png", _T('barre_a_accent_grave'), $champhelp);
 $reta .= bouton_barre_racc ("barre_inserer('&Eacute;',$champ)", _DIR_IMG_ICONES_BARRE."eacute-maj.png", _T('barre_e_accent_aigu'), $champhelp);
-$reta .= bouton_barre_racc ("barre_inserer('&Egrave;',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/eagrave-maj.png', _T('bartypenr:barre_e_accent_grave'), $champhelp);
-$reta .= bouton_barre_racc ("barre_inserer('&aelig;',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/aelig.png', _T('bartypenr:barre_ea'), $champhelp);
-$reta .= bouton_barre_racc ("barre_inserer('&AElig;',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/aelig-maj.png', _T('bartypenr:barre_ea_maj'), $champhelp);
+$reta .= bouton_barre_racc ("barre_inserer('&Egrave;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/eagrave-maj.png', _T('bartypenr:barre_e_accent_grave'), $champhelp);
+$reta .= bouton_barre_racc ("barre_inserer('&aelig;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/aelig.png', _T('bartypenr:barre_ea'), $champhelp);
+$reta .= bouton_barre_racc ("barre_inserer('&AElig;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/aelig-maj.png', _T('bartypenr:barre_ea_maj'), $champhelp);
 
 if ($spip_lang == "fr") {
 $reta .= bouton_barre_racc ("barre_inserer('&oelig;',$champ)", _DIR_IMG_ICONES_BARRE."oelig.png", _T('barre_eo'), $champhelp);
 $reta .= bouton_barre_racc ("barre_inserer('&OElig;',$champ)", _DIR_IMG_ICONES_BARRE."oelig-maj.png", _T('barre_eo_maj'), $champhelp);
-$reta .= bouton_barre_racc ("barre_inserer('&Ccedil;',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/ccedil-maj.png', _T('bartypenr:barre_c_cedille_maj'), $champhelp);
+$reta .= bouton_barre_racc ("barre_inserer('&Ccedil;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/ccedil-maj.png', _T('bartypenr:barre_c_cedille_maj'), $champhelp);
 }
 }
 // euro
@@ -224,7 +238,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
     $toolbox .= afficher_gestion_remplacer($champ);
 //
 
-	//$ret .= '<script type="text/javascript" src="' . _DIR_PLUGIN_BARRE_TYPO . '/js/jquery-latest.pack.js"></script>';
 	$ret .= "<table class='spip_barre' style='width:auto;' cellpadding='0' cellspacing='0' border='0' summary=''>";
 	$ret .= "\n<tr style='width: auto;' class='spip_barre'>";
 	$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
@@ -234,19 +247,19 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$ret .= bouton_barre_racc ("barre_raccourci('{','}',$champ)", _DIR_IMG_ICONES_BARRE."italique.png", _T('barre_italic'), $champhelp);
 	$ret .= bouton_barre_racc ("barre_raccourci('{{','}}',$champ)", _DIR_IMG_ICONES_BARRE."gras.png", _T('barre_gras'), $champhelp);
 	if ($options == "avancees") {
-		$ret .= bouton_barre_racc ("barre_raccourci('[*','*]',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/miseenevidence.png', _T('bartypenr:barre_miseenevidence'), $champhelp);
-		$ret .= bouton_barre_racc ("barre_raccourci('&lt;sup&gt;','&lt;/sup&gt;',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/exposant.png', _T('bartypenr:barre_exposant'), $champhelp);
-		$ret .= bouton_barre_racc ("barre_raccourci('&lt;sc&gt;','&lt;/sc&gt;',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/petitescapitales.png', _T('bartypenr:barre_petitescapitales'), $champhelp);
+		$ret .= bouton_barre_racc ("barre_raccourci('[*','*]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/miseenevidence.png', _T('bartypenr:barre_miseenevidence'), $champhelp);
+		$ret .= bouton_barre_racc ("barre_raccourci('&lt;sup&gt;','&lt;/sup&gt;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/exposant.png', _T('bartypenr:barre_exposant'), $champhelp);
+		$ret .= bouton_barre_racc ("barre_raccourci('&lt;sc&gt;','&lt;/sc&gt;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/petitescapitales.png', _T('bartypenr:barre_petitescapitales'), $champhelp);
 	}
 	if (!$forum) {
 		$ret .= "&nbsp;";
 		$ret .= bouton_barre_racc ("barre_raccourci('\n\n{{{','}}}\n\n',$champ)", _DIR_IMG_ICONES_BARRE."intertitre.png", _T('barre_intertitre'), $champhelp);
 		if ($options == "avancees") {
-			$ret .= bouton_barre_racc ("barre_raccourci('\n\n{2{','}2}\n\n',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/intertitre2.png', _T('bartypenr:barre_intertitre2'), $champhelp);
-			$ret .= bouton_barre_racc ("barre_raccourci('\n\n{3{','}3}\n\n',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/intertitre3.png', _T('bartypenr:barre_intertitre3'), $champhelp);
-			$ret .= bouton_barre_racc ("barre_raccourci('[|','|]',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/center.png', _T('bartypenr:barre_centrer'), $champhelp);
-			$ret .= bouton_barre_racc ("barre_raccourci('[/','/]',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/right.png', _T('bartypenr:barre_alignerdroite'), $champhelp);
-			$ret .= bouton_barre_racc ("barre_raccourci('[(',')]',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/cadretexte.png', _T('bartypenr:barre_encadrer'), $champhelp);
+			$ret .= bouton_barre_racc ("barre_raccourci('\n\n{2{','}2}\n\n',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/intertitre2.png', _T('bartypenr:barre_intertitre2'), $champhelp);
+			$ret .= bouton_barre_racc ("barre_raccourci('\n\n{3{','}3}\n\n',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/intertitre3.png', _T('bartypenr:barre_intertitre3'), $champhelp);
+			$ret .= bouton_barre_racc ("barre_raccourci('[|','|]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/center.png', _T('bartypenr:barre_centrer'), $champhelp);
+			$ret .= bouton_barre_racc ("barre_raccourci('[/','/]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/right.png', _T('bartypenr:barre_alignerdroite'), $champhelp);
+			$ret .= bouton_barre_racc ("barre_raccourci('[(',')]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/cadretexte.png', _T('bartypenr:barre_encadrer'), $champhelp);
 		}
 	}
 	$ret .= "&nbsp;</td>\n<td>";
@@ -267,21 +280,21 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$ret .= bouton_barre_racc ("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);
 	}
 	if ($options == "avancees") {
-		$ret .= bouton_barre_racc ("barre_raccourci('[?',']',$champ)", _DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/barre-wiki.png', "Entr&eacute;e du [?glossaire] (Wikipedia)", $champhelp);
+		$ret .= bouton_barre_racc ("barre_raccourci('[?',']',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/barre-wiki.png', _T('bartypenr:barre_glossaire'), $champhelp);
 
 
 //gestion des tableaux		
 		$ret .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_gestion']."','');",
-			_DIR_PLUGIN_BARRE_TYPO.'/img_pack/icones_barre/barre-tableau.png', "Ins&eacute;rer un tableau",
+			_DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/barre-tableau.png', _T('bartypenr:barre_tableau'),
 			$champhelp);
 
 	$ret .= "&nbsp</td>\n<td>";
 
 // gestion du remplacement
-      $ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_remplacer']."','');", _DIR_PLUGIN_BARRE_TYPO."/img_pack/icones_barre/chercher_remplacer.png", "Chercher Remplacer", $champhelp);
+      $ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_remplacer']."','');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/chercher_remplacer.png", _T('bartypenr:barre_chercher'), $champhelp);
 
 // gestion des ancres		
-		$ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_ancre']."','');", _DIR_PLUGIN_BARRE_TYPO."/img_pack/icones_barre/ancre.png", 'Gestion des ancres', $champhelp);  
+		$ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_ancre']."','');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/ancre.png", _T('bartypenr:barre_ancres'), $champhelp);  
 
 }
 
@@ -291,7 +304,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	// Insertion de caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...)
 	$ret .= "\n<td style='text-align:$spip_lang_left;' valign='middle'>";
 	$col++;
-	$ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_caracteres']."','');", _DIR_PLUGIN_BARRE_TYPO."/img_pack/icones_barre/clavier.png", _T('bartypenr:barre_caracteres'), $champhelp);
+	$ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_caracteres']."','');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/clavier.png", _T('bartypenr:barre_caracteres'), $champhelp);
 	
 
 
@@ -301,11 +314,10 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	if (!_DIR_RESTREINT) {
 		$ret .= "\n<td style='text-align:$spip_lang_right;' valign='middle'>";
 		$col++;
-		$ret .=    bouton_barre_racc("toggle_preview();", _DIR_PLUGIN_BARRE_TYPO."/img_pack/icones_barre/eye.png", _T('bartypenr:barre_preview'), $champhelp);
+		$ret .=    bouton_barre_racc("toggle_preview();", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/eye.png", _T('bartypenr:barre_preview'), $champhelp);
 		$ret .= "&nbsp;";
 		$ret .= aide("raccourcis");
 		$ret .= "&nbsp;";
-
 		$ret .= "</td>";
 	}
 	$ret .= "</tr>";

@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Barre Typo Enrichie pour SVN
+	Barre Typo Enlumin&eacute;e pour 1.9.2 (SVN)
 	</nom>
 	<auteur><!-- Auteur du plugin -->
  	[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_] &agrave; partir des raccourcis mis en place par [Fran&ccedil;ois->http://www.spip-contrib.net/_Francois-Schreuer_]
@@ -9,15 +9,13 @@ _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	</auteur>
 	<lien>[Exemple d'utilisation->http://www.pyrat.net/Raccourcis-Typographiques-de-SPIP.html]</lien>
 	<version>
-	1.21
+	1.22
 	</version>
 	<etat>
 	stable
 	</etat>
 	<description>
-Rajoute une barre typographique enrichie et les raccourcis typographiques correspondants (Pour SPIP 1.9.1).
-
-Attention, la barre n&eacute;cessite que le plugin jquery soit lui aussi install&eacute; (ceci afin de permettre la pr&eacute;visualisation au cours de la frappe).
+Rajoute une barre typographique enlumin&eacute;e et les raccourcis typographiques correspondants (Pour SPIP 1.9.2).
 
 -* Paragraphes :
 -** {{Sous-titres}} <code>{n{</code>Texte du titre<code>}n}</code>, n variant de 2 &agrave; 5, la barre de raccourcis ne proposant que 2 et 3
@@ -72,6 +70,11 @@ $GLOBALS['fin_intertitre_5'] = '</h6>';
 	<prefix> 
 	BarreTypoEnrichie
 	</prefix>
+	<options> <!-- fichier charge a chaque hit -->
+	</options>
+	<icon>
+	img_pack/moinecopiste.gif
+	</icone>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 			<nom>pre_propre</nom>
