@@ -6,6 +6,9 @@
 	<etat>stable</etat>
 	<lien>[Afficher les mots-cl&#233;s en faisant varier la taille de la police->http://www.spip-contrib.net/Afficher-les-mots-cles-en-faisant]</lien>
 	<description>Version plugin avec modeles et filtres de la contrib nuage de tag (cf lien).</description>
+	<icon>
+	nuage-64.png
+	</icon>
 	<pipeline>
 		<nom>insert_head</nom> 
 		<inclure>nuage_pipelines_public.php</inclure>
