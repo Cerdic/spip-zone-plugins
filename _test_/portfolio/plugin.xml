@@ -23,6 +23,9 @@
 	<prefix> 
 	portfolio
 	</prefix>
+	<icon>
+	portofolio-64.png
+	</icon>
 	<fonctions>portfolio_fonctions.php</fonctions>
 	<pipeline>
 		<nom>insert_head</nom>

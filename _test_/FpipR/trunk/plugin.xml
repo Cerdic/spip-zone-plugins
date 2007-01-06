@@ -25,6 +25,9 @@ _ version 0.2 introduces SPIP loops to access Flickr's API from your templates.
 	<prefix> 
 	  FpipR
 	</prefix>
+	<icon>
+	FpipR.png
+	</icon>
 	<pipeline>
 	  <nom>affiche_milieu</nom>
 	  <inclure>FpipR.php</inclure>
