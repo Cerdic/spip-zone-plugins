@@ -12,6 +12,8 @@ include_spip('inc/validateur_api');
 
 function exec_w3c_go_home(){
 	global $connect_statut;
+	$validateurs = array('spip_xhtml_validator');
+	$out = "";
 	
 	include_spip ("inc/presentation");
 
@@ -29,8 +31,14 @@ function exec_w3c_go_home(){
 	}
 
 	debut_page(_L("Validation Site W3C"), "w3c", "w3c");
-	debut_gauche();
-	debut_droite();
+	
+	$out .= debut_gauche('',true);
+	$out .= debut_boite_info(true);
+	$action = generer_action_auteur('w3cgh_reset_test',implode('-',$validateurs),generer_url_ecrire('w3c_go_home'));
+	$out .= "<a href='$action'>"._L("Tout Reinitialiser")."</a><br/>";
+	$out .= fin_boite_info(true);
+	
+	$out .= debut_droite('',true);
 
 	// utiliser un recuperer_page car sinon les url sont calculees depuis ecrire, avec des redirect
 	//include_spip('public/assembler');
@@ -57,20 +65,17 @@ function exec_w3c_go_home(){
 		
 	$titre_table = _L("Conformit&eacute; du site");
 	$icone = "";
-	$validateurs = array('spip_xhtml_validator');
-	
-	echo "<div style='height: 12px;'></div>";
-	echo "<a href='".generer_url_ecrire('w3c_go_home','reset=1')."'>Reset</a><br/>";
-	echo "<div class='liste'>";
-	bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black");
-	echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
+	$out .= "<div class='liste'>";
+	$out .= bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black",false);
+	$out .= "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
 	
 	$vals[] = '';
 	$vals[] = 'url';
 	$largeurs = array('','');
 	$styles = array('arial11', 'arial11');
 	foreach($validateurs as $nom){
-		$vals[] = validateur_infos($nom);
+		$action = generer_action_auteur('w3cgh_reset_test',$nom,generer_url_ecrire('w3c_go_home'));
+		$vals[] = validateur_infos($nom)."<br /><a href='$action'>"._L("Reinitialiser")."</a>";
 		$largeurs[] = '';
 		$styles[] = 'arial11';
 	}
@@ -124,15 +129,15 @@ function exec_w3c_go_home(){
 			$table[] = $vals;
 		}
 	}
-	echo afficher_liste($largeurs, $table, $styles);
-	echo "</table>";
-	echo "</div>\n";
+	$out .= afficher_liste($largeurs, $table, $styles);
+	$out .= "</table>";
+	$out .= "</div>\n";
 	
 	foreach($validateurs as $nom)
-		echo $compteur[$nom]."/$cpt pages conforme selon le validateur $nom<br/>";
+		$out .= $compteur[$nom]."/$cpt pages conforme selon le validateur $nom<br/>";
 	
-	echo "$cpt_ok/$cpt pages totalement conforme";
-	fin_page();
+	$out .= "$cpt_ok/$cpt pages totalement conforme";
+	echo $out,fin_gauche(),fin_page();
 
 }
 
