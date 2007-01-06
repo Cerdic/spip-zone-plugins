@@ -20,10 +20,8 @@ _ La configuration optionnelle peut se faire en installant le plugin cfg et en c
 _ Certains éléments peuvent &ecirc;tre froc&eacute;s par javascript.
 _ ATTENTION: Necessite jQuery et la balise <code>#INSERT_HEAD</code> dans les squelettes
   </description>
-  <lien>
-[Documentation->http://www.spip-contrib.net/?article1474]
-
-[Configuration->.?exec=cfg&cfg=boutonstexte]
+  <lien>[Documentation sur contrib->http://www.spip-contrib.net/?article1474],
+et si vous avez cfg: [Configuration->.?exec=cfg&cfg=boutonstexte]
   </lien>
   <prefix>
 	boutonstexte
