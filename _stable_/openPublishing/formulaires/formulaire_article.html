@@ -3,6 +3,7 @@
 <form action="[(#ENV{url})]" method="post" name="formulaire_article" id="Formulaire_article" enctype="multipart/form-data">
 
 	<input type="hidden" name="article" value="[(#ENV**{article})]"  size="50">
+	<input type="hidden" name="url_site" value="[(#URL_SITE_SPIP)]"  size="50">
 
 	[(#ENV*{formulaire_previsu})]
 
