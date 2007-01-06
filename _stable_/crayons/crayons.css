@@ -4,14 +4,14 @@ img.crayon-img-changed {
 .crayon-changed img.crayon-img-changed {
     display: inline;
 }
-.crayon-changed img.crayon-pencil {
+.crayon-changed img.crayon-crayon {
     display: none;
 }
-img.crayon-edit, img.crayon-pencil {
+img.crayon-edit, img.crayon-crayon {
     visibility: hidden;
 }
 .crayon-autorise:hover img.crayon-edit, .crayon-hover img.crayon-edit,
-.crayon-autorise:hover img.crayon-pencil, .crayon-hover img.crayon-pencil {
+.crayon-autorise:hover img.crayon-crayon, .crayon-hover img.crayon-crayon {
     visibility: visible;
 }
 .crayon-autorise:hover, .crayon-hover {
@@ -35,6 +35,6 @@ img.crayon-edit, img.crayon-pencil {
 .crayon-icones span {
     position:absolute;
 }
-.crayon-edit, .crayon-pencil, .crayon-img-changed {
+.crayon-edit, .crayon-crayon, .crayon-img-changed {
 	cursor: pointer;
 } 
