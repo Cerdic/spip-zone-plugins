@@ -6,11 +6,6 @@ Pour supprimer une fonctionnalit&eacute;, mettez <b>_</b> dans la valeur du text
 
 ]
 [(#REM) titre=Configuration du plugin boutonstexte]
-[(#REM)
-		'jsFile' => 'boutonstexte.js',
-		'cssFile' => 'boutonstexte.css',
-		'imgPath' => 'images/fontsizeup.png',
-]
 #CACHE{0}
 [(#INCLURE{fond=fonds/cfg_tete}{lang}{base_url}{hash}{arg})]
 
@@ -36,6 +31,21 @@ Pour supprimer une fonctionnalit&eacute;, mettez <b>_</b> dans la valeur du text
 	value="#ENV{txtSizeDown,boutonstexte:diminuer_police}" />
 </p>
 <p>* si <b>_</b> ou vide, supprime la fonctionnalit&eacute; (vide reviendra au d&eacute;faut)</p>
+</fieldset>
+
+<fieldset><legend><:Donn&eacute;es techniques &agrave; ne pas changer:></legend>
+<p>
+<label>Fichier javascript</label>
+<input type="text" name="jsFile" class="type_file" size="15"
+	value="#ENV{jsFile,boutonstexte.js}" />
+<label>Fichier style</label>
+<input type="text" name="cssFile" class="type_file" size="15"
+	value="#ENV{cssFile,boutonstexte.css}" />
+<label>R&eacute;pertoire d'image</label>
+<input type="text" name="imgPath" class="type_file" size="20"
+	value="#ENV{imgPath,images/fontsizeup.png}" />(adresse d'une image)
+</p>
+<p>Si vide, reviendront au d&eacute;faut</p>
 </fieldset>
 
 [(#INCLURE{fond=fonds/cfg_pied}{lang}{hash}{arg})]
