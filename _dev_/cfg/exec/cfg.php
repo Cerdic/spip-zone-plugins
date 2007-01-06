@@ -43,6 +43,7 @@ class cfg
 	
 	function lire()
 	{
+		include_spip('inc/meta');
 		lire_metas();
 	    global $meta;
 	    if (empty($meta[$this->nom])) {
