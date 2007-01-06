@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'document_inclusion' => 'Document (le fichier apparaitra sous forme de lien sous l\'article)',
 
 // E
-'explication_agenda' => 'Pour ajouter votre article dans l\'agenda (dans le cas d\'un &eacute;v&eacute;nement), cochez la case ci-dessous et choisissez la date et l\'heure correspondant à l\'&eacute;v&eacute;nement. Votre article sera publi&eacute; dans l\'agenda (et non dans une des rubriques "contributions").',
+'explication_agenda' => 'Pour ajouter votre article dans l\'agenda (dans le cas d\'un &eacute;v&eacute;nement), cochez la case ci-dessous et choisissez la date et l\'heure correspondant &agrave; l\'&eacute;v&eacute;nement. Votre article sera publi&eacute; dans l\'agenda (et non dans une des rubriques "contributions").',
 'extensions_acceptees' => 'Les extensions de fichier accept&eacute;es sont :',
 
 // I
