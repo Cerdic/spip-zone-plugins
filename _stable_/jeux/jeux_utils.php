@@ -6,9 +6,16 @@
 #  Licence : GPL                                    #
 #---------------------------------------------------#
 
-// compatibilite avant 1.9.2
+// sacree compatibilite...
+
+global $spip_version_code;
 if ($spip_version_code<1.92) {
 	define(_DIR_VAR, _DIR_IMG);
+	function set_request($var, $val = NULL) {
+		unset($_GET[$var]);
+		unset($_POST[$var]);
+		if ($val !== NULL) $_GET[$var] = $val;
+	}
 }
 
 if (!defined('_DIR_PLUGIN_JEUX')){
@@ -32,7 +39,7 @@ function jeux_config_set($param, $valeur) {
 }
 function jeux_config_init($texte, $ecrase) {
  global $jeux_config;
- $lignes = preg_split("/\r?\n/", $texte);
+ $lignes = preg_split("/[\r\n]+/", $texte);
  foreach ($lignes as $ligne) {
   $ligne = preg_replace(',\/\*(.*)\*\/,','', $ligne);
   $ligne = preg_replace(',\/\/(.*)$,','', $ligne);
@@ -65,7 +72,7 @@ function jeux_split_texte($jeu, &$texte) {
 
 // transforme un texte en listes html 
 function jeux_listes($texte) {
-	$tableau = preg_split("/\r?\n/", trim($texte));	
+	$tableau = preg_split("/[\r\n]+/", trim($texte));	
 	foreach ($tableau as $i=>$valeur) if (($valeur=trim($valeur))!='') $tableau[$i] = "<li>$valeur</li>\n";
 	$texte = implode('', $tableau);
 	return "<ol>$texte</ol>"; 
