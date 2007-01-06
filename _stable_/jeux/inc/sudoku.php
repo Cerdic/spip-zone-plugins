@@ -103,11 +103,11 @@ function affichage_sudoku($tableau_sudoku, $indexJeux, $solution=false){
 
 // dechiffre le code source de la grille
 function calcul_tableau_sudoku($texte){
-	$texte = preg_replace(",\s?[\r\n]+\s?,", "\n", trim($texte));
+	$texte = preg_replace(",\s*[\r\n]+\s*,", "\n", trim($texte));
 	$tableau = split("\n", $texte);	
 	$hauteur = count($tableau);
 	foreach ($tableau as $i=>$valeur) {
-		$valeur .= str_repeat('-', $hauteur-strlen($valeur));
+		if (strlen($valeur)) $valeur .= str_repeat('-', $hauteur-strlen($valeur));
 		$tableau[$i] = preg_split('//', trim($valeur), -1, PREG_SPLIT_NO_EMPTY);
 	}
 	return $tableau;
