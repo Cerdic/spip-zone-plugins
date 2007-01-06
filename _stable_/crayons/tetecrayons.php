@@ -52,7 +52,7 @@ function Crayons_affichage_final($page) {
 
 function Crayons_preparer_page($page, $droits, $wdgcfg = array()) {
 
-    $jsFile = find_in_path('crayons.js');
+    $jsFile = generer_url_public('crayons.js');
     $cssFile = find_in_path('crayons.css');
     $config = var2js(array(
 		'imgPath' => dirname(find_in_path('images/crayon.png')),

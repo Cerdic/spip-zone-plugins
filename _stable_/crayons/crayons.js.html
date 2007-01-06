@@ -1,0 +1,16 @@
+[(#REM)
+
+	Charger la librairie crayons et ses addenda
+
+]
+#CACHE{7*24*3600,cache-client}
+#HTTP_HEADER{'Content-Type: text/javascript'}
+
+[(#CHEMIN{javascript/crayons.js}|spip_file_get_contents)]
+
+[(#REM)
+
+[(#CHEMIN{javascript/form.js}|spip_file_get_contents)]
+[(#CHEMIN{javascript/ajaxCallback.js}|spip_file_get_contents)]
+
+]
