@@ -1,38 +1,39 @@
 #CACHE{86400}
 
-<form action="[(#ENV{url})]" method="post" name="formulaire_article" id="Formulaire_article" enctype="multipart/form-data">
+<form action="[(#ENV{url})]" method="post" name="formulaire_article" enctype="multipart/form-data">
 
 	<input type="hidden" name="article" value="[(#ENV**{article})]"  size="50">
 	<input type="hidden" name="url_site" value="[(#URL_SITE_SPIP)]"  size="50">
 
 	[(#ENV*{formulaire_previsu})]
 
-	<div style="text-align: center; color: red; font-style: bold;">[(#ENV*{mess_error})]</div>
-	<div style="margin-left:5px; margin-right: 15px; background-color: #8a5e99;">
+	<div id="erreur"><p>[(#ENV*{mess_error})]</p></div>
+
+	<div id="block-op">
+
 	<center>
 
-	<div id="block-footer"><b><:opconfig:redigez_article:></b></div>
+	<div id="block-op-footer"><b><:opconfig:redigez_article:></b></div>
 	
 	<br />
-
 
 	<table>
 	<tr><td valign="top" width="200">
 	
-		<div id="block-center">
-		<div id="block-content">
+		<div id="block-op-center">
+		<div id="block-op-content">
 
 		<p><label><b><small><:opconfig:publie_titre:>&nbsp;[<:opconfig:obligatoire:>]</small></b></label></p>
 		<p><input type="text" name="titre" value="[(#ENV**{titre})]"  size="60" maxlength="80"></p>
 
-		<hr style="margin-left : 10px; margin-right : 10px;" />
+		<hr />
 
 			<p><label><b><small><:opconfig:publie_texte:></b></small></label></p>
-			<p><div style="margin-left : 10px; margin-right : 10px;">[(#ENV**{texte}|barre_article{30,62})]</div></p>
+			<p><div id="op-textearea">[(#ENV**{texte}|barre_article{30,62})]</div></p>
 
-		<hr style="margin-left : 10px; margin-right : 10px;" />
+		<hr />
 
-		<div style="font-size : 0.8em; margin-left : 10px; margin-bottom : 10px;">
+		<div id="op-identif">
 			<p>
 			<b><:opconfig:identification:>&nbsp;[<:opconfig:optionel:>]</b><br /><br />
 			<table cellspacing="0" cellpadding="0" border="0">
@@ -62,8 +63,8 @@
 	</tr>
 	</table>
 
-	<div id="block-footer">
-		<p><div style='text-align:center;'>
+	<div id="block-op-footer">
+		<div id="op-barre">
 			&nbsp;&nbsp;<label><b><:opconfig:publie_rubrique:></b></label>
 			<select name="rubrique" value="[(#ENV**{rubrique})]">
 				<BOUCLE_rubrique(RUBRIQUES){id_rubrique IN #CONTRIBUTIONS_LOCALES,#CONTRIBUTIONS_NON_LOCALES,#CONTRIBUTIONS_ANALYSES}{tout}>
@@ -72,7 +73,7 @@
 			</select>
 			<input type='submit' name='valider' class='spip_bouton' value="#ENV*{bouton}" />
 			<input type="submit" name="previsualiser" class="spip_bouton" value="<:previsualiser:>" />
-		</div></p>
+		</div>
 	</div>
 	</div>
 
