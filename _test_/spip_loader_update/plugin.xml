@@ -14,7 +14,7 @@ _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	</etat>
 	<icon>images/spip_mise_a_jour.png</icon>
 	<description>
-	Un utilisateur (par d&#233;faut, l'administrateur num&#233;ro 1) est autoris&eacute; &agrave; faire une mise &agrave; jour du site (via spip_loader.php, qui doit donc &ecirc;tre pr&#233;sent à la racine de votre site) ou de tout autre contribution distribu&#233;e sur Internet. Pour cela il doit se rendre sur la page [Mise &agrave; jour->./?exec=spip_loader_update] du menu Configuration et s&eacute;lectionner les &eacute;l&eacute;ments &agrave; mettre &agrave; jour.
+	Un utilisateur (par d&#233;faut, l'administrateur num&#233;ro 1) est autoris&eacute; &agrave; faire une mise &agrave; jour du site (via spip_loader.php, qui doit donc &ecirc;tre pr&#233;sent &agrave; la racine de votre site) ou de tout autre contribution distribu&#233;e sur Internet. Pour cela il doit se rendre sur la page [Mise &agrave; jour->./?exec=spip_loader_update] du menu Configuration et s&eacute;lectionner les &eacute;l&eacute;ments &agrave; mettre &agrave; jour.
 
 La configuration de ce plugin se fait &agrave; deux emplacements :
 - dans <code>config/mes_options.php</code>, on indique la liste des administrateurs autoris&eacute;s &agrave; proc&eacute;der aux mises &agrave; jour, par exemple avec :

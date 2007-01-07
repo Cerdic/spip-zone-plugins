@@ -12,8 +12,8 @@
           test
         </etat>
         <description>
-          Permet de r&eacute;aliser une comparaison de ce ces fichiers spip par rapport  &agrave; ceux disponible sur http://trac.rezo.net/trac/spip/browser/branches/spip-1.9/  (pour l'instant).
-La comparaison est faite par rapport à la taille des fichiers et leur date de modification.
+          Permet de r&eacute;aliser une comparaison de ce ces fichiers spip par rapport  &agrave; ceux disponible sur [->http://trac.rezo.net/trac/spip/browser/branches/spip-1.9/]  (pour l'instant).
+La comparaison est faite par rapport  &agrave; la taille des fichiers et leur date de modification.
          L'int&eacute;ret de ce plugin est double:
          1) V&eacute;rifie que le transfert ftp des fichiers c'est bien effectu&eacute;
          2) Permet de voir s'il y a eu des mis &agrave;  jour (du principalement &agrave; des corrections de bugs)

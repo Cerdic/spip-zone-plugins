@@ -13,9 +13,9 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	test
 	</etat>
 	<description>
-Ce plugin recopie les articles syndiques {et publi&eacute;s} de spip_syndic_articles vers spip_articles. Le code est suffisamment simple pour &ecirc;tre modifiable en fonction des besoins.
+Ce plugin recopie les articles syndiqu&eacute;s {et publi&eacute;s} de spip_syndic_articles vers spip_articles. Le code est suffisamment simple pour &ecirc;tre modifiable en fonction des besoins.
 
-Les articles sont organis&eacute;s automatiquement selon un rubriquage &laquo;intelligent&raquo;: au d&eacute;part, SPIP positionne l'article dans la rubrique o&ugrave; se trouve le site syndiqu&eacute;. Si l'article &agrave; recopier dispose d'un tag de 'category', SPIP cree la sous-rubrique correspondante (voire, arborescente si le tag s'&eacute;crit sous la forme &laquo;Chemin/Vers/Rubrique&raquo;). S'il n'y a pas de tag de ce type, la sous-rubrique "ann&eacute;e/ann&eacute;e-mois" est cr&eacute;&eacute;e et re&ccedil;oit l'article. (Un param&egrave;tre _MODE_RUBRIQUE_MIROIR permet de supprimer ce comportement, ou de se limiter au tri par mois.)
+Les articles sont organis&eacute;s automatiquement selon un rubriquage &laquo;intelligent&raquo;: au d&eacute;part, SPIP positionne l'article dans la rubrique o&ugrave; se trouve le site syndiqu&eacute;. Si l'article &agrave; recopier dispose d'un tag de 'category', SPIP cr&eacute;e la sous-rubrique correspondante (voire, arborescente si le tag s'&eacute;crit sous la forme &laquo;Chemin/Vers/Rubrique&raquo;). S'il n'y a pas de tag de ce type, la sous-rubrique "ann&eacute;e/ann&eacute;e-mois" est cr&eacute;&eacute;e et re&ccedil;oit l'article. (Un param&egrave;tre _MODE_RUBRIQUE_MIROIR permet de supprimer ce comportement, ou de se limiter au tri par mois.)
 
 	</description>
 	<lien></lien> <!-- URI de documentation -->
