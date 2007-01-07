@@ -51,6 +51,7 @@ function exec_w3c_go_home(){
 		return false;
 	}
 	function affiche_rapport(url,origine){
+		url = url.replace('&amp;','&');
 		$('#rapport_test').html(\"<div style='text-align:$spip_lang_right' class='verdana2'><a href='#' onclick='return ferme_rapport(\"+'\"'+origine+'\"'+\");'>"._T('icone_retour')."</a></div>\"
 		+\"<iframe src='\"+url+\"' style='width:100%;height:600px;'></iframe>\");
 		window.location.hash = 'rapport_test';
@@ -147,15 +148,14 @@ function exec_w3c_go_home(){
 				$s = "";
 				$url_affiche = generer_url_ecrire('w3cgh_affiche',"nom=$nom&url=".urlencode($loc),true);
 				$url_voir = generer_url_ecrire('w3cgh_voir',"nom=$nom&url=".urlencode($loc));
-				$url_voir_2 = generer_url_ecrire('w3cgh_voir',"nom=$nom&url=".urlencode($loc),true);
 				$id_test++;
 				if ($etat[$nom]){
-					$s .= "<a href='$url_voir' id='t$id_test' onclick='return affiche_rapport(\"$url_voir_2\",\"t$id_test\")'>";
+					$s .= "<a href='$url_voir' id='t$id_test' onclick='return affiche_rapport(\"$url_voir\",\"t$id_test\")'>";
 					$s .= "OK (".date('d-m-Y H:i',$etat[$nom]).")</a>";
 				}
 				else {
 					$url_test = generer_url_ecrire('w3cgh_test',"nom=$nom&url=".urlencode($loc));
-					$s .= "<a href='$url_voir' id='t$id_test' onclick='return affiche_rapport(\"$url_voir_2\",\"t$id_test\")' rel='$url_test' class='test'></a>";
+					$s .= "<a href='$url_voir' id='t$id_test' onclick='return affiche_rapport(\"$url_voir\",\"t$id_test\")' rel='$url_test' class='test'></a>";
 					//$s .= "<span class='test' name='$url_test'></span></a>";
 					//if ($id_test<10)
 					//	$s .= "<script type='text/javascript'>$('#test_$id_test').append(ajax_image_searching).load('$url_test');</script>";
