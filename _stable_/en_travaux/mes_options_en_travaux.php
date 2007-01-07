@@ -11,6 +11,7 @@ if ($GLOBALS['meta']['en_travaux']=='true')
 	$en_travaux_mode_admin = ($en_travaux_mode_admin OR isset($_GET['action']));
 	$en_travaux_mode_admin = ($en_travaux_mode_admin OR isset($_POST['action']));
 	$en_travaux_mode_admin = ($en_travaux_mode_admin OR $_GET['page']== 'style_prive'); // filtrage de la feuille de style admin mise en squelette
+	$en_travaux_mode_admin = ($en_travaux_mode_admin OR $_GET['page']== 'jquery.js');   // filtrage de jquery qui sert pour la partie admin
 	
 	if ($en_travaux_mode_admin) {
 		// ne rien faire si zone ecrire 
