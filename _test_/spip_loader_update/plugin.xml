@@ -1,10 +1,10 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Mise &agrave; jour (via spip_loader)
+	Mise &#224; jour (via spip_loader)
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	James, inspir&eacute; par les travaux de Cedric &amp; Fil
-_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+	James, inspir&#233; par les travaux de Cedric &amp; Fil
+_ &copy; 2006 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.1
@@ -14,12 +14,12 @@ _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	</etat>
 	<icon>images/spip_mise_a_jour.png</icon>
 	<description>
-	Un utilisateur (par d&#233;faut, l'administrateur num&#233;ro 1) est autoris&eacute; &agrave; faire une mise &agrave; jour du site (via spip_loader.php, qui doit donc &ecirc;tre pr&#233;sent &agrave; la racine de votre site) ou de tout autre contribution distribu&#233;e sur Internet. Pour cela il doit se rendre sur la page [Mise &agrave; jour->./?exec=spip_loader_update] du menu Configuration et s&eacute;lectionner les &eacute;l&eacute;ments &agrave; mettre &agrave; jour.
+	Un utilisateur (par d&#233;faut, l'administrateur num&#233;ro 1) est autoris&#233; &#224; faire une mise &#224; jour du site (via spip_loader.php, qui doit donc &#234;tre pr&#233;sent &#224; la racine de votre site) ou de tout autre contribution distribu&#233;e sur Internet. Pour cela il doit se rendre sur la page [Mise &#224; jour->./?exec=spip_loader_update] du menu Configuration et s&#233;lectionner les &#233;l&#233;ments &#224; mettre &#224; jour.
 
-La configuration de ce plugin se fait &agrave; deux emplacements :
-- dans <code>config/mes_options.php</code>, on indique la liste des administrateurs autoris&eacute;s &agrave; proc&eacute;der aux mises &agrave; jour, par exemple avec :
+La configuration de ce plugin se fait &#224; deux emplacements :
+- dans <code>config/mes_options.php</code>, on indique la liste des administrateurs autoris&#233;s &#224; proc&#233;der aux mises &#224; jour, par exemple avec :
 _ <code>define('_SPIP_LOADER_UPDATE_AUTEURS', '1:2:3');</code>
-- Dans le fichier <code>spip_loader_update_list.txt</code> (&agrave; recopier dans son r&eacute;pertoire config/), on indique la liste des contributions concern&eacute;es, en donnant pour chacune une ligne :
+- Dans le fichier <code>spip_loader_update_list.txt</code> (&#224; recopier dans son r&#233;pertoire config/), on indique la liste des contributions concern&#233;es, en donnant pour chacune une ligne :
 _ <code>paquet url</code>
 _ Par exemple :
 _ <code>spip http://www.spip.net/spip-dev/DISTRIB/spip.zip</code>

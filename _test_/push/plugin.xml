@@ -4,7 +4,7 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	Ben.
- 	_ &copy; 2007 - Distribu&eacute; sous licence GPL
+ 	_ &copy; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
 	<version>
 	0.1
@@ -13,7 +13,7 @@
 	dev
 	</etat>
 	<description>
-	publier des articles &agrave; partir d'un email 
+	publier des articles &#224; partir d'un email 
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<fonctions> <!-- fichier charge a chaque recalcul -->

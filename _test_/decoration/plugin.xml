@@ -1,9 +1,9 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	D&eacute;coration
+	D&#233;coration
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
- 	izo@aucuneid.net  www.aucuneid.com &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+ 	izo@aucuneid.net  www.aucuneid.com &copy; 2006 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 		<lien>http://www.aucuneid.com/bones</lien>
 
@@ -14,7 +14,7 @@
 	test
 	</etat>
 	<description>
-Le filtre "decoration" permet aux redacteurs d'un site spip de d'appliquer les styles soulign&eacute;, barr&eacute;, au dessus, blink et fluo &agrave; une phrase, un mot, parapraphe.
+Le filtre "decoration" permet aux redacteurs d'un site spip de d'appliquer les styles soulign&#233;, barr&#233;, au dessus, blink et fluo &#224; une phrase, un mot, parapraphe.
 -* {&lt;souligne&gt;}Lorem ipsum dolor sit amet{&lt;/souligne&gt;}
 -* {&lt;barre&gt;}Lorem ipsum dolor sit amet{&lt;/barre&gt;}
 -* {&lt;blink&gt;}Lorem ipsum dolor sit amet{&lt;/blink&gt;}

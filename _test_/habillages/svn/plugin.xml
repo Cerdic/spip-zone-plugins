@@ -3,13 +3,13 @@
 	Habillages
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
- 	Franck Ducas [Site personnel->http://franck.ducas.free.fr] pour la r&eacute;alisation et l'id&eacute;e originale.
+ 	Franck Ducas [Site personnel->http://franck.ducas.free.fr] pour la r&#233;alisation et l'id&#233;e originale.
 _ Margot pour les textes et la relecture.
 _ Cedric MORIN [notre-ville.net->http://www.notre-ville.net] pour l'aide technique et la rationalisation d'une partie du code.
-_ Pierre Andrews pour toutes les id&eacute;es.
+_ Pierre Andrews pour toutes les id&#233;es.
 _ Tou(te)s les autres qui ont mis leur grain de sel dans ce projet sur la liste spip-zone notamment.
 _ Et tous les concepteurs et les conceptrices de squelettes, themes, et images (voir auteurs de chaque habillages).
-_ &copy; 2006-2007 - Distribu&eacute; sous licence GNU/GPL
+_ &copy; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
 	1.3
@@ -28,7 +28,7 @@ _ &copy; 2006-2007 - Distribu&eacute; sous licence GNU/GPL
 	</options>
 	<description>
 Gestionnaire d'habillages SPIP.
-_ Pour la version compl&egrave;te (avec les jeux de squelettes, les th&egrave;mes, les extras, et les icones).
+_ Pour la version compl&#232;te (avec les jeux de squelettes, les th&#232;mes, les extras, et les icones).
 _ Ce plugin est compatible avec la version SPIP 1.9.2 alpha 2 (7521 minimum).
 	</description>
 	<lien></lien> <!-- URI de documentation -->

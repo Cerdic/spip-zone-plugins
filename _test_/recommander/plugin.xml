@@ -1,10 +1,10 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Recommander &agrave; un ami
+	Recommander &#224; un ami
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	[fil@rezo.net->mailto:fil@rezo.net]
-_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+_ &copy; 2006 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.2
@@ -13,9 +13,9 @@ _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	test
 	</etat>
 	<description>
-	Fonction recommander un article &agrave; un ami.
+	Fonction recommander un article &#224; un ami.
 
-On l'ajoute dans n'importe quel squelette en pr&eacute;cisant comme param&egrave;tres d'inclusion :
+On l'ajoute dans n'importe quel squelette en pr&#233;cisant comme param&#232;tres d'inclusion :
 - le titre de la page;
 - l'url de la page;
 - le texte a afficher.
@@ -25,9 +25,9 @@ Sous la forme :
  {texte=#INTRODUCTION}&gt;}
 
 On peut ajouter <code>{subject=xxxx}</code> si on veut fixer le sujet,
-sinon par d&eacute;faut c'est <code>"A lire sur #NOM_SITE -- #ENV{titre}"</code>.
+sinon par d&#233;faut c'est <code>"A lire sur #NOM_SITE -- #ENV{titre}"</code>.
 
-Bonus : si {{jQuery}} est pr&eacute;sent, l'interface est en ahah.
+Bonus : si {{jQuery}} est pr&#233;sent, l'interface est en ahah.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>

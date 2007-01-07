@@ -13,10 +13,10 @@
           test
         </etat>
         <description>
-          Permet de r&eacute;aliser l'int&eacute;gration d'auteurs et administrateurs restreints &agrave; partir de fichiers CSV. 
-					Ce plugin g&egrave;re &eacute;galement la cr&eacute;ation de rubriques pour les admins restreints 
-					ainsi que la cr&eacute;ation de groupes pour les restrictions d'acc&egrave;s (plugin acces_groupes).
-					Il permet aussi la suppression des utilisateurs qui ne seraient plus souhait&eacute;s avec &eacute;ventuellement la sauvegarde/gestion
+          Permet de r&#233;aliser l'int&#233;gration d'auteurs et administrateurs restreints &#224; partir de fichiers CSV. 
+					Ce plugin g&#232;re &#233;galement la cr&#233;ation de rubriques pour les admins restreints 
+					ainsi que la cr&#233;ation de groupes pour les restrictions d'acc&#232;s (plugin acces_groupes).
+					Il permet aussi la suppression des utilisateurs qui ne seraient plus souhait&#233;s avec &#233;ventuellement la sauvegarde/gestion
 					de leurs articles.
         </description>
 				<lien>http://www.spip-contrib.net/articles1550</lien> <!-- URI de documentation -->

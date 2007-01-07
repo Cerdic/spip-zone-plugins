@@ -2,7 +2,7 @@
 	<nom> <!-- Nom du plugin -->
 	  EXIF
 <multi>
-[fr] Donn&eacute;es issues de l'appareil photo.
+[fr] Donn&#233;es issues de l'appareil photo.
 [en] Data from your camera for your photos.
 [it] Informazionni della machina fotographica per i foto.
 </multi>
@@ -20,11 +20,11 @@
 	  <multi>
 	  [fr]
 -# Balise <code>#EXIF</code> pour afficher les informations [?EXIF] d'une image,
--# <code>#EXIF{EXIF}</code> pour afficher une famille de donn&eacute;es, <code>#EXIF{EXIF,ExposureTime}</code> pour extraire une info pr&eacute;cise ;
--# Page (cach&eacute;e: exec=update_date_exif) pour synchroniser les photos qui existent d&eacute;j&agrave; pour avoir la date exif dans la base &agrave; la place de la date de transfert,
--# Les nouvelles photos transfer&eacute;es prendront automatiquement la date EXIF si elle est disponible,
--# Quelques informations EXIF (commentaire, marque et mod&egrave;le de l'appareil photo) sont index&eacute;es par le moteur de recherche.
--# Un mod&egrave;le {&lt;doc1|exif&gt;} permet d'afficher la photo avec ses tags EXIF comme descriptif (stylage &agrave; revoir !)
+-# <code>#EXIF{EXIF}</code> pour afficher une famille de donn&#233;es, <code>#EXIF{EXIF,ExposureTime}</code> pour extraire une info pr&#233;cise ;
+-# Page (cach&#233;e: exec=update_date_exif) pour synchroniser les photos qui existent d&#233;j&#224; pour avoir la date exif dans la base &#224; la place de la date de transfert,
+-# Les nouvelles photos transfer&#233;es prendront automatiquement la date EXIF si elle est disponible,
+-# Quelques informations EXIF (commentaire, marque et mod&#232;le de l'appareil photo) sont index&#233;es par le moteur de recherche.
+-# Un mod&#232;le {&lt;doc1|exif&gt;} permet d'afficher la photo avec ses tags EXIF comme descriptif (stylage &#224; revoir !)
 	  [en]
 -# New SPIP tag <code>#EXIF</code> to display [?EXIF] information from your image,
 -# <code>#EXIF{EXIF}</code> to display an EXIF data subfamily, <code>#EXIF{EXIF,ExposureTime}</code> to display a specific information;

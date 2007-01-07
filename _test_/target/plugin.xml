@@ -4,7 +4,7 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	francois.vachon@iago.ca
-_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+_ &copy; 2006 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.1
@@ -13,9 +13,9 @@ _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	test
 	</etat>
 	<description>
- 	Ouvre tous les liens de class spip_out dans une nouvelle fen&ecirc;tre.
- 	Ajoute la class spip_out aux liens de type directory des sites syndiqu&eacute;s et les ouvrent dans une nouvelle fen&ecirc;tre.
- 	Ouvre tous les liens de class spip_glossaire (vers wikipedia)  aussi dans une nouvelle fen&ecirc;tre.
+ 	Ouvre tous les liens de class spip_out dans une nouvelle fen&#234;tre.
+ 	Ajoute la class spip_out aux liens de type directory des sites syndiqu&#233;s et les ouvrent dans une nouvelle fen&#234;tre.
+ 	Ouvre tous les liens de class spip_glossaire (vers wikipedia)  aussi dans une nouvelle fen&#234;tre.
 	<br /><a href="http://monsitespip.com/spip.php?article2" target="_blank">Voir MonSiteSpip.com pour plus de détails</a>
 	</description>
 	<lien>http://monsitespip.com/spip.php?article2</lien> <!-- URI de documentation -->

@@ -1,10 +1,10 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Mode "propres2" personalis&eacute;
+	Mode "propres2" personalis&#233;
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Gilles Vincent
-_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+_ &copy; 2006 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.1
@@ -13,7 +13,7 @@ _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	test
 	</etat>
 	<description>
-	Pour un site dont l'architecture est essentiellement bas&eacute;e sur des rubriques, la r&eacute;&eacute;criture classique des urls peut &ecirc;tre g&ecirc;nante. Ce plugin permet d'inverser les repr&eacute;sentations des rubriques et des articles. Seuls ces derniers commencent donc par un tiret (un seul, car deux m'ont paru inutiles). Ce plugin se substitue au mode propre2. Donc pour l'activer il faut aussi pr&eacute;ciser dans mes_options.php : $type_urls = "propres2";
+	Pour un site dont l'architecture est essentiellement bas&#233;e sur des rubriques, la r&#233;&#233;criture classique des urls peut &#234;tre g&#234;nante. Ce plugin permet d'inverser les repr&#233;sentations des rubriques et des articles. Seuls ces derniers commencent donc par un tiret (un seul, car deux m'ont paru inutiles). Ce plugin se substitue au mode propre2. Donc pour l'activer il faut aussi pr&#233;ciser dans mes_options.php : $type_urls = "propres2";
 	</description>
 	<dependances>
 		<spip>

@@ -13,8 +13,8 @@ _ (c) 2006 - Licence GPL
 	dev
 	</etat>
 	<description>
-	Ce plugin maintient une liste des liens ins&eacute;r&eacute;s dans le contenu ditorialcute; afin d'en valider p&eacute;riodiquement la validit&eacute;,
-	et d'en d&eacute;tecter les attributs de langue et de titre qui sont ainsi renseign&eacute;s automatiquements sur les balises a
+	Ce plugin maintient une liste des liens ins&#233;r&#233;s dans le contenu ditorialcute; afin d'en valider p&#233;riodiquement la validit&#233;,
+	et d'en d&#233;tecter les attributs de langue et de titre qui sont ainsi renseign&#233;s automatiquements sur les balises a
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix> 

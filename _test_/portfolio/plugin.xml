@@ -3,7 +3,7 @@
 	Portfolio
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	&copy; 2006 Cedric Morin &amp; Mathieu Drouet [notre-ville.net->http://www.notre-ville.net]  Distribu&eacute; sous licence GNU/GPL
+	&copy; 2006 Cedric Morin &amp; Mathieu Drouet [notre-ville.net->http://www.notre-ville.net]  Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.2
@@ -12,7 +12,7 @@
 	test
 	</etat>
 	<description>
-	Portfolio images &agrave; utiliser en combinaison avec les plugins pagination ahah, jsquery, thickbox, ajax_callback.
+	Portfolio images &#224; utiliser en combinaison avec les plugins pagination ahah, jsquery, thickbox, ajax_callback.
 
  Usage : 
 - dans le squelette : <code>[(#MODELE{article_portfolio,id_article})]</code>.<br />

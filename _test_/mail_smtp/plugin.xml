@@ -4,8 +4,8 @@
 	<version>1.9.2</version>
 	<etat>test</etat>
 	<description>Utilisation d'un serveur SMTP pour l'envoi des mails par SPIP
-_ Les param&egrave;tres du serveur SMTP sont configur&eacute;s dans la panneau de configuration des fonctions avanc&eacute;es.	
-_ N&eacute;cessite SPIP 1.9.2
+_ Les param&#232;tres du serveur SMTP sont configur&#233;s dans la panneau de configuration des fonctions avanc&#233;es.	
+_ N&#233;cessite SPIP 1.9.2
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>smtp</prefix>
