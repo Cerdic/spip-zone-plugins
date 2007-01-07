@@ -4,7 +4,7 @@ function boutonstexte_insert_head($flux)
 {
 	$metacfg = array(
 		'jsFile' => 'boutonstexte.js',
-		'cssFile' => 'boutonstexte.css',
+		'cssFile' => 'boutonstexte',
 		'imgPath' => 'images/fontsizeup.png',
 		'txtOnly' => 'boutonstexte:texte_seulement',
 		'txtBackSpip' => 'boutonstexte:retour_a_spip',
@@ -14,7 +14,7 @@ function boutonstexte_insert_head($flux)
 	meta_boutonstexte($metacfg);
 	
 	$jsFile = find_in_path($metacfg['jsFile']);
-	$cssFile = find_in_path($metacfg['cssFile']);
+	$cssFile = $metacfg['cssFile'];
 	$imgPath = dirname(find_in_path($metacfg['imgPath']));
 
 	$txtOnly = txt_boutonstexte($metacfg['txtOnly']);
@@ -23,7 +23,8 @@ function boutonstexte_insert_head($flux)
 	$txtSizeDown = txt_boutonstexte($metacfg['txtSizeDown']);
 
 	$incHead = <<<EOH
-<link rel="stylesheet" href="$cssFile" type="text/css" media="all" />
+<link rel="stylesheet" href="spip.php?page={$cssFile}.css" type="text/css" media="all" />
+<link rel="stylesheet" href="spip.php?page={$cssFile}-print.css" type="text/css" media="print" />
 <script src="{$jsFile}" type="text/javascript"></script>
 <script type="text/javascript">
 	var boutonstexte = new boutonsTexte({
