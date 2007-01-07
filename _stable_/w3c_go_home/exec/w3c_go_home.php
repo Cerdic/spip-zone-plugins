@@ -38,7 +38,9 @@ function exec_w3c_go_home(){
 		var compteur=0;
 		$('.test').each(function(){
 			if ( (!$(this).html()) && (compteur<max)){
-				$(this).append(ajax_image_searching).load($(this).rel());
+				var url = $(this).rel();
+				url = url.replace('&amp;','&');
+				$(this).append(ajax_image_searching).load(url);
 				compteur++;
 			}
 		});
@@ -130,26 +132,30 @@ function exec_w3c_go_home(){
 			if ($ok){
 				$cpt_ok++;
 				$puce = 'puce-verte-breve.gif';
+				$alt = "OK";
 			}
-			else
+			else{
 				$puce = 'puce-orange-breve.gif';
+				$alt = "";
+			}
 	
-			$s = "<img src='"._DIR_IMG_PACK."$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
+			$s = "<img src='"._DIR_IMG_PACK."$puce' width='7' height='7' style='border:0' alt='$alt' />&nbsp;&nbsp;";
 			$s .= "<a href='$loc'>".lignes_longues($loc,50)."</a>";
 			$vals[] = $s;
 			
 			foreach($validateurs as $nom){
 				$s = "";
 				$url_affiche = generer_url_ecrire('w3cgh_affiche',"nom=$nom&url=".urlencode($loc),true);
-				$url_voir = generer_url_ecrire('w3cgh_voir',"nom=$nom&url=".urlencode($loc),true);
+				$url_voir = generer_url_ecrire('w3cgh_voir',"nom=$nom&url=".urlencode($loc));
+				$url_voir_2 = generer_url_ecrire('w3cgh_voir',"nom=$nom&url=".urlencode($loc),true);
 				$id_test++;
 				if ($etat[$nom]){
-					$s .= "<a href='$url_voir' id='t$id_test' onclick='return affiche_rapport(\"$url_voir\",\"t$id_test\")'>";
+					$s .= "<a href='$url_voir' id='t$id_test' onclick='return affiche_rapport(\"$url_voir_2\",\"t$id_test\")'>";
 					$s .= "OK (".date('d-m-Y H:i',$etat[$nom]).")</a>";
 				}
 				else {
-					$url_test = generer_url_ecrire('w3cgh_test',"nom=$nom&url=".urlencode($loc),true);
-					$s .= "<a href='$url_voir' id='t$id_test' onclick='return affiche_rapport(\"$url_voir\",\"t$id_test\")' rel='$url_test' class='test'></a>";
+					$url_test = generer_url_ecrire('w3cgh_test',"nom=$nom&url=".urlencode($loc));
+					$s .= "<a href='$url_voir' id='t$id_test' onclick='return affiche_rapport(\"$url_voir_2\",\"t$id_test\")' rel='$url_test' class='test'></a>";
 					//$s .= "<span class='test' name='$url_test'></span></a>";
 					//if ($id_test<10)
 					//	$s .= "<script type='text/javascript'>$('#test_$id_test').append(ajax_image_searching).load('$url_test');</script>";
@@ -178,7 +184,7 @@ function w3cgh_formulaire_choix_validateurs(){
 	$out = "";
 	$out .= "<b>"._T('titre_formulaire_choix_validateur')."&nbsp;:</b><br />";
 	$action = generer_action_auteur("w3cgh_selectionne","",generer_url_ecrire('w3c_go_home'));
-	$out .= "<form action='$action'><p>";
+	$out .= "<form action='$action'><div>";
 	$out .= form_hidden($action);
 	$liste = validateur_liste();
 	foreach ($liste as $validateur){
@@ -193,8 +199,8 @@ function w3cgh_formulaire_choix_validateurs(){
 		"</label>" .
 		"<br />";	
 	}
-	$out .= "\n<div align='$spip_lang_right'><input type='submit' name='Changer' class='fondo' value='"._T('bouton_changer')."' /></div>";
-	$out .= "</p></form>";
+	$out .= "\n<p align='$spip_lang_right'><input type='submit' name='Changer' class='fondo' value='"._T('bouton_changer')."' /></p>";
+	$out .= "</div></form>";
 	return $out;
 }
 

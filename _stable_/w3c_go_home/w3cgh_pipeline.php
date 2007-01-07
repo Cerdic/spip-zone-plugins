@@ -20,7 +20,7 @@
 		if ($flux['args']['exec']=='articles'){
 			include_spip('inc/validateur_api');
 			$s = "";
-			$s .= debut_cadre_relief(_DIR_PLUGIN_W3CGH."images/w3cgh-icone.gif",true);
+			$s .= debut_cadre_relief(_DIR_PLUGIN_W3CGH."images/xml-valid-24.png",true);
 
 			$id_article = $flux['args']['id_article'];
 			$url = generer_url_public('w3cgh_article',"id_article=$id_article");
