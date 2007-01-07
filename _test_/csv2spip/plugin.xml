@@ -23,11 +23,13 @@
         <prefix>
           csv2spip
         </prefix>
+				<icon>
+				  img_pack/csv2spip-24.png
+				</icon>
         <!-- Definitions des fonctions qui s'inserent dans les pipelines -->
         <pipeline>
         		<nom>ajouter_boutons</nom>
             <inclure>csv2spip_pipelines.php</inclure>
         </pipeline>
-	
         <!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.        -->
 </plugin>
