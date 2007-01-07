@@ -7,8 +7,14 @@ function exec_w3cgh_test_dist()
 	$url = urldecode(_request('url'));
 	include_spip("inc/validateur_api");
 	$res = validateur_test($nom,$url);
+	
+	$texte = end($res['res']);
+	if ($ok = reset($res['res']))
+		$texte = "<span style='color:#0f0'>$texte</span>";
+	else
+		$texte = "<span style='color:#f00'>$texte</span>";
 
-	ajax_retour(end($res['res']));
+	ajax_retour($texte);
 }
 
 ?>

@@ -1,5 +1,11 @@
 <?php
 
+function validateur_liste(){
+	$liste = find_all_in_path("validateur/","[.]php$");
+	foreach (array_keys($liste) as $nom)
+		$validateur[] = basename($nom,'.php');
+	return $validateur;
+}
 
 function validateur_infos($nom){
 	$validateur = charger_fonction($nom,'validateur');

@@ -9,14 +9,12 @@
  *
  */
 include_spip('inc/validateur_api');
+include_spip('inc/actions');
 
 function exec_w3c_go_home(){
-	global $connect_statut;
+	global $connect_statut,$spip_lang_right;
 	
-	//$validateurs = array('spip_xhtml_validator');
-	$liste = find_all_in_path("validateur/","[.]php$");
-	foreach (array_keys($liste) as $nom)
-		$validateurs[] = basename($nom,'.php');
+	$validateurs = isset($GLOBALS['meta']['w3cgh_validateurs_actifs'])?unserialize($GLOBALS['meta']['w3cgh_validateurs_actifs']):array();
 	$out = "";
 	
 	include_spip ("inc/presentation");
@@ -45,10 +43,23 @@ function exec_w3c_go_home(){
 			}
 		});
 	}
+	function ferme_rapport(origine){
+		$('#rapport_test').html('');
+		window.location.hash = origine;
+		return false;
+	}
+	function affiche_rapport(url,origine){
+		$('#rapport_test').html(\"<div style='text-align:$spip_lang_right' class='verdana2'><a href='#' onclick='return ferme_rapport(\"+'\"'+origine+'\"'+\");'>"._T('icone_retour')."</a></div>\"
+		+\"<iframe src='\"+url+\"' style='width:100%;height:600px;'></iframe>\");
+		window.location.hash = 'rapport_test';
+		return false;
+	}
 	--></script>";
 	
+	$out .= "<div id='rapport_test'></div>";
 	$out .= debut_gauche('',true);
 	$out .= debut_boite_info(true);
+	$out .= w3cgh_formulaire_choix_validateurs();
 	$action = generer_action_auteur('w3cgh_reset_test',implode('-',$validateurs),generer_url_ecrire('w3c_go_home'));
 	$out .= "<a href='$action'>"._L("Tout Reinitialiser")."</a><br/>";
 	$out .= "<a href='#' onclick='perform_tests(10);'>"._L("10 Tests")."</a><br/>";
@@ -129,19 +140,20 @@ function exec_w3c_go_home(){
 			
 			foreach($validateurs as $nom){
 				$s = "";
+				$url_affiche = generer_url_ecrire('w3cgh_affiche',"nom=$nom&url=".urlencode($loc),true);
 				$url_voir = generer_url_ecrire('w3cgh_voir',"nom=$nom&url=".urlencode($loc),true);
+				$id_test++;
 				if ($etat[$nom]){
-					$s .= "<a href='$url_voir'>";
+					$s .= "<a href='$url_voir' id='t$id_test' onclick='return affiche_rapport(\"$url_voir\",\"t$id_test\")'>";
 					$s .= "OK (".date('d-m-Y H:i',$etat[$nom]).")</a>";
 				}
 				else {
 					$url_test = generer_url_ecrire('w3cgh_test',"nom=$nom&url=".urlencode($loc),true);
-					$s .= "<a href='$url_voir' rel='$url_test' class='test'></a>";
+					$s .= "<a href='$url_voir' id='t$id_test' onclick='return affiche_rapport(\"$url_voir\",\"t$id_test\")' rel='$url_test' class='test'></a>";
 					//$s .= "<span class='test' name='$url_test'></span></a>";
 					//if ($id_test<10)
 					//	$s .= "<script type='text/javascript'>$('#test_$id_test').append(ajax_image_searching).load('$url_test');</script>";
 					// ajouter la methode img en noscript
-					$id_test++;
 				}
 				$vals[] = $s;
 			}
@@ -158,6 +170,32 @@ function exec_w3c_go_home(){
 	$out .= "$cpt_ok/$cpt pages totalement conforme";
 	echo $out,fin_gauche(),fin_page();
 
+}
+
+function w3cgh_formulaire_choix_validateurs(){
+	global $spip_lang_right;
+	$validateurs_actifs = isset($GLOBALS['meta']['w3cgh_validateurs_actifs'])?unserialize($GLOBALS['meta']['w3cgh_validateurs_actifs']):array();
+	$out = "";
+	$out .= "<b>"._T('titre_formulaire_choix_validateur')."&nbsp;:</b><br />";
+	$action = generer_action_auteur("w3cgh_selectionne","",generer_url_ecrire('w3c_go_home'));
+	$out .= "<form action='$action'><p>";
+	$out .= form_hidden($action);
+	$liste = validateur_liste();
+	foreach ($liste as $validateur){
+		$out .= "<label for='choix_$validateur'>" .
+		boutonne('checkbox',
+			'validateurs[]',
+			$validateur,
+			(in_array($validateur,$validateurs_actifs) ? ' checked="checked" ' : '') .
+			"id='choix_$validateur'") .
+		"&nbsp;" . 
+		validateur_infos($validateur) .
+		"</label>" .
+		"<br />";	
+	}
+	$out .= "\n<div align='$spip_lang_right'><input type='submit' name='Changer' class='fondo' value='"._T('bouton_changer')."' /></div>";
+	$out .= "</p></form>";
+	return $out;
 }
 
 ?>

@@ -22,8 +22,12 @@ function validateur_spip_xhtml_validator_dist($action, $url= ""){
 			}	
 			return array($ok,$erreurs,$texte);
 		case 'visu':
-			$page = recuperer_page($url);
-			return $transformer_xml($page, false);
+			$url = parametre_url($url,'var_mode','debug','&');
+			$url = parametre_url($url,'var_mode_affiche','validation','&');
+			include_spip('inc/headers');
+			redirige_par_entete($url);
+			//$page = recuperer_page($url);
+			//return $transformer_xml($page, false);
 	}
 	return false;
 }
