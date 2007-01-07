@@ -501,7 +501,7 @@ function checkbox_agenda($choix_agenda) {
 
 	$checked = '';
 	if ($choix_agenda == "OK") $checked = "CHECKED";
-	return "<input type='checkbox' name='choix_agenda' value='OK' '$checked' />&nbsp;Faire apparaitre l'article dans l'agenda<br />";
+	return "<input type='checkbox' name='choix_agenda' value='OK' '$checked' />&nbsp;Publier en tant que br&egrave;ve dans l'agenda<br />";
 }
 
 // pour garder la valeur lors d'un rechargement de page

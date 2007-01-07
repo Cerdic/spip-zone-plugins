@@ -28,6 +28,8 @@
 		{{Procedure de d&#233;-installation : }} <br />
 		- Allez dans l'onglet de configuration open-publishing <br />
 		- Supprimez la table open-publishing de la base de donn&#233;es <br />
+		
+		{{feuille de style : }} attention, il <b>faut</b> copier les styles du plugin dans <b>votre</b> feuille de style<br />
 	</description>
 	<lien>[Documentation->https://docs.indymedia.org/view/Local/ImcLilleSite]</lien>
 	<prefix>op</prefix>
@@ -45,6 +47,11 @@
 	<pipeline>
 		<nom>ajouter_onglets</nom>
 		<action>ajouterOnglets</action>
+		<inclure>op_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>headerPrive</action>
 		<inclure>op_pipeline.php</inclure>
 	</pipeline>
 </plugin>
