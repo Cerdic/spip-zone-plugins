@@ -21,7 +21,7 @@ Utilisation:
 -* {&lt;img234|ragged&gt;}
 -* {&lt;img234|ragged|left&gt;} pour specifier l'alignement (droite ou gauche)
 -* {&lt;img234|ragged|margin=100&gt;} pour specifier la marge autour de l'image
--* {&lt;img234|ragged|couleur&gt;} pour specifier la couleur de fond à decouper. Si on n'en specifie pas, on detoure le transparent.
+-* {&lt;img234|ragged|couleur&gt;} pour specifier la couleur de fond &agrave; decouper. Si on n'en specifie pas, on detoure le transparent.
 	</description>
 	<fonctions> <!-- fichier charge a chaque recalul de page -->
 	image_ragged_filtre.php

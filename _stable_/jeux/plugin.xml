@@ -7,7 +7,7 @@
 	<auteur>
 [Patrice VANNEUFVILLE->mailto:patrice.vanneufville@laposte.net], novembre 2006
 
-Mentions spéciales :
+Mentions sp&eacute;ciales :
 _ QCM : Mathieu GIANNECCHINI
 _ Mots crois&eacute;s : Ma&iuml;eul ROUQUETTE
 _ Diagrammes d'&eacute;checs : Fran&ccedil;ois SCHREUER
@@ -15,7 +15,7 @@ _ Diagrammes d'&eacute;checs : Fran&ccedil;ois SCHREUER
 	<description>
 Des jeux avec Spip !
 ----
-_ Voici pour vous la possibilit&eacute; d'ins&eacute;rer dans vos articles des mots crois&eacute;s, des sudokus, des devinettes, des blagues, des po&eacute;sies, des QCM, des exercices à trous, etc.<br />
+_ Voici pour vous la possibilit&eacute; d'ins&eacute;rer dans vos articles des mots crois&eacute;s, des sudokus, des devinettes, des blagues, des po&eacute;sies, des QCM, des exercices &agrave; trous, etc.<br />
 _ Mettez une touche &eacute;ducative et ludique &agrave; votre site !
 
 Un exemple : 
@@ -23,11 +23,11 @@ Un exemple :
         [titre]
         La devinette du jour
         [devinette]
-        Comment appelle t-on un patron de la nouvelle économie ?
+        Comment appelle t-on un patron de la nouvelle &eacute;conomie ?
         [reponse]
         Un e-responsable
 </jeux></code></quote>
-Ce plugin fonctionne de fa&ccedil;on optimale sur les squelettes disposant de la balise {{#INSERT_HEAD}} et peut &eacute;galement être test&eacute; dans l'espace priv&eacute;.
+Ce plugin fonctionne de fa&ccedil;on optimale sur les squelettes disposant de la balise {{#INSERT_HEAD}} et peut &eacute;galement &ecirc;tre test&eacute; dans l'espace priv&eacute;.
 _ Pour certains jeux, il n&eacute;cessite l'activation du plugin {{jQuery}} pour les versions de spip {{1.9.1}} ou inf&eacute;rieures.
 _ Pour les jeux graphiques, il faut avoir les librairies {{GD}} install&eacute;es sur votre server.
 _ Ce plugin est en &eacute;volution, proc&eacute;dez r&eacute;guli&egrave;rement &agrave; vos mises &agrave; jours.

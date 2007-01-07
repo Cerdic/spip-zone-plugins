@@ -13,17 +13,17 @@ _ Licence GPL
 	stable
 	</etat>
 	<description>
-	Gestion du flux XML documentaion francaise et insertion du comarquage dans le site
-_	le flux s'insere dans un article au moyen du tag 
+	Gestion du flux XML documentation fran&ccedil;aise et insertion du comarquage dans le site
+_	le flux s'ins&egrave;re dans un article au moyen du tag 
 _ {&lt;comarquage&gt;}.
-_ Vous pouvez pr&eacute;ciser une page pr&eacute;cise en definissant les attributs xml et xsl de l'url :
+_ Vous pouvez pr&eacute;ciser une page pr&eacute;cise en d&eacute;finissant les attributs xml et xsl de l'url :
 _ {&lt;comarquage xml='N333.xml' xsl='Noeud.xsl'&gt;}
 
-Les parametres de connexion a la documentation francaise sont ajustables a la page [ecrire/?exec=admin_comarquage-> index.php?exec=admin_comarquage]
+Les param&egrave;tres de connexion &agrave; la documentation fran&ccedil;aise sont ajustables &agrave; la page [ecrire/?exec=admin_comarquage-> index.php?exec=admin_comarquage]
 
-Ce plugin necessite la presence de libxslt sur votre serveur, utilisable en ligne de commande par 'xsltproc', et que la commande php 'exec' ne soit pas inhib&eacute;e.
+Ce plugin n&eacute;ecessite la pr&eacute;sence de libxslt sur votre serveur, utilisable en ligne de commande par 'xsltproc', et que la commande php 'exec' ne soit pas inhib&eacute;e.
 
-Necessite SPIP 1.9.0 minimum, compatible SPIP 1.9.1
+N&eacute;cessite SPIP 1.9.0 minimum, compatible SPIP 1.9.1
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix> 

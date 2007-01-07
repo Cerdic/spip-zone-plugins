@@ -15,7 +15,7 @@ _ &copy; 2006 - Licence GPL
 	</etat>
 	<description>
 	Gestion des Informations Personnelles : Agenda
-_	{{Ce plugin necessite le plugin Widget Calendar}}
+_	{{Ce plugin n&eacute;cessite le plugin Widget Calendar}}
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->

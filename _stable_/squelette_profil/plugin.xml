@@ -18,7 +18,7 @@
 	<description>
 <multi>
 [fr]
-	utilise un repertoire de squelette en fonction du profil. 
+	utilise un r&eacute;pertoire de squelette en fonction du profil. 
 
 	Si on a {dossier_squelettes=messquelettes}, alors on peut cr&eacute;er un dossier {messquelettes=minirezo}
 	 pour les squelettes des administrateurs, et ainsi de suite pour les autres...
@@ -26,8 +26,8 @@
         Si on a {dossier_squelettes=messquelettes:walma3:forum}, on peut cr&eacute;er les dossiers 
 	{messquelettes=minirezo}, {walma3=minirezo}, {forum=minirezo} juste pour les administrateurs. 
 
-	Mais on n'est pas oblig&eacute; de tous les avoir. S'il n'y a pas de repertoire sp&eacute;cifique au statut, 
-	alors on prend le repertoire par defaut.
+	Mais on n'est pas oblig&eacute; de tous les avoir. S'il n'y a pas de r&eacute;pertoire sp&eacute;cifique au statut, 
+	alors on prend le r&eacute;pertoire par d&eacute;faut.
 [en]
    This plugin allows you to provide a different template by login status (admin, editor, etc...)
 
