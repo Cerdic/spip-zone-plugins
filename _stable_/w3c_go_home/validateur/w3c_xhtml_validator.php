@@ -23,8 +23,9 @@ function validateur_w3c_xhtml_validator_dist($action, $url= ""){
 			return array($erreurs==0,$erreurs,$texte);
 			break;
 		case 'visu':
-			$test = recuperer_page($urlvalidator);
-			return $test;
+			include_spip('inc/headers');
+			redirige_par_entete($urlvalidator);
+			break;
 	}
 	return false;
 }

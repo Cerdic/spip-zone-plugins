@@ -26,8 +26,7 @@ function validateur_spip_xhtml_validator_dist($action, $url= ""){
 			$url = parametre_url($url,'var_mode_affiche','validation','&');
 			include_spip('inc/headers');
 			redirige_par_entete($url);
-			//$page = recuperer_page($url);
-			//return $transformer_xml($page, false);
+			break;
 	}
 	return false;
 }
