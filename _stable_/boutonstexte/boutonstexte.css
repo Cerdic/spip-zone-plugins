@@ -20,6 +20,11 @@
 }
 
 div.onlytext {
-/* je sais pas comment on fait rtl/ltr */
 	text-align: left;
+	margin:0 auto!important;
+	width:19cm!important;
+}
+
+div.onlytext p {
+	padding-bottom:1em;
 }
