@@ -11,7 +11,7 @@
 	test
 	</etat>
 	<description>
-Le plugin orientation ajoute les crit&egrave;res <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code> pour le classement des photos.
+Le plugin orientation ajoute les crit&#232;res <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code> pour le classement des photos.
 	</description>
 	<lien>http://www.spip-contrib.net/Portrait-ou-Paysage</lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction

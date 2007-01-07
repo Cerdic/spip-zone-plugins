@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Comarquage Service public avec la Documentation fran&ccedil;aise (&agrave; partir de SPIP 1.9.0)
+	Comarquage Service public avec la Documentation fran&ccedil;aise (&#224; partir de SPIP 1.9.0)
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Cedric MORIN [notre-ville.net->http://www.notre-ville.net]
@@ -14,16 +14,16 @@ _ Licence GPL
 	</etat>
 	<description>
 	Gestion du flux XML documentation fran&ccedil;aise et insertion du comarquage dans le site
-_	le flux s'ins&egrave;re dans un article au moyen du tag 
+_	le flux s'ins&#232;re dans un article au moyen du tag 
 _ {&lt;comarquage&gt;}.
-_ Vous pouvez pr&eacute;ciser une page pr&eacute;cise en d&eacute;finissant les attributs xml et xsl de l'url :
+_ Vous pouvez pr&#233;ciser une page pr&#233;cise en d&#233;finissant les attributs xml et xsl de l'url :
 _ {&lt;comarquage xml='N333.xml' xsl='Noeud.xsl'&gt;}
 
-Les param&egrave;tres de connexion &agrave; la documentation fran&ccedil;aise sont ajustables &agrave; la page [ecrire/?exec=admin_comarquage-> index.php?exec=admin_comarquage]
+Les param&#232;tres de connexion &#224; la documentation fran&ccedil;aise sont ajustables &#224; la page [ecrire/?exec=admin_comarquage-> index.php?exec=admin_comarquage]
 
-Ce plugin n&eacute;ecessite la pr&eacute;sence de libxslt sur votre serveur, utilisable en ligne de commande par 'xsltproc', et que la commande php 'exec' ne soit pas inhib&eacute;e.
+Ce plugin n&#233;ecessite la pr&#233;sence de libxslt sur votre serveur, utilisable en ligne de commande par 'xsltproc', et que la commande php 'exec' ne soit pas inhib&#233;e.
 
-N&eacute;cessite SPIP 1.9.0 minimum, compatible SPIP 1.9.1
+N&#233;cessite SPIP 1.9.0 minimum, compatible SPIP 1.9.1
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix> 

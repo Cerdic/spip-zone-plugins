@@ -4,7 +4,7 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Philippe Drouot, adaptation en plugin de la contrib switcher de Fil
-_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+_ &copy; 2006 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.1
@@ -13,11 +13,11 @@ _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	test
 	</etat>
 	<description>
-	Ajoute une liste d&eacute;roulante permettant de basculer entre les squelettes par d&eacute;faut du site, les squelettes de la dist de SPIP et l'ensemble des squelettes contenus dans le r&eacute;pertoire nomm&eacute; <code>squelettes-test</code>	(un sous-r&eacute;pertoire par jeu de squelettes).
+	Ajoute une liste d&#233;roulante permettant de basculer entre les squelettes par d&#233;faut du site, les squelettes de la dist de SPIP et l'ensemble des squelettes contenus dans le r&#233;pertoire nomm&#233; <code>squelettes-test</code>	(un sous-r&#233;pertoire par jeu de squelettes).
 
-	Si vous souhaitez modifier le nom du r&eacute;pertoire contenant les squelettes, &eacute;ditez le fichier <code>inc/switcher_config.php</code>. Il est &eacute;galement possible dans ce m&ecirc;me fichier de sp&eacute;cifier si les non administrateurs ont la possibilit&eacute; de jouer avec les jeux de squelettes en mettant a FALSE la variable <code>$afficherSeulementPourLesAdmins</code>.
+	Si vous souhaitez modifier le nom du r&#233;pertoire contenant les squelettes, &#233;ditez le fichier <code>inc/switcher_config.php</code>. Il est &#233;galement possible dans ce m&#234;me fichier de sp&#233;cifier si les non administrateurs ont la possibilit&#233; de jouer avec les jeux de squelettes en mettant a FALSE la variable <code>$afficherSeulementPourLesAdmins</code>.
 
-	Pour se faire une id&eacute;e, voir [d&eacute;mo->http://spiptest.africa-web.org/].
+	Pour se faire une id&#233;e, voir [d&#233;mo->http://spiptest.africa-web.org/].
 	<lien>http://zine.spip.org/spip.php?article8</lien> <!-- URI de documentation -->
 	</description>
 	<prefix> 

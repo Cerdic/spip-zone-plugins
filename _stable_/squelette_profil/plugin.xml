@@ -18,16 +18,16 @@
 	<description>
 <multi>
 [fr]
-	utilise un r&eacute;pertoire de squelette en fonction du profil. 
+	utilise un r&#233;pertoire de squelette en fonction du profil. 
 
-	Si on a {dossier_squelettes=messquelettes}, alors on peut cr&eacute;er un dossier {messquelettes=minirezo}
+	Si on a {dossier_squelettes=messquelettes}, alors on peut cr&#233;er un dossier {messquelettes=minirezo}
 	 pour les squelettes des administrateurs, et ainsi de suite pour les autres...
 
-        Si on a {dossier_squelettes=messquelettes:walma3:forum}, on peut cr&eacute;er les dossiers 
+        Si on a {dossier_squelettes=messquelettes:walma3:forum}, on peut cr&#233;er les dossiers 
 	{messquelettes=minirezo}, {walma3=minirezo}, {forum=minirezo} juste pour les administrateurs. 
 
-	Mais on n'est pas oblig&eacute; de tous les avoir. S'il n'y a pas de r&eacute;pertoire sp&eacute;cifique au statut, 
-	alors on prend le r&eacute;pertoire par d&eacute;faut.
+	Mais on n'est pas oblig&#233; de tous les avoir. S'il n'y a pas de r&#233;pertoire sp&#233;cifique au statut, 
+	alors on prend le r&#233;pertoire par d&#233;faut.
 [en]
    This plugin allows you to provide a different template by login status (admin, editor, etc...)
 
@@ -39,7 +39,7 @@
 
 Se avete una cartella {dossier_squelettes=mieimodelli}, allora potete creare una carella {mieimodelli=minirezo} per i modelli che saranno utilizzati per gli amministratori, etc.
 
-Se la cartella specifica non esiste, allora sar&agrave; utilizzata  la cartella di default.
+Se la cartella specifica non esiste, allora sar&#224; utilizzata  la cartella di default.
 </multi>
 	</description>
 	<lien></lien> <!-- URI de documentation -->

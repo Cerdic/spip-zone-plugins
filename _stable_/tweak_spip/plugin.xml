@@ -4,7 +4,7 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	Patrice Vanneufville
-_ &copy; 2006 - Distribu&eacute; sous licence GPL
+_ &copy; 2006 - Distribu&#233; sous licence GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
 	0.1
@@ -13,8 +13,8 @@ _ &copy; 2006 - Distribu&eacute; sous licence GPL
 	test
 	</etat>
 	<description>
-R&eacute;unit en un seul plugin une liste de petites fonctionnalit&eacute;s nouvelles et utiles am&eacute;liorant la gestion de vos sites SPIP. Chacun de ces tweaks peut &ecirc;tre activ&eacute; ou non par l'utilisateur dans la page Configuration/Tweak SPIP.
-_ Une activation des tweaks est n&eacute;cessaire sur la page d'administration du plugin : cf. {Configuration/Tweak SPIP}.
+R&#233;unit en un seul plugin une liste de petites fonctionnalit&#233;s nouvelles et utiles am&#233;liorant la gestion de vos sites SPIP. Chacun de ces tweaks peut &#234;tre activ&#233; ou non par l'utilisateur dans la page Configuration/Tweak SPIP.
+_ Une activation des tweaks est n&#233;cessaire sur la page d'administration du plugin : cf. {Configuration/Tweak SPIP}.
 	</description>
 	<lien>[->http://www.spip-contrib.net/Tweak-SPIP]</lien> <!-- URI de documentation -->
 	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->

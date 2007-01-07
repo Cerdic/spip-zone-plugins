@@ -12,8 +12,8 @@
 	stable
 	</etat>
 	<description>
-	Gestion et administration de formulaires &eacute;ditables.
-	Ce plugin permet &eacute;galement la publication de sondages et enqu&ecirc;tes, la collecte des r&eacute;ponses dans la base de donn&eacute;es et le t&eacute;l&eacute;chargement au format CSV.
+	Gestion et administration de formulaires &#233;ditables.
+	Ce plugin permet &#233;galement la publication de sondages et enqu&#234;tes, la collecte des r&#233;ponses dans la base de donn&#233;es et le t&#233;l&#233;chargement au format CSV.
 	</description>
 	<lien>http://zone.spip.org/trac/spip-zone/wiki/SpipForms</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->

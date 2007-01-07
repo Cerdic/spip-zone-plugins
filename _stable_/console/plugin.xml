@@ -3,11 +3,11 @@
 	Console de supervision des fichiers log spip
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	Fil, Booz et C&eacute;dric
+	Fil, Booz et C&#233;dric
 _ mail : fil@rezo.net
 _ adaptation en plugin par booz@rezo.net
 _ integration dans un flash/xml par cedric.morin@yterium.com
-_ &copy; 2005-2006 - Distribu&eacute; sous licence GNU/GPL
+_ &copy; 2005-2006 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.1
@@ -16,7 +16,7 @@ _ &copy; 2005-2006 - Distribu&eacute; sous licence GNU/GPL
 	experimental
 	</etat>
 	<description>
-	Console de supervision des fichiers log spip et sql, affich&eacute;e en superposition dans l'espace priv&eacute; ou dans une popup ind&eacute;pendante.
+	Console de supervision des fichiers log spip et sql, affich&#233;e en superposition dans l'espace priv&#233; ou dans une popup ind&#233;pendante.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction

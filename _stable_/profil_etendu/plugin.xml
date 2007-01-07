@@ -1,9 +1,9 @@
 <plugin>
- 	<nom>Profil &eacute;tendu</nom>
-	<auteur>Stephane LAURENT (Bill) - Distribu&eacute; sous licence GNU/GPL</auteur>
+ 	<nom>Profil &#233;tendu</nom>
+	<auteur>Stephane LAURENT (Bill) - Distribu&#233; sous licence GNU/GPL</auteur>
 	<version>1.0</version>
 	<etat>test</etat>
-	<description>gestion d'un profil &eacute;tendu
+	<description>gestion d'un profil &#233;tendu
 	</description>
 	<lien>http://zone.spip.org/trac/spip-zone/wiki/ProfilEtendu</lien> <!-- URI de documentation -->
 	

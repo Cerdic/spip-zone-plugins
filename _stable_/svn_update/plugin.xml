@@ -4,7 +4,7 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Cedric &amp; Fil
-_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+_ &copy; 2006 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.2
@@ -13,12 +13,12 @@ _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	stable
 	</etat>
 	<description>
-	Un utilisateur (par defaut, l'administrateur numero 1) est autoris&eacute; &agrave; faire une mise &agrave; jour SVN du site ou de tout autre r&eacute;pertoire. Pour cela il doit se rendre sur la page [ecrire/?exec=svn_update->./?exec=svn_update] et s&eacute;lectionner les &eacute;l&eacute;ments &agrave; mettre &agrave; jour.
+	Un utilisateur (par defaut, l'administrateur numero 1) est autoris&#233; &#224; faire une mise &#224; jour SVN du site ou de tout autre r&#233;pertoire. Pour cela il doit se rendre sur la page [ecrire/?exec=svn_update->./?exec=svn_update] et s&#233;lectionner les &#233;l&#233;ments &#224; mettre &#224; jour.
 
-La configuration se fait &agrave; deux emplacements :
-- dans <code>ecrire/mes_options.php</code>, on indique la liste des administrateurs autoris&eacute;s &agrave; proc&eacute;der aux mises &agrave; jour, par exemple avec :
+La configuration se fait &#224; deux emplacements :
+- dans <code>ecrire/mes_options.php</code>, on indique la liste des administrateurs autoris&#233;s &#224; proc&#233;der aux mises &#224; jour, par exemple avec :
 _ <code>define('_SVN_UPDATE_AUTEURS', '1:3');</code>
-- Dans le fichier <code>svn_update_list.txt</code> (&agrave; recopier dans son r&eacute;pertoire personnel de squelettes), on indique la liste des r&eacute;pertoires concern&eacute;s, en donnant pour chacun une ligne :
+- Dans le fichier <code>svn_update_list.txt</code> (&#224; recopier dans son r&#233;pertoire personnel de squelettes), on indique la liste des r&#233;pertoires concern&#233;s, en donnant pour chacun une ligne :
 _ <code>source destination [revision] [user]</code>
 _ Par exemple :
 _ <code>svn://zone.spip.org/spip-zone/_squelettes_/sedna sedna</code>

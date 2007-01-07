@@ -3,7 +3,7 @@
 	W3C Go Home ! Mon site est valide...
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
- 	C&eacute;dric MORIN [notre-ville.net->http://www.notre-ville.net]
+ 	C&#233;dric MORIN [notre-ville.net->http://www.notre-ville.net]
 &copy; 2006 - Licence GPL
 	</auteur>
 	<version>
@@ -13,7 +13,7 @@
 	stable
 	</etat>
 	<description>
-	Tableau de bord de validation xhtml et accessibilit&eacute; du site
+	Tableau de bord de validation xhtml et accessibilit&#233; du site
 _ Necessite le plugin Sitemap Google
 	</description>
 	<lien></lien> <!-- URI de documentation -->

@@ -1,10 +1,10 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	R&eacute;vision typographique (ins&eacute;cables &amp; notes)
+	R&#233;vision typographique (ins&#233;cables &amp; notes)
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
  	fil@rezo.net
-_ &copy; 2005-6 - Distribu&eacute; sous licence GNU/GPL
+_ &copy; 2005-6 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.2
@@ -13,11 +13,11 @@ _ &copy; 2005-6 - Distribu&eacute; sous licence GNU/GPL
 	stable
 	</etat>
 	<description>
-	Dans l'espace priv&eacute;:
-- souligne en gris les espaces ins&eacute;cables, pour faciliter la relecture;
-- propose un bouton pour transformer les notes r&eacute;dig&eacute;es &laquo; en dur &raquo; -- de la forme (1), (2), (3)... -- en raccourcis SPIP.
+	Dans l'espace priv&#233;:
+- souligne en gris les espaces ins&#233;cables, pour faciliter la relecture;
+- propose un bouton pour transformer les notes r&#233;dig&#233;es &laquo; en dur &raquo; -- de la forme (1), (2), (3)... -- en raccourcis SPIP.
 
-_ Compatibilit&eacute; : SPIP versions 1.9.0 et sup&eacute;rieures
+_ Compatibilit&#233; : SPIP versions 1.9.0 et sup&#233;rieures
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>

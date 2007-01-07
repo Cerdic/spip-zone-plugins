@@ -23,7 +23,7 @@ Il suffit de mettre le code entre
 _ {{&lt;code class="langage">...&lt;/code>}}
 _ ou avec un cadre
 _ {{&lt;cadre class="langage">...&lt;/cadre>}}.
-_ Les langages support&eacute;s sont ceux fournis par [->http://sourceforge.net/projects/geshi/] avec une classe suppl&eacute;mentaire: "spip".
+_ Les langages support&#233;s sont ceux fournis par [->http://sourceforge.net/projects/geshi/] avec une classe suppl&#233;mentaire: "spip".
 
 Par d&#233;faut, si le code mis en surbrillance fait plus d'une ligne, il est mis en cache sous forme textuelle et propos&#233; au t&#233;l&#233;chargement.
 Ce fonctionnement est control&#233; globalement par une constante PLUGIN_COLORATION_CODE_TELECHARGE d&#233;faut true.

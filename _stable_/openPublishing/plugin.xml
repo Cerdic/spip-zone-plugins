@@ -6,18 +6,18 @@
 	_ &copy; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<description>
-		{{moteur d'open-publishing pour un site indym&eacute;dia.}} <br /> <br />
+		{{moteur d'open-publishing pour un site indym&#233;dia.}} <br /> <br />
 		{{Ce plugin fourni :}} <br />
 		- un formulaire open-publishing <br />
 		- deux nouvelles tables dans la base de donn&#233;es (spip_op_auteurs spip_op_config) <br />
 		- plusieurs nouvelles balises : <br />
 		   - #FORMUMLAIRE_ARTICLE (affiche le formulaire de saisie d'un article) <br />
-		   - #CONTRIBUTIONS_LOCALES (donne le num&eacute;ro de la rubrique locale <br />
-		   - #CONTRIBUTIONS_NON_LOCALES (donne le num&eacute;ro de la rubrique non-locale <br />
-		   - #CONTRIBUTIONS_ANALYSES (donne le num&eacute;re de la rubrique analyse <br />
+		   - #CONTRIBUTIONS_LOCALES (donne le num&#233;ro de la rubrique locale <br />
+		   - #CONTRIBUTIONS_NON_LOCALES (donne le num&#233;ro de la rubrique non-locale <br />
+		   - #CONTRIBUTIONS_ANALYSES (donne le num&#233;re de la rubrique analyse <br />
 		   - (#ID_ARTICLE|getAuteurOpName) : donne le nom de l'auteur op (dans une boucle article) <br />
 		   - (#ID_ARTICLE|getAuteurOpMail) : donne le mail de l'auteur op (dans une boucle article) <br />
-		   - (#ID_ARTICLE|getAuteurOpPhone) : donne le t&eacute;l&eacute;phone de l'auteur op (dans une boucle article) <br />
+		   - (#ID_ARTICLE|getAuteurOpPhone) : donne le t&#233;l&#233;phone de l'auteur op (dans une boucle article) <br />
 		   - (#ID_ARTICLE|getAuteurOpGroup) : donne le groupe de l'auteur op (dans une boucle article) <br /><br />
 		
 		{{Procedure d'installation :}} <br />

@@ -15,10 +15,10 @@ _ &copy; 2006 - Licence GPL
 	</etat>
 	<description>
 	Import de fichiers CSV dans les tables SPIP.
-_ Le plugin permet &agrave; l'administrateur de definir les tables pour lesquelles import et/ou export sont autoris&eacute;s : 
+_ Le plugin permet &#224; l'administrateur de definir les tables pour lesquelles import et/ou export sont autoris&#233;s : 
 ce peut etre les tables spip ou n'importe quelle autre table de la base.
 _ Les tables autorisees pour l'import/export qui ne sont pas des tables de spip sont declarees dynamiquement
-afin d'&ecirc;tre sauvegard&eacute;es automatiquement par le plugin Super_Dump
+afin d'&#234;tre sauvegard&#233;es automatiquement par le plugin Super_Dump
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix> 

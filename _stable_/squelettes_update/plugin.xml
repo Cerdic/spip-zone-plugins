@@ -4,7 +4,7 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Cedric MORIN
-_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+_ &copy; 2006 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
 	0.1
@@ -13,10 +13,10 @@ _ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
 	test
 	</etat>
 	<description>
-	Ajoute un bouton d'admin pour faire un update par svn du dossier squelette en cours d'utilisation et recalculer la page du m&ecirc;me coup
-_ Pour utiliser un subversion n&eacute;cessitant une authentification, 
-ajouter en argument lors de la premi&egrave;re utilisation &amp;username=toto&amp;password=toto
-_ Si les scripts php sont &eacute;x&eacute;cut&eacute;s avec l'user apache, vous devez mettre votre dossier squelette en mode 777 pour qu'apache ait
+	Ajoute un bouton d'admin pour faire un update par svn du dossier squelette en cours d'utilisation et recalculer la page du m&#234;me coup
+_ Pour utiliser un subversion n&#233;cessitant une authentification, 
+ajouter en argument lors de la premi&#232;re utilisation &amp;username=toto&amp;password=toto
+_ Si les scripts php sont &#233;x&#233;cut&#233;s avec l'user apache, vous devez mettre votre dossier squelette en mode 777 pour qu'apache ait
 le droit d'updater le dossier avec subversion
 	</description>
 	<lien></lien> <!-- URI de documentation -->

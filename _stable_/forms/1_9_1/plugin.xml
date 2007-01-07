@@ -18,12 +18,12 @@
 	</etat>
 	<description>
 	<multi>
-      [fr]Gestion et administration de formulaires &eacute;ditables.
-	Ce plugin permet &eacute;galement la publication de sondages et enqu&egrave;tes, la collecte des r&eacute;ponses dans la base de donn&#233;es et le t&eacute;l&eacute;chargement au format csv
+      [fr]Gestion et administration de formulaires &#233;ditables.
+	Ce plugin permet &#233;galement la publication de sondages et enqu&#232;tes, la collecte des r&#233;ponses dans la base de donn&#233;es et le t&#233;l&#233;chargement au format csv
 	[it]Gestione ed amministrazione di form modificabili.
 	Questo plugin consente anche la publicazione di sondaggi ed inchieste, la raccolta delle risposte all'interno della base dati e le mette a disposizione per lo scaricamento in formato csv
       [es]Gesti&oacute;n y administraci&oacute;n de formularios editables.
-	Este plugin tambi&eacute;n permite la publicaci&oacute;n de sondeos y encuestas, la colecta de las respuestas en la base de datos y su descarga en formato CSV (Comma Sepparated Variables).
+	Este plugin tambi&#233;n permite la publicaci&oacute;n de sondeos y encuestas, la colecta de las respuestas en la base de datos y su descarga en formato CSV (Comma Sepparated Variables).
 	</multi>
 	</description>
 	<lien>http://zone.spip.org/trac/spip-zone/wiki/SpipForms</lien> <!-- URI de documentation -->

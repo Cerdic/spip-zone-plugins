@@ -20,9 +20,9 @@
 		[fr]
 		Pour trier les articles en fonction d'un mot. 
 
-		Plus besoin d'utiliser le num&eacute;ros dans le titre, on peut associer un mots &agrave; plusieurs &eacute;l&eacute;ments. On peut alors ordonner tous les &eacute;l&eacute;ments associ&eacute;s au m&ecirc;me mot par simple glisser-d&eacute;poser.
+		Plus besoin d'utiliser le num&#233;ros dans le titre, on peut associer un mots &#224; plusieurs &#233;l&#233;ments. On peut alors ordonner tous les &#233;l&#233;ments associ&#233;s au m&#234;me mot par simple glisser-d&#233;poser.
 
-		Comme le tri est local au mot clef, on peut donner plusieurs ordres diff&eacute;rents au m&ecirc;me &eacute;l&eacute;ment.
+		Comme le tri est local au mot clef, on peut donner plusieurs ordres diff&#233;rents au m&#234;me &#233;l&#233;ment.
 		[en]
 		This plugin provides a simple sorting by keywords.
 
@@ -32,9 +32,9 @@
 		[it]
 		Questo plugin permette di ordinare semplicemente mediante una parola chiave.
 
-		Non &egrave; necessario utilizzare numeri nel titolo. Associando una parola chiave a differenti elementi, potete ordinarli mediante un semplice trascinamento.
+		Non &#232; necessario utilizzare numeri nel titolo. Associando una parola chiave a differenti elementi, potete ordinarli mediante un semplice trascinamento.
 
-		Poich&eacute; l'ordine &egrave; è determinato in base alla una parola chiave, potete dare un ordine diverso allo stesso elemento.
+		Poich&#233; l'ordine &#232; è determinato in base alla una parola chiave, potete dare un ordine diverso allo stesso elemento.
 		</multi>
 	</description>
 	<lien></lien> <!-- URI de documentation -->

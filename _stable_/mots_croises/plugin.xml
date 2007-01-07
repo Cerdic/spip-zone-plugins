@@ -1,5 +1,5 @@
 <plugin>
-	<nom>Mot-crois&eacute;s</nom>
+	<nom>Mot-crois&#233;s</nom>
 	<etat>stable</etat>
 	<version>3.0 pour Spip 1.9.1 minimum.
 	
@@ -8,8 +8,8 @@
 _ [http://maieul.ouvaton.org->http://maieul.ouvaton.org]
 _ Patrice Vanneufville - patrice.vanneufville@laposte.net
 	</auteur>
-	<description>Des mots-crois&eacute;s avec Spip !
-_ Exemple &agrave; ins&eacute;rer dans un article : 
+	<description>Des mots-crois&#233;s avec Spip !
+_ Exemple &#224; ins&#233;rer dans un article : 
 <quote><code><mots-croises>
 
 [horizontal]
@@ -28,12 +28,12 @@ b*g
 a*d
 
 </mots-croises></code></quote>
-Ce plugin fonctionne de fa&ccedil;on optimale sur les squelettes disposant de la balise {{#INSERT_HEAD}}, ainsi que dans l'espace priv&eacute;.
-_ Il n&eacute;cessite l'activation du plugin {{jQuery}} ou une version de spip sup&eacute;rieure &agrave; {{1.9.2}}.
+Ce plugin fonctionne de fa&ccedil;on optimale sur les squelettes disposant de la balise {{#INSERT_HEAD}}, ainsi que dans l'espace priv&#233;.
+_ Il n&#233;cessite l'activation du plugin {{jQuery}} ou une version de spip sup&#233;rieure &#224; {{1.9.2}}.
 
-{{Attention}} : afin d'&eacute;viter les mauvaises surprises de pr&eacute;sentation (sommaires, rubriques, backends, ...), pensez bien :
-- soit &agrave; placer une introduction dans votre article entre les balises &lt;intro&gt; et &lt;/intro&gt;
-- soit &agrave; remplir le descriptif de l'article.
+{{Attention}} : afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (sommaires, rubriques, backends, ...), pensez bien :
+- soit &#224; placer une introduction dans votre article entre les balises &lt;intro&gt; et &lt;/intro&gt;
+- soit &#224; remplir le descriptif de l'article.
 	</description>
 	<lien>[->http://www.spip-contrib.net/article1379.html]</lien> <!-- URI de documentation -->
 	<fonctions>mots_croises_fonctions.php</fonctions>

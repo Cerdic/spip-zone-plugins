@@ -14,8 +14,8 @@ _ &copy; 2006 - Licence GPL
 	dev
 	</etat>
 	<description>
-	Agenda Ev&eacute;nementiel
-_ {{Ce plugin n&eacute;cessite le plugin Widget Calendar version 0.11 ou plus}}
+	Agenda Ev&#233;nementiel
+_ {{Ce plugin n&#233;cessite le plugin Widget Calendar version 0.11 ou plus}}
 	</description>
 	<lien>http://www.spip-contrib.net/article1396.html</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->

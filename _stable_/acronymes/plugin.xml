@@ -14,14 +14,14 @@ _ &copy; 2006 - Licence GPL
 	stable
 	</etat>
 	<description>
-	D&eacute;tection et ajout des d&eacute;finitions des acronymes &agrave; partir d'une base syndiqu&eacute;e ou d'une rubrique.
-	Les acronymes sont d&eacute;finis dans des articles, le titre correspond &agrave; l'acronyme 
-	(en majuscule, sans point de s&eacute;paration) et le descriptif au contenu &agrave; ajouter dans la balise.
-	Les d&eacute;finitions peuvent &ecirc;tre regroup&eacute;es dans une rubrique ou sur un site distant syndiqu&eacute;
+	D&#233;tection et ajout des d&#233;finitions des acronymes &#224; partir d'une base syndiqu&#233;e ou d'une rubrique.
+	Les acronymes sont d&#233;finis dans des articles, le titre correspond &#224; l'acronyme 
+	(en majuscule, sans point de s&#233;paration) et le descriptif au contenu &#224; ajouter dans la balise.
+	Les d&#233;finitions peuvent &#234;tre regroup&#233;es dans une rubrique ou sur un site distant syndiqu&#233;
 
-	Pour d&eacute;finir la rubrique et/ou le site, aller dessus dans l'interface d'admin et cliquer selectionnez-le dans le cadre blanc situ&eacute; en bas &agrave; gauche (ou en haut a droite si vous &egrave;tes en &eacute;cran large)
+	Pour d&#233;finir la rubrique et/ou le site, aller dessus dans l'interface d'admin et cliquer selectionnez-le dans le cadre blanc situ&#233; en bas &#224; gauche (ou en haut a droite si vous &#232;tes en &#233;cran large)
 
-	Une page de test (<code>?page=acronymes_voir</code>) boucle sur l'ensemble des articles du site et rep&egrave;re tout ce qui ressemble de pr&egrave;s ou de loin a un accronyme. Elle permet de v&eacute;rifier la compl&egrave;tude de votre base.
+	Une page de test (<code>?page=acronymes_voir</code>) boucle sur l'ensemble des articles du site et rep&#232;re tout ce qui ressemble de pr&#232;s ou de loin a un accronyme. Elle permet de v&#233;rifier la compl&#232;tude de votre base.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix> 

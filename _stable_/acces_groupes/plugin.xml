@@ -1,6 +1,6 @@
 <plugin>
         <nom> <!-- Nom du plugin -->
-          Acc&egrave;s restreint par groupes
+          Acc&#232;s restreint par groupes
         </nom>
         <auteur>        <!-- Auteur du plugin -->
           Coyote &amp; cy_altern _ 
@@ -13,19 +13,19 @@
           stable
         </etat>
         <description>
-          Permet de g&eacute;rer l'acc&egrave;s restreint (parties publique et priv&eacute;e) &agrave; des rubriques 
+          Permet de g&#233;rer l'acc&#232;s restreint (parties publique et priv&#233;e) &#224; des rubriques 
           en utilisant des groupes d'utilisateurs.<br />
 					Documentation : [->http://www.spip-contrib.net/Le-plugin-acces-restreint-par]<br /><br />
 					{{/!\ ATTENTION !}} <br />
 					- Ce plugin n'est {{PAS compatible}} avec le plugin {{acces_restreint}} ! Vous ne pouvez PAS utiliser les 2 simultanéments !<br />
-					- Si vous {{mettez &agrave; jour}} depuis une version 1.8* de SPIP qui utilisait la contrib {{"acc&egrave;s restreint par groupes"}} 
-					version 0.61 ou 0.7, vous {{DEVEZ}} proc&eacute;der &agrave; la mise &agrave; jour des tables de la base de donn&eacute;es
+					- Si vous {{mettez &#224; jour}} depuis une version 1.8* de SPIP qui utilisait la contrib {{"acc&#232;s restreint par groupes"}} 
+					version 0.61 ou 0.7, vous {{DEVEZ}} proc&#233;der &#224; la mise &#224; jour des tables de la base de donn&#233;es
 					en utilisant le script [->../plugins/acces_groupes/maj_tables.php] {{AVANT}} d'activer ce plugin ! 
 					<br />
-					v 1.0.1 : support de exec=articles_versions pour le filtrage de l'espace priv&eacute;
+					v 1.0.1 : support de exec=articles_versions pour le filtrage de l'espace priv&#233;
 					<br />
-					v 1.0.2 : impl&eacute;mentation du crit&egrave;re {{tout_voir}} et du filtre {{accesgroupes_visualise}}
-					pour afficher les contenus restreints aux utilisateurs n'ayant pas acc&egrave;s dans les squelettes
+					v 1.0.2 : impl&#233;mentation du crit&#232;re {{tout_voir}} et du filtre {{accesgroupes_visualise}}
+					pour afficher les contenus restreints aux utilisateurs n'ayant pas acc&#232;s dans les squelettes
 					<br />
 					Ce plugin est compatible avec les versions <strong>1.9.0</strong> et <strong>1.9.1</strong> de spip. 
 					Il n’est <strong>pas compatible</strong> avec la version SVN spip 1.9.2 alpha.

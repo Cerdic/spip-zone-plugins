@@ -7,34 +7,34 @@
 	<auteur>
 [Patrice VANNEUFVILLE->mailto:patrice.vanneufville@laposte.net], novembre 2006
 
-Mentions sp&eacute;ciales :
+Mentions sp&#233;ciales :
 _ QCM : Mathieu GIANNECCHINI
-_ Mots crois&eacute;s : Ma&iuml;eul ROUQUETTE
-_ Diagrammes d'&eacute;checs : Fran&ccedil;ois SCHREUER
+_ Mots crois&#233;s : Ma&iuml;eul ROUQUETTE
+_ Diagrammes d'&#233;checs : Fran&ccedil;ois SCHREUER
 	</auteur>
 	<description>
 Des jeux avec Spip !
 ----
-_ Voici pour vous la possibilit&eacute; d'ins&eacute;rer dans vos articles des mots crois&eacute;s, des sudokus, des devinettes, des blagues, des po&eacute;sies, des QCM, des exercices &agrave; trous, etc.<br />
-_ Mettez une touche &eacute;ducative et ludique &agrave; votre site !
+_ Voici pour vous la possibilit&#233; d'ins&#233;rer dans vos articles des mots crois&#233;s, des sudokus, des devinettes, des blagues, des po&#233;sies, des QCM, des exercices &#224; trous, etc.<br />
+_ Mettez une touche &#233;ducative et ludique &#224; votre site !
 
 Un exemple : 
 <quote><code><jeux>
         [titre]
         La devinette du jour
         [devinette]
-        Comment appelle t-on un patron de la nouvelle &eacute;conomie ?
+        Comment appelle t-on un patron de la nouvelle &#233;conomie ?
         [reponse]
         Un e-responsable
 </jeux></code></quote>
-Ce plugin fonctionne de fa&ccedil;on optimale sur les squelettes disposant de la balise {{#INSERT_HEAD}} et peut &eacute;galement &ecirc;tre test&eacute; dans l'espace priv&eacute;.
-_ Pour certains jeux, il n&eacute;cessite l'activation du plugin {{jQuery}} pour les versions de spip {{1.9.1}} ou inf&eacute;rieures.
-_ Pour les jeux graphiques, il faut avoir les librairies {{GD}} install&eacute;es sur votre server.
-_ Ce plugin est en &eacute;volution, proc&eacute;dez r&eacute;guli&egrave;rement &agrave; vos mises &agrave; jours.
+Ce plugin fonctionne de fa&ccedil;on optimale sur les squelettes disposant de la balise {{#INSERT_HEAD}} et peut &#233;galement &#234;tre test&#233; dans l'espace priv&#233;.
+_ Pour certains jeux, il n&#233;cessite l'activation du plugin {{jQuery}} pour les versions de spip {{1.9.1}} ou inf&#233;rieures.
+_ Pour les jeux graphiques, il faut avoir les librairies {{GD}} install&#233;es sur votre server.
+_ Ce plugin est en &#233;volution, proc&#233;dez r&#233;guli&#232;rement &#224; vos mises &#224; jours.
 _  
-{{Attention}} : afin d'&eacute;viter les mauvaises surprises de pr&eacute;sentation (sommaires, rubriques, backends, ...), pensez bien :
-- soit &agrave; placer une introduction dans votre article entre les balises &lt;intro&gt; et &lt;/intro&gt;
-- soit &agrave; remplir le descriptif de l'article.
+{{Attention}} : afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (sommaires, rubriques, backends, ...), pensez bien :
+- soit &#224; placer une introduction dans votre article entre les balises &lt;intro&gt; et &lt;/intro&gt;
+- soit &#224; remplir le descriptif de l'article.
 	</description>
 	<lien>[->http://www.spip-contrib.net/Des-jeux-dans-vos-articles]</lien> <!-- URI de documentation -->
 	<fonctions>jeux_fonctions.php</fonctions>

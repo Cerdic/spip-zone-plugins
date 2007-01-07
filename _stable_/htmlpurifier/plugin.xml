@@ -1,6 +1,6 @@
 <plugin>
   <nom> <!-- Nom du plugin -->
-  HTML Purifier (remplacement de Safe HTML : S&eacute;curit&eacute; accrue)
+  HTML Purifier (remplacement de Safe HTML : S&#233;curit&#233; accrue)
   </nom>
   <auteur>        <!-- Auteur du plugin -->
   Edward Z. Yang (http://hp.jpsband.org/), Mise en plugin SPIP : RealET &amp; Fil
