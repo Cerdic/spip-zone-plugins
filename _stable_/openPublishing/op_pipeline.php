@@ -22,4 +22,9 @@ function op_ajouterOnglets($flux) {
 	return $flux;
 }
 
+function op_headerPrive($texte) {
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	$texte.= '<link rel="stylesheet" type="text/css" href="' . (_DIR_PLUGINS.end($p)) . '/css/op.css" />' . "\n";
+	return $texte;
+}
 ?> 
