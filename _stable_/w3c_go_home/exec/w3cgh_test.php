@@ -10,9 +10,9 @@ function exec_w3cgh_test_dist()
 	
 	$texte = end($res['res']);
 	if ($ok = reset($res['res']))
-		$texte = "<span style='color:#0f0'>$texte</span>";
+		$texte = "<span style='color:#45CF00'>$texte</span>";
 	else
-		$texte = "<span style='color:#f00'>$texte</span>";
+		$texte = "<span style='color:#FF1F1F'>$texte</span>";
 
 	ajax_retour($texte);
 }

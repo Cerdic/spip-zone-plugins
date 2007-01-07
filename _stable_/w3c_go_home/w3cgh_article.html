@@ -1,0 +1,36 @@
+#CACHE{0}
+<BOUCLE_article_principal(ARTICLES) {id_article}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+</head>
+<body class="page_article">
+	[(#LOGO_ARTICLE||image_reduire{200,200})]
+	[<p class=" surtitre">(#SURTITRE)</p>]
+	<h1 class=" titre">#TITRE</h1>
+	[<p class=" soustitre">(#SOUSTITRE)</p>]
+	[<div class=" chapo">(#CHAPO)</div>]
+	<br class="nettoyeur" />
+	[<p class=" lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+	[<div class=" texte">(#TEXTE|image_reduire{50})</div>]
+	[<div class="ps"><h2><:info_ps:></h2>(#PS)</div>]
+
+	[(#REM) Autres documents joints a l'article ]
+	<B_documents_joints>
+	<div id="documents_joints">
+		<h2><:titre_documents_joints:></h2>
+		<ul>
+			<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par num titre, date}>
+			<li>
+				<div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
+				[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+			</li>
+			</BOUCLE_documents_joints>
+		</ul>
+	</div>
+	</B_documents_joints>
+	[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+</body>
+</html>
+</BOUCLE_article_principal>

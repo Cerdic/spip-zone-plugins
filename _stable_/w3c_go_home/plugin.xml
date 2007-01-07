@@ -25,4 +25,8 @@ _ Necessite le plugin Sitemap Google
 		<nom>ajouter_boutons</nom>
 		<inclure>w3cgh_pipeline.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>w3cgh_pipeline.php</inclure>
+	</pipeline>
 </plugin>
