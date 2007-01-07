@@ -1,6 +1,6 @@
 <plugin>
         <nom> <!-- Nom du plugin -->
-          Acc&egrave;s restreint par groupes
+          Acc&#232;s restreint par groupes
         </nom>
         <auteur>        <!-- Auteur du plugin -->
           Coyote &amp; cy_altern _ 
@@ -13,13 +13,13 @@
           dev
         </etat>
         <description>
-          Permet de g&eacute;rer l'acc&egrave;s restreint (parties publique et priv&eacute;e) &agrave; des rubriques 
+          Permet de g&#233;rer l'acc&#232;s restreint (parties publique et priv&#233;e) &#224; des rubriques 
           en utilisant des groupes d'utilisateurs.<br />
 					Documentation : [->http://www.spip-contrib.net/Creer-des-groupes-limiter-l-acces]<br /><br />
 					{{/!\ ATTENTION !}} <br />
 					- Ce plugin n'est {{PAS compatible}} avec le plugin {{acces_restreint}} ! Vous ne pouvez PAS utiliser les 2 simultanéments !<br />
-					- Si vous {{mettez &agrave; jour}} depuis une version 1.8* de SPIP qui utilisait la contrib {{"acc&egrave;s restreint par groupes"}} 
-					version 0.61 ou 0.7, vous {{DEVEZ}} proc&eacute;der &agrave; la mise &agrave; jour des tables de la base de donn&eacute;es
+					- Si vous {{mettez &#224; jour}} depuis une version 1.8* de SPIP qui utilisait la contrib {{"acc&#232;s restreint par groupes"}} 
+					version 0.61 ou 0.7, vous {{DEVEZ}} proc&#233;der &#224; la mise &#224; jour des tables de la base de donn&#233;es
 					en utilisant le script [->../plugins/acces_groupes/maj_tables.php] {{AVANT}} d'activer ce plugin ! 
 					
 					Version 1.1 : tentative de bridage de l'affichage des rubriques restreintes dans TOUT l'espace prive. 

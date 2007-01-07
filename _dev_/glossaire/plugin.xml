@@ -5,11 +5,11 @@
  <etat>dev</etat>
  <auteur>Philippe Auriol [contact->mailto:philippe.auriol@gmail.com]
  _ [page perso->http://philippe.auriol.free.fr/]</auteur>
- <description> Ce plugin est un glossaire bas&eacute; sur la 
+ <description> Ce plugin est un glossaire bas&#233; sur la 
  [contrib de Francois Schreuer->http://www.spip-contrib.net/Un-glossaire-interne], 
- il a &eacute;t&eacute; modifi&eacute; pour supporter la pr&eacute;sence des mots dans les liens 
+ il a &#233;t&#233; modifi&#233; pour supporter la pr&#233;sence des mots dans les liens 
  et en ne prenant la chaine de caractere que si elle est entouree de deux espaces.
- Il est distribu&eacute; sous licence GNU/GPL
+ Il est distribu&#233; sous licence GNU/GPL
  </description>
 	<lien></lien> <!-- URI de documentation -->
  <fonctions>glossaire.php</fonctions>

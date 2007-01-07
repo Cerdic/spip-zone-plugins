@@ -16,22 +16,22 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	test
 	</etat>
 	<description>
-	Rendre possible la visualisation et la mise &agrave; jours de nouveaux champs ajout&eacute;s dans plusieurs tables de SPIP grâce aux champs EXTRA.
+	Rendre possible la visualisation et la mise &#224; jours de nouveaux champs ajout&#233;s dans plusieurs tables de SPIP grâce aux champs EXTRA.
 	<hr />
 {{Modification au code source}}
-_ Ce plugin utilise une version modifi&eacute;e du fichier extra.php de la version 1.9.1
-_ À l'activation de ce plugin, le fichier extra.php contenu dans ce plugin aura priorit&eacute; sur celui natif de SPIP.
-_ Pour &eacute;viter tout conflit possible, ne pas activer avec un autre plugin contenant aussi un fichier extra.php.
+_ Ce plugin utilise une version modifi&#233;e du fichier extra.php de la version 1.9.1
+_ À l'activation de ce plugin, le fichier extra.php contenu dans ce plugin aura priorit&#233; sur celui natif de SPIP.
+_ Pour &#233;viter tout conflit possible, ne pas activer avec un autre plugin contenant aussi un fichier extra.php.
 _ Nouvautés de la version 0.2: meilleur synchronisation des champs homonymes et des champs extra.  
 	<hr />
-	{{Derni&egrave;re version test&eacute;e:}} 
+	{{Derni&#232;re version test&#233;e:}} 
 _ SPIP 1.9.2 alpha SVN [7334]
 	<hr />
-	Ce plugin ne modifie aucune table ni ne cr&eacute;e aucun champ extra.
-_ Ces modifications restent &agrave; votre discretion.
-_ Les d&eacute;tails de son utilisation sont d&eacute;crits ici: 
+	Ce plugin ne modifie aucune table ni ne cr&#233;e aucun champ extra.
+_ Ces modifications restent &#224; votre discretion.
+_ Les d&#233;tails de son utilisation sont d&#233;crits ici: 
 _ <a href="http://monsitespip.com/spip.php?article7" target="_blank">Gestion des nouveaux champs dans les tables SPIP par les champs extra : champs homonymes</a>
-_ Merci de nous signaler son bon fonctionnement ou non sur le forum li&eacute; &agrave; cet article.
+_ Merci de nous signaler son bon fonctionnement ou non sur le forum li&#233; &#224; cet article.
 	</description>
 	<lien>http://monsitespip.com/spip.php?article7</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->

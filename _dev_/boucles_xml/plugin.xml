@@ -16,7 +16,7 @@ _ &copy; 2006 Licence GPL
 	Parser du xml avec les boucles SPIP
 	
 	Le plugin introduit un type de boucle XML qui permet de parcourir l'arborescence d'un fichier au format
-xml au moyen des boucles spip. Les crit&egrave;res disponibles sont
+xml au moyen des boucles spip. Les crit&#232;res disponibles sont
 -* <code>{xml=fichier.xml}</code> pour aller chercher fichier.xml dans le path
 -* <code>{xpath}</code> pour acceder a un noeud par son chemin a partir de la racine (fini par un /}
 -* <code>{racine}</code>

@@ -14,10 +14,10 @@
 	<description>
 CE CODE N&#039;EST PAS FONCTIONNEL !
 _ VOUS NE DEVEZ PAS L&#039;INSTALLER.
-_ Ce plugin permet de g&eacute;rer des config, il est d&eacute;riv&eacute; de la config sms &agrave; formulaires variables.
-_ Le stockage existant est juste dans un cran de meta, il sera port&eacute; aux gateaux (cookies) et sql.
-_ Toute d&eacute;finition vient des fonds/
-_ Il fournit une balise #CONFIG &eacute;tendue.
+_ Ce plugin permet de g&#233;rer des config, il est d&#233;riv&#233; de la config sms &#224; formulaires variables.
+_ Le stockage existant est juste dans un cran de meta, il sera port&#233; aux gateaux (cookies) et sql.
+_ Toute d&#233;finition vient des fonds/
+_ Il fournit une balise #CONFIG &#233;tendue.
 	</description>
 	<lien>
 	</lien>

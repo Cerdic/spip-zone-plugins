@@ -12,7 +12,7 @@
           test
         </etat>
         <description>  <!-- description -->
-          Cr&eacute;e un fil RSS pour tous les plugins &agrave; partir de leur fichier plugin.xml
+          Cr&#233;e un fil RSS pour tous les plugins &#224; partir de leur fichier plugin.xml
         </description>
 				<url_doc>  <!-- Lien hypertexte -->
 						http://extranet-eze.dyndns.org/portail/spip_SVN/

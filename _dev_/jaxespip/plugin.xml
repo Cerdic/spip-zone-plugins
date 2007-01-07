@@ -10,12 +10,12 @@
 	<etat>experimental</etat>
 	<description>
 
-{{Editeur graphique pour les articles/rubriques/br&egrave;ves}}
+{{Editeur graphique pour les articles/rubriques/br&#232;ves}}
 
 [documentation->../plugins/jaxespip/LISEZ_MOI.html]
 
 {Limitations:}
-- Test&eacute; sur SPIP 1.9.0, risque de ne pas marcher sur les versions ult&eacute;rieures de SPIP.
+- Test&#233; sur SPIP 1.9.0, risque de ne pas marcher sur les versions ult&#233;rieures de SPIP.
 - incompatible avec d'autres plugins modifiant les fichiers articles_edit.php, rubriques_edit.php ou breves_edit.php.
 
 	</description>

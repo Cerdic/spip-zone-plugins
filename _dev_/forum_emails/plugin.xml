@@ -13,7 +13,7 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	test
 	</etat>
 	<description>
-	Objectif&nbsp;: envoyer &agrave; chaque participant d'un fil de discussion d'un forum un message par courriel l'informant de la publication d'un nouveau message.
+	Objectif&nbsp;: envoyer &#224; chaque participant d'un fil de discussion d'un forum un message par courriel l'informant de la publication d'un nouveau message.
 	<br /><br />Voir: <a href="http://monsitespip.com/spip.php?article20" target="_blank">http://monsitespip.com/spip.php?article20</a>
 	</description>
 	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->

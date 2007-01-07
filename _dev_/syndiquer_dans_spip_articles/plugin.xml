@@ -2,7 +2,7 @@
 	<nom>Syndiquer dans spip_articles</nom>
 	<auteur><a href="http://francois.schreuer.org/">franz</a>
 
-	&copy; 2006 - Distribu&eacute; sous licence GPL</auteur>
+	&copy; 2006 - Distribu&#233; sous licence GPL</auteur>
 	<version>
 	0.1
 	</version>
@@ -10,13 +10,13 @@
 	dev
 	</etat>
 	<description>
-	Ce plugin modifie le comportement du module de syndication : les articles syndiqu&eacute;s sont directement inject&eacute;s dans
-	la table <code>spip_articles</code> et non plus dans la table <code>spip_syndic_articles</code>. Avantage&nbsp;? On peut d&eacute;sormais g&eacute;rer des logos, auteurs,
-	mots-cl&eacute;s et autres statistiques de fr&eacute;quentation (entre autres) sur les articles syndiqu&eacute;s.
+	Ce plugin modifie le comportement du module de syndication : les articles syndiqu&#233;s sont directement inject&#233;s dans
+	la table <code>spip_articles</code> et non plus dans la table <code>spip_syndic_articles</code>. Avantage&nbsp;? On peut d&#233;sormais g&#233;rer des logos, auteurs,
+	mots-cl&#233;s et autres statistiques de fr&#233;quentation (entre autres) sur les articles syndiqu&#233;s.
 
-	Attention : ce plugin affecte profond&eacute;ment le fonctionnement de SPIP, notamment en rempla&ccedil;ant plusieurs fichiers importants. &Agrave; utiliser avec grande prudence, donc.
+	Attention : ce plugin affecte profond&#233;ment le fonctionnement de SPIP, notamment en rempla&ccedil;ant plusieurs fichiers importants. &Agrave; utiliser avec grande prudence, donc.
 
-	Ce plugin a &eacute;t&eacute; d&eacute;velopp&eacute; dans le cadre du projet de portail <a href="http://mouvements.be/">mouvements.be/</a>.
+	Ce plugin a &#233;t&#233; d&#233;velopp&#233; dans le cadre du projet de portail <a href="http://mouvements.be/">mouvements.be/</a>.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>syndiquer_dans_spip_articles</prefix>

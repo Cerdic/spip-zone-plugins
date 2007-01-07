@@ -6,7 +6,7 @@
 	<auteur>Laurent RIEFFEL[contact->mailto:laurent.rieffel@laposte.net]
 	 _ [mon site->http://www.autodelta.fr]
 	</auteur>
-	<description>Ma boutique en ligne, Il est distribu&eacute; sous licence GNU/GPL</description>
+	<description>Ma boutique en ligne, Il est distribu&#233; sous licence GNU/GPL</description>
 	<prefix> 
 	ecommerce
 	</prefix>

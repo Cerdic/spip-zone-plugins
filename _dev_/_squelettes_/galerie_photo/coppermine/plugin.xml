@@ -14,12 +14,12 @@ _ &copy; 2006 - Distribue sous licence GNU/GPL
 	experimental
 	</etat>
 	<description>
-	Int&eacute;gration de Coppermine avec Spip r&eacute;alis&eacute;e par :
--* un "bridge" Coppermine pour partager la base des utilisateurs spip (un r&eacute;dacteur peut publier des photos avec son login spip en ne s'identifiant qu'une fois, un administrateur spip est &eacute;galement administrateur de la galerie).
--* une nouvelle balise spip <code>#COPPERMINE</code> pour sp&eacute;cifier dans un squelette l'emplacement de la galerie, ce qui permet d'int&eacute;grer visuellement la galerie avec le reste de votre site; ainsi que d'une balise <code>#COPPERMINE_RANDOM_IMG</code> pour afficher des vignettes al&eacute;atoires.
+	Int&#233;gration de Coppermine avec Spip r&#233;alis&#233;e par :
+-* un "bridge" Coppermine pour partager la base des utilisateurs spip (un r&#233;dacteur peut publier des photos avec son login spip en ne s'identifiant qu'une fois, un administrateur spip est &#233;galement administrateur de la galerie).
+-* une nouvelle balise spip <code>#COPPERMINE</code> pour sp&#233;cifier dans un squelette l'emplacement de la galerie, ce qui permet d'int&#233;grer visuellement la galerie avec le reste de votre site; ainsi que d'une balise <code>#COPPERMINE_RANDOM_IMG</code> pour afficher des vignettes al&#233;atoires.
 
 	Installation : consultez le fichier {{documentation.txt}}
-_ [D&eacute;mo->http://spiptest.africa-web.org/]
+_ [D&#233;mo->http://spiptest.africa-web.org/]
 	</description>
 	<lien>http://zone.spip.org/trac/spip-zone/wiki/CopperMine</lien> <!-- URI de documentation -->
 	<prefix> 

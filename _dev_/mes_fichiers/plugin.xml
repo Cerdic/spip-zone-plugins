@@ -3,8 +3,8 @@
 	<nom>mes_fichiers.zip</nom>
 	<prefix>mes_fichiers</prefix>
 	<description>
-	[Cr&eacute;er ou Mettre &agrave; Jour->../spip.php?action=mes_fichiers]
-	[D&eacute;compresser mes fichiers->../spip.php?action=decompresser_mes_fichiers]
+	[Cr&#233;er ou Mettre &#224; Jour->../spip.php?action=mes_fichiers]
+	[D&#233;compresser mes fichiers->../spip.php?action=decompresser_mes_fichiers]
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 </plugin>

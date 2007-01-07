@@ -1,9 +1,9 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	  textile &agrave; la place de propre	
+	  textile &#224; la place de propre	
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	  Pierre Andrews (Mortimer) pour l'encapsulation en plugin et les &eacute;chapements.
+	  Pierre Andrews (Mortimer) pour l'encapsulation en plugin et les &#233;chapements.
 	  Fil pour la piste sur le code.
 	</auteur>
 	<version>

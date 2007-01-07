@@ -12,11 +12,11 @@ _ &copy; 2006 - Licence GPL
 	<description>
     Migration de la [contribution SPIP2SPIP->http://www.a-brest.net/article2340.html] en plugin.
     <p>Permet de copier les articles de SPIP distant dans le SPIP sous forme d'articles. 
-    A la diff&eacute;rence de miroir de syndication, vous avez le choix des articles &agrave; recopier ou diffuser en attribuant les mots-cl&eacute;s du groupe dedi&eacute; - spip2spip - 
-    <br />Les articles recopi&eacute;s tentent de r&eacute;cuperer le maximum de donn&eacute;es: 
+    A la diff&#233;rence de miroir de syndication, vous avez le choix des articles &#224; recopier ou diffuser en attribuant les mots-cl&#233;s du groupe dedi&#233; - spip2spip - 
+    <br />Les articles recopi&#233;s tentent de r&#233;cuperer le maximum de donn&#233;es: 
     <ul>
     <li>formatage original SPIP de l'article</li>
-    <li>images, documents attach&eacute;s recopi&eacute;s en documents distants</li>
+    <li>images, documents attach&#233;s recopi&#233;s en documents distants</li>
     <li>essayer de faire correspondre les auteurs</li>
     <li>licence ...</li>  
     </ul>

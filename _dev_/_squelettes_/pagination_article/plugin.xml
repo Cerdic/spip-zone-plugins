@@ -12,7 +12,7 @@
   dev
   </etat>
   <description>
-  Paginer les articles en les d&eacute;coupant selon les intertitres h3 et en pr&eacute;sentant les pages sous forme d'onglets
+  Paginer les articles en les d&#233;coupant selon les intertitres h3 et en pr&#233;sentant les pages sous forme d'onglets
   </description>
 	<lien></lien> <!-- URI de documentation -->
   <fonctions>

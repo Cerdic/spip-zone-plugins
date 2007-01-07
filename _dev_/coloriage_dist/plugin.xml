@@ -4,7 +4,7 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	[erational->http://www.erational.org]
-_ &copy; 2006 - Distribu&eacute; sous licence GNU/GPL
+_ &copy; 2006 - Distribu&#233; sous licence GNU/GPL
 _ Le module de choix de couleur par [knallgrau->http://www.knallgrau.at/code/colorpicker] sous licence MIT
 	</auteur>
 	<version>
@@ -15,7 +15,7 @@ _ Le module de choix de couleur par [knallgrau->http://www.knallgrau.at/code/col
 	</etat>
 	<description>
 		<multi>
-	[fr] Permet de modifier les couleurs de l'habillage par d&eacute;faut (squelette dist) du site SPIP via une interface graphique sans &agrave; avoir &agrave; &eacute;diter le code
+	[fr] Permet de modifier les couleurs de l'habillage par d&#233;faut (squelette dist) du site SPIP via une interface graphique sans &#224; avoir &#224; &#233;diter le code
   <p>A tester avec firefox... bug etrange sur IE</p> 
 	</multi>
 	</description>

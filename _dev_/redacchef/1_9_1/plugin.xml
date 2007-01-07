@@ -4,13 +4,13 @@
  <prefix>redacchef</prefix>
  <etat>test</etat>
 <auteur>Florent Jugla [contact->mailto:florent.jugla@eledo.com]
- Soci&eacute;t&eacute; [Eledo->http://www.eledo.com]</auteur>
+ Soci&#233;t&#233; [Eledo->http://www.eledo.com]</auteur>
 
- <description>Ce plugin permet de g&eacute;rer le statut r&eacute;dacteurs-chef. Le r&eacute;dacteur-chef est interm&eacute;diaire entre administrateur et r&eacute;dacteur : il peut publier les articles, mais n'a pas acc&egrave;s aux fonctions d'administratation du site.
+ <description>Ce plugin permet de g&#233;rer le statut r&#233;dacteurs-chef. Le r&#233;dacteur-chef est interm&#233;diaire entre administrateur et r&#233;dacteur : il peut publier les articles, mais n'a pas acc&#232;s aux fonctions d'administratation du site.
 
-Attention ! Bien lire le fichier INSTALL.TXT avant d'utiliser le module (l'installation du module n&eacute;c&eacute;ssite de patcher les sources de SPIP pour ajouter des points d'entr&eacute;es 'pipelines').
+Attention ! Bien lire le fichier INSTALL.TXT avant d'utiliser le module (l'installation du module n&#233;c&#233;ssite de patcher les sources de SPIP pour ajouter des points d'entr&#233;es 'pipelines').
 
-Ce plugin a &eacute;t&eacute; d&eacute;velopp&eacute; par la soci&eacute;t&eacute; Eledo (http://www.eledo.com/) pour les besoins de la soci&eacute;t&eacute; Synapse Informatique (http://www.synapse-info.com/). Il est distribu&eacute; sous licence GPL par la soci&eacute;t&eacute; Eledo, en accord avec la soci&eacute;t&eacute; Synapse Informatique.
+Ce plugin a &#233;t&#233; d&#233;velopp&#233; par la soci&#233;t&#233; Eledo (http://www.eledo.com/) pour les besoins de la soci&#233;t&#233; Synapse Informatique (http://www.synapse-info.com/). Il est distribu&#233; sous licence GPL par la soci&#233;t&#233; Eledo, en accord avec la soci&#233;t&#233; Synapse Informatique.
  </description>
 
  <pipeline>
