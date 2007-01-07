@@ -13,13 +13,20 @@ function validateur_apinc_dist($action, $url= ""){
 			ob_start();
 			test_apinc();
 			ob_end_clean();
-			$ok = false;
-			$texte = "Erreurs : $erreur1/$erreur2/$erreur3";
-			if(($erreur1+$erreur2+$erreur3)==0){
+			$erreurs = $erreur1+$erreur2+$erreur3;
+			if($erreurs==0){
 				$ok = true;
-				$texte = "OK";
+				$texte = _T("w3cgh:page_valide");
 			}
-			return array($ok,$erreur1+$erreur2+$erreur3,$texte);
+			else {
+				$ok = false;
+				if ($erreurs>1)
+					$texte = _T("w3cgh:erreurs",array('erreurs'=>$erreurs));
+				else
+					$texte = _T("w3cgh:une_erreur");
+				$texte .= " ($erreur1/$erreur2/$erreur3)";
+			}
+			return array($ok,$erreurs,$texte);
 			break;
 		case 'visu':
 			$_GET['urlAVerif']=$url;

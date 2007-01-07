@@ -24,7 +24,7 @@ function exec_w3c_go_home(){
 	//
 
 	if ($connect_statut != '0minirezo') {
-		debut_page(_L("Validation Site W3C"), "w3c", "w3c");
+		debut_page(_T("w3cgh:titre_page"), "w3c", "w3c");
 		debut_gauche();
 		debut_droite();
 		echo "<strong>"._T('avis_acces_interdit')."</strong>";
@@ -32,8 +32,10 @@ function exec_w3c_go_home(){
 		exit;
 	}
 
-	debut_page(_L("Validation Site W3C"), "w3c", "w3c");
+	debut_page(_T("w3cgh:titre_page"), "w3c", "w3c");
 	$out .= "<script type='text/javascript'><!--
+	var tests_en_cours=0;
+	var cancel = 0;
 	function perform_tests(max){
 		var compteur=0;
 		$('.test').each(function(){
@@ -64,13 +66,11 @@ function exec_w3c_go_home(){
 	$out .= debut_boite_info(true);
 	$out .= w3cgh_formulaire_choix_validateurs();
 	$action = generer_action_auteur('w3cgh_reset_test',implode('-',$validateurs),generer_url_ecrire('w3c_go_home'));
-	$out .= "<a href='$action'>"._L("Tout Reinitialiser")."</a><br/>";
+	$out .= "<a href='$action'>"._T("w3cgh:reset_all")."</a><br/>";
 	$out .= "<a href='#' onclick='perform_tests(10);'>"._L("10 Tests")."</a><br/>";
 	$out .= "<a href='#' onclick='perform_tests(100);'>"._L("100 Tests")."</a><br/>";
 	$out .= fin_boite_info(true);
 	
-	$out .= debut_droite('',true);
-
 	// utiliser un recuperer_page car sinon les url sont calculees depuis ecrire, avec des redirect
 	//include_spip('public/assembler');
 	//$xml_sitemap=recuperer_fond('sitemap');
@@ -94,19 +94,13 @@ function exec_w3c_go_home(){
 	$table_url[]=generer_url_public("article","id_article=6");	$urlcount++;
 	*/
 		
-	$titre_table = _L("Conformit&eacute; du site");
-	$icone = "";
-	$out .= "<div class='liste'>";
-	$out .= bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black",false);
-	$out .= "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
-	
 	$vals[] = '';
 	$vals[] = 'url';
 	$largeurs = array('','');
 	$styles = array('arial11', 'arial11');
 	foreach($validateurs as $nom){
 		$action = generer_action_auteur('w3cgh_reset_test',$nom,generer_url_ecrire('w3c_go_home'));
-		$vals[] = validateur_infos($nom)."<br /><a href='$action'>"._L("Reinitialiser")."</a>";
+		$vals[] = validateur_infos($nom)."<br /><a href='$action'>"._T("w3cgh:reset")."</a>";
 		$largeurs[] = '';
 		$styles[] = 'arial11';
 	}
@@ -166,14 +160,24 @@ function exec_w3c_go_home(){
 			$table[] = $vals;
 		}
 	}
+	
+	$out .= "<p class='verdana2'>";
+	foreach($validateurs as $nom)
+		$out .= _T('w3cgh:resultat_pages_conformes',array('nb'=>$compteur[$nom],'tot'=>$cpt,'nom'=>$nom))."<br/>";
+	
+	$out .= _T('w3cgh:resultat_pages_completement_conformes',array('nb'=>$cpt_ok,'tot'=>$cpt));
+	$out .= "</p>";
+
+	$out .= debut_droite('',true);
+	$titre_table = _T("w3cgh:titre_tableau_conformite");
+	$icone = "";
+	$out .= "<div class='liste'>";
+	$out .= bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black",false);
+	$out .= "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
 	$out .= afficher_liste($largeurs, $table, $styles);
 	$out .= "</table>";
 	$out .= "</div>\n";
 	
-	foreach($validateurs as $nom)
-		$out .= $compteur[$nom]."/$cpt pages conforme selon le validateur $nom<br/>";
-	
-	$out .= "$cpt_ok/$cpt pages totalement conforme";
 	echo $out,fin_gauche(),fin_page();
 
 }
@@ -182,7 +186,7 @@ function w3cgh_formulaire_choix_validateurs(){
 	global $spip_lang_right;
 	$validateurs_actifs = isset($GLOBALS['meta']['w3cgh_validateurs_actifs'])?unserialize($GLOBALS['meta']['w3cgh_validateurs_actifs']):array();
 	$out = "";
-	$out .= "<b>"._T('titre_formulaire_choix_validateur')."&nbsp;:</b><br />";
+	$out .= "<b>"._T('w3cgh:titre_formulaire_choix_validateur')."</b><br />";
 	$action = generer_action_auteur("w3cgh_selectionne","",generer_url_ecrire('w3c_go_home'));
 	$out .= "<form action='$action'><div>";
 	$out .= form_hidden($action);

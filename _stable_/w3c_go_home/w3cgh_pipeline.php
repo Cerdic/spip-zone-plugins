@@ -11,16 +11,18 @@
 		  // on voit le bouton dans la barre "naviguer"
 			$boutons_admin['configuration']->sousmenu['w3c_go_home']= new Bouton(
 			$icone,  // icone
-			_L('Conformit&eacute;')	// titre
+			_T('w3cgh:titre_page')	// titre
 			);
 		}
 		return $boutons_admin;
 	}
 	function w3cgh_affiche_droite($flux){
+		global $spip_lang_right;
 		if ($flux['args']['exec']=='articles'){
 			include_spip('inc/validateur_api');
 			$s = "";
 			$s .= debut_cadre_relief(_DIR_PLUGIN_W3CGH."images/xml-valid-24.png",true);
+			$s .= _T('w3cgh:titre_conformite_page')."<br />";
 
 			$id_article = $flux['args']['id_article'];
 			$url = generer_url_public('w3cgh_article',"id_article=$id_article");
@@ -34,16 +36,19 @@
 			$res = validateur_test_valide($nom,$url,$last_mod);
 			$url_affiche = generer_url_ecrire('w3cgh_affiche',"nom=$nom&url=".urlencode($url),true);
 			$url_voir = generer_url_ecrire('w3cgh_voir',"nom=$nom&url=".urlencode($url),true);
+			$url_test = generer_url_ecrire('w3cgh_test',"nom=$nom&url=".urlencode($url),true);
 			if ($res){
-				$s .= "<a href='$url_voir' id='t$id_test' onclick='return affiche_rapport(\"$url_voir\",\"t$id_test\")'>";
+				$s .= "<a href='$url_voir' id='w3cgh_test' onclick='return affiche_rapport(\"$url_voir\",\"t$id_test\")'>";
 				$s .= "OK (".date('d-m-Y H:i',$res).")</a>";
 			}
 			else {
-				$url_test = generer_url_ecrire('w3cgh_test',"nom=$nom&url=".urlencode($url),true);
-				$s .= "<a href='$url_voir' id='w3cgh_test' onclick='return affiche_rapport(\"$url_voir\",\"t$id_test\")' rel='$url_test' class='test'></a>";
+				$s .= "<a href='$url_voir' id='w3cgh_test' onclick='return affiche_rapport(\"$url_voir\",\"t$id_test\")'></a>";
 				$s .= "<script type='text/javascript'>$('#w3cgh_test').append(ajax_image_searching).load('$url_test');</script>";
 				// ajouter la methode img en noscript
 			}
+			$s .= "<div style='text-align:$spip_lang_right'>";
+			$s .= "<a href='#' onclick=\"$('#w3cgh_test').prepend(ajax_image_searching).load('$url_test');return false;\">";
+			$s .= _T("w3cgh:tester_page")."</a></div>";
 
 			$s .= fin_cadre_relief(true);
 			$flux['data'] .= $s;

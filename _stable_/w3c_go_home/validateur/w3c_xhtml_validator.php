@@ -12,14 +12,19 @@ function validateur_w3c_xhtml_validator_dist($action, $url= ""){
 			break;
 		case 'test':
 			$test = recuperer_page($urlvalidator);
-			if (preg_match('/passed validation/is',$test))
+			if (preg_match('/passed validation/is',$test)){
 				$erreurs=0;
+				$texte = _T("w3cgh:page_valide");
+			}
 			else{
 				$erreurs=1;
 				if (preg_match('/([0-9]*)\s+error[s]?.*/is',$test,$regs))
 					$erreurs=intval($regs[1]);
+				if ($erreurs>1)
+					$texte = _T("w3cgh:erreurs",array('erreurs'=>$erreurs));
+				else
+					$texte = _T("w3cgh:une_erreur");
 			}
-			$texte = "Erreurs : $erreurs";
 			return array($erreurs==0,$erreurs,$texte);
 			break;
 		case 'visu':

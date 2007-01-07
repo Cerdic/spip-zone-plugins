@@ -14,11 +14,11 @@ function validateur_spip_xhtml_validator_dist($action, $url= ""){
 			$page = recuperer_page($url);
 			$transformer_xml($page, false);
 			$erreurs = (strlen($GLOBALS['xhtml_error'])>0);
-			$texte = "Erreur";
+			$texte = _T("w3cgh:erreur");
 			$ok = false;
 			if(!$erreurs){
 				$ok = true;
-				$texte = "OK";
+				$texte = _T("w3cgh:page_valide");
 			}	
 			return array($ok,$erreurs,$texte);
 		case 'visu':
