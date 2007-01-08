@@ -20,7 +20,8 @@ Comme dans les squelettes récents de la dist/ 1.9.2, il suffit d'avoir une bali
 _ <code><h1 class="#EDIT{titre} autres classes">#TITRE</h1></code>.
 	</description>
 	<lien>
-	[Documentation->http://www.spip-contrib.net/?article1475]
+	[Documentation->http://www.spip-contrib.net/?article1475],
+et si vous avez cfg: [Configuration->.?exec=cfg&cfg=crayons]
 	</lien>
 	<prefix>
 	Crayons
