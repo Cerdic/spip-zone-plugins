@@ -36,13 +36,21 @@ function exec_w3c_go_home(){
 	$out .= "<script type='text/javascript'><!--
 	var tests_en_cours=0;
 	var cancel = 0;
+	var compteur_global=0;
+	function tests(max){
+		perform_tests(max);
+	}
 	function perform_tests(max){
 		var compteur=0;
-		$('.test').each(function(){
-			if ( (!$(this).html()) && (compteur<max)){
+		$('.test').lt(10).each(function(){
+			if ( (!$(this).html()) && (compteur<max) && (compteur<10) && (cancel==0)){
 				var url = $(this).rel();
 				url = url.replace('&amp;','&');
-				$(this).append(ajax_image_searching).load(url);
+				/* on relance a mi chemin : toujours entre 5 et 15 tests en cours */
+				if (compteur==5) 
+					$(this).toggleClass('test').append(ajax_image_searching).load(url,function(){perform_tests(max-10);});
+				else
+					$(this).toggleClass('test').append(ajax_image_searching).load(url);
 				compteur++;
 			}
 		});
@@ -67,8 +75,8 @@ function exec_w3c_go_home(){
 	$out .= w3cgh_formulaire_choix_validateurs();
 	$action = generer_action_auteur('w3cgh_reset_test',implode('-',$validateurs),generer_url_ecrire('w3c_go_home'));
 	$out .= "<a href='$action'>"._T("w3cgh:reset_all")."</a><br/>";
-	$out .= "<a href='#' onclick='perform_tests(10);'>"._L("10 Tests")."</a><br/>";
-	$out .= "<a href='#' onclick='perform_tests(100);'>"._L("100 Tests")."</a><br/>";
+	$out .= "<a href='#' onclick='tests(10);'>"._L("10 Tests")."</a><br/>";
+	$out .= "<a href='#' onclick='tests(100);'>"._L("100 Tests")."</a><br/>";
 	$out .= fin_boite_info(true);
 	
 	// utiliser un recuperer_page car sinon les url sont calculees depuis ecrire, avec des redirect
