@@ -28,11 +28,13 @@ if (MODIFIER_SIGNATURES AND !function_exists('autoriser_signature_modifier')) {
 }
 function colonne_table($table, $col)
 {
+	include_spip('base/serial');
 	global $tables_principales;
+	$return = false;
 	if (isset($tables_principales['spip_' . table_objet($table)]['field'][$col])) {
-		return $tables_principales['spip_' . table_objet($table)]['field'][$col];
+		$return = $tables_principales['spip_' . table_objet($table)]['field'][$col];
 	}
-	return false;
+	return $return;
 }
 function valeur_colonne_table($table, $col, $id) {
     $s = spip_query(

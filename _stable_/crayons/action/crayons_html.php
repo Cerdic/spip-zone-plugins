@@ -61,7 +61,9 @@ function controleur_dist($regs) {
     if ($controleur) {
 	    $options['hauteurMini'] = 36; // base de hauteur mini
 	    $options['controleur'] = $controleur;
-    } elseif (in_array($champ, array('chapo', 'texte', 'descriptif', 'ps', 'bio'))) {
+    } elseif (($sqltype = colonne_table($type, $champ)) &&
+    preg_match('/\b(mediumtext|longblob|text)\b/i', $sqltype , $match) &&
+    ($match[1] != 'text' || in_array($champ, array('descriptif', 'bio')))) {
 	    $options['hauteurMini'] = 36; // hauteur mini d'un textarea
         $mode = 'texte';
     } else { // ligne, hauteur naturelle
