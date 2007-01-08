@@ -38,22 +38,38 @@ function exec_w3c_go_home(){
 	var cancel = 0;
 	var compteur_global=0;
 	function tests(max){
+		$('#annuler').show();
+		cancel = 0;
 		perform_tests(max);
 	}
 	function perform_tests(max){
 		var compteur=0;
-		$('.test').lt(10).each(function(){
-			if ( (!$(this).html()) && (compteur<max) && (compteur<10) && (cancel==0)){
-				var url = $(this).rel();
+		var nbitems = 10;
+		var next_shot = max-10;
+		if (next_shot<=0)
+			next_shot=-1;
+		if (max==0) next_shot = 0;
+		else if (max<10) nbitems = max;
+		if (cancel==0)
+			$('.test').lt(nbitems).each(function(){
+				var elt = $(this);
+				var url = elt.rel();
 				url = url.replace('&amp;','&');
 				/* on relance a mi chemin : toujours entre 5 et 15 tests en cours */
-				if (compteur==5) 
-					$(this).toggleClass('test').append(ajax_image_searching).load(url,function(){perform_tests(max-10);});
+				if (compteur==5)
+					elt.toggleClass('process').toggleClass('test').append(ajax_image_searching).load(url,function(){ elt.toggleClass('process'); perform_tests(next_shot);});
 				else
-					$(this).toggleClass('test').append(ajax_image_searching).load(url);
+					elt.toggleClass('process').toggleClass('test').append(ajax_image_searching).load(url,function(){ elt.toggleClass('process');});
 				compteur++;
-			}
-		});
+			});
+		if (next_shot==-1)
+			$('#annuler').hide();
+	}
+	function annule_tests(){
+		cancel = 1;
+		$('.process').html('');
+		$('#annuler').hide();
+		return false;
 	}
 	function ferme_rapport(origine){
 		$('#rapport_test').html('');
@@ -75,8 +91,11 @@ function exec_w3c_go_home(){
 	$out .= w3cgh_formulaire_choix_validateurs();
 	$action = generer_action_auteur('w3cgh_reset_test',implode('-',$validateurs),generer_url_ecrire('w3c_go_home'));
 	$out .= "<a href='$action'>"._T("w3cgh:reset_all")."</a><br/>";
-	$out .= "<a href='#' onclick='tests(10);'>"._L("10 Tests")."</a><br/>";
-	$out .= "<a href='#' onclick='tests(100);'>"._L("100 Tests")."</a><br/>";
+	$out .= "<p class='verdana2'>";
+	$out .= "<a href='#' onclick='tests(10);'>"._T("w3cgh:tester_10")."</a><br/>";
+	$out .= "<a href='#' onclick='tests(0);'>"._T("w3cgh:tester_tout")."</a><br/>";
+	$out .= "</p>";
+	$out .= "\n<p align='$spip_lang_right' id='annuler' style='display:none;'><input type='submit' name='annuler' class='fondo' onclick='annule_tests();' value='"._T('w3cgh:bouton_arreter')."' /></p>";
 	$out .= fin_boite_info(true);
 	
 	// utiliser un recuperer_page car sinon les url sont calculees depuis ecrire, avec des redirect

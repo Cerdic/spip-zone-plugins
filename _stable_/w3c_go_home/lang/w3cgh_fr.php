@@ -3,6 +3,9 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+'bouton_arreter' => 'Arr&ecirc;ter les tests',
+'tester_10' => '10 Tests',
+'tester_tout' => 'Tester Tout!',
 'erreur' => 'Erreur',
 'une_erreur' => 'Une erreur',
 'erreurs' => '@erreurs@ erreurs',
