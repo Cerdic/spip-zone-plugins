@@ -3,7 +3,7 @@
 // Boucles SPIP-listes
 global $tables_principales,$exceptions_des_tables,$table_date;
 
-$tables_principales['messages']= array(
+/*$tables_principales['messages']= array(
  'field' => array(
    "id_message" => "bigint(21)",
    "titre" => "varchar(100)",
@@ -12,7 +12,7 @@ $tables_principales['messages']= array(
    "date_heure" => "datetime"
  ),
  'key' => array("PRIMARY KEY" => "id_message")
-);
+);*/
 
 $exceptions_des_tables['messages']['date']='date_heure';
 $table_date['messages']='date_heure';
