@@ -102,7 +102,7 @@ function exec_saveauto_admin() {
 						 echo "</table>";
 				 }
 				 else {
-				 			echo _T('saveauto:repertoire').$rep_bases._T('saveauto:repertoire_absent')."<br />";
+				 			echo "</table>"._T('saveauto:repertoire').$rep_bases._T('saveauto:repertoire_absent')."<br />";
 				 }
 				 fin_raccourcis();				 
 				 
