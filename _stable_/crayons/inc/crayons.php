@@ -152,15 +152,17 @@ function _U($texte)
 }
 
 function wdgcfg() {
-	$prepare_wdgcfg = function_exists('crayons_config') ? crayons_config() : array();
+	$php = function_exists('crayons_config') ? crayons_config() : array();
+	include_spip('inc/meta');
+	lire_metas();
+	global $meta;
+	$metacrayons = empty($meta['crayons']) ? array() : unserialize($meta['crayons']);
 	$wdgcfg = array();
-	foreach (array('msgNoChange' => false, 'msgAbandon' => true, 'filet' => false, 'yellow_fade' => false)
-				as $prepare_wdgcfgi => $def) {
-		if (isset($prepare_wdgcfg[$prepare_wdgcfgi])) {
-			$wdgcfg[$prepare_wdgcfgi] = $prepare_wdgcfg[$prepare_wdgcfgi];
-		} else {
-			$wdgcfg[$prepare_wdgcfgi] = $def;
-		}
+	foreach (array('msgNoChange' => false, 'msgAbandon' => true,
+					'filet' => false, 'yellow_fade' => false)
+			as $cfgi => $def) {
+		$wdgcfg[$cfgi] = isset($php[$cfgi]) ? $php[$cfgi] :
+			isset($metacrayons[$cfgi]) ? $metacrayons[$cfgi] : $def;
 	}
 	return $wdgcfg;
 }
