@@ -34,14 +34,10 @@ function exec_w3c_go_home(){
 
 	debut_page(_T("w3cgh:titre_page"), "w3c", "w3c");
 	$out .= "<script type='text/javascript'><!--
-	var tests_en_cours=0;
-	var cancel = 0;
-	var compteur_global=0;
-	var a_tester;;
+	var a_tester;
 	function tests(max){
 		$('#annuler').show();
 		a_tester = $('.test');
-		cancel = 0;
 		perform_tests(max);
 	}
 	function perform_tests(max){
@@ -52,7 +48,7 @@ function exec_w3c_go_home(){
 			next_shot=-1;
 		if (max==0) next_shot = 0;
 		else if (max<10) nbitems = max;
-		if (cancel==0 && nbitems>0){
+		if (nbitems>0){
 			$(a_tester).lt(nbitems).each(function(){
 				var elt = $(this);
 				var url = elt.rel();
@@ -70,7 +66,7 @@ function exec_w3c_go_home(){
 			$('#annuler').hide();
 	}
 	function annule_tests(){
-		cancel = 1;
+		a_tester = undefined;
 		$('.process').html('');
 		$('#annuler').hide();
 		return false;
