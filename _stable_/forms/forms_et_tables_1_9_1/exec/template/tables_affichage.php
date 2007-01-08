@@ -111,7 +111,7 @@ function affichage_donnee_edit($type_form, $titre_page, $titre_type, $titre_ajou
   
 	$contexte = array('id_form'=>$id_form,'id_donnee'=>$id_donnee,'type_form'=>$type_form,'titre_liste'=>$titre_page,'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
 	$formulaire = recuperer_fond("modeles/form",$contexte);
-	$row = spip_fetch_array(spip_query("SELECT COUNT(id_donnee) AS n FROM spip_forms_donnees WHERE id_form="._q($id_form)));
+	$row = spip_fetch_array(spip_query("SELECT COUNT(id_donnee) AS n FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND statut!='poubelle'"));
 	$nb_reponses = intval($row['n']);
 	
 	debut_page($titre_page, "documents", "forms");

@@ -139,7 +139,7 @@ function exec_forms_edit(){
 
 	$nb_reponses = 0;
 	if ($id_form)
-		if ($row = spip_fetch_array(spip_query("SELECT COUNT(*) AS num FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND confirmation='valide'")))
+		if ($row = spip_fetch_array(spip_query("SELECT COUNT(*) AS num FROM spip_forms_donnees WHERE id_form="._q($id_form)." AND confirmation='valide' and statut!='poubelle'")))
 			$nb_reponses = $row['num'];
 
 
