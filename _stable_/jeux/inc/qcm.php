@@ -118,7 +118,6 @@ function qcm_analyse_le_qcm($qcm, $indexQCM) {
 			// calcul du plus grand score attribué aux bonnes reponses
 			$qcms[$indexQCM]['maxscore'] = max($qcms[$indexQCM]['maxscore'], $qcms[$indexQCM]['points'][$indexBonneReponse]);
 		}
-echo "<br>"; print_r($qcms[$indexQCM]);
 		break;
 
       default : break;

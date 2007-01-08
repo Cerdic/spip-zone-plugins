@@ -50,10 +50,9 @@ function FEN2classic($fen) {
 // cree un echiquier vierge
 function image_echiquier() {
 	// qq initialisations 
-	global $diag_echecs_globales;
-	$light = $diag_echecs_globales[jeux_config('blancs')];
-	$dark = $diag_echecs_globales[jeux_config('noirs')];
-	$fond = jeux_config('fond');
+	global $jeux_couleurs;
+	$light = $jeux_couleurs[jeux_config('blancs')];
+	$dark = $jeux_couleurs[jeux_config('noirs')];
 	$taille = intval(jeux_config('taille'));
 	$bordure = intval(jeux_config('bordure'));
 	$board_size = intval(jeux_config('board_size'));
@@ -103,7 +102,6 @@ function diag_echecs_hilite_square($chessboard,$square,$hilite,$flip) {
 	global $diag_echecs_globales;
 	$img_create = jeux_config('img_create');
 	$suffix = jeux_config('img_suffix');
-	$fond = jeux_config('fond');
 	$taille = intval(jeux_config('taille'));
 	$bordure = intval(jeux_config('bordure'));
 	$board_size = intval(jeux_config('board_size'));

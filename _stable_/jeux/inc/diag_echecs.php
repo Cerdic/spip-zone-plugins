@@ -75,9 +75,8 @@ require("diag_echecs_inc.php");
 // creation du diagramme d'echecs
 function calcul_diagramme_echecs($position, $indexJeux) {
 	// qq initialisations
-	global $diag_echecs_globales;
+	global $diag_echecs_globales, $jeux_couleurs;
 	$flip = jeux_config('flip');
-	$fond = jeux_config('fond');
 	$taille = intval(jeux_config('taille'));
 	$bordure = intval(jeux_config('bordure'));
 	$board_size = intval(jeux_config('board_size'));
@@ -101,7 +100,9 @@ function calcul_diagramme_echecs($position, $indexJeux) {
 	}
 	
 	// image en cache
-	$fichier_dest = sous_repertoire(_DIR_VAR, "cache-jeux") . 'echiq_'.md5($position) . jeux_config('img_suffix');
+	global $jeux_config;
+	$md5 = md5($position.serialize($jeux_config));
+	$fichier_dest = sous_repertoire(_DIR_VAR, "cache-jeux") . 'echiq_'.$md5 . jeux_config('img_suffix');
 	$image = "<img src=\"$fichier_dest\" alt=\"$position\" border=\"0\"/><br>\n";
 	// pas de recalcul de l'image pendant 12 heures si le fichier existe déjà
 	if (file_exists($fichier_dest) AND ($GLOBALS['var_mode'] != 'recalcul') AND (time()-@filemtime($fichier_dest) < 12*3600))
@@ -162,6 +163,7 @@ second */
 	/*	if ($hdr) header(jeux_config('img_header'); */
 	
 	if (jeux_config('coords')) {
+	  $fond = $jeux_couleurs[jeux_config('fond')];
 	  $big_chessboard = imagecreate($board_size+2*$bordure+$taille,$board_size+2*$bordure+$taille);
 	  $bg_color = imagecolorallocate($big_chessboard,$fond[0],$fond[1],$fond[2]);
 	  imagecolortransparent($big_chessboard,$bg_color);
@@ -194,7 +196,7 @@ second */
 		imagecopy($big_chessboard,$empty_coord,$i*$taille,8*$taille+2*$bordure,0,0,$taille,$taille);
 	  }
 	 $chessboard = $big_chessboard;
-	}
+	} // if (jeux_config('coords'))
 	
 	$img($chessboard, $fichier_dest);
 	return $image;
