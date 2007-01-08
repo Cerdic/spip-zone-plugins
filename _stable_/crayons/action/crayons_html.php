@@ -6,7 +6,7 @@ function affiche_controleur($class) {
   $return = array('$erreur'=>'');
 
   if (preg_match(_PREG_CRAYON, $class, $regs)) {
-    list(,$crayon,$type,$champ,$id) = $regs;
+    list(,$nomcrayon,$type,$champ,$id) = $regs;
     include_spip('inc/autoriser');
     if (!autoriser('modifier',$type, $id, NULL, array('champ'=>$champ))) {
         $return['$erreur'] = "$type $id: " . _U('crayons:non_autorise');
@@ -29,7 +29,7 @@ function affiche_controleur($class) {
 }
 
 function controleur_dist($regs) {
-    list(,$crayon,$type,$champ,$id) = $regs;
+    list(,$nomcrayon,$type,$champ,$id) = $regs;
     $options = array();
 	// Si le controleur est un squelette html, on va chercher
 	// les champs qu'il lui faut dans la table demandee
@@ -61,26 +61,27 @@ function controleur_dist($regs) {
     $inputAttrs = array();
     if ($controleur) {
 	    $options['hauteurMini'] = 36; // base de hauteur mini
+        $option['inmode'] = 'controleur';
 	    $options['controleur'] = $controleur;
     } elseif (($sqltype = colonne_table($type, $champ)) &&
 	   ( in_array($sqltype['type'] , array('mediumtext', 'longblob')) ||
 	   ($sqltype['type'] == 'text' && in_array($champ, array('descriptif', 'bio'))))) {
 	    $options['hauteurMini'] = 36; // hauteur mini d'un textarea
-        $mode = 'texte';
+        $option['inmode'] = 'texte';
     } else { // ligne, hauteur naturelle
 	    $options['hauteurMaxi'] = 0;
-        $mode = 'ligne';
+        $option['inmode'] = 'ligne';
         if ($sqltype['long']) {
         	$inputAttrs['maxlength'] = $sqltype['long'];
         }
 	}
-    $n = new Crayon($crayon, $valeur, $options);
+    $crayon = new Crayon($nomcrayon, $valeur, $options);
 
-    $inputAttrs['style'] = 'width:' . $n->largeur . 'px;' .
-         ($n->hauteur ? ' height:' . $n->hauteur . 'px;' : '');
+    $inputAttrs['style'] = 'width:' . $crayon->largeur . 'px;' .
+         ($crayon->hauteur ? ' height:' . $crayon->hauteur . 'px;' : '');
 
-    $html = $controleur ? $n->formulaire() :
-    				$n->formulaire($mode, $inputAttrs);
+    $html = $controleur ? $crayon->formulaire() :
+    				$crayon->formulaire($option['inmode'], $inputAttrs);
     $status = NULL;
 
     return array($html,$status);
@@ -107,6 +108,8 @@ class Crayon {
     var $largeurMaxi = 700;
     var $hauteurMini = 36;
     var $hauteurMaxi = 700;
+    // le mode d'entree: texte, ligne ou controleur
+    var $inmode = '';
     // eventuellement le fond modele pour le controleur
     var $controleur = '';
 
