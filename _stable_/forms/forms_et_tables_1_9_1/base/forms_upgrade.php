@@ -20,23 +20,25 @@
 		}
 		
 		$structure = unserialize($row['structure']);
-		$rang = 1;
-		foreach($structure as $cle=>$val){
-			$champ = $val['code'];
-			$titre = $val['nom'];
-			$type = $val['type'];
-			$obligatoire = $val['obligatoire'];
-			$type_ext = $val['type_ext'];
-			$extra_info = isset($type_ext['id_groupe']) ? $type_ext['id_groupe']:'';
-			$extra_info = isset($type_ext['taille']) ? $type_ext['taille']:$extra_info;
-			$obligatoire = $val['obligatoire'];
-			spip_query("INSERT INTO spip_forms_champs (id_form,rang,champ,titre,type,obligatoire,extra_info) 
-				VALUES("._q($id_form).","._q($rang++).","._q($champ).","._q($titre).","._q($type).","._q($obligatoire).","._q($extra_info).")");
-			if ($type=='select' OR $type=='multiple'){
-				$rangchoix = 1;
-				foreach($type_ext as $choix=>$titre){
-					spip_query("INSERT INTO spip_forms_champs_choix (id_form,champ,choix,titre,rang) 
-						VALUES("._q($id_form).","._q($champ).","._q($choix).","._q($titre).","._q($rangchoix++).")");
+		if ($structure) { //  precaution pour cas tordus
+			$rang = 1;
+			foreach($structure as $cle=>$val){
+				$champ = $val['code'];
+				$titre = $val['nom'];
+				$type = $val['type'];
+				$obligatoire = $val['obligatoire'];
+				$type_ext = $val['type_ext'];
+				$extra_info = isset($type_ext['id_groupe']) ? $type_ext['id_groupe']:'';
+				$extra_info = isset($type_ext['taille']) ? $type_ext['taille']:$extra_info;
+				$obligatoire = $val['obligatoire'];
+				spip_query("INSERT INTO spip_forms_champs (id_form,rang,champ,titre,type,obligatoire,extra_info) 
+					VALUES("._q($id_form).","._q($rang++).","._q($champ).","._q($titre).","._q($type).","._q($obligatoire).","._q($extra_info).")");
+				if ($type=='select' OR $type=='multiple'){
+					$rangchoix = 1;
+					foreach($type_ext as $choix=>$titre){
+						spip_query("INSERT INTO spip_forms_champs_choix (id_form,champ,choix,titre,rang) 
+							VALUES("._q($id_form).","._q($champ).","._q($choix).","._q($titre).","._q($rangchoix++).")");
+					}
 				}
 			}
 		}

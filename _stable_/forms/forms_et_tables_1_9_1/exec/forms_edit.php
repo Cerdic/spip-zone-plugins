@@ -69,12 +69,12 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 		$out .= $email['defaut'];
 		$out .= "</div>\n";
 	}
-	if ($row['champconfirm']){
+	if ($champconfirm = $row['champconfirm']){
 		$champconfirm_known = false;
 		$out .= "<div class='champconfirm'><strong>"._T('forms:confirmer_reponse')."</strong>";
 		$res2 = spip_query("SELECT titre FROM spip_forms_champs WHERE type='email' AND id_form="._q($id_form)." AND champ="._q($champconfirm));
 		if ($row2 = spip_fetch_array($res2)){
-			$out .= $row2['nom'] . " ";
+			$out .= $row2['titre'] . " ";
 			$champconfirm_known = true;
 		}
 		$out .= "</div>\n";
