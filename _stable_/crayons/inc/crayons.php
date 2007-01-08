@@ -26,7 +26,14 @@ if (MODIFIER_SIGNATURES AND !function_exists('autoriser_signature_modifier')) {
 			AND !$qui['restreint'];
 	}
 }
-
+function colonne_table($table, $col)
+{
+	global $tables_principales;
+	if (isset($tables_principales['spip_' . table_objet($table)]['field'][$col])) {
+		return $tables_principales['spip_' . table_objet($table)]['field'][$col];
+	}
+	return false;
+}
 function valeur_colonne_table($table, $col, $id) {
     $s = spip_query(
         'SELECT ' . (is_array($col) ? implode($col, ', ') : $col) .

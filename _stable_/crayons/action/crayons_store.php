@@ -207,15 +207,12 @@ function action_crayons_store_dist() {
 
 		// pour ce qui a une {lang_select} par defaut dans la boucle,
 		// la regler histoire d'avoir la bonne typo dans le propre()
-		// NB: je ne sais pas comment verifier autrement qu'en lisant
-		// la donnee, ce qui provoque des erreurs SQL si elle n'existe pas
-		// du coup je limite aux tables connues (dommage)
-		// NB2: ceci n'a d'impact que sur le "par defaut" en bas
-		if (in_array($type, array('article', 'breve', 'rubrique')))
+		// NB: ceci n'a d'impact que sur le "par defaut" en bas
+		if (colonne_table($type, 'lang')) {
 			lang_select($a = valeur_colonne_table($type, 'lang', $id));
-		else
+		} else {
 			lang_select($a = $GLOBALS['meta']['langue_site']);
-
+		}
 
 	    // chercher vues/article_toto.html
 	    // sinon vues/toto.html
