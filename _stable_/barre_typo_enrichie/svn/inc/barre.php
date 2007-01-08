@@ -275,7 +275,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$ret .= bouton_barre_racc ("barre_raccourci('[[',']]',$champ)", _DIR_IMG_ICONES_BARRE."notes.png", _T('barre_note'), $champhelp);
 	}
 	if ($forum) {
-		$ret .= "&nbsp;</td>\n<td>";
+		$ret .= "&nbsp;</td>\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$col ++;
 		$ret .= bouton_barre_racc ("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);
 	}
@@ -288,7 +288,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 			_DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/barre-tableau.png', _T('bartypenr:barre_tableau'),
 			$champhelp);
 
-	$ret .= "&nbsp</td>\n<td>";
+	$ret .= "</td>\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 
 // gestion du remplacement
       $ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_remplacer']."','');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/chercher_remplacer.png", _T('bartypenr:barre_chercher'), $champhelp);
@@ -298,26 +298,26 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 }
 
-	$ret .= "&nbsp;</td>";
+	$ret .= "</td>";
 	$col++;
 
 	// Insertion de caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...)
-	$ret .= "\n<td style='text-align:$spip_lang_left;' valign='middle'>";
+	$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 	$col++;
 	$ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_caracteres']."','');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/clavier.png", _T('bartypenr:barre_caracteres'), $champhelp);
 	
 
 
-	$ret .= "&nbsp;</td>";
+	$ret .= "</td>";
 	$col++;
 
 	if (!_DIR_RESTREINT) {
-		$ret .= "\n<td style='text-align:$spip_lang_right;' valign='middle'>";
+		$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$col++;
 		$ret .=    bouton_barre_racc("toggle_preview();", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/eye.png", _T('bartypenr:barre_preview'), $champhelp);
-		$ret .= "&nbsp;";
+		$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$ret .= aide("raccourcis");
-		$ret .= "&nbsp;";
+		$ret .= "";
 		$ret .= "</td>";
 	}
 	$ret .= "</tr>";
