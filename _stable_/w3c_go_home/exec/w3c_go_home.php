@@ -97,10 +97,9 @@ function exec_w3c_go_home(){
 	$out .= "</p>";
 	$out .= "\n<p align='$spip_lang_right' id='annuler' style='display:none;'><input type='submit' name='annuler' class='fondo' onclick='annule_tests();' value='"._T('w3cgh:bouton_arreter')."' /></p>";
 	$out .= fin_boite_info(true);
+	
 	// utiliser un recuperer_page car sinon les url sont calculees depuis ecrire, avec des redirect
-	//include_spip('public/assembler');
-	//$xml_sitemap=recuperer_fond('sitemap');
-	$sitemap_url = parametre_url(generer_url_public('sitemap'),'var_mode',_request('var_mode'));
+	$sitemap_url = parametre_url(generer_url_public('w3cgh_sitemap'),'var_mode',_request('var_mode'));
 	include_spip('inc/xml');
 	$sitemap = spip_xml_load($sitemap_url);
 
