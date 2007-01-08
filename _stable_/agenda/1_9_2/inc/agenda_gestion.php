@@ -22,7 +22,7 @@ function Agenda_uninstall(){
 }
 
 function Agenda_verifier_base(){
-	$version_base = 0.12;
+	$version_base = 0.13;
 	$current_version = 0.0;
 	if (   (!isset($GLOBALS['meta']['agenda_base_version']) )
 			|| (($current_version = $GLOBALS['meta']['agenda_base_version'])!=$version_base)){
@@ -37,11 +37,11 @@ function Agenda_verifier_base(){
 			if (!isset($desc['field']['evenements'])){
 				spip_query("ALTER TABLE spip_groupes_mots ADD `evenements` VARCHAR(3) NOT NULL AFTER `syndic`");
 			}
-			ecrire_meta('agenda_base_version',$current_version=$version_base);
+			ecrire_meta('agenda_base_version',$current_version=$version_base,'non');
 		}
 		if ($current_version<0.11){
 			spip_query("ALTER TABLE spip_evenements ADD `horaire` ENUM('oui','non') DEFAULT 'oui' NOT NULL AFTER `lieu`");
-			ecrire_meta('agenda_base_version',$current_version=0.11);
+			ecrire_meta('agenda_base_version',$current_version=0.11,'non');
 		}
 		if ($current_version<0.12){
 			spip_query("ALTER TABLE spip_evenements ADD `id_article` bigint(21) DEFAULT '0' NOT NULL AFTER `id_evenement`");
@@ -53,9 +53,15 @@ function Agenda_verifier_base(){
 				spip_query("UPDATE spip_evenements SET id_article=$id_article WHERE id_evenement=$id_evenement");
 			}
 			spip_query("DROP TABLE spip_evenements_articles");
-			ecrire_meta('agenda_base_version',$current_version=0.12);
+			ecrire_meta('agenda_base_version',$current_version=0.12,'non');
 		}
-		
+		if ($current_version<0.13){
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			creer_base();
+			ecrire_meta('agenda_base_version',$current_version=0.13,'non');
+		}
+
 		ecrire_metas();
 	}
 	
