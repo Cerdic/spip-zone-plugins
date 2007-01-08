@@ -73,7 +73,9 @@ function affichage_donnees_tous($type_form, $titre_page, $titre_type, $titre_ajo
 	echo "</div>";
 	
 	$row=spip_fetch_array(spip_query("SELECT titre FROM spip_forms WHERE id_form="._q(_request('id_form'))));
+	echo '<div style="clear:left;text-align:center">';
 	echo gros_titre($row['titre']);
+	echo '</div>';
 	echo "<div class='verdana2'>";
 	echo '<p><div id="sorting">
 	<div>Tri en cours, un instant...</div>
