@@ -50,7 +50,7 @@
 	}
 
 	function Forms_upgrade(){
-		$version_base = 0.24;
+		$version_base = 0.25;
 		$current_version = 0.0;
 		if (   (isset($GLOBALS['meta']['forms_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['forms_base_version'])==$version_base))
@@ -208,7 +208,13 @@
 					$rang++;
 				}
 			}
-			ecrire_meta('forms_base_version',$current_version=0.24);
+			ecrire_meta('forms_base_version',$current_version=0.24,'non');
+		}
+		if ($current_version<0.25){
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			creer_base();
+			ecrire_meta('forms_base_version',$current_version=0.24,'non');
 		}
 		ecrire_metas();
 	}
