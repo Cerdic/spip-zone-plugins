@@ -97,7 +97,6 @@ function exec_w3c_go_home(){
 	$out .= "</p>";
 	$out .= "\n<p align='$spip_lang_right' id='annuler' style='display:none;'><input type='submit' name='annuler' class='fondo' onclick='annule_tests();' value='"._T('w3cgh:bouton_arreter')."' /></p>";
 	$out .= fin_boite_info(true);
-	
 	// utiliser un recuperer_page car sinon les url sont calculees depuis ecrire, avec des redirect
 	//include_spip('public/assembler');
 	//$xml_sitemap=recuperer_fond('sitemap');
@@ -136,6 +135,7 @@ function exec_w3c_go_home(){
 	if (is_array($sitemap) && count($sitemap)){
 		$cpt_ok = 0;
 		$id_test = 0;
+		$time_mark = time();
 		foreach($validateurs as $nom)
 			$compteur[$nom] = 0;
 		foreach($sitemap as $url) {
@@ -177,10 +177,10 @@ function exec_w3c_go_home(){
 				else {
 					$url_test = generer_url_ecrire('w3cgh_test',"nom=$nom&url=".urlencode($loc));
 					$s .= "<a href='$url_voir' id='t$id_test' onclick='return affiche_rapport(\"$url_voir\",\"t$id_test\")' rel='$url_test' class='test'></a>";
-					//$s .= "<span class='test' name='$url_test'></span></a>";
-					//if ($id_test<10)
-					//	$s .= "<script type='text/javascript'>$('#test_$id_test').append(ajax_image_searching).load('$url_test');</script>";
-					// ajouter la methode img en noscript
+					// la methode img en noscript
+					$url_test = parametre_url($url_test,'var_mode','image');
+					$url_test = parametre_url($url_test,'time',$time_mark); // eviter de taper dans le cache navigateur
+					$s .= "<noscript><a href='$url_voir' ><img src='$url_test' alt='test'/></a></noscript>";
 				}
 				$vals[] = $s;
 			}

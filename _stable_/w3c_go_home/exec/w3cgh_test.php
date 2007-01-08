@@ -10,11 +10,19 @@ function exec_w3cgh_test_dist()
 	
 	$texte = end($res['res']);
 	if ($ok = reset($res['res']))
-		$texte = "<span style='color:#45CF00'>$texte</span>";
+		$couleur = '45CF00';
 	else
-		$texte = "<span style='color:#FF1F1F'>$texte</span>";
-
+		$couleur = 'FF1F1F';
+	if (_request('var_mode')=='image'){
+		include_spip('inc/filtres');
+		$img = image_typo($texte, "police=dustismo.ttf","couleur=$couleur", "taille=12");
+		$img = extraire_attribut($img,'src');
+		header('Content-Type: image/png');
+		header('Content-Length: '.filesize($img));
+		readfile($img);
+		exit();
+	}
+	$texte = "<span style='color:#$couleur'>$texte</span>";
 	ajax_retour($texte);
 }
-
 ?>
