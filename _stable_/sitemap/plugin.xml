@@ -33,7 +33,4 @@ Modali&#224; di utilizzo: dichiarare l'[URL della SiteMap->../spip.php?page=site
 	<prefix> 
 	siteMap
 	</prefix>
-	<fonctions>
-	sitemap_fonctions.php
-	</fonctions>
 </plugin>
