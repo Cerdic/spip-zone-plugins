@@ -36,6 +36,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'une_vide'			=> 'Una casella bianca',
 'bravo'				=> "Complimenti!",
 
+'reponseJuste' => "La risposta è esatta",
+'reponseFausse' => "La risposta è sbagliata",
+'reponseNulle' => "Non hai ancora risposto",
+
 'erreur_taille_grille'	=> "Errore: dimensioni errate",
 'erreur_syntaxe'	=> "Errore di sintassi ",
 

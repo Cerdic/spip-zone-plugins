@@ -106,13 +106,19 @@ function qcm_analyse_le_qcm($qcm, $indexQCM) {
 		}
 		break;
       case 'R' :		// On recupere le numero et les points de la bonne reponse
-		ereg("^R([0-9]+)", $li, $eregResult);	
-		$qcms[$indexQCM]['bonnereponse'] = $eregResult[1];
-		// au cas ou les points ne sont pas specifies pour la bonne reponse
-		if ($qcms[$indexQCM]['points'][$eregResult[1]]==0) 
-		  $qcms[$indexQCM]['points'][$eregResult[1]] = 1;
 		// total des points des bonnes reponses
-		$qcms[$indexQCM]['maxscore'] = $qcms[$indexQCM]['points'][$eregResult[1]];
+		$qcms[$indexQCM]['maxscore'] = 0;
+		// parcours des bonnes reponses
+		$t=preg_split(',\sR,', ' '.$li);
+		for ($i=1;$i<count($t);$i++) if (preg_match(",^([0-9]+),", $t[$i], $eregResult)) {
+			$indexBonneReponse = intval($eregResult[1]);
+			$qcms[$indexQCM]['bonnesreponses'][$indexBonneReponse]=1;
+			// au cas ou les points ne sont pas specifies pour la bonne reponse
+			if ($qcms[$indexQCM]['points'][$indexBonneReponse]==0) $qcms[$indexQCM]['points'][$indexBonneReponse] = 1;
+			// calcul du plus grand score attribué aux bonnes reponses
+			$qcms[$indexQCM]['maxscore'] = max($qcms[$indexQCM]['maxscore'], $qcms[$indexQCM]['points'][$indexBonneReponse]);
+		}
+echo "<br>"; print_r($qcms[$indexQCM]);
 		break;
 
       default : break;
@@ -177,34 +183,35 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corrigee, $gestionPoint
 
   // Sinon on affiche la correction
   else {
- 	 if ($_POST[$nomVarSelect]) {
+  	 $reponse = $_POST[$nomVarSelect];
+ 	 if ($reponse) {
 		// les points de la reponse donnee...
-		$pointsR = $qcms[$indexQCM]['points'][$trou?0:$_POST[$nomVarSelect]];
+		$pointsR = $qcms[$indexQCM]['points'][$trou?0:$reponse];
 		
 		// la reponse donnee & precision des points eventuels de la mauvaise reponse...
 		$intro=$trou?_T('jeux:votre_reponse'):_T('jeux:votre_choix');
 		$codeHTML.='<div class="qcm_reponse">'
 			 .((($pointsR==$pointsQ) || ($pointsR==0))?$intro:qcm_les_points($intro, $pointsR))
-			 .($trou?$_POST[$nomVarSelect]:$qcms[$indexQCM]['propositions'][$_POST[$nomVarSelect]])
+			 .($trou?$reponse:$qcms[$indexQCM]['propositions'][$reponse])
 			 .'</div>';
 
 		// bonne reponse
-		$bonneReponse = ($trou && in_array($_POST[$nomVarSelect], $qcms[$indexQCM]['propositions']))
-			|| ($qcms[$indexQCM]['bonnereponse']==$_POST[$nomVarSelect]);
+		$bonneReponse = ($trou && in_array($reponse, $qcms[$indexQCM]['propositions']))
+			|| ($qcms[$indexQCM]['bonnesreponses'][$reponse]==1);
 
 		// si ce n'est pas un trou, on donne les points de la reponse quoiqu'il arrive
 		if (!$trou || $bonneReponse) $qcm_score += $pointsR;
 			
         if ($bonneReponse)
-			$codeHTML .= '<div class="qcm_correction_juste">'._T('qcm:qcm_reponseJuste').'</div>';
-         else $codeHTML .= '<div class="qcm_correction_faux">'._T('qcm:qcm_reponseFausse').'</div>';
+			$codeHTML .= '<div class="qcm_correction_juste">'._T('jeux:reponseJuste').'</div>';
+         else $codeHTML .= '<div class="qcm_correction_faux">'._T('jeux:reponseFausse').'</div>';
            
         // les precisions eventuelles
-		$prec = $qcms[$indexQCM]['precisions'][$trou?0:$_POST[$nomVarSelect]];
+		$prec = $qcms[$indexQCM]['precisions'][$trou?0:$reponse];
         if ($prec<>"") $codeHTML.="<div align=\"center\"><div class=\"qcm_precision\">$prec</div></div>";
 
 	// pas de reponse postee...
-	} else $codeHTML.='<div class="qcm_correction_null">'._T('qcm:qcm_reponseNulle').'</div>';
+	} else $codeHTML.='<div class="qcm_correction_null">'._T('jeux:reponseNulle').'</div>';
 	   
 	$codeHTML.='<br />';
      

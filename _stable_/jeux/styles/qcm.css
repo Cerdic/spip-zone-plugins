@@ -1,6 +1,6 @@
 /* Mise en forme des QCM
  */
-/*
+
 .qcm
 { 
  text-align:left;
@@ -16,29 +16,35 @@
 
 .qcm_titre{ 
  text-align: center;
-}
-*/
-table.pendu_clavier, td.pendu_clavier{ 
- text-align:center;
- width:16em;
+/* color: #3F5264; */
 }
 
-input.pendu_clavier{ 
- font-size: 120%; 
- text-align:center;
- width:1.6em;
- display:inline;
- margin:1px;
-}
+.qcm_proposition{ 
+ font-size: 90%; 
+ font-size: 10;
+/* color: #3F5264;*/
+ }
 
-input.pendu_cache, input.pendu_jouees{ 
- border:0px none;
-}
-/*
 .qcm_reponse{ 
   font-size: 80%;
  font-size: 10;
+/* color: #3F5264;*/
  }
+
+.qcm_precision{
+ margin-left: 0;
+ margin-top: 5;
+ margin-bottom: 1em; 
+ margin-right: 0;
+ text-align:left;
+ font-size: 80%;
+ width:90%;
+/* font-family: arial, helvetica, sans-serif;
+ color: #3F5264;
+ font-size: 12;*/
+ border: 1px dotted #3F5264;
+ padding: 3px; 
+}
 
 .qcm_correction_faux{ 
  font-size: 10;
@@ -73,4 +79,7 @@ input.pendu_cache, input.pendu_jouees{
  background-color: #F3EEEA;
 }
 
-*/
+.qcm_radio{
+/* margin:2pt;
+ padding:2pt; */
+}

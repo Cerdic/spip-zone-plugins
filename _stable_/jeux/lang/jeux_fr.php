@@ -36,6 +36,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'une_vide'			=> 'Une case vide',
 'bravo' => "Bravo !",
 
+'reponseJuste' => "La r&eacute;ponse est juste",
+'reponseFausse' => "La r&eacute;ponse est fausse",
+'reponseNulle' => "Vous n'avez pas r&eacute;pondu",
+
 'erreur_taille_grille'	=> "Erreur : taille invalide",
 'erreur_syntaxe'	=> "Erreur de syntaxe",
 
