@@ -89,7 +89,10 @@ while($row = spip_fetch_array($list_bg)) {
 		spip_log("Message choppe->$titre".$titre_bg);
 
 		// ne pas envoyer des textes de moins de 10 caractères
-			if ( (strlen($texte_patron_bg) > 10) ) {
+			
+			$tampon = preg_replace("/(\r\n|\n|\r| )+/", "", version_texte($texte_patron_bg));
+
+			if ( (strlen($tampon) > 10) ) {
 				$texte_patron_bg = "__bLg__".$id_article_bg."__bLg__ ".$texte_patron_bg;
 				$texte_patron_bg = addslashes($texte_patron_bg);
 				//echo "->$texte_patron_bg" ; 
