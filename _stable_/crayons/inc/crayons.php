@@ -30,12 +30,64 @@ function colonne_table($table, $col)
 {
 	include_spip('base/serial');
 	global $tables_principales;
-	$return = false;
-	if (isset($tables_principales['spip_' . table_objet($table)]['field'][$col])) {
-		$return = $tables_principales['spip_' . table_objet($table)]['field'][$col];
+	if (!isset($tables_principales['spip_' . table_objet($table)]['field'][$col])) {
+		return false;
 	}
-	return $return;
+	$ana = explode(' ',
+		$brut = $tables_principales['spip_' . table_objet($table)]['field'][$col]);
+	$sta = 0;
+	$sep = '';
+	$ret = array('brut' => $brut,
+		'type' => '', 'obli' => false, 'long' => 0, 'def' => '');
+	foreach ($ana as $mot) {
+		switch ($sta) {
+			case 0:	$ret['type'] = ($mot = strtolower($mot));
+			case 1:	if ($mot[strlen($mot) - 1] == ')') {
+					$pos = strpos($mot, '(');
+					$ret['type'] = strtolower(substr($mot, 0, $pos++));
+					if (count($vir = explode(',', substr($mot, $pos, -1))) > 1) {
+						$ret['long'] = $vir;
+					} else {
+						$ret['long'] = $vir[0];
+					}
+					$sta = 1;
+					continue;
+				}
+				if (!$sta) {
+					$sta = 1;
+					continue;
+				}
+			case 2: switch (strtolower($mot)) {
+				case 'not':
+					$sta = 3;
+					continue;
+				case 'default':
+					$sta = 4;
+					continue;
+				}
+				continue;
+			case 3: 	$ret['obli'] = strtolower($mot) == 'null';
+				$sta = 2;
+				continue;
+			case 4:	$df1 = strpos('"\'', $mot[0]) !== false? $mot[0] : '';
+				$sta = 5;
+			case 5:	$ret['def'] .= $sep . $mot;
+				if (!$df1) {
+					$sta = 2;
+					continue;
+				}
+				if ($df1 == $mot[strlen($mot) - 1]) {
+					$ret['def'] = substr($ret['def'], 1, -1);
+					$sta = 2;
+				}
+				$sep = ' ';
+				continue;
+		}
+	}
+	return $ret;
 }
+//	var_dump(colonne_table('forum', 'id_syndic')); die();
+
 function valeur_colonne_table($table, $col, $id) {
     $s = spip_query(
         'SELECT ' . (is_array($col) ? implode($col, ', ') : $col) .
