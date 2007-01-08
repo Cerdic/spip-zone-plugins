@@ -50,6 +50,20 @@ function balise_DATE_MODIF_SITE($p) {
    return $p;
 }
 
+function calcul_DATE_MODIF_FORUM() {
+   $date_f=spip_query("SELECT date_heure,titre FROM spip_forum WHERE statut='publie' ORDER BY date_heure DESC LIMIT 0,1");
+   $date_f=spip_fetch_array($date_f);
+   $date_f= $date_f['date_heure'];
+   
+   return  $date_f;
+}
+
+function balise_DATE_MODIF_FORUM($p) {
+   $p->code = "calcul_DATE_MODIF_FORUM()";
+   $p->statut = 'php';
+   return $p;
+}
+
 //utiliser le cron pour envoyer les messages en attente
 function spiplistes_taches_generales_cron($taches_generales){
 	$taches_generales['spiplistes_cron'] = 20;
