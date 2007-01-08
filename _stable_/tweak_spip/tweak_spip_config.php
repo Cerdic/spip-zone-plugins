@@ -50,6 +50,13 @@ add_tweak( array(
 	'options'	=> 1
 ));
 
+add_tweak( array(
+	'id'	=> 'insert_head',
+	'code'	=> '$spip_pipeline["affichage_final"] .= "|f_insert_head";', 
+	'categorie'	=> 'squel',
+	'options'	=> 1
+));
+
 //-----------------------------------------------------------------------------//
 //                               fonctions                                     //
 //-----------------------------------------------------------------------------//
@@ -139,10 +146,11 @@ add_tweak( array(
 // http://www.spip-contrib.net/Citations
 // http://www.spip-contrib.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
 // http://www.spip-contrib.net/Ajouter-une-lettrine-aux-articles
-// Les sommaires. voir :     
+// Un Sommaire. voir :     
 //		$GLOBALS['debut_intertitre'] = "<h3 class='mon_style_h3'>";
 //		$GLOBALS['fin_intertitre'] = "</h3>";
 // http://www.spip-contrib.net/Generation-automatique-de
+// Les sessions
 
 //-----------------------------------------------------------------------------//
 //                        activation des tweaks                                //

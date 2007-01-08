@@ -90,9 +90,10 @@ function enregistre_modif_tweaks(){
 		foreach($_POST as $choix=>$val) if (isset($test[$choix])&&$val=='O') $liste[$test[$choix]]['actif'] = 1;
 	global $connect_id_auteur, $connect_login;
 	spip_log("Changement des tweaks actifs par auteur id=$connect_id_auteur :".implode(',',$liste));
-//	ecrire_plugin_actifs($liste);
 	ecrire_meta('tweaks',serialize($liste));
 	ecrire_metas();
+	// reinitialisation des pipelines, au cas ou
+	unlink(_DIR_TMP."charger_pipelines.php");
 }
 
 function exec_tweak_spip_admin() {

@@ -34,6 +34,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forcer_langue:nom' => 'Forcer langue',
 	'forcer_langue:description'	=> "Force le contexte de langue pour les jeux de squelettes multilingues disposant d'un formulaire ou d'un menu de langues sachant g&eacute;rer le cookie de langues.",
 
+	'insert_head:nom' => 'Balise #INSERT_HEAD',
+	'insert_head:description'	=> "Active #INSERT_HEAD sur tous les squelettes, qu'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Gr&acirc;ce &agrave; cette option, les plugins pourront ins&eacute;rer du javascript (.js) ou des feuilles de style (.css).",
+
 	'verstexte:nom' => 'Version texte',
 	'verstexte:description'	=> "2 filtres pour vos squelettes. 
 _ version_texte : extrait le contenu texte d'une page html &agrave; l'exclusion de quelques balises &eacute;l&eacute;mentaires.
