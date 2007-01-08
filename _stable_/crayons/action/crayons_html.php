@@ -58,6 +58,7 @@ function controleur_dist($regs) {
     }
 //return array(print_r($valeur, true), 7);
     // type du crayon
+    $inputAttrs = array();
     if ($controleur) {
 	    $options['hauteurMini'] = 36; // base de hauteur mini
 	    $options['controleur'] = $controleur;
@@ -69,12 +70,14 @@ function controleur_dist($regs) {
     } else { // ligne, hauteur naturelle
 	    $options['hauteurMaxi'] = 0;
         $mode = 'ligne';
+        if ($sqltype['long']) {
+        	$inputAttrs['maxlength'] = $sqltype['long'];
+        }
 	}
     $n = new Crayon($crayon, $valeur, $options);
 
-    $inputAttrs = array(
-        'style' => 'width:' . $n->largeur . 'px;' .
-         ($n->hauteur ? ' height:' . $n->hauteur . 'px;' : ''));
+    $inputAttrs['style'] = 'width:' . $n->largeur . 'px;' .
+         ($n->hauteur ? ' height:' . $n->hauteur . 'px;' : '');
 
     $html = $controleur ? $n->formulaire() :
     				$n->formulaire($mode, $inputAttrs);
