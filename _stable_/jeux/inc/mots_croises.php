@@ -160,7 +160,7 @@ function jeux_mots_croises($texte, $indexJeux) {
 	$tableau = jeux_split_texte('mots_croises', $texte);
 	jeux_config_init("
 		solution=oui	// Afficher la solution ?
-		fondnoir=gris	// couleur des cases noires
+		fondnoir=noir	// couleur des cases noires
 		type=0			// types de grilles : 0 ou 1
 	", false);
 	foreach($tableau as $i => $valeur) if ($i & 1) {
