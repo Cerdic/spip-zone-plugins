@@ -109,7 +109,7 @@ function qcm_analyse_le_qcm($qcm, $indexQCM) {
 		// total des points des bonnes reponses
 		$qcms[$indexQCM]['maxscore'] = 0;
 		// parcours des bonnes reponses
-		$t=preg_split(',\sR,', ' '.$li);
+		$t=preg_split(',\s+R,', ' '.$li);
 		for ($i=1;$i<count($t);$i++) if (preg_match(",^([0-9]+),", $t[$i], $eregResult)) {
 			$indexBonneReponse = intval($eregResult[1]);
 			$qcms[$indexQCM]['bonnesreponses'][$indexBonneReponse]=1;
