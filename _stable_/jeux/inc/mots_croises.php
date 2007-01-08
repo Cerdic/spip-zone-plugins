@@ -17,6 +17,8 @@ separateurs obligatoires : [horizontal], [vertical], [solution]
 separateurs optionnels   : [titre], [texte], [config]
 paramètres de configurations par defaut :
 	solution=oui	// Afficher la solution ?
+	fondnoir=noir	// couleur des cases noires
+	type=0			// types de grilles : 0 ou 1
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
@@ -48,6 +50,7 @@ function lettre_grille($chiffre) {
 
 // affiche la grille de mot croises, avec la solution au cas ou
 function affichage_grille_mc($tableau_grille, $indexJeux, $solution=false){
+	global $jeux_couleurs;
 	
 	// les variables de la grille
 	$hauteur = sizeof($tableau_grille);
@@ -74,9 +77,13 @@ function affichage_grille_mc($tableau_grille, $indexJeux, $solution=false){
 		foreach ($contenu_ligne as $colonne =>$cellule){
 		    $colonne++;
 			$class = $ligne==$hauteur?($colonne==$largeur?' class="bas droite"':' class="bas"'):($colonne==$largeur?' class="droite"':'');
+			$classnoir = ' class="noir' . ($ligne==$hauteur?($colonne==$largeur?' bas droite':' bas'):($colonne==$largeur?' droite':'')) . '"';
 		    //s'il s'agit d'un noir
-		    if ($cellule == "*") 
-		    	$grille .= "\t\t<td class=\"noir\">*</td>\n";
+		    if ($cellule == "*") { 
+					$noires = $jeux_couleurs[jeux_config('fondnoir')];
+					$noires = "rgb($noires[0], $noires[1], $noires[2])";
+			    	$grille .= "\t\t<td$classnoir style=\"background-color:$noires; color:$noires;\">*</td>\n";
+				}
 				else if ($solution)
 					$grille .= "\t\t<td$class>$cellule</td>\n" ;
 				else {
@@ -153,6 +160,8 @@ function jeux_mots_croises($texte, $indexJeux) {
 	$tableau = jeux_split_texte('mots_croises', $texte);
 	jeux_config_init("
 		solution=oui	// Afficher la solution ?
+		fondnoir=gris	// couleur des cases noires
+		type=0			// types de grilles : 0 ou 1
 	", false);
 	foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];

@@ -14,6 +14,7 @@
 global $diag_echecs_globales;
 $diag_echecs_globales = Array(
   // Codes RGB des couleurs prédéfinies
+/*
   	// en
 	'white' => array(255,255,255),
 	'black' => array(0,0,0), 
@@ -33,6 +34,7 @@ $diag_echecs_globales = Array(
 	'jauneclair' => array(247,235,211), 
 	'brunclair' => array(255,243,217),
 	// hilite
+*/
 	'hrouge' => array(255,170,170), 
 	'hbleu' => array(101,128,230), 
 	'hvert' => array(51,153,102), 
@@ -65,6 +67,9 @@ $diag_echecs_globales = Array(
 	Swedish      B S L T D K
 */
 );
+global $jeux_couleurs;
+$diag_echecs_globales = array_merge($diag_echecs_globales, $jeux_couleurs);
+
 
 // parametres par defaut
 function diag_echecs_config_default() {
