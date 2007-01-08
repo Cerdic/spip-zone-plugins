@@ -234,10 +234,10 @@ function exec_forms_edit(){
 	if (!include_spip('inc/autoriser'))
 		include_spip('inc/autoriser_compat');
 	if (autoriser('administrer','form',$id_form)) {
+		$nretour = urlencode(self());
+		icone_horizontale(_T("forms:suivi_reponses")."<br />".(($nb_reponses==0)?_T("forms:aucune_reponse"):(($nb_reponses==1)?_T("forms:une_reponse"):_T("forms:nombre_reponses",array('nombre'=>$nb_reponses)))),
+		generer_url_ecrire(in_array($row['type_form'],array('','sondage'))?'forms_reponses':'donnees_tous',"id_form=$id_form"), "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif");
 		if ($nb_reponses){
-			$nretour = urlencode(self());
-			icone_horizontale(_T("forms:suivi_reponses")."<br />".(($nb_reponses==0)?_T("forms:aucune_reponse"):(($nb_reponses==1)?_T("forms:une_reponse"):_T("forms:nombre_reponses",array('nombre'=>$nb_reponses)))),
-				generer_url_ecrire(in_array($row['type_form'],array('','sondage'))?'forms_reponses':'donnees_tous',"id_form=$id_form"), "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif");
 			icone_horizontale(_T("forms:telecharger_reponses"),
 				generer_url_ecrire('forms_telecharger',"id_form=$id_form&retour=$nretour"), _DIR_PLUGIN_FORMS."img_pack/donnees-exporter-24.png", "rien.gif");
 		}
