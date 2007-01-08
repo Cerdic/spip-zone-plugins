@@ -33,9 +33,16 @@ Pour supprimer une fonctionnalit&eacute;, mettez <b>_</b> dans la valeur du text
 <p>* si <b>_</b> ou vide, supprime la fonctionnalit&eacute; (vide reviendra au d&eacute;faut)</p>
 </fieldset>
 
-<fieldset><legend><:boutonstexte:donnees_techniques:></legend>
+<fieldset><legend><:boutonstexte:selecteur:></legend>
 <p>
-<label>Fichier javascript</label>
+<label>Expression CSS ou etendue jQuery</label>
+<input type="text" name="selector" class="type_txt" size="60"
+	value="#ENV{selector,#contenu .texte}" />
+</p>
+</fieldset>
+
+<fieldset><legend><:boutonstexte:donnees_techniques:></legend>
+<p><label>Fichier javascript</label>
 <input type="text" name="jsFile" class="type_file" size="15"
 	value="#ENV{jsFile,boutonstexte.js}" />
 <label>Fichier style</label>

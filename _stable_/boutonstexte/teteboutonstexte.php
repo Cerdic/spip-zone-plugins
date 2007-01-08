@@ -3,6 +3,7 @@
 function boutonstexte_insert_head($flux)
 {
 	$metacfg = array(
+		'selector' => '#contenu .texte',
 		'jsFile' => 'boutonstexte.js',
 		'cssFile' => 'boutonstexte',
 		'imgPath' => 'images/fontsizeup.png',
@@ -13,6 +14,7 @@ function boutonstexte_insert_head($flux)
 	);
 	meta_boutonstexte($metacfg);
 	
+	$selector = $metacfg['selector'];
 	$jsFile = find_in_path($metacfg['jsFile']);
 	$cssFile = $metacfg['cssFile'];
 	$imgPath = dirname(find_in_path($metacfg['imgPath']));
@@ -28,6 +30,7 @@ function boutonstexte_insert_head($flux)
 <script src="{$jsFile}" type="text/javascript"></script>
 <script type="text/javascript">
 	var boutonstexte = new boutonsTexte({
+		'selector':'{$selector}',
 		'imgPath':'{$imgPath}',
 		'txtOnly':'{$txtOnly}',
 		'txtBackSpip':'{$txtBackSpip}',
