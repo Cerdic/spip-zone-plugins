@@ -68,7 +68,7 @@ function Crayons_preparer_page($page, $droits, $wdgcfg = array()) {
 				'txt' => _U('crayons:veuillez_patienter')
 			),
 			'crayon' => array(
-				'file' => 'pencil.png',
+				'file' => 'crayon20.png',
 				'txt' => _U('crayons:editer')
 			),
 			'edit' => array(
