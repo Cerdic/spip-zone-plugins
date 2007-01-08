@@ -7,7 +7,9 @@
 #HTTP_HEADER{'Content-Type: text/javascript'}
 
 [(#CHEMIN{javascript/crayons.js}|spip_file_get_contents)]
+[(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";}|?{'',' '})
 [(#CHEMIN{javascript/crayons-fade.js}|spip_file_get_contents)]
+]
 
 /*
 [(#REM|sinon{', '}|implode{#CONFIG{crayons}|unserialize|array_keys})]
