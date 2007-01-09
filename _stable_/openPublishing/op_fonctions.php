@@ -4,6 +4,17 @@ $GLOBALS['contrib_local'] = 13;
 $GLOBALS['contrib_non_local'] = 14;
 $GLOBALS['contrib_analyse'] = 24;
 
+/*
+ * <BOUCLE(OP_RUBRIQUES)>
+ */
+
+function boucle_OP_RUBRIQUES_dist($id_boucle, &$boucles) {
+        $boucle = &$boucles[$id_boucle];
+        $id_table = $boucle->id_table;
+        $boucle->from[$id_table] =  "spip_op_rubriques";
+        return calculer_boucle($id_boucle, $boucles);
+}
+
 function balise_CONTRIBUTIONS_LOCALES($p) {
 	$p->code = 'return_contrib_local()';
 	$p->statut = 'php';

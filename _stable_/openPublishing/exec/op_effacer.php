@@ -36,7 +36,7 @@ function exec_op_effacer() {
 	
 	
 	debut_page(_T('opconfig:op_config'), "administration", "INDY");
-	echo "<br/><br/><br/>";
+	echo "<br/>";
 	
 	gros_titre(_T('opconfig:op_config'));
 	

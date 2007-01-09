@@ -1,8 +1,24 @@
 <?php
+
+/* API plugin open-publishing
+	set_config_rubrique($i) : ajoute une rubrique dans la liste des rubriques op
+	get_auteur_anonymous() : retourne l'id de l'auteur anonymous
+*/
 	
 
-	function set_config_rubrique($local,$global,$analyse) {
-		spip_query('UPDATE `spip_op_config` SET `contrib_local` = '.$local.', `contrib_global`='.$global.', `contrib_analyse` = '.$analyse. ' WHERE `id` = 0 LIMIT 1');
+	//function set_config_rubrique($local,$global,$analyse) {
+	//	spip_query('UPDATE `spip_op_config` SET `contrib_local` = '.$local.', `contrib_global`='.$global.', `contrib_analyse` = '.$analyse. ' WHERE `id` = 0 LIMIT 1');
+	//}
+
+	function set_config_rubrique($ajout_rubrique) {
+		// faire vérification pour voir si la rubrique n'existe pas déjà ...
+		// faire vérification pour voir si la rubrique existe dans spip_article ... sinon pas glop
+		spip_abstract_insert('spip_op_rubriques', "(id_rubrique,op_rubrique)", "(
+		" . intval($id_rubrique) .",
+		" . $ajout_rubrique . "
+		)");
+		
+		$retour = "ok";
 	}
 
 	function get_config_local() {
@@ -35,11 +51,17 @@
 		return $row[0];
 	}
 
+	function get_rubriques_op() {
+		$result = spip_query("SELECT `op_rubrique` FROM `spip_op_rubriques`");
+		return $result;
+	}
+
 	// Script de verification de l'existance de la base de donnee
 	function op_verifier_base() {
 		if (!op_verifier_auteurs()) return false;
 		if (!op_verifier_config()) return false;
 		if (!op_verifier_anonymous()) return false;
+		if (!op_verifier_rubriques()) return false;
 		return true;
 	}
 
@@ -90,6 +112,26 @@
 		return false;
 	}
 
+	function op_verifier_rubriques() {
+
+		$sql = "SHOW TABLES";
+		$result = mysql_query($sql);
+
+		if (!$result) {
+   		echo "Erreur DB, impossible de lister les tables\n";
+   		echo 'Erreur MySQL : ' . mysql_error();
+   		exit;
+		}
+
+		while ($row = mysql_fetch_row($result)) {
+
+			if ($row[0]=="spip_op_rubriques") return true;
+		}
+		
+		mysql_free_result($result);
+		return false;
+	}
+
 	function op_installer_base() {
 	
 		include_spip('inc/meta');
@@ -119,6 +161,17 @@
 			`contrib_local` INT NULL,
 			`contrib_global` INT NULL,
 			`contrib_analyse` INT NULL
+			);
+			";
+			spip_query($req);
+		}
+
+		if (!op_verifier_rubriques()) {
+			$req = "
+			CREATE TABLE `spip_op_rubriques` (
+			`id_rubrique` bigint(21) NOT NULL auto_increment,
+			`op_rubrique` bigint(21) DEFAULT '0' NOT NULL,
+			PRIMARY KEY (`id_rubrique`)
 			);
 			";
 			spip_query($req);
@@ -153,6 +206,8 @@
 		$req = "DROP table `spip_op_auteurs`";
 		spip_query($req);
 		$req = "DROP table `spip_op_config`";
+		spip_query($req);
+		$req = "DROP table `spip_op_rubriques`";
 		spip_query($req);
 	}
  
