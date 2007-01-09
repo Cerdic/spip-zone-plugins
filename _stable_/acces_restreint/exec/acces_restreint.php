@@ -5,15 +5,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/acces_restreint_base');
 include_spip('inc/acces_restreint');
 include_spip('inc/acces_restreint_gestion');
+include_spip('inc/presentation');
 
 function exec_acces_restreint(){
 	global $connect_statut;
 	global $connect_toutes_rubriques;
 	global $couleur_claire;
 	global $spip_lang_right;
-  	include_spip('inc/presentation');
-	include_spip('base/create');
-	creer_base(); // au cas ou
+	if ($GLOBALS['spip_version_code']<1.9204){
+		include_spip('base/create');
+		creer_base(); // au cas ou
+	}
 	  
 	debut_page(_T('accesrestreint:page_zones_acces'));
 	

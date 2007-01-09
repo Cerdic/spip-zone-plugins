@@ -2,6 +2,7 @@
 	<nom> <!-- Nom du plugin -->
 	<multi>[fr]Acces Restreint[es]Acceso restringido</multi>
 	</nom>
+	<icon>img_pack/zones-acces-48.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
  	cedric.morin@yterium.com
 	<multi>
@@ -42,6 +43,7 @@ _ Todos los bucles nativos de SPIP quedan modificados para filtrar los resultado
 	<prefix> 
 	AccesRestreint
 	</prefix>
+	<install>inc/acces_restreint_install.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_boutons</nom>
