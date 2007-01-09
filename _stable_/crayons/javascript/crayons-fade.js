@@ -60,16 +60,16 @@ jQuery(document).ready(function() {
 		
 		jQuery('.crayon-autorise').each(
 			function(){
-				var contenu = $(this).html();
-				$(this)
+				var contenu = jQuery(this).html();
+				jQuery(this)
 					.height(this.offsetHeight + 'px')
 					.html('<div></div>');
-				$(this)
+				jQuery(this)
 					.find('div')
 						.html(contenu)
 						.position('absolute')
 						.width(this.offsetWidth + 'px')
-				$(this)
+				jQuery(this)
 					.prepend('<div class="survol"></div>')
 					.find('.survol')
 						.css('border','1px solid red')
@@ -78,7 +78,7 @@ jQuery(document).ready(function() {
 						.height((this.offsetHeight - 2) + 'px')
 						.width((this.offsetWidth - 2) + 'px');
 				if (jQuery.browser.msie) {
-			    $('#survol')
+			    jQuery('#survol')
 						.width(this.offsetWidth + 'px')
 						.height(this.offsetHeight + 'px');
 				}
@@ -88,11 +88,11 @@ jQuery(document).ready(function() {
 		jQuery('.crayon-autorise').hover(
 			function(){
 				if (jQuery.browser.msie) jQuery(this).addClass('crayon-hover');
-				$('.survol', this).css('display','block');
+				jQuery('.survol', this).css('display','block');
 			},
 			function(){
 				if (jQuery.browser.msie) jQuery(this).removeClass('crayon-hover');
-				$('.survol', this).css('display','none');
+				jQuery('.survol', this).css('display','none');
 			}
 		);
 		
