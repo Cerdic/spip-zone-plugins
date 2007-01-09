@@ -27,6 +27,15 @@ function boucle_ARTICLES($id_boucle, &$boucles) {
 		// et le filtrage d'acces filtre !
 		$boucle->where[] = '$acces_where';
 	}
+	/*
+	$marchive = $id_table .'.archive';
+	if (!$boucle->modificateur['criteres']['archive']) {
+		if (!$GLOBALS['var_preview']) {
+			$boucle->where[]= array("'='", "'$marchive'", "'\"non\"'");
+			//$boucle->where[]= array("'>'", "'$id_table" . ".date_archive'", "'NOW()'");
+			$boucle->where[]= array("'($id_table.date_archive > NOW() OR $id_table.date_archive=0)'");
+	}
+	*/
 
 	return boucle_ARTICLES_dist($id_boucle, $boucles);
 }
