@@ -17,7 +17,14 @@ function AccesRestreint_upgrade(){
 		creer_base();
 		ecrire_meta($meta_base,$current_version=$version_base,'non');
 	}
-		var_dump($current_version);
+	ecrire_metas();
+}
+
+function AccesRestreint_vider_tables() {
+	spip_query("DROP TABLE spip_zones");
+	spip_query("DROP TABLE spip_zones_auteurs");
+	spip_query("DROP TABLE spip_zones_rubriques");
+	effacer_meta('accesrestreint_base_version');
 	ecrire_metas();
 }
 
