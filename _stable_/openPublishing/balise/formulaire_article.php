@@ -66,8 +66,8 @@ function balise_FORMULAIRE_ARTICLE_dyn($id_machin) {
 
 global $_FILES, $_HTTP_POST_FILES; // ces variables sont indispensables pour récuperer les documents joints
 
-// ATTENTION ! il vous faudra trés certainement modifier ces variables pour adapter ce plugin à votre site
-$rubrique_breve = 2; // mettez le numero de votre rubrique Agenda contenant les brèves
+// récupération de la rubrique agenda
+$rubrique_breve = $GLOBALS['op_agenda'];
 
 // securite (additif spip_indy, peut-être toujour utile)
 $article = (int) $article;
@@ -317,7 +317,7 @@ if($valider) {
    	// cette fonction serait peut-être plus douce ...
 	// $url_site = vider_url($url_site); # pas de http://
 
-	$url_retour = $url_site . '/spip.php?page=indy-attente&var_mode=calcul';
+	$url_retour = $url_site . $GLOBALS['op_renvoie'];
 	$message = '<META HTTP-EQUIV="refresh" content="10; url='.$url_retour.'">';
 	$message = $message . "<center><b>Veuillez patientez ...</b><br />Votre contribution est enregistr&eacute;e. Elle va apparaitre dans la zone -En attente-.<br /> Lorsque qu'un mod&eacute;rateur l'aura valid&eacute;e, elle apparaitra dans la rubrique que vous avez choisis (locale, non-locale, ou analyse).";
 	$message = $message . '<br />La page -en attente- sera recharg&eacute;e dans 10 secondes.</center>';
