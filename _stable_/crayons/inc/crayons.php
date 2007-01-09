@@ -38,7 +38,7 @@ function colonne_table($table, $col)
 	$sta = 0;
 	$sep = '';
 	$ret = array('brut' => $brut,
-		'type' => '', 'obli' => false, 'long' => 0, 'def' => '');
+		'type' => '', 'notnull' => false, 'long' => 0, 'def' => '');
 	foreach ($ana as $mot) {
 		switch ($sta) {
 			case 0:	$ret['type'] = ($mot = strtolower($mot));
@@ -66,7 +66,7 @@ function colonne_table($table, $col)
 					continue;
 				}
 				continue;
-			case 3: 	$ret['obli'] = strtolower($mot) == 'null';
+			case 3: 	$ret['notnull'] = strtolower($mot) == 'null';
 				$sta = 2;
 				continue;
 			case 4:	$df1 = strpos('"\'', $mot[0]) !== false? $mot[0] : '';
