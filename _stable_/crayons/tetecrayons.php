@@ -89,19 +89,9 @@ function Crayons_preparer_page($page, $droits, $wdgcfg = array()) {
 	if ($pos_head === false)
 		return $page;
 
-	// on inclut jquery s'il n'y est pas deja (s'il y est et qu'on ne l'a pas
-	// repere, ce n'est pas grave...)
-	if (!preg_match(',<script[^<>]*jquery,i', substr($page,0,$pos_head)))
-		$inclure_jquery = '<script src="'
-		. generer_url_public('jquery.js')
-		. '" type="text/javascript"></script>';
-	else
-		$inclure_jquery = '';
-
     $incHead = <<<EOH
 
 <link rel="stylesheet" href="{$cssFile}" type="text/css" media="all" />
-{$inclure_jquery}
 <script src="{$jsFile}" type="text/javascript"></script>
 <script type="text/javascript">
     var configCrayons = new cfgCrayons({$config});
