@@ -9,6 +9,6 @@
 [(#CHEMIN{javascript/jquery-1.0.4.js}|spip_file_get_contents|replace{jQuery,cQuery}|replace{'var \$ = cQuery','// dont set dollar'})]
 [(#CHEMIN{javascript/form.js}|spip_file_get_contents|replace{jQuery,cQuery})]
 [(#CHEMIN{javascript/crayons.js}|spip_file_get_contents|replace{jQuery,cQuery})]
-[(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";}|?{'',' '})
+[(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";}|?{' ',''})
 [(#CHEMIN{javascript/crayons-fade.js}|spip_file_get_contents|replace{jQuery,cQuery})]
 ]
