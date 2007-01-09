@@ -24,8 +24,8 @@ function spip_loader_liste() {
 	foreach ($config as $l) {
 		$l = trim($l);
 		if ($l AND substr($l,0,1) != "#") {
-			list($paquet,$url) = explode(' ', $l);
-			$spip_loader_liste[$paquet] = $url;				
+			list($paquet,$url, $dest) = explode(' ', $l);
+			$spip_loader_liste[$paquet] = array($url, $dest);
 		}
 	}
 	return $spip_loader_liste;

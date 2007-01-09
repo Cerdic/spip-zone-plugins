@@ -120,10 +120,10 @@ function exec_spip_loader_update() {
 		<input type='hidden' name='action' value='spip_loader' />
 		<select name='paquet'>
 		<option value=''>&nbsp;</option>";
-		foreach ($spip_loader_liste as $paquet => $url) {
+		foreach ($spip_loader_liste as $paquet => $url_dest) {
 			$selected = $paquet==$le_paquet?' selected="selected"':'';
 			echo "<option value='$paquet'$selected>".$paquet
-				." depuis ".$url."</option>\n";
+				." depuis ".$url_dest[0].($url_dest[1]?' dans '.$url_dest[1]:'')."</option>\n";
 		}
 		echo "</select>
 		<input type='submit' value='Update' ".($test_local_script?'':'disabled="disabled"')."/>

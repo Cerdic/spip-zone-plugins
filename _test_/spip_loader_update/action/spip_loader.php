@@ -14,7 +14,11 @@ function action_spip_loader() {
 	);
 	define(
 		'_URL_PAQUET_ZIP',
-		$spip_loader_liste[_request('paquet')]
+		$spip_loader_liste[_request('paquet')][0]
+	);
+	define(
+		'_DEST_PAQUET_ZIP',
+		$spip_loader_liste[_request('paquet')][1]
 	);
 	define(
 		'_SPIP_LOADER_URL_RETOUR',
