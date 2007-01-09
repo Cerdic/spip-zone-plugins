@@ -1,6 +1,20 @@
 /*
- *  crayons.js (c) Fil, toggg 2006 -- licence GPL
+ *  crayons.js (c) Fil, toggg 2006-2007 -- licence GPL
  */
+
+
+/* compat 1.0.4 tant que 1.1 est instable */
+jQuery.fn.extend({
+	one: function( type, data, fn ) {
+		return this.each(function(){
+			jQuery.event.add( this, type, function(event) {
+				jQuery(this).unbind(event);
+				return (fn || data).apply( this, arguments);
+			}, data);
+		});
+	}
+});
+
 
 // le prototype configuration de Crayons
 function cfgCrayons(options)
@@ -82,8 +96,8 @@ jQuery.fn.opencrayon = function(evt) {
       var me=this;
       jQuery.getJSON(configCrayons.url_crayons_html,
         {
-          'w': jQuery(this).width(),
-          'h': jQuery(this).height(),
+          'w': parseInt(jQuery(this).css('width')),
+          'h': parseInt(jQuery(this).css('height')),
           'wh': window.innerHeight,
           'em': jQuery(this).css('fontSize'),
           'class': me.className
@@ -169,7 +183,7 @@ jQuery.fn.activatecrayon = function() {
           .iconecrayon();
         jQuery(me)
           .cancelcrayon();
-      }}).onesubmit(function(){
+      }}).one('submit', function(){
         jQuery(this)
         .append(configCrayons.mkimg('searching')) // icone d'attente
         .find(".crayon-boutons")
@@ -214,7 +228,7 @@ jQuery.fn.activatecrayon = function() {
         .click(function(e){
           e.stopPropagation();
           jQuery(this)
-          .ancestors("form").eq(0)
+          .parents("form").eq(0)
           .submit();
         })
       .end()
@@ -227,7 +241,7 @@ jQuery.fn.activatecrayon = function() {
       .end()
       .each(function(){
         // rendre les boutons visibles (cf. plugin jquery/dimensions.js)
-        var buttonpos = (this.offsetTop || 0) + jQuery(this).height();
+        var buttonpos = (this.offsetTop || 0) + parseInt(jQuery(this).css('height'));
         var scrolltop = window.pageYOffset ||
           jQuery.boxModel && document.documentElement.scrollTop  ||
           document.body.scrollTop || 0;
@@ -249,7 +263,7 @@ jQuery.fn.iconecrayon = function(){
     jQuery(this).prepend(configCrayons.iconclick(this.className))
     .find('.crayon-crayon, .crayon-img-changed') // le crayon a clicker lui-meme et sa memoire
       .click(function(e){
-        jQuery(this).ancestors('.crayon').eq(0).opencrayon(e);
+        jQuery(this).parents('.crayon').eq(0).opencrayon(e);
       });
     });
 }
@@ -280,14 +294,6 @@ jQuery.fn.initcrayon = function(){
 // demarrage
 jQuery(document).ready(function() {
   if (!configCrayons.droits) return;
-  if (!jQuery.getJSON) {
-    alert("version jquery < 1.0.2, Crayon ne peut pas fonctionner");
-    return;
-  }
-  if (!jQuery.fn.ajaxForm) {
-    alert("jQuery plugin form.js absent, Crayon ne peut pas fonctionner");
-    return;
-  }
 
   // sortie, demander pour sauvegarde si oubli
   if (configCrayons.txt.sauvegarder) {
