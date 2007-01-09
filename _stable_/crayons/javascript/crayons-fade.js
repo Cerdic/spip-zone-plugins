@@ -62,25 +62,25 @@ jQuery(document).ready(function() {
 			function(){
 				var contenu = jQuery(this).html();
 				jQuery(this)
-					.height(this.offsetHeight + 'px')
+					.css('height',this.offsetHeight + 'px')
 					.html('<div></div>');
 				jQuery(this)
 					.find('div')
 						.html(contenu)
-						.position('absolute')
-						.width(this.offsetWidth + 'px')
+						.css('position','absolute')
+						.css('width',this.offsetWidth + 'px')
 				jQuery(this)
 					.prepend('<div class="survol"></div>')
 					.find('.survol')
 						.css('border','1px solid red')
 						.css('display','none')
-						.position('absolute')
-						.height((this.offsetHeight - 2) + 'px')
-						.width((this.offsetWidth - 2) + 'px');
+						.css('position','absolute')
+						.css('height',(this.offsetHeight - 2) + 'px')
+						.css('width',(this.offsetWidth - 2) + 'px');
 				if (jQuery.browser.msie) {
 			    jQuery('#survol')
-						.width(this.offsetWidth + 'px')
-						.height(this.offsetHeight + 'px');
+						.css('width',this.offsetWidth + 'px')
+						.css('height',this.offsetHeight + 'px');
 				}
 			}
 		);
