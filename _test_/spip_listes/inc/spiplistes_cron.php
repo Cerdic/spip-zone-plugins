@@ -90,9 +90,9 @@ while($row = spip_fetch_array($list_bg)) {
 
 		// ne pas envoyer des textes de moins de 10 caractères
 			
-			$tampon = preg_replace("/(\r\n|\n|\r| )+/", "", version_texte($texte_patron_bg));
+			$tampon_sp = preg_replace("/(\r\n|\n|\r| )+/", "", $texte_patron_bg);
 
-			if ( (strlen($tampon) > 10) ) {
+			if ( (strlen($tampon_sp) > 10) ) {
 				$texte_patron_bg = "__bLg__".$id_article_bg."__bLg__ ".$texte_patron_bg;
 				$texte_patron_bg = addslashes($texte_patron_bg);
 				//echo "->$texte_patron_bg" ; 
@@ -114,7 +114,7 @@ while($row = spip_fetch_array($list_bg)) {
 				$statut_bg = 'publie';
 
 				$query = "INSERT INTO spip_messages (titre, texte, date_heure, statut, type, id_auteur) 
-				VALUES ('Pas d\'envoi', 'aucune nouveauté, le mail automatique n a pas été envoyé' , NOW(), '$statut', '$type', 1 )";
+				VALUES ('Pas d\'envoi', 'aucune nouveaut&eacute;, le mail automatique n a pas &eacute;t&eacute; envoy&eacute;' , NOW(), '$statut_bg', '$type_bg', 1 )";
 				$result = spip_query($query);
 				$id_message_bg = spip_insert_id();
 				spip_query("INSERT INTO spip_auteurs_messages (id_auteur,id_message,vu) VALUES ('1','$id_message_bg','oui')");
