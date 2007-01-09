@@ -70,7 +70,7 @@ function spiplistes_taches_generales_cron($taches_generales){
 	return $taches_generales;
 }
 
-$GLOBALS['spiplistes_version'] = "SPIP-listes 1.9b2";
+$GLOBALS['spiplistes_version'] = "SPIP-listes 1.9b2.1";
 
 include_spip('inc/options_spip_listes');
 ?>
