@@ -6,18 +6,9 @@
 #CACHE{7*24*3600,cache-client}
 #HTTP_HEADER{'Content-Type: text/javascript'}
 
-[(#CHEMIN{javascript/crayons.js}|spip_file_get_contents)]
+[(#CHEMIN{javascript/jquery-1.0.4.js}|spip_file_get_contents|replace{jQuery,cQuery}|replace{'var \$ = cQuery','// dont set dollar'})]
+[(#CHEMIN{javascript/form.js}|spip_file_get_contents|replace{jQuery,cQuery})]
+[(#CHEMIN{javascript/crayons.js}|spip_file_get_contents|replace{jQuery,cQuery})]
 [(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";}|?{'',' '})
-[(#CHEMIN{javascript/crayons-fade.js}|spip_file_get_contents)]
+[(#CHEMIN{javascript/crayons-fade.js}|spip_file_get_contents|replace{jQuery,cQuery})]
 ]
-
-/*
-[(#REM|sinon{', '}|implode{#CONFIG{crayons}|unserialize|array_keys})]
-config:
-[(#CONFIG{crayons}|match{s:11:"msgNoChange";s:2:"on";})]
-[(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";})]
-je prefere avec cfg:
-msgNoChange: [(#CONFIG{crayons/msgNoChange,no})]
-yellow_fade: [(#CONFIG{crayons/yellow_fade,no})]
-voila :)
-*/
