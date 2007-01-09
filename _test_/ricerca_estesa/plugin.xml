@@ -1,0 +1,26 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Ricerca estesa
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	[Renato Formato->renatoformato@virgilio.it] 
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Plugin che permette di fare ricerche in AND, OR e per esclusione di parole
+_ Usare il criterio <code>{recherche_ext}</code>.
+_ Le parole da cercare in AND vanno precedute da un + mentre quelle da escludere da un -
+_ Potete provare un esempio di pagina di ricerca scrivendo spip.php?page=demo_recherche
+	</description>
+	<prefix>
+	ricerca_estesa
+	</prefix>
+	<fonctions>
+	ricerca_estesa.php
+	</fonctions>
+</plugin>
