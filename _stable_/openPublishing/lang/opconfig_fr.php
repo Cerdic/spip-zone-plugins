@@ -6,6 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'ajouter_agenda' => 'Ajouter dans l\'agenda',
+'abandonner' => 'Abandonner',
 
 // D
 'document_joint' => 'Joindre un document',
@@ -59,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'publie_titre' => 'Titre :',
 	'publie_rubrique' => 'Rubrique',
 	'previsualisation' => 'Pr&eacute;visualisation',
+	'previsualiser' => 'Pr&eacute;visualiser',
 
 // R
 	'redigez_article' => 'R&eacute;digez votre article',

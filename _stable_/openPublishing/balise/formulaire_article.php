@@ -106,6 +106,18 @@ $previsualiser= _request('previsualiser');
 $valider= _request('valider');
 $media=_request('media');
 $agenda=_request('agenda');
+$abandonner=_request('abandonner');
+
+// on quitte et renvoie vers le sommaire
+if ($abandonner) {
+
+	$url_retour = $url_site . '/spip.php?page=sommaire' ;
+	$message = '<META HTTP-EQUIV="refresh" content="10; url='.$url_retour.'">';
+	$message = $message . "<center><b>Veuillez patientez ...</b><br />Dans quelques secondes vous serez redirig&eacute; vers la page sommaire du site.</center>";
+	$message = $message . $retour;
+	return $message;
+
+}
 
 // recuperation url du site
 $url_site = _request('url_site');
@@ -206,6 +218,9 @@ if($valider) {
 	// Anti spam (remplace les @ par un texte aléatoire)
 	$texte = antispam($texte);
 	$mail_inscription = antispam($mail_inscription);
+
+	// pas de majuscule dans le titre d'un article
+ 	$titre = strtolower($titre);
 
 	/* fonctions  anti robots inspiré par les forums
 	 * a adapter pour l'openpublishing

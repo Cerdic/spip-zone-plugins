@@ -13,7 +13,7 @@
 
 	<center>
 
-	<div id="block-op-footer"><b><:opconfig:redigez_article:></b></div>
+	<div id="block-op-bande"><b><:opconfig:redigez_article:></b></div>
 	
 	<br />
 
@@ -62,18 +62,18 @@
 
 	</tr>
 	</table>
+	<br />
 
-	<div id="block-op-footer">
-		<div id="op-barre">
-			&nbsp;&nbsp;<label><b><:opconfig:publie_rubrique:></b></label>
-			<select name="rubrique" value="[(#ENV**{rubrique})]">
-				<BOUCLE_rubrique(RUBRIQUES){id_rubrique IN #CONTRIBUTIONS_LOCALES,#CONTRIBUTIONS_NON_LOCALES,#CONTRIBUTIONS_ANALYSES}{tout}>
-					[(#ENV**{rubrique}|selected_option{#ID_RUBRIQUE,#TITRE})]
-				</BOUCLE_rubrique>
-			</select>
-			<input type='submit' name='valider' class='spip_bouton' value="#ENV*{bouton}" />
-			<input type="submit" name="previsualiser" class="spip_bouton" value="<:previsualiser:>" />
-		</div>
+	<div id="block-op-bande">
+		&nbsp;&nbsp;<label><b><:opconfig:publie_rubrique:></b></label>
+		<select name="rubrique" value="[(#ENV**{rubrique})]">
+			<BOUCLE_rubrique(RUBRIQUES){id_rubrique IN #CONTRIBUTIONS_LOCALES,#CONTRIBUTIONS_NON_LOCALES,#CONTRIBUTIONS_ANALYSES}{tout}>
+				[(#ENV**{rubrique}|selected_option{#ID_RUBRIQUE,#TITRE})]
+			</BOUCLE_rubrique>
+		</select>
+		<input type='submit' name='valider' class='spip_bouton' value="#ENV*{bouton}" />
+		<input type="submit" name="previsualiser" class="spip_bouton" value="<:opconfig:previsualiser:>" />
+		<input type="submit" name="abandonner" class="spip_bouton" value="<:opconfig:abandonner:>" />
 	</div>
 	</div>
 
