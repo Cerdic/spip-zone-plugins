@@ -37,7 +37,7 @@ function action_mes_fichiers() {
 	if ($erreur == 0) {
 		die("Erreur : ".$mes_fichiers->errorInfo(true));
 	}
-	@header('Location: ecrire/');
+	@header('Location: ecrire/?exec=admin_tech&mes_fichier=sauve_ok');
 }
 
 ?>
