@@ -35,6 +35,19 @@ function tweak_spip_header_prive($flux){
 	$flux .= tweak_insert_css();
 	return tweak_pipeline('header_prive', $flux);
 }
+function tweak_spip_install($action){
+	include_spip('inc/meta');
+	switch ($action){
+		case 'test':
+			break;
+		case 'install':
+			break;
+		case 'uninstall':
+			effacer_meta('tweaks');
+			ecrire_metas();
+			break;
+	}
+}	
 
 
 ?>

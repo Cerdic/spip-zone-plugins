@@ -1,14 +1,11 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Tweak SPIP
-	</nom>
+	<nom>Tweak SPIP</nom>
+	<icon>img/tweak-24.gif</icon>
+	<version>0.1</version>
 	<auteur>	<!-- Auteur du plugin -->
  	Patrice Vanneufville
 _ &copy; 2006 - Distribu&#233; sous licence GPL
 	</auteur>
-	<version> <!-- Version du plugin -->
-	0.1
-	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	test
 	</etat>
@@ -28,13 +25,9 @@ _ Une activation des tweaks est n&#233;cessaire sur la page d'administration du 
 		C'est par ailleurs conseille pour les noms de fichier
 		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
 		-->
-	<prefix> 
-	tweak_spip
-	</prefix>
+	<prefix>tweak_spip</prefix>
+	<install>base/tweak_spip_upgrade.php</install>	
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
-	<!-- Le parametre action est facultatif : en son absence la fonction appelee sera le prefixe suivi du nom du pipeline
-	ex : tweak_spip_affichage_final()
-	Le parametre inclure est egalement facultatif, si la fonction est deja chargee en memoire (car presente dans le fichier options par exemple)	-->
 	<pipeline>
 		<!-- pipeline qui permet de modifier les pages publiques html issues du cache ou du calcul avant leur envoi au navigateur 
 		il permet de modifier n'importe quoi, mais est execute a chaque fois et ne profite pas du cache
