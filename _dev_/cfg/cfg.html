@@ -13,6 +13,9 @@
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}{lang}>
 <a href="ecrire/?exec=cfg&cfg=testsimple" class="spip_in">changer test simple</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="?page=cfg&var_mode=recalcul&test=testsimple/testid" class="spip_in">avec param GET :( </a>
+
 	<div id="conteneur">
 
 		[(#REM) Contenu principal: test de cfg ]
@@ -32,6 +35,12 @@
 
 	<dt>&#035;CONFIG{testsimple/testid}</dt>
 	<dd>#CONFIG{testsimple/testid}</dd>
+
+	<dt>&#035;CONFIG{[(&#035;ENV{test})]} avec &#035;ENV{test}=#ENV{test}</dt>
+	<dd>#CONFIG{[(#ENV{test})]}</dd>
+
+	<dt>&#035;CONFIG{[(&#035;ENV{test,testsimple/testid})]}</dt>
+	<dd>#CONFIG{[(#ENV{test,testsimple/testid})]}</dd>
 
 	<dt>&#035;CONFIG{testsimple/dudu/user}</dt>
 	<dd>[(#CONFIG{testsimple/dudu/user})]</dd>
