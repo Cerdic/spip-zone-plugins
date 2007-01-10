@@ -68,7 +68,7 @@
 		&nbsp;&nbsp;<label><b><:opconfig:publie_rubrique:></b></label>
 		<select name="rubrique" value="[(#ENV**{rubrique})]">
 			<BOUCLE_rubrique_op(op_rubriques)>
-			<BOUCLE_rubrique(RUBRIQUES){id_rubrique = #OP_RUBRIQUE}>
+			<BOUCLE_rubrique(RUBRIQUES){id_rubrique = #OP_RUBRIQUE}{tout}>
 				[(#ENV**{rubrique}|selected_option{#ID_RUBRIQUE,#TITRE})]
 			</BOUCLE_rubrique>
 			</BOUCLE_rubrique_op>

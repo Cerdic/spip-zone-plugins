@@ -1,33 +1,44 @@
 <plugin>
-	<nom>Open-Publishing</nom>
-	<version>0.1</version>
-	<etat>test</etat>
+	<nom>OpenPublishing</nom>
+	<version>0.2</version>
+	<etat>stable</etat>
 	<auteur>Collectif Indymedia Lille [contact->mailto:imc.lille@no-log.org] _ [site->http://lille.indymedia.org]
 	_ &copy; 2006-2007 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<description>
-		{{moteur d'open-publishing pour un site indym&#233;dia.}} <br /> <br />
+		{{moteur OpenPublishing pour site de publication libre.}} <br /> <br />
 		{{Ce plugin fourni :}} <br />
-		- un formulaire open-publishing <br />
-		- deux nouvelles tables dans la base de donn&#233;es (spip_op_auteurs spip_op_config) <br />
-		- plusieurs nouvelles balises : <br />
-		   - #FORMUMLAIRE_ARTICLE (affiche le formulaire de saisie d'un article) <br />
-		   - #CONTRIBUTIONS_LOCALES (donne le num&#233;ro de la rubrique locale <br />
-		   - #CONTRIBUTIONS_NON_LOCALES (donne le num&#233;ro de la rubrique non-locale <br />
-		   - #CONTRIBUTIONS_ANALYSES (donne le num&#233;re de la rubrique analyse <br />
-		   - (#ID_ARTICLE|getAuteurOpName) : donne le nom de l'auteur op (dans une boucle article) <br />
-		   - (#ID_ARTICLE|getAuteurOpMail) : donne le mail de l'auteur op (dans une boucle article) <br />
-		   - (#ID_ARTICLE|getAuteurOpPhone) : donne le t&#233;l&#233;phone de l'auteur op (dans une boucle article) <br />
-		   - (#ID_ARTICLE|getAuteurOpGroup) : donne le groupe de l'auteur op (dans une boucle article) <br /><br />
-		
+		<ul>
+		<li>un formulaire OpenPublishing <code>#FORMULAIRE_ARTICLE{#SELF}</code></li>
+		<li>trois nouvelles tables dans la base de donn&#233;es (spip_op_auteurs spip_op_config et spip_op_rubriques). </li>
+		<li>une nouvelle balise :
+			<ul>
+			<li> #AGENDA (donne le num&#233;ro de votre rubrique agenda).</li>
+			</ul>
+		</li>
+			
+		<li>deux nouvelles boucles :
+			<ul>
+			<li>(op_rubriques) qui liste vos rubriques openPublishing.</li>
+			<li>(op_auteur) qui liste les informations d'un auteur pour un article donn&#233;.</li>
+			</ul>
+		</li>
+		</ul>
+				
 		{{Procedure d'installation :}} <br />
-		- Activez ce plugin <br />
-		- Allez dans l'onglet de configuration open-publishing <br />
-		- Creez les nouvelles tables dans la base de donn&#233;es <br /> <br />
+		<ul>
+		<li>Activez ce plugin <br />
+		<li>Allez dans l'onglet de configuration open-publishing.</li>
+		<li>Cr&eacute;ez les nouvelles tables dans la base de donn&#233;es.</li>
+		<li>Modifiez la configuration par d&eacute;faut du plugin.</li>
+		</ul>
 		
 		{{Procedure de d&#233;-installation : }} <br />
-		- Allez dans l'onglet de configuration open-publishing <br />
-		- Supprimez la table open-publishing de la base de donn&#233;es <br />
+		<ul>
+		<li>Allez dans l'onglet de configuration open-publishing.</li>
+		<li>Supprimez la table open-publishing de la base de donn&#233;es.</li>
+		<li>D&eacute;sactivez le plugin.</li>
+		</ul>
 		
 		{{feuille de style : }} attention, il <b>faut</b> copier les styles du plugin dans <b>votre</b> feuille de style<br />
 	</description>

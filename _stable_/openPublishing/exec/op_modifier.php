@@ -38,6 +38,23 @@ function exec_op_modifier() {
         switch ($action = $_GET['action']) {
             case "config" :
 
+			$rubrique_array = get_rubriques_op();
+			if (count($rubrique_array) > 0) {
+				$i=0;
+				while ($row = mysql_fetch_array($rubrique_array)) {
+					$sup_rubrique_array[$i] = _request('sup_rubrique_'.$row[0]);
+					$value_rubrique[$i] = $row[0];
+					$i=$i+1;
+				}
+				if (count($sup_rubrique_array) > 0) {
+					$i=0;
+  					foreach ($sup_rubrique_array AS $sup_rubrique ){
+						if($sup_rubrique) op_sup_rubrique($value_rubrique[$i]);
+						$i = $i+1;
+					}
+				}
+			}
+			
 			$ajout_rubrique = stripslashes(_request('ajout_rubrique'));
 			$modif_agenda = stripslashes(_request('modif_agenda'));
 			$modif_document = stripslashes(_request('modif_document'));
@@ -134,7 +151,7 @@ function exec_op_modifier() {
 	if (op_verifier_base()) {
 		// les messages de retours de l'action demandé par l'utilisateur
 		if ($message_modif) {
-			debut_cadre_enfonce("racine-site-24.gif", false, "", "résultat ...");
+			debut_cadre_enfonce("racine-site-24.gif", false, "", "r&eacute;sultat ...");
 			echo '<b>' . $message_modif . '</b><br />';
 			fin_cadre_enfonce();
 		}
@@ -189,15 +206,18 @@ function op_cadre_auteur() {
 
 function op_cadre_renvoi() {
 	debut_cadre_enfonce("racine-site-24.gif", false, "", "Gestion des renvois");
-	echo 'texte de renvoi normal<br />';
-	echo '<textarea name="renvoi_normal" rows="5" cols="30">'.op_get_renvoi_normal().'</textarea>';
-	echo '<input type="submit" name="modif_renvoi_normal" value="modifier ce texte" /><br />';
-	echo 'texte de renvoi lors d\'un abandon<br />';
-	echo '<textarea name="renvoi_abandon" rows="5" cols="30">'.op_get_renvoi_abandon().'</textarea>';
-	echo '<input type="submit" name="modif_renvoi_abandon" value="modifier ce texte" /><br />';
-	echo 'redirection normale<br />';
+	echo '<small>Les textes de renvois sont les petites phrases que le plugin affiche lorsqu\'une publication c\'est' .
+		'soit d&eacute;roul&eacute;e normallement, soit termin&eacute;e par un abandon (les balises HTML sont permises).</small><br />';
+	echo '<small>Les redirections permettent de diriger l\'utilisateur vers une page de votre site (de type "spip.php?page=sommaire").</small><br /><br />';
+	echo '<b>texte de renvoi normal</b><br />';
+	echo '<textarea name="renvoi_normal" rows="5" cols="50">'.op_get_renvoi_normal().'</textarea><br />';
+	echo '<input type="submit" name="modif_renvoi_normal" value="modifier ce texte" /><br /><br />';
+	echo '<b>texte de renvoi lors d\'un abandon</b><br />';
+	echo '<textarea name="renvoi_abandon" rows="5" cols="50">'.op_get_renvoi_abandon().'</textarea><br />';
+	echo '<input type="submit" name="modif_renvoi_abandon" value="modifier ce texte" /><br /><br />';
+	echo '<b>redirection normale :</b>&nbsp;';
 	echo '<input type="text" name="url_retour" size="30" value="'.op_get_url_retour().'" /><br />';
-	echo 'redirection lors d\'un abandon<br />';
+	echo '<b>redirection lors d\'un abandon :</b>&nbsp;';
 	echo '<input type="text" name="url_abandon" size="30" value="'.op_get_url_abandon().'" /><br />';
 	echo '<input type="submit" name="modif_url" value="modifier ces adresses" />';
 	fin_cadre_enfonce();
@@ -205,6 +225,7 @@ function op_cadre_renvoi() {
 
 function op_cadre_traitement() {
 	debut_cadre_enfonce("racine-site-24.gif", false, "", "Post-traitement des textes");
+	echo '<small>Ces traitements seront appliqu&eacute;s lorsque l\'utilisateur validera son texte.</small><br /><br />';
 	echo 'imposer les titres en minuscule ?&nbsp;';
 	echo '<select name="active_titre_minus">';
 	$r = op_get_titre_minus();
@@ -216,7 +237,7 @@ function op_cadre_traitement() {
 		echo '<option value="oui">oui</option>' .
 		'<option value="non" selected>non</option>';
 	}
-	echo '</select><br />';
+	echo '</select><br /><small>(les majuscules seront transform&eacute;es en minuscule)</small><br />';
 	echo 'activer l\'anti-spam ?&nbsp;';
 	echo '<select name="active_antispam">';
 	$r = op_get_antispam();
@@ -228,13 +249,15 @@ function op_cadre_traitement() {
 		echo '<option value="oui">oui</option>' .
 		'<option value="non" selected>non</option>';
 	}
-	echo '</select><br />';
+	echo '</select><br /><small>(les @ des adresses mails du texte seront transform&eacute;s.)</small><br />';
 	echo '<input type="submit" name="modif_traitement" value="appliquer les changements" />';
 	fin_cadre_enfonce();
 }
 
 function op_cadre_agenda() {
 	debut_cadre_enfonce("racine-site-24.gif", false, "", "Gestion de l'agenda");
+	echo '<small>L\'orsque l\'utilisateur coche la case "Agenda", son article est publi&eacute; sous forme de '.
+		'br&egrave; dans la rubrique indiqu&eacute;e ci-dessous.</small><br /><br />';
 	echo 'activer l\'agenda ?&nbsp;' .
 		'<select name="active_agenda">';
 	$r = op_get_agenda();

@@ -86,6 +86,14 @@ function exec_op() {
 
 function op_liste_config() {
 
-	echo "Version install&eacute;e : ".op_get_version()." <br />";
+	echo "<ul>";
+	echo "<li>Version install&eacute;e : <b>".op_get_version()."</b></li>";
+	echo "<li>Gestion d'un agenda : <b>".op_get_agenda()."</b></li>";
+	echo "<li>Gestion des documents : <b>".op_get_document()."</b></li>";
+	echo "<li>Post-traitement<ul>";
+		echo "<li>Titre en minuscule : <b>".op_get_titre_minus()."</b></li>";
+		echo "<li>Anti-spam : <b>".op_get_antispam()."</b></li>";
+		echo "</ul></li>";
+	echo "</ul>";
 }
 ?>

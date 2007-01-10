@@ -38,6 +38,14 @@
 		return $retour;
 	}
 
+	function op_sup_rubrique($id) {
+
+		$req = "
+		DELETE FROM `spip_op_rubriques` WHERE `op_rubrique` = ".$id." LIMIT 1;
+		";
+		spip_query($req);
+	}
+
 	function op_get_id_auteur() {
 		$result = spip_query("SELECT `id_auteur_op` FROM `spip_op_config` WHERE `id_config` = 1");
 		$row = mysql_fetch_row($result);
@@ -317,8 +325,6 @@
 
 	// Supression de l'utilisateur anonymous
 	function op_deluser_anonymous($id) {
-	
-		spip_query($req);
 
 		$req = "
 		DELETE FROM `spip_auteurs` WHERE `id_auteur` = ".$id." LIMIT 1;
