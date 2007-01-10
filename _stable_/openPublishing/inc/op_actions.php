@@ -2,13 +2,28 @@
 
 /* API plugin open-publishing
 	set_config_rubrique($i) : ajoute une rubrique dans la liste des rubriques op
-	get_auteur_anonymous() : retourne l'id de l'auteur anonymous
 	get_rubrique_op() : renvoi un tableau des rubriques op
 	op_get_version() : renvoi la version actuelle du plugin
 	op_get_agenda() : renvoi le flag agenda
 	op_get_rubrique_agenda() : renvoi le num rubrique de l'agenda
+	op_get_document() : renvoi le flag document
+	op_get_titre_minus() : renvoi le flag titre_minus
+	op_get_antispam() : renvoi le flag anti_spam
+	op_get_renvoi_normal() : recupere le texte
+	op_get_renvoi_abandon() : recupere le texte
+	op_get_url_retour() : etc
+	op_get_url_abandon() :
+	op_get_id_auteur();
+	op_set_id_auteur();
+	op_set_url_retour() :
+	op_set_url_abandon() :
+	op_set_renvoi_normal($texte) : maj du texte
+	op_set_renvoi_abandon($texte) : maj du texte
 	op_set_agenda($i) : maj du flag agenda
 	op_set_rubrique_agenda($i) : maj de la rubrique agenda
+	op_set_document($i) : maj du flag document
+	op_set_titre_minus($i) : maj du flag titre minus
+	op_set_antispam($i) : maj du flag anti_spam
 */
 
 	function set_config_rubrique($ajout_rubrique) {
@@ -23,8 +38,8 @@
 		return $retour;
 	}
 
-	function get_id_anonymous() {
-		$result = spip_query("SELECT `id_auteur` FROM `spip_auteurs` WHERE `id_auteur` = 999");
+	function op_get_id_auteur() {
+		$result = spip_query("SELECT `id_auteur_op` FROM `spip_op_config` WHERE `id_config` = 1");
 		$row = mysql_fetch_row($result);
 		return $row[0];
 	}
@@ -37,6 +52,48 @@
 
 	function op_get_agenda() {
 		$result = spip_query("SELECT `agenda` FROM `spip_op_config` WHERE `id_config` = 1");
+		$row = mysql_fetch_row($result);
+		return $row[0];
+	}
+
+	function op_get_document() {
+		$result = spip_query("SELECT `documents` FROM `spip_op_config` WHERE `id_config` = 1");
+		$row = mysql_fetch_row($result);
+		return $row[0];
+	}
+
+	function op_get_titre_minus() {
+		$result = spip_query("SELECT `titre_minus` FROM `spip_op_config` WHERE `id_config` = 1");
+		$row = mysql_fetch_row($result);
+		return $row[0];
+	}
+
+	function op_get_antispam() {
+		$result = spip_query("SELECT `anti_spam` FROM `spip_op_config` WHERE `id_config` = 1");
+		$row = mysql_fetch_row($result);
+		return $row[0];
+	}
+
+	function op_get_renvoi_normal() {
+		$result = spip_query("SELECT `message_retour` FROM `spip_op_config` WHERE `id_config` = 1");
+		$row = mysql_fetch_row($result);
+		return $row[0];
+	}
+
+	function op_get_renvoi_abandon() {
+		$result = spip_query("SELECT `message_retour_abandon` FROM `spip_op_config` WHERE `id_config` = 1");
+		$row = mysql_fetch_row($result);
+		return $row[0];
+	}
+
+	function op_get_url_retour() {
+		$result = spip_query("SELECT `lien_retour` FROM `spip_op_config` WHERE `id_config` = 1");
+		$row = mysql_fetch_row($result);
+		return $row[0];
+	}
+
+	function op_get_url_abandon() {
+		$result = spip_query("SELECT `lien_retour_abandon` FROM `spip_op_config` WHERE `id_config` = 1");
 		$row = mysql_fetch_row($result);
 		return $row[0];
 	}
@@ -57,8 +114,50 @@
 		return $retour;
 	}
 
+	function op_set_id_auteur($id) {
+		$retour = spip_query('UPDATE spip_op_config SET id_auteur_op = '.spip_abstract_quote($id).' WHERE id_config = 1');
+		if (op_verifier_anonymous($id)) op_deluser_anonymous($id);
+		op_user_anonymous($id);
+		return $retour;
+	}
+
+	function op_set_document($flag_doc) {
+		$retour = spip_query('UPDATE spip_op_config SET documents = '.spip_abstract_quote($flag_doc).' WHERE id_config = 1');
+		return $retour;
+	}
+
+	function op_set_titre_minus($flag) {
+		$retour = spip_query('UPDATE spip_op_config SET titre_minus = '.spip_abstract_quote($flag).' WHERE id_config = 1');
+		return $retour;
+	}
+
+	function op_set_antispam($flag) {
+		$retour = spip_query('UPDATE spip_op_config SET anti_spam = '.spip_abstract_quote($flag).' WHERE id_config = 1');
+		return $retour;
+	}
+
 	function op_set_rubrique_agenda($rub_agenda) {
 		$retour = spip_query('UPDATE spip_op_config SET rubrique_agenda = '.spip_abstract_quote($rub_agenda).' WHERE id_config = 1');
+		return $retour;
+	}
+
+	function op_set_renvoi_normal($texte) {
+		$retour = spip_query('UPDATE `spip_op_config` SET `message_retour` = "'.$texte.'" WHERE `id_config` = 1 LIMIT 1');
+		return $retour;
+	}
+
+	function op_set_renvoi_abandon($texte) {
+		$retour = spip_query('UPDATE `spip_op_config` SET `message_retour_abandon` = "'.$texte.'" WHERE `id_config` = 1 LIMIT 1');
+		return $retour;
+	}
+
+	function op_set_url_retour($texte) {
+		$retour = spip_query('UPDATE `spip_op_config` SET `lien_retour` = "'.$texte.'" WHERE `id_config` = 1 LIMIT 1');
+		return $retour;
+	}
+
+	function op_set_url_abandon($texte) {
+		$retour = spip_query('UPDATE `spip_op_config` SET `lien_retour_abandon` = "'.$texte.'" WHERE `id_config` = 1 LIMIT 1');
 		return $retour;
 	}
 
@@ -66,13 +165,13 @@
 	function op_verifier_base() {
 		if (!op_verifier_auteurs()) return false;
 		if (!op_verifier_config()) return false;
-		if (!op_verifier_anonymous()) return false;
+		//if (!op_verifier_anonymous()) return false;
 		if (!op_verifier_rubriques()) return false;
 		return true;
 	}
 
-	function op_verifier_anonymous() {
-		$result = spip_query("SELECT * FROM `spip_auteurs` WHERE `id_auteur` = 999");
+	function op_verifier_anonymous($id) {
+		$result = spip_query("SELECT * FROM `spip_auteurs` WHERE `id_auteur` = ".$id." ");
 
 		if (spip_num_rows($result) == 0) return false;
 		return true;
@@ -205,24 +304,24 @@
 		)");
 	}
 	// Création de l'utilisateur anonymous (id = 999)
-	function op_user_anonymous() {
+	function op_user_anonymous($id) {
 	
-		if (!op_verifier_anonymous()) {
+		if (!op_verifier_anonymous($id)) {
 			$req = "
 			INSERT INTO `spip_auteurs` ( `id_auteur` , `nom` , `bio` , `email` , `nom_site` , `url_site` , `login` , `pass` , `low_sec` , `statut` , `maj` , `pgp` , `htpass` , `en_ligne` , `imessage` , `messagerie` , `alea_actuel` , `alea_futur` , `prefs` , `cookie_oubli` , `source` , `lang` , `idx` , `url_propre` , `extra` )
-			VALUES (999 , 'anonymous', '', '', '', '', '', '', '', '', NOW( ) , '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', 'spip', '', '', '', '');
+			VALUES (".$id." , 'anonymous', '', '', '', '', '', '', '', '', NOW( ) , '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', 'spip', '', '', '', '');
 			";
 			spip_query($req);
 		}
 	}
 
 	// Supression de l'utilisateur anonymous
-	function op_deluser_anonymous() {
+	function op_deluser_anonymous($id) {
 	
 		spip_query($req);
 
 		$req = "
-		DELETE FROM `spip_auteurs` WHERE `id_auteur` = 999 LIMIT 1;
+		DELETE FROM `spip_auteurs` WHERE `id_auteur` = ".$id." LIMIT 1;
 		";
 		spip_query($req);
 	}

@@ -28,7 +28,7 @@ function exec_op_effacer() {
 	if (isset($_GET['action'])) {        
         switch ($action = $_GET['action']) {
             case "desinstall" :
-		op_deluser_anonymous();
+		op_deluser_anonymous(op_get_id_auteur());
                 op_desinstaller_base();
                 break;
         }

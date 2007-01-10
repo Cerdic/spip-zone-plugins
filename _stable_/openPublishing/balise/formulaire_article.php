@@ -14,6 +14,7 @@ include_spip ("inc/documents");
 include_spip ("inc/getdocument");
 include_spip('inc/barre');
 include_spip('base/abstract_sql');
+include_spip('inc/op_actions');
 
 spip_connect();
 
@@ -67,13 +68,13 @@ function balise_FORMULAIRE_ARTICLE_dyn($id_machin) {
 global $_FILES, $_HTTP_POST_FILES; // ces variables sont indispensables pour récuperer les documents joints
 
 // récupération de la rubrique agenda
-$rubrique_breve = $GLOBALS['op_agenda'];
+$rubrique_breve = op_get_rubrique_agenda();
 
 // securite (additif spip_indy, peut-être toujour utile)
 $article = (int) $article;
 
 // on recuperer l'id de l'auteur anonymous
-$connect_id_auteur =  op_request_auteur_id('anonymous');
+$connect_id_auteur =  op_get_id_auteur();
 
 // si il n'est pas dans la base => plugins openpublishing mal installé
 if(!$connect_id_auteur) {
@@ -111,9 +112,8 @@ $abandonner=_request('abandonner');
 // on quitte et renvoie vers le sommaire
 if ($abandonner) {
 
-	$url_retour = $url_site . '/spip.php?page=sommaire' ;
-	$message = '<META HTTP-EQUIV="refresh" content="10; url='.$url_retour.'">';
-	$message = $message . "<center><b>Veuillez patientez ...</b><br />Dans quelques secondes vous serez redirig&eacute; vers la page sommaire du site.</center>";
+	$url_retour = $url_site . op_get_url_abandon() ;
+	$message = '<META HTTP-EQUIV="refresh" content="10; url='.$url_retour.'">' . op_get_renvoi_abandon();
 	$message = $message . $retour;
 	return $message;
 
@@ -216,11 +216,17 @@ if($valider) {
 	 */
 
 	// Anti spam (remplace les @ par un texte aléatoire)
-	$texte = antispam($texte);
-	$mail_inscription = antispam($mail_inscription);
+	$flag = op_get_antispam();
+	if ($flag == 'oui') {
+		$texte = antispam($texte);
+		$mail_inscription = antispam($mail_inscription);
+	}
 
 	// pas de majuscule dans le titre d'un article
- 	$titre = strtolower($titre);
+	$flag = op_get_titre_minus();
+	if ($flag == 'oui') {
+ 		$titre = strtolower($titre);
+	}
 
 	/* fonctions  anti robots inspiré par les forums
 	 * a adapter pour l'openpublishing
@@ -332,12 +338,9 @@ if($valider) {
    	// cette fonction serait peut-être plus douce ...
 	// $url_site = vider_url($url_site); # pas de http://
 
-	$url_retour = $url_site . $GLOBALS['op_renvoie'];
-	$message = '<META HTTP-EQUIV="refresh" content="10; url='.$url_retour.'">';
-	$message = $message . "<center><b>Veuillez patientez ...</b><br />Votre contribution est enregistr&eacute;e. Elle va apparaitre dans la zone -En attente-.<br /> Lorsque qu'un mod&eacute;rateur l'aura valid&eacute;e, elle apparaitra dans la rubrique que vous avez choisis (locale, non-locale, ou analyse).";
-	$message = $message . '<br />La page -en attente- sera recharg&eacute;e dans 10 secondes.</center>';
+	$url_retour = $url_site . op_get_url_retour();
+	$message = '<META HTTP-EQUIV="refresh" content="10; url='.$url_retour.'">' . op_get_renvoi_normal();
 	$message = $message . $retour;
-
 	return $message;
 }
 
@@ -427,28 +430,34 @@ else
 	}
 	// cas d'un nouvel article ou re-affichage du formulaire
 
-	// Gestion de l'agenda
-	$formulaire_agenda = inclure_balise_dynamique(
-	array('formulaires/formulaire_agenda',	0,
-		array(
-			'annee' => $annee,
-			'mois' => $mois,
-			'jour' => $jour,
-			'heure' => $heure,
-			'choix_agenda' => $choix_agenda
-		)
-	), false);
+	$flag = op_get_agenda();
+	if ($flag == 'oui') {
+		// Gestion de l'agenda
+		$formulaire_agenda = inclure_balise_dynamique(
+		array('formulaires/formulaire_agenda',	0,
+			array(
+				'annee' => $annee,
+				'mois' => $mois,
+				'jour' => $jour,
+				'heure' => $heure,
+				'choix_agenda' => $choix_agenda
+			)
+		), false);
+	}
 	
-	// Gestion des documents
-	$bouton= "Ajouter un nouveau document";
-	$formulaire_documents = inclure_balise_dynamique(
-	array('formulaires/formulaire_documents',	0,
-		array(
-			'id_article' => $article,
-			'tab_ext' => get_types_documents(),
-			'bouton' => $bouton,
-		)
-	), false);
+	$flag = op_get_document();
+	if ($flag == 'oui') {
+		// Gestion des documents
+		$bouton= "Ajouter un nouveau document";
+		$formulaire_documents = inclure_balise_dynamique(
+		array('formulaires/formulaire_documents',	0,
+			array(
+				'id_article' => $article,
+				'tab_ext' => get_types_documents(),
+				'bouton' => $bouton,
+			)
+		), false);
+	}
 
 	// Liste des documents associés à l'article
 	op_liste_vignette($article);
@@ -641,17 +650,6 @@ function select_heure($heure) {
 	else $return = $return . "<option value='05:00' >05:00</option>";
 		
 	return $return . '</select>';
-}
-
-// fonction qui cherche l'i de l'auteur anonymous
-function op_request_auteur_id($name)
-{
-   $query = "SELECT id_auteur FROM spip_auteurs WHERE nom=\"$name\"";
-   $result = spip_query($query);
-   if($row = mysql_fetch_array($result)) {
-  	$id_auteur = $row['id_auteur'];
-    } else die("<H3> D&eacute;sol&eacute;, sorry, lo siento: il n'existe pas d'auteur $name</H3>");
-    return $id_auteur;
 }
 
 // fonction qui demande à la base un nouvel id_article

@@ -20,7 +20,12 @@ function exec_op_modifier() {
 	global $spip_lang_right;
 	$surligne = "";
 	$message_modif = "";
+	$modif_url = "";
 	$modif_agenda = "";
+	$modif_document = "";
+	$modif_traitement = "";
+	$modif_renvoi_normal = "";
+	$modif_renvoi_abandon = "";
   
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 		debut_page(_T('opconfig:op_config'), "administration", "INDY");
@@ -35,8 +40,20 @@ function exec_op_modifier() {
 
 			$ajout_rubrique = stripslashes(_request('ajout_rubrique'));
 			$modif_agenda = stripslashes(_request('modif_agenda'));
+			$modif_document = stripslashes(_request('modif_document'));
+			$modif_traitement = stripslashes(_request('modif_traitement'));
+			$modif_renvoi_normal = stripslashes(_request('modif_renvoi_normal'));
+			$modif_renvoi_abandon = stripslashes(_request('modif_renvoi_abandon'));
+			$modif_url = _request('modif_url');
 			$num_rubrique_ajout = stripslashes(_request('num_rubrique_ajout'));
 			$active_agenda = stripslashes(_request('active_agenda'));
+			$active_document = stripslashes(_request('active_document'));
+			$active_titre_minus = stripslashes(_request('active_titre_minus'));
+			$active_antispam = stripslashes(_request('active_antispam'));
+			$renvoi_normal = _request('renvoi_normal');
+			$renvoi_abandon = _request('renvoi_abandon');
+			$url_retour = _request('url_retour');
+			$url_abandon = _request('url_abandon');
 			$num_rubrique_agenda = stripslashes(_request('num_rubrique_agenda'));
 			if ($ajout_rubrique) {
 				$retour = set_config_rubrique($num_rubrique_ajout);
@@ -55,6 +72,23 @@ function exec_op_modifier() {
 			if($modif_agenda) {
 				op_set_agenda($active_agenda);
 				op_set_rubrique_agenda($num_rubrique_agenda);
+			}
+			if($modif_document) {
+				op_set_document($active_document);
+			}
+			if($modif_traitement) {
+				op_set_titre_minus($active_titre_minus);
+				op_set_antispam($active_antispam);
+			}
+			if($modif_renvoi_normal) {
+				op_set_renvoi_normal($renvoi_normal);
+			}
+			if($modif_renvoi_abandon) {
+				op_set_renvoi_abandon($renvoi_abandon);
+			}
+			if($modif_url) {
+				op_set_url_retour($url_retour);
+				op_set_url_abandon($url_abandon);
 			}
 			
                 break;
@@ -149,23 +183,53 @@ function op_cadre_rubrique() {
 
 function op_cadre_auteur() {
 	debut_cadre_enfonce("racine-site-24.gif", false, "", "Gestion de l'auteur anonymous");
-	echo 'num&eacute;ro id : ' . get_id_anonymous();
+	echo 'num&eacute;ro id : ' . op_get_id_auteur();
 	fin_cadre_enfonce();
 }
 
 function op_cadre_renvoi() {
 	debut_cadre_enfonce("racine-site-24.gif", false, "", "Gestion des renvois");
 	echo 'texte de renvoi normal<br />';
+	echo '<textarea name="renvoi_normal" rows="5" cols="30">'.op_get_renvoi_normal().'</textarea>';
+	echo '<input type="submit" name="modif_renvoi_normal" value="modifier ce texte" /><br />';
 	echo 'texte de renvoi lors d\'un abandon<br />';
+	echo '<textarea name="renvoi_abandon" rows="5" cols="30">'.op_get_renvoi_abandon().'</textarea>';
+	echo '<input type="submit" name="modif_renvoi_abandon" value="modifier ce texte" /><br />';
 	echo 'redirection normale<br />';
+	echo '<input type="text" name="url_retour" size="30" value="'.op_get_url_retour().'" /><br />';
 	echo 'redirection lors d\'un abandon<br />';
+	echo '<input type="text" name="url_abandon" size="30" value="'.op_get_url_abandon().'" /><br />';
+	echo '<input type="submit" name="modif_url" value="modifier ces adresses" />';
 	fin_cadre_enfonce();
 }
 
 function op_cadre_traitement() {
 	debut_cadre_enfonce("racine-site-24.gif", false, "", "Post-traitement des textes");
-	echo 'imposer les titres en minuscule<br />';
-	echo 'activer l\'anti-spam ?';
+	echo 'imposer les titres en minuscule ?&nbsp;';
+	echo '<select name="active_titre_minus">';
+	$r = op_get_titre_minus();
+	if ($r == 'oui') {
+		echo '<option value="oui" selected >oui</option>' .
+		'<option value="non">non</option>';
+	}
+	else {
+		echo '<option value="oui">oui</option>' .
+		'<option value="non" selected>non</option>';
+	}
+	echo '</select><br />';
+	echo 'activer l\'anti-spam ?&nbsp;';
+	echo '<select name="active_antispam">';
+	$r = op_get_antispam();
+	if ($r == 'oui') {
+		echo '<option value="oui" selected >oui</option>' .
+		'<option value="non">non</option>';
+	}
+	else {
+		echo '<option value="oui">oui</option>' .
+		'<option value="non" selected>non</option>';
+	}
+	echo '</select><br />';
+	echo '<input type="submit" name="modif_traitement" value="appliquer les changements" />';
 	fin_cadre_enfonce();
 }
 
@@ -191,7 +255,19 @@ function op_cadre_agenda() {
 
 function op_cadre_documents() {
 	debut_cadre_enfonce("racine-site-24.gif", false, "", "Gestions des documents");
-	echo 'autoriser l\'upload de document ?';
+	echo 'autoriser l\'upload de document ?&nbsp;';
+	echo '<select name="active_document">';
+	$r = op_get_document();
+	if ($r == 'oui') {
+		echo '<option value="oui" selected >oui</option>' .
+		'<option value="non">non</option>';
+	}
+	else {
+		echo '<option value="oui">oui</option>' .
+		'<option value="non" selected>non</option>';
+	}
+	echo '</select><br />';
+	echo '<input type="submit" name="modif_document" value="appliquer les changements" />';
 	fin_cadre_enfonce();
 }
 

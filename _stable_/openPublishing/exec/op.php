@@ -30,7 +30,7 @@ function exec_op() {
         switch ($action = $_GET['action']) {
             	case "install" :
                 	op_installer_base();
-			op_user_anonymous();
+			op_set_id_auteur(999);
                 break;
         }
     	}	
