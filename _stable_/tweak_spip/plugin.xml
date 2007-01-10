@@ -26,7 +26,7 @@ _ Une activation des tweaks est n&#233;cessaire sur la page d'administration du 
 		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
 		-->
 	<prefix>tweak_spip</prefix>
-	<install>base/tweak_spip_upgrade.php</install>	
+	<install>tweak_spip_pipelines_admin.php</install>	
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<!-- pipeline qui permet de modifier les pages publiques html issues du cache ou du calcul avant leur envoi au navigateur 
