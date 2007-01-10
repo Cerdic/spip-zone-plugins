@@ -35,7 +35,7 @@ function charts_duplique_chart(){
 function exec_charts_tous(){
   include_spip("inc/presentation");
 
-  charts_verifier_base();
+  _charts_install();
 	charts_duplique_chart();
 	
 	debut_page(_T("charts:tous_graphiques"), "documents", "charts");

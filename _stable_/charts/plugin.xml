@@ -2,6 +2,7 @@
 	<nom> <!-- Nom du plugin -->
 	Charts
 	</nom>
+	<icon>img_pack/chart-24.gif</icon>
 	<auteur>	<!-- Auteur du plugin -->
 	Cedric MORIN [notre-ville.net->http://www.notre-ville.net]
 	</auteur>
@@ -25,6 +26,7 @@ _ tutorial ici sur [maani.us->http://maani.us/xml_charts/index.php?menu=Tutorial
 	<prefix> 
 	charts
 	</prefix>
+	<install>base/charts_upgrade.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>pre_propre</nom>

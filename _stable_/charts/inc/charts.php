@@ -9,32 +9,13 @@
  */
 
 
-	function charts_install(){
-		chart_verifier_base();
-	}
-	
-	function charts_uninstall(){
-		include_spip('base/charts');
-		include_spip('base/abstract_sql');
-	}
-	
-	function charts_verifier_base(){
-		$version_base = 0.10;
-		$current_version = 0.0;
-		if (   (isset($GLOBALS['meta']['charts_base_version']) )
-				&& (($current_version = $GLOBALS['meta']['charts_base_version'])==$version_base))
-			return;
-
-		include_spip('base/charts');
-		if ($current_version==0.0){
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			creer_base();
-			ecrire_meta('charts_base_version',$current_version=$version_base);
+	function _charts_install(){
+		if ($GLOBALS['spip_version_code']<1.9204){
+			include_spip('base/charts_upgrade');
+			charts_install('install');
 		}
-		ecrire_metas();
 	}
-
+	
 	// Fonction utilitaires
 	function charts_chart_editable($id_chart = 0) {
 		global $connect_statut;

@@ -97,7 +97,7 @@ function exec_charts_edit(){
 	$supp_rejet = _request('supp_rejet');
 
 	
-  charts_verifier_base();
+  _charts_install();
 
 	if ($retour)
 		$retour = urldecode($retour);
