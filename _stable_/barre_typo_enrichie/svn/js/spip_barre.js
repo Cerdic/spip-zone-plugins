@@ -18,12 +18,12 @@ function delayFunction(callbackFunction, seconds){
 
 function toggle_preview() {
 	if ($("#article_preview").css("display") == "none") {
-		$("#text_area").height($("#text_area").height()/2+"px");
-		$("#article_preview").height($("#text_area").height()+"px")
+		$("#text_area").css("height",parseInt($("#text_area").css("height"))/2+"px");
+		$("#article_preview").css("height",$("#text_area").css("height"));
 		$("#article_preview").show();
 		MajPreview();
 	} else {
-		$("#text_area").height($("#text_area").height()*2+"px");
+		$("#text_area").css("height",parseInt($("#text_area").css("height"))*2+"px");
 		$("#article_preview").hide();
 	}
 }
