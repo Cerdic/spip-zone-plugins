@@ -332,12 +332,7 @@ if($valider) {
 		)");
 
 	} // fin du else
-	// re-calcul du site
-	include_spip('inc/invalideur');
-	purger_repertoire(_DIR_CACHE, 0);
-   	// cette fonction serait peut-être plus douce ...
-	// $url_site = vider_url($url_site); # pas de http://
-
+	
 	$url_retour = $url_site . op_get_url_retour();
 	$message = '<META HTTP-EQUIV="refresh" content="10; url='.$url_retour.'">' . op_get_renvoi_normal();
 	$message = $message . $retour;
