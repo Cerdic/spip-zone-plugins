@@ -1,13 +1,10 @@
 <?php
 /*
- * forms
- * Gestion de formulaires editables dynamiques
+ * charts
  *
- * Auteurs :
- * Antoine Pitrou
- * Cedric Morin
- * Renato
- * ??? 2005,2006 - Distribue sous licence GNU/GPL
+ * Auteur :
+ * Cedric MORIN
+ * (c) 2006 - Distribue sous licence GNU/GPL
  *
  */
 	
