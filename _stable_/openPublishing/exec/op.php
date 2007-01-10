@@ -86,6 +86,6 @@ function exec_op() {
 
 function op_liste_config() {
 
-	echo "Version install&eacute;e : 0.1 <br />";
+	echo "Version install&eacute;e : ".op_get_version()." <br />";
 }
 ?>
