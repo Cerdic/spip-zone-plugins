@@ -29,17 +29,9 @@ function exec_op() {
         
         switch ($action = $_GET['action']) {
             	case "install" :
-                op_installer_base();
-		op_user_anonymous();
+                	op_installer_base();
+			op_user_anonymous();
                 break;
-
-		case "config_rubrique" :
-			$local = stripslashes(_request('contrib_local'));
-			$global = stripslashes(_request('contrib_global'));
-			$analyse = stripslashes(_request('contrib_analyse'));
-			set_config_rubrique($local,$global,$analyse);
-		break;
-	
         }
     	}	
 	
@@ -95,23 +87,5 @@ function exec_op() {
 function op_liste_config() {
 
 	echo "Version install&eacute;e : 0.1 <br />";
-	echo "<hr />";
-	echo '<b>Auteur anonymous : </b><br />';
-	echo 'num&eacute;ro id : ';
-	echo get_id_anonymous();
-	echo '<BR /';
-	echo '<HR />';
-
-	echo '<b>Rubriques : </b><br />';
-
-	echo '<form method="post" action="'.generer_url_ecrire('op',"action=config_rubrique").'">';
-	echo 'Contributions Locales : ';
-	echo '<input  type="text" name="contrib_local" value="'.get_config_local().'"  size="3"><br>';
-	echo 'Contributions Non-locales : ';
-	echo '<input  type="text" name="contrib_global" value="'.get_config_nonlocal().'"  size="3"><br>';
-	echo 'Contributions Analyses : ';
-	echo '<input  type="text" name="contrib_analyse" value="'.get_config_analyse().'"  size="3"><br>';
-	echo '<input type="submit" name="appliq" value="appliquer les changements" />';
-	echo '</form>';
 }
 ?>

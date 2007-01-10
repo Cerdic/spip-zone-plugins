@@ -80,7 +80,7 @@ function exec_op_modifier() {
 	debut_cadre_enfonce("racine-site-24.gif", false, "", _T('opconfig:op_configuration_modifier'));
 	if (op_verifier_base()) {
         	echo _T('opconfig:op_info_base_ok') . '<br />';
-		echo "Version install&eacute;e : 0.1 <br />";
+		echo "Version install&eacute;e : ". op_get_version() . "<br />";
     	} 
 	else {
         	echo _T("opconfig:op_info_deja_ko") . '<br />';
@@ -97,10 +97,14 @@ function exec_op_modifier() {
 			fin_cadre_enfonce();
 		}
 		echo '<form method="post" action="'.generer_url_ecrire('op_modifier',"action=config").'">';
-		// le cadre config auteur
+	
 		op_cadre_auteur();
-		// le cadre config rubriques
 		op_cadre_rubrique();
+		op_cadre_renvoi();
+		op_cadre_traitement();
+		op_cadre_agenda();
+		op_cadre_documents();
+
 		echo '</form>';
 	}
 	else {
@@ -141,5 +145,33 @@ function op_cadre_auteur() {
 	fin_cadre_enfonce();
 }
 
+function op_cadre_renvoi() {
+	debut_cadre_enfonce("racine-site-24.gif", false, "", "Gestion des renvois");
+	echo 'texte de renvoi normal<br />';
+	echo 'texte de renvoi lors d\'un abandon<br />';
+	echo 'redirection normale<br />';
+	echo 'redirection lors d\'un abandon<br />';
+	fin_cadre_enfonce();
+}
+
+function op_cadre_traitement() {
+	debut_cadre_enfonce("racine-site-24.gif", false, "", "Post-traitement des textes");
+	echo 'imposer les titres en minuscule<br />';
+	echo 'activer l\'anti-spam ?';
+	fin_cadre_enfonce();
+}
+
+function op_cadre_agenda() {
+	debut_cadre_enfonce("racine-site-24.gif", false, "", "Gestion de l'agenda");
+	echo 'activer l\'agenda ?<br />';
+	echo 'rubrique de l\'agenda';
+	fin_cadre_enfonce();
+}
+
+function op_cadre_documents() {
+	debut_cadre_enfonce("racine-site-24.gif", false, "", "Gestions des documents");
+	echo 'autoriser l\'upload de document ?';
+	fin_cadre_enfonce();
+}
 
 ?> 

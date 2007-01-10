@@ -3,12 +3,9 @@
 /* API plugin open-publishing
 	set_config_rubrique($i) : ajoute une rubrique dans la liste des rubriques op
 	get_auteur_anonymous() : retourne l'id de l'auteur anonymous
+	get_rubrique_op() : renvoi un tableau des rubriques op
+	op_get_version() : renvoi la version actuelle du plugin
 */
-	
-
-	//function set_config_rubrique($local,$global,$analyse) {
-	//	spip_query('UPDATE `spip_op_config` SET `contrib_local` = '.$local.', `contrib_global`='.$global.', `contrib_analyse` = '.$analyse. ' WHERE `id` = 0 LIMIT 1');
-	//}
 
 	function set_config_rubrique($ajout_rubrique) {
 		// faire vérification pour voir si la rubrique n'existe pas déjà ...
@@ -19,34 +16,17 @@
 		)");
 		
 		$retour = "ok";
-	}
-
-	function get_config_local() {
-		$result = spip_query("SELECT `contrib_local` FROM `spip_op_config` WHERE `id` = 0 LIMIT 1");
-		$row = mysql_fetch_row($result);
-		
-		if ($row[0] == "") return 0;
-		return $row[0];
-	}
-
-	function get_config_nonlocal() {
-		$result = spip_query("SELECT `contrib_global` FROM `spip_op_config` WHERE `id` = 0 LIMIT 1");
-		$row = mysql_fetch_row($result);
-		
-		if ($row[0] == "") return 0;
-		return $row[0];
-	}
-
-	function get_config_analyse() {
-		$result = spip_query("SELECT `contrib_analyse` FROM `spip_op_config` WHERE `id` = 0 LIMIT 1");
-		$row = mysql_fetch_row($result);
-		
-		if ($row[0] == "") return 0;
-		return $row[0];
+		return $retour;
 	}
 
 	function get_id_anonymous() {
 		$result = spip_query("SELECT `id_auteur` FROM `spip_auteurs` WHERE `id_auteur` = 999");
+		$row = mysql_fetch_row($result);
+		return $row[0];
+	}
+
+	function op_get_version() {
+		$result = spip_query("SELECT `version` FROM `spip_op_config` WHERE `id_config` = 1");
 		$row = mysql_fetch_row($result);
 		return $row[0];
 	}
@@ -158,12 +138,24 @@
 		if (!op_verifier_config()) {
 			$req = "
 			CREATE TABLE `spip_op_config` (
-			`contrib_local` INT NULL,
-			`contrib_global` INT NULL,
-			`contrib_analyse` INT NULL
+			`id_config` bigint(21) NOT NULL auto_increment,
+			`agenda` ENUM('oui','non') DEFAULT 'oui' NOT NULL,
+			`documents` ENUM('oui','non') DEFAULT 'oui' NOT NULL,
+			`anti_spam` ENUM('oui','non') DEFAULT 'oui' NOT NULL,
+			`titre_minus` ENUM('oui','non') DEFAULT 'oui' NOT NULL,
+			`rubrique_agenda` bigint(21) NOT NULL,
+			`lien_retour` text NOT NULL,
+			`lien_retour_abandon` text NOT NULL,
+			`id_auteur_op` bigint(21) NOT NULL,
+			`message_retour` text NOT NULL,
+			`message_retour_abandon` text NOT NULL,
+			`version` text NOT NULL,
+			PRIMARY KEY  (`id_config`)
 			);
 			";
 			spip_query($req);
+			// dans la foulée : créer l'enregistrement par défaut
+			op_insert_first_config();
 		}
 
 		if (!op_verifier_rubriques()) {
@@ -178,6 +170,14 @@
 		}
 	}
 
+	function op_insert_first_config() {
+		include_spip('base/abstract_sql');
+
+		spip_abstract_insert('spip_op_config', "(id_config, version)", "(
+		" . intval($id_config) .",
+		'0.2'
+		)");
+	}
 	// Création de l'utilisateur anonymous (id = 999)
 	function op_user_anonymous() {
 	
