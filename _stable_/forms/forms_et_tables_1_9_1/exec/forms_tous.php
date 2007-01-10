@@ -18,7 +18,7 @@ function exec_forms_tous(){
   include_spip("inc/presentation");
 	include_spip('public/assembler');
 
-  Forms_install();
+  _Forms_install();
 	
 	debut_page(_T("forms:tous_formulaires"), "documents", "forms");
 	debut_gauche();

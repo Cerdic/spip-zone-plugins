@@ -2,6 +2,7 @@
 	<nom> <!-- Nom du plugin -->
 	<multi>[ar]&#1575;&#1604;&#1575;&#1587;&#1578;&#1605;&#1575;&#1585;&#1575;&#1578;[en]Forms[fr]Formulaires&amp;Tables[it] Forms[es] Formularios</multi> (SPIP 1.9.1+)
 	</nom>
+	<icon>img_pack/form-24.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
 		<multi>[ar]&#1575;&#1606;&#1591;&#1608;&#1575;&#1606; &#1576;&#1578;&#1585;&#1608;&#1548; &#1587;&#1610;&#1583;&#1585;&#1610;&#1603; &#1605;&#1608;&#1585;&#1575;&#1606;&#1548; &#1585;&#1610;&#1606;&#1575;&#1578;&#1608;
 		[fr]Antoine Pitrou, Cedric Morin, Renato Formato
@@ -45,6 +46,7 @@
 	<prefix> 
 	Forms
 	</prefix>
+	<install>base/forms_upgrade.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>pre_propre</nom>

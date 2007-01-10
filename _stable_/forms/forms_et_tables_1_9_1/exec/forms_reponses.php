@@ -20,7 +20,7 @@ function exec_forms_reponses(){
 	global $id_form;
 	global $supp_reponse;
 	$debut = _request('debut');
-  Forms_install();
+  _Forms_install();
 
 	$id_form = intval($id_form);
 

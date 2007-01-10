@@ -11,6 +11,7 @@
  *
  */
 	
+	$GLOBALS['forms_base_version'] = 0.25;
 	function Forms_structure2table($row,$clean=false){
 		$id_form=$row[id_form];
 		// netoyer la structure precedente en table
@@ -50,7 +51,7 @@
 	}
 
 	function Forms_upgrade(){
-		$version_base = 0.25;
+		$version_base = $GLOBALS['forms_base_version'];
 		$current_version = 0.0;
 		if (   (isset($GLOBALS['meta']['forms_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['forms_base_version'])==$version_base))
@@ -214,9 +215,36 @@
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			creer_base();
-			ecrire_meta('forms_base_version',$current_version=0.24,'non');
+			ecrire_meta('forms_base_version',$current_version=0.25,'non');
 		}
 		ecrire_metas();
 	}
 	
+	function Forms_vider_tables() {
+		spip_query("DROP TABLE spip_forms");
+		spip_query("DROP TABLE spip_forms_champs");
+		spip_query("DROP TABLE spip_forms_champs_choix");
+		spip_query("DROP TABLE spip_forms_donnees");
+		spip_query("DROP TABLE spip_forms_donnees_champs");
+		spip_query("DROP TABLE spip_forms_articles");
+		spip_query("DROP TABLE spip_forms_donnees_articles");
+		spip_query("DROP TABLE spip_forms_documents_donnees");
+		effacer_meta('forms_base_version');
+		ecrire_metas();
+	}
+	
+	function Forms_install($action){
+		global $forms_base_version;
+		switch ($action){
+			case 'test':
+				return (isset($GLOBALS['meta']['forms_base_version']) AND ($GLOBALS['meta']['forms_base_version']>=$forms_base_version));
+				break;
+			case 'install':
+				Forms_upgrade();
+				break;
+			case 'uninstall':
+				Forms_vider_tables();
+				break;
+		}
+	}	
 ?>

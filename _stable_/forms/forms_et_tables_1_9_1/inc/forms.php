@@ -14,14 +14,11 @@
 	if ($GLOBALS['spip_version_code']<1.92)
 		include_spip('inc/forms_compat_191');
 
-	function Forms_install(){
-		include_spip('base/forms_upgrade');
-		Forms_upgrade();
-	}
-	
-	function Forms_uninstall(){
-		include_spip('base/forms');
-		include_spip('base/abstract_sql');
+	function _Forms_install(){
+		if ($GLOBALS['spip_version_code']<1.9204){
+			include_spip('base/forms_upgrade');
+			Forms_upgrade();
+		}
 	}
 	
 	function Forms_structure($id_form){

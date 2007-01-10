@@ -18,7 +18,7 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
   include_spip("inc/presentation");
 	include_spip('public/assembler');
 
-  Forms_install();
+  _Forms_install();
 	
 	debut_page($titre_page, "documents", "forms");
 	debut_gauche();
@@ -57,7 +57,7 @@ function affichage_donnees_tous($type_form, $titre_page, $titre_type, $titre_ajo
   include_spip("inc/presentation");
 	include_spip('public/assembler');
 
-  Forms_install();
+  _Forms_install();
 	
 	echo debut_page($titre_page, "documents", "forms");
 	if (!$retour = _request('retour'))
@@ -99,7 +99,7 @@ function affichage_donnee_edit($type_form, $titre_page, $titre_type, $titre_ajou
   include_spip("inc/presentation");
 	include_spip('public/assembler');
 
-  Forms_install();
+  _Forms_install();
   $id_form = intval(_request('id_form'));
   $id_donnee = intval(_request('id_donnee'));
   $res = spip_query("SELECT id_form,statut FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));

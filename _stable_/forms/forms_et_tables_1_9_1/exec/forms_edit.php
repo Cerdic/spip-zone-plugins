@@ -126,7 +126,7 @@ function exec_forms_edit(){
 	$supp_rejet = _request('supp_rejet');
 	$titre = _request('titre');
 	
-	Forms_install();
+	_Forms_install();
 	if ($supp_form)
 		$id_form = $supp_form;
 
