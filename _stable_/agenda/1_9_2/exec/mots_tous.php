@@ -32,7 +32,6 @@ function exec_mots_tous_dist()
 	debut_gauche();
 
 	if (acces_mots()  AND !$conf_mot){
-		if (function_exists('Agenda_install'))	Agenda_install();
 		if (function_exists('PIMAgenda_install'))	PIMAgenda_install();
 		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
 

@@ -4,8 +4,6 @@ include_spip('inc/presentation');
 include_spip('inc/voir_agenda');
 
 function exec_agenda_evenements_dist(){
-	// s'assurer que les tables sont crees
-	Agenda_install();
 	include_spip('inc/calendar');
 	// Reserver les widgets agenda
 	WCalendar_ajoute_lies(_T('agenda:evenement_date_debut'),'_evenement_debut',_T('agenda:evenement_date_fin'),'_evenement_fin');

@@ -106,9 +106,7 @@ function Agenda_action_update_liste_mots($id_evenement,$liste_mots){
 
 function Agenda_action_formulaire_article($id_article,$id_evenement, $c=NULL){
 	include_spip('base/abstract_sql');
-	// s'assurer que les tables sont crees
-	Agenda_install();
-	// gestion des requetes de mises à jour dans la base
+	// gestion des requetes de mises a jour dans la base
 	$insert = _request('evenement_insert',$c);
 	$modif = _request('evenement_modif',$c);
 	if (($insert || $modif)){

@@ -2,6 +2,7 @@
 	<nom> <!-- Nom du plugin -->
 	Agenda pour SPIP 1.9.2
 	</nom>
+	<icon>img_pack/agenda-48.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
 	Cedric MORIN 	[notre-ville.net->http://www.notre-ville.net]
 _ patrice.vanneufville@laposte.net pour la saisie rapide
@@ -32,6 +33,7 @@ _ {{Ce plugin n&#233;cessite le plugin Widget Calendar version 0.11 ou plus}}
 	<prefix> 
 	Agenda
 	</prefix>
+	<install>base/agenda_upgrade.php</install>	
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_onglets</nom>
