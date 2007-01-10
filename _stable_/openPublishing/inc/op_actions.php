@@ -5,6 +5,10 @@
 	get_auteur_anonymous() : retourne l'id de l'auteur anonymous
 	get_rubrique_op() : renvoi un tableau des rubriques op
 	op_get_version() : renvoi la version actuelle du plugin
+	op_get_agenda() : renvoi le flag agenda
+	op_get_rubrique_agenda() : renvoi le num rubrique de l'agenda
+	op_set_agenda($i) : maj du flag agenda
+	op_set_rubrique_agenda($i) : maj de la rubrique agenda
 */
 
 	function set_config_rubrique($ajout_rubrique) {
@@ -31,9 +35,31 @@
 		return $row[0];
 	}
 
+	function op_get_agenda() {
+		$result = spip_query("SELECT `agenda` FROM `spip_op_config` WHERE `id_config` = 1");
+		$row = mysql_fetch_row($result);
+		return $row[0];
+	}
+
+	function op_get_rubrique_agenda() {
+		$result = spip_query("SELECT `rubrique_agenda` FROM `spip_op_config` WHERE `id_config` = 1");
+		$row = mysql_fetch_row($result);
+		return $row[0];
+	}
+
 	function get_rubriques_op() {
 		$result = spip_query("SELECT `op_rubrique` FROM `spip_op_rubriques`");
 		return $result;
+	}
+
+	function op_set_agenda($flag_agenda) {
+		$retour = spip_query('UPDATE spip_op_config SET agenda = '.spip_abstract_quote($flag_agenda).' WHERE id_config = 1');
+		return $retour;
+	}
+
+	function op_set_rubrique_agenda($rub_agenda) {
+		$retour = spip_query('UPDATE spip_op_config SET rubrique_agenda = '.spip_abstract_quote($rub_agenda).' WHERE id_config = 1');
+		return $retour;
 	}
 
 	// Script de verification de l'existance de la base de donnee

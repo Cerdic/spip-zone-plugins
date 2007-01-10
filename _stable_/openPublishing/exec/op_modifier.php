@@ -20,6 +20,7 @@ function exec_op_modifier() {
 	global $spip_lang_right;
 	$surligne = "";
 	$message_modif = "";
+	$modif_agenda = "";
   
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 		debut_page(_T('opconfig:op_config'), "administration", "INDY");
@@ -33,7 +34,10 @@ function exec_op_modifier() {
             case "config" :
 
 			$ajout_rubrique = stripslashes(_request('ajout_rubrique'));
+			$modif_agenda = stripslashes(_request('modif_agenda'));
 			$num_rubrique_ajout = stripslashes(_request('num_rubrique_ajout'));
+			$active_agenda = stripslashes(_request('active_agenda'));
+			$num_rubrique_agenda = stripslashes(_request('num_rubrique_agenda'));
 			if ($ajout_rubrique) {
 				$retour = set_config_rubrique($num_rubrique_ajout);
 				switch ($retour) {
@@ -47,6 +51,10 @@ function exec_op_modifier() {
 					$message_modif = 'la rubrique ' . $num_rubrique_ajout . ' n\'a pas &eacute;t&eacute; ajout&eacute;e : erreur inconue.';
 					break;
 				}
+			}
+			if($modif_agenda) {
+				op_set_agenda($active_agenda);
+				op_set_rubrique_agenda($num_rubrique_agenda);
 			}
 			
                 break;
@@ -163,8 +171,21 @@ function op_cadre_traitement() {
 
 function op_cadre_agenda() {
 	debut_cadre_enfonce("racine-site-24.gif", false, "", "Gestion de l'agenda");
-	echo 'activer l\'agenda ?<br />';
-	echo 'rubrique de l\'agenda';
+	echo 'activer l\'agenda ?&nbsp;' .
+		'<select name="active_agenda">';
+	$r = op_get_agenda();
+	if ($r == 'oui') {
+		echo '<option value="oui" selected >oui</option>' .
+		'<option value="non">non</option>';
+	}
+	else {
+		echo '<option value="oui">oui</option>' .
+		'<option value="non" selected>non</option>';
+	}
+	echo '</select><br />';
+	echo 'rubrique de l\'agenda : ';
+	echo '<input type="text" name="num_rubrique_agenda" size="3" value="'. op_get_rubrique_agenda() .'" /><br />';
+	echo '<input type="submit" name="modif_agenda" value="appliquer les changements" />';
 	fin_cadre_enfonce();
 }
 
