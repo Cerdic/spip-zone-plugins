@@ -1,0 +1,151 @@
+<?php 
+	/**
+	 * saveauto : plugin de sauvegarde automatique de la base de données de SPIP
+	 *
+	 * Auteur : cy_altern d'après une contrib de Silicium (silicium@japanim.net)
+	 *  
+	 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+	 *
+	 * v 0.3 : passage à cfg_saveauto.html
+	 *  
+	 **/
+?>	 
+
+[(#REM) descriptif=
+<h4>Exp&eacute;rimental</h4>
+Ici vous pouvez configurer le plugin saveauto.<br />
+<br /><a href="http://www.spip-contrib.net/?article1442" class="spip_out">Documentation sur contrib</a>
+
+]
+[(#REM) titre=Configuration du plugin saveauto]
+#CACHE{0}
+[(#INCLURE{fond=fonds/cfg_tete}{lang}{base_url}{hash}{arg})]
+
+
+<?php    $p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+         $pp = explode("/", end($p));
+         define('_DIR_PLUGIN_SAVEAUTO',(_DIR_PLUGINS.$pp[0]));
+
+         $page_save_conf = _DIR_PLUGIN_SAVEAUTO."/inc/saveauto_conf.php";
+
+			// trouver la version en cours à partir de plugin.xml
+				 $Tlecture_fich_plugin = file(_DIR_PLUGIN_SAVEAUTO.'/plugin.xml');
+				 $stop_prochain = 0;
+				 foreach ($Tlecture_fich_plugin as $ligne) {
+								 if ($stop_prochain == 1) {
+									  $version_script = $ligne;
+									  break;
+								 }
+								 if (substr_count($ligne, '<version>') > 0) {
+									  $stop_prochain = 1;
+								 }
+				 }
+/*
+					$prefix = 'saveauto';
+					include_spip('inc/meta');
+					lire_metas();
+					global $meta;
+					$meta_prefix = 'meta'.'_'.$prefix;
+					$$meta_prefix = unserialize($meta[$prefix]);
+//					$meta_saveauto = unserialize($meta['saveauto']);
+					foreach ($$meta_prefix as $cle => $valeur) {
+					 			  $$cle = $valeur;
+				 }
+//echo '$$cle = $'.$cle.' $valeur = '.$valeur.'<br>';
+*/
+?>
+
+[(#REM) descriptif=
+<h4><:saveauto:saveauto:plugin_saveauto:></h4>
+<:saveauto:saveauto:help_titre:>
+<br /><a href="http://www.spip-contrib.net/?article1442" class="spip_out">Documentation sur contrib</a>
+<br /><br /><strong><:saveauto:saveauto:version></strong>$version_script
+]
+[(#REM) titre=Configuration du plugin saveauto]
+#CACHE{0}
+[(#INCLURE{fond=fonds/cfg_tete}{lang}{base_url}{hash}{arg})]
+
+				<style type="text/css">
+				   fieldset { background-color: #ddd; margin-bottom: 10px;  }
+					 legend { font-weight: bold; }
+					 .help { font-size: 0.8em; }
+				</style>
+				
+				<fieldset><legend><:saveauto:nom_base:></legend>
+				   <input type="text" name="base" id="base" value="[(#ENV{base,nom_base_SPIP})]" />
+				</fieldset>
+				<fieldset><legend><:saveauto:repertoire_stockage:></legend>
+				   <input type="text" name="rep_bases" id="rep_bases" value="[(#ENV{rep_bases,ecrire/data/})]" style="width: 300px;" />
+					 <br /><span class="help"><:saveauto:help_rep:></span>
+				</fieldset>
+				<fieldset><legend><:saveauto:prefixe_sauvegardes:></legend>
+				   <input type="text" name="prefixe_save" id="prefixe_save" value="[(#ENV{prefixe_save,saveauto_})]" style="width: 200px;" />
+				   <br /><span class="help"><:saveauto:help_prefixe:></span>
+				</fieldset>
+				<fieldset><legend><:saveauto:frequence:></legend>
+				   <input type="text" name="frequence_maj" id="frequence_maj" value="[(#ENV{frequence_maj,1})]" style="width: 30px;" />
+					 <:saveauto:jours:>
+				</fieldset>
+				<fieldset><legend><:saveauto:compression_gz:></legend>
+				   <:saveauto:oui:> 
+					 <input type="radio" name="gz" id="gz_true" value="true" [(#ENV{gz|==true|?{checked="checked",''},checked="checked"})] />
+				   <input type="radio" name="gz" id="gz_false" value="false" [(#ENV{gz|!=true|?{checked="checked",''}})] /> 
+					 <:saveauto:non:>
+				   <br /><span class="help"><:saveauto:help_gz:></span>
+<?php	 // Le support de Zlib est il activé dans PHP ?
+				 if ($gz_capable = zlib_get_coding_type()) {
+				 		$flag_gz = TRUE;
+				 }				 
+         if (!$flag_gz) {  ?>
+				 		<br />
+						<span style="color:red"><strong><:saveauto:attention:></strong><:saveauto:compression_impossible:></span>
+<?php    }  ?>
+				</fieldset>
+				<fieldset><legend><:saveauto:structure_donnees:></legend>
+				   <:saveauto:structure:><:saveauto:oui:> 
+					 <input type="radio" name="structure" id="structure_true" value="true" [(#ENV{structure|==true|?{checked="checked",''},checked="checked"})] />
+    		   <input type="radio" name="structure" id="structure_false" value="false" [(#ENV{structure|!=true|?{checked="checked",''}})] /> 
+					 <:saveauto:non:>
+				   <br /><:saveauto:donnees:> <:saveauto:oui:> 
+				   <input type="radio" name="donnees" id="donnees_true" value="true" [(#ENV{donnees|==true|?{checked="checked",''},checked="checked"})] />
+    		   <input type="radio" name="donnees" id="donnees_false" value="false" [(#ENV{donnees|!=true|?{checked="checked",''},checked="checked"})] />
+				   <:saveauto:non:>
+				</fieldset>
+				<fieldset><legend><:saveauto:envoi_mail:><:saveauto:adresse:></legend>
+				   <input type="text" name="destinataire_save" id="destinataire_save" value="[(#ENV{destinataire_save})]" style="width: 200px;" />
+				   <br /><span class="help"><:saveauto:help_envoi:></span>
+<?php // mail() OK ?
+				 if ($destinataire_save != '' AND !@mail('toto@truc.net', 'test envoi mail', 'le message de test')) {  ?>
+	 			 	 <br><span style="color:red"><strong><:saveauto:attention:></strong><:saveauto:mail_absent:><:saveauto:pas_envoi:></span>
+<?php    }  ?>
+				</fieldset>
+				<fieldset><legend><:saveauto:tables_acceptes:></legend>
+				   <input type="text" name="accepter" id="accepter" value="[(#ENV{accepter})]" style="width: 300px;" />
+				   <br /><span style='font-size: 11px;'><:saveauto:help_accepter:></span>
+				</fieldset>
+				<fieldset><legend><:saveauto:donnees_ignorees:></legend>
+				   <input type="text" name="eviter" id="eviter" value="[(#ENV{eviter,_index;_temp;_cache})]" style="width: 300px;" />
+				   <br /><span class="help"><:saveauto:help_eviter:></span>
+				</fieldset>
+				<fieldset><legend><:saveauto:message_succes:></legend>
+				   <:saveauto:oui:>
+				   <input type="radio" name="ecrire_succes" id="ecrire_succes_true" value="true" [(#ENV{ecrire_succes|==true|?{checked="checked",''},checked="checked"})] />
+    		   <input type="radio" name="ecrire_succes" id="ecrire_succes_false" value="false" [(#ENV{ecrire_succes|!=true|?{checked="checked",''}})] />
+				   <:saveauto:non:>
+				   <br /><span class="help"><:saveauto:help_msg:></span>
+				</fieldset>
+				<fieldset><legend><:saveauto:obsolete_jours:></legend>
+				   <input type="text" name="jours_obso" id="jours_obso" value="[(#ENV{jours_obso,15})]" style="width: 30px;"><:saveauto:jours:>
+		 		   <br /><span class="help"><:saveauto:help_obsolete:></span>
+				</fieldset>
+				<fieldset><legend><:saveauto:acces_redac:></legend>
+				   <:saveauto:oui:> <input type="radio" name="acces_redac" id="acces_redac_true" value="true" [(#ENV{acces_redac|==true|?{checked="checked",''},checked="checked"})] />
+    		   <input type="radio" name="acces_redac" id="acces_redac_false" value="false" [(#ENV{acces_redac|!=true|?{checked="checked",''}})] />
+				   <:saveauto:non:>
+				   <br /><span class="help"><:saveauto:help_acces_redac:></span>
+				</fieldset>
+				<fieldset><legend><:saveauto:restauration:></legend>
+				   <:saveauto:help_restauration:>
+				</fieldset>
+
+[(#INCLURE{fond=fonds/cfg_pied}{lang}{hash}{arg})]
