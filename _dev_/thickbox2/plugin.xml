@@ -3,24 +3,23 @@
 	Thickbox v2
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	Thickbox (version 2) par [Cody Lindley->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all], mis en plugin par Fil.
-	Version 2 bien crade par IZO
+	Thickbox (version 2) par [Cody Lindley->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all], mis en plugin par Fil, Izo, BoOz
 	</auteur>
 	<version>
-	0.2
+	0.3
 	</version>
+	<icon>circle_animation.gif</icon>
 	<etat>
 	test
 	</etat>
 	<description>
-	ajoute un effet [thickbox->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all]
+	ajoute un effet [thickbox->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all] <br />voir surtout [thickbox->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all]
 
-Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>, ainsi que dans l'espace priv&#233;.
-_ il n&#233;cessite l'activation du plugin {{jQuery}}.
+Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>, ainsi que dans l'espace priv&eacute;.
+_ il n&eacute;cessite l'activation du plugin {{jQuery}}.
 	</description>
-	<lien></lien> <!-- URI de documentation -->
 	<prefix>
-	ThickBox2
+	ThickBox1
 	</prefix>
 	<pipeline>
 		<nom>insert_head</nom>

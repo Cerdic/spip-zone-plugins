@@ -1,6 +1,6 @@
 <?php
 
-function ThickBox2_insert_head($flux){
+function ThickBox1_insert_head($flux){
 
 // on ajoute la class thickbox aux liens de type="image/xxx"
 
@@ -18,7 +18,8 @@ $flux .=
 // and "the ajaxed element" when called because of onAjaxLoad 
 var init_f = function() {
 	if ($("a.thickbox,a[@type=\'image/jpeg\'],a[@type=\'image/png\'],a[@type=\'image/gif\']",this).addClass("thickbox").size()) {
-		TB_load = "'.url_absolue(find_in_path('loadingAnimation.gif')).'"
+		TB_chemin_animation = "'.url_absolue(find_in_path('circle_animation.gif')).'";
+		TB_chemin_close = "'.url_absolue(find_in_path('close.gif')).'";
 		TB_chemin_css = "'.url_absolue(find_in_path('thickbox.css')).'";
 		TB_init(this);
 	};
