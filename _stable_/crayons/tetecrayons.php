@@ -43,9 +43,9 @@ function Crayons_affichage_final($page) {
 
     // et les signaler dans la page
     if ($droits_accordes == count($regs)) // tous les droits
-        $page = Crayons_preparer_page($page, array('*'), $wdgcfg);
+        $page = Crayons_preparer_page($page, '*', $wdgcfg);
     else if ($droits) // seulement certains droits, preciser lesquels
-        $page = Crayons_preparer_page($page, array_keys($droits), $wdgcfg);
+        $page = Crayons_preparer_page($page, join(',',array_keys($droits)), $wdgcfg);
 
     return $page;
 }

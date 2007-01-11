@@ -96,8 +96,8 @@ jQuery.fn.opencrayon = function(evt) {
       var me=this;
       jQuery.getJSON(configCrayons.url_crayons_html,
         {
-          'w': parseInt(jQuery(this).css('width')),
-          'h': parseInt(jQuery(this).css('height')),
+          'w': jQuery(this).width(),
+          'h': jQuery(this).height(),
           'wh': window.innerHeight,
           'em': jQuery(this).css('fontSize'),
           'class': me.className
