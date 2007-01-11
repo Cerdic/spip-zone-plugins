@@ -5,10 +5,10 @@
  */
 
 //
-// #CONFIG etendue interpretant les /
+// #CONFIG etendue dynamique interpretant les /
 //
 // Par exemple #CONFIG{xxx/yyy/zzz} fait comme #CONFIG{xxx}['yyy']['zzz']
-// xxx etant un tableau serialise dans spip_meta
+// xxx etant un tableau serialise dans spip_meta comme avec exec=cfg&cfg=montruc
 // Le 2eme argument de la balise est la valeur defaut comme pour la dist
 //
 // La balise fait comme celle de la dist si pas de /
@@ -44,20 +44,4 @@ function balise_CONFIG_dyn($cfg, $sinon)
 {
 	return cfg_meta($cfg, $sinon);
 }
-/*
-function balise_CONFIG($p) {
-	$p->code = interprete_argument_balise(1,$p);
-	$args = interprete_argument_balise(2,$p);
-	if ($args != "''" && $args!==NULL)
-		$p->code .= ','.$args;
-
-	// autres filtres (???)
-//	array_shift($p->param);
-
-	$p->code = 'cfg_meta(' . $p->code .')';
-
-	#$p->interdire_scripts = true;
-	return $p;
-}
-*/
 ?>
