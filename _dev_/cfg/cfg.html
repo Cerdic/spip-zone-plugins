@@ -24,6 +24,9 @@
 
 <dl>
 
+	<dt>&#035;CONFIG</dt>
+	<dd>#CONFIG</dd>
+
 	<dt>&#035;CONFIG{cfg}</dt>
 	<dd>#CONFIG{cfg}</dd>
 
@@ -36,11 +39,11 @@
 	<dt>&#035;CONFIG{testsimple/testid}</dt>
 	<dd>#CONFIG{testsimple/testid}</dd>
 
-	<dt>&#035;CONFIG{[(&#035;ENV{test})]} avec &#035;ENV{test}=#ENV{test}</dt>
-	<dd>#CONFIG{[(#ENV{test})]}</dd>
+	<dt>&#035;CONFIG{&#035;ENV{test}} avec &#035;ENV{test}=#ENV{test}</dt>
+	<dd>#CONFIG{#ENV{test}}</dd>
 
-	<dt>&#035;CONFIG{[(&#035;ENV{test,testsimple/testid})]}</dt>
-	<dd>#CONFIG{[(#ENV{test,testsimple/testid})]}</dd>
+	<dt>&#035;CONFIG{&#035;ENV{testx,testsimple/testid}}</dt>
+	<dd>#CONFIG{#ENV{testx,testsimple/testid}}</dd>
 
 	<dt>&#035;CONFIG{testsimple/dudu/user}</dt>
 	<dd>[(#CONFIG{testsimple/dudu/user})]</dd>
@@ -59,8 +62,29 @@
 
 	<dt>[(&#035;REM|sinon{', '}|implode{&#035;CONFIG|unserialize|array_keys})]</dt>
 	<dd>[(#REM|sinon{', '}|implode{#CONFIG|unserialize|array_keys})]</dd>
-</dl>
+	
+	<dt>var_dump(lire_cfg('testsimple/testidnum'))</dt>
+	<dd><?php echo var_dump(lire_cfg('testsimple/testidnum')); ?></dd>
+	
+	<dt>var_dump(lire_cfg('testsimple'))</dt>
+	<dd><?php echo var_dump(lire_cfg('testsimple')); ?></dd>
+	
+	<dt>var_dump(lire_cfg('testsimple/testidnux', 'blah'))</dt>
+	<dd><?php echo var_dump(lire_cfg('testsimple/testidnux', 'blah')); ?></dd>
+	
+	<dt>var_dump(lire_cfg('testsimplex', 'blih'))</dt>
+	<dd><?php echo var_dump(lire_cfg('testsimplex', 'blih')); ?></dd>
+	
+	<dt>var_dump(lire_cfg('testsimplex/testidnum'))</dt>
+	<dd><?php echo var_dump(lire_cfg('testsimplex/testidnum')); ?></dd>
+	
+	<dt>var_dump(lire_cfg('testsimplex'))</dt>
+	<dd><?php echo var_dump(lire_cfg('testsimplex')); ?></dd>
+	
+	<dt>var_dump(lire_cfg())</dt>
+	<dd><?php echo var_dump(lire_cfg()); ?></dd>
 
+</dl>
 		</div><!-- fin contenu -->
 
 	</div><!-- fin conteneur -->
