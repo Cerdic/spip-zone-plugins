@@ -17,13 +17,24 @@ function TB_image() {
 }
 
 //add thickbox to href elements that have a class of .thickbox
-function TB_init(root) {
+function TB_init(){
+	$("a.thickbox").click(function(){
+	var t = this.title || this.name || null;
+	var g = this.rel || false;
+	TB_show(t,this.href,g);
+			
+	this.blur();
+	return false;
+	});
 	$("a.thickbox",root).each(
 		function(i) {
 			this.onclick = TB_image;
 		}
 	);
 }
+
+
+
 
 function TB_show(caption, url, imageGroup) {//function called when the user clicks on a thickbox link
 
@@ -39,7 +50,7 @@ function TB_show(caption, url, imageGroup) {//function called when the user clic
  		
 		TB_overlaySize();
 		
-		$("body").append("<div id='TB_load'><img src='+TB_load+' /></div>");
+		$("body").append("<div id='TB_load'><img src='http://www.webzinenameless.net/weare/img/loadingAnimation.gif' /></div>");
 		TB_load_position();
 		
 		
@@ -112,7 +123,7 @@ function TB_show(caption, url, imageGroup) {//function called when the user clic
 			
 			TB_WIDTH = imageWidth + 30;
 			TB_HEIGHT = imageHeight + 60;
-			$("#TB_window").append("<a href='' id='TB_ImageOff' title='Close'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+"'/></a>" + "<div id='TB_caption'>"+caption+"<div id='TB_secondLine'>" + TB_imageCount + TB_PrevHTML + TB_NextHTML + "</div></div><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton' title='Close'>close</a></div>"); 		
+			$("#TB_window").append("<a href='' id='TB_ImageOff' title='Close'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+"'/></a>" + "<div id='TB_caption'>"+caption+"<div id='TB_secondLine'>" + TB_imageCount + TB_PrevHTML + TB_NextHTML + "</div></div><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton' title='Close'>fermer</a></div>"); 		
 			
 			$("#TB_closeWindowButton").click(TB_remove);
 			
@@ -178,9 +189,9 @@ function TB_show(caption, url, imageGroup) {//function called when the user clic
 			
 			if(url.indexOf('TB_iframe') != -1){				
 					urlNoQuery = url.split('TB_');		
-					$("#TB_window").append("<div id='TB_title'><div id='TB_ajaxWindowTitle'>"+caption+"</div><div id='TB_closeAjaxWindow'><a href='#' id='TB_closeWindowButton' title='Close'>close</a></div></div><iframe frameborder='0' hspace='0' src='"+urlNoQuery[0]+"' id='TB_iframeContent' name='TB_iframeContent' style='width:"+(ajaxContentW + 29)+"px;height:"+(ajaxContentH + 17)+"px;' onload='TB_showIframe()'> </iframe>");
+					$("#TB_window").append("<div id='TB_title'><div id='TB_ajaxWindowTitle'>"+caption+"</div><div id='TB_closeAjaxWindow'><a href='#' id='TB_closeWindowButton' title='Close'>fermer</a></div></div><iframe frameborder='0' hspace='0' src='"+urlNoQuery[0]+"' id='TB_iframeContent' name='TB_iframeContent' style='width:"+(ajaxContentW + 29)+"px;height:"+(ajaxContentH + 17)+"px;' onload='TB_showIframe()'> </iframe>");
 				}else{
-					$("#TB_window").append("<div id='TB_title'><div id='TB_ajaxWindowTitle'>"+caption+"</div><div id='TB_closeAjaxWindow'><a href='#' id='TB_closeWindowButton'>close</a></div></div><div id='TB_ajaxContent' style='width:"+ajaxContentW+"px;height:"+ajaxContentH+"px;'></div>");
+					$("#TB_window").append("<div id='TB_title'><div id='TB_ajaxWindowTitle'>"+caption+"</div><div id='TB_closeAjaxWindow'><a href='#' id='TB_closeWindowButton'>fermer</a></div></div><div id='TB_ajaxContent' style='width:"+ajaxContentW+"px;height:"+ajaxContentH+"px;'></div>");
 			}
 					
 			$("#TB_closeWindowButton").click(TB_remove);
