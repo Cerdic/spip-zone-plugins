@@ -157,17 +157,17 @@ global  $connect_statut;
 echo debut_raccourcis("../"._DIR_PLUGIN_SPIPLISTES."/img_pack/mailer_config.gif");
 
 if ($connect_statut == "0minirezo") {
-echo icone_horizontale(_T('spiplistes:Nouveau_courrier'), "?exec=courrier_edit&new=oui&type=nl", "../"._DIR_PLUGIN_SPIPLISTES."/img_pack/stock_mail_send.gif");
+ icone_horizontale(_T('spiplistes:Nouveau_courrier'), "?exec=courrier_edit&new=oui&type=nl", "../"._DIR_PLUGIN_SPIPLISTES."/img_pack/stock_mail_send.gif");
 echo "</a>"; // bug icone_horizontale()
 echo "<br />" ;
 echo "<br />" ;
 
-echo icone_horizontale(_T('spiplistes:Nouvelle_liste_de_diffusion'), "?exec=liste_edit&new=oui", "../"._DIR_PLUGIN_SPIPLISTES."/img_pack/reply-to-all-24.gif");
+ icone_horizontale(_T('spiplistes:Nouvelle_liste_de_diffusion'), "?exec=liste_edit&new=oui", "../"._DIR_PLUGIN_SPIPLISTES."/img_pack/reply-to-all-24.gif");
 echo "</a>"; // bug icone_horizontale()
-echo icone_horizontale(_T('spiplistes:import_export'), "?exec=import_export", "../"._DIR_PLUGIN_SPIPLISTES."/img_pack/listes_inout.png");
+ icone_horizontale(_T('spiplistes:import_export'), "?exec=import_export", "../"._DIR_PLUGIN_SPIPLISTES."/img_pack/listes_inout.png");
 echo "</a>"; // bug icone_horizontale()
 
-echo icone_horizontale(_T('spiplistes:Configuration'), "?exec=config","../"._DIR_PLUGIN_SPIPLISTES."/img_pack/mailer_config.gif");
+ icone_horizontale(_T('spiplistes:Configuration'), "?exec=config","../"._DIR_PLUGIN_SPIPLISTES."/img_pack/mailer_config.gif");
 echo "</a>"; // bug icone_horizontale()
 
 }
@@ -521,6 +521,9 @@ $i++ ;
 spip_query("UPDATE ".$table_prefix."_courriers SET total_abonnes='$i' WHERE id_courrier='$id_courrier'"); 
 
 }
+
+// compatibilite spip 1.9
+if(!function_exists(fin_gauche)) { function fin_gauche(){return false;} }
 
 // Nombre d'abonnes a une liste : a faire
 
