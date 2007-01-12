@@ -14,21 +14,24 @@
 	<INCLURE{fond=inc-entete}{lang}>
 <a href="ecrire/?exec=cfg&cfg=testsimple" class="spip_in">changer test simple</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="?page=cfg&var_mode=recalcul&test=testsimple/testid" class="spip_in">avec param GET :( </a>
+<a href="?page=test_cfg&var_mode=recalcul&test=testsimple/testid" class="spip_in">avec param GET :( </a>
 
 	<div id="conteneur">
 
 		[(#REM) Contenu principal: test de cfg ]
 
 		<div id="contenu" style="width: 100%; ">
-
+yellow_fade:
+[(#REM|sinon{#CONFIG{crayons}}|match{s:11:"yellow_fade";s:2:"on";}|?{' ',''})
+ON
+]
 <dl>
 
 	<dt>&#035;CONFIG</dt>
 	<dd>#CONFIG</dd>
 
-	<dt>&#035;CONFIG{cfg}</dt>
-	<dd>#CONFIG{cfg}</dd>
+	<dt>&#035;CONFIG{crayons}</dt>
+	<dd>#CONFIG{crayons}</dd>
 
 	<dt>&#035;CONFIG{descriptif_site}</dt>
 	<dd>#CONFIG{descriptif_site}</dd>
