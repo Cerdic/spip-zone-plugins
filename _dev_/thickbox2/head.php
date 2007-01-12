@@ -1,6 +1,6 @@
 <?php
 
-function ThickBox2_insert_head($flux){
+function ThickBox1_insert_head($flux){
 
 // on ajoute la class thickbox aux liens de type="image/xxx"
 
