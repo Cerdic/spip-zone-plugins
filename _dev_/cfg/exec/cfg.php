@@ -76,7 +76,7 @@ class cfg
 		if (!lire_fichier($fichier, $controldata)) {
 			return _L('erreur_lecture_') . $nom;
 		}
-		if (preg_match_all('/\[\(#REM\) (\w+)(\[\])?=(.*?)\]/sim',
+		if (preg_match_all('/\[\(#REM\) (\w+)(\*)?=(.*?)\]/sim',
 						$controldata, $matches, PREG_SET_ORDER)) {
 			foreach ($matches as $regs) {
 			    if (empty($regs[2])) {
