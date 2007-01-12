@@ -93,7 +93,6 @@ spip_query($requette_maj2);
 spip_query("DELETE FROM ".$table_prefix."_auteurs_listes WHERE id_liste = $id_liste");
 spip_query("INSERT INTO ".$table_prefix."_auteurs_listes (id_auteur, id_liste) VALUES ($connect_id_auteur, $id_liste)");
 //recuperer les abonnes (peut etre plus tard ?)
-spip_query("DELETE FROM ".$table_prefix."_abonnes_listes WHERE id_liste = $id_liste");
 $abos=spip_query("SELECT id_auteur, id_article FROM ".$table_prefix."_auteurs_articles WHERE id_article='$id_article'");
 
 while($abonnes=spip_fetch_array($abos)){
@@ -405,7 +404,7 @@ WHERE type="'.$type.'" AND statut="'.$statut.'"';
 $retour = 'spip_listes';
 break;
 case "abonnements":
-$requete_total = 'SELECT listes.id_liste, listes.titre, listes.statut, listes.date, 							lien.id_auteur,lien.id_liste FROM  spip_abonnes_listes AS lien LEFT JOIN spip_listes AS listes  ON 				lien.id_liste=listes.id_liste WHERE lien.id_auteur="'.$id_auteur.'" AND (listes.statut ="liste" OR 				listes.statut ="inact") ORDER BY listes.date DESC';
+$requete_total = 'SELECT listes.id_liste, listes.titre, listes.statut, listes.date, lien.id_auteur,lien.id_liste FROM  spip_abonnes_listes AS lien LEFT JOIN spip_listes AS listes  ON 	lien.id_liste=listes.id_liste WHERE lien.id_auteur="'.$id_auteur.'" AND (listes.statut ="liste" OR listes.statut ="inact") ORDER BY listes.date DESC';
 $retour = 'abonne_edit';
 $param = '&id_auteur='.$id_auteur;
 break;
