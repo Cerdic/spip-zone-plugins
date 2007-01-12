@@ -13,4 +13,7 @@
 	<pipeline>
 		<nom>header_prive</nom>
 	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+	</pipeline>
 </plugin>

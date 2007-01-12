@@ -118,4 +118,9 @@ spip_query("INSERT INTO `cm_settings` (`set_name`, `set_value`)
 ecrire_meta('clevermail_base_version','0.1');
 ecrire_metas();
 }
+
+function clevermail_taches_generales_cron($taches_generales){
+	$taches_generales['clevermail_cron'] = 10 ;
+	return $taches_generales;
+}
 ?>
