@@ -78,17 +78,17 @@ function cron_clevermail_cron() {
 					// message sent
 					spip_query("INSERT INTO cm_posts_done (pst_id, sub_id) VALUES (".$message['pst_id'].", ".$message['sub_id'].")");
 					if ($verbose == 'yes') {
-						echo "\n".'Message from list "'.$list['lst_name'].'" sent to '.$to.' in '.$mode.' format<br />';
+						echo "Message from list \"".$list['lst_name']."\" sent to ".$to." in ".$mode." format<br />";
 					} else {
-						spip_log('Message from list '.$list['lst_name'].' sent to '.$to.' in '.$mode.' format');
+						spip_log("Message from list ".$list['lst_name']." sent to ".$to." in ".$mode." format");
 					}
 				} else {
 					if ($verbose == 'yes') {
 						echo "Message could not be sent.<br />";
   						echo "Mailer Error: " . $mail->ErrorInfo;
 					} else {
-  						spip_log('Message could not be sent');
-  						spip_log('Mailer Error: '.$mail->ErrorInfo);
+  						spip_log("Message could not be sent");
+  						spip_log("Mailer Error: ".$mail->ErrorInfo);
 					}
 				}
 			}
