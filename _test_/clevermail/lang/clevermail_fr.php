@@ -1,7 +1,7 @@
 <?php
 	/**
 	 *
-	 * CleverMail : plugin de gestion de lettres d'information bas� sur CleverMail
+	 * CleverMail : plugin de gestion de lettres d'information basé sur CleverMail
 	 * Author : Thomas Beaumanoir
 	 * Clever Age <http://www.clever-age.com>
 	 * Copyright (c) 2006 - Distribue sous licence GNU/GPL
@@ -12,18 +12,18 @@
 		// Front
 		'email' => 'E-mail :',
 		'version' => 'Version :',
-		'inscription_lettre' => 'Inscrivez-vous &agrave; notre lettre d\'information :',
-		'inscription_lettres' => 'Inscrivez-vous &agrave; nos lettres d\'information :',
-		'deja_inscrit' => 'Vous &eacute;tiez d&eacute;j&agrave; inscrit &agrave; cette lettre d\'information. Votre mode d\'inscription a &eacute;t&eacute; mis &agrave; jour.',
-		'inscription_validee' => 'Votre inscription est valid&eacute;e. Merci',
-		'desinscription_validee' => 'Votre d&eacute;sinscription est valid&eacute;e. A bient&ocirc;t',
-		'deja_validee' => 'Cette op&eacute;ration a d&eacute;j&agrave; &eacute;t&eacute; valid&eacute;e. Merci.',
-		'aucune_inscription' => 'Aucune inscription ne correspond &agrave; ce param&egrave;tre.',
-		'desinscription_confirmation_debut' => 'D&eacute;sinscription de la lettre d\'information',
-		'desinscription_confirmation_fin' => 'demand&eacute;e. Vous allez recevoir un message demandant confirmation.',
+		'inscription_lettre' => 'Inscrivez-vous à notre lettre d\'information :',
+		'inscription_lettres' => 'Inscrivez-vous à nos lettres d\'information :',
+		'deja_inscrit' => 'Vous êtiez déjà inscrit à cette lettre d\'information. Votre mode d\'inscription a été mis à jour.',
+		'inscription_validee' => 'Votre inscription est validée. Merci',
+		'desinscription_validee' => 'Votre désinscription est validée. A bientôt',
+		'deja_validee' => 'Cette opération a déjà été validée. Merci.',
+		'aucune_inscription' => 'Aucune inscription ne correspond &agrave; ce paramètre.',
+		'desinscription_confirmation_debut' => 'Désinscription de la lettre d\'information',
+		'desinscription_confirmation_fin' => 'demandée. Vous allez recevoir un message demandant confirmation.',
 		'ok' => 'Inscription demand&eacute;e. Vous allez recevoir un message de demande de confirmation.',
-		'nok' => 'Inscription non authoris&eacute;e pour cette lettre d\'information',
-		'mok' => 'Inscription en attente de validation par le mod&eacute;rateur.',
+		'nok' => 'Inscription non authorisée pour cette lettre d\'information',
+		'mok' => 'Inscription en attente de validation par le modérateur.',
 		'send_error' => 'Erreur lors de l\'envoi',
 		'email_non_valide' => 'Adresse non valide',
 
