@@ -1018,12 +1018,12 @@ jQuery.extend({
 				var m = re.exec( t );
 
 				if ( m ) {
+					// Remove what we just matched
+					t = t.substring( m[0].length );
+
 					// Re-organize the first match
 					if ( jQuery.expr[ m[1] ]._resort )
 						m = jQuery.expr[ m[1] ]._resort( m );
-
-					// Remove what we just matched
-					t = t.replace( re, "" );
 
 					break;
 				}
@@ -1249,7 +1249,7 @@ jQuery.event = {
 			event.target = event.srcElement;
 
 		// Calculate pageX/Y if missing and clientX/Y available
-		if ( typeof event.pageX == "undefined" && typeof event.clientX != "undefined" ) {
+		if ( event.pageX == undefined && event.clientX != undefined ) {
 			var e = document.documentElement, b = document.body;
 			event.pageX = event.clientX + (e.scrollLeft || b.scrollLeft);
 			event.pageY = event.clientY + (e.scrollTop || b.scrollTop);
@@ -2153,4 +2153,4 @@ jQuery.extend({
 	}
 
 });
-} // close: if(typeof window.jQuery == "undefined") {
+}
