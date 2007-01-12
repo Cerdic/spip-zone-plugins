@@ -12,7 +12,7 @@ include_spip("inc/presentation");
 
 function exec_clevermail_index() {
 	// Vérification que les tables ont déjà été créées
-	if ($GLOBALS['meta']['clevermail_base_version']<=0.0) {
+	if (!isset($GLOBALS['meta']['clevermail_base_version']) || $GLOBALS['meta']['clevermail_base_version']<=0.0) {
 		clevermail_creer_tables();
 	}
 
