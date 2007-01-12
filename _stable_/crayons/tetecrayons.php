@@ -60,7 +60,7 @@ function Crayons_preparer_page($page, $droits, $wdgcfg = array()) {
 
 		'txt' => array(
 			'error' => _U('crayons:svp_copier_coller'),
-			'sauvegarder' => $wdgcfg[msgAbandon] ? _U('crayons:sauvegarder') : ''
+			'sauvegarder' => $wdgcfg['msgAbandon'] ? _U('crayons:sauvegarder') : ''
 		),
 		'img' => array(
 			'searching' => array(
