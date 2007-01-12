@@ -9,6 +9,7 @@
 	 **/
 
 include_spip("inc/presentation");
+include_spip("inc/distant");
 
 function exec_clevermail_post_edit() {
 
@@ -18,8 +19,8 @@ function exec_clevermail_post_edit() {
 			$post['pst_subject'] = addslashes($post['pst_subject']);
 
 			$list = spip_fetch_array(spip_query("SELECT * FROM cm_lists WHERE lst_id = ".$post['lst_id']));
-			$post['pst_html'] = addslashes(get_template($list['lst_url_html']));
-			$post['pst_text'] = addslashes(get_template($list['lst_url_text']));
+			$post['pst_html'] = addslashes(recuperer_page($list['lst_url_html']));
+			$post['pst_text'] = addslashes(recuperer_page($list['lst_url_text']));
 
 			if ($post['pst_id'] == -1) {
 				spip_query("INSERT INTO cm_posts
@@ -94,17 +95,5 @@ function exec_clevermail_post_edit() {
 <?php
 			fin_cadre_relief();
 	fin_page();
-}
-
-function get_template($url) {
-    $file = fopen ($url,"r");
-    if (!$file) {
-        return null;
-    }
-    $doc = "";
-    while (!feof ($file))
-       $doc .= fgets ($file, 1024);
-    fclose($file);
-    return $doc;
 }
 ?>
