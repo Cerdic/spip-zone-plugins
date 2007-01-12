@@ -41,9 +41,9 @@ function exec_op_modifier() {
 			$rubrique_array = get_rubriques_op();
 			if (count($rubrique_array) > 0) {
 				$i=0;
-				while ($row = mysql_fetch_array($rubrique_array)) {
-					$sup_rubrique_array[$i] = _request('sup_rubrique_'.$row[0]);
-					$value_rubrique[$i] = $row[0];
+				while ($row = spip_fetch_array($rubrique_array)) {
+					$sup_rubrique_array[$i] = _request('sup_rubrique_'.$row['op_rubrique']);
+					$value_rubrique[$i] = $row['op_rubrique'];
 					$i=$i+1;
 				}
 				if (count($sup_rubrique_array) > 0) {
@@ -181,11 +181,11 @@ function op_cadre_rubrique() {
 		
 	$rubrique_array = get_rubriques_op();
 
-	if (mysql_num_rows($rubrique_array) > 0 ) {
+	if (count($rubrique_array) > 0 ) {
 		echo 'liste des rubriques open-publishing : <br />';
 		echo '<table border="1" cellpadding="2">';
-		while ($row = mysql_fetch_array($rubrique_array)) {
-			echo '<tr><td>' . $row[0] . '</td><td><input type="submit" name="sup_rubrique_' . $row[0] . '" value="X" /></td></tr>';
+		while ($row = spip_fetch_array($rubrique_array)) {
+			echo '<tr><td>' . $row['op_rubrique'] . '</td><td><input type="submit" name="sup_rubrique_' . $row['op_rubrique'] . '" value="X" /></td></tr>';
 		}
 		echo '</table>';
 	}

@@ -1,5 +1,7 @@
 <?php
 
+include_spip('base/abstract_sql');
+
 /* API plugin open-publishing
 	set_config_rubrique($i) : ajoute une rubrique dans la liste des rubriques op
 	get_rubrique_op() : renvoi un tableau des rubriques op
@@ -47,74 +49,63 @@
 	}
 
 	function op_get_id_auteur() {
-		$result = spip_query("SELECT `id_auteur_op` FROM `spip_op_config` WHERE `id_config` = 1");
-		$row = mysql_fetch_row($result);
-		return $row[0];
+     		$row = spip_fetch_array(spip_abstract_select('id_auteur_op', 'spip_op_config', "id_config=1 LIMIT 1"));
+ 		return $row['id_auteur_op'];
 	}
 
 	function op_get_version() {
-		$result = spip_query("SELECT `version` FROM `spip_op_config` WHERE `id_config` = 1");
-		$row = mysql_fetch_row($result);
-		return $row[0];
+		$row = spip_fetch_array(spip_abstract_select('version', 'spip_op_config', "id_config=1 LIMIT 1"));
+ 		return $row['version'];
 	}
 
 	function op_get_agenda() {
-		$result = spip_query("SELECT `agenda` FROM `spip_op_config` WHERE `id_config` = 1");
-		$row = mysql_fetch_row($result);
-		return $row[0];
+		$row = spip_fetch_array(spip_abstract_select('agenda', 'spip_op_config', "id_config=1 LIMIT 1"));
+ 		return $row['agenda'];
 	}
 
 	function op_get_document() {
-		$result = spip_query("SELECT `documents` FROM `spip_op_config` WHERE `id_config` = 1");
-		$row = mysql_fetch_row($result);
-		return $row[0];
+		$row = spip_fetch_array(spip_abstract_select('documents', 'spip_op_config', "id_config=1 LIMIT 1"));
+ 		return $row['documents'];
 	}
 
 	function op_get_titre_minus() {
-		$result = spip_query("SELECT `titre_minus` FROM `spip_op_config` WHERE `id_config` = 1");
-		$row = mysql_fetch_row($result);
-		return $row[0];
+		$row = spip_fetch_array(spip_abstract_select('titre_minus', 'spip_op_config', "id_config=1 LIMIT 1"));
+ 		return $row['titre_minus'];
 	}
 
 	function op_get_antispam() {
-		$result = spip_query("SELECT `anti_spam` FROM `spip_op_config` WHERE `id_config` = 1");
-		$row = mysql_fetch_row($result);
-		return $row[0];
+		$row = spip_fetch_array(spip_abstract_select('anti_spam', 'spip_op_config', "id_config=1 LIMIT 1"));
+ 		return $row['anti_spam'];
 	}
 
 	function op_get_renvoi_normal() {
-		$result = spip_query("SELECT `message_retour` FROM `spip_op_config` WHERE `id_config` = 1");
-		$row = mysql_fetch_row($result);
-		return $row[0];
+		$row = spip_fetch_array(spip_abstract_select('message_retour', 'spip_op_config', "id_config=1 LIMIT 1"));
+ 		return $row['message_retour'];
 	}
 
 	function op_get_renvoi_abandon() {
-		$result = spip_query("SELECT `message_retour_abandon` FROM `spip_op_config` WHERE `id_config` = 1");
-		$row = mysql_fetch_row($result);
-		return $row[0];
+     		$row = spip_fetch_array(spip_abstract_select('message_retour_abandon', 'spip_op_config', "id_config=1 LIMIT 1"));
+ 		return $row['message_retour_abandon'];
 	}
 
 	function op_get_url_retour() {
-		$result = spip_query("SELECT `lien_retour` FROM `spip_op_config` WHERE `id_config` = 1");
-		$row = mysql_fetch_row($result);
-		return $row[0];
+     		$row = spip_fetch_array(spip_abstract_select('lien_retour_abandon', 'spip_op_config', "id_config=1 LIMIT 1"));
+ 		return $row['lien_retour'];
 	}
 
 	function op_get_url_abandon() {
-		$result = spip_query("SELECT `lien_retour_abandon` FROM `spip_op_config` WHERE `id_config` = 1");
-		$row = mysql_fetch_row($result);
-		return $row[0];
+     		$row = spip_fetch_array(spip_abstract_select('lien_retour_abandon', 'spip_op_config', "id_config=1 LIMIT 1"));
+ 		return $row['lien_retour_abandon'];
 	}
 
 	function op_get_rubrique_agenda() {
-		$result = spip_query("SELECT `rubrique_agenda` FROM `spip_op_config` WHERE `id_config` = 1");
-		$row = mysql_fetch_row($result);
-		return $row[0];
+     		$row = spip_fetch_array(spip_abstract_select('rubrique_agenda', 'spip_op_config', "id_config=1 LIMIT 1"));
+ 		return $row['rubrique_agenda'];
 	}
 
 	function get_rubriques_op() {
-		$result = spip_query("SELECT `op_rubrique` FROM `spip_op_rubriques`");
-		return $result;
+     		$row = spip_abstract_select('op_rubrique', 'spip_op_rubriques', "");
+ 		return $row;
 	}
 
 	function op_set_agenda($flag_agenda) {
@@ -248,7 +239,7 @@
 	function op_installer_base() {
 	
 		include_spip('inc/meta');
-		ecrire_meta('indy_version', '0.2');
+		ecrire_meta('indy_version', '0.2.1');
 		ecrire_metas();
 
 		if (!op_verifier_auteurs()) {
@@ -308,7 +299,7 @@
 
 		spip_abstract_insert('spip_op_config', "(id_config, version)", "(
 		" . intval($id_config) .",
-		'0.2'
+		'0.2.1'
 		)");
 	}
 	// Création de l'utilisateur anonymous (id = 999)
