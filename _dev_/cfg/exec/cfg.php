@@ -25,6 +25,7 @@ class cfg
 	var $fond = '';
 	var $descriptif = '';
 	var $message = '';
+	var $liens = array();
 	var $champs = array();
 	var $val = array();
 	
@@ -75,10 +76,17 @@ class cfg
 		if (!lire_fichier($fichier, $controldata)) {
 			return _L('erreur_lecture_') . $nom;
 		}
-		if (preg_match_all('/\[\(#REM\) (\w+)=(.*?)\]/sim',
+		if (preg_match_all('/\[\(#REM\) (\w+)(\[\])?=(.*?)\]/sim',
 						$controldata, $matches, PREG_SET_ORDER)) {
 			foreach ($matches as $regs) {
-			    $this->{$regs[1]} = $regs[2];
+			    if (empty($regs[2])) {
+				    $this->{$regs[1]} = $regs[3];
+			    } else {
+				    if (!is_array($this->{$regs[1]})) {
+				    	continue;
+				    }
+				    $this->{$regs[1]}[] = $regs[3];
+			    }
 		    }
 		}
 		if (!preg_match_all(
@@ -170,7 +178,16 @@ class cfg
 			$this->fin_page();
 				
 	}
-/*
+
+	function lier()
+	{
+		$return = '';
+		foreach ($this->liens as $lien) {
+			$return .= '' . $this->boite_liens($lien, 'test liens');
+		}
+		return $return;
+	}
+
 	function boite_liens($titre = "", $elements = array())
 	{
 		if (!$elements) {
@@ -196,7 +213,7 @@ class cfg
 		$dedans .= '</ul>' . fin_boite_info(true);
 		return $dedans;
 	}
-
+/*
 	function liens_existants($config)
 	{
 		$liste = array();
@@ -239,6 +256,7 @@ class cfg
 		
 //			$this>liens_existants() .
 //			$this->liens_nouveaux() .
+			$this->lier() .
 		
 			debut_droite("", true) .
 			
