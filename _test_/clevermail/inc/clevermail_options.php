@@ -22,7 +22,8 @@ function clevermail_ajouter_boutons($boutons_admin) {
 	return $boutons_admin;
 }
 
-function clevermail_creer_table() {
+// TODO : utiliser http://doc.spip.org/@creer_base
+function clevermail_creer_tables() {
 spip_query("CREATE TABLE IF NOT EXISTS `cm_lists` (
   `lst_id` int(11) NOT NULL auto_increment,
   `lst_name` varchar(255) NOT NULL default '',
@@ -114,5 +115,7 @@ spip_query("INSERT INTO `cm_settings` (`set_name`, `set_value`)
   ('CM_MAIL_ADMIN', '".$GLOBALS['meta']['email_webmaster']."'),
   ('CM_SEND_NUMBER', '50');");
 
+ecrire_meta('clevermail_base_version','0.1');
+ecrire_metas();
 }
 ?>
