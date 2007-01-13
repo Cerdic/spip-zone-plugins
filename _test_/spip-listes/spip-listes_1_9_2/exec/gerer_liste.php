@@ -143,7 +143,8 @@ $result_auteur = spip_query($query);
 // Droits mieux structuré que ca ?
 //
 
-$flag_auteur = (spip_num_rows($result_auteur) > 0);
+//$flag_auteur = (spip_num_rows($result_auteur) > 0);
+$flag_auteur=true;
 $flag_editable = ($flag_auteur AND ($statut_article == 'inact' OR $statut_article == 'liste' OR $statut_article == 'poublist'));
 
 
@@ -330,7 +331,7 @@ if ($flag_editable) {
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 	echo "<td align='center'>";
 
-		icone(_T('spiplistes:modifier_liste'), "?exec=liste_edit&id_liste=$id_liste", "../"._DIR_PLUGIN_SPIPLISTES."/img_pack/reply-to-all-24.gif", "edit.gif");
+	icone(_T('spiplistes:modifier_liste'), "?exec=liste_edit&id_liste=$id_liste", "../"._DIR_PLUGIN_SPIPLISTES."/img_pack/reply-to-all-24.gif", "edit.gif");
 
 	echo "</td>";
 }
