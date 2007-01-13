@@ -25,8 +25,8 @@ _ <code>define('_TIDY_COMMAND', 'tidy');</code>
 	options.php
 	</options>
 <pipeline>
-Ê<nom>affichage_final</nom>
-Ê<action>appliquer</action>
-Ê<inclure>options.php</inclure>
+	<nom>affichage_final</nom>
+	<action>appliquer</action>
+	<inclure>options.php</inclure>
 </pipeline>	
 </plugin>
