@@ -1,0 +1,41 @@
+<plugin>
+        <nom> <!-- Nom du plugin -->
+          <multi>
+					[fr]Article sommaire
+					[en]Article summary
+					</multi>
+        </nom>
+        <auteur>        <!-- Auteur du plugin -->
+          <multi>
+					[fr]					cy_altern
+					_ &copy; 2007 - Distribu&#233; sous licence GNU/LGPL
+					[en]cy_altern - distributed under GNU/GPL licence
+					</multi>
+        </auteur>
+        <version>
+          0.1
+        </version>
+        <etat>
+          dev
+        </etat>
+        <description>
+        <multi>
+					[fr]Un exemple de plugin pour apprendre &#223'; utiliser cfg
+          [en]An example to learn cfg.
+          </multi>
+        </description>
+		<lien>
+		[Documentation sur ->],
+		et si vous avez cfg: [Configuration->.?exec=cfg&cfg=aa]
+		</lien>
+        <icon>plugin-24.gif</icon>
+        <prefix>
+          aa
+        </prefix>
+<!--
+        <pipeline>
+        		<nom>ajouter_boutons</nom>
+            <inclure>inc_saveauto.php</inclure>
+        </pipeline>	
+-->
+</plugin>

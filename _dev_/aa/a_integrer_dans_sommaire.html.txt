@@ -1,0 +1,6 @@
+
+[(#REM) test plugin aa]
+<div class="liste-articles">			
+		 [(#SET{id_aa,[(#CONFIG{aa/id_aa})]})] 
+		 <INCLURE{fond=aa}{id_article=(#GET{id_aa})}>
+</div>
