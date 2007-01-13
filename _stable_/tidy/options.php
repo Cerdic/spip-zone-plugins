@@ -12,18 +12,17 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function tidy_appliquer ($texte) {
+	if ($GLOBALS['html'] # verifie que la page avait l'entete text/html
+		AND strlen($texte)
+		AND (_request('var_fragment') === NULL)
+		AND !headers_sent()) {
+		include_spip('inc/tidy');
+		return inc_tidy_dist ($texte);
+	} else {
+		return $texte;
+	}
+}
 
-//
-// Activation du plugin 'tidy'
-//
 
-// Cette ligne active le mode tidy
-$xhtml = 'tidy';
-
-
-// Cette ligne definit le chemin de la commande 'tidy'
-// a modifier si cette commande n'est pas dans le PATH du serveur
-// par exemple :
-// define ('_TIDY_COMMAND', '/usr/local/bin/tidy');
-define ('_TIDY_COMMAND', 'tidy');
 ?>

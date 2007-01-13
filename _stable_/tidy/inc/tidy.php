@@ -33,7 +33,6 @@ function inc_tidy_dist($buffer) {
 	// tidy en ligne de commande (si on ne l'a pas en module php,
 	// ou si le module php ne marche pas)
 	// '/bin/tidy' ou '/usr/local/bin/tidy' ou tout simplement 'tidy'
-	define('_TIDY_COMMAND', 'tidy');
 
 	$buffer = traite_xhtml($buffer);
 
@@ -83,7 +82,6 @@ function inc_tidy_dist($buffer) {
 }
 
 function traite_xhtml ($buffer) {
-
 	// Seuls les charsets iso-latin et utf-8 sont concernes
 	$charset = $GLOBALS['meta']['charset'];
 	if ($charset == "iso-8859-1")
@@ -174,7 +172,7 @@ function traite_xhtml ($buffer) {
 		tidy_setopt('indent-spaces', 4);
 		tidy_setopt('output-xhtml', true);
 		tidy_setopt('add-xml-decl', false);
-		tidy_setopt('indent', 5);
+		tidy_setopt('indent', true);
 		tidy_setopt('show-body-only', false);
 		tidy_setopt('quote-nbsp', false);
 
@@ -204,7 +202,7 @@ function traite_xhtml ($buffer) {
 			'indent-spaces' => 4,
 			'output-xhtml' => true,
 			'add-xml-decl' => false,
-			'indent' => 0,
+			'indent' => true,
 			'show-body-only' => false,
 			'quote-nbsp' => false
 			);
