@@ -13,7 +13,6 @@ function exec_cfg_dist()
 		($nom = _request('cfg'))? $nom : 'cfg',
 		($fond = _request('fond'))? $fond : $nom
 		);
-//var_dump($config);die();
 
 	$config->traiter();
 	echo $config->sortie();
@@ -94,7 +93,6 @@ class cfg
 						$controldata, $matches, PREG_SET_ORDER)) {
 			return _L('pas_de_champs_dans_') . $nom;
 		}
-//var_dump($matches);die();
 		foreach ($matches as $regs) {
 		    if (!empty($regs[1])) {
 		    	$regs[2] = 'select';
@@ -104,7 +102,6 @@ class cfg
 		    	$this->champs[$regs[3]]['typ'] = $regs[4];
 		    }
 	    }
-//var_dump($this->champs);die();
 	    return '';
 	}
 
@@ -204,27 +201,6 @@ class cfg
 		$dedans .= '</ul>' . fin_boite_info(true);
 		return $dedans;
 	}
-/*
-	function liens_existants($config)
-	{
-		$liste = array();
-		foreach ($config as $compte => $info) {
-			$liste[] = array('get' => 'modifier=' . $compte, 'name' => $compte,
-							'desc' => '(' . $info['driver'] . ')');
-		}
-		return boite_liens(_L('modifier_un_compte'), $liste);
-	}
-
-	function liens_nouveaux()
-	{
-		$liste = array();
-		foreach (cherche_prestataires() as $driver => $info) {
-			$info['get'] = 'adddriver=' . $driver;
-			$liste[] = $info;
-		}
-		return boite_liens(_L('creer_un_nouveau_compte'), $liste);
-	}
-*/
 	function debut_page()
 	{
 		include_spip('inc/presentation');
@@ -245,8 +221,6 @@ class cfg
 				fin_boite_info(true)
 			: '') .
 		
-//			$this>liens_existants() .
-//			$this->liens_nouveaux() .
 			$this->lier() .
 		
 			debut_droite("", true) .
@@ -264,66 +238,4 @@ class cfg
 			fin_page();
 	}
 }
-/*
-
-// sans parametre: lecture seule, sans data = suppression sinon update/delete
-function meta_cfg($compte = '', $data = array())
-{
-	// recuperer le tableau de config dans meta , pas tres securit tout ça ...
-	lire_metas();
-    global $meta;
-    if (empty($meta['cfg'])) {
-    	$cfg = array();
-    } else {
-    	$cfg = unserialize($meta['cfg']);
-    }
-	// pas de compte , c'est juste pour lire
-    if (!$compte) {
-	    return $cfg;
-    }
-    // donnees => actualise ou cree , detruit sinon
-    if ($data) {
-    	$cfg[$compte] = $data;
-    } else {
-    	unset($cfg[$compte]);
-    }
-    if (count($cfg)) {
-	    ecrire_meta('cfg', serialize($cfg));
-    } else {
-	    effacer_meta('cfg');
-    }
-    return $cfg;
-}
-
-	if (($addDriver = _request('adddriver'))) {
-		$contexte['driver'] = $addDriver;
-	} else {
-		if (($modifier = _request('modifier'))) {
-			$contexte['driver'] = $config[$modifier]['driver'];
-		} else {
-			$contexte['driver'] = _request('driver');
-			$contexte['compte'] = _request('compte');
-			$contexte['was_compte'] = _request('was_compte');
-		}
-	}
-
-	$champs = array('compte' => array('inp' => 'text', 'typ' => 'id'));
-	($this->message = empty($contexte['driver']) ? _L('creer_un_compte') : '') ||
-	if ($modifier) {
-		$contexte['compte'] = $modifier;
-		foreach ($champs as $name => $def) {
-			if (isset($config[$modifier][$name])) {
-				$contexte[$name] = $config[$modifier][$name];
-			}
-		}
-
-//	$this->message .= print_r($champs, true);
-//	$this->message .= print_r($contexte, true);
-
-		if ($supprimer ||
-		 (!_request('copier') && $contexte['compte'] != $contexte['was_compte'])) {
-			$config = meta_config_sms($contexte['was_compte']);
-		}
-
-*/
 ?>
