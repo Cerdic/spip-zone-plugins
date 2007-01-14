@@ -7,8 +7,8 @@ if(typeof window.jQuery == "undefined") {
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * $Date: 2007-01-11 20:32:18 +0100 (Thu, 11 Jan 2007) $
- * $Rev: 1014 $
+ * $Date: 2007-01-14 16:47:32 +0100 (Sun, 14 Jan 2007) $
+ * $Rev: 1062 $
  */
 
 // Global undefined variable
@@ -24,7 +24,7 @@ var jQuery = function(a,c) {
 	// HANDLE: $(function)
 	// Shortcut for document ready
 	// Safari reports typeof on DOM NodeLists as a function
-	if ( typeof a == "function" && !a.nodeType && a[0] == undefined )
+	if ( jQuery.isFunction(a) && !a.nodeType && a[0] == undefined )
 		return new jQuery(document)[ jQuery.fn.ready ? "ready" : "load" ]( a );
 	
 	// Handle HTML strings
@@ -129,7 +129,7 @@ jQuery.fn = jQuery.prototype = {
 			"textContent" : "innerText";
 			
 		return e == undefined ?
-			jQuery.map(this, function(a){ return a[ type ]; }).join('') :
+			jQuery.map(this, function(a){ return a[ type ]; }).join("") :
 			this.each(function(){ this[ type ] = e; });
 	},
 
@@ -189,7 +189,7 @@ jQuery.fn = jQuery.prototype = {
 
 	filter: function(t) {
 		return this.pushStack(
-			t.constructor == Function &&
+			jQuery.isFunction( t ) &&
 			jQuery.grep(this, function(el, index){
 				return t.apply(el, [index])
 			}) ||
@@ -274,6 +274,10 @@ jQuery.extend({
 		if ( jQuery._$ )
 			$ = jQuery._$;
 	},
+
+	isFunction: function( fn ) {
+		return fn && typeof fn == "function";
+	},
 	// args is for internal usage only
 	each: function( obj, fn, args ) {
 		if ( obj.length == undefined )
@@ -287,11 +291,11 @@ jQuery.extend({
 	
 	prop: function(elem, value, type){
 			// Handle executable functions
-			if ( value.constructor == Function )
+			if ( jQuery.isFunction( value ) )
 				return value.call( elem );
 
 			// Handle passing in a number to a CSS property
-			if ( value.constructor == Number && type == "css" )
+			if ( value.constructor == Number && type == "curCSS" )
 				return value + "px";
 
 			return value;
@@ -311,7 +315,7 @@ jQuery.extend({
 			elem.className = c ?
 				jQuery.grep( elem.className.split(/\s+/), function(cur){
 					return !jQuery.className.has( c, cur );	
-				}).join(' ') : "";
+				}).join(" ") : "";
 		},
 
 		// internal only, use is(".class")
@@ -373,8 +377,8 @@ jQuery.extend({
 	curCSS: function(elem, prop, force) {
 		var ret;
 		
-		if (prop == 'opacity' && jQuery.browser.msie)
-			return jQuery.attr(elem.style, 'opacity');
+		if (prop == "opacity" && jQuery.browser.msie)
+			return jQuery.attr(elem.style, "opacity");
 			
 		if (prop == "float" || prop == "cssFloat")
 		    prop = jQuery.browser.msie ? "styleFloat" : "cssFloat";
@@ -392,12 +396,12 @@ jQuery.extend({
 
 			if ( cur )
 				ret = cur.getPropertyValue(prop);
-			else if ( prop == 'display' )
-				ret = 'none';
+			else if ( prop == "display" )
+				ret = "none";
 			else
-				jQuery.swap(elem, { display: 'block' }, function() {
-				    var c = document.defaultView.getComputedStyle(this, '');
-				    ret = c && c.getPropertyValue(prop) || '';
+				jQuery.swap(elem, { display: "block" }, function() {
+				    var c = document.defaultView.getComputedStyle(this, "");
+				    ret = c && c.getPropertyValue(prop) || "";
 				});
 
 		} else if (elem.currentStyle) {
@@ -518,7 +522,7 @@ jQuery.extend({
 			if ( value != undefined ) elem[fix[name]] = value;
 			return elem[fix[name]];
 
-		} else if ( value == undefined && jQuery.browser.msie && elem.nodeName && elem.nodeName.toUpperCase() == 'FORM' && (name == 'action' || name == 'method') )
+		} else if ( value == undefined && jQuery.browser.msie && elem.nodeName && elem.nodeName.toUpperCase() == "FORM" && (name == "action" || name == "method") )
 			return elem.getAttributeNode(name).nodeValue;
 
 		// IE elem.getAttribute passes even for style
@@ -713,7 +717,7 @@ jQuery.each( [ "height", "width" ], function(i,n){
 });
 jQuery.extend({
 	expr: {
-		"": "m[2]== '*'||a.nodeName.toUpperCase()==m[2].toUpperCase()",
+		"": "m[2]=='*'||a.nodeName.toUpperCase()==m[2].toUpperCase()",
 		"#": "a.getAttribute('id')==m[2]",
 		":": {
 			// Position Checks
@@ -740,14 +744,14 @@ jQuery.extend({
 			contains: "jQuery.fn.text.apply([a]).indexOf(m[3])>=0",
 
 			// Visibility
-			visible: "a.type!='hidden'&&jQuery.css(a,'display')!='none'&&jQuery.css(a,'visibility')!='hidden'",
-			hidden: "a.type=='hidden'||jQuery.css(a,'display')=='none'||jQuery.css(a,'visibility')=='hidden'",
+			visible: 'a.type!="hidden"&&jQuery.css(a,"display")!="none"&&jQuery.css(a,"visibility")!="hidden"',
+			hidden: 'a.type=="hidden"||jQuery.css(a,"display")=="none"||jQuery.css(a,"visibility")=="hidden"',
 
 			// Form attributes
 			enabled: "!a.disabled",
 			disabled: "a.disabled",
 			checked: "a.checked",
-			selected: "a.selected || jQuery.attr(a, 'selected')",
+			selected: "a.selected||jQuery.attr(a,'selected')",
 
 			// Form elements
 			text: "a.type=='text'",
@@ -758,16 +762,16 @@ jQuery.extend({
 			submit: "a.type=='submit'",
 			image: "a.type=='image'",
 			reset: "a.type=='reset'",
-			button: "a.type=='button'||a.nodeName=='BUTTON'",
+			button: 'a.type=="button"||a.nodeName=="BUTTON"',
 			input: "/input|select|textarea|button/i.test(a.nodeName)"
 		},
 		".": "jQuery.className.has(a,m[2])",
 		"@": {
 			"=": "z==m[4]",
 			"!=": "z!=m[4]",
-			"^=": "z && !z.indexOf(m[4])",
-			"$=": "z && z.substr(z.length - m[4].length,m[4].length)==m[4]",
-			"*=": "z && z.indexOf(m[4])>=0",
+			"^=": "z&&!z.indexOf(m[4])",
+			"$=": "z&&z.substr(z.length - m[4].length,m[4].length)==m[4]",
+			"*=": "z&&z.indexOf(m[4])>=0",
 			"": "z",
 			_resort: function(m){
 				return ["", m[1], m[3], m[2], m[5]];
@@ -780,23 +784,23 @@ jQuery.extend({
 	// The regular expressions that power the parsing engine
 	parse: [
 		// Match: [@value='test'], [@foo]
-		"\\[ *(@)S *([!*$^=]*) *('?\"?)(.*?)\\4 *\\]",
+		/^\[ *(@)([a-z0-9_-]*) *([!*$^=]*) *('?"?)(.*?)\4 *\]/i,
 
 		// Match: [div], [div p]
-		"(\\[)\\s*(.*?(\\[.*?\\])?[^[]*?)\\s*\\]",
+		/^(\[)\s*(.*?(\[.*?\])?[^[]*?)\s*\]/,
 
 		// Match: :contains('foo')
-		"(:)S\\(\"?'?(.*?(\\(.*?\\))?[^(]*?)\"?'?\\)",
+		/^(:)([a-z0-9_-]*)\("?'?(.*?(\(.*?\))?[^(]*?)"?'?\)/i,
 
 		// Match: :even, :last-chlid
-		"([:.#]*)S"
+		/^([:.#]*)([a-z0-9_*-]*)/i
 	],
 
 	token: [
-		"\\.\\.|/\\.\\.", "a.parentNode",
-		">|/", "jQuery.sibling(a.firstChild)",
-		"\\+", "jQuery.nth(a,2,'nextSibling')",
-		"~", function(a){
+		/^(\/?\.\.)/, "a.parentNode",
+		/^(>|\/)/, "jQuery.sibling(a.firstChild)",
+		/^(\+)/, "jQuery.nth(a,2,'nextSibling')",
+		/^(~)/, function(a){
 			var s = jQuery.sibling(a.parentNode.firstChild);
 			return s.slice(0, jQuery.inArray(a,s));
 		}
@@ -872,13 +876,13 @@ jQuery.extend({
 				for ( var i = 0; i < jQuery.token.length; i += 2 ) {
 					// Attempt to match each, individual, token in
 					// the specified order
-					var re = new RegExp("^(" + jQuery.token[i] + ")");
+					var re = jQuery.token[i];
 					var m = re.exec(t);
 
 					// If the token match was found
 					if ( m ) {
 						// Map it against the token's handler
-						r = ret = jQuery.map( ret, jQuery.token[i+1].constructor == Function ?
+						r = ret = jQuery.map( ret, jQuery.isFunction( jQuery.token[i+1] ) ?
 							jQuery.token[i+1] :
 							function(a){ return eval(jQuery.token[i+1]); });
 
@@ -1012,9 +1016,7 @@ jQuery.extend({
 		
 				// Look for, and replace, string-like sequences
 				// and finally build a regexp out of it
-				var re = new RegExp(
-					"^" + p[i].replace("S", "([a-z*_-][a-z0-9_-]*)"), "i" );
-
+				var re = p[i];
 				var m = re.exec( t );
 
 				if ( m ) {
@@ -1040,7 +1042,7 @@ jQuery.extend({
 
 				var re = new RegExp("(^|\\s)" + m[2] + "(\\s|$)");
 				r = jQuery.grep( r, function(e){
-					return re.test(e.className || '');
+					return re.test(e.className || "");
 				}, not);
 
 			// Otherwise, find the expression to execute
@@ -1072,7 +1074,7 @@ jQuery.extend({
 				if ( token == "." )
 					add = s.className && re.test(s.className);
 				else if ( token == "#" )
-					add = s.getAttribute('id') == name;
+					add = s.getAttribute("id") == name;
 	
 				if ( add )
 					r.push( s );
@@ -1198,15 +1200,14 @@ jQuery.event = {
 
 		// Handle triggering a single element
 		} else if ( element["on" + type] ) {
-			if ( element[ type ] && element[ type ].constructor == Function )
-				element[ type ]();
-			else {
-				// Pass along a fake event
-				data.unshift( this.fix({ type: type, target: element }) );
+			// Pass along a fake event
+			data.unshift( this.fix({ type: type, target: element }) );
 	
-				// Trigger the event
-				element["on" + type].apply( element, data );
-			}
+			// Trigger the event
+			var val = element["on" + type].apply( element, data );
+
+			if ( val !== false && jQuery.isFunction( element[ type ] ) )
+				element[ type ]();
 		}
 	},
 
@@ -1473,7 +1474,7 @@ jQuery.fn.extend({
 
 	show: function(speed,callback){
 		var hidden = this.filter(":hidden");
-		speed ?
+		return speed ?
 			hidden.animate({
 				height: "show", width: "show", opacity: "show"
 			}, speed, callback) :
@@ -1483,12 +1484,11 @@ jQuery.fn.extend({
 				if ( jQuery.css(this,"display") == "none" )
 					this.style.display = "block";
 			});
-		return this;
 	},
 
 	hide: function(speed,callback){
 		var visible = this.filter(":visible");
-		speed ?
+		return speed ?
 			visible.animate({
 				height: "hide", width: "hide", opacity: "hide"
 			}, speed, callback) :
@@ -1499,17 +1499,17 @@ jQuery.fn.extend({
 					this.oldblock = "block";
 				this.style.display = "none";
 			});
-		return this;
 	},
 
 	// Save the old toggle function
 	_toggle: jQuery.fn.toggle,
 	toggle: function( fn, fn2 ){
-		return fn ?
+		var args = arguments;
+		return jQuery.isFunction(fn) && jQuery.isFunction(fn2) ?
 			this._toggle( fn, fn2 ) :
 			this.each(function(){
 				jQuery(this)[ jQuery(this).is(":hidden") ? "show" : "hide" ]
-					.apply( jQuery(this), arguments );
+					.apply( jQuery(this), args );
 			});
 	},
 	slideDown: function(speed,callback){
@@ -1576,7 +1576,7 @@ jQuery.extend({
 	speed: function(speed, easing, fn) {
 		var opt = speed && speed.constructor == Object ? speed : {
 			complete: fn || !fn && easing || 
-				speed && speed.constructor == Function && speed,
+				jQuery.isFunction( speed ) && speed,
 			duration: speed,
 			easing: fn && easing || easing && easing.constructor != Function && easing
 		};
@@ -1586,11 +1586,11 @@ jQuery.extend({
 			{ slow: 600, fast: 200 }[opt.duration]) || 400;
 	
 		// Queueing
-		opt.oldComplete = opt.complete;
+		opt.old = opt.complete;
 		opt.complete = function(){
 			jQuery.dequeue(this, "fx");
-			if ( opt.oldComplete && opt.oldComplete.constructor == Function )
-				opt.oldComplete.apply( this );
+			if ( jQuery.isFunction( opt.old ) )
+				opt.old.apply( this );
 		};
 	
 		return opt;
@@ -1628,9 +1628,11 @@ jQuery.extend({
 		var y = elem.style;
 		
 		// Store display property
-		var oldDisplay = jQuery.css(elem, 'display');
+		var oldDisplay = jQuery.css(elem, "display");
+
 		// Set display property to block for animation
 		y.display = "block";
+
 		// Make sure that nothing sneaks out
 		y.overflow = "hidden";
 
@@ -1704,7 +1706,7 @@ jQuery.extend({
 			// Remember where we started, so that we can go back to it later
 			elem.orig[prop] = this.cur();
 
-			if(oldDisplay == 'none')  {
+			if(oldDisplay == "none")  {
 				options.show = true;
 				
 				// Stupid IE, look what you made me do
@@ -1742,16 +1744,16 @@ jQuery.extend({
 
 				if ( done ) {
 					// Reset the overflow
-					y.overflow = '';
+					y.overflow = "";
 					
 					// Reset the display
 					y.display = oldDisplay;
-					if (jQuery.css(elem, 'display') == 'none')
-						y.display = 'block';
+					if (jQuery.css(elem, "display") == "none")
+						y.display = "block";
 
 					// Hide the element if the "hide" operation was done
 					if ( options.hide ) 
-						y.display = 'none';
+						y.display = "none";
 
 					// Reset the properties, if the item has been hidden or shown
 					if ( options.hide || options.show )
@@ -1759,11 +1761,11 @@ jQuery.extend({
 							if (p == "opacity")
 								jQuery.attr(y, p, elem.orig[p]);
 							else
-								y[p] = '';
+								y[p] = "";
 				}
 
 				// If a callback was provided, execute it
-				if ( done && options.complete && options.complete.constructor == Function )
+				if ( done && jQuery.isFunction( options.complete ) )
 					// Execute the complete function
 					options.complete.apply( elem );
 			} else {
@@ -1789,7 +1791,7 @@ jQuery.fn.extend({
 		this.load( url, params, callback, 1 );
 	},
 	load: function( url, params, callback, ifModified ) {
-		if ( url.constructor == Function )
+		if ( jQuery.isFunction( url ) )
 			return this.bind("load", url);
 
 		callback = callback || function(){};
@@ -1800,7 +1802,7 @@ jQuery.fn.extend({
 		// If the second parameter was provided
 		if ( params )
 			// If it's a function
-			if ( params.constructor == Function ) {
+			if ( jQuery.isFunction( params.constructor ) ) {
 				// We assume that it's the callback
 				callback = params;
 				params = null;
@@ -1822,7 +1824,7 @@ jQuery.fn.extend({
 			complete: function(res, status){
 				if ( status == "success" || !ifModified && status == "notmodified" )
 					// Inject the HTML into all the matched elements
-					self.attr("innerHTML", res.responseText)
+					self.html(res.responseText)
 					  // Execute all the scripts inside of the newly-injected HTML
 					  .evalScripts()
 					  // Execute callback
@@ -1837,7 +1839,7 @@ jQuery.fn.extend({
 		return jQuery.param( this );
 	},
 	evalScripts: function() {
-		return this.find('script').each(function(){
+		return this.find("script").each(function(){
 			if ( this.src )
 				jQuery.getScript( this.src );
 			else
@@ -1864,7 +1866,7 @@ jQuery.each( "ajaxStart,ajaxStop,ajaxComplete,ajaxError,ajaxSuccess,ajaxSend".sp
 jQuery.extend({
 	get: function( url, data, callback, type, ifModified ) {
 		// shift arguments if data argument was ommited
-		if ( data && data.constructor == Function ) {
+		if ( jQuery.isFunction( data ) ) {
 			callback = data;
 			data = null;
 		}
@@ -1923,7 +1925,7 @@ jQuery.extend({
 		// if data available
 		if ( s.data ) {
 			// convert data if not already a string
-			if (s.processData && typeof s.data != 'string')
+			if (s.processData && typeof s.data != "string")
     			s.data = jQuery.param(s.data);
 			// append data to url for get requests
 			if( s.type.toLowerCase() == "get" )
