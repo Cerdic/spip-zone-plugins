@@ -1,0 +1,19 @@
+[(#REM) descriptif=Fond de test multi pour le plugin de configuration cfg
+<br /><a href="../?page=cfg&var_mode=recalcul" class="spip_in">retour test public</a>
+
+]
+[(#REM) titre=Test multi pour le plugin cfg]
+
+#CACHE{0}
+[(#INCLURE{fond=fonds/cfg_tete}{lang}{base_url}{hash}{arg})]
+
+<fieldset><legend><:Champs de chez multi:></legend>
+<label>id</label>
+<input type="text" name="mulid" class="type_id" value="#ENV{mulid}" size="10" />
+<label>password</label>
+<input type="password" name="mulpwd" class="type_pwd" value="#ENV{mulpwd}" size="10" />
+<label>idnum</label>
+<input type="text" name="mulidnum" class="type_idnum" value="#ENV{mulidnum}" size="8" />
+</fieldset>
+
+[(#INCLURE{fond=fonds/cfg_pied}{lang})]

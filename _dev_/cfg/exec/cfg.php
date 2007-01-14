@@ -188,27 +188,18 @@ class cfg
 		return $return;
 	}
 
-	function boite_liens($titre = "", $elements = array())
+	function boite_liens($lien)
 	{
-		if (!$elements) {
-			return '';
-		}
-		$dedans = debut_boite_info(true);
-		if ($titre) {
-			$dedans .= '<h4>' . _L($titre) . '</h4>';
-		}
-		if (is_string($elements)) {
-			return $dedans . $elements;
-		}
-		$dedans .= '<ul>';
-		foreach ($elements as $elt) {
-			$dedans .= '<li>';
-			if (!empty($elt['get'])) {
-				$dedans .= '<a href="' .
-				  generer_url_ecrire('config_sms', $elt['get'] ) . '">' .
-				  (empty($elt['name']) ? $elt['get'] : $elt['name']) . '</a>';
+		$dedans = debut_boite_info(true) .
+			'<h4>' . _L($lien) . '</h4><ul><li><a href="' .
+			  generer_url_ecrire('cfg', 'cfg=' . $lien) . '"><b>' .
+				  _L('Nouveau') . ' ' . $lien . '</b></a></li>';
+		if (count($this->val[$lien])) {
+			foreach ($this->val[$lien] as $compte => $info) {
+				$dedans .= '<li><a href="' .
+					  generer_url_ecrire('cfg', 'cfg=' . $lien . '&modifier=' . $compte ) . '">' .
+					  $compte . '</a></li>';
 			}
-			$dedans .=  (empty($elt['desc']) ? '' : '<br />' . $elt['desc']) . '</li>';
 		}
 		$dedans .= '</ul>' . fin_boite_info(true);
 		return $dedans;
