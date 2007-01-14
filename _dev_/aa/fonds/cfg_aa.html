@@ -1,0 +1,40 @@
+#CACHE{0}
+[(#INCLURE{fond=fonds/cfg_tete}{lang}{base_url}{hash}{arg}{compte})]
+
+<fieldset><legend><:article:> <:sommaire:></legend>
+<label>Choix de l'article à utiliser dans la page sommaire</label>
+<select name="id_aa">
+   <option value="">Racine</option>
+	 <BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
+	    <option value="">&nbsp;&nbsp;<strong>rubrique : #TITRE</strong></option>
+			<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
+	        <option value="#ID_ARTICLE" [(#CONFIG{aa/id_aa}|=={#ID_ARTICLE}|?{selected="selected",''})]>&nbsp;&nbsp;&nbsp;&nbsp;#ID_ARTICLE . #TITRE</option>
+			</BOUCLE_articles_racine>
+			<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
+			   <option value="" style="font-weight: bold;">&nbsp;&nbsp;rubrique #ID_RUBRIQUE : #TITRE</option>
+				 <BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}>
+				    <option value="#ID_ARTICLE" [(#CONFIG{aa/id_aa}|=={#ID_ARTICLE}|?{selected="selected",''})]>&nbsp;&nbsp;&nbsp;&nbsp;#ID_ARTICLE . #TITRE</option>
+
+				 </BOUCLE_articles>
+				 <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+			</BOUCLE_rubriques>
+	 </BOUCLE_secteurs>
+</select>
+</fieldset>
+
+<fieldset><legend>Eléments à utiliser :</legend>
+   <label>Logo</label>
+   <input type="checkbox" name="logo" [checked="(#ENV{logo})"] />
+
+   <label>Titre</label>
+   <input type="checkbox" name="titre" [checked="(#ENV{titre})"] />
+   <label>Sous-titre</label>
+   <input type="checkbox" name="soustitre" [checked="(#ENV{soustitre})"] />	 
+	 <label>Chapeau</label>
+   <input type="checkbox" name="chapo" [checked="(#ENV{chapo})"] />
+	 <label>Texte</label>
+
+   <input type="checkbox" name="texte" [checked="(#ENV{texte})"] />
+</fieldset>
+
+[(#INCLURE{fond=fonds/cfg_pied}{lang}{hash}{arg})]
