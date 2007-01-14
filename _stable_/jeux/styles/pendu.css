@@ -1,23 +1,9 @@
-/* Mise en forme des QCM
- */
-/*
-.qcm
-{ 
- text-align:left;
- font-size: 90%;
- font-family: arial, helvetica, sans-serif;
- color: #3F5264;
- font-size: 12;
- border: 1px solid #F78C54;
- padding: 3px; 
- background-color: #FFEADE;
- width:100%;
+/* Mise en forme du jeu de pendu */
+
+table.pendu { 
+ text-align:center;
 }
 
-.qcm_titre{ 
- text-align: center;
-}
-*/
 table.pendu_clavier, td.pendu_clavier{ 
  text-align:center;
  width:16em;
@@ -31,46 +17,18 @@ input.pendu_clavier{
  margin:1px;
 }
 
-input.pendu_cache, input.pendu_jouees{ 
+input.pendu_deviner{ 
  border:0px none;
-}
-/*
-.qcm_reponse{ 
-  font-size: 80%;
- font-size: 10;
- }
-
-.qcm_correction_faux{ 
- font-size: 10;
- text-align:center;
- background-color: red;
- color: #FFEADE;
- font-weight: bold; 
- padding-right: 1px;
- padding-left: 1px;
- width:12em;
+ font-weight:bold;
+ font-size: 120%;
 }
 
-.qcm_correction_juste{ 
- font-size: 10;
- text-align:center;
- background-color: green;
- color: #FFEADE;
- font-weight: bold;
- padding-right: 1px;
- padding-left: 1px;
- width: 11em;
+input.pendu_reset{ 
+ border:0px none;
+ color:#333333;
 }
 
-.qcm_correction_null{ 
- font-size: 10; 
- font-weight: bold;
+img.image_pendu{ 
+ border:0px none;
+ display:block;
 }
-
-.qcm_select{ 
- color: #3F5264;
- font-size: 10; 
- background-color: #F3EEEA;
-}
-
-*/

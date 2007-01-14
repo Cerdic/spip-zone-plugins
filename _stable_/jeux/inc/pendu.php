@@ -13,10 +13,11 @@ Insere un jeu de pendu dans vos articles !
 
 balises du plugin : <jeux></jeux>
 separateurs obligatoires : [pendu]
-separateurs optionnels   : [titre], [texte]
+separateurs optionnels   : [titre], [texte], [config]
 parametres de configurations par defaut :
-	pendu=1		// dessin du pendu à utiliser (voir : /jeux/img/pendu?)
-	regle=non	// Afficher la règle du jeu ?
+	pendu=1		// dessin du pendu a utiliser (voir : /jeux/img/pendu?)
+	regle=non	// Afficher la regle du jeu ?
+	indices=non // Afficher les premieres et dernieres lettres?
 
 Règles du jeu :
 - Vous devez choisir une lettre à chaque essai.
@@ -41,64 +42,23 @@ Exemple de syntaxe dans l'article :
 function pendu_titre($texte) {
  return $texte?"<p class=\"jeux_titre pendu_titre\">$texte</p>":'';
 }
-function pendu_pendu($texte, $indexJeux) {
-
-  if (_request('etat')=='') set_request('etat', 1);
-  if (_request('mot')=='') {
-	$mots = jeux_liste_mots_maj($texte);
-  	set_request('mot', $mot1 = $mots[array_rand($mots)]);
-	set_request('mot2', str_repeat('_', strlen($mot1)));
-  }
-  
- //$proposition = join(' ', preg_split('//', _request('mot2'), -1, PREG_SPLIT_NO_EMPTY));
- $proposition = "\n<input class=\"pendu_cache\" type=\"button\" readonly=\"readonly\" value=\"$proposition\" name=\"cache\" \">";
- //$jouees = join(' ', preg_split('//', _request('jouees'), -1, PREG_SPLIT_NO_EMPTY));
- $jouees = "\n<input class=\"pendu_jouees\" type=\"button\" readonly=\"readonly\" value=\"$jouees\" name=\"jouees\" \">"; 
- return affiche_un_pendu(intval(_request('etat'))) . '<br>'
- 	. $proposition . '<br>' . affiche_un_clavier($indexJeux) . '<br>' . $jouees
- 	. (jeux_config('regle')?'<p class="jeux_regle">'.definir_puce()._T('pendu:regle').'</p>' : '')
-	. '['._JEUX_POST."|pendu_javascript_post|$indexJeux|\"".join('","',jeux_liste_mots_maj($texte)).'"@@]';
- //return $p . ($texte?"<p class=\"jeux_question pendu_pendu\">$texte</p>":'');
-}
-function pendu_reponse($texte, $id) {
- if (!jeux_config('reponse')) return '';
- include_spip('inc/filtrer');
- $image = image_typo($texte, 'taille=10');
- $image = aligner_droite(filtrer('image_flip_vertical', filtrer('image_flip_horizontal', $image)));
- $texte = jeux_block_invisible($id, _T('jeux:reponse'), $image);
- return $texte?"<span class=\"pendu_reponse\">$texte</span>":'';
-}
-
-function pendu_javascript_post($idJeux, $liste) {
- return "<script type=\"text/javascript\"><!--
-Mots[$idJeux] = new Array($liste);
-//Cherche[$idJeux] = '"._request('mot')."' //new Array($liste);
-//Chaine[$idJeux]='"._request('mot2')."'; // Stocker le mot tiré
-NbMots=Mots[$idJeux].length; // Nb mots contenus dans la table Mots
-Tirage=Math.floor(Math.random()*NbMots); // Tirer aléatoirement un mot
-Cherche[$idJeux]=Mots[$idJeux][Tirage]; // Stocker le mot tiré
-//Chaine[$idJeux]=Cherche[$idJeux].substr(0,1); // Créer la chaine à afficher
-Long=Cherche[$idJeux].length; // Calculer la longueur du mot tiré
-Chaine[$idJeux]='';
-for(i=1;i<(Long-0);i++) Chaine[$idJeux]+='!'; // en mettant des . au milieu
-//Chaine+=Cherche.substr(Long-1,Long);
-//Long[$idJeux]=Cherche.length; // Calculer la longueur du mot tiré
-//var Chaine[$idJeux]=Cherche[$id].substr(0,1); // Créer la chaine à afficher
-//for(i=1;i<=(Long[$idJeux]-2);i++) Chaine[$idJeux]+=''; // en mettant des . au milieu
-//	Chaine+=Cherche[$id].substr(Long[$id]-1,Long[$id]);
-Propos[$idJeux]=''; // Lettres proposées
-NbErr[$idJeux]=0; // Nombre d'erreurs
-pendu_aff_mot($idJeux);
-//document.write(Cherche[$idJeux]);
-// --></script>";
-}
-
-function affiche_un_pendu($etat) {
- $img = preg_split('/\s*,\s*/', jeux_config($etat));
- $debut = '<img src="'.jeux_config('base_img');
- $fin = '">';
-//echo "<br>etat:$etat"; print_r($img);
- return $debut.join($fin.'<br />'.$debut, $img).$fin;
+function pendu_pendu($js, $indexJeux) {
+ $nb_images = jeux_config('nb_images');
+ $js = "\n<script type=\"text/javascript\"><!--$js
+	var T_fini=\""._T('pendu:fini').'";
+	var T_bravo="'._T('jeux:bravo').'";';
+ $proposition = '<input class="pendu_deviner" type="button" readonly=\"readonly" value="" name="cache">';
+ $reset = '<input class="pendu_reset" type="button" value="'._T('jeux:rejouer').'" onclick="pendu_init('.$indexJeux.')">'; 
+ $images = '';
+ for($i=0; $i<=$nb_images-1; $i++)
+ 	$images .= "<img class=\"image_pendu\" name=\"pict{$indexJeux}_$i\" src=\"\" />";
+ $regles = jeux_config('regle')?'<p class="jeux_regle">'.definir_puce()._T('pendu:regle').'</p>' : '';
+ return '<table class="pendu" border=0><tr><td>'
+ 	. "<p align=\"center\">$images<br/>\n$proposition</p></td><td width=\"20\">&nbsp;</td><td valign=\"bottom\">\n" . affiche_un_clavier($indexJeux) . "<br/></td></tr><tr><td colspan=\"3\" align=\"right\">$reset</td></tr></table>\n"
+ 	. $regles
+	. echappe_html("$js
+ 	pendu_init($indexJeux);
+// --></script>", 'JEUX');
 }
 
 function affiche_un_clavier($indexJeux) {
@@ -109,14 +69,6 @@ function affiche_un_clavier($indexJeux) {
  return "\n<table class=\"pendu_clavier\" border=0><tr><td td class=\"pendu_clavier\" >".join('', array_slice($clav, 0, $i)).'<br>'.join('', array_slice($clav, $i)).'</td></tr></table>';
 }
 
-function affiche_un_clavier0($indexJeux) {
- $clav = preg_split('//', _T('jeux:alphabet'), -1, PREG_SPLIT_NO_EMPTY);
- foreach ($clav as $i=>$lettre) $clav[$i] = "<td><input class=\"jeux_bouton pendu_clavier\" type=\"button\" value=\"$lettre\" onclick=\"pendu_trouve('$lettre', 'pendu_$indexJeux');\"></td>";
- $i = floor(count($clav)/2);
-//echo "<br>etat:$etat"; print_r($img);
- return "\n<table class=\"pendu_clavier\"><tr>".join('', array_slice($clav, 0, $i)).'</tr><tr>'.join('', array_slice($clav, $i)).'</tr></table>';
-}
-
 // fonction principale 
 function jeux_pendu($texte, $indexJeux) {
   $html = false;
@@ -125,18 +77,32 @@ function jeux_pendu($texte, $indexJeux) {
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('pendu', $texte);
   jeux_config_init("
-	pendu=1		// dessin du pendu à utiliser dans : /jeux/img/pendu?
-	regle=non	// Afficher la règle du jeu ?
+	pendu=1		// dessin du pendu a utiliser dans : /jeux/img/pendu?
+	regle=non	// Afficher la regle du jeu ?
+	indices=non // Afficher les premieres et dernieres lettres?
   ", false);
-  jeux_config_set('base_img', $f = _DIR_PLUGIN_JEUX.'img/pendu'.jeux_config('pendu').'/');
-  lire_fichier ($f.'config.ini', $images);
+  // initialisation des images de pendu
+  $path = _DIR_PLUGIN_JEUX.'img/pendu'.jeux_config('pendu').'/';
+  lire_fichier ($path.'config.ini', $images);
   jeux_config_init($images, false);
-//global $jeux_config; print_r($jeux_config);
+  $i=1; $c=0; $js2=false;
+  $extremes = jeux_config('indices')?'true':'false'; // Affiche-t-on les lettres extremes?
+  $js="\n\tExtremes[$indexJeux]=$extremes;\n\tPaths[$indexJeux]='$path';\n\tImages[$indexJeux]=new Array(\n\t";
+  while(jeux_config($i)) {
+    $images = preg_split('/\s*,\s*/', jeux_config($i++));
+	$j=1; 
+	$js2[]= " new Array('".join("','",$images)."')";
+	$c = max($x, count($images));
+  } $i-=2;
+  jeux_config_set('nb_images',$c);
+  $js .= join(",\n\t",$js2) . "\n\t);\n\tnb_Images[$indexJeux]=$c;\n\tnb_Pendus[$indexJeux]=$i;";
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $html .= pendu_titre($tableau[$i+1]);
-	  elseif ($valeur==_JEUX_PENDU) $html .= pendu_pendu($tableau[$i+1], $indexJeux);
+	  elseif ($valeur==_JEUX_PENDU) $mots = jeux_liste_mots_maj($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
   }
+  $js .= "\n\tMots[$indexJeux]=new Array('".join("','",$mots)."');";
+  $html .= pendu_pendu($js, $indexJeux);
   return "<form NAME=\"pendu$indexJeux\">$html</form>";
 }
 

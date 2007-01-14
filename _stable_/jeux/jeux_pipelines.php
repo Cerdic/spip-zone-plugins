@@ -30,6 +30,8 @@ function jeux_pre($chaine, $indexJeux){
 
 // fonction post-traitement
 function jeux_post($chaine){
+$chaine=echappe_retour($chaine, 'JEUX');
+
 	$sep1 = '['._JEUX_POST.'|'; $sep2 = '@@]';
 	if (strpos($chaine, $sep1)===false || strpos($chaine, $sep2)===false) return $chaine;
 	

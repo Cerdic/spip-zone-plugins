@@ -26,6 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'reinitialiser'		=> 'R&eacute;initialiser',
 'recommencer'		=> 'Recommencer',
+'rejouer'		=> 'Rejouer',
+'reset'		=> 'Reset',
 
 'grille_valide'		=>'La grille est valide',
 'grille_invalide'		=>'La grille est invalide',

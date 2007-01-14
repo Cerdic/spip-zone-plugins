@@ -26,6 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'reinitialiser'		=> 'Ricarica', // 'qcm_reinitialiser' => "Ricarica il questionario",
 'recommencer'		=> 'Ricomincia',
+'rejouer'		=> 'Rejouer',
+'reset'		=> 'Reset',
 
 'grille_valide'		=>'Lo schema è valido',
 'grille_invalide'		=>'Lo schema non è valido',
