@@ -2,10 +2,19 @@
 <br /><a href="../?page=cfg&var_mode=recalcul" class="spip_in">retour test public</a>
 
 ]
-[(#REM) titre=Test multi pour le plugin cfg]
+[(#REM) titre=Test multi pour #ENV{depuis} avec le plugin cfg]
 
 #CACHE{0}
 [(#INCLURE{fond=fonds/cfg_tete}{lang}{base_url}{hash}{arg})]
+
+<fieldset>
+<input name="depuis" type="hidden" value="#ENV{depuis}" />
+<label for="id">*<:cfg:id:></label>
+<input type="text" name="id" value="#ENV{id}" size="15" />
+<label for="copier"><:cfg:copier_si_change:></label>
+<input type="checkbox" name="copier" />
+<input type="hidden" name="was_id" value="#ENV{id}" />
+</fieldset>
 
 <fieldset><legend><:Champs de chez multi:></legend>
 <label>id</label>

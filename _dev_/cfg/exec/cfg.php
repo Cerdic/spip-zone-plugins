@@ -11,7 +11,8 @@ function exec_cfg_dist()
 {
 	$config = new cfg(
 		($nom = _request('cfg'))? $nom : 'cfg',
-		($fond = _request('fond'))? $fond : $nom
+		($fond = _request('fond'))? $fond : $nom,
+		($id = _request('id'))? $id : ''
 		);
 
 	$config->traiter();
@@ -22,19 +23,21 @@ class cfg
 {
 	var $nom = '';
 	var $fond = '';
+	var $id = '';
 	var $descriptif = '';
 	var $message = '';
 	var $liens = array();
 	var $champs = array();
 	var $val = array();
 	
-	function cfg($nom, $fond = '', $opt = array())
+	function cfg($nom, $fond = '', $id = '', $opt = array())
 	{
 		$this->nom = $nom;
 		$this->titre = _L('Configuration') . ' ' . $this->nom;
 		foreach ($opt as $o=>$v) {
 			$this->$o = $v;
 		}
+		$this->id = $id;
 		$this->lire();
 		if ($fond) {
 			$this->message .= $this->set_fond($fond);
@@ -43,14 +46,7 @@ class cfg
 	
 	function lire()
 	{
-		include_spip('inc/meta');
-		lire_metas();
-	    global $meta;
-	    if (empty($meta[$this->nom])) {
-	    	$this->val = array();
-	    } else {
-	    	$this->val = unserialize($meta[$this->nom]);
-	    }
+    	$this->val = lire_cfg($this->nom);
 	    return $this->val;
 	}
 	
@@ -192,10 +188,10 @@ class cfg
 			  generer_url_ecrire('cfg', 'cfg=' . $lien) . '"><b>' .
 				  _L('Nouveau') . ' ' . $lien . '</b></a></li>';
 		if (count($this->val[$lien])) {
-			foreach ($this->val[$lien] as $compte => $info) {
-				$dedans .= '<li><a href="' .
-					  generer_url_ecrire('cfg', 'cfg=' . $lien . '&modifier=' . $compte ) . '">' .
-					  $compte . '</a></li>';
+			foreach (lire_cfg($lien) as $compte => $info) {
+				$dedans .= '<li><a href="' . generer_url_ecrire('cfg', 'cfg=' . $lien .
+						'&id=' . $compte ) . '">' .
+						 $compte . '</a></li>';
 			}
 		}
 		$dedans .= '</ul>' . fin_boite_info(true);
