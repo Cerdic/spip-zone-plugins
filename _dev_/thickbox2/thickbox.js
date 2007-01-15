@@ -23,7 +23,7 @@
 // init
 //
 var imageArray = [];
-var FULL_S = false ;
+var FULL_S = false;
 if(typeof TB_chemin_css == 'undefined') { TB_chemin_css = 'thickbox.css'; }
 if(typeof TB_chemin_animation == 'undefined') { TB_chemin_animation = 'circle_animation.gif'; }
 $(TB_init);
@@ -67,8 +67,10 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
     
     if(caption==null){caption=""};
     
-    if(!(FULL_S))  $(window).scroll(TB_position);
-         
+    if(!FULL_S){
+    $(window).scroll(TB_position);
+    }    
+    
     TB_overlaySize();
     
     $("body").append("<div id='TB_load'><img src='"+TB_chemin_animation+"' /></div>");
@@ -124,13 +126,14 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
       var y = pagesize[1] - 150;
       var imageWidth = imgPreloader.width;
       var imageHeight = imgPreloader.height;
+      IMAGE_WIDTH = imageWidth ;
+	  IMAGE_HEIGHT = imageHeight ;
+     
       if (imageWidth > x) {
         TB_Big_Image = true ;
         imageHeight = imageHeight * (x / imageWidth); 
         imageWidth = x; 
-        if (imageHeight > y) { 
-          IMAGE_WIDTH = imageWidth ;
-          IMAGE_HEIGHT = imageHeight ;
+         if (imageHeight > y) { 
           TB_Big_Image = true ;
           imageWidth = imageWidth * (y / imageHeight); 
           imageHeight = y; 
@@ -141,8 +144,6 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
         imageHeight = y; 
         if (imageWidth > x) { 
           TB_Big_Image = true ;
-          IMAGE_WIDTH = imageWidth ;
-          IMAGE_HEIGHT = imageHeight ;
           imageHeight = imageHeight * (x / imageWidth); 
           imageWidth = x;
         }
@@ -158,23 +159,22 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
       
       	$("#TB_window").append("<a href='' id='TB_ImageOff'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+"'/></a>" + "<div id='TB_legend' style='background-color:#fff'><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'><img src='"+TB_chemin_close+"' /></a></div><div id='TB_caption'>"+caption+"</div><div id='TB_secondLine'>" + TB_imageCount + TB_Full_Size + TB_PrevHTML + TB_NextHTML + "</div></div>"); 
 			
-			if(!(FULL_S)) TB_position() ;
+			//TB_position() ;
 
-			$("#TB_legend").hide();
 			$("#TB_closeWindowButton").click(TB_remove);		
 			$("#TB_load").remove();
 			$("#TB_window").fadeIn("slow");
-			setTimeout('$("#TB_legend").slideDown(800);',1000);      
+			setTimeout('$("#TB_legend").slideDown(800);',1600);      
       
       
       
       if (!(TB_PrevHTML == "")) {
         function goPrev(){
+          FULL_S = false ;
           if($(document).unclick(goPrev)){$(document).unclick(goPrev)};
           $("#TB_window").remove();
           $("body").append("<div id='TB_window'></div>");
           TB_show(TB_PrevCaption, TB_PrevURL);
-          FULL_S = false ;       
           return false;  
         }
         $("#TB_prev").click(goPrev);
@@ -182,10 +182,10 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
       
       if (!(TB_NextHTML == "")) {    
         function goNext(){
+          FULL_S = false ;
           $("#TB_window").remove();
           $("body").append("<div id='TB_window'></div>");
           TB_show(TB_NextCaption, TB_NextURL); 
-          FULL_S = false ;       
           return false;  
         }
         $("#TB_next").click(goNext);
@@ -195,13 +195,29 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
       
       if (!(TB_Full_Size == "")) {    
         function fullSize(){
- 		document.location = url ;
- 		/*
- 		var arrayPageScroll = TB_getPageScrollTop();
+ 		var arrayPageScroll = TB_getPageScrollTop();  
+		var pagesize = TB_getPageSize();  
+
+ 		if(!FULL_S){
  		FULL_S = true ;
- 		$("#TB_window").animate({top:arrayPageScroll[1],left:50,width:(IMAGE_WIDTH+20),height:(IMAGE_HEIGHT+20)},1500);         
- 		$("#TB_Image").animate({top:20,left:20,width:IMAGE_WIDTH,height:IMAGE_HEIGHT},1500);         
-        */
+		TB_TOP = arrayPageScroll[1];
+		if( (arrayPageScroll[0] + (pagesize[0] - IMAGE_WIDTH)/2) > 0 ){
+		TB_LEFT = arrayPageScroll[0] + (pagesize[0] - IMAGE_WIDTH)/2 ;
+		}else{
+		TB_LEFT = 50 ;
+		}
+		
+		$("#TB_window").animate({top:TB_TOP,left:TB_LEFT,width:(IMAGE_WIDTH+20),height:(IMAGE_HEIGHT+20)},1500);         
+ 		$("#TB_Image").animate({top:20,left:20,width:IMAGE_WIDTH,height:IMAGE_HEIGHT},1500, TB_recadre);         
+      
+
+       	}else{
+       	FULL_S = false ;
+       
+       	$("#TB_window").animate({top: (arrayPageScroll[1] + (pagesize[1]-TB_HEIGHT)/2),left:(arrayPageScroll[0] + (pagesize[0] - TB_WIDTH)/2), width:TB_WIDTH,height:TB_HEIGHT},1500);         
+ 		$("#TB_Image").animate({top:20,left:20,width:(TB_WIDTH - 20),height:(TB_HEIGHT - 20)},1500,TB_recadre);         
+       	}
+       
         return false;  
         }
         $("#TB_Full").click(fullSize);
@@ -236,7 +252,7 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
         }  
       }
       
-      if(!(FULL_S)) TB_position() ;
+      TB_position() ;
  
       $("#TB_load").remove();
       $("#TB_window").css({display:"block"}); //for safari using css instead of show
@@ -284,7 +300,7 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
       
     }
     
-    if(!(FULL_S)) $(window).resize(TB_position);
+    $(window).resize(TB_position);
     
     document.onkeyup = function(e){   
       if (e == null) { // ie
@@ -317,7 +333,10 @@ function TB_remove() {
 function TB_position() {
   var pagesize = TB_getPageSize();  
   var arrayPageScroll = TB_getPageScrollTop();  
+ if(!FULL_S){
   $("#TB_window").css({width:TB_WIDTH+"px",left: (arrayPageScroll[0] + (pagesize[0] - TB_WIDTH)/2)+"px", top: (arrayPageScroll[1] + (pagesize[1]-TB_HEIGHT)/2)+"px" });
+  }    
+
 }
 
 function TB_overlaySize(){
@@ -382,4 +401,8 @@ function TB_getPageSize(){
   var h = window.innerHeight || self.innerHeight || (de&&de.clientHeight) || document.body.clientHeight
   arrayPageSize = new Array(w,h) 
   return arrayPageSize;
+}
+function TB_recadre(){
+TB_overlaySize();
+TB_position();
 }
