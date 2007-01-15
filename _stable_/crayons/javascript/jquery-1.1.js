@@ -1,14 +1,14 @@
 /* prevent execution of jQuery if included more than once */
 if(typeof window.jQuery == "undefined") {
 /*
- * jQuery 1.1b - New Wave Javascript
+ * jQuery 1.1 - New Wave Javascript
  *
- * Copyright (c) 2006 John Resig (jquery.com)
+ * Copyright (c) 2007 John Resig (jquery.com)
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * $Date: 2007-01-14 16:47:32 +0100 (Sun, 14 Jan 2007) $
- * $Rev: 1062 $
+ * $Date: 2007-01-14 23:37:33 +0100 (Sun, 14 Jan 2007) $
+ * $Rev: 1073 $
  */
 
 // Global undefined variable
@@ -29,14 +29,14 @@ var jQuery = function(a,c) {
 	
 	// Handle HTML strings
 	if ( typeof a  == "string" ) {
-		// HANDLE: $(html) -> $(array)
 		var m = /^[^<]*(<.+>)[^>]*$/.exec(a);
-		if ( m )
-			a = jQuery.clean( [ m[1] ] );
+
+		a = m ?
+			// HANDLE: $(html) -> $(array)
+			jQuery.clean( [ m[1] ] ) :
 		
-		// HANDLE: $(expr)
-		else
-			return new jQuery( c ).find( a );
+			// HANDLE: $(expr)
+			jQuery.find( a, c );
 	}
 	
 	return this.setArray(
@@ -59,7 +59,7 @@ if ( typeof $ != "undefined" )
 var $ = jQuery;
 
 jQuery.fn = jQuery.prototype = {
-	jquery: "1.1b",
+	jquery: "1.1",
 
 	size: function() {
 		return this.length;
@@ -125,12 +125,18 @@ jQuery.fn = jQuery.prototype = {
 	},
 
 	text: function(e) {
-		var type = this.length && this[0].innerText == undefined ?
-			"textContent" : "innerText";
-			
-		return e == undefined ?
-			jQuery.map(this, function(a){ return a[ type ]; }).join("") :
-			this.each(function(){ this[ type ] = e; });
+		if ( typeof e == "string" )
+			return this.empty().append( document.createTextNode( e ) );
+
+		var t = "";
+		jQuery.each( e || this, function(){
+			jQuery.each( this.childNodes, function(){
+				if ( this.nodeType != 8 )
+					t += this.nodeType != 1 ?
+						this.nodeValue : jQuery.fn.text([ this ]);
+			});
+		});
+		return t;
 	},
 
 	wrap: function() {
@@ -243,8 +249,9 @@ jQuery.fn = jQuery.prototype = {
 			if ( table && this.nodeName.toUpperCase() == "TABLE" && a[0].nodeName.toUpperCase() == "TR" )
 				obj = this.getElementsByTagName("tbody")[0] || this.appendChild(document.createElement("tbody"));
 
-			for ( var i = 0, al = a.length; i < al; i++ )
-				fn.apply( obj, [ clone ? a[i].cloneNode(true) : a[i] ] );
+			jQuery.each( a, function(){
+				fn.apply( obj, [ clone ? this.cloneNode(true) : this ] );
+			});
 
 		});
 	}
@@ -338,10 +345,10 @@ jQuery.extend({
 		if ( p == "height" || p == "width" ) {
 			var old = {}, oHeight, oWidth, d = ["Top","Bottom","Right","Left"];
 
-			for ( var i = 0, dl = d.length; i < dl; i++ ) {
-				old["padding" + d[i]] = 0;
-				old["border" + d[i] + "Width"] = 0;
-			}
+			jQuery.each( d, function(){
+				old["padding" + this] = 0;
+				old["border" + this + "Width"] = 0;
+			});
 
 			jQuery.swap( e, old, function() {
 				if (jQuery.css(e,"display") != "none") {
@@ -417,10 +424,8 @@ jQuery.extend({
 	clean: function(a) {
 		var r = [];
 
-		for ( var i = 0, al = a.length; i < al; i++ ) {
-			var arg = a[i];
-
-			if ( !arg ) continue;
+		jQuery.each( a, function(i,arg){
+			if ( !arg ) return;
 
 			if ( arg.constructor == Number )
 				arg = arg.toString();
@@ -473,13 +478,16 @@ jQuery.extend({
 				
 				arg = div.childNodes;
 			}
+
+			if ( arg.length === 0 )
+				return;
 			
 			if ( arg[0] == undefined )
 				r.push( arg );
 			else
 				r = jQuery.merge( r, arg );
 
-		}
+		});
 
 		return r;
 	},
@@ -731,7 +739,7 @@ jQuery.extend({
 			odd: "i%2",
 
 			// Child Checks
-			"nth-child": "jQuery.nth(a.parentNode.firstChild,m[3],'nextSibling')==a",
+			"nth-child": "jQuery.nth(a.parentNode.firstChild,m[3],'nextSibling',a)==a",
 			"first-child": "jQuery.nth(a.parentNode.firstChild,1,'nextSibling')==a",
 			"last-child": "jQuery.nth(a.parentNode.lastChild,1,'previousSibling')==a",
 			"only-child": "jQuery.sibling(a.parentNode.firstChild).length==1",
@@ -863,10 +871,11 @@ jQuery.extend({
 
 			if ( m ) {
 				// Perform our own iteration and filter
-				for ( var i = 0, rl = ret.length; i < rl; i++ )
-					for ( var c = ret[i].firstChild; c; c = c.nextSibling )
+				jQuery.each( ret, function(){
+					for ( var c = this.firstChild; c; c = c.nextSibling )
 						if ( c.nodeType == 1 && ( c.nodeName == m[1].toUpperCase() || m[1] == "*" ) )
 							r.push( c );
+				});
 
 				ret = r;
 				t = jQuery.trim( t.replace( re, "" ) );
@@ -945,20 +954,20 @@ jQuery.extend({
 						// We need to find all descendant elements, it is more
 						// efficient to use getAll() when we are already further down
 						// the tree - we try to recognize that here
-						for ( var i = 0, rl = ret.length; i < rl; i++ ) {
+						jQuery.each( ret, function(){
 							// Grab the tag name being searched for
 							var tag = m[1] != "" || m[0] == "" ? "*" : m[2];
 
 							// Handle IE7 being really dumb about <object>s
-							if ( ret[i].nodeName.toUpperCase() == "OBJECT" && tag == "*" )
+							if ( this.nodeName.toUpperCase() == "OBJECT" && tag == "*" )
 								tag = "param";
 
 							jQuery.merge( r,
 								m[1] != "" && ret.length != 1 ?
-									jQuery.getAll( ret[i], [], m[1], m[2], rec ) :
-									ret[i].getElementsByTagName( tag )
+									jQuery.getAll( this, [], m[1], m[2], rec ) :
+									this.getElementsByTagName( tag )
 							);
-						}
+						});
 
 						// It's faster to filter by class and be done with it
 						if ( m[1] == "." && ret.length == 1 )
@@ -973,11 +982,12 @@ jQuery.extend({
 							r = [];
 
 							// Then try to find the element with the ID
-							for ( var i = 0, tl = tmp.length; i < tl; i++ )
-								if ( tmp[i].getAttribute("id") == m[2] ) {
-									r = [ tmp[i] ];
-									break;
+							jQuery.each( tmp, function(){
+								if ( this.getAttribute("id") == m[2] ) {
+									r = [ this ];
+									return false;
 								}
+							});
 						}
 
 						ret = r;
@@ -1010,14 +1020,13 @@ jQuery.extend({
 		// Look for common filter expressions
 		while ( t && /^[a-z[({<*:.#]/i.test(t) ) {
 
-			var p = jQuery.parse;
+			var p = jQuery.parse, m;
 
-			for ( var i = 0, pl = p.length; i < pl; i++ ) {
+			jQuery.each( p, function(i,re){
 		
 				// Look for, and replace, string-like sequences
 				// and finally build a regexp out of it
-				var re = p[i];
-				var m = re.exec( t );
+				m = re.exec( t );
 
 				if ( m ) {
 					// Remove what we just matched
@@ -1027,9 +1036,9 @@ jQuery.extend({
 					if ( jQuery.expr[ m[1] ]._resort )
 						m = jQuery.expr[ m[1] ]._resort( m );
 
-					break;
+					return false;
 				}
-			}
+			});
 
 			// :not() is a special case that can be optimized by
 			// keeping it out of the expression list
@@ -1096,13 +1105,13 @@ jQuery.extend({
 		}
 		return matched;
 	},
-	nth: function(cur,result,dir){
+	nth: function(cur,result,dir,elem){
 		result = result || 1;
 		var num = 0;
 		for ( ; cur; cur = cur[dir] ) {
 			if ( cur.nodeType == 1 ) num++;
-			if ( num == result || result == "even" && num % 2 == 0 && num > 1 ||
-				result == "odd" && num % 2 == 1 ) return cur;
+			if ( num == result || result == "even" && num % 2 == 0 && num > 1 && cur == elem ||
+				result == "odd" && num % 2 == 1 && cur == elem ) return cur;
 		}
 	},
 	sibling: function( n, elem ) {
@@ -1195,8 +1204,9 @@ jQuery.event = {
 		if ( !element ) {
 			var g = this.global[type];
 			if ( g )
-				for ( var i = 0, gl = g.length; i < gl; i++ )
-					this.trigger( type, data, g[i] );
+				jQuery.each( g, function(){
+					jQuery.event.trigger( type, data, this );
+				});
 
 		// Handle triggering a single element
 		} else if ( element["on" + type] ) {
@@ -1383,8 +1393,9 @@ jQuery.extend({
 			// If there are functions bound, to execute
 			if ( jQuery.readyList ) {
 				// Execute all of them
-				for ( var i = 0; i < jQuery.readyList.length; i++ )
-					jQuery.readyList[i].apply( document );
+				jQuery.each( jQuery.readyList, function(){
+					this.apply( document );
+				});
 				
 				// Reset the list of functions
 				jQuery.readyList = null;
@@ -1474,7 +1485,7 @@ jQuery.fn.extend({
 
 	show: function(speed,callback){
 		var hidden = this.filter(":hidden");
-		return speed ?
+		speed ?
 			hidden.animate({
 				height: "show", width: "show", opacity: "show"
 			}, speed, callback) :
@@ -1484,11 +1495,12 @@ jQuery.fn.extend({
 				if ( jQuery.css(this,"display") == "none" )
 					this.style.display = "block";
 			});
+		return this;
 	},
 
 	hide: function(speed,callback){
 		var visible = this.filter(":visible");
-		return speed ?
+		speed ?
 			visible.animate({
 				height: "hide", width: "hide", opacity: "hide"
 			}, speed, callback) :
@@ -1499,6 +1511,7 @@ jQuery.fn.extend({
 					this.oldblock = "block";
 				this.style.display = "none";
 			});
+		return this;
 	},
 
 	// Save the old toggle function
@@ -1824,7 +1837,7 @@ jQuery.fn.extend({
 			complete: function(res, status){
 				if ( status == "success" || !ifModified && status == "notmodified" )
 					// Inject the HTML into all the matched elements
-					self.html(res.responseText)
+					self.attr("innerHTML", res.responseText)
 					  // Execute all the scripts inside of the newly-injected HTML
 					  .evalScripts()
 					  // Execute callback
@@ -1913,7 +1926,8 @@ jQuery.extend({
 		timeout: 0,
 		contentType: "application/x-www-form-urlencoded",
 		processData: true,
-		async: true
+		async: true,
+		data: null
 	},
 	
 	// Last-Modified header cache for next request
@@ -2124,8 +2138,9 @@ jQuery.extend({
 		// of form elements
 		if ( a.constructor == Array || a.jquery )
 			// Serialize the form elements
-			for ( var i = 0; i < a.length; i++ )
-				s.push( encodeURIComponent(a[i].name) + "=" + encodeURIComponent( a[i].value ) );
+			jQuery.each( a, function(){
+				s.push( encodeURIComponent(this.name) + "=" + encodeURIComponent( this.value ) );
+			});
 
 		// Otherwise, assume that it's an object of key/value pairs
 		else
@@ -2133,8 +2148,9 @@ jQuery.extend({
 			for ( var j in a )
 				// If the value is an array then the key names need to be repeated
 				if ( a[j].constructor == Array )
-					for ( var k = 0; k < a[j].length; k++ )
-						s.push( encodeURIComponent(j) + "=" + encodeURIComponent( a[j][k] ) );
+					jQuery.each( a[j], function(){
+						s.push( encodeURIComponent(j) + "=" + encodeURIComponent( this ) );
+					});
 				else
 					s.push( encodeURIComponent(j) + "=" + encodeURIComponent( a[j] ) );
 
