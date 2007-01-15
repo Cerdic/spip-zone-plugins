@@ -17,7 +17,9 @@ function exec_clevermail_post() {
 			$mode = 'text';
 		}
 		if ($mode == 'text') {
-			header('Content-type: text/plain');
+			header('Content-type: text/plain; charset='.lire_meta('charset'));
+		} else {
+			header('Content-type: text/html; charset='.lire_meta('charset'));
 		}
 		$post = spip_fetch_array(spip_query("SELECT * FROM cm_posts WHERE pst_id = ".$_GET['pst_id']));
 		if (is_array($post)) {
