@@ -24,7 +24,7 @@ _ Il fournit une balise #CONFIG &#233;tendue.
 	<prefix>
 	cfg
 	</prefix>
-	<fonctions>
+	<options>
 	cfg_fonctions.php
-	</fonctions>
+	</options>
 </plugin>
