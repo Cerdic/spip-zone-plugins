@@ -7,7 +7,7 @@ if(typeof window.jQuery == "undefined") {
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * $Date: 2007-01-14 23:37:33 +0100 (Sun, 14 Jan 2007) $
+ * $Date: 2007-01-14 17:37:33 -0500 (Sun, 14 Jan 2007) $
  * $Rev: 1073 $
  */
 
@@ -1485,7 +1485,7 @@ jQuery.fn.extend({
 
 	show: function(speed,callback){
 		var hidden = this.filter(":hidden");
-		speed ?
+		return speed ?
 			hidden.animate({
 				height: "show", width: "show", opacity: "show"
 			}, speed, callback) :
@@ -1495,12 +1495,11 @@ jQuery.fn.extend({
 				if ( jQuery.css(this,"display") == "none" )
 					this.style.display = "block";
 			});
-		return this;
 	},
 
 	hide: function(speed,callback){
 		var visible = this.filter(":visible");
-		speed ?
+		return speed ?
 			visible.animate({
 				height: "hide", width: "hide", opacity: "hide"
 			}, speed, callback) :
@@ -1511,7 +1510,6 @@ jQuery.fn.extend({
 					this.oldblock = "block";
 				this.style.display = "none";
 			});
-		return this;
 	},
 
 	// Save the old toggle function
