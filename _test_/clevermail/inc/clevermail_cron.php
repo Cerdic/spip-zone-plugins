@@ -39,9 +39,10 @@ function cron_clevermail_cron() {
 			$mail = new PHPMailer();
 			$mail->Subject = $subject;
 			$mail->From = $cm_mail_from['set_value'];
-			$mail->FromName = $GLOBALS['meta']['nom_site'];
+			$mail->FromName = lire_meta('nom_site');
 			$mail->AddAddress($to);
 			$mail->AddReplyTo($cm_mail_from['set_value']);
+			$mail->Charset = lire_meta('charset');
 
 			// message content
 			$text = $post['pst_text'];
@@ -56,7 +57,7 @@ function cron_clevermail_cron() {
 			$template['@@DESCRIPTION@@'] = $list['lst_comment'];
 			$template['@@FORMAT_INSCRIPTION@@'] = $mode;
 			$template['@@EMAIL@@'] = $to;
-			$template['@@URL_DESINSCRIPTION@@'] = $GLOBALS['meta']['adresse_site'].'/rm.php?id='.$subscription['lsr_id'];
+			$template['@@URL_DESINSCRIPTION@@'] = lire_meta('adresse_site').'/rm.php?id='.$subscription['lsr_id'];
 			reset($template);
 			while (list($templateFrom, $templateTo) = each($template)) {
 				$text = str_replace($templateFrom, $templateTo, $text);
