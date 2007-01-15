@@ -1,6 +1,38 @@
 
-[(#REM) test plugin aa]
+[(#REM) test plugin aa : 2 méthodes équivalentes ]
+
+[(#REM) 1/ méthode avec #INCLURE d'un fichier de squelette aa.html ]
 <div class="liste-articles">			
-		 [(#SET{id_aa,[(#CONFIG{aa/id_aa})]})] 
-		 <INCLURE{fond=aa}{id_article=(#GET{id_aa})}>
+		 [(#INCLURE{fond=aa}{id_article=[(#CONFIG{aa/id_aa})]})]
+</div>
+[(#REM) contenu du fichier aa.html ]
+#CACHE{3600}	 
+		 <BOUCLE_aa(ARTICLES){id_article}>
+    			<div class="cartouche">
+    				#DEBUT_SURLIGNE
+    				[(#CONFIG{aa/logo}|=={on}|?{[(#LOGO_ARTICLE||image_reduire{200,200})],''})]
+    				[(#CONFIG{aa/titre}|=={on}|?{[<h1 class="#EDIT{titre} titre">(#TITRE)</h1>],''})]
+    				[(#CONFIG{aa/soustitre}|=={on}|?{[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>],''})]
+    				[(#CONFIG{aa/chapo}|=={on}|?{[<p class="#EDIT{chapo} chapo">(#CHAPO)</p>],''})]
+    				#FIN_SURLIGNE
+    			</div>
+				  [(#CONFIG{aa/texte}|=={on}|?{[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{520,0})</div>],''})]
+		 </BOUCLE_aa>
+
+
+
+
+[(#REM) 2/ méthode avec récupération du paramètre de cfg direct dans la boucle ]
+<div class="liste-articles">			
+		 <BOUCLE_truc(ARTICLES){id_article=(#CONFIG{aa/id_aa})}>
+    			<div class="cartouche">
+    				#DEBUT_SURLIGNE
+    				[(#CONFIG{aa/logo}|=={on}|?{[(#LOGO_ARTICLE||image_reduire{200,200})],''})]
+    				[(#CONFIG{aa/titre}|=={on}|?{[<h1 class="#EDIT{titre} titre">(#TITRE)</h1>],''})]
+    				[(#CONFIG{aa/soustitre}|=={on}|?{[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>],''})]
+    				[(#CONFIG{aa/chapo}|=={on}|?{[<p class="#EDIT{chapo} chapo">(#CHAPO)</p>],''})]
+    				#FIN_SURLIGNE
+    			</div>
+				  [(#CONFIG{aa/texte}|=={on}|?{[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{520,0})</div>],''})]		 		
+		 </BOUCLE_truc>
 </div>

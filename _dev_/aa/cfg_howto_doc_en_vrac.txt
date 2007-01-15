@@ -11,12 +11,38 @@
       	 			  $$cle = $valeur;
        }
 
+REMPLACE PAR
+        lire_cfg()
+================================================================================       
+
 
 (12:52:39) cy_altern: ...donc même si cfg ne produit pas de balises dynamiques, finalement on s'en f*** : 
 il suffit de le passer la valeur de #CONFIG{prefix_plugin/nom_variable} dans #SET{var_cfg,[(#CONFIG{prefix_plugin/nom_variable})]} 
 et d'utiliser ensuite #GET{var_cfg}
-(1
+		 [(#SET{id_aa,[(#CONFIG{aa/id_aa})]})] 
+		 <INCLURE{fond=aa}{id_article=(#GET{id_aa})}>
 
+REMPLACE PAR 
+     [(#INCLURE{fond=aa}{id_article=[(#CONFIG{aa/id_aa})]})]
+     
+POSSIBLE AUSSI SANS #INCLURE : BOUCLE avec {id_article=(#CONFIG{aa/id_aa})}
+
+[(#REM) test plugin aa]
+<div class="liste-articles">			
+		 <BOUCLE_truc(ARTICLES){id_article=(#CONFIG{aa/id_aa})}>
+    			<div class="cartouche">
+    				#DEBUT_SURLIGNE
+    				[(#CONFIG{aa/logo}|=={on}|?{[(#LOGO_ARTICLE||image_reduire{200,200})],''})]
+    				[(#CONFIG{aa/titre}|=={on}|?{[<h1 class="#EDIT{titre} titre">(#TITRE)</h1>],''})]
+    				[(#CONFIG{aa/soustitre}|=={on}|?{[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>],''})]
+    				[(#CONFIG{aa/chapo}|=={on}|?{[<p class="#EDIT{chapo} chapo">(#CHAPO)</p>],''})]
+    				#FIN_SURLIGNE
+    			</div>
+				  [(#CONFIG{aa/texte}|=={on}|?{[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{520,0})</div>],''})]		 		
+		 </BOUCLE_truc>
+</div>
+
+================================================================================
 
 (02:21:22) cy_altern: toggg : pour cfg, le nom du fichier qu'il faut créer dans le plugin c'est fonds/cfg_prefix_du_plugin.html ?
 (02:21:41) toggg: oué

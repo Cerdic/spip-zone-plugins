@@ -1,7 +1,7 @@
 <plugin>
         <nom> <!-- Nom du plugin -->
           <multi>
-					[fr]Article sommaire
+					[fr]Article accueil
 					[en]Article summary
 					</multi>
         </nom>
@@ -24,18 +24,16 @@
           [en]An example to learn cfg.
           </multi>
         </description>
-		<lien>
-		[Documentation sur ->],
-		et si vous avez cfg: [Configuration->.?exec=cfg&cfg=aa]
-		</lien>
+		    <lien>
+		      [Documentation sur ->],
+		      et si vous avez cfg: [Configuration->.?exec=cfg&cfg=aa]
+		    </lien>
         <icon>plugin-24.gif</icon>
         <prefix>
           aa
         </prefix>
-<!--
         <pipeline>
         		<nom>ajouter_boutons</nom>
-            <inclure>inc_saveauto.php</inclure>
+            <inclure>aa_pipelines.php</inclure>
         </pipeline>	
--->
 </plugin>
