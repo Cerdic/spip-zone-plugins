@@ -1,0 +1,25 @@
+<plugin>
+	<nom>
+		Akismet : antiSpam
+	</nom>
+  	<auteur>
+		Gilles VINCENT - Distribu&#233; sous licence GNU/GPL
+	</auteur>
+	<lien>
+	</lien>
+	<version>
+		0.1
+	</version>
+	<etat>
+    	test
+	</etat>
+	<description>
+		Class Akismet
+	</description>
+	<lien></lien> <!-- URI de documentation -->
+  	<prefix>akismet
+	</prefix>
+	<options>
+		Akismet.class.php
+	</options>
+</plugin>
