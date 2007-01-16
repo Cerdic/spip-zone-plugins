@@ -1,0 +1,20 @@
+<plugin>
+	<nom>Edition des articles et rubriques avec TinyMCE</nom>
+	<auteur>MORBIN Daniel - Distribu&eacute; sous licence GNU/GPL</auteur>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>
+{{Edition des articles avec TinyMCE}}
+
+<u>Caract&eacute;ristiques</u>
+-* Seule la zone 'texte' est &eacute;ditable
+-* Bas&eacute; sur TinyMCE 2.0.8
+-* R&eacute;alis&eacute; sous spip 1.9.1 [7502]
+
+<u>Limitations</u>
+-* La fonction de d&eacute;coupe des gros articles est d&eacute;sactiv&eacute;e (non probl&eacute;matique sur les navigateurs r&eacute;cents)
+-* Ne pas mixer pour un m&ecirc;me article l'&eacute;dition WYSIWYG
+</description>
+
+	<prefix>TinyMCE</prefix>
+</plugin>
