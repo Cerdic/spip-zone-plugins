@@ -7,14 +7,7 @@
 	non-spams qui en sont). Cet aspect évolutif de cette solution est particulièrement intéressant.
 ]
 [(#REM) titre=]
-<?php 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	// on sait que cette fonction est dans le fichier associe
-	$hash = calculer_action_auteur("-cfg");
-	echo generer_url_post_ecrire("cfg", "cfg=akismet&hash=" . $hash);
-?>
-<input type="hidden" name="exec" value="exec" />
-<input type="hidden" name="arg" value="cfg" />
+[(#INCLURE{fond=fonds/cfg_tete}{_cfg_=#ENV*{_cfg_}})]
 
 <fieldset><legend>Clé API WordPress.com</legend>
 <p>Cette clé vous permet d'utiliser le service fourni par <a href="http://www.wordpress.com">WordPress.com</a>. Les conditions d'utilisation sont disponibles sur <a href="http://www.akismet.com/">le site d'Akimet</a>.</p>

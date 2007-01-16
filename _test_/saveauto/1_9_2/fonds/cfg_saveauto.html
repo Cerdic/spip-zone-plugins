@@ -19,7 +19,7 @@ Ici vous pouvez configurer le plugin saveauto.<br />
 ]
 [(#REM) titre=Configuration du plugin saveauto]
 #CACHE{0}
-[(#INCLURE{fond=fonds/cfg_tete}{lang}{base_url}{hash}{arg})]
+[(#INCLURE{fond=fonds/cfg_tete}{_cfg_=#ENV*{_cfg_}})]
 
 
 <?php    $p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
@@ -63,7 +63,7 @@ Ici vous pouvez configurer le plugin saveauto.<br />
 ]
 [(#REM) titre=Configuration du plugin saveauto]
 #CACHE{0}
-[(#INCLURE{fond=fonds/cfg_tete}{lang}{base_url}{hash}{arg})]
+[(#INCLURE{fond=fonds/cfg_tete}{_cfg_=#ENV*{_cfg_}})]
 
 				<style type="text/css">
 				   fieldset { background-color: #ddd; margin-bottom: 10px;  }
