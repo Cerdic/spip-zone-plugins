@@ -33,15 +33,4 @@
    <input type="checkbox" name="texte" [checked="(#ENV{texte})"] />
 </fieldset>
 
-
-
-<?php
-/*
-include_spip('inc/meta');
-print '<br>début php<br>';
-echo 'lire_config(aa) = '.lire_config('aa');
-*/
-?>
-
-
-[(#INCLURE{fond=fonds/cfg_pied}{lang}{hash}{arg})]
+[(#INCLURE{fond=fonds/cfg_pied})]
