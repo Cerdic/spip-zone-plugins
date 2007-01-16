@@ -215,21 +215,20 @@ class cfg
 	function boite_liens($lien)
 	{
 		$dedans = debut_boite_info(true) .
-			'<h4>' . _L($lien) . '</h4><p>' .
-'<form method="post" action="$this->base_url">
-<input type="hidden" name="hash" value="#ENV{hash}" />
-<input type="hidden" name="arg" value="#ENV{arg}" />
+			'<h4>' . _L($lien) . '</h4><div>
+<form method="post" action="' . $this->base_url . '">
 <input type="hidden" name="exec" value="cfg" />
-<input type="hidden" name="cfg_id" value="#ENV{cfg_id}" />' .
-			'<ul><li><a href="' .
-			  generer_url_ecrire('cfg', 'cfg=' . $lien) . '"><b>' .
-				  _L('Nouveau') . ' ' . $lien . '</b></a></li>';
-		foreach (lire_cfg($lien) as $compte => $info) {
-			$dedans .= '<li><a href="' . generer_url_ecrire('cfg', 'cfg=' . $lien .
-					'&cfg_id=' . $compte ) . '">' .
-					 $compte . '</a></li>';
+<input type="hidden" name="cfg" value="' . $lien . '" />
+<p><label for="' . $lien . '_">' . _T('cfg:nouveau') . '</label>
+<input type="image" id="' . $lien . '_" name="nouveau" value="1" src="../dist/images/creer.gif" style="vertical-align: text-top;"/></p>';
+		if (($exi = lire_cfg($lien))) {
+			foreach ($exi as $compte => $info) {
+				$dedans .= '
+<p><label for="' . $lien . '_' . $compte . '">' . _T('cfg:nouveau') . '</label>
+<input type="image" id="' . $lien . '_' . $compte . '" name="cfg_id" value="' . $compte . '" src="../dist/images/triangle.gif" style="vertical-align: text-top;"/></p>';
+			}
 		}
-		$dedans .= '</ul>' . fin_boite_info(true);
+		$dedans .= '</form></div>' . fin_boite_info(true);
 		return $dedans;
 	}
 	function debut_page()
@@ -252,7 +251,7 @@ class cfg
 				fin_boite_info(true)
 			: '') .
 		
-//			$this->lier() .
+			$this->lier() .
 		
 			debut_droite("", true) .
 			
