@@ -92,7 +92,6 @@ jQuery.SplickerBox.prototype = {
 		$(image).css("cursor","pointer").click(function(){
 				//thickbox
 				if(typeof imageArray != 'undefined'){
-					TB_on();
 					TB_show('',href,'image');
 				}else{
 					window.document.location = href ;
