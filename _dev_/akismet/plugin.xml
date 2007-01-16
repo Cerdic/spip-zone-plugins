@@ -3,7 +3,8 @@
 		Akismet : antiSpam
 	</nom>
   	<auteur>
-		Gilles VINCENT - Distribu&#233; sous licence GNU/GPL
+		Gilles VINCENT, Alex Potsides
+_ Cette extension, basé de la classe PHP4 fournie par [Alex Potsides->http://www.achingbrain.net], est distribu&#233; sous licence [GNU/GPL->http://www.gnu.org/licenses/gpl.html]
 	</auteur>
 	<lien>
 	</lien>
@@ -14,7 +15,7 @@
     	test
 	</etat>
 	<description>
-		Class Akismet
+		Portage pour SPIP d'[Akismet->http://akismet.com], une extension anti-spam de Wordpress . Cette extension de Spip nécessite l'extension CFG. [ Accédez à la configuration->.?exec=cfg&cfg=akismet]
 	</description>
 	<lien></lien> <!-- URI de documentation -->
   	<prefix>akismet

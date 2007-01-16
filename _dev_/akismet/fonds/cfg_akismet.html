@@ -1,0 +1,22 @@
+#CACHE{0}
+[(#REM) descriptif= 
+<h4>Pr&eacute;sentation</h4>
+<p>Akismet est le portage d'une solution anti-spam que l'on retrouve chez Wordpress.</p>
+<p>Tout commentaire est soumis au serveur d'antispam qui se charge de préciser s'il s'agit d'un spam ou non. En principe, les 
+	spams devraient être mis de côté, afin de retourner les faux positifs au serveurs (Les spams qui n'en sont pas, ou les
+	non-spams qui en sont). Cet aspect évolutif de cette solution est particulièrement intéressant.
+]
+[(#REM) titre=]
+[(#INCLURE{fond=fonds/cfg_tete}{lang}{base_url}{hash}{arg}{compte})]
+<form method="post" action="#ENV{base_url}">
+<fieldset><legend>Clé API WordPress.com</legend>
+<p>Cette clé vous permet d'utiliser le service fourni par <a href="http://www.wordpress.com">WordPress.com</a>. Les conditions d'utilisation sont disponibles sur <a href="http://www.akismet.com/">le site d'Akimet</a>.</p>
+<p>
+<label>Clé API Worpress.com</label>
+<input type="text" name="apiKey" value="[(#ENV{apiKey}|?{#ENV{apiKey},'Saisissez une clé valide'})]" onclick="jQuery(this).attr('value','')"/>
+<input type="submit" name="ok" value="Valider cette clé" />
+</p>
+</fieldset>
+
+</form>
+</div
