@@ -7,7 +7,8 @@ function boucle_FLICKR_TAGS_GETLISTPHOTO_dist($id_boucle, &$boucles) {
 
   $arguments = FpipR_utils_search_args($boucle,$id_table,array('id_photo'));
 
-  $boucle->hash = FpipR_utils_calculer_hash('flickr.tags.getListPhoto',$arguments);
+  $null = null;
+  $boucle->hash = FpipR_utils_calculer_hash('flickr.tags.getListPhoto',$arguments, $null);
   return calculer_boucle($id_boucle, $boucles); 
   }
 

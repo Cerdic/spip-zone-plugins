@@ -7,7 +7,8 @@ function boucle_FLICKR_PHOTOSETS_COMMENTS_GETLIST_dist($id_boucle,&$boucles) {
   $boucle->from[$id_table] =  "spip_fpipr_comments";
 
   $arguments = FpipR_utils_search_args($boucle,$id_table,$possible_args);
-  $boucle->hash = FpipR_utils_calculer_hash('flickr.photosets.comments.getList',$arguments);
+  $null = null;
+  $boucle->hash = FpipR_utils_calculer_hash('flickr.photosets.comments.getList',$arguments, $null);
   return calculer_boucle($id_boucle, $boucles); 
   }
 ?>

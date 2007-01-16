@@ -70,7 +70,7 @@ function FpipR_utils_search_args_extras($boucle,$id_table,$possible_args,$possib
   return $arguments;
 }
 
-function FpipR_utils_calculer_hash($method, $arguments, &$boucle=null) {
+function FpipR_utils_calculer_hash($method, $arguments, &$boucle) {
   $hash = "// CREER la table flickr_photos et la peupler avec le resultat de la query
 	  \$arguments = '';\n";
   if($boucle) $hash .=   FpipR_utils_calcul_limit($boucle,$arguments);
@@ -103,6 +103,7 @@ function FpipR_utils_search_args($boucle,$id_table,$possible_args) {
 
 function FpipR_utils_search_extras($boucle,$id_table,$possible_extras) {
   $arguments = array();
+  $extras = array();
   foreach($boucle->where as $w) {
 	if($w[0] == "'?'") {
 	  $w = $w[2];

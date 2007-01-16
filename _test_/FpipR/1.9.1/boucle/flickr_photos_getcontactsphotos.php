@@ -20,7 +20,8 @@ function boucle_FLICKR_PHOTOS_GETCONTACTSPHOTOS_dist($id_boucle, &$boucles) {
 	$arguments['count'] = $boucle->total_parties;
   }
 
-  $boucle->hash = FpipR_utils_calculer_hash('flickr.photos.getContactsPhotos',$arguments);
+  $null = null;
+  $boucle->hash = FpipR_utils_calculer_hash('flickr.photos.getContactsPhotos',$arguments,$null);
   return calculer_boucle($id_boucle, $boucles); 
   }
 ?>
