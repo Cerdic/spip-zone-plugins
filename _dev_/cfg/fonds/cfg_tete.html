@@ -4,7 +4,9 @@
 
 ]
 <div>
-<form method="post" action="#ENV{base_url}">
-<input name="hash" type="hidden" value="#ENV{hash}" />
-<input name="arg" type="hidden" value="#ENV{arg}" />
-<input name="exec" type="hidden" value="cfg" />
+<form method="post" action="[(#ENV*{_cfg_}|extrait{base_url})]" >
+<input type="hidden" name="hash" value="[(#ENV*{_cfg_}|extrait{hash})]" />
+<input type="hidden" name="arg" value="[(#ENV*{_cfg_}|extrait{arg})]" />
+<input type="hidden" name="exec" value="cfg" />
+<input type="hidden" name="cfg" value="[(#ENV*{_cfg_}|extrait{nom})]" />
+<input type="hidden" name="cfg_id" value="[(#ENV*{_cfg_}|extrait{cfg_id})]" />

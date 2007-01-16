@@ -5,15 +5,14 @@
 [(#REM) titre=Test multi pour #ENV{depuis} avec le plugin cfg]
 
 #CACHE{0}
-[(#INCLURE{fond=fonds/cfg_tete}{lang}{base_url}{hash}{arg})]
+[(#INCLURE{fond=fonds/cfg_tete}{_cfg_=#ENV*{_cfg_}})]
 
 <fieldset>
-<input name="depuis" type="hidden" value="#ENV{depuis}" />
+[(#REM) la classe cfg_id permet de stocker dans un tableau sous cet index]
 <label for="id">*<:cfg:id:></label>
-<input type="text" name="id" value="#ENV{id}" size="15" />
-<label for="copier"><:cfg:copier_si_change:></label>
-<input type="checkbox" name="copier" />
-<input type="hidden" name="was_id" value="#ENV{id}" />
+<input type="text" name="id" class="cfg_id" value="#ENV{id}" size="15" />
+<label for="cfg_copier"><:cfg:copier_si_change:></label>
+<input type="checkbox" name="cfg_copier" />
 </fieldset>
 
 <fieldset><legend><:Champs de chez multi:></legend>
@@ -25,4 +24,4 @@
 <input type="text" name="mulidnum" class="type_idnum" value="#ENV{mulidnum}" size="8" />
 </fieldset>
 
-[(#INCLURE{fond=fonds/cfg_pied}{lang})]
+[(#INCLURE{fond=fonds/cfg_pied})]

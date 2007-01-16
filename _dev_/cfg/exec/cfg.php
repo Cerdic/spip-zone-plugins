@@ -6,50 +6,67 @@
  * © 2007 - Distribue sous licence LGPL
  *
  */
-
+// la fonction appelee par le core, une simple "factory" de la classe cfg
 function exec_cfg_dist()
 {
 	$config = new cfg(
 		($nom = _request('cfg'))? $nom : 'cfg',
 		($fond = _request('fond'))? $fond : $nom,
-		($id = _request('id'))? $id : ''
+		($cfg_id = _request('cfg_id'))? $cfg_id : ''
 		);
 
 	$config->traiter();
 	echo $config->sortie();
 	return;
 }
+// la classe cfg represente une page de configuration
 class cfg
 {
+// le nom du meta (ou autre) ou va etre stocke la config concernee
 	var $nom = '';
+// le fond html utilise , en general pour config simple idem $nom
 	var $fond = '';
-	var $id = '';
+// pour une config multiple , l'id courant
+	var $cfg_id = '';
+// sous tableau optionel du meta ou va etre stocke le fragment de config
+// vide = a la "racine" du meta nomme $nom
+	var $casier = '';
+// descriptif
 	var $descriptif = '';
+// compte-rendu des mises a jour, vide == pas d'erreur
 	var $message = '';
+// liens optionnels sur des sous-config [(#REM) liens*=xxx]
 	var $liens = array();
+// les champs trouve dans le fond
 	var $champs = array();
+// les champs index
+	var $champs_id = array();
+// leurs valeurs
 	var $val = array();
 	
-	function cfg($nom, $fond = '', $id = '', $opt = array())
+	function cfg($nom, $fond = '', $cfg_id = '', $opt = array())
 	{
 		$this->nom = $nom;
 		$this->titre = _L('Configuration') . ' ' . $this->nom;
+		$this->base_url = generer_url_ecrire('');
 		foreach ($opt as $o=>$v) {
 			$this->$o = $v;
 		}
-		$this->id = $id;
+		$this->cfg_id = $cfg_id;
 		$this->lire();
 		if ($fond) {
 			$this->message .= $this->set_fond($fond);
 		}
 	}
 	
+// recuperer les valeurs, utilise la fonction commune lire_cfg() de cfg_options.php
 	function lire()
 	{
     	$this->val = lire_cfg($this->nom);
 	    return $this->val;
 	}
 	
+// supprimer le fragment voire tout le meta 
 	function supprimer()
 	{
 	    effacer_meta($this->nom);
@@ -57,6 +74,7 @@ class cfg
 	    ecrire_metas();
 	}
 	
+// modifier le fragment qui peut etre tout le meta
 	function modifier()
 	{
 	    ecrire_meta($this->nom, serialize($this->val));
@@ -85,7 +103,7 @@ class cfg
 		    }
 		}
 		if (!preg_match_all(
-		  '#<(?:(select)|input type=["\'](text|password|checkbox|radio)["\']) name=["\'](\w+)["\'](?: class=["\']type_(\w+).*?["\'])?.+?>#ims',
+		  '#<(?:(select)|input type=["\'](text|password|checkbox|radio)["\']) name=["\'](\w+)["\'](?: class=(["\'])(?:.*?(?:type_(\w+)|cfg_(\w+)))*.*?\4)?.+?>#ims',
 						$controldata, $matches, PREG_SET_ORDER)) {
 			return _L('pas_de_champs_dans_') . $nom;
 		}
@@ -94,11 +112,24 @@ class cfg
 		    	$regs[2] = 'select';
 		    }
 		    $this->champs[$regs[3]] = array('inp' => $regs[2], 'typ' => '');
-		    if (!empty($regs[4])) {
-		    	$this->champs[$regs[3]]['typ'] = $regs[4];
+		    if (!empty($regs[5])) {
+		    	$this->champs[$regs[3]]['typ'] = $regs[5];
+		    }
+		    if (!empty($regs[6])) {
+		    	$this->champs[$regs[3]]['cfg'] = $regs[6];
+		    	if ($regs[6] == 'id') {
+			    	$this->champs[$regs[3]]['id'] = count($this->champs_id);
+		    		$this->champs_id[] = $regs[3];
+		    	}
 		    }
 	    }
 	    return '';
+	}
+
+	function nom_config()
+	{
+	    return $this->nom . ($this->casier ? '/' . $this->casier : '') .
+	    		($this->cfg_id ? '/' . $this->cfg_id : '');
 	}
 
 	function traiter()
@@ -147,18 +178,18 @@ class cfg
 	*/
 	function get_fond($contexte = array())
 	{
-		$get =  'cfg=' . $this->nom;
-		if ($this->nom != $this->fond) {
-			$get .= '&fond=' . $this->fond;
-		}
-		$contexte['base_url'] = generer_url_ecrire('cfg', $get);
-	    $contexte['lang'] = $GLOBALS['spip_lang'];
-	    $contexte['arg'] = 'cfg0.0.0-' . $this->nom . '-' . $this->fond;
-	    $contexte['hash'] =  calculer_action_auteur('-' . $contexte['arg']);
-
+	    $arg = 'cfg0.0.0-' . $this->nom . '-' . $this->fond;
+		$contexte['_cfg_'] = serialize(array(
+			'nom' => $this->nom,
+			'fond' => $this->fond,
+			'base_url' => $this->base_url,
+		    'lang' => $GLOBALS['spip_lang'],
+		    'arg' => $arg,
+		    'hash' =>  calculer_action_auteur('-' . $arg)
+		));
 	    include_spip('public/assembler');
 	    return recuperer_fond('fonds/cfg_' . $this->fond,
-	    		array_merge($contexte, $this->val));
+	    		$this->val ? array_merge($contexte, $this->val) : $contexte);
 	}
 
 	function sortie($contexte = array())
@@ -184,15 +215,19 @@ class cfg
 	function boite_liens($lien)
 	{
 		$dedans = debut_boite_info(true) .
-			'<h4>' . _L($lien) . '</h4><ul><li><a href="' .
+			'<h4>' . _L($lien) . '</h4><p>' .
+'<form method="post" action="$this->base_url">
+<input type="hidden" name="hash" value="#ENV{hash}" />
+<input type="hidden" name="arg" value="#ENV{arg}" />
+<input type="hidden" name="exec" value="cfg" />
+<input type="hidden" name="cfg_id" value="#ENV{cfg_id}" />' .
+			'<ul><li><a href="' .
 			  generer_url_ecrire('cfg', 'cfg=' . $lien) . '"><b>' .
 				  _L('Nouveau') . ' ' . $lien . '</b></a></li>';
-		if (count($this->val[$lien])) {
-			foreach (lire_cfg($lien) as $compte => $info) {
-				$dedans .= '<li><a href="' . generer_url_ecrire('cfg', 'cfg=' . $lien .
-						'&id=' . $compte ) . '">' .
-						 $compte . '</a></li>';
-			}
+		foreach (lire_cfg($lien) as $compte => $info) {
+			$dedans .= '<li><a href="' . generer_url_ecrire('cfg', 'cfg=' . $lien .
+					'&cfg_id=' . $compte ) . '">' .
+					 $compte . '</a></li>';
 		}
 		$dedans .= '</ul>' . fin_boite_info(true);
 		return $dedans;
@@ -217,7 +252,7 @@ class cfg
 				fin_boite_info(true)
 			: '') .
 		
-			$this->lier() .
+//			$this->lier() .
 		
 			debut_droite("", true) .
 			
