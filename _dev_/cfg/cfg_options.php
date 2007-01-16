@@ -13,25 +13,15 @@
 //
 // La balise appelle celle de la dist si pas de /
 //
-
-function cfg_meta($cfg = '', $def = NULL)
+function extrait($sou, $cfg = '')
 {
-	include_spip('inc/meta');
-	lire_metas();
-	global $meta;
-	$ret = '';
-	if (!$cfg) {
-		$ret = serialize($meta);
-	} elseif (strpos($cfg, '/') === false) {
-		$ret = $meta[$cfg];
-	} else {
-		$cfg = explode('/', $cfg);
-		$ret = $cfg[0] ? unserialize($meta[$cfg[0]]) : $meta;
-		for ($i = 1; $ret && $i < count($cfg) && $cfg[$i] !== ''; ++$i) {
-			$ret = is_array($ret) ? (is_numeric($cfg[$i]) ? $ret[0 + $cfg[$i]] : $ret[$cfg[$i]]) : '';
-		}
+	$cfg = explode('/', $cfg);
+	$ret = $cfg[0] ? unserialize(is_array($sou) ? $sou[$cfg[0]] : $sou) : $sou;
+//var_dump($sou);var_dump($cfg);var_dump($ret);die();
+	for ($i = is_array($sou) ? 1 : 0; $ret && $i < count($cfg) && $cfg[$i] !== ''; ++$i) {
+		$ret = is_array($ret) ? (is_numeric($cfg[$i]) ? $ret[0 + $cfg[$i]] : $ret[$cfg[$i]]) : '';
 	}
-	return !$ret && $def ? $def : $ret;
+	return $ret;
 }
 function balise_CONFIG($p)
 {
@@ -49,5 +39,21 @@ function balise_CONFIG($p)
 function lire_cfg($cfg = '', $def = NULL)
 {
 	return cfg_meta($cfg . '/', $def);
+}
+
+function cfg_meta($cfg = '', $def = NULL)
+{
+	include_spip('inc/meta');
+	lire_metas();
+	global $meta;
+	$ret = '';
+	if (!$cfg) {
+		$ret = serialize($meta);
+	} elseif (strpos($cfg, '/') === false) {
+		$ret = $meta[$cfg];
+	} else {
+		$ret = extrait($meta, $cfg);
+	}
+	return !$ret && $def ? $def : $ret;
 }
 ?>
