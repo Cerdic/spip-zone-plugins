@@ -9,7 +9,8 @@ function boucle_FLICKR_PHOTOSETS_GETLIST_dist($id_boucle,&$boucles) {
 
   $arguments = FpipR_utils_search_args($boucle,$id_table,$possible_args);
 
-  $boucle->hash = FpipR_utils_calculer_hash('flickr.photosets.getList',$arguments);
+  $null = null;
+  $boucle->hash = FpipR_utils_calculer_hash('flickr.photosets.getList',$arguments,$null);
   return calculer_boucle($id_boucle, $boucles); 
   }
 
