@@ -7,7 +7,7 @@ Pour supprimer une fonctionnalit&eacute;, mettez <b>_</b> dans la valeur du text
 ]
 [(#REM) titre=Configuration du plugin boutonstexte]
 #CACHE{0}
-[(#INCLURE{fond=fonds/cfg_tete}{lang}{base_url}{hash}{arg})]
+[(#INCLURE{fond=fonds/cfg_tete}{_cfg_=#ENV*{_cfg_}})]
 
 <fieldset><legend><:boutonstexte:textes_icones:></legend>
 <p>
@@ -55,4 +55,4 @@ Pour supprimer une fonctionnalit&eacute;, mettez <b>_</b> dans la valeur du text
 <p>Si vide, reviendront au d&eacute;faut</p>
 </fieldset>
 
-[(#INCLURE{fond=fonds/cfg_pied}{lang}{hash}{arg})]
+[(#INCLURE{fond=fonds/cfg_pied})]
