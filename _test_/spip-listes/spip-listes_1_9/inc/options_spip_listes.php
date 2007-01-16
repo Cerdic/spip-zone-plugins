@@ -23,6 +23,12 @@
 
 // Verifier la conformite d'une ou plusieurs adresses email
 function email_valide_bloog($adresse) {
+	// Si c'est un spammeur autant arreter tout de suite
+	if (preg_match(",[\n\r].*(MIME|multipart|Content-),i", $adresse)) {
+		spip_log("Tentative d'injection de mail : $adresse");
+		return false;
+	}
+	
 	$adresses = explode(',', $adresse);
 	if (is_array($adresses)) {
 		while (list(, $adresse) = each($adresses)) {
