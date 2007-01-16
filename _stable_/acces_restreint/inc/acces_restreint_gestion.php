@@ -175,7 +175,7 @@
 		else if ($table == 'auteurs') {
 			$id_table = 'id_auteur';
 			$objet = 'auteur';
-			$url_base = "auteurs_edit";
+			$url_base = ($GLOBALS['spip_version_code']>1.92)?"auteur_infos":"auteurs_edit";
 		}
 	
 		list($nombre_zones) = spip_fetch_array(spip_query("SELECT COUNT(*) FROM spip_zones AS zones, spip_zones_$table AS lien WHERE lien.$id_table=$id_objet AND zones.id_zone=lien.id_zone"),SPIP_NUM);

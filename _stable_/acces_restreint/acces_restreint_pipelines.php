@@ -26,7 +26,7 @@ if (!defined('_DIR_PLUGIN_ACCESRESTREINT')){ // definie automatiquement en 1.9.2
 		
 	function AccesRestreint_affiche_milieu($flux){
 		$exec = $flux['args']['exec'];
-		if ($exec == 'auteurs_edit'){
+		if (($exec == 'auteurs_edit') || ($exec == 'auteur_infos')){
 			include_spip('inc/acces_restreint_gestion');
 			$id_auteur = $flux['args']['id_auteur'];
 			$nouv_zone = _request('nouv_zone');

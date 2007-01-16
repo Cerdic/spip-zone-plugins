@@ -7,6 +7,11 @@ function critere_tout_voir_dist($idb, &$boucles, $crit) {
 	$boucle->modificateur['tout_voir'] = true;
 }
 
+/*function critere_archive_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	$boucle->modificateur['archive'] = true;
+}*/
+
 //
 // <BOUCLE(ARTICLES)>
 //
@@ -34,6 +39,7 @@ function boucle_ARTICLES($id_boucle, &$boucles) {
 			$boucle->where[]= array("'='", "'$marchive'", "'\"non\"'");
 			//$boucle->where[]= array("'>'", "'$id_table" . ".date_archive'", "'NOW()'");
 			$boucle->where[]= array("'($id_table.date_archive > NOW() OR $id_table.date_archive=0)'");
+		}
 	}
 	*/
 
