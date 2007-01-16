@@ -6,7 +6,7 @@ Ici vous pouvez configurer le plugin Crayons.<br />
 ]
 [(#REM) titre=Configuration du plugin crayons]
 #CACHE{0}
-[(#INCLURE{fond=fonds/cfg_tete}{lang}{base_url}{hash}{arg})]
+[(#INCLURE{fond=fonds/cfg_tete}{_cfg_=#ENV*{_cfg_}})]
 
 <fieldset><legend><:crayons:messages:></legend>
 <p>
@@ -26,4 +26,4 @@ Ici vous pouvez configurer le plugin Crayons.<br />
 </p>
 </fieldset>
 
-[(#INCLURE{fond=fonds/cfg_pied}{lang}{hash}{arg})]
+[(#INCLURE{fond=fonds/cfg_pied})]
