@@ -91,7 +91,8 @@ function tracer_erreur_forum($type='') {
 // http://doc.spip.org/@inc_forum_insert_dist
 function inc_forum_insert_dist() {
 
-	$akismet = new Akismet($GLOBALS['meta']["adresse_site"], lire_cfg('akismet','apiKey')); 
+	$cfg = lire_cfg('akismet','apiKey');
+	$akismet = new Akismet($GLOBALS['meta']["adresse_site"], $cfg['apiKey']); 
 	// Utilisez votre propre clé de développeur Wordress, 
 	// disponible sur http://akismet.com/personal/ pour un usage personnel / non commercial
 	// ou http://akismet.com/commercial/ sinon
