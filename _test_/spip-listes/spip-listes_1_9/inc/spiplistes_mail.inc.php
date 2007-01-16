@@ -45,7 +45,7 @@
 			if (!empty($message_html) AND !empty($message_texte)) {
 	     		$this->Body = $message_html;
 	     		$this->AltBody = $message_texte;
-				$this->spiplistes_JoindreImagesHTML();
+				//$this->spiplistes_JoindreImagesHTML();
 			}
 			if (!empty($message_texte) AND empty($message_html)) {
 				
