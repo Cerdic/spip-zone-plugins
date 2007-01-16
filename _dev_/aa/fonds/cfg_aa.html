@@ -20,5 +20,28 @@
   	 </BOUCLE_secteurs>
    </select>
 </fieldset>
+<fieldset><legend>Eléments à utiliser :</legend>
+   <label>Logo</label>
+   <input type="checkbox" name="logo" [checked="(#ENV{logo})"] />
+   <label>Titre</label>
+   <input type="checkbox" name="titre" [checked="(#ENV{titre})"] />
+   <label>Sous-titre</label>
+   <input type="checkbox" name="soustitre" [checked="(#ENV{soustitre})"] />	 
+	 <label>Chapeau</label>
+   <input type="checkbox" name="chapo" [checked="(#ENV{chapo})"] />
+	 <label>Texte</label>
+   <input type="checkbox" name="texte" [checked="(#ENV{texte})"] />
+</fieldset>
+
+
+
+<?php
+/*
+include_spip('inc/meta');
+print '<br>début php<br>';
+echo 'lire_config(aa) = '.lire_config('aa');
+*/
+?>
+
 
 [(#INCLURE{fond=fonds/cfg_pied}{lang}{hash}{arg})]
