@@ -3,6 +3,9 @@
  padding:0pt;
 }
 
+/* Espaceur de blocs */
+.jeux_nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
+
 .jeux { 
  text-align:left;
  font-size: 90%;

@@ -181,6 +181,6 @@ function jeux_mots_croises($texte, $indexJeux) {
 					._T('motscroises:verticalement')."</h4>\n".$vertical.'</div>'
 	// solution
 			. (($GLOBALS['affiche_solution_'.$indexJeux][0] == 1)? affichage_grille_mc($solution, $indexJeux, true) : '')
-			. '</div>';
+			. '</div><br class="jeux_nettoyeur"/>';
 }
 ?>
