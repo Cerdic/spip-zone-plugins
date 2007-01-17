@@ -255,14 +255,9 @@ else if ($tri=='nombre')
 // Construire la requete
 //
 
-// si on n'est pas minirezo, supprimer les auteurs sans article publie
-// sauf les admins, toujours visibles.
-// limiter les statuts affiches
-if ($connect_statut == '0minirezo') {
+$sql_visible="1=1"; 
+$tri = 'nom'; 
 	
-		$sql_visible = "aut.statut IN ('6forum','5poubelle','1comite') OR art.statut IN ('liste', 'inact')";
-		$tri = 'nom';
-}
 
 $sql_sel = '';
 
