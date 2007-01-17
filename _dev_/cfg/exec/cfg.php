@@ -12,7 +12,7 @@ function exec_cfg_dist()
 	$config = new cfg(
 		($nom = _request('cfg'))? $nom : 'cfg',
 		($fond = _request('fond'))? $fond : $nom,
-		($_cfg_id = _request('_cfg_id'))? $_cfg_id : ''
+		($cfg_id = _request('cfg_id'))? $cfg_id : ''
 		);
 
 	$config->traiter();
@@ -27,7 +27,7 @@ class cfg
 // le fond html utilise , en general pour config simple idem $nom
 	var $fond = '';
 // pour une config multiple , l'id courant
-	var $_cfg_id = '';
+	var $cfg_id = '';
 // sous tableau optionel du meta ou va etre stocke le fragment de config
 // vide = a la "racine" du meta nomme $nom
 	var $casier = '';
@@ -44,7 +44,7 @@ class cfg
 // leurs valeurs
 	var $val = array();
 	
-	function cfg($nom, $fond = '', $_cfg_id = '', $opt = array())
+	function cfg($nom, $fond = '', $cfg_id = '', $opt = array())
 	{
 		$this->nom = $nom;
 		$this->titre = _L('Configuration') . ' ' . $this->nom;
@@ -52,7 +52,7 @@ class cfg
 		foreach ($opt as $o=>$v) {
 			$this->$o = $v;
 		}
-		$this->_cfg_id = $_cfg_id;
+		$this->cfg_id = $cfg_id;
 		if ($fond) {
 			$this->message .= $this->set_fond($fond);
 		}
@@ -62,7 +62,7 @@ class cfg
 	function nom_config()
 	{
 	    return $this->nom . ($this->casier ? '/' . $this->casier : '') .
-	    		($this->_cfg_id ? '/' . $this->_cfg_id : '');
+	    		($this->cfg_id ? '/' . $this->cfg_id : '');
 	}
 	
 // recuperer les valeurs, utilise la fonction commune lire_cfg() de cfg_options.php
@@ -180,18 +180,18 @@ class cfg
 	{
 		$enregistrer = $supprimer = false;
 		if ($this->message ||
-			! (($enregistrer = _request('ok')) ||
-							($supprimer = _request('delete')))) {
+			! (($enregistrer = _request('_cfg_ok')) ||
+							($supprimer = _request('_cfg_delete')))) {
 			return;
 		}
 
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$securiser_action();
 		if ($supprimer) {
-			$this->supprimer();
+			$this->modifier('supprimer');
 			$this->message = _L('config_supprimee') . ' <b>' . $this->nom . '</b>';
 		} elseif (!($this->message = $this->controle())) {
-			if ($this->new_id != $this->_cfg_id && !_request('_cfg_copier')) {
+			if ($this->new_id != $this->cfg_id && !_request('_cfg_copier')) {
 			}
 			$this->modifier();
 			$this->message = _L('config_enregistree') . ' <b>' . $this->nom . '</b>';
@@ -235,7 +235,7 @@ class cfg
 		$contexte['_cfg_'] =
 			'?exec=cfg&cfg=' . $this->nom .
 			'&fond=' . $this->fond .
-			'&_cfg_id=' . $this->_cfg_id .
+			'&cfg_id=' . $this->cfg_id .
 			'&base_url=' . $this->base_url .
 		    '&lang=' . $GLOBALS['spip_lang'] .
 		    '&arg=' . $arg .
@@ -278,7 +278,7 @@ class cfg
 			foreach ($exi as $compte => $info) {
 				$dedans .= '
 <p><label for="' . $lien . '_' . $compte . '">' . _T('cfg:nouveau') . '</label>
-<input type="image" id="' . $lien . '_' . $compte . '" name="_cfg_id" value="' . $compte . '" src="../dist/images/triangle.gif" style="vertical-align: text-top;"/></p>';
+<input type="image" id="' . $lien . '_' . $compte . '" name="cfg_id" value="' . $compte . '" src="../dist/images/triangle.gif" style="vertical-align: text-top;"/></p>';
 			}
 		}
 		$dedans .= '</form></div>' . fin_boite_info(true);
