@@ -79,8 +79,8 @@ Ici vous pouvez configurer le plugin saveauto.<br />
 				</fieldset>
 				<fieldset><legend><:saveauto:compression_gz:></legend>
 				   <:saveauto:oui:> 
-					 <input type="radio" name="gz" id="gz_true" value="true" [(#ENV{gz|==true|?{checked="checked",''},checked="checked"})] />
-				   <input type="radio" name="gz" id="gz_false" value="false" [(#ENV{gz|!=true|?{checked="checked",''}})] /> 
+					 <input type="radio" name="gz" id="gz_true" value="true" [(#ENV{gz}|=={true}|?{checked="checked",''})] />
+				   <input type="radio" name="gz" id="gz_false" value="false" [(#ENV{gz}|!={true}|?{checked="checked",''})] /> 
 					 <:saveauto:non:>
 				   <br /><span class="help"><:saveauto:help_gz:></span>
 <?php	 // Le support de Zlib est il activé dans PHP ?
@@ -94,12 +94,12 @@ Ici vous pouvez configurer le plugin saveauto.<br />
 				</fieldset>
 				<fieldset><legend><:saveauto:structure_donnees:></legend>
 				   <:saveauto:structure:><:saveauto:oui:> 
-					 <input type="radio" name="structure" id="structure_true" value="true" [(#ENV{structure|==true|?{checked="checked",''},checked="checked"})] />
-    		   <input type="radio" name="structure" id="structure_false" value="false" [(#ENV{structure|!=true|?{checked="checked",''}})] /> 
+					 <input type="radio" name="structure" id="structure_true" value="true" [(#ENV{structure}|=={true}|?{checked="checked",''})] />
+    		   <input type="radio" name="structure" id="structure_false" value="false" [(#ENV{structure}|!={true}|?{checked="checked",''})] /> 
 					 <:saveauto:non:>
 				   <br /><:saveauto:donnees:> <:saveauto:oui:> 
-				   <input type="radio" name="donnees" id="donnees_true" value="true" [(#ENV{donnees|==true|?{checked="checked",''},checked="checked"})] />
-    		   <input type="radio" name="donnees" id="donnees_false" value="false" [(#ENV{donnees|!=true|?{checked="checked",''},checked="checked"})] />
+				   <input type="radio" name="donnees" id="donnees_true" value="true" [(#ENV{donnees}|=={true}|?{checked="checked",''})] />
+    		   <input type="radio" name="donnees" id="donnees_false" value="false" [(#ENV{donnees}|!={true}|?{checked="checked",''})] />
 				   <:saveauto:non:>
 				</fieldset>
 				<fieldset><legend><:saveauto:envoi_mail:><:saveauto:adresse:></legend>
@@ -120,8 +120,8 @@ Ici vous pouvez configurer le plugin saveauto.<br />
 				</fieldset>
 				<fieldset><legend><:saveauto:message_succes:></legend>
 				   <:saveauto:oui:>
-				   <input type="radio" name="ecrire_succes" id="ecrire_succes_true" value="true" [(#ENV{ecrire_succes|==true|?{checked="checked",''},checked="checked"})] />
-    		   <input type="radio" name="ecrire_succes" id="ecrire_succes_false" value="false" [(#ENV{ecrire_succes|!=true|?{checked="checked",''}})] />
+				   <input type="radio" name="ecrire_succes" id="ecrire_succes_true" value="true" [(#ENV{ecrire_succes}|=={true}|?{checked="checked",''})] />
+    		   <input type="radio" name="ecrire_succes" id="ecrire_succes_false" value="false" [(#ENV{ecrire_succes}|!={true}|?{checked="checked",''})] />
 				   <:saveauto:non:>
 				   <br /><span class="help"><:saveauto:help_msg:></span>
 				</fieldset>
@@ -130,8 +130,8 @@ Ici vous pouvez configurer le plugin saveauto.<br />
 		 		   <br /><span class="help"><:saveauto:help_obsolete:></span>
 				</fieldset>
 				<fieldset><legend><:saveauto:acces_redac:></legend>
-				   <:saveauto:oui:> <input type="radio" name="acces_redac" id="acces_redac_true" value="true" [(#ENV{acces_redac|==true|?{checked="checked",''},checked="checked"})] />
-    		   <input type="radio" name="acces_redac" id="acces_redac_false" value="false" [(#ENV{acces_redac|!=true|?{checked="checked",''}})] />
+				   <:saveauto:oui:> <input type="radio" name="acces_redac" id="acces_redac_true" value="true" [(#ENV{acces_redac}|=={true}|?{checked="checked",''})] />
+    		   <input type="radio" name="acces_redac" id="acces_redac_false" value="false" [(#ENV{acces_redac}|!={true}|?{checked="checked",''})] />
 				   <:saveauto:non:>
 				   <br /><span class="help"><:saveauto:help_acces_redac:></span>
 				</fieldset>
