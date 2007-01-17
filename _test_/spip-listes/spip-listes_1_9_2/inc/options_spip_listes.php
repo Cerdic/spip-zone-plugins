@@ -103,35 +103,12 @@ function propre_bloog($texte) {
 
   return $texte;
 }
-/****
- * titre : absolute_url
- * d'apres Clever Mail (-> NHoizey)
-****/
 
-function absolute_url ($chaine) {
-    // TBI : quid si le href n'est pas en premier ?     
-    $URL_SITE_SPIP = lire_meta ('adresse_site');
-
-    // rajout d'un / éventuellement 
-    if (substr ($URL_SITE_SPIP, strlen($URL_SITE_SPIP)-1, 1) != '/') $URL_SITE_SPIP .= '/';
-
-    $chaine = eregi_replace ('<a href="' , '<a href="'.$URL_SITE_SPIP, $chaine); 
-    $chaine = eregi_replace ('<a href="'.$URL_SITE_SPIP.'http://([^"]*)"', "<a href=\"http://\\1\"", $chaine);
-    $chaine = eregi_replace ('<a href="'.$URL_SITE_SPIP.'mailto:([^"]*)"', "<a href=\"mailto:\\1\"", $chaine);
-    $chaine = eregi_replace ('<a href="'.$URL_SITE_SPIP.'#([^"]*)"', "<a href=\"#\\1\"", $chaine);
-
-    $chaine = eregi_replace ('<img src="' , '<img src="'.$URL_SITE_SPIP, $chaine); 
-    $chaine = eregi_replace ('<img src="'.$URL_SITE_SPIP.'http://([^"]*)"', "<img src=\"http://\\1\"", $chaine);
-    $chaine = eregi_replace ('<img src=\'' , '<img src=\''.$URL_SITE_SPIP, $chaine);  
-    $chaine = eregi_replace ('<img src=\''.$URL_SITE_SPIP.'http://([^"]*)\'', "<img src=\'http://\\1\'", $chaine);
-
-    return $chaine;
-}
 
 
 /****
  * titre : version_texte
- * d'après Clever Mail (-> NHoizey)
+ * d'après Clever Mail (-> NHoizey), mais en mieux.
 ****/
 
 function version_texte ($in) {
@@ -183,7 +160,7 @@ $out = ereg_replace ('<li[^>]>', "\n".'-', $out);
 
 	// accentuation du gras -
     // <strong>texte</strong> -> *texte*
-    $out = ereg_replace ('<strong[^>|r]*>','*' ,$out);
+    $out = ereg_replace ('<strong[^>]*>','*' ,$out);
     $out = str_replace ('</strong>','*' ,$out);
 
 
