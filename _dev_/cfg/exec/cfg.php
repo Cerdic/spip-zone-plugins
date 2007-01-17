@@ -53,22 +53,29 @@ class cfg
 			$this->$o = $v;
 		}
 		$this->cfg_id = $cfg_id;
-		$this->lire();
 		if ($fond) {
 			$this->message .= $this->set_fond($fond);
 		}
+		$this->lire();
+	}
+
+	function nom_config()
+	{
+	    return $this->nom . ($this->casier ? '/' . $this->casier : '') .
+	    		($this->cfg_id ? '/' . $this->cfg_id : '');
 	}
 	
 // recuperer les valeurs, utilise la fonction commune lire_cfg() de cfg_options.php
 	function lire()
 	{
-    	$this->val = lire_cfg($this->nom);
+    	$this->val = lire_cfg($this->nom_config());
 	    return $this->val;
 	}
 	
 // supprimer le fragment voire tout le meta 
 	function supprimer()
 	{
+    	$was = lire_cfg($this->nom);
 	    effacer_meta($this->nom);
 	    $this->val = array();
 	    ecrire_metas();
@@ -103,7 +110,7 @@ class cfg
 		    }
 		}
 		if (!preg_match_all(
-		  '#<(?:(select)|input type=["\'](text|password|checkbox|radio)["\']) name=["\'](\w+)["\'](?: class=(["\'])(?:.*?(?:type_(\w+)|cfg_(\w+)))*.*?\4)?.+?>#ims',
+		  '#<(?:(select)|input type="(text|password|checkbox|radio)") name="(\w+)"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?[^>]*?>#ims',
 						$controldata, $matches, PREG_SET_ORDER)) {
 			return _L('pas_de_champs_dans_') . $nom;
 		}
@@ -112,24 +119,18 @@ class cfg
 		    	$regs[2] = 'select';
 		    }
 		    $this->champs[$regs[3]] = array('inp' => $regs[2], 'typ' => '');
-		    if (!empty($regs[5])) {
-		    	$this->champs[$regs[3]]['typ'] = $regs[5];
+		    if (!empty($regs[4])) {
+		    	$this->champs[$regs[3]]['typ'] = $regs[4];
 		    }
-		    if (!empty($regs[6])) {
-		    	$this->champs[$regs[3]]['cfg'] = $regs[6];
-		    	if ($regs[6] == 'id') {
+		    if (!empty($regs[5])) {
+		    	$this->champs[$regs[3]]['cfg'] = $regs[5];
+		    	if ($regs[5] == 'id') {
 			    	$this->champs[$regs[3]]['id'] = count($this->champs_id);
 		    		$this->champs_id[] = $regs[3];
 		    	}
 		    }
 	    }
 	    return '';
-	}
-
-	function nom_config()
-	{
-	    return $this->nom . ($this->casier ? '/' . $this->casier : '') .
-	    		($this->cfg_id ? '/' . $this->cfg_id : '');
 	}
 
 	function traiter()
@@ -150,6 +151,7 @@ class cfg
 			$this->modifier();
 			$this->message = _L('config_enregistree') . ' <b>' . $this->nom . '</b>';
 		}
+//		$this->message .= print_r($this->champs, true);
 	}
 
 	function controle()
