@@ -12,8 +12,8 @@ function init_sort_table(){
 			tolerance:		'intersect',
 			/*containment: 'parent',*/
 			onStop : function(){
-				serial = $.SortSerialize($(this).parent().id());
-				var url = $(this).parent().siblings('a').rel();
+				serial = $.SortSerialize($(this).parent().attr("id"));
+				var url = $(this).parent().siblings('a').attr("rel");
 				/*alert(url+'&'+serial.hash);*/
 				$(this).parent().siblings('input[@name=ordre]').val(serial.hash);
 				$(this).parent().parent().find('input[@type=submit]').eq(0).each(function(){ this.click(); });

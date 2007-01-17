@@ -1,6 +1,6 @@
 var onglet_actif = undefined;
 jQuery.fn.desactive_onglet = function() {
-	var url = $(this).children('a').href();
+	var url = $(this).children('a').attr("href");
 	if (url){
 		var ancre = url.split('#'); ancre = ancre[1];
 		$('#'+ancre).hide();
@@ -11,7 +11,7 @@ jQuery.fn.desactive_onglet = function() {
 jQuery.fn.active_onglet = function(hash) {
 	if (onglet_actif)	$(onglet_actif).desactive_onglet();
 	onglet_actif = this;
-	var url = $(this).children('a').href();
+	var url = $(this).children('a').attr("href");
 	var ancre = url.split('#'); ancre = ancre[1];
 	$(this).addClass('onglet_on').removeClass('onglet');
 	$('#'+ancre).show();
@@ -31,28 +31,28 @@ jQuery.fn.ajaxWait = function() {
 }
 
 jQuery.fn.ajaxAction = function() {
-	var id=$(this).id();
+	var id=$(this).attr("id");
 	$('#'+id+' a.ajaxAction').click(function(){
-		var action = $(this).href();
+		var action = $(this).attr("href");
 		var idtarget = action.split('#')[1];
 		if (!idtarget) idtarget = id;		
-		var url = (($(this).rel()).split('#'))[0];
+		var url = (($(this).attr("rel")).split('#'))[0];
 		var redir = url + "&var_ajaxcharset="+ajaxcharset+"&bloc="+idtarget;
 		action = (action.split('#')[0]).replace(/&?redirect=[^&#]*/,''); // l'ancre perturbe IE ...
 		$('#'+idtarget+',#apercu_gauche').ajaxWait();
-		$('#'+idtarget).load(action,{redirect: redir}, function(){ 
-			$('#'+idtarget).ajaxAction();
+		$.get(action,{redirect: redir}, function(data){ 
+			$('#'+idtarget).html(data).ajaxAction();
 			if($('#'+idtarget).is('.forms_champs')) forms_init_multi($('#'+idtarget).parent());
 			if($('#'+idtarget).is('#champs')) forms_init_lang();
 		});
 		$.get( url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu" , function(data){refresh_apercu(data);} );
 		if (idtarget!='proprietes')
-			$('#proprietes').load(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=proprietes",function(){ $('#proprietes').ajaxAction(); });
+			$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=proprietes",function(data){ $('#proprietes').html(data).ajaxAction(); });
 		return false;
 	});
 	$('#'+id+' form.ajaxAction').each(function(){
 		var idtarget = $(this).children('input[@name=idtarget]').val();
-		if (!idtarget) idtarget = $(this).parent().id();
+		if (!idtarget) idtarget = $(this).parent().attr("id");
 		var redir = $(this).children('input[@name=redirect]');
 		var url = (($(redir).val()).split('#'))[0];
 		$(redir).val(url + "&var_ajaxcharset="+ajaxcharset+"&bloc="+idtarget);
@@ -60,12 +60,12 @@ jQuery.fn.ajaxAction = function() {
 		$(this).ajaxForm({"target":'#'+idtarget, 
 			"after":
 			function(){ 
-				$('#'+idtarget).ajaxAction();
 				$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=apercu",function(data){refresh_apercu(data);});
+				if (idtarget!='proprietes')
+					$.get(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=proprietes",function(data){ $('#proprietes').html(data).ajaxAction(); });
+				$('#'+idtarget).ajaxAction();
 				if($('#'+idtarget).is('.forms_champs')) forms_init_multi($('#'+idtarget).parent());
 				if($('#'+idtarget).is('#champs')) forms_init_lang();
-				if (idtarget!='proprietes')
-					$('#proprietes').load(url+"&var_ajaxcharset="+ajaxcharset+"&bloc=proprietes",function(){ $('#proprietes').ajaxAction(); });
 			},
 			"before":
 			function(param,form){ 
@@ -74,7 +74,7 @@ jQuery.fn.ajaxAction = function() {
 			}
 			});
 	});
-	$('.antifocus').onefocus( function(){ this.value='';$(this).removeClass('antifocus'); } );
+	$('.antifocus').one('focus',function(){ this.value='';$(this).removeClass('antifocus'); } );
 	$('#'+id+' div.sortableChoix').Sortable(
 		{
 			accept : 			'sortableChoixItem',
@@ -88,7 +88,7 @@ jQuery.fn.ajaxAction = function() {
 			tolerance:		'intersect',
 			/*containment: 'parent',*/
 			onStop : function(){
-				serial = $.SortSerialize($(this).parent().id());
+				serial = $.SortSerialize($(this).parent().attr("id"));
 				$(this).parent().siblings('input[@name=ordre]').val(serial.hash);
 			}
 		}
@@ -108,12 +108,12 @@ jQuery.fn.ajaxAction = function() {
 				tolerance:		'intersect',
 				/*containment: 'parent',*/
 				onStart : function(arg){
-					serial = $.SortSerialize($(this).parent().id());
+					serial = $.SortSerialize($(this).parent().attr("id"));
 					var form = $(this).parent().siblings('form.sortableChamps');
 					form.children('input[@name=ordre]').val(serial.hash);
 				},
 				onStop : function(arg){
-					serial = $.SortSerialize($(this).parent().id());
+					serial = $.SortSerialize($(this).parent().attr("id"));
 					var form = $(this).parent().siblings('form.sortableChamps');
 					var prev = form.children('input[@name=ordre]').val();
 					if (prev != serial.hash) {
