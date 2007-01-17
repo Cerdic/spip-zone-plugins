@@ -67,6 +67,7 @@ table.motscroises0 {
 .mots_croises {
 	float:left;
 	width:100%;
+	clear:both;
 }
 
 .jeux_vertical, .jeux_horizontal{

@@ -85,7 +85,7 @@ $jeux_header_public = array('jeux', 'qcm', 'mots_croises', 'sudoku', 'pendu');
 // liste des css a placer dans le header prive
 // dossier jeux/style/
 global $jeux_header_prive;
-$jeux_header_prive = array('jeux','qcm', 'mots_croises', 'sudoku', 'pendu');		//, 'mots_croises-prive');
+$jeux_header_prive = array('jeux','qcm', 'mots_croises', 'sudoku', 'pendu');
 
 // liste des js a placer dans le header prive
 // dossier jeux/javascript/
