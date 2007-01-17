@@ -26,7 +26,6 @@ var imageArray = [];
 var FULL_S = false;
 if(typeof TB_chemin_css == 'undefined') { TB_chemin_css = 'thickbox.css'; }
 if(typeof TB_chemin_animation == 'undefined') { TB_chemin_animation = 'circle_animation.gif'; }
-$(TB_init);
 //add thickbox to href elements that have a class of .thickbox
 
 function TB_image() {
@@ -164,7 +163,7 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
 			$("#TB_closeWindowButton").click(TB_remove);		
 			$("#TB_load").remove();
 			$("#TB_window").fadeIn("slow");
-			setTimeout('$("#TB_legend").slideDown(800);',1600);      
+			//setTimeout('$("#TB_legend").slideDown(800);',1600);      
       
       
       

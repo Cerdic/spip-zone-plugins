@@ -44,9 +44,11 @@ margin:20px;
 display:none;
 }
 
+/*
 #TB_legend{
 display:none;
 }
+*/
 
 #TB_window {
 	position: absolute;
