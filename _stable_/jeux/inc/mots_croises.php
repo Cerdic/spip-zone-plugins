@@ -18,6 +18,7 @@ separateurs optionnels   : [titre], [texte], [config]
 paramètres de configurations par defaut :
 	solution=oui	// Afficher la solution ?
 	fondnoir=noir	// couleur des cases noires
+	compact=non		// Definitions en format compact ?
 	type=0			// types de grilles : 0 ou 1
 
 Exemple de syntaxe dans l'article :
@@ -151,6 +152,32 @@ function calcul_erreurs_grille($solution, $indexJeux) {
 	}
 }
 
+// retourne une liste compactee alphabetique ou numerique
+function jeux_listes_compacte($texte, $alpha) {
+	$tableau = preg_split("/[\r\n]+/", trim($texte));	
+	$tableau2 = array(); $i=0; $a=_T('jeux:alphabet');
+	foreach ($tableau as $i=>$valeur) if (($valeur=trim($valeur))!='') {
+		$c=$alpha?$a[$i]:$i+1;
+		if ($valeur[strlen($valeur)-1]!='.') $valeur.='.';
+		$tableau2[] = "<strong>$c.</strong>&nbsp;$valeur";
+	}
+	return implode(' ', $tableau2);
+}
+
+// definitions des mots croisés
+function affichage_definitions($horizontal, $vertical) {
+ if (jeux_config('compact')) return 
+ 		'<p><strong>'._T('motscroises:horizontalement').'&nbsp;</strong>'
+		.jeux_listes_compacte($horizontal, true) 
+ 		.'<br /><strong>'._T('motscroises:verticalement').'&nbsp;</strong>'
+		.jeux_listes_compacte($vertical, false).'</p>';
+ else return '<div class="spip jeux_horizontal"><h4 class="spip jeux_grille">'
+		._T('motscroises:horizontalement')."</h4>\n".jeux_listes($horizontal).'</div>'
+	. '<div class="spip jeux_vertical"><h4 class="spip jeux_grille">'
+		._T('motscroises:verticalement')."</h4>\n".jeux_listes($vertical).'</div>';
+}
+
+
 // decode une grille de mots croises 
 function jeux_mots_croises($texte, $indexJeux) {
 	$horizontal = $vertical = $solution = $html = false;
@@ -161,12 +188,13 @@ function jeux_mots_croises($texte, $indexJeux) {
 	jeux_config_init("
 		solution=oui	// Afficher la solution ?
 		fondnoir=noir	// couleur des cases noires
+		compact=non		// Definitions en format compact ?
 		type=0			// types de grilles : 0 ou 1
 	", false);
 	foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
-	  elseif ($valeur==_JEUX_HORIZONTAL) $horizontal = jeux_listes($tableau[$i+1]);
-	  elseif ($valeur==_JEUX_VERTICAL) $vertical = jeux_listes($tableau[$i+1]);
+	  elseif ($valeur==_JEUX_HORIZONTAL) $horizontal = $tableau[$i+1];
+	  elseif ($valeur==_JEUX_VERTICAL) $vertical = $tableau[$i+1];
 	  elseif ($valeur==_JEUX_SOLUTION) $solution = calcul_tableau_grille($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
 	}
@@ -174,11 +202,7 @@ function jeux_mots_croises($texte, $indexJeux) {
 	return 	'<div class="mots_croises">'
 			. calcul_erreurs_grille($solution, $indexJeux)
 			. affichage_grille_mc($solution, $indexJeux)
-	// definitions	
-			. '<div class="spip jeux_horizontal"><h4 class="spip jeux_grille">'
-					._T('motscroises:horizontalement')."</h4>\n".$horizontal.'</div>'
-			. '<div class="spip jeux_vertical"><h4 class="spip jeux_grille">'
-					._T('motscroises:verticalement')."</h4>\n".$vertical.'</div>'
+			. affichage_definitions($horizontal, $vertical)
 	// solution
 			. (($GLOBALS['affiche_solution_'.$indexJeux][0] == 1)? affichage_grille_mc($solution, $indexJeux, true) : '')
 			. '</div><br class="jeux_nettoyeur"/>';
