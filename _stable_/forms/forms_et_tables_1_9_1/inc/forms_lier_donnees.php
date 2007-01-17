@@ -112,6 +112,8 @@ function Forms_formulaire_article_afficher_donnees($id_article, $script){
 	$res = spip_query("SELECT id_donnee FROM spip_forms_donnees_articles AS d WHERE d.id_article="._q($id_article));
 	while ($row = spip_fetch_array($res)){
 		list($id_form,$titreform,$t) = Forms_liste_decrit_donnee($row['id_donnee']);
+		if (!count($t))
+			list($id_form,$titreform,$t) = Forms_liste_decrit_donnee($row['id_donnee'], false);
 		if (count($t)){
 			$liste[$id_form][$row['id_donnee']]=$t;
 			$forms[$id_form] = $titreform;
@@ -188,6 +190,8 @@ function Forms_liste_recherche_donnees($recherche,$les_donnees){
 		}
 		while ($row = spip_fetch_array($res)){
 			list($id_form,$titreform,$t) = Forms_liste_decrit_donnee($row['id_donnee']);
+			if (!count($t))
+				list($id_form,$titreform,$t) = Forms_liste_decrit_donnee($row['id_donnee'],false);
 			if (count($t))
 				$table[$titreform][$row['id_donnee']]=$t;
 		}
@@ -195,13 +199,15 @@ function Forms_liste_recherche_donnees($recherche,$les_donnees){
 	return $table;
 }
 
-function Forms_liste_decrit_donnee($id_donee){
+function Forms_liste_decrit_donnee($id_donnee, $specifiant=true){
 	$t = array();$titreform="";
+	if ($specifiant) $specifiant = "c.specifiant='oui' AND ";
+	else $specifiant="";
 	$res2 = spip_query("SELECT c.titre,dc.valeur,f.titre AS titreform,f.id_form FROM spip_forms_donnees_champs AS dc 
 	JOIN spip_forms_donnees AS d ON d.id_donnee=dc.id_donnee
 	JOIN spip_forms_champs AS c ON c.champ=dc.champ AND c.id_form=d.id_form
 	JOIN spip_forms AS f ON f.id_form=d.id_form
-	WHERE c.specifiant='oui' AND dc.id_donnee="._q($id_donee)." AND f.linkable='oui' ORDER BY c.rang");
+	WHERE $specifiant dc.id_donnee="._q($id_donnee)." AND f.linkable='oui' ORDER BY c.rang");
 	/*var_dump("SELECT c.titre,dc.valeur FROM spip_forms_donnees_champs AS dc 
 	JOIN spip_forms_donnees AS d ON d.id_donnee=dc.id_donnee
 	JOIN spip_forms_champs AS c ON c.champ=dc.champ AND c.id_form=d.id_form

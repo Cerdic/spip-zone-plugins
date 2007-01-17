@@ -7,12 +7,12 @@ jQuery.fn.ajaxAction = function() {
 	$('#'+id+' a.ajaxAction').click(function(){
 		var action = $(this).attr("href");
 		var idtarget = action.split('#')[1];
-		if (!idtarget) idtarget = id;		
+		if (!idtarget) idtarget = id;
 		var url = (($(this).attr("rel")).split('#'))[0];
 		var redir = url + "&var_ajaxcharset="+ajaxcharset+"&bloc="+idtarget;
 		action = (action.split('#')[0]).replace(/&?redirect=[^&#]*/,''); // l'ancre perturbe IE ...
 		$('#'+idtarget).ajaxWait();
-		$('#'+idtarget).load(action,{redirect: redir}, function(){ $('#'+idtarget).ajaxAction();});
+		$.get(action,{redirect: redir}, function(data){ $('#'+idtarget).html(data).ajaxAction();});
 		return false;
 	});
 	$('#'+id+' form.ajaxAction').each(function(){
@@ -20,6 +20,8 @@ jQuery.fn.ajaxAction = function() {
 		if (!idtarget) idtarget = $(this).parent().attr("id");
 		var redir = $(this).children('input[@name=redirectajax]');
 		var url = (($(redir).val()).split('#'))[0];
+		/*alert(url);
+		alert($(this).children('input[@name=redirect]').val());*/
 		$(this).children('input[@name=redirect]').val(url + "&var_ajaxcharset="+ajaxcharset+"&bloc="+idtarget);
 		$(redir).after("<input type='hidden' name='var_ajaxcharset' value='"+ajaxcharset+"' />");
 		$(this).ajaxForm({"target":'#'+idtarget, 

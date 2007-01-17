@@ -23,7 +23,6 @@ function action_forms_lier_donnees(){
 	$cherche_donnee = _request('cherche_donnee');
 	$id_donnee = intval(_request('id_donnee'));
 	if (!$id_donnee) $id_donnee = intval(_request('_id_donnee'));
-
 	if ($redirect==NULL) $redirect="";
 	if (!include_spip("inc/securiser_action"))
 		include_spip("inc/actions");
@@ -44,7 +43,7 @@ function action_forms_lier_donnees(){
 				$redirect = parametre_url($redirect,'ajouter','1');
 			}
 		}
-		if ($faire='retirer'){
+		if ($faire=='retirer'){
 			$id_donnee = intval($args[2]);
 			if ($id_article && $id_donnee && autoriser('modifier','article',$id_article))
 				spip_query("DELETE FROM spip_forms_donnees_articles WHERE id_article="._q($id_article)." AND id_donnee="._q($id_donnee));
