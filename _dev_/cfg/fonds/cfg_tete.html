@@ -4,9 +4,5 @@
 
 ]
 <div>
-<form method="post" action="[(#ENV*{_cfg_}|extrait{base_url})]" >
-<input type="hidden" name="hash" value="[(#ENV*{_cfg_}|extrait{hash})]" />
-<input type="hidden" name="arg" value="[(#ENV*{_cfg_}|extrait{arg})]" />
-<input type="hidden" name="exec" value="cfg" />
-<input type="hidden" name="cfg" value="[(#ENV*{_cfg_}|extrait{nom})]" />
-<input type="hidden" name="cfg_id" value="[(#ENV*{_cfg_}|extrait{cfg_id})]" />
+<form method="post" action="#URL_SITE_SPIP/ecrire/" >
+[(#ENV{_cfg_}|form_hidden)]

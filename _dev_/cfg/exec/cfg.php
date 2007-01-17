@@ -12,7 +12,7 @@ function exec_cfg_dist()
 	$config = new cfg(
 		($nom = _request('cfg'))? $nom : 'cfg',
 		($fond = _request('fond'))? $fond : $nom,
-		($cfg_id = _request('cfg_id'))? $cfg_id : ''
+		($_cfg_id = _request('_cfg_id'))? $_cfg_id : ''
 		);
 
 	$config->traiter();
@@ -27,7 +27,7 @@ class cfg
 // le fond html utilise , en general pour config simple idem $nom
 	var $fond = '';
 // pour une config multiple , l'id courant
-	var $cfg_id = '';
+	var $_cfg_id = '';
 // sous tableau optionel du meta ou va etre stocke le fragment de config
 // vide = a la "racine" du meta nomme $nom
 	var $casier = '';
@@ -44,7 +44,7 @@ class cfg
 // leurs valeurs
 	var $val = array();
 	
-	function cfg($nom, $fond = '', $cfg_id = '', $opt = array())
+	function cfg($nom, $fond = '', $_cfg_id = '', $opt = array())
 	{
 		$this->nom = $nom;
 		$this->titre = _L('Configuration') . ' ' . $this->nom;
@@ -52,7 +52,7 @@ class cfg
 		foreach ($opt as $o=>$v) {
 			$this->$o = $v;
 		}
-		$this->cfg_id = $cfg_id;
+		$this->_cfg_id = $_cfg_id;
 		if ($fond) {
 			$this->message .= $this->set_fond($fond);
 		}
@@ -62,7 +62,7 @@ class cfg
 	function nom_config()
 	{
 	    return $this->nom . ($this->casier ? '/' . $this->casier : '') .
-	    		($this->cfg_id ? '/' . $this->cfg_id : '');
+	    		($this->_cfg_id ? '/' . $this->_cfg_id : '');
 	}
 	
 // recuperer les valeurs, utilise la fonction commune lire_cfg() de cfg_options.php
@@ -82,9 +82,52 @@ class cfg
 	}
 	
 // modifier le fragment qui peut etre tout le meta
-	function modifier()
+	function monte_arbre(&$base, $chemin, &$report)
 	{
-	    ecrire_meta($this->nom, serialize($this->val));
+		if (!$chemin) {
+			return;
+		}
+		foreach (explode('/', $chemin) as $chunk) {
+			if (!isset($base[$chunk])) {
+				$base[$chunk] = array();
+			}
+	    	$base = &$base[$chunk];
+	    	$report[] = &$base[$chunk];
+		}
+	}
+	
+// modifier le fragment qui peut etre tout le meta
+	function modifier($supprimer = false)
+	{
+		global $meta;
+    	($base = lire_cfg($this->nom)) || ($base = array());
+    	$ici = &$base;
+    	$report = array();
+    	$this->monte_arbre($ici, $this->casier, $report);
+    	$this->monte_arbre($ici, $this->new_id, $report);
+		foreach ($this->champs as $name => $def) {
+			if (isset($def['id'])) {
+				continue;
+			}
+			if ($supprimer) {
+				unset($ici[$name]);
+			} else {
+				$ici[$name] = $this->val[$name];
+			}
+	    }
+		if ($supprimer) {
+			for ($i = count($report); $i--; ) {
+				if ($report[$i]) {
+					break;
+				}
+				unset($report[$i]);
+			}
+		}
+		if ($supprimer && !$base) {
+		    effacer_meta($this->nom);
+		} else {
+		    ecrire_meta($this->nom, serialize($base));
+	    }
 	    ecrire_metas();
 	}
 
@@ -148,6 +191,8 @@ class cfg
 			$this->supprimer();
 			$this->message = _L('config_supprimee') . ' <b>' . $this->nom . '</b>';
 		} elseif (!($this->message = $this->controle())) {
+			if ($this->new_id != $this->_cfg_id && !_request('_cfg_copier')) {
+			}
 			$this->modifier();
 			$this->message = _L('config_enregistree') . ' <b>' . $this->nom . '</b>';
 		}
@@ -170,6 +215,12 @@ class cfg
 		    	}
 		    }
 	    }
+		$this->new_id = '';
+		$sep = '';
+		foreach ($this->champs_id as $name) {
+			$this->new_id .= $sep . $this->val[$name];
+			$sep = '/';
+	    }
 	    return $return;
 	}
 
@@ -181,14 +232,14 @@ class cfg
 	function get_fond($contexte = array())
 	{
 	    $arg = 'cfg0.0.0-' . $this->nom . '-' . $this->fond;
-		$contexte['_cfg_'] = serialize(array(
-			'nom' => $this->nom,
-			'fond' => $this->fond,
-			'base_url' => $this->base_url,
-		    'lang' => $GLOBALS['spip_lang'],
-		    'arg' => $arg,
-		    'hash' =>  calculer_action_auteur('-' . $arg)
-		));
+		$contexte['_cfg_'] =
+			'?exec=cfg&cfg=' . $this->nom .
+			'&fond=' . $this->fond .
+			'&_cfg_id=' . $this->_cfg_id .
+			'&base_url=' . $this->base_url .
+		    '&lang=' . $GLOBALS['spip_lang'] .
+		    '&arg=' . $arg .
+		    '&hash=' .  calculer_action_auteur('-' . $arg);
 	    include_spip('public/assembler');
 	    return recuperer_fond('fonds/cfg_' . $this->fond,
 	    		$this->val ? array_merge($contexte, $this->val) : $contexte);
@@ -227,7 +278,7 @@ class cfg
 			foreach ($exi as $compte => $info) {
 				$dedans .= '
 <p><label for="' . $lien . '_' . $compte . '">' . _T('cfg:nouveau') . '</label>
-<input type="image" id="' . $lien . '_' . $compte . '" name="cfg_id" value="' . $compte . '" src="../dist/images/triangle.gif" style="vertical-align: text-top;"/></p>';
+<input type="image" id="' . $lien . '_' . $compte . '" name="_cfg_id" value="' . $compte . '" src="../dist/images/triangle.gif" style="vertical-align: text-top;"/></p>';
 			}
 		}
 		$dedans .= '</form></div>' . fin_boite_info(true);
