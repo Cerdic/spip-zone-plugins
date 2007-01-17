@@ -140,7 +140,8 @@ if ($message_pile > 0){
 	   $objet = str_replace("&#8220;", "\"", $objet);
 	   $objet = str_replace("&#8221;", "\"", $objet);
  	}
-	$texte = absolute_url($texte);
+        include_spip('inc/filtres');
+        $texte = liens_absolus($texte);
 	
 	// on prépare la version texte
 	
