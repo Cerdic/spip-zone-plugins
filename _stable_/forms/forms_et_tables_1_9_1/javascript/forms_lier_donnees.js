@@ -3,12 +3,12 @@ jQuery.fn.ajaxWait = function() {
 	return this;
 }
 jQuery.fn.ajaxAction = function() {
-	var id=$(this).id();
+	var id=$(this).attr("id");
 	$('#'+id+' a.ajaxAction').click(function(){
-		var action = $(this).href();
+		var action = $(this).attr("href");
 		var idtarget = action.split('#')[1];
 		if (!idtarget) idtarget = id;		
-		var url = (($(this).rel()).split('#'))[0];
+		var url = (($(this).attr("rel")).split('#'))[0];
 		var redir = url + "&var_ajaxcharset="+ajaxcharset+"&bloc="+idtarget;
 		action = (action.split('#')[0]).replace(/&?redirect=[^&#]*/,''); // l'ancre perturbe IE ...
 		$('#'+idtarget).ajaxWait();
@@ -17,7 +17,7 @@ jQuery.fn.ajaxAction = function() {
 	});
 	$('#'+id+' form.ajaxAction').each(function(){
 		var idtarget = $(this).children('input[@name=idtarget]').val();
-		if (!idtarget) idtarget = $(this).parent().id();
+		if (!idtarget) idtarget = $(this).parent().attr("id");
 		var redir = $(this).children('input[@name=redirectajax]');
 		var url = (($(redir).val()).split('#'))[0];
 		$(this).children('input[@name=redirect]').val(url + "&var_ajaxcharset="+ajaxcharset+"&bloc="+idtarget);
