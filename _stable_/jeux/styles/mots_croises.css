@@ -1,5 +1,5 @@
 /*
-.jeux_grille td.noir {
+.jeux_grille td.jeux_noir {
 	background-color:#000000;
 	color:#000000;
 }
@@ -10,22 +10,22 @@ text-align:center;
 vertical-align:middle;
 height:1.5em;}
 table.jeux_grille td{border:1px solid black;text-align:center}
-.jeux_grille td.coin,table.jeux_grille input,.jeux_grille th{border:0px solid black}
+.jeux_grille td.jeux_coin,table.jeux_grille input,.jeux_grille th{border:0px solid black}
 .erreur{float:left;}
 
 table.jeux_grille label{display:none}
 
 
 
-.horizontal ol{list-style-type:upper-alpha}
+.jeux_horizontal ol{list-style-type:upper-alpha}
 
-.vertical, .horizontal{float:left;
+.jeux_vertical, .jeux_horizontal{float:left;
 font-size:90%;
 max-width:49%;
 width:auto;
 margin-right:5%;
 margin-left:5%}
-//.horizontal .vertical {float:left}
+//.jeux_horizontal .jeux_vertical {float:left}
 
 form.jeux_grille{float:left;
 clear:both;
@@ -45,10 +45,10 @@ h4.jeux_grille{
 	font-weight:bold;
 }
 
-.horizontal ol,.vertical ol{margin:0;
+.jeux_horizontal ol,.jeux_vertical ol{margin:0;
 list-style-position:inside;
 }
-.horizontal >ol, .vertical > ol{list-style-position:outside;}
+.jeux_horizontal >ol, .jeux_vertical > ol{list-style-position:outside;}
 
 
 .jeux_grille{margin:0;padding:0}
@@ -64,16 +64,12 @@ table.motscroises0 {
 	text-align:left;
 }	
 
-.jeux_grille td.noir {
-	background-color:#000000; 
-	color:#000000;
+.mots_croises {
+	float:left;
+	width:100%;
 }
 
-.jeux_grille td.coin{
-	border:0px;
-}
-
-.vertical, .horizontal{
+.jeux_vertical, .jeux_horizontal{
 	float:left;
 	font-size:90%;
 	text-align:left;
@@ -90,15 +86,15 @@ table.motscroises0 {
 	margin-left:3%;
 }
 
-.horizontal li{
+.jeux_horizontal li{
 	list-style-type:upper-alpha; 
 }
 
-.vertical li{
+.jeux_vertical li{
 	list-style-type:decimal; 
 }
 
-/*.horizontal .vertical {float:left}*/
+/*.jeux_horizontal .jeux_vertical {float:left}*/
 
 
 /*
@@ -114,12 +110,12 @@ h4.jeux_grille{
 }
 
 
-.horizontal ol, .vertical ol{
+.jeux_horizontal ol, .jeux_vertical ol{
 	margin:0;
 	list-style-position:inside;
 }
 
-.horizontal > ol, .vertical > ol{
+.jeux_horizontal > ol, .jeux_vertical > ol{
 	list-style-position:outside;
 }
 

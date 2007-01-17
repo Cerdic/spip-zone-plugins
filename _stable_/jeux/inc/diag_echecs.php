@@ -103,7 +103,7 @@ function calcul_diagramme_echecs($position, $indexJeux) {
 	global $jeux_config;
 	$md5 = md5($position.serialize($jeux_config));
 	$fichier_dest = sous_repertoire(_DIR_VAR, "cache-jeux") . 'echiq_'.$md5 . jeux_config('img_suffix');
-	$image = "<img src=\"$fichier_dest\" alt=\"$position\" border=\"0\"/><br>\n";
+	$image = "<img class=\"no_image_filtrer \" src=\"$fichier_dest\" alt=\"$position\" title=\"$position\" border=\"0\"/><br>\n";
 	// pas de recalcul de l'image pendant 12 heures si le fichier existe déjà
 	if (file_exists($fichier_dest) AND ($GLOBALS['var_mode'] != 'recalcul') AND (time()-@filemtime($fichier_dest) < 12*3600))
 		 return $image;

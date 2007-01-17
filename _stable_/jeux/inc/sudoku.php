@@ -66,8 +66,8 @@ function affichage_sudoku($tableau_sudoku, $indexJeux, $solution=false){
 		
 		foreach ($contenu_ligne as $colonne =>$cellule){
 		    $colonne++; 
-			$class = preg_match(",[$interh],", $colonne)?(preg_match(",[$interv],", $ligne)?' class="bas droite"':' class="droite"'):(preg_match(",[$interv],", $ligne)?' class="bas"':'');
-//				: ($ligne==$hauteur?($colonne==$largeur?' class="bas droite"':' class="bas"'):($colonne==$largeur?' class="droite"':''))
+			$class = preg_match(",[$interh],", $colonne)?(preg_match(",[$interv],", $ligne)?' class="jeux_bas jeux_droite"':' class="jeux_droite"'):(preg_match(",[$interv],", $ligne)?' class="jeux_bas"':'');
+//				: ($ligne==$hauteur?($colonne==$largeur?' class="jeux_bas jeux_droite"':' class="jeux_bas"'):($colonne==$largeur?' class="jeux_droite"':''))
 //			);
 		    // s'il s'agit pas d'un espace
 		    if ($cellule != '-') 

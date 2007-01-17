@@ -51,7 +51,7 @@ function pendu_pendu($js, $indexJeux) {
  $reset = '<input class="pendu_reset" type="button" value="'._T('jeux:rejouer').'" onclick="pendu_init('.$indexJeux.')">'; 
  $images = '';
  for($i=0; $i<=$nb_images-1; $i++)
- 	$images .= "<img class=\"image_pendu\" name=\"pict{$indexJeux}_$i\" src=\"\" />";
+ 	$images .= "<img class=\"no_image_filtrer image_pendu\" name=\"pict{$indexJeux}_$i\" src=\"\" />";
  $regles = jeux_config('regle')?'<p class="jeux_regle">'.definir_puce()._T('pendu:regle').'</p>' : '';
  return '<table class="pendu" border=0><tr><td>'
  	. "<p align=\"center\">$images<br/>\n$proposition</p></td><td width=\"20\">&nbsp;</td><td valign=\"bottom\">\n" . affiche_un_clavier($indexJeux) . "<br/></td></tr><tr><td colspan=\"3\" align=\"right\">$reset</td></tr></table>\n"

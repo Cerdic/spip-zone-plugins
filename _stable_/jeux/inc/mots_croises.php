@@ -58,27 +58,27 @@ function affichage_grille_mc($tableau_grille, $indexJeux, $solution=false){
     $grille = '';
 
     // entetes : formulaire + grille
-    $grille .= (!$solution)? '<form class="jeux_grille" action="'.self()."\" method=\"post\">\n" 
+    $grille .= (!$solution)? '<form class="jeux_grille jeux_left" action="'.self()."\" method=\"post\">\n" 
 		: '<p class="jeux_solution">'._T('jeux:solution').' : </p>' ;
     $grille .= '<table class="jeux_grille" cellspacing="0" border="0" summary="'
 		. _T('motscroises:table_summary',Array('hauteur'=>$hauteur,'largeur'=>$largeur))
-		. "\">\n\t<tr>\n\t\t<td class=\"coin\"></td>\n";
+		. "\">\n\t<tr>\n\t\t<td class=\"jeux_coin\"></td>\n";
 	
 	
-	//les cellules d'entetes verticales
+	// les cellules d'entetes verticales
 	for($i = 1; $i<=$largeur; $i++) $grille .= "\t\t<th scope=\"col\">$i</th>\n";
 	$grille .= "\t</tr>\n";		
 	
-	//debut affichage des lignes
+	// debut affichage des lignes
 	foreach($tableau_grille as $ligne =>$contenu_ligne){
 		$ligne++;
 		$grille .= "\t<tr>\n\t<th scope=\"row\">".lettre_grille($ligne)."</th>\n";	// numeros de ligne
 		
 		foreach ($contenu_ligne as $colonne =>$cellule){
 		    $colonne++;
-			$class = $ligne==$hauteur?($colonne==$largeur?' class="bas droite"':' class="bas"'):($colonne==$largeur?' class="droite"':'');
-			$classnoir = ' class="noir' . ($ligne==$hauteur?($colonne==$largeur?' bas droite':' bas'):($colonne==$largeur?' droite':'')) . '"';
-		    //s'il s'agit d'un noir
+			$class = $ligne==$hauteur?($colonne==$largeur?' class="jeux_bas jeux_droite"':' class="jeux_bas"'):($colonne==$largeur?' class="jeux_droite"':'');
+			$classnoir = ' class="jeux_noir' . ($ligne==$hauteur?($colonne==$largeur?' jeux_bas jeux_droite':' jeux_bas'):($colonne==$largeur?' jeux_droite':'')) . '"';
+		    // s'il s'agit d'un noir
 		    if ($cellule == "*") { 
 					$noires = $jeux_couleurs[jeux_config('fondnoir')];
 					$noires = "rgb($noires[0], $noires[1], $noires[2])";
@@ -171,14 +171,16 @@ function jeux_mots_croises($texte, $indexJeux) {
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
 	}
 
-	return calcul_erreurs_grille($solution, $indexJeux)
+	return 	'<div class="mots_croises">'
+			. calcul_erreurs_grille($solution, $indexJeux)
 			. affichage_grille_mc($solution, $indexJeux)
 	// definitions	
-			. '<div class="spip horizontal"><h4 class="spip jeux_grille">'
+			. '<div class="spip jeux_horizontal"><h4 class="spip jeux_grille">'
 					._T('motscroises:horizontalement')."</h4>\n".$horizontal.'</div>'
-			. '<div class="spip vertical"><h4 class="spip jeux_grille">'
+			. '<div class="spip jeux_vertical"><h4 class="spip jeux_grille">'
 					._T('motscroises:verticalement')."</h4>\n".$vertical.'</div>'
 	// solution
-			. (($GLOBALS['affiche_solution_'.$indexJeux][0] == 1)? affichage_grille_mc($solution, $indexJeux, true) : '');
+			. (($GLOBALS['affiche_solution_'.$indexJeux][0] == 1)? affichage_grille_mc($solution, $indexJeux, true) : '')
+			. '</div>';
 }
 ?>

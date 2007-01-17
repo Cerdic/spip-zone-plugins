@@ -99,11 +99,14 @@
 }
 
 form.jeux_grille{
-	float:left;
 	clear:both;
 	padding:0 4pt 0 0;
 	margin:0;
 	width:auto;
+}
+
+.jeux_left{
+	float:left;
 }
 
 table.jeux_grille label{
@@ -133,10 +136,20 @@ table.jeux_grille td{
 	border-left:1px solid black;
 }
 
-.jeux_grille td.droite{
+
+.jeux_grille td.jeux_noir {
+	background-color:#000000; 
+	color:#000000;
+}
+
+.jeux_grille td.jeux_coin{
+	border:0px;
+}
+
+.jeux_grille td.jeux_droite{
 	border-right:1px solid black;
 }
 
-.jeux_grille td.bas{
+.jeux_grille td.jeux_bas{
 	border-bottom:1px solid black;
 }
