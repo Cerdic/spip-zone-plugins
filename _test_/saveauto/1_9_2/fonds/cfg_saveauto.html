@@ -19,7 +19,7 @@ Ici vous pouvez configurer le plugin saveauto.<br />
 ]
 [(#REM) titre=Configuration du plugin saveauto]
 #CACHE{0}
-[(#INCLURE{fond=fonds/cfg_tete}{_cfg_=#ENV*{_cfg_}})]
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
 
 
 <?php    $p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
@@ -55,15 +55,6 @@ Ici vous pouvez configurer le plugin saveauto.<br />
 */
 ?>
 
-[(#REM) descriptif=
-<h4><:saveauto:saveauto:plugin_saveauto:></h4>
-<:saveauto:saveauto:help_titre:>
-<br /><a href="http://www.spip-contrib.net/?article1442" class="spip_out">Documentation sur contrib</a>
-<br /><br /><strong><:saveauto:saveauto:version></strong>$version_script
-]
-[(#REM) titre=Configuration du plugin saveauto]
-#CACHE{0}
-[(#INCLURE{fond=fonds/cfg_tete}{_cfg_=#ENV*{_cfg_}})]
 
 				<style type="text/css">
 				   fieldset { background-color: #ddd; margin-bottom: 10px;  }
@@ -148,4 +139,8 @@ Ici vous pouvez configurer le plugin saveauto.<br />
 				   <:saveauto:help_restauration:>
 				</fieldset>
 
-[(#INCLURE{fond=fonds/cfg_pied}{lang}{hash}{arg})]
+				<input type="submit" name="_cfg_ok" value="<:OK:>" />
+				<input type="reset" value="<:Reset:>" />
+				<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+				</form>
+				</div>

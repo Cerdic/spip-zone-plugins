@@ -7,16 +7,17 @@
 	non-spams qui en sont). Cet aspect évolutif de cette solution est particulièrement intéressant.
 ]
 [(#REM) titre=]
-[(#INCLURE{fond=fonds/cfg_tete}{_cfg_=#ENV*{_cfg_}})]
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
 
 <fieldset><legend>Clé API WordPress.com</legend>
 <p>Cette clé vous permet d'utiliser le service fourni par <a href="http://www.wordpress.com">WordPress.com</a>. Les conditions d'utilisation sont disponibles sur <a href="http://www.akismet.com/">le site d'Akimet</a>.</p>
 <p>
 <label>Clé API Worpress.com</label>
 <input type="text" name="apiKey" value="[(#ENV{apiKey}|?{#ENV{apiKey},'Saisissez une clé valide'})]" onclick="jQuery(this).attr('value','')"/>
-<input type="submit" name="ok" value="Valider cette clé" />
+<input type="submit" name="_cfg_ok" value="Valider cette clé" />
 </p>
 </fieldset>
 
 </form>
+
 

@@ -1,5 +1,6 @@
 #CACHE{0}
-[(#INCLURE{fond=fonds/cfg_tete}{_cfg_=#ENV*{_cfg_}})]
+<div>
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
 
 <fieldset><legend><:article:> <:sommaire:></legend>
    <label>Choix de l'article &agrave; utiliser :</label>
@@ -33,4 +34,8 @@
    <input type="checkbox" name="texte" [checked="(#ENV{texte})"] />
 </fieldset>
 
-[(#INCLURE{fond=fonds/cfg_pied})]
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
+</div>
