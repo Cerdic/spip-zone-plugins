@@ -86,21 +86,6 @@ function exec_abonne_edit(){
 		$extra = $row["extra"];
 		$low_sec = $row["low_sec"];
 		
-		if($effacer_definitif){
-			echo debut_cadre_relief("redacteurs-poubelle-24.gif");
-			if($statut=='6forum'){
-				spip_query("DELETE FROM spip_abonnes_listes WHERE id_auteur="._q($id_auteur));
-				spip_query("DELETE FROM spip_auteurs WHERE id_auteur="._q($id_auteur));
-				
-				echo "$nom ($email) "._T('spiplistes:efface');
-				echo "<p><a href='?exec=abonnes_tous'>Retour au suivi des abonnements</a><p>";
-			}
-			else
-				echo "Attention, ce contact est auteur sur le site, il ne peut etre effac&eacute;"; 
-	
-			echo fin_cadre_relief();
-		}
-		
 		echo "<div align='center'>";
 		gros_titre($nom);
 		echo "</div>";
@@ -148,18 +133,15 @@ function exec_abonne_edit(){
 	
 	echo spiplistes_afficher_en_liste(_T('spiplistes:abonne_listes'), _DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'abonnements', '', '', 'position') ;
 
-	
-	if(!$effacer_definitif=$_POST['effacer_definitif']){
+	if ($statut == '6forum'){
+		$retour = generer_url_ecrire('abonnes_tous');
+		$action = generer_action_auteur('spiplistes_supprimer_abonne',$id_auteur,$retour);
 		echo debut_cadre_relief("$logo");
 		echo "<h3>"._T('spiplistes:supprime_contact')."</h3>";
-		echo "<form action='?exec=abonne_edit' method='post'>";
+		echo "<form action='$action' method='post'>";
+		echo form_hidden($action);
 		echo "<p align='center'>";
-		
 		echo "<input type='submit' name='Valider' value='"._T('spiplistes:supprime_contact_base')."'>";
-		echo "<input type='hidden' name='id_auteur'  value=$id_auteur >";
-		echo "<input type='hidden' name='nom'  value=$nom >";
-		echo "<input type='hidden' name='email'  value=$email >";
-		echo "<input type='hidden' name='effacer_definitif'  value='oui' >";
 		echo "</p>";
 		echo "</form>";
 		echo fin_cadre_relief();

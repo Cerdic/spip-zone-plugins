@@ -28,6 +28,12 @@ include_spip ('base/spip-listes');
 include_spip('inc/plugin');
 
 function spiplistes_afficher_pile_messages(){
+	
+	if ($GLOBALS['spip_version_code']<1.9204){
+		include_spip('base/spiplistes_upgrade');
+		if (!spiplistes_install('test'))
+			spiplistes_install('install');
+	}
 	$out = "";
 	$list = spip_query ("SELECT * FROM spip_listes WHERE message_auto='oui' ");
 	$message_pile = spip_num_rows($list);
