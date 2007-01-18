@@ -20,26 +20,6 @@
 	<h4><:auteurscomplets:contacts:></h4>
 	[<:auteurscomplets:organisation:> <a class="org" href="#URL_ORGANISATION">(#ORGANISATION)</a>]<br />
 	[<:auteurscomplets:email:> <a class="email" href="mailto:#EMAIL">(#EMAIL)</a><br />][<:auteurscomplets:tel:> <span class="tel">(#TELEPHONE)</span><br />][<:auteurscomplets:fax:> <span class="fax">(#FAX)</span><br />][<:auteurscomplets:website:> <a href="#URL_SITE" class="url" rel="me">(#NOM_SITE)</a>]
-
-	[(#REM) Articles de l'auteur ]
-	<B_articles>
-	<div>
-	<h4><:auteurscomplets:vos_articles:></h4>
-		<div class="liste-articles">
-			#ANCRE_PAGINATION
-			<h2 class="invisible"><:articles_auteur:></h2>
-			<ul>
-				<BOUCLE_articles(ARTICLES) {id_auteur} {par date}{inverse} {pagination 5}>
-				<li>
-					<strong><a href="#URL_ARTICLE" title="#TITRE">#TITRE</a></strong>
-					<small>[(#DATE|affdate)]</small>
-				</li>
-				</BOUCLE_articles>
-			</ul>
-		[<p class="pagination">(#PAGINATION)</p>]
-		</div>
-	</div><!-- fin contre-encart -->
-	</B_articles>
 </div>
 #FORMULAIRE_PROFILE
 </BOUCLE_AUTEUR>

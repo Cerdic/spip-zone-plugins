@@ -17,7 +17,7 @@ include_spip('inc/actions');
 include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@action_legender_auteur
-function action_legender_auteur_supp()
+function action_legender_auteur_supp_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
         $securiser_action();
@@ -27,13 +27,13 @@ function action_legender_auteur_supp()
 	$echec = array();
 
 	if (!preg_match(",^(\d+)\D(\d*)(\D(\w*)\D(.*))?$,", $arg, $r)) {
-		$r = "action_legender_auteur_dist $arg pas compris";
+		$r = "action_legender_auteur_supp_dist $arg pas compris";
 		spip_log($r);
-        } else 	redirige_par_entete(action_legender_auteur_post_supp($r));
+        } else 	redirige_par_entete(action_legender_auteur_supp_post($r));
 }
 
 // http://doc.spip.org/@action_legender_post
-function action_legender_auteur_post_supp($r){
+function action_legender_auteur_supp_post($r){
 	global $auteur_session, $id_auteur;
 
 	$prenom = _request('prenom');

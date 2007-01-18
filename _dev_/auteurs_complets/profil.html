@@ -4,12 +4,12 @@
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
 	<title>[(#NOM|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-	[<meta name="description" content="(#BIO|couper{150}|textebrut)" />]
+	[<meta name="description" content="(#BIO|couper{150}|texte_backend|textebrut)" />]
 	<INCLURE{fond=inc-head}>
 
 </head>
 
-<body class="page_auteur">
+<body class="page_profil_auteur">
 
 <div id="page">
 
@@ -17,39 +17,48 @@
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; (#NOM|couper{80})]</div>
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>[ &gt; (#NOM|couper{80})]</div>
 
 	<div id="conteneur">
 
 		[(#REM) Contenu principal : affichage de l'auteur ]
-		<div id="contenu_profil">
+		<div id="contenu">
 
-			[<div class="texte">(#BIO)</div><br />]
-			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 			[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{' '})[(#MODELE{editer_profil}{id_auteur=#SESSION{id_auteur}}{cache=0})]]
 			[(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{'',' '})[(#MODELE{id_card_complete}{id_auteur})]<br /><:auteurscomplets:error_bad_user:>]
 
 		</div><!-- fin contenu -->
+		
+		[(#REM) Articles de l'auteur ]
+		<B_articles>
+		<div id="articles_profil">
+		<h4><:auteurscomplets:vos_articles:></h4>
+		<div class="liste-articles">
+			#ANCRE_PAGINATION
+			<ul>
+				<BOUCLE_articles(ARTICLES) {id_auteur} {par date}{inverse} {pagination 5}>
+				<li>
+					<div class="date"><small>[(#DATE|affdate{d/m})]</small><br class="date" />[(#DATE|affdate{Y})]</div>[(#DATE_REDAC|>{#DATE}|?{' ',''})<div class="date_deux"><small>[(#DATE_REDAC|affdate{d/m})]</small><br class="date" />[(#DATE|affdate{Y})]</div>]
+					<div style="float:left;margin:.5em 1em;"><a href="#URL_ARTICLE" title="#TITRE">#TITRE</a><br />
+					<BOUCLE_rubriqueart(HIERARCHIE){id_article}>
+					<small>#TITRE</small>
+					</BOUCLE_rubriqueart>
+					</div>
+					<br class="nettoyeur" />
+				</li>
+				</BOUCLE_articles>
+			</ul>
+		[<p class="pagination">(#PAGINATION)</p>]
+		</div>
+		</B_articles>
+		
+		</div><!-- fin conteneur -->
 
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
 
 			[(#REM) Menu de navigation par rubriques ]
 			<INCLURE{fond=inc-rubriques}>
-	
-			[(#REM) Autres auteurs ]
-			<B_auteurs>
-			<div class="forums">
-				#ANCRE_PAGINATION
-				<h2 class="menu-titre"><:info_auteurs:></h2>
-				[<p class="pagination">(#PAGINATION)</p>]
-				<ul>
-					<BOUCLE_auteurs(AUTEURS) {par nom} {pagination 20}>
-					<li><a href="#URL_AUTEUR"[ class="(#EXPOSE)"]>[(#NOM|couper{80})]</a></li>
-					</BOUCLE_auteurs>
-				</ul>
-			</div>
-			</B_auteurs>
 
 		</div><!-- fin navigation -->
 
