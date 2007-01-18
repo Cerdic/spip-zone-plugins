@@ -27,15 +27,6 @@ include_spip('inc/lang');
 include_spip('inc/affichage');
 include_spip('base/spip-listes');
 
-function spiplistes_terminer_changement_statut($id_liste,$ok_nouveau_statut,$statut_nouv,$statut_ancien) {
-	if ($ok_nouveau_statut) {
-		//calculer_rubriques();
-		if ($statut_nouv == 'publie' AND $statut_ancien != $statut_nouv) {
-			include_spip('inc/mail');
-			envoyer_mail_publication($id_liste);
-		}
-	}
-}
 
 function exec_gerer_liste(){
 
@@ -49,7 +40,7 @@ function exec_gerer_liste(){
 	$titre = _request('titre');
 	$texte = _request('texte');
 	$pied_page = _request('pied_page');
-		
+	//on peut plus ajouter un auteur la c buggue
 	//global $flag_auteur;
 	$creer_auteur = _request('creer_auteur');
 	//global $ajout_auteur;
@@ -68,6 +59,9 @@ function exec_gerer_liste(){
 	$envoyer_direct = _request('envoyer_direct');
 	
 	$debut = _request('debut');
+ 
+ 	$ok_nouveau_statut  = _request('ok_nouveau_statut');
+	$statut_nouv = _request('statut_nouv');
  
 	$nomsite=lire_meta("nom_site"); 
 	$urlsite=lire_meta("adresse_site"); 
@@ -580,11 +574,7 @@ function exec_gerer_liste(){
 
 	/// fin abonnes
 
-	if ($ok_nouveau_statut || $reindexer) {
-		@flush();
-		spiplistes_terminer_changement_statut($id_liste,$ok_nouveau_statut,$statut_nouv,$statut_ancien);
-	}
-
+	
 	////
 	// MODE EDIT LISTE FIN ---------------------------------------------------------
 	echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$GLOBALS['spiplistes_version']."<p>" ;
