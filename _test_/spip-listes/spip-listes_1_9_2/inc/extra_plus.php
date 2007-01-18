@@ -32,7 +32,7 @@
 
 function get_extra ($id, $objet) {
 	if(!$id) return false;
-	// On construit qqch qui ressemble à "SELECT extra FROM spip_articles WHERE id_article=$id_article"
+	// On construit qqch qui ressemble a "SELECT extra FROM spip_articles WHERE id_article=$id_article"
 	$query = "SELECT statut, extra FROM spip_".$objet."s";
 	$query .= " WHERE id_".$objet."=".$id;
 	$res = spip_query($query);

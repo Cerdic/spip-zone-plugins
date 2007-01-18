@@ -28,51 +28,47 @@ include_spip('inc/meta');
 include_spip('inc/filtres');
 include_spip('inc/lang');
 
+function exec_import_patron(){
 
+	$id_message = _request('id_message');
+	$patron = _request('patron');
+	$date = _request('date');
+	$changer_lang = _request('changer_lang');
 
-function exec_import_patron()
-{
+	$lang = (isset($changer_lang)) ? $changer_lang : $GLOBALS['spip_lang'] ; 
 
-global $id_message;
-global $_POST, $patron , $date, $changer_lang ;
+	$nomsite=lire_meta("nom_site"); 
+	$urlsite=lire_meta("adresse_site");
+	$message_texte ='';
 
-$lang = (isset($changer_lang)) ? $changer_lang : $GLOBALS['spip_lang'] ; 
-
-$nomsite=lire_meta("nom_site"); 
-$urlsite=lire_meta("adresse_site");
-$message_texte ='';
-
-	if (!isset($patron)) $patron = $_POST['patron'] ;
-	if (!isset($date)) $date = $_POST['date'] ; 
-	
 	include_spip('public/assembler');
 	$contexte_patron = array('date' => $date,'patron'=>$patron,'lang'=>$lang);
 	
 	if (find_in_path('patrons/'.$patron.'_texte.html')){
-	 $patron_version_texte = true ;
-	 $message_texte =  recuperer_fond('patrons/'.$patron.'_texte', $contexte_patron);
-	 }
-	 $texte_patron = recuperer_fond('patron_switch', $contexte_patron);
-	 //$texte_patron = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;		
+		$patron_version_texte = true ;
+		$message_texte =  recuperer_fond('patrons/'.$patron.'_texte', $contexte_patron);
+	}
+	$texte_patron = recuperer_fond('patron_switch', $contexte_patron);
+	//$texte_patron = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;		
 			
 	$titre_patron = _T('spiplistes:lettre_info')." ".$nomsite;
 	
-	$titre = addslashes($titre_patron);
-	$texte = addslashes($texte_patron);
-	$message_texte = addslashes($message_texte);
+	$titre = $titre_patron;
+	$texte = $texte_patron;
+	$message_texte = $message_texte;
 
-	if((strlen($texte) > 10)){
-	spip_query("UPDATE spip_courriers SET titre='$titre', texte='$texte', message_texte='$message_texte' WHERE id_courrier='$id_message'");
-	}else{
-	$message_erreur = _T('spiplistes:patron_erreur');
-	}
+	if((strlen($texte) > 10))
+		spip_query("UPDATE spip_courriers SET titre="._q($titre).", texte="._q($texte).", message_texte="._q($message_texte)." WHERE id_courrier="._q($id_message));
+	else
+		$message_erreur = _T('spiplistes:patron_erreur');
 	
 	$nomsite=lire_meta("nom_site");
 	$urlsite=lire_meta("adresse_site");
-	if (!$charset)  $charset = lire_meta('charset');
+	$charset = lire_meta('charset');
 	
 	echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n";
-	echo "<HEAD><META HTTP_EQUIV='Content-Type' CONTENT='text/html; CHARSET=".$charset."'></HEAD><BODY>\n";
+	echo "<html lang='$lang' dir='ltr'>";
+	echo "<head><meta http_equiv='Content-Type' content='text/html; charset=".$charset."'></head><body>\n";
 	
   echo "<div style='float:right;width:200px;text-align:left;border:1px solid #000;background: yellow;color: #000;margin-bottom: 10px;padding:10px;'>";  
   echo "<p><strong>$patron</strong><p>\n";
@@ -95,9 +91,8 @@ $message_texte ='';
 	echo $texte_pied;
 	echo "</div>";
 	
-	
-	echo "</BODY></HTML>";
+	echo "</body></html>";
 		 
-	}	
+}	
 
 ?>

@@ -26,8 +26,7 @@ include_spip('inc/presentation');
 include_spip('inc/acces');
 include_spip('inc/affichage');
 
-function exec_import_export()
-{
+function exec_import_export(){
 
 global $connect_statut;
 global $connect_toutes_rubriques;

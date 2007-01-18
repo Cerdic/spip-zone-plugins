@@ -26,97 +26,75 @@ include_spip('inc/presentation');
 include_spip('inc/affichage');
 
 
-function exec_listes_toutes()
-{
+function exec_listes_toutes(){
+	
+	global $connect_statut;
+	global $connect_toutes_rubriques;
+	global $connect_id_auteur;
 
-global $connect_statut;
-global $connect_toutes_rubriques;
-global $connect_id_auteur;
-global $type;
-global $new;
-
- 
- 
-$nomsite=lire_meta("nom_site"); 
-$urlsite=lire_meta("adresse_site"); 
-
- 
-// Admin SPIP-Listes
-echo debut_page("Spip listes", "redacteurs", "spiplistes");
-
-// spip-listes bien installé ?
-if (!function_exists(spip_listes_onglets)){
-    echo("<h3>erreur: spip-listes est mal installé !</h3>");     
-    echo fin_page();
-	  exit;
-}
-
-if ($connect_statut != "0minirezo" ) {
-	echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
-	echo fin_page();
-	exit;
-}
-
-if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
+	$nomsite=lire_meta("nom_site"); 
+	$urlsite=lire_meta("adresse_site"); 
+	
+	// Admin SPIP-Listes
+	echo debut_page("Spip listes", "redacteurs", "spiplistes");
+	
+	if (!function_exists('spip_listes_onglets')){
+		echo("<h3>erreur: spip-listes est mal installe !</h3>");     
+		echo fin_page();
+		exit;
+	}
+	
+	if ($connect_statut != "0minirezo" ) {
+		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
+		echo fin_page();
+		exit;
+	}
+	
+	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
 	$statut_auteur=$statut;
 	spip_listes_onglets("messagerie", "Spip listes");
-}
+	}
+	
+	debut_gauche();
+	
+	spip_listes_raccourcis();
+	
+	creer_colonne_droite();
+	
+	debut_droite("messagerie");
 
-debut_gauche();
-
-spip_listes_raccourcis();
-
-creer_colonne_droite();
-
-debut_droite("messagerie");
-
-
-
-
-
-// MODE LISTES: afficher les listes --------------------------------------------
-
-
-global $table_prefix;
-
-/*
-debut_cadre_relief('forum-interne-24.gif');
-
-echo _T('spiplistes:nb_abonnes')."$nb_abonnes<p>";
-echo "<p>";
-fin_cadre_relief();
-*/
-
-echo "<p>";
-
-//
-// Afficher tableau de listes
-//
-
-
-//
-// lettres d'infos
-//
-
-
-spiplistes_afficher_en_liste(_T('spiplistes:listes_internes'), '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'listes', 'inact', '', 'position') ;
-
-
-
-spiplistes_afficher_en_liste(_T('spiplistes:liste_diff_publiques'), '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'listes', 'liste', '', 'position') ;
-
-
-
-spiplistes_afficher_en_liste(_T('spiplistes:listes_poubelle'), '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'listes', 'poublist', '', 'position') ;
-
-
-
-// MODE EDIT LISTES FIN --------------------------------------------------------
-
-echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$GLOBALS['spiplistes_version']."<p>" ;
-
-    echo fin_gauche(), fin_page();
-
+	
+	// MODE LISTES: afficher les listes --------------------------------------------
+	
+	/*
+	debut_cadre_relief('forum-interne-24.gif');
+	
+	echo _T('spiplistes:nb_abonnes')."$nb_abonnes<p>";
+	echo "<p>";
+	fin_cadre_relief();
+	*/
+	
+	echo "<p>";
+	
+	//
+	// Afficher tableau de listes
+	//
+	
+	
+	//
+	// lettres d'infos
+	//
+	
+	
+	echo spiplistes_afficher_en_liste(_T('spiplistes:listes_internes'), _DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'listes', 'inact', '', 'position') ;
+	echo spiplistes_afficher_en_liste(_T('spiplistes:liste_diff_publiques'), _DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'listes', 'liste', '', 'position') ;
+	echo spiplistes_afficher_en_liste(_T('spiplistes:listes_poubelle'), _DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'listes', 'poublist', '', 'position') ;
+	
+	
+	// MODE EDIT LISTES FIN --------------------------------------------------------
+	
+	echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$GLOBALS['spiplistes_version']."<p>" ;
+	echo fin_gauche(), fin_page();
 }
 
 /******************************************************************************************/

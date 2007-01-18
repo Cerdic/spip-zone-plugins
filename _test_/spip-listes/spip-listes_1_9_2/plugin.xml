@@ -1,21 +1,21 @@
 <plugin>
-        <nom>SPIP-Listes</nom>
-        <auteur>BoOz@rezo.net</auteur>
-        <version>1.92</version>
-        <etat>test</etat>
-        <icon>img_pack/stock_mail.gif</icon>
-        <description>Listes d'informations par email</description>
-        <options>spiplistes_mes_options.php</options>
-        <fonctions>spiplistes_mes_fonctions.php</fonctions>
-        <prefix>spiplistes</prefix>
-		<lien>http://bloog.net/spip-listes</lien>
-        <pipeline>
-                <nom>ajouter_boutons</nom>
-                <action>ajouterBoutons</action>
-                <inclure>spiplistes_boutons.php</inclure>
-        </pipeline>
-        <pipeline>
+	<nom>SPIP-Listes</nom>
+	<auteur>BoOz@rezo.net</auteur>
+	<version>1.92</version>
+	<etat>test</etat>
+	<icon>img_pack/stock_mail.gif</icon>
+	<description>Listes d'informations par email</description>
+	<options>spiplistes_mes_options.php</options>
+	<fonctions>spiplistes_mes_fonctions.php</fonctions>
+	<prefix>spiplistes</prefix>
+	<install>base/spiplistes_upgrade.php</install>
+	<lien>http://bloog.net/spip-listes</lien>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>spiplistes_boutons.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>taches_generales_cron</nom>
-		</pipeline>
-      
+	</pipeline>
 </plugin>

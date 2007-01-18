@@ -25,20 +25,15 @@ include_spip('inc/presentation');
 include_spip('inc/affichage');
 
 
-function exec_courrier_preview()
-{
+function exec_courrier_preview(){
 
-global $id_message;
-
- 
-$query_m = "SELECT * FROM spip_courriers WHERE id_courrier=$id_message";
-$result_m = spip_query($query_m);
-
+	$id_message = _request('id_message');
+	$result_m = spip_query("SELECT * FROM spip_courriers WHERE id_courrier="._q($id_message));
 	while($row = spip_fetch_array($result_m)) {
-	    $texte = $row["texte"];
-	    $statut = $row["statut"];
-	    if($statut != 'encour' AND $statut != 'publie' AND $statut != 'ready')
-		$texte = spiplistes_propre($texte);
+		$texte = $row["texte"];
+		$statut = $row["statut"];
+		if($statut != 'encour' AND $statut != 'publie' AND $statut != 'ready')
+			$texte = spiplistes_propre($texte);
 		echo $texte ;
 	}
 
