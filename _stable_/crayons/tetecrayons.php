@@ -104,12 +104,16 @@ EOH;
 // #EDIT{ps} pour appeler le crayon ps ;
 // si cette fonction est absente, balise_EDIT_dist() met a vide
 function balise_EDIT($p) {
+	$arg1 = interprete_argument_balise(1,$p);
+	$arg2 = interprete_argument_balise(2,$p);
+	$arg2 = $arg2 ? substr($arg1, 1, -1) . ' ' : '';
 	$p->code = "'crayon '. preg_replace(',^hierarchie$,', 'rubrique', preg_replace(',s$,', '', '"
 		. $p->type_requete
 		."')) .'-'."
-		. sinon(interprete_argument_balise(1,$p), "''")
+		. sinon($arg1, "''")
 		.".'-'."
-		.champ_sql($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->primary, $p).".' '";
+		.champ_sql($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->primary, $p)
+		.".' $arg2'";
 
 	$p->interdire_scripts = false;
 	return $p;
