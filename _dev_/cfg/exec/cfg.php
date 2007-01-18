@@ -11,7 +11,7 @@ function exec_cfg_dist()
 {
 	$config = new cfg(
 		($nom = _request('cfg'))? $nom : 'cfg',
-		($fond = _request('fond'))? $fond : $nom,
+		($vue = _request('vue'))? $vue : $nom,
 		($cfg_id = _request('cfg_id'))? $cfg_id : ''
 		);
 
@@ -25,7 +25,7 @@ class cfg
 // le nom du meta (ou autre) ou va etre stocke la config concernee
 	var $nom = '';
 // le fond html utilise , en general pour config simple idem $nom
-	var $fond = '';
+	var $vue = '';
 // pour une config multiple , l'id courant
 	var $cfg_id = '';
 // sous tableau optionel du meta ou va etre stocke le fragment de config
@@ -44,7 +44,7 @@ class cfg
 // leurs valeurs
 	var $val = array();
 	
-	function cfg($nom, $fond = '', $cfg_id = '', $opt = array())
+	function cfg($nom, $vue = '', $cfg_id = '', $opt = array())
 	{
 		$this->nom = $nom;
 		$this->titre = _L('Configuration') . ' ' . $this->nom;
@@ -53,8 +53,8 @@ class cfg
 			$this->$o = $v;
 		}
 		$this->cfg_id = $cfg_id;
-		if ($fond) {
-			$this->message .= $this->set_fond($fond);
+		if ($vue) {
+			$this->message .= $this->set_vue($vue);
 		}
 		$this->lire();
 	}
@@ -128,11 +128,11 @@ class cfg
 	    ecrire_metas();
 	}
 
-	function set_fond($fond)
+	function set_vue($vue)
 	{
-		$this->fond = $fond;
-		$this->boite = _L('Configuration') . ' ' . $this->fond;
-		$fichier = find_in_path($nom = 'fonds/cfg_' . $this->fond .'.html');
+		$this->vue = $vue;
+		$this->boite = _L('Configuration') . ' ' . $this->vue;
+		$fichier = find_in_path($nom = 'fonds/cfg_' . $this->vue .'.html');
 		if (!lire_fichier($fichier, $controldata)) {
 			return _L('erreur_lecture_') . $nom;
 		}
@@ -233,17 +233,17 @@ class cfg
 	*/
 	function get_fond($contexte = array())
 	{
-	    $arg = 'cfg0.0.0-' . $this->nom . '-' . $this->fond;
+	    $arg = 'cfg0.0.0-' . $this->nom . '-' . $this->vue;
 		$contexte['_cfg_'] =
 			'?exec=cfg&cfg=' . $this->nom .
-			'&fond=' . $this->fond .
+			'&vue=' . $this->vue .
 			'&cfg_id=' . $this->cfg_id .
 			'&base_url=' . $this->base_url .
 		    '&lang=' . $GLOBALS['spip_lang'] .
 		    '&arg=' . $arg .
 		    '&hash=' .  calculer_action_auteur('-' . $arg);
 	    include_spip('public/assembler');
-	    return recuperer_fond('fonds/cfg_' . $this->fond,
+	    return recuperer_fond('fonds/cfg_' . $this->vue,
 	    		$this->val ? array_merge($contexte, $this->val) : $contexte);
 	}
 
