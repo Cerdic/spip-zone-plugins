@@ -36,14 +36,20 @@
 		if (   (!isset($GLOBALS['meta']['spiplistes_version']) )
 				|| (($current_version = $GLOBALS['meta']['spiplistes_version'])!=$version_base)){
 			include_spip('base/spip-listes');
+			
+			// si etait deja installe mais dans une vieille version, on reprend a zero
+			$desc = spip_abstract_showtable("spip_listes", '', true);
+			if (!isset($desc['field']['id_liste']))
+				$current_version = 0.0;
+			if (spip_query('SELECT *	FROM spip_articles	WHERE statut in ("liste","inact","poublist")'))
+				$current_version=0.0;
+			
 			if ($current_version==0.0){
 				// Verifie que les tables spip_listes existent, sinon les creer
-				if (!spip_query("SELECT id_liste FROM spip_listes")) {
-					spip_log('creation des tables spip_listes');
-					include_spip('base/create');
-					include_spip('base/abstract_sql');
-					creer_base();
-				}
+				spip_log('creation des tables spip_listes');
+				include_spip('base/create');
+				include_spip('base/abstract_sql');
+				creer_base();
 				
 				//Mise a jour des listes anciennes // a mettre en fonction
 				$resultat_aff = spip_query('SELECT *	FROM spip_articles	WHERE statut in ("liste","inact","poublist")');
