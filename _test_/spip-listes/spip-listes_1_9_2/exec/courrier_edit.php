@@ -107,35 +107,17 @@ function exec_courrier_edit(){
 	}
 
 	echo "<form action='".generer_url_ecrire("import_patron","id_message=$id_message")."' METHOD='post'>";  
-	$dir = find_in_path("patrons/");
-
-	// Ouvre un dossier bien connu, et liste tous les fichiers
-	if (is_dir($dir)) {
-		if ($dh = opendir($dir)) {
-			$total_option=0;
-			while (($file = readdir($dh)) !== false) {
-				$titre_option=ereg_replace('(\.html|\.HTML)','',$file);
-				if($file != '..' && $file !='.' && $file !='' && !ereg('texte$', $titre_option) ) 
-					$total_option=$total_option+1;
-			}
-			closedir($dh);
-		}
-		if ($dh = opendir($dir)) {
-			echo "<select style='float:left;width:150px' name='patron' size='".($total_option+2)."'>";
-			$i=0;
-			while (($file = readdir($dh)) !== false) {
-				$titre_option=ereg_replace('(\.html|\.HTML)','',$file);
-				if($file != '..' && $file !='.' && $file !='' && !ereg('texte$', $titre_option) )	{
-					$selected=($i==0)?'selected':'' ;
-					echo "<option value='$titre_option' $selected>$titre_option</option>\n";
-					$i++;
-				}
-			}
-			echo "</select>";
-			closedir($dh);
-		}
+	$liste_patrons = find_all_in_path("patrons/","[.]html$");
+	echo "<select style='float:left;width:150px' name='patron' size='".(count($liste_patrons)+2)."'>";
+	foreach($liste_patrons as $titre_option) {
+		$titre_option = basename($titre_option,".html");
+		$selected ="";
+		if ($patron == $titre_option)
+			$selected = "selected='selected";
+		echo "<option ".$selected." value='".$titre_option."'>".$titre_option."</option>\n";
 	}
-
+	echo "</select>";
+	
 	echo "<link rel='stylesheet' href='".url_absolue(find_in_path('img_pack/date_picker.css'))."' type='text/css' media='all' />";
 	echo '<script src="'.url_absolue(find_in_path('javascript/datepicker.js')).'" type="text/javascript"></script>';
 	echo '<script src="'.url_absolue(find_in_path('javascript/jquery-dom.js')).'" type="text/javascript"></script>';
