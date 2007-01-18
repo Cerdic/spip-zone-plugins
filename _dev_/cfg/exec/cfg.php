@@ -69,42 +69,39 @@ class cfg
 	function lire()
 	{
     	$this->val = lire_cfg($this->nom_config());
+    	if ($this->cfg_id) {
+    		$cles = explode('/', $this->cfg_id);
+			foreach ($this->champs_id as $i => $name) {
+				$this->val[$name] = $cles[$i];
+		    }
+    	}
 	    return $this->val;
 	}
 	
-// supprimer le fragment voire tout le meta 
-	function supprimer()
-	{
-    	$was = lire_cfg($this->nom);
-	    effacer_meta($this->nom);
-	    $this->val = array();
-	    ecrire_metas();
-	}
-	
-// modifier le fragment qui peut etre tout le meta
-	function monte_arbre(&$base, $chemin, &$report)
+// se positionner dans le tableau arborescent
+	function & monte_arbre(&$base, $chemin)
 	{
 		if (!$chemin) {
-			return;
+			return $base;
 		}
 		foreach (explode('/', $chemin) as $chunk) {
 			if (!isset($base[$chunk])) {
 				$base[$chunk] = array();
 			}
+	    	$this->_report[] = array(&$base, $chunk);
 	    	$base = &$base[$chunk];
-	    	$report[] = &$base[$chunk];
 		}
+		return $base;
 	}
 	
 // modifier le fragment qui peut etre tout le meta
 	function modifier($supprimer = false)
 	{
-		global $meta;
     	($base = lire_cfg($this->nom)) || ($base = array());
     	$ici = &$base;
-    	$report = array();
-    	$this->monte_arbre($ici, $this->casier, $report);
-    	$this->monte_arbre($ici, $this->new_id, $report);
+    	$this->_report = array();
+    	$ici = &$this->monte_arbre($ici, $this->casier);
+    	$ici = &$this->monte_arbre($ici, $this->cfg_id);
 		foreach ($this->champs as $name => $def) {
 			if (isset($def['id'])) {
 				continue;
@@ -116,11 +113,11 @@ class cfg
 			}
 	    }
 		if ($supprimer) {
-			for ($i = count($report); $i--; ) {
-				if ($report[$i]) {
+			for ($i = count($this->_report); $i--; ) {
+				if ($this->_report[$i][0][$this->_report[$i][1]]) {
 					break;
 				}
-				unset($report[$i]);
+				unset($this->_report[$i][0][$this->_report[$i][1]]);
 			}
 		}
 		if ($supprimer && !$base) {
@@ -158,6 +155,9 @@ class cfg
 			return _L('pas_de_champs_dans_') . $nom;
 		}
 		foreach ($matches as $regs) {
+			if (substr($regs[3], 0, 5) == '_cfg_') {
+				continue;
+			}
 		    if (!empty($regs[1])) {
 		    	$regs[2] = 'select';
 		    }
@@ -189,12 +189,14 @@ class cfg
 		$securiser_action();
 		if ($supprimer) {
 			$this->modifier('supprimer');
-			$this->message = _L('config_supprimee') . ' <b>' . $this->nom . '</b>';
+			$this->message .= _L('config_supprimee') . ' <b>' . $this->nom . '</b>';
 		} elseif (!($this->message = $this->controle())) {
 			if ($this->new_id != $this->cfg_id && !_request('_cfg_copier')) {
+				$this->modifier('supprimer');
 			}
+			$this->cfg_id = $this->new_id;
 			$this->modifier();
-			$this->message = _L('config_enregistree') . ' <b>' . $this->nom . '</b>';
+			$this->message .= _L('config_enregistree') . ' <b>' . $this->nom . '</b>';
 		}
 //		$this->message .= print_r($this->champs, true);
 	}
@@ -277,7 +279,7 @@ class cfg
 		if (($exi = lire_cfg($lien))) {
 			foreach ($exi as $compte => $info) {
 				$dedans .= '
-<p><label for="' . $lien . '_' . $compte . '">' . _T('cfg:nouveau') . '</label>
+<p><label for="' . $lien . '_' . $compte . '">' . $compte . '</label>
 <input type="image" id="' . $lien . '_' . $compte . '" name="cfg_id" value="' . $compte . '" src="../dist/images/triangle.gif" style="vertical-align: text-top;"/></p>';
 			}
 		}
