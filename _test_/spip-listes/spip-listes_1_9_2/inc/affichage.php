@@ -196,13 +196,13 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 		$en_liste.= "<td width='11'>";
 		switch ($statut) {
 			case 'brouillon':
-				$en_liste.= "<img src='img_pack/puce-blanche.gif' alt='puce-blanche' border='0' style='margin: 1px;' />";
+				$en_liste.= "<img src='../"._DIR_PLUGIN_SPIPLISTES."/img_pack/puce-blanche.gif' alt='puce-blanche' border='0' style='margin: 1px;' />";
 				break;
 			case 'publie':
-				$en_liste.= "<img src='img_pack/puce-verte.gif' alt='puce-verte' border='0' style='margin: 1px;' />";
+				$en_liste.= "<img src='../"._DIR_PLUGIN_SPIPLISTES."/img_pack/puce-verte.gif' alt='puce-verte' border='0' style='margin: 1px;' />";
 				break;
 			case 'envoi_en_cours':
-				$en_liste.= "<img src='img_pack/puce-orange.gif' alt='puce-orange' border='0' style='margin: 1px;' />";
+				$en_liste.= "<img src='../"._DIR_PLUGIN_SPIPLISTES."/img_pack/puce-orange.gif' alt='puce-orange' border='0' style='margin: 1px;' />";
 				break;
 		}
 		$en_liste.= "</td>";
@@ -215,15 +215,15 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 			$nb_abo= spip_num_rows(spip_query("SELECT id_auteur FROM spip_abonnes_listes WHERE id_liste='$id_row'"));
 			$nb_abo = ($nb_abo>1)? $nb_abo." abonn&eacute;s" : $nb_abo." abonn&eacute;";
 			
-			$en_liste.= " <font size='1' color='#666666' dir='ltr'>\n";
+			$en_liste.= " <span style='font-size:100%;color:#666666' dir='ltr'>\n";
 			$en_liste.= "(".$nb_abo.")\n";
-			$en_liste.= "</font>\n";
+			$en_liste.= "</span>\n";
 		}
 		
 		if($nb_emails_envoyes>0){
-			$en_liste.= " <font size='1' color='#666666' dir='ltr'>\n";
+			$en_liste.= "<span style='font-size:100%;color:#666666' dir='ltr'>\n";
 			$en_liste.= "(".$nb_emails_envoyes.")\n";
-			$en_liste.= "</font>\n";
+			$en_liste.= "</span>\n";
 		}
 		
 		$en_liste.= "</a>\n";
