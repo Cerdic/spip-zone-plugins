@@ -41,7 +41,7 @@
 			$desc = spip_abstract_showtable("spip_listes", '', true);
 			if (!isset($desc['field']['id_liste']))
 				$current_version = 0.0;
-			if (spip_query('SELECT *	FROM spip_articles	WHERE statut in ("liste","inact","poublist")'))
+			if (spip_query("SELECT * FROM spip_articles WHERE statut='liste' OR statut='inact' OR statut='poublist'"))
 				$current_version=0.0;
 			
 			if ($current_version==0.0){
@@ -52,7 +52,7 @@
 				creer_base();
 				
 				//Mise a jour des listes anciennes // a mettre en fonction
-				$resultat_aff = spip_query('SELECT *	FROM spip_articles	WHERE statut in ("liste","inact","poublist")');
+				$resultat_aff = spip_query("SELECT * FROM spip_articles WHERE statut='liste' OR statut='inact' OR statut='poublist'");
 				if(@spip_num_rows($resultat_aff) > 0){
 					echo "<h3>SPIP-listes va mettre a jour</h3>";
 					while ($row = spip_fetch_array($resultat_aff)) {
@@ -87,9 +87,9 @@
 						//Auteur de la liste (moderateur)
 						spip_query("DELETE FROM spip_auteurs_listes WHERE id_liste ="._q($id_liste));
 						spip_query("INSERT INTO spip_auteurs_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
+						
 						//recuperer les abonnes (peut etre plus tard ?)
 						$abos=spip_query("SELECT id_auteur, id_article FROM spip_auteurs_articles WHERE id_article="._q($id_article));
-						
 						while($abonnes=spip_fetch_array($abos)){
 							$abo=$abonnes["id_auteur"];
 							spip_query("INSERT INTO spip_abonnes_listes (id_auteur, id_liste) VALUES ("._q($abo).","._q($id_liste).")");
