@@ -38,3 +38,7 @@ img.crayon-edit, img.crayon-crayon {
 .crayon-edit, .crayon-crayon, .crayon-img-changed {
 	cursor: pointer;
 } 
+.formulaire_spip .crayon-active {
+	padding: 1px;
+	border: 1px inset;
+}
