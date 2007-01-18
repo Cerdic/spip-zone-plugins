@@ -1,22 +1,22 @@
 <?php
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un systï¿½e de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Gï¿½ï¿½ale GNU publiï¿½ par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribuï¿½car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but spï¿½ifique. Reportez-vous ï¿½la Licence Publique Gï¿½ï¿½ale GNU  */
+/* pour plus de dï¿½ails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir reï¿½ une copie de la Licence Publique Gï¿½ï¿½ale GNU                    */
+/* en mï¿½e temps que ce programme ; si ce n'est pas le cas, ï¿½rivez ï¿½la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, ï¿½ats-Unis.                   */
 /******************************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -34,7 +34,7 @@ function spiplistes_configurer() {
 	
 	if ($adresse_defaut = _request('email_defaut') AND email_valide($adresse_defaut)) {
 		ecrire_meta('email_defaut', $adresse_defaut);
-	}	            
+	}
 	
 	if ($smtp_server = _request('smtp_server'))
 		ecrire_meta('smtp_server', $smtp_server);
@@ -104,7 +104,7 @@ function exec_config(){
 
 	echo debut_cadre_relief("redacteurs-24.gif", false, "", _T('spiplistes:mode_inscription'));
 	echo "<form action='".generer_url_ecrire('config')."' method='post'>";
-	echo "<input type='hidden' name='changer_config' value='oui'>";
+	echo "<input type='hidden' name='changer_config' value='oui' />";
 	
 	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
 	
@@ -114,13 +114,13 @@ function exec_config(){
 	$texte2 = '' ;
 	($config == 'simple' ) ? $texte1 = "checked"  : $texte2 = "checked" ;
 
-	echo "<input type='radio' name='abonnement_config' value='simple' $texte1 id='statut_simple'>";
+	echo "<input type='radio' name='abonnement_config' value='simple' $texte1 id='statut_simple' />";
 	echo "<label for='statut_simple'>"._T('spiplistes:abonnement_simple')."</label> ";
-	echo "<p><input type='radio' name='abonnement_config' value='membre' $texte2 id='statut_membre'>";
-	echo "<label for='statut_membre'>"._T('spiplistes:abonnement_code_acces')."</label></b> ";
+	echo "<p><input type='radio' name='abonnement_config' value='membre' $texte2 id='statut_membre' />";
+	echo "<label for='statut_membre'>"._T('spiplistes:abonnement_code_acces')."</label> ";
 	echo "</td></tr>";
 	echo "<tr><td style='text-align:$spip_lang_right;'>";
-	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
+	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
 	echo "</td></tr>";
 	echo "</table>\n";
 	
@@ -134,15 +134,15 @@ function exec_config(){
 
 	echo debut_cadre_trait_couleur("", false, "", "Adresse d'envoi par d&eacute;faut");
 	$adresse_defaut = (email_valide($GLOBALS['meta']['email_defaut'])) ? $GLOBALS['meta']['email_defaut'] : $GLOBALS['meta']['email_webmaster'];
-	echo "<input type='text' name='email_defaut' value='".$adresse_defaut."' size='30' CLASS='fondl'>";
+	echo "<input type='text' name='email_defaut' value='".$adresse_defaut."' size='30' CLASS='fondl' />";
 	
 	echo fin_cadre_trait_couleur();
 
 	echo debut_cadre_trait_couleur("", false, "", "M&eacute;thode d'envoi");
 
-	echo "<div>
+	echo "<p>
 	Si vous n'&ecirc;tes pas s&ucirc;r, choisissez la fonction mail de PHP.
-	</div>";
+	</p>";
 
 	$mailer_smtp = $GLOBALS['meta']['mailer_smtp'];
 
@@ -154,8 +154,8 @@ function exec_config(){
 	else $style = "display: none;";
 	echo "<div id='smtp' style='$style'>";
 	echo "<ul>";
-	echo "<li>H&ocirc;te <input type='text' name='smtp_server' value='".$GLOBALS['meta']['smtp_server']."' size='30' class='fondl'>";
-	echo "<li>Port <input type='text' name='smtp_port' value='".$GLOBALS['meta']['smtp_port']."' size='4' class='fondl'>";
+	echo "<li>H&ocirc;te <input type='text' name='smtp_server' value='".$GLOBALS['meta']['smtp_server']."' size='30' class='fondl' />";
+	echo "<li>Port <input type='text' name='smtp_port' value='".$GLOBALS['meta']['smtp_port']."' size='4' class='fondl' />";
 	echo "<li>Requiert une identification";
 
 	$smtp_identification = $GLOBALS['meta']['smtp_identification'];
@@ -168,15 +168,15 @@ function exec_config(){
 	else $style = "display: none;";
 	echo "<div id='smtp-auth' style='$style'>";
 	echo "<ul>";
-	echo "<li>Login <input type='text' name='smtp_login' value='".$GLOBALS['meta']['smtp_login']."' size='30' CLASS='fondl'>";
-	echo "<li>Password <input type='password' name='smtp_pass' value='".$GLOBALS['meta']['smtp_pass']."' size='30' CLASS='fondl'>";
+	echo "<li>Login <input type='text' name='smtp_login' value='".$GLOBALS['meta']['smtp_login']."' size='30' CLASS='fondl' />";
+	echo "<li>Password <input type='password' name='smtp_pass' value='".$GLOBALS['meta']['smtp_pass']."' size='30' CLASS='fondl' />";
 	echo "</ul>";
 	echo "</div>";
 
 	echo "</ul>";
 	echo "</div>";
 
-	echo "<br /><br />";
+	echo "<br />";
 	echo fin_cadre_trait_couleur();
 
 	if ($mailer_smtp == "oui") $style = "display: block;";
@@ -184,12 +184,12 @@ function exec_config(){
 	echo "<div style='$style'>";
 	echo debut_cadre_relief("", false, "", "adresse email du <i>sender</i> SMTP");
 	echo "<p style='margin:10px'>Lors d'un envoi via la m&eacute;thode SMTP ce champ d&eacute;finit l'adresse de l'envoyeur.</p>";
-	echo "<input type='text' name='smtp_sender' value=\"".$GLOBALS['meta']['smtp_sender']."\" style='width:20em' CLASS='forml'>";
+	echo "<input type='text' name='smtp_sender' value=\"".$GLOBALS['meta']['smtp_sender']."\" style='width:20em' class='forml' />";
 	echo fin_cadre_relief();
 	echo "</div>\n";
 
-	echo "<input type='submit' name='valid_smtp' value='"._T('spiplistes:valider')."' class='fondo' style='float:right'>";
-	echo "<hr style='clear:both;visibility:hidden'>";
+	echo "<input type='submit' name='valid_smtp' value='"._T('spiplistes:valider')."' class='fondo' style='float:right' />";
+	echo "<hr style='clear:both;visibility:hidden' />";
 
 	echo "</form>";	
 
@@ -203,40 +203,40 @@ function exec_config(){
 	echo debut_cadre_relief("redacteurs-24.gif", false, "", _T('spiplistes:tableau_bord'));
 
 	echo "<form action='".generer_url_ecrire('config')."' method='post'>";
-	echo "<input type='hidden' name='reinitialiser_config' value='oui'>";	
+	echo "<input type='hidden' name='reinitialiser_config' value='oui' />";
 	echo "<label for='spiplistes_lots'>Nombre d'envois par lot</label>" ;
-	echo "<input type='text' name='spiplistes_lots' value=\"".$GLOBALS['meta']['spiplistes_lots']."\" style='width:3em' CLASS='forml'>";
+	echo "<input type='text' name='spiplistes_lots' value=\"".$GLOBALS['meta']['spiplistes_lots']."\" style='width:3em' class='forml' />";
 
-	echo "<input type='submit' name='Valider_reinit' value='"._T('spiplistes:reinitialiser')."' class='fondo' style='float:right'>";
-	echo "<hr style='clear:both;visibility:hidden'>";
-	echo "</form>";	
+	echo "<input type='submit' name='Valider_reinit' value='"._T('spiplistes:reinitialiser')."' class='fondo' style='float:right' />";
+	echo "<hr style='clear:both;visibility:hidden' />";
+	echo "</form>";
 	echo fin_cadre_relief();
 
 	// MODE CONFIG FIN -------------------------------------------------------------
 
 	//$spiplistes_version = "SPIP-listes 1.9b2";
-	echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$GLOBALS['spiplistes_version']."<p>" ;
+	echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$GLOBALS['spiplistes_version']."</p>" ;
 
 	echo fin_gauche(), fin_page();
 }
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'abonnés et d'envoi d'information     */
+/* SPIP-listes est un systï¿½e de gestion de listes d'abonnï¿½ et d'envoi d'information     */
 /* par email  pour SPIP.                                                                  */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Gï¿½ï¿½ale GNU publiï¿½ par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribuï¿½car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but spï¿½ifique. Reportez-vous ï¿½la Licence Publique Gï¿½ï¿½ale GNU  */
+/* pour plus de dï¿½ails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir reï¿½ une copie de la Licence Publique Gï¿½ï¿½ale GNU                    */
+/* en mï¿½e temps que ce programme ; si ce n'est pas le cas, ï¿½rivez ï¿½la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, ï¿½ats-Unis.                   */
 /******************************************************************************************/
 ?>

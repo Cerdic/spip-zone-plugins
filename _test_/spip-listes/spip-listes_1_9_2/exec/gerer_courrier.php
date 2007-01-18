@@ -1,22 +1,22 @@
 <?php
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un systï¿½e de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Gï¿½ï¿½ale GNU publiï¿½ par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribuï¿½car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but spï¿½ifique. Reportez-vous ï¿½la Licence Publique Gï¿½ï¿½ale GNU  */
+/* pour plus de dï¿½ails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir reï¿½ une copie de la Licence Publique Gï¿½ï¿½ale GNU                    */
+/* en mï¿½e temps que ce programme ; si ce n'est pas le cas, ï¿½rivez ï¿½la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, ï¿½ats-Unis.                   */
 /******************************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -206,10 +206,10 @@ function exec_gerer_courrier(){
 		}
 		
 		if ($statut == 'ready' && $pret_envoi) {
-			echo "<font face='Verdana,Arial,Sans,sans-serif' size=2 color='red'>
-			<b>"._T('spiplistes:message_presque_envoye')."</b></font> <br />  &agrave; destination de $destinataire<br />"._T('spiplistes:confirme_envoi');
+			echo "<span style='font-family:Verdana,Arial,Sans,sans-serif;font-size:120%;color:red'>
+			<b>"._T('spiplistes:message_presque_envoye')."</b></span><br /> &agrave; destination de $destinataire<br />"._T('spiplistes:confirme_envoi');
 			echo "<form action='?exec=gerer_courrier&id_message=".$id_message."' method='post'>";
-			echo "<div style='text-align:center'><input type='submit' name='envoi' value='"._T('spiplistes:envoyer')."' class='fondo'></div>";
+			echo "<div style='text-align:center'><input type='submit' name='envoi' value='"._T('spiplistes:envoyer')."' class='fondo' /></div>";
 			echo "</form>";
 		}
 		
@@ -219,14 +219,14 @@ function exec_gerer_courrier(){
 				icone (_T('icone_supprimer_message'), generer_url_ecrire('spip_listes','detruire_message='.$id_message), 'poubelle.gif', 'poubelle.gif');
 				echo "</div>";
 			}
-			echo "<p><font face='Verdana,Arial,Sans,sans-serif' size=2 color='red'>
-			<b>"._T('spiplistes:envoi_program')."</b></font><br />  &agrave; destination de $destinataire<br /><br />
+			echo "<p><span style='font-family:Verdana,Arial,Sans,sans-serif;font-size:120%;color:red'>
+			<b>"._T('spiplistes:envoi_program')."</b></span><br /> &agrave; destination de $destinataire<br /><br />
 			<a href='?exec=spip_listes'>["._T('spiplistes:voir_historique')."]</a></p>";
 		}
 		
 		if ($statut == 'publie')  {
-			echo "<font face='Verdana,Arial,Sans,sans-serif' size=2 color='red'>
-			<b>"._T('spiplistes:message_arch')."</b></font>";
+			echo "<span style='font-family:Verdana,Arial,Sans,sans-serif;font-size:120%;color:red'>
+			<b>"._T('spiplistes:message_arch')."</b></span>";
 			echo "<ul>";
 			echo "<li>Envoy&eacute; &agrave $destinataire</li>";
 			echo "<li>Date de l'envoi : $date_heure</li>";
@@ -260,8 +260,8 @@ function exec_gerer_courrier(){
 			echo "</div>";
 		}
 		
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size=2 color='$la_couleur'><b>$le_type</b></font><br />";
-		echo "<font face='Verdana,Arial,Sans,sans-serif'><h3>$titre</h3></font>";
+		echo "<span style='font-family:Verdana,Arial,Sans,sans-serif;font-size:120%;color:$la_couleur'><b>$le_type</b></span><br />";
+		echo "<span style='font-family:Verdana,Arial,Sans,sans-serif'><h3>$titre</h3></span>";
 		
 		echo "<br /><font face='Georgia,Garamond,Times,serif' size=3>";
 		echo debut_boite_info();
@@ -272,10 +272,10 @@ function exec_gerer_courrier(){
 		echo debut_boite_info();
 		
 		if($message_texte !=''){
-			$alt = 'Calcul avec le patron version texte';  
+			$alt = 'Calcul avec le patron version texte';
 		}
 		else{
-			$alt = 'Calcul depuis la version HTML du message';  
+			$alt = 'Calcul depuis la version HTML du message';
 			$message_texte = version_texte($texte);
 		}
 		
@@ -298,13 +298,13 @@ function exec_gerer_courrier(){
 				echo debut_cadre_enfonce();
 				echo "<div style='font-size:12px;font-familly:Verdana,Garamond,Times,serif;color:#000000;'>";
 				echo "<div style='float:right'><input type='submit' name='envoi_test' value='"._T('spiplistes:email_tester')."' class='fondo' /></div>";
-				echo "<input type='text' name='adresse_test' value='"._T('spiplistes:email_adresse')."' class='fondo'>" ;
+				echo "<input type='text' name='adresse_test' value='"._T('spiplistes:email_adresse')."' class='fondo' />" ;
 				echo "</div>" ;
 				echo fin_cadre_enfonce() ;
 				
 				$list = spip_query ("SELECT * FROM spip_listes WHERE statut = 'liste' OR statut = 'inact' ");
 				echo "<div style='font-size:14px;font-weight:bold'>"._T('spiplistes:destinataires')."</div>";
-				echo "<div style='float:right'><input type='submit' name='choisir_dest' value='"._T('spiplistes:choisir_cette')."' class='fondo'></div>";
+				echo "<div style='float:right'><input type='submit' name='choisir_dest' value='"._T('spiplistes:choisir_cette')."' class='fondo' /></div>";
 				echo "<select name='destinataire' >";
 				echo "<option value='tous'>"._T('spiplistes:toutes')."</option>" ;
 				while($row = spip_fetch_array($list)) {
@@ -338,22 +338,22 @@ function exec_gerer_courrier(){
 	echo fin_gauche(), fin_page();
 }
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'abonnés et d'envoi d'information     */
+/* SPIP-listes est un systï¿½e de gestion de listes d'abonnï¿½ et d'envoi d'information     */
 /* par email  pour SPIP.                                                                  */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Gï¿½ï¿½ale GNU publiï¿½ par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribuï¿½car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but spï¿½ifique. Reportez-vous ï¿½la Licence Publique Gï¿½ï¿½ale GNU  */
+/* pour plus de dï¿½ails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir reï¿½ une copie de la Licence Publique Gï¿½ï¿½ale GNU                    */
+/* en mï¿½e temps que ce programme ; si ce n'est pas le cas, ï¿½rivez ï¿½la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, ï¿½ats-Unis.                   */
 /******************************************************************************************/
 ?>

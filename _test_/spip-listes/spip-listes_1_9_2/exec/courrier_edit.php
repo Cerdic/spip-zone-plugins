@@ -1,22 +1,22 @@
 <?php
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un systï¿½e de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Gï¿½ï¿½ale GNU publiï¿½ par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribuï¿½car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but spï¿½ifique. Reportez-vous ï¿½la Licence Publique Gï¿½ï¿½ale GNU  */
+/* pour plus de dï¿½ails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir reï¿½ une copie de la Licence Publique Gï¿½ï¿½ale GNU                    */
+/* en mï¿½e temps que ce programme ; si ce n'est pas le cas, ï¿½rivez ï¿½la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, ï¿½ats-Unis.                   */
 /******************************************************************************************/
 
 
@@ -83,8 +83,8 @@ function exec_courrier_edit(){
 
 	if ($type == 'nl') $le_type = _T('spiplistes:email_collec');
 
-	echo "<p><font face='Verdana,Arial,Sans,sans-serif' size=2 color='green'><b>$le_type</b></font></p>";
-	echo "<p style='margin-bottom:10px'><font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='red'>"._T('spiplistes:alerte_edit')."</font><br/><br /></p>";
+	echo "<p><span style='font-family:Verdana,Arial,Sans,sans-serif;color:green;font-size:120%'><b>$le_type</b></span></p>";
+	echo "<p style='margin-bottom:10px;font-family:Verdana,Arial,Sans,sans-serif;color:red;font-size:100%'>"._T('spiplistes:alerte_edit')."<br /><br /></p>";
 
 	echo debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_insert-slide.gif');
 
@@ -126,14 +126,14 @@ function exec_courrier_edit(){
 	  . unicode2charset(charset2unicode(recuperer_fond('formulaires/date_picker_init'),'html'))
 	  . " \n $('input.date-picker').datePicker({startDate:'01/01/1900'});\n }); \n //--></script> ";
 
-  echo "<input type='Hidden' name='inclure_patron' value=\"oui\">";
-	echo "<input type='Hidden' name='id_message' value=\"$id_message\">";
-	echo "<input type='Hidden' name='nomsite' value=\"$nomsite\">";
+  echo "<input type='hidden' name='inclure_patron' value=\"oui\" />";
+	echo "<input type='hidden' name='id_message' value=\"$id_message\" />";
+	echo "<input type='hidden' name='nomsite' value=\"$nomsite\" />";
 
 	$auj = date('Y-m-d');
-	echo "<div style='margin-left:200px;height:200px'><p>"._T('spiplistes:date_ref')."</p><div><input type=\"text\" class=\"date-picker\" name=\"date\" style=\"text-align:center;width:8em\" value=\"$auj\"></div>";
+	echo "<div style='margin-left:200px;height:200px'><p>"._T('spiplistes:date_ref')."</p><div><input type=\"text\" class=\"date-picker\" name=\"date\" style=\"text-align:center;width:8em\" value=\"$auj\" /></div>";
 
-	echo "<p style='padding-left:20px;clear:both'>"._T('spiplistes:alerte_modif')."<br /><br /><input type='submit' name='Valider' value='"._T('spiplistes:charger_le_patron')."' class='fondo'></p></div>";
+	echo "<p style='padding-left:20px;clear:both'>"._T('spiplistes:alerte_modif')."<br /><br /><input type='submit' name='Valider' value='"._T('spiplistes:charger_le_patron')."' class='fondo' /></p></div>";
 	echo "</form>";
 
 	// Fin du bloc
@@ -144,21 +144,21 @@ function exec_courrier_edit(){
 	echo "<br />";
 
 	echo "<form id='choppe_patron-1' action='".generer_url_ecrire("gerer_courrier","id_message=$id_message")."' method='post' name='formulaire'>";
-	echo "<input type='hidden' name='modifier_message' value=\"oui\">";
-	echo "<input type='hidden' name='id_message' value=\"$id_message\">";
+	echo "<input type='hidden' name='modifier_message' value=\"oui\" />";
+	echo "<input type='hidden' name='id_message' value=\"$id_message\" />";
 	if(!intval($id_message))
-		echo "<input type='hidden' name='new' value=\"oui\">";
+		echo "<input type='hidden' name='new' value=\"oui\" />";
 
 	echo "<b>Sujet du courrier</b> (obligatoire)<br />";
 
-	echo "<input type='text' class='formo' name='titre' value=\"$titre\" size='40'>";
+	echo "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' />";
 	echo "<br />";
 	echo "<br />";
 	echo "<b>Texte du courrier</b> (HTML autoris&eacute;)";
 	echo aide ("raccourcis");
 	echo "<br />";
 	echo afficher_barre('document.formulaire.texte');
-	echo "<textarea id='text_area' name='texte' ".$GLOBALS['browser_caret']." class='formo' ROWS='20' COLS='40' wrap=soft>";
+	echo "<textarea id='text_area' name='texte' ".$GLOBALS['browser_caret']." class='formo' rows='20' cols='40' wrap=soft>";
 	echo $texte;
 	echo "</textarea>\n";
 
@@ -172,22 +172,22 @@ function exec_courrier_edit(){
 
 }
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'abonnés et d'envoi d'information     */
+/* SPIP-listes est un systï¿½e de gestion de listes d'abonnï¿½ et d'envoi d'information     */
 /* par email  pour SPIP.                                                                  */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Gï¿½ï¿½ale GNU publiï¿½ par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribuï¿½car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but spï¿½ifique. Reportez-vous ï¿½la Licence Publique Gï¿½ï¿½ale GNU  */
+/* pour plus de dï¿½ails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir reï¿½ une copie de la Licence Publique Gï¿½ï¿½ale GNU                    */
+/* en mï¿½e temps que ce programme ; si ce n'est pas le cas, ï¿½rivez ï¿½la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, ï¿½ats-Unis.                   */
 /******************************************************************************************/
 ?>

@@ -1,22 +1,22 @@
 <?php
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un systï¿½e de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Gï¿½ï¿½ale GNU publiï¿½ par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribuï¿½car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but spï¿½ifique. Reportez-vous ï¿½la Licence Publique Gï¿½ï¿½ale GNU  */
+/* pour plus de dï¿½ails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir reï¿½ une copie de la Licence Publique Gï¿½ï¿½ale GNU                    */
+/* en mï¿½e temps que ce programme ; si ce n'est pas le cas, ï¿½rivez ï¿½la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, ï¿½ats-Unis.                   */
 /******************************************************************************************/
 
 function spip_listes_onglets($rubrique, $onglet){
@@ -39,17 +39,17 @@ function spip_listes_raccourcis(){
 	
 	if ($connect_statut == "0minirezo") {
 		icone_horizontale(_T('spiplistes:Nouveau_courrier'), generer_url_ecrire("courrier_edit","new=oui&type=nl"), _DIR_PLUGIN_SPIPLISTES."/img_pack/stock_mail_send.gif");
-		echo "</a>"; // bug icone_horizontale()
+// 		echo "</a>"; // bug icone_horizontale()
 		echo "<br />" ;
 		echo "<br />" ;
 		
 		icone_horizontale(_T('spiplistes:Nouvelle_liste_de_diffusion'), generer_url_ecrire("liste_edit","new=oui"), _DIR_PLUGIN_SPIPLISTES."/img_pack/reply-to-all-24.gif");
-		echo "</a>"; // bug icone_horizontale()
+// 		echo "</a>"; // bug icone_horizontale()
 		icone_horizontale(_T('spiplistes:import_export'), generer_url_ecrire("import_export"), _DIR_PLUGIN_SPIPLISTES."/img_pack/listes_inout.png");
-		echo "</a>"; // bug icone_horizontale()
+// 		echo "</a>"; // bug icone_horizontale()
 		
 		icone_horizontale(_T('spiplistes:Configuration'), generer_url_ecrire("config"),_DIR_PLUGIN_SPIPLISTES."/img_pack/mailer_config.gif");
-		echo "</a>"; // bug icone_horizontale()
+// 		echo "</a>"; // bug icone_horizontale()
 	}
 	echo fin_raccourcis();
 
@@ -70,10 +70,8 @@ function spip_listes_raccourcis(){
 		echo "<div id='meleuse'></div>" ;
 		echo "<p>"._T('spiplistes:texte_boite_en_cours')."</p>" ;
 		echo "<p align='center'><a href='".generer_url_ecrire('gerer_courrier','change_statut=publie&id_message='.$id_mess)."'>["._T('annuler')."]</a></p>";
-		
-		
 		echo fin_boite_info();
-	} 
+	}
 
 	// colonne gauche boite info
 	echo "<br />" ;
@@ -85,15 +83,14 @@ function spip_listes_raccourcis(){
 /**
 * spiplistes_afficher_en_liste
 *
-* affiche des listes d'éléments
+* affiche des listes d'ï¿½ï¿½ents
 *
 * @param string titre
 * @param string image
 * @param string statut
 * @param string recherche
 * @param string nom_position
-* @return string la liste des lettres pour le statut demandé
-* @author BoOz / Pierre Basson
+* @return string la liste des lettres pour le statut demandï¿½* @author BoOz / Pierre Basson
 **/
 function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut, $recherche='', $nom_position='position') {
 	
@@ -657,13 +654,13 @@ function spiplistes_afficher_auteurs($query, $url){
 		if ($debut > 0) {
 			$debut_prec = strval(max($debut - $max_par_page, 0));
 			echo "<form method=\"get\" action=\"".parametre_url($url,'debut',$debut_prec)."\">";
-			echo "<input type='submit' name='submit' value='&lt;&lt;&lt;' class='fondo'>";
+			echo "<input type='submit' name='submit' value='&lt;&lt;&lt;' class='fondo' />";
 			echo "</form>";
 		}
 		echo "</td><td align='right'>";
 		if ($debut_suivant < $nombre_auteurs) {
 			echo '<form method="post" action="'.parametre_url($url,'debut',$debut_suivant).'">';
-			echo "<input type='submit' name='submit' value='&gt;&gt;&gt;' class='fondo'>";
+			echo "<input type='submit' name='submit' value='&gt;&gt;&gt;' class='fondo' />";
 			echo "</form>";
 		}
 		echo "</td></tr>\n";
@@ -675,21 +672,21 @@ function spiplistes_afficher_auteurs($query, $url){
 }
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un systï¿½e de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Gï¿½ï¿½ale GNU publiï¿½ par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribuï¿½car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but spï¿½ifique. Reportez-vous ï¿½la Licence Publique Gï¿½ï¿½ale GNU  */
+/* pour plus de dï¿½ails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir reï¿½ une copie de la Licence Publique Gï¿½ï¿½ale GNU                    */
+/* en mï¿½e temps que ce programme ; si ce n'est pas le cas, ï¿½rivez ï¿½la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, ï¿½ats-Unis.                   */
 /******************************************************************************************/
 ?>

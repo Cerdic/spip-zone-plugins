@@ -1,22 +1,22 @@
 <?php
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un systï¿½e de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Gï¿½ï¿½ale GNU publiï¿½ par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribuï¿½car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but spï¿½ifique. Reportez-vous ï¿½la Licence Publique Gï¿½ï¿½ale GNU  */
+/* pour plus de dï¿½ails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir reï¿½ une copie de la Licence Publique Gï¿½ï¿½ale GNU                    */
+/* en mï¿½e temps que ce programme ; si ce n'est pas le cas, ï¿½rivez ï¿½la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, ï¿½ats-Unis.                   */
 /******************************************************************************************/
 
 
@@ -24,11 +24,11 @@
 // Definition des fonctions extra
 //
 
-// Récupération des extra dans la base
+// Rï¿½upï¿½ation des extra dans la base
 // Retourne un tableau associatif.
 // NB on retourne extra
 // sous forme de tableau associatif
-// Merci à Beatnick de www.spip_contrib.net
+// Merci ï¿½Beatnick de www.spip_contrib.net
 
 function get_extra ($id, $objet) {
 	if(!$id) return false;
@@ -50,7 +50,7 @@ function get_extra ($id, $objet) {
 function set_extra ($id, $extra, $objet) {
 	if(!$id) return false;
 	$extra = addslashes(serialize($extra));
-	// On construit qqch qui ressemble à "UPDATE spip_articles SET extra='$extra' WHERE id_article=$id_article"
+	// On construit qqch qui ressemble ï¿½"UPDATE spip_articles SET extra='$extra' WHERE id_article=$id_article"
 	$query = "UPDATE spip_".$objet."s";
 	$query .= " SET extra='$extra' ";
 	$query .= " WHERE id_".$objet."=".$id;
@@ -112,9 +112,9 @@ function bloog_extra_saisie($extra, $type, $ensemble='',$no_echo='') {
 			case "case":
 			case "checkbox":
 				$affiche = ereg_replace("<br />$", "&nbsp;", $affiche);
-				$affiche .= "<INPUT TYPE='checkbox' NAME='suppl_$champ'";
+				$affiche .= "<input type='checkbox' name='suppl_$champ'";
 				if ($extra[$champ] == 'true')
-					$affiche .= " CHECKED ";
+					$affiche .= " checked ";
 				break;
 
 			case "list":
@@ -263,21 +263,21 @@ function bloog_extra_recup_saisie($type) {
 
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un systï¿½e de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Gï¿½ï¿½ale GNU publiï¿½ par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribuï¿½car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but spï¿½ifique. Reportez-vous ï¿½la Licence Publique Gï¿½ï¿½ale GNU  */
+/* pour plus de dï¿½ails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir reï¿½ une copie de la Licence Publique Gï¿½ï¿½ale GNU                    */
+/* en mï¿½e temps que ce programme ; si ce n'est pas le cas, ï¿½rivez ï¿½la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, ï¿½ats-Unis.                   */
 /******************************************************************************************/
 ?>

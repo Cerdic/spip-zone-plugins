@@ -1,22 +1,22 @@
 <?php
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un systï¿½e de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Gï¿½ï¿½ale GNU publiï¿½ par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribuï¿½car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but spï¿½ifique. Reportez-vous ï¿½la Licence Publique Gï¿½ï¿½ale GNU  */
+/* pour plus de dï¿½ails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir reï¿½ une copie de la Licence Publique Gï¿½ï¿½ale GNU                    */
+/* en mï¿½e temps que ce programme ; si ce n'est pas le cas, ï¿½rivez ï¿½la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, ï¿½ats-Unis.                   */
 /******************************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -145,7 +145,7 @@ function exec_gerer_liste(){
 	//Modifier le statut de la liste
 	if ($statut_nouv) {
 		if ($flag_auteur) {
-		     //il faut etre admin et abonné pour modifer une liste
+		     //il faut etre admin et abonnï¿½pour modifer une liste
 			if ($statut_nouv == 'liste' AND $statut_article == 'inact')
 				$ok_nouveau_statut = true;
 			else if ($statut_nouv == 'inact' AND $statut_article == 'poublist')
@@ -290,8 +290,8 @@ function exec_gerer_liste(){
 	if ($connect_statut == '0minirezo' ) {
 		echo debut_cadre_relief("racine-site-24.gif");
 		echo "<form action='".generer_url_ecrire('gerer_liste',"id_liste=$id_liste")."' method='get'>";
-		echo "<input type='hidden' name='exec' value='gerer_liste'>";
-		echo "<input type='hidden' name='id_liste' value='$id_liste'>";
+		echo "<input type='hidden' name='exec' value='gerer_liste' />";
+		echo "<input type='hidden' name='id_liste' value='$id_liste' />";
 
 		echo "<b>"._T('spiplistes:Cette_liste_est').": </b> ";
 		
@@ -314,7 +314,7 @@ function exec_gerer_liste(){
 		}
 		echo " \n";
 		
-		echo "<input type='submit' name='Modifier' value='"._T('bouton_modifier')."' class='fondo'>";
+		echo "<input type='submit' name='Modifier' value='"._T('bouton_modifier')."' class='fondo' />";
 		echo aide ("artstatut");
 		echo "</form>";	
 		
@@ -332,13 +332,13 @@ function exec_gerer_liste(){
 		echo _T('spiplistes:retour')."</strong><br />";
 		
 		echo "<p>"._T('spiplistes:adresse')."</p>";
-		echo "<input type='text' name='email_envoi' value=\"".$email_envoi."\" size='20' class='fondl'>&nbsp;";
+		echo "<input type='text' name='email_envoi' value=\"".$email_envoi."\" size='20' class='fondl' />&nbsp;";
 				
 		if($id_liste)
-			echo "<input type='hidden' name='id_liste' value='$id_liste'>";
+			echo "<input type='hidden' name='id_liste' value='$id_liste' />";
 		if($new)
-			echo "<input type='hidden' name='new' value='$new'>";
-		echo "<input type='submit' name='Valider_auto' value='"._T('bouton_valider')."' class='fondo'>";
+			echo "<input type='hidden' name='new' value='$new' />";
+		echo "<input type='submit' name='Valider_auto' value='"._T('bouton_valider')."' class='fondo' />";
 				
 		echo "</form>";
 				
@@ -382,7 +382,7 @@ function exec_gerer_liste(){
 	$checked = ($message_auto=='oui')?"checked='checked'":"";
 	echo "<input type='radio' name='auto' value='oui' id='auto_oui' "
 	 . $checked
-	 ." onchange=\"jQuery('#auto_oui_detail').show();\" >";
+	 ." onchange=\"jQuery('#auto_oui_detail').show();\" />";
 	echo $checked?"<b>":"";
 	echo "<label for='auto_oui'>"._T('spiplistes:prog_env')."</label>";
 	echo $checked?"</b>":"";
@@ -392,7 +392,7 @@ function exec_gerer_liste(){
 	$sujet_message = ($titre_message=='') ? $titre." de ".$nomsite : $titre_message ;
 	
 	echo "<ul style='list-style-type:none;'>";
-	echo "<li>Sujet : <input type='titre_message' name='sujet_message' value='".$sujet_message."' size='50' class='fondl'> </li>" ;
+	echo "<li>Sujet : <input type='titre_message' name='sujet_message' value='".$sujet_message."' size='50' class='fondl' /> </li>" ;
 	echo "<li>"._T('spiplistes:squel');
 	
 	
@@ -409,7 +409,7 @@ function exec_gerer_liste(){
 	
 	echo "</li>";
 
-	echo "<li>"._T('spiplistes:Tous_les')." <input type='text' name='periode' value='".$periode."' size='4' class='fondl'> "._T('info_jours')."</li>" ;
+	echo "<li>"._T('spiplistes:Tous_les')." <input type='text' name='periode' value='".$periode."' size='4' class='fondl' /> "._T('info_jours')."</li>" ;
 
 	if(!$envoyer_direct)
 		echo " <li><input type='checkbox' class='checkbox' name='envoyer_direct' id='box' class='fondl' /><label for='box'>"._T('spiplistes:env_maint')."</label></li>";
@@ -418,7 +418,7 @@ function exec_gerer_liste(){
 	$checked = ($message_auto=='non')?"checked='checked'":"";
 	echo "<br /><input type='radio' name='auto' value='non' id='auto_non' "
 	 . $checked
-	 ." onchange=\"jQuery('#auto_oui_detail').hide();\" >";
+	 ." onchange=\"jQuery('#auto_oui_detail').hide();\" />";
 	echo $checked?"<b>":"";
 	echo " <label for='auto_non'>"._T('spiplistes:prog_env_non')."</label> ";
 	echo $checked?"</b>":"";
@@ -431,10 +431,10 @@ function exec_gerer_liste(){
 	
 	echo "<tr><td style='text-align:$spip_lang_right;'>";
 	if($id_liste)
-		echo "<input type='hidden' name='id_liste' value='$id_liste'>";
+		echo "<input type='hidden' name='id_liste' value='$id_liste' />";
 	if($new)
-		echo "<input type='hidden' name='new' value='$new'>";
-	echo "<input type='submit' name='Valider_auto' value='"._T('bouton_valider')."' class='fondo'>";
+		echo "<input type='hidden' name='new' value='$new' />";
+	echo "<input type='submit' name='Valider_auto' value='"._T('bouton_valider')."' class='fondo' />";
 	echo "</td></tr>";
 	echo "</table>\n";
 	
@@ -508,10 +508,10 @@ function exec_gerer_liste(){
 			if (spip_num_rows($result) > 80 ) {
 				echo "<form action='".generer_url_ecrire('gerer_liste',"id_liste=$id_liste")."#auteurs' method='post'>";
 				echo "<span class='verdana1'><b>"._T('spiplistes:abon_ajouter')."</b></span>\n";
-				echo "<div><input type='Hidden' name='id_liste' value=\"$id_liste\">";
-				echo "<input type='text' name='cherche_auteur' onClick=\"setvisibility('valider_ajouter_auteur','visible');\" class='fondl' value='' size='20'>";
+				echo "<div><input type='hidden' name='id_liste' value=\"$id_liste\" />";
+				echo "<input type='text' name='cherche_auteur' onclick=\"setvisibility('valider_ajouter_auteur','visible');\" class='fondl' value='' size='20' />";
 				echo "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>";
-				echo " <input type='submit' name='Chercher' value='"._T('bouton_chercher')."' class='fondo'>";
+				echo " <input type='submit' name='Chercher' value='"._T('bouton_chercher')."' class='fondo' />";
 				echo "</span>";
 			}
 			else {
@@ -519,8 +519,8 @@ function exec_gerer_liste(){
 				$action = generer_action_auteur('spiplistes_changer_statut_abonne', "0-listeabo-$id_liste", $retour);
 				echo "<form action='$action' method='post'>";
 				echo "<span class='verdana1'><b>"._T('spiplistes:abon_ajouter')."</b></span>\n";
-				echo "<div><input type='hidden' name='id_liste' value=\"$id_liste\">";
-				echo "<input type='hidden' name='ajout_auteur' value='oui'>";
+				echo "<div><input type='hidden' name='id_liste' value=\"$id_liste\" />";
+				echo "<input type='hidden' name='ajout_auteur' value='oui' />";
 				echo "<select name='id_auteur' size='1' style='width:150px;' class='fondl' onChange=\"setvisibility('valider_ajouter_auteur','visible');\">";
 				$group = false;
 				$group2 = false;
@@ -559,7 +559,7 @@ function exec_gerer_liste(){
 				
 				echo "</select>";
 				echo "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>";
-				echo " <input type='submit' name='Ajouter' value="._T('bouton_ajouter')." class='fondo'>";
+				echo " <input type='submit' name='Ajouter' value="._T('bouton_ajouter')." class='fondo' />";
 				echo "</span>";
 			}
 			echo "</div></form>";
@@ -578,23 +578,23 @@ function exec_gerer_liste(){
 }
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'abonnés et d'envoi d'information     */
+/* SPIP-listes est un systï¿½e de gestion de listes d'abonnï¿½ et d'envoi d'information     */
 /* par email  pour SPIP.                                                                  */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Gï¿½ï¿½ale GNU publiï¿½ par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribuï¿½car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but spï¿½ifique. Reportez-vous ï¿½la Licence Publique Gï¿½ï¿½ale GNU  */
+/* pour plus de dï¿½ails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir reï¿½ une copie de la Licence Publique Gï¿½ï¿½ale GNU                    */
+/* en mï¿½e temps que ce programme ; si ce n'est pas le cas, ï¿½rivez ï¿½la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, ï¿½ats-Unis.                   */
 /******************************************************************************************/
 
 ?>
