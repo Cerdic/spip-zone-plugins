@@ -673,7 +673,7 @@ function spiplistes_afficher_auteurs($query, $url){
 	
 	echo "</table>\n";
 	echo fin_cadre_relief();
-	return join(',', $les_auteurs);
+	//return join(',', $les_auteurs);
 }
 
 /******************************************************************************************/
