@@ -55,7 +55,7 @@ function spip_listes_raccourcis(){
 
 	//Afficher la console d'envoi ?
 	global $table_prefix;
-	$qery_message = "SELECT * FROM ".$table_prefix."_courriers AS messages WHERE statut='encour' LIMIT 0,1";
+	$qery_message = "SELECT * FROM spip_courriers AS messages WHERE statut='encour' LIMIT 0,1";
 	$rsult_pile = spip_query($qery_message);
 	$mssage_pile = spip_num_rows($rsult_pile);
 	$mess=spip_fetch_array($rsult_pile);	
@@ -351,9 +351,9 @@ function spip_listes_strlen($out){
 // ajouter les abonnes d'une liste a un envoi
 function remplir_liste_envois($id_courrier,$id_liste){
 	if($id_liste==0){
-		$query_m = "SELECT id_auteur FROM ".$table_prefix."_auteurs ORDER BY id_auteur ASC";
+		$query_m = "SELECT id_auteur FROM spip_auteurs ORDER BY id_auteur ASC";
 	}else{
-		$query_m = "SELECT id_auteur FROM ".$table_prefix."_abonnes_listes WHERE id_liste='".$id_liste."'";
+		$query_m = "SELECT id_auteur FROM spip_abonnes_listes WHERE id_liste='".$id_liste."'";
 	}
 	//echo $query_m ."<br>";
 	$result_m = spip_query($query_m);
