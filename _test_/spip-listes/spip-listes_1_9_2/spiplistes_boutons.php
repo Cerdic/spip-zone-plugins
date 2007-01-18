@@ -4,9 +4,11 @@
  * definition du plugin "spiplistes" version "classe statique"
  * utilisee comme espace de nommage
  */
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_SPIPLISTES',(_DIR_PLUGINS.end($p)));
- 
+
+	if (!defined('_DIR_PLUGIN_SPIPLISTES')){
+		$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+		define('_DIR_PLUGIN_SPIPLISTES',(_DIR_PLUGINS.end($p)));
+	} 
 
 	function spiplistes_ajouterBoutons($boutons_admin) {
 		// si on est admin
@@ -18,12 +20,6 @@ define('_DIR_PLUGIN_SPIPLISTES',(_DIR_PLUGINS.end($p)));
 			);
 		}
 		return $boutons_admin;
-	}
-
-	/* public static */
-	function spiplistes_ajouterOnglets($flux) {
-		$rubrique = $flux['args'];
-		return $flux;
 	}
 
 

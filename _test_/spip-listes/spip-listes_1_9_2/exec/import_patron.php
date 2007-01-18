@@ -48,7 +48,7 @@ function exec_import_patron(){
 		$patron_version_texte = true ;
 		$message_texte =  recuperer_fond('patrons/'.$patron.'_texte', $contexte_patron);
 	}
-	$texte_patron = recuperer_fond('patron_switch', $contexte_patron);
+	$texte_patron = recuperer_fond('patrons/'.$patron, $contexte_patron);
 	//$texte_patron = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;		
 			
 	$titre_patron = _T('spiplistes:lettre_info')." ".$nomsite;
