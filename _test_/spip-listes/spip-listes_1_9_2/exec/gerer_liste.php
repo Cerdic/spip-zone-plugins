@@ -379,68 +379,54 @@ function exec_gerer_liste(){
 	echo "</td></tr>";
 	echo "<tr><td background='img_pack/rien.gif' align='$spip_lang_left' class='verdana2'>";
 
-	if ($message_auto != "oui") {
-		echo "<input type='radio' name='auto' value='oui' id='auto_oui'>";
-		echo " <label for='auto_oui'>"._T('spiplistes:prog_env')."</label> ";
-		echo "<br /><input type='radio' name='auto' value='non' checked='checked' id='auto_non'>";
-		echo " <b><label for='auto_non'>"._T('spiplistes:prog_env_non')."</label></b> ";
-	}
-	else {
-		echo "<input type='radio' name='auto' value='oui' id='auto_oui' checked='checked'>";
-		echo " <b><label for='auto_oui'>"._T('spiplistes:prog_env')."</label></b> ";
-		echo "<input type='hidden' name='changer_extra' value='oui'>";
-		echo "<p>";
-		
-		$sujet_message = ($titre_message=='') ? $titre." de ".$nomsite : $titre_message ;
-		
-		echo "<ul style='list-style-type:none;'>";
-		echo "<li>Sujet : <input type='titre_message' name='sujet_message' value='".$sujet_message."' size='50' class='fondl'> </li>" ;
-		echo "<li>"._T('spiplistes:squel');
-		
-		
-		$dir = find_in_path("patrons/");
-
-	// Ouvre un dossier bien connu, et liste tous les fichiers
-	if (is_dir($dir)) {
-		if ($dh = opendir($dir)) {
-			echo "<select name='patron'>";
-			$i=0;
-			while (($file = readdir($dh)) !== false) {
-				$titre_option=ereg_replace('(\.html|\.HTML)','',$file);
-				if($file != '..' && $file !='.' && $file !='' && !ereg('texte$', $titre_option) )	{
-					$selected=($patron==$titre_option)?'selected':'' ;
-					echo "<option value='$titre_option' $selected>$titre_option</option>\n";
-					$i++;
-				}
-			}
-			echo "</select>";
-			closedir($dh);
-		}
-	}
-		/*
-		$liste_patrons = find_all_in_path("patrons",",[.]html$,i");
-
-		echo "<select name='patron'>";
-		foreach($liste_patrons as $titre_option) {
-			$titre_option = basename($titre_option,".html");
-			$selected ="";
-			if ($patron == $titre_option)
-				$selected = "selected='selected";
-			echo "<option ".$selected." value='".$titre_option."'>".$titre_option."</option>\n";
-		}
-		echo "</select>";
-		*/
-		echo "</li>";
-
-		echo "<li>"._T('spiplistes:Tous_les')." <input type='text' name='periode' value='".$periode."' size='4' class='fondl'> "._T('info_jours')."</li>" ;
+	$checked = ($message_auto=='oui')?"checked='checked'":"";
+	echo "<input type='radio' name='auto' value='oui' id='auto_oui' "
+	 . $checked
+	 ." onchange=\"jQuery('#auto_oui_detail').show();\" >";
+	echo $checked?"<b>":"";
+	echo "<label for='auto_oui'>"._T('spiplistes:prog_env')."</label>";
+	echo $checked?"</b>":"";
+	echo "<input type='hidden' name='changer_extra' value='oui'>";
+	echo "<div id='auto_oui_detail'>";
 	
-		if(!$envoyer_direct)
-			echo " <li><input type='checkbox' class='checkbox' name='envoyer_direct' id='box' class='fondl' /><label for='box'>"._T('spiplistes:env_maint')."</label></li>";
-
-		echo "</ul><br />";
-		echo "<br /><input type='radio' name='auto' value='non' id='auto_non'>";
-		echo " <label for='auto_non'>"._T('spiplistes:prog_env_non')."</label> ";
+	$sujet_message = ($titre_message=='') ? $titre." de ".$nomsite : $titre_message ;
+	
+	echo "<ul style='list-style-type:none;'>";
+	echo "<li>Sujet : <input type='titre_message' name='sujet_message' value='".$sujet_message."' size='50' class='fondl'> </li>" ;
+	echo "<li>"._T('spiplistes:squel');
+	
+	
+	$liste_patrons = find_all_in_path("patrons/","[.]html$");
+	echo "<select name='patron'>";
+	foreach($liste_patrons as $titre_option) {
+		$titre_option = basename($titre_option,".html");
+		$selected ="";
+		if ($patron == $titre_option)
+			$selected = "selected='selected";
+		echo "<option ".$selected." value='".$titre_option."'>".$titre_option."</option>\n";
 	}
+	echo "</select>";
+	
+	echo "</li>";
+
+	echo "<li>"._T('spiplistes:Tous_les')." <input type='text' name='periode' value='".$periode."' size='4' class='fondl'> "._T('info_jours')."</li>" ;
+
+	if(!$envoyer_direct)
+		echo " <li><input type='checkbox' class='checkbox' name='envoyer_direct' id='box' class='fondl' /><label for='box'>"._T('spiplistes:env_maint')."</label></li>";
+
+	echo "</ul></div>";
+	$checked = ($message_auto=='non')?"checked='checked'":"";
+	echo "<br /><input type='radio' name='auto' value='non' id='auto_non' "
+	 . $checked
+	 ." onchange=\"jQuery('#auto_oui_detail').hide();\" >";
+	echo $checked?"<b>":"";
+	echo " <label for='auto_non'>"._T('spiplistes:prog_env_non')."</label> ";
+	echo $checked?"</b>":"";
+	if ($message_auto=='non')
+		echo "<script type='text/javascript'><!--
+		jQuery('#auto_oui_detail').hide();
+		--></script>";
+	
 	echo "</td></tr>\n";
 	
 	echo "<tr><td style='text-align:$spip_lang_right;'>";
