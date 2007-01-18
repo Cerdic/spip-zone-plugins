@@ -136,7 +136,7 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 			titre,
 			date, nb_emails_envoyes
 			FROM spip_courriers
-			WHERE (type='._q($type).' '.$type2.') AND statut='.q($statut).' '.$clause_where.'
+			WHERE (type='._q($type).' '.$type2.') AND statut='._q($statut).' '.$clause_where.'
 			ORDER BY date DESC
 			LIMIT '.intval($position).','.intval($pas).'';
 	}
