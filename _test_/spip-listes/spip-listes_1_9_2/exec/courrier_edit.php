@@ -135,6 +135,7 @@ function exec_courrier_edit(){
 
 	echo "<p style='padding-left:20px;clear:both'>"._T('spiplistes:alerte_modif')."<br /><br /><input type='submit' name='Valider' value='"._T('spiplistes:charger_le_patron')."' class='fondo' /></p></div>";
 	echo "</form>";
+	echo "<br style='clear:both' />";
 
 	// Fin du bloc
 	echo fin_block();
@@ -143,7 +144,7 @@ function exec_courrier_edit(){
 
 	echo "<br />";
 
-	echo "<form id='choppe_patron-1' action='".generer_url_ecrire("gerer_courrier","id_message=$id_message")."' method='post' name='formulaire'>";
+	echo "<form id='choppe_patron-1' action='".generer_url_ecrire("gerer_courrier","id_message=$id_message")."' method='post' name='choppe_patron-1'>";
 	echo "<input type='hidden' name='modifier_message' value=\"oui\" />";
 	echo "<input type='hidden' name='id_message' value=\"$id_message\" />";
 	if(!intval($id_message))
@@ -162,12 +163,12 @@ function exec_courrier_edit(){
 	echo $texte;
 	echo "</textarea>\n";
 
-	echo "<p align='right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
+	echo "<p align='right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
 	echo "</form>";
 
 	// MODE EDIT FIN ---------------------------------------------------------------
 
-	echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$GLOBALS['spiplistes_version']."<p>" ;
+	echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$GLOBALS['spiplistes_version']."</p>" ;
 	echo fin_gauche(), fin_page();
 
 }
