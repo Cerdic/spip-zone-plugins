@@ -397,7 +397,29 @@ function exec_gerer_liste(){
 		echo "<li>Sujet : <input type='titre_message' name='sujet_message' value='".$sujet_message."' size='50' class='fondl'> </li>" ;
 		echo "<li>"._T('spiplistes:squel');
 		
-		$liste_patrons = find_all_in_path("patrons/",",[.]html$,i");
+		
+		$dir = find_in_path("patrons/");
+
+	// Ouvre un dossier bien connu, et liste tous les fichiers
+	if (is_dir($dir)) {
+		if ($dh = opendir($dir)) {
+			echo "<select name='patron'>";
+			$i=0;
+			while (($file = readdir($dh)) !== false) {
+				$titre_option=ereg_replace('(\.html|\.HTML)','',$file);
+				if($file != '..' && $file !='.' && $file !='' && !ereg('texte$', $titre_option) )	{
+					$selected=($patron==$titre_option)?'selected':'' ;
+					echo "<option value='$titre_option' $selected>$titre_option</option>\n";
+					$i++;
+				}
+			}
+			echo "</select>";
+			closedir($dh);
+		}
+	}
+		/*
+		$liste_patrons = find_all_in_path("patrons",",[.]html$,i");
+
 		echo "<select name='patron'>";
 		foreach($liste_patrons as $titre_option) {
 			$titre_option = basename($titre_option,".html");
@@ -407,7 +429,7 @@ function exec_gerer_liste(){
 			echo "<option ".$selected." value='".$titre_option."'>".$titre_option."</option>\n";
 		}
 		echo "</select>";
-		
+		*/
 		echo "</li>";
 
 		echo "<li>"._T('spiplistes:Tous_les')." <input type='text' name='periode' value='".$periode."' size='4' class='fondl'> "._T('info_jours')."</li>" ;
