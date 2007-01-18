@@ -32,8 +32,6 @@ function exec_abonnes_tous(){
 	global $connect_id_auteur;
 	$type = _request('type');
 	$new = _request('new');
-	$changer_statut = _request('changer_statut');
-	$statut = _request('statut');
 	$id_auteur = _request('id_auteur');
 	
 	$options = 'avancees' ;
@@ -50,10 +48,8 @@ function exec_abonnes_tous(){
 		exit;
 	}
 	
-	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur)) {
-		$statut_auteur=$statut;
+	if (($connect_statut == "0minirezo") OR ($connect_id_auteur == $id_auteur))
 		spip_listes_onglets("messagerie", "Spip listes");
-	}
 	
 	debut_gauche();
 	spip_listes_raccourcis();
@@ -80,7 +76,7 @@ function exec_abonnes_tous(){
 	$cmpt_non = 0;
 	
 	while ($row = spip_fetch_array($result)) {
-		$abo = get_extra($row["id_auteur"],auteur);
+		$abo = get_extra($row["id_auteur"],'auteur');
 		if ($abo['abo'] == "texte")
 			$cmpt_texte = $cmpt_texte + 1 ;
 		if ($abo['abo'] == "html")
@@ -123,14 +119,6 @@ function exec_abonnes_tous(){
 	// auteur
 	
 	$retour = generer_url_ecrire("abonnes_tous");
-	
-	//changer de statut
-	if(!$statut) $statut=' ';
-	if( ($changer_statut=='oui') AND ( ($statut=='html') OR ($statut=='texte') OR ($statut=='non') ) ){
-		$extras = get_extra($id_auteur,"auteur");
-		$extras["abo"] = $statut;
-		set_extra($id_auteur,$extras,"auteur");
-	}
 	
 	if (!$tri) $tri='nom';
 	$retour = parametre_url($retour,"tri",$tri);

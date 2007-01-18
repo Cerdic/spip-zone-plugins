@@ -350,22 +350,18 @@ function spip_listes_strlen($out){
 
 // ajouter les abonnes d'une liste a un envoi
 function remplir_liste_envois($id_courrier,$id_liste){
-	if($id_liste==0){
-		$query_m = "SELECT id_auteur FROM spip_auteurs ORDER BY id_auteur ASC";
-	}else{
-		$query_m = "SELECT id_auteur FROM spip_abonnes_listes WHERE id_liste='".$id_liste."'";
-	}
-	//echo $query_m ."<br>";
-	$result_m = spip_query($query_m);
-	$i = 0 ;
+	if($id_liste==0)
+		$result_m = spip_query("SELECT id_auteur FROM spip_auteurs ORDER BY id_auteur ASC");
+	else
+		$result_m = spip_query("SELECT id_auteur FROM spip_abonnes_listes WHERE id_liste="._q($id_liste));
+	
 	while($row_ = spip_fetch_array($result_m)) {
 		$id_abo = $row_['id_auteur'];
-		//echo $id_abo.",".$id_message."<br>";
 		spip_query("INSERT INTO spip_abonnes_courriers (id_auteur,id_courrier,statut,maj) VALUES ("._q($id_abo).","._q($id_courrier).",'a_envoyer', NOW()) ");
-		$i++ ;
 	}
-	spip_query("UPDATE spip_courriers SET total_abonnes='$i' WHERE id_courrier="._q($id_courrier)); 
-
+	$res = spip_query("SELECT COUNT(id_auteur) AS n FROM spip_abonnes_courriers WHERE id_courrier="._q($id_courrier)." AND statut='a_envoyer'");
+	if ($row = spip_fetch_array($res))
+		spip_query("UPDATE spip_courriers SET total_abonnes="._q($row['n'])." WHERE id_courrier="._q($id_courrier)); 
 }
 
 // compatibilite spip 1.9
@@ -630,18 +626,17 @@ function spiplistes_afficher_auteurs($query, $url){
 		
 		$retour = parametre_url($url,'debut',$debut);
 		if ($row["statut"] != '0minirezo') {
-			$u = parametre_url($retour,'id_auteur',$row['id_auteur']);
-			$u = parametre_url($retour,'changer_statut','oui');
+			$u = generer_action_auteur('spiplistes_changer_statut_abonne', $row['id_auteur'], $retour);
 			if($extra["abo"] == 'html'){
-				$option_abo = "<a href='".parametre_url($retour,'statut','non')."'>"._T('spiplistes:desabo')
-				 . "</a> | <a href='".parametre_url($retour,'statut','texte')."'>"._T('spiplistes:texte')."</a>";
+				$option_abo = "<a href='".parametre_url($u,'statut','non')."'>"._T('spiplistes:desabo')
+				 . "</a> | <a href='".parametre_url($u,'statut','texte')."'>"._T('spiplistes:texte')."</a>";
 			}
 			elseif ($extra["abo"] == 'texte') 
-				$option_abo = "<a href='".parametre_url($retour,'statut','non')."'>"._T('spiplistes:desabo')
-				 . "</a> | <a href='".parametre_url($retour,'statut','html')."'>html</a>";
+				$option_abo = "<a href='".parametre_url($u,'statut','non')."'>"._T('spiplistes:desabo')
+				 . "</a> | <a href='".parametre_url($u,'statut','html')."'>html</a>";
 			elseif(($extra["abo"] == 'non')OR (!$extra["abo"])) 
-				$option_abo = "<a href='".parametre_url($retour,'statut','texte')."'>"._T('spiplistes:texte')
-				 . "</a> | <a href='".parametre_url($retour,'statut','html')."'>html</a>";
+				$option_abo = "<a href='".parametre_url($u,'statut','texte')."'>"._T('spiplistes:texte')
+				 . "</a> | <a href='".parametre_url($u,'statut','html')."'>html</a>";
 			echo "&nbsp;".$option_abo;
 		}
 		echo "</td></tr>\n";
@@ -673,7 +668,7 @@ function spiplistes_afficher_auteurs($query, $url){
 	
 	echo "</table>\n";
 	echo fin_cadre_relief();
-	//return join(',', $les_auteurs);
+	return join(',', $auteurs);
 }
 
 /******************************************************************************************/
