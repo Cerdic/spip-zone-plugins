@@ -178,11 +178,12 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 		$titre		= $row['titre'];
 		$date		= affdate($row['date']);				
 		
+		$retour = _DIR_RESTREINT_ABS.self();
 		switch ($element){
 			case "abonnements":
 				$id_row = $row['id_liste'];
 				$url_row	= generer_url_ecrire('gerer_liste', 'id_liste='.$id_row);
-				$url_desabo	= generer_url_ecrire('abonne_edit', 'id_liste='.$id_row.'&id_auteur='.$id_auteur.'&suppr_auteur='.$id_auteur);
+				$url_desabo = generer_action_auteur('spiplistes_changer_statut_abonne', $row['id_auteur']."-listedesabo-$id_row", $retour);
 				break;
 			case "listes":
 				$id_row = $row['id_liste'];
@@ -457,12 +458,14 @@ function spiplistes_afficher_auteurs($query, $url){
 	
 	$i = 0;
 	$auteurs=array();
+	$les_auteurs = array();
 	while ($auteur = spip_fetch_array($t)) {
 		if ($i>=$debut AND $i<$debut+$max_par_page) {
 			if ($auteur['statut'] == '0minirezo')
 			$auteur['restreint'] = spip_num_rows(
 			  spip_query("SELECT * FROM spip_auteurs_rubriques WHERE id_auteur="._q($auteur['id_auteur'])));
 			$auteurs[] = $auteur;
+			$les_auteurs[] = $auteur['id_auteur'];
 		}
 		$i++;
 		
@@ -626,7 +629,7 @@ function spiplistes_afficher_auteurs($query, $url){
 		
 		$retour = parametre_url($url,'debut',$debut);
 		if ($row["statut"] != '0minirezo') {
-			$u = generer_action_auteur('spiplistes_changer_statut_abonne', $row['id_auteur'], $retour);
+			$u = generer_action_auteur('spiplistes_changer_statut_abonne', $row['id_auteur']."-format", $retour);
 			if($extra["abo"] == 'html'){
 				$option_abo = "<a href='".parametre_url($u,'statut','non')."'>"._T('spiplistes:desabo')
 				 . "</a> | <a href='".parametre_url($u,'statut','texte')."'>"._T('spiplistes:texte')."</a>";
@@ -668,7 +671,7 @@ function spiplistes_afficher_auteurs($query, $url){
 	
 	echo "</table>\n";
 	echo fin_cadre_relief();
-	return join(',', $auteurs);
+	return join(',', $les_auteurs);
 }
 
 /******************************************************************************************/

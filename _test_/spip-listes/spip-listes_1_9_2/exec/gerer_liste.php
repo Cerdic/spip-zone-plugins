@@ -479,9 +479,6 @@ function exec_gerer_liste(){
 	// Appliquer les modifications sur les abonnes
 	//
 
-	if ($supp_auteur && $flag_editable)
-		$result=spip_query("DELETE FROM spip_abonnes_listes WHERE id_auteur="._q($supp_auteur)." AND id_liste="._q($id_liste));
-
 	echo "<a name='auteurs'></a>";
 	echo debut_cadre_enfonce("auteur-24.gif", false, "",  _T('spiplistes:abon').aide ("artauteurs"));
 
@@ -490,19 +487,6 @@ function exec_gerer_liste(){
 	//
 
 	spiplistes_cherche_auteur();
-
-	if ($ajout_auteur && $flag_editable) {
-		if ($nouv_auteur > 0) {
-			$result=spip_query("DELETE FROM spip_abonnes_listes WHERE id_auteur="._q($nouv_auteur)." AND id_liste="._q($id_liste));
-			$result=spip_query("INSERT INTO spip_abonnes_listes (id_auteur,id_liste) VALUES ("._q($nouv_auteur).","._q($id_liste).")");
-			//attribuer un format de reception si besoin (ancien auteur)
-			$extra_format=get_extra($nouv_auteur,"auteur");
-			if(!$extra_format["abo"]){
-				$extra_format["abo"] = "html";
-				set_extra($nouv_auteur,$extra,'auteur');
-			}
-		}
-	}
 
 	//
 	// Afficher les abonnes
@@ -516,7 +500,7 @@ function exec_gerer_liste(){
 	$query = "SELECT * FROM spip_auteurs AS auteurs, spip_abonnes_listes AS lien ".
 		"WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_liste="._q($id_liste).
 		"GROUP BY auteurs.id_auteur ORDER BY auteurs.nom";
-	$les_auteurs = spiplistes_afficher_auteurs($query, generer_url_ecrire('gerer_liste'));
+	$les_auteurs = spiplistes_afficher_auteurs($query, ancre_url(generer_url_ecrire('gerer_liste',"id_liste=$id_liste"),'auteurs'));
 
 	//
 	// Ajouter un auteur
@@ -534,31 +518,35 @@ function exec_gerer_liste(){
 
 		echo "<td>";
 		if (spip_num_rows($result) > 0) {
-			echo "<form action='".generer_url_ecrire('gerer_liste',"id_liste=$id_liste")."#auteurs' method='post'>";
-			echo "<span class='verdana1'><b>"._T('spiplistes:abon_ajouter')."</b></span>\n";
-			echo "<div><input type='Hidden' name='id_liste' value=\"$id_liste\">";
 			
 			if (spip_num_rows($result) > 80 ) {
+				echo "<form action='".generer_url_ecrire('gerer_liste',"id_liste=$id_liste")."#auteurs' method='post'>";
+				echo "<span class='verdana1'><b>"._T('spiplistes:abon_ajouter')."</b></span>\n";
+				echo "<div><input type='Hidden' name='id_liste' value=\"$id_liste\">";
 				echo "<input type='text' name='cherche_auteur' onClick=\"setvisibility('valider_ajouter_auteur','visible');\" class='fondl' value='' size='20'>";
 				echo "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>";
 				echo " <input type='submit' name='Chercher' value='"._T('bouton_chercher')."' class='fondo'>";
 				echo "</span>";
 			}
 			else {
-				echo "<input type='Hidden' name='ajout_auteur' value='oui'>";
-				echo "<select name='nouv_auteur' size='1' style='width:150px;' class='fondl' onChange=\"setvisibility('valider_ajouter_auteur','visible');\">";
+				$retour = ancre_url(generer_url_ecrire('gerer_liste',"id_liste=$id_liste"),'auteurs');
+				$action = generer_action_auteur('spiplistes_changer_statut_abonne', "0-listeabo-$id_liste", $retour);
+				echo "<form action='$action' method='post'>";
+				echo "<span class='verdana1'><b>"._T('spiplistes:abon_ajouter')."</b></span>\n";
+				echo "<div><input type='hidden' name='id_liste' value=\"$id_liste\">";
+				echo "<input type='hidden' name='ajout_auteur' value='oui'>";
+				echo "<select name='id_auteur' size='1' style='width:150px;' class='fondl' onChange=\"setvisibility('valider_ajouter_auteur','visible');\">";
 				$group = false;
 				$group2 = false;
-			
+				$statut_lib = array("0minirezo"=> _T('info_administrateurs'),"1comite"=>_T('info_redacteurs'),"2redac"=> _T('info_redacteurs'));
 				while ($row = spip_fetch_array($result)) {
 					$id_auteur = $row["id_auteur"];
 					$nom = $row["nom"];
 					$email = $row["email"];
 					$statut = $row["statut"];
 					
-					$statut=ereg_replace("0minirezo", _T('info_administrateurs'), $statut);
-					$statut=ereg_replace("1comite", _T('info_redacteurs'), $statut);
-					$statut=ereg_replace("2redac", _T('info_redacteurs'), $statut);
+					if (isset($statut_lib[$statut]))
+						$statut=$statut_lib[$statut];
 					
 					$premiere = strtoupper(substr(trim($nom), 0, 1));
 					

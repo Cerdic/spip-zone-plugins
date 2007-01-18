@@ -105,14 +105,6 @@ function exec_abonne_edit(){
 		gros_titre($nom);
 		echo "</div>";
 		
-		if ($suppr_auteur AND $id_liste) {
-			$query = spip_query("SELECT * FROM spip_listes WHERE id_liste="._q($id_liste));
-			$row = spip_fetch_array($query);
-			$title = $row['titre'] ;
-			echo "<h2> ".$nom." "._T('spiplistes:plus_abonne').$title." </h2>";
-			spip_query("DELETE FROM spip_abonnes_listes WHERE id_auteur="._q($suppr_auteur)." AND id_liste="._q($id_liste));
-		}
-		
 		if ($statut == "0minirezo")
 			$logo = "redacteurs-admin-24.gif";
 		elseif ($statut == "5poubelle")
@@ -154,7 +146,7 @@ function exec_abonne_edit(){
 		else $aff_art = "'prop','publie'";
 	}
 	
-	echo spiplistes_afficher_en_liste(_T('spiplistes:abonne_listes'), '../'._DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'abonnements', '', '', 'position') ;
+	echo spiplistes_afficher_en_liste(_T('spiplistes:abonne_listes'), _DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'abonnements', '', '', 'position') ;
 
 	
 	if(!$effacer_definitif=$_POST['effacer_definitif']){
