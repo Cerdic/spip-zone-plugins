@@ -537,9 +537,9 @@ function spiplistes_afficher_auteurs($query, $url){
 			if ($j == $debut)
 				echo "<b>$j</b>";
 			elseif ($j > 0)
-				echo "<a href=$retour&debut=$j>$j</a>";
+				echo "<a href='".parametre_url($url,'debut',$j)."'>$j</a>";
 			else
-				echo " <a href=$retour>0</a>";
+				echo " <a href='".parametre_url($url,'debut',0)."'>0</a>";
 			
 			if ($debut > $j  AND $debut < $j+$max_par_page)
 				echo " | <b>$debut</b>";
