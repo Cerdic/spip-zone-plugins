@@ -2,6 +2,15 @@
 <div>
 <form method="post">[(#ENV{_cfg_}|form_hidden)]
 
+[(#REM) descriptif=
+<h4>Tutoriel utilisation de cfg</h4>
+Ici vous pouvez configurer l'article qui sera affich&eacute; en page sommaire.<br />
+<br /><a href="http://extranet-eze.dyndns.org/portail/spip_SVN/spip.php?article112" class="spip_out">Documentation provisoire (&agrave; verser sur contrib ?)</a>
+]
+[(#REM) titre=plugin aa titre]
+[(#REM) liens*=aa_multi]
+
+
 <fieldset><legend><:article:> <:sommaire:></legend>
    <label>Choix de l'article &agrave; utiliser :</label>
    <select name="id_aa">
