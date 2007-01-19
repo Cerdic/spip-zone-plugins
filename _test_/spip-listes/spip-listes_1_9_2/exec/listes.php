@@ -445,31 +445,11 @@ function exec_listes_dist(){
 	// Liste des abonnes
 	//
 
-	////////////////////////////////////////////////////
-	// Gestion des auteurs
-	//
-
-	// Creer un nouvel abonne et l'ajouter
-	
-	if ($creer_auteur AND $connect_statut=='0minirezo'){
-		$result_creer = spip_query("INSERT INTO spip_auteurs (nom, statut) VALUES ("._q($creer_auteur).", '1comite')");
-	
-		$nouv_auteur = spip_insert_id();
-		$ajout_auteur = true;
-	}
-
 	//
 	// Appliquer les modifications sur les abonnes
 	//
 
 	echo "<a name='auteurs'></a>";
-	echo debut_cadre_enfonce("auteur-24.gif", false, "",  _T('spiplistes:abon').aide ("artauteurs"));
-
-	//
-	// Recherche d'auteur
-	//
-
-	spiplistes_cherche_auteur();
 
 	//
 	// Afficher les abonnes
@@ -479,94 +459,11 @@ function exec_listes_dist(){
 	// Liste des abonnes a la liste
 	//
 
-	
-	$query = "SELECT * FROM spip_auteurs AS auteurs, spip_auteurs_listes AS lien ".
-		"WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_liste="._q($id_liste).
-		"GROUP BY auteurs.id_auteur ORDER BY auteurs.nom";
-	$les_auteurs = spiplistes_afficher_auteurs($query, ancre_url(generer_url_ecrire('listes',"id_liste=$id_liste"),'auteurs'));
-
-	//
-	// Ajouter un auteur
-	//
-
-	if ($flag_editable) {
-
-		$query = "SELECT * FROM spip_auteurs WHERE ";
-		if ($les_auteurs) $query .= "id_auteur NOT IN ($les_auteurs) AND ";
-		$query .= "statut!='5poubelle' AND statut!='nouveau' ORDER BY statut, nom";
-		$result = spip_query($query);
-	
-		echo "<table width='100%'>";
-		echo "<tr>";
-
-		echo "<td>";
-		if (spip_num_rows($result) > 0) {
-			
-			if (spip_num_rows($result) > 80 ) {
-				echo "<form action='".generer_url_ecrire('listes',"id_liste=$id_liste")."#auteurs' method='post'>";
-				echo "<span class='verdana1'><b>"._T('spiplistes:abon_ajouter')."</b></span>\n";
-				echo "<div><input type='hidden' name='id_liste' value=\"$id_liste\" />";
-				echo "<input type='text' name='cherche_auteur' onclick=\"setvisibility('valider_ajouter_auteur','visible');\" class='fondl' value='' size='20' />";
-				echo "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>";
-				echo " <input type='submit' name='Chercher' value='"._T('bouton_chercher')."' class='fondo' />";
-				echo "</span>";
-			}
-			else {
-				$retour = ancre_url(generer_url_ecrire('listes',"id_liste=$id_liste"),'auteurs');
-				$action = generer_action_auteur('spiplistes_changer_statut_abonne', "0-listeabo-$id_liste", $retour);
-				echo "<form action='$action' method='post'>";
-				echo "<span class='verdana1'><b>"._T('spiplistes:abon_ajouter')."</b></span>\n";
-				echo "<div><input type='hidden' name='id_liste' value=\"$id_liste\" />";
-				echo "<input type='hidden' name='ajout_auteur' value='oui' />";
-				echo "<select name='id_auteur' size='1' style='width:150px;' class='fondl' onChange=\"setvisibility('valider_ajouter_auteur','visible');\">";
-				$group = false;
-				$group2 = false;
-				$statut_lib = array("0minirezo"=> _T('info_administrateurs'),"1comite"=>_T('info_redacteurs'),"2redac"=> _T('info_redacteurs'));
-				while ($row = spip_fetch_array($result)) {
-					$id_auteur = $row["id_auteur"];
-					$nom = $row["nom"];
-					$email = $row["email"];
-					$statut = $row["statut"];
-					
-					if (isset($statut_lib[$statut]))
-						$statut=$statut_lib[$statut];
-					
-					$premiere = strtoupper(substr(trim($nom), 0, 1));
-					
-					if ($connect_statut != '0minirezo')
-						if ($p = strpos($email, '@'))
-							$email = substr($email, 0, $p).'@...';
-					if ($email)
-						$email = " ($email)";
-					
-					if ($statut != $statut_old) {
-						echo "\n<option value=\"x\">";
-						echo "\n<option value=\"x\"> $statut";
-					}
-					
-					if ($premiere != $premiere_old AND ($statut != _T('info_administrateurs') OR !$premiere_old)) {
-						echo "\n<option value=\"x\">";
-					}
-					
-					$texte_option = supprimer_tags(couper("$nom$email", 40));
-					echo "\n<option value=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;$texte_option";
-					$statut_old = $statut;
-					$premiere_old = $premiere;
-				}
-				
-				echo "</select>";
-				echo "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>";
-				echo " <input type='submit' name='Ajouter' value="._T('bouton_ajouter')." class='fondo' />";
-				echo "</span>";
-			}
-			echo "</div></form>";
-		}
-		echo "</td></tr></table>";
-	}
-	echo fin_cadre_enfonce(false);
-
-	/// fin abonnes
-
+	$editer_auteurs = charger_fonction('editer_auteurs','inc');
+	echo $editer_auteurs('liste',$id_liste,$flag_editable, _request('cherche_auteur'),_request('ids'), 
+		_T('spiplistes:abon'),
+		'listes',
+		'abonne_edit');
 	
 	////
 	// MODE EDIT LISTE FIN ---------------------------------------------------------

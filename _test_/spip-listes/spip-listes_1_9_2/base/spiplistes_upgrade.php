@@ -20,7 +20,7 @@
 /******************************************************************************************/
 
 
-	$GLOBALS['spiplistes_version'] = 1.93;
+	$GLOBALS['spiplistes_version'] = 1.94;
 	function spiplistes_verifier_base(){
 		$accepter_visiteurs = lire_meta('accepter_visiteurs');
 
@@ -38,12 +38,15 @@
 			include_spip('base/spip-listes');
 			
 			// si etait deja installe mais dans une vieille version, on reprend a zero
+			include_spip('base/abstract_sql');
 			$desc = spip_abstract_showtable("spip_listes", '', true);
 			if (!isset($desc['field']['id_liste']))
 				$current_version = 0.0;
-			if (spip_query("SELECT * FROM spip_articles WHERE statut='liste' OR statut='inact' OR statut='poublist'"))
+			if (
+				($res=spip_query("SELECT * FROM spip_articles WHERE statut='liste' OR statut='inact' OR statut='poublist'"))
+				AND ($row = spip_fetch_array($res)) )
 				$current_version=0.0;
-			
+
 			if ($current_version==0.0){
 				// Verifie que les tables spip_listes existent, sinon les creer
 				spip_log('creation des tables spip_listes');
@@ -110,12 +113,20 @@
 				spip_query("ALTER TABLE spip_listes ADD pied_page longblob NOT NULL;");
 				ecrire_meta('spiplistes_version', $current_version=1.92);
 			}
-			if ($current_version<1.93){
-				echo "<br /> Maj 1.93<br />";
+			if ($current_version<1.94){
+				echo "<br /> Maj 1.94<br />";
+				include_spip('base/abstract_sql');
+				if (($res=spip_query("SELECT id_auteur FROM spip_auteurs_mod_listes"))
+					AND (!spip_fetch_array($res))
+				  AND ($desc = spip_abstract_showtable("spip_abonnes_listes", '', true))
+				  AND isset($desc['field']['id_auteur'])) {
+					spip_query("DROP TABLE spip_auteurs_mod_listes"); // elle vient d'etre cree par un creer_base inopportun
+					spip_query("DROP TABLE spip_auteurs_courriers"); // elle vient d'etre cree par un creer_base inopportun
+				}
 				spip_query("ALTER TABLE spip_auteurs_listes RENAME spip_auteurs_mod_listes;");
 				spip_query("ALTER TABLE spip_abonnes_listes RENAME spip_auteurs_listes;");
 				spip_query("ALTER TABLE spip_abonnes_courriers RENAME spip_auteurs_courriers;");
-				ecrire_meta('spiplistes_version', $current_version=1.92);
+				ecrire_meta('spiplistes_version', $current_version=1.94);
 			}
 			ecrire_metas();
 		}
@@ -138,7 +149,8 @@
 		$version_base = $GLOBALS['spiplistes_version'];
 		switch ($action){
 			case 'test':
-				return (isset($GLOBALS['meta']['spiplistes_version']) AND ($GLOBALS['meta']['spiplistes_version']>=$version_base));
+				return (isset($GLOBALS['meta']['spiplistes_version']) 
+				  AND ($GLOBALS['meta']['spiplistes_version']>=$version_base));
 				break;
 			case 'install':
 				spiplistes_verifier_base();
