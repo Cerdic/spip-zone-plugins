@@ -1,0 +1,27 @@
+<div id='nav-container'>
+<B_rubriques>
+	<ul>
+	<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}>
+		<li>
+			<a href="#URL_RUBRIQUE"[ class="(#EXPOSE) head"]>[(#TITRE|couper{80}|supprimer_numero)]</a>
+
+			<B_sous_rubriques>
+
+			<ul>
+				<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
+					<BOUCLE_test_expose(RUBRIQUES) {id_enfant}>#EXPOSE{' '}</BOUCLE_test_expose>
+						<li>
+							<a href="#URL_RUBRIQUE"[ class="(#EXPOSE)  head"]>[(#TITRE|couper{80})]</a>
+							<BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re>
+						</li>
+					</B_test_expose>
+
+				</BOUCLE_sous_rubriques>
+			</ul>
+			</B_sous_rubriques>
+
+		</li>
+	</BOUCLE_rubriques>
+
+	</ul>
+</B_rubriques></div>
