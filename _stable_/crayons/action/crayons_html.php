@@ -57,15 +57,19 @@ function controleur_dist($regs) {
     	$valeur = array($champ => $valeur);
     }
 
-    // type du crayon
+    // type du crayon  (a revoir quand le core aura type ses donnees)
     $inputAttrs = array();
     if ($controleur) {
 	    $options['hauteurMini'] = 36; // base de hauteur mini
         $option['inmode'] = 'controleur';
 	    $options['controleur'] = $controleur;
-    } elseif (($sqltype = colonne_table($type, $champ)) &&
+    } elseif (
+   preg_match(",[\n\r],", $valeur[$champ])  // si la valeur fait plusieurs lignes on doit mettre un textarea
+    OR
+	// on regarde le type tel que defini dans serial (attention il y a des blob)
+    ($sqltype = colonne_table($type, $champ)) &&
 	   ( in_array($sqltype['type'] , array('mediumtext', 'longblob')) ||
-	   ($sqltype['type'] == 'text' && in_array($champ, array('descriptif', 'bio'))))) {
+	   (($sqltype['type'] == 'text' || $sqltype['type'] == 'blob') && in_array($champ, array('descriptif', 'bio'))))) {
 	    $options['hauteurMini'] = 36; // hauteur mini d'un textarea
         $option['inmode'] = 'texte';
     } else { // ligne, hauteur naturelle
