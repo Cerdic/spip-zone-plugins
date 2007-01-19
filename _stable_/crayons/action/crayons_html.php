@@ -56,7 +56,7 @@ function controleur_dist($regs) {
     if (is_scalar($valeur)) {
     	$valeur = array($champ => $valeur);
     }
-//return array(print_r($valeur, true), 7);
+
     // type du crayon
     $inputAttrs = array();
     if ($controleur) {
@@ -75,8 +75,8 @@ function controleur_dist($regs) {
         	$inputAttrs['maxlength'] = $sqltype['long'];
         }
 	}
-    $crayon = new Crayon($nomcrayon, $valeur, $options);
 
+    $crayon = new Crayon($nomcrayon, $valeur, $options);
     $inputAttrs['style'] = 'width:' . $crayon->largeur . 'px;' .
          ($crayon->hauteur ? ' height:' . $crayon->hauteur . 'px;' : '');
 
