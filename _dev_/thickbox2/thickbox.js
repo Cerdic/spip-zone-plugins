@@ -24,6 +24,8 @@
 //
 var imageArray = [];
 var FULL_S = false;
+var DIAPO = false;
+
 if(typeof TB_chemin_css == 'undefined') { TB_chemin_css = 'thickbox.css'; }
 if(typeof TB_chemin_animation == 'undefined') { TB_chemin_animation = 'circle_animation.gif'; }
 //add thickbox to href elements that have a class of .thickbox
@@ -148,6 +150,7 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
         }
       }
       // End Resizing
+      TB_Diapo = "<span id='TB_Diapo'>&nbsp;&nbsp;<a href='#'><strong>[Slideshow]</strong></a></span>";
       
       if (TB_Big_Image) {
         TB_Full_Size = "<span id='TB_Full'>&nbsp;&nbsp;<a href='#'><strong>[Zoom]</strong></a></span>";
@@ -156,7 +159,7 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
       TB_WIDTH = imageWidth + 20;
       TB_HEIGHT = imageHeight + 20;    
       
-      	$("#TB_window").append("<a href='' id='TB_ImageOff'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+"'/></a>" + "<div id='TB_legend' style='background-color:#fff'><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'><img src='"+TB_chemin_close+"' /></a></div><div id='TB_caption'>"+caption+"</div><div id='TB_secondLine'>" + TB_imageCount + TB_Full_Size + TB_PrevHTML + TB_NextHTML + "</div></div>"); 
+      	$("#TB_window").append("<a href='' id='TB_ImageOff'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+"'/></a>" + "<div id='TB_legend' style='background-color:#fff'><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'><img src='"+TB_chemin_close+"' /></a></div><div id='TB_caption'>"+caption+"</div><div id='TB_secondLine'>" + TB_imageCount + TB_Full_Size + TB_PrevHTML + TB_NextHTML + TB_Diapo +"</div></div>"); 
 			
 			//TB_position() ;
 
@@ -229,6 +232,12 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
 	 	 }else{
       	 $("#TB_ImageOff").click(TB_remove);
       }
+      
+       
+      
+       $("#TB_Diapo").click(diaporama);
+	  //  if(DIAPO) setTimeout('goNext();',2000);
+
       
       document.onkeydown = function(e){   
         if (e == null) { // ie
@@ -317,12 +326,31 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
   }
 }
 //helper functions below
+ function diaporama(){
+ //alert("diapo");
+ if(!DIAPO) DIAPO = true ; else DIAPO = false ; 
+ diapo();
+ }
+
+function diapo(){
+  if(DIAPO){
+   if(TB_NextURL !=""){
+   $("#TB_window").remove();
+   $("body").append("<div id='TB_window'></div>");
+   TB_show(TB_NextCaption, TB_NextURL); 
+   setTimeout('diapo();',5000);
+   }else DIAPO = false ;
+   }
+return false;  
+}
+
 function TB_showIframe(){
   $("#TB_load").remove();
   $("#TB_window").css({display:"block"});
 }
 function TB_remove() {
-   $("#TB_imageOff").unbind('click');
+  DIAPO = false ;
+  $("#TB_imageOff").unbind('click');
   $("#TB_overlay").unbind('click');
   $("#TB_closeWindowButton").unbind('click');
   $("#TB_window").fadeOut("fast",function(){$('#TB_window,#TB_overlay,#TB_HideSelect').remove();});
