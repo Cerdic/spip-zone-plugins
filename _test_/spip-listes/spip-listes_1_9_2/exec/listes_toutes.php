@@ -86,9 +86,9 @@ function exec_listes_toutes(){
 	//
 	
 	
-	echo spiplistes_afficher_en_liste(_T('spiplistes:listes_internes'), _DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'listes', 'inact', '', 'position') ;
-	echo spiplistes_afficher_en_liste(_T('spiplistes:liste_diff_publiques'), _DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'listes', 'liste', '', 'position') ;
-	echo spiplistes_afficher_en_liste(_T('spiplistes:listes_poubelle'), _DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'listes', 'poublist', '', 'position') ;
+	echo spiplistes_afficher_en_liste(_T('spiplistes:listes_internes'), _DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'listes', 'inact', '', 'position') ;
+	echo spiplistes_afficher_en_liste(_T('spiplistes:liste_diff_publiques'), _DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'listes', 'liste', '', 'position') ;
+	echo spiplistes_afficher_en_liste(_T('spiplistes:listes_poubelle'), _DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'listes', 'poublist', '', 'position') ;
 	
 	
 	// MODE EDIT LISTES FIN --------------------------------------------------------

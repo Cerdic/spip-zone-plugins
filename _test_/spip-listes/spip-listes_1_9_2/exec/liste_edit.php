@@ -141,7 +141,7 @@ function exec_liste_edit(){
 		icone(_T('icone_retour'), generer_url_ecrire("gerer_liste","id_liste=$id_liste"), "article-24.gif", "rien.gif");
 	
 	echo "</td>";
-	echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
+	echo "<td><img src='"._DIR_IMG_PACK."/rien.gif' width=10></td>\n";
 	echo "<td width='100%'>";
 	echo _T('spiplistes:modifier_liste');
 	gros_titre($titre);

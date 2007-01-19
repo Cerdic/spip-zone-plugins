@@ -260,7 +260,7 @@ function exec_gerer_liste(){
 	if ($flag_editable) {
 		echo "<td><img src='"._DIR_IMG_PACK."rien.gif' width='5'></td>\n";
 		echo "<td align='center'>";
-		icone(_T('spiplistes:modifier_liste'), generer_url_ecrire("liste_edit","id_liste=$id_liste"),_DIR_PLUGIN_SPIPLISTES."/img_pack/reply-to-all-24.gif", "edit.gif");
+		icone(_T('spiplistes:modifier_liste'), generer_url_ecrire("liste_edit","id_liste=$id_liste"),_DIR_PLUGIN_SPIPLISTES."img_pack/reply-to-all-24.gif", "edit.gif");
 		echo "</td>";
 	}
 	echo "</tr></table>\n";
@@ -345,14 +345,14 @@ function exec_gerer_liste(){
 		echo fin_cadre_relief();
 	}
 
-	echo debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES."/img_pack/stock_timer.gif");
+	echo debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES."img_pack/stock_timer.gif");
 	echo "<form action='".generer_url_ecrire('gerer_liste',"id_liste=$id_liste")."' method='post'>";
 	 
 	// programmer un courrier automatique
 	echo "<h3>"._T('spiplistes:program')."</h3>";
 
 	echo "<table border=0 cellspacing=1 cellpadding=3 width=\"100%\">";
-	echo "<tr><td background='img_pack/rien.gif' align='$spip_lang_left' class='verdana2'>";
+	echo "<tr><td background='"._DIR_IMG_PACK."/rien.gif' align='$spip_lang_left' class='verdana2'>";
 	if ($message_auto != "oui")
 		echo _T('spiplistes:non_program');
 	else {
@@ -377,7 +377,7 @@ function exec_gerer_liste(){
 	}
 
 	echo "</td></tr>";
-	echo "<tr><td background='img_pack/rien.gif' align='$spip_lang_left' class='verdana2'>";
+	echo "<tr><td background='"._DIR_IMG_PACK."/rien.gif' align='$spip_lang_left' class='verdana2'>";
 
 	$checked = ($message_auto=='oui')?"checked='checked'":"";
 	echo "<input type='radio' name='auto' value='oui' id='auto_oui' "

@@ -24,9 +24,9 @@ function spip_listes_onglets($rubrique, $onglet){
 	
 	echo debut_onglet();
 	if ($rubrique == "messagerie"){
-		echo onglet(_T('spiplistes:Historique_des_envois'), generer_url_ecrire("spip_listes"), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."/img_pack/stock_hyperlink-mail-and-news-24.gif");
-		echo onglet(_T('spiplistes:Listes_de_diffusion'), generer_url_ecrire("listes_toutes"), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."/img_pack/reply-to-all-24.gif");
-		echo onglet(_T('spiplistes:Suivi_des_abonnements'), generer_url_ecrire("abonnes_tous"), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."/img_pack/addressbook-24.gif");
+		echo onglet(_T('spiplistes:Historique_des_envois'), generer_url_ecrire("spip_listes"), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."img_pack/stock_hyperlink-mail-and-news-24.gif");
+		echo onglet(_T('spiplistes:Listes_de_diffusion'), generer_url_ecrire("listes_toutes"), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."img_pack/reply-to-all-24.gif");
+		echo onglet(_T('spiplistes:Suivi_des_abonnements'), generer_url_ecrire("abonnes_tous"), "messagerie", $onglet, _DIR_PLUGIN_SPIPLISTES."img_pack/addressbook-24.gif");
 	}
 	echo fin_onglet();
 }
@@ -35,20 +35,20 @@ function spip_listes_raccourcis(){
 	global  $connect_statut;
 	
 	// debut des racourcis
-	echo debut_raccourcis(_DIR_PLUGIN_SPIPLISTES."/img_pack/mailer_config.gif");
+	echo debut_raccourcis(_DIR_PLUGIN_SPIPLISTES."img_pack/mailer_config.gif");
 	
 	if ($connect_statut == "0minirezo") {
-		icone_horizontale(_T('spiplistes:Nouveau_courrier'), generer_url_ecrire("courrier_edit","new=oui&type=nl"), _DIR_PLUGIN_SPIPLISTES."/img_pack/stock_mail_send.gif");
+		icone_horizontale(_T('spiplistes:Nouveau_courrier'), generer_url_ecrire("courrier_edit","new=oui&type=nl"), _DIR_PLUGIN_SPIPLISTES."img_pack/stock_mail_send.gif");
 // 		echo "</a>"; // bug icone_horizontale()
 		echo "<br />" ;
 		echo "<br />" ;
 		
-		icone_horizontale(_T('spiplistes:Nouvelle_liste_de_diffusion'), generer_url_ecrire("liste_edit","new=oui"), _DIR_PLUGIN_SPIPLISTES."/img_pack/reply-to-all-24.gif");
+		icone_horizontale(_T('spiplistes:Nouvelle_liste_de_diffusion'), generer_url_ecrire("liste_edit","new=oui"), _DIR_PLUGIN_SPIPLISTES."img_pack/reply-to-all-24.gif");
 // 		echo "</a>"; // bug icone_horizontale()
-		icone_horizontale(_T('spiplistes:import_export'), generer_url_ecrire("import_export"), _DIR_PLUGIN_SPIPLISTES."/img_pack/listes_inout.png");
+		icone_horizontale(_T('spiplistes:import_export'), generer_url_ecrire("import_export"), _DIR_PLUGIN_SPIPLISTES."img_pack/listes_inout.png");
 // 		echo "</a>"; // bug icone_horizontale()
 		
-		icone_horizontale(_T('spiplistes:Configuration'), generer_url_ecrire("config"),_DIR_PLUGIN_SPIPLISTES."/img_pack/mailer_config.gif");
+		icone_horizontale(_T('spiplistes:Configuration'), generer_url_ecrire("config"),_DIR_PLUGIN_SPIPLISTES."img_pack/mailer_config.gif");
 // 		echo "</a>"; // bug icone_horizontale()
 	}
 	echo fin_raccourcis();
@@ -66,7 +66,7 @@ function spip_listes_raccourcis(){
 		echo "<script type='text/javascript' src='".find_in_path('javascript/autocron.js')."'></script>";
 		
 		echo "<div style='font-weight:bold;text-align:center'>"._T('spiplistes:envoi_en_cours')."</div>";
-		echo "<div style='padding : 10px;text-align:center'><img src='../"._DIR_PLUGIN_SPIPLISTES."/img_pack/48_import.gif'></div>";
+		echo "<div style='padding : 10px;text-align:center'><img src='"._DIR_PLUGIN_SPIPLISTES."img_pack/48_import.gif'></div>";
 		echo "<div id='meleuse'></div>" ;
 		echo "<p>"._T('spiplistes:texte_boite_en_cours')."</p>" ;
 		echo "<p align='center'><a href='".generer_url_ecrire('gerer_courrier','change_statut=publie&id_message='.$id_mess)."'>["._T('annuler')."]</a></p>";
@@ -196,13 +196,13 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 		$en_liste.= "<td width='11'>";
 		switch ($statut) {
 			case 'brouillon':
-				$en_liste.= "<img src='../"._DIR_PLUGIN_SPIPLISTES."/img_pack/puce-blanche.gif' alt='puce-blanche' border='0' style='margin: 1px;' />";
+				$en_liste.= "<img src='"._DIR_IMG_PACK."puce-blanche.gif' alt='puce-blanche' border='0' style='margin: 1px;' />";
 				break;
 			case 'publie':
-				$en_liste.= "<img src='../"._DIR_PLUGIN_SPIPLISTES."/img_pack/puce-verte.gif' alt='puce-verte' border='0' style='margin: 1px;' />";
+				$en_liste.= "<img src='"._DIR_IMG_PACK."img_pack/puce-verte.gif' alt='puce-verte' border='0' style='margin: 1px;' />";
 				break;
 			case 'envoi_en_cours':
-				$en_liste.= "<img src='../"._DIR_PLUGIN_SPIPLISTES."/img_pack/puce-orange.gif' alt='puce-orange' border='0' style='margin: 1px;' />";
+				$en_liste.= "<img src='"._DIR_IMG_PACK."img_pack/puce-orange.gif' alt='puce-orange' border='0' style='margin: 1px;' />";
 				break;
 		}
 		$en_liste.= "</td>";
@@ -497,7 +497,7 @@ function spiplistes_afficher_auteurs($query, $url){
 	echo "<table border='0' cellpadding=3 cellspacing=0 width='100%' class='arial2'>\n";
 	echo "<tr bgcolor='#DBE1C5'>";
 	echo "<td width='20'>";
-	$img = "<img src='img_pack/admin-12.gif' alt='' border='0'>";
+	$img = "<img src='"._DIR_IMG_PACK."/admin-12.gif' alt='' border='0'>";
 	if ($tri=='statut')
 		echo $img;
 	else

@@ -131,7 +131,7 @@ function exec_abonne_edit(){
 		else $aff_art = "'prop','publie'";
 	}
 	
-	echo spiplistes_afficher_en_liste(_T('spiplistes:abonne_listes'), _DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'abonnements', '', '', 'position') ;
+	echo spiplistes_afficher_en_liste(_T('spiplistes:abonne_listes'), _DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'abonnements', '', '', 'position') ;
 
 	if ($statut == '6forum'){
 		$retour = generer_url_ecrire('abonnes_tous');

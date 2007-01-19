@@ -195,7 +195,7 @@ function exec_gerer_courrier(){
 			$pret_envoi=true;
 		}
 	
-		echo debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail_send.gif');
+		echo debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail_send.gif');
 		//echo "tklo $destinataire, $email_test , $id_liste";
 		
 		if($erreur_mail_pas_bon){
@@ -256,7 +256,7 @@ function exec_gerer_courrier(){
 		echo "<tr><td width=100%>";
 		if ($statut=="redac" OR $statut=="ready") {
 			echo "<div style='float:right'>";
-			icone ('Modifier ce courrier',generer_url_ecrire('courrier_edit','id_message='.$id_message), _DIR_PLUGIN_SPIPLISTES."/img_pack/stock_mail.gif");
+			icone ('Modifier ce courrier',generer_url_ecrire('courrier_edit','id_message='.$id_message), _DIR_PLUGIN_SPIPLISTES."img_pack/stock_mail.gif");
 			echo "</div>";
 		}
 		

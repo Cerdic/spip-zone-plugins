@@ -86,7 +86,7 @@ function exec_courrier_edit(){
 	echo "<p><span style='font-family:Verdana,Arial,Sans,sans-serif;color:green;font-size:120%'><b>$le_type</b></span></p>";
 	echo "<p style='margin-bottom:10px;font-family:Verdana,Arial,Sans,sans-serif;color:red;font-size:100%'>"._T('spiplistes:alerte_edit')."<br /><br /></p>";
 
-	echo debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_insert-slide.gif');
+	echo debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_insert-slide.gif');
 
 	//Charger un patron ?    
 

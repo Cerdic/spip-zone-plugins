@@ -28,7 +28,7 @@ include_spip('inc/acces');
 include_spip ('base/spip-listes');
 
 include_spip('spiplistes_boutons');
-include_once(_DIR_PLUGIN_SPIPLISTES.'/inc/spiplistes_mail.inc.php');
+include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
 
 $charset=lire_meta('charset');
 global $table_prefix;

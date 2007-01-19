@@ -38,7 +38,7 @@ function spiplistes_afficher_pile_messages(){
 	$list = spip_query ("SELECT * FROM spip_listes WHERE message_auto='oui' ");
 	$message_pile = spip_num_rows($list);
 	if ($message_pile == 0) return $out; 
-	$out .= debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_timer.gif',true);
+	$out .= debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_timer.gif',true);
 	$out .= "<div  class='chapo' style='border-top:1px #cccccc;width:100%;font-weight:bold;font-size:14px'>"._T('spiplistes:Messages_automatiques')."</div>";
 	$out .= "<style>
 	table.tab td {
@@ -146,8 +146,8 @@ function exec_spip_listes() {
 	
 	$messages_vus = '';
 	
-	echo spiplistes_afficher_en_liste(_T('spiplistes:aff_encours'), _DIR_PLUGIN_SPIPLISTES.'/img_pack/24_send-receive.gif', 'messages', 'encour', '', 'position') ;
-	echo spiplistes_afficher_en_liste(_T('spiplistes:aff_redac'), _DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'messages', 'redac', '', 'position') ;
+	echo spiplistes_afficher_en_liste(_T('spiplistes:aff_encours'), _DIR_PLUGIN_SPIPLISTES.'img_pack/24_send-receive.gif', 'messages', 'encour', '', 'position') ;
+	echo spiplistes_afficher_en_liste(_T('spiplistes:aff_redac'), _DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'messages', 'redac', '', 'position') ;
 	
 	
 	// afficher les messages auto
@@ -155,8 +155,8 @@ function exec_spip_listes() {
 	
 	echo "<br /><br />";
 
-	echo spiplistes_afficher_en_liste(_T('spiplistes:messages_auto_envoye'),_DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'messages', 'auto', '', 'position') ;
-	echo spiplistes_afficher_en_liste(_T('spiplistes:aff_envoye'), _DIR_PLUGIN_SPIPLISTES.'/img_pack/stock_mail.gif', 'messages', 'publie', '', 'position') ;
+	echo spiplistes_afficher_en_liste(_T('spiplistes:messages_auto_envoye'),_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'messages', 'auto', '', 'position') ;
+	echo spiplistes_afficher_en_liste(_T('spiplistes:aff_envoye'), _DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'messages', 'publie', '', 'position') ;
 	
 	
 	// MODE HISTORIQUE FIN ---------------------------------------------------------
