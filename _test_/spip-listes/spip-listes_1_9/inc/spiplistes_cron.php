@@ -79,7 +79,7 @@ while($row = spip_fetch_array($list_bg)) {
 	
 		// preparation mail
 		
-		$date = date('Y/m/d',$maj) ;
+		$date = date('Y-m-d H:i:s',$maj) ;
 		
 		
 	$texte_patron_bg = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;		

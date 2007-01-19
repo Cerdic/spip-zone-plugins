@@ -72,7 +72,7 @@ while($row = spip_fetch_array($list_bg)) {
 	
 		// preparation mail
 		
-		$date = date('Y-m-d',$last_maj_bg) ;
+		$date = date('Y-m-d H:i:s',$last_maj_bg) ;
 		
 		include_spip('public/assembler');
 		$contexte_patron = array('date' => $date,'patron'=>$patron, 'lang'=>$lang_bg);
