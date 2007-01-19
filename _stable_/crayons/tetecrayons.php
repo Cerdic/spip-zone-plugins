@@ -107,9 +107,9 @@ function balise_EDIT($p) {
 	$arg1 = interprete_argument_balise(1,$p);
 	$arg2 = interprete_argument_balise(2,$p);
 	$arg2 = $arg2 ? substr($arg1, 1, -1) . ' ' : '';
-	$p->code = "'crayon '. preg_replace(',^hierarchie$,', 'rubrique', preg_replace(',s$,', '', '"
+	$p->code = "'crayon '. type_boucle_crayon('"
 		. $p->type_requete
-		."')) .'-'."
+		."') .'-'."
 		. sinon($arg1, "''")
 		.".'-'."
 		.champ_sql($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->primary, $p)
@@ -117,6 +117,19 @@ function balise_EDIT($p) {
 
 	$p->interdire_scripts = false;
 	return $p;
+}
+
+// Donne le nom du crayon en fonction du type de la boucle
+// (attention aux exceptions)
+// pour #EDIT dans les boucles (HIERARCHIE) et (SITES)
+function type_boucle_crayon($type_boucle){
+	if ($type_boucle == 'hierarchie')
+		return 'rubrique';
+	if ($type_boucle == 'syndication')
+		return 'site';
+
+	// cas general
+	return preg_replace(',s$,', '', $type_boucle);
 }
 
 ?>
