@@ -31,12 +31,9 @@ include_spip('spiplistes_boutons');
 include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
 
 $charset=lire_meta('charset');
-global $table_prefix;
 
 // Trouver un message a envoyer 
-$query_message = "SELECT * FROM ".$table_prefix."_courriers AS messages WHERE statut='encour' ORDER BY date ASC LIMIT 0,1";
-
-$result_pile = spip_query($query_message);
+$result_pile = spip_query("SELECT * FROM spip_courriers AS messages WHERE statut='encour' ORDER BY date ASC LIMIT 0,1");
 $message_pile = spip_num_rows($result_pile);
 
 if ($message_pile > 0){
@@ -86,8 +83,7 @@ if ($message_pile > 0){
 				} else {
 				//c'est un mail pour une liste alors ?
 				$mail_collectif = 'non' ;
-				$query_d = "SELECT * FROM spip_listes WHERE id_liste=$id_liste";
-				$result_d = spip_query($query_d);
+				$result_d = spip_query("SELECT * FROM spip_listes WHERE id_liste="._q($id_liste));
 		
 					if(spip_num_rows($result_d)>0){
 						while($ro = spip_fetch_array($result_d)) {
@@ -172,16 +168,11 @@ if ($message_pile > 0){
 		
 		//chopper un lot 
 		
-	if($test == 'oui'){
-		$query = "SELECT id_auteur, nom, email, extra FROM ".$table_prefix."_auteurs WHERE email = '$email_test' ORDER BY id_auteur ASC ";
-	}
-	
-	
-	if($test != 'oui'){
-		$query = "SELECT a.nom, a.id_auteur, a.email, a.extra FROM ".$table_prefix."_auteurs AS a, ".$table_prefix."_abonnes_courriers AS b WHERE a.id_auteur=b.id_auteur AND b.id_courrier = '$id_message' ORDER BY a.id_auteur ASC  LIMIT 0,$limit";
-	}		
+	if($test == 'oui')
+		$result_inscrits = spip_query("SELECT id_auteur, nom, email, extra FROM spip_auteurs WHERE email ="._q($email_test)." ORDER BY id_auteur ASC");
+	else
+		$result_inscrits = spip_query("SELECT a.nom, a.id_auteur, a.email, a.extra FROM spip_auteurs AS a, spip_auteurs_courriers AS b WHERE a.id_auteur=b.id_auteur AND b.id_courrier = "._q($id_message)." ORDER BY a.id_auteur ASC  LIMIT 0,".intval($limit));
 			
-		$result_inscrits = spip_query($query);
 		$liste_abonnes = spip_num_rows($result_inscrits);
 	
 		if($liste_abonnes > 0){	
@@ -195,7 +186,7 @@ if ($message_pile > 0){
 				
 				//indiquer eventuellement le debut de l'envoi
 				if($debut_envoi=="0000-00-00 00:00:00" AND $test !='oui'){
-				spip_query("UPDATE ".$table_prefix."_courriers SET date_debut_envoi=NOW() WHERE id_courrier='$id_message'"); 
+				spip_query("UPDATE spip_courriers SET date_debut_envoi=NOW() WHERE id_courrier="._q($id_message)); 
 				}
 		
 				$extra = unserialize ($row2["extra"]);
@@ -212,7 +203,7 @@ if ($message_pile > 0){
 				                                                       else $abo = false;				
 				if ($abo) {
 					$cookie = creer_uniqid();
-					spip_query("UPDATE spip_auteurs SET cookie_oubli = '$cookie' WHERE email ='$email'");				
+					spip_query("UPDATE spip_auteurs SET cookie_oubli ="._q($cookie)." WHERE email ="._q($email));				
 				
 				//version texte utilisee en format texte et HTML multipart
 				$pagem = $page_."\n\n"  ;
@@ -233,7 +224,7 @@ if ($message_pile > 0){
 						$str_temp .= "->ok";
 						$nb_emails_envoyes++;
 						$nb_emails_texte++;
-						spip_query("DELETE FROM ".$table_prefix."_abonnes_courriers WHERE id_auteur='$id_auteur' AND id_courrier='$id_message'");				
+						spip_query("DELETE FROM spip_auteurs_courriers WHERE id_auteur="._q($id_auteur)." AND id_courrier="._q($id_message));				
              			 } else {
                  		 $str_temp .= _T('spiplistes:erreur_mail');
                  		 $nb_emails_echec++;
@@ -259,7 +250,7 @@ if ($message_pile > 0){
 							     $str_temp .= "->ok";
 							     $nb_emails_envoyes++;
 							     $nb_emails_html++;
-							     spip_query("DELETE FROM ".$table_prefix."_abonnes_courriers WHERE id_auteur='$id_auteur' AND id_courrier='$id_message'");				
+							     spip_query("DELETE FROM spip_auteurs_courriers WHERE id_auteur="._q($id_auteur)." AND id_courrier="._q($id_message));				
 							 } else {
                  			 $str_temp .= _T('spiplistes:erreur_mail');
                   			 $nb_emails_echec++;
@@ -272,14 +263,14 @@ if ($message_pile > 0){
 					} else {  // email fin TXT /HTML  -----------------------------------------
 
 					$nb_emails_non_envoyes++; //desabonnes 
-					spip_query("DELETE FROM ".$table_prefix."_abonnes_courriers WHERE id_auteur='$id_auteur' AND id_courrier='$id_message'");	
+					spip_query("DELETE FROM spip_auteurs_courriers WHERE id_auteur="._q($id_auteur)." AND id_courrier="._q($id_message));	
 					spip_log('pas abonne en ce moment');
 					}  				
 					
 				spip_log($str_temp);								
 				}else {
 					$nb_emails_non_envoyes++; // pas de extra abo ou exeption
-					spip_query("DELETE FROM ".$table_prefix."_abonnes_courriers WHERE id_auteur='$id_auteur' AND id_courrier='$id_message'");	
+					spip_query("DELETE FROM spip_auteurs_courriers WHERE id_auteur="._q($id_auteur)." AND id_courrier="._q($id_message));	
 					spip_log('pas de extra abo');
 					} /* fin abo*/
 				   
@@ -287,36 +278,36 @@ if ($message_pile > 0){
 			
 			// si c'est un test on repasse en redac
 			if ($test== 'oui') {				
-  				spip_query("UPDATE ".$table_prefix."_courriers SET statut='redac', email_test='', total_abonnes=0 WHERE id_courrier='$id_message'");
+  				spip_query("UPDATE spip_courriers SET statut='redac', email_test='', total_abonnes=0 WHERE id_courrier="._q($id_message));
   				spip_log('repasse en redac');
 				}
 			
 		} else {   /* fin liste abonnes */	
 	
 				// archiver
-  				spip_log("UPDATE ".$table_prefix."_courriers SET statut='publie' WHERE id_courrier='$id_message'");
-  				spip_query("UPDATE ".$table_prefix."_courriers SET statut='publie' WHERE id_courrier='$id_message'");
+  				spip_log("UPDATE spip_courriers SET statut='publie' WHERE id_courrier="._q($id_message));
+  				spip_query("UPDATE spip_courriers SET statut='publie' WHERE id_courrier="._q($id_message));
   				$fin_envoi="oui";
 				
 		}
 	} else {
 	//aucun destinataire connu pour ce message
 	spip_log(_T('spiplistes:erreur_sans_destinataire')."---"._T('spiplistes:envoi_annule'));
-	spip_query("UPDATE ".$table_prefix."_courriers SET titre='".addslashes(_T('spiplistes:erreur_destinataire'))."', statut='publie' WHERE id_courrier='$id_message'"); 
+	spip_query("UPDATE spip_courriers SET titre="._q(_T('spiplistes:erreur_destinataire')).", statut='publie' WHERE id_courrier="._q($id_message)); 
 	}
 		
 	// faire le bilan apres l'envoi d'un lot	
 		
 		if($test != 'oui'){
-			spip_query("UPDATE ".$table_prefix."_courriers SET nb_emails_envoyes='$nb_emails_envoyes' WHERE id_courrier='$id_message'"); 
+			spip_query("UPDATE spip_courriers SET nb_emails_envoyes="._q($nb_emails_envoyes)." WHERE id_courrier="._q($id_message)); 
 		   if($nb_emails_non_envoyes > 0)
-		    spip_query("UPDATE ".$table_prefix."_courriers SET nb_emails_non_envoyes='$nb_emails_non_envoyes' WHERE id_courrier='$id_message'");
+		    spip_query("UPDATE spip_courriers SET nb_emails_non_envoyes="._q($nb_emails_non_envoyes)." WHERE id_courrier="._q($id_message));
 		    if($nb_emails_echec > 0)
-		    spip_query("UPDATE ".$table_prefix."_courriers SET nb_emails_echec='$nb_emails_echec' WHERE id_courrier='$id_message'"); 
-		    spip_query("UPDATE ".$table_prefix."_courriers SET nb_emails_texte='$nb_emails_texte' WHERE id_courrier='$id_message'"); 
-		    spip_query("UPDATE ".$table_prefix."_courriers SET nb_emails_html='$nb_emails_html' WHERE id_courrier='$id_message'"); 
+		    spip_query("UPDATE spip_courriers SET nb_emails_echec="._q($nb_emails_echec)." WHERE id_courrier="._q($id_message)); 
+		    spip_query("UPDATE spip_courriers SET nb_emails_texte="._q($nb_emails_texte)." WHERE id_courrier="._q($id_message)); 
+		    spip_query("UPDATE spip_courriers SET nb_emails_html="._q($nb_emails_html)." WHERE id_courrier="._q($id_message)); 
 			if($fin_envoi=="oui"){
-			spip_query("UPDATE ".$table_prefix."_courriers SET date_fin_envoi=NOW() WHERE id_courrier='$id_message'"); 
+			spip_query("UPDATE spip_courriers SET date_fin_envoi=NOW() WHERE id_courrier="._q($id_message)); 
 			}
 		}
 } else {

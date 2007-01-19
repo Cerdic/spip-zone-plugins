@@ -17,7 +17,7 @@ function action_spiplistes_supprimer_abonne_dist()
 			$statut=$row['statut'];
 	
 			if($statut=='6forum'){
-				spip_query("DELETE FROM spip_abonnes_listes WHERE id_auteur="._q($id_auteur));
+				spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur="._q($id_auteur));
 				spip_query("DELETE FROM spip_auteurs WHERE id_auteur="._q($id_auteur));
 			}
 		}

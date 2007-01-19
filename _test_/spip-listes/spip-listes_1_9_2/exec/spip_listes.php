@@ -78,7 +78,7 @@ function spiplistes_afficher_pile_messages(){
   	$date_dernier = strtotime($row['maj']) ;
     $date_dernier = date(_T('spiplistes:format_date'),$date_dernier) ;
 
-		$out .= "<td><a href='".generer_url_public('patron_switch',"patron=".$row['patron']."&date=".$date_dernier)."'> ".$row['patron']."</a><br />"._T('spiplistes:Tous_les')." ".$row['periode']." "._T('spiplistes:jours')."</td><td><a href='?exec=gerer_liste&id_liste=$id_article'>$titre</a><br />" ;
+		$out .= "<td><a href='".generer_url_public('patron_switch',"patron=".$row['patron']."&date=".$date_dernier)."'> ".$row['patron']."</a><br />"._T('spiplistes:Tous_les')." ".$row['periode']." "._T('spiplistes:jours')."</td><td><a href='?exec=listes&id_liste=$id_article'>$titre</a><br />" ;
 		$out .= "</td>" ;
 		$out .= "<td>";
 		if($proch != 0)

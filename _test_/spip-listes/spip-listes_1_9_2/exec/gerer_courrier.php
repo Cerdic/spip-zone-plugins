@@ -125,14 +125,14 @@ function exec_gerer_courrier(){
 			
 			if($change_statut == 'publie'){
 				// si on annule un envoi, effacer les abonnes en attente
-				spip_query("DELETE FROM spip_abonnes_courriers WHERE id_courrier="._q($id_message));
+				spip_query("DELETE FROM spip_auteurs_courriers WHERE id_courrier="._q($id_message));
 			}
 		}
 		
 		// A securiser ?
 		if ($envoi) {
 			spip_query("UPDATE spip_courriers SET statut='encour' WHERE id_courrier="._q($id_message));
-			spip_query("DELETE FROM spip_abonnes_courriers WHERE id_courrier="._q($id_message));
+			spip_query("DELETE FROM spip_auteurs_courriers WHERE id_courrier="._q($id_message));
 		
 			spip_log("test ? ->".$test."idliste->$id_liste");
 			if(intval($id_liste) OR ($id_liste==0 AND $test!='oui') )
@@ -185,7 +185,7 @@ function exec_gerer_courrier(){
 		if(intval($id_liste) !=0){
 			$query_ = spip_query ("SELECT * FROM spip_listes WHERE id_liste = "._q($id_liste));
 			$row = spip_fetch_array($query_);
-			$destinataire = 'la liste : <a href="'.generer_url_ecrire('gerer_liste','id_liste='.$id_liste).'">'.$row['titre'].'</a>';
+			$destinataire = 'la liste : <a href="'.generer_url_ecrire('listes','id_liste='.$id_liste).'">'.$row['titre'].'</a>';
 			//ajouter le nombre d'inscrits
 			// ici
 			$pret_envoi=true;

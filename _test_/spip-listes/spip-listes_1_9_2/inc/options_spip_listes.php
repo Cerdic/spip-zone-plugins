@@ -22,7 +22,7 @@
 
 function pied_de_page_liste($id_liste) {
 if(intval($id_liste) > 0){
-	$pied=spip_query("SELECT pied_page FROM spip_listes WHERE id_liste='$id_liste' LIMIT 0,1");
+	$pied=spip_query("SELECT pied_page FROM spip_listes WHERE id_liste="._q($id_liste)." LIMIT 0,1");
 	$pied=spip_fetch_array($pied);
 	$pied= $pied['pied_page'];
 }else{
@@ -34,7 +34,7 @@ return $pied ;
 }
 
 function spiplistes_langue_liste ($id_liste) {
-$lang=spip_query("SELECT lang FROM spip_listes WHERE id_liste='$id_liste' LIMIT 0,1");
+$lang=spip_query("SELECT lang FROM spip_listes WHERE id_liste="._q($id_liste)." LIMIT 0,1");
 $lang=spip_fetch_array($lang);
 $lang= $lang['lang'];
 return $lang ;

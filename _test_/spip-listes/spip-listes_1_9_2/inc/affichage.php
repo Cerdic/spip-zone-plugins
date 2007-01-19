@@ -54,9 +54,7 @@ function spip_listes_raccourcis(){
 	echo fin_raccourcis();
 
 	//Afficher la console d'envoi ?
-	global $table_prefix;
-	$qery_message = "SELECT * FROM spip_courriers AS messages WHERE statut='encour' LIMIT 0,1";
-	$rsult_pile = spip_query($qery_message);
+	$rsult_pile = spip_query("SELECT * FROM spip_courriers AS messages WHERE statut='encour' LIMIT 0,1");
 	$mssage_pile = spip_num_rows($rsult_pile);
 	$mess=spip_fetch_array($rsult_pile);	
 	$id_mess = $mess['id_courrier'];
@@ -99,8 +97,7 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 	
 	$clause_where = '';
 	if (!empty($recherche)) {
-		$recherche = addslashes($recherche);
-		$clause_where.= ' AND ( titre LIKE "%'.$recherche.'%"  OR  descriptif LIKE "%'.$recherche.'%"  OR  texte LIKE "%'.$recherche.'%" )';
+		$clause_where.= ' AND ( titre LIKE '._q("%$recherche%").' OR descriptif LIKE '._q("%$recherche%").' OR  texte LIKE '._q("%$recherche%").' )';
 	}
 	
 	$lettres = '';
@@ -140,7 +137,11 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 	
 	if($element == 'abonnements'){
 		if($statut=='')
-			$requete_listes = 'SELECT listes.id_liste, listes.titre, listes.statut, listes.date, 							lien.id_auteur,lien.id_liste FROM  spip_abonnes_listes AS lien LEFT JOIN spip_listes AS listes  ON 				lien.id_liste=listes.id_liste WHERE lien.id_auteur="'.$id_auteur.'" AND (listes.statut ="liste" OR 				listes.statut ="inact") ORDER BY listes.date DESC LIMIT '.$position.','.$pas.'';
+			$requete_listes = 'SELECT listes.id_liste, listes.titre, listes.statut, listes.date,lien.id_auteur,lien.id_liste 
+			  FROM spip_auteurs_listes AS lien 
+			  LEFT JOIN spip_listes AS listes ON lien.id_liste=listes.id_liste 
+			  WHERE lien.id_auteur='._q($id_auteur).' AND (listes.statut="liste" OR listes.statut="inact") 
+			  ORDER BY listes.date DESC LIMIT '.intval($position).','.intval($pas).'';
 		else{
 			$requete_listes = 'SELECT id_courrier,
 			titre,
@@ -179,12 +180,12 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 		switch ($element){
 			case "abonnements":
 				$id_row = $row['id_liste'];
-				$url_row	= generer_url_ecrire('gerer_liste', 'id_liste='.$id_row);
+				$url_row	= generer_url_ecrire('listes', 'id_liste='.$id_row);
 				$url_desabo = generer_action_auteur('spiplistes_changer_statut_abonne', $row['id_auteur']."-listedesabo-$id_row", $retour);
 				break;
 			case "listes":
 				$id_row = $row['id_liste'];
-				$url_row	= generer_url_ecrire('gerer_liste', 'id_liste='.$id_row);
+				$url_row	= generer_url_ecrire('listes', 'id_liste='.$id_row);
 				break;
 			default:
 				$id_row	= $row['id_courrier'];			
@@ -212,7 +213,7 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 		$en_liste.= $titre;
 		
 		if ($element == 'listes') {
-			$nb_abo= spip_num_rows(spip_query("SELECT id_auteur FROM spip_abonnes_listes WHERE id_liste='$id_row'"));
+			$nb_abo= spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_listes WHERE id_liste="._q($id_row)));
 			$nb_abo = ($nb_abo>1)? $nb_abo." abonn&eacute;s" : $nb_abo." abonn&eacute;";
 			
 			$en_liste.= " <span style='font-size:100%;color:#666666' dir='ltr'>\n";
@@ -248,18 +249,23 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 		case "listes":
 			$requete_total = 'SELECT id_liste
 			FROM spip_listes
-			WHERE statut="'.$statut.'" '.$clause_where.'
+			WHERE statut='._q($statut).' '.$clause_where.'
 			ORDER BY date DESC';
 			$retour = 'listes_toutes';
 			break;
 		case "messages":
 			$requete_total = 'SELECT id_courrier
 			FROM spip_courriers
-			WHERE type="'.$type.'" AND statut="'.$statut.'"';
+			WHERE type='._q($type).' AND statut='._q($statut);
 			$retour = 'spip_listes';
 			break;
 		case "abonnements":
-			$requete_total = 'SELECT listes.id_liste, listes.titre, listes.statut, listes.date, lien.id_auteur,lien.id_liste FROM  spip_abonnes_listes AS lien LEFT JOIN spip_listes AS listes  ON 	lien.id_liste=listes.id_liste WHERE lien.id_auteur="'.$id_auteur.'" AND (listes.statut ="liste" OR listes.statut ="inact") ORDER BY listes.date DESC';
+			$requete_total = 'SELECT listes.id_liste, listes.titre, listes.statut, listes.date, lien.id_auteur,lien.id_liste 
+			 FROM  spip_auteurs_listes AS lien 
+			 LEFT JOIN spip_listes AS listes 
+			 ON lien.id_liste=listes.id_liste 
+			 WHERE lien.id_auteur='._q($id_auteur).' AND (listes.statut ="liste" OR listes.statut ="inact") 
+			 ORDER BY listes.date DESC';
 			$retour = 'abonne_edit';
 			$param = '&id_auteur='.$id_auteur;
 			break;
@@ -351,13 +357,13 @@ function remplir_liste_envois($id_courrier,$id_liste){
 	if($id_liste==0)
 		$result_m = spip_query("SELECT id_auteur FROM spip_auteurs ORDER BY id_auteur ASC");
 	else
-		$result_m = spip_query("SELECT id_auteur FROM spip_abonnes_listes WHERE id_liste="._q($id_liste));
+		$result_m = spip_query("SELECT id_auteur FROM spip_auteurs_listes WHERE id_liste="._q($id_liste));
 	
 	while($row_ = spip_fetch_array($result_m)) {
 		$id_abo = $row_['id_auteur'];
-		spip_query("INSERT INTO spip_abonnes_courriers (id_auteur,id_courrier,statut,maj) VALUES ("._q($id_abo).","._q($id_courrier).",'a_envoyer', NOW()) ");
+		spip_query("INSERT INTO spip_auteurs_courriers (id_auteur,id_courrier,statut,maj) VALUES ("._q($id_abo).","._q($id_courrier).",'a_envoyer', NOW()) ");
 	}
-	$res = spip_query("SELECT COUNT(id_auteur) AS n FROM spip_abonnes_courriers WHERE id_courrier="._q($id_courrier)." AND statut='a_envoyer'");
+	$res = spip_query("SELECT COUNT(id_auteur) AS n FROM spip_auteurs_courriers WHERE id_courrier="._q($id_courrier)." AND statut='a_envoyer'");
 	if ($row = spip_fetch_array($res))
 		spip_query("UPDATE spip_courriers SET total_abonnes="._q($row['n'])." WHERE id_courrier="._q($id_courrier)); 
 }

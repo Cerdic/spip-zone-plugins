@@ -41,8 +41,7 @@ function exec_import_export(){
 	if (isset($_POST['export_txt']) && isset($_POST['export_id']) && $connect_statut == "0minirezo" ) {
 		$export_id =$_POST['export_id'];
 		if (intval($export_id)>0) {
-			$query="SELECT id_auteur FROM spip_abonnes_listes WHERE id_liste='$export_id'";
-			$abonnes = spip_query($query);
+			$abonnes = spip_query("SELECT id_auteur FROM spip_auteurs_listes WHERE id_liste="._q($export_id));
 			$str_export= "# spip-listes\r\n";
 			$str_export .= "# "._T('spiplistes:membres_liste')."\r\n";
 			$str_export .= "# liste id: $export_id\r\n";
@@ -51,8 +50,7 @@ function exec_import_export(){
 				$abonne = $row['id_auteur'];
 				$extras = get_extra($abonne,"auteur");
 				if ($extras["abo"]=="html" || $extras["abo"]=="texte") {
-					$subquery = "SELECT email FROM spip_auteurs WHERE statut!='5poubelle' AND statut!='nouveau' AND id_auteur='$abonne' LIMIT 1";
-					$subresult = spip_query($subquery);
+					$subresult = spip_query("SELECT email FROM spip_auteurs WHERE statut!='5poubelle' AND statut!='nouveau' AND id_auteur="._q($abonne)." LIMIT 1");
 					while ($subrow = spip_fetch_array($subresult)) {
 						$str_export .= $subrow['email']."\r\n";
 					}
@@ -66,7 +64,7 @@ function exec_import_export(){
 	else{
 
 		if($export_id == "abo_sans_liste"){
-			$abonnes = spip_query("select a.id_auteur, count(d.id_liste) from spip_auteurs a left join spip_abonnes_listes d on a.id_auteur = d.id_auteur group by a.id_auteur having count(d.id_liste) = 0;");
+			$abonnes = spip_query("select a.id_auteur, count(d.id_liste) from spip_auteurs a left join spip_auteurs_listes d on a.id_auteur = d.id_auteur group by a.id_auteur having count(d.id_liste) = 0;");
 
 			$str_export= "# spip-listes\r\n"; 
 			$str_export .= "# "._T('spiplistes:membres_liste')."\r\n";
@@ -76,8 +74,7 @@ function exec_import_export(){
 				$abonne = $row['id_auteur'];
 				$extras = get_extra($abonne,"auteur");
 				if ($extras["abo"]=="html" || $extras["abo"]=="texte") {
-					$subquery = "SELECT email FROM spip_auteurs WHERE statut!='5poubelle' AND statut!='nouveau' AND id_auteur='$abonne' LIMIT 1";
-					$subresult = spip_query($subquery);
+					$subresult = spip_query("SELECT email FROM spip_auteurs WHERE statut!='5poubelle' AND statut!='nouveau' AND id_auteur="._q($abonne)." LIMIT 1");
 					while ($subrow = spip_fetch_array($subresult)) {
 						$str_export .= $subrow['email']."\r\n";
  					}
@@ -89,8 +86,7 @@ function exec_import_export(){
 			exit;
 		}
  		if($export_id == "desabo"){
-			$query = "SELECT id_auteur, nom, extra FROM spip_auteurs";
-			$result = spip_query($query);
+			$result = spip_query("SELECT id_auteur, nom, extra FROM spip_auteurs");
 			$nb_inscrits = spip_num_rows($result);
 
 			$str_export= "# spip-listes\r\n";
@@ -101,8 +97,7 @@ function exec_import_export(){
 				$abonne = $row['id_auteur'];
 				$extras = get_extra($abonne,"auteur");	
 				if ($extras["abo"]=="non" || !$extras["abo"]) {
-					$subquery = "SELECT email FROM spip_auteurs WHERE statut!='5poubelle' AND statut!='nouveau' AND id_auteur='$abonne' LIMIT 1";
-					$subresult = spip_query($subquery);
+					$subresult = spip_query("SELECT email FROM spip_auteurs WHERE statut!='5poubelle' AND statut!='nouveau' AND id_auteur="._q($abonne)." LIMIT 1");
 					while ($subrow = spip_fetch_array($subresult)) {
 						$str_export .= $subrow['email']."\r\n";
 					}
@@ -162,8 +157,7 @@ function exec_import_export(){
 		for ($i = 0; ; $i++) {
 			if ($i) $login = $login_base.$i;
 			else $login = $login_base;
-			$query = "SELECT id_auteur FROM spip_auteurs WHERE login='$login'";
-			$result = spip_query($query);
+			$result = spip_query("SELECT id_auteur FROM spip_auteurs WHERE login="._q($login));
 			if (!spip_num_rows($result)) break;
 		}
 
@@ -217,8 +211,7 @@ function exec_import_export(){
 							$cookie = creer_uniqid();
 							$extras = bloog_extra_recup_saisie('auteurs');
 
-							$query = "SELECT * FROM spip_auteurs WHERE email='$mail_inscription'";
-							$resulta = spip_query($query);
+							$resulta = spip_query("SELECT * FROM spip_auteurs WHERE email="._q($mail_inscription));
 
 							if ($row = spip_fetch_array($resulta)) {
 								$nom = $row['nom'] ;
@@ -226,20 +219,18 @@ function exec_import_export(){
 								$id = $row['id_auteur'] ;
 								echo _T('spiplistes:adresse_deja_inclus').": ";
 								echo "<span style='color:#999;margin-bottom:5px'>".$mail_inscription."</span><br />\n" ;
-								$ok = spip_query("UPDATE spip_auteurs SET extra='$extras' WHERE id_auteur='$id'");
+								$ok = spip_query("UPDATE spip_auteurs SET extra="._q($extras)." WHERE id_auteur="._q($id));
 								if ($ok){echo "format mis a jour<br />";}
 							}
 							else {
 				 				$sub_report .= "<span style='color:#090;margin-bottom:5px'>$mail_inscription</span> ($format)<br />\n";
- 								$query = "INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, extra, cookie_oubli) ".
-								"VALUES ('$nom_inscription', '$mail_inscription', '$login', '$mdpass', '$statut', '$htpass', '$extras', '$cookie')";
-								spip_query($query);
+								spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, extra, cookie_oubli) ".
+								"VALUES ("._q($nom_inscription).","._q($mail_inscription).","._q($login).","._q($mdpass).","._q($statut).","._q($htpass).","._q($extras).","._q($cookie).")");
 							}
 
 							// Inscription aux listes
 							// abonnement aux listes http://www.phpfrance.com/tutorials/index.php?page=2&id=13
-							$query = "SELECT * FROM spip_auteurs WHERE email='$mail_inscription'";
-							$resu = spip_query($query);
+							$resu = spip_query("SELECT * FROM spip_auteurs WHERE email="._q($mail_inscription));
 
 							// l'abonne existe deja.
 							if ($row = spip_fetch_array($resu)) {
@@ -253,20 +244,17 @@ function exec_import_export(){
 									reset($list_abo);
 									while( list(,$val) = each($list_abo) ){
 										 //echo "<h2>$nom :liste $val </h2>" ;
-										 $query="DELETE FROM spip_abonnes_listes WHERE id_auteur='$id_auteur' AND id_liste='$val'";
-										 $result = spip_query($query);
+										 $result = spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur="._q($id_auteur)." AND id_liste="._q($val));
 
 										 if($GLOBALS['suppl_abo'] !='non'){
 											 $sub_report .= "<span style='color:#090;margin-bottom:5px'>".$mel."</span><br />\n" ;
-											 $query="INSERT INTO spip_abonnes_listes (id_auteur,id_liste) VALUES ('$id_auteur','$val')";
-										}
-										 $result=spip_query($query);
-										 $new_abonne++;
+											 spip_query("INSERT INTO spip_auteurs_listes (id_auteur,id_liste) VALUES ("._q($id_auteur).","._q($val).")");
+										 	$new_abonne++;
+										 }
 									}
 								}else{
 								if($GLOBALS['suppl_abo'] =='non'){
-									$query="DELETE FROM spip_auteurs_listes WHERE id_auteur='$id_auteur'";
-									$result=spip_query($query); 
+									$result=spip_query("DELETE FROM spip_auteurs_mod_listes WHERE id_auteur="._q($id_auteur)); 
 									$sub_report .= "<span style='color:#090;margin-bottom:5px'>".$mel."</span> (desabo)<br />\n" ;
 								}
 								}

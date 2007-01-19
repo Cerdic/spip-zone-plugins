@@ -29,8 +29,8 @@ function action_spiplistes_changer_statut_abonne_dist()
 		$id_auteur = _request('id_auteur');
 		if ($id_auteur && ($id_liste = $arg[2]) 
 			&& autoriser('abonnerauteur','liste',$id_liste,NULL,array('id_auteur'=>$id_auteur))) {
-			$result=spip_query("DELETE FROM spip_abonnes_listes WHERE id_auteur="._q($id_auteur)." AND id_liste="._q($id_liste));
-			$result=spip_query("INSERT INTO spip_abonnes_listes (id_auteur,id_liste) VALUES ("._q($id_auteur).","._q($id_liste).")");
+			$result=spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur="._q($id_auteur)." AND id_liste="._q($id_liste));
+			$result=spip_query("INSERT INTO spip_auteurs_listes (id_auteur,id_liste) VALUES ("._q($id_auteur).","._q($id_liste).")");
 			//attribuer un format de reception si besoin (ancien auteur)
 			$extra_format=get_extra($id_auteur,"auteur");
 			if(!$extra_format["abo"]){
@@ -43,7 +43,7 @@ function action_spiplistes_changer_statut_abonne_dist()
 		if ($id_liste = $arg[2])
 			//if (autoriser())
 			if (autoriser('desabonnerauteur','liste',$id_liste,NULL,array('id_auteur'=>$id_auteur)))
-				spip_query("DELETE FROM spip_abonnes_listes WHERE id_auteur="._q($id_auteur)." AND id_liste="._q($id_liste));
+				spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur="._q($id_auteur)." AND id_liste="._q($id_liste));
 	}
 	
 	if ($redirect){

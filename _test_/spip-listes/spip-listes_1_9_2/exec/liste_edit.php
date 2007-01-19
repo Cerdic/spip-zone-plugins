@@ -95,7 +95,7 @@ function exec_liste_edit(){
 			
 			$extra=$row["extra"];
 	
-			$result_auteur = spip_query("SELECT * FROM spip_abonnes_listes WHERE id_liste="._q($id_liste)." AND id_auteur="._q($connect_id_auteur));
+			$result_auteur = spip_query("SELECT * FROM spip_auteurs_listes WHERE id_liste="._q($id_liste)." AND id_auteur="._q($connect_id_auteur));
 			$flag_auteur = (spip_num_rows($result_auteur) > 0);
 	
 			$flag_editable = (acces_rubrique($id_rubrique) OR ($flag_auteur > 0 AND ($statut == 'prepa' OR $statut == 'prop' OR $new == 'oui')));
@@ -110,8 +110,7 @@ function exec_liste_edit(){
 	}
 	
 	if ($id_liste && $id_document) {
-		$query_doc = "SELECT * FROM spip_documents_articles WHERE id_document=$id_document AND id_liste=$id_liste";
-		$result_doc = spip_query($query_doc);
+		$result_doc = spip_query("SELECT * FROM spip_documents_articles WHERE id_document="._q($id_document)." AND id_liste"._q($id_liste));
 		$flag_document_editable = (spip_num_rows($result_doc) > 0);
 	} else {
 		$flag_document_editable = false;
@@ -136,9 +135,9 @@ function exec_liste_edit(){
 	echo "<tr width='100%'>";
 	echo "<td>";
 	if ($lier_trad) 
-		icone(_T('icone_retour'), generer_url_ecrire("gerer_liste","id_liste=$lier_trad"), "article-24.gif", "rien.gif");
+		icone(_T('icone_retour'), generer_url_ecrire("listes","id_liste=$lier_trad"), "article-24.gif", "rien.gif");
 	else 
-		icone(_T('icone_retour'), generer_url_ecrire("gerer_liste","id_liste=$id_liste"), "article-24.gif", "rien.gif");
+		icone(_T('icone_retour'), generer_url_ecrire("listes","id_liste=$id_liste"), "article-24.gif", "rien.gif");
 	
 	echo "</td>";
 	echo "<td><img src='"._DIR_IMG_PACK."/rien.gif' width=10></td>\n";
@@ -154,7 +153,7 @@ function exec_liste_edit(){
 	$descriptif = entites_html($descriptif);
 	$texte = entites_html($texte);
 	
-	$lien = generer_url_ecrire('gerer_liste');
+	$lien = generer_url_ecrire('listes');
 	if ($id_liste) $lien .= "&id_liste=$id_liste";
 	echo "<form action='$lien' method='post' name='formulaire'>\n";
 

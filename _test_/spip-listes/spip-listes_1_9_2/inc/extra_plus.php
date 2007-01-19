@@ -32,9 +32,10 @@
 
 function get_extra ($id, $objet) {
 	if(!$id) return false;
+	if (!preg_match(',^[a-z0-9]*$,i',$objet)) return false;
 	// On construit qqch qui ressemble a "SELECT extra FROM spip_articles WHERE id_article=$id_article"
 	$query = "SELECT statut, extra FROM spip_".$objet."s";
-	$query .= " WHERE id_".$objet."=".$id;
+	$query .= " WHERE id_".$objet."="._q($id);
 	$res = spip_query($query);
 	$cells = spip_fetch_array($res);
 	
@@ -49,10 +50,10 @@ function get_extra ($id, $objet) {
 
 function set_extra ($id, $extra, $objet) {
 	if(!$id) return false;
-	$extra = addslashes(serialize($extra));
+	$extra = serialize($extra);
 	// On construit qqch qui ressemble �"UPDATE spip_articles SET extra='$extra' WHERE id_article=$id_article"
 	$query = "UPDATE spip_".$objet."s";
-	$query .= " SET extra='$extra' ";
+	$query .= " SET extra="._q($extra);
 	$query .= " WHERE id_".$objet."=".$id;
 	return spip_query($query);
 }

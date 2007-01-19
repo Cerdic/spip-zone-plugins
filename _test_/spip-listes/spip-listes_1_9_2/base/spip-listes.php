@@ -14,18 +14,18 @@
 	$table_des_tables['courriers'] = 'courriers';
 	$table_des_tables['listes'] = 'listes';
 
-	$spip_abonnes_courriers = array(
+	$spip_auteurs_courriers = array(
 						"id_auteur"		=> "bigint(21) NOT NULL default '0'",
 						"id_courrier"	=> "bigint(21) NOT NULL default '0'",
 						"statut"		=> "enum('a_envoyer','envoye','echec') NOT NULL default 'a_envoyer'",
 						"maj"			=> "datetime NOT NULL default '0000-00-00 00:00:00'"
 					);
 					
-	$spip_abonnes_courriers_key = array(
+	$spip_auteurs_courriers_key = array(
 						"PRIMARY KEY" => "id_auteur, id_courrier"
 					);
 
-	$spip_abonnes_listes = array(
+	$spip_auteurs_listes = array(
 						"id_auteur"			=> "bigint(21) NOT NULL default '0'",
 						"id_liste" 			=> "bigint(21) NOT NULL default '0'",
 						"date_inscription"	=> "datetime NOT NULL default '0000-00-00 00:00:00'",
@@ -33,7 +33,7 @@
 						"format"			=> "enum('html','texte') NOT NULL default 'html'"
 
 					);
-	$spip_abonnes_listes_key = array(
+	$spip_auteurs_listes_key = array(
 						"PRIMARY KEY" => "id_auteur, id_liste"
 					);
 
@@ -64,11 +64,11 @@
 					);
 
 	//moderateurs
-	$spip_auteurs_listes = array(
+	$spip_auteurs_mod_listes = array(
 						"id_auteur"		=> "bigint(21) NOT NULL",
 						"id_liste"		=> "bigint(21) NOT NULL"
 					);
-	$spip_auteurs_listes_key = array(
+	$spip_auteurs_mod_listes_key = array(
 						"PRIMARY KEY" => "id_auteur, id_liste",
 					);
 
@@ -101,12 +101,12 @@
 		array('field' => &$spip_listes, 'key' => &$spip_listes_key);
 	
 
-	$tables_auxiliaires['spip_abonnes_courriers'] = 
-		array('field' => &$spip_abonnes_courriers, 'key' => &$spip_abonnes_courriers_key);
-	$tables_auxiliaires['spip_abonnes_listes'] = 
-		array('field' => &$spip_abonnes_listes, 'key' => &$spip_abonnes_listes_key);
+	$tables_auxiliaires['spip_auteurs_courriers'] = 
+		array('field' => &$spip_auteurs_courriers, 'key' => &$spip_auteurs_courriers_key);
 	$tables_auxiliaires['spip_auteurs_listes'] = 
 		array('field' => &$spip_auteurs_listes, 'key' => &$spip_auteurs_listes_key);
+	$tables_auxiliaires['spip_auteurs_mod_listes'] = 
+		array('field' => &$spip_auteurs_mod_listes, 'key' => &$spip_auteurs_mod_listes_key);
 	
 
 
@@ -115,17 +115,17 @@
 	//$tables_jointures['spip_abonnes'][]= 'listes';
 
 	$tables_jointures['spip_courriers'][]= 'auteurs';
-	$tables_jointures['spip_courriers'][]= 'abonnes_courriers';
+	$tables_jointures['spip_courriers'][]= 'auteurs_courriers';
 	$tables_jointures['spip_courriers'][]= 'listes';
 
 	$tables_jointures['spip_listes'][]= 'auteurs';
-	$tables_jointures['spip_listes'][]= 'abonnes_listes';
-	$tables_jointures['spip_listes'][]= 'courriers';
 	$tables_jointures['spip_listes'][]= 'auteurs_listes';
+	$tables_jointures['spip_listes'][]= 'courriers';
+	$tables_jointures['spip_listes'][]= 'auteurs_mod_listes';
 	
 
-	//$tables_jointures['spip_auteurs'][]= 'auteurs_listes';
-	$tables_jointures['spip_auteurs'][]= 'abonnes_listes';
+	//$tables_jointures['spip_auteurs'][]= 'auteurs_mod_listes';
+	$tables_jointures['spip_auteurs'][]= 'auteurs_listes';
 	$tables_jointures['spip_auteurs'][]= 'listes';
 	$tables_jointures['spip_auteurs'][]= 'courriers';
 	

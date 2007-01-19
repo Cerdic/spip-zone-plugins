@@ -72,14 +72,13 @@ $inscription_visiteur ="";
 	// envoyer le cookie de relance mot de passe si pass oublie
 	if ($email_oubli) {
 		if (email_valide($email_oubli)) {
-			$email = addslashes($email_oubli);
-			$res = spip_query("SELECT * FROM spip_auteurs WHERE email ='$email'");
+			$res = spip_query("SELECT * FROM spip_auteurs WHERE email ="._q($email_oubli));
 			if ($row = spip_fetch_array($res)) {
 				if ($row['statut'] == '5poubelle')
 					$erreur = _T('pass_erreur_acces_refuse');
 				else {
 					$cookie = creer_uniqid();
-					spip_query("UPDATE spip_auteurs SET cookie_oubli = '$cookie' WHERE email ='$email'");
+					spip_query("UPDATE spip_auteurs SET cookie_oubli = "._q($cookie)." WHERE email ="._q($email));
 	
 					$nom_site_spip = lire_meta("nom_site");
 					$adresse_site = lire_meta("adresse_site");
@@ -186,8 +185,7 @@ function formulaire_inscription($type,$acces_membres,$formulaire) {
 	}
 		
 if ($mail_valide && $nom_inscription_) {
-$query = "SELECT * FROM spip_auteurs WHERE email='".addslashes($mail_inscription_)."'";
-$result = spip_query($query);
+$result = spip_query("SELECT * FROM spip_auteurs WHERE email="._q($mail_inscription_));
 
 //echo "<div class='reponse_formulaire'>";
 
@@ -201,13 +199,13 @@ $result = spip_query($query);
 			if ($statut == '5poubelle') {
 				$reponse_formulaire = _T('form_forum_access_refuse');
 			}elseif ($statut == 'nouveau') {
-				spip_query ("DELETE FROM spip_auteurs WHERE id_auteur=$id_auteur");
+				spip_query ("DELETE FROM spip_auteurs WHERE id_auteur="._q($id_auteur));
 				$continue = true;
 			}else{
         	// envoyer le cookie de relance modif abonnement
 
         	$cookie = creer_uniqid();
-        	spip_query("UPDATE spip_auteurs SET cookie_oubli = '$cookie' WHERE email ='$mail_inscription_'");
+        	spip_query("UPDATE spip_auteurs SET cookie_oubli = "._q($cookie)." WHERE email ="._q($mail_inscription_));
 
         	$message = _T('spiplistes:abonnement_mail_passcookie', array('nom_site_spip' => $nomsite, 'adresse_site' => $urlsite, 'cookie' => $cookie));
 				if (envoyer_mail($mail_inscription_, "[$nomsite] "._T('spiplistes:abonnement_titre_mail'), $message)){
@@ -241,14 +239,12 @@ if($type_abo!="non" && $type_abo!="texte" && $type_abo!="html") return;
 			
 $extras = bloog_extra_recup_saisie('auteurs');
 
-$query = "INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, extra, cookie_oubli) ".
-				"VALUES ('".addslashes($nom_inscription_)."', '".addslashes($mail_inscription_)."', '$login_', '$mdpass', '$statut', '$htpass', '$extras', '$cookie')";
-$result = spip_query($query);
+$result = spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, extra, cookie_oubli) ".
+				"VALUES ("._q($nom_inscription_).", "._q($mail_inscription_).","._q($login_).","._q($mdpass).","._q($statut).","._q($htpass).","._q($extras).","._q($cookie).")");
 			
 // abonnement aux listes http://www.phpfrance.com/tutorials/index.php?page=2&id=13
 
-$query = "SELECT * FROM spip_auteurs WHERE email='".addslashes($mail_inscription_)."'";
-$result = spip_query($query);
+$result = spip_query("SELECT * FROM spip_auteurs WHERE email="._q($mail_inscription_));
 
 	// l'abonne existe deja.
 	 if ($row = spip_fetch_array($result)) {
@@ -258,10 +254,8 @@ $result = spip_query($query);
 	 // on abonne l'auteur aux listes
 	     if(is_array($list)){
 			 while( list(,$val) = each($list) ){
-			 $query="DELETE FROM spip_abonnes_listes WHERE id_auteur='$id_auteur' AND id_liste='$val'";
-			 $result=spip_query($query);
-			 $query="INSERT INTO spip_abonnes_listes (id_auteur,id_liste) VALUES ('$id_auteur','$val')";
-			 $result=spip_query($query);
+				$result=spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur="._q($id_auteur)." AND id_liste="._q($val));
+				$result=spip_query("INSERT INTO spip_auteurs_listes (id_auteur,id_liste) VALUES ("._q($id_auteur).","._q($val).")");
 			 }
 		 }
 	 }
@@ -282,8 +276,7 @@ $result = spip_query($query);
       	}else if($type_abo=="texte" || $type_abo=="html")  {
 
         //SELECT des listes de l'abonne		
-		$query = "SELECT * FROM spip_abonnes_listes AS abonnements, spip_listes AS listes WHERE abonnements.id_auteur='$id_auteur' AND abonnements.id_liste=listes.id_liste AND listes.statut='liste'";
-		$result_list = spip_query($query);
+		$result_list = spip_query("SELECT * FROM spip_auteurs_listes AS abonnements, spip_listes AS listes WHERE abonnements.id_auteur="._q($id_auteur)." AND abonnements.id_liste=listes.id_liste AND listes.statut='liste'");
 
 				//lister les listes
        			 $message_list = '' ;
@@ -291,8 +284,7 @@ $result = spip_query($query);
 
 		        while($row = spip_fetch_array($result_list)) {			
 				  $id_liste = $row['id_liste'] ;	
-				  $query = "SELECT * FROM spip_listes WHERE id_liste=$id_liste";
-				  $result = spip_query($query);
+				  $result = spip_query("SELECT * FROM spip_listes WHERE id_liste="._q($id_liste));
 		          $row = spip_fetch_array($result);
 		          $titre = $row['titre'] ;
 		          $message_list .= "\n- ".$titre ;
@@ -374,8 +366,7 @@ function test_login2($mail) {
 	for ($i = 0; ; $i++) {
 		if ($i) $login = $login_base.$i;
 		else $login = $login_base;
-		$query = "SELECT id_auteur FROM spip_auteurs WHERE login='$login'";
-		$result = spip_query($query);
+		$result = spip_query("SELECT id_auteur FROM spip_auteurs WHERE login="._q($login));
 		if (!spip_num_rows($result)) break;
 	}
 

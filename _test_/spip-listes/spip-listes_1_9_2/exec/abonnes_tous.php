@@ -62,10 +62,10 @@ function exec_abonnes_tous(){
 	
 	spiplistes_cherche_auteur();
 	
-	$result_pile = spip_query("SELECT * FROM spip_listes AS listes LEFT JOIN spip_abonnes_listes AS abonnements USING (id_liste) WHERE listes.statut='liste'");
+	$result_pile = spip_query("SELECT * FROM spip_listes AS listes LEFT JOIN spip_auteurs_listes AS abonnements USING (id_liste) WHERE listes.statut='liste'");
 	$nb_abonnes = spip_num_rows($result_pile);
 	
-	$result_pile = spip_query("SELECT * FROM spip_listes AS listes LEFT JOIN spip_abonnes_listes AS abonnements USING (id_liste) WHERE listes.statut='inact'");
+	$result_pile = spip_query("SELECT * FROM spip_listes AS listes LEFT JOIN spip_auteurs_listes AS abonnements USING (id_liste) WHERE listes.statut='inact'");
 	$nb_abonnes_int = spip_num_rows($result_pile);
 	
 	$result = spip_query("SELECT id_auteur, nom, extra FROM spip_auteurs");
@@ -87,7 +87,7 @@ function exec_abonnes_tous(){
 	}
 	
 	$abonnes = spip_query("select a.id_auteur, count(d.id_liste) from spip_auteurs a  
-	      left join spip_abonnes_listes d on a.id_auteur =  
+	      left join spip_auteurs_listes d on a.id_auteur =  
 	          d.id_auteur group by a.id_auteur having count(d.id_liste) = 0;"); 
 
 	$nb_abonnes_auc = spip_num_rows($abonnes);
@@ -171,7 +171,7 @@ function exec_abonnes_tous(){
 		count(lien.id_liste) as compteur
 		$sql_sel
 		FROM spip_auteurs as aut
-		LEFT JOIN spip_abonnes_listes AS lien ON aut.id_auteur=lien.id_auteur
+		LEFT JOIN spip_auteurs_listes AS lien ON aut.id_auteur=lien.id_auteur
 		LEFT JOIN spip_listes AS art ON (lien.id_liste = art.id_liste)
 		WHERE
 		$sql_visible

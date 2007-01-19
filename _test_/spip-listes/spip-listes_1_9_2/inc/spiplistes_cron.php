@@ -31,8 +31,6 @@ include_spip ('inc/affichage');
 $nomsite=lire_meta("nom_site");
 $urlsite=lire_meta("adresse_site");
 
-global $table_prefix;
-
 // ---------------------------------------------------------------------------------------------
 // Taches de fond
 
@@ -69,7 +67,7 @@ while($row = spip_fetch_array($list_bg)) {
 		$lang_bg = $row["lang"];
 		spip_log('->'.$lang_bg);
 		//Maj de la date d'envoi
-		spip_query("UPDATE ".$table_prefix."_listes SET maj=NOW() WHERE id_liste='$id_liste_bg'"); 
+		spip_query("UPDATE spip_listes SET maj=NOW() WHERE id_liste="._q($id_liste_bg)); 
 
 	
 		// preparation mail
@@ -82,7 +80,7 @@ while($row = spip_fetch_array($list_bg)) {
 	 	//$texte_patron_bg = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;		
 		
 		$titre_patron_bg = ($titre_message =="") ? $titre_bg." de ".$nomsite : $titre_message;
-		$titre_bg = addslashes($titre_patron_bg);
+		$titre_bg = $titre_patron_bg;
 		
 		spip_log("Message choppe->$titre".$titre_bg);
 
@@ -92,16 +90,14 @@ while($row = spip_fetch_array($list_bg)) {
 
 		if ( $taille > 10 ) {
 
-				$texte_patron_bg = addslashes($texte_patron_bg);
-				//echo "->$texte_patron_bg" ; 
+				$texte_patron_bg = $texte_patron_bg;
 				// si un mail a pu etre genere, on l'ajoute a la pile d'envoi
 				$type_bg = 'auto';
 				$statut_bg = 'encour';
 				
 				// creer le courrier
-				$query = "INSERT INTO spip_courriers (titre, texte, date, statut, type, id_auteur, id_liste) 
-					VALUES ('$titre_bg', '$texte_patron_bg', NOW(), '$statut_bg', '$type_bg', '1','$id_liste_bg')";
-				$result = spip_query($query);
+				$result = spip_query("INSERT INTO spip_courriers (titre, texte, date, statut, type, id_auteur, id_liste) 
+					VALUES ("._q($titre_bg).","._q($texte_patron_bg).", NOW(),"._q($statut_bg).","._q($type_bg).", '1',"._q($id_liste_bg).")");
 				
 				$id_message_bg = spip_insert_id();
 				
@@ -114,9 +110,10 @@ while($row = spip_fetch_array($list_bg)) {
 				$type_bg = 'auto';
 				$statut_bg = 'publie';
 
-				$query = "INSERT INTO spip_courriers (titre, texte, date, statut, type, id_auteur, id_liste) 
-				VALUES ('Pas d\'envoi', 'aucune nouveaut&eacute;, le mail automatique n\'a pas &eacute;t&eacute; envoy&eacute;' , NOW(), '$statut_bg', '$type_bg', '1' ,'$id_liste_bg' )";
-				$result = spip_query($query);
+				$result = spip_query("INSERT INTO spip_courriers (titre, texte, date, statut, type, id_auteur, id_liste) 
+				 VALUES ("._q(_L("Pas d'envoi"))
+				 .","._q(_L("aucune nouveaut&eacute;, le mail automatique n'a pas &eacute;t&eacute; envoy&eacute;"))
+				 .", NOW(),"._q($statut_bg).","._q($type_bg).", '1' ,"._q($id_liste_bg)." )");
 				$id_message_bg = spip_insert_id();
 		
 			} // y'a du neuf
@@ -127,10 +124,7 @@ while($row = spip_fetch_array($list_bg)) {
 /**************/
 
 // Envoi d'un mail automatique ?
-global $table_prefix;
-$query_message = "SELECT * FROM ".$table_prefix."_courriers AS messages WHERE statut='encour' ORDER BY date ASC LIMIT 0,1";
-
-$result_pile = spip_query($query_message);
+$result_pile = spip_query("SELECT * FROM spip_courriers AS messages WHERE statut='encour' ORDER BY date ASC LIMIT 0,1");
 $message_pile = spip_num_rows($result_pile);
 			
 if ($message_pile > 0) {

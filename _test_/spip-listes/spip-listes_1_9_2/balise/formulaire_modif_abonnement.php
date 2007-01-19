@@ -47,8 +47,7 @@ $formulaire = "formulaires/formulaire_modif_abonnement";
 	
 	 // revoir le test ?
 	if($champs_extra AND ($confirm == 'oui') ){
-		$d = addslashes($d);
-		$res = spip_query("SELECT * FROM spip_auteurs WHERE cookie_oubli='$d' AND statut<>'5poubelle' AND pass<>''");
+		$res = spip_query("SELECT * FROM spip_auteurs WHERE cookie_oubli="._q($d)." AND statut<>'5poubelle' AND pass<>''");
 	  if ($row = spip_fetch_array($res)) {
 	  	$id_auteur = $row['id_auteur'];
 			$statut = $row['statut'];
@@ -62,8 +61,7 @@ $formulaire = "formulaires/formulaire_modif_abonnement";
 			$listes = spip_query ("SELECT * FROM spip_listes WHERE statut = 'liste'");
 			while($row = spip_fetch_array($listes)) {
 				$id_liste = $row['id_liste'] ;
-				$query="DELETE FROM spip_abonnes_listes WHERE id_auteur='$id_auteur' AND id_liste='$id_liste'";
-				$result=spip_query($query);
+				$result=spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur="._q($id_auteur)." AND id_liste="._q($id_liste));
 			}
 	
 			if(is_array($list)){
@@ -71,8 +69,7 @@ $formulaire = "formulaires/formulaire_modif_abonnement";
 		 		// on abonne l'auteur aux listes choisies
 		 		while( list(,$val) = each($list) ){
 				
-		      $query="INSERT INTO spip_abonnes_listes (id_auteur,id_liste) VALUES ('$id_auteur','$val')";
-		      $result=spip_query($query);
+		      $result=spip_query("INSERT INTO spip_auteurs_listes (id_auteur,id_liste) VALUES ("._q($id_auteur).","._q($val).")");
 				
 		 		}
 			} else { $desabo="oui"; }
@@ -83,8 +80,8 @@ $formulaire = "formulaires/formulaire_modif_abonnement";
 		
 		  $extras = bloog_extra_recup_saisie('auteurs');
 		
-		  spip_query("UPDATE spip_auteurs SET extra = '$extras' WHERE cookie_oubli ='$d'");
-		  spip_query("UPDATE spip_auteurs SET cookie_oubli = '0' WHERE cookie_oubli ='$d'");
+		  spip_query("UPDATE spip_auteurs SET extra = "._q($extras)." WHERE cookie_oubli ="._q($d));
+		  spip_query("UPDATE spip_auteurs SET cookie_oubli = '0' WHERE cookie_oubli ="._q($d));
 		
 		  // affichage des modifs
 		
@@ -117,9 +114,9 @@ $formulaire = "formulaires/formulaire_modif_abonnement";
 	}
 	
 	// recuperer le cookie de relance désabonnement, et afficher le formulaire de modif
-	if ($d = addslashes($d) AND ($confirm != 'oui')) {
+	if ($d  AND ($confirm != 'oui')) {
 	
-		$res = spip_query ("SELECT * FROM spip_auteurs WHERE cookie_oubli='$d' AND statut<>'5poubelle' AND pass<>''");
+		$res = spip_query ("SELECT * FROM spip_auteurs WHERE cookie_oubli="._q($d)." AND statut<>'5poubelle' AND pass<>''");
 		if ($row = spip_fetch_array($res)) {
 			$formulaire_affiche = '1';
 	  	$id_auteur = $row['id_auteur'];
@@ -148,14 +145,13 @@ $formulaire = "formulaires/formulaire_modif_abonnement";
 	// envoyer le cookie de relance modif abonnement
 	if ($email_desabo) {
 		if (email_valide($email_desabo)) {
-			$email = addslashes($email_desabo);
-			$res = spip_query("SELECT * FROM spip_auteurs WHERE email ='$email'");
+			$res = spip_query("SELECT * FROM spip_auteurs WHERE email ="._q($email_desabo));
 			if ($row = spip_fetch_array($res)) {
 				if ($row['statut'] == '5poubelle')
 					$erreur = _T('pass_erreur_acces_refuse');
 				else {
 					$cookie = creer_uniqid();
-					spip_query("UPDATE spip_auteurs SET cookie_oubli = '$cookie' WHERE email ='$email'");
+					spip_query("UPDATE spip_auteurs SET cookie_oubli = "._q($cookie)." WHERE email ="._q($email));
 	
 					$message = _T('spiplistes:abonnement_mail_passcookie', array('nom_site_spip' => $nomsite, 'adresse_site' => $urlsite, 'cookie' => $cookie));
 					if (envoyer_mail($email, "[$nomsite] "._T('spiplistes:abonnement_titre_mail'), $message))

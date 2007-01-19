@@ -20,7 +20,7 @@
 /******************************************************************************************/
 
 
-	$GLOBALS['spiplistes_version'] = 1.92;
+	$GLOBALS['spiplistes_version'] = 1.93;
 	function spiplistes_verifier_base(){
 		$accepter_visiteurs = lire_meta('accepter_visiteurs');
 
@@ -57,8 +57,8 @@
 					echo "<h3>SPIP-listes va mettre a jour</h3>";
 					while ($row = spip_fetch_array($resultat_aff)) {
 						$id_article=$row['id_article'];
-						$titre_liste=addslashes(corriger_caracteres($row['titre']));
-						$texte_liste = addslashes(corriger_caracteres($row['texte']));
+						$titre_liste=corriger_caracteres($row['titre']);
+						$texte_liste = corriger_caracteres($row['texte']);
 						$date_liste = $row['date'];
 						$langue=$row["lang"];
 						$statut = $row['statut'];
@@ -85,14 +85,14 @@
 							  . ", message_auto="._q($message_auto)." WHERE id_liste="._q($id_liste));
 						
 						//Auteur de la liste (moderateur)
-						spip_query("DELETE FROM spip_auteurs_listes WHERE id_liste ="._q($id_liste));
-						spip_query("INSERT INTO spip_auteurs_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
+						spip_query("DELETE FROM spip_auteurs_mod_listes WHERE id_liste ="._q($id_liste));
+						spip_query("INSERT INTO spip_auteurs_mod_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
 						
 						//recuperer les abonnes (peut etre plus tard ?)
 						$abos=spip_query("SELECT id_auteur, id_article FROM spip_auteurs_articles WHERE id_article="._q($id_article));
 						while($abonnes=spip_fetch_array($abos)){
 							$abo=$abonnes["id_auteur"];
-							spip_query("INSERT INTO spip_abonnes_listes (id_auteur, id_liste) VALUES ("._q($abo).","._q($id_liste).")");
+							spip_query("INSERT INTO spip_auteurs_listes (id_auteur, id_liste) VALUES ("._q($abo).","._q($id_liste).")");
 						}
 						
 						//effacer les anciens articles/abo
@@ -110,6 +110,13 @@
 				spip_query("ALTER TABLE spip_listes ADD pied_page longblob NOT NULL;");
 				ecrire_meta('spiplistes_version', $current_version=1.92);
 			}
+			if ($current_version<1.93){
+				echo "<br /> Maj 1.93<br />";
+				spip_query("ALTER TABLE spip_auteurs_listes RENAME spip_auteurs_mod_listes;");
+				spip_query("ALTER TABLE spip_abonnes_listes RENAME spip_auteurs_listes;");
+				spip_query("ALTER TABLE spip_abonnes_courriers RENAME spip_auteurs_courriers;");
+				ecrire_meta('spiplistes_version', $current_version=1.92);
+			}
 			ecrire_metas();
 		}
 	}
@@ -120,9 +127,9 @@
 		// suppression du champ evenements a la table spip_groupe_mots
 		spip_query("DROP TABLE spip_courriers");
 		spip_query("DROP TABLE spip_listes");
-		spip_query("DROP TABLE spip_abonnes_courriers");
-		spip_query("DROP TABLE spip_abonnes_listes");
+		spip_query("DROP TABLE spip_auteurs_courriers");
 		spip_query("DROP TABLE spip_auteurs_listes");
+		spip_query("DROP TABLE spip_auteurs_mod_listes");
 		effacer_meta('spiplistes_version');
 		ecrire_metas();
 	}

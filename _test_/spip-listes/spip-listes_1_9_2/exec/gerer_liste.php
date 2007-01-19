@@ -28,7 +28,7 @@ include_spip('inc/affichage');
 include_spip('base/spip-listes');
 
 
-function exec_gerer_liste(){
+function exec_listes_dist(){
 
 	global $connect_statut;
 	global $connect_toutes_rubriques;
@@ -91,11 +91,11 @@ function exec_gerer_liste(){
 			spip_query("INSERT INTO spip_listes (statut, date, lang) VALUES ('inact', NOW(),"._q($langue_new).")");
 			$id_liste = spip_insert_id();
 			//Auteur de la liste (moderateur)
-			spip_query("DELETE FROM spip_auteurs_listes WHERE id_liste = "._q($id_liste));
-			spip_query("INSERT INTO spip_auteurs_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
+			spip_query("DELETE FROM spip_auteurs_mod_listes WHERE id_liste = "._q($id_liste));
+			spip_query("INSERT INTO spip_auteurs_mod_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
 			//abonner le moderateur a sa liste
-			spip_query("DELETE FROM spip_abonnes_listes WHERE id_liste = "._q($id_liste).")");
-			spip_query("INSERT INTO spip_abonnes_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
+			spip_query("DELETE FROM spip_auteurs_listes WHERE id_liste = "._q($id_liste).")");
+			spip_query("INSERT INTO spip_auteurs_listes (id_auteur, id_liste) VALUES ("._q($connect_id_auteur).","._q($id_liste).")");
 		} 
 	}
 
@@ -127,7 +127,7 @@ function exec_gerer_liste(){
 		$statut_article = '';
 	}
 
-	$result_auteur = spip_query("SELECT * FROM spip_auteurs_listes WHERE id_liste="._q($id_liste)." AND id_auteur="._q($connect_id_auteur));
+	$result_auteur = spip_query("SELECT * FROM spip_auteurs_mod_listes WHERE id_liste="._q($id_liste)." AND id_auteur="._q($connect_id_auteur));
 
 	//
 	// Droits mieux structure que ca ?
@@ -192,8 +192,7 @@ function exec_gerer_liste(){
 		if($auto == "oui"){
 			$result = spip_query("UPDATE spip_listes SET message_auto='oui' WHERE id_liste="._q($id_liste));
 			if($maj=="0000-00-00 00:00:00"){
-				$query = "UPDATE spip_listes SET maj=NOW() WHERE id_liste="._q($id_liste);
-				$result = spip_query($query);
+				$result = spip_query("UPDATE spip_listes SET maj=NOW() WHERE id_liste="._q($id_liste));
 			}
 		}
 		elseif ($auto == "non"){
@@ -289,8 +288,8 @@ function exec_gerer_liste(){
 
 	if ($connect_statut == '0minirezo' ) {
 		echo debut_cadre_relief("racine-site-24.gif");
-		echo "<form action='".generer_url_ecrire('gerer_liste',"id_liste=$id_liste")."' method='get'>";
-		echo "<input type='hidden' name='exec' value='gerer_liste' />";
+		echo "<form action='".generer_url_ecrire('listes',"id_liste=$id_liste")."' method='get'>";
+		echo "<input type='hidden' name='exec' value='listes' />";
 		echo "<input type='hidden' name='id_liste' value='$id_liste' />";
 
 		echo "<b>"._T('spiplistes:Cette_liste_est').": </b> ";
@@ -323,7 +322,7 @@ function exec_gerer_liste(){
 		echo "</div>";
 		
 		//regler email d'envoi de la liste
-		echo "<form action='".generer_url_ecrire('gerer_liste',"id_liste=$id_liste")."' method='post'>";
+		echo "<form action='".generer_url_ecrire('listes',"id_liste=$id_liste")."' method='post'>";
 				
 		$email_defaut = entites_html(lire_meta("email_webmaster"));
 		$email_envoi = (email_valide($email_envoi)) ? $email_envoi : $email_defaut ;
@@ -346,7 +345,7 @@ function exec_gerer_liste(){
 	}
 
 	echo debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES."img_pack/stock_timer.gif");
-	echo "<form action='".generer_url_ecrire('gerer_liste',"id_liste=$id_liste")."' method='post'>";
+	echo "<form action='".generer_url_ecrire('listes',"id_liste=$id_liste")."' method='post'>";
 	 
 	// programmer un courrier automatique
 	echo "<h3>"._T('spiplistes:program')."</h3>";
@@ -453,9 +452,7 @@ function exec_gerer_liste(){
 	// Creer un nouvel abonne et l'ajouter
 	
 	if ($creer_auteur AND $connect_statut=='0minirezo'){
-		$creer_auteur = addslashes($creer_auteur);
-		$query_creer = "INSERT INTO spip_auteurs (nom, statut) VALUES (\"$creer_auteur\", '1comite')";
-		$result_creer = spip_query($query_creer);
+		$result_creer = spip_query("INSERT INTO spip_auteurs (nom, statut) VALUES ("._q($creer_auteur).", '1comite')");
 	
 		$nouv_auteur = spip_insert_id();
 		$ajout_auteur = true;
@@ -483,10 +480,10 @@ function exec_gerer_liste(){
 	//
 
 	
-	$query = "SELECT * FROM spip_auteurs AS auteurs, spip_abonnes_listes AS lien ".
+	$query = "SELECT * FROM spip_auteurs AS auteurs, spip_auteurs_listes AS lien ".
 		"WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_liste="._q($id_liste).
 		"GROUP BY auteurs.id_auteur ORDER BY auteurs.nom";
-	$les_auteurs = spiplistes_afficher_auteurs($query, ancre_url(generer_url_ecrire('gerer_liste',"id_liste=$id_liste"),'auteurs'));
+	$les_auteurs = spiplistes_afficher_auteurs($query, ancre_url(generer_url_ecrire('listes',"id_liste=$id_liste"),'auteurs'));
 
 	//
 	// Ajouter un auteur
@@ -506,7 +503,7 @@ function exec_gerer_liste(){
 		if (spip_num_rows($result) > 0) {
 			
 			if (spip_num_rows($result) > 80 ) {
-				echo "<form action='".generer_url_ecrire('gerer_liste',"id_liste=$id_liste")."#auteurs' method='post'>";
+				echo "<form action='".generer_url_ecrire('listes',"id_liste=$id_liste")."#auteurs' method='post'>";
 				echo "<span class='verdana1'><b>"._T('spiplistes:abon_ajouter')."</b></span>\n";
 				echo "<div><input type='hidden' name='id_liste' value=\"$id_liste\" />";
 				echo "<input type='text' name='cherche_auteur' onclick=\"setvisibility('valider_ajouter_auteur','visible');\" class='fondl' value='' size='20' />";
@@ -515,7 +512,7 @@ function exec_gerer_liste(){
 				echo "</span>";
 			}
 			else {
-				$retour = ancre_url(generer_url_ecrire('gerer_liste',"id_liste=$id_liste"),'auteurs');
+				$retour = ancre_url(generer_url_ecrire('listes',"id_liste=$id_liste"),'auteurs');
 				$action = generer_action_auteur('spiplistes_changer_statut_abonne', "0-listeabo-$id_liste", $retour);
 				echo "<form action='$action' method='post'>";
 				echo "<span class='verdana1'><b>"._T('spiplistes:abon_ajouter')."</b></span>\n";
