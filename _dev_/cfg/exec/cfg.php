@@ -68,7 +68,7 @@ class cfg
 // recuperer les valeurs, utilise la fonction commune lire_cfg() de cfg_options.php
 	function lire()
 	{
-    	$this->val = lire_cfg($this->nom_config());
+    	$this->val = lire_config($this->nom_config());
     	if ($this->cfg_id) {
     		$cles = explode('/', $this->cfg_id);
 			foreach ($this->champs_id as $i => $name) {
@@ -97,7 +97,7 @@ class cfg
 // modifier le fragment qui peut etre tout le meta
 	function modifier($supprimer = false)
 	{
-    	($base = lire_cfg($this->nom)) || ($base = array());
+    	($base = lire_config($this->nom)) || ($base = array());
     	$ici = &$base;
     	$this->_report = array();
     	$ici = &$this->monte_arbre($ici, $this->casier);
@@ -276,7 +276,7 @@ class cfg
 <input type="hidden" name="cfg" value="' . $lien . '" />
 <p><label for="' . $lien . '_">' . _T('cfg:nouveau') . '</label>
 <input type="image" id="' . $lien . '_" name="nouveau" value="1" src="../dist/images/creer.gif" style="vertical-align: text-top;"/></p>';
-		if (($exi = lire_cfg($lien))) {
+		if (($exi = lire_config($lien))) {
 			foreach ($exi as $compte => $info) {
 				$dedans .= '
 <p><label for="' . $lien . '_' . $compte . '">' . $compte . '</label>

@@ -11,23 +11,12 @@
 // xxx etant un tableau serialise dans spip_meta comme avec exec=cfg&cfg=montruc
 // Le 2eme argument de la balise est la valeur defaut comme pour la dist
 //
-// La balise appelle celle de la dist si pas de /
-//
-function extrait($sou, $cfg = '')
-{
-	$cfg = explode('/', $cfg);
-	$ret = $cfg[0] ? unserialize(is_array($sou) ? $sou[$cfg[0]] : $sou) : $sou;
-//var_dump($sou);var_dump($cfg);var_dump($ret);die();
-	for ($i = is_array($sou) ? 1 : 0; $ret && $i < count($cfg) && $cfg[$i] !== ''; ++$i) {
-		$ret = is_array($ret) ? (is_numeric($cfg[$i]) ? $ret[0 + $cfg[$i]] : $ret[$cfg[$i]]) : '';
-	}
-	return $ret;
-}
-function balise_CONFIG($p)
-{
-	$arg = interprete_argument_balise(1,$p);
+function balise_CONFIG($p) {
+	if (!$arg = interprete_argument_balise(1,$p)) $arg="''";
 	$sinon = interprete_argument_balise(2,$p);
-	$p->code = 'cfg_meta(' . $arg . ($sinon ? ",$sinon)" : ')');
+	$p->code = 'lire_config(' . $arg . ',1)';
+	if ($sinon AND $sinon != "''")
+		$p->code = 'sinon(' . $p->code .','.$sinon.')';
 	return $p;
 }
 
@@ -35,25 +24,25 @@ function balise_CONFIG($p)
 // $cfg: la config, lire_cfg('montruc') est un tableau
 // lire_cfg('montruc/sub') est l'element "sub" de cette config
 // $def: un defaut optionnel
+function lire_config($cfg='', $serialize=false) {
+	$config = $GLOBALS['meta'];
+	$cfg = explode('/', $cfg);
 
-function lire_cfg($cfg = '', $def = NULL)
-{
-	return cfg_meta($cfg . '/', $def);
-}
-
-function cfg_meta($cfg = '', $def = NULL)
-{
-	include_spip('inc/meta');
-	lire_metas();
-	global $meta;
-	$ret = '';
-	if (!$cfg) {
-		$ret = serialize($meta);
-	} elseif (strpos($cfg, '/') === false) {
-		$ret = $meta[$cfg];
-	} else {
-		$ret = extrait($meta, $cfg);
+	while ($x = array_shift($cfg)) {
+		if (is_string($config) && is_array($c = @unserialize($config)))
+			$config = $c[$x];
+		else
+			$config = $config[$x];
 	}
-	return !$ret && $def ? $def : $ret;
+
+	// transcodage vers le mode serialize
+	if ($serialize && is_array($config))
+		return serialize($config);
+	// transcodage vers le mode non serialize
+	if (!$serialize && ($c = @unserialize($config)))
+		return $c;
+	// pas de transcodage
+	return $config;
 }
+
 ?>
