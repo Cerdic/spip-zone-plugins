@@ -12,32 +12,43 @@ $GLOBALS['meta'] = array(
 	'serie' => serialize($assoc)
 );
 
-$sans = array(
-	'' => $GLOBALS['meta'],
-	'/' => $GLOBALS['meta'],
-	'//' => $GLOBALS['meta'],
-	'chaine' => 'une chaine',
-	'chaine/' => 'une chaine',
-	'chaine//' => 'une chaine',
-	'assoc' => $assoc,
-	'assoc/two' => 'element 2',
-	'assoc/pasla' => null,
-	'serie' => $assoc,
-	'serie/two' => 'element 2',
-	'serie/pasla' => null,
-	'la/testid/' => null,
-	'pasla' => null,
-	'la/pasla' => null
+$essais = array(
+	array('' , $GLOBALS['meta']),
+	array('/' , $GLOBALS['meta']),
+	array('//' , $GLOBALS['meta']),
+	array('chaine' , 'une chaine'),
+	array('chaine/' , 'une chaine'),
+	array('chaine//' , 'une chaine'),
+	array('assoc' , $assoc),
+	array('assoc/two' , 'element 2'),
+	array('assoc/pasla' , null),
+	array('serie' , $assoc),
+	array('serie/two' , 'element 2'),
+	array('serie/pasla' , null),
+	array('la/testid/' , null),
+	array('pasla' , null),
+	array('la/pasla' , null)
 );
 $ok = true;
 $rsans = array();
 $err = array();
-foreach ($sans as $arg => $res) {
-	$rsans[$arg] = lire_config($arg);
-	if ($rsans[$arg] === $res) {
+$fun = 'lire_config';
+foreach ($essais as $i => $spec) {
+	if (!is_array($spec[0])) {
+		$spec[0] = array($spec[0]);
+	}
+	switch (count($spec[0])) {
+		case 0:
+			$rsans[$i] = $fun();
+		break;
+		case 1:
+			$rsans[$i] = $fun($spec[0][0]);
+		break;
+	}
+	if ($rsans[$i] === $spec[1]) {
 		continue;
 	}
-	$err[] = print_r($rsans[$arg], true) . ' attendu: ' . print_r($res, true);
+	$err[] = print_r($rsans[$i], true) . ' attendu: ' . print_r($spec[1], true);
 }
 echo $err ? 'Echec:<br />' . join('<br />', $err) : 'OK';
 if ($_GET['dump']) {
