@@ -9,36 +9,7 @@ include_spip('inc/calendar');
 include_spip('agenda_mes_fonctions');
 
 function article_editable($id_article){
-	$flag_editable = false;
-	global $connect_id_auteur, $id_secteur; 
-
- 	$id_parent = intval($id_parent);
- 	if (!($id_article=intval($id_article)))
- 		return false;
-
-	if ($row = spip_fetch_array(spip_query("SELECT statut, titre, id_rubrique FROM spip_articles WHERE id_article="._q($id_article)))) {
-		$statut_article = $row['statut'];
-		$titre_article = $row['titre'];
-		$id_rubrique = $row['id_rubrique'];
-		$statut_rubrique = acces_rubrique($id_rubrique);
-		if ($titre_article=='') $titre_article = _T('info_sans_titre');
-	}
-	else {
-		$statut_article = '';
-		$statut_rubrique = false;
-		$id_rubrique = '0';
-		if ($titre=='') $titre = _T('info_sans_titre');
-	}
-
-	$flag_auteur = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article="._q($id_article)." AND id_auteur="._q($connect_id_auteur)." LIMIT 1"));
-
-	$ok_nouveau_statut = false;
-	$flag_editable = ($statut_rubrique
-		OR ($flag_auteur
-			AND ($statut_article == 'prepa'
-				OR $statut_article == 'prop' 
-				OR $statut_article == 'poubelle')));
-	return $flag_editable;
+	return autoriser('modifier','article',$id_article);
 }
 
 function Agenda_afficher_date_evenement($date_debut, $date_fin, $horaire){
