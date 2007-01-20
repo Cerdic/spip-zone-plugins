@@ -12,11 +12,12 @@
 // Le 2eme argument de la balise est la valeur defaut comme pour la dist
 //
 function balise_CONFIG($p) {
-	if (!$arg = interprete_argument_balise(1,$p)) $arg="''";
+	if (!$arg = interprete_argument_balise(1,$p)) {
+		$arg = "''";
+	}
 	$sinon = interprete_argument_balise(2,$p);
-	$p->code = 'lire_config(' . $arg . ',1)';
-	if ($sinon AND $sinon != "''")
-		$p->code = 'sinon(' . $p->code .','.$sinon.')';
+	$p->code = 'lire_config(' . $arg . ',' . 
+		($sinon && $sinon != "''" ? $sinon : 'null') . ',1)';
 	return $p;
 }
 
@@ -24,25 +25,29 @@ function balise_CONFIG($p) {
 // $cfg: la config, lire_cfg('montruc') est un tableau
 // lire_cfg('montruc/sub') est l'element "sub" de cette config
 // $def: un defaut optionnel
-function lire_config($cfg='', $serialize=false) {
+function lire_config($cfg='', $def=null, $serialize=false) {
 	$config = $GLOBALS['meta'];
 	$cfg = explode('/', $cfg);
 
 	while ($x = array_shift($cfg)) {
-		if (is_string($config) && is_array($c = @unserialize($config)))
+		if (is_string($config) && is_array($c = @unserialize($config))) {
 			$config = $c[$x];
-		else
+		} else {
 			$config = $config[$x];
+		}
 	}
 
 	// transcodage vers le mode serialize
-	if ($serialize && is_array($config))
-		return serialize($config);
+	if ($serialize && is_array($config)) {
+		$ret = serialize($config);
+	} elseif (!$serialize && ($c = @unserialize($config))) {
 	// transcodage vers le mode non serialize
-	if (!$serialize && ($c = @unserialize($config)))
-		return $c;
+		$ret = $c;
+	} else {
 	// pas de transcodage
-	return $config;
+		$ret = $config;
+	}
+	return !$ret && $def ? $def : $ret;
 }
 
 ?>
