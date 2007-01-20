@@ -15,32 +15,26 @@ $GLOBALS['meta'] = array(
 $sermeta = serialize($GLOBALS['meta']);
 $essais = array(
 // presents
-	array(array(), $GLOBALS['meta'], $sermeta),
-	array('' , $GLOBALS['meta'], $sermeta),
-	array('/' , $GLOBALS['meta'], $sermeta),
-	array('//' , $GLOBALS['meta'], $sermeta),
+	array(array(), $GLOBALS['meta'], $GLOBALS['meta'], $sermeta),
+	array('' , $GLOBALS['meta'], $GLOBALS['meta'], $sermeta),
+	array('/' , $GLOBALS['meta'], $GLOBALS['meta'], $sermeta),
+	array('//' , $GLOBALS['meta'], $GLOBALS['meta'], $sermeta),
 	array('chaine' , 'une chaine'),
 	array('chaine/' , 'une chaine'),
 	array('chaine//' , 'une chaine'),
-	array('assoc' , $assoc, $serassoc),
+	array('assoc' , $assoc, $assoc, $serassoc),
 	array('assoc/two' , 'element 2'),
-	array('serie' , $assoc, $serassoc),
+	array('serie' , $assoc, $assoc, $serassoc),
 	array('serie/two' , 'element 2'),
 // pas la
-	array('assoc/pasla' , null),
-	array('serie/pasla' , null),
-	array('la/testid/' , null),
-	array('pasla' , null),
-	array('la/pasla' , null),
-// pas la avec defaut	
-	array(array('assoc/pasla', 'defaut'), 'defaut'),
-	array(array('serie/pasla', 'defaut'), 'defaut'),
-	array(array('la/testid/', 'defaut'), 'defaut'),
-	array(array('pasla', 'defaut'), 'defaut'),
-	array(array('la/pasla', 'defaut'), 'defaut')
+	array('assoc/pasla', null, 'defaut'),
+	array('serie/pasla', null, 'defaut'),
+	array('la/testid/', null, 'defaut'),
+	array('pasla', null, 'defaut'),
+	array('la/pasla', null, 'defaut')
 );
 $ok = true;
-$rsans = array();
+$r1 = array();
 $err = array();
 $fun = 'lire_config';
 foreach ($essais as $i => $spec) {
@@ -49,31 +43,46 @@ foreach ($essais as $i => $spec) {
 	}
 	switch (count($spec[0])) {
 		case 0:
-			$rsans[$i] = $fun();
-			$ravec[$i] = $fun(null, null, true);
+			$r1[$i] = $fun();
+			$r2[$i] = $fun(null, 'defaut');
+			$r3[$i] = $fun(null, null, true);
 		break;
 		case 1:
-			$rsans[$i] = $fun($spec[0][0]);
-			$ravec[$i] = $fun($spec[0][0], null, true);
+			$r1[$i] = $fun($spec[0][0]);
+			$r2[$i] = $fun($spec[0][0], 'defaut');
+			$r3[$i] = $fun($spec[0][0], null, true);
 		break;
-		case 2:
-			$rsans[$i] = $fun($spec[0][0], $spec[0][1]);
-			$ravec[$i] = $fun($spec[0][0], $spec[0][1], true);
+/*		case 2:
+			$r1[$i] = $fun($spec[0][0], $spec[0][1]);
+			$r2[$i] = $fun($spec[0][0], $spec[0][1]);
+			$r3[$i] = $fun($spec[0][0], $spec[0][1], true);
 		break;
+*/
 	}
-	if ($rsans[$i] !== $spec[1]) {
-		$err[] = $i . ' sans (' . print_r($rsans[$i], true) .
+	if ($r1[$i] !== $spec[1]) {
+		$err[] = $i . ' 1 (' . print_r($r1[$i], true) .
 			') attendu (' . print_r($spec[1], true) . ')';
 	}
-	if (isset($spec[2])) {
-		$spec[1] = $spec[2];
+	if ($r2[$i] !== ($s = isset($spec[2]) ? $spec[2] : $spec[1])) {
+		$err[] = $i . ' 2 (' . print_r($r2[$i], true) .
+			') attendu (' . print_r($s, true) . ')';
 	}
-	if ($ravec[$i] !== $spec[1]) {
-		$err[] = $i . ' avec (' . print_r($ravec[$i], true) .
-			') attendu (' . print_r($spec[1], true) . ')';
+	if ($r3[$i] !== ($s = isset($spec[3]) ? $spec[3] : $spec[1])) {
+		$err[] = $i . ' 3 (' . print_r($r3[$i], true) .
+			') attendu (' . print_r($s, true) . ')';
 	}
 }
+
+function get_fond($contexte = array())
+{
+    include_spip('public/assembler');
+    return recuperer_fond('local/cache-tests/cfg-test', $contexte);
+}
+//echo get_fond();
+
 echo $err ? 'Echec:<ul><li>' . join('</li><li>', $err) . '</li></ul>' : 'OK';
 if ($_GET['dump']) {
-	echo "<div>\n" . print_r($rsans, true) . "</div>\n";
+	echo "<div>\n" . print_r($r1, true) . "</div>\n";
+	echo "<div>\n" . print_r($r2, true) . "</div>\n";
+	echo "<div>\n" . print_r($r3, true) . "</div>\n";
 }
