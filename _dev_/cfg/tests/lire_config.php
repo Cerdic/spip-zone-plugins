@@ -53,6 +53,9 @@ foreach ($essais as $i => $spec) {
 		case 1:
 			$rsans[$i] = $fun($spec[0][0]);
 		break;
+		case 2:
+			$rsans[$i] = $fun($spec[0][0], $spec[0][1]);
+		break;
 	}
 	if ($rsans[$i] === $spec[1]) {
 		continue;
