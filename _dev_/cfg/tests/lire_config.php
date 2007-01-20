@@ -34,7 +34,7 @@ $essais = array(
 	array('la/pasla', null, 'defaut')
 );
 $ok = true;
-$r1 = array();
+$r = array(null, array(), array(), array());
 $err = array();
 $fun = 'lire_config';
 foreach ($essais as $i => $spec) {
@@ -43,33 +43,27 @@ foreach ($essais as $i => $spec) {
 	}
 	switch (count($spec[0])) {
 		case 0:
-			$r1[$i] = $fun();
-			$r2[$i] = $fun(null, 'defaut');
-			$r3[$i] = $fun(null, null, true);
+			$r[1][$i] = $fun();
+			$r[2][$i] = $fun(null, 'defaut');
+			$r[3][$i] = $fun(null, null, true);
 		break;
 		case 1:
-			$r1[$i] = $fun($spec[0][0]);
-			$r2[$i] = $fun($spec[0][0], 'defaut');
-			$r3[$i] = $fun($spec[0][0], null, true);
+			$r[1][$i] = $fun($spec[0][0]);
+			$r[2][$i] = $fun($spec[0][0], 'defaut');
+			$r[3][$i] = $fun($spec[0][0], null, true);
 		break;
 /*		case 2:
-			$r1[$i] = $fun($spec[0][0], $spec[0][1]);
-			$r2[$i] = $fun($spec[0][0], $spec[0][1]);
-			$r3[$i] = $fun($spec[0][0], $spec[0][1], true);
+			$r[1][$i] = $fun($spec[0][0], $spec[0][1]);
+			$r[2][$i] = $fun($spec[0][0], $spec[0][1]);
+			$r[3][$i] = $fun($spec[0][0], $spec[0][1], true);
 		break;
 */
 	}
-	if ($r1[$i] !== $spec[1]) {
-		$err[] = $i . ' 1 (' . print_r($r1[$i], true) .
-			') attendu (' . print_r($spec[1], true) . ')';
-	}
-	if ($r2[$i] !== ($s = isset($spec[2]) ? $spec[2] : $spec[1])) {
-		$err[] = $i . ' 2 (' . print_r($r2[$i], true) .
-			') attendu (' . print_r($s, true) . ')';
-	}
-	if ($r3[$i] !== ($s = isset($spec[3]) ? $spec[3] : $spec[1])) {
-		$err[] = $i . ' 3 (' . print_r($r3[$i], true) .
-			') attendu (' . print_r($s, true) . ')';
+	for ($nbarg = 1; $nbarg < 4; ++$nbarg) {
+		if ($r[$nbarg][$i] !== ($s = isset($spec[$nbarg]) ? $spec[$nbarg] : $spec[1])) {
+			$err[] = $i . " $nbarg (" . print_r($r[$nbarg][$i], true) .
+				') attendu (' . print_r($s, true) . ')';
+		}
 	}
 }
 
@@ -82,7 +76,7 @@ function get_fond($contexte = array())
 
 echo $err ? 'Echec:<ul><li>' . join('</li><li>', $err) . '</li></ul>' : 'OK';
 if ($_GET['dump']) {
-	echo "<div>\n" . print_r($r1, true) . "</div>\n";
-	echo "<div>\n" . print_r($r2, true) . "</div>\n";
-	echo "<div>\n" . print_r($r3, true) . "</div>\n";
+	echo "<div>\n" . print_r($r[1], true) . "</div>\n";
+	echo "<div>\n" . print_r($r[2], true) . "</div>\n";
+	echo "<div>\n" . print_r($r[3], true) . "</div>\n";
 }
