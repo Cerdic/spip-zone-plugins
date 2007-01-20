@@ -13,6 +13,8 @@ $GLOBALS['meta'] = array(
 );
 
 $essais = array(
+// presents
+	array(array(), $GLOBALS['meta']),
 	array('' , $GLOBALS['meta']),
 	array('/' , $GLOBALS['meta']),
 	array('//' , $GLOBALS['meta']),
@@ -21,13 +23,20 @@ $essais = array(
 	array('chaine//' , 'une chaine'),
 	array('assoc' , $assoc),
 	array('assoc/two' , 'element 2'),
-	array('assoc/pasla' , null),
 	array('serie' , $assoc),
 	array('serie/two' , 'element 2'),
+// pas la
+	array('assoc/pasla' , null),
 	array('serie/pasla' , null),
 	array('la/testid/' , null),
 	array('pasla' , null),
-	array('la/pasla' , null)
+	array('la/pasla' , null),
+// pas la avec defaut	
+	array(array('assoc/pasla', 'defaut'), 'defaut'),
+	array(array('serie/pasla', 'defaut'), 'defaut'),
+	array(array('la/testid/', 'defaut'), 'defaut'),
+	array(array('pasla', 'defaut'), 'defaut'),
+	array(array('la/pasla', 'defaut'), 'defaut')
 );
 $ok = true;
 $rsans = array();
