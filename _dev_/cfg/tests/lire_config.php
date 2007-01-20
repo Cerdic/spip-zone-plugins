@@ -73,8 +73,7 @@ foreach ($essais as $i => $spec) {
 			') attendu (' . print_r($spec[1], true) . ')';
 	}
 }
-echo $err ? 'Echec:<br />' . join('<br />', $err) : 'OK';
+echo $err ? 'Echec:<ul><li>' . join('</li><li>', $err) . '</li></ul>' : 'OK';
 if ($_GET['dump']) {
-	print_r($rsans);
-	echo "<br />\n";
+	echo "<div>\n" . print_r($rsans, true) . "</div>\n";
 }
