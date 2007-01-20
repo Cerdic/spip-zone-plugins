@@ -39,7 +39,7 @@ $r = array(null, array(), array(), array());
 $s = array(1, '', '');
 $err = array();
 $fun = 'lire_config';
-$bal = '#CONFIG{';
+$bal = 'CONFIG';
 
 foreach ($essais as $i => $spec) {
 	if (!is_array($spec[0])) {
@@ -50,15 +50,15 @@ foreach ($essais as $i => $spec) {
 			$r[1][$i] = $fun();
 			$r[2][$i] = $fun(null, 'defaut');
 			$r[3][$i] = $fun(null, null, true);
-			$s[1] .= '(((' . $i . ')))' . $bal . "}\n";
-			$s[2] .= '(((' . $i . ')))' . $bal . "'',defaut" . "}\n";
+			$s[1] .= '<h4>' . $i . '</h4><div>#' . $bal . "</div>\n";
+			$s[2] .= '<h4>' . $i . '</h4><div>#' . $bal . "{'',defaut" . "}</div>\n";
 		break;
 		case 1:
 			$r[1][$i] = $fun($spec[0][0]);
 			$r[2][$i] = $fun($spec[0][0], 'defaut');
 			$r[3][$i] = $fun($spec[0][0], null, true);
-			$s[1] .= '(((' . $i . ')))' . $bal . $spec[0][0] . "}\n";
-			$s[2] .= '(((' . $i . ')))' . $bal . $spec[0][0] . ',defaut' . "}\n";
+			$s[1] .= '<h4>' . $i . '</h4><div>#' . $bal . '{' . $spec[0][0] . "}</div>\n";
+			$s[2] .= '<h4>' . $i . '</h4><div>#' . $bal . '{' . ($spec[0][0] ? $spec[0][0] : "''") . ',defaut' . "}</div>\n";
 		break;
 /*		case 2:
 			$r[1][$i] = $fun($spec[0][0], $spec[0][1]);
@@ -75,12 +75,22 @@ foreach ($essais as $i => $spec) {
 	}
 }
 
-function get_fond($contexte = array())
+function test_bal($bali, $skel, $contexte = array())
 {
-    include_spip('public/assembler');
-    return recuperer_fond('local/cache-tests/cfg-test', $contexte);
+	$dossier = sous_repertoire(_DIR_VAR, 'cache-tests');
+	$fichier = "$dossier$bali.html";
+
+	if (($handle = fopen($fichier, 'w'))) {
+		fwrite($handle, '[(#REM) ' . $bali . " ]\n" . $skel);
+		fclose($handle);
+	    include_spip('public/assembler');
+	$GLOBALS['meta']['chaine'] = 'une chaine';
+	$GLOBALS['meta']['assoc'] = $GLOBALS['assoc'];
+	$GLOBALS['meta']['serie'] = serialize($GLOBALS['assoc']);
+
+	    return recuperer_fond('local/cache-tests/' . $bali, $contexte);
+	}
 }
-//echo get_fond();
 
 echo $err ? 'Echec:<ul><li>' . join('</li><li>', $err) . '</li></ul>' : 'OK';
 if ($_GET['dump']) {
@@ -89,4 +99,8 @@ if ($_GET['dump']) {
 	echo "<div>\n" . print_r($r[3], true) . "</div>\n";
 	echo "<div>\n" . print_r($s[1], true) . "</div>\n";
 	echo "<div>\n" . print_r($s[2], true) . "</div>\n";
+
+	for ($i = 1; $i < 3; ++$i) {
+		echo test_bal($bal . $i, $s[$i]);
+	}
 }
