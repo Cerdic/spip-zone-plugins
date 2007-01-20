@@ -45,7 +45,7 @@ function exec_liste_edit(){
 	// Admin SPIP-Listes
 	echo debut_page("Spip listes", "redacteurs", "spiplistes");
 	
-	if ($connect_statut != "0minirezo" ) {
+	if (!autoriser('modifier','liste',$id_liste)) {
 		echo "<p><b>"._T('spiplistes:acces_a_la_page')."</b></p>";
 		echo fin_page();
 		exit;
@@ -73,7 +73,6 @@ function exec_liste_edit(){
 	
 	// securite
 	$id_liste = intval($id_liste);
-	$id_rubrique = intval($id_rubrique);
 	$lier_trad = intval($lier_trad);
 	unset ($flag_editable);
 	
@@ -98,7 +97,7 @@ function exec_liste_edit(){
 			$result_auteur = spip_query("SELECT * FROM spip_auteurs_listes WHERE id_liste="._q($id_liste)." AND id_auteur="._q($connect_id_auteur));
 			$flag_auteur = (spip_num_rows($result_auteur) > 0);
 	
-			$flag_editable = (acces_rubrique($id_rubrique) OR ($flag_auteur > 0 AND ($statut == 'prepa' OR $statut == 'prop' OR $new == 'oui')));
+			$flag_editable = autoriser('modifier','liste',$id_liste);
 		}
 	} 
 	elseif ($new=='oui') {
