@@ -200,10 +200,10 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 				$en_liste.= "<img src='"._DIR_IMG_PACK."puce-blanche.gif' alt='puce-blanche' border='0' style='margin: 1px;' />";
 				break;
 			case 'publie':
-				$en_liste.= "<img src='"._DIR_IMG_PACK."img_pack/puce-verte.gif' alt='puce-verte' border='0' style='margin: 1px;' />";
+				$en_liste.= "<img src='"._DIR_IMG_PACK."puce-verte.gif' alt='puce-verte' border='0' style='margin: 1px;' />";
 				break;
 			case 'envoi_en_cours':
-				$en_liste.= "<img src='"._DIR_IMG_PACK."img_pack/puce-orange.gif' alt='puce-orange' border='0' style='margin: 1px;' />";
+				$en_liste.= "<img src='"._DIR_IMG_PACK."puce-orange.gif' alt='puce-orange' border='0' style='margin: 1px;' />";
 				break;
 		}
 		$en_liste.= "</td>";
