@@ -22,7 +22,7 @@
  */
 
 /*
-    HTML Purifier 1.3.2 - Standards Compliant HTML Filtering
+    HTML Purifier 1.4.1 - Standards Compliant HTML Filtering
     Copyright (C) 2006 Edward Z. Yang
 
     This library is free software; you can redistribute it and/or
@@ -64,9 +64,10 @@ require_once 'HTMLPurifier/Encoder.php';
 class HTMLPurifier
 {
     
-    var $version = '1.3.2';
+    var $version = '1.4.1';
     
     var $config;
+    var $filters;
     
     var $lexer, $strategy, $generator;
     
@@ -91,8 +92,15 @@ class HTMLPurifier
         $this->lexer        = HTMLPurifier_Lexer::create();
         $this->strategy     = new HTMLPurifier_Strategy_Core();
         $this->generator    = new HTMLPurifier_Generator();
-        $this->encoder      = new HTMLPurifier_Encoder();
         
+    }
+    
+    /**
+     * Adds a filter to process the output. First come first serve
+     * @param $filter HTMLPurifier_Filter object
+     */
+    function addFilter($filter) {
+        $this->filters[] = $filter;
     }
     
     /**
@@ -109,8 +117,12 @@ class HTMLPurifier
         
         $config = $config ? HTMLPurifier_Config::create($config) : $this->config;
         
-        $context =& new HTMLPurifier_Context();
-        $html = $this->encoder->convertToUTF8($html, $config, $context);
+        $context = new HTMLPurifier_Context();
+        $html = HTMLPurifier_Encoder::convertToUTF8($html, $config, $context);
+        
+        for ($i = 0, $size = count($this->filters); $i < $size; $i++) {
+            $html = $this->filters[$i]->preFilter($html, $config, $context);
+        }
         
         // purified HTML
         $html = 
@@ -127,7 +139,11 @@ class HTMLPurifier
                 $config, $context
             );
         
-        $html = $this->encoder->convertFromUTF8($html, $config, $context);
+        for ($i = $size - 1; $i >= 0; $i--) {
+            $html = $this->filters[$i]->postFilter($html, $config, $context);
+        }
+        
+        $html = HTMLPurifier_Encoder::convertFromUTF8($html, $config, $context);
         $this->context =& $context;
         return $html;
     }
