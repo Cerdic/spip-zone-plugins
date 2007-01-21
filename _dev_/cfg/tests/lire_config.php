@@ -73,14 +73,19 @@ foreach ($essais as $i => $spec) {
 		break;
 */
 	}
+	$att = array(null);
 	for ($nbarg = 1; $nbarg < 4; ++$nbarg) {
-		if ($r[$nbarg][$i] !== ($res = isset($spec[$nbarg]) ? $spec[$nbarg] : $spec[1])) {
+		if ($r[$nbarg][$i] !== ($att[$nbarg] = isset($spec[$nbarg]) ? $spec[$nbarg] : $spec[1])) {
 			$err[] = $i . "({$essais[$i][0]}) $nbarg (" . print_r($r[$nbarg][$i], true) .
-				') attendu (' . print_r($res, true) . ')';
+				') attendu (' . print_r($att[$nbarg], true) . ')';
 		}
 	}
-	$s[1] .= '<dt>&#035;' . $tst1 . '</dt><dd>#' . $tst1 . "</dd>\n";
-	$s[2] .= '<dt>&#035;' . $tst2 . '</dt><dd>#' . $tst2 . "</dd>\n";
+	$s[1] .= '<dt>&#035;' . $tst1 . '</dt><dd>' .
+		(is_array($att[1]) ? serialize($att[1]) : $att[1]) .
+		'</dd><dd>#' . $tst1 . "</dd>\n";
+	$s[2] .= '<dt>&#035;' . $tst2 . '</dt><dd>' .
+		(is_array($att[2]) ? serialize($att[2]) : $att[2]) .
+		'</dd><dd>#' . $tst2 . "</dd>\n";
 }
 $s[1] .= '</dl>';
 $s[2] .= '</dl>';
@@ -98,15 +103,29 @@ function test_bal($bali, $skel, $contexte = array())
 	return '';
 }
 
-echo $err ? 'Echec:<ul><li>' . join('</li><li>', $err) . '</li></ul>' : 'OK';
+for ($i = 1; $i < 3; ++$i) {
+	$s[$i] = test_bal($bal . $i, $s[$i]);
+	$count = count($r[$i]);
+	if (preg_match_all(',<dt>([^<]*)</dt><dd>([^<]*)</dd><dd>([^<]*)</dd>,ms',
+			$s[$i], $matches, PREG_SET_ORDER)) {
+		foreach ($matches as $regs) {
+			--$count;
+			if ($regs[3] !== $regs[2]) {
+				$err[] = $regs[1] . ' attendu (' . $regs[2] . ') obtenu (' . $regs[3] . ')';
+			}
+		}
+	}
+	if ($count) {
+		$err[] = "#$bal avec $i arguments, difference dans le compte de tests: $count";
+	}
+}
+
+echo $err ? 'Echec:<ul><li>' . join("</li>\n<li>", $err) . "</li></ul>\n" : 'OK';
+
 if ($_GET['dump']) {
 	echo "<div>\n" . print_r($r[1], true) . "</div>\n";
 	echo "<div>\n" . print_r($r[2], true) . "</div>\n";
 	echo "<div>\n" . print_r($r[3], true) . "</div>\n";
-//	echo "<div>\n" . print_r($s[1], true) . "</div>\n";
-//	echo "<div>\n" . print_r($s[2], true) . "</div>\n";
-
-	for ($i = 1; $i < 3; ++$i) {
-		echo test_bal($bal . $i, $s[$i]);
-	}
+	echo "<div>\n" . print_r($s[1], true) . "</div>\n";
+	echo "<div>\n" . print_r($s[2], true) . "</div>\n";
 }
