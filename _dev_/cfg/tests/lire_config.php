@@ -39,7 +39,7 @@ $essais = array(
 );
 $ok = true;
 $r = array(null, array(), array(), array());
-$s = array(1, '', '');
+$s = array(null, '<dl>', '<dl>');
 $err = array();
 $fun = 'lire_config';
 $bal = 'CONFIG';
@@ -53,15 +53,15 @@ foreach ($essais as $i => $spec) {
 			$r[1][$i] = $fun();
 			$r[2][$i] = $fun(null, 'defaut');
 			$r[3][$i] = $fun(null, null, true);
-			$s[1] .= '<h4>' . $i . '</h4><div>#' . $bal . "</div>\n";
-			$s[2] .= '<h4>' . $i . '</h4><div>#' . $bal . "{'',defaut" . "}</div>\n";
+			$tst1 = $bal;
+			$tst2 = $bal . "{'',defaut}";
 		break;
 		case 1:
 			$r[1][$i] = $fun($spec[0][0]);
 			$r[2][$i] = $fun($spec[0][0], 'defaut');
 			$r[3][$i] = $fun($spec[0][0], null, true);
-			$s[1] .= '<h4>' . $i . '</h4><div>#' . $bal . '{' . $spec[0][0] . "}</div>\n";
-			$s[2] .= '<h4>' . $i . '</h4><div>#' . $bal . '{' . ($spec[0][0] ? $spec[0][0] : "''") . ',defaut' . "}</div>\n";
+			$tst1 = $bal . '{' . $spec[0][0] . '}';
+			$tst2 = $bal . '{' . ($spec[0][0] ? $spec[0][0] : "''") . ',defaut}';
 		break;
 /*		case 2:
 			$r[1][$i] = $fun($spec[0][0], $spec[0][1]);
@@ -76,7 +76,11 @@ foreach ($essais as $i => $spec) {
 				') attendu (' . print_r($res, true) . ')';
 		}
 	}
+	$s[1] .= '<dt>&#035;' . $tst1 . '</dt><dd>#' . $tst1 . "</dd>\n";
+	$s[2] .= '<dt>&#035;' . $tst2 . '</dt><dd>#' . $tst2 . "</dd>\n";
 }
+$s[1] .= '</dl>';
+$s[2] .= '</dl>';
 
 function test_bal($bali, $skel, $contexte = array())
 {
@@ -86,13 +90,9 @@ function test_bal($bali, $skel, $contexte = array())
 	if (($handle = fopen($fichier, 'w'))) {
 		fwrite($handle, '[(#REM) ' . $bali . " ]\n" . $skel);
 		fclose($handle);
-	    include_spip('public/assembler');
-	$GLOBALS['meta']['chaine'] = 'une chaine';
-	$GLOBALS['meta']['assoc'] = $GLOBALS['assoc'];
-	$GLOBALS['meta']['serie'] = serialize($GLOBALS['assoc']);
-
 	    return recuperer_fond('local/cache-tests/' . $bali, $contexte);
 	}
+	return '';
 }
 
 echo $err ? 'Echec:<ul><li>' . join('</li><li>', $err) . '</li></ul>' : 'OK';
@@ -100,8 +100,14 @@ if ($_GET['dump']) {
 	echo "<div>\n" . print_r($r[1], true) . "</div>\n";
 	echo "<div>\n" . print_r($r[2], true) . "</div>\n";
 	echo "<div>\n" . print_r($r[3], true) . "</div>\n";
-	echo "<div>\n" . print_r($s[1], true) . "</div>\n";
-	echo "<div>\n" . print_r($s[2], true) . "</div>\n";
+//	echo "<div>\n" . print_r($s[1], true) . "</div>\n";
+//	echo "<div>\n" . print_r($s[2], true) . "</div>\n";
+
+    include_spip('public/assembler');
+    recuperer_fond('local/cache-tests/cfg-test', array());
+	$GLOBALS['meta']['chaine'] = 'une chaine';
+	$GLOBALS['meta']['assoc'] = $GLOBALS['assoc'];
+	$GLOBALS['meta']['serie'] = serialize($GLOBALS['assoc']);
 
 	for ($i = 1; $i < 3; ++$i) {
 		echo test_bal($bal . $i, $s[$i]);
