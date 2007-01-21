@@ -1,7 +1,10 @@
 <?php
 
+// nom du test
 $test = 'cfg:lire_config';
-require '../../../tests/test.inc';
+
+// chemin vers test.inc
+require str_repeat('../',intval(@$_GET['b'])).'../tests/test.inc';
 
 include_spip('cfg_options');
 
