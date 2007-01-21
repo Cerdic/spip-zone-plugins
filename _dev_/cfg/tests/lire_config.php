@@ -3,16 +3,20 @@
 // nom du test
 $test = 'cfg:lire_config';
 
-// chemin vers test.inc, ici plugins/cfg/tests/
+// ici plugins/cfg/tests/, chemin vers test.inc qui nous ouvre au monde spip
 require '../../../tests/test.inc';
 
+// c'est ca qu'on teste
 include_spip('cfg_options');
 
+// pour recuperer_fond(), un premier tour à vide pour demarrer la machine ...
 include_spip('public/assembler');
 recuperer_fond('local/cache-tests/cfg-test', array());
 
+// les bases de test
 $assoc = array('one' => 'element 1', 'two' => 'element 2');
 $serassoc = serialize($assoc);
+// on flingue meta a juste nos donnees
 $GLOBALS['meta'] = array(
 	'chaine' => 'une chaine',
 	'assoc' => $assoc,
@@ -20,25 +24,28 @@ $GLOBALS['meta'] = array(
 );
 $sermeta = serialize($GLOBALS['meta']);
 
+// tableau de test, chaque ligne a de 2 a 4 elements,
+// le 2eme sert de defaut pour les suivants si absents
 $essais = array(
+//		argument		res. 1 argument		res. + defaut		res + serialize
 // presents
-	array(array(), $GLOBALS['meta'], $GLOBALS['meta'], $sermeta),
-	array('' , $GLOBALS['meta'], $GLOBALS['meta'], $sermeta),
-	array('/' , $GLOBALS['meta'], $GLOBALS['meta'], $sermeta),
-	array('//' , $GLOBALS['meta'], $GLOBALS['meta'], $sermeta),
-	array('chaine' , 'une chaine'),
-	array('chaine/' , 'une chaine'),
-	array('chaine//' , 'une chaine'),
-	array('assoc' , $assoc, $assoc, $serassoc),
-	array('assoc/two' , 'element 2'),
-	array('serie' , $assoc, $assoc, $serassoc),
-	array('serie/two' , 'element 2'),
+	array(array(),		$GLOBALS['meta'],	$GLOBALS['meta'], 	$sermeta),
+	array('',			$GLOBALS['meta'],	$GLOBALS['meta'],	$sermeta),
+	array('/',			$GLOBALS['meta'],	$GLOBALS['meta'],	$sermeta),
+	array('//',			$GLOBALS['meta'],	$GLOBALS['meta'],	$sermeta),
+	array('chaine',		'une chaine'),
+	array('chaine/',	'une chaine'),
+	array('chaine//',	'une chaine'),
+	array('assoc',		$assoc,				$assoc,				$serassoc),
+	array('assoc/two',	'element 2'),
+	array('serie',		$assoc,				$assoc,				$serassoc),
+	array('serie/two',	'element 2'),
 // pas la
-	array('assoc/pasla', null, 'defaut'),
-	array('serie/pasla', null, 'defaut'),
-	array('la/testid/', null, 'defaut'),
-	array('pasla', null, 'defaut'),
-	array('la/pasla', null, 'defaut')
+	array('assoc/pasla',null,				'defaut'),
+	array('serie/pasla',null,				'defaut'),
+	array('la/testid/',	null,				'defaut'),
+	array('pasla',		null,				'defaut'),
+	array('la/pasla',	null,				'defaut')
 );
 $ok = true;
 $r = array(null, array(), array(), array());
