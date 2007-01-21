@@ -84,7 +84,7 @@ function exec_courrier_edit(){
 	if ($type == 'nl') $le_type = _T('spiplistes:email_collec');
 
 	echo "<p><span style='font-family:Verdana,Arial,Sans,sans-serif;color:green;font-size:120%'><b>$le_type</b></span></p>";
-	echo "<p style='margin-bottom:10px;font-family:Verdana,Arial,Sans,sans-serif;color:red;font-size:100%'>"._T('spiplistes:alerte_edit')."<br /><br /></p>";
+	echo "<p style='margin-bottom:10px;font-family:Verdana,Arial,Sans,sans-serif;color:red;'>"._T('spiplistes:alerte_edit')."</p><br /><br />";
 
 	echo debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_insert-slide.gif');
 
@@ -108,13 +108,18 @@ function exec_courrier_edit(){
 
 	echo "<form action='".generer_url_ecrire("import_patron","id_message=$id_message")."' METHOD='post'>";  
 	$liste_patrons = find_all_in_path("patrons/","[.]html$");
+	foreach($liste_patrons as $key => $val) {
+	if(ereg("_texte",$val)) unset ($liste_patrons[$key]) ;
+	}
+
 	echo "<select style='float:left;width:150px' name='patron' size='".(count($liste_patrons)+2)."'>";
+	$i=0;
 	foreach($liste_patrons as $titre_option) {
-		$titre_option = basename($titre_option,".html");
-		$selected ="";
-		if ($patron == $titre_option)
-			$selected = "selected='selected";
-		echo "<option ".$selected." value='".$titre_option."'>".$titre_option."</option>\n";
+		$titre_option = basename($titre_option,".html");		
+		$selected = "";
+		if($i == 0) $selected = "'selected=selected'";
+		echo "<option $selected value='".$titre_option."'>".$titre_option."</option>\n";
+	$i++;
 	}
 	echo "</select>";
 	
