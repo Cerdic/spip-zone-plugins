@@ -14,7 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/actions');
-include_spip('exec/grouper_mots');
 include_spip('inc/agenda_gestion');
 include_spip('inc/pim_agenda_gestion');
 
@@ -31,8 +30,7 @@ function exec_mots_tous_dist()
 	echo $commencer_page(_T('titre_page_mots_tous'), "naviguer", "mots");
 	debut_gauche();
 
-	if (acces_mots()  AND !$conf_mot){
-		if (function_exists('PIMAgenda_install'))	PIMAgenda_install();
+	if (autoriser('modifier','groupemots',$id_groupe)  AND !$conf_mot){
 		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
 
 		echo bloc_des_raccourcis($res);
@@ -45,7 +43,7 @@ function exec_mots_tous_dist()
 	debut_droite();
 
 	gros_titre(_T('titre_mots_tous'));
-	if (acces_mots()) {
+	if (autoriser('modifier','groupemots',$id_groupe)) {
 	  echo typo(_T('info_creation_mots_cles')) . aide ("mots") ;
 	}
 	echo "<br /><br />";
@@ -123,7 +121,7 @@ function exec_mots_tous_dist()
 
 		echo "<div\nid='editer_mot-$id_groupe' style='position: relative;'>";
 
-		// Preliminaire: confirmation de suppression d'un mot lie à qqch
+		// Preliminaire: confirmation de suppression d'un mot lie ï¿½qqch
 		// (cf fin de afficher_groupe_mots_boucle executee a l'appel precedent)
 		if ($conf_mot  AND $son_groupe==$id_groupe) {
 			include_spip('inc/grouper_mots');
@@ -136,7 +134,7 @@ function exec_mots_tous_dist()
 
 		echo "</div>";
 
-		if (acces_mots()){
+		if (autoriser('modifier','groupemots',$id_groupe)){
 			echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 			echo "<tr>";
 			echo "<td>";
