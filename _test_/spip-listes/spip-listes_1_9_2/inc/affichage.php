@@ -370,9 +370,6 @@ function remplir_liste_envois($id_courrier,$id_liste){
 		spip_query("UPDATE spip_courriers SET total_abonnes="._q($row['n'])." WHERE id_courrier="._q($id_courrier)); 
 }
 
-// compatibilite spip 1.9
-if(!function_exists(fin_gauche)) { function fin_gauche(){return false;} }
-
 // Nombre d'abonnes a une liste : a faire
 
 function spiplistes_cherche_auteur(){
