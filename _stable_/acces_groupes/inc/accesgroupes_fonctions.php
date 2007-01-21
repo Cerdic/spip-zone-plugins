@@ -147,12 +147,13 @@
         						$Tdocuments_restreints[$row['id_document']]=1;
         			}
         			// rattaches aux syndic
-        			$liste_syn = accesgroupes_liste_syndics_restreints();
+/*        			$liste_syn = accesgroupes_liste_syndics_restreints();
         			$where = calcul_mysql_in('id_syndic', join(",",$liste_syn));
         			$s = spip_query("SELECT id_document FROM spip_documents_syndic WHERE $where");
         			while ($row = spip_fetch_array($s)){
         						$Tdocuments_restreints[$row['id_document']]=1;
         			}
+*/							
         			$Tdocuments_restreints = array_keys($Tdocuments_restreints);
         	 }
         	 return $Tdocuments_restreints;	
