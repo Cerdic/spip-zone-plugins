@@ -5,7 +5,7 @@
 [(#REM) titre=Test multi pour #ENV{depuis} avec le plugin cfg]
 
 #CACHE{0}
-[(#INCLURE{fond=fonds/cfg_tete}{_cfg_=#ENV*{_cfg_}})]
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
 
 <fieldset>
 [(#REM) la classe cfg_id permet de stocker dans un tableau sous cet index]
@@ -24,4 +24,7 @@
 <input type="text" name="mulidnum" class="type_idnum" value="#ENV{mulidnum}" size="8" />
 </fieldset>
 
-[(#INCLURE{fond=fonds/cfg_pied})]
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>

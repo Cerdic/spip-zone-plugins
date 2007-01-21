@@ -6,7 +6,7 @@
 [(#REM) liens*=testmulti]
 
 #CACHE{0}
-[(#INCLURE{fond=fonds/cfg_tete}{_cfg_=#ENV*{_cfg_}})]
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
 
 <fieldset><legend><:cfg:champs_simples:></legend>
 <label>Type id</label>
@@ -17,4 +17,7 @@
 <input type="text" name="testidnum" class="type_idnum" value="#ENV{testidnum}" size="8" />
 </fieldset>
 
-[(#INCLURE{fond=fonds/cfg_pied})]
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
