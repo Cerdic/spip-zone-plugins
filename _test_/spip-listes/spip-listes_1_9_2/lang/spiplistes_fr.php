@@ -369,6 +369,9 @@ et de recevoir les lettres d\'informations.',
 'inscription_listes' => 'Vous avez choisi de recevoir les courriers adress&eacute;s aux listes suivantes : ',
 'inscription_format' => ' en format ',
 
+'info_1_liste' => '1 liste',
+'info_liste_2' => 'listes',
+
 );
 
 ?>

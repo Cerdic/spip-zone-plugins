@@ -27,7 +27,6 @@ include_spip('inc/lang');
 include_spip('inc/affichage');
 include_spip('base/spip-listes');
 
-
 function exec_listes_dist(){
 
 	global $connect_statut;
