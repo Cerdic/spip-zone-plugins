@@ -81,14 +81,14 @@ function spip_listes_raccourcis(){
 /**
 * spiplistes_afficher_en_liste
 *
-* affiche des listes d'ï¿½ï¿½ents
+* affiche des listes d'éléments
 *
 * @param string titre
 * @param string image
 * @param string statut
 * @param string recherche
 * @param string nom_position
-* @return string la liste des lettres pour le statut demandï¿½* @author BoOz / Pierre Basson
+* @return string la liste des lettres pour le statut demandé @author BoOz / Pierre Basson
 **/
 function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut, $recherche='', $nom_position='position') {
 	
@@ -117,20 +117,22 @@ function spiplistes_afficher_en_liste($titre, $image, $element='listes', $statut
 	
 	if($element == 'messages'){
 		$type='nl' ;
+		$type2="";
+		$statut2="";
 		if($statut=='redac')
-			$statut='redac" OR statut="ready';
+			$statut2=" OR statut='ready'";
 		if($statut=='auto'){
 			$type='auto';
 			$statut='publie';
 		}
 		if($statut=='encour')
-			$type2='OR type="auto"';
+			$type2=" OR type='auto'";
 	
 		$requete_listes = 'SELECT id_courrier,
 			titre,
 			date, nb_emails_envoyes
 			FROM spip_courriers
-			WHERE (type='._q($type).' '.$type2.') AND statut='._q($statut).' '.$clause_where.'
+			WHERE (type='._q($type).$type2.') AND (statut='._q($statut).$statut2.') '.$clause_where.'
 			ORDER BY date DESC
 			LIMIT '.intval($position).','.intval($pas).'';
 	}
