@@ -212,7 +212,7 @@ class Crayon {
                 case 'texte':
                     $input = '<textarea class="crayon-active"'
                     . ' name="content_'.$this->key.'_'.$champ.'">'
-                    . entites_html($val)
+                    . chr(255)
                     . '</textarea>'."\n";
                     break;
                 case 'ligne':
@@ -220,18 +220,19 @@ class Crayon {
                     $input = '<input class="crayon-active" type="text"'
                     . ' name="content_'.$this->key.'_'.$champ.'"'
                     . ' value="'
-                    . entites_html($val)
+                    . chr(255)
                     . '" />'."\n";
             }
             if (is_array($spec) && isset($spec[$champ]['attrs'])) {
-	            foreach ($spec[$champ]['attrs'] as $attr=>$val) {
-	                $input = inserer_attribut($input, $attr, $val);
+	            foreach ($spec[$champ]['attrs'] as $attr=>$vala) {
+	                $input = inserer_attribut($input, $attr, $vala);
 	            }
             }
 
-            foreach ($attrs as $attr=>$val) {
-                $input = inserer_attribut($input, $attr, $val);
+            foreach ($attrs as $attr=>$vala) {
+                $input = inserer_attribut($input, $attr, $vala);
             }
+            $input = str_replace(chr(255), entites_html($val), $input);
             $return .= $input;
         }
         return $return;
