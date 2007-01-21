@@ -1,6 +1,6 @@
 <?php
 
-$GLOBALS['accesrestreint_version_base'] = 0.1;
+$GLOBALS['accesrestreint_version_base'] = 0.11;
 function AccesRestreint_upgrade(){
 	global $accesrestreint_version_base;
 	$meta_base = 'accesrestreint_base_version';
@@ -16,6 +16,11 @@ function AccesRestreint_upgrade(){
 		include_spip('base/abstract_sql');
 		creer_base();
 		ecrire_meta($meta_base,$current_version=$version_base,'non');
+	}
+	if ($current_version<0.11){
+		spip_query("ALTER TABLE spip_zones ADD publique ENUM('non', 'oui') DEFAULT 'oui' NOT NULL AFTER descriptif");
+		spip_query("ALTER TABLE spip_zones ADD privee ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER publique");
+		ecrire_meta($meta_base,$current_version=0.11,'non');
 	}
 	ecrire_metas();
 }

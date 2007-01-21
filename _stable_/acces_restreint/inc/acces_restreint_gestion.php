@@ -27,9 +27,11 @@
   function AccesRestreint_enregistrer_zone(){
     $titre = addslashes(_request('titre'));
     $descriptif = addslashes(_request('descriptif'));
+    $publique = (_request('publique')=='oui')?'oui':'non';
+    $privee = (_request('privee')=='oui')?'oui':'non';
     $id_zone = intval(_request('id_zone'));
 		if (strlen($titre)>0 && $id_zone){
-			spip_query("UPDATE spip_zones SET titre='$titre', descriptif='$descriptif' WHERE id_zone=$id_zone");
+			spip_query("UPDATE spip_zones SET titre='$titre', descriptif='$descriptif', privee='$privee', publique='$publique' WHERE id_zone=$id_zone");
 			// suppression de tous les liens zone-rubriques
 			spip_query("DELETE FROM spip_zones_rubriques WHERE id_zone='$id_zone'");
 			if (is_array($_POST['restrict'])){
@@ -42,6 +44,36 @@
 		return 0;
 	}
 
+	function AccesRestreint_formulaire_zone($id_zone, $titre, $descriptif, $publique, $privee){
+		global $couleur_claire;
+		echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
+		echo _T('accesrestreint:titre_zones_acces');
+		echo "</div>";
+		echo "<p>";
+		echo _T('accesrestreint:titre')."<br/>";
+		echo "<input type='input' name='titre' value='".entites_html($titre)."' class='formo' />";
+		echo "</p>";
+		echo "<p>";
+		echo _T('accesrestreint:descriptif')."<br/>";
+		echo "<textarea name='descriptif' class='formo'>";
+		echo entites_html($descriptif);
+		echo "</textarea>";
+		echo "</p>";
+		
+		echo "<p>";
+		$checked = ($publique == 'oui') ? " checked='checked'" : "";
+		echo "&nbsp; &nbsp; <input type='checkbox' name='publique' value='oui' id='zone_publique'$checked> ";
+		echo "<label for='zone_publique'>"._T("accesrestreint:zone_restreinte_publique")."</label>";
+		echo "<br />\n";
+		if ($GLOBALS['spip_version_code']>=1.9206){
+			$checked = ($privee == 'oui') ? " checked='checked'" : "";
+			echo "&nbsp; &nbsp; <input type='checkbox' name='privee' value='oui' id='zone_privee'$checked> ";
+			echo "<label for='zone_privee'>"._T("accesrestreint:zone_restreinte_espace_prive")."</label>";
+		}
+		echo "</p>";
+		echo "</div>";
+		return;
+	}
 
 	// Fonction de presentation
 	function AccesRestreint_sous_menu_rubriques($id_zone, $root, $niv, &$data, &$enfants, &$liste_rub_dir, &$liste_rub, $type) {

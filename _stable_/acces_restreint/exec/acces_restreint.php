@@ -74,6 +74,8 @@ function exec_acces_restreint(){
 		$vals[] = _T('accesrestreint:colonne_id');
 		$vals[] = _T('accesrestreint:titre');
 		$vals[] = _T('accesrestreint:descriptif');
+		$vals[] = _T('accesrestreint:publique');
+		$vals[] = _T('accesrestreint:privee');
 		$vals[] = '';
 		$vals[] = '';
 		$table[] = $vals;
@@ -94,6 +96,12 @@ function exec_acces_restreint(){
 			$vals[] = $s;
 
 			$s = propre($row['descriptif']);
+			$vals[] = $s;
+			
+			$s = ($row['publique']=='oui')?"<img src='"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/restreint-16.png' width='16' height='16' />":'';
+			$vals[] = $s;
+			
+			$s = ($row['privee']=='oui')?"<img src='"._DIR_PLUGIN_ACCESRESTREINT."/img_pack/restreint-16.png' width='16' height='16' />":'';
 			$vals[] = $s;
 			
 			$s = "";
@@ -121,8 +129,8 @@ function exec_acces_restreint(){
 	bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black");
 	echo "<table width='100%' cellpadding='5' cellspacing='0' border='0'>";
 	echo $tranches;
-	$largeurs = array('','','','','');
-	$styles = array('arial11', 'arial1', 'arial1','arial1','arial1');
+	$largeurs = array('','','','','','','');
+	$styles = array('arial11', 'arial1', 'arial1','arial1','arial1','arial1','arial1');
 	echo afficher_liste($largeurs, $table, $styles);
 	echo "</table>";
 	echo "</div>";
@@ -131,22 +139,13 @@ function exec_acces_restreint(){
 
 	debut_cadre_relief();
 	echo generer_url_post_ecrire("acces_restreint");
-	echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
-	echo _T('accesrestreint:icone_creer_zone');
-	echo "</div>";
-	echo "<p>";
-	echo _T('accesrestreint:titre')."<br/>";
-	echo "<input type='input' name='titre' value='"._T('accesrestreint:titre')."' class='formo' />";
-	echo "</p>";
-	echo "<p>";
-	echo _T('accesrestreint:descriptif')."<br/>";
-	echo "<textarea name='descriptif' class='formo'>";
-	echo _T('accesrestreint:descriptif');
-	echo "</textarea>";
-	echo "</p>";
+	AccesRestreint_formulaire_zone($id_zone , _T('accesrestreint:titre'), _T('accesrestreint:descriptif'), 'oui', 'non');
 
-	if ($connect_statut == "0minirezo" && $connect_toutes_rubriques)
+	if ($connect_statut == "0minirezo" && $connect_toutes_rubriques){
+		echo "<div class='verdana2'>";
 		echo "<input type='checkbox' name='auto_attribue_droits' value='oui' checked='checked' id='droits_admin'> <label for='droits_admin'>"._T("accesrestreint:ajouter_droits_auteur")."</label><br>";
+		echo "</div>";
+	}
 
 	echo "<div style='text-align:$spip_lang_right'><input type='submit' name='creer' value='"._T('accesrestreint:bouton_creer_la_zone')."' class='fondo'></div>";
 	echo "</div>";

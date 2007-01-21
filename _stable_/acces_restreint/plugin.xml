@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	<multi>[fr]Acces Restreint[es]Acceso restringido</multi>
+	<multi>[fr]Acces Restreint 2.0[es]Acceso restringido 2.0</multi>
 	</nom>
 	<icon>img_pack/zones-acces-48.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
@@ -11,7 +11,7 @@
 	</multi>
 	</auteur>
 	<version>
-	0.11
+	0.2
 	</version>
 	<etat>
 	stable
@@ -22,6 +22,7 @@
 _ Chaque zone contient des rubriques.
 _ Les auteurs peuvent etre associes a des zones pour avoir le droit d'y acceder.
 _ Toutes les boucles natives de SPIP sont surchargees pour en filtrer les resultats en fonction des droits du visiteur.
+_ A partir de SPIP 1.92, les zones peuvent concerner l'espace publique et/ou l'espace priv&eacute; de SPIP.
 	[es] Gesti&oacute;n de zonas de acceso restringido.
 _ Cada zona contiene secciones.
 _ Los autores podr&aacute;n ser asociados a ciertas zonas restringidas para tener derechos de acceso a ellas.

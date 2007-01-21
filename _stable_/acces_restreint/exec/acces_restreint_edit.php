@@ -41,28 +41,18 @@ function exec_acces_restreint_edit(){
 
 	$titre = $row['titre'];
 	$descriptif = $row['descriptif'];
+	$publique = $row['publique'];
+	$privee = $row['privee'];
 
 	$retour = '';
 	if (isset($_GET['retour']))
 		$retour = $_GET['retour'];
 
 	debut_cadre_relief();
-	echo generer_url_post_ecrire("acces_restreint_edit","id_zone=$id_zone".($retour?"&retour=".urlencode($retour):""));
-	echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
-	echo _T('accesrestreint:titre_zones_acces');
-	echo "</div>";
-	echo "<p>";
-	echo _T('accesrestreint:titre')."<br/>";
-	echo "<input type='input' name='titre' value='".entites_html($titre)."' class='formo' />";
-	echo "</p>";
-	echo "<p>";
-	echo _T('accesrestreint:descriptif')."<br/>";
-	echo "<textarea name='descriptif' class='formo'>";
-	echo entites_html($descriptif);
-	echo "</textarea>";
-	echo "</p>";
-	echo "</div>";
+	echo generer_url_post_ecrire('acces_restreint_edit',"id_zone=$id_zone".($retour?"&retour=".urlencode($retour):""));
+	AccesRestreint_formulaire_zone($id_zone, $titre, $descriptif, $publique, $privee);
 
+	echo "<div style='text-align:$spip_lang_right'><input type='submit' name='Enregistrer' value='"._T('bouton_enregistrer')."' class='fondo'></div>";
 	echo "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
 	echo _T('accesrestreint:rubriques_zones_acces');
 	echo "</div>";
