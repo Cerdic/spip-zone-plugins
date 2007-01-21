@@ -81,10 +81,16 @@ function formater_auteur_listes_mail($email, $id_auteur)
 		  . '</a>';
 }
 
-function inc_determiner_non_auteurs_liste($les_auteurs, $order){
-	if (!$les_auteurs)
-	  $cond = '';
-	else $cond = "id_auteur NOT IN (" . join(',',$les_auteurs) . ') AND ';
+function inc_determiner_non_auteurs_liste($type, $id, $cond_les_auteurs, $order)
+{
+	$cond = '';
+	$res = determiner_auteurs_objet($type, $id, $cond_les_auteurs);
+	if (spip_num_rows($res)<200){ // probleme de performance au dela, on ne filtre plus
+		while ($row = spip_fetch_array($res))
+			$cond .= ",".$row['id_auteur'];
+	}
+	if (strlen($cond))
+		$cond = "id_auteur NOT IN (" . substr($cond,1) . ') AND ';
 
 	return spip_query("SELECT * FROM spip_auteurs WHERE $cond" . "statut!='5poubelle' AND statut!='nouveau' ORDER BY $order");
 }
