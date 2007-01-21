@@ -182,7 +182,7 @@ function exec_gerer_courrier(){
 			}
 		}
 		
-		if(intval($id_liste) !=0){
+		elseif(intval($id_liste) !=0){
 			$query_ = spip_query ("SELECT * FROM spip_listes WHERE id_liste = "._q($id_liste));
 			$row = spip_fetch_array($query_);
 			$destinataire = 'la liste : <a href="'.generer_url_ecrire('listes','id_liste='.$id_liste).'">'.$row['titre'].'</a>';
@@ -198,8 +198,8 @@ function exec_gerer_courrier(){
 		echo debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail_send.gif');
 		//echo "tklo $destinataire, $email_test , $id_liste";
 		
-		if($erreur_mail_pas_bon){
-			echo $erreur_mail_pas_bon ;
+		if($erreur_mail){
+			echo "<h3>"._T('spiplistes:sans_envoi')."</h3>" ;
 		}
 		if ($statut == 'redac' && !$pret_envoi) {
 			echo "<font face='Verdana,Arial,Sans,sans-serif' size=2 color='red'><b>"._T('spiplistes:message_en_cours')." <br />"._T('spiplistes:modif_envoi')."</b></font>";
