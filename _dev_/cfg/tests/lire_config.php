@@ -3,8 +3,8 @@
 // nom du test
 $test = 'cfg:lire_config';
 
-// chemin vers test.inc
-require str_repeat('../',intval(@$_GET['b'])).'../tests/test.inc';
+// chemin vers test.inc, ici plugins/cfg/tests/
+require '../../../tests/test.inc';
 
 include_spip('cfg_options');
 
