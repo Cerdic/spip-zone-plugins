@@ -8,6 +8,9 @@ require '../../../tests/test.inc';
 
 include_spip('cfg_options');
 
+include_spip('public/assembler');
+recuperer_fond('local/cache-tests/cfg-test', array());
+
 $assoc = array('one' => 'element 1', 'two' => 'element 2');
 $serassoc = serialize($assoc);
 $GLOBALS['meta'] = array(
@@ -102,12 +105,6 @@ if ($_GET['dump']) {
 	echo "<div>\n" . print_r($r[3], true) . "</div>\n";
 //	echo "<div>\n" . print_r($s[1], true) . "</div>\n";
 //	echo "<div>\n" . print_r($s[2], true) . "</div>\n";
-
-    include_spip('public/assembler');
-    recuperer_fond('local/cache-tests/cfg-test', array());
-	$GLOBALS['meta']['chaine'] = 'une chaine';
-	$GLOBALS['meta']['assoc'] = $GLOBALS['assoc'];
-	$GLOBALS['meta']['serie'] = serialize($GLOBALS['assoc']);
 
 	for ($i = 1; $i < 3; ++$i) {
 		echo test_bal($bal . $i, $s[$i]);
