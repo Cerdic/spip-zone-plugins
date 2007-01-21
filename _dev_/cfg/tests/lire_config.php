@@ -3,8 +3,16 @@
 // nom du test
 $test = 'cfg:lire_config';
 
-// ici plugins/cfg/tests/, chemin vers test.inc qui nous ouvre au monde spip
-require '../../../tests/test.inc';
+// recherche test.inc qui nous ouvre au monde spip
+$deep = 2;
+$include = '../../tests/test.inc';
+while (!defined('_SPIP_TEST_INC') && $deep++ < 4) {
+	$include = '../' . $include;
+	@include $include;
+}
+if (!defined('_SPIP_TEST_INC')) {
+	die("Pas de $include");
+}
 
 // c'est ca qu'on teste
 include_spip('cfg_options');
