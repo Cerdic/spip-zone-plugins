@@ -191,7 +191,7 @@ include_spip('inc/rubriques');
 	function AccesRestreint_liste_articles_exclus($publique=true){
 		static $liste_art_exclus=array();
 		if (!is_array($liste_art_exclus[$publique])){
-			$liste_art_exclus = array();
+			$liste_art_exclus[$publique] = array();
 			$liste_rub = AccesRestreint_liste_rubriques_exclues($publique);
 			$where = calcul_mysql_in('id_rubrique', join(",",$liste_rub));
 			$s = spip_query("SELECT id_article FROM spip_articles WHERE $where");
