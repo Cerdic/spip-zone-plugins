@@ -16,7 +16,7 @@ function balise_CLEVERMAIL_UNSUBSCRIBE($p) {
 
 function balise_CLEVERMAIL_UNSUBSCRIBE_dyn() {
 	if (isset($_GET['id']) && $_GET['id'] != '') {
-		$result = spip_query("SELECT * FROM cm_lists_subscribers WHERE lsr_id = '"._q($_GET['id'])."'");
+		$result = spip_query("SELECT * FROM cm_lists_subscribers WHERE lsr_id = "._q($_GET['id']));
 	    if (spip_num_rows($result)==1) {
 	    	$data = spip_fetch_array($result);
 
@@ -47,6 +47,7 @@ function balise_CLEVERMAIL_UNSUBSCRIBE_dyn() {
 			$mail->From = $cm_mail_from['set_value'];
 			$mail->FromName = $GLOBALS['meta']['nom_site'];
 			$mail->AddAddress($recipient['sub_email']);
+			$mail->Charset = $GLOBALS['meta']['charset'];
 			$mail->IsHTML(false);
 			$mail->Body = $message;
 			$mail->Send();
