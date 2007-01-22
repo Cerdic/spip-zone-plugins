@@ -21,7 +21,7 @@
 		'aucune_inscription' => 'Aucune inscription ne correspond &agrave; ce paramètre.',
 		'desinscription_confirmation_debut' => 'Désinscription de la lettre d\'information',
 		'desinscription_confirmation_fin' => 'demandée. Vous allez recevoir un message demandant confirmation.',
-		'ok' => 'Inscription demand&eacute;e. Vous allez recevoir un message de demande de confirmation.',
+		'ok' => 'Inscription demandée. Vous allez recevoir un message de demande de confirmation.',
 		'nok' => 'Inscription non authorisée pour cette lettre d\'information',
 		'mok' => 'Inscription en attente de validation par le modérateur.',
 		'send_error' => 'Erreur lors de l\'envoi',
