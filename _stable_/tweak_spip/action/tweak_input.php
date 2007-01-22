@@ -4,10 +4,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_tweak_input_dist()
 {
-	if ($spip_version_code>=1.92)
+	if ($spip_version_code>=1.92) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
-	else {
+	} else {
 		include_spip('inc/actions');
 		$var_f = charger_fonction('controler_action_auteur', 'inc');
 		$var_f();
