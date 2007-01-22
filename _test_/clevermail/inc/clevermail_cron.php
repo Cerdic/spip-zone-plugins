@@ -42,7 +42,7 @@ function cron_clevermail_cron() {
 			$mail->FromName = $GLOBALS['meta']['nom_site'];
 			$mail->AddAddress($to);
 			$mail->AddReplyTo($cm_mail_from['set_value']);
-			$mail->Charset = $GLOBALS['meta']['charset'];
+			$mail->CharSet = $GLOBALS['meta']['charset'];
 
 			// message content
 			$text = $post['pst_text'];
