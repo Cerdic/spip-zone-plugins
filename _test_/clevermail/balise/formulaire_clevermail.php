@@ -87,6 +87,7 @@ function balise_FORMULAIRE_CLEVERMAIL_dyn($id_liste, $formulaire) {
 						$mail->From = $cm_mail_from['set_value'];
 						$mail->FromName = $GLOBALS['meta']['nom_site'];
 						$mail->AddAddress($address);
+						$mail->Charset = lire_meta('charset');
 						$mail->IsHTML(false);
 						$mail->Body = $message;
 
@@ -124,6 +125,7 @@ function balise_FORMULAIRE_CLEVERMAIL_dyn($id_liste, $formulaire) {
 						$mail->From = $address;
 						$cm_mail_from = spip_fetch_array(spip_query("SELECT set_value FROM cm_settings WHERE set_name='CM_MAIL_FROM'"));
 						$mail->AddAddress($cm_mail_from);
+						$mail->Charset = lire_meta('charset');
 						$mail->IsHTML(false);
 						$mail->Body = $message;
 
