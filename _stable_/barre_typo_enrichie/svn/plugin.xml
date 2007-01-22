@@ -9,7 +9,7 @@ _ &copy; 2006 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<lien>[Exemple d'utilisation->http://www.pyrat.net/Raccourcis-Typographiques-de-SPIP.html]</lien>
 	<version>
-	1.22
+	1.3
 	</version>
 	<etat>
 	stable
@@ -60,6 +60,8 @@ $GLOBALS['fin_intertitre_4'] = '</h5>';
 $GLOBALS['debut_intertitre_5'] = '<h6 class="spip">';
 $GLOBALS['fin_intertitre_5'] = '</h6>';
 </code>
+
+{Certaines icones proviennent de [FamFamFam->http://www.famfamfam.com/lab/icons/silk/].}
 	</description>
 	<lien>http://zone.spip.org/trac/spip-zone/wiki/BarreTypoEnrichie</lien> <!-- URI de documentation -->
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction

@@ -128,6 +128,28 @@ function barre_inserer(text,champ) {
 	}
 }
 
+// Attention : rec_tout (mot entier) n'est pas actif !
+function barre_search(chercher,rec_entier, rec_case, champ) {
+	if(chercher != null && champ.value != null) {
+		if(champ.selectionStart == champ.selectionEnd) {
+			ndx = 0;
+		} else {
+			ndx = champ.selectionEnd;
+		}
+		if (rec_case == false) {
+			var x = champ.value.toLowerCase().indexOf(chercher.toLowerCase(),ndx);
+		} else {
+			var x = champ.value.indexOf(chercher,ndx);
+		}
+		if(x!=-1)
+		{ 
+			var end = (x+chercher.length);
+			champ.setSelectionRange(x,end);
+			champ.focus();
+		}
+	}
+}
+
 function barre_searchreplace(chercher,remplacer, rec_tout, rec_case, rec_entier, champ) {
 	
 	var condition = "";
@@ -146,6 +168,44 @@ function barre_searchreplace(chercher,remplacer, rec_tout, rec_case, rec_entier,
 
   champ.value = champ.value.replace(re, remplacer);
 /*   mozWrap(txtarea, debut, fin); */
+}
+
+function barre_2Majuscules(champ) {
+	var oldSelStart = champ.selectionStart;
+	var oldSelEnd = champ.selectionEnd;
+	if(oldSelStart == oldSelEnd) {
+		champ.value = champ.value.toUpperCase();
+	} else {
+		var val = champ.value.substring(champ.selectionStart,champ.selectionEnd);
+		var oldSelStart = champ.selectionStart;
+			
+		val = val.toUpperCase();
+				
+		champ.value = champ.value.substring(0,champ.selectionStart)
+		+val
+		+champ.value.substring(champ.selectionEnd,champ.value.length);
+	}
+	champ.setSelectionRange(oldSelStart,oldSelEnd);
+	champ.focus();
+}
+
+function barre_2Minuscules(champ) {
+	var oldSelStart = champ.selectionStart;
+	var oldSelEnd = champ.selectionEnd;
+	if(oldSelStart == oldSelEnd) {
+		champ.value = champ.value.toLowerCase();
+	} else {
+		var val = champ.value.substring(champ.selectionStart,champ.selectionEnd);
+		var oldSelStart = champ.selectionStart;
+			
+		val = val.toLowerCase();
+				
+		champ.value = champ.value.substring(0,champ.selectionStart)
+		+val
+		+champ.value.substring(champ.selectionEnd,champ.value.length);
+	}
+	champ.setSelectionRange(oldSelStart,oldSelEnd);
+	champ.focus();
 }
 
 // D'apres Nicolas Hoizey 

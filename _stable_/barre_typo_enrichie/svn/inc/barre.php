@@ -91,7 +91,7 @@ $tableau_formulaire = '
 </td><td>
 '._T('bartypenr:barre_langue').'&nbsp;: <input type="text" name="lien_langue" value="" size="10" maxlength="10" />
 </td><td>
-  <input type="button" value="OK" class="fondo" onclick="javascript:barre_demande_lien(\'[\', \'->\', \']\', lien_nom.value, lien_bulle.value, lien_langue.value,'.$champ.');" /> 
+  <input type="button" value="OK" class="fondo" onclick="javascript:barre_demande_lien(\'[\', \'->\', \']\', lien_nom.value, lien_bulle.value, lien_langue.value,'.$champ.');lien_nom.value=\'\';lien_bulle.value=\'\';lien_langue.value=\'\';" /> 
 </td></tr></table>
 ';
   return produceWharf('tableau_lien','',$tableau_formulaire); 	
@@ -104,23 +104,28 @@ function afficher_gestion_remplacer($champ) {
 
 $tableau_formulaire = '
 <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
-<tr><td style="width: 25%;">'.
+<tr><td><label for="barre_chercher">'.
 _T('bartypenr:barre_gestion_cr_chercher')
-.'<input type="text" name="barre_chercher" value="" size="12" maxlength="255" /></td><td style="width: 20%;">
-<input type="checkbox" name="rec_case" value="yes" />'
-._T('bartypenr:barre_gestion_cr_casse')
-.'<br /><input type="checkbox" name="rec_entier" value="yes" />
-'._T('bartypenr:barre_gestion_cr_entier').'
-</td><td  style="width: 25%;">'
+.'</label> <input type="text" id="barre_chercher" name="barre_chercher" value="" size="12" maxlength="255" /><br />
+<input type="checkbox" name="rec_case" id="rec_case" value="yes" />
+<label for="rec_case">'._T('bartypenr:barre_gestion_cr_casse').'</label><br />
+   <input type="button" value="'._T('bartypenr:barre_gestion_cr_chercher').'" class="fondo"
+  onclick="javascript:barre_search(document.formulaire.barre_chercher.value, document.formulaire.rec_entier.checked, document.formulaire.rec_case.checked,'.$champ.');" /> 
+</td><td><label for="barre_remplacer">'
 ._T('bartypenr:barre_gestion_cr_remplacer')
-.'<input type="text" name="barre_remplacer" value="" size="12" maxlength="255" /> 
-</td><td style="width: 20%;">
-<input type="checkbox" name="rec_tout" value="yes" />'
-._T('bartypenr:barre_gestion_cr_tout')
-.'</td><td style="width: 10%;">
-   <input type="button" value="OK" class="fondo"
+.'</label> <input type="text" name="barre_remplacer" id="barre_remplacer" value="" size="12" maxlength="255" /><br />
+<input type="checkbox" name="rec_tout" id="rec_tout" value="yes" />
+<label for="rec_tout">'._T('bartypenr:barre_gestion_cr_tout').'</label><br />
+<input type="checkbox" name="rec_entier" id="rec_entier" value="yes" />
+<label for="rec_entier">'._T('bartypenr:barre_gestion_cr_entier').'</label><br />
+   <input type="button" value="'._T('bartypenr:barre_gestion_cr_remplacer').'" class="fondo"
   onclick="javascript:barre_searchreplace(document.formulaire.barre_chercher.value, document.formulaire.barre_remplacer.value, document.formulaire.rec_tout.checked, document.formulaire.rec_case.checked, document.formulaire.rec_entier.checked,'.$champ.');" /> 
-</td></tr></table>';
+</td>
+<td>'._T('bartypenr:barre_gestion_cr_changercasse').' :<br />
+'. bouton_barre_racc ("barre_2Majuscules($champ)",  _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/text_uppercase.png', _T('bartypenr:barre_gestion_cr_changercassemajuscules'), $champhelp) .' '
+. bouton_barre_racc ("barre_2Minuscules($champ)",  _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/text_lowercase.png', _T('bartypenr:barre_gestion_cr_changercasseminuscules'), $champhelp) .'
+</td>
+</tr></table>';
 
   return produceWharf('tableau_remplacer','',$tableau_formulaire); 
 }
@@ -179,7 +184,7 @@ else {
 $reta .= bouton_barre_racc ("barre_raccourci('&ldquo;','&rdquo;',$champ)", _DIR_IMG_ICONES_BARRE."guillemets-simples.png", _T('barre_guillemets'), $champhelp);
 $reta .= bouton_barre_racc ("barre_raccourci('&lsquo;','&rsquo;',$champ)", _DIR_IMG_ICONES_BARRE."guillemets-uniques.png", _T('barre_guillemets_simples'), $champhelp);
 }
-	// caaracteres
+	// caracteres
 if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
 
 $reta .= bouton_barre_racc ("barre_inserer('&Agrave;',$champ)", _DIR_IMG_ICONES_BARRE."agrave-maj.png", _T('barre_a_accent_grave'), $champhelp);
