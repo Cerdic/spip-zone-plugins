@@ -30,17 +30,23 @@ if(array_key_exists("HOST", $_GET)) {
 	}
 } elseif(!empty($_COOKIE["HOST"])) {
 	// sinon, on la cherche dans un cookie
-	 $requiredHost= $_COOKIE["HOST"];
-	 // slashs interdits, meme en tripotant les cookies
-	 if (strstr($requiredHost, '/')) {
-		 $requiredHost='';
-	 }
-} else {
-	 // sinon, selon le HTTP_HOST
-	if(array_key_exists($_SERVER['HTTP_HOST'], $vhosts)) {
-		$requiredHost=$vhosts[$_SERVER['HTTP_HOST']];
-	} else {
+	$requiredHost= $_COOKIE["HOST"];
+	// slashs interdits, meme en tripotant les cookies
+	if (strstr($requiredHost, '/')) {
 		$requiredHost='';
+	}
+} else {
+	// sinon, selon le HTTP_HOST
+	// Verification pour le domaine general (pour traiter plusieurs sous-domaines d'un seul coup)
+	$domaine = implode('.',array_slice(explode('.',strtolower($_SERVER['HTTP_HOST'])),-2,2));
+	if(array_key_exists($domaine, $vhosts)
+			|| array_key_exists(strtolower($_SERVER['HTTP_HOST']), $vhosts)) {
+		$requiredHost = $vhosts[$_SERVER['HTTP_HOST']];
+	} elseif (is_dir(_DIR_RACINE."squelettes/$domaine")) {
+		die('Pause');
+		$requiredHost  = $domaine;
+	} else {
+		$requiredHost = '';
 	}
 }
 
