@@ -316,7 +316,7 @@
 	
 		$s = "";
 		// Ajouter un formulaire
-		$s .= "\n<p>";
+		$s .= "\n";
 		$s .= debut_cadre_relief("../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", true);
 	
 		$s .= "<div style='padding: 2px; background-color: $couleur_claire; text-align: center; color: black;'>";
