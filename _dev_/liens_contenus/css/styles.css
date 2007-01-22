@@ -1,0 +1,31 @@
+.liens_contenus {
+    list-style-type: none;
+}
+
+.liens_contenus .rubrique {
+    list-style-image: url(../images/rubrique-12.gif);
+}
+
+.liens_contenus .article {
+    list-style-image: url(../images/article-12.gif);
+}
+
+.liens_contenus .breve {
+    list-style-image: url(../images/breve-12.gif);
+}
+
+.liens_contenus .site {
+    list-style-image: url(../images/site-12.gif);
+}
+
+.liens_contenus .document {
+    list-style-image: url(../images/document-12.gif);
+}
+
+.liens_contenus .auteur {
+    list-style-image: url(../images/auteur-12.gif);
+}
+
+.liens_contenus .mot {
+    list-style-image: url(../images/mot-12.gif);
+}
