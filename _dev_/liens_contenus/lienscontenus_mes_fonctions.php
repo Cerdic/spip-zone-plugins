@@ -1,5 +1,5 @@
 <?php
-function liens_contenus_generer_url($type_objet, $id_objet)
+function lienscontenus_generer_url($type_objet, $id_objet)
 {
     include_ecrire('inc/urls');
     $f = 'generer_url_ecrire_'.$type_objet;

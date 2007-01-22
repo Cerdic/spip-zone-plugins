@@ -7,28 +7,27 @@
 Ce plugin (pour SPIP 1.9.2+) permet d'identifier les liens d&eacute;finis entre les contenus au sein de leurs &eacute;l&eacute;ments textuels, et donc notamment d'{{&eacute;viter la suppression par erreur}} d'une rubrique, d'un article, d'une br&egrave;ve, d'un site, d'un document ou m&ecirc;me d'un mod&egrave;le, vers lesquels pointent d'autres contenus.
 
 Reste &agrave; faire :
--* Ne pas lister dans un article les documents qui y sont li&eacute;s
 -* V&eacute;rifier l'existance des objets li&eacute;s
 -* Interdire la suppression d'objets li&eacute;s depuis des objets en ligne ? Juste alerter ?
 -* Initialisation progressive en cron pour les gros sites
 -* R&eacute;f&eacute;rencement des liens externes ? (rapprochement avec le plugin {checklink} de C&eacute;dric ?)
 	</description>
-	<prefix>liens_contenus</prefix>
-	<options>liens_contenus_mes_options.php</options>
-	<fonctions>liens_contenus_mes_fonctions.php</fonctions>
+	<prefix>lienscontenus</prefix>
+	<options>lienscontenus_mes_options.php</options>
+	<fonctions>lienscontenus_mes_fonctions.php</fonctions>
 	<pipeline>
 		<nom>post_edition</nom>
 		<action>post_edition</action>
-		<inclure>liens_contenus_pipelines.php</inclure>
+		<inclure>lienscontenus_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>affiche_droite</nom>
 		<action>affiche_droite</action>
-		<inclure>liens_contenus_pipelines.php</inclure>
+		<inclure>lienscontenus_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>header_prive</action>
-		<inclure>liens_contenus_pipelines.php</inclure>
+		<inclure>lienscontenus_pipelines.php</inclure>
 	</pipeline>
 </plugin>
