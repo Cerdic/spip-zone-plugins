@@ -30,15 +30,15 @@ function exec_aa_admin() {
 	echo debut_cadre_couleur();
 // simple test de lire_cfg()
   echo '<strong>lire_cfg(aa) retourne :</strong> ';
-  print_r(lire_cfg('aa'));
-	echo '<br /><br /><strong>lire_cfg(aa/id_aa) =</strong> '.lire_cfg('aa/id_aa');
+  print_r(lire_config('aa'));
+/*	echo '<br /><br /><strong>lire_cfg(aa/id_aa) =</strong> '.lire_cfg('aa/id_aa');
 	echo '<br /><br /><strong>lire_cfg(aa/chapo) =</strong> '.lire_cfg('aa/chapo');
 	
 	echo '<br /><br /><strong>une boucle dans lire_cfg(aa)</strong> ';
 	foreach(lire_cfg('aa') as $cle => $val) {
 	    echo '<br />$cle = '.$cle.' $val = '.$val;
 	}
-	
+*/	
 	echo fin_page();
 
 }				 
