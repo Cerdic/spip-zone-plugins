@@ -4,8 +4,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_tweak_input_dist()
 {
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+	if ($spip_version_code>=1.92)
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	else {
+		include_spip('inc/actions');
+		$var_f = charger_fonction('controler_action_auteur', 'inc');
+		$var_f();
+		$arg = _request('arg');
+	}
 
 tweak_log("action_tweak_input_dist : arg = $arg");
 	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {
