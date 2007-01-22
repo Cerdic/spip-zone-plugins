@@ -97,10 +97,15 @@ $tableau_formulaire = '
   return produceWharf('tableau_lien','',$tableau_formulaire); 	
 }
 
+// Changer la casse
+function RaccourcisMajusculesMinuscules($champ, $champhelp) {
+	return bouton_barre_racc ("barre_2Majuscules($champ)",  _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/text_uppercase.png', _T('bartypenr:barre_gestion_cr_changercassemajuscules'), $champhelp) .'&nbsp;'
+. bouton_barre_racc ("barre_2Minuscules($champ)",  _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/text_lowercase.png', _T('bartypenr:barre_gestion_cr_changercasseminuscules'), $champhelp);
+}
 
 // gestion de la recherche
 
-function afficher_gestion_remplacer($champ) {
+function afficher_gestion_remplacer($champ, $champhelp) {
 
 $tableau_formulaire = '
 <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
@@ -121,9 +126,7 @@ _T('bartypenr:barre_gestion_cr_chercher')
    <input type="button" value="'._T('bartypenr:barre_gestion_cr_remplacer').'" class="fondo"
   onclick="javascript:barre_searchreplace(document.formulaire.barre_chercher.value, document.formulaire.barre_remplacer.value, document.formulaire.rec_tout.checked, document.formulaire.rec_case.checked, document.formulaire.rec_entier.checked,'.$champ.');" /> 
 </td>
-<td>'._T('bartypenr:barre_gestion_cr_changercasse').' :<br />
-'. bouton_barre_racc ("barre_2Majuscules($champ)",  _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/text_uppercase.png', _T('bartypenr:barre_gestion_cr_changercassemajuscules'), $champhelp) .' '
-. bouton_barre_racc ("barre_2Minuscules($champ)",  _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/text_lowercase.png', _T('bartypenr:barre_gestion_cr_changercasseminuscules'), $champhelp) .'
+<td>'._T('bartypenr:barre_gestion_cr_changercasse').' :'. RaccourcisMajusculesMinuscules($champ, $champhelp).'
 </td>
 </tr></table>';
 
@@ -169,8 +172,6 @@ _T('bartypenr:barre_gestion_anc_bulle')
 // pour les caractères
 function afficher_caracteres($champ, $spip_lang, $champhelp) {
 
-$reta .=    "";
-
 	// guillemets
 	if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf" OR $spip_lang == "ar" OR $spip_lang == "es") {
 $reta .= bouton_barre_racc ("barre_raccourci('&laquo;~','~&raquo;',$champ)", _DIR_IMG_ICONES_BARRE."guillemets.png", _T('barre_guillemets'), $champhelp);
@@ -201,13 +202,14 @@ $reta .= bouton_barre_racc ("barre_inserer('&Ccedil;',$champ)", _DIR_PLUGIN_BARR
 }
 // euro
 $reta .= bouton_barre_racc ("barre_inserer('&euro;',$champ)", _DIR_IMG_ICONES_BARRE."euro.png", _T('barre_euro'), $champhelp);
+$reta .= '&nbsp;'.RaccourcisMajusculesMinuscules($champ, $champhelp);
 
-$reta .= "&nbsp;";
+$reta .= '&nbsp;';
 	
 $tableau_formulaire = '
 <table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
   <tr class="spip_barre">
-    <td style="width:30%;">'._T('bartypenr:barre_caracteres').'</td>
+    <td>'._T('bartypenr:barre_caracteres').'</td>
     <td>'.$reta.'
     </td>
   </tr> 
@@ -225,8 +227,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	include_spip('inc/layer');
 	if (!$GLOBALS['browser_barre']) return '';
 	if (!$lang) $lang = $spip_lang;
-	$layer_public = (!$forum) ? '' :
-	 '<script type="text/javascript" src="' . find_in_path('img_pack/layer.js').'"></script>';
+	$layer_public = '<script type="text/javascript" src="' . find_in_path('javascript/layer.js').'"></script>';
 	$ret = ($num_barre > 0)  ? '' :
 	  $layer_public . '<script type="text/javascript" src="' . find_in_path('js/spip_barre.js').'"></script>';
 
@@ -240,7 +241,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
     $toolbox .= afficher_gestion_lien($champ);
 	$toolbox .= afficher_gestion_ancre($champ);
 	$toolbox .= afficher_caracteres($champ, $spip_lang, $champhelp);
-    $toolbox .= afficher_gestion_remplacer($champ);
+    $toolbox .= afficher_gestion_remplacer($champ, $champhelp);
 //
 
 	$ret .= "<table class='spip_barre' style='width:auto;' cellpadding='0' cellspacing='0' border='0' summary=''>";
