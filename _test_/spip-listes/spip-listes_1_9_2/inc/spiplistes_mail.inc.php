@@ -10,9 +10,10 @@
 			//$this->From		= lire_meta('email_webmaster');
 			$this->FromName	= lire_meta('nom_site');
 			$this->CharSet	= lire_meta('charset');
-	    	$this->Mailer	= 'mail';
+	    $this->Mailer	= 'mail';
 			$this->Subject	= $objet;
-			$this->AddAddress($email);
+			if ($email)
+				$this->SetAddress($email);
 			
 			
 			if ($smtp_sender = lire_meta('smtp_sender')) {
@@ -39,9 +40,6 @@
 					}
 				}
 			}
-			
-
-
 			if (!empty($message_html) AND !empty($message_texte)) {
 	     		$this->Body = $message_html;
 	     		$this->AltBody = $message_texte;
@@ -54,13 +52,22 @@
 				
 			}
 		}
+    function SetAddress($address, $name = "") {
+    	$this->to=array();
+      $this->AddAddress($address,$name);
+    }
+    function SetAddress($address, $name = "") {
+    	$this->to=array();
+      $this->AddAddress($address,$name);
+    }
 
 
-/**
-	 * d'après SPIP-Lettres : plugin de gestion de lettres d'information
+
+	/**
+	 * d'apres SPIP-Lettres : plugin de gestion de lettres d'information
 	 *
 	 * Copyright (c) 2006
-	 * Agence Atypik CrÃ©ations
+	 * Agence Atypik Creations
 	 *  
 	 *  
 	 **/

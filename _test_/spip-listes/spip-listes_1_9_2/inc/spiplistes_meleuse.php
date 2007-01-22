@@ -136,12 +136,27 @@ if ($message_pile > 0){
 	$page_.=$urlsite."\n";
 	$page_.="________________________________________________________________________"  ;
 	
+	$pied_desabo_texte = "\n\n" . filtrer_entites(_T('spiplistes:abonnement_mail'))."\n" ;
+	
 
 	$nb_inscrits=$total_abonnes;
 	
 	
 	spip_log(_T('spiplistes:email_reponse').$from."\n"._T('spiplistes:contacts')." : ".$nb_inscrits) ;
 
+	$email_a_envoyer_texte = new phpMail('', $objet, '',$pagem);
+	$email_a_envoyer_texte->From = $from ;
+	$email_a_envoyer_texte->AddCustomHeader("Errors-To: ".$from);
+	$email_a_envoyer_texte->AddCustomHeader("Reply-To: ".$from);
+	$email_a_envoyer_texte->AddCustomHeader("Return-Path: ".$from);
+
+	$email_a_envoyer_html = new phpMail('', $objet, $pagehm, $pagem);
+	$email_a_envoyer_html->From = $from ;
+	$email_a_envoyer_html->AddCustomHeader("Errors-To: ".$from);
+	$email_a_envoyer_html->AddCustomHeader("Reply-To: ".$from);
+	$email_a_envoyer_html->AddCustomHeader("Return-Path: ".$from);
+	
+	$is_from_valide = email_valide($from);
 	
 	if($nb_inscrits > 0){
 
@@ -198,21 +213,14 @@ if ($message_pile > 0){
 					spip_query("UPDATE spip_auteurs SET cookie_oubli ="._q($cookie)." WHERE email ="._q($email));				
 				
 					//version texte utilisee en format texte et HTML multipart
-					$pagem = $page_."\n\n"  ;
 
 					if ($extra["abo"] == 'texte'){    // email TXT -----------------------
-						// desabo pied de page texte			
-						$pagem.= filtrer_entites(_T('spiplistes:abonnement_mail'))."\n" ;
-						$pagem.= filtrer_entites(generer_url_public('abonnement','d='.$cookie))."\n\n"  ;
-						
-						$email_a_envoyer = new phpMail($email, $objet, '',$pagem);
-						if (email_valide($from)){
-							$email_a_envoyer->From = $from ;
-							$email_a_envoyer->AddCustomHeader("Errors-To: ".$from);
-							$email_a_envoyer->AddCustomHeader("Reply-To: ".$from);
-							$email_a_envoyer->AddCustomHeader("Return-Path: ".$from);
-		
-							if ($email_a_envoyer->send()) {
+						// desabo pied de page texte
+						$pagem = $page_.$pied_desabo_texte.filtrer_entites(generer_url_public('abonnement','d='.$cookie))."\n\n"  ;
+						$email_a_envoyer_texte->Body = $pagem;
+						$email_a_envoyer_texte->SetAddress($email);
+						if ($is_from_valide){
+							if ($email_a_envoyer_texte->send()) {
 								$str_temp .= "->ok";
 								$nb_emails_envoyes++;
 								$nb_emails_texte++;
@@ -229,18 +237,11 @@ if ($message_pile > 0){
 						}
 					}
 					else if ($extra["abo"] == 'html') {  // email HTML ------------------
-						// desabo pied de page HTML
-						//spip_log($pied_page);
 						$pagehm = $pageh.$pied_page."<a href=\"".generer_url_public('abonnement','d='.$cookie)."\">"._T('spiplistes:abonnement_mail')."</a>\n\n</body></html>";
-							
-						$email_a_envoyer = new phpMail($email, $objet, $pagehm, $pagem);
-						if (email_valide($from)){
-							$email_a_envoyer->From = $from ;
-							$email_a_envoyer->AddCustomHeader("Errors-To: ".$from);
-							$email_a_envoyer->AddCustomHeader("Reply-To: ".$from);
-							$email_a_envoyer->AddCustomHeader("Return-Path: ".$from);
-	
-							if ($email_a_envoyer->send()){
+						$email_a_envoyer_html->Body = $pagehm;
+						$email_a_envoyer_html->SetAddress($email);
+						if ($is_from_valide){
+							if ($email_a_envoyer_html->send()){
 								$str_temp .= "->ok";
 								$nb_emails_envoyes++;
 								$nb_emails_html++;
@@ -292,15 +293,14 @@ if ($message_pile > 0){
 	// faire le bilan apres l'envoi d'un lot	
 	if($test != 'oui'){
 		spip_query("UPDATE spip_courriers SET nb_emails_envoyes="._q($nb_emails_envoyes)." WHERE id_courrier="._q($id_message)); 
-	   if($nb_emails_non_envoyes > 0)
-	    spip_query("UPDATE spip_courriers SET nb_emails_non_envoyes="._q($nb_emails_non_envoyes)." WHERE id_courrier="._q($id_message));
-	    if($nb_emails_echec > 0)
-	    spip_query("UPDATE spip_courriers SET nb_emails_echec="._q($nb_emails_echec)." WHERE id_courrier="._q($id_message)); 
-	    spip_query("UPDATE spip_courriers SET nb_emails_texte="._q($nb_emails_texte)." WHERE id_courrier="._q($id_message)); 
-	    spip_query("UPDATE spip_courriers SET nb_emails_html="._q($nb_emails_html)." WHERE id_courrier="._q($id_message)); 
-		if($fin_envoi=="oui"){
-		spip_query("UPDATE spip_courriers SET date_fin_envoi=NOW() WHERE id_courrier="._q($id_message)); 
-		}
+		if($nb_emails_non_envoyes > 0)
+			spip_query("UPDATE spip_courriers SET nb_emails_non_envoyes="._q($nb_emails_non_envoyes)." WHERE id_courrier="._q($id_message));
+		if($nb_emails_echec > 0)
+			spip_query("UPDATE spip_courriers SET nb_emails_echec="._q($nb_emails_echec)." WHERE id_courrier="._q($id_message)); 
+		spip_query("UPDATE spip_courriers SET nb_emails_texte="._q($nb_emails_texte)." WHERE id_courrier="._q($id_message)); 
+		spip_query("UPDATE spip_courriers SET nb_emails_html="._q($nb_emails_html)." WHERE id_courrier="._q($id_message)); 
+		if($fin_envoi=="oui")
+			spip_query("UPDATE spip_courriers SET date_fin_envoi=NOW() WHERE id_courrier="._q($id_message)); 
 	}
 } 
 else {
