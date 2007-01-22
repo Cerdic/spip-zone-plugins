@@ -100,7 +100,7 @@ function liens_contenus_referencer_liens($type_objet_contenant, $id_objet_conten
 	}
 }
 
-// (ré)initialisation de la table des liens
+// (re)initialisation de la table des liens
 function liens_contenus_initialiser()
 {
 	// vider la table
@@ -112,11 +112,14 @@ function liens_contenus_initialiser()
 	// parcourir les tables et les champs
 	foreach ($liste_tables as $table) {
 		$type_objet_contenant = ereg_replace("^spip_(.*[^s])s?$", "\\1", $table);
+        if ($type_objet_contenant == 'syndic') {
+            $type_objet_contenant = 'site';
+        }
 		$col_id = primary_index_table($table);
 		$res = spip_query("SELECT * FROM $table");
 		while ($row = spip_fetch_array($res)) {
 		    $id_objet_contenant = $row[$col_id];
-			// implode() n'est pas forcément le plus propre conceptuellement, mais ça doit convenir et c'est rapide
+			// implode() n'est pas forcement le plus propre conceptuellement, mais ca doit convenir et c'est rapide
 			liens_contenus_referencer_liens($type_objet_contenant, $id_objet_contenant, implode(' ', $row));
 		}
 	}

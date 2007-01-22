@@ -21,7 +21,6 @@ function liens_contenus_post_edition($flux)
 	$type_objet = ereg_replace("^spip_(.*[^s])s?$", "\\1", $flux['args']['table']);
 	// Cas particulier des sites
 	if ($type_objet == 'syndic') {
-	   spip_log('un site !!!');
     	$type_objet = 'site';
 	}
 	// Traitement des redirections
@@ -40,7 +39,7 @@ function liens_contenus_affiche_droite($flux)
 		return $flux;
 	}
 
-    // On vérifie si la table a été créée
+    // On verifie si la table a ete creee
     $liens_contenus_version_base_active = isset($GLOBALS['meta']['liens_contenus_version_base']) ? $GLOBALS['meta']['liens_contenus_version_base'] : 0;
     if ($liens_contenus_version_base_active == 0) {
         liens_contenus_verifier_version_base();
