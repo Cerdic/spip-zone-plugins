@@ -16,7 +16,7 @@ function balise_CLEVERMAIL_VALIDATION($p) {
 
 function balise_CLEVERMAIL_VALIDATION_dyn() {
 	if (isset($_GET['id']) && $_GET['id'] != '') {
-		$result = spip_query("SELECT * FROM cm_pending WHERE pnd_action_id='"._q($_GET['id'])."'");
+		$result = spip_query("SELECT * FROM cm_pending WHERE pnd_action_id="._q($_GET['id']));
 	    if (spip_num_rows($result)==1) {
 	    	$action = spip_fetch_array($result);
 	        switch ($action['pnd_action']) {
@@ -63,7 +63,7 @@ function balise_CLEVERMAIL_VALIDATION_dyn() {
 					$mail->Send();
 	                break;
 	        }
-	        spip_query("DELETE FROM cm_pending WHERE pnd_action_id='"._q($_GET['id'])."'");
+	        spip_query("DELETE FROM cm_pending WHERE pnd_action_id="._q($_GET['id']));
 	    } else {
 	        $return = '<p>'._T('clevermail:deja_validee').'</p>';
 	    }
