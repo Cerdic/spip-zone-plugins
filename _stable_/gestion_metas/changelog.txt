@@ -1,3 +1,4 @@
+         22 jan 2007 : correction d'une petite faute dans le README ({id_rubrique} et pas {id_rubriques})
 V0.1.1 : 24 nov 2006 : à la création de la table, on force la valeur par défaut d'id_rubrique et id_article à NULL pour gérer le cas id_rubrique=0 (la racine).
-V0.1 : 23 Nov 2006 : version stable pour l'ajout des metas title, description, keywords sur les articles et les rubriques.
+V0.1   : 23 Nov 2006 : version stable pour l'ajout des metas title, description, keywords sur les articles et les rubriques.
 

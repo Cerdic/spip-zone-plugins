@@ -4,7 +4,7 @@
 /* GestionMetas est un outils de gestion des métadonnee title, description et keywords    */
 /* pour SPIP, Copyright 2006 novactive - http://www.novactive.fr/                         */
 /* Il a ete developpe par Olivier G. <o.gendrin@novactive.com>                            */
-/*    pour le compte de Novactive                                                            */
+/*    pour le compte de Novactive                                                         */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
 /* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
