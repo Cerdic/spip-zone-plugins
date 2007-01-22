@@ -32,24 +32,24 @@ function exec_clevermail_lists_edit() {
 		            spip_query("INSERT INTO cm_lists
 		                (lst_id, lst_name, lst_comment, lst_moderation, lst_moderator_email, lst_subscribe_subject, lst_subscribe_text, lst_subject, lst_unsubscribe_subject, lst_unsubscribe_text, lst_subject_tag, lst_url_html, lst_url_text)
 		                VALUES
-		                ('', '".$list['lst_name']."', '".$list['lst_comment']."', '".$list['lst_moderation']."', '".$list['lst_moderator_email']."', '".$list['lst_subscribe_subject']."', "._q($list['lst_subscribe_text']).", "._q($list['lst_subject']).", "._q($list['lst_unsubscribe_subject']).", "._q($list['lst_unsubscribe_text']).", ".$list['lst_subject_tag'].", '".$list['lst_url_html']."', '".$list['lst_url_text']."')");
+		                ('', "._q($list['lst_name']).", "._q($list['lst_comment']).", "._q($list['lst_moderation']).", "._q($list['lst_moderator_email']).", "._q($list['lst_subscribe_subject']).", "._q($list['lst_subscribe_text']).", "._q($list['lst_subject']).", "._q($list['lst_unsubscribe_subject']).", "._q($list['lst_unsubscribe_text']).", "._q($list['lst_subject_tag']).", "._q($list['lst_url_html']).", "._q($list['lst_url_text']).")");
 		        } else {
 		            spip_query("UPDATE cm_lists
 		                SET
-		                lst_name = '".$list['lst_name']."',
-		                lst_comment = '".$list['lst_comment']."',
-		                lst_moderation = '".$list['lst_moderation']."',
-						lst_moderator_email = '".$list['lst_moderator_email']."',
-		                lst_subscribe_subject = '".$list['lst_subscribe_subject']."',
-		                lst_subscribe_text = '".$list['lst_subscribe_text']."',
-		                lst_subject = '".$list['lst_subject']."',
-		                lst_unsubscribe_subject = '".$list['lst_unsubscribe_subject']."',
-		                lst_unsubscribe_text = '".$list['lst_unsubscribe_text']."',
-		                lst_subject_tag = ".$list['lst_subject_tag'].",
-		                lst_url_html = '".$list['lst_url_html']."',
-		                lst_url_text = '".$list['lst_url_text']."'
+		                lst_name = "._q($list['lst_name']).",
+		                lst_comment = "._q($list['lst_comment']).",
+		                lst_moderation = "._q($list['lst_moderation']).",
+						lst_moderator_email = "._q($list['lst_moderator_email']).",
+		                lst_subscribe_subject = "._q($list['lst_subscribe_subject']).",
+		                lst_subscribe_text = "._q($list['lst_subscribe_text']).",
+		                lst_subject = "._q($list['lst_subject']).",
+		                lst_unsubscribe_subject = "._q($list['lst_unsubscribe_subject']).",
+		                lst_unsubscribe_text = "._q($list['lst_unsubscribe_text']).",
+		                lst_subject_tag = "._q($list['lst_subject_tag']).",
+		                lst_url_html = "._q($list['lst_url_html']).",
+		                lst_url_text = "._q($list['lst_url_text'])."
 		                WHERE
-		                lst_id = ".$list['lst_id']);
+		                lst_id = "._q($list['lst_id']));
 		        }
 		    } else {
 		        define('_ERROR', _T('clevermail:lettre_meme_nom'));
