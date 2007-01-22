@@ -11,8 +11,6 @@
  *
  */
 
-
-
 	// la fonction est tres legere on la definit directement ici
 	function ToutMulti_pre_typo($texte) {
 		$regexp = "|<:([^>]*):>|";
@@ -22,7 +20,5 @@
 			_T('spip/ecrire/public:'.$regs[1]), $texte);
 		return $texte;
 	}
-  
-
 
 ?>
