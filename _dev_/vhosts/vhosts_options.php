@@ -14,9 +14,9 @@ if (lire_fichier(_DIR_SESSIONS . 'vhosts.txt', $vhosts)) {
 }
 error_log("vhosts = ".var_export($vhosts, 1));
 
-if(array_key_exists("HOST", $HTTP_GET_VARS)) {
+if(array_key_exists("HOST", $_GET)) {
 	// on fixe de force si la valeur est dans l'url
-	$requiredHost= $HTTP_GET_VARS["HOST"];
+	$requiredHost= $_GET["HOST"];
 	// on enleve cet argument de l'url, pour pas polluer les liens qui
 	// seront generes par la suite
 	str_replace("&HOST=$requiredHost", '', $GLOBALS['REQUEST_URI']);
@@ -28,17 +28,17 @@ if(array_key_exists("HOST", $HTTP_GET_VARS)) {
 	} else {
 		setcookie("HOST", $requiredHost);
 	}
-} elseif(!empty($HTTP_COOKIE_VARS["HOST"])) {
+} elseif(!empty($_COOKIE["HOST"])) {
 	// sinon, on la cherche dans un cookie
-	 $requiredHost= $HTTP_COOKIE_VARS["HOST"];
+	 $requiredHost= $_COOKIE["HOST"];
 	 // slashs interdits, meme en tripotant les cookies
 	 if (strstr($requiredHost, '/')) {
 		 $requiredHost='';
 	 }
 } else {
 	 // sinon, selon le HTTP_HOST
-	if(array_key_exists($HTTP_HOST, $vhosts)) {
-		$requiredHost=$vhosts[$HTTP_HOST];
+	if(array_key_exists($_SERVER['HTTP_HOST'], $vhosts)) {
+		$requiredHost=$vhosts[$_SERVER['HTTP_HOST']];
 	} else {
 		$requiredHost='';
 	}
