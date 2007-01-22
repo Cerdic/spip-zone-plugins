@@ -1,23 +1,23 @@
 <?php
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
+/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
+/* par email pour SPIP. http://bloog.net/spip-listes                                      */
+/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                               */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous � la Licence Publique Generale GNU  */
+/* pour plus de d�tails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir re�u une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
-
 
 
 function pied_de_page_liste($id_liste) {
@@ -27,7 +27,7 @@ if(intval($id_liste) > 0){
 	$pied= $pied['pied_page'];
 }else{
 	include_spip('public/assembler');
-	$contexte_pied = array('lang'=>$lang);
+	$contexte_pied = array('lang'=>$GLOBALS['spip_lang']);
 	$pied = recuperer_fond('modeles/piedmail', $contexte_pied);
 }
 return $pied ;
@@ -108,7 +108,7 @@ function propre_bloog($texte) {
 
 /****
  * titre : version_texte
- * d'après Clever Mail (-> NHoizey), mais en mieux.
+ * d'apr�s Clever Mail (-> NHoizey), mais en mieux.
 ****/
 
 function version_texte ($in) {
@@ -200,24 +200,23 @@ $out = ereg_replace ('<li[^>]>', "\n".'-', $out);
 }
 
 
-
-
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
+/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
+/* par email pour SPIP. http://bloog.net/spip-listes                                      */
+/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                               */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous � la Licence Publique Generale GNU  */
+/* pour plus de d�tails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir re�u une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 ?>

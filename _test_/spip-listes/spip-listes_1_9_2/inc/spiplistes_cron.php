@@ -22,14 +22,7 @@
 
 function cron_spiplistes_cron($t){
 
-include_spip('inc/distant');
-include_spip ('base/spip-listes');
-include_spip ('inc/affichage');
-
-
-
-$nomsite=lire_meta("nom_site");
-$urlsite=lire_meta("adresse_site");
+$nomsite = $GLOBALS['meta']['nom_site'];
 
 // ---------------------------------------------------------------------------------------------
 // Taches de fond
@@ -41,8 +34,6 @@ $urlsite=lire_meta("adresse_site");
 $time = time();
 spip_log("liste meleuse cron");
 	
-
-
 // Verifier toutes les listes et determiner les dates d'envoi
 
 $list_bg = spip_query ("SELECT * FROM spip_listes WHERE statut = 'liste' OR statut = 'inact'");
@@ -76,7 +67,7 @@ while($row = spip_fetch_array($list_bg)) {
 		
 		include_spip('public/assembler');
 		$contexte_patron = array('date' => $date,'patron'=>$patron, 'lang'=>$lang_bg);
-		$texte_patron_bg = recuperer_fond('patron_switch', $contexte_patron);
+		$texte_patron_bg = recuperer_fond('patrons/'.$patron, $contexte_patron);
 	 	//$texte_patron_bg = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;		
 		
 		$titre_patron_bg = ($titre_message =="") ? $titre_bg." de ".$nomsite : $titre_message;

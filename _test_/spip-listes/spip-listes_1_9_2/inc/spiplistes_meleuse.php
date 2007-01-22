@@ -1,5 +1,4 @@
 <?php
-
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes                                      */
@@ -24,13 +23,11 @@
 include_spip('inc/meta');
 include_spip('inc/texte');
 include_spip('inc/filtres');
-include_spip('inc/acces');
-include_spip ('base/spip-listes');
 
 include_spip('spiplistes_boutons');
 include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
 
-$charset=lire_meta('charset');
+$charset = $GLOBALS['meta']['charset'];
 
 // Trouver un message a envoyer 
 $result_pile = spip_query("SELECT * FROM spip_courriers AS messages WHERE statut='encour' ORDER BY date ASC LIMIT 0,1");
@@ -99,8 +96,8 @@ if ($message_pile > 0){
 		}
 	
 	// on prepare l'email
-	$nomsite=lire_meta("nom_site");
-	$urlsite=lire_meta("adresse_site");
+	$nomsite = $GLOBALS['meta']['nom_site'];
+	$urlsite = $GLOBALS['meta']['adresse_site'];
 	srand((double)microtime()*1000000);
 	$boundary = md5(uniqid(rand()));
 	
@@ -115,9 +112,7 @@ if ($message_pile > 0){
 	   $objet = str_replace("&#8221;", "\"", $objet);
  	}
 	
-	
-	//$texte = liens_absolus($texte); // vraiment  utile ?
-	//$texte = absolute_url($texte); // vraiment  utile ?
+
 		
 	if ($charset <> 'utf-8') {
 		$texte = str_replace("&#8217;", "'", $texte);
@@ -161,7 +156,7 @@ if ($message_pile > 0){
 		//initialiser la taille des lots
 		$lot=$GLOBALS['meta']['spiplistes_lots'];
 		if (!isset($lot)) {
-		ecrire_meta('spiplistes_lots' , 20) ;
+		ecrire_meta('spiplistes_lots' , 30) ;
 		ecrire_metas();
 		}
 		$limit=$GLOBALS['meta']['spiplistes_lots']; // nombre de messages envoyés par boucles.	

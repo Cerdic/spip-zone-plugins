@@ -677,21 +677,22 @@ function spiplistes_afficher_auteurs($query, $url){
 }
 
 /******************************************************************************************/
-/* SPIP-listes est un systï¿½e de gestion de listes d'information par email pour SPIP      */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
+/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
+/* par email pour SPIP. http://bloog.net/spip-listes                                      */
+/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                               */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Gï¿½ï¿½ale GNU publiï¿½ par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribuï¿½car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spï¿½ifique. Reportez-vous ï¿½la Licence Publique Gï¿½ï¿½ale GNU  */
-/* pour plus de dï¿½ails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous à la Licence Publique Generale GNU  */
+/* pour plus de détails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reï¿½ une copie de la Licence Publique Gï¿½ï¿½ale GNU                    */
-/* en mï¿½e temps que ce programme ; si ce n'est pas le cas, ï¿½rivez ï¿½la                  */
+/* Vous devez avoir reçu une copie de la Licence Publique Generale GNU                    */
+/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, ï¿½ats-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 ?>
