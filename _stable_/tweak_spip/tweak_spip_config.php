@@ -30,6 +30,15 @@ add_tweak( array(
 ));
 
 add_tweak( array(
+	'id'	=> 'quota_cache',
+//	'code' 	=> '$GLOBALS["quota_cache0"]=10;',
+	'code' 	=> '$GLOBALS["quota_cache"]=%%quota_cache/d/$GLOBALS["quota_cache"]%%;',
+	'categorie'	=> 'admin',
+	'options'	=> 1,
+//	'fonctions'	=> 1,
+));
+
+add_tweak( array(
 	'id'	=> 'supprimer_numero',
 	'code' 	=> '$GLOBALS["table_des_traitements"]["TITRE"][]= "typo(supprimer_numero(%s))";',
 	'categorie'	=> 'admin',
@@ -85,8 +94,7 @@ add_tweak( array(
 	'id'	=> 'desactiver_flash',
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'categorie'		=> 'admin',
-	// pipeline => fonction
-	'affichage_final' => 'InhibeFlash_affichage_final',
+	'pipeline:affichage_final' => 'InhibeFlash_affichage_final',
 ));
 
 //-----------------------------------------------------------------------------//
@@ -96,50 +104,43 @@ add_tweak( array(
 add_tweak( array(
 	'id'	=> 'toutmulti',
 	'categorie'		=> 'typo',
-	// pipeline => fonction
-	'pre_typo'	=> 'ToutMulti_pre_typo',
+	'pipeline:pre_typo'	=> 'ToutMulti_pre_typo',
 ));
 
 add_tweak( array(
 	'id'	=> 'bellespuces',
 	'auteur' 		=> '[J&eacute;r&ocirc;me Combaz->http://conseil-recherche-innovation.net/index.php/2000/07/08/72-jerome-combaz]',
 	'categorie'		=> 'typo',
-	// pipeline => fonction
-	'pre_typo' => 'bellespuces_pre_typo',
+	'pipeline:pre_typo' => 'bellespuces_pre_typo',
 ));	
 
 add_tweak( array(
 	'id'	=> 'decoration',
 	'auteur' 		=> '[izo@aucuneid.net->http://www.aucuneid.com/bones]',
 	'categorie'		=> 'typo',
-	// pipeline => fonction
-	'pre_typo' => 'decoration_pre_typo',
+	'pipeline:pre_typo' => 'decoration_pre_typo',
 ));
 
-// tweak specifiquement français. D'autres langues peuvent etre ajoutees dans inc/typo_exposants.php
-// TODO : le dire sur spip-contrib
+// tweak specifiquement français. D'autres langues peuvent etre ajoutees dans tweaks/typo_exposants.php
 add_tweak( array(
 	'id'	=> 'typo_exposants',
 	'auteur' 		=> 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
 	'categorie'		=> 'typo',
-	// pipeline => fonction
-	'post_typo'	=> 'typo_exposants',
+	'pipeline:post_typo'	=> 'typo_exposants',
 ));
 
 add_tweak( array(
 	'id'	=> 'filets_sep',
 	'auteur' 		=> 'FredoMkb',
 	'categorie'		=> 'typo',
-	// pipeline => fonction
-	'pre_typo'	=> 'filets_sep',
+	'pipeline:pre_typo'	=> 'filets_sep',
 ));
 
 add_tweak( array(
 	'id'	=> 'smileys',
 	'auteur' 		=> 'Sylvain',
 	'categorie'		=> 'typo',
-	// pipeline => fonction
-	'pre_typo'	=> 'tweak_smileys',
+	'pipeline:pre_typo'	=> 'tweak_smileys',
 ));
 
 // Idées d'ajouts :
@@ -156,13 +157,11 @@ add_tweak( array(
 //                        activation des tweaks                                //
 //-----------------------------------------------------------------------------//
 
-// exclure ce qui n'est pas un pipeline...
-global $tweak_exclude;
-$tweak_exclude = array('id', 'nom', 'description', 'auteur', 'categorie', 'code', 'options', 'fonctions', 'actif');
-
 // lire les metas et initialiser : $tweaks_pipelines, $tweaks_css
 global $tweaks_pipelines, $tweaks_css;
+//echo "début initialisation faite dans tweak_spip_config\n";
 tweak_initialisation();
+//echo "fin initialisation faite dans tweak_spip_config\n";
 
 // print_r($tweaks); print_r($tweaks_pipelines); print_r($tweaks_css);
 

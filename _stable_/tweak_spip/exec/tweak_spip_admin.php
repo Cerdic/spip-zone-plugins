@@ -12,6 +12,10 @@ include_spip('inc/layer');
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
 define('_DIR_PLUGIN_TWEAK_SPIP',(_DIR_PLUGINS.end($p)));
 
+// compatibilite spip 1.9
+if(!function_exists(fin_gauche)) { function fin_gauche(){return false;} }
+
+
 function tweak_styles_et_js() {
 	global $couleur_claire;
 	echo "<style type='text/css'>\n";
@@ -71,10 +75,24 @@ div.detailtweak hr {
 EOF;
 	echo "</style>";
 	echo "<script type=\"text/javascript\"><!--
-function verifchange(id) {
- if(this.checked == true)
-	document.getElementById(id).className = 'nomtweak_on';
- else document.getElementById(id).className = 'nomtweak';
+function verifchange(tweak, index, nb_var) {
+ if(this.checked == true) {
+ 	classe = 'nomtweak_on';
+	html = 'input';
+	test = 1
+ } else {
+ 	classe = 'nomtweak';
+	html = 'valeur';
+	test = 0
+ }
+ document.getElementById(tweak).className = classe;
+ document.getElementById('tweak_'+tweak).value = test;
+ for(i=1;i<=nb_var;i++) {
+  j = index+i;
+  var chaine=document.getElementById('tweak_'+j+'-'+html).innerHTML;
+  if(html=='input') chaine=chaine.replace(/HIDDENTWEAKVAR__/,'');
+  document.getElementById('tweak_'+j+'-visible').innerHTML = chaine;
+ }
 }
 //--></script>";
 }
@@ -87,7 +105,7 @@ function enregistre_modif_tweaks(){
 	foreach($tweaks as $tweak) $test["tweak_".$tweak['id']] = $tweak['id'];
 	$liste = array();
 	if (!isset($_POST['desactive_tous']))
-		foreach($_POST as $choix=>$val) if (isset($test[$choix])&&$val=='O') $liste[$test[$choix]]['actif'] = 1;
+		foreach($_POST as $choix=>$val) if (isset($test[$choix]) && $val=='1') $liste[$test[$choix]]['actif'] = 1;
 	global $connect_id_auteur, $connect_login;
 	spip_log("Changement des tweaks actifs par auteur id=$connect_id_auteur :".implode(',',$liste));
 	ecrire_meta('tweaks',serialize($liste));
@@ -124,7 +142,7 @@ function exec_tweak_spip_admin() {
 //	else
 //		verif_tweaks();
 
-	tweak_initialisation();
+	//tweak_initialisation();
 	
 	global $spip_version_code;
 	if ($spip_version_code<1.92) 
@@ -148,9 +166,6 @@ function exec_tweak_spip_admin() {
 	debut_droite();
 	lire_metas();
 
-	echo generer_url_post_ecrire('tweak_spip_admin');
-	echo "\n<input type='hidden' name='changer_tweaks' value='oui'>";
-
 	debut_cadre_trait_couleur('administration-24.gif','','',_T('tweak:tweaks_liste'));
 
 	echo "\n<table border='0' cellspacing='0' cellpadding='5' >",
@@ -160,12 +175,15 @@ function exec_tweak_spip_admin() {
 	foreach(array_keys($categ) as $c) {
 		echo '<p><strong>'._T('tweak:'.$c).'</strong></p>';
 		echo '<ul>';
-		foreach($temp = $tweaks as $tweak) if ($tweak['categorie']==$c) echo '<li>' . ligne_tweak($tweak) . "</li>\n"; 
+		foreach($temp = $tweaks as $tweak) if ($tweak['categorie']==$c) echo '<li>' . ligne_tweak($tweak) . "</li>\n";
 		echo '</ul>';
 	}
-	echo "</td></tr></table>\n",
+	echo "</td></tr></table>\n";
 
-		"\n<div style='text-align:$spip_lang_right'>",
+	echo generer_url_post_ecrire('tweak_spip_admin');
+	echo "\n<input type='hidden' name='changer_tweaks' value='oui'>";
+	foreach($temp = $tweaks as $tweak) echo "<input type='hidden' id='tweak_".$tweak['id']."' name='tweak_".$tweak['id']."' value='".($tweak['actif']?"1":"0")."' />";
+	echo "\n<div style='text-align:$spip_lang_right'>",
 		"<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' ",
 		"\"></div>";
 
@@ -181,14 +199,8 @@ function exec_tweak_spip_admin() {
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'tweak_spip_admin'),'data'=>''));
 	echo "</form>";
 
-	echo $spip_version_code>=1.92?fin_gauche():'', fin_page();
+	echo fin_gauche(), fin_page();
 	
-}
-
-// est-ce que $pipe est un pipeline ?
-function is_tweak_pipeline($pipe) {
-	global $tweak_exclude;
-	return !in_array($pipe, $tweak_exclude);
 }
 
 // affiche un tweak sur une ligne
@@ -198,8 +210,10 @@ function ligne_tweak($tweak){
 	$actif = $tweak['actif'];
 	$puce = $actif?'puce-verte.gif':'puce-rouge.gif';
 	$titre_etat = _T('tweak:'.($actif?'':'in').'actif');
+	$nb_var = intval($tweak['nb_variables']);
+	$index = intval($tweak['basic']);
 	
-	$s = "<div id='$tweak_id' class='nomtweak".($actif?'_on':'')."'>";
+	$s = "<form><div id='$tweak_id' class='nomtweak".($actif?'_on':'')."'>";
 /*
 	if (isset($info['erreur'])){
 		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
@@ -211,29 +225,28 @@ function ligne_tweak($tweak){
 */
 	$s .= "<img src='"._DIR_IMG_PACK."$puce' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;";
 
-	$s .= "<input type='checkbox' name='tweak_$inc' value='O' id='label_$id_input'";
+	$s .= "<input type='checkbox' name='foo_$inc' value='O' id='label_$id_input'";
 	$s .= $actif?" checked='checked'":"";
-//	$s .= " onclick='verifchange.apply(this,[\"$inc\"])'";
+	$s .= " onclick='verifchange.apply(this,[\"$inc\", $index, $nb_var])'";
 	$s .= "/> <label for='label_$id_input' style='display:none'>"._T('tweak:activer_tweak')."</label>";
 
 	$s .= bouton_block_invisible($tweak_id) . propre($tweak['nom']);
 
-	$s .= "</div>";
+	$s .= "</div></form>";
 
 	$s .= debut_block_invisible($tweak_id);
 
 	$s .= "\n<div class='detailtweak'>";
-	if (isset($tweak['description'])) $s .= propre($tweak['description']);
-	if (isset($tweak['auteur'])) $s .= "<p>" . _T('auteur') .' '. propre($tweak['auteur']) . "</p>";
+	$s .= $tweak['description'];
+	if ($tweak['auteur']!='') $s .= "<p>" . _T('auteur') .' '. $tweak['auteur'] . "</p>";
 	$s .= "<hr/>" . _T('tweak:tweak') . (isset($tweak['code'])?" code":" $inc.php");
 	if ($tweak['options']) $s .= ' | options';
 	if ($tweak['fonctions']) $s .= ' | fonctions';
-	foreach ($tweak as $pipe=>$fonc) if (is_tweak_pipeline($pipe)) $s .= ' | '.$pipe;
+	foreach ($tweak as $pipe=>$fonc) if (is_tweak_pipeline($pipe, $pipe2)) $s .= ' | '.$pipe2;
 	$s .= "</div>";
 
 	$s .= fin_block();
 	$id_input++;
-
 	return $s;
 }
 ?>

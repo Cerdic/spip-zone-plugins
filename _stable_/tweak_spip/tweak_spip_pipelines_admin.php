@@ -44,6 +44,7 @@ function tweak_spip_install($action){
 			break;
 		case 'uninstall':
 			effacer_meta('tweaks');
+			effacer_meta('tweaks_var');
 			ecrire_metas();
 			break;
 	}

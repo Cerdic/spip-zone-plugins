@@ -83,6 +83,11 @@ _ Infos : [->http://www.spip-contrib.net/?article1563]",
 	'smileys:nom' => 'Smileys',
 	'smileys:description'	=> "Ins&egrave;re des smileys dans tous les textes o&ugrave; apparait un raccourci du genre <acronym>:-)</acronym>. Id&eacute;al pour les  forums.
 _ Infos : [->http://www.spip-contrib.net/?article1561]",
+
+	'quota_cache:nom' => 'Quota du cache',
+	'quota_cache:description'	=> "Modifier le quota r&eacute;serv&eacute; au cache. Une valeur &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique.<br>Valeur (en Mo) : %quota_cache%",
+
+
 /*
 	':nom' => '',
 	':description'	=> '',
