@@ -98,12 +98,12 @@ if ($message_pile > 0){
 	// on prepare l'email
 	$nomsite = $GLOBALS['meta']['nom_site'];
 	$urlsite = $GLOBALS['meta']['adresse_site'];
-	srand((double)microtime()*1000000);
-	$boundary = md5(uniqid(rand()));
-	
+		
 	// email emmeteur
 	$email_webmaster = (email_valide($GLOBALS['meta']['email_defaut'])) ? $GLOBALS['meta']['email_defaut'] : $GLOBALS['meta']['email_webmaster'];
 	$from = email_valide($email_liste) ? $email_liste : $email_webmaster;
+    
+    $is_from_valide = email_valide($from);         
             
 	$objet= filtrer_entites($titre);
 	if ($charset <> 'utf-8') {
@@ -138,7 +138,6 @@ if ($message_pile > 0){
 	
 
 	$nb_inscrits=$total_abonnes;
-	
 	
 	spip_log(_T('spiplistes:email_reponse').$from."\n"._T('spiplistes:contacts')." : ".$nb_inscrits) ;
 
@@ -206,7 +205,7 @@ if ($message_pile > 0){
 						$pagem.= filtrer_entites(generer_url_public('abonnement','d='.$cookie))."\n\n"  ;
 						
 						$email_a_envoyer = new phpMail($email, $objet, '',$pagem);
-						if (email_valide($from)){
+						if ($is_from_valide){
 							$email_a_envoyer->From = $from ;
 							$email_a_envoyer->AddCustomHeader("Errors-To: ".$from);
 							$email_a_envoyer->AddCustomHeader("Reply-To: ".$from);
@@ -234,7 +233,7 @@ if ($message_pile > 0){
 						$pagehm = $pageh.$pied_page."<a href=\"".generer_url_public('abonnement','d='.$cookie)."\">"._T('spiplistes:abonnement_mail')."</a>\n\n</body></html>";
 							
 						$email_a_envoyer = new phpMail($email, $objet, $pagehm, $pagem);
-						if (email_valide($from)){
+						if ($is_from_valide){
 							$email_a_envoyer->From = $from ;
 							$email_a_envoyer->AddCustomHeader("Errors-To: ".$from);
 							$email_a_envoyer->AddCustomHeader("Reply-To: ".$from);
