@@ -5,7 +5,7 @@
  * 
  *
  * Autore : renatoformato@virgilio.it
- * © 2006 - Distribuito sotto licenza GNU/GPL
+ * © 2006-2007 - Distribuito sotto licenza GNU/GPL
  *
  */
 
@@ -143,6 +143,8 @@ function indicizza_tabelle_debut_page() {
 function indicizza_tabelle_fin_page() {
 
 	$ret = fin_cadre_trait_couleur(true);
+	
+	$ret .= fin_gauche();
 	
 	$ret .= fin_page();
 	

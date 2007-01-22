@@ -6,7 +6,7 @@
  * 
  *
  * Autore : renatoformato@virgilio.it
- * © 2006 - Distribuito sotto licenza GNU/GPL
+ * © 2006-2007 - Distribuito sotto licenza GNU/GPL
  *
  */
 
@@ -117,6 +117,8 @@ function exec_tabelle_aggiuntive_dist() {
 	$ret .= afficher_liste_debut_tableau().afficher_liste(array('40%','40%','20%'),$tabelle).afficher_liste_fin_tableau();
 	
 	$ret .= fin_cadre_trait_couleur(true);
+	
+	$ret .= fin_gauche(); 
 	
 	$ret .= fin_page();
 	

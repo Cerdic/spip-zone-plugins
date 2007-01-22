@@ -6,7 +6,7 @@
  * 
  *
  * Autore : renatoformato@virgilio.it
- * © 2006 - Distribuito sotto licenza GNU/GPL
+ * © 2006-2007 - Distribuito sotto licenza GNU/GPL
  *
  */
 
