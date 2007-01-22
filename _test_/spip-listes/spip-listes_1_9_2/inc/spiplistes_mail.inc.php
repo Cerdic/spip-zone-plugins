@@ -2,39 +2,40 @@
 
 	include_spip('phpmailer/class.phpmailer');
 	include_spip('phpmailer/class.smtp');
-	include_spip('inc/meta');
 
 	class phpMail extends PHPMailer {
 
 		function phpMail($email, $objet, $message_html, $message_texte) {
+		
+		$charset = $GLOBALS['meta']['charset'];
+					
 			//$this->From		= lire_meta('email_webmaster');
-			$this->FromName	= lire_meta('nom_site');
-			$this->CharSet	= lire_meta('charset');
-	    $this->Mailer	= 'mail';
+			$this->FromName	=  $GLOBALS['meta']['nom_site'];
+			$this->CharSet	= $charset ;
+	    	$this->Mailer	= 'mail';
 			$this->Subject	= $objet;
-			if ($email)
-				$this->SetAddress($email);
+			$this->AddAddress($email); 
 			
 			
-			if ($smtp_sender = lire_meta('smtp_sender')) {
-	       		$this->Sender = lire_meta('spip_lettres_smtp_sender');
+			if ($smtp_sender =  $GLOBALS['meta']['smtp_sender']) {
+	       		$this->Sender = $GLOBALS['meta']['spip_lettres_smtp_sender'];
 			}
 			
-			$envoi_par_smtp = lire_meta('mailer_smtp') ;
+			$envoi_par_smtp =  $GLOBALS['meta']['mailer_smtp'] ;
 
 			if($envoi_par_smtp == "oui"){
-				if ($smpt_server = lire_meta('smtp_server')) {
+				if ($smpt_server =  $GLOBALS['meta']['smtp_server']) {
 		    		$this->IsSMTP(); // telling the class to use SMTP
 		    		$this->Mailer	= 'smtp';
-				    $this->Host 	= lire_meta('smtp_server');
-				    $this->Port 	= lire_meta('smtp_port');
+				    $this->Host 	=  $GLOBALS['meta']['smtp_server'];
+				    $this->Port 	=  $GLOBALS['meta']['smtp_port'];
 					
-					$smtp_identification = lire_meta('smtp_identification') ;
+					$smtp_identification =  $GLOBALS['meta']['smtp_identification'] ;
 
 					if ($smtp_identification == "oui") {
 					    $this->SMTPAuth = true;
-					    $this->Username = lire_meta('smtp_login');
-					    $this->Password = lire_meta('smtp_pass');
+					    $this->Username =  $GLOBALS['meta']['smtp_login'];
+					    $this->Password =  $GLOBALS['meta']['smtp_pass'];
 					} else {
 					    $this->SMTPAuth = false;
 					}
@@ -52,20 +53,11 @@
 				
 			}
 		}
-    function SetAddress($address, $name = "") {
-    	$this->to=array();
-      $this->AddAddress($address,$name);
-    }
-    function SetAddress($address, $name = "") {
-    	$this->to=array();
-      $this->AddAddress($address,$name);
-    }
-
-
+       
 
 	/**
 	 * d'apres SPIP-Lettres : plugin de gestion de lettres d'information
-	 *
+	 * inutilisé mais ca pourra peut etre servir pour emabarquer les images
 	 * Copyright (c) 2006
 	 * Agence Atypik Creations
 	 *  

@@ -116,15 +116,16 @@ function cron_spiplistes_cron($t){
 	
 	// Envoi d'un mail automatique ?
 	$result_pile = spip_query("SELECT COUNT(id_courrier) AS n FROM spip_courriers AS messages WHERE statut='encour'");
-	if ($row = spip_fetch_array($result_pile) && $row[n]>0){
+	$message_pile = spip_num_rows($result_pile); 
+	if ($row = spip_fetch_array($result_pile) AND $message_pile > 0){
 		spip_log("appel meleuse");
 		include_spip('inc/spiplistes_meleuse');
-		
+		/*
 		$result_pile = spip_query("SELECT COUNT(id_courrier) AS n FROM spip_courriers AS messages WHERE statut='encour'");
 		if ($row = spip_fetch_array($result_pile) && $row[n]>0){
 			spip_log("il reste des courriers a envoyer");
 			return (0 - $t);
-		}
+		}*/
 	}
 	return 1; 
 }
