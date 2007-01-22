@@ -2,8 +2,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-function action_tweak_input_dist()
-{
+function action_tweak_input_dist() {
+	global $spip_version_code;
 	if ($spip_version_code>=1.92) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
