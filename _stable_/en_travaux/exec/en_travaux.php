@@ -28,7 +28,7 @@ include_ecrire("inc_presentation");
 	debut_gauche();
 	
 	debut_boite_info();
-	echo propre(_T('entravaux:en_travaux_info_message'));	
+	echo propre(_T('entravaux:info_message'));	
 	fin_boite_info();
 	
 	debut_droite();
@@ -38,22 +38,23 @@ include_ecrire("inc_presentation");
 	if ($GLOBALS['connect_statut'] == "0minirezo") {
 	echo generer_url_post_ecrire("en_travaux");
 	echo "<p>";
-	echo "<label for='est_en_travaux'>"._T("entravaux:en_travaux_actif")."</label> : ";
+	echo "<label for='est_en_travaux'>"._T("entravaux:activer_message")."</label> ";
 	echo "<input type='checkbox' name='est_en_travaux' value='true' $check_en_travaux/>";
 	echo "</p>";
 	echo "<p>";
-	echo _T('entravaux:en_travaux_message')."<br/>";
+	echo _T('entravaux:message_temporaire')."<br/>";
 	echo "<textarea name='en_travaux_message' class='formo'>";
 	echo $en_travaux_texte;
 	echo "</textarea>";
 	echo "</p>";
-	echo "<input type='submit' name='modifier' value='"._T('bouton_valider')."' />";
-	echo "</div>";
+	echo '<div style="text-align: right;">';
+	echo "<input class='fondo' type='submit' name='modifier' value='"._T('bouton_valider')."' />";
+	echo "</div></div>";
 	echo "</form>";
 		
 	}
 	else 
-		echo "<strong>Vous n'avez pas acc&egrave;s &agrave; cette page.</strong>";
+		echo "<strong>"._T("avis_non_acces_page")."</strong>";
 	echo "</span>";
 	fin_cadre_trait_couleur();
 	fin_page();

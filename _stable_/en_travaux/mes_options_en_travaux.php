@@ -22,10 +22,16 @@ if ($GLOBALS['meta']['en_travaux']=='true')
 	}
 }
 function action_en_travaux(){
-	$texte="Site en cours de maintenace";
-	if (isset($GLOBALS['meta']['en_travaux_message']) && strlen($GLOBALS['meta']['en_travaux_message'])>0);
-		$texte=$GLOBALS['meta']['en_travaux_message'];
-	echo $texte;
+	$texte = trim($GLOBALS['meta']['en_travaux_message']);
+	if (!strlen($GLOBALS['meta']['en_travaux_message'])) $texte=_T('info_travaux_titre');
+
+	global $spip_version;
+	if ($spip_version<1.9) include_ecrire("inc_presentation.php3");  // version 1.8
+		else include_spip('inc/minipres');  // version 1.9 et suivantes
+
+	$page = install_debut_html($texte).install_fin_html();
+	if ($spip_version>=1.92) echo $page; // a partir de spip 1.9.2 ces fonctions ne font plus l'echo directement
+
 	return true;
 }
 ?>

@@ -4,7 +4,7 @@
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	[Arnaud Ventre->ventrea@gmail.com]
-	_ &copy; 2006 - Distribue sous licence GPL
+_ &copy; 2006 - Distribue sous licence GPL
 	</auteur>
 	<version>
 	1.0
@@ -13,7 +13,7 @@
 	stable
 	</etat>
 	<description>
-	Permet d'afficher un message personalisable pendant une phase de maintenance sur tout le site public
+	Permet d'afficher un message personalisable pendant une phase de maintenance sur tout le site public.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
