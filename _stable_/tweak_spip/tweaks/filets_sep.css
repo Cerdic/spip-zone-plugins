@@ -15,6 +15,10 @@
 *	+-------------------------------------+ 
 */
 
+.filet_sep {
+	font-size:1px;
+	text-align:center;
+}
 
 /******************************************/
 /** Filets **/
@@ -29,7 +33,7 @@
 .filet_sep_2 {border-bottom: 1px dashed #666; padding: 0; margin: 0px 80px;}
 
 /* Filet pointille court fin 1px gris fonce */
-.filet_sep_3 {border-bottom: 1px dotted #333; padding: 0; margin: 0px 160px;}
+.filet_sep_3 {border-bottom: 1px dotted #333; padding: 0; margin: 0 33%;}
 
 
 /******************************************/
@@ -47,7 +51,7 @@
 /* Bloc moyen fond gris clair avec filets gauche-droite bleu */
 .filet_sep_5 { 
 	padding: 0; 
-	margin: 0 100px;
+	margin: 0px 100px;
 	height: 5px;
 	background-color: silver; /* #C0C0C0 */
 	border-left: 25px solid navy; /* #000080 */
@@ -57,7 +61,7 @@
 /* Bloc court fond bleu, filet haut rouge, filet bas orange */
 .filet_sep_6 { 
 	padding: 0; 
-	margin: 0 200px;
+	margin: 0 42%;
 	height: 6px;
 	background-color: blue; /* #0000FF */
 	border-top: 6px solid red; /* #FF0000 */

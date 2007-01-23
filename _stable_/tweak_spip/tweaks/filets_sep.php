@@ -25,7 +25,7 @@ function filets_sep_rempl($texte) {
 
 	if ($test) {
 		// On remplace les balises filets numeriques dans le texte par le code Html correspondant.
-		$texte = preg_replace($modele_nombre,'<html><p class="filet_sep_$1"><br style="display:none;" /></p></html>',$texte); 
+		$texte = preg_replace($modele_nombre,'<html><p class="spip filet_sep filet_sep_$1">&nbsp; &nbsp; &nbsp;</p></html>',$texte); 
 
 		// On remplace les balises filets numeriques dans le texte par le code Html correspondant.
 		$t=preg_split($modele_fichier, $texte, -1, PREG_SPLIT_DELIM_CAPTURE);
@@ -34,7 +34,7 @@ function filets_sep_rempl($texte) {
 			$f=find_in_path('img/filets/'.$t[$i]);
 			if (file_exists($f)) list(,$haut) = @getimagesize($f);
 			if ($haut) $haut='height:'.$haut.'px; ';
-			$texte .= '<html><p class="filet_sep_image" style="'.$haut.'background-image: url('.$f.');"><br style="display:none;" /></p></html>'.$t[$i+2];
+			$texte .= '<html><p class="spip filet_sep filet_sep_image" style="'.$haut.'background-image: url('.$f.');">&nbsp; &nbsp; &nbsp;</p></html>'.$t[$i+2];
 		}
 	};
 
