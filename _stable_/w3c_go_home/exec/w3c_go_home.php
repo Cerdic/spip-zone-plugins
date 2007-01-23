@@ -51,13 +51,13 @@ function exec_w3c_go_home(){
 		if (nbitems>0){
 			$(a_tester).lt(nbitems).each(function(){
 				var elt = $(this);
-				var url = elt.rel();
+				var url = elt.attr('rel');
 				url = url.replace('&amp;','&');
 				/* on relance a mi chemin : toujours entre 5 et 15 tests en cours */
 				if (compteur==5)
-					elt.toggleClass('process').toggleClass('test').append(ajax_image_searching).load(url,function(){ elt.toggleClass('process'); perform_tests(next_shot);});
+					elt.toggleClass('process').toggleClass('test').append(ajax_image_searching).get(url,function(data){ elt.html(data).toggleClass('process'); perform_tests(next_shot);});
 				else
-					elt.toggleClass('process').toggleClass('test').append(ajax_image_searching).load(url,function(){ elt.toggleClass('process');});
+					elt.toggleClass('process').toggleClass('test').append(ajax_image_searching).get(url,function(data){ elt.html(data).toggleClass('process');});
 				compteur++;
 			});
 			a_tester.gt(nbitems-1);
