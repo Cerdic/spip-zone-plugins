@@ -55,12 +55,10 @@ function exec_w3c_go_home(){
 				url = url.replace('&amp;','&');
 				/* on relance a mi chemin : toujours entre 5 et 15 tests en cours */
 				if (compteur==5){
-					elt.toggleClass('process').toggleClass('test').append(ajax_image_searching);
-					jQuery.get(url,function(data){ elt.html(data).toggleClass('process'); perform_tests(next_shot);});
+					elt.toggleClass('process').toggleClass('test').append(ajax_image_searching).load(url,function(){ elt.toggleClass('process'); perform_tests(next_shot);});
 				}
 				else {
-					elt.toggleClass('process').toggleClass('test').append(ajax_image_searching);
-					jQuery.get(url,function(data){ elt.html(data).toggleClass('process');});
+					elt.toggleClass('process').toggleClass('test').append(ajax_image_searching).load(url,function(){ elt.toggleClass('process');});
 				}
 				compteur++;
 			});
