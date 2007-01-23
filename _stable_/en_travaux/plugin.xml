@@ -1,10 +1,14 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	En travaux
+	<multi>[fr]En travaux [en]Under construction</multi>
 	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	[Arnaud Ventre->ventrea@gmail.com]
+	<auteur><multi>
+		[fr][Arnaud Ventre->ventrea@gmail.com]
 _ &copy; 2006 - Distribue sous licence GPL
+		[en][Arnaud Ventre->ventrea@gmail.com]
+_ &copy; 2006 - Distributed under GPL Licence
+_ Translated from French by Etienne B. [->http://www.loiseau2nuit.net]
+		</multi>
 	</auteur>
 	<version>
 	1.0
@@ -12,10 +16,16 @@ _ &copy; 2006 - Distribue sous licence GPL
 	<etat>
 	stable
 	</etat>
-	<description>
-	Permet d'afficher un message personalisable pendant une phase de maintenance sur tout le site public.
+	<description><multi>
+		[fr] Permet d'afficher un message personalisable pendant une phase de maintenance sur tout le site public.
+		[en] Displays a message of your choice during maintenance period on all your public pages.
+		</multi>
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien><multi>
+		[fr][->http://www.spip-contrib.net/ecrire/?article1588]
+		[en][->http://www.spip-contrib.net/ecrire/?article1590]
+		</multi>
+	</lien> <!-- URL de documentation  -->
 	<options> <!-- fichier charge a chaque hit -->
 	mes_options_en_travaux.php
 	</options>
