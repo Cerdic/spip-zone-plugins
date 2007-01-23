@@ -2,13 +2,15 @@ Cette amelioration est destinee a ceux qui ont beaucoup d'evenements a placer da
 un lien 'Saisie rapide' apparait a cote de 'Ajouter un evenement' lorsqu'on edite un article.
 un dialogue surgit, et on se laisse guider !
 
+Compatibilité : Agenda 1.9.0 et 1.9.1 uniquement. 
+La version 1.9.2 de l'Agenda a intégré la saisie rapide (merci Cédric).
+
 fichiers à placer dans le repertoire plugins/agenda :
 	exec/saisie_rapide.php : dialogue de saisie rapide
 	inc/agenda_gestion.php : fichier d'origine modifie
 	SAISIE.TXT : les details.
 
 attention : aucune internationalisation pour l'instant, mais le code est prêt pour les traducteurs.
-Compatibilité : 1.9.0, 1.9.1 et svn
 
 Syntaxe : 
 	"jj/mm[/aaaa][-jj/mm[/aaaa]] [hh:mm[-hh:mm]] "Le titre" ["Le lieu" [ "La description"]] [REP=jj/mm/aaaa[,jj/mm/aaaa,etc.]] [MOTS=[groupe1:]mot1[,[groupe2:]mot2,etc.]]
