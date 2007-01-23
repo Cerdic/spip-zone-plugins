@@ -48,7 +48,10 @@ function tweak_rempl_smileys($texte) {
 	// smileys a probleme :
 	$texte = str_replace(':->', ':-&gt;', $texte);
 	// accessibilite : protection de alt et title
-	foreach ($smileys_rempl as $smy=>$val) $texte = str_replace($smy, '<img alt="@@64@@'.base64_encode($smy).'@@65@@" title="@@64@@'.base64_encode($smy).'@@65@@" src="'._CHEMIN_SMILEYS.$val.'">', $texte);
+	foreach ($smileys_rempl as $smy=>$val) {
+		$alt = '@@64@@'.base64_encode($smy).'@@65@@';
+		$texte = str_replace($smy, '<img alt="'.$alt.'" title="'.$alt.'" src="'._CHEMIN_SMILEYS.$val.'">', $texte);
+	}
 	// accessibilite : alt et title avec le smiley en texte
 	while(preg_match('`@@64@@([^@]*)@@65@@`', $texte, $regs)) $texte = str_replace('@@64@@'.$regs[1].'@@65@@', base64_decode($regs[1]), $texte);
 	return $texte;
