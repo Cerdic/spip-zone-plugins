@@ -36,4 +36,5 @@
 
 .liens_contenus .ko a, .liens_contenus .ko a:active, .liens_contenus .ko a:visited {
 	color: red;
+	text-decoration: line-through;
 }
