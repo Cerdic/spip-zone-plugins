@@ -54,10 +54,14 @@ function exec_w3c_go_home(){
 				var url = elt.attr('rel');
 				url = url.replace('&amp;','&');
 				/* on relance a mi chemin : toujours entre 5 et 15 tests en cours */
-				if (compteur==5)
-					elt.toggleClass('process').toggleClass('test').append(ajax_image_searching).get(url,function(data){ elt.html(data).toggleClass('process'); perform_tests(next_shot);});
-				else
-					elt.toggleClass('process').toggleClass('test').append(ajax_image_searching).get(url,function(data){ elt.html(data).toggleClass('process');});
+				if (compteur==5){
+					elt.toggleClass('process').toggleClass('test').append(ajax_image_searching);
+					jQuery.get(url,function(data){ elt.html(data).toggleClass('process'); perform_tests(next_shot);});
+				}
+				else {
+					elt.toggleClass('process').toggleClass('test').append(ajax_image_searching);
+					jQuery.get(url,function(data){ elt.html(data).toggleClass('process');});
+				}
 				compteur++;
 			});
 			a_tester.gt(nbitems-1);
