@@ -6,6 +6,8 @@
 // cette fonction ne fonctionne que pour le francais
 // elle n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
 function typo_exposants_fr($texte){
+	$sup='<small style="display:inline;"><sup>';
+	$fin='</sup></small>';
 	$trouve = array(
 		'/(\\bM)e?(lles?)\\b/',		// Mlle(s), Mme(s) et erreurs Melle(s)
 		'/(\\bM)(mes?)\\b/',
@@ -23,20 +25,20 @@ function typo_exposants_fr($texte){
 		'/(\\b[02-9IVX]+)(es?)\\b/', // 2e(s), IIIe(s)...
 	);
 	$remplace = array(
-		'M<small><sup>\\2</sup></small>',		// Mlle(s), Mme(s)
-		'M<small><sup>\\2</sup></small>',
+		"M$sup\\2$fin",		// Mlle(s), Mme(s)
+		"M$sup\\2$fin",
 
-		'\\1<small><sup>\\2</sup></small>\\3',	// Dr(s), Pr(s), St(e)(s)
-		'\\1<small><sup>\\2</sup></small>\\3',
+		"\\1$sup\\2$fin\\3",	// Dr(s), Pr(s), St(e)(s)
+		"\\1$sup\\2$fin\\3",
 
-		'm<small><sup>\\2</sup></small>',	// m2, m3
+		"m$sup\\2$fin",	// m2, m3
 
-		'\\1<small><sup>\\2</sup></small>', // Corrige 1er(s), 1re(s)
-		'\\1<small><sup>\\3</sup></small>',
-		'\\1<small><sup>\\2</sup></small>', // 1e(s), 1re(s)
+		"\\1$sup\\2$fin", // Corrige 1er(s), 1re(s)
+		"\\1$sup\\3$fin",
+		"\\1$sup\\2$fin", // 1e(s), 1re(s)
 
-		'\\1<small><sup>e\\3</sup></small>', // Corrige 2e(s), IIIe(s)...
-		'\\1<small><sup>\\2</sup></small>', // 2e(s), IIIe(s)...
+		"\\1$supe\\3$fin", // Corrige 2e(s), IIIe(s)...
+		"\\1$sup\\2$fin", // 2e(s), IIIe(s)...
 	);
 
 	return preg_replace($trouve, $remplace, $texte);
