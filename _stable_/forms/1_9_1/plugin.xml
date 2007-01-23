@@ -3,11 +3,12 @@
 	<multi>[fr]Formulaires[it] Forms[es] Formularios</multi> (SPIP 1.9.1 +)
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	<multi>[fr]Antoine Pitrou
-	portage sur 182e et adaptation en plugin par Cedric MORIN
-	[it]Antoine Pitrou
-	adattamento per la versione 182e e plugin di Cedric MORIN
-      [es]Adaptado para 182e y conversi&oacute;n en plugin por Cedric Morin.
+	Antoine Pitrou  <multi>[fr]
+	portage sur 182e et adaptation en plugin par Cedric MORIN.
+	[it]
+	adattamento per la versione 182e e plugin di Cedric MORIN.
+      [es]Adaptado para 182e y conversi&oacute;n en plugin por Cedric MORIN.
+	  [en]Adapted for 182e and converted in a plugin by Cedric MORIN.
 	</multi>
 	</auteur>
 	<version>
@@ -24,6 +25,8 @@
 	Questo plugin consente anche la publicazione di sondaggi ed inchieste, la raccolta delle risposte all'interno della base dati e le mette a disposizione per lo scaricamento in formato csv
       [es]Gesti&oacute;n y administraci&oacute;n de formularios editables.
 	Este plugin tambi&#233;n permite la publicaci&oacute;n de sondeos y encuestas, la colecta de las respuestas en la base de datos y su descarga en formato CSV (Comma Sepparated Variables).
+	[en]Management and Administration of editable forms.
+	This plugin provides the ability to publish surveys, collect replies in the database and export them to CSV format.
 	</multi>
 	</description>
 	<lien>http://zone.spip.org/trac/spip-zone/wiki/SpipForms</lien> <!-- URI de documentation -->
