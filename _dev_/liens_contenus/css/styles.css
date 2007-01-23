@@ -29,3 +29,11 @@
 .liens_contenus .mot {
     list-style-image: url(../images/mot-12.gif);
 }
+
+.liens_contenus .modele {
+    list-style-image: url(../images/modele-12.gif);
+}
+
+.liens_contenus .ko a, .liens_contenus .ko a:active, .liens_contenus .ko a:visited {
+	color: red;
+}

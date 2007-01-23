@@ -14,6 +14,7 @@
 		'objets_avec_liens_vers_courant' => 'Ces contenus contiennent des liens vers celui-ci :',
 		'objets_avec_liens_depuis_courant' => 'Ce contenu contient des liens vers ceux-ci :',
 		'aucun_objets_avec_lien_vers_courant' => 'Aucun autre contenu ne contient de lien vers celui-ci.',
-		'aucun_objets_avec_lien_depuis_courant' => 'Ce contenu ne contient aucun lien vers un autre contenu.'
+		'aucun_objets_avec_lien_depuis_courant' => 'Ce contenu ne contient aucun lien vers un autre contenu.',
+        'legende_liens_faux_objets' => 'Les liens en rouge indiquent des contenus qui n\'existent pas.'
 	);
 ?>
