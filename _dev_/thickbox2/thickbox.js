@@ -150,8 +150,11 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
         }
       }
       // End Resizing
+      if(!DIAPO){
       TB_Diapo = "<span id='TB_Diapo'>&nbsp;&nbsp;<a href='#'><strong>[Slideshow]</strong></a></span>";
-      
+      }else{
+      TB_Diapo = "<span id='TB_Diapo'>&nbsp;&nbsp;<a href='#'><strong>[Stop]</strong></a></span>";
+      }
       if (TB_Big_Image) {
         TB_Full_Size = "<span id='TB_Full'>&nbsp;&nbsp;<a href='#'><strong>[Zoom]</strong></a></span>";
       }
@@ -191,9 +194,14 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
           return false;  
         }
         $("#TB_next").click(goNext);
-        
+        //preload de la prochaine image
+		imageSuivante = new Image();
+		imageSuivante.src = TB_NextURL ;
       }
       
+      //diapo
+       setTimeout('diapo();',7000);
+
       
       if (!(TB_Full_Size == "")) {    
         function fullSize(){
@@ -236,7 +244,6 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
        
       
        $("#TB_Diapo").click(diaporama);
-	  //  if(DIAPO) setTimeout('goNext();',2000);
 
       
       document.onkeydown = function(e){   
@@ -328,8 +335,13 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
 //helper functions below
  function diaporama(){
  //alert("diapo");
- if(!DIAPO) DIAPO = true ; else DIAPO = false ; 
- diapo();
+ if(!DIAPO){
+  DIAPO = true ;
+  //$("TB_secondLine").html(TB_imageCount + TB_Full_Size + TB_PrevHTML + TB_NextHTML + "[Stop]");
+  } else {
+  DIAPO = false ; 
+  }
+ setTimeout('diapo();',7000);
  }
 
 function diapo(){
@@ -338,7 +350,6 @@ function diapo(){
    $("#TB_window").remove();
    $("body").append("<div id='TB_window'></div>");
    TB_show(TB_NextCaption, TB_NextURL); 
-   setTimeout('diapo();',5000);
    }else DIAPO = false ;
    }
 return false;  
