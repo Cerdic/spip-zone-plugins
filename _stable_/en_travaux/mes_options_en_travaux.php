@@ -26,9 +26,7 @@ function action_en_travaux(){
 	if (!strlen($GLOBALS['meta']['en_travaux_message'])) $texte=_T('info_travaux_titre');
 
 	global $spip_version;
-	if ($spip_version<1.9) include_ecrire("inc_presentation.php3");  // version 1.8
-		else include_spip('inc/minipres');  // version 1.9 et suivantes
-
+	include_spip('inc/minipres');
 	$page = install_debut_html($texte).install_fin_html();
 	if ($spip_version>=1.92) echo $page; // a partir de spip 1.9.2 ces fonctions ne font plus l'echo directement
 
