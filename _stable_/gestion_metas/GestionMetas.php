@@ -21,13 +21,9 @@
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 
-function GestionMetas_affiche_milieu() {
-	if (_request('exec') != 'articles') return;
-	formulaire_metas();
-}
 function GestionMetas_affiche_gauche() {
-	if (_request('exec') != 'naviguer') return;
-	formulaire_metas();
+	if ((_request('exec') != 'naviguer') && (_request('exec') != 'articles')) return;
+	return formulaire_metas();
 }
 
 function formulaire_metas() {
@@ -79,24 +75,24 @@ function formulaire_metas() {
 		$res = spip_query($query);
 	}
 	
-?>
-	<form id="metas" method="post">
+	$contenu = "<form id='metas' method='post'>
 		<fieldset>
 			<legend>Metadatas</legend>
-			<input type="hidden" name="submit" value="1" />
-			<input type="hidden" name="exec" value="<?php echo _request('exec'); ?>" />
-			<input type="hidden" name="id_rubrique" value="<?php echo _request('id_rubrique'); ?>" />
-			<input type="hidden" name="id_article" value="<?php echo _request('id_article'); ?>" />
-			<p><label for="GestionMetas_title">Title</label><br />
-			<input id="GestionMetas_title" type="text" name="titre" value="<?php echo htmlspecialchars($metas['titre'], ENT_QUOTES); ?>" style="width: 98%"/></p>
-			<p><label for="GestionMetas_description">Description</label><br />
-			<input id="GestionMetas_description" type="text" name="description" value="<?php echo htmlspecialchars($metas['description'], ENT_QUOTES); ?>" style="width: 98%"/></p>
-			<p><label for="GestionMetas_keywords">Keywords</label><br />
-			<input id="GestionMetas_keywords" type="text" name="keywords" value="<?php echo htmlspecialchars($metas['keywords'], ENT_QUOTES); ?>" style="width: 98%"/></p>
-			<p><input type="submit" /></p>
+			<input type='hidden' name='submit' value='1' />
+			<input type='hidden' name='exec' value='"._request('exec')."' />
+			<input type='hidden' name='id_rubrique' value='"._request('id_rubrique')."' />
+			<input type='hidden' name='id_article' value='"._request('id_article')."' />
+			<p><label for='GestionMetas_title'>Title</label><br />
+			<input id='GestionMetas_title' type='text' name='titre' value='".htmlspecialchars($metas['titre'], ENT_QUOTES)."' style='width: 98%'/></p>
+			<p><label for='GestionMetas_description'>Description</label><br />
+			<textarea id='GestionMetas_description' name='description' rows=3>".htmlspecialchars($metas['description'], ENT_QUOTES)." </textarea></p>
+			<p><label for='GestionMetas_keywords'>Keywords</label><br />
+			<input id='GestionMetas_keywords' type='text' name='keywords' value='".htmlspecialchars($metas['keywords'], ENT_QUOTES)."' style='width: 98%'/></p>
+			<p><input type='submit' /></p>
 		</fieldset>
-	</form>
-<?php
+	</form>";
+
+	return $contenu;
 }
 
 function create_GestionMetasTable($GestionMetasTable) {
