@@ -92,8 +92,17 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
                     }
                 }
             } else {
-				$id_objet_contenu = $type_objet_contenu;
-				$type_objet_contenu = 'modele';
+                switch ($type_objet_contenu) {
+                	case 'form':
+                        // Soyons gentil avec le plugin Forms s'il est activŽ
+                        if (isset($tables_principales['spip_forms'])) {
+                            $type_objet_contenu = 'formulaire';
+                        }
+                        break;
+                    default:
+                        $id_objet_contenu = $type_objet_contenu;
+                        $type_objet_contenu = 'modele';
+                }
 			}
             if ($nouveau_lien) {
                 $liens_trouves[$type_objet_contenu.' '.$id_objet_contenu] = array('type' => $type_objet_contenu, 'id' =>$id_objet_contenu);
