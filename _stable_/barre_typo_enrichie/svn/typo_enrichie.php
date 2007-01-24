@@ -83,7 +83,8 @@ function BarreTypoEnrichie_pre_propre($texte) {
 		/* 18 */ 	"/<==/S",
 		/* 19 */ 	"/\([cC]\)/S",
 		/* 20 */ 	"/\([rR]\)/S",
-		/* 21 */ 	"/\.\.\./S"
+		/* 21 */ 	"/\([tT][mM]\)/S",
+		/* 22 */ 	"/\.\.\./S"
 	);
 
 	$remplacer_raccourcis = array(
@@ -109,7 +110,8 @@ function BarreTypoEnrichie_pre_propre($texte) {
 		/* 18 */ 	"&lArr;",
 		/* 19 */ 	"&copy;",
 		/* 20 */ 	"&reg;",
-		/* 21 */ 	"&hellip;"
+		/* 21 */ 	"&trade;",
+		/* 22 */ 	"&hellip;"
 	);
 
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
