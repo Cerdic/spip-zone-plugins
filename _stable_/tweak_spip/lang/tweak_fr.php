@@ -43,7 +43,7 @@ _ version_texte : extrait le contenu texte d'une page html &agrave; l'exclusion 
 _ version_plein_texte : extrait le contenu texte d'une page html pour rendre du texte plein.",
 
 	'orientation:nom' => 'Orientation des images',
-	'orientation:description'	=> "3 nouveaux crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&egrave;al pour le classement des photos en fonction de leur forme.
+	'orientation:description'	=> "3 nouveaux crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&eacute;al pour le classement des photos en fonction de leur forme.
 _ Infos : [->http://www.spip-contrib.net/Portrait-ou-Paysage]",
 
 	'desactiver_flash:nom' => 'D&eacute;sactiver les objects flash',
@@ -85,7 +85,7 @@ _ Infos : [->http://www.spip-contrib.net/?article1563]",
 _ Infos : [->http://www.spip-contrib.net/?article1561]",
 
 	'quota_cache:nom' => 'Quota du cache',
-	'quota_cache:description'	=> "Modifier le quota r&eacute;serv&eacute; au cache. Une valeur &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique.<br>Valeur (en Mo) : %quota_cache%",
+	'quota_cache:description'	=> "Modifier le quota r&eacute;serv&eacute; au cache. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique.<br>Valeur (en Mo) : %quota_cache%",
 
 	'dossier_squelettes:nom' => 'Dossier du squelette',
 	'dossier_squelettes:description'	=> "Modifier le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.<br>Dossier à utiliser : %dossier_squelettes%",

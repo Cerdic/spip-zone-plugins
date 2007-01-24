@@ -31,7 +31,7 @@ function include_tweaks($type) {
 	eval($temp);
 tweak_log("  $type = $temp");
 $fichier_dest = sous_repertoire(_DIR_VAR, "tweak-spip") . "mes_$type.php";
-ecrire_fichier($fichier_dest, "<?php\n// Code en cache pour le plugin Tweak-SPIP\n$temp ?".'>');
+ecrire_fichier($fichier_dest, "<?php\n// Code en cache pour le plugin Tweak-SPIP\n$temp?".'>');
 }
 
 // passe le $flux dans le $pipeline ...
