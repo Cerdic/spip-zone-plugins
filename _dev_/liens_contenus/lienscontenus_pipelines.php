@@ -25,7 +25,7 @@ function lienscontenus_post_edition($flux)
 	}
 	// Traitement des redirections
 	if ($type_objet == 'article' && substr($flux['data']['chapo'], 0, 1) == '=') {
-        // Argh, le chapo n'est pas dans le flux quand c'est une redirection... :(
+        // TODO : Argh, le chapo n'est pas dans le flux quand c'est une redirection... :(
 		$flux['data']['chapo'] = '[->'.substr($flux['data']['chapo'], 1).']';
 	}
 	$contenu = join(' ',$flux['data']);
@@ -53,7 +53,8 @@ function lienscontenus_affiche_droite($flux)
         'breves_voir' => array('breve', 'id_breve'),
         'sites' => array('site', 'id_syndic'),
         'mots_edit' => array('mot', 'id_mot'),
-        'auteur_infos' => array('auteur', 'id_auteur')
+        'auteur_infos' => array('auteur', 'id_auteur'),
+        'forms_edit' => array('form', 'id_form')
         // TODO : Ajouter les autres
         );
     if (isset($liste_pages[$exec])) {

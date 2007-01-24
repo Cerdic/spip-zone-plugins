@@ -92,6 +92,7 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
                     }
                 }
             } else {
+                // TODO : D'autres raccourcis particuliers a traiter ?
                 switch ($type_objet_contenu) {
                 	case 'form':
                         // Soyons gentil avec le plugin Forms s'il est activé
