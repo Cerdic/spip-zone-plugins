@@ -95,8 +95,9 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
                 switch ($type_objet_contenu) {
                 	case 'form':
                         // Soyons gentil avec le plugin Forms s'il est activé
-                        if (isset($tables_principales['spip_forms'])) {
-                            $type_objet_contenu = 'formulaire';
+                        if (!defined('_DIR_PLUGIN_FORMS')) {
+                            $id_objet_contenu = $type_objet_contenu;
+                            $type_objet_contenu = 'modele';
                         }
                         break;
                     default:
