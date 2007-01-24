@@ -77,7 +77,13 @@ function BarreTypoEnrichie_pre_propre($texte) {
 		/* 12 */ 	"/\}(ง|ยง)\}/S",
 		/* 13 */ 	"/<-->/S",
 		/* 14 */ 	"/-->/S",
-		/* 15 */ 	"/<--/S"
+		/* 15 */ 	"/<--/S",
+		/* 16 */ 	"/<==>/S",
+		/* 17 */ 	"/==>/S",
+		/* 18 */ 	"/<==/S",
+		/* 19 */ 	"/\([cC]\)/S",
+		/* 20 */ 	"/\([rR]\)/S",
+		/* 21 */ 	"/\.\.\./S"
 	);
 
 	$remplacer_raccourcis = array(
@@ -97,7 +103,13 @@ function BarreTypoEnrichie_pre_propre($texte) {
 		/* 12 */ 	"</span>",
 		/* 13 */ 	"&harr;",
 		/* 14 */ 	"&rarr;",
-		/* 15 */ 	"&larr;"
+		/* 15 */ 	"&larr;",
+		/* 16 */ 	"&hArr;",
+		/* 17 */ 	"&rArr;",
+		/* 18 */ 	"&lArr;",
+		/* 19 */ 	"&copy;",
+		/* 20 */ 	"&reg;",
+		/* 21 */ 	"&hellip;"
 	);
 
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
