@@ -314,16 +314,16 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	$nb_groupes = spip_num_rows(spip_query("SELECT * FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus)"));
 
 	if ($visible)
-		$res = debut_block_visible("lesmots");
+		$res = debut_block_visible("lesmots".$id_objet);
 	else if ($nb_groupes > 0) {
-		$res = debut_block_visible("lesmots");
+		$res = debut_block_visible("lesmots".$id_objet);
 			// vilain hack pour redresser un triangle
-		$couche_a_redresser = $GLOBALS['numero_block']['lesmots'];
+		$couche_a_redresser = $GLOBALS['numero_block']['lesmots'.$id_objet];
 		if ($GLOBALS['browser_layer'])
 			$res .= http_script("
 				triangle = findObj('triangle' + $couche_a_redresser);
 				if (triangle) triangle.src = '" . _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif';");
-	} else $res = debut_block_invisible("lesmots");
+	} else $res = debut_block_invisible("lesmots".$id_objet);
 
 	if ($nombre_mots_associes > 3) {
 		$res .= "<div align='right' class='arial1'>"
@@ -336,7 +336,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	// Afficher un menu par groupe de mots
 	$ajouter ='';
 	while ($row = spip_fetch_array($result_groupes)) {
-		if ($menu = menu_mots($row, $id_groupes_vus, $les_mots)) {
+		if ($menu = menu_mots($row, $id_groupes_vus, $les_mots,$id_objet)) {
 			$menu = ajax_action_auteur('editer_mot',
 				"$id_objet,,$table,$table_id,$objet",
 				$url_base,
@@ -372,7 +372,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 
 
 // http://doc.spip.org/@menu_mots
-function menu_mots($row, $id_groupes_vus, $les_mots)
+function menu_mots($row, $id_groupes_vus, $les_mots, $cle_objet='')
 {
 	$rand = rand(0,10000); # pour antifocus & ajax
 
@@ -389,7 +389,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 	$obligatoire = $row['obligatoire']=='oui' AND !in_array($id_groupe, $id_groupes_vus);
 
 	$res = '';
-	$ancre = "valider_groupe_$id_groupe"; 
+	$ancre = "valider_groupe_$id_groupe$cle_objet"; 
 
 	// forcer le recalcul du noeud car on est en Ajax
 	$jscript1 = "findObj_forcer('$ancre').style.visibility='visible';";
