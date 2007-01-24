@@ -3,7 +3,7 @@
 	<auteur>BoOz@rezo.net</auteur>
 	<version>1.92</version>
 	<etat>test</etat>
-	<icon>img_pack/stock_mail.gif</icon>
+	<icon>spip-listes.png</icon>
 	<description>Listes d'informations par email</description>
 	<options>spiplistes_mes_options.php</options>
 	<fonctions>spiplistes_mes_fonctions.php</fonctions>
