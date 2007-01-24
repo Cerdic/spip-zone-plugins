@@ -7,6 +7,15 @@
 #-----------------------------------------------------#
 include_spip('tweak_spip_config');
 
+// sacree compatibilite...
+global $spip_version_code;
+if ($spip_version_code<1.92) define(_DIR_VAR, _DIR_IMG);
+if (!defined('_DIR_PLUGIN_TWEAKSPIP')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	$p=_DIR_PLUGINS.end($p); if ($p[strlen($p)-1]!='/') $p.='/';
+	define('_DIR_PLUGIN_TWEAKSPIP', $p);
+}
+
 // ajoute un tweak à $tweaks;
 function add_tweak($tableau) {
 	global $tweaks;
@@ -21,6 +30,8 @@ function include_tweaks($type) {
 	foreach ($tweaks_pipelines['code_'.$type] as $code) $temp .= $code."\n";
 	eval($temp);
 tweak_log("  $type = $temp");
+$fichier_dest = sous_repertoire(_DIR_VAR, "tweak-spip") . "mes_$type.php";
+ecrire_fichier($fichier_dest, "<?php\n// Code en cache pour le plugin Tweak-SPIP\n$temp ?".'>');
 }
 
 // passe le $flux dans le $pipeline ...
@@ -84,14 +95,16 @@ function tweak_parse_code($code) {
 	while(preg_match(',%%([a-zA-Z_][a-zA-Z0-9_]*)(/[ds])?(/[^%]+)?%%,', $code, $matches)) {
 		$rempl = '""';	
 		// si le meta est present on garde la valeur du meta, sinon la valeur par defaut si elle existe
-		if (isset($metas_vars[$matches[1]])) $rempl = $metas_vars[$matches[1]];
-			else { 
+		if (isset($metas_vars[$matches[1]])) {
+				$rempl = $metas_vars[$matches[1]];
+				if (preg_match(',^"(.*)"$,', trim($rempl), $matches2)) $rempl = str_replace('\"','"',$matches2[1]);
+			} else { 
 				$rempl = isset($matches[3])?substr($matches[3],1):'""';
 				if($matches[2]=='/d') $rempl = 'intval('.$rempl.')';
 					elseif($matches[2]=='/s') $rempl = 'strval('.$rempl.')';
 				eval('$rempl='.$rempl.';');
-				if($matches[2]!='/d') $rempl = '"'.str_replace('"','\"',$rempl).'"';
 			}
+		if($matches[2]!='/d' && $rempl[0]!='"') $rempl = '"'.str_replace('"','\"',$rempl).'"';
 		$code = str_replace($matches[0], $rempl, $code);
 		// on conserve le resultat dans $metas_vars
 		$metas_vars[$matches[1]] = $rempl;
@@ -110,7 +123,7 @@ function tweak_parse_description($tweak, $tweak_input) {
 	$descrip = '';
 	for($i=0;$i<count($t);$i+=2) if (($var=trim($t[$i+1]))!='') {
 		// si le meta est present on remplace
-		if (isset($metas_vars[$var])) 
+		if (isset($metas_vars[$var]))
 				$descrip .= $tweak_input(
 					$tweaks[$tweak]['basic']+(++$tweaks[$tweak]['nb_variables']), 
 					$var, 

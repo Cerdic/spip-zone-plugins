@@ -87,6 +87,9 @@ _ Infos : [->http://www.spip-contrib.net/?article1561]",
 	'quota_cache:nom' => 'Quota du cache',
 	'quota_cache:description'	=> "Modifier le quota r&eacute;serv&eacute; au cache. Une valeur &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique.<br>Valeur (en Mo) : %quota_cache%",
 
+	'dossier_squelettes:nom' => 'Dossier du squelette',
+	'dossier_squelettes:description'	=> "Modifier le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.<br>Dossier à utiliser : %dossier_squelettes%",
+
 
 /*
 	':nom' => '',

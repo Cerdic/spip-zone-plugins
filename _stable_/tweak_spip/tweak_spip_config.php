@@ -31,17 +31,23 @@ add_tweak( array(
 
 add_tweak( array(
 	'id'	=> 'quota_cache',
-//	'code' 	=> '$GLOBALS["quota_cache0"]=10;',
+//	'code' 	=> '$GLOBALS["quota_cache"]=10;',
 	'code' 	=> '$GLOBALS["quota_cache"]=%%quota_cache/d/$GLOBALS["quota_cache"]%%;',
 	'categorie'	=> 'admin',
 	'options'	=> 1,
-//	'fonctions'	=> 1,
+));
+
+add_tweak( array(
+	'id'	=> 'dossier_squelettes',
+	'code' 	=> '$GLOBALS["dossier_squelettes"]=%%dossier_squelettes/s/$GLOBALS["dossier_squelettes"]%%;',
+	'categorie'	=> 'admin',
+	'options'	=> 1,
 ));
 
 add_tweak( array(
 	'id'	=> 'supprimer_numero',
 	'code' 	=> '$GLOBALS["table_des_traitements"]["TITRE"][]= "typo(supprimer_numero(%s))";',
-	'categorie'	=> 'admin',
+	'categorie'	=> 'squel',
 	'options'	=> 1
 ));
 
