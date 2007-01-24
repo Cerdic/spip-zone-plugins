@@ -1,6 +1,10 @@
+/* Histoire que tous les navigateurs soient d'accord... */
 * {
  margin:0pt;
  padding:0pt;
+}
+ul, ol {
+ padding-left: 50px;
 }
 
 /* Espaceur de blocs */
