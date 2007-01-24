@@ -9,23 +9,22 @@
  *
  */
 
-include_spip('base/abstract_sql');
-
 function lienscontenus_verifier_version_base()
 {
-	static $version_base_active = 0;
+	static $version_base_active;
 
 	// Version de la base pour cette version du code
 	$version_base_code = 1;
 
-	if ($version_base_active == 0) {
-		$version_base_active = isset($GLOBALS['meta']['liens_contenus_version_base']) ? $GLOBALS['meta']['liens_contenus_version_base'] : 0;
+	if (!isset($version_base_active)) {
+		$version_base_active = isset($GLOBALS['meta']['liens_contenus_version_base']) ? intval($GLOBALS['meta']['liens_contenus_version_base']) : 0;
 	}
+
 	if ($version_base_active != $version_base_code) {
-		include_spip('base/liens_contenus');
 		if ($version_base_active == 0) {
 			// Premiere installation
 			include_spip('base/create');
+            include_spip('base/abstract_sql');
             spip_log('Plugin liens_contenus : creation de la base');
 			creer_base();
     		$version_base_active = $version_base_code;
@@ -33,7 +32,8 @@ function lienscontenus_verifier_version_base()
     		ecrire_metas();
 			lienscontenus_initialiser();
 		} else {
-			// Mise à jour
+			// Mise a jour
+            spip_log('Plugin liens_contenus : mise a jour de la base');
 		}
 	}
 }

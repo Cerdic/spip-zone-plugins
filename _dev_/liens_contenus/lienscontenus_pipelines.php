@@ -41,10 +41,7 @@ function lienscontenus_affiche_droite($flux)
 	}
 
     // On verifie si la table a ete creee
-    $liens_contenus_version_base_active = isset($GLOBALS['meta']['liens_contenus_version_base']) ? $GLOBALS['meta']['liens_contenus_version_base'] : 0;
-    if ($liens_contenus_version_base_active == 0) {
-        lienscontenus_verifier_version_base();
-    }
+    lienscontenus_verifier_version_base();
     
     $exec = $flux['args']['exec'];
     $liste_pages = array(

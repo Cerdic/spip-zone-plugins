@@ -9,9 +9,8 @@
  *
  */
 
-include_spip('base/serial');
-
 global $tables_principales;
+global $tables_auxiliaires;
 global $table_des_tables;
 
 $spip_liens_contenus = array(
@@ -28,6 +27,5 @@ $spip_liens_contenus_key = array(
 		);
 
 $tables_principales['spip_liens_contenus'] = array('field' => &$spip_liens_contenus, 'key' => &$spip_liens_contenus_key);
-
 $table_des_tables['liens_contenus'] = 'liens_contenus';
 ?>
