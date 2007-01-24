@@ -1,5 +1,8 @@
 <?php
 
+function spiplistes_log($texte){
+	spip_log($texte,'spiplistes');
+}
 //
 // Creation / ajout du champ extra auteur pour l'abonnement
 //

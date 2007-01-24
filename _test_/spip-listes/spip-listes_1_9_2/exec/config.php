@@ -134,7 +134,7 @@ function exec_config(){
 
 	echo debut_cadre_trait_couleur("", false, "", "Adresse d'envoi par d&eacute;faut");
 	$adresse_defaut = (email_valide($GLOBALS['meta']['email_defaut'])) ? $GLOBALS['meta']['email_defaut'] : $GLOBALS['meta']['email_webmaster'];
-	echo "<input type='text' name='email_defaut' value='".$adresse_defaut."' size='30' CLASS='fondl' />";
+	echo "<input type='text' name='email_defaut' value='".$adresse_defaut."' size='30' CLASS='formo' />";
 	
 	echo fin_cadre_trait_couleur();
 
@@ -154,7 +154,7 @@ function exec_config(){
 	else $style = "display: none;";
 	echo "<div id='smtp' style='$style'>";
 	echo "<ul>";
-	echo "<li>H&ocirc;te <input type='text' name='smtp_server' value='".$GLOBALS['meta']['smtp_server']."' size='30' class='fondl' />";
+	echo "<li>H&ocirc;te <input type='text' name='smtp_server' value='".$GLOBALS['meta']['smtp_server']."' size='30' class='formo' />";
 	echo "<li>Port <input type='text' name='smtp_port' value='".$GLOBALS['meta']['smtp_port']."' size='4' class='fondl' />";
 	echo "<li>Requiert une identification";
 
@@ -168,8 +168,8 @@ function exec_config(){
 	else $style = "display: none;";
 	echo "<div id='smtp-auth' style='$style'>";
 	echo "<ul>";
-	echo "<li>Login <input type='text' name='smtp_login' value='".$GLOBALS['meta']['smtp_login']."' size='30' CLASS='fondl' />";
-	echo "<li>Password <input type='password' name='smtp_pass' value='".$GLOBALS['meta']['smtp_pass']."' size='30' CLASS='fondl' />";
+	echo "<li>Login <input type='text' name='smtp_login' value='".$GLOBALS['meta']['smtp_login']."' size='30' CLASS='formo' />";
+	echo "<li>Password <input type='password' name='smtp_pass' value='".$GLOBALS['meta']['smtp_pass']."' size='30' CLASS='formo' />";
 	echo "</ul>";
 	echo "</div>";
 
@@ -184,7 +184,7 @@ function exec_config(){
 	echo "<div style='$style'>";
 	echo debut_cadre_relief("", false, "", "adresse email du <i>sender</i> SMTP");
 	echo "<p style='margin:10px'>Lors d'un envoi via la m&eacute;thode SMTP ce champ d&eacute;finit l'adresse de l'envoyeur.</p>";
-	echo "<input type='text' name='smtp_sender' value=\"".$GLOBALS['meta']['smtp_sender']."\" style='width:20em' class='forml' />";
+	echo "<input type='text' name='smtp_sender' value=\"".$GLOBALS['meta']['smtp_sender']."\" class='formo' />";
 	echo fin_cadre_relief();
 	echo "</div>\n";
 
@@ -205,7 +205,7 @@ function exec_config(){
 	echo "<form action='".generer_url_ecrire('config')."' method='post'>";
 	echo "<input type='hidden' name='reinitialiser_config' value='oui' />";
 	echo "<label for='spiplistes_lots'>Nombre d'envois par lot</label>" ;
-	echo "<input type='text' name='spiplistes_lots' value=\"".$GLOBALS['meta']['spiplistes_lots']."\" style='width:3em' class='forml' />";
+	echo "<input type='text' name='spiplistes_lots' value=\"".$GLOBALS['meta']['spiplistes_lots']."\" class='formo' />";
 
 	echo "<input type='submit' name='Valider_reinit' value='"._T('spiplistes:reinitialiser')."' class='fondo' style='float:right' />";
 	echo "<hr style='clear:both;visibility:hidden' />";

@@ -7,18 +7,17 @@
 
 		function phpMail($email, $objet, $message_html, $message_texte) {
 		
-		$charset = $GLOBALS['meta']['charset'];
+			$charset = $GLOBALS['meta']['charset'];
 					
 			//$this->From		= lire_meta('email_webmaster');
 			$this->FromName	=  $GLOBALS['meta']['nom_site'];
 			$this->CharSet	= $charset ;
-	    	$this->Mailer	= 'mail';
+	    $this->Mailer	= 'mail';
 			$this->Subject	= $objet;
 			$this->AddAddress($email); 
 			
-			
 			if ($smtp_sender =  $GLOBALS['meta']['smtp_sender']) {
-	       		$this->Sender = $GLOBALS['meta']['spip_lettres_smtp_sender'];
+				$this->Sender = $GLOBALS['meta']['spip_lettres_smtp_sender'];
 			}
 			
 			$envoi_par_smtp =  $GLOBALS['meta']['mailer_smtp'] ;
@@ -53,7 +52,10 @@
 				
 			}
 		}
-       
+		function SetAddress($address, $name = "") {
+			$this->to=array();
+			$this->AddAddress($address,$name);
+		}       
 
 	/**
 	 * d'apres SPIP-Lettres : plugin de gestion de lettres d'information
@@ -116,7 +118,6 @@
 				}
 			}
 		}
-
 
 	}
 
