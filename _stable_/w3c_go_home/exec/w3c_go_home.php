@@ -62,7 +62,7 @@ function exec_w3c_go_home(){
 				}
 				compteur++;
 			});
-			a_tester.gt(nbitems-1);
+			a_tester=a_tester.gt(nbitems-1);
 		}
 		if (next_shot==-1)
 			$('#annuler').hide();
