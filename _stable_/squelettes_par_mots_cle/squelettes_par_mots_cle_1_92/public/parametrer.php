@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2006                                                *
+ *  Copyright (c) 2001-2007                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -21,13 +21,14 @@ include_spip('inc/lang');
 
 // NB: Ce fichier peut initialiser $dossier_squelettes (old-style)
 // donc il faut l'inclure "en globals"
-if ($f = include_spip('mes_fonctions', false)) {
+if ($f = find_in_path('mes_fonctions.php')
+OR $f = find_in_path('mes_fonctions.php3')) {
 	global $dossier_squelettes;
 	@include ($f); 
 }
-if (@is_readable(_DIR_SESSIONS."charger_plugins_fonctions.php")){
+if (@is_readable(_DIR_TMP."charger_plugins_fonctions.php")){
 	// chargement optimise precompile
-	include_once(_DIR_SESSIONS."charger_plugins_fonctions.php");
+	include_once(_DIR_TMP."charger_plugins_fonctions.php");
 }
 
 charger_generer_url(); # pour recuperer_parametres_url
@@ -39,6 +40,7 @@ charger_generer_url(); # pour recuperer_parametres_url
 // il est recommande de modifier $_GET['toto'] (meme si la page est
 // appelee avec la methode POST).
 //
+// http://doc.spip.org/@calculer_contexte
 function calculer_contexte() {
 	global $_GET, $_POST;
 
@@ -101,6 +103,7 @@ function analyse_resultat_skel($nom, $cache, $corps) {
 // Calcul de la rubrique associee a la requete
 // (selection de squelette specifique par id_rubrique & lang)
 
+// http://doc.spip.org/@sql_rubrique_fond
 function sql_rubrique_fond($contexte) {
 
 	if (isset($contexte['id_rubrique'])) {
@@ -152,6 +155,7 @@ function sql_rubrique_fond($contexte) {
 
 # retourne le chapeau d'un article, et seulement s'il est publie
 
+// http://doc.spip.org/@sql_chapo
 function sql_chapo($id_article) {
 	$chapo= spip_abstract_fetsel(array('chapo'),
 		array('spip_articles'),
@@ -162,6 +166,7 @@ function sql_chapo($id_article) {
 
 # retourne le parent d'une rubrique
 
+// http://doc.spip.org/@sql_parent
 function sql_parent($id_rubrique) {
 	if (!$id_rubrique = intval($id_rubrique))
 		return 0;
@@ -178,6 +183,7 @@ function sql_parent($id_rubrique) {
 
 # retourne la profondeur d'une rubrique
 
+// http://doc.spip.org/@sql_profondeur
 function sql_profondeur($id) {
 	$n = 0;
 	while ($id) {
@@ -189,6 +195,7 @@ function sql_profondeur($id) {
 
 # retourne la rubrique d'un article
 
+// http://doc.spip.org/@sql_rubrique
 function sql_rubrique($id_article) {
 	$id_rubrique = spip_abstract_fetsel(array('id_rubrique'),
 			array('spip_articles'),
@@ -237,6 +244,7 @@ function sql_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
 }
 
 # retourne le champ 'accepter_forum' d'un article
+// http://doc.spip.org/@sql_accepter_forum
 function sql_accepter_forum($id_article) {
 	static $cache = array();
 
@@ -252,7 +260,7 @@ function sql_accepter_forum($id_article) {
 	return $cache[$id_article];
 }
 
-# Determine les parametres d'URL (hors réécriture) et consorts
+# Determine les parametres d'URL (hors rÃ©Ã©criture) et consorts
 # En deduit un contexte disant si la page est une redirection ou 
 # exige un squelette deductible de $fond et du contexte linguistique.
 # Applique alors le squelette sur le contexte et le nom du cache.
@@ -266,42 +274,48 @@ function sql_accepter_forum($id_article) {
 
 # En cas d'erreur process_ins est absent et texte est un tableau de 2 chaines
 
-function public_parametrer($fond, $local='', $cache='')  {
+// http://doc.spip.org/@public_parametrer_dist
+function public_parametrer_dist($fond, $local='', $cache='')  {
+	// verifier que la fonction assembler est bien chargee (cf. #608)
+	$assembler = charger_fonction('assembler', 'public');
 
 	// distinguer le premier appel des appels par inclusion
-	if (!is_array($local)) { 
+	if (!is_array($local)) {
 		global $contexte;
-	// ATTENTION, gestion des URLs personnalises (propre etc):
-	// 1. $contexte est global car cette fonction le modifie.
-	// 2. $fond est passe par reference, pour la meme raison
-	// Bref,  les URL dites propres ont une implementation sale.
-	// Interdit de nettoyer, faut assumer l'histoire.
+		// ATTENTION, gestion des URLs personnalises (propre etc):
+		// 1. $contexte est global car cette fonction le modifie.
+		// 2. $fond est passe par reference, pour la meme raison
+		// Bref,  les URL dites propres ont une implementation sale.
+		// Interdit de nettoyer, faut assumer l'histoire.
 		include_spip('inc/filtres'); // pour normaliser_date
 		$contexte = calculer_contexte();
 		if (function_exists("recuperer_parametres_url")) {
 			recuperer_parametres_url($fond, nettoyer_uri());
-	// remettre les globales (bouton "Modifier cet article" etc)
+			// remettre les globales (bouton "Modifier cet article" etc)
 			foreach ($contexte as $var=>$val) {
 				if (substr($var,0,3) == 'id_') $GLOBALS[$var] = $val;
 			}
 		}
-	        $local = $contexte;
-	}
+		$local = $contexte;
 
-	// si le champ chapo commence par '=' c'est une redirection.
-
-	if ($fond == 'article'
-	AND $id_article = intval($local['id_article'])) {
-		if ($chapo = sql_chapo($id_article)) {
-			if (preg_match(',^=(\[->)?(.*?)[]]?$,', $chapo, $url)){
+		// si le champ chapo commence par '=' c'est une redirection.
+		// avec un eventuel raccourci Spip
+		// si le raccourci a un titre il sera pris comme corps du 302
+		if ($fond == 'article'
+		AND $id_article = intval($local['id_article'])) {
+			$m = sql_chapo($id_article);
+			if ($m[0]=='=') {
 				include_spip('inc/texte');
-				$url = calculer_url($url[2]);
-				if ($url) { // sinon les navigateurs pataugent
-					$url = texte_script(str_replace('&amp;', '&', $url));
-					return array('texte' => "<".
-					"?php redirige_par_entete('$url'); ?" . ">",
+				// les navigateurs pataugent si l'URL est vide
+				if ($m = chapo_redirige(substr($m,1)))
+					if ($url = calculer_url($m[3]))
+					return array('texte' => "<"
+				. "?php header('Location: "
+				. texte_script(str_replace('&amp;', '&', $url))
+				. "'); echo '"
+				.  addslashes($m[1])
+				. "'?" . ">",
 					'process_ins' => 'php');
-				}
 			}
 		}
 	}
@@ -319,35 +333,57 @@ function public_parametrer($fond, $local='', $cache='')  {
 	if (!isset($lang))
 		$lang = $GLOBALS['meta']['langue_site'];
 
-	if (!$GLOBALS['forcer_lang'])
+	if (!$GLOBALS['forcer_lang']
+	AND $lang <> $GLOBALS['spip_lang']
+	) {
 		lang_select($lang);
+		$lang_select = true;
+	}
 
-	$f = charger_fonction('styliser', 'public');
-	list($skel,$mime_type, $gram, $sourcefile) = $f($fond, $id_rubrique_fond,$GLOBALS['spip_lang'], $local);
-
+	$styliser = charger_fonction('styliser', 'public');
+	list($skel,$mime_type, $gram, $sourcefile) =
+		$styliser($fond, $id_rubrique_fond, $GLOBALS['spip_lang'], $local);
+	
 	// Charger le squelette en specifiant les langages cibles et source
 	// au cas il faudrait le compiler (source posterieure au resultat)
 	// et appliquer sa fonction principale sur le contexte.
 	// Passer le nom du cache pour produire sa destruction automatique
 
-	$f = charger_fonction('composer', 'public');
+	$composer = charger_fonction('composer', 'public');
 
-	if ($fonc = $f($skel, $mime_type, $gram, $sourcefile)){
-		spip_timer('calcul page');
+	if ($fonc = $composer($skel, $mime_type, $gram, $sourcefile)){
+		spip_timer($a = 'calcul page '.rand(0,1000));
 		$page = $fonc(array('cache' => $cache), array($local));
+
+		// spip_log: un joli contexte
+		$info = array();
+		foreach($local as $var => $val)
+			if($val)
+				$info[] = "$var='$val'";
 		spip_log("calcul ("
-			.spip_timer('calcul page')
-			.") [$skel] ".
-			 join(", ", $local)
+			.spip_timer($a)
+			.") [$skel] "
+			. join(', ',$info)
 			.' ('.strlen($page['texte']).' octets)'
 		);
-	} else 	$page = array();
+
+		// Si #CACHE{} n'etait pas la, le mettre a $delais
+		if (!isset($page['entetes']['X-Spip-Cache']))
+			$page['entetes']['X-Spip-Cache'] = $GLOBALS['delais'];
+
+	} else
+		$page = array();
 
 	if ($GLOBALS['var_mode'] == 'debug') {
 		include_spip('public/debug');
 		debug_dumpfile ($page['texte'], $fonc, 'resultat');
 	}
-	$page['signal'] = signaler_squelette($local);
+	$page['contexte'] = $local;
+
+	if ($lang_select)
+		lang_dselect();
+
 	return $page;
 }
+
 ?>

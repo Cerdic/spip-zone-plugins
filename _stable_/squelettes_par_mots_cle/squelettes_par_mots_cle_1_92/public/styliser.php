@@ -1,20 +1,14 @@
 <?php
 
-//    Fichier créé pour SPIP avec un bout de code emprunté à celui ci.
-//    Distribué sans garantie sous licence GPL.
-//
-//    This program is free software; you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation; either version 2 of the License, or any later version.
-//
-//    This program is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//
-//    You should have received a copy of the GNU General Public License
-//    along with this program; if not, write to the Free Software
-//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2007                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -41,10 +35,10 @@ function public_styliser($fond, $id_rubrique, $lang, $contexte) {
 
 	// supprimer le ".html" pour pouvoir affiner par id_rubrique ou par langue
 	$squelette = substr($base, 0, - strlen(".$ext"));
-  $trouve = false;
-  $id_rubrique = intval($id_rubrique);
-  $id_rub_init = $id_rubrique;
-  
+	$trouve = false;
+	$id_rubrique = intval($id_rubrique);
+	$id_rub_init = $id_rubrique;
+
 	// On selectionne, dans l'ordre :
 	// fond=10
 	$f = "$fond=$id_rubrique";
@@ -65,7 +59,8 @@ function public_styliser($fond, $id_rubrique, $lang, $contexte) {
 				$id_rubrique = sql_parent($id_rubrique);
 		}
 	}
-  if(!$trouve) {
+
+	if(!$trouve) {
 		$fonds = unserialize($GLOBALS['meta']['SquelettesMots:fond_pour_groupe']);
 		if (is_array($fonds) && (list($id_groupe,$table,$id_table) = $fonds[$fond])) {
 		  $trouve = false;
@@ -92,7 +87,8 @@ function public_styliser($fond, $id_rubrique, $lang, $contexte) {
 	// Affiner par lang
 	if ($lang) {
 		lang_select($lang);
-		$f = "$squelette.$lang";
+		$f = "$squelette.".$GLOBALS['spip_lang'];
+		lang_dselect();
 		if (@file_exists("$f.$ext"))
 			$squelette = $f;
 	}
