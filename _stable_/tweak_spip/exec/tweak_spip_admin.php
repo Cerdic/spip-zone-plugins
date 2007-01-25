@@ -8,13 +8,13 @@
 
 include_spip('inc/texte');
 include_spip('inc/layer');
-
+/*
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
 define('_DIR_PLUGIN_TWEAK_SPIP',(_DIR_PLUGINS.end($p)));
-
+*/
 // compatibilite spip 1.9
-if(!function_exists(fin_gauche)) { function fin_gauche(){return false;} }
-
+global $spip_version_code;
+if ($spip_version_code<1.92) { function fin_gauche(){return false;} }
 
 function tweak_styles_et_js() {
 	global $couleur_claire;
@@ -109,7 +109,7 @@ tweak_log("Début : enregistre_modif_tweaks()");
 		foreach($_POST as $choix=>$val) if (isset($test[$choix]) && $val=='1') $liste[$test[$choix]]['actif'] = 1;
 	global $connect_id_auteur, $connect_login;
 	spip_log("Changement des tweaks actifs par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys($liste)));
-	ecrire_meta('tweaks',serialize($liste));
+	ecrire_meta('tweaks_actifs',serialize($liste));
 	ecrire_metas();
 	// on force la réinstallation complete des tweaks
 	tweak_initialisation(true);
@@ -135,6 +135,8 @@ tweak_log("Début : exec_tweak_spip_admin()");
 		exit;
 	}
 	
+	// initialisation générale forcée : récupération de $tweaks;
+	tweak_initialisation(true);
 	// mise a jour des donnees si envoi via formulaire
 	// sinon fait une passe de verif sur les tweaks
 	if (_request('changer_tweaks')=='oui'){

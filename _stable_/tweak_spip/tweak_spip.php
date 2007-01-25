@@ -12,10 +12,10 @@
 
 global $spip_version_code;
 if ($spip_version_code<1.92) define(_DIR_VAR, _DIR_IMG);
-if (!defined('_DIR_PLUGIN_TWEAKSPIP')){
+if (!defined('_DIR_PLUGIN_TWEAK_SPIP')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	$p=_DIR_PLUGINS.end($p); if ($p[strlen($p)-1]!='/') $p.='/';
-	define('_DIR_PLUGIN_TWEAKSPIP', $p);
+	define('_DIR_PLUGIN_TWEAK_SPIP', $p);
 }
 
 /*************/
@@ -30,8 +30,8 @@ function add_tweak($tableau) {
 
 // installation de $tweaks_metas_pipes
 // $type ici est egal à 'options' ou 'fonctions'
-function set_tweaks_metas_pipes_fichier($type) {
-	global $tweaks_pipelines, $tweaks_metas_pipes;
+function set_tweaks_metas_pipes_fichier($tweaks_pipelines, $type) {
+	global $tweaks_metas_pipes;
 	$code = '';
 	if (isset($tweaks_pipelines['inc_'.$type]))
 		foreach ($tweaks_pipelines['inc_'.$type] as $inc) $code .= "include_spip('tweaks/$inc');\n";
@@ -44,8 +44,8 @@ function set_tweaks_metas_pipes_fichier($type) {
 }
 
 // installation de $tweaks_metas_pipes
-function set_tweaks_metas_pipes_pipeline($pipeline) {
-	global $tweaks_pipelines, $tweaks_metas_pipes;
+function set_tweaks_metas_pipes_pipeline($tweaks_pipelines, $pipeline) {
+	global $tweaks_metas_pipes;
 	$code = '';
 	if (isset($tweaks_pipelines[$pipeline])) {
 		foreach ($tweaks_pipelines[$pipeline]['inclure'] as $inc) $code .= "include_spip('tweaks/$inc');\n";
@@ -55,18 +55,6 @@ function set_tweaks_metas_pipes_pipeline($pipeline) {
 	tweak_log("set_tweaks_metas_pipes_pipeline($pipeline) : strlen=".strlen($code));
 	$fichier_dest = sous_repertoire(_DIR_VAR, "tweak-spip") . "$pipeline.php";
 	ecrire_fichier($fichier_dest, "<?php\n// Code de contrôle pour le plugin Tweak-SPIP\n$code?".'>');
-}
-
-// bientot obsolete : passe le $flux dans le $pipeline ...
-function tweak_pipeline($pipeline, $flux) {
-return $flux;
-//tweak_log("tweak_pipeline() pour : $pipeline");
-	global $tweaks_pipelines;
-	if (isset($tweaks_pipelines[$pipeline])) {
-		foreach ($tweaks_pipelines[$pipeline]['inclure'] as $inc) include_spip('tweaks/'.$inc);
-		foreach ($tweaks_pipelines[$pipeline]['fonction'] as $fonc) if (function_exists($fonc)) $flux = $fonc($flux);
-	}
-	return $flux;
 }
 
 // retourne les css utilises (en vue d'un insertion en head)
@@ -83,9 +71,9 @@ function is_tweak_pipeline($pipe, &$set_pipe) {
 	return $ok;
 }
 
-// initialise : $tweaks_pipelines, $tweaks_css
+// initialise : $tweaks_css
 function tweak_initialise_includes() {
-  global $tweaks, $tweaks_pipelines, $tweaks_css;
+  global $tweaks, $tweaks_css;
   $tweaks_pipelines = $tweaks_css = array();
   // liste des pipelines utilises
   $pipelines_utilises = array();
@@ -116,9 +104,9 @@ function tweak_initialise_includes() {
 	}
   }
   // installation de $tweaks_metas_pipes
-  set_tweaks_metas_pipes_fichier('options');
-  set_tweaks_metas_pipes_fichier('fonctions');
-  foreach($pipelines_utilises as $pipe) set_tweaks_metas_pipes_pipeline($pipe);
+  set_tweaks_metas_pipes_fichier($tweaks_pipelines, 'options');
+  set_tweaks_metas_pipes_fichier($tweaks_pipelines, 'fonctions');
+  foreach($pipelines_utilises as $pipe) set_tweaks_metas_pipes_pipeline($tweaks_pipelines, $pipe);
 }
 
 // remplace les valeurs marquees comme %%toto%% par la valeur reelle de $metas_vars['toto']
@@ -179,25 +167,27 @@ function tweak_log($s) {
 	spip_log('TWEAKS. '.$s);
 }	
 
-// lit les metas et initialise $tweaks_pipelines et les includes
+// lit/ecrit les metas et initialise $tweaks_metas_pipes
 function tweak_initialisation($forcer=false) {
 	global $tweaks, $tweaks_metas_pipes, $metas_vars;
 tweak_log("tweak_initialisation($forcer) : Entrée");
-	if (!isset($GLOBALS['meta']['tweaks'])) {
+	if (!isset($GLOBALS['meta']['tweaks_actifs'])) {
 tweak_log(" -- lecture metas ");
 		include_spip('inc/meta');
 		lire_metas();
 	}
-	if (isset($GLOBALS['meta']['tweaks_metas_pipes'])) {
-		$tweaks_metas_pipes = unserialize($GLOBALS['meta']['tweaks_metas_pipes']);
+	if (isset($GLOBALS['meta']['tweaks_pipelines'])) {
+		$tweaks_metas_pipes = unserialize($GLOBALS['meta']['tweaks_pipelines']);
+tweak_log(" -- tweaks_metas_pipes = ".join(', ',array_keys($tweaks_metas_pipes)));
 tweak_log("tweak_initialisation($forcer) : Sortie car les metas sont présents");
 		// Les pipelines sont en meta, tout va bien on peut partir d'ici.
 		if (!$forcer) return;
 tweak_log(" -- pipelines en metas : mode forcé, donc on continue...");
 	}
 	include_spip('tweak_spip_config');
-	$metas_tweaks = unserialize($GLOBALS['meta']['tweaks']);
-	$metas_vars = unserialize($GLOBALS['meta']['tweaks_vars']);
+	if (isset($GLOBALS['meta']['tweaks'])) $metas_tweaks = unserialize($GLOBALS['meta']['tweaks']);
+	 else $metas_tweaks = unserialize($GLOBALS['meta']['tweaks_actifs']);
+	$metas_vars = unserialize($GLOBALS['meta']['tweaks_variables']);
 	// au cas ou un tweak a besoin d'input
 	$tweak_input = charger_fonction('tweak_input', 'inc');
 	// completer les variables manquantes et incorporer l'activite lue dans les metas
@@ -217,14 +207,16 @@ tweak_log(" -- pipelines en metas : mode forcé, donc on continue...");
 		tweak_parse_description($i, $tweak_input);
 	}
 	// installer $tweaks_metas_pipes
+	$tweaks_metas_pipes = array();
 	tweak_initialise_includes();
 	// tweaks actifs
 tweak_log(" -- ecriture metas ");
-	ecrire_meta('tweaks', serialize($metas_tweaks));
+	effacer_meta('tweaks');												// ######## a supprimer a terme tous les metas 'tweaks'
+	ecrire_meta('tweaks_actifs', serialize($metas_tweaks));
 	// variables de tweaks
-	ecrire_meta('tweaks_vars', serialize($metas_vars));
+	ecrire_meta('tweaks_variables', serialize($metas_vars));
 	// code inline pour les pipelines, mes_options et mes_fonctions;
-	ecrire_meta('tweaks_metas_pipes', serialize($tweaks_metas_pipes));
+	ecrire_meta('tweaks_pipelines', serialize($tweaks_metas_pipes));
 	ecrire_metas();
 tweak_log("tweak_initialisation($forcer) : Sortie");
 }
@@ -246,8 +238,8 @@ function tweak_exclure_balises($balises, $fonction, $texte){
 /*****************/
 
 // les globales
-global $tweaks, $tweaks_metas_pipes, $tweaks_pipelines, $tweaks_css;
-$tweaks = $tweaks_metas_pipes = $tweaks_pipelines = $tweaks_css = array();
+global $tweaks, $tweaks_metas_pipes, $tweaks_css;
+$tweaks = $tweaks_metas_pipes = $tweaks_css = array();
 
 // lancer l'initialisation
 tweak_initialisation();

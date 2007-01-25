@@ -1,6 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/filtres');
 
 function action_tweak_input_dist() {
 tweak_log("Début : action_tweak_input_dist()");
@@ -25,9 +26,9 @@ tweak_log("Fin   : action_tweak_input_dist()");
 function action_tweak_input_post($r) {
 tweak_log("Début : action_tweak_input_dist(Array($r[1], $r[2], ...))");
 
-//	lire_metas();
+	lire_metas();
 	global $metas_vars;
-//	$metas_vars = unserialize($GLOBALS['meta']['tweaks_vars']);
+	$metas_vars = unserialize($GLOBALS['meta']['tweaks_variables']);
 
 	$variable = _request('variable');
 	$final = corriger_caracteres(_request($variable));
@@ -35,7 +36,7 @@ tweak_log("Début : action_tweak_input_dist(Array($r[1], $r[2], ...))");
 	$metas_vars[$variable] = $final;
 tweak_log(" -- tweak $r[1] : $variable devient $final, donc :");
 tweak_log(" -- metas_vars = ".serialize($metas_vars));
-	ecrire_meta('tweaks_vars', serialize($metas_vars));
+	ecrire_meta('tweaks_variables', serialize($metas_vars));
 	ecrire_metas();
 tweak_log("Fin   : action_tweak_input_dist(Array($r[1], $r[2], ...))");
 }

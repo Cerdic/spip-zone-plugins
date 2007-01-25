@@ -21,7 +21,9 @@ if(!function_exists(ajax_retour)) {
 function exec_tweak_input_dist() {
 tweak_log("Début : exec_tweak_input_dist()");
 
+	lire_metas();
 	global $metas_vars;
+	$metas_vars = unserialize($GLOBALS['meta']['tweaks_variables']);
 
 	$script = _request('script');
 	$index = intval(_request('index'));
