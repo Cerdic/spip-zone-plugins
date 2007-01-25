@@ -22,6 +22,8 @@ function player_affiche_config_form($exec_page){
 		$out .= bouton_radio("player", "pixplayer", "One pixel out player", $player_ == "pixplayer");
 		$out .= "<br />";
 		$out .= bouton_radio("player", "neoplayer_multi", "Neolao player multi", $player_ == "neoplayer_multi");
+		$out .= "<br />";
+		$out .= bouton_radio("player", "eraplayer", "Erational player", $player_ == "eraplayer");
 	
 		$out .= "<div style='text-align:$spip_lang_right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>";
 		
