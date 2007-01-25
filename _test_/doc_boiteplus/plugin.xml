@@ -13,8 +13,8 @@
 	  test
 	</etat>
 	<description>
-	  Permet d'ajouter une boite dans le portfolio de l'article, n&#233;cessite le plugin 
-	  [Mots partout->http://www.spip-contrib.net/Des-mots-clefs-partout]
+	  Permet d'ajouter une boite dans le portfolio de l'article, necessite le plugin 
+	  _ http://www.spip-contrib.net/Des-mots-clefs-partout
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
@@ -22,6 +22,11 @@
 	ce parametre est obligatoire et doit etre non vide
 	-->
 	<prefix> 
-	 doc_boiteplus
+	 docboiteplus
 	</prefix>
+	<pipeline>
+		<nom>body_prive</nom>
+		<action>insert_head</action>
+ 		<inclure>head.php</inclure>
+	</pipeline>
 	</plugin>

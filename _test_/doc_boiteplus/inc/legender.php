@@ -63,12 +63,14 @@ global $id_article;
 
 
 	$entete = basename($document['fichier']);
+	$nomdoc = basename($document['fichier']);
 	//alm on inverse les 2 if
 	if (strlen($document['titre']))
-		$entete = "<b>". typo($titre) . "</b>";
+		$entete = "<b>". typo($titre) . "</b><br />" .$nomdoc ;
 	
 	if (($n=strlen($entete)) > 20) 
-		$entete = substr($entete, 0, 12)."...".substr($entete, $n-10, $n);
+		//$entete = substr($entete, 0, 10)."...".substr($entete, $n-10, $n);
+		$entete = "<span class='titredoc'>". $entete . "</span>";
 
 	$contenu = '';
 	if ($descriptif)
@@ -87,13 +89,13 @@ global $id_article;
 	   "<br /><div class='verdana1' style='text-align: center;'>$contenu</div>") .
 	  "<b>$label</b><br />\n" .
 
-	  "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre).
+	  "<input type='text' name='titre_document' class='formou' value=\"".entites_html($titre).
 	  "\" size='40'	onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /><br /><br />\n" .
 	  date_formulaire_legender($date, $id_document) .
 	  "<br />\n<b>".
 	  _T('info_description_2').
 	  "</b><br />\n" .
-	  "<textarea name='descriptif_document' rows='4' class='formo' cols='*' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">" .
+	  "<textarea name='descriptif_document' rows='6' class='formou' cols='*' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">" .
 	    entites_html($descriptif) .
 	  "</textarea>\n" .
 	  $taille .
@@ -123,17 +125,15 @@ $editer_motdoc = charger_fonction('editer_motdoc', 'inc');
 	. "\n\n\n\n"
 	. icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
 
-	$corps = "<div class='verdana1' style='color: "
+	$corps = "<div class='verdana1 legendemoi' style='color: "
 	. $GLOBALS['couleur_foncee']
 	. "; border: 1px solid "
 	. $GLOBALS['couleur_foncee']
-	. ";  padding: 5px 0px 5px 0px; margin: 3px 3px 0px 3px; background-color: white; border-bottom:1px dotted; font-size:0.9em;'>"
+	. ";  '>"
 	. block_parfois_visible("legender-aff-$id_document", $entete, $corps, "text-align:center;", $flag)
 	. "</div>"
 	  //ajout alm mettre les mots ici ++ janv 2007 $flag_editable remplacé par ajax?
-	  //+ hack sur le style à mettre dans head
-	  . "<style>.cadre-info ul{list-style-type: none;} #documenter--1 a, #documenter--1 b, #documenter--1 input, #documenter--1 select{font-size:0.8em;}   #documenter--1{position:relative; z-index:1000;}</style>"
-	  . (!$editer_motdoc ? '' : $editer_motdoc('document', $id_document, $cherche_mot, $select_groupe, 'ajax'));
+	  	  . (!$editer_motdoc ? '' : $editer_motdoc('document', $id_document, $cherche_mot, $select_groupe, 'ajax'));
 	  //$editer_motdoc($id_document). 
 
 
@@ -209,7 +209,7 @@ function date_formulaire_legender($date, $id_document) {
 		$jour = $regs[3];
 		$annee = $regs[1];
 	}
-	return  "<b>"._T('info_mise_en_ligne')."</b><br />\n" .
+	return  "<b>"._T('docboiteplus:info_prise_de_vue')."</b><br />\n" .
 		afficher_jour($jour, "name='jour_doc' size='1' class='fondl' \n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
 		afficher_mois($mois, "name='mois_doc' size='1' class='fondl' \n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
 		afficher_annee($annee, "name='annee_doc' size='1' class='fondl' \n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") .

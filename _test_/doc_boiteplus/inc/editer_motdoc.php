@@ -9,15 +9,13 @@
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
-
 //ne pas mettre la possibilité de motclef unique si longue liste de mots
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/mots');
 
 // http://doc.spip.org/@inc_editer_motdoc_dist
-//voir les memes noms de fichier dans action et exec
+//voir les memes noms de fichier dans action et exec ajout global $id_article
 function inc_editer_motdoc_dist($objet, $id_objet, $cherche_mot, $select_groupe, $flag) {
 	global $id_article, $options, $connect_statut, $spip_lang_rtl, $spip_lang_right, $spip_lang;
 
@@ -191,8 +189,8 @@ function afficher_motsdoc_cles($flag_editable, $objet, $id_objet, $table, $table
 			$id_mot = $row['id_mot'];
 			$titre_mot = $row['titre'];
 // on raccourci le mot
-		if (($n=strlen($titre_mot)) > 14) 
-		$titre_mot = substr($titre_mot, 0, 10)."...";
+		if (($n=strlen($titre_mot)) > 15) 
+		$titre_mot = substr($titre_mot, 0, 11)."...";
 			
 			$descriptif_mot = $row['descriptif'];
 			$id_groupe = $row['id_groupe'];
@@ -220,7 +218,7 @@ function afficher_motsdoc_cles($flag_editable, $objet, $id_objet, $table, $table
 			}
 			
 // on raccourci le type de mot
-		if (($n=strlen($type_mot)) > 11) 
+		if (($n=strlen($type_mot)) > 14) 
 		$type_mot = substr($type_mot, 0, 8)."...";
 			if ($connect_toutes_rubriques)
 				$vals[]= "<a href='" . generer_url_ecrire("mots_type","id_groupe=$id_groupe") . "'>$type_mot</a>";
@@ -243,11 +241,11 @@ function afficher_motsdoc_cles($flag_editable, $objet, $id_objet, $table, $table
 	
 			$les_mots[] = $id_mot;
 		}
-	//alm on supprime le 1er td pour le cadre quand les mots clefs sont choisis
+	//alm on supprime le 1er td pour le cadre quand les mots clefs sont choisis //arial2
 		$largeurs = array('', '', '');
-		$styles = array('arial2', 'arial2', 'arial1');
+		$styles = array('rien', 'arial1', 'arial1');
 
-		$res = "\n<div class='liste' style='text-align:center; margin:0 auto; padding:0; '>"
+		$res = "\n<div class='liste'>"
 		. "\n<table style='width:100%; border:0; margin:0 auto;' cellspacing='0' >"
 		. afficher_liste($largeurs, $tableau, $styles)
 		. "</table></div>";
@@ -291,7 +289,7 @@ function formulaire_motdoc_remplace($id_groupe, $id_mot, $url_base, $table, $tab
 }
 
 
-// http://doc.spip.org/@formulaire_motsdoc_cles
+// http://doc.spip.org/@formulaire_motsdoc_cles //pas de modif
 function formulaire_motsdoc_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet) {
 	global $connect_statut, $spip_lang, $spip_lang_right, $spip_lang_rtl;
 
@@ -350,25 +348,28 @@ function formulaire_motsdoc_cles($id_groupes_vus, $id_objet, $les_mots, $table, 
 			. $ajouter
 			."</div>\n" ;
 	}
+	
 //alm on supprime la possibilité de rajouter un mot clef au document sinon ç'est trop lourd
-	/*if (acces_mots()) {
+	/**/
+	if (autoriser('modifier','groupemots')) {
 		$titre = _request('cherche_mot')
 			? "&titre=".rawurlencode(_request('cherche_mot')) : '';
-			//modif alm pour retour sur article et le doc après creation mot
-		$bouton_ajouter = icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id$titre&redirect=" . generer_url_retour($url_base, "#editer_motdoc-$id_objet")), "mot-cle-24.gif", "creer.gif", false)
+		$bouton_ajouter = icone_horizontale(_T('docboiteplus:titre_ajouter_mot_cle_doc'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id$titre&redirect=" . generer_url_retour($url_base, "$table_id=$id_objet")), "mot-cle-24.gif", "creer.gif", false)
 		. "\n";
 	}
 
 	if ($message OR $bouton_ajouter) {
-		$res .= "<div style='width:170px;'>$message
-			<br />$bouton_ajouter</div>\n";
-	}*/
+		$res .= "<div class='ajoutmot'>";
+		//$res .= "$message<br />";
+		$res .= "$bouton_ajouter ";
+		$res .= "</div>\n";
+	}
 
 	return $res . fin_block();
 }
 
 
-// http://doc.spip.org/@menu_motsdoc
+// http://doc.spip.org/@menu_motsdoc non modifié
 function menu_motsdoc($row, $id_groupes_vus, $les_mots)
 {
 	$rand = rand(0,10000); # pour antifocus & ajax
