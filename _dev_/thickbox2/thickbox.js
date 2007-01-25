@@ -40,11 +40,11 @@ function TB_image() {
 function TB_init(root) {
 	$("a.thickbox",root).each(
 		function(i) {
+			this.onclick = TB_image;
 			if (
 				(this.type && this.type.match(/^image[\/](jpeg|gif|png)$/i))
 				|| (this.href && this.href.match(/\.(jpeg|jpg|png|gif)$/i))
 			) {
-				this.onclick = TB_image;
 
 				// we store image links in an array (for a gallery)
 				imageArray.push ([
@@ -53,9 +53,9 @@ function TB_init(root) {
 				]);
 
 			}
-
 		}
 	);
+//console.log(imageArray);
 }
 
 
@@ -275,12 +275,17 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
     
       imgPreloader.src = url;
     }else{//code to show html pages
-      
-      var queryString = url.replace(/^[^\?]+\??/,'');
+      //console.log(url);      
+      var queryString = url.replace(/^[^\?]+\?+/,'');
+      //rhooooo, c'est pas du boulot ce thickbox
+      queryString = queryString.replace(/^[^\?]+\?+/,'');
+      //console.log(queryString);
       var params = TB_parseQuery( queryString );
+      //console.log(params);
       
       TB_WIDTH = (params['width']*1) + 30;
       TB_HEIGHT = (params['height']*1) + 40;
+      
       ajaxContentW = TB_WIDTH - 30;
       ajaxContentH = TB_HEIGHT - 45;
       
