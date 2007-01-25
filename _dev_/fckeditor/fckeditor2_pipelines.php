@@ -47,6 +47,8 @@ function fckeditor2_header_prive($flux) {
 			var oFCKeditor = new FCKeditor( "text_area" ) ;
 			oFCKeditor.BasePath = "'._DIR_PLUGIN_FCKEDITOR.'/FCKeditor/" ;
 			oFCKeditor.Config["CustomConfigurationsPath"] = "'._DIR_PLUGIN_FCKEDITOR.'/spip_fck/fckconfig.php?path='._DIR_PLUGIN_FCKEDITOR.'&" + ( new Date() * 1 ) ;
+			oFCKeditor.Config[ "AutoDetectLanguage" ] = false ;
+			oFCKeditor.Config[ "DefaultLanguage" ] = "'.$GLOBALS['_COOKIE']['spip_lang_ecrire'].'" ;
 			oFCKeditor.Height = "600";
 			oFCKeditor.ToolbarSet = "Spip";
 			oFCKeditor.ReplaceTextarea();
