@@ -22,6 +22,7 @@
 //
 // init
 //
+var DELAI = 7000 ; //nombre de secondes entre deux images
 var imageArray = [];
 var FULL_S = false;
 var DIAPO = false;
@@ -87,193 +88,190 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
     
     if(urlType == '.jpg' || urlType == '.jpeg' || urlType == '.png' || urlType == '.gif' || urlType == '.bmp'){//code to show images
         
-      TB_PrevCaption = "";
-      TB_PrevURL = "";
-      TB_PrevHTML = "";
-      TB_NextCaption = "";
-      TB_NextURL = "";
-      TB_NextHTML = "";
-      TB_imageCount = "";
-      TB_Full_Size = "";
-      TB_FoundURL = false;
-      if(imageArray.length > 0){
-        TB_TempArray = imageArray ;
-        for (TB_Counter = 0; ((TB_Counter < TB_TempArray.length) && (TB_NextHTML == "")); TB_Counter++) {
-          var urlTypeTemp = TB_TempArray[TB_Counter][0].toLowerCase().match(urlString);
-            if (!(TB_TempArray[TB_Counter][0] == url)) {            
-              if (TB_FoundURL) {
-                TB_NextCaption = TB_TempArray[TB_Counter][1];
-                TB_NextURL = TB_TempArray[TB_Counter][0];
-                TB_NextHTML = "<span id='TB_next'>&nbsp;&nbsp;<a href='#'><strong> &gt;</strong></a></span>";
-              } else {
-                TB_PrevCaption = TB_TempArray[TB_Counter][1];
-                TB_PrevURL = TB_TempArray[TB_Counter][0];
-                TB_PrevHTML = "<span id='TB_prev'>&nbsp;&nbsp;<a href='#'><strong>&lt; </strong></a></span>";
-              }
-            } else {
-              TB_FoundURL = true;
-              TB_imageCount =  (TB_Counter + 1) +" / "+ (TB_TempArray.length);                      
-            }
-        }
-      }
-      imgPreloader = new Image();
-      imgPreloader.onload = function(){    
-      imgPreloader.onload = null;
-        
-      // Resizing large images - orginal by Christian Montoya edited by me.
-      TB_Big_Image = false ;
-      var pagesize = TB_getPageSize();
-      var x = pagesize[0] - 150;
-      var y = pagesize[1] - 150;
-      var imageWidth = imgPreloader.width;
-      var imageHeight = imgPreloader.height;
-      IMAGE_WIDTH = imageWidth ;
-	  IMAGE_HEIGHT = imageHeight ;
-     
-      if (imageWidth > x) {
-        TB_Big_Image = true ;
-        imageHeight = imageHeight * (x / imageWidth); 
-        imageWidth = x; 
-         if (imageHeight > y) { 
-          TB_Big_Image = true ;
-          imageWidth = imageWidth * (y / imageHeight); 
-          imageHeight = y; 
-        }
-      } else if (imageHeight > y) { 
-        TB_Big_Image = true ;
-        imageWidth = imageWidth * (y / imageHeight); 
-        imageHeight = y; 
-        if (imageWidth > x) { 
-          TB_Big_Image = true ;
-          imageHeight = imageHeight * (x / imageWidth); 
-          imageWidth = x;
-        }
-      }
-      // End Resizing
-      if(!DIAPO){
-      TB_Diapo = "<span id='TB_Diapo'>&nbsp;&nbsp;<a href='#'><strong>[Slideshow]</strong></a></span>";
-      }else{
-      TB_Diapo = "<span id='TB_Diapo'>&nbsp;&nbsp;<a href='#'><strong>[Stop]</strong></a></span>";
-      }
-      if (TB_Big_Image) {
-        TB_Full_Size = "<span id='TB_Full'>&nbsp;&nbsp;<a href='#'><strong>[Zoom]</strong></a></span>";
-      }
-      
-      TB_WIDTH = imageWidth + 20;
-      TB_HEIGHT = imageHeight + 20;    
-      
-      	$("#TB_window").append("<a href='' id='TB_ImageOff'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+"'/></a>" + "<div id='TB_legend' style='background-color:#fff'><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'><img src='"+TB_chemin_close+"' /></a></div><div id='TB_caption'>"+caption+"</div><div id='TB_secondLine'>" + TB_imageCount + TB_Full_Size + TB_PrevHTML + TB_NextHTML + TB_Diapo +"</div></div>"); 
+	      TB_PrevCaption = "";
+	      TB_PrevURL = "";
+	      TB_PrevHTML = "";
+	      TB_NextCaption = "";
+	      TB_NextURL = "";
+	      TB_NextHTML = "";
+	      TB_imageCount = "";
+	      TB_Full_Size = "";
+	      TB_FoundURL = false;
+	      if(imageArray.length > 0){
+	        TB_TempArray = imageArray ;
+	        for (TB_Counter = 0; ((TB_Counter < TB_TempArray.length) && (TB_NextHTML == "")); TB_Counter++) {
+	          var urlTypeTemp = TB_TempArray[TB_Counter][0].toLowerCase().match(urlString);
+	            if (!(TB_TempArray[TB_Counter][0] == url)) {            
+	              if (TB_FoundURL) {
+	                TB_NextCaption = TB_TempArray[TB_Counter][1];
+	                TB_NextURL = TB_TempArray[TB_Counter][0];
+	                TB_NextHTML = "<span id='TB_next'>&nbsp;&nbsp;<a href='#'><strong> &gt;</strong></a></span>";
+	              } else {
+	                TB_PrevCaption = TB_TempArray[TB_Counter][1];
+	                TB_PrevURL = TB_TempArray[TB_Counter][0];
+	                TB_PrevHTML = "<span id='TB_prev'>&nbsp;&nbsp;<a href='#'><strong>&lt; </strong></a></span>";
+	              }
+	            } else {
+	              TB_FoundURL = true;
+	              TB_imageCount =  (TB_Counter + 1) +" / "+ (TB_TempArray.length);                      
+	            }
+	        }
+	      }
+	      if (!(TB_NextHTML == "")) { 
+	       //preload de la prochaine image
+			imageSuivante = new Image();
+			imageSuivante.src = TB_NextURL ;
+	      }
+	      
+	      imgPreloader = new Image();
+	      imgPreloader.onload = function(){    
+	      imgPreloader.onload = null;
+	      //console.log("loaded" + url);
+	      // Resizing large images - orginal by Christian Montoya edited by me.
+	      TB_Big_Image = false ;
+	      var pagesize = TB_getPageSize();
+	      var x = pagesize[0] - 150;
+	      var y = pagesize[1] - 150;
+	      var imageWidth = imgPreloader.width;
+	      var imageHeight = imgPreloader.height;
+	      IMAGE_WIDTH = imageWidth ;
+		  IMAGE_HEIGHT = imageHeight ;
+	     
+	      if (imageWidth > x) {
+	        TB_Big_Image = true ;
+	        imageHeight = imageHeight * (x / imageWidth); 
+	        imageWidth = x; 
+	         if (imageHeight > y) { 
+	          TB_Big_Image = true ;
+	          imageWidth = imageWidth * (y / imageHeight); 
+	          imageHeight = y; 
+	        }
+	      } else if (imageHeight > y) { 
+	        TB_Big_Image = true ;
+	        imageWidth = imageWidth * (y / imageHeight); 
+	        imageHeight = y; 
+	        if (imageWidth > x) { 
+	          TB_Big_Image = true ;
+	          imageHeight = imageHeight * (x / imageWidth); 
+	          imageWidth = x;
+	        }
+	      }
+	      // End Resizing
+	      if(!DIAPO){
+	      TB_Diapo = "<span id='TB_Diapo'>&nbsp;&nbsp;<a href='#'><strong>[Slideshow]</strong></a></span>";
+	      }else{
+	      TB_Diapo = "<span id='TB_Diapo'>&nbsp;&nbsp;<a href='#'><strong>[Stop]</strong></a></span>";
+	      }
+	      if (TB_Big_Image) 
+	        TB_Full_Size = "<span id='TB_Full'>&nbsp;&nbsp;<a href='#'><strong>[Zoom]</strong></a></span>";
+	      TB_WIDTH = imageWidth + 20;
+	      TB_HEIGHT = imageHeight + 20;    
+	      
+	      $("#TB_window").append("<a href='' id='TB_ImageOff'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+"'/></a>" + "<div id='TB_legend' style='background-color:#fff'><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'><img src='"+TB_chemin_close+"' /></a></div><div id='TB_caption'>"+caption+"</div><div id='TB_secondLine'>" + TB_imageCount + TB_Full_Size + TB_PrevHTML + TB_NextHTML + TB_Diapo +"</div></div>"); 
 			
-			//TB_position() ;
-
-			$("#TB_closeWindowButton").click(TB_remove);		
-			$("#TB_load").remove();
-			$("#TB_window").fadeIn("slow");
+		   $("#TB_closeWindowButton").click(TB_remove);		
+		   $("#TB_load").remove();
+		   $("#TB_window").fadeIn("slow");
 			//setTimeout('$("#TB_legend").slideDown(800);',1600);      
-      
-      
-      
-      if (!(TB_PrevHTML == "")) {
-        function goPrev(){
-          FULL_S = false ;
-          if($(document).unbind('click',goPrev)){$(document).unbind('click',goPrev)};
-          $("#TB_window").remove();
-          $("body").append("<div id='TB_window'></div>");
-          TB_show(TB_PrevCaption, TB_PrevURL);
-          return false;  
-        }
-        $("#TB_prev").click(goPrev);
-      }
-      
-      if (!(TB_NextHTML == "")) {    
-        function goNext(){
-          FULL_S = false ;
-          $("#TB_window").remove();
-          $("body").append("<div id='TB_window'></div>");
-          TB_show(TB_NextCaption, TB_NextURL); 
-          return false;  
-        }
-        $("#TB_next").click(goNext);
-        //preload de la prochaine image
-		imageSuivante = new Image();
-		imageSuivante.src = TB_NextURL ;
-      }
-      
-      //diapo
-       setTimeout('diapo();',7000);
+	       
+	         if (!(TB_NextHTML == "")) {    
+	        function goNext(){
+	          FULL_S = false ;
+	          $("#TB_window").remove();
+	          $("body").append("<div id='TB_window'></div>");
+	          TB_show(TB_NextCaption, TB_NextURL); 
+	          return false;  
+	        }
+	        $("#TB_next").click(goNext);
+	      	}
+	      
+	        if (!(TB_PrevHTML == "")) {
+	        function goPrev(){
+	          FULL_S = false ;
+	          if($(document).unbind('click',goPrev)){$(document).unbind('click',goPrev)};
+	          $("#TB_window").remove();
+	          $("body").append("<div id='TB_window'></div>");
+	          TB_show(TB_PrevCaption, TB_PrevURL);
+	          return false;  
+	        }
+	        $("#TB_prev").click(goPrev);
+	        }
+	     
+	      	if (!(TB_Full_Size == "")) {    
+	        function fullSize(){
+	 		var arrayPageScroll = TB_getPageScrollTop();  
+			var pagesize = TB_getPageSize();  
+	
+		 		if(!FULL_S){
+		 		FULL_S = true ;
+				TB_TOP = arrayPageScroll[1];
+					if( (arrayPageScroll[0] + (pagesize[0] - IMAGE_WIDTH)/2) > 0 ){
+					TB_LEFT = arrayPageScroll[0] + (pagesize[0] - IMAGE_WIDTH)/2 ;
+					}else{
+					TB_LEFT = 50 ;
+					}
+				
+				$("#TB_window").animate({top:TB_TOP,left:TB_LEFT,width:(IMAGE_WIDTH+20),height:(IMAGE_HEIGHT+20)},1500);         
+		 		$("#TB_Image").animate({top:20,left:20,width:IMAGE_WIDTH,height:IMAGE_HEIGHT},1500, TB_recadre);         
+		      
+		       	}
+		       	else{
+		       	FULL_S = false ;
+		       	$("#TB_window").animate({top: (arrayPageScroll[1] + (pagesize[1]-TB_HEIGHT)/2),left:(arrayPageScroll[0] + (pagesize[0] - TB_WIDTH)/2), width:TB_WIDTH,height:TB_HEIGHT},1500);         
+		 		$("#TB_Image").animate({top:20,left:20,width:(TB_WIDTH - 20),height:(TB_HEIGHT - 20)},1500,TB_recadre);         
+		       	}
+	       
+	        return false;  
+	        }
+	      $("#TB_Full").click(fullSize);  
+	     }
+	      
+	     if(!(TB_NextHTML == "")){
+	      	 $("#TB_ImageOff").click(goNext);
+		 	 }else{
+	      	 $("#TB_ImageOff").click(TB_remove);
+	      }
+	     
+	     
+	     $("#TB_Diapo").click(diaporama);
+	
+	      
+	      document.onkeydown = function(e){   
+	        if (e == null) { // ie
+	          keycode = event.keyCode;
+	        } else { // mozilla
+	          keycode = e.which;
+	        }
+	        if(keycode == 27 | keycode == 67 | keycode == 70){ // close
+	          TB_remove();
+	        } else if(keycode == 190 | keycode == 39){ // display previous image <-
+	          if(!(TB_NextHTML == "")){
+	          document.onkeydown = "";
+	          goNext();
+	          }
+	        } else if(keycode == 188  | keycode == 37){ // display next image ->
+	          if(!(TB_PrevHTML == "")){
+	          document.onkeydown = "";
+	          goPrev();
+	          }
+	        }  
+	      }
+	      
+	      TB_position() ;
+	 
+	      $("#TB_load").remove();
+	      $("#TB_window").css({display:"block"}); //for safari using css instead of show
+	      
+	      
+	      //diapo
+	       //console.log("deb " + DELAI); 
+	       if(DIAPO)
+	       setTimeout('diapo();',DELAI);
+	      }
+	 
+	 imgPreloader.src = url;
+	 //console.log("hop" + url);
 
-      
-      if (!(TB_Full_Size == "")) {    
-        function fullSize(){
- 		var arrayPageScroll = TB_getPageScrollTop();  
-		var pagesize = TB_getPageSize();  
-
- 		if(!FULL_S){
- 		FULL_S = true ;
-		TB_TOP = arrayPageScroll[1];
-		if( (arrayPageScroll[0] + (pagesize[0] - IMAGE_WIDTH)/2) > 0 ){
-		TB_LEFT = arrayPageScroll[0] + (pagesize[0] - IMAGE_WIDTH)/2 ;
-		}else{
-		TB_LEFT = 50 ;
-		}
-		
-		$("#TB_window").animate({top:TB_TOP,left:TB_LEFT,width:(IMAGE_WIDTH+20),height:(IMAGE_HEIGHT+20)},1500);         
- 		$("#TB_Image").animate({top:20,left:20,width:IMAGE_WIDTH,height:IMAGE_HEIGHT},1500, TB_recadre);         
-      
-
-       	}else{
-       	FULL_S = false ;
-       
-       	$("#TB_window").animate({top: (arrayPageScroll[1] + (pagesize[1]-TB_HEIGHT)/2),left:(arrayPageScroll[0] + (pagesize[0] - TB_WIDTH)/2), width:TB_WIDTH,height:TB_HEIGHT},1500);         
- 		$("#TB_Image").animate({top:20,left:20,width:(TB_WIDTH - 20),height:(TB_HEIGHT - 20)},1500,TB_recadre);         
-       	}
-       
-        return false;  
-        }
-        $("#TB_Full").click(fullSize);
-        
-      }
-      
-      
-      if(!(TB_NextHTML == "")){
-      	 $("#TB_ImageOff").click(goNext);
-	 	 }else{
-      	 $("#TB_ImageOff").click(TB_remove);
-      }
-      
-       
-      
-       $("#TB_Diapo").click(diaporama);
-
-      
-      document.onkeydown = function(e){   
-        if (e == null) { // ie
-          keycode = event.keyCode;
-        } else { // mozilla
-          keycode = e.which;
-        }
-        if(keycode == 27 | keycode == 67 | keycode == 70){ // close
-          TB_remove();
-        } else if(keycode == 190 | keycode == 39){ // display previous image <-
-          if(!(TB_NextHTML == "")){
-          document.onkeydown = "";
-          goNext();
-          }
-        } else if(keycode == 188  | keycode == 37){ // display next image ->
-          if(!(TB_PrevHTML == "")){
-          document.onkeydown = "";
-          goPrev();
-          }
-        }  
-      }
-      
-      TB_position() ;
- 
-      $("#TB_load").remove();
-      $("#TB_window").css({display:"block"}); //for safari using css instead of show
-      }
-    
-      imgPreloader.src = url;
     }else{//code to show html pages
       //console.log(url);      
       var queryString = url.replace(/^[^\?]+\?+/,'');
@@ -342,18 +340,21 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
  //alert("diapo");
  if(!DIAPO){
   DIAPO = true ;
+ //console.log("deb"); 
+  setTimeout('diapo();',DELAI);
   //$("TB_secondLine").html(TB_imageCount + TB_Full_Size + TB_PrevHTML + TB_NextHTML + "[Stop]");
   } else {
   DIAPO = false ; 
   }
- setTimeout('diapo();',7000);
  }
 
 function diapo(){
+  //console.log(DIAPO);
   if(DIAPO){
    if(TB_NextURL !=""){
    $("#TB_window").remove();
    $("body").append("<div id='TB_window'></div>");
+   //console.log("hop");
    TB_show(TB_NextCaption, TB_NextURL); 
    }else DIAPO = false ;
    }
