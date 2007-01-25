@@ -115,10 +115,10 @@ jQuery.fn.ajaxAction = function() {
 				onStop : function(arg){
 					serial = $.SortSerialize($(this).parent().attr("id"));
 					var form = $(this).parent().siblings('form.sortableChamps');
-					var prev = form.children('input[@name=ordre]').val();
+					var prev = $(form).children('input[@name=ordre]').val();
 					if (prev != serial.hash) {
-						form.end().children('input[@name=ordre]').val(serial.hash);
-						form.end().children('input[@type=submit]').eq(0).each(function(){ this.click(); });
+						$(form).children('input[@name=ordre]').val(serial.hash);
+						$(form).children('input[@type=submit]').eq(0).each(function(){ this.click(); });
 					}
 				}
 			}
