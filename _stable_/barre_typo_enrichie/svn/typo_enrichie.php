@@ -84,7 +84,8 @@ function BarreTypoEnrichie_pre_propre($texte) {
 		/* 19 */ 	"/\([cC]\)/S",
 		/* 20 */ 	"/\([rR]\)/S",
 		/* 21 */ 	"/\([tT][mM]\)/S",
-		/* 22 */ 	"/\.\.\./S"
+		/* 22 */ 	"/\.\.\./S",
+		/* 23 */	"/\[([^|][^][]*)\|((?:[^][](?!->))*)\]/S"
 	);
 
 	$remplacer_raccourcis = array(
@@ -111,7 +112,8 @@ function BarreTypoEnrichie_pre_propre($texte) {
 		/* 19 */ 	"&copy;",
 		/* 20 */ 	"&reg;",
 		/* 21 */ 	"&trade;",
-		/* 22 */ 	"&hellip;"
+		/* 22 */ 	"&hellip;",
+		/* 23 */	"@@acro@@$2@@$1@@acro@@"
 	);
 
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
@@ -156,8 +158,7 @@ function BarreTypoEnrichie_post_propre($texte) {
 			/* 22 */	"/\*\]/S",
 			/* 23 */ 	"/\[\^/S",
 			/* 24 */	"/\^\]/S",
-			/* 40 */	"/\[([^|][^][]*)\|([^][]*)\]/S",
-			/* 41 */	"/<a href=([^>]*)>([^|<]*)\|([^<]*)<\/a>/S"
+			/* 40 */	"/@@acro@@([^@]*)@@([^@]*)@@acro@@/S"
 
 		);
 		$remplace1 = array(
@@ -184,8 +185,7 @@ function BarreTypoEnrichie_post_propre($texte) {
 			/* 37 */	#"<div",
 			/* 38 */	#"<blockquote class=\"spip\"><p class=\"spip\">",
 			/* 39 */	#"</p></blockquote>",
-			/* 40 */	"<acronym title='$2' class='spip_acronym spip'>$1</acronym>",
-			/* 41 */	"<a href=$1 title=\"$3\">$2</a>"
+			/* 40 */	"<acronym title='$1' class='spip_acronym spip'>$2</acronym>"
 
 		);
 		$texte = preg_replace($cherche1, $remplace1, $texte);
@@ -194,7 +194,42 @@ function BarreTypoEnrichie_post_propre($texte) {
 }
 
 
+function BarreTypoEnrichie_pre_typo($texte) {
+	$chercher_raccourcis = array(
+		/* 13 */ 	"/<-->/S",
+		/* 14 */ 	"/-->/S",
+		/* 15 */ 	"/<--/S",
+		/* 16 */ 	"/<==>/S",
+		/* 17 */ 	"/==>/S",
+		/* 18 */ 	"/<==/S",
+		/* 19 */ 	"/\([cC]\)/S",
+		/* 20 */ 	"/\([rR]\)/S",
+		/* 21 */ 	"/\([tT][mM]\)/S",
+		/* 22 */ 	"/\.\.\./S",
+		/* 23 */	"/\[([^|][^][]*)\|((?:[^][](?!->))*)\]/S"
+	);
+
+	$remplacer_raccourcis = array(
+		/* 13 */ 	"&harr;",
+		/* 14 */ 	"&rarr;",
+		/* 15 */ 	"&larr;",
+		/* 16 */ 	"&hArr;",
+		/* 17 */ 	"&rArr;",
+		/* 18 */ 	"&lArr;",
+		/* 19 */ 	"&copy;",
+		/* 20 */ 	"&reg;",
+		/* 21 */ 	"&trade;",
+		/* 22 */ 	"&hellip;",
+		/* 23 */	"@@acro@@$2@@$1@@acro@@"
+	);
+
+	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
+	return $texte;
+}
+
 function BarreTypoEnrichie_post_typo($texte) {
+	// Acronymes
+	$texte = preg_replace('/@@acro@@([^@]*)@@([^@]*)@@acro@@/S',"<acronym title='$1' class='spip_acronym spip'>$2</acronym>",$texte); // échapement des entités html déjà présentes
 	// Correction des & en &amp;
 	$texte = preg_replace('/&([A-Za-z#0-9]*);/','@@@amp:\1:amp@@@',$texte); // échapement des entités html déjà présentes
 	$texte = str_replace('&','&amp;',$texte);

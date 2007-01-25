@@ -87,6 +87,10 @@ $GLOBALS['fin_intertitre_5'] = '</h6>';
 			<inclure>typo_enrichie.php</inclure>
 	</pipeline>
 	<pipeline>
+			<nom>pre_typo</nom>
+			<inclure>typo_enrichie.php</inclure>
+	</pipeline>
+	<pipeline>
 			<nom>post_typo</nom>
 			<inclure>typo_enrichie.php</inclure>
 	</pipeline>
