@@ -377,7 +377,13 @@ function TB_remove() {
 function TB_position() {
   var pagesize = TB_getPageSize();  
   var arrayPageScroll = TB_getPageScrollTop();  
- if(!FULL_S){
+ if(FULL_S && DIAPO){
+ 	FULL_S = false ;
+	$("#TB_window").animate({top: (arrayPageScroll[1] + (pagesize[1]-TB_HEIGHT)/2),left:(arrayPageScroll[0] + (pagesize[0] - TB_WIDTH)/2), width:TB_WIDTH,height:TB_HEIGHT},1500);         
+	$("#TB_Image").animate({top:20,left:20,width:(TB_WIDTH - 20),height:(TB_HEIGHT - 20)},1500,TB_recadre);         
+		       
+ }
+ if(!FULL_S || DIAPO){
   $("#TB_window").css({width:TB_WIDTH+"px",left: (arrayPageScroll[0] + (pagesize[0] - TB_WIDTH)/2)+"px", top: (arrayPageScroll[1] + (pagesize[1]-TB_HEIGHT)/2)+"px" });
   }    
 
