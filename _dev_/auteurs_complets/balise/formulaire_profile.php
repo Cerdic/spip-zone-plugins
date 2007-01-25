@@ -71,24 +71,6 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 	$auteur=unserialize(get_auteur_infos($id_auteur_session));
 
 	if($valider_auteur){
-		// Récupération des variables à integrer a la base de donnee
-// 		$nom2= _request('nom2');
-// 		$bio2= _request('bio2');
-// 		$email2= _request('email2');
-// 		$organisation2= _request('organisation2');
-// 		$url_organisation2= _request('url_organisation2');
-// 		$telephone2 = _request('telephone2');
-// 		$fax2 = _request('fax2');
-// 		$skype2 = _request('skype2');
-// 		$adresse2 = _request('adresse2');
-// 		$codepostal2 = _request('codepostal2');
-// 		$ville2 = _request('ville2');
-// 		$pays2 = _request('pays2');
-// 		$latitude2 = _request('latitude2');
-// 		$longitude2 = _request('longitude2');
-// 		$nom_site2= _request('nom_site2');
-// 		$url_site2= _request('url_site2');
-// 		$query_pass2 = _request('pass');
 
 		// Modifier l'auteur dans la base
 		$query = "UPDATE spip_auteurs SET $query_pass2
@@ -114,29 +96,6 @@ function balise_FORMULAIRE_PROFILE_dyn($bio=' ', $url_site=' ', $nom_site=' ',  
 			WHERE id_auteur=".$id_auteur;
 
 		spip_query($query) OR die($query);
-
-// 	return array('formulaire_profile', 0,
-// 		array(
-// 				'previsu' => $previsu,
-// 				'id_auteur' => $id_auteur,
-// 				'nom' => $nom,
-// 				'email' => $email,
-// 				'organisation' => $organisation,
-// 				'url_organisation' => $url_organisation,
-// 				'telephone' => $telephone,
-// 				'fax' => $fax,
-// 				'skype' => $skype,
-// 				'adresse' => $adresse,
-// 				'codepostal' => $codepostal,
-// 				'ville' => $ville,
-// 				'pays' => $pays,
-// 				'latitude' => $latitude,
-// 				'longitude' => $longitude,
-// 				'url_site' => $url_site,
-// 				'nom_site' => $nom_site,
-// 				'pgp' => $pgp,
-// 				'bio' => $bio
-// 			));
 
 		return header("Location: ".$_SERVER['HTTP_REFERER']) ;
 		}
