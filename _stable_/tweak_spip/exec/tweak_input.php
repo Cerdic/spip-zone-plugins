@@ -42,8 +42,12 @@ tweak_log(" -- metas_vars = ".serialize($metas_vars));
 		exit;
 	      }
 
+	global $connect_id_auteur, $connect_login;
+	spip_log("Changement de valeur sur la variable '$variable' du tweak $index par l'auteur id=$connect_id_auteur : $final");
+tweak_log("Fin   : exec_tweak_input_dist()");
+
 	$tweak_input = charger_fonction('tweak_input', 'inc');
 	ajax_retour($tweak_input($index, $variable, $final, $label, $actif, $script));
-tweak_log("Début : exec_tweak_input_dist()");
+	
 }
 ?>

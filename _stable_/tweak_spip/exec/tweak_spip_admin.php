@@ -109,9 +109,9 @@ tweak_log("Début : enregistre_modif_tweaks()");
 		foreach($_POST as $choix=>$val) if (isset($test[$choix]) && $val=='1') $liste[$test[$choix]]['actif'] = 1;
 	global $connect_id_auteur, $connect_login;
 	spip_log("Changement des tweaks actifs par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys($liste)));
-	ecrire_meta('tweaks_actifs',serialize($liste));
+	ecrire_meta('tweaks_actifs', serialize($liste));
 	ecrire_metas();
-	// on force la réinstallation complete des tweaks
+	// on force la reinstallation complete des tweaks
 	tweak_initialisation(true);
 	// reinitialisation des pipelines, au cas ou
 	unlink(_DIR_TMP."charger_pipelines.php");
