@@ -3,19 +3,54 @@
 // Les filtres pour les squeletes
 function lienscontenus_generer_url($type_objet, $id_objet)
 {
-    include_ecrire('inc/urls');
-    $f = 'generer_url_ecrire_'.$type_objet;
-    return $f($id_objet);
+    $liste_urls = array(
+        'rubrique' => array('naviguer', 'id_rubrique'),
+        'article' => array('articles', 'id_article'),
+        'breve' => array('breves_voir', 'id_breve'),
+        'site' => array('sites', 'id_syndic'),
+        'mot' => array('mots_edit', 'id_mot'),
+        'auteur' => array('auteur_infos', 'id_auteur'),
+        'form' => array('forms_edit', 'id_form')
+        // TODO : Ajouter les autres
+    );
+    if (isset($liste_urls[$type_objet])) {
+    	return $GLOBALS['meta']['adresse_site'].'/ecrire/?exec='.$liste_urls[$type_objet][0].'&amp;'.$liste_urls[$type_objet][1].'='.$id_objet;
+    } else {
+        $f = 'lienscontenus_generer_url_'.$type_objet;
+        if (function_exists($f)) {
+            return $f($id_objet);
+        } else {
+            // On ne devrait pas se retrouver là
+            spip_log('Plugin liens_contenus : il manque une fonction de génération d\'url pour le type '.$type_objet);
+            // TODO : ameliorer spip_log() pour accepter en parametre un nom de fichier different de "spip"
+        	return '#';
+        }
+    }
 }
 
-function generer_url_ecrire_modele($id_objet)
+function lienscontenus_generer_url_document($id_objet)
+{
+    include_spip('base/abstract_sql');
+    $query = 'SELECT id_article FROM spip_documents_articles WHERE id_document='._q($id_objet);
+    $res = spip_query($query);
+    if (spip_num_rows($res) == 1) {
+        $row = spip_fetch_array($res);
+        return lienscontenus_generer_url('article', intval($row['id_article']));
+    } else {
+        $query = 'SELECT id_rubrique FROM spip_documents_rubriques WHERE id_document='._q($id_objet);
+        $res = spip_query($query);
+        if (spip_num_rows($res) == 1) {
+            $row = spip_fetch_array($res);
+            return lienscontenus_generer_url('rubrique', intval($row['id_rubrique']));
+        }
+    }
+    // D'autres possibilites ???
+    // A quoi servent les tables spip_documents_breves et spip_documents_donnees ?
+}
+
+function lienscontenus_generer_url_modele($id_objet)
 {
     return find_in_path($id_objet.'.html');
-}
-
-function generer_url_ecrire_form($id_objet)
-{
-    return $GLOBALS['meta']['adresse_site'].'/ecrire/?exec=forms_edit&id_form='.$id_objet;
 }
 
 function lienscontenus_verifier_si_existe($type_objet, $id_objet)
