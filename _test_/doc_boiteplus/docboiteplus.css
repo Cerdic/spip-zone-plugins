@@ -1,0 +1,19 @@
+/*css insere auto dans le head partie privé spip*/
+/*.cadre-padding{border:2px solid yellow; width:auto;} */
+.formou, textarea .formou {width:98%;} 
+.cadre-info ul{list-style-type: none;} 
+#documenter--1 a, #documenter--1 b, #documenter--1 input, #documenter--1 select{font-size:0.8em;}   
+#documenter--1{position:relative; z-index:1000;}
+
+.legendemoi{font-size:x-small; padding: 5px 0px 5px 0px; margin: 3px 3px 0px 3px; background-color: white; border-bottom:1px dotted; overflow:auto;}
+.legendemoi a{font-size:x-small;}
+.titredoc {font-size:0.7em;}
+
+.rien{width:0px; display:none;}
+.fondo {font-size:x-small;}
+.liste{width:100%; text-align:center; margin:0 auto; padding:0;}
+.ajoutmot{clear:both; border:1px solid #fff; font-size:xx-small}
+
+/*compatible plugin gestion_document*/
+#documenter--Array td {border:1px solid #000;}
+#documenter--Array td td {border:none;}
