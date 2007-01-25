@@ -31,6 +31,76 @@ function spip_listes_onglets($rubrique, $onglet){
 	echo fin_onglet();
 }
 
+
+function boite_autocron(){
+	$res = spip_query("SELECT COUNT(a.id_auteur) AS n FROM spip_auteurs_courriers AS a JOIN spip_courriers AS c ON c.id_courrier=a.id_courrier WHERE c.statut='encour'");
+	$n = 0;
+	if ($row = spip_fetch_array($res))
+		$n = $row['n'];
+
+	if($n > 0 ){
+		echo "<br />";
+		echo debut_boite_info();
+		//echo "<script type='text/javascript' src='".find_in_path('javascript/autocron.js')."'></script>";
+		
+		echo "<div style='font-weight:bold;text-align:center'>"._T('spiplistes:envoi_en_cours')."</div>";
+		echo "<div style='padding : 10px;text-align:center'><img src='"._DIR_PLUGIN_SPIPLISTES."img_pack/48_import.gif'></div>";
+		
+		$total = $n;
+		$res2 = spip_query("SELECT SUM(total_abonnes) AS total FROM spip_courriers WHERE statut='encour'");
+		$row2 = spip_fetch_array($res2);
+		$total = $row2['total'];
+		echo "<div id='meleuse'>";
+		echo "<p align='center' id='envoi_statut'>"._T('spiplistes:envoi_en_cours')." "
+		  . "<strong id='envois_restants'>$n</strong>/<span id='envois_total'>$total</span> (<span id='envois_restant_pourcent'>"
+		  . round($n/$total*100)."</span>%)</p>";
+		 
+		$href = generer_action_auteur('spiplistes_envoi_lot','envoyer');
+		
+		for ($i=0;$i<4;$i++)
+			echo "<span id='proc$i' class='processus' name='$href'></span>";
+		if (_request('exec')=='spip_listes')
+			echo "<a href='".generer_url_ecrire('spip_listes')."' id='redirect_after'></a>";
+		echo "</div>";
+		
+		echo "<script><!--
+		var target = $('#envois_restants');
+		var total = $('#envois_total').html();
+		var target_pc = $('#envois_restant_pourcent');
+		function redirect_fin(){
+			redirect = $('#redirect_after');
+			if (redirect.length>0){
+				href = redirect.attr('href');
+				setTimeout('document.location.href = \"'+href+'\"',0);
+			}
+		}
+		jQuery.fn.runProcessus = function(url) {
+			var proc=this;
+			var href=url;
+			$(target).load(url,function(data){
+				restant = $(target).html();
+				pourcent=Math.round(restant/total*100);
+				$(target_pc).html(pourcent);
+				if (Math.round(restant)>0)
+					$(proc).runProcessus(href);
+				else
+					redirect_fin();
+			});
+		}
+		$('span.processus').each(function(){
+			var href = $(this).attr('name');
+			$(this).html(ajax_image_searching).runProcessus(href);
+			//run_processus($(this).attr('id'));
+		});
+		//--></script>";
+		echo "<p>"._T('spiplistes:texte_boite_en_cours')."</p>" ;
+		echo "<p align='center'><a href='".generer_url_ecrire('gerer_courrier','change_statut=publie&id_message='.$id_mess)."'>["._T('annuler')."]</a></p>";
+		echo fin_boite_info();
+	}
+	//echo ' <div style="background-image: url(\''. generer_url_action('cron','&var='.time()).'\');"> </div> ';
+	//spip_log("spip_listes :  autocron");	
+}
+
 function spip_listes_raccourcis(){
 	global  $connect_statut;
 	
@@ -54,23 +124,8 @@ function spip_listes_raccourcis(){
 	echo fin_raccourcis();
 
 	//Afficher la console d'envoi ?
-	$rsult_pile = spip_query("SELECT * FROM spip_courriers AS messages WHERE statut='encour' LIMIT 0,1");
-	$mssage_pile = spip_num_rows($rsult_pile);
-	$mess=spip_fetch_array($rsult_pile);	
-	$id_mess = $mess['id_courrier'];
-	if($mssage_pile > 0 ){
-		echo "<br />";
-		echo debut_boite_info();
-		echo "<script type='text/javascript' src='".find_in_path('javascript/autocron.js')."'></script>";
-		
-		echo "<div style='font-weight:bold;text-align:center'>"._T('spiplistes:envoi_en_cours')."</div>";
-		echo "<div style='padding : 10px;text-align:center'><img src='"._DIR_PLUGIN_SPIPLISTES."img_pack/48_import.gif'></div>";
-		echo "<div id='meleuse'></div>" ;
-		echo "<p>"._T('spiplistes:texte_boite_en_cours')."</p>" ;
-		echo "<p align='center'><a href='".generer_url_ecrire('gerer_courrier','change_statut=publie&id_message='.$id_mess)."'>["._T('annuler')."]</a></p>";
-		echo fin_boite_info();
-	}
-
+	boite_autocron();
+	
 	// colonne gauche boite info
 	echo "<br />" ;
 	echo debut_boite_info();

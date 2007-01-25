@@ -127,14 +127,14 @@ if ($message_pile > 0){
 	$page_.=$urlsite."\n";
 	$page_.="________________________________________________________________________"  ;
 	
-	$email_a_envoyer['texte'] = new phpMail('', $objet, '',$pagem); 
+	$email_a_envoyer['texte'] = new phpMail('', $objet, '',$page_); 
 	$email_a_envoyer['texte']->From = $from ; 
 	$email_a_envoyer['texte']->AddCustomHeader("Errors-To: ".$from); 
 	$email_a_envoyer['texte']->AddCustomHeader("Reply-To: ".$from); 
 	$email_a_envoyer['texte']->AddCustomHeader("Return-Path: ".$from); 
 	$email_a_envoyer['texte']->SMTPKeepAlive = true;
 	
-	$email_a_envoyer['html'] = new phpMail('', $objet, $pageh, $pagem); 
+	$email_a_envoyer['html'] = new phpMail('', $objet, $pageh, $page_); 
 	$email_a_envoyer['html']->From = $from ; 
 	$email_a_envoyer['html']->AddCustomHeader("Errors-To: ".$from); 
 	$email_a_envoyer['html']->AddCustomHeader("Reply-To: ".$from); 
@@ -158,8 +158,17 @@ if ($message_pile > 0){
 		
 		if($test == 'oui')
 			$result_inscrits = spip_query("SELECT id_auteur, nom, email, extra FROM spip_auteurs WHERE email ="._q($email_test)." ORDER BY id_auteur ASC");
-		else
-			$result_inscrits = spip_query("SELECT a.nom, a.id_auteur, a.email, a.extra FROM spip_auteurs AS a, spip_auteurs_courriers AS b WHERE a.id_auteur=b.id_auteur AND b.id_courrier = "._q($id_courrier)." ORDER BY a.id_auteur ASC  LIMIT 0,".intval($limit));
+		else{
+			//$result_inscrits = spip_query("SELECT a.nom, a.id_auteur, a.email, a.extra FROM spip_auteurs AS a, spip_auteurs_courriers AS b WHERE a.id_auteur=b.id_auteur AND b.id_courrier = "._q($id_courrier)." ORDER BY a.id_auteur ASC  LIMIT 0,".intval($limit));
+			// un id pour ce processus
+			$id_process = substr(creer_uniqid(),0,5);
+			spip_query("UPDATE spip_auteurs_courriers SET etat="._q($id_process)." WHERE etat='' AND id_courrier = "._q($id_courrier)." LIMIT ".intval($limit));
+			$result_inscrits = spip_query(
+				"SELECT a.nom, a.id_auteur, a.email, a.extra 
+				FROM spip_auteurs AS a, spip_auteurs_courriers AS b 
+				WHERE a.id_auteur=b.id_auteur AND b.id_courrier = "._q($id_courrier)." AND etat="._q($id_process)."
+				ORDER BY a.id_auteur ASC");
+		}
 			
 		$liste_abonnes = spip_num_rows($result_inscrits);
 		if($liste_abonnes > 0){
