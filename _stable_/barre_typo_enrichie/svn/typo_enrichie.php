@@ -170,21 +170,6 @@ function BarreTypoEnrichie_post_propre($texte) {
 			/* 22 */	"</strong>",
 			/* 23 */ 	"<sup>",
 			/* 24 */	"</sup>",
-			/* 25 */	#"<ul class=\"spip\">",
-			/* 26 */	#"</ul>",
-			/* 27 */	#"<ol class=\"spip\">",
-			/* 28 */	#"</ol>",
-			/* 29 */	#"<table class=\"spip\">",
-			/* 30 */	#"</table>",
-			/* 31 */	#"<div",
-			/* 32 */	#"</div>",
-			/* 33 */	#"<h$1>",
-			/* 34 */	#"</h$1>",
-			/* 35 */	#"<div class='spip_documents'>",
-			/* 36 */	#"</div>",
-			/* 37 */	#"<div",
-			/* 38 */	#"<blockquote class=\"spip\"><p class=\"spip\">",
-			/* 39 */	#"</p></blockquote>",
 			/* 40 */	"<acronym title='$1' class='spip_acronym spip'>$2</acronym>"
 
 		);
