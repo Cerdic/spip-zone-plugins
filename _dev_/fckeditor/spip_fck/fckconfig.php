@@ -1,12 +1,18 @@
 <?php
+
 	echo '
 		FCKConfig.SkinPath = "' . $_GET['path'] . '/spip_fck/skins/office2003/";
-		FCKConfig.Plugins.Add( "helppanel" , "fr,en", "' . $_GET['path'] . '/spip_fck/plugins/");
 		FCKConfig.EditorAreaCSS = "' . $_GET['path'] . '/spip_fck/css/fck_editorarea.css";
 		FCKConfig.TemplatesXmlPath = "' . $_GET['path'] . '/spip_fck/fcktemplates.xml" ;
 		FCKConfig.StylesXmlPath = "' . $_GET['path'] . '/spip_fck/fckstyles.xml" ;
 		
-		FCKConfig.DefaultLanguage	= "fr" ;
+		// exemple pour intégrer les raccroucis SPIP
+		//FCKConfig.ProtectedSource.Add( /<\?[\s\S]*?\?>/g ) ; 
+		
+		// Ajout des plug-ins
+		FCKConfig.Plugins.Add( "helppanel" , "fr,en", "' . $_GET['path'] . '/spip_fck/plugins/");
+		FCKConfig.Plugins.Add( "spipeditor" , "fr,en", "' . $_GET['path'] . '/spip_fck/plugins/");
+		
 
 		FCKConfig.ToolbarSets["Spip"] = [
 			["Source","-","Save","NewPage","Preview","-","Templates"],
@@ -21,7 +27,7 @@
 			["Style","FontFormat","FontName","FontSize"],
 			["Image","Flash","Table","Rule","Smiley","SpecialChar","PageBreak","UniversalKey"],
 			["TextColor","BGColor"],
-			["FitWindow","-","About","HelpPanel"]
+			["FitWindow","-","About","HelpPanel","SpipEditor"]
 		] ;
 
 		// The following value defines which File Browser connector and Quick Upload 
