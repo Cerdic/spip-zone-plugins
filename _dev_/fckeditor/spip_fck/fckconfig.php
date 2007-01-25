@@ -10,9 +10,7 @@
 		//FCKConfig.ProtectedSource.Add( /<\?[\s\S]*?\?>/g ) ; 
 		
 		// Ajout des plug-ins
-		FCKConfig.Plugins.Add( "helppanel" , "fr,en", "' . $_GET['path'] . '/spip_fck/plugins/");
-		FCKConfig.Plugins.Add( "spipeditor" , "fr,en", "' . $_GET['path'] . '/spip_fck/plugins/");
-		
+		FCKConfig.Plugins.Add( "helppanel" , "fr,en", "' . $_GET['path'] . '/spip_fck/plugins/");		
 
 		FCKConfig.ToolbarSets["Spip"] = [
 			["Source","-","Save","NewPage","Preview","-","Templates"],
@@ -27,7 +25,7 @@
 			["Style","FontFormat","FontName","FontSize"],
 			["Image","Flash","Table","Rule","Smiley","SpecialChar","PageBreak","UniversalKey"],
 			["TextColor","BGColor"],
-			["FitWindow","-","About","HelpPanel","SpipEditor"]
+			["FitWindow","-","About","HelpPanel"]
 		] ;
 
 		// The following value defines which File Browser connector and Quick Upload 
