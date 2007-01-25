@@ -18,6 +18,7 @@
 						"id_auteur"		=> "bigint(21) NOT NULL default '0'",
 						"id_courrier"	=> "bigint(21) NOT NULL default '0'",
 						"statut"		=> "enum('a_envoyer','envoye','echec') NOT NULL default 'a_envoyer'",
+						"etat"	=> "varchar(5) NOT NULL default ''",
 						"maj"			=> "datetime NOT NULL default '0000-00-00 00:00:00'"
 					);
 					

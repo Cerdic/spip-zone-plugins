@@ -20,7 +20,7 @@
 /******************************************************************************************/
 
 
-	$GLOBALS['spiplistes_version'] = 1.94;
+	$GLOBALS['spiplistes_version'] = 1.95;
 	function spiplistes_verifier_base(){
 		$accepter_visiteurs = lire_meta('accepter_visiteurs');
 
@@ -108,13 +108,13 @@
 				ecrire_meta('spiplistes_version',$current_version=$version_base,'non');
 			}
 			if ($current_version<1.92){
-				echo "<br /> Maj 1.92<br />";
+				echo "SpipListes Maj 1.92<br />";
 				spip_query("ALTER TABLE spip_listes ADD titre_message varchar(255) NOT NULL default '';");
 				spip_query("ALTER TABLE spip_listes ADD pied_page longblob NOT NULL;");
 				ecrire_meta('spiplistes_version', $current_version=1.92);
 			}
 			if ($current_version<1.94){
-				echo "<br /> Maj 1.94<br />";
+				echo "SpipListes Maj 1.94<br />";
 				include_spip('base/abstract_sql');
 				if (($res=spip_query("SELECT id_auteur FROM spip_auteurs_mod_listes"))
 					AND (!spip_fetch_array($res))
@@ -127,6 +127,12 @@
 				spip_query("ALTER TABLE spip_abonnes_listes RENAME spip_auteurs_listes;");
 				spip_query("ALTER TABLE spip_abonnes_courriers RENAME spip_auteurs_courriers;");
 				ecrire_meta('spiplistes_version', $current_version=1.94);
+			}
+			if ($current_version<1.95){
+				echo "SpipListes Maj 1.95<br />";
+				include_spip('base/abstract_sql');
+				spip_query("ALTER TABLE spip_auteurs_courriers ADD etat varchar(5) NOT NULL default '' AFTER statut");
+				ecrire_meta('spiplistes_version', $current_version=1.95);
 			}
 			ecrire_metas();
 		}
