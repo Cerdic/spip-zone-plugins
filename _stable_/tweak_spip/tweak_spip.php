@@ -57,11 +57,17 @@ function set_tweaks_metas_pipes_pipeline($tweaks_pipelines, $pipeline) {
 	ecrire_fichier($fichier_dest, "<?php\n// Code de contrôle pour le plugin Tweak-SPIP\n$code?".'>');
 }
 
-// retourne les css utilises (en vue d'un insertion en head)
-function tweak_insert_css() {
-	global $tweaks_css;
-	$head = "\n<!-- CSS TWEAKS -->\n";
-	foreach ($tweaks_css as $css) $head .= $css;
+// retourne les css ou js utilises (en vue d'un insertion en head)
+function tweak_insert_header($type) {
+	include_spip('inc/filtres');
+	global $tweaks_metas_pipes;
+	$head = '';
+	if (isset($tweaks_metas_pipes[$type])) 
+	  foreach	($tweaks_metas_pipes[$type] as $inc) {
+	  	$f = find_in_path('tweaks/'.$inc);
+	  	if ($type='css') $f = direction_css($f);
+		$head .= '<link rel="stylesheet" href="'.$f.'" type="text/css" media="projection, screen" />';
+	  }
 	return $head;
 }
 
@@ -71,10 +77,10 @@ function is_tweak_pipeline($pipe, &$set_pipe) {
 	return $ok;
 }
 
-// initialise : $tweaks_css
+// cree un tableau $tweaks_pipelines et initialise $tweaks_metas_pipes
 function tweak_initialise_includes() {
-  global $tweaks, $tweaks_css;
-  $tweaks_pipelines = $tweaks_css = array();
+  global $tweaks, $tweaks_metas_pipes;
+  $tweaks_pipelines = array();
   // liste des pipelines utilises
   $pipelines_utilises = array();
   // parcours de tous les tweaks
@@ -90,12 +96,9 @@ function tweak_initialise_includes() {
 			// liste des pipelines utilises
 			if (!in_array($pipe2, $pipelines_utilises)) $pipelines_utilises[] = $pipe2;
 		}
-		// recherche d'un fichier .css eventuellement present dans tweaks/
-		$f = find_in_path('tweaks/'.$inc.'.css');
-		if ($f) {
-			include_spip('tweaks/filtres');
-			$tweaks_css[] = '<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="projection, screen" />';
-		}
+		// recherche d'un fichier .css et/ou .js eventuellement present dans tweaks/
+		if (find_in_path('tweaks/'.$inc.'.css')) $tweaks_metas_pipes['css'][] = $inc.'.css';
+		if (find_in_path('tweaks/'.$inc.'.js')) $tweaks_metas_pipes['js'][] = $inc.'.js';
 		// recherche d'un code inline eventuellement propose
 		if (isset($tweak['code'])) { $inc = $tweak['code']; $prefixe = 'code_'; }
 			else $prefixe = 'inc_';
@@ -104,6 +107,7 @@ function tweak_initialise_includes() {
 	}
   }
   // installation de $tweaks_metas_pipes
+print_r($tweaks_metas_pipes);
   set_tweaks_metas_pipes_fichier($tweaks_pipelines, 'options');
   set_tweaks_metas_pipes_fichier($tweaks_pipelines, 'fonctions');
   foreach($pipelines_utilises as $pipe) set_tweaks_metas_pipes_pipeline($tweaks_pipelines, $pipe);
@@ -238,8 +242,8 @@ function tweak_exclure_balises($balises, $fonction, $texte){
 /*****************/
 
 // les globales
-global $tweaks, $tweaks_metas_pipes, $tweaks_css;
-$tweaks = $tweaks_metas_pipes = $tweaks_css = array();
+global $tweaks, $tweaks_metas_pipes;
+$tweaks = $tweaks_metas_pipes = array();
 
 // lancer l'initialisation
 tweak_initialisation();

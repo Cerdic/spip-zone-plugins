@@ -8,7 +8,9 @@ function tweak_spip_affichage_final($flux){
 }
 
 function tweak_spip_insert_head($flux){
-	$flux .= tweak_insert_css();
+	$flux .= "\n<!-- header TWEAKS -->\n"
+		. tweak_insert_header('css')
+		. tweak_insert_header('js');
 	global $tweaks_metas_pipes;
 	eval($tweaks_metas_pipes['insert_head']);
 	return $flux;
