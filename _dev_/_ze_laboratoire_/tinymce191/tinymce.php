@@ -19,7 +19,12 @@ function TinyMCE_header_prive($flux) {
 		$flux .= 'tinyMCE.init({
 			language: "fr",
 			mode: "exact",
-			elements: "text_area"
+			elements: "text_area",
+			theme_advanced_toolbar_location: "top",
+			theme_advanced_buttons1: "bold,italic,underline,strikethrough,separator,justifyleft,justifyright,justifycenter,justifyfull,separator,formatselect",
+			theme_advanced_buttons2: "bullist,numlist,separator,outdent,indent,separator,undo,redo,separator,link,unlink,anchor,image,code",
+			theme_advanced_buttons3: ""
+			
 		});
 		</script>';
 	}

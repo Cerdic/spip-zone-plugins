@@ -152,9 +152,10 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 
 	if ($spip_ecran == "large") $rows = 28;	else $rows = 20;
 	$att_text = " class='formo' ".$GLOBALS['browser_caret']." rows='$rows' COLS='40' wrap='soft'";
-	if (strlen($texte)>29*1024) { // texte > 32 ko -> decouper en morceaux
+	/*if (strlen($texte)>29*1024) { // texte > 32 ko -> decouper en morceaux
 	  list($texte, $sup) = articles_edit_recolle($texte, $att_text);
-	} else $sup='';
+	} else */
+	$sup='';
 
 	if ($champs_extra) include_spip('inc/extra');
 
