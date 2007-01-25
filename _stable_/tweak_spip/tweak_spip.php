@@ -11,7 +11,7 @@
 /*****************/
 
 global $spip_version_code;
-if ($spip_version_code<1.92) define(_DIR_VAR, _DIR_IMG);
+if ($spip_version_code<1.92) define(_DIR_VAR, _DIR_TMP);
 if (!defined('_DIR_PLUGIN_TWEAK_SPIP')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	$p=_DIR_PLUGINS.end($p); if ($p[strlen($p)-1]!='/') $p.='/';
