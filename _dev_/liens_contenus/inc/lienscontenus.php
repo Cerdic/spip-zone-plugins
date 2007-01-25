@@ -121,6 +121,7 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
 	if (count($liens_trouves) > 0) {
 	   foreach ($liens_trouves as $lien) {
             //spip_log('Plugin liens_contenus : - lien '.$type_objet_contenant.' '.$id_objet_contenant.' vers '.$lien['type'].' '.$lien['id']);
+            include_spip('base/abstract_sql');
             spip_abstract_insert(
                 'spip_liens_contenus',
                 '(type_objet_contenant, id_objet_contenant, type_objet_contenu, id_objet_contenu)',
