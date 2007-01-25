@@ -5,26 +5,19 @@
 ]
 #CACHE{7*24*3600,cache-client}
 #HTTP_HEADER{'Content-Type: text/javascript'}
+/* cQuery est jQuery, renommee pour eviter tout conflit */
 
-[(#REM)
-
-	Note on charge jQuery en remplacant chaque "jQuery" par "cQuery"
-	ce qui permet d'etre independant d'un autre jQuery eventuellement
-	present sur le site.
-
-]
-
-[(#CHEMIN{javascript/jquery-1.1.js}|spip_file_get_contents
+[(#CHEMIN{js/jquery-1.1.js}|spip_file_get_contents
 	|replace{jQuery,cQuery,''}
 	|replace{'var \$ = cQuery','// dont set dollar'})]
 
-[(#CHEMIN{javascript/form.js}|spip_file_get_contents
+[(#CHEMIN{js/form.js}|spip_file_get_contents
 	|replace{jQuery,cQuery,''})]
 
-[(#CHEMIN{javascript/crayons.js}|spip_file_get_contents
+[(#CHEMIN{js/crayons.js}|spip_file_get_contents
 	|replace{jQuery,cQuery,''})]
 
 [(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";}|?{' ',''})
-[(#CHEMIN{javascript/crayons-fade.js}|spip_file_get_contents
+[(#CHEMIN{js/crayons-fade.js}|spip_file_get_contents
 	|replace{jQuery,cQuery,''})]
 ]
