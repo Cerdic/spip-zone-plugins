@@ -149,32 +149,31 @@ function BarreTypoEnrichie_post_propre($texte) {
 	$texte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre_5@@', $debut_intertitre_5, $texte);
 	$texte = ereg_replace('@@SPIP_fin_intertitre_5@@[[:space:]]*(</p>)?', $fin_intertitre_5, $texte);*/
 
-		$cherche1 = array(
-			/* 15 */ 	",\[/(.*)/\],Ums",
-			/* 17 */ 	",\[\|(.*)\|\],Ums",
-			/* 19 */ 	",\[\((.*)\)\],Ums",
-			/* 21 */ 	"/\[\*\*/S",
-			/* 21b */ 	"/\[\*/S",
-			/* 22 */	"/\*\]/S",
-			/* 23 */ 	"/\[\^/S",
-			/* 24 */	"/\^\]/S",
-			/* 40 */	"/@@acro@@([^@]*)@@([^@]*)@@acro@@/S"
+	$cherche1 = array(
+		/* 15 */ 	",\[/(.*)/\],Ums",
+		/* 17 */ 	",\[\|(.*)\|\],Ums",
+		/* 19 */ 	",\[\((.*)\)\],Ums",
+		/* 21 */ 	"/\[\*\*/S",
+		/* 21b */ 	"/\[\*/S",
+		/* 22 */	"/\*\]/S",
+		/* 23 */ 	"/\[\^/S",
+		/* 24 */	"/\^\]/S",
+		/* 40 */	"/@@acro@@([^@]*)@@([^@]*)@@acro@@/S"
+	);
 
-		);
-		$remplace1 = array(
-			/* 15 */ 	"<div class=\"spip\" style=\"text-align:right;\">$1</div>",
-			/* 17 */ 	"<div class=\"spip\" style=\"text-align:center;\">$1</div>",
-			/* 19 */ 	"<div class=\"texteencadre-spip spip\">$1</div>",
-			/* 21 */ 	"<strong class=\"caractencadre2-spip spip\">",
-			/* 21b */ 	"<strong class=\"caractencadre-spip spip\">",
-			/* 22 */	"</strong>",
-			/* 23 */ 	"<sup>",
-			/* 24 */	"</sup>",
-			/* 40 */	"<acronym title='$1' class='spip_acronym spip'>$2</acronym>"
-
-		);
-		$texte = preg_replace($cherche1, $remplace1, $texte);
-		$texte = paragrapher($texte,$GLOBALS['toujours_paragrapher']); // il faut reparagrapher a cause des raccourcis typo que l'on a ajoute (block div)
+	$remplace1 = array(
+		/* 15 */ 	"<div class=\"spip\" style=\"text-align:right;\">$1</div>",
+		/* 17 */ 	"<div class=\"spip\" style=\"text-align:center;\">$1</div>",
+		/* 19 */ 	"<div class=\"texteencadre-spip spip\">$1</div>",
+		/* 21 */ 	"<strong class=\"caractencadre2-spip spip\">",
+		/* 21b */ 	"<strong class=\"caractencadre-spip spip\">",
+		/* 22 */	"</strong>",
+		/* 23 */ 	"<sup>",
+		/* 24 */	"</sup>",
+		/* 40 */	"<acronym title='$1' class='spip_acronym spip'>$2</acronym>"
+	);
+	$texte = preg_replace($cherche1, $remplace1, $texte);
+	$texte = paragrapher($texte,$GLOBALS['toujours_paragrapher']); // il faut reparagrapher a cause des raccourcis typo que l'on a ajoute (block div)
 	return $texte;
 }
 
@@ -213,6 +212,22 @@ function BarreTypoEnrichie_pre_typo($texte) {
 }
 
 function BarreTypoEnrichie_post_typo($texte) {
+	$cherche1 = array(
+		/* 21 */ 	"/\[\*\*/S",
+		/* 21b */ 	"/\[\*/S",
+		/* 22 */	"/\*\]/S",
+		/* 23 */ 	"/\[\^/S",
+		/* 24 */	"/\^\]/S",
+	);
+
+	$remplace1 = array(
+		/* 21 */ 	"<strong class=\"caractencadre2-spip spip\">",
+		/* 21b */ 	"<strong class=\"caractencadre-spip spip\">",
+		/* 22 */	"</strong>",
+		/* 23 */ 	"<sup>",
+		/* 24 */	"</sup>",
+	);
+	$texte = preg_replace($cherche1, $remplace1, $texte);
 	// Acronymes
 	$texte = preg_replace('/@@acro@@([^@]*)@@([^@]*)@@acro@@/S',"<acronym title='$1' class='spip_acronym spip'>$2</acronym>",$texte); // échapement des entités html déjà présentes
 	// Correction des & en &amp;
