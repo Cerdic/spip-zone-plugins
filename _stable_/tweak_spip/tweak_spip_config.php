@@ -7,9 +7,6 @@
 #  Infos : http://www.spip-contrib.net/?article1554   #
 #-----------------------------------------------------#
 
-global $tweaks;
-$tweaks = array();
-
 //-----------------------------------------------------------------------------//
 //                               options                                       //
 //-----------------------------------------------------------------------------//
@@ -159,16 +156,5 @@ add_tweak( array(
 // http://www.spip-contrib.net/Generation-automatique-de
 // Les sessions
 
-//-----------------------------------------------------------------------------//
-//                        activation des tweaks                                //
-//-----------------------------------------------------------------------------//
-
-// lire les metas et initialiser : $tweaks_pipelines, $tweaks_css
-global $tweaks_pipelines, $tweaks_css;
-//echo "début initialisation faite dans tweak_spip_config\n";
-tweak_initialisation();
-//echo "fin initialisation faite dans tweak_spip_config\n";
-
-// print_r($tweaks); print_r($tweaks_pipelines); print_r($tweaks_css);
-
+tweak_log("tweak_spip_config");
 ?>

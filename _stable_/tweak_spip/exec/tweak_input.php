@@ -19,6 +19,7 @@ if(!function_exists(ajax_retour)) {
 }
 
 function exec_tweak_input_dist() {
+tweak_log("Début : exec_tweak_input_dist()");
 
 	global $metas_vars;
 
@@ -30,8 +31,8 @@ function exec_tweak_input_dist() {
 	$actif = _request('actif');
 
 	$final = $metas_vars[$variable];	
-tweak_log("exec_tweak_input_dist : $variable est devenu $final");
-tweak_log("  metas_vars = ".serialize($metas_vars));
+tweak_log(" -- index = $index; $variable est devenu $final");
+tweak_log(" -- metas_vars = ".serialize($metas_vars));
 	
 	if (!preg_match('/^\w+$/', $script))
 	      {include_spip('minipres');
@@ -41,5 +42,6 @@ tweak_log("  metas_vars = ".serialize($metas_vars));
 
 	$tweak_input = charger_fonction('tweak_input', 'inc');
 	ajax_retour($tweak_input($index, $variable, $final, $label, $actif, $script));
+tweak_log("Début : exec_tweak_input_dist()");
 }
 ?>

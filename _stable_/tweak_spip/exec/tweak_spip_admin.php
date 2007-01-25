@@ -99,6 +99,7 @@ function verifchange(tweak, index, nb_var) {
 
 // mise à jour des données si envoi via formulaire
 function enregistre_modif_tweaks(){
+tweak_log("Début : enregistre_modif_tweaks()");
 	global $tweaks;
 	// recuperer les tweaks dans l'ordre des $_POST
 	$test = array();
@@ -107,14 +108,18 @@ function enregistre_modif_tweaks(){
 	if (!isset($_POST['desactive_tous']))
 		foreach($_POST as $choix=>$val) if (isset($test[$choix]) && $val=='1') $liste[$test[$choix]]['actif'] = 1;
 	global $connect_id_auteur, $connect_login;
-	spip_log("Changement des tweaks actifs par auteur id=$connect_id_auteur :".implode(',',$liste));
+	spip_log("Changement des tweaks actifs par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys($liste)));
 	ecrire_meta('tweaks',serialize($liste));
 	ecrire_metas();
+	// on force la réinstallation complete des tweaks
+	tweak_initialisation(true);
 	// reinitialisation des pipelines, au cas ou
 	unlink(_DIR_TMP."charger_pipelines.php");
+tweak_log("Fin   : enregistre_modif_tweaks()");
 }
 
 function exec_tweak_spip_admin() {
+tweak_log("Début : exec_tweak_spip_admin()");
 	global $connect_statut, $connect_toutes_rubriques;
 	global $spip_lang_right;
 	global $couleur_claire;
@@ -142,8 +147,6 @@ function exec_tweak_spip_admin() {
 //	else
 //		verif_tweaks();
 
-	//tweak_initialisation();
-	
 	global $spip_version_code;
 	if ($spip_version_code<1.92) 
   		debut_page(_T('tweak:titre'), 'configuration', 'tweak_spip');
@@ -200,7 +203,7 @@ function exec_tweak_spip_admin() {
 	echo "</form>";
 
 	echo fin_gauche(), fin_page();
-	
+tweak_log("Fin   : exec_tweak_spip_admin()");
 }
 
 // affiche un tweak sur une ligne

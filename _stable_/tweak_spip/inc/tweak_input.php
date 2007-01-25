@@ -15,8 +15,8 @@ include_spip('inc/message_select');
 
 
 // affiche un petit input
-function inc_tweak_input_dist($index, $variable, $valeur, $label, $actif, $url_self)
-{
+function inc_tweak_input_dist($index, $variable, $valeur, $label, $actif, $url_self) {
+
 	$len=0;
 	if (preg_match(',^"(.*)"$,', trim($valeur), $matches2)) $valeur = str_replace('"','&quot;',$matches2[1]);
 		else $len=strlen(strval($valeur));
@@ -34,6 +34,7 @@ function inc_tweak_input_dist($index, $variable, $valeur, $label, $actif, $url_s
 	// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
 	$res = ajax_action_auteur('tweak_input', $index, $url_self, "index=$index&variable=$variable&valeur=$valeur&actif=".intval($actif)."&label=".urlencode($label), $res);
 
+tweak_log("inc_tweak_input_dist($index, $variable, $valeur, [label], $actif, $url_self)");
 return "<div id='tweak_input-$index'>$res</div>";
 
 }

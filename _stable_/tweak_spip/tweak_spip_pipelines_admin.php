@@ -36,9 +36,11 @@ function tweak_spip_header_prive($flux){
 	return tweak_pipeline('header_prive', $flux);
 }
 function tweak_spip_install($action){
+tweak_log("tweak_spip_install($action)");
 	include_spip('inc/meta');
 	switch ($action){
 		case 'test':
+			return isset($GLOBALS['meta']['tweaks']);
 			break;
 		case 'install':
 			break;
