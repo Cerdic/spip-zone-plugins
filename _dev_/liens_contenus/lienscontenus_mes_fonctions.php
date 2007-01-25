@@ -50,14 +50,14 @@ function lienscontenus_generer_url_document($id_objet)
 
 function lienscontenus_generer_url_modele($id_objet)
 {
-    return find_in_path($id_objet.'.html');
+    return find_in_path('modeles/'.$id_objet.'.html');
 }
 
 function lienscontenus_verifier_si_existe($type_objet, $id_objet)
 {
     switch ($type_objet) {
     	case 'modele':
-            if(find_in_path($id_objet.'.html')) {
+            if(find_in_path('modeles/'.$id_objet.'.html')) {
                 return 'ok';
             } else {
                 return 'ko';
