@@ -188,6 +188,7 @@ function afficher_motsdoc_cles($flag_editable, $objet, $id_objet, $table, $table
 
 			$id_mot = $row['id_mot'];
 			$titre_mot = $row['titre'];
+			$titre_mot_entier = $row['titre'];
 // on raccourci le mot
 		if (($n=strlen($titre_mot)) > 15) 
 		$titre_mot = substr($titre_mot, 0, 11)."...";
@@ -214,7 +215,7 @@ function afficher_motsdoc_cles($flag_editable, $objet, $id_objet, $table, $table
 			if ($row_groupe['unseul'] == "oui") /*(   AND $flag_groupe)*/ {
 				$vals[]= formulaire_motdoc_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet);
 			} else {
-				$vals[]= "<a href='$url'>".typo($titre_mot)."</a>";
+				$vals[]= "<a href='$url' title='".typo($titre_mot_entier)."'>".typo($titre_mot)."</a>";
 			}
 			
 // on raccourci le type de mot
