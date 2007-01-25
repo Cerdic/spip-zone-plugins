@@ -54,6 +54,11 @@ function boucle_CARTO_OBJETS($id_boucle, &$boucles) {
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
+function balise_PINTERRO($p) {
+	$p->code = "'?'";
+	$p->interdire_scripts = false;
+	return $p;
+}
 
 
 function worldfileWidth($callage){	
@@ -197,7 +202,7 @@ function wkt2shape($geometrie, $format = "HTML"){
 
 	$wktGeomType = substr($geometrie,0,strpos($geometrie,"("));
 
-	if (function_exists($format)) return $format($wktGeomType);
+	if (function_exists($format)) return strtolower($format($wktGeomType));
 	else return "";
 }
 /*

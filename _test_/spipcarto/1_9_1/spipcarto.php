@@ -40,8 +40,8 @@ e -
 define('_DIR_PLUGIN_SPIPCARTO',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
 
 function spipcarto_ajouterBoutons($boutons_admin) {
-  
-  if (lire_meta('activer_carto')=='oui')
+  global $connect_statut,$connect_toutes_rubriques;
+  if (lire_meta('activer_carto')=='oui' && $connect_statut=='0minirezo' && $connect_toutes_rubriques)
   	$boutons_admin['naviguer']->sousmenu["carto_cartes"]= new Bouton(
 																   "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.png",  // icone
 																   _L('spipcarto:cartes') //titre

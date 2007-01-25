@@ -2,7 +2,7 @@
 	<div style="position: absolute;">
 	<BOUCLE_carte(CARTO_CARTES){id_carto_carte=#ID_MAP}>
 		<B_objets>
-			<map name="map#ID_CARTO_CARTE">
+			<map name="map#ID_CARTO_CARTE" id="map#ID_CARTO_CARTE">
 			<BOUCLE_objets(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}>
 			<area shape="[(#GEOMETRIE|wkt2shape)]" coords="[(#GEOMETRIE|wkt2coords{HTML,#CALLAGE,#URL_CARTE,'',#ENV{args}})]" href="[(#URL_OBJET)]" alt="#TITRE"/>
 		</BOUCLE_objets>

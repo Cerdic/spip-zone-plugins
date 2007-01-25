@@ -1,9 +1,11 @@
-.polygon {fill:red;fill-opacity:.6;}
-.polygoncat1 {stroke:red;stroke-width:2;fill:transparent;fill-opacity:0.5;}
-.polygoncat2 {stroke-width:2;fill:url(#GradientLinear);fill-opacity:.6;}
-.use {fill:red;}
-.polyline {stroke:gray;stroke-width:5;fill:none;}
 
+		<style type="text/css"><![CDATA[
+		.polygon {fill:red;fill-opacity:.6;}
+		.polygoncat1 {stroke:red;stroke-width:2;fill:transparent;fill-opacity:0.5;}
+		.polygoncat2 {stroke-width:2;fill:url(#GradientLinear);fill-opacity:.6;}
+		.use {fill:red;}
+		.polyline {stroke:gray;stroke-width:5;fill:none;}
+		]]></style>
 
 
 

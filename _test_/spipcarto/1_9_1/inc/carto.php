@@ -187,7 +187,6 @@ function afficher_carte_interface($id_carte,$retour,$fichier,$callage, $id_img =
 	
 	// Recuperer largeur/hauteur de la carte associee :
 	$image = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_img"));
-	
 	if ($image) {
 		$width=$image['largeur'];
 		$height=$image['hauteur'];
@@ -307,21 +306,36 @@ function afficher_carte_interface($id_carte,$retour,$fichier,$callage, $id_img =
    <td colspan="7">&nbsp;</td>
   </tr>
   <tr>
-   <td> '._T("spipcarto:carte_draw").'<br />
+   <td colspan="7">
+   <table width="500"><tr>
+   <td> '._T("spipcarto:carte_draw").'
     <!--<input type="radio" name="tool" value="rectangle,submit,crossHair,zoom_in"  id="zoom_in" onclick="dhtmlBox.changeTool()" />
-         zoom_in<br />-->
-     <!--<input type="radio" name="tool" value="point,submit,crossHair,zoom_out"  id="zoom_out" onclick="dhtmlBox.changeTool()" />
+          zoom_in<br />-->
+   </td>
+   <td>
+    <!--<input type="radio" name="tool" value="point,submit,crossHair,zoom_out"  id="zoom_out" onclick="dhtmlBox.changeTool()" />
           zoom out<br />-->
+   </td>
+   <td>
     <!--<input type="radio" name="tool" value="pan,submit,move,pan"  id="pan" onclick="dhtmlBox.changeTool()" />
           pan<br />-->
+   </td>
+   <td>
     <!--<input type="radio" name="tool" value="rectangle,submit,help,query"  id="query" onclick="dhtmlBox.changeTool()" />
           Rectangle<br />-->
+   </td>
+   <td>
     <input type="radio" name="tool" value="point,submit,crossHair,point"   id="point" onclick="dhtmlBox.changeTool()" />
           '._T('spipcarto:carte_point').'<br />
-   <input type="radio" name="tool" value="line,submit,crossHair,line"   id="line" onclick="dhtmlBox.changeTool()" />
+   </td>
+   <td>
+    <input type="radio" name="tool" value="line,submit,crossHair,line"   id="line" onclick="dhtmlBox.changeTool()" />
           '._T('spipcarto:carte_line').'<br />
-<input type="radio" name="tool" value="polygon,submit,crossHair,polygon"   checked="checked"  id="polygon" onclick="dhtmlBox.changeTool()" />
+   </td><td><input type="radio" name="tool" value="polygon,submit,crossHair,polygon"   checked="checked"  id="polygon" onclick="dhtmlBox.changeTool()" />
           '._T('spipcarto:carte_polygon').'<br />
+   </td>
+  </tr>
+ </table>
    </td>
   </tr>
  </table>
@@ -333,8 +347,8 @@ function carte_editable() {
 	return true;
 }
 function carte_administrable() {
-	global $connect_statut;
-	return $connect_statut=='0minirezo';
+	global $connect_statut,$connect_toutes_rubriques;
+	return ($connect_statut=='0minirezo' && $connect_toutes_rubriques);
 }
 //
 // Afficher un pave cartes dans la colonne de gauche
@@ -570,4 +584,19 @@ function puce_statut_carto_objet($id, $statut, $type, $droit) {
 	  	. afficher_script_statut($id, $type, -19, $puces[2], 'refuse',_T('texte_statut_refuse'), $action)
 		.  "</div></div>";
 }
+function dupliquer_carte($id_carte){
+	$carte_origin = spip_fetch_array(spip_query("SELECT * FROM spip_carto_cartes WHERE id_carto_carte = ".intval($id_carte)));
+	spip_abstract_insert("spip_carto_cartes",
+						'(url_carte, titre, texte, callage, id_srs)',
+						"('".addslashes($carte_origin['url_carte'])."', '".addslashes($carte_origin['titre'])."', '".addslashes($carte_origin['texte'])."', '".addslashes($carte_origin['callage'])."', '".addslashes($carte_origin['id_srs'])."')");
+	$new_id=spip_insert_id();
+	$r = spip_query("SELECT * FROM spip_carto_objets WHERE id_carto_carte = ".intval($id_carte));
+	while ($obj_origin=spip_fetch_array($r)){
+		spip_abstract_insert("spip_carto_objets",
+						'(id_carto_carte, titre, texte, url_objet, url_logo, geometrie)',
+						"(".$new_id.", '".addslashes($obj_origin['titre'])."', '".addslashes($obj_origin['texte'])."', '".addslashes($obj_origin['url_objet'])."', '".addslashes($obj_origin['url_logo'])."', '".addslashes($obj_origin['geometrie'])."')");
+	}
+	return $new_id;
+}
+
 ?>

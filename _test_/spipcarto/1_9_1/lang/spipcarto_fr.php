@@ -66,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'carte_import' => 'Vous pouvez ici importer, modifier et supprimer les objets de la carte.',
 'carte_import_objet' => 'Importer des objets dans la carte',
 'carte_supp_objets' => 'Supprimer tous les objets de la carte',
+'carte_dupl' => 'Dupliquer cette carte',
 'carte_insert' => 'Ins&eacute;rer une carte',
 'carte_insert_texte' => 'Vous pouvez ins&eacute;rer des cartes dans vos articles.<br/>Positionnez votre curseur dans le texte de l\'article, choisissez une carte dans la liste ci-dessous et cliquez sur un raccourci pour l\'ins&eacute;rer.',
 'carte_raccourci' => 'Recopiez ce raccourci dans le texte de l\'article pour ins&eacute;rer ce formulaire.',

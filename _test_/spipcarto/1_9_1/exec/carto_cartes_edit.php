@@ -93,18 +93,25 @@ $objet_texte=stripslashes($_REQUEST['objet_texte']);
 $url_objet=stripslashes($_REQUEST['url_objet']);
 $url_logo=stripslashes($_REQUEST['url_logo']);
 $geometrie=stripslashes($_REQUEST['geometrie']);
+$dupl_carte=stripslashes($_REQUEST['dupl_carte']);
 
 //
 // Modifications aux donnees de base de la carte
 //
 if (carte_administrable($id_carte)) {
-	if ($supp_carte = intval($supp_carte) AND $supp_confirme AND !$supp_rejet) {
+	if (intval($supp_carte) AND $supp_confirme==_T('item_oui') AND $supp_rejet!=_T('item_non')) {
 		//TODO : passer tout ca en spip_abstract ...
 		$query = "DELETE FROM spip_carto_objets WHERE id_carto_carte=$supp_carte";
 		$result = spip_query($query);
 		$query = "DELETE FROM spip_carto_cartes WHERE id_carto_carte=$supp_carte";
 		$result = spip_query($query);
 		Header("Location: $retour");
+		exit;
+	}
+	if ($dupl_carte=='oui') {
+		$new_id=dupliquer_carte($id_carte);
+		$url=str_replace("&amp;","&",generer_url_ecrire("carto_cartes_edit",'id_carte='.$new_id));
+		Header("Location: ".$url);
 		exit;
 	}
 }
@@ -222,6 +229,7 @@ $carte_link = generer_url_ecrire("carto_cartes_edit",$param);
 $carte_supplink = generer_url_ecrire("carto_cartes_edit",$param.'&supp_carte='.$id_carte);
 $carte_importlink = generer_url_ecrire("cartes_import",$param);
 $carte_suppallobjlink = generer_url_ecrire("carto_cartes_edit",$param.'&supp_objet_all=ok');
+$carte_dupllink = generer_url_ecrire("carto_cartes_edit",$param.'&dupl_carte=oui');
 
 //
 // Affichage de la page
@@ -279,7 +287,7 @@ if ($supp_carte && !$supp_confirme && !$supp_rejet) {
 	if ($retour)
 		echo '<input type="hidden" name="retour" value="'.$retour.'">'; 
 	echo '<input type="hidden" name="id_carte" value="'.$id_carte.'">'; 
-	echo '<input type="hidden" name="suppcarte" value="'.$id_carte.'">'; 
+	echo '<input type="hidden" name="supp_carte" value="'.$id_carte.'">'; 
 	echo "<input type='submit' name='supp_confirme' value=\""._T('item_oui')."\" class='fondl'>";
 	echo " &nbsp; ";
 	echo "<input type='submit' name='supp_rejet' value=\""._T('item_non')."\" class='fondl'>";
@@ -371,6 +379,9 @@ if ($id_carte && carte_administrable($id_carte)) {
 //	echo "<br />\n";
 	echo "<div style='float: right'>";
 	icone(_T("spipcarto:carte_supp"), 	$carte_supplink, "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.gif", "supprimer.gif");
+	echo "</div>\n";
+	echo "<div style='float: right'>";
+	icone(_T("spipcarto:carte_dupl"), 	$carte_dupllink, "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.gif", "edit.gif");
 	echo "</div>\n";
 }
 	echo "<br style='clear:both'/>\n";

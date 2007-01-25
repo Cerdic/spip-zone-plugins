@@ -1,55 +1,23 @@
-<div style="position: relative;visibility: visible; margin: 0px; padding: 0px;" onMouseOver="chien=0">
+
+<div style="position: relative;visibility: visible; margin: 0px; padding: 0px;">
+ <div style="position: absolute;">
  <BOUCLE_carte(CARTO_CARTES){id_carto_carte=#ID_MAP}>
-  <img[ alt='(#TITRE|texte_script)'] src="spip_carto.php?fond_carte=[(#URL_CARTE|base64_encode)][&amp;scale=(#ENV{scale})][&amp;x=(#ENV{x})][&amp;y=(#ENV{y})]" [height="(#ENV{args}|wkt2imgheight{#CALLAGE,#URL_CARTE})px"] [width="(#ENV{args}|wkt2imgwidth{#CALLAGE,#URL_CARTE})px"] style="border: 0px;" <B_objets>usemap="#map#ID_CARTO_CARTE" />
-<map name="map#ID_CARTO_CARTE" id="map#ID_CARTO_CARTE">
-  <BOUCLE_objets(CARTO_OBJETS){geometrie==^(poly)}{id_carto_carte=#ID_CARTO_CARTE}{doublons poly}>
+  <img alt="#TITRE" src="#URL_SITE_SPIP/spip_carto.php?fond_carte=[(#URL_CARTE|base64_encode)][&amp;scale=(#ENV{scale})][&amp;x=(#ENV{x})][&amp;y=(#ENV{y})]" usemap="#map#ID_CARTO_CARTE" [height="(#ENV{args}|wkt2imgheight{#CALLAGE,#URL_CARTE})px"] [width="(#ENV{args}|wkt2imgwidth{#CALLAGE,#URL_CARTE})px"] style="position:absolute;top:0;left:0;border: 0px;"/>
+  <B_objets>
+  <map name="map#ID_CARTO_CARTE" id="map#ID_CARTO_CARTE">
+  <BOUCLE_objets(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}>
   [(#GEOMETRIE|wkt2shape|choixsiegal{POLY,' ',''})]
-	<area <BOUCLE_MOT(MOTS){id_carto_objet}{par titre}{0,1}>[onMouseOver="active_zone('[(#ID_CARTO_OBJET)]','IMG/(#LOGO_MOT_SURVOL|fichier)','IMG/[(#LOGO_MOT_NORMAL|fichier)]')" 
-		onMouseOut="desactive_zone('[(#ID_CARTO_OBJET)]','IMG/[(#LOGO_MOT_NORMAL|fichier)]')" ]</BOUCLE_MOT>
-	shape="[(#GEOMETRIE|wkt2shape)]" coords="[(#GEOMETRIE|wkt2coords{HTML,#CALLAGE,#URL_CARTE,'',#ENV{args}})]" href="[(#URL_OBJET)]"[ alt='(#TITRE|texte_script)']/>
+	<area <BOUCLE_MOT(MOTS){id_carto_objet}{par titre}{0,1}>[onMouseOver="document.getElementById('motobj#ID_MOT').src='IMG/(#LOGO_MOT_SURVOL|fichier)'" ]</BOUCLE_MOT>
+	shape="[(#GEOMETRIE|wkt2shape)]" coords="[(#GEOMETRIE|wkt2coords{HTML,#CALLAGE,#URL_CARTE,'',#ENV{args}})]" href="[(#URL_OBJET)]" alt="#TITRE"/>
   </BOUCLE_objets>
   </map>
-  </B_objets>/><//B_objets>
-  <BOUCLE_objets2(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}{!doublons poly}>
-  <BOUCLE_MOT1(MOTS){id_carto_objet}{par titre}{0,1}>
-  <a class="map_obj_logo" style="[(#GEOMETRIE|wkt2coords{HTMLZONE,#CALLAGE,#URL_CARTE,'',#ENV{args}})]" 
- href="[(#URL_OBJET)]" title='[(#TITRE|texte_script)]'>
-	<img [onMouseOver="active_zone('[(#ID_CARTO_OBJET)]','IMG/(#LOGO_MOT_SURVOL|fichier)','IMG/[(#LOGO_MOT_NORMAL|fichier)]')" 
-		onMouseOut="desactive_zone('[(#ID_CARTO_OBJET)]','IMG/[(#LOGO_MOT_NORMAL|fichier)]')" ]
-		src="[IMG/(#LOGO_MOT_NORMAL|fichier)]" id="map_obj_[(#ID_CARTO_OBJET)]"
-		[ alt='(#TEXTE|texte_script)']/>
-  </a>  
-</BOUCLE_MOT1>
+  </B_objets>
+  <BOUCLE_objets2(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}>
+  <a href="[(#URL_OBJET)]" title='[(#TEXTE|texte_script)]'>
+	<img <BOUCLE_MOT1(MOTS){id_carto_objet}{par titre}{0,1}>[onMouseOut="this.src='IMG/(#LOGO_MOT_NORMAL|fichier)'" ]</BOUCLE_MOT1>style="position: absolute;margin: 0px; padding: 0px;[(#GEOMETRIE|wkt2coords{HTMLZONE,#CALLAGE,#URL_CARTE,'',#ENV{args}})]border: 0px;"[ alt='(#TEXTE|texte_script)'] src="<BOUCLE_MOT2(MOTS){id_carto_objet}{par titre}{0,1}>[IMG/(#LOGO_MOT_NORMAL|fichier)]" id="motobj#ID_MOT</BOUCLE_MOT2>ecrire/img_pack/croix-rouge.gif<//B_MOT2>"/>
+  </a>
   </BOUCLE_objets2>
-  <BOUCLE_objets3(CARTO_OBJETS){id_carto_carte=#ID_CARTO_CARTE}{doublons poly}>
-  <BOUCLE_MOT2(MOTS){id_carto_objet}{par titre}{0,1}>
-  <div class="map_obj_div" 
-  id="map_obj_div_[(#ID_CARTO_OBJET)]"
-  style="[(#GEOMETRIE|wkt2coords{HTMLZONE,#CALLAGE,#URL_CARTE,'',#ENV{args}})]" 
-  [onMouseOver="active_point('[(#ID_CARTO_OBJET)]','IMG/(#LOGO_MOT_SURVOL|fichier)','IMG/[(#LOGO_MOT_NORMAL|fichier)]');" 
-  onMouseOut="desactive_point('[(#ID_CARTO_OBJET)]','IMG/[(#LOGO_MOT_NORMAL|fichier)]');" ]>
-  <a[ title='(#TITRE|texte_script)']
-  	[onMouseOver="active_point('[(#ID_CARTO_OBJET)]','IMG/(#LOGO_MOT_SURVOL|fichier)','IMG/[(#LOGO_MOT_NORMAL|fichier)]');" 
-  onMouseOut="desactive_point('[(#ID_CARTO_OBJET)]','IMG/[(#LOGO_MOT_NORMAL|fichier)]');" ]>
-	<img src="[IMG/(#LOGO_MOT_NORMAL|fichier)]" id="map_obj_[(#ID_CARTO_OBJET)]"   
-	[ alt='(#TEXTE|texte_script)']
- 	[onMouseOver="active_point('[(#ID_CARTO_OBJET)]','IMG/(#LOGO_MOT_SURVOL|fichier)','IMG/[(#LOGO_MOT_NORMAL|fichier)]');" 
-  onMouseOut="desactive_point('[(#ID_CARTO_OBJET)]','IMG/[(#LOGO_MOT_NORMAL|fichier)]');" ]
-  />
-  </a>  
-  <div class="map_objdiv" 
-  	[onMouseOver="active_point('[(#ID_CARTO_OBJET)]','IMG/(#LOGO_MOT_SURVOL|fichier)','IMG/[(#LOGO_MOT_NORMAL|fichier)]');" 
-  onMouseOut="desactive_point('[(#ID_CARTO_OBJET)]','IMG/[(#LOGO_MOT_NORMAL|fichier)]');" ]
-  id="map_objdiv_[(#ID_CARTO_OBJET)]">
-  <a 	[onMouseOver="active_point('[(#ID_CARTO_OBJET)]','IMG/(#LOGO_MOT_SURVOL|fichier)','IMG/[(#LOGO_MOT_NORMAL|fichier)]');" 
-  onMouseOut="desactive_point('[(#ID_CARTO_OBJET)]','IMG/[(#LOGO_MOT_NORMAL|fichier)]');" ]/
-  href="[(#URL_OBJET)]">
-	#_objets3:TITRE
-  </a><br style="clear:both"/>
-  #_objets3:TEXTE
-  </div>
-  </div>
-  </BOUCLE_MOT2>
-  </BOUCLE_objets3>
  </BOUCLE_carte>
+<hr/>
+ </div>
 </div>
