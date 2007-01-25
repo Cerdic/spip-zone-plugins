@@ -94,6 +94,13 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
             } else {
                 // TODO : D'autres raccourcis particuliers a traiter ?
                 switch ($type_objet_contenu) {
+                    case 'code':
+                    case 'quote':
+                    case 'intro':
+                    case 'div':
+                    case 'span':
+                        $nouveau_lien = false;
+                        break;
                 	case 'form':
                         // Soyons gentil avec le plugin Forms s'il est activé
                         if (!defined('_DIR_PLUGIN_FORMS')) {
