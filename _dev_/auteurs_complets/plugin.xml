@@ -24,6 +24,9 @@ _ {{Attention}} : le plugin BALISE_SESSION est obligatoire pour cela.
 	<options>
 	auteurs_complets_options.php
 	</options>
+	<fonctions> <!-- fichier charge a chaque recalcul -->
+	auteurs_complets_fonctions.php
+	</fonctions>
 	<prefix>
 	auteurs_complets
 	</prefix>
