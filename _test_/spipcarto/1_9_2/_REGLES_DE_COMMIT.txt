@@ -1,0 +1,41 @@
+Voici les regles a suivre avant de commiter des modifications sur
+cette branche.
+
+A. Obligation de commenter:
+   Si vous envoyez des modifications, il faut toujours les commenter
+   des facon "descriptive" et "complete" avec l'option -m ou -F du
+   commit SVN.
+
+B. Modification autorisees :
+  	  	o l'ajout d'une fonctionnalite etant decrite dans la TODO
+officielle,
+  		o la correction d'un bug classe mineure,
+Il faut clairement decrire le but de la modification dans les 
+commentaire du commit: la fonctionnalite ajoutee, le bug corrige 
+en donnant des exemples de ce que cela corrige/apporte. 
+Il faut alors aussi commenter dans le fichier et ecrire les chaenes 
+de documentation necessaires.
+	Tout le monde peut alors commiter une telle modification.
+
+   Toute modification n'etant pas classifiees dans les deux categories
+precedentes est dite majeure.
+   On ne peut pas commiter de telles modifications sans en referer e
+l'auteur principal du projet (bill@adequates.com). Il faut alors,
+dans le mail, envoyer un patch au format "diff -pu" et donner une
+description defendable des modifications/ajouts.
+   En particulier, il faut bien penser e:
+   	  o decrire le bug que l'on corrige, comment on a choisit de le
+  corriger,
+	  o decrire la modification que l'on a faite et pourquoi le
+  nouveau code est meilleur que l'ancien (qui n'est certainement pas
+  un code parfait de toute faeon)
+  	  o decrire la nouvelle fonction, ce quelle apporte e
+  l'utilisateur, les dependances qu'elle apporte.
+
+C. Clarte du code.
+   Il n'y a actuellement pas de regles precises d'ecriture correct du
+code. Il faut juste garder du code indenter, en general,
+suivre la faeon dont c'est fait dans les fichiers de bases.
+   Il faut toujours mettre une documentation quand c'est
+possible et quand on le peut documenter le processus/l'algorithme que
+l'on implemente.
