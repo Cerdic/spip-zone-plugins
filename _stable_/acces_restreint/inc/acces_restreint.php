@@ -122,7 +122,7 @@ include_spip('inc/rubriques');
 
 	function AccesRestreint_liste_rubriques_acces_proteges($publique=true){
 		static $liste_acces_protege=array(); // la calculer une seule fois par hit
-		if (!is_array($liste_acces_protege[$publique])){
+		if (!isset($liste_acces_protege[$publique]) || !is_array($liste_acces_protege[$publique])){
 			if ($publique) $cond = "publique='oui'";
 			else $cond = "privee='oui'";
 			$liste_acces_protege[$publique] = AccesRestreint_liste_contenu_zone_rub($cond);
@@ -131,7 +131,7 @@ include_spip('inc/rubriques');
 	}
 	function AccesRestreint_liste_rubriques_acces_libre($publique=true){
 		static $liste_acces_libre=array(); // la calculer une seule fois par hit
-		if (!is_array($liste_acces_libre[$publique])){
+		if (!isset($liste_acces_libre[$publique]) || !is_array($liste_acces_libre[$publique])){
 			$liste_acces_libre[$publique] = array();
 			$liste_prot = join(",",AccesRestreint_liste_rubriques_acces_proteges($publique));
 			if ($liste_prot)
@@ -164,7 +164,7 @@ include_spip('inc/rubriques');
 	// -> condition NOT IN
 	function AccesRestreint_liste_rubriques_exclues($publique=true){
 		static $liste_rub_exclues = array();
-		if (!is_array($liste_rub_exclues[$publique])){
+		if (!isset($liste_rub_exclues[$publique]) || !is_array($liste_rub_exclues[$publique])){
 			$liste_rub_exclues[$publique] = array();
 			global $auteur_session;
 			$liste_rub_exclues[$publique] = AccesRestreint_liste_rubriques_acces_proteges($publique);
@@ -190,7 +190,7 @@ include_spip('inc/rubriques');
 	// -> condition NOT IN
 	function AccesRestreint_liste_articles_exclus($publique=true){
 		static $liste_art_exclus=array();
-		if (!is_array($liste_art_exclus[$publique])){
+		if (!isset($liste_art_exclus[$publique]) || !is_array($liste_art_exclus[$publique])){
 			$liste_art_exclus[$publique] = array();
 			$liste_rub = AccesRestreint_liste_rubriques_exclues($publique);
 			$where = calcul_mysql_in('id_rubrique', join(",",$liste_rub));
@@ -211,7 +211,7 @@ include_spip('inc/rubriques');
 	// -> condition NOT IN
 	function AccesRestreint_liste_breves_exclues($publique=true){
 		static $liste_breves_exclues=array();
-		if (!is_array($liste_breves_exclues[$publique])){
+		if (!isset($liste_breves_exclues[$publique]) || !is_array($liste_breves_exclues[$publique])){
 			$liste_breves_exclues[$publique] = array();
 			$liste_rub = AccesRestreint_liste_rubriques_exclues($publique);
 			$where = calcul_mysql_in('id_rubrique', join(",",$liste_rub));
@@ -232,7 +232,7 @@ include_spip('inc/rubriques');
 	// -> condition NOT IN
 	function AccesRestreint_liste_forum_exclus($publique=true){
 		static $liste_forum_exclus=array();
-		if (!is_array($liste_forum_exclus[$publique])){
+		if (!isset($liste_forum_exclus[$publique]) || !is_array($liste_forum_exclus[$publique])){
 			$liste_forum_exclus[$publique] = array();
 			// rattaches aux rubriques
 			$liste_rub = AccesRestreint_liste_rubriques_exclues($publique);
@@ -261,7 +261,7 @@ include_spip('inc/rubriques');
 	// -> condition NOT IN
 	function AccesRestreint_liste_signatures_exclues($publique=true){
 		static $liste_signatures_exclues=array();
-		if (!is_array($liste_signatures_exclues[$publique])){
+		if (!isset($liste_signatures_exclues[$publique]) || !is_array($liste_signatures_exclues[$publique])){
 			$liste_signatures_exclues[$publique] = array();
 			// rattaches aux articles
 			$liste_art = AccesRestreint_liste_articles_exclus($publique);
@@ -283,7 +283,7 @@ include_spip('inc/rubriques');
 	// -> condition NOT IN
 	function AccesRestreint_liste_documents_exclus($publique=true){
 		static $liste_documents_exclus=array();
-		if (!is_array($liste_documents_exclus[$publique])){
+		if (!isset($liste_documents_exclus[$publique]) || !is_array($liste_documents_exclus[$publique])){
 			$liste_documents_exclus[$publique] = array();
 			// rattaches aux articles
 			$liste_art = AccesRestreint_liste_articles_exclus($publique);
@@ -327,7 +327,7 @@ include_spip('inc/rubriques');
 	// -> condition NOT IN
 	function AccesRestreint_liste_syndic_exclus($publique=true){
 		static $liste_syndic_exclus=array();
-		if (!is_array($liste_syndic_exclus[$publique])){
+		if (!isset($liste_syndic_exclus[$publique]) || !is_array($liste_syndic_exclus[$publique])){
 			$liste_syndic_exclus[$publique] = array();
 			$liste_rub = AccesRestreint_liste_rubriques_exclues($publique);
 			$where = calcul_mysql_in('id_rubrique', join(",",$liste_rub));
@@ -348,7 +348,7 @@ include_spip('inc/rubriques');
 	// -> condition NOT IN
 	function AccesRestreint_liste_syndic_articles_exclus($publique=true){
 		static $liste_syndic_articles_exclus=array();
-		if (!is_array($liste_syndic_articles_exclus[$publique])){
+		if (!isset($liste_syndic_articles_exclus[$publique]) || !is_array($liste_syndic_articles_exclus[$publique])){
 			$liste_syndic_articles_exclus[$publique] = array();
 			$liste_syn = AccesRestreint_liste_syndic_exclus($publique);
 			$where = calcul_mysql_in('id_syndic', join(",",$liste_syn));
