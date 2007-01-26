@@ -12,7 +12,9 @@ function validateur_spip_xhtml_validator_dist($action, $url= ""){
 			break;
 		case 'test':
 			$page = recuperer_page($url);
-			$transformer_xml($page, false);
+			if (!$page)
+				return array(false,"404","404");
+			$sax = $transformer_xml($page, false);
 			$erreurs = (strlen($GLOBALS['xhtml_error'])>0);
 			$texte = _T("w3cgh:erreur");
 			$ok = false;
