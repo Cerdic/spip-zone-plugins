@@ -107,7 +107,6 @@ function tweak_initialise_includes() {
 	}
   }
   // installation de $tweaks_metas_pipes
-print_r($tweaks_metas_pipes);
   set_tweaks_metas_pipes_fichier($tweaks_pipelines, 'options');
   set_tweaks_metas_pipes_fichier($tweaks_pipelines, 'fonctions');
   foreach($pipelines_utilises as $pipe) set_tweaks_metas_pipes_pipeline($tweaks_pipelines, $pipe);
