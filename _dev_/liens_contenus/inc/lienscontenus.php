@@ -81,38 +81,42 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
 			list(,$type_objet_contenu, $id_objet_contenu, $params) = $match;
 			$type_objet_contenu = isset($liens_contenus_aliases[$type_objet_contenu]) ? $liens_contenus_aliases[$type_objet_contenu] : $type_objet_contenu;
             $nouveau_lien = true;
-            if ($type_objet_contenu == 'document') {
-                if ($type_objet_contenant == 'article' || $type_objet_contenant == 'rubrique') {
-                    // Si le doc est rattache a l'article ou la rubrique, on ne doit pas le comptabiliser
-                    $query = 'SELECT COUNT(*) AS nb FROM spip_documents_'.$type_objet_contenant.'s WHERE id_document='.$id_objet_contenu.' AND id_'.$type_objet_contenant.'='.$id_objet_contenant;
-                	$res = spip_query($query);
-                    $row = spip_fetch_array($res);
-                    if ($row['nb'] == 1) {
-                    	$nouveau_lien = false;
-                    }
-                }
-            } else {
-                // TODO : D'autres raccourcis particuliers a traiter ?
-                switch ($type_objet_contenu) {
-                    case 'code':
-                    case 'quote':
-                    case 'intro':
-                    case 'div':
-                    case 'span':
-                        $nouveau_lien = false;
-                        break;
-                	case 'form':
-                        // Soyons gentil avec le plugin Forms s'il est activŽ
-                        if (!defined('_DIR_PLUGIN_FORMS')) {
-                            $id_objet_contenu = $type_objet_contenu;
-                            $type_objet_contenu = 'modele';
+            switch ($type_objet_contenu) {
+                case 'document':
+                    if ($type_objet_contenant == 'article' || $type_objet_contenant == 'rubrique') {
+                        $query = 'SELECT COUNT(*) AS nb FROM spip_documents_'.$type_objet_contenant.'s WHERE id_document='.$id_objet_contenu.' AND id_'.$type_objet_contenant.'='.$id_objet_contenant;
+                        $res = spip_query($query);
+                        $row = spip_fetch_array($res);
+                        if ($row['nb'] == 1) {
+                            // Si le doc est rattache a l'article ou la rubrique courant, on ne doit pas le comptabiliser
+                            $nouveau_lien = false;
                         }
+                    }
+                    break;
+            	case 'form':
+                    // Soyons gentil avec le plugin Forms s'il est activŽ
+                    if (defined('_DIR_PLUGIN_FORMS')) {
                         break;
-                    default:
-                        $id_objet_contenu = $type_objet_contenu;
+                    }
+                default:
+                    if ($id_objet_contenu != '' || $params != '') {
+                        // C'est a priori un modele
+                        $modele = $type_objet_contenu;
+                        $params = array_filter(explode('|', strtolower($params)));
+                        if ($params) {
+                            list(, $soustype) = each($params);
+                            if (in_array($soustype, array('left', 'right', 'center'))) {
+                                list(, $soustype) = each($params);
+                            }
+                            if (preg_match(',^[a-z0-9_]+$,', $soustype)) {
+                                $modele .= '_'.$soustype;
+                            }
+                        }
+                        $id_objet_contenu = $modele;
                         $type_objet_contenu = 'modele';
-                }
-			}
+                    } else {
+                    }
+            }
             if ($nouveau_lien) {
                 $liens_trouves[$type_objet_contenu.' '.$id_objet_contenu] = array('type' => $type_objet_contenu, 'id' =>$id_objet_contenu);
             }
