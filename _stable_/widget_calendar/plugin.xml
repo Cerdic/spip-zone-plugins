@@ -1,6 +1,9 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Widget Calendrier
+<multi>	Widget Calendrier
+[en]
+Calendar Widget
+</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Cedric MORIN - [notre-ville.net->http://www.notre-ville.net]
@@ -13,7 +16,9 @@ _ 2006 - Distribu&#233; sous licence GPL
 	stable
 	</etat>
 	<description>
-	Un Widget Calendrier pr&#234;t &#224; l'emploi pour saisir vos dates
+	<multi>Un Widget Calendrier pr&#234;t &#224; l'emploi pour saisir vos dates
+[en] A Calendar Widget to specify dates.
+</multi>
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<fonctions>
