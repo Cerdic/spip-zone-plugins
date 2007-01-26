@@ -373,6 +373,7 @@ function TB_remove() {
   $("#TB_closeWindowButton").unbind('click');
   $("#TB_window").fadeOut("fast",function(){$('#TB_window,#TB_overlay,#TB_HideSelect').remove();});
   $("#TB_load").remove();
+  if(TB_Counter < TB_TempArray.length)
   $("a.thickbox,a[@type='image/jpeg'],a[@type='image/png'],a[@type='image/gif']")[TB_Counter+1].focus();
   return false;
 }
