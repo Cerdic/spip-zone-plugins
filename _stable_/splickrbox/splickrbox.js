@@ -73,8 +73,8 @@ jQuery.SplickerBox.prototype = {
 
 	//iteration apres le timeout
 	postpone: function() {
-		this.itere();		
 		$(this.c).css('background-color','transparent');
+		this.itere();		
 		$(this.c).empty();
 		this.start();
 	},
@@ -117,8 +117,8 @@ jQuery.SplickerBox.prototype = {
 
 
 		var back = $(this.elt.parentNode).css('background-color');
-		if(!back || back=='transparent') back = 'white';
-		$(this.c).css('background-color',back);		
+		//if(!back || back=='transparent') back = 'white';
+		//$(this.c).css('background-color',back);		
 		$(this.c).fadeIn(2000);		
 		setTimeout(getObjectMethodClosure(this,'resize'),4000); 
 		setTimeout(getObjectMethodClosure(this,'postpone'),7000);
