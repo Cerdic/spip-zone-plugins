@@ -44,11 +44,6 @@ margin:20px;
 display:none;
 }
 
-/*
-#TB_legend{
-display:none;
-}
-*/
 
 #TB_window {
 	position: absolute;
@@ -65,10 +60,15 @@ display:none;
 	margin: 10px 0 10px 10px;
 }
 
-#TB_legend {
-	position:relative;
+#TB_legend{
+/*display:none;*/
+position:relative;
 }
 
+#TB_legend img{
+/*display:none;*/
+margin: 0 ;
+}
 
 #TB_caption{
 	padding:10px 35px 10px 10px;
@@ -85,13 +85,13 @@ display:none;
 #TB_closeWindow{
 	padding:0;
 	margin:0;
-	width: 36px; 
+	width: 26px; 
 	height:26px;
 	top:0px;
-	right:0px;
+	right:10px;
 	position: absolute;  
 	padding-bottom: 0.7em;
-	margin-right: 10px;
+	/*margin-right: 10px;*/
 	text-align:right;
 }
 
