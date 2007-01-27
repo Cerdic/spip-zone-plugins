@@ -370,6 +370,7 @@ function TB_showIframe(){
 }
 function TB_remove() {
   DIAPO = false ;
+  FULL_S = false ;
   $("#TB_imageOff").unbind('click');
   $("#TB_overlay").unbind('click');
   $("#TB_closeWindowButton").unbind('click');
