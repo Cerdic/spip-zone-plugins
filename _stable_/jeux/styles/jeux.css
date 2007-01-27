@@ -1,10 +1,11 @@
 /* Histoire que tous les navigateurs soient d'accord... */
-* {
- margin:0pt;
- padding:0pt;
-}
-ul, ol {
- padding-left: 50px;
+* { margin:0pt; padding:0pt; }
+ul, ol, dd, dir, menu { padding-left: 40px; } /* decalage des listes */
+ol ul, ul ol, ul ul, ol ol { margin-top: 0; margin-bottom: 0 } /* liste imbriquees */
+p { margin:1em auto; }
+
+div#haut-page {
+ margin: 40px; 
 }
 
 /* Espaceur de blocs */
