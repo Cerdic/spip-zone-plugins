@@ -65,16 +65,20 @@ display:none;
 	margin: 10px 0 10px 10px;
 }
 
+#TB_legend {
+	position:relative;
+}
+
 
 #TB_caption{
-	padding:10px 30px 10px 10px;
+	padding:10px 35px 10px 10px;
 	font-weight: bold;
 	text-align:left;
 }
 
 #TB_secondLine {
   font: 10px Arial, Helvetica, sans-serif;
-  padding:0px 30px 10px 10px;
+  padding:0px 35px 10px 10px;
   color:#666666;
 }
 
@@ -83,8 +87,9 @@ display:none;
 	margin:0;
 	width: 36px; 
 	height:26px;
-	
-	float: right;  
+	top:0px;
+	right:0px;
+	position: absolute;  
 	padding-bottom: 0.7em;
 	margin-right: 10px;
 	text-align:right;

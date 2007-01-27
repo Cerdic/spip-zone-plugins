@@ -42,6 +42,8 @@ function TB_init(root) {
 	$("a.thickbox",root).each(
 		function(i) {
 			this.onclick = TB_image;
+			var t = this.alt || this.name || null;
+			this.alt = t + " - view bigger version";
 			if (
 				(this.type && this.type.match(/^image[\/](jpeg|gif|png)$/i))
 				|| (this.href && this.href.match(/\.(jpeg|jpg|png|gif)$/i))
@@ -63,7 +65,7 @@ function TB_init(root) {
 function TB_show(caption, url) {//function called when the user clicks on a thickbox link
   try {
     if (document.getElementById("TB_HideSelect") == null) {
-    $("body").append("<iframe id='TB_HideSelect'></iframe><div id='TB_overlay'></div><div id='TB_window'></div>");
+    $("body").append("<iframe id='TB_HideSelect'></iframe><div id='TB_overlay' title='Close the picture'></div><div id='TB_window'></div>");
     $("#TB_overlay").click(TB_remove);
     }
     
@@ -75,7 +77,7 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
     
     TB_overlaySize();
     
-    $("body").append("<div id='TB_load'><img src='"+TB_chemin_animation+"' /></div>");
+    $("body").append("<div id='TB_load'><img src='"+TB_chemin_animation+"' alt='loading' /></div>");
     TB_load_position();
     
      if(url.indexOf("?")!==-1){ //If there is a query string involved
@@ -105,11 +107,11 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
 	              if (TB_FoundURL) {
 	                TB_NextCaption = TB_TempArray[TB_Counter][1];
 	                TB_NextURL = TB_TempArray[TB_Counter][0];
-	                TB_NextHTML = "<span id='TB_next'>&nbsp;&nbsp;<a href='#'><strong> &gt;</strong></a></span>";
+	                TB_NextHTML = "<span id='TB_next'>&nbsp;&nbsp;<a href='#' title='Next Image'><strong> &gt;</strong></a></span>";
 	              } else {
 	                TB_PrevCaption = TB_TempArray[TB_Counter][1];
 	                TB_PrevURL = TB_TempArray[TB_Counter][0];
-	                TB_PrevHTML = "<span id='TB_prev'>&nbsp;&nbsp;<a href='#'><strong>&lt; </strong></a></span>";
+	                TB_PrevHTML = "<span id='TB_prev'>&nbsp;&nbsp;<a href='#' title='Previous Image'><strong>&lt; </strong></a></span>";
 	              }
 	            } else {
 	              TB_FoundURL = true;
@@ -160,14 +162,14 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
 	      if(!DIAPO){
 	      TB_Diapo = "<span id='TB_Diapo'>&nbsp;&nbsp;<a href='#'><strong>[Slideshow]</strong></a></span>";
 	      }else{
-	      TB_Diapo = "<span id='TB_Diapo'>&nbsp;&nbsp;<a href='#'><strong>[Stop]</strong></a></span>";
+	      TB_Diapo = "<span id='TB_Diapo'>&nbsp;&nbsp;<a href='#' title='Stop the slideshow'><strong>[Stop]</strong></a></span>";
 	      }
 	      if (TB_Big_Image) 
 	        TB_Full_Size = "<span id='TB_Full'>&nbsp;&nbsp;<a href='#'><strong>[Zoom]</strong></a></span>";
 	      TB_WIDTH = imageWidth + 20;
 	      TB_HEIGHT = imageHeight + 20;    
 	      
-	      $("#TB_window").append("<a href='#' id='TB_ImageOff'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+"'/></a>" + "<div id='TB_legend' style='background-color:#fff'><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'><img src='"+TB_chemin_close+"' /></a></div><div id='TB_caption'>"+caption+"</div><div id='TB_secondLine'>" + TB_imageCount + TB_Full_Size + TB_PrevHTML + TB_NextHTML + TB_Diapo +"</div></div>"); 
+	      $("#TB_window").append("<a href='#' id='TB_ImageOff'><img id='TB_Image' src='"+url+"' width='"+imageWidth+"' height='"+imageHeight+"' alt='"+caption+" - next picture'/></a>" + "<div id='TB_legend' style='background-color:#fff'><div id='TB_caption'>"+caption+"</div><div id='TB_secondLine'>" + TB_imageCount + TB_Full_Size + TB_PrevHTML + TB_NextHTML + TB_Diapo +"</div><div id='TB_closeWindow'><a href='#' id='TB_closeWindowButton'><img src='"+TB_chemin_close+"' alt='Close this picture' /></a></div></div>"); 
 			
 		   $("#TB_closeWindowButton").click(TB_remove);		
 		   $("#TB_load").remove();
