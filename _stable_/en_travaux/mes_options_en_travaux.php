@@ -23,6 +23,8 @@ if ($GLOBALS['meta']['en_travaux']=='true')
 }
 function action_en_travaux(){
 	include_spip('inc/minipres');
+	include_spip('inc/charsets');
+	include_spip('inc/filtres');
 	$corps = charset2unicode(extraire_multi($GLOBALS['meta']['en_travaux_message']));
 	$page = minipres(_T('info_travaux_titre'), $corps);
 	global $spip_version;
