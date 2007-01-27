@@ -59,4 +59,9 @@ _
 		<inclure>jeux_pipelines.php</inclure>
 		<action>header_prive</action>
 	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>jeux_pipelines.php</inclure>
+		<action>affiche_gauche</action>
+	</pipeline>
 </plugin>
