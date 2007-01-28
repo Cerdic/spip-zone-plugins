@@ -6,9 +6,9 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 
 
 //_
-'_aide' => '<p>SPIP-Listes allows you to send a newsletters or automatic messages to people who have signed up. </p> <p>You can write your message in simple text format, in HTML or apply a master template - called "patron" in SPIP language - that can include SPIP-code.</p>
-<p>A sign-up form on the webpage frontend allows users to decide themselves to which newsletters they want to subscribe and the format in which they want to receive it (HTML or txt).</p> 
-<p>Every message is automatically converted from HTML into text format for those who prefere receiving it in this format.</p>
+'_aide' => '<p>SPIP-Listes allows you to send newsletters or other automatic messages to people who have signed up. </p> <p>You can write your message in simple text format, in HTML, or apply a master template - called "patron" in SPIP language - that can include SPIP-code.</p>
+<p>A sign-up form on the webpage frontend allows users to decide themselves to which newsletters they want to subscribe and the format in which they want to receive it (HTML or text).</p> 
+<p>Every message is automatically converted from HTML into text format for those who prefer receiving it in this format.</p>
 <p><b>Note:</b><br/>Sending out a newsletter can take several minutes: The messages are sent out in batches that are sent out one by one. You can manually speed-up the sending process. </p>',
 
 
@@ -20,9 +20,9 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 'abonnement_bouton'=>'Change your subscription',
 'abonnement_cdt' => '<a href=\'http://bloog.net/spip-listes/\'>SPIP-Listes</a>' ,
 'abonnement_change_format'=>'You can change the format in which you will receive the newsletter: ',
-'abonnement_mail' => 'To change your subscription, please visit the following webpage',
+'abonnement_mail' => 'To change your subscription, please visit the following webpage: ',
 'abonnement_mail_passcookie' => '(this is an automatically generated e-mail)
-To change your subscription to the newsletter, please visite the following webpage:
+To change your subscription to the newsletter, please visit the following webpage:
 @nom_site_spip@ (@adresse_site@)
 
 To change your subscription, please visit the following webpage:
@@ -32,7 +32,7 @@ To change your subscription, please visit the following webpage:
 'abonnement_modifie'=>'Your modifications have been registered.',
 'abonnement_nouveau_format'=>'The format in which you will receive the newsletter will from now on be: ',
 'abonnement_titre_mail'=>'Change your subscription',
-'abonnement_texte_mail'=>'Please specify with which e-mail address you have signed up previously;. 
+'abonnement_texte_mail'=>'Please specify with which e-mail address you have signed up previously. 
 You will receive an e-mail with a link to the webpage where you can modify your subscription.',
 'abonner' => 'Subscribe',
 'actualiser' => 'Update',
@@ -71,7 +71,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'definir_squel_choix' => 'When editing a new message, SPIP-Listes allows you to load a  template. Hitting a button allows you to load the content of a template into the message <b>. <b>/template</b> (located at the root of your SPIP-website). <p><b>You can edit and modify these templates as you like it.</b></p> <ul><li>These templates may contain HTML code</li>
 <li>These templates may contain SPIP-loops (boucles)</li>
 <li>After loading a master template (patron), you can still modify the message before sending it out (for example to add text)</li>
-</ul><p>The function "Load a master template (patron)" allows to use personalized HTML code or to create specified through the SPIP loops (boucles).</p><p>Note: the template template should not include the tags body, head or html, but only the HTML code and the SPIP loops (boucles).</p>',
+</ul><p>The function "Load a master template (patron)" allows you to use personalized HTML code or to create specified through the SPIP loops (boucles).</p><p>Note: the template should not include the tags body, head or html, but only the HTML code and the SPIP loops (boucles).</p>',
 'definir_squel_texte' => 'If you have an FTP access to your website, you can add SPIP templates in the folder /patrons at the root of the SPIP-site.',
 'devenir_redac'=>'Become an editor of this website',
 'devenir_abonne'=>'Subscribe to this website',
@@ -411,11 +411,11 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 
 'bonjour' => 'Hello,',
 
-'inscription_response' => 'Your e-mail address has been added to the newsletter of',
-'inscription_responses' => 'Your e-mail address has been added to the newsletter of',
-'inscription_liste' => 'You will receive the newsletter sent to the following newsletter : ',
-'inscription_listes' => 'You will receive the newsletters sent to the following lists : ',
-'inscription_format' => ' in format ',
+'inscription_response' => 'Your e-mail address has been added to the mailinglist of ',
+'inscription_responses' => 'Your e-mail address has been added to the mailinglist of ',
+'inscription_liste' => 'You will receive the newsletter sent to the following mailing list : ',
+'inscription_listes' => 'You will receive the newsletters sent to the following mailing lists : ',
+'inscription_format' => ', in format ',
 
 );
 
