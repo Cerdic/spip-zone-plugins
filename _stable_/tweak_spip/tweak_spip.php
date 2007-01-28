@@ -11,7 +11,6 @@
 /*****************/
 
 global $spip_version_code;
-if ($spip_version_code<1.92) define(_DIR_VAR, _DIR_TMP);
 if (!defined('_DIR_PLUGIN_TWEAK_SPIP')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	$p=_DIR_PLUGINS.end($p); if ($p[strlen($p)-1]!='/') $p.='/';
@@ -39,7 +38,7 @@ function set_tweaks_metas_pipes_fichier($tweaks_pipelines, $type) {
 		foreach ($tweaks_pipelines['code_'.$type] as $code) $code .= $code."\n";
 	$tweaks_metas_pipes[$type] = $code;
 	tweak_log("set_tweaks_metas_pipes_fichier($type) : strlen=".strlen($code));
-	$fichier_dest = sous_repertoire(_DIR_VAR, "tweak-spip") . "mes_$type.php";
+	$fichier_dest = sous_repertoire(_DIR_TMP, "tweak-spip") . "mes_$type.php";
 	ecrire_fichier($fichier_dest, "<?php\n// Code de contrôle pour le plugin Tweak-SPIP\n$code?".'>');
 }
 
@@ -53,7 +52,7 @@ function set_tweaks_metas_pipes_pipeline($tweaks_pipelines, $pipeline) {
 	}
 	$tweaks_metas_pipes[$pipeline] = $code;
 	tweak_log("set_tweaks_metas_pipes_pipeline($pipeline) : strlen=".strlen($code));
-	$fichier_dest = sous_repertoire(_DIR_VAR, "tweak-spip") . "$pipeline.php";
+	$fichier_dest = sous_repertoire(_DIR_TMP, "tweak-spip") . "$pipeline.php";
 	ecrire_fichier($fichier_dest, "<?php\n// Code de contrôle pour le plugin Tweak-SPIP\n$code?".'>');
 }
 
