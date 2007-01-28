@@ -1,0 +1,106 @@
+<h2 class="structure"><:Agenda:></h2>
+<style>
+.agendaBold {
+	font-weight: bold;
+	font-size:108%;
+}
+.agendaThisDay { 
+/*	background-color: #FFFFDD; */
+	border:2px solid #000000; !important
+} 
+</style>
+<?php
+preg_match(',^([0-9]{4})(-[0-9]{2})?(-[0-9]{2})?,', '#DATE_REQUEST_SURE', $matches);
+$Y = sprintf('%04d', $y=$matches[1]);
+$M = sprintf('%02d', $m=-$matches[2]);
+$D = sprintf('%02d', $j=-$matches[3]);
+
+$Ymd = intval("$Y$M$D"); $Ym = "$Y$M";
+//$dmY = isset($GLOBALS['jour'])?"$D$M$Y":date('dmY',time());
+$dmY = date('dmY',time());
+
+$M2 = intval(date('m', mktime(0, 0, 0, $M+1, 1, $Y)));
+$M0 = intval(date('m',mktime(0, 0, 0, $M-1, 1, $Y)));
+
+?>
+
+ <BOUCLE_evenements(EVENEMENTS){par date}{statut=publie}{0,500}><?php
+               
+//	$date = ereg_replace("^([0-9]{4})-([0-9]{2})-([0-9]{2}).*$", "\\1\\2\\3", '#DATE_DEBUT');
+//	$datetot = ereg_replace("^([0-9]{4})-([0-9]{2})-([0-9]{2}).*$", "\\1\\2\\3", '#DATE_FIN');
+	$date = [(#DATE_DEBUT|affdate{'Ymd'})];
+	$datetot = [(#DATE_FIN|affdate{'Ymd'})];
+	$az=substr($date,0,4);
+	$mz=substr($date,4,2);
+	$jz=substr($date,6,2);
+
+//
+//le compteur de jour
+//
+$nbr_jrs = 1 + floor((strtotime("#DATE_FIN")-strtotime("#DATE_DEBUT")) / (24*3600));       
+$texte=($nbr_jrs == "0" OR $nbr_jrs == "1")?"":" ($nbr_jrs <:date_jours:>)";
+
+if($datetot >= date("Ymd", mktime(0, 0, 0, $M-1, 1, $Y)) && $date <= date("Ymd", mktime(0, 0, 0, $M+1, 1, $Y))) {
+	if (!isset($events[$date])) $events[$date] = array();
+	$events[$date][] = array('link' => '#URL_ARTICLE', 'title' => '[(#TITRE|texte_script)]', 'logo' => '<img src="#URL_SITE_SPIP/IMG/[(#LOGO_ARTICLE_RUBRIQUE|fichier)]" />', 'desc' => '[(#DESCRIPTIF|supprimer_tags|attribut_html)]');
+	while ($nbr_jrs>1) {
+		$nbr_jrs--;
+		$datezzz=date("Ymd",mktime(0, 0, 0, $mz,$jz+$nbr_jrs,$az));
+		$events[$datezzz][] = array('link' => '#URL_ARTICLE', 'title' => '[(#TITRE|texte_script)]'.$texte, 'logo' => '<img src="#URL_SITE_SPIP/IMG/[(#LOGO_ARTICLE_RUBRIQUE|fichier)]" />', 'desc' => '[(#DESCRIPTIF|supprimer_tags|attribut_html)]');
+	}
+} 
+?>
+</BOUCLE_evenements>
+
+<ul>
+<li><b><center>
+	[<a	style="display:inline; padding:0; background-image:none; font-weight:normal"
+		href="(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE_REQUEST_SURE|Agenda_moisdecal{-1,'Y-m'})]})"
+		title="[(#DATE_REQUEST_SURE|Agenda_moisdecal{-1,'Y-m'}|affdate_mois_annee)]">&#171;</a>][
+	<a	style="display:inline; padding:0; background-image:none;; font-weight:normal"
+		href="[(#URL_PAGE{evenements}|parametre_url{#ENV{var_date},[(#DATE_REQUEST_SURE|Agenda_moisdecal{0,'Y-m'})]})]"
+		title="[<:minicalalter_tout_voir_1:> (#DATE_REQUEST_SURE|affdate_mois_annee)]">(#DATE_REQUEST_SURE|affdate_mois_annee)</a>][
+	<a	style="display:inline; padding:0; background-image:none;; font-weight:normal"
+		href="(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE_REQUEST_SURE|Agenda_moisdecal{1,'Y-m'})]})"
+		title="[(#DATE_REQUEST_SURE|Agenda_moisdecal{1,'Y-m'}|affdate_mois_annee)]">&#187;</a>]
+</center></b>
+</li></ul>
+<div align="center" style="margin:0px 0px 10px 0px; font-size:78%">
+<table summary="<:icone_calendrier:>" cellpadding="0" cellspacing="2" align="center" class="agenda" width=100%>
+		<thead>
+			<tr>
+				<th scope="col"><abbr title="<:date_jour_2:>"><:date_jour_2|spip_substr{0,1}:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_3:>"><:date_jour_3|spip_substr{0,1}:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_4:>"><:date_jour_4|spip_substr{0,1}:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_5:>"><:date_jour_5|spip_substr{0,1}:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_6:>"><:date_jour_6|spip_substr{0,1}:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_7:>"><:date_jour_7|spip_substr{0,1}:></abbr></th>
+				<th scope="col"><abbr title="<:date_jour_1:>"><:date_jour_1|spip_substr{0,1}:></abbr></th>
+			</tr>
+		</thead>
+<tbody>
+<?php
+	// Calcul du premier jour à afficher
+	$TempD = 1; while (date('w', $Time = mktime(0, 0, 0, $M, $TempD--, $Y)) != 1); $TempD++;
+	
+	while((date('m', $Time) == $M0) OR (date('m', $Time) == $M) OR ((date('m', $Time) == $M2) AND (date('w', $Time) != 1))) {
+		if(date('w', $Time) == 1) { echo "<tr>"; }
+		if(date('m', $Time)-$M) { $Class = 'agenda'.(date('dmY', $Time) == $dmY ? 'ThisDay' : '').'NotThisMonth'; }
+		 else { $Class ='agenda'.(date('dmY', $Time) == $dmY ? 'ThisDay' : 'ThisMonth'); }
+		$date=date('Ymd', $Time);
+		if (isset($events[$date])) $Class.=' agendaBold'; 
+		echo "\n<td width=\"14%\" align=\"center\" class=\"$Class\">";
+		if (isset($events[$date])) {
+			if (count($events[$date]) == 1) 
+				{ echo '<a href="'.$events[$date][0]['link'].'" title="'.$events[$date][0]['title'].'" style="font-size:95%">'; }
+			  else { echo '<a href="'.url_evenements($TempD, $M, $Y).'" title="'._T('minicalalter_evenements', array('evts'=>count($events[$date]))).'" style="font-size:95%">'; }
+			echo date('j', $Time).'</a>';
+		} else {echo date('j', $Time);}
+		echo '</td>';
+		$Time = mktime(0, 0, 0, $M, ++$TempD, $Y);
+	}
+?>
+</tr></tbody></table>
+</div>
+
+         

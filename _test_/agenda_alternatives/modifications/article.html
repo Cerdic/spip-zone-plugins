@@ -1,0 +1,251 @@
+#CACHE{7200}
+<BOUCLE_article_principal(ARTICLES) {id_article} {lang_select} {doublons} >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title>[(#TITRE|textebrut)] - [[(#NOM_SITE_SPIP|textebrut)]]</title>
+		<INCLURE{fond=inc/inc-meta}{lang}{id_article}>
+		<INCLURE{fond=styles}{lang}>
+	
+</head>
+<body dir="#LANG_DIR" class="#LANG article sect#ID_SECTEUR <BOUCLE_rubriques_body(HIERARCHIE){id_article}{" "}>rub#ID_RUBRIQUE</BOUCLE_rubriques_body> art#ID_ARTICLE">
+<div id="page" class="article">
+<!-- *****************************************************************
+	Bandeau, titre du site et menu langue
+	Header and main menu (top and right) 
+    ************************************************************* -->
+	
+<INCLURE{fond=inc/inc-bandeau}{lang}{id_article}>
+
+
+<!-- *****************************************************************
+	Contenu principal (centre)
+	Main content (center) 
+    ************************************************************* -->
+
+    <div id="bloc-contenu">
+      <div class="article-info-rubrique">
+        <h5><B_rubriques_chemin>
+            <BOUCLE_rubriques_chemin(HIERARCHIE){id_article}{" <b class='separateur'>&gt;</b> "}>
+              <a href="#URL_SITE_SPIP/#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+            </BOUCLE_rubriques_chemin>
+        </h5>
+
+        <B_traductions>
+            <div class="petit-info" style="text-align:right"><:titre_langue_trad_article:> 
+            <BOUCLE_traductions(ARTICLES){traduction}{exclus}{"<br />"}>
+              [<div dir="#LANG_DIR">(#LANG|traduire_nom_langue) : <a href="#URL_SITE_SPIP/spip.php?action=cookie&amp;url=#URL_SITE_SPIP%2F#URL_ARTICLE&amp;var_lang=#LANG" dir="#LANG_DIR">][(#TITRE|supprimer_numero)</a></div>]
+            </BOUCLE_traductions>
+            </div>
+        </B_traductions>
+        
+        <div class="ligne-debut"></div><!-- ligne-debut -->
+      </div><!-- article-info-rubrique -->
+      
+      <div class="cartouche">
+			[<span style="float:right;">(#LOGO_ARTICLE||reduire_image{160,0})</span>]
+			[<div class="surtitre">(#SURTITRE)</div>]
+			<h1 class="titre-article">[(#TITRE|supprimer_numero)]</h1>
+            [<div class="sous-titre">(#SOUSTITRE)</div>]
+				<p class="detail">
+				[(#DATE|nom_jour)] [(#DATE|affdate)]
+				<B_auteurs_recents><:par_auteur:>
+				<BOUCLE_auteurs_recents(AUTEURS) {id_article} {", "}><a href="#URL_SITE_SPIP/#URL_AUTEUR">#NOM</a>
+				</BOUCLE_auteurs_recents>
+				</p>
+				
+      </div><!-- cartouche -->
+
+
+		[<div class="chapo">(#CHAPO|reduire_image{440,0})</div>]
+		[<div id="sommaire">
+			<h4><:icone_brouteur:></h4> [(#REM) = "Navigation rapide" on aurait prefere "Sommaire", mais pas de traduction ]
+			(#TEXTE*|sommaire_article|propre)
+		</div>]
+		[<div class="texte">(#TEXTE*|decouper_en_page{#ID_ARTICLE}|propre|reduire_image{440,0})</div>]
+		[<div class="ps">(#PS)</div>]
+		[<div class="notes">(#NOTES)</div>]
+		[<div class="chapo"><:voir_en_ligne:> : <a href="(#URL_SITE)">[(#NOM_SITE|sinon{#URL_SITE})]</a></div>]
+
+		<!-- Documents joints et portfolio d'images -->
+<BOUCLE_afficher_document(DOCUMENTS){id_document}{mode=document}{fichier==(png|jpg|gif)$}{doublons}>
+<hr />
+
+
+[<h3 class="spip">(#TITRE)</h3>]
+<div>[<a href="[(#URL_DOCUMENT|abs_url)]">(#FICHIER|reduire_image{440,0}|inserer_attribut{alt,[(#TITRE|supprimer_numero|couper{80}|texte_backend)]}) </a>]</div>
+[<div>(#DESCRIPTIF)</div>]
+</BOUCLE_afficher_document>
+
+<B_documents_portfolio>
+<div><hr />
+<BOUCLE_documents_portfolio(DOCUMENTS){id_article}{mode=document}{fichier==(png|jpg|gif)$}{doublons}>
+	<div style="float: left; padding: 2px;">
+	[<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{?}|?{&amp;,?})]id_document=#ID_DOCUMENT">(#LOGO_DOCUMENT{0,60})</a>]
+	[(#REM) pas besoin du titre et descriptif sous les vignettes
+[<div style="clear: both;"><b>(#TITRE)</b></div>][<div style="clear: both;">(#DESCRIPTIF)</div>]
+	]
+	</div>
+</BOUCLE_documents_portfolio>
+</div>
+<div style="clear: both;"></div>
+</B_documents_portfolio>
+
+<B_documents_joints>
+<div><hr />
+<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {doublons}>
+	<div style="float: left;">
+	[(#LOGO_DOCUMENT|#URL_DOCUMENT)][<div style="clear: both;"><b>(#TITRE)</b></div>][<div style="clear: both;">(#DESCRIPTIF)</div>]
+	</div>
+</BOUCLE_documents_joints>
+</div>
+<div style="clear: both;"></div>
+</B_documents_joints>
+
+		<br />
+			[(#REM) Petition :
+			La petition ayant une PAGINATION il faut absolument lui passer SELF en argument. ]
+			[ #REM Conserver cet invalideur : (#PETITION|?{'',''}) ]
+			<INCLURE{fond=inc-petition}{id_article}{self=#SELF}>
+		
+		<!-- Début Patrice -->
+			[(#MODELE{evenements_article}{id_article}{lang}{self=#SELF})]
+		<!-- Fin Patrice -->
+
+		<!-- Derniers articles des auteurs de l'article -->
+		<B_auteurs>
+			<div class="ps">
+				<BOUCLE_auteurs(AUTEURS) {id_article} {par nom}>
+				<h4><a href="#URL_AUTEUR" title="#NOM">#NOM</a></h4>	
+					<B_articles_auteur>
+					<h3><em><:articles_auteur:></em></h3>
+					<ul>
+						<BOUCLE_articles_auteur(ARTICLES) {id_auteur} {par date} {inverse} {exclus}{0,5}>
+						<li>	
+							<a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
+						</li>
+							</BOUCLE_articles_auteur>
+						<li><a href="#URL_AUTEUR" title="<:suite:>">[...]</a></li>
+					</ul>
+					</B_articles_auteur>
+				</BOUCLE_auteurs>
+			</div><!-- notes chapo -->
+		</B_auteurs>
+
+		<!-- Mots cles -->
+		<B_mots>
+		<div class="ps">
+			<h2><:mots_clefs:></h2>
+			<ul title="<:mots_clefs:>">
+				<BOUCLE_mots(MOTS) {id_article} {par titre}>
+					<li>
+							<a href="#URL_MOT" title="<:info_articles_lies_mot:>">[(#TITRE|supprimer_numero)]</a>
+						<B_articles_mots>
+						<ul>
+							<BOUCLE_articles_mots(ARTICLES) {id_mot} {par date} {inverse} {0,5}>
+								<li>
+									<a href="#URL_ARTICLE" title="[(#DESCRIPTIF|textebrut|entites_html)]">[(#TITRE|supprimer_numero)]</a>
+								</li>
+							</BOUCLE_articles_mots>
+						</ul>
+						</B_articles_mots>						
+					</li>
+				</BOUCLE_mots>
+			</ul>
+		</div><!-- menu -->
+		</B_mots>
+
+		<!-- Forums -->
+		[<div class="forum-repondre">
+			<h5><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></h5>
+		</div>]
+		<B_forums>
+		<h2 class="structure"><:Forum:></h2>
+		<ul class="forum-total">
+			<BOUCLE_forums(FORUMS){id_article}{par date}{inverse}>
+				<li>
+					<div class="forum-fil">
+						<div class="forum">
+							<a name="forum#ID_FORUM"></a>
+							<div class="forum-chapo">
+								<div class="forum-titre">[(#TITRE|supprimer_numero)]</div>
+								[(#DATE|affdate)][, <:par_auteur:> <strong>(#NOM)</strong>]
+							</div><!-- forum-chapo -->
+							<div class="forum-item">
+								#TEXTE
+								[<div class="forum-titre"><a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
+								[<div class="forum-repondre-message"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:></a></div>]
+							</div><!-- forum-item -->
+						</div><!-- forum -->
+						<B_forums_fils>
+						<ul>
+						<BOUCLE_forums_fils(FORUMS){id_parent}{par date}>
+
+							<li>
+								<div class="forum">
+									<a name="forum#ID_FORUM"></a>
+									<div class="forum-chapo">
+										<div class="forum-titre">[(#TITRE|supprimer_numero)]</div>
+										[(#DATE|affdate)][, <:par_auteur:> <strong>(#NOM)</strong>]
+									</div><!-- forum-chapo -->
+									<div class="forum-item">
+										#TEXTE
+										[<div class="forum-titre"><a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
+										[<div class="forum-repondre-message"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:></a></div>]
+									</div><!-- forum-item -->
+								</div><!-- forum -->
+							<BOUCLE_Forums_Boucle(boucle_forums_fils)></BOUCLE_Forums_Boucle>
+								</li>
+							</BOUCLE_forums_fils>
+						</ul>
+						</B_forums_fils><!-- forum-fil -->
+					</div>
+				</li>
+			</BOUCLE_forums>
+		</ul><!-- forum-total -->
+		</B_forums>
+	</div><!-- bloc-contenu -->
+	
+<!-- *****************************************************************
+	Menus contextuels (droite)
+	Contextual menus (right) 
+    ************************************************************* -->
+    <div id="encart"> 
+      <INCLURE{fond=inc/inc-annonces}{lang}>
+		<!-- Derniers articles dans la meme rubrique -->
+		<B_articles_rubrique>
+			<div class="menu">
+			<h2 class="structure"><:articles_recents:></h2>
+				#ANCRE_PAGINATION
+				<ul>
+					<li>
+						<a href="#URL_SITE_SPIP/#URL_RUBRIQUE"><:meme_rubrique:></a>
+						<ul>
+							<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date} {inverse} {doublons} {id_article != #ID_ARTICLE} {pagination 15}>
+							<li>
+								<a href="#URL_SITE_SPIP/#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
+							</li>
+							</BOUCLE_articles_rubrique>
+						</ul>
+					</li>
+    <!--[if lte IE 6]><style>#encart a{height:1em;}#encart li{height:1em;float:left;clear:both;width:100%}</style><![endif]-->
+    <!--[if IE 6]><style>#encart li{clear:none;}</style><![endif]-->
+				</ul>
+				#PAGINATION
+			</div><!-- menu -->
+		</B_articles_rubrique>
+
+	</div><!-- encart -->
+	
+<BOUCLE_rub_en_cours(ARTICLES){id_article}{lang_select}>
+<INCLURE{fond=inc/inc-menu}{lang}{id_rubrique}>
+</BOUCLE_rub_en_cours>
+<INCLURE{fond=inc//inc-bas}{lang}{id_article}>
+</div><!-- page -->
+
+</body>
+</html>
+</BOUCLE_article_principal>
+<INCLURE{fond=404}{lang}{id_article}>
+<//B_article_principal>

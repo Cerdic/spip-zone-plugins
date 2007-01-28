@@ -1,0 +1,136 @@
+<!-- menu permanent de navigation - permanent navigation -->
+<div id="navigation">
+    <h2 class="structure"><:navigation:></h2>
+[(#REM) *********************************************************
+	Menu de navigation principal - liens statiques
+	Main navigation - static links 
+    ************************************************************* ]
+<INCLURE{fond=inc/inc-menu-principal}>
+
+[(#REM) *********************************************************
+	Menu rubriques DEPLIANT dynamique
+	voir: http://spip-contrib.net/ecrire/articles.php3?id_article=913
+	Dynamic sections menu 
+    ************************************************************* ]
+<div class="menu" id="menu-rubriques">
+<!-- Début Patrice -->
+	[(#MODELE{rubrique_calendrier}{self=#SELF}{var_date=archives}{date=#ENV{archives,#DATE}}{lang}{id_rubrique})]
+<!-- Fin Patrice -->
+<BOUCLE_rub_menu(RUBRIQUES){id_rubrique}>
+<BOUCLE_filles(RUBRIQUES){id_parent}{doublons filles}></BOUCLE_filles>
+[(#REM) les rubriques filles de la rubrique en cours sont mémorisées dans {doublons filles} ]
+[(#REM) les soeurs et tantes jusqu'aux rubriques racines sont mémorisées dans {doublons parents} ]
+   <BOUCLE_hierarchie_courante(HIERARCHIE){id_rubrique} {tout}>
+        <BOUCLE_parents(RUBRIQUES){meme_parent} {doublons parents} ></BOUCLE_parents>
+   </BOUCLE_hierarchie_courante>
+[(#REM) L'ensemble des rubriques contenues dans {doublons filles} et {doublons parents} représente
+l'ensembles des rubriques à afficher  
+
+		 Toutes les rubriques qui ne doivent pas être affichées sont exclues dans la  boucle suivante
+ qui liste toutes les rubriques du site - {doublons filles} et {doublons parents} le resultat est stocké dans {doublons exclus} ]
+<BOUCLE_tout(RUBRIQUES){tout}{doublons parents}{doublons filles}{doublons exclus}></BOUCLE_tout>
+
+[(#REM) boucle principale d'affichage pour squelettes rubriques, articles, brèves...
+On limite l'affichage du plan aux seules rubriques utiles, les autres sont exclues par {doublons exclus} ]
+	<h3 class="structure"><:rubriques:></h3>
+	<ul>
+	<BOUCLE_RubExclues_sect(RUBRIQUES){titre_mot=agenda}{doublons}></BOUCLE_RubExclues_sect>
+
+	<BOUCLE_secteurs2(RUBRIQUES){racine}{lang}{par num titre}{doublons} >
+		<li>
+				<a class="lien[(#EXPOSER)]" href="#URL_RUBRIQUE" [title="(#INTRODUCTION|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
+		<B_art_secteur>
+		[(#REM) debut BOUCLE art_secteur pour afficher dans les articles des rubriques racine (secteur) ]
+			<ul>
+		<BOUCLE_art_secteur(ARTICLES){id_rubrique}{par num titre}{lang}>
+				<li>
+					<a class="lien[(#EXPOSER)] article" href="#URL_ARTICLE" [title="(#INTRODUCTION|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
+				</li>
+		</BOUCLE_art_secteur>
+			</ul>
+		</B_art_secteur>[(#REM) fin BOUCLE art_secteur  ]
+		<B_sousrub2>
+			<ul>
+		<BOUCLE_sousrub2(RUBRIQUES){id_parent}{lang}{par num titre}{doublons exclus}>
+				<li>
+					<a class="lien[(#EXPOSER)]" href="#URL_RUBRIQUE" [title="(#INTRODUCTION|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
+		<BOUCLE_sousousrub2(boucle_sousrub2)></BOUCLE_sousousrub2>
+				</li>
+		</BOUCLE_sousrub2>
+			</ul>
+		</B_sousrub2>
+		</li>
+	</BOUCLE_secteurs2>
+    <!--[if lte IE 6]><style>#menu-rubriques a{height:1em;}#menu-rubriques li{height:1em;float:left;clear:both;width:100%}</style><![endif]-->
+    <!--[if IE 6]><style>#menu-rubriques li{clear:none;}</style><![endif]-->
+	</ul>
+ </BOUCLE_rub_menu>
+
+[(#REM) boucle d'affichage pour les autres squelettes : sommaire, plan, recherche, resume, etc... 
+Ici, on affiche 2 niveaux de rubriques a partir de la racine pour la langue du contexte.Si on ne veut afficher qu'un seul niveau, pour ces , on efface la boucle sousrub_sommaire.
+Pour les sites multilingues, on n'affiche pas les autres langues; 
+si on veut afficher uniquement le premier niveau (secteur) des autres langues, on efface lang dans BOUCLE_sommaire). ]
+
+<BOUCLE_RubExclues_som(RUBRIQUES){titre_mot=agenda}{doublons}></BOUCLE_RubExclues_som>
+<B_sommaire>
+	<h3 class="structure"><:rubriques:></h3>
+	<ul>
+<BOUCLE_sommaire(RUBRIQUES){racine}{lang}{par num titre} {doublons}>
+		<li>
+			<a class="lien[(#EXPOSER)]" href="#URL_RUBRIQUE" [title="(#INTRODUCTION|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
+<B_art_sommaire><!-- debut BOUCLE art_somm pour afficher des articles dans les rubriques racine (secteur) -->
+			<ul>
+		<BOUCLE_art_sommaire(ARTICLES){id_rubrique}{par num titre}{lang}>
+				<li>
+					<a class="lien[(#EXPOSER)] article" href="#URL_ARTICLE" [title="(#INTRODUCTION|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
+				</li>
+		</BOUCLE_art_sommaire>
+			</ul>
+</B_art_sommaire>
+		<B_sousrub_sommaire>[(#REM) pour afficher dans le menu 2 niveaux de rubriques ]
+			<ul>
+		<BOUCLE_sousrub_sommaire(RUBRIQUES){id_parent}{par num titre}{lang}>
+				<li>
+					<a class="lien[(#EXPOSER)]" href="#URL_RUBRIQUE" [title="(#INTRODUCTION|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
+				</li>
+		</BOUCLE_sousrub_sommaire>
+			</ul>
+		</B_sousrub_sommaire>
+		</li>
+</BOUCLE_sommaire>
+    <!--[if lte IE 6]><style>#menu-rubriques a{height:1em;}#menu-rubriques li{height:1em;float:left;clear:both;width:100%}</style><![endif]-->
+    <!--[if IE 6]><style>##menu-rubriques li{clear:none;}</style><![endif]-->
+	</ul>
+</B_sommaire>
+
+<//B_rub_menu>
+</div>[(#REM) fin menu ]
+
+[(#REM) boucle d'affichage d'un agenda ou calendrier d'evenements. 
+Pour s'afficher dans ce menu, une rubrique doit se voir attribuer le mot-cle "agenda". Pour s'afficher dans l'agenda, les articles doivent, en plus d'une date de publication, se voir attribuer une "Date de publication anterieure" qui constituera la date de l'evenement. ]
+<BOUCLE_agenda(RUBRIQUES){racine}{lang}{titre_mot=agenda}{par num titre}>
+<B_art_agenda>
+<div class="menu" id="menu-agenda">
+	<h3 class="structure"><:icone_agenda:></h3>
+
+	<ul>
+		<li>
+			<a class="lien[(#EXPOSER)]" href="#URL_PAGE{agenda,id_rubrique=#ID_RUBRIQUE}" [title="(#INTRODUCTION|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
+			<ul>
+		<BOUCLE_art_agenda(ARTICLES){branche}{par date_redac}{age_redac < 1}{0,5}{lang}>
+				<li>[<span>(#DATE_REDAC|affdate)</span>]
+					<a class="lien[(#EXPOSER)] article" href="#URL_ARTICLE" [title="(#INTRODUCTION|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a>
+
+				</li>
+		</BOUCLE_art_agenda>
+			</ul>
+		</li>
+    <!--[if lte IE 6]><style>#menu-agenda a{height:1em;}#menu-agenda li{height:1em;float:left;clear:both;width:100%}</style><![endif]-->
+    <!--[if IE 6]><style>##menu-agenda li{clear:none;}</style><![endif]-->
+	</ul>
+</div>
+</B_art_agenda>
+</BOUCLE_agenda>
+
+
+</div>[(#REM) navigation ]

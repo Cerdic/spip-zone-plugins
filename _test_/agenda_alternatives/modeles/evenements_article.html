@@ -1,0 +1,29 @@
+<B_evenements_article>
+	<div class="ps">
+	<BOUCLE_evenements_article(EVENEMENTS){id_article}{0,1}>
+		<!-- Les évènements prochains : -->
+		<B_agenda_prochain>
+			<h3><em><:minicalalter_evenements_prochains_article:></em></h3>
+			<ul>
+			<BOUCLE_agenda_prochain(EVENEMENTS){age_fin<0}{par date}{id_article}>
+			<li>[(#TITRE|supprimer_numero)][ - (#DESCRIPTIF)]
+			[<div class="detail">(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})[ - (#LIEU)]</div>]
+			</li>
+			</BOUCLE_agenda_prochain>
+			</ul>
+		</B_agenda_prochain>
+
+		<!-- Les évènements passés : -->
+		<B_agenda_passes>
+			<h3><em><:minicalalter_evenements_passes_article:></em></h3>
+			<ul>
+			<BOUCLE_agenda_passes(EVENEMENTS){age>=0}{par date}{id_article}{inverse}>
+			<li>[(#TITRE|supprimer_numero)][ - (#DESCRIPTIF)]
+			[<div class="detail">(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})[ - (#LIEU)]</div>]
+			</li>
+			</BOUCLE_agenda_passes>
+			</ul>
+		</B_agenda_passes>
+	</BOUCLE_evenements_article>
+	</div>
+</B_evenements_article>

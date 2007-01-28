@@ -1,0 +1,14 @@
+[(#REM) Menu de navigation laterale ]
+
+<div class="menu">
+<h2 class="structure"><:Agenda:></h2>
+
+	[(#MODELE{rubrique_calendrier}
+		{self=#URL_PAGE{minicalalter_demo}}
+		{var_date=archives}
+		{date=#ENV{archives,#DATE}}
+		{lang}
+		{id_rubrique}
+	)]
+</div><!-- menu -->
+

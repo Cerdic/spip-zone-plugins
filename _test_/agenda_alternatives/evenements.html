@@ -1,0 +1,173 @@
+#CACHE{7200}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!--
+	Gestion des evenements pour Alternatives
+	Patrice Vanneufville
+	patrice!.!vanneufville!@!laposte!.!net
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title>[[(#NOM_SITE_SPIP|textebrut)]] : <:icone_agenda:></title>
+	<INCLURE{fond=page}{fond=styles}{lang}>
+	<INCLURE{fond=inc/inc-meta}{lang}>
+</head>
+
+<body dir="#LANG_DIR" class="#LANG resume">
+<div id="page">
+
+<!-- *****************************************************************
+	Bandeau, titre du site et menu langue
+	Header and main menu (top and right) 
+    ************************************************************* -->
+	
+<INCLURE{fond=inc/inc-bandeau}{lang}>
+
+<!-- *****************************************************************
+	Contenu principal (centre)
+	Main content (center) 
+    ************************************************************* -->
+	<div id="bloc-contenu">
+<!--
+<div class="edito">
+<h3 class="edito-titre"><:icone_agenda:></h3><img src="#CHEMIN{img_pack/agenda-48.png}" align="right" class="spip_logos format_png" />
+<div class="chapo"><:minicalalter_info_evenements:></div>
+</div>
+-->
+<img src="#CHEMIN{img_pack/agenda-48.png}" align="right" class="spip_logos format_png" />
+	<div class="cartouche">
+		<h2><:icone_agenda:></h2>
+	</div>
+  <div class="chapo"><span style="font-style: italic; "><:minicalalter_info_evenements:></span></div>
+
+ <style>
+/* Espaceur de blocs */
+.nettoie { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
+</style>
+
+  <?php
+
+preg_match(',^([0-9]{4})(-[0-9]{2})?(-[0-9]{2})?,', '#DATE_REQUEST', $matches);
+$Y = sprintf('%04d', $y=intval($matches[1]));
+$M = sprintf('%02d', $m=-intval($matches[2]));
+$D = sprintf('%02d', $j=-intval($matches[3]));
+$Ymd = intval("$Y$M$D"); $Ym = "$Y$M";
+
+if ($y && $m) if ($j){ ?>
+		<!-- Les evenements du jour : -->
+		<B_agenda_jour>
+		<div class="cartouche">
+		<h3><?=_T('minicalalter_evenements_jour', array('day_month_year'=>'[(#DATE_REQUEST|affdate)]'))?></h3>
+		<table border="0" cellpadding="0">
+			<BOUCLE_agenda_jour(EVENEMENTS){par date}{statut=publie}> <?php 
+			if (($Ymd <= [(#DATE_FIN|affdate{'Ymd'})]) && ($Ymd >= [(#DATE_DEBUT|affdate{'Ymd'})])) {	?>
+				<tr valign="middle">[<td>(#LOGO_RUBRIQUE|#URL_RUBRIQUE|image_reduire{50,50})</td>]
+				<td>[<p class="surtitre">(#SURTITRE)</p>]
+				<h3><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a></h3>
+				[<div class="detail">(#DESCRIPTIF)<br /></div>]
+				[<div class="detail">(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})[ - (#LIEU)]</div>] 
+				</td></tr>
+			<?php } ?>
+			</BOUCLE_agenda_jour>
+		</table>
+		</div>
+		</B_agenda_jour> 
+<?php } else { ?>
+		<!-- Les evenements du mois : -->
+		<B_agenda_mois>
+		<div class="cartouche">
+		<h3><?=_T('minicalalter_evenements_mois', array('month_year'=>'[(#DATE_REQUEST|affdate_mois_annee)]'))?></h3>
+		<!-- cette boucle permet d'afficher les attributs des evenements -->
+		<table border="0" cellpadding="0">
+			<BOUCLE_agenda_mois(EVENEMENTS){par date}{statut=publie}> <?php 
+			if (($Ym.'00' <= [(#DATE_FIN|affdate{'Ymd'})]) && ($Ym.'31' >= [(#DATE_DEBUT|affdate{'Ymd'})])) {	?>
+				<tr valign="middle">[<td>(#LOGO_RUBRIQUE|#URL_RUBRIQUE|image_reduire{50,50})</td>]
+				<td>[<p class="surtitre">(#SURTITRE)</p>]
+				<h3><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a></h3>
+				[<div class="detail">(#DESCRIPTIF)<br /></div>]
+				[<div class="detail">(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})[ - (#LIEU)]</div>] 
+				</td></tr>
+			<?php } ?>
+			</BOUCLE_agenda_mois>
+		</table>
+		</div>
+		</B_agenda_mois><?php 
+} 
+?>
+<?php if(true) { ?>
+		<!-- Les evenements prochains : -->
+			<B_agenda_prochain>
+		<div class="cartouche">
+			<h3><:minicalalter_evenements_prochains:></h3>
+			#ANCRE_PAGINATION
+			<table border="0" cellpadding="0">
+				<BOUCLE_agenda_prochain(EVENEMENTS){age_fin<0}{par date}{statut=publie}{pagination}>
+				<tr valign="middle">[<td>(#LOGO_RUBRIQUE|#URL_RUBRIQUE|image_reduire{50,50})</td>]
+				<td>[<p class="surtitre">(#SURTITRE)</p>]
+				<h3><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a></h3>
+				[<div class="detail">(#DESCRIPTIF)<br /></div>]
+				[<div class="detail">(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})[ - (#LIEU)]</div>] 
+				</td></tr>
+				</BOUCLE_agenda_prochain>
+			</table>
+			[<br />#GRAND_TOTAL &eacute;v&egrave;nements : (#PAGINATION)]
+		</div>
+			</B_agenda_prochain>
+		<!-- Les evenements passes : -->
+			<B_agenda_passes>
+		<div class="cartouche">
+			<h3><:minicalalter_evenements_passes:></h3>
+			#ANCRE_PAGINATION
+			<table border="0" cellpadding="0">
+				<BOUCLE_agenda_passes(EVENEMENTS){age>=0}{par date}{statut=publie}{inverse}{pagination}>
+				<tr valign="middle">[<td>(#LOGO_RUBRIQUE|#URL_RUBRIQUE|image_reduire{50,50})</td>]
+				<td>[<p class="surtitre">(#SURTITRE)</p>]
+				<h3><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero)]</a></h3>
+				[<div class="detail">(#DESCRIPTIF)<br /></div>]
+				[<div class="detail">(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})[ - (#LIEU)]</div>] 
+				</td></tr>
+				</BOUCLE_agenda_passes>
+			</table>
+			[<br />#GRAND_TOTAL &eacute;v&egrave;nements : (#PAGINATION)]
+		</div>
+			</B_agenda_passes>
+<?php } ?>
+	</div><!-- bloc-contenu -->
+	
+<!-- *****************************************************************
+	Menus contextuels (droite)
+	Contextual menus (right) 
+    ************************************************************* -->
+  <div id="encart">  
+<INCLURE{fond=inc/inc-annonces}{lang}>
+
+<INCLURE{fond=inc/inc-breves}{lang}>
+
+<INCLURE{fond=inc/inc-syndic}{lang}>
+
+    <!-- Liens des forums -->
+    <B_forums_liens>
+    <div class="menu">
+    <h2 class="structure"><:messages_recents:></h2>
+      <ul>
+        <li><b><:derniers_commentaires:></b>
+          <ul>
+            <BOUCLE_forums_liens(FORUMS){plat}{par date}{inverse}{0,15}>
+            <li>
+                [<span>(#DATE|affdate)</span>]
+               <a href="#URL_SITE_SPIP/#URL_FORUM">[(#TITRE|supprimer_numero)]</a>
+            </li>
+            </BOUCLE_forums_liens>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- menu -->
+    </B_forums_liens>
+    
+  </div><!-- encart -->
+<INCLURE{fond=inc/inc-menu}{lang}>
+<INCLURE{fond=inc/inc-bas}{lang}></div><!-- page -->
+
+</body>
+</html>  
