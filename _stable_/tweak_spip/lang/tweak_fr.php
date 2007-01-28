@@ -55,8 +55,8 @@ _ N&eacute;cessite le plugin {jQuery} ou une version de SPIP sup&eacute;rieure à
 _ La fonction SPIP utilis&eacute;e est : _T('un_texte', \$flux).
 _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans les fichiers de langue.",
 
-	'bellespuces:nom' => 'Belles puces',
-	'bellespuces:description'	=> 'Remplace les puces - (tiret) des articles par des puces -* (&lt;li>...)',
+	'pucesli:nom' => 'Belles puces',
+	'pucesli:description'	=> 'Remplace les puces - (tiret) des articles par des puces -* (&lt;li>&lt;ul>...&lt;/li>&lt;/ul>)',
 
 	'decoration:nom' => 'D&eacute;coration',
 	'decoration:description'	=> "7 nouveaux styles dans vos articles : <sc>capitales</sc>, <souligne>soulign&eacute;</souligne>, <barre>barr&eacute;</barre>, <dessus>dessus</dessus>, <clignote>clignote</clignote>, <surfluo>fluo</surfluo> et <surgris>gris&eacute;</surgris>. Utilisation :

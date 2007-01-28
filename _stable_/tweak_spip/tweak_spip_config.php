@@ -111,10 +111,10 @@ add_tweak( array(
 ));
 
 add_tweak( array(
-	'id'	=> 'bellespuces',
+	'id'	=> 'pucesli',
 	'auteur' 		=> '[J&eacute;r&ocirc;me Combaz->http://conseil-recherche-innovation.net/index.php/2000/07/08/72-jerome-combaz]',
 	'categorie'		=> 'typo',
-	'pipeline:pre_typo' => 'bellespuces_pre_typo',
+	'pipeline:pre_typo' => 'pucesli_pre_typo',
 ));	
 
 add_tweak( array(
