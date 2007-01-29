@@ -4,6 +4,8 @@
 	Gestion de documents
 	[it]
 	Gestione dei documenti
+	[es]
+	Gesti&oacute;n de los documentos
 	</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
@@ -20,6 +22,8 @@
 	Outils de gestion des documents : une page r&#233;capitulative de tous les documents.
 	[it]
 	Utility di gestione dei documenti : una pagina che mostra tutti i documenti.
+	[es]
+	Utilidad de gesti&oacute;n de los documentos: una p&aacute;gina que resume todos los documentos del sitio.
 	</multi>
 	</description>
 	<lien></lien> <!-- URI de documentation -->
