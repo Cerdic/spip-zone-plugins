@@ -53,6 +53,11 @@ function lienscontenus_generer_url_modele($id_objet)
     return find_in_path('modeles/'.$id_objet.'.html');
 }
 
+function lienscontenus_generer_url_modele_non_reconnu($id_objet)
+{
+    return '#';
+}
+
 function lienscontenus_verifier_si_existe($type_objet, $id_objet)
 {
     switch ($type_objet) {
