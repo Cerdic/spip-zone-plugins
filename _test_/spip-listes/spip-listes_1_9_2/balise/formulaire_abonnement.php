@@ -51,6 +51,7 @@ include_spip ("inc/acces");
 $oubli_pass = _request('oubli_pass');
 $email_oubli = _request('email_oubli');
 $type = _request('type');
+$desabo = _request('desabo');
 
 // recuperation de la config
 	
@@ -122,7 +123,7 @@ $inscription_visiteur ="";
 			list($affiche_formulaire,$reponse_formulaire)=formulaire_inscription(($type=="redac")? 'redac' : 'forum',$acces_membres,$formulaire);
 	}
 	else {
-		return "<br />\n"._T('pass_erreur')."<br />\n<p>"._T('pass_rien_a_faire_ici')."</p>";
+		spip_log(_T('pass_erreur')." "._T('pass_rien_a_faire_ici')."visiteurs non autorises spip listes");
 	}
 	
 
@@ -147,7 +148,7 @@ $inscription_visiteur ="";
 // inscrire les visiteurs dans l'espace public (statut 6forum) ou prive (statut nouveau->1comite)
 function formulaire_inscription($type,$acces_membres,$formulaire) {
 	
-	$request_uri = $GLOBALS["REQUEST_URI"];
+	$request_uri = $GLOBALS["REQUEST_URI"]."#abo";
 	global $mail_inscription_;
 	global $nom_inscription_;
 	global $list;
@@ -235,13 +236,14 @@ $cookie = creer_uniqid();
 			
 $type_abo = $GLOBALS['suppl_abo'] ;
 //verify suppl_abo is correct
-if($type_abo!="non" && $type_abo!="texte" && $type_abo!="html") return;
+if($desabo!="oui" && $type_abo!="texte" && $type_abo!="html") return;
 			
 $extras = bloog_extra_recup_saisie('auteurs');
 
 $result = spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, extra, cookie_oubli) ".
 				"VALUES ("._q($nom_inscription_).", "._q($mail_inscription_).","._q($login_).","._q($mdpass).","._q($statut).","._q($htpass).","._q($extras).","._q($cookie).")");
-			
+				spip_log("insert inscription : ->".$mail_inscription_);
+		
 // abonnement aux listes http://www.phpfrance.com/tutorials/index.php?page=2&id=13
 
 $result = spip_query("SELECT * FROM spip_auteurs WHERE email="._q($mail_inscription_));
@@ -262,8 +264,6 @@ $result = spip_query("SELECT * FROM spip_auteurs WHERE email="._q($mail_inscript
 
 			// abo
 
-
-
       ecrire_acces();
 
 	$nom_site_spip = lire_meta("nom_site");
@@ -271,7 +271,7 @@ $result = spip_query("SELECT * FROM spip_auteurs WHERE email="._q($mail_inscript
 
 	$message = _T('form_forum_message_auto')."\n\n"._T('spiplistes:bonjour')."\n";
 			
-		if ($type_abo=="non"){
+		if ($desabo=="oui"){
      	$message .= _T('spiplistes:mail_non', array('nom_site_spip' => $nom_site_spip))."\n";
       	}else if($type_abo=="texte" || $type_abo=="html")  {
 
@@ -293,11 +293,11 @@ $result = spip_query("SELECT * FROM spip_auteurs WHERE email="._q($mail_inscript
 
 
 	        if($i>1){
-		        $message .= "\n"._T('spiplistes:inscription_responses').$nom_site_spip._T('spiplistes:inscription_format').$type_abo."." ;
+		        $message .= "\n"._T('spiplistes:inscription_responses').$nom_site_spip."." ;
 		        $message .= "\n"._T('spiplistes:inscription_listes').$message_list ;
 	        } 
 	        if($i==1){
-		        $message .= "\n"._T('spiplistes:inscription_response').$nom_site_spip._T('spiplistes:inscription_format').$type_abo."." ;
+		        $message .= "\n"._T('spiplistes:inscription_response').$nom_site_spip."." ;
 		        $message .= "\n"._T('spiplistes:inscription_liste').$message_list ;
 	        } 
 	        if($i==0){
@@ -327,6 +327,7 @@ $result = spip_query("SELECT * FROM spip_auteurs WHERE email="._q($mail_inscript
 		if($abonne_existant != 'oui'){
 
 			if (envoyer_mail($mail_inscription_, "[$nom_site_spip] "._T('spiplistes:form_forum_identifiants'), $message)) {
+				spip_log("inscription : ->".$mail_inscription_);
 				if($acces_membres == 'oui'){
           		$reponse_formulaire =_T('form_forum_identifiant_mail');
        			}else{
