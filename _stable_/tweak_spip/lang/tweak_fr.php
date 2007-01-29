@@ -48,7 +48,7 @@ _ Infos : [->http://www.spip-contrib.net/Portrait-ou-Paysage]",
 
 	'desactiver_flash:nom' => 'D&eacute;sactiver les objects flash',
 	'desactiver_flash:description'	=> 'Supprime les objets flash des pages de votre site et les remplace par le contenu alternatif associ&eacute;.
-_ N&eacute;cessite le plugin {jQuery} ou une version de SPIP sup&eacute;rieure à 1.9.2.',
+_ N&eacute;cessite le plugin {jQuery} ou une version de SPIP sup&eacute;rieure &agrave; 1.9.2.',
 
 	'toutmulti:nom' => 'Tout multi',
 	'toutmulti:description'	=> "Introduit le raccourci &lt;:un_texte:&gt; pour introduire librement des blocs multi-langues dans un article.
@@ -88,7 +88,7 @@ _ Infos : [->http://www.spip-contrib.net/?article1561]",
 	'quota_cache:description'	=> "Modifier le quota r&eacute;serv&eacute; au cache. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique.<br>Valeur (en Mo) : %quota_cache%",
 
 	'dossier_squelettes:nom' => 'Dossier du squelette',
-	'dossier_squelettes:description'	=> "Modifier le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.<br>Dossier à utiliser : %dossier_squelettes%",
+	'dossier_squelettes:description'	=> "Modifier le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.<br>Dossier &agrave; utiliser : %dossier_squelettes%",
 
 
 /*

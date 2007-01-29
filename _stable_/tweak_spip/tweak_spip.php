@@ -21,14 +21,14 @@ if (!defined('_DIR_PLUGIN_TWEAK_SPIP')){
 /* FONCTIONS */
 /*************/
 
-// ajoute un tweak à $tweaks;
+// ajoute un tweak a $tweaks;
 function add_tweak($tableau) {
 	global $tweaks;
 	$tweaks[] = $tableau;
 }
 
 // installation de $tweaks_metas_pipes
-// $type ici est egal à 'options' ou 'fonctions'
+// $type ici est egal a 'options' ou 'fonctions'
 function set_tweaks_metas_pipes_fichier($tweaks_pipelines, $type) {
 	global $tweaks_metas_pipes;
 	$code = '';

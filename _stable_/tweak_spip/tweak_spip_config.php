@@ -92,7 +92,7 @@ add_tweak( array(
 //                               PUBLIC                                        //
 //-----------------------------------------------------------------------------//
 
-// TODO : gestion du jQuery dans la fonction à revoir ?
+// TODO : gestion du jQuery dans la fonction a revoir ?
 add_tweak( array(
 	'id'	=> 'desactiver_flash',
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
