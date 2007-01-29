@@ -35,7 +35,7 @@ function set_tweaks_metas_pipes_fichier($tweaks_pipelines, $type) {
 	if (isset($tweaks_pipelines['inc_'.$type]))
 		foreach ($tweaks_pipelines['inc_'.$type] as $inc) $code .= "include_spip('tweaks/$inc');\n";
 	if (isset($tweaks_pipelines['code_'.$type]))
-		foreach ($tweaks_pipelines['code_'.$type] as $code) $code .= $code."\n";
+		foreach ($tweaks_pipelines['code_'.$type] as $inline) $code .= $inline."\n";
 	$tweaks_metas_pipes[$type] = $code;
 	tweak_log("set_tweaks_metas_pipes_fichier($type) : strlen=".strlen($code));
 	$fichier_dest = sous_repertoire(_DIR_TMP, "tweak-spip") . "mes_$type.php";
