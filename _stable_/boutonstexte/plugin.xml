@@ -16,7 +16,7 @@
 Rajoute des boutons pour l'affichage des textes comme augmenter/diminuer police
 _ Les boutons sont rajout&#233;s avant chaque div de classe texte du contenu si ils ne sont pas d&#233;j&#224; pr&#233;sents dans la page
 (images de classe textsizeup , textsizedown ou textonly)
-_ La configuration optionnelle peut se faire en installant le plugin cfg et en chargeant ecrire/?exec=cfg&cfg=boutonstexte
+_ La configuration optionnelle peut se faire en installant le plugin cfg et en chargeant ecrire/?exec=cfg&amp;cfg=boutonstexte
 _ Certains &#233;l&#233;ments peuvent &#234;tre forc&#233;s par javascript.
 _ ATTENTION: Necessite jQuery et la balise <code>#INSERT_HEAD</code> dans les squelettes
   </description>
