@@ -21,7 +21,7 @@ _ Certains &#233;l&#233;ments peuvent &#234;tre forc&#233;s par javascript.
 _ ATTENTION: Necessite jQuery et la balise <code>#INSERT_HEAD</code> dans les squelettes
   </description>
   <lien>[Documentation sur contrib->http://www.spip-contrib.net/?article1474],
-et si vous avez cfg: [Configuration->.?exec=cfg&cfg=boutonstexte]
+et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=boutonstexte]
   </lien>
   <prefix>
 	boutonstexte
