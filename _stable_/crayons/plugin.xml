@@ -22,7 +22,7 @@ _ <code><h1 class="#EDIT{titre} autres classes">#TITRE</h1></code>.
 	</description>
 	<lien>
 	[Documentation->http://www.spip-contrib.net/?article1475],
-et si vous avez cfg: [Configuration->.?exec=cfg&cfg=crayons]
+et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=crayons]
 	</lien>
 	<prefix>
 	Crayons
