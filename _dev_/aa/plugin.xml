@@ -26,7 +26,7 @@
         </description>
 		    <lien>
 		      [Documentation provisoire sur ->http://extranet-eze.dyndns.org/portail/spip_SVN/spip.php?article112],
-		      et si vous avez cfg: [Configuration->.?exec=cfg&cfg=aa]
+		      et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=aa]
 		    </lien>
         <icon>plugin-24.gif</icon>
         <prefix>

@@ -37,7 +37,7 @@
         </description>
 		<lien>
 		[Documentation sur contrib->http://www.spip-contrib.net/?article1442],
-		et si vous avez cfg: [Configuration->.?exec=cfg&cfg=saveauto]
+		et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=saveauto]
 		</lien>
         <icon>img_pack/saveauto-24.png</icon>
         <prefix>
