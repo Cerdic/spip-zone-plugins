@@ -23,69 +23,11 @@
     ************************************************************* -->
   <div id="bloc-contenu">
     <div class="edito">
-   [(#REM) 
-   		On affiche le TITRE, le LOGO et l'INTRODUCTION du plus recent article affecte du mot-cle "Editorial", et ce, pour chaque langue, 
-		- sinon le DESCRIPTIF du SITE
-		- sinon, le DESCRIPTIF de la premiere rubrique racine (par num titre), pour chaque langue
-		- sinon un texte statique de Bienvenue !
-	]<B_articles_edito>
-<BOUCLE_articles_edito(ARTICLES) {lang?} {par date} {inverse} {titre_mot=Editorial} {0,1}>
-      [<h3 class="edito-titre"><a href="#URL_SITE_SPIP/#URL_ARTICLE">(#TITRE|supprimer_numero)</a></h3>]
-      [<span style="float:right;">(#LOGO_ARTICLE||reduire_image{120,0})</span>]
-      [<div class="chapo">(#DESCRIPTIF|sinon{[(#CHAPO|sinon{#TEXTE}|couper{300})]})</div>]
-    </BOUCLE_articles_edito>
-    </B_articles_edito>
-
-	<B_rub_first>
-	<BOUCLE_rub_first(RUBRIQUES)  {racine} {lang?} {par num titre} {0,1}>
-
-[(#DESCRIPTIF_SITE_SPIP|?{	
-		[<h3 class="edito-titre"><:entree_description_site:></h3>
-		<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
-	,
-    	[<h3 class="edito-titre"><a href="#URL_SITE_SPIP/#URL_RUBRIQUE">(#TITRE|supprimer_numero)</a></h3>]
-        [<span style="float:right;">(#LOGO_RUBRIQUE||reduire_image{120,0})</span>]
-        [<div class="chapo">(#DESCRIPTIF|sinon{[(#TEXTE|couper{300})]})</div>]
-})]
-	</BOUCLE_rub_first>
-	</B_rub_first>
-	<INCLURE{fond=inc/inc-install}{lang}>
-	<//B_rub_first>
-    <//B_articles_edito>
+		<INCLURE{fond=inc/inc-sommaire-edito}{lang}>
     </div><!-- edito -->
     
     <h2 class="structure"><:articles_recents:></h2>
-    
-    <B_article_langue>
-    #ANCRE_PAGINATION
-    <BOUCLE_article_langue(ARTICLES) {lang} {par date} {inverse} {pagination}>
-      [<span style="float:right;">(#LOGO_ARTICLE||reduire_image{120,0})</span>]
-			[<div class="surtitre">(#SURTITRE)</div>]
-      <h3><a href="#URL_SITE_SPIP/#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h3>
-      [<div class="sous-titre">(#SOUSTITRE)</div>]
-      <div class="detail">
-        [(#DATE|nom_jour)] [(#DATE|affdate)]
-        <B_auteurs_langue><:par_auteur:> <BOUCLE_auteurs_langue(AUTEURS) {id_article} {", "}><a href="#URL_SITE_SPIP/[(#URL_AUTEUR)]">#NOM</a></BOUCLE_auteurs_langue>
-      </div><!-- detail -->
-      [<div class="texte">
-      	<div class="extrait">
-      	 (#DESCRIPTIF|sinon{[(#CHAPO|sinon{#TEXTE}|couper{300})]})&nbsp;<b class="separateur">&gt;</b>&nbsp;<a  class="suite" href="#URL_SITE_SPIP/#URL_ARTICLE" title="...<:suite:>" ><:suite:></a>
-      	</div>
-      </div>]
-      <br />
-    </BOUCLE_article_langue>
-
-    [<div class="pagination">
-      <div class="ligne1">
-        <div dir="#LANG_DIR">#TOTAL_BOUCLE/#GRAND_TOTAL <:articles:></div>
-      </div>
-      <div class="ligne2">
-        (#PAGINATION)
-      </div>
-    </div>]
-
-    </B_article_langue>
-    <//B_article_langue>
+    <INCLURE{fond=inc/inc-sommaire-articles}{lang}{self=#SELF}>
     
      
   </div><!-- bloc-contenu-->
@@ -121,7 +63,7 @@
           </li>
         </ul>
     </div><!-- menu -->]
-    
+
   </div><!-- encart -->
 <INCLURE{fond=inc/inc-menu}{lang}>
 <INCLURE{fond=inc/inc-bas} {lang}>

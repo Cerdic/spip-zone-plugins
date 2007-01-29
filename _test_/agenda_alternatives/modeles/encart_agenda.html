@@ -13,9 +13,7 @@
 	<!-- la boucle s'effectue avec les parametres entre {} donc evenement attachés a cette rubrique : id_rubrique non dépassé age<0 triés par date (sous entendu croissante sinon mettre {inverse} affiche 6 evenements {0,6} uniquement pour un article publié  -->
 	
 	<li><a href="#URL_ARTICLE">#TITRE</a></li>
-	<li><small>#DESCRIPTIF -
-	[(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})] -
-	#LIEU</small></li>
+	<li>- <small>[(#DESCRIPTIF) - ][(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})][ -	(#LIEU)]</small></li>
 	
 	</BOUCLE_agenda>
 		

@@ -10,7 +10,7 @@
 	
 </head>
 <body dir="#LANG_DIR" class="#LANG article sect#ID_SECTEUR <BOUCLE_rubriques_body(HIERARCHIE){id_article}{" "}>rub#ID_RUBRIQUE</BOUCLE_rubriques_body> art#ID_ARTICLE">
-<div id="page" class="article">
+<div id="page" class="article art#ID_ARTICLE">
 <!-- *****************************************************************
 	Bandeau, titre du site et menu langue
 	Header and main menu (top and right) 
@@ -28,7 +28,7 @@
       <div class="article-info-rubrique">
         <h5><B_rubriques_chemin>
             <BOUCLE_rubriques_chemin(HIERARCHIE){id_article}{" <b class='separateur'>&gt;</b> "}>
-              <a href="#URL_SITE_SPIP/#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+              <a href="#URL_SITE_SPIP/#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{60})]</a>
             </BOUCLE_rubriques_chemin>
         </h5>
 
@@ -108,11 +108,11 @@
 			La petition ayant une PAGINATION il faut absolument lui passer SELF en argument. ]
 			[ #REM Conserver cet invalideur : (#PETITION|?{'',''}) ]
 			<INCLURE{fond=inc-petition}{id_article}{self=#SELF}>
-		
+
 		<!-- Début Patrice -->
 			[(#MODELE{evenements_article}{id_article}{lang}{self=#SELF})]
 		<!-- Fin Patrice -->
-
+		
 		<!-- Derniers articles des auteurs de l'article -->
 		<B_auteurs>
 			<div class="ps">
@@ -241,7 +241,7 @@
 <BOUCLE_rub_en_cours(ARTICLES){id_article}{lang_select}>
 <INCLURE{fond=inc/inc-menu}{lang}{id_rubrique}>
 </BOUCLE_rub_en_cours>
-<INCLURE{fond=inc//inc-bas}{lang}{id_article}>
+<INCLURE{fond=inc/inc-bas}{lang}{id_article}{id_rubrique}{id_secteur}>
 </div><!-- page -->
 
 </body>
