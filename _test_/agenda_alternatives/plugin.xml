@@ -7,19 +7,18 @@ _ &copy; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
 	<version>0.1</version>
 	<etat>test</etat>
-	<description>Permet l'utilisation du plugin Agenda dans le squelettes Alternatives.
+	<description>Permet l'utilisation des plugins Agenda & Widget Calendar dans le squelettes Alternatives, et donc la gestion des &eacute;v&egrave;nements.
 
-Dans le squelette, quatre fichiers &agrave; modifier : sommaire.html, article.html, inc-menu.html et inc/inc-menu-principal.html
+Fonctions :
+<quote>1. Un mini calendrier dans le cadre de gauche
+_ 2. Un encart 'Agenda' dans le cadre de droite avec les prochains &eacute;v&egrave;nements
+_ 3. Un bouton 'Agenda' suppl&eacute;mentaire en haut, menant &agrave; :
+_ 4. Une page 'evenements' qui liste les &eacute;v&egrave;nements (du jour/du mois, prochains, pass&eacute;s)
+_ 5. La liste des &eacute;v&egrave;nements associ&eacute;s au bas de chaque article</quote>
 
-{{Pour sommaire.html}}, placer le code : <cadre>[(#MODELE{encart_agenda}{lang}{self=#SELF})]</cadre> apr&egrave;s la ligne : <code><INCLURE{fond=inc/inc-annonces}{lang}></code>
-
-{{Pour inc/inc-menu-principal.html}}, placer le code : <cadre><B_agenda><li id="menu-principal-contact"><a href="<BOUCLE_agenda(EVENEMENTS){0,1}>[(#URL_PAGE{evenements})]</BOUCLE_agenda>" title="<:icone_agenda:>"><:icone_agenda:></a></li></B_agenda></cadre> apr&egrave;s la ligne qui se termine par : <code><:accueil_site:></a></li></code>
-
-{{Pour inc/inc-menu.html}}, placer le code : <cadre>[(#MODELE{rubrique_calendrier}{self=#SELF}{var_date=archives}{date=#ENV{archives,#DATE}}{lang}{id_rubrique})]</cadre> apr&egrave;s la ligne  : <code><div class="menu" id="menu-rubriques"></code>
-
-{{Pour article.html}}, placer le code : <cadre>[(#MODELE{evenements_article}{id_article}{lang}{self=#SELF})]</cadre> apr&egrave;s la ligne  : <code><INCLURE{fond=inc-petition}{id_article}{self=#SELF}></code>
+Pour en savoir plus, lire le fichier lisezmoi.txt
 </description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>bient&ocirc;t ?</lien> <!-- URI de documentation -->
 	<fonctions>minicalalter_fonctions.php</fonctions>
 	<options>minicalalter_options.php</options>
 	<prefix>CalAlter</prefix>
