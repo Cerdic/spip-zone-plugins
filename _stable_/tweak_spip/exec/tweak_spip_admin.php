@@ -135,7 +135,7 @@ tweak_log("Début : exec_tweak_spip_admin()");
 		exit;
 	}
 	
-	// initialisation générale forcée : récupération de $tweaks;
+	// initialisation générale forcée : recuperation de $tweaks;
 	tweak_initialisation(true);
 	// mise a jour des donnees si envoi via formulaire
 	// sinon fait une passe de verif sur les tweaks
@@ -210,9 +210,11 @@ tweak_log("Fin   : exec_tweak_spip_admin()");
 
 // affiche un tweak sur une ligne
 function ligne_tweak($tweak){
+	global $spip_version_code;
 	static $id_input=0;
 	$inc = $tweak_id = $tweak['id'];
 	$actif = $tweak['actif'];
+	$erreur_version = isset($tweak['version']) && $spip_version_code<$tweak['version'];
 	$puce = $actif?'puce-verte.gif':'puce-rouge.gif';
 	$titre_etat = _T('tweak:'.($actif?'':'in').'actif');
 	$nb_var = intval($tweak['nb_variables']);
@@ -232,6 +234,7 @@ function ligne_tweak($tweak){
 
 	$s .= "<input type='checkbox' name='foo_$inc' value='O' id='label_$id_input'";
 	$s .= $actif?" checked='checked'":"";
+	$s .= $erreur_version?" disabled='disabled'":"";
 	$s .= " onclick='verifchange.apply(this,[\"$inc\", $index, $nb_var])'";
 	$s .= "/> <label for='label_$id_input' style='display:none'>"._T('tweak:activer_tweak')."</label>";
 
@@ -244,10 +247,14 @@ function ligne_tweak($tweak){
 	$s .= "\n<div class='detailtweak'>";
 	$s .= $tweak['description'];
 	if ($tweak['auteur']!='') $s .= "<p>" . _T('auteur') .' '. $tweak['auteur'] . "</p>";
-	$s .= "<hr/>" . _T('tweak:tweak') . (isset($tweak['code'])?" code":" $inc.php");
-	if ($tweak['options']) $s .= ' | options';
-	if ($tweak['fonctions']) $s .= ' | fonctions';
-	foreach ($tweak as $pipe=>$fonc) if (is_tweak_pipeline($pipe, $pipe2)) $s .= ' | '.$pipe2;
+	$s .= '<hr/>' . _T('tweak:tweak').' ';
+	if ($erreur_version) $s .= _T('tweak:erreur:version');
+	else {
+		$s .= (isset($tweak['code'])?"code":"$inc.php");
+		if ($tweak['options']) $s .= ' | options';
+		if ($tweak['fonctions']) $s .= ' | fonctions';
+		foreach ($tweak as $pipe=>$fonc) if (is_tweak_pipeline($pipe, $pipe2)) $s .= ' | '.$pipe2;
+	}
 	$s .= "</div>";
 
 	$s .= fin_block();

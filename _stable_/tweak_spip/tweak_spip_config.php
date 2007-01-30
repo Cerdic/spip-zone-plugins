@@ -66,7 +66,8 @@ add_tweak( array(
 	'id'	=> 'insert_head',
 	'code'	=> '$spip_pipeline["affichage_final"] .= "|f_insert_head";', 
 	'categorie'	=> 'squel',
-	'options'	=> 1
+	'options'	=> 1,
+	'version'	=> 1.92,
 ));
 
 //-----------------------------------------------------------------------------//
@@ -143,7 +144,14 @@ add_tweak( array(
 	'id'	=> 'smileys',
 	'auteur' 		=> 'Sylvain',
 	'categorie'		=> 'typo',
-	'pipeline:pre_typo'	=> 'tweak_smileys',
+	'pipeline:pre_typo'	=> 'tweak_smileys_pre_typo',
+));
+
+add_tweak( array(
+	'id'	=> 'chatons',
+	'auteur' 		=> 'BoOz (booz.bloog@laposte.net)',
+	'categorie'		=> 'typo',
+	'pipeline:pre_typo'	=> 'chatons_pre_typo',
 ));
 
 // Idées d'ajouts :

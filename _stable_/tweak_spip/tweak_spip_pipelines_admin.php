@@ -52,9 +52,8 @@ tweak_log("tweak_spip_install($action)");
 		case 'install':
 			break;
 		case 'uninstall':
-			effacer_meta('tweaks_actifs');
-			effacer_meta('tweaks_variables');
-			effacer_meta('tweaks_pipelines');
+			foreach(array_keys($GLOBALS['meta']) as $meta) 
+				if(strpos($meta, 'tweaks_') !== false) effacer_meta($meta);
 			ecrire_metas();
 			break;
 	}

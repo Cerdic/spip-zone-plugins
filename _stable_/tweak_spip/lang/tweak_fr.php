@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // erreurs
 	'erreur:nom' => 'Erreur !',
 	'erreur:description'	=> 'id manquant dans la d&eacute;finition du tweak !',
+	'erreur:version'	=> 'indisponible dans cette version de Spip trop ancienne.',
 
 // categories
 	'admin' => "1. Administration",
@@ -22,10 +23,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'divers' => "4. Divers",
 	
 // Les tweaks
-	'desactive_cache:nom' => 'D&eacute;sactiver le cache',
+	'desactive_cache:nom' => 'D&eacute;sactive le cache',
 	'desactive_cache:description'	=> 'Inhibition du cache de SPIP pour le d&eacute;veloppement du site.',
 
-	'supprimer_numero:nom' => 'Supprimer le num&eacute;ro des titres',
+	'supprimer_numero:nom' => 'Supprime le num&eacute;ro des titres',
 	'supprimer_numero:description'	=> "Applique la fonction SPIP supprimer_numero() &agrave; l'ensemble des {{titres}} du site, sans que le filtre supprimer_numero soit pr&eacute;sent dans les squelettes.",
 
 	'paragrapher:nom' => 'Paragrapher',
@@ -46,7 +47,7 @@ _ version_plein_texte : extrait le contenu texte d'une page html pour rendre du 
 	'orientation:description'	=> "3 nouveaux crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&eacute;al pour le classement des photos en fonction de leur forme.
 _ Infos : [->http://www.spip-contrib.net/Portrait-ou-Paysage]",
 
-	'desactiver_flash:nom' => 'D&eacute;sactiver les objects flash',
+	'desactiver_flash:nom' => 'D&eacute;sactive les objects flash',
 	'desactiver_flash:description'	=> 'Supprime les objets flash des pages de votre site et les remplace par le contenu alternatif associ&eacute;.
 _ N&eacute;cessite le plugin {jQuery} ou une version de SPIP sup&eacute;rieure &agrave; 1.9.2.',
 
@@ -85,11 +86,14 @@ _ Infos : [->http://www.spip-contrib.net/?article1563]",
 _ Infos : [->http://www.spip-contrib.net/?article1561]",
 
 	'quota_cache:nom' => 'Quota du cache',
-	'quota_cache:description'	=> "Modifier le quota r&eacute;serv&eacute; au cache. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique.<br>Valeur (en Mo) : %quota_cache%",
+	'quota_cache:description'	=> "Modifie le quota r&eacute;serv&eacute; au cache. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique.<br>Valeur (en Mo) : %quota_cache%",
 
 	'dossier_squelettes:nom' => 'Dossier du squelette',
-	'dossier_squelettes:description'	=> "Modifier le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.<br>Dossier &agrave; utiliser : %dossier_squelettes%",
+	'dossier_squelettes:description'	=> "Modifie le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.<br>Dossier &agrave; utiliser : %dossier_squelettes%",
 
+	'chatons:nom' => 'Chatons',
+	'chatons:description'	=> 'Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <acronym>:nom</acronym>.
+_ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouve dans le r&eacute;pertoire img/chatons.',
 
 /*
 	':nom' => '',

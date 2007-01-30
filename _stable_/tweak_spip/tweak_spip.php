@@ -16,6 +16,15 @@ if (!defined('_DIR_PLUGIN_TWEAK_SPIP')){
 	$p=_DIR_PLUGINS.end($p); if ($p[strlen($p)-1]!='/') $p.='/';
 	define('_DIR_PLUGIN_TWEAK_SPIP', $p);
 }
+if ($spip_version_code<1.92) { 
+	if (!function_exists('stripos')) {
+		function stripos($botte, $aiguille) {
+			if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@isU', $botte, $regs)) return strlen($regs[1]);
+			return false;
+		}
+	}
+}
+
 
 /*************/
 /* FONCTIONS */
@@ -37,9 +46,9 @@ function set_tweaks_metas_pipes_fichier($tweaks_pipelines, $type) {
 	if (isset($tweaks_pipelines['code_'.$type]))
 		foreach ($tweaks_pipelines['code_'.$type] as $inline) $code .= $inline."\n";
 	$tweaks_metas_pipes[$type] = $code;
-	tweak_log("set_tweaks_metas_pipes_fichier($type) : strlen=".strlen($code));
+tweak_log("set_tweaks_metas_pipes_fichier($type) : strlen=".strlen($code));
 	$fichier_dest = sous_repertoire(_DIR_TMP, "tweak-spip") . "mes_$type.php";
-	ecrire_fichier($fichier_dest, "<?php\n// Code de contrôle pour le plugin Tweak-SPIP\n$code?".'>');
+	ecrire_fichier($fichier_dest, "<?php\n// Code de controle pour le plugin Tweak-SPIP\n$code?".'>');
 }
 
 // installation de $tweaks_metas_pipes
@@ -48,7 +57,7 @@ function set_tweaks_metas_pipes_pipeline($tweaks_pipelines, $pipeline) {
 	$code = '';
 	if (isset($tweaks_pipelines[$pipeline])) {
 		foreach ($tweaks_pipelines[$pipeline]['inclure'] as $inc) $code .= "include_spip('tweaks/$inc');\n";
-		foreach ($tweaks_pipelines[$pipeline]['fonction'] as $fonc) $code .= "if (function_exists('$fonc')) \$flux = $fonc(\$flux);\n";
+		foreach ($tweaks_pipelines[$pipeline]['fonction'] as $fonc) $code .= "if (function_exists('$fonc')) \$flux = $fonc(\$flux);\n\telse spip_log('Erreur - $fonc(\$flux) non definie !');\n";
 	}
 	$tweaks_metas_pipes[$pipeline] = $code;
 	tweak_log("set_tweaks_metas_pipes_pipeline($pipeline) : strlen=".strlen($code));
@@ -169,12 +178,24 @@ function tweak_log($s) {
 	spip_log('TWEAKS. '.$s);
 }	
 
-// lit/ecrit les metas et initialise $tweaks_metas_pipes
+// lance la fonction d'installation de chaque tweak actif, si elle existe.
+function tweak_installe_tweaks() {
+	global $tweaks; 
+	foreach($temp = $tweaks as $tweak) if ($tweak['actif']) {
+		if (function_exists($f = $tweak['id'].'_installe')) {
+			$f();
+tweak_log(" -- $f()");
+		}
+	}
+}
+
+// lit ecrit les metas et initialise $tweaks_metas_pipes
 function tweak_initialisation($forcer=false) {
 	global $tweaks, $tweaks_metas_pipes, $metas_vars;
+	global $spip_version_code;
 tweak_log("tweak_initialisation($forcer) : Entrée");
-	if (!isset($GLOBALS['meta']['tweaks_actifs'])) {
-tweak_log(" -- lecture metas ");
+	if (!isset($GLOBALS['meta']['tweaks_actifs']) || $forcer) {
+tweak_log(" -- lecture metas");
 		include_spip('inc/meta');
 		lire_metas();
 	}
@@ -187,8 +208,7 @@ tweak_log("tweak_initialisation($forcer) : Sortie car les metas sont présents");
 tweak_log(" -- pipelines en metas : mode forcé, donc on continue...");
 	}
 	include_spip('tweak_spip_config');
-	if (isset($GLOBALS['meta']['tweaks'])) $metas_tweaks = unserialize($GLOBALS['meta']['tweaks']);
-	 else $metas_tweaks = unserialize($GLOBALS['meta']['tweaks_actifs']);
+	$metas_tweaks = unserialize($GLOBALS['meta']['tweaks_actifs']);
 	$metas_vars = unserialize($GLOBALS['meta']['tweaks_variables']);
 	// au cas ou un tweak a besoin d'input
 	$tweak_input = charger_fonction('tweak_input', 'inc');
@@ -201,6 +221,8 @@ tweak_log(" -- pipelines en metas : mode forcé, donc on continue...");
 		$tweaks[$i]['auteur'] = propre($tweaks[$i]['auteur']);
 		if (!isset($tweak['description'])) $tweaks[$i]['description'] = _T('tweak:'.$tweak['id'].':description');
 		$tweaks[$i]['actif'] = isset($metas_tweaks[$tweaks[$i]['id']])?$metas_tweaks[$tweaks[$i]['id']]['actif']:0;
+		// Si Spip est trop ancien...
+		if (isset($tweak['version']) && $spip_version_code<$tweak['version']) $tweaks[$i]['actif'] = 0;
 		// au cas ou des variables sont presentes dans le code
 		$tweaks[$i]['basic'] = $i*10; $tweaks[$i]['nb_variables'] = 0;
 		// cette ligne peut initialiser des variables dans $metas_vars
@@ -210,10 +232,12 @@ tweak_log(" -- pipelines en metas : mode forcé, donc on continue...");
 	}
 	// installer $tweaks_metas_pipes
 	$tweaks_metas_pipes = array();
+tweak_log(" -- tweak_initialise_includes()...");
 	tweak_initialise_includes();
+tweak_log(" -- tweak_installe_tweaks...");
+	tweak_installe_tweaks();
 	// tweaks actifs
 tweak_log(" -- ecriture metas ");
-	effacer_meta('tweaks');												// ######## a supprimer a terme tous les metas 'tweaks'
 	ecrire_meta('tweaks_actifs', serialize($metas_tweaks));
 	// variables de tweaks
 	ecrire_meta('tweaks_variables', serialize($metas_vars));
@@ -233,6 +257,13 @@ function tweak_exclure_balises($balises, $fonction, $texte){
 	if ($spip_version_code<1.92 && $balises=='') $balises = ',<(html|code|cadre|frame|script)>(.*)</\1>,UimsS';
 	$texte = echappe_retour($fonction(echappe_html($texte, 'TWEAKS', true, $balises)), 'TWEAKS');
 	return $texte;
+}
+
+// transforme un chemin d'image relatif en chemin html
+function tweak_htmlpath($relative_path) {
+   $realpath=str_replace("\\", "/", realpath($relative_path));
+   $htmlpathURL=str_replace($_SERVER['DOCUMENT_ROOT'],'',$realpath);
+   return $htmlpathURL;
 }
 
 /*****************/
