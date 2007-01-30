@@ -135,6 +135,14 @@ tweak_log("Début : exec_tweak_spip_admin()");
 		exit;
 	}
 	
+	// reset general
+	if (_request('reset')=='oui'){
+		spip_log("Reset de tous les tweaks par l'auteur id=$connect_id_auteur");
+		foreach(array_keys($GLOBALS['meta']) as $meta) 
+			if(strpos($meta, 'tweaks_') !== false) effacer_meta($meta);
+		ecrire_metas();
+	}
+	
 	// initialisation générale forcée : recuperation de $tweaks;
 	tweak_initialisation(true);
 	// mise a jour des donnees si envoi via formulaire
