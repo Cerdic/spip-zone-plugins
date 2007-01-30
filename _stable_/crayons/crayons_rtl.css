@@ -1,0 +1,44 @@
+img.crayon-img-changed {
+    display: none;
+}
+.crayon-changed img.crayon-img-changed {
+    display: inline;
+}
+.crayon-changed img.crayon-crayon {
+    display: none;
+}
+img.crayon-edit, img.crayon-crayon {
+    visibility: hidden;
+}
+.crayon-autorise:hover img.crayon-edit, .crayon-hover img.crayon-edit,
+.crayon-autorise:hover img.crayon-crayon, .crayon-hover img.crayon-crayon {
+    visibility: visible;
+}
+.crayon-autorise:hover, .crayon-hover {
+}
+.crayon-boutons, .crayon-searching {
+    float: left;
+}
+.crayon-boutons {
+    width: 40px;
+    display: none;
+}
+.crayon-boutons div {
+	position: absolute;
+}
+.crayon-boutons a {
+	cursor: pointer;
+}
+.crayon-icones {
+    float: left;
+}
+.crayon-icones span {
+    position:absolute;
+}
+.crayon-edit, .crayon-crayon, .crayon-img-changed {
+	cursor: pointer;
+} 
+.formulaire_spip .crayon-active {
+	padding: 1px;
+	border: 1px inset;
+}
