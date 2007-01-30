@@ -50,6 +50,7 @@ function post_crayons() {
 
 function action_crayons_store_dist() {
     include_spip('inc/crayons');
+	lang_select($GLOBALS['auteur_session']['lang']);
     $wdgcfg = wdgcfg();
     header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
 

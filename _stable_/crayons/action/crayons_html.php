@@ -299,6 +299,7 @@ function action_crayons_html_dist() {
     // CONTROLEUR
     // on affiche le formulaire demande
     include_spip('inc/crayons');
+	lang_select($GLOBALS['auteur_session']['lang']);
     $return = affiche_controleur($_GET['class']);
 
     echo var2js($return);

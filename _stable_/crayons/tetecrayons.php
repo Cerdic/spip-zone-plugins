@@ -51,15 +51,11 @@ function Crayons_affichage_final($page) {
 }
 
 function Crayons_preparer_page($page, $droits, $wdgcfg = array()) {
+	lang_select($GLOBALS['auteur_session']['lang']);
 
-    $jsFile = generer_url_public('crayons.js');
-	// added by George
-	if ($GLOBALS['spip_lang_left'] == "right") {
-    $cssFile = find_in_path('crayons_rtl.css');
-	} else {
-	$cssFile = find_in_path('crayons.css');
-	}
-	// end of added by George
+	$jsFile = generer_url_public('crayons.js');
+	$cssFile = direction_css(find_in_path('crayons.css'));
+
     $config = var2js(array(
 		'imgPath' => dirname(find_in_path('images/crayon.png')),
         'droits' => $droits,
