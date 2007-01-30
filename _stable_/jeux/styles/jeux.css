@@ -1,6 +1,7 @@
 /* Histoire de mettre tous les navigateurs d'accord... */
 * { margin:0pt; padding:0pt; }
 ul, ol, dd, dir, menu { padding-left: 40px; } /* decalage des listes */
+ul, ol { margin:1em; } /* marge des listes */
 ol ul, ul ol, ul ul, ol ol { margin-top: 0; margin-bottom: 0 } /* liste imbriquees */
 p { margin:1em auto; } /* separation des paragraphes */
 
