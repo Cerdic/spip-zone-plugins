@@ -60,13 +60,9 @@ function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $red
 	. "<b>"._T('auteurscomplets:entree_longitude')."</b>"
 	. "<br /><input type='text' name='longitude' class='formo' value=\"".entites_html($auteur['longitude'])."\" />\n";
 
-// Le bouton de validation...
-	$corps_supp .= ""
-	. "\n<div align='right'>"
-	. "\n<input type='submit' class='fondo' value='"
-	. _T('bouton_enregistrer')
-	. "'></div>";
-
+	$att = " style='float:         "
+	. $GLOBALS['spip_lang_right']
+	. "' class='fondo'";
 	$arg = intval($id_auteur) . '/';
 
 // Affichage du formulaire en Ajax qui reprend ce qu'il y a avant ...
@@ -75,7 +71,7 @@ function legender_auteur_supp_saisir($id_auteur, $auteur, $mode, $echec='', $red
 	. debut_cadre_relief("fiche-perso-24.gif", true, "", _T("auteurscomplets:coordonnees_sup"))
 	. ($redirect
 	     ? generer_action_auteur('legender_auteur_supp', $arg, $redirect, $corps_supp)
-	   : ajax_action_auteur('legender_auteur_supp', $arg, 'auteur_infos_supp', "id_auteur=$id_auteur&initial=-1&retour=$redirect", $corps_supp))
+	   : ajax_action_post('legender_auteur_supp', $arg, 'auteur_infos_supp', "id_auteur=$id_auteur&initial=-1&retour=$redirect", $corps_supp, _T('bouton_enregistrer'), $att))
 	. fin_cadre_relief(true)
 	. '</div>';
 }
