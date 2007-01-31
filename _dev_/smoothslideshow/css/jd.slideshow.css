@@ -3,18 +3,43 @@
 	width: 320px;
 	height: 240px;
 	z-index:5;
+}
+
+.jdSlideshow
+{
 	display: none;
 	overflow:hidden;
 	position: relative;
 }
 
-#mySlideshow img
+.jdSlideshow img
 {
 	border: 0;
 	margin: 0;
 }
 
-#mySlideshow #slideInfoZone
+.jdSlideshow .slideElement
+{
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	background-repeat: no-repeat;
+}
+
+.jdSlideshow .loadingElement
+{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: #000;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-image: url('img/loading-bar-black.gif');
+}
+
+.jdSlideshow .slideInfoZone
 {
 	position: absolute;
 	z-index: 10;
@@ -22,38 +47,38 @@
 	margin: 0px;
 	left: 0;
 	bottom: 0;
-	height: 3em;
+	height: 40px;
 	background: #333;
 	color: #fff;
 	text-indent: 0;
 }
 
-#slideInfoZone h2
+.jdSlideshow .slideInfoZone h2
 {
 	padding: 0;
-	font-size: 80%;
+	font-size: 90%;
 	margin: 0;
 	margin: 2px 5px;
-	font-weight: strong;
-	color: inherit;
+	font-weight: bold;
+	color: #inherit;
 }
 
-#slideInfoZone p
+.jdSlideshow .slideInfoZone p
 {
 	padding: 0;
-	font-size: 60%;
+	font-size: 70%;
 	margin: 2px 5px;
 	color: #eee;
 }
 
-#mySlideshow a
+.jdSlideshow a
 {
 	font-size: 100%;
 	text-decoration: none;
 	color: inherit;
 }
 
-#mySlideshow a.right, #mySlideshow a.left
+.jdSlideshow a.right, .jdSlideshow a.left
 {
 	position: absolute;
 	height: 100%;
@@ -66,12 +91,12 @@
 	opacity: 0.2;
 }
 
-* html #mySlideshow a.right, * html #mySlideshow a.left
+* html .jdSlideshow a.right, * html .jdSlideshow a.left
 {
 	filter:alpha(opacity=50);
 }
 
-#mySlideshow a.right:hover, #mySlideshow a.left:hover
+.jdSlideshow a.right:hover, .jdSlideshow a.left:hover
 {
 	filter:alpha(opacity=80);
 	-moz-opacity:0.8;
@@ -79,16 +104,20 @@
 	opacity: 0.8;
 }
 
-#mySlideshow a.left
+.jdSlideshow a.left
 {
 	left: 0;
 	top: 0;
-	background: url('img/fleche1.gif') no-repeat top left;
+	background: url('img/fleche1.png') no-repeat top left;
 }
 
-#mySlideshow a.right
+* html .jdSlideshow a.left { background: url('img/fleche1.gif') no-repeat top left; }
+
+.jdSlideshow a.right
 {
 	right: 0;
 	top: 0;
-	background: url('img/fleche2.gif') no-repeat top right;
+	background: url('img/fleche2.png') no-repeat top right;
 }
+
+* html .jdSlideshow a.right { background: url('img/fleche2.gif') no-repeat top right; }

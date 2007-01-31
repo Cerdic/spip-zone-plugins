@@ -12,7 +12,7 @@
              to convert to a fixed width site.
  **************************************************************/
 
-#content {  
+#content {
   height: 100%;
   min-height: 100%;
 
@@ -22,7 +22,7 @@
 #content,
 #width {
   /* max-width hack for IE since it doesn't understand the valid css property */
-  width: expression(document.body.clientWidth > 1000 ? "1000px" : "94%");  
+  width: expression(document.body.clientWidth > 1000 ? "1000px" : "94%");
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -69,7 +69,7 @@
 #header h2 {
   position: absolute;
   top: 7px;
-  right: 5px;
+  right: 5em;
 
   margin: 0;
   padding: 0;
@@ -77,6 +77,11 @@
   font: 700 1.2em "trebuchet ms", serif;
   text-transform: lowercase;
   color: #CC3030;
+}
+
+#header h2 a {
+  color: #CC3030;
+  text-decoration: none;
 }
 
 
@@ -102,7 +107,7 @@
   z-index: 2;
 
   top: 70px;
-  right: 400px;
+  right: 400px;
 }
 
 
@@ -111,10 +116,10 @@
    #mainMenu: The top level site menu
  **************************************************************/
 
-#mainMenu { 
+#mainMenu {
   float: left;
   width: 100%;
-  clear: both;  
+  clear: both;
 }
 
 #mainMenu ul {
@@ -164,8 +169,8 @@ ul.sideMenu {
 
 .sideMenu li {
   display: inline;
-  
-  /* Needed since IE fails when you give it list-style: none; */  
+
+  /* Needed since IE fails when you give it list-style: none; */
   list-style-image: url(foo.gif);
   font: 400 1.3em "trebuchet ms", serif;
 }
@@ -173,11 +178,11 @@ ul.sideMenu {
 .sideMenu li a {
   display: block;
   margin: 0.2em 0;
-  padding: 3px 5px;    
-  
+  padding: 3px 5px;
+
   text-decoration: none;
   color: #FFF;
-} 
+}
 
 .sideMenu li a:hover {
   color: #65EBFF;
@@ -186,7 +191,7 @@ ul.sideMenu {
 
 /* Active menu item */
 .sideMenu li.here {
-  display: block;  
+  display: block;
   padding: 5px;
   color: #65EBFF;
   background: #555;
@@ -200,8 +205,8 @@ ul.sideMenu {
 
 .sideMenu li.here ul li a {
   padding-left: 35px;
-  font: 400 0.55em verdana, arial, sans-serif; 
-  color: #FFF;  
+  font: 400 0.55em verdana, arial, sans-serif;
+  color: #FFF;
   background: url(../images/bg/bullet.gif) no-repeat 10px 0px;
 }
 
@@ -220,7 +225,7 @@ ul.sideMenu {
   float: left;
   width: 100%;
   clear: both;
-  
+
   padding-bottom: 4em;
 }
 
@@ -236,7 +241,7 @@ ul.sideMenu {
   float: left;
   width: 100%;
   clear: both;
-  
+
   margin-top: -3.8em;
   background: #000 url(../images/bg/footer.jpg) repeat-x top left;
 }
@@ -337,7 +342,7 @@ ul.sideMenu {
 
 .gradient {
   margin-bottom: 2em;
-  background: #555 url(../images/bg/gradient.jpg) repeat-x bottom left; 
+  background: #555 url(../images/bg/gradient.jpg) repeat-x bottom left;
 }
 
 

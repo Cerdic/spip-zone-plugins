@@ -1,41 +1,43 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	  Smooth
+<nom> <!-- Nom du plugin -->
+Smooth Slideshow
+</nom>
+<auteur>	<!-- Auteur du plugin -->
+Yvan d'après IZO, James et le plugin [lecteur multimedia->http://spip-zone.info/spip.php?article18]
+_ portage de [->http://smoothslideshow.jondesign.net/]
+_ Distribu&#233; sous licence GNU/GPL
+</auteur>
+<version>
+0.1
+</version>
+<etat>
+test
+</etat>
+<description>
 <multi>
-[fr] gallery photo en js. Portage de http://smoothslideshow.jondesign.net/
+[fr]
 
+3 mod&#232;les joints :
+- slideshow des logos des articles d'une rubrique
+- slideshow des images d'un article
+- slideshow des rubriques d'un article
+
+à insérer dans les squelettes par <code>#MODELE{nom_du_modele}</code>
 </multi>
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-IZO, James	</auteur>
-	<version>
-	  0.1
-	</version>
-	<etat>
-	  test
-	</etat>
-	<description>
-	  <multi>
-	  [fr]
-un plugin de gallerie d'image 
-
-portage de http://smoothslideshow.jondesign.net/
-
-J'aimerai obtenir #SMOOTH comme pour le plugin #PORTOFOLIO mais j'y arrive pas mais je veux bien l'on m'explique 
-... au fait le plugin marche pas :)
-	  </multi>
-	</description>
-	<lien>http://smoothslideshow.jondesign.net/</lien>
-
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	smooth_fonctions.php
-	</fonctions>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
-	<prefix> 
-	  SMOOTH
-	</prefix>
+</description>
+<lien> [Exemple->http://mamoud.free.fr/spip_svn/spip.php?article1]</lien>
+<fonctions> <!-- fichier charge a chaque recalul de page -->
+smooth_fonctions.php
+</fonctions>
+<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+sur le mode Rien::
+ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+ce parametre est obligatoire et doit etre non vide
+-->
+<prefix> 
+smooth
+</prefix>
+<pipeline>
+<nom>insert_head</nom>
+</pipeline>
 </plugin>
