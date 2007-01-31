@@ -91,7 +91,7 @@ jQuery.SplickerBox.prototype = {
 
 		$(image).css("cursor","pointer").click(function(){
 				//thickbox
-				if(typeof imageArray != 'undefined'){
+				if(typeof imageArray != 'undefined' && href.match(/\.(jpeg|jpg|png|gif)$/i)){
 					TB_show('',href,'image');
 				}else{
 					window.document.location = href ;
