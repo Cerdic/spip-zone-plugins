@@ -208,17 +208,15 @@ tweak_log("Début : exec_tweak_spip_admin()");
 	foreach($categ as $c=>$i) {
 		$basics = array(); $s = '';
 		foreach($temp = $tweaks as $tweak) if ($tweak['categorie']==$i) {
-			$s .= '<li>' . ligne_tweak($tweak, $js) . "</li>\n";
+			$s .= ligne_tweak($tweak, $js) . "\n";
 			$basics[] = $tweak['basic'];
 		}
 		$ss = "<input type='checkbox' name='foo_$i' value='O' id='label_{$i}_categ'";
 //		$ss .= $actif?" checked='checked'":"";
-//		$ss .= $erreur_version?" disabled='disabled'":"";
 		$ss .= " onclick='tweakcateg.apply(this,[\"$i\", [".join(', ', $basics).'], '.count($basics)."])' />";
 		$ss .= "<label for='label_{$i}_categ' style='display:none'>"._T('tweak:activer_tweak')."</label>";
 		preg_match(',([0-9]+)\.?\s*(.*),', _T('tweak:'.$c), $reg);
-		echo "<form>$ss <strong>$reg[2]</strong></form>";
-		echo "<ul>$s</ul>";
+		echo "<form style='margin:0pt;'>$ss&nbsp;<strong>$reg[2]</strong></form>\n", $s;
 	}
 	echo "</td></tr></table>\n";
 	echo "<script type=\"text/javascript\"><!--\n$js\n//--></script>";
@@ -257,7 +255,7 @@ function ligne_tweak($tweak, &$js){
 	$nb_var = intval($tweak['nb_variables']);
 	$index = intval($tweak['basic']);
 	
-	$s = "<form><div id='$tweak_id' class='nomtweak".($actif?'_on':'')."'>";
+	$s = "<form  style='margin:0 0 0 1em;'><div id='$tweak_id' class='nomtweak".($actif?'_on':'')."'>";
 /*
 	if (isset($info['erreur'])){
 		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
