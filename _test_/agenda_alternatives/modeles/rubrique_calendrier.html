@@ -29,8 +29,6 @@ $M0 = intval(date('m',mktime(0, 0, 0, $M-1, 1, $Y)));
 
  <BOUCLE_evenements(EVENEMENTS){par date}{statut=publie}{0,500}><?php
                
-//	$date = ereg_replace("^([0-9]{4})-([0-9]{2})-([0-9]{2}).*$", "\\1\\2\\3", '#DATE_DEBUT');
-//	$datetot = ereg_replace("^([0-9]{4})-([0-9]{2})-([0-9]{2}).*$", "\\1\\2\\3", '#DATE_FIN');
 	$date = [(#DATE_DEBUT|affdate{'Ymd'})];
 	$datetot = [(#DATE_FIN|affdate{'Ymd'})];
 	$az=substr($date,0,4);
