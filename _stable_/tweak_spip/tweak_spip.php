@@ -180,6 +180,7 @@ function tweak_log($s) {
 
 // lance la fonction d'installation de chaque tweak actif, si elle existe.
 function tweak_installe_tweaks() {
+spip_log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz2');
 	global $tweaks; 
 	foreach($temp = $tweaks as $tweak) if ($tweak['actif']) {
 		if (function_exists($f = $tweak['id'].'_installe')) {
