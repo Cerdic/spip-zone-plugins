@@ -6,5 +6,5 @@
 */
 
 // variable utilisée dans par le calendrier dans les urls
-define(VAR_DATE_CAL, 'archives');
+define('VAR_DATE_CAL', 'archives');
 ?>

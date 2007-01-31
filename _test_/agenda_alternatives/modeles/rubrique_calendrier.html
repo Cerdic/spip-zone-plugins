@@ -56,14 +56,14 @@ if($datetot >= date("Ymd", mktime(0, 0, 0, $M-1, 1, $Y)) && $date <= date("Ymd",
 <ul>
 <li><b><center>
 	[<a	style="display:inline; padding:0; background-image:none; font-weight:normal"
-		href="(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE_REQUEST_SURE|Agenda_moisdecal{-1,'Y-m'})]})"
-		title="[(#DATE_REQUEST_SURE|Agenda_moisdecal{-1,'Y-m'}|affdate_mois_annee)]">&#171;</a>][
+		href="(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE_REQUEST_SURE|Agenda_moisdecal2{-1,'Y-m'})]})"
+		title="[(#DATE_REQUEST_SURE|Agenda_moisdecal2{-1,'Y-m'}|affdate_mois_annee)]">&#171;</a>][
 	<a	style="display:inline; padding:0; background-image:none;; font-weight:normal"
-		href="[(#URL_PAGE{evenements}|parametre_url{#ENV{var_date},[(#DATE_REQUEST_SURE|Agenda_moisdecal{0,'Y-m'})]})]"
+		href="[(#URL_PAGE{evenements}|parametre_url{#ENV{var_date},[(#DATE_REQUEST_SURE|Agenda_moisdecal2{0,'Y-m'})]})]"
 		title="[<:minicalalter_tout_voir_1:> (#DATE_REQUEST_SURE|affdate_mois_annee)]">(#DATE_REQUEST_SURE|affdate_mois_annee)</a>][
 	<a	style="display:inline; padding:0; background-image:none;; font-weight:normal"
-		href="(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE_REQUEST_SURE|Agenda_moisdecal{1,'Y-m'})]})"
-		title="[(#DATE_REQUEST_SURE|Agenda_moisdecal{1,'Y-m'}|affdate_mois_annee)]">&#187;</a>]
+		href="(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE_REQUEST_SURE|Agenda_moisdecal2{1,'Y-m'})]})"
+		title="[(#DATE_REQUEST_SURE|Agenda_moisdecal2{1,'Y-m'}|affdate_mois_annee)]">&#187;</a>]
 </center></b>
 </li></ul>
 <div align="center" style="margin:0px 0px 10px 0px; font-size:78%">

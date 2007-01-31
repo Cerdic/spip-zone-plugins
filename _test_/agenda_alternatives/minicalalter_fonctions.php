@@ -4,10 +4,11 @@ function url_evenements($D, $M, $Y) {
  return parametre_url(generer_url_public('evenements'),VAR_DATE_CAL,sprintf("%04d-%02d-%02d",$Y,$M,$D));
 }			  
 
+// A supprimer bientot !! (Intégré dans Agenda...)
 // décale les mois de la date.
 // cette fonction peut raboter le jour si le nouveau mois ne les contient pas
 // exemple 31/01/2007 + 1 mois => 28/02/2007
-function Agenda_moisdecal($date,$decalage,$format){
+function Agenda_moisdecal2($date,$decalage,$format){
 	include_spip('inc/filtres');
 	$date_array = recup_date($date);
 	if ($date_array) list($annee, $mois, $jour) = $date_array;
