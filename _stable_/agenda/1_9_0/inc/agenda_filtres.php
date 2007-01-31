@@ -177,4 +177,24 @@ function Agenda_dateplus($date,$secondes,$format){
 	$date = strtotime($date)+eval("return $secondes;"); // permet de passer une expression
 	return date($format,$date);
 }
+
+// decale les mois de la date.
+// cette fonction peut raboter le jour si le nouveau mois ne les contient pas
+// exemple 31/01/2007 + 1 mois => 28/02/2007
+function Agenda_moisdecal($date,$decalage,$format){
+	include_spip('inc/filtres');
+	$date_array = recup_date($date);
+	if ($date_array) list($annee, $mois, $jour) = $date_array;
+	if (!$jour) $jour=1;
+	if (!$mois) $mois=1;
+	$mois2 = $mois + $decalage;
+	$date2 = mktime(1, 1, 1, $mois2, $jour, $annee);
+	// mois normalement attendu
+	$mois3 = date('m', mktime(1, 1, 1, $mois2, 1, $annee));
+	// et si le mois de la nouvelle date a moins de jours...
+	$mois2 = date('m', $date2);
+	if ($mois2 - $mois3) $date2 = mktime(1, 1, 1, $mois2, 0, $annee);
+	return date($format, $date2);
+}
+
 ?>
