@@ -202,7 +202,7 @@ tweak_log("Début : exec_tweak_spip_admin()");
 
 	echo "\n<table border='0' cellspacing='0' cellpadding='5' >",
 		"<tr><td class='serif'>",
-		'<p>'._T('tweak:presente_tweaks').'</p><br/>';
+		'<p>'._T('tweak:presente_tweaks').'</p>';
 	foreach($temp = $tweaks as $tweak) $categ[_T('tweak:'.$tweak['categorie'])] = $tweak['categorie']; ksort($categ);
 	$js = ''; 
 	foreach($categ as $c=>$i) {
@@ -216,7 +216,7 @@ tweak_log("Début : exec_tweak_spip_admin()");
 		$ss .= " onclick='tweakcateg.apply(this,[\"$i\", [".join(', ', $basics).'], '.count($basics)."])' />";
 		$ss .= "<label for='label_{$i}_categ' style='display:none'>"._T('tweak:activer_tweak')."</label>";
 		preg_match(',([0-9]+)\.?\s*(.*),', _T('tweak:'.$c), $reg);
-		echo "<form style='margin:0pt;'>$ss&nbsp;<strong>$reg[2]</strong></form>\n", $s;
+		echo "<form style='margin:1em 0 0 0;'>$ss&nbsp;<strong>$reg[2]</strong></form>\n", $s;
 	}
 	echo "</td></tr></table>\n";
 	echo "<script type=\"text/javascript\"><!--\n$js\n//--></script>";
