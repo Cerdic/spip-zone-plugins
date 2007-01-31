@@ -16,9 +16,9 @@ Ici vous pouvez configurer l'article qui sera affich&eacute; en page sommaire.<b
    <select name="id_aa">
      <option value="">Racine</option>
   	 <BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
-  	    <option value="">&nbsp;&nbsp;<strong>rubrique : #TITRE</strong></option>
+  	    <option value="" style="font-weight: bold;"><strong>rubrique : #TITRE</strong></option>
   			<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
-  	        <option value="#ID_ARTICLE" [(#CONFIG{aa/id_aa}|=={#ID_ARTICLE}|?{selected="selected",''})]>&nbsp;&nbsp;&nbsp;&nbsp;#ID_ARTICLE . #TITRE</option>
+  	        <option value="#ID_ARTICLE" [(#CONFIG{aa/id_aa}|=={#ID_ARTICLE}|?{selected="selected",''})]>&nbsp;&nbsp;#ID_ARTICLE . #TITRE</option>
   			</BOUCLE_articles_racine>
   			<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
   			   <option value="" style="font-weight: bold;">&nbsp;&nbsp;rubrique #ID_RUBRIQUE : #TITRE</option>
@@ -33,13 +33,13 @@ Ici vous pouvez configurer l'article qui sera affich&eacute; en page sommaire.<b
 <fieldset><legend>Eléments à utiliser :</legend>
    <label>Logo</label>
    <input type="checkbox" name="logo" [checked="(#ENV{logo})"] />
-   <label>Titre</label>
+   &nbsp;&nbsp;<label>Titre</label>
    <input type="checkbox" name="titre" [checked="(#ENV{titre})"] />
-   <label>Sous-titre</label>
+   &nbsp;&nbsp;<label>Sous-titre</label>
    <input type="checkbox" name="soustitre" [checked="(#ENV{soustitre})"] />	 
-	 <label>Chapeau</label>
+	 &nbsp;&nbsp;<label>Chapeau</label>
    <input type="checkbox" name="chapo" [checked="(#ENV{chapo})"] />
-	 <label>Texte</label>
+	 &nbsp;&nbsp;<label>Texte</label>
    <input type="checkbox" name="texte" [checked="(#ENV{texte})"] />
 </fieldset>
 
