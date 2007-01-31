@@ -1,0 +1,22 @@
+   
+<div class="timedSlideshow jdSlideshow" id="mySlideshow">                             						
+	<script type="text/javascript">
+		countArticle = 0;
+		var	 mySlideData = new Array();
+		<BOUCLE_liste_images(DOCUMENTS) {id_rubrique} {par hasard} {lang}>
+			mySlideData[countArticle++] = new Array(
+				'[(#URL_DOCUMENT)]',
+				'[(#URL_DOCUMENT)]',
+				'[(#TITRE)]',
+				'[(#DESCRIPTIF)]'
+			);
+		</BOUCLE_liste_images>						
+	</script>			
+	<script type="text/javascript">
+		function startSlideshow() {
+			var slideshow = new timedSlideShow($('mySlideshow'), mySlideData);
+		}
+
+		addLoadEvent(startSlideshow);
+	</script>
+</div>
