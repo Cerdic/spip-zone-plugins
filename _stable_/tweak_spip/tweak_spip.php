@@ -215,8 +215,8 @@ tweak_log(" -- pipelines en metas : mode forcé, donc on continue...");
 	// completer les variables manquantes et incorporer l'activite lue dans les metas
 	foreach($temp = $tweaks as $i=>$tweak) {
 		if (!isset($tweak['id'])) { $tweaks[$i]['id']='erreur'; $tweaks[$i]['nom'] = _T('tweak:erreur_id');	}
-		if (!isset($tweak['categorie'])) $tweaks[$i]['categorie'] = _T('tweak:divers');
-			else $tweaks[$i]['categorie'] = _T('tweak:'.$tweaks[$i]['categorie']);
+		if (!isset($tweak['categorie'])) $tweaks[$i]['categorie'] = 'divers';//_T('tweak:divers');
+//			else $tweaks[$i]['categorie'] = _T('tweak:'.$tweaks[$i]['categorie']);
 		if (!isset($tweak['nom'])) $tweaks[$i]['nom'] = _T('tweak:'.$tweak['id'].':nom');
 		$tweaks[$i]['auteur'] = propre($tweaks[$i]['auteur']);
 		if (!isset($tweak['description'])) $tweaks[$i]['description'] = _T('tweak:'.$tweak['id'].':description');

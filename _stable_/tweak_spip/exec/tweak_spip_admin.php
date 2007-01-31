@@ -75,24 +75,43 @@ div.detailtweak hr {
 EOF;
 	echo "</style>";
 	echo "<script type=\"text/javascript\"><!--
-function verifchange(tweak, index, nb_var) {
- if(this.checked == true) {
+
+var Tweaks = new Array(); // Listes des tweaks
+
+function tweakcheck(ischecked, index) {
+ tweak = Tweaks[index][0];
+ if(ischecked == true) {
  	classe = 'nomtweak_on';
-	html = 'input';
+	html = '-input';
 	test = 1
  } else {
  	classe = 'nomtweak';
-	html = 'valeur';
+	html = '-valeur';
 	test = 0
  }
  document.getElementById(tweak).className = classe;
  document.getElementById('tweak_'+tweak).value = test;
- for(i=1;i<=nb_var;i++) {
-  j = index+i;
-  var chaine=document.getElementById('tweak_'+j+'-'+html).innerHTML;
+ 
+ for(ti=1;ti<=Tweaks[index][1];ti++) {
+  tj = index+ti;
+  var chaine=document.getElementById('tweak_'+tj+html).innerHTML;
   if(html=='input') chaine=chaine.replace(/HIDDENTWEAKVAR__/,'');
-  document.getElementById('tweak_'+j+'-visible').innerHTML = chaine;
+  document.getElementById('tweak_'+tj+'-visible').innerHTML = chaine;
  }
+}
+
+function tweakcateg(categ, lestweaks, count) {
+ for(tk=0;tk<count;tk++) {
+ 	name = Tweaks[lestweaks[tk]][0];
+	if (!document.getElementsByName('foo_'+name)[0].disabled) {
+		document.getElementsByName('foo_'+name)[0].checked = this.checked;
+		tweakcheck(this.checked, lestweaks[tk]);
+	}
+ }
+}
+
+function tweakchange(index) {
+ tweakcheck(this.checked, index);
 }
 //--></script>";
 }
@@ -184,26 +203,36 @@ tweak_log("Début : exec_tweak_spip_admin()");
 	echo "\n<table border='0' cellspacing='0' cellpadding='5' >",
 		"<tr><td class='serif'>",
 		'<p>'._T('tweak:presente_tweaks').'</p><br/>';
-	foreach($temp = $tweaks as $tweak) $categ[$tweak['categorie']] = 1; ksort($categ);
-	foreach(array_keys($categ) as $c) {
-		echo '<p><strong>'._T('tweak:'.$c).'</strong></p>';
-		echo '<ul>';
-		foreach($temp = $tweaks as $tweak) if ($tweak['categorie']==$c) echo '<li>' . ligne_tweak($tweak) . "</li>\n";
-		echo '</ul>';
+	foreach($temp = $tweaks as $tweak) $categ[_T('tweak:'.$tweak['categorie'])] = $tweak['categorie']; ksort($categ);
+	$js = ''; 
+	foreach($categ as $c=>$i) {
+		$basics = array(); $s = '';
+		foreach($temp = $tweaks as $tweak) if ($tweak['categorie']==$i) {
+			$s .= '<li>' . ligne_tweak($tweak, $js) . "</li>\n";
+			$basics[] = $tweak['basic'];
+		}
+		$ss = "<input type='checkbox' name='foo_$i' value='O' id='label_{$i}_categ'";
+//		$ss .= $actif?" checked='checked'":"";
+//		$ss .= $erreur_version?" disabled='disabled'":"";
+		$ss .= " onclick='tweakcateg.apply(this,[\"$i\", [".join(', ', $basics).'], '.count($basics)."])' />";
+		$ss .= "<label for='label_{$i}_categ' style='display:none'>"._T('tweak:activer_tweak')."</label>";
+		preg_match(',([0-9]+)\.?\s*(.*),', _T('tweak:'.$c), $reg);
+		echo "<form>$ss <strong>$reg[2]</strong></form>";
+		echo "<ul>$s</ul>";
 	}
 	echo "</td></tr></table>\n";
+	echo "<script type=\"text/javascript\"><!--\n$js\n//--></script>";
 
 	echo generer_url_post_ecrire('tweak_spip_admin');
 	echo "\n<input type='hidden' name='changer_tweaks' value='oui'>";
 	foreach($temp = $tweaks as $tweak) echo "<input type='hidden' id='tweak_".$tweak['id']."' name='tweak_".$tweak['id']."' value='".($tweak['actif']?"1":"0")."' />";
 	echo "\n<div style='text-align:$spip_lang_right'>",
-		"<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' ",
-		"\"></div>";
+		"<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' /></div>";
 
 # ce bouton est trop laid :-)
 # a refaire en javascript, qui ne fasse que "decocher" les cases
 #	echo "<div style='text-align:$spip_lang_left'>";
-#	echo "<input type='submit' name='desactive_tous' value='"._T('bouton_desactive_tout')."' class='fondl'>";
+#	echo "<input type='submit' name='desactive_tous' value='"._T('bouton_desactive_tout')."' class='fondl' />";
 #	echo "</div>";
 
 	fin_cadre_trait_couleur();
@@ -217,7 +246,7 @@ tweak_log("Fin   : exec_tweak_spip_admin()");
 }
 
 // affiche un tweak sur une ligne
-function ligne_tweak($tweak){
+function ligne_tweak($tweak, &$js){
 	global $spip_version_code;
 	static $id_input=0;
 	$inc = $tweak_id = $tweak['id'];
@@ -243,8 +272,9 @@ function ligne_tweak($tweak){
 	$s .= "<input type='checkbox' name='foo_$inc' value='O' id='label_$id_input'";
 	$s .= $actif?" checked='checked'":"";
 	$s .= $erreur_version?" disabled='disabled'":"";
-	$s .= " onclick='verifchange.apply(this,[\"$inc\", $index, $nb_var])'";
+	$s .= " onclick='tweakchange.apply(this,[$index])'";
 	$s .= "/> <label for='label_$id_input' style='display:none'>"._T('tweak:activer_tweak')."</label>";
+	$js .= "Tweaks[$index] = new Array(\"$inc\", $nb_var);\n";
 
 	$s .= bouton_block_invisible($tweak_id) . propre($tweak['nom']);
 
