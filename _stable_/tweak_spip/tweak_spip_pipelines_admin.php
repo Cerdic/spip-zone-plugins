@@ -39,7 +39,8 @@ function tweak_spip_header_prive($flux){
 		. tweak_insert_header('css')
 		. tweak_insert_header('js');
 	global $tweaks_metas_pipes;
-	eval($tweaks_metas_pipes['header_prive']);
+	if (isset($tweaks_metas_pipes['header_prive']))
+		eval($tweaks_metas_pipes['header_prive']);
 	return $flux;
 }
 function tweak_spip_install($action){
