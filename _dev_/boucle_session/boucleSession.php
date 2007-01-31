@@ -11,6 +11,7 @@ $GLOBALS['tables_principales']['spip_session']= array(
 		'nom' => 'text NOT NULL',
 		'login' => 'VARCHAR(255) BINARY NOT NULL',
 		'email' => 'tinytext NOT NULL',
+		'lang' => 'VARCHAR(5)',
 		'statut' => 'VARCHAR(255) NOT NULL',
 	),
 	'key' => array('PRIMARY KEY' => 'id_auteur')
@@ -35,6 +36,7 @@ function boucle_SESSION($id_boucle, &$boucles) {
 			\$Pile[\$SP]['nom']= \$GLOBALS['auteur_session']['nom'];
 			\$Pile[\$SP]['login']= \$GLOBALS['auteur_session']['login'];
 			\$Pile[\$SP]['email']= \$GLOBALS['auteur_session']['email'];
+			\$Pile[\$SP]['lang']= \$GLOBALS['auteur_session']['lang'];
 			\$Pile[\$SP]['statut']= \$GLOBALS['auteur_session']['statut'];
 			\$prefs = spip_abstract_fetsel("prefs", "spip_auteurs",
 					"id_auteur = " . \$GLOBALS['auteur_session']['id_auteur']);
@@ -45,6 +47,7 @@ function boucle_SESSION($id_boucle, &$boucles) {
 			\$Pile[\$SP]['nom']='';
 			\$Pile[\$SP]['login']='';
 			\$Pile[\$SP]['email']='';
+			\$Pile[\$SP]['lang']='';
 			\$Pile[\$SP]['statut']='anonymous';
 			\$Pile[\$SP]['prefs']= array();
 		}
@@ -92,6 +95,19 @@ function critere_admin($idb, &$boucles, $crit) {
 		$boucle->where[]= "\$GLOBALS['auteur_session']['statut']!='0minirezo'";
 	} else {
 		$boucle->where[]= "\$GLOBALS['auteur_session']['statut']=='0minirezo'";
+	}
+}
+
+function critere_visiteur($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	if($boucle->type_requete!='session') {
+		error_log("Heu ...");
+		return;
+	}
+	if($crit->not) {
+		$boucle->where[]= "\$GLOBALS['auteur_session']['statut']!='6forum'";
+	} else {
+		$boucle->where[]= "\$GLOBALS['auteur_session']['statut']=='6forum'";
 	}
 }
 
