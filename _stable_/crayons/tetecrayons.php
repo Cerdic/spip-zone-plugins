@@ -107,7 +107,7 @@ EOH;
 // si cette fonction est absente, balise_EDIT_dist() met a vide
 function balise_EDIT($p) {
 	$p->code = "classe_boucle_crayon('"
-		. $p->type_requete
+		. $p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->type_requete
 		."',"
 		.sinon(interprete_argument_balise(1,$p),"''")
 		.","
@@ -124,7 +124,7 @@ function balise_EDIT($p) {
 // - du champ demande (vide, + ou se terminant par + : (+)classe type--id)
 // - de l'id courant
 function classe_boucle_crayon($type_boucle, $champ, $id) {
-	$type_boucle = 	$type_boucle[strlen($type_boucle) - 1] == 's' ?
+	$type_boucle = $type_boucle[strlen($type_boucle) - 1] == 's' ?
 			substr($type_boucle, 0, -1) : 
 			str_replace(
 				array('hierarchie', 'syndication'),
