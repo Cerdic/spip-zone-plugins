@@ -22,7 +22,7 @@ $.fn.diapo_mode = function() {
     return this.click(function() {
     	$("#diapo_icones a").removeClass("selected");
 		$(this).addClass("selected");
-		mId=$(this).id();
+		mId=$(this).attr('id');
 		if (mId=="diapo_ico"){
 			$("#diapo_vignettes").attr("class","diapo_vignettes_invisible");
 			$("#diapo").attr("class","diapo_grand");
@@ -66,9 +66,9 @@ $.fn.diapo_pagination = function() {
     	pagin="";
     	mClass=$("#diapo_grand").attr('class').split('_');
 		mPage="diapo";
-		malign=$("#diapo_icones a.selected").id().replace("diapo_ico","");
+		malign=$("#diapo_icones a.selected").attr('id').replace("diapo_ico","");
 		mid_article=mClass[1];
-		tab=$(this).href().split('#');
+		tab=$(this).attr('href').split('#');
     	i=tab[0].lastIndexOf('debut_')
     	if (i>0)
 			pagin="?"+tab[0].substring(i,(tab[0].indexOf('=',i)))+"="+tab[0].substring((tab[0].indexOf('=',i)+1),tab[0].length);	
@@ -92,7 +92,7 @@ $.fn.diapo_vignette = function() {
  		mpage="diapo_img";
 		mid_article=mClass[1];
 		mnum=mClass[2]-1;
-		malign=$("#diapo_icones a.selected").id().replace("diapo_ico","");
+		malign=$("#diapo_icones a.selected").attr('id').replace("diapo_ico","");
 		$.get("spip.php",
 				{page : mpage, id_article : mid_article, num : mnum, align : malign},
 				function(txt){
