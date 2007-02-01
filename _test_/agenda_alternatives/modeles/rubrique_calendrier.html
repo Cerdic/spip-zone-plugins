@@ -1,17 +1,4 @@
 <h2 class="structure"><:Agenda:></h2>
-<style>
-.agenda {
-line-height:1.4em;
-}
-.agendaBold {
-	font-weight: bold;
-	font-size:108%;
-}
-.agendaThisDay { 
-/*	background-color: #FFFFDD; 
-	border:1px solid #000000; !important */
-} 
-</style>
 <?php
 preg_match(',^([0-9]{4})(-[0-9]{2})?(-[0-9]{2})?,', '#DATE_REQUEST_SURE', $matches);
 $Y = sprintf('%04d', $y=$matches[1]);

@@ -16,13 +16,13 @@ Pour sommaire.html, placer le code :
 	<INCLURE{fond=inc/inc-annonces}{lang}>
 
 Pour inc/inc-menu-principal.html, placer le code : 
-	<B_agenda><li id="menu-principal-contact"><a href="<BOUCLE_agenda(EVENEMENTS){0,1}>[(#URL_PAGE{evenements})]</BOUCLE_agenda>" title="<:icone_agenda:>"><:icone_agenda:></a></li></B_agenda>
+	<B_agenda><li id="menu-principal-agenda"><a href="<BOUCLE_agenda(EVENEMENTS){0,1}>[(#URL_PAGE{evenements})]</BOUCLE_agenda>" title="<:icone_agenda:>"><:icone_agenda:></a></li></B_agenda>
 	
 	après la ligne qui se termine par : 
 	<:accueil_site:></a></li>
 
 Pour inc/inc-menu.html, placer le code : 
-	[(#MODELE{rubrique_calendrier}{self=#SELF}{var_date=archives}{date=#ENV{archives,#DATE{lang}{id_rubrique})]
+	[(#MODELE{rubrique_calendrier}{self=#SELF}{var_date=archives}{date=#ENV{archives,#DATE}}{lang}{id_rubrique})]
 	
 	après la ligne : 
 	<div class="menu" id="menu-rubriques">

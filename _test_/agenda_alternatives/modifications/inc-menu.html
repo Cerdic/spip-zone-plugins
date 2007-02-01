@@ -13,14 +13,8 @@
 	Dynamic sections menu 
     ************************************************************* ]
 <div class="menu" id="menu-rubriques">
-<!-- Début Patrice -->
-	[(#MODELE{rubrique_calendrier}
-		{self=#SELF}
-		{var_date=archives}
-		{date=#ENV{archives,#DATE}}
-		{lang}
-		{id_rubrique}
-	)]
+<!-- Debut Patrice -->
+	[(#MODELE{rubrique_calendrier}{self=#SELF}{var_date=archives}{date=#ENV{archives,#DATE}}{lang}{id_rubrique})]
 <!-- Fin Patrice -->
 <BOUCLE_rub_menu(RUBRIQUES){id_rubrique}>
 <BOUCLE_filles(RUBRIQUES){id_parent}{doublons filles}></BOUCLE_filles>

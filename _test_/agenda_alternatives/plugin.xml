@@ -5,7 +5,7 @@
  	[Patrice VANNEUFVILLE->mailto:patrice.vanneufville@laposte.net]
 _ &copy; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
-	<version>0.2</version>
+	<version>0.3</version>
 	<etat>test</etat>
 	<description>Permet l'utilisation des plugins Agenda & Widget Calendar dans le squelettes Alternatives, et donc la gestion des &eacute;v&egrave;nements.
 
@@ -24,4 +24,9 @@ _ Le plugin SkTheme (et donc Alternatives v1.9.1.2 !) ne semblent pas compatible
 	<fonctions>minicalalter_fonctions.php</fonctions>
 	<options>minicalalter_options.php</options>
 	<prefix>CalAlter</prefix>
+	<pipeline>
+		<nom>insert_head</nom> 
+		<action>insert_head</action>
+		<inclure>minicalalter_pipelines.php</inclure>
+	</pipeline>
 </plugin>

@@ -1,8 +1,8 @@
 	<div class="menu" id="menu-principal">
 		<ul>
 			<li id="menu-principal-accueil"><a href="#URL_SITE_SPIP" title="<:accueil_site:> : #NOM_SITE_SPIP"><:accueil_site:></a></li>
-<!-- Début Patrice -->
-			<B_agenda><li id="menu-principal-contact"><a href="<BOUCLE_agenda(EVENEMENTS){0,1}>[(#URL_PAGE{evenements})]</BOUCLE_agenda>" title="<:icone_agenda:>"><:icone_agenda:></a></li></B_agenda>
+<!-- Debut Patrice -->
+			<B_agenda><li id="menu-principal-agenda"><a href="<BOUCLE_agenda(EVENEMENTS){0,1}>[(#URL_PAGE{evenements})]</BOUCLE_agenda>" title="<:icone_agenda:>"><:icone_agenda:></a></li></B_agenda>
 <!-- Fin Patrice -->
 			<B_contact><li id="menu-principal-contact"><a href="<BOUCLE_contact(AUTEURS) {id_auteur=1}>[(#URL_SITE_SPIP)/][(#URL_AUTEUR)]</BOUCLE_contact>" title="<:info_contact:>"><:info_contact:></a></li></B_contact>
 			<li id="menu-principal-plan"><a href="#URL_PAGE{plan}" title="<:plan_site:>"><:plan_site:></a></li>

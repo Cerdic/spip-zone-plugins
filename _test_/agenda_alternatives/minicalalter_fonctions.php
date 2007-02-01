@@ -1,10 +1,19 @@
 <?php
+/*
+	Mini Calendrier pour Alternatives
+ 	Patrice VANNEUFVILLE - patrice.vanneufville<@>laposte.net
+		(idee de James)
+	(c) 2007 - Distribue sous licence GPL
+	Plugin pour spip 1.9
+	Licence GNU/GPL
+*/
 
 function url_evenements($D, $M, $Y) {
  return parametre_url(generer_url_public('evenements'),VAR_DATE_CAL,sprintf("%04d-%02d-%02d",$Y,$M,$D));
 }			  
 
-// A supprimer bientot !! (Intégré dans Agenda...)
+// A supprimer bientot !! (En principe, intégrée dans Agenda...)
+//
 // décale les mois de la date.
 // cette fonction peut raboter le jour si le nouveau mois ne les contient pas
 // exemple 31/01/2007 + 1 mois => 28/02/2007
@@ -47,12 +56,6 @@ function balise_DATE_REQUEST_SURE($p) {
 	#$p->interdire_scripts = true;
 	return $p;
 }
-
-/* Balise #MINICAL_ALTER
-   Auteur James (c) 2006
-   Plugin pour spip 1.9
-   Licence GNU/GPL
-*/
 
 
 function critere_archives($idb, &$boucles, $crit) {
