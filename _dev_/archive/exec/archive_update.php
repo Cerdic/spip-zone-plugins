@@ -35,9 +35,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	}
 	
 	//relance la page appelante
-	$url = generer_url_ecrire("articles", "id_article=$id_article", true, true);
-	$url = "http://".$_SERVER['HTTP_HOST']."/ecrire/".$url;
-	header("Location: ".$url);
+	//$url = generer_url_ecrire("articles", "id_article=$id_article", true, true);
+	//$url = "http://".$_SERVER['HTTP_HOST']."/ecrire/".$url;
+	header("Location: ".$_SERVER['HTTP_REFERER']);
 	//echo recuperer_page($url);
 	
 ?>
