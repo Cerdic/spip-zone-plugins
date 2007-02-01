@@ -48,7 +48,7 @@ jQuery.fn.ajaxAction = function() {
 			helperClass: 'autocompleter',
 			selectClass: 'selectAutocompleter',
 			minchars: 1,
-			onSelect : setDonnee,
+			onSelect : setDonnee
 			/*onShow : fadeInSuggestion,
 			onHide : fadeOutSuggestion*/
 		}

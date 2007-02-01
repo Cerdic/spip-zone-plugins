@@ -28,7 +28,7 @@
 	//echo "forms_avant_propre::";
 		// Mecanisme de mise a jour des liens
 		$forms = array();
-		$maj_liens = ($_GET['exec']=='articles' AND $id_article = intval($_GET['id_article']));
+		$maj_liens = (isset($_GET['exec']) AND $_GET['exec']=='articles' AND $id_article = intval($_GET['id_article']));
 		if ($maj_liens) {
 			if (!$reset) {
 				$query = "DELETE FROM spip_forms_articles WHERE id_article=$id_article";
