@@ -150,10 +150,6 @@ function typo_guillemets_rempl($texte){
 		default:
 			$guilles="&ldquo;$1&rdquo;";
 	}
-/*
-echo $texte;	
-if (preg_match('/"\s*(.*)\s*"/', $texte, $reg)) echo "<br>GUIL : $reg[1]<br>";
-*/
 	$trouve = array(
 		'/\s*=\s*"(.*?)"/', // 1. Echappement des guillemets a l'interieur de balises
 		'/"\s*(.*?)\s*"/', // 2. Remplacement des autres paires de guillemets (et suppression des espaces apres/avant)
