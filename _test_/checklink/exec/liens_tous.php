@@ -6,8 +6,6 @@ include_spip('public/assembler');
 function exec_liens_tous(){
   include_spip("inc/presentation");
 
-  checklink_verifier_base();
-	
 	debut_page(_L("Tous les liens"), "documents", "liens");
 	debut_gauche();
 	//debut_boite_info();

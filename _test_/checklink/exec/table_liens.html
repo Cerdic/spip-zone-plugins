@@ -30,10 +30,10 @@ alt="checklink-24"  /></div><div style='background-color: #C5E41C; color: black;
 <div class='pagination'>#PAGINATION</div>
 </td>
 </tr>
-<BOUCLE_liens(LIENS){statut?}{pagination 20}>
+<BOUCLE_liens(LIENS){statut?}{pagination 20}{obsolete!='oui'}>
 <tr class='tr_liste'>
 <td class="arial11"><img src='#EVAL{_DIR_IMG_PACK}[(#GET{#STATUT})]' alt="Statut #STATUT" /></td>
-<td class="arial11">[<a href='(#ID_TABLE|url_visu_objet{#ID_OBJET})'>][(#URL|lignes_longues{60})][</a>(#ID_TABLE|url_visu_objet{#ID_OBJET}|?{' '})]</td>
+<td class="arial11">[<a href='(#ID_TABLE|url_visu_objet{#ID_OBJET})'>][(#URL|lignes_longues{30})][</a>(#ID_TABLE|url_visu_objet{#ID_OBJET}|?{' '})]</td>
 <td class="arial11">[(#LANG*)]</td>
 <td class="arial11">[<a href='#URL' title="[(#TITRE|texte_backend)]"><:lien_visite_site:></a>]</td>
 <td class="arial11">[<a href='[(#GET{urlbase}|parametre_url{verifier,#ID_LIEN})]' title="[(#TITRE|texte_backend)]"><:lien_mise_a_jour_syndication:></a>]</td>

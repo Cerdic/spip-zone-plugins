@@ -18,7 +18,7 @@ function checklink_ajouter_boutons($boutons_admin) {
 	return $boutons_admin;
 }
 
-function checklink_pre_enregistre_contenu($flux){
+function checklink_post_edition($flux){
 	static $objet_traite=array();
 	if (!isset($flux['args']['id_objet']) || !isset($flux['args']['table']))
 		return; // rien a faire ici ...
@@ -28,10 +28,11 @@ function checklink_pre_enregistre_contenu($flux){
 	$id_table = id_index_table($table);
 	
 	// si on a pas commence a traiter cet objet, marquer tous ses liens existants comme obsolete
-	if (!count($objet_traite)) checklink_verifier_base();
 	if (!isset($objet_traite[$id_table]) OR !isset($objet_traite[$id_table][$id_objet]) ){
-		spip_query("UPDATE spip_liens SET obsolete='oui' WHERE id_table=$id_table AND id_objet=$id_objet");
-		$objet_traite[$id_table][$id_objet] = true;
+		if (count($flux['data'])>=0.5*count($flux['args']['champs'])){
+			spip_query("UPDATE spip_liens SET obsolete='oui' WHERE id_table=$id_table AND id_objet=$id_objet");
+			$objet_traite[$id_table][$id_objet] = true;
+		}
 	}
 	
 	// passer le contenu dans propre pour transformer les liens internes et les modeles eventuels

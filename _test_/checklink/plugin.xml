@@ -6,14 +6,14 @@
 	Cedric &amp; James
 _ (c) 2006 - Licence GPL
 	</auteur>
-	<version>
-	0.1
-	</version>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<install>base/checklink_upgrade.php</install>
 	<etat>
 	dev
 	</etat>
 	<description>
-	Ce plugin maintient une liste des liens ins&#233;r&#233;s dans le contenu ditorialcute; afin d'en valider p&#233;riodiquement la validit&#233;,
+	Ce plugin maintient une liste des liens ins&#233;r&#233;s dans le contenu &#233;ditorial afin d'en valider p&#233;riodiquement la validit&#233;,
 	et d'en d&#233;tecter les attributs de langue et de titre qui sont ainsi renseign&#233;s automatiquements sur les balises a
 	</description>
 	<lien></lien> <!-- URI de documentation -->
@@ -27,7 +27,7 @@ _ (c) 2006 - Licence GPL
 	checklink_mes_fonctions.php
 	</fonctions>
 	<pipeline>
-		<nom>pre_enregistre_contenu</nom>
+		<nom>post_edition</nom>
 		<inclure>checklink_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
