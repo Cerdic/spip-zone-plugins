@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // categories
 	'admin' => "1. Administration",
-	'typo' => "2. Typographie",
+	'typo' => "2. Raccourcis typographiques",
 	'squel' => "3. Squelettes",
 	'divers' => "4. Divers",
 	
@@ -47,11 +47,11 @@ _ version_plein_texte : extrait le contenu texte d'une page html pour rendre du 
 	'orientation:description'	=> "3 nouveaux crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&eacute;al pour le classement des photos en fonction de leur forme.
 _ Infos : [->http://www.spip-contrib.net/Portrait-ou-Paysage]",
 
-	'desactiver_flash:nom' => 'D&eacute;sactive les objects flash',
+	'desactiver_flash:nom' => 'D&eacute;sactive les objets flash',
 	'desactiver_flash:description'	=> 'Supprime les objets flash des pages de votre site et les remplace par le contenu alternatif associ&eacute;.
 _ N&eacute;cessite le plugin {jQuery} ou une version de SPIP sup&eacute;rieure &agrave; 1.9.2.',
 
-	'toutmulti:nom' => 'Tout multi',
+	'toutmulti:nom' => 'Blocs multilingues',
 	'toutmulti:description'	=> "Introduit le raccourci &lt;:un_texte:&gt; pour introduire librement des blocs multi-langues dans un article.
 _ La fonction SPIP utilis&eacute;e est : _T('un_texte', \$flux).
 _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans les fichiers de langue.",
@@ -71,7 +71,7 @@ _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans le
 
 Infos : [->http://www.spip-contrib.net/?article1552]",
 
-	'typo_exposants:nom' => 'Mises en exposant',
+	'typo_exposants:nom' => 'Exposants typographiques',
 	'typo_exposants:description'	=> "Textes fran&ccedil;ais : am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abr&eacute;viation correcte).
 _ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie nationale telles qu'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l'Imprimerie nationale, Paris, 2002).
 _ Infos : [->http://www.spip-contrib.net/?article1564]",
@@ -95,6 +95,8 @@ _ Infos : [->http://www.spip-contrib.net/?article1561]",
 	'chatons:description'	=> 'Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <acronym>:nom</acronym>.
 _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouve dans le r&eacute;pertoire img/chatons.',
 
+	'guillemets:nom' => 'Guillemets typographiques',
+	'guillemets:description'	=> 'Ce plugin remplace automatiquement les guillemets droits (") par les guillemets typographiques de la langue de composition. Le remplacement, transparent pour l\'utilisateur, ne modifie pas le texte mais seulement l\'affichage final.',
 /*
 	':nom' => '',
 	':description'	=> '',

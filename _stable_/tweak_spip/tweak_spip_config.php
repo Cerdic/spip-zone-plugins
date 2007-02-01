@@ -134,6 +134,13 @@ add_tweak( array(
 ));
 
 add_tweak( array(
+	'id'	=> 'guillemets',
+	'auteur' 		=> 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
+	'categorie'		=> 'typo',
+	'pipeline:post_typo'	=> 'typo_guillemets',
+));
+
+add_tweak( array(
 	'id'	=> 'filets_sep',
 	'auteur' 		=> 'FredoMkb',
 	'categorie'		=> 'typo',
