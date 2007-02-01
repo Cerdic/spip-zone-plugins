@@ -1,0 +1,77 @@
+#CACHE{0}
+<?php
+function spipodf_unzip($fichier){
+	include_spip('inc/pclzip');
+	$repodf = sous_repertoire(_DIR_TMP,'odf');
+	$sous_rep = basename($fichier)."/";
+
+	$odt = new PclZip($fichier);
+	$ok = $odt->extract(
+		PCLZIP_OPT_PATH, $repodf,
+		PCLZIP_OPT_ADD_PATH, $sous_rep,
+		PCLZIP_OPT_REPLACE_NEWER
+	);
+
+	if ($odt->error_code<0)
+		return $odt->error_code;
+		
+	return $repodf.$sous_rep;
+}
+
+function spipodf_zip($dossier,$dest){
+	$files = preg_files($dossier,".*");
+	$newodt = new PclZip($dest);
+	$newodt->create($files,PCLZIP_OPT_REMOVE_PATH,$dossier);
+	if ($newodt->error_code<0)
+		return $newodt->error_code;
+
+	return $dest;
+}
+
+function spipodf_html2odf($texte){
+	$styles = '<style:style style:name="spip_gras" style:family="text"><style:text-properties fo:font-weight="bold" style:font-weight-asian="bold" style:font-weight-complex="bold"/>';
+	$styles .= '</style:style><style:style style:name="spip_italic" style:family="text"><style:text-properties fo:font-style="italic" style:font-style-asian="italic" style:font-style-complex="italic"/></style:style>';
+	$styles .= '<style:style style:name="spip_souligne" style:family="text"><style:text-properties style:text-underline-style="solid" style:text-underline-width="auto" style:text-underline-color="font-color"/></style:style>';
+
+	$texte = str_replace('</office:automatic-styles>',$styles.'</office:automatic-styles>',$texte);
+	$texte = preg_replace(',<p [^>]*class="([^"]*)"[^>]*>,','<text:p text:style-name="\\1">',$texte);
+	$texte = preg_replace(',</p>,','</text:p>',$texte);
+	//$texte = str_replace("<br />","\n",$texte);
+	$texte = str_replace("&nbsp;"," ",$texte);
+	return $texte;
+}
+
+$template = find_in_path('templates/article.odt');
+$unzip = spipodf_unzip($template);
+
+// lire le content
+lire_fichier($unzip."content.xml",$contenu);
+
+// retablir les boucles
+$contenu = preg_replace(",&lt;([/]?B(.*))&gt;,U","<\\1>",$contenu);
+$contenu = preg_replace(",^<"."[?]xml,","<@XML",$contenu);
+
+$contenu = "#"."CACHE{0}
+#"."HTTP_HEADER{Content-type: text/xml; charset=UTF-8}
+$contenu";
+
+ecrire_fichier(_DIR_TMP."content.html",$contenu);
+lire_fichier(_DIR_PLUGIN_SPIPODF."content_fonctions.php",$contenu);
+
+ecrire_fichier(_DIR_TMP."content_fonctions.php",$contenu);
+
+include_spip('inc/assembler');
+$page = recuperer_fond(_DIR_TMP."content",array('id_article'=>'#ID_ARTICLE'));
+@unlink(_DIR_TMP."content_fonctions.php");
+@unlink(_DIR_TMP."content.html");
+
+$page = preg_replace(",^<@XML,","<"."?xml",$page);
+
+$page = spipodf_html2odf($page);
+
+ecrire_fichier($unzip."content.xml",$page);
+$odt = spipodf_zip($unzip,_DIR_TMP . 'test.odt');
+
+//header('Content-Disposition: attachment; filename=test.odt');
+//readfile(_DIR_TMP . 'test.odt');
+?>
