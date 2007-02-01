@@ -54,6 +54,7 @@ function Crayons_preparer_page($page, $droits, $wdgcfg = array()) {
 	lang_select($GLOBALS['auteur_session']['lang']);
 
 	$jsFile = generer_url_public('crayons.js');
+	include_spip('inc/filtres'); // rien que pour direction_css() :(
 	$cssFile = direction_css(find_in_path('crayons.css'));
 
     $config = var2js(array(
