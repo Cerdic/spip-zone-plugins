@@ -74,7 +74,7 @@ texte d'inscription en tant que visiteur
 				]
 				[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 				<div style="text-align:left; padding:0px 0px 4px 0px;clear:both">
-				<input type="checkbox" name="list&#91;&#93;"  [(#COMPTEUR_BOUCLE|=={1}|?{'checked="checked"',''})]  value="#ID_LISTE" /><label><a title='<:spiplistes:infos_liste:>' href="[(#SELF|parametre_url{liste,#ID_LISTE})]">#TITRE</a></label></div>]
+				<label><input type="checkbox" name="list&#91;&#93;"  [(#COMPTEUR_BOUCLE|=={1}|?{'checked="checked"',''})]  value="#ID_LISTE" />#TITRE</a></label></div>]
 		</BOUCLE_listes>
 		[(#COMPTEUR_BOUCLE|!={1}|?{'<br />',''})]
 		</B_listes>
