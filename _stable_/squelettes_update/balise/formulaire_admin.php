@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2006                                                *
+ *  Copyright (c) 2001-2007                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -13,12 +13,14 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 
+// http://doc.spip.org/@balise_FORMULAIRE_ADMIN
 function balise_FORMULAIRE_ADMIN ($p) {
 	return calculer_balise_dynamique($p,'FORMULAIRE_ADMIN', array());
 }
 
 # on ne peut rien dire au moment de l'execution du squelette
 
+// http://doc.spip.org/@balise_FORMULAIRE_ADMIN_stat
 function balise_FORMULAIRE_ADMIN_stat($args, $filtres) {
 	return $args;
 }
@@ -30,6 +32,7 @@ function balise_FORMULAIRE_ADMIN_stat($args, $filtres) {
 # Pas question de recompiler: ca fait boucler !
 # Le debuger transmet donc ses donnees, et cette balise y retrouve son petit.
 
+// http://doc.spip.org/@balise_FORMULAIRE_ADMIN_dyn
 function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 
 	global $var_preview, $use_cache, $forcer_debug, $xhtml;
@@ -142,7 +145,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	include_spip('base/abstract_sql');
 	$login = preg_replace(',^@,','',$GLOBALS['spip_admin']);
 	$alang = spip_abstract_fetsel(array('lang'), array('spip_auteurs'),
-		array("login=" . spip_abstract_quote($login)));
+		array("login=" . _q($login)));
 	if ($alang['lang']) {
 		lang_select($alang['lang']);
 		$lang = $GLOBALS['spip_lang'];
@@ -150,37 +153,45 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	} else
 		$lang = '';
 
+	// Preparer le #ENV des boutons
+	$env = array(
+		'ecrire' => $ecrire,
+		'action' => self(),
+		'divclass' => $float,
+		'lang' => $lang,
+		'calcul' => (_request('var_mode') ? 'recalcul' : 'calcul'),
+	);
 
-	return array('formulaires/formulaire_admin', 0,
-		array(
-			'id_article' => $id_article,
-			'id_rubrique' => $id_rubrique,
-			'id_auteur' => $id_auteur,
-			'id_breve' => $id_breve,
-			'id_mot' => $id_mot,
-			'id_syndic' => $id_syndic,
-			'voir_article' => str_replace('&amp;', '&', generer_url_ecrire_article($id_article, 'prop')),
-			'voir_breve' => str_replace('&amp;', '&', generer_url_ecrire_breve($id_breve, 'prop')),
-			'voir_rubrique' => str_replace('&amp;', '&', generer_url_ecrire_rubrique($id_rubrique, 'prop')),
-			'voir_mot' => str_replace('&amp;', '&', generer_url_ecrire_mot($id_mot, 'prop')),
-			'voir_site' => str_replace('&amp;', '&', generer_url_ecrire_site($id_syndic, 'prop')),
-			'voir_auteur' => str_replace('&amp;', '&', generer_url_ecrire_auteur($id_auteur, 'prop')),
-			'ecrire' => $ecrire,
-			'action' => self(),
-			'preview' => $preview?parametre_url(self(),'var_mode','preview','&'):'',
-			'debug' => $debug,
-			'popularite' => $popularite,
-			'statistiques' => $statistiques,
-			'visites' => $visites,
-			'use_cache' => ($use_cache ? '' : ' *'),
-			'divclass' => $float,
-			'analyser' => $analyser,
-			'lang' => $lang,
-			'xhtml_error' => isset($GLOBALS['xhtml_error']) ? $GLOBALS['xhtml_error'] : '',
-			'svn_up_result' => isset($GLOBALS['svn_update_result'])?$GLOBALS['svn_update_result'] : '',
-			'svn_up_dir_skel' => isset($GLOBALS['svn_up_dir_skel'])?$GLOBALS['svn_up_dir_skel'] : ''
-			)
-		     );
+	if ($preview)
+		$env['preview']=parametre_url(self(),'var_mode','preview','&');
+	if ($debug)
+		$env['debug'] = $debug;
+	if ($statistiques) {
+		$env['popularite'] = $popularite;
+		$env['statistiques'] = $statistiques;
+		$env['visites'] = $visites;
+	}
+	if (!$use_cache)
+		$env['use_cache'] = ' *';
+	if ($analyser)
+		$env['analyser'] = $analyser;
+	if (isset($GLOBALS['xhtml_error']))
+		$env['xhtml_error'] = $GLOBALS['xhtml_error'];
+
+	foreach (array('article','rubrique','auteur','breve','mot','syndic'=>'site')
+	as $id => $obj) {
+		if (is_int($id)) $id = $obj;
+		if (${'id_'.$id}) {
+			$env['id_'.$id] = ${'id_'.$id};
+			$g = 'generer_url_ecrire_'.$obj;
+			$env['voir_'.$obj] = str_replace('&amp;', '&',
+				$g(${'id_'.$id}, 'prop'));
+		}
+	}
+	$env['svn_up_result'] = isset($GLOBALS['svn_update_result'])?$GLOBALS['svn_update_result'] : '';
+	$env['svn_up_dir_skel'] = isset($GLOBALS['svn_up_dir_skel'])?$GLOBALS['svn_up_dir_skel'] : '';
+	
+	return array('formulaires/formulaire_admin', 0, $env);
 }
 
 ?>
