@@ -44,8 +44,15 @@ $GLOBALS['sq_cartes'][]='zone';
 $GLOBALS['sq_cartes'][]='svg';
 $GLOBALS['sq_cartes'][]='svgx';
 $GLOBALS['sq_cartes'][]='geosvgwms';
+
+if (!defined('_DIR_PLUGIN_SPIPCARTO')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_SPIPCARTO',(_DIR_PLUGINS.end($p))."/");
+}
+
 include_spip("base/carto");
 function spipcarto_header_prive($flux) {
+		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_SPIPCARTO."css/carto_style_prive.css' type='text/css' media='all' />\n";
 	return $flux;
 }
 

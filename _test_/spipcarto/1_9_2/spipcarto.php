@@ -37,7 +37,10 @@ e -
 *
 \***************************************************************************/
 
-define('_DIR_PLUGIN_SPIPCARTO',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__)))))));
+if (!defined('_DIR_PLUGIN_SPIPCARTO')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_SPIPCARTO',(_DIR_PLUGINS.end($p))."/");
+}
 
 function spipcarto_ajouterBoutons($boutons_admin) {
   global $connect_statut,$connect_toutes_rubriques;

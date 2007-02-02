@@ -37,9 +37,10 @@ e -
 *
 \***************************************************************************/
 
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_CARTE")) return;
-define("_ECRIRE_INC_CARTE", "1");
+if (!defined('_DIR_PLUGIN_SPIPCARTO')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_SPIPCARTO',(_DIR_PLUGINS.end($p))."/");
+}
 include_spip("base/carto");
 
 function boucle_CARTO_CARTES($id_boucle, &$boucles) {
