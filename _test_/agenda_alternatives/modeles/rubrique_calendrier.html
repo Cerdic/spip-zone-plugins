@@ -76,6 +76,7 @@ if($datetot >= date("Ymd", mktime(0, 0, 0, $M-1, 1, $Y)) && $date <= date("Ymd",
 		if(date('m', $Time)-$M) { $Class = 'agenda'.(date('dmY', $Time) == $dmY ? 'ThisDay' : '').'NotThisMonth'; }
 		 else { $Class ='agenda'.(date('dmY', $Time) == $dmY ? 'ThisDay' : 'ThisMonth'); }
 		$date=date('Ymd', $Time);
+//		$bords = (date('dmY', $Time) == $dmY)?' style="border:1px solid #000000;"':''; 
 		if (isset($events[$date])) $Class.=' agendaBold'; 
 		echo "\n<td width=\"14%\" align=\"center\" class=\"$Class\">";
 		if (isset($events[$date])) {

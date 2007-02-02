@@ -32,12 +32,17 @@ function CalAlter_insert_head($flux){
 			font-size:108%;
 		}
 		td.agendaThisDay { 
+/* couleur jaune. retirer la ligne ci-dessous pour retrouver le bleu d'origine */		
 			background-color: #FFFFDD;
-			border:1px solid #000000;
+/*			border:1px solid #000000;*/
 		} 
 		td.agendaThisDayNotThisMonth {
 			background-color:#BBC9E3;
-			border:1px solid #000000;
+/*			border:1px solid #000000;*/
+		}
+/* Espaceur de blocs */
+		.nettoie { 
+			clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; 
 		}
 	</style>";
 	return $flux;
