@@ -39,9 +39,9 @@ function acronymes_config($flux){
 			}
 			$acronymes_rubrique_locale_active = $GLOBALS['meta']['acronymes_rubrique_locale_active']?$GLOBALS['meta']['acronymes_rubrique_locale_active']:'non';
 			$out .= debut_cadre_relief('',true);
-			if ($acronymes_rubrique_locale_active!='oui'){
+			if ($acronymes_rubrique_locale_active!=$id_rubrique){
 				$out .= generer_url_post_ecrire('naviguer', "id_rubrique=$id_rubrique");
-				$out .= "<input type='hidden' name='acronymes_rubrique_locale_active' value='oui' />\n";
+				$out .= "<input type='hidden' name='acronymes_rubrique_locale_active' value='$id_rubrique' />\n";
 				$out .= "<div>"._L("Utiliser &eacute;galement la rubrique courante comme base locale des acronymes")."\n";
 				$out .= "<div align='$spip_lang_right'><input type='submit' name='Choisir' value='"._T('bouton_choisir')."' class='fondo'></div>\n";
 				$out .= "</div></form>";

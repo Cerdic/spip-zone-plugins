@@ -43,19 +43,18 @@ function acronymes_ajouter($chaine,$replacenb=1)
 {
 	static $acro_patterns=array();
 	static $acro_replacements=array();
+	static $acro_step2=array();
 
 	$id_rubrique_acronymes = 0;
 	if (isset($GLOBALS['meta']['acronymes_id_syndic'])){
 		$id_syndic_acronymes=$GLOBALS['meta']['acronymes_id_syndic'];
 		if (isset($GLOBALS['meta']['acronymes_rubrique_locale_active'])&&($GLOBALS['meta']['acronymes_rubrique_locale_active']!='non')){
-	  	$res = spip_query("SELECT id_rubrique FROM spip_syndic WHERE id_syndic=".spip_abstract_quote($id_syndic_acronymes));
-	  	if ($row = spip_fetch_array($res))
-				$id_rubrique_acronymes=$row['id_rubrique'];
+			$id_rubrique_acronymes=$GLOBALS['meta']['acronymes_rubrique_locale_active'];
 		}
 	}
 	else
 		$id_syndic_acronymes = 0;
-		
+
 	$id_syndic_acronymes=intval($id_syndic_acronymes);
 	$id_rubrique_acronymes=intval($id_rubrique_acronymes);
 	
@@ -79,6 +78,7 @@ function acronymes_ajouter($chaine,$replacenb=1)
 					$set[$accro] = 1;
 				}
 			}
+			
 			#Récupération des mots et des définitions dans un site syndique distant
 	  	$res = spip_query("SELECT titre,descriptif FROM spip_syndic_articles WHERE id_syndic=".spip_abstract_quote($id_syndic_acronymes));
 			while($row = spip_fetch_array($res)){
@@ -93,14 +93,17 @@ function acronymes_ajouter($chaine,$replacenb=1)
 	  	
 			foreach($acro_patterns as $key=>$accro)
 			{
-				$desc_temp = trim(attribut_xhtml(supprimer_tags($acro_replacements[$key])));
-				$pattern="{([^A-Za-z0-9@\.])(";
+				$desc_temp = trim(attribut_html(supprimer_tags($acro_replacements[$key])));
+				$desc_temp = str_replace("'","&#039;",$desc_temp);
+				$pattern="{([^\w@\.])(";
 				for ($i=0;$i<strlen($accro);$i++)
 					$pattern.=$accro{$i}."[\.]?";
-				$pattern.=")(?![A-Za-z0-9])}";
+				$pattern.=")(?![\w@])}";
 				$acro_patterns[$key] = $pattern;
-				$acro_replacements[$key] = "\\1<acronym title='$desc_temp'>\\2</acronym>";
+				$acro_replacements[$key] = "\\1<acronym title='@A@C@R@O@$key@@'>\\2@</acronym>";
+				$acro_step2["@A@C@R@O@$key@@"] = $desc_temp;
 			}
+			$acro_step2["@</acronym>"] = "</acronym>"; // nettoyer les balises fermantes
 			
 			#tri nécessaire
 			ksort($acro_patterns);
@@ -119,7 +122,11 @@ function acronymes_ajouter($chaine,$replacenb=1)
 			  $pattern = '<([a-zA-Zéàèçùûôâîê0-9\. \s"\'_\/\-\+=;,!:@~\(\)\?&#%\n\[\]]+)>';
 			  preg_match_all ('/' . $pattern . '/', $texte, $xtagMatches, PREG_SET_ORDER);
 			  $xtextMatches = preg_split ('/' . $pattern . '/', $texte);
+			  // on met des acronymes la ou besoin, mais avec un title factice (pour pas en remettre dans le title)
  				$xtextMatches = preg_replace($acro_patterns, $acro_replacements, $xtextMatches ,$replacenb);
+ 				// on met les bons title et on nettoie les balises acronym fermantes
+ 				$xtextMatches = str_replace(array_keys($acro_step2), array_values($acro_step2), $xtextMatches);
+ 				
 			  for ($ii = 0; $ii < count ($xtextMatches); $ii ++)
 	 				$xtextMatches [$ii] = $xtextMatches [$ii] . $xtagMatches [$ii] [0];
 
