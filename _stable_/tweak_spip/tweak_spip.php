@@ -154,8 +154,9 @@ function tweak_parse_code($code) {
 // parse la description et renseigne le nombre de variables
 function tweak_parse_description($tweak, $tweak_input) {
 	global $tweaks, $metas_vars; 
+tweak_log(" -- tweak_parse_description({$tweaks[$tweak]['id']})");
 	$tweaks[$tweak]['nb_variables'] = 0;
-	$tweaks[$tweak]['description'] = propre($tweaks[$tweak]['description']);
+	$tweaks[$tweak]['description'] = $tweaks[$tweak]['description'];
 	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $tweaks[$tweak]['description'], -1, PREG_SPLIT_DELIM_CAPTURE);
 	$descrip = '';
 	for($i=0;$i<count($t);$i+=2) if (($var=trim($t[$i+1]))!='') {
@@ -180,12 +181,11 @@ function tweak_log($s) {
 
 // lance la fonction d'installation de chaque tweak actif, si elle existe.
 function tweak_installe_tweaks() {
-spip_log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz2');
 	global $tweaks; 
 	foreach($temp = $tweaks as $tweak) if ($tweak['actif']) {
 		if (function_exists($f = $tweak['id'].'_installe')) {
 			$f();
-tweak_log(" -- $f()");
+tweak_log(" -- $f() : installé !");
 		}
 	}
 }
@@ -194,19 +194,28 @@ tweak_log(" -- $f()");
 function tweak_initialisation($forcer=false) {
 	global $tweaks, $tweaks_metas_pipes, $metas_vars;
 	global $spip_version_code;
-tweak_log("tweak_initialisation($forcer) : Entrée");
+	$rand = rand();
+	// au premier passage, on force l'installation si le calcul ou le recalcul est demande
+	static $deja_passe_ici;
+	if (!intval($deja_passe_ici)) {
+tweak_log("#### 1er PASSAGE ####################################### - \$rand = $rand - \$forcer = ".intval($forcer));
+		$forcer |= ($GLOBALS['var_mode'] == 'recalcul') || ($GLOBALS['var_mode']=='calcul');
+	}
+	$deja_passe_ici++;
+	// si les metas ne sont pas lus, on les lit
+tweak_log("tweak_initialisation($forcer) : Entrée #$deja_passe_ici - \$rand = $rand");
 	if (!isset($GLOBALS['meta']['tweaks_actifs']) || $forcer) {
-tweak_log(" -- lecture metas");
+tweak_log(" -- lecture metas - \$rand = $rand");
 		include_spip('inc/meta');
 		lire_metas();
 	}
 	if (isset($GLOBALS['meta']['tweaks_pipelines'])) {
 		$tweaks_metas_pipes = unserialize($GLOBALS['meta']['tweaks_pipelines']);
 tweak_log(" -- tweaks_metas_pipes = ".join(', ',array_keys($tweaks_metas_pipes)));
-tweak_log("tweak_initialisation($forcer) : Sortie car les metas sont présents");
+tweak_log(" -- tweaks actifs :  = ".join(', ',array_keys(unserialize($GLOBALS['meta']['tweaks_actifs']))));
+tweak_log($forcer?"":"tweak_initialisation($forcer) : Sortie car les metas sont présents - \$rand = $rand");
 		// Les pipelines sont en meta, tout va bien on peut partir d'ici.
 		if (!$forcer) return;
-tweak_log(" -- pipelines en metas : mode forcé, donc on continue...");
 	}
 	include_spip('tweak_spip_config');
 	$metas_tweaks = unserialize($GLOBALS['meta']['tweaks_actifs']);
@@ -219,7 +228,6 @@ tweak_log(" -- pipelines en metas : mode forcé, donc on continue...");
 		if (!isset($tweak['categorie'])) $tweaks[$i]['categorie'] = 'divers';//_T('tweak:divers');
 //			else $tweaks[$i]['categorie'] = _T('tweak:'.$tweaks[$i]['categorie']);
 		if (!isset($tweak['nom'])) $tweaks[$i]['nom'] = _T('tweak:'.$tweak['id'].':nom');
-		$tweaks[$i]['auteur'] = propre($tweaks[$i]['auteur']);
 		if (!isset($tweak['description'])) $tweaks[$i]['description'] = _T('tweak:'.$tweak['id'].':description');
 		$tweaks[$i]['actif'] = isset($metas_tweaks[$tweaks[$i]['id']])?$metas_tweaks[$tweaks[$i]['id']]['actif']:0;
 		// Si Spip est trop ancien...
@@ -233,19 +241,19 @@ tweak_log(" -- pipelines en metas : mode forcé, donc on continue...");
 	}
 	// installer $tweaks_metas_pipes
 	$tweaks_metas_pipes = array();
-tweak_log(" -- tweak_initialise_includes()...");
+tweak_log(" -- tweak_initialise_includes()... - \$rand = $rand");
 	tweak_initialise_includes();
-tweak_log(" -- tweak_installe_tweaks...");
+tweak_log(" -- tweak_installe_tweaks... - \$rand = $rand");
 	tweak_installe_tweaks();
 	// tweaks actifs
-tweak_log(" -- ecriture metas ");
+tweak_log(" -- ecriture metas - \$rand = $rand");
 	ecrire_meta('tweaks_actifs', serialize($metas_tweaks));
 	// variables de tweaks
 	ecrire_meta('tweaks_variables', serialize($metas_vars));
 	// code inline pour les pipelines, mes_options et mes_fonctions;
 	ecrire_meta('tweaks_pipelines', serialize($tweaks_metas_pipes));
 	ecrire_metas();
-tweak_log("tweak_initialisation($forcer) : Sortie");
+tweak_log("tweak_initialisation($forcer) : Sortie - \$rand = $rand");
 }
 
 // evite les transformations typo dans les balises $balises
@@ -276,7 +284,14 @@ function tweak_htmlpath($relative_path) {
 /* DEBUT DU CODE */
 /*****************/
 
-// les globales
+// les globales :
+// $tweaks est un tableau ultra complet avec tout ce qu'il faut savoir sur chaque tweak
+// $tweaks_metas_pipes ne sert qu'a l'execution et ne comporte que :
+//	- les fichiers .js 
+//	- les fichiers .css 
+//	- le code pour les options.php
+//	- le code pour les fonction.php
+//	- le code pour les pipelines utilises
 global $tweaks, $tweaks_metas_pipes;
 $tweaks = $tweaks_metas_pipes = array();
 

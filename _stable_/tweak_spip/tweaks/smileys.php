@@ -6,6 +6,7 @@
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
 function smileys_installe() {
+//tweak_log('smileys_installe()');
 	$path = dirname(find_in_path('img/smileys/test'));
 
 	$smileys = array(
@@ -48,12 +49,14 @@ function smileys_installe() {
 		$smileys2[0][] = $smy;
 		$smileys2[1][] = "<img alt=\"$alt\" title=\"$alt\" class=\"no_image_filtrer\" src=\"".tweak_htmlpath($path)."/$val\">";
 	}
-	$GLOBALS['meta']['tweaks_smileys'] = serialize($smileys2);
+	ecrire_meta('tweaks_smileys', serialize($smileys2));
+	ecrire_metas();
 }
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
 function tweak_rempl_smileys($texte) {
-	if (!isset($GLOBALS['meta']['tweaks_smileys'])) smileys_installe($texte);
+	if (!isset($GLOBALS['meta']['tweaks_smileys']) || $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul')
+		smileys_installe();
 	$smileys_rempl = unserialize($GLOBALS['meta']['tweaks_smileys']);
 	// smileys a probleme :
 	$texte = str_replace(':->', ':-&gt;', $texte);

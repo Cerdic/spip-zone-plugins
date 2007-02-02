@@ -281,8 +281,8 @@ function ligne_tweak($tweak, &$js){
 	$s .= debut_block_invisible($tweak_id);
 
 	$s .= "\n<div class='detailtweak'>";
-	$s .= $tweak['description'];
-	if ($tweak['auteur']!='') $s .= "<p>" . _T('auteur') .' '. $tweak['auteur'] . "</p>";
+	$s .= propre($tweak['description']);
+	if ($tweak['auteur']!='') $s .= "<p>" . _T('auteur') .' '. propre($tweak['auteur']) . "</p>";
 	$s .= '<hr/>' . _T('tweak:tweak').' ';
 	if ($erreur_version) $s .= _T('tweak:erreur:version');
 	else {
