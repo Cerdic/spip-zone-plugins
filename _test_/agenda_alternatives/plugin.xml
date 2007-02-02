@@ -5,7 +5,7 @@
  	[Patrice VANNEUFVILLE->mailto:patrice.vanneufville@laposte.net]
 _ &copy; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
-	<version>0.3</version>
+	<version>0.4</version>
 	<etat>test</etat>
 	<description>Permet l'utilisation des plugins Agenda & Widget Calendar dans le squelettes Alternatives, et donc la gestion des &eacute;v&egrave;nements.
 
@@ -16,7 +16,7 @@ _ 3. Un bouton 'Agenda' suppl&eacute;mentaire en haut, menant &agrave; :
 _ 4. Une page 'evenements' qui liste les &eacute;v&egrave;nements (du jour/du mois, prochains, pass&eacute;s)
 _ 5. La liste des &eacute;v&egrave;nements associ&eacute;s au bas de chaque article</quote>
 
-Pour en savoir plus, lire le fichier lisezmoi.txt.
+Pour en savoir plus, lire le fichier {{lisezmoi.txt}}.
 _ Ce plugin est compatible avec Spip v1.9.1 et Alternatives v1.9.1.2.
 _ Le plugin SkTheme (et donc Alternatives v1.9.1.2 !) ne semblent pas compatibles avec vSpip 1.9.2
 </description>
@@ -26,7 +26,10 @@ _ Le plugin SkTheme (et donc Alternatives v1.9.1.2 !) ne semblent pas compatible
 	<prefix>CalAlter</prefix>
 	<pipeline>
 		<nom>insert_head</nom> 
-		<action>insert_head</action>
+		<inclure>minicalalter_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
 		<inclure>minicalalter_pipelines.php</inclure>
 	</pipeline>
 </plugin>

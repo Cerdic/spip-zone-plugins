@@ -11,6 +11,7 @@
 		'minicalalter_evenements_passes_article' => 'Les &eacute;v&egrave;nements pass&eacute;s associ&eacute;s &agrave; cet article',
 		'minicalalter_evenements_mois' => 'Les &eacute;v&egrave;nements du mois de @month_year@',
 		'minicalalter_evenements_jour' => 'Les &eacute;v&egrave;nements du @day_month_year@',
+		'minicalalter_activer_agenda' => "ERREUR !<br /><br />Merci d'activer le Plugin Agenda.",
 		
 	);
 
