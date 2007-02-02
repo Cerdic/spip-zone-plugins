@@ -48,7 +48,7 @@ function exec_mots_tous_dist()
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 
-	if (autoriser('modifier','groupemots',$son_groupe)  AND !$conf_mot){
+	if (autoriser('creer','groupemots')  AND !$conf_mot){
 		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
 
 		echo bloc_des_raccourcis($res);
@@ -60,7 +60,7 @@ function exec_mots_tous_dist()
 	debut_droite();
 
 	gros_titre(_T('titre_mots_tous'));
-	if (autoriser('modifier','groupemots',$son_groupe)) {
+	if (autoriser('creer','groupemots')) {
 	  echo typo(_T('info_creation_mots_cles')) . aide ("mots") ;
 	}
 	echo "<br /><br />";

@@ -51,7 +51,7 @@ function action_instituer_groupe_mots_post($r)
 		foreach($tables_installees as $chose => $m) { 
 			$q.=", ".$chose."="._q($GLOBALS[$chose] ? 'oui' : 'non');
 			$q1.=", ".$chose; 
-			$q2.=", '"._q($GLOBALS[$chose] ? 'oui' : 'non'); 
+			$q2.=", "._q($GLOBALS[$chose] ? 'oui' : 'non'); 
 		}
 		if ($id_groupe) {	// modif groupe
 			spip_query("UPDATE spip_mots SET type=" . _q($change_type) . " WHERE id_groupe=$id_groupe");
