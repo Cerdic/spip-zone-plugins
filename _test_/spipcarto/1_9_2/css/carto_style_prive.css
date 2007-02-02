@@ -1,0 +1,12 @@
+#mapAnchorDiv * {margin:0; padding:0;}
+#mapAnchorDiv table {border-collapse : collapse;}
+.lineH, .lineW, .point {position: absolute; background-color: #F00; overflow: hidden;}
+.lineH {width: 2px;}
+.lineW {height: 2px;}
+.point {width: 2px; height: 2px;}
+.dhtmldiv {position:absolute; left: 0px; top: 0px;width: 0px;height: 0px;}
+.dhtmlDisplay {left: 0px; top: 0px; padding: 0px; font-size: 10px;}
+
+.cadre-padding {
+	position: none;
+}
