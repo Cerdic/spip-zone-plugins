@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'rubriques' => 'rubriques',
 'auteurs' => 'auteurs',
 'icone_supprimer_zone' => 'Supprimer cette zone',
-'ajouter_droits_auteur' => "M'ajouter les droits d'acc&egrave;s a cette zone",
+'ajouter_droits_auteur' => "M'ajouter les droits d'acc&egrave;s &agrave; cette zone",
 
 'publique' => 'Publique',
 'privee' => 'Priv&eacute;e',

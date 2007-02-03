@@ -29,7 +29,7 @@ _ Los autores podr&aacute;n ser asociados a ciertas zonas restringidas para tene
 _ Todos los bucles nativos de SPIP quedan modificados para filtrar los resultados en funci&oacute;n de los derechos del visitante.
 	</multi>
 	</description>
-	<lien>http://zone.spip.org/trac/spip-zone/wiki/AccesRestreint</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Le-plugin-Acces-Restreint,1420</lien> <!-- URI de documentation -->
 	<options> <!-- fichier charge a chaque hit -->
 	acces_restreint_options.php
 	</options>
