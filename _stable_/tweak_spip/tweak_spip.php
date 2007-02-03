@@ -278,6 +278,11 @@ function tweak_exclure_balises($balises, $fonction, $texte){
 function tweak_htmlpath($relative_path) {
    $realpath=str_replace("\\", "/", realpath($relative_path));
    $htmlpathURL=str_replace($_SERVER['DOCUMENT_ROOT'],'',$realpath);
+static $temp1;
+$temp2="tweak_htmlpath() : '$relative_path' = '$realpath' - '{$_SERVER['DOCUMENT_ROOT']}' = '$htmlpathURL'";
+if($temp2!=$temp1)
+tweak_log($temp2);
+$temp1=$temp2;
    return $htmlpathURL;
 }
 
