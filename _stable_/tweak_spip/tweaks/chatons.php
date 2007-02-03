@@ -7,14 +7,14 @@
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
 function tweak_rempl_chatons($texte) {
 	if (strpos($texte, ':')===false) return $texte;
-	if (!isset($GLOBALS['meta']['tweaks_chatons']) || $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul')
-		chatons_installe();
 	$chatons_rempl = unserialize($GLOBALS['meta']['tweaks_chatons']);
 	return str_replace($chatons_rempl[0], $chatons_rempl[1], $texte);
 }
 
 function chatons_pre_typo($texte) {
 	if (strpos($texte, ':')===false) return $texte;
+	if (!isset($GLOBALS['meta']['tweaks_chatons']) || $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul')
+		chatons_installe();
 	return tweak_exclure_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_chatons', $texte);
 }
 

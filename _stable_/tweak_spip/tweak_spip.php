@@ -154,7 +154,7 @@ function tweak_parse_code($code) {
 // parse la description et renseigne le nombre de variables
 function tweak_parse_description($tweak, $tweak_input) {
 	global $tweaks, $metas_vars; 
-tweak_log(" -- tweak_parse_description({$tweaks[$tweak]['id']})");
+//tweak_log(" -- tweak_parse_description({$tweaks[$tweak]['id']})");
 	$tweaks[$tweak]['nb_variables'] = 0;
 	$tweaks[$tweak]['description'] = $tweaks[$tweak]['description'];
 	$t = preg_split(',%([a-zA-Z_][a-zA-Z0-9_]*)%,', $tweaks[$tweak]['description'], -1, PREG_SPLIT_DELIM_CAPTURE);
@@ -213,7 +213,7 @@ tweak_log(" -- lecture metas - \$rand = $rand");
 		$tweaks_metas_pipes = unserialize($GLOBALS['meta']['tweaks_pipelines']);
 tweak_log(" -- tweaks_metas_pipes = ".join(', ',array_keys($tweaks_metas_pipes)));
 tweak_log(" -- tweaks actifs :  = ".join(', ',array_keys(unserialize($GLOBALS['meta']['tweaks_actifs']))));
-tweak_log($forcer?"":"tweak_initialisation($forcer) : Sortie car les metas sont présents - \$rand = $rand");
+tweak_log($forcer?"\$forcer = true":"tweak_initialisation($forcer) : Sortie car les metas sont présents - \$rand = $rand");
 		// Les pipelines sont en meta, tout va bien on peut partir d'ici.
 		if (!$forcer) return;
 	}
@@ -223,6 +223,7 @@ tweak_log($forcer?"":"tweak_initialisation($forcer) : Sortie car les metas sont 
 	// au cas ou un tweak a besoin d'input
 	$tweak_input = charger_fonction('tweak_input', 'inc');
 	// completer les variables manquantes et incorporer l'activite lue dans les metas
+tweak_log(" -- foreach(\$tweaks) : tweak_parse_code, tweak_parse_description... - \$rand = $rand");
 	foreach($temp = $tweaks as $i=>$tweak) {
 		if (!isset($tweak['id'])) { $tweaks[$i]['id']='erreur'; $tweaks[$i]['nom'] = _T('tweak:erreur_id');	}
 		if (!isset($tweak['categorie'])) $tweaks[$i]['categorie'] = 'divers';//_T('tweak:divers');

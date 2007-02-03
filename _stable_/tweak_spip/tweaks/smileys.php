@@ -55,18 +55,22 @@ function smileys_installe() {
 
 // cette fonction n'est pas appelee dans les balises html : html|code|cadre|frame|script|acronym|cite
 function tweak_rempl_smileys($texte) {
-	if (!isset($GLOBALS['meta']['tweaks_smileys']) || $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul')
-		smileys_installe();
+	if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
 	$smileys_rempl = unserialize($GLOBALS['meta']['tweaks_smileys']);
 	// smileys a probleme :
 	$texte = str_replace(':->', ':-&gt;', $texte);
 	$texte = str_replace($smileys_rempl[0], $smileys_rempl[1], $texte);
 	// accessibilite : alt et title avec le smiley en texte
 	while(preg_match('`@@64@@([^@]*)@@65@@`', $texte, $regs)) $texte = str_replace('@@64@@'.$regs[1].'@@65@@', base64_decode($regs[1]), $texte);
+//tweak_log('smileys traités : '.$texte);
 	return $texte;
 }
 
 function tweak_smileys_pre_typo($texte) {
+	if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
+	if (!isset($GLOBALS['meta']['tweaks_smileys']) || $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul')
+		smileys_installe();
+//tweak_log('smileys trouvés !');
 	return tweak_exclure_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_smileys', $texte);
 }
 ?>
