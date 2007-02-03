@@ -7,7 +7,7 @@ global $tables_auxiliaires;
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Extension de la table des groupes de mots cles
+// Extension de la table des auteurs
 $spip_auteurs = array(
 		"id_auteur"	=> "bigint(21) NOT NULL",
 		"nom"	=> "text NOT NULL",

@@ -78,7 +78,7 @@ function auteurs_complets_verifier_base(){
 }
 	
 	function auteurs_complets_vider_tables() {
-		include_spip('base/agenda_evenements');
+		include_spip('base/auteurs_complets');
 		include_spip('base/abstract_sql');
 		spip_query("ALTER TABLE spip_auteurs DROP `nom_famille`");
 		spip_query("ALTER TABLE spip_auteurs DROP `prenom`");
