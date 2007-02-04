@@ -11,7 +11,7 @@ function CalAlter_header_prive($flux){
 	// s'assurer en prive que les tables sont crees
 	if ($GLOBALS['spip_version_code']<1.92) {
 		include_spip('inc/agenda_gestion'); // spip 1.9
-	 	if function_exists('Agenda_install')) Agenda_install();
+	 	if (function_exists('Agenda_install')) Agenda_install();
 	}
 	return $flux;
 }
