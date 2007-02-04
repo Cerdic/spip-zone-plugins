@@ -1,11 +1,11 @@
 <?php
 
 /***************************************************************************\
- *  Plugin Lilyspip                         				   *
+ *  Plugin Lilyspip                                                        *
  *                                                                         *
- *  Auteur : Christophe RICHARD						   *
- *  Adaptation de la gestion des formules mathematiques	de SPIP		   * 
- *									   *
+ *  Auteur : Christophe RICHARD - Patrice VANNEUFVILLE                     *
+ *  Adaptation des notations musicales dans Spip en utilisant Lilypond.    * 
+ *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
@@ -20,13 +20,13 @@ if ($GLOBALS['spip_version_code']<1.92) define(_DIR_VAR, _DIR_IMG);
 
 define('_DIR_Lilypond', sous_repertoire(_DIR_VAR, "cache-lilypond"));	
 
-function lilyspip_midi_lilypond($music) {
+function lilyspip_midi_lilypond($code) {
 	// Regarder dans le repertoire local de Lilypond
-	$fichier = _DIR_Lilypond.md5($music).".midi";
+	$fichier = _DIR_Lilypond.md5($code).".midi";
 	
-	if (!@file_exists($fichier) || $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul') {
+	if (!@file_exists($fichier) /*|| $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul'*/) {
 		// Aller chercher le fichier midi sur le serveur
-		$url = $GLOBALS['meta']['lilyspip_server'].'?format=midi&code='.rawurlencode($music);
+		$url = $GLOBALS['meta']['lilyspip_server'].'?format=midi&code='.rawurlencode($code);
 		spip_log("Lilypond - appel midi de : $url");
 
 		include_spip('inc/distant');
@@ -40,29 +40,29 @@ function lilyspip_midi_lilypond($music) {
 		else return false;
 }
 
-function lilyspip_ly_lilypond($music) {
+function lilyspip_ly_lilypond($code) {
 	// Regarder dans le repertoire local de Lilypond
-	$fichier = _DIR_Lilypond.md5($music).".ly";
+	$fichier = _DIR_Lilypond.md5($code).".ly";
 	
-	if (!@file_exists($fichier) || $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul') {
+	if (!@file_exists($fichier) /*|| $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul'*/) {
 		// Aller chercher le fichier midi sur le serveur
-//		$url = $GLOBALS['meta']['lilyspip_server'].'?format=ly&code='.rawurlencode($music);
+//		$url = $GLOBALS['meta']['lilyspip_server'].'?format=ly&code='.rawurlencode($code);
 //		spip_log("Lilypond - appel ly de : $url");
 //		include_spip('inc/distant');
-//		$music = recuperer_page($url);
-		ecrire_fichier($fichier, $music);
+//		$code = recuperer_page($url);
+		ecrire_fichier($fichier, $code);
 	}
 
-	return $music;
+	return $code;
 }
 
-function lilyspip_image_lilypond($music) {
+function lilyspip_image_lilypond($code) {
 	// Regarder dans le repertoire local de Lilypond
-	$fichier = _DIR_Lilypond .md5($music).".png";
+	$fichier = _DIR_Lilypond .md5($code).".png";
 
-	if (!@file_exists($fichier) || $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul') {
+	if (!@file_exists($fichier) /*|| $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul'*/) {
 		// Aller chercher l'image sur le serveur		
-		$url = $GLOBALS['meta']['lilyspip_server'].'?format=png&code='.rawurlencode($music);
+		$url = $GLOBALS['meta']['lilyspip_server'].'?format=png&code='.rawurlencode($code);
 		spip_log("Lilypond - appel png de : $url");
 
 		include_spip('inc/distant');
@@ -71,14 +71,14 @@ function lilyspip_image_lilypond($music) {
 	}
 	
 	// Composer la reponse selon presence ou non de l'image
-	$music = entites_html($music);
+	$code = entites_html($code);
 	if (@file_exists($fichier)) {
 		list(,,,$size) = @getimagesize($fichier);
-		$alt = "alt=\"$music\" title=\"$music\""; 
+		$alt = "alt=\"$code\" title=\"$code\""; 
 		return "<img class=\"no_image_filtrer\" src=\"$fichier\" style=\"vertical-align:middle;\" $size $alt />";
 	}
 	else // pas de fichier
-		return "<tt><span class=\"spip_code\" dir=\"ltr\">"._T('lilyspip:erreur_code')."<br />\n".lilyspip_caracteres_alt($music)."</span></tt>";
+		return "<tt><span class=\"spip_code\" dir=\"ltr\">".lilyspip_caracteres_alt($code)."</span></tt>";
 
 }
 

@@ -12,6 +12,7 @@ function exec_lilyspip() {
 		lire_metas();
 	}
 	$url_serveur = $GLOBALS['meta']['lilyspip_server'];
+	if (!strlen($url_serveur)) $url_serveur = 'http://';
 	
 	include_spip('inc/presentation');
 	if ($GLOBALS['spip_version_code']<1.92) 
@@ -40,7 +41,7 @@ function exec_lilyspip() {
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'lilyspip'),'data'=>''));
 	debut_droite();
 
-	debut_cadre_trait_couleur(/*find_in_path('img_pack/lilyspip-32.png')*/'base-24.gif', false, '', _T('lilyspip:parametrages'));
+	debut_cadre_trait_couleur('base-24.gif', false, '', _T('lilyspip:parametrages'));
 
 	echo generer_url_post_ecrire("lilyspip");	
 	echo "<strong><label for='lilyspip_server'>"._T("lilyspip:adresse_serveur")."</label></strong> ";

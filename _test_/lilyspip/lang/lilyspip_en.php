@@ -8,6 +8,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_message' => 'This page lets you specify Lilypond server address to embed music notation in all text.',
 	'adresse_serveur' => 'Server address (URL)',
 	'previsualisation' => 'Previsualisation',
-	'erreur_code' => 'Code Error:',
 );
 ?>

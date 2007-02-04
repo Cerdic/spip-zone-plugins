@@ -25,4 +25,20 @@ function lilyspip_ajouterOnglets($flux) {
 	return $flux;
 }
 
+function lilyspip_install($action){
+	include_spip('inc/meta');
+	switch ($action){
+		case 'test':
+			return isset($GLOBALS['meta']['lilyspip_server']);
+			break;
+		case 'install':
+			break;
+		case 'uninstall':
+			foreach(array_keys($GLOBALS['meta']) as $meta) 
+				if(strpos($meta, 'lilyspip_') !== false) effacer_meta($meta);
+			ecrire_metas();
+			break;
+	}
+}	
+
 ?>
