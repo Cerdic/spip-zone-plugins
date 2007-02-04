@@ -92,7 +92,6 @@ function tweakcheck(ischecked, index) {
  document.getElementById(tweak).className = classe;
  document.getElementById('tweak_'+tweak).value = test;
  
- alert(html);
  for(ti=1;ti<=Tweaks[index][1];ti++) {
   tj = index+ti;
   var chaine=document.getElementById('tweak_'+tj+html).innerHTML;
