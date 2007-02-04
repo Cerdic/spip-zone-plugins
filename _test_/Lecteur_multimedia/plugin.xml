@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Lecteur Multimedia en Flash (MP3,flv)
+	Lecteur Multim&eacute;dia en Flash (MP3,flv)
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	<a href="http://trac.spip.org/trac/spip-zone/browser/_plugins_" target="_blank">BoOz</a>, <a href="http://trac.spip.org/trac/spip-zone/browser/_plugins_branche_stable_/_spip_1_9_0_/dewplayer" target="_blank">C&#233;dric</a>,  <a href="http://monsitespip.com/spip.php?article12" target="_blank">Iago (francois.vachon@iago.ca)</a>, erational.
@@ -15,7 +15,7 @@
 	- Remplace automatiquement les liens vers un fichier de format mp3 par un lecteur mp3 en flash permettant d'&#233;couter ce fichier.<br />
 	- Le mod&#232;le doc.html, fait la m&#234;me chose en utilisant la balise permettant d'afficher la vignette du document.<br />
 	- Avec le plugin jQuery, et la balise #INSERT_HEAD, ajoute un lecteur devant les liens enclosures MP3<br />
-	- Avec <code>#MODELE{playliste}</code> vous pouvez afficher une playliste des derniers mp3 (requiert l'activation du plugin -jQuery)
+	- Avec <code>#MODELE{playliste}</code> vous pouvez afficher une playliste des derniers mp3 (requiert l'activation du plugin -jQuery si version de SPIP < 1.9.2)
 _ <a href="?exec=player_admin">configurer le plugin</a> || 
 	<a href="http://spip-zone.info/spip.php?article18">documentation</a>
 	</description>
