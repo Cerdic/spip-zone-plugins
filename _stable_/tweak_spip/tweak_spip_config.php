@@ -48,7 +48,8 @@ add_tweak( array(
 
 add_tweak( array(
 	'id'	=> 'supprimer_numero',
-	'code' 	=> '$GLOBALS["table_des_traitements"]["TITRE"][]= "typo(supprimer_numero(%s))";',
+	'code' 	=> '$GLOBALS["table_des_traitements"]["TITRE"][]= "typo(supprimer_numero(%s))";
+				$GLOBALS["table_des_traitements"]["NOM"][]="typo(supprimer_numero(%s))";',
 	'categorie'	=> 'squel',
 	'options'	=> 1
 ));
