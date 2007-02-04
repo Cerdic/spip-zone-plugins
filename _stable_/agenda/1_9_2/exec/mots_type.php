@@ -64,20 +64,6 @@ function exec_mots_type_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("&laquo; $titre &raquo;", "naviguer", "mots");
 	
-	$multi_js = "";
-	if($GLOBALS['meta']['multi_rubriques']=="oui" || $GLOBALS['meta']['multi_articles']=="oui" || $GLOBALS['meta']['multi_secteurs']=="oui") {
-	$active_langs = "'".str_replace(",","','",$GLOBALS['meta']['langues_multilingue'])."'";
-	$multi_js = "<script type='text/javascript' src='"._DIR_JAVASCRIPT."multilang.js'></script>\n".
-	"<script type='text/javascript'>\n".
-	"var multilang_def_lang='".$GLOBALS["spip_lang"]."';var multilang_avail_langs=[$active_langs];\n".
-	"$(function(){\n".
-	"multilang_init_lang({'root':'#page','form_menu':'div.cadre-formulaire:eq(0)','fields':'input[@name=\'change_type\'],textarea'});\n".
-	"});\n".
-	"</script>\n";
-	}
-	echo $multi_js; 
-
-	
 	debut_gauche();
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
@@ -100,13 +86,11 @@ function exec_mots_type_dist()
 	. icone(_T('icone_retour'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif",'', false)
 	. "</td>"
 	. "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n"
-	. "<td width='100%' valign='top'>"
-	. "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"
-	. _T('titre_groupe_mots')
-	. "</b></font><br />"
+	. "<td style='width: 100%' valign='top'>"
+	  . "<span class='verdana1 spip_x-small'><b>". _T('titre_groupe_mots') . "</b></span><br />"
 	  . gros_titre($titre,'',false)
 	. aide("motsgroupes")
-	. "<div style='font-family: Verdana,Arial,Sans,sans-serif;'>"
+	. "<div class='verdana1'>"
 	. debut_cadre_formulaire('',true)
 	. "<b>"._T('info_changer_nom_groupe')."</b><br />\n"
 	. "<input type='text' size='40' class='formo' name='change_type' value=\"$type\" $onfocus />\n";
@@ -135,7 +119,7 @@ function exec_mots_type_dist()
 	. "</div>"
 	. "</td></tr></table>"
 	. fin_cadre_relief(true)
-	. "<br />\n<div style='font-family: Verdana,Arial,Sans,sans-serif;'>"
+	. "<br />\n<div class='verdana1'>"
 	. debut_cadre_formulaire('',true)
 	. "<div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>"
 	. "<b>"._T('info_mots_cles_association')."</b>"
@@ -216,6 +200,9 @@ function exec_mots_type_dist()
 	. "' /></div>"
 	.  fin_cadre_formulaire(true)
 	. "</div>";
+
+	$res .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
+
 
 	echo redirige_action_auteur('instituer_groupe_mots', $id_groupe, "mots_tous", "id_groupe=$id_groupe", $res),
 		fin_gauche(),
