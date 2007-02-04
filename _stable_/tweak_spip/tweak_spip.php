@@ -120,6 +120,12 @@ function tweak_initialise_includes() {
   foreach($pipelines_utilises as $pipe) set_tweaks_metas_pipes_pipeline($tweaks_pipelines, $pipe);
 }
 
+// retourne le tableau $reg si le code propose est un code de boutons radio
+//  forme : choixX(choixY=traductionY|choixX=traductionX|etc)
+function tweak_is_radio($code, &$reg) {
+ return preg_match(',([0-9A-Za-z_]*)\(('.'[A-Za-z_]+=[A-Za-z_:-]+\|[A-Za-z_:=>|-]+'.')\),', $code, $reg);
+}
+
 // remplace les valeurs marquees comme %%toto%% par la valeur reelle de $metas_vars['toto']
 // attention : la description du tweak (trouvee dans lang/tweak_xx.php) doit 
 // obligatoirement conporter la demande de valeur : %toto%
@@ -140,7 +146,8 @@ function tweak_parse_code($code) {
 				$cmd = substr($matches[2], 1, 1);
 				$rempl = isset($matches[3])?substr($matches[3],1):'""';
 				if($cmd=='d') $rempl = 'intval('.$rempl.')';
-					elseif($cmd=='s' || $cmd=='r') $rempl = 'strval('.$rempl.')';
+					elseif($cmd=='s') $rempl = 'strval('.$rempl.')';
+echo $rempl;
 				eval('$rempl='.$rempl.';');
 			}
 		if($cmd!='d' && $rempl[0]!='"') $rempl = '"'.str_replace('"','\"',$rempl).'"';
@@ -190,6 +197,14 @@ function tweak_installe_tweaks() {
 tweak_log(" -- $f() : installé !");
 		}
 	}
+}
+
+// on force la reinstallation complete des tweaks et des plugins
+function tweak_initialisation_totale() {
+	// on force la reinstallation complete des tweaks
+	tweak_initialisation(true);
+	// reinitialisation des pipelines, au cas ou
+	unlink(_DIR_TMP."charger_pipelines.php");
 }
 
 // lit ecrit les metas et initialise $tweaks_metas_pipes

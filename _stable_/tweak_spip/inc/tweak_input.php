@@ -16,38 +16,37 @@ include_spip('inc/message_select');
 
 // affiche un petit input
 function inc_tweak_input_dist($index, $variable, $valeur, $label, $actif, $url_self) {
-
 	$len=0;
 	if (preg_match(',^"(.*)"$,', trim($valeur), $matches2)) $valeur = str_replace('"','&quot;',$matches2[1]);
 		else $len=strlen(strval($valeur));
 	
-	// est-ce des boutons radio ?
-	if (preg_match(',([0-9]*)\(('.'[A-Za-z_:-]+\|[A-Za-z_:|-]+'.')\),', $valeur, $matches3)) {
-		$liste = $matches3[2]; $langues = explode('|', $liste); $choix=intval($matches3[1]);
-		$ok_input = $valeur.'-'. $label;
-		foreach($langues as $i => $l) $ok_input .= 
-"<input id=\"label_$variable\" type=\"radio\"".($choix==$i?' checked="checked"':'')." value=\"$i($liste)\" name=\"HIDDENTWEAKVAR__$variable\"/>
-<label for=\"label_$variable\">".($choix==$i?'<b>':'')._T($l).($choix==$i?'</b>':'').'</label>';
-		$ok_valeur = $label.(strlen($matches3[1])?_T($langues[$choix]):'&nbsp;-');
-/*
-<input id="label_1" type="radio" value="non" name="activer_breves"/>
-<label for="label_1">Ne pas utiliser les brèves</label>
-*/	
+	// est-ce des boutons radio ? forme : choixX(choixY=traductionY|choixX=traductionX|etc)
+	if (tweak_is_radio($valeur, $matches3)) {
+		$choix=$matches3[1]; $liste = $matches3[2]; $lesoptions = explode('|', $liste);
+		$ok_input = $GLOBALS["set_options"].'.'.$GLOBALS["radio_set_options"].'.'.$label; $traducs = array();
+		foreach($lesoptions as $option) {
+			list($code, $traduc) = explode('=', $option, 2);
+			$traducs[$code] = _T($traduc);
+			$ok_input .= 
+"<input id=\"label_{$variable}_$code\" type=\"radio\"".($choix==$code?' checked="checked"':'')." value=\"$code($liste)\" name=\"HIDDENTWEAKVAR__$variable\"/>
+<label for=\"label_{$variable}_$code\">".($choix==$code?'<b>':'').$traducs[$code].($choix==$code?'</b>':'').'</label> ';
+		}
+		$ok_valeur = $label.(strlen($choix)?ucfirst(_T($traducs[$choix])):'&nbsp;-');
 	} 
 	// eh non, donc juste une case input
 	else {
 		$ok_input = "$label<input name='HIDDENTWEAKVAR__$variable' value='$valeur' type='text' size='$len' />";
-		$ok_valeur = $label.(strlen($valeur)?$valeur:'&nbsp;-');
+		$ok_valeur = $label.(strlen($valeur)?"$valeur":'&nbsp;-');
 	}
 
 	$ok_input .= "<input type='submit' class='fondo' value=\""._T('bouton_modifier')."\" />";
 	// HIDDENTWEAKVAR__ pour eviter d'avoir deux inputs du meme nom...
 	$ok_visible = $actif?str_replace("HIDDENTWEAKVAR__","",$ok_input):$ok_valeur;
 
-	$res = "<input type='hidden' value='$variable' name='variable'>"
-		. "<div id='tweak_$index-input' style='position:absolute; visibility:hidden;' >$ok_input</div>"
-		. "<div id='tweak_$index-valeur' style='position:absolute; visibility:hidden;' >$ok_valeur</div>\n"
-		. "<div id='tweak_$index-visible' >$ok_visible</div>";
+	$res = "\n<input type='hidden' value='$variable' name='variable'>"
+		. "\n<div id='tweak_$index-input' style='position:absolute; visibility:hidden;' >$ok_input</div>"
+		. "\n<div id='tweak_$index-valeur' style='position:absolute; visibility:hidden;' >$ok_valeur</div>\n"
+		. "\n<div id='tweak_$index-visible' >$ok_visible</div>";
 
 	// syntaxe : ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
 	$res = ajax_action_auteur('tweak_input', $index, $url_self, "index=$index&variable=$variable&valeur=$valeur&actif=".intval($actif)."&label=".urlencode($label), $res);

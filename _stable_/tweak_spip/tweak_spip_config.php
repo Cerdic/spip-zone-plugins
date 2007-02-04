@@ -79,13 +79,13 @@ add_tweak( array(
 	'id'	=> 'set_options',
 	// ici on demande a Tweak Spip deux boutons radio : _T('icone_interface_simple') et _T('icone_interface_complet')
 	// la variable est : set_options
-	// le /1 signifie que _T('icone_interface_complet') sera coche par defaut
+	// le /avancees signifie que avancees (traduit par : _T('icone_interface_complet')) sera coche par defaut
 	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	'code' 	=> '$GLOBALS["set_options"]=%%set_options/r/1(icone_interface_simple|icone_interface_complet)%%;',
+	'code' 	=> '$GLOBALS["radio_set_options"]=%%radio_set_options/s/avancees(basiques=icone_interface_simple|avancees=icone_interface_complet)%%;
+list($GLOBALS["set_options"], $foo) = explode("(", $GLOBALS["radio_set_options"], 2);',
 	'categorie'	=> 'admin',
 	'options'	=> 1,
 ));
-
 
 //-----------------------------------------------------------------------------//
 //                               fonctions                                     //

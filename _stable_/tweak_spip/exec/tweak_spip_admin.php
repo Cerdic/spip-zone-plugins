@@ -130,10 +130,7 @@ tweak_log("Début : enregistre_modif_tweaks()");
 	spip_log("Changement des tweaks actifs par l'auteur id=$connect_id_auteur : ".implode(', ',array_keys($liste)));
 	ecrire_meta('tweaks_actifs', serialize($liste));
 	ecrire_metas();
-	// on force la reinstallation complete des tweaks
-	tweak_initialisation(true);
-	// reinitialisation des pipelines, au cas ou
-	unlink(_DIR_TMP."charger_pipelines.php");
+	tweak_initialisation_totale();
 tweak_log("Fin   : enregistre_modif_tweaks()");
 }
 

@@ -38,6 +38,9 @@ tweak_log(" -- tweak $r[1] : $variable devient $final, donc :");
 tweak_log(" -- metas_vars = ".serialize($metas_vars));
 	ecrire_meta('tweaks_variables', serialize($metas_vars));
 	ecrire_metas();
-tweak_log("Fin   : action_tweak_input_dist(Array($r[1], $r[2], ...))");
+tweak_log("Fin   : action_tweak_input_dist(Array($r[1], $r[2], ...)) - Réinitialisation forcée :");
+
+	// on reinitialise tout, au cas ou ...
+	tweak_initialisation_totale();
 }
 ?>
