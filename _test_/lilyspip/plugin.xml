@@ -14,13 +14,13 @@ _ &copy; 2007 - Distribu&eacute; sous licence GPL
 	test
 	</etat>
 	<description>
-Ce plugin permet d'ins&eacute;rer des notations musicales dans vos articles en utilisant la syntaxe Lilypond.
+Ce plugin permet d'ins&eacute;rer des notations musicales dans vos articles en utilisant la syntaxe [Lilypond->http://lilypond.org/].
 
 Un petit exemple :<code><lilypond>
    {\\relative c'{\\time 4/4  c4 c c d e2 d c4 e d d c1}}
 </lilypond></code>
 	</description>
-	<lien>http://www.spip.net/fr_article3448.html</lien> <!-- URI de documentation -->
+	<lien>[->http://www.spip.net/fr_article3448.html]</lien> <!-- URI de documentation -->
 	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
 		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : template_ma_fonction() par exemple)
 		C'est par ailleurs conseille pour les noms de fichier
