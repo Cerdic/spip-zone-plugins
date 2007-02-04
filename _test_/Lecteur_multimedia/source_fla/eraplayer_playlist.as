@@ -42,7 +42,7 @@ function explode(separator:String, string:String) {
 //---------------------------------------
 // main
 //---------------------------------------
-//song_url = "a.mp3,b.mp3,c.mp3";
+//song_url = "a.mp3|b.mp3|c.mp3";
 
 isPlaying = false;
 userAction = true; //false;

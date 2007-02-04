@@ -101,7 +101,7 @@ $("#musicplayer").html('<object '+
 	'type="application/x-shockwave-flash" '+
 	'data="'+musicplayerurl+'" '+
 	'width="1" height="1" align="middle">'+
-	'<param name="FlashVars" value="song_url='+playlist+'&amp;autoplay=1&amp;bgcolor1=ADC4D9&amp;bgcolor2=E6ECF2&amp;buttoncolor=000000&amp;showlist=0&amp;slidercolor1=000000&amp;slidercolor1=c0c0c0&amp;sliderovercolor=E6ECF2&amp;buttonovercolor=E6ECF2&amp;loadingcolor=ffffff" />'+
+	'<param name="FlashVars" value="song_url='+playlist+'" />'+
 	'<param name="wmode" value="transparent" />'+
 	'<param name="movie" value="'+musicplayerurl+'" />'+
 	'</object>');
