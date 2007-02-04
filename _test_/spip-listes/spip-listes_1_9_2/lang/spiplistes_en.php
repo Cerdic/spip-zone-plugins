@@ -25,7 +25,7 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 To change your subscription to the newsletter, please visit the following webpage:
 @nom_site_spip@ (@adresse_site@)
 
-To change your subscription, please visit the following webpage:
+Please visit the following webpage:
 
 @adresse_site@/spip.php?page=abonnement&d=@cookie@',
 
@@ -75,7 +75,8 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'definir_squel_texte' => 'If you have an FTP access to your website, you can add SPIP templates in the folder /patrons at the root of the SPIP-site.',
 'devenir_redac'=>'Become an editor of this website',
 'devenir_abonne'=>'Subscribe to this website',
-'desabonnement_valid'=>'The following e-mail address is not subscribed anymore' , 'pass_recevoir_mail'=>'You will receive a confirmation e-mail specifying how to change your subscription. ',
+'desabonnement_valid'=>'The following e-mail address is not subscribed anymore' ,
+'pass_recevoir_mail'=>'You will receive a confirmation e-mail specifying how to change your subscription.',
 'desabonnement_confirm'=>'You are about to cancel your subscription to the newsletter',
 'date_depuis'=>'since @delai@', 
 
