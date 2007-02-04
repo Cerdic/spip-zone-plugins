@@ -79,18 +79,23 @@ while($row = spip_fetch_array($list_bg)) {
 	
 		// preparation mail
 		
-		$date = date('Y-m-d H:i:s',$maj) ;
-		
-		
-	$texte_patron_bg = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;		
-		$titre_patron_bg = $titre_bg." de ".$nomsite;
-		$titre_bg = addslashes($titre_patron_bg);
-		
-		spip_log("Message choppe->$titre".$titre_bg);
-
-		// ne pas envoyer des textes de moins de 10 caractères
+		$date = date('Y-m-d H:i:s',$last_maj_bg) ;
 			
+			include_spip('public/assembler');
+			$contexte_patron = array('date' => $date,'patron'=>$patron);
+			$texte_patron_bg = recuperer_fond('patrons/'.$patron, $contexte_patron);
+		 	//$texte_patron_bg = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;		
+			
+			$titre_patron_bg = ($titre_message =="") ? $titre_bg." de ".$nomsite : $titre_message;
+			$titre_bg = $titre_patron_bg;
+			
+			spip_log("Message choppe->$titre".$titre_bg);
+	
+			// ne pas envoyer des textes de moins de 10 caracteres
 			$tampon_sp = preg_replace("/(\r\n|\n|\r| )+/", "", $texte_patron_bg);
+			spip_log("taille ->".strlen($tampon_sp));
+			
+			
 
 			if ( (strlen($tampon_sp) > 10) ) {
 				$texte_patron_bg = "__bLg__".$id_article_bg."__bLg__ ".$texte_patron_bg;
