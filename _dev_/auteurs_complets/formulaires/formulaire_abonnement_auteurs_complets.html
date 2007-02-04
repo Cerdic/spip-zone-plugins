@@ -78,8 +78,7 @@
 
 
 		<div class="showhide"><a href="#">Formulaire complet</a></div>
-		<fieldset class="cache">
-			<div>
+		<div class="cache">
 			<h4><:auteurscomplets:vos_coordonnees:></h4>
 
 			<p><label for="nom_famille"><:auteurscomplets:entree_nom_famille:></label>
@@ -127,8 +126,7 @@
 			<input type="text" id="latitude" class="forml" style="width:20em" value="" size="40" /></p>
 			<p><label for="longitude"><:auteurscomplets:entree_longitude:></label>
 			<input type="text" id="longitude" class="forml" style="width:20em" value="" size="40" /></p>
-			</div>
-		</fieldset>
+		</div>
 			[(#ENV{acces_membres}|=={oui}|?{' ',''})
 				<div style="margin-top:5px">
 					<label for="nom_inscription_" style="font-weight:bold;"><:form_pet_votre_nom:></label>
