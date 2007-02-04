@@ -170,6 +170,7 @@ function formulaire_inscription_auteurs_complets($type,$acces_membres,$formulair
 	global $list;
 	global $liste;
 	global $id_fond; //fond name of the form posting values
+	global $nom_famille,$prenom,$telephone,$fax,$skype,$organisation,$url_organisation,$bio,$nom_site,$url_site,$adresse,$codepostal,$ville,$pays,$latitude,$longitude;
 
 	if ($type == 'redac') {
 		if (lire_meta("accepter_inscriptions") != "oui") return;
@@ -225,10 +226,8 @@ function formulaire_inscription_auteurs_complets($type,$acces_membres,$formulair
 			$message = _T('auteurscomplets:abonnement_mail_passcookie', array('nom_site_spip' => $nomsite, 'adresse_site' => $urlsite, 'cookie' => $cookie));
 				if (envoyer_mail($mail_inscription_, "[$nomsite] "._T('spiplistes:abonnement_titre_mail'), $message)){
 					$reponse_formulaire =_T('auteurscomplets:pass_recevoir_mail');
-					//echo _T('spiplistes:pass_recevoir_mail');
 				}else{
 					$reponse_formulaire =_T('pass_erreur_probleme_technique');
-					//echo _T('pass_erreur_probleme_technique');
 				}
 
 			}
@@ -254,7 +253,7 @@ function formulaire_inscription_auteurs_complets($type,$acces_membres,$formulair
 				$extras = bloog_extra_recup_saisie('auteurs');
 
 				// Modifier l'auteur dans la base
-				$result = spip_query("INSERT INTO spip_auteurs (nom, bio, email, nom_famille, prenom, organisation, url_organisation, telephone, fax, skype, adresse, codepostal, ville, pays, latitude, longitude, nom_site, url_site, login, pass, statut, htpass, extra, cookie_oubli) "."VALUES ("._q($nom_inscription_).", "._q($bio).", "._q($mail_inscription_).","._q($nom_famille).","._q($prenom).","._q($organisation).","._q($url_organisation).","._q($telephone).","._q($fax).","._q($skype).","._q($adresse).","._q($codepostal).","._q($ville).","._q($pays).","._q($latitude).","._q($longitude).","._q($login_).","._q($mdpass).","._q($statut).","._q($htpass).","._q($extras).","._q($cookie).")");
+				$result = spip_query("INSERT INTO spip_auteurs (nom, bio, email, nom_famille, prenom, organisation, url_organisation, telephone, fax, skype, adresse, codepostal, ville, pays, latitude, longitude, nom_site, url_site, login, pass, statut, htpass, extra, cookie_oubli) "."VALUES ("._q($nom_inscription_).", "._q($bio).", "._q($mail_inscription_).","._q($nom_famille).","._q($prenom).","._q($organisation).","._q($url_organisation).","._q($telephone).","._q($fax).","._q($skype).","._q($adresse).","._q($codepostal).","._q($ville).","._q($pays).","._q($latitude).","._q($longitude).","._q($nom_site).","._q($url_site).","._q($login_).","._q($mdpass).","._q($statut).","._q($htpass).","._q($extras).","._q($cookie).")");
 
 				// abonnement aux listes http://www.phpfrance.com/tutorials/index.php?page=2&id=13
 				$result = spip_query("SELECT * FROM spip_auteurs WHERE email="._q($mail_inscription_));

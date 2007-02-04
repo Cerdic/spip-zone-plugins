@@ -15,22 +15,7 @@
 	</form>
 	]
 ]
-<script type="text/javascript">//<![CDATA[
 
-$(document).ready(function() {
-	$('.cache').hide();
-	$('.showhide').click( function() {
-		if($(this).next('.cache').is(':hidden')){
-			$(this).next('.cache').toggle('slow');
-		}
-		else {
-			$(this).next('.cache').toggle('slow');
-		}
-	});
-});
-//]]>/*
-
-</script>
 
 <div class="formulaire_spip formulaire_inscription">
 [(#REM) texte d'inscription en tant que redacteur]
@@ -54,7 +39,7 @@ $(document).ready(function() {
 </fieldset>]
 
 
-[<span style="color:red">(#ENV*{reponse_formulaire})</span>]
+[<span class="reponse_formulaire">(#ENV*{reponse_formulaire})</span>]
 
 
 [(#ENV{mode_login}|?{' ',''})
@@ -92,8 +77,8 @@ $(document).ready(function() {
 		[(#ENV{mode_login}|?{' ',''})
 
 
-		<div style="float:right" class="showhide"><a href="#">Formulaire complet</a></div>
-		<fieldset class="cache" style="clear:both">
+		<div class="showhide"><a href="#">Formulaire complet</a></div>
+		<fieldset class="cache">
 			<div>
 			<h4><:auteurscomplets:vos_coordonnees:></h4>
 
