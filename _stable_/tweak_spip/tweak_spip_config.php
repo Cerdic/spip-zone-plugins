@@ -63,7 +63,7 @@ add_tweak( array(
 add_tweak( array(
 	'id'	=> 'forcer_langue',
 	'code'	=> '$GLOBALS["forcer_lang"]=true;', 
-	'categorie'	=> 'admin',
+	'categorie'	=> 'squel',
 	'options'	=> 1
 ));
 
