@@ -66,7 +66,7 @@ Veuillez vous rendre &agrave; l\'adresse suivante :
 
 Vous pourrez alors confirmer la modification de votre abonnement.',
 
-	'Z' => 'ZZzZZzzz'
+'Z' => 'ZZzZZzzz'
 
 );
 
