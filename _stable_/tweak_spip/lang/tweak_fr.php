@@ -86,17 +86,21 @@ _ Infos : [->http://www.spip-contrib.net/?article1563]",
 _ Infos : [->http://www.spip-contrib.net/?article1561]",
 
 	'quota_cache:nom' => 'Quota du cache',
-	'quota_cache:description'	=> "Modifie le quota r&eacute;serv&eacute; au cache. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique.<br>Valeur (en Mo) : %quota_cache%",
+	'quota_cache:description'	=> "Modifie le quota r&eacute;serv&eacute; au cache. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique.<br />Valeur (en Mo) : %quota_cache%",
 
 	'dossier_squelettes:nom' => 'Dossier du squelette',
-	'dossier_squelettes:description'	=> "Modifie le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.<br>Dossier(s) &agrave; utiliser : %dossier_squelettes%",
+	'dossier_squelettes:description'	=> "Modifie le dossier du squelette utilis&eacute;. Par exemple : &quot;squelettes/monsquelette&quot;. En laissant vide la case qui suit, c'est le squelette original &quot;dist&quot; fourni par Spip qui sera utilis&eacute;.<br />Dossier(s) &agrave; utiliser : %dossier_squelettes%",
 
 	'chatons:nom' => 'Chatons',
 	'chatons:description'	=> 'Ins&egrave;re des images (ou chatons pour les {tchats}) dans tous les textes o&ugrave; appara&icirc;t une cha&icirc;ne du genre <acronym>:nom</acronym>.
 _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouve dans le r&eacute;pertoire img/chatons.',
 
 	'guillemets:nom' => 'Guillemets typographiques',
-	'guillemets:description'	=> 'Ce plugin remplace automatiquement les guillemets droits (") par les guillemets typographiques de la langue de composition. Le remplacement, transparent pour l\'utilisateur, ne modifie pas le texte mais seulement l\'affichage final.',
+	'guillemets:description'	=> 'Remplace automatiquement les guillemets droits (") par les guillemets typographiques de la langue de composition. Le remplacement, transparent pour l\'utilisateur, ne modifie pas le texte mais seulement l\'affichage final.',
+
+	'set_options:nom' => "Type d'interface priv&eacute;e",
+	'set_options:description'	=> "S&eacute;lectionne d'office le type d&rsquo;interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes<br />Votre choix : %set_options%",
+
 /*
 	':nom' => '',
 	':description'	=> '',

@@ -81,7 +81,7 @@ function tweak_insert_header($type) {
 
 // est-ce que $pipe est un pipeline ?
 function is_tweak_pipeline($pipe, &$set_pipe) {
-	if ($ok=preg_match(',^\s*pipeline\s*:(.*)$,',$pipe,$t)) $set_pipe = trim($t[1]);
+	if ($ok=preg_match(',^\s*pipeline\s*:(.*?)$,',$pipe,$t)) $set_pipe = trim($t[1]);
 	return $ok;
 }
 
@@ -126,22 +126,24 @@ function tweak_initialise_includes() {
 // %%toto/d%% oblige un nombre et %%toto/s%% oblige une chaine
 // %%toto/valeurpardefaut%% renvoie valeurpardefaut si le meta n'existe pas encore
 // syntaxe generale : %%toto/d/valeurpardefaut%% ou %%toto/s/valeurpardefaut%% 
+// /s est une chaine, /d est un nombre, /r est un set de boutons radio
 // $code est le code inline livre par tweak_spip_config
 function tweak_parse_code($code) {
 	global $metas_vars;
-	while(preg_match(',%%([a-zA-Z_][a-zA-Z0-9_]*)(/[ds])?(/[^%]+)?%%,', $code, $matches)) {
+	while(preg_match(',%%([a-zA-Z_][a-zA-Z0-9_]*)(/[ds]|/r\(.*?\))?(/[^%]+)?%%,', $code, $matches)) {
 		$rempl = '""';	
 		// si le meta est present on garde la valeur du meta, sinon la valeur par defaut si elle existe
 		if (isset($metas_vars[$matches[1]])) {
 				$rempl = $metas_vars[$matches[1]];
-				if (preg_match(',^"(.*)"$,', trim($rempl), $matches2)) $rempl = str_replace('\"','"',$matches2[1]);
+				if (preg_match(',^"(.*?)"$,', trim($rempl), $matches2)) $rempl = str_replace('\"','"',$matches2[1]);
 			} else { 
+				$cmd = substr($matches[2], 1, 1);
 				$rempl = isset($matches[3])?substr($matches[3],1):'""';
-				if($matches[2]=='/d') $rempl = 'intval('.$rempl.')';
-					elseif($matches[2]=='/s') $rempl = 'strval('.$rempl.')';
+				if($cmd=='d') $rempl = 'intval('.$rempl.')';
+					elseif($cmd=='s' || $cmd=='r') $rempl = 'strval('.$rempl.')';
 				eval('$rempl='.$rempl.';');
 			}
-		if($matches[2]!='/d' && $rempl[0]!='"') $rempl = '"'.str_replace('"','\"',$rempl).'"';
+		if($cmd!='d' && $rempl[0]!='"') $rempl = '"'.str_replace('"','\"',$rempl).'"';
 		$code = str_replace($matches[0], $rempl, $code);
 		// on conserve le resultat dans $metas_vars
 		$metas_vars[$matches[1]] = $rempl;
@@ -268,8 +270,8 @@ function tweak_exclure_balises($balises, $fonction, $texte){
 		spip_log("Erreur - tweak_exclure_balises() : $fonction() non definie !");
 		return $texte;
 	}
-	$balises = strlen($balises)?',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS':'';
-	if ($spip_version_code<1.92 && $balises=='') $balises = ',<(html|code|cadre|frame|script)>(.*)</\1>,UimsS';
+	$balises = strlen($balises)?',<('.$balises.')(\s[^>]*)?>(.*?)</\1>,UimsS':'';
+	if ($spip_version_code<1.92 && $balises=='') $balises = ',<(html|code|cadre|frame|script)>(.*?)</\1>,UimsS';
 	$texte = echappe_retour($fonction(echappe_html($texte, 'TWEAKS', true, $balises)), 'TWEAKS');
 	return $texte;
 }

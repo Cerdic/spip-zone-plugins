@@ -28,7 +28,9 @@ add_tweak( array(
 
 add_tweak( array(
 	'id'	=> 'quota_cache',
-//	'code' 	=> '$GLOBALS["quota_cache"]=10;',
+	// ici on demande a Tweak Spip une case input. La variable est : quota_cache
+	// par defaut, la valeur sera $GLOBALS["quota_cache"]
+	// le /s demande a Tweak Spip de traiter la variable comme un nombre.
 	'code' 	=> '$GLOBALS["quota_cache"]=%%quota_cache/d/$GLOBALS["quota_cache"]%%;',
 	'categorie'	=> 'admin',
 	'options'	=> 1,
@@ -36,6 +38,9 @@ add_tweak( array(
 
 add_tweak( array(
 	'id'	=> 'dossier_squelettes',
+	// ici on demande a Tweak Spip une case input. La variable est : dossier_squelettes
+	// par defaut, la valeur sera $GLOBALS["dossier_squelettes"]
+	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
 	'code' 	=> '$GLOBALS["dossier_squelettes"]=%%dossier_squelettes/s/$GLOBALS["dossier_squelettes"]%%;',
 	'categorie'	=> 'admin',
 	'options'	=> 1,
@@ -69,6 +74,18 @@ add_tweak( array(
 	'options'	=> 1,
 	'version'	=> 1.92,
 ));
+
+add_tweak( array(
+	'id'	=> 'set_options',
+	// ici on demande a Tweak Spip deux boutons radio : _T('icone_interface_simple') et _T('icone_interface_complet')
+	// la variable est : set_options
+	// le /1 signifie que _T('icone_interface_complet') sera coche par defaut
+	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
+	'code' 	=> '$GLOBALS["set_options"]=%%set_options/r/1(icone_interface_simple|icone_interface_complet)%%;',
+	'categorie'	=> 'admin',
+	'options'	=> 1,
+));
+
 
 //-----------------------------------------------------------------------------//
 //                               fonctions                                     //
