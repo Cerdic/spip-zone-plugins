@@ -23,7 +23,7 @@ function inc_tweak_input_dist($index, $variable, $valeur, $label, $actif, $url_s
 	// est-ce des boutons radio ? forme : choixX(choixY=traductionY|choixX=traductionX|etc)
 	if (tweak_is_radio($valeur, $matches3)) {
 		$choix=$matches3[1]; $liste = $matches3[2]; $lesoptions = explode('|', $liste);
-		$ok_input = $GLOBALS["set_options"].'.'.$GLOBALS["radio_set_options"].'.'.$label; $traducs = array();
+		$ok_input = $label; $traducs = array();
 		foreach($lesoptions as $option) {
 			list($code, $traduc) = explode('=', $option, 2);
 			$traducs[$code] = _T($traduc);
