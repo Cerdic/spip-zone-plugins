@@ -52,10 +52,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'vos_articles' => 'Your Articles :',
 
 // Pour le formulaire profil
-	'error_bad_user' => 'You are not logged as this author, so you can\'t modify him ...',
+'error_bad_user' => 'You are not logged as this author, so you can\'t modify him ...',
 
 // Pour le formulaire des listes
-'pass_recevoir_mail'=>'The e-mail address you are using is eithe in the database.<br /><br /> You will receive a confirmation e-mail specifying how to change your subscription.',
+'pass_recevoir_mail'=>'The e-mail address you are using is already in the database.<br /><br /> You will receive a confirmation e-mail specifying how to change your subscription.',
 'abonnement_mail_passcookie' => '(this is an automatically generated e-mail)
 To change your subscription to the newsletter, please visit the following webpage:
 @nom_site_spip@ (@adresse_site@)
