@@ -1,9 +1,9 @@
 /*
-	appelee par le body onload, cette fonction affiche les players mp3 et genere les playlistes associées
-	auteur :BoOz - booz@rezo.net
-	code gnu - gpl
+	Appelee par le body onload, cette fonction affiche les players mp3 et genere les playlistes associees
+	Auteur : BoOz <booz CHEZ rezo POINT net>
+	Licence : GNU/GPL
 
- par BoOz booz AT rezo.net
+	compatibilite firefox par Vincent Ramos <www-lansargues CHEZ kailaasa POINT net> et erational <http://www.erational.org>
 *
 * Fonctionne avec jQuery.
 **/
@@ -27,7 +27,7 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 	         '</div>';
 			
 			$('body').append(playa);
-			$('div#musicplayer').css({position:"absolute",height:"1px",width:"1px",background:"#FFFFFF",overflow:"hidden"});
+			$('div#musicplayer').css({position:"fixed",top:"10px", right:"10px",width:"0",height:"0"});
 	
 
 	$("a[@rel='enclosure'][@href$=mp3]").each(
@@ -81,41 +81,32 @@ var aff= $("a[@rel='enclosure'][@href$=mp3]").size();
 
 function player_play(i){
 	player_stop();
-	$("span.play_:eq("+i+")").html("stop").addClass("play_on");			
-	$(".playliste li:eq("+i+")").addClass("play_on");	
+	$("span.play_:eq("+i+")").html("stop").addClass("play_on");		
+	$(".playliste li:eq("+i+")").addClass("play_on");
 	//Ajouter le musicplayer
-	 playlist='';
-						deb=0;
-							for(j=i; j < mp3Array.length ; j++) {
-								if(deb > 0){
-								playlist = playlist + ',' + mp3Array[j];
-								}else{
-								playlist = mp3Array[j];
-								deb=1;
-								}
-							}
-
-						$("#musicplayer").html('<object ' +
-						'classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" ' +
-						'codebase="' +
-						'http://fpdownload.macromedia.com/pub/shockwave/cabs/'+
-						'flash/swflash.cab#version=6,0,0,0"' +
-						'width="18" height="18" align="middle">' +
-						'<param name="wmode" value="transparent" />' +
-						'<param name="allowScriptAccess" value="sameDomain" />' +
-						'<param name="flashVars" value="song_url='+playlist+'" />' +
-						'<param name="movie" value="'+musicplayerurl+'?autoplay=true" />' +
-						'<param name="quality" value="high" />' +
-						'<embed style="margin-left:0.1em" ' +
-						'src="'+musicplayerurl+'?autoplay=true" '+
-						'flashVars="song_url='+playlist+'"' +
-						'quality="high" wmode="transparent" width="18" height="18" name="player"' +
-						' allowScriptAccess="sameDomain" type="application/x-shockwave-flash"' +
-						' pluginspage="http://www.macromedia.com/go/getflashplayer" /></object>');
-											
-							
-							
+	playlist='';
+	deb=0;
+	for(j=i; j < mp3Array.length ; j++) {
+		if(deb > 0){
+// Modification du code original. Voir ci-dessous.
+			playlist = playlist + '|' + mp3Array[j];
+// Fin modification
+		}else{
+			playlist = mp3Array[j];
+			deb=1;
+		}
 	}
+
+$("#musicplayer").html('<object '+
+	'type="application/x-shockwave-flash" '+
+	'data="'+musicplayerurl+'" '+
+	'width="1" height="1" align="middle">'+
+	'<param name="FlashVars" value="song_url='+playlist+'&amp;autoplay=1&amp;bgcolor1=ADC4D9&amp;bgcolor2=E6ECF2&amp;buttoncolor=000000&amp;showlist=0&amp;slidercolor1=000000&amp;slidercolor1=c0c0c0&amp;sliderovercolor=E6ECF2&amp;buttonovercolor=E6ECF2&amp;loadingcolor=ffffff" />'+
+	'<param name="wmode" value="transparent" />'+
+	'<param name="movie" value="'+musicplayerurl+'" />'+
+	'</object>');
+// Fin modification
+}
 	
 
 
@@ -127,7 +118,6 @@ function player_stop(){
 						$("span.play_on").removeClass("play_on");
 						
 						$(".playliste li.play_on").removeClass("play_on");
-						
 						//stop le musicplayer en flash < 8
 						$("#musicplayer").html('');
 }	

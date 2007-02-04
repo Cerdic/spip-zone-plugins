@@ -54,7 +54,7 @@ var my_sound:Sound = new Sound();
 my_sound.start();
 if (song_url!=undefined) {
 	playlist = new Array();
-	playlist = explode(",",song_url);	
+	playlist = explode("|,",song_url);	
 	if (playlist.length>0) {
 		playlist_pos = 0;
 		trace(playlist[playlist_pos]);
