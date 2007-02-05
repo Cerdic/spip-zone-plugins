@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	  Export ODT EXPERIMENTAL
+	  Export ODT
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	  Cedric
@@ -13,10 +13,15 @@
 	</etat>
 	<description>
 	Export au format ODT
+	S'utilise dans un squelette avec un appel au modele export_odf :
+_	{ #MODELE&#123;export_odf,id_article=#ID_ARTICLE,template=article.odt,nom_fichier='#TITRE*'&#125; }
+_ le template et le nom_fichier sont facultatifs.
+_ les templates peuvent &ecirc;tre d&eacute;finis dans un sous dossier templates/ de votre dosier squelette. Ce sont des documents Open Document Text ecrit en SPIP (comportants squelettes et balises)
 	</description>
 	<lien>
 	</lien>
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	<fonctions>
+		exportodf_fonctions.php
 	</fonctions>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
