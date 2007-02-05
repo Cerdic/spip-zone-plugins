@@ -39,7 +39,7 @@ function acronymes_traiter_raccourcis($letexte){
  *   Modifié le 2/08/2005 par Cedric MORIN
  */
 
-function acronymes_ajouter($chaine,$replacenb=1)
+function acronymes_ajouter($chaine,$replacenb=-1)
 {
 	static $acro_patterns=array();
 	static $acro_replacements=array();
