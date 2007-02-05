@@ -25,7 +25,8 @@
           La sauvegarde est d&#233;clench&#233;e lors d'une visite dans l'espace priv&#233; si le d&#233;lais
           depuis la derni&#232;re sauvegarde est sup&#233;rieur &#224; celui configur&#233; comme fr&#233;quence.
           Les sauvegardes stock&#233;es consid&#233;r&#233;es comme obsol&#232;tes (en fonction du param&#232;tre de config correspondant)
-          sont automatiquement d&#233;truites.
+          sont automatiquement d&#233;truites.<br />
+					{{Attention !}} cette version de {{saveauto}} n&#233;cessite le plugin {{config}} pour fonctionner ! 
           [it]Consente di effettuare un salvataggio di tutta la base dati utilizzata da SPIP.
           Il file .gz o .sql ottenuto &#232; memorizzato all'interno di una cartella (in maniera predefinita ecrire/data, configurabile)
           e pu&ograve; essere inviato per posta elettronica.<br />
@@ -37,7 +38,7 @@
         </description>
 		<lien>
 		[Documentation sur contrib->http://www.spip-contrib.net/?article1442],
-		et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=saveauto]
+		[Accès configuration->.?exec=cfg&amp;cfg=saveauto]
 		</lien>
         <icon>img_pack/saveauto-24.png</icon>
         <prefix>
