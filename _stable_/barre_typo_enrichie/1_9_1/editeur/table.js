@@ -102,7 +102,7 @@
 			var texte="<a href='javascript:ihm_tableau.supprime_ligne("+ligne+")'><img  ";
 			texte += " title='Supprimer cette ligne' ";
 			texte += " alt='Supprimer cette ligne' ";
-			texte += "src='supprimer_ligne.gif' value='ligne' /></a>\n";
+			texte += "src='supprimer_ligne.png' value='ligne' /></a>\n";
 			return texte;
 		}
 
@@ -124,7 +124,7 @@
 			var texte="<a href='javascript:ihm_tableau.supprime_colonne("+colonne+")'><img";
 			texte+=" title='Supprimer cette colonne'";
 			texte+=" alt='Supprimer cette colonne'";
-			texte+=" src='supprimer_ligne.gif' value='colonne' /></a>\n";
+			texte+=" src='supprimer_ligne.png' value='colonne' /></a>\n";
 			return texte;
 		}
 		/**

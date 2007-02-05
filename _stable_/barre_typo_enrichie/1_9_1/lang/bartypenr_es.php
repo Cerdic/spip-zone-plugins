@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_gestion_anc_nom' => 'Nombre  del ancla',
 'barre_gestion_anc_pointer' => 'Enlazar hacia un ancla',
 'barre_gestion_anc_cible' => 'Ancla destino',
-'barre_gestion_anc_bulle' => 'Burbuja de ayuda del ancla',
+'barre_gestion_anc_bulle' => 'Burbuja de ayuda del ancla'
 
 );
 ?>

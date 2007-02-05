@@ -219,6 +219,32 @@ $tableau_formulaire = '
   return produceWharf('tableau_caracteres','',$tableau_formulaire); 	
 }
 
+// pour les caractères
+function afficher_boutonsavances($champ, $champhelp) {
+
+$reta = '';
+$reta .= bouton_barre_racc ("barre_raccourci('\n\n{2{','}2}\n\n',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/intertitre2.png', _T('bartypenr:barre_intertitre2'), $champhelp);
+$reta .= bouton_barre_racc ("barre_raccourci('\n\n{3{','}3}\n\n',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/intertitre3.png', _T('bartypenr:barre_intertitre3'), $champhelp);
+$reta .= bouton_barre_racc ("barre_raccourci('[|','|]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/center.png', _T('bartypenr:barre_centrer'), $champhelp);
+$reta .= bouton_barre_racc ("barre_raccourci('[/','/]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/right.png', _T('bartypenr:barre_alignerdroite'), $champhelp);
+$reta .= bouton_barre_racc ("barre_raccourci('[(',')]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/cadretexte.png', _T('bartypenr:barre_encadrer'), $champhelp);
+$reta .= bouton_barre_racc ("barre_raccourci('<poesie>','</poesie>',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/poesie.png", _T('bartypenr:barre_poesie'), $champhelp);
+
+$reta .= '&nbsp;';
+	
+$tableau_formulaire = '
+<table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
+  <tr class="spip_barre">
+    <td>'._T('bartypenr:barre_avances').'</td>
+    <td>'.$reta.'
+    </td>
+  </tr> 
+</table>
+';
+
+  return produceWharf('tableau_boutonsavances','',$tableau_formulaire); 	
+}
+
 // construit un tableau de raccourcis pour un noeud de DOM
 
 function afficher_barre($champ, $forum=false, $lang='') {
@@ -237,10 +263,11 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 
  // Prégénération des toolzbox.. (wharfing)
-    $toolbox .= afficher_gestion_tableau($champ);
+    $toolbox .= afficher_boutonsavances($champ, $champhelp);
+	$toolbox .= afficher_caracteres($champ, $spip_lang, $champhelp);
+    //$toolbox .= afficher_gestion_tableau($champ);
     $toolbox .= afficher_gestion_lien($champ);
 	$toolbox .= afficher_gestion_ancre($champ);
-	$toolbox .= afficher_caracteres($champ, $spip_lang, $champhelp);
     $toolbox .= afficher_gestion_remplacer($champ, $champhelp);
 //
 
@@ -261,12 +288,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$ret .= "&nbsp;";
 		$ret .= bouton_barre_racc ("barre_raccourci('\n\n{{{','}}}\n\n',$champ)", _DIR_IMG_ICONES_BARRE."intertitre.png", _T('barre_intertitre'), $champhelp);
 		if ($options == "avancees") {
-			$ret .= bouton_barre_racc ("barre_raccourci('\n\n{2{','}2}\n\n',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/intertitre2.png', _T('bartypenr:barre_intertitre2'), $champhelp);
-			$ret .= bouton_barre_racc ("barre_raccourci('\n\n{3{','}3}\n\n',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/intertitre3.png', _T('bartypenr:barre_intertitre3'), $champhelp);
-			$ret .= bouton_barre_racc ("barre_raccourci('[|','|]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/center.png', _T('bartypenr:barre_centrer'), $champhelp);
-			$ret .= bouton_barre_racc ("barre_raccourci('[/','/]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/right.png', _T('bartypenr:barre_alignerdroite'), $champhelp);
-			$ret .= bouton_barre_racc ("barre_raccourci('[(',')]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/cadretexte.png', _T('bartypenr:barre_encadrer'), $champhelp);
-		$ret .= bouton_barre_racc ("barre_raccourci('<poesie>','</poesie>',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/poesie.png", _T('bartypenr:barre_poesie'), $champhelp);
+			$ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_boutonsavances']."','');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/avances.png", _T('bartypenr:barre_boutonsavances'), $champhelp);
 		}
 	}
 	$ret .= "&nbsp;</td>\n<td>";
@@ -277,7 +299,8 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 // gestion des liens
       $ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_lien']."','');", _DIR_IMG_ICONES_BARRE."lien.png", _T('barre_lien'), $champhelp);
-	  
+// gestion des ancres		
+		$ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_ancre']."','');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/ancre.png", _T('bartypenr:barre_ancres'), $champhelp);  
 	if (!$forum) {
 		$ret .= bouton_barre_racc ("barre_raccourci('[[',']]',$champ)", _DIR_IMG_ICONES_BARRE."notes.png", _T('barre_note'), $champhelp);
 	}
@@ -290,7 +313,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$ret .= bouton_barre_racc ("barre_raccourci('[?',']',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/barre-wiki.png', _T('bartypenr:barre_glossaire'), $champhelp);
 
 
-//gestion des tableaux		
+//gestion des tableaux
 		$ret .= bouton_barre_racc("barre_tableau($champ, '"._DIR_PLUGIN_BARRETYPOENRICHIE."')",
 			_DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/barre-tableau.png', _T('bartypenr:barre_tableau'),
 			$champhelp);
@@ -300,8 +323,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
 // gestion du remplacement
       $ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_remplacer']."','');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/chercher_remplacer.png", _T('bartypenr:barre_chercher'), $champhelp);
 
-// gestion des ancres		
-		$ret .=    bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_ancre']."','');", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/ancre.png", _T('bartypenr:barre_ancres'), $champhelp);  
 
 }
 
