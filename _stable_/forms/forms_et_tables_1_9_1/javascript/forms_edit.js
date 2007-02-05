@@ -74,7 +74,10 @@ jQuery.fn.ajaxAction = function() {
 			}
 			});
 	});
-	$('.antifocus').one('focus',function(){ this.value='';$(this).removeClass('antifocus'); } );
+	if ((jQuery.fn.jquery[2]>0) || (jQuery.fn.jquery[0]>1))
+		$('.antifocus').one('focus',function(){ this.value='';$(this).removeClass('antifocus'); } );
+	else
+		$('.antifocus').onefocus( function(){ this.value='';$(this).removeClass('antifocus'); } );
 	$('#'+id+' div.sortableChoix').Sortable(
 		{
 			accept : 			'sortableChoixItem',
@@ -144,7 +147,11 @@ $(document).ready(function(){
 		$('#champs').ajaxAction();
 		$('#proprietes').ajaxAction();
 	}
-	else
-		$('.antifocus').onefocus( function(){ this.value='';$(this).removeClass('antifocus'); } );
+	else{
+		if ((jQuery.fn.jquery[2]>0) || (jQuery.fn.jquery[0]>1))
+			$('.antifocus').one('focus',function(){ this.value='';$(this).removeClass('antifocus'); } );
+		else
+			$('.antifocus').onefocus( function(){ this.value='';$(this).removeClass('antifocus'); } );
+	}
 
 });
