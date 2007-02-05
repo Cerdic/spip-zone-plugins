@@ -290,7 +290,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 
 //gestion des tableaux		
-		$ret .= bouton_barre_racc("swap_couche('".$GLOBALS['numero_block']['tableau_gestion']."','');",
+		$ret .= bouton_barre_racc("barre_tableau($champ, '"._DIR_PLUGIN_BARRETYPOENRICHIE."')",
 			_DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/barre-tableau.png', _T('bartypenr:barre_tableau'),
 			$champhelp);
 

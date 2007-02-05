@@ -315,3 +315,13 @@ function mozWrap(txtarea, open, close)
          textEl.caretPos = document.selection.createRange().duplicate();
      }
 
+//insere un tableau courcy michael ec49.org/sitenkit2/
+ 	var zone_selection;
+ 	function barre_tableau(champs_de_texte, cheminediteur){
+ 		zone_selection = champs_de_texte;
+
+ 		hauteur=600;
+ 		largeur=700;
+ 		propriete='scrollbars=yes,resizable=yes,width='+largeur+',height='+hauteur;
+		w=window.open(cheminediteur+'editeur/table.html', '',propriete);
+ 	}

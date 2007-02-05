@@ -19,9 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_c_cedille_maj' => 'Insert capital C cedilla',
 
 'barre_chercher' => 'Search & Replace',
-'barre_tableau' => 'Insert a table',
+'barre_tableau' => 'Insert/modify a table',
 'barre_glossaire' => '[?Glossary] reference (Wikipedia)',
 
+'barre_poesie' => 'display like poetry',
 'barre_caracteres' => 'Special characters',
 'barre_adresse' => 'Address',
 'barre_lien_externe' => 'External link',
