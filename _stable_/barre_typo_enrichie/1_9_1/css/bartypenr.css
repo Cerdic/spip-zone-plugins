@@ -45,3 +45,9 @@ a.spip_blank {
 	background-color: #FFF;
 	padding: 0 1em;
 }
+
+sup {
+	vertical-align:20%;
+	font-variant: small-caps;
+	font-size: .5em;
+}
