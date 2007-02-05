@@ -266,6 +266,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 			$ret .= bouton_barre_racc ("barre_raccourci('[|','|]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/center.png', _T('bartypenr:barre_centrer'), $champhelp);
 			$ret .= bouton_barre_racc ("barre_raccourci('[/','/]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/right.png', _T('bartypenr:barre_alignerdroite'), $champhelp);
 			$ret .= bouton_barre_racc ("barre_raccourci('[(',')]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/cadretexte.png', _T('bartypenr:barre_encadrer'), $champhelp);
+		$ret .= bouton_barre_racc ("barre_raccourci('<poesie>','</poesie>',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/poesie.png", _T('bartypenr:barre_poesie'), $champhelp);
 		}
 	}
 	$ret .= "&nbsp;</td>\n<td>";

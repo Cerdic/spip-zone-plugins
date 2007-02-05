@@ -56,7 +56,7 @@
 	    /*******CONStrUIT tableAU**********/
 		function construit_tableau(){
 			var texte = "";
-			texte+="<table class='ihm' cellspacing='"+cellspacing+"' width='85%;'>\n";
+			texte+="<table id='ihm' cellspacing='"+cellspacing+"'>\n";
 			for (i=0;i<nl+2;i++){//on rajoute deux lignes en plus pour l'interface
 				texte+="<tr>\n";
 				for (j=0;j<nc+2;j++){//on rajoute deux lignes  en plus pour l'interface
@@ -215,11 +215,11 @@
 		/* cette fonction insere une zone de texte dans la cellule */
 		function insere(){
 
-			var texte ="<textarea cols='10' rows='2' style='width:100%;' ";	
-			texte+="onfocus='this.cols=25; this.rows=3;' ";
+			var texte ="<textarea cols='10' rows='2'";	
+			texte+=" onfocus='this.cols=25; this.rows=3;'";
 			//on remet aux dimensions et on sauve le contenu
-			texte+=" onchange='lc[" + this.l + "][" + this.c + "].content=this.value;' ";			
-			texte+=" onblur='this.cols=10; this.rows=2; ' >";	
+			texte+=" onchange='lc[" + this.l + "][" + this.c + "].content=this.value;'";			
+			texte+=" onblur='this.cols=10; this.rows=2;'>";
 			texte+=this.content;			
 			texte+="</textarea> \n";	
 			return texte;
@@ -459,5 +459,4 @@
 			}
 		}
 		window.close();		
-	}	
-			
+	}

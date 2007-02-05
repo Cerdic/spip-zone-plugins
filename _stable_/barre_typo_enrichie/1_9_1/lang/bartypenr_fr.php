@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_tableau' => 'Ins&eacute;rer/modifier (le s&eacute;lectioner avant) un tableau',
 'barre_glossaire' => 'Entr&eacute;e du [?glossaire] (Wikipedia)',
 
-'barre_poesie' => 'Mettre en forme comme une po&eacute;sie',
+'barre_poesie' => 'Mettre en forme comme une &lt;poesie&gt;po&eacute;sie&lt;/poesie&gt;',
 'barre_caracteres' => 'Caract&egrave;res sp&eacute;ciaux',
 'barre_adresse' => 'Adresse',
 'barre_lien_externe' => 'Lien externe',
