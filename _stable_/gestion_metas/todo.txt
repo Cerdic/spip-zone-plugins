@@ -5,3 +5,6 @@
 - Générer 'à la volée' la possibilité d'avoir d'autres champs metas.
 	Problèmes :	- format du code HTML à insérer -> fait dans le squelette.
 			- Où stocker l'information des champs demandés ?
+			
+		
+- Tester le multinlinguisme.

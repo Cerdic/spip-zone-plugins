@@ -22,7 +22,7 @@
 /******************************************************************************************/
 
 function GestionMetas_affiche_gauche() {
-	if ((_request('exec') != 'naviguer') && (_request('exec') != 'articles')) return;
+	if ((_request('exec') != 'naviguer') && (_request('exec') != 'articles') && (_request('exec') != 'breves_voir')) return;
 	return formulaire_metas();
 }
 
@@ -38,6 +38,10 @@ function formulaire_metas() {
 			$ElementGestionMetas = 'article';
 			$IdElementGestionMetas = _request('id_article');
 			break;
+		case 'breves_voir':
+			$ElementGestionMetas = 'breve';
+			$IdElementGestionMetas = _request('id_breve');
+			break;
 	}
 	if ($ElementGestionMetas == '') return;
 	
@@ -48,9 +52,9 @@ function formulaire_metas() {
 	
 	// On rempli le tableau 'metas' (qui pourrait etre un objet)
 	$metas = Array();
-	$metas['titre'] = _request('titre');
-	$metas['description'] = _request('description');
-	$metas['keywords'] = _request('keywords');
+	$metas['titre'] = _request('GestionMetasTitre');
+	$metas['description'] = _request('GestionMetasDescription');
+	$metas['keywords'] = _request('GestionMetasKeywords');
 	
 	// On recupere les informations en base, et on les utilise si l'element de metas correspondant est vide.
 	$query = "SELECT * FROM ".$GestionMetasTable." WHERE id_".$ElementGestionMetas." = '".$IdElementGestionMetas."'";
@@ -75,24 +79,25 @@ function formulaire_metas() {
 		$res = spip_query($query);
 	}
 	
-	$contenu = "<form id='metas' method='post'>
+?>
+	<form id="metas" method="post">
 		<fieldset>
 			<legend>Metadatas</legend>
-			<input type='hidden' name='submit' value='1' />
-			<input type='hidden' name='exec' value='"._request('exec')."' />
-			<input type='hidden' name='id_rubrique' value='"._request('id_rubrique')."' />
-			<input type='hidden' name='id_article' value='"._request('id_article')."' />
-			<p><label for='GestionMetas_title'>Title</label><br />
-			<input id='GestionMetas_title' type='text' name='titre' value='".htmlspecialchars($metas['titre'], ENT_QUOTES)."' style='width: 98%'/></p>
-			<p><label for='GestionMetas_description'>Description</label><br />
-			<textarea id='GestionMetas_description' name='description' rows=3>".htmlspecialchars($metas['description'], ENT_QUOTES)." </textarea></p>
-			<p><label for='GestionMetas_keywords'>Keywords</label><br />
-			<input id='GestionMetas_keywords' type='text' name='keywords' value='".htmlspecialchars($metas['keywords'], ENT_QUOTES)."' style='width: 98%'/></p>
-			<p><input type='submit' /></p>
+			<input type="hidden" name="submit" value="1" />
+			<input type="hidden" name="exec" value="<?php echo _request('exec'); ?>" />
+			<input type="hidden" name="id_rubrique" value="<?php echo _request('id_rubrique'); ?>" />
+			<input type="hidden" name="id_article" value="<?php echo _request('id_article'); ?>" />
+			<input type="hidden" name="id_breve" value="<?php echo _request('id_breve'); ?>" />
+			<p><label for="GestionMetas_title">Title</label><br />
+			<input id="GestionMetas_title" type="text" name="GestionMetasTitre" value="<?php echo htmlspecialchars($metas['titre'], ENT_QUOTES); ?>" style="width: 98%"/></p>
+			<p><label for="GestionMetas_description">Description</label><br />
+			<input id="GestionMetas_description" type="text" name="GestionMetasDescription" value="<?php echo htmlspecialchars($metas['description'], ENT_QUOTES); ?>" style="width: 98%"/></p>
+			<p><label for="GestionMetas_keywords">Keywords</label><br />
+			<input id="GestionMetas_keywords" type="text" name="GestionMetasKeywords" value="<?php echo htmlspecialchars($metas['keywords'], ENT_QUOTES); ?>" style="width: 98%"/></p>
+			<p><input type="submit" /></p>
 		</fieldset>
-	</form>";
-
-	return $contenu;
+	</form>
+<?php
 }
 
 function create_GestionMetasTable($GestionMetasTable) {
@@ -100,6 +105,7 @@ function create_GestionMetasTable($GestionMetasTable) {
 						(id_meta INTEGER NOT NULL AUTO_INCREMENT, 
 						id_rubrique INTEGER DEFAULT NULL,
 						id_article INTEGER DEFAULT NULL,
+						id_breve INTEGER DEFAULT NULL,
 						titre TEXT,
 						description TEXT,
 						keywords TEXT,
@@ -112,7 +118,7 @@ function create_GestionMetasTable($GestionMetasTable) {
 		return;
 	}
 	echo ("la table ".$GestionMetasTable." n'existait pas et a &eacute;t&eacute; cr&eacute;&eacute;e");
-	spip_log($GestionMetasTable.' created', 'mysql');
+	spip_log('Plugin Gestion Metas : '.$GestionMetasTable.' created', 'mysql');
 }
 
 ?>

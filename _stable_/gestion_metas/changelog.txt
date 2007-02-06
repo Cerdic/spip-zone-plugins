@@ -1,4 +1,7 @@
+V0.2   : 06 fev 2007 : 1 Support des breves
+                       2 On change les noms des champs du formulaire pour Ã©viter de dÃ©publier la breve lorsqu'on poste le formulaire (le code de voir_breve fait un test sur le contenu de $titre, et pensait donc a tord qu'on avait modifie la breve)
+                       3 Ajout des modifications proposees par Florent Jaouali <fj AT octavo.fr> pour le support de id_rubrique=0
          22 jan 2007 : correction d'une petite faute dans le README ({id_rubrique} et pas {id_rubriques})
-V0.1.1 : 24 nov 2006 : à la création de la table, on force la valeur par défaut d'id_rubrique et id_article à NULL pour gérer le cas id_rubrique=0 (la racine).
+V0.1.1 : 24 nov 2006 : a la creation de la table, on force la valeur par defaut d'id_rubrique et id_article a NULL pour gerer le cas id_rubrique=0 (la racine).
 V0.1   : 23 Nov 2006 : version stable pour l'ajout des metas title, description, keywords sur les articles et les rubriques.
 
