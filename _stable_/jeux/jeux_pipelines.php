@@ -88,8 +88,7 @@ function jeux_insert_head($flux){
 
 // pipeline affiche_gauche
 function jeux_affiche_gauche($flux) {
-global $spip_version_code;
-if ($spip_version_code<1.92) $flux['data'] .="<script type=\"text/javascript\"><!--
+if ($GLOBALS['spip_version_code']<1.92) $flux['data'] .="<script type=\"text/javascript\"><!--
 document.getElementById('haut-page').childNodes[2].align='center';
 --></script>";
 	return $flux;
