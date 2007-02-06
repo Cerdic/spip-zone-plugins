@@ -61,7 +61,8 @@ function jeux2($chaine, $indexJeux){
 
 // pipeline pre_propre
 function jeux_pre_propre($texte) { 
-	return jeux_pre($texte, 1);
+	// l'identifiant du jeu est choisi au hasard... on n'est jamais trop prudent
+	return jeux_pre($texte, rand(1, 65000));
 }
 
 // pipeline pre_propre

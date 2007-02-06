@@ -52,10 +52,10 @@ function pendu_init(jeu) {
 
 // griser (ou non !) une lettre du clavier
 function pendu_clavier_grise(jeu, lettre, grise) {
-	document.forms[jeu].elements[lettre].disabled=grise;
-	if (grise) document.forms[jeu].elements[lettre].style.color='graytext';
-	 else document.forms[jeu].elements[lettre].style.color='';
-	document.forms[jeu].elements[lettre].blur();
+	document.forms['pendu'+jeu].elements[lettre].disabled=grise;
+	if (grise) document.forms['pendu'+jeu].elements[lettre].style.color='graytext';
+	 else document.forms['pendu'+jeu].elements[lettre].style.color='';
+	document.forms['pendu'+jeu].elements[lettre].blur();
 }
 
 // Voir si la lettre existe dans le mot
