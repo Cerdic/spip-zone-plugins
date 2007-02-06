@@ -69,7 +69,7 @@ while($row = spip_fetch_array($list_bg)) {
 		$ext = get_extra($id_article_bg,"article");
 		
 		//date dernier envoi
-		$maj = $ext["majnouv"];
+		$maj_nouv = $ext["majnouv"];
 		//squelette du patron
 		$patron = $ext["squelette"] ;
 		
@@ -79,7 +79,7 @@ while($row = spip_fetch_array($list_bg)) {
 	
 		// preparation mail
 		
-		$date = date('Y-m-d H:i:s',$last_maj_bg) ;
+		$date = date('Y-m-d H:i:s',$maj_nouv) ;
 			
 			include_spip('public/assembler');
 			$contexte_patron = array('date' => $date,'patron'=>$patron);
