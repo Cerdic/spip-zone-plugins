@@ -38,6 +38,7 @@ function smileys_installe() {
 	
 	// les courts : tester a l'usage...
 	 ':)'	=> 'sourire.png',
+	 ':('	=> 'pas_content.png',
 	 ';)'	=> 'clin_d-oeil.png',
 	 ':|'	=> 'bof.png',
 	 '|)'	=> 'rouge.png',
