@@ -240,7 +240,11 @@ function spip2odt_convertir_images($texte,$dossier){
 			$height = round(intval(extraire_attribut($tag[3],'height'))/28.3378,2);
 			$width = round(intval(extraire_attribut($tag[3],'width'))/28.3378,2);
 			$fichier = copie_locale($src);
-			if ($ok = @copy($fichier, $dir.basename($fichier))){
+			if (!$ok = @copy($fichier, $dir.basename($fichier))){
+				$fichier = copie_locale(url_absolue($src)); // essayer en http
+				$ok = @copy($fichier, $dir.basename($fichier));
+			}
+			if ($ok){
 				// TODO gerer ici les cas spip_documents_left/right/center
 				$src = "Pictures/".basename($fichier);
 				$insert = '<draw:frame draw:style-name="fr1" draw:name="Image1" text:anchor-type="paragraph" svg:width="'
@@ -248,7 +252,7 @@ function spip2odt_convertir_images($texte,$dossier){
 				  .$src.'" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/></draw:frame>';
 				$texte = str_replace($tag[3], $insert, $texte);
 			}
-			else echo ("erreur copy $fichier vers ".$dir.basename($fichier));
+			else spip_log("erreur copy $fichier vers ".$dir.basename($fichier));
 		}
 	}
 	return $texte;
@@ -283,7 +287,7 @@ function spip2odt_reparagrapher($texte){
 
 	// Fermer les paragraphes (y compris sur "STOP P")
 	$texte = preg_replace(
-		',(<text:p\s.*)(</?(STOP P|text:h|text:list)[>[:space:]]),UimsS',
+		',(<text:p\s.*)(</?(STOP P|text:h|text:list|text:list-item|table:table|table:table-column|table:table-row|table:table-cell)[>[:space:]]),UimsS',
 		"\n\\1</text:p>\n\\2", $texte);
 
 	// Supprimer les marqueurs "STOP P"
