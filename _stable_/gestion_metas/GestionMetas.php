@@ -62,7 +62,7 @@ function formulaire_metas() {
 	$result = spip_fetch_array($res);
 	$metas['id_meta'] = $result['id_meta'];
 	// Si le formulaire n'a pas ete soumis, on prend les informations de la base. Sinon on prend met a jour icelle.
-	if (!_request('submit')) {
+	if (!_request('GestionMetasSubmit')) {
 		$metas['titre'] = $result['titre'];
 		$metas['description'] = $result['description'];
 		$metas['keywords'] = $result['keywords'];
@@ -83,7 +83,7 @@ function formulaire_metas() {
 	<form id="metas" method="post">
 		<fieldset>
 			<legend>Metadatas</legend>
-			<input type="hidden" name="submit" value="1" />
+			<input type="hidden" name="GestionMetasSubmit" value="1" />
 			<input type="hidden" name="exec" value="<?php echo _request('exec'); ?>" />
 			<input type="hidden" name="id_rubrique" value="<?php echo _request('id_rubrique'); ?>" />
 			<input type="hidden" name="id_article" value="<?php echo _request('id_article'); ?>" />
