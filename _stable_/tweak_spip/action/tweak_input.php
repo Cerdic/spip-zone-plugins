@@ -5,8 +5,7 @@ include_spip('inc/filtres');
 
 function action_tweak_input_dist() {
 tweak_log("Début : action_tweak_input_dist()");
-	global $spip_version_code;
-	if ($spip_version_code>=1.92) {
+	if ($GLOBALS['spip_version_code']>=1.92) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	} else {

@@ -49,7 +49,7 @@ add_tweak( array(
 add_tweak( array(
 	'id'	=> 'supprimer_numero',
 	'code' 	=> '$GLOBALS["table_des_traitements"]["TITRE"][]= "typo(supprimer_numero(%s))";
-				$GLOBALS["table_des_traitements"]["NOM"][]="typo(supprimer_numero(%s))";',
+$GLOBALS["table_des_traitements"]["NOM"][]="typo(supprimer_numero(%s))";',
 	'categorie'	=> 'squel',
 	'options'	=> 1
 ));
@@ -83,7 +83,7 @@ add_tweak( array(
 	// le /avancees signifie que avancees (traduit par : _T('icone_interface_complet')) sera coche par defaut
 	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
 	'code' 	=> '$GLOBALS["radio_set_options"]=%%radio_set_options/s/avancees(basiques=icone_interface_simple|avancees=icone_interface_complet)%%;
-list($GLOBALS["set_options"], $foo) = explode("(", $GLOBALS["radio_set_options"], 2);',
+list($GLOBALS["set_options"],) = explode("(", $GLOBALS["radio_set_options"], 2);',
 	'categorie'	=> 'admin',
 	'options'	=> 1,
 ));

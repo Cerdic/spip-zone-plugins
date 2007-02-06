@@ -23,6 +23,7 @@ function smileys_installe() {
 	 ':-D'	=> 'mort_de_rire.png',
 	 ':-)'	=> 'sourire.png',
 	 '|-)'	=> 'rouge.png',
+	 ":'-)"=> 'pleure_de_rire.png',
 	 ":'-D"	=> 'pleure_de_rire.png',
 	 ":'-("	=> 'triste.png',
 	 ':o)'	=> 'rigolo.png',
@@ -47,7 +48,8 @@ function smileys_installe() {
 	foreach ($smileys as $smy=>$val) {
 		$alt = '@@64@@'.base64_encode($smy).'@@65@@';
 		$smileys2[0][] = $smy;
-		$smileys2[1][] = "<img alt=\"$alt\" title=\"$alt\" class=\"no_image_filtrer\" src=\"".tweak_htmlpath($path)."/$val\" />";
+		list(,,,$size) = @getimagesize("$path/$val");
+		$smileys2[1][] = "<img alt=\"$alt\" title=\"$alt\" class=\"no_image_filtrer\" src=\"".tweak_htmlpath($path)."/$val\" $size/>";
 	}
 	ecrire_meta('tweaks_smileys', serialize($smileys2));
 	ecrire_metas();

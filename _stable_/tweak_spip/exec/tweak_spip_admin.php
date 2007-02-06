@@ -8,13 +8,13 @@
 
 include_spip('inc/texte');
 include_spip('inc/layer');
+include_spip("inc/presentation");
 /*
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
 define('_DIR_PLUGIN_TWEAK_SPIP',(_DIR_PLUGINS.end($p)));
 */
 // compatibilite spip 1.9
-global $spip_version_code;
-if ($spip_version_code<1.92) { function fin_gauche(){return false;} }
+if ($GLOBALS['spip_version_code']<1.92) { function fin_gauche(){return false;} }
 
 function tweak_styles_et_js() {
 	global $couleur_claire;
@@ -139,17 +139,7 @@ tweak_log("Début : exec_tweak_spip_admin()");
 	global $connect_statut, $connect_toutes_rubriques;
 	global $spip_lang_right;
 	global $couleur_claire;
-	global $tweaks, $spip_version_code;
-	
-	include_spip('tweak_spip_config');
-	include_spip("inc/presentation");
-	
-	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
-		echo _T('avis_non_acces_page');
-		fin_page();
-		exit;
-	}
+	global $tweaks;
 	
 	// reset general
 	if (_request('reset')=='oui'){
@@ -157,6 +147,15 @@ tweak_log("Début : exec_tweak_spip_admin()");
 		foreach(array_keys($GLOBALS['meta']) as $meta) 
 			if(strpos($meta, 'tweaks_') !== false) effacer_meta($meta);
 		ecrire_metas();
+	}
+
+	include_spip('tweak_spip_config');
+	
+	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
+		echo _T('avis_non_acces_page');
+		fin_page();
+		exit;
 	}
 	
 	// initialisation générale forcée : recuperation de $tweaks;
@@ -167,14 +166,13 @@ tweak_log("Début : exec_tweak_spip_admin()");
 		enregistre_modif_tweaks();
 		// pour la peine, un redirige, 
 		// que les tweaks charges soient coherent avec la liste
-		if ($spip_version_code>=1.92) include_spip('inc/headers');
+		if ($GLOBALS['spip_version_code']>=1.92) include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('tweak_spip_admin'));
 	}
 //	else
 //		verif_tweaks();
 
-	global $spip_version_code;
-	if ($spip_version_code<1.92) 
+	if ($GLOBALS['spip_version_code']<1.92) 
   		debut_page(_T('tweak:titre'), 'configuration', 'tweak_spip');
   	else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -189,6 +187,8 @@ tweak_log("Début : exec_tweak_spip_admin()");
 	debut_gauche();
 	debut_boite_info();
 	echo propre(_T('tweak:help'));
+	fin_boite_info();
+
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'tweak_spip_admin'),'data'=>''));
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'tweak_spip_admin'),'data'=>''));
@@ -242,11 +242,10 @@ tweak_log("Fin   : exec_tweak_spip_admin()");
 
 // affiche un tweak sur une ligne
 function ligne_tweak($tweak, &$js){
-	global $spip_version_code;
 	static $id_input=0;
 	$inc = $tweak_id = $tweak['id'];
 	$actif = $tweak['actif'];
-	$erreur_version = isset($tweak['version']) && $spip_version_code<$tweak['version'];
+	$erreur_version = isset($tweak['version']) && $GLOBALS['spip_version_code']<$tweak['version'];
 	$puce = $actif?'puce-verte.gif':'puce-rouge.gif';
 	$titre_etat = _T('tweak:'.($actif?'':'in').'actif');
 	$nb_var = intval($tweak['nb_variables']);

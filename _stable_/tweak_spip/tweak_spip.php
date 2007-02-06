@@ -10,13 +10,12 @@
 /* COMPATIBILITE */
 /*****************/
 
-global $spip_version_code;
 if (!defined('_DIR_PLUGIN_TWEAK_SPIP')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	$p=_DIR_PLUGINS.end($p); if ($p[strlen($p)-1]!='/') $p.='/';
 	define('_DIR_PLUGIN_TWEAK_SPIP', $p);
 }
-if ($spip_version_code<1.92) { 
+if ($GLOBALS['spip_version_code']<1.92) { 
 	if (!function_exists('stripos')) {
 		function stripos($botte, $aiguille) {
 			if (preg_match('@^(.*)' . preg_quote($aiguille, '@') . '@isU', $botte, $regs)) return strlen($regs[1]);
@@ -147,7 +146,6 @@ function tweak_parse_code($code) {
 				$rempl = isset($matches[3])?substr($matches[3],1):'""';
 				if($cmd=='d') $rempl = 'intval('.$rempl.')';
 					elseif($cmd=='s') $rempl = 'strval('.$rempl.')';
-echo $rempl;
 				eval('$rempl='.$rempl.';');
 			}
 		if($cmd!='d' && $rempl[0]!='"') $rempl = '"'.str_replace('"','\"',$rempl).'"';
@@ -185,7 +183,7 @@ function tweak_parse_description($tweak, $tweak_input) {
 
 // decommenter pour debug...
 function tweak_log($s) { 
-	spip_log('TWEAKS. '.$s);
+ if(strlen($s)) spip_log('TWEAKS. '.$s);
 }	
 
 // lance la fonction d'installation de chaque tweak actif, si elle existe.
@@ -210,7 +208,6 @@ function tweak_initialisation_totale() {
 // lit ecrit les metas et initialise $tweaks_metas_pipes
 function tweak_initialisation($forcer=false) {
 	global $tweaks, $tweaks_metas_pipes, $metas_vars;
-	global $spip_version_code;
 	$rand = rand();
 	// au premier passage, on force l'installation si le calcul ou le recalcul est demande
 	static $deja_passe_ici;
@@ -229,7 +226,8 @@ tweak_log(" -- lecture metas - \$rand = $rand");
 	if (isset($GLOBALS['meta']['tweaks_pipelines'])) {
 		$tweaks_metas_pipes = unserialize($GLOBALS['meta']['tweaks_pipelines']);
 tweak_log(" -- tweaks_metas_pipes = ".join(', ',array_keys($tweaks_metas_pipes)));
-tweak_log(" -- tweaks actifs :  = ".join(', ',array_keys(unserialize($GLOBALS['meta']['tweaks_actifs']))));
+tweak_log(''); $c=count(unserialize($GLOBALS['meta']['tweaks_actifs']));
+tweak_log(" -- $c tweaks actifs".($c?" = ".join(', ',array_keys(unserialize($GLOBALS['meta']['tweaks_actifs']))):''));
 tweak_log($forcer?"\$forcer = true":"tweak_initialisation($forcer) : Sortie car les metas sont présents - \$rand = $rand");
 		// Les pipelines sont en meta, tout va bien on peut partir d'ici.
 		if (!$forcer) return;
@@ -249,7 +247,7 @@ tweak_log(" -- foreach(\$tweaks) : tweak_parse_code, tweak_parse_description... 
 		if (!isset($tweak['description'])) $tweaks[$i]['description'] = _T('tweak:'.$tweak['id'].':description');
 		$tweaks[$i]['actif'] = isset($metas_tweaks[$tweaks[$i]['id']])?$metas_tweaks[$tweaks[$i]['id']]['actif']:0;
 		// Si Spip est trop ancien...
-		if (isset($tweak['version']) && $spip_version_code<$tweak['version']) $tweaks[$i]['actif'] = 0;
+		if (isset($tweak['version']) && $GLOBALS['spip_version_code']<$tweak['version']) $tweaks[$i]['actif'] = 0;
 		// au cas ou des variables sont presentes dans le code
 		$tweaks[$i]['basic'] = $i*10; $tweaks[$i]['nb_variables'] = 0;
 		// cette ligne peut initialiser des variables dans $metas_vars
@@ -280,27 +278,31 @@ tweak_log("tweak_initialisation($forcer) : Sortie - \$rand = $rand");
 // $texte est le texte d'origine
 // si $balises = '' alors la protection par defaut est : html|code|cadre|frame|script
 function tweak_exclure_balises($balises, $fonction, $texte){
-	global $spip_version_code;
 	if (!function_exists($fonction)) {
 		spip_log("Erreur - tweak_exclure_balises() : $fonction() non definie !");
 		return $texte;
 	}
 	$balises = strlen($balises)?',<('.$balises.')(\s[^>]*)?>(.*?)</\1>,UimsS':'';
-	if ($spip_version_code<1.92 && $balises=='') $balises = ',<(html|code|cadre|frame|script)>(.*?)</\1>,UimsS';
+	if ($GLOBALS['spip_version_code']<1.92 && $balises=='') $balises = ',<(html|code|cadre|frame|script)>(.*?)</\1>,UimsS';
 	$texte = echappe_retour($fonction(echappe_html($texte, 'TWEAKS', true, $balises)), 'TWEAKS');
 	return $texte;
 }
 
 // transforme un chemin d'image relatif en chemin html
 function tweak_htmlpath($relative_path) {
-   $realpath=str_replace("\\", "/", realpath($relative_path));
-   $htmlpathURL=str_replace($_SERVER['DOCUMENT_ROOT'],'',$realpath);
-static $temp1;
-$temp2="tweak_htmlpath() : '$relative_path' = '$realpath' - '{$_SERVER['DOCUMENT_ROOT']}' = '$htmlpathURL'";
-if($temp2!=$temp1)
-tweak_log($temp2);
-$temp1=$temp2;
-   return $htmlpathURL;
+	$realpath=str_replace("\\", "/", realpath($relative_path));
+	if (strlen($a=$_SERVER['DOCUMENT_ROOT']) && strpos($realpath, $a)!==false) 
+		return str_replace($a,'',$realpath);
+	return tweak_canonicalize($_SERVER['SCRIPT_URL'].$relative_path);
+}
+
+// retourne un chemin canonique a partir d'un chemin contenant des ../
+function tweak_canonicalize($address) {
+   $address = explode('/', $address);
+   $keys = array_keys($address, '..');
+   foreach($keys AS $keypos => $key) array_splice($address, $key - ($keypos * 2 + 1), 2);
+   $address = implode('/', $address);
+   return preg_replace(',([^.])\./,', '\1', $address);
 }
 
 /*****************/
