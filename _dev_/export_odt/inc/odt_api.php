@@ -3,11 +3,11 @@ include_spip('inc/odf_api');
 
 // XHTML - Preserver les balises-bloc : on liste ici tous les elements
 // dont on souhaite qu'ils provoquent un saut de paragraphe
-define('_TAGS_BLOCS',
-	'div|pre|ul|ol|li|blockquote|h[1-6r]|'
-	.'t(able|[rdh]|body|foot|extarea)|'
+define('_TAGS_BLOCS_TO_P',
+	'pre|blockquote|'
+	.'textarea|'
 	.'form|object|center|marquee|address|'
-	.'d[ltd]|script|noscript|map|button|fieldset');
+	.'d[ltd]|map|button|fieldset');
 define('_TAGS_INLINE',
 	'span|strong|b|em|i|');
 
@@ -56,14 +56,20 @@ function spip2odt_convertir($texte,$dossier){
 	#include_spip('inc/xml');
 	#$xml = spip_xml_parse($texte);
 	#var_dump($xml);
+	
+	// faire un heritage des <p>
+	$texte = spip2odt_heriter_p($texte,$dossier);
+	
 	// on ajoute ici des paragraphe, donc a faire avant reparagraphage
 	$texte = spip2odt_convertir_tags_blocs($texte);
 	
 	// transmettre les paragraphes aux enfants
-	$texte = spip2odt_reparagrapher($texte,$dossier);
+	$texte = spip2odt_reparagrapher($texte);
+//var_dump($texte);
+//die();	
 	
 	// ajouter les styles
-	$texte = spip2odt_ajouter_styles($texte);
+	$texte = spip2odt_ajouter_styles($texte,$dossier);
 	
 	//$texte = str_replace("<br />","\n",$texte);
 	$texte = str_replace("&nbsp;"," ",$texte);
@@ -132,8 +138,22 @@ function spip2odt_convertir_tags_blocs($texte){
 	$texte = preg_replace(",<(td|th)(\s[^>]*)?>,ims",'<table:table-cell table:style-name="td_spip" office:value-type="string"><text:p text:style-name="table_spip_contenu">',$texte);
 	$texte = preg_replace(",</(td|th)>,ims",'</text:p></table:table-cell>',$texte);
 	$texte = preg_replace(",<[/]?(thead|tbody)>,","",$texte);
-	//$texte = preg_replace(",</table>,ims","</table:table><text:p/>",$texte);
 	
+	// les headings
+	$texte = preg_replace(",(<h([1-6])(\s[^>]*)?".">),is",'<text:h text:style-name="spip_h\\2" text:outline-level="\\2">',$texte);
+	$texte = preg_replace(",(</h([1-6])>),is",'</text:h>',$texte);
+	
+	// les tags blocs restants sauf les div
+	$texte = preg_replace(",(<("._TAGS_BLOCS_TO_P.")(\s[^>]*)?".">),is",'<text:p text:style-name="spip_\\2">',$texte);
+	// les div qui sont generiquement utilisees pour faire des encadres ou autre
+	$splits = preg_split(",(<(div)(\s[^>]*)?".">),is",$texte,-1,PREG_SPLIT_DELIM_CAPTURE);
+	$texte = $splits[0];
+	for ($i=1;$i<count($splits);$i+=4){
+		$class = 'spip_'.extraire_attribut($splits[$i],'class');
+		$tag = '<text:p text:style-name="'.$class.'">';
+		$texte .= $tag . (isset($splits[$i+3])?$splits[$i+3]:"");
+	}
+	$texte = preg_replace(",</(div|"._TAGS_BLOCS_TO_P.")>,is","</text:p>",$texte);
 	return $texte;
 }
 function spip2odt_analyser_tables($texte,$no_table_spip){
@@ -234,8 +254,8 @@ function spip2odt_convertir_images($texte,$dossier){
 	return $texte;
 }
 
-function spip2odt_reparagrapher($texte,$dossier){
-	$split = preg_split(',(<text:p [^>]*>),ims',$texte,null,PREG_SPLIT_DELIM_CAPTURE);
+function spip2odt_heriter_p($texte,$dossier){
+	$split = preg_split(',(<text:p\s[^>]*>),ims',$texte,null,PREG_SPLIT_DELIM_CAPTURE);
 	$n = count($split);
 	for ($i=2;$i<$n;$i+=2){
 		if (strpos($split[$i],'<p ')!==FALSE){
@@ -255,51 +275,52 @@ function spip2odt_reparagrapher($texte,$dossier){
 	return implode('',$split);
 }
 
-function spip2odt_ajouter_styles($texte){
-	// le gras
-	$styles = '<style:style style:name="spip_strong" style:family="text"><style:text-properties fo:font-weight="bold" style:font-weight-asian="bold" style:font-weight-complex="bold"/>';
-	$styles .= '<style:style style:name="spip_b" style:family="text"><style:text-properties fo:font-weight="bold" style:font-weight-asian="bold" style:font-weight-complex="bold"/>';
-	// l'italique
-	$styles .= '</style:style><style:style style:name="spip_i" style:family="text"><style:text-properties fo:font-style="italic" style:font-style-asian="italic" style:font-style-complex="italic"/></style:style>';
-	$styles .= '</style:style><style:style style:name="spip_em" style:family="text"><style:text-properties fo:font-style="italic" style:font-style-asian="italic" style:font-style-complex="italic"/></style:style>';
-	// le souligne ?
-	//$styles .= '<style:style style:name="spip_souligne" style:family="text"><style:text-properties style:text-underline-style="solid" style:text-underline-width="auto" style:text-underline-color="font-color"/></style:style>';
-	
-	// les listes numerotees
-	$styles .= '<text:list-style style:name="spip_ol">'
-	. '<text:list-level-style-number text:level="1" text:style-name="Numbering_20_Symbols" style:num-suffix="." style:num-format="1">'
-	. '<style:list-level-properties text:space-before="0.635cm" text:min-label-width="0.635cm"/>'
-	. '</text:list-level-style-number>'
-	. '<text:list-level-style-number text:level="2" text:style-name="Numbering_20_Symbols" style:num-suffix="." style:num-format="1">'
-	. '<style:list-level-properties text:space-before="1.27cm" text:min-label-width="0.635cm"/>'
-	. '</text:list-level-style-number>'
-	. '<text:list-level-style-number text:level="3" text:style-name="Numbering_20_Symbols" style:num-suffix="." style:num-format="1">'
-	. '<style:list-level-properties text:space-before="1.905cm" text:min-label-width="0.635cm"/>'
-	. '</text:list-level-style-number>'
-	. '<text:list-level-style-number text:level="4" text:style-name="Numbering_20_Symbols" style:num-suffix="." style:num-format="1">'
-	. '<style:list-level-properties text:space-before="2.54cm" text:min-label-width="0.635cm"/>'
-	. '</text:list-level-style-number>'
-	. '<text:list-level-style-number text:level="5" text:style-name="Numbering_20_Symbols" style:num-suffix="." style:num-format="1">'
-	. '<style:list-level-properties text:space-before="3.175cm" text:min-label-width="0.635cm"/>'
-	. '</text:list-level-style-number>'
-	. '<text:list-level-style-number text:level="6" text:style-name="Numbering_20_Symbols" style:num-suffix="." style:num-format="1">'
-	. '<style:list-level-properties text:space-before="3.81cm" text:min-label-width="0.635cm"/>'
-	. '</text:list-level-style-number>'
-	. '<text:list-level-style-number text:level="7" text:style-name="Numbering_20_Symbols" style:num-suffix="." style:num-format="1">'
-	. '<style:list-level-properties text:space-before="4.445cm" text:min-label-width="0.635cm"/>'
-	. '</text:list-level-style-number>'
-	. '<text:list-level-style-number text:level="8" text:style-name="Numbering_20_Symbols" style:num-suffix="." style:num-format="1">'
-	. '<style:list-level-properties text:space-before="5.08cm" text:min-label-width="0.635cm"/>'
-	. '</text:list-level-style-number>'
-	. '<text:list-level-style-number text:level="9" text:style-name="Numbering_20_Symbols" style:num-suffix="." style:num-format="1">'
-	. '<style:list-level-properties text:space-before="5.715cm" text:min-label-width="0.635cm"/>'
-	. '</text:list-level-style-number>'
-	. '<text:list-level-style-number text:level="10" text:style-name="Numbering_20_Symbols" style:num-suffix="." style:num-format="1">'
-	. '<style:list-level-properties text:space-before="6.35cm" text:min-label-width="0.635cm"/>'
-	. '</text:list-level-style-number>'
-	. '</text:list-style>';
+function spip2odt_reparagrapher($texte){
 
-	$texte = str_replace('</office:automatic-styles>',$styles.'</office:automatic-styles>',$texte);	
+	// Ajouter un espace aux <p> et un "STOP P"
+	// transformer aussi les </p> existants en <p>, nettoyes ensuite
+	$texte = preg_replace(',</?text:p(\s([^>]*))?'.'>,iS', '<STOP P><text:p \2>',$texte);
+
+	// Fermer les paragraphes (y compris sur "STOP P")
+	$texte = preg_replace(
+		',(<text:p\s.*)(</?(STOP P|text:h|text:list)[>[:space:]]),UimsS',
+		"\n\\1</text:p>\n\\2", $texte);
+
+	// Supprimer les marqueurs "STOP P"
+	$texte = str_replace('<STOP P>', '', $texte);
+
+	// Reduire les blancs dans les <p>
+	// Do not delete multibyte utf character just before </p> having last byte equal to whitespace  
+	$u = ($GLOBALS['meta']['charset']=='utf-8' && test_pcre_unicode()) ? 'u':'S';
+	$texte = preg_replace(
+	',(<text:p(>|\s[^>]*)>)\s*|\s*(</text:p[>[:space:]]),'.$u.'i', '\1\3',
+		$texte);
+
+	// Supprimer les <p xx></p> vides
+	$texte = preg_replace(',<text:p\s[^>]*></text:p>\s*,iS', '',
+		$texte);
+	return $texte;
+}
+
+function spip2odt_ajouter_styles($texte,$dossier){
+
+	
+	lire_fichier($dossier . "styles.xml",$styles);
+	
+	$f = find_in_path('templates/styles.xml');
+	lire_fichier($f,$styles_defaut);
+	$ajout_styles = "";
+	if (preg_match_all(",<((style:style|text:list-style|text:outline-style)\s[^/>]*)(/>|>.*</(\\2)>),Uims",$styles_defaut,$matches,PREG_SET_ORDER)){
+		foreach($matches as $match){
+			if (preg_match(",style:name=([\"'])([^\\1]*)\\1,Ums",$match[1],$regs)){
+				$nom_style = $regs[2];
+				if (!preg_match(",style:name=(['\"])$nom_style\\1,",$styles))
+					$ajout_styles .= $match[0];
+			}
+		}
+	}
+	$styles = str_replace('</office:styles>',$ajout_styles.'</office:styles>',$styles);	
+	ecrire_fichier($dossier . "styles.xml",$styles);
 	return $texte;
 }
 
