@@ -57,6 +57,11 @@ function spip2odt_convertir($texte,$dossier){
 	#$xml = spip_xml_parse($texte);
 	#var_dump($xml);
 	
+	// reperer les puces et les substituer
+	$puce = str_replace("toto","",propre("\n- toto"));
+	$texte = str_replace($puce,"<p />* ",$texte);
+	
+	$texte = str_replace("<br />","<p />",$texte);
 	// faire un heritage des <p>
 	$texte = spip2odt_heriter_p($texte,$dossier);
 	
@@ -65,13 +70,10 @@ function spip2odt_convertir($texte,$dossier){
 	
 	// transmettre les paragraphes aux enfants
 	$texte = spip2odt_reparagrapher($texte);
-//var_dump($texte);
-//die();	
 	
 	// ajouter les styles
 	$texte = spip2odt_ajouter_styles($texte,$dossier);
 	
-	//$texte = str_replace("<br />","\n",$texte);
 	$texte = str_replace("&nbsp;"," ",$texte);
 	return $texte;
 }
@@ -227,7 +229,7 @@ function spip2odt_analyser_tables($texte,$no_table_spip){
 
 function spip2odt_convertir_images($texte,$dossier){
 	if (preg_match_all(
-		',(<([a-z]+) [^<>]*spip_documents[^<>]*>)?\s*(<img\s.*>),UimsS',
+		',(<([a-z]+) [^<>]*spip_documents[^<>]*>)?\s*((<a [^>]*>)?\s*(<img\s.*>)),UimsS',
 		$texte, $tags, PREG_SET_ORDER)) {
 		$dir = sous_repertoire($dossier,'Pictures');
 		include_spip('inc/distant');
@@ -236,7 +238,7 @@ function spip2odt_convertir_images($texte,$dossier){
 			$class = "";
 			if($tag[1])
 				$class = extraire_attribut($tag[1], 'class');
-			$src = extraire_attribut($tag[3],'src');
+			$src = extraire_attribut($tag[5],'src');
 			$height = round(intval(extraire_attribut($tag[3],'height'))/28.3378,2);
 			$width = round(intval(extraire_attribut($tag[3],'width'))/28.3378,2);
 			$fichier = copie_locale($src);
@@ -250,6 +252,10 @@ function spip2odt_convertir_images($texte,$dossier){
 				$insert = '<draw:frame draw:style-name="fr1" draw:name="Image1" text:anchor-type="paragraph" svg:width="'
 				  .$width.'cm" svg:height="'.$height.'cm" draw:z-index="0"><draw:image xlink:href="'
 				  .$src.'" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/></draw:frame>';
+				if ($tag[4]){
+					$href = extraire_attribut($tag[4],'href');
+					if ($href) $insert .= $tag[4]. $href;
+				}
 				$texte = str_replace($tag[3], $insert, $texte);
 			}
 			else spip_log("erreur copy $fichier vers ".$dir.basename($fichier));
