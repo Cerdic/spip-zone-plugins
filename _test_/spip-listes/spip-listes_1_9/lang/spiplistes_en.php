@@ -405,7 +405,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 // ====================== mes-options.php3 ======================
 
 
-'options' => 'radio|simple|Format :|Html,Text,unsubscription|html,text,non',
+'options' => 'radio|simple|Format :|Html,Text,unsubscription|html,texte,non',
 
 // ====================== mes-options.php3 ======================
 

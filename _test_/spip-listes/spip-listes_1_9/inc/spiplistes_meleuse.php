@@ -17,7 +17,7 @@
 /* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
 /* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, +tats-Unis.                   */
 /******************************************************************************************/
 
 // Trouver un message à envoyer
@@ -243,6 +243,7 @@ if ($message_pile > 0){
 				$row3 = spip_fetch_array($res);
 		
 				$nom_auteur = $row3["nom"];
+				$extra = unserialize ($row3["extra"]);
 				
 				$str_temp .= $nom_auteur." format : ".$extra['abo'];
 
@@ -251,8 +252,6 @@ if ($message_pile > 0){
 				$total=$total+1;
 				unset ($cookie);
 				
-				$extra = unserialize ($row3["extra"]);
-
 				if (($extra["abo"] == 'texte') OR ($extra["abo"] == 'html')) $abo = true;
 				                                                       else $abo = false;				
 
