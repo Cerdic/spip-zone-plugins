@@ -246,7 +246,7 @@ function action_crayons_store_dist() {
 
 	        // seul spip core sait rendre les donnees
 	        if (in_array($modele,
-	        array('chapo', 'texte', 'descriptif', 'ps'))) {
+	        array('chapo', 'texte', 'descriptif', 'ps', 'bio'))) {
 	            $return[$wid] = propre($valeur);
 	        } else {
 	            $return[$wid] = typo($valeur);
