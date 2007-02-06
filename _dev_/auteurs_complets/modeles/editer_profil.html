@@ -1,5 +1,5 @@
 #CACHE{0}
-<BOUCLE_AUTEUR(AUTEURS){tout}{id_auteur=#SESSION{id_auteur}}>
+<BOUCLE_AUTEUR(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>
 <div class="vcard">
 <h3><:auteurscomplets:id_card:></h3>
 <div style="padding:10px">
@@ -8,10 +8,10 @@
 	</div>]
 	[<strong><span class="fn">(#NOM_FAMILLE|?{' ',#NOM})<strong><span class="fn"><span class="given-name widget auteur-prenom-#ID_AUTEUR">#PRENOM</span> <span class="family-namen widget auteur-nom_famille-#ID_AUTEUR">#NOM_FAMILLE</span></span></strong></span></strong>]
 	[<p><span class="adr">
-	[<span class="street-address widget auteur-adresse-#ID_AUTEUR">(#ADRESSE)</span><br />]
-	[<span class="postal-code widget auteur-codepostal-#ID_AUTEUR">(#CODEPOSTAL)</span>]
-	[<span class="locality widget auteur-ville-#ID_AUTEUR">(#VILLE)</span><br />]
-	<span class="country-name widget auteur-pays-#ID_AUTEUR">(#PAYS)</span>
+	[<span class="#EDIT{adresse} street-address">(#ADRESSE)</span><br />]
+	[<span class="#EDIT{codepostal} postal-code">(#CODEPOSTAL)</span>]
+	[<span class="#EDIT{ville} locality">(#VILLE)</span><br />]
+	<span class="#EDIT{pays} country-name">(#PAYS)</span>
 	</span></p>]
 
 	[<p><span class="geo">
