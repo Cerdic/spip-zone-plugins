@@ -8,7 +8,7 @@
 	</div>]
 	
 		<span class="fn">
-		[(#NOM_FAMILLE*|?{' ',''})<strong><span class="fn"><span class="given-name #EDIT{prenom}">#PRENOM*</span> <span class="#EDIT{nom_famille} family-name">#NOM_FAMILLE*</span></span></strong>]
+		[(#NOM_FAMILLE*|?{' ',''})<strong><span class="#EDIT{nomcomplet} fn"><span class="given-name">#PRENOM*</span> <span class="family-name">#NOM_FAMILLE*</span></span></strong>]
 		[(#NOM_FAMILLE*|?{'',' '})<strong><span class="#EDIT{qui} fn">#NOM*</span></strong>]
 		</span>
 		[<strong><a href="#URL_AUTEUR" class="spip_in" title="#NOM">URL</a></strong>]
@@ -27,9 +27,14 @@
 </div>
 
 	<h3><:auteurscomplets:contacts:></h3>
+
 <div style="padding:10px">
-	[<:auteurscomplets:organisation:> <a class="org spip_out" href="#URL_ORGANISATION">(#ORGANISATION*)</a>]<br />
-	[<:auteurscomplets:email:> <span class="#EDIT{email}"><a class="email" href="mailto:#EMAIL">(#EMAIL*)</a></span><br />][<:auteurscomplets:tel:> <span class="tel #EDIT{telephone}">(#TELEPHONE*)</span><br />][<:auteurscomplets:fax:> <span class="fax #EDIT{fax}">(#FAX*)</span><br />][<:auteurscomplets:website:> <span class="#EDIT{hyperlien}"><a href="#URL_SITE" class="url spip_out" rel="me">(#NOM_SITE*)</a></span>]
+	[<:auteurscomplets:organisation:> <span class="#EDIT{organisationlink}"><a class="org spip_out" href="#URL_ORGANISATION">(#ORGANISATION*)</a>]</span><br />
+	[<:auteurscomplets:email:> <span class="#EDIT{email}"><a class="email" href="mailto:#EMAIL">(#EMAIL*)</a></span><br />]
+	[<:auteurscomplets:tel:> <span class="tel #EDIT{telephone}">(#TELEPHONE*)</span><br />]
+	[<:auteurscomplets:fax:> <span class="fax #EDIT{fax}">(#FAX*)</span><br />]
+	[<:auteurscomplets:website:> <span class="#EDIT{hyperlien}"><a href="#URL_SITE" class="url spip_out" rel="me">(#NOM_SITE*)</a></span>]
 </div>
+
 </div>
 </BOUCLE_AUTEUR>
