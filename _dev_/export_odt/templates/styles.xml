@@ -57,6 +57,7 @@
 <style:style style:name="spip_b" style:display-name="Gras" style:family="text"><style:text-properties fo:font-weight="bold" style:font-weight-asian="bold" style:font-weight-complex="bold"/></style:style>
 <style:style style:name="spip_i" style:display-name="Italique" style:family="text"><style:text-properties fo:font-style="italic" style:font-style-asian="italic" style:font-style-complex="italic"/></style:style>
 <style:style style:name="spip_em" style:display-name="Italique" style:family="text"><style:text-properties fo:font-style="italic" style:font-style-asian="italic" style:font-style-complex="italic"/></style:style>
+<style:style style:name="spip_code" style:display-name="Code" style:family="text"><style:text-properties style:font-name="Courier" fo:font-size="11pt"/></style:style>
 
 <text:list-style style:name="spip_ol" style:display-name="Listes numerotees">
 <text:list-level-style-number text:level="1" text:style-name="Numbering_20_Symbols" style:num-suffix="." style:num-format="1">

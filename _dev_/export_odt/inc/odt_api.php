@@ -9,7 +9,7 @@ define('_TAGS_BLOCS_TO_P',
 	.'form|object|center|marquee|address|'
 	.'d[ltd]|map|button|fieldset');
 define('_TAGS_INLINE',
-	'span|strong|b|em|i|');
+	'span|strong|b|em|i|code');
 
 // retablir les boucles et autres tags du squelette
 function spip2odt_styliser_contenu($odf_dir, $contexte){
