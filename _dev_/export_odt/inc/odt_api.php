@@ -63,7 +63,7 @@ function spip2odt_convertir($texte,$dossier){
 	$puce = str_replace("toto","",propre("\n- toto"));
 	$texte = str_replace($puce,"<p />* ",$texte);
 	
-	$texte = str_replace("<br />","<p />",$texte);
+	$texte = preg_replace(",<br(\s*/)?>,ims","<p />",$texte);
 	// faire un heritage des <p>
 	$texte = spip2odt_heriter_p($texte,$dossier);
 	
@@ -331,7 +331,7 @@ function spip2odt_reparagrapher($texte){
 	// Supprimer les <p xx></p> vides
 	$texte = preg_replace(',<text:p\s[^<>]*></text:p>\s*,iS', '',
 		$texte);
-	$texte = preg_replace(',<text:span\s[^<>]*>([^<]*)</text:span>\s*,iS', '\\1',
+	$texte = preg_replace(',<text:span\s*>([^<]*)</text:span>\s*,iS', '\\1',
 		$texte);
 	return $texte;
 }
