@@ -61,9 +61,6 @@ function Notifications_spip_signatures($x) {
 			. url_absolue($url_suppr)
 			;
 
-var_dump($texte);
-var_dump($t);
-
 		include_spip('inc/mail');
 		envoyer_mail(_SPIP_MODERATEURS_PETITION,
 			$sujet, $texte);
