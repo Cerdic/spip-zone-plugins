@@ -5,10 +5,10 @@
 		var	 mySlideData = new Array();
 		<BOUCLE_liste_images(DOCUMENTS) {id_article} {par hasard}>
 			mySlideData[countArticle++] = new Array(
-				'[(#FICHIER|image_reduire{320,240}|extraire_attribut{'src'})]',
+				'[(#FICHIER|copie_locale|image_reduire{320,240}|extraire_attribut{'src'})]',
 				'[(#URL_DOCUMENT)]',
 				'[(#TITRE)]',
-				'[(#DESCRIPTIF)]'
+				'[(#DESCRIPTIF|textebrut)]'
 			);
 		</BOUCLE_liste_images>						
 	</script>			
