@@ -305,12 +305,12 @@ function spip2odt_reparagrapher($texte){
 	// Fermer les span (y compris sur "STOP P")
 	$texte = preg_replace(
 		',(<text:span\s.*)(</?(STOP SPAN|STOP P|text:h|text:list|text:list-item|table:table|table:table-column|table:table-row|table:table-cell)[>[:space:]]),UimsS',
-		"\n\\1</text:span>\n\\2", $texte);
+		"\\1</text:span>\\2", $texte);
 
 	// Fermer les paragraphes (y compris sur "STOP P")
 	$texte = preg_replace(
 		',(<text:p\s.*)(</?(STOP P|text:h|text:list|text:list-item|table:table|table:table-column|table:table-row|table:table-cell)[>[:space:]]),UimsS',
-		"\n\\1</text:p>\n\\2", $texte);
+		"\\1</text:p>\\2", $texte);
 
 
 	// Supprimer les marqueurs "STOP P"
@@ -324,14 +324,11 @@ function spip2odt_reparagrapher($texte){
 	$texte = preg_replace(
 	',(<text:p(>|\s[^<>]*)>)\s*|\s*(</text:p[>[:space:]]),'.$u.'i', '\1\3',
 		$texte);
-	$texte = preg_replace(
-	',(<text:span(>|\s[^<>]*)>)\s*|\s*(</text:span[>[:space:]]),'.$u.'i', '\1\3',
-		$texte);
 
 	// Supprimer les <p xx></p> vides
 	$texte = preg_replace(',<text:p\s[^<>]*></text:p>\s*,iS', '',
 		$texte);
-	$texte = preg_replace(',<text:span\s*>([^<]*)</text:span>\s*,iS', '\\1',
+	$texte = preg_replace(',<text:span\s*>([^<]*)</text:span>,iS', '\\1',
 		$texte);
 	return $texte;
 }
