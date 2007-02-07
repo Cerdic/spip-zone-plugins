@@ -66,6 +66,7 @@
 		[<div class="texte">(#TEXTE*|decouper_en_page{#ID_ARTICLE}|propre|reduire_image{440,0})</div>]
 		[<div class="ps">(#PS)</div>]
 		[<div class="notes">(#NOTES)</div>]
+		[(#TEXTE|?{""})]
 		[<div class="chapo"><:voir_en_ligne:> : <a href="(#URL_SITE)">[(#NOM_SITE|sinon{#URL_SITE})]</a></div>]
 
 		<!-- Documents joints et portfolio d'images -->
@@ -108,11 +109,11 @@
 			La petition ayant une PAGINATION il faut absolument lui passer SELF en argument. ]
 			[ #REM Conserver cet invalideur : (#PETITION|?{'',''}) ]
 			<INCLURE{fond=inc-petition}{id_article}{self=#SELF}>
-
+		
 		<!-- Debut Patrice -->
 			[(#MODELE{evenements_article}{id_article}{lang}{self=#SELF})]
 		<!-- Fin Patrice -->
-		
+
 		<!-- Derniers articles des auteurs de l'article -->
 		<B_auteurs>
 			<div class="ps">

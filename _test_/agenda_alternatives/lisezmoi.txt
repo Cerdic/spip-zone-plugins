@@ -1,5 +1,6 @@
 ----------------------------------------------------------------------
 Permet l'utilisation du plugin Agenda dans le squelettes Alternatives.
+(Contrib testée pour Spip 1.9.1 et Spip 1.9.2)
 ----------------------------------------------------------------------
 
 Dans le squelette, quatre fichiers à modifier : 
@@ -36,10 +37,13 @@ Pour article.html, placer le code :
 ----------------------------------------------------------------------
 Pour vous simplifer la vie, les fichiers modifiés ainsi modifiés ont été placés dans : 
 	plugins/agenda_alternatives/modifications
-	
+
 Il suffit donc pour vous de remplacer les 4 fichiers originaux dans :
 	themes/alternatives et themes/alternatives/inc
 
+Mais attention : il se peut que le squelette alternatives que vous avez entre les mains soit légèrement différent que celui qui est proposé ici.
+Si vous le pouvez donc, il vaut mieux que vous fassiez les changements vous-même.
+	
 ----------------------------------------------------------------------
 Vous obtiendrez donc :
 
@@ -48,6 +52,34 @@ Vous obtiendrez donc :
 	- Un bouton 'Agenda' supplémentaire en haut, menant à :
 	- Une page 'evenements' qui liste les évènements (du jour/du mois, prochains, passés)
 	- La liste des évènements associés au bas de chaque article
-	
+
+Note : certains des éléments précédents n'aparaissent pas si aucun évènement n'est programmé dans le site.
+
+----------------------------------------------------------------------
+Précautions d'usage :
+
+0. Restez prudent. Cette contrib libre n'a aucune obligation de résultats.
+	De furtifs bogues peuvent encore échapper à notre vigilance...
+
+I. Placez les trois plugins en question dans le dossier /plugins/
+	Vous obtiendrez donc trois sous-dossiers, ressemblant à :
+		/plugins/agenda_alternatives
+		/plugins/agenda
+		/plugins/widget_calendar
+	Pour les utiliser, n'oubliez pas de les activer tous les trois dans l'interface privée, sinon votre site pourra ne pas fonctionner.
+
+II. Assurez-vous des compatibilités. Par exemple :
+	Agenda 1.9.1 avec Spip 1.9.1
+	Agenda 1.9.2 avec Spip 1.9.2
+
+III. Faites les choses dans l'ordre :
+	1. s'assurer que spip fonctionne
+	2. s'assurer que le squelette fonctionne
+	3. activer l'agenda et widget calendar et s'assurer que tout fonctionne encore
+	4. procéder aux modifications du squelettes et activer agenda_alternatives.
+
+IV. Ajouter vos évènements attachés à vos articles.
+
+----------------------------------------------------------------------
 Toutes vos remarques : patrice.vanneufville!@!laposte.net
 	
