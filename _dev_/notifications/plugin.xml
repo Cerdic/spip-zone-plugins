@@ -1,0 +1,27 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Notifications
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	collectif
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+		Active les notifications par email de certaines actions
+	</description>
+	<prefix>
+	Notifications
+	</prefix>
+
+	<pipeline>
+		<nom>pre_edition</nom>
+		<action>pre_edition</action>
+		<inclure>notifications.php</inclure>
+	</pipeline>
+
+</plugin>
