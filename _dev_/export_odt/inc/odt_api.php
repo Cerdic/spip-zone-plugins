@@ -56,6 +56,8 @@ function spip2odt_convertir($texte,$dossier){
 	#include_spip('inc/xml');
 	#$xml = spip_xml_parse($texte);
 	#var_dump($xml);
+	// precaution pas inutile
+	#$texte = quote_amp($texte);
 	
 	// reperer les puces et les substituer
 	$puce = str_replace("toto","",propre("\n- toto"));
@@ -73,8 +75,16 @@ function spip2odt_convertir($texte,$dossier){
 	
 	// ajouter les styles
 	$texte = spip2odt_ajouter_styles($texte,$dossier);
-	
+
+	$texte = unicode2charset(html2unicode($texte,true),'utf-8');
 	$texte = str_replace("&nbsp;"," ",$texte);
+	
+	//securisons tout ce qui n'est pas un tag xml odt
+	$splits = preg_split(",(</?[a-z]+[:][a-z]+[^<>]*>),Ui",$texte,null,PREG_SPLIT_DELIM_CAPTURE);
+	$texte = array_shift($splits);
+	while (count($splits))
+		$texte .= array_shift($splits).str_replace(array('<','>'),array('&lt;','&gt;'),array_shift($splits));
+	
 	return $texte;
 }
 
@@ -82,14 +92,13 @@ function spip2odt_convertir($texte,$dossier){
 // Conversion SPIP->ODF
 function spip2odt_convertir_tags_inline($texte){
 	// traitement des liens :
-	if (preg_match_all(",(<a\s[^>]*>)(.*)</a>,Uims",$texte,$regs,PREG_SET_ORDER)){
+	if (preg_match_all(",(<a\s[^<>]*>)(.*)</a>,Uims",$texte,$regs,PREG_SET_ORDER)){
 		foreach($regs as $reg){
 			$href = extraire_attribut($reg[1],'href');
-			$texte = str_replace($reg[0],'<text:a xlink:type="simple" xlink:href="'.$href.'">'.$reg[2].'</text:a>',$texte);
+			$texte = str_replace($reg[0],'<text:a xlink:type="simple" xlink:href="'.str_replace("&","&amp;",$href).'">'.$reg[2].'</text:a>',$texte);
 		}
 	}
-	
-	$texte = preg_replace(",<("._TAGS_INLINE.")(\s+[^>]*)?>,","<text:span text:style-name='spip_\\1'>",$texte);	
+	$texte = preg_replace(",<("._TAGS_INLINE.")(\s+[^<>]*)?>,","<text:span text:style-name='spip_\\1'>",$texte);	
 	$texte = preg_replace(",</("._TAGS_INLINE.")>,","</text:span>",$texte);	
 	return $texte;
 }
@@ -97,15 +106,15 @@ function spip2odt_convertir_tags_inline($texte){
 function spip2odt_convertir_tags_blocs($texte){
 	static $nb_tables_spip = 1;
 	// les ul/ol li
-	$texte = preg_replace(",<li(\s[^>]*)?>,ims",'<text:list-item>',$texte);
+	$texte = preg_replace(",<li(\s[^<>]*)?>,ims",'<text:list-item>',$texte);
 	$texte = preg_replace(",</li>,ims","</text:list-item>",$texte);
 	
-	$texte = preg_replace(",<ul(\s[^>]*)?>,ims",'<text:list text:style-name="spip_ul">',$texte);
-	$texte = preg_replace(",</ul>\s*(<p(\s[^>]*)>),ims","</text:list><text:p/>\\1",$texte);
+	$texte = preg_replace(",<ul(\s[^<>]*)?>,ims",'<text:list text:style-name="spip_ul">',$texte);
+	$texte = preg_replace(",</ul>\s*(<p(\s[^<>]*)>),ims","</text:list><text:p/>\\1",$texte);
 	$texte = preg_replace(",</ul>,ims","</text:list>",$texte);
 	
-	$texte = preg_replace(",<ol(\s[^>]*)?>,ims",'<text:list text:style-name="spip_ol">',$texte);
-	$texte = preg_replace(",</ol>\s*(<p(\s[^>]*)>),ims","</text:list><text:p/>\\1",$texte);
+	$texte = preg_replace(",<ol(\s[^<>]*)?>,ims",'<text:list text:style-name="spip_ol">',$texte);
+	$texte = preg_replace(",</ol>\s*(<p(\s[^<>]*)>),ims","</text:list><text:p/>\\1",$texte);
 	$texte = preg_replace(",</ol>,ims","</text:list>",$texte);
 	// paragrapher les items de list
 	$texte = preg_replace(",(<text:list-item>)(.*)(<[/]?text:list),Uims",'\\1<text:p text:style-name="spip_li">\\2</text:p>\\3',$texte);
@@ -124,9 +133,9 @@ function spip2odt_convertir_tags_blocs($texte){
 	// <table:table-cell table:style-name="Tableau1.A2" office:value-type="string"><text:p text:style-name="Table_20_Contents"/></table:table-cell>
 	// <table:table-cell table:style-name="Tableau1.C2" office:value-type="string"><text:p text:style-name="Table_20_Contents"/></table:table-cell>
 	// </table:table-row></table:table>
-	/*while (preg_match(",<table(\s[^>]*)?>,imsS",$texte)){
+	/*while (preg_match(",<table(\s[^<>]*)?>,imsS",$texte)){
 		$nb_tables_spip++;
-		$texte = preg_replace(",<table(\s[^>]*)?>,imsS",
+		$texte = preg_replace(",<table(\s[^<>]*)?>,imsS",
 		  '<table:table table:name="Tableau'.$nb_tables_spip.'" table:style-name="table_spip">'
 		  . '<table:table-column table:style-name="table_spip.A" table:number-columns-repeated="3"/>',$texte,1);
 	}*/
@@ -136,19 +145,20 @@ function spip2odt_convertir_tags_blocs($texte){
 		$nb_tables_spip++;
 		list($texte,,$tag,,) = spip2odt_analyser_tables($texte,$nb_tables_spip);
 	}
-	$texte = preg_replace(",<([/]?)tr(\s[^>]*)?>,ims",'<\\1'.'table:table-row>',$texte);
-	$texte = preg_replace(",<(td|th)(\s[^>]*)?>,ims",'<table:table-cell table:style-name="td_spip" office:value-type="string"><text:p text:style-name="table_spip_contenu">',$texte);
+	$texte = preg_replace(",<([/]?)tr(\s[^<>]*)?>,ims",'<\\1'.'table:table-row>',$texte);
+	$texte = preg_replace(",<(td|th)(\s[^<>]*)?>,ims",'<table:table-cell table:style-name="td_spip" office:value-type="string"><text:p text:style-name="table_spip_contenu">',$texte);
 	$texte = preg_replace(",</(td|th)>,ims",'</text:p></table:table-cell>',$texte);
 	$texte = preg_replace(",<[/]?(thead|tbody)>,","",$texte);
 	
 	// les headings
-	$texte = preg_replace(",(<h([1-6])(\s[^>]*)?".">),is",'<text:h text:style-name="spip_h\\2" text:outline-level="\\2">',$texte);
+	$texte = preg_replace(",(<h([1-6])(\s[^<>]*)?".">),is",'<text:h text:style-name="spip_h\\2" text:outline-level="\\2">',$texte);
 	$texte = preg_replace(",(</h([1-6])>),is",'</text:h>',$texte);
 	
 	// les tags blocs restants sauf les div
-	$texte = preg_replace(",(<("._TAGS_BLOCS_TO_P.")(\s[^>]*)?".">),is",'<text:p text:style-name="spip_\\2">',$texte);
+	$texte = preg_replace(",(<("._TAGS_BLOCS_TO_P.")(\s[^<>]*)?".">),is",'<text:p text:style-name="spip_\\2">',$texte);
 	// les div qui sont generiquement utilisees pour faire des encadres ou autre
-	$splits = preg_split(",(<(div)(\s[^>]*)?".">),is",$texte,-1,PREG_SPLIT_DELIM_CAPTURE);
+	$splits = preg_split(",(<(div)(\s[^<>]*>|>)),is",$texte,-1,PREG_SPLIT_DELIM_CAPTURE);
+	#var_dump($splits);die();
 	$texte = $splits[0];
 	for ($i=1;$i<count($splits);$i+=4){
 		$class = 'spip_'.extraire_attribut($splits[$i],'class');
@@ -164,7 +174,7 @@ function spip2odt_analyser_tables($texte,$no_table_spip){
 	$content = "";
 	$txt = "";
 	// tant qu'il y a des tags
-	$chars = preg_split(",<table(\s[^>]*)?>,is",$texte,2,PREG_SPLIT_DELIM_CAPTURE);
+	$chars = preg_split(",<table(\s[^<>]*)?>,is",$texte,2,PREG_SPLIT_DELIM_CAPTURE);
 	if(count($chars)>=2){
 		$avant = $chars[0];
 		$tag = $chars[1];
@@ -179,13 +189,13 @@ function spip2odt_analyser_tables($texte,$no_table_spip){
 			$content = "";
 			if (count($chars)>3){ // plusieurs tags fermant -> verifier les tags ouvrants/fermants
 				$nclose =0; $nopen = 0;
-				preg_match_all("{<table(\s*>|\s[^>]*[^/>]>)}isS",$chars[0],$matches,PREG_SET_ORDER);
+				preg_match_all("{<table(\s*>|\s[^<>]*[^/>]>)}isS",$chars[0],$matches,PREG_SET_ORDER);
 				$nopen += count($matches);
 				while ($nopen>$nclose && (count($chars)>3)){
 					$content.=array_shift($chars);
 					$content.=array_shift($chars);
 					$nclose++;
-					preg_match_all("{<table(\s*>|\s[^>]*[^/>]>)}isS",$chars[0],$matches,PREG_SET_ORDER);
+					preg_match_all("{<table(\s*>|\s[^<>]*[^/>]>)}isS",$chars[0],$matches,PREG_SET_ORDER);
 					$nopen += count($matches);
 				}
 			}
@@ -202,7 +212,7 @@ function spip2odt_analyser_tables($texte,$no_table_spip){
 		// $content est l'interieur de la table
 		$content_safe = $content;
 		// supprimer les tables imbriquees
-		if (preg_match(",<table([^>]*?)>,is",$content)){
+		if (preg_match(",<table([^<>]*?)>,is",$content)){
 			$content_safe="";
 			list(,$ins_avant,$ins_tag,$ins_cont,$ins_apres) = spip2odt_analyser_tables($content,0);
 			$content_safe .= $ins_avant;
@@ -212,10 +222,10 @@ function spip2odt_analyser_tables($texte,$no_table_spip){
 			}
 		}
 		// splitter les lignes de la table et compter les colonnes
-		$lines = preg_split(",<(tr)(\s[^>]*)?>(.*)</tr>,Uims",$content_safe,-1,PREG_SPLIT_DELIM_CAPTURE);
+		$lines = preg_split(",<(tr)(\s[^<>]*)?>(.*)</tr>,Uims",$content_safe,-1,PREG_SPLIT_DELIM_CAPTURE);
 		$maxcols = 0;
 		for ($j=1;$j<count($lines);$j+=2){
-			preg_match_all(",<t(d|h)(\s*>|\s[^>]*[^/>]>),isS",$lines[$j],$matches,PREG_SET_ORDER);
+			preg_match_all(",<t(d|h)(\s*>|\s[^<>]*[^/>]>),isS",$lines[$j],$matches,PREG_SET_ORDER);
 			$maxcols = max($maxcols,count($matches));
 		}
 		// renommer le tag
@@ -229,7 +239,7 @@ function spip2odt_analyser_tables($texte,$no_table_spip){
 
 function spip2odt_convertir_images($texte,$dossier){
 	if (preg_match_all(
-		',(<([a-z]+) [^<>]*spip_documents[^<>]*>)?\s*((<a [^>]*>)?\s*(<img\s.*>)),UimsS',
+		',(<([a-z]+) [^<>]*spip_documents[^<>]*>)?\s*((<a [^<>]*>)?\s*(<img\s.*>)),UimsS',
 		$texte, $tags, PREG_SET_ORDER)) {
 		$dir = sous_repertoire($dossier,'Pictures');
 		include_spip('inc/distant');
@@ -265,17 +275,17 @@ function spip2odt_convertir_images($texte,$dossier){
 }
 
 function spip2odt_heriter_p($texte,$dossier){
-	$split = preg_split(',(<text:p\s[^>]*>),ims',$texte,null,PREG_SPLIT_DELIM_CAPTURE);
+	$split = preg_split(',(<text:p\s[^<>]*>),ims',$texte,null,PREG_SPLIT_DELIM_CAPTURE);
 	$n = count($split);
 	for ($i=2;$i<$n;$i+=2){
 		if (strpos($split[$i],'<p ')!==FALSE){
 			// enlever le <p ouvrant
-			$split[$i] = preg_replace(",\A\s*<p [^>]*>,ms","",$split[$i]);
+			$split[$i] = preg_replace(",\A\s*<p [^<>]*>,ms","",$split[$i]);
 			// enlever le </p fermant
-			$split[$i] = preg_replace(",</p>\s*(</text:p(\s[^>]*)?>),ms","\\1",$split[$i]);
+			$split[$i] = preg_replace(",</p>\s*(</text:p(\s[^<>]*)?>),ms","\\1",$split[$i]);
 			
 			// tous les <p ouvrants sont remplaces par le <text:p parent
-			$split[$i] = preg_replace(",<p [^>]*>,ms",$split[$i-1],$split[$i]);
+			$split[$i] = preg_replace(",<p [^<>]*>,ms",$split[$i-1],$split[$i]);
 			// tous les </p fermants sont remplaces par </text:p>
 			$split[$i] = preg_replace(",</p>,ms",'</text:p>',$split[$i]);
 		}
@@ -289,25 +299,39 @@ function spip2odt_reparagrapher($texte){
 
 	// Ajouter un espace aux <p> et un "STOP P"
 	// transformer aussi les </p> existants en <p>, nettoyes ensuite
-	$texte = preg_replace(',</?text:p(\s([^>]*))?'.'>,iS', '<STOP P><text:p \2>',$texte);
+	$texte = preg_replace(',</?text:p(\s([^<>]*))?'.'>,iS', '<STOP P><text:p \2>',$texte);
+
+	$texte = preg_replace(',</?text:span(\s([^<>]*))?'.'>,iS', '<STOP SPAN><text:span \2>',$texte);
+	// Fermer les span (y compris sur "STOP P")
+	$texte = preg_replace(
+		',(<text:span\s.*)(</?(STOP SPAN|STOP P|text:h|text:list|text:list-item|table:table|table:table-column|table:table-row|table:table-cell)[>[:space:]]),UimsS',
+		"\n\\1</text:span>\n\\2", $texte);
 
 	// Fermer les paragraphes (y compris sur "STOP P")
 	$texte = preg_replace(
 		',(<text:p\s.*)(</?(STOP P|text:h|text:list|text:list-item|table:table|table:table-column|table:table-row|table:table-cell)[>[:space:]]),UimsS',
 		"\n\\1</text:p>\n\\2", $texte);
 
+
 	// Supprimer les marqueurs "STOP P"
 	$texte = str_replace('<STOP P>', '', $texte);
+	// Supprimer les marqueurs "STOP SPAN"
+	$texte = str_replace('<STOP SPAN>', '', $texte);
 
 	// Reduire les blancs dans les <p>
 	// Do not delete multibyte utf character just before </p> having last byte equal to whitespace  
 	$u = ($GLOBALS['meta']['charset']=='utf-8' && test_pcre_unicode()) ? 'u':'S';
 	$texte = preg_replace(
-	',(<text:p(>|\s[^>]*)>)\s*|\s*(</text:p[>[:space:]]),'.$u.'i', '\1\3',
+	',(<text:p(>|\s[^<>]*)>)\s*|\s*(</text:p[>[:space:]]),'.$u.'i', '\1\3',
+		$texte);
+	$texte = preg_replace(
+	',(<text:span(>|\s[^<>]*)>)\s*|\s*(</text:span[>[:space:]]),'.$u.'i', '\1\3',
 		$texte);
 
 	// Supprimer les <p xx></p> vides
-	$texte = preg_replace(',<text:p\s[^>]*></text:p>\s*,iS', '',
+	$texte = preg_replace(',<text:p\s[^<>]*></text:p>\s*,iS', '',
+		$texte);
+	$texte = preg_replace(',<text:span\s[^<>]*>([^<]*)</text:span>\s*,iS', '\\1',
 		$texte);
 	return $texte;
 }
