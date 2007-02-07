@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Gestion des m&#233;ta donn&#233;es <code>title</code>, <code>description</code> et <code>keywords</code>.</nom>
-	<version>0.2</version>
+	<version>0.2.2</version>
 	<prefix>GestionMetas</prefix>
 	<etat>stable</etat>
 	<auteur>[Olivier G.->mailto:o.gendrin@novactive.com] pour [Novactive->http://www.novactive.fr/]</auteur>
