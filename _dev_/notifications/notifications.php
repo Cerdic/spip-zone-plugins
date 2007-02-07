@@ -49,17 +49,20 @@ function Notifications_spip_signatures($x) {
 			. "\n\n***"
 			. url_absolue($url)
 			. "\n"
-			. "\nNom: ". $a['nom_email']
-			. "\nemail: ". $a['ad_email']
-			. "\nmessage: ". $a['message']
-			. "\n\nnom_site: ". $a['nom_site']
-			. "\nurl_site: ". $a['url_site']
+			. "\nNom: ". $x['data']['nom_email']
+			. "\nemail: ". $x['data']['ad_email']
+			. "\nmessage: ". $x['data']['message']
+			. "\n\nnom_site: ". $x['data']['nom_site']
+			. "\nurl_site: ". $x['data']['url_site']
 			. "\n\n"
 			. "Cette signature n'a pas encore ete validee ;"
 			. "\nsi vous souhaitez la supprimer directement :"
 			. "\n"
 			. url_absolue($url_suppr)
 			;
+
+var_dump($texte);
+var_dump($t);
 
 		include_spip('inc/mail');
 		envoyer_mail(_SPIP_MODERATEURS_PETITION,
