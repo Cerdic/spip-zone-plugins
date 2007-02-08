@@ -208,7 +208,7 @@ function tweak_initialisation_totale() {
 	// on force la reinstallation complete des tweaks
 	tweak_initialisation(true);
 	// reinitialisation des pipelines, au cas ou
-	unlink(_DIR_TMP."charger_pipelines.php");
+	if (file_exists($f = _DIR_TMP."charger_pipelines.php")) unlink($f);
 }
 
 // lit ecrit les metas et initialise $tweaks_metas_pipes
