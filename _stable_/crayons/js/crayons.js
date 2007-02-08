@@ -218,6 +218,11 @@ jQuery.fn.activatecrayon = function() {
             jQuery(me)
             .cancelcrayon();
           }
+          if (((e.charCode||e.keyCode) == 115) && e.ctrlKey) { // ctrl-s pour sauver (Firefox)
+            jQuery(me)
+            .find("form.formulaire_spip")
+            .submit();
+          }
           var maxh = this.className.match(/\bmaxheight(\d+)?\b/);
           if (maxh) {
             maxh = maxh[1] ? parseInt(maxh[1]) : 200;
