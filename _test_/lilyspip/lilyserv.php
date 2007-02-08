@@ -14,7 +14,7 @@
 // Necessite l'installation de lilypond et ImageMagick
 $convert_bin = "/usr/bin/convert";
 $lilypond_bin = "/usr/local/bin/lilypond";
-$lilypond_version = "2.10.11";
+$lilypond_version = "2.10.15";
 
 // Cache du serveur
 $cache_dir = "CACHE/lilyspip";
@@ -26,7 +26,9 @@ $format = $_GET['format'];
 
 
 function lilypond_enhance($texte,$code_format) {
-	if ($code_format=="test"){		//Pour afficher la version dans les parametres du Plugin
+	global $lilypond_version;
+	
+	if ($code_format=="test"){//Pour afficher la version dans les parametres du Plugin
 	$textem = "\version \"$lilypond_version\"
 	\header {}
 	\paper {
@@ -40,15 +42,15 @@ function lilypond_enhance($texte,$code_format) {
 	
 	else {// Correction pour supprimer le bas de page et centrer l'image
 	
-	$textem = '\version "$lilypond_version"
+	$textem = "\version \"$lilypond_version\"
 	\header {
-		tagline= ""
+		tagline= \"\"
 	}
 	\paper {
 		ragged-right = ##t
 		indent = 0.0\mm
 	}
-	'."$texte";
+	$texte";
 	}
 
 	return $textem;
@@ -60,7 +62,7 @@ function lilypond_($texte, $code_format) {
 	global $convert_bin;
 	global $lilypond_bin;
 	
-	$fichier = "$cache_dir/".md5(trim($texte));
+	$fichier = "$cache_dir/".md5(trim($texte)); //contiendra le log en cas d echec
 	$fichier_source = $fichier.'.ly';
 	$fichier_image = $fichier.'.png';
 	$fichier_son = $fichier.'.midi';
@@ -76,20 +78,27 @@ function lilypond_($texte, $code_format) {
 
 	if (!file_exists($fichier_image) OR (filemtime($fichier_image)<filemtime("lilyserv.php"))) {
 		
-		$cmd = $lilypond_bin." --safe --png --output=$cache_dir/"." ".$fichier_source;
+		$cmd = $lilypond_bin." --safe --png --output=$cache_dir"." ".$fichier_source." 2> ".$fichier ;
 		exec($cmd);
-		$cmd2 = $convert_bin." -trim ".$fichier_image." ".$fichier_image;
-		exec($cmd2);
+		if (@file_exists($fichier_image)){
+			$cmd2 = $convert_bin." -trim ".$fichier_image." ".$fichier_image;
+			exec($cmd2);
+		}
+		else { // insertion du fichier log dans l image
+		$cmd3 = $convert_bin." -size 700x100 xc:white -pointsize 10 -gravity northwest -annotate 0 @".$fichier." ".$fichier_image;
+		exec($cmd3);
+		}
 	}
 
-	//efface fichiers ly et ps du CACHE
-	if (file_exists($fichier_ps) && chmod($fichier_ps,0777)) unlink($fichier_ps);
-	if (file_exists($fichier_source) && chmod($fichier_source,0777)) unlink($fichier_source);	
+	//efface fichiers ly log et ps du CACHE
+	if (@file_exists($fichier_ps) && chmod($fichier_ps,0777)) unlink($fichier_ps);
+	if (@file_exists($fichier_source) && chmod($fichier_source,0777)) unlink($fichier_source);	
+	if (@file_exists($fichier) && chmod($fichier,0777)) unlink($fichier);
 
 
-
-	if ($code_format=="test" || $code_format=="png")
+	if ($code_format=="test" || $code_format=="png") 
 		return $fichier_image;
+		
 	else if ($code_format == "midi" && file_exists($fichier_son))
 		return $fichier_son;
 }
@@ -97,10 +106,10 @@ function lilypond_($texte, $code_format) {
 
 
 // Retourner l'image ou le son demande
-if ($format=="test" || $format=="png") $type_header = "png";
-else if ($format=="midi") $type_header = "midi";
+if (($format=="test" || $format=="png")) $type_header = "image/png";		
+else if ($format=="midi") $type_header = "audio/x-midi";
 
-header("Content-Type: image/".$type_header);
+header("Content-Type: ".$type_header);
 readfile(lilypond_(rawurldecode($code),$format));
 
 ?>
