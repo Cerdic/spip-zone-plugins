@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * � 2005,2006 - Distribue sous licence GNU/GPL
+ * (c) 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -54,8 +54,7 @@
 	
 	function Forms_forms_avant_propre($texte) {
 		static $reset;
-		if (!_DIR_RESTREINT || $GLOBALS['spip_version_code']>=1.92) return $texte;
-		
+		if (_DIR_RESTREINT || $GLOBALS['spip_version_code']>=1.92) return $texte;
 		// Mecanisme de mise a jour des liens en <=1.9.1
 		if ((isset($_GET['exec']) 
 		  AND $_GET['exec']=='articles' 
