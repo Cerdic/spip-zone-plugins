@@ -134,7 +134,8 @@ function tweak_is_radio($code, &$reg) {
 // %%toto/d%% oblige un nombre et %%toto/s%% oblige une chaine
 // %%toto/valeurpardefaut%% renvoie valeurpardefaut si le meta n'existe pas encore
 // syntaxe generale : %%toto/d/valeurpardefaut%% ou %%toto/s/valeurpardefaut%% 
-// /s est une chaine, /d est un nombre, /r est un set de boutons radio
+// /s est une chaine, /d est un nombre
+// pour les boutons radio, il faut utiliser deux variables. Par ex : set_options.
 // $code est le code inline livre par tweak_spip_config
 function tweak_parse_code($code) {
 	global $metas_vars;
@@ -146,7 +147,9 @@ function tweak_parse_code($code) {
 				if (preg_match(',^"(.*?)"$,', trim($rempl), $matches2)) $rempl = str_replace('\"','"',$matches2[1]);
 			} else { 
 				$cmd = substr($matches[2], 1, 1);
-				$rempl = isset($matches[3])?substr($matches[3],1):'""';
+				// une valeur par defaut est-elle specifiee ?
+				$rempl = strlen($matches[3])>1?substr($matches[3],1):'""';
+				// une commande d ou s est-elle specifiee ?
 				if($cmd=='d') $rempl = 'intval('.$rempl.')';
 					elseif($cmd=='s') $rempl = 'strval('.$rempl.')';
 				eval('$rempl='.$rempl.';');
@@ -186,7 +189,7 @@ function tweak_parse_description($tweak, $tweak_input) {
 
 // decommenter pour debug...
 function tweak_log($s) { 
- if(strlen($s)) spip_log('TWEAKS. '.$s);
+ if($GLOBALS["log_tweaks"] && strlen($s)) spip_log('TWEAKS. '.$s);
 }	
 
 // lance la fonction d'installation de chaque tweak actif, si elle existe.

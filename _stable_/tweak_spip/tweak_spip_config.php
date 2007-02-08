@@ -79,14 +79,22 @@ add_tweak( array(
 add_tweak( array(
 	'id'	=> 'set_options',
 	// ici on demande a Tweak Spip deux boutons radio : _T('icone_interface_simple') et _T('icone_interface_complet')
-	// la variable est : set_options
+	// pour les boutons radio, il faut utiliser une deuxième variable : radio_set_options
+	// la variable Spip est : set_options
 	// le /avancees signifie que avancees (traduit par : _T('icone_interface_complet')) sera coche par defaut
 	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	'code' 	=> '$GLOBALS["radio_set_options"]=%%radio_set_options/s/avancees(basiques=icone_interface_simple|avancees=icone_interface_complet)%%;
+	'code' 	=> '$GLOBALS["radio_set_options"]=%%radio_set_options/s/"avancees(basiques=icone_interface_simple|avancees=icone_interface_complet)"%%;
 list($GLOBALS["set_options"],) = explode("(", $GLOBALS["radio_set_options"], 2);',
 	'categorie'	=> 'admin',
 	'options'	=> 1,
 	'pipeline:header_prive' => 'set_options_header_prive',
+));
+
+add_tweak( array(
+	'id'	=> 'log_tweaks',
+	'code' 	=> '$GLOBALS["log_tweaks"]=true;',
+//	'categorie'	=> 'admin',
+	'options'	=> 1,
 ));
 
 //-----------------------------------------------------------------------------//
@@ -116,7 +124,7 @@ add_tweak( array(
 add_tweak( array(
 	'id'	=> 'desactiver_flash',
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
-	'categorie'		=> 'admin',
+	'categorie'		=> 'squel',
 	'pipeline:affichage_final' => 'InhibeFlash_affichage_final',
 ));
 

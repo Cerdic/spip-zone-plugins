@@ -261,7 +261,7 @@ function ligne_tweak($tweak, &$js){
 		$s .=  "</div>";
 	}
 */
-	$s .= "<img src='"._DIR_IMG_PACK."$puce' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;";
+	$s .= "<img src='"._DIR_IMG_PACK."$puce' name='puce_$id_input' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;";
 
 	$s .= "<input type='checkbox' name='foo_$inc' value='O' id='label_$id_input'";
 	$s .= $actif?" checked='checked'":"";

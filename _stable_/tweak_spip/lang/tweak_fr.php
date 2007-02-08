@@ -101,6 +101,9 @@ _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouv
 	'set_options:nom' => "Type d'interface priv&eacute;e",
 	'set_options:description'	=> "S&eacute;lectionne d'office le type d&rsquo;interface priv&eacute;e (simplifi&eacute;e ou avanc&eacute;e) pour tous les r&eacute;dacteurs d&eacute;j&agrave; existant ou &agrave; venir et supprime le bouton correspondant du bandeau des petites ic&ocirc;nes.<br />Votre choix : %radio_set_options%",
 
+	'log_tweaks:nom' => 'Log d&eacute;taill&eacute; de Tweak Spip',
+	'log_tweaks:description'	=> "Inscrit la majeure partie du fonctionnement du plugin 'Tweak Spip' dans les fichiers spip.log accessibles dans le r&eacute;pertoire : ".tweak_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),
+
 /*
 	':nom' => '',
 	':description'	=> '',
