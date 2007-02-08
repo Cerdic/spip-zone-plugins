@@ -188,13 +188,17 @@ jQuery.fn.activatecrayon = function() {
         .append(configCrayons.mkimg('searching')) // icone d'attente
         .find(".crayon-boutons")
           .hide(); // boutons de validation
-      }).keyup(function(){
+      }).keyup(function(e){
         jQuery(this)
         .find(".crayon-boutons")
           .show();
         jQuery(me)
         .prev()
           .addClass('crayon-changed');
+        e.cancelBubble = true; // ne pas remonter l'evenement vers la page
+      })
+      .keypress(function(e){
+        e.cancelBubble = true; // ne pas remonter l'evenement vers la page
       })
       .find(".crayon-active")
         .css({
