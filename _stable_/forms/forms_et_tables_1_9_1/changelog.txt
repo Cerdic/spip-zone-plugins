@@ -31,3 +31,4 @@
 - ajout des chaines de langue format_liste_ou_radio, format_liste, format_radio, date_invalide
 - presentation des choix liste/radio configurable
 - ajout des chaines de langue afficher,editer,exporter,vider,supprimer, toutes_tables,icone_creer_table
+- Cédric Despres (07/02/2007): différenciation des modeles de mails envoyés à l'admin et en mail de confirmation 

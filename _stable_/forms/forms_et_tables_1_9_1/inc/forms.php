@@ -604,16 +604,20 @@
 
 	function Forms_generer_mail_reponse_formulaire($id_form, $id_donnee, $env){
 		if (!is_array($env)) $env=array();
-		$modele_mail = 'form_reponse_email';
+		$modele_mail_admin = 'form_reponse_email_admin';
+		$modele_mail_confirm = 'form_reponse_email_confirm';
 		if (isset($env['modele']))
-			$modele_mail = $env['modele'];
+			$modele_mail_admin = $env['modele'];
 		$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 		if ($row = spip_fetch_array($result)) {
-			$modele = "modeles/$modele_mail";
-			if ($f = find_in_path(($m = "$modele-$id_form").".html"))
-				$modele = $m;
-			$corps_mail = recuperer_fond($modele,array_merge($env,array('id_donnee'=>$id_donnee)));
-			$corps_mail_admin = recuperer_fond($modele,array_merge($env,array('id_donnee'=>$id_donnee,'mail_admin'=>'oui')));
+			$modele_admin = "modeles/$modele_mail_admin";
+			$modele_confirm = "modeles/$modele_mail_confirm";
+			if ($f = find_in_path(($m_admin = "$modele_admin-$id_form").".html"))
+				$modele_admin = $m_admin;
+			if ($f = find_in_path(($m_confirm = "$modele_confirm-$id_form").".html"))
+				$modele_confirm = $m_confirm;
+			$corps_mail_confirm = recuperer_fond($modele_confirm,array_merge($env,array('id_donnee'=>$id_donnee)));
+			$corps_mail_admin = recuperer_fond($modele_admin,array_merge($env,array('id_donnee'=>$id_donnee,'mail_admin'=>'oui')));
 			$champconfirm = $row['champconfirm'];
 			$email = unserialize($row['email']);
 			$email_dest = $email['defaut'];
@@ -641,7 +645,7 @@
 				//$mess_iso = unicode2charset(html2unicode(charset2unicode($corps_mail)),'iso-8859-1');
 				//mail($dest, $sujet, $mess_iso, $head);
 				$headers = "";
-				if (preg_match(",<html>(.*)</html>,Uims",$corps_mail,$regs)){
+				if (preg_match(",<html>(.*)</html>,Uims",$corps_mail_confirm,$regs)){
 					$charset = $GLOBALS['meta']['charset'];
 					$headers .=
 					"MIME-Version: 1.0\n".
@@ -650,7 +654,7 @@
 					if (preg_match(",<h[1-6]>(.*)</h[1-6]>,Uims",$regs[1],$hs))
 						$sujet=$hs[1];
 				}
-				envoyer_mail($dest, $sujet, $corps_mail, "formulaire@".$_SERVER["HTTP_HOST"], $headers);
+				envoyer_mail($dest, $sujet, $corps_mail_confirm, "formulaire@".$_SERVER["HTTP_HOST"], $headers);
 			}
 			if ($email_dest != '') {
 				$head="From: formulaire_$id_form@".$_SERVER["HTTP_HOST"]."\n";
