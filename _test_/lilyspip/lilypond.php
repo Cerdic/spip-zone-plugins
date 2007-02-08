@@ -30,18 +30,18 @@ define('_DIR_Lilypond', _DIR_IMG . "cache-Lilypond/");
 
 
 
-function midi_lilypond($code) {
+function midi_lilypond($tex) {
 	
 	
 	$server = $GLOBALS['meta']['lilyspip_server'];
 	
 	if (!@is_dir(_DIR_Lilypond))
 		@mkdir (_DIR_Lilypond, 0777);	
-	$fichiermidi = _DIR_Lilypond .md5(trim($code)).".midi";
+	$fichiermidi = _DIR_Lilypond .md5(trim($tex)).".midi";
 		
 	if (!@file_exists($fichiermidi)) {
 		// Aller chercher le fichier midi sur le serveur	
-		spip_log($url = $server.'?'.'code='.rawurlencode($code).'&format=midi');
+		spip_log($url = $server.'?'.'code='.rawurlencode($tex).'&format=midi');
 
 		include_spip('inc/distant');
 		if ($son = recuperer_page($url)) {
@@ -51,7 +51,7 @@ function midi_lilypond($code) {
 				}
 			}
 			else { 
-// creation d'un fichier vide pour éviter d'aller rechercher le midi sur le serveur alors que la code ne le genere pas
+// creation d'un fichier vide pour eviter d'aller rechercher le midi sur le serveur alors que la code ne le genere pas
 			if ($fs = @fopen($fichiermidi, 'w')) {
 				@fwrite($fs, "");
 				@fclose($fs);
@@ -60,7 +60,7 @@ function midi_lilypond($code) {
 	}
 	
 
-	if (@file_exists($fichiermidi) && !fichier_vide($fichiermidi)) {
+	if ( @filesize($fichiermidi)) {
 		return "<a href=\"$fichiermidi\"  />";
 		}
 	else // pas de fichier
@@ -69,7 +69,7 @@ function midi_lilypond($code) {
 
 
 
-function image_lilypond($code) {
+function image_lilypond($tex) {
 
 	
 	$server = $GLOBALS['meta']['lilyspip_server'];
@@ -78,12 +78,13 @@ function image_lilypond($code) {
 
 	if (!@is_dir(_DIR_Lilypond))
 		@mkdir (_DIR_Lilypond, 0777);
-	$fichier = _DIR_Lilypond .md5(trim($code)).".png";
+	$fichier = _DIR_Lilypond .md5(trim($tex)).".png";
+ 
 		
 
 	if (!@file_exists($fichier)) {
 		// Aller chercher l'image sur le serveur		
-		spip_log($url = $server.'?'.'code='.rawurlencode($code).'&format=png');
+		spip_log($url = $server.'?'.'code='.rawurlencode($tex).'&format=png');
 
 		include_spip('inc/distant');
 		if ($image = recuperer_page($url)) {
@@ -91,18 +92,18 @@ function image_lilypond($code) {
 				@fwrite($f, $image);
 				@fclose($f);
 				}
+			
 			}
 		}
 	
-	// Composer la reponse selon presence ou non de l'image
-	$tex = entites_html($code);
+	// l'image correspond soit Ã  la partition soit au log 
+	$tex = entites_html($tex);
 	if (@file_exists($fichier)) {
 		list(,,,$size) = @getimagesize($fichier);
-		$alt = "alt=\"$code\" title=\"$code\""; 
+		$alt = "alt=\"$tex\" title=\"$tex\""; 
 		return "<img src=\"$fichier\" style=\"vertical-align:middle;\" $size $alt />";
 	}
-	else // pas de fichier
-		return "<tt><span class='spip_code' dir='ltr'>".caracteres_alt($code)."</span></tt>";
+	//return "<tt><span class='spip_code' dir='ltr'>".caracteres_alt($tex)."</span></tt>";
 
 }
 
@@ -117,13 +118,6 @@ function caracteres_alt($texte) {
 
 
 
-// tester si le fichier MIDI est vide pour ne pas afficher le lien
-function fichier_vide($file) {
-
-$octet=filesize($file);
-if ($octet==0) return true;
-else return false;
-}
 
 
 
