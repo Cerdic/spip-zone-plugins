@@ -21,31 +21,52 @@
 		$flux .= 	"<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/jtip.css' type='text/css' media='all' />\n";
 		return $flux;
 	}
+	
+	define('_RACCOURCI_MODELE_FORM', 
+		 '(<(form)' # <modele
+		.'\s*([0-9]*)\s*' # id
+		.'([|](?:<[^<>]*>|[^>])*)?' # |arguments (y compris des tags <...>)
+		.'>)' # fin du modele >
+		.'\s*(<\/a>)?' # eventuel </a>
+	       );
+	
+	function Forms_trouve_liens($texte){
+		$forms = array();
+		if (preg_match_all(','._RACCOURCI_MODELE_FORM.',is', $texte, $regs, PREG_SET_ORDER)){
+			foreach ($regs as $r) {
+				$id_form = $r[3];
+				$forms[$id_form] = $id_form;
+			}
+		}
+		return $forms;
+	}
 
-	// A reintegrer dans echapper_html()
+	function Forms_post_edition($flux){
+		if ($flux['args']['table']!='spip_articles') return $flux;
+		$id_article = intval($flux['args']['id_objet']);
+		if (count($flux['data'])>=count($flux['args']['champs'])/2) // edition complete a priori
+			spip_query("DELETE FROM spip_forms_articles WHERE id_article=$id_article");
+		if (count($forms = Forms_trouve_liens(implode(' ',$flux['data']))))
+			spip_query("INSERT INTO spip_forms_articles (id_article, id_form) ".
+				"VALUES ($id_article, ".join("), ($id_article, ", $forms).")");
+		return $flux;
+	}
+	
 	function Forms_forms_avant_propre($texte) {
 		static $reset;
-	//echo "forms_avant_propre::";
-		// Mecanisme de mise a jour des liens
-		$forms = array();
-		$maj_liens = (isset($_GET['exec']) AND $_GET['exec']=='articles' AND $id_article = intval($_GET['id_article']));
-		if ($maj_liens) {
+		if (!_DIR_RESTREINT || $GLOBALS['spip_version_code']>=1.92) return $texte;
+		
+		// Mecanisme de mise a jour des liens en <=1.9.1
+		if ((isset($_GET['exec']) 
+		  AND $_GET['exec']=='articles' 
+		  AND $id_article = intval($_GET['id_article']))){
 			if (!$reset) {
-				$query = "DELETE FROM spip_forms_articles WHERE id_article=$id_article";
-				spip_query($query);
+				spip_query("DELETE FROM spip_forms_articles WHERE id_article=$id_article");
 				$reset = true;
 			}
-			if (preg_match_all(',<form([0-9]+)([|]([a-z_0-9]+))?'.'>,', $texte, $regs, PREG_SET_ORDER)){
-				foreach ($regs as $r) {
-					$id_form = $r[1];
-					$forms[$id_form] = $id_form;
-				}
-			}
-			if ($forms) {
-				$query = "INSERT INTO spip_forms_articles (id_article, id_form) ".
-					"VALUES ($id_article, ".join("), ($id_article, ", $forms).")";
-				spip_query($query);
-			}
+			if (count($forms = Forms_trouve_liens($texte)))
+				spip_query("INSERT INTO spip_forms_articles (id_article, id_form) ".
+					"VALUES ($id_article, ".join("), ($id_article, ", $forms).")");
 		}
 	
 		return $texte;
