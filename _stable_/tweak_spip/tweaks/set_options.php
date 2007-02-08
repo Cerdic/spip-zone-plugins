@@ -6,12 +6,7 @@ function set_options_header_prive($flux) {
 $(document).ready(function(){
  if ($('a.icone26').length) {
 	$("#displayfond").hide();
-	$.each($('a.icone26'), function(i, a) {
-		if ($(a).attr('href').indexOf('set_options')>=0) {
-			$(a).hide(); 
-			return false;
-		}
-	});
+	$("a.icone26[@href*=set_options]").hide();
  }
 });
 //--></script>
