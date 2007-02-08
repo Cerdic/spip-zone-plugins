@@ -1,13 +1,12 @@
 <plugin>
 	<nom>Liens inter-contenus</nom>
 	<auteur>Nicolas Hoizey &copy; 2007 - Licence GNU/GPL</auteur>
-	<version>0.4</version>
+	<version>0.5</version>
 	<etat>dev</etat>
 	<description>
 Ce plugin (pour SPIP 1.9.2+) permet d'identifier les liens d&eacute;finis entre les contenus au sein de leurs &eacute;l&eacute;ments textuels, et donc notamment d'{{&eacute;viter la suppression par erreur}} d'une rubrique, d'un article, d'une br&egrave;ve, d'un site, d'un document ou m&ecirc;me d'un mod&egrave;le, vers lesquels pointent d'autres contenus.
 
 Reste &agrave; faire :
--* Indiquer le statut (publi&eacute; ou non) des objets li&eacute;s
 -* Interdire la suppression d'objets li&eacute;s depuis des objets en ligne ? Juste alerter ?
 -* Initialisation progressive en cron pour les gros sites
 -* R&eacute;f&eacute;rencement des liens externes ? (rapprochement avec le plugin {checklink} de C&eacute;dric ?)

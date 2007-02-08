@@ -15,6 +15,11 @@
 		'objets_avec_liens_depuis_courant' => 'This content contains links to these ones:',
 		'aucun_objets_avec_lien_vers_courant' => 'No other content contain link to this one.',
 		'aucun_objets_avec_lien_depuis_courant' => 'This content doesn\'t contain any link to another content.',
-        'legende_liens_faux_objets' => 'Red and striked links are linked content that don\'t exist.'
+        'legende_liens_faux_objets' => 'Red and striked links are linked content that don\'t exist.',
+        'statut_prepa' => 'Editing in progress',
+        'statut_prop' => 'Submitted for evaluation',
+        'statut_publie' => 'Published online',
+        'statut_refuse' => 'Rejected',
+        'statut_poubelle' => 'In the dustbin'
 	);
 ?>
