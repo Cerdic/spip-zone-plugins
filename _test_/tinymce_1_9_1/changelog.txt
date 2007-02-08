@@ -1,0 +1,15 @@
+v 0.1 : 07/02/2007 : Cedric Despres
+- Création du plugin intégrant TinyMCE dans Spip
+	- intégration de ibrowser dans TinyMCE sous forme de plugin (ajout de variable dans la configuration de TinyMCE)
+	- intégration de filemanager dans TinyMCE sous forme de plugin (ajout de variable dans la configuration de TinyMCE)
+	- les raccourcis typographiques de Spip sont toujours utilisables dans tinyMCE. On peut également mettre les images de Spip sous la forme <img25|...>, les <doc>, et même les <forms> (pour le plugin forms ou forms_et_tables).
+
+
+   Le plugin nécessite la modification de deux fichiers Spip pour fonctionner (la modification sera sans doute intégrer à la prochaine version de Spip)
+   Le plugin activé intègre le mini-word dans la page de modification d'article et de breves
+   Le plugin activé permet le rendu de l'article/brêve avec les styles du site
+
+TODO : 
+- ajout de configuration du plugin pour permettre de choisir directement dans l'espace privé de Spip les zones sur lesquelles ont souhaite le mini-word (descriptif article, texte article, ps article, texte brève, ...), ainsi que la configuration complète de tinymce
+- passage de ibrowser et filemanager en plugin TinyMCE complet (ajout de tous les paramètres de configuration possibles)
+- Pour ce qui est de la mise à jour de la version de TinyMCE, j'ai construis le plugin afin qu'on puisse remplacer le répertoire concerné par la nouvelle version, tout simplement; sans plus de modification. Il faudrait prévoir un bouton "installation" ou "mise à jour de TinyMCE" dans l'espace privé, et que cela télécharge et installe automatiquement la dernière version.
