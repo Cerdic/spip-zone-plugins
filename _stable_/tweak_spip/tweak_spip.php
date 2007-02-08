@@ -72,10 +72,13 @@ function tweak_insert_header($type) {
 	if (isset($tweaks_metas_pipes[$type])) 
 	  foreach	($tweaks_metas_pipes[$type] as $inc) {
 	  	$f = find_in_path('tweaks/'.$inc);
-	  	if ($type='css') $f = direction_css($f);
-		$head .= '<link rel="stylesheet" href="'.$f.'" type="text/css" media="projection, screen" />';
+	  	if ($type=='css') 
+			$head .= '<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="projection, screen" />'."\n";
+	  	elseif ($type=='js') 
+			$head .= "<script type=\"text/javascript\" src=\"$f\"></script>\n";
+			
 	  }
-	return $head;
+	return $head."\n";
 }
 
 // est-ce que $pipe est un pipeline ?

@@ -86,6 +86,7 @@ add_tweak( array(
 list($GLOBALS["set_options"],) = explode("(", $GLOBALS["radio_set_options"], 2);',
 	'categorie'	=> 'admin',
 	'options'	=> 1,
+	'pipeline:header_prive' => 'set_options_header_prive',
 ));
 
 //-----------------------------------------------------------------------------//
