@@ -1,9 +1,10 @@
 <?
 
 function exec_documents_distants(){
+	global $documents;
 	
 	$commencer_page= charger_fonction('commencer_page', 'inc');
-	importer_document($documents_distants,$type_lien,$id);
+	importer_document($documents,$type_lien,$id);
 	
 	echo $commencer_page($titre=_T('documentsdistants:importer'));
 	
@@ -34,7 +35,23 @@ function exec_documents_distants(){
 
 function importer_document($documents_distants,$type_lien,$id)
 	{
+	$tableau =explode(";",$documents_distants);
 	
+	include_spip('inc/distant');
+	foreach ($tableau as $documents_distants){
+		
+		
+		$infos=recuperer_infos_distantes($documents_distants);
+		
+		$request='INSERT INTO  `spip_documents` (`fichier`,`titre`,`taille`,`date`,`largeur`,`distant`,`hauteur`,`mode`,`id_type`) VALUES ("'.$documents_distants.'","'.$infos['titre'].'","'.$infos['taille'].'",NOW(),"'.$infos['largeur'].'","oui","'.$infos['hauteur'].'","document","'.$infos['id_type'].'") ';
+		spip_query($request);
+	
+		
+
+		}
+	
+	
+		
 	}
 
 ?>
