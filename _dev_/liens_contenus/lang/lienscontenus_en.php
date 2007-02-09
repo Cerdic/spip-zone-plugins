@@ -5,7 +5,7 @@
  *
  * Auteur :
  * Nicolas Hoizey
- * © 2007 - Distribue sous licence GNU/GPL
+ * Â© 2007 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -20,6 +20,7 @@
         'statut_prop' => 'Submitted for evaluation',
         'statut_publie' => 'Published online',
         'statut_refuse' => 'Rejected',
-        'statut_poubelle' => 'In the dustbin'
+        'statut_poubelle' => 'In the dustbin',
+        'confirmation_depublication' => 'Be careful, a published content contains at least one link to this one!\nIt will be affected if change the status of this one.\n\nDo you still want to change the status?'        
 	);
 ?>

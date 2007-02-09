@@ -107,4 +107,26 @@ function lienscontenus_icone_statut($type_objet, $id_objet)
     	return '';
     }
 }
+
+function lienscontenus_statut($type_objet, $id_objet)
+{
+    $listeStatuts = array('prepa', 'prop', 'publie', 'refuse', 'poubelle');
+    include_spip('base/abstract_sql');
+    if ($type_objet == 'site') {
+        $query = 'SELECT statut FROM spip_syndic WHERE id_syndic='._q($id_objet);
+    } else {
+        // Marche aussi pour les formulaires (type = "form")
+        $query = 'SELECT statut FROM spip_'.$type_objet.'s WHERE id_'.$type_objet.'='._q($id_objet);
+    }
+    if ($res = spip_query($query)) {
+        $row = spip_fetch_array($res);
+        if (in_array($row['statut'], $listeStatuts)) {
+            return $row['statut'];
+        } else {
+            return '';
+        }
+    } else {
+        return '';
+    }
+}
 ?>

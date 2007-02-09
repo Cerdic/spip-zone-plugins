@@ -5,7 +5,7 @@
  *
  * Auteur :
  * Nicolas Hoizey
- * � 2007 - Distribue sous licence GNU/GPL
+ * © 2007 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -20,6 +20,7 @@
         'statut_prop' => 'Propos&eacute;',
         'statut_publie' => 'Publi&eacute;',
         'statut_refuse' => 'Refus&eacute;',
-        'statut_poubelle' => 'A la poubelle'
+        'statut_poubelle' => 'A la poubelle',
+        'confirmation_depublication' => 'Attention, un contenu publié pointe vers celui-ci !\nIl sera impacté si vous dépubliez celui-ci.\n\nVoulez-vous vraiment changer le statut ?'
 	);
 ?>
