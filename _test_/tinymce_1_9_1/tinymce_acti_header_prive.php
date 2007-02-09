@@ -26,18 +26,7 @@ function tinymce_acti_header_prive($flux) {
 		
 		//télécharge les packages de langues TinyMCE nécessaires sur le web (si on veut autre chose que l'Anglais)
 		if (!empty(${_PLUGIN_TINYMCE_LANGUAGES_PACK_VARNAME})) {
-			require_once 'includes/cls_curl.php';
-			$clsCurl = new cls_curl(_PLUGIN_TINYMCE_LANGUAGES_URL);
-			$post_datas = array(
-							'dlang' => ${_PLUGIN_TINYMCE_LANGUAGES_PACK_VARNAME},
-							'format' => 'zip',
-							'submit' => 'Download'
-						  );
-			$zip_content = $clsCurl->post($post_datas);
-			if ($theError = $clsCurl->hasError()) {
-				return;
-			}
-			$clsCurl->close();
+			$zip_content = file_get_contents(_PLUGIN_TINYMCE_LANGUAGES_URL.'?dlang[]='.implode('&dlang[]=',${_PLUGIN_TINYMCE_LANGUAGES_PACK_VARNAME}).'&format=zip&submit=Download');
 			if (!file_put_contents(_DIR_PLUGIN_TINYMCE.'/files/tinymce_languages_archive.zip', $zip_content))
 				return;
 			//dézippe l'archive de langues récupérée		

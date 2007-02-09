@@ -3,6 +3,8 @@ TODO :
  - passage de ibrowser et filemanager en plugin TinyMCE complet (ajout de tous les paramètres de configuration possibles)
 
 
+v 0.21 : 09/02/2007 : Cédric Despres
+ - suppression de la nécessité de la librairie CURL pour le tééléchargement des pack de langues.
 
 v 0.2 : 09/02/2007 : Cédric Despres
  - Les fichiers de TinyMCE ont été supprimés afin d'alléger le plugin (et la SVN). Ils sont automatiquement téléchargés au premier chargement du plugin (fichiers TinyMCE + packs de langues).
