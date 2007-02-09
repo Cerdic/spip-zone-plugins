@@ -2,8 +2,10 @@ TODO :
  - ajout de configuration du plugin pour permettre de choisir les zones sur lesquelles ont souhaite le mini-word (descriptif article, texte article, ps article, texte brève, ...)
  - passage de ibrowser et filemanager en plugin TinyMCE complet (ajout de tous les paramètres de configuration possibles)
 
+v 0.2.2 : 09/02/2007 : Cédric Despres
+ - utilisation uniquement des fonctions interne à Spip. Aucune librairie externe nécessaire.
 
-v 0.21 : 09/02/2007 : Cédric Despres
+v 0.2.1 : 09/02/2007 : Cédric Despres
  - suppression de la nécessité de la librairie CURL pour le tééléchargement des pack de langues.
 
 v 0.2 : 09/02/2007 : Cédric Despres
