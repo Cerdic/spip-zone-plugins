@@ -4,7 +4,7 @@
 		
 		filemanager_docs_relative_path : '/documents', 	//par défaut '/documents'
 		filemanager_base_url : '/', 					//par défaut '/'
-		filemanager_base_path : 'C:/Spip-zone/mydev/', 	//par défaut '../../../../../../' soit la racine du site
+		//filemanager_base_path : 'C:/Spip-zone/mydev/', 	//par défaut '../../../../../../../../' soit la racine du site
 		ibrowser_library : '/images/librairie/', 		//par défaut "/images/librairie/"
 		
 		mode : "specific_textareas",
@@ -312,7 +312,7 @@
             return strUrl; 
     } 
 	function myCustomCleanup(type, value) {
-		var foo = new String (value);
+	var foo = new String (value);
 		switch (type) {
 			case "get_from_editor":
 				//remplace le code des images et documents pour que la balise ne soit pas interprétée par TinyMCE :

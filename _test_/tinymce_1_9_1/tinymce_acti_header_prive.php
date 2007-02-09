@@ -1,20 +1,54 @@
 <?php
 
-//$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\',/*'*/'/',realpath(dirname(__FILE__))));
-//define('_DIR_PLUGIN_FCKEDITOR',(_DIR_PLUGINS.end($p)));
-
-// determination du chemin de base par rapport a  la racine du serveur
-/*$dir_relatif_array = split('/', $_SERVER['PHP_SELF']);
-$i = 0;
-while($dir_relatif_array[$i] != 'ecrire') {
-	$dir_relatif .= $dir_relatif_array[$i];
-	$i++;
-}
-if($dir_relatif != '') $dir_relatif = '/'.$dir_relatif;
-define('_DIR_PLUGIN_TINYMCE', $dir_relatif.'/plugins/tinymce');*/
 
 function tinymce_acti_header_prive($flux) {
 	global $exec;
+	global ${_PLUGIN_TINYMCE_LANGUAGES_PACK_VARNAME};
+	
+	//vérifie que les fichiers de TinyMCE sont présents, sinon les installe
+	if (!is_file(_DIR_TINYMCE_FILES.'/tiny_mce.js')) {
+		require_once 'includes/zip/dUnzip2.inc.php';
+		
+		//récupère l'archive de TinyMCE sur le web et la met dans le répertoire du plugin
+		$zip_content = file_get_contents(_PLUGIN_TINYMCE_ARCHIVE_URL);
+		if (!file_put_contents(_DIR_PLUGIN_TINYMCE.'/files/tinymce_archive.zip', $zip_content))
+			return;
+		//dézippe l'archive récupérée		
+		$zip = new dUnzip2(_DIR_PLUGIN_TINYMCE.'/files/tinymce_archive.zip');
+		$zip->unzipAll(_DIR_PLUGIN_TINYMCE.'', 'tinymce/jscripts/');
+		@unlink(_DIR_PLUGIN_TINYMCE.'/files/tinymce_archive.zip');
+		
+		//dézippe les plugins filemanager et ibrowser
+		$zip = new dUnzip2(_DIR_PLUGIN_TINYMCE.'/files/filemanager.zip');
+		$zip->unzipAll(_DIR_TINYMCE_FILES.'/plugins/');
+		$zip = new dUnzip2(_DIR_PLUGIN_TINYMCE.'/files/ibrowser.zip');
+		$zip->unzipAll(_DIR_TINYMCE_FILES.'/plugins/');
+		
+		//télécharge les packages de langues TinyMCE nécessaires sur le web (si on veut autre chose que l'Anglais)
+		if (!empty(${_PLUGIN_TINYMCE_LANGUAGES_PACK_VARNAME})) {
+			require_once 'includes/cls_curl.php';
+			$clsCurl = new cls_curl(_PLUGIN_TINYMCE_LANGUAGES_URL);
+			$post_datas = array(
+							'dlang' => ${_PLUGIN_TINYMCE_LANGUAGES_PACK_VARNAME},
+							'format' => 'zip',
+							'submit' => 'Download'
+						  );
+			$zip_content = $clsCurl->post($post_datas);
+			if ($theError = $clsCurl->hasError()) {
+				return;
+			}
+			$clsCurl->close();
+			if (!file_put_contents(_DIR_PLUGIN_TINYMCE.'/files/tinymce_languages_archive.zip', $zip_content))
+				return;
+			//dézippe l'archive de langues récupérée		
+			$zip = new dUnzip2(_DIR_PLUGIN_TINYMCE.'/files/tinymce_languages_archive.zip');
+			$zip->unzipAll(_DIR_PLUGIN_TINYMCE.'', 'tinymce/jscripts/');
+			@unlink(_DIR_PLUGIN_TINYMCE.'/files/tinymce_languages_archive.zip');
+		}
+	}
+	//fin de vérification que TinyMCE est bien installé
+	
+	//code de header_prive à proprement parler
 
 	$code='';
 
@@ -40,7 +74,7 @@ function tinymce_acti_header_prive($flux) {
 
 	if(!empty($code_js)) {
 		$code .= '
-			<script type="text/javascript" src="'._DIR_PLUGIN_TINYMCE.'/tiny_mce/tiny_mce.js">/* fichier de tinymce */</script>
+			<script type="text/javascript" src="'._DIR_TINYMCE_FILES.'/tiny_mce.js">/* fichier de tinymce */</script>
 			<script type="text/javascript" src="'._DIR_PLUGIN_TINYMCE.'/jquery-1.0.js">/* fichier de librairie javascript cf. http://jquery.com/docs/ */</script>
 			<script type="text/javascript"><!--
 			$(document).ready(function () {
