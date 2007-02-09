@@ -1,0 +1,29 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Document distant
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	Maïeul Rouquette (maieulrouquette @ tele2.fr)
+_ &copy; 2006 - Licence GPL
+	</auteur>
+	<version>
+	0
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Plugin chargé d'importer massivement des document distant
+	</description>
+	
+
+	<prefix> 
+	documents_distants
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+        <inclure>documents_distants_pipelines.php</inclure>
+	</pipeline>
+	
+</plugin>
