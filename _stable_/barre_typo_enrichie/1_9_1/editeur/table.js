@@ -305,6 +305,7 @@
 		this.s1 = "";
 		this.s2 = "";
 		this.s3 = "";
+		this.t_SPIP = new Array(); // les lignes du tableau SPIP
 		this.t = new Array(); // le tableau des valeurs à modifier
 		this.premiere_ligne = "";
 
@@ -316,6 +317,11 @@
 		this.recup_cellule = recup_cellule;
 		this.contenu = contenu;
 		this.existe = existe;
+		
+		var lignes = new Array(); // les lignes brutes de la zone d'édition SPIP
+		var ligne_cour = ""; // la ligne brute en cours de traitement lors de la reconstitution du tableau SPIP
+		var j=0;
+		var init_i; // début du contenu du tableau de données (1 si tableau avec entête, 0 sinon)
 		
 		if ((clientVer >= 4) && is_ie && is_win)
 		{
@@ -341,31 +347,47 @@
 			this.s2 = (zone.value).substring(selStart, selEnd)
 			this.s3 = (zone.value).substring(selEnd, selLength);
 		}
-		this.premiere_ligne = this.s2.split("\n")[0];
+
+		lignes = this.s2.split("\n");
+			
+		if (this.avec_entete()) init_i = 1;	
+		for (i=init_i;i<lignes.length;i++) {
+			ligne_cour += lignes[i] + "\n";
+			if (lignes[i].match(/\|.?$/)) {
+				ligne_cour = ligne_cour.replace(/\|(left|right|center)/g, "££$1"); //pour distinguer les barres verticales des codes d'inclusion d'image et de document
+				this.t_SPIP[j++] = ligne_cour;
+				ligne_cour = "";
+			}
+		}
+		this.premiere_ligne = this.t_SPIP[0];
+
 		this.contenu();
 
 
 		function avec_entete(){
-			return (this.premiere_ligne.search(/^\|\|/) != -1); // si double pipe en tête de la première ligne(resumé)
+			return (lignes[0].search(/^\|\|/) != -1); // si double pipe en tête de la première ligne(resumé)
 		}
 		function recup_caption(){
-			return this.premiere_ligne.match(/^\|\|([^\|]*)/)[1];
+			return lignes[0].match(/^\|\|([^\|]*)/)[1];
 		}
 		function recup_summary(){
-			return this.premiere_ligne.match(/^\|\|([^\|])*\|([^\|]*)/)[2];
+			return lignes[0].match(/^\|\|([^\|])*\|([^\|]*)/)[2];
 		}
 		function compte_lignes(){
-			var sel = this.s2.split("|\n");
-			return (this.avec_entete() ? sel.length-1 : sel.length);
+			return (this.t_SPIP.length);
 		}
 		function recup_ligne(num_ligne){
-			var ligne = this.s2.split("|\n")[num_ligne] + "|";
-			return (ligne.split("|"));
+			var ligne_encodee = this.t_SPIP[num_ligne].split("|");
+			var ligne_decodee = new Array();
+			
+			for (var i=0; i<ligne_encodee.length; i++){
+				ligne_decodee[i] = ligne_encodee[i].replace(/££/g,"|");
+			}
+			return (ligne_decodee);
 		}
 		function contenu(){
-			var ligne_data = (this.avec_entete() ? 1 : 0);
-			for (var i=0; i<this.compte_lignes();i++){
-				this.t[i] = this.recup_ligne(i+ligne_data); //t est un tableau bidimensionnel avec les valeurs à modifier
+			for (var i=0; i<this.t_SPIP.length; i++){
+				this.t[i] = this.recup_ligne(i); //t est un tableau bidimensionnel avec les valeurs à modifier
 			}
 		}
 		function recup_cellule(i,j){
@@ -399,7 +421,7 @@
 		}
 
 		nl= (ancien_tableau.existe()) ? ancien_tableau.compte_lignes() : 3;
-		nc= (ancien_tableau.existe()) ? ancien_tableau.t[1].length - 2 : 3;
+		nc= (ancien_tableau.existe()) ? ancien_tableau.t[0].length - 2 : 3;
 
 		for (i=0;i<nl;i++){
     	  lc[i]=new Array(); //2 lignes au depart
