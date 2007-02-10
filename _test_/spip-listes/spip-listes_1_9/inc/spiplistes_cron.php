@@ -86,8 +86,7 @@ while($row = spip_fetch_array($list_bg)) {
 			$texte_patron_bg = recuperer_fond('patrons/'.$patron, $contexte_patron);
 		 	//$texte_patron_bg = recuperer_page(generer_url_public('patron_switch',"patron=$patron&date=$date",true)) ;		
 			
-			$titre_patron_bg = ($titre_message =="") ? $titre_bg." de ".$nomsite : $titre_message;
-			$titre_bg = $titre_patron_bg;
+			$titre_bg = $titre_bg." de ".$nomsite ;
 			
 			spip_log("Message choppe->$titre".$titre_bg);
 	
@@ -100,6 +99,7 @@ while($row = spip_fetch_array($list_bg)) {
 			if ( (strlen($tampon_sp) > 10) ) {
 				$texte_patron_bg = "__bLg__".$id_article_bg."__bLg__ ".$texte_patron_bg;
 				$texte_patron_bg = addslashes($texte_patron_bg);
+				$titre_bg = addslashes($titre_bg);
 				//echo "->$texte_patron_bg" ; 
 				// si un mail a pu etre généré, on l'ajoute à la pile d'envoi
 				$type_bg = 'auto';
