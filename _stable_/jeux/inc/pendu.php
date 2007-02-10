@@ -103,7 +103,7 @@ function jeux_pendu($texte, $indexJeux) {
   }
   $js .= "\n\tMots[$indexJeux]=new Array('".join("','",$mots)."');";
   $html .= pendu_pendu($js, $indexJeux);
-  return "<form NAME=\"pendu$indexJeux\">$html</form>";
+  return jeux_form_debut('pendu', $indexJeux).$html.jeux_form_fin();
 }
 
 

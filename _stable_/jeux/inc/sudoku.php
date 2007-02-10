@@ -54,7 +54,7 @@ function affichage_sudoku($tableau_sudoku, $indexJeux, $solution=false){
     $grille='';
 
     // entetes : formulaire + grille
-    $grille .= (!$solution)? '<form class="jeux_grille" action="'.self()."\" method=\"post\">\n" 
+    $grille .= (!$solution)? jeux_form_debut('sudoku', $indexJeux, 'jeux_grille', 'post', self())
 		: '<p class="jeux_solution">'._T('jeux:solution').' : </p>' ;
     $grille .= '<table class="jeux_grille  sudoku" cellspacing="0" border="0" summary="'
 		. _T('sudoku:table_summary',Array('hauteur'=>$hauteur,'largeur'=>$largeur)) . "\">\n";
@@ -96,7 +96,7 @@ function affichage_sudoku($tableau_sudoku, $indexJeux, $solution=false){
 	if (!$solution) $grille .= 
 		(jeux_config('regle')?'<p class="jeux_regle">'.definir_puce()._T('sudoku:regle',Array('hauteur'=>$li,'largeur'=>$lj, 'max'=>$largeur)).'</p>' : '')
 		.(jeux_config('solution')?"<p><input id=\"affiche_solution_$indexJeux\" name=\"affiche_solution_{$indexJeux}[]\" type=\"checkbox\" class=\"jeux_cocher\" value=\"1\" /><label for=\"affiche_solution_$indexJeux\" >"._T('jeux:afficher_solution')."</label></p>\n":'')
-		.'<p><input type="submit" value="'._T('jeux:verifier_validite')."\" name=\"bouton_envoi_$indexJeux\" /></p></form>\n";
+		.'<p><input type="submit" value="'._T('jeux:verifier_validite')."\" name=\"bouton_envoi_$indexJeux\" /></p>".jeux_form_fin();
 
 	return $grille;
 }

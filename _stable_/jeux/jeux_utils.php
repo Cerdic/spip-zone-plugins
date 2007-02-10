@@ -169,4 +169,19 @@ function jeux_block_invisible($id, $texte, $block) {
 	:bouton_block_invisible($id).$texte.debut_block_invisible($id).$block.fin_block();
 }
 
+// deux fonctions qui encadrent un jeu dans un formulaire
+function jeux_form_debut($name, $indexJeux, $class="", $method="post", $action="") {
+	if (strlen($name)) $name=" name=\"$name$indexJeux\"";
+	if (strlen($class)) $class=" class=\"$class\"";
+	if (strlen($method)) $method=" method=\"$method\"";
+	if (strlen($action)) $action=" action=\"$action\"";
+	return "\n<form".$name.$class.$method.$action." >\n"
+		."<input type=\"hidden\" name=\"debut_index_jeux\" value=\"{$GLOBALS['debut_index_jeux']}\">\n"
+		."<input type=\"hidden\" name=\"index_jeux\" value=$indexJeux>\n"
+		."<input type=\"hidden\" name=\"var_correction_$indexJeux\" value=1>\n";
+}
+function jeux_form_fin() {
+	return "\n</form>\n";
+}
+
 ?>

@@ -61,8 +61,11 @@ function jeux2($chaine, $indexJeux){
 
 // pipeline pre_propre
 function jeux_pre_propre($texte) { 
-	// l'identifiant du jeu est choisi au hasard... on n'est jamais trop prudent
-	return jeux_pre($texte, rand(1, 65000));
+	// s'il n'est pas present dans un formulaire envoye,
+	// l'identifiant du jeu est choisi au hasard... ca peut servir dans le cas des signatures.
+	// en passant tous les jeux en ajax, ce ne sera plus la peine.
+	$GLOBALS['debut_index_jeux'] = isset($_POST['debut_index_jeux'])?$_POST['debut_index_jeux']:rand(1, 65000);
+	return jeux_pre($texte, $GLOBALS['debut_index_jeux']);
 }
 
 // pipeline pre_propre

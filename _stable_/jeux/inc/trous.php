@@ -125,10 +125,8 @@ function jeux_trous($texte, $indexJeux) {
   $pied = jeux_config('indices')?trous_afficher_indices($indexJeux):'';
   
   if (!isset($_POST["var_correction_".$indexJeux])) { 
-	$tete .= "\n".'<form method="post" action="">';
-	$pied .= '<br /><input type="hidden" name="var_correction_'.$indexJeux.'" value="yes">
-	<div align="center"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton"></div>
-	</form>';
+	$tete .= jeux_form_debut('trous', $indexJeux);
+	$pied .= '<br /><div align="center"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton"></div>'.jeux_form_fin();
   } else {
       // On ajoute le score final
       $pied .= jeux_afficher_score($scoreTROUS, $indexTrou)

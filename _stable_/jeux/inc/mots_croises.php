@@ -59,7 +59,7 @@ function affichage_grille_mc($tableau_grille, $indexJeux, $solution=false){
     $grille = '';
 
     // entetes : formulaire + grille
-    $grille .= (!$solution)? '<form class="jeux_grille jeux_left" action="'.self()."\" method=\"post\">\n" 
+    $grille .= (!$solution)? jeux_form_debut('motscroises', $indexJeux, 'jeux_grille jeux_left', 'post', self())
 		: '<p class="jeux_solution">'._T('jeux:solution').' : </p>' ;
     $grille .= '<table class="jeux_grille" cellspacing="0" border="0" summary="'
 		. _T('motscroises:table_summary',Array('hauteur'=>$hauteur,'largeur'=>$largeur))
@@ -107,7 +107,7 @@ function affichage_grille_mc($tableau_grille, $indexJeux, $solution=false){
 	
 	if (!$solution) $grille .= 
 		(jeux_config('solution')?"<p><input id=\"affiche_solution_$indexJeux\" name=\"affiche_solution_{$indexJeux}[]\" type=\"checkbox\" class=\"jeux_cocher\" value=\"1\" /><label for=\"affiche_solution_$indexJeux\" >"._T('jeux:afficher_solution')."</label></p>\n":'')
-		.'<p><input type="submit" value="'._T('jeux:verifier')."\" name=\"bouton_envoi_$indexJeux\" /></p></form>\n";
+		.'<p><input type="submit" value="'._T('jeux:verifier')."\" name=\"bouton_envoi_$indexJeux\" /></p>".jeux_form_fin();
 
 	return $grille;
 }
