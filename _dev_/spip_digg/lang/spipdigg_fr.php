@@ -19,9 +19,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_des_diggs'=>'Forum des Digg\'s',
 // G
 'gerer_les_diggs'=>'Gerer les Digg\'s',
-// S
+// M
 'mes_diggs'=>'Mes Digg\'s',
+// S
 'stats_des_diggs'=> 'Statistiques des Digg\'s',
+'supprimer_digg'=>'Supprimer un digg',
 // T
 'titre_digg'=>'Titre du Digg :',
 // U
