@@ -1,7 +1,7 @@
 <?php
 
 // ouvrir un odf et le decompacter dans tmp/
-function spipodf_unzip($fichier){
+function spipoasis_unzip($fichier){
 	include_spip('inc/pclzip');
 	$repodf = sous_repertoire(_DIR_TMP,'oasis');
 	$sous_rep = basename($fichier)."/";
@@ -20,7 +20,7 @@ function spipodf_unzip($fichier){
 }
 
 // recompacter un dossier pour en faire un odf
-function spipodf_zip($dossier,$dest){
+function spipoasis_zip($dossier,$dest){
 	include_spip('inc/pclzip');
 	$files = preg_files($dossier,".*");
 	$newodt = new PclZip($dest);
@@ -32,14 +32,14 @@ function spipodf_zip($dossier,$dest){
 }
 
 // ecrire le meta.xml a partir du template meta.xml.html
-function spipodf_ecrire_meta($odf_dir,$contexte){
+function spipoasis_ecrire_meta($odf_dir,$contexte){
 	// calculer le fond
 	include_spip('inc/assembler');
 	$texte = recuperer_fond("templates/meta.xml",$contexte);
 	ecrire_fichier($odf_dir."meta.xml",$texte,true);
 }
 
-function spipodf_recuperer_fond($template,$contexte,$nom_fichier){
+function spipoasis_recuperer_fond($template,$contexte,$nom_fichier){
 	if (!preg_match(",[.](od[tpgbf])$,i",$template,$regs))
 		return false;
 	$extension = strtolower($regs[1]);
@@ -62,15 +62,15 @@ function spipodf_recuperer_fond($template,$contexte,$nom_fichier){
 		if (!strlen($template))
 			return;
 		$styliser = charger_fonction("spip2{$extension}_styliser",'inc');
-		$unzip = spipodf_unzip($template);
+		$unzip = spipoasis_unzip($template);
 		// styliser un odf
 		$styliser($unzip,$contexte);
-		$cache = spipodf_zip($unzip,$cache);
+		$cache = spipoasis_zip($unzip,$cache);
 	}
 	return array($cache,$nom_fichier);
 }
 
-function spipodf_envoyer($fichier, $alias = NULL){
+function spipoasis_envoyer($fichier, $alias = NULL){
 	if ($alias==NULL) $alias=basename($fichier);
 	if (!preg_match(",[.](od[tpgbf])$,i",$fichier,$regs))
 		return false;

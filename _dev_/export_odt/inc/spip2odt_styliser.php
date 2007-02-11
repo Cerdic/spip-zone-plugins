@@ -32,7 +32,7 @@ function inc_spip2odt_styliser($odf_dir, $contexte){
 
 	// ecrire le squelette et le fichier fonctions associe
 	ecrire_fichier(_DIR_TMP."content.html",$texte);
-	lire_fichier(_DIR_PLUGIN_SPIPODF."content_fonctions.php",$fonctions);
+	lire_fichier(_DIR_PLUGIN_SPIPOASIS."content_fonctions.php",$fonctions);
 	ecrire_fichier(_DIR_TMP."content_fonctions.php",$fonctions);
 	
 	// calculer le fond
@@ -50,7 +50,7 @@ function inc_spip2odt_styliser($odf_dir, $contexte){
 
 	ecrire_fichier($odf_dir."content.xml",$texte);
 	
-	spipodf_ecrire_meta($odf_dir,$contexte);
+	spipoasis_ecrire_meta($odf_dir,$contexte);
 }
 
 
@@ -252,7 +252,7 @@ function spip2odt_imagedraw($dir,$img,$align='left',$titre="",$descriptif="",$hr
 		if ($titre OR $descriptif){
 			$insert = '<draw:frame draw:style-name="spip_documents_'.$align.'" '
 			. 'draw:name="Frame1" text:anchor-type="paragraph" svg:x="0cm" svg:y="0cm" svg:width="'
-			. max($width,5).'cm" svg:height="'
+			. max($width,7.5).'cm" svg:height="'
 			. $height.'cm" style:rel-height="scale-min" draw:z-index="0"><draw:text-box>'
 			. '<text:p text:style-name="'.($titre?'spip_doc_titre':'spip_doc_descriptif').'">'
 			. $insert
@@ -276,14 +276,15 @@ function spip2odt_convertir_images($texte,$dossier){
 		$frag = array_shift($split);
 		if (preg_match_all(
 		  ','
-		  .'(<([b-z][a-z]*)[^<>]*>)?'
+		  .'(<([b-z][a-z]*)(\s[^<>]*)?>)?' # ne pas attraper les <text:p > qui precedent une image
 		  .'(<a [^<>]*>)?\s*(<img\s[^<>]*>)(\s*</a>)?'
 		  .'(\s*</\\2>)?'
-		  .'(\s*<([a-z]+)[^<>]*spip_doc_titre[^<>]*>(.*?)</\\8>)?'
-		  .'(\s*<([a-z]+)[^<>]*spip_doc_descriptif[^<>]*>(.*?)</\\11>)?'
+		  .'(\s*<([a-z]+)[^<>]*spip_doc_titre[^<>]*>(.*?)</\\9>)?'
+		  .'(\s*<([a-z]+)[^<>]*spip_doc_descriptif[^<>]*>(.*?)</\\12>)?'
 		  .',imsS',
 		   $frag, $regs,PREG_SET_ORDER)!==FALSE) {
-			//if ($class && count($regs) && !count($split)) {var_dump($frag);var_dump($regs);die;}
+		  #if (count($regs)) {var_dump($frag);var_dump($regs);die;}
+			#if ($class && count($regs) && !count($split)) {var_dump($frag);var_dump($regs);die;}
 			foreach($regs as $reg){
 				// En cas de span spip_documents_xx recuperer la class
 				$align = 'left'; // comme ca c'est bon pour les puces :)
@@ -291,11 +292,11 @@ function spip2odt_convertir_images($texte,$dossier){
 				$title = "";
 				if ($class AND preg_match(',spip_documents_(left|right|center),i',$class,$match))
 					$align = $match[1];
-				if ($reg[3]){
-					$href = extraire_attribut($reg[3],'href');
-					$title = extraire_attribut($reg[3],'title');
+				if ($reg[4]){
+					$href = extraire_attribut($reg[4],'href');
+					$title = extraire_attribut($reg[4],'title');
 				}
-				$insert = spip2odt_imagedraw($dir,$reg[4],$align,isset($reg[9])?$reg[9]:"",isset($reg[12])?$reg[12]:"",$href,$title);
+				$insert = spip2odt_imagedraw($dir,$reg[5],$align,isset($reg[10])?$reg[10]:"",isset($reg[13])?$reg[13]:"",$href,$title);
 				$frag = str_replace($reg[0], $insert, $frag);
 				$class="";
 			}

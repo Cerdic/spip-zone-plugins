@@ -27,7 +27,7 @@ function spip2odt($env){
 	}
 	
 	include_spip('inc/odf_api');
-	return spipodf_recuperer_fond($template,$env,$nom_fichier);
+	return spipoasis_recuperer_fond($template,$env,$nom_fichier);
 }
 
 $GLOBALS['spip_matrice']['image_resolution'] = '';

@@ -3,10 +3,10 @@
 include_spip('inc/odt_api');
 
 $template = find_in_path('templates/article.odt');
-$unzip = spipodf_unzip($template);
+$unzip = spipoasis_unzip($template);
 
 // styliser
 spip2odt_styliser_contenu($unzip,array('id_article'=>'#ID_ARTICLE'));
-$odt = spipodf_zip($unzip,_DIR_TMP . 'test.odt');
-spipodf_envoyer($odt);
+$odt = spipoasis_zip($unzip,_DIR_TMP . 'test.odt');
+spipoasis_envoyer($odt);
 ?>
