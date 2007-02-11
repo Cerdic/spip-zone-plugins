@@ -294,21 +294,27 @@ function tweak_exclure_balises($balises, $fonction, $texte){
 	return $texte;
 }
 
-// transforme un chemin d'image relatif en chemin html
+// transforme un chemin d'image relatif en chemin html absolu
 function tweak_htmlpath($relative_path) {
-	$realpath=str_replace("\\", "/", realpath($relative_path));
-	if (strlen($a=$_SERVER['DOCUMENT_ROOT']) && strpos($realpath, $a)!==false) 
-		return str_replace($a,'',$realpath);
-	return tweak_canonicalize($_SERVER['SCRIPT_URL'].$relative_path);
+	$realpath = str_replace("\\", "/", realpath($relative_path));
+	$root = $_SERVER['DOCUMENT_ROOT'];
+	if (strlen($root) && strpos($realpath, $root)===0) 
+		return substr($realpath, strlen($root));
+	$dir = dirname(!empty($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] :
+			(!empty($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : 
+			(!empty($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : str_replace('\\','/',__FILE__)
+		)));
+	return tweak_canonicalize($dir.'/'.$relative_path);
 }
 
 // retourne un chemin canonique a partir d'un chemin contenant des ../
 function tweak_canonicalize($address) {
-   $address = explode('/', $address);
-   $keys = array_keys($address, '..');
-   foreach($keys AS $keypos => $key) array_splice($address, $key - ($keypos * 2 + 1), 2);
-   $address = implode('/', $address);
-   return preg_replace(',([^.])\./,', '\1', $address);
+	$address = str_replace("//", "/", $address);
+	$address = explode('/', $address);
+	$keys = array_keys($address, '..');
+	foreach($keys AS $keypos => $key) array_splice($address, $key - ($keypos * 2 + 1), 2);
+	$address = implode('/', $address);
+	return preg_replace(',([^.])\./,', '\1', $address);
 }
 
 /*****************/

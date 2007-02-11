@@ -1,10 +1,10 @@
 <plugin>
 	<nom>Tweak SPIP</nom>
 	<icon>img/tweak-24.gif</icon>
-	<version>0.5</version>
+	<version>0.6</version>
 	<auteur>	<!-- Auteur du plugin -->
  	Patrice Vanneufville
-_ &copy; 2006 - Distribu&#233; sous licence GPL
+_ &copy; 2007 - Distribu&#233; sous licence GPL
 	</auteur>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	test
