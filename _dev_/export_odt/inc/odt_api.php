@@ -12,7 +12,7 @@ define('_TAGS_INLINE',
 	'span|strong|b|em|i|code');
 
 // retablir les boucles et autres tags du squelette
-function spip2odt_styliser_contenu($odf_dir, $contexte){
+function inc_spip2odt_styliser($odf_dir, $contexte){
 	// lire le content
 	lire_fichier($odf_dir."content.xml",$texte);
 	
@@ -49,6 +49,8 @@ function spip2odt_styliser_contenu($odf_dir, $contexte){
 	$texte = spip2odt_convertir($texte,$odf_dir);
 
 	ecrire_fichier($odf_dir."content.xml",$texte);
+	
+	spipodf_ecrire_meta($odf_dir,$contexte);
 }
 
 
@@ -218,48 +220,89 @@ function spip2odt_analyser_tables($texte,$no_table_spip){
 	return array($texte,$avant,$tag,$content,$txt);
 }
 
+function spip2odt_imagedraw($dir,$img,$align='left',$titre="",$descriptif="",$href="",$title=""){
+	static $image_nb = 0;
+	$insert = "";
+	$src = extraire_attribut($img,'src');
+	$alt = extraire_attribut($img,'alt');
+	list($height,$width)=taille_image($img);
+	$height = round(intval($height)/38.3378,2);
+	$width = round(intval($width)/38.3378,2);
+	$fichier = copie_locale($src);
+	if (!$ok = @copy($fichier, $dir.basename($fichier))){
+		$fichier = copie_locale(url_absolue($src)); // essayer en http
+		$ok = @copy($fichier, $dir.basename($fichier));
+	}
+	if ($ok){
+		$image_nb++;
+		$src = basename($dir)."/".basename($fichier);
+		$insert = '<draw:frame draw:style-name="spip_documents_'.$align.'" draw:name="Image'
+		  .$image_nb.'" text:anchor-type="paragraph" svg:width="'
+		  .$width.'cm" svg:height="'.$height.'cm" draw:z-index="0"><draw:image xlink:href="'
+		  .$src.'" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>'
+		  . ($alt?"<svg:desc>$alt</svg:desc>":'')
+		  . '</draw:frame>';
+		  
+		if ($href){
+			$insert = '<draw:a xlink:type="simple" xlink:href="'.$href.'" office:name="'.$title.'">'
+			 . $insert
+			 . '</draw:a>';
+		}
+		// un caption ?
+		if ($titre OR $descriptif){
+			$insert = '<draw:frame draw:style-name="spip_documents_'.$align.'" '
+			. 'draw:name="Frame1" text:anchor-type="paragraph" svg:x="0cm" svg:y="0cm" svg:width="'
+			. max($width,5).'cm" svg:height="'
+			. $height.'cm" style:rel-height="scale-min" draw:z-index="0"><draw:text-box>'
+			. '<text:p text:style-name="'.($titre?'spip_doc_titre':'spip_doc_descriptif').'">'
+			. $insert
+			. ($titre?($titre.($descriptif?'</text:p><text:p text:style-name="spip_doc_descriptif">':'')):'')
+			. $descriptif
+			. '</text:p></draw:text-box></draw:frame>';
+		}
+	}
+	else spip_log("erreur copy $fichier vers ".$dir.basename($fichier));
+	return $insert;
+}
+
 function spip2odt_convertir_images($texte,$dossier){
+	//$puce = str_replace("toto","",propre("\n- toto"));
 	$dir = sous_repertoire($dossier,'Pictures');
 	include_spip('inc/distant');
-	static $image_nb = 0;
 	$split = preg_split(',(<[a-z]+\s[^<>]*spip_documents[^<>]*>),Uims',$texte,null,PREG_SPLIT_DELIM_CAPTURE);
-	$texte = array_shift($split);
+	$class = "";
+	$texte = "";
 	while (count($split)){
-		$texte .= $tag=array_shift($split);
 		$frag = array_shift($split);
-		$class = extraire_attribut($tag, 'class');
-		if (preg_match_all(',((<a [^<>]*>)?\s*(<img\s.*>)),UimsS', $frag, $regs,PREG_SET_ORDER)!==FALSE) {
+		if (preg_match_all(
+		  ','
+		  .'(<([b-z][a-z]*)[^<>]*>)?'
+		  .'(<a [^<>]*>)?\s*(<img\s[^<>]*>)(\s*</a>)?'
+		  .'(\s*</\\2>)?'
+		  .'(\s*<([a-z]+)[^<>]*spip_doc_titre[^<>]*>(.*?)</\\8>)?'
+		  .'(\s*<([a-z]+)[^<>]*spip_doc_descriptif[^<>]*>(.*?)</\\11>)?'
+		  .',imsS',
+		   $frag, $regs,PREG_SET_ORDER)!==FALSE) {
+			//if ($class && count($regs) && !count($split)) {var_dump($frag);var_dump($regs);die;}
 			foreach($regs as $reg){
 				// En cas de span spip_documents_xx recuperer la class
-				$src = extraire_attribut($reg[3],'src');
-				$height = round(intval(extraire_attribut($reg[3],'height'))/28.3378,2);
-				$width = round(intval(extraire_attribut($reg[3],'width'))/28.3378,2);
-				$fichier = copie_locale($src);
-				if (!$ok = @copy($fichier, $dir.basename($fichier))){
-					$fichier = copie_locale(url_absolue($src)); // essayer en http
-					$ok = @copy($fichier, $dir.basename($fichier));
+				$align = 'left'; // comme ca c'est bon pour les puces :)
+				$href = "";
+				$title = "";
+				if ($class AND preg_match(',spip_documents_(left|right|center),i',$class,$match))
+					$align = $match[1];
+				if ($reg[3]){
+					$href = extraire_attribut($reg[3],'href');
+					$title = extraire_attribut($reg[3],'title');
 				}
-				if ($ok){
-					$align = 'left';
-					if (preg_match(',spip_documents_(left|right|center),i',$class,$match))
-						$align = $match[1];
-					$image_nb++;
-					$src = "Pictures/".basename($fichier);
-					$insert = '<draw:frame draw:style-name="spip_documents_'.$align.'" draw:name="Image'
-					  .$image_nb.'" text:anchor-type="paragraph" svg:width="'
-					  .$width.'cm" svg:height="'.$height.'cm" draw:z-index="0"><draw:image xlink:href="'
-					  .$src.'" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/></draw:frame>';
-					if ($reg[2]){
-						$href = extraire_attribut($reg[2],'href');
-						if ($href) $insert .= $reg[2]. $href;
-					}
-					$frag = str_replace($reg[0], $insert, $frag);
-				}
-				else spip_log("erreur copy $fichier vers ".$dir.basename($fichier));
+				$insert = spip2odt_imagedraw($dir,$reg[4],$align,isset($reg[9])?$reg[9]:"",isset($reg[12])?$reg[12]:"",$href,$title);
+				$frag = str_replace($reg[0], $insert, $frag);
 				$class="";
 			}
 		}
 		$texte .= $frag;
+		$texte .= $tag=array_shift($split);
+		$class = extraire_attribut($tag, 'class');
 	}
 	return $texte;
 }
@@ -286,6 +329,16 @@ function spip2odt_heriter_p($texte,$dossier){
 }
 
 function spip2odt_reparagrapher($texte){
+	// avant de reparagrapher, echappons les paragraphes dans les <draw:text-box><text:p>
+	$split = preg_split(',(<draw:text-box[^<>]*>.*</draw:text-box>),Uims',$texte,null,PREG_SPLIT_DELIM_CAPTURE);
+	//var_dump($split);die();
+	$texte = array_shift($split);
+	$texte_boxes=array();
+	while (count($split)){
+		$i = "@T@E@X@T@B@O@X@".count($texte_boxes)."@";
+		$texte_boxes[$i] = array_shift($split);
+		$texte .= $i . array_shift($split);
+	}
 
 	// Ajouter un espace aux <p> et un "STOP P"
 	// transformer aussi les </p> existants en <p>, nettoyes ensuite
@@ -320,6 +373,9 @@ function spip2odt_reparagrapher($texte){
 		$texte);
 	$texte = preg_replace(',<text:span\s*>(.*)</text:span>,UiS', '\\1',
 		$texte);
+		
+	// remettre les text-boxes
+	$texte = str_replace(array_keys($texte_boxes),array_values($texte_boxes),$texte);
 	return $texte;
 }
 

@@ -63,6 +63,14 @@
 <style:style style:name="spip_em" style:display-name="Italique" style:family="text"><style:text-properties fo:font-style="italic" style:font-style-asian="italic" style:font-style-complex="italic"/></style:style>
 <style:style style:name="spip_code" style:display-name="Code" style:family="text"><style:text-properties style:font-name="Courier" fo:font-size="11pt"/></style:style>
 
+<style:style style:name="spip_doc_titre" style:display-name="spip_doc_titre" style:family="paragraph" style:parent-style-name="Caption">
+<style:paragraph-properties fo:margin-top="0.21cm" fo:margin-bottom="0.0cm" fo:text-align="center" style:justify-single-word="false"/>
+</style:style>
+<style:style style:name="spip_doc_descriptif" style:display-name="spip_doc_descriptif" style:family="paragraph" style:parent-style-name="Caption" style:master-page-name="">
+<style:paragraph-properties fo:margin-top="0.0cm" fo:margin-bottom="0.21cm" fo:text-align="center" style:justify-single-word="false" style:shadow="none"/>
+<style:text-properties fo:font-weight="normal" style:font-weight-asian="normal" style:font-weight-complex="normal"/>
+</style:style>
+
 <text:list-style style:name="spip_ol" style:display-name="Listes numerotees">
 <text:list-level-style-number text:level="1" text:style-name="Numbering_20_Symbols" style:num-suffix="." style:num-format="1">
 <style:list-level-properties text:space-before="0.635cm" text:min-label-width="0.635cm"/>
