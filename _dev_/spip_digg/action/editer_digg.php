@@ -22,10 +22,12 @@ function action_editer_digg_dist(){
 		if ($res_insert_digg && $res_lier_digg_auteur) $insert = true;
 		//echo $sql_insert_digg;
 	}else{
-		
+		$sql_maj_digg = "UPDATE spip_diggs SET titre='".addslashes(_request('titre'))."', url_digg='".addslashes(_request('url_digg'))."', descriptif='".addslashes(_request('texte'))."' WHERE id_digg='".$id_digg."';";
+		//echo $sql_maj_digg;
+		$res_maj_digg = spip_query($sql_maj_digg);
 	}
 	
-	$redirect = parametre_url(urldecode(_request('redirect')),'id_digg', $id_digg);
+	$redirect = parametre_url(urldecode(_request('redirect')),'id_digg', $id_digg,'&');
 	redirige_par_entete($redirect);
 }
 ?>
