@@ -32,6 +32,10 @@ function Agenda_exec_init($flux) {
 	$exec =  $flux['args']['exec'];
 	if (($exec == 'calendrier')||($exec=='articles')){
 		include_spip('inc/calendar');
+		if (!function_exists('WCalendar_ajoute_lies')){
+			echo ('Erreur Wcalendar manquant');
+			return $flux;
+		}
 		// Reserver les widgets agenda
 		WCalendar_ajoute_lies(_T('agenda:evenement_date_debut'),'_evenement_debut',_T('agenda:evenement_date_fin'),'_evenement_fin');
 		WCalendar_ajoute_statique(_T('agenda:evenement_repetitions'),'_repetitions');
