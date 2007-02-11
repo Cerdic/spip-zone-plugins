@@ -84,7 +84,7 @@ add_tweak( array(
 	// le /avancees signifie que avancees (traduit par : _T('icone_interface_complet')) sera coche par defaut
 	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
 	'code' 	=> '$GLOBALS["radio_set_options"]=%%radio_set_options/s/"avancees(basiques=icone_interface_simple|avancees=icone_interface_complet)"%%;
-list($GLOBALS["set_options"],) = explode("(", $GLOBALS["radio_set_options"], 2);',
+list($set_options, $foo) = explode("(", $GLOBALS["radio_set_options"], 2); $_GET["set_options"] = $GLOBALS["set_options"] = $set_options;',
 	'categorie'	=> 'admin',
 	'options'	=> 1,
 	'pipeline:header_prive' => 'set_options_header_prive',
