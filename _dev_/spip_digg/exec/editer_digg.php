@@ -13,7 +13,8 @@ function exec_editer_digg(){
 				echo "Hello World !";
 			echo fin_boite_info();
 			echo debut_raccourcis();
-				echo '<a href="?exec=editer_digg&id_digg=new">'._T('spipdigg:ajouter_un_digg').'</a>';
+				echo '<a href="?exec=editer_digg&id_digg=new">'._T('spipdigg:ajouter_un_digg').'</a><br />';
+				echo '<a href="?exec=spipdigg">'._T('spipdigg:mes_diggs').'</a>';
 			echo fin_raccourcis();
 		echo debut_droite();
 			$oncontinue = true;
@@ -43,6 +44,21 @@ function exec_editer_digg(){
 					echo '<br />';
 					echo '<b>'._T('spipdigg:url_digg').'</b>';
 					echo '<br /><input type="text" name="url_digg" value="'.$contenu[url_digg].'" class="forml" />';
+					echo '<br />';
+					if (lire_meta('spipdigg_diggs_dans_rubrique') == '1'){
+						debut_cadre_couleur ( 'rubrique.gif', $return = false, $fonction='', $titre=_T('spipdigg:dans_la_rubrique') );
+						$res_les_rubriques = spip_query("SELECT id_rubrique, titre FROM spip_rubriques;");
+						echo '<select name="id_rubrique" style="font-size: 90%; width: 99%; max-height: 24px;" class="verdana1" size="1">';
+						while($row_les_rubriques = spip_fetch_array($res_les_rubriques)){
+							echo '<option value="'.$row_les_rubriques['id_rubrique'].'"';
+							if ($contenu['id_rubrique'] == $row_les_rubriques['id_rubrique']) echo 'selected';
+							echo '>'.$row_les_rubriques['titre'].'</option>';
+						}
+						echo '</select>';
+						echo fin_cadre_couleur(false);
+					}else{
+						echo '<input name="id_rubrique" type="hidden" value="'.$contenu['id_rubrique'].'" />';
+					}
 					echo '<br />';
 					echo '<b>'._T('spipdigg:descriptif_digg').'</b>';
 					echo '<br />'.barre_textarea ( $contenu['descriptif'], '10', $cols, $lang='' );

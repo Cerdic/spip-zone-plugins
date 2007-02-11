@@ -18,6 +18,10 @@ function exec_admin_digg(){
 			debut_cadre_trait_couleur();
 			echo'config des digg';
 			fin_cadre_trait_couleur();
+			
+			//lire_meta('spipdigg_diggs_dans_rubrique')
+			//lire_meta('spipdigg_mots_sur_digg')
+			
 	if ($GLOBALS['spip_version_code']>=1.92) { echo fin_gauche(); }
 	echo fin_page();
 }
