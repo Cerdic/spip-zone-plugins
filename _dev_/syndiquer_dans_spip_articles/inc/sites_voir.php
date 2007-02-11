@@ -56,87 +56,89 @@ function afficher_sites($titre_table, $requete) {
 		while ($row = spip_fetch_array($result)) {
 			$vals = '';
 			$id_syndic=$row["id_syndic"];
-			$id_rubrique=$row["id_rubrique"];
-			$nom_site=sinon(typo($row["nom_site"]), _T('info_sans_titre'));
-			$url_site=$row["url_site"];
-			$url_syndic=$row["url_syndic"];
-			$description=propre($row["description"]);
-			$syndication=$row["syndication"];
-			$statut=$row["statut"];
-			$date=$row["date"];
-			$moderation=$row['moderation'];
-			
-			$tous_id[] = $id_syndic;
-
-			//echo "<tr bgcolor='$couleur'>";
-
-			//echo "<td class='arial2'>";
-			$link = new Link(generer_url_ecrire("sites","id_syndic=$id_syndic"));
-			switch ($statut) {
-			case 'publie':
-				if (acces_restreint_rubrique($id_rubrique))
-					$puce = 'puce-verte-anim.gif';
-				else
-					$puce='puce-verte-breve.gif';
-				$title = _T('info_site_reference');
-				break;
-			case 'prop':
-				if (acces_restreint_rubrique($id_rubrique))
+			if (autoriser('voir','site',$id_syndic)){
+				$id_rubrique=$row["id_rubrique"];
+				$nom_site=sinon(typo($row["nom_site"]), _T('info_sans_titre'));
+				$url_site=$row["url_site"];
+				$url_syndic=$row["url_syndic"];
+				$description=propre($row["description"]);
+				$syndication=$row["syndication"];
+				$statut=$row["statut"];
+				$date=$row["date"];
+				$moderation=$row['moderation'];
+				
+				$tous_id[] = $id_syndic;
+	
+				//echo "<tr bgcolor='$couleur'>";
+	
+				//echo "<td class='arial2'>";
+				$link = new Link(generer_url_ecrire("sites","id_syndic=$id_syndic"));
+				switch ($statut) {
+				case 'publie':
+					if (acces_restreint_rubrique($id_rubrique))
+						$puce = 'puce-verte-anim.gif';
+					else
+						$puce='puce-verte-breve.gif';
+					$title = _T('info_site_reference');
+					break;
+				case 'prop':
+					if (acces_restreint_rubrique($id_rubrique))
+						$puce = 'puce-orange-anim.gif';
+					else
+						$puce='puce-orange-breve.gif';
+					$title = _T('info_site_attente');
+					break;
+				case 'refuse':
+					if (acces_restreint_rubrique($id_rubrique))
+						$puce = 'puce-poubelle-anim.gif';
+					else
+						$puce='puce-poubelle-breve.gif';
+					$title = _T('info_site_refuse');
+					break;
+				}
+				if ($syndication == 'off' OR $syndication == 'sus') {
 					$puce = 'puce-orange-anim.gif';
-				else
-					$puce='puce-orange-breve.gif';
-				$title = _T('info_site_attente');
-				break;
-			case 'refuse':
-				if (acces_restreint_rubrique($id_rubrique))
-					$puce = 'puce-poubelle-anim.gif';
-				else
-					$puce='puce-poubelle-breve.gif';
-				$title = _T('info_site_refuse');
-				break;
-			}
-			if ($syndication == 'off' OR $syndication == 'sus') {
-				$puce = 'puce-orange-anim.gif';
-				$title = _T('info_panne_site_syndique');
-			}
-
-			$s = "<a href=\"".$link->getUrl()."\" title=\"$title\">";
-
-			if ($voir_logo);
-				$s .= baliser_logo("site", $id_syndic, 26, 20) ;
-
-			$s .= http_img_pack($puce, $statut, "width='7' height='7' border='0'") ."&nbsp;&nbsp;";
-			
-			$s .= typo($nom_site);
-
-			$s .= "</a> &nbsp;&nbsp; <font size='1'>[<a href='$url_site'>"._T('lien_visite_site')."</a>]</font>";
-			$vals[] = $s;
-			
-			//echo "</td>";
-
-			$s = "";
-			//echo "<td class='arial1' align='right'> &nbsp;";
-			if ($syndication == 'off' OR $syndication == 'sus') {
-				$s .= "<font color='red'>"._T('info_probleme_grave')." </font>";
-			}
-			if ($syndication == "oui" or $syndication == "off" OR $syndication == 'sus'){
-				$s .= "<font color='red'>"._T('info_syndication')."</font>";
-			}
+					$title = _T('info_panne_site_syndique');
+				}
+	
+				$s = "<a href=\"".$link->getUrl()."\" title=\"$title\">";
+	
+				if ($voir_logo);
+					$s .= baliser_logo("site", $id_syndic, 26, 20) ;
+	
+				$s .= http_img_pack($puce, $statut, "width='7' height='7' border='0'") ."&nbsp;&nbsp;";
+				
+				$s .= typo($nom_site);
+	
+				$s .= "</a> &nbsp;&nbsp; <font size='1'>[<a href='$url_site'>"._T('lien_visite_site')."</a>]</font>";
 				$vals[] = $s;
-			//echo "</td>";
-			//echo "<td class='arial1'>";
-			$s = "";
-			if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
-				$result_art = spip_query("SELECT COUNT(*) FROM spip_syndic_articles WHERE id_syndic='$id_syndic'");
-				list($total_art) = spip_fetch_array($result_art,SPIP_NUM);
-				$s .= " $total_art "._T('info_syndication_articles');
-			} else {
-				$s .= "&nbsp;";
+				
+				//echo "</td>";
+	
+				$s = "";
+				//echo "<td class='arial1' align='right'> &nbsp;";
+				if ($syndication == 'off' OR $syndication == 'sus') {
+					$s .= "<font color='red'>"._T('info_probleme_grave')." </font>";
+				}
+				if ($syndication == "oui" or $syndication == "off" OR $syndication == 'sus'){
+					$s .= "<font color='red'>"._T('info_syndication')."</font>";
+				}
+					$vals[] = $s;
+				//echo "</td>";
+				//echo "<td class='arial1'>";
+				$s = "";
+				if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
+					$result_art = spip_query("SELECT COUNT(*) FROM spip_syndic_articles WHERE id_syndic='$id_syndic'");
+					list($total_art) = spip_fetch_array($result_art,SPIP_NUM);
+					$s .= " $total_art "._T('info_syndication_articles');
+				} else {
+					$s .= "&nbsp;";
+				}
+				$vals[] = $s;
+				//echo "</td>";
+				//echo "</tr></n>";
+				$table[] = $vals;
 			}
-			$vals[] = $s;
-			//echo "</td>";
-			//echo "</tr></n>";
-			$table[] = $vals;
 		}
 		spip_free_result($result);
 		
