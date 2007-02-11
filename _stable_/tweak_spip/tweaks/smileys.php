@@ -15,6 +15,7 @@ function smileys_installe() {
 	 ':-))'	=> 'mort_de_rire.png',
 	 ':))'	=> 'mort_de_rire.png',
 	 ":'-))"=> 'pleure_de_rire.png',
+	 ":’-))"=> 'pleure_de_rire.png',
 	
 	// les simples :
 	// ':->'	=> 'diable.png',	// remplace par le suivant...
@@ -26,6 +27,9 @@ function smileys_installe() {
 	 ":'-)"=> 'pleure_de_rire.png',
 	 ":'-D"	=> 'pleure_de_rire.png',
 	 ":'-("	=> 'triste.png',
+	 ":’-)"=> 'pleure_de_rire.png',
+	 ":’-D"	=> 'pleure_de_rire.png',
+	 ":’-("	=> 'triste.png',
 	 ':o)'	=> 'rigolo.png',
 	 'B-)'	=> 'lunettes.png',
 	 ';-)'	=> 'clin_d-oeil.png',
