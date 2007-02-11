@@ -2,12 +2,14 @@
 //
 // action/editer_digg.php
 //
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip("inc/presentation");
 
 function action_editer_digg_dist(){	
 	$insert = false;
-	if (!$id_digg = intval($arg)) {
+	$id_digg = _request('id_digg');
+	if ($id_digg == "new") {
 		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 		if (lire_meta('spipdigg_type_moderation')  != 0)  { $date_validation = "0000-00-00 00:00:00"; }else{ $date_validation = "CURRENT_TIMESTAMP"; }
 		$id_rubrique = _request('id_rubrique');
@@ -20,7 +22,7 @@ function action_editer_digg_dist(){
 		if ($res_insert_digg && $res_lier_digg_auteur) $insert = true;
 		//echo $sql_insert_digg;
 	}else{
-		$id_digg = _request('id_digg');
+		
 	}
 	
 	$redirect = parametre_url(urldecode(_request('redirect')),'id_digg', $id_digg);

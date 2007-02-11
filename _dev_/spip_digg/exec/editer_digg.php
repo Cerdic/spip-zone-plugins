@@ -2,6 +2,7 @@
 //
 // exec/editer_digg.php
 //
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip("inc/presentation");
 
@@ -20,7 +21,7 @@ function exec_editer_digg(){
 				echo '<form action="'.lire_meta('adresse_site').'/spip.php" method="post"><input type="hidden" name="redirect" value="'.lire_meta('adresse_site').'/spip.php" />';
 				echo "
 					<input name='action' type='hidden' value='editer_digg' />
-					<input name='redirect' type='hidden' value='".utf8_encode(lire_meta('adresse_site').'/ecrire/?exec=editer_digg')."' />
+					<input name='redirect' type='hidden' value='".lire_meta('adresse_site').'/ecrire/?exec=editer_digg'."' />
 					<input type='hidden' name='editer_digg' value='oui' />
 				";
 				

@@ -2,6 +2,7 @@
 //
 // exec/spipdigg.php
 //
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip("inc/presentation");
 
@@ -20,7 +21,7 @@ function exec_spipdigg(){
 			//echo $sql_list_digg;
 			$res_list_digg = spip_query($sql_list_digg);
 			while ($row_diggs = spip_fetch_array($res_list_digg)){
-				echo '<a href="?exec=diggs&amp;id_digg='.$row_diggs['id_digg'].'">'.$row_diggs['titre'].'</a><br />';
+				echo $row_diggs['id_digg'].'&nbsp;<a href="?exec=diggs&amp;id_digg='.$row_diggs['id_digg'].'">'.$row_diggs['titre'].'</a><br />';
 			}
 	if ($GLOBALS['spip_version_code']>=1.92) { echo fin_gauche(); }
 	echo fin_page();
