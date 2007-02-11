@@ -12,7 +12,7 @@ function exec_diggs(){
 				echo "Hello World !";
 			echo fin_boite_info();
 			echo debut_raccourcis();
-				echo '<a href="?exec=editer_digg&new=oui">'._T('spipdigg:ajouter_des_digg').'</a>';
+				echo '<a href="?exec=editer_digg&id_digg=new">'._T('spipdigg:ajouter_des_digg').'</a>';
 			echo fin_raccourcis();
 		echo debut_droite();
 			$sql_digg = "SELECT * FROM spip_diggs WHERE id_digg='"._request('id_digg')."';";
@@ -20,10 +20,10 @@ function exec_diggs(){
 			$contenu_digg = spip_fetch_array($res_digg);
 			
 			echo debut_cadre_trait_couleur();
-			echo '<form action="'.lire_meta('adresse_site').'/spip.php" method="post"><input type="hidden" name="redirect" value="'.lire_meta('adresse_site').'/spip.php" />';
+			echo '<form action="?exec=editer_digg" method="post">';
 			echo "
 				<input name='action' type='hidden' value='editer_digg' />
-				<input name='redirect' type='hidden' value='".utf8_encode(lire_meta('adresse_site').'/ecrire/?exec=editer_digg')."' />
+				<input name='redirect' type='hidden' value='".lire_meta('adresse_site')."'/ecrire/?exec=editer_digg' />
 				<input type='hidden' name='editer_digg' value='oui' />
 			";
 			if (_request('new') == "oui") {
@@ -36,7 +36,7 @@ function exec_diggs(){
 			echo '<span class="spip_large"><b>'.$contenu_digg['titre'].'</b></span>';
 			echo '<br />';
 			//echo _T('spipdigg:url_digg');
-			echo '<br /><b>'.$contenu_digg['url_digg'].'</b>';
+			echo '<br /><b><a href="'.$contenu_digg['url_digg'].'">'.$contenu_digg['url_digg'].'</a></b>';
 			echo '<br /><br />';
 			echo _T('spipdigg:descriptif_digg');
 			debut_cadre_formulaire();
