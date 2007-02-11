@@ -1,5 +1,5 @@
 <?php
-include_spip('inc/odf_api');
+include_spip('inc/spipoasis');
 
 // XHTML - Preserver les balises-bloc : on liste ici tous les elements
 // dont on souhaite qu'ils provoquent un saut de paragraphe

@@ -26,7 +26,7 @@ function spip2odt($env){
 		unset($env['nom_fichier']);
 	}
 	
-	include_spip('inc/odf_api');
+	include_spip('inc/spipoasis');
 	return spipoasis_recuperer_fond($template,$env,$nom_fichier);
 }
 
