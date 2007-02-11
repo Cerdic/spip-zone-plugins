@@ -26,8 +26,8 @@ function exec_documents_distants(){
 	
 	<select name='type_lien'>
 		<option value='articles'>"._T('info_article')."</option>
-		<option value'rubriques'>"._T('info_rubriques')."</option>
-		<option value'breves'>"._T('info_breves_02')."</option>
+		<option value='rubriques'>"._T('info_rubriques')."</option>
+		<option value='breves'>"._T('info_breves_02')."</option>
 		</select> 
 	
 	</label><label>"._T('id')."
