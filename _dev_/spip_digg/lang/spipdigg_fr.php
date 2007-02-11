@@ -12,15 +12,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ajouter_un_digg'=>'Ajouter un Digg\'s',
 // C
 'configurer_les_digg'=>'Configurer Spip-Digg',
-'descriptif_digg'=>'Descriptif :',
+
 'enregistrer'=>'Enregistrer',
 'editer_digg'=>'Editer le Digg',
+// D
+'descriptif_digg'=>'Descriptif :',
+'dans_la_rubrique'=>'Dans la rubrique :',
+'digg_numero'=>'Digg num&eacute;ro :',
 // F
 'forum_des_diggs'=>'Forum des Digg\'s',
 // G
 'gerer_les_diggs'=>'Gerer les Digg\'s',
 // M
 'mes_diggs'=>'Mes Digg\'s',
+'mes_diggs_en_prepa'=>'Mes Digg\'s en pr&eacute;paration',
+'mes_diggs_prop'=>'Mes Digg\'s en propos&eacute;s',
 // S
 'stats_des_diggs'=> 'Statistiques des Digg\'s',
 'supprimer_digg'=>'Supprimer un digg',
