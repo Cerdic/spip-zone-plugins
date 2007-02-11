@@ -1,0 +1,19 @@
+<form method="post" name="documents_distants" action="#SELF">
+	
+	<label for="document"><:documentsdistants:explicatif:></label>
+	<textarea name='documents' rows='40' cols='80'></textarea>
+	
+	<br />
+	
+	<label><:documentsdistants:attribuer:>
+		<select name='type_lien'>
+		<option value="articles"><:info_article:></option>
+		<option value="rubriques"><:info_rubriques:></option>
+		<option value="breves"><:info_breves_02:></option>
+		</select> 
+	</label>
+	
+	<label><:id:><input type="texte" name="id" /></label>
+		
+	<input type="submit" name="valider" value="<:bouton_enregistrer:>" />
+</form>
