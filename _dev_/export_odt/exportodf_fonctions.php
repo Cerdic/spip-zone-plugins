@@ -1,5 +1,4 @@
 <?php
-include_spip('inc/odt_api');
 $GLOBALS['debug_oasis']=true;
 function env2url($env){
 	if (is_string($env)) $env = unserialize($env);
@@ -26,6 +25,8 @@ function spip2odt($env){
 		$nom_fichier = $env['nom_fichier'];
 		unset($env['nom_fichier']);
 	}
+	
+	include_spip('inc/odf_api');
 	return spipodf_recuperer_fond($template,$env,$nom_fichier);
 }
 
