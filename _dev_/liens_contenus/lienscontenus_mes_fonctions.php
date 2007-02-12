@@ -21,8 +21,7 @@ function lienscontenus_generer_url($type_objet, $id_objet)
             return $f($id_objet);
         } else {
             // On ne devrait pas se retrouver là
-            spip_log('Plugin liens_contenus : il manque une fonction de génération d\'url pour le type '.$type_objet);
-            // TODO : ameliorer spip_log() pour accepter en parametre un nom de fichier different de "spip"
+            spip_log('Plugin liens_contenus : il manque une fonction de génération d\'url pour le type '.$type_objet, 'liens_contenus');
         	return '#';
         }
     }
