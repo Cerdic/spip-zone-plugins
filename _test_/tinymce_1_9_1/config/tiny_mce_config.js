@@ -16,6 +16,7 @@
 		//convert_url : true,
 		relative_url : true,
 		document_base_url : "/", 
+		remove_script_host : false,
 		width : "600",
 		plugins : "table,advlink,insertdatetime,preview,searchreplace,print,contextmenu,paste,directionality,fullscreen,style,layer,ibrowser,filemanager",
 		paste_create_paragraphs : false,
@@ -30,7 +31,6 @@
 		theme_advanced_toolbar_location : "top",
 		theme_advanced_toolbar_align : "left",
 		theme_advanced_path_location : "bottom",
-      	remove_script_host : false, 
 		convert_fonts_to_spans : true,
 		trim_span_elements : true,
 		cleanup : true,
@@ -308,11 +308,11 @@
 		alert("Filebrowser callback: " + field_name + "," + url + "," + type);
 	}
 	function convLinkVC(strUrl, node, on_save) { 
-            	strUrl=strUrl.replace("../",""); 
+            strUrl=strUrl.replace("../",""); 
             return strUrl; 
     } 
 	function myCustomCleanup(type, value) {
-	var foo = new String (value);
+		var foo = new String (value);
 		switch (type) {
 			case "get_from_editor":
 				//remplace le code des images et documents pour que la balise ne soit pas interprétée par TinyMCE :
@@ -320,12 +320,14 @@
 				foo=foo.replace(/\&amp\;lt\;((img)|(IMG)|(doc)|(DOC))([0-9]+)((\|left)|(\|LEFT)|(\|center)|(\|CENTER)|(\|right)|(\|RIGHT))?\&amp\;gt\;/g, "<$1$6$7>");
 				foo=foo.replace(/\&lt\;((img)|(IMG)|(doc)|(DOC))([0-9]+)((\|left)|(\|LEFT)|(\|center)|(\|CENTER)|(\|right)|(\|RIGHT))?\&gt\;/g, "<$1$6$7>");
 				foo=foo.replace(/\&lt\;(form)([0-9]+)?\&gt\;/g, "<$1$2>");
+				foo=foo.replace(/\[([^\]]*)-&gt;([^\]]*)]/g, "[$1->$2]");
 				break;
 			case "insert_to_editor":
 				//remplace le code des images et documents pour que la balise ne soit pas interprétée par TinyMCE :
 				//ex. : remplace un texte du genre "<IMG97|left>" par "&lt;IMG97|left&gt;"
 				foo=foo.replace(/\<((img)|(IMG)|(doc)|(DOC))([0-9]+)((\|left)|(\|LEFT)|(\|center)|(\|CENTER)|(\|right)|(\|RIGHT))?\>/g, "&lt;$1$6$7&gt;");
 				foo=foo.replace(/\<(form)([0-9]+)?\>/g, "&lt;$1$2&gt;");
+				foo=foo.replace(/\[([^\]]*)-\>([^\]]*)]/g, "[$1-&gt;$2]");
 				break;
 			case "get_from_editor_dom":
 				//remplace le code des images et documents pour que la balise ne soit pas interprétée par TinyMCE :
@@ -334,12 +336,14 @@
 				foo=foo.replace(/\&amp\;lt\;((img)|(IMG)|(doc)|(DOC))([0-9]+)((\|left)|(\|LEFT)|(\|center)|(\|CENTER)|(\|right)|(\|RIGHT))?\&amp\;gt\;/g, "<$1$6$7>");
 				foo=foo.replace(/\&lt\;((img)|(IMG)|(doc)|(DOC))([0-9]+)((\|left)|(\|LEFT)|(\|center)|(\|CENTER)|(\|right)|(\|RIGHT))?\&gt\;/g, "<$1$6$7>");
 				foo=foo.replace(/\&lt\;(form)([0-9]+)?\&gt\;/g, "<$1$2>");
+				foo=foo.replace(/-&gt;/g, "[$1->$2]");
 				break;
 			case "insert_to_editor_dom":
 				//remplace le code des images et documents pour que la balise ne soit pas interprétée par TinyMCE :
 				//ex. : remplace un texte du genre "<IMG97|left>" de spip par "&lt;IMG97|left&gt;"
 				foo=foo.replace(/\<((img)|(IMG)|(doc)|(DOC))([0-9]+)((\|left)|(\|LEFT)|(\|center)|(\|CENTER)|(\|right)|(\|RIGHT))?\>/g, "&lt;$1$6$7&gt;");
 				foo=foo.replace(/\<(form)([0-9]+)?\>/g, "&lt;$1$2&gt;");
+				foo=foo.replace(/\[([^\]]*)-\>([^\]]*)]/g, "[$1-&gt;$2]");
 				break;
 			case "submit_content":
 				//remplace le code des images et documents pour que la balise ne soit pas interprétée par TinyMCE :
@@ -348,7 +352,7 @@
 				foo=foo.replace(/\&amp\;lt\;((img)|(IMG)|(doc)|(DOC))([0-9]+)((\|left)|(\|LEFT)|(\|center)|(\|CENTER)|(\|right)|(\|RIGHT))?\&amp\;gt\;/g, "<$1$6$7>");
 				foo=foo.replace(/\&lt\;((img)|(IMG)|(doc)|(DOC))([0-9]+)((\|left)|(\|LEFT)|(\|center)|(\|CENTER)|(\|right)|(\|RIGHT))?\&gt\;/g, "<$1$6$7>");
 				foo=foo.replace(/\&lt\;(form)([0-9]+)?\&gt\;/g, "<$1$2>");
-				foo=foo.replace("-&gt;", "->");
+				foo=foo.replace(/\[([^\]]*)-&gt;([^\]]*)]/g, "[$1->$2]");
 				break;
 		}
 		value = foo;
