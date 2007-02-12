@@ -301,8 +301,8 @@ function tweak_htmlpath($relative_path) {
 	if (strlen($root) && strpos($realpath, $root)===0) 
 		return substr($realpath, strlen($root));
 	$dir = dirname(!empty($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] :
-			(!empty($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : 
-			(!empty($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : str_replace('\\','/',__FILE__)
+			(!empty($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : 
+			(!empty($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : str_replace('\\','/',__FILE__)
 		)));
 	return tweak_canonicalize($dir.'/'.$relative_path);
 }
@@ -312,7 +312,7 @@ function tweak_canonicalize($address) {
 	$address = str_replace("//", "/", $address);
 	$address = explode('/', $address);
 	$keys = array_keys($address, '..');
-	foreach($keys AS $keypos => $key) array_splice($address, $key - ($keypos * 2 + 1), 2);
+	foreach($keys as $keypos => $key) array_splice($address, $key - ($keypos * 2 + 1), 2);
 	$address = implode('/', $address);
 	return preg_replace(',([^.])\./,', '\1', $address);
 }

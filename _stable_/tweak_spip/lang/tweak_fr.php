@@ -5,6 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Tweak SPIP',
 	'help'	=> "{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Tweak&nbsp;SPIP'.</p>",
+	'titre_tests' => 'Tweak SPIP - Page de tests',
 	'actif' => 'Tweak actif',
 	'inactif' => 'Tweak inactif',
 	'activer_tweak' => 'Activer le tweak',

@@ -149,8 +149,6 @@ tweak_log("Début : exec_tweak_spip_admin()");
 		ecrire_metas();
 	}
 
-	include_spip('tweak_spip_config');
-	
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
 		echo _T('avis_non_acces_page');
@@ -158,7 +156,9 @@ tweak_log("Début : exec_tweak_spip_admin()");
 		exit;
 	}
 	
-	// initialisation générale forcée : recuperation de $tweaks;
+	// definitions manuelles de tous les tweaks : remplissage de $tweaks
+	include_spip('tweak_spip_config');
+	// initialisation generale forcee : recuperation de $tweaks;
 	tweak_initialisation(true);
 	// mise a jour des donnees si envoi via formulaire
 	// sinon fait une passe de verif sur les tweaks
