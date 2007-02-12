@@ -13,7 +13,7 @@
 	</label>
 	
 	<label><:id:><input [value="(#ENV{id})"] type="texte" name="id" /></label>
-	<label><input type="checkbox" name="retour" value="oui" [(#ENV{retour}|?{checked="checked"})]/><:documentsdistants:retourner:></label>	
+	<label><input type="checkbox" name="retour[]" value="oui" [(#ENV{retour}|?{checked="checked"})]/><:documentsdistants:retourner:></label>	
 	<input type="submit" name="valider" value="<:bouton_enregistrer:>" />
 	
 </form>

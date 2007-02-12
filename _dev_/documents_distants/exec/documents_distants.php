@@ -5,8 +5,12 @@ function exec_documents_distants(){
 	global $id;
 	global $type_lien;
 	global $valider;
+	
+
 	global $retour;
-	//echo $retour;
+	
+	$retour[0] =='oui' ? $retour = $retour[0] : $retour;
+	
 	if ($valider)
 		{importer_document($documents,$type_lien,$id,$retour);
 		}
@@ -33,8 +37,12 @@ function exec_documents_distants(){
 
 function importer_document($documents_distants,$type_lien,$id,$retour)
 	{
+	$id2=$id;
+	settype($id,'integer');
+	settype($id,'string');// amha il y a moyen de faire plus simple
+	
 	$tableau =explode(";",$documents_distants);
-	if (!($documents_distants and $id)){return;}
+	if (!($documents_distants and $id and $id2==$id)){return;}
 	
 	include_spip('inc/distant');
 	include_spip('inc/indexation');
