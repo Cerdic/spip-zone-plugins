@@ -58,6 +58,7 @@ function lienscontenus_affiche_droite($flux)
         'naviguer' => array('rubrique', 'id_rubrique'),
         'articles' => array('article', 'id_article'),
         'breves_voir' => array('breve', 'id_breve'),
+        'breves_edit' => array('breve', 'id_breve'),
         'sites' => array('site', 'id_syndic'),
         'mots_edit' => array('mot', 'id_mot'),
         'auteur_infos' => array('auteur', 'id_auteur'),

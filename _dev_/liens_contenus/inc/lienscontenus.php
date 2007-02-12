@@ -198,7 +198,90 @@ function lienscontenus_boite_liste($type_objet, $id_objet)
     include_spip('public/assembler');
 	$contexte = array('type_objet' => $type_objet, 'id_objet' => $id_objet);
 	$data .= recuperer_fond('exec/lienscontenus_liste', $contexte);
-
+    $data .= '<script language="javascript" type="text/javascript">var messageConfirmation="'._T('lienscontenus:confirmation_depublication').'";</script>';
+    // TODO : gerer les autres cas que les breves et articles
+    switch ($type_objet) {
+    	case 'article':
+            $script = <<<EOS
+                <script language="javascript" type="text/javascript">
+                $(document).ready(function() {
+                    // on recupere le statut actuel et le code par defaut du onchange
+                    var initialStatut = $('select[@name=statut_nouv] > option[@selected]').attr('value');
+                    var currentStatut = initialStatut;
+                    var currentOnChange = $('select[@name=statut_nouv]').attr('onchange').replace('/this/', '$(\'select[@name=statut_nouv]\')');
+                
+                    // on supprime le onchange par defaut
+                    /*
+                    Cela ne marche pas ???
+                    $('select[@name=statut_nouv]').unbind('change');
+                    */
+                    $('select[@name=statut_nouv]').removeAttr('onchange');
+                
+                    // on gere un onchange specifique
+                    $('select[@name=statut_nouv]').bind('change', function(event) {
+                        // Si le statut initial etait "publie" et s'il y a au moins un contenu publie qui pointe vers lui, on demande confirmation
+                        if ((initialStatut == 'publie') && (currentStatut == 'publie') && ($('#liens_contenus_contenants > li.publie').size() > 0)) {
+                            if (confirm(messageConfirmation)) {
+                                var newStatut = $('select[@name=statut_nouv] > option[@selected]').attr('value');
+                                currentStatut = newStatut; 
+                                /*
+                                Cela ne marche pas... :(
+                                eval(currentOnChange);
+                                */
+                                $('select[@name=statut_nouv]').next("img").attr('src', '../dist/images/' + puce_statut(newStatut));
+                                setvisibility('valider_statut', 'visible');
+                            } else {
+                                $('select[@name=statut_nouv] > option[@selected]').removeAttr('selected');
+                                $('select[@name=statut_nouv] > option[@value=publie]').attr('selected', 'selected');
+                            }
+                        } else {
+                            var newStatut = $('select[@name=statut_nouv] > option[@selected]').attr('value');
+                            currentStatut = newStatut;
+                            /*
+                            Cela ne marche pas... :(
+                            eval(currentOnChange);
+                            */
+                            $('select[@name=statut_nouv]').next("img").attr('src', '../dist/images/' + puce_statut(newStatut));
+                            setvisibility('valider_statut', 'visible');
+                        }
+                    });
+                });
+                </script>
+EOS;
+            $data .= $script;
+            break;
+        case 'breve':
+            $script = <<<EOS
+                <script language="javascript" type="text/javascript">
+                $(document).ready(function() {
+                    // on recupere le statut actuel
+                    if ($('select[@name=statut]')) {
+                        var initialStatut = $('select[@name=statut] > option[@selected]').attr('value');
+                        var currentStatut = initialStatut;
+                    
+                        // on gere un onchange specifique
+                        $('select[@name=statut]').bind('change', function(event) {
+                            // Si le statut initial etait "publie" et s'il y a au moins un contenu publie qui pointe vers lui, on demande confirmation
+                            if ((initialStatut == 'publie') && (currentStatut == 'publie') && ($('#liens_contenus_contenants > li.publie').size() > 0)) {
+                                if (confirm(messageConfirmation)) {
+                                    var newStatut = $('select[@name=statut] > option[@selected]').attr('value');
+                                    currentStatut = newStatut; 
+                                } else {
+                                    $('select[@name=statut] > option[@selected]').removeAttr('selected');
+                                    $('select[@name=statut] > option[@value=publie]').attr('selected', 'selected');
+                                }
+                            } else {
+                                var newStatut = $('select[@name=statut] > option[@selected]').attr('value');
+                                currentStatut = newStatut;
+                            }
+                        });
+                    }
+                });
+                </script>
+EOS;
+            $data .= $script;
+            break;
+    }
     $data .= fin_cadre_relief(true);
 
     return $data;
