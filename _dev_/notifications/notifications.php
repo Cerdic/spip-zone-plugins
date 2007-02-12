@@ -46,7 +46,7 @@ function Notifications_spip_signatures($x) {
 		$sujet = _L("Nouvelle signature pour la petition ").typo(supprimer_numero($a['titre']));
 
 		$texte = $sujet
-			. "\n\n***"
+			. "\n\n** "
 			. url_absolue($url)
 			. "\n"
 			. "\nNom: ". $x['data']['nom_email']
