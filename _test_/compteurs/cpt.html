@@ -1,0 +1,28 @@
+#CACHE{0}
+<html>
+<head>
+<title>compteur de dw vodeo</title>
+</head>
+<body>
+<BOUCLE_session(SESSION){admin}>
+<h1>compteur de dw vodeo</h1>
+<!-- [(#COMPTEUR{vodeo,2380}|var_export{1})]
+/ [(#COMPTEUR{vodeo,2381}|var_export{1})]
+/ [(#COMPTEUR{vodeo}|var_export{1})]
+-->
+
+<?php $total=0; ?>
+D&eacute;tail :
+<ul>
+<BOUCLE_cpt(EUREKA_COMPTEURS){type=vodeo}>
+<li>vid&eacute;o #ID : #NB</li>
+<?php $total+=#NB; ?>
+</BOUCLE_cpt>
+</ul>
+
+<br>Total : <?php echo $total; ?>
+</BOUCLE_session>
+pas admin ...
+<//B_session>
+</body>
+</html>
