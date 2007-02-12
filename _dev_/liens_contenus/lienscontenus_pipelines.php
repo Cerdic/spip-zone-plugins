@@ -23,12 +23,22 @@ function lienscontenus_post_edition($flux)
 	if ($type_objet == 'syndic') {
     	$type_objet = 'site';
 	}
+
+    // On recupere les donnees en base
+    include_spip('base/abstract_sql');
+    if ($type_objet == 'site') {
+        $query = 'SELECT * FROM spip_syndic WHERE id_syndic='._q($id_objet);
+    } else {
+        $query = 'SELECT * FROM spip_'.$type_objet.'s WHERE id_'.$type_objet.'='._q($id_objet);
+    }
+    $res = spip_query($query);
+    $row = spip_fetch_array($res);
+    
 	// Traitement des redirections
-	if ($type_objet == 'article' && substr($flux['data']['chapo'], 0, 1) == '=') {
-        // TODO : Argh, le chapo n'est pas dans le flux quand c'est une redirection... :(
-		$flux['data']['chapo'] = '[->'.substr($flux['data']['chapo'], 1).']';
+	if ($type_objet == 'article' && substr($row['chapo'], 0, 1) == '=') {
+		$row['chapo'] = '[->'.substr($row['chapo'], 1).']';
 	}
-	$contenu = join(' ',$flux['data']);
+	$contenu = join(' ',$row);
 	lienscontenus_referencer_liens($type_objet, $id_objet, $contenu);
 
 	return $flux;
