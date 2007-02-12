@@ -218,7 +218,9 @@ jQuery.fn.activatecrayon = function() {
             jQuery(me)
             .cancelcrayon();
           }
-          if (((e.charCode||e.keyCode) == 115) && e.ctrlKey) { // ctrl-s pour sauver (Firefox)
+          // Ctrl-s ou Ctrl-Maj-S (Firefox) ou F8 pour sauver
+          if (((((e.charCode||e.keyCode) == 115) || ((e.charCode||e.keyCode) == 83))
+           && e.ctrlKey) || (!e.charCode && e.keyCode == 119)) {
             jQuery(me)
             .find("form.formulaire_spip")
             .submit();
