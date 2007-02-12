@@ -208,41 +208,33 @@ function lienscontenus_boite_liste($type_objet, $id_objet)
                     // on recupere le statut actuel et le code par defaut du onchange
                     var initialStatut = $('select[@name=statut_nouv] > option[@selected]').attr('value');
                     var currentStatut = initialStatut;
-                    var currentOnChange = $('select[@name=statut_nouv]').attr('onchange').replace('/this/', '$(\'select[@name=statut_nouv]\')');
+                    var select = $('select[@name=statut_nouv]')[0];
+                    var currentOnChange = select.onchange;
                 
                     // on supprime le onchange par defaut
-                    /*
-                    Cela ne marche pas ???
-                    $('select[@name=statut_nouv]').unbind('change');
-                    */
-                    $('select[@name=statut_nouv]').removeAttr('onchange');
+                    select.onchange = null;
                 
                     // on gere un onchange specifique
                     $('select[@name=statut_nouv]').bind('change', function(event) {
                         // Si le statut initial etait "publie" et s'il y a au moins un contenu publie qui pointe vers lui, on demande confirmation
                         if ((initialStatut == 'publie') && (currentStatut == 'publie') && ($('#liens_contenus_contenants > li.publie').size() > 0)) {
                             if (confirm(messageConfirmation)) {
+                                // changement confirme
                                 var newStatut = $('select[@name=statut_nouv] > option[@selected]').attr('value');
                                 currentStatut = newStatut; 
-                                /*
-                                Cela ne marche pas... :(
-                                eval(currentOnChange);
-                                */
-                                $('select[@name=statut_nouv]').next("img").attr('src', '../dist/images/' + puce_statut(newStatut));
-                                setvisibility('valider_statut', 'visible');
+                                // on execute le onchange initial
+                                currentOnChange.apply(this);
                             } else {
+                                // on ne change pas, finalement
                                 $('select[@name=statut_nouv] > option[@selected]').removeAttr('selected');
                                 $('select[@name=statut_nouv] > option[@value=publie]').attr('selected', 'selected');
                             }
                         } else {
+                            // pas de probleme pour changer
                             var newStatut = $('select[@name=statut_nouv] > option[@selected]').attr('value');
                             currentStatut = newStatut;
-                            /*
-                            Cela ne marche pas... :(
-                            eval(currentOnChange);
-                            */
-                            $('select[@name=statut_nouv]').next("img").attr('src', '../dist/images/' + puce_statut(newStatut));
-                            setvisibility('valider_statut', 'visible');
+                            // on execute le onchange initial
+                            currentOnChange.apply(this);
                         }
                     });
                 });
