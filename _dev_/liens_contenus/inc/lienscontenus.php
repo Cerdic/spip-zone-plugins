@@ -273,6 +273,67 @@ EOS;
 EOS;
             $data .= $script;
             break;
+        case 'site':
+            $script = <<<EOS
+                <script language="javascript" type="text/javascript">
+                $(document).ready(function() {
+                    // on recupere le statut actuel
+                    if ($('select[@name=nouveau_statut]')) {
+                        var initialStatut = $('select[@name=nouveau_statut] > option[@selected]').attr('value');
+                        var currentStatut = initialStatut;
+                    
+                        // on gere un onchange specifique
+                        $('select[@name=nouveau_statut]').bind('change', function(event) {
+                            // Si le statut initial etait "publie" et s'il y a au moins un contenu publie qui pointe vers lui, on demande confirmation
+                            if ((initialStatut == 'publie') && (currentStatut == 'publie') && ($('#liens_contenus_contenants > li.publie').size() > 0)) {
+                                if (confirm(messageConfirmation)) {
+                                    var newStatut = $('select[@name=nouveau_statut] > option[@selected]').attr('value');
+                                    currentStatut = newStatut; 
+                                } else {
+                                    $('select[@name=nouveau_statut] > option[@selected]').removeAttr('selected');
+                                    $('select[@name=nouveau_statut] > option[@value=publie]').attr('selected', 'selected');
+                                }
+                            } else {
+                                var newStatut = $('select[@name=nouveau_statut] > option[@selected]').attr('value');
+                                currentStatut = newStatut;
+                            }
+                        });
+                    }
+                });
+                </script>
+EOS;
+            $data .= $script;
+            break;
+        case 'auteur':
+            $script = <<<EOS
+                <script language="javascript" type="text/javascript">
+                $(document).ready(function() {
+                    // on recupere le statut actuel
+                    if ($('select[@name=statut]')) {
+                        var initialStatut = $('select[@name=statut] > option[@selected]').attr('value');
+                        var currentStatut = initialStatut;
+                    
+                        // on gere un onchange specifique
+                        $('select[@name=statut]').bind('change', function(event) {
+                            // Si le statut initial n'etait pas "5poubelle" et s'il y a au moins un contenu publie qui pointe vers lui, on demande confirmation
+                            var newStatut = $('select[@name=statut] > option[@selected]').attr('value');
+                            if ((initialStatut != '5poubelle') && (newStatut == '5poubelle') && ($('#liens_contenus_contenants > li.publie').size() > 0)) {
+                                if (confirm(messageConfirmation)) {
+                                    currentStatut = newStatut; 
+                                } else {
+                                    $('select[@name=statut] > option[@selected]').removeAttr('selected');
+                                    $('select[@name=statut] > option[@value='+currentStatut+']').attr('selected', 'selected');
+                                }
+                            } else {
+                                currentStatut = newStatut;
+                            }
+                        });
+                    }
+                });
+                </script>
+EOS;
+            $data .= $script;
+            break;
     }
     $data .= fin_cadre_relief(true);
 

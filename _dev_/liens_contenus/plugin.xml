@@ -8,7 +8,7 @@ Ce plugin (pour SPIP 1.9.2+) permet d'identifier les liens d&eacute;finis entre 
 
 Reste &agrave; faire :
 -* Utiliser le nouveau syst&egrave;me standard d'installation et mise &agrave; jour
--* Etendre le controle de depublication aux sites, auteurs, documents, mots clefs
+-* Etendre le controle de depublication aux documents et mots clefs
 -* Etendre le controle de depublication aux actions dans les listes
 -* Proposer une option de configuration pour interdire la suppression d'objets li&eacute;s depuis des objets en ligne ou juste alerter
 -* Initialisation progressive en cron pour les gros sites
