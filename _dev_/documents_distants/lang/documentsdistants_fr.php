@@ -5,7 +5,8 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'importer' 		=>	"Importer massivement des documents distants",
 'explicatif'	=>	"Notez ici la liste des documents distants que vous souhaitez importer, chaque document distant est séparé par un point virgule",
-'attribuer'		=>	'Attribués à'
+'attribuer'		=>	'Attribués à',
+'retourner'		=>'Y retourner'
 
 );
 

@@ -5,12 +5,14 @@ function exec_documents_distants(){
 	global $id;
 	global $type_lien;
 	global $valider;
-	echo $valider;
-	$commencer_page= charger_fonction('commencer_page', 'inc');
+	global $retour;
+	//echo $retour;
 	if ($valider)
-		{importer_document($documents,$type_lien,$id);
-		echo "spiup";
+		{importer_document($documents,$type_lien,$id,$retour);
 		}
+	
+	$commencer_page= charger_fonction('commencer_page', 'inc');
+	
 	include_spip('public/assembler');
 	echo $commencer_page($titre=_T('documentsdistants:importer'));
 	
@@ -21,7 +23,7 @@ function exec_documents_distants(){
 	debut_cadre_formulaire();
 	echo gros_titre(_T('documentsdistants:importer'));
 	
-	echo recuperer_fond('documents_distants');
+	echo recuperer_fond('documents_distants',Array('id'=>$id,'type_lien'=>$type_lien,'retour'=>$retour));
 	fin_cadre_formulaire();
 	
 	echo fin_gauche();
@@ -29,7 +31,7 @@ function exec_documents_distants(){
 	}
 
 
-function importer_document($documents_distants,$type_lien,$id)
+function importer_document($documents_distants,$type_lien,$id,$retour)
 	{
 	$tableau =explode(";",$documents_distants);
 	if (!($documents_distants and $id)){return;}
@@ -52,7 +54,16 @@ function importer_document($documents_distants,$type_lien,$id)
 		marquer_indexer('spip_documents', $dernier_document);
 			
 		}
+	
+	if($retour="oui") {
+		include_spip('inc/headers');
+		$type_lien == 'articles' ?  $url = './?exec=articles&id_article='.$id: pass ;
+		$type_lien == 'rubriques' ? $url = './?exec=naviguer&id_rubrique='.$id : pass;
+		$type_lien == 'breves' 	 ?	$url = './?exec=breves_voir&id_breve='.$id : pass;
 		
+		
+		redirige_par_entete($url); //pas sur
+		}
 	}
 
 ?>

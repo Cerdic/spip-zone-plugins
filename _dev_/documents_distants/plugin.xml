@@ -24,6 +24,11 @@ _ &copy; 2006 - Licence GPL
 	<pipeline>
 		<nom>ajouter_boutons</nom>
         <inclure>documents_distants_pipelines.php</inclure>
+        <action>ajouter_boutons</action>
 	</pipeline>
-	
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>documents_distants_pipelines.php</inclure>
+		<action>affiche_gauche</action>
+	</pipeline>
 </plugin>

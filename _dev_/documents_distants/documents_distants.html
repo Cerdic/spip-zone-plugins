@@ -6,14 +6,15 @@
 	<br />
 	
 	<label><:documentsdistants:attribuer:>
-		<select name='type_lien'>
-		<option value="articles"><:info_article:></option>
-		<option value="rubriques"><:info_rubriques:></option>
-		<option value="breves"><:info_breves_02:></option>
+		<select  name='type_lien'>
+		<option [(#ENV{type_lien}|=={articles}|?{selected="selected"})] value="articles"><:info_article:></option>
+		<option [(#ENV{type_lien}|=={rubriques}|?{selected="selected"})] value="rubriques"><:info_rubriques:></option>
+		<option [(#ENV{type_lien}|=={breves}|?{selected="selected"})] value="breves"><:info_breves_02:></option>
 		</select> 
 	</label>
 	
-	<label><:id:><input type="texte" name="id" /></label>
-		
+	<label><:id:><input [value="(#ENV{id})"] type="texte" name="id" /></label>
+	<label><input type="checkbox" name="retour" value="oui" [(#ENV{retour}|?{checked="checked"})]/><:documentsdistants:retourner:></label>	
 	<input type="submit" name="valider" value="<:bouton_enregistrer:>" />
+	
 </form>
