@@ -9,6 +9,8 @@ _ Le plugin défini deux balises :
 -* une balise #COMPTEUR{type, id, categ} pour récupérer le contenu courant d'un compteur, sou sla forme d'un tableau de 2 entrées : montant total, nombre d'ajouts.
 
   Ainsi, pour gérer un vote 'oui/non', on peut faire des #COMPTEUR_PLUS{article, 42, vote, 1} ou #COMPTEUR_PLUS{article, 42, vote, -1}. #COMPTEUR_PLUS{article, 42, vote} renverra alors un tableau avec le total des montant (0 signifiant 50%/50%) et le nombre de votes.
+
+{{installation}} : il faut créer la table compteurs, via le script compteurs.sql
 	</description>
 
 	<options>compteurs_opt.php</options>

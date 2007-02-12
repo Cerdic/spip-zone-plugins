@@ -29,7 +29,7 @@ function balise_COMPTEUR_PLUS($p) {
 	}
 
 	$p->code = "compteur_plus($donnee, $id, $categ, $montant)";
-	////"((\$row=spip_abstract_fetsel('total, nb', 'eureka_compteurs', array(array('=', 'type', '\''.$donnee.'\''), array('=', 'id', '\''.$id.'\''), array('=', 'categ', '\''.$categ.'\''))))!==false?spip_query(\"update eureka_compteurs set total=total+\".".$montant.".\", nb=nb+1 where type='\".".$donnee.".\"' and id='\".".$id.".\"' and categ='\".".$categ.".\"'\"):spip_query(\"insert into eureka_compteurs values ('\".".$donnee.".\"','\".".$id.".\"','\".".$categ.".\"','\".".$montant.".\"',1)\"))";
+	////"((\$row=spip_abstract_fetsel('total, nb', 'compteurs', array(array('=', 'type', '\''.$donnee.'\''), array('=', 'id', '\''.$id.'\''), array('=', 'categ', '\''.$categ.'\''))))!==false?spip_query(\"update compteurs set total=total+\".".$montant.".\", nb=nb+1 where type='\".".$donnee.".\"' and id='\".".$id.".\"' and categ='\".".$categ.".\"'\"):spip_query(\"insert into compteurs values ('\".".$donnee.".\"','\".".$id.".\"','\".".$categ.".\"','\".".$montant.".\"',1)\"))";
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -55,7 +55,7 @@ function balise_COMPTEUR($p) {
 			$where[]= "array('=', 'categ', '\''.$categ.'\'')";
 		}
 
-		$p->code= "((\$row= spip_abstract_fetsel('sum(total) as total, sum(nb) as nb', 'eureka_compteurs', array(".join(',', $where).")))?\$row:array(0,0))";
+		$p->code= "((\$row= spip_abstract_fetsel('sum(total) as total, sum(nb) as nb', 'compteurs', array(".join(',', $where).")))?\$row:array(0,0))";
 		$p->interdire_scripts = false;
 		return $p;
 	} else {
