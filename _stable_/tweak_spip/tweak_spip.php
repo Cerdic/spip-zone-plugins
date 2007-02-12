@@ -297,7 +297,7 @@ function tweak_exclure_balises($balises, $fonction, $texte){
 // transforme un chemin d'image relatif en chemin html absolu
 function tweak_htmlpath($relative_path) {
 	$realpath = str_replace("\\", "/", realpath($relative_path));
-	$root = $_SERVER['DOCUMENT_ROOT'];
+	$root = preg_replace(',/$,', '', $_SERVER['DOCUMENT_ROOT']);
 	if (strlen($root) && strpos($realpath, $root)===0) 
 		return substr($realpath, strlen($root));
 	$dir = dirname(!empty($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] :

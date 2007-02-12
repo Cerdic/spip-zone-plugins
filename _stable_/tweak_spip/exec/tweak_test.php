@@ -51,7 +51,7 @@ tweak_log("Début : exec_tweak_test()");
 	// test de tweak_htmlpath()
 	$relative_path = dirname(find_in_path('img/smileys/test'));
 	$realpath = str_replace("\\", "/", realpath($relative_path));
-	$root = $_SERVER['DOCUMENT_ROOT'];
+	$root = preg_replace(',/$,', '', $_SERVER['DOCUMENT_ROOT']);
 	$test_result=substr($realpath, strlen($root));
 	$dir = dirname(!empty($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] :
 			(!empty($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : 
@@ -62,6 +62,7 @@ tweak_log("Début : exec_tweak_test()");
 			'SCRIPT_NAME'=>$_SERVER['SCRIPT_NAME'],
 			'PHP_SELF'=>$_SERVER['PHP_SELF'],
 			'__FILE__'=>__FILE__,
+			'$root'=>$root,
 			"find_in_path('img/smileys/test')"=>find_in_path('img/smileys/test'),
 			"dirname(find_in_path('img/smileys/test'))"=>$relative_path,
 			"str_replace('\\', '/', realpath('$relative_path'))"=>$realpath,
