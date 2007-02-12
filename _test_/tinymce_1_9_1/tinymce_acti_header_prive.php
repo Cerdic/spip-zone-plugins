@@ -21,11 +21,11 @@ function tinymce_acti_header_prive($flux) {
 		supprimer_fichier(_DIR_RACINE.'/IMG/tinymce_archive.zip');
 		
 		//dézippe les plugins filemanager et ibrowser
-		$zip = new PclZip(_DIR_RACINE.'/IMG/filemanager.zip');
-		$zip->extract(_DIR_TINYMCE_FILES.'/plugins/');
-		$zip = new PclZip(_DIR_RACINE.'/IMG/ibrowser.zip');
-		$zip->extract(_DIR_TINYMCE_FILES.'/plugins/');
-		
+		$zip = new PclZip(_DIR_PLUGIN_TINYMCE.'/files/filemanager.zip');
+		$zip->extract(_DIR_TINYMCE_FILES.'/plugins');
+		$zip = new PclZip(_DIR_PLUGIN_TINYMCE.'/files/ibrowser.zip');
+		$zip->extract(_DIR_TINYMCE_FILES.'/plugins');
+echo '<!--'._DIR_TINYMCE_FILES.'/plugins'.'-->';
 		//télécharge les packages de langues TinyMCE nécessaires sur le web (si on veut autre chose que l'Anglais)
 		if (!empty(${_PLUGIN_TINYMCE_LANGUAGES_PACK_VARNAME})) {
 			$zip_content = spip_file_get_contents(_PLUGIN_TINYMCE_LANGUAGES_URL.'?dlang[]='.implode('&dlang[]=',${_PLUGIN_TINYMCE_LANGUAGES_PACK_VARNAME}).'&format=zip&submit=Download', 'force');
