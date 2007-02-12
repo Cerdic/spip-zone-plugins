@@ -234,7 +234,7 @@ function qcm_inserer_les_qcm(&$chaine, $indexJeux, $gestionPoints) {
 function jeux_qcm($texte, $indexJeux) {
   // initialisation  
   global $qcms, $qcm_score;
-  $indexQCM = $qcm_score = 0;
+  $qcms = array(); $indexQCM = $qcm_score = 0;
   $qcms['nbquestions'] = $qcms['totalscore'] = $qcms['totalpropositions'] = 0;
   $titre = $horizontal = $vertical = $solution = $html = false;
 
