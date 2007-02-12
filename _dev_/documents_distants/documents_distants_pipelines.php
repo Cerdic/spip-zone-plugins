@@ -9,13 +9,14 @@ function documents_distants_ajouter_boutons($boutons_admin){
 function documents_distants_affiche_gauche($flux){
 	include_spip('public/assembler');
 	
-	if (in_array($flux['args']['exec'],array('articles')) and $flux['args']['id_article'])		{
+	if (in_array($flux['args']['exec'],array('articles')) and $flux['args']['id_article'] and $GLOBALS['meta']['documents_article']=='oui')		{
 					$flux['data'].=recuperer_fond('lien_documents_distants',Array('type_lien'=>'articles','id'=>$flux['args']['id_article']));
 	
 				
 	}
+	
 	//rubriques
-	if (in_array($flux['args']['exec'],array('rubriques_edit')) and $flux['args']['id_rubrique'])		{
+	if (in_array($flux['args']['exec'],array('rubriques_edit')) and $flux['args']['id_rubrique'] and $GLOBALS['meta']['documents_rubrique']=='oui')		{
 					$flux['data'].=recuperer_fond('lien_documents_distants',Array('type_lien'=>'rubriques','id'=>$flux['args']['id_rubrique']));
 	
 				

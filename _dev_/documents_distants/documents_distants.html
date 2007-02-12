@@ -4,13 +4,12 @@
 	<textarea name='documents' rows='40' cols='80'></textarea>
 	
 	<br />
-	
-	<label><:documentsdistants:attribuer:>
+		<label><:documentsdistants:attribuer:>
 		<select  name='type_lien'>
-		<option [(#ENV{type_lien}|=={articles}|?{selected="selected"})] value="articles"><:info_article:></option>
-		<option [(#ENV{type_lien}|=={rubriques}|?{selected="selected"})] value="rubriques"><:info_rubriques:></option>
-		<option [(#ENV{type_lien}|=={breves}|?{selected="selected"})] value="breves"><:info_breves_02:></option>
-		</select> 
+		[(#CONFIG{documents_article}|=={oui}|?{<option [(#ENV{type_lien}|=={articles}|?{selected="selected"})] value="articles"><:info_article:></option>})]
+		[(#CONFIG{documents_rubrique}|=={oui}|?{<option [(#ENV{type_lien}|=={rubriques}|?{selected="selected"})] value="rubriques"><:info_rubriques:></option>})]
+		[(#CONFIG{activer_breves}|=={oui}|?{<option [(#ENV{type_lien}|=={breves}|?{selected="selected"})] value="breves"><:info_breves_02:></option>
+		</select>})]
 	</label>
 	
 	<label><:id:><input [value="(#ENV{id})"] type="texte" name="id" /></label>
