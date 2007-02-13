@@ -1,0 +1,27 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+		Edit Table /!\ USE THIS PLUGIN AT YOUR OWN RISK /!\
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+		Crowf00t ::  /!\ USE THIS PLUGIN AT YOUR OWN RISK /!\
+_ &copy; 2006 - Distribu&eacute; sous licence GPL
+	</auteur>
+	<version> <!-- Version du plugin -->
+		0.0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+		experimental
+	</etat>
+	<description>
+		Ce plugin permet d'&eacute;diter les tables de la base de donn&eacute;e sur laquelle spip est install&eacute;.
+	</description>
+	<lien>http://www.spip-contrib.net</lien> <!-- URI de documentation -->
+	<prefix> 
+	edittable
+	</prefix>
+	<pipeline>
+		<nom>ajouter_boutons</nom> 
+		<action>ajouter_boutons</action>
+		<inclure>edittable_admin.php</inclure>
+	</pipeline>
+</plugin>
