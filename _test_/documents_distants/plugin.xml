@@ -1,19 +1,19 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	Document distant
+	Importer massivement des documents distants
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 	Maïeul Rouquette (maieulrouquette @ tele2.fr)
-_ &copy; 2006 - Licence GPL
+_ &copy; 2007 - Licence GPL
 	</auteur>
 	<version>
-	0
+	1.0
 	</version>
 	<etat>
-	dev
+	test
 	</etat>
 	<description>
-	Plugin chargé d'importer massivement des document distant
+	Plugin chargé d'importer massivement des documents distants. A partir de la [page suivante->?exec=documents_distants] 
 	</description>
 	
 
