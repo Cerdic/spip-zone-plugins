@@ -54,7 +54,7 @@ function lienscontenus_affiche_droite($flux)
     lienscontenus_verifier_version_base();
     
     $exec = $flux['args']['exec'];
-    $liste_pages = array(
+    $liste_pages_unitaires = array(
         'naviguer' => array('rubrique', 'id_rubrique'),
         'articles' => array('article', 'id_article'),
         'breves_voir' => array('breve', 'id_breve'),
@@ -65,9 +65,13 @@ function lienscontenus_affiche_droite($flux)
         'forms_edit' => array('form', 'id_form')
         // TODO : Ajouter les autres
         );
-    if (isset($liste_pages[$exec])) {
-        $type = $liste_pages[$exec];
+    if (isset($liste_pages_unitaires[$exec])) {
+        $type = $liste_pages_unitaires[$exec];
         $flux['data'] .= lienscontenus_boite_liste($type[0], $flux['args'][$type[1]]);
+    }
+    $fonction = 'lienscontenus_verification_'.$exec;
+    if (function_exists($fonction)) {
+        $flux['data'] .= $fonction();
     }
     return $flux;
 }
