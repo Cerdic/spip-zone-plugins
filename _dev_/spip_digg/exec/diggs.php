@@ -6,6 +6,8 @@
 include_spip("inc/presentation");
 
 function exec_diggs(){
+	global $connect_statut;
+	global $connect_toutes_rubriques;
 	echo debut_page(_T('spipdigg:spip_diggs'));
 		echo debut_gauche();
 			echo debut_boite_info();
@@ -44,8 +46,24 @@ function exec_diggs(){
 			echo '<br /><b><a href="'.$contenu_digg['url_digg'].'">'.$contenu_digg['url_digg'].'</a></b>';
 			echo '<br /><br />';
 			
-			
-			
+			debut_cadre_trait_couleur();
+			$res_secu_rubrique = spip_query("SELECT diggs.id_auteur FROM spip_diggs diggs WHERE diggs.id_auteur = '".$GLOBALS['auteur_session']['id_auteur']."';");
+			if ($res_secu_rubrique OR $connect_statut == '0minirezo' OR $connect_toutes_rubriques){
+				echo '<form action="" method="">';
+				echo _T('spipdigg:ce_digg_est').'&nbsp;';
+				echo '<select name="statut" >';
+				echo '<option value="prepa" >'._T('spipdigg:en_preparation').'</option>';
+				echo '<option value="prop" >'._T('spipdigg:popose').'</option>';
+				if ($connect_statut == 'Ominirezo' OR $connect_toutes_rubriques) {
+					echo '<option value="publie" >'._T('spipdigg:publie').'</option>';
+					echo '<option value="refuse" >'._T('spipdigg:refuse').'</option>';
+					echo '<option value="poubelle" >'._T('spipdigg:a_la_poubelle').'</option>';
+				}
+				echo '</select>';
+				echo '<input type="submit" value="'._T('spipdigg:modifier').'" />';
+				echo '</form>';
+			}
+			fin_cadre_trait_couleur();
 			
 			echo '<b>'._T('spipdigg:descriptif_digg').'</b><br />';
 			echo propre($contenu_digg['descriptif']);
