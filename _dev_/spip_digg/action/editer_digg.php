@@ -1,18 +1,20 @@
 <?php
 //
-// action/editer_digg.php
+// action/editer_digg.php 
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip("inc/presentation");
 
 function action_editer_digg_dist(){	
+
 	$insert = false;
 	$id_digg = _request('id_digg');
 	$id_rubrique = _request('id_rubrique');
 	$id_secteur = '';
+	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+	
 	if ($id_digg == "new") {
-		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 		if (lire_meta('spipdigg_type_moderation')  != 0)  { $date_validation = "0000-00-00 00:00:00"; }else{ $date_validation = "CURRENT_TIMESTAMP"; }
 		$sql_insert_digg = "INSERT INTO spip_diggs SET id_digg='', titre='".addslashes(_request('titre'))."', descriptif='".addslashes(_request('texte'))."', url_digg='".addslashes(_request('url_digg'))."', id_rubrique='".$id_rubrique."', id_secteur='".$id_secteur."', date=CURRENT_TIMESTAMP, date_modif=CURRENT_TIMESTAMP, hits='0', points='0', date_validation='".$date_validation."', statut='prepa';";
 		$res_insert_digg = spip_query($sql_insert_digg);
