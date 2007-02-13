@@ -1,6 +1,6 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-		Spip-Digg : Un moteur de digg pour Spip 1.9.1++
+		Spip-Digg
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
 		Crowf00t et collectif 
@@ -13,7 +13,8 @@
 		experimental
 	</etat>
 	<description>
-		Ce plugin permet de gérer des ?digg à la facon de [Scoopeo->http://www.scoopeo.com/].
+		Spip-digg est un moteur de digg pour Spip 1.9.1++
+		Ce plugin permet de gérer des digg à la facon de [Scoopeo->http://www.scoopeo.com/].
 	</description>
 	<lien>http://www.spip-contrib.net</lien> <!-- URI de documentation -->
 	<prefix> 
