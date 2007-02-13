@@ -57,10 +57,9 @@ function autoriser_form_insererdonnee_dist($faire, $type, $id_form, $qui, $opt) 
 	return true;
 }
 
-// Code a rapatrier dans inc-public et inc_forms
-// (NB : le reglage du cookie doit se faire avant l'envoi de tout HTML au client)
-function Forms_poser_cookie_sondage() {
-	if ($id_form = intval($_POST['id_form'])) {
+// le reglage du cookie doit se faire avant l'envoi de tout HTML au client
+function Forms_poser_cookie_sondage($id_form) {
+	if ($id_form = intval($id_form)) {
 		$nom_cookie = $GLOBALS['cookie_prefix'].'cookie_form_'.$id_form;
 		// Ne generer un nouveau cookie que s'il n'existe pas deja
 		if (!$cookie = $_COOKIE[$nom_cookie]) {
@@ -77,14 +76,13 @@ function Forms_generer_url_sondage($id_form) {
 	return generer_url_public("sondage","id_form=$id_form",true);
 }
 
-if (isset($GLOBALS['ajout_reponse']) && $GLOBALS['ajout_reponse'] == 'oui' &&
-		isset($GLOBALS['ajout_cookie_form']) && $GLOBALS['ajout_cookie_form'] == 'oui')
-	Forms_poser_cookie_sondage();
+if ((intval(_request('ajout_reponse'))) && (_request('ajout_cookie_form') == 'oui'))
+	Forms_poser_cookie_sondage(_request('ajout_reponse'));
 
 // test si un cookie sondage a ete pose
 foreach($_COOKIE as $cookie=>$value){
-	if (preg_match(",".$GLOBALS['cookie_prefix']."cookie_form_([0-9]+),",$cookie)){
-		$idf = preg_replace(",".$GLOBALS['cookie_prefix']."cookie_form_([0-9]+),","\\1",$cookie);
+	if (preg_match(",".$GLOBALS['cookie_prefix']."cookie_form_([0-9]+),",$cookie,$reg)){
+		$idf = intval($reg[1]);
 		$res = spip_query("SELECT id_article FROM spip_forms_articles WHERE id_form=".intval($idf));
 		while($row=spip_fetch_array($res)){
 			$ida = $row['id_article'];

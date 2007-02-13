@@ -53,7 +53,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 	$formactif = (_DIR_RESTREINT==_DIR_RESTREINT_ABS || preg_match(',donnees_edit$,',_request('exec')))?' ':'';
 
 	$id_donnee = $id_donnee?$id_donnee:intval(_request('id_donnee'));
-	$flag_reponse = (_request('ajout_reponse') == 'oui' && _request('id_form') == $id_form) && _request('nobotnobot')=='';
+	$flag_reponse = (_request('ajout_reponse') == $id_form) && (_request('nobotnobot')=='');
 	if ($flag_reponse) {
 		include_spip('inc/forms');
 		$url_validation = Forms_enregistrer_reponse_formulaire($id_form, $id_donnee, $erreur, $reponse, $script_validation, $id_article?"id_article=$id_article":"");
