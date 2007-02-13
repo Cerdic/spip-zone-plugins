@@ -48,19 +48,21 @@ function importer_document($documents_distants,$type_lien,$id,$retour)
 	include_spip('inc/indexation');
 	foreach ($tableau as $documents_distants){
 		
+		if ($infos=recuperer_infos_distantes($documents_distants)){
 		
-		$infos=recuperer_infos_distantes($documents_distants);
 		
-		$request='INSERT INTO  `spip_documents` (`fichier`,`titre`,`taille`,`date`,`largeur`,`distant`,`hauteur`,`mode`,`id_type`) VALUES ("'.$documents_distants.'","'.$infos['titre'].'","'.$infos['taille'].'",NOW(),"'.$infos['largeur'].'","oui","'.$infos['hauteur'].'","document","'.$infos['id_type'].'") ; 
-		  ';
-		 
-		 spip_query($request); // il doit y avoir moyen de se servir de  spip_mysql_insert(), si quelqu'un sait comment ...
-		$dernier_document = spip_insert_id();
-				
-		spip_query('INSERT INTO  `spip_documents_'.$type_lien.'` VALUES ("'.$dernier_document.'","'.$id.'")');
 		
-		marquer_indexer('spip_documents', $dernier_document);
+			$request='INSERT INTO  `spip_documents` (`fichier`,`titre`,`taille`,`date`,`largeur`,`distant`,`hauteur`,`mode`,`id_type`) VALUES ("'.$documents_distants.'","'.$infos['titre'].'","'.$infos['taille'].'",NOW(),"'.$infos['largeur'].'","oui","'.$infos['hauteur'].'","document","'.$infos['id_type'].'") ; 
+			  ';
+			 
+			 spip_query($request); // il doit y avoir moyen de se servir de  spip_mysql_insert(), si quelqu'un sait comment ...
+			$dernier_document = spip_insert_id();
+					
+			spip_query('INSERT INTO  `spip_documents_'.$type_lien.'` VALUES ("'.$dernier_document.'","'.$id.'")');
 			
+			marquer_indexer('spip_documents', $dernier_document);
+		}
+		
 		}
 	
 	if($retour="oui") {
