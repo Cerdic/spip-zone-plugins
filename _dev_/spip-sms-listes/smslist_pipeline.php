@@ -1,4 +1,13 @@
 <?php
+/*
+ * Spip SMS Liste
+ * Gestion de liste de diffusion de SMS
+ *
+ * Auteur :
+ * Cedric Morin
+ * (c) 2007 - Distribue sous licence GNU/GPL
+ *
+ */
 
 function smslist_ajouter_boutons($boutons_admin) {
 	// si on est admin

@@ -1,13 +1,11 @@
 <?php
 /*
- * forms
- * Gestion de formulaires editables dynamiques
+ * Spip SMS Liste
+ * Gestion de liste de diffusion de SMS
  *
- * Auteurs :
- * Antoine Pitrou
+ * Auteur :
  * Cedric Morin
- * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * (c) 2007 - Distribue sous licence GNU/GPL
  *
  */
 

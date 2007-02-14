@@ -1,4 +1,13 @@
 <?php
+/*
+ * Spip SMS Liste
+ * Gestion de liste de diffusion de SMS
+ *
+ * Auteur :
+ * Cedric Morin
+ * (c) 2007 - Distribue sous licence GNU/GPL
+ *
+ */
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 

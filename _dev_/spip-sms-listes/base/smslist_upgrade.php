@@ -1,4 +1,13 @@
 <?php
+/*
+ * Spip SMS Liste
+ * Gestion de liste de diffusion de SMS
+ *
+ * Auteur :
+ * Cedric Morin
+ * (c) 2007 - Distribue sous licence GNU/GPL
+ *
+ */
 
 	include_spip('inc/meta');
 	
