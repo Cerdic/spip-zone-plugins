@@ -23,6 +23,7 @@ function exec_edittable_edit(){
 			$contenu_edittable = spip_fetch_array($res_edittable);
 			
 			echo debut_cadre_formulaire();
+			echo '<form action="'.lire_meta('adresse_site').'/spip.php" method="post" >';
 			if (_request('new') == "oui") {
 				echo '<input type="hidden" name="id_article" value="new" />';
 			}else{
@@ -30,6 +31,13 @@ function exec_edittable_edit(){
 			}
 			//var_dump($contenu_edittable);
 			editer_tableau_div($contenu_edittable);
+			echo '<input type="hidden" name="action" value="edittable_save" />
+				<input type="hidden" name="valeur_cle" value="'._request('valeur_cle').'" />
+				<input type="hidden" name="table" value="'._request('table').'" />
+				<input type="hidden" name="colonne_cle" value="'._request('colonne_cle').'" />
+				<input type="hidden" value="'.lire_meta('adresse_site').'/ecrire/?exec=edittable_voir&amp;valeur_cle='._request('valeur_cle').'&amp;table='._request('table').'&amp;colonne_cle='._request('colonne_cle').'" name="redirect" />
+				<div align="right"><input type="submit" value="'._T('edittable:enregistrer').'" class="fondo"/></div>
+				</form>';
 			echo fin_cadre_formulaire();
 			
 			

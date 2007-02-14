@@ -48,7 +48,7 @@ function exec_edittable(){
 			
 			echo '<br />';
 			
-			$res_structure_table = spip_query(" SHOW INDEX FROM "._request('table').";");
+			$res_structure_table = spip_query(" DESC "._request('table').";");
 			debut_cadre_formulaire();
 			while ($row_structure = spip_fetch_array($res_structure_table)){
 				afficher_tableau($row_structure);

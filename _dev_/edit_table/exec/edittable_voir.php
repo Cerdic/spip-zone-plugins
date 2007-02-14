@@ -15,14 +15,14 @@ function exec_edittable_voir(){
 				echo '<a href="?exec=listetable">'._T('edittable:mes_edittable').'</a>';
 			echo fin_raccourcis();
 		echo debut_droite();
-
+			if(_request('sql_command')) echo '<br />'._request('sql_command').'<br />';
 			$sql_edittable = "SELECT * FROM "._request('table')." WHERE "._request('colonne_cle')." = '"._request('valeur_cle')."';";
 			$res_edittable = spip_query($sql_edittable);
 			$contenu_edittable = spip_fetch_array($res_edittable);
 			
 			echo debut_cadre_trait_couleur();
 				echo '<form action="?exec=edittable_edit&valeur_cle='._request('valeur_cle').'&table='._request('table').'&colonne_cle='._request('colonne_cle').'" method="post">
-				<input type=submit value="'._T('adittable:edite_enregistrement').'" />
+				<div align="right"><input type=submit value="'._T('adittable:edite_enregistrement').'" class="fondo"/></div>
 				</form>';
 			afficher_tableau_div($contenu_edittable);
 			echo fin_cadre_trait_couleur();
