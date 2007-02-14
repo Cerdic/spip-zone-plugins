@@ -180,20 +180,28 @@ function BarreTypoEnrichie_post_propre($texte) {
 
 function BarreTypoEnrichie_pre_typo($texte) {
 	$chercher_raccourcis = array(
+		/* 7 */ 	"/(?<![{])[{][{](?![{])/S", // Expressions complexes car on n'a pas encore traite les titres ici
+		/* 8 */ 	"/(?<![}])[}][}](?![}])/S", // En gros, verification qu'on n'est pas a l'interieur d'un titre
+		/* 9 */ 	"/(?<![{\d])[{](?![{\d])/S", // puisque gras et italique utilisent les memes caracteres en nombre inferieur
+		/* 10 */	"/(?<![}\d])[}](?![}\d])/S",
 		/* 13 */ 	"/<-->/S",
 		/* 14 */ 	"/-->/S",
 		/* 15 */ 	"/<--/S",
 		/* 16 */ 	"/<==>/S",
 		/* 17 */ 	"/==>/S",
 		/* 18 */ 	"/<==/S",
-		/* 19 */ 	"/\([cC]\)/S",
-		/* 20 */ 	"/\([rR]\)/S",
-		/* 21 */ 	"/\([tT][mM]\)/S",
+		/* 19 */ 	"/\(c\)/Si",
+		/* 20 */ 	"/\(r\)/Si",
+		/* 21 */ 	"/\(tm\)/Si",
 		/* 22 */ 	"/\.\.\./S",
 		/* 23 */	"/\[([^|?][^][]*)\|((?:[^][](?!->))*)\]/S"
 	);
 
 	$remplacer_raccourcis = array(
+		/* 7 */ 	"<strong class=\"spip\">",
+		/* 8 */ 	"</strong>",
+		/* 9 */ 	"<i class=\"spip\">",
+		/* 10 */	"</i>",
 		/* 13 */ 	"&harr;",
 		/* 14 */ 	"&rarr;",
 		/* 15 */ 	"&larr;",
