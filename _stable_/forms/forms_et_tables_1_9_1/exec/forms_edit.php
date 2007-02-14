@@ -49,7 +49,7 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 	$prefixei18n = 'forms';
 	$is_form = 	in_array($row['type_form'],array('','sondage'));
 	if (!$is_form)
-		$prefixei18n = $row['type_form'];
+		$prefixei18n = str_replace("_","",$row['type_form']);
 
 	$out = "";
 

@@ -64,7 +64,7 @@ function affichage_donnees_tous($type_form, $titre_page, $titre_type, $titre_ajo
 		$retour = generer_url_ecrire($type_form.'s_tous');
 	echo "<table><tr><td>";
 	echo "<div style='float:left;'>";
-	echo icone_horizontale(_T('icone_retour'), urldecode($retour), "../"._DIR_PLUGIN_FORMS."img_pack/$type_form-24.png", "rien.gif",false);
+	echo icone_horizontale(_T('icone_retour'), urldecode($retour), find_in_path("img_pack/$type_form-24.png"), "rien.gif",false);
 	echo "</div>";
 	$url_edit = generer_url_ecrire('donnees_edit',"id_form="._request('id_form'));
 	$url_edit = parametre_url($url_edit,'retour',urlencode(self()));

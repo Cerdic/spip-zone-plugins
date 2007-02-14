@@ -247,7 +247,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 	$prefixei18n = 'forms';
 	$is_form = 	in_array($row['type_form'],array('','sondage'));
 	if (!$is_form)
-		$prefixei18n = $row['type_form'];
+		$prefixei18n = str_replace("_","",$row['type_form']);
 	
 	$out = "";
 	if (!$id_form) return $out;
@@ -435,8 +435,8 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$prefixei18n = 'forms';
 	$is_form = 	in_array($row['type_form'],array('','sondage'));
 	if (!$is_form)
-		$prefixei18n = $row['type_form'];
-	
+		$prefixei18n = str_replace("_","",$row['type_form']);
+
 	$out = "";
 	$out .= "<p>";
 	$out .= Forms_debut_cadre_formulaire('',true);
