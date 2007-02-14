@@ -48,7 +48,7 @@ function exec_forms_telecharger(){
 		if (!$row)	acces_interdit();
 		
 		$fichier = $row['valeur'];
-		if ((strpos($fichier, "..")!==FALSE) || !preg_match(',^'._DIR_IMG.',', $fichier))
+		if ((strpos($fichier, "..")!==FALSE) || !preg_match(',^'._DIR_IMG.',', _DIR_RACINE.$fichier))
 			acces_interdit();
 
 		$filename = basename($fichier);
