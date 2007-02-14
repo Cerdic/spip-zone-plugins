@@ -183,12 +183,15 @@ jQuery.fn.activatecrayon = function() {
           .iconecrayon();
         jQuery(me)
           .cancelcrayon();
-      }}).one('submit', function(){
+      }})
+      .one('submit', function(){
         jQuery(this)
         .append(configCrayons.mkimg('searching')) // icone d'attente
         .find(".crayon-boutons")
           .hide(); // boutons de validation
-      }).keyup(function(e){
+      })
+      // keyup pour les input et textarea ...
+      .keyup(function(e){
         jQuery(this)
         .find(".crayon-boutons")
           .show();
@@ -196,6 +199,12 @@ jQuery.fn.activatecrayon = function() {
         .prev()
           .addClass('crayon-changed');
         e.cancelBubble = true; // ne pas remonter l'evenement vers la page
+      })
+      // ... change pour les select : ici on submit direct, pourquoi pas
+      .change(function(e){
+        jQuery(me)
+        .find("form.formulaire_spip")
+        .submit();
       })
       .keypress(function(e){
         e.cancelBubble = true; // ne pas remonter l'evenement vers la page

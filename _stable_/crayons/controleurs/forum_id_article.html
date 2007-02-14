@@ -1,0 +1,15 @@
+[(#REM)
+
+	Controleur pour le crayon 'forum-id_article'
+
+]
+#CACHE{0}
+
+<BOUCLE_b(FORUMS){id_forum}{statut==.}{id_article>0}>
+<select class="crayon-active" name="#ENV{name_id_article}">
+<BOUCLE_a(ARTICLES)>
+<option value="#ID_ARTICLE"[
+	(#ID_ARTICLE|=={#_b:ID_ARTICLE}|?{selected})]>#ID_ARTICLE - [(#TITRE|couper{30})]</option>
+</BOUCLE_a>
+</select>
+</BOUCLE_b>
