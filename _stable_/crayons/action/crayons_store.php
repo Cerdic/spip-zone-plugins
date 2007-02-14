@@ -127,7 +127,10 @@ function action_crayons_store_dist() {
 		if (!isset($updates[$type])) {
 			// MODELE
 			$fun = '';
-			switch($type) {
+
+			if (function_exists($f = 'modeles_'. $modele))
+				$fun = $f;
+			else switch($type) {
 				case 'article':
 				    $fun = 'crayons_update_article';
 				    break;
@@ -257,8 +260,9 @@ function action_crayons_store_dist() {
     exit;
 }
 
-
+//
 // Fonctions de mise a jour
+//
 function crayons_update_article($id_article, $c = false) {
 	include_spip('action/editer_article');
 
@@ -272,7 +276,14 @@ function crayons_update_article($id_article, $c = false) {
 		unset ($c['id_rubrique']);
 	}
 	instituer_article($id_article, $c);
+}
 
+// TODO:
+// Ce modele est cense enregistrer les tags sous forme de ??
+// une ligne dans un champ spip_articles.tags, et/ou des mots-clés...
+function modeles_tags($id, $c) {
+	var_dump($id); #id_article
+	var_dump($c); # perturbant : ici on a array('id_article'=>'valeur envoyee')
 }
 
 ?>
