@@ -231,9 +231,9 @@ tweak_log(" -- lecture metas - \$rand = $rand");
 	}
 	if (isset($GLOBALS['meta']['tweaks_pipelines'])) {
 		$tweaks_metas_pipes = unserialize($GLOBALS['meta']['tweaks_pipelines']);
-tweak_log(" -- tweaks_metas_pipes = ".join(', ',array_keys($tweaks_metas_pipes)));
-tweak_log(''); $c=count(unserialize($GLOBALS['meta']['tweaks_actifs']));
-tweak_log(" -- $c tweaks actifs".($c?" = ".join(', ',array_keys(unserialize($GLOBALS['meta']['tweaks_actifs']))):''));
+tweak_log(' -- tweaks_metas_pipes = '.join(', ',array_keys($tweaks_metas_pipes)));
+tweak_log(''); $actifs=unserialize($GLOBALS['meta']['tweaks_actifs']);
+tweak_log(' -- '.(is_array($actifs)?count($actifs):0).' tweak(s) actif(s)'.(is_array($actifs)?" = ".join(', ',array_keys($actifs)):''));
 tweak_log($forcer?"\$forcer = true":"tweak_initialisation($forcer) : Sortie car les metas sont présents - \$rand = $rand");
 		// Les pipelines sont en meta, tout va bien on peut partir d'ici.
 		if (!$forcer) return;
