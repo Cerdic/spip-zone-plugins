@@ -14,7 +14,7 @@
 include_spip('exec/template/tables_affichage');
 
 function exec_abonnes_sms_tous(){
-	echo afficher_tables_tous('smslist_abonnes',_T("smslist:toutes_listes_abonnes"),_T("smslist:listes_abonnes"),_T("smslist:icone_creer_liste"));
+	echo afficher_tables_tous('smslist_liste',_T("smslist:toutes_listes_abonnes"),_T("smslist:listes_abonnes"),_T("smslist:icone_creer_liste"));
 }
 
 ?>
