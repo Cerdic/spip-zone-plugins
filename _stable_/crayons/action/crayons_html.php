@@ -50,7 +50,9 @@ function controleur_dist($regs) {
     }
 
     $valeur = valeur_colonne_table($type, $champ, $id);
-    if ($valeur === false) {
+spip_log("    $valeur = valeur_colonne_table($type, $champ, $id);");
+spip_log($champ);
+	if ($valeur === false) {
 	    return array("$type $id $champ: " . _U('crayons:pas_de_valeur'), 6);
     }
     if (is_scalar($valeur)) {

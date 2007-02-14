@@ -1,0 +1,14 @@
+[(#REM)
+
+	Controleur pour le crayon 'id_rubrique', uniquement html
+
+]
+#CACHE{0}
+
+<BOUCLE_a(ARTICLES){id_article}{statut==.}>
+#SET{id,#ID_RUBRIQUE}
+</BOUCLE_a>
+
+
+<input class="crayon-active" name="#ENV{name_id_rubrique}"
+ style="width:#ENV{largeur}px;" value="#GET{id}" />

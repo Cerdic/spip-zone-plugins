@@ -129,8 +129,7 @@ function action_crayons_store_dist() {
 			$fun = '';
 			switch($type) {
 				case 'article':
-				    include_spip('action/editer_article');
-				    $fun = 'revisions_articles';
+				    $fun = 'crayons_update_article';
 				    break;
 				case 'breve':
 				    include_spip('action/editer_breve');
@@ -257,4 +256,23 @@ function action_crayons_store_dist() {
     echo var2js($return);
     exit;
 }
+
+
+// Fonctions de mise a jour
+function crayons_update_article($id_article, $c = false) {
+	include_spip('action/editer_article');
+
+	// Enregistrer les nouveaux contenus
+	revisions_articles($id_article, $c);
+
+	// En cas de statut ou de id_rubrique
+	// NB: instituer_article veut id_parent, et pas id_rubrique !
+	if (isset($c['id_rubrique'])) {
+		$c['id_parent'] = $c['id_rubrique'];
+		unset ($c['id_rubrique']);
+	}
+	instituer_article($id_article, $c);
+
+}
+
 ?>
