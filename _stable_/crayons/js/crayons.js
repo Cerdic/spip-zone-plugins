@@ -202,9 +202,13 @@ jQuery.fn.activatecrayon = function() {
       })
       // ... change pour les select : ici on submit direct, pourquoi pas
       .change(function(e){
+        jQuery(this)
+        .find(".crayon-boutons")
+          .show();
         jQuery(me)
-        .find("form.formulaire_spip")
-        .submit();
+        .prev()
+          .addClass('crayon-changed');
+        e.cancelBubble = true; // ne pas remonter l'evenement vers la page
       })
       .keypress(function(e){
         e.cancelBubble = true; // ne pas remonter l'evenement vers la page
