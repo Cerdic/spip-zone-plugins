@@ -13,7 +13,7 @@
 
 include_spip('exec/template/tables_affichage');
 
-function exec_abonnes_sms_tous(){
+function exec_smslist_listes_tous(){
 	echo afficher_tables_tous('smslist_liste',_T("smslist:toutes_listes_abonnes"),_T("smslist:listes_abonnes"),_T("smslist:icone_creer_liste"));
 }
 

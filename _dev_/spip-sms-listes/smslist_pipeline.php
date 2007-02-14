@@ -7,8 +7,8 @@ function smslist_ajouter_boutons($boutons_admin) {
 	AND (!isset($GLOBALS['meta']['activer_smslist']) OR $GLOBALS['meta']['activer_smslist']!="non") ) {
 
 	  // on voit le bouton dans la barre "naviguer"
-		$boutons_admin['naviguer']->sousmenu["abonnes_sms_tous"]= new Bouton(
-		_DIR_PLUGIN_SMSLIST."images/smslist-64.png",  // icone
+		$boutons_admin['naviguer']->sousmenu["smslist_listes_tous"]= new Bouton(
+		_DIR_PLUGIN_SMSLIST."img_pack/smslist_liste-24.png",  // icone
 		_T("smslist:listes_abonnes") //titre
 		);
 	}
