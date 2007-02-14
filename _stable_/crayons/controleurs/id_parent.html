@@ -10,5 +10,10 @@
 </BOUCLE_a>
 
 
-<input class="crayon-active" name="#ENV{name_id_rubrique}"
- style="width:#ENV{largeur}px;" value="#GET{id}" />
+<select class="crayon-active" name="#ENV{name_id_rubrique}"
+ style="width:#ENV{largeur}px;" />
+<BOUCLE_r(RUBRIQUES){par num titre, titre}>
+<option value="#ID_RUBRIQUE"[
+	(#GET{id}|=={#ID_RUBRIQUE}|?{selected})]>[(#TITRE|couper{30})]</option>
+</BOUCLE_r>
+</select>
