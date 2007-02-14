@@ -63,7 +63,8 @@ function devinettes_reponse($texte, $id) {
  if (!jeux_config('reponse')) return '';
  include_spip('inc/filtrer');
  $image = image_typo($texte, 'taille='.jeux_config('taille'));
- $image = filtrer('image_graver', filtrer('image_flip_vertical', filtrer('image_flip_horizontal', $image)));
+ $image = filtrer('image_flip_vertical', filtrer('image_flip_horizontal', $image));
+ if (function_exists('image_graver')) $image = filtrer('image_graver', $image);
  $image = aligner_droite(inserer_attribut($image, 'class', 'no_image_filtrer', false, true));
  $texte = jeux_block_invisible($id, _T('jeux:reponse'), $image);
  return $texte?"<span class=\"devinettes_reponse\">$texte</span>":'';
