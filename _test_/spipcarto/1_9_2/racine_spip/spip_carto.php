@@ -39,7 +39,7 @@ e -
 # ou est l'espace prive ?
 @define('_DIR_RESTREINT_ABS', 'ecrire/');
 include_once _DIR_RESTREINT_ABS.'inc_version.php';
-
+include_spip("inc/headers");
 $fond_carte=_request("fond_carte");
 if (isset($fond_carte) && !empty($fond_carte))
 {
