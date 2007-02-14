@@ -1,0 +1,19 @@
+<plugin>
+	<nom>Spip-SMS-listes</nom>
+	<auteur>Cedric
+	_ &copy; 2006 - Distribu&#233; sous licence GNU/LGPL
+	</auteur>
+	<version>	0.1.0	</version>
+	<version_base>	0.1.0	</version_base>
+	<etat>dev</etat>
+	<description>
+	Gestion de listes de diffusion SMS
+	</description>
+	<lien></lien>
+	<prefix>smslist</prefix>
+	<install>base/smslist_upgrade.php</install>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>smslist_pipeline.php</inclure>
+	</pipeline>
+</plugin>
