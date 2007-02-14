@@ -11,7 +11,7 @@
  *
  */
 
-function snippets_forms_importer($id_form_target,$formtree,$contexte){
+function snippets_forms_importer($id_form_target,$formtree,$contexte=array()){
 	include_spip('inc/forms');
 	include_spip('base/forms');
 	include_spip('base/abstract_sql');

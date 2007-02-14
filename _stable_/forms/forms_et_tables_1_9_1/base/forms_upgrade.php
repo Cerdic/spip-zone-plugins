@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * ??? 2005,2006 - Distribue sous licence GNU/GPL
+ * (c) 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 	

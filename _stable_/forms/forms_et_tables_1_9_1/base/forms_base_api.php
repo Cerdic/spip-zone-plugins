@@ -1,0 +1,65 @@
+<?php
+/*
+ * forms
+ * Gestion de formulaires editables dynamiques
+ *
+ * Auteurs :
+ * Antoine Pitrou
+ * Cedric Morin
+ * Renato Formato
+ * (c) 2005-2007 - Distribue sous licence GNU/GPL
+ *
+ */
+
+// creation d'une table a partir de sa structure xml
+// le type est surchargŽ par $type
+// $unique : ne pas creer la table si une du meme type existe deja
+function Forms_creer_table($structure_xml,$type=NULL, $unique = true){
+	include_spip('inc/xml');
+
+	$xml = spip_xml_load($structure_xml);
+	foreach($xml as $k1=>$forms)
+		foreach($forms as $k2=>$formscont)
+			foreach($formscont as $k3=>$form)
+				foreach($form as $k4=>$formcont)
+					foreach($formcont as $prop=>$datas)
+					if ($prop=='type_form'){
+						if ($type)
+							$xml[$k1][$k2][$k3][$k4][$prop] = array($type);
+						else 
+							$type = trim(applatit_arbre($datas));
+					}
+
+	if (!$type) return;
+	if ($unique){
+		$res = spip_query("SELECT id_form FROM spip_forms WHERE type_form="._q($type));
+		if (spip_num_rows($res))
+			return;
+	}
+	// ok on peut creer la table
+	$importer = charger_fonction('importer','snippets/forms');
+	snippets_forms_importer(0,$xml);
+	return;
+}
+
+function Forms_supprimer_tables($type_ou_id){
+	if (!$id_form = intval($type_ou_id)){
+		$res = spip_query("SELECT id_form FROM spip_forms WHERE type_form="._q($type_ou_id));
+		while ($row = spip_fetch_array($res)){
+			Forms_supprimer_tables($row['id_form']);
+		}
+		return;
+	}
+	$res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form));
+	while ($row = spip_fetch_array($res)){
+		spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($row['id_donnee']));
+	}
+	spip_query("DELETE FROM spip_forms_donnees WHERE id_form="._q($id_form));
+	spip_query("DELETE FROM spip_forms_champs_choix WHERE id_form="._q($id_form));
+	spip_query("DELETE FROM spip_forms_champs WHERE id_form="._q($id_form));
+	spip_query("DELETE FROM spip_forms WHERE id_form="._q($id_form));
+	spip_query("DELETE FROM spip_forms_articles WHERE id_form="._q($id_form));
+}
+
+
+?>
