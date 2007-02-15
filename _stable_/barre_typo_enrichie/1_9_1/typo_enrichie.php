@@ -237,7 +237,7 @@ function BarreTypoEnrichie_post_typo($texte) {
 	);
 	$texte = preg_replace($cherche1, $remplace1, $texte);
 	// Acronymes
-	$texte = preg_replace('/@@acro@@([^@]*)@@([^@]*)@@acro@@/S',"<acronym title='$1' class='spip_acronym spip'>$2</acronym>",$texte); // échapement des entités html déjà présentes
+	$texte = preg_replace('/@@acro@@([^@]*)@@([^@]*)@@acro@@/S',"<acronym title='$1' class='spip_acronym spip'>$2</acronym>",$texte);
 	// Correction des & en &amp;
 	$texte = preg_replace('/&([A-Za-z#0-9]*);/','@@@amp:\1:amp@@@',$texte); // échapement des entités html déjà présentes
 	$texte = str_replace('&','&amp;',$texte);
