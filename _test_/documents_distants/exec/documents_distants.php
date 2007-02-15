@@ -48,7 +48,7 @@ function importer_document($documents_distants,$type_lien,$id,$retour)
 	include_spip('inc/indexation');
 	foreach ($tableau as $documents_distants){
 		
-		if ($infos=recuperer_infos_distantes($documents_distants)){
+		if ($infos=recuperer_infos_distantes(trim($documents_distants))){
 		
 		
 		
