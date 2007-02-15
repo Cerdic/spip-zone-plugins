@@ -30,7 +30,7 @@ function exec_edittable_edit(){
 				echo '<input type="hidden" name="id_article" value="'.$contenu_edittable['id_titre'].'" />';
 			}
 			//var_dump($contenu_edittable);
-			editer_tableau_div($contenu_edittable);
+			afficher_tableau_complex_div($contenu_edittable,_request('table'));
 			echo '<input type="hidden" name="action" value="edittable_save" />
 				<input type="hidden" name="valeur_cle" value="'._request('valeur_cle').'" />
 				<input type="hidden" name="table" value="'._request('table').'" />
