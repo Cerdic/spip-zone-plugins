@@ -21,7 +21,7 @@ function balise_GRAVATAR_dyn($email, $size, $gravatar_default) {
 	$md5_email = md5($email);
 	$gravatar_cache = sous_repertoire(_DIR_VAR, 'cache-gravatar').$md5_email;
 
-	if(!file_exists($gravatar_cache)) {
+	if(!file_exists($gravatar_cache) OR time()-3600*24 > filemtime($gravatar_cache)) {
 		$gravatar = recuperer_page('http://www.gravatar.com/avatar.php?gravatar_id='.$md5_email.'&amp;size='.$size);
 		if($gravatar) {
 			$file = fopen($gravatar_cache, "w+");

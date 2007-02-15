@@ -1,9 +1,14 @@
 <plugin>
 	<nom>Gravatar</nom>
 	<auteur>Thomas Beaumanoir - [Clever Age->http://www.clever-age.com]</auteur>
-	<version>0.2</version>
+	<icon>img_pack/gravatar.gif</icon>
+	<version>0.3</version>
 	<etat>dev</etat>
-	<description>Globally Recognized AVATAR</description>
+	<description>
+Permet d'utiliser un cache pour stocker les gravatars
+_ A utiliser dans une boucle de cette manière : <code>#GRAVATAR{email, taille, url image par défaut}</code>
+_ Exemple : <code>#GRAVATAR{#EMAIL,80,#URL_SITE_SPIP/defaut-gravatar.gif}</code>
+	</description>
 	<lien>[Gravatar->http://www.gravatar.com]</lien>
 	<prefix>gravatar</prefix>
 </plugin>
