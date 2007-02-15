@@ -21,6 +21,25 @@ function afficher_tableau_div($tableau){
 	echo '</div>';
 }
 
+function afficher_tableau_complex_div($tableau,$table){
+	$res_desc_table = spip_query("DESC ".$table.";");
+	$desc_table = spip_fetch_array($res_desc_table);
+	echo '<div>';
+	while ($description_table = mysql_fetch_array($res_desc_table)){
+		switch ($description_table['Type']){
+		
+			case 'longblob' :
+				echo $description_table['Field'].'<br />';
+				echo'<textarea style="width: 480px;" class="forml" rows="5" cols="40" name='.$description_table['Field'].'>'.$tableau[$description_table['Field']].'</textarea><br />';
+				break;
+				
+			default :
+				echo '<div><b>'.$description_table['Field'].'</b><br /><input type="text" class="formo" value="'.$tableau[$description_table['Field']].'" name="'.$description_table['Field'].'" /></div><br />';
+		
+		}
+	}
+	echo '</div>';
+}
 
 function afficher_tableau_test($tableau){
 	//echo '<table>';
