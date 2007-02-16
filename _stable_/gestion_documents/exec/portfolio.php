@@ -134,8 +134,14 @@ function exec_portfolio(){
 	else
 		$nombre_documents = 0;
 
-
-	$requete = array('SELECT'=>'docs.*','FROM'=>'spip_documents AS docs','JOIN'=>"",'WHERE'=>"1=1",'ORDER'=>"docs.id_document DESC");
+	// lister les vignettes
+	$res = spip_query("SELECT id_vignette FROM spip_documents WHERE id_vignette>0");
+	$vignettes = array();
+	while ($row = spip_fetch_array($res))
+		$vignettes[] = $row['id_vignette'];
+	$in_vignettes = calcul_mysql_in('id_document',join(',',$vignettes),'NOT');
+		
+	$requete = array('SELECT'=>'docs.*','FROM'=>'spip_documents AS docs','JOIN'=>"",'WHERE'=>$in_vignettes,'ORDER'=>"docs.id_document DESC");
 
 	if ($conteneur){
 		$requete['JOIN'] = "spip_documents_$conteneur AS L on L.id_document=docs.id_document";
