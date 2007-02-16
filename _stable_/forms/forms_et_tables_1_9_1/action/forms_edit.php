@@ -46,6 +46,10 @@ function Forms_update_edition_champ($id_form,$champ) {
 			if ($id_groupe = intval(_request('groupe_champ')))
 				$extra_info = $id_groupe;
 		}
+		if ($type == 'joint') {
+			if ($type_table = _request('type_table'))
+				$extra_info = $type_table;
+		}
 		if ($type == 'fichier') {
 			$extra_info = intval(_request('taille_champ'));
 		}

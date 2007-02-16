@@ -87,6 +87,25 @@
 		}
 	}
 
+	function forms_type_table_lier($type,$id){
+		$type_table = 'table';
+		if ($type == 'donnee'){
+			$id = explode('-',$id);
+			$id_donnee_source = $id[0];
+			$champ = $id[1];
+			$id_form = 0;
+			$res = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
+			if($row = spip_fetch_array($res))
+				$id_form = $row['id_form'];
+			$res = spip_query("SELECT extra_info FROM spip_forms_champs WHERE id_form=".q($id_form)." AND champ="._q($champ));
+			if($row = spip_fetch_array($res))
+				$type_table = $row['extra_info'];
+		}
+		return $type_table;
+	}
+	function forms_prefixi18n($type_table){
+		return $prefixi18n = str_replace("_","",strtolower($type_table));
+	}
 	function Forms_csvimport_ajoute_table_csv($data, $id_form, $assoc_field, &$erreur, $simu = false){
 		include_spip('inc/forms_type_champs');
 		$assoc = array_flip($assoc_field);

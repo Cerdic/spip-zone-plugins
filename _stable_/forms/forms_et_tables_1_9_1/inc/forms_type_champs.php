@@ -48,7 +48,7 @@
 
 	function Forms_liste_types_champs(){
 		$types_etendus = array_keys($GLOBALS['forms_types_champs_etendus']);
-		return array_merge(array('ligne', 'texte', 'date', 'email', 'url', 'select', 'multiple', 'fichier', 'mot','separateur','textestatique'),$types_etendus);
+		return array_merge(array('ligne', 'texte', 'date', 'email', 'url', 'select', 'multiple', 'fichier', 'mot','joint','separateur','textestatique'),$types_etendus);
 	}
 	function Forms_type_champ_autorise($type) {
 		static $t;
@@ -70,6 +70,7 @@
 				'multiple' => _T("forms:champ_type_multiple"),
 				'fichier' => _T("forms:champ_type_fichier"),
 				'mot' => _T("forms:champ_type_mot"),
+				'joint' => _T("forms:champ_type_joint"),
 				'separateur' => _T("forms:champ_type_separateur"),
 				'textestatique' => _T("forms:champ_type_textestatique")
 			);

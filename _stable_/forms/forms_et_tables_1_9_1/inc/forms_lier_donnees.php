@@ -39,7 +39,7 @@ function inc_forms_lier_donnees($type, $id, $script, $deplie=false){
 		$icone = find_in_path("img_pack/$type_table-24.png");
 	if (!$icone)
 		$icone = find_in_path("img_pack/table-24.gif");
-	$out .= debut_cadre_enfonce($icone, true, "", $bouton._T("$prefixi18n:tables"));
+	$out .= debut_cadre_enfonce($icone, true, "", $bouton._T("$prefixi18n:type_des_tables"));
 
 	$lesdonnees = array();
 	//
@@ -58,26 +58,6 @@ function inc_forms_lier_donnees($type, $id, $script, $deplie=false){
 	
 	$out .= fin_cadre_enfonce(true);
 	return $out;
-}
-
-function forms_type_table_lier($type,$id){
-	$type_table = 'table';
-	if ($type == 'donnee'){
-		$id = explode('-',$id);
-		$id_donnee_source = $id[0];
-		$champ = $id[1];
-		$id_form = 0;
-		$res = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
-		if($row = spip_fetch_array($res))
-			$id_form = $row['id_form'];
-		$res = spip_query("SELECT extra_info FROM spip_forms_champs WHERE id_form=".q($id_form)." AND champ="._q($champ));
-		if($row = spip_fetch_array($res))
-			$type_table = $row['extra_info'];
-	}
-	return $type_table;
-}
-function forms_prefixi18n($type_table){
-	return $prefixi18n = str_replace("_","",strtolower($type_table));
 }
 
 function Forms_formulaire_objet_chercher_donnee($type,$id,$les_donnees, $script, $type_table){

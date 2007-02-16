@@ -3,7 +3,8 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'tables'=> 'Tables',
+
+'type_des_tables' => 'Tables',
 'lien_retirer_donnee' => "Retirer cette donn&eacute;e",
 'articles_utilisant'=> "Articles utilisant cette table",
 'champs_formulaire'=>"Champs de la table",
