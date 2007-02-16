@@ -12,16 +12,20 @@
  */
 
 function exec_recherche_donnees(){
-	$id_article = intval(_request('id_article'));
+	$type = _request('type');
+	if (!preg_match(',[\w]+,',$type))
+		$type = 'article';
+	$id = intval(_request("id_$type"));
 	if (_request('field')=='cherche_donnee')
 		$recherche = _request('value');
 	include_spip("inc/forms_lier_donnees");
 	
+	$type_table = forms_type_table_lier($type,$id);
 	// recuperer les donnees deja liees
-	list($s,$les_donnees) = Forms_formulaire_article_afficher_donnees($id_article,"");
+	list($s,$les_donnees) = Forms_formulaire_objet_afficher_donnees($type,$id,"",$type_table);
 	
 	// recuperer les donnees que l'on peut lier
-	$liste = Forms_liste_recherche_donnees($recherche,$les_donnees);
+	$liste = Forms_liste_recherche_donnees($recherche,$les_donnees,$type_table);
 	
 	$out = "<ajaxresponse>";
 	foreach($liste as $titre=>$donnees){

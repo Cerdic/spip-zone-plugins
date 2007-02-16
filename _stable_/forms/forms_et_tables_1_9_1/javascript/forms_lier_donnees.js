@@ -61,7 +61,7 @@ var fadeOutSuggestion = function(suggestionBox, suggestionIframe){
 	$(suggestionBox).fadeTo(300,0);
 };*/
 var setDonnee = function(data) {
-	$('#_id_donnee').val(data.id_donnee);
+	$('#_id_donnee_liee').val(data.id_donnee);
 };
 
 $(document).ready(function(){

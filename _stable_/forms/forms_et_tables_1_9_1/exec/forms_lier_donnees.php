@@ -12,9 +12,12 @@
  */
 
 function exec_forms_lier_donnees(){
-	$id_article = intval(_request('id_article'));
+	$type = _request('type');
+	if (!preg_match(',[\w]+,',$type))
+		$type = 'article';
+	$id = intval(_request("id_$type"));
 	$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
-	$out = $forms_lier_donnees($id_article, _request('script'), true);
+	$out = $forms_lier_donnees($type,$id, _request('script'), true);
 	ajax_retour($out);
 }
 
