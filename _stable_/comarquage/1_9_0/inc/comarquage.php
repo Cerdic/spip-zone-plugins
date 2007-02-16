@@ -54,8 +54,8 @@ if (!isset($GLOBALS['meta']['comarquage_default_xsl_file'])){
 function & comarquage_compile_page_xml($parametres,$url_base){
 	// regarder si la page parsee est en cache et valide
 	comarquage_prepare_parametres_cache($parametres,$url_base);
-	if ($page =& comarquage_lire_cache($parametres))
-	  return $page;
+	if ($ma_page =& comarquage_lire_cache($parametres))
+	  return $ma_page;
 
 	// sinon la parser
 
@@ -78,17 +78,17 @@ function & comarquage_compile_page_xml($parametres,$url_base){
 	if (isset($parametres['motcle'])) $parametres_xsl['MOTCLE'] = $parametres['motcle'];
 	$parametres_xsl['REFERER'] = $url_base;
 	
-	$page =& comarquage_transforme_fichier_xml($parametres['xml_full_path'],$parametres['xsl_full_path'], $parametres_xsl);
-	if ($page === FALSE) {
+	$ma_page =& comarquage_transforme_fichier_xml($parametres['xml_full_path'],$parametres['xsl_full_path'], $parametres_xsl);
+	if ($ma_page === FALSE) {
 		comarquage_error("le processeur XSLT a retourné une erreur fatale; l'action ne peut pas continuer");
 		return -40;
 	}
 	
-	$page = implode("\n", $page)."\n";
+	$ma_page = implode("\n", $ma_page)."\n";
 	// ecrire le fichier cache pour le prochain coup
-	ecrire_fichier ($parametres['cache_full_path'], $page);
+	ecrire_fichier ($parametres['cache_full_path'], $ma_page);
 	
-	return $page;
+	return $ma_page;
 }
 
 // rapatrier tout le contenu necessaire pour effectuer le rendu
@@ -97,8 +97,8 @@ function comarquage_prepare_fichiers_xml($parametres, $profondeur = 2){
 	if (isset($parsed[$parametres['xml_full_path']]))
 		return $parsed[$parametres['xml_full_path']];
 
-	$page ="";
-	$mise_a_jour = comarquage_lire_xml($parametres, $page);
+	$ma_page ="";
+	$mise_a_jour = comarquage_lire_xml($parametres, $ma_page);
 	if ($mise_a_jour == FALSE){
 		$parsed[$parametres['xml_full_path']] = FALSE;
 		return FALSE;
@@ -106,7 +106,7 @@ function comarquage_prepare_fichiers_xml($parametres, $profondeur = 2){
 	$parsed[$parametres['xml_full_path']] = TRUE;
 	
 	if ($profondeur>0 && $mise_a_jour !==FALSE && $parametres['xml']{0} != 'M') {
-		$liste_ressources = comarquage_extraire_ressources($parametres['xml_full_path'], $page);
+		$liste_ressources = comarquage_extraire_ressources($parametres['xml_full_path'], $ma_page);
     if ($liste_ressources !== FALSE) 
 			foreach ($liste_ressources as $v){
 				$pars = array_merge($parametres, array('xml' => $v,'xml_full_path' => dirname($parametres['xml_full_path']).'/'.$v));
@@ -125,11 +125,11 @@ function comarquage_prepare_fichiers_xml($parametres, $profondeur = 2){
  
 // recuperer toutes les ressouces associees a un fichier xml
 // dans un tableau
-function comarquage_extraire_ressources($fichier_xml, $page){
+function comarquage_extraire_ressources($fichier_xml, $ma_page){
 	$liste_ressources=array();
 	include_spip('inc/plugin');
 	include_spip('inc/filtres');
-	$arbre = parse_plugin_xml($page);
+	$arbre = parse_plugin_xml($ma_page);
 	if (is_array($arbre)){
 		$arbre = reset($arbre); // prendre le noeud racine
 		$arbre = $arbre[0];
@@ -186,15 +186,15 @@ function & comarquage_lire_cache($parametres) {
 		filemtime($fichier) > filemtime($parametres['xml_full_path']) &&
 		filemtime($fichier) > filemtime(dirname($parametres['xsl_full_path']))) {
 		
-		$page = "";
-		if (lire_fichier ($fichier, $page))
-			return $page;
+		$ma_page = "";
+		if (lire_fichier ($fichier, $ma_page))
+			return $ma_page;
 	}
 	
 	return FALSE;
 }
 
-function & comarquage_lire_xml($parametres, &$page) {
+function & comarquage_lire_xml($parametres, &$ma_page) {
 	$fichier = $parametres['xml_full_path'];
 	// on ne recharge pas la page ici du moment qu'elle n'est pas trop vieille
 	// la reactualisation des pages est réalisée preferentiellement par tache cron
@@ -211,7 +211,7 @@ function & comarquage_lire_xml($parametres, &$page) {
 		if ($ok==FALSE) return FALSE;
 		$mise_a_jour = 10;
 	}
-	if (lire_fichier ($fichier, $page))
+	if (lire_fichier ($fichier, $ma_page))
 		return $mise_a_jour;
 	else
 		return FALSE;
@@ -225,12 +225,12 @@ function comarquage_recuperer_page_xml($parametres){
 	$url = "$url/".$parametres['xml'];
 	
 	include_spip('inc/distant');
-	$page = recuperer_page($url);
+	$ma_page = recuperer_page($url);
 	
-	if ($page===FALSE || !strlen($page)) return FALSE;
+	if ($ma_page===FALSE || !strlen($ma_page)) return FALSE;
 	
 	/* Return 20 if the file has been downloaded OK. */
-	ecrire_fichier($parametres['xml_full_path'],$page);
+	ecrire_fichier($parametres['xml_full_path'],$ma_page);
 	return 20;
 }
 
