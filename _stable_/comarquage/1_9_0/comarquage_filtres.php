@@ -15,16 +15,16 @@ include_spip('inc/comarquage');
 function comarquage_run($parametres_defaut){
 	$url_base = preg_replace(',\?.*$,','',self()); 
 	$parametres =& comarquage_parametres($parametres_defaut,$url_base);
-	$page =& comarquage_compile_page_xml($parametres,$url_base);
+	$ma_page =& comarquage_compile_page_xml($parametres,$url_base);
 	
-	if (!is_string($page)) {
-		if ($page == -20)
-			$page = _T('comarquage:avis_serveur_indisponible');
+	if (!is_string($ma_page)) {
+		if ($ma_page == -20)
+			$ma_page = _T('comarquage:avis_serveur_indisponible');
 		else
-			$page = _T('comarquage:avis_erreur');
+			$ma_page = _T('comarquage:avis_erreur');
 	}
 	
-	return $page;
+	return $ma_page;
 }
 
 // recuperer les parametres specifiques au comarquage et les autres
