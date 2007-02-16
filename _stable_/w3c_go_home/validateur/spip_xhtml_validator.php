@@ -11,10 +11,10 @@ function validateur_spip_xhtml_validator_dist($action, $url= ""){
 			return "SPIP XHTML Validator";
 			break;
 		case 'test':
-			$page = recuperer_page($url);
-			if (!$page)
+			$ma_page = recuperer_page($url);
+			if (!$ma_page)
 				return array(false,"404","404");
-			$sax = $transformer_xml($page, false);
+			$sax = $transformer_xml($ma_page, false);
 			$erreurs = (strlen($GLOBALS['xhtml_error'])>0);
 			$texte = _T("w3cgh:erreur");
 			$ok = false;
