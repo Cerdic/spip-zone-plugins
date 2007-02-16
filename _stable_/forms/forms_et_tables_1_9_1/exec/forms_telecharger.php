@@ -94,6 +94,7 @@ function exec_forms_telecharger(){
 	echo "<br />\n";
 	// Extrait de la table en commencant par les dernieres maj
 	$action = generer_action_auteur("forms_telecharger","$id_form",urlencode($retour));
+	$action = parametre_url($action,'var_mode','download'); // hack pour desactiver la compression gzip par buffer qui corromp le zip
 	echo "<form action='$action' method='POST'>";
 	echo form_hidden($action);
 	echo "<select name='delim'>\n";

@@ -57,6 +57,7 @@ function action_forms_telecharger(){
 				//
 				// S'il y a des fichiers joints, creer un ZIP
 				//
+				define( 'PCLZIP_TEMPORARY_DIR', _DIR_TMP ); // au cas ou ca n'est pas fait dans la librairie
 				include_spip("inc/pclzip");
 				include_spip("inc/session");
 			
