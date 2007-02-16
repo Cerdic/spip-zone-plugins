@@ -341,21 +341,19 @@ function lienscontenus_verification_mots_tous()
                     dataType: 'xml'
                     }).responseText;
                 motContenu = $(motContenu).text();
-                alert(motContenu);
                 var lienSupprimer = $(this).find('td:last-child > div > a');
                 lienSupprimer.addClass('lienscontenus_'+motContenu);
             });
             // on ne s'interesse qu'aux mots vers lesquels pointent d'autres contenus
-            /*
             $('tr.tr_liste > td > div > a.lienscontenus_oui').each(function() {
                 if (this.onclick) {
-                    currentOnClick = this.onclick;
+                    currentonclick = this.onclick;
                 } else {
-                	currentOnClick = false;
+                	currentonclick = false;
                 }
-                alert(currentOnClick);
+                /*
                 this.onclick = null;
-                $(this).bind('click', function(event) {
+                $(this).bind('click', { oldonclick: currentonclick }, function(event) {
                     if (confirm(messageConfirmation)) {
                         if(currentOnClick) {
                             currentOnClick.apply(this);
@@ -363,9 +361,10 @@ function lienscontenus_verification_mots_tous()
                             return true;
                         }
                     }
+                    return false;
                 });
+                */
             });
-            */
         });
         </script>
 EOS;
