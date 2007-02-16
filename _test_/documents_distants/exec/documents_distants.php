@@ -9,7 +9,7 @@ function exec_documents_distants(){
 
 	global $retour;
 	
-	$retour[0] =='oui' ? $retour = $retour[0] : $retour;
+	$retour[0] =="oui" ? $retour="oui" : ($retour == "oui" ? $retour = "d" : pass);
 	
 	if ($valider)
 		{importer_document($documents,$type_lien,$id,$retour);
@@ -37,6 +37,7 @@ function exec_documents_distants(){
 
 function importer_document($documents_distants,$type_lien,$id,$retour)
 	{
+	
 	$id2=$id;
 	settype($id,'integer');
 	settype($id,'string');// amha il y a moyen de faire plus simple
@@ -65,7 +66,8 @@ function importer_document($documents_distants,$type_lien,$id,$retour)
 		
 		}
 	
-	if($retour="oui") {
+	if($retour=="oui") {
+		
 		include_spip('inc/headers');
 		$type_lien == 'articles' ?  $url = './?exec=articles&id_article='.$id: pass ;
 		$type_lien == 'rubriques' ? $url = './?exec=naviguer&id_rubrique='.$id : pass;
