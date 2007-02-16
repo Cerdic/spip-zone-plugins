@@ -7,7 +7,7 @@ function lienscontenus_generer_url($type_objet, $id_objet)
         'rubrique' => array('naviguer', 'id_rubrique'),
         'article' => array('articles', 'id_article'),
         'breve' => array('breves_voir', 'id_breve'),
-        'site' => array('sites', 'id_syndic'),
+        'syndic' => array('sites', 'id_syndic'),
         'mot' => array('mots_edit', 'id_mot'),
         'auteur' => array('auteur_infos', 'id_auteur'),
         'form' => array('forms_edit', 'id_form')
@@ -69,8 +69,8 @@ function lienscontenus_verifier_si_existe($type_objet, $id_objet)
             break;
         default:
             include_spip('base/abstract_sql');
-            if ($type_objet == 'site') {
-                $query = 'SELECT COUNT(*) AS nb FROM spip_syndic WHERE id_syndic='._q($id_objet);
+            if (in_array($type_objet, array('syndic', 'forum'))) {
+                $query = 'SELECT COUNT(*) AS nb FROM spip_'.$type_objet.' WHERE id_'.$type_objet.'='._q($id_objet);
             } else {
                 // Marche aussi pour les formulaires (type = "form")
                 $query = 'SELECT COUNT(*) AS nb FROM spip_'.$type_objet.'s WHERE id_'.$type_objet.'='._q($id_objet);
@@ -89,8 +89,8 @@ function lienscontenus_icone_statut($type_objet, $id_objet)
 {
     $listeStatuts = array('prepa', 'prop', 'publie', 'refuse', 'poubelle');
     include_spip('base/abstract_sql');
-    if ($type_objet == 'site') {
-        $query = 'SELECT statut FROM spip_syndic WHERE id_syndic='._q($id_objet);
+    if (in_array($type_objet, array('syndic', 'forum'))) {
+        $query = 'SELECT statut FROM spip_'.$type_objet.' WHERE id_'.$type_objet.'='._q($id_objet);
     } else {
         // Marche aussi pour les formulaires (type = "form")
         $query = 'SELECT statut FROM spip_'.$type_objet.'s WHERE id_'.$type_objet.'='._q($id_objet);
@@ -111,8 +111,8 @@ function lienscontenus_statut($type_objet, $id_objet)
 {
     $listeStatuts = array('prepa', 'prop', 'publie', 'refuse', 'poubelle');
     include_spip('base/abstract_sql');
-    if ($type_objet == 'site') {
-        $query = 'SELECT statut FROM spip_syndic WHERE id_syndic='._q($id_objet);
+    if (in_array($type_objet, array('syndic', 'forum'))) {
+        $query = 'SELECT statut FROM spip_'.$type_objet.' WHERE id_'.$type_objet.'='._q($id_objet);
     } else {
         // Marche aussi pour les formulaires (type = "form")
         $query = 'SELECT statut FROM spip_'.$type_objet.'s WHERE id_'.$type_objet.'='._q($id_objet);

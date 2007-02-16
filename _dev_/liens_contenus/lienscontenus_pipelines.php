@@ -19,27 +19,20 @@ function lienscontenus_post_edition($flux)
 
 	$id_objet = $flux['args']['id_objet'];
 	$type_objet = ereg_replace("^spip_(.*[^s])s?$", "\\1", $flux['args']['table']);
-	// Cas particulier des sites
-	if ($type_objet == 'syndic') {
-    	$type_objet = 'site';
-	}
 
     // On recupere les donnees en base
     include_spip('base/abstract_sql');
-    if ($type_objet == 'site') {
-        $query = 'SELECT * FROM spip_syndic WHERE id_syndic='._q($id_objet);
-    } else {
-        $query = 'SELECT * FROM spip_'.$type_objet.'s WHERE id_'.$type_objet.'='._q($id_objet);
+    $query = 'SELECT * FROM '.$flux['args']['table'].' WHERE id_'.$type_objet.'='._q($id_objet);
+    if ($res = spip_query($query)) {
+        $row = spip_fetch_array($res);
+        
+        // Traitement des redirections
+        if ($type_objet == 'article' && substr($row['chapo'], 0, 1) == '=') {
+            $row['chapo'] = '[->'.substr($row['chapo'], 1).']';
+        }
+        $contenu = implode(' ',$row);
+        lienscontenus_referencer_liens($type_objet, $id_objet, $contenu);
     }
-    $res = spip_query($query);
-    $row = spip_fetch_array($res);
-    
-	// Traitement des redirections
-	if ($type_objet == 'article' && substr($row['chapo'], 0, 1) == '=') {
-		$row['chapo'] = '[->'.substr($row['chapo'], 1).']';
-	}
-	$contenu = join(' ',$row);
-	lienscontenus_referencer_liens($type_objet, $id_objet, $contenu);
 
 	return $flux;
 }
@@ -50,16 +43,13 @@ function lienscontenus_affiche_droite($flux)
 		return $flux;
 	}
 
-    // On verifie si la table a ete creee
-    lienscontenus_verifier_version_base();
-    
     $exec = $flux['args']['exec'];
     $liste_pages_unitaires = array(
         'naviguer' => array('rubrique', 'id_rubrique'),
         'articles' => array('article', 'id_article'),
         'breves_voir' => array('breve', 'id_breve'),
         'breves_edit' => array('breve', 'id_breve'),
-        'sites' => array('site', 'id_syndic'),
+        'sites' => array('syndic', 'id_syndic'),
         'mots_edit' => array('mot', 'id_mot'),
         'auteur_infos' => array('auteur', 'id_auteur'),
         'forms_edit' => array('form', 'id_form')

@@ -9,46 +9,15 @@
  *
  */
 
-function lienscontenus_verifier_version_base()
-{
-	static $version_base_active;
-
-	// Version de la base pour cette version du code
-	$version_base_code = 1;
-
-	if (!isset($version_base_active)) {
-		$version_base_active = isset($GLOBALS['meta']['liens_contenus_version_base']) ? intval($GLOBALS['meta']['liens_contenus_version_base']) : 0;
-	}
-
-	if ($version_base_active != $version_base_code) {
-		if ($version_base_active == 0) {
-			// Premiere installation
-			include_spip('base/create');
-            include_spip('base/abstract_sql');
-            spip_log('Creation de la base', 'liens_contenus');
-			creer_base();
-    		$version_base_active = $version_base_code;
-    		ecrire_meta('liens_contenus_version_base', $version_base_active);
-    		ecrire_metas();
-			lienscontenus_initialiser();
-		} else {
-			// Mise a jour
-            spip_log('Mise a jour de la base', 'liens_contenus');
-		}
-	}
-}
-
 function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contenant, $contenu)
 {
     spip_log('Referencer liens contenus dans '.$type_objet_contenant.' '.$id_objet_contenant.' :', 'liens_contenus');
 
-	lienscontenus_verifier_version_base();
-
     $liens_trouves = array();
 
 	// Types et aliases
-	$liens_contenus_types = array('article', 'breve', 'rubrique', 'auteur', 'document', 'mot', 'site');
-	$liens_contenus_aliases = array('art' => 'article', 'br' => 'breve', 'brève' => 'breve', 'rub' => 'rubrique', 'aut' => 'auteur', 'doc' => 'document', 'im' => 'document', 'img' => 'document', 'image' => 'document', 'emb' => 'document', 'mot' => 'mot', 'syndic' => 'site');
+	$liens_contenus_types = array('article', 'breve', 'rubrique', 'auteur', 'document', 'mot', 'syndic');
+	$liens_contenus_aliases = array('art' => 'article', 'br' => 'breve', 'brève' => 'breve', 'rub' => 'rubrique', 'aut' => 'auteur', 'doc' => 'document', 'im' => 'document', 'img' => 'document', 'image' => 'document', 'emb' => 'document', 'mot' => 'mot', 'site' => 'syndic');
 
 	// Effacer les liens connus
 	spip_query("DELETE FROM spip_liens_contenus WHERE type_objet_contenant="._q($type_objet_contenant)." AND id_objet_contenant="._q($id_objet_contenant));
@@ -87,7 +56,7 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
                 case 'article':
                 case 'rubrique':
                 case 'breve':
-                case 'site':
+                case 'syndic':
                 case 'auteur':
                 case 'mot':
                     // Les elements de base de SPIP ont des pseudo modeles automatiques
@@ -177,16 +146,14 @@ function lienscontenus_initialiser()
 	// parcourir les tables et les champs
 	foreach ($liste_tables as $table) {
 		$type_objet_contenant = ereg_replace("^spip_(.*[^s])s?$", "\\1", $table);
-        if ($type_objet_contenant == 'syndic') {
-            $type_objet_contenant = 'site';
-        }
 		$col_id = primary_index_table($table);
-		$res = spip_query("SELECT * FROM $table");
-		while ($row = spip_fetch_array($res)) {
-		    $id_objet_contenant = $row[$col_id];
-			// implode() n'est pas forcement le plus propre conceptuellement, mais ca doit convenir et c'est rapide
-			lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contenant, implode(' ', $row));
-		}
+        if ($res = spip_query("SELECT * FROM $table")) {
+            while ($row = spip_fetch_array($res)) {
+                $id_objet_contenant = $row[$col_id];
+                // implode() n'est pas forcement le plus propre conceptuellement, mais ca doit convenir et c'est rapide
+                lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contenant, implode(' ', $row));
+            }
+        }
 	}
 }
 
@@ -379,8 +346,8 @@ function lienscontenus_verification_mots_tous()
                 lienSupprimer.addClass('lienscontenus_'+motContenu);
             });
             // on ne s'interesse qu'aux mots vers lesquels pointent d'autres contenus
+            /*
             $('tr.tr_liste > td > div > a.lienscontenus_oui').each(function() {
-                /*
                 if (this.onclick) {
                     currentOnClick = this.onclick;
                 } else {
@@ -397,8 +364,8 @@ function lienscontenus_verification_mots_tous()
                         }
                     }
                 });
-                */
             });
+            */
         });
         </script>
 EOS;
