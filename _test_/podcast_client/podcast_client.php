@@ -27,9 +27,9 @@
 		//trouver un flash dailymotion
 		# <media:content url="http://www.dailymotion.com/swf/3ndb67rMbTuLh8E2i" type="application/x-shockwave-flash" duration="520" width="320" height="240"/>
 		//echo $item ;
-		if (preg_match(',(<media:content[^>]*type="application/x-shockwave-flash".*>),i',
+		if (preg_match(',(<media:content[^>]*type="video/x-flv".*>),i',
 		$data['item'], $match)) {
-			$go=str_replace(':','',$match[1]);
+			$go=str_replace('media:content','mediacontent',$match[1]);
 			
 			$data['enc_flash']['url'] = extraire_attribut($go, 'url');
 			$data['enc_flash']['duration'] = extraire_attribut($go, 'duration');
