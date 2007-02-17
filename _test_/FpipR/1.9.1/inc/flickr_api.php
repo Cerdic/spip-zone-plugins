@@ -137,6 +137,7 @@ class FlickrPhotoDetails {
   var $license;
   var $rotation;
   var $originalformat;
+  var $originalsecret;
   var $owner_nsid;
   var $owner_username;
   var $owner_realname;
@@ -168,7 +169,7 @@ class FlickrPhotoDetails {
    o	original image, either a jpg, gif or png, depending on source format
   */
   function source($size='') {
-	return "http://farm".$this->farm.".static.flickr.com/".$this->server."/".$this->id."_".$this->secret.($size?"_$size":'').'.'.(($size=='o')?$this->originalformat:'jpg');
+	return "http://farm".$this->farm.".static.flickr.com/".$this->server."/".$this->id."_".(($size=='o')?$this->originalsecret:$this->secret).($size?"_$size":'').'.'.(($size=='o')?$this->originalformat:'jpg');
   }
 
 }
@@ -184,6 +185,7 @@ class FlickrPhoto {
   var $isfriend;
   var $isfamily;
   var $originalformat;
+  var $originalsecret;
   var $license='';
   var $dateupload='';
   var $datetaken='';
@@ -205,7 +207,7 @@ class FlickrPhoto {
    o	original image, either a jpg, gif or png, depending on source format
   */
   function source($size='') {
-	return "http://farm".$this->farm.".static.flickr.com/".$this->server."/".$this->id."_".$this->secret.($size?"_$size":'').'.'.(($size=='o')?$this->originalformat:'jpg');
+	return "http://farm".$this->farm.".static.flickr.com/".$this->server."/".$this->id."_".(($size=='o')?$this->originalsecret:$this->secret).($size?"_$size":'').'.'.(($size=='o')?$this->originalformat:'jpg');
   }
 
   function url() {
