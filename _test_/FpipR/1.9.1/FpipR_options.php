@@ -15,9 +15,10 @@ function generer_url_document_flickr($id_document, $statut='') {
   $row = @spip_fetch_array(spip_query("SELECT fichier,distant	FROM spip_documents WHERE id_document = $id_document"));
   if ($row) {
 	if ($row['distant'] == 'oui') {
-	  if(preg_match('#http://static.flickr.com/(.*?)/(.*?)_(.*?)(_[stmbo])\.(jpg|gif|png)#',$row['fichier'],$matches)) {
-		$id = $matches[2];
-		$secret = $matches[3];
+	  if(preg_match('#http://(farm[0-9]*.)?static.flickr.com/(.*?)/(.*?)_(.*?)(_[stmbo])\.(jpg|gif|png)#',$row['fichier'],$matches)) {
+		$id = $matches[3];
+		$secret = $matches[4];
+		//		$farm = $matches[1];
 		include_spip('inc/flickr_api');
 		$details = flickr_photos_getInfo($id,$secret);
 		if($details->urls['photopage']) return $details->urls['photopage'];
@@ -92,12 +93,12 @@ function FpipR_logo_owner($user_id,$server = '') {
 }
 
 
-function FpipR_logo_photo($id_photo,$server,$secret,$taille='',$originalformat='jpg') {
+function FpipR_logo_photo($id_photo,$farm,$server,$secret,$taille='',$originalformat='jpg') {
   if($id_photo) {
 	$w = ($taille=='s')?75:FpipR_taille_photo($id_photo,$taille,'width');
 	$h = ($taille=='s')?75:FpipR_taille_photo($id_photo,$taille,'height');
-	if($server) {
-	  return '<img src="http://static.flickr.com/'.$server."/".$id_photo."_".$secret.($taille?"_$taille":'').'.'.(($taille=='o')?$originalformat:'jpg').'" width="'.$w.'" height="'.$h.'" style="width:'.$w.';height:'.$h.'" />';
+	if($server && ($taille != 'o')) {
+	  return '<img src="http://farm'.$farm.'.static.flickr.com/'.$server."/".$id_photo."_".$secret.($taille?"_$taille":'').'.'.(($taille=='o')?$originalformat:'jpg').'" width="'.$w.'" height="'.$h.'" style="width:'.$w.';height:'.$h.'" />';
 	} else {
 	  $src = FpipR_taille_photo($id_photo,$taille,'source');
 	  return '<img src="'.$src.'" width="'.$w.'" height="'.$h.'" style="width:'.$w.';height:'.$h.'" />';
@@ -241,17 +242,25 @@ function FpipR_photos_geo_getLocation($id_photo,$location) {
 }
 
 function FpipR_get_flickr_photo_id($fichier) {
-  if(preg_match('#http://static.flickr.com/(.*?)/(.*?)_(.*?)(_[stmbo])\.(jpg|gif|png)#',$fichier,$matches))
-		return $matches[2];
+  if(preg_match('#http://(farm[0-9]*.)?static.flickr.com/(.*?)/(.*?)_(.*?)(_[stmbo])\.(jpg|gif|png)#',$fichier,$matches))
+		return $matches[3];
 	return NULL;
 }
 
 function FpipR_get_flickr_photo_secret($fichier) {
-  if(preg_match('#http://static.flickr.com/(.*?)/(.*?)_(.*?)(_[stmbo])\.(jpg|gif|png)#',$fichier,$matches))
-		return $matches[3];
+  if(preg_match('#http://(farm[0-9]*.)?static.flickr.com/(.*?)/(.*?)_(.*?)(_[stmbo])\.(jpg|gif|png)#',$fichier,$matches))
+		return $matches[4];
   return NULL;
 	
 }
+
+function FpipR_get_flickr_photo_secret($fichier) {
+  if(preg_match('#http://(farm[0-9]*.)?static.flickr.com/(.*?)/(.*?)_(.*?)(_[stmbo])\.(jpg|gif|png)#',$fichier,$matches))
+		return $matches[1];
+  return NULL;
+	
+}
+
 
 
 function FpipR_calcul_argument_page($debut,$pas) {

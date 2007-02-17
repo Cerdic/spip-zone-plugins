@@ -12,7 +12,7 @@ function balise_LOGO_NEXTPHOTO_dist($p) {
 									$p->descr,
 									$p->boucles,
 									$p->id_boucle);
-  $p->code = "FpipR_logo_photo(FpipR_photos_getContext($id_photo,$photoset_id,$group_id,'nextphoto','id'),FpipR_photos_getContext($id_photo,$photoset_id,$group_id,'nextphoto','server'),FpipR_photos_getContext($id_photo,$photoset_id,$group_id,'nextphoto','secret'),$taille,'jpg')";	
+  $p->code = "FpipR_logo_photo(FpipR_photos_getContext($id_photo,$photoset_id,$group_id,'nextphoto','id'),FpipR_photos_getContext($id_photo,$photoset_id,$group_id,'nextphoto','farm'),FpipR_photos_getContext($id_photo,$photoset_id,$group_id,'nextphoto','server'),FpipR_photos_getContext($id_photo,$photoset_id,$group_id,'nextphoto','secret'),$taille,'jpg')";	
   return $p;
 }
 

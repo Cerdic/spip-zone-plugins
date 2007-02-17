@@ -25,13 +25,14 @@ $GLOBALS['tables_principales']['spip_auteurs']['field']['flickr_token'] = "TINYT
 // La table pour une liste de photos
 //La version du schema de table
 
-$GLOBALS['FpipR_versions']['spip_fpipr_photos'] = '0.6';
+$GLOBALS['FpipR_versions']['spip_fpipr_photos'] = '0.7';
 
 $GLOBALS['FpipR_tables']['spip_fpipr_photos_field'] = array(
 															"id_photo"  => "bigint(21) NOT NULL",
 															"user_id" => "varchar(100)", //"47058503995@N01" 
 															"secret"=> "varchar(100)", //"a123456"
 															"server"=> "int NOT NULL", //"2"
+															"farm" => "int NOT NULL",
 															"title"	=> "text DEFAULT '' NOT NULL",
 															"ispublic"=> "ENUM ('0','1') NOT NULL",
 															"isfriend"=> "ENUM ('0','1') NOT NULL",
@@ -73,12 +74,13 @@ $GLOBALS['table_des_tables']['flickr_photos_search'] = 'fpipr_photos';
 
 //Les tables pour les details de photos
 
-$GLOBALS['FpipR_versions']['spip_fpipr_photo_details'] = '0.3';
+$GLOBALS['FpipR_versions']['spip_fpipr_photo_details'] = '0.4';
 
 $GLOBALS['FpipR_tables']['spip_fpipr_photo_details_field'] = array(
 																   'id_photo' => 'bigint(21) NOT NULL',
 																   'secret' => 'varchar(100)',
 																   'server' => 'int NOT NULL',
+																   'farm' => 'int NOT NULL',
 																   'isfavorite' => "ENUM ('0','1') NOT NULL",
 																   'license' => 'smallint',
 																   'rotation' => 'smallint',
@@ -170,13 +172,14 @@ $GLOBALS['table_des_tables']['flickr_photo_urls'] = 'fpipr_urls';
 //pour les sets
 
 
-$GLOBALS['FpipR_versions']['spip_fpipr_photosets'] = '0.3';
+$GLOBALS['FpipR_versions']['spip_fpipr_photosets'] = '0.4';
 $GLOBALS['FpipR_tables']['spip_fpipr_photosets_field'] = array(
 															   "id_photoset" => "bigint(21) NOT NULL",
 															   "user_id" => 'varchar(100)',
 															   'primary_photo' => "bigint(21) NOT NULL",
 															   "secret"=> "varchar(100)", //"a123456"
 															   "server"=> "int NOT NULL", //"2"
+															   "farm" => "int NOT NULL",
 															   'photos' => 'int',
 															   "title"	=> "text DEFAULT '' NOT NULL",
 															   "description" => "text DEFAULT '' NOT NULL"
@@ -318,11 +321,12 @@ $GLOBALS['table_des_tables']['flickr_urls_lookupuser'] = 'fpipr_people';
 //======================================================================
 //EXIF
 
-$GLOBALS['FpipR_versions']['spip_fpipr_exif'] = '0.2';
+$GLOBALS['FpipR_versions']['spip_fpipr_exif'] = '0.3';
 $GLOBALS['FpipR_tables']['spip_fpipr_exif_field'] = array(
 														  'id_photo' => 'bigint(21) NOT NULL',
 														  'secret' => 'varchar(100)',
 														  'server' => 'int NOT NULL',
+														  'farm' => 'int NOT NULL',
 														  'tagspace' => 'varchar(50)',
 														  'tagspaceid' => 'int',
 														  'tag' => 'int',
@@ -375,7 +379,7 @@ function FpipR_fill_photos_table($photos,$add='') {
   $cnt = 0;
   $query = "DELETE FROM spip_fpipr_photos";
   spip_query($query);
-  $col = '(id_photo,user_id,secret,server,title,ispublic,isfriend,isfamily,originalformat,license,upload_date,taken_date,owner_name,icon_server,last_update,longitude,latitude,accuracy,rang,added_date';
+  $col = '(id_photo,user_id,secret,server,farm,title,ispublic,isfriend,isfamily,originalformat,license,upload_date,taken_date,owner_name,icon_server,last_update,longitude,latitude,accuracy,rang,added_date';
 
   if($add)
 	foreach($add as $name=>$val) {
@@ -383,7 +387,7 @@ function FpipR_fill_photos_table($photos,$add='') {
 	}
   foreach($photos as $photo) {
 	$ownername = $photo->ownername?$photo->ownername:$photo->username;
-	$vals = "("._q($photo->id).','._q($photo->owner).','._q($photo->secret).','._q($photo->server).','._q($photo->title).','._q($photo->idpublic).','._q($photo->isfriend).','._q($photo->isfamily).','._q($photo->originalformat).','._q($photo->license).','._q(date('Y-m-d H:i:s',$photo->dateupload+0)).','._q($photo->datetaken).','._q($photo->ownername).','._q($photo->iconserver).','._q(date('Y-m-d H:i:s',$photo->lastupdate+0)).','._q($photo->longitude).','._q($photo->latitude).','._q($photo->accuracy).','.$cnt++.','._q(date('Y-m-d H:i:s',$photo->dateadded+0));
+	$vals = "("._q($photo->id).','._q($photo->owner).','._q($photo->secret).','._q($photo->server).','._q($photo->farm).','._q($photo->title).','._q($photo->idpublic).','._q($photo->isfriend).','._q($photo->isfamily).','._q($photo->originalformat).','._q($photo->license).','._q(date('Y-m-d H:i:s',$photo->dateupload+0)).','._q($photo->datetaken).','._q($photo->ownername).','._q($photo->iconserver).','._q(date('Y-m-d H:i:s',$photo->lastupdate+0)).','._q($photo->longitude).','._q($photo->latitude).','._q($photo->accuracy).','.$cnt++.','._q(date('Y-m-d H:i:s',$photo->dateadded+0));
 	if($add)
 	  foreach($add as $name=>$val) {
 		$vals .= ','._q($val);

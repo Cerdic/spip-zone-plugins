@@ -9,10 +9,11 @@ function FpipR_fill_flickr_photos_getexif_dist($arguments) {
 	$id = _q($photo['id']);
 	$secret = _q($photo['secret']);
 	$server = _q($photo['server']);
+	$farm = _q($photo['farm']);
 	foreach($photo['exif'] as $e) {
 	  spip_abstract_insert('spip_fpipr_exif',
-						   '(id_photo,secret,server,tagspace,tagspaceid,tag,label,raw,clean)',
-						   '('.$id.','.$secret.','.$server.','._q($e['tagspace']).','._q($e['tagspaceid']).','._q($e['tag']).','._q($e['label']).','._q($e['raw']['_content']).','._q($e['clean']['_content']).')'
+						   '(id_photo,secret,server,farm,tagspace,tagspaceid,tag,label,raw,clean)',
+						   '('.$id.','.$secret.','.$server.','.$farm.','._q($e['tagspace']).','._q($e['tagspaceid']).','._q($e['tag']).','._q($e['label']).','._q($e['raw']['_content']).','._q($e['clean']['_content']).')'
 						   );
 	}
   }
