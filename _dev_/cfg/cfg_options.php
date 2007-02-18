@@ -47,7 +47,7 @@ function lire_config($cfg='', $def=null, $serialize=false) {
 	// pas de transcodage
 		$ret = $config;
 	}
-	return !$ret && $def ? $def : $ret;
+	return is_null($ret) && $def ? $def : $ret;
 }
 
 ?>
