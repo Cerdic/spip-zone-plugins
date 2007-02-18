@@ -26,6 +26,8 @@ $assoc = array('one' => 'element 1', 'two' => 'element 2');
 $serassoc = serialize($assoc);
 // on flingue meta a juste nos donnees
 $GLOBALS['meta'] = array(
+	'zero' => 0,
+	'zeroc' => '0',
 	'chaine' => 'une chaine',
 	'assoc' => $assoc,
 	'serie' => serialize($assoc)
@@ -41,6 +43,8 @@ $essais = array(
 	array('',            $GLOBALS['meta'], $GLOBALS['meta'], $sermeta),
 	array('/',           $GLOBALS['meta'], $GLOBALS['meta'], $sermeta),
 	array('//',          $GLOBALS['meta'], $GLOBALS['meta'], $sermeta),
+	array('zero',        0,                0),
+	array('zeroc',       '0',              '0'),
 	array('chaine',      'une chaine'),
 	array('chaine/',     'une chaine'),
 	array('chaine//',    'une chaine'),
