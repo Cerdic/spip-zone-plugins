@@ -11,7 +11,7 @@
  *
  */
 	
-	$GLOBALS['forms_base_version'] = 0.25;
+	$GLOBALS['forms_base_version'] = 0.26;
 	function Forms_structure2table($row,$clean=false){
 		$id_form=$row[id_form];
 		// netoyer la structure precedente en table
@@ -217,6 +217,13 @@
 			creer_base();
 			ecrire_meta('forms_base_version',$current_version=0.25,'non');
 		}
+		if ($current_version<0.26){
+			include_spip('base/create');
+			include_spip('base/abstract_sql');
+			creer_base();
+			echo "forms update @ 0.26<br/>";
+			ecrire_meta('forms_base_version',$current_version=0.26,'non');
+		}
 		ecrire_metas();
 	}
 	
@@ -226,6 +233,7 @@
 		spip_query("DROP TABLE spip_forms_champs_choix");
 		spip_query("DROP TABLE spip_forms_donnees");
 		spip_query("DROP TABLE spip_forms_donnees_champs");
+		spip_query("DROP TABLE spip_forms_donnees_donnees");
 		spip_query("DROP TABLE spip_forms_articles");
 		spip_query("DROP TABLE spip_forms_donnees_articles");
 		spip_query("DROP TABLE spip_forms_documents_donnees");

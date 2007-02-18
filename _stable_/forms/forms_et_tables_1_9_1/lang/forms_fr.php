@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'boite_info' => "Cliquez sur les icones pour voir les donn&eacute;es associ&eacute;es a un formulaire, l'editer, le dupliquer, l'exporter, vider les donn&eacute;es ou le supprimer.",
 
+'champ_table_jointure_type' => "Type de table pour les jointures",
 'champ_type_ligne'=>"ligne de texte",
 'champ_type_texte'=>"texte",
 'champ_type_date'=>"date",
@@ -29,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'champ_type_multiple'=>"choix multiple",
 'champ_type_fichier'=>"fichier &agrave; t&eacute;l&eacute;charger",
 'champ_type_mot'=>"mots-cl&eacute;s",
+'champ_type_joint'=>'jointure avec une autre table',
 'champ_type_separateur'=>"Nouveau bloc de questions",
 'champ_type_textestatique'=>"Message d'explication",
 'champ_email_details'=>"Veuillez entrer une adresse e-mail valide (de type vous@fournisseur.com).",

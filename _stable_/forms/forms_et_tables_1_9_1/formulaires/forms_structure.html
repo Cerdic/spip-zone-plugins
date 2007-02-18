@@ -1,6 +1,6 @@
 <BOUCLE_form(FORMS){id_form=#ENV{id_form}}>
 #SET{need_fieldset,1} #SET{date-picker,0}
-<BOUCLE_champs(FORMS_CHAMPS){id_form}{tout}{par rang}>
+<BOUCLE_champs(FORMS_CHAMPS){id_form}{tout}{type!=joint}{par rang}>
 [(#ENV{affiche_sondage})
 <fieldset><legend>#_form:TITRE</legend>
 <:forms:sondage_deja_repondu:>

@@ -139,7 +139,7 @@ $spip_forms_articles_key = array(
 	"KEY id_form" 	=> "id_form",
 	"KEY id_article" => "id_article");
 
-$tables_principales['spip_forms_articles'] = array(
+$tables_auxiliaires['spip_forms_articles'] = array(
 	'field' => &$spip_forms_articles,
 	'key' => &$spip_forms_articles_key);
 	
@@ -151,9 +151,21 @@ $spip_forms_donnees_articles_key = array(
 	"KEY id_donnee" 	=> "id_donnee",
 	"KEY id_article" => "id_article");
 
-$tables_principales['spip_forms_donnees_articles'] = array(
+$tables_auxiliaires['spip_forms_donnees_articles'] = array(
 	'field' => &$spip_forms_donnees_articles,
 	'key' => &$spip_forms_donnees_articles_key);
+
+$spip_forms_donnees_donnees = array(
+	"id_donnee" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+	"id_donnee_liee" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+
+$spip_forms_donnees_donnees_key = array(
+	"KEY id_donnee" 	=> "id_donnee",
+	"KEY id_donnee_liee" => "id_donnee_liee");
+
+$tables_auxiliaires['spip_forms_donnees_donnees'] = array(
+	'field' => &$spip_forms_donnees_donnees,
+	'key' => &$spip_forms_donnees_donnees_key);
 
 $spip_documents_donnees = array(
 		"id_document"	=> "BIGINT (21) DEFAULT '0' NOT NULL",

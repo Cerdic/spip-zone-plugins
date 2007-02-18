@@ -42,9 +42,9 @@
 		if ($exec=='articles'){
 			$id_article = $flux['args']['id_article'];
 			$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
-			$flux['data'] .= "<div id='forms_lier_donnees'><div id='forms_lier_donnees-$id_article'>";
+			$flux['data'] .= "<div id='forms_lier_donnees'>";
 			$flux['data'] .= $forms_lier_donnees('article',$id_article, $exec);
-			$flux['data'] .= "</div></div>";
+			$flux['data'] .= "</div>";
 		}
 		return $flux;
 	}
@@ -63,7 +63,7 @@
 		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/date_picker.css' type='text/css' media='all' />\n";
 		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/jtip.css' type='text/css' media='all' />\n";
 		$flux .= "<script type='text/javascript'><!--\n var ajaxcharset='utf-8';\n//--></script>";
-		if (_request('exec')=='articles'){
+		if (in_array(_request('exec'),array('articles','donnees_edit'))){
 			$flux .= "<script src='".find_in_path('javascript/iautocompleter.js')."' type='text/javascript'></script>\n"; 
 			$flux .= "<script src='".find_in_path('javascript/interface.js')."' type='text/javascript'></script>\n"; 
 			if (!_request('var_noajax'))

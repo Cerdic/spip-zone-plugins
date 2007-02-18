@@ -22,15 +22,21 @@ function inc_forms_lier_donnees($type, $id, $script, $deplie=false){
 
 	$type_table = forms_type_table_lier($type, $id);
 	$prefixi18n = forms_prefixi18n($type_table);
+	$lesdonnees = array();
+	//
+	// Afficher les donnees liees, rangees par tables
+	//
+	list($s,$les_donnees) = Forms_formulaire_objet_afficher_donnees($type,$id,$script,$type_table);
+	$form .= Forms_formulaire_objet_chercher_donnee($type,$id,$les_donnees, $script, $type_table);
 	
 	$out = "";
 	$out .= "<a name='tables'></a>";
-	if (_request('cherche_donnee') || $deplie){
-		$bouton = bouton_block_visible("tables_article");
+	if (_request('cherche_donnee') || _request('ajouter') || $deplie){
+		$bouton = bouton_block_visible("tables_$type_$id");
 		$debut_block = 'debut_block_visible';
 	}
 	else{
-		$bouton = bouton_block_invisible("tables_article");
+		$bouton = bouton_block_invisible("tables_$type_$id");
 		$debut_block = 'debut_block_invisible';
 	}
 
@@ -41,33 +47,33 @@ function inc_forms_lier_donnees($type, $id, $script, $deplie=false){
 		$icone = find_in_path("img_pack/table-24.gif");
 	$out .= debut_cadre_enfonce($icone, true, "", $bouton._T("$prefixi18n:type_des_tables"));
 
-	$lesdonnees = array();
-	//
-	// Afficher les donnees liees, rangees par tables
-	//
-	list($s,$les_donnees) = Forms_formulaire_objet_afficher_donnees($type,$id,$script,$type_table);
 	$out .= $s;
 	
-	$out .= $debut_block("tables_$type",true);
+	$out .= $debut_block("tables_$type_$id",true);
 	//
 	// Afficher le formulaire de recherche des donnees des tables
 	//
 
-	$out .= Forms_formulaire_objet_chercher_donnee($type,$id,$les_donnees, $script, $type_table);
+	$out .= $form;
 	$out .= fin_block(true);
 	
 	$out .= fin_cadre_enfonce(true);
-	return $out;
+	return _request('var_ajaxcharset')?$out:("<div id='forms_lier_donnees-$id'>".$out."</div>");
 }
 
 function Forms_formulaire_objet_chercher_donnee($type,$id,$les_donnees, $script, $type_table){
   global $spip_lang_right,$spip_lang_left,$couleur_claire,$couleur_foncee;
 	$out = "";
 	$recherche = _request('cherche_donnee');
+	$iid = intval($id);
 	
 	if (!include_spip("inc/securiser_action"))
 		include_spip("inc/actions");
-	$redirect = ancre_url(generer_url_ecrire($script,"type=$type&id_$type=$id"),'tables');
+	$redirect = ancre_url(generer_url_ecrire($script,"type=$type&id_$type=$iid"),'tables');
+	if ($type == 'donnee'){
+		$redirect = parametre_url($redirect,'id_form',_request('id_form'));
+		$redirect = parametre_url($redirect,'retour',urlencode(_request('retour')));
+	}
 	$action = generer_action_auteur("forms_lier_donnees","$id,$type,ajouter");
 	
 	$out .= "<form action='$action' method='post' class='ajaxAction' >";
@@ -78,6 +84,8 @@ function Forms_formulaire_objet_chercher_donnee($type,$id,$les_donnees, $script,
 	$out .= "<div style='text-align:$spip_lang_left'>";
 	$out .= "<input id ='autocompleteMe' type='text' name='cherche_donnee' value='$recherche' class='forml' />";
 
+	if ($type == 'donnee')
+		$les_donnees .= (strlen($les_donnees)?",":"").$iid;
 	$out .= Forms_boite_selection_donnees($recherche?$recherche:((_request('ajouter')!==NULL)?"":$recherche),$les_donnees, $type_table);
 	
 	$script_rech = generer_url_ecrire("recherche_donnees","type=$type&id_$type=$id",true);
@@ -102,8 +110,8 @@ function Forms_formulaire_objet_chercher_donnee($type,$id,$les_donnees, $script,
 }</style>";
 	
 	$out .= "</div>";
-	$out .= "<div style='text-align:$spip_lang_right'>";
-	$out .= "<input type='submit' name='ajouter' value='"._T('bouton_ajouter')."' class='fondo' />";
+	$out .= "<div class='spip_bouton' style='text-align:$spip_lang_right'>";
+	$out .= "<input type='submit' name='ajouter' value='"._T('bouton_ajouter')."' />";
 	$out .= "</div>";
 	$out .= "</form>";
 	return $out;
@@ -112,19 +120,23 @@ function Forms_formulaire_objet_chercher_donnee($type,$id,$les_donnees, $script,
 function Forms_formulaire_objet_afficher_donnees($type,$id, $script, $type_table='table'){
 	$out = "";
 	$prefixi18n = forms_prefixi18n($type_table);
+	$iid = intval($id);
 
 	$les_donnees = array();
 	$liste = array();
 	$forms = array();
 	$retour = self();
 	
-	$res = spip_query("SELECT id_donnee FROM spip_forms_donnees_{$type}s AS d WHERE d.id_$type="._q($id));
+	$champ_donnee = 'id_donnee';
+	if ($type == 'donnee')
+		$champ_donnee = 'id_donnee_liee';
+	$res = spip_query("SELECT $champ_donnee FROM spip_forms_donnees_{$type}s AS d WHERE d.id_$type="._q($iid));
 	while ($row = spip_fetch_array($res)){
-		list($id_form,$titreform,$t) = Forms_liste_decrit_donnee($row['id_donnee']);
+		list($id_form,$titreform,$t) = Forms_liste_decrit_donnee($row[$champ_donnee]);
 		if (!count($t))
-			list($id_form,$titreform,$t) = Forms_liste_decrit_donnee($row['id_donnee'], false);
+			list($id_form,$titreform,$t) = Forms_liste_decrit_donnee($row[$champ_donnee], false);
 		if (count($t)){
-			$liste[$id_form][$row['id_donnee']]=$t;
+			$liste[$id_form][$row[$champ_donnee]]=$t;
 			$forms[$id_form] = $titreform;
 		}
 	}
@@ -145,7 +157,7 @@ function Forms_formulaire_objet_afficher_donnees($type,$id, $script, $type_table
 				$vals[] = $id_donnee;
 				$vals[] = "<a href='".generer_url_ecrire("donnees_edit","id_form=$id_form&id_donnee=$id_donnee&retour=".urlencode($retour))."'>"
 					.implode(", ",$champs)."</a>";
-				$redirect = ancre_url(generer_url_ecrire($script,"type=$type&id_$type=$id"),'tables');
+				$redirect = ancre_url(generer_url_ecrire($script,"type=$type&id_$type=$iid"),'tables');
 				$action = generer_action_auteur("forms_lier_donnees","$id,$type,retirer,$id_donnee",urlencode($redirect));
 				$action = ancre_url($action,"forms_lier_donnees-$id");
 				$redirajax = generer_url_ecrire("forms_lier_donnees","type=$type&id_$type=$id");
@@ -188,7 +200,7 @@ function Forms_liste_recherche_donnees($recherche,$les_donnees,$type_table){
 	$table = array();
 	if ($recherche!==NULL){
 		include_spip('base/abstract_sql');
-		$in = calcul_mysql_in('id_donnee',$les_donnees,'NOT');
+		$in = calcul_mysql_in('d.id_donnee',$les_donnees,'NOT');
 		if (!strlen($recherche))
 			$res = spip_query("SELECT id_donnee FROM spip_forms_donnees AS d
 			  JOIN spip_forms AS f ON f.id_form=d.id_form
@@ -197,12 +209,12 @@ function Forms_liste_recherche_donnees($recherche,$les_donnees,$type_table){
 			$res = spip_query("SELECT c.id_donnee FROM spip_forms_donnees_champs AS c
 			JOIN spip_forms_donnees AS d ON d.id_donnee = c.id_donnee
 			JOIN spip_forms AS f ON d.id_form = f.id_form
-			WHERE f.type_form="._q($type_table)." AND $in AND valeur LIKE "._q("$recherche%")." GROUP BY id_donnee");
+			WHERE f.type_form="._q($type_table)." AND $in AND valeur LIKE "._q("$recherche%")." GROUP BY c.id_donnee");
 			if (spip_num_rows($res)<10){
 				$res = spip_query("SELECT c.id_donnee FROM spip_forms_donnees_champs AS c
 				JOIN spip_forms_donnees AS d ON d.id_donnee = c.id_donnee
 				JOIN spip_forms AS f ON d.id_form = f.id_form
-				WHERE f.type_form="._q($type_table)." AND $in AND valeur LIKE "._q("%$recherche%")." GROUP BY id_donnee");
+				WHERE f.type_form="._q($type_table)." AND $in AND valeur LIKE "._q("%$recherche%")." GROUP BY c.id_donnee");
 			}
 		}
 		while ($row = spip_fetch_array($res)){

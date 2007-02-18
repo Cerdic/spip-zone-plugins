@@ -15,15 +15,18 @@ function exec_recherche_donnees(){
 	$type = _request('type');
 	if (!preg_match(',[\w]+,',$type))
 		$type = 'article';
-	$id = intval(_request("id_$type"));
 	if (_request('field')=='cherche_donnee')
 		$recherche = _request('value');
 	include_spip("inc/forms_lier_donnees");
 	
+	$id = _request("id_$type");
 	$type_table = forms_type_table_lier($type,$id);
+	$id = intval($id);
 	// recuperer les donnees deja liees
 	list($s,$les_donnees) = Forms_formulaire_objet_afficher_donnees($type,$id,"",$type_table);
 	
+	if ($type == 'donnee')
+		$les_donnees .= (strlen($les_donnees)?",":"").$id;
 	// recuperer les donnees que l'on peut lier
 	$liste = Forms_liste_recherche_donnees($recherche,$les_donnees,$type_table);
 	

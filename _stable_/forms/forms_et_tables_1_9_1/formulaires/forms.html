@@ -34,5 +34,16 @@
 	[(#REM) [(#ID_DONNEE|afficher_documents_colonne{donnee,donnees_edit})]]
 	[<div class='spip_form_notes'>(#NOTES)</div>]
 ]
+<B_joint>
+<div id='forms_lier_donnees'>
+<BOUCLE_joint(FORMS_CHAMPS){id_form}{tout}{type=joint}{par rang}>
+[(#ENV{formvisible}|?{' '})
+	[(#ENV{formactif})
+		[(#ENV{id_donnee}|forms_boite_jointure{#CHAMP,#ID_FORM})]
+	]
+]
+</BOUCLE_joint>
+</div>
+</B_joint>
 </div>
 </BOUCLE_form>

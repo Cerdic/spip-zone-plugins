@@ -35,12 +35,13 @@ function action_forms_lier_donnees(){
 		$faire = $args[2];
 		if ($faire=='ajouter'){
 			if ($id && $id_donnee_liee && autoriser('modifier',$type,$id)){
-				if ($type!='donnee') {
-					$res = spip_query("SELECT * FROM spip_forms_donnees_{$type}s WHERE id_$type="._q($id)." AND id_donnee="._q($id_donnee_liee));
-					if (!$row = spip_fetch_array($res))
-						spip_query("INSERT INTO spip_forms_donnees_{$type}s (id_$type,id_donnee) VALUES ("._q($id).","._q($id_donnee_liee).")");
-					$redirect = parametre_url($redirect,'cherche_donnee','');
-				}
+				$champ_donnee = 'id_donnee';
+				if ($type=='donnee') 
+					$champ_donnee = 'id_donnee_liee';
+				$res = spip_query("SELECT * FROM spip_forms_donnees_{$type}s WHERE id_$type="._q($id)." AND $champ_donnee="._q($id_donnee_liee));
+				if (!$row = spip_fetch_array($res))
+					spip_query("INSERT INTO spip_forms_donnees_{$type}s (id_$type,$champ_donnee) VALUES ("._q($id).","._q($id_donnee_liee).")");
+				$redirect = parametre_url($redirect,'cherche_donnee','');
 			}
 			if (!$id_donnee_liee){
 				if ($cherche_donnee)
@@ -51,8 +52,10 @@ function action_forms_lier_donnees(){
 		if ($faire=='retirer'){
 			$id_donnee_liee = intval($args[3]);
 			if ($id && $id_donnee_liee && autoriser('modifier',$type,$id)){
-				if ($type!='donnee')
-					spip_query("DELETE FROM spip_forms_donnees_{$type}s WHERE id_$type="._q($id)." AND id_donnee="._q($id_donnee_liee));
+				$champ_donnee = 'id_donnee';
+				if ($type=='donnee') 
+					$champ_donnee = 'id_donnee_liee';
+				spip_query("DELETE FROM spip_forms_donnees_{$type}s WHERE id_$type="._q($id)." AND $champ_donnee="._q($id_donnee_liee));
 			}
 		}
 	}

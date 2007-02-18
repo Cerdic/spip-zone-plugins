@@ -70,6 +70,14 @@
 		}
 		return $valeur;
 	}
+	function forms_boite_jointure($id_donnee,$champ,$id_form){
+		if (!_DIR_RESTREINT){
+			$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
+			$out = $forms_lier_donnees('donnee',"$id_donnee-$champ-$id_form",'donnees_edit');
+		}
+		return $out;
+	}
+
 		
 	//
 	// Afficher le diagramme de resultats d'un sondage

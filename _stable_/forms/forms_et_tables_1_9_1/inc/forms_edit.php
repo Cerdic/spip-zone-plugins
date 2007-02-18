@@ -230,7 +230,7 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 		$out .= "<br />\n";
 	}
 	if ($type == 'joint') {
-		$out .= "<label for='type_table_$champ'>"._T("forms:champ_type_table")."</label> :";
+		$out .= "<label for='type_table_$champ'>"._T("forms:champ_table_jointure_type")."</label> :";
 		$out .= " &nbsp;<select name='type_table' value='' id='type_table_$champ' class='fondo verdana2'>\n";
 		$res2 = spip_query("SELECT type_form FROM spip_forms WHERE type_form NOT IN ('sondage','') GROUP BY type_form ORDER BY type_form");
 		while ($row2 = spip_fetch_array($res2)) {
