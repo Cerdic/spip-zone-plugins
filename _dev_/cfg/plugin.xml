@@ -2,24 +2,23 @@
 	<nom>
 	Config
 	</nom>
-	<auteur>toggg
+	<auteur>bertrand Gugger [->http://toggg.com/]
 	_ &copy; 2007 - Distribu&#233; sous licence GNU/LGPL
 	</auteur>
 	<version>
-	0.1.0
+	1.0.0
 	</version>
 	<etat>
-	dev
+	stable
 	</etat>
 	<description>
-CE CODE N&#039;EST PAS FONCTIONNEL !
-_ VOUS NE DEVEZ PAS L&#039;INSTALLER.
-_ Ce plugin permet de g&#233;rer des config, il est d&#233;riv&#233; de la config sms &#224; formulaires variables.
-_ Le stockage existant est juste dans un cran de meta, il sera port&#233; aux gateaux (cookies) et sql.
-_ Toute d&#233;finition vient des fonds/
-_ Il fournit une balise #CONFIG &#233;tendue.
+_ Ce plugin permet de g&#233;rer des configurations pour des plugins ou autres.
+_ Les valeurs pour une configuration sont compress&#233;es dans un seul enregistrement de la table spip_meta.
+_ La seule d&#233;finition n&#233;cessaire pour une configuration xxx est un fonds/cfg_xxx.html (xxx &#233;tant la cl&#233; de l'enregistrement meta)
+_ Il fournit une balise #CONFIG &#233;tendue comme #CONFIG&#123;xxx/nom_valeur&#125; pour les squelettes et la fonction lire_config() correspondante pour le php.
 	</description>
 	<lien>
+	[Documentation sur contrib->http://www.spip-contrib.net/?article1605]
 	</lien>
 	<prefix>
 	cfg
