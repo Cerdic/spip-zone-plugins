@@ -262,7 +262,7 @@ class cfg
 	{
 		$return = '';
 		foreach ($this->liens as $lien) {
-			$return .= '' . $this->boite_liens($lien, 'test liens');
+			$return .= $this->boite_liens($lien);
 		}
 		return $return;
 	}
