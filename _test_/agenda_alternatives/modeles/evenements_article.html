@@ -3,7 +3,7 @@
 	<BOUCLE_evenements_article(EVENEMENTS){id_article}{0,1}>
 		<!-- Les évènements prochains : -->
 		<B_agenda_prochain>
-			<h3><em><:minicalalter_evenements_prochains_article:></em></h3>
+			<h3><em><:minicalalter:evenements_prochains_article:></em></h3>
 			<ul>
 			<BOUCLE_agenda_prochain(EVENEMENTS){age_fin<0}{par date}{id_article}>
 			<li>[(#TITRE|supprimer_numero)][ - (#DESCRIPTIF)]
@@ -15,7 +15,7 @@
 
 		<!-- Les évènements passés : -->
 		<B_agenda_passes>
-			<h3><em><:minicalalter_evenements_passes_article:></em></h3>
+			<h3><em><:minicalalter:evenements_passes_article:></em></h3>
 			<ul>
 			<BOUCLE_agenda_passes(EVENEMENTS){age>=0}{par date}{id_article}{inverse}>
 			<li>[(#TITRE|supprimer_numero)][ - (#DESCRIPTIF)]

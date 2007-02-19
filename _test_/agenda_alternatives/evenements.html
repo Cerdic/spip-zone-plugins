@@ -32,14 +32,14 @@
 <!--
 <div class="edito">
 <h3 class="edito-titre"><:icone_agenda:></h3><img src="#CHEMIN{img_pack/agenda-48.png}" style="float:right;" class="spip_logos format_png" />
-<div class="chapo"><:minicalalter_info_evenements:></div>
+<div class="chapo"><:minicalalter:info_evenements:></div>
 </div>
 -->
 <img src="#CHEMIN{img_pack/agenda-48.png}" style="float:right;" class="spip_logos format_png" />
 	<div class="cartouche">
 		<h2><:icone_agenda:></h2>
 	</div>
-  <div class="chapo"><span style="font-style: italic; "><:minicalalter_info_evenements:></span></div>
+  <div class="chapo"><span style="font-style: italic; "><:minicalalter:info_evenements:></span></div>
 
 <?php
 
@@ -53,7 +53,7 @@ if ($y && $m) if ($j){ ?>
 		<!-- Les evenements du jour : -->
 		<B_agenda_jour>
 		<div class="cartouche">
-		<h3><?=_T('minicalalter_evenements_jour', array('day_month_year'=>'[(#DATE_REQUEST|affdate)]'))?></h3>
+		<h3><?=_T('minicalalter:evenements_jour', array('day_month_year'=>'[(#DATE_REQUEST|affdate)]'))?></h3>
 		<table border="0" cellpadding="0" summary="<:icone_calendrier:>">
 			<BOUCLE_agenda_jour(EVENEMENTS){par date}{statut=publie}> <?php 
 			if (($Ymd <= [(#DATE_FIN|affdate{'Ymd'})]) && ($Ymd >= [(#DATE_DEBUT|affdate{'Ymd'})])) {	?>
@@ -72,7 +72,7 @@ if ($y && $m) if ($j){ ?>
 		<!-- Les evenements du mois : -->
 		<B_agenda_mois>
 		<div class="cartouche">
-		<h3><?=_T('minicalalter_evenements_mois', array('month_year'=>'[(#DATE_REQUEST|affdate_mois_annee)]'))?></h3>
+		<h3><?=_T('minicalalter:evenements_mois', array('month_year'=>'[(#DATE_REQUEST|affdate_mois_annee)]'))?></h3>
 		<!-- cette boucle permet d'afficher les attributs des evenements -->
 		<table border="0" cellpadding="0" summary="<:icone_calendrier:>">
 			<BOUCLE_agenda_mois(EVENEMENTS){par date}{statut=publie}> <?php 
@@ -94,7 +94,7 @@ if ($y && $m) if ($j){ ?>
 		<!-- Les evenements prochains : -->
 			<B_agenda_prochain>
 		<div class="cartouche">
-			<h3><:minicalalter_evenements_prochains:></h3>
+			<h3><:minicalalter:evenements_prochains:></h3>
 			#ANCRE_PAGINATION
 			<table border="0" cellpadding="0" summary="<:icone_calendrier:>">
 				<BOUCLE_agenda_prochain(EVENEMENTS){age_fin<0}{par date}{statut=publie}{pagination}>
@@ -112,7 +112,7 @@ if ($y && $m) if ($j){ ?>
 		<!-- Les evenements passes : -->
 			<B_agenda_passes>
 		<div class="cartouche">
-			<h3><:minicalalter_evenements_passes:></h3>
+			<h3><:minicalalter:evenements_passes:></h3>
 			#ANCRE_PAGINATION
 			<table border="0" cellpadding="0" summary="<:icone_calendrier:>">
 				<BOUCLE_agenda_passes(EVENEMENTS){age>=0}{par date}{statut=publie}{inverse}{pagination}>
