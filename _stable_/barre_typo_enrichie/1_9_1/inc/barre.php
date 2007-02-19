@@ -16,7 +16,14 @@ $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirn
 	define('_DIR_PLUGIN_BARRETYPOENRICHIE',(_DIR_PLUGINS.end($p)));
 }
 
+include_spip('inc/vieilles_defs');
 // construit un bouton (ancre) de raccourci avec icone et aide
+if (!function_exists('afficher_claret')){
+	function afficher_claret() {
+		include_spip('inc/layer');
+		return $GLOBALS['browser_caret'];
+	}
+}
 
 function bouton_barre_racc($action, $img, $help, $champhelp) {
 	include_spip('inc/charsets');
@@ -385,12 +392,4 @@ $(document).ready(function(){
 	 //--></script>';
 	return $ret;
 }
-
-// pour compatibilite arriere. utiliser directement le corps a present.
-
-function afficher_claret() {
-	include_spip('inc/layer');
-	return $GLOBALS['browser_caret'];
-}
-
 ?>
