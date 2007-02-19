@@ -224,6 +224,12 @@
 			echo "forms update @ 0.26<br/>";
 			ecrire_meta('forms_base_version',$current_version=0.26,'non');
 		}
+		if ($current_version<0.27){
+			spip_query("ALTER TABLE spip_forms_donnees_article ADD article_ref ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER id_article");
+			spip_query("ALTER TABLE spip_forms_donnees_donnees ADD donnee_ref ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER id_donnee");
+			echo "forms update @ 0.27<br/>";
+			ecrire_meta('forms_base_version',$current_version=0.27,'non');
+		}
 		ecrire_metas();
 	}
 	

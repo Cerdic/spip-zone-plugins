@@ -145,7 +145,8 @@ $tables_auxiliaires['spip_forms_articles'] = array(
 	
 $spip_forms_donnees_articles = array(
 	"id_donnee" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-	"id_article" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+	"id_article" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+	"article_ref" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
 
 $spip_forms_donnees_articles_key = array(
 	"KEY id_donnee" 	=> "id_donnee",
@@ -157,7 +158,8 @@ $tables_auxiliaires['spip_forms_donnees_articles'] = array(
 
 $spip_forms_donnees_donnees = array(
 	"id_donnee" 	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-	"id_donnee_liee" 	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+	"donnee_ref" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
+	"id_donnee_liee" 	=> "BIGINT (21) DEFAULT '0' NOT NULL"	);
 
 $spip_forms_donnees_donnees_key = array(
 	"KEY id_donnee" 	=> "id_donnee",
