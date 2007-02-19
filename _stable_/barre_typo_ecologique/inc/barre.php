@@ -18,6 +18,12 @@ if (!defined('_DIR_PLUGIN_BARRETYPOENRICHIE')){
 
 include_spip('inc/vieilles_defs');
 // construit un bouton (ancre) de raccourci avec icone et aide
+if (!function_exists('afficher_claret')){
+	function afficher_claret() {
+		include_spip('inc/layer');
+		return $GLOBALS['browser_caret'];
+	}
+}
 
 function bouton_barre_racc($action, $img, $help, $champhelp) {
 	include_spip('inc/charsets');
