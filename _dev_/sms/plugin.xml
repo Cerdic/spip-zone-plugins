@@ -2,19 +2,20 @@
 	<nom>
 	SMS
 	</nom>
-	<auteur>toggg
-	_ &copy; 2006 - Distribu&#233; sous licence GNU/LGPL
+	<auteur>
+bertrand Gugger [->http://toggg.com/]
+_ &copy; 2007 - Distribu&#233; sous licence GNU/LGPL
 	</auteur>
 	<version>
-	0.1.0
+	0.2.0
 	</version>
 	<etat>
-	dev
+	test
 	</etat>
 	<description>
-CE CODE N&#034;EST PAS FONCTIONNEL !
-_ VOUS NE DEVEZ PAS L&#034;INSTALLER.
-_ Ce plugin permet d'envoyer des SMS, il n&#233;cessite d'avoir un compte chez un prestataire comme Clickatell ou sms2email.
+Ce plugin permet d'envoyer des SMS, il n&#233;cessite d'avoir un compte chez un prestataire comme Clickatell, sms2email ou autres.
+_ Il fournit la partie technique n&eacute;cessaire à la transmission.
+_ Il est bas&eacute; sur Net_SMS de Horde/PEAR
 	</description>
 	<lien>
 	</lien>
