@@ -23,4 +23,6 @@ function smslist_ajouter_boutons($boutons_admin) {
 	}
 	return $boutons_admin;
 }
+
+
 ?>
