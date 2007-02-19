@@ -21,7 +21,7 @@ function CalAlter_insert_head($flux){
 		include_spip('inc/agenda_gestion'); // spip 1.9
 		if (!function_exists('Agenda_install')) {
 			include_spip('inc/minipres');
-			minipres(_T('minicalalter_activer_agenda'));
+			minipres(_T('minicalalter:activer_agenda'));
 		}
 	}
 	$flux .= "
