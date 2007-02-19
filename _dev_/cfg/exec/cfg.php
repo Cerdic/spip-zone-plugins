@@ -150,7 +150,7 @@ class cfg
 		    }
 		}
 		if (!preg_match_all(
-		  '#<(?:(select)|input type="(text|password|checkbox|radio)") name="(\w+)"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?[^>]*?>#ims',
+		  '#<(?:(select|textarea)|input type="(text|password|checkbox|radio)") name="(\w+)"(?: class="[^"]*?(?:type_(\w+))?[^"]*?(?:cfg_(\w+))?[^"]*?")?[^>]*?>#ims',
 						$controldata, $matches, PREG_SET_ORDER)) {
 			return _L('pas_de_champs_dans_') . $nom;
 		}
