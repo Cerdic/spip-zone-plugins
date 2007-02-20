@@ -122,6 +122,7 @@
 	      $count_lignes ++;
 				// creation de la donnee si necessaire
 				$creation = true;
+				$cle_libre = true;
 				$id_donnee = 0;
 				// verifier la validite de l'import
 				$c = array();
@@ -147,8 +148,8 @@
 		 		else if (!$simu) {
 					if ($cle) {
 						$id_donnee = $ligne[$cle];
-						$res = spip_query("SELECT * FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee)." AND id_form="._q($id_form));
-						if ($row = spip_fetch_array($res)){
+						$res = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
+						if ($row = spip_fetch_array($res) AND ($cle_libre = ($row['id_form']==$id_form))){
 							$creation = false;
 							$set = "";
 							foreach(array('date','url','ip','id_auteur') as $champ)
@@ -161,7 +162,7 @@
 						$id_auteur = $GLOBALS['auteur_session'] ? intval($GLOBALS['auteur_session']['id_auteur']) : 0;
 						$ip = $GLOBALS['REMOTE_ADDR'];
 						$url = _DIR_RESTREINT_ABS;
-						if ($cle){
+						if ($cle AND $cle_libre){
 							if (intval($id_donnee))
 								spip_abstract_insert("spip_forms_donnees","(id_donnee,id_form,date,ip,id_auteur,url,confirmation,statut,maj)","("._q($id_donnee).","._q($id_form).", NOW(),"._q($ip).","._q($id_auteur).","._q($url).", 'valide', 'publie', NOW() )");
 						}
