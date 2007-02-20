@@ -86,6 +86,7 @@ add_tweak( array(
 
 add_tweak( array(
 	'id'	=> 'set_options',
+	'auteur' 		=> 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
 	// ici on demande a Tweak Spip deux boutons radio : _T('icone_interface_simple') et _T('icone_interface_complet')
 	// pour les boutons radio, il faut utiliser une deuxième variable : radio_set_options
 	// la variable Spip est : set_options
