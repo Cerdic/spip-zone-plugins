@@ -5,7 +5,7 @@
 <div style='position: relative;'>
 	<div style='position: absolute; top: -12px; left: 3px;'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/#ENV{type_form,form}-24.png' alt="" /></div>
 	<div style='background-color: #ENV{couleur_claire}; color: black; padding: 3px; padding-left: 30px; border-bottom: 1px solid #444444;' class='verdana2'>
-	<b>[(#ENV{titre_liste,''}|?{'',' '})<:forms:tous_formulaires:>]#ENV{titre_liste,''}</b>
+	<b>[(#ENV{titre_liste,''}|?{'',' '})<:forms:tous_formulaires:>]#ENV*{titre_liste,''}</b>
 	</div>
 </div>
 <table width='100%' cellpadding='5' cellspacing='0' border='0'>

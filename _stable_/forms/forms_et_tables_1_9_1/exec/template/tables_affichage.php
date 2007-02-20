@@ -36,14 +36,14 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 	if (!include_spip('inc/autoriser'))
 		include_spip('inc/autoriser_compat');
 
-	if (_request('var_mode')=='dev') {
+	if (_request('var_mode')=='dev' OR _OUTILS_DEVELOPPEURS) {
 		$res = spip_query("SELECT type_form FROM spip_forms GROUP BY type_form ORDER BY type_form");
 		while ($row = spip_fetch_array($res)){
 			$prefix = in_array($row['type_form'],array('sondage',''))?'forms':forms_prefixi18n($row['type_form']);
-			$contexte = array('type_form'=>$row['type_form'],'titre_liste'=>_T("$prefix:toutes_tables")." (".$row['type_form'].")",'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
+			$contexte = array('type_form'=>$row['type_form'],'titre_liste'=>_T("$prefix:toutes_tables")." [".$row['type_form']."]",'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
 			echo recuperer_fond("exec/template/tables_tous",$contexte);
 			if (autoriser('creer','form')) {
-				echo "<div align='right'>";
+				echo "<div style='float:right'>";
 				$link=generer_url_ecrire('forms_edit', "new=oui&type_form=".$row['type_form']);
 				$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
 				icone(_T("$prefix:icone_creer_table"), $link, "../"._DIR_PLUGIN_FORMS. "img_pack/".($row['type_form']?$row['type_form']:'form')."-24.png", "creer.gif");
