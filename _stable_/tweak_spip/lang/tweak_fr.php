@@ -105,6 +105,9 @@ _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouv
 	'log_tweaks:nom' => 'Log d&eacute;taill&eacute; de Tweak Spip',
 	'log_tweaks:description'	=> "Inscrit de nombreux renseignements &agrave; propos du fonctionnement du plugin 'Tweak Spip' dans les fichiers spip.log que l'on peut trouver dans le r&eacute;pertoire : ".tweak_canonicalize(_DIR_RESTREINT_ABS._DIR_TMP),
 
+	'cookie_prefix:nom' => 'Prefixe des cookies',
+	'cookie_prefix:description'	=> 'Sp&eacute;cifie le pr&eacute;fixe &agrave; donner aux cookies de ce site. Utile pour installer des sites SPIP dans des sous-r&eacute;pertoires.<br />Votre choix : %cookie_prefix%',
+
 /*
 	':nom' => '',
 	':description'	=> '',

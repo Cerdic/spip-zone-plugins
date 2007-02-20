@@ -45,7 +45,15 @@ add_tweak( array(
 	'categorie'	=> 'admin',
 	'options'	=> 1,
 ));
-
+add_tweak( array(
+	'id'	=> 'cookie_prefix',
+	// ici on demande a Tweak Spip une case input. La variable est : dossier_squelettes
+	// par defaut, la valeur sera $GLOBALS["cookie_prefix"]
+	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
+	'code' 	=> '$GLOBALS["cookie_prefix"]=%%cookie_prefix/s/$GLOBALS["cookie_prefix"]%%;',
+	'categorie'	=> 'admin',
+	'options'	=> 1,
+));
 add_tweak( array(
 	'id'	=> 'supprimer_numero',
 	'code' 	=> '$GLOBALS["table_des_traitements"]["TITRE"][]= "typo(supprimer_numero(%s))";
