@@ -17,9 +17,13 @@
 				|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 			
 			if ($current_version==0.0){
-				$f = find_in_path('base/Abonnes_SMS.xml');
 				include_spip('base/forms_base_api');
+				$f = find_in_path('base/Abonnes_SMS.xml');
+				Forms_creer_table($f,'smslist_abonne');
+				$f = find_in_path('base/Liste_de_diffusion_SMS.xml');
 				Forms_creer_table($f,'smslist_liste');
+				$f = find_in_path('base/SMS.xml');
+				Forms_creer_table($f,'smslist_message');
 				ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 			}
 	
@@ -30,6 +34,13 @@
 	function smslist_vider_tables($nom_meta_base_version) {
 		include_spip('base/forms_base_api');
 		Forms_supprimer_tables('smslist_liste');
+		Forms_supprimer_tables('smslist_abonne');
+		Forms_supprimer_tables('smslist_message');
+		// a enlever
+		Forms_supprimer_tables('smslist_listes');
+		Forms_supprimer_tables('smslist_abonnes');
+		Forms_supprimer_tables('smslist_messages');
+		// fin
 		effacer_meta($nom_meta_base_version);
 		ecrire_metas();
 	}
