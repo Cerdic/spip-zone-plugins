@@ -5,6 +5,9 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'type_des_tables' => 'Tables',
+'toutes_tables' => "Toutes les tables",
+'icone_creer_table' => "Cr&eacute;er une nouvelle table",
+
 'lien_retirer_donnee' => "Retirer cette donn&eacute;e",
 'articles_utilisant'=> "Articles utilisant cette table",
 'champs_formulaire'=>"Champs de la table",
