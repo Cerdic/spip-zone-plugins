@@ -13,7 +13,7 @@ function action_edittable_save_dist(){
 	$description_table = mysql_fetch_array($res_description_table);
 	while ($description_table = mysql_fetch_array($res_description_table)){
 		//if ($cle == 'Field'){
-			$sql_save .= " ".$description_table['Field']."='"._request($description_table['Field'])."',";
+			$sql_save .= " ".$description_table['Field']."='".addslashes(_request($description_table['Field']))."',";
 		//}
 	} 
 	$sql_save = substr($sql_save, 0, strlen($sql_save)-1);
