@@ -110,7 +110,7 @@ _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouv
 	'cookie_prefix:description'	=> 'Sp&eacute;cifie le pr&eacute;fixe &agrave; donner aux cookies de ce site. Utile pour installer des sites SPIP dans des sous-r&eacute;pertoires.<br />Votre choix : %cookie_prefix%',
 
 	'filtrer_javascript:nom' => 'Gestion du javascript',
-	'filtrer_javascript:description'	=> 'Pour le g&eacute;rer le javascript dans les articles, trois modes sont disponibles :
+	'filtrer_javascript:description'	=> 'Pour g&eacute;rer le javascript dans les articles, trois modes sont disponibles :
 - {jamais}: le javascript est refus&eacute; partout
 - {d&eacute;faut} : le javascript est signal&eacute; en rouge dans l\'espace priv&eacute;
 - {toujours} : le javascript est accept&eacute; partout.
