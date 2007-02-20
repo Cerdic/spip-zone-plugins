@@ -39,7 +39,9 @@ function inc_tweak_input_dist($index, $variable, $valeur, $label, $actif, $url_s
 		$ok_valeur = $label.(strlen($valeur)?"$valeur":'&nbsp;-');
 	}
 
-	$ok_input .= "<input type='submit' class='fondo' value=\""._T('bouton_modifier')."\" />";
+	// on ne peut pas modifier les variables si le tweak est inactif
+	if ($actif) $ok_input .= "<input type='submit' class='fondo' value=\""._T('bouton_modifier')."\" />";
+		else $ok_input = $ok_valeur.' ('._T('tweak:validez_page').')';
 	// HIDDENTWEAKVAR__ pour eviter d'avoir deux inputs du meme nom...
 	$ok_visible = $actif?str_replace("HIDDENTWEAKVAR__","",$ok_input):$ok_valeur;
 

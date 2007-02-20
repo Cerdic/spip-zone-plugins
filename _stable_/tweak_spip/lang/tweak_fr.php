@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'actif' => 'Tweak actif',
 	'inactif' => 'Tweak inactif',
 	'activer_tweak' => 'Activer le tweak',
+	'validez_page' => 'Validez cette page pour modifier cette valeur',
 	'tweak'	=> 'Tweak :',
 	'tweaks_liste' => 'Liste des tweaks',
 	'presente_tweaks' => "Cette page liste les tweaks disponibles.<br />Vous pouvez activer les tweaks n&eacute;cessaires en cochant la case correspondante.",
