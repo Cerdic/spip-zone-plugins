@@ -153,7 +153,7 @@
 							$creation = false;
 							$set = "";
 							foreach(array('date','url','ip','id_auteur') as $champ)
-								if (isset($assoc_field['$champ'])) $set .= "$champ="._q($ligne[$assoc_field['date']]).", ";
+								if (isset($assoc_field[$champ])) $set .= "$champ="._q($ligne[$assoc_field['date']]).", ";
 							$set.=" maj=NOW()";
 							spip_query("UPDATE spip_forms_donnees $set WHERE id_donnee="._q($id_donnee)." AND id_form="._q($id_form));
 						}
