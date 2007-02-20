@@ -126,6 +126,7 @@ function snippets_liste_raccourcis($table){
 function snippets_translate_raccourcis_modeles($translations){
 	$trans = array();
 	$liste = array();
+	if (!is_array($translations)) return;
 	foreach($translations as $translatation) {
 		$t = $translatation[0];
 		// recuperer la liste des raccourcis a changer pour ce type
