@@ -148,14 +148,16 @@
 		 		else if (!$simu) {
 					if ($cle) {
 						$id_donnee = $ligne[$cle];
-						$res = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
+						$res = spip_query("SELECT id_form,statut FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
 						if ($row = spip_fetch_array($res) AND ($cle_libre = ($row['id_form']==$id_form))){
 							$creation = false;
 							$set = "";
 							foreach(array('date','url','ip','id_auteur') as $champ)
 								if (isset($assoc_field[$champ])) $set .= "$champ="._q($ligne[$assoc_field['date']]).", ";
 							$set.=" maj=NOW()";
-							spip_query("UPDATE spip_forms_donnees $set WHERE id_donnee="._q($id_donnee)." AND id_form="._q($id_form));
+							if ($row['statut']=='poubelle')
+								$set .= ", statut = 'publie'";
+							spip_query("UPDATE spip_forms_donnees SET $set WHERE id_donnee="._q($id_donnee)." AND id_form="._q($id_form));
 						}
 					}
 					if ($creation){
