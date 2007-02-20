@@ -112,6 +112,7 @@ add_tweak( array(
 list($GLOBALS["filtrer_javascript"], $foo) = explode("(", $GLOBALS["radio_filtrer_javascript"], 2);',
 	'categorie'	=> 'admin',
 	'options'	=> 1,
+	'version'	=> 1.92,
 ));
 
 add_tweak( array(
