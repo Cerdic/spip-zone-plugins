@@ -14,6 +14,11 @@ function exec_edittable_voir(){
 			echo debut_raccourcis();
 				echo '<a href="?exec=listetable">'._T('edittable:mes_edittable').'</a>';
 			echo fin_raccourcis();
+			if(_request('sql_command')){
+				echo debut_boite_info();
+				echo '<center><font face="Verdana,Arial,Sans,sans-serif" size="3"><b>'._T('edittable:command_sql_executee').'</b></font><br /><br /><code>'._request('sql_command').'</code><br />';
+				echo fin_boite_info();
+			}
 		echo debut_droite();
 			if(_request('sql_command')) echo '<br />'._request('sql_command').'<br />';
 			$sql_edittable = "SELECT * FROM "._request('table')." WHERE "._request('colonne_cle')." = '"._request('valeur_cle')."';";
