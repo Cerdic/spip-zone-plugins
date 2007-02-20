@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'desactive_cache:description'	=> 'Inhibition du cache de SPIP pour le d&eacute;veloppement du site.',
 
 	'supprimer_numero:nom' => 'Supprime le num&eacute;ro',
-	'supprimer_numero:description'	=> "Applique la fonction SPIP supprimer_numero() &agrave; l'ensemble des {{titres}} et des {{noms}} du site, sans que le filtre supprimer_numero soit pr&eacute;sent dans les squelettes.",
+	'supprimer_numero:description'	=> "Applique la fonction SPIP supprimer_numero() &agrave; l'ensemble des {{titres}} et des {{noms}} du site public, sans que le filtre supprimer_numero soit pr&eacute;sent dans les squelettes.",
 
 	'paragrapher:nom' => 'Paragrapher',
 	'paragrapher:description'	=> "Applique la fonction SPIP paragrapher() aux textes qui sont d&eacute;pourvus de paragraphes en ins&eacute;rant des balises &lt;p&gt; et &lt;/p&gt;. Utile pour visualiser tous les textes sans style.",
@@ -107,6 +107,17 @@ _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouv
 
 	'cookie_prefix:nom' => 'Prefixe des cookies',
 	'cookie_prefix:description'	=> 'Sp&eacute;cifie le pr&eacute;fixe &agrave; donner aux cookies de ce site. Utile pour installer des sites SPIP dans des sous-r&eacute;pertoires.<br />Votre choix : %cookie_prefix%',
+
+	'filtrer_javascript:nom' => 'Gestion du javascript',
+	'filtrer_javascript:description'	=> 'Pour le g&eacute;rer le javascript dans les articles, trois modes sont disponibles :
+- {jamais}: le javascript est refus&eacute; partout
+- {d&eacute;faut} : le javascript est signal&eacute; en rouge dans l\'espace priv&eacute;
+- {toujours} : le javascript est accept&eacute; partout.
+
+Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la gestion du javascript est {{toujours}} s&eacute;curis&eacute;e.<br />Votre choix : %radio_filtrer_javascript%',
+	'js_jamais' => 'Jamais',
+	'js_defaut' => 'D&eacute;faut',
+	'js_toujours' => 'Toujours',
 
 /*
 	':nom' => '',
