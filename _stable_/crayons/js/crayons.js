@@ -233,12 +233,13 @@ jQuery.fn.activatecrayon = function(percent) {
           }
           // Clavier pour sauver
           if (
-          /* ctrl-s ou ctrl-maj-S, firefox */
           (e.ctrlKey && (
+            /* ctrl-s ou ctrl-maj-S, firefox */
             ((e.charCode||e.keyCode) == 115) || ((e.charCode||e.keyCode) == 83))
-          )
-          || (!e.charCode && e.keyCode == 119 /* F8, windows */)
-          || (e.charCode==19 && e.keyCode==19 /* ctrl-s, safari */)) {
+            /* ctrl-s, safari */
+            || (e.charCode==19 && e.keyCode==19)
+          ) || (!e.charCode && e.keyCode == 119 /* F8, windows */)
+          ) {
             jQuery(me)
             .find("form.formulaire_spip")
             .submit();
