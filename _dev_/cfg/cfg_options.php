@@ -16,8 +16,10 @@ function balise_CONFIG($p) {
 		$arg = "''";
 	}
 	$sinon = interprete_argument_balise(2,$p);
+	$serialize = interprete_argument_balise(3,$p);
 	$p->code = 'lire_config(' . $arg . ',' . 
-		($sinon && $sinon != "''" ? $sinon : 'null') . ',1)';
+		($sinon && $sinon != "''" ? $sinon : 'null') . ',' . 
+		($serialize ? $serialize : 'true') . ')';
 	return $p;
 }
 
