@@ -81,8 +81,8 @@ function Forms_formulaire_objet_chercher_donnee($type,$id,$les_donnees, $script,
 	$out .= "<input type='hidden' name='redirect' value='$redirect' />";
 	$out .= "<input type='hidden' name='idtarget' value='forms_lier_donnees-$id' />";
 	$out .= "<input type='hidden' name='redirectajax' value='".generer_url_ecrire('forms_lier_donnees',"type=$type&id_$type=$id")."' />";
-	$out .= "<div style='text-align:$spip_lang_left'>";
-	$out .= "<input id ='autocompleteMe' type='text' name='cherche_donnee' value='$recherche' class='forml' />";
+	$out .= "<div style='text-align:$spip_lang_left;width:100%;'>";
+	$out .= "<input id ='autocompleteMe' type='text' name='cherche_donnee' value='$recherche' class='forml' style='width:90%;' />";
 
 	if ($type == 'donnee')
 		$les_donnees .= (strlen($les_donnees)?",":"").$iid;
@@ -198,13 +198,14 @@ function Forms_boite_selection_donnees($recherche, $les_donnees, $type_table){
 
 function Forms_liste_recherche_donnees($recherche,$les_donnees,$type_table){
 	$table = array();
-	if ($recherche!==NULL){
+	//if ($recherche!==NULL){
 		include_spip('base/abstract_sql');
 		$in = calcul_mysql_in('d.id_donnee',$les_donnees,'NOT');
-		if (!strlen($recherche))
-			$res = spip_query("SELECT id_donnee FROM spip_forms_donnees AS d
+		if (!strlen($recherche)){
+			$res = spip_query("SELECT d.id_donnee FROM spip_forms_donnees AS d
 			  JOIN spip_forms AS f ON f.id_form=d.id_form
-			  WHERE f.type_form="._q($type_table)." AND $in GROUP BY id_donnee");
+			  WHERE f.type_form="._q($type_table)." AND $in GROUP BY d.id_donnee");
+		}
 		else {
 			$res = spip_query("SELECT c.id_donnee FROM spip_forms_donnees_champs AS c
 			JOIN spip_forms_donnees AS d ON d.id_donnee = c.id_donnee
@@ -224,7 +225,7 @@ function Forms_liste_recherche_donnees($recherche,$les_donnees,$type_table){
 			if (count($t))
 				$table[$titreform][$row['id_donnee']]=$t;
 		}
-	}
+	//}
 	return $table;
 }
 

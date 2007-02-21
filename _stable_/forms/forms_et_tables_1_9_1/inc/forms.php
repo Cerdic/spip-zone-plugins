@@ -89,7 +89,7 @@
 
 	function forms_type_table_lier($type,$id){
 		$type_table = 'table';
-		if ($type == 'donnee_liee'){
+		if ($type == 'donnee'){
 			$id = explode('-',$id);
 			$id_donnee_source = $id[0];
 			$champ = $id[1];
