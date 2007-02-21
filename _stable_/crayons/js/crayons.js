@@ -231,9 +231,14 @@ jQuery.fn.activatecrayon = function(percent) {
             jQuery(me)
             .cancelcrayon();
           }
-          // Ctrl-s ou Ctrl-Maj-S (Firefox) ou F8 pour sauver
-          if (((((e.charCode||e.keyCode) == 115) || ((e.charCode||e.keyCode) == 83))
-           && e.ctrlKey) || (!e.charCode && e.keyCode == 119)) {
+          // Clavier pour sauver
+          if (
+          /* ctrl-s ou ctrl-maj-S, firefox */
+          (e.ctrlKey && (
+            ((e.charCode||e.keyCode) == 115) || ((e.charCode||e.keyCode) == 83))
+          )
+          || (!e.charCode && e.keyCode == 119 /* F8, windows */)
+          || (e.charCode==19 && e.keyCode==19 /* ctrl-s, safari */)) {
             jQuery(me)
             .find("form.formulaire_spip")
             .submit();
