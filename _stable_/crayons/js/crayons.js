@@ -72,7 +72,7 @@ function uniConfirm(txt)
 }
 
 // ouvre un crayon
-jQuery.fn.opencrayon = function(evt) {
+jQuery.fn.opencrayon = function(evt, percent) {
   if (evt.stopPropagation) {
     evt.stopPropagation();
   }
@@ -115,7 +115,7 @@ jQuery.fn.opencrayon = function(evt) {
           .addClass('crayon-has')
           .after('<div>'+c.$html+'</div>')
           .next()
-            .activatecrayon();
+            .activatecrayon(percent);
         }
       );
     }
@@ -144,7 +144,7 @@ jQuery.fn.hidecrayon = function() {
 }
 
 // active un crayon qui vient d'etre charge
-jQuery.fn.activatecrayon = function() {
+jQuery.fn.activatecrayon = function(percent) {
   return this
   .click(function(e){
     e.stopPropagation();
@@ -265,7 +265,8 @@ jQuery.fn.activatecrayon = function() {
       .end()
       .each(function(){
         // rendre les boutons visibles (cf. plugin jquery/dimensions.js)
-        var buttonpos = (this.offsetTop || 0) + parseInt(jQuery(this).css('height'));
+        var hauteur = parseInt(jQuery(this).css('height'));
+        var buttonpos = (this.offsetTop || 0) + hauteur;
         var scrolltop = window.pageYOffset ||
           jQuery.boxModel && document.documentElement.scrollTop  ||
           document.body.scrollTop || 0;
@@ -275,6 +276,10 @@ jQuery.fn.activatecrayon = function() {
         var h = window.innerHeight;
         if (buttonpos - h + 20 > scrolltop) {
           window.scrollTo(scrollleft, buttonpos - h + 30);
+        }
+        var area = $(this).find("textarea.crayon-active").get(0);
+        if (percent && area && area.scrollHeight > hauteur) {
+          area.scrollTop = area.scrollHeight * percent - hauteur;
         }
       })
     .end();
@@ -297,7 +302,9 @@ jQuery.fn.initcrayon = function(){
   this
   .addClass('crayon-autorise')
   .dblclick(function(e){
-    jQuery(this).opencrayon(e);
+    jQuery(this).opencrayon(e,
+    	(e.pageY ? e.pageY - document.body.scrollTop - this.scrollTop : e.clientY)
+    	  / this.clientHeight);
   })
   .iconecrayon();
 
