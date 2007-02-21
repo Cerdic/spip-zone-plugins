@@ -1,3 +1,4 @@
+#HTTP_HEADER{content-type:text/html}
 <style type='text/css'>
 	#popularTags {line-height:1.2em }
 	#suggestions {margin:3px }
@@ -9,7 +10,8 @@
 
 #CACHE{0}
 <?php
-
+if (!$auteur_session)
+    redirige_par_entete('spip.php?page=login&url='.rawurlencode(str_replace('&amp;', '&', self())));
 [(#ENV{id_article}|?{' ',''}) $elements='articles'; $element='article'; $id_element='#ID_ARTICLE';]
 [(#ENV{id_document}|?{' ',''}) $elements='documents'; $element='document'; $id_element='#ID_DOCUMENT';]
 	
@@ -120,7 +122,7 @@ $query="UPDATE spip_".$element."s SET titre='".addslashes(_request('titre'))."' 
 	desc
 </td><td>
 	<textarea name='descriptif' rows='2'
-	cols='77'>[(#DESCRIPTIF*|entites_html)]</textarea>
+	cols='60'>[(#DESCRIPTIF*|entites_html)]</textarea>
 </td></tr><tr><td align='right'>
 	tags
 </td><td>
