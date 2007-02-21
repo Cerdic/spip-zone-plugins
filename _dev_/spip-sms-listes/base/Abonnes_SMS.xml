@@ -12,7 +12,7 @@
 	<texte></texte>
 	<moderation>posteriori</moderation>
 	<public>non</public>
-	<linkable>non</linkable>
+	<linkable>oui</linkable>
 	<documents>non</documents>
 	<html_wrap></html_wrap>
 	<fields>

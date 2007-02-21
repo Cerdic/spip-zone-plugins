@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'type_des_tables' => 'Abonn&eacute;s SMS',
 'toutes_tables' => "Tous les abonn&eacute;s SMS",
 'icone_creer_table' => "Cr&eacute;er une nouvelle table d'abonn&eacute; SMS",
+'lien_retirer_donnee' => 'Retirer cet abonn&eacute;'
 );
 
 
