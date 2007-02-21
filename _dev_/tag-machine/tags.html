@@ -16,8 +16,8 @@
 	if (!$id_element = intval($id_element)) die ('bah, non...');
 
 	if (isset($_REQUEST['tags'])) {
-		include_once 'inc_tag-machine.php';
-		ajouter_mots(_request('tags'),
+		include_spip('inc/tag-machine');
+		ajouter_liste_mots(_request('tags'),
 			$id_element,
 			$groupe_defaut = 'tags',
 			$elements,
