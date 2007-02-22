@@ -36,7 +36,8 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 	if (!include_spip('inc/autoriser'))
 		include_spip('inc/autoriser_compat');
 
-	if (_request('var_mode')=='dev' OR _OUTILS_DEVELOPPEURS) {
+	if ( _request('exec')=='tables_tous'
+		&& (_request('var_mode')=='dev' OR _OUTILS_DEVELOPPEURS)) {
 		$res = spip_query("SELECT type_form FROM spip_forms GROUP BY type_form ORDER BY type_form");
 		while ($row = spip_fetch_array($res)){
 			$prefix = forms_prefixi18n($row['type_form']);
@@ -52,14 +53,15 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 		}
 	}
 	else {
-		$contexte = array('type_form'=>$type_form,'titre_liste'=>$titre_page,'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
+		$prefix = forms_prefixi18n($type_form);
+		$contexte = array('type_form'=>$type_form,'titre_liste'=>_T("$prefix:toutes_tables"),'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
 		echo recuperer_fond("exec/template/tables_tous",$contexte);
 		
 		if (autoriser('creer','form')) {
 			echo "<div align='right'>";
 			$link=generer_url_ecrire('forms_edit', "new=oui&type_form=$type_form");
 			$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
-			icone($titre_creer, $link, "../"._DIR_PLUGIN_FORMS. "img_pack/$type_form-24.png", "creer.gif");
+			icone(_T("$prefix:icone_creer_table"), $link, "../"._DIR_PLUGIN_FORMS. "img_pack/$type_form-24.png", "creer.gif");
 			echo "</div>";
 		}
 	}
