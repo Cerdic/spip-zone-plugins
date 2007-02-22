@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'format_radio' => 'boutons radio',
 'html_wrapper'=> 'Encapsuler le champ dans le code html',
 
-'icone_ajouter_donnee' => "Ajouter des donn&eacute;es",
+'icone_ajouter_donnees' => "Ajouter des r&eacute;ponses",
 'info_articles_lies_donnee' => 'Les articles li&eacute;s',
 'icone_creer_formulaire' => "Cr&eacute;er un nouveau formulaire",
 'icone_creer_table' => "Cr&eacute;er un nouveau formulaire",

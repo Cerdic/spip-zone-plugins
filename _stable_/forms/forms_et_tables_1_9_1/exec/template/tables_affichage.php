@@ -70,28 +70,37 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 }
 
 
-function affichage_donnees_tous($type_form, $titre_page, $titre_type, $titre_ajouter){
+function affichage_donnees_tous($type_form){
 	global $spip_lang_right,$spip_lang_left;
   include_spip("inc/presentation");
 	include_spip('public/assembler');
 
   _Forms_install();
+	$row=spip_fetch_array(spip_query("SELECT titre FROM spip_forms WHERE id_form="._q(_request('id_form'))));
+	$titre_page = $row['titre'];
 	
+	$prefix = forms_prefixi18n($type_form);
+  $icone = find_in_path("img_pack/$type_form-24.png");
+  if (!$icone)
+  	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
 	echo debut_page($titre_page, "documents", "forms");
-	if (!$retour = _request('retour'))
-		$retour = generer_url_ecrire($type_form.'s_tous');
+	if (!$retour = _request('retour')){
+		if (find_in_path("exec/{$type_form}s_tous"))
+			$retour = generer_url_ecrire($type_form.'s_tous');
+		else
+			$retour = generer_url_ecrire('tables_tous');
+	}
 	echo "<table><tr><td>";
 	echo "<div style='float:$spip_lang_left;'>";
-	echo icone(_T('icone_retour'), urldecode($retour), find_in_path("img_pack/$type_form-24.png"), "rien.gif",false);
+	echo icone(_T('icone_retour'), urldecode($retour), $icone, "rien.gif",false);
 	echo "</div>";
 	$id_form = _request('id_form');
 	if (autoriser('administrer','form',$id_form)) {
-		$prefix = forms_prefixi18n($type_form);
 		$retour = urlencode(self());
 		
 		$url_edit = generer_url_ecrire('donnees_edit',"id_form=$id_form&retour=$retour");
 		echo "<div style='float:$spip_lang_left;'>";
-		echo icone($titre_ajouter, $url_edit, "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "creer.gif",false);
+		echo icone(_T("$prefix:icone_ajouter_donnees"), $url_edit, $icone, "creer.gif",false);
 		echo "</div>";
 		
 		echo "<div style='float:$spip_lang_left;'>";
@@ -106,9 +115,8 @@ function affichage_donnees_tous($type_form, $titre_page, $titre_type, $titre_ajo
 		}
 	}
 	
-	$row=spip_fetch_array(spip_query("SELECT titre FROM spip_forms WHERE id_form="._q(_request('id_form'))));
 	echo '<div style="clear:left;text-align:center">';
-	echo gros_titre($row['titre']);
+	echo gros_titre($titre_page);
 	echo '</div>';
 	echo "<div class='verdana2'>";
 	echo '<p><div id="sorting">
@@ -117,7 +125,7 @@ function affichage_donnees_tous($type_form, $titre_page, $titre_type, $titre_ajo
 	<div id="filter"></div></p></div>
 	<div style="clear:both">&nbsp;</div>';
 	
-	$contexte = array('id_form'=>_request('id_form'),'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
+	$contexte = array('id_form'=>_request('id_form'),'titre_liste'=>$titre_page,'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
 	echo recuperer_fond("exec/template/donnees_tous",$contexte);
 	
 	echo "</td></tr></table><br />\n";
@@ -128,12 +136,18 @@ function affichage_donnees_tous($type_form, $titre_page, $titre_type, $titre_ajo
 	echo fin_page();
 }
 
-function affichage_donnee_edit($type_form, $titre_page, $titre_type, $titre_ajouter){
+function affichage_donnee_edit($type_form){
 	global $spip_lang_right;
   include_spip("inc/presentation");
 	include_spip('public/assembler');
 
   _Forms_install();
+	$prefix = forms_prefixi18n($type_form);
+  $icone = find_in_path("img_pack/$type_form-24.png");
+  if (!$icone)
+  	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
+  $titre_page = _T("$prefix:type_des_tables");
+  
   $id_form = intval(_request('id_form'));
   $id_donnee = intval(_request('id_donnee'));
   $res = spip_query("SELECT id_form,statut FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
@@ -152,7 +166,7 @@ function affichage_donnee_edit($type_form, $titre_page, $titre_type, $titre_ajou
 	debut_gauche();
 	debut_boite_info();
 	if ($retour = _request('retour')) {
-		echo icone_horizontale(_T('icone_retour'), urldecode($retour), "../"._DIR_PLUGIN_FORMS."img_pack/$type_form-24.png", "rien.gif",false);
+		echo icone_horizontale(_T('icone_retour'), urldecode($retour), $icone, "rien.gif",false);
 	}
 	if (autoriser('administrer','form',$id_form)) {
 		$prefix = forms_prefixi18n($type_form);

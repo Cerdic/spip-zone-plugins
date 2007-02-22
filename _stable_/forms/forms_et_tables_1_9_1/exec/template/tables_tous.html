@@ -3,7 +3,7 @@
 <B_forms>
 <div class='liste'>
 <div style='position: relative;'>
-	<div style='position: absolute; top: -12px; left: 3px;'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/#ENV{type_form,form}-24.png' alt="" /></div>
+	<div style='position: absolute; top: -12px; left: 3px;'><img src='#CHEMIN{img_pack/(#ENV{type_form,form}|concat{-24.png})}' alt="" /></div>
 	<div style='background-color: #ENV{couleur_claire}; color: black; padding: 3px; padding-left: 30px; border-bottom: 1px solid #444444;' class='verdana2'>
 	<b>[(#ENV{titre_liste,''}|?{'',' '})<:forms:tous_formulaires:>]#ENV*{titre_liste,''}</b>
 	</div>
@@ -33,7 +33,7 @@
 <img src='#EVAL{_DIR_IMG_PACK}puce-[(#GET{donnees}|?{'verte','orange'})]-breve.gif' width='7' height='7' border='0' alt='puce'>&nbsp;&nbsp;
 </td>
 <td class="arial11">
-	<a href='#GET{lien_edite}' class='cellule-h'>
+	<a href='#GET{lien_affiche}' class='cellule-h'>
 	#TITRE</a>
 </td>
 <td class="arial1">&nbsp;

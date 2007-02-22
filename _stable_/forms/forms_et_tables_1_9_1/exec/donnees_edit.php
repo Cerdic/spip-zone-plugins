@@ -14,7 +14,12 @@
 include_spip('exec/template/tables_affichage');
 
 function exec_donnees_edit(){
-	echo affichage_donnee_edit('table',_T("forms:toutes_tables"),_T("forms:tables"),_T("forms:icone_ajouter_donnee"));
+	$type_form = 'table';
+	$id_form = _request('id_form');
+	$res = spip_query("SELECT type_form FROM spip_forms WHERE id_form="._q($id_form));
+	if ($row = spip_fetch_array($res))
+		$type_form = $row['type_form'];
+	echo affichage_donnee_edit($type_form);
 }
 
 ?>
