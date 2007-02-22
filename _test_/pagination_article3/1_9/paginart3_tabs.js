@@ -33,13 +33,13 @@ $(document).ready(function(){
 		var liste = "<ul class='anchors'>";
 		$("div.section",group).each(function(){
 			liste += "<li><a href='#art"+art+"sect"+sect+"'>"+$('span.titre_onglet',this).get(0).innerHTML+"</a></li>";
-			$(this).id('art'+art+'sect'+sect);
+			$(this).attr('id','art'+art+'sect'+sect);
 			$(this).addClass('anchor');
 			sect += 1;
 		});
 		liste += "</ul>";
 		$("div#"+"art"+art+"sect1",group).before(liste);
-		$(this).id('article-container'+art);
+		$(this).attr('id','article-container'+art);
 		$.tabs('article-container'+art);
 		$("div#"+"art"+art+"sect1",group).show();
 		art+=1;

@@ -1,23 +1,21 @@
 <plugin>
   <nom> <!-- Nom du plugin -->
-  Pagination des Articles (Variante)
+  Pagination intertitre (extension de la BTExtensible)
   </nom>
   <auteur>        <!-- Auteur du plugin -->
-  Stephane LAURENT (bill@adequates.com) 
-  a partir des travaux de Cedric (cedric@yterium.com) et James (james@rezo.net)
+  bill (Stephane LAURENT spipcarto@gmail.com)
   </auteur>
   <version>
-  0.1
+  0.2
   </version>
   <etat>
-  test
+  stable
   </etat>
   <description>
-  Paginer les articles en les decoupant selon les titres <code><h3 class="paginart3"></h3></code> 
-  correspondant au raccourci <code>{p{titre}p}</code> et en presentant les pages sous forme d'onglets.
-  Ajoute egalement le bouton correspondant dans la barre typo extensible
+  Paginer les articles en les decoupant selon les intertitres 
+  <code><h3 class="paginart3"></code> correspondant au raccourci <code>{p{titre}p}</code> et en 
+  presentant les pages sous forme d'onglets
   </description>
-	<lien></lien> <!-- URI de documentation -->
   <fonctions>
   paginart3_fonctions.php
   </fonctions>
@@ -28,10 +26,6 @@
   paginart3
   </prefix>
   <pipeline>
-	<nom>pre_propre</nom>
-	<inclure>paginart3_fonctions.php</inclure>
-  </pipeline>
-  <pipeline>
 	<nom>nettoyer_raccourcis_typo</nom>
 	<inclure>paginart3_fonctions.php</inclure>
   </pipeline>
@@ -40,7 +34,7 @@
   	<inclure>paginart3_fonctions.php</inclure>
   </pipeline>
   <pipeline>
-  	<nom>BarreTypoEnrichie_avancees</nom>
+  	<nom>BarreTypoEnrichie_boutonsavances</nom>
   	<inclure>paginart3_fonctions.php</inclure>
   </pipeline>
 </plugin>

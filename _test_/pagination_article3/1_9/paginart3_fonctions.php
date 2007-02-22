@@ -1,19 +1,8 @@
 <?php
 
-function paginart3_BarreTypoEnrichie_avancees($paramArray){
+function paginart3_BarreTypoEnrichie_boutonsavances($paramArray){
 $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	return "&nbsp;".bouton_barre_racc ("barre_raccourci('\n\n{p{','}p}\n\n',".$paramArray[0].")", _DIR_PLUGINS.end($p).'/img_pack/icones_barre/intertitre_p.png', _T('paginart3:barre_intertitre_p'), $paramArray[1])."&nbsp;";	
-}
-function paginart3_pre_propre($texte) {
-	global $debut_intertitre_p, $fin_intertitre_p;
-	$chercher_raccourcis = array(
-		/* 3 */ 	"/(^|[^{])\{p\{/S",
-		/* 4 */ 	"/\}p\}($|[^}])/S");
-	$remplacer_raccourcis = array(
-		/* 3 */ 	"\$1\n\n$debut_intertitre_p",
-		/* 4 */ 	"$fin_intertitre_p\n\n\$1");
-	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
-	return $texte;
 }
 
 function paginart3_nettoyer_raccourcis_typo($texte){
@@ -24,12 +13,12 @@ function paginart3_nettoyer_raccourcis_typo($texte){
 
 function paginart3_paginer($texte){
 	global $debut_intertitre_p,$fin_intertitre_p;
-	$t = explode($debut_intertitre_p,$texte);
+	$t = explode("<h3 class=\"paginart3\">",$texte);
 	if (count($t)>2){
 		$texte = array_shift($t);
 		foreach($t as $p){
-			$p = str_replace($fin_intertitre_p,"</span>$fin_intertitre_p",$p);
-			$texte .= "<div class='section'>$debut_intertitre_p<span class='titre_onglet'>".$p."</div>";
+			$p = str_replace("</h3>","</span></h3>",$p);
+			$texte .= "<div class='section'><h3 class=\"paginart3\"><span class='titre_onglet'>".$p."</div>";
 		}
 		$texte = "<div class='paginer_intertitres'>".$texte."</div>";
 	}
