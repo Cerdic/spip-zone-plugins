@@ -1,0 +1,62 @@
+#CACHE{0}
+#HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
+#HTTP_HEADER{"Pragma: no-cache"}
+
+[(#REM) version modifiée du formulaire_login.html livré par Spip ; ce formulaire est utilisé uniquement pour le LOGIN_PUBLIC]
+
+[(#ENV{echec_cookie})
+<fieldset class="reponse_formulaire">
+<legend><:avis_erreur_cookie:></legend>
+<p><:login_cookie_oblige:></p>
+<p><:login_cookie_accepte:></p>
+</fieldset>]
+
+	<script type="text/javascript" src="#EVAL{_DIR_IMG_PACK}md5.js"> </script>
+	<script type="text/javascript" src="http://jquery.com/src/jquery-latest.pack.js"></script>
+	<script type="text/javascript" src="#EVAL{_DIR_PLUGINS}login_direct_1_9_1/login_direct.js"></script>
+	<form id="login"
+		action="[(#ENV{action2})]"
+		method="post"onsubmit='return login_direct_submit();'>
+	<fieldset>
+	<legend><:form_forum_identifiants:></legend>
+		[<p class="reponse_formulaire">(#ENV*{erreur})</p>]
+
+[(#LOGO_AUTEUR||reduire_image{100,80}|inserer_attribut{alt,#ENV{login_alt}})]
+	<input type="hidden" name="session_login_hidden" value="" />
+	<p><label for="var_login"><:login_login2:></label><br />
+		<input type="text" class="forml" id="var_login" name="var_login" value="[(#ENV{login})]" size="40" /><br />
+		<input type="hidden" name="url_action_hidden" id="url_action_hidden" value="[(#ENV{action})]" />
+[(#ENV{login}|?{' ',''})
+	<input type="hidden" name="url_other_login_hidden" id="url_other_login_hidden" value="[(#ENV{action2}
+		|parametre_url{cookie_admin,non}
+		|parametre_url{url,#ENV*{url}}
+		|parametre_url{retour,#ENV*{self}})]" />
+]
+		<label for="var_password"><:login_pass2:></label><br />
+		<input type="password" class="forml" name="session_password" id="var_password" value="" size="20" /></p>
+	<p><input type="checkbox" name="session_remember" id="session" value="oui"[(#ENV*{prefs}|filtre_rester_connecte)checked="checked"]/>
+	<label for="session"><:login_rester_identifie:></label></p>
+
+	<input type="hidden" name="session_password_md5" value="[(#ENV{login}|?{[(#ENV{alea_actuel})]})]" />
+	<input type="hidden" name="next_session_password_md5" value="[(#ENV{login}|?{[(#ENV{alea_futur})]})]" />
+	<input type="hidden" name="essai_login" value="[(#ENV{login}|?{'oui'})]" />
+	<input type="hidden" name="url" value="[(#ENV{url})]" />
+	<div class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></div>
+	</fieldset>
+	</form>
+<script type="text/javascript"><!--
+document.getElementById('var_login').focus();
+--></script>
+[
+	<form action="(#ENV{auth_http})" method="get">[
+	(#ENV{auth_http}|form_hidden)
+	]
+	<fieldset>
+	<legend><:login_sans_cookiie:></legend>
+	<div><:login_preferez_refuser:>
+	<input type="hidden" name="essai_auth_http" value="oui"/>
+	[<input type="hidden" name="url" value="(#ENV{url})"/>]
+	<div class="spip_bouton"><input type="submit" value="<:login_sans_cookiie:>"/></div></div>
+	</fieldset>
+	</form>
+]
