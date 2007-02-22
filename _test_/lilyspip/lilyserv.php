@@ -92,7 +92,7 @@ function lilypond_($texte, $code_format) {
 
 	//efface fichiers ly log et ps du CACHE
 	if (@file_exists($fichier_ps) && chmod($fichier_ps,0777)) unlink($fichier_ps);
-	//if (@file_exists($fichier_source) && chmod($fichier_source,0777)) unlink($fichier_source);	
+	if (@file_exists($fichier_source) && chmod($fichier_source,0777)) unlink($fichier_source);	
 	if (@file_exists($fichier) && chmod($fichier,0777)) unlink($fichier);
 
 
