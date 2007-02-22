@@ -280,7 +280,7 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 		$s .= "\n<option value='$id'$selected> $le_titre_mot</option>";
 	}
 
-	$ancre = "valider_groupe_$id_groupe"; 
+	$ancre = "valider_groupe_".$id_groupe."_obj_".$id_objet; 
 	// forcer le recalcul du noeud car on est en Ajax
 	$jscript1 = "findObj_forcer('$ancre').style.visibility='visible';";
 
@@ -292,7 +292,7 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 
 	$t =  _T('bouton_changer');
 
-	return ajax_action_post('editer_mot', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet",$corps, $t, " class='fondo spip_xx-small visible_au_chargement' id='$ancre'", "&id_objet=$id_objet&objet=$objet");
+	return ajax_action_post('editer_mot', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet",$corps, $t, " class='fondo spip_xx-small visible_au_chargement' id='$ancre'", "", "&id_objet=$id_objet&objet=$objet");
 }
 
 
@@ -345,7 +345,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 				"$table_id=$id_objet",
 				$corps,
 				$clic,
-				" class='visible_au_chargement fondo spip_xx-small' id='valider_groupe_$id_groupe'",
+				" class='visible_au_chargement fondo spip_xx-small' id='valider_groupe_".$id_groupe."_obj_".$id_objet."'",
 				"&id_objet=$id_objet&objet=$objet&select_groupe=$id_groupe");
 		}
 	}
@@ -390,7 +390,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots, $cle_objet='')
 	$obligatoire = $row['obligatoire']=='oui' AND !in_array($id_groupe, $id_groupes_vus);
 
 	$res = '';
-	$ancre = "valider_groupe_$id_groupe$cle_objet"; 
+	$ancre = "valider_groupe_".$id_groupe."_obj_".$cle_objet;
 
 	// forcer le recalcul du noeud car on est en Ajax
 	$jscript1 = "findObj_forcer('$ancre').style.visibility='visible';";
