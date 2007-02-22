@@ -17,8 +17,8 @@ function smslist_ajouter_boutons($boutons_admin) {
 
 	  // on voit le bouton dans la barre "naviguer"
 		$boutons_admin['naviguer']->sousmenu["smslist_listes_tous"]= new Bouton(
-		_DIR_PLUGIN_SMSLIST."img_pack/spip-sms-listes-24.gif",  // icone
-		_T("smslistliste:listes_abonnes") //titre
+		_DIR_PLUGIN_SMSLIST."img_pack/smslist_message-24.gif",  // icone
+		_L("Spip-SMS-Listes") //titre
 		);
 	}
 	return $boutons_admin;
