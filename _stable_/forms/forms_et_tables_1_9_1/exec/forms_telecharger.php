@@ -77,9 +77,12 @@ function exec_forms_telecharger(){
 	else
 		$retour = generer_url_ecrire('forms_tous');
 	
-	$titre = _T("forms:telecharger_reponses");
+	$res = spip_query("SELECT type_form FROM spip_forms WHERE id_form="._q($id_form));
+	$row = spip_fetch_array($res);
+	$prefix = forms_prefixi18n($row['type_form']);
+	$titre = _T("$prefix:telecharger_reponses");
 
-	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png";
+	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
 	
 	debut_page($titre, "documents", "forms");
 	debut_gauche();
