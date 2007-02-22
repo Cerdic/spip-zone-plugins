@@ -85,14 +85,14 @@ function lilypond_($texte, $code_format) {
 			exec($cmd2);
 		}
 		else { // insertion du fichier log dans l image
-		$cmd3 = $convert_bin." -size 700x100 xc:white -pointsize 10 -gravity northwest -annotate 0 @".$fichier." ".$fichier_image;
+		$cmd3 = $convert_bin." -size 800x150 xc:white -pointsize 10 -gravity northwest -annotate 0 @".$fichier." ".$fichier_image;
 		exec($cmd3);
 		}
 	}
 
 	//efface fichiers ly log et ps du CACHE
 	if (@file_exists($fichier_ps) && chmod($fichier_ps,0777)) unlink($fichier_ps);
-	if (@file_exists($fichier_source) && chmod($fichier_source,0777)) unlink($fichier_source);	
+	//if (@file_exists($fichier_source) && chmod($fichier_source,0777)) unlink($fichier_source);	
 	if (@file_exists($fichier) && chmod($fichier,0777)) unlink($fichier);
 
 

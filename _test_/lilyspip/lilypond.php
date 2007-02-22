@@ -26,11 +26,13 @@
 // Gestion du raccourci <lilypond>...</lilypond> en client-serveur
 //
 
-define('_DIR_Lilypond', _DIR_IMG . "cache-Lilypond/");	
+	
 
+// Pour compatibilite - ajout de Patrice  VANNEUFVILLE
+if ($GLOBALS['spip_version_code']<1.92) define(_DIR_VAR, _DIR_IMG);
+define('_DIR_Lilypond', sous_repertoire(_DIR_VAR, "cache-Lilypond"));	
 
-
-function midi_lilypond($tex) {
+function lilyspip_genere_midi($tex) {
 	
 	
 	$server = $GLOBALS['meta']['lilyspip_server'];
@@ -61,7 +63,7 @@ function midi_lilypond($tex) {
 	
 
 	if ( @filesize($fichiermidi)) {
-		return "<a href=\"$fichiermidi\"  />";
+		return "<a href=\"$fichiermidi\" >";
 		}
 	else // pas de fichier
 		return "";
@@ -69,7 +71,7 @@ function midi_lilypond($tex) {
 
 
 
-function image_lilypond($tex) {
+function lilyspip_genere_image($tex) {
 
 	
 	$server = $GLOBALS['meta']['lilyspip_server'];
@@ -97,7 +99,12 @@ function image_lilypond($tex) {
 		}
 	
 	// l'image correspond soit à la partition soit au log 
+
 	$tex = entites_html($tex);
+	// supprimer les retour à la ligne du code 
+	$tex=str_replace(CHR(10),"",$tex); 
+	$tex=str_replace(CHR(13),"",$tex);  
+
 	if (@file_exists($fichier)) {
 		list(,,,$size) = @getimagesize($fichier);
 		$alt = "alt=\"$tex\" title=\"$tex\""; 
@@ -123,14 +130,13 @@ function caracteres_alt($texte) {
 
 // Fonction appelee par propre() s'il repere un mode <lilypond>
 function lilyspip_pre_propre($letexte) {
-	global $flag_ecrire;
 			
 	preg_match_all("|<lilypond>(.*?)</lilypond>|s", $letexte, $regs, PREG_SET_ORDER);
 
 	foreach ($regs as $lily) {
-		$mid = midi_lilypond($lily[1]);
+		$mid = lilyspip_genere_midi($lily[1]);
 		if ($mid == "") $aendtag = ""; else $aendtag = "</a>";
-		$img = "\n<p class=\"spip\" style=\"text-align: center;\">".$mid.image_lilypond($lily[1]).$aendtag."</p>\n";
+		$img = "\n<p class=\"spip\" style=\"text-align: center;\">".$mid.lilyspip_genere_image($lily[1]).$aendtag."</p>\n";
 		
 		$letexte = str_replace($lily[0], $img, $letexte);
 	}		

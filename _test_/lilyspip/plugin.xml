@@ -7,13 +7,13 @@
 _ &copy; 2006 - Distribu&eacute; sous licence GPL
 	</auteur>
 	<version> <!-- Version du plugin -->
-	1.0
+	1.1
 	</version>
 	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	test
 	</etat>
 	<description>
-	Ins&eacute;rer des notations musicales en utilisant Lilypond
+	Ins&eacute;rer des notations musicales en utilisant Lilypond : http://lilypond.org/web/index
 	</description>
 	<lien>http://www.spip.net/fr_article3448.html</lien> <!-- URI de documentation -->
 	
@@ -25,6 +25,9 @@ _ &copy; 2006 - Distribu&eacute; sous licence GPL
 	<prefix> 
 	lilyspip
 	</prefix>
+	<install>
+	lilyspip_gestion.php
+	</install>	
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<!-- Le parametre action est facultatif : en son absence la fonction appelee sera le prefixe suivi du nom du pipeline
 	ex : template_affichage_final()
@@ -34,7 +37,7 @@ _ &copy; 2006 - Distribu&eacute; sous licence GPL
 
 	<nom>ajouter_boutons</nom>
 	<action>ajouterBoutons</action>
-	<inclure>lilyspip_boutons.php</inclure>
+	<inclure>lilyspip_gestion.php</inclure>
 	</pipeline>
 	
 	

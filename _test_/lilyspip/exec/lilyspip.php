@@ -1,13 +1,14 @@
 
 <?php
 
-
+// compatibilite spip 1.9 ajout de Patrice  VANNEUFVILLE
+if ($GLOBALS['spip_version_code']<1.92) { function fin_gauche(){return false;} }
 
 function exec_lilyspip(){}
 include_ecrire('inc/presentation');
  		
 
-		if (isset($_POST['lilyspip_server'])){		
+	if (isset($_POST['lilyspip_server'])){		
 	ecrire_meta('lilyspip_server',$_POST['lilyspip_server']);
  	ecrire_metas();
  	lire_metas();
@@ -15,7 +16,9 @@ include_ecrire('inc/presentation');
 	}
  	$adresse_serveur=$GLOBALS['meta']['lilyspip_server'];
 
-	debut_page(_T('Lilyspip'), "", "");
+
+  	debut_page(_T('lilyspip:lilyspip_plugin'), '', '');
+
 
 	echo "<br /><br /><br />";
 	gros_titre(_T('lilyspip:lilyspip_plugin'));
@@ -27,6 +30,7 @@ include_ecrire('inc/presentation');
 	
 	debut_droite();
 	debut_cadre_trait_couleur("", false, "", _T('lilyspip:parametrage_lilyspip'));
+
 
 if ($GLOBALS['connect_statut'] == "0minirezo") {
 	echo generer_url_post_ecrire("lilyspip");	
@@ -55,5 +59,6 @@ if ($GLOBALS['connect_statut'] == "0minirezo") {
 	
 	
 fin_cadre_trait_couleur();
+fin_gauche();
 fin_page();
 ?>
