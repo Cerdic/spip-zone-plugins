@@ -14,7 +14,7 @@ function exec_listetable(){
 	echo debut_page(_T('edittable:spip_edittable'));
 		echo debut_gauche();
 			echo debut_boite_info();
-				echo "Hello World !";
+				echo _T('edittable:les_tables_de_la_base');
 			echo fin_boite_info();
 			echo debut_raccourcis();
 				echo '<a href="?exec=listetable">'._T('edittable:les_table').'</a>';
@@ -22,12 +22,12 @@ function exec_listetable(){
 		echo debut_droite();
 			$res_list_table = spip_query("SHOW TABLES;");
 			debut_cadre_trait_couleur("../"._DIR_PLUGIN_edittable."/img_pack/digg.png", false, '', _T('edittable:mes_edittable_en'));
-			echo '<table>';
+			//echo '<table style="width:100%">';
 			while ($row_table = MYSQL_fetch_row($res_list_table)){
 				//var_dump($row_table);
-				echo '<tr><td>'.$row_table[0].'</td><td><a href="?exec=edittable&amp;table='.$row_table[0].'">'.$row_table[0].'</a></td></tr>';
+				//echo '<tr><td style="border-bottom: 1px solid black; margin: 20px; widht: 100%;">'; echo debut_boite_info(); echo '<b>'.$row_table[0].'</b><br /><a href="?exec=edittable&amp;table='.$row_table[0].'">'._T('edittable:editer_la_table').'</a></td></tr>';
+				echo debut_boite_info(); echo '<b>'.$row_table[0].'</b><br /><a href="?exec=edittable&amp;table='.$row_table[0].'">'._T('edittable:editer_la_table').'</a>';echo fin_boite_info(); echo '<br />';
 			}
-			echo '</table>';
 			fin_cadre_trait_couleur(false);
 			
 			

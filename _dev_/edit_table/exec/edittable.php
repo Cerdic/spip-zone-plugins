@@ -41,7 +41,7 @@ function exec_edittable(){
 			debut_cadre_trait_couleur("../"._DIR_PLUGIN_edittable."/img_pack/digg.png", false, '', _T('edittable:mes_edittable_en'));
 			echo '<table>';
 			while ($row_edittable = spip_fetch_array($res_list_edittable)){
-				echo '<tr><td>'.$row_edittable[$structure[1]].'</td><td>'.$row_edittable[$structure[2]].'</td><td>'.$row_edittable[$structure[3]].'</td><td><a href="?exec=edittable_voir&amp;valeur_cle='.$row_edittable[$olonne_cle].'&amp;table='._request('table').'&amp;colonne_cle='.$olonne_cle.'">'._T('edittable:editer_enregistrement').'</a></td></tr>';
+				echo '<tr><td>'._T('edittable:enregistrement_numero').'&nbsp;<b>'.$row_edittable[$olonne_cle].'</b><a href="?exec=edittable_voir&amp;valeur_cle='.$row_edittable[$olonne_cle].'&amp;table='._request('table').'&amp;colonne_cle='.$olonne_cle.'">'._T('edittable:editer_enregistrement').'</a></td></tr>';
 			}
 			echo '</table>';
 			fin_cadre_trait_couleur(false);
