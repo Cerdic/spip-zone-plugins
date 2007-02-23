@@ -24,7 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'importer_donnees_csv' => "Importer des listes de diffusion",
 
 // page donnees_edit
-'lien_retirer_donnee' => 'Retirer cette listes de diffusion',
+'lien_retirer_donnee_liee' => 'Retirer cette liste de diffusion',
+'lien_retirer_donnee_liante' => 'Enlever de cette liste de diffusion',
 'articles_utilisant'=> "Articles utilisant cette liste",
 'suivi_reponses' => "Voir les listes de diffusion",
 'aucune_reponse' => "Aucune liste de diffusion",

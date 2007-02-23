@@ -24,7 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'importer_donnees_csv' => "Importer des SMS",
 
 // page donnees_edit
-'lien_retirer_donnee' => 'Retirer ce SMS',
+'lien_retirer_donnee_liee' => 'Retirer ce SMS',
+'lien_retirer_donnee_liante' => 'Retirer ce SMS',
 'articles_utilisant'=> "Articles li&eacute; a ce SMS",
 'suivi_reponses' => "Voir les SMS",
 'aucune_reponse' => "Aucun SMS",

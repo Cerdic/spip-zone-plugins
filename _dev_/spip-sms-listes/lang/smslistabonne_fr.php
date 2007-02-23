@@ -24,7 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'importer_donnees_csv' => "Importer des abonn&eacute;s",
 
 // page donnees_edit
-'lien_retirer_donnee' => 'Retirer cet abonn&eacute;',
+'lien_retirer_donnee_liee' => 'Desabonner',
+'lien_retirer_donnee_liante' => 'Retirer cet abonn&eacute;',
 'articles_utilisant'=> "Articles li&eacute; a cet abonn&eacute;",
 'suivi_reponses' => "Voir les abonn&eacute;s",
 'aucune_reponse' => "Aucun abonn&eacute;",
