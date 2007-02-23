@@ -5,6 +5,37 @@
 // Startup variables
 var theSelection = false;
 
+// Variables globales
+var currentTimeout;
+
+// Déclencher une fonction après n secondes ou annuler un appel précédent à la fonction
+function delayFunction(callbackFunction, seconds, param){
+	if(this.currentTimeout)
+		clearTimeout(this.currentTimeout);
+	if(callbackFunction && seconds){
+		stringfct=callbackFunction+'(\''+param+'\')';
+		this.currentTimeout = setTimeout(stringfct, seconds*1000);
+	}
+}
+
+function toggle_preview(id) {
+
+	if ($("#article_preview").size()==0) {
+		windowInit('preview','Preview','<div id="article_preview" class="preview_'+id+'"></div>');
+		centerElementById("preview");
+		$.ajaxTimeout( 5000 );
+		$("#article_preview").css("height",$("#"+id).css("height"));
+		MajPreview(id);
+		$("#"+id).keypress(function() { MajPreview(id) });
+//		$("#article_preview").show();		
+	} else {
+		$("#preview").remove();
+	}
+}
+
+function preview_off() {
+}
+
 // Check for Browser & Platform for PC & IE specific bits
 // More details from: http://www.mozilla.org/docs/web-developer/sniffer/browser_type.html
 var clientPC = navigator.userAgent.toLowerCase(); // Get client info
@@ -102,6 +133,28 @@ function barre_inserer(text,champ) {
 	}
 }
 
+// Attention : rec_tout (mot entier) n'est pas actif !
+function barre_search(chercher,rec_entier, rec_case, champ) {
+	if(chercher != null && champ.value != null) {
+		if(champ.selectionStart == champ.selectionEnd) {
+			ndx = 0;
+		} else {
+			ndx = champ.selectionEnd;
+		}
+		if (rec_case == false) {
+			var x = champ.value.toLowerCase().indexOf(chercher.toLowerCase(),ndx);
+		} else {
+			var x = champ.value.indexOf(chercher,ndx);
+		}
+		if(x!=-1)
+		{ 
+			var end = (x+chercher.length);
+			champ.setSelectionRange(x,end);
+			champ.focus();
+		}
+	}
+}
+
 function barre_searchreplace(chercher,remplacer, rec_tout, rec_case, rec_entier, champ) {
 	
 	var condition = "";
@@ -120,6 +173,44 @@ function barre_searchreplace(chercher,remplacer, rec_tout, rec_case, rec_entier,
 
   champ.value = champ.value.replace(re, remplacer);
 /*   mozWrap(txtarea, debut, fin); */
+}
+
+function barre_2Majuscules(champ) {
+	var oldSelStart = champ.selectionStart;
+	var oldSelEnd = champ.selectionEnd;
+	if(oldSelStart == oldSelEnd) {
+		champ.value = champ.value.toUpperCase();
+	} else {
+		var val = champ.value.substring(champ.selectionStart,champ.selectionEnd);
+		var oldSelStart = champ.selectionStart;
+			
+		val = val.toUpperCase();
+				
+		champ.value = champ.value.substring(0,champ.selectionStart)
+		+val
+		+champ.value.substring(champ.selectionEnd,champ.value.length);
+	}
+	champ.setSelectionRange(oldSelStart,oldSelEnd);
+	champ.focus();
+}
+
+function barre_2Minuscules(champ) {
+	var oldSelStart = champ.selectionStart;
+	var oldSelEnd = champ.selectionEnd;
+	if(oldSelStart == oldSelEnd) {
+		champ.value = champ.value.toLowerCase();
+	} else {
+		var val = champ.value.substring(champ.selectionStart,champ.selectionEnd);
+		var oldSelStart = champ.selectionStart;
+			
+		val = val.toLowerCase();
+				
+		champ.value = champ.value.substring(0,champ.selectionStart)
+		+val
+		+champ.value.substring(champ.selectionEnd,champ.value.length);
+	}
+	champ.setSelectionRange(oldSelStart,oldSelEnd);
+	champ.focus();
 }
 
 // D'apres Nicolas Hoizey 
@@ -218,7 +309,7 @@ function mozWrap(txtarea, open, close)
 	window.setSelectionRange(txtarea, selDeb, selFin);
 	txtarea.scrollTop = selTop;
 	txtarea.focus();
-	
+	MajPreview(txtarea);
 	return;
 }
 
@@ -229,3 +320,13 @@ function mozWrap(txtarea, open, close)
          textEl.caretPos = document.selection.createRange().duplicate();
      }
 
+//insere un tableau courcy michael ec49.org/sitenkit2/
+ 	var zone_selection;
+ 	function barre_tableau(champs_de_texte, cheminediteur){
+ 		zone_selection = champs_de_texte;
+
+ 		hauteur=600;
+ 		largeur=700;
+ 		propriete='scrollbars=yes,resizable=yes,width='+largeur+',height='+hauteur;
+		w=window.open(cheminediteur+'/editeur/table.html', '',propriete);
+ 	}
