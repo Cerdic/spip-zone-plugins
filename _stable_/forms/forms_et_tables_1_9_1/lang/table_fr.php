@@ -15,7 +15,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'importer_donnees_csv' => "Importer des donn&eacute;es",
 
 // page donnees_edit
-'lien_retirer_donnee' => "Retirer cette donn&eacute;e",
+'lien_retirer_donnee_liee' => "Retirer cette donn&eacute;e",
+'lien_retirer_donnee_liante' => "Retirer le lien depuis cette donn&eacute;e",
 'articles_utilisant'=> "Articles utilisant cette table",
 'suivi_reponses' => "Voir les donn&eacute;es",
 'aucune_reponse' => "Aucune donn&eacute;e",

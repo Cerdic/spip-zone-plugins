@@ -66,4 +66,5 @@ var setDonnee = function(data) {
 
 $(document).ready(function(){
 		$('#forms_lier_donnees').ajaxAction();
+		$('#forms_donnees_liantes').ajaxAction();
 });

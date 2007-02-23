@@ -95,7 +95,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_supprimer_formulaire_reponses' => "Des donn&eacute;es sont associ&eacute;es &agrave; ce formulaire. Voulez-vous vraiment le supprimer ?",
 
 'liste_choix' => "Liste des choix propos&eacute;s",
-'lien_retirer_donnee' =>"Retirer le lien",
+'lien_retirer_donnee_liee' =>"Retirer le lien",
+'lien_retirer_donnee_liante' =>"Retirer le lien",
 'lier_articles' => "Permettre d'associer les donn&eacute;es aux articles",
 'lier_documents' => "Permettre de joindre des documents aux donn&eacute;es",
 

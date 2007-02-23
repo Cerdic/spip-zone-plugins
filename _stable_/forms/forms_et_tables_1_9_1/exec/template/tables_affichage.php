@@ -240,6 +240,17 @@ function affichage_donnee_edit($type_form){
 		}
 		echo $liste;
 	}
+
+	list($out,$les_donnees,$nombre_donnees) = Forms_afficher_liste_donnees_liees(
+		"donnee_liee", 
+		$id_donnee, 
+		"donnee", 
+		"forms_donnees_liantes", 
+		"forms_donnees_liantes", 
+		"id_donnee=$id_donnee", 
+		self());
+	echo "<div id='forms_donnees_liantes'>$out</div>";
+	
 	if ($GLOBALS['spip_version_code']>=1.9203)
 		echo fin_gauche();
 	echo fin_page();

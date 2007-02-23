@@ -724,4 +724,120 @@ function Forms_obligatoire($row,$forms_obligatoires){
 	}
 	return $returned;	
 }
+
+function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $script, $bloc_id, $arg_ajax, $retour){
+	// article, donnee
+	// donnee, donnee_liee
+	// donnee_liee, donnee
+	$lieeliante = ($type_source=='donnee_liee')?'liante':'liee';
+	$linkable = $type_source!='donnee_liee';
+	
+	$out = "";
+	$iid = intval($id);
+
+	$les_donnees = "0";
+	$nombre_donnees = 0;
+	$liste = array();
+	$forms = array();
+	$types = array();
+	$prefixi18n = array();
+	
+	$champ_donnee_liee = "id_$type_lie";
+	$champ_donnee_source = "id_$type_source";
+	$table_liens = strncmp($type_source,"donnee",6)==0?"spip_forms_donnees_donnees":"spip_forms_donnees_{$type_source}s";
+	
+	$res = spip_query("SELECT l.$champ_donnee_liee FROM $table_liens AS l WHERE l.$champ_donnee_source="._q($iid));
+	$nombre_donnees = $cpt = spip_num_rows($res);
+	while ($row = spip_fetch_array($res,SPIP_NUM))	$les_donnees.=",".$row[0];
+
+	$tranches = ($cpt>1000)?2*_TRANCHES:_TRANCHES;
+	$tmp_var = $bloc_id;
+	$nb_aff = floor(1.5 * $tranches);
+	if ($cpt > $nb_aff) {
+		$nb_aff = $tranches; 
+		$tranches = afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire($script,$arg_ajax), $nb_aff);
+	} else $tranches = '';
+	
+	$deb_aff = _request($tmp_var);
+	$deb_aff = ($deb_aff !== NULL ? intval($deb_aff) : 0);
+	
+	$limit = (($deb_aff < 0) ? '' : " LIMIT $deb_aff, $nb_aff");	
+	
+	$res = spip_query(
+	"SELECT dl.$champ_donnee_liee 
+	FROM $table_liens AS dl 
+	JOIN spip_forms_donnees AS d ON d.id_donnee=dl.$champ_donnee_liee
+	WHERE dl.$champ_donnee_source="._q($iid)."
+	ORDER BY d.id_form $limit");
+	while ($row = spip_fetch_array($res)){
+		list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($row[$champ_donnee_liee],true,$linkable);
+		if (!count($t))
+			list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($row[$champ_donnee_liee], false,$linkable);
+		if (count($t)){
+			$liste[$id_form][$row[$champ_donnee_liee]]=$t;
+			$forms[$id_form] = $titreform;
+			$types[$id_form] = $type_form;
+		}
+	}
+	foreach($types as $type_form)
+		$prefixi18n[$type_form] = forms_prefixi18n($type_form);
+	
+	if (count($liste) OR $tranches) {
+		$out .= "<div class='liste liste-donnees'>";
+		$out .= $tranches;
+		$out .= "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
+		$table = array();
+		foreach($liste as $id_form=>$donnees){
+			$vals = array();
+			$vals[] = "";
+			$vals[] = "<a href='".generer_url_ecrire("donnees_tous","id_form=$id_form&retour=".urlencode($retour))."'>".$forms[$id_form]."</a>";
+			$vals[] = "";
+			$table[] = $vals;
+			foreach($donnees as $id_donnee=>$champs){
+				$vals = array();
+				$vals[] = $id_donnee;
+				$vals[] = "<a href='".generer_url_ecrire("donnees_edit","id_form=$id_form&id_donnee=$id_donnee&retour=".urlencode($retour))."'>"
+					.implode(", ",$champs)."</a>";
+				$redirect = ancre_url((_DIR_RESTREINT?"":_DIR_RESTREINT_ABS).self(),'tables');
+				if ($lieeliante=='liee')
+					$action = generer_action_auteur("forms_lier_donnees","$id,$type_source,retirer,$id_donnee",urlencode($redirect));
+				else
+					$action = generer_action_auteur("forms_lier_donnees","$id_donnee,$type_lie,retirer,$id",urlencode($redirect));
+				$action = ancre_url($action,$bloc_id);
+				$redirajax = generer_url_ecrire($script,$arg_ajax);
+				$vals[] = "<a href='$action' rel='$redirajax' class='ajaxAction' >"
+					. _T($prefixi18n[$types[$id_form]].":lien_retirer_donnee_$lieeliante")."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'")
+					. "</a>";
+				$table[] = $vals;
+			}
+		}
+		$largeurs = array('', '', '', '', '');
+		$styles = array('arial11', 'arial11', 'arial2', 'arial11', 'arial11');
+		$out .= afficher_liste($largeurs, $table, $styles, false);
+	
+		$out .= "</table></div>\n";
+	}
+	return array($out,$les_donnees,$nombre_donnees) ;
+}
+
+function Forms_liste_decrit_donnee($id_donnee, $specifiant=true, $linkable=true){
+	$t = array();$titreform="";
+	if ($specifiant) $specifiant = "c.specifiant='oui' AND ";
+	else $specifiant="";
+	if ($linkable) $linkable = " AND f.linkable='oui'";
+	else $linkable = "";
+	$res2 = spip_query("SELECT c.titre,dc.valeur,f.titre AS titreform,f.id_form,f.type_form FROM spip_forms_donnees_champs AS dc 
+	JOIN spip_forms_donnees AS d ON d.id_donnee=dc.id_donnee
+	JOIN spip_forms_champs AS c ON c.champ=dc.champ AND c.id_form=d.id_form
+	JOIN spip_forms AS f ON f.id_form=d.id_form
+	WHERE $specifiant dc.id_donnee="._q($id_donnee)."$linkable ORDER BY c.rang");
+	while ($row2 = spip_fetch_array($res2)){
+		$t[$row2['titre']] = $row2['valeur'];
+		$titreform = $row2['titreform'];
+		$id_form = $row2['id_form'];
+		$type_form = $row2['type_form'];
+	}
+	return array($id_form,$titreform,$type_form,$t);
+}
+
 ?>
