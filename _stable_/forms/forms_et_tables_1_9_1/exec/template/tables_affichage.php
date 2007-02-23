@@ -44,10 +44,13 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 			$contexte = array('type_form'=>$row['type_form'],'titre_liste'=>_T("$prefix:toutes_tables")." [".$row['type_form']."]",'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
 			echo recuperer_fond("exec/template/tables_tous",$contexte);
 			if (autoriser('creer','form')) {
+			  $icone = find_in_path("img_pack/".($row['type_form']?$row['type_form']:'form')."-24.png");
+			  if (!$icone)
+			  	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/table-24.png";
 				echo "<div style='float:right'>";
 				$link=generer_url_ecrire('forms_edit', "new=oui&type_form=".$row['type_form']);
 				$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
-				icone(_T("$prefix:icone_creer_table"), $link, "../"._DIR_PLUGIN_FORMS. "img_pack/".($row['type_form']?$row['type_form']:'form')."-24.png", "creer.gif");
+				icone(_T("$prefix:icone_creer_table"), $link, $icone, "creer.gif");
 				echo "</div>";
 			}
 		}
@@ -58,10 +61,13 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 		echo recuperer_fond("exec/template/tables_tous",$contexte);
 		
 		if (autoriser('creer','form')) {
+		  $icone = find_in_path("img_pack/".($type_form?$type_form:'form')."-24.png");
+		  if (!$icone)
+		  	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/table-24.png";
 			echo "<div align='right'>";
 			$link=generer_url_ecrire('forms_edit', "new=oui&type_form=$type_form");
 			$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
-			icone(_T("$prefix:icone_creer_table"), $link, "../"._DIR_PLUGIN_FORMS. "img_pack/$type_form-24.png", "creer.gif");
+			icone(_T("$prefix:icone_creer_table"), $link, $icone, "creer.gif");
 			echo "</div>";
 		}
 	}
