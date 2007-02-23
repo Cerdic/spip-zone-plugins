@@ -76,7 +76,7 @@ function editer_article_texte($texte, $config, $aider)
 	if ($config['afficher_barre']) {
 		include_spip('inc/barre');
 		$afficher_barre = '<div>' 
-		.  afficher_barre('document.getElementById(\'texte_area\')')
+		.  afficher_barre('document.getElementById(\'text_area\')')
 		. '</div>';
 	} else $afficher_barre = '';
 
