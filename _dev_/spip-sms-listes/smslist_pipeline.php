@@ -16,7 +16,7 @@ function smslist_ajouter_boutons($boutons_admin) {
 	AND (!isset($GLOBALS['meta']['activer_smslist']) OR $GLOBALS['meta']['activer_smslist']!="non") ) {
 
 	  // on voit le bouton dans la barre "naviguer"
-		$boutons_admin['naviguer']->sousmenu["smslist_listes_tous"]= new Bouton(
+		$boutons_admin['naviguer']->sousmenu["spip_sms_listes"]= new Bouton(
 		_DIR_PLUGIN_SMSLIST."img_pack/smslist_message-24.gif",  // icone
 		_L("Spip-SMS-Listes") //titre
 		);

@@ -44,13 +44,15 @@ function exec_spip_sms_listes() {
 	$retour = generer_url_ecrire('spip_sms_listes');
 
 	$gerer = tables_ou_donnees('smslist_message',$retour);
-	echo icone_etendue(_T("smslist:gerer_messages"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist_nouveau_message-64.png", "rien.gif",false);
-	
-	$gerer = tables_ou_donnees('smslist_abonne',$retour);
-	echo icone_etendue(_T("smslist:gerer_abonnes"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist_abonne-64.png", "rien.gif",false);
-	
+	echo icone_etendue(_T("smslist:icone_gerer_messages"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist_message-64.png", "rien.gif",false);
+		
 	$gerer = tables_ou_donnees('smslist_liste',$retour);
-	echo icone_etendue(_T("smslist:gerer_listes"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist_liste-64.png", "rien.gif",false);
+	echo icone_etendue(_T("smslist:icone_gerer_listes"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist_liste-64.png", "rien.gif",false);
+
+	$gerer = tables_ou_donnees('smslist_abonne',$retour);
+	echo icone_etendue(_T("smslist:icone_gerer_abonnes"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist_abonne-64.png", "rien.gif",false);
+	
+	echo icone_etendue(_T("smslist:icone_configurer"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist-config-64.png", "rien.gif",false);
 
 	echo creer_colonne_droite();
 
