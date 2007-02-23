@@ -1,4 +1,6 @@
 #CACHE{0}
+<BOUCLE_test(FORMS_DONNEES){id_form}{statut!=poubelle}{0,1}>
+<div class='verdana2'><p><div id="sorting"><div>Tri en cours, un instant...</div></div><div id="filter"></div></p></div><div style="clear:both">&nbsp;</div>
 #SET{colonnes_sans_tri,'0,1'}<BOUCLE_form(FORMS){id_form}>#SET{documents,#DOCUMENTS|=={oui}|?{' '}}</BOUCLE_form>
 	<link rel="stylesheet" type="text/css" href="#EVAL{_DIR_PLUGIN_FORMS}img_pack/donnees_tous.css" />
 	<script type="text/javascript" src="#EVAL{_DIR_PLUGIN_FORMS}javascript/jquery.tablesorter.dev.js"></script>
@@ -78,3 +80,6 @@
 	});
 	// -->
 	</script>	
+</BOUCLE_test>
+#ENV*{aucune_reponse}
+<//B_test>

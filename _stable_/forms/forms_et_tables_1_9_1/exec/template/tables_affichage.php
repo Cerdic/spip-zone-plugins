@@ -120,14 +120,10 @@ function affichage_donnees_tous($type_form){
 	echo '<div style="clear:left;text-align:center">';
 	echo gros_titre($titre_page);
 	echo '</div>';
-	echo "<div class='verdana2'>";
-	echo '<p><div id="sorting">
-	<div>Tri en cours, un instant...</div>
-	</div>
-	<div id="filter"></div></p></div>
-	<div style="clear:both">&nbsp;</div>';
 	
-	$contexte = array('id_form'=>_request('id_form'),'titre_liste'=>$titre_page,'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
+	$contexte = array('id_form'=>_request('id_form'),
+	'titre_liste'=>$titre_page,'aucune_reponse'=>_T("$prefix:aucune_reponse"),
+	'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
 	echo recuperer_fond("exec/template/donnees_tous",$contexte);
 	
 	echo "</td></tr></table><br />\n";
