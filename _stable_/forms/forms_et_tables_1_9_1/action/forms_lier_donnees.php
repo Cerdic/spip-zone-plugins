@@ -21,7 +21,7 @@ function action_forms_lier_donnees(){
 	$id_auteur = $auteur_session['id_auteur'];
 	$redirect = urldecode(_request('redirect'));
 	$cherche_donnee = _request('cherche_donnee');
-	$id_donnee_liee = intval(_request('id_donnee_liee'));
+	$id_donnee_liee = _request('id_donnee_liee'); // peut etre un tableau du fait d'un select multiple
 	if (!$id_donnee_liee) $id_donnee_liee = intval(_request('_id_donnee_liee'));
 	if ($redirect==NULL) $redirect="";
 	if (!include_spip("inc/securiser_action"))
@@ -38,9 +38,14 @@ function action_forms_lier_donnees(){
 				$champ_donnee = 'id_donnee';
 				if ($type=='donnee') 
 					$champ_donnee = 'id_donnee_liee';
-				$res = spip_query("SELECT * FROM spip_forms_donnees_{$type}s WHERE id_$type="._q($id)." AND $champ_donnee="._q($id_donnee_liee));
-				if (!$row = spip_fetch_array($res))
-					spip_query("INSERT INTO spip_forms_donnees_{$type}s (id_$type,$champ_donnee) VALUES ("._q($id).","._q($id_donnee_liee).")");
+				if (!is_array($id_donnee_liee)) $id_donnee_liee = array($id_donnee_liee);
+				foreach($id_donnee_liee as $id_liee) {
+					if ($id_liee = intval($id_liee)) {
+						$res = spip_query("SELECT * FROM spip_forms_donnees_{$type}s WHERE id_$type="._q($id)." AND $champ_donnee="._q($id_liee));
+						if (!$row = spip_fetch_array($res))
+							spip_query("INSERT INTO spip_forms_donnees_{$type}s (id_$type,$champ_donnee) VALUES ("._q($id).","._q($id_liee).")");
+					}
+				}
 				$redirect = parametre_url($redirect,'cherche_donnee','');
 			}
 			if (!$id_donnee_liee){

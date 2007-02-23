@@ -26,7 +26,7 @@ function inc_forms_lier_donnees($type, $id, $script, $deplie=false){
 	//
 	// Afficher les donnees liees, rangees par tables
 	//
-	list($s,$les_donnees) = Forms_formulaire_objet_afficher_donnees($type,$id,$script,$type_table);
+	list($s,$les_donnees, $nombre_donnees) = Forms_formulaire_objet_afficher_donnees($type,$id,$script,$type_table);
 	$form .= Forms_formulaire_objet_chercher_donnee($type,$id,$les_donnees, $script, $type_table);
 	
 	$out = "";
@@ -45,7 +45,7 @@ function inc_forms_lier_donnees($type, $id, $script, $deplie=false){
 		$icone = find_in_path("img_pack/$type_table-24.png");
 	if (!$icone)
 		$icone = find_in_path("img_pack/table-24.gif");
-	$out .= debut_cadre_enfonce($icone, true, "", $bouton._T("$prefixi18n:type_des_tables"));
+	$out .= debut_cadre_enfonce($icone, true, "", $bouton._T("$prefixi18n:type_des_tables")."($nombre_donnees)");
 
 	$out .= $s;
 	
@@ -123,6 +123,7 @@ function Forms_formulaire_objet_afficher_donnees($type,$id, $script, $type_table
 	$iid = intval($id);
 
 	$les_donnees = array();
+	$nombre_donnees = 0;
 	$liste = array();
 	$forms = array();
 	$retour = self();
@@ -131,6 +132,27 @@ function Forms_formulaire_objet_afficher_donnees($type,$id, $script, $type_table
 	if ($type == 'donnee')
 		$champ_donnee = 'id_donnee_liee';
 	$res = spip_query("SELECT $champ_donnee FROM spip_forms_donnees_{$type}s AS d WHERE d.id_$type="._q($iid));
+	$nombre_donnees = $cpt = spip_num_rows($res);
+	while ($row = spip_fetch_array($res))	$les_donnees[] = $row[$champ_donnee];
+
+	$tmp_var = "forms_lier_donnees-$id";
+	$nb_aff = floor(1.5 * _TRANCHES);
+	if ($cpt > $nb_aff) {
+		$nb_aff = _TRANCHES; 
+		$tranches = afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('forms_lier_donnees',"type=$type&id_$type=$id"), $nb_aff);
+	} else $tranches = '';
+	
+	$deb_aff = _request($tmp_var);
+	$deb_aff = ($deb_aff !== NULL ? intval($deb_aff) : 0);
+	
+	$limit = (($deb_aff < 0) ? '' : " LIMIT $deb_aff, $nb_aff");	
+	
+	$res = spip_query(
+	"SELECT dl.$champ_donnee 
+	FROM spip_forms_donnees_{$type}s AS dl 
+	JOIN spip_forms_donnees AS d ON d.id_donnee=dl.$champ_donnee
+	WHERE dl.id_$type="._q($iid)."
+	ORDER BY d.id_form $limit");
 	while ($row = spip_fetch_array($res)){
 		list($id_form,$titreform,$t) = Forms_liste_decrit_donnee($row[$champ_donnee]);
 		if (!count($t))
@@ -141,8 +163,9 @@ function Forms_formulaire_objet_afficher_donnees($type,$id, $script, $type_table
 		}
 	}
 	
-	if (count($liste)) {
+	if (count($liste) OR $tranches) {
 		$out .= "<div class='liste liste-donnees'>";
+		$out .= $tranches;
 		$out .= "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
 		$table = array();
 		foreach($liste as $id_form=>$donnees){
@@ -152,7 +175,6 @@ function Forms_formulaire_objet_afficher_donnees($type,$id, $script, $type_table
 			$vals[] = "";
 			$table[] = $vals;
 			foreach($donnees as $id_donnee=>$champs){
-				$les_donnees[] = $id_donnee;
 				$vals = array();
 				$vals[] = $id_donnee;
 				$vals[] = "<a href='".generer_url_ecrire("donnees_edit","id_form=$id_form&id_donnee=$id_donnee&retour=".urlencode($retour))."'>"
@@ -174,14 +196,14 @@ function Forms_formulaire_objet_afficher_donnees($type,$id, $script, $type_table
 		$out .= "</table></div>\n";
 	}
 	$les_donnees = implode (',',$les_donnees);
-	return array($out,$les_donnees) ;
+	return array($out,$les_donnees,$nombre_donnees) ;
 }
 
 function Forms_boite_selection_donnees($recherche, $les_donnees, $type_table){
 	$out = "";
 	$liste_res = Forms_liste_recherche_donnees($recherche,$les_donnees,$type_table);
 	if (count($liste_res)){
-		$out .= "<select name='id_donnee_liee' class='fondl' style='width:100%' size='10'>";
+		$out .= "<select name='id_donnee_liee[]' multiple='multiple' class='fondl' style='width:100%' size='10'>";
 		foreach($liste_res as $titre=>$donnees){
 			$out .= "<option value=''>$titre</option>";
 			foreach($donnees as $id_donnee=>$champs){
@@ -196,26 +218,31 @@ function Forms_boite_selection_donnees($recherche, $les_donnees, $type_table){
 	return $out;
 }
 
-function Forms_liste_recherche_donnees($recherche,$les_donnees,$type_table){
+function Forms_liste_recherche_donnees($recherche,$les_donnees,$type_table,$max_items=-1){
 	$table = array();
+	if ($recherche===NULL && $max_items==-1)
+		$max_items = 200;
 	//if ($recherche!==NULL){
 		include_spip('base/abstract_sql');
 		$in = calcul_mysql_in('d.id_donnee',$les_donnees,'NOT');
+		$limit = "";
+		if ($max_items>0)
+			$limit = "LIMIT 0,".intval($max_items);
 		if (!strlen($recherche)){
 			$res = spip_query("SELECT d.id_donnee FROM spip_forms_donnees AS d
 			  JOIN spip_forms AS f ON f.id_form=d.id_form
-			  WHERE f.type_form="._q($type_table)." AND $in GROUP BY d.id_donnee");
+			  WHERE f.type_form="._q($type_table)." AND $in GROUP BY d.id_donnee $limit");
 		}
 		else {
 			$res = spip_query("SELECT c.id_donnee FROM spip_forms_donnees_champs AS c
 			JOIN spip_forms_donnees AS d ON d.id_donnee = c.id_donnee
 			JOIN spip_forms AS f ON d.id_form = f.id_form
-			WHERE f.type_form="._q($type_table)." AND $in AND valeur LIKE "._q("$recherche%")." GROUP BY c.id_donnee");
+			WHERE f.type_form="._q($type_table)." AND $in AND valeur LIKE "._q("$recherche%")." GROUP BY c.id_donnee $limit");
 			if (spip_num_rows($res)<10){
 				$res = spip_query("SELECT c.id_donnee FROM spip_forms_donnees_champs AS c
 				JOIN spip_forms_donnees AS d ON d.id_donnee = c.id_donnee
 				JOIN spip_forms AS f ON d.id_form = f.id_form
-				WHERE f.type_form="._q($type_table)." AND $in AND valeur LIKE "._q("%$recherche%")." GROUP BY c.id_donnee");
+				WHERE f.type_form="._q($type_table)." AND $in AND valeur LIKE "._q("%$recherche%")." GROUP BY c.id_donnee $limit");
 			}
 		}
 		while ($row = spip_fetch_array($res)){
