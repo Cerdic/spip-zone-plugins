@@ -13,12 +13,12 @@ include_spip('inc/meta');
 
 $GLOBALS['lienscontenus_base_version'] = 0.2;
 
-function lienscontenus_upgrade()
+function lienscontenus_upgrade($nom_meta_base_version, $version_cible)
 {
     $version_base = $GLOBALS['lienscontenus_base_version'];
     $current_version = 0.0;
-    if ((isset($GLOBALS['meta']['lienscontenus_base_version']))
-            && (($current_version = $GLOBALS['meta']['lienscontenus_base_version']) == $version_base)) {
+    if ((isset($GLOBALS['meta'][$nom_meta_base_version]))
+            && (($current_version = $GLOBALS['meta'][$nom_meta_base_version]) == $version_base)) {
         return;
     }
 
@@ -40,14 +40,14 @@ function lienscontenus_upgrade()
         spip_query("UPDATE spip_liens_contenus SET type_objet_contenu='syndic' WHERE type_objet_contenu='site'");
         $current_version = 0.2;
     }
-    ecrire_meta('lienscontenus_base_version', $current_version, 'non');
+    ecrire_meta($nom_meta_base_version, $current_version, 'non');
     ecrire_metas();
 }
 
-function lienscontenus_vider_tables()
+function lienscontenus_vider_tables($nom_meta_base_version)
 {
     spip_query('DROP TABLE spip_liens_contenus');
-    effacer_meta('lienscontenus_base_version');
+    effacer_meta($nom_meta_base_version);
     ecrire_metas();
 }
 

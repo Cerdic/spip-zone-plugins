@@ -170,7 +170,10 @@ function lienscontenus_boite_liste($type_objet, $id_objet)
 
 function lienscontenus_verification()
 {
-    $data = '<script language="javascript" type="text/javascript">var messageConfirmation="'._T('lienscontenus:confirmation_depublication').'";</script>';
+    $data = '<script language="javascript" type="text/javascript">' .
+                'var messageConfirmationChangementStatut="'._T('lienscontenus:confirmation_depublication').'";' .
+                'var messageConfirmationSuppression="'._T('lienscontenus:confirmation_suppression').'";' .
+                '</script>';
     return $data;
 }
 
@@ -193,7 +196,7 @@ function lienscontenus_verification_articles()
             $('select[@name=statut_nouv]').bind('change', function(event) {
                 // Si le statut initial etait "publie" et s'il y a au moins un contenu publie qui pointe vers lui, on demande confirmation
                 if ((initialStatut == 'publie') && (currentStatut == 'publie') && ($('#liens_contenus_contenants > li.publie').size() > 0)) {
-                    if (confirm(messageConfirmation)) {
+                    if (confirm(messageConfirmationChangementStatut)) {
                         // changement confirme
                         var newStatut = $('select[@name=statut_nouv] > option[@selected]').attr('value');
                         currentStatut = newStatut; 
@@ -234,7 +237,7 @@ function lienscontenus_verification_breves_edit()
                 $('select[@name=statut]').bind('change', function(event) {
                     // Si le statut initial etait "publie" et s'il y a au moins un contenu publie qui pointe vers lui, on demande confirmation
                     if ((initialStatut == 'publie') && (currentStatut == 'publie') && ($('#liens_contenus_contenants > li.publie').size() > 0)) {
-                        if (confirm(messageConfirmation)) {
+                        if (confirm(messageConfirmationChangementStatut)) {
                             var newStatut = $('select[@name=statut] > option[@selected]').attr('value');
                             currentStatut = newStatut; 
                         } else {
@@ -269,7 +272,7 @@ function lienscontenus_verification_sites()
                 $('select[@name=nouveau_statut]').bind('change', function(event) {
                     // Si le statut initial etait "publie" et s'il y a au moins un contenu publie qui pointe vers lui, on demande confirmation
                     if ((initialStatut == 'publie') && (currentStatut == 'publie') && ($('#liens_contenus_contenants > li.publie').size() > 0)) {
-                        if (confirm(messageConfirmation)) {
+                        if (confirm(messageConfirmationChangementStatut)) {
                             var newStatut = $('select[@name=nouveau_statut] > option[@selected]').attr('value');
                             currentStatut = newStatut; 
                         } else {
@@ -305,7 +308,7 @@ function lienscontenus_verification_auteur_infos()
                     // Si le statut initial n'etait pas "5poubelle" et s'il y a au moins un contenu publie qui pointe vers lui, on demande confirmation
                     var newStatut = $('select[@name=statut] > option[@selected]').attr('value');
                     if ((initialStatut != '5poubelle') && (newStatut == '5poubelle') && ($('#liens_contenus_contenants > li.publie').size() > 0)) {
-                        if (confirm(messageConfirmation)) {
+                        if (confirm(messageConfirmationChangementStatut)) {
                             currentStatut = newStatut; 
                         } else {
                             $('select[@name=statut] > option[@selected]').removeAttr('selected');
@@ -328,43 +331,54 @@ function lienscontenus_verification_mots_tous()
     // TODO : A finir...
     $data = lienscontenus_verification();
     $script = <<<EOS
+        <style>a.lienscontenus_oui { color: red; text-decoration: line-through; }</style>
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
-            // on ajoute une classe specifique
-            $('tr.tr_liste').each(function() {
-                var idMot = $(this).find('td:first-child > a').attr('href').replace(/^.*&id_mot=([0-9]+)&.*$/g, '$1');
-                // on recupere "oui" si un autre contenu pointe vers le mot, "non" sinon 
-                var motContenu = $.ajax({
-                    url: '?exec=lienscontenus_ajax_mot_contient',
-                    data: 'id_mot='+idMot+'&var_ajaxcharset=utf-8',
-                    async: false,
-                    dataType: 'xml'
-                    }).responseText;
-                motContenu = $(motContenu).text();
-                var lienSupprimer = $(this).find('td:last-child > div > a');
-                lienSupprimer.addClass('lienscontenus_'+motContenu);
-            });
-            // on ne s'interesse qu'aux mots vers lesquels pointent d'autres contenus
-            $('tr.tr_liste > td > div > a.lienscontenus_oui').each(function() {
-                if (this.onclick) {
-                    currentonclick = this.onclick;
-                } else {
-                	currentonclick = false;
-                }
-                /*
-                this.onclick = null;
-                $(this).bind('click', { oldonclick: currentonclick }, function(event) {
-                    if (confirm(messageConfirmation)) {
-                        if(currentOnClick) {
-                            currentOnClick.apply(this);
+            function gestionDesSuppressionsDeMots() {
+                // on ajoute une classe specifique
+                $('tr.tr_liste').each(function() {
+                    var idMot = $(this).find('td:first-child > a').attr('href').replace(/^.*&id_mot=([0-9]+)&.*$/g, '$1');
+                    // on recupere "oui" si un autre contenu pointe vers le mot, "non" sinon 
+                    var motContenu = $.ajax({
+                        url: '?exec=lienscontenus_ajax_mot_contient',
+                        data: 'id_mot='+idMot+'&var_ajaxcharset=utf-8',
+                        async: false,
+                        dataType: 'xml'
+                        }).responseText;
+                    motContenu = $(motContenu).text();
+                    $(this).find('td:last-child > div > a').addClass('lienscontenus_' + motContenu);
+                });
+                // on ne s'interesse qu'aux mots vers lesquels pointent d'autres contenus
+                $('tr.tr_liste > td > div > a.lienscontenus_oui').each(function() {
+                    if (this.onclick) {
+                        originalOnClick = this.onclick;
+                        this.onclick = null;
+                    } else {
+                        originalOnClick = null;
+                    }
+                    $(this).bind('click', {origclick: originalOnClick}, handleClick);
+                    function handleClick(event)
+                    {
+                        if (confirm(messageConfirmationSuppression)) {
+                            if(event.data.origclick) {
+                                event.data.origclick.apply(this);
+                                // On relance la detection apres la mise a jour
+                                // TODO : executer apres le AjaxSqueeze de origclick, qui est asynchrone !
+                                gestionDesSuppressionsDeMots();
+                                return false;
+                            } else {
+                                // Si on n'a pas de onclick a l'origine, c'est que le href doit etre suivi
+                                return true;
+                            }
                         } else {
-                            return true;
+                            return false;
                         }
                     }
-                    return false;
                 });
-                */
-            });
+            }
+            gestionDesSuppressionsDeMots();
+            // TODO : comment intercepter la modification de ces divs par AjaxSqueeze ?
+            $('div[@id^=editer_mot-]').bind('change', function() { gestionDesSuppressionsDeMots() });
         });
         </script>
 EOS;

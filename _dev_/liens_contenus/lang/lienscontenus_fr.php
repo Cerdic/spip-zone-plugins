@@ -21,6 +21,7 @@
         'statut_publie' => 'Publi&eacute;',
         'statut_refuse' => 'Refus&eacute;',
         'statut_poubelle' => 'A la poubelle',
-        'confirmation_depublication' => 'Attention, un contenu publié pointe vers celui-ci !\nIl sera impacté si vous dépubliez celui-ci.\n\nVoulez-vous vraiment changer le statut ?'
+        'confirmation_depublication' => 'Attention, un contenu publié pointe vers celui-ci, et sera impacté si vous le dépubliez !\n\nVoulez-vous vraiment changer le statut ?',
+        'confirmation_suppression' => 'Attention, un contenu publié pointe vers celui-ci, et sera impacté si vous le supprimez !\n\nVoulez-vous vraiment le supprimer ?'
 	);
 ?>
