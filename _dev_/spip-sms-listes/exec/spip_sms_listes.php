@@ -14,6 +14,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/smslist_affichage');
 
+function tables_ou_donnees($type_form,$retour){
+	$res = spip_query("SELECT id_form FROM spip_forms WHERE type_form="._q($type_form));
+	if (spip_num_rows($res)==1){
+		$row = spip_fetch_array($res);
+		return generer_url_ecrire("donnees_tous","id_form=".$row['id_form']."&retour=".urlencode($retour));
+	}
+	else
+		return generer_url_ecrire($type_form."s_tous","retour=".urlencode($retour));
+}
+
 function exec_spip_sms_listes() {
 	
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -26,16 +36,27 @@ function exec_spip_sms_listes() {
 	
 	// Admin Spip-sms-listes
 	echo $commencer_page(_L('Spip-sms-listes'),"", "redacteurs", "smslist");
-	echo smslist_onglets("smslist", "Spip-SMS-Listes");
+	//echo smslist_onglets("smslist", "Spip-SMS-Listes");
 	
 	echo debut_gauche("smslist",true);
-	echo smslist_raccourcis();
+	//echo smslist_raccourcis();
+	
+	$retour = generer_url_ecrire('spip_sms_listes');
+
+	$gerer = tables_ou_donnees('smslist_message',$retour);
+	echo icone_etendue(_T("smslist:gerer_messages"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist_nouveau_message-64.png", "rien.gif",false);
+	
+	$gerer = tables_ou_donnees('smslist_abonne',$retour);
+	echo icone_etendue(_T("smslist:gerer_abonnes"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist_abonne-64.png", "rien.gif",false);
+	
+	$gerer = tables_ou_donnees('smslist_liste',$retour);
+	echo icone_etendue(_T("smslist:gerer_listes"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist_liste-64.png", "rien.gif",false);
+
 	echo creer_colonne_droite();
 
 	echo debut_droite("smslist",true);
-	
 	///
-	$messages_vus = '';
+	/*$messages_vus = '';
 	echo spiplistes_afficher_en_liste(_T('spiplistes:aff_encours'), _DIR_PLUGIN_SPIPLISTES.'img_pack/24_send-receive.gif', 'messages', 'encour', '', 'position') ;
 	echo spiplistes_afficher_en_liste(_T('spiplistes:aff_redac'), _DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'messages', 'redac', '', 'position') ;
 	
@@ -47,11 +68,9 @@ function exec_spip_sms_listes() {
 
 	echo spiplistes_afficher_en_liste(_T('spiplistes:messages_auto_envoye'),_DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'messages', 'auto', '', 'position') ;
 	echo spiplistes_afficher_en_liste(_T('spiplistes:aff_envoye'), _DIR_PLUGIN_SPIPLISTES.'img_pack/stock_mail.gif', 'messages', 'publie', '', 'position') ;
+	*/
 	
 	
-	// MODE HISTORIQUE FIN ---------------------------------------------------------
-	
-	echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$GLOBALS['spiplistes_version']."</p>" ;
 	echo fin_gauche(), fin_page();
 }
 
