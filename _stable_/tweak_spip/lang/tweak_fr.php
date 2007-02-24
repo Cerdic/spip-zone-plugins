@@ -120,6 +120,11 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'js_defaut' => 'D&eacute;faut',
 	'js_toujours' => 'Toujours',
 
+'xml:nom'	=>'Activer le validateur xml',
+	'xml:description' =>"Active le validateur xml pour l'espace public tel qu'il est décrit dans la [documentation->http://www.spip.net/fr_article3541.html]." 
+
+
+
 /*
 	':nom' => '',
 	':description'	=> '',

@@ -213,6 +213,16 @@ add_tweak( array(
 	'pipeline:pre_typo'	=> 'chatons_pre_typo',
 ));
 
+add_tweak( array (
+	'id' => 'xml',
+	'code'		=> '$xhtml = "sax";',
+	'auteur' => 'Ma&iuml;eul Rouquette (maieulrouquette@tele2.fr)',
+	'categorie' =>'squel',
+	'version'	=> '1.92',
+	'options'	=>	1
+	
+	));
+
 // Idées d'ajouts :
 // http://www.spip-contrib.net/Citations
 // http://www.spip-contrib.net/la-balise-LESMOTS et d'autres balises #MAINTENANT #LESADMINISTRATEURS #LESREDACTEURS #LESVISITEURS
