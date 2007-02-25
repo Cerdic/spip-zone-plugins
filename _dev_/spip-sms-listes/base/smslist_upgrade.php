@@ -24,6 +24,8 @@
 				Forms_creer_table($f,'smslist_liste');
 				$f = find_in_path('base/SMS.xml');
 				Forms_creer_table($f,'smslist_message');
+				$f = find_in_path('base/Boite_d_envoi_des_SMS.xml');
+				Forms_creer_table($f,'smslist_message');
 				ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 			}
 	
