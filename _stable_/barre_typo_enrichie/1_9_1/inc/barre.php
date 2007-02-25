@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2006                                                *
+ *  Copyright (c) 2001-2007                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -25,6 +25,7 @@ if (!function_exists('afficher_claret')){
 	}
 }
 
+// http://doc.spip.org/@bouton_barre_racc
 function bouton_barre_racc($action, $img, $help, $champhelp) {
 	include_spip('inc/charsets');
 
@@ -392,4 +393,21 @@ $(document).ready(function(){
 	 //--></script>';
 	return $ret;
 }
+
+// http://doc.spip.org/@afficher_textarea_barre
+function afficher_textarea_barre($texte, $forum=false)
+{
+	global $spip_display, $spip_ecran;
+
+	$rows = ($spip_ecran == "large") ? 28 : 15;
+
+	return (($spip_display == 4) ? '' :
+		afficher_barre('document.formulaire.texte', $forum))
+	. "<textarea name='texte' id='texte' "
+	. $GLOBALS['browser_caret']
+	. " rows='$rows' class='formo' cols='40'>"
+	. entites_html($texte)
+	. "</textarea>\n";
+}
+
 ?>
