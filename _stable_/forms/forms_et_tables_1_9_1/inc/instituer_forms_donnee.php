@@ -14,24 +14,42 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut, $rang=NULL)
 {
+	$pi18n = "form";
+	$res = spip_query("SELECT type_form FROM spip_forms WHERE id_form="._q($id_form));
+	if ($row = spip_fetch_array($res)
+		AND $row['type_form']!=''
+		AND $rox['type_form']!='sondage')
+			$pi18n = forms_prefixi18n($row['type_form']); 
 
 	$res =
 	"\n<div id='instituer_forms_donnee-$id_donnee'>" .
 	"\n<center>" . 
 	"<b>" .
-	_T('forms:texte_donnee_statut') .
+	_T("$pi18n:texte_donnee_statut") .
 	"</b>" .
 	"\n<select name='statut_nouv' size='1' class='fondl'\n" .
 	"onchange=\"this.nextSibling.nextSibling.src='" .
 	_DIR_IMG_PACK .
 	"' + puce_statut(options[selectedIndex].value);" .
-	" setvisibility('valider_statut', 'visible');\">\n" .
-	"<option"  . mySel("prop", $statut)  . " style='background-color: #FFF1C6'>" ._T('texte_statut_propose_evaluation') ."</option>\n" .
-	"<option"  . mySel("publie", $statut)  . " style='background-color: #B4E8C5'>" ._T('texte_statut_publie') ."</option>\n" .
-	"<option"  . mySel("poubelle", $statut) .
-	http_style_background('rayures-sup.gif')  . '>'  ._T('texte_statut_poubelle') ."</option>\n" .
-	"<option"  . mySel("refuse", $statut)  . " style='background-color: #FFA4A4'>" ._T('texte_statut_refuse') ."</option>\n" .
-	"</select>" .
+	" setvisibility('valider_statut', 'visible');\">\n";
+
+	$atts = array("prepa"=>"",
+	"prop"=>"style='background-color: #FFF1C6'",
+	"publie"=>"style='background-color: #B4E8C5'",
+	"poubelle"=>http_style_background('rayures-sup.gif'),
+	"refuse"=>"style='background-color: #FFA4A4'"
+	);
+	foreach(array("prepa","prop","publie","poubelle","refuse") as $s) {
+		$lib = _T("$pi18n:texte_statut_$s");
+		if (strlen(trim($lib)))
+			$res .= "<option"  . 
+				mySel($s, $statut)  . " " .
+				$atts[$s] . " >" .
+				$lib .
+				"</option>\n";
+	}
+
+	$res .=	"</select>" .
 	" &nbsp; " .
 	http_img_pack("puce-".puce_statut($statut).'.gif', "", "border='0'") .
 	"  &nbsp;\n";

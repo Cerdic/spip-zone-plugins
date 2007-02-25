@@ -22,6 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucune_reponse' => "Aucune donn&eacute;e",
 'une_reponse' => "Une donn&eacute;e",
 'nombre_reponses' => "@nombre@ donn&eacute;es",
+'texte_donnee_statut' => "Statut de cette donn&eacute;e",
+'texte_statut_prepa' => " ",
+'texte_statut_prop' => "Donn&eacute;e propos&eacute;e",
+'texte_statut_publie' => "Donn&eacute;e publi&eacute;e",
+'texte_statut_poubelle' => "Donn&eacute;e supprim&eacute;e",
+'texte_statut_refuse' => "Donn&eacute;e refus&eacute;e",
 
 // page forms_edit
 'champs_formulaire'=>"Champs de la table",

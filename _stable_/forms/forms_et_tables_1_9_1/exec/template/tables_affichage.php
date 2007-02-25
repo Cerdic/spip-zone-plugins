@@ -17,6 +17,8 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 	global $spip_lang_right;
   include_spip("inc/presentation");
 	include_spip('public/assembler');
+	if (!include_spip('inc/autoriser'))
+		include_spip('inc/autoriser_compat');
 
   _Forms_install();
 	
@@ -32,9 +34,6 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 		echo boite_snippets($titre_type,_DIR_PLUGIN_FORMS."img_pack/$type_form-24.gif",'forms','forms');
 	
 	debut_droite();
-
-	if (!include_spip('inc/autoriser'))
-		include_spip('inc/autoriser_compat');
 
 	if ( _request('exec')=='tables_tous'
 		&& (_request('var_mode')=='dev' OR _OUTILS_DEVELOPPEURS)) {
@@ -82,6 +81,8 @@ function affichage_donnees_tous($type_form){
 	global $spip_lang_right,$spip_lang_left;
   include_spip("inc/presentation");
 	include_spip('public/assembler');
+	if (!include_spip('inc/autoriser'))
+		include_spip('inc/autoriser_compat');
 
   _Forms_install();
 	$row=spip_fetch_array(spip_query("SELECT titre FROM spip_forms WHERE id_form="._q(_request('id_form'))));
@@ -144,6 +145,8 @@ function affichage_donnee_edit($type_form){
 	global $spip_lang_right;
   include_spip("inc/presentation");
 	include_spip('public/assembler');
+	if (!include_spip('inc/autoriser'))
+		include_spip('inc/autoriser_compat');
 
   _Forms_install();
 	$prefix = forms_prefixi18n($type_form);
