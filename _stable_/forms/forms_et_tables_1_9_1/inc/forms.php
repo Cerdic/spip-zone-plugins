@@ -556,23 +556,23 @@
 				include_spip("inc/acces");
 				$cookie = creer_uniqid();
 			}
-			if ($moderation = 'posteriori') 
+			if ($moderation == 'posteriori') 
 				$statut='publie';
 			else {
 				$statut = 'prop';
 				foreach(array('prepa','prop','publie','refuse') as $s)
-				if (autoriser(
-						'instituer',
-						(in_array($row['type_form'],array('','sondage'))?'form':$row['type_form']).'_donnee',
-						0,NULL,array('id_form'=>$id_form,'statut'=>'prepa','nouveau_statut'=>$s))){
-					$statut = $s;
-					break;
-				}
+					if (autoriser(
+							'instituer',
+							(in_array($row['type_form'],array('','sondage'))?'form':$row['type_form']).'_donnee',
+							0,NULL,array('id_form'=>$id_form,'statut'=>'prepa','nouveau_statut'=>$s))){
+						$statut = $s;
+						break;
+					}
 			}
 			// D'abord creer la reponse dans la base de donnees
 			if ($ok) {
 				if (autoriser('modifierdonnee', 'form', $id_form, NULL, array('id_donnee'=>$id_donnee))){
-					spip_query("UPDATE spip_forms_donnees SET date=NOW(), ip="._q($GLOBALS['ip']).", url="._q($url).", confirmation="._q($confirmation).", statut="._q($statut).", cookie="._q($cookie)." ".
+					spip_query("UPDATE spip_forms_donnees SET date=NOW(), ip="._q($GLOBALS['ip']).", url="._q($url).", confirmation="._q($confirmation).", cookie="._q($cookie)." ".
 						"WHERE id_donnee="._q($id_donnee));
 					spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
 				} elseif (autoriser('insererdonnee', 'form', $id_form, NULL, array('id_donnee'=>$id_donnee))){

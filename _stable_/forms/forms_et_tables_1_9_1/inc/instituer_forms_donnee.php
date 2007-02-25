@@ -107,7 +107,7 @@ function puce_statut_donnee($id, $statut, $id_form, $ajax = false) {
 	$statuts = array("prepa","prop","publie","poubelle","refuse");
 	foreach($statuts as $s){
 		$lib[$s] = _T("$p:texte_statut_$s");
-		if ($lib[$s]{0}!=' ')
+		if (autoriser('instituer',$type_form[$id_form].'_donnee',$id_donnee,NULL,array('id_form'=>$id_form,'statut'=>$statut,'nouveau_statut'=>$s)))
 			$clip[$s] = $c++;
 		else 
 			$clip[$s] = 0;
