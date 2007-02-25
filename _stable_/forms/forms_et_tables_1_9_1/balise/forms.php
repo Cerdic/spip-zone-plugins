@@ -43,16 +43,25 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 			$row=Forms_obligatoire($row,$forms_obligatoires);
 			$id_form=$row['id_form'];
 		}
+		$type_form = $row['type_form'];
 	}
 
+	$id_donnee = $id_donnee?$id_donnee:intval(_request('id_donnee'));
 	$erreur = array();
 	$reponse = '';
 	$formok = '';
 	$valeurs = array('0'=>'0');
 	$affiche_sondage = '';
-	$formactif = (_DIR_RESTREINT==_DIR_RESTREINT_ABS || in_array(_request('exec'),$GLOBALS['forms_actif_exec']))?' ':'';
+	$formactif = 
+	  (
+		   (_DIR_RESTREINT==_DIR_RESTREINT_ABS && $row['modifiable']=='oui')
+		OR in_array(_request('exec'),$GLOBALS['forms_actif_exec'])
+		)
+		AND 
+		(!$id_donnee 
+		OR autoriser('modifier',(in_array($type_form,array('','sondage'))?'form':$type_form).'_donnee',$id_donnee));
+	$formactif = $formactif?' ':'';
 
-	$id_donnee = $id_donnee?$id_donnee:intval(_request('id_donnee'));
 	$flag_reponse = (_request('ajout_reponse') == $id_form) && (_request('nobotnobot')=='');
 	if ($flag_reponse) {
 		include_spip('inc/forms');
