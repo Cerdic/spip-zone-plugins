@@ -31,6 +31,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucune_reponse' => "Aucun SMS",
 'une_reponse' => "Un SMS",
 'nombre_reponses' => "@nombre@ sms",
+'texte_donnee_statut' => "Statut de ce SMS",
+'texte_statut_prepa' => "En cours de r&eacute;daction",
+'texte_statut_prop' => " En cours d'envoi",
+'texte_statut_publie' => " Envoy&eacute;",
+'texte_statut_poubelle' => "Supprim&eacute;",
+'texte_statut_refuse' => " Envoi refus&eacute;",
 
 // page forms_edit
 'champs_formulaire'=>"Champs de la table de SMS",

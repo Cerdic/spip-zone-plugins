@@ -13,6 +13,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/smslist_affichage');
+include_spip('base/forms_base_api');
+include_spip('public/assembler');
 
 function tables_ou_donnees($type_form,$retour){
 	$res = spip_query("SELECT id_form FROM spip_forms WHERE type_form="._q($type_form));
@@ -57,6 +59,34 @@ function exec_spip_sms_listes() {
 	echo creer_colonne_droite();
 
 	echo debut_droite("smslist",true);
+	
+	// messages en preparation
+	foreach(Forms_liste_tables('smslist_message') as $id_form){
+		$contexte = array('id_form'=>$id_form,
+		'titre_liste'=>_T("smslist:messages_en_redaction"),
+		'aucune_reponse'=>" ",
+		'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],
+		'statuts' => array('prepa'),
+		'affiche_rang'=>0,
+		'affiche_de'=>1,
+		'colonne_extra_titre'=>"<img src='"._DIR_PLUGIN_SMSLIST. "img_pack/envoyer-message-16.png' width='16' height='16' alt='"._L('Envoyer')."' />",
+		'colonne_extra_url'=>generer_url_ecrire('smslist_envoyer_message'));
+		echo recuperer_fond("exec/template/donnees_tous",$contexte);	
+	}
+
+	// messages en cours d'envoi
+	foreach(Forms_liste_tables('smslist_boiteenvoi') as $id_form){
+		$contexte = array('id_form'=>$id_form,
+		'titre_liste'=>_T("smslist:envois_programmes"),
+		'aucune_reponse'=>" ",
+		'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],
+		'statuts' => array('prepa'),
+		'affiche_rang'=>0,
+		'affiche_de'=>1,
+		);
+		echo recuperer_fond("exec/template/donnees_tous",$contexte);	
+	}
+
 	///
 	/*$messages_vus = '';
 	echo spiplistes_afficher_en_liste(_T('spiplistes:aff_encours'), _DIR_PLUGIN_SPIPLISTES.'img_pack/24_send-receive.gif', 'messages', 'encour', '', 'position') ;

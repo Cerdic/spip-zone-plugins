@@ -31,6 +31,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucune_reponse' => "Aucune liste de diffusion",
 'une_reponse' => "Une liste de diffusion",
 'nombre_reponses' => "@nombre@ listes de diffusion",
+'texte_donnee_statut' => "Statut de cette liste",
+'texte_statut_prepa' => "???",
+'texte_statut_prop' => "Suspendue",
+'texte_statut_publie' => "Active",
+'texte_statut_poubelle' => "Supprim&eacute;",
+'texte_statut_refuse' => "???",
 
 // page forms_edit
 'champs_formulaire'=>"Champs du format de la liste",

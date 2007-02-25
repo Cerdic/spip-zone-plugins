@@ -31,6 +31,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucune_reponse' => "Aucun abonn&eacute;",
 'une_reponse' => "Un abonn&eacute;",
 'nombre_reponses' => "@nombre@ abonn&eacute;s",
+'texte_donnee_statut' => "Statut de cet abonn&eacute;",
+'texte_statut_prepa' => "???",
+'texte_statut_prop' => "D&eacute;sabonn&eacute;",
+'texte_statut_publie' => "Abonn&eacute;",
+'texte_statut_poubelle' => "Supprim&eacute;",
+'texte_statut_refuse' => "Banni",
 
 // page forms_edit
 'champs_formulaire'=>"Champs de la table d'abonn&eacute;",
