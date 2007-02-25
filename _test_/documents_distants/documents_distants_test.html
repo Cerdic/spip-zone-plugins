@@ -1,0 +1,16 @@
+[(#REM) test si une personne à le droit d'allier un document à un article]
+<BOUCLE_auteur(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>
+<BOUCLE_restreint(spip_AUTEURS_RUBRIQUES){id_auteur=#ID_AUTEUR}>
+[(#ENV{type_lien}=={rubriques}|?{#ENV{id}=={#ID_RUBRIQUE}|?{1}})]
+<BOUCLE_article_restreint(ARTICLES){statut==prop|prepa|publie|refuse|poubelle}{id_rubrique}{id_article=#ENV{id}}{id_auteur}>[(#ENV{type_lien}|=={articles}|?{1})]</BOUCLE_article_restreint>
+</BOUCLE_restreint>
+<BOUCLE_article (ARTICLES){id_article=#ENV{id}}{statut==prop|prepa|publie|refuse|poubelle}{id_auteur}>[(#ENV{type_lien}=={articles}|?{1})]</BOUCLE_article>
+[(#SESSION{statut}|=={0minirezo}|?{1})]
+<//B_article>
+<//B_restreint>
+
+</BOUCLE_auteur>
+
+
+
+

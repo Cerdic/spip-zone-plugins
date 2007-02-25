@@ -12,10 +12,13 @@ function exec_documents_distants(){
 	$retour[0] =="oui" ? $retour="oui" : ($retour == "oui" ? $retour = "d" : pass);
 	
 	if ($valider)
-		{importer_document($documents,$type_lien,$id,$retour);
+		{
+		$erreur=importer_document($documents,$type_lien,$id,$retour);
 		}
 	
 	$commencer_page= charger_fonction('commencer_page', 'inc');
+	
+	
 	
 	include_spip('public/assembler');
 	echo $commencer_page($titre=_T('documentsdistants:importer'));
@@ -23,7 +26,7 @@ function exec_documents_distants(){
 	
 	debut_gauche();
 	debut_droite();
-	
+	echo (_T('documentsdistants:'.$erreur));
 	debut_cadre_formulaire();
 	echo gros_titre(_T('documentsdistants:importer'));
 	
@@ -43,10 +46,18 @@ function importer_document($documents_distants,$type_lien,$id,$retour)
 	settype($id,'string');// amha il y a moyen de faire plus simple
 	
 	$tableau =explode(";",$documents_distants);
-	if (!($documents_distants and $id and $id2==$id)){return;}
+	include_spip('public/assembler');
+	$autoriser=recuperer_fond('documents_distants_test',array('id'=>$id,'type_lien'=>$type_lien));
 	
+	echo $autoriser;
+	if (!($documents_distants and $id and $id2==$id)){return 'completer';}
+	
+	if (!$autoriser) {return 'pasdroits';}
 	include_spip('inc/distant');
 	include_spip('inc/indexation');
+	
+	
+	
 	foreach ($tableau as $documents_distants){
 		
 		if ($infos=recuperer_infos_distantes(trim($documents_distants))){

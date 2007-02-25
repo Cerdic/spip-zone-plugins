@@ -1,3 +1,4 @@
+
 <form method="post" name="documents_distants" action="#SELF">
 	
 	<label for="document"><:documentsdistants:explicatif:></label>
@@ -8,8 +9,7 @@
 		<select  name='type_lien'>
 		[(#CONFIG{documents_article}|=={oui}|?{<option [(#ENV{type_lien}|=={articles}|?{selected="selected"})] value="articles"><:info_article:></option>})]
 		[(#CONFIG{documents_rubrique}|=={oui}|?{<option [(#ENV{type_lien}|=={rubriques}|?{selected="selected"})] value="rubriques"><:info_rubriques:></option>})]
-		[(#CONFIG{activer_breves}|=={oui}|?{<option [(#ENV{type_lien}|=={breves}|?{selected="selected"})] value="breves"><:info_breves_02:></option>
-		</select>})]
+		
 	</label>
 	
 	<label><:id:><input [value="(#ENV{id})"] type="texte" name="id" /></label>
