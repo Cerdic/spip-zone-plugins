@@ -558,8 +558,17 @@
 			}
 			if ($moderation = 'posteriori') 
 				$statut='publie';
-			else 
-				$statut = 'propose';
+			else {
+				$statut = 'prop';
+				foreach(array('prepa','prop','publie','refuse') as $s)
+				if (autoriser(
+						'instituer',
+						(in_array($row['type_form'],array('','sondage'))?'form':$row['type_form']).'_donnee',
+						0,NULL,array('id_form'=>$id_form,'statut'=>'prepa','nouveau_statut'=>$s))){
+					$statut = $s;
+					break;
+				}
+			}
 			// D'abord creer la reponse dans la base de donnees
 			if ($ok) {
 				if (autoriser('modifierdonnee', 'form', $id_form, NULL, array('id_donnee'=>$id_donnee))){

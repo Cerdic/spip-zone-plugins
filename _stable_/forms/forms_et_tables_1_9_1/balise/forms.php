@@ -50,7 +50,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 	$formok = '';
 	$valeurs = array('0'=>'0');
 	$affiche_sondage = '';
-	$formactif = (_DIR_RESTREINT==_DIR_RESTREINT_ABS || preg_match(',donnees_edit$,',_request('exec')))?' ':'';
+	$formactif = (_DIR_RESTREINT==_DIR_RESTREINT_ABS || in_array(_request('exec'),$GLOBALS['forms_actif_exec']))?' ':'';
 
 	$id_donnee = $id_donnee?$id_donnee:intval(_request('id_donnee'));
 	$flag_reponse = (_request('ajout_reponse') == $id_form) && (_request('nobotnobot')=='');

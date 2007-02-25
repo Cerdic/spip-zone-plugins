@@ -15,6 +15,7 @@ if (!defined('_DIR_PLUGIN_FORMS')){
 	define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end($p))."/");
 }
 include_spip('base/forms');
+$GLOBALS['forms_actif_exec'][] = 'donnees_edit';
 
 function autoriser_form_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	if ($type=='form')
@@ -54,6 +55,12 @@ function autoriser_form_insererdonnee_dist($faire, $type, $id_form, $qui, $opt) 
 	if ($row['multiple']=='oui') return true;
 	$dejareponse=Forms_verif_cookie_sondage_utilise($id_form);
 	if ($dejareponse) return false;
+	return true;
+}
+function autoriser_table_donnee_instituer($faire,$type,$id_donnee,$qui,$opt) {
+	if (($qui['statut'] != '0minirezo')
+	OR !isset($opt['nouveau_statut'])
+	OR ($opt['nouveau_statut']=='prepa')) return false;
 	return true;
 }
 
