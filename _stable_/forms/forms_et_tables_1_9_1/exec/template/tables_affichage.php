@@ -246,10 +246,12 @@ function affichage_donnee_edit($type_form){
 		echo $liste;
 	}
 
+	// donnees liantes
 	list($out,$les_donnees,$nombre_donnees) = Forms_afficher_liste_donnees_liees(
 		"donnee_liee", 
 		$id_donnee, 
-		"donnee", 
+		"donnee",
+		"", 
 		"forms_donnees_liantes", 
 		"forms_donnees_liantes", 
 		"id_donnee=$id_donnee", 

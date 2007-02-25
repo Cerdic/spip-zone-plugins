@@ -28,7 +28,7 @@ function exec_recherche_donnees(){
 	if ($type == 'donnee')
 		$les_donnees .= (strlen($les_donnees)?",":"").$id;
 	// recuperer les donnees que l'on peut lier
-	$liste = Forms_liste_recherche_donnees($recherche,$les_donnees,$type_table,30);
+	$liste = Forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table,30);
 	
 	$out = "<ajaxresponse>";
 	foreach($liste as $titre=>$donnees){

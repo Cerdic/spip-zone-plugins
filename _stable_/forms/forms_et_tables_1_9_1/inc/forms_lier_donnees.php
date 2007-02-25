@@ -86,7 +86,7 @@ function Forms_formulaire_objet_chercher_donnee($type,$id,$les_donnees, $script,
 
 	if ($type == 'donnee')
 		$les_donnees .= (strlen($les_donnees)?",":"").$iid;
-	$out .= Forms_boite_selection_donnees($recherche?$recherche:((_request('ajouter')!==NULL)?"":$recherche),$les_donnees, $type_table);
+	$out .= Forms_boite_selection_donnees($recherche?$recherche:((_request('ajouter')!==NULL)?"":$recherche),$les_donnees, $type, $type_table);
 	
 	$script_rech = generer_url_ecrire("recherche_donnees","type=$type&id_$type=$id",true);
 	$out .= "<input type='hidden' name='autocompleteUrl' value='$script_rech' />";
@@ -121,16 +121,17 @@ function Forms_formulaire_objet_afficher_donnees($type,$id, $script, $type_table
 	return Forms_afficher_liste_donnees_liees(
 		$type, 
 		$id, 
-		strncmp($type,"donnee",6)==0?"donnee_liee":"donnee", 
+		strncmp($type,"donnee",6)==0?"donnee_liee":"donnee",
+		$type_table,
 		'forms_lier_donnees', 
 		"forms_lier_donnees-$id", 
 		"type=$type&id_$type=$id",
 		self());
 }
 
-function Forms_boite_selection_donnees($recherche, $les_donnees, $type_table){
+function Forms_boite_selection_donnees($recherche, $les_donnees, $type, $type_table){
 	$out = "";
-	$liste_res = Forms_liste_recherche_donnees($recherche,$les_donnees,$type_table);
+	$liste_res = Forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table);
 	if (count($liste_res)){
 		$out .= "<select name='id_donnee_liee[]' multiple='multiple' class='fondl' style='width:100%' size='10'>";
 		foreach($liste_res as $titre=>$donnees){
@@ -147,7 +148,11 @@ function Forms_boite_selection_donnees($recherche, $les_donnees, $type_table){
 	return $out;
 }
 
-function Forms_liste_recherche_donnees($recherche,$les_donnees,$type_table,$max_items=-1){
+function Forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table,$max_items=-1){
+	if (strncmp($type,'donnees',6)==0)
+		$linkable = false;
+	else 	
+		$linkable = true;
 	$table = array();
 	if ($recherche===NULL && $max_items==-1)
 		$max_items = 200;
@@ -175,9 +180,9 @@ function Forms_liste_recherche_donnees($recherche,$les_donnees,$type_table,$max_
 			}
 		}
 		while ($row = spip_fetch_array($res)){
-			list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($row['id_donnee']);
+			list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($row['id_donnee'],true, $linkable);
 			if (!count($t))
-				list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($row['id_donnee'],false);
+				list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($row['id_donnee'],false, $linkable);
 			if (count($t))
 				$table[$titreform][$row['id_donnee']]=$t;
 		}

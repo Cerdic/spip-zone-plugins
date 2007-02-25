@@ -39,7 +39,8 @@
 <BOUCLE_joint(FORMS_CHAMPS){id_form}{tout}{type=joint}{par rang}>
 [(#ENV{formvisible}|?{' '})
 	[(#ENV{formactif})
-		[(#ENV{id_donnee}|forms_boite_jointure{#CHAMP,#ID_FORM})]
+		[<span class='spip_form_label'><div class='spip_form_champ'><span class='label'>#TITRE</span></span>
+		(#ENV{id_donnee}|forms_boite_jointure{#CHAMP,#ID_FORM})</div>]
 	]
 ]
 </BOUCLE_joint>

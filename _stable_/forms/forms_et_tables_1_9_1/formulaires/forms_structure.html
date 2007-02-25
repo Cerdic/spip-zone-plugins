@@ -93,7 +93,7 @@ $('input.formo').bind('blur',function(){$(this).removeClass('formo-focus').addCl
 $('input.forml').bind('focus',function(){$(this).removeClass('forml').addClass('forml-focus');});
 $('input.forml').bind('blur',function(){$(this).removeClass('forml-focus').addClass('forml');});
 [(#GET{date-picker}|?{' '})
-	$.datePicker.setDateFormat('ddmmyyyy','/');
+	$.datePicker.setDateFormat('dmy','/');
 	[(#INCLURE{fond=formulaires/date_picker_init}|charset2unicode{html}|unicode2charset)]
 	$('input.date-picker').datePicker({startDate:'01/01/1900'});
 ]

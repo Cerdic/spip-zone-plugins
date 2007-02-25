@@ -734,12 +734,18 @@ function Forms_obligatoire($row,$forms_obligatoires){
 	return $returned;	
 }
 
-function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $script, $bloc_id, $arg_ajax, $retour){
+function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_table, $script, $bloc_id, $arg_ajax, $retour){
 	// article, donnee
 	// donnee, donnee_liee
 	// donnee_liee, donnee
 	$lieeliante = ($type_source=='donnee_liee')?'liante':'liee';
-	$linkable = $type_source!='donnee_liee';
+	$linkable = strncmp($type_source,'donnee',6)!=0;
+	$in_type_table="";
+	if ($type_table){
+		include_spip("base/abstract_sql");
+		include_spip("base/forms_base_api");
+		$in_type_table = calcul_mysql_in('d.id_form',implode(",",Forms_liste_tables($type_table)))." AND";
+	}
 	
 	$out = "";
 	$iid = intval($id);
@@ -755,7 +761,10 @@ function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $scrip
 	$champ_donnee_source = "id_$type_source";
 	$table_liens = strncmp($type_source,"donnee",6)==0?"spip_forms_donnees_donnees":"spip_forms_donnees_{$type_source}s";
 	
-	$res = spip_query("SELECT l.$champ_donnee_liee FROM $table_liens AS l WHERE l.$champ_donnee_source="._q($iid));
+	$res = spip_query("SELECT dl.$champ_donnee_liee
+	  FROM $table_liens AS dl 
+	  JOIN spip_forms_donnees AS d ON d.id_donnee=dl.$champ_donnee_liee
+	  WHERE $in_type_table dl.$champ_donnee_source="._q($iid));
 	$nombre_donnees = $cpt = spip_num_rows($res);
 	while ($row = spip_fetch_array($res,SPIP_NUM))	$les_donnees.=",".$row[0];
 
@@ -776,7 +785,7 @@ function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $scrip
 	"SELECT dl.$champ_donnee_liee 
 	FROM $table_liens AS dl 
 	JOIN spip_forms_donnees AS d ON d.id_donnee=dl.$champ_donnee_liee
-	WHERE dl.$champ_donnee_source="._q($iid)."
+	WHERE $in_type_table dl.$champ_donnee_source="._q($iid)."
 	ORDER BY d.id_form $limit");
 	while ($row = spip_fetch_array($res)){
 		list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($row[$champ_donnee_liee],true,$linkable);

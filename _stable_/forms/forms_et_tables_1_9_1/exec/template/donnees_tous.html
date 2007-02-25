@@ -1,6 +1,10 @@
 #CACHE{0}
 #SET{colonnes_sans_tri,'0,1'}<BOUCLE_form(FORMS){id_form}>#SET{documents,#DOCUMENTS|=={oui}|?{' '}}</BOUCLE_form>
 #SET{id,#ENV*{statuts}|serialize|md5|concat{_,#ID_FORM}}
+[(#ENV{colonne_extra_titre,''}|?{' '})
+	#SET{colonne_extra_titre,#ENV*{colonne_extra_titre}|supprimer_tags|attribut_html|trim}
+	[(#GET{colonne_extra_titre}|?{'',' '})#SET{colonne_extra_titre,#ENV*{colonne_extra_titre}|extraire_attribut{alt}}]
+]
 <B_donnees>
 <div class='verdana2'><p><div id="sorting_#GET{id}"><div>Tri en cours, un instant...</div></div><div id="filter_#GET{id}"></div></p></div><div style="clear:both">&nbsp;</div>
 	<link rel="stylesheet" type="text/css" href="#EVAL{_DIR_PLUGIN_FORMS}img_pack/donnees_tous.css" />
@@ -53,7 +57,7 @@
 		</BOUCLE_docs>
 		[(#GET{documents})</td>]
 		[(#ENV{colonne_extra_titre,''}|?{' '})
-		<td><a href='[(#ENV{colonne_extra_url}|parametre_url{id_donnee,#ID_DONNEE})]' >#ENV*{colonne_extra_titre}</a></td>]
+		<td><a href='[(#ENV{colonne_extra_url}|parametre_url{id_donnee,#ID_DONNEE})]' title='#GET{colonne_extra_titre}'>#ENV*{colonne_extra_titre}</a></td>]
 	</tr>
 </BOUCLE_donnees>
 </tbody>

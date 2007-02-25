@@ -17,11 +17,47 @@
 	include_spip('forms_filtres');
 	function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separateur=" "){
 		$lesvaleurs = array();
-		$res = spip_query("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champ));
-		while ($row = spip_fetch_array($res)){
-			$lesvaleurs[] = forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $row['valeur'], $id_form);
+		if (strncmp($champ,'joint_',6)!=0){
+			$res = spip_query("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champ));
+			while ($row = spip_fetch_array($res)){
+				$lesvaleurs[] = forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $row['valeur'], $id_form);
+			}
+			return implode($separateur,$lesvaleurs);
 		}
-		return implode($separateur,$lesvaleurs);
+		else 
+			return forms_calcule_valeur_jointure($type, $id_donnee, $champ, $id_form);
+	}
+	function forms_calcule_valeur_jointure($type, $id_donnee, $champ, $id_form){
+		static $type_joint = array();
+		static $prefixi18n = array();
+		static $liste_table = array();
+		if (!isset($type_joint[$id_form][$champ])){
+			$res = spip_query("SELECT extra_info FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($champ));
+			if ($row = spip_fetch_array($res))
+				$type_joint[$id_form][$champ] = $row["extra_info"];
+			else return "";
+		}
+		$type = $type_joint[$id_form][$champ];
+		if (!isset($prefixi18n[$type]))
+			$prefixi18n[$type] = forms_prefixi18n($type);
+		if (!isset($liste_table[$type])){
+			include_spip("base/forms_base_api");
+			$liste_table[$type] = implode(",",Forms_liste_tables($type));
+		}
+		include_spip("base/abstract_sql");
+		$in = calcul_mysql_in("d.id_form",$liste_table[$type]); 
+		$pre = $prefixi18n[$type];
+		$res = spip_query(
+		  "SELECT id_donnee_liee 
+		  FROM spip_forms_donnees_donnees AS l
+		  JOIN spip_forms_donnees AS d ON d.id_donnee=l.id_donnee_liee
+		  WHERE $in AND l.id_donnee="._q($id_donnee));
+		$cpt = spip_num_rows($res);
+		$out = "";
+		if ($cpt==0) $out .= _T("$pre:aucune_reponse");
+		else if ($cpt==1) $out .= _T("$pre:une_reponse");
+		else $out .= _T("$pre:nombre_reponses",array('nombre'=>$cpt));
+		return $out;
 	}
 
 	function forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $valeur, $id_form){
