@@ -13,18 +13,22 @@
 	<b>#ENV*{titre_liste}</b>
 	</div>
 </div>
+#SET{offset,0}
 <table class="arial11 donnees" id='donnees_#GET{id}' width='100%' cellpadding='5' cellspacing='0' border='0'>
 <thead>
 	<tr>
-		<th class='neutre'></th>
-		<th class='neutre'>id</th>
-		<th>Rang</th>
-		<th>De</th>
+		<th class='neutre'></th>#SET{offset,#GET{offset}|plus{1}}
+		<th class='neutre'>id</th>#SET{offset,#GET{offset}|plus{1}}
+		[(#ENV{affiche_rang,1}|?{' '})<th>Rang</th>#SET{offset,#GET{offset}|plus{1}}]
+		[(#ENV{affiche_de,1}|?{' '})<th>De</th>#SET{offset,#GET{offset}|plus{1}}]
 		<BOUCLE_head(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{tout}{par rang}>
-		<th [(#SPECIFIANT|=={oui}|?{'','class="neutre"'})#SET{colonnes_sans_tri,#GET{colonnes_sans_tri}|concat{','}|concat{#COMPTEUR_BOUCLE|plus{3}}]>#TITRE</th>
+		<th [(#SPECIFIANT|=={oui}|?{'','class="neutre"'})#SET{colonnes_sans_tri,#GET{colonnes_sans_tri}|concat{','}|concat{#COMPTEUR_BOUCLE|plus{#GET{offset}}|moins{1}}]>#TITRE</th>
 		</BOUCLE_head>
-		#SET{colonnes_sans_tri,#GET{colonnes_sans_tri}|concat{','}|concat{#TOTAL_BOUCLE|plus{4}}}
+		#SET{colonnes_sans_tri,#GET{colonnes_sans_tri}|concat{','}|concat{#TOTAL_BOUCLE|plus{#GET{offset}}}}
 		[(#GET{documents})<th class='neutre'>&nbsp;</th>]
+		[(#ENV{colonne_extra_titre,''}|?{' '})
+		#SET{colonnes_sans_tri,#GET{colonnes_sans_tri}|concat{','}|concat{#TOTAL_BOUCLE|plus{#GET{offset}}|plus{1}}}		
+		<th class='neutre'>&nbsp;</th>]
 	</tr>
 </thead>
 <tbody>
@@ -34,8 +38,8 @@
 	<tr class='tr_liste'>
 		<td>[(#ID_DONNEE|forms_puce_statut_donnee{#STATUT,#ID_FORM})]</td>
 		<td><a href='#GET{lien_edit}'><img src='#EVAL{_DIR_PLUGIN_FORMS}img_pack/loupe.png' alt='' width='16' height='16' style='vertical-align:middle' /></a><a href='#GET{lien_edit}'>#ID_DONNEE</a></td>
-		<td>#RANG</td>
-		<td><BOUCLE_auteur(AUTEURS){id_auteur}>#NOM</BOUCLE_auteur>#IP<//B_auteur></th>
+		[(#ENV{affiche_rang,1}|?{' '})<td>#RANG</td>]
+		<BOUCLE_auteur(AUTEURS){id_auteur}>[(#ENV{affiche_de,1}|?{' '})<td>#NOM</td>]</BOUCLE_auteur>[(#ENV{affiche_de,1}|?{' '})<td>#IP</td>]<//B_auteur>
 		<BOUCLE_body(FORMS_CHAMPS){id_form}{tout}{type !IN (separateur,textestatique)}{par rang}>
 		<td>
 		#LESVALEURS{'<br />'}
@@ -48,6 +52,8 @@
 		[(#GET{documents}|?{'',' '})</td>]
 		</BOUCLE_docs>
 		[(#GET{documents})</td>]
+		[(#ENV{colonne_extra_titre,''}|?{' '})
+		<td><a href='[(#ENV{colonne_extra_url}|parametre_url{id_donnee,#ID_DONNEE})]' >#ENV*{colonne_extra_titre}</a></td>]
 	</tr>
 </BOUCLE_donnees>
 </tbody>
