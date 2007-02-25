@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_gerer_messages' => "G&eacute;rer les SMS",
 'icone_gerer_abonnes' => "G&eacute;rer les Abonn&eacute;s",
 'icone_gerer_listes' => "G&eacute;rer les listes de diffusion",
+'icone_boite_d_envoi' => "Bo&icirc;te d'Envoi",
 'icone_configurer' => "Configurer",
 
 

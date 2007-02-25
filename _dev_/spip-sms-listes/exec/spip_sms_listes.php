@@ -54,6 +54,9 @@ function exec_spip_sms_listes() {
 	$gerer = tables_ou_donnees('smslist_abonne',$retour);
 	echo icone_etendue(_T("smslist:icone_gerer_abonnes"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist_abonne-64.png", "rien.gif",false);
 	
+	$gerer = tables_ou_donnees('smslist_boiteenvoi',$retour);
+	echo icone_etendue(_T("smslist:icone_boite_d_envoi"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist_boiteenvoi-64.png", "rien.gif",false);
+
 	echo icone_etendue(_T("smslist:icone_configurer"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist-config-64.png", "rien.gif",false);
 
 	echo creer_colonne_droite();
