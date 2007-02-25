@@ -21,9 +21,7 @@ function documents_distants_affiche_gauche($flux){
 	
 				
 	}
-		
-				
-	}
+	
 	return $flux;} 
  
 ?>
