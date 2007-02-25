@@ -129,8 +129,10 @@ function affichage_donnees_tous($type_form){
 	echo '</div>';
 	
 	$contexte = array('id_form'=>_request('id_form'),
-	'titre_liste'=>$titre_page,'aucune_reponse'=>_T("$prefix:aucune_reponse"),
-	'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee']);
+	'titre_liste'=>$titre_page,
+	'aucune_reponse'=>_T("$prefix:aucune_reponse"),
+	'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],
+	'statuts' => array('prepa','prop','propose','publie','refuse') );
 	echo recuperer_fond("exec/template/donnees_tous",$contexte);
 	
 	echo "</td></tr></table><br />\n";

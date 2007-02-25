@@ -4,7 +4,7 @@ div.liste { clear:both;width:auto; }
 	font-weight: bold;
 }
 .donnees th {
-	vertical-align:top;
+	vertical-align:middle;
 	background-repeat: no-repeat;
 	border-left: 1px solid #FFF;
 	border-right: 1px solid #000;
@@ -14,10 +14,10 @@ div.liste { clear:both;width:auto; }
 	margin:0px;
 	height:34px;
 }
-.donnees th.neutre {padding-left: 0px;background-image: url(img_pack/header.png);	}
-.donnees th.header {padding-left: 15px;background-image: url(img_pack/header-bg.png);	}
-.donnees th.headerSortUp {padding-left: 15px;background-image: url(img_pack/header-asc.png);	}
-.donnees th.headerSortDown {padding-left: 15px;background-image: url(img_pack/header-desc.png);}
+.donnees th.neutre {padding-left: 0px;background: url(img_pack/header.png) repeat-x left bottom;	}
+.donnees th.header {padding-left: 15px;background: url(img_pack/header-bg.png) no-repeat left bottom;	}
+.donnees th.headerSortUp {padding-left: 15px;background: url(img_pack/header-asc.png) no-repeat left bottom;	}
+.donnees th.headerSortDown {padding-left: 15px;background: url(img_pack/header-desc.png) no-repeat left bottom;}
 #sorting div {
 	font-weight: bold;
 }

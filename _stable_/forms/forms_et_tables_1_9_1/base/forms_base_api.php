@@ -42,12 +42,20 @@ function Forms_creer_table($structure_xml,$type=NULL, $unique = true){
 	return;
 }
 
+function Forms_liste_tables($type){
+	$liste = array();
+	$res = spip_query("SELECT id_form FROM spip_forms WHERE type_form="._q($type));
+	while ($row = spip_fetch_array($res)){
+		$liste[] = $row['id_form'];
+	}
+	return $liste;
+}
+
 function Forms_supprimer_tables($type_ou_id){
-	if (!$id_form = intval($type_ou_id)){
-		$res = spip_query("SELECT id_form FROM spip_forms WHERE type_form="._q($type_ou_id));
-		while ($row = spip_fetch_array($res)){
-			Forms_supprimer_tables($row['id_form']);
-		}
+	if (!$id_form = intval($type_ou_id) OR !is_numeric($type_ou_id)){
+		$liste = Forms_liste_tables($type_ou_id);
+		foreach($liste as $id)
+			Forms_supprimer_tables($id);
 		return;
 	}
 	$res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form));
