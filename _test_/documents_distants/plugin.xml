@@ -14,6 +14,7 @@ _ &copy; 2007 - Licence GPL
 	</etat>
 	<description>
 	Plugin chargé d'importer massivement des documents distants. A partir de la [page suivante->?exec=documents_distants] 
+	Nécéssite le plugin balise session ...
 	</description>
 	
 

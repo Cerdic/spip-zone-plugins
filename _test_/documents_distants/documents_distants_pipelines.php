@@ -21,10 +21,7 @@ function documents_distants_affiche_gauche($flux){
 	
 				
 	}
-	//breves
-	if (in_array($flux['args']['exec'],array('breves_voir')) and $flux['args']['id_breve'])		{
-					$flux['data'].=recuperer_fond('lien_documents_distants',Array('type_lien'=>'breves','id'=>$flux['args']['id_breve']));
-	
+		
 				
 	}
 	return $flux;} 
