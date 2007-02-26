@@ -44,7 +44,7 @@ function exec_reparer_liens_documents(){
 
 	debut_raccourcis();
 	icone_horizontale (_T('gestdoc:portfolio'), 
-		generer_url_ecrire('portfolio'),
+		generer_url_ecrire('portfolio_edit'),
 		"../"._DIR_PLUGIN_GESTIONDOCUMENTS."/img_pack/stock_broken_image.png");
 	fin_raccourcis();
 	debut_droite();
