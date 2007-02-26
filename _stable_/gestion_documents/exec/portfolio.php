@@ -23,7 +23,7 @@ function generer_query_string($conteneur,$id_type,$nb_aff,$filtre){
   return $query;
 }	
 
-function exec_portfolio(){
+function exec_portfolio_edit(){
 	global $updatetable;
 	global $connect_statut;
 	//global $modif;
@@ -267,7 +267,7 @@ function exec_portfolio(){
 			$fichier = $doc['fichier'];
 			$url_fichier = generer_url_document($doc['id_document']);
 			$doc['url'] = $url_fichier;
-			$doc['script'] = 'portfolio'; # script de retour formulaires
+			$doc['script'] = 'portfolio_edit'; # script de retour formulaires
 			$size = @getimagesize($url_fichier);
 			$file_size = @filesize($url_fichier);
 
@@ -403,15 +403,15 @@ function exec_portfolio(){
 
 		if ($table_need_update){
 			icone_horizontale (_T('gestdoc:mis_jour_tailles'), 
-				generer_url_ecrire('portfolio',"updatetable=oui&".generer_query_string($conteneur,$id_type,$nb_aff,$filtre)),
+				generer_url_ecrire('portfolio_edit',"updatetable=oui&".generer_query_string($conteneur,$id_type,$nb_aff,$filtre)),
 				"administration-24.gif");
 		}
 		icone_horizontale (_T('gestdoc:reparer_liens'), generer_url_ecrire('reparer_liens_documents'),"../"._DIR_PLUGIN_GESTIONDOCUMENTS."/img_pack/stock_broken_image.png");
 
-		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string($conteneur,"",$nb_aff,$filtre))."' method='post'><div>\n";
+		echo "<form action='".generer_url_ecrire('portfolio_edit',generer_query_string($conteneur,"",$nb_aff,$filtre))."' method='post'><div>\n";
 		echo _T('gestdoc:type') . "<br /><select name='id_type'";
 		echo "onchange=\"document.location.href='";
-		echo generer_url_ecrire('portfolio',generer_query_string($conteneur,"",$nb_aff,$filtre).'id_type=')."'+this.options[this.selectedIndex].value\"";
+		echo generer_url_ecrire('portfolio_edit',generer_query_string($conteneur,"",$nb_aff,$filtre).'id_type=')."'+this.options[this.selectedIndex].value\"";
 		echo " class='forml' >" . "\n";
 		$s=spip_query('SELECT * FROM spip_types_documents');
 		echo "<option value=''>"._T("gestdoc:tous")."</option>";
@@ -427,10 +427,10 @@ function exec_portfolio(){
 		echo "</div></noscript></div>\n";
 		echo "</form>\n";
 
-		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string("",$id_type,$nb_aff,$filtre))."' method='post'><div>\n";
+		echo "<form action='".generer_url_ecrire('portfolio_edit',generer_query_string("",$id_type,$nb_aff,$filtre))."' method='post'><div>\n";
 		echo _T('gestdoc:conteneur') . "<br /><select name='conteneur'";
 		echo "onchange=\"document.location.href='";
-		echo generer_url_ecrire('portfolio',generer_query_string("",$id_type,$nb_aff,$filtre).'conteneur=')."'+this.options[this.selectedIndex].value\"";
+		echo generer_url_ecrire('portfolio_edit',generer_query_string("",$id_type,$nb_aff,$filtre).'conteneur=')."'+this.options[this.selectedIndex].value\"";
 		echo " class='forml' >" . "\n";
 		echo "<option value=''>"._T("gestdoc:tous")."</option>";
 		echo "<option value='rubriques'".($conteneur=='rubriques'?(" selected='selected'"):"").">"._T("ecrire:info_rubriques")."</option>";
@@ -443,10 +443,10 @@ function exec_portfolio(){
 		echo "</div></noscript></div>\n";
 		echo "</form>\n";
 
-		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,$nb_aff,""))."' method='post'><div>\n";
+		echo "<form action='".generer_url_ecrire('portfolio_edit',generer_query_string($conteneur,$id_type,$nb_aff,""))."' method='post'><div>\n";
 		echo _T('gestdoc:filtrer') . "<br /><select name='filtre'";
 		echo "onchange=\"document.location.href='";
-		echo generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,$nb_aff,"").'filtre=')."'+this.options[this.selectedIndex].value\"";
+		echo generer_url_ecrire('portfolio_edit',generer_query_string($conteneur,$id_type,$nb_aff,"").'filtre=')."'+this.options[this.selectedIndex].value\"";
 		echo " class='forml' >" . "\n";
 		echo "<option value=''>"._T("gestdoc:tous")."</option>";
 		echo "<option value='notitle'".($filtre=='notitle'?(" selected='selected'"):"").">"._T("gestdoc:sans_titre_descriptif")."</option>";
@@ -458,10 +458,10 @@ function exec_portfolio(){
 		echo "</div></noscript></div>\n";
 		echo "</form>\n";
 	
-		echo "<form action='".generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,"",$filtre))."' method='post'><div>\n";
+		echo "<form action='".generer_url_ecrire('portfolio_edit',generer_query_string($conteneur,$id_type,"",$filtre))."' method='post'><div>\n";
 		echo _T('gestdoc:affichage') . "<br /><select name='nb_aff'";
 		echo "onchange=\"document.location.href='";
-		echo generer_url_ecrire('portfolio',generer_query_string($conteneur,$id_type,"",$filtre).'nb_aff=')."'+this.options[this.selectedIndex].value\"";
+		echo generer_url_ecrire('portfolio_edit',generer_query_string($conteneur,$id_type,"",$filtre).'nb_aff=')."'+this.options[this.selectedIndex].value\"";
 		echo " class='forml' >" . "\n";
 		echo "<option value='12'>"._T("gestdoc:par",array("numero" => 12))."</option>";
 		echo "<option value='24'".($nb_aff=='24'?(" selected='selected'"):"").">"._T("gestdoc:par",array("numero" => 24))."</option>";
@@ -513,14 +513,14 @@ function exec_portfolio(){
 				echo "<tr bgcolor='white'><td align='left'>";
 				if ($t_debut > 0) {
 					$debut_prec = max($t_debut - $nb_aff, 0);
-					echo generer_url_post_ecrire("portfolio",generer_query_string($conteneur,$id_type,$nb_aff,$filtre)."t_debut=$debut_prec"),
+					echo generer_url_post_ecrire("portfolio_edit",generer_query_string($conteneur,$id_type,$nb_aff,$filtre)."t_debut=$debut_prec"),
 						"\n<input type='submit' value='&lt;&lt;&lt;' class='fondo' />",
 						$visiteurs,
 						"\n</form>";
 				}
 				echo "</td><td style='text-align:right;'>";
 				if ($debut_suivant < $nombre_documents) {
-					echo generer_url_post_ecrire("portfolio",generer_query_string($conteneur,$id_type,$nb_aff,$filtre)."t_debut=$debut_suivant"),
+					echo generer_url_post_ecrire("portfolio_edit",generer_query_string($conteneur,$id_type,$nb_aff,$filtre)."t_debut=$debut_suivant"),
 						"\n<input type='submit' value='&gt;&gt;&gt;' class='fondo' />",
 						$visiteurs,
 						"\n</form>";
