@@ -49,11 +49,11 @@ function action_table_donnee_deplace(){
 					}
 				}
 			}
-			if (autoriser('modifierdonnee','form',$id_form,NULL,array('id_donnee'=>$id_donnee)))
+			if (autoriser('modifier','donnee',$id_donnee,NULL,array('id_form'=>$id_form)))
 				Forms_rang_update($id_donnee,$rang_nouv);
 		}
 		else {
-			if (autoriser('modifierdonnee','form',$id_form,NULL,array('id_donnee'=>$id_donnee))){
+			if (autoriser('modifier','donnee',$id_donnee,NULL,array('id_form'=>$id_form))){
 				$rang_nouv = _request('rang_nouv');
 				Forms_rang_update($id_donnee,$rang_nouv);
 			}

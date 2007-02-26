@@ -77,13 +77,16 @@
 	function Forms_donnees_vide($id_form){
 		if (!include_spip('inc/autoriser'))
 			include_spip('inc/autoriser_compat');
-		if (autoriser('supprimerdonnee','form',$id_form)){
+		// on teste si autorisation en masse
+		if (autoriser('supprimer','donnee',0,NULL,array('id_form'=>$id_form)))
 			spip_query("UPDATE spip_forms_donnees SET statut='poubelle' WHERE id_form="._q($id_form));
-			/*$res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form));
+		// sinon, on teste une par une
+		else {
+			$res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form));
 			while ($row = spip_fetch_array($res)){
-				spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($row['id_donnee']));
+				if (autoriser('supprimer','donnee',$row['id_donnee'],NULL,array('id_form'=>$id_form)))
+					spip_query("UPDATE spip_forms_donnees SET statut='poubelle' WHERE id_donnee="._q($row['id_donnee']));
 			}
-			spip_query("DELETE FROM spip_forms_donnees WHERE id_form="._q($id_form));*/
 		}
 	}
 
@@ -571,11 +574,11 @@
 			}
 			// D'abord creer la reponse dans la base de donnees
 			if ($ok) {
-				if (autoriser('modifierdonnee', 'form', $id_form, NULL, array('id_donnee'=>$id_donnee))){
+				if (autoriser('modifier', 'donnee', $id_donnee, NULL, array('id_form'=>$id_form))){
 					spip_query("UPDATE spip_forms_donnees SET date=NOW(), ip="._q($GLOBALS['ip']).", url="._q($url).", confirmation="._q($confirmation).", cookie="._q($cookie)." ".
 						"WHERE id_donnee="._q($id_donnee));
 					spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
-				} elseif (autoriser('insererdonnee', 'form', $id_form, NULL, array('id_donnee'=>$id_donnee))){
+				} elseif (autoriser('creer', 'donnee', 0, NULL, array('id_form'=>$id_form))){
 					$rang = Forms_rang_prochain($id_form);
 					spip_query("INSERT INTO spip_forms_donnees (id_form, id_auteur, date, ip, url, confirmation,statut, cookie, rang) ".
 					"VALUES ("._q($id_form).","._q($id_auteur).", NOW(),"._q($GLOBALS['ip']).","._q($url).", '$confirmation', '$statut',"._q($cookie).","._q($rang).")");
@@ -799,6 +802,10 @@ function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_
 	}
 	foreach($types as $type_form)
 		$prefixi18n[$type_form] = forms_prefixi18n($type_form);
+	if ($lieeliante=='liee')
+		$type_autoriser = strncmp($type_source,'donnee',6)==0?'donnee':$type_source;
+	else 
+		$type_autoriser = 'donnee';
 	
 	if (count($liste) OR $tranches) {
 		$out .= "<div class='liste liste-donnees'>";
@@ -817,10 +824,14 @@ function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_
 				$vals[] = "<a href='".generer_url_ecrire("donnees_edit","id_form=$id_form&id_donnee=$id_donnee&retour=".urlencode($retour))."'>"
 					.implode(", ",$champs)."</a>";
 				$redirect = ancre_url((_DIR_RESTREINT?"":_DIR_RESTREINT_ABS).self(),'tables');
-				if ($lieeliante=='liee')
-					$action = generer_action_auteur("forms_lier_donnees","$id,$type_source,retirer,$id_donnee",urlencode($redirect));
+				$action = "";
+				if ($lieeliante=='liee'){
+					if (autoriser("delier_donnee",$type_autoriser,$id,NULL,array('id_donnee_liee'=>$id_donnee)))
+						$action = generer_action_auteur("forms_lier_donnees","$id,$type_source,retirer,$id_donnee",urlencode($redirect));
+				}
 				else
-					$action = generer_action_auteur("forms_lier_donnees","$id_donnee,$type_lie,retirer,$id",urlencode($redirect));
+					if (autoriser("delier_donnee",$type_autoriser,$id_donnee,NULL,array('id_form'=>$id_form,'id_donnee_liee'=>$id)))
+						$action = generer_action_auteur("forms_lier_donnees","$id_donnee,$type_lie,retirer,$id",urlencode($redirect));
 				$action = ancre_url($action,$bloc_id);
 				$redirajax = generer_url_ecrire($script,$arg_ajax);
 				$vals[] = "<a href='$action' rel='$redirajax' class='ajaxAction' >"

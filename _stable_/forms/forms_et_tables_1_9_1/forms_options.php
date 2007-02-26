@@ -26,9 +26,64 @@ function autoriser_form_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) 
 			return ($qui['statut'] == '0minirezo');
 	return false;
 }
-function autoriser_form_modifierdonnee_dist($faire, $type, $id_form, $qui, $opt) {
+function autoriser_donnee_dist($faire,$type,$id_donnee,$qui,$opt){
+	static $types = array();
+	if (!isset($opt['id_form'])){
+		$res = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
+		if (!$row = spip_fetch_array($res)) return false;
+		$opt['id_form'] = $row['id_form'];
+	}
+	$id_form = $opt['id_form'];
+	if (!isset($opt['type_form'])){
+		if (!isset($types[$id_form])){
+			$res = spip_query("SELECT type_form FROM spip_forms WHERE id_form="._q($id_form));
+			if (!$row = spip_fetch_array($res)) return false;
+			$types[$id_form] = $row['type_form'];
+		}
+		$opt['type_form'] = $types[$id_form];
+	}
+	$type_form = in_array($opt['type_form'],array('','sondage'))?'form':$opt['type_form'];
+	// Chercher une fonction d'autorisation explicite
+	if (
+	// 1. Sous la forme "autoriser_type_form_donnee_faire"
+		(
+		$type_form
+		AND $f = 'autoriser_'.$type_form.'_donnee_'.$faire
+		AND (function_exists($f) OR function_exists($f.='_dist'))
+		)
+
+	// 2. Sous la forme "autoriser_type_form_donnee"
+	OR (
+		$type_form
+		AND $f = 'autoriser_'.$type_form.'_donnee'
+		AND (function_exists($f) OR function_exists($f.='_dist'))
+		)
+	// 3. Sous la forme "autoriser_table_donnee_faire"
+	OR (
+		$f = 'autoriser_table_donnee_'.$faire
+		AND (function_exists($f) OR function_exists($f.='_dist'))
+	)
+	// 4. Sous la forme "autoriser_table_donnee_faire"
+	OR (
+		$f = 'autoriser_table_donnee'
+		AND (function_exists($f) OR function_exists($f.='_dist'))
+	)
+
+	// 5. Sinon autorisation generique
+	OR (
+		$f = 'autoriser_form'
+		AND (function_exists($f) OR function_exists($f.='_dist'))
+	)
+
+	)
+		$a = $f($faire,$type,intval($id),$qui,$opt);
+	if (_DEBUG_AUTORISER) spip_log("autoriser_form_donnee_dist delegue a $f($faire,$type,$id): ".($a?'OK':'niet'));
+	return $a;
+}
+
+function autoriser_form_donnee_modifier_dist($faire, $type, $id_donnee, $qui, $opt) {
+	if (!isset($opt['id_form']) OR !$id_form = $opt['id_form']) return false;
 	// un admin dans le back office a toujours le droit de modifier
-	if (!$opt['id_donnee']) return false;
 	if (($qui['statut'] == '0minirezo')) return true;
 	$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 	if (!$row = spip_fetch_array($result)) return false;
@@ -47,7 +102,11 @@ function autoriser_form_modifierdonnee_dist($faire, $type, $id_form, $qui, $opt)
 	}
 	return false;
 }
-function autoriser_form_insererdonnee_dist($faire, $type, $id_form, $qui, $opt) {
+function autoriser_table_donnee_modifier_dist($faire, $type, $id_donnee, $qui, $opt) {
+	return autoriser_form_donnee_modifier_dist($faire, $type, $id_donnee, $qui, $opt);
+}
+function autoriser_form_donnee_creer_dist($faire, $type, $id_donnee, $qui, $opt) {
+	if (!isset($opt['id_form']) OR !$id_form = $opt['id_form']) return false;
 	// un admin dans le back office a toujours le droit d'inserer
 	if (($qui['statut'] == '0minirezo')) return true;
 	$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
@@ -57,11 +116,17 @@ function autoriser_form_insererdonnee_dist($faire, $type, $id_form, $qui, $opt) 
 	if ($dejareponse) return false;
 	return true;
 }
-function autoriser_table_donnee_instituer($faire,$type,$id_donnee,$qui,$opt) {
+function autoriser_table_donnee_creer_dist($faire, $type, $id_donnee, $qui, $opt) {
+	return autoriser_form_donnee_creer($faire, $type, $id_donnee, $qui, $opt);
+}
+function autoriser_form_donnee_instituer_dist($faire,$type,$id_donnee,$qui,$opt) {
 	if (($qui['statut'] != '0minirezo')
 	OR !isset($opt['nouveau_statut'])
 	OR ($opt['nouveau_statut']=='prepa')) return false;
 	return true;
+}
+function autoriser_table_donnee_instituer_dist($faire,$type,$id_donnee,$qui,$opt) {
+	return autoriser_form_donnee_instituer_dist($faire,$type,$id_donnee,$qui,$opt);
 }
 
 // le reglage du cookie doit se faire avant l'envoi de tout HTML au client

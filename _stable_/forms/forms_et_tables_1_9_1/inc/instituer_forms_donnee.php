@@ -46,7 +46,7 @@ function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut, $rang=NU
 		$lib = _T("$pi18n:texte_statut_$s");
 		if (
 		$s==$statut
-		OR autoriser('instituer',$type_form.'_donnee',$id_donnee,NULL,array('id_form'=>$id_form,'statut'=>$statut,'nouveau_statut'=>$s)) 
+		OR autoriser('instituer','donnee',$id_donnee,NULL,array('id_form'=>$id_form,'statut'=>$statut,'nouveau_statut'=>$s)) 
 		)
 			$res .= "<option"  . 
 				mySel($s, $statut)  . " " .
@@ -107,7 +107,7 @@ function puce_statut_donnee($id, $statut, $id_form, $ajax = false) {
 	$statuts = array("prepa","prop","publie","poubelle","refuse");
 	foreach($statuts as $s){
 		$lib[$s] = _T("$p:texte_statut_$s");
-		if (autoriser('instituer',$type_form[$id_form].'_donnee',$id_donnee,NULL,array('id_form'=>$id_form,'statut'=>$statut,'nouveau_statut'=>$s)))
+		if (autoriser('instituer','donnee',$id_donnee,NULL,array('id_form'=>$id_form,'statut'=>$statut,'nouveau_statut'=>$s)))
 			$clip[$s] = $c++;
 		else 
 			$clip[$s] = 0;
@@ -125,7 +125,7 @@ function puce_statut_donnee($id, $statut, $id_form, $ajax = false) {
 		. "</span>"
 		. "<span class='puce_article_popup' id='statutdecalforms_donnee$id'\nonmouseout=\"cacher('statutdecalforms_donnee$id');\" style='margin-left: -".((11*$clip[$statut])+1)."px;width:{$width}px'>";
 		foreach($statuts as $s)
-			if (autoriser('instituer',$type_form[$id_form].'_donnee',$id_donnee,NULL,array('id_form'=>$id_form,'statut'=>$statut,'nouveau_statut'=>$s)))
+			if (autoriser('instituer','donnee',$id_donnee,NULL,array('id_form'=>$id_form,'statut'=>$statut,'nouveau_statut'=>$s)))
 		  	$res .= afficher_script_statut($id, 'forms_donnee', -((11*$clip[$s])+1), $puce[$s], $s, $lib[$s], $action);
 		$res .= "</span>";
 		return $res;

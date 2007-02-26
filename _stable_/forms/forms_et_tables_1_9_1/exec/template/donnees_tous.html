@@ -21,7 +21,7 @@
 <table class="arial11 donnees" id='donnees_#GET{id}' width='100%' cellpadding='5' cellspacing='0' border='0'>
 <thead>
 	<tr>
-		<th class='neutre'></th>#SET{offset,#GET{offset}|plus{1}}
+		<th class='neutre' style='width:12px'></th>#SET{offset,#GET{offset}|plus{1}}
 		<th class='neutre'>id</th>#SET{offset,#GET{offset}|plus{1}}
 		[(#ENV{affiche_rang,1}|?{' '})<th>Rang</th>#SET{offset,#GET{offset}|plus{1}}]
 		[(#ENV{affiche_de,1}|?{' '})<th>De</th>#SET{offset,#GET{offset}|plus{1}}]
