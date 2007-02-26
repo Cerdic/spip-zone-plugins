@@ -268,6 +268,7 @@ function exec_portfolio_edit(){
 			$url_fichier = generer_url_document($doc['id_document']);
 			$doc['url'] = $url_fichier;
 			$doc['script'] = 'portfolio_edit'; # script de retour formulaires
+			$doc['id_article'] = 1; # hack 1.9.2 pour avoir le droit de supprimer le doc (pfff)
 			$size = @getimagesize($url_fichier);
 			$file_size = @filesize($url_fichier);
 
