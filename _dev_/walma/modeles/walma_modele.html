@@ -1,0 +1,228 @@
+[(#REM)
+on va essayé de récupérer un array des documents
+article
+mot
+recherche
+rubrique
+
+Pour utiliser walma 3.4 en inclusion comme on veut on met dans le squelette de son choix
+dans le head (css et javascript pour walma) mettre le mode par defaut gauche
+<INCLURE{fond=inc-walma_head}{mode,gauche}>
+dans le body
+[(#MODELE{walma_modele}{pas}{textforum}{grande}{mode}{debut_img}{page})]
+en option on peut avoir une inclusion qui affiche le texte de l'article et si activé, son forum
+<INCLURE{fond=inc-walma_txtforum}{id_article}{textforum}{lang}>
+
+
+Pour utiliser le modèle en inclusion ça marche pas encore bien
+ walma48|modele>
+encore moins
+<walma48|modele|mode=vignettes|pas|textforum|grande|debut_img|page>
+mais ça viendra surement
+]
+ 
+<!--[(#REM) modifier ici le nbre de vignette que vous souhaitez (6 par defaut) dans ce cas modifier aussi le filtre |alterner et ses virgules ]-->
+#SET{nbvignettes,6}
+<BOUCLE_totalsearch(DOCUMENTS){id_article?}{recherche?}{mode=document}{extension==(png|jpg|gif)$}>
+</BOUCLE_totalsearch>
+
+<B_walma_vignette> 
+ 
+<!-- diaporama sans javascript-->
+[(#ENV{mode}|=={image}|?{
+	[(#ENV{diapo}|=={on}|?{
+		<META HTTP-EQUIV=Refresh CONTENT="2; URL=[(#SELF|parametre_url{'mode','image'}|parametre_url{'diapo',''}|parametre_url{'recherche',#RECHERCHE}|parametre_url{'grande',''}|parametre_url{'debut_img',''})][&amp;grande=(#ENV{grande,1}|<={[(#EVAL{[(#_walma_vignette:TOTAL_BOUCLE)]-2})]}|?{[(#EVAL{[(#ENV{grande,0})]+1})],0})][&amp;diapo=(#ENV{diapo,on})]#godiapo"> 
+	,''})]
+,''})]
+
+<div id="galeriewalma">
+<a name="godiapo"></a>
+
+<div class="menuwalma">
+<!--[(#REM) MENU MODES  ]-->
+<a href="[(#SELF|parametre_url{'mode','vignettes'}|parametre_url{'diapo',''}|parametre_url{'pas',1}|parametre_url{'textforum',x}|parametre_url{'recherche',#RECHERCHE})]#mosaic"
+ id="ico1" class="ico ico[(#ENV{mode}|=={vignettes}|?{'select',''})]mosaiclic" title="mosaïclic" >&nbsp;</a>
+<a href="[(#SELF|parametre_url{'mode','gauche'}|parametre_url{'grande',''}|parametre_url{'large',''}|parametre_url{'diapo',''}|parametre_url{'pas',''}|parametre_url{'textforum',x}|parametre_url{'recherche',#RECHERCHE})]#left"
+ id="ico2" class="ico ico[(#ENV{mode, gauche}|=={gauche}|?{'select',''})]gauche" title="<multi>[fr]Gauche[en]Left</multi>">&nbsp;</a>
+<a href="[(#SELF|parametre_url{'mode','droite'}|parametre_url{'grande',''}|parametre_url{'large',''}|parametre_url{'diapo',''}|parametre_url{'pas',''}|parametre_url{'textforum',x}|parametre_url{'recherche',#RECHERCHE})]#right" 
+ id="ico3" class="ico ico[(#ENV{mode}|=={droite}|?{'select',''})]droite" title="<multi>[fr]Droite[en]Right</multi>">&nbsp;</a>
+<a href="[(#SELF|parametre_url{'mode','image'}|parametre_url{'diapo',''}|parametre_url{'pas',1}|parametre_url{'textforum',x}|parametre_url{'recherche',#RECHERCHE})]#image"
+ id="ico4" class="ico ico[(#ENV{mode}|=={image}|?{'select',''})][(#ENV{diapo}|=={on}|?{diapo,image})]" title="Image [(#ENV{diapo}|=={on}|?{Stop,''})]" >&nbsp;</a>
+<a href="[(#SELF|parametre_url{'mode','image'}|parametre_url{'id_document',''}|parametre_url{'pas',1}|parametre_url{'textforum',x}|parametre_url{'recherche',#RECHERCHE})][&amp;diapo=(#ENV{diapo,on})]#ziapo"
+ id="ico5" class="ico ico[(#ENV{mode}|=={image}|?{select[(#ENV{diapo}|!={on}|?{diapo,''})],''})]image " [(#ENV{diapo}|=={on}|?{style="text-decoration:blink; cursor:wait;",''})] title="<multi>[fr]Diaporama[en]Slideshow</multi>" >::></a>
+
+<div style="float:right; font-size:11px">
+[<:resultats_recherche:> <strong>(#RECHERCHE)</strong> [(#_totalsearch:TOTAL_BOUCLE|>{1}|?{ [(#_totalsearch:TOTAL_BOUCLE)] images, [(#_totalsearch:TOTAL_BOUCLE|=={''}|?{0 image ,1 image })]})]]
+ 
+<!--[(#REM)réglage de la langue]-->
+<a href="[(#SELF|parametre_url{'recherche',#RECHERCHE}|parametre_url{'lang',[(#ENV{lang}|=={fr}|?{en,fr})]})]#haut" title="<multi>[fr]English language[en]Passer en langue française</multi>">
+[[(#ENV{lang}|=={fr}|?{fr,en})]]
+</a>
+</div>
+
+</div><!--[(#REM) MENU MODES fin , on ferme la boucle article ici, rubrique prend le relais]-->
+
+<div class="recherchevidehauteur">
+<a href="#SELF" onclick='history.back()' class="cachersipasrecherche">[(#RECHERCHE)] ? <multi>[fr]Pas de r&eacute;sultat![en]No result!</multi> </a>
+</div>
+ 
+<div class="blocgalerie">
+ <div id="petitdiv" class="petitdiv sirecherchevide">
+	
+		<div id="compteurwalma" class="sirecherchevide">
+			 <!--[(#REM) si mode image on affiche seulement ce compteur image par image]-->
+			 [(#ENV{mode}|=={image}|?{
+			 <!--[(#REM) si il y a + de 1 image]-->
+			 [(#TOTAL_BOUCLE|=={1}|?{#TOTAL_BOUCLE image,
+			 <a id="backref" href="[(#SELF|parametre_url{'grande',''}|parametre_url{'diapo',''})][&amp;grande=(#ENV{grande,0}|=={0}|?{[(#EVAL{[(#_walma_vignette:TOTAL_BOUCLE)]-1})],[(#EVAL{[(#ENV{grande,0})]-1})]})]">
+			 <span id="back">&lt;</span></a> 
+			 <a id="goref" href="[(#SELF|parametre_url{'grande',''}|parametre_url{'diapo',''})][&amp;grande=(#ENV{grande,1}|<={[(#EVAL{[(#_walma_vignette:TOTAL_BOUCLE)]-2})]}|?{[(#EVAL{[(#ENV{grande,0})]+1})],0})]">
+			 <span id="go">&gt;</span></a>
+			 <a href="[(#URL_PAGE{#PAGE})][(#PAGE|=={''}|?{?page=article,[&amp;id_article=(#ENV{id_article,''})]})][&amp;mode=(#ENV{mode})][&amp;recherche=(#RECHERCHE|textebrut)]">
+			 [(#EVAL{[(#ENV{grande,[(#ENV{debut_img,0})]})]+1})] / #_walma_vignette:TOTAL_BOUCLE
+			 </a> 
+			 })]
+			 <div class="hidden">,''})]
+		
+			<!--[(#REM) si mode vignettes on affiche seulement le nombre d'images]-->
+			[(#ENV{mode}|=={vignettes}|?{ [(#TOTAL_BOUCLE|>{1}|?{#TOTAL_BOUCLE images, #TOTAL_BOUCLE image})]
+			<div class="hidden">,''})]
+			<!--[(#REM) et si nb vignette insuffisant on affiche seulement le nombre d'images]--> 
+			[<span id="nofleches">(#TOTAL_BOUCLE|<{[(#GET{nbvignettes})]}|?{ [(#TOTAL_BOUCLE|>{1}|?{#TOTAL_BOUCLE images, #TOTAL_BOUCLE image})</span>]
+			
+			<div class="hidden" id="cachecompteur" >,''})]
+				
+			<!-- dans les autres cas le compteur complet  [< [1-6]/20 >]-->
+			
+			<!-- fleche arrière avec ancre -->
+			<a title="back" id="backref" href="[(#SELF|parametre_url{'id_document',''}|parametre_url{'debut_img',''}|parametre_url{'bloc',''}|parametre_url{'grande',''}|parametre_url{'pas',''}|parametre_url{'recherche',#RECHERCHE})]
+			[&amp;debut_img=(#EVAL{[(#ENV{debut_img,0})]-[(#GET{nbvignettes})]}|<{0}|?{
+			[(#EVAL{[(#EVAL{#_walma_vignette:TOTAL_BOUCLE/[(#GET{nbvignettes})]}|ceil)]*[(#GET{nbvignettes})]-[(#GET{nbvignettes})]})]
+			,[(#EVAL{[(#ENV{debut_img,0})]-[(#GET{nbvignettes})]})]})]
+			[#bloc(#EVAL{[(#ENV{debut_img,0})]-[(#GET{nbvignettes})]}|<{0}|?{
+			[(#EVAL{[(#EVAL{#_walma_vignette:TOTAL_BOUCLE/[(#GET{nbvignettes})]}|ceil)]*[(#GET{nbvignettes})]-[(#GET{nbvignettes})]})]
+			,[(#EVAL{[(#ENV{debut_img,0})]-[(#GET{nbvignettes})]})]})]
+			"><span id="back">&lt;</span></a>
+			
+			<!--fleche avant -->
+			<a title="go" id="goref" href="[(#SELF|parametre_url{'debut_img',''}|parametre_url{'id_document',''}|parametre_url{'bloc',''}|parametre_url{'grande',''}|parametre_url{'pas',''}|parametre_url{'recherche',#RECHERCHE})]
+			[&amp;debut_img=(#EVAL{[(#ENV{debut_img,0})]+[(#GET{nbvignettes})]}|>={[(#TOTAL_BOUCLE)]}|?{0,[(#EVAL{[(#ENV{debut_img,0})]+[(#GET{nbvignettes})]})]})]
+			[#bloc(#EVAL{[(#ENV{debut_img,0})]+[(#GET{nbvignettes})]}|>={[(#TOTAL_BOUCLE)]}|?{0,[(#EVAL{[(#ENV{debut_img,0})]+[(#GET{nbvignettes})]})]})]
+			"><span id="go">&gt;</span></a>
+			
+			<!--numérotation au centre du compteur -->
+			<a id="compteurcentreref" href="[(#SELF|parametre_url{'id_document',''}|parametre_url{'debut_img',''}|parametre_url{'bloc',''}|parametre_url{'grande',''}|parametre_url{'pas',''}|parametre_url{'recherche',#RECHERCHE})]#bloc0">
+			[
+[(#EVAL{[(#ENV{debut_img,0})]+1})-][(#EVAL{[(#ENV{debut_img,0})]+[(#GET{nbvignettes})]}|>={[(#TOTAL_BOUCLE)]}|?{[(#TOTAL_BOUCLE)],[(#EVAL{[(#ENV{debut_img,0})]+[(#GET{nbvignettes})]})]})]
+			] / [(#TOTAL_BOUCLE)]
+			</a> 
+			
+			<!--[(#REM) si mode vignettes on a caché les flèches]-->
+			[(#ENV{mode}|=={vignettes}|?{</div>,''})]
+			<!--[(#REM) si mode image on a caché les flèches et affiché seulement le nombre d'images]-->
+			[(#ENV{mode}|=={image}|?{</div>,''})]
+			<!--[(#REM) si nb vignette insuffisant on a caché les flèches et affiché seulement le nombre d'images]-->
+			[(#TOTAL_BOUCLE|<{[(#GET{nbvignettes})]}|?{</div>,''})]
+		</div>
+	 
+	<!--[(#REM) LES VIGNETTES]-->
+	<!-- on charge toutes les vignette de 6 en 6 dans des blocs distincts qui portent l'id de leur premier compteur {#ENV{debut_img},#ENV{pasbloc,60}}-->
+	<BOUCLE_walma_vignette(DOCUMENTS){id_article?}{recherche?}{mode=document}{extension==(png|jpg|gif)$}{par titre}>
+		
+		[(#COMPTEUR_BOUCLE|alterner{
+		<ul class="[(#ENV{debut_img,0}|=={[(#EVAL{[(#COMPTEUR_BOUCLE)]-1})]}|?{voir,hidden})] [(#ENV{mode}|=={vignettes}|?{voir,''})]" id="bloc[(#EVAL{[(#COMPTEUR_BOUCLE)]-1})]">
+		,'','','','',''})] 
+		<li id="vign#COMPTEUR_BOUCLE" class="vignette" [style="(#ENV{mode, gauche}|!={vignettes}|?{[(#COMPTEUR_BOUCLE|alterner{float:left;,float:right;})],''})"]>
+			[(#ENV{mode}|=={vignettes}|?{ 
+			<a href="[(#SELF|parametre_url{'pas',1}|parametre_url{'mode',image}|parametre_url{'textforum',x}|parametre_url{'recherche',#RECHERCHE}|parametre_url{'grande',[(#EVAL{[(#COMPTEUR_BOUCLE)]-1})]})#doc#ID_DOCUMENT]" title="[(#TITRE|supprimer_numero|couper{80}|texte_backend)]" id="vignlist#COMPTEUR_BOUCLE">
+			, 
+			<a href="[(#SELF|parametre_url{'pas',1}|parametre_url{'textforum',x}|parametre_url{'recherche',#RECHERCHE}|parametre_url{'grande',[(#EVAL{[(#COMPTEUR_BOUCLE)]-1})]})#doc#ID_DOCUMENT]" title="[(#TITRE|supprimer_numero|couper{80}|texte_backend)]" id="vignlist#COMPTEUR_BOUCLE">
+			})]
+			<img src='[(#FICHIER|image_reduire{100}|extraire_attribut{src})]' height='[(#FICHIER|image_reduire{100}|hauteur)]' width='[(#FICHIER|image_reduire{100}|largeur)]' alt='[(#TITRE|supprimer_numero|sinon{[(#FICHIER|)]})]' title="[(#DESCRIPTIF|sinon{[(#TITRE|supprimer_numero)]})]" />
+			</a>
+			<span class="commentaires">
+			[(#TITRE|supprimer_numero)]
+			</span>
+		</li>
+		[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{</ul>,
+		[(#COMPTEUR_BOUCLE|alterner{'','','','','',</ul>})]	
+		})]
+		
+	</BOUCLE_walma_vignette>
+				 
+	<hr class="clearw" />
+ </div><!-- fin petit div -->
+
+[(#REM)<!-- on charge toutes les images compt COMPTEUR_BOUCLE et id=doc ID_DOCUMENT  -->]
+[(#REM)<!-- si url id_document alors voir et le php ne charge qu'une image sinon debut_img alors on choisit laquelle voir sur le lot-->]
+
+<div id="lesphotos" class="granddiv sirecherchevide">
+<BOUCLE_walma_image(DOCUMENTS){id_article?}{#ENV{grande},#ENV{pas,200}}{recherche?}{mode=document}{extension==(png|jpg|gif)$}{par titre}>
+			<div class="hidden 
+			[(#ENV{id_document}|=={#ID_DOCUMENT}|?{voir ,''})]
+			[(#ENV{grande}|!={''}|?{[(#ENV{grande}|=={[(#EVAL{[(#COMPTEUR_BOUCLE)]-1})]}|?{voir ,''})]})]
+			[(#ENV{debut_img,0}|=={[(#EVAL{[(#COMPTEUR_BOUCLE)]-1})]}|?{voir ,''})]
+			" 
+			id="doc#ID_DOCUMENT">
+	<!--les autres docs sont cachés ont force la taille!--> 
+			<a href="[(#SELF|parametre_url{'pas',1}|parametre_url{'mode',image}|parametre_url{'textforum',x}|parametre_url{'recherche',#RECHERCHE}|parametre_url{'grande',[(#EVAL{[(#COMPTEUR_BOUCLE)]-1})]})#doc#ID_DOCUMENT]" title="[(#TITRE|supprimer_numero|couper{80}|texte_backend)]">
+ 		[(#REM) taille maximum de l'image]
+		<img src='[(#FICHIER|image_reduire{1000}|extraire_attribut{src})]'
+		[(#ENV{large}|!={y}|?{
+		[height='(#FICHIER|image_reduire{400}|hauteur)'] [width='(#FICHIER|image_reduire{400}|largeur)']  
+		,
+		[height='(#FICHIER|image_reduire{650}|hauteur)'] [width='(#FICHIER|image_reduire{650}|largeur)']  
+		})] 
+		alt='[(#TITRE|supprimer_numero|sinon{[(#FICHIER)]})]' />
+			</a>
+					<dl class="commentairesgrande" style="width:[(#FICHIER|image_reduire{400}|largeur)]px;">
+						<BOUCLE_article_dudoc(ARTICLES){id_document}{lang_select=non}>
+							<!--lien retour sur les articles/galeries d'origines]-->
+							 [(#ENV{id_article}|=={''}|?{
+							 <span style="font-size:0.8em;"><:info_portfolio:> :
+							[<a href="[(#URL_PAGE{#PAGE})[(#PAGE|=={''}|?{?article=#ID_ARTICLE,&amp;id_article=#ID_ARTICLE})]]" style="color:#666666; text-decoration:underline" >
+							 (#TITRE|supprimer_numero)</a><br />]</span>
+							,''})]
+						</BOUCLE_article_dudoc>
+					
+						<dt>[(#TITRE|supprimer_numero)] &nbsp;</dt>
+						<dd>[(#DESCRIPTIF)] &nbsp;</dd>
+					</dl>
+					
+	</div>
+</BOUCLE_walma_image>
+		<hr class="clearw" />
+	 </div>
+<div class="clearw">&nbsp;</div>
+
+</div>
+
+<!--[(#REM) AGRANDIR L'IMAGE]-->
+
+<div class="largeimage">
+<a href="[(#ENV{large}|=={y}|?{[(#SELF|parametre_url{'large',''}|texte_script)],[(#SELF|parametre_url{'large','y'}|parametre_url{'pas',1}|parametre_url{'textforum',x}|parametre_url{'mode',image}|texte_script)]})]#haut" style="cursor: ne-resize" title="<multi>[fr]Taille de l'image[en]Image width</multi>">
+	<span></span>
+	<span class="largeun"></span>
+	<span class="largedeux"></span>
+	<span></span>
+</a>
+</div>
+
+<div class="clearw">&nbsp;</div>
+ </div>
+
+<div class="baswalma">
+<form action="[(#SELF|parametre_url{id_article,''})]" method="post" class="recherchewalma" >
+<div><input name="recherche" type="text" value="[(#ENV{recherche}|safehtml)]" />
+<input type="submit" value="<:info_rechercher:>" /></div>
+</form>
+<div style="float:right; margin:0; padding:0; padding-right:5px;">
+CopID 
+<multi>[fr]libre [en] free</multi> 
+ non marchand (c) 07/2006 Alm &amp; Walk Galerie <a href="http://elastick.net">WALMA 3.3</a>
+<multi>[fr]pour [en] for </multi> 
+<a href="http://spip.net">SPIP 1.9</a>
+</div>
+ 
+</div>
+ 

@@ -1,0 +1,182 @@
+#CACHE{3600*100}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+<BOUCLE_totalsearch(DOCUMENTS){recherche}{mode=document}{extension==(png|jpg|gif)$}>
+</BOUCLE_totalsearch>
+
+body{font-family:Arial, Helvetica, sans-serif; text-align:center; margin:0 auto;}
+/*[(#REM) couleur du fond de la galerie ici #dadada = gris clair + typo et bordure de la galerie ]*/
+a {text-decoration:underline; color:#999999}
+#galeriewalma{background-color:#dadada; border:1px solid #666666; font-family:Arial, Helvetica, sans-serif;}
+#galeriewalma h1 {font-size: medium; color: #fff; margin-left: 1em;}
+.hidden{display:none;}
+.voir {display:block;}
+.floatleft{float:left; border:1px solid red;} /*js*/
+.orange{float:left; background-color:#FF9900; border:2px solid yellow; width:100px;}
+ 
+ 
+/*    bloc vignettes    */ 
+.petitdiv{text-align:center; position:relative; height:auto; margin-bottom:10px;
+[(#ENV{mode, gauche}|=={vignettes}|?{width:782px; float:right;,''})] 
+[(#ENV{mode, gauche}|=={gauche}|?{float:right; margin-right:2%; width:32%; ,''})] 
+[(#ENV{mode, gauche}|=={droite}|?{float:left; margin-left:2%; width:32%; ,''})]
+}
+
+.petitdiv ul, .droitevignettes ul, .gauchevignettes ul{
+list-style-type: none; padding:0; margin:0;
+[(#ENV{mode}|=={vignettes}|?{'clear:both;',''})]
+}
+
+/*pour javascript*/
+.mosaic{display:block; width:782px; float:right; clear:both;}
+.mosaic ul{display:block; list-style-type: none; padding:0; margin:0; clear:both;}
+.mosaic li{display:block; background-color:#ffffff; overflow:hidden; padding:0; width:126px; height:120px; margin:1px}
+
+.droitevignettes{display:block; width:32%; float:left; margin-left:2%;}
+.droitebigimage{display:block; float:right; width:60%; padding-right:25px; padding-top:25px;}
+
+.gauchevignettes{display:block; width:32%; float:right; margin-right:2%;}
+.gauchebigimage{display:block; float:left; width:60%; padding-left:25px; padding-top:25px;}
+
+.voircentrer{display:block; margin:0 auto;}
+ 
+
+.petitdiv a{text-decoration:none; color:#000000;}
+/*.vignettes == .encadreul li */
+
+.vignette {background-color:#ffffff; overflow:hidden; padding:0; width:126px; height:120px;
+[(#ENV{mode, gauche}|=={image}|?{display:none;,''})]
+[(#ENV{mode, gauche}|=={vignettes}|?{'float:left; margin:1px','margin-bottom:3px;'})]
+}
+
+/*les images on peut reduire margin*/
+.vignette img, .mosaic li img{ border:1px solid #999999; margin:10px auto; margin-bottom:2px;}
+.vignette img:hover, .mosaic li img:hover { border: 1px solid #000000;}
+#lesphotos img{border:1px solid #444444;}
+
+/*taille des commentaires*/
+.commentairesgrande{margin:0 auto; text-align:center; font-size:0.8em;}
+.commentaires {display:block; margin:0 auto; text-align:center; font-size:0.6em;}
+.commentaires dt, .commentairesgrande dt{font-weight:bold; } 
+.commentaires dd, .commentairesgrande dd{margin:0 auto; text-align:center; font-weight:lighter; } 
+ 
+
+
+/*.image{border:2px solid orange; padding:1em; float:right; width:60%;}*/
+
+.list{border:1px solid green; padding:1em; float:right; width:60%;}
+ 
+ 
+/*ajout css walma de base*/
+
+
+.menuwalma a { text-decoration:none; color:#444444;}
+.menuwalma a:hover{ text-decoration:none; color:#0099CC;}
+
+/*taille de la galerie, modifier aussi pleins d'autres...*/
+.titredelagalerie, #galeriewalma, .baswalma, .ajoutextforum{width:800px;}
+.blocgalerie{width:796px;}
+
+.titredelagalerie{margin:0 auto; text-align:right; margin-bottom:10px;}
+.titredelagalerie a{font-size:11px; color:#999999; text-decoration:none;}
+.titredelagalerie a:hover{color:#666666;}
+#galeriewalma, .baswalma, .ajoutextforum{position:relative; margin:0 auto; text-align:center; padding:0; padding-bottom:10px;}
+#galeriewalma a{text-decoration:none;}
+.blocgalerie{float:left; text-align:center; margin:0; padding:0;}
+.largeimage{float:right;
+background-color:#E6E6E6; margin-right:12px; font-size:1px; width:13px; height:13px; padding:0;}
+.largeimage span{float:left; display:block; font-size:1px; width:5px; height:5px;}
+.largeun{border-right:1px solid #000000; border-top:1px solid #000000;}
+.largedeux{border-left:1px solid #000000; border-bottom:1px solid #000000;}
+/*MENU avec les modes*/
+.menuwalma {height:18px; background-color:#ffffff; padding-left:5px; padding-right:5px; font-size:12px; text-align:left; border-bottom:1px solid #666666; margin-bottom:10px;}
+.baswalma { background-color:#ffffff; height:18px; border:1px solid #666666; border-top:0; line-height:16px; font-size:10px; margin-top:0;  margin-bottom:10px; padding-top:0; padding-bottom:0;}
+.baswalma a{color:#999999;}
+.ico {display:block; background-color:#ffffff; cursor:pointer; float:left; font-size:8px;  width:9px; margin:3px 5px 2px 2px; text-align:center;}
+.icomosaiclic,.icogauche,.icodroite,.icoimage
+{ border:1px solid #dadada; border-color:#dadada;}
+.icoselectmosaiclic,.icoselectgauche,.icoselectdroite,.icoselectimage
+{ border:1px solid #FF9900; border-color:#FF9900;}
+.icogauche, .icoselectgauche{border-right-width:4px;}
+.icodroite, .icoselectdroite{border-left-width:4px;}
+.icomosaiclic{background-color:#dadada;}
+.icoselectmosaiclic{background-color:#FF9900;}
+.icoimage, .icoselectimage{margin:3px 5px 2px 2px; color:#999999;}
+.icoselectimage{margin:3px 5px 2px 2px; color:#FF9900;}
+.icoselectdiapo{margin:3px 5px 2px 2px; color:#999999;  border:1px solid #FF9900; border-color:#444444;}
+.icoselectdiapoimage{margin:3px 5px 2px 2px; color:#999999;  border:1px solid #FF9900; border-color:#444444; color:#444444;}
+.modeselect{color:#FF9900; font-size:11px;} 
+.mode{color:#b9b9b9; font-size:11px;}
+
+ 
+/*          le compteur           */
+ 
+#compteurwalma{border:1px solid #999999; background-color:#ffffff; 
+line-height:18px; height:18px; font-size:12px; width:100px; text-align:center; margin:0 auto;}
+#compteurwalma a{ text-decoration:none; color:#000000; }
+[(#ENV{mode, gauche}|!={image}|?{'',.cachermodeimage span{display:none;}})]
+#back, #go{cursor:pointer; font-size:18px; font-weight:bold; display:block; [(#ENV{mode, gauche}|=={image}|?{'',color:#FFCC00;})]}
+#back{float:left;}
+#go{float:right;}
+ 
+/*          la grande image            */
+ 
+.granddiv{ 
+[(#ENV{mode, gauche}|=={vignettes}|?{display:none;,' '})] 
+[(#ENV{mode, gauche}|=={gauche}|?{float:left; width:60%; padding-left:25px; padding-top:25px;,' '})] 
+[(#ENV{mode, gauche}|=={droite}|?{float:right; width:60%; padding-right:25px; padding-top:25px;,' '})]
+}
+/*recherche*/
+.spip_surligne{text-decoration:underline;}
+.recherchewalma{margin:0; padding:0; float:left; width:224px;}
+.recherchewalma input{margin:0; padding:0; font-size:11px;}
+[/*(#REM)*/]
+.cachersipasrecherche{[(#ENV{recherche}|!={''}|?{[(#_totalsearch:TOTAL_BOUCLE|=={''}|?{font-weight: bold; color:#003366; border-bottom:2px solid #003366;, display:none; })],'display:none;'})]}
+.sirecherchevide{[(#ENV{recherche}|!={''}|?{[(#_totalsearch:TOTAL_BOUCLE|=={''}|?{display:none;,''})],''})]}
+.recherchevidehauteur{width:1px; float:left;[(#ENV{diapo}|=={on}|?{height:500px;, height:420px;})]}
+[(#ENV{recherche}|!={''}|?{[(#_totalsearch:TOTAL_BOUCLE|=={''}|?{'.recherchevidehauteur{clear:both; width:99%; margin:0 auto; text-align:center; }',''})],''})]
+ 
+
+.clearw{height:1px; font-size:1px; clear:both;  width:100%; margin:0; padding:0; visibility:hidden; border:2px solid red;}
+
+/*  Mise en forme des textes  */
+.cadretxt{border:1px solid #dadada; height:auto; margin-bottom:10px; background-color:#f9f9f9;}
+.cartouche{padding: 2em 8em 0 6em; text-align:left; font-size:0.8em;}
+h1, h2, h3{margin:0.4em 0 0.4em 0;}
+.logoarticle {margin:2em 5em 2em 2em; float:right;}
+.chapo { font-weight:bold; font-size:1.2em; margin-bottom: 2em;}
+.texte{padding: 3em 8em 5em 8em; text-align:left; font-size:0.8em; color:#333333}
+.ps {padding-top: 0.6em; margin-top: 0.6em;border-top: 1px dashed #404040; }
+.notes {margin-top: 0.6em;margin-bottom: 0.6em;border-top: 1px solid #a0a0a0;padding: 1.5em;}
+.chapo, .texte, .texte p.spip, .ps, .notes {font-family:Arial, Helvetica, sans-serif;}
+
+	
+/*forumgalerie*/
+.ajoutextforum{margin-bottom:1em; margin-top:2em;}
+.formforum {width:400px; margin:0 auto; font-size:0.8em;}
+.forumgalerie {width:80%; margin:0 auto;}
+.boutonforum{position:absolute; top:-5px; right:-5px; width:140px; display:block; padding: 0.2em; text-decoration:none; color:#777; background-color:#f9f9f9; }
+.reponse a{ text-decoration:none; color:#0099CC; }
+.forumgalerie span{color:#666666; font-size:0.9em;}
+.thread{position:relative; font-family:Verdana, Arial, Helvetica, sans-serif; background-color:#e9e9e9; padding:1em; padding-top:0;  text-align:left; margin:1em;}
+.thread, .boutonforum{ font-size:0.7em;  border: 1px solid #C6DDDC; border-bottom: 1px solid #ABD6CC; -moz-border-radius: 0.8em;}
+.guillemet{ font-size:10em; font-family:Garamond; position:absolute; top:-30px; left:-5px; color:#3399CC;}
+.fil{ background-color:#fff; border:1px dashed #dadada; margin:0.8em 2em 0.8em 2em;}
+.topfil{border-bottom:1px dashed #dadada; background-color:#f9f9f9; padding:0.5em;  }
+.filtxt{background-color:#fff;  margin-bottom:0.8em; padding:0.5em 1em 0.5em 1em; }
+.reponse{text-align:right;}
+.topthread{padding:0.8em; padding-left:0; margin-left:1em}
+.topthreadtxt, .forumgalerie blockquote{ border:1px solid #ccc; background-color:#fff;  margin-bottom:0.8em; padding:0.5em 1em 0.5em 1em; }
+.topthreadtxt{margin:0em 2em 0.8em 2em;}
+
+[/*(#REM) si insertion  menu à gauche libérez simplement ces lignes des crochets et des étoiles 
+#galeriewalma, .baswalma, .ajoutextforum{float:right; right:10px; }
+.titredelagalerie{float:right; margin-right:20px; }
+.insertionmenu{position:absolute; font-size:12px;  width:170px; left:10px; top:100px; text-align:left; z-index:2; background-color:#E8E8E8;}
+*/]
+
+[/*(#REM) si insertion  menu à droite libérez simplement ces lignes des crochets et des étoiles 
+#galeriewalma, .titredelagalerie, .baswalma, .ajoutextforum{float:left; left:10px; }
+.insertionmenu{position:absolute; font-size:12px;  width:170px; left:820px; top:100px; text-align:left; z-index:2; background-color:#E8E8E8; }
+*/]

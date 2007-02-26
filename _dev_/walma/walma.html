@@ -1,0 +1,54 @@
+#CACHE{86400}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<!--version walma3.4  pour spip 1.9.2 CopID libre non marchand (c) février 2007 Alm & Walk Galerie WALMA -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+[<meta name="description" content="(#INTRODUCTION|couper{150}|attribut_html)" />]
+<title>[(#NOM_SITE_SPIP|textebrut)] [<:resultats_recherche|textebrut:> (#RECHERCHE|textebrut)] <BOUCLE_article_title(ARTICLES){id_article}{lang_select=non}>[(#TITRE|supprimer_numero|textebrut)] </BOUCLE_article_title> walma.html</title>
+<INCLURE{fond=inc-walma_head}{mode,gauche}>
+</head>
+
+<body>
+
+<!--[(#REM) Galerie Walma3 plaçé en haut à droite, ce bloc peut être remplacé]-->
+	<div style="font-size:4em; text-align:left;">
+	<BOUCLE_article_rubrique(ARTICLES){id_article}{lang_select=non}>
+	<a href="#URL_RUBRIQUE" style="color:#000000; text-decoration:none;">
+	</BOUCLE_article_rubrique>
+	<!-- si pas d'appel à un article-->
+			</B_article_rubrique>
+			<a href="[(#URL_SITE_SPIP)]" style="color:#000000; text-decoration:none;">
+			<//B_article_rubrique>
+	  Galerie Walma3</a>
+	</div>
+
+	
+<!--[(#REM) si on souhaite cela permet retour sur la page sans parametres d'url si on a renommé ce fichier en article.html ou en ce qu'on veut]-->	
+<div class="titredelagalerie">
+<a href="[(#URL_PAGE{#PAGE})][(#PAGE|=={''}|?{[?article(#ENV{id_article,''})],[&amp;id_article=(#ENV{id_article,''})]})][&amp;recherche=(#RECHERCHE)]">
+<BOUCLE_article_retour(ARTICLES){id_article}{lang_select=non}>[(#TITRE|supprimer_numero|textebrut)]</BOUCLE_article_retour>
+</B_article_retour><br />
+[<:icone_retour:> <:resultats_recherche:> (#RECHERCHE|textebrut)]
+<//B_article_retour>
+</a>
+</div>
+
+<!--[(#REM)  possibilité d'insérer vos menus en haut à gauche ou à droite
+<div class="insertionmenu"> 
+< INCLURE(fond=menu-gauche-ou-droite){id_article}>
+</div>]-->
+
+[<!--(#REM) ici on inclut le modele walma, on peut donc s'en servir de façon autonome ailleurs !! conserver dans le head INCLURE{fond=inc-walma_head}{mode,gauche}>-->]
+[(#MODELE{walma_modele}{mode}{diapo}{pas}{textforum}{grande}{debut_img}{page})]
+
+[<!--(#REM) si on souhaite ajouter une inclusion du texte et forum de l'article lookés pour walma-->]
+<INCLURE{fond=inc-walma_txtforum}{id_article}{textforum}{lang}>
+
+[<!--(#REM) si on souhaite le validateur xhtml-->]
+ <p><a href="http://validator.w3.org/check?uri=referer">
+ <img src="http://www.w3.org/Icons/valid-xhtml10"
+        alt="Valid HTML 4.01 Transitional" height="31" width="88" style="float:right; margin-right:60px; border:0;" /></a></p>
+		
+</body>
+</html>
