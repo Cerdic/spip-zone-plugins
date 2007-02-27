@@ -30,7 +30,7 @@ function exec_documents_distants(){
 	debut_cadre_formulaire();
 	echo gros_titre(_T('documentsdistants:importer'));
 	
-	echo recuperer_fond('documents_distants',Array('id'=>$id,'type_lien'=>$type_lien,'retour'=>$retour));
+	echo recuperer_fond('documents_distants',Array('documents'=>$documents,'id'=>$id,'type_lien'=>$type_lien,'retour'=>$retour));
 	fin_cadre_formulaire();
 	
 	echo fin_gauche();
@@ -40,16 +40,17 @@ function exec_documents_distants(){
 
 function importer_document($documents_distants,$type_lien,$id,$retour)
 	{
+	include_spip('inc/autoriser');
 	
 	$id2=$id;
 	settype($id,'integer');
 	settype($id,'string');// amha il y a moyen de faire plus simple
 	
 	$tableau =explode(";",$documents_distants);
-	include_spip('public/assembler');
-	$autoriser=recuperer_fond('documents_distants_test',array('id'=>$id,'type_lien'=>$type_lien));
 	
-	echo $autoriser;
+	$autoriser=autoriser('joindredocument',str_replace('s', '',$type_lien),$id);
+	
+	
 	if (!($documents_distants and $id and $id2==$id)){return 'completer';}
 	
 	if (!$autoriser) {return 'pasdroits';}
