@@ -9,6 +9,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'taille_image' => "Taille de l'image",
 'diaporama' => "Diaporama",
 'change_langue'=> "English language",
+'clic_fermer'=> "clic pour fermer",
+'gauche'=> "Gauche",
+'droite'=> "Droite", 
+'no_result'=> "Pas de r&eacute;sultat!",
 
 
 );

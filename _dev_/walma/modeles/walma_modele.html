@@ -7,15 +7,13 @@ recherche
 rubrique
 
 Pour utiliser walma 3.4 en inclusion comme on veut on met dans le squelette de son choix
-dans le head (css et javascript pour walma) , les options des SET et l' INCLURE du head
- 
+dans le head  les options des SET et l' INCLURE du head
 #SET{menugauche,oui}
 #SET{menudroite,non}
 #SET{texteforum,non}
-#SET{mode,gauche}
-
-
+#SET{mode,gauche} 
 [(#INCLURE{fond=inc-walma_head}{mode=#GET{mode}}{menugauche=#GET{menugauche}}{menudroite=#GET{menudroite}})]
+
 et dans le body
 [(#MODELE{walma_modele}{mode=#GET{mode}}{diapo}{pas}{textforum}{grande}{debut_img}{page})]
  
@@ -48,9 +46,9 @@ mais ça viendra surement
 <a href="[(#SELF|parametre_url{'mode','vignettes'}|parametre_url{'diapo',''}|parametre_url{'pas',1}|parametre_url{'textforum',x}|parametre_url{'recherche',#RECHERCHE})]#mosaic"
  id="ico1" class="ico ico[(#ENV{mode}|=={vignettes}|?{'select',''})]mosaiclic" title="mosaïclic" >&nbsp;</a>
 <a href="[(#SELF|parametre_url{'mode','gauche'}|parametre_url{'grande',''}|parametre_url{'large',''}|parametre_url{'diapo',''}|parametre_url{'pas',''}|parametre_url{'textforum',x}|parametre_url{'recherche',#RECHERCHE})]#left"
- id="ico2" class="ico ico[(#ENV{mode, gauche}|=={gauche}|?{'select',''})]gauche" title="<multi>[fr]Gauche[en]Left</multi>">&nbsp;</a>
+ id="ico2" class="ico ico[(#ENV{mode, gauche}|=={gauche}|?{'select',''})]gauche" title="<:walma:gauche:>">&nbsp;</a>
 <a href="[(#SELF|parametre_url{'mode','droite'}|parametre_url{'grande',''}|parametre_url{'large',''}|parametre_url{'diapo',''}|parametre_url{'pas',''}|parametre_url{'textforum',x}|parametre_url{'recherche',#RECHERCHE})]#right" 
- id="ico3" class="ico ico[(#ENV{mode}|=={droite}|?{'select',''})]droite" title="<multi>[fr]Droite[en]Right</multi>">&nbsp;</a>
+ id="ico3" class="ico ico[(#ENV{mode}|=={droite}|?{'select',''})]droite" title="<:walma:droite:>">&nbsp;</a>
 <a href="[(#SELF|parametre_url{'mode','image'}|parametre_url{'diapo',''}|parametre_url{'pas',1}|parametre_url{'textforum',x}|parametre_url{'recherche',#RECHERCHE})]#image"
  id="ico4" class="ico ico[(#ENV{mode}|=={image}|?{'select',''})][(#ENV{diapo}|=={on}|?{diapo,image})]" title="Image [(#ENV{diapo}|=={on}|?{Stop,''})]" >&nbsp;</a>
 <a href="[(#SELF|parametre_url{'mode','image'}|parametre_url{'id_document',''}|parametre_url{'pas',1}|parametre_url{'textforum',x}|parametre_url{'recherche',#RECHERCHE})][&amp;diapo=(#ENV{diapo,on})]#ziapo"
@@ -68,7 +66,7 @@ mais ça viendra surement
 </div><!--[(#REM) MENU MODES fin , on ferme la boucle article ici, rubrique prend le relais]-->
 
 <div class="recherchevidehauteur">
-<a href="#SELF" onclick='history.back()' class="cachersipasrecherche">[(#RECHERCHE)] ? <multi>[fr]Pas de r&eacute;sultat![en]No result!</multi> </a>
+<a href="#SELF" onclick='history.back()' class="cachersipasrecherche">[(#RECHERCHE)] ? <:walma:no_result:> </a>
 </div>
  
 <div class="blocgalerie">

@@ -397,7 +397,7 @@ if(firstletter){
 	fenetre.resizeTo(largeur,hauteur);  
 	fenetre.document.write("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html><head><title>"+titre+"</title></head><body style='padding:0; text-align:center; padding-top:20px;'>");
 	fenetre.document.write("<a href='javascript:self.close()'><img src='"+photo+"' style='margin:0 auto; border:0; width:100%;' alt='"+titre+"'/></a>");
-	fenetre.document.write("<div><strong>"+titre+"</strong><br />"+descriptif+"</div><div style='position:absolute; z-index:1; left: 2px; top: 2px; font-size:12px;  background-color:#E9E9E9'><a href='javascript:self.close()' style='color:#666666; text-decoration:none;'><multi>clic to close</multi></a></div></body></html>");
+	fenetre.document.write("<div><strong>"+titre+"</strong><br />"+descriptif+"</div><div style='position:absolute; z-index:1; left: 2px; top: 2px; font-size:12px;  background-color:#E9E9E9'><a href='javascript:self.close()' style='color:#666666; text-decoration:none;'><:walma:clic_fermer:></a></div></body></html>");
 	fenetre.document.close();
     fenetre.focus();	
 //}

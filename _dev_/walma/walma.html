@@ -7,14 +7,14 @@
 [<meta name="description" content="(#INTRODUCTION|couper{150}|attribut_html)" />]
 <title>[(#NOM_SITE_SPIP|textebrut)] [<:resultats_recherche|textebrut:> (#RECHERCHE|textebrut)] <BOUCLE_article_title(ARTICLES){id_article}{lang_select=non}>[(#TITRE|supprimer_numero|textebrut)] </BOUCLE_article_title> walma.html</title>
 
-[(#REM) modifier vos options pour walma]
+[(#REM) modification options walma]
 [<!--(#REM) si vous voulez un menu à insérer à gauche ou à droite, mettre oui dans le SET correspondant-->]
 #SET{menugauche,non}
 #SET{menudroite,non}
 [<!--(#REM) si vous souhaitez avoir le texte et le forum de l'article lookés pour walma, mettre oui dans le SET-->]
 #SET{texteforum,non}
 [<!--(#REM) L'affichage est par defaut avec l'image principale à gauche, il est possible de changer gauche pour droite ou vignettes-->]
-#SET{mode,gauche}
+#SET{mode,#ENV{mode,gauche}}
 [(#REM) fin des options pour walma]
 
 [(#REM) inclusion dynamique du css et du js, ne pas modifier]
@@ -55,7 +55,7 @@
 })</div>]
 
 [<!--(#REM) ici on inclut le modele walma, on peut donc s'en servir de façon autonome ailleurs !! conserver l'inclusion du head special avec les SET >-->]
-[(#MODELE{walma_modele}{mode=#GET{mode}}{id_article}{diapo}{pas}{textforum}{grande}{debut_img}{page})]
+[(#MODELE{walma_modele}{mode=#GET{mode}}{id_article}{diapo}{pas}{textforum}{grande}{debut_img}{page}{large})]
 
 [<!--(#REM) permet aux auteurs autorisés de télécharger une image ou un zip-->]
 [<div id="telecharge" >(#ID_ARTICLE|afficher_documents_walma)</div>]
