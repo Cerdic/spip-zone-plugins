@@ -1,0 +1,16 @@
+<plugin>
+	<version>1.0</version>
+	<nom>jolirecherche</nom>
+	<prefix>recherche</prefix>
+	<auteur>Copyleft - all rights reversed.</auteur>
+	<etat>stable</etat>
+	<description>remplace le formulaire recherche par de jolie boite de saisie.</description>
+	<icon>
+	jolirecherche.png
+	</icon>
+	<pipeline>
+		<nom>insert_head</nom> 
+		<inclure>recherche_public.php</inclure>
+		<action>insert_head</action>
+	</pipeline>
+</plugin>
