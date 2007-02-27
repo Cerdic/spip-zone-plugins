@@ -13,8 +13,8 @@ _ &copy; 2007 - Licence GPL
 	test
 	</etat>
 	<description>
-	Plugin chargé d'importer massivement des documents distants. A partir de la [page suivante->?exec=documents_distants] 
-	Nécéssite le plugin balise session ...
+	Plugin chargé d'importer massivement des documents distants. A partir de la [page suivante->./?exec=documents_distants] 
+	Nécéssite SPIp 1.9.2
 	</description>
 	
 
