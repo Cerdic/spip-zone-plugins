@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2006                                                *
+ *  Copyright (c) 2001-2007                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -25,6 +25,7 @@ if (!function_exists('afficher_claret')){
 	}
 }
 
+// http://doc.spip.org/@bouton_barre_racc
 function bouton_barre_racc($action, $img, $help, $champhelp) {
 	include_spip('inc/charsets');
 
@@ -48,7 +49,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 		."' height='16' width='16' alt=\"".$a."\" /></a>";
 }
 
-// sert à construire les sousbarre
+// sert a construire les sousbarre
 function produceWharf($champ,$id, $title = '', $sb = '') {
   $visible = ($changer_virtuel || $virtuel);
   $res .= $title;
@@ -178,7 +179,7 @@ _T('bartypenr:barre_gestion_anc_bulle')
   return produceWharf($champ,'tableau_ancre','',$tableau_formulaire); 	
 }
 
-// pour les caractères
+// pour les caracteres
 function afficher_caracteres($champ, $spip_lang, $champhelp) {
 
 	// guillemets
@@ -228,7 +229,7 @@ $tableau_formulaire = '
   return produceWharf($champ,'tableau_caracteres','',$tableau_formulaire); 	
 }
 
-// pour les caractères
+// pour les caracteres
 function afficher_boutonsavances($champ, $champhelp) {
 
 $reta = '';
@@ -283,7 +284,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$champhelp = "document.getElementById('barre_$num_barre')";
 
 
- // Prégénération des toolzbox.. (wharfing)
+ // Pregeneration des toolzbox.. (wharfing)
     $toolbox .= afficher_boutonsavances($champ, $champhelp);
 	$toolbox .= afficher_caracteres($champ, $spip_lang, $champhelp);
     //$toolbox .= afficher_gestion_tableau($champ);
@@ -436,6 +437,7 @@ function MajPreview(id) {
 	 //--></script>';
 	return $ret;
 }
+
 // http://doc.spip.org/@afficher_textarea_barre
 function afficher_textarea_barre($texte, $forum=false)
 {
@@ -451,4 +453,5 @@ function afficher_textarea_barre($texte, $forum=false)
 	. entites_html($texte)
 	. "</textarea>\n";
 }
+
 ?>
