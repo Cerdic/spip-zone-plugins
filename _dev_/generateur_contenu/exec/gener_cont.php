@@ -1,21 +1,18 @@
 <?
 /* générateur de clones de rubrique avec articles
   
-	gener_cont.php (c) cy_altern 2006 -- licence GPL
+	cy_altern &copy; 2007 - Distribu&#233; sous licence GNU/LGPL
 	
 */
 
 
 function exec_gener_cont() {
-  // PARAMETRES A RENSEIGNER 
-	 $num_secteur = 57;    // le numéro du secteur où la création de clones est autorisée
-	 $num_secteur_2copy = 56;   // le numéro du secteur qui contient les sous-rubriques à cloner
-	 $max_copies = 5;   // le nombre max de copies (sous-répertoires) autorisé
-
-//	 $num_rub_spots = 20;  // le numéro de la sous-rubrique spots dans le secteur spots
- // FIN PARAMETRES A RENSEIGNER		
-		
-		
+  // PARAMETRES de configuration gérés par cfg 
+	 $num_source = lire_config('gener_cont/secteur_source');   // le numéro de la rubrique qui contient les sous-rubriques modèles
+	 $num_cible = lire_config('gener_cont/secteur_cible');    // le numéro du secteur où la création de clones est autorisée
+	 $max_copies = lire_config('gener_cont/nb_max_clones');   // le nombre max de copies (sous-répertoires) autorisé
+	 $statut_articles_defaut = lire_config('gener_cont/statut_articles_defaut');  // le statut par défaut des articles clonés
+	 		
 	 include_spip("inc/presentation");
 
   // vérifier les droits
@@ -68,14 +65,22 @@ function exec_gener_cont() {
     	 $Tchamps = array();
 			 for ($j = 1; $j < 4; $j++) {
 			 		 if ($_POST['champ_'.$j.'_titre_rub'] AND $_POST['champ_'.$j.'_titre_rub'] != '') {
-					 		$champ_ec = $_POST['champ_'.$j.'_titre_rub'];
-					 		if ($champ_ec == "#INCREMENT") {
-					 			 $debut_increment_titre_rub = ( (isset($_POST['debut_increment_titre_rub']) AND $_POST['debut_increment_titre_rub'] != '') ? intval($_POST['debut_increment_titre_rub']) : 1);
-								 $Tchamps[$j] = '#INCREMENT';
-						  }
-					 		else {
-					 				 $Tchamps[$j] = $row4[$champ_ec];
-					    }
+					 		$champ_ec = trim($_POST['champ_'.$j.'_titre_rub']);
+					 // traiter les valeurs débutant par # (#INCREMENT ou appel des champs #TITRE, #TEXTE et #DESCRIPTIF pour récup du contenu des champs de la rubrique clonée)
+							if (strpos($champ_ec, '#') === 0) {
+								 $champ_ec = strtolower(substr($champ_ec, 1));
+  							 if ($champ_ec == "increment") {
+  					 			  $debut_increment_titre_rub = ( (isset($_POST['debut_increment_titre_rub']) AND $_POST['debut_increment_titre_rub'] != '') ? intval($_POST['debut_increment_titre_rub']) : 1);
+  								  $Tchamps[$j] = '#INCREMENT';
+  						   }
+  					 		 else {
+  					 				  $Tchamps[$j] = $row4[$champ_ec];
+  					     }
+							}
+					// si pas de # en début de valeur, récupérer le contenu du champ POST tel quel
+							else {
+									 $Tchamps[$j] = $champ_ec;
+							}
 					 }
 			 }
 			 
@@ -96,7 +101,7 @@ function exec_gener_cont() {
 								}
       			 }
 						 spip_query("INSERT INTO $Trubriques (id_rubrique, id_parent, titre, id_secteur, statut, date, texte, descriptif) 
-						 						 VALUES ('', $num_parent, '$titre_rub', $num_secteur, 'publie', '$date_ec', '$texte_rub', '$descriptif_rub')" );
+						 						 VALUES ('', $num_parent, '$titre_rub', $num_cible, 'publie', '$date_ec', '$texte_rub', '$descriptif_rub')" );
   	 				 if (mysql_error() != '') {
   					 		$Terr_rub[] = 'insertion rubrique n°'.$i.' : erreur => '.mysql_error();
   							break;
@@ -116,27 +121,33 @@ function exec_gener_cont() {
      // ici, c'est le bide : une mauvaise bidouille pour récupérer les articles de la rubrique à copier 
      // TO DO : faire une copie de l'arborescence de la rubrique (un pt'it coup de récursif en vue... y'a un truc à retrouver dans ak !)
      // avec la création des champs automatique du style $$nom_champ_spip = ...
-    			 			  $result5 = spip_query("SELECT * FROM $Tarticles WHERE id_rubrique = $num_parent_2copy");
+    			 			  if (isset($_POST['statut_articles']) AND $_POST['statut_articles'] != '') {
+										 $statut_articles = $_POST['statut_articles'];
+									}
+									else {
+											 $statut_articles = $statut_articles_defaut;
+									}
+									$result5 = spip_query("SELECT * FROM $Tarticles WHERE id_rubrique = $num_parent_2copy");
     						  while ($row5 = spip_fetch_array($result5)) {
-    									 $surtitre_fiche = $row5['surtitre'];
-    			 						 $titre_fiche = $row5['titre'];
-    			 						 $soustitre_fiche = $row5['soustitre'];
-    			 						 $descriptif_fiche = $row5['descriptif'];
-    			 						 $nom_site_fiche = $row5['nom_site'];
-    			 						 $chapo_fiche = $row5['chapo'];
-    			 						 $texte_fiche = $row5['texte'];
-    			 						 $ps_fiche = $row5['ps'];
+    									 $surtitre = $row5['surtitre'];
+    			 						 $titre = $row5['titre'];
+    			 						 $soustitre = $row5['soustitre'];
+    			 						 $descriptif = $row5['descriptif'];
+    			 						 $nom_site = $row5['nom_site'];
+    			 						 $chapo = $row5['chapo'];
+    			 						 $texte = $row5['texte'];
+    			 						 $ps = $row5['ps'];
             	 		 // création clone article
           						 spip_query("INSERT INTO $Tarticles (id_article, id_rubrique, id_secteur, date, statut, surtitre, titre, soustitre, descriptif, nom_site, chapo, texte, ps) 
-            					 						  VALUES ('', '$id_rub_ec', '$num_secteur', '$date_ec', 'publie', '$surtitre_fiche', '$titre_fiche', '$soustitre_fiche', '$descriptif_fiche', '$nom_site_fiche', '$chapo_fiche', '$texte_fiche', '$ps_fiche')");
+            					 						  VALUES ('', '$id_rub_ec', '$num_cible', '$date_ec', '$statut_articles', '$surtitre', '$titre', '$soustitre', '$descriptif', '$nom_site', '$chapo', '$texte', '$ps')");
             					 if (mysql_error() != '') {
-          								 $Terr_art[] = 'insertion article FICHE rubrique n°'.$id_rub_ec.' : erreur => '.mysql_error();
+          								 $Terr_art[] = 'insertion article rubrique n°'.$id_rub_ec.' : erreur => '.mysql_error();
             					 }
           						 else {
               						 $id_art_ec = mysql_insert_id();
               						 spip_query("INSERT INTO $Tauteurs_articles (id_article, id_auteur) VALUES ($id_art_ec, $id_utilisateur)");
               			 				if (mysql_error() != '') {
-              							 	 $Terr_art[] = 'insertion auteur_article FICHE rubrique n° '.$id_rub_ec.' : erreur => '.mysql_error();
+              							 	 $Terr_art[] = 'insertion auteur_article rubrique n° '.$id_rub_ec.' : erreur => '.mysql_error();
               							}
           						 }
     						  }   // fin while article
@@ -145,7 +156,7 @@ function exec_gener_cont() {
 					 
 				}   // fin for nb_copies
 				
-	  }
+	  }  // fin if $_POST complet
 
 
 // DEBUT FORMULAIRE DE LANCEMENT
@@ -190,12 +201,13 @@ function exec_gener_cont() {
     
     debut_boite_info();  
     echo "<img src=\""._DIR_PLUGIN_GENER_CONT."/img_pack/gener_cont-24.png\" style=\"float: left; margin-right: 10px;\">";
-		echo "Cette moulinette clone une sous-rubrique appartenant au secteur ".$num_secteur_2copy." dans la rubrique de votre choix.";
+		echo "Cette moulinette clone une sous-rubrique de la rubrique des mod&egrave;les (".$num_source.") dans une sous-rubrique du secteur ".$num_cible.".";
 		echo "<br /><br /><strong>Version : </strong>".$version_script;		
+		echo '<br /><br /><a href=".?exec=cfg&cfg=gener_cont">Configuration de ce plugin</a>';
     fin_boite_info();
     
     debut_droite();
-    gros_titre('Moulinette &agrave; cr&eacute;er les sous-rubriques');
+    gros_titre('Moulinette &agrave; cloner les rubriques');
 
 		
     echo "\r\n<br />";  
@@ -217,7 +229,7 @@ function exec_gener_cont() {
 <?		 }
 			 else { ?>			 			
 			 <div id="ok" class="ok">
-			 			Tout c'est bien pass&eacute;, <? print $nb_cree; ?> rubriques cr&eacute;&eacute;s.
+			 			Tout c'est bien pass&eacute;, <? print $nb_cree; ?> rubrique(s) cr&eacute;&eacute;(s).
 			 </div>
 <?   	 }  
 			 fin_cadre_trait_couleur();
@@ -225,10 +237,16 @@ function exec_gener_cont() {
 		else {  ?>
 <form method="post" action="<? print basename($_SERVER['PHP_SELF']); ?>?exec=gener_cont" id="form_saisie" name="form_saisie">
 			
-<?			 debut_cadre_trait_couleur("rubrique-24.gif", false, "", "Choix de la rubrique destination et du nombre de sous-rubriques");  ?>			
-			 Rubrique où cr&eacute;er les clones : 
+<?			 debut_cadre_trait_couleur("rubrique-24.gif", false, "", "Choix de la rubrique de destination et du nombre de copies");  ?>			
+			 Rubrique o&ugrave; cr&eacute;er les clones : 
 			 <select id="num_parent" name="num_parent">
-<?		 	 $sql1 = "SELECT id_rubrique, titre FROM $Trubriques WHERE id_secteur = $num_secteur";
+<?		 	 if ($num_cible == 0) {
+				 		$sql_where = 'id_parent = 0';
+				 }
+				 else {
+				 			$sql_where = 'id_secteur = '.$num_cible;
+				 }
+				 $sql1 = "SELECT id_rubrique, titre FROM $Trubriques WHERE $sql_where";
 				 $result1 = spip_query($sql1);
 				 while ($row1 = spip_fetch_array($result1)) {   
 				 			 echo "<option value=\"".$row1['id_rubrique']."\">".$row1['titre']."</option>";
@@ -243,15 +261,15 @@ function exec_gener_cont() {
 			</select>
 			<br />
 <? 		   fin_cadre_trait_couleur();
-				 debut_cadre_trait_couleur("rubrique-24.gif", false, "", "Param&eacute;trage rubrique à copier"); ?>			
-			 Rubrique à copier : 
+				 debut_cadre_trait_couleur("rubrique-24.gif", false, "", "Param&eacute;trage de la rubrique &agrave; copier"); ?>			
+			 Rubrique &agrave; copier : 
 			 <select id="num_parent_2copy" name="num_parent_2copy">
-<?		 	 $result2 = spip_query("SELECT id_rubrique, titre FROM $Trubriques WHERE id_secteur = $num_secteur_2copy AND id_rubrique != $num_secteur_2copy");
+<?		 	 $result2 = spip_query("SELECT id_rubrique, titre FROM $Trubriques WHERE id_parent = $num_source");   // AND id_rubrique != $num_source
 				 while ($row2 = spip_fetch_array($result2)) {   
 				 			 echo "<option value=\"".$row2['id_rubrique']."\">".$row2['titre']."</option>";
   			 }  ?>			 				 
 			 </select>
-<? 		   if ($connect_toutes_rubriques) {   // choix auteur uniquement pour les admins complets ?>			 
+<?  		 if ($connect_toutes_rubriques) {   // choix auteur uniquement pour les admins complets ?>			 
 			 <br /><br />
 			 Auteur des articles : 
 			 <select id="auteur_copies" name="auteur_copies">
@@ -260,30 +278,39 @@ function exec_gener_cont() {
 									echo "<option value=\"".$row3['id_auteur']."\">".$row3['login']."</option>";
 						}   ?>
 			 </select>
-			 
 <? 		   } ?>			 
+				 <br /><br />
+				 Statut des articles :
+      	 <select name="statut_articles">
+      	 				 <option value="publie" <? echo ($statut_articles_defaut == "publie" ? 'selected="selected"' : ''); ?>>publi&#233; en ligne</option>
+      					 <option value="prop" <? echo ($statut_articles_defaut == "prop" ? 'selected="selected"' : ''); ?>>propos&#233; &agrave; l'&#233;valuation</option>
+      					 <option value="prepa" <? echo ($statut_articles_defaut == "prepa" ? 'selected="selected"' : ''); ?>>en cours de r&#233;daction</option>
+      					 <option value="poubelle" <? echo ($statut_articles_defaut == "poubelle" ? 'selected="selected"' : ''); ?>>&agrave; la poubelle</option>
+      					 <option value="refuse" <? echo ($statut_articles_defaut == "refuse" ? 'selected="selected"' : ''); ?>>refus&#233;</option>
+      	 </select>
+				 
 <? 		   fin_cadre_trait_couleur();
 				 debut_cadre_trait_couleur("rubrique-24.gif", false, "", "Création des titres de sous-rubriques :");			?>
 				 champ 1 : <input type="text" id="champ_1_titre_rub" name="champ_1_titre_rub"> 
 				 <br />champ 2 : <input type="text" id="champ_2_titre_rub" name="champ_2_titre_rub">
 				 <br />champ 3 : <input type="text" id="champ_3_titre_rub" name="champ_3_titre_rub">
 				 <br />
-				 Numérotation : increment commence à : <input type="text" style="width: 30px;" id="debut_increment_titre_rub" name="debut_increment_titre_rub">
+				 Num&eacute;rotation : incr&eacute;ment commence &agrave; : <input type="text" style="width: 30px;" id="debut_increment_titre_rub" name="debut_increment_titre_rub">
 				 <br /><br />
 				 <span style="font-size: 75%;">
-				 Le titre de la rubrique sera constitué par les champs 1 à 3. Chacun de ces champs peut être rempli automatiquement par 
-				 le contenu d'un champ de la rubrique à cloner (<strong>titre</strong>, <strong>descriptif</strong> ou <strong>texte</strong>)
-				 Pour qu'un champ soit rempli par un numéro incrémenté à chaque clone, mettre <strong>#INCREMENT</strong> dans le champ
-				 <br /><br />par ex, la formule suivantes : 
+				 Le titre de la rubrique sera constitu&eacute; par les champs 1 &agrave; 3. Chacun de ces champs peut &ecirc;tre rempli automatiquement par 
+				 le contenu d'un champ de la rubrique &agrave; cloner (<strong>#TITRE</strong>, <strong>#DESCRIPTIF</strong> ou <strong>#TEXTE</strong>)
+				 Pour qu'un champ soit rempli par un num&eacute;ro incr&eacute;ment&eacute; &agrave; chaque clone, mettre <strong>#INCREMENT</strong> dans le champ
+				 <br /><br />Pour exemple : la formule 
 				 <ul>
-				 		<li>champ 1 : <strong>titre</strong></li>
+				 		<li>champ 1 : <strong>#TITRE</strong></li>
 						<li>champ 2 : <strong>#INCREMENT</strong></li>
-						<li>champ 3 : <strong>descriptif</strong></li>
+						<li>champ 3 : <strong>#DESCRIPTIF</strong></li>
 						<li>increment à <strong>12</strong></li>
 				 </ul>
-				 donnera comme premier titre de la série : 
+				 donnera comme premier titre de la s&eacute;rie : 
 				 <br /><strong>Partie II / Chapitre 12 :&lt;multi&gt;[fr] le titre du chapitre [en]chapter's title&lt;/multi&gt;</strong>
-				 <br />si on clone une rubrique avec les caractéristiques suivantes :
+				 <br />si on clone une rubrique avec les caract&eacute;ristiques suivantes :
 				 <ul>
 				 		<li>titre : <strong>Partie II / Chapitre </strong></li>
 						<li>descriptif : <strong> :&lt;multi&gt;[fr] le titre du chapitre [en]chapter's title &lt;/multi&gt;</strong></li>

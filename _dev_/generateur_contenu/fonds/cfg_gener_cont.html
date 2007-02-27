@@ -1,0 +1,59 @@
+#CACHE{0}
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+[(#REM) descriptif=
+<h4>Générateur de contenu</h4>
+Ici vous pouvez configurer :
+- la rubrique qui contient les rubriques &#224; utiliser comme mod&#232;le pour les clones (= source)
+- le secteur dans lequel seront cr&#233;&#233;s les clones (= cible)
+]
+[(#REM) titre=plugin g&#233;n&#233;rateur de contenu]
+[(#REM) liens*=gener_cont_multi]
+
+
+<fieldset><legend><:rubrique:> <:source:></legend>
+   <label>Rubrique qui stocke les rubriques &#224; cloner :</label>
+   <select name="secteur_source">
+     <option value="">Racine</option>
+  	 <BOUCLE_secteurs_source(RUBRIQUES) {racine} {par titre} {tout}>
+  	    <option value="#ID_RUBRIQUE" style="font-weight: bold;" [(#ENV{secteur_source}|=={#ID_RUBRIQUE}|?{selected="selected",''})]><strong>secteur #ID_RUBRIQUE : #TITRE</strong></option>
+  			<BOUCLE_rubriques_source(RUBRIQUES) {id_parent} {par titre} {tout}>
+  			   <option value="#ID_RUBRIQUE" style="font-weight: bold;" [(#ENV{secteur_source}|=={#ID_RUBRIQUE}|?{selected="selected",''})]>&nbsp;&nbsp;rubrique #ID_RUBRIQUE : #TITRE</option>
+  				 &nbsp;&nbsp;<BOUCLE_sous_rubriques_source(BOUCLE_rubriques_source)></BOUCLE_sous_rubriques_source>
+  			</BOUCLE_rubriques_source>
+  	 </BOUCLE_secteurs_source>
+   </select>
+</fieldset>
+
+<fieldset><legend><:rubrique:> <:cible:></legend>
+   <label>Secteur o&ugrave; la cr&#233;ation de clones est autoris&#233;e :</label>
+   <select name="secteur_cible">
+     <option value="0">Racine</option>
+  	 <BOUCLE_secteurs_cible(RUBRIQUES) {racine} {par titre} {tout}>
+  	    <option value="#ID_RUBRIQUE" style="font-weight: bold;" [(#ENV{secteur_cible}|=={#ID_RUBRIQUE}|?{selected="selected",''})]><strong>secteur #ID_RUBRIQUE : #TITRE</strong></option>
+  	 </BOUCLE_secteurs_cible>
+   </select>
+</fieldset>
+
+<fieldset><legend>Maximum de clones</legend>
+   <label>Nombre max de copies autoris&#233;s simultan&#233;ment</label>
+	 <input type="text" name="nb_max_clones" value="[(#ENV{nb_max_clones,5})]" style="width: 20px;">
+</fieldset>
+
+<fieldset><legend>Statut des articles par d&#233;faut</legend>
+   <label>Si le statut des articles clon&#233;s n'est pas d&#233;fini, utiliser :</label>
+	 <select name="statut_articles_defaut">
+	 				 <option value="publie" [(#ENV{statut_articles_defaut}|=={publie}|?{selected="selected",''})]>publi&#233; en ligne</option>
+					 <option value="prop" [(#ENV{statut_articles_defaut}|=={prop}|?{selected="selected",''})]>propos&#233; &agrave; l'&#233;valuation</option>
+					 <option value="prepa" [(#ENV{statut_articles_defaut}|=={prepa}|?{selected="selected",''})]>en cours de r&#233;daction</option>
+					 <option value="poubelle" [(#ENV{statut_articles_defaut}|=={poubelle}|?{selected="selected",''})]>&agrave; la poubelle</option>
+					 <option value="refuse" [(#ENV{statut_articles_defaut}|=={refuse}|?{selected="selected",''})]>refus&#233;</option>
+	 </select>
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
+
