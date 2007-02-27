@@ -82,6 +82,7 @@ function autoriser_donnee_dist($faire,$type,$id_donnee,$qui,$opt){
 }
 
 function autoriser_form_donnee_modifier_dist($faire, $type, $id_donnee, $qui, $opt) {
+	if (!intval($id_donnee)) return false;
 	if (!isset($opt['id_form']) OR !$id_form = $opt['id_form']) return false;
 	// un admin dans le back office a toujours le droit de modifier
 	if (($qui['statut'] == '0minirezo')) return true;
@@ -96,7 +97,7 @@ function autoriser_form_donnee_modifier_dist($faire, $type, $id_donnee, $qui, $o
 		if ($cookie) $q.=" AND (cookie="._q($cookie)." OR id_auteur="._q($id_auteur).")";
 		else $q.=" AND id_auteur="._q($id_auteur)." ";
 		//si unique, ignorer id_donnee, si pas id_donnee, ne renverra rien
-		if ($row['multiple']=='oui' || !_DIR_RESTREINT) $q.=" AND id_donnee="._q($opt['id_donnee']);
+		if ($row['multiple']=='oui' || !_DIR_RESTREINT) $q.=" AND id_donnee="._q($id_donnee);
 		$r=spip_query($q);
 		if ($r=spip_fetch_array($r)) return true;
 	}
