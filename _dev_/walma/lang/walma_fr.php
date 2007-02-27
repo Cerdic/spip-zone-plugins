@@ -4,7 +4,12 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'more_info' => 'En savoir plus', 
-'zone_restreinte_espace_prive' => "Restreindre l'acc&egrave;s &agrave; cette zone dans l'espace priv&eacute;",
+'copidlibre' => "CopID libre non marchand &copy; 02/2007 Alm &amp; Walk Galerie ",
+'pour' => "pour",
+'taille_image' => "Taille de l'image",
+'diaporama' => "Diaporama",
+'change_langue'=> "English language",
+
 
 );
 

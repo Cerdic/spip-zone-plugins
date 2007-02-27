@@ -1,4 +1,5 @@
 [(#REM)
+<!--version walma3.4  pour spip 1.9.2 CopID libre non marchand (c) février 2007 Alm & Walk Galerie WALMA -->
 on va essayé de récupérer un array des documents
 article
 mot
@@ -6,15 +7,19 @@ recherche
 rubrique
 
 Pour utiliser walma 3.4 en inclusion comme on veut on met dans le squelette de son choix
-dans le head (css et javascript pour walma) mettre le mode par defaut gauche
-<INCLURE{fond=inc-walma_head}{mode,gauche}>
-dans le body
-[(#MODELE{walma_modele}{pas}{textforum}{grande}{mode}{debut_img}{page})]
-en option on peut avoir une inclusion qui affiche le texte de l'article et si activé, son forum
-<INCLURE{fond=inc-walma_txtforum}{id_article}{textforum}{lang}>
+dans le head (css et javascript pour walma) , les options des SET et l' INCLURE du head
+ 
+#SET{menugauche,oui}
+#SET{menudroite,non}
+#SET{texteforum,non}
+#SET{mode,gauche}
 
 
-Pour utiliser le modèle en inclusion ça marche pas encore bien
+[(#INCLURE{fond=inc-walma_head}{mode=#GET{mode}}{menugauche=#GET{menugauche}}{menudroite=#GET{menudroite}})]
+et dans le body
+[(#MODELE{walma_modele}{mode=#GET{mode}}{diapo}{pas}{textforum}{grande}{debut_img}{page})]
+ 
+Pour utiliser uniquement le modèle en inclusion ça marche pas encore bien
  walma48|modele>
 encore moins
 <walma48|modele|mode=vignettes|pas|textforum|grande|debut_img|page>
@@ -49,13 +54,13 @@ mais ça viendra surement
 <a href="[(#SELF|parametre_url{'mode','image'}|parametre_url{'diapo',''}|parametre_url{'pas',1}|parametre_url{'textforum',x}|parametre_url{'recherche',#RECHERCHE})]#image"
  id="ico4" class="ico ico[(#ENV{mode}|=={image}|?{'select',''})][(#ENV{diapo}|=={on}|?{diapo,image})]" title="Image [(#ENV{diapo}|=={on}|?{Stop,''})]" >&nbsp;</a>
 <a href="[(#SELF|parametre_url{'mode','image'}|parametre_url{'id_document',''}|parametre_url{'pas',1}|parametre_url{'textforum',x}|parametre_url{'recherche',#RECHERCHE})][&amp;diapo=(#ENV{diapo,on})]#ziapo"
- id="ico5" class="ico ico[(#ENV{mode}|=={image}|?{select[(#ENV{diapo}|!={on}|?{diapo,''})],''})]image " [(#ENV{diapo}|=={on}|?{style="text-decoration:blink; cursor:wait;",''})] title="<multi>[fr]Diaporama[en]Slideshow</multi>" >::></a>
+ id="ico5" class="ico ico[(#ENV{mode}|=={image}|?{select[(#ENV{diapo}|!={on}|?{diapo,''})],''})]image " [(#ENV{diapo}|=={on}|?{style="text-decoration:blink; cursor:wait;",''})] title="<:diaporama:>" >::></a>
 
 <div style="float:right; font-size:11px">
 [<:resultats_recherche:> <strong>(#RECHERCHE)</strong> [(#_totalsearch:TOTAL_BOUCLE|>{1}|?{ [(#_totalsearch:TOTAL_BOUCLE)] images, [(#_totalsearch:TOTAL_BOUCLE|=={''}|?{0 image ,1 image })]})]]
  
 <!--[(#REM)réglage de la langue]-->
-<a href="[(#SELF|parametre_url{'recherche',#RECHERCHE}|parametre_url{'lang',[(#ENV{lang}|=={fr}|?{en,fr})]})]#haut" title="<multi>[fr]English language[en]Passer en langue française</multi>">
+<a href="[(#SELF|parametre_url{'recherche',#RECHERCHE}|parametre_url{'lang',[(#ENV{lang}|=={fr}|?{en,fr})]})]#haut" title="<:walma:change_langue:>">
 [[(#ENV{lang}|=={fr}|?{fr,en})]]
 </a>
 </div>
@@ -200,7 +205,7 @@ mais ça viendra surement
 <!--[(#REM) AGRANDIR L'IMAGE]-->
 
 <div class="largeimage">
-<a href="[(#ENV{large}|=={y}|?{[(#SELF|parametre_url{'large',''}|texte_script)],[(#SELF|parametre_url{'large','y'}|parametre_url{'pas',1}|parametre_url{'textforum',x}|parametre_url{'mode',image}|texte_script)]})]#haut" style="cursor: ne-resize" title="<multi>[fr]Taille de l'image[en]Image width</multi>">
+<a href="[(#ENV{large}|=={y}|?{[(#SELF|parametre_url{'large',''}|texte_script)],[(#SELF|parametre_url{'large','y'}|parametre_url{'pas',1}|parametre_url{'textforum',x}|parametre_url{'mode',image}|texte_script)]})]#haut" style="cursor: ne-resize" title="<:walma:taille_image:>">
 	<span></span>
 	<span class="largeun"></span>
 	<span class="largedeux"></span>
@@ -216,12 +221,8 @@ mais ça viendra surement
 <div><input name="recherche" type="text" value="[(#ENV{recherche}|safehtml)]" />
 <input type="submit" value="<:info_rechercher:>" /></div>
 </form>
-<div style="float:right; margin:0; padding:0; padding-right:5px;">
-CopID 
-<multi>[fr]libre [en] free</multi> 
- non marchand (c) 07/2006 Alm &amp; Walk Galerie <a href="http://elastick.net">WALMA 3.3</a>
-<multi>[fr]pour [en] for </multi> 
-<a href="http://spip.net">SPIP 1.9</a>
+<div id="copid">
+<:walma:copidlibre:> <a href="http://elastick.net">WALMA 3.4</a> <:walma:pour:> <a href="http://spip.net">SPIP 1.9.2</a>
 </div>
  
 </div>

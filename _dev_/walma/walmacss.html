@@ -2,6 +2,8 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
+/*<!--version walma3.4  pour spip 1.9.2 CopID libre non marchand (c) février 2007 Alm & Walk Galerie WALMA -->*/
+
 <BOUCLE_totalsearch(DOCUMENTS){recherche}{mode=document}{extension==(png|jpg|gif)$}>
 </BOUCLE_totalsearch>
 
@@ -136,7 +138,8 @@ line-height:18px; height:18px; font-size:12px; width:100px; text-align:center; m
 .sirecherchevide{[(#ENV{recherche}|!={''}|?{[(#_totalsearch:TOTAL_BOUCLE|=={''}|?{display:none;,''})],''})]}
 .recherchevidehauteur{width:1px; float:left;[(#ENV{diapo}|=={on}|?{height:500px;, height:420px;})]}
 [(#ENV{recherche}|!={''}|?{[(#_totalsearch:TOTAL_BOUCLE|=={''}|?{'.recherchevidehauteur{clear:both; width:99%; margin:0 auto; text-align:center; }',''})],''})]
- 
+
+#copid{float:right; margin:0; padding:0; padding-right:5px;}
 
 .clearw{height:1px; font-size:1px; clear:both;  width:100%; margin:0; padding:0; visibility:hidden; border:2px solid red;}
 
@@ -170,13 +173,18 @@ h1, h2, h3{margin:0.4em 0 0.4em 0;}
 .topthreadtxt, .forumgalerie blockquote{ border:1px solid #ccc; background-color:#fff;  margin-bottom:0.8em; padding:0.5em 1em 0.5em 1em; }
 .topthreadtxt{margin:0em 2em 0.8em 2em;}
 
-[/*(#REM) si insertion  menu à gauche libérez simplement ces lignes des crochets et des étoiles 
+[/*(#REM) si insertion  menu gauche*/]
+[(#ENV{menugauche}|=={'oui'}|?{"
 #galeriewalma, .baswalma, .ajoutextforum{float:right; right:10px; }
 .titredelagalerie{float:right; margin-right:20px; }
-.insertionmenu{position:absolute; font-size:12px;  width:170px; left:10px; top:100px; text-align:left; z-index:2; background-color:#E8E8E8;}
-*/]
+.insertionmenu{ position:absolute; font-size:12px;  width:170px; left:10px; top:100px; text-align:left; z-index:2; background-color:#E8E8E8;}
+"})]
 
-[/*(#REM) si insertion  menu à droite libérez simplement ces lignes des crochets et des étoiles 
+[/*(#REM) si insertion  menu à droite*/]
+[(#ENV{menudroite}|=={'oui'}|?{"
 #galeriewalma, .titredelagalerie, .baswalma, .ajoutextforum{float:left; left:10px; }
-.insertionmenu{position:absolute; font-size:12px;  width:170px; left:820px; top:100px; text-align:left; z-index:2; background-color:#E8E8E8; }
-*/]
+.insertionmenu{ position:absolute; font-size:12px;  width:170px; left:820px; top:100px; text-align:left; z-index:2; background-color:#E8E8E8; }
+"})]
+
+#telecharge{clear:both; margin:0 auto; padding:1em; font-size:0.7em;  width:250px; text-align:left; z-index:2; background-color:#E8E8E8; border:1px dotted #555}
+.form_upload input {font-size:0.8em;}

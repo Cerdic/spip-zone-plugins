@@ -18,6 +18,7 @@ en créant un lien dans un squelette cela donnerait
 le developpement du plugin walma 
 walma tend toujours à permettre de facilement installer une galerie pour spip 
 et de la modifier encore plus simplement pour ceux qui le souhaitent.
+voir les SET à modifier en entete de walma.html
 
 Le  plugin walma découpe ainsi l'ancien fichier unique en plusieurs morceaux:
 
@@ -27,14 +28,14 @@ Le  plugin walma découpe ainsi l'ancien fichier unique en plusieurs morceaux:
 	01B -le javascript (walma.js)
 04-la galerie en contenu principal passe en modele (modeles/walma_modele.html)
 05- texte et forum lookés walma peuvent être ajouté ou retiré facilement (inc-walma_txtforum.html)
-
-06-le multilinguisme est maintenant assuré par les fichiers de langues que l'on peut ajouter (lang/walma_fr.php)
+06-le menu en option s'affiche à gauche ou à droite  (inc-walma_menus.html)
+07-le multilinguisme est maintenant assuré par les fichiers de langues que l'on peut ajouter (lang/walma_fr.php)
 
 
 /************       TODO     **********/  
-le developpement du plugin walma prévoit des options:
+le developpement du plugin walma prévoit des options à modifier facilement 
 
- des menus lookés walma à gauche ou à droite à insérer
+ des menus lookés walma à gauche ou à droite
  une taille ajustable de la galerie
  un squelette de rubrique
  un modèle walma à insérer
@@ -44,7 +45,10 @@ et des plus:
 
  le passage en jquery
  le fondu enchainé des images
+ la vitesse du diaporama
  l’exportation zippé de la galerie
  lier un mot clef walma à l’article sans toucher au code
  détecter les articles ayant un certains nombres d'images pour automatiquement les afficher en walma
  avoir les crayons actifs
+OK possibilité d'insérer un document ou un zip de documents lorsque l'administrateur est authentifié
+
