@@ -595,7 +595,7 @@ text-align: center;
 #menuadmin UL {
 direction: $direction;
 text-align: $rightouleft;
-list-style-image: url(\""._DIR_PLUGIN_PHPMV."/themes/default/images/f3$direction.png\");
+list-style-image: url(\""._DIR_PLUGIN_PHPMV."themes/default/images/f3$direction.png\");
 }
 #menuadmin LI {
 padding: 0.5em;

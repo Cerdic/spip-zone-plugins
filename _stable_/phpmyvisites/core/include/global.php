@@ -82,13 +82,13 @@ else
 }
 
 // directories
-define('DIR_IMG_THEMES', _DIR_PLUGIN_PHPMV . '/themes/default/images/');
-define('DIR_IMG_BROWSERS', _DIR_PLUGIN_PHPMV . '/images/browsers');
-define('DIR_IMG_OS',       _DIR_PLUGIN_PHPMV . '/images/os');
-define('DIR_IMG_PLUGINS',  _DIR_PLUGIN_PHPMV . '/images/plugins');
-define('DIR_IMG_LOGOS',  _DIR_PLUGIN_PHPMV . '/images/logos');
-define('DIR_IMG_COUNTRIES_FLAGS', _DIR_PLUGIN_PHPMV . '/images/countries_flags');
-define('DIR_IMG_SCREENS', _DIR_PLUGIN_PHPMV . '/images/screens');
+define('DIR_IMG_THEMES', _DIR_PLUGIN_PHPMV . 'themes/default/images/');
+define('DIR_IMG_BROWSERS', _DIR_PLUGIN_PHPMV . 'images/browsers');
+define('DIR_IMG_OS',       _DIR_PLUGIN_PHPMV . 'images/os');
+define('DIR_IMG_PLUGINS',  _DIR_PLUGIN_PHPMV . 'images/plugins');
+define('DIR_IMG_LOGOS',  _DIR_PLUGIN_PHPMV . 'images/logos');
+define('DIR_IMG_COUNTRIES_FLAGS', _DIR_PLUGIN_PHPMV . 'images/countries_flags');
+define('DIR_IMG_SCREENS', _DIR_PLUGIN_PHPMV . 'images/screens');
 define('LANGS_PATH', INCLUDE_PATH . '/langs');
 define('DIR_IMG_MAPS', INCLUDE_PATH . '/images/maps');
 define('DIR_IMG_SEARCH_ENGINES', INCLUDE_PATH . '/images/search_engines');

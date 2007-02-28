@@ -1,8 +1,10 @@
 <?php
 
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_PHPMV',(_DIR_PLUGINS.end($p)));
+if (!defined('_DIR_PLUGIN_PHPMV')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
+	define('_DIR_PLUGIN_PHPMV',(_DIR_PLUGINS.end($p)).'/');
+}
 
 	function phpmv_ajouterBoutons($boutons_admin) {
 		// si on est admin
@@ -18,7 +20,7 @@ define('_DIR_PLUGIN_PHPMV',(_DIR_PLUGINS.end($p)));
 			}
 			else{
 				$boutons_admin['statistiques_visites']->sousmenu["phpmv"]= new Bouton(
-				"../"._DIR_PLUGIN_PHPMV."/img_pack/phpmv-logo.png",  // icone
+				"../"._DIR_PLUGIN_PHPMV."img_pack/phpmv-logo.png",  // icone
 				_L("PHPMyVisites") //titre
 				);
 			}

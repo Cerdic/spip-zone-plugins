@@ -6,9 +6,9 @@ if (!isset($GLOBALS['meta']['_PHPMV_DIR_CONFIG']) || !strlen($GLOBALS['meta']['_
 	ecrire_meta('_PHPMV_DIR_DATA',realpath(_DIR_SESSIONS . "phpmvdatas"));
 	ecrire_metas();
 }
-if (!defined(_DIR_PLUGIN_PHPMV)){
+if (!defined('_DIR_PLUGIN_PHPMV')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	define('_DIR_PLUGIN_PHPMV',_DIR_PLUGINS.end($p));
+	define('_DIR_PLUGIN_PHPMV',(_DIR_PLUGINS.end($p)).'/');
 }
 if (!isset($GLOBALS['meta']['_DIR_PLUGIN_PHPMV']) OR $GLOBALS['meta']['_DIR_PLUGIN_PHPMV']!=_DIR_PLUGIN_PHPMV){
 	include_spip("inc/meta");

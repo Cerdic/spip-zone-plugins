@@ -20,22 +20,45 @@
  * 
  */
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
-define('_DIR_PLUGIN_PHPMV',(_DIR_PLUGINS.end($p)));
+if (!defined('_DIR_PLUGIN_PHPMV')){
+	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(dirname(__FILE__)))));
+	define('_DIR_PLUGIN_PHPMV',(_DIR_PLUGINS.end($p)).'/');
+}
 
 function verif_install(){
-	// gestion de l'install
-	if (!is_dir(_DIR_SESSIONS."phpmvconfig")){
-		sous_repertoire(_DIR_SESSIONS, "phpmvconfig");
+	// gestion de l'install et repertoires, selon les versions
+	if (defined('_DIR_TMP')){
+		define('_PHPMV_DIR_DATA',realpath(_DIR_TMP . "phpmvdatas"));
+		if (!is_dir(_DIR_TMP."phpmvdatas")){
+			sous_repertoire(_DIR_TMP, "phpmvdatas");
 	}
-	if (!is_dir(_DIR_SESSIONS."phpmvdatas")){
-		sous_repertoire(_DIR_SESSIONS, "phpmvdatas");
+	else {
+		define('_PHPMV_DIR_DATA',realpath(_DIR_SESSIONS . "phpmvdatas"));
+		if (!is_dir(_DIR_SESSIONS."phpmvdatas")){
+			sous_repertoire(_DIR_SESSIONS, "phpmvdatas");
+	}
+	if (defined('_DIR_ETC')){
+		if (!is_dir(_DIR_ETC."phpmvconfig"))
+			sous_repertoire(_DIR_ETC, "phpmvconfig");
+		if (is_dir(_DIR_ETC."phpmvconfig"))
+			define('_PHPMV_DIR_CONFIG',realpath(_DIR_ETC . "phpmvconfig"));
+	}
+	if (!defined('_PHPMV_DIR_CONFIG')){
+		define('_PHPMV_DIR_CONFIG',realpath(_DIR_SESSIONS . "phpmvconfig"));
+		if (!is_dir(_DIR_SESSIONS."phpmvconfig")){
+			sous_repertoire(_DIR_SESSIONS, "phpmvconfig");
 	}
 
-	if (@file_exists(_DIR_SESSIONS."phpmvconfig/config.php"))
+	if (@file_exists(_PHPMV_DIR_CONFIG."config.php"))
 		return;
 
-	if (lire_fichier('inc_connect.php',$connect) && preg_match(',spip_connect_db\(([^\)]*)\),i',$connect,$r)){
+	if (!defined('_FILE_CONNECT')){
+		define('_FILE_CONNECT',
+		  (@is_readable($f = _DIR_RESTREINT . 'inc_connect.php') ? $f
+		:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php3') ? $f
+		:	false)));
+	}
+	if (lire_fichier(_FILE_CONNECT,$connect) && preg_match(',spip_connect_db\(([^\)]*)\),i',$connect,$r)){
 		$pars = explode(',',$r[1]);
 		$host = substr($pars[0],1,strlen($pars[0])-2);
 		$port = substr($pars[1],1,strlen($pars[1])-2);
@@ -61,7 +84,7 @@ $siteInfo = array ('."
   ),
 );
 ?".'>';
-		ecrire_fichier(_DIR_SESSIONS."phpmvconfig/site_info.php",$conf);
+		ecrire_fichier(_PHPMV_DIR_CONFIG."/site_info.php",$conf);
 		$conf = '<'.'?php 
 $siteUrls = array ('."
   1 => 
@@ -70,7 +93,7 @@ $siteUrls = array ('."
   ),
 );
 ?".'>';
-		ecrire_fichier(_DIR_SESSIONS."phpmvconfig/site_urls.php",$conf);
+		ecrire_fichier(_PHPMV_DIR_CONFIG."/site_urls.php",$conf);
 		
 		return;
 
@@ -148,8 +171,6 @@ function exec_phpmv(){
 	define('INCLUDE_PATH', '.');
 	
 	verif_install();
-	define('_PHPMV_DIR_CONFIG',realpath(_DIR_SESSIONS . "phpmvconfig"));
-	define('_PHPMV_DIR_DATA',realpath(_DIR_SESSIONS . "phpmvdatas"));
 	
 	if (!isset($GLOBALS['meta']['PHPMyVisites_no_admin_stat'])){
 		ecrire_meta('PHPMyVisites_no_admin_stat','non');
