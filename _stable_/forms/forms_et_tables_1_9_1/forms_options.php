@@ -88,6 +88,7 @@ function autoriser_form_donnee_modifier_dist($faire, $type, $id_donnee, $qui, $o
 	if (($qui['statut'] == '0minirezo')) return true;
 	$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 	if (!$row = spip_fetch_array($result)) return false;
+	include_spip('inc/forms');
 	$dejareponse=Forms_verif_cookie_sondage_utilise($id_form);
 	global $auteur_session;
 	$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
@@ -118,7 +119,7 @@ function autoriser_form_donnee_creer_dist($faire, $type, $id_donnee, $qui, $opt)
 	return true;
 }
 function autoriser_table_donnee_creer_dist($faire, $type, $id_donnee, $qui, $opt) {
-	return autoriser_form_donnee_creer($faire, $type, $id_donnee, $qui, $opt);
+	return autoriser_form_donnee_creer_dist($faire, $type, $id_donnee, $qui, $opt);
 }
 function autoriser_form_donnee_instituer_dist($faire,$type,$id_donnee,$qui,$opt) {
 	if (($qui['statut'] != '0minirezo')

@@ -59,7 +59,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 		)
 		AND 
 		(!$id_donnee 
-		OR autoriser('modifier',(in_array($type_form,array('','sondage'))?'form':$type_form).'_donnee',$id_donnee));
+		OR autoriser('modifier','donnee',$id_donnee,NULL,array('id_form'=>$id_form)));
 	$formactif = $formactif?' ':'';
 
 	$flag_reponse = (_request('ajout_reponse') == $id_form) && (_request('nobotnobot')=='');
