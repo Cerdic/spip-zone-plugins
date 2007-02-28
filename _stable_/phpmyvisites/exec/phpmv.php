@@ -29,12 +29,12 @@ function verif_install(){
 	// gestion de l'install et repertoires, selon les versions
 	if (defined('_DIR_TMP')){
 		define('_PHPMV_DIR_DATA',realpath(_DIR_TMP . "phpmvdatas"));
-		if (!is_dir(_DIR_TMP."phpmvdatas")){
+		if (!is_dir(_DIR_TMP."phpmvdatas"))
 			sous_repertoire(_DIR_TMP, "phpmvdatas");
 	}
 	else {
 		define('_PHPMV_DIR_DATA',realpath(_DIR_SESSIONS . "phpmvdatas"));
-		if (!is_dir(_DIR_SESSIONS."phpmvdatas")){
+		if (!is_dir(_DIR_SESSIONS."phpmvdatas"))
 			sous_repertoire(_DIR_SESSIONS, "phpmvdatas");
 	}
 	if (defined('_DIR_ETC')){
@@ -45,7 +45,7 @@ function verif_install(){
 	}
 	if (!defined('_PHPMV_DIR_CONFIG')){
 		define('_PHPMV_DIR_CONFIG',realpath(_DIR_SESSIONS . "phpmvconfig"));
-		if (!is_dir(_DIR_SESSIONS."phpmvconfig")){
+		if (!is_dir(_DIR_SESSIONS."phpmvconfig"))
 			sous_repertoire(_DIR_SESSIONS, "phpmvconfig");
 	}
 
