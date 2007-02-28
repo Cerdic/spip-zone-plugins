@@ -49,7 +49,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 		."' height='16' width='16' alt=\"".$a."\" /></a>";
 }
 
-// sert a construire les sousbarre
+// sert à construire les sousbarre
 function produceWharf($id, $title = '', $sb = '') {
   $visible = ($changer_virtuel || $virtuel);
   $res .= $title;
@@ -177,7 +177,7 @@ _T('bartypenr:barre_gestion_anc_bulle')
   return produceWharf('tableau_ancre','',$tableau_formulaire); 	
 }
 
-// pour les caracteres
+// pour les caractères
 function afficher_caracteres($champ, $spip_lang, $champhelp) {
 
 	// guillemets
@@ -227,7 +227,7 @@ $tableau_formulaire = '
   return produceWharf('tableau_caracteres','',$tableau_formulaire); 	
 }
 
-// pour les caracteres
+// pour les caractères
 function afficher_boutonsavances($champ, $champhelp) {
 
 $reta = '';
@@ -237,15 +237,6 @@ $reta .= bouton_barre_racc ("barre_raccourci('[|','|]',$champ)", _DIR_PLUGIN_BAR
 $reta .= bouton_barre_racc ("barre_raccourci('[/','/]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/right.png', _T('bartypenr:barre_alignerdroite'), $champhelp);
 $reta .= bouton_barre_racc ("barre_raccourci('[(',')]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/cadretexte.png', _T('bartypenr:barre_encadrer'), $champhelp);
 $reta .= bouton_barre_racc ("barre_raccourci('<poesie>','</poesie>',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/poesie.png", _T('bartypenr:barre_poesie'), $champhelp);
-////////////////////////////
-//MODIFICATION
-///////////////////////////
-	global $spip_lang;
-	$params = array($champ,$champhelp,$spip_lang);
-	$add = pipeline("BarreTypoEnrichie_boutonsavances",array($champ,$champhelp,$spip_lang));
-	if ($params!=$add)
-		$reta .= $add;
-///////////////////////////
 
 $reta .= '&nbsp;';
 	
@@ -279,22 +270,13 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$champhelp = "document.getElementById('barre_$num_barre')";
 
 
- // Pregeneration des toolzbox.. (wharfing)
+ // Prégénération des toolzbox.. (wharfing)
     $toolbox .= afficher_boutonsavances($champ, $champhelp);
 	$toolbox .= afficher_caracteres($champ, $spip_lang, $champhelp);
     //$toolbox .= afficher_gestion_tableau($champ);
     $toolbox .= afficher_gestion_lien($champ);
 	$toolbox .= afficher_gestion_ancre($champ);
     $toolbox .= afficher_gestion_remplacer($champ, $champhelp);
-////////////////////////////
-//MODIFICATION
-///////////////////////////
-//un pipeline pour ajouter une toolbox
-    $params=array($champ,$champhelp,$spip_lang);
-    $add=pipeline("BarreTypoEnrichie_toolbox",$params);
-    if ($params!=$add)
-		$toolbox .= $add;
-///////////////////////////
 //
 
 	$ret .= "<table class='spip_barre' style='width:auto;' cellpadding='0' cellspacing='0' border='0' summary=''>";
@@ -305,37 +287,12 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	// Italique, gras, intertitres
 	$ret .= bouton_barre_racc ("barre_raccourci('{','}',$champ)", _DIR_IMG_ICONES_BARRE."italique.png", _T('barre_italic'), $champhelp);
 	$ret .= bouton_barre_racc ("barre_raccourci('{{','}}',$champ)", _DIR_IMG_ICONES_BARRE."gras.png", _T('barre_gras'), $champhelp);
-////////////////////////////
-//MODIFICATION
-///////////////////////////
-	$params = array($champ,$champhelp,$spip_lang);
-	$add = pipeline("BarreTypoEnrichie_tous",array($champ,$champhelp,$spip_lang));
-	if ($params!=$add)
-		$ret .= $add;
-///////////////////////////
-
 	if ($options == "avancees") {
 		$ret .= bouton_barre_racc ("barre_raccourci('[*','*]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/miseenevidence.png', _T('bartypenr:barre_miseenevidence'), $champhelp);
 		$ret .= bouton_barre_racc ("barre_raccourci('&lt;sup&gt;','&lt;/sup&gt;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/exposant.png', _T('bartypenr:barre_exposant'), $champhelp);
 		$ret .= bouton_barre_racc ("barre_raccourci('&lt;sc&gt;','&lt;/sc&gt;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/petitescapitales.png', _T('bartypenr:barre_petitescapitales'), $champhelp);
-////////////////////////////
-//MODIFICATION
-///////////////////////////
-		$params = array($champ,$champhelp,$spip_lang);
-		$add = pipeline("BarreTypoEnrichie_avancees",array($champ,$champhelp,$spip_lang));
-		if ($params!=$add)
-			$ret .= $add;
-///////////////////////////
 	}
 	if (!$forum) {
-////////////////////////////
-//MODIFICATION
-///////////////////////////
-		$params = array($champ,$champhelp,$spip_lang);
-		$add = pipeline("BarreTypoEnrichie_ecrire",array($champ,$champhelp,$spip_lang));
-		if ($params!=$add)
-			$ret .= $add;
-///////////////////////////
 		$ret .= "&nbsp;";
 		$ret .= bouton_barre_racc ("barre_raccourci('\n\n{{{','}}}\n\n',$champ)", _DIR_IMG_ICONES_BARRE."intertitre.png", _T('barre_intertitre'), $champhelp);
 		if ($options == "avancees") {
@@ -356,14 +313,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$ret .= bouton_barre_racc ("barre_raccourci('[[',']]',$champ)", _DIR_IMG_ICONES_BARRE."notes.png", _T('barre_note'), $champhelp);
 	}
 	if ($forum) {
-////////////////////////////
-//MODIFICATION
-///////////////////////////
-		$params = array($champ,$champhelp,$spip_lang);
-		$add = pipeline("BarreTypoEnrichie_forum",array($champ,$champhelp,$spip_lang));
-		if ($params!=$add)
-			$ret .= $add;
-///////////////////////////
 		$ret .= "&nbsp;</td>\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$col ++;
 		$ret .= bouton_barre_racc ("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);
