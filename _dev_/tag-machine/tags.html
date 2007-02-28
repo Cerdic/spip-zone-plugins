@@ -1,4 +1,6 @@
-#HTTP_HEADER{content-type:text/html}
+#HTTP_HEADER{content-type:text/html;charset=#CHARSET}
+#CACHE{5}
+
 <style type='text/css'>
 	#popularTags {line-height:1.2em }
 	#suggestions {margin:3px }
@@ -137,7 +139,7 @@ $query="UPDATE spip_".$element."s SET titre='".addslashes(_request('titre'))."' 
 </div>
 </td></tr>
 <tr><td colspan='2'>
-	<div align="#LANG_RIGHT"><input type='submit' value='ok' />
+	<div align="#LANG_LEFT"><input type='submit' value='ok' />
 </td></tr>
 </table>
 
