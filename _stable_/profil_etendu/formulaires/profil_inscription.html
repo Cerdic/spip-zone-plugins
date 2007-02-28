@@ -1,0 +1,23 @@
+[
+(#ENV*{message})
+]
+[<fieldset>
+<legend><:pass_vousinscrire:></legend>
+<p>(#ENV*{commentaire})</p>
+</fieldset>]
+<b><:texte_intro_formulaire_inscription:></b><br>
+<form id="profil_etendu" method='post' action="[(#ENV{self})#formulaire_inscription]"> 
+	[<input type="hidden" name="insert_(#ENV{type})" value="oui"/>]
+	<label class="inscription" for="nom_inscription"><:form_pet_votre_nom:></label>
+	  <input type="text" class="forml" name="nom_inscription" value="" size="30" />
+	<label class="inscription" for="mail_inscription"><:form_pet_votre_email:></label>
+	  <input type="text" class="forml" name="mail_inscription" value="" size="30" />
+<div class="profil_champs">
+      [(#ENV*{form})]
+</div>   
+      <div align="right"><input type="submit" class="spip_bouton" value="<:bouton_valider:>" /></div> 
+ </form>[
+<script type="text/javascript"><!--
+document.forms.profil_etendu.(#ENV{focus}).focus()
+--></script>
+]

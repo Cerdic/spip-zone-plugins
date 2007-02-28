@@ -24,11 +24,11 @@ function balise_FORMULAIRE_ARTICLES_AUTEUR_stat($args, $filtres) {
 	else
 	    return (array($args[0]));
 */
-	return array();
+	return array($args[0]);
 }
 
 //function balise_FORMULAIRE_ARTICLES_AUTEUR_dyn($id_rubrique) {
-function balise_FORMULAIRE_ARTICLES_AUTEUR_dyn() {
+function balise_FORMULAIRE_ARTICLES_AUTEUR_dyn($url='') {
 
 /*	$page_lot=5;
 	$debut_page=intval($_REQUEST['debut_page']);
@@ -57,6 +57,7 @@ function balise_FORMULAIRE_ARTICLES_AUTEUR_dyn() {
 //						'id_rubrique' => $id_rubrique,
 						'id_auteur' => $id_auteur_session,
 						'auteur_statut' => $auteur_statut,
+						'url' => $url,
 //						'debut_page'=>$debut_page,
 //						'page_lot'=>$page_lot
 				));
@@ -69,6 +70,7 @@ function balise_FORMULAIRE_ARTICLES_AUTEUR_dyn() {
 						'id_auteur' => $id_auteur_session,
 						'auteur_statut' => $auteur_statut,
 						'statut' => "prop",
+						'url' => $url,
 //						'debut_page'=>$debut_page,
 //						'page_lot'=>$page_lot
 				));
@@ -76,6 +78,7 @@ function balise_FORMULAIRE_ARTICLES_AUTEUR_dyn() {
 			return array('formulaires/formulaire_articles_auteur', 0,
 					array(
 //						'id_rubrique' => $id_rubrique,
+						'url' => $url,
 						'id_auteur' => $id_auteur_session,
 						'statut' => "publie",
 						'auteur_statut' => $auteur_statut,
@@ -89,6 +92,7 @@ function balise_FORMULAIRE_ARTICLES_AUTEUR_dyn() {
 //						'id_rubrique' => $id_rubrique,
 						'id_auteur' => 0,
 						'statut' => "publie",
+						'url' => $url,
 //						'debut_page'=>$debut_page,
 //						'page_lot'=>$page_lot
 				));

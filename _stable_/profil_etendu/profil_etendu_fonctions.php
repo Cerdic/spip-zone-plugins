@@ -1,10 +1,4 @@
 <?php
-$GLOBALS['profil_etendu_articles_visiteurs']='oui';
-$GLOBALS['profil_etendu_statut_article']='prop';
-//formulaire avec juste titre et texte
-$GLOBALS['profil_etendu_type_formulaire']='_simple';
-//formulaire basé sur la config spip
-//$GLOBALS['profil_etendu_type_formulaire']='';
 
 include_spip("inc/extra");
 include_spip("inc/layer");

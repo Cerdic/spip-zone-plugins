@@ -53,65 +53,55 @@ function balise_FORMULAIRE_PROFIL_ETENDU_dyn($type_profil='',$lien='') {
 					$f = 'envoyer_inscription';
 				else 
 					$f = 'envoyer_inscription_dist';
-				$commentaire = $f($commentaire, $nom, 'forum');
+				$commentaire = $f($commentaire, $nom, 'forum',0);
 				$message = $commentaire ? $commentaire : _T('form_forum_identifiant_mail');
 			}
+			else
+				$message = $commentaire ? $commentaire : _T('form_forum_identifiant_mail');
 			
 		}
 
-	
-		return array("formulaires/formulaire_profil_inscription", $GLOBALS['delais'],
+		if ($message==_T('form_forum_identifiant_mail')) return $message;
+		else $message.="<br/>";
+		$etendu_form=etendu_form(array(),$type_profil,'');
+		return array("formulaires/profil_inscription", 0,
 				array('focus' => 'nom_inscription',
 					'target' => _request('target'),
 					'message' => $message,
 					'mode' => 'forum',
-					'form' => etendu_form(array(),$type_profil,''),
-					'self' => ($lien ? $lien : generer_url_public('profil')),
+					'form' => $etendu_form[0],
+					'self' => ($lien ? $lien : self()),//generer_url_public('profil')),
 					));
 	}
 	else {
 		$message='';
+		$fields=creer_profil($type_profil);
 		if (_request("update_".$type_profil)){
 			$fields=etendu_recup_saisie($type_profil);
 			$message=enregistrer_profil($type_profil,$fields);
 		}
-		else {
-			if ((_request("installation")=='oui')&&($GLOBALS['auteur_session']['statut']=='0minirezo')){
-				creer_table_profil($type_profil);
-			}
-			$fields=creer_profil($type_profil);
-		}
-		return array("formulaires/formulaire_profil_etendu", $GLOBALS['delais'],
-					array('form' => etendu_form($fields,$type_profil,''),
+
+		$etendu_form=etendu_form($fields,$type_profil,'');
+		$match_form=implode('|',$etendu_form[1]);
+		if ($match_form=='') $match_form='(defaut)';
+		else $match_form='^('.$match_form.')$';
+		//return $match_form;
+		return array("formulaires/profil_etendu", 0,
+					array('form' => $etendu_form[0],
+						'match_forms' => $match_form,
 //						'extra' => $r['extra'],
 						'type' => $type_profil,
 						'legend' => _T("forms:".$type_profil),
 						'message' => $message,
-					'self' => ($lien ? $lien : generer_url_public('profil')),
+					'self' => ($lien ? $lien : self()),//generer_url_public('profil')),
 					));
 		
 	}
 	
 }
-function creer_table_profil($type_profil){
-	$q="CREATE TABLE spip_".$type_profil." (";
-	$champs=etendu_champs($type_profil);
-	foreach (array_keys($champs) as $champ){
-		$q.="`".$champ."` ";
-		if ((($champs[$champ]=="radio")||($champs[$champ]=="select"))&&(is_array($GLOBALS['enum_conf'][$champ])))
-			$q.="ENUM('".join(array_keys($GLOBALS['enum_conf'][$champ]),"','")."'),";
-		elseif ($champs[$champ]=="bloc")
-			$q.="TEXT,";
-		elseif ($champs[$champ]=="checkbox")
-			$q.="ENUM('oui','non') NOT NULL default 'non',";
-		else $q.="varchar(255) default NULL,";	
-	}
-	$q.="`id_auteur` int(11) NOT NULL default '0',maj DATETIME)";
-//	spip_log("installation formulaire etendu:".$type_profil);
-	$result=spip_query($q);
-}
+
 function creer_profil($type_profil,$id=0){
-	if ($id==0)$id=$GLOBALS['auteur_session']['id_auteur'];
+	if ($id==0) $id=$GLOBALS['auteur_session']['id_auteur'];
 	$champs = array_keys(etendu_champs($type_profil));
 	//array_keys($GLOBALS['champs_etendus'][$type_profil]);
 	$qs="select ".join($champs,', ')." from spip_".$type_profil." where id_auteur=".$id;
@@ -133,9 +123,10 @@ function enregistrer_profil($type_profil,$fields,$id=0){
 	$query="update spip_auteurs set $set$add_extra, maj=now() where id_auteur=".$id;
 	*/
 	$set.="maj=now() where id_auteur=".$id;
-	//spip_log("set:".$set);
 	if ($result=spip_query($set)) $message="Modifications sauvegard&eacute;es";
 	else $message="Erreur &agrave; l'enregistrement";
+
+	
 }
 function message_inscription_profil($type_profil,$mail, $nom, $mode, $id=0) {
 
@@ -189,7 +180,7 @@ function etendu_recup_saisie($type_profil) {
 }
 // a partir de la liste des champs, generer la liste des input
 function etendu_form($extra, $type_profil, $ensemble='') {
-
+$titre_form=array();
 	// quels sont les extras de ce type d'objet
 	if (!$champs = $GLOBALS['champs_etendus'][$type_profil])
 		$champs = array();
@@ -222,22 +213,23 @@ function etendu_form($extra, $type_profil, $ensemble='') {
 		list($form, $filtre, $prettyname, $choix, $valeurs) = explode("|", $desc);
 
 		if (!$prettyname) $prettyname = ucfirst($champ);
+		$prettyname=$filtre($prettyname);
 //		$label = "<label for=''>$prettyname&nbsp;:</label>";
 
 		switch($form) {
 
 			case "case":
 			case "checkbox":
-				$affiche .= "<label for='etendu_$champ' class='checkbox'><input type='checkbox' class='truc' name='etendu_$champ' id='etendu_$champ'";
+				$affiche .= "<label for='etendu_$champ' class='checkbox'>$prettyname&nbsp;<input type='checkbox' class='truc' name='etendu_$champ' id='etendu_$champ'";
 				if ($extra[$champ] == 'oui')
 					$affiche .= " CHECKED ";
 				$affiche .= " value='on'/>";
-				$affiche .= "$prettyname</label>";
+				$affiche .= "</label>";
 				break;
 			case "list":
 			case "liste":
 			case "select":
-				$affiche .= "<label for='etendu_$champ'>$prettyname&nbsp;:</label>";
+				$affiche .= "<label for='etendu_$champ'>$prettyname</label>";
 				$choix = explode(",",$choix);
 				if (!is_array($choix)) {
 					$affiche .= "Pas de choix d&eacute;finis.\n";
@@ -257,14 +249,14 @@ function etendu_form($extra, $type_profil, $ensemble='') {
 					$affiche .= "<option value=\"$val\"";
 					if ($val == entites_html($extra[$champ]))
 						$affiche .= " SELECTED";
-					$affiche .= ">$choix_</option>\n";
+					$affiche .= ">".$filtre($choix_)."</option>\n";
 					$i++;
 				}
 				$affiche .= "</select>";
 				break;
 
 			case "radio":
-				$affiche .= "<label for=''>$prettyname&nbsp;:</label>";
+				$affiche .= $prettyname;
 				$choix = explode(",",$choix);
 				if (!is_array($choix)) {
 					$affiche .= "Pas de choix d&eacute;finis.\n";
@@ -285,15 +277,49 @@ function etendu_form($extra, $type_profil, $ensemble='') {
 					if (!$extra["$champ"] AND $i == 0)
 						$affiche .= " CHECKED";
 
-					$affiche .= " value='$val'/><label for='etendu_$champ_$i' class='radio'>$choix_</label>\n";
+					$affiche .= " value='$val'/><label for='etendu_$champ_$i' class='radio'>".$filtre($choix_)."</label>\n";
 					$i++;
 				}
+				break;
+
+			case "radio_form":
+				$affiche .= $prettyname;
+				$choix = explode(",",$choix);
+				if (!is_array($choix)) {
+					$affiche .= "Pas de choix d&eacute;finis.\n";
+					break;
+				}
+				$valeurs = explode(",",$valeurs);
+				if($valeurs == explode(",",""))
+					$valeurs = $choix ;
+
+				$i=0;
+				while (list(, $choix_) = each($choix)) {
+					$affiche .= "<input type='radio' class='radio' name='etendu_$champ' id='etendu_$champ_$i' ";
+					$val = $valeurs[$i] ;
+					if (entites_html($extra["$champ"])== $val){
+						$affiche .= " CHECKED";
+						$titre_form[]=$val;
+					}
+
+					// premiere valeur par defaut
+					if (!$extra["$champ"] AND $i == 0)
+						$affiche .= " CHECKED";
+
+					$affiche .= " value='$val'/><label for='etendu_$champ_$i' class='radio'>".$filtre($choix_)."</label>\n";
+					$i++;
+				}
+				break;
+			case "hidden_form":
+				$affiche .= "<input type='hidden' name='etendu_$champ'\n";
+				$affiche .= " value=\"".$prettyname."\">\n";
+				$titre_form[]=$prettyname;
 				break;
 
 			// A refaire car on a pas besoin de renvoyer comme pour checkbox
 			// les cases non cochees
 			case "multiple":
-				$affiche .= "<label for=''>$prettyname&nbsp;:</label>";
+				$affiche .= "<label for=''>$prettyname</label>";
 				$choix = explode(",",$choix);
 				if (!is_array($choix)) {
 					$affiche .= "Pas de choix d&eacute;finis.\n";
@@ -304,27 +330,27 @@ function etendu_form($extra, $type_profil, $ensemble='') {
 					if (entites_html($extra[$champ."_multi_".$i])=="on")
 						$affiche .= " CHECKED";
 					$affiche .= "/>";
-					$affiche .= $choix[$i];
+					$affiche .= $filtre($choix[$i]);
 					$affiche .= "</label>\n";
 				}
 				break;
 
 			case "bloc":
 			case "block":
-				$affiche .= "<label for='etendu_$champ'>$prettyname&nbsp;:</label>";
-				$affiche .= "<textarea name='etendu_$champ' id='etendu_$champ' class='forml' rows='5' cols='40'>".entites_html($extra[$champ])."</textarea>\n";
+				$affiche .= "<label for='etendu_$champ'>$prettyname</label>";
+				$affiche .= "<textarea name='etendu_$champ' id='etendu_$champ' class='formo' rows='5' cols='40'>".entites_html($extra[$champ])."</textarea>\n";
 				break;
 
 			case "masque":
-				$affiche .= "<label for='etendu_$champ'>$prettyname&nbsp;:</label>";
+				$affiche .= "<label for='etendu_$champ'>$prettyname</label>";
 				$affiche .= "<span style='color:#555'>".interdire_scripts($extra[$champ])."</span>\n";
 				break;
 
 			case "ligne":
 			case "line":
 			default:
-				$affiche .= "<label for='etendu_$champ'>$prettyname&nbsp;:</label>";
-				$affiche .= "<INPUT TYPE='text' NAME='etendu_$champ' CLASS='forml'\n";
+				$affiche .= "<label for='etendu_$champ'>$prettyname</label>";
+				$affiche .= "<INPUT TYPE='text' NAME='etendu_$champ' CLASS='formo'\n";
 				$affiche .= " VALUE=\"".entites_html($extra[$champ])."\" SIZE='40'>\n";
 				break;
 		}
@@ -332,7 +358,7 @@ function etendu_form($extra, $type_profil, $ensemble='') {
 //		$affiche .= "\n";
 //		$affiche .= "<p>\n";
 	}
-	return $affiche;
+	return array($affiche,$titre_form);
 
 }
 

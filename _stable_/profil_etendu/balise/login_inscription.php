@@ -27,19 +27,20 @@ function balise_LOGIN_INSCRIPTION ($p, $nom='LOGIN_INSCRIPTION') {
 #    programme une <boucle(AUTEURS)>[(#LOGIN_INSCRIPTION{#LOGIN})]
 
 function balise_LOGIN_INSCRIPTION_stat ($args, $filtres) {
-	return array($filtres[0] ? $filtres[0] : $args[0], $args[1], $args[2]);
+	return array($filtres[0] ? $filtres[0] : $args[0]);
 }
 
-function balise_LOGIN_INSCRIPTION_dyn($url, $login) {
+function balise_LOGIN_INSCRIPTION_dyn($url) {
 
 	if (!$url 		# pas d'url passee en filtre ou dans le contexte
 	AND !$url = _request('url') # ni d'url passee par l'utilisateur
 	)
 		$url = str_replace('&amp;', '&', self());
-	return login_explicite_inscription($login, $url);
+	
+	return login_explicite_inscription( $url);
 }
 
-function login_explicite_inscription($login, $cible) {
+function login_explicite_inscription($cible) {
 	global $auteur_session;
 
 	$action = str_replace('&amp;', '&', self());
@@ -66,11 +67,100 @@ function login_explicite_inscription($login, $cible) {
 				redirige_par_entete($cible);
 			else {
 				include_spip('inc/minipres');
-				return '';//http_href($cible, _T('login_par_ici'));
+				return http_href($cible, _T('login_par_ici'));
 			}
-		} else
-			return ''; # on est arrive on bon endroit, et logue'...
+		} else{
+				include_spip('inc/minipres');
+				return http_href(_request('redir'), _T('login_par_ici'));
+			
+			//return ''; # on est arrive on bon endroit, et logue'...
+		}
 	}
-	return login_pour_tous($login ? $login : _request('var_login'), $cible, $action);
+	return login_pour_tous2( _request('var_login'), $cible, $action);
 }
+function login_pour_tous2($login, $cible, $action) {
+	global $ignore_auth_http, $_SERVER, $_COOKIE;
+
+	// en cas d'echec de cookie, inc_auth a renvoye vers le script de
+	// pose de cookie ; s'il n'est pas la, c'est echec cookie
+	// s'il est la, c'est probablement un bookmark sur bonjour=oui,
+	// et pas un echec cookie.
+	if (_request('var_echec_cookie'))
+		$echec_cookie = ($_COOKIE['spip_session'] != 'test_echec_cookie');
+	else $echec_cookie = '';
+
+	$pose_cookie = generer_url_public('spip_cookie');
+	$auth_http = '';	
+	if ($echec_cookie AND !$ignore_auth_http) {
+		include_spip('inc/headers');
+		if (php_module()) $auth_http = $pose_cookie;
+	}
+	// Attention dans le cas 'intranet' la proposition de se loger
+	// par auth_http peut conduire a l'echec.
+	if (isset($_SERVER['PHP_AUTH_USER']) AND isset($_SERVER['PHP_AUTH_PW']))
+		$auth_http = '';
+
+	// Le login est memorise dans le cookie d'admin eventuel
+	if (!$login) {
+		if (ereg("^@(.*)$", $_COOKIE['spip_admin'], $regs))
+			$login = $regs[1];
+	} else if ($login == '-1')
+		$login = '';
+
+	$erreur = '';
+	if ($login) {
+		$row =  spip_abstract_fetsel('*', 'spip_auteurs', "login=" . spip_abstract_quote($login));
+		// Retrouver ceux qui signent de leur nom ou email
+		if (!$row AND !$GLOBALS['ldap_present']) {
+			$row = spip_abstract_fetsel('*', 'spip_auteurs', "(nom = " . spip_abstract_quote($login) . " OR email = " . spip_abstract_quote($login) . ") AND login<>'' AND statut<>'5poubelle'");
+			if ($row) {
+				$login_alt = $login; # afficher ce qu'on a tape
+				$login = $row['login'];
+			}
+		}
+
+		if ((!$row AND !$GLOBALS['ldap_present']) OR
+			($row['statut'] == '5poubelle') OR 
+			(($row['source'] == 'spip') AND $row['pass'] == '')) {
+			$erreur =  _T('login_identifiant_inconnu',
+				array('login' => htmlspecialchars($login)));
+			$row = array();
+			$login = '';
+			include_spip('inc/cookie');
+			spip_setcookie("spip_admin", "", time() - 3600);
+		} else {
+			// on laisse le menu decider de la langue
+			unset($row['lang']);
+		}
+	}
+	if (!$row)
+		$row = array();
+	// afficher "erreur de mot de passe" si &var_erreur=pass
+	if (_request('var_erreur') == 'pass')
+		$erreur = _T('login_erreur_pass');
+
+	// le formulaire utilise le filtre |chercher_logo si un id_auteur est la...
+	include_spip('inc/logos');
+
+	// Appeler le squelette formulaire_login
+	return array('formulaires/formulaire_login', $GLOBALS['delais'],
+		array_merge(
+				array_map('texte_script', $row),
+				array(
+					'action2' => ($login ? $pose_cookie: $action),
+					'erreur' => $erreur,
+					'action' => $action,
+					'url' => $cible,
+					'auth_http' => $auth_http,
+					'echec_cookie' => ($echec_cookie ? ' ' : ''),
+					'login' => $login,
+					'login_alt' => (isset($login_alt) ? $login_alt : $login),
+					'self' => str_replace('&amp;', '&', self())
+					)
+				)
+			);
+
+}
+
+
 ?>

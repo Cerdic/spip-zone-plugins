@@ -31,6 +31,7 @@ $document_root=$_SERVER['DOCUMENT_ROOT'];
 if (!$GLOBALS["auteur_session"]) return '';
 $message='';
 $page=addslashes(_request('page'));
+$id_article_edit=intval(_request('id_article_edit'));
 $gerer_surtitre = (lire_meta("articles_surtitre")=='oui');
 $gerer_soustitre = (lire_meta("articles_soustitre")=='oui');
 $gerer_descriptif = (lire_meta("articles_descriptif")=='oui');
@@ -99,12 +100,16 @@ $gerer_lang = (lire_meta("multi_articles")=='oui');
 	$form_prefixe= 'fma'.$id_article.'_';
 	$valider= (_request($form_prefixe.'valider')=='oui');
 	$editer= (_request($form_prefixe.'editer')=='oui');
-    $hidden = "<input type='hidden' name='id_article' value='".$id_article."'/>";
-	$hidden .= "<input type='hidden' name='page' value='".$page."'/>";
+    if($page) $hidden .= "<input type='hidden' name='page' value='".$page."'/>";
+	if($id_article_edit) $hidden .= "<input type='hidden' name='id_article_edit' value='".$id_article_edit."'/>";
+	else $hidden .= "<input type='hidden' name='id_article' value='".$id_article."'/>";
 	if ($flag_modif){ 
 //		$hidden .= "<input type='hidden' name='".$form_prefixe."editer' value='oui'/>";
 		$hidden .= "<input type='hidden' name='".$form_prefixe."valider' value='oui'/>";
-		$fma_form="<form action='spip.php?page=".$page."&id_article=".$id_article."' method='POST' enctype='multipart/form-data'>".$hidden;
+//if ($id_article_edit)
+		$fma_form="<form action='".parametre_url(parametre_url(self(),"id_article_edit",""),$form_prefixe."editer","")."' method='POST' enctype='multipart/form-data'>".$hidden;
+//else
+//		$fma_form="<form action='spip.php?page=".$page."&id_article=".$id_article."' method='POST' enctype='multipart/form-data'>".$hidden;
 		$url_edit=parametre_url(self(),$form_prefixe."editer","oui");
 //		$url_edit=parametre_url($url_edit,$form_prefixe."valider","oui");
 	}
@@ -208,7 +213,6 @@ $gerer_lang = (lire_meta("multi_articles")=='oui');
 					'redirect_url'=>$url_edit
 			));
 	}
-
 	return array('formulaires/formulaire_afficher_article'.$GLOBALS['profil_etendu_type_formulaire'], 0, 
 //	return array('formulaires/formulaire_modifier_article', 60, 
 					array('id_article' => $id_article,
