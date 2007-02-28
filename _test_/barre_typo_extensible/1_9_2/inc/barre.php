@@ -39,11 +39,11 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 		."\"\n class='spip_barre' tabindex='1000' title=\""
 		. $a
 		."\"" 
-		.(!_DIR_RESTREINT ? '' :  " onmouseover=\"helpline('"
+		/*.(!_DIR_RESTREINT ? '' :  " onmouseover=\"helpline('"
 		  .addslashes($a)
 		  ."',$champhelp)\" onmouseout=\"helpline('"
 		  .attribut_html(_T('barre_aide'))
-		  ."', $champhelp)\"")
+		  ."', $champhelp)\"")*/
 		."><img src='"
 		.$img
 		."' height='16' width='16' alt=\"".$a."\" /></a>";
@@ -275,9 +275,9 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	include_spip('inc/layer');
 	if (!$GLOBALS['browser_barre']) return '';
 	if (!$lang) $lang = $spip_lang;
-	$layer_public = '<script type="text/javascript" src="' . find_in_path('javascript/layer.js').'"></script>';
-	$ret = ($num_barre > 0)  ? '' :
-	  $layer_public . '<script type="text/javascript" src="' . find_in_path('js/spip_barre.js').'"></script>';
+//	$layer_public = '<script type="text/javascript" src="' . find_in_path('javascript/layer.js').'"></script>';
+//	$ret = ($num_barre > 0)  ? '' :
+//	  $layer_public . '<script type="text/javascript" src="' . find_in_path('js/spip_barre.js').'"></script>';
 
 
 	$num_barre++;
@@ -301,6 +301,21 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$toolbox .= $add;
 ///////////////////////////
 //
+	 $ret .= '<script type="text/javascript"><!--
+
+function MajPreviewCallBack(id) {
+	$.post("' . generer_url_ecrire("article_preview",""). '", { texte:$("#"+id).val() }, function(data) {
+		$("#article_preview").empty()
+		$("#article_preview").append(data);
+		});
+}
+
+function MajPreview(id) {
+	if ($("#article_preview").size()>0) {
+		delayFunction("MajPreviewCallBack",1,id);
+	}
+}
+	 //--></script>';
 
 	$ret .= "<table class='spip_barre' style='width:auto;' cellpadding='0' cellspacing='0' border='0' summary=''>";
 	$ret .= "\n<tr style='width: auto;' class='spip_barre'>";
@@ -417,24 +432,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 	$ret .= "</table>";
 	 $ret .= $toolbox;
-	 $ret .= '<script type="text/javascript"><!--
-
-function MajPreviewCallBack(id) {
-//	alert(\'MajPreviewCallBack:\'+id);
-	$.post("' . generer_url_ecrire("article_preview",""). '", { texte:$("#"+id).val() }, function(data) {
-		$("#article_preview").empty()
-		$("#article_preview").append(data);
-		});
-}
-
-function MajPreview(id) {
-//	alert(\'MajPreview:\'+id);
-	//if ($("#article_preview").css("display") != "none") {
-	if ($("#article_preview").size()>0) {
-		delayFunction("MajPreviewCallBack",1,id);
-	}
-}
-	 //--></script>';
 	return $ret;
 }
 
@@ -446,7 +443,7 @@ function afficher_textarea_barre($texte, $forum=false)
 	$rows = ($spip_ecran == "large") ? 28 : 15;
 
 	return (($spip_display == 4) ? '' :
-		afficher_barre('document.formulaire.texte', $forum))
+		afficher_barre('document.getElementById(\'texte\')', $forum))
 	. "<textarea name='texte' id='texte' "
 	. $GLOBALS['browser_caret']
 	. " rows='$rows' class='formo' cols='40'>"
