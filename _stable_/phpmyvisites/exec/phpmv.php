@@ -25,124 +25,6 @@ if (!defined('_DIR_PLUGIN_PHPMV')){
 	define('_DIR_PLUGIN_PHPMV',(_DIR_PLUGINS.end($p)).'/');
 }
 
-function verif_install(){
-	// gestion de l'install et repertoires, selon les versions
-	if (defined('_DIR_TMP')){
-		define('_PHPMV_DIR_DATA',realpath(_DIR_TMP . "phpmvdatas"));
-		if (!is_dir(_DIR_TMP."phpmvdatas"))
-			sous_repertoire(_DIR_TMP, "phpmvdatas");
-	}
-	else {
-		define('_PHPMV_DIR_DATA',realpath(_DIR_SESSIONS . "phpmvdatas"));
-		if (!is_dir(_DIR_SESSIONS."phpmvdatas"))
-			sous_repertoire(_DIR_SESSIONS, "phpmvdatas");
-	}
-	if (defined('_DIR_ETC')){
-		if (!is_dir(_DIR_ETC."phpmvconfig"))
-			sous_repertoire(_DIR_ETC, "phpmvconfig");
-		if (is_dir(_DIR_ETC."phpmvconfig"))
-			define('_PHPMV_DIR_CONFIG',realpath(_DIR_ETC . "phpmvconfig"));
-	}
-	if (!defined('_PHPMV_DIR_CONFIG')){
-		define('_PHPMV_DIR_CONFIG',realpath(_DIR_SESSIONS . "phpmvconfig"));
-		if (!is_dir(_DIR_SESSIONS."phpmvconfig"))
-			sous_repertoire(_DIR_SESSIONS, "phpmvconfig");
-	}
-
-	if (@file_exists(_PHPMV_DIR_CONFIG."config.php"))
-		return;
-
-	if (!defined('_FILE_CONNECT')){
-		define('_FILE_CONNECT',
-		  (@is_readable($f = _DIR_RESTREINT . 'inc_connect.php') ? $f
-		:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php3') ? $f
-		:	false)));
-	}
-	if (lire_fichier(_FILE_CONNECT,$connect) && preg_match(',spip_connect_db\(([^\)]*)\),i',$connect,$r)){
-		$pars = explode(',',$r[1]);
-		$host = substr($pars[0],1,strlen($pars[0])-2);
-		$port = substr($pars[1],1,strlen($pars[1])-2);
-		$login = substr($pars[2],1,strlen($pars[2])-2);
-		$pass = substr($pars[3],1,strlen($pars[3])-2);
-		$db = substr($pars[4],1,strlen($pars[4])-2);
-		$url = url_de_base()._DIR_PLUGIN_PHPMV;
-		
-		define('DB_LOGIN',$login);
-		define('DB_PASSWORD',$pass);
-		define('DB_HOST',$host);
-		define('DB_NAME',$db);
-
-		$conf = '<'.'?php 
-$siteInfo = array ('."
-  1 => 
-  array (
-    'idsite' => '1',
-    'name' => '".$GLOBALS['meta']['nom_site']."',
-    'logo' => 'pixel.gif',
-    'params_choice' => 'all',
-    'params_names' => '',
-  ),
-);
-?".'>';
-		ecrire_fichier(_PHPMV_DIR_CONFIG."/site_info.php",$conf);
-		$conf = '<'.'?php 
-$siteUrls = array ('."
-  1 => 
-  array (
-    0 => '".$GLOBALS['meta']['adresse_site']."',
-  ),
-);
-?".'>';
-		ecrire_fichier(_PHPMV_DIR_CONFIG."/site_urls.php",$conf);
-		
-		return;
-
-		/*define('_PHPMV_DIR_CONFIG',realpath(_DIR_SESSIONS . "phpmvconfig"));
-		define('_PHPMV_DIR_DATA',realpath(_DIR_SESSIONS . "phpmvdatas"));
-		chdir(_DIR_PLUGIN_PHPMV);
-		require_once INCLUDE_PATH . '/core/include/PmvConfig.class.php';
-		require_once INCLUDE_PATH . '/core/include/ApplicationController.php';
-		require_once INCLUDE_PATH . '/core/include/Request.class.php';
-		require_once INCLUDE_PATH . '/core/include/Module.class.php';
-		require_once INCLUDE_PATH . '/core/include/global.php';
-		require_once INCLUDE_PATH . '/core/include/Lang.class.php';
-		require_once INCLUDE_PATH . '/core/include/User.class.php';
-		
-		$configPhpFileContent = array(
-			'db_login' => $login,
-			'db_password' => $pass,
-			'db_host' => $host,
-			'db_name' => $db,
-			'db_tables_prefix' => 'phpmv_',
-		);
-		
-		$db =& Db::getInstance();
-		
-		// try to connect with new values
-		$db->host = $configPhpFileContent['db_host'];
-		$db->login = $configPhpFileContent['db_login'];
-		$db->password = $configPhpFileContent['db_password'];
-		$db->name = $configPhpFileContent['db_name'];
-		$db->init();
-		
-		if($db->isReady())
-		{
-			$c =& PmvConfig::getInstance();
-			$c->update( $configPhpFileContent );
-			
-			$c->write();
-			$c->defineAsConstant( $c->content );
-			$c->defineTables();			
-			$db->createAllTables();
-		}*/
-					
-		//$db->connect();
-		//$db->createAllTables();
-	}
-	
-}
-
-
 function exec_phpmv(){
 	global $connect_statut;
 	include_spip('inc/presentation');
@@ -169,13 +51,16 @@ function exec_phpmv(){
 	}
 	
 	define('INCLUDE_PATH', '.');
-	
-	verif_install();
-	
-	if (!isset($GLOBALS['meta']['PHPMyVisites_no_admin_stat'])){
-		ecrire_meta('PHPMyVisites_no_admin_stat','non');
-		ecrire_metas();
+	if (!isset($GLOBALS['meta']['_DIR_PLUGIN_PHPMV']) 
+	OR $GLOBALS['meta']['_DIR_PLUGIN_PHPMV']!=_DIR_PLUGIN_PHPMV
+	OR !file_exists(_PHPMV_DIR_CONFIG."config.php") ){
+		include_spip("inc/phpmv_install");
+		phpmv_verif_install();
 	}
+
+	@define('_PHPMV_DIR_CONFIG',$GLOBALS['meta']['phpmv_dir_config']);
+	@define('_PHPMV_DIR_DATA',$GLOBALS['meta']['phpmv_dir_data']);
+	
 	$PHPMyVisites_no_admin_stat = $GLOBALS['meta']['PHPMyVisites_no_admin_stat'];
 	
 	$cwd = getcwd();
