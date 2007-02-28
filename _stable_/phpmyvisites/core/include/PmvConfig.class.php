@@ -86,7 +86,7 @@ class PmvConfig
 	{       
 		foreach ($a_vars as $constName => $constValue) 
 		{
-			define(strtoupper($constName), $constValue);
+			@define(strtoupper($constName), $constValue);
 		}
 	}
 	
