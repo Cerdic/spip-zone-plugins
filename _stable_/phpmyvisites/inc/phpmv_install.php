@@ -123,7 +123,7 @@
 		effacer_meta('_DIR_PLUGIN_PHPMV');
 		ecrire_metas();
 		// la config
-		$fichiers = preg_files(_PHPMV_DIR_CONFIG,".*");
+		$fichiers = preg_files(_PHPMV_DIR_CONFIG.'/',".*");
 		foreach($fichiers as $f)
 			@unlink($f);
 		@unlink(_PHPMV_DIR_CONFIG);
