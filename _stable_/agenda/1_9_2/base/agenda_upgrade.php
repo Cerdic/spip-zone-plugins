@@ -86,7 +86,16 @@
 		$version_base = $GLOBALS['agenda_base_version'];
 		switch ($action){
 			case 'test':
-				return (isset($GLOBALS['meta']['agenda_base_version']) AND ($GLOBALS['meta']['agenda_base_version']>=$version_base));
+				return (isset($GLOBALS['meta']['agenda_base_version']) AND ($GLOBALS['meta']['agenda_base_version']>=$version_base)
+				AND isset($GLOBALS['meta']['INDEX_elements_objet'])
+				AND $t = unserialize($GLOBALS['meta']['INDEX_elements_objet'])
+				AND isset($t['spip_evenements'])
+				AND isset($GLOBALS['meta']['INDEX_objet_associes'])
+				AND $t = unserialize($GLOBALS['meta']['INDEX_objet_associes'])
+				AND isset($t['spip_articles']['spip_evenements'])
+				AND isset($GLOBALS['meta']['INDEX_elements_associes'])
+				AND $t = unserialize($GLOBALS['meta']['INDEX_elements_associes'])
+				AND isset($t['spip_evenements']));
 				break;
 			case 'install':
 				Agenda_verifier_base();
