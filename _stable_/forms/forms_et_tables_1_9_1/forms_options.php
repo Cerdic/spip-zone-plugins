@@ -76,7 +76,7 @@ function autoriser_donnee_dist($faire,$type,$id_donnee,$qui,$opt){
 	)
 
 	)
-		$a = $f($faire,$type,intval($id),$qui,$opt);
+		$a = $f($faire,$type,intval($id_donnee),$qui,$opt);
 	if (_DEBUG_AUTORISER) spip_log("autoriser_form_donnee_dist delegue a $f($faire,$type,$id): ".($a?'OK':'niet'));
 	return $a;
 }
