@@ -333,12 +333,12 @@ function exec_portfolio_edit(){
 			if ($utile) {
 				$puce = 'puce-verte.gif';
 				$doc['info'] .= "<a href='$url' title='$link_title'>";
-				$doc['info'] .= "<img src='"._DIR_IMG_PACK."$puce' width='7' height='7' border='0'>&nbsp;";
+				$doc['info'] .= "<img src='"._DIR_IMG_PACK."$puce' width='7' height='7' border='0' />&nbsp;";
 				$doc['info'] .= "</a>";
 			}
 			else {
 				$puce = 'puce-orange.gif';
-				$doc['info'] .= "<img src='"._DIR_IMG_PACK."$puce' width='7' height='7' border='0'>&nbsp;";
+				$doc['info'] .= "<img src='"._DIR_IMG_PACK."$puce' width='7' height='7' border='0' />&nbsp;";
 			}
 
 			if ($alt == "")
@@ -505,13 +505,13 @@ function exec_portfolio_edit(){
 			echo "</table>";
 			if ($f != 'afficher_portfolio') echo $ret; // spip>=1.9.2
 
-			echo "<a name='bas'>";
+			echo "<a name='bas' />";
 			echo "<table width='100%' border='0'>";
 			
 			$debut_suivant = $t_debut + $nb_aff;
 			if ($debut_suivant < $nombre_documents OR $t_debut > 0) {
-				echo "<tr height='10'></tr>";
-				echo "<tr bgcolor='white'><td align='left'>";
+				echo "<tr style='height:10px;'><td>&nbsp;</td></tr>";
+				echo "<tr bgcolor='white'><td style='text-align:left;'>";
 				if ($t_debut > 0) {
 					$debut_prec = max($t_debut - $nb_aff, 0);
 					echo generer_url_post_ecrire("portfolio_edit",generer_query_string($conteneur,$id_type,$nb_aff,$filtre)."t_debut=$debut_prec"),
