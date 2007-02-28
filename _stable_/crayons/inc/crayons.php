@@ -29,12 +29,16 @@ if (MODIFIER_SIGNATURES AND !function_exists('autoriser_signature_modifier')) {
 function colonne_table($table, $col)
 {
 	include_spip('base/serial');
-	global $tables_principales;
-	if (!isset($tables_principales['spip_' . table_objet($table)]['field'][$col])) {
-		return false;
+	$categ = 'tables_principales';
+	if (!isset($GLOBALS[$categ]['spip_' . table_objet($table)]['field'][$col])) {
+		include_spip('base/auxiliaires');
+		$categ = 'tables_auxiliaires';
+		if (!isset($GLOBALS[$categ]['spip_' . table_objet($table)]['field'][$col])) {
+			return false;
+		}
 	}
 	$ana = explode(' ',
-		$brut = $tables_principales['spip_' . table_objet($table)]['field'][$col]);
+		$brut = $GLOBALS[$categ]['spip_' . table_objet($table)]['field'][$col]);
 	$sta = 0;
 	$sep = '';
 	$ret = array('brut' => $brut,
