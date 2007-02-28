@@ -342,7 +342,7 @@ function exec_portfolio_edit(){
 			}
 
 			if ($alt == "")
-				$doc['info'] .= _T("gestdoc:attr_alt").htmlentities($montexte);
+				$doc['info'] .= _T("gestdoc:attr_alt");
 			else {
 				if ($altgood == true)
 					$doc['info'] .= "<span style='background : #00FF00;'>";
