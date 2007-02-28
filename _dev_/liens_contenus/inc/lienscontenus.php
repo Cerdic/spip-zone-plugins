@@ -374,14 +374,15 @@ function lienscontenus_verification_mots_tous()
                 });
             }
             // TODO : comment intercepter la modification de ces divs par AjaxSqueeze ?
+            /*
             $('div[@id^=editer_mot-]').ajaxSuccess(gestionDesSuppressionsDeMotsApresMaj);
             function gestionDesSuppressionsDeMotsApresMaj()
             {
                 $(this).unbind('ajaxSuccess');
-                alert('stop');
-//                gestionDesSuppressionsDeMots();
+                gestionDesSuppressionsDeMots();
                 $(this).ajaxSuccess(gestionDesSuppressionsDeMotsApresMaj);
             }
+            */
             gestionDesSuppressionsDeMots();
         });
         </script>
