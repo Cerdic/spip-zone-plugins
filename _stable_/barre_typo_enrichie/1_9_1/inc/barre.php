@@ -49,7 +49,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 		."' height='16' width='16' alt=\"".$a."\" /></a>";
 }
 
-// sert à construire les sousbarre
+// sert a construire les sousbarre
 function produceWharf($id, $title = '', $sb = '') {
   $visible = ($changer_virtuel || $virtuel);
   $res .= $title;
@@ -177,7 +177,7 @@ _T('bartypenr:barre_gestion_anc_bulle')
   return produceWharf('tableau_ancre','',$tableau_formulaire); 	
 }
 
-// pour les caractères
+// pour les caracteres
 function afficher_caracteres($champ, $spip_lang, $champhelp) {
 
 	// guillemets
@@ -227,7 +227,7 @@ $tableau_formulaire = '
   return produceWharf('tableau_caracteres','',$tableau_formulaire); 	
 }
 
-// pour les caractères
+// pour les caracteres
 function afficher_boutonsavances($champ, $champhelp) {
 
 $reta = '';
@@ -270,7 +270,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$champhelp = "document.getElementById('barre_$num_barre')";
 
 
- // Prégénération des toolzbox.. (wharfing)
+ // Pregeneration des toolzbox.. (wharfing)
     $toolbox .= afficher_boutonsavances($champ, $champhelp);
 	$toolbox .= afficher_caracteres($champ, $spip_lang, $champhelp);
     //$toolbox .= afficher_gestion_tableau($champ);

@@ -1,22 +1,22 @@
 <?php
 
 /*
-  * Ce plugin rajoute des raccourcis typographique et améliore les possibilités de la barre typographique pour les rédacteurs
+  * Ce plugin rajoute des raccourcis typographique et ameliore les possibilites de la barre typographique pour les redacteurs
 */
 
 	/*
 	 *    Fonctions de ces filtres :
-	 *     Ils rajoutent quelques racourcis typo à SPIP
+	 *     Ils rajoutent quelques racourcis typo a SPIP
 	 *
 	 *     Syntaxe des raccourcis :
-	 *           [/texte/] : aligner le texte à droite
+	 *           [/texte/] : aligner le texte a droite
 	 *           [|texte|] : centrer le texte
-	 *           [(texte)] : encadrer le texte (occupe toute la largeur de la page, à mettre autour d'un paragraphe)
-	 *           [*texte*] : encadrer/surligner le texte (une partie à l'intérieur d'un paragraphe)
-	 *           [**texte*] : variante encadrer/surligner le texte (une partie à l'intérieur d'un paragraphe)
-	 *           <sup>texte</sup> : mettre en exposant le texte sélectionné
+	 *           [(texte)] : encadrer le texte (occupe toute la largeur de la page, a mettre autour d'un paragraphe)
+	 *           [*texte*] : encadrer/surligner le texte (une partie a l'interieur d'un paragraphe)
+	 *           [**texte*] : variante encadrer/surligner le texte (une partie a l'interieur d'un paragraphe)
+	 *           <sup>texte</sup> : mettre en exposant le texte selectionne
 	 *
-	 *     Styles pour les encadrements à rajouter dans votre feuille de style :
+	 *     Styles pour les encadrements a rajouter dans votre feuille de style :
 	 *            .texteencadre-spip {
 	 *           	background: #FFE;
 	 *           	border-bottom: 2px solid #999999;
@@ -33,8 +33,8 @@
 	*/
 
 function BarreTypoEnrichie_pre_propre($texte) {
-	// remplace les fausses listes à puce par de vraies
-	// (recherche en début de lignes - suivi d'un ou plusieurs caractères blancs, en mode multiligne)
+	// remplace les fausses listes a puce par de vraies
+	// (recherche en debut de lignes - suivi d'un ou plusieurs caracteres blancs, en mode multiligne)
 	// Mettre $GLOBALS['barre_typo_preserve_puces'] = true; dans mes_options.php pour ne pas avoir ce comportement
 	if ($GLOBALS['barre_typo_pas_de_fausses_puces'] === true)
 		$texte =  preg_replace('/^-\s+/m','-* ',$texte);
@@ -42,7 +42,7 @@ function BarreTypoEnrichie_pre_propre($texte) {
 	// tous les elements block doivent etre introduits ici
 	// pour etre pris en charge par paragrapher
 
-	// Definition des différents intertitres possibles, si pas deja definies
+	// Definition des differents intertitres possibles, si pas deja definies
 	tester_variable('debut_intertitre', '<h3 class="spip">');
 	tester_variable('fin_intertitre', '</h3>');
 	tester_variable('debut_intertitre_2', '<h4 class="spip">');
@@ -118,8 +118,8 @@ function BarreTypoEnrichie_pre_propre($texte) {
 
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
 
-	// remplace les fausses listes à puce par de vraies
-	// (recherche en début de lignes - suivi d'un ou plusieurs caractères blancs, en mode multiligne)
+	// remplace les fausses listes a puce par de vraies
+	// (recherche en debut de lignes - suivi d'un ou plusieurs caracteres blancs, en mode multiligne)
 	// $texte =  preg_replace('/^-\s+/m','-* ',$texte); # deja fait dans post_propre
 
 	return $texte;
@@ -127,24 +127,24 @@ function BarreTypoEnrichie_pre_propre($texte) {
 
 function BarreTypoEnrichie_post_propre($texte) {
 
-	# Le remplacement des intertitres de premier niveau a déjà été effectué dans inc/texte.php
+	# Le remplacement des intertitres de premier niveau a deja ete effectue dans inc/texte.php
 
-	# Intertitre de deuxième niveau
+	# Intertitre de deuxieme niveau
 	/*global $debut_intertitre_2, $fin_intertitre_2;
 	$texte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre_2@@', $debut_intertitre_2, $texte);
 	$texte = ereg_replace('@@SPIP_fin_intertitre_2@@[[:space:]]*(</p>)?', $fin_intertitre_2, $texte);*/
 
-	# Intertitre de troisième niveau
+	# Intertitre de troisieme niveau
 	/*global $debut_intertitre_3, $fin_intertitre_3;
 	$texte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre_3@@', $debut_intertitre_3, $texte);
 	$texte = ereg_replace('@@SPIP_fin_intertitre_3@@[[:space:]]*(</p>)?', $fin_intertitre_3, $texte);*/
 
-	# Intertitre de quatrième niveau
+	# Intertitre de quatrieme niveau
 	/*global $debut_intertitre_4, $fin_intertitre_4;
 	$texte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre_4@@', $debut_intertitre_4, $texte);
 	$texte = ereg_replace('@@SPIP_fin_intertitre_4@@[[:space:]]*(</p>)?', $fin_intertitre_4, $texte);*/
 
-	# Intertitre de cinquième niveau
+	# Intertitre de cinquieme niveau
 	/*global $debut_intertitre_5, $fin_intertitre_5;
 	$texte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre_5@@', $debut_intertitre_5, $texte);
 	$texte = ereg_replace('@@SPIP_fin_intertitre_5@@[[:space:]]*(</p>)?', $fin_intertitre_5, $texte);*/
@@ -239,7 +239,7 @@ function BarreTypoEnrichie_post_typo($texte) {
 	// Acronymes
 	$texte = preg_replace('/@@acro@@([^@]*)@@([^@]*)@@acro@@/S',"<acronym title='$1' class='spip_acronym spip'>$2</acronym>",$texte);
 	// Correction des & en &amp;
-	$texte = preg_replace('/&([A-Za-z#0-9]*);/','@@@amp:\1:amp@@@',$texte); // échapement des entités html déjà présentes
+	$texte = preg_replace('/&([A-Za-z#0-9]*);/','@@@amp:\1:amp@@@',$texte); // echapement des entites html deja presentes
 	$texte = str_replace('&','&amp;',$texte);
 	$texte = preg_replace('/@@@amp:([A-Za-z#0-9]*):amp@@@/','&\1;',$texte);
 	// Raccourci typographique <sc></sc>
