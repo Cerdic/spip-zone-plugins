@@ -80,8 +80,7 @@ $GLOBALS['fin_intertitre_5'] = '</h6>';
 	<prefix> 
 	BarreTypoEnrichie
 	</prefix>
-	<options> <!-- fichier charge a chaque hit -->
-	</options>
+	<options>typo_options.php</options>
 	<icon>
 	img_pack/moinecopiste.gif
 	</icon>
