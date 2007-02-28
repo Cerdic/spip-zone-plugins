@@ -69,7 +69,7 @@ function lienscontenus_affiche_droite($flux)
 function lienscontenus_header_prive($flux)
 {
 	// On ajoute une CSS pour le back-office
-	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_LIENS_CONTENUS.'/css/styles.css" />';
+	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_LIENSCONTENUS.'/css/styles.css" />';
 	return $flux;
 }
 ?>

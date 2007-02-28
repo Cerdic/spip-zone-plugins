@@ -160,7 +160,7 @@ function lienscontenus_initialiser()
 function lienscontenus_boite_liste($type_objet, $id_objet)
 {
     $data = "\n";
-    $data .= debut_cadre_relief('../'._DIR_PLUGIN_LIENS_CONTENUS.'/images/liens_contenus-24.gif', true);
+    $data .= debut_cadre_relief('../'._DIR_PLUGIN_LIENSCONTENUS.'/images/liens_contenus-24.gif', true);
     include_spip('public/assembler');
 	$contexte = array('type_objet' => $type_objet, 'id_objet' => $id_objet);
 	$data .= recuperer_fond('exec/lienscontenus_liste', $contexte);
@@ -362,9 +362,6 @@ function lienscontenus_verification_mots_tous()
                         if (confirm(messageConfirmationSuppression)) {
                             if(event.data.origclick) {
                                 event.data.origclick.apply(this);
-                                // On relance la detection apres la mise a jour
-                                // TODO : executer apres le AjaxSqueeze de origclick, qui est asynchrone !
-                                gestionDesSuppressionsDeMots();
                                 return false;
                             } else {
                                 // Si on n'a pas de onclick a l'origine, c'est que le href doit etre suivi
@@ -376,9 +373,16 @@ function lienscontenus_verification_mots_tous()
                     }
                 });
             }
-            gestionDesSuppressionsDeMots();
             // TODO : comment intercepter la modification de ces divs par AjaxSqueeze ?
-            $('div[@id^=editer_mot-]').bind('change', function() { gestionDesSuppressionsDeMots() });
+            $('div[@id^=editer_mot-]').ajaxSuccess(gestionDesSuppressionsDeMotsApresMaj);
+            function gestionDesSuppressionsDeMotsApresMaj()
+            {
+                $(this).unbind('ajaxSuccess');
+                alert('stop');
+//                gestionDesSuppressionsDeMots();
+                $(this).ajaxSuccess(gestionDesSuppressionsDeMotsApresMaj);
+            }
+            gestionDesSuppressionsDeMots();
         });
         </script>
 EOS;

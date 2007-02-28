@@ -98,7 +98,7 @@ function lienscontenus_icone_statut($type_objet, $id_objet)
     if ($res = spip_query($query)) {
         $row = spip_fetch_array($res);
         if (in_array($row['statut'], $listeStatuts)) {
-            return '<img src="'._DIR_PLUGIN_LIENS_CONTENUS.'/images/statut-'.$row['statut'].'.gif" align="absmiddle" alt="'._T('lienscontenus:statut_'.$row['statut']).'" />';      
+            return '<img src="'._DIR_PLUGIN_LIENSCONTENUS.'/images/statut-'.$row['statut'].'.gif" align="absmiddle" alt="'._T('lienscontenus:statut_'.$row['statut']).'" />';      
         } else {
             return '';
         }
