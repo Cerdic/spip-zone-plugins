@@ -99,14 +99,12 @@ function afficher_cartes($titre_table, $requete, $icone = '') {
 	$group = $requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '';
 	$limit = $requete['LIMIT'] ? (' LIMIT ' . $requete['LIMIT']) : '';
 
-	$cpt = "$from$where";
+	$cpt = $from.$where;
 	$tmp_var = substr(md5($cpt), 0, 4);
 	
 	$res = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $cpt"));
 	$cpt = $res['n'];
-	
 	if ($cpt==0) return;
-	
 
 	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
 
@@ -202,7 +200,7 @@ function afficher_carte_interface($id_carte,$retour,$fichier,$callage, $id_img =
 <script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/js/x_event_nn4.js"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/js/navTools.js"></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_SPIPCARTO.'/js/graphTools.js"></script>
-<form method="post" action="#nouveau_objet" name="carto_form">
+<form id="carto_form" method="post" action="#nouveau_objet" name="carto_form">
  <input type="hidden" name="exec" value="carto_cartes_edit"/>
  <input type="hidden" name="id_carte" value="'.$id_carte.'"/>
  <input type="hidden" name="retour" value="'.$retour.'"/>
@@ -290,7 +288,7 @@ function afficher_carte_interface($id_carte,$retour,$fichier,$callage, $id_img =
       xHide(xGetElementById(\'mapAnchorDiv\')); 
     }
 	/*]]>*/
-  </script>
+</script>
 	<div id="mapAnchorDiv" style="position:relative; width:'.$width.'px; height:'.$height.'px;"> 
      <table>
       <tr> 
@@ -308,7 +306,7 @@ function afficher_carte_interface($id_carte,$retour,$fichier,$callage, $id_img =
   <tr>
    <td colspan="7">
    <table width="500"><tr>
-   <td> '._T("spipcarto:carte_draw").'
+   <td>'._T("spipcarto:carte_draw").'
     <!--<input type="radio" name="tool" value="rectangle,submit,crossHair,zoom_in"  id="zoom_in" onclick="dhtmlBox.changeTool()" />
           zoom_in<br />-->
    </td>
@@ -339,10 +337,50 @@ function afficher_carte_interface($id_carte,$retour,$fichier,$callage, $id_img =
    </td>
   </tr>
  </table>
-</form>';
+</form><script type="text/javascript">  
+		$(\'#bug\').click(function(){
+//		$(\'body\').click(\'mouseover\',function(){
+//		$(function(){
+//		$(document).ready(function(){
+//		$(\'#carto_form\').one(\'mouseover\',function(){
+//			$(\'div.dhtmldiv\').each(function(){alert($(this).attr(\'id\')+\'/\'+$(this).css(\'top\')+\'/\'+$(this).css(\'left\'))})
+			$(\'#mapImageDiv\').css(\'top\',\'40px\').css(\'left\',\'10px\');
+			$(\'#myCanvasDiv\').css(\'top\',\'40px\').css(\'left\',\'10px\');
+			$(\'#myCanvas2Div\').css(\'top\',\'40px\').css(\'left\',\'10px\');
+			$(\'#myCanvas3Div\').css(\'top\',\'40px\').css(\'left\',\'10px\');
+			$(\'#mainDHTMLDiv\').css(\'top\',\'40px\').css(\'left\',\'10px\');
+			$(\'#diplayContainerDiv\').css(\'top\',\'0px\').css(\'left\',\'250px\');
+		});	
+</script>
+';
 	return $returned;
 }
 
+function autoriser_carto_carte_administrer_dist($faire, $type, $id, $qui, $opt) {
+	//webmestre ?
+	$autorisation = autoriser_defaut($faire, $type, $id, $qui, $opt);
+}
+function autoriser_carto_carte_modifier_dist($faire, $type, $id, $qui, $opt) {
+	//webmestre ?
+	$autorisation = autoriser_defaut($faire, $type, $id, $qui, $opt);
+}
+function autoriser_carto_carte_voir_dist($faire, $type, $id, $qui, $opt) {
+	//webmestre ?
+	$autorisation = autoriser_defaut($faire, $type, $id, $qui, $opt);
+	if (!$autorisation) {
+		$s = spip_query("SELECT carte.statut as statut, count(objets.id_carto_objet) as publie_objets " .
+				"FROM spip_carto_cartes AS carte LEFT JOIN spip_carto_objets AS objets " .
+				"ON (objets.id_carto_carte=carte.id_carto_carte) " .
+				"WHERE carte.id_carto_carte=".intval($id)." ".
+				"GROUP BY statut");
+		$r = spip_fetch_array($s);
+		//rubrique visible
+		if (($r['statut']=='publie') && ($r['publie']))
+			return true;
+		else return false;
+	}
+	else return $autorisation;
+}
 function carte_editable() {
 	return true;
 }

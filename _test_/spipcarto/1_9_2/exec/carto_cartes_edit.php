@@ -38,7 +38,6 @@ e -
 \***************************************************************************/
 
 
-define('_DIR_PLUGIN_SPIPCARTO',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__).'/..'))))));
 
 /***********************************************************************/
 /* function*/
@@ -313,7 +312,9 @@ if ($supp_objet_all && !$supp_objet_confirme && !$supp_objet_rejet) {
 if ($id_carte) {
 	debut_cadre_relief("../"._DIR_PLUGIN_SPIPCARTO."img/carte-24.gif");
 	echo "<br/>";
+	echo "<span id='bug'>";
 	gros_titre($titre);
+	echo "</span>";
 	
 	if ($texte) {
 		echo "<p><div align='left' border: 1px dashed #aaaaaa;'>";

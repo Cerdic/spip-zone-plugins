@@ -37,7 +37,6 @@ e -
 *
 \***************************************************************************/
 
-define('_DIR_PLUGIN_SPIPCARTO',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__).'/..'))))));
 
 /***********************************************************************/
 /* function*/
@@ -66,7 +65,7 @@ function exec_carto_cartes() {
 	
 	
 	//TODO !!!
-	if (carte_administrable()) 
+	if (autoriser('administrer','carto_carte')) 
 	afficher_cartes(_T("spipcarto:cartes_toutes"),
 			array(
 		"SELECT"=>"cartes.*, COUNT(id_carto_objet) AS objets ",
@@ -76,6 +75,7 @@ function exec_carto_cartes() {
 		"GROUP BY"=>"cartes.id_carto_carte",
 		"ORDER BY"=>"cartes.titre"));
 
+	if (autoriser('voir','carto_carte')) 
 	afficher_cartes(_T("spipcarto:cartes_toutes"),
 			array(
 		"SELECT"=>"cartes.*, COUNT(id_carto_objet) AS objets ",
@@ -87,7 +87,8 @@ function exec_carto_cartes() {
 
 	echo "<br />\n";
 	
-	if (carte_editable()) {
+	if (autoriser('creer','carto_carte')) {
+		//TODO : afficher ses cartes
 		echo "<div align='right'>";
 		$link = generer_url_ecrire('carto_cartes_edit','new=oui&retour='.urlencode(generer_url_ecrire('carto_cartes')));
 		icone(_T("spipcarto:carte_creer"), $link, "../"._DIR_PLUGIN_SPIPCARTO."/img/carte-24.png", "creer.gif");

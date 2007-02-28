@@ -1,5 +1,4 @@
 <?php
-define('_DIR_PLUGIN_SPIPCARTO',(_DIR_PLUGINS.end(explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__).'/..'))))));
 
 function exec_config_spipcarto() {
   global $connect_statut, $connect_toutes_rubriques;
