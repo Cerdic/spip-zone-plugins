@@ -600,7 +600,9 @@ le message d'alerte.
 On vérifie que la ligne contienne un lien 
 et si celui-ci mêne nulle part, on affiche une alerte.
 */
-			if(preg_match("`&lt;a(.*?)href\s?=\s?(&quot;#&quot;|'#')(.*?)&gt;`i",$html[$i])){
+			if(preg_match("`&lt;a(.*?)href\s?=\s?(&quot;#&quot;|'#')(.*?)&gt;`i",$html[$i])
+				// ne faire une alerte que le lien comporte un on(click|press|..)
+			 AND preg_match(",on(click|press)\s*=,i",$html[3])){
 			$resultat.="</p><div class=\"rouge\"><span class=\"facile\">Très facile ! </span><a href=\"wiki/wiki/06_3_lien_javascript\" tabindex=\"$tab\" title=\"lien vers la page sur les liens\">Priorité 1 - Ce type de lien ne fonctionne pas si le javascrit est désactivé.</a></div><p>";
 			$erreur1++;
 			$tab++;
