@@ -4,7 +4,11 @@ function checklink_verifie_lien($url, $date_verif, $maj_statut){
 	include_spip('inc/distant');
 	$datas="";
 	$boundary="";
-	$statut = recuperer_page($url, false, false, 1048576, $datas, $boundary, false, $date_verif);
+	$url_abs = url_absolue($url);
+	if (!preg_match(",^([\w]{3-6})://,") AND $url_abs{0}!='/'){
+		$url_abs = suivre_lien(url_de_base(),$url_abs);
+	}
+	$statut = recuperer_page($url_abs, false, false, 1048576, $datas, $boundary, false, $date_verif);
 	// inchangee : on met juste a jour les infos
 	if ($statut==200){
 		spip_query("UPDATE spip_liens SET statut='oui',date_verif=NOW() WHERE url=".spip_abstract_quote($url));
@@ -19,7 +23,7 @@ function checklink_verifie_lien($url, $date_verif, $maj_statut){
 	}
 	// presente
 	// extraire le titre et la langue
-	$texte = $statut;
+	$texte = importer_charset($statut);
 	$titre = null;
 	$lang = null;
 	if (preg_match(',<title[^>]*>(.*)</title>,Uims',$texte,$reg))
