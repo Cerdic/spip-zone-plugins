@@ -1,9 +1,9 @@
 <?php
-function exec_lienscontenus_ajax_mot_contient()
+function exec_lienscontenus_ajax_doc_contenu()
 {
-    $id_mot = intval(_request('id_mot'));
+    $id_doc = intval(_request('id_doc'));
     include_spip('base/abstract_sql');
-    $query = "SELECT COUNT(*) AS nb FROM spip_liens_contenus WHERE type_objet_contenu='mot' AND id_objet_contenu="._q($id_mot);
+    $query = "SELECT COUNT(*) AS nb FROM spip_liens_contenus WHERE type_objet_contenu='document' AND id_objet_contenu="._q($id_doc);
     $res = spip_query($query);
     $row = spip_fetch_array($res);
     

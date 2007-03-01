@@ -181,8 +181,10 @@ function lienscontenus_verification_articles()
 {
     $data = lienscontenus_verification();
     $script = <<<EOS
+        <style>a.lienscontenus_oui { color: red; text-decoration: line-through; }</style>
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
+            // ETAPE 1 : Gestion des changements de statut de l'article
             // on recupere le statut actuel et le code par defaut du onchange
             var initialStatut = $('select[@name=statut_nouv] > option[@selected]').attr('value');
             var currentStatut = initialStatut;
@@ -212,11 +214,49 @@ function lienscontenus_verification_articles()
                     var newStatut = $('select[@name=statut_nouv] > option[@selected]').attr('value');
                     currentStatut = newStatut;
                     // on execute le onchange initial
-                            currentOnChange.apply(this);
+                    currentOnChange.apply(this);
+                }
+            });
+            // ETAPE 2 : Gestion des changements de statut de l'article
+            // on ajoute une classe specifique aux liens de suppression des docs
+            $('div[@id^=legender-]').each(function() {
+                var idDoc = $(this).attr('id').replace(/^legender-([0-9]+)$/g, '$1');
+                // on recupere "oui" si un autre contenu pointe vers le doc, "non" sinon 
+                var docContenu = $.ajax({
+                    url: '?exec=lienscontenus_ajax_doc_contenu',
+                    data: 'id_doc='+idDoc+'&var_ajaxcharset=utf-8',
+                    async: false,
+                    dataType: 'xml'
+                    }).responseText;
+                docContenu = $(docContenu).text();
+                $(this).find('a.cellule-h').addClass('lienscontenus_' + docContenu);
+            });
+            // on ne s'interesse qu'aux mots vers lesquels pointent d'autres contenus
+            $('a.lienscontenus_oui').each(function() {
+                if (this.onclick) {
+                    originalOnClick = this.onclick;
+                    this.onclick = null;
+                } else {
+                    originalOnClick = null;
+                }
+                $(this).bind('click', {origclick: originalOnClick}, handleClick);
+                function handleClick(event)
+                {
+                    if (confirm(messageConfirmationSuppression)) {
+                        if(event.data.origclick) {
+                            event.data.origclick.apply(this);
+                            return false;
+                        } else {
+                            // Si on n'a pas de onclick a l'origine, c'est que le href doit etre suivi
+                            return true;
                         }
-                    });
-                });
-                </script>
+                    } else {
+                        return false;
+                    }
+                }
+            });
+        });
+        </script>
 EOS;
     $data .= $script;
     return $data;
@@ -340,7 +380,7 @@ function lienscontenus_verification_mots_tous()
                     var idMot = $(this).find('td:first-child > a').attr('href').replace(/^.*&id_mot=([0-9]+)&.*$/g, '$1');
                     // on recupere "oui" si un autre contenu pointe vers le mot, "non" sinon 
                     var motContenu = $.ajax({
-                        url: '?exec=lienscontenus_ajax_mot_contient',
+                        url: '?exec=lienscontenus_ajax_mot_contenu',
                         data: 'id_mot='+idMot+'&var_ajaxcharset=utf-8',
                         async: false,
                         dataType: 'xml'
