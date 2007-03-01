@@ -20,6 +20,7 @@ _ Pour l'instant il vous suffit d'appeler [?page=walma&id_article=xx->../?page=w
 _ la premiere phase du plugin se contente de porter walma en 1.9.2 en decoupant plusieurs fichiers css,js,squelette
 _ voir aussi le fichier README.txt
 	</description>
+	<fonctions>walma_fonctions.php</fonctions>
 	<prefix>
 	walma
 	</prefix>

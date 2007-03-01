@@ -173,18 +173,24 @@ h1, h2, h3{margin:0.4em 0 0.4em 0;}
 .topthreadtxt, .forumgalerie blockquote{ border:1px solid #ccc; background-color:#fff;  margin-bottom:0.8em; padding:0.5em 1em 0.5em 1em; }
 .topthreadtxt{margin:0em 2em 0.8em 2em;}
 
+#telecharge{clear:both; margin:0 auto; padding:1em; font-size:0.7em;  width:250px; text-align:left; z-index:2; background-color:#E8E8E8; border:1px dotted #555;}
+.form_upload input {font-size:0.8em;}
+
 [/*(#REM) si insertion  menu gauche*/]
 [(#ENV{menugauche}|=={'oui'}|?{"
-#galeriewalma, .baswalma, .ajoutextforum{float:right; right:10px; }
+#galeriewalma, .baswalma, .ajoutextforum{float:right; right:10px;}
 .titredelagalerie{float:right; margin-right:20px; }
-.insertionmenu{ position:absolute; font-size:12px;  width:170px; left:10px; top:100px; text-align:left; z-index:2; background-color:#E8E8E8;}
+.insertionmenu{ position:absolute; font-size:12px;  width:170px; left:10px; top:100px; text-align:left; z-index:2; background-color:#E8E8E8; padding:0.8em;}
 "})]
 
 [/*(#REM) si insertion  menu à droite*/]
 [(#ENV{menudroite}|=={'oui'}|?{"
 #galeriewalma, .titredelagalerie, .baswalma, .ajoutextforum{float:left; left:10px; }
-.insertionmenu{ position:absolute; font-size:12px;  width:170px; left:820px; top:100px; text-align:left; z-index:2; background-color:#E8E8E8; }
+#galeriewalma, .titredelagalerie, .baswalma, .ajoutextforum {width:750px;}
+.blocgalerie{width:746px;}
+.vignette {width:118px; height:120px;}
+.mosaic{width:700px;}
+.insertionmenu{ position:absolute; font-size:12px;  width:170px; left:780px; top:100px; text-align:left; z-index:2; background-color:#E8E8E8; padding:0.8em;}
 "})]
+[(#ENV{mode, gauche}|=={vignettes}|?{[(#ENV{menudroite}|=={'oui'}|?{".petitdiv{width:732px;}",""})]})]
 
-#telecharge{clear:both; margin:0 auto; padding:1em; font-size:0.7em;  width:250px; text-align:left; z-index:2; background-color:#E8E8E8; border:1px dotted #555}
-.form_upload input {font-size:0.8em;}

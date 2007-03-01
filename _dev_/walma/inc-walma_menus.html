@@ -1,5 +1,43 @@
+<style>
+.insertionmenu ul{margin:0; padding: 0 0.5em 0;}
+.insertionmenu li{margin:0; padding: 0 0.5em 0;}
+.insertionmenu a{text-decoration:none;}
 
+.insertionmenu li ul ul{ display:none; }
+	
+.insertionmenu li:hover>ul{ display:block; }
 
+.insertionmenu a{
+  display:block;
+  width:100%;
+  color:#000000;
+}
 
-blabla menu
+.insertionmenu a:hover{
+  background: gray;
+  color: white;
+}
+</style>
 
+<B_rubriques>
+<ul>
+	<BOUCLE_rubriques(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}{par titre}>
+	<li>
+	<a href="#URL_RUBRIQUE"class="intitule">[(#TITRE|supprimer_numero|couper{80})]</a>
+	<B_articlesone><ul><BOUCLE_articlesone(ARTICLES){id_rubrique}>[<li><a href="#URL_ARTICLE">(#TITRE|supprimer_numero|couper{80})</a></li>]</BOUCLE_articlesone></ul></B_articlesone>
+	<B_sous_rubriques>
+		<ul>
+		<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
+		<li>
+		<a href="#URL_RUBRIQUE" <BOUCLE_test_sousrub(RUBRIQUES){id_parent}{0,1}>class='daddy'</BOUCLE_test_sousrub>>[(#TITRE|supprimer_numero|couper{80})]</a>
+		<B_articles><ul><BOUCLE_articles(ARTICLES){id_rubrique}>[<li><a href="#URL_ARTICLE">(#TITRE|supprimer_numero|couper{80})</a></li>]</BOUCLE_articles></ul></B_articles>
+		<BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re>
+		</li>
+		</BOUCLE_sous_rubriques>
+		</ul>
+	</B_sous_rubriques>
+	</li>
+	</BOUCLE_rubriques>
+</ul>
+</B_rubriques>
+ 

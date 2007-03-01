@@ -10,18 +10,27 @@
 [(#REM) modification options walma]
 [<!--(#REM) si vous voulez un menu à insérer à gauche ou à droite, mettre oui dans le SET correspondant-->]
 #SET{menugauche,non}
-#SET{menudroite,non}
+#SET{menudroite,oui}
+[<!--(#REM) L'affichage des menus sera par defaut en fonction de l'article affiché sinon de la rubrique 1  -->]
+<BOUCLE_rubrique_menu(ARTICLES){id_article}>
+#SET{rubrique_menu,#ID_RUBRIQUE}
+</BOUCLE_rubrique_menu>
+</B_rubrique_menu>
+#SET{rubrique_menu,1}
+<//B_rubrique_menu>
 [<!--(#REM) si vous souhaitez avoir le texte et le forum de l'article lookés pour walma, mettre oui dans le SET-->]
 #SET{texteforum,non}
 [<!--(#REM) L'affichage est par defaut avec l'image principale à gauche, il est possible de changer gauche pour droite ou vignettes-->]
 #SET{mode,#ENV{mode,gauche}}
+
+
 [(#REM) fin des options pour walma]
 
 [(#REM) inclusion dynamique du css et du js, ne pas modifier]
 [(#INCLURE{fond=inc-walma_head}{mode=#GET{mode}}{menugauche=#GET{menugauche}}{menudroite=#GET{menudroite}})]
 </head>
 
-<body> 
+<body>
 [<!--(#REM) Galerie Walma3 plaçé en haut à droite, ce bloc peut être remplacé, voire effaçé-->]
 	<div style="font-size:4em; text-align:left;">
 	<BOUCLE_article_rubrique(ARTICLES){id_article}{lang_select=non}>
@@ -31,7 +40,7 @@
 			</B_article_rubrique>
 			<a href="[(#URL_SITE_SPIP)]" style="color:#000000; text-decoration:none;">
 			<//B_article_rubrique>
-	  Galerie Walma3</a>
+	  Galerie Walma</a>
 	</div>
 
 	
@@ -47,10 +56,10 @@
 
 [<!--(#REM) insertion des menus -->]	
 [<div class="insertionmenu">(#GET{menugauche}|=={'oui'}|?{
-[(#INCLURE{fond=inc-walma_menus}{id_article}{menugauche,#GET{menugauche}}{menudroite,#GET{menudroite}})]
+[(#INCLURE{fond=inc-walma_menus}{id_article}{id_rubrique=#GET{rubrique_menu}})]
 ,
 	[(#GET{menudroite}|=={'oui'}|?{
-	[(#INCLURE{fond=inc-walma_menus}{id_article}{menugauche,#GET{menugauche}}{menudroite,#GET{menudroite}})]
+	[(#INCLURE{fond=inc-walma_menus}{id_article}{id_rubrique=#GET{rubrique_menu}})]
 	})]
 })</div>]
 

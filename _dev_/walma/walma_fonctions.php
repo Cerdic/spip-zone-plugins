@@ -1,6 +1,7 @@
 <?php
 /*<!--version walma3.4  pour spip 1.9.2 CopID libre non marchand (c) février 2007 Alm & Walk Galerie WALMA -->*/
 // se référer à http://doc.spip.org/@afficher_documents_colonne
+//afficher_documents_walma
 function afficher_documents_walma($id, $type="article",$script=NULL) {
 	include_spip('inc/autoriser');
 	// il faut avoir les droits de modif sur l'article pour pouvoir uploader !
