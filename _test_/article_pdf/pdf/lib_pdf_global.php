@@ -114,7 +114,7 @@ function WriteHTML($html,$LineFeedHeight)
 	foreach($a as $i=>$e) 
   {
 		//Balise 
-	$Balise= preg_match(',<(?=[/a-zA-Z])(/)?([/a-zA-Z]+)((\s.*|/)?)>,',$e,$match);
+	$Balise= preg_match(',<(?=[/a-zA-Z0-9])(/)?([/a-zA-Z0-9]+)((\s.*|/)?)>,',$e,$match);
 	if ($Balise){
       $tag=strtoupper($match[2]);
 			$closing = $match[1]=="/";
@@ -281,11 +281,43 @@ function OpenTag($tag,$e,$LineFeedHeight)
 		$this->BlocContent[$this->ProcessingBloc-1]="";
 	}
 	
+	if($tag=='H2')
+	{
+		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
+		$this->Ln($LineFeedHeight*3);
+		$this->SetStyle($tag='B',true,24);
+		$this->texteAddSpace = false;
+	}
+
 	if($tag=='H3')
 	{
 		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
 		$this->Ln($LineFeedHeight*3);
+		$this->SetStyle($tag='B',true,20);
+		$this->texteAddSpace = false;
+	}
+
+	if($tag=='H4')
+	{
+		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
+		$this->Ln($LineFeedHeight*3);
+		$this->SetStyle($tag='B',true,18);
+		$this->texteAddSpace = false;
+	}
+
+	if($tag=='H5')
+	{
+		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
+		$this->Ln($LineFeedHeight*3);
 		$this->SetStyle($tag='B',true,14);
+		$this->texteAddSpace = false;
+	}
+
+	if($tag=='H6')
+	{
+		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
+		$this->Ln($LineFeedHeight*3);
+		$this->SetStyle($tag='B',true,12);
 		$this->texteAddSpace = false;
 	}
 
@@ -494,7 +526,7 @@ function CloseTag($tag,$LineFeedHeight)
 //    $this->Write(5,"\n<\code>");
 	}
 
-	if($tag=='H3'){		
+	if(($tag=='H2') OR ($tag=='H3') OR ($tag=='H4') OR ($tag=='H5') OR ($tag=='H6')){		
 		$this->SetStyle($tag='B',false,10);
 		$this->maxLineWidth = max($this->maxLineWidth,$this->x);
 		$this->Ln($LineFeedHeight);
