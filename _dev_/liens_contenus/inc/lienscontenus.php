@@ -264,6 +264,8 @@ EOS;
 
 function lienscontenus_verification_articles_edit()
 {
+    // TODO : Quand on met a jour le doc, comment relancer cela ?
+    // TODO : Y a t'il parfois de l'AjaxSqueeze pour la suppression de doc ? 
     $data = lienscontenus_verification();
     $script = <<<EOS
         <style>a.lienscontenus_oui { color: red; text-decoration: line-through; }</style>
@@ -282,7 +284,7 @@ function lienscontenus_verification_articles_edit()
                 docContenu = $(docContenu).text();
                 $(this).find('a.cellule-h').addClass('lienscontenus_' + docContenu);
             });
-            // on ne s'interesse qu'aux mots vers lesquels pointent d'autres contenus
+            // on ne s'interesse qu'aux docs vers lesquels pointent d'autres contenus
             $('a.lienscontenus_oui').each(function() {
                 if (this.onclick) {
                     originalOnClick = this.onclick;
