@@ -1,6 +1,8 @@
 <plugin>
  	<nom>Gestion de compteurs</nom>
-	<auteur>Christian Lefebvre, Atos Worldline &copy; 2006</auteur>
+	<auteur>Christian Lefebvre, Atos Worldline
+
+	&copy; 2006 Distribue sous licence GNU/GPL v2</auteur>
 	<version>1.0</version>
 	<etat>test</etat>
 	<description>compteurs simples, de clics, de votes ou d'actions.
