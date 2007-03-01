@@ -2,7 +2,7 @@
 
 /** BOUCLE SESSION
  * Christian Lefebvre, Atos Worldline © 2006
- * Distribué sous licence GPL
+ * Distribué sous licence GPL v2
  */
 
 $GLOBALS['tables_principales']['spip_session']= array(
@@ -31,7 +31,7 @@ function boucle_SESSION($id_boucle, &$boucles) {
 
 	$code.=<<<CODE
 		\$SP++;
-		if(\$GLOBALS['auteur_session']) {
+		if(is_array(\$GLOBALS['auteur_session'])) {
 			\$Pile[\$SP]['id_auteur']= \$GLOBALS['auteur_session']['id_auteur'];
 			\$Pile[\$SP]['nom']= \$GLOBALS['auteur_session']['nom'];
 			\$Pile[\$SP]['login']= \$GLOBALS['auteur_session']['login'];
