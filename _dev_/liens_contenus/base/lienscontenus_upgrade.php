@@ -50,20 +50,4 @@ function lienscontenus_vider_tables($nom_meta_base_version)
     effacer_meta($nom_meta_base_version);
     ecrire_metas();
 }
-
-function lienscontenus_install($action)
-{
-    switch ($action) {
-        case 'test':
-            return (isset($GLOBALS['meta']['lienscontenus_base_version'])
-                && ($GLOBALS['meta']['lienscontenus_base_version'] >= $GLOBALS['lienscontenus_base_version']));
-            break;
-        case 'install':
-            lienscontenus_upgrade();
-            break;
-        case 'uninstall':
-            lienscontenus_vider_tables();
-            break;
-    }
-}   
 ?>

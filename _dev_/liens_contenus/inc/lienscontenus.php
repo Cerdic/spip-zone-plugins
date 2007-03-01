@@ -262,6 +262,57 @@ EOS;
     return $data;
 }
 
+function lienscontenus_verification_articles_edit()
+{
+    $data = lienscontenus_verification();
+    $script = <<<EOS
+        <style>a.lienscontenus_oui { color: red; text-decoration: line-through; }</style>
+        <script language="javascript" type="text/javascript">
+        $(document).ready(function() {
+            // on ajoute une classe specifique aux liens de suppression des docs
+            $('div[@id^=legender-]').each(function() {
+                var idDoc = $(this).attr('id').replace(/^legender-([0-9]+)$/g, '$1');
+                // on recupere "oui" si un autre contenu pointe vers le doc, "non" sinon 
+                var docContenu = $.ajax({
+                    url: '?exec=lienscontenus_ajax_doc_contenu',
+                    data: 'id_doc='+idDoc+'&var_ajaxcharset=utf-8',
+                    async: false,
+                    dataType: 'xml'
+                    }).responseText;
+                docContenu = $(docContenu).text();
+                $(this).find('a.cellule-h').addClass('lienscontenus_' + docContenu);
+            });
+            // on ne s'interesse qu'aux mots vers lesquels pointent d'autres contenus
+            $('a.lienscontenus_oui').each(function() {
+                if (this.onclick) {
+                    originalOnClick = this.onclick;
+                    this.onclick = null;
+                } else {
+                    originalOnClick = null;
+                }
+                $(this).bind('click', {origclick: originalOnClick}, handleClick);
+                function handleClick(event)
+                {
+                    if (confirm(messageConfirmationSuppression)) {
+                        if(event.data.origclick) {
+                            event.data.origclick.apply(this);
+                            return false;
+                        } else {
+                            // Si on n'a pas de onclick a l'origine, c'est que le href doit etre suivi
+                            return true;
+                        }
+                    } else {
+                        return false;
+                    }
+                }
+            });
+        });
+        </script>
+EOS;
+    $data .= $script;
+    return $data;
+}
+
 function lienscontenus_verification_breves_edit()
 {
     $data = lienscontenus_verification();
