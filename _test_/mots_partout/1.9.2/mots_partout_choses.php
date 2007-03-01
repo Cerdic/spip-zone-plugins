@@ -45,7 +45,7 @@ $choses_possibles['breves'] = array(
 
 $choses_possibles['rubriques'] = array(
 									  'titre_chose' => 'rubriques',
-										  'id_chose' => 'id_rubrique',
+									  'id_chose' => 'id_rubrique',
 									  'table_principale' => 'spip_rubriques',
 									  'url_base' => 'naviguer',
 									  'table_auth' => 'spip_auteurs_rubriques',

@@ -27,7 +27,7 @@ function exec_mots_tous_dist()
 // - ceux du core
 //	$choses= array('articles', 'breves', 'rubriques', 'syndic');
 // - ceux du plugin
-//	include(_DIR_PLUGIN_MOTS_PARTOUT."/mots_partout_choses.php");
+//	include(_DIR_PLUGIN_MOTSPARTOUT."/mots_partout_choses.php");
 	$tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));	
 	if (!$tables_installees){
 	  $tables_installees=array("articles"=>true,"rubriques"=>true,"breves"=>true,"syndic"=>true);

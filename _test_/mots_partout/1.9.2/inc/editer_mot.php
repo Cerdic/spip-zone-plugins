@@ -27,11 +27,13 @@ function inc_editer_mot($objet, $id_objet, $cherche_mot, $select_groupe, $flag) 
 // MODIFICATION
 ///////////////////////////
     global $choses_possibles;
-    include_spip("mots_partout_choses.php");
+include(_DIR_PLUGIN_MOTSPARTOUT."/mots_partout_choses.php");
 	if ($objet == 'syndic') $table=$objet;
 	else $table=$objet.'s';
 	if (isset($choses_possibles[$table])) {
-		$table_id = $choses_possibles[$table]['id_chose'];
+		if ($choses_possibles[$table]['id_chose'])
+			$table_id = $choses_possibles[$table]['id_chose'];
+		else $table_id = 'id_'.$objet;
 		if ($choses_possibles[$table]['objet']) $objet=$choses_possibles[$table]['objet'];
 		else $objet = substr($table,0,-1);
 		if ($choses_possibles[$table]['url_base']) $url_base=$choses_possibles[$table]['url_base'];
@@ -298,7 +300,8 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 
 // http://doc.spip.org/@formulaire_mots_cles
 function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet) {
-	global $connect_statut, $spip_lang, $spip_lang_right, $spip_lang_rtl;
+
+global $connect_statut, $spip_lang, $spip_lang_right, $spip_lang_rtl;
 
 	if ($les_mots) {
 		$nombre_mots_associes = count($les_mots);
@@ -320,7 +323,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 		$couche_a_redresser = $GLOBALS['numero_block']['lesmots'.$id_objet];
 		if ($GLOBALS['browser_layer'])
 			$res .= http_script("
-				triangle = findObj('triangle' + $couche_a_redresser);
+				triangle = findObj('triangle$couche_a_redresser');
 				if (triangle) triangle.src = '" . _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif';");
 	} else $res = debut_block_invisible("lesmots".$id_objet);
 
@@ -328,8 +331,8 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 		$res .= "<div align='right' class='arial1'>"
 		  . ajax_action_auteur('editer_mot', "$id_objet,-1,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array(_T('info_retirer_mots'),''),"&id_objet=$id_objet&objet=$objet")
 		. "</div><br />\n";
-	}
 
+	}
 	$result_groupes = spip_query("SELECT id_groupe,unseul,obligatoire,titre, ".creer_objet_multi ("titre", $spip_lang)." FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus))) ORDER BY multi");
 
 	// Afficher un menu par groupe de mots
@@ -345,7 +348,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 				"$table_id=$id_objet",
 				$corps,
 				$clic,
-				" class='visible_au_chargement fondo spip_xx-small' id='valider_groupe_".$id_groupe."_obj_".$id_objet."'",
+				" class='visible_au_chargement fondo spip_xx-small' id='valider_groupe_".$id_groupe."_obj_".$id_objet."'", "",
 				"&id_objet=$id_objet&objet=$objet&select_groupe=$id_groupe");
 		}
 	}

@@ -21,12 +21,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-//TODO : voir pourquoi pas defini encore ici ?
-//Attention, on est dans /exec => + '/..'
-if (!defined('_DIR_PLUGIN_MOTS_PARTOUT')){
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS.end($p)).'/..');
-}
 /***********************************************************************/
 /* function*/
 /***********************************************************************/
@@ -182,7 +176,7 @@ function afficher_liste_defaut($choses) {
 
 function exec_mots_partout() {
 global $choses_possibles;
-  include(_DIR_PLUGIN_MOTS_PARTOUT."/mots_partout_choses.php");
+  include(_DIR_PLUGIN_MOTSPARTOUT."/mots_partout_choses.php");
   include_spip("inc/choses");
   include_spip ("inc/presentation");
   include_spip ("inc/documents");
@@ -337,7 +331,7 @@ global $choses_possibles;
   /* affichage*/
   /***********************************************************************/
 
-  debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_MOTS_PARTOUT."/mots_partout.css");
+  debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'documents', 'mots', '', _DIR_PLUGIN_MOTSPARTOUT."/mots_partout.css");
   echo'</script>';
 
 	  echo '<br><br><center>';

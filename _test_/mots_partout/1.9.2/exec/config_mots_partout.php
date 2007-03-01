@@ -10,7 +10,7 @@ function exec_config_mots_partout() {
 	include_spip ("mots_partout_choses");
 
   global $choses_possibles;
-//  include(_DIR_PLUGIN_MOTS_PARTOUT."/mots_partout_choses.php");
+//  include(_DIR_PLUGIN_MOTSPARTOUT."/mots_partout_choses.php");
   debut_page('&laquo; '._T('motspartout:titre_page').' &raquo;', 'configurations', 'mots_partout');
 
   if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {

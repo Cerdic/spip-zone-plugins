@@ -9,15 +9,11 @@
  * � 2006 - Distribue sous licence GPL
  *
  */
-if (!defined('_DIR_PLUGIN_MOTS_PARTOUT')){
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS.end($p)));
-}
 function MotsPartout_ajouterBoutons($boutons_admin) {
   
   // on voit les bouton dans la barre "accueil"
   $boutons_admin['naviguer']->sousmenu["mots_partout"]= new Bouton(
-																   "../"._DIR_PLUGIN_MOTS_PARTOUT."/tag.png",  // icone
+																   "../"._DIR_PLUGIN_MOTSPARTOUT."/tag.png",  // icone
 																   _L('motspartout:mots_partout') //titre
 																   );
   return $boutons_admin;
@@ -26,7 +22,7 @@ function MotsPartout_ajouterBoutons($boutons_admin) {
 function MotsPartout_ajouterOnglets($flux) {
   if($flux['args']=='configuration')
 	$flux['data']['mots_partout']= new Bouton(
-											  "../"._DIR_PLUGIN_MOTS_PARTOUT."/tag.png", 'Configurer Mots Partout',
+											  "../"._DIR_PLUGIN_MOTSPARTOUT."/tag.png", 'Configurer Mots Partout',
 											  generer_url_ecrire("config_mots_partout"));
   return $flux;
 }

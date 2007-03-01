@@ -18,12 +18,6 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-//TODO : voir pourquoi pas defini encore ici ?
-//Attention, on est dans /exec => + '/..'
-if (!defined('_DIR_PLUGIN_MOTS_PARTOUT')){
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS.end($p)).'/..');
-}
 
 //force a un tableau de int
 function secureIntArray($array) {
@@ -78,7 +72,7 @@ function action_mots_partout() {
   }
   */   
   
-  include(_DIR_PLUGIN_MOTS_PARTOUT."/mots_partout_choses.php");
+  include(_DIR_PLUGIN_MOTSPARTOUT."/mots_partout_choses.php");
   include_spip('base/abstract_sql');
   
 

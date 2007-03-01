@@ -1,8 +1,4 @@
 <?php
-if (!defined('_DIR_PLUGIN_MOTS_PARTOUT')){
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	define('_DIR_PLUGIN_MOTS_PARTOUT',(_DIR_PLUGINS.end($p)));
-}
 global $tables_jointures;
 global $tables_auxiliaires;
 
@@ -16,7 +12,7 @@ if (!$tables_installees){
 	
 foreach($tables_installees as $chose => $m) { $choses[]= $chose; }
 global $choses_possibles;
-include(_DIR_PLUGIN_MOTS_PARTOUT."/mots_partout_choses.php");
+include(_DIR_PLUGIN_MOTSPARTOUT."/mots_partout_choses.php");
    
 foreach ($choses as $chose){
   $id_chose = $choses_possibles[$chose]['id_chose'];
