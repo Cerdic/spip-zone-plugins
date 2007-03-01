@@ -5,7 +5,7 @@ function checklink_verifie_lien($url, $date_verif, $maj_statut){
 	$datas="";
 	$boundary="";
 	$url_abs = url_absolue($url);
-	if (!preg_match(",^([\w]{3-6})://,") AND $url_abs{0}!='/'){
+	if (!preg_match(",^([\w]{3-6})://,",$url_abs) AND $url_abs{0}!='/'){
 		$url_abs = suivre_lien(url_de_base(),$url_abs);
 	}
 	$statut = recuperer_page($url_abs, false, false, 1048576, $datas, $boundary, false, $date_verif);
@@ -22,8 +22,20 @@ function checklink_verifie_lien($url, $date_verif, $maj_statut){
 		return;
 	}
 	// presente
+	$texte = $statut;
+	// extraire le charset si present
+	$charset = false;
+	if (preg_match(",charset=\s*([^\s\"']*),i",$texte,$reg))
+		$charset = trim($reg[1]);
+	if ($charset)
+		$texte = charset2unicode($texte,$charset);
+	else {
+		// a l'aveugle
+		$texte = charset2unicode($texte,'iso-8859-1');
+		$texte = charset2unicode($texte,'utf-8');
+	}
+
 	// extraire le titre et la langue
-	$texte = importer_charset($statut);
 	$titre = null;
 	$lang = null;
 	if (preg_match(',<title[^>]*>(.*)</title>,Uims',$texte,$reg))

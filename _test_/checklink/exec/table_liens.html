@@ -5,7 +5,7 @@
 #SET{off,'puce-poubelle.gif'}
 <p>
 <div style='float:right'>
-#SET{urlbase,#SELF|parametre_url{raz,''}|parametre_url{debut_liens,''}|parametre_url{update,''}}
+#SET{urlbase,#SELF|parametre_url{raz,''}|parametre_url{debut_liens,''}|parametre_url{update,''}|parametre_url{verifier,''}}
 [(#ENV{statut,''}|?{' ',''})<a href='[(#GET{urlbase}|parametre_url{statut,''})]'>Tous les liens</a><br/>]
 <BOUCLE_averif(LIENS){statut=ind}></BOUCLE_averif>
 <img src='#EVAL{_DIR_IMG_PACK}[(#GET{ind})]' alt="Statut ind" /> #TOTAL_BOUCLE [(#ENV{statut,''}|=={ind}|?{'',' '})<a href='[(#GET{urlbase}|parametre_url{statut,ind})]'>]liens a verifier[(#ENV{statut,''}|=={ind}|?{'',' '})</a>]<br/>
@@ -36,7 +36,7 @@ alt="checklink-24"  /></div><div style='background-color: #C5E41C; color: black;
 <td class="arial11">[<a href='(#ID_TABLE|url_visu_objet{#ID_OBJET})'>][(#URL|lignes_longues{30})][</a>(#ID_TABLE|url_visu_objet{#ID_OBJET}|?{' '})]</td>
 <td class="arial11">[(#LANG*)]</td>
 <td class="arial11">[<a href='[(#URL_SITE_SPIP|suivre_lien{#URL})]' title="[(#TITRE|texte_backend)]"><:lien_visite_site:></a>]</td>
-<td class="arial11">[<a href='[(#GET{urlbase}|parametre_url{verifier,#ID_LIEN})]' title="[(#TITRE|texte_backend)]"><:lien_mise_a_jour_syndication:></a>]</td>
+<td class="arial11">[<a href='[(#SELF|parametre_url{raz,''}|parametre_url{update,''}|parametre_url{verifier,#ID_LIEN})]' title="[(#TITRE|texte_backend)]"><:lien_mise_a_jour_syndication:></a>]</td>
 </tr>
 </BOUCLE_liens>
 </table>
