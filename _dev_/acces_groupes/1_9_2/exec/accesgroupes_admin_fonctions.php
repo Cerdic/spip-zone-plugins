@@ -264,7 +264,7 @@ function accesgroupes_affiche_groupes_rubriques() {
 				$id_rub_ec = $row302['id_rubrique'];
 				$nom_rub_ec = $row302['titre'];
 				$a_afficher .= "<img src='"._DIR_PLUGIN_ACCESGROUPES."/img_pack/sous-groupe.png' alt='|_' style='vertical-align:top;'>";
-				$a_afficher .= " <a href=\"?exec=naviguer&id_rubrique=".$id_rub_ec."\"><img src='img_pack/rubrique-12.gif' alt='|_' style='vertical-align:top; border: 0px;'>".$nom_rub_ec;
+				$a_afficher .= " <a href=\"?exec=naviguer&id_rubrique=".$id_rub_ec."\"><img src='img_pack/rubrique-12.gif' alt='|_' style='vertical-align:top; border: 0px;'>".typo($nom_rub_ec);
 				
 				if (accesgroupes_est_admin_rubrique($id_rub_ec) == TRUE) {
 					$a_afficher .= " <img src='img_pack/admin-12.gif'>";
