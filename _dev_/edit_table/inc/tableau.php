@@ -26,17 +26,24 @@ function afficher_tableau_complex_div($tableau,$table){
 	$desc_table = spip_fetch_array($res_desc_table);
 	echo '<div>';
 	while ($description_table = mysql_fetch_array($res_desc_table)){
-		switch ($description_table['Type']){
-		
-			case 'longblob' :
-				echo $description_table['Field'].'<br />';
-				echo'<textarea style="width: 480px;" class="forml" rows="5" cols="40" name='.$description_table['Field'].'>'.$tableau[$description_table['Field']].'</textarea><br />';
+		/*switch ($description_table['Type']){
+			case 'autre chause' :
 				break;
 				
 			default :
-				echo '<div><b>'.$description_table['Field'].'</b><br /><input type="text" class="formo" value="'.$tableau[$description_table['Field']].'" name="'.$description_table['Field'].'" /></div><br />';
-		
+				echo $description_table['Field'].'<br />';
+				echo'<textarea style="width: 480px;" class="forml" rows="5" cols="40" name='.$description_table['Field'].'>'.$tableau[$description_table['Field']].'</textarea><br />';
+				break;
+			
+		}*/
+		if (($description_table['Type'] == 'longblob') OR (strlen($tableau[$description_table['Field']]) > 100) ){
+			echo $description_table['Field'].'<br />';
+			echo'<textarea style="width: 480px;" class="forml" rows="5" cols="40" name='.$description_table['Field'].'>'.$tableau[$description_table['Field']].'</textarea><br />';
+		}else{
+			echo $description_table['Field'].'<br />';
+			echo'<input type="text" class="forml" rows="5" cols="40" name='.$description_table['Field'].' value="'.$tableau[$description_table['Field']].'"><br />';
 		}
+		
 	}
 	echo '</div>';
 }
