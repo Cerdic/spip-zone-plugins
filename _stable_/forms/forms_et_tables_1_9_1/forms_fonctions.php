@@ -15,12 +15,12 @@
 	if ($GLOBALS['spip_version_code']<1.92)
 		include_spip('inc/forms_compat_191');
 	include_spip('forms_filtres');
-	function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separateur=" "){
+	function forms_calcule_les_valeurs($type, $id_donnee, $champ, $id_form, $separateur=" ",$etoile=false){
 		$lesvaleurs = array();
 		if (strncmp($champ,'joint_',6)!=0){
 			$res = spip_query("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champ));
 			while ($row = spip_fetch_array($res)){
-				$lesvaleurs[] = forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $row['valeur'], $id_form);
+				$lesvaleurs[] = forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $row['valeur'], $id_form, $etoile);
 			}
 			return implode($separateur,$lesvaleurs);
 		}
@@ -60,7 +60,7 @@
 		return $out;
 	}
 
-	function forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $valeur, $id_form){
+	function forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $valeur, $id_form, $etoile=false){
 		static $type_champ=array();
 		static $wrap_champ=array();
 		// s'assurer que l'on est bien sur une boucle forms, sinon retourner $valeur
@@ -84,25 +84,27 @@
 			else 
 				$ok = false;
 		}
+		$rendu = 'typo';
 		if ($ok) {
 			$t = $type_champ[$id_form][$champ];
 			if ($t == 'select' OR $t == 'multiple'){
 				$res = spip_query("SELECT titre FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ)." AND choix="._q($valeur));
 				if ($row = spip_fetch_array($res)){
-					$valeur = typo($row['titre']);
+					$valeur = $row['titre'];
 				}
 			}
 			elseif ($t == 'mot'){
 				$res = spip_query("SELECT titre FROM spip_mots WHERE id_mot="._q($valeur));
 				if ($row = spip_fetch_array($res)){
-					$valeur = typo($row['titre']);
+					$valeur = $row['titre'];
 				}
 			}
 			elseif ($t == 'texte')
-				$valeur = propre($valeur);
-			else
-				$valeur = typo($valeur);
-			$valeur = wrap_champ($valeur,$wrap_champ[$id_form][$champ]);
+				$rendu = 'propre';
+			if (!$etoile){
+				$valeur = $rendu($valeur);
+				$valeur = wrap_champ($valeur,$wrap_champ[$id_form][$champ]);
+			}
 		}
 		return $valeur;
 	}
