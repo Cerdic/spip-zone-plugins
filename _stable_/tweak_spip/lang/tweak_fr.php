@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // erreurs
 	'erreur:nom' => 'Erreur !',
 	'erreur:description'	=> 'id manquant dans la d&eacute;finition du tweak !',
-	'erreur:version'	=> 'indisponible dans cette version de Spip trop ancienne.',
+	'erreur:version'	=> 'indisponible dans cette version de Spip.',
 
 // categories
 	'admin' => "1. Administration",
@@ -111,11 +111,11 @@ _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouv
 
 	'filtrer_javascript:nom' => 'Gestion du javascript',
 	'filtrer_javascript:description'	=> 'Pour g&eacute;rer le javascript dans les articles, trois modes sont disponibles :
-- {jamais}: le javascript est refus&eacute; partout
-- {d&eacute;faut} : le javascript est signal&eacute; en rouge dans l\'espace priv&eacute;
-- {toujours} : le javascript est accept&eacute; partout.
+- <i>jamais</i> : le javascript est refus&eacute; partout
+- <i>d&eacute;faut</i> : le javascript est signal&eacute; en rouge dans l\'espace priv&eacute;
+- <i>toujours</i> : le javascript est accept&eacute; partout.
 
-Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la gestion du javascript est {{toujours}} s&eacute;curis&eacute;e.<br />Votre choix : %radio_filtrer_javascript2%',
+Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la gestion du javascript est <strong>toujours</strong> s&eacute;curis&eacute;e.<br />Votre choix : %radio_filtrer_javascript2%',
 	'js_jamais' => 'Jamais',
 	'js_defaut' => 'D&eacute;faut',
 	'js_toujours' => 'Toujours',

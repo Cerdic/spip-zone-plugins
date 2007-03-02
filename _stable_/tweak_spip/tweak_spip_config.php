@@ -81,7 +81,7 @@ add_tweak( array(
 	'code'	=> '$spip_pipeline["affichage_final"] .= "|f_insert_head";', 
 	'categorie'	=> 'squel',
 	'options'	=> 1,
-	'version'	=> 1.92,
+	'version-min'	=> 1.92,
 ));
 
 add_tweak( array(
@@ -99,6 +99,8 @@ $_GET["set_options"] = $GLOBALS["set_options"] = $set_options;',
 	'options'	=> 1,
 	// pipeline pour retirer en javascript le bouton de controle de l'interface
 	'pipeline:header_prive' => 'set_options_header_prive',
+	// non supporte a partir de la version 1.9.3
+	'version-max'	=> 1.93,
 ));
 
 add_tweak( array(
@@ -112,7 +114,7 @@ add_tweak( array(
 list($GLOBALS["filtrer_javascript"], $foo) = explode("(", $GLOBALS["radio_filtrer_javascript2"], 2);',
 	'categorie'	=> 'admin',
 	'options'	=> 1,
-	'version'	=> 1.92,
+	'version-min'	=> 1.92,
 ));
 
 add_tweak( array(
@@ -120,6 +122,15 @@ add_tweak( array(
 	'code' 	=> '$GLOBALS["log_tweaks"]=true;',
 //	'categorie'	=> 'admin',
 	'options'	=> 1,
+));
+
+add_tweak( array (
+	'id' => 'xml',
+	'code'		=> '$xhtml = "sax";',
+	'auteur' => 'Ma&iuml;eul Rouquette (maieulrouquette@tele2.fr)',
+	'categorie' =>'squel',
+	'version-min'	=> '1.92',
+	'options'	=>	1
 ));
 
 //-----------------------------------------------------------------------------//
@@ -212,16 +223,6 @@ add_tweak( array(
 	'categorie'		=> 'typo',
 	'pipeline:pre_typo'	=> 'chatons_pre_typo',
 ));
-
-add_tweak( array (
-	'id' => 'xml',
-	'code'		=> '$xhtml = "sax";',
-	'auteur' => 'Ma&iuml;eul Rouquette (maieulrouquette@tele2.fr)',
-	'categorie' =>'squel',
-	'version'	=> '1.92',
-	'options'	=>	1
-	
-	));
 
 // Idées d'ajouts :
 // http://www.spip-contrib.net/Citations

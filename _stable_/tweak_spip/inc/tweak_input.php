@@ -54,7 +54,7 @@ function inc_tweak_input_dist($index, $variable, $valeur, $label, $actif, $url_s
 	$res = ajax_action_auteur('tweak_input', $index, $url_self, "index=$index&variable=$variable&valeur=$valeur&actif=".intval($actif)."&label=".urlencode($label), $res);
 
 tweak_log("inc_tweak_input_dist($index, $variable, $valeur, [label], $actif, $url_self)");
-return "<div id='tweak_input-$index'>$res</div>";
+return $res;
 
 }
 ?>

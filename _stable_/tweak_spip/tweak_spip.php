@@ -176,7 +176,7 @@ function tweak_parse_description($tweak, $tweak_input) {
 		// si le meta est present on remplace
 		if (isset($metas_vars[$var]))
 				$descrip .= $tweak_input(
-					$tweaks[$tweak]['basic']+(++$tweaks[$tweak]['nb_variables']), 
+					$index = $tweaks[$tweak]['basic']+(++$tweaks[$tweak]['nb_variables']), 
 					$var, 
 					$metas_vars[$var],
 					$t[$i],
@@ -184,7 +184,7 @@ function tweak_parse_description($tweak, $tweak_input) {
 					'tweak_spip_admin');
 			else $descrip .= $t[$i]."[$var?]";
 	} else $descrip .= $t[$i];
-	$tweaks[$tweak]['description'] = $descrip;
+	$tweaks[$tweak]['description'] = "<div id='tweak_input-$index'>$descrip</div>";
 }
 
 // decommenter pour debug...
@@ -252,8 +252,10 @@ tweak_log(" -- foreach(\$tweaks) : tweak_parse_code, tweak_parse_description... 
 		if (!isset($tweak['nom'])) $tweaks[$i]['nom'] = _T('tweak:'.$tweak['id'].':nom');
 		if (!isset($tweak['description'])) $tweaks[$i]['description'] = _T('tweak:'.$tweak['id'].':description');
 		$tweaks[$i]['actif'] = isset($metas_tweaks[$tweaks[$i]['id']])?$metas_tweaks[$tweaks[$i]['id']]['actif']:0;
-		// Si Spip est trop ancien...
-		if (isset($tweak['version']) && $GLOBALS['spip_version_code']<$tweak['version']) $tweaks[$i]['actif'] = 0;
+		// Si Spip est trop ancien ou trop recent...
+		if ((isset($tweak['version-min']) && $GLOBALS['spip_version_code']<$tweak['version-min']) 
+			|| (isset($tweak['version-max']) && $GLOBALS['spip_version_code']>$tweak['version-max']))
+				$tweaks[$i]['actif'] = 0;
 		// au cas ou des variables sont presentes dans le code
 		$tweaks[$i]['basic'] = $i*10; $tweaks[$i]['nb_variables'] = 0;
 		// cette ligne peut initialiser des variables dans $metas_vars
