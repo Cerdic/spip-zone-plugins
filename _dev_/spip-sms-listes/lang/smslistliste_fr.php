@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // page donnees_tous
 'icone_ajouter_donnees' => "Ajouter des listes de diffusion",
-'telecharger_reponses' => "T&eacute;l&eacute;chargez les listes de diffusion",
+'telecharger_reponses' => "Exporter les listes de diffusion",
 'importer_donnees_csv' => "Importer des listes de diffusion",
 
 // page donnees_edit

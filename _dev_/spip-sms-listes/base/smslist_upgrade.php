@@ -25,7 +25,9 @@
 				$f = find_in_path('base/SMS.xml');
 				Forms_creer_table($f,'smslist_message');
 				$f = find_in_path('base/Boite_d_envoi_des_SMS.xml');
-				Forms_creer_table($f,'smslist_message');
+				Forms_creer_table($f,'smslist_boiteenvoi');
+				$f = find_in_path('base/Comptes_SMS.xml');
+				Forms_creer_table($f,'smslist_compte');
 				ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 			}
 	
@@ -35,13 +37,12 @@
 	
 	function smslist_vider_tables($nom_meta_base_version) {
 		include_spip('base/forms_base_api');
-		Forms_supprimer_tables('smslist_liste');
+		/*Forms_supprimer_tables('smslist_liste');
 		Forms_supprimer_tables('smslist_abonne');
 		Forms_supprimer_tables('smslist_message');
-		// a enlever
-		Forms_supprimer_tables('smslist_listes');
-		Forms_supprimer_tables('smslist_abonnes');
-		Forms_supprimer_tables('smslist_messages');
+		Forms_supprimer_tables('smslist_boiteenvoi');
+		Forms_supprimer_tables('smslist_compte');*/
+		
 		// fin
 		effacer_meta($nom_meta_base_version);
 		ecrire_metas();

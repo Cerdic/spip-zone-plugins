@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // page donnees_tous
 'icone_ajouter_donnees' => "Programmer un envoi",
-'telecharger_reponses' => "T&eacute;l&eacute;chargez la liste des envois en instance",
+'telecharger_reponses' => "Exporter la liste des envois en instance",
 'importer_donnees_csv' => "Importer une liste d'envois",
 
 // page donnees_edit

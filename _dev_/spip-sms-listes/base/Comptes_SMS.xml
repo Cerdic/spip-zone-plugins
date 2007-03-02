@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<forms>
+<form>
+	<id_form>64</id_form>
+	<titre>Comptes SMS</titre>
+	<descriptif></descriptif>
+	<type_form>smslist_compte</type_form>
+	<modifiable>non</modifiable>
+	<multiple>non</multiple>
+	<email>a:1:{s:6:"defaut";s:0:"";}</email>
+	<champconfirm></champconfirm>
+	<texte></texte>
+	<moderation>posteriori</moderation>
+	<public>non</public>
+	<linkable>non</linkable>
+	<documents>non</documents>
+	<html_wrap></html_wrap>
+	<fields>
+		<field>
+			<champ>ligne_1</champ>
+			<rang>1</rang>
+			<titre>Login</titre>
+			<type>ligne</type>
+			<obligatoire>oui</obligatoire>
+			<extra_info></extra_info>
+			<specifiant>oui</specifiant>
+			<public></public>
+			<aide></aide>
+			<html_wrap></html_wrap>
+		</field>
+		<field>
+			<champ>password_1</champ>
+			<rang>2</rang>
+			<titre>Mot de passe</titre>
+			<type>password</type>
+			<obligatoire>oui</obligatoire>
+			<extra_info></extra_info>
+			<specifiant></specifiant>
+			<public></public>
+			<aide></aide>
+			<html_wrap></html_wrap>
+		</field>
+		<field>
+			<champ>ligne_2</champ>
+			<rang>3</rang>
+			<titre>API ID</titre>
+			<type>ligne</type>
+			<obligatoire>oui</obligatoire>
+			<extra_info></extra_info>
+			<specifiant></specifiant>
+			<public></public>
+			<aide></aide>
+			<html_wrap></html_wrap>
+		</field>
+		<field>
+			<champ>select_1</champ>
+			<rang>4</rang>
+			<titre>Prestataire</titre>
+			<type>select</type>
+			<obligatoire>oui</obligatoire>
+			<extra_info>liste</extra_info>
+			<specifiant></specifiant>
+			<public></public>
+			<aide></aide>
+			<html_wrap></html_wrap>
+			<les_choix>
+				<un_choix>
+					<choix>select_1_1</choix>
+					<titre>clickatell_http</titre>
+					<rang>1</rang>
+				</un_choix>
+				<un_choix>
+					<choix>select_1_2</choix>
+					<titre>sms2email_http</titre>
+					<rang>2</rang>
+				</un_choix>
+			</les_choix>
+		</field>
+		<field>
+			<champ>ligne_3</champ>
+			<rang>5</rang>
+			<titre>Client ID</titre>
+			<type>ligne</type>
+			<obligatoire>oui</obligatoire>
+			<extra_info></extra_info>
+			<specifiant></specifiant>
+			<public></public>
+			<aide></aide>
+			<html_wrap></html_wrap>
+		</field>
+	</fields>
+</form>
+</forms>

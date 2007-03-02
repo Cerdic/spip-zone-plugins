@@ -16,9 +16,10 @@ include_spip('inc/smslist_affichage');
 include_spip('base/forms_base_api');
 include_spip('public/assembler');
 
-function exec_smslist_listes_tous(){
+function exec_smslist_config() {
+	
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	if (!autoriser('administrer','smslist')) {
+	if (!autoriser('configurer','smslist')) {
 		echo $commencer_page(_L('Spip-sms-listes'),"", "redacteurs", "smslist");
 		echo "<strong>"._T('avis_acces_interdit')."</strong>";
 		echo fin_page();
@@ -26,19 +27,19 @@ function exec_smslist_listes_tous(){
 	}
 	
 	// Admin Spip-sms-listes
-	echo $commencer_page(_L('Spip-sms-listes'),"", "redacteurs", "listes");
+	echo $commencer_page(_L('Spip-sms-listes'),"", "redacteurs", "smslist");
 	
 	echo debut_gauche("smslist",true);
 	
-	echo smslist_barre_nav_gauche('gerer_listes');
+	echo smslist_barre_nav_gauche('configurer');
 
 	echo creer_colonne_droite();
 
 	echo debut_droite("smslist",true);
 	
 	include_spip("exec/template/tables_affichage");
-	$liste = Forms_liste_tables('smslist_liste');
-	echo affichage_donnees_tous_corps('smslist_liste',reset($liste));
+	$liste = Forms_liste_tables('smslist_compte');
+	echo affichage_donnees_tous_corps('smslist_compte',reset($liste));
 
 	echo fin_gauche(), fin_page();
 }

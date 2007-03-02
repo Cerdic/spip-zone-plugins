@@ -21,7 +21,7 @@
 			<rang>1</rang>
 			<titre>Date d'envoi</titre>
 			<type>date</type>
-			<obligatoire>oui</obligatoire>
+			<obligatoire>non</obligatoire>
 			<extra_info></extra_info>
 			<specifiant>oui</specifiant>
 			<public></public>
@@ -33,7 +33,7 @@
 			<rang>2</rang>
 			<titre>Heure d'envoi</titre>
 			<type>heure</type>
-			<obligatoire>oui</obligatoire>
+			<obligatoire>non</obligatoire>
 			<extra_info></extra_info>
 			<specifiant>oui</specifiant>
 			<public></public>
