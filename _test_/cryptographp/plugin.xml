@@ -1,0 +1,49 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	  CRYPTOGRAPHP
+<multi>
+[fr] Cr&eacute;ation et v&eacute;rification d'une image pour Captcha.
+[en] Create and check a Captcha image.
+</multi>
+	</nom>
+	<auteur>
+	  BobCaTT
+	</auteur>
+	<version>
+	  0.1.0
+	</version>
+	<etat>
+	  test
+	</etat>
+	<description>
+	  <multi>
+	  [fr]
+-# Balise <code>#CRYPTOGRAPHPIMG</code> pour afficher l'image g&eacute;n&eacute;r&eacute;e.
+-# Balise <code>#CRYPTOGRAPHPBTN</code> pour afficher le bouton de rafra&icirc;chissement.
+-# Balise <code>#CRYPTOGRAPHP</code> pour afficher l'image g&eacute;n&eacute;r&eacute;e et le bouton de rafra&icirc;chissement &agrave; la suite.
+-# Balise <code>#CRYPTOGRAPHPCHK</code> pour v&eacute;rifier la validit&eacute; de l'entr&eacute;e de l'utilisateur.
+	  [en]
+-# Balise <code>#CRYPTOGRAPHPIMG</code> display the generated image.
+-# Balise <code>#CRYPTOGRAPHPBTN</code> display a small logo to refresh the picture
+-# Balise <code>#CRYPTOGRAPHP</code> display the image and the bouton at the same time.
+-# Balise <code>#CRYPTOGRAPHPCHK</code> to check the user's input.
+	  </multi>
+	</description>
+	<lien>
+	  http://www.menfin.net/
+	</lien>
+	<lien>
+	  http://www.cryptographp.com/
+	</lien>
+	<fonctions> <!-- fichier charge a chaque recalul de page -->
+	  plug_cryptographp.php
+	</fonctions>
+	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
+	sur le mode Rien::
+	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
+	ce parametre est obligatoire et doit etre non vide
+	-->
+	<prefix> 
+	  CRYPTO
+	</prefix>
+</plugin>
