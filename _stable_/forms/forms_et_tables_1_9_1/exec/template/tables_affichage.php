@@ -77,9 +77,16 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 }
 
 
-function affichage_donnees_tous_corps($type_form,$id_form,$retour=false){
+function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_page=false){
 	global $spip_lang_right,$spip_lang_left;
 	$out = "";
+	if (!$id_form = intval($id_form)) return $out;
+	if ($titre_page===false){
+		$res = spip_query("SELECT titre FROM spip_forms WHERE id_form="._q($id_form));
+		$row=spip_fetch_array($res);
+		$titre_page = $row['titre'];
+	}
+	
 	$prefix = forms_prefixi18n($type_form);
   $icone = find_in_path("img_pack/$type_form-24.png");
   if (!$icone)
@@ -142,7 +149,7 @@ function affichage_donnees_tous($type_form){
 		else
 			$retour = generer_url_ecrire('tables_tous');
 	}
-	echo affichage_donnees_tous_corps($type_form,_request('id_form'),$retour);
+	echo affichage_donnees_tous_corps($type_form,_request('id_form'),$retour, $titre_page);
 	if ($GLOBALS['spip_version_code']>=1.9203)
 		echo fin_gauche();
 	echo fin_page();
