@@ -69,5 +69,9 @@ function Forms_supprimer_tables($type_ou_id){
 	spip_query("DELETE FROM spip_forms_articles WHERE id_form="._q($id_form));
 }
 
+include_spip('forms_fonctions');
+function Forms_les_valeurs($id_form, $id_donnee, $champ, $separateur=",",$etoile=false){
+	return forms_calcule_les_valeurs('forms_donnees_champs', $id_donnee, $champ, $id_form, $separateur,$etoile);
+}
 
 ?>

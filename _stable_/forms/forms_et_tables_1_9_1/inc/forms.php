@@ -821,22 +821,31 @@ function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_
 			foreach($donnees as $id_donnee=>$champs){
 				$vals = array();
 				$vals[] = $id_donnee;
-				$vals[] = "<a href='".generer_url_ecrire("donnees_edit","id_form=$id_form&id_donnee=$id_donnee&retour=".urlencode($retour))."'>"
-					.implode(", ",$champs)."</a>";
+				if ($lieeliante=='liee')
+					$auth_modifier = autoriser('modifier',$type_autoriser,$iid,NULL,array('id_donnee_liee'=>$id_donnee));
+				else
+					$auth_modifier = autoriser('modifier',$type_autoriser,$id_donnee,NULL,array('id_form'=>$id_form,'id_donnee_liee'=>$iid));
+				$vals[] = 
+				  ($auth_modifier?"<a href='".generer_url_ecrire("donnees_edit","id_form=$id_form&id_donnee=$id_donnee&retour=".urlencode($retour))."'>":"")
+				  .implode(", ",$champs)
+				  .($auth_modifier?"</a>":"");
 				$redirect = ancre_url((_DIR_RESTREINT?"":_DIR_RESTREINT_ABS).self(),'tables');
 				$action = "";
 				if ($lieeliante=='liee'){
-					if (autoriser("delier_donnee",$type_autoriser,$id,NULL,array('id_donnee_liee'=>$id_donnee)))
+					if (autoriser("delier_donnee",$type_autoriser,$iid,NULL,array('id_donnee_liee'=>$id_donnee)))
 						$action = generer_action_auteur("forms_lier_donnees","$id,$type_source,retirer,$id_donnee",urlencode($redirect));
 				}
 				else
-					if (autoriser("delier_donnee",$type_autoriser,$id_donnee,NULL,array('id_form'=>$id_form,'id_donnee_liee'=>$id)))
+					if (autoriser("delier_donnee",$type_autoriser,$id_donnee,NULL,array('id_form'=>$id_form,'id_donnee_liee'=>$iid)))
 						$action = generer_action_auteur("forms_lier_donnees","$id_donnee,$type_lie,retirer,$id",urlencode($redirect));
-				$action = ancre_url($action,$bloc_id);
-				$redirajax = generer_url_ecrire($script,$arg_ajax);
-				$vals[] = "<a href='$action' rel='$redirajax' class='ajaxAction' >"
-					. _T($prefixi18n[$types[$id_form]].":lien_retirer_donnee_$lieeliante")."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'")
-					. "</a>";
+				if ($action){
+					$action = ancre_url($action,$bloc_id);
+					$redirajax = generer_url_ecrire($script,$arg_ajax);
+					$vals[] = "<a href='$action' rel='$redirajax' class='ajaxAction' >"
+						. _T($prefixi18n[$types[$id_form]].":lien_retirer_donnee_$lieeliante")."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'")
+						. "</a>";
+				}
+				else $vals[] = "";
 				$table[] = $vals;
 			}
 		}

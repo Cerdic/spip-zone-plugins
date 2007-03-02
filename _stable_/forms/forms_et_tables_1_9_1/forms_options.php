@@ -18,12 +18,13 @@ include_spip('base/forms');
 $GLOBALS['forms_actif_exec'][] = 'donnees_edit';
 
 function autoriser_form_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
-	if ($type=='form')
+	if ($type=='form' OR $type=='donnee'){
 		if ($faire=='administrer'){
 			return ($qui['statut'] == '0minirezo');
 		}
 		else
 			return ($qui['statut'] == '0minirezo');
+	}
 	return false;
 }
 function autoriser_donnee_dist($faire,$type,$id_donnee,$qui,$opt){

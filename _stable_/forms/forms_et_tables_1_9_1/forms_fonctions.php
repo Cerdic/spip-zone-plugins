@@ -25,9 +25,9 @@
 			return implode($separateur,$lesvaleurs);
 		}
 		else 
-			return forms_calcule_valeur_jointure($type, $id_donnee, $champ, $id_form);
+			return forms_calcule_valeur_jointure($type, $id_donnee, $champ, $id_form, $etoile);
 	}
-	function forms_calcule_valeur_jointure($type, $id_donnee, $champ, $id_form){
+	function forms_calcule_valeur_jointure($type, $id_donnee, $champ, $id_form,$separateur,$etoile=false){
 		static $type_joint = array();
 		static $prefixi18n = array();
 		static $liste_table = array();
@@ -54,9 +54,16 @@
 		  WHERE $in AND l.id_donnee="._q($id_donnee));
 		$cpt = spip_num_rows($res);
 		$out = "";
-		if ($cpt==0) $out .= _T("$pre:aucune_reponse");
-		else if ($cpt==1) $out .= _T("$pre:une_reponse");
-		else $out .= _T("$pre:nombre_reponses",array('nombre'=>$cpt));
+		if (!$etoile){
+			if ($cpt==0) $out .= _T("$pre:aucune_reponse");
+			else if ($cpt==1) $out .= _T("$pre:une_reponse");
+			else $out .= _T("$pre:nombre_reponses",array('nombre'=>$cpt));
+		}
+		else {
+			$out .="0";
+			while ($row = spip_fetch_array($res))
+				$out .= $separateur.$row['id_donnee_liee'];
+		}
 		return $out;
 	}
 
