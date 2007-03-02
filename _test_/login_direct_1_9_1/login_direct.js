@@ -1,7 +1,7 @@
 
 function login_direct_submit() {
 	try {
-		$.noConflict();
+		jQuery.noConflict();
 		var jform = $('#login');
 		if ($('#var_login', jform).val() && $('#var_password', jform).val()) {
 			//kill la précédente connexion (fait comme si on avait cliqué sur le lien "Se connecter sous un autre identifiant)
