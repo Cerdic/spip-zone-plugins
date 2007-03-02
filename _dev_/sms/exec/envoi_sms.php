@@ -20,7 +20,7 @@ function exec_envoi_sms_dist()
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$securiser_action();
 		$resultat = transmet_prestataire($contexte);
-		$message = $resultat ? _L('erreur') . ':<br />'. $resultat
+		$message = $resultat!==true ? _L('erreur') . ':<br />'. $resultat
 							: _L('envoi_correct_pour') . ' ' . $contexte['to'];
 	}
 	include_spip("inc/texte");
@@ -39,31 +39,18 @@ function exec_envoi_sms_dist()
 */
 function transmet_prestataire(&$contexte)
 {
-	include_spip('inc/sms');
-	$contexte['resultat'] = '';
-//	$contexte['resultat'] = print_r($contexte, true);
-
-    $sender =& Net_SMS::factory($contexte['prestataire'],
-                         array(	'user' => $contexte['user'],
-								'password' => $contexte['password'],
-								'api_id' => $contexte['api_id'] ));
-    if (c_pear::isError($sender))   {
-		$contexte['resultat'] = _L('factory SMS failed') . '<br />' .
-			print_r($sender, true);
-		return $contexte['resultat'];
-    }
-	//send message and return result
-	$msg = array('to'=>$contexte['to'],
-	             'from'=>$contexte['from'],
-				 'id'=>$contexte['id'],
-				 'text'=>$contexte['text']);
-	$e = $sender->send($msg);
-    if (c_pear::isError($e))   {
-		$contexte['resultat'] = _L('transmission_loupee') .
-		   '<br />' . print_r($msg, true) .
-		   '<br />' . print_r($e, true);
-    }
-	return $contexte['resultat'];
+	$envoyer_sms = charger_fonction('envoyer_sms','inc');
+	return $envoyer_sms(
+	  array('prestataire' => $contexte['prestataire'],
+		      'user' => $contexte['user'],
+		      'password' => $contexte['password'],
+		      'api_id' => $contexte['api_id'] )
+		      ,
+	  array('to'=>$contexte['to'],
+	        'from'=>$contexte['from'],
+	        'id'=>$contexte['id'],
+	        'text'=>$contexte['text'])
+	);
 }
 
 /*
