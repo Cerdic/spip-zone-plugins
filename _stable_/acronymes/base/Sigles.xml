@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<forms>
+<form>
+	<id_form>21</id_form>
+	<titre>Sigles</titre>
+	<descriptif></descriptif>
+	<type_form>table</type_form>
+	<modifiable>non</modifiable>
+	<multiple>non</multiple>
+	<email>a:1:{s:6:"defaut";s:0:"";}</email>
+	<champconfirm></champconfirm>
+	<texte></texte>
+	<moderation>posteriori</moderation>
+	<public>non</public>
+	<linkable>non</linkable>
+	<documents>non</documents>
+	<html_wrap></html_wrap>
+	<fields>
+		<field>
+			<champ>ligne_1</champ>
+			<rang>1</rang>
+			<titre>SIGLE</titre>
+			<type>ligne</type>
+			<obligatoire>oui</obligatoire>
+			<extra_info></extra_info>
+			<specifiant>oui</specifiant>
+			<public></public>
+			<aide>Indiquez le SIGLE de l'accronyme ou de l'abbréviation</aide>
+			<html_wrap></html_wrap>
+		</field>
+		<field>
+			<champ>select_1</champ>
+			<rang>2</rang>
+			<titre>Type</titre>
+			<type>select</type>
+			<obligatoire>oui</obligatoire>
+			<extra_info>radio</extra_info>
+			<specifiant></specifiant>
+			<public></public>
+			<aide>Sélectionnez la balise qui sera utilisée : ex acronym pour ASSEDIC (qui se prononce comme un mot) et abbr pour ANPE (qui se prononce lettre à lettre).</aide>
+			<html_wrap></html_wrap>
+			<les_choix>
+				<un_choix>
+					<choix>select_1_1</choix>
+					<titre>acronym</titre>
+					<rang>1</rang>
+				</un_choix>
+				<un_choix>
+					<choix>select_1_2</choix>
+					<titre>abbr</titre>
+					<rang>2</rang>
+				</un_choix>
+			</les_choix>
+		</field>
+		<field>
+			<champ>texte_1</champ>
+			<rang>3</rang>
+			<titre>Descriptif</titre>
+			<type>texte</type>
+			<obligatoire>oui</obligatoire>
+			<extra_info></extra_info>
+			<specifiant></specifiant>
+			<public></public>
+			<aide>Descriptif du sigle</aide>
+			<html_wrap></html_wrap>
+		</field>
+		<field>
+			<champ>select_2</champ>
+			<rang>4</rang>
+			<titre>Langue</titre>
+			<type>select</type>
+			<obligatoire>oui</obligatoire>
+			<extra_info>liste</extra_info>
+			<specifiant></specifiant>
+			<public></public>
+			<aide>Indiquez la langue du SIGLE</aide>
+			<html_wrap></html_wrap>
+			<les_choix>
+				<un_choix>
+					<choix>select_2_1</choix>
+					<titre>fr</titre>
+					<rang>1</rang>
+				</un_choix>
+				<un_choix>
+					<choix>select_2_2</choix>
+					<titre>en</titre>
+					<rang>2</rang>
+				</un_choix>
+			</les_choix>
+		</field>
+	</fields>
+</form>
+</forms>

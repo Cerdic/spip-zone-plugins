@@ -65,28 +65,49 @@ function acronymes_ajouter($chaine,$replacenb=-1)
   if ($replacenb!=0)
   {
   	if (!count($acro_patterns)){
-			#définition des remplacements
+			#definition des remplacements
 			$set = array();
 
-			#Récupération des mots et des définitions dans une rubrique locale
-	  	$res = spip_query("SELECT titre,descriptif FROM spip_articles WHERE id_rubrique=".spip_abstract_quote($id_rubrique_acronymes));
-			while($row = spip_fetch_array($res)){
-				$accro=str_replace(".","",$row['titre']);
-				if (!isset($set[$accro])){
+			#Recuperation des mots et des definitions dans une table des acronymes
+			if (include_spip('base/forms_base_api') AND count($liste=Forms_liste_tables('acronymes_sigles'))){
+				include_spip('forms_fonctions');
+				$id_form = intval(reset($liste));
+		  	$res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form));
+		  	while ($row = spip_fetch_array($res)){
+		  		$accro=str_replace(".","",forms_calcule_les_valeurs('forms_donnees_champs', $row['id_donnee'], 'ligne_1', $id_form,' ', true));
+		  		$desc = forms_calcule_les_valeurs('forms_donnees_champs', $row['id_donnee'], 'texte_1', $id_form,' ', true);
+		  		$balise = forms_calcule_les_valeurs('forms_donnees_champs', $row['id_donnee'], 'select_1', $id_form,' ', true);
+		  		$lang = forms_calcule_les_valeurs('forms_donnees_champs', $row['id_donnee'], 'select_2', $id_form,' ', true);
 					$acro_patterns[] = $accro;
-					$acro_replacements[] = $row['descriptif'];
+					$acro_replacements[] = $desc;
+					$acro_balise[] = $balise;
 					$set[$accro] = 1;
+		  	}
+			}
+			#Recuperation des mots et des definitions dans une rubrique locale
+			if ($id_rubrique_acronymes) {
+		  	$res = spip_query("SELECT titre,descriptif FROM spip_articles WHERE id_rubrique=".spip_abstract_quote($id_rubrique_acronymes));
+				while($row = spip_fetch_array($res)){
+					$accro=str_replace(".","",$row['titre']);
+					if (!isset($set[$accro])){
+						$acro_patterns[] = $accro;
+						$acro_replacements[] = $row['descriptif'];
+						$acro_balise[] = 'acronym';
+						$set[$accro] = 1;
+					}
 				}
 			}
-			
-			#Récupération des mots et des définitions dans un site syndique distant
-	  	$res = spip_query("SELECT titre,descriptif FROM spip_syndic_articles WHERE id_syndic=".spip_abstract_quote($id_syndic_acronymes));
-			while($row = spip_fetch_array($res)){
-				$accro=str_replace(".","",$row['titre']);
-				if (!isset($set[$accro])){
-					$acro_patterns[] = $accro;
-					$acro_replacements[] = $row['descriptif'];
-					$set[$accro] = 1;
+			#Recuperation des mots et des definitions dans un site syndique distant
+			if ($id_syndic_acronymes) {
+		  	$res = spip_query("SELECT titre,descriptif FROM spip_syndic_articles WHERE id_syndic=".spip_abstract_quote($id_syndic_acronymes));
+				while($row = spip_fetch_array($res)){
+					$accro=str_replace(".","",$row['titre']);
+					if (!isset($set[$accro])){
+						$acro_patterns[] = $accro;
+						$acro_replacements[] = $row['descriptif'];
+						$acro_balise[] = 'acronym';
+						$set[$accro] = 1;
+					}
 				}
 			}
 			unset($set);
@@ -94,32 +115,34 @@ function acronymes_ajouter($chaine,$replacenb=-1)
 			foreach($acro_patterns as $key=>$accro)
 			{
 				$desc_temp = trim(attribut_html(supprimer_tags($acro_replacements[$key])));
-				$desc_temp = str_replace("'","&#039;",$desc_temp);
+				$desc_temp = supprimer_tags(str_replace("'","&#039;",$desc_temp));
 				$pattern="{([^\w@\.])(";
 				for ($i=0;$i<strlen($accro);$i++)
 					$pattern.=$accro{$i}."[\.]?";
 				$pattern.=")(?![\w@])}";
 				$acro_patterns[$key] = $pattern;
-				$acro_replacements[$key] = "\\1<acronym title='@A@C@R@O@$key@@'>\\2@</acronym>";
+				$balise = $acro_balise[$key];
+				$acro_replacements[$key] = "\\1<$balise title='@A@C@R@O@$key@@'>\\2@</$balise>";
 				$acro_step2["@A@C@R@O@$key@@"] = $desc_temp;
 			}
 			$acro_step2["@</acronym>"] = "</acronym>"; // nettoyer les balises fermantes
+			$acro_step2["@</abbr>"] = "</abbr>"; // nettoyer les balises fermantes
 			
-			#tri nécessaire
+			#tri necessaire
 			ksort($acro_patterns);
 			ksort($acro_replacements);
   	}
 
   	if (count($acro_patterns)){
 			// reperage des balises acronym existantes
-			$pattern="{<acronym[^>]*>([^<]*)</acronym>}";
+			$pattern="{<(?:acronym|abbr)[^>]*>([^<]*)</(?:acronym|abbr)>}";
 			preg_match_all ($pattern, $chaine, $tagMatches, PREG_SET_ORDER);
 			$textMatches = preg_split ($pattern, $chaine);
  			//$textMatches = preg_replace($patterns, $replacements, $textMatches ,$replacenb);
 
 		  for ($i = 0; $i < count ($textMatches); $i ++){
 		    $texte=$textMatches[$i];
-			  $pattern = '<([a-zA-Zéàèçùûôâîê0-9\. \s"\'_\/\-\+=;,!:@~\(\)\?&#%\n\[\]]+)>';
+			  $pattern = '<([a-z]+[^<>]*)>';
 			  preg_match_all ('/' . $pattern . '/', $texte, $xtagMatches, PREG_SET_ORDER);
 			  $xtextMatches = preg_split ('/' . $pattern . '/', $texte);
 			  // on met des acronymes la ou besoin, mais avec un title factice (pour pas en remettre dans le title)
