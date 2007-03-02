@@ -34,7 +34,7 @@ function action_forms_lier_donnees(){
 			$type = 'article';
 		$faire = $args[2];
 		if ($faire=='ajouter'){
-			if ($id && $id_donnee_liee && autoriser('modifier',$type,$id)){
+			if ($id!=0 && $id_donnee_liee && ($id<0 OR autoriser('modifier',$type,$id))){
 				$champ_donnee = 'id_donnee';
 				if ($type=='donnee') 
 					$champ_donnee = 'id_donnee_liee';

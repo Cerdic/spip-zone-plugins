@@ -24,7 +24,7 @@ function balise_FORMS ($p) {
 function balise_FORMS_stat($args, $filtres) {
 	return $args;
 }
- 
+
 function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class='', $script_validation = 'valide_form', $message_confirm='forms:avis_message_confirmation',$reponse_enregistree="forms:reponse_enregistree",$forms_obligatoires="") {
 	if (!include_spip('inc/autoriser'))
 		include_spip('inc/autoriser_compat');
@@ -58,7 +58,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 		OR in_array(_request('exec'),$GLOBALS['forms_actif_exec'])
 		)
 		AND 
-		(!$id_donnee 
+		(!($id_donnee>0)
 		OR autoriser('modifier','donnee',$id_donnee,NULL,array('id_form'=>$id_form)));
 	$formactif = $formactif?' ':'';
 
@@ -70,8 +70,11 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 			$formok = _T($reponse_enregistree);
 			if ($reponse)
 			  $reponse = _T($message_confirm,array('mail'=>$reponse));
-			if (!_DIR_RESTREINT && $id_donnee=_request('id_donnee'))
+			if (!_DIR_RESTREINT 
+			  AND (($r=_request('id_donnee'))===NULL OR $r==$id_donnee OR $r<0) )
 				$valeurs = Forms_valeurs($id_form,$id_donnee);
+			else
+				$id_donnee = 0;
 		}
 		else {
 			// on reinjecte get et post dans $valeurs
@@ -121,7 +124,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 			'reponse'=>filtrer_entites($reponse),
 			'id_article' => $id_article,
 			'id_form' => $id_form,
-			'id_donnee' => $id_donnee?$id_donnee:'',
+			'id_donnee' => $id_donnee?$id_donnee:(0-$GLOBALS['auteur_session']['id_auteur']), # GROS Hack pour les jointures a la creation
 			'self' => $url,
 			'valeurs' => serialize($valeurs),
 			'url_validation' => str_replace("&amp;","&",$url_validation),

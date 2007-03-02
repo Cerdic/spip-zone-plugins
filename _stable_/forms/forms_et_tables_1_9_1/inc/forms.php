@@ -93,7 +93,7 @@
 	function forms_type_table_lier($type,$id){
 		$type_table = 'table';
 		if ($type == 'donnee'){
-			$id = explode('-',$id);
+			$id = explode(';',$id);
 			$id_donnee_source = $id[0];
 			$champ = $id[1];
 			$id_form = $id[2];
@@ -517,7 +517,7 @@
 		return $row['rang'];
 	}
 	
-	function Forms_enregistrer_reponse_formulaire($id_form, $id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='') {
+	function Forms_enregistrer_reponse_formulaire($id_form, &$id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='') {
 		$r = '';
 		if (!include_spip('inc/autoriser'))
 			include_spip('inc/autoriser_compat');
@@ -574,7 +574,7 @@
 			}
 			// D'abord creer la reponse dans la base de donnees
 			if ($ok) {
-				if (autoriser('modifier', 'donnee', $id_donnee, NULL, array('id_form'=>$id_form))){
+				if ($id_donnee>0 AND autoriser('modifier', 'donnee', $id_donnee, NULL, array('id_form'=>$id_form))){
 					spip_query("UPDATE spip_forms_donnees SET date=NOW(), ip="._q($GLOBALS['ip']).", url="._q($url).", confirmation="._q($confirmation).", cookie="._q($cookie)." ".
 						"WHERE id_donnee="._q($id_donnee));
 					spip_query("DELETE FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee));
@@ -587,6 +587,10 @@
 					# rattrapper les documents associes a cette nouvelle donnee
 					# ils ont un id = 0-id_auteur
 					spip_query("UPDATE spip_documents_donnees SET id_donnee = $id_donnee WHERE id_donnee = ".(0-$GLOBALS['auteur_session']['id_auteur']));
+					# cf. GROS HACK 2 balise/forms
+					# rattrapper les documents associes a cette nouvelle donnee
+					# ils ont un id = 0-id_auteur
+					spip_query("UPDATE spip_forms_donnees_donnees SET id_donnee = $id_donnee WHERE id_donnee = ".(0-$GLOBALS['auteur_session']['id_auteur']));
 				}
 				if (!$id_donnee) {
 					$erreur['@'] = _T("forms:probleme_technique");
