@@ -184,10 +184,10 @@ function affichage_donnee_edit($type_form){
 	}
 	if (autoriser('administrer','form',$id_form)) {
 		$prefix = forms_prefixi18n($type_form);
-		$retour = urlencode(self());
 		echo icone_horizontale(_T("$prefix:suivi_reponses")."<br />".(($nb_reponses==0)?_T("$prefix:aucune_reponse"):(($nb_reponses==1)?_T("$prefix:une_reponse"):_T("forms:nombre_reponses",array('nombre'=>$nb_reponses)))),
-			generer_url_ecrire('donnees_tous',"id_form=$id_form"), "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif",false);
+			generer_url_ecrire('donnees_tous',"id_form=$id_form".(strpos($retour,"exec=donnees_tous")===FALSE?"&retour=$retour":"")), "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png", "rien.gif",false);
 			
+		$retour = urlencode(self());
 		echo icone_horizontale(_T("$prefix:telecharger_reponses"),
 			generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-exporter-24.png", "rien.gif",false);
 		if (defined('_DIR_PLUGIN_CSVIMPORT')){
