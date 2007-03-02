@@ -44,6 +44,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'erreur_taille_grille'	=> "Erreur : taille invalide",
 'erreur_syntaxe'	=> "Erreur de syntaxe",
+'erreur_spip'	=> "Cette version de Spip ne vous permet pas de jouer &agrave; ce jeu !",
+'erreur_scripts'	=> "Scripts d&eacute;sactiv&eacute;s : vous ne pouvez pas jouer &agrave; ce jeu ici !",
 
 );
 

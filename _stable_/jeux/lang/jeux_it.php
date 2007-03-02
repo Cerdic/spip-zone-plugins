@@ -43,7 +43,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'reponseNulle' => "Non hai ancora risposto",
 
 'erreur_taille_grille'	=> "Errore: dimensioni errate",
-'erreur_syntaxe'	=> "Errore di sintassi ",
+'erreur_syntaxe'	=> "Errore di sintassi",
+'erreur_spip'	=> "This Spip version is too old to play this game!",
+'erreur_scripts'	=> "Scripts not allowed: you can not play this game here!",
 
 );
 

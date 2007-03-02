@@ -8,11 +8,11 @@
 
 // filtre qui evite d'afficher le resultat obtenu par certains plugins
 // grace aux espions : <!-- PLUGIN-DEBUT --> et <!-- PLUGIN-FIN -->
-// ou : <!-- PLUGIN-DEBUT-xx --> et <!-- PLUGIN-FIN-xx --> ou xx est un numero.
+// ou : <!-- PLUGIN-DEBUT-#xxxx --> et <!-- PLUGIN-FIN-#xxxx --> ou xxxx est le numero d'identification du plugin.
 
 if (!function_exists("pas_de_plugin")) {	
  function pas_de_plugin($texte){
-		return preg_replace(",<!--\s*PLUGIN-DEBUT(-[0-9]*)?\s*-->.*<!--\s*PLUGIN-FIN(-[0-9]*)?\s*-->,UimsS", '', $texte);
+		return preg_replace(",<!--\s*PLUGIN-DEBUT(-#[0-9]*)?.*<!--\s*PLUGIN-FIN\\1?\s*-->,UimsS", '', $texte);
  }
 }
 

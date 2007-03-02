@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Des jeux dans vos articles</nom>
 	<etat>test</etat>
-	<version>0.1 pour Spip 1.9 minimum.</version>
+	<version>0.2 pour Spip 1.9 minimum.</version>
 	<icon>img/jeux-48.png</icon>
 	<auteur>
 [Patrice VANNEUFVILLE->mailto:patrice.vanneufville@laposte.net], novembre 2006
@@ -30,14 +30,16 @@ Un exemple :
 
 Ce plugin fonctionne de fa&ccedil;on optimale sur les squelettes disposant de la balise {{#INSERT_HEAD}} et peut &#233;galement &#234;tre test&#233; dans l'espace priv&#233;.
 
-_ Pour certains jeux, il n&#233;cessite l'activation du plugin {{jQuery}} pour les versions de spip {{1.9.1}} ou inf&#233;rieures.
+_ Si vous avez une version de Spip inf&#233;rieure ou &#233;gale &#224; {{1.9.1}}, certains jeux n&#233;cessiteront l'activation du plugin [jQuery->http://files.spip.org/spip-zone/jqueryplugin.zip].
 _ Pour les jeux graphiques, il faut avoir les librairies {{GD}} install&#233;es sur votre server.
-_ Ce plugin est en &#233;volution, proc&#233;dez r&#233;guli&#232;rement &#224; vos mises &#224; jours.
+_ Ce plugin est encore en &#233;volution, proc&#233;dez r&#233;guli&#232;rement &#224; vos mises &#224; jours.
   
-{{Attention}} : afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (sommaires, rubriques, backends, ...), pensez bien :
+{{Important}} : afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (sommaires, rubriques, backends, ...), pensez bien :
 
--* soit &#224; placer une introduction dans votre article entre les balises &lt;intro&gt; et &lt;/intro&gt;
--* soit &#224; remplir le descriptif de l'article.
+-* soit &#224; placer une {{introduction}} dans votre article entre les balises &lt;intro&gt; et &lt;/intro&gt;
+-* soit &#224; remplir le {{descriptif}} de l'article.
+
+Aide : [->http://www.spip-contrib.net/Des-jeux-dans-vos-articles]
 	</description>
 	<lien>[->http://www.spip-contrib.net/Des-jeux-dans-vos-articles]</lien> <!-- URI de documentation -->
 	<fonctions>jeux_fonctions.php</fonctions>
@@ -68,4 +70,9 @@ _ Ce plugin est en &#233;volution, proc&#233;dez r&#233;guli&#232;rement &#224; 
 		<inclure>jeux_pipelines.php</inclure>
 		<action>affiche_gauche</action>
 	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom> 
+		<inclure>jeux_pipelines.php</inclure>
+		<action>affichage_final</action>
+	</pipeline>	
 </plugin>

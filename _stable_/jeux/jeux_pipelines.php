@@ -11,10 +11,11 @@ include_spip('jeux_config');
 include_spip('jeux_utils');
 
 // tableau de parametres exploitables par les plugins
-global $jeux_config;
+global $jeux_config, $jeux_liste;
 
 // fonction pre-traitement
 function jeux_pre($chaine, $indexJeux){ 
+	global $jeux_liste;
 	if (strpos($chaine, _JEUX_DEBUT)===false || strpos($chaine, _JEUX_FIN)===false) return $chaine;
 	
 	// isoler le jeu...
@@ -22,15 +23,16 @@ function jeux_pre($chaine, $indexJeux){
 	list($chaine, $texteApres) = explode(_JEUX_FIN, $suite, 2); 
 	
 	// ...et decoder le texte obtenu en fonction des signatures
-	jeux_inclure_et_decoder($chaine, $indexJeux);
+	$liste = jeux_inclure_et_decoder($chaine, $indexJeux);
+	$jeux_liste = array_merge($jeux_liste, $liste);
 
-	return $texteAvant.jeux_rem('PLUGIN-DEBUT', $indexJeux).$chaine
+	return $texteAvant.jeux_rem('PLUGIN-DEBUT', $indexJeux, join('/', $liste)).$chaine
 		.jeux_rem('PLUGIN-FIN', $indexJeux).jeux_pre($texteApres, ++$indexJeux);
 }
 
 // fonction post-traitement
 function jeux_post($chaine){
-$chaine=echappe_retour($chaine, 'JEUX');
+	$chaine=echappe_retour($chaine, 'JEUX');
 
 	$sep1 = '['._JEUX_POST.'|'; $sep2 = '@@]';
 	if (strpos($chaine, $sep1)===false || strpos($chaine, $sep2)===false) return $chaine;
@@ -42,8 +44,6 @@ $chaine=echappe_retour($chaine, 'JEUX');
 	$fonc = $params[0];
 	if (function_exists($fonc)) $chaine = $fonc($params[1], $params[2]);
 
-//	$chaine = "OK : {$params[0]} - {$params[1]} - {$regs[2]}";
-	
 	return $texteAvant.$chaine.jeux_post($texteApres);
 }
 
@@ -61,11 +61,21 @@ function jeux2($chaine, $indexJeux){
 
 // pipeline pre_propre
 function jeux_pre_propre($texte) { 
+	// liste des jeux trouves
+	global $jeux_liste;
+	$jeux_liste = array();
 	// s'il n'est pas present dans un formulaire envoye,
-	// l'identifiant du jeu est choisi au hasard... ca peut servir dans le cas des signatures.
+	// l'identifiant du jeu est choisi au hasard...
+	// ca peut servir en cas d'affichage de plusieurs articles par page.
 	// en passant tous les jeux en ajax, ce ne sera plus la peine.
 	$GLOBALS['debut_index_jeux'] = isset($_POST['debut_index_jeux'])?$_POST['debut_index_jeux']:rand(1, 65000);
-	return jeux_pre($texte, $GLOBALS['debut_index_jeux']);
+	$texte = jeux_pre($texte, $GLOBALS['debut_index_jeux']);
+	$jeux_liste = array_unique($jeux_liste);
+	$header='';
+	foreach($jeux_liste as $jeu) $header .= jeux_stylesheet($jeu) . "\n";
+	foreach($jeux_liste as $jeu) $header .= jeux_javascript($jeu) . "\n";
+	$header = htmlentities(preg_replace(",\n+,", "||", trim($header)));
+	return (count($jeux_liste)?jeux_rem('JEUX-HEAD', count($jeux_liste), $header):'') . $texte;
 }
 
 // pipeline pre_propre
@@ -75,27 +85,37 @@ function jeux_post_propre($texte) {
 
 // pipeline header_prive
 function jeux_header_prive($flux){
-	global $jeux_header_prive, $jeux_javascript;
-	foreach($jeux_header_prive as $s) $flux .= jeux_stylesheet_public($s);
-	foreach($jeux_javascript as $s) $flux .= jeux_javascript($s);
+	global $jeux_header_prive, $jeux_javascript_prive;
+	$flux .= _JEUX_HEAD1;
+	foreach($jeux_header_prive as $s) $flux .= jeux_stylesheet($s);
+	foreach($jeux_javascript_prive as $s) $flux .= jeux_javascript($s);
 	return $flux;
 }
 
 // pipeline insert_head
 function jeux_insert_head($flux){
-	global $jeux_header_public, $jeux_javascript;
-	$flux .= "<!-- CSS & JS JEUX -->\n";
-	foreach($jeux_header_public as $s) $flux .= jeux_stylesheet_public($s);
-	foreach($jeux_javascript as $s) $flux .= jeux_javascript($s);
-	return $flux;
+	return $flux . _JEUX_HEAD1 . jeux_stylesheet('jeux') . jeux_javascript('layer') . _JEUX_HEAD2;
 }
 
 // pipeline affiche_gauche
 function jeux_affiche_gauche($flux) {
+// correction d'un bug d'affichage
 if ($GLOBALS['spip_version_code']<1.92) $flux['data'] .="<script type=\"text/javascript\"><!--
 document.getElementById('haut-page').childNodes[2].align='center';
 --></script>";
 	return $flux;
 }
+
+// Le pipeline affichage_final, execute a chaque hit sur toute la page
+function jeux_affichage_final($flux) {
+	preg_match_all(",<!-- JEUX-HEAD-#[0-9]+ '([^>]*)' -->,", $flux, $matches, PREG_SET_ORDER);
+	$liste = array();
+	foreach ($matches as $val) $liste = array_merge($liste, explode('||', $val[1]));
+	$liste = array_unique($liste);
+	$header = html_entity_decode(join("\n",$liste));
+	$flux = str_replace(_JEUX_HEAD2, _JEUX_HEAD2 . $header, $flux);
+	return $flux;
+}
+
 
 ?>

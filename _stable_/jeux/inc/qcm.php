@@ -140,7 +140,7 @@ function qcm_un_trou($nomVarSelect, $indexQCM) {
   return " &nbsp; &nbsp; &nbsp;<input name=\"$nomVarSelect\" class=\"jeux_input qcm_input\" size=\"$sizeInput\" type=\"text\"> ";
 }
 
-function qcm_affiche_la_question($indexJeux, $indexQCM, $corrigee, $gestionPoints) {
+function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoints) {
   global $qcms, $qcm_score;
   if (!$qcms[$indexQCM]['nbpropositions'] || !$qcms[$indexQCM]['maxscore']) 
   	return "<div class=\"jeux_question\">".definir_puce()._T('jeux:erreur_syntaxe').'</div><br />';
@@ -157,7 +157,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corrigee, $gestionPoint
   } else $pointsQ = 1;
 
   $codeHTML = "<div class=\"jeux_question\">".definir_puce().$question.'</div>';
-  if (!$corrigee){
+  if (!$corriger){
     // affichage sans correction :
      $codeHTML.="\n<div class=\"qcm_proposition\">";
 

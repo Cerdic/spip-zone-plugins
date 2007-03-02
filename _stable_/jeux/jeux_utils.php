@@ -79,14 +79,21 @@ function jeux_listes($texte) {
 // retourne un tableau de mots ou d'expressions a partir d'un texte
 function jeux_liste_mots($texte) {
 	$texte = filtrer_entites(trim($texte));
-	$texte = preg_replace("/[,;\.\|\s\t\n\r]+/", " ", $texte);
-	$split = split('"', $texte);
+	$split = explode('"', $texte);
 	$c = count($split);
-	for($i=0; $i<$c; $i++) if ($i & 1) $split[$i] = str_replace(' ','+', $split[$i]);
-	$texte = join('', $split);
-	$texte = str_replace(" ","\t", $texte);
-	$texte = str_replace("+"," ", $texte);
-	return array_unique(split("\t", trim($texte)));
+	$split2 = array();
+	for($i=0; $i<$c; $i++) if (($s = trim($split[$i])) != ""){
+		if (($i & 1) && ($i != $c-1)) {
+			// on touche pas au texte entre deux ""
+			$split2[] = $s;
+		} else {
+			// on rassemble tous les separateurs : ,;.|\s\t\n
+			$temp = preg_replace("/[,;\.\|\s\t\n\r]+/", "\t", $s);
+			$temp = str_replace("+"," ", $temp);
+			$split2 = array_merge($split2, explode("\t", $temp));
+		}
+	}
+		return array_unique($split2);
 }
 function jeux_liste_mots_maj($texte) {
 	return jeux_liste_mots(strtoupper($texte));
@@ -113,7 +120,7 @@ function jeux_bouton_recommencer() {
 }
 
 // ajoute un module jeu a la bibliotheque
-function include_jeux($jeu, &$texte, $indexJeux) {
+function jeux_include_jeu($jeu, &$texte, $indexJeux) {
 	$fonc = 'jeux_'.$jeu;
 	if (!function_exists($fonc)) include_spip('inc/'.$jeu);
 	// on est jamais trop prudent !!
@@ -121,31 +128,30 @@ function include_jeux($jeu, &$texte, $indexJeux) {
 }	
 
 // inclut et decode les jeux, si le module inc/lejeu.php est present
+// retourne la liste des jeux trouves
 function jeux_inclure_et_decoder(&$texte, $indexJeux) {
 	global $jeux_signatures;
+	$liste = array();
 	foreach($jeux_signatures as $jeu=>$signatures) {
 		$ok = false;
 		foreach($signatures as $s) $ok |= (strpos($texte, "[$s]")!==false);
-		if ($ok) include_jeux($jeu, $texte, $indexJeux);
+		if ($ok) { 
+		 jeux_include_jeu($jeu, $texte, $indexJeux);
+		 $liste[]=$jeu;
+		}
 	}
+	return $liste;
 }
 
 // pour placer des commentaires
-function jeux_rem($rem, $index=false) {
- return code_echappement("\n<!-- ".$rem.($index!==false?'-#'.$index:'')." -->\n");
+function jeux_rem($rem, $index=false, $jeu='') {
+ return code_echappement("\n<!-- ".$rem.($index!==false?'-#'.$index:'').(strlen($jeu)?" '".$jeu."'":'')." -->\n");
 }
 
-// pour inserer un css en public
-function jeux_stylesheet_public($b) {
+// pour inserer un css
+function jeux_stylesheet($b) {
  $f = find_in_path("styles/$b.css");
  return $f?'<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="projection, screen" />'."\n":'';
-}
-
-// pour inserer un css en prive
-function jeux_stylesheet_prive($b) {
- $f = find_in_path("styles/$b.css");
- return $f?'<link rel="stylesheet" href="'.$f.'" type="text/css" media="projection, screen" />'."\n":'';
-// return '<link rel="stylesheet" href="'._DIR_PLUGIN_JEUX."styles/$b.css\" type=\"text/css\" media=\"projection, screen\" />\n";
 }
 
 // pour inserer un js
