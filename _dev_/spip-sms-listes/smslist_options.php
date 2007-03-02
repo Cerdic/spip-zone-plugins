@@ -22,7 +22,8 @@ function autoriser_smslist_administrer($faire, $type, $id, $qui, $opt) {
 function autoriser_smslist_message_donnee_instituer($faire,$type,$id_donnee,$qui,$opt) {
 	if (($qui['statut'] != '0minirezo')
 	OR !isset($opt['nouveau_statut'])
-	OR in_array($opt['nouveau_statut'],array('prop','publie','refuse')) ) return false;
+	OR in_array($opt['nouveau_statut'],array('prop','publie','refuse')) 
+	OR !in_array($opt['statut'],array('prepa'))) return false;
 	return true;
 }
 function autoriser_smslist_liste_donnee_instituer($faire,$type,$id_donnee,$qui,$opt) {
@@ -40,7 +41,7 @@ function autoriser_smslist_abonne_donnee_instituer($faire,$type,$id_donnee,$qui,
 function autoriser_smslist_boiteenvoi_donnee_instituer($faire,$type,$id_donnee,$qui,$opt) {
 	if (($qui['statut'] != '0minirezo')
 	OR !isset($opt['nouveau_statut'])
-	OR !in_array($opt['nouveau_statut'],array('prepa')) ) return false;
+	OR !in_array($opt['nouveau_statut'],array('prepa','poubelle')) ) return false;
 	return true;
 }
 
