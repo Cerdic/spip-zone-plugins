@@ -115,15 +115,13 @@ _ Ce tweak remplace ces raccourcis par les images du m&ecirc;me nom qu\'il trouv
 - {d&eacute;faut} : le javascript est signal&eacute; en rouge dans l\'espace priv&eacute;
 - {toujours} : le javascript est accept&eacute; partout.
 
-Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la gestion du javascript est {{toujours}} s&eacute;curis&eacute;e.<br />Votre choix : %radio_filtrer_javascript%',
+Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la gestion du javascript est {{toujours}} s&eacute;curis&eacute;e.<br />Votre choix : %radio_filtrer_javascript2%',
 	'js_jamais' => 'Jamais',
 	'js_defaut' => 'D&eacute;faut',
 	'js_toujours' => 'Toujours',
 
-'xml:nom'	=>'Activer le validateur xml',
+	'xml:nom'	=>'Activer le validateur xml',
 	'xml:description' =>"Active le validateur xml pour l'espace public tel qu'il est décrit dans la [documentation->http://www.spip.net/fr_article3541.html]." 
-
-
 
 /*
 	':nom' => '',

@@ -108,8 +108,8 @@ add_tweak( array(
 	// la variable Spip est : set_options
 	// le /defaut signifie que avancees (traduit par : _T('tweak:js_defaut')) sera coche par defaut
 	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	'code' 	=> '$GLOBALS["radio_filtrer_javascript"]=%%radio_filtrer_javascript/s/"defaut(jamais=tweak:js_jamais|defaut=tweak:js_defaut|toujours=tweak:js_toujours)"%%;
-list($GLOBALS["filtrer_javascript"], $foo) = explode("(", $GLOBALS["radio_filtrer_javascript"], 2);',
+	'code' 	=> '$GLOBALS["radio_filtrer_javascript2"]=%%radio_filtrer_javascript2/s/"0(-1=tweak:js_jamais|0=tweak:js_defaut|1=tweak:js_toujours)"%%;
+list($GLOBALS["filtrer_javascript"], $foo) = explode("(", $GLOBALS["radio_filtrer_javascript2"], 2);',
 	'categorie'	=> 'admin',
 	'options'	=> 1,
 	'version'	=> 1.92,
