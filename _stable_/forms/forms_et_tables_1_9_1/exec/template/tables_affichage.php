@@ -77,8 +77,56 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 }
 
 
-function affichage_donnees_tous($type_form){
+function affichage_donnees_tous_corps($type_form,$id_form,$retour=false){
 	global $spip_lang_right,$spip_lang_left;
+	$out = "";
+	$prefix = forms_prefixi18n($type_form);
+  $icone = find_in_path("img_pack/$type_form-24.png");
+  if (!$icone)
+  	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
+	$out .=  "<table><tr><td>";
+	if ($retour){
+		$out .=  "<div style='float:$spip_lang_left;'>";
+		$out .=  icone(_T('icone_retour'), urldecode($retour), $icone, "rien.gif","",false);
+		$out .=  "</div>";
+	}
+	
+	if (autoriser('administrer','form',$id_form)) {
+		$retour = urlencode(self());
+		
+		$url_edit = generer_url_ecrire('donnees_edit',"id_form=$id_form&retour=$retour");
+		$out .=  "<div style='float:$spip_lang_left;'>";
+		$out .=  icone(_T("$prefix:icone_ajouter_donnees"), $url_edit, $icone, "creer.gif","",false);
+		$out .=  "</div>";
+		
+		$out .=  "<div style='float:$spip_lang_left;'>";
+		$out .=  icone(_T("$prefix:telecharger_reponses"),
+			generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-exporter-24.png", "rien.gif","",false);
+		$out .=  "</div>";
+		if (defined('_DIR_PLUGIN_CSVIMPORT')){
+			$out .=  "<div style='float:$spip_lang_left;'>";
+			$out .=  icone(_T("$prefix:importer_donnees_csv"),
+				generer_url_ecrire("csvimport_import","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-importer-24.png", "rien.gif","",false);
+			$out .=  "</div>";
+		}
+	}
+	
+	$out .=  '<div style="clear:left;text-align:center">';
+	$out .=  gros_titre($titre_page,'',false);
+	$out .=  '</div>';
+	
+	$contexte = array('id_form'=>$id_form,
+	'titre_liste'=>$titre_page,
+	'aucune_reponse'=>_T("$prefix:aucune_reponse"),
+	'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],
+	'statuts' => array('prepa','prop','propose','publie','refuse') );
+	$out .=  recuperer_fond("exec/template/donnees_tous",$contexte);
+	
+	$out .=  "</td></tr></table><br />\n";
+	return $out;
+}
+
+function affichage_donnees_tous($type_form){
   include_spip("inc/presentation");
 	include_spip('public/assembler');
 	if (!include_spip('inc/autoriser'))
@@ -87,11 +135,6 @@ function affichage_donnees_tous($type_form){
   _Forms_install();
 	$row=spip_fetch_array(spip_query("SELECT titre FROM spip_forms WHERE id_form="._q(_request('id_form'))));
 	$titre_page = $row['titre'];
-	
-	$prefix = forms_prefixi18n($type_form);
-  $icone = find_in_path("img_pack/$type_form-24.png");
-  if (!$icone)
-  	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
 	echo debut_page($titre_page, "documents", "forms");
 	if (!$retour = _request('retour')){
 		if (find_in_path("exec/{$type_form}s_tous"))
@@ -99,45 +142,7 @@ function affichage_donnees_tous($type_form){
 		else
 			$retour = generer_url_ecrire('tables_tous');
 	}
-	echo "<table><tr><td>";
-	echo "<div style='float:$spip_lang_left;'>";
-	echo icone(_T('icone_retour'), urldecode($retour), $icone, "rien.gif",false);
-	echo "</div>";
-	$id_form = _request('id_form');
-	if (autoriser('administrer','form',$id_form)) {
-		$retour = urlencode(self());
-		
-		$url_edit = generer_url_ecrire('donnees_edit',"id_form=$id_form&retour=$retour");
-		echo "<div style='float:$spip_lang_left;'>";
-		echo icone(_T("$prefix:icone_ajouter_donnees"), $url_edit, $icone, "creer.gif",false);
-		echo "</div>";
-		
-		echo "<div style='float:$spip_lang_left;'>";
-		echo icone(_T("$prefix:telecharger_reponses"),
-			generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-exporter-24.png", "rien.gif",false);
-		echo "</div>";
-		if (defined('_DIR_PLUGIN_CSVIMPORT')){
-			echo "<div style='float:$spip_lang_left;'>";
-			echo icone(_T("$prefix:importer_donnees_csv"),
-				generer_url_ecrire("csvimport_import","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-importer-24.png", "rien.gif",false);
-			echo "</div>";
-		}
-	}
-	
-	echo '<div style="clear:left;text-align:center">';
-	echo gros_titre($titre_page);
-	echo '</div>';
-	
-	$contexte = array('id_form'=>_request('id_form'),
-	'titre_liste'=>$titre_page,
-	'aucune_reponse'=>_T("$prefix:aucune_reponse"),
-	'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],
-	'statuts' => array('prepa','prop','propose','publie','refuse') );
-	echo recuperer_fond("exec/template/donnees_tous",$contexte);
-	
-	echo "</td></tr></table><br />\n";
-	
-
+	echo affichage_donnees_tous_corps($type_form,_request('id_form'),$retour);
 	if ($GLOBALS['spip_version_code']>=1.9203)
 		echo fin_gauche();
 	echo fin_page();

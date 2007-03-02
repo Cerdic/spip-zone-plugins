@@ -99,10 +99,16 @@
 					$valeur = $row['titre'];
 				}
 			}
+			elseif ($t == 'password'){
+				$rendu = "";
+				if (!$etoile)
+					$valeur="******"; # ne jamais afficher en clair un password, si on veut vraiment le faire on utilise l'etoile sur le champ
+			}
 			elseif ($t == 'texte')
 				$rendu = 'propre';
 			if (!$etoile){
-				$valeur = $rendu($valeur);
+				if ($rendu)
+					$valeur = $rendu($valeur);
 				$valeur = wrap_champ($valeur,$wrap_champ[$id_form][$champ]);
 			}
 		}
