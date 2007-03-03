@@ -103,7 +103,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 			else
 				$q.="AND 0=1 ";
 		//si unique, ignorer id_donnee, si pas id_donnee, ne renverra rien
-		if ($row['multiple']=='oui' && $id_donnee) $q.="AND donnees.id_donnee="._q($id_donnee);
+		if ($row['multiple']=='oui') $q.="AND donnees.id_donnee="._q($id_donnee);
 		$res = spip_query($q);
 		if($row2 = spip_fetch_array($res)){
 			$id_donnee=$row2['id_donnee'];
