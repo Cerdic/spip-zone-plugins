@@ -25,7 +25,7 @@
 			return implode($separateur,$lesvaleurs);
 		}
 		else 
-			return forms_calcule_valeur_jointure($type, $id_donnee, $champ, $id_form, $etoile);
+			return forms_calcule_valeur_jointure($type, $id_donnee, $champ, $id_form, $separateur,$etoile);
 	}
 	function forms_calcule_valeur_jointure($type, $id_donnee, $champ, $id_form,$separateur,$etoile=false){
 		static $type_joint = array();
@@ -55,9 +55,13 @@
 		$cpt = spip_num_rows($res);
 		$out = "";
 		if (!$etoile){
-			if ($cpt==0) $out .= _T("$pre:aucune_reponse");
-			else if ($cpt==1) $out .= _T("$pre:une_reponse");
-			else $out .= _T("$pre:nombre_reponses",array('nombre'=>$cpt));
+			if ($cpt==0) $out .= "";//_T("$pre:aucune_reponse");
+			elseif ($cpt>5) $out .= _T("$pre:nombre_reponses",array('nombre'=>$cpt));
+			//else if ($cpt==1) $out .= _T("$pre:une_reponse");
+			else {
+				while ($row = spip_fetch_array($res))
+					$out .= implode(" ",Forms_decrit_donnee($row['id_donnee_liee'])).$separateur;
+			}
 		}
 		else {
 			$out .="0";
