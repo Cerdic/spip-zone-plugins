@@ -1,0 +1,16 @@
+Ce plugin est destiné à remplacer/compléter le plugin csv2spip (gestionnaire d'auteurs à partir de fichiers csv).
+
+Principe général pour ce projet :
+  . une carcasse vide où on créerait des morceaux ou importerait les fonctionnalités actuelles de csv2spip avec comme règle de base la compatibilité
+  . code de l'espace privé squeletisé et modulaire => tout en récupérer_fond(), echo interdit , pas de css inline
+  . utilisation de cfg pour la config du plugin
+
+
+Fonctionnalités supplémentaires par rapport à csv2spip:
+  . suppression auteurs depuis une liste soit id , soit login, email ou nom
+  . gestion des admins autorisés à utiliser le plugin (et/ou bridage des fonctionnalités en fonction de l'admin)
+  . exportation des listes d'auteurs en CSV
+  . gestion de l'ensemble des champs de la table spip_auteurs
+  . possibilité de remplir des tables complémentaires avec des infos par auteurs / par groupes / par sous-groupes (cf la connexion avec acces_groupes de csv2spip)
+
+
