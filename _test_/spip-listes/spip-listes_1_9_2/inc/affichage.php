@@ -432,7 +432,12 @@ function spiplistes_cherche_auteur(){
 	
 	echo "<p align='left'>";
 	$col = strpos($cherche_auteur, '@') !== false ? 'email' : 'nom';
-	$result = spip_query("SELECT id_auteur, $col FROM spip_auteurs");
+	$like = '';
+	if (strpos($cherche_auteur, '%') !== false) {
+		$like = " WHERE $col LIKE '" . $cherche_auteur . "'";
+		$cherche_auteur = str_replace('%', ' ', $cherche_auteur);
+	}
+	$result = spip_query("SELECT id_auteur, $col FROM spip_auteurs$like");
 	
 	while ($row = spip_fetch_array($result, SPIP_NUM)) {
 		$table_auteurs[] = $row[1];
