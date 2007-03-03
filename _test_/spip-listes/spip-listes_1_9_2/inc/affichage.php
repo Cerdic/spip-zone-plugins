@@ -431,7 +431,7 @@ function spiplistes_cherche_auteur(){
 	if (!$cherche_auteur = _request('cherche_auteur')) return;
 	
 	echo "<p align='left'>";
-	$col = email_valide($cherche_auteur) ? 'email' : 'nom';
+	$col = strpos($cherche_auteur, '@') !== false ? 'email' : 'nom';
 	$result = spip_query("SELECT id_auteur, $col FROM spip_auteurs");
 	
 	while ($row = spip_fetch_array($result, SPIP_NUM)) {
