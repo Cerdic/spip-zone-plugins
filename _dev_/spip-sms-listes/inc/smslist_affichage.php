@@ -98,6 +98,9 @@ background-color:#FFFFFF;border:2px solid #666666;display:inline;margin:0pt;padd
 </style>";
 	$retour = generer_url_ecrire('spip_sms_listes');
 
+	$gerer = generer_url_ecrire("spip_sms_listes");
+	$out .= icone_etendue(_T("smslist:spip_sms_liste"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/spip-sms-list-64.png", "rien.gif","", false, $page_actuelle=="accueil");
+	
 	$gerer = generer_url_ecrire("smslist_messages_tous");
 	$out .= icone_etendue(_T("smslist:icone_gerer_messages"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist_message-64.png", "rien.gif","", false, $page_actuelle=="gerer_messages");
 		

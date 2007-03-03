@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_statut_prop' => "En cours d'envoi",
 'texte_statut_publie' => "Fini",
 'texte_statut_poubelle' => "Supprim&eacute;",
-'texte_statut_refuse' => "Envoi annul&eacute;",
+'texte_statut_refuse' => "Envoi stopp&eacute;",
 
 // page forms_edit
 'champs_formulaire'=>"Champs de la bo&icirc;te d'envoi",

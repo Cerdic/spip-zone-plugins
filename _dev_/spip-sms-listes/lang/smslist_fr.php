@@ -13,12 +13,19 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+'envois_programmes' => 'Envois programm&eacute;s',
+'envois_en_cours' => 'Envois en cours',
+'envois_interrompus' => 'Envois interrompus',
 'icone_gerer_messages' => "G&eacute;rer les SMS",
 'icone_gerer_abonnes' => "G&eacute;rer les Abonn&eacute;s",
 'icone_gerer_listes' => "G&eacute;rer les listes de diffusion",
 'icone_boite_d_envoi' => "Bo&icirc;te d'Envoi",
 'icone_configurer' => "Configurer",
 
+'messages_en_redaction' => 'Messages en cours de r&eacute;daction',
+'spip_sms_liste' => 'Spip-SMS-listes',
+'reprendre_envoi' => 'Reprendre cet envoi',
+'stopper_envoi' => 'Stopper cet envoi'
 
 );
 

@@ -28,9 +28,12 @@
 				Forms_creer_table($f,'smslist_boiteenvoi');
 				$f = find_in_path('base/Comptes_SMS.xml');
 				Forms_creer_table($f,'smslist_compte');
+				include_spip('base/smslist');
+				include_spip('base/create');
+				creer_base();
 				ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 			}
-	
+
 			ecrire_metas();
 		}
 	}

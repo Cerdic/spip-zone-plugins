@@ -16,6 +16,7 @@ include_spip('inc/smslist_affichage');
 include_spip('base/forms_base_api');
 include_spip('public/assembler');
 
+
 function exec_smslist_config() {
 	
 	$commencer_page = charger_fonction('commencer_page', 'inc');

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <forms>
 <form>
-	<id_form>64</id_form>
+	<id_form>25</id_form>
 	<titre>Comptes SMS</titre>
 	<descriptif></descriptif>
 	<type_form>smslist_compte</type_form>
@@ -82,6 +82,18 @@
 			<titre>Client ID</titre>
 			<type>ligne</type>
 			<obligatoire>oui</obligatoire>
+			<extra_info></extra_info>
+			<specifiant></specifiant>
+			<public></public>
+			<aide></aide>
+			<html_wrap></html_wrap>
+		</field>
+		<field>
+			<champ>telephone_1</champ>
+			<rang>6</rang>
+			<titre>Expéditeur par defaut</titre>
+			<type>telephone</type>
+			<obligatoire></obligatoire>
 			<extra_info></extra_info>
 			<specifiant></specifiant>
 			<public></public>

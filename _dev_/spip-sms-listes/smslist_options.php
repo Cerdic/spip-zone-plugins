@@ -26,6 +26,11 @@ function autoriser_smslist_message_donnee_instituer($faire,$type,$id_donnee,$qui
 	OR !in_array($opt['statut'],array('prepa'))) return false;
 	return true;
 }
+function autoriser_smslist_message_donnee_modifier($faire,$type,$id_donnee,$qui,$opt) {
+	if (($qui['statut'] != '0minirezo')
+	OR ($opt['statut'] != 'prepa'))return false;
+	return true;
+}
 function autoriser_smslist_liste_donnee_instituer($faire,$type,$id_donnee,$qui,$opt) {
 	if (($qui['statut'] != '0minirezo')
 	OR !isset($opt['nouveau_statut'])
@@ -42,6 +47,11 @@ function autoriser_smslist_boiteenvoi_donnee_instituer($faire,$type,$id_donnee,$
 	if (($qui['statut'] != '0minirezo')
 	OR !isset($opt['nouveau_statut'])
 	OR !in_array($opt['nouveau_statut'],array('prepa','poubelle')) ) return false;
+	return true;
+}
+function autoriser_smslist_boiteenvoi_donnee_modifier($faire,$type,$id_donnee,$qui,$opt) {
+	if (($qui['statut'] != '0minirezo')
+	OR ($opt['statut'] != 'prepa'))return false;
 	return true;
 }
 
