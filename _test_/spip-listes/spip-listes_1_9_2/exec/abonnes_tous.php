@@ -103,8 +103,8 @@ function exec_abonnes_tous(){
 	
 	echo"</div>";
 	
-	$result = spip_query("SELECT * FROM spip_auteurs WHERE statut!='5poubelle' AND statut!='nouveau' ORDER BY statut, nom");
-	if (spip_num_rows($result) > 0) {
+	$result = spip_query("SELECT id_auteur FROM spip_auteurs WHERE statut!='5poubelle' AND statut!='nouveau' LIMIT 2");
+	if (spip_num_rows($result) > 1) {
 		echo "<form action='?exec=abonnes_tous' METHOD='post'>";
 		echo "<div align=center>\n";
 		echo "<input type='text' name='cherche_auteur' class='fondl' value='' size='20' />";
