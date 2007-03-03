@@ -431,14 +431,12 @@ function spiplistes_cherche_auteur(){
 	if (!$cherche_auteur = _request('cherche_auteur')) return;
 	
 	echo "<p align='left'>";
-	$result = spip_query("SELECT id_auteur, nom, email FROM spip_auteurs");
+	$col = email_valide($cherche_auteur) ? 'email' : 'nom';
+	$result = spip_query("SELECT id_auteur, $col FROM spip_auteurs");
 	
-	while ($row = spip_fetch_array($result)) {
-		if( email_valide($cherche_auteur) )
-			$table_auteurs[] = $row["email"] ;
-		else
-			$table_auteurs[] = $row["nom"];
-		$table_ids[] = $row["id_auteur"];
+	while ($row = spip_fetch_array($result, SPIP_NUM)) {
+		$table_auteurs[] = $row[1];
+		$table_ids[] = $row[0];
 	}
 	
 	$resultat = mots_ressemblants($cherche_auteur, $table_auteurs, $table_ids);
