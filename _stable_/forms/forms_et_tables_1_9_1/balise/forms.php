@@ -52,14 +52,15 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 	$formok = '';
 	$valeurs = array('0'=>'0');
 	$affiche_sondage = '';
-	$formactif = 
+	$formactif = (
 	  (
 		   (_DIR_RESTREINT==_DIR_RESTREINT_ABS && $row['modifiable']=='oui')
-		OR in_array(_request('exec'),$GLOBALS['forms_actif_exec'])
+		  OR in_array(_request('exec'),$GLOBALS['forms_actif_exec'])
 		)
 		AND 
 		(!($id_donnee>0)
-		OR autoriser('modifier','donnee',$id_donnee,NULL,array('id_form'=>$id_form)));
+		  OR autoriser('modifier','donnee',$id_donnee,NULL,array('id_form'=>$id_form))
+		));
 	$formactif = $formactif?' ':'';
 
 	$flag_reponse = (_request('ajout_reponse') == $id_form) && (_request('nobotnobot')=='');

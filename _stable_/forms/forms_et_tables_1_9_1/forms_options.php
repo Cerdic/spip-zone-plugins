@@ -29,10 +29,11 @@ function autoriser_form_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) 
 }
 function autoriser_donnee_dist($faire,$type,$id_donnee,$qui,$opt){
 	static $types = array();
-	if (!isset($opt['id_form'])){
-		$res = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
+	if (!isset($opt['id_form']) OR !isset($opt['statut'])){
+		$res = spip_query("SELECT id_form,statut FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
 		if (!$row = spip_fetch_array($res)) return false;
 		$opt['id_form'] = $row['id_form'];
+		$opt['statut'] = $row['statut'];
 	}
 	$id_form = $opt['id_form'];
 	if (!isset($opt['type_form'])){
