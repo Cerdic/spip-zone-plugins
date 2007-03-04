@@ -3,7 +3,8 @@
   Menu accordeon
   </nom>
   <auteur>        <!-- Auteur du plugin -->
-  Stephan d art-logic.info. [devel-art-logic.info->http://artlogic.ovh.org/spip_svn/]
+  <br />Bruno Bergot - [eliaz weblog->http://www.weblog.eliaz.fr/]
+  <br />Stephan d art-logic.info. [devel-art-logic.info->http://artlogic.ovh.org/spip_svn/]
   </auteur>
   <version>
   0.1
@@ -12,19 +13,20 @@
   dev
   </etat>
   <description>
-  Bogu&#233;: Un menu vertical en accord&#233;on qui devrait pouvoir fonctionner sur une liste comme pour celle des menus couramment utilis&#233;s. Ce plugin a besoin d'un gros coup de pouce.
+  Un menu vertical en accord&#233;on qui fonctionne sur une liste comme pour celle des menus couramment utilis&#233;s.
+  <br /><br />Pour ins&#233;rer le plugin dans vos squelettes, appelez le mod&#232;le inc-menu-accordeon.html au lieu de inc-rubriques.html
   </description>
 	<lien>
 	http://bassistance.de/jquery-plugins/jquery-plugin-accordion/
 	</lien> <!-- URI de documentation -->
   <fonctions>
-  menuaccor_fonctions.php
+  menuaccordeon_fonctions.php
   </fonctions>
   <prefix>
-  menuaccor
+  menuaccordeon
   </prefix>
   <pipeline>
   	<nom>insert_head</nom>
-  	<inclure>menuaccor_fonctions.php</inclure>
+  	<inclure>menuaccordeon_fonctions.php</inclure>
   </pipeline>
 </plugin>
