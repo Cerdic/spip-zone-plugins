@@ -108,6 +108,8 @@ function smslist_envoi_unitaire($compte,$from,$to,$texte, $simuler=false){
 		}
 	}
 	if (!isset($connexion[$compte])) return "Compte SMS $compte introuvable";
+	include_spip('inc/charsets');
+	$texte = unicode2charset($texte,'iso-8859-1');
 	
 	if (!$envoyer_sms = charger_fonction('envoyer_sms','inc',true))
 		return "Interface techniqe SMS introuvable (inc/envoyer_sms)";
@@ -129,6 +131,9 @@ function smslist_declencher_envoi($lot,$message,$listes){
 		smslist_log("Envoi du lot $lot impossible : message $in introuvable");
 		return;
 	}
+	include_spip('inc/charsets');
+	include_spip('inc/filtres');
+	$message = charset2unicode(supprimer_tags($message));
 	
 	// y a -t-il des listes selectionnes ?
 	if ($listes=='0' OR !strlen($listes)){

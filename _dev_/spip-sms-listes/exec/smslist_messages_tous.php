@@ -39,7 +39,10 @@ function exec_smslist_messages_tous() {
 	
 	include_spip("exec/template/tables_affichage");
 	$liste = Forms_liste_tables('smslist_message');
-	echo affichage_donnees_tous_corps('smslist_message',reset($liste));
+	echo affichage_donnees_tous_corps('smslist_message',reset($liste),false,false,
+	  array(
+	    'colonne_extra_titre'=>"<img src='"._DIR_PLUGIN_SMSLIST. "img_pack/envoyer-message-16.png' width='16' height='16' alt='"._T('icone_envoyer_message')."' />",
+		  'colonne_extra_url'=>generer_url_action('smslist_envoyer_message')) );
 
 	echo fin_gauche(), fin_page();
 }
