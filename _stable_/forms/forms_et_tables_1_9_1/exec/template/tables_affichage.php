@@ -77,7 +77,7 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 }
 
 
-function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_page=false){
+function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_page=false, $contexte = array()){
 	global $spip_lang_right,$spip_lang_left;
 	$out = "";
 	if (!$id_form = intval($id_form)) return $out;
@@ -122,11 +122,13 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 	$out .=  gros_titre($titre_page,'',false);
 	$out .=  '</div>';
 	
-	$contexte = array('id_form'=>$id_form,
-	'titre_liste'=>$titre_page,
-	'aucune_reponse'=>_T("$prefix:aucune_reponse"),
-	'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],
-	'statuts' => array('prepa','prop','propose','publie','refuse') );
+	$contexte = array_merge($contexte,
+		array('id_form'=>$id_form,
+		'titre_liste'=>$titre_page,
+		'aucune_reponse'=>_T("$prefix:aucune_reponse"),
+		'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],
+		'statuts' => array('prepa','prop','propose','publie','refuse') )
+	);
 	$out .=  recuperer_fond("exec/template/donnees_tous",$contexte);
 	
 	$out .=  "</td></tr></table><br />\n";
