@@ -72,7 +72,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 			if ($reponse)
 			  $reponse = _T($message_confirm,array('mail'=>$reponse));
 			if (!_DIR_RESTREINT 
-			  AND (($r=_request('id_donnee'))===NULL OR $r==$id_donnee OR $r<0) )
+			  AND (($r=_request('id_donnee'))===NULL OR $r==$id_donnee OR ($r<0 AND !in_array(_request('exec'),$GLOBALS['forms_saisie_km_exec']))) )
 				$valeurs = Forms_valeurs($id_form,$id_donnee);
 			else
 				$id_donnee = 0;

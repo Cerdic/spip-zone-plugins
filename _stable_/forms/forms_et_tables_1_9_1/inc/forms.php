@@ -92,11 +92,10 @@
 
 	function forms_type_table_lier($type,$id){
 		$type_table = 'table';
-		if ($type == 'donnee'){
-			$id = explode(';',$id);
-			$id_donnee_source = $id[0];
-			$champ = $id[1];
-			$id_form = $id[2];
+		if ($type == 'donnee' AND preg_match(",^(-?[0-9]+)-([a-z_0-9]+)-([0-9]+)$,",$id,$reg)){
+			$id_donnee_source = $reg[1];
+			$champ = $reg[2];
+			$id_form = $reg[3];
 			$res = spip_query("SELECT extra_info FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($champ));
 			if($row = spip_fetch_array($res))
 				$type_table = $row['extra_info'];

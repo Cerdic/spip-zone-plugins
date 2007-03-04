@@ -64,6 +64,7 @@ function action_forms_lier_donnees(){
 			}
 		}
 	}
+	include_spip('inc/headers');
 	redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));
 }
 

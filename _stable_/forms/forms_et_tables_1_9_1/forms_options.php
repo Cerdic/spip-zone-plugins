@@ -16,6 +16,7 @@ if (!defined('_DIR_PLUGIN_FORMS')){
 }
 include_spip('base/forms');
 $GLOBALS['forms_actif_exec'][] = 'donnees_edit';
+$GLOBALS['forms_saisie_km_exec'][] = 'donnees_edit';
 
 function autoriser_form_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	if ($type=='form' OR $type=='donnee'){
