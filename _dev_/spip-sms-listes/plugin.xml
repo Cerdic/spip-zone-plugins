@@ -6,9 +6,10 @@ _ &copy; 2007 - Distribu&#233; sous licence GNU/LGPL
 	</auteur>
 	<version>	0.1.0	</version>
 	<version_base>	0.1.0	</version_base>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<description>
 	Gestion de listes de diffusion SMS
+_ {{Necessite les plugin forms&amp;tables et sms}}
 	</description>
 	<lien></lien>
 	<prefix>smslist</prefix>
