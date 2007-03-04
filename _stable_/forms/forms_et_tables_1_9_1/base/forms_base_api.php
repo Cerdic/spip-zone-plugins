@@ -43,12 +43,14 @@ function Forms_creer_table($structure_xml,$type=NULL, $unique = true){
 }
 
 function Forms_liste_tables($type){
-	$liste = array();
-	$res = spip_query("SELECT id_form FROM spip_forms WHERE type_form="._q($type));
-	while ($row = spip_fetch_array($res)){
-		$liste[] = $row['id_form'];
+	static $liste = array();
+	if (!isset($liste[$type])){
+		$res = spip_query("SELECT id_form FROM spip_forms WHERE type_form="._q($type));
+		while ($row = spip_fetch_array($res)){
+			$liste[$type][] = $row['id_form'];
+		}
 	}
-	return $liste;
+	return $liste[$type];
 }
 
 function Forms_supprimer_tables($type_ou_id){

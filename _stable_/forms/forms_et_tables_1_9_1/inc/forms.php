@@ -592,7 +592,7 @@
 					# ils ont un id = 0-id_auteur
 					spip_query("UPDATE spip_forms_donnees_donnees SET id_donnee = $id_donnee WHERE id_donnee = ".(0-$GLOBALS['auteur_session']['id_auteur']));
 				}
-				if (!$id_donnee) {
+				if (!($id_donnee>0)) {
 					$erreur['@'] = _T("forms:probleme_technique");
 					$ok = false;
 				}

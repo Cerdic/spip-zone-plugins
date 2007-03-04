@@ -118,8 +118,10 @@
 			elseif ($t == 'texte')
 				$rendu = 'propre';
 			if (!$etoile){
-				if ($rendu)
+				if ($rendu){
+					include_spip('inc/texte');
 					$valeur = $rendu($valeur);
+				}
 				$valeur = wrap_champ($valeur,$wrap_champ[$id_form][$champ]);
 			}
 		}
