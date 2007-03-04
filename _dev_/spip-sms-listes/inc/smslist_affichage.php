@@ -110,8 +110,8 @@ background-color:#FFFFFF;border:2px solid #666666;display:inline;margin:0pt;padd
 	$gerer = generer_url_ecrire("smslist_abonnes_tous");
 	$out .= icone_etendue(_T("smslist:icone_gerer_abonnes"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist_abonne-64.png", "rien.gif","", false, $page_actuelle=="gerer_abonnes");
 	
-	$gerer = generer_url_ecrire("smslist_boiteenvois_tous");
-	$out .= icone_etendue(_T("smslist:icone_boite_d_envoi"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist_boiteenvoi-64.png", "rien.gif","", false, $page_actuelle=="gerer_boiteenvoi");
+	#$gerer = generer_url_ecrire("smslist_boiteenvois_tous");
+	#$out .= icone_etendue(_T("smslist:icone_boite_d_envoi"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist_boiteenvoi-64.png", "rien.gif","", false, $page_actuelle=="gerer_boiteenvoi");
 
 	$gerer = generer_url_ecrire("smslist_config");
 	$out .= icone_etendue(_T("smslist:icone_configurer"), $gerer, _DIR_PLUGIN_SMSLIST. "img_pack/smslist-config-64.png", "rien.gif", "", false, $page_actuelle=="configurer");

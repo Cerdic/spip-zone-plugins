@@ -1,0 +1,29 @@
+<div class='verdana2'>
+<B_envois>
+[<div class='pagination'>(#PAGINATION)</div>]
+<table>
+<tr>
+<th>DATE</th>
+<th>HEURE</th>
+<th>TEL_TO</th>
+<th>MESSAGE</th>
+<th>TEL_FROM</th>
+<th>COMPTE</th>
+<th>ESSAIS</th>
+<th>STATUT</th>
+</tr>
+<BOUCLE_envois(SMSLIST_SPOOL){!par date_envoi}{pagination 20}{statut !IN ('','envoye')}>
+<tr>
+<td>[(#DATE_ENVOI|affdate_jourcourt)]</td>
+<td>[(#DATE_ENVOI|heures)h][(#DATE_ENVOI|minutes)]</td>
+<td>#TEL_TO</td>
+<td>#MESSAGE</td>
+<td>#TEL_FROM</td>
+<td>#COMPTE</td>
+<td>#ESSAIS</td>
+<td>#STATUT</td>
+</tr>
+</BOUCLE_envois>
+</table>
+</B_envois>
+</div>

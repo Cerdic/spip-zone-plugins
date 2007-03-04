@@ -18,4 +18,5 @@ _ &copy; 2007 - Distribu&#233; sous licence GNU/LGPL
 		<inclure>smslist_pipeline.php</inclure>
 	</pipeline>
 	<options>smslist_options.php</options>
+	<fonctions>base/smslist.php</fonctions>
 </plugin>

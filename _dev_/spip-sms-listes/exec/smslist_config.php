@@ -42,6 +42,8 @@ function exec_smslist_config() {
 	$liste = Forms_liste_tables('smslist_compte');
 	echo affichage_donnees_tous_corps('smslist_compte',reset($liste));
 
+	echo recuperer_fond("exec/fond/envois",array());	
+
 	echo fin_gauche(), fin_page();
 }
 
