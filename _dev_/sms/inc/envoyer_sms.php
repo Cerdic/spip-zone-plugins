@@ -30,6 +30,9 @@ function inc_envoyer_sms($connexion,$message){
   }
   
 	//send message and return result
+	// un peu d'ordre dans le message
+	if (isset($message('from'))) $message['send_params']['from'] = $message['from'];
+
 	$e = $sender->send($message);
   if (c_pear::isError($e))   {
 	$resultat = _L('transmission_loupee') .
