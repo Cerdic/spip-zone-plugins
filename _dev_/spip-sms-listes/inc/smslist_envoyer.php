@@ -113,7 +113,7 @@ function smslist_envoi_unitaire($compte,$from,$to,$texte, $simuler=false){
 	
 	if (!$envoyer_sms = charger_fonction('envoyer_sms','inc',true))
 		return "Interface techniqe SMS introuvable (inc/envoyer_sms)";
-	$message = array('to'=>$to,'from'=>$from,'text'=>$texte,'id'=>$connexion[$compte]['client_id']);
+	$message = array('to'=>$to,'send_params'=>array('from'=>$from),'text'=>$texte,'id'=>$connexion[$compte]['client_id']);
 	if (!$simuler)
 		return $envoyer_sms($connexion[$compte],$message);
 	else {
