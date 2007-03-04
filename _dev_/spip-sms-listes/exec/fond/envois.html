@@ -1,18 +1,24 @@
 <div class='verdana2'>
 <B_envois>
-[<div class='pagination'>(#PAGINATION)</div>]
+<div class='liste'>
+<div style='position: relative;'>
+	<div style='background-color: #ENV{couleur_claire}; color: black; padding: 3px; padding-left: 30px; border-bottom: 1px solid #444444;' class='verdana2'>
+	<div class='pagination' style='float:right;'>#PAGINATION</div>
+	<b><:smslist:derniers_envois:></b>
+	</div>
+</div>
 <table>
 <tr>
-<th>DATE</th>
-<th>HEURE</th>
-<th>TEL_TO</th>
-<th>MESSAGE</th>
-<th>TEL_FROM</th>
-<th>COMPTE</th>
-<th>ESSAIS</th>
-<th>STATUT</th>
+<th>Date</th>
+<th>Heure</th>
+<th>Destinataire</th>
+<th>Message</th>
+<th>Exp.</th>
+<th>Compte</th>
+<th>Nb Essais</th>
+<th>Statut</th>
 </tr>
-<BOUCLE_envois(SMSLIST_SPOOL){!par date_envoi}{pagination 20}{statut !IN ('','envoye')}>
+<BOUCLE_envois(SMSLIST_SPOOL){!par date_envoi}{pagination 20}{statut!=''}>
 <tr>
 <td>[(#DATE_ENVOI|affdate_jourcourt)]</td>
 <td>[(#DATE_ENVOI|heures)h][(#DATE_ENVOI|minutes)]</td>
@@ -25,5 +31,6 @@
 </tr>
 </BOUCLE_envois>
 </table>
+</div>
 </B_envois>
 </div>

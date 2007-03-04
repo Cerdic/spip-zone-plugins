@@ -13,9 +13,11 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+'derniers_envois' => 'Envois R&eacute;cents',
 'envois_programmes' => 'Envois programm&eacute;s',
 'envois_en_cours' => 'Envois en cours',
 'envois_interrompus' => 'Envois interrompus',
+'envois_restants' => 'Envois restants',
 'icone_gerer_messages' => "G&eacute;rer les SMS",
 'icone_gerer_abonnes' => "G&eacute;rer les Abonn&eacute;s",
 'icone_gerer_listes' => "G&eacute;rer les listes de diffusion",

@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'toutes_tables' => "Toutes les listes de diffusion SMS",
 
 // page donnees_tous
-'icone_ajouter_donnees' => "Ajouter des listes de diffusion",
+'icone_ajouter_donnees' => "Cr&eacute;er des listes de diffusion",
 'telecharger_reponses' => "Exporter les listes de diffusion",
 'importer_donnees_csv' => "Importer des listes de diffusion",
 

@@ -9,41 +9,80 @@
  *
  */
 
+include_spip("base/forms_base_api");
+include_spip("base/abstract_sql");
+if (!defined('_SMS_LIST_SPOOL_NOMBRE'))
+	define('_SMS_LIST_SPOOL_NOMBRE',10);
+if (!defined('_SMS_LIST_DELAI_ESSAIS'))
+	define('_SMS_LIST_DELAI_ESSAIS',1);
+function inc_smslist_envoyer($test = false){
 
-function inc_smslist_envoyer(){
-	include_spip("base/forms_base_api");
-
-	// chercher les envois en attente (statut=prepa)
-	smslist_demon_boite_envoi();
-	// envoyer un lot
-	smslist_spool(10);
-	
-	// clore les lots finis
-	smslist_nettoie_boite_envoi();
+	// mode test : on regarde si des actions sont a faire, mais on ne fait rien
+	if ($test){
+		$encore = smslist_demon_boite_envoi(true); // regarder si des envois a declencher
+		if (!$encore){
+			$res = spip_query("SELECT id_spool FROM spip_smslist_spool WHERE NOT(statut IN ('envoye','annule')) LIMIT 0,1");
+			$encore = (spip_num_rows($res)>0);
+		}
+		return $encore;
+	}
+	else {
+		// chercher les envois en attente (statut=prepa)
+		smslist_demon_boite_envoi();
+		// envoyer un lot
+		smslist_spool(_SMS_LIST_SPOOL_NOMBRE);
+		
+		// clore les lots finis
+		return smslist_nettoie_boite_envoi();
+	}
 }
 
 function smslist_log($texte){
-	echo $texte."<br/>";
+	if (_request('var_mode')!='test')
+		spip_log($texte,'smslist');
+	else 
+		echo "$texte<br/>";
 }
 
+function smslist_compter_spool(){
+	# reperer les lots plus valides (en attente de suppression ? ou en pause aussi)
+	$res = spip_query("SELECT s.lot_envoi FROM spip_smslist_spool AS s JOIN spip_forms_donnees AS d ON d.id_donnee=s.lot_envoi WHERE d.statut='prop' GROUP BY s.lot_envoi");
+	$lots = "0";
+	while ($row = spip_fetch_array($res)) $lots.=",".$row['lot_envoi'];
+	$inlots = calcul_mysql_in('lot_envoi',$lots);
+	$total = 0;
+	$restant = 0;
+	#total
+	$res = spip_query("SELECT COUNT(id_spool) AS n FROM spip_smslist_spool WHERE $inlots");
+	if ($row = spip_fetch_array($res))
+		$total = $row['n'];
+	# restants
+	if ($total){
+		$res = spip_query("SELECT COUNT(id_spool) AS n FROM spip_smslist_spool WHERE $inlots AND NOT(statut IN ('envoye','annule'))");
+		if ($row = spip_fetch_array($res))
+			$restant = $row['n'];
+	}
+	return array($total,$restant);
+}
 
 function smslist_spool($nombre){
 	# reperer les lots plus valides (en attente de suppression ? ou en pause aussi)
-	spip_query("SELECT s.lot_envoi FROM spip_smslist_spool AS s JOIN spip_forms_donnees AS d ON d.id_donnee=s.lot_envoi WHERE d.statut<>'prepa'");
-	$bad = "0";
-	while ($row = spip_fetch_array($res)) $bad.=",".$row['lot_envoi'];
-	$inbad = calcul_mysql_in('lot_envoi',$bad,'NOT');
+	$res = spip_query("SELECT s.lot_envoi FROM spip_smslist_spool AS s JOIN spip_forms_donnees AS d ON d.id_donnee=s.lot_envoi WHERE d.statut='prop' GROUP BY s.lot_envoi");
+	$lots = "0";
+	while ($row = spip_fetch_array($res)) $lots.=",".$row['lot_envoi'];
+	$inlots = calcul_mysql_in('lot_envoi',$lots);
 	//smslist_log("bad : $inbad");
 	
 	# preparer un lot d'envois
+	include_spip('inc/acces');
 	$id_process = substr(creer_uniqid(),0,5);
 	# marquer le lot avec un tampo id_process
-	spip_query("UPDATE spip_smslist_spool SET statut="._q($id_process)." WHERE $inbad AND statut='' ORDER BY compte,maj LIMIT ".intval($nombre));
+	spip_query("UPDATE spip_smslist_spool SET statut="._q($id_process)." WHERE $inlots AND statut='' ORDER BY compte,maj LIMIT ".intval($nombre));
 
 	$res = spip_query("SELECT id_spool,compte,tel_from,tel_to,message,essais FROM spip_smslist_spool WHERE statut="._q($id_process));
 	// si moins que possible, on retente des envois echoues il y a plus d'une heure
 	if (($n = spip_num_rows($res))<$nombre){
-		spip_query("UPDATE spip_smslist_spool SET statut="._q($id_process)." WHERE $inbad AND statut<>'envoye' AND maj<NOW()-1 ORDER BY compte,maj LIMIT ".intval($nombre-$n));
+		spip_query("UPDATE spip_smslist_spool SET statut="._q($id_process)." WHERE $inlots AND NOT(statut IN ('envoye','annule')) AND maj<NOW()-".intval(_SMS_LIST_DELAI_ESSAIS)." ORDER BY compte,maj LIMIT ".intval($nombre-$n));
 	}
 	$res = spip_query("SELECT id_spool,compte,tel_from,tel_to,message,essais FROM spip_smslist_spool WHERE statut="._q($id_process));
 	while($row = spip_fetch_array($res)){
@@ -54,7 +93,7 @@ function smslist_spool($nombre){
 	}
 }	
 
-function smslist_envoi_unitaire($compte,$from,$to,$texte, $simuler=true){
+function smslist_envoi_unitaire($compte,$from,$to,$texte, $simuler=false){
 	static $connexion = array();
 	if (!isset($connexion[$compte])){
 		$res = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee="._q($compte));
@@ -70,7 +109,8 @@ function smslist_envoi_unitaire($compte,$from,$to,$texte, $simuler=true){
 	}
 	if (!isset($connexion[$compte])) return "Compte SMS $compte introuvable";
 	
-	$envoyer_sms = charger_fonction('envoyer_sms','inc');
+	if (!$envoyer_sms = charger_fonction('envoyer_sms','inc',true))
+		return "Interface techniqe SMS introuvable (inc/envoyer_sms)";
 	$message = array('to'=>$to,'from'=>$from,'text'=>$texte,'id'=>$connexion[$compte]['client_id']);
 	if (!$simuler)
 		return $envoyer_sms($connexion[$compte],$message);
@@ -154,21 +194,33 @@ function smslist_declencher_envoi($lot,$message,$listes){
 	
 }
 
-function smslist_demon_boite_envoi(){
+function smslist_demon_boite_envoi($test = false){
 	$now = time();
 	# scanner les boites d'envoi a la recherche d'envois a declencher
 	$liste = Forms_liste_tables("smslist_boiteenvoi");
 	$in = calcul_mysql_in('id_form',implode(',',$liste));
-	smslist_log("scan $in");
+	if (!$test) smslist_log("scan $in");
 	$res = spip_query("SELECT id_form,id_donnee FROM spip_forms_donnees WHERE $in AND statut='prepa'");
 	while ($row = spip_fetch_array($res)){
 		$id_donnee = $row['id_donnee'];
 		$date = Forms_les_valeurs($row['id_form'], $id_donnee, "date_1", " ",true);
+		if (preg_match('#([0-9]{1,2})/([0-9]{1,2})/([0-9]{4}|[0-9]{1,2})#', $date, $regs)) {
+			$jour = $regs[1];
+			$mois = $regs[2];
+			$annee = $regs[3];
+			if ($annee < 90){
+				$annee = 2000 + $annee;
+			} elseif ($annee<100) {
+				$annee = 1900 + $annee ;
+			}
+			$date = "$annee-$mois-$jour";
+		}
 		$heure = Forms_les_valeurs($row['id_form'], $id_donnee, "heure_1", " ",true);
 		$message = Forms_les_valeurs($row['id_form'], $id_donnee, "joint_1", ",",true);
 		$listes = Forms_les_valeurs($row['id_form'], $id_donnee, "joint_2", ",",true);
 		$log = "#$id_donnee:$date:$heure:$message:$listes";
 		if (strtotime("$date $heure")<$now){
+			if ($test) return true; // ok il y a des actions a faire, pas la peine de continuer
 			$log .= " Top depart";
 			smslist_log($log);
 			smslist_declencher_envoi($id_donnee,$message,$listes);
@@ -182,13 +234,16 @@ function smslist_nettoie_boite_envoi(){
 	$in = calcul_mysql_in('id_form',implode(',',$liste));
 	smslist_log("scan $in");
 	$res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE $in AND statut='prop'");
+	$encore = false;
 	while ($row = spip_fetch_array($res)){
 		$row2 = spip_query("SELECT id_spool FROM spip_smslist_spool WHERE lot_envoi="._q($row['id_donnee'])." AND statut<>'envoye' LIMIT 0,1");
 		if (!spip_num_rows($row2)){
 			spip_query("UPDATE spip_forms_donnees SET statut='publie' WHERE id_donnee="._q($row['id_donnee']));
 		 	smslist_log("envoi du lot ".$row['id_donnee']." fini");
 		}
+		else $encore = true;
 	}
+	return $encore;
 }
 
 ?>

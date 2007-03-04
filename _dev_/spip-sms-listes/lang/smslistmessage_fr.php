@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'toutes_tables' => "Tous les SMS",
 
 // page donnees_tous
-'icone_ajouter_donnees' => "Ajouter des SMS",
+'icone_ajouter_donnees' => "Cr&eacute;er des SMS",
 'telecharger_reponses' => "Exporter les SMS",
 'importer_donnees_csv' => "Importer des SMS",
 

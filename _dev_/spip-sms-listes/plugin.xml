@@ -13,10 +13,13 @@ _ &copy; 2007 - Distribu&#233; sous licence GNU/LGPL
 	<lien></lien>
 	<prefix>smslist</prefix>
 	<install>base/smslist_upgrade.php</install>
+	<options>smslist_options.php</options>
+	<fonctions>base/smslist.php</fonctions>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<inclure>smslist_pipeline.php</inclure>
 	</pipeline>
-	<options>smslist_options.php</options>
-	<fonctions>base/smslist.php</fonctions>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+	</pipeline>
 </plugin>

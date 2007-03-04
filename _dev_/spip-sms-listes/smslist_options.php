@@ -55,5 +55,9 @@ function autoriser_smslist_boiteenvoi_donnee_modifier($faire,$type,$id_donnee,$q
 	return true;
 }
 
-
+//utiliser le cron pour envoyer les messages en attente
+function smslist_taches_generales_cron($taches_generales){
+	$taches_generales['smslist_cron'] = 10 ;
+	return $taches_generales;
+}
 ?>
