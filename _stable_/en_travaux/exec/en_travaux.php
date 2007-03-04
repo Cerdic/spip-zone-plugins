@@ -6,23 +6,19 @@ include_ecrire("inc_presentation");
 	$check_en_travaux=''; //gestion de l'etat de la case a cocher
  	if (isset($_POST['modifier'])){
  		if (isset($_POST['est_en_travaux'])){
-	 		if ($_POST['est_en_travaux'] == 'true')
-	 			ecrire_meta('en_travaux','true');
-	 			ecrire_meta('en_travaux_message',$_POST['en_travaux_message']);
-	 		}
- 		else 
+	 		if ($_POST['est_en_travaux'] == 'true') ecrire_meta('en_travaux','true');
+	 	} else 
  			effacer_meta('en_travaux');
-	
+
+ 		ecrire_meta('en_travaux_message', $_POST['en_travaux_message']);
  		ecrire_metas();
  		lire_metas();
  	}
- 	if ($GLOBALS['meta']['en_travaux']=='true'){
- 		$check_en_travaux='checked';
- 		//debug echo "meta= ".$GLOBALS['meta']['en_travaux'];
-  	}
-	$en_travaux_texte=$GLOBALS['meta']['en_travaux_message'];
+
+ 	if ($GLOBALS['meta']['en_travaux']=='true')	$check_en_travaux='checked';
+	$en_travaux_texte = $GLOBALS['meta']['en_travaux_message'];
+
  	debut_page(_T('entravaux:en_travaux'));
-	
 	echo "<br /><br /><br />";
 	gros_titre(_T('entravaux:en_travaux'));
 	debut_gauche();
