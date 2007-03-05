@@ -2,6 +2,7 @@
 //
 // exec/edittable.php
 //
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip("inc/presentation");
 include_spip("inc/tableau");
@@ -20,7 +21,6 @@ function exec_edittable_voir(){
 				echo fin_boite_info();
 			}
 		echo debut_droite();
-			if(_request('sql_command')) echo '<br />'._request('sql_command').'<br />';
 			$sql_edittable = "SELECT * FROM "._request('table')." WHERE "._request('colonne_cle')." = '"._request('valeur_cle')."';";
 			$res_edittable = spip_query($sql_edittable);
 			$contenu_edittable = spip_fetch_array($res_edittable);

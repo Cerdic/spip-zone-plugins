@@ -39,11 +39,13 @@ function exec_edittable(){
 			
 			$res_list_edittable = spip_query("SELECT * FROM "._request('table').";");
 			debut_cadre_trait_couleur("../"._DIR_PLUGIN_edittable."/img_pack/digg.png", false, '', _T('edittable:mes_edittable_en'));
-			echo '<table>';
+			//echo '<table>';
 			while ($row_edittable = spip_fetch_array($res_list_edittable)){
-				echo '<tr><td>'._T('edittable:enregistrement_numero').'&nbsp;<b>'.$row_edittable[$olonne_cle].'</b><a href="?exec=edittable_voir&amp;valeur_cle='.$row_edittable[$olonne_cle].'&amp;table='._request('table').'&amp;colonne_cle='.$olonne_cle.'">'._T('edittable:editer_enregistrement').'</a></td></tr>';
+				echo _T('edittable:enregistrement_numero').'&nbsp;<b>'.$row_edittable[$olonne_cle].'</b>';
+				echo '&nbsp;'._T('edittable:cle_primaire').'&nbsp;:'.$olonne_cle.'&nbsp;=&nbsp;'.$row_edittable[$olonne_cle];
+				echo '<br /><a href="?exec=edittable_voir&amp;valeur_cle='.$row_edittable[$olonne_cle].'&amp;table='._request('table').'&amp;colonne_cle='.$olonne_cle.'">'._T('edittable:editer_enregistrement').'</a><hr />';
 			}
-			echo '</table>';
+			//echo '</table>';
 			fin_cadre_trait_couleur(false);
 			
 			echo '<br />';

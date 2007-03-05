@@ -26,7 +26,12 @@ function exec_listetable(){
 			while ($row_table = MYSQL_fetch_row($res_list_table)){
 				//var_dump($row_table);
 				//echo '<tr><td style="border-bottom: 1px solid black; margin: 20px; widht: 100%;">'; echo debut_boite_info(); echo '<b>'.$row_table[0].'</b><br /><a href="?exec=edittable&amp;table='.$row_table[0].'">'._T('edittable:editer_la_table').'</a></td></tr>';
-				echo debut_boite_info(); echo '<b>'.$row_table[0].'</b><br /><a href="?exec=edittable&amp;table='.$row_table[0].'">'._T('edittable:editer_la_table').'</a>';echo fin_boite_info(); echo '<br />';
+				$nbr_enreg = mysql_num_rows(mysql_query("SELECT * FROM ".$row_table[0].";"));
+				echo debut_boite_info();
+				echo '<b>'.$row_table[0].'</b><br />';
+				echo _T('edittable:nombre_d_enregistrement').' : <b>'.$nbr_enreg.'</b><br />';
+				echo '<a href="?exec=edittable&amp;table='.$row_table[0].'">'._T('edittable:editer_la_table').'</a>';
+				echo fin_boite_info(); echo '<br />';
 			}
 			fin_cadre_trait_couleur(false);
 			
