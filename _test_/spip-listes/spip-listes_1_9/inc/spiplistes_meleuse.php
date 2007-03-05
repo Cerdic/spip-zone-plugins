@@ -30,7 +30,8 @@ include_spip('inc/acces');
 include_spip('spiplistes_boutons');
 include_once(_DIR_PLUGIN_SPIPLISTES.'/inc/spiplistes_mail.inc.php');
 
-$charset=lire_meta('charset');
+#$charset=lire_meta('charset');
+$charset = 'iso-8859-1';
 
 global $table_prefix;
 $query_message = "SELECT * FROM ".$table_prefix."_messages AS messages WHERE statut='encour' AND (TYPE='auto' OR TYPE='nl') ORDER BY date_heure ASC LIMIT 0,1";
@@ -117,11 +118,12 @@ if ($message_pile > 0){
 	$boundary = md5(uniqid(rand()));
 
 	$objet= filtrer_entites($titre);
-  	if ($charset <> 'utf-8') {
+ 	if ($charset <> 'utf-8') {
  	   $objet = str_replace("&#8217;", "'", $objet);
 	   $objet = str_replace("&#8220;", "\"", $objet);
 	   $objet = str_replace("&#8221;", "\"", $objet);
  	}
+	$objet = unicode2charset(charset2unicode($objet),$charset);
 	include_spip('inc/filtres');
 	$texte = liens_absolus($texte);
 	
@@ -265,7 +267,7 @@ if ($message_pile > 0){
 					$pagem.= filtrer_entites(_T('spiplistes:abonnement_mail'))."\n" ;
 					$pagem.= filtrer_entites(generer_url_public('abonnement','d='.$cookie))."\n\n"  ;
 					include_spip('inc/charsets');
-					$pagem = unicode2charset(charset2unicode($pagem),'iso-8859-1');
+					$pagem = unicode2charset(charset2unicode($pagem),$charset);
 				
 				if ($extra["abo"] == 'texte'){    // email TXT -----------------------
 
@@ -291,7 +293,7 @@ if ($message_pile > 0){
 		
 						$pagehm = $pageh."<hr style=\"noshade color:#000;size:1px;\" />"._T('spiplistes:editeur')."<a href=\"".$urlsite."\">".$nomsite."</a><br /><a href=\"".$urlsite."\">".$urlsite."</a><hr style=\"noshade color:#000;size:1px;\"/>
 						<a href=\"".generer_url_public('abonnement','d='.$cookie)."\">"._T('spiplistes:abonnement_mail')."</a>\n\n</body></html>";
-						$pagehm = unicode2charset(charset2unicode($pagehm),'iso-8859-1');
+						$pagehm = unicode2charset(charset2unicode($pagehm),$charset);
 						
 		
 						// fin du pied de page HTML
