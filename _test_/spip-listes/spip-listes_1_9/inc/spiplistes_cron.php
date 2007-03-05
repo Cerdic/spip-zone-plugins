@@ -139,7 +139,7 @@ $query_message = "SELECT * FROM spip_messages AS messages WHERE statut='encour' 
 $result_pile = spip_query($query_message);
 $message_pile = spip_num_rows($result_pile);
 			
-if (($message_pile > 0) AND ($locked == 'non') ) {
+if (($message_pile > 0) AND ( $locked == 'non' OR _request('var_mode')=='test') ) {
 //echo "<br>yeah";
 spip_log("appel meleuse");
 include_spip('inc/spiplistes_meleuse');
