@@ -208,48 +208,6 @@ function barre_2Minuscules(champ) {
 	champ.focus();
 }
 
-// D'apres Nicolas Hoizey 
-function barre_tableau(toolbarfield,cols,rows,tete,caption)
-{
-	var txtarea = toolbarfield;
-	txtarea.focus();
-//	var cols = 2;
-//	var rows = 2;
-//	var tete = 1;
-
-if (cols != null && rows != null) {
-		var tbl = '';
-		var ligne = '|';
-		var captiontxt = '|| titre | resum\351 ||';
-		var entete = '|';
-		var marqueur =' |';
-		
-		for(i = 0; i < cols; i++) {
-			ligne = ligne + ' valeur |';
-			entete = entete + ' {{entete}}' + marqueur;
-		}
-		for (i = 0; i < rows; i++) {
-			tbl = tbl + ligne + '\n';
-		}
-		if (tete==true) {
-			tbl = entete + '\n' + tbl;
-		}
-		if (caption==true) {
-			tbl = captiontxt + '\n' + tbl;
-		}
-		if ((clientVer >= 4) && is_ie && is_win) {
-			var str = document.selection.createRange().text;
-			var sel = document.selection.createRange();
-			sel.text = str + '\n\n' + tbl + '\n\n';
-		} else {
-			mozWrap(txtarea, '', "\n\n" + tbl + "\n\n");
-		}
-	}
-	return;
-}
-
-
-
 // Shows the help messages in the helpline window
 function helpline(help, champ) {
 	champ.value = help;
@@ -323,5 +281,5 @@ function mozWrap(txtarea, open, close)
  		hauteur=600;
  		largeur=700;
  		propriete='scrollbars=yes,resizable=yes,width='+largeur+',height='+hauteur;
-		w=window.open(cheminediteur+'/editeur/table.html', '',propriete);
+		w=window.open(cheminediteur+'?exec=tableau_edit', '',propriete);
  	}

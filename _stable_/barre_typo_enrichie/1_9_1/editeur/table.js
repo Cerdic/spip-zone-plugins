@@ -90,7 +90,7 @@
 			var texte = "<a href='javascript:ihm_tableau.insere_ligne("+ligne+")'><img ";
 			texte += " title='Insérer une ligne au-dessus' ";
 			texte += " alt='Insérer une ligne au-dessus' ";
-			texte += "src='inserer_ligne.gif' value=''></a>\n";
+			texte += "src='"+tableau_edit_images_path+"inserer_ligne.gif' value=''></a>\n";
 			return texte;
 		}
 
@@ -102,7 +102,7 @@
 			var texte="<a href='javascript:ihm_tableau.supprime_ligne("+ligne+")'><img  ";
 			texte += " title='Supprimer cette ligne' ";
 			texte += " alt='Supprimer cette ligne' ";
-			texte += "src='supprimer_ligne.png' value='ligne' /></a>\n";
+			texte += "src='"+tableau_edit_images_path+"supprimer_ligne.png' value='ligne' /></a>\n";
 			return texte;
 		}
 
@@ -113,7 +113,7 @@
 			var texte="<a href='javascript:ihm_tableau.insere_colonne("+colonne+")'> <img ";
 			texte+=" title='Insérer une colonne avant' ";
 			texte+=" alt='Insérer une colonne avant' ";
-			texte+="src='inserer_colonne.gif' value='colonne'></a>\n";	
+			texte+="src='"+tableau_edit_images_path+"inserer_colonne.gif' value='colonne'></a>\n";	
 			return texte;
 		}
 		/**
@@ -124,7 +124,7 @@
 			var texte="<a href='javascript:ihm_tableau.supprime_colonne("+colonne+")'><img";
 			texte+=" title='Supprimer cette colonne'";
 			texte+=" alt='Supprimer cette colonne'";
-			texte+=" src='supprimer_ligne.png' value='colonne' /></a>\n";
+			texte+=" src='"+tableau_edit_images_path+"supprimer_ligne.png' value='colonne' /></a>\n";
 			return texte;
 		}
 		/**
