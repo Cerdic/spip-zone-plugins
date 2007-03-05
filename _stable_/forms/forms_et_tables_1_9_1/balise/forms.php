@@ -54,7 +54,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 	$affiche_sondage = '';
 	$formactif = (
 	  (
-		   (_DIR_RESTREINT==_DIR_RESTREINT_ABS && $row['modifiable']=='oui')
+		   (_DIR_RESTREINT==_DIR_RESTREINT_ABS )
 		  OR in_array(_request('exec'),$GLOBALS['forms_actif_exec'])
 		)
 		AND 

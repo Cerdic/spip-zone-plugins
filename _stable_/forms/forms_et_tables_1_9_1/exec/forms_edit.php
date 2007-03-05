@@ -85,7 +85,7 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 		}
 	}
 
-	if (spip_fetch_array(spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)))) {
+	#if (spip_fetch_array(spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)))) {
 		$out .= "<br />";
 		$out .= "<div style='padding: 2px; background-color: $couleur_claire; color: black;'>&nbsp;";
 		$out .= bouton_block_invisible("preview_form");
@@ -97,7 +97,7 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 		$out .= _T("forms:info_apparence")."<p>\n";
 		$out .= "<div id='apercu'>$apercu</div>";
 		$out .= fin_block();
-	}
+	#}
 
 	if ($GLOBALS['spip_version_code']<1.92)		ob_start(); // des echo direct en 1.9.1
 	$liste = afficher_articles(_T("$prefixei18n:articles_utilisant"),
@@ -202,8 +202,14 @@ function exec_forms_edit(){
 		include_spip('inc/charset');
 		$row['titre'] = $titre = unicode2charset(html2unicode($titre));
 		$row['descriptif'] = "";
-		$row['modifiable'] = 'non';
-		$row['multiple'] = 'non';
+		if ($is_form){
+			$row['modifiable'] = 'non';
+			$row['multiple'] = 'oui';
+		}
+		else {
+			$row['modifiable'] = 'non';
+			$row['multiple'] = 'non';
+		}
 		$row['forms_obligatoires'] = "";
 		$row['email'] = array();
 		$row['champconfirm'] = "";
@@ -227,7 +233,8 @@ function exec_forms_edit(){
 	
 	echo "<br /><br />\n";
 	debut_boite_info();
-	echo "<div align='center' style='font-size:3em;font-weight:bold;'>$id_form</div>\n";
+	if ($id_form>0)
+		echo "<div align='center' style='font-size:3em;font-weight:bold;'>$id_form</div>\n";
 	if ($retour) {
 		icone_horizontale(_T('icone_retour'), $retour, "../"._DIR_PLUGIN_FORMS."img_pack/form-24.png", "rien.gif",'right');
 	}
