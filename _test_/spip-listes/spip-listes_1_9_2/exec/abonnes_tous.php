@@ -120,19 +120,15 @@ function exec_abonnes_tous(){
 	
 	$retour = generer_url_ecrire("abonnes_tous");
 	
-	if (!$tri) $tri='nom';
+	$tri = _request('tri') ? _request('tri') : 'nom';
 	$retour = parametre_url($retour,"tri",$tri);
-	if ($tri=='nom' OR $tri=='statut')
-	$partri = " "._T('info_par_tri', array('tri' => $tri));
-	else if ($tri=='nombre')
-	$partri = " "._T('info_par_nombre_article');
 	
 	//
 	// Construire la requete
 	//
 	
 	$sql_visible="1=1"; 
-	$tri = 'nom'; 
+	$partri = " " . _T('info_par_tri', array('tri' => $tri));
 	
 	$sql_sel = '';
 	
@@ -141,12 +137,21 @@ function exec_abonnes_tous(){
 		case 'nombre':
 			$sql_order = ' ORDER BY compteur DESC, unom';
 			$type_requete = 'nombre';
+			$partri = " "._T('info_par_nombre_article');
 			break;
 		case 'statut':
 			$sql_order = ' ORDER BY statut, login = "", unom';
 			$type_requete = 'auteur';
 			break;
 		case 'nom':
+			$sql_order = ' ORDER BY LOWER(nom)';
+			$type_requete = 'auteur';
+			break;
+		case 'email':
+			$sql_order = ' ORDER BY LOWER(email)';
+			$type_requete = 'auteur';
+			break;
+		case 'multi':
 		default:
 			$type_requete = 'auteur';
 			$sql_sel = ", ".creer_objet_multi ("nom", $spip_lang);
