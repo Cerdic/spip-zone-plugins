@@ -3,14 +3,15 @@
 	include_spip('phpmailer/class.phpmailer');
 	include_spip('phpmailer/class.smtp');
 	include_spip('inc/meta');
+	include_spip('inc/charsets');
 
 	class phpMail extends PHPMailer {
 
 		function phpMail($email, $objet, $message_html, $message_texte) {
 			//$this->From		= lire_meta('email_webmaster');
-			$this->FromName	= lire_meta('nom_site');
-			$this->CharSet	= lire_meta('charset');
-	    	$this->Mailer	= 'mail';
+			$this->CharSet	= $GLOBALS['meta']['spiplistes_charset_envoi'];
+			$this->FromName	= charset2unicode(unicode2charset(lire_meta('nom_site')),$this->Charset);
+	    $this->Mailer	= 'mail';
 			$this->Subject	= $objet;
 			$this->AddAddress($email);
 			

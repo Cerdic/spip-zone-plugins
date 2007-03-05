@@ -31,7 +31,7 @@ include_spip('spiplistes_boutons');
 include_once(_DIR_PLUGIN_SPIPLISTES.'/inc/spiplistes_mail.inc.php');
 
 #$charset=lire_meta('charset');
-$charset = 'iso-8859-1';
+$GLOBALS['meta']['spiplistes_charset_envoi'] = $charset = 'iso-8859-1';
 
 global $table_prefix;
 $query_message = "SELECT * FROM ".$table_prefix."_messages AS messages WHERE statut='encour' AND (TYPE='auto' OR TYPE='nl') ORDER BY date_heure ASC LIMIT 0,1";
