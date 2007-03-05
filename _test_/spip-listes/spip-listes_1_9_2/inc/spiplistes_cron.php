@@ -76,6 +76,7 @@ function cron_spiplistes_cron($t){
 			spip_log("Message choppe->$titre".$titre_bg);
 	
 			// ne pas envoyer des textes de moins de 10 caracteres
+			include_spip('inc/affichage');
 			$taille = strlen(spip_listes_strlen(version_texte($texte_patron_bg))) ;
 			spip_log("taille ->$taille");
 	
