@@ -27,8 +27,6 @@ include_spip('inc/acces');
 include_spip('spiplistes_boutons');
 include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
 
-$charset = $GLOBALS['meta']['charset'];
-
 // Trouver un message a envoyer 
 $result_pile = spip_query("SELECT * FROM spip_courriers AS messages WHERE statut='encour' ORDER BY date ASC LIMIT 0,1");
 $message_pile = spip_num_rows($result_pile);
@@ -107,7 +105,7 @@ if ($message_pile > 0){
           
 	$objet= filtrer_entites($titre);
 	$remplacements = array("&#8217;"=>"'","&#8220;"=>'"',"&#8221;"=>'"');
-	if ($charset <> 'utf-8') {
+	if ($GLOBALS['meta']['spiplistes_charset_envoi'] <> 'utf-8') {
 		$objet = strtr($objet, $remplacements);
 		$texte = strtr($texte, $remplacements);
  	}
@@ -126,6 +124,13 @@ if ($message_pile > 0){
 	$page_.="\n\n"._T('spiplistes:editeur').$nomsite."\n"  ;
 	$page_.=$urlsite."\n";
 	$page_.="________________________________________________________________________"  ;
+
+	if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
+		include_spip('inc/charsets');
+		$pageh = unicode2charset(charset2unicode($pageh),$GLOBALS['meta']['spiplistes_charset_envoi']);
+		$page_ = unicode2charset(charset2unicode($page_),$GLOBALS['meta']['spiplistes_charset_envoi']);
+		$pied_page = unicode2charset(charset2unicode($pied_page),$GLOBALS['meta']['spiplistes_charset_envoi']);
+	}
 	
 	$email_a_envoyer['texte'] = new phpMail('', $objet, '',$page_); 
 	$email_a_envoyer['texte']->From = $from ; 

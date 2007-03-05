@@ -195,8 +195,11 @@ function exec_config(){
 
 	echo fin_cadre_relief();
 
+	if (!isset($GLOBALS['meta']['spiplistes_charset_envoi']))
+		$GLOBALS['meta']['spiplistes_charset_envoi'] = 'iso-8859-1'; # par defaut a cause des vieux clients mails et des webmails
 	if (($reinitialiser_config == 'oui' AND $Valider_reinit)) {
 		ecrire_meta('spiplistes_lots' , _request('spiplistes_lots')) ;
+		ecrire_meta('spiplistes_charset_envoi' , _request('spiplistes_charset_envoi')) ;
 		ecrire_metas();
 	}
 
@@ -206,6 +209,8 @@ function exec_config(){
 	echo "<input type='hidden' name='reinitialiser_config' value='oui' />";
 	echo "<label for='spiplistes_lots'>Nombre d'envois par lot</label>" ;
 	echo "<input type='text' name='spiplistes_lots' value=\"".$GLOBALS['meta']['spiplistes_lots']."\" class='formo' />";
+	echo "<label for='spiplistes_charset_envoi'>Charset de l'envoi</label>" ;
+	echo "<input type='text' name='spiplistes_charset_envoi' value=\"".$GLOBALS['meta']['spiplistes_charset_envoi']."\" class='formo' />";
 
 	echo "<input type='submit' name='Valider_reinit' value='"._T('spiplistes:reinitialiser')."' class='fondo' style='float:right' />";
 	echo "<hr style='clear:both;visibility:hidden' />";
