@@ -61,11 +61,12 @@
 	}
 	function Forms_header_prive($flux){
 		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."spip_forms.css' type='text/css' media='all' />\n";
-		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."donnees_voir.css' type='text/css' media='all' />\n";
+		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."donnee_voir.css' type='text/css' media='all' />\n";
 		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."donnees_tous.css' type='text/css' media='all' />\n";
 		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/date_picker.css' type='text/css' media='all' />\n";
 		$flux .= "<link rel='stylesheet' href='"._DIR_PLUGIN_FORMS."img_pack/jtip.css' type='text/css' media='all' />\n";
 		$flux .= "<script type='text/javascript'><!--\n var ajaxcharset='utf-8';\n//--></script>";
+		
 		if (in_array(_request('exec'),array('articles','donnees_edit'))){
 			$flux .= "<script src='".find_in_path('javascript/iautocompleter.js')."' type='text/javascript'></script>\n"; 
 			$flux .= "<script src='".find_in_path('javascript/interface.js')."' type='text/javascript'></script>\n"; 
