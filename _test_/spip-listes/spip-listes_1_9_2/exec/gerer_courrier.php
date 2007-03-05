@@ -216,7 +216,7 @@ function exec_gerer_courrier(){
 		if ($statut == 'encour'){
 			if ($expediteur == $connect_id_auteur  OR ($type == 'nl' AND $connect_statut == '0minirezo') OR ($type == 'auto' AND $connect_statut == '0minirezo')) {
 				echo "<div style='float:right'>";
-				icone (_T('icone_supprimer_message'), generer_url_ecrire('spip_listes','detruire_message='.$id_message), 'poubelle.gif', 'poubelle.gif');
+				icone (_T('icone_supprimer_message'), generer_url_ecrire('spip_listes','detruire_message='.$id_message), _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif', _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif');
 				echo "</div>";
 			}
 			echo "<p><span style='font-family:Verdana,Arial,Sans,sans-serif;font-size:120%;color:red'>
@@ -297,8 +297,8 @@ function exec_gerer_courrier(){
 				echo "<b>"._T('spiplistes:envoi')."</b><p style='font-familly : Georgia,Garamond,Times,serif'>"._T('spiplistes:envoi_texte')."</p>";
 				echo debut_cadre_enfonce();
 				echo "<div style='font-size:12px;font-familly:Verdana,Garamond,Times,serif;color:#000000;'>";
-				echo "<div style='float:right'><input type='submit' name='envoi_test' value='"._T('spiplistes:email_tester')."' class='fondo' /></div>";
-				echo "<input type='text' name='adresse_test' value='"._T('spiplistes:email_adresse')."' class='fondo' />" ;
+				echo "<div style='float:right'><input type='submit' name='envoi_test' value='"._T('spiplistes:email_tester')."' class='fondo'  /></div>";
+				echo "<input type='text' name='adresse_test' value='"._T('spiplistes:email_adresse')."' class='fondo' size='35' onfocus=\"this.value=''\" />" ;
 				echo "</div>" ;
 				echo fin_cadre_enfonce() ;
 				
@@ -326,7 +326,7 @@ function exec_gerer_courrier(){
 		echo "</td></tr></table>";
 		if($statut != 'publie'){
 			echo "<div style='margin:auto;margin-top:10px'>";
-			icone (_T('icone_supprimer_message'), '?exec=spip_listes&detruire_message='.$id_message, 'poubelle.gif', 'poubelle.gif');
+			icone (_T('icone_supprimer_message'), '?exec=spip_listes&detruire_message='.$id_message, _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif', _DIR_PLUGIN_SPIPLISTES.'img_pack/poubelle_msg.gif');
 			echo "</div>";
 		}
 		echo "</div>"; // fin du cadre de couleur
