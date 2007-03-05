@@ -66,28 +66,6 @@ function produceWharf($id, $title = '', $sb = '') {
 
 //gestion des lignes optionnelles
 
-//creation de tableau
-function afficher_gestion_tableau($champ) {
-
-$tableau_formulaire = '<table class="spip_barre" style="width: auto; padding: 1px!important; border-top: 0px;" summary="">
-<tr><td>
-'._T('bartypenr:barre_gestion_colonne').': <input type="text" name="barre_nbcolones" style="width: 30px;" value="2" size="2" maxlength="2"   /></td><td>
-'._T('bartypenr:barre_gestion_ligne').': <input type="text" name="barre_nbrangs" style="width: 30px;" value="2" size="2" maxlength="2" /></td><td>
-<input type="checkbox" name="barre_doentete" value="-1" checked="checked" /> '._T('bartypenr:barre_gestion_entete')
-.'</td><td>
-<input type="checkbox" name="barre_docaption" value="-1" checked="checked" /> '._T('bartypenr:barre_gestion_caption')
-.'</td><td>
-  <input type="button" value="OK" class="fondo" onclick="javascript:
-    barre_nbcolones.value = Math.abs(barre_nbcolones.value); barre_nbrangs.value
-    = Math.abs(barre_nbrangs.value);
-    if (!(barre_nbcolones.value == 0 || barre_nbrangs.value == 0)) {
-    barre_tableau('.$champ.', barre_nbcolones.value, barre_nbrangs.value,
-    barre_doentete.checked, barre_docaption.checked); } " /> 
-</td></tr></table>
-';  
-  return produceWharf('tableau_gestion','',$tableau_formulaire); 
-}
-
 // construction des liens
 function afficher_gestion_lien($champ) {
 
@@ -273,7 +251,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
  // Pregeneration des toolzbox.. (wharfing)
     $toolbox .= afficher_boutonsavances($champ, $champhelp);
 	$toolbox .= afficher_caracteres($champ, $spip_lang, $champhelp);
-    //$toolbox .= afficher_gestion_tableau($champ);
     $toolbox .= afficher_gestion_lien($champ);
 	$toolbox .= afficher_gestion_ancre($champ);
     $toolbox .= afficher_gestion_remplacer($champ, $champhelp);
