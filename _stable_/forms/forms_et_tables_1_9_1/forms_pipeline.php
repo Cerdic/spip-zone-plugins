@@ -40,11 +40,14 @@
 	function Forms_affiche_milieu($flux) {
 		$exec =  $flux['args']['exec'];
 		if ($exec=='articles'){
-			$id_article = $flux['args']['id_article'];
-			$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
-			$flux['data'] .= "<div id='forms_lier_donnees'>";
-			$flux['data'] .= $forms_lier_donnees('article',$id_article, $exec);
-			$flux['data'] .= "</div>";
+			include_spip('base/forms_base_api');
+			if (count(Forms_liste_tables('table'))){
+				$id_article = $flux['args']['id_article'];
+				$forms_lier_donnees = charger_fonction('forms_lier_donnees','inc');
+				$flux['data'] .= "<div id='forms_lier_donnees'>";
+				$flux['data'] .= $forms_lier_donnees('article',$id_article, $exec);
+				$flux['data'] .= "</div>";
+			}
 		}
 		return $flux;
 	}
