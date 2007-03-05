@@ -92,11 +92,10 @@ jQuery.fn.opencrayon = function(evt, percent) {
     // sinon charger le formulaire
     else {
       // sauf si je suis deja en train de le charger (lock)
-      if (jQuery(this).is('.crayon-loading')) {
+      if (jQuery(this).find("img.crayon-searching").length) {
         return;
       }
       jQuery(this)
-      .addClass('crayon-loading')
       .append(configCrayons.mkimg('searching')); // icone d'attente
       var me=this;
       jQuery.getJSON(configCrayons.url_crayons_html,
