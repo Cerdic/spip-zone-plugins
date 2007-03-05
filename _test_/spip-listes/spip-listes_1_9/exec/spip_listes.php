@@ -215,7 +215,7 @@ echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weigh
 
 if (_request('var_mode')=='test'){
 	include_spip('inc/spiplistes_cron');
-	cron_spiplistes_cron();
+	cron_spiplistes_cron(time());
 }
 
 fin_page();

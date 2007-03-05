@@ -31,7 +31,7 @@ include_spip('spiplistes_boutons');
 include_once(_DIR_PLUGIN_SPIPLISTES.'/inc/spiplistes_mail.inc.php');
 
 #$charset=lire_meta('charset');
-$GLOBALS['meta']['spiplistes_charset_envoi'] = $charset = 'iso-8859-1';
+$GLOBALS['spiplistes_charset_envoi'] = $charset = 'iso-8859-1';
 
 global $table_prefix;
 $query_message = "SELECT * FROM ".$table_prefix."_messages AS messages WHERE statut='encour' AND (TYPE='auto' OR TYPE='nl') ORDER BY date_heure ASC LIMIT 0,1";
@@ -117,23 +117,27 @@ if ($message_pile > 0){
 	srand((double)microtime()*1000000);
 	$boundary = md5(uniqid(rand()));
 
+	include_spip('inc/charsets');
 	$objet= filtrer_entites($titre);
- 	if ($charset <> 'utf-8') {
+ 	if (strncmp($GLOBALS['spiplistes_charset_envoi'],'utf-8',5)!==0) {
+	   $objet = charset2unicode($objet);
  	   $objet = str_replace("&#8217;", "'", $objet);
 	   $objet = str_replace("&#8220;", "\"", $objet);
 	   $objet = str_replace("&#8221;", "\"", $objet);
  	}
-	$objet = unicode2charset(charset2unicode($objet),$charset);
+	$objet = unicode2charset($objet,$GLOBALS['spiplistes_charset_envoi']);
 	include_spip('inc/filtres');
 	$texte = liens_absolus($texte);
 	
 	// on prépare la version texte
 	
-	if ($charset <> 'utf-8') {
+	if ($GLOBALS['spiplistes_charset_envoi'] <> 'utf-8') {
+		$texte = charset2unicode($texte);
 		$texte = str_replace("&#8217;", "'", $texte);
 		$texte = str_replace("&#8220;", "\"", $texte);
 		$texte = str_replace("&#8221;", "\"", $texte);
 	}
+	$texte = unicode2charset($texte,$GLOBALS['spiplistes_charset_envoi']);
 	
   
     $page_ = version_texte($texte);
@@ -266,8 +270,8 @@ if ($message_pile > 0){
 					$pagem = $page_."\n\n"  ;
 					$pagem.= filtrer_entites(_T('spiplistes:abonnement_mail'))."\n" ;
 					$pagem.= filtrer_entites(generer_url_public('abonnement','d='.$cookie))."\n\n"  ;
-					include_spip('inc/charsets');
-					$pagem = unicode2charset(charset2unicode($pagem),$charset);
+#					include_spip('inc/charsets');
+#					$pagem = unicode2charset(charset2unicode($pagem),$GLOBALS['spiplistes_charset_envoi']);
 				
 				if ($extra["abo"] == 'texte'){    // email TXT -----------------------
 
@@ -293,7 +297,7 @@ if ($message_pile > 0){
 		
 						$pagehm = $pageh."<hr style=\"noshade color:#000;size:1px;\" />"._T('spiplistes:editeur')."<a href=\"".$urlsite."\">".$nomsite."</a><br /><a href=\"".$urlsite."\">".$urlsite."</a><hr style=\"noshade color:#000;size:1px;\"/>
 						<a href=\"".generer_url_public('abonnement','d='.$cookie)."\">"._T('spiplistes:abonnement_mail')."</a>\n\n</body></html>";
-						$pagehm = unicode2charset(charset2unicode($pagehm),$charset);
+#						$pagehm = unicode2charset(charset2unicode($pagehm),$GLOBALS['spiplistes_charset_envoi']);
 						
 		
 						// fin du pied de page HTML

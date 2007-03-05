@@ -9,7 +9,7 @@
 
 		function phpMail($email, $objet, $message_html, $message_texte) {
 			//$this->From		= lire_meta('email_webmaster');
-			$this->CharSet	= $GLOBALS['meta']['spiplistes_charset_envoi'];
+			$this->CharSet	= $GLOBALS['spiplistes_charset_envoi'];
 			$this->FromName	= unicode2charset(charset2unicode(lire_meta('nom_site')),$this->Charset);
 	    $this->Mailer	= 'mail';
 			$this->Subject	= $objet;
