@@ -511,9 +511,13 @@ function spiplistes_afficher_auteurs($query, $url){
 	// et memoriser la liste des lettres initiales
 	//
 	
+	
+	// reglage du debut
 	$max_par_page = 30;
-	if ($debut > $nombre_auteurs - $max_par_page)
-	$debut = max(0,$nombre_auteurs - $max_par_page);
+	if ($debut > $nombre_auteurs - $max_par_page) {
+		$debut = max(0,$nombre_auteurs - $max_par_page);
+	}
+	$fin = min($nombre_auteurs, $debut + $max_par_page);
 	$debut = intval($debut);
 	
 	$i = 0;
@@ -543,12 +547,6 @@ function spiplistes_afficher_auteurs($query, $url){
 	//
 	// Affichage
 	//
-	
-	// reglage du debut
-	$max_par_page = 30;
-	if ($debut > $nombre_auteurs - $max_par_page)
-	$debut = max(0,$nombre_auteurs - $max_par_page);
-	$fin = min($nombre_auteurs, $debut + $max_par_page);
 	
 	// ignorer les $debut premiers
 	unset ($i);
