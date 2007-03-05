@@ -12,7 +12,7 @@ Der Versand der Mails kann einige Minuten in Anspruch nehmen: Die Empf&auml;nger
 
 // A
 'abo_1_lettre' => 'Newsletter',
-'abonnement' => 'Abonnement',
+'abonnement_0' => 'Abonnement',
 'abonnement'=>'Sie m&ouml;chten Ihr Abonnement des Newsletters bearbeiten',
 'abonnement_bouton'=>'Ihr Abonnement bearbeiten',
 'abonnement_cdt' => '<a href=\'http://bloog.net/spip-listes/\'>SPIP-Listes</a>' ,

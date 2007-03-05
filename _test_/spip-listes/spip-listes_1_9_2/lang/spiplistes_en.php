@@ -15,7 +15,7 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 
 // A
 'abo_1_lettre' => 'Newsletter',
-'abonnement' => 'Subscription',
+'abonnement_0' => 'Subscription',
 'abonnement'=>'You would like to change your subscription to the newsletter',
 'abonnement_bouton'=>'Change your subscription',
 'abonnement_cdt' => '<a href=\'http://bloog.net/spip-listes/\'>SPIP-Listes</a>' ,

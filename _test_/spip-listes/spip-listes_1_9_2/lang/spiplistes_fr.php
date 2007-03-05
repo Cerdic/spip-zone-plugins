@@ -12,7 +12,7 @@ dans lequel ils souhaitent recevoir les courriers (HTML/texte). </p><p>Tout cour
 
 // A
 'abo_1_lettre' => 'Lettre d\'information',
-'abonnement' => 'Abonnement',
+'abonnement_0' => 'Abonnement',
 'abonnement'=>'Vous souhaitez modifier votre abonnement &agrave; la lettre d\'information',
 'abonnement_bouton'=>'Modifier votre abonnement',
 'abonnement_cdt' => '<a href=\'http://bloog.net/spip-listes/\'>SPIP-Listes</a>' ,

@@ -13,7 +13,7 @@ col quale desiderano ricevere le comunicazioni (HTML/testo). <br /><br />Ogni me
 
 // A
 'abo_1_lettre' => 'Iscrizione alla newsletter di ',
-'abonnement' => 'Iscrizione',
+'abonnement_0' => 'Iscrizione',
 'abonnement'=>'Si desidera modificare la propria iscrizione alla newsletter',
 'abonnement_bouton'=>'Modifica l&#39;iscrizione',
 'abonnement_cdt' => '<a href=\'http://bloog.net\'>SPIP-Listes</a>' ,

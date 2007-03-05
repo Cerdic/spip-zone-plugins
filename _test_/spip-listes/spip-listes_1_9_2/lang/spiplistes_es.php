@@ -12,6 +12,7 @@ prepararlo en HTML.
 
 // A
 'abo_1_lettre' => 'Inscribirse para recibir novedades de ',
+'abonnement_0' => 'Inscripci&oacute;n',
 'abonnement' => 'Inscripci&oacute;n',
 'abonnement_mod'=>'Modificar tu inscripci&oacute;n',
 'abonnement_bouton'=>'Modificar',
