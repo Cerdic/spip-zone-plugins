@@ -122,7 +122,7 @@ class Crayon {
 	// le constructeur du crayon
 	// $name : son nom
 	// $texts : tableau associatif des valeurs ou valeur unique si crayon monochamp
-	// $options : options directes du crayon (développement)
+	// $options : options directes du crayon (developpement)
     function Crayon($name, $texts = array(), $options = array()) {
         $this->name = $name;
     	list($this->type, $this->modele, $this->id) = explode('-', $this->name);
