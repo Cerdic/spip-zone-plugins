@@ -99,7 +99,6 @@ function exec_spip_listes() {
 	include_spip ('inc/config');
 	include_spip ('inc/barre');
 	
-	include_spip ('inc/logos');
 	include_spip ('inc/mots');
 	include_spip ('inc/documents');
 	
