@@ -1,8 +1,7 @@
 <?php
 // un controleur qui n'utilise que php et les inputs dŽfauts
-function controleurs_forms_donnees_dist($regs) {
+function controleurs_forms_donnee_dist($regs) {
     list(,$crayon,$type,$champ,$id) = $regs;
-
 	$q = "SELECT valeur FROM spip_forms_donnees_champs WHERE champ="._q($champ)." AND id_donnee="._q($id);
 	$s = spip_query($q);
 	if (!$t = spip_fetch_array($s))
