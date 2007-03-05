@@ -15,7 +15,7 @@
 </td>
 </tr>]
 <BOUCLE_forms(FORMS){type_form=#ENV{type_form,''}}{pagination 10 #ENV{type_form,form}}>
-<BOUCLE_rep(FORMS_DONNEES){id_form}></BOUCLE_rep>#SET{donnees,#TOTAL_BOUCLE}<//B_rep>
+<BOUCLE_rep(FORMS_DONNEES){id_form}{statut IN (prepa,prop,publie)}></BOUCLE_rep>#SET{donnees,#TOTAL_BOUCLE}<//B_rep>
 #SET{lien_edite,(#URL_ECRIRE{forms_edit,id_form=#ID_FORM}|parametre_url{retour,#SELF|urlencode})}
 #SET{lien_affiche,(#URL_ECRIRE{(#TYPE_FORM|match{(^$|^sondage$)}|?{forms_reponses,donnees_tous}),id_form=#ID_FORM}|parametre_url{retour,#SELF|urlencode})}
 [(#GET{donnees}|?{'',' '})
