@@ -214,7 +214,8 @@ spiplistes_afficher_en_liste(_T('spiplistes:aff_envoye'), '../'._DIR_PLUGIN_SPIP
 echo "<p style='font-family: Arial, Verdana,sans-serif;font-size:10px;font-weight:bold'>".$GLOBALS['spiplistes_version']."<p>" ;
 
 if (_request('var_mode')=='test'){
-	
+	include_spip('inc/spiplistes_cron');
+	cron_spiplistes_cron();
 }
 
 fin_page();
