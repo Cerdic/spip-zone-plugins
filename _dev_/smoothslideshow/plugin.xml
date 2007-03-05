@@ -3,7 +3,7 @@
 Smooth Slideshow
 </nom>
 <auteur>	<!-- Auteur du plugin -->
-Yvan d'après IZO, James et le plugin [lecteur multimedia->http://spip-zone.info/spip.php?article18]
+Yvan d'apr&#232;s IZO, James et le plugin [lecteur multimedia->http://spip-zone.info/spip.php?article18]
 _ portage de [->http://smoothslideshow.jondesign.net/]
 _ Distribu&#233; sous licence GNU/GPL
 </auteur>
@@ -20,9 +20,9 @@ test
 3 mod&#232;les joints :
 - slideshow des logos des articles d'une rubrique
 - slideshow des images d'un article
-- slideshow des rubriques d'un article
+- slideshow des images d'une rubrique
 
-à insérer dans les squelettes par <code>#MODELE{nom_du_modele}</code>
+&#224; ins&#233;rer dans les squelettes par <code>#MODELE{nom_du_modele}</code>
 </multi>
 </description>
 <lien> [Exemple->http://mamoud.free.fr/spip_svn/spip.php?article1]</lien>
