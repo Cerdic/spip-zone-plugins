@@ -264,7 +264,8 @@ if ($message_pile > 0){
 					$pagem = $page_."\n\n"  ;
 					$pagem.= filtrer_entites(_T('spiplistes:abonnement_mail'))."\n" ;
 					$pagem.= filtrer_entites(generer_url_public('abonnement','d='.$cookie))."\n\n"  ;
-		
+					include_spip('inc/charsets');
+					$pagem = unicode2charset(charset2unicode($pagem),'iso-8859-1');
 				
 				if ($extra["abo"] == 'texte'){    // email TXT -----------------------
 
@@ -290,6 +291,7 @@ if ($message_pile > 0){
 		
 						$pagehm = $pageh."<hr style=\"noshade color:#000;size:1px;\" />"._T('spiplistes:editeur')."<a href=\"".$urlsite."\">".$nomsite."</a><br /><a href=\"".$urlsite."\">".$urlsite."</a><hr style=\"noshade color:#000;size:1px;\"/>
 						<a href=\"".generer_url_public('abonnement','d='.$cookie)."\">"._T('spiplistes:abonnement_mail')."</a>\n\n</body></html>";
+						$pagehm = unicode2charset(charset2unicode($pagehm),'iso-8859-1');
 						
 		
 						// fin du pied de page HTML
