@@ -205,16 +205,17 @@ function exec_forms_edit(){
 		if ($is_form){
 			$row['modifiable'] = 'non';
 			$row['multiple'] = 'oui';
+			$row['moderation'] = "posteriori";
 		}
 		else {
 			$row['modifiable'] = 'non';
 			$row['multiple'] = 'non';
+			$row['moderation'] = "priori";
 		}
 		$row['forms_obligatoires'] = "";
 		$row['email'] = array();
 		$row['champconfirm'] = "";
 		$row['texte'] = "";
-		$row['moderation'] = "priori";
 		$row['public'] = "non";
 		$row['linkable'] = "non";
 		$row['documents'] = "non";
