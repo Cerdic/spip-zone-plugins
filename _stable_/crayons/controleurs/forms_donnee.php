@@ -13,7 +13,7 @@ function controleurs_forms_donnee_dist($regs) {
 		return array("$type $id $champ: " . _U('crayons:pas_de_valeur'), 6);
 
 	$n = new Crayon("$type-$champ-" . $id, $valeurs,
-			array('hauteurMini' => 234,
+			array(/*'hauteurMini' => 234,*/
 				  'controleur' => 'formulaires/forms_structure'));
     
 	$contexte = array(

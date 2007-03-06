@@ -12,7 +12,6 @@ function verif_secu($w, $secu) {
 
 function post_crayons() {
     $results = array();
-
     if (isset($_POST['crayons']) AND is_array($_POST['crayons']))
     foreach ($_POST['crayons'] as $crayon) {
 
@@ -152,7 +151,7 @@ function action_crayons_store_dist() {
 				    break;
 				
 				# plugin forms&tables
-				case 'forms_donnees':
+				case 'forms_donnee':
 					include_spip('inc/forms');
 					$fun = 'Forms_revision_donnee';
 					break;
@@ -219,25 +218,18 @@ function action_crayons_store_dist() {
 	    // chercher vues/article_toto.html
 	    // sinon vues/toto.html
 	    if (find_in_path( ($fond = 'vues/' . $type . '_' . $modele) . '.html')
-	    OR find_in_path( ($fond = 'vues/' . $modele) .'.html')) {
+	    OR find_in_path( ($fond = 'vues/' . $modele) .'.html')
+	    OR find_in_path( ($fond = 'vues/' . $type) .'.html')) {
 	        $contexte = array(
 	            'id_' . $type => $id,
+	            'champ' => $modele,
 	            'lang' => $GLOBALS['spip_lang']
 	        );
 	        $contexte = array_merge($contexte, $content);
 	        include_spip('public/assembler');
 	        $return[$wid] = recuperer_fond($fond, $contexte);
 	    }
-	    // vues par defaut
-	    else
-	    
-	    // cas de forms
-	    if ($type == 'forms_donnees') {
-	    	$q = "SELECT valeur FROM spip_forms_donnees_champs WHERE champ="._q($modele)." AND id_donnee="._q($id);
-			$s = spip_query($q);
-			if ($t = spip_fetch_array($s))
-				$return[$wid] = typo($t['valeur']);
-	    }
+	    // vue par defaut
 	    else {
 	        // Par precaution on va rechercher la valeur
 	        // dans la base de donnees (meme si a priori la valeur est
