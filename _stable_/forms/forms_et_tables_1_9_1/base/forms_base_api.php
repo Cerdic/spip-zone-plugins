@@ -47,7 +47,6 @@ function Forms_liste_tables($type){
 	if (!isset($liste[$type])){
 		$liste[$type] = array();
 		$res = spip_query("SELECT id_form FROM spip_forms WHERE type_form="._q($type));
-		$liste[$type] = array();
 		while ($row = spip_fetch_array($res)){
 			$liste[$type][] = $row['id_form'];
 		}
