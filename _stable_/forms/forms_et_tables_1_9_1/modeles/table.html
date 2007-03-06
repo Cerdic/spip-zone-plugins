@@ -18,9 +18,7 @@
 	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]'>
 		<td><a href='[(#SELF|parametre_url{id_donnee,#ID_DONNEE}|ancre_url{donnee-#ID_DONNEE})]'>#ID_DONNEE</a></td>
 		<BOUCLE_body(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}{specifiant=oui}>
-		<td>
-		#LESVALEURS{'<br />'}
-		</td>
+		<td ><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{'<br />'}</span></td>
 		</BOUCLE_body>
 </BOUCLE_donnees>
 </tbody>

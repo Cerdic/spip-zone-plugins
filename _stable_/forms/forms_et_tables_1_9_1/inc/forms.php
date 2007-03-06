@@ -22,6 +22,7 @@
 	}
 	
 	function Forms_structure($id_form){
+		include_spip('inc/texte'); # typo et textebrut
 		// Preparer la table de traduction code->valeur & mise en table de la structure pour eviter des requettes
 		// a chaque ligne
 		$structure = array();
@@ -49,10 +50,17 @@
 		}
 		return $structure;
 	}
-	function Forms_valeurs($id_form,$id_donnee){
+	function Forms_valeurs($id_donnee,$id_form = NULL,$champ=NULL){
 		static $unseul = array();
 		$valeurs = array();
-		$res = spip_query("SELECT * FROM spip_forms_donnees_champs AS d JOIN spip_forms_champs AS c ON c.champ=d.champ AND c.id_form="._q($id_form)." WHERE id_donnee="._q($id_donnee));
+		if ($id_form===NULL){
+			$res = spip_query("SELECT id_form FROM spip_forms_donnees WHERE id_donnee="._q($id_donnee));
+			if( !$row = spip_fetch_array($res)) return $valeurs;
+			$id_form = $row['id_form'];
+		}
+		$selchamp = "";
+		if ($champ!==NULL) $selchamp = "d.champ="._q($champ)." AND";
+		$res = spip_query("SELECT * FROM spip_forms_donnees_champs AS d JOIN spip_forms_champs AS c ON c.champ=d.champ AND c.id_form="._q($id_form)." WHERE $selchamp d.id_donnee="._q($id_donnee));
 		while ($row = spip_fetch_array($res)){
 			if ($row['type']=='multiple')
 				$valeurs[$row['champ']][]= $row['valeur'];
@@ -459,7 +467,7 @@
 			}
 			$in_champs = calcul_mysql_in('champ',join(',',array_map('_q', $champs_mod)));
 			spip_query("DELETE FROM spip_forms_donnees_champs WHERE $in_champs AND id_donnee="._q($id_donnee));
-			spip_query("INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
+			spip_query($q="INSERT INTO spip_forms_donnees_champs (id_donnee, champ, valeur) ".
 				"VALUES ".join(',', $inserts));
 		}
 		else

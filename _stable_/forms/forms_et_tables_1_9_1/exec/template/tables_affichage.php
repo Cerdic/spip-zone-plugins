@@ -13,6 +13,11 @@
 
 include_spip('inc/forms');
 
+function forms_inserer_crayons($out){
+	$out = pipeline('affichage_final', "</head>".$out);
+	$out = str_replace("</head>","",$out);
+	return $out;
+}
 function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer){
 	global $spip_lang_right;
   include_spip("inc/presentation");
@@ -130,6 +135,7 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 		'statuts' => array('prepa','prop','propose','publie','refuse') )
 	);
 	$out .=  recuperer_fond("exec/template/donnees_tous",$contexte);
+	$out = forms_inserer_crayons($out);
 	
 	$out .=  "</td></tr></table><br />\n";
 	return $out;

@@ -73,7 +73,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 			  $reponse = _T($message_confirm,array('mail'=>$reponse));
 			if (!_DIR_RESTREINT 
 			  AND (($r=_request('id_donnee'))===NULL OR $r==$id_donnee OR ($r<0 AND !in_array(_request('exec'),$GLOBALS['forms_saisie_km_exec']))) )
-				$valeurs = Forms_valeurs($id_form,$id_donnee);
+				$valeurs = Forms_valeurs($id_donnee,$id_form);
 			else
 				$id_donnee = 0;
 		}
@@ -86,7 +86,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 		}
 	}
 	elseif (!_DIR_RESTREINT && $id_donnee=_request('id_donnee'))
-		$valeurs = Forms_valeurs($id_form,$id_donnee);
+		$valeurs = Forms_valeurs($id_donnee,$id_form);
 	elseif (_DIR_RESTREINT!="" && $row['modifiable']=='oui'){
 		global $auteur_session;
 		$id_auteur = $auteur_session ? intval($auteur_session['id_auteur']) : 0;
@@ -107,7 +107,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $class=
 		$res = spip_query($q);
 		if($row2 = spip_fetch_array($res)){
 			$id_donnee=$row2['id_donnee'];
-			$valeurs = Forms_valeurs($id_form,$id_donnee);
+			$valeurs = Forms_valeurs($id_donnee,$id_form);
 		}
 	}
 

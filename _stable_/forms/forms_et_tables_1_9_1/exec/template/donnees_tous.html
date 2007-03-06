@@ -49,9 +49,7 @@
 		[(#ENV{affiche_rang,1}|?{' '})<td>#RANG</td>]
 		<BOUCLE_auteur(AUTEURS){id_auteur}>[(#ENV{affiche_de,1}|?{' '})<td>#NOM</td>]</BOUCLE_auteur>[(#ENV{affiche_de,1}|?{' '})<td>#IP</td>]<//B_auteur>
 		<BOUCLE_body(FORMS_CHAMPS){id_form}{tout}{type !IN (separateur,textestatique)}{par rang}>
-		<td>
-		#LESVALEURS{'<br />'}
-		</td>
+		<td><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{'<br />'}</span></td>
 		</BOUCLE_body>
 		[(#GET{documents})<td>]
 		<BOUCLE_docs(DOCUMENTS){id_donnee}{0,1}>
