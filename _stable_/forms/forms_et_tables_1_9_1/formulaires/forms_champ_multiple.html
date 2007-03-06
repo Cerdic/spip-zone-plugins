@@ -3,7 +3,7 @@
 <B_choix>
 	<BOUCLE_choix(FORMS_CHAMPS_CHOIX){id_form}{champ}{par rang}>
 	<span class='spip_form_choix_multiple'>
-	&nbsp; <input type='checkbox' name='#CHAMP[]' id='input-#ID_FORM-#CHOIX' value='#CHOIX'
+	&nbsp; <input type='checkbox' name='#ENV{name,#CHAMP}[]' id='input-#ID_FORM-#CHOIX' value='#CHOIX'
 	[(#CHOIX|in_any{[(#ENV**{valeur}|forms_valeur{#CHAMP})], ''}|?{'checked="checked"',''})] />
 	<label for='input-#ID_FORM-#CHOIX'>[(#TITRE|supprimer_numero)]</label>
 	</span>
