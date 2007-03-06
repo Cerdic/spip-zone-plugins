@@ -47,8 +47,8 @@ function smileys_installe() {
 	 ';)'	=> 'clin_d-oeil.png',
 	 ':|'	=> 'bof.png',
 	 '|)'	=> 'rouge.png',
-	// ':/'	=> 'mouais.png',	// conflit avec 'http://' par exemple
-	// ':('	=> 'pas_content.png',
+	 ':/'	=> 'mouais.png',	// conflit avec 'http://' par exemple
+	 ':('	=> 'pas_content.png',
 	);
 
 	// accessibilite : protection de alt et title
