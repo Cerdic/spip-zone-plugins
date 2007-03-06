@@ -15,10 +15,12 @@ function exec_edittable_edit(){
 
 			echo fin_boite_info();
 			echo debut_raccourcis();
+				echo '<a href="?exec=edittable&table='._request('table').'">'._T('edittable:retour_a_la_table').'</a><hr />';
 				echo '<a href="?exec=listetable">'._T('edittable:les_table').'</a>';
 			echo fin_raccourcis();
 		echo debut_droite();
-			
+		if ($GLOBALS['connect_statut'] == "0minirezo")
+		{
 			$sql_edittable = "SELECT * FROM "._request('table')." WHERE ".utf8_decode(_request('colonne_cle'))." = '"._request('valeur_cle')."';";
 			$res_edittable = spip_query($sql_edittable);
 			$contenu_edittable = spip_fetch_array($res_edittable);
@@ -40,8 +42,7 @@ function exec_edittable_edit(){
 				<div align="right"><input type="submit" value="'._T('edittable:enregistrer').'" class="fondo"/></div>
 				</form>';
 			echo fin_cadre_formulaire();
-			
-			
+		}			
 	if ($GLOBALS['spip_version_code']>=1.92) { echo fin_gauche(); }
 	echo fin_page();
 }

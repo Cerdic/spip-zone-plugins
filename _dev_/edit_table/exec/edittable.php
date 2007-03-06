@@ -4,8 +4,6 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_EDITTABLE',(_DIR_PLUGINS.end($p)));
 
 include_spip("inc/presentation");
 include_spip("inc/barre");
@@ -38,18 +36,18 @@ function exec_edittable(){
 			if ( $olonne_cle == '000' ) { $olonne_cle = $colone_temp; }
 			
 			$res_list_edittable = spip_query("SELECT * FROM "._request('table').";");
-			debut_cadre_trait_couleur("../"._DIR_PLUGIN_edittable."/img_pack/digg.png", false, '', _T('edittable:mes_edittable_en'));
+			debut_cadre_trait_couleur("../"._DIR_PLUGIN_edittable."/img_pack/digg.png", false, '', _T('edittable:enregistrements_de_la_able').'&nbsp;:&nbsp;'._request('table'));
 			//echo '<table>';
 			while ($row_edittable = spip_fetch_array($res_list_edittable)){
-				echo _T('edittable:enregistrement_numero').'&nbsp;<b>'.$row_edittable[$olonne_cle].'</b>';
-				echo '&nbsp;'._T('edittable:cle_primaire').'&nbsp;:'.$olonne_cle.'&nbsp;=&nbsp;'.$row_edittable[$olonne_cle];
-				echo '<br /><a href="?exec=edittable_voir&amp;valeur_cle='.$row_edittable[$olonne_cle].'&amp;table='._request('table').'&amp;colonne_cle='.$olonne_cle.'">'._T('edittable:editer_enregistrement').'</a><hr />';
+				echo _T('edittable:enregistrement_numero').'&nbsp;<b>'.$row_edittable[$olonne_cle].'</b><br />';
+				echo '&nbsp;'._T('edittable:cle_primaire').'&nbsp;:&nbsp;<b>'.$olonne_cle.'</b>&nbsp;|&nbsp;'._T('edittable:valeur_courante').'&nbsp;:&nbsp;<b>'.$row_edittable[$olonne_cle].'</b><br />';
+				echo '<a href="?exec=edittable_voir&amp;valeur_cle='.$row_edittable[$olonne_cle].'&amp;table='._request('table').'&amp;colonne_cle='.$olonne_cle.'">'._T('edittable:editer_enregistrement').'</a><hr />';
 			}
 			//echo '</table>';
 			fin_cadre_trait_couleur(false);
 			
 			echo '<br />';
-			
+			echo '<div class="cadre-titre"><u>'._T('edittable:structure_de_la_table_courante').'</u></div>';
 			$res_structure_table = spip_query(" DESC "._request('table').";");
 			debut_cadre_formulaire();
 			while ($row_structure = spip_fetch_array($res_structure_table)){

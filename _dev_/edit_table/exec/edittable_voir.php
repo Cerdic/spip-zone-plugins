@@ -13,6 +13,7 @@ function exec_edittable_voir(){
 				echo '<center><font face="Verdana,Arial,Sans,sans-serif" size="1"><b>'._request('table').'</b></font><br><font face="Verdana,Arial,Sans,sans-serif" size="2"><b>'._request('colonne_cle').'&nbsp;=&nbsp;'._request('valeur_cle').'</b></font></center>';
 			echo fin_boite_info();
 			echo debut_raccourcis();
+				echo '<a href="?exec=edittable&table='._request('table').'">'._T('edittable:retour_a_la_table').'</a><hr />';
 				echo '<a href="?exec=listetable">'._T('edittable:mes_edittable').'</a>';
 			echo fin_raccourcis();
 			if(_request('sql_command')){
@@ -21,6 +22,8 @@ function exec_edittable_voir(){
 				echo fin_boite_info();
 			}
 		echo debut_droite();
+		if ($GLOBALS['connect_statut'] == "0minirezo")
+		{
 			$sql_edittable = "SELECT * FROM "._request('table')." WHERE "._request('colonne_cle')." = '"._request('valeur_cle')."';";
 			$res_edittable = spip_query($sql_edittable);
 			$contenu_edittable = spip_fetch_array($res_edittable);
@@ -31,8 +34,7 @@ function exec_edittable_voir(){
 				</form>';
 			afficher_tableau_div($contenu_edittable);
 			echo fin_cadre_trait_couleur();
-			
-			
+		}
 	if ($GLOBALS['spip_version_code']>=1.92) { echo fin_gauche(); }
 	echo fin_page();
 }

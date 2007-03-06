@@ -4,8 +4,6 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-define('_DIR_PLUGIN_EDITTABLE',(_DIR_PLUGINS.end($p)));
 
 include_spip("inc/presentation");
 include_spip("inc/barre");
@@ -20,8 +18,10 @@ function exec_listetable(){
 				echo '<a href="?exec=listetable">'._T('edittable:les_table').'</a>';
 			echo fin_raccourcis();
 		echo debut_droite();
+		if ($GLOBALS['connect_statut'] == "0minirezo")
+		{
 			$res_list_table = spip_query("SHOW TABLES;");
-			debut_cadre_trait_couleur("../"._DIR_PLUGIN_edittable."/img_pack/digg.png", false, '', _T('edittable:mes_edittable_en'));
+			debut_cadre_trait_couleur("../"._DIR_PLUGIN_edittable."/img_pack/digg.png", false, '', _T('edittable:liste_des_tables_de_la_base'));
 			//echo '<table style="width:100%">';
 			while ($row_table = MYSQL_fetch_row($res_list_table)){
 				//var_dump($row_table);
@@ -34,8 +34,8 @@ function exec_listetable(){
 				echo fin_boite_info(); echo '<br />';
 			}
 			fin_cadre_trait_couleur(false);
-			
-			
+		}
+		
 	if ($GLOBALS['spip_version_code']>=1.92) { echo fin_gauche(); }
 	echo fin_page();
 }
