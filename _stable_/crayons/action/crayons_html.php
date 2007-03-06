@@ -156,7 +156,7 @@ class Crayon {
 	// formulaire standard
     function formulaire($contexte = array(), $inputAttrs = array()) {
         return '<form class="formulaire_spip" method="post" action="' .
-        	str_replace('crayons_html', 'crayons_store', self()) . '">' .
+        	str_replace('crayons_html', 'crayons_store', self(true)) . '">' .
         	$this->code() .
 	        $this->input($contexte, $inputAttrs) .
         	$this->boutons() . // array('edit'=>'')
@@ -246,7 +246,7 @@ class Crayon {
 	le + "editer tout" n'y est pas, au contraire on peut le mettre avec 'edit'=>''
 */
     function boutons($boutons = array()) {
-        $crayonsImgPath = dirname(find_in_path('images/cancel.png'));
+        $crayonsImgPath = dirname(url_absolue(find_in_path('images/cancel.png')));
         if (!isset($boutons['submit'])) {
         	$boutons['submit'] = array('ok', texte_backend(_T('bouton_enregistrer')));
         }

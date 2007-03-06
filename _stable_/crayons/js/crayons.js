@@ -19,7 +19,7 @@ jQuery.fn.extend({
 // le prototype configuration de Crayons
 function cfgCrayons(options)
 {
-  this.url_crayons_html = 'spip.php?action=crayons_html';
+  this.url_crayons_html = options['dir_racine']+'spip.php?action=crayons_html';
   this.img = {
     'searching':{'file':'searching.gif','txt':'En attente du serveur ...'},
     'edit':{'file':'crayon.png','txt':'Editer'},

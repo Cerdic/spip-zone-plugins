@@ -20,7 +20,7 @@ function Crayons_affichage_final($page) {
         return $page;
 
     // sinon regarder rapidement si la page a des classes crayon
-    if (!strpos($page, 'crayon'))
+    if (strpos($page, 'crayon')===FALSE)
         return $page;
 
     // voir un peu plus precisement lesquelles
@@ -60,6 +60,7 @@ function Crayons_preparer_page($page, $droits, $wdgcfg = array()) {
     $config = var2js(array(
 		'imgPath' => dirname(find_in_path('images/crayon.png')),
         'droits' => $droits,
+    'dir_racine' => _DIR_RACINE,
 
 		'txt' => array(
 			'error' => _U('crayons:svp_copier_coller'),
