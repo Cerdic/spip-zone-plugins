@@ -1,5 +1,6 @@
 <?php
-/* insert le css et le js externes pour Crayons dans le <head>
+
+/* inserer le css et le js externes pour Crayons dans le <head>
  *
  *  Crayons plugin for spip (c) Fil, toggg 2006-2007 -- licence GPL
  */
