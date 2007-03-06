@@ -500,25 +500,21 @@ function spiplistes_cherche_auteur(){
 }
 
 function spiplistes_afficher_auteurs($query, $url){
-	$debut = _request('debut');
 	$tri = _request('tri');
 
+	$t = spip_query('SELECT COUNT(*) FROM spip_auteurs');
+	$nombre_auteurs = spip_fetch_array($t, SPIP_NUM);
+	$nombre_auteurs = intval($nombre_auteurs[0]);
+	
 	$t = spip_query($query);
-	$nombre_auteurs = spip_num_rows($t);
-	
-	//
-	// Lire les auteurs qui nous interessent
-	// et memoriser la liste des lettres initiales
-	//
-	
 	
 	// reglage du debut
 	$max_par_page = 30;
+	$debut = intval(_request('debut'));
 	if ($debut > $nombre_auteurs - $max_par_page) {
 		$debut = max(0,$nombre_auteurs - $max_par_page);
 	}
 	$fin = min($nombre_auteurs, $debut + $max_par_page);
-	$debut = intval($debut);
 	
 	$i = 0;
 	$auteurs=array();

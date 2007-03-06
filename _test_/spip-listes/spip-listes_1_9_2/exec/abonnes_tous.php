@@ -83,8 +83,8 @@ function exec_abonnes_tous(){
 			$cmpt_html = $cmpt_html + 1 ;
 		if ($abo['abo'] == "non")
 			$cmpt_non = $cmpt_non + 1 ;
-		$total_abo = $cmpt_html + $cmpt_texte ;
 	}
+	$total_abo = $cmpt_html + $cmpt_texte ;
 
 	$abonnes = spip_query("select a.id_auteur, count(d.id_liste) from spip_auteurs a  
 	      left join spip_auteurs_listes d on a.id_auteur =  
@@ -144,7 +144,7 @@ function exec_abonnes_tous(){
 			$type_requete = 'auteur';
 			break;
 		case 'nom':
-			$sql_order = ' ORDER BY LOWER(nom)';
+			$sql_order = ' ORDER BY unom';
 			$type_requete = 'auteur';
 			break;
 		case 'email':
