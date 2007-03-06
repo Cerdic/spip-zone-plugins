@@ -96,12 +96,6 @@ function colonne_table($table, $col)
 	return $ret;
 }
 //	var_dump(colonne_table('forum', 'id_syndic')); die();
-function forms_donnee_valeur_colonne_table($table,$champ,$id_donnee){
-	include_spip("inc/forms");
-	$valeurs = Forms_valeurs($id_donnee,NULL,$champ);
-	return isset($valeurs[$champ])?$valeurs[$champ]:'';
-}
-
 
 function valeur_colonne_table($table, $col, $id) {
 	if (function_exists($f = $table.'_valeur_colonne_table_dist')

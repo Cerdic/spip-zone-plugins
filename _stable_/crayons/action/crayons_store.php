@@ -78,8 +78,6 @@ function action_crayons_store_dist() {
 				// recuperer l'existant pour calculer son md5 et verifier
 				// qu'il n'a pas ete modifie entre-temps
 
-				// on fait une exception pour forms_donnee, on verra plus tard
-				// comment faire ca de maniere generique
 				$data = array();
 				foreach ($content as $champtable => $val) {
 					$data[$champtable] = valeur_colonne_table($type, $champtable, $id);
@@ -123,8 +121,9 @@ function action_crayons_store_dist() {
 		if (!isset($updates[$type])) {
 			// MODELE
 			$fun = '';
-
-			if (function_exists($f = 'modeles_'. $modele))
+			if (function_exists($f = $type.'_'. $modele . "_revision")
+			OR function_exists($f = $modele . "_revision")
+			OR function_exists($f = $type . "_revision"))
 				$fun = $f;
 			else switch($type) {
 				case 'article':
@@ -147,13 +146,6 @@ function action_crayons_store_dist() {
 				    include_spip('action/editer_site');
 				    $fun = 'revisions_sites';
 				    break;
-				
-				# plugin forms&tables
-				case 'forms_donnee':
-					include_spip('inc/forms');
-					$fun = 'Forms_revision_donnee';
-					break;
-
 				// cas geres de la maniere la plus standard
 				case 'auteur':
 				case 'document':
@@ -199,54 +191,60 @@ function action_crayons_store_dist() {
 	include_spip('inc/texte');
 	foreach ($modifs as $m) {
 		list($type, $modele, $id, $content, $wid) = $modif;
+			$f = charger_fonction($type.'_'.$modele, 'vues', true)
+			  OR $f = charger_fonction($modele, 'vues', true)
+			  OR $f = charger_fonction($type, 'vues', true)
+			  OR $f = 'vues_dist';
+			$return[$wid] = $f($type, $modele, $id, $content);
+	}
+	echo var2js($return);
+	exit;
+}
 
-		//
-		// VUE
-		//
+//
+// VUE
+//
+function vues_dist($type, $modele, $id, $content){
 
-		// pour ce qui a une {lang_select} par defaut dans la boucle,
-		// la regler histoire d'avoir la bonne typo dans le propre()
-		// NB: ceci n'a d'impact que sur le "par defaut" en bas
-		if (colonne_table($type, 'lang')) {
-			lang_select($a = valeur_colonne_table($type, 'lang', $id));
-		} else {
-			lang_select($a = $GLOBALS['meta']['langue_site']);
-		}
-
-	    // chercher vues/article_toto.html
-	    // sinon vues/toto.html
-	    if (find_in_path( ($fond = 'vues/' . $type . '_' . $modele) . '.html')
-	    OR find_in_path( ($fond = 'vues/' . $modele) .'.html')
-	    OR find_in_path( ($fond = 'vues/' . $type) .'.html')) {
-	        $contexte = array(
-	            'id_' . $type => $id,
-	            'champ' => $modele,
-	            'lang' => $GLOBALS['spip_lang']
-	        );
-	        $contexte = array_merge($contexte, $content);
-	        include_spip('public/assembler');
-	        $return[$wid] = recuperer_fond($fond, $contexte);
-	    }
-	    // vue par defaut
-	    else {
-	        // Par precaution on va rechercher la valeur
-	        // dans la base de donnees (meme si a priori la valeur est
-	        // ce qu'on vient d'envoyer, il y a nettoyage des caracteres et
-	        // eventuellement d'autres filtres de saisie...)
-	        $valeur = valeur_colonne_table($type, $modele, $id);
-
-	        // seul spip core sait rendre les donnees
-	        if (in_array($modele,
-	        array('chapo', 'texte', 'descriptif', 'ps', 'bio'))) {
-	            $return[$wid] = propre($valeur);
-	        } else {
-	            $return[$wid] = typo($valeur);
-	        }
-	    }
+	// pour ce qui a une {lang_select} par defaut dans la boucle,
+	// la regler histoire d'avoir la bonne typo dans le propre()
+	// NB: ceci n'a d'impact que sur le "par defaut" en bas
+	if (colonne_table($type, 'lang')) {
+		lang_select($a = valeur_colonne_table($type, 'lang', $id));
+	} else {
+		lang_select($a = $GLOBALS['meta']['langue_site']);
 	}
 
-    echo var2js($return);
-    exit;
+  // chercher vues/article_toto.html
+  // sinon vues/toto.html
+  if (find_in_path( ($fond = 'vues/' . $type . '_' . $modele) . '.html')
+  OR find_in_path( ($fond = 'vues/' . $modele) .'.html')
+  OR find_in_path( ($fond = 'vues/' . $type) .'.html')) {
+		$contexte = array(
+		    'id_' . $type => $id,
+		    'champ' => $modele,
+		    'lang' => $GLOBALS['spip_lang']
+		);
+		$contexte = array_merge($contexte, $content);
+		include_spip('public/assembler');
+		return recuperer_fond($fond, $contexte);
+  }
+	// vue par defaut
+	else {
+		// Par precaution on va rechercher la valeur
+		// dans la base de donnees (meme si a priori la valeur est
+		// ce qu'on vient d'envoyer, il y a nettoyage des caracteres et
+		// eventuellement d'autres filtres de saisie...)
+		$valeur = valeur_colonne_table($type, $modele, $id);
+		
+		// seul spip core sait rendre les donnees
+		if (in_array($modele,
+		  array('chapo', 'texte', 'descriptif', 'ps', 'bio'))) {
+			return propre($valeur);
+		} else {
+			return typo($valeur);
+		}
+	}
 }
 
 //

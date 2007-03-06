@@ -9,7 +9,8 @@ function controleurs_forms_donnee_dist($regs) {
 	$type_form = $row['type_form'];
 	
 	if ($f = charger_fonction($type_form.'_donnee_'.$champ, 'controleurs', true)
-	  OR $f = charger_fonction($type_form.'_donnee_'.$champ, 'controleurs', true) )
+	  OR $f = charger_fonction('forms_donnee_'.$champ, 'controleurs', true) 
+	  OR $f = charger_fonction($type_form.'_donnee', 'controleurs', true) )
 	  return $f($regs,$id_form,$type_form);
 	
 	include_spip('inc/forms');
