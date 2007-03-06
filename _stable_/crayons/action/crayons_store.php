@@ -49,79 +49,78 @@ function post_crayons() {
 
 
 function action_crayons_store_dist() {
-    include_spip('inc/crayons');
+	include_spip('inc/crayons');
 	lang_select($GLOBALS['auteur_session']['lang']);
-    $wdgcfg = wdgcfg();
-    header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
-
-    $return = array('$erreur'=>'');
+	$wdgcfg = wdgcfg();
+	header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
+	
+	$return = array('$erreur'=>'');
 
 	$postees = post_crayons();
 
 	$modifs = $updates = array();
 	if (!is_array($postees)) {
-	    $return['$erreur'] = _U('crayons:donnees_mal_formatees');
+		$return['$erreur'] = _U('crayons:donnees_mal_formatees');
 	} else {
-	    include_spip('inc/autoriser');
+		include_spip('inc/autoriser');
 
-	    foreach ($postees as $postee) {
-	    	$name = $postee[0];
-	    	$content = $postee[1];
-	        if ($content && preg_match(_PREG_CRAYON, 'crayon '.$name, $regs)) {
-	            list(,$crayon,$type,$modele,$id) = $regs;
-	            $wid = $postee[3];
-	            if (!autoriser('modifier', $type, $id, NULL, array('modele'=>$modele))) {
-	                $return['$erreur'] =
-	                    "$type $id: " . _U('crayons:non_autorise');
-	                break;
-	            }
+		foreach ($postees as $postee) {
+			$name = $postee[0];
+			$content = $postee[1];
+			if ($content && preg_match(_PREG_CRAYON, 'crayon '.$name, $regs)) {
+				list(,$crayon,$type,$modele,$id) = $regs;
+				$wid = $postee[3];
+				if (!autoriser('modifier', $type, $id, NULL, array('modele'=>$modele))) {
+					$return['$erreur'] = 
+					  "$type $id: " . _U('crayons:non_autorise');
+				  break;
+				}
 
 				// recuperer l'existant pour calculer son md5 et verifier
 				// qu'il n'a pas ete modifie entre-temps
 
-				// on fait une exception pour forms_donnees, on verra plus tard
+				// on fait une exception pour forms_donnee, on verra plus tard
 				// comment faire ca de maniere generique
-				if ($type != 'forms_donnees') {
+				if ($type != 'forms_donnee') {
+					$data = array();
+					foreach ($content as $champtable => $val) {
+						$data[$champtable] = valeur_colonne_table($type, $champtable, $id);
+					}
+					$md5 = md5(serialize($data));
 
-				$data = array();
-				foreach ($content as $champtable => $val) {
-					$data[$champtable] = valeur_colonne_table($type, $champtable, $id);
-				}
-	            $md5 = md5(serialize($data));
-
-	            // est-ce que le champ a ete modifie dans la base entre-temps ?
-	            if ($md5 != $postee[2]) {
-	                // si oui, la modif demandee correspond peut-etre
-	                // a la nouvelle valeur ? dans ce cas on procede
-	                // comme si "pas de modification", sinon erreur
-	                if ($md5 != md5(serialize($content))) {
-	                    $return['$erreur'] = "$type $id $champtable: " .
-	                        _U('crayons:modifie_par_ailleurs');
-	                    }
-	                break;
-	            }
+					// est-ce que le champ a ete modifie dans la base entre-temps ?
+					if ($md5 != $postee[2]) {
+						// si oui, la modif demandee correspond peut-etre
+						// a la nouvelle valeur ? dans ce cas on procede
+						// comme si "pas de modification", sinon erreur
+						if ($md5 != md5(serialize($content))) {
+							$return['$erreur'] = "$type $id $champtable: " .
+								_U('crayons:modifie_par_ailleurs');
+						}
+						break;
+					}
 				} // fin exception
 
-	            $modifs[] = array($type, $modele, $id, $content, $wid);
-	        }
-	    }
+				$modifs[] = array($type, $modele, $id, $content, $wid);
+			}
+		}
 	}
 
 	if (!$modifs AND !$return['$erreur']) {
-	    $return['$erreur'] = $wdgcfg['msgNoChange'] ?
-		     _U('crayons:pas_de_modification') : ' ';
-	    $return['$annuler'] = true;
+		$return['$erreur'] = $wdgcfg['msgNoChange'] ?
+		   _U('crayons:pas_de_modification') : ' ';
+		$return['$annuler'] = true;
 	}
 
 	// une quelconque erreur ... ou rien ==> on ne fait rien !
 	if ($return['$erreur']) {
-	    echo var2js($return);
-	    exit;
+		echo var2js($return);
+		exit;
 	}
 
 	// sinon on bosse : toutes les modifs ont ete acceptees
-	// vérifier qu'on a tout ce qu'il faut pour mettre a jour la base
-	// et regrouper les mises à jour par type/id
+	// verifier qu'on a tout ce qu'il faut pour mettre a jour la base
+	// et regrouper les mises a jour par type/id
 	foreach ($modifs as $modif) {
 		list($type, $modele, $id, $content, $wid) = $modif;
 		if (!isset($updates[$type])) {
