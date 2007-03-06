@@ -400,11 +400,7 @@ function spiplistes_propre($texte){
 	return $texte;
 }
 
-//taille d'une chaine sans saut de lignes ni espaces
-function spip_listes_strlen($out){
-	$out = preg_replace("/(\r\n|\n|\r| )+/", "", $out);
-	return $out ;
-}
+
 
 
 // API a enrichir
