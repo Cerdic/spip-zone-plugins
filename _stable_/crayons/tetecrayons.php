@@ -12,6 +12,30 @@ function analyse_droits_rapide_dist() {
         return true;
 }
 
+// Le pipeline header_prive (pour y tester les crayons)
+function Crayons_insert_head($head) {
+    // Pages crayonnables
+    if (!in_array(_request('exec'), array('articles')))
+        return $head;
+
+    // Est-on autorise ?
+    include_spip('inc/autoriser');
+    switch (_request('exec')) {
+        case 'articles':
+            $droits = autoriser('modifier', 'article', _request('id_article'));
+            break;
+
+        default:
+            $droits=false;
+    }
+
+    if (!$droits)
+        return $head;
+
+    include_spip('inc/crayons');
+    return Crayons_preparer_page($head, '*', wdgcfg(), 'head');
+}
+
 // Le pipeline affichage_final, execute a chaque hit sur toute la page
 function Crayons_affichage_final($page) {
 
@@ -50,7 +74,7 @@ function Crayons_affichage_final($page) {
     return $page;
 }
 
-function Crayons_preparer_page($page, $droits, $wdgcfg = array()) {
+function Crayons_preparer_page($page, $droits, $wdgcfg = array(), $mode='page') {
 	lang_select($GLOBALS['auteur_session']['lang']);
 
 	$jsFile = generer_url_public('crayons.js');
@@ -89,10 +113,6 @@ function Crayons_preparer_page($page, $droits, $wdgcfg = array()) {
 //    $txtErrInterdit = addslashes(unicode_to_javascript(html2unicode(_T(
 //        'crayons:erreur_ou_interdit'))));
 
-	$pos_head = strpos($page, '</head>');
-	if ($pos_head === false)
-		return $page;
-
     $incHead = <<<EOH
 
 <link rel="stylesheet" href="{$cssFile}" type="text/css" media="all" />
@@ -102,7 +122,16 @@ function Crayons_preparer_page($page, $droits, $wdgcfg = array()) {
 </script>
 EOH;
 
+
+	if ($mode == 'head')
+		return $page . $incHead;
+
+	$pos_head = strpos($page, '</head>');
+	if ($pos_head === false)
+		return $page;
+
     return substr_replace($page, $incHead, $pos_head, 0);
+
 }
 
 // #EDIT{ps} pour appeler le crayon ps ;

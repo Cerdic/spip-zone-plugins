@@ -48,4 +48,10 @@ _ <code><h1 class="#EDIT{titre} &#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &#157
 		<nom>affichage_final</nom>
 		<inclure>tetecrayons.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+		<inclure>tetecrayons.php</inclure>
+	</pipeline>
+
 </plugin>
