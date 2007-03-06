@@ -80,25 +80,23 @@ function action_crayons_store_dist() {
 
 				// on fait une exception pour forms_donnee, on verra plus tard
 				// comment faire ca de maniere generique
-				if ($type != 'forms_donnee') {
-					$data = array();
-					foreach ($content as $champtable => $val) {
-						$data[$champtable] = valeur_colonne_table($type, $champtable, $id);
-					}
-					$md5 = md5(serialize($data));
+				$data = array();
+				foreach ($content as $champtable => $val) {
+					$data[$champtable] = valeur_colonne_table($type, $champtable, $id);
+				}
+				$md5 = md5(serialize($data));
 
-					// est-ce que le champ a ete modifie dans la base entre-temps ?
-					if ($md5 != $postee[2]) {
-						// si oui, la modif demandee correspond peut-etre
-						// a la nouvelle valeur ? dans ce cas on procede
-						// comme si "pas de modification", sinon erreur
-						if ($md5 != md5(serialize($content))) {
-							$return['$erreur'] = "$type $id $champtable: " .
-								_U('crayons:modifie_par_ailleurs');
-						}
-						break;
+				// est-ce que le champ a ete modifie dans la base entre-temps ?
+				if ($md5 != $postee[2]) {
+					// si oui, la modif demandee correspond peut-etre
+					// a la nouvelle valeur ? dans ce cas on procede
+					// comme si "pas de modification", sinon erreur
+					if ($md5 != md5(serialize($content))) {
+						$return['$erreur'] = "$type $id $champtable: " .
+							_U('crayons:modifie_par_ailleurs');
 					}
-				} // fin exception
+					break;
+				}
 
 				$modifs[] = array($type, $modele, $id, $content, $wid);
 			}
