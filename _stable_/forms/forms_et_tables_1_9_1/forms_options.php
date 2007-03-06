@@ -14,6 +14,9 @@ if (!defined('_DIR_PLUGIN_FORMS')){
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	define('_DIR_PLUGIN_FORMS',(_DIR_PLUGINS.end($p))."/");
 }
+if (defined('_DIR_PLUGIN_CRAYONS'))
+	include_spip('forms_crayons');
+
 include_spip('base/forms');
 $GLOBALS['forms_actif_exec'][] = 'donnees_edit';
 $GLOBALS['forms_saisie_km_exec'][] = 'donnees_edit';
