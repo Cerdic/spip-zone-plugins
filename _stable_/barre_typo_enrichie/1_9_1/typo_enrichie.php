@@ -60,61 +60,66 @@ function BarreTypoEnrichie_pre_propre($texte) {
 	global $debut_intertitre_4, $fin_intertitre_4;
 	global $debut_intertitre_5, $fin_intertitre_5;
 
-	$chercher_raccourcis = array(
-		/* 1 */ 	"/(^|[^{])[{][{][{]/S",
-		/* 2 */ 	"/[}][}][}]($|[^}])/S",
-		/* 3 */ 	"/(^|[^{])\{1\{/S",
-		/* 4 */ 	"/\}1\}($|[^}])/S",
-		/* 5 */ 	"/(^|[^{])\{2\{/S",
-		/* 6 */ 	"/\}2\}($|[^}])/S",
-		/* 7 */ 	"/(^|[^{])\{3\{/S",
-		/* 8 */ 	"/\}3\}($|[^}])/S",
-		/* 9 */ 	"/(^|[^{])\{4\{/S",
-		/* 10 */ 	"/\}4\}($|[^}])/S",
-		/* 9b */ 	"/(^|[^{])\{5\{/S",
-		/* 10b */ 	"/\}5\}($|[^}])/S",
-		/* 11 */ 	"/\{(ง|ยง)\{/S", # ยง Pour g้rer l'unicode aussi !
-		/* 12 */ 	"/\}(ง|ยง)\}/S",
-		/* 13 */ 	"/<-->/S",
-		/* 14 */ 	"/-->/S",
-		/* 15 */ 	"/<--/S",
-		/* 16 */ 	"/<==>/S",
-		/* 17 */ 	"/==>/S",
-		/* 18 */ 	"/<==/S",
-		/* 19 */ 	"/\([cC]\)/S",
-		/* 20 */ 	"/\([rR]\)/S",
-		/* 21 */ 	"/\([tT][mM]\)/S",
-		/* 22 */ 	"/\.\.\./S",
-		/* 23 */	"/\[([^|?][^][]*)\|((?:[^][](?!->))*)\]/S"
-	);
+	$chercher_raccourcis=array();
+	$remplacer_raccourcis=array();
+	global $BarreTypoEnrichie;
+	if (is_array($BarreTypoEnrichie))
+		foreach($BarreTypoEnrichie as $item) {
+			$chercher_raccourcis[]=$item['chercher'];					
+			$remplacer_raccourcis[]=$item['remplacer'];					
+		}
 
-	$remplacer_raccourcis = array(
-		/* 1 */ 	"\$1\n\n$debut_intertitre",
-		/* 2 */ 	"$fin_intertitre\n\n\$1",
-		/* 3 */ 	"\$1\n\n$debut_intertitre",
-		/* 4 */ 	"$fin_intertitre\n\n\$1",
-		/* 5 */ 	"\$1\n\n$debut_intertitre_2",
-		/* 6 */ 	"$fin_intertitre_2\n\n\$1",
-		/* 7 */ 	"\$1\n\n$debut_intertitre_3",
-		/* 8 */ 	"$fin_intertitre_3\n\n\$1",
-		/* 9 */ 	"\$1\n\n$debut_intertitre_4",
-		/* 10 */ 	"$fin_intertitre_4\n\n\$1",
-		/* 9b */ 	"\$1\n\n$debut_intertitre_5",
-		/* 10b */ 	"$fin_intertitre_5\n\n\$1",
-		/* 11 */ 	"<span style=\"font-variant: small-caps\">",
-		/* 12 */ 	"</span>",
-		/* 13 */ 	"&harr;",
-		/* 14 */ 	"&rarr;",
-		/* 15 */ 	"&larr;",
-		/* 16 */ 	"&hArr;",
-		/* 17 */ 	"&rArr;",
-		/* 18 */ 	"&lArr;",
-		/* 19 */ 	"&copy;",
-		/* 20 */ 	"&reg;",
-		/* 21 */ 	"&trade;",
-		/* 22 */ 	"&hellip;",
-		/* 23 */	"@@acro@@$2@@$1@@acro@@"
-	);
+		/* 1 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]/S";
+		/* 2 */ 	$chercher_raccourcis[]="/[}][}][}]($|[^}])/S";
+		/* 3 */ 	$chercher_raccourcis[]="/(^|[^{])\{1\{/S";
+		/* 4 */ 	$chercher_raccourcis[]="/\}1\}($|[^}])/S";
+		/* 5 */ 	$chercher_raccourcis[]="/(^|[^{])\{2\{/S";
+		/* 6 */ 	$chercher_raccourcis[]="/\}2\}($|[^}])/S";
+		/* 7 */ 	$chercher_raccourcis[]="/(^|[^{])\{3\{/S";
+		/* 8 */ 	$chercher_raccourcis[]="/\}3\}($|[^}])/S";
+		/* 9 */ 	$chercher_raccourcis[]="/(^|[^{])\{4\{/S";
+		/* 10 */ 	$chercher_raccourcis[]="/\}4\}($|[^}])/S";
+		/* 9b */ 	$chercher_raccourcis[]="/(^|[^{])\{5\{/S";
+		/* 10b */ 	$chercher_raccourcis[]="/\}5\}($|[^}])/S";
+		/* 11 */ 	$chercher_raccourcis[]="/\{(ง|ยง)\{/S"; # ยง Pour gerer l'unicode aussi !
+		/* 12 */ 	$chercher_raccourcis[]="/\}(ง|ยง)\}/S";
+		/* 13 */ 	$chercher_raccourcis[]="/<-->/S";
+		/* 14 */ 	$chercher_raccourcis[]="/-->/S";
+		/* 15 */ 	$chercher_raccourcis[]="/<--/S";
+		/* 16 */ 	$chercher_raccourcis[]="/<==>/S";
+		/* 17 */ 	$chercher_raccourcis[]="/==>/S";
+		/* 18 */ 	$chercher_raccourcis[]="/<==/S";
+		/* 19 */ 	$chercher_raccourcis[]="/\([cC]\)/S";
+		/* 20 */ 	$chercher_raccourcis[]="/\([rR]\)/S";
+		/* 21 */ 	$chercher_raccourcis[]="/\([tT][mM]\)/S";
+		/* 22 */ 	$chercher_raccourcis[]="/\.\.\./S";
+		/* 23 */	$chercher_raccourcis[]="/\[([^|?][^][]*)\|((?:[^][](?!->))*)\]/S";
+
+		/*  1 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre";
+		/*  2 */	$remplacer_raccourcis[]="$fin_intertitre\n\n\$1";
+		/*  3 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre";
+		/*  4 */	$remplacer_raccourcis[]="$fin_intertitre\n\n\$1";
+		/*  5 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_2";
+		/*  6 */	$remplacer_raccourcis[]="$fin_intertitre_2\n\n\$1";
+		/*  7 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_3";
+		/*  8 */	$remplacer_raccourcis[]="$fin_intertitre_3\n\n\$1";
+		/*  9 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_4";
+		/* 10 */	$remplacer_raccourcis[]="$fin_intertitre_4\n\n\$1";
+		/* 9b */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_5";
+		/* 10b */	$remplacer_raccourcis[]="$fin_intertitre_5\n\n\$1";
+		/* 11 */	$remplacer_raccourcis[]="<span style=\"font-variant: small-caps\">";
+		/* 12 */	$remplacer_raccourcis[]="</span>";
+		/* 13 */	$remplacer_raccourcis[]="&harr;";
+		/* 14 */	$remplacer_raccourcis[]="&rarr;";
+		/* 15 */	$remplacer_raccourcis[]="&larr;";
+		/* 16 */	$remplacer_raccourcis[]="&hArr;";
+		/* 17 */	$remplacer_raccourcis[]="&rArr;";
+		/* 18 */	$remplacer_raccourcis[]="&lArr;";
+		/* 19 */	$remplacer_raccourcis[]="&copy;";
+		/* 20 */	$remplacer_raccourcis[]="&reg;";
+		/* 21 */	$remplacer_raccourcis[]="&trade;";
+		/* 22 */	$remplacer_raccourcis[]="&hellip;";
+		/* 23 */	$remplacer_raccourcis[]="@@acro@@$2@@$1@@acro@@";
 
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
 

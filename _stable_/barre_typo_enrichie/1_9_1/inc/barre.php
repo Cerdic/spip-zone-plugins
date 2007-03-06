@@ -215,6 +215,11 @@ $reta .= bouton_barre_racc ("barre_raccourci('[|','|]',$champ)", _DIR_PLUGIN_BAR
 $reta .= bouton_barre_racc ("barre_raccourci('[/','/]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/right.png', _T('bartypenr:barre_alignerdroite'), $champhelp);
 $reta .= bouton_barre_racc ("barre_raccourci('[(',')]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/cadretexte.png', _T('bartypenr:barre_encadrer'), $champhelp);
 $reta .= bouton_barre_racc ("barre_raccourci('<poesie>','</poesie>',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE."/img_pack/icones_barre/poesie.png", _T('bartypenr:barre_poesie'), $champhelp);
+	global $spip_lang;
+	$params = array($champ,$champhelp,$spip_lang);
+	$add = pipeline("BarreTypoEnrichie_boutonsavances",array($champ,$champhelp,$spip_lang));
+	if ($params!=$add)
+		$reta .= $add;
 
 $reta .= '&nbsp;';
 	
@@ -264,12 +269,25 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	// Italique, gras, intertitres
 	$ret .= bouton_barre_racc ("barre_raccourci('{','}',$champ)", _DIR_IMG_ICONES_BARRE."italique.png", _T('barre_italic'), $champhelp);
 	$ret .= bouton_barre_racc ("barre_raccourci('{{','}}',$champ)", _DIR_IMG_ICONES_BARRE."gras.png", _T('barre_gras'), $champhelp);
+	$params = array($champ,$champhelp,$spip_lang);
+	$add = pipeline("BarreTypoEnrichie_tous",array($champ,$champhelp,$spip_lang));
+	if ($params!=$add)
+		$ret .= $add;
+
 	if ($options == "avancees") {
 		$ret .= bouton_barre_racc ("barre_raccourci('[*','*]',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/miseenevidence.png', _T('bartypenr:barre_miseenevidence'), $champhelp);
 		$ret .= bouton_barre_racc ("barre_raccourci('&lt;sup&gt;','&lt;/sup&gt;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/exposant.png', _T('bartypenr:barre_exposant'), $champhelp);
 		$ret .= bouton_barre_racc ("barre_raccourci('&lt;sc&gt;','&lt;/sc&gt;',$champ)", _DIR_PLUGIN_BARRETYPOENRICHIE.'/img_pack/icones_barre/petitescapitales.png', _T('bartypenr:barre_petitescapitales'), $champhelp);
+		$params = array($champ,$champhelp,$spip_lang);
+		$add = pipeline("BarreTypoEnrichie_avancees",array($champ,$champhelp,$spip_lang));
+		if ($params!=$add)
+			$ret .= $add;
 	}
 	if (!$forum) {
+		$params = array($champ,$champhelp,$spip_lang);
+		$add = pipeline("BarreTypoEnrichie_ecrire",array($champ,$champhelp,$spip_lang));
+		if ($params!=$add)
+			$ret .= $add;
 		$ret .= "&nbsp;";
 		$ret .= bouton_barre_racc ("barre_raccourci('\n\n{{{','}}}\n\n',$champ)", _DIR_IMG_ICONES_BARRE."intertitre.png", _T('barre_intertitre'), $champhelp);
 		if ($options == "avancees") {
@@ -290,6 +308,10 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$ret .= bouton_barre_racc ("barre_raccourci('[[',']]',$champ)", _DIR_IMG_ICONES_BARRE."notes.png", _T('barre_note'), $champhelp);
 	}
 	if ($forum) {
+		$params = array($champ,$champhelp,$spip_lang);
+		$add = pipeline("BarreTypoEnrichie_forum",array($champ,$champhelp,$spip_lang));
+		if ($params!=$add)
+			$ret .= $add;
 		$ret .= "&nbsp;</td>\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$col ++;
 		$ret .= bouton_barre_racc ("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", _DIR_IMG_ICONES_BARRE."quote.png", _T('barre_quote'), $champhelp);

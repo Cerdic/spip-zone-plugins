@@ -37,6 +37,12 @@ a.spip_blank {
 	color: #F00;
 }
 
+sup {
+	vertical-align:20%;
+	font-variant: small-caps;
+	font-size: .5em;
+}
+
 /* Pour le mode preview dans l'admin */
 #article_preview {
 	display:none;
@@ -44,10 +50,4 @@ a.spip_blank {
 	overflow: auto;
 	background-color: #FFF;
 	padding: 0 1em;
-}
-
-sup {
-	vertical-align:20%;
-	font-variant: small-caps;
-	font-size: .5em;
 }
