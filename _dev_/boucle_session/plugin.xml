@@ -15,5 +15,6 @@
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<fonctions>boucleSession.php</fonctions>
+	<options>boucleSessionOptions.php</options>
 	<prefix>boucleSession</prefix>
 </plugin>

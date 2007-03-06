@@ -25,6 +25,7 @@ function boucle_SESSION($id_boucle, &$boucles) {
 	$code='
 		//error_log("session : ".var_export($GLOBALS[\'auteur_session\'], 1));
 ';
+
 	foreach($boucle->where as $w) {
 		$code.="\n		if(!($w)) return '';";
 	}
@@ -79,9 +80,9 @@ function critere_anonymous($idb, &$boucles, $crit) {
 		return;
 	}
 	if($crit->not) {
-		$boucle->where[]= "\$GLOBALS['auteur_session']!=''";
+		$boucle->where[]= "\$GLOBALS['auteur_session']!==''";
 	} else {
-		$boucle->where[]= "\$GLOBALS['auteur_session']==''";
+		$boucle->where[]= "\$GLOBALS['auteur_session']===''";
 	}
 }
 
