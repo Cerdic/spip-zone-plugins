@@ -68,15 +68,15 @@ function exec_abonnes_tous(){
 	$result_pile = spip_query("SELECT * FROM spip_listes AS listes LEFT JOIN spip_auteurs_listes AS abonnements USING (id_liste) WHERE listes.statut='inact'");
 	$nb_abonnes_int = spip_num_rows($result_pile);
 	
-	$result = spip_query("SELECT id_auteur, nom, extra FROM spip_auteurs");
+	$result = spip_query("SELECT extra FROM spip_auteurs");
 	$nb_inscrits = spip_num_rows($result);
-	
+
 	$cmpt_texte = 0;
 	$cmpt_html = 0;
 	$cmpt_non = 0;
 	
-	while ($row = spip_fetch_array($result)) {
-		$abo = get_extra($row["id_auteur"],'auteur');
+	while ($row = spip_fetch_array($result, SPIP_NUM)) {
+		$abo = unserialize($row[0]);
 		if ($abo['abo'] == "texte")
 			$cmpt_texte = $cmpt_texte + 1 ;
 		if ($abo['abo'] == "html")
@@ -85,7 +85,7 @@ function exec_abonnes_tous(){
 			$cmpt_non = $cmpt_non + 1 ;
 		$total_abo = $cmpt_html + $cmpt_texte ;
 	}
-	
+
 	$abonnes = spip_query("select a.id_auteur, count(d.id_liste) from spip_auteurs a  
 	      left join spip_auteurs_listes d on a.id_auteur =  
 	          d.id_auteur group by a.id_auteur having count(d.id_liste) = 0;"); 
