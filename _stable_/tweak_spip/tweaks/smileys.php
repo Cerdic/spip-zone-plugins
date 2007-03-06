@@ -41,6 +41,7 @@ function smileys_installe() {
 	 ':-O'	=> 'surpris.png',
 	
 	// les courts : tester a l'usage...
+	// reconnus uniquement s'i y a un espace avant
 	 ':)'	=> 'sourire.png',
 	 ':('	=> 'pas_content.png',
 	 ';)'	=> 'clin_d-oeil.png',
@@ -53,9 +54,10 @@ function smileys_installe() {
 	// accessibilite : protection de alt et title
 	foreach ($smileys as $smy=>$val) {
 		$alt = '@@64@@'.base64_encode($smy).'@@65@@';
-		$smileys2[0][] = $smy;
+		$espace = strlen($smy)==2?' ':'';
+		$smileys2[0][] = $espace.$smy;
 		list(,,,$size) = @getimagesize("$path/$val");
-		$smileys2[1][] = "<img alt=\"$alt\" title=\"$alt\" class=\"no_image_filtrer\" src=\"".tweak_htmlpath($path)."/$val\" $size/>";
+		$smileys2[1][] = $espace."<img alt=\"$alt\" title=\"$alt\" class=\"no_image_filtrer\" src=\"".tweak_htmlpath($path)."/$val\" $size/>";
 	}
 	ecrire_meta('tweaks_smileys', serialize($smileys2));
 	ecrire_metas();
