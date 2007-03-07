@@ -62,29 +62,29 @@ function exec_abonnes_tous(){
 	
 	spiplistes_cherche_auteur();
 	
-	$result_pile = spip_query("SELECT * FROM spip_listes AS listes LEFT JOIN spip_auteurs_listes AS abonnements USING (id_liste) WHERE listes.statut='liste'");
-	$nb_abonnes = spip_num_rows($result_pile);
+	$result_pile = spip_query(
+	  'SELECT listes.statut, COUNT(abonnements.id_auteur)
+	   FROM spip_listes AS listes LEFT JOIN spip_auteurs_listes AS abonnements USING (id_liste)
+	   GROUP BY listes.statut');
+	$nb_abonnes = array();
+	while ($row = spip_fetch_array($result_pile, SPIP_NUM)) {
+		$nb_abonnes[$row[0]] = intval($row[1]);
+	}
 	
-	$result_pile = spip_query("SELECT * FROM spip_listes AS listes LEFT JOIN spip_auteurs_listes AS abonnements USING (id_liste) WHERE listes.statut='inact'");
-	$nb_abonnes_int = spip_num_rows($result_pile);
-	
-	$result = spip_query("SELECT extra FROM spip_auteurs");
-	$nb_inscrits = spip_num_rows($result);
+	$result = spip_query(
+	  'SELECT extra, COUNT(spip_auteurs.id_auteur) FROM spip_auteurs GROUP BY extra');
+	$nb_inscrits = 0;
 
-	$cmpt_texte = 0;
-	$cmpt_html = 0;
-	$cmpt_non = 0;
+	$cmpt = array('texte'=>0, 'html'=>0, 'non'=>0);
 	
 	while ($row = spip_fetch_array($result, SPIP_NUM)) {
+		$nb_inscrits += $row[1];
 		$abo = unserialize($row[0]);
-		if ($abo['abo'] == "texte")
-			$cmpt_texte = $cmpt_texte + 1 ;
-		if ($abo['abo'] == "html")
-			$cmpt_html = $cmpt_html + 1 ;
-		if ($abo['abo'] == "non")
-			$cmpt_non = $cmpt_non + 1 ;
+		if ($abo['abo']) {
+			$cmpt[$abo['abo']] += $row[1];
+		}
 	}
-	$total_abo = $cmpt_html + $cmpt_texte ;
+	$total_abo = $cmpt['html'] + $cmpt['texte'] ;
 
 	$abonnes = spip_query("select a.id_auteur, count(d.id_liste) from spip_auteurs a  
 	      left join spip_auteurs_listes d on a.id_auteur =  
@@ -96,10 +96,13 @@ function exec_abonnes_tous(){
 
 	echo"<div>";
 	echo"<div style='float:right;width:150px'>";
-	echo "<b>"._T('spiplistes:repartition')."</b>  <br /><b>"._T('spiplistes:html')."</b> : $cmpt_html <br /><b>"._T('spiplistes:texte')."</b> : $cmpt_texte <br /><b>"._T('spiplistes:desabonnes')."</b> : $cmpt_non";
+	echo "<b>"._T('spiplistes:repartition')."</b>  <br /><b>"._T('spiplistes:html')."</b> : {$cmpt['html']} <br /><b>"._T('spiplistes:texte')."</b> : {$cmpt['texte']} <br /><b>"._T('spiplistes:desabonnes')."</b> : {$cmpt['non']}";
 	echo"</div>";
-	$total= $cmpt_html+$cmpt_texte+$cmpt_non;
-	echo "Nombre d'abonn&eacute;s : ".$total_abo."<p>Abonn&eacute;s aux listes publiques : ".$nb_abonnes."<br />Abonn&eacute;s aux listes internes : ".$nb_abonnes_int."<br />Abonn&eacute;s &agrave; aucune liste : ".($nb_abonnes_auc-$cmpt_non)."</p>";
+	$total = $cmpt['html'] + $cmpt['texte'] + $cmpt['non'];
+	echo "Nombre d'abonn&eacute;s : ". $total_abo .
+	  "<p>Abonn&eacute;s aux listes publiques : " . $nb_abonnes['liste'] .
+	  "<br />Abonn&eacute;s aux listes internes : ". $nb_abonnes['inact'] .
+	  "<br />Abonn&eacute;s &agrave; aucune liste : " . ($nb_abonnes_auc - $cmpt['non']) . "</p>";
 	
 	echo"</div>";
 	
