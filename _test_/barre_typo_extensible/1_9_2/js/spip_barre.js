@@ -328,5 +328,5 @@ function mozWrap(txtarea, open, close)
  		hauteur=600;
  		largeur=700;
  		propriete='scrollbars=yes,resizable=yes,width='+largeur+',height='+hauteur;
-		w=window.open(cheminediteur+'/editeur/table.html', '',propriete);
+		w=window.open(cheminediteur+'?exec=tableau_edit', '',propriete);
  	}

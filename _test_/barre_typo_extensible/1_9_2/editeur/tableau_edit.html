@@ -1,11 +1,16 @@
-﻿<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+﻿#CACHE{1}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html lang='fr' dir='ltr'>
   <head>
     <title>Editeur de table</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="table.css" type="text/css" media="screen" />
-    <script src="../js/spip_barre.js" type="text/javascript"></script>
-    <script src="table.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="#CHEMIN{editeur/table.css}" type="text/css" media="screen" />
+	<script type="text/javascript">
+		tableau_edit_images_path = "[(#CHEMIN{editeur/table.css}|dirname)/]";
+	</script>
+    <script src="#CHEMIN{js/spip_barre.js}" type="text/javascript"></script>
+    <script src="#CHEMIN{editeur/table.js}" type="text/javascript"></script>
+	#INSERT_HEAD
   </head>
   <body onload="init();">
 
@@ -17,6 +22,5 @@
   <div id='debug'></div>
   <p>la première ligne du tableau accueille les intitulés des colonnes</p>
   <a id="enregistrer" href="javascript:enregistre()">Enregistrer</a>
-   
   </body>
 </html>

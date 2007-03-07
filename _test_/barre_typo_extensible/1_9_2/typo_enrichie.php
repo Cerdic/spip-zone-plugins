@@ -59,10 +59,7 @@ function BarreTypoEnrichie_pre_propre($texte) {
 	global $debut_intertitre_3, $fin_intertitre_3;
 	global $debut_intertitre_4, $fin_intertitre_4;
 	global $debut_intertitre_5, $fin_intertitre_5;
-	
-///////////////////////////
-//MODIFICATION
-//////////////////////////
+
 	$chercher_raccourcis=array();
 	$remplacer_raccourcis=array();
 	global $BarreTypoEnrichie;
@@ -84,8 +81,8 @@ function BarreTypoEnrichie_pre_propre($texte) {
 		/* 10 */ 	$chercher_raccourcis[]="/\}4\}($|[^}])/S";
 		/* 9b */ 	$chercher_raccourcis[]="/(^|[^{])\{5\{/S";
 		/* 10b */ 	$chercher_raccourcis[]="/\}5\}($|[^}])/S";
-		/* 11 */ 	$chercher_raccourcis[]="/\{(�|§)\{/S"; # § Pour gerer l'unicode aussi !
-		/* 12 */ 	$chercher_raccourcis[]="/\}(�|§)\}/S";
+		/* 11 */ 	$chercher_raccourcis[]="/\{(�|§)\{/S"; # § Pour gerer l'unicode aussi !
+		/* 12 */ 	$chercher_raccourcis[]="/\}(�|§)\}/S";
 		/* 13 */ 	$chercher_raccourcis[]="/<-->/S";
 		/* 14 */ 	$chercher_raccourcis[]="/-->/S";
 		/* 15 */ 	$chercher_raccourcis[]="/<--/S";
@@ -98,30 +95,30 @@ function BarreTypoEnrichie_pre_propre($texte) {
 		/* 22 */ 	$chercher_raccourcis[]="/\.\.\./S";
 		/* 23 */	$chercher_raccourcis[]="/\[([^|?][^][]*)\|((?:[^][](?!->))*)\]/S";
 
-		/* 1 */ 	$remplacer_raccourcis[]="/$1\n\n$debut_intertitre";
-		/* 2 */ 	$remplacer_raccourcis[]="$fin_intertitre\n\n\$1";
-		/* 3 */ 	$remplacer_raccourcis[]="/$1\n\n$debut_intertitre";
-		/* 4 */ 	$remplacer_raccourcis[]="$fin_intertitre\n\n\$1";
-		/* 5 */ 	$remplacer_raccourcis[]="/$1\n\n$debut_intertitre_2";
-		/* 6 */ 	$remplacer_raccourcis[]="$fin_intertitre_2\n\n\$1";
-		/* 7 */ 	$remplacer_raccourcis[]="/$1\n\n$debut_intertitre_3";
-		/* 8 */ 	$remplacer_raccourcis[]="$fin_intertitre_3\n\n\$1";
-		/* 9 */ 	$remplacer_raccourcis[]="/$1\n\n$debut_intertitre_4";
-		/* 10 */ 	$remplacer_raccourcis[]="$fin_intertitre_4\n\n\$1";
-		/* 9b */ 	$remplacer_raccourcis[]="/$1\n\n$debut_intertitre_5";
-		/* 10b */ 	$remplacer_raccourcis[]="$fin_intertitre_5\n\n\$1";
-		/* 11 */ 	$remplacer_raccourcis[]="<span style=\"font-variant: small-caps\">";
-		/* 12 */ 	$remplacer_raccourcis[]="</span>";
-		/* 13 */ 	$remplacer_raccourcis[]="&harr;";
-		/* 14 */ 	$remplacer_raccourcis[]="&rarr;";
-		/* 15 */ 	$remplacer_raccourcis[]="&larr;";
-		/* 16 */ 	$remplacer_raccourcis[]="&hArr;";
-		/* 17 */ 	$remplacer_raccourcis[]="&rArr;";
-		/* 18 */ 	$remplacer_raccourcis[]="&lArr;";
-		/* 19 */ 	$remplacer_raccourcis[]="&copy;";
-		/* 20 */ 	$remplacer_raccourcis[]="&reg;";
-		/* 21 */ 	$remplacer_raccourcis[]="&trade;";
-		/* 22 */ 	$remplacer_raccourcis[]="&hellip;";
+		/*  1 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre";
+		/*  2 */	$remplacer_raccourcis[]="$fin_intertitre\n\n\$1";
+		/*  3 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre";
+		/*  4 */	$remplacer_raccourcis[]="$fin_intertitre\n\n\$1";
+		/*  5 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_2";
+		/*  6 */	$remplacer_raccourcis[]="$fin_intertitre_2\n\n\$1";
+		/*  7 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_3";
+		/*  8 */	$remplacer_raccourcis[]="$fin_intertitre_3\n\n\$1";
+		/*  9 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_4";
+		/* 10 */	$remplacer_raccourcis[]="$fin_intertitre_4\n\n\$1";
+		/* 9b */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_5";
+		/* 10b */	$remplacer_raccourcis[]="$fin_intertitre_5\n\n\$1";
+		/* 11 */	$remplacer_raccourcis[]="<span style=\"font-variant: small-caps\">";
+		/* 12 */	$remplacer_raccourcis[]="</span>";
+		/* 13 */	$remplacer_raccourcis[]="&harr;";
+		/* 14 */	$remplacer_raccourcis[]="&rarr;";
+		/* 15 */	$remplacer_raccourcis[]="&larr;";
+		/* 16 */	$remplacer_raccourcis[]="&hArr;";
+		/* 17 */	$remplacer_raccourcis[]="&rArr;";
+		/* 18 */	$remplacer_raccourcis[]="&lArr;";
+		/* 19 */	$remplacer_raccourcis[]="&copy;";
+		/* 20 */	$remplacer_raccourcis[]="&reg;";
+		/* 21 */	$remplacer_raccourcis[]="&trade;";
+		/* 22 */	$remplacer_raccourcis[]="&hellip;";
 		/* 23 */	$remplacer_raccourcis[]="@@acro@@$2@@$1@@acro@@";
 
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
@@ -264,8 +261,8 @@ function BarreTypoEnrichie_nettoyer_raccourcis_typo($texte){
 }
 
 function BarreTypoEnrichie_header_prive($texte) {
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	$texte.= '<link rel="stylesheet" type="text/css" href="' . (_DIR_PLUGINS.end($p)) . '/css/bartypenr.css" />' . "\n";
+	$texte.= '<link rel="stylesheet" type="text/css" href="' . _DIR_PLUGIN_BARRETYPOENRICHIE. 'css/bartypenr.css" />' . "\n";
+	$texte .= '<script type="text/javascript" src="'. _DIR_PLUGIN_BARRETYPOENRICHIE.'js/spip_barre.js'.'"></script>';
 	return $texte;
 }
 
