@@ -500,13 +500,11 @@ function spiplistes_cherche_auteur(){
 }
 
 function spiplistes_afficher_auteurs($query, $url){
-	$tri = _request('tri');
+	$tri = _request('tri') ? _request('tri') : 'nom';
 
 	$t = spip_query('SELECT COUNT(*) FROM spip_auteurs');
 	$nombre_auteurs = spip_fetch_array($t, SPIP_NUM);
 	$nombre_auteurs = intval($nombre_auteurs[0]);
-	
-	$t = spip_query($query);
 	
 	// reglage du debut
 	$max_par_page = 30;
@@ -514,40 +512,34 @@ function spiplistes_afficher_auteurs($query, $url){
 	if ($debut > $nombre_auteurs - $max_par_page) {
 		$debut = max(0,$nombre_auteurs - $max_par_page);
 	}
-	$fin = min($nombre_auteurs, $debut + $max_par_page);
 	
-	$i = 0;
+	$t = spip_query($query . ' LIMIT ' . $debut . ',' . $max_par_page);
+	
 	$auteurs=array();
 	$les_auteurs = array();
 	while ($auteur = spip_fetch_array($t)) {
-		if ($i>=$debut AND $i<$debut+$max_par_page) {
-			if ($auteur['statut'] == '0minirezo')
-			$auteur['restreint'] = spip_num_rows(
-			  spip_query("SELECT * FROM spip_auteurs_rubriques WHERE id_auteur="._q($auteur['id_auteur'])));
-			$auteurs[] = $auteur;
-			$les_auteurs[] = $auteur['id_auteur'];
+		if ($auteur['statut'] == '0minirezo') {
+		$auteur['restreint'] = spip_num_rows(spip_query(
+		  "SELECT * FROM spip_auteurs_rubriques WHERE id_auteur="._q($auteur['id_auteur'])));
 		}
-		$i++;
+		$auteurs[] = $auteur;
+		$les_auteurs[] = $auteur['id_auteur'];
+	}
 		
-		if ($tri == 'nom') {
-			$lettres_nombre_auteurs ++;
+	$lettre = array();
+	if (($tri == 'nom') AND $GLOBALS['options'] == 'avancees') {
+/*			$lettres_nombre_auteurs ++;
 			$premiere_lettre = strtoupper(spip_substr(extraire_multi($auteur['nom']),0,1));
 			if ($premiere_lettre != $lettre_prec) {
 				#			echo " - $auteur[nom] -";
 				$lettre[$premiere_lettre] = $lettres_nombre_auteurs-1;
 			}
 			$lettre_prec = $premiere_lettre;
-		}
-	}
+*/	}
 	
 	//
 	// Affichage
 	//
-	
-	// ignorer les $debut premiers
-	unset ($i);
-	reset ($auteurs);
-	while ($i++ < $debut AND each($auteurs));
 	
 	// ici commence la vraie boucle
 	echo debut_cadre_relief('redacteurs-24.gif');
@@ -566,7 +558,7 @@ function spiplistes_afficher_auteurs($query, $url){
 	else
 		echo "<a href='".parametre_url($url,'tri','nom')."' title='"._T('lien_trier_nom')."'><b>"._T('info_nom')."</b></a>";
 	
-	if ($options == 'avancees') echo "</td><td colspan='2'><b>"._T('info_contact')."</b>";
+	if ($GLOBALS['options'] == 'avancees') echo "</td><td colspan='2'><b>"._T('info_contact')."</b>";
 		echo "</td><td>";
 	if ($visiteurs != 'oui') {
 		if ($tri=='nombre')
@@ -580,7 +572,7 @@ function spiplistes_afficher_auteurs($query, $url){
 	echo "</td></tr>\n";
 	
 	if ($nombre_auteurs > $max_par_page) {
-		echo "<tr bgcolor='white'><td colspan='".($options == 'avancees' ? 5 : 3)."'>";
+		echo "<tr bgcolor='white'><td colspan='".($GLOBALS['options'] == 'avancees' ? 5 : 3)."'>";
 		echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
 		for ($j=0; $j < $nombre_auteurs; $j+=$max_par_page) {
 			if ($j > 0) echo " | ";
@@ -598,7 +590,7 @@ function spiplistes_afficher_auteurs($query, $url){
 		echo "</font>";
 		echo "</td></tr>\n";
 		
-		if (($tri == 'nom') AND $options == 'avancees') {
+		if (($tri == 'nom') AND $GLOBALS['options'] == 'avancees') {
 			// affichage des lettres
 			echo "<tr bgcolor='white'><td colspan='5'>";
 			echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
@@ -641,7 +633,7 @@ function spiplistes_afficher_auteurs($query, $url){
 		echo " &nbsp;<small>"._T('statut_admin_restreint')."</small>";
 		
 		// contact
-		if ($options == 'avancees') {
+		if ($GLOBALS['options'] == 'avancees') {
 			echo '</td><td>';
 			if ($row['messagerie'] == 'oui' AND $row['login']
 			  AND $activer_messagerie != "non" AND $connect_activer_messagerie != "non" AND $messagerie != "non")
@@ -710,7 +702,7 @@ function spiplistes_afficher_auteurs($query, $url){
 		echo "<tr bgcolor='white'><td align='left'>";
 		if ($debut > 0) {
 			$debut_prec = strval(max($debut - $max_par_page, 0));
-			echo "<form method=\"get\" action=\"".parametre_url($url,'debut',$debut_prec)."\">";
+			echo '<form method="post" action="'.parametre_url($url,'debut',$debut_prec).'">';
 			echo "<input type='submit' name='submit' value='&lt;&lt;&lt;' class='fondo' />";
 			echo "</form>";
 		}
