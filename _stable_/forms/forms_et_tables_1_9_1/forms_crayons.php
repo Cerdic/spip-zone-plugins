@@ -21,6 +21,36 @@ function forms_donnee_revision($id_donnee,$c=NULL){
 	include_spip('inc/forms');
 	return Forms_revision_donnee($id_donnee,$c);
 }
+function forms_champ_valeur_colonne_table($table,$champ,$id){
+	$id = explode('-',$id);
+	$id_form = $id[0];
+	$form_champ = $id[1];
+	
+	if (!preg_match(',^\w+$,',$champ)
+	OR !$res = spip_query("SELECT $champ FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($form_champ))
+	OR !$row = spip_fetch_array($res))
+		return false;
+
+	return 	$row[$champ];
+}
+function forms_champ_revision($id,$c=NULL){
+	$id = explode('-',$id);
+	$id_form = $id[0];
+	$form_champ = $id[1];
+
+	$set = "";
+	foreach(array('titre','obligatoire','specifiant','public','aide','html_wrap') as $champ){
+		if ($v = _request($champ,$c)){
+			$set .= ",$champ="._q($v);
+		}
+	}
+
+	if (strlen($set)){
+		$set = substr($set,1);
+		spip_query("UPDATE spip_forms_champs SET $set WHERE id_form="._q($id_form)." AND champ="._q($form_champ));
+	}
+	return true;
+}
 
 //
 // VUE

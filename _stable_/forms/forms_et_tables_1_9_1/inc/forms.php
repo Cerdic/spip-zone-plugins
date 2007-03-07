@@ -524,7 +524,7 @@
 		return $row['rang'];
 	}
 	
-	function Forms_enregistrer_reponse_formulaire($id_form, &$id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='') {
+	function Forms_enregistrer_reponse_formulaire($id_form, &$id_donnee, &$erreur, &$reponse, $script_validation = 'valide_form', $script_args='', $c=NULL) {
 		$r = '';
 		if (!include_spip('inc/autoriser'))
 			include_spip('inc/autoriser_compat');
@@ -541,7 +541,7 @@
 		$mailconfirm = '';
 
 		include_spip("inc/forms_type_champs");
-		$erreur = Forms_valide_champs_reponse_post($id_form);
+		$erreur = Forms_valide_champs_reponse_post($id_form, $c);
 
 		// Si tout est bon, enregistrer la reponse
 		if (!$erreur) {
@@ -550,7 +550,11 @@
 			$url = (_DIR_RESTREINT==_DIR_RESTREINT_ABS)?parametre_url(self(),'id_form',''):_DIR_RESTREINT_ABS;
 			$ok = true;
 			$confirme = false;
-			if ($id = intval(_request("deja_enregistre_$id_form"))){
+			if ($GLOBALS['spip_version_code']<1.92)
+				$id = _request("deja_enregistre_$id_form");
+			else
+				$id = _request("deja_enregistre_$id_form", $c);
+			if ($id = intval($id)){
 				$id_donnee = $id;
 				$ok = false;
 				$confirme = true;
@@ -609,7 +613,7 @@
 			}
 			// Puis enregistrer les differents champs
 			if ($ok) {
-				$inserts = Forms_insertions_reponse_post($id_form,$id_donnee,$erreur,$ok);
+				$inserts = Forms_insertions_reponse_post($id_form,$id_donnee,$erreur,$ok,$c);
 				if (!count($inserts)) {
 					// Reponse vide => annuler
 					$erreur['@'] = _T("forms:remplir_un_champ");

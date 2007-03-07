@@ -83,4 +83,30 @@ function Forms_decrit_donnee($id_donnee,$specifiant=true,$linkable=false){
 	return $t;
 }
 
+function Forms_creer_donnee($id_form,$c = NULL){
+	include_spip('inc/autoriser');
+	if (!autoriser('creer','donnee',0,NULL,array('id_form'=>$id_form)))
+		return array(0,_L("droits insuffisants pour creer une donnee dans table $id_form"));
+	include_spip('inc/forms');
+	$new = 0;
+	$erreur = array();
+	Forms_enregistrer_reponse_formulaire($id_form, $new, $erreur, $reponse, '', '' , $c);
+	return array($new,$erreur);
+}
+function Forms_supprimer_donnee($id_form,$id_donnee){
+	include_spip('inc/autoriser');
+	if (!autoriser('supprimer','donnee',$id_donnee,NULL,array('id_form'=>$id_form)))
+		return _L("droits insuffisants pour supprimer la donnee $id_donnee");
+	spip_query("UPDATE spip_forms_donnees SET statut='poubelle' WHERE id_donnee="._q($id_donnee));
+	return true;
+}
+/*function Forms_modifier_donnee($id_form,$id_donnee,$c = NULL){
+	include_spip('inc/forms');
+	$c = array('ligne_1'=>_L("Nouvelle ligne"),"select_1"=>$niveau);
+	$new = 0;
+	$erreur = array();
+	Forms_enregistrer_reponse_formulaire($id_form, $new, $erreur, $reponse, '', '' , $c);
+	return array($new,$erreur);
+}*/
+
 ?>

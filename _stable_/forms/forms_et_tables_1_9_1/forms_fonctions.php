@@ -20,7 +20,7 @@
 		if (strncmp($champ,'joint_',6)!=0){
 			$res = spip_query("SELECT valeur FROM spip_forms_donnees_champs WHERE id_donnee="._q($id_donnee)." AND champ="._q($champ));
 			while ($row = spip_fetch_array($res)){
-				$lesvaleurs[] = forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $row['valeur'], $id_form, $etoile);
+				$lesvaleurs[] = $etoile?$row['valeur']:forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $row['valeur'], $id_form, $etoile);
 			}
 			return implode($separateur,$lesvaleurs);
 		}
@@ -71,7 +71,7 @@
 		return $out;
 	}
 
-	function forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $valeur, $id_form, $etoile=false){
+	function forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $valeur, $id_form){
 		static $type_champ=array();
 		static $wrap_champ=array();
 		// s'assurer que l'on est bien sur une boucle forms, sinon retourner $valeur
@@ -112,18 +112,15 @@
 			}
 			elseif ($t == 'password'){
 				$rendu = "";
-				if (!$etoile)
-					$valeur="******"; # ne jamais afficher en clair un password, si on veut vraiment le faire on utilise l'etoile sur le champ
+				$valeur="******"; # ne jamais afficher en clair un password, si on veut vraiment le faire on utilise l'etoile sur le champ
 			}
 			elseif ($t == 'texte')
 				$rendu = 'propre';
-			if (!$etoile){
-				if ($rendu){
-					include_spip('inc/texte');
-					$valeur = $rendu($valeur);
-				}
-				$valeur = wrap_champ($valeur,$wrap_champ[$id_form][$champ]);
+			if ($rendu){
+				include_spip('inc/texte');
+				$valeur = $rendu($valeur);
 			}
+			$valeur = wrap_champ($valeur,$wrap_champ[$id_form][$champ]);
 		}
 		return $valeur;
 	}
