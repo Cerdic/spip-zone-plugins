@@ -31,6 +31,10 @@ function autoriser_form_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) 
 	}
 	return false;
 }
+// en cas d'appel avec le nom de la table (crayons)
+function autoriser_forms_donnee_dist($faire,$type,$id_donnee,$qui,$opt){
+	return autoriser_donnee_dist($faire,$type,$id_donnee,$qui,$opt);
+}
 function autoriser_donnee_dist($faire,$type,$id_donnee,$qui,$opt){
 	static $types = array();
 	if (!isset($opt['id_form']) OR !isset($opt['statut'])){
