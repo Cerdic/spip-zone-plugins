@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <forms>
 <form>
-	<id_form>28</id_form>
+	<id_form>29</id_form>
 	<titre>Un Outliner</titre>
 	<descriptif>Arbo de riec</descriptif>
 	<type_form>outline</type_form>
@@ -17,8 +17,67 @@
 	<html_wrap></html_wrap>
 	<fields>
 		<field>
-			<champ>ligne_1</champ>
+			<champ>select_1</champ>
 			<rang>1</rang>
+			<titre>Niveau</titre>
+			<type>select</type>
+			<obligatoire>oui</obligatoire>
+			<extra_info>liste</extra_info>
+			<specifiant></specifiant>
+			<public>oui</public>
+			<aide></aide>
+			<html_wrap></html_wrap>
+			<les_choix>
+				<un_choix>
+					<choix>select_1_1</choix>
+					<titre>1</titre>
+					<rang>1</rang>
+				</un_choix>
+				<un_choix>
+					<choix>select_1_2</choix>
+					<titre>2</titre>
+					<rang>2</rang>
+				</un_choix>
+				<un_choix>
+					<choix>select_1_3</choix>
+					<titre>3</titre>
+					<rang>3</rang>
+				</un_choix>
+				<un_choix>
+					<choix>select_1_4</choix>
+					<titre>4</titre>
+					<rang>4</rang>
+				</un_choix>
+				<un_choix>
+					<choix>select_1_5</choix>
+					<titre>5</titre>
+					<rang>5</rang>
+				</un_choix>
+				<un_choix>
+					<choix>select_1_6</choix>
+					<titre>6</titre>
+					<rang>6</rang>
+				</un_choix>
+				<un_choix>
+					<choix>select_1_7</choix>
+					<titre>7</titre>
+					<rang>7</rang>
+				</un_choix>
+				<un_choix>
+					<choix>select_1_8</choix>
+					<titre>8</titre>
+					<rang>8</rang>
+				</un_choix>
+				<un_choix>
+					<choix>select_1_9</choix>
+					<titre>9</titre>
+					<rang>9</rang>
+				</un_choix>
+			</les_choix>
+		</field>
+		<field>
+			<champ>ligne_1</champ>
+			<rang>2</rang>
 			<titre>Titre</titre>
 			<type>ligne</type>
 			<obligatoire>oui</obligatoire>

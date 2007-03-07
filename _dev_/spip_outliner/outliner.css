@@ -1,0 +1,64 @@
+/* Tableaux */
+#outline {
+font-size:small;
+width:100%;
+
+}
+
+.crayon-icones span {
+margin-left:-20px;
+}
+
+table.outline {
+	width:100%;
+	margin-top: 1em;
+	border: 1px solid black;
+	border-collapse: collapse; }
+table.outline caption {
+	caption-side: top; /* bottom pas pris en compte par IE */
+	text-align: left;
+	padding: 3px;
+	font-weight: bold; }
+table.outline tr.row_first { background: #ccc; }
+table.outline tr.row_last { background: #ccc; }
+table.outline tr.row_odd { background: #DDD; }
+table.outline tr.row_even { background: #EEE; }
+table.outline th, table.outline td { 
+	padding: 0px; text-align: left; vertical-align: top; 
+	border: 1px solid #ccc;
+}
+
+table.outline table {
+	width:100%;
+	border: none;
+	border-collapse: collapse; 
+}
+table.outline table th,table.outline table td {
+border : none;
+}
+td.niveau{width:1px};
+
+div.niveau{text-align:right;width:15px};
+div.niveau-1{padding-left:5px;}
+div.niveau-2{padding-left:15px;}
+div.niveau-3{padding-left:25px;}
+div.niveau-4{padding-left:35px;}
+div.niveau-5{padding-left:45px;}
+div.niveau-6{padding-left:55px;}
+div.niveau-7{padding-left:65px;}
+div.niveau-8{padding-left:75px;}
+div.niveau-9{padding-left:85px;}
+
+
+/* Barre de raccourcis typographiques */
+table.spip_barre { width: 100%; }
+
+table.spip_barre a img {
+	background: #FDA;
+	padding: 3px;
+	border: 1px outset #999; }
+table.spip_barre a:hover img {
+	background: #FFF;
+	border: 1px solid #999; }
+
+table.spip_barre input.barre { width: 100%; background: #EEE; }

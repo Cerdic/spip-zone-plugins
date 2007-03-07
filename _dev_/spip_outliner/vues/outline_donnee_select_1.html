@@ -4,4 +4,4 @@
 
 ]
 #CACHE{0}
-<BOUCLE_d(FORMS_DONNEES){id_donnee}><BOUCLE_f(FORMS_CHAMPS){id_form}{champ}><span style='letter-spacing:7px;border-bottom:1px dashed black;' >[(#REM|?{'','&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;'}|substr{0,#LESVALEURS|mult{4}})]</span></BOUCLE_f></BOUCLE_d>
+<BOUCLE_d(FORMS_DONNEES){id_donnee}><BOUCLE_f(FORMS_CHAMPS){id_form}{champ}><div class='niveau niveau-#LESVALEURS'>#PUCE</div></BOUCLE_f></BOUCLE_d>
