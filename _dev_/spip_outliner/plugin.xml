@@ -1,0 +1,27 @@
+<plugin>
+	<nom>Spip-Outliner</nom>
+	<icon></icon>
+	<auteur>Cedric Morin [notre-ville.net->http://www.notre-ville.net]
+_ &copy; 2007 - Distribu&#233; sous licence GNU/LGPL
+	</auteur>
+	<version>	0.1.0	</version>
+	<version_base>	0.1.0	</version_base>
+	<etat>dev</etat>
+	<description>
+	Un outliner en ligne avec SPIP
+_ en experimentation sur la page ?page=outline&amp;id_form=xx
+_ permet d'ajouter/supprimer des lignes
+_ ajouter (supprimer a faire) des colonnes
+_ edition en place (crayons) de chaque cellule
+_ a venir : import/export opml pour echanger avec des outils comme omnioutliner
+_ opml->arbo spip pour construire son arbo d'un clic a partir de sont outline exitant
+	</description>
+	<lien></lien>
+	<prefix>outliner</prefix>
+	<install>base/outliner_upgrade.php</install>
+	<options>outliner_options.php</options>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>outliner_pipeline.php</inclure>
+	</pipeline>
+</plugin>
