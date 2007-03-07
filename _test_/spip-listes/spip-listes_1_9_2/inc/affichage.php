@@ -1,22 +1,22 @@
 <?php
 
 /******************************************************************************************/
-/* SPIP-listes est un systï¿½e de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Gï¿½ï¿½ale GNU publiï¿½ par la Free Software Foundation            */
+/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribuï¿½car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spï¿½ifique. Reportez-vous ï¿½la Licence Publique Gï¿½ï¿½ale GNU  */
-/* pour plus de dï¿½ails.                                                                  */
+/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
+/* pour plus de détails.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reï¿½ une copie de la Licence Publique Gï¿½ï¿½ale GNU                    */
-/* en mï¿½e temps que ce programme ; si ce n'est pas le cas, ï¿½rivez ï¿½la                  */
+/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
+/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
 /* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, ï¿½ats-Unis.                   */
+/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
 /******************************************************************************************/
 
 function spip_listes_onglets($rubrique, $onglet){
@@ -395,7 +395,8 @@ function spiplistes_propre($texte){
 	$texte = propre($texte); // pb: enleve aussi <style>...  
 	$texte = propre_bloog($texte); //nettoyer les spip class truc en trop
 	$texte = ereg_replace("__STYLE__", $style_str, $texte);
-	$texte = liens_absolus($texte);
+	$urlsite=lire_meta("adresse_site");
+	$texte = liens_absolus($texte,$urlsite);
 	
 	return $texte;
 }

@@ -83,7 +83,7 @@ function exec_import_patron(){
 	echo "</form>";
 	echo "</div>";
 	echo "<div style='text-align:left;margin-right:250px;border-right:2px outset #000000'>";
-	echo liens_absolus($texte_patron).$message_erreur;
+	echo liens_absolus($texte_patron,$urlsite).$message_erreur;
 	
 	$contexte_pied = array('lang'=>$lang);
 	$texte_pied = recuperer_fond('modeles/piedmail', $contexte_pied);
