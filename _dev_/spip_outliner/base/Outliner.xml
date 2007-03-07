@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<forms>
+<form>
+	<id_form>28</id_form>
+	<titre>Un Outliner</titre>
+	<descriptif>Arbo de riec</descriptif>
+	<type_form>outline</type_form>
+	<modifiable>oui</modifiable>
+	<multiple>oui</multiple>
+	<email>a:1:{s:6:"defaut";s:0:"";}</email>
+	<champconfirm></champconfirm>
+	<texte></texte>
+	<moderation>posteriori</moderation>
+	<public>oui</public>
+	<linkable>non</linkable>
+	<documents>non</documents>
+	<html_wrap></html_wrap>
+	<fields>
+		<field>
+			<champ>ligne_1</champ>
+			<rang>1</rang>
+			<titre>Titre</titre>
+			<type>ligne</type>
+			<obligatoire>oui</obligatoire>
+			<extra_info></extra_info>
+			<specifiant>oui</specifiant>
+			<public>oui</public>
+			<aide></aide>
+			<html_wrap></html_wrap>
+		</field>
+	</fields>
+</form>
+</forms>
