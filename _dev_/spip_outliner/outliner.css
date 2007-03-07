@@ -8,6 +8,12 @@ width:100%;
 .crayon-icones span {
 margin-left:-20px;
 }
+.crayon-boutons div {
+margin-top:-20px;
+}
+div.spip_form_champ {
+padding-bottom:20px;
+}
 
 table.outline {
 	width:100%;
