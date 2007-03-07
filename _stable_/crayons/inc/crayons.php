@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_PREG_CRAYON', ',crayon\b[^<>\'"]+\b((\w+)-(\w+)-(\d+))\b,');
+define('_PREG_CRAYON', ',crayon\b[^<>\'"]+\b((\w+)-(\w+)-(\d+(?:-\w+)?))\b,');
 
 define('MODIFIER_FORUMS', false);
 define('MODIFIER_SIGNATURES', false);

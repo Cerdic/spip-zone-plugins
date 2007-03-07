@@ -138,14 +138,19 @@ EOH;
 // #EDIT{ps} pour appeler le crayon ps ;
 // si cette fonction est absente, balise_EDIT_dist() met a vide
 function balise_EDIT($p) {
+	$primary = $p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->primary;
+	$primary = explode(',',$primary);
+	$id = array();
+	foreach($primary as $key)
+		$id[] = champ_sql(trim($key),$p);
+	$primary = implode(".'-'.",$id);
 	$p->code = "classe_boucle_crayon('"
 		. $p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->type_requete
 		."',"
 		.sinon(interprete_argument_balise(1,$p),"''")
 		.","
-		.champ_sql($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->primary, $p)
+		. $primary
 		.").' '";
-
 	$p->interdire_scripts = false;
 	return $p;
 }
