@@ -17,8 +17,7 @@ _ 4. Une page 'evenements' qui liste les &eacute;v&egrave;nements (du jour/du mo
 _ 5. La liste des &eacute;v&egrave;nements associ&eacute;s au bas de chaque article</quote>
 
 Pour en savoir plus, lire le fichier {{lisezmoi.txt}}.
-_ Ce plugin est compatible avec Spip v1.9.1 et Alternatives v1.9.1.2.
-_ Le plugin SkTheme (et donc Alternatives v1.9.1.2 !) ne semblent pas compatibles avec vSpip 1.9.2
+_ Ce plugin a &eacute;t&eacute; test&eacute; sous Spip v1.9.1, v1.9.2 et Alternatives v1.9.1.2.
 </description>
 	<lien>bient&ocirc;t ?</lien> <!-- URI de documentation -->
 	<fonctions>minicalalter_fonctions.php</fonctions>
