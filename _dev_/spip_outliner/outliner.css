@@ -14,7 +14,9 @@ margin-top:-20px;
 div.spip_form_champ {
 padding-bottom:20px;
 }
-
+#selecteur_niveau{
+float:right;
+}
 table.outline {
 	width:100%;
 	margin-top: 1em;
@@ -24,7 +26,9 @@ table.outline caption {
 	caption-side: top; /* bottom pas pris en compte par IE */
 	text-align: left;
 	padding: 3px;
-	font-weight: bold; }
+	font-weight: bold; 
+	width:100%;
+}
 table.outline tr.row_first { background: #ccc; }
 table.outline tr.row_last { background: #ccc; }
 table.outline tr.row_odd { background: #DDD; }
