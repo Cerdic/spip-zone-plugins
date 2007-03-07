@@ -11,7 +11,7 @@
 	[[(#GET{need_fieldset}|?{'','</fieldset>'})]<fieldset><legend>(#TYPE|=={separateur}|?{#TITRE,''})</legend> #SET{need_fieldset,0}]
 	[(#GET{need_fieldset}|?{' '})<fieldset><legend>#_form:TITRE</legend> #SET{need_fieldset,0}]
 	[(#TYPE|=={separateur}|?{'',' '})
-		<div class='spip_form_champ'>
+		<div class='spip_form_champ #CHAMP'>
 			[(#TYPE|=={textestatique}|?{#TITRE,''})]
 			[(#TYPE|=={textestatique}|?{'',' '})
 				#SET{afficher,1}
