@@ -528,14 +528,14 @@ function spiplistes_afficher_auteurs($query, $url){
 		
 	$lettre = array();
 	if (($tri == 'nom') AND $GLOBALS['options'] == 'avancees') {
-/*			$lettres_nombre_auteurs ++;
-			$premiere_lettre = strtoupper(spip_substr(extraire_multi($auteur['nom']),0,1));
-			if ($premiere_lettre != $lettre_prec) {
-				#			echo " - $auteur[nom] -";
-				$lettre[$premiere_lettre] = $lettres_nombre_auteurs-1;
-			}
-			$lettre_prec = $premiere_lettre;
-*/	}
+		$qlettre = spip_query(
+	'select distinct upper(left(nom,1)) l, count(*) from spip_auteurs group by l order by l');
+		$count = 0;
+		while ($rlettre = spip_fetch_array($qlettre, SPIP_NUM)) {
+			$lettre[$rlettre[0]] = $count;
+			$count += intval($rlettre[1]);
+		}
+	}
 	
 	//
 	// Affichage
