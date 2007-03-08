@@ -148,6 +148,7 @@ Un saludo
 'messages_voir_dernier' => 'Ver el &uacute;ltimo mensaje',
 'moderateurs' => 'Moderadora(e)(s)',
 'modifier' => 'Cambiar',
+'mis_a_jour' => 'Updated', // FIXME
 
 //N
 'nom' => 'Nombre de usuari@',

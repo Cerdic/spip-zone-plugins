@@ -146,6 +146,7 @@ e ricevere le newsletter.',
 'messages_voir_dernier' => 'Vedi l\'ultimo messaggio',
 'moderateurs' => 'Moderatori',
 'modifier' => 'Modifica',
+'mis_a_jour' => 'Updated', // FIXME
 
 //n
 'nom' => 'Nome dell\'utente',

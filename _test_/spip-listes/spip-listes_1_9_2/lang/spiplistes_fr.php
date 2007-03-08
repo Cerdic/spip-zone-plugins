@@ -144,6 +144,7 @@ et de recevoir les lettres d\'informations.',
 'messages_voir_dernier' => 'Voir le dernier message',
 'moderateurs' => 'Mod&eacute;rateur(s)',
 'modifier' => 'Modifier',
+'mis_a_jour' => 'Mis &agrave; jour',
 
 //n
 'nom' => 'Nom d\'utilisateur',
@@ -195,7 +196,7 @@ et de recevoir les lettres d\'informations.',
 'abonnement_code_acces' => '<b>Abonnement avec codes d\'acc&egrave;s : </b><br /><i>Les abonn&eacute;s re&ccedil;oivent en plus un login et un mot de passe qui leur permettront de s\'identifier sur le site. </i>',
 'abonnement_newsletter' => '<b>Abonnement &agrave; la lettre d\'information</b>',
 'acces_a_la_page' => 'Vous n\'avez pas acc&egrave;s &agrave; cette page.',
-'adresse_deja_inclus' => 'L\'adresse est d&eacute;j&agrave; connue',
+'adresse_deja_inclus' => 'Adresse d&eacute;j&agrave; connue',
 'autorisation_inscription' => 'SPIP-listes vient d\'activer l\'autorisation de s\'inscrire aux visiteurs du site',
 
 'choisir' => 'Choisir',

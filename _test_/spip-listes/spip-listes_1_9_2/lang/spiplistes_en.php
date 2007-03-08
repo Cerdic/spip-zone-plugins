@@ -167,6 +167,7 @@ You will receive an e-mail with a link to the webpage where you can modify your 
 'messages_voir_dernier' => 'Read previous message',
 'moderateurs' => 'Moderators',
 'modifier' => 'Modify',
+'mis_a_jour' => 'Updated', 
 
 //n
 'nom' => 'Username',

@@ -175,11 +175,9 @@ function exec_import_export(){
 	{
 
 		if (!$insert_file) $insert_file = $_FILES["insert_file"]["tmp_name"] ;
-		if ($insert_file && $insert_file != "none") {
-		if(!file_exists("./temp"))	mkdir("./temp",0777);
-		else 	chmod("./temp",0777);
-		$import_file = "./temp/import.txt";
-			if(move_uploaded_file($insert_file,$import_file )) {
+		if ($insert_file && $insert_file != "none") {		
+		  $import_file = _DIR_TMP."import_email.txt";		  
+			if(move_uploaded_file($insert_file,$import_file)) {
 				// if(ereg("^php[0-9A-Za-z_.-]+$", basename($insert_file)))
 				if(!empty($insert_file) && $insert_file != "none" && ereg("^php[0-9A-Za-z_.-]+$", basename($insert_file)))
 				$liste = fread(fopen($import_file, "r"), filesize($import_file)); //pour NS et IE
@@ -190,6 +188,7 @@ function exec_import_export(){
 				$sub_report = "";
 
 				for($i=0;$i<sizeof($liste); $i++) {
+          $tmp_log = "\n<br style='clear:both'/>";				  
 
 					/* Ajouter un nouvel enregistrement dans la table */
 					$liste[$i]=trim($liste[$i]);
@@ -199,8 +198,9 @@ function exec_import_export(){
 						// Inscription
 						// Ajouter un code pour retrouver l'abonne
 						$mail_inscription = $liste[$i] ;
-
+						
 						if(email_valide($mail_inscription)){
+						  $tmp_log .= "<div style='color:#090;margin-bottom:5px;width:220px;float:left;'>$mail_inscription</div> " ;
 
 							$pass = creer_pass_aleatoire(8, $mail_inscription);
 							$nom_inscription = test_login2($mail_inscription);
@@ -217,13 +217,12 @@ function exec_import_export(){
 								$nom = $row['nom'] ;
 								$mail = $row['email'] ;
 								$id = $row['id_auteur'] ;
-								echo _T('spiplistes:adresse_deja_inclus').": ";
-								echo "<span style='color:#999;margin-bottom:5px'>".$mail_inscription."</span><br />\n" ;
+								$tmp_log .= _T('spiplistes:adresse_deja_inclus')." ";								
 								$ok = spip_query("UPDATE spip_auteurs SET extra="._q($extras)." WHERE id_auteur="._q($id));
-								if ($ok){echo "format mis a jour<br />";}
+								if ($ok)  $tmp_log .=  "("._T('spiplistes:mis_a_jour').")";
 							}
 							else {
-				 				$sub_report .= "<span style='color:#090;margin-bottom:5px'>$mail_inscription</span> ($format)<br />\n";
+				 				$tmp_log .= "<strong>$format</strong>";
 								spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, extra, cookie_oubli) ".
 								"VALUES ("._q($nom_inscription).","._q($mail_inscription).","._q($login).","._q($mdpass).","._q($statut).","._q($htpass).","._q($extras).","._q($cookie).")");
 							}
@@ -244,14 +243,14 @@ function exec_import_export(){
 									reset($list_abo);
 									while( list(,$val) = each($list_abo) ){
 										 //echo "<h2>$nom :liste $val </h2>" ;
+										 //$tmp_log .= "liste $val ";
 										 $result = spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur="._q($id_auteur)." AND id_liste="._q($val));
 
-										 if($GLOBALS['suppl_abo'] !='non'){
-											 $sub_report .= "<span style='color:#090;margin-bottom:5px'>".$mel."</span><br />\n" ;
-											 spip_query("INSERT INTO spip_auteurs_listes (id_auteur,id_liste) VALUES ("._q($id_auteur).","._q($val).")");
-										 	$new_abonne++;
-										 }
-									}
+										 if($GLOBALS['suppl_abo'] !='non')
+											           spip_query("INSERT INTO spip_auteurs_listes (id_auteur,id_liste) VALUES ("._q($id_auteur).","._q($val).")");										 	
+										 
+									}																				 
+									$new_abonne++;
 								}else{
 								if($GLOBALS['suppl_abo'] =='non'){
 									$result=spip_query("DELETE FROM spip_auteurs_mod_listes WHERE id_auteur="._q($id_auteur)); 
@@ -261,17 +260,18 @@ function exec_import_export(){
 							}
 						} else {
 
-							echo " "._T('spiplistes:erreur_import').$ligne_nb.": ";
-							echo "<span style='color:red;margin-bottom:5px'>".$liste[$i]." : </span><br />\n";
+							$tmp_log .= _T('spiplistes:erreur_import').$ligne_nb.": ";
+							$tmp_log .= "<span style='color:red;margin-bottom:5px'>".$liste[$i]." : </span>";
 						}//email valide
-
+						
+            echo $tmp_log;
 					}//listei
 
 				}// for
 
 				unlink($import_file);
 				echo "<br />".$sub_report;
-				echo "<div style='margin:10px 0'><strong>"._T('spiplistes:adresses_importees').": </strong> $new_abonne / $i</div>\n";
+				echo "<div style='margin:10px 0'><strong>"._T('spiplistes:adresses_importees').": </strong> $new_abonne</div>\n";
 			}// move et file
 
 		} // insert

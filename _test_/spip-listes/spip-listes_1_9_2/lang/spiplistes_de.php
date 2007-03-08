@@ -136,6 +136,7 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 'messages_voir_dernier' => 'Letzte Nachricht lesen',
 'moderateurs' => 'Moderator(en)',
 'modifier' => '&auml;ndern',
+'mis_a_jour' => 'Updated', // FIXME
 
 //N
 'nom' => 'Benutzername',
