@@ -176,8 +176,11 @@ function exec_import_export(){
 
 		if (!$insert_file) $insert_file = $_FILES["insert_file"]["tmp_name"] ;
 		if ($insert_file && $insert_file != "none") {		
-		  $import_file = _DIR_TMP."import_email.txt";		  
-			if(move_uploaded_file($insert_file,$import_file)) {
+		  $import_file = _DIR_TMP."import_email.txt";	
+      $ok = @copy($insert_file,$import_file); // a terme utiliser la fonction de spip: deplacer_fichier_upload (inc/getdocument) ?
+      if (!$ok) $ok = @move_uploaded_file($insert_file,$import_file);
+                	  
+			if($ok) {
 				// if(ereg("^php[0-9A-Za-z_.-]+$", basename($insert_file)))
 				if(!empty($insert_file) && $insert_file != "none" && ereg("^php[0-9A-Za-z_.-]+$", basename($insert_file)))
 				$liste = fread(fopen($import_file, "r"), filesize($import_file)); //pour NS et IE
