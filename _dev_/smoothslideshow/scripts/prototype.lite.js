@@ -48,7 +48,7 @@ var $A = function(iterable) {
 	return nArray;
 };
 
-function $() {
+function sss$() {
 	if (arguments.length == 1) return get$(arguments[0]);
 	var elements = [];
 	$c(arguments).each(function(el){
@@ -67,22 +67,22 @@ if (!window.Element) var Element = {};
 Object.extend(Element, {
 
 	remove: function(element) {
-		element = $(element);
+		element = sss$(element);
 		element.parentNode.removeChild(element);
 	},
 
 	hasClassName: function(element, className) {
-		element = $(element);
+		element = sss$(element);
 		return !!element.className.match(new RegExp("\\b"+className+"\\b"));
 	},
 
 	addClassName: function(element, className) {
-		element = $(element);
+		element = sss$(element);
 		if (!Element.hasClassName(element, className)) element.className = (element.className+' '+className);
 	},
 
 	removeClassName: function(element, className) {
-		element = $(element);
+		element = sss$(element);
 		if (Element.hasClassName(element, className)) element.className = element.className.replace(className, '');
 	}
 

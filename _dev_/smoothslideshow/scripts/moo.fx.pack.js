@@ -6,7 +6,7 @@ Fx.Scroll = Class.create();
 Fx.Scroll.prototype = Object.extend(new Fx.Base(), {
 
 	initialize: function(el, options) {
-		this.element = $(el);
+		this.element = sss$(el);
 		this.setOptions(options);
 		this.element.style.overflow = 'hidden';
 	},
@@ -31,7 +31,7 @@ Fx.Color = Class.create();
 Fx.Color.prototype = Object.extend(new Fx.Base(), {
 	
 	initialize: function(el, property, options){
-		this.element = $(el);
+		this.element = sss$(el);
 		this.setOptions(options);
 		this.property = property.camelize();
 		this.now = [];

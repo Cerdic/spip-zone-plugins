@@ -87,7 +87,7 @@ Fx.Style = Class.create();
 Fx.Style.prototype = Object.extend(new Fx.Base(), {
 
 	initialize: function(el, property, options){
-		this.element = $(el);
+		this.element = sss$(el);
 		this.setOptions(options);
 		this.property = property.camelize();
 	},
@@ -102,7 +102,7 @@ Fx.Styles = Class.create();
 Fx.Styles.prototype = Object.extend(new Fx.Base(), {
 
 	initialize: function(el, options){
-		this.element = $(el);
+		this.element = sss$(el);
 		this.setOptions(options);
 		this.now = {};
 	},
