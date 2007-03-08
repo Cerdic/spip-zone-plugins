@@ -173,15 +173,18 @@ function ajoute_creneaux_horaires($urlbase,$ts_start,$ts_fin,$type,$partie_cal,$
 		}
 	}
 }
-
-function http_calendrier_ics_message($annee, $mois, $jour, $large)
-{
-	return "";
+if (!function_exists('http_calendrier_ics_message')) {
+	function http_calendrier_ics_message($annee, $mois, $jour, $large)
+	{
+		return "";
+	}
 }
 
-function http_calendrier_aide_mess()
-{
-	return "";
+if (!function_exists('http_calendrier_aide_mess')) {
+	function http_calendrier_aide_mess()
+	{
+		return "";
+	}
 }
 
 function http_calendrier_semainesh($annee, $mois, $jour, $echelle, $partie_cal, $script, $ancre, $evt)
