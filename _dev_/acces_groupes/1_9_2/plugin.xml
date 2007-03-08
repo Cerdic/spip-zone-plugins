@@ -50,9 +50,11 @@ v 1.0.3 Ce script devient compatible avec SPIP 1.9.2 et +
 <inclure>accesgroupes_pipelines.php</inclure>
 </pipeline>
 <pipeline>
+<!--
 <nom>affiche_milieu</nom>
 <inclure>accesgroupes_pipelines.php</inclure>
 </pipeline>		
+-->
 </plugin>
 
 

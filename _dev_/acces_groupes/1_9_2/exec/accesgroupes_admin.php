@@ -47,7 +47,7 @@ function exec_accesgroupes_admin() {
 	$pp = explode("/", end($p));
 	define('_DIR_PLUGIN_ACCESGROUPES',(_DIR_PLUGINS.$pp[0]));
 	
-	$url_auteur = ($GLOBALS['spip_version_code']>1.92)?"auteur_infos":"auteurs_edit";
+	$url_auteur = (($GLOBALS['spip_version_code']>1.92)?"auteur_infos":"auteurs_edit");
 	$url_naviguer = "naviguer";
 	// initialisation d'un éventuel message de maintenance + état d'erreur potentiel
 	$msg_text = '';

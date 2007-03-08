@@ -10,13 +10,19 @@ include_spip('base/accesgroupes_tables');
 //	 la fonction afficher_breves_voir() et non pas la fonction exec_breves_voir() !!!
 //	 merci ESJ pour la subtilité du include() php à la place du inclure_spip()
 $exec = _request('exec'); // si on est dans l'espace privé : intégrer le fichier concerné par la surcharge
+/*
+// coyote - modif v1.0.3 on ne modifie plus les exec_xxx.php
 if (in_array($exec, array('naviguer','rubriques_edit','articles','articles_edit','articles_versions','breves_edit'))) {  // ,'breves_voir'
 	// inclure uniquement le fichier exec dont a besoin ET utiliser un include() php et non pas include_spip() pour ne pas se faire couillonner par find_in_path()
 	include('exec/'.$exec.'.php');
 	// appel du fichier contenant les fonctions exec_xxx() modifiées pour accesgroupes
 	include_spip('inc/accesgroupes_prive');
 }
-
+*/
+if (defined("_ECRIRE_INC_VERSION")){
+	// appel de la gestion de l'espace privé...
+	include_spip('inc/accesgroupes_prive');
+}
 // CACHE : nécessité d'un cache différencié selon les rubriques autorisées/restreintes 
 //   ajouter un marqueur de cache pour permettre de differencier le cache en fonction des rubriques autorisees
 // 	 potentiellement une version de cache differente par combinaison de rubriques autorisées pour un utilisateur + le cache de base sans autorisation
@@ -35,7 +41,7 @@ if ($exec == '') {  // si on on est dans l'espace public gérer le marqueur de ca
 
 
 // fct pour construire et renvoyer le tableau des rubriques à accès restreint dans la partie PUBLIQUE
-// 		 clone de la fct accesgroupes_liste_rubriques_restreintes() de inc/accesgroupes_fonctions.php 
+// 	 clone de la fct accesgroupes_liste_rubriques_restreintes() de inc/accesgroupes_fonctions.php 
 function accesgroupes_combin($id_parent = 0) {
 	$id_parent = intval($id_parent); // securite					 
 	static $Trub_restreintes; // nécessaire pour que la suite ne soit éxécutée qu'une fois par hit (même si on à n BOUCLES)
@@ -74,8 +80,6 @@ function accesgroupes_visualise($texte, $id_rub = 0, $image = 'ecrire/img_pack/c
 		return $texte;
 	}
 }
-
-
 
 // détermine si une rubrique $rub est restreinte ou non (en fct de la provenance $prive_public : prive | public)
 // retourne 0 : accès libre | 1 : accès restreint non-connecté | 2 : accès restreint non-autorisé | 3 accès retreint autorisé
@@ -504,7 +508,7 @@ function accesgroupes_affichage_acces_restreint() {
 		echo "<br />"._T('accesgroupes:choix_groupe');
 		// trouver si c'est la rubrique en cours qui est restreinte ou un de ses ascendants
 		$id_rub_restreinte = accesgroupes_trouve_parent_restreint($id_rubrique, $provenance_prive_public);
-		$sql22 = "SELECT spip_accesgroupes_acces.id_grpacces, 
+		$sql22 = "SELECT DISTINCT spip_accesgroupes_acces.id_grpacces, 
 						spip_accesgroupes_groupes.nom
 						FROM spip_accesgroupes_acces
 						LEFT JOIN spip_accesgroupes_groupes
@@ -594,7 +598,7 @@ function accesgroupes_auteurs_liste_groupes($auteur){
 function accesgroupes_formulaire_zones($table, $id_objet, $nouv_zone, $supp_zone, $flag_editable, $retour){
 	global $connect_statut, $connect_toutes_rubriques, $options;
 	global $connect_id_auteur;
-	global $spip_lang_rtl, $spip_lang_right;	
+	global $spip_lang_rtl, $spip_lang_right;
 	$exec = $flux['args']['exec'];
 	$auteur=((isset($_GET['id_auteur']))?$_GET['id_auteur']:0); // Auteur en cours...
 	
@@ -648,23 +652,29 @@ function accesgroupes_formulaire_zones($table, $id_objet, $nouv_zone, $supp_zone
 	return $out;
 }
 
-function accesgroupes_formulaire_rejoindre_groupe($auteur) {
+function accesgroupes_formulaire_rejoindre_groupe($id_rubrique,$auteur) {
 		$out = "";
 		$out = generer_url_post_ecrire("auteur_infos","id_auteur=$auteur");
 		$out.= _T('accesgroupes:demande_acces'); 
 		$out.= "<br />"._T('accesgroupes:choix_groupe');
 		// trouver si c'est la rubrique en cours qui est restreinte ou un de ses ascendants
-		//$id_rub_restreinte = accesgroupes_trouve_parent_restreint($id_rubrique, $provenance_prive_public);
-		$sql22 = "SELECT spip_accesgroupes_acces.id_grpacces, 
+		$where= "";
+		if ($id_rubrique > 0){
+		$id_rub_restreinte = accesgroupes_trouve_parent_restreint($id_rubrique, $provenance_prive_public);
+		$where = " AND id_rubrique = $id_rubrique ";
+		}
+		
+		$sql22 = "SELECT DISTINCT spip_accesgroupes_acces.id_grpacces, 
 						spip_accesgroupes_groupes.nom
 						FROM spip_accesgroupes_acces
 						LEFT JOIN spip_accesgroupes_groupes
 						ON spip_accesgroupes_acces.id_grpacces = spip_accesgroupes_groupes.id_grpacces
 						WHERE demande_acces = 1
 						AND actif = 1
+						$where
 				";
 		$result22 = spip_query($sql22);
-		//echo '<br>mysql_error $sql22 = '.mysql_error();									 
+		//echo "<br>$sql22<br>mysql_error sql22 = ".mysql_error(); 
 		$out.= " <select name=\"groupe_demande_acces\" size=\"1\">";
 		while ($row22 = spip_fetch_array($result22)) {
 			$id_groupe_ec = $row22['id_grpacces'];

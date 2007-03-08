@@ -23,6 +23,22 @@ function accesgroupes_affiche_milieu($flux){
 		global $connect_statut;
 		$flux['data'] .= accesgroupes_formulaire_zones('auteurs', $id_auteur, $nouv_zone, $supp_zone, $connect_statut == '0minirezo', generer_url_ecrire('auteurs_edit',"id_auteur=$id_auteur"));
 	}
+	
+	if ($exec == 'naviguer' && $flux['args']['id_rubrique'] > 0){
+		if( isset($GLOBALS['auteur_session']['id_auteur'])){
+		// le formulaire qu'on ajoute
+		$r = "";
+		$r .= debut_cadre('couleur', _DIR_PLUGINS_ACCESGROUPES."/img_pack/groupe-24.png", '', 'Groupes');
+		$r .= bouton_block_invisible("grpacces", _DIR_PLUGINS_ACCESGROUPES."/img_pack/groupe-24.png") ;
+		//$r .= debut_block_invisible('grpacces');
+		$r .= debut_cadre_formulaire(true);
+		$r .= accesgroupes_formulaire_rejoindre_groupe($flux['args']['id_rubrique'],$GLOBALS['auteur_session']['id_auteur']);
+		$r .= fin_cadre_formulaire(true);
+		//$r .= fin_block_invisible('grpacces');
+		$r .= fin_cadre('couleur');
+		$flux['data'] .= $r;
+		}
+	}
 	return $flux;
 }
 ?>
