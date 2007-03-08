@@ -185,7 +185,6 @@ function exec_import_export(){
 				$liste=ereg_replace("\n|\r|\n\r|\r\n|\n\n","\n",$liste);
 				$liste = explode( "\n",$liste);
 				$new_abonne = 0;
-				$sub_report = "";
 
 				for($i=0;$i<sizeof($liste); $i++) {
           $tmp_log = "\n<br style='clear:both'/>";				  
@@ -241,8 +240,7 @@ function exec_import_export(){
 							// on abonne l'auteur aux listes
 								if(is_array($list_abo)){
 									reset($list_abo);
-									while( list(,$val) = each($list_abo) ){
-										 //echo "<h2>$nom :liste $val </h2>" ;
+									while( list(,$val) = each($list_abo) ){										 
 										 //$tmp_log .= "liste $val ";
 										 $result = spip_query("DELETE FROM spip_auteurs_listes WHERE id_auteur="._q($id_auteur)." AND id_liste="._q($val));
 
@@ -254,7 +252,7 @@ function exec_import_export(){
 								}else{
 								if($GLOBALS['suppl_abo'] =='non'){
 									$result=spip_query("DELETE FROM spip_auteurs_mod_listes WHERE id_auteur="._q($id_auteur)); 
-									$sub_report .= "<span style='color:#090;margin-bottom:5px'>".$mel."</span> (desabo)<br />\n" ;
+									$tmp_log .= "<strong>"._T('spiplistes:desabo')."</strong>";
 								}
 								}
 							}
@@ -269,8 +267,7 @@ function exec_import_export(){
 
 				}// for
 
-				unlink($import_file);
-				echo "<br />".$sub_report;
+				unlink($import_file);				
 				echo "<div style='margin:10px 0'><strong>"._T('spiplistes:adresses_importees').": </strong> $new_abonne</div>\n";
 			}// move et file
 
