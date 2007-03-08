@@ -12,11 +12,11 @@
           test
         </etat>
         <description>
-          Permet de r&#233;aliser une comparaison de ce ces fichiers spip par rapport  &#224; ceux disponible sur [->http://trac.rezo.net/trac/spip/browser/branches/spip-1.9/]  (pour l'instant).
-La comparaison est faite par rapport  &#224; la taille des fichiers et leur date de modification.
-         L'int&#233;ret de ce plugin est double:
-         1) V&#233;rifie que le transfert ftp des fichiers c'est bien effectu&#233;
-         2) Permet de voir s'il y a eu des mis &#224;  jour (du principalement &#224; des corrections de bugs)
+          Permet de r&#233;aliser une comparaison de ces fichiers spip par rapport  &#224; ceux disponible sur [->http://trac.rezo.net/trac/spip/browser/branches/spip-1.9/]  (pour l'instant).
+_ La comparaison est faite par rapport  &#224; la taille des fichiers et &#224; leur date de modification.
+_ L'int&#233;ret de ce plugin est double:
+-* V&#233;rifie le transfert correct des fichiers via ftp
+-* D&#233;tecte les mises &#224;  jour (dues principalement &#224; des corrections de bugs)
         </description>
 	<lien></lien> <!-- URI de documentation -->
         <prefix>
