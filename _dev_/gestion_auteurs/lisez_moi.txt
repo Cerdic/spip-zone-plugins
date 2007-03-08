@@ -13,4 +13,6 @@ Fonctionnalités supplémentaires par rapport à csv2spip:
   . gestion de l'ensemble des champs de la table spip_auteurs
   . possibilité de remplir des tables complémentaires avec des infos par auteurs / par groupes / par sous-groupes (cf la connexion avec acces_groupes de csv2spip)
 
+... la suite sur http://trac.rezo.net/trac/spip-zone/wiki/GestionAuteurs
+
 
