@@ -58,7 +58,11 @@ function acronymes_ajouter($chaine,$replacenb=-1)
 	$id_syndic_acronymes=intval($id_syndic_acronymes);
 	$id_rubrique_acronymes=intval($id_rubrique_acronymes);
 	
-	if((strlen($chaine) == 0)||(!$id_rubrique_acronymes && !$id_syndic_acronymes))
+	if((strlen($chaine) == 0)||
+		  ( (!include_spip('base/forms_base_api') OR !count($liste=Forms_liste_tables('acronymes_sigles')))
+		    && !$id_rubrique_acronymes && !$id_syndic_acronymes
+		  )
+		)
 		return $chaine;
 	$chaine=" ".$chaine;
 
@@ -69,7 +73,7 @@ function acronymes_ajouter($chaine,$replacenb=-1)
 			$set = array();
 
 			#Recuperation des mots et des definitions dans une table des acronymes
-			if (include_spip('base/forms_base_api') AND count($liste=Forms_liste_tables('acronymes_sigles'))){
+			if (count($liste)){
 				include_spip('forms_fonctions');
 				$id_form = intval(reset($liste));
 		  	$res = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE id_form="._q($id_form));
