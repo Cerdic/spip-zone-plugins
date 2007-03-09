@@ -1,0 +1,38 @@
+<div id='toolbar'>
+[(#INCLUDE{fond=outline_selecteur_niveau}{id_table=#ENV{id_table}})]
+<a href='#URL_PAGE{outline_tous}' title='<:outliner:tous_les_outline:>'>
+<img src='#CHEMIN{img_pack/outliner.png}' width='64' height='64' alt='<:outliner:tous_les_outline:>' />
+</a>
+[(#ENV{id_table}|?{'',' '})
+
+]
+[(#ENV{id_table}|?{' '})
+<a href='#' onclick='CollapseAll();return false;' title='<:outliner:tout_reduire:>'>
+<img src='#CHEMIN{img_pack/CollapseAll.png}' width='64' height='64' alt='<:outliner:tout_reduire:>' />
+</a>
+<a href='#' onclick='ExpandAll();return false;' title='<:outliner:tout_developper:>'>
+<img src='#CHEMIN{img_pack/ExpandAll.png}' width='64' height='64' alt='<:outliner:tout_developper:>' />
+</a>
+<a href='#' onclick='MoveLeft();return false;' title='<:outliner:reduire_niveau:>'>
+<img src='#CHEMIN{img_pack/MoveLeft.png}' width='64' height='64' alt='<:outliner:reduire_niveau:>' />
+</a>
+<a href='#' onclick='MoveRight();return false;' title='<:outliner:augmenter_niveau:>'>
+<img src='#CHEMIN{img_pack/MoveRight.png}' width='64' height='64' alt='<:outliner:augmenter_niveau:>' />
+</a>
+<a href='[(#URL_PAGE{'','action=outline_add_row'}|parametre_url{redirect,#SELF|urlencode})&amp;arg=#ENV{id_table}]' onclick='return AddItem(this);' title='<:outliner:ajouter_ligne:>'>
+<img src='#CHEMIN{img_pack/AddItem.png}' width='64' height='64' alt='<:outliner:ajouter_ligne:>' />
+</a>
+<a href='[(#URL_PAGE{'','action=outline_supp_row'}|parametre_url{redirect,#SELF|urlencode})&amp;arg=#ENV{id_table}]' onclick='return RemoveItem(this);' title='<:outliner:supprimer_ligne:>'>
+<img src='#CHEMIN{img_pack/RemoveItem.png}' width='64' height='64' alt='<:outliner:supprimer_ligne:>' />
+</a>
+<a href='[(#URL_PAGE{'','action=outline_add_col'}|parametre_url{redirect,#SELF|urlencode})&amp;arg=#ENV{id_table}]' onclick='return AddColumn(this);' title='<:outliner:ajouter_colonne:>'>
+<img src='#CHEMIN{img_pack/AddColumn.png}' width='64' height='64' alt='<:outliner:ajouter_colonne:>' />
+</a>
+<a href='[(#URL_PAGE{'','action=outline_supp_col'}|parametre_url{redirect,#SELF|urlencode})&amp;arg=#ENV{id_table}]' onclick='return RemoveColumn(this);' title='<:outliner:supprimer_colonne:>'>
+<img src='#CHEMIN{img_pack/RemoveColumn.png}' width='64' height='64' alt='<:outliner:supprimer_colonne:>' />
+</a>
+
+]
+
+
+</div>

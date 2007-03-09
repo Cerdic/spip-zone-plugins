@@ -7,42 +7,34 @@
 <INCLURE{fond=inc-head}>
 <link rel="stylesheet" href="[(#CHEMIN{outliner.css})]" type="text/css" media="all" />
 <script type='text/javascript' src='#CHEMIN{javascript/outliner.js}'></script>
+<script type='text/javascript'><!--
+var img_noeud_plus='#EVAL{_DIR_IMG_PACK}noeud_plus.gif';
+var img_noeud_moins='#EVAL{_DIR_IMG_PACK}noeud_moins.gif';
+//-->
+</script>
 </head>
 
 <body class="outliner">
+[(#INCLUDE{fond=outline_toolbar}{id_table=#ENV{id_table}})]
 <div id="outline">
-
 <B_titreh>
 <table class="outline donnees" id='donnees-#ENV{id_table}'>
 <BOUCLE_caption(FORMS){id_form=#ENV{id_table}}>
-<caption>
-<select name='niveau' id='selecteur_niveau' onchange='filtre_niveau(this.value)'>
-<option value='10' selected='selected'>Filtrer l'affichage par niveau</option>
-<option value='1'>Niveau 1</option>
-<option value='2'>Niveau 2</option>
-<option value='3'>Niveau 3</option>
-<option value='4'>Niveau 4</option>
-<option value='5'>Niveau 5</option>
-<option value='6'>Niveau 6</option>
-<option value='7'>Niveau 7</option>
-<option value='8'>Niveau 8</option>
-<option value='9'>Niveau 9</option>
-</select>
-#TITRE</caption></BOUCLE_caption>
+<caption>#TITRE</caption></BOUCLE_caption>
 <thead><tr class='row_first'>
-	<th></th>
+	<!--<th></th>-->
 	<th>id</th>
-	<th>
+	<th class='ligne_1'>
 	<BOUCLE_titreh(FORMS_CHAMPS){id_form=#ENV{id_table}}{champ=ligne_1}>
 	<span class='#EDIT{titre}'>#TITRE</span>
 	</BOUCLE_titreh>
 	</th>
 	<BOUCLE_head(FORMS_CHAMPS){id_form=#ENV{id_table}}{champ !IN (select_1,ligne_1)}{type !IN (separateur,textestatique)}{par rang}>
-	<th><span class='#EDIT{titre}'>#TITRE</span></th>
+	<th class='#CHAMP'><span class='#EDIT{titre}'>#TITRE</span></th>
 	</BOUCLE_head>
-	<th></th>
+	<!--<th></th>-->
 </tr></thead>
-<tbody>
+<tbody><!--
 <tr class='row_first'>
 	<td></td>
 	<td></td>
@@ -57,19 +49,21 @@
 	<td><a href='#URL_ACTION_AUTEUR{outline_add_col,#ENV{id_table}|concat{:,:#GET{champprev}},(#SELF|urlencode)}' title='<:outliner:insertion_colonne:>'>
 	<img src='#CHEMIN{img_pack/outline_insert_col-24.png}' width='24' height='24' alt='<:outliner:insertion_colonne:>' />
 	</a></td>#SET{champprev,#CHAMP}
-</tr>
+</tr>-->
 #SET{prev,0}
 <BOUCLE_donnees(FORMS_DONNEES){id_form=#ENV{id_table}}{id_mot?}{par rang}{statut!=poubelle}>
 #SET{lien_addrow,#URL_ACTION_AUTEUR{outline_add_row,#ID_FORM|concat{:#ID_DONNEE,:#GET{prev}},(#SELF|urlencode)}}
 #SET{lien_supprow,#URL_ACTION_AUTEUR{outline_supp_row,#ID_FORM:#ID_DONNEE,(#SELF|urlencode)}}
 #SET{prev,#ID_DONNEE}
-	<tr class='row [(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]'>
-		<td><a href='#GET{lien_addrow}' title='<:outliner:insertion_ligne:>'><img src='#CHEMIN{img_pack/outline_insert_ligne-24.png}' width='24' height='24' alt='<:outliner:insertion_ligne:>' /></a></td>
+	<tr id='#ID_DONNEE' class='row [(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]'>
+		<!--<td><a href='#GET{lien_addrow}' title='<:outliner:insertion_ligne:>'><img src='#CHEMIN{img_pack/outline_insert_ligne-24.png}' width='24' height='24' alt='<:outliner:insertion_ligne:>' /></a></td>-->
 		<td><a href='[(#SELF|parametre_url{id_donnee,#ID_DONNEE}|ancre_url{donnee-#ID_DONNEE})]'>#ID_DONNEE</a></td>
-		<td>
+		<td class='ligne_1'>
 		<table><tr >
 		<BOUCLE_niveau(FORMS_CHAMPS){id_form}{champ=select_1}>
-		<td class='niveau'><span class='#_donnees:EDIT{#CHAMP}'><div class='niveau niveau-#LESVALEURS'>#PUCE</div></span></td>
+		<td class='niveau'>[(#REM)<span class='#_donnees:EDIT{#CHAMP}'>]
+		<div class='niveau niveau-#LESVALEURS'><img src='#EVAL{_DIR_IMG_PACK}noeud_moins.gif' width='16' height='16' class='noeud'/></div>
+		[(#REM)</span>]</td>
 		</BOUCLE_niveau>
 		<BOUCLE_titre(FORMS_CHAMPS){id_form}{champ=ligne_1}>
 		<td><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{','} </span></td>
@@ -77,33 +71,34 @@
 		</tr></table>
 		</td>
 		<BOUCLE_body(FORMS_CHAMPS){id_form}{type !IN (separateur,textestatique)}{par rang}{champ !IN (select_1,ligne_1)}>
-		<td><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{'<br />'}</span></td>
+		<td class='#CHAMP'><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{'<br />'}</span></td>
 		</BOUCLE_body>
-		<td><a href='#GET{lien_supprow}' title='<:outliner:suppression_ligne:>'><img src='#CHEMIN{img_pack/supprimer-24.png}' width='24' height='24' alt='<:outliner:suppression_ligne:>' /></a></td>
+		<!--<td><a href='#GET{lien_supprow}' title='<:outliner:suppression_ligne:>'><img src='#CHEMIN{img_pack/supprimer-24.png}' width='24' height='24' alt='<:outliner:suppression_ligne:>' /></a></td>-->
 	</tr>
 </BOUCLE_donnees>
-#SET{lien_addrow,#URL_ACTION_AUTEUR{outline_add_row,#ENV{id_table}|concat{:0:#GET{prev}},(#SELF|urlencode)}}
+<!--#SET{lien_addrow,#URL_ACTION_AUTEUR{outline_add_row,#ENV{id_table}|concat{:0:#GET{prev}},(#SELF|urlencode)}}
 <tr class='row_last'>
 	<td><a href='#GET{lien_addrow}' title='<:outliner:insertion_ligne:>'><img src='#CHEMIN{img_pack/outline_insert_ligne-24.png}' width='24' height='24' alt='<:outliner:insertion_ligne:>' /></a></td>
 	<td></td>
-	<td>
+	<td class='ligne_1'>
 	</td>
 	#SET{champprev,ligne_1}
 	<BOUCLE_pied(FORMS_CHAMPS){id_form=#ENV{id_table}}{champ !IN (select_1,ligne_1)}{type !IN (separateur,textestatique)}{par rang}>
-		<td><a href='#URL_ACTION_AUTEUR{outline_supp_col,#ENV{id_table}|concat{:#CHAMP,:#GET{champprev}},(#SELF|urlencode)}' title='<:outliner:suppression_colonne:>'>
+		<td class='#CHAMP'><a href='#URL_ACTION_AUTEUR{outline_supp_col,#ENV{id_table}|concat{:#CHAMP,:#GET{champprev}},(#SELF|urlencode)}' title='<:outliner:suppression_colonne:>'>
 		<img src='#CHEMIN{img_pack/supprimer-24.png}' width='24' height='24' alt='<:outliner:suppression_colonne:>' />
 		</a></td>#SET{champprev,#CHAMP}
 	</BOUCLE_pied>
 	<td><a href='#URL_ACTION_AUTEUR{outline_supp_col,#ENV{id_table}|concat{:,:#GET{champprev}},(#SELF|urlencode)}' title='<:outliner:suppression_colonne:>'>
 	<img src='#CHEMIN{img_pack/supprimer-24.png}' width='24' height='24' alt='<:outliner:suppression_colonne:>' />
 	</a></td>#SET{champprev,#CHAMP}
-</tr>
+</tr>-->
 
 </tbody>
 </table>
 </B_titreh>
 #MODELE{donnee,id_donnee=#EVAL{$_GET['id_donnee']} }
 
+#FORMULAIRE_ADMIN
 </div><!-- fin page -->
 </body>
 </html>

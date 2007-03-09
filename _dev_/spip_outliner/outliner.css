@@ -1,10 +1,41 @@
-/* Tableaux */
+/* La Page */
 #outline {
 font-size:small;
 width:100%;
-
+margin-top:70px;
 }
 
+/* la Tool bar */
+#toolbar {
+display:block;
+position:fixed;
+left:0px;
+top:0px;
+width:100%;
+height:70px;
+background:#ffffff;
+border-bottom:3px solid #ccc;
+}
+#toolbar a {
+display:block;
+float:left;
+}
+#toolbar a img {
+	filter: alpha(opacity=70);
+	opacity: 0.7;
+	-moz-opacity: 0.7;
+	padding:3px;
+	background:none;
+}
+#toolbar a:hover img {
+	filter: alpha(opacity=100);
+	opacity: 1.0;
+	-moz-opacity: 1.0;
+	background:#ffffcc;
+}
+
+
+/* Les crayons */
 .crayon-icones span {
 margin-left:-20px;
 }
@@ -14,9 +45,13 @@ margin-top:-20px;
 div.spip_form_champ {
 padding-bottom:20px;
 }
+
+/* Le selecteur de niveau */
 #selecteur_niveau{
 float:right;
 }
+
+/* L'outline */
 table.outline {
 	width:100%;
 	margin-top: 1em;
@@ -38,6 +73,7 @@ table.outline th, table.outline td {
 	border: 1px solid #ccc;
 }
 
+/* sous table dans la celule ligne_1 pour gerer le decalage lie au niveau */
 table.outline table {
 	width:100%;
 	border: none;
@@ -59,16 +95,6 @@ div.niveau-7{padding-left:65px;}
 div.niveau-8{padding-left:75px;}
 div.niveau-9{padding-left:85px;}
 
-
-/* Barre de raccourcis typographiques */
-table.spip_barre { width: 100%; }
-
-table.spip_barre a img {
-	background: #FDA;
-	padding: 3px;
-	border: 1px outset #999; }
-table.spip_barre a:hover img {
-	background: #FFF;
-	border: 1px solid #999; }
-
-table.spip_barre input.barre { width: 100%; background: #EEE; }
+/* selection ligne et colonne */
+table.outline tr.row_sel { background: #ffffcc; }
+table.outline td.col_sel,table.outline th.col_sel { background: #ffcc99; }

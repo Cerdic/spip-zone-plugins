@@ -6,13 +6,14 @@ include_spip('inc/forms');
 include_spip('base/forms_base_api');
 function action_outline_add_row_dist()
 {
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+	//$securiser_action = charger_fonction('securiser_action', 'inc');
+	//$arg = $securiser_action();
+	$arg = _request('arg');
 
 	$arg = explode(':',$arg);
 	$id_form = $arg[0];
-	$id_donnee = $arg[1];
-	$id_donnee_prev = $arg[2];
+	$id_donnee = $arg[2];
+	$id_donnee_prev = $arg[1];
 	$rang = 0;
 	$niveau = "select_1_1";
 	

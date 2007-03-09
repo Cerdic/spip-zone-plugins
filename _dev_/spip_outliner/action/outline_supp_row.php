@@ -6,8 +6,9 @@ include_spip('inc/forms');
 include_spip('base/forms_base_api');
 function action_outline_supp_row_dist()
 {
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+	//$securiser_action = charger_fonction('securiser_action', 'inc');
+	//$arg = $securiser_action();
+	$arg = _request('arg');
 
 	$arg = explode(':',$arg);
 	$id_form = $arg[0];

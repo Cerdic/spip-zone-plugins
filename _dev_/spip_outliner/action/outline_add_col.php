@@ -6,13 +6,14 @@ include_spip('inc/forms');
 include_spip('base/forms_base_api');
 function action_outline_add_col_dist()
 {
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+	//$securiser_action = charger_fonction('securiser_action', 'inc');
+	//$arg = $securiser_action();
+	$arg = _request('arg');
 
 	$arg = explode(':',$arg);
 	$id_form = $arg[0];
-	$champ = $arg[1];
-	$champ_prev = $arg[2];
+	$champ = $arg[2];
+	$champ_prev = $arg[1];
 	$rang = 0;
 	
 	if ($champ){
