@@ -173,6 +173,8 @@ $html=$_POST['verifLocale'];
 else{
 $html=implode ('', file ($adresse_base));
 }
+// enlever les commentaires html, ca allege l'analyse surtout si du javascript embarque
+$html = preg_replace(",<!--.*-->,Ums","",$html);
 	$htp=$html;
 	$html=htmlentities($html);
 	$html=stripslashes($html);
