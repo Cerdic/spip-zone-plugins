@@ -73,8 +73,8 @@ function Forms_supprimer_tables($type_ou_id){
 }
 
 include_spip('forms_fonctions');
-function Forms_les_valeurs($id_form, $id_donnee, $champ, $separateur=",",$etoile=false){
-	return forms_calcule_les_valeurs('forms_donnees_champs', $id_donnee, $champ, $id_form, $separateur,$etoile);
+function Forms_les_valeurs($id_form, $id_donnee, $champ, $separateur=",",$etoile=false, $traduit=true){
+	return forms_calcule_les_valeurs('forms_donnees_champs', $id_donnee, $champ, $id_form, $separateur,$etoile,$traduit);
 }
 function Forms_decrit_donnee($id_donnee,$specifiant=true,$linkable=false){
 	list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($id_donnee,$specifiant,$linkable);
