@@ -1,7 +1,15 @@
 <?php
 // insert le css pour les styles supplementaires de la BTE dans le <head> du document (#INSERT_HEAD)
 function BarreTypoEnrichie_insert_head($flux) {
-	global $BarreTypoEnrichie_Preserve_Header;
+	if (!function_exists('lire_config')) {
+		global $BarreTypoEnrichie_Preserve_Header;
+	} else {
+		if (lire_config('bte/insertcss','Oui') == 'Non') {
+			$BarreTypoEnrichie_Preserve_Header = true;
+		} else {
+			$BarreTypoEnrichie_Preserve_Header = false;
+		}
+	}
 	if (!$BarreTypoEnrichie_Preserve_Header) {
 		$cssFile = find_in_path('css/bartypenr.css');
 		$incHead = <<<EOH

@@ -50,8 +50,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_gestion_anc_cible' => 'Ancre cible',
 'barre_gestion_anc_bulle' => 'Bulle d\'aide ancre',
 'barre_avances' => 'Du sens, du sens&nbsp;!',
-'barre_boutonsavances' => 'Mises en sens suppl&eacute;mentaires, &agrave; utiliser avec mod&eacute;ration et discernement&nbsp;!'
-
+'barre_boutonsavances' => 'Mises en sens suppl&eacute;mentaires, &agrave; utiliser avec mod&eacute;ration et discernement&nbsp;!',
+'cfg_puces' => 'Traitement des puces',
+'cfg_titraille' => 'Titraille',
+'cfg_insertcss' => 'Insertion CSS'
 
 );
 ?>

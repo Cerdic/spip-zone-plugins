@@ -36,23 +36,47 @@ function BarreTypoEnrichie_pre_propre($texte) {
 	// remplace les fausses listes a puce par de vraies
 	// (recherche en debut de lignes - suivi d'un ou plusieurs caracteres blancs, en mode multiligne)
 	// Mettre $GLOBALS['barre_typo_preserve_puces'] = true; dans mes_options.php pour ne pas avoir ce comportement
-	if ($GLOBALS['barre_typo_pas_de_fausses_puces'] === true)
+	if (!function_exists('lire_config')) {
+		global $barre_typo_pas_de_fausses_puces;
+	} else {
+		if (lire_config('bte/puces','Non') == 'Oui') {
+			$barre_typo_pas_de_fausses_puces = true;
+		} else {
+			$barre_typo_pas_de_fausses_puces = false;
+		}
+	}
+
+	if ($barre_typo_pas_de_fausses_puces === true) {
 		$texte =  preg_replace('/^-\s+/m','-* ',$texte);
+	}
 
 	// tous les elements block doivent etre introduits ici
 	// pour etre pris en charge par paragrapher
 
 	// Definition des differents intertitres possibles, si pas deja definies
-	tester_variable('debut_intertitre', '<h3 class="spip">');
-	tester_variable('fin_intertitre', '</h3>');
-	tester_variable('debut_intertitre_2', '<h4 class="spip">');
-	tester_variable('fin_intertitre_2', '</h4>');
-	tester_variable('debut_intertitre_3', '<h5 class="spip">');
-	tester_variable('fin_intertitre_3', '</h5>');
-	tester_variable('debut_intertitre_4', '<h6 class="spip">');
-	tester_variable('fin_intertitre_4', '</h6>');
-	tester_variable('debut_intertitre_5', '<h6 class="spip">');
-	tester_variable('fin_intertitre_5', '</h6>');
+	if (!function_exists('lire_config')) {
+		tester_variable('debut_intertitre', '<h3 class="spip">');
+		tester_variable('fin_intertitre', '</h3>');
+		tester_variable('debut_intertitre_2', '<h4 class="spip">');
+		tester_variable('fin_intertitre_2', '</h4>');
+		tester_variable('debut_intertitre_3', '<h5 class="spip">');
+		tester_variable('fin_intertitre_3', '</h5>');
+		tester_variable('debut_intertitre_4', '<h6 class="spip">');
+		tester_variable('fin_intertitre_4', '</h6>');
+		tester_variable('debut_intertitre_5', '<strong class="spip titraille5">');
+		tester_variable('fin_intertitre_5', '</strong>');
+	} else {
+		tester_variable('debut_intertitre', lire_config('bte/titraille1open','<h3 class="spip">'));
+		tester_variable('debut_intertitre', lire_config('bte/titraille1close','</h3>'));
+		tester_variable('debut_intertitre_2', lire_config('bte/titraille2open','<h4 class="spip">'));
+		tester_variable('debut_intertitre_2', lire_config('bte/titraille2close','</h4>'));
+		tester_variable('debut_intertitre_3', lire_config('bte/titraille3open','<h5 class="spip">'));
+		tester_variable('debut_intertitre_3', lire_config('bte/titraille3close','</h5>'));
+		tester_variable('debut_intertitre_4', lire_config('bte/titraille4open','<h6 class="spip">'));
+		tester_variable('debut_intertitre_4', lire_config('bte/titraille4close','</h6>'));
+		tester_variable('debut_intertitre_5', lire_config('bte/titraille5open','<strong class="spip titraille5">'));
+		tester_variable('debut_intertitre_5', lire_config('bte/titraille5close','</strong>'));
+	}
 
 	global $debut_intertitre, $fin_intertitre;
 	global $debut_intertitre_2, $fin_intertitre_2;
