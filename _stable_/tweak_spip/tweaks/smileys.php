@@ -14,23 +14,22 @@ function smileys_installe() {
 	 ':-(('	=> 'en_colere.png',
 	 ':-))'	=> 'mort_de_rire.png',
 	 ':))'	=> 'mort_de_rire.png',
-	// attention ' est different de ’ (SPIP utilise/ecrit ce dernier)
 	 ":'-))"=> 'pleure_de_rire.png',
-	 ":’-))"=> 'pleure_de_rire.png',
+	// attention ' est different de ’ (&#8217;) (SPIP utilise/ecrit ce dernier)
+	 ":&#8217;-))"=> 'pleure_de_rire.png',
 
 	// les simples :
-	// ':->'	=> 'diable.png',	// remplace par le suivant...
 	 ':-&gt;' => 'diable.png',
 	 ':-('	=> 'pas_content.png',
 	 ':-D'	=> 'mort_de_rire.png',
 	 ':-)'	=> 'sourire.png',
 	 '|-)'	=> 'rouge.png',
 	 ":'-)"=> 'pleure_de_rire.png',
-	 ":’-)"=> 'pleure_de_rire.png',
+	 ":&#8217;-)"=> 'pleure_de_rire.png',
 	 ":'-D"	=> 'pleure_de_rire.png',
-	 ":’-D"	=> 'pleure_de_rire.png',
+	 ":&#8217;-D"	=> 'pleure_de_rire.png',
 	 ":'-("	=> 'triste.png',
-	 ":’-("	=> 'triste.png',
+	 ":&#8217;-("	=> 'triste.png',
 	 ":-("	=> 'triste.png',
 	 ':o)'	=> 'rigolo.png',
 	 'B-)'	=> 'lunettes.png',
@@ -71,6 +70,8 @@ function tweak_rempl_smileys($texte) {
 	$smileys_rempl = unserialize($GLOBALS['meta']['tweaks_smileys']);
 	// smileys a probleme :
 	$texte = str_replace(':->', ':-&gt;', $texte);
+	$texte = str_replace(':’-', ':-&#8217;', $texte);
+	// voila, on remplace tous les smileys d'un coup...
 	$texte = str_replace($smileys_rempl[0], $smileys_rempl[1], $texte);
 	// accessibilite : alt et title avec le smiley en texte
 	while(preg_match('`@@64@@([^@]*)@@65@@`', $texte, $regs)) $texte = str_replace('@@64@@'.$regs[1].'@@65@@', base64_decode($regs[1]), $texte);
