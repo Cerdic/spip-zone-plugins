@@ -1,6 +1,6 @@
 <?php
 
-// Tweak SMILEYS - 25 décembre 2006
+// Tweak SMILEYS - 25 dcembre 2006
 // serieuse refonte 2006 : Patrice Vanneufville
 // Toutes les infos sur : http://www.spip-contrib.net/?article1561
 
@@ -15,10 +15,11 @@ function smileys_installe() {
 	 ':-))'	=> 'mort_de_rire.png',
 	 ':))'	=> 'mort_de_rire.png',
 	 ":'-))"=> 'pleure_de_rire.png',
-	 ":’-))"=> 'pleure_de_rire.png',
+	 ":-))"=> 'pleure_de_rire.png',
 	
 	// les simples :
 	// ':->'	=> 'diable.png',	// remplace par le suivant...
+	// attention ' est diffÃ©rent de â€™ (SPIP utilise/Ã©crit ce dernier)
 	 ':-&gt;' => 'diable.png',
 	 ':-('	=> 'pas_content.png',
 	 ':-D'	=> 'mort_de_rire.png',
@@ -26,10 +27,15 @@ function smileys_installe() {
 	 '|-)'	=> 'rouge.png',
 	 ":'-)"=> 'pleure_de_rire.png',
 	 ":'-D"	=> 'pleure_de_rire.png',
+	 ":â€™-)"=> 'pleure_de_rire.png',
+	 ":â€™-))"=> 'pleure_de_rire.png',
+	 ":â€™-)"=> 'pleure_de_rire.png',
+	 ":â€™-D"	=> 'pleure_de_rire.png',
 	 ":'-("	=> 'triste.png',
-	 ":’-)"=> 'pleure_de_rire.png',
-	 ":’-D"	=> 'pleure_de_rire.png',
-	 ":’-("	=> 'triste.png',
+	 ":â€™-("	=> 'triste.png',
+	 ":-)"=> 'pleure_de_rire.png',
+	 ":-D"	=> 'pleure_de_rire.png',
+	 ":-("	=> 'triste.png',
 	 ':o)'	=> 'rigolo.png',
 	 'B-)'	=> 'lunettes.png',
 	 ';-)'	=> 'clin_d-oeil.png',
@@ -57,7 +63,7 @@ function smileys_installe() {
 		$espace = strlen($smy)==2?' ':'';
 		$smileys2[0][] = $espace.$smy;
 		list(,,,$size) = @getimagesize("$path/$val");
-		$smileys2[1][] = $espace."<img alt=\"$alt\" title=\"$alt\" class=\"no_image_filtrer\" src=\"".tweak_htmlpath($path)."/$val\" $size/>";
+		$smileys2[1][] = "<img alt=\"$alt\" title=\"$alt\" class=\"no_image_filtrer\" src=\"".$path."/$val\" $size/>";
 	}
 	ecrire_meta('tweaks_smileys', serialize($smileys2));
 	ecrire_metas();
@@ -72,7 +78,7 @@ function tweak_rempl_smileys($texte) {
 	$texte = str_replace($smileys_rempl[0], $smileys_rempl[1], $texte);
 	// accessibilite : alt et title avec le smiley en texte
 	while(preg_match('`@@64@@([^@]*)@@65@@`', $texte, $regs)) $texte = str_replace('@@64@@'.$regs[1].'@@65@@', base64_decode($regs[1]), $texte);
-//tweak_log('smileys traités : '.$texte);
+//tweak_log('smileys traits : '.$texte);
 	return $texte;
 }
 
@@ -80,7 +86,7 @@ function tweak_smileys_pre_typo($texte) {
 	if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
 	if (!isset($GLOBALS['meta']['tweaks_smileys']) || $GLOBALS['var_mode'] == 'recalcul' || $GLOBALS['var_mode']=='calcul')
 		smileys_installe();
-//tweak_log('smileys trouvés !');
+//tweak_log('smileys trouvs !');
 	return tweak_exclure_balises('html|code|cadre|frame|script|acronym|cite', 'tweak_rempl_smileys', $texte);
 }
 ?>
