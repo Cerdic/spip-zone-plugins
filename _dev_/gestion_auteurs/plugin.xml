@@ -1,0 +1,36 @@
+<plugin>
+<nom>
+    gestion_auteurs
+</nom>
+<auteur>
+    cy_altern, toggg
+	(c) 2007 - Licence LGPL
+</auteur>
+<version>
+    0.0.0
+</version>
+<etat>
+    experimental
+</etat>
+<description>
+    Un pot-pourri pour g&eacute;rer les auteurs, les visiteurs et administrateurs restreints.
+    Ce plugin reprend les fonctionalit&eacute;s de cdv2spip
+    Il permet de r&#233;aliser l'int&#233;gration d'auteurs et administrateurs restreints &#224; partir de fichiers CSV. 
+	Ce plugin g&#232;re &#233;galement la cr&#233;ation de rubriques pour les admins restreints
+	ainsi que la cr&#233;ation de groupes pour les restrictions d'acc&#232;s (plugin acces_groupes).
+	Il permet aussi la suppression des utilisateurs qui ne seraient plus souhait&#233;s avec &#233;ventuellement la sauvegarde/gestion de leurs articles.
+</description>
+<lien>
+	[D&eacute;veloppement->http://trac.rezo.net/trac/spip-zone/wiki/GestionAuteurs]
+</lien>
+<prefix>
+    gestion_auteurs
+</prefix>
+<icon>
+	img_pack/gestion_auteurs-24.png
+</icon>
+<!-- pipeline>
+	<nom>ajouter_boutons</nom>
+    <inclure>gestion_auteurs_pipelines.php</inclure>
+</pipeline -->
+</plugin>
