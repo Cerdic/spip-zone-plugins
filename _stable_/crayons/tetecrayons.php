@@ -16,7 +16,7 @@ function analyse_droits_rapide_dist() {
 // Le pipeline header_prive (pour y tester les crayons)
 function Crayons_insert_head($head) {
     // Pages crayonnables
-    if (!in_array(_request('exec'), array('articles')))
+    if (!in_array(_request('exec'), array( /* 'articles', 'etc...' */ )))
         return $head;
 
     // Est-on autorise ?
