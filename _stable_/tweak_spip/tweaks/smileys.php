@@ -40,7 +40,7 @@ function smileys_installe() {
 	 ':-/'	=> 'mouais.png',
 	 ':-o'	=> 'surpris.png',
 	 ':-O'	=> 'surpris.png',
-	
+
 	// les courts : tester a l'usage...
 	// attention : ils ne sont reconnus que s'il y a un espace avant !
 	 ':)'	=> 'sourire.png',
@@ -69,8 +69,8 @@ function tweak_rempl_smileys($texte) {
 	if (strpos($texte, ':')===false && strpos($texte, ')')===false) return $texte;
 	$smileys_rempl = unserialize($GLOBALS['meta']['tweaks_smileys']);
 	// smileys a probleme :
-	$texte = str_replace(':->', ':-&gt;', $texte);
-	$texte = str_replace(':’-', ':-&#8217;', $texte);
+	$texte = str_replace(':->', ':-&gt;', $texte); // remplacer > par &gt;
+	$texte = str_replace(':'.chr(146).'-', ':&#8217;-', $texte); // remplacer ’ (apostrophe curly) par &#8217;
 	// voila, on remplace tous les smileys d'un coup...
 	$texte = str_replace($smileys_rempl[0], $smileys_rempl[1], $texte);
 	// accessibilite : alt et title avec le smiley en texte
