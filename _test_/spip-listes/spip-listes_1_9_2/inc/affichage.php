@@ -638,7 +638,7 @@ function spiplistes_afficher_auteurs($query, $url){
 			echo '</td><td>';
 			if ($row['messagerie'] == 'oui' AND $row['login']
 			  AND $activer_messagerie != "non" AND $connect_activer_messagerie != "non" AND $messagerie != "non")
-				echo bouton_imessage($row['id_auteur'],"force")."&nbsp;";
+				echo 'erreur'; // bouton_imessage($row['id_auteur'],"force")."&nbsp;";
 			if ($connect_statut=="0minirezo"){
 				if (strlen($row['email'])>3)
 					echo "<a href='mailto:".$row['email']."'>"._T('lien_email')."</a>";
