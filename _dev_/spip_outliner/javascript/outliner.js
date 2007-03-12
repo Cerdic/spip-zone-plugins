@@ -2,6 +2,17 @@ function init_events(){
 	$('td').click(function(){	$(this).selectRow();	});
 	$('th').click(function(){	$(this).selectCol();	});
 	$('img.noeud').click(function(){	$(this).toggleLine();	});
+	update_toolbar_icones();
+}
+function update_toolbar_icones(){
+	if (row_selected!=undefined)
+		$('#toolbar a.MoveLeft,#toolbar a.MoveRight,#toolbar a.RemoveItem').removeClass('inactif');
+	else
+		$('#toolbar a.MoveLeft,#toolbar a.MoveRight,#toolbar a.RemoveItem').addClass('inactif');
+	if (col_selected!=undefined)
+		$('#toolbar a.AddColumn,#toolbar a.RemoveColumn').removeClass('inactif');
+	else
+		$('#toolbar a.AddColumn,#toolbar a.RemoveColumn').addClass('inactif');
 }
 // selectionne une ligne
 var row_selected=undefined;
@@ -17,6 +28,7 @@ function unselect_all(){
 jQuery.fn.selectRow = function() {
 	unselect_all();
 	row_selected = this.parents('tr.row');
+	update_toolbar_icones();
 	return this
   .parents('tr.row')
     .addClass('row_sel');
@@ -26,6 +38,7 @@ jQuery.fn.selectCol = function() {
 	col_selected = this.attr('class');
 	$('td.'+col_selected).addClass('col_sel');
 	$('th.'+col_selected).addClass('col_sel');
+	update_toolbar_icones();
 	return this;
 }
 

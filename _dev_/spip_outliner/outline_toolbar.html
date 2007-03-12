@@ -28,22 +28,22 @@
 <a href='#' onclick='ExpandAll();return false;' title='<:outliner:tout_developper:>' class='ExpandAll' >
 <img src='#CHEMIN{img_pack/ExpandAll.png}' width='64' height='64' alt='<:outliner:tout_developper:>' />
 </a>
-<a href='#' onclick='MoveLeft();return false;' title='<:outliner:reduire_niveau:>' class='MoveLeft'>
+<a href='#' onclick='MoveLeft();return false;' title='<:outliner:reduire_niveau:>' class='MoveLeft inactif'>
 <img src='#CHEMIN{img_pack/MoveLeft.png}' width='64' height='64' alt='<:outliner:reduire_niveau:>' />
 </a>
-<a href='#' onclick='MoveRight();return false;' title='<:outliner:augmenter_niveau:>' class='MoveRight'>
+<a href='#' onclick='MoveRight();return false;' title='<:outliner:augmenter_niveau:>' class='MoveRight inactif'>
 <img src='#CHEMIN{img_pack/MoveRight.png}' width='64' height='64' alt='<:outliner:augmenter_niveau:>' />
 </a>
 <a href='[(#URL_PAGE{'','action=outline_add_row'}|parametre_url{redirect,#SELF|urlencode})&amp;arg=#ENV{id_table}]' onclick='return AddItem(this);' title='<:outliner:ajouter_ligne:>' class='AddItem'>
 <img src='#CHEMIN{img_pack/AddItem.png}' width='64' height='64' alt='<:outliner:ajouter_ligne:>' />
 </a>
-<a href='[(#URL_PAGE{'','action=outline_supp_row'}|parametre_url{redirect,#SELF|urlencode})&amp;arg=#ENV{id_table}]' onclick='return RemoveItem(this);' title='<:outliner:supprimer_ligne:>' class='RemoveItem'>
+<a href='[(#URL_PAGE{'','action=outline_supp_row'}|parametre_url{redirect,#SELF|urlencode})&amp;arg=#ENV{id_table}]' onclick='return RemoveItem(this);' title='<:outliner:supprimer_ligne:>' class='RemoveItem inactif'>
 <img src='#CHEMIN{img_pack/RemoveItem.png}' width='64' height='64' alt='<:outliner:supprimer_ligne:>' />
 </a>
-<a href='[(#URL_PAGE{'','action=outline_add_col'}|parametre_url{redirect,#SELF|urlencode})&amp;arg=#ENV{id_table}]' onclick='return AddColumn(this);' title='<:outliner:ajouter_colonne:>' class='AddColumn'>
+<a href='[(#URL_PAGE{'','action=outline_add_col'}|parametre_url{redirect,#SELF|urlencode})&amp;arg=#ENV{id_table}]' onclick='return AddColumn(this);' title='<:outliner:ajouter_colonne:>' class='AddColumn inactif'>
 <img src='#CHEMIN{img_pack/AddColumn.png}' width='64' height='64' alt='<:outliner:ajouter_colonne:>' />
 </a>
-<a href='[(#URL_PAGE{'','action=outline_supp_col'}|parametre_url{redirect,#SELF|urlencode})&amp;arg=#ENV{id_table}]' onclick='return RemoveColumn(this);' title='<:outliner:supprimer_colonne:>' class='RemoveColumn'>
+<a href='[(#URL_PAGE{'','action=outline_supp_col'}|parametre_url{redirect,#SELF|urlencode})&amp;arg=#ENV{id_table}]' onclick='return RemoveColumn(this);' title='<:outliner:supprimer_colonne:>' class='RemoveColumn inactif'>
 <img src='#CHEMIN{img_pack/RemoveColumn.png}' width='64' height='64' alt='<:outliner:supprimer_colonne:>' />
 </a>
 </div>
