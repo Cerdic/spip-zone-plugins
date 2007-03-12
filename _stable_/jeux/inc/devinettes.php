@@ -86,7 +86,7 @@ function jeux_devinettes($texte, $indexJeux) {
 	 if ($valeur==_JEUX_TITRE) $html .= devinettes_titre($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_DEVINETTE) $html .= devinettes_devinette($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_CHARADE) $html .= devinettes_charade($tableau[$i+1]);
-	  elseif ($valeur==_JEUX_REPONSE) $html .= devinettes_reponse($tableau[$i+1], "devinettes_$indexJeux_$i");
+	  elseif ($valeur==_JEUX_REPONSE) $html .= devinettes_reponse($tableau[$i+1], "devinettes_{$indexJeux}_$i");
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
   }
   return $html;

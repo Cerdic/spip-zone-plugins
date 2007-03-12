@@ -64,7 +64,7 @@ function jeux_rebus($texte, $indexJeux) {
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $html .= rebus_titre($tableau[$i+1]);
 	  elseif ($valeur==_JEUX_REBUS) $html .= rebus_rebus($tableau[$i+1]);
-	  elseif ($valeur==_JEUX_SOLUTION) $html .= rebus_reponse($tableau[$i+1], "rebus_$indexJeux_$i");
+	  elseif ($valeur==_JEUX_SOLUTION) $html .= rebus_reponse($tableau[$i+1], "rebus_{$indexJeux}_$i");
 	  elseif ($valeur==_JEUX_TEXTE) $html .= $tableau[$i+1];
   }
   return $html;

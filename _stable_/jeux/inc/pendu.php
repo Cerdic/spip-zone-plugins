@@ -71,8 +71,8 @@ function affiche_un_clavier($indexJeux) {
  $clav = preg_split('//', _T('jeux:alphabet'), -1, PREG_SPLIT_NO_EMPTY);
  foreach ($clav as $i=>$lettre) $clav[$i] = "<input class=\"jeux_bouton pendu_clavier\" type=\"button\" name=\"$lettre\" value=\"$lettre\" onclick=\"pendu_trouve('$lettre', '$indexJeux');\">";
  $i = floor(count($clav)/2);
-//echo "<br>etat:$etat"; print_r($img);
- return "\n<table class=\"pendu_clavier\" border=0><tr><td td class=\"pendu_clavier\" >".join('', array_slice($clav, 0, $i)).'<br>'.join('', array_slice($clav, $i)).'</td></tr></table>';
+ $clav = join('', array_slice($clav, 0, $i)) . "<br />\n" . join('', array_slice($clav, $i));
+ return "\n<table class=\"pendu_clavier\" border=0><tr><td class=\"pendu_clavier\" >$clav</td></tr></table>";
 }
 
 // fonction principale 
