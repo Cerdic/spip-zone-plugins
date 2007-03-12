@@ -238,3 +238,4 @@ div.spip_forms p.spip_form_ok, div.spip_forms p.spip_form_erreur, div.spip_forms
 span.nettoyeur{
 	clear:both;line-height:1px;font-size:1px;display:block;
 }
+span.erreur { display:block;}
