@@ -1,0 +1,117 @@
+<div id="map" name="map" style="width: 700px; height: 400px; top:0px"></div>
+	<script type="text/javascript">
+	//<![CDATA[
+	var html = '';
+	function getNodeText(node){
+       	return node.text || node.firstChild ? node.firstChild.nodeValue : "";
+	}
+	function createMap(){
+       	map = new GMap2(document.getElementById("map"));
+        map.addControl(new GLargeMapControl());
+   		map.addControl(new GMapTypeControl());
+  		map.setCenter(new GLatLng([(#ENV{lonxit,42.94})], [(#ENV{latit,-8.228})]), [(#ENV{zoom,7})], G_SATELLITE_MAP);
+  		map.enableDoubleClickZoom();
+   		map.enableContinuousZoom();
+	}
+	function verNodos(objeto){
+       	$("item", objeto).each(function(item){
+			//primero buscamos dentro del objeto xml almacenado en xml todos los nodos "item"
+			//en la variable item se almacena la posicion del "item" actual en el array de items y asi podemos recorrerlos con facilidad
+			var marker = objeto.documentElement.getElementsByTagName("item")[item];
+			//en la variable marker se almacena el contenido de cada nodo "item"
+			//esta funcion recorre los nodos que hay dentro de cada item y devuelve su nombre y su contenido gracias a la funcion getnodeText
+			var text = "";
+			for (var i = 0; i < marker.childNodes.length; i++) {
+				text += marker.childNodes[i].tagName + ": " + getNodeText(marker.childNodes[i]) + ", "; 
+			}
+			//alert(text);
+		});
+	}
+	function createMarker(point, html, icon, son) {
+		var marker = new GMarker(point, icon);
+		//alert("marcador " + point);
+		GEvent.addListener(marker, "click", function() {
+			marker.openInfoWindowHtml(html);
+			// only call this when the info window is open...(esta parte del codigo llama a un objeto flah creado con flashobject.js)
+			//alert("#URL_SITE_SPIP/plugins/gis/img_pack/musicplayer.swf?autoplay=true&song_url="+son);
+			
+			if (son){
+			GEvent.addListener(map,"infowindowopen", function() {
+				var fo = new FlashObject("#URL_SITE_SPIP/plugins/gis/img_pack/musicplayer.swf?autoplay=true&song_url="+son, "player_x", "17", "17", "6", "#FFFFFF");
+				fo.write("player");
+				//initLightbox(); para usar light box hai que lincalo se non esta correcto devolve un erro de javascript e proboca o problema dos sons repetidos
+			});
+			GEvent.addListener(map,"infowindowclose", function() {
+				//var fo = null;
+			});
+			}
+			
+		});
+		//gmarkers[i] = marker;	
+		return marker;
+	}
+	function crearMarcadores(objeto){
+        $("item", objeto).each(function(item){
+			//primero buscamos dentro del objeto xml almacenado en xml todos los nodos "item"
+			//en la variable item se almacena la posicion del "item" actual en el array de items y asi podemos recorrerlos con facilidad
+				
+			var marker = objeto.documentElement.getElementsByTagName("item")[item];
+			//en la variable marker se almacena el contenido de cada nodo "item"
+			
+			// obtemos os atributos de cada un dos marcadores  + ", " + html lat + ", " + lng + ", " + 
+    		var lat = parseFloat(getNodeText(marker.childNodes[5]));
+    		
+    		var lng = parseFloat(getNodeText(marker.childNodes[6]));
+    		
+    		var son = marker.childNodes[7].getAttribute("url");
+    		
+    		//var html = getNodeText(marker.childNodes[3]) + "#URL_SITE_SPIP/plugins/gis/img_pack/musicplayer.swf?autoplay=true&song_url=" + son;
+    		var html = getNodeText(marker.childNodes[3]);
+   			var point = new GPoint(lat,lng);
+			var icono_categoria = new GIcon();
+			icono_categoria.image = "#URL_SITE_SPIP/plugins/gis/img_pack/correxir.png";
+			icono_categoria.shadow = "#URL_SITE_SPIP/plugins/gis/img_pack/shadow.png";
+			icono_categoria.iconSize = new GSize(20, 34);
+			icono_categoria.shadowSize = new GSize(22, 20);	
+			icono_categoria.iconAnchor = new GPoint(10, 34);
+			icono_categoria.infoWindowAnchor = new GPoint(5, 1);
+			
+			//alert(getNodeText(marker.childNodes[6]) + " " + getNodeText(marker.childNodes[7]) + " " +  marker.childNodes[5].getAttribute("url") + " " + getNodeText(marker.childNodes[3]));
+   			//alert (point + " " + html + " " + icono_categoria + " " + son);
+   		
+    		// create the marker
+    		var marker = createMarker(point, html, icono_categoria, son);
+    		map.addOverlay(marker);
+    			
+    		//na posicion adecuada do array gmarkers recollemos o marcador
+    		gmarkers[item] = marker;
+    		htmls[item] = html;
+    		sonsurl[item] = son;
+    			
+		});
+	}
+	//recollemos nuha variable todos os marcadores
+	var gmarkers = [];
+	var htmls = [];
+	var sonsurl = [];
+	
+	$(document).ready(
+		function() {
+    		if (GBrowserIsCompatible()) {
+    			// facelo mapa
+    			createMap();
+  				//leemo-lo documento dos marcadores
+       			$.get('[(#URL_PAGE{rss-gis})[&id_mot=(#ID_MOT)][&id_auteur=(#ID_AUTEUR)][&recherche=(#RECHERCHE)][&id_article=(#ID_ARTICLE)]]', function(xml){
+    				//xml almacena en un objeto xml los datos recogidos del documento leido
+   					//verNodos(xml);
+   					//alert("hola");
+   					//alert(xml);
+   					crearMarcadores(xml);
+   				});	
+        		
+    		
+   			}
+		}
+	);
+	//]]>
+	</script>

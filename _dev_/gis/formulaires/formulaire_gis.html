@@ -1,0 +1,265 @@
+<div id="formMap" name="formMap" style="width: 794px; height: 350px"></div>
+<div id="adress" style="position:relative; top:-30px; left: 10px; display:none;">
+    <form action="#" onsubmit="showAddress(this.address.value); return false">
+		<nobr><input size="40" name="address" value="calle, ciudad, pais" type="text"> <input value="Go!" type="submit"></nobr>
+	</form>
+</div>
+<script type="text/javascript">
+
+//<![CDATA[
+
+
+
+var letraNH = String.fromCharCode(241);
+
+var letraNHNH = String.fromCharCode(209);
+
+var letraAacute = String.fromCharCode(225);
+
+var letraAAacute = String.fromCharCode(193);
+
+var letraEacute = String.fromCharCode(233);
+
+var letraEEacute = String.fromCharCode(201);
+
+var letraIacute = String.fromCharCode(237);
+
+var letraIIacute = String.fromCharCode(205);
+
+var letraOacute = String.fromCharCode(243);
+
+var letraOOacute = String.fromCharCode(211);
+
+var letraUacute = String.fromCharCode(250);
+
+var letraUUacute = String.fromCharCode(218);
+
+
+
+arraycomarcas = new Array();
+
+arrayidcomarcas = new Array();
+
+
+
+comarcas = "escolle unha comarca";
+
+arraycomarcas[0] = comarcas;
+
+arrayidcomarcas[0] = "";
+
+
+
+arraycomarcas[1] = new Array(<BOUCLE_lugo(MOTS){id_groupe=5}{par titre}{", "}>["(#TITRE)"]</BOUCLE_lugo>);
+
+arrayidcomarcas[1] = new Array(<BOUCLE_lugo2(MOTS){id_groupe=5}{par titre}{", "}>["(#ID_MOT)"]</BOUCLE_lugo2>);
+
+
+
+arraycomarcas[2] = new Array(<BOUCLE_coruna(MOTS){id_groupe=3}{par titre}{", "}>["(#TITRE)"]</BOUCLE_coruna>);
+
+arrayidcomarcas[2] = new Array(<BOUCLE_coruna2(MOTS){id_groupe=3}{par titre}{", "}>["(#ID_MOT)"]</BOUCLE_coruna2>);
+
+
+
+arraycomarcas[3] = new Array(<BOUCLE_ourense(MOTS){id_groupe=6}{par titre}{", "}>["(#TITRE)"]</BOUCLE_ourense>);
+
+arrayidcomarcas[3] = new Array(<BOUCLE_ourense2(MOTS){id_groupe=6}{par titre}{", "}>["(#ID_MOT)"]</BOUCLE_ourense2>);
+
+
+
+arraycomarcas[4] = new Array(<BOUCLE_pontevedra(MOTS){id_groupe=7}{par titre}{", "}>["(#TITRE)"]</BOUCLE_pontevedra>);
+
+arrayidcomarcas[4] = new Array(<BOUCLE_pontevedra2(MOTS){id_groupe=7}{par titre}{", "}>["(#ID_MOT)"]</BOUCLE_pontevedra2>);
+
+
+
+function cambiaProvincia() {	
+
+	var selectedProvincia  = document.forms.formulaire_gis.provincias[document.forms.formulaire_gis.provincias.selectedIndex].value;
+
+
+
+	if (selectedProvincia == "0"){
+
+		document.forms.formulaire_gis.comarcas.length = 1;
+
+		document.forms.formulaire_gis.comarcas.options[0].value = 0;
+
+		document.forms.formulaire_gis.comarcas.options[0].text = arraycomarcas[0];
+
+	} else {
+
+		document.forms.formulaire_gis.comarcas.length = 1;
+
+		document.forms.formulaire_gis.comarcas.length = arraycomarcas[selectedProvincia].length + 1;
+
+		for(i=0; i<arraycomarcas[selectedProvincia].length; i++){
+
+			document.forms.formulaire_gis.comarcas.options[i+1].value = arrayidcomarcas[selectedProvincia][i];
+
+			document.forms.formulaire_gis.comarcas.options[i+1].text = arraycomarcas[selectedProvincia][i];
+
+		}
+
+	}
+
+}
+
+
+
+fecha = new Date();
+
+if (GBrowserIsCompatible()) {
+
+
+
+    // create the map
+
+    var map = new GMap2(document.getElementById("formMap"));
+
+    map.addControl(new GLargeMapControl());
+
+    map.addControl(new GMapTypeControl());
+
+    map.setCenter(new GLatLng(42.95,-7.9), 8, G_MAP_TYPE);
+
+
+
+    // creamos el evento para crear nuevos marcadores
+
+    GEvent.addListener(map, "click", function(overlay, point){
+
+	map.clearOverlays();
+
+	if (point) {
+
+		map.addOverlay(new GMarker(point));
+
+		map.panTo(point);
+
+		document.forms.formulaire_gis.lat.value = point.x;
+
+		document.forms.formulaire_gis.lonx.value = point.y;
+
+	}
+
+    });
+
+
+
+} else {
+
+    alert("Sorry, the Google Maps API is not compatible with this browser");
+
+}
+
+//]]>
+
+</script>            
+
+<form action="[(#ENV{url})]" method="post"  name="formulaire_gis" id="Formulaire_gis" enctype="multipart/form-data">
+
+	[(#ENV*{previsu})	]
+
+	<fieldset>
+
+		<input type="text" name="lat" size="20">Latitude</br>
+
+		<input type="text" name="lonx" size="20">Lonxitude
+
+	</fieldset>
+
+	<fieldset>
+
+		<select name="mot">
+
+    	<option value="0">escolle unha categoria</option>
+
+   		<BOUCLE_mots(MOTS){id_groupe=4}>
+
+      	<option value="#ID_MOT">#TITRE</option>
+
+      	</BOUCLE_mots>
+
+      	</select><br>
+
+		<select name="provincias" onchange="cambiaProvincia()">
+
+    	<option value="">escolle unha provincia</option>
+
+   		<BOUCLE_provincias(MOTS){id_groupe=1}>
+
+      	<option value="#ID_MOT">#TITRE</option>
+
+      	</BOUCLE_provincias>
+
+      	</select><br>
+
+		<select id="comarcas" name="comarcas">
+
+    	<option value="">escolle unha comarca</option>
+
+      	</select>
+
+	</fieldset>
+
+	
+
+	id do artigo: [(#ENV*{id_article})]
+
+	
+
+	<input name='doc' type='file' class='fondl' style='width: 100%;'><br>
+
+	<input type=radio name="type" value="vignette">&nbsp;<:opconfig:image_inclusion:><br>
+
+	<input type=radio name="type" value="document" checked>&nbsp;<:opconfig:document_inclusion:><br>
+
+
+
+	<div><input type="file" accept="image/*" id="commentimg" name="commentimg"></input>Imaxe</div>
+
+	<div><input type="file" accept="audio/*" id="commentsound" name="commentsound">Son</input></div>
+
+	<input type="hidden" name="auteur" size="20" value="#SESSION{id_auteur}"><br>
+
+	
+	<fieldset>
+
+		[(#ENV*{formulaire_date})]
+
+		<input class="id_rubrique" type="hidden" name="titre" value="[(#ENV*{id_rubrique})]"  size="50">
+
+		<input class="id_rubrique" type="hidden" name="statut" value="publie" >
+
+	
+
+		<label><:texte_titre_obligatoire:></label>
+
+		<input  type="text" name="titre" value="[(#ENV**{titre})]"  size="50"><br>		
+
+						
+
+		<label>#CHAPO</label>
+
+		<textarea class="chapo" name="chapo" cols="25" rows="5">[(#ENV*{chapo})]</textarea>
+
+		
+
+	   <label>#TEXTO</label>
+
+		[(#ENV*{texte}|barre_article)]
+
+
+
+	</fieldset>
+
+
+
+	<div align="right"><input type="submit" name="valider" class="spip_bouton" value="<:valider:>" /></div>
+
+  </fieldset>
+
+</form>
+

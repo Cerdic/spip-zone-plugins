@@ -1,0 +1,32 @@
+#CACHE{1}
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
+<?php echo '<' ?>?xml version="1.0"[ encoding="(#CHARSET)"]?>
+
+<rss  version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" 
+xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" 
+xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+
+
+<channel>
+	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+	<link>#URL_SITE_SPIP/</link>
+	<description>[(#DESCRIPTIF_SITE_SPIP|texte_backend)]</description>
+    <itunes:category text="Music"/>
+    <itunes:owner>
+		<itunes:name>[(#NOM_SITE_SPIP|texte_backend)]</itunes:name>
+		<itunes:email>#EMAIL_WEBMASTER</itunes:email>
+	</itunes:owner>
+	<itunes:explicit>no</itunes:explicit>
+	<language>#LANG</language>
+	<BOUCLE_un_article(ARTICLES){id_mot ?}{id_auteur ?}{recherche ?}{id_article ?}{id_rubrique=1}{par date}{inverse}><item>
+	<title>[(#TITRE|supprimer_numero|texte_backend)]</title>[<guid isPermaLink="true">(#URL_ARTICLE|url_absolue)</guid>]<description>&lt;div style='width:200px'&gt;
+			&lt;div id='player'&gt;&lt;/div&gt;
+			&lt;span class='windowText'&gt; #CHAPO &lt;/span&gt;
+			&lt;br&gt;&lt;br&gt;
+			<BOUCLE_imaxe(DOCUMENTS){id_article}{mode=document}{extension==jpg|png|gif}{0,1}>&lt;a href='#URL_DOCUMENT' title='ad' class='thickbox'&gt;&lt;img src='[(#URL_DOCUMENT|url_absolue)]' border='0' height='60' alt='Single Image'&gt;&lt;/a&gt;</BOUCLE_imaxe>
+			&lt;br&gt;
+			&lt;small&gt;[(#DATE|affdate_jourcourt)]<BOUCLE_autores(AUTEURS){id_article}>[, <:par_auteur:> (#NOM)]</BOUCLE_autores>&lt;/small&gt;
+			&lt;br&gt;
+			&lt;/div&gt;</description>[<pubDate>(#DATE|date_iso)</pubDate>]<BOUCLE_gis(GIS){id_article}><geo:lat>#LAT</geo:lat><geo:long>#LONX</geo:long></BOUCLE_gis><BOUCLE_mp3(DOCUMENTS){id_article}{mode=document}{extension=mp3}{0,1}><enclosure url="[(#URL_DOCUMENT|url_absolue)]" type="audio/mpeg" /></BOUCLE_mp3><B_tags1><geo:icon><BOUCLE_tags1(MOTS){id_article}{id_groupe=4}>[#URL_SITE_SPIP/IMG/(#LOGO_MOT|fichier)]</BOUCLE_tags1></geo:icon></B_tags1><B_tags><dc:subject><BOUCLE_tags(MOTS){id_article}>#TITRE</BOUCLE_tags></dc:subject></B_tags>[<itunes:author>(#LESAUTEURS|supprimer_tags|texte_backend)</itunes:author>][<itunes:summary>(#DESCRIPTIF|couper{80})</itunes:summary>]<itunes:duration>00:00:00</itunes:duration><BOUCLE_img(DOCUMENTS){id_article}{mode=document}{extension==jpg|png|gif}{0,1}>[<itunes:image href="(#URL_DOCUMENT|url_absolue)" />]</BOUCLE_img>[<dc:language>(#LANG)</dc:language>][<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]</item></BOUCLE_un_article>
+</channel>
+</rss>
