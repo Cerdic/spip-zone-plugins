@@ -18,7 +18,7 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 	</itunes:owner>
 	<itunes:explicit>no</itunes:explicit>
 	<language>#LANG</language>
-	<BOUCLE_un_article(ARTICLES){id_mot ?}{id_auteur ?}{recherche ?}{id_article ?}{id_rubrique=1}{par date}{inverse}><item>
+	<BOUCLE_un_article(ARTICLES){id_rubrique ?}{id_mot ?}{id_auteur ?}{recherche ?}{id_article ?}{par date}{inverse}><item>
 	<title>[(#TITRE|supprimer_numero|texte_backend)]</title>[<guid isPermaLink="true">(#URL_ARTICLE|url_absolue)</guid>]<description>&lt;div style='width:200px'&gt;
 			&lt;div id='player'&gt;&lt;/div&gt;
 			&lt;span class='windowText'&gt; #CHAPO &lt;/span&gt;
