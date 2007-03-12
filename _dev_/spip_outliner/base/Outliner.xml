@@ -2,8 +2,8 @@
 <forms>
 <form>
 	<id_form>29</id_form>
-	<titre>Un Outliner</titre>
-	<descriptif>Arbo de riec</descriptif>
+	<titre>Outliner</titre>
+	<descriptif>descriptif</descriptif>
 	<type_form>outline</type_form>
 	<modifiable>oui</modifiable>
 	<multiple>oui</multiple>

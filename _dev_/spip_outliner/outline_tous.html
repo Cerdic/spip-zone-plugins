@@ -6,7 +6,7 @@
 [<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
 <INCLURE{fond=inc-head}>
 <link rel="stylesheet" href="[(#CHEMIN{outliner.css})]" type="text/css" media="all" />
-<script type='text/javascript' src='#CHEMIN{javascript/outliner.js}'></script>
+<script type='text/javascript' src='#CHEMIN{javascript/outline_tous.js}'></script>
 <script type='text/javascript'><!--
 var img_noeud_plus='#EVAL{_DIR_IMG_PACK}noeud_plus.gif';
 var img_noeud_moins='#EVAL{_DIR_IMG_PACK}noeud_moins.gif';
@@ -14,14 +14,22 @@ var img_noeud_moins='#EVAL{_DIR_IMG_PACK}noeud_moins.gif';
 </script>
 </head>
 
-<body class="outliner">
+<body class="outline_tous">
 [(#INCLUDE{fond=outline_toolbar})]
-<div id="outline">
+<div id="outline_tous">
 
 <BOUCLE_tous(FORMS){type_form=outline}>
-<a href='#URL_PAGE{outline,id_table=#ID_FORM}'><img src='#CHEMIN{img_pack/outliner.png}' width='64' height='64' />#TITRE</a>
+<dl id='#ID_FORM' class='outline_one' style='float:left;' name='#URL_PAGE{outline,id_table=#ID_FORM}' >
+<dt>
+[(#REM) <a href="#URL_PAGE{outline,id_table=#ID_FORM}" title='[(#TITRE|attribut_html)]'>]
+<img src='#CHEMIN{img_pack/outliner.png}' width='64' height='64' alt='[(#TITRE|attribut_html)]' />
+[(#REM)</a>]
+</dt>
+[<dt class='#EDIT{titre} spip_doc_titre' style='width:120px;'><strong>(#TITRE)</strong></dt>]
+[<dd class='#EDIT{descriptif} spip_doc_descriptif' style='width:120px;'>(#DESCRIPTIF)#NOTES</dd>]
+</dl>
 </BOUCLE_tous>
-
+<br class='nettoyeur' />
 #FORMULAIRE_ADMIN
 </div><!-- fin page -->
 </body>

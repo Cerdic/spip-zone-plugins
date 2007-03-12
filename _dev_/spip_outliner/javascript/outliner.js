@@ -107,24 +107,31 @@ function MoveLeft(){
 function MoveRight(){
 	$('tr.row_sel').changeLevel(1);
 }
-function actionItem(lien){
+function actionItem(lien,ajout){
 	href = $(lien).attr('href');
 	sel = $('tr.row_sel');
-	if (sel.size()==0) return false;
-	sel = sel.eq(0);
-	href = href+':'+sel.attr('id');
-	sel = sel.next('tr.row');
-	if (sel.size())
+	if (sel.size()==0){
+		if (!ajout) return false;
+		sel = $('tr.row:last');
+	}
+	if (sel.size()){
+		sel = sel.eq(0);
 		href = href+':'+sel.attr('id');
+		sel = sel.next('tr.row');
+		if (sel.size())
+			href = href+':'+sel.attr('id');
+		else
+			href = href+':0';
+	}
 	else
-		href = href+':0';
+		href = href+':0:0';
 	$(lien).attr('href',href);
 }
 function AddItem(lien){
-	return actionItem(lien)
+	return actionItem(lien,true)
 }
 function RemoveItem(lien){
-	return actionItem(lien)
+	return actionItem(lien,false)
 }
 
 function actionColumn(lien){
@@ -134,7 +141,7 @@ function actionColumn(lien){
 	sel = sel.eq(0);
 	sel.removeClass('col_sel');
 	href = href+':'+sel.attr('class');
-	sel.addClass('col.sel');
+	sel.addClass('col_sel');
 	sel = sel.next('th');
 	if (sel.size())
 		href = href+':'+sel.attr('class');

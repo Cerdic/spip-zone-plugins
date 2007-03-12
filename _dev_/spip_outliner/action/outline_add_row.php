@@ -23,7 +23,7 @@ function action_outline_add_row_dist()
 		if ($row = spip_fetch_array($res)) $rang = $row['rang'];
 	}
 	if ($id_donnee_prev>0)
-		$niveau = Forms_les_valeurs($id_form,$id_donnee_prev,'select_1'," ",true);
+		$niveau = Forms_les_valeurs($id_form,$id_donnee_prev,'select_1'," ",true,false);
 	$new = 0;
 	$c = array('ligne_1'=>_L("Nouvelle ligne"),"select_1"=>$niveau);
 	list($new,$erreur) = Forms_creer_donnee($id_form,$c);
