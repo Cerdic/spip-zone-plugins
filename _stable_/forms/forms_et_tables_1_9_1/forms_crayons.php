@@ -11,7 +11,7 @@
  *
  */
 
-// Crayons
+// Crayons sur les donnes
 function forms_donnee_valeur_colonne_table($table,$champ,$id_donnee){
 	include_spip("inc/forms");
 	$valeurs = Forms_valeurs($id_donnee,NULL,$champ);
@@ -33,6 +33,8 @@ function forms_champ_valeur_colonne_table($table,$champ,$id){
 
 	return 	$row[$champ];
 }
+
+// Crayons sur les champs
 function forms_champ_revision($id,$c=NULL){
 	$id = explode('-',$id);
 	$id_form = $id[0];
@@ -48,6 +50,24 @@ function forms_champ_revision($id,$c=NULL){
 	if (strlen($set)){
 		$set = substr($set,1);
 		spip_query("UPDATE spip_forms_champs SET $set WHERE id_form="._q($id_form)." AND champ="._q($form_champ));
+	}
+	return true;
+}
+
+// Crayons sur le form
+function form_revision($id,$c=NULL){
+	$id = explode('-',$id);
+	$id_form = $id[0];
+	$set = "";
+	foreach(array('titre','descriptif','texte','html_wrap') as $champ){
+		if ($v = _request($champ,$c)){
+			$set .= ",$champ="._q($v);
+		}
+	}
+
+	if (strlen($set)){
+		$set = substr($set,1);
+		spip_query("UPDATE spip_forms SET $set WHERE id_form="._q($id_form));
 	}
 	return true;
 }
