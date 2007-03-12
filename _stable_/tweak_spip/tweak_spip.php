@@ -286,12 +286,13 @@ tweak_log("tweak_initialisation($forcer) : Sortie - \$rand = $rand");
 // $texte est le texte d'origine
 // si $balises = '' alors la protection par defaut est : html|code|cadre|frame|script
 function tweak_exclure_balises($balises, $fonction, $texte){
+	if(!strlen($texte)) return '';
 	if (!function_exists($fonction)) {
 		spip_log("Erreur - tweak_exclure_balises() : $fonction() non definie !");
 		return $texte;
 	}
-	$balises = strlen($balises)?',<('.$balises.')(\s[^>]*)?>(.*?)</\1>,UimsS':'';
-	if ($GLOBALS['spip_version_code']<1.92 && $balises=='') $balises = ',<(html|code|cadre|frame|script)>(.*?)</\1>,UimsS';
+	if(!strlen($balises)) $balises = 'html|code|cadre|frame|script';
+	$balises = ',<('.$balises.')(\s[^>]*)?>(.*)</\1>,UimsS';
 	$texte = echappe_retour($fonction(echappe_html($texte, 'TWEAKS', true, $balises)), 'TWEAKS');
 	return $texte;
 }
