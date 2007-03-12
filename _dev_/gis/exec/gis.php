@@ -15,7 +15,7 @@ include_spip('base/abstract_sql');
 
 function exec_gis_dist(){
 	global $connect_statut;
-	debut_page(_T('Configuraci—n Gis'));
+	debut_page(_T('gis:configurar_gis'));
 
 // Google map KEY	
 	echo '<div align="center" style="width:700px;margin:20px">';
@@ -40,13 +40,13 @@ function exec_gis_dist(){
 		echo '<a href="http://www.google.com/apis/maps" target="_blank" ><img src="../'._DIR_PLUGIN_GIS.'img_pack/logo_google.gif" border="0" align="left" hspace="10" ></a>';
 		echo '<form name="googlemapkey" method="post" action="'.generer_url_ecrire('gis').'">';
 		echo '<br/>';
-		echo '<label>Google Map API Key <a href="http://www.google.com/apis/maps/signup.html" target="_blank" >(conseguir)</a></label> <input type="text" name="key" value="'.$row['value'].'" size="30" />';
+		echo '<label>Google Map API Key <a href="http://www.google.com/apis/maps/signup.html" target="_blank" >'._T('gis:conseguir').'</a></label> <input type="text" name="key" value="'.$row['value'].'" size="30" />';
 		echo '<input type="submit" name="ok" value="ok" />';
 		echo '</form>';
 		
 		if($_POST['ok']){
 			echo '<div align="center" style="margin:20px">';
-			echo 'Clave engadida: <code>'.$_POST['key'].'</code>';
+			echo ''._T('gis:clave_engadida').'<code>'.$_POST['key'].'</code>';
 			echo '</div>';
 		}
 		echo fin_cadre(true);

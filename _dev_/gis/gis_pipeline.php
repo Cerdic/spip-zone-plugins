@@ -16,7 +16,7 @@ function gis_ajouterBoutons($boutons_admin) {
 	if ($GLOBALS['connect_statut'] == "0minirezo") {
     // vese o bot—n na barra de "configuraci—n"
 	    $boutons_admin['configuration']->sousmenu['gis']= new Bouton(
-		    '../'._DIR_PLUGINS.'gis/img_pack/correxir.png', _T('Configurar Gis'));
+		    '../'._DIR_PLUGINS.'gis/img_pack/correxir.png', _T('gis:configurar_gis'));
 	}
 	return $boutons_admin;
 }
