@@ -42,23 +42,32 @@ function xml_creer_tables_temporaires(){
 		$nom = 'spip_xml';
 		$champs = $GLOBALS['tables_principales'][$nom]['field'];
 		$cles = $GLOBALS['tables_principales'][$nom]['key'];
-		spip_create_table($nom, $champs, $cles, true, true);
+		spip_mysql_create($nom, $champs, $cles, true, true);
 		
 	}
 }
 
-function xml_fill_table($xml_file){
+function xml_fill_table($xml_file, $is_code=false) {
 	static $file_done=array(''=>true);
-	if (isset($file_done[$xml_file])) return;
-	if (lire_fichier($f=find_in_path($xml_file),$contenu)!==false){
+
+	if($is_code) {
+		$key= md5($xml_file);
+	} else {
+		$key= $xml_file;
+	}
+	if (isset($file_done[$key])) return;
+
+	if(!$is_code && lire_fichier($f=find_in_path($xml_file),$contenu)!==false){
 		include_spip('inc/charset');
 		$contenu = transcoder_page($contenu);
-		include_spip('inc/plugin');
-		$tree = parse_plugin_xml($contenu);
-		spip_query("DELETE FROM spip_xml WHERE xml=".spip_abstract_quote($xml_file));
-		xml_recurse_parse_to_table($xml_file,'/',0,$tree);
-		$file_done[$xml_file]=true;
+	} else {
+		$contenu= $xml_file;
 	}
+	include_spip('inc/plugin');
+	$tree = parse_plugin_xml($contenu);
+	spip_query("DELETE FROM spip_xml WHERE xml=".spip_abstract_quote($key));
+	xml_recurse_parse_to_table($key,'/',0,$tree);
+	$file_done[$key]=true;
 }
 
 function xml_recurse_parse_to_table(&$file,$xpath,$id_parent,&$subtree){

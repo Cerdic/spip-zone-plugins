@@ -1,6 +1,6 @@
 #CACHE{3600}
-[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
-<?php echo '<' ?>?xml version="1.0"[ encoding="(#CHARSET)"]?>
+[(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<!--?php echo '<' ?>?xml version="1.0"[ encoding="(#CHARSET)"]?-->
 <BOUCLE_parse(XML){xml}{racine}>
 <#NOEUD #ATTRIBUTS>
 	<BOUCLE_tree(XML){xml}{id_parent}>
@@ -10,3 +10,13 @@
 	</BOUCLE_tree>#TEXTE*<//B_tree>
 </#NOEUD>
 </BOUCLE_parse>
+
+<BOUCLE_parse2(XML){texte}{racine}>
+<#NOEUD #ATTRIBUTS>
+	<BOUCLE_tree2(XML){xml}{id_parent}>
+	<#NOEUD #ATTRIBUTS>
+		<BOUCLE_rec2(boucle_tree2)></BOUCLE_rec2>
+	</#NOEUD>
+	</BOUCLE_tree2>#TEXTE*<//B_tree2>
+</#NOEUD>
+</BOUCLE_parse2>
