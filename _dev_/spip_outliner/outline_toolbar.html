@@ -1,16 +1,16 @@
 <div id='toolbar'>
 [(#ENV{id_table}|?{'',' '})
 <div class='icones'>
-<a href='#' onclick='EditOutline();return false;' title='<:outliner:modifier_un_outline:>' class='EditOutline'>
+<a href='#' onclick='EditOutline();return false;' title='<:outliner:modifier_un_outline:>' class='EditOutline inactif'>
 <img src='#CHEMIN{img_pack/outliner.png}' width='64' height='64' alt='<:outliner:modifier_un_outline:>' />
 </a>
-<a href='#URL_ACTION_AUTEUR{outline_creer,0,#SELF|urlencode}' title='<:outliner:creer_un_outline:>'>
+<a href='#URL_ACTION_AUTEUR{outline_creer,0,#SELF|urlencode}' title='<:outliner:creer_un_outline:>' class='CreerOutline'>
 <img src='#CHEMIN{img_pack/add_outliner.png}' width='64' height='64' alt='<:outliner:creer_un_outline:>' />
 </a>
-<a href='#URL_PAGE{outline_importe}' title='<:outliner:importer_un_outline:>'>
+<a href='#URL_PAGE{outline_importe}' title='<:outliner:importer_un_outline:>' class='ImporteOutline'>
 <img src='#CHEMIN{img_pack/import_opml.png}' width='64' height='64' alt='<:outliner:importer_un_outline:>' />
 </a>
-<a href='#URL_ACTION_AUTEUR{outline_supprimer,0,#SELF|urlencode}' onclick='return del_outline(this);' title='<:outliner:supprimer_un_outline:>'>
+<a href='#URL_ACTION_AUTEUR{outline_supprimer,0,#SELF|urlencode}' onclick='return del_outline(this);' title='<:outliner:supprimer_un_outline:>' class='SupprimeOutline inactif'>
 <img src='#CHEMIN{img_pack/del_outliner.png}' width='64' height='64' alt='<:outliner:supprimer_un_outline:>' />
 </a>
 <br class='nettoyeur' />

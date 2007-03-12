@@ -41,6 +41,12 @@ float:left;
 	-moz-opacity: 1.0;
 	background:#ffffcc;
 }
+#toolbar a.inactif img,#toolbar a.inactif:hover img {
+	filter: alpha(opacity=30);
+	opacity: 0.3;
+	-moz-opacity: 0.3;
+	background:none;
+}
 
 body.outline_tous #toolbar .icones {margin:auto; width:350px;}
 body.outline_tous #toolbar a {padding:0 8px 0 8px; }
