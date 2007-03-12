@@ -5,20 +5,26 @@
  <version>0.1.0</version>
  <version_base>0.1.0</version_base>
 
- <prefix>Gis_en_ligne</prefix>
-
  <etat>dev</etat>
 
- <auteur>[Berio Molina->http://www.berio.alg-a.org]<br>[Horaciogd->http://www.vhplab.net]</auteur>
+ <auteur>[Berio Molina->http://www.berio.alg-a.org], [Horaciogd->http://www.vhplab.net]</auteur>
 
- <description>para insertar un google map na parte privada e na parte publica de spip. 
- Permite introducir un punto de google map — editar un artigo dende a parte privada.
+ <description>
+ <multi>Plugin para insertar un google map na parte privada e na parte publica de spip. 
+ Permite introducir un punto de google map &oacute; editar un artigo dende a parte privada.
+ [es]Plugin para insertar un Googlemaps en un sitio Spip.
+ _ Permite introducir un punto de google maps en la edici&oacute;n de un art&iacute;culo desde la parte privada.
+ </multi>
  </description>
+ 
+ <lien>http://www.escoitar.org/documentacion/spip.php?article175</lien>
  
  <install>base/gis_upgrade.php</install>
 
  <options>gis_options.php</options>
+ 
  <fonctions>balise/formulaire_gis.php</fonctions>
+ 
  <fonctions>base/gis.php</fonctions>
 
  <prefix>gis</prefix>
