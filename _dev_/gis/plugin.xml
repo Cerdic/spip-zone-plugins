@@ -10,10 +10,12 @@
  <auteur>[Berio Molina->http://www.berio.alg-a.org], [Horaciogd->http://www.vhplab.net]</auteur>
 
  <description>
- <multi>Plugin para insertar un google map na parte privada e na parte publica de spip. 
+ <multi>Plugin para insertar un google map na parte privada e na parte publica de SPIP. 
  Permite introducir un punto de google map &oacute; editar un artigo dende a parte privada.
- [es]Plugin para insertar un Googlemaps en un sitio Spip.
+ [es]Plugin para insertar un Googlemaps en un sitio SPIP.
  _ Permite introducir un punto de google maps en la edici&oacute;n de un art&iacute;culo desde la parte privada.
+ [fr]Plugin pour ins&eacute;rer Googlemaps sur votre site SPIP.
+ _ Permet de placer des points Googlemaps en &eacute;ditant un article dans la partie priv&eacute;e.
  </multi>
  </description>
  
