@@ -3,11 +3,14 @@
 // Tweak SMILEYS - 25 dcembre 2006
 // serieuse refonte 2006 : Patrice Vanneufville
 // Toutes les infos sur : http://www.spip-contrib.net/?article1561
+// dessin des frimousses : Sylvain Michel [http://www.guaph.net/]
 
 // cette fonction est appelee automatiquement a chaque affichage de la page privee de Tweak SPIP
 function smileys_installe() {
-//tweak_log('smileys_installe()');
 	$path = dirname(find_in_path('img/smileys/test'));
+tweak_log("smileys_installe() : $path");
+	$path = tweak_htmlpath($path);
+tweak_log(" -- abs. path = $path");
 
 	$smileys = array(
 	// les doubles :
