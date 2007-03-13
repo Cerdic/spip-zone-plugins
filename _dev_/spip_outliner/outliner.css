@@ -27,6 +27,7 @@ width:100%;
 height:70px;
 background:#ffffff;
 border-bottom:3px solid #ccc;
+z-index:1000;
 }
 #toolbar a {
 display:block;
@@ -53,7 +54,7 @@ float:left;
 	background:none;
 }
 
-body.outline_tous #toolbar .icones {margin:auto; width:350px;}
+body.outline_tous #toolbar .icones {margin:auto; width:430px;}
 body.outline_tous #toolbar a {padding:0 8px 0 8px; }
 
 

@@ -15,7 +15,7 @@ function update_toolbar_icones(){
 	if ($('dl.sel').size()>0)
 		$('#toolbar a.inactif').removeClass('inactif');
 	else
-		$('#toolbar a.EditOutline,#toolbar a.SupprimeOutline').addClass('inactif');
+		$('#toolbar a.EditOutline,#toolbar a.SupprimeOutline,#toolbar a.ExporteOutline').addClass('inactif');
 }
 function del_outline(lien){
 	sel = $('dl.sel');
@@ -28,6 +28,15 @@ function del_outline(lien){
 }
 function ImporterOutline(){
 	$('#outline_import:hidden').show('slow');
+}
+function ExporterOutline(lien){
+	sel = $('dl.sel');
+	if (sel.size()){
+		sel=sel.eq(0);
+		href = $(lien).attr('href')+'&id_form='+$(sel).attr('id');
+		window.location.replace(href);
+	}
+	return false;
 }
 function EditOutline(){
 	sel = $('dl.sel');
