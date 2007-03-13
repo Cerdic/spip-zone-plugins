@@ -35,7 +35,7 @@
 				.icone_horizontale(
 					'Transformer les notes de cet article.',
 					generer_url_action('corriger_notes', 'id_article='.$id_article),
-						"../../plugins/revision_nbsp/edit-find-replace.png",  # grml!!
+						_DIR_PLUGIN_REVISIONNBSP."edit-find-replace.png",  # grml!!
 						"rien.gif", false)
 				.fin_boite_info(true);
 			}

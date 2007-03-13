@@ -14,7 +14,13 @@ function action_corriger_notes() {
 		$s = spip_query("SELECT texte FROM spip_articles WHERE id_article=$id_article");
 		$t=spip_fetch_array($s);
 		if ($c = notes_automatiques($t['texte'])) {
-			spip_query("UPDATE spip_articles SET texte='".addslashes($c)."' WHERE id_article=$id_article");
+			include_spip('inc/modifier');
+			modifier_contenu('article', $id_article,
+				array(
+					'champs' => array('texte')
+				),
+				array('texte' => $c)
+			);
 		}
 	}
 

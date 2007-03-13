@@ -7,7 +7,7 @@
 _ &copy; 2005-6 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
-	0.2
+	0.3
 	</version>
 	<etat>
 	stable
@@ -17,7 +17,7 @@ _ &copy; 2005-6 - Distribu&#233; sous licence GNU/GPL
 - souligne en gris les espaces ins&#233;cables, pour faciliter la relecture;
 - propose un bouton pour transformer les notes r&#233;dig&#233;es &laquo; en dur &raquo; -- de la forme (1), (2), (3)... -- en raccourcis SPIP.
 
-_ Compatibilit&#233; : SPIP versions 1.9.0 et sup&#233;rieures
+_ Compatibilit&#233; : SPIP versions 1.9.2 et sup&#233;rieures
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>
