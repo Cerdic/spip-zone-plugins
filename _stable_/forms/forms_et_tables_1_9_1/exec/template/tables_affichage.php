@@ -20,12 +20,12 @@ function forms_inserer_crayons($out){
 }
 function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer){
 	global $spip_lang_right;
-  include_spip("inc/presentation");
+	include_spip("inc/presentation");
 	include_spip('public/assembler');
 	if (!include_spip('inc/autoriser'))
 		include_spip('inc/autoriser_compat');
 
-  _Forms_install();
+	_Forms_install();
 	
 	debut_page($titre_page, "documents", "forms");
 	debut_gauche();
@@ -41,7 +41,7 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 	debut_droite();
 
 	if ( _request('exec')=='tables_tous'
-		&& (_request('var_mode')=='dev' OR _OUTILS_DEVELOPPEURS)) {
+		&& (_request('var_mode')=='dev' OR (defined('_OUTILS_DEVELOPPEURS') && _OUTILS_DEVELOPPEURS))) {
 		$res = spip_query("SELECT type_form FROM spip_forms GROUP BY type_form ORDER BY type_form");
 		while ($row = spip_fetch_array($res)){
 			$prefix = forms_prefixi18n($row['type_form']);
