@@ -36,13 +36,14 @@ function spip_xml_match_nodes($regexp,&$arbre,&$matches){
 
 
 function opml2table($niveau,&$arbre,&$table,&$colonnes){
-	foreach($arbre as $tag=>$sousarbre){
-		list($tagname,$attributs) = spip_xml_decompose_tag($tag);
-		$colonnes = array_merge($colonnes,$attributs);
-		$table[] = array($niveau,$attributs);
-		foreach($sousarbre as $opmls)
-			opml2table($niveau+1,$opmls,$table,$colonnes);
-	}
+	if(is_array($arbre) && count($arbre))
+		foreach($arbre as $tag=>$sousarbre){
+			list($tagname,$attributs) = spip_xml_decompose_tag($tag);
+			$colonnes = array_merge($colonnes,$attributs);
+			$table[] = array($niveau,$attributs);
+			foreach($sousarbre as $opmls)
+				opml2table($niveau+1,$opmls,$table,$colonnes);
+		}
 }
 
 function inc_outline_importer($opml_arbre,$nom_fichier){
