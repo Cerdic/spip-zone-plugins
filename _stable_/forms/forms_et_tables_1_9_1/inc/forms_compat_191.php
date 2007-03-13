@@ -105,4 +105,16 @@
 		$p->interdire_scripts = false;
 		return $p;
 	}
+	//
+	// #EDIT
+	// une balise qui ne fait rien, pour surcharge par le plugin widgets
+	//
+	// http://doc.spip.org/@balise_EDIT_dist
+	if (!function_exists('balise_EDIT_dist')){
+		function balise_EDIT_dist($p) {
+			$p->code = "''";
+			$p->interdire_scripts = false;
+			return $p;
+		}
+	}	
 ?>
