@@ -24,12 +24,13 @@ function spip_xml_decompose_tag($tag){
 }
 
 function spip_xml_match_nodes($regexp,&$arbre,&$matches){
-	foreach(array_keys($arbre) as $tag){
-		if (preg_match($regexp,$tag))
-			$matches[$tag] = &$arbre[$tag];
-		foreach(array_keys($arbre[$tag]) as $occurences)
-			spip_xml_match_nodes($regexp,$arbre[$tag][$occurences],$matches);
-	}
+	if(count($arbre))
+		foreach(array_keys($arbre) as $tag){
+			if (preg_match($regexp,$tag))
+				$matches[$tag] = &$arbre[$tag];
+			foreach(array_keys($arbre[$tag]) as $occurences)
+				spip_xml_match_nodes($regexp,$arbre[$tag][$occurences],$matches);
+		}
 	return (count($matches));
 }
 
