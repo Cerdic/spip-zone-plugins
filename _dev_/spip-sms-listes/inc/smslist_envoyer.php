@@ -1,4 +1,4 @@
-<?
+<?php
 /*
  * Spip SMS Liste
  * Gestion de liste de diffusion de SMS
