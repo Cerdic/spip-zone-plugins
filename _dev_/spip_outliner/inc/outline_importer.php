@@ -24,7 +24,7 @@ function spip_xml_decompose_tag($tag){
 }
 
 function spip_xml_match_nodes($regexp,&$arbre,&$matches){
-	if(count($arbre))
+	if(is_array($arbre) && count($arbre))
 		foreach(array_keys($arbre) as $tag){
 			if (preg_match($regexp,$tag))
 				$matches[$tag] = &$arbre[$tag];
