@@ -9,8 +9,8 @@
 function smileys_installe() {
 	$path = dirname(find_in_path('img/smileys/test'));
 tweak_log("smileys_installe() : $path");
-	$path = tweak_htmlpath($path);
-tweak_log(" -- abs. path = $path");
+	$path2 = tweak_htmlpath($path);
+tweak_log(" -- abs. path = $path2");
 
 	$smileys = array(
 	// les doubles :
@@ -61,7 +61,7 @@ tweak_log(" -- abs. path = $path");
 		$espace = strlen($smy)==2?' ':'';
 		$smileys2[0][] = $espace.$smy;
 		list(,,,$size) = @getimagesize("$path/$val");
-		$smileys2[1][] = $espace."<img alt=\"$alt\" title=\"$alt\" class=\"no_image_filtrer\" src=\"".$path."/$val\" $size/>";
+		$smileys2[1][] = $espace."<img alt=\"$alt\" title=\"$alt\" class=\"no_image_filtrer\" src=\"".$path2."/$val\" $size/>";
 	}
 	ecrire_meta('tweaks_smileys', serialize($smileys2));
 	ecrire_metas();

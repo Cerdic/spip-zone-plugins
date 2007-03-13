@@ -126,11 +126,20 @@ add_tweak( array(
 
 add_tweak( array (
 	'id' => 'xml',
-	'code'		=> '$xhtml = "sax";',
+	'code' => '$xhtml = "sax";',
 	'auteur' => 'Ma&iuml;eul Rouquette (maieulrouquette@tele2.fr)',
 	'categorie' =>'squel',
-	'version-min'	=> '1.92',
-	'options'	=>	1
+	'version-min' => '1.92',
+	'options' => 1
+));
+
+add_tweak( array (
+	'id' => 'f_jQuery',
+	'code' => '$spip_pipeline["insert_head"] = str_replace("|f_jQuery", "", $spip_pipeline["insert_head"]);',
+	'auteur' => 'Fil',
+	'categorie' =>'squel',
+	'version-min' => '1.92',
+	'options' => 1
 ));
 
 //-----------------------------------------------------------------------------//
@@ -162,6 +171,12 @@ add_tweak( array(
 	'auteur' 		=> '[Cedric MORIN->mailto:cedric.morin@yterium.com]',
 	'categorie'		=> 'squel',
 	'pipeline:affichage_final' => 'InhibeFlash_affichage_final',
+));
+
+add_tweak( array (
+	'id' => 'target_blank',
+	'categorie' =>'squel',
+	// le fichier target_blank.js est automatiquement insere si le tweak est actif
 ));
 
 //-----------------------------------------------------------------------------//

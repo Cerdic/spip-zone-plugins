@@ -2,6 +2,9 @@
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
+$temp_jQuery = $GLOBALS['spip_version_code']<1.92?
+	"\n\n{{Attention}} : ce tweak n&eacute;cessite le plugin {jQuery} pour fonctionner ou une version de SPIP sup&eacute;rieure &agrave; 1.9.2.":"";
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Tweak SPIP',
 	'help'	=> "{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Tweak&nbsp;SPIP'.</p>",
@@ -47,11 +50,11 @@ _ version_plein_texte : extrait le contenu texte d'une page html pour rendre du 
 
 	'orientation:nom' => 'Orientation des images',
 	'orientation:description'	=> "3 nouveaux crit&egrave;res pour vos squelettes : <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code>. Id&eacute;al pour le classement des photos en fonction de leur forme.
-_ Infos : [->http://www.spip-contrib.net/Portrait-ou-Paysage]",
+_ Plus d'infos : [->http://www.spip-contrib.net/Portrait-ou-Paysage]",
 
 	'desactiver_flash:nom' => 'D&eacute;sactive les objets flash',
-	'desactiver_flash:description'	=> 'Supprime les objets flash des pages de votre site et les remplace par le contenu alternatif associ&eacute;.
-_ N&eacute;cessite le plugin {jQuery} ou une version de SPIP sup&eacute;rieure &agrave; 1.9.2.',
+	'desactiver_flash:description'	=> 'Supprime les objets flash des pages de votre site et les remplace par le contenu alternatif associ&eacute;.'
+		. $temp_jQuery,
 
 	'toutmulti:nom' => 'Blocs multilingues',
 	'toutmulti:description'	=> "Introduit le raccourci &lt;:un_texte:&gt; pour introduire librement des blocs multi-langues dans un article.
@@ -71,21 +74,22 @@ _ N'oubliez pas de v&eacute;rifier que 'un_texte' est bien d&eacute;fini dans le
 -* {&lt;surfluo&gt;}Lorem ipsum dolor sit amet{&lt;/surfluo&gt;}
 -* {&lt;surgris&gt;}Lorem ipsum dolor sit amet{&lt;/surgris&gt;}
 
-Infos : [->http://www.spip-contrib.net/?article1552]",
+Plus d'infos : [->http://www.spip-contrib.net/?article1552]",
 
 	'typo_exposants:nom' => 'Exposants typographiques',
 	'typo_exposants:description'	=> "Textes fran&ccedil;ais : am&eacute;liore le rendu typographique des abr&eacute;viations courantes, en mettant en exposant les &eacute;l&eacute;ments n&eacute;cessaires (ainsi, {<acronym>Mme</acronym>} devient {M<sup>me</sup>}) et en corrigeant les erreurs courantes ({<acronym>2&egrave;me</acronym>} ou  {<acronym>2me</acronym>}, par exemple, deviennent {2<sup>e</sup>}, seule abr&eacute;viation correcte).
 _ Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie nationale telles qu'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l'Imprimerie nationale, Paris, 2002).
-_ Infos : [->http://www.spip-contrib.net/?article1564]",
+_ Plus d'infos : [->http://www.spip-contrib.net/?article1564]",
 
 	'filets_sep:nom' => 'Filets de S&eacute;paration',
 	'filets_sep:description'	=>  "Ins&egrave;re des filets de s&eacute;paration, personnalisables par des feuilles de style, dans tous les textes de Spip.
 _ La syntaxe est : &quot;__code__&quot;, o&ugrave; &quot;code&quot; repr&eacute;sente soit le num&eacute;ro d&rsquo;identification (de 0 &agrave; 7) du filet &agrave; ins&eacute;rer en relation directe avec les styles correspondants, soit le nom d'une image plac&eacute;e dans le dossier img/filets.
-_ Infos : [->http://www.spip-contrib.net/?article1563]",
+_ Plus d'infos : [->http://www.spip-contrib.net/?article1563]",
 
 	'smileys:nom' => 'Smileys',
 	'smileys:description'	=> "Ins&egrave;re des smileys dans tous les textes o&ugrave; apparait un raccourci du genre <acronym>:-)</acronym>. Id&eacute;al pour les  forums.
-_ Infos : [->http://www.spip-contrib.net/?article1561]",
+_ Plus d'infos : [->http://www.spip-contrib.net/?article1561]
+_ Dessins : [Sylvain Michel->http://www.guaph.net/]",
 
 	'quota_cache:nom' => 'Quota du cache',
 	'quota_cache:description'	=> "Modifie le quota r&eacute;serv&eacute; au cache. Une valeur vide ou &eacute;gale &agrave; 0 signifie qu'aucun quota ne s'applique.<br />Valeur (en Mo) : %quota_cache%",
@@ -121,7 +125,14 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'js_toujours' => 'Toujours',
 
 	'xml:nom'	=>'Activer le validateur xml',
-	'xml:description' =>"Active le validateur xml pour l'espace public tel qu'il est décrit dans la [documentation->http://www.spip.net/fr_article3541.html]." 
+	'xml:description' =>"Active le validateur xml pour l'espace public tel qu'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html].",
+
+	'f_jQuery:nom' => 'D&eacute;sactive jQuery',
+	'f_jQuery:description'	=> "Emp&ecirc;che l'installation de jQuery dans la partie publique. Cette librairie ([->http://jquery.com/]) apporte de nombreuses commodit&eacute;s dans la programmation de Javascript et peut &ecirc;tre utilis&eacute;e par certains plugins. Spip l'utilise dans sa partie priv&eacute;e.",
+
+	'target_blank:nom' => 'Liens externes',
+	'target_blank:description'	=> "Permet aux liens externes au site de s'ouvrir dans une nouvelle fen&ecirc;tre ext&eacute;rieure.\n\nActiver ce tweak revient &agrave; ajouter {target=&quot;blanc&quot;} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par Spip des classes {spip_out} et/ou {spip_url}. Il est parfois n&eacute;cessaire d'ajouter l'une de ces classes aux liens du squelette du site (fichiers html) afin d'&eacute;tendre au maximum cette fonctionnalit&eacute;."
+		. $temp_jQuery,
 
 /*
 	':nom' => '',
@@ -129,5 +140,5 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 */
 );
 
-
+unset($temp_jQuery);
 ?>
