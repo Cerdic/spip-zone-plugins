@@ -50,15 +50,3 @@ DIV {
 #plaintab {
 	width: 100%;
 }
-
-.bandeau_titre{
-	background: url(../img_pack/fondt.png) no-repeat left top ;
-}
-
-.bandeau_stitre{
-	background: url(../img_pack/fondst.png) no-repeat left top ;
-	font-weight: bold;
-	height: 30px;
-	padding: 2px;
-	vertical-align: middle;
-}
