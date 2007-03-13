@@ -5,6 +5,7 @@ ul, ol { margin:1em; } /* marge des listes */
 ol ul, ul ol, ul ul, ol ol { margin-top: 0; margin-bottom: 0 } /* liste imbriquees */
 p { margin:1em auto; } /* separation des paragraphes */
 fieldset { padding:4pt; }
+.check { margin-left:3pt; margin-right:3pt; }
 
 /* Bug Spip 1.9.1 ?
 #haut-page>div { text-align:center; }

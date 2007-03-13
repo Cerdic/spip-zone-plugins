@@ -158,26 +158,26 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 
   $codeHTML = "<div class=\"jeux_question\">".definir_puce().$question.'</div>';
   if (!$corriger){
-    // affichage sans correction :
-     $codeHTML.="\n<div class=\"qcm_proposition\">";
+	// affichage sans correction :
+	$codeHTML.="\n<div class=\"qcm_proposition\">";
 
-      // S'il n'y a qu'1 seul choix, on affiche un trou
-      // S'il y a plus de 5 choix, on utilise une liste
-      // Sinon, entre 2 et 4 choix, des radio boutons
-	  if ($trou) {
-        $codeHTML.=qcm_un_trou($nomVarSelect, $indexQCM);
-      } elseif ($qcms[$indexQCM]['nbpropositions']>5) {
-        $codeHTML.='<select name="'.$nomVarSelect.'" class="qcm_select"><option value="">'._T('jeux:votre_choix').'</option>';
+	// S'il n'y a qu'1 seul choix, on affiche un trou
+	// S'il y a plus de 5 choix, on utilise une liste
+	// Sinon, entre 2 et 4 choix, des radio boutons
+	if ($trou) {
+		$codeHTML.=qcm_un_trou($nomVarSelect, $indexQCM);
+	} elseif ($qcms[$indexQCM]['nbpropositions']>5) {
+		$codeHTML.='<select name="'.$nomVarSelect.'" class="qcm_select"><option value="">'._T('jeux:votre_choix').'</option>';
 		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) $codeHTML.="<option value=\"$i\">$valeur</option>";
 		$codeHTML.='</select>';
-      } else {
+	} else {
 		foreach($qcms[$indexQCM]['propositions'] as $i=>$valeur) 
-          $codeHTML.='<input type="radio" class="jeux_radio qcm_radio" name="'.$nomVarSelect
-		  	. '" value="'.$i.'" id="'.$nomVarSelect.$i.'"><label for="'.$nomVarSelect.$i.'">&nbsp;'
-          	. $valeur.'</label><br />';
-       }
-       $codeHTML.="</div><br />";
-       
+			$codeHTML.='<input type="radio" class="jeux_radio qcm_radio" name="'.$nomVarSelect
+				. '" value="'.$i.'" id="'.$nomVarSelect.$i.'"><label for="'.$nomVarSelect.$i.'">&nbsp;'
+				. $valeur.'</label><br />';
+	}
+	$codeHTML.="</div> <br />";
+
     }	// fin du cas sans correction
 
   // Sinon on affiche la correction
