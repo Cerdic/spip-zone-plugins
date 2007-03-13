@@ -17,7 +17,15 @@ var img_noeud_moins='#EVAL{_DIR_IMG_PACK}noeud_moins.gif';
 <body class="outline_tous">
 [(#INCLUDE{fond=outline_toolbar})]
 <div id="outline_tous">
-
+<form action='#URL_ACTION_AUTEUR{outline_importer,0,(#SELF|urlencode)}' method='post' enctype='multipart/form-data'>
+<div id='outline_import'>
+<label for='fichier_import'><:spip:info_telecharger:></label>
+<input id='fichier_import' class="forml spip_xx-small" type="file" size="15" name="fichier_opml" />
+<div align="right">
+<input class="fondo" type="submit" value="<:spip:bouton_telecharger:>" name="telecharger"/>
+</div>
+</div>
+</form>
 <BOUCLE_tous(FORMS){type_form=outline}>
 <dl id='#ID_FORM' class='outline_one' style='float:left;' name='#URL_PAGE{outline,id_table=#ID_FORM}' >
 <dt>

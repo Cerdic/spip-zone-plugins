@@ -26,7 +26,9 @@ function del_outline(lien){
 	}
 	return false;
 }
-
+function ImporterOutline(){
+	$('#outline_import:hidden').show('slow');
+}
 function EditOutline(){
 	sel = $('dl.sel');
 	if (sel.size()){

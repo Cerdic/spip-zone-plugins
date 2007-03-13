@@ -12,6 +12,11 @@ margin-top:70px;
 #outline_tous dl.hover { background: #ffffcc;cursor: pointer; }
 #outline_tous dl.sel { background: #ffcc99; }
 
+#outline_import{
+width:400px;
+margin:auto;
+display:none;
+}
 /* la Tool bar */
 #toolbar {
 display:block;
