@@ -22,8 +22,8 @@ _ Translated from French by Etienne B. [->http://www.loiseau2nuit.net]
 		</multi>
 	</description>
 	<lien><multi>
-		[fr][->http://www.spip-contrib.net/ecrire/?article1588]
-		[en][->http://www.spip-contrib.net/ecrire/?article1590]
+		[fr][->http://www.spip-contrib.net/article1588.html]
+		[en][->http://www.spip-contrib.net/article1590.html]
 		</multi>
 	</lien> <!-- URL de documentation  -->
 	<options> <!-- fichier charge a chaque hit -->
