@@ -62,6 +62,7 @@ function snippets_forms_importer($id_form_target,$formtree,$contexte=array()){
 				}
 			}
 		}
+	return $id_form;
 }
 
 ?>

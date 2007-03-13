@@ -14,7 +14,7 @@
 // creation d'une table a partir de sa structure xml
 // le type est surchargŽ par $type
 // $unique : ne pas creer la table si une du meme type existe deja
-function Forms_creer_table($structure_xml,$type=NULL, $unique = true){
+function Forms_creer_table($structure_xml,$type=NULL, $unique = true, $c=NULL){
 	include_spip('inc/xml');
 
 	$xml = spip_xml_load($structure_xml);
@@ -37,9 +37,13 @@ function Forms_creer_table($structure_xml,$type=NULL, $unique = true){
 			return;
 	}
 	// ok on peut creer la table
-	$importer = charger_fonction('importer','snippets/forms');
-	snippets_forms_importer(0,$xml);
-	return;
+	$snippets_forms_importer = charger_fonction('importer','snippets/forms');
+	$id_form = $snippets_forms_importer(0,$xml);
+	if ($c!==NULL){
+		include_spip('forms_crayons');
+		form_revision($id_form,$c);
+	}
+	return $id_form;
 }
 
 function Forms_liste_tables($type){
@@ -76,13 +80,22 @@ include_spip('forms_fonctions');
 function Forms_les_valeurs($id_form, $id_donnee, $champ, $separateur=",",$etoile=false, $traduit=true){
 	return forms_calcule_les_valeurs('forms_donnees_champs', $id_donnee, $champ, $id_form, $separateur,$etoile,$traduit);
 }
+function Forms_creer_champ($id_form,$type,$titre,$c=NULL,$champ=""){
+	include_spip('inc/forms_edit');
+	$champ = Forms_insere_nouveau_champ($id_form,$type,$titre,$champ);
+	if ($c!==NULL){
+		include_spip('forms_crayons');
+		forms_champ_revision("$id_form-$champ",$c);
+	}
+	return $champ;
+}
+
 function Forms_decrit_donnee($id_donnee,$specifiant=true,$linkable=false){
 	list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($id_donnee,$specifiant,$linkable);
 	if (!count($t) && $specifiant)
 		list($id_form,$titreform,$type_form,$t) = Forms_liste_decrit_donnee($id_donnee, false,$linkable);
 	return $t;
 }
-
 function Forms_creer_donnee($id_form,$c = NULL){
 	include_spip('inc/autoriser');
 	if (!autoriser('creer','donnee',0,NULL,array('id_form'=>$id_form)))
