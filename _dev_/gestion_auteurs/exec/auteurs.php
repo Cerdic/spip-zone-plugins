@@ -23,16 +23,16 @@ function exec_auteurs()
 	$navig = new NavigationListe(array(
 		'requete_liste' => requete_auteurs($tri, $statut),
 //		'callback_liste' => 'complement_auteur',
-//		'requete_comptage' => 'SELECT COUNT(*) FROM spip_auteurs',
+		'requete_comptage' => 'SELECT COUNT(*) FROM spip_auteurs',
 		'requete_etapes' =>
-			'SELECT DISTINCT UPPER(LEFT(nom,1)) l, COUNT(*) FROM spip_auteurs
-			 GROUP BY l ORDER BY l',
+			'SELECT DISTINCT UPPER(LEFT(nom,1)) etape, COUNT(*) compte FROM spip_auteurs
+			 GROUP BY etape ORDER BY etape',
 		'max_par_page' => 30,
 		'debut' => intval(_request('debut')),
 		'fragment' => intval(_request('fragment')),
 		'contenu_ligne' => 'ligne_auteur'
 	));
-	$res = $navig->show();
+	var_dump($navig); die();
 /*
 	$result = requete_auteurs($tri, $statut);
 	$nombre_auteurs = spip_num_rows($result);
@@ -62,12 +62,33 @@ function exec_auteurs()
 
 function ligne_auteurs($ligne = array(), $pos = 0, $reste = 0)
 {
+	static $formater_auteur = '';
+	($formater_auteur || ($formater_auteur = charger_fonction('formater_auteur', 'inc')));
+	global $connect_statut, $options;
+
 	if ($ligne['statut'] == '0minirezo') {
 		$count = spip_fetch_array(spip_query(
 			'SELECT COUNT(*) FROM spip_auteurs_rubriques WHERE id_auteur='
 			. $ligne['id_auteur']), SPIP_NUM);
 		$ligne['restreint'] = $count[0];
 	}
+
+	list($s, $mail, $nom, $w, $p) = $formater_auteur($ligne['id_auteur']);
+	return "\n<tr style='background-color: #eeeeee;'>"
+	. "\n<td style='border-top: 1px solid #cccccc;'>"
+	. $s
+	. "</td><td class='arial1' style='border-top: 1px solid #cccccc;'>"
+	. $mail
+	. "</td><td class='verdana1' style='border-top: 1px solid #cccccc;'>"
+	. $nom
+	. ((isset($row['restreint']) AND $ligne['restreint'])
+	   ? (" &nbsp;<small>"._T('statut_admin_restreint')."</small>")
+	   : '')
+	 ."</td><td class='arial1' style='border-top: 1px solid #cccccc;'>"
+	 . $w
+	 . "</td><td class='arial1' style='border-top: 1px solid #cccccc;'>"
+	 . $p
+	.  "</td></tr>\n";
 }
 
 function requete_auteurs($tri, $statut)
@@ -109,6 +130,10 @@ function requete_auteurs($tri, $statut)
 		break;
 
 	case 'nom':
+		$sql_order = ' unom';
+		break;
+
+	case 'multi':
 	default:
 		$sql_sel = ", ".creer_objet_multi ("nom", $spip_lang);
 		$sql_order = " multi";
@@ -128,47 +153,19 @@ function requete_auteurs($tri, $statut)
 		GROUP BY aut.id_auteur
 		ORDER BY $sql_order";
 }
-/*
-// http://doc.spip.org/@lettres_d_auteurs
-function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
-{
-	$auteurs = $lettre = array();
-	$lettres_nombre_auteurs =0;
-	$lettre_prec ="";
-	$i = 0;
-	while ($auteur = spip_fetch_array($query)) {
-		if ($i>=$debut AND $i<$debut+$max_par_page) {
-			if ($auteur['statut'] == '0minirezo')
-				$auteur['restreint'] = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_rubriques WHERE id_auteur=".$auteur['id_auteur']));
-			$auteurs[] = $auteur;
-		}
-		$i++;
-
-		if ($tri == 'nom') {
-			$premiere_lettre = strtoupper(spip_substr(extraire_multi($auteur['nom']),0,1));
-			if ($premiere_lettre != $lettre_prec) {
-				$lettre[$premiere_lettre] = $lettres_nombre_auteurs;
-			}
-			$lettres_nombre_auteurs ++;
-			$lettre_prec = $premiere_lettre;
-		}
-	}
-
-	return array($auteurs, $lettre);
-}
-*/
 
 // http://doc.spip.org/@bandeau_auteurs
 function bandeau_auteurs($tri, $statut)
 {
-	global $options, $spip_lang_right, $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
+	global $options, $spip_lang_right, $connect_id_auteur,
+		$connect_statut, $connect_toutes_rubriques;
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	return ($statut == '6forum' ?
 		$commencer_page(_T('titre_page_auteurs'), "auteurs", "redacteurs") :
 		$commencer_page(_T('info_auteurs_par_tri', array('partri' =>
-			 $tri=='nom' ? _T('info_par_nom') :
-			($tri=='statut' ? _T('info_par_statut') : _T('info_par_nombre_articles')))),
+			 $tri=='nombre' ? _T('info_par_nombre_articles') :
+			($tri=='statut' ? _T('info_par_statut') : _T('info_par_nom')))),
 			"auteurs", "redacteurs"))
 	. debut_gauche(null, true)
 
@@ -194,7 +191,6 @@ function bandeau_auteurs($tri, $statut)
 				icone_horizontale (_T('icone_afficher_visiteurs'), generer_url_ecrire("auteurs","statut=6forum"), "auteur-24.gif", "", false)
 			) : '')
 		)
-//	)
 	. creer_colonne_droite(null, true)
 	. pipeline('affiche_droite',array('args'=>array('exec'=>'auteurs'),'data'=>''))
 	. debut_droite(null, true)
@@ -203,7 +199,7 @@ function bandeau_auteurs($tri, $statut)
 	. gros_titre(_T($statut == '6forum' ? 'info_visiteurs' : 'info_auteurs'), '', false)
 	. "\n<br />";
 }
-/*
+
 // http://doc.spip.org/@auteurs_tranches
 function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_page, $nombre_auteurs)
 {
@@ -333,5 +329,5 @@ function afficher_n_auteurs($auteurs) {
 	}
 	return $res;
 }
-*/
+
 ?>
