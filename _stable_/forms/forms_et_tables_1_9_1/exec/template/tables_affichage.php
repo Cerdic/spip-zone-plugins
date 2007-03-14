@@ -84,6 +84,9 @@ function afficher_tables_tous($type_form, $titre_page, $titre_type, $titre_creer
 
 function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_page=false, $contexte = array()){
 	global $spip_lang_right,$spip_lang_left;
+	if (!include_spip('inc/autoriser'))
+		include_spip('inc/autoriser_compat');
+	include_spip('public/assembler');
 	$out = "";
 	if (!$id_form = intval($id_form)) return $out;
 	if ($titre_page===false){
@@ -93,6 +96,14 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 	}
 	
 	$prefix = forms_prefixi18n($type_form);
+	$contexte = array_merge($contexte,
+		array('id_form'=>$id_form,
+		'titre_liste'=>$titre_page,
+		'aucune_reponse'=>_T("$prefix:aucune_reponse"),
+		'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],
+		'statuts' => array('prepa','prop','propose','publie','refuse') )
+	);
+	
   $icone = find_in_path("img_pack/$type_form-24.png");
   if (!$icone)
   	$icone = "../"._DIR_PLUGIN_FORMS."img_pack/donnees-24.png";
@@ -111,10 +122,15 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 		$out .=  icone(_T("$prefix:icone_ajouter_donnees"), $url_edit, $icone, "creer.gif","",false);
 		$out .=  "</div>";
 		
-		$out .=  "<div style='float:$spip_lang_left;'>";
-		$out .=  icone(_T("$prefix:telecharger_reponses"),
-			generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-exporter-24.png", "rien.gif","",false);
-		$out .=  "</div>";
+		// verifier si il y a des donnees
+		$in = "statut IN (".implode(',',array_map('_q',$contexte['statuts'])).")";
+		$res2 = spip_query("SELECT id_donnee FROM spip_forms_donnees WHERE $in AND id_form="._q($id_form));
+		if ($row2 = spip_fetch_array($res2)){
+			$out .=  "<div style='float:$spip_lang_left;'>";
+			$out .=  icone(_T("$prefix:telecharger_reponses"),
+				generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-exporter-24.png", "rien.gif","",false);
+			$out .=  "</div>";
+		}
 		if (defined('_DIR_PLUGIN_CSVIMPORT')){
 			$out .=  "<div style='float:$spip_lang_left;'>";
 			$out .=  icone(_T("$prefix:importer_donnees_csv"),
@@ -127,13 +143,6 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 	$out .=  gros_titre($titre_page,'',false);
 	$out .=  '</div>';
 	
-	$contexte = array_merge($contexte,
-		array('id_form'=>$id_form,
-		'titre_liste'=>$titre_page,
-		'aucune_reponse'=>_T("$prefix:aucune_reponse"),
-		'couleur_claire'=>$GLOBALS['couleur_claire'],'couleur_foncee'=>$GLOBALS['couleur_foncee'],
-		'statuts' => array('prepa','prop','propose','publie','refuse') )
-	);
 	$out .=  recuperer_fond("exec/template/donnees_tous",$contexte);
 	$out = forms_inserer_crayons($out);
 	
@@ -143,9 +152,6 @@ function affichage_donnees_tous_corps($type_form,$id_form,$retour=false, $titre_
 
 function affichage_donnees_tous($type_form){
   include_spip("inc/presentation");
-	include_spip('public/assembler');
-	if (!include_spip('inc/autoriser'))
-		include_spip('inc/autoriser_compat');
 
   _Forms_install();
 	$row=spip_fetch_array(spip_query("SELECT titre FROM spip_forms WHERE id_form="._q(_request('id_form'))));
