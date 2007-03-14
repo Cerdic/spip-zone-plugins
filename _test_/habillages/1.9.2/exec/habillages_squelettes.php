@@ -62,9 +62,6 @@ function exec_habillages_squelettes() {
 		}
 		else {
     	
-    	# Lire le fichier theme.xml du squelette choisi afin de memoriser le prefixe.
-    	$squelette_choisi = _request('statusplug');
-    	
 		lire_metas();
 		$choix_squelettes = $GLOBALS['meta']['habillages_squelettes'];
 		$xml_squelette = _DIR_PLUGINS.$choix_squelettes."/theme.xml";
