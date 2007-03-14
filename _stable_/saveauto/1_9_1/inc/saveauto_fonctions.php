@@ -153,7 +153,7 @@ function saveauto_sauvegarde() {
               if ($sauver_base) {
         	  //echo "on sauve la base<br>";
                  //calcul de la date
-                 $jour = date("j", $temps); //format numerique : 1->31
+                 $jour = date("d", $temps); //format numerique : 01->31
                  $annee = date("Y", $temps); //format numerique : 4 chiffres
                  $mois = date("m", $temps);
                  $heure = date("H", $temps);
