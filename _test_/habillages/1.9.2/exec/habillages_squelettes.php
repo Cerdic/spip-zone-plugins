@@ -61,6 +61,10 @@ function exec_habillages_squelettes() {
 			ecrire_metas;
 		}
 		else {
+    	
+    	# Lire le fichier theme.xml du squelette choisi afin de memoriser le prefixe.
+    	$squelette_choisi = _request('statusplug');
+    	
 		lire_metas();
 		$choix_squelettes = $GLOBALS['meta']['habillages_squelettes'];
 		$xml_squelette = _DIR_PLUGINS.$choix_squelettes."/theme.xml";
@@ -82,6 +86,9 @@ function exec_habillages_squelettes() {
 			# Si il y a des themes disponibles, on entre le squelettes (qui est aussi egal a son prefixe)
 			# dans une liste de themes dispos afin de pouvoir mettre des icones sur la page squelettes.
 			if ($prefixe_type == "themes") {
+                # Le code ci-dessous n'est pas fonctionnel. TODO : quand le $prefixe_type = balise <themes> 
+                # et $squelettes_theme = $nom_theme, on ecrit le nom du theme dans le champ meta
+                # "habillages_liste_themes". Le meme principe est a adpoter pour les extras.
 				lire_metas();
 				$liste_themes_meta = $GLOBALS['meta']['habillages_liste_themes'];
 				if (!eregi($squelettes_theme, $liste_themes_meta)) {
