@@ -85,7 +85,7 @@ function gis_cambiar_coord($id_article) {
 	$s .= "";
 	// Ajouter un formulaire
 	$s .= "\n<p>";
-	$s .= debut_cadre('r', "../"._DIR_PLUGIN_GIS."img_pack/correxir.png");
+	$s .= debut_cadre('r', _DIR_PLUGIN_GIS."img_pack/correxir.png");
 	$s .= bouton_block_invisible("ajouter_form");
 	$s .= "&nbsp;&nbsp;&nbsp;<strong class='verdana3' style='text-transform: uppercase;'>"
 		._T("gis:cambiar")." <a onclick=\"$('#cadroFormulario').slideToggle('slow')\">("._T('gis:clic_desplegar').")</a></strong>";
@@ -152,7 +152,7 @@ function gis_grupo_mots($id_groupe) {
 	global $id_groupe;
 	
 	$s .= "\n<p>";
-	$s .= debut_cadre('r', "../"._DIR_PLUGIN_GIS."img_pack/correxir.png");
+	$s .= debut_cadre('r', _DIR_PLUGIN_GIS."img_pack/correxir.png");
 	$s .= bouton_block_invisible("ajouter_form");
 	$s .= debut_block_visible("ajouter_form");
 	$s .= "hola ".$id_groupe;

@@ -16,7 +16,7 @@ function gis_ajouterBoutons($boutons_admin) {
 	if ($GLOBALS['connect_statut'] == "0minirezo") {
     // vese o bot—n na barra de "configuraci—n"
 	    $boutons_admin['configuration']->sousmenu['gis']= new Bouton(
-		    '../'._DIR_PLUGINS.'gis/img_pack/correxir.png', _T('gis:configurar_gis'));
+		    _DIR_PLUGIN_GIS.'img_pack/correxir.png', _T('gis:configurar_gis'));
 	}
 	return $boutons_admin;
 }
@@ -98,7 +98,7 @@ function gis_insertarp_head($flux){
 <script src="http://maps.google.com/maps?file=api&v=2&key='.$row['value'].'"></script>';
 // esta li–a non vai. no lugar de functions.js Ž functions.php, pero creo que non Ž necesaria____:<script src="http://www.escoitar.org/loudblog/custom/templates/berio/functions.js" type="text/javascript"></script>
 		$flux.='
-<script type="text/javascript" src="../'._DIR_PLUGINS.'gis/js/swfobject.js"></script>';
+<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/swfobject.js"></script>';
 		
 	
 	return $flux;

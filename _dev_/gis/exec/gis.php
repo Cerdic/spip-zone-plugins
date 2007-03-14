@@ -20,7 +20,7 @@ function exec_gis_dist(){
 // Google map KEY	
 	echo '<div align="center" style="width:700px;margin:20px">';
 	if ($connect_statut == "0minirezo") {
-		echo debut_cadre('r', "../"._DIR_PLUGIN_GIS."img_pack/correxir.png");
+		echo debut_cadre('r', _DIR_PLUGIN_GIS."img_pack/correxir.png");
 		if($_POST['ok']){					
 			$query = "SELECT * FROM spip_gis_config WHERE name='googlemapkey'";
 			$result = spip_query($query);
@@ -37,7 +37,7 @@ function exec_gis_dist(){
 		$row = spip_fetch_array($result);
 		
 		echo '<br/>';
-		echo '<a href="http://www.google.com/apis/maps" target="_blank" ><img src="../'._DIR_PLUGIN_GIS.'img_pack/logo_google.gif" border="0" align="left" hspace="10" ></a>';
+		echo '<a href="http://www.google.com/apis/maps" target="_blank" ><img src="'._DIR_PLUGIN_GIS.'img_pack/logo_google.gif" border="0" align="left" hspace="10" ></a>';
 		echo '<form name="googlemapkey" method="post" action="'.generer_url_ecrire('gis').'">';
 		echo '<br/>';
 		echo '<label>Google Map API Key <a href="http://www.google.com/apis/maps/signup.html" target="_blank" >'._T('gis:conseguir').'</a></label> <input type="text" name="key" value="'.$row['value'].'" size="30" />';
