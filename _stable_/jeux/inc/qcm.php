@@ -17,6 +17,7 @@ separateurs obligatoires : [qcm], oui [quiz]
 separateurs optionnels   : [titre], [texte], [config]
 paramètres de configurations par defaut :
 	trou=auto	// taille du trou affiche en cas de proposition unique
+	solution=non	// donne la(les) bonne(s) reponse(s) lors de la correction
 
 Exemple de syntaxe dans l'article :
 ------------------------------------
@@ -183,6 +184,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
   // Sinon on affiche la correction
   else {
   	 $reponse = $_POST[$nomVarSelect];
+	 $bonneReponse = false;
  	 if ($reponse) {
 		// les points de la reponse donnee...
 		$pointsR = $qcms[$indexQCM]['points'][$trou?0:$reponse];
@@ -201,16 +203,32 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
 		// si ce n'est pas un trou, on donne les points de la reponse quoiqu'il arrive
 		if (!$trou || $bonneReponse) $qcm_score += $pointsR;
 			
+        // les precisions eventuelles
+		$prec = $qcms[$indexQCM]['precisions'][$trou?0:$reponse];
+        if (strlen($prec)) $codeHTML.="<div align=\"center\"><div class=\"qcm_precision\">$prec</div></div>";
+
         if ($bonneReponse)
 			$codeHTML .= '<div class="qcm_correction_juste">'._T('jeux:reponseJuste').'</div>';
          else $codeHTML .= '<div class="qcm_correction_faux">'._T('jeux:reponseFausse').'</div>';
            
-        // les precisions eventuelles
-		$prec = $qcms[$indexQCM]['precisions'][$trou?0:$reponse];
-        if ($prec<>"") $codeHTML.="<div align=\"center\"><div class=\"qcm_precision\">$prec</div></div>";
-
 	// pas de reponse postee...
 	} else $codeHTML.='<div class="qcm_correction_null">'._T('jeux:reponseNulle').'</div>';
+	
+	// on affiche la bonne reponse si la configuration l'autorise
+	if (!$bonneReponse && jeux_config('solution')) {
+		$codeHTML.='<div class="qcm_reponse">'._T('jeux:bonneReponse').'&nbsp;';
+		if ($trou) $codeHTML.="'".join("' "._T('info_ou')."' ", $qcms[$indexQCM]['propositions'])."'";
+		else {
+			$temp=array();
+			foreach($qcms[$indexQCM]['bonnesreponses'] as $i=>$val) if ($qcms[$indexQCM]['bonnesreponses'][$i]==1) {
+				$prec = $qcms[$indexQCM]['precisions'][$i];
+				$temp[]=$qcms[$indexQCM]['propositions'][$i]
+					. (strlen($prec)?"<div align=\"center\"><div class=\"qcm_precision\">$prec</div></div>":'<br />');
+			}
+			$codeHTML.=join(''._T('info_ou').' ', $temp);
+		}
+		$codeHTML.='</div>';
+	}
 	   
 	$codeHTML.='<br />';
      
@@ -242,6 +260,7 @@ function jeux_qcm($texte, $indexJeux) {
   $tableau = jeux_split_texte('qcm', $texte);
   jeux_config_init("
 	trou=auto	// taille du trou affiche en cas de proposition unique
+	solution=non	// donne la(les) bonne(s) reponse(s) lors de la correction
   ", false);
   foreach($tableau as $i => $valeur) if ($i & 1) {
 	 if ($valeur==_JEUX_TITRE) $titre = $tableau[$i+1];
