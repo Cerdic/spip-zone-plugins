@@ -49,6 +49,7 @@ function exec_habillages_squelettes() {
 			ecrire_meta('habillages_is_themes', 'non');
 			ecrire_meta('habillages_is_extras', 'non');
 			ecrire_meta('habillages_prefixe_squel', '');
+			ecrire_meta('habillages_liste_themes', '');
 			ecrire_metas;
 		}
 		
@@ -56,6 +57,7 @@ function exec_habillages_squelettes() {
 			ecrire_meta('habillages_is_themes', 'oui');
 			ecrire_meta('habillages_is_extras', 'oui');
 			ecrire_meta('habillages_prefixe_squel', 'dist');
+			ecrire_meta('habillages_liste_themes', '');
 			ecrire_metas;
 		}
 		else {
