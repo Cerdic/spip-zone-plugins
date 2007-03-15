@@ -21,7 +21,7 @@ function balise_LANGUE_PREFEREE_LIEN_EFFACE_COOKIE_stat($args, $filtres)
 function balise_LANGUE_PREFEREE_LIEN_EFFACE_COOKIE_dyn($texte = '')
 {
     if ($texte == '') {
-    	$texte = _t('languepreferee:efface_cookie');
+    	$texte = _T('languepreferee:efface_cookie');
     }
     include_spip('inc/meta');
     $lien = '';
