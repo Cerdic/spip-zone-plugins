@@ -41,7 +41,7 @@
 						size='40' />
 				]
 				[(#TYPE|=={texte}|?{' ',''}) #SET{afficher,0}
-					[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|forms_textarea{10,80,#ENV{name_#CHAMP,#CHAMP},#CHAMP,[(#OBLIGATOIRE|=={oui}|?{forml,formo}|concat{#ENV**{erreur}|forms_valeur{#CHAMP}|?{champ_obli_oubli}})] })]
+					[(#ENV**{valeurs}|forms_valeur{#CHAMP,''}|forms_textarea{10,80,#ENV{name_#CHAMP,#CHAMP},input-#ID_FORM-#CHAMP,[(#OBLIGATOIRE|=={oui}|?{forml,formo}|concat{#ENV**{erreur}|forms_valeur{#CHAMP}|?{champ_obli_oubli}})] })]
 				]
 				[(#TYPE|=={fichier}|?{' ',''}) #SET{afficher,0}
 					<input type='file' name='#ENV{name_#CHAMP,#CHAMP}' id='input-#ID_FORM-#CHAMP'

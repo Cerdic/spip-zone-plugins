@@ -227,7 +227,7 @@
 	
 		$texte = entites_html($texte);
 		if (!$GLOBALS['browser_barre'])
-			return "<textarea name='$name' rows='$rows' class='$class' cols='$cols'>$texte</textarea>";
+			return "<textarea name='$name' rows='$rows' class='$class' cols='$cols' id='$id'>$texte</textarea>";
 	
 		include_spip ('inc/barre');
 		return afficher_barre("document.getElementById('$id')", true, $lang) .
