@@ -71,7 +71,7 @@
 		return $out;
 	}
 
-	function forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $valeur, $id_form, $etoile=true){
+	function forms_calcule_valeur_en_clair($type, $id_donnee, $champ, $valeur, $id_form, $etoile=false){
 		static $type_champ=array();
 		static $wrap_champ=array();
 		// s'assurer que l'on est bien sur une boucle forms, sinon retourner $valeur
