@@ -15,7 +15,6 @@ define('_DIR_PLUGIN_PHPMV',$GLOBALS['meta']['_DIR_PLUGIN_PHPMV']);
 function phpmv_get_code(){
 	$i_site = 1;
 	return '<!-- phpmyvisites -->
-			<div style="display:none;">
 			<script type="text/javascript">
 			<!--
 			var a_vars = Array();
@@ -27,9 +26,10 @@ function phpmv_get_code(){
 			</script>
 			<script src="'.url_de_base().find_in_path('spip_phpmyvisites.js').'" type="text/javascript"></script>
 			<noscript>
+			<div style="display:none;">
 			<img src="'.generer_url_public('phpmyvisites','var_nophpmv=1',false).'" alt="phpMyVisites" class="phpmyvisitestag" />
-			</noscript>
 			</div>
+			</noscript>
 			<!-- /phpmyvisites -->';	
 }
 
