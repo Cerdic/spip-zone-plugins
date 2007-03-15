@@ -1,0 +1,43 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Spip Boutique
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	Sebastien D. ( crowf00t pour les intimes ;-p )
+_ &copy; 2006 - Distribu&eacute; sous licence GPL
+_ Avec le soutient de [Media-Animation->http://www.media-animation.be] 
+	</auteur>
+	<version> <!-- Version du plugin -->
+	0.0.1
+	</version>
+	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
+	dev
+	</etat>
+	<description>
+	Gestion de vente de produits en ligne.
+	</description>
+	<lien>http://www.spip.net/fr_article3448.html</lien> <!-- URI de documentation -->
+	<options> <!-- fichier options (comme l'ancien mes_options.php) charge a chaque hit !! ne surtout pas l'appeler mes_options -->
+	boutique_options.php
+	</options>
+	<fonctions> <!-- fichier fonctions charge a chaque recalcul (comme l'ancien mes_fonctions.php) !! ne surtout pas l'appeler mes_fonctions -->
+	boutique_fonctions.php
+	</fonctions>
+	<!-- prefixe des fonctions, filtres et fichers de votre plugin : 
+		toutes vos fonctions doivent commencer par ce prefixe suivi de _ (ici : template_ma_fonction() par exemple)
+		C'est par ailleurs conseille pour les noms de fichier
+		Deux plugin ne peuvent pas avoir le meme prefixe, donc ne gardez pas celui la ! :)
+		-->
+	<prefix> 
+	boutique
+	</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<!-- Le parametre action est facultatif : en son absence la fonction appelee sera le prefixe suivi du nom du pipeline
+	ex : template_affichage_final()
+	Le parametre inclure est egalement facultatif, si la fonction est deja chargee en memoire (car presente dans le fichier options par exemple)	-->
+	<pipeline>
+		<nom>ajouter_boutons</nom> 
+		<action>ajouter_boutons</action>
+		<inclure>boutique_pipelines_admin.php</inclure>
+	</pipeline>	
+</plugin>
