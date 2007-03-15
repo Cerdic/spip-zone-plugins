@@ -3,7 +3,8 @@
 	<version>2.3</version>
 	<prefix>boutons_admin_supp</prefix>
 	<etat>stable</etat>
-	<auteur>[Vincent Ramos->mailto:spip_dev@kailaasa.net]</auteur>
+	<auteur>[Vincent Ramos->http://www.spip-contrib.net/auteur7639.html</auteur>
+	<lien>http://www.spip-contrib.net/article1553.html</lien>
 	<description>Ce plugin ajoute, dans l&#8217;interface publique, des boutons d&#8217;administration suppl&eacute;mentaires permettant, par exemple, d&#8217;&eacute;diter directement le texte d&#8217;un article, d&#8217;une rubrique, d&#8217;acc&eacute;der &agrave; l&#8217;interface priv&eacute;e, de cr&eacute;er un nouvel article, etc. Les possibilit&#233;s offertes d&#233;pendent du statut&nbsp;: les administrateurs seuls, par exemple, disposent d&#8217;un bouton pour cr&#233;er une rubrique.
 
 	Un bouton (prenant la forme d&#8217;un plus ou d&#8217;un moins) permet de masquer/afficher les boutons de la barre d&#8217;&eacute;dition et un autre (en forme de trombone) de garder cette barre au premier plan (ce bouton n&#8217;est pas activ&#233; pour Internet Explorer).

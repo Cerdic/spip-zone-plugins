@@ -1,9 +1,9 @@
 <plugin>
 	<nom>EVA Plugin</nom>
-	<version>.1</version>
+	<version>0.1</version>
 	<prefix>eva_</prefix>
 	<etat>dev</etat>
-	<auteur>[Vincent Ramos->mailto:www-lansargues@kailaasa.net]</auteur>
+	<auteur>[Vincent Ramos->http://www.spip-contrib.net/auteur7639.html</auteur>
 	<description>
 	Ce plugin est distribu&eacute; sous licence GNU/GPL</description>
 </plugin>
