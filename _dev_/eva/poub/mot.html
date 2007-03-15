@@ -1,0 +1,132 @@
+#CACHE{24*3600}
+<BOUCLE_principale(MOTS) {id_mot}>
+<?php $actuel = "#ID_BREVE"; ?>
+<INCLURE{fond=entete_meta}>
+	<!--affichage du titre de la page -->
+	<title>[#NOM_SITE_SPIP]  [(#TITRE|supprimer_numero)]</title>
+	<!-- description et mots-clés de la page -->
+	[<meta name="Description" content="(#DESCRIPTIF|supprimer_tags|texte_script)" />]
+</head>
+<body>
+	<div id="Page">		
+		<div id="EntetePage">
+			
+			<div id="TitreSite">
+				<!--affichage du logo et titre du site -->
+				<h1>
+					<BOUCLE_logo_accueil(SITES){id_syndic=7}>
+					[(#LOGO_SITE)]
+					</BOUCLE_logo_accueil>
+					#NOM_SITE_SPIP
+				</h1>
+			</div>
+			
+			<!-- affichage du logo et titre du mot-clé -->
+			[<h2>#LOGO_MOT (#TITRE|supprimer_numero)</h2>]
+		</div>
+		
+
+		<!-- début du menu -->
+		<div id="Menu">
+			<INCLURE{fond=menu}{id_rubrique=102}>
+			
+			<B_mots_groupe>
+			<!--affichage des mot-clés du même groupe -->
+			<div class="bloc">
+				<h4><:mots_clefs_meme_groupe:></h4>
+				<ul>
+					<BOUCLE_mots_groupe(MOTS){type}>
+					<li[ class="(#EXPOSER|on,off)"]><a href="#URL_MOT">[<strong>(#TITRE|supprimer_numero)</strong>]</a></li>
+					</BOUCLE_mots_groupe>
+					<li><em><a href="spip.php?page=plan-mots"><:autres_groupes_mots_clefs:></a></em></li>
+				</ul>
+				
+			</div>
+			</B_mots_groupe>
+            
+		</div>
+		<!-- fin du menu -->
+		
+
+		<!-- début du contenu -->
+		<div id="Contenu">
+			
+			<!-- chapeau, texte, post-scriptum de l'article -->
+			[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+			
+			<B_rubriques>
+			<!-- Rubriques -->
+				<div id="rubriques">
+					<h3 class="titre"><:rubriques:></h3>
+					<dl>
+					<BOUCLE_rubriques(RUBRIQUES){id_mot}{par date}{inverse}>
+						<dt><a href="#URL_RUBRIQUE">[<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em></dt>
+						[<dd>(#DESCRIPTIF)</dd>]
+					</BOUCLE_rubriques>
+					</dl>
+				</div>
+			</B_rubriques>
+			
+			<B_articles>
+			<!-- Articles -->
+				<div id="articles">
+					<h3 class="titre"><:articles:></h3>
+					<dl>
+[<div style="text-align:center">(#PAGINATION)[ ─ (#GRAND_TOTAL) résultats]</div>]
+					<BOUCLE_articles(ARTICLES){id_mot}{par date}{inverse}{pagination}>
+						<dt><a href="#URL_ARTICLE">[<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em></dt>
+						[<dd>(#DESCRIPTIF)</dd>]
+					</BOUCLE_articles>
+					</dl>
+				</div>
+			</B_articles>
+			
+			<B_breves>
+			<!-- Brèves -->
+				<div id="breves">
+					<h3 class="titre"><:breves:></h3>
+					<dl>
+					<BOUCLE_breves(BREVES){id_mot}>
+						<dt><a href="#URL_ARTICLE">[<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em></dt>
+						[<dd>(#DESCRIPTIF)</dd>]
+					</BOUCLE_breves>
+					</dl>
+				</div>
+			</B_breves>
+
+			<B_sites_web>
+			<!-- Sites référencés -->
+				<div id="sites_web">
+					<h3 class="titre"><:sites_web:></h3>
+					<BOUCLE_sites_web(SITES){id_mot}>
+					<dl>
+						<dt><a href="#URL_SITE">[(#LOGO_SITE)][<strong>(#NOM_SITE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em></dt>
+						[<dd>(#DESCRIPTIF)</dd>]
+					</dl>
+					<br class="clear" />
+					</BOUCLE_sites_web>
+					<br class="clear" />
+				</div>
+			</B_sites_web>
+			
+			
+			[<!-- Notes de bas de page -->
+			<div class="notes">
+			<h4><:notes_bas_page:></h4>
+			<div>(#NOTES)</div>
+			</div>]
+
+		</div>
+		<!-- fin du contenu -->
+		
+		
+		<br class="clear" />
+		
+		
+		<INCLURE{fond=pied}{skel=#SQUELETTE}>
+	</div>
+</body>
+</html>
+</BOUCLE_principale>
+<INCLURE{fond=page-404}>
+<//B_principale>

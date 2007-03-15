@@ -1,0 +1,121 @@
+#CACHE{24*3600}
+<div class="sommaire">
+<?php
+if(floor(phpversion()) < 4)	{
+// La version de PHP est inférieure à 4,
+// la fonction in_array n existe donc pas
+	function in_array($member, $array) {
+		reset($array);
+		while (list($k, $v) = each($array)) {
+			if ($v == $member) return true;
+		}
+		return false;
+	}
+}
+
+// récupération de la hiérarchie courante
+$hierarchie = array();
+<BOUCLE_recup_rub(RUBRIQUES){id_rubrique}>
+	$le_secteur = #ID_SECTEUR; 
+	<BOUCLE_recup_hierarchie(HIERARCHIE){id_rubrique}>
+		$hierarchie[] = #ID_RUBRIQUE;
+	</BOUCLE_recup_hierarchie>
+	$hierarchie[] = #ID_RUBRIQUE;
+	$actuelle = #ID_RUBRIQUE;
+</BOUCLE_recup_rub>
+
+// inclusion du script de gestion des layers
+include(find_in_path('fonction_deplier.php'));
+afficher_script_layer();
+?>
+	<ul>
+	
+		<li class="<?php echo ($accueil == 1 ? 'on' : 'off'); ?>">
+			<img src="plugins/eva/images/puce<?php echo ($accueil == 1 ? 'on' : 'off'); ?>.gif" alt="-" />
+			<a href="#URL_SITE_SPIP" class="<?php echo ($accueil == 1 ? 'on' : 'off'); ?>"><:accueil_site:></a>
+		</li>
+		
+		<BOUCLE_secteur(RUBRIQUES){id_parent=0}{id_secteur!=1}{par num titre}>
+		<?php $id = #ID_RUBRIQUE; ?>
+		<BOUCLE_nb_rubriques(RUBRIQUES){id_parent}{par num titre}>
+		<?php ${'nb'.$id} = #TOTAL_BOUCLE; ?>
+		</BOUCLE_nb_rubriques>
+		<li class="<?php echo (#ID_SECTEUR == $le_secteur ? 'on' : 'off'); ?>">
+			<?php
+			if ($nb#ID_RUBRIQUE > 0) {
+				if (in_array(#ID_RUBRIQUE, $hierarchie)) {
+					echo bouton_block_visible('rub#ID_RUBRIQUE');
+				} else {
+					echo bouton_block_invisible('rub#ID_RUBRIQUE');
+				}
+			} else {
+				echo '<img src="plugins/eva/images/puce'.(#ID_RUBRIQUE == $actuelle ? 'on' : 'off').'.gif" alt="-" /> ';
+			} ?>
+			<a href="#URL_RUBRIQUE" class="<?php echo (#ID_RUBRIQUE == $actuelle ? 'on' : 'off'); ?>">[(#TITRE|supprimer_numero)]</a>
+			
+			<?php
+			if ($nb#ID_RUBRIQUE > 0) {
+				if (in_array(#ID_RUBRIQUE, $hierarchie)) {
+					echo debut_block_visible('rub#ID_RUBRIQUE');
+				} else {
+					echo debut_block_invisible('rub#ID_RUBRIQUE');
+				}
+			} else {
+				echo '<div>';
+			} ?>
+			
+			<B_rubriques>
+			<ul>
+			<BOUCLE_rubriques(RUBRIQUES){id_parent}{par num titre}>
+			<?php $id = #ID_RUBRIQUE; ?>
+			<BOUCLE_nb_sous_rubriques(RUBRIQUES){id_parent}>
+			<?php ${'nb'.$id} = #TOTAL_BOUCLE; ?>
+			</BOUCLE_nb_sous_rubriques>
+			
+				<li class="<?php echo (#ID_RUBRIQUE == $actuelle ? 'on' : 'off'); ?>">
+					<?php
+					if ($nb#ID_RUBRIQUE > 0) {
+						if (in_array(#ID_RUBRIQUE, $hierarchie)) {
+							echo bouton_block_visible('rub#ID_RUBRIQUE');
+						} else {
+							echo bouton_block_invisible('rub#ID_RUBRIQUE');
+						}
+					} else {
+						echo '<img src="plugins/eva/images/puce'.(#ID_RUBRIQUE == $actuelle ? 'on' : 'off').'.gif" alt="-" /> ';
+					}?>
+					<a href="#URL_RUBRIQUE" class="<?php echo (#ID_RUBRIQUE == $actuelle ? 'on' : 'off'); ?>">[(#TITRE|supprimer_numero)]</a>
+					
+					<B_sous_rubriques>
+					<?php
+					if ($nb#ID_RUBRIQUE > 0) {
+						if (in_array(#ID_RUBRIQUE, $hierarchie)) {
+							echo debut_block_visible('rub#ID_RUBRIQUE');
+						} else {
+							echo debut_block_invisible('rub#ID_RUBRIQUE');
+						}
+					} else {
+						echo '<div>';
+					} ?>
+					<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+					</div>
+					</B_sous_rubriques>
+				</li>
+				
+			</BOUCLE_rubriques>
+			</ul>
+			</B_rubriques>
+		
+		</div>
+		</li>
+		</BOUCLE_secteur>
+		
+	</ul>
+	<div class="clear"> </div>
+</div>
+<div class="bloc">
+	<h4>Chercher dans le site</h4>
+	<div style="line-height:3px"> </div>
+	<div style="text-align:center">#FORMULAIRE_RECHERCHE</div>
+	<div style="line-height:3px"> </div>
+</div>
+<div class="clear"></div>

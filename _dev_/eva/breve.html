@@ -1,0 +1,151 @@
+#CACHE{24*3600}
+<BOUCLE_principale(BREVES) {id_breve}>
+<?php $actuel = "#ID_BREVE"; ?>
+<INCLURE{fond=entete_meta}>
+	<!--affichage du titre de la page -->
+	<title>[#NOM_SITE_SPIP]  [(#TITRE|supprimer_numero)]</title>
+	<!-- description et mots-clés de la page -->
+	[<meta name="Description" content="(#DESCRIPTIF|supprimer_tags|texte_script)" />]
+	<meta name="Keywords" content="<BOUCLE_keywords(MOTS){id_breve}{", "}>#TITRE</BOUCLE_keywords>" />
+</head>
+<body>
+	<div id="Page">		
+		<div id="EnteteArticle">
+			
+			<div id="TitreSite">
+				<!--affichage du logo et titre du site -->
+				<h1>
+					<BOUCLE_logo_accueil(SITES){id_syndic=7}>
+					[(#LOGO_SITE)]
+					</BOUCLE_logo_accueil>
+					#NOM_SITE_SPIP
+				</h1>
+			</div>
+			
+			<!-- Auteur(s), date, <:version_imprimable:> -->
+			<ul class="auteur">
+				<li><strong><:le:> </strong>[ (#DATE|nom_jour)][ (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</li>
+			</ul>
+			<!--affichage du titre et logo de la brève -->
+			[<h2>#LOGO_BREVE_RUBRIQUE (#TITRE|supprimer_numero)</h2>]
+			<br class="clear" />
+		</div>
+		
+
+		<!-- début du menu -->
+		<div id="Menu">
+			<INCLURE{fond=menu}{id_rubrique}>
+			
+			<B_breves>
+			<!--affichage des brèves de la même rubrique -->
+			<div class="bloc">
+				<h4><:autres_breves:></h4>
+				<ul>
+					<BOUCLE_breves(BREVES){id_secteur}{par date}{inverse}>
+					<li[ class="(#EXPOSER|on,off)"]><a href="#URL_BREVE">[<strong>(#TITRE|supprimer_numero)</strong>]</a></li>
+					</BOUCLE_breves>
+				</ul>
+			</div>
+			</B_breves>
+			
+			<B_mots>
+			<!--affichage des mots-clés -->
+			<div class="bloc">
+				<h4><:mots_clefs:></h4>
+				<ul>
+					<BOUCLE_mots(MOTS){id_breve}>
+					<li><a href="#URL_MOT">[<strong>(#TITRE|supprimer_numero)</strong>]</a></li>
+					</BOUCLE_mots>
+				</ul>
+			</div>
+			</B_mots>
+			
+			<B_forums_liens>
+			<!--affichage des messages du forum -->
+			<div class="bloc">
+				<h4><:derniers_messages_forum:></h4>
+				<ul>
+				 <BOUCLE_forums_liens(FORUMS){id_breve}{par date}{inverse}{plat}{0,5}>
+				 			<li><a href="#forum#ID_FORUM">#TITRE</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)]</em></li>
+				</BOUCLE_forums_liens>
+				</ul>
+			</div>
+			</B_forums_liens>
+            
+		</div>
+		<!-- fin du menu -->
+		
+
+		<!-- début du contenu -->
+		<div id="Contenu">
+			
+			<!-- chapeau, texte, post-scriptum de l'article -->
+			[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+			
+			[<!-- Bouton laisser un commentaire -->
+			<a href="spip.php?page=forum&(#PARAMETRES_FORUM)" class="spip_bouton"><:repondre_breve:></a>]
+			
+			[<div class="lien"><strong><:voir_en_ligne:> : </strong><a href="#URL_SITE">(#NOM_SITE)</a></div>]
+			
+			[<!-- Notes de bas de page -->
+			<div class="notes">
+			<h4><:notes_bas_page:></h4>
+			<div>(#NOTES)</div>
+			</div>]
+			
+			<!-- début du forum -->
+			<div id="forum">
+			
+				<B_forums_decompte>
+				<h4 class="titre-forum">
+					<strong><:forum_breve:></strong> 
+					<BOUCLE_forums_decompte(FORUMS){id_breve}{plat}>
+					</BOUCLE_forums_decompte>[(#TOTAL_BOUCLE) <:contributions_forum:>]
+				</h4>
+				</B_forums_decompte>
+				
+				<B_forums>
+				<!-- Affichage des messages du forum -->
+				<BOUCLE_forums(FORUMS){id_breve}{par date}{inverse}>
+					<dl class="forum" id="forum#ID_FORUM">
+						<dt>[<strong>(#TITRE)</strong>][, par <a href="mailto:[(#EMAIL|antispam)]">(#NOM)</a>]<em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em></dt>
+						<dd>
+							[(#TEXTE)]
+							[<div class="lien"><:voir_en_ligne:> <a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
+							[<div class="bouton"><a href="spip.php?page=forum&(#PARAMETRES_FORUM)" class="spip_bouton"><:repondre_message:></a></div>]
+						</dd>
+						<!-- Affichage des réponses aux messages -->
+						<BOUCLE_forums_fils(FORUMS){id_parent}{par date}{inverse}>
+							<dl class="reponse" id="forum#ID_FORUM">
+								<dt>[<strong>(#TITRE)</strong>][, par <a href="mailto:[(#EMAIL|antispam)]">(#NOM)</a>]<em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em></dt>
+								<dd>
+									[(#TEXTE)]
+									[<div class="lien"><:voir_en_ligne:> <a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
+								 	[<div class="bouton"><a href="spip.php?page=forum&(#PARAMETRES_FORUM)" class="spip_bouton"><:repondre_message:></a></div>]
+								</dd>
+								<BOUCLE_Forums_Boucle(boucle_forums_fils)>
+								</BOUCLE_Forums_Boucle>
+							</dl>
+						</BOUCLE_forums_fils>
+					</dl>
+					<a href="#forum" class="spip_bouton"><:retour_debut_forums:></a>
+				</BOUCLE_forums>
+				</B_forums>
+			
+			</div>
+			<!-- Fin du forum -->
+
+		</div>
+		<!-- fin du contenu -->
+		
+		
+		<br class="clear" />
+		
+		
+		<INCLURE{fond=pied}{skel=#SQUELETTE}>
+	</div>
+</body>
+</html>
+</BOUCLE_principale>
+<INCLURE{fond=page-404}>
+<//B_principale>

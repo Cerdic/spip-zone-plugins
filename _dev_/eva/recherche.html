@@ -1,0 +1,125 @@
+#CACHE{24*3600}
+<INCLURE{fond=entete_meta}>
+	<!--affichage du titre de la page -->
+	<title>[#NOM_SITE_SPIP]  <:rechercher_sur_le_site:> #RECHERCHE</title>
+	<!-- Lien vers le backend pour navigateurs eclaires -->
+	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="spip.php?page=backend" />
+	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_breves:>" href="spip.php?page=backend-breves" />
+</head>
+<body>
+	<div id="Page">
+		<div id="EntetePage">
+			
+			<!--affichage du formulaire de recherche sur le site -->
+			
+			<div id="TitreSite">
+				<!--affichage du logo et titre du site -->
+				<h1>
+					<BOUCLE_logo_accueil(SITES){id_syndic=7}>
+					[(#LOGO_SITE)]
+					</BOUCLE_logo_accueil>
+					#NOM_SITE_SPIP
+				</h1>
+			</div>
+			
+			<!--affichage du logo et titre de la page -->
+			<h2>
+				<img src="/IMG/rubon16.png" alt="Rechercher sur le site" class="spip_logos" />
+				<:rechercher_sur_le_site:> <em>#RECHERCHE</em>
+			</h2>
+			#FORMULAIRE_RECHERCHE
+			<div class="arborescence">
+				<:vous_etes_ici:> <a href="#URL_SITE_SPIP"><:accueil_site:></a>
+				<span>&nbsp;</span>
+				<:rechercher_sur_le_site:> <em>#RECHERCHE</em>
+			</div>
+		</div>
+		
+
+		<!-- début du menu-->
+		<div id="Menu">
+			
+			<B_rubriques>
+			<!-- rubriques trouvées -->
+			<div class="bloc">
+				<h4><:rubriques:></h4>
+				<ul> 
+					<BOUCLE_rubriques(RUBRIQUES){id_secteur != 1}{recherche}{par points}{inverse}{0,5}>
+					<li><a href="#URL_RUBRIQUE">[<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)]</em></li>
+					</BOUCLE_rubriques>
+				</ul>
+			</div>
+			</B_rubriques>
+			
+			<B_breves>
+			<!-- brèves trouvées -->
+			<div class="bloc">
+				<h4><:breves:></h4>
+				<ul> 
+					<BOUCLE_breves(BREVES){id_secteur != 1}{recherche}{par points}{inverse}{0,5}>
+					<li><a href="#URL_BREVE">[<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)]</em></li>
+					</BOUCLE_breves>
+				</ul>
+			</div>
+			</B_breves>
+			
+			<B_sites>
+			<!-- sites trouvés -->
+			<div class="bloc">
+				<h4><:sites_web:></h4>
+				<ul> 
+					<BOUCLE_sites(SITES){id_secteur != 1}{recherche}{par points}{inverse}{0,5}>
+					<li><a href="#URL_SITE">[<strong>(#NOM_SITE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)]</em></li>
+					</BOUCLE_sites>
+				</ul>
+			</div>
+			</B_sites>
+			
+			<B_mots>
+			<!-- mots-clés trouvés -->
+			<div class="bloc">
+				<h4><:mots_clefs:></h4>
+				<ul>
+					<BOUCLE_mots(MOTS){recherche}{par points}{inverse}{0,5}>
+					<li><a href="#URL_MOT">[<strong>(#TITRE|supprimer_numero)</strong>]</a></li>
+					</BOUCLE_mots>
+				</ul>
+			</div>
+			</B_mots>
+            
+		</div>
+		<!-- fin du menu-->
+		
+
+		<!-- début du contenu-->
+		<div id="Contenu">
+			<B_articles>
+			<!-- Articles trouvés -->
+			<div id="articles">
+				<h3 class="titre"><:articles:></h3>
+				<dl>
+					<BOUCLE_articles(ARTICLES){id_secteur != 1}{recherche}{par points}{inverse}{0,20}>
+					<dt><a href="#URL_ARTICLE">[<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em></dt>
+					[<dd>(#INTRODUCTION|supprimer_tags|couper{200})</dd>]
+					</BOUCLE_articles>
+				</dl>
+			</div>
+			</B_articles>
+	
+			[<!-- Notes de bas de page -->
+			<div class="notes">
+				<h4><:notes_bas_page:></h4>
+				(#NOTES)
+			</div>]
+
+		</div>
+		<!-- fin du contenu -->
+		
+		
+		<br class="clear" />
+		
+
+		<INCLURE{fond=pied}{skel=#SQUELETTE}>
+	</div>
+</body>
+</html>

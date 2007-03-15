@@ -1,0 +1,75 @@
+#CACHE{24*3600}
+<INCLURE{fond=entete_meta}>
+	<!--affichage du titre de la page -->
+	<title>[#NOM_SITE_SPIP]  <:autres_groupes_mots_clefs:></title>
+</head>
+<body>
+	<div id="Page">
+		<div id="EntetePage">
+			
+			<div id="TitreSite">
+				<!--affichage du logo et titre du site -->
+				<h1>
+					<BOUCLE_logo_accueil(SITES){id_syndic=7}>
+					[(#LOGO_SITE)]
+					</BOUCLE_logo_accueil>
+					#NOM_SITE_SPIP
+				</h1>
+			</div>
+			
+			<!--affichage du (sur et sous) titre de l'article -->
+			<h2><:autres_groupes_mots_clefs:></h2>
+<!--			<div class="arborescence">
+				Vous &ecirc;tes ici : <a href="#URL_SITE_SPIP"><:accueil_site:></a>
+				<span>&nbsp;</span>
+				<:autres_groupes_mots_clefs:>
+			</div>
+			<br class="clear" />-->
+		</div>
+		
+
+		<!-- menu -->
+		<div id="Menu">
+			<INCLURE{fond=menu}{id_rubrique=102}>
+		</div>
+		
+
+		<!-- début du contenu -->
+		<div id="Contenu">
+			
+	      <!-- affichage des groupes de mots-clés -->
+	     <BOUCLE_groupes(GROUPES_MOTS){par titre}>
+	      
+			<B_mots>
+			<!-- Rubriques -->
+				<div class="groupesmots">
+					[<h3 class="titre">(#TITRE|supprimer_numero)</h3>]
+					<dl>
+					<BOUCLE_mots(MOTS){id_groupe}>
+						<dt><a href="#URL_MOT">[<strong>(#TITRE|supprimer_numero)</strong>]</a></dt>
+						[<dd>(#DESCRIPTIF)</dd>]
+					</BOUCLE_mots>
+					</dl>
+				</div>
+			</B_mots>
+			
+			</BOUCLE_groupes>
+		
+			
+			[<!-- Notes de bas de page -->
+			<div class="notes">
+			<h4><:notes_bas_page:></h4>
+			<div>(#NOTES)</div>
+			</div>]
+
+		</div>
+		<!-- fin du contenu -->
+		
+		
+		<br class="clear" />
+		
+		
+		<INCLURE{fond=pied}{skel=#SQUELETTE}>
+	</div>
+</body>
+</html>

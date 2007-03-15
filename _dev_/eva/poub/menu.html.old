@@ -1,0 +1,113 @@
+#CACHE{24*3600}
+
+<?php
+$hierarchie = array();
+<BOUCLE_recup_rub(RUBRIQUES){id_rubrique}>
+	<BOUCLE_recup_hierarchie(HIERARCHIE){id_rubrique}>
+		$hierarchie[] = #ID_RUBRIQUE;
+	</BOUCLE_recup_hierarchie>
+	$hierarchie[] = #ID_RUBRIQUE;
+</BOUCLE_recup_rub>
+?>
+
+<script type="text/javascript">
+var liste_cache = new Array(0);
+
+function alterner_visibilite(liste, onload){
+	var el  = document.getElementsByName(liste)[0].getElementsByTagName("LI");
+	//var el = document.all[liste].getElementsByTagName("LI");
+	if(onload == "non"){
+		if(document.images['puce_'+liste].src == "#URL_SITE_SPIP/plugins/eva/images/deplierbas.gif"){
+			document.images['puce_'+liste].src = "plugins/eva/images/deplierhaut.gif"
+		}
+		else{
+			document.images['puce_'+liste].src = "plugins/eva/images/deplierbas.gif"
+		}
+	}
+	for(i=0; i<el.length; i++){
+
+		if(el[i].style.display=="none"){
+			el[i].style.display="block";
+		}
+		else{
+			el[i].style.display="none";
+		}
+	}
+}
+
+
+</script>
+<div class="sommaire">
+<ul>
+	<li[ class="(#ENV{accueil}|=={'1'}|?{'on','off'})"]>
+		<img src="plugins/eva/images/puce[(#ENV{accueil}|=={'1'}|?{'on','off'})].gif" onclick="location.href('/')" style="cursor:pointer" alt="-" />
+		<a href="#URL_SITE_SPIP" class="petites_caps[ (#ENV{accueil}|=={'1'}|?{'on','off'})]">
+			<:accueil_site:>
+		</a>
+	</li>
+
+<?php /* Boucles */ ?>
+<BOUCLE_secteurs(RUBRIQUES){id_parent=0}{id_secteur!=1}{par num titre}>
+	<li class="liste_secteurs[ (#EXPOSE)]" name="#ID_RUBRIQUE">
+			<img style="cursor:pointer" onclick="javascript:alterner_visibilite(#ID_RUBRIQUE, 'non')" src="plugins/eva/images/deplier[(#EXPOSE{bas.gif,haut.gif})]" name="puce_#ID_RUBRIQUE" alt="-" />
+		<script type="text/javascript">
+			liste_cache.push("#ID_RUBRIQUE");
+		</script>
+			<a href="#URL_RUBRIQUE" class="liens_secteur petites_caps[ (#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'on', ''})]">
+				[(#TITRE|supprimer_numero)] <?php /* Titres des secteurs */ ?>
+			</a>
+	<B_articles>
+		<ul class="liste_articles_menu">
+		<BOUCLE_articles(ARTICLES){id_rubrique}{par num titre}>
+				<li class="articles_menu">
+					<a class="liens_articles[ (#EXPOSE)]" href="#URL_ARTICLE" name="art_#ID_ARTICLE">
+						[(#TITRE|supprimer_numero)] <?php /*Titres des articles*/ ?>
+					</a>
+				</li> <?php /* A : ferme B */ ?>
+		</BOUCLE_articles>
+			</ul>
+	</B_articles>
+
+	<B_rubriques>
+		<ul classe="liste_rubriques_ul">
+		<BOUCLE_rubriques(RUBRIQUES){id_parent}{par num titre}>
+    			<li class="liste_rubriques_li [ (#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'on', ''})]" name="#ID_RUBRIQUE"> <?php /* B : ouvre A */ ?>
+					<img style="cursor:pointer" onclick="javascript:alterner_visibilite(#ID_RUBRIQUE, 'non')" src="plugins/eva/images/deplier[(#EXPOSE{bas.gif,haut.gif})]" id="#ID_RUBRIQUE" alt="-" name="puce_#ID_RUBRIQUE" />
+					<a class="liens_rubriques[ (#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'on', ''})]" href="#URL_RUBRIQUE">
+						<strong>[(#TITRE|supprimer_numero)]</strong>
+					</a> <?php /* Titres des rubriques */ ?>
+					<script type="text/javascript">
+						liste_cache.push("#ID_RUBRIQUE");
+					</script>
+			<BOUCLE_articles_rubriques(BOUCLE_articles)>
+			</BOUCLE_articles_rubriques>
+
+			<BOUCLE_sous_rubriques(BOUCLE_rubriques)>
+				<BOUCLE_articles_sous_rubriques(BOUCLE_articles)>
+				</BOUCLE_articles_sous_rubriques>
+			</BOUCLE_sous_rubriques>
+
+		</BOUCLE_rubriques>
+			</ul>
+	</B_rubriques>
+
+	</li>
+</BOUCLE_secteurs>
+<?php /* Boucles */ ?>
+<script>
+for(j=0; j<liste_cache.length; j++){
+alterner_visibilite(liste_cache[j]);
+}
+</script>
+<?php
+for($i=0; $i < count($hierarchie); $i++){
+echo "
+	<script type='text/javascript'>
+		alterner_visibilite($hierarchie[$i], 'oui');
+	</script>
+";
+}
+?>
+
+</ul>
+</div>

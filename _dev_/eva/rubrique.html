@@ -1,0 +1,104 @@
+#CACHE{24*3600}
+<BOUCLE_principale(RUBRIQUES){id_rubrique}>
+<?php 
+/* cette page n'affichera rien elle même, 
+mais nous sert à tester la présence ou 
+non du mots-clés agenda  */
+
+/* on initialise nos variables */
+$Agenda=0;
+$AgendaSimple=0;
+
+/* Test Agenda Simple */
+<BOUCLE_hierarchie_simple(HIERARCHIE){id_rubrique}>
+<BOUCLE_mot_agenda_hierarchie_simple(MOTS){id_rubrique}{titre = agenda}{unique}>
+	$Agenda=1;
+	$AgendaRub='#ID_RUBRIQUE';
+</BOUCLE_mot_agenda_hierarchie_simple>
+</BOUCLE_hierarchie_simple>
+
+<BOUCLE_mot_agenda_simple(MOTS){id_rubrique}{titre = agenda}>
+	$Agenda=1;
+</BOUCLE_mot_agenda_simple>
+
+/* Test Agenda (normal) */
+<BOUCLE_hierarchie(HIERARCHIE){id_rubrique}>
+<BOUCLE_mot_agenda_hierarchie(MOTS){id_rubrique}{titre = calendrier}{unique}>
+	$Calendrier=1;
+	$AgendaRub='#ID_RUBRIQUE';
+</BOUCLE_mot_agenda_hierarchie>
+</BOUCLE_hierarchie>
+
+<BOUCLE_mot_agenda(MOTS){id_rubrique}{titre = calendrier}>
+	$Calendrier=1;
+</BOUCLE_mot_agenda>
+
+
+
+/* si ce doit être l'agenda simple on appelle le 
+fichier "rubrique-agenda-simple.html" */
+if ("$Agenda"=="1") {
+
+$date=$_GET['date']; ?>
+
+<INCLURE{fond=rubrique-agenda}{id_rubrique}>
+
+<?php 
+/* si ce doit être l'agenda on appelle le 
+fichier "rubrique-agenda.html" */
+} elseif ("$Calendrier"=="1") {
+
+/************************************************
+ début de récupération des éléments pour l'agenda
+*************************************************/
+
+/* Tout d'abord, on prépare quelques données qui seront utilisées par la suite */
+$months = array('', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre');
+$days = array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi');
+
+if (!isset($date) || $date == '') $date = date('Y-m-d');
+ereg("^([0-9]{4})-([0-9]{2})-([0-9]{2}).*$", $date, $regs);
+$cal_day = mktime(0, 0, 0, $regs[2], $regs[3], $regs[1]);
+
+$D = date('d', $cal_day);
+$M = date('m', $cal_day);
+$Y = date('Y', $cal_day);
+
+/* Ensuite, on rempli un tableau avec la liste des rubriques thématiques retenues */
+
+$branche = array();
+<BOUCLE_courante(RUBRIQUES){id_rubrique}>
+    <BOUCLE_branche(RUBRIQUES){branche}>
+        $branche[] = #ID_RUBRIQUE;
+    </BOUCLE_branche>
+</BOUCLE_courante>
+
+/* Puis on récupère dans un nouveau tableau la liste des évènements du mois donné */
+
+$events = array();
+<BOUCLE_evts(ARTICLES){branche}{age_relatif_redac > -38}{age_relatif_redac < 38}{par date_redac}>
+    if (in_array(#ID_RUBRIQUE, $branche)) {
+        $dateEvt = ereg_replace("^([0-9]{4})-([0-9]{2})-([0-9]{2}).*$", "\\1\\2\\3", '#DATE_REDAC');
+        if (!isset($events[$dateEvt])) {
+            $events[$dateEvt] = array();
+        }
+        $events[$dateEvt][] = array('rub' => #ID_RUBRIQUE, 'link' => '#URL_ARTICLE', 'title' => '[(#TITRE|supprimer_tags|texte_script)]', 'descriptif' => '[(#DESCRIPTIF|supprimer_tags|texte_script)]', 'logo' => '<img src="IMG/[(#LOGO_ARTICLE_RUBRIQUE|fichier)]" width="20" />');
+    }
+</BOUCLE_evts>
+
+/************************************************
+ fin de récupération des éléments pour l'agenda
+*************************************************/
+?>
+<INCLURE{fond=rubrique-calendrier}{id_rubrique}{AgendaRub=$AgendaRub}>
+
+<?php 
+/* sinon on appelle le fichier "rubrique-normal.html" */
+} else { ?>
+<INCLURE{fond=rubrique-normal}{id_rubrique}>
+<?php }  ?>
+
+</BOUCLE_principale>
+
+<INCLURE{fond=page-404}><?php 
+<//B_principale>

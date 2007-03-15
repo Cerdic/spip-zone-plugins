@@ -1,0 +1,45 @@
+#CACHE{24*3600}
+<BOUCLE_principale(DOCUMENTS){id_article}{par num titre}{extension==jpg|png|gif}{mode=document}{debut_image,1}>
+<BOUCLE_article(ARTICLES){id_article}>
+<?php $actuel = "#ID_ARTICLE"; ?>
+</BOUCLE_article>
+<INCLURE{fond=entete_meta}>
+	<!--affichage du titre de la page -->
+	<title>[#NOM_SITE_SPIP] [(#TITRE|supprimer_numero)]</title>
+
+	<!-- description et mots-clés de la page -->
+	[<meta name="Description" content="(#DESCRIPTIF|supprimer_tags|texte_script)" />]
+	<meta name="Keywords" content="<BOUCLE_keywords(MOTS){id_article}{", "}>#TITRE</BOUCLE_keywords>" />
+</head>
+<body>
+	<!-- affichage de la photo -->
+	<div id="photo">
+		<BOUCLE_nb_photo(DOCUMENTS){id_article}{extension==jpg|png|gif}{mode=document}>
+		</BOUCLE_nb_photo>
+		<?php // récupération du nombre total d'images attachées à l'article, dans une variable PHP
+			$nb_images = "#TOTAL_BOUCLE"; ?>
+		</B_nb_photo>
+		<?php // pour passer d'une image à l'autre avec affichage du num. de l'image par rapport au nombre total. calcul des num. d'image suivante et précédente
+			if ($debut_image == $nb_images-1){
+				$im_suiv = 0;
+			}else{
+				$im_suiv = $debut_image + 1;
+			}
+		?>
+		<!-- affichage de la première photo de la liste (par défaut), avec lien vers la suivante dessus -->
+		<a href="?page=article-album-photo&id_article=<?php echo $actuel ; ?>&debut_image=<?php echo $im_suiv ?>" title="<:image_suivante:>">
+<img src="#URL_DOCUMENT"[ alt="(#TITRE|supprimer_numero|sinon{"Photo"})"] class="spip_logos">
+		</a> 
+		<!-- affichage de la légende (titre et descriptif) de la photo -->
+		<dl>
+			<dt[ class="(#EDIT{titre})"]>[<strong>(#TITRE|supprimer_numero)</strong>]</dt>
+			[<dd class="#EDIT{descriptif}">(#DESCRIPTIF)</dd>]
+		</dl>
+		<div class="spip_bouton" style="width:100px; margin:4px 4px 4px auto;" onClick="javascript:self.close();"><a href="javascript:self.close();"><strong><:fermer:></strong></a></div>
+		
+	</div>
+</body>
+</html>
+</BOUCLE_principale>
+<INCLURE{fond=page-404}>
+<//B_principale>

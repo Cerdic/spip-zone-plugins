@@ -1,0 +1,253 @@
+<BOUCLE_principale(ARTICLES) {id_article}>
+<?php $actuel = "#ID_ARTICLE"; ?>
+<INCLURE{fond=entete_meta}>
+	<!--affichage du titre de la page -->
+	<title>[#NOM_SITE_SPIP]  <:repondre_forum:></title>
+	
+</head>
+<body>
+	<div id="NoMenu">		
+		<div id="EnteteArticle">
+			
+			<div id="TitreSite">
+				<!--affichage du logo et titre du site -->
+				<h1>
+					<BOUCLE_logo_accueil(SITES){id_syndic=7}>
+					[(#LOGO_SITE)]
+					</BOUCLE_logo_accueil>
+					#NOM_SITE_SPIP
+				</h1>
+			</div>
+			
+			<h2><:en_reponse:></h2>		
+			
+			<dl class="premier">
+			<B_message_2><!--Réponse au message-->
+			<BOUCLE_message_2(FORUMS){id_forum}>
+				[<dt><strong>(#TITRE|supprimer_numero)</strong></dt>]
+				[<dd>(#TEXTE)</dd>]
+			</BOUCLE_message_2>
+				<B_article_2><!--Réponse à l'article-->
+				<BOUCLE_article_2(ARTICLES){id_article}>
+					[<dt><strong><a href="#URL_ARTICLE">(#TITRE|supprimer_numero)</a></strong></dt>]
+					[<dd>(#INTRODUCTION)</dd>]
+				</BOUCLE_article_2>
+				<B_breve_2><!--Réponse à la brève-->
+				<BOUCLE_breve_2(BREVES){id_breve}>
+					[<dt><strong><a href="#URL_BREVE">(#TITRE|supprimer_numero)</a></strong></dt>]
+					[<dd>(#INTRODUCTION)</dd>]
+				</BOUCLE_breve_2>
+			<//B_message_2>
+			</dl>
+		</div>
+
+		<!-- début du contenu -->
+		<div id="Contenu">
+
+<?php 			
+/*
+			<!-- tableau des smileys -->
+			<table id="smileys">
+				<tr class="row_first"> 
+					<td colspan="2">Smileys</td>
+				</tr>
+				<tr class="row_even"> 
+					<td><img src="smileys/sourire.png" alt="smiley" class="smiley" /></td>
+					<td>:-)</td>
+				</tr>
+				<tr class="row_odd"> 
+					<td><img src="smileys/mort_de_rire.png" alt="smiley" class="smiley" /></td>
+					<td>:-D</td>
+				</tr>
+				<!-- <tr class="row_even"> 
+					<td><img src="smileys/pleure_de_rire.png" alt="smiley" class="smiley" /></td>
+					<td>:'-D</td>
+				</tr> -->
+				<tr class="row_odd"> 
+					<td><img src="smileys/rigolo.png" alt="smiley" class="smiley" /></td>
+					<td>:o)</td>
+				</tr>
+				<tr class="row_even"> 
+					<td><img src="smileys/lunettes.png" alt="smiley" class="smiley" /></td>
+					<td>B-)</td>
+				</tr>
+				<tr class="row_odd"> 
+					<td><img src="smileys/clin_d-oeil.png" alt="smiley" class="smiley" /></td>
+					<td>;-)</td>
+				</tr>
+				<tr class="row_even"> 
+					<td><img src="smileys/tire_la_langue.png" alt="smiley" class="smiley" /></td>
+					<td>:-p</td>
+				</tr>
+				<tr class="row_odd"> 
+					<td><img src="smileys/diable.png" alt="smiley" class="smiley" /></td>
+					<td>:-></td>
+				</tr>
+				<tr class="row_even"> 
+					<td><img src="smileys/bof.png" alt="smiley" class="smiley" /></td>
+					<td>:-|</td>
+				</tr>
+				<tr class="row_odd"> 
+					<td><img src="smileys/mouai.png" alt="smiley" class="smiley" /></td>
+					<td>:-/</td>
+				</tr>
+				<tr class="row_even"> 
+					<td><img src="smileys/surprit.png" alt="smiley" class="smiley" /></td>
+					<td>:-o</td>
+				</tr>
+				<tr class="row_odd"> 
+					<td><img src="smileys/pas_content.png" alt="smiley" class="smiley" /></td>
+					<td>:-(</td>
+				</tr>
+				<!-- <tr class="row_even"> 
+					<td><img src="smileys/triste.png" alt="smiley" class="smiley" /></td>
+					<td>:'-(</td>
+				</tr> -->
+				<tr class="row_odd"> 
+					<td><img src="smileys/en_colere.png" alt="smiley" class="smiley" /></td>
+					<td>:-((</td>
+				</tr>
+			</table>
+*/
+?>
+			
+			<!--affichage du formulaire-->
+			[<div class="#EDIT{texte} texte">(#FORMULAIRE_FORUM)</div>]
+			
+			[<!-- Notes de bas de page -->
+			<div class="notes">
+			<h4><:notes_bas_page:></h4>
+			<div>(#NOTES)</div>
+			</div>]
+			
+		</div>
+		<br class="clear" />
+		<!-- fin du contenu -->
+		
+		<INCLURE{fond=pied}{skel=#SQUELETTE}>
+	</div>
+</body>
+</html>
+</BOUCLE_principale>
+
+<BOUCLE_principale_breves(BREVES) {id_breve}>
+<?php $actuel = "#ID_BREVE"; ?>
+<INCLURE{fond=entete_meta}>
+	<!--affichage du titre de la page -->
+	<title>[#NOM_SITE_SPIP]  <:repondre_forum:></title>
+</head>
+<body>
+	<div id="NoMenu">		
+		<div id="EnteteArticle">
+			
+			<div id="TitreSite">
+				<!--affichage du logo et titre du site -->
+				<h1>
+					<BOUCLE_logo_accueil_bis(SITES){id_syndic=7}>
+					[(#LOGO_SITE)]
+					</BOUCLE_logo_accueil_bis>
+					#NOM_SITE_SPIP
+				</h1>
+			</div>
+			
+			<h2><:en_reponse:></h2>		
+			
+			<dl class="premier">
+			<B_message_2_bis><!--Réponse au message-->
+			<BOUCLE_message_2_bis(FORUMS){id_forum}>
+				[<dt><strong>(#TITRE|supprimer_numero)</strong></dt>]
+				[<dd>(#TEXTE)</dd>]
+			</BOUCLE_message_2_bis>
+				<B_breve_2_bis><!--Réponse à la brève-->
+				<BOUCLE_breve_2_bis(BREVES){id_breve}>
+					[<dt><strong><a href="#URL_BREVE">(#TITRE|supprimer_numero)</a></strong></dt>]
+					[<dd>(#INTRODUCTION)</dd>]
+				</BOUCLE_breve_2_bis>
+			<//B_message_2_bis>
+			</dl>
+		</div>
+
+		<!-- début du contenu -->
+		<div id="Contenu">
+			
+			<!-- tableau des smileys -->
+			<table id="smileys">
+				<tr class="row_first"> 
+					<td colspan="2">Smileys</td>
+				</tr>
+				<tr class="row_even"> 
+					<td><img src="smileys/sourire.png" alt="smiley" class="smiley" /></td>
+					<td>:-)</td>
+				</tr>
+				<tr class="row_odd"> 
+					<td><img src="smileys/mort_de_rire.png" alt="smiley" class="smiley" /></td>
+					<td>:-D</td>
+				</tr>
+				<!-- <tr class="row_even"> 
+					<td><img src="smileys/pleure_de_rire.png" alt="smiley" class="smiley" /></td>
+					<td>:'-D</td>
+				</tr> -->
+				<tr class="row_odd"> 
+					<td><img src="smileys/rigolo.png" alt="smiley" class="smiley" /></td>
+					<td>:o)</td>
+				</tr>
+				<tr class="row_even"> 
+					<td><img src="smileys/lunettes.png" alt="smiley" class="smiley" /></td>
+					<td>B-)</td>
+				</tr>
+				<tr class="row_odd"> 
+					<td><img src="smileys/clin_d-oeil.png" alt="smiley" class="smiley" /></td>
+					<td>;-)</td>
+				</tr>
+				<tr class="row_even"> 
+					<td><img src="smileys/tire_la_langue.png" alt="smiley" class="smiley" /></td>
+					<td>:-p</td>
+				</tr>
+				<tr class="row_odd"> 
+					<td><img src="smileys/diable.png" alt="smiley" class="smiley" /></td>
+					<td>:-></td>
+				</tr>
+				<tr class="row_even"> 
+					<td><img src="smileys/bof.png" alt="smiley" class="smiley" /></td>
+					<td>:-|</td>
+				</tr>
+				<tr class="row_odd"> 
+					<td><img src="smileys/mouai.png" alt="smiley" class="smiley" /></td>
+					<td>:-/</td>
+				</tr>
+				<tr class="row_even"> 
+					<td><img src="smileys/surprit.png" alt="smiley" class="smiley" /></td>
+					<td>:-o</td>
+				</tr>
+				<tr class="row_odd"> 
+					<td><img src="smileys/pas_content.png" alt="smiley" class="smiley" /></td>
+					<td>:-(</td>
+				</tr>
+				<!-- <tr class="row_even"> 
+					<td><img src="smileys/triste.png" alt="smiley" class="smiley" /></td>
+					<td>:'-(</td>
+				</tr> -->
+				<tr class="row_odd"> 
+					<td><img src="smileys/en_colere.png" alt="smiley" class="smiley" /></td>
+					<td>:-((</td>
+				</tr>
+			</table>
+			
+			<!--affichage du formulaire-->
+			[<div class="#EDIT{texte} texte">(#FORMULAIRE_FORUM)</div>]
+			
+			[<!-- Notes de bas de page -->
+			<div class="notes">
+			<h4><:notes_bas_page:></h4>
+			<div>(#NOTES)</div>
+			</div>]
+			
+		</div>
+		<br class="clear" />
+		<!-- fin du contenu -->
+		
+		<INCLURE{fond=pied}{skel=#SQUELETTE}>
+	</div>
+</body>
+</html>
+</BOUCLE_principale_breves>

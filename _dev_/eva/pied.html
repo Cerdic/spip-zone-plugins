@@ -1,0 +1,22 @@
+#CACHE{24*3600}
+<!--affichage de la barre de boutons -->
+<ul id="PiedPage">
+	<BOUCLE_boutons_rubriques(RUBRIQUES){titre_mot = bouton}{par num titre}>
+		<li><a href="#URL_RUBRIQUE"  title="[(#TITRE|supprimer_numero)][ - (#DESCRIPTIF|supprimer_tags)]">[<span>(#TITRE|supprimer_numero)</span>]#LOGO_RUBRIQUE</a></li>
+	</BOUCLE_boutons_rubriques>
+	<BOUCLE_boutons_articles(ARTICLES){titre_mot = bouton}{par num titre}>
+		<li><a href="#URL_ARTICLE"  title="[(#TITRE|supprimer_numero)][ - (#DESCRIPTIF|supprimer_tags)]">[<span>(#TITRE|supprimer_numero)</span>]#LOGO_ARTICLE_RUBRIQUE</a></li>
+	</BOUCLE_boutons_articles>
+	<BOUCLE_boutons_sites(SITES){id_rubrique=2}{par nom_site}>
+		<li><a href="#URL_SITE"  title="[(#NOM_SITE|supprimer_numero)][ - (#DESCRIPTIF|supprimer_tags)]">[<span>(#NOM_SITE|supprimer_numero)</span>]#LOGO_SITE</a></li>
+	</BOUCLE_boutons_sites>
+</ul>
+<br class="clear" />
+<div class="spip_doc_titre">
+<a title="Suivre la vie du site" href="spip.php?page=backend"><img align="absmiddle" src="[(#CHEMIN{feed.png})]"><span class="petites_caps"> rss</span></a> |
+<a href="http://www.spip.net/fr"><img align="absmiddle" src="[(#CHEMIN{spip.png})]"/> #SPIP_VERSION</a> |
+<a href="http://spip-edu.edres74.net/eva/">d’après <span class="petites_caps">eva-w</span>eb 2.3</a> |
+<a href="#ENV{skel}">Squelette</a> |
+<a href="plugins/eva/eva/index.php3?presentation=presentation">Aide aux rédacteurs</a>
+
+</div>

@@ -1,0 +1,254 @@
+#CACHE{24*3600}
+<BOUCLE_principale(ARTICLES) {id_article}>
+<?php $actuel = "#ID_ARTICLE"; ?>
+<INCLURE{fond=entete_meta}>
+	<!--affichage du titre de la page -->
+	<title>[#NOM_SITE_SPIP]  [(#TITRE|supprimer_numero)]</title>
+	<!-- description et mots-clés de la page -->
+	[<meta name="Description" content="(#DESCRIPTIF|supprimer_tags|texte_script)" />]
+	<meta name="Keywords" content="<BOUCLE_keywords(MOTS){id_article}{", "}>#TITRE</BOUCLE_keywords>" />
+</head>
+<body>
+	<div id="Page">		
+		<div id="EnteteArticle">
+			
+			<div id="TitreSite">
+				<!--affichage du logo et titre du site -->
+				<h1>
+					<BOUCLE_logo_accueil(SITES){id_syndic=7}>
+					[(#LOGO_SITE)]
+					</BOUCLE_logo_accueil>
+					#NOM_SITE_SPIP
+				</h1>
+			</div>
+			
+			<!-- Auteur(s), date, <:version_imprimable:> -->
+			<ul class="auteur">
+				<li><strong><:par:> </strong><BOUCLE_auteurs(AUTEURS){id_article}{par nom}{", "}><a href="#URL_AUTEUR">#NOM</a></BOUCLE_auteurs></li>
+				<li><strong><:le:> </strong>[(#DATE|affdate)]</li>
+				<?php // Affichage de la date de mise à jour si elle diffère
+				if('[(#DATE|affdate)]'!='[(#DATE_MODIF|affdate)]')
+				{$mise_a_jour="<li><strong><:mise_a_jour:> </strong>[ (#DATE_MODIF|affdate)]</li>";}
+				else{$mise_a_jour="";}
+				echo $mise_a_jour;
+				?>
+				<B_traductions>
+					<li><strong><:autres_versions:></strong>
+					<BOUCLE_traductions(ARTICLES){traduction}{exclus}>
+					[<a href="#URL_ARTICLE" rel="alternate" hreflang="#LANG">(#LANG|traduire_nom_langue)</a>]
+					</BOUCLE_traductions></li>
+				</B_traductions>
+			</ul>
+			<!--affichage du (sur et sous) titre et logo de l'article -->
+			#LOGO_ARTICLE_RUBRIQUE
+			<div class="letitre">
+				[<div class="surtitre #EDIT{surtitre}">(#SURTITRE)</div>]
+				<h2>[(#TITRE|supprimer_numero)]</h2>
+				[<div class="soustitre #EDIT{soustitre}">(#SOUSTITRE)</div>]
+			</div>
+			<br class="clear" />
+			<div class="arborescence">
+				<:vous_etes_ici:> <a href="#URL_SITE_SPIP"><:accueil_site:></a>
+				<BOUCLE_hier(HIERARCHIE){id_article}>
+				<span>&nbsp;</span>
+				<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|supprimer_tags)"]>[(#TITRE|supprimer_numero)]</a> 
+				</BOUCLE_hier>
+				<span>&nbsp;</span>
+				[(#TITRE|supprimer_numero)]
+			</div>
+			<br class="clear" />
+		</div>
+		
+
+		<!-- début du menu -->
+		<div id="Menu">
+			
+			<B_vignettes>
+			<!-- affichage des vignettes des images attachées à l'article (sur 2 colonnes) -->
+			<div id="vignettes">
+				<?php $url_image = 0; ?>
+				<BOUCLE_vignettes(DOCUMENTS){id_article}{par num titre}{extension==jpg|png|gif}{mode=document}>
+					<a href="spip.php?page=article-album&id_article=<?php echo $actuel ; ?>&amp;debut_image=<?php echo $url_image ?>" title="[(#TITRE|supprimer_numero)]">#LOGO_DOCUMENT</a>
+				<?php $url_image = $url_image + 1; ?>
+				</BOUCLE_vignettes>
+			</div>
+			</B_vignettes>
+			
+			<B_articles>
+			<!--affichage des articles de la même rubrique -->
+			<div class="bloc">
+				<h4><:meme_rubrique:></h4>
+				<ul>
+					<BOUCLE_articles(ARTICLES){id_rubrique}>
+					<li[ class="(#EXPOSER|on,off)"]><a href="#URL_ARTICLE">[<strong>(#TITRE|supprimer_numero)</strong>]</a></li>
+					</BOUCLE_articles>
+				</ul>
+			</div>
+			</B_articles>
+			
+			<B_forums_liens>
+			<!--affichage des messages du forum -->
+			<div class="bloc">
+				<h4><:derniers_messages_forum:></h4>
+				<ul>
+				 <BOUCLE_forums_liens(FORUMS){id_article}{par date}{inverse}{plat}{0,5}>
+				 			<li><a href="#forum#ID_FORUM">#TITRE</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)]</em></li>
+				</BOUCLE_forums_liens>
+				</ul>
+			</div>
+			</B_forums_liens>
+            
+		</div>
+		<!-- fin du menu -->
+		<div id="barre_droite">
+		<B_mots>
+		<!--affichage des mots-clés -->
+		<div id="groupesmots">
+			<h4 class="center"><:mots_clefs:></h4>
+			<ul>
+				<BOUCLE_mots(MOTS){id_article}{id_mot!=4}>
+				<li><a href="#URL_MOT">[<strong>(#TITRE|supprimer_numero)</strong>]</a></li>
+				</BOUCLE_mots>
+			</ul>
+		</div>
+			</B_mots>
+	</div>	
+
+		<!-- début du contenu -->
+		<div id="Contenu">
+<a href="#photo" class="spip_bouton" style="display:block; text-align:center" onClick="window.open ('spip.php?page=article-album-photo&id_article=<?php echo $actuel ; ?>&amp;debut_image=<?php echo $debut_image ?>', 'Photo', config='height=600, width=710, toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, directories=no, status=no')" title="Les photos dans un popup"><:plein_ecran:></a><p>
+			<B_photo>
+			<!-- affichage de la photo -->
+			<div id="photo">
+			
+				<BOUCLE_photo(DOCUMENTS){id_article}{par num titre}{extension==jpg|png|gif}{mode=document}{debut_image,1}>
+				<BOUCLE_nb_photo(DOCUMENTS){id_article}{extension==jpg|png|gif}{mode=document}>
+				</BOUCLE_nb_photo>
+				<?php // récupération du nombre total d'images attachées à l'article, dans une variable PHP
+					$nb_images = "#TOTAL_BOUCLE"; ?>
+				</B_nb_photo>
+				<?php // pour passer d'une image à l'autre avec affichage du num. de l'image par rapport au nombre total. calcul des num. d'image suivante et précédente
+					if ($debut_image == $nb_images-1){
+						$im_suiv = 0;
+					}else{
+						$im_suiv = $debut_image + 1;
+					}
+				?>
+				<!-- affichage de la première photo de la liste (par défaut), avec lien vers la suivante dessus -->
+				<a href="spip.php?page=article-album&id_article=<?php echo $actuel ; ?>&amp;debut_image=<?php echo $im_suiv ?>" title="<:image_suivante:>">
+
+<img src="#URL_DOCUMENT" [alt="(#TITRE|supprimer_numero|sinon{"photo"})"]
+<?php
+$largeur = "#LARGEUR";
+$hauteur = "#HAUTEUR";
+
+if ($largeur > "500") {
+	echo "width=\"500\" ";
+} elseif($hauteur > "400") {
+	echo "height=\"400\"";
+} 
+//  
+?>
+class="spip_logos">
+				</a> 
+				<!-- affichage de la légende (titre et descriptif) de la photo -->
+				<dl>
+					<dt[ class="(#EDIT{titre})"]>[<strong>(#TITRE|supprimer_numero)</strong>]</dt>
+					[<dd[ class="(#EDIT{descriptif})"]>(#DESCRIPTIF)</dd>]
+				</dl>
+				</BOUCLE_photo>
+			</div>
+			</B_photo>
+			
+			<!-- chapeau, texte, post-scriptum de l'article -->
+			[<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
+			[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+			
+			[<div class="lien"><strong><:voir_en_ligne:> </strong><a href="#URL_SITE">(#NOM_SITE)</a></div>]
+			[<div class="#EDIT{ps} ps">
+			<h4><:post_scriptum:></h4>
+			<div>(#PS)</div>
+			</div>]
+
+			<BOUCLE_documents_exlure(DOCUMENTS){id_article}{extension==jpg|png|gif}{mode=document}{doublons}></BOUCLE_documents_exlure>
+			<B_documents>
+			<!-- Documents liés -->
+				<div id="documents">
+					<h3 class="titre"><:documents:></h3>
+					<BOUCLE_documents(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
+					<dl>
+						<dt><a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT)][<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)][, (#TYPE_DOCUMENT)][ (#TAILLE|taille_en_octets)][, (#LARGEUR) x #HAUTEUR pixels]</em></dt>
+						[<dd>(#DESCRIPTIF)</dd>]
+					</dl>
+					<br class="clear" />
+					</BOUCLE_documents>
+				</div>
+			</B_documents>
+			
+			<!-- début du forum -->
+			<div id="forum">
+			[<!-- Bouton laisser un commentaire -->
+			<a href="spip.php?page=forum&(#PARAMETRES_FORUM)" class="spip_bouton"><:repondre_article:></a>]
+			
+			<B_forums_decompte>
+			<h4 class="titre-forum">
+				<strong><:forum_article:></strong> 
+				<BOUCLE_forums_decompte(FORUMS){id_article}{plat}>
+				</BOUCLE_forums_decompte>[(#TOTAL_BOUCLE) <:contributions_forum:>]
+			</h4>
+			</B_forums_decompte>
+			
+			<B_forums>
+			<!-- Affichage des messages du forum -->
+			<BOUCLE_forums(FORUMS){id_article}{par date}{inverse}>
+				<a name="forum#ID_FORUM"></a>
+				<dl class="forum">
+					<dt>[<strong>(#TITRE)</strong>][, <:par:> <a href="mailto:[(#EMAIL|antispam)]">(#NOM)</a>]<em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em></dt>
+					<dd>
+						[(#TEXTE)]
+						[<div class="lien"><:voir_en_ligne:> <a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
+						[<div class="bouton"><a href="spip.php?page=forum&(#PARAMETRES_FORUM)" class="spip_bouton"><:repondre_message:></a></div>]
+					</dd>
+					<!-- Affichage des réponses aux messages -->
+					<BOUCLE_forums_fils(FORUMS){id_parent}{par date}{inverse}>
+						<a name="forum#ID_FORUM"></a>
+						<dl class="reponse">
+							<dt>[<strong>(#TITRE)</strong>][, par <a href="mailto:[(#EMAIL|antispam)]">(#NOM)</a>]<em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em></dt>
+							<dd>
+								[(#TEXTE)]
+								[<div class="lien"><:voir_en_ligne:> <a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
+							 	[<div class="bouton"><a href="spip.php?page=forum&(#PARAMETRES_FORUM)" class="spip_bouton"><:repondre_message:></a></div>]
+							</dd>
+							<BOUCLE_Forums_Boucle(boucle_forums_fils)>
+							</BOUCLE_Forums_Boucle>
+						</dl>
+					</BOUCLE_forums_fils>
+				</dl>
+				<a href="#forum" class="spip_bouton"><:retour_debut_forums:></a>
+			</BOUCLE_forums>
+			<!-- Fin des messages du forum -->
+			</B_forums>
+			
+			</div>
+			<!-- fin du forum -->
+			
+			[<!-- Notes de bas de page -->
+			<div class="notes">
+			<h4><:notes_bas_page:></h4>
+			<div>(#NOTES)</div>
+			</div>]
+
+		</div>
+		<!-- fin du contenu -->
+		
+		
+		<br class="clear" />
+		
+		
+		<INCLURE{fond=pied}{skel=#SQUELETTE}>
+	</div>
+</body>
+</html>
+</BOUCLE_principale>
+<INCLURE{fond=page-404}>
+<//B_principale>

@@ -1,0 +1,66 @@
+<?php echo '<'.'?xml version="1.0" encoding="iso-8859-1"?'.'>'; ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>[EVA] Pr&eacute;sentation - Documentation - Aide aux r&eacute;dacteurs</title>
+	<!-- feuilles de styles -->
+	<link href="../eva_style.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="../eva_style_print.css" rel="stylesheet" type="text/css" media="print" />
+<style type="text/css"><!--
+h1 {
+	font-size:18px;
+	margin:0;
+}
+div#Contenu img {
+	margin:4px;
+	vertical-align:middle;
+}
+div#Contenu li {
+	margin:4px;
+}
+--></style>
+</head>
+<body>
+
+<div id="Page">
+    <?php
+// 	R&eacute;cup&egrave;ration des variables
+//	et r&eacute;attribution de celles-ci
+
+if (isset($_GET['aide'])){
+	$sect = "aide" ;
+	$aide= $_GET['aide'];
+	$perso= "0";
+}
+elseif (isset($_GET['perso'])){
+	$sect = "perso" ;
+	$perso= $_GET['perso'];
+	$aide= "0";
+}
+else {
+	$sect = "0" ;
+	$aide= "0";
+	$perso= "0";
+
+}
+?>
+
+	<?php include "menu.php3"; ?>
+
+	<div id="Contenu">
+        <?php
+			if ($aide !=="0") {
+				include $aide.".html";
+			}
+			elseif ($perso !== "0") {
+				include $perso.".html";
+			} else {
+				include "presentation.html";
+			}
+		?>
+	</div>
+
+</div>
+</body>
+</html>

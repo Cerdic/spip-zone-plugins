@@ -1,0 +1,23 @@
+#CACHE{24*3600}
+<BOUCLE_principale(ARTICLES) {id_article}>
+<?php $actuel = "#ID_ARTICLE"; ?>
+<INCLURE{fond=entete_meta}>
+	<!--affichage du titre de la page -->
+	<title>[#NOM_SITE_SPIP]  [(#TITRE|supprimer_numero)]</title>
+	<!-- description et mots-clés de la page -->
+	[<meta name="Description" content="(#DESCRIPTIF|supprimer_tags|texte_script)" />]
+	<meta name="Keywords" content="<BOUCLE_keywords(MOTS){id_article}{", "}>#TITRE</BOUCLE_keywords>" />
+
+</head>
+<body>
+	<div id="Page">	
+		<!-- début du menu -->
+		<div id="Menu">
+			<INCLURE{fond=menu2}{id_rubrique}{id_article}>
+		</div>
+		<div id="Contenu">
+		</div>
+</body>
+</html>
+</BOUCLE_principale>
+<//B_principale>

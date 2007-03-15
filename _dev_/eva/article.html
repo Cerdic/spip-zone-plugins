@@ -1,0 +1,36 @@
+#CACHE{24*3600}
+<BOUCLE_principale(ARTICLES) {id_article}>
+<?php /* cette page n'affichera rien elle même, 
+mais nous sert à tester la présence ou non 
+des mots-clés diaporama, album ou planning*/ ?>
+
+<?php /* si le mot-clé "diaporama" est attaché
+à la rubrique de l'article en cours, on 
+appelle le squelette "diaporama.html" */ ?>
+<BOUCLE_diaporama(MOTS){id_rubrique}{titre = diaporama}>
+<INCLURE{fond=article-diaporama}{id_article}>
+</BOUCLE_diaporama>
+
+<?php /* si le mot-clé "diaporama" n'est pas 
+attaché à la rubrique de l'article, MAIS 
+que le mot-clé "album" est attaché à 
+l'article en cours, on appelle le 
+squelette "album.html" */ ?>
+<BOUCLE_album(MOTS){id_article}{titre = album}>
+<INCLURE{fond=article-album}{id_article}>
+</BOUCLE_album>
+
+<?php /* si le mot-clé "diaporama" n'est pas 
+attaché à la rubrique de l'article, ET 
+que le mot-clé "album" n'est pas attaché 
+à l'article en cours, ET que le mot-clé 
+"album" n'est pas attaché à 
+l'article en cours, on appelle le 
+squelette "article-normal.html" */ ?>
+<INCLURE{fond=article-normal}{id_article}>
+
+<//B_album>
+<//B_diaporama>
+</BOUCLE_principale>
+<INCLURE{fond=page-404}>
+<//B_principale>

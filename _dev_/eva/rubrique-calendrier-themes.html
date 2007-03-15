@@ -1,0 +1,20 @@
+#CACHE{24*3600}
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+<!-- affichage des thèmes -->
+	<input type="hidden" name="date" value="<?php echo $date ; ?>" />
+	<label for="theme"><:themes:>
+	<select name="id_rubrique" id="theme" onChange="submit()">
+		[<option value="#ID_RUBRIQUE"<?php echo ($AgendaRub == $la_rubrique ? 'selected="selected" class="on"' : ''); ?> >(#TITRE|supprimer_numero)</option>]
+		<?php $i=0; ?>
+		<B_categories>
+		<BOUCLE_categories(RUBRIQUES){id_parent}{par num titre}>
+
+			[<option value="#ID_RUBRIQUE"<?php echo (#ID_RUBRIQUE == $la_rubrique ? 'selected="selected" class="on"' : ''); ?> >
+			<?php echo str_repeat("&nbsp;", $i); ?>
+			&gt; (#TITRE|supprimer_numero)</option>]
+			<B_categories_rep><?php $i=$i+2; ?><BOUCLE_categories_rep(BOUCLE_categories)></BOUCLE_categories_rep>
+		</BOUCLE_categories>
+		<?php $i=0; ?>
+		</B_categories>
+	</select></label>
+</BOUCLE_principale>

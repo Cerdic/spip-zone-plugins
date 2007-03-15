@@ -1,0 +1,61 @@
+#CACHE{24*3600}
+<INCLURE{fond=entete_meta}>
+	<!--affichage du titre de la page -->
+	<title>[#NOM_SITE_SPIP]  [(#NOM)]</title>
+	<!-- description et mots-clés de la page -->
+	[<meta name="Description" content="(#BIO|supprimer_tags)" />]
+</head>
+<body>
+	<div id="Page">		
+		<div id="EntetePage">
+			
+			<div id="TitreSite">
+				<!--affichage du logo et titre du site -->
+				<h1>
+					<BOUCLE_logo_accueil(SITES){id_syndic=7}>
+					[(#LOGO_SITE)]
+					</BOUCLE_logo_accueil>
+					#NOM_SITE_SPIP
+				</h1>
+			</div>
+
+			<!--affichage du logo et nom de l'auteur -->
+			<h2>Rédacteurs du site</h2>
+		</div>
+		
+		
+		<!-- début du menu -->
+		<div id="Menu">
+			<INCLURE{fond=menu}{id_rubrique=102}>
+		</div>
+		<!-- fin du menu -->
+		
+
+		<!-- début du contenu -->
+<div id="Contenu">
+	<div class="#EDIT{texte} texte">
+		<p class="spip">
+		Voici la liste de tous les auteurs qui participent ou ont participé à la rédaction des articles du site. Les liens renvoient vers une page donnant la liste de leurs articles.
+		</p>
+		<B_auteurs>
+		<!--affichage des auteurs -->
+			<dl>
+			<BOUCLE_auteurs(AUTEURS){par nom}>
+			<div class="bloc" style="padding:4px">
+			<dt><strong><a href="#URL_AUTEUR">#NOM</a></strong></dt>
+			[<dd>(#BIO|couper{80})</dd>]</div>
+			</BOUCLE_auteurs>
+			</dl>
+		</B_auteurs>
+	</div>
+</div>
+		<!-- fin du contenu -->
+		
+		
+		<br class="clear" />
+		
+		
+		<INCLURE{fond=pied}{skel=#SQUELETTE}>
+	</div>
+</body>
+</html>

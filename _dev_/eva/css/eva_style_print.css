@@ -1,0 +1,595 @@
+/******************************************
+	PAGE : éléments d'habillage de la page
+	et éléments communs sur toute la page
+******************************************/
+body {
+	background-color:#ffffff;	
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	}
+* {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	}
+
+/* force le retour à la ligne, le plus souvent appliqué à <br> */
+.clear {
+	clear: both;
+	font-size:0;
+	}
+
+/* couleurs des liens */
+a, a:visited {
+	color:#007ce6;
+	}
+	
+/* images & logos */
+img.spip_logos {
+	border:none;
+	padding:2px;
+	}
+img.smiley {
+	vertical-align:middle;
+	}
+a img {
+	border:none;
+	}
+
+/* messages d'erreur */
+.erreur {
+	color:#CC3300;
+	}
+
+
+
+/******************************************
+	LOGIN : éléments spécifique au 
+	squelette login.html
+******************************************/
+div#Login {
+	position:relative;
+	}
+div#Login div#Contenu {
+	margin-top:10px;
+	padding:4px;
+	}
+div#Login div#Contenu img.spip_logos{
+	float:left;
+	}
+div#Login div.spip_encadrer {
+	margin-top:10px;
+	padding:4px;
+	border: 2px solid #000000;
+	}
+
+/******************************************
+	ENTETE : éléments des entêtes (titres, logos, ...)
+	des pages (accueil, rubriques, plan, ...) 
+******************************************/	
+div#EntetePage {
+	border-bottom: 2px solid #000000;
+	margin-bottom:20px;
+	}
+h1 {
+	margin: 0;
+	padding: 0;
+	font-size:22px;
+	font-weight: bold;
+	text-align:center;
+	}
+h1 img.spip_logos {
+	vertical-align:middle;
+	height:35px;
+	}
+h2 {
+	margin: 5px;
+	padding: 0;	
+	font-size: 18px;
+	font-weight: bold;
+	}
+h2 img.spip_logos {
+	vertical-align:middle;
+	}
+h1 a, h2 a {
+	text-decoration:none;
+	}
+
+/* barre des boutons sur la page d'accueil (sommaire.html) */
+div#EntetePage ul.boutons {
+	display:none;
+	}
+
+
+
+/******************************************
+	FORMULAIRE DE RECHERCHE : apparait sur
+	rubrique=16.html, rubrique-16.html,
+	recherche.html et page-404.html
+******************************************/
+div#EntetePage .rechercher {
+	display:none;
+	}
+
+
+/******************************************
+	ENTETE DES ARTICLES : éléments des 
+	entêtes (titres, logos, ...) des pages
+	articles
+******************************************/
+
+div#EnteteArticle {
+	border-bottom: 2px solid #000000;
+	margin-bottom:20px;
+	}
+div#EnteteArticle img.spip_logos {
+	float:left;
+	}
+div#EnteteArticle h1 img.spip_logos {
+	vertical-align:middle;
+	float:none;
+	
+	}
+div#EnteteArticle div.letitre{
+	padding:2px;
+	}
+div#EnteteArticle h2 {
+	margin: 0;
+	padding: 0;
+	}
+div#EnteteArticle div.surtitre, div#EnteteArticle div.soustitre {
+	font-weight: bold;
+	font-size: 14px;
+	}
+	
+/* Message auquel on répond (forum.html) */
+div#EnteteArticle dl {
+	margin: 4px;
+	padding:4px;	
+	border: 1px solid #000000;
+}
+
+/* Affichage des auteurs, dates, version imprimable */
+div#EnteteArticle ul.auteur {
+	float:right;
+	padding: 2px 8px;
+	margin: 0 0 0 8px;
+	font-size: 14px;
+	}
+div#EnteteArticle ul.auteur li {
+	padding: 0;
+	margin: 0;
+	}
+
+/* Boutons suivants et précédents du diaporama */
+div.BoutonsPrecedents, div.BoutonsSuivants {
+	display:none;
+	}
+
+/* affichage de l'arborescence sur certaines pages (album, diaporama, agenda, plan, recherche) */
+div.arborescence {
+	display:none;
+	}
+
+/******************************************
+	CONTENU : affichage du texte des pages ;
+	affichages des articles, sites 
+	référencés pour les rubriques ; etc ...
+******************************************/
+
+div#Contenu {
+	}
+
+/* affichage des blocs */
+div#articles, div#breves, div#sites_web, div#sites_syndiques, div#documents,
+div#petition, div#rubriques, div#breves, div#secteur, div#edito, div#sites_recherche,
+div#GroupesMots, div.agenda, div.secteur, div.GroupesMots {
+	border: 2px solid #000000 ;
+	margin-bottom:20px;
+	}
+div.suite {
+	text-align:right;
+	font-style: italic;
+	font-size:10px;
+}
+div#Contenu h3.titre {
+	margin: 0;
+	padding: 2px;
+	border-bottom: 1px solid #000000 ;
+	text-align:center;
+	font-size:16px;
+	font-weight:bold;
+	}
+div#Contenu h3.titre img.spip_logos{
+	vertical-align: middle;
+	border:none;
+	margin: 1px;
+	}
+
+/* edito sur la page d'accueil */
+div#edito img.spip_logos {
+	float:left;
+	margin: 1px;
+	}
+
+/* affichages des listes de définitions, utilisées pour
+ lister les articles, documents, etc ... */
+div#Contenu dl {
+	margin: 0 0 5px 0;
+	padding: 4px;
+	}
+div#Contenu dl.suivants dd {
+	display:none;
+	}
+div#Contenu dt {
+	margin: 5px 0 0;
+	padding: 0;
+	text-align:left;
+	}
+div#Contenu dt img {
+	float: left;
+	margin: 2px;
+	}
+div#Contenu dt strong {
+	font-weight:bold;
+	font-size:14px;
+	}
+div#Contenu dt em {
+	color: #666666;
+	font-style: italic;
+	}
+div#Contenu dd {
+	margin: 0;
+	padding: 2px 0 0 20px;
+	}
+
+/* dernier article sur la page d'accueil  */
+div#Contenu dl.premier {
+	border-bottom:1px solid #000000 ;
+	}
+/* liste des signatures de la pétition */
+div#Contenu div#petition dd {
+	border-bottom: 1px solid #000000 ;
+	padding-bottom: 2px;
+	margin-bottom: 2px;
+	}
+/* formulaire de recherche (page 404 + pages secteur 1) */
+div#Contenu div.rechercher {
+	text-align:center;
+	}
+div#Contenu div.rechercher input.forml {
+	width:150px;
+	}
+
+/* affichage de la photo sur l'album-photo */
+div#photo {
+	text-align:center;
+	border-bottom: 1px solid #000000 ;
+	}
+div#photo dl {
+	margin:2px;
+	padding:0;
+	}
+
+/* affichage : texte, chapeau, etc ... */
+div#Contenu div.chapo {
+	margin: 5px 0;
+	padding: 4px;
+	font-size:16px;
+	font-weight:bold;
+	}
+div#Contenu div.texte {
+	margin: 5px 0;
+	padding: 4px;
+	font-size:14px;
+	}
+div#Contenu div.lien {
+	border-top: 1px dashed #000000;
+	text-align:center;
+	padding: 5px;
+	font-size:14px;
+	margin: 5px 0;
+	}
+div#Contenu div.ps, div#Contenu div.notes {
+	border: 1px solid #000000;
+	margin: 10px 0;
+	padding: 4px;
+	font-size:12px;
+	}
+div#Contenu div.ps h4, div#Contenu div.notes h4 {
+	display:none;
+	}
+div#Contenu div.ps div, div#Contenu div.notes div {
+	}
+div#Contenu p.spip, p.spip_note {
+	margin: 0;
+	padding: 4px;
+	}
+
+
+
+
+/******************************************
+	MENU : éléments affiché dans le bloc
+	"menu" (sommaire, brèves, derniers 
+	messages des forums)
+******************************************/
+
+div#Menu {
+	display:none;
+	}
+
+
+
+/******************************************
+	AGENDA (calendrier) : affichages 
+	spécifiques à l'agenda (rubrique-agenda.html)
+******************************************/
+table.agenda {
+	width:100%;
+}
+table.agenda, table.agenda tr, table.agenda th, table.agenda td {
+	font-size: 12px;
+	padding:0;
+	margin:0 0 20px 0;
+}
+table.agenda th form {
+	display: inline;
+}
+table.agenda td img {
+	float:left;
+}
+table.agenda th, table.agenda td {
+	padding:2px;
+	width:14%;
+}
+table.agenda td {
+	height:50px;
+	vertical-align: top;
+}
+.agendaNav {
+	border:2px solid #000000 ;
+	text-align: center;
+}
+.agendaHead {
+	border:1px solid #000000 ;
+	font-weight:bold;
+	text-align: center;
+}
+.agendaThisDay {
+	border:1px solid #000000;
+}
+.agendaThisMonth {
+	border:1px solid #000000;
+}
+
+.agendaNotThisMonth, .agendaNotThisDay {
+	border:1px solid #000000;
+}
+
+table.agenda select, table.agenda input {
+	font-size: 10px;
+}
+
+
+/******************************************
+	PLAN DU SITE : affichages spécifiques
+	au plan du site (plan.html)
+******************************************/
+
+ul.plan {
+	margin: 0 4px;
+	padding:0;
+	}
+ul.plan ul {
+	margin: 0 4px;
+	padding:0;
+	}
+ul.plan li {
+	list-style-type: none;
+	margin: 4px 0 4px 20px;
+	padding:0;
+	}
+ul.plan li.rubriques {
+	margin: 10px 0 10px 20px;
+	}
+ul.plan li.rubriques strong {
+	border: 1px solid #000000 ;
+	padding:2px;
+	font-size:14px;
+	}	
+ul.plan li.articles strong {
+	border: none ;
+	background:none;
+	padding:0;
+	font-size:12px;
+	}
+ul.plan li.rubriques strong a {
+	color:#000000;
+	text-decoration:none;
+	}
+
+/* affichage des brèves du secteur dans le plan du site */
+div.secteur div.breves {
+	border: 2px solid #000000 ;
+	position:relative;
+	float: right;
+	width: 250px;
+	margin: 5px 5px 20px;
+	}
+div.secteur div.breves h4 {
+	border-bottom: 1px solid #000000;
+	margin: 0;
+	padding: 2px 4px;
+	font-size:14px;
+	font-weight:bold;
+	}
+div.secteur div.breves ul {
+	margin: 0;
+	padding: 0;
+	}
+div.secteur div.breves li {
+	margin: 2px;
+	padding: 1px;
+	font-size:12px;
+	list-style-position: inside;
+	list-style-image: url(images/puceoff.gif);
+	}
+div.secteur div.breves li em {
+	color:#666666;
+	font-style: italic;
+	}
+
+
+/******************************************
+	PIED DE PAGE : pour toutes les pages,
+	il contient la barre de boutons
+******************************************/
+
+ul#PiedPage{
+	display:none;
+	}
+
+/* pied de page de la page d'accueil */
+div#PiedPage {
+	display:none;
+	}
+ 
+/******************************************
+	FORUMS : affichage des forums des 
+	articles et brèves
+******************************************/
+div#forum {
+	margin: 20px 0;
+	}
+div#forum h4 {
+	margin: 10px 0;
+	font-size: 14px;
+	font-weight: normal;
+	text-align: center;
+	}
+div#forum h4 strong {
+	font-size: 16px;
+	font-weight: bold;
+	}
+div#forum div.lien {
+	margin: 5px 0 0;
+	padding:5px 5px 10px;
+	font-style:italic;
+	font-size: 12px;
+	}
+
+/* boutons (liens) "répondre à ..." */
+div#forum dl div.bouton {
+	display:none;
+	}
+
+/* messages des forums */
+div#forum dl.forum {
+	margin:20px 0;
+	padding: 0;
+	border: 2px solid #000000;
+	}
+div#forum dl.forum a.spip_bouton {
+	font-size:10px;
+	}
+div#forum dt em {
+	font-size:12px;
+	}
+div#forum dt {
+	margin: 0;
+	padding:2px;
+	border-bottom: 1px solid #000000;
+	font-size:16px;
+	}
+div#forum dd {
+	margin: 0;
+	padding:5px 5px 10px;
+	font-size:14px;
+	}
+div#forum dl.reponse {
+	margin: 0 5px 10px 20px;
+	padding: 0;
+	border: 1px solid #000000;
+	}
+div#forum dl.reponse dt {
+	font-size:14px;
+	}
+div#forum dl.reponse dd {
+	font-size:12px;
+	}
+	
+	
+	
+/******************************************
+	SPIP : éléménets générés par SPIP 
+******************************************/
+
+h3.spip {
+	text-align:center;
+	font-size:20px;
+	font-weight:bold;
+	}
+.spip_surligne {
+}
+.spip_puce {
+	list-style-position: inside;
+}
+blockquote.spip {
+	margin-left : 5px 0 5px 20px;
+	border: 1px solid #000000;
+	padding: 5px;
+}
+
+/* Barre de raccourcis */
+a.spip_barre img {
+	display:none;
+}
+
+/* boutons */
+.spip_bouton, a.spip_bouton, a:visited.spip_bouton {
+	display:none;
+	}
+	
+/* champs de formulaires */
+.forml {
+	width: 98%;
+	padding:2px;
+	font-size:12px;
+	}
+/* tableau des smileys  */
+table#smileys {
+	display:none;
+	}
+
+/* tableaux */
+table.spip {
+	padding: 0;
+	margin:10px auto;
+	border-collapse: collapse;
+	font-size:12px;
+	}
+table.spip tr.row_first {
+	font-weight:bold;
+	text-align:center;
+	}
+table.spip tr.row_odd {
+	}
+table.spip tr.row_even {
+	}
+table.spip td {
+	padding: 2px;
+	vertical-align: center;
+	border: 1px solid #000000;
+	}
+	
+	
+/******************************************
+	BOUTONS ADMIN : boutons affichés pour
+	les administrateurs
+	(recalculer cette page , ...) 
+******************************************/
+.spip-admin {
+	text-align:left;
+	left:2px;
+	}
+.spip-admin form{
+	margin:2px;
+	}
