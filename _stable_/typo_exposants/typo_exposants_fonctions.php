@@ -1,14 +1,13 @@
 <?php
-// Filtre typographique exposants pour langue francaise
-// Cette fonction emprunte les expressions régulières publiees par Raphaël Meyssen
-// sur <http://www.spip-contrib.net/Filtre-typographique-exposants>.
+// Filtre typographique exposants pour langue francaise, par Vincent Ramos
+// <spip AD kailaasa PVNCTVM net>, sous licence GNU/GPL.
+// Ce filtre emprunte les expressions régulières publiees par Raphaël Meyssen
+// sur <http://www.spip-contrib.net/Filtre-typographique-exposants> et 
+// ne fonctionne que pour le francais.
+// Ce filtre est aussi utilisé dans le plugin tweaks.
 
-// cette fonction ne fonctionne que pour le francais
 function typo_exposants_fr($texte){
 	$trouve = array(
-		//'/mailto:([\w.]{2,})@([\w.]{2,})\.([\w.]{2,})/',
-		//'/"mailto:\w*?@\w*?\.\w{2,}"/',
-//		'/([^\>])".*?([^<])/',
 		'/(\\bM)(elle|lle)\\b/', // Mlle(s), Mme(s) et erreurs Melle(s)
 		'/(\\bM)(elles|lles)\\b/',
 		'/(\\bM)(mes?)\\b/',
@@ -27,8 +26,6 @@ function typo_exposants_fr($texte){
 		'/(\\b[0-9IVX]+)e\\b/' // 1e, 2e, IIIe...
 	);
 	$remplace = array(
-		//'"mailto:"',
-//		'$1<span style="color:red; font-weight:bold">Je dois utiliser de vrais guillemets</span>$2',
 		'M<small><sup>lle</sup></small>', // Mlle(s), Mme(s)
 		'M<small><sup>lles</sup></small>',
 		'M<small><sup>\\2</sup></small>',
