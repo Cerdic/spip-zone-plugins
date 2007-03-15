@@ -1,7 +1,7 @@
 <?php
 /*
 Fichier de formatage typographique des guillemets, par Vincent Ramos
-<spip AD kailaasa PVNCTVM net>, sous licence GNU/GPL.
+<spip_dev AD kailaasa PVNCTVM net>, sous licence GNU/GPL.
 
 Ne sont touchees que les paires de guillemets.
 
