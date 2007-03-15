@@ -208,6 +208,8 @@ function BarreTypoEnrichie_post_propre($texte) {
 
 
 function BarreTypoEnrichie_pre_typo($texte) {
+	if ($GLOBALS['barre_typo_pas_de_fork_typo'] === true)
+		return $texte;
 	$chercher_raccourcis = array(
 		/* 7 */ 	"/(?<![{])[{][{](?![{])/S", // Expressions complexes car on n'a pas encore traite les titres ici
 		/* 8 */ 	"/(?<![}])[}][}](?![}])/S", // En gros, verification qu'on n'est pas a l'interieur d'un titre
@@ -249,6 +251,8 @@ function BarreTypoEnrichie_pre_typo($texte) {
 }
 
 function BarreTypoEnrichie_post_typo($texte) {
+	if ($GLOBALS['barre_typo_pas_de_fork_typo'] === true)
+		return $texte;
 	$cherche1 = array(
 		/* 21 */ 	"/\[\*\*/S",
 		/* 21b */ 	"/\[\*/S",
