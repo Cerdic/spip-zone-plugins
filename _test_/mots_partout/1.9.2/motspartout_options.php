@@ -1,6 +1,5 @@
 <?php
-global $tables_jointures;
-global $tables_auxiliaires;
+global $tables_jointures,$tables_auxiliaires,$exceptions_des_jointures;
 
 
 $tables_installees = unserialize(lire_meta('MotsPartout:tables_installees'));	
@@ -27,12 +26,28 @@ foreach ($choses as $chose){
 								"PRIMARY KEY"	=> "$id_chose, id_mot",
 								"KEY id_mot"	=> "id_mot");
 
-  $tables_auxiliaires[str_replace('spip_','spip_mots_',$table_principale)] = array(
-																				   'field' => &$spip_mots_choses,
-																				   'key' => &$spip_mots_choses_key);
+  $tables_auxiliaires['spip_mots_'.$chose] = array(
+												   'field' => &$spip_mots_choses,
+												   'key' => &$spip_mots_choses_key);
+/*
+if (!in_array($chose,$tables_jointures['spip_'.$chose]))
+	$tables_jointures['spip_'.$chose][]= $chose;
+if (!in_array('mots',$tables_jointures['spip_'.$chose]))
+	$tables_jointures['spip_'.$chose][]= 'mots';
+if (!in_array('mots_'.$chose,$tables_jointures['spip_mots']))
+	$tables_jointures['spip_mots'][]= 'mots_'.$chose;
+*/
+//$exceptions_des_jointures['sous_mot'] = array('spip_mots', 'id_mot');
 
 //  $tables_jointures[$table_principale][]= 'mots';
- // $tables_jointures['spip_mots'][]= str_replace('spip_','mots_',$table_principale);
+//  $tables_jointures['spip_mots'][]= str_replace('spip_','mots_',$table_principale);
 }
-
+/*
+$tables_jointures['spip_auteurs'][]= 'mots_auteurs';
+//$tables_jointures['spip_auteurs'][]= 'mots';
+$tables_jointures['spip_mots'][]= 'mots_auteurs';
+$tables_jointures['spip_groupes_mots'][]= 'mots_groupes_mots';
+//$tables_jointures['spip_groupes_mots'][]= 'mots';
+$tables_jointures['spip_mots'][]= 'mots_groupes_mots';
+*/
 ?>
