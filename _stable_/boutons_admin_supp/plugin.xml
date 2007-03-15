@@ -1,0 +1,22 @@
+<plugin>
+	<nom>Boutons d&#8217;administration suppl&eacute;mentaires</nom>
+	<version>2.3</version>
+	<prefix>boutons_admin_supp</prefix>
+	<etat>stable</etat>
+	<auteur>[Vincent Ramos->mailto:www-lansargues@kailaasa.net]</auteur>
+	<description>Ce plugin ajoute, dans l&#8217;interface publique, des boutons d&#8217;administration suppl&eacute;mentaires permettant, par exemple, d&#8217;&eacute;diter directement le texte d&#8217;un article, d&#8217;une rubrique, d&#8217;acc&eacute;der &agrave; l&#8217;interface priv&eacute;e, de cr&eacute;er un nouvel article, etc. Les possibilit&#233;s offertes d&#233;pendent du statut&nbsp;: les administrateurs seuls, par exemple, disposent d&#8217;un bouton pour cr&#233;er une rubrique.
+
+	Un bouton (prenant la forme d&#8217;un plus ou d&#8217;un moins) permet de masquer/afficher les boutons de la barre d&#8217;&eacute;dition et un autre (en forme de trombone) de garder cette barre au premier plan (ce bouton n&#8217;est pas activ&#233; pour Internet Explorer).
+
+	La technique employ&eacute;e (surcharge du fichier <code>formulaire_admin.html</code>) n&#8217;a rien d&#8217;original&nbsp;: elle est par exemple expliqu&eacute;e dans [cette page->http://www.spip-contrib.net/Administrer-un-site-web-depuis-l]. La seule originalit&eacute; est qu&#8217;elle se pr&eacute;sente ici sous la forme d&#8217;un plugin, qui ne n&eacute;cessite donc pas de modification de fichiers ou d&#8217;ajout de squelettes et permet des mises &agrave; jour simplifi&eacute;es. L&#8217;intitul&eacute; des boutons suppl&eacute;mentaire est localis&eacute; et s&#8217;affichera dans la langue choisie pour l&#8217;interface.
+
+	Noter que les rubriques, articles, br&egrave;ves ou r&eacute;f&eacute;rences &agrave; des sites externes cr&eacute;&eacute;s par ce biais sont par d&eacute;faut class&eacute;s dans la rubrique depuis laquelle on a cliqu&eacute; sur le bouton dans la partie publique du site.
+
+	Un fichier de configuration permet de choisir les boutons suppl&eacute;mentaires qu&#8217;on d&eacute;sire voir appara&icirc;tre afin de masquer d&#233;finitivement ceux qui ne semblent pas utiles. La configuration est globale et concerne tous les utilisateurs.
+
+	Ce plugin est distribu&eacute; sous licence GNU/GPL</description>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>boutons_admin_supp_fonctions.php</inclure>
+	</pipeline>
+</plugin>
