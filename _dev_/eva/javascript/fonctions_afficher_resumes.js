@@ -1,7 +1,11 @@
 // Les fonctions createCookie() et readCookie()
 // ont ete recuperees depuis <http://www.quirksmode.org/js/cookies.html>
 // dans le respect des droits de reproduction declares sur
-// <http://www.quirksmode.org/about/copyright.html> (utilisation libre)
+// <http://www.quirksmode.org/about/copyright.html> (utilisation libre).
+// Les autres fonctions ont ete ecrites pra Vincent Ramos
+// <spip_dev AD kailaasa PVNCTVM net> et sont publiees sous licence
+// GNU/GPL.
+
 function createCookie(name,value,days) {
 	if (days) {
 		var date = new Date();

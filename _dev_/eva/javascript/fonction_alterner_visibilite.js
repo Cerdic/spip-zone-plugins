@@ -1,3 +1,6 @@
+// Par Vincent Ramos <spip_dev AD kailaasa PVNCTVM net>, sous
+// licence GNU/GPL.
+
 var liste_cache = new Array(0);
 
 
