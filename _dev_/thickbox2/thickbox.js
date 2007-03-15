@@ -67,6 +67,7 @@ function TB_show(caption, url) {//function called when the user clicks on a thic
 		$("body").append("<iframe id='TB_HideSelect'></iframe><div id='TB_overlay' title='Close the picture'></div><div id='TB_window'></div>");
 		$("#TB_overlay").click(TB_remove);
 	}
+	$(".TB_hide").hide();
 
 	if(caption==null){caption=""};
 
@@ -377,7 +378,7 @@ function TB_remove() {
 	$("#TB_closeWindowButton").unbind('click');
 	$("#TB_window").fadeOut("fast",function(){$('#TB_window,#TB_overlay,#TB_HideSelect').remove();});
 	$("#TB_load").remove();
-
+	$(".TB_hide").show();
 	
 	return false;
 }
