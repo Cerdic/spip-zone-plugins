@@ -2,13 +2,18 @@
 global $cacher_le_bouton;
 
 /*
-Pour choisir la position globale de la barre de boutons, decommenter
-la suivante en enlevant les deux barres qui la debutent.
+Pour placer la barre de boutons verticalement et a droite, decommenter
+la ligne suivante en enlevant les deux barres qui la debutent.
 */
 
 //$GLOBALS['style_barre'] = "a_droite";
-$GLOBALS['style_barre'] = "translucide";
-$GLOBALS['translucidite'] = "0.6";
+/*
+Pour que la barre soit translucide, décommenter les deux ligne suivante
+et choisir le taux de translucidite (de 0 a 1).
+*/
+
+//$GLOBALS['style_barre'] = "translucide";
+//$GLOBALS['translucidite'] = "0.6";
 
 
 /*
@@ -20,18 +25,18 @@ afficher ou non un bouton. Par exemple, si l'on veut que les boutons pour
 editer et modifier une rubrique n'apparaissent pas dans une rubrique
 particuliere (par exemple, la rubrique 100), il suffit d'utiliser la syntaxe
 suivante :
-*/
+
 if($GLOBALS['id_rubrique']=='100'){
 	$cacher_le_bouton["editer_rubrique"]=" style='display:none !important'";
 	$cacher_le_bouton["modifier_rubrique"]=" style='display:none !important'";
 }
-/*
+
 Par defaut, tous les boutons sont affiches.
 */
 
 //$cacher_le_bouton["garder_au_premier_plan"]=" style='display:none !important'";
 
-$cacher_le_bouton["auteur"]=" style='display:none !important'";
+// $cacher_le_bouton["auteur"]=" style='display:none !important'";
 
 // $cacher_le_bouton["creer_rubrique"]=" style='display:none !important'";
 // $cacher_le_bouton["nouvel_article"]=" style='display:none !important'";

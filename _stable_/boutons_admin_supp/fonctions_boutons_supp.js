@@ -3,6 +3,8 @@
 // ont ete recuperees depuis <http://www.quirksmode.org/js/cookies.html>
 // dans le respect des droits de reproduction declares sur
 // <http://www.quirksmode.org/about/copyright.html> (utilisation libre)
+// Les autres fonctions ont ete creees par Vincent Ramos.
+
 function createCookie(name,value,days) {
 	if (days) {
 		var date = new Date();
@@ -59,6 +61,8 @@ masquer_boutons(etat);
 // Bouton de fixation de la barre
 // N'est pas active avec IE car cela ne fonctionne pas sous IE6
 // (position:fixed n'etant pas supporte).
+// Amelioration possible : si IE7 comprend cette position,
+// activer ce bouton pour ce navigateur.
 // =============================================
 
 var statut_fixe = readCookie("statut_fixe");
