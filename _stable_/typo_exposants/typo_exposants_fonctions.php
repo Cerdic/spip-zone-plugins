@@ -1,6 +1,6 @@
 <?php
 // Filtre typographique exposants pour langue francaise, par Vincent Ramos
-// <spip AD kailaasa PVNCTVM net>, sous licence GNU/GPL.
+// <spip_dev AD kailaasa PVNCTVM net>, sous licence GNU/GPL.
 // Ce filtre emprunte les expressions régulières publiees par Raphaël Meyssen
 // sur <http://www.spip-contrib.net/Filtre-typographique-exposants> et 
 // ne fonctionne que pour le francais.
