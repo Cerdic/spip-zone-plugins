@@ -1,0 +1,21 @@
+<plugin>
+	<nom>Langue pr&eacute;f&eacute;r&eacute;e par l'internaute</nom>
+	<auteur>Nicolas Hoizey &copy; 2007 - Licence GNU/GPL</auteur>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>
+Ce plugin (pour SPIP 1.9.2+) permet d'identifier les langues pr&eacute;f&eacute;r&eacute;es configur&eacute;es par l'internaute dans son navigateur et de lui proposer automatiquement la langue la plus pertinente dans un site multilingue ayant un secteur par langue.
+Ce m&eacute;canisme suppose qu'il n'y a pas de page sommaire particuli&egrave;re, les pages d'accueil localis&eacute;es &eacute;tant des pages de secteurs.
+
+Utilisez la balise <code>#LANGUE_PREFEREE_REDIRECTION</code> dans <code>sommaire.html</code>, &agrave; l'exclusion de tout autre code, pour que l'internaute soit redirig&eacute; automatiquement vers le secteur qu'il est le plus susceptible de comprendre, selon la configuration de langue de son navigateur.
+Si aucune langue disponible n'est compatible avec les choix configur&eacute;s dans le navigateur, la langue par d&eacute;faut du site est choisie.
+Si cette langue n'est utilis&eacute;e par aucun secteur (!!!), le premier secteur trouv&eacute; est choisi.
+
+Il est possible de laisser l'internaute choisir sa langue pr&eacute;f&eacute;r&eacute;e, différente de celle configur&eacute;e dans son navigateur, en la pr&eacute;cisant en param&egrave;tre d'appel du sommaire, avec <code>/?lang=fr</code> par exemple pour le fran&ccedil;ais.
+Ce choix est alors stock&eacute; dans un cookie pour utilisation ultérieure prioritaire sur la configuration du navigateur.
+La balise <code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE</code> permet de proposer un lien de suppression de ce cookie.
+<code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE{mon message personnalis&eacute;}</code> permet de remplacer le message propos&eacute; par d&eacute;faut.
+    </description>
+	<prefix>languepreferee</prefix>
+	<options>languepreferee_options.php</options>
+</plugin>
