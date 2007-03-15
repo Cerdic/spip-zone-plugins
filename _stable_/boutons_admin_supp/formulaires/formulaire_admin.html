@@ -1,7 +1,9 @@
 <?php
-// Le code de ce plugin est la propriete intellectuelle de Vincent Ramos
-// <www-lansargues AD kailaasa PVNCTCM net>, qui le publie sous licence
+// Fichier pour SPIP 1.9.1 surchargeant formulaire_admin.html pour
+// le plugin boutons_admin_supp, par de Vincent Ramos
+// <spip_dev AD kailaasa PVNCTCM net>, publie sous licence
 // GNU/GPL <http://www.gnu.org/copyleft/gpl.html>.
+
 // Les images sont tirees du jeu d'icones Nuvola <http://icon-king.com/?p=15>
 // et sont publiees sous licence LGPL <http://fr.wikipedia.org/wiki/LGPL>
 
@@ -184,7 +186,7 @@ $cacher_le_bouton = $GLOBALS['cacher_le_bouton'];
 	</a>]
 
 	<?php /* Deconnexion */ ?>
-	<a href='#URL_LOGOUT'<?php echo $cacher_le_bouton['deconnexion'];?> title="<:icone_deconnecter:>">
+	<a href="javascript:quitter('#URL_LOGOUT')"<?php echo $cacher_le_bouton['deconnexion'];?> title="<:icone_deconnecter:>">
 		<img align="absmiddle" src="<?php echo($img_logout); ?>" alt="<:icone_deconnecter:>" />
 	</a>
 
