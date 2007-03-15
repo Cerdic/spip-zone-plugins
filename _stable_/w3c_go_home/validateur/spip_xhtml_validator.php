@@ -16,7 +16,7 @@ function validateur_spip_xhtml_validator_dist($action, $url= ""){
 				return array(false,"404","404");
 			$sax = $transformer_xml($ma_page, false);
 			$erreurs = (strlen($GLOBALS['xhtml_error'])>0);
-			$texte = _T("w3cgh:erreur");
+			$texte = _T("w3cgh:erreur").substr($GLOBALS['xhtml_error'],0,50);
 			$ok = false;
 			if(!$erreurs){
 				$ok = true;
