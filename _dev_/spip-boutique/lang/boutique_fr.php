@@ -3,8 +3,15 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+
+// a
+'ajouter_un_produit'=>'Ajoutrer un produit',
+
 // c
 'configurer_boutique'=>'Configurer Spip-Boutique',
+
+// g
+'gerer_les_produits'=>'Gestion des produits',
 
 // l
 'les_cadis'=>'Les cadis',
