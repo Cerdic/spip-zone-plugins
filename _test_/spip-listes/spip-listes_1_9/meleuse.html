@@ -43,7 +43,8 @@ include_spip('spiplistes_boutons');
 include_once(_DIR_PLUGIN_SPIPLISTES.'/inc/spiplistes_mail.inc.php');
 
 
-$charset=lire_meta('charset');
+#$charset=lire_meta('charset');
+$GLOBALS['spiplistes_charset_envoi'] = $charset = 'iso-8859-1';
 
 global $table_prefix;
 $query_message = "SELECT * FROM ".$table_prefix."_messages AS messages WHERE statut='encour' AND (TYPE='auto' OR TYPE='nl') ORDER BY date_heure ASC LIMIT 0,1";
@@ -134,25 +135,30 @@ if ($message_pile > 0){
 	srand((double)microtime()*1000000);
 	$boundary = md5(uniqid(rand()));
 
+	include_spip('inc/charsets');
 	$objet= filtrer_entites($titre);
-  	if ($charset <> 'utf-8') {
+ 	if (strncmp($GLOBALS['spiplistes_charset_envoi'],'utf-8',5)!==0) {
+	   $objet = charset2unicode($objet);
  	   $objet = str_replace("&#8217;", "'", $objet);
 	   $objet = str_replace("&#8220;", "\"", $objet);
 	   $objet = str_replace("&#8221;", "\"", $objet);
  	}
-        include_spip('inc/filtres');
-        $texte = liens_absolus($texte);
+	$objet = unicode2charset($objet,$GLOBALS['spiplistes_charset_envoi']);
+	include_spip('inc/filtres');
+	$texte = liens_absolus($texte);
 	
 	// on prépare la version texte
-	
-	if ($charset <> 'utf-8') {
+	if ($GLOBALS['spiplistes_charset_envoi'] <> 'utf-8') {
+		$texte = charset2unicode($texte);
 		$texte = str_replace("&#8217;", "'", $texte);
 		$texte = str_replace("&#8220;", "\"", $texte);
 		$texte = str_replace("&#8221;", "\"", $texte);
 	}
+	$texte = unicode2charset($texte,$GLOBALS['spiplistes_charset_envoi']);
+
 	
   
-    $page_ = version_texte($texte);
+	$page_ = version_texte($texte);
 
 	$page_.="\n\n________________________________________________________________________"  ;
 	$page_.="\n\n"._T('spiplistes:editeur').$nomsite."\n"  ;
