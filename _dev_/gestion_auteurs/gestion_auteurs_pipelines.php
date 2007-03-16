@@ -11,7 +11,7 @@ function gestion_auteurs_header_prive($flux) {
 			var data = [];
 			jQuery('li',el).each(function(){
 				var mon_li = jQuery(this);
-				data.push([mon_li.text(),mon_li.find('span').text()]);
+				data.push([mon_li.html(),mon_li.find('span').text()]);
 			})
 			return data;
 		}

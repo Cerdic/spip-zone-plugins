@@ -122,7 +122,7 @@ class NavigationListe
 	{
 		$res = "<div id='auteurs_nav'><ul>";
 		foreach($this->etapes as $nom=>$val) {
-			$res .= "<li><a href='$nom'>$nom (<span>".$val['compte']."</span>)</a></li>";
+			$res .= "<li><a href='".parametre_url($this->url,'debut_etape',$nom)."'>$nom (<span>".$val['compte']."</span>)</a></li>";
 		}
 		$res .= "</ul></div>";
 		return $res;
