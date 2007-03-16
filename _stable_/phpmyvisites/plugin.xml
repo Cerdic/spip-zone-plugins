@@ -35,5 +35,9 @@ _ &copy; 2006 - GPL
 	<pipeline>
 		<nom>insert_body</nom>
 		<inclure>phpmv_fonctions.php</inclure>
+	</pipeline>	
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>phpmv_fonctions.php</inclure>
 	</pipeline>
 </plugin>
