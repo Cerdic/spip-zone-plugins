@@ -2,20 +2,6 @@
  *  crayons.js (c) Fil, toggg 2006-2007 -- licence GPL
  */
 
-
-/* compat 1.0.4 tant que 1.1 est instable */
-jQuery.fn.extend({
-	one: function( type, data, fn ) {
-		return this.each(function(){
-			jQuery.event.add( this, type, function(event) {
-				jQuery(this).unbind(event);
-				return (fn || data).apply( this, arguments);
-			}, data);
-		});
-	}
-});
-
-
 // le prototype configuration de Crayons
 function cfgCrayons(options)
 {
@@ -227,8 +213,15 @@ jQuery.fn.activatecrayon = function(percent) {
             'backgroundColor': jQuery(me).prev().css('backgroundColor')
         })
         .each(function(n){
-          if (n==0)
+          // focus pour commencer a taper son texte directement dans le champ
+          // on essaie de positionner la selection (la saisie) au niveau du clic
+          if (n==0) {
             this.focus();
+            // premiere approximation, en fonction de la hauteur du clic
+            var position = parseInt(percent * this.textLength);
+            this.selectionStart=position;
+            this.selectionEnd=position;
+          }
         })
         .keypress(function(e){
           if (e.keyCode == 27) {
@@ -307,14 +300,15 @@ jQuery.fn.iconecrayon = function(){
     });
 }
 
-// initialise les crayons (cree le clone actif)
+// initialise les crayons
 jQuery.fn.initcrayon = function(){
   this
   .addClass('crayon-autorise')
   .dblclick(function(e){
     jQuery(this).opencrayon(e,
-    	(e.pageY ? e.pageY - document.body.scrollTop - this.scrollTop : e.clientY)
-    	  / this.clientHeight);
+      // calcul du "percent" du click par rapport a la hauteur totale du div
+      ((e.pageY ? e.pageY : e.clientY) - document.body.scrollTop - this.offsetTop)
+      / this.clientHeight);
   })
   .iconecrayon();
 
