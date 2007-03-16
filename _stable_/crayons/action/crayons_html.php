@@ -62,7 +62,7 @@ function controleur_dist($regs) {
     // type du crayon  (a revoir quand le core aura type ses donnees)
     $inputAttrs = array();
     if ($controleur) {
-	    $options['hauteurMini'] = 36; // base de hauteur mini
+	    $options['hauteurMini'] = 80; // base de hauteur mini
         $option['inmode'] = 'controleur';
 	    $options['controleur'] = $controleur;
     } elseif (
@@ -72,7 +72,7 @@ function controleur_dist($regs) {
     ($sqltype = colonne_table($type, $champ)) &&
 	   ( in_array($sqltype['type'] , array('mediumtext', 'longblob')) ||
 	   (($sqltype['type'] == 'text' || $sqltype['type'] == 'blob') && in_array($champ, array('descriptif', 'bio'))))) {
-	    $options['hauteurMini'] = 36; // hauteur mini d'un textarea
+	    $options['hauteurMini'] = 80; // hauteur mini d'un textarea
         $option['inmode'] = 'texte';
     } else { // ligne, hauteur naturelle
 	    $options['hauteurMaxi'] = 0;
@@ -112,7 +112,7 @@ class Crayon {
 	// dimensions indicatives
     var $largeurMini = 170;
     var $largeurMaxi = 700;
-    var $hauteurMini = 36;
+    var $hauteurMini = 80;
     var $hauteurMaxi = 700;
     // le mode d'entree: texte, ligne ou controleur
     var $inmode = '';
