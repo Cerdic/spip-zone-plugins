@@ -139,9 +139,9 @@ if ($message_pile > 0){
 	$objet= filtrer_entites($titre);
  	if (strncmp($GLOBALS['spiplistes_charset_envoi'],'utf-8',5)!==0) {
 	   $objet = charset2unicode($objet);
- 	   $objet = str_replace("&#8217;", "'", $objet);
-	   $objet = str_replace("&#8220;", "\"", $objet);
-	   $objet = str_replace("&#8221;", "\"", $objet);
+ 	   $objet = str_replace("&"."#8217;", "'", $objet);
+	   $objet = str_replace("&"."#8220;", "\"", $objet);
+	   $objet = str_replace("&"."#8221;", "\"", $objet);
  	}
 	$objet = unicode2charset($objet,$GLOBALS['spiplistes_charset_envoi']);
 	include_spip('inc/filtres');
@@ -154,9 +154,9 @@ if ($message_pile > 0){
 		$page_ = charset2unicode($page_);
 		$nomsite = charset2unicode($texte);
 		$texte = charset2unicode($texte);
-		$texte = str_replace("&#8217;", "'", $texte);
-		$texte = str_replace("&#8220;", "\"", $texte);
-		$texte = str_replace("&#8221;", "\"", $texte);
+		$texte = str_replace("&"."#8217;", "'", $texte);
+		$texte = str_replace("&"."#8220;", "\"", $texte);
+		$texte = str_replace("&"."#8221;", "\"", $texte);
 	}
 	$texte = unicode2charset($texte,$GLOBALS['spiplistes_charset_envoi']);
 	$page_ = unicode2charset($page_,$GLOBALS['spiplistes_charset_envoi']);
