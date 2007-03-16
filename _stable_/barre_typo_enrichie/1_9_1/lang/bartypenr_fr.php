@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_c_cedille_maj' => 'Ins&eacute;rer un C c&eacute;dille majuscule',
 
 'barre_chercher' => 'Chercher Remplacer',
-'barre_tableau' => 'Ins&eacute;rer/modifier (le s&eacute;lectioner avant) un tableau',
+'barre_tableau' => 'Ins&eacute;rer/modifier (le s&eacute;lectionner avant) un tableau',
 'barre_glossaire' => 'Entr&eacute;e du [?glossaire] (Wikipedia)',
 
 'barre_poesie' => 'Mettre en forme comme une &lt;poesie&gt;po&eacute;sie&lt;/poesie&gt;',
