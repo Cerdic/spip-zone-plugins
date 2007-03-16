@@ -211,13 +211,8 @@ function BarreTypoEnrichie_pre_typo($texte) {
 	if ($GLOBALS['barre_typo_pas_de_fork_typo'] === true)
 		return $texte;
 	$chercher_raccourcis = array(
-	# Il faut laisser tomber le traitement du gras tant qu'une expression reguliere capable de voir qu'on est dans un tableau n'aura pas ete trouvee
-	# Ce n'est pas bien grave : mettre du gras dans un titre, c'est un peu stupide, non ?
-	# Ou alors, remettre les {{}} apres si on est dans un tableaux ?
-		#/* 7 */ 	"/(?<![{])[{][{](?![{])/S", // Expressions complexes car on n'a pas encore traite les titres ici
-		#/* 8 */ 	"/(?<![}])[}][}](?![}])/S", // En gros, verification qu'on n'est pas a l'interieur d'un titre, ni d'un entete de tableau
-		/* 9 */ 	"/(?<![{\d])[{](?![{\d])/S", // puisque gras et italique utilisent les memes caracteres en nombre inferieur
-		/* 10 */	"/(?<![}\d])[}](?![}\d])/S",
+		/* 9 */ 	"/(?<![{\d])[{](?![{\d])/S", // Expressions complexes car on n'a pas encore traite les titres ici
+		/* 10 */	"/(?<![}\d])[}](?![}\d])/S", // puisque italique utilisent les memes caracteres en nombre inferieur
 		/* 13 */ 	"/<-->/S",
 		/* 14 */ 	"/-->/S",
 		/* 15 */ 	"/<--/S",
@@ -232,8 +227,6 @@ function BarreTypoEnrichie_pre_typo($texte) {
 	);
 
 	$remplacer_raccourcis = array(
-		#/* 7 */ 	"<strong class=\"spip\">",
-		#/* 8 */ 	"</strong>",
 		/* 9 */ 	"<i class=\"spip\">",
 		/* 10 */	"</i>",
 		/* 13 */ 	"&harr;",
@@ -250,6 +243,22 @@ function BarreTypoEnrichie_pre_typo($texte) {
 	);
 
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
+	
+	/*
+		Cas particulier pour le gras
+		Il ne faut pas traiter la mise en gras ici si le texte contient un tableau
+	*/
+	if (!preg_match(',.(\|([[:space:]]*{{[^}]+}}[[:space:]]*|<))+.,sS', $texte)) {
+		$chercher_raccourcis = array(
+			/* 7 */ 	"/(?<![{])[{][{](?![{])/S", // Expressions complexes car on n'a pas encore traite les titres ici
+			/* 8 */ 	"/(?<![}])[}][}](?![}])/S" // En gros, verification qu'on n'est pas a l'interieur d'un titre
+		);
+		$remplacer_raccourcis = array(
+			/* 7 */ 	"<strong class=\"spip\">",
+			/* 8 */ 	"</strong>"
+		);
+		$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
+	}
 	return $texte;
 }
 
