@@ -12,8 +12,10 @@
  <description>
  <multi>Plugin para insertar un google map na parte privada e na parte publica de SPIP. 
  Permite introducir un punto de google map &oacute; editar un artigo dende a parte privada.
+ _ Este plugin engade duas taboas sobre a base de datos. Unha chamada {{spip_gis}} e outra chamada {{spip_gis_config}}
  [es]Plugin para insertar un Googlemaps en un sitio SPIP.
  _ Permite introducir un punto de google maps en la edici&oacute;n de un art&iacute;culo desde la parte privada.
+ _ Este plugin a&tilde;ade dos nuevas tablas en la base de datos. Una llamada {{spip_gis}} y otra llamada {{spip_gis_config}}
  [fr]Plugin pour ins&eacute;rer Googlemaps sur votre site SPIP.
  _ Permet de placer des points Googlemaps en &eacute;ditant un article dans la partie priv&eacute;e.
  </multi>
