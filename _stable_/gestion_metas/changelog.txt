@@ -1,3 +1,4 @@
+﻿V0.2.4 : 16 mars 2007 : CDE : modification du plugin.xml et de la fonction affiche_gauche pour affichage correct du formulaire sur la page article
 V0.2.3 : 07 fev 2007 : Fonction textebrut et pas texte_brut !
 V0.2.2 : 07 fev 2007 : On protège <title> avec supprimer_numero|texte_brut|entites_html dans le squelette inclus
 V0.2.1 : 06 fev 2007 : On utilise au maximum le prefix pour éviter de déplaisantes interactions avec d'autres plugins, ou des adaptations de ce plugin.

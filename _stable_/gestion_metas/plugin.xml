@@ -1,14 +1,10 @@
 <plugin>
 	<nom>Gestion des m&#233;ta donn&#233;es <code>title</code>, <code>description</code> et <code>keywords</code>.</nom>
-	<version>0.2.3</version>
+	<version>0.2.4</version>
 	<prefix>GestionMetas</prefix>
 	<etat>stable</etat>
 	<auteur>[Olivier G.->mailto:o.gendrin@novactive.com] pour [Novactive->http://www.novactive.fr/]</auteur>
 	<description>Ce plugin permet de remplir la table qui lie les m&#233;tadonn&#233;es et les articles ou les rubriques.</description>
-	<pipeline>
-		<nom>affiche_milieu</nom>
-		<inclure>GestionMetas.php</inclure>
-	</pipeline>
 	<pipeline>
 		<nom>affiche_gauche</nom>
 		<inclure>GestionMetas.php</inclure>
