@@ -14,11 +14,8 @@ define('_DIR_PLUGIN_PHPMV',$GLOBALS['meta']['_DIR_PLUGIN_PHPMV']);
 
 function phpmv_get_code(){
 	return '<!-- phpmyvisites -->
-			<script src="'.url_de_base().find_in_path('spip_phpmyvisites.js').'" type="text/javascript"></script>
 			<noscript>
-			<div style="display:none;">
 			<img src="'.generer_url_public('phpmyvisites','var_nophpmv=1',false).'" alt="phpMyVisites" class="phpmyvisitestag" />
-			</div>
 			</noscript>
 			<!-- /phpmyvisites -->';	
 }
@@ -37,7 +34,7 @@ function phpmv_insert_head($texte){
 	  '<script type="text/javascript"><!--
 var a_vars = Array();var pagename=\'\';var phpmyvisitesSite = '.$i_site.';var phpmyvisitesURL = "'.($url = generer_url_public('phpmyvisites','var_nophpmv=1',true)).'";
 //-->
-</script>';
+</script><script src="'.url_de_base().find_in_path('spip_phpmyvisites.js').'" type="text/javascript"></script>';
 }
 
 ?>
