@@ -33,4 +33,8 @@
 	<nom>ajouter_boutons</nom>
     <inclure>gestion_auteurs_pipelines.php</inclure>
 </pipeline -->
+<pipeline>
+	<nom>header_prive</nom>
+	<inclure>gestion_auteurs_pipelines.php</inclure>
+</pipeline>
 </plugin>

@@ -32,7 +32,9 @@ function exec_auteurs()
 		'fragment' => intval(_request('fragment')),
 		'contenu_ligne' => 'ligne_auteur'
 	));
-	var_dump($navig); die();
+	
+	$res = $navig->show();
+	//var_dump($navig); die();
 /*
 	$result = requete_auteurs($tri, $statut);
 	$nombre_auteurs = spip_num_rows($result);
@@ -45,6 +47,7 @@ function exec_auteurs()
 
 	$res = auteurs_tranches(afficher_n_auteurs($auteurs), $debut, $lettre, $tri, $statut, $max_par_page, $nombre_auteurs);
 */
+
 	if (_request('var_ajaxcharset')) {
 		$ret = ajax_retour($res);
 	} else {
