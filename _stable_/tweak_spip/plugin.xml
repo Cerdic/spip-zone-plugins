@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Tweak SPIP</nom>
 	<icon>img/tweak-24.gif</icon>
-	<version>0.10</version>
+	<version>0.11</version>
 	<auteur>	<!-- Auteur du plugin -->
  	Patrice Vanneufville
 _ &copy; 2007 - Distribu&#233; sous licence GPL
@@ -38,6 +38,11 @@ _ Une activation des tweaks est n&#233;cessaire sur la page d'administration du 
 		<inclure>tweak_spip_pipelines_public.php</inclure>
 	</pipeline>	
 	<pipeline>
+		<nom>insert_head</nom> 
+		<action>insert_head</action>
+		<inclure>tweak_spip_pipelines_public.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>ajouter_onglets</nom> 
 		<action>ajouter_onglets</action>
 		<inclure>tweak_spip_pipelines_admin.php</inclure>
@@ -48,29 +53,14 @@ _ Une activation des tweaks est n&#233;cessaire sur la page d'administration du 
 		<inclure>tweak_spip_pipelines_admin.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>insert_head</nom> 
-		<action>insert_head</action>
-		<inclure>tweak_spip_pipelines_public.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>nettoyer_raccourcis_typo</nom> 
 		<action>nettoyer_raccourcis_typo</action>
 		<inclure>tweak_spip_pipelines_typo.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>pre_indexation</nom> 
-		<action>pre_indexation</action>
-		<inclure>tweak_spip_pipelines_cron.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>pre_propre</nom> 
 		<action>pre_propre</action>
 		<inclure>tweak_spip_pipelines_typo.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>pre_syndication</nom> 
-		<action>pre_syndication</action>
-		<inclure>tweak_spip_pipelines_cron.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>pre_typo</nom> 
@@ -83,23 +73,37 @@ _ Une activation des tweaks est n&#233;cessaire sur la page d'administration du 
 		<inclure>tweak_spip_pipelines_typo.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>post_syndication</nom> 
-		<action>post_syndication</action>
-		<inclure>tweak_spip_pipelines_cron.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>post_typo</nom> 
 		<action>post_typo</action>
 		<inclure>tweak_spip_pipelines_typo.php</inclure>
 	</pipeline>
+<!--
 	<pipeline>
 		<nom>rendu_evenement</nom> 
 		<action>rendu_evenement</action>
 		<inclure>tweak_spip_pipelines_public.php</inclure>
+	</pipeline>
+-->
+<!--	
+	<pipeline>
+		<nom>pre_indexation</nom> 
+		<action>pre_indexation</action>
+		<inclure>tweak_spip_pipelines_cron.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_syndication</nom> 
+		<action>pre_syndication</action>
+		<inclure>tweak_spip_pipelines_cron.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_syndication</nom> 
+		<action>post_syndication</action>
+		<inclure>tweak_spip_pipelines_cron.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>taches_generales_cron</nom> 
 		<action>taches_generales_cron</action>
 		<inclure>tweak_spip_pipelines_cron.php</inclure>
 	</pipeline>
+-->
 </plugin>

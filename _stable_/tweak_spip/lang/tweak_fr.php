@@ -7,7 +7,8 @@ $temp_jQuery = $GLOBALS['spip_version_code']<1.92?
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Tweak SPIP',
-	'help'	=> "{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Tweak&nbsp;SPIP'.</p>",
+	'help'	=> "{{Cette page est uniquement accessible aux responsables du site.}}"
+		."<p>Elle donne acc&egrave;s aux diff&eacute;rentes  fonctions suppl&eacute;mentaires apport&eacute;es par le plugin 'Tweak&nbsp;SPIP'.</p>",
 	'titre_tests' => 'Tweak SPIP - Page de tests',
 	'actif' => 'Tweak actif',
 	'inactif' => 'Tweak inactif',
@@ -16,18 +17,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tweak'	=> 'Tweak :',
 	'tweaks_liste' => 'Liste des tweaks',
 	'presente_tweaks' => "Cette page liste les tweaks disponibles.<br />Vous pouvez activer les tweaks n&eacute;cessaires en cochant la case correspondante.",
-// erreurs
 	'erreur:nom' => 'Erreur !',
 	'erreur:description'	=> 'id manquant dans la d&eacute;finition du tweak !',
 	'erreur:version'	=> 'indisponible dans cette version de Spip.',
 
-// categories
+// categories de tweaks
+// --------------------
+
 	'admin' => "1. Administration",
 	'typo' => "2. Raccourcis typographiques",
 	'squel' => "3. Squelettes",
 	'divers' => "4. Divers",
 	
-// Les tweaks
+// Chaines de langue concernant tous les tweaks configures dans tweak_spip_config.php
+// ----------------------------------------------------------------------------------
+
 	'desactive_cache:nom' => 'D&eacute;sactive le cache',
 	'desactive_cache:description'	=> 'Inhibition du cache de SPIP pour le d&eacute;veloppement du site.',
 

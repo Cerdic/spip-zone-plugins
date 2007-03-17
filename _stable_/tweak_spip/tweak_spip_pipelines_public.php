@@ -17,12 +17,12 @@ function tweak_spip_insert_head($flux){
 		eval($tweaks_metas_pipes['insert_head']);
 	return $flux."\n<!-- Fin header TWEAKS -->\n\n";
 }
-
+/*
 function tweak_spip_rendu_evenement($flux){
 	global $tweaks_metas_pipes;
 	if (isset($tweaks_metas_pipes['header_rendu_evenementprive']))
 		eval($tweaks_metas_pipes['rendu_evenement']);
 	return $flux;
 }
-
+*/
 ?>

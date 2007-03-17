@@ -1,11 +1,6 @@
 <?php
 include_spip('tweak_spip');
 /*
-if (!defined('_DIR_PLUGIN_TWEAK_SPIP')){
-	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
-	define('_DIR_PLUGIN_TWEAK_SPIP',(_DIR_PLUGINS.end($p)));
-}
-
 function tweak_spip_affiche_droite($flux){
 	return tweak_pipeline('affiche_droite', $flux);
 }
@@ -43,6 +38,7 @@ function tweak_spip_header_prive($flux){
 		eval($tweaks_metas_pipes['header_prive']);
 	return $flux."\n<!-- Fin header TWEAKS -->\n\n";
 }
+
 function tweak_spip_install($action){
 tweak_log("tweak_spip_install($action)");
 	include_spip('inc/meta');
@@ -53,9 +49,11 @@ tweak_log("tweak_spip_install($action)");
 		case 'install':
 			break;
 		case 'uninstall':
-			foreach(array_keys($GLOBALS['meta']) as $meta) 
+/*			foreach(array_keys($GLOBALS['meta']) as $meta) 
 				if(strpos($meta, 'tweaks_') !== false) effacer_meta($meta);
-			ecrire_metas();
+			ecrire_metas();*/
+			include_spip('inc/getdocument');
+			effacer_repertoire_temporaire(_DIR_TMP."tweak-spip");
 			break;
 	}
 }	

@@ -89,43 +89,47 @@ function is_tweak_pipeline($pipe, &$set_pipe) {
 
 // cree un tableau $tweaks_pipelines et initialise $tweaks_metas_pipes
 function tweak_initialise_includes() {
-  global $tweaks, $tweaks_metas_pipes;
-  $tweaks_pipelines = array();
-  // liste des pipelines utilises
-  $pipelines_utilises = array();
-  // parcours de tous les tweaks
-  foreach ($tweaks as $i=>$tweak) {
-	// stockage de la liste des fonctions par pipeline, si le tweak est actif...
-	if ($tweak['actif']) {
-		$inc = $tweak['id']; $pipe2 = '';
-		foreach ($tweak as $pipe=>$fonc) if (is_tweak_pipeline($pipe, $pipe2)) {
-			// module a inclure
-			$tweaks_pipelines[$pipe2]['inclure'][] = $inc;
-			// fonction a appeler
-			$tweaks_pipelines[$pipe2]['fonction'][] = $fonc;
-			// liste des pipelines utilises
-			if (!in_array($pipe2, $pipelines_utilises)) $pipelines_utilises[] = $pipe2;
+	global $tweaks, $tweaks_metas_pipes;
+	// toutes les infos sur les pipelines
+	$tweaks_pipelines = array();
+	// liste des pipelines utilises
+	$pipelines_utilises = array();
+	// parcours de tous les tweaks
+	foreach ($tweaks as $i=>$tweak) {
+		// stockage de la liste des fonctions par pipeline, si le tweak est actif...
+		if ($tweak['actif']) {
+			$inc = $tweak['id']; $pipe2 = '';
+			foreach ($tweak as $pipe=>$fonc) if (is_tweak_pipeline($pipe, $pipe2)) {
+				// module a inclure
+				$tweaks_pipelines[$pipe2]['inclure'][] = $inc;
+				// fonction a appeler
+				$tweaks_pipelines[$pipe2]['fonction'][] = $fonc;
+				// liste des pipelines utilises
+				if (!in_array($pipe2, $pipelines_utilises)) $pipelines_utilises[] = $pipe2;
+			}
+			// recherche d'un fichier .css et/ou .js eventuellement present dans tweaks/
+			if (find_in_path('tweaks/'.$inc.'.css')) $tweaks_metas_pipes['css'][] = $inc.'.css';
+			if (find_in_path('tweaks/'.$inc.'.js')) $tweaks_metas_pipes['js'][] = $inc.'.js';
+			// recherche d'un code inline eventuellement propose
+			if (isset($tweak['code'])) { $inc = $tweak['code']; $prefixe = 'code_'; }
+				else $prefixe = 'inc_';
+			if ($tweak['options']) $tweaks_pipelines[$prefixe.'options'][] = $inc;
+			if ($tweak['fonctions']) $tweaks_pipelines[$prefixe.'fonctions'][] = $inc;
 		}
-		// recherche d'un fichier .css et/ou .js eventuellement present dans tweaks/
-		if (find_in_path('tweaks/'.$inc.'.css')) $tweaks_metas_pipes['css'][] = $inc.'.css';
-		if (find_in_path('tweaks/'.$inc.'.js')) $tweaks_metas_pipes['js'][] = $inc.'.js';
-		// recherche d'un code inline eventuellement propose
-		if (isset($tweak['code'])) { $inc = $tweak['code']; $prefixe = 'code_'; }
-			else $prefixe = 'inc_';
-		if ($tweak['options']) $tweaks_pipelines[$prefixe.'options'][] = $inc;
-		if ($tweak['fonctions']) $tweaks_pipelines[$prefixe.'fonctions'][] = $inc;
 	}
-  }
-  // installation de $tweaks_metas_pipes
-  set_tweaks_metas_pipes_fichier($tweaks_pipelines, 'options');
-  set_tweaks_metas_pipes_fichier($tweaks_pipelines, 'fonctions');
-  foreach($pipelines_utilises as $pipe) set_tweaks_metas_pipes_pipeline($tweaks_pipelines, $pipe);
+	// effacement du repertoir temporaire de controle
+	include_spip('inc/getdocument');
+	effacer_repertoire_temporaire(_DIR_TMP."tweak-spip");
+	// installation de $tweaks_metas_pipes
+	set_tweaks_metas_pipes_fichier($tweaks_pipelines, 'options');
+	set_tweaks_metas_pipes_fichier($tweaks_pipelines, 'fonctions');
+	foreach($pipelines_utilises as $pipe) set_tweaks_metas_pipes_pipeline($tweaks_pipelines, $pipe);
 }
 
 // retourne le tableau $reg si le code propose est un code de boutons radio
 //  forme : choixX(choixY=traductionY|choixX=traductionX|etc)
 function tweak_is_radio($code, &$reg) {
- return preg_match(',([0-9A-Za-z_-]*)\(('.'[0-9A-Za-z_-]+=[A-Za-z_:-]+\|[0-9A-Za-z_:=>|-]+'.')\),', $code, $reg);
+	return preg_match(',([0-9A-Za-z_-]*)\(('.'[0-9A-Za-z_-]+=[A-Za-z_:-]+\|[0-9A-Za-z_:=>|-]+'.')\),', $code, $reg);
 }
 
 // remplace les valeurs marquees comme %%toto%% par la valeur reelle de $metas_vars['toto']
@@ -207,8 +211,8 @@ tweak_log(" -- $f() : installé !");
 function tweak_initialisation_totale() {
 	// on force la reinstallation complete des tweaks
 	tweak_initialisation(true);
-	// reinitialisation des pipelines, au cas ou
-	if (file_exists($f = _DIR_TMP."charger_pipelines.php")) unlink($f);
+	// reinitialisation des pipelines, par precaution
+	if (file_exists($f = _DIR_TMP."charger_pipelines.php")) @unlink($f);
 }
 
 // lit ecrit les metas et initialise $tweaks_metas_pipes
@@ -325,13 +329,19 @@ function tweak_canonicalize($address) {
 /*****************/
 
 // les globales :
+//
 // $tweaks est un tableau ultra complet avec tout ce qu'il faut savoir sur chaque tweak
+//  - ce tableau n'est rempli qu'une fois, lors d'une initialisation totale
+//    les hits ordinaires ne se servent que des metas, non des fichiers.
+//  - l'initialisation totale insere en premier lieu tweak_spip_config.php
+//
 // $tweaks_metas_pipes ne sert qu'a l'execution et ne comporte que :
 //	- les fichiers .js 
 //	- les fichiers .css 
 //	- le code pour les options.php
 //	- le code pour les fonction.php
 //	- le code pour les pipelines utilises
+
 global $tweaks, $tweaks_metas_pipes;
 $tweaks = $tweaks_metas_pipes = array();
 
