@@ -1,5 +1,6 @@
 function init_events(){
-	$('td').click(function(){	$(this).selectRow();	});
+	/*$('tr.row').click(function(){	$(this).selectRow();	});*/
+	/*$('td').click(function(){	$(this).selectRow();	});*/
 	$('th').click(function(){	$(this).selectCol();	});
 	$('img.noeud').click(function(){	$(this).toggleLine();	});
 	update_toolbar_icones();
@@ -22,21 +23,26 @@ function unselect_all(){
 		row_selected.removeClass('row_sel');
 	row_selected = undefined;
 	if (col_selected!=undefined)
-		$('td.col_sel,th.col_sel').removeClass('col_sel');
+		/*$('td.col_sel,th.col_sel').removeClass('col_sel');*/
+		$('th.col_sel').removeClass('col_sel');
 	col_selected = undefined;
 }
 jQuery.fn.selectRow = function() {
-	unselect_all();
-	row_selected = this.parents('tr.row');
+	if (row_selected!=undefined)
+		row_selected.removeClass('row_sel');
+	row_selected = this;
 	update_toolbar_icones();
 	return this
-  .parents('tr.row')
     .addClass('row_sel');
 }
+jQuery.fn.selectParentRow = function() {
+	this.parents('tr.row').selectRow();
+	return this;
+}
 jQuery.fn.selectCol = function() {
-	unselect_all();
+	if (col_selected!=undefined)
+		$('th.col_sel').removeClass('col_sel');
 	col_selected = this.attr('class');
-	$('td.'+col_selected).addClass('col_sel');
 	$('th.'+col_selected).addClass('col_sel');
 	update_toolbar_icones();
 	return this;
@@ -52,7 +58,8 @@ function getLevel(c){
   return n;
 }
 jQuery.fn.toggleLine = function() {
-	niveau = getLevel(this.parent().attr('class'));
+	cur = l = this.parents('tr.row');
+	niveau = l.attr('name'); //getLevel(this.parent().attr('class'));
 	expand=false;
 	if (this.attr('src')==img_noeud_plus) {	
 		expand=true;
@@ -60,35 +67,34 @@ jQuery.fn.toggleLine = function() {
 	else {
 		this.attr('src',img_noeud_plus);
 	}
-	cur = l = this.parents('tr.row');
 	next = l.next('tr.row');
-	while (next.size() && (n=getLevel(next.find('div.niveau').attr('class')) >niveau)){
-		if (expand){ 
+	if (expand){ 
+		while (next.size() && (n=next.attr('name')>niveau)){
 			cur.find('img.noeud').attr('src',img_noeud_moins);
-			next.show();
+			cur = next.show();
+			next = next.next('tr.row');
 		}
-		else {
-			next.hide();
-		}
-		cur = next;
-		next = next.next('tr.row');
-	}
-	if (expand){
 		cur.find('img.noeud').attr('src',img_noeud_plus);
+	}
+	else{
+		while (next.size() && (n=next.attr('name')>niveau)){
+			cur = next.hide();
+			next = next.next('tr.row');
+		}
 	}
 	return this;
 }
 function filtre_niveau(niveau){
-	for (i=1;i<10;i++){
-		if (i<=niveau){
-			l=$('.niveau-'+i);
-			l.parents('tr.row').show();
-			if (i<niveau) l.find('img.noeud').attr('src',img_noeud_moins);
-			else  l.find('img.noeud').attr('src',img_noeud_plus);
-		}
-		else
-			$('.niveau-'+i).parents('tr.row').hide();
-	}
+	l=$('#');
+	for (i=1;i<niveau;i++)
+		l = l.add('tr.row[@name='+i+']:hidden');
+	l.show().find('img.noeud').attr('src',img_noeud_moins);
+	$('tr.row[@name='+niveau+']').show().find('img.noeud').attr('src',img_noeud_plus);
+	l=$('#');
+	niveau++;
+	for (i=niveau;i<10;i++)
+		l = l.add('tr.row[@name='+i+']:visible');
+	l.hide();
 }
 
 // augmenter/reduire le niveau
@@ -97,10 +103,12 @@ jQuery.fn.changeLevel = function(increment) {
 	if (niveau+increment<1) return this;
 	ids = this.attr('id')+':'+niveau;
 	this.find('div.niveau').attr('class','niveau niveau-'+(niveau+increment));
+	this.attr('name',niveau+increment);
 	cur = this.next('tr.row');
 	while (cur.size() && ( (n=getLevel(cur.find('div.niveau').attr('class'))) >niveau)){
 		ids = ids+','+cur.attr('id')+':'+n;
 		cur.find('div.niveau').attr('class','niveau niveau-'+(n+increment));
+		cur.attr('name',niveau+increment);
 		cur = cur.next('tr.row');
 	}
 	//alert(ids);

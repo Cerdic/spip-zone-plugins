@@ -39,17 +39,13 @@ var img_noeud_moins='#EVAL{_DIR_IMG_PACK}noeud_moins.gif';
 <BOUCLE_donnees(FORMS_DONNEES){id_form=#ENV{id_table}}{id_mot?}{par rang}{statut!=poubelle}>
 #SET{lien_addrow,#URL_ACTION_AUTEUR{outline_add_row,#ID_FORM|concat{:#ID_DONNEE,:#GET{prev}},(#SELF|urlencode)}}
 #SET{lien_supprow,#URL_ACTION_AUTEUR{outline_supp_row,#ID_FORM:#ID_DONNEE,(#SELF|urlencode)}}
-#SET{prev,#ID_DONNEE}
-	<tr id='#ID_DONNEE' class='row [(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]'>
-		<!--<td><a href='#GET{lien_addrow}' title='<:outliner:insertion_ligne:>'><img src='#CHEMIN{img_pack/outline_insert_ligne-24.png}' width='24' height='24' alt='<:outliner:insertion_ligne:>' /></a></td>-->
-		<td><a href='[(#SELF|parametre_url{id_donnee,#ID_DONNEE}|ancre_url{donnee-#ID_DONNEE})]'>#ID_DONNEE</a></td>
+#SET{prev,#ID_DONNEE}#SET{niveau,1}
+	<BOUCLE_niveau(FORMS_CHAMPS){id_form}{champ=select_1}>#SET{niveau,#LESVALEURS}</BOUCLE_niveau>
+	<tr id='#ID_DONNEE' class='row [(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]' onclick='$(this).selectRow();' name='#GET{niveau}'>
+		<td>#ID_DONNEE</td>
 		<td class='ligne_1'>
 		<table><tr >
-		<BOUCLE_niveau(FORMS_CHAMPS){id_form}{champ=select_1}>
-		<td class='niveau'>[(#REM)<span class='#_donnees:EDIT{#CHAMP}'>]
-		<div class='niveau niveau-#LESVALEURS'><img src='#EVAL{_DIR_IMG_PACK}noeud_moins.gif' width='16' height='16' class='noeud'/></div>
-		[(#REM)</span>]</td>
-		</BOUCLE_niveau>
+		<td class='niveau'><div class='niveau niveau-#GET{niveau}'><img src='#EVAL{_DIR_IMG_PACK}noeud_moins.gif' width='16' height='16' class='noeud'/></div></td>
 		<BOUCLE_titre(FORMS_CHAMPS){id_form}{champ=ligne_1}>
 		<td><span class='#_donnees:EDIT{#CHAMP}'>#LESVALEURS{','} </span></td>
 		</BOUCLE_titre>
