@@ -1,0 +1,69 @@
+﻿<?php
+/**
+* Plugin Association
+*
+* Copyright (c) 2007
+* Bernard Blazin & François de Montlivault
+* http://www.plugandspip.com 
+* Ce programme est un logiciel libre distribue sous licence GNU/GPL.
+* Pour plus de details voir le fichier COPYING.txt.
+*  
+**/
+debut_cadre_formulaire();
+$link= generer_url_ecrire('adherents');
+$link1= generer_url_ecrire('ajout_adherent');
+$link2= generer_url_ecrire('dons');
+$link3= generer_url_ecrire('essai');
+$link4= generer_url_ecrire('ventes');
+$link5= generer_url_ecrire('comptes');
+//$link6= generer_url_ecrire('activites');
+//$link7= generer_url_ecrire('prets');
+
+$sql = "SELECT * FROM spip_asso_profil where id_profil=1";
+$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+
+while ($data = mysql_fetch_assoc($req)) {
+$dons=$data['dons'];
+$ventes=$data['ventes'];
+$comptes=$data['comptes'];
+echo '<table width="70%" border="0">';
+echo '<tr>';
+echo '<td>';
+icone_horizontale(_T('asso:Gestion_des_membres'), $link, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' ); 
+echo '</td>';
+echo '<td>';
+icone_horizontale(_T('asso:Ajouter_un_membre'),$link1, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','creer.gif');
+echo '</td>';
+echo '<td>';
+icone_horizontale(_T('asso:Relances_des_cotisations'),$link3,  '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/ico_panier.png','rien.gif' ); 
+echo '</td>';
+if ($dons=='oui'){
+echo '<td>';
+icone_horizontale(_T('asso:Gestion_des_dons'), $link2, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/bienfaiteur.png','rien.gif' ); 
+echo '</td>';}
+if ($ventes=='oui'){
+echo '<td>';
+icone_horizontale(_T('asso:Ventes_associatives'), $link4, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/journaux.png','rien.gif' ); 
+echo '</td>';}
+if ($comptes=='oui'){
+echo '<td>';
+icone_horizontale(_T('asso:Livres_de_comptes'), $link5, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' ); 
+echo '</td>';
+echo '</tr>';}
+/*
+if ($comptes=='oui'){
+echo '<td>';
+icone_horizontale(_T('asso:Gestion des activit&eacutes;s'), $link6, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' ); 
+echo '</td>';
+echo '</tr>';}
+if ($comptes=='oui'){
+echo '<td>';
+icone_horizontale(_T('asso:Gestion des prêts'), $link7, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/livredor.png','rien.gif' ); 
+echo '</td>';
+echo '</tr>';}
+*/
+echo '</table>';
+}
+fin_cadre_formulaire();
+
+?>
