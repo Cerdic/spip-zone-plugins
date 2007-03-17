@@ -5,5 +5,7 @@
 	<etat>dev</etat>
 	<auteur>[Vincent Ramos->http://www.spip-contrib.net/auteur7639.html</auteur>
 	<description>
-	Ce plugin est distribu&eacute; sous licence GNU/GPL</description>
+		Ce plugin contient un squelette complet fortement inspiré d'[EVA-WEB->http://spip-edu.edres74.net/rubrique.php3?id_rubrique=22] 2.3, squelette développé pour les établissements scolaires. Une grande partie de l'architecture d'EVA-WEB a été reprise mais le plugin offre une présentation (sur trois colonnes et non deux) et des fonctionnalités différentes. D'autre part, il ne nécessite aucune modification d'une installation de SPIP préexistante ─ au contraire d'EVA-WEB, qui demande l'utilisation d'une version de SPIP qui lui soit propre ─ et permet des mises à jour de SPIP indépendantes de celle d'EVA-WEB.
+
+		Ce plugin est distribu&eacute; sous licence GNU/GPL</description>
 </plugin>
