@@ -30,6 +30,10 @@ function exec_auteurs()
 			'SELECT DISTINCT UPPER(LEFT(nom,'.$len_debut_etape.')) etape, COUNT(*) compte FROM spip_auteurs
 			'.($len_debut_etape>1?'WHERE nom LIKE "'._request('debut_etape').'%"':'').'
 			 GROUP BY etape ORDER BY etape',
+		'requete_etapes_suivante' =>
+			'SELECT DISTINCT UPPER(LEFT(nom,'.($len_debut_etape).')) etape_prec,UPPER(LEFT(nom,'.($len_debut_etape+1).')) etape, COUNT(*) compte FROM spip_auteurs
+			'.($len_debut_etape>1?'WHERE nom LIKE "'._request('debut_etape').'%"':'').'
+			 GROUP BY etape ORDER BY etape',
 		'debut_etape' => _request('debut_etape'),
 		'max_par_page' => 30,
 		'debut' => intval(_request('debut')),
