@@ -29,6 +29,7 @@ print('<p>Nous sommes le '.date('d-m-Y').'</p>');
 //On récupère les données globales
 $sujet=$_POST['sujet'];
 $message=$_POST['message'] ;
+$message=utf8_decode($message) ;
 //$message=utf8_decode($_POST['message']) ;
 $statut=$_POST['statut'];
 $email_tab=(isset($_POST["email"])) ? $_POST["email"]:array();
