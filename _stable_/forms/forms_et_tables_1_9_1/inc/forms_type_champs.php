@@ -95,7 +95,7 @@
 				$val = _request($champ, $c);
 			if ($type == 'fichier') $val = $_FILES[$champ]['tmp_name'];
 			// verifier la presence des champs obligatoires
-			if (!$val && ($infos['obligatoire'] == 'oui'))
+			if (($val===NULL || !strlen($val)) && ($infos['obligatoire'] == 'oui'))
 					$erreur[$champ] = _T("forms:champ_necessaire");
 		}
 
