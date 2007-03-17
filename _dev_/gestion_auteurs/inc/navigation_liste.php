@@ -85,22 +85,7 @@ class NavigationListe
 			$this->etapes[$eta]['debut'] = $cumul;
 			$cumul += $this->etapes[$eta]['compte'];
 		} while ($this->fetch = spip_fetch_array($this->result));
-		
-		// chercher les etapes ou mourir
-		if ($this->requete_etapes_suivante && $this->errQuery($this->requete_etapes_suivante, 'Etapes impossibles')) {
-			return;
-		}
-		// charger le tableau des etapes
-		$cumul_suivantes = 0;
-		do {
-			$eta_prec = $this->fetch['etape_prec'];
-			$eta = $this->fetch['etape'];
-			$this->etapes[$eta_prec]['filles'][$eta]['compte'] = intval($this->fetch['compte']);
-			$this->etapes[$eta_prec]['filles'][$eta]['debut'] = $cumul_suivantes;
-			$cumul_suivantes += $this->etapes[$eta_prec]['filles'][$eta]['compte'];
-		} while ($this->fetch = spip_fetch_array($this->result));
-		
-		
+
 		// total des etapes == population totale ?
 		if (is_null($this->compte)) {
 			$this->compte = $cumul;
@@ -141,14 +126,7 @@ class NavigationListe
 			$res = "<a href='".parametre_url($this->url,'debut_etape',substr($this->debut_etape,0,-1))."'>".substr($this->debut_etape,0,-1)."</a>";
 		$res .= "<div id='auteurs_nav'><ul>";
 		foreach($this->etapes as $nom=>$val) {
-			$res .= "<li><a href='".parametre_url($this->url,'debut_etape',$nom)."'>$nom (<span>".$val['compte']."</span>)</a>";
-			if($val['filles']) {
-				$res .= "<ul>";
-				foreach($val['filles'] as $nom=>$val)
-					$res .= "<li><a href='".parametre_url($this->url,'debut_etape',$nom)."'>$nom (<span>".$val['compte']."</span>)</a></li>";
-				$res .= "</ul>";			
-			}			
-			$res .= "</li>";
+			$res .= "<li><a href='".parametre_url($this->url,'debut_etape',$nom)."'>$nom (<span>".$val['compte']."</span>)</a></li>";
 		}
 		$res .= "</ul></div>";
 		return $res;
