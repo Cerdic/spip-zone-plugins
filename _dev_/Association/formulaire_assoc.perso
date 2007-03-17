@@ -1,0 +1,76 @@
+<?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+
+include_spip('base/abstract_sql');
+
+// Balise independante du contexte
+function balise_FORMULAIRE_ASSOC ($p) 
+{
+return calculer_balise_dynamique($p, 'FORMULAIRE_ASSOC', array()); //  variables à déclarer
+	// Ajouter l'invalideur forums sur les pages contenant ce formulaire
+	//$p->code = code_invalideur_forums($p, $p->code);
+	//return $p;
+}
+
+//function balise_FORMULAIRE_ASSOC_stat() {}
+
+function balise_FORMULAIRE_ASSOC_dyn(){
+
+	return array('formulaires/formulaire_assoc', 3600, 
+		array(
+			'assoc' => ($lien ? $lien : generer_url_public('assoc')),
+			//'recherche' => _request('recherche'),
+			'lang' => $lang
+		));
+		
+//recuperation des variables
+$nom = _request('nom');
+$prenom = _request('prenom');
+$mail = _request('mail');
+$case_radio = _request('case_radio');
+$adresse = _request('adresse');
+$cp = _request('cp');
+$ville = _request('ville');
+$telephone = _request('telephone');
+$text = _request('text');
+$sujet = _request('sujet');
+
+
+	
+
+	return array('formulaires/formulaire_assoc', 3600, 
+		array(
+			'assoc' => ($lien ? $lien : generer_url_public('assoc')),
+			//'recherche' => _request('recherche'),
+			'lang' => $lang
+		));
+if($_POST["nom"]==""){echo "Merci de renseigner les champs obligatoires"; exit;}
+else {
+$sql = "SELECT * FROM spip_asso_profil";
+$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+
+while ($data = mysql_fetch_assoc($req)) {
+$nomasso=$data['nom'];
+$mailresponsable=$data['mail'];
+
+
+$message = "Un nouveau membre vient de s'inscrire: ".$prenom." ".$nom."\nSon email :".$mail."\nIl sera membre:".$case_radio."\nSon adresse: ".$adresse." ".$cp." ".$ville."\nSon numéro de t&eacute;l&eacute;phone: ".$telephone."\nSon message: ".$text."";
+$headers = "From: ".$nomasso."";
+$adresse = $mailresponsable;
+
+mail("$adresse","$sujet","$message", "$headers");
+$adresse1= $mail;
+$message1= "Bonjour ".$_POST[prenom]."\n\n\nVous venez de demander votre inscription à l'association ".$nomasso." .\nNous allons prendre contact avec vous tr&egrave;s rapidement.\n\nAvec nos remerciements. \n\n\nLe bureau de ".$nomasso.".\r\n";
+
+mail("$adresse1","$sujet","$message1","$headers");
+}
+if ($_POST[case_radio]=="actif"){
+
+$sql="INSERT INTO spip_asso_adherents (nom, prenom, email,  rue, cp, ville, telephone, statut, creation) VALUES ('$nom', '$prenom',  '$mail',  '$adresse', '$cp', '$ville', '$telephone','prospect', CURRENT_DATE() )";
+$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+}
+echo " Merci pour votre enregistrement.";
+}
+}
+?>
