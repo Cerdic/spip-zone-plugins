@@ -38,13 +38,12 @@ debut_droite();
 
 	debut_cadre_formulaire();
 		gros_titre(_T('asso:Votre association'));
-		$query = "SELECT * FROM spip_asso_profil WHERE id_profil=1";
+		$query = spip_query ("SELECT * FROM spip_asso_profil WHERE id_profil=1");
 
-$val = spip_query (${query}) ;
 $i=0;
 
 
-while ($data = mysql_fetch_assoc($val))
+while ($data = mysql_fetch_assoc($query))
     {	
     	$i++;
 	echo '<br>';				
@@ -69,8 +68,7 @@ echo '<br />';
 	
 	debut_cadre_relief();
 
-$query = "SELECT * FROM spip_asso_adherents WHERE fonction != '' AND statut != 'sorti' ORDER BY nom ";
-$val = spip_query ($query) ;
+$query = spip_query("SELECT * FROM spip_asso_adherents WHERE fonction != '' AND statut != 'sorti' ORDER BY nom ");
 
 echo '<table border=0 cellpadding=2 cellspacing=0 width="100%" class="arial2" style="border: 1px solid #aaaaaa;">';
 echo '<tr bgcolor="#DBE1C5">';
@@ -80,7 +78,7 @@ echo '<td><strong>Fonction</strong></td>';
 echo '<td><strong>Portable</strong></td>';
 echo '<td><strong>T&eacute;l&eacute;phone</strong></td>';
 echo '</tr>';
-while ($data = mysql_fetch_assoc($val))
+while ($data = mysql_fetch_assoc($query))
     {	
 echo '<tr style="background-color: #EEEEEE;">';
 echo '<td class="arial11" style="border-top: 1px solid #CCCCCC;"><a href="'.$url_edit_adherent.'&id='.$data['id_adherent'].'" title="Modifier l\'administrateur">'.$data['nom'].' '.$data['prenom'].'</a></td>';
@@ -96,14 +94,11 @@ echo '</table>';
 		fin_page();
 		
 //Petite routine pour mettre à jour les statuts de cotisation "échu"
-$sql = "UPDATE spip_asso_adherents SET statut='echu' WHERE statut = 'ok' AND validite < CURRENT_DATE() ";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$sql = spip_query("UPDATE spip_asso_adherents SET statut='echu' WHERE statut = 'ok' AND validite < CURRENT_DATE() ");
 
 //ROUTINE ID_AUTEUR
 //Enregistrement de l'id_auteur d'emails correspondants
-$sql = "UPDATE spip_asso_adherents INNER JOIN spip_auteurs ON spip_asso_adherents.email=spip_auteurs.email SET spip_asso_adherents.id_auteur= spip_auteurs.id_auteur WHERE spip_asso_adherents.email<>'' ";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+$sql = spip_query("UPDATE spip_asso_adherents INNER JOIN spip_auteurs ON spip_asso_adherents.email=spip_auteurs.email SET spip_asso_adherents.id_auteur= spip_auteurs.id_auteur WHERE spip_asso_adherents.email<>'' ");
 
-	}
-
+}
 ?>
