@@ -1,0 +1,22 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Champs homonymes 1.9.2
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+ 	francois.vachon@iago.ca
+_ &copy; 2006 - Distribue sous licence GNU/GPL
+ 	[iago.ca->http://www.iago.ca]
+	</auteur>
+	<version>
+	0.1
+	</version>
+	<etat>
+	test
+	</etat>
+	<description>
+	Rendre possible la visualisation et la mise à jours de nouveaux champs ajoutés dans plusieurs tables de SPIP grâce aux champs EXTRA.
+	</description> 
+	<prefix> 
+	homonymes
+	</prefix>
+	</plugin>
