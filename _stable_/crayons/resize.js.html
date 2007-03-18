@@ -1,0 +1,10 @@
+[(#REM)
+
+	Charger la librairie "resize"
+
+]
+#CACHE{7*24*3600,cache-client}
+#HTTP_HEADER{'Content-Type: text/javascript'}
+
+[(#CHEMIN{js/resize.js}|spip_file_get_contents)]
+

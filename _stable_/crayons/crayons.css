@@ -38,6 +38,14 @@ img.crayon-edit, img.crayon-crayon {
 .crayon-edit, .crayon-crayon, .crayon-img-changed {
 	cursor: pointer;
 } 
+.jstHandle {
+	background:transparent url("images/resizer.png") no-repeat scroll 45%;
+	cursor:s-resize;
+	font-size:0.1em;
+	height:16px;
+	width:100%;
+}
+
 .formulaire_spip .crayon-active {
 	padding: 1px;
 	border: 1px inset;
