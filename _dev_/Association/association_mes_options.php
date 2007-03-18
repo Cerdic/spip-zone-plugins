@@ -35,9 +35,8 @@ function cree_login($email) {
      for ($i = 0; ; $i++) {
      	if ($i) $login = $login.$i;
      	else $login = $login;
-     	$query = "SELECT id_auteur FROM spip_auteurs WHERE login='$login'";
-     	$result = spip_query($query);
-     	if (!spip_num_rows($result)) break;
+     	$query = spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='$login'");
+     	if (!spip_num_rows($query)) break;
 	     }		
 	return $login;
   }
