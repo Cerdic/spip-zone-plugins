@@ -11,7 +11,7 @@ function Player_insert_head($flux){
 	//$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'AFLAX/aflax.js"></script>';
 	//$flux .= '<script type="text/javascript">var aflax = new AFLAX("'._DIR_PLUGIN_PLAYER.'AFLAX/aflax.swf");</script>';
 	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_PLAYER.'player_enclosure.js"></script>';
-	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_PLAYER.'player.css" type="text/css" media="projection, screen, tv" />';
+	$flux .= '<link rel="stylesheet" href="'.direction_css(find_in_path('player.css')).'" type="text/css" media="projection, screen, tv" />';
 	return $flux;
 }
 
@@ -21,7 +21,7 @@ function Player_insert_head($flux){
  */
 
 // Contrairement au plugin original (http://zone.spip.org/trac/spip-zone/browser/_plugins_branche_stable_/_spip_1_9_0_/dewplayer)
-// Cette version pour la version 1.9.1 utilisera la modification du modèle doc pour traiter les adresses relatives 
+// Cette version pour la version 1.9.1 utilisera la modification du modï¿½e doc pour traiter les adresses relatives 
 // qu'on retrouverait si on placerait un lien dans le texte par une balise <docXX>
 // ajout d'un rel="enclosure" simple sur les liens mp3
 function Player_post_propre($texte) {
