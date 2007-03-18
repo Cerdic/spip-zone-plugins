@@ -88,13 +88,12 @@ add_tweak( array(
 	'id'	=> 'set_options',
 	'auteur' 		=> 'Vincent Ramos [contact->mailto:www-lansargues@kailaasa.net]',
 	// ici on demande a Tweak Spip deux boutons radio : _T('icone_interface_simple') et _T('icone_interface_complet')
-	// pour les boutons radio, il faut utiliser une deuxième variable avec le prefixe radio_ : radio_set_options
+	// pour les boutons radio, il faut utiliser une deuxieme variable avec le prefixe radio_ : radio_set_options
 	// la variable Spip est : set_options
-	// le /avancees signifie que avancees (traduit par : _T('icone_interface_complet')) sera coche par defaut
+	// le avancees( signifie que avancees (traduit par : _T('icone_interface_complet')) sera coche par defaut
 	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	'code' 	=> '$GLOBALS["radio_set_options"]=%%radio_set_options/s/"avancees(basiques=icone_interface_simple|avancees=icone_interface_complet)"%%;
-list($set_options, $foo) = explode("(", $GLOBALS["radio_set_options"], 2);
-$_GET["set_options"] = $GLOBALS["set_options"] = $set_options;',
+	'code' 	=> '$GLOBALS["radio_set_options"]=$foo=%%radio_set_options/s/"avancees(basiques=icone_interface_simple|avancees=icone_interface_complet)"%%;
+$_GET["set_options"] = $GLOBALS["set_options"] = tweak_choix($foo);',
 	'categorie'	=> 'admin',
 	'options'	=> 1,
 	// pipeline pour retirer en javascript le bouton de controle de l'interface
@@ -106,12 +105,23 @@ $_GET["set_options"] = $GLOBALS["set_options"] = $set_options;',
 add_tweak( array(
 	'id'	=> 'filtrer_javascript',
 	// ici on demande a Tweak Spip trois boutons radio : _T('tweak:js_jamais'), _T('tweak:js_defaut') et _T('tweak:js_toujours')
-	// pour les boutons radio, il faut utiliser une deuxième variable avec le prefixe radio_ : radio_set_options
-	// la variable Spip est : set_options
-	// le /defaut signifie que avancees (traduit par : _T('tweak:js_defaut')) sera coche par defaut
+	// pour les boutons radio, il faut utiliser une deuxieme variable avec le prefixe radio_ : radio_filtrer_javascript2
+	// la variable Spip est : filtrer_javascript
+	// le 0( signifie que 'par defaut' (traduit par : _T('tweak:js_defaut')) sera coche par defaut
 	// le /s demande a Tweak Spip de traiter la variable comme une chaine.
-	'code' 	=> '$GLOBALS["radio_filtrer_javascript2"]=%%radio_filtrer_javascript2/s/"0(-1=tweak:js_jamais|0=tweak:js_defaut|1=tweak:js_toujours)"%%;
-list($GLOBALS["filtrer_javascript"], $foo) = explode("(", $GLOBALS["radio_filtrer_javascript2"], 2);',
+	'code' 	=> '$GLOBALS["radio_filtrer_javascript2"]=$foo=%%radio_filtrer_javascript2/s/"0(-1=tweak:js_jamais|0=tweak:js_defaut|1=tweak:js_toujours)"%%;
+$GLOBALS["filtrer_javascript"]=tweak_choix($foo);',
+	'categorie'	=> 'admin',
+	'options'	=> 1,
+	'version-min'	=> 1.92,
+));
+
+add_tweak( array(
+	'id'	=> 'suivi_forums',
+	// ici on demande a Tweak Spip trois boutons radio : _T('tweak:sf_defaut'), _T('tweak:sf_amont') et _T('tweak:sf_tous')
+	'code' 	=> '$GLOBALS["radio_suivi_forums"]=$foo=%%radio_suivi_forums/s/"(=tweak:sf_defaut|_SUIVI_FORUMS_REPONSES=tweak:sf_amont|_SUIVI_FORUM_THREAD=tweak:sf_tous)"%%;
+if (strlen($suivi=tweak_choix($foo))) define($suivi, true);
+',
 	'categorie'	=> 'admin',
 	'options'	=> 1,
 	'version-min'	=> 1.92,

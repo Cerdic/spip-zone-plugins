@@ -128,6 +128,12 @@ Attention : dans les forums, p&eacute;titions, flux syndiqu&eacute;s, etc., la g
 	'js_defaut' => 'D&eacute;faut',
 	'js_toujours' => 'Toujours',
 
+	'suivi_forums:nom' => 'Suivi des forums',
+	'suivi_forums:description'	=> 'Un auteur d\'article est toujours inform&eacute; lorsqu\'un message est publi&eacute; dans le forum associ&eacute;. Mais il est aussi possible d\'avertir en plus : tous les participants au forum ou seulement les auteurs de messages en amont.<br />Votre choix : %radio_suivi_forums%',
+	'sf_tous' => 'Tous',
+	'sf_defaut' => 'Par d&eacute;faut',
+	'sf_amont' => 'En amont',
+
 	'xml:nom'	=>'Activer le validateur xml',
 	'xml:description' =>"Active le validateur xml pour l'espace public tel qu'il est d&eacute;crit dans la [documentation->http://www.spip.net/fr_article3541.html].",
 

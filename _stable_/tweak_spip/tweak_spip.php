@@ -129,7 +129,7 @@ function tweak_initialise_includes() {
 // retourne le tableau $reg si le code propose est un code de boutons radio
 //  forme : choixX(choixY=traductionY|choixX=traductionX|etc)
 function tweak_is_radio($code, &$reg) {
-	return preg_match(',([0-9A-Za-z_-]*)\(('.'[0-9A-Za-z_-]+=[A-Za-z_:-]+\|[0-9A-Za-z_:=>|-]+'.')\),', $code, $reg);
+	return preg_match(',([0-9A-Za-z_-]*)\(('.'[0-9A-Za-z_-]*=[A-Za-z_:-]+\|[0-9A-Za-z_:=>|-]+'.')\),', $code, $reg);
 }
 
 // remplace les valeurs marquees comme %%toto%% par la valeur reelle de $metas_vars['toto']
@@ -194,7 +194,11 @@ function tweak_parse_description($tweak, $tweak_input) {
 // decommenter pour debug...
 function tweak_log($s) { 
  if($GLOBALS["log_tweaks"] && strlen($s)) spip_log('TWEAKS. '.$s);
-}	
+}
+
+// obtenir la valeur d'un choix radio
+// forme : choixX(choixY=traductionY|choixX=traductionX|etc)
+function tweak_choix($s) { if ($p = strpos($s, '(')) return substr($s, 0, $p); return ''; }
 
 // lance la fonction d'installation de chaque tweak actif, si elle existe.
 function tweak_installe_tweaks() {
