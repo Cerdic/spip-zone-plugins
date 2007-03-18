@@ -91,7 +91,7 @@ echo '<td>&nbsp;</td>';
 echo '<td>&nbsp;</td>';
 echo '</tr>';
 echo '<tr>';
-echo '<td>Gestion des ventes</td>';
+echo '<td>Gestion des ventes associatives</td>';
 echo '<td><input name="ventes" type="radio" value="oui" ';
 if ($data['ventes']=="oui") {echo 'checked';}
 echo '>oui';
@@ -100,7 +100,7 @@ if ($data['ventes']=="non") {echo 'checked';}
 echo '>non</td>';
 echo '</tr>';
 echo '<tr>';
-echo '<td>Gestion des dons</td>';
+echo '<td>Gestion des dons et colis</td>';
 echo '<td><input name="dons" type="radio" value="oui"';
 if ($data['dons']=="oui") {echo 'checked';}
 echo '>oui';
@@ -115,6 +115,14 @@ echo '>oui';
 echo '<input name="comptes" type="radio" value="non"';
 if ($data['comptes']=="non") {echo 'checked';}
 echo '>non</td>';
+echo '</tr>';
+echo '<td>Gestion des inscriptions aux activit&eacute;s</td>';
+echo '<td><input name="activites" type="radio" value="oui"';
+if ($data['activites']=="oui") {echo 'checked';}
+echo '>oui';
+echo '<input name="activites" type="radio" value="non"';
+if ($data['activites']=="non") {echo 'checked';}
+echo '>non (n&eacute;c&eacute;ssite le plugin agenda)</td>';
 echo '</tr>';
 }
 echo '<tr>';
@@ -141,19 +149,19 @@ $president= addslashes($_POST['president']);
 $dons= $_POST['dons'];
 $ventes= $_POST['ventes'];
 $comptes= $_POST['comptes'];
+$activites= $_POST['activites'];
 $prefet=nl2br($prefet); 
 
 if($nom == ''){
       echo '';
 }    
 else {
-$sql="UPDATE spip_asso_profil SET nom='$nom', numero='$numero', rue='$rue', cp='$cp', ville='$ville', telephone= '$telephone',mail='$mail', siret='$siret', declaration='$declaration', prefet='$prefet', president='$president', dons='$dons', ventes='$ventes', comptes='$comptes' WHERE id_profil=1";
-$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+spip_query("UPDATE spip_asso_profil SET nom='$nom', numero='$numero', rue='$rue', cp='$cp', ville='$ville', telephone= '$telephone',mail='$mail', siret='$siret', declaration='$declaration', prefet='$prefet', president='$president', dons='$dons', ventes='$ventes', comptes='$comptes', activites='$activites' WHERE id_profil=1");
 
 echo '<div align="center">';
 echo '<br><strong>Le profil de l\'association a &eacute;t&eacute; mis &agrave; jour</strong>';
 echo '</div>';
-mysql_close();}	
+}	
 }
 
 fin_cadre_formulaire();
