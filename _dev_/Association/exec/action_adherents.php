@@ -42,7 +42,7 @@ $ville=addslashes($_POST['ville']);
 $telephone=$_POST['telephone'];
 $portable=$_POST['portable'];
 //$divers=$_POST['divers'];
-$remarques=addslashes($_POST['remarques']);
+$remarques=$_POST['remarques'];
 $id_asso=$_POST['id_asso'];
 $naissance=$_POST['naissance'];
 $profession=addslashes($_POST['profession']);
@@ -70,8 +70,7 @@ $url_retour=$_POST['url_retour'];
 if ($action=="ajoute"){
 
 // Inscription adherent
-		$sql="INSERT INTO spip_asso_adherents (nom, prenom, sexe, email, numero, rue, cp, ville, telephone, portable, remarques, id_asso, naissance, profession, societe, secteur, publication, utilisateur1, utilisateur2, utilisateur3, utilisateur4, categorie, statut, creation) VALUES ('$nom', '$prenom', '$sexe', '$email', '$numero', '$rue', '$cp', '$ville', '$telephone', '$portable', '$remarques', '$id_asso', '$naissance', '$profession', '$societe', '$secteur', '$publication', '$utilisateur1', '$utilisateur2', '$utilisateur3', '$utilisateur4', '$categorie', 'prospect', CURRENT_DATE() )";
-		$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+		spip_query("INSERT INTO spip_asso_adherents (nom, prenom, sexe, email, numero, rue, cp, ville, telephone, portable, remarques, id_asso, naissance, profession, societe, secteur, publication, utilisateur1, utilisateur2, utilisateur3, utilisateur4, categorie, statut, creation) VALUES ('$nom', '$prenom', '$sexe', '$email', '$numero', '$rue', '$cp', '$ville', '$telephone', '$portable', ".spip_abstract_quote($remarques).", '$id_asso', '$naissance', '$profession', '$societe', '$secteur', '$publication', '$utilisateur1', '$utilisateur2', '$utilisateur3', '$utilisateur4', '$categorie', 'prospect', CURRENT_DATE() )");
 		echo '<p><strong>'.$prenom.' '.$nom.' a &eacute;t&eacute; ajout&eacute; dans le fichier';
 		
 //Validation email 	si il existe	
@@ -85,16 +84,14 @@ if ($action=="ajoute"){
 		$htpass = generer_htpass($pass);
 		$statut = '6forum' ;
 		$cookie = creer_uniqid();
-		$query = "SELECT * FROM spip_auteurs WHERE email='$email'";
-		$resulta = spip_query($query);                
-			if (!spip_fetch_array($resulta))  {   
-			$query = "INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, cookie_oubli) VALUES ('$nom_inscription', '$email', '$login', '$mdpass', '$statut', '$htpass', '$cookie') ";
-			$maj = spip_query($query); 			
-			if ($maj){echo ' et enregistr&eacute; comme visiteur';}	  
+		$query = spip_query("SELECT * FROM spip_auteurs WHERE email='$email'");          
+			if (!spip_fetch_array($query))  {   
+			$query = spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass, cookie_oubli) VALUES ('$nom_inscription', '$email', '$login', '$mdpass', '$statut', '$htpass', '$cookie') ");		
+			if ($query){echo ' et enregistr&eacute; comme visiteur';}	
+			}  
 			//on met a jour  les id_auteur pour tous les adherents
-			$query = "UPDATE spip_asso_adherents INNER JOIN spip_auteurs ON spip_asso_adherents.email=spip_auteurs.email SET spip_asso_adherents.id_auteur= spip_auteurs.id_auteur WHERE spip_asso_adherents.email<>'' ";	
-			$maj = spip_query($query);   			
-			}
+			spip_query("UPDATE spip_asso_adherents INNER JOIN spip_auteurs ON spip_asso_adherents.email=spip_auteurs.email SET spip_asso_adherents.id_auteur= spip_auteurs.id_auteur WHERE spip_asso_adherents.email<>'' ");	   			
+			
 }
 		echo '</strong></p>';
 		echo '<p>';
@@ -108,12 +105,9 @@ if ($action=="ajoute"){
 
 if ($action=="modifie"){
 
-	$sql = "UPDATE spip_asso_adherents SET nom='$nom', prenom='$prenom', sexe='$sexe', categorie='$categorie', fonction='$fonction', email='$email', numero='$numero', rue='$rue', cp='$cp', ville='$ville', telephone='$telephone', portable='$portable', remarques='$remarques', id_asso='$id_asso', naissance='$naissance', profession='$profession',societe='$societe', secteur='$secteur', publication='$publication', utilisateur1='$utilisateur1', utilisateur2='$utilisateur2', utilisateur3='$utilisateur3', utilisateur4='$utilisateur4', statut='$statut'  WHERE id_adherent='$id_adherent'";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+	spip_query("UPDATE spip_asso_adherents SET nom='$nom', prenom='$prenom', sexe='$sexe', categorie='$categorie', fonction='$fonction', email='$email', numero='$numero', rue='$rue', cp='$cp', ville='$ville', telephone='$telephone', portable='$portable', remarques='$remarques', id_asso='$id_asso', naissance='$naissance', profession='$profession',societe='$societe', secteur='$secteur', publication='$publication', utilisateur1='$utilisateur1', utilisateur2='$utilisateur2', utilisateur3='$utilisateur3', utilisateur4='$utilisateur4', statut='$statut'  WHERE id_adherent='$id_adherent'");
 	//on met a jour  les id_auteur pour tous les adherents	
-	$sql = "UPDATE spip_asso_adherents INNER JOIN spip_auteurs ON spip_asso_adherents.email=spip_auteurs.email SET spip_asso_adherents.id_auteur= spip_auteurs.id_auteur WHERE spip_asso_adherents.email<>'' ";	
-	$req = spip_query($query);   
-	
+	spip_query("UPDATE spip_asso_adherents INNER JOIN spip_auteurs ON spip_asso_adherents.email=spip_auteurs.email SET spip_asso_adherents.id_auteur= spip_auteurs.id_auteur WHERE spip_asso_adherents.email<>'' ");	
 	echo '<p><strong>Les donn&eacute;es de '.$prenom.' '.$nom.' ont &eacute;t&eacute; mises &agrave; jour !</strong></p>';
 	echo '<p>';
 	icone(_T('asso:Retour'), $url_retour, '../'._DIR_PLUGIN_ASSOCIATION.'/img_pack/actif.png','rien.gif' );
@@ -134,12 +128,11 @@ echo '<table>';
 echo '<form action="'.$url_action_adherents.'"  method="post">';
 for ( $i=0 ; $i < $count ; $i++ )
 {	$id = $delete_tab[$i];
-	$sql = "SELECT * FROM spip_asso_adherents where id_adherent='$id'";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
-	while($val = mysql_fetch_assoc($req)) 
+	$query = spip_query("SELECT * FROM spip_asso_adherents where id_adherent='$id'");
+	while($data = mysql_fetch_assoc($query)) 
 	{
 echo '<tr>';
-echo '<td><strong>'.$val['nom'].' '.$val['prenom'].'</strong>';
+echo '<td><strong>'.$data['nom'].' '.$data['prenom'].'</strong>';
 echo '<td>';
 echo '<input type=checkbox name="drop[]" value="'.$id.'" checked>';
 	}	
@@ -167,8 +160,7 @@ $count=count ($drop_tab);
 
 for ( $i=0 ; $i < $count ; $i++ )
 {	$id = $drop_tab[$i];
-	$sql = "DELETE FROM spip_asso_adherents WHERE id_adherent='$id'";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());  
+	spip_query("DELETE FROM spip_asso_adherents WHERE id_adherent='$id'");
 }
 echo '<p><strong>Suppression effectu&eacute;e !</strong></p>';	
 
