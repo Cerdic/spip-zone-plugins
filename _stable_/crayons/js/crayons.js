@@ -326,6 +326,11 @@ jQuery.fn.initcrayon = function(){
   return this;
 }
 
+/* une fonction pour initialiser les crayons dynamiquement */
+jQuery.fn.initcrayons = function(){
+	this.find('.crayon').not('.crayon-autorise').filter(configCrayons.droits).initcrayon();
+}
+
 // demarrage
 jQuery(document).ready(function() {
   if (!configCrayons.droits) return;
@@ -340,7 +345,8 @@ jQuery(document).ready(function() {
     });
   }
 
-  jQuery(".crayon").filter(configCrayons.droits).initcrayon();
+  /* on limite l'init auto aux 100 premiers crayons. les autres doivent etre init par un appel de initcrayons sur un onmouseover d'un parent */
+  jQuery(".crayon:lt(100)").filter(configCrayons.droits).initcrayon();
 
   // fermer tous les crayons ouverts
   jQuery("html")
