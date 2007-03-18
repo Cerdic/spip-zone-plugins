@@ -280,11 +280,15 @@ jQuery.fn.activatecrayon = function(percent) {
         if (buttonpos - h + 20 > scrolltop) {
           window.scrollTo(scrollleft, buttonpos - h + 30);
         }
-        var area = $(this).find("textarea.crayon-active").get(0);
-        if (percent && area && area.scrollHeight > hauteur) {
-          area.scrollTop = area.scrollHeight * percent - hauteur;
-        }
-        if (area && jsToolBar) new jsToolBar(area); // resize
+        // Si c'est textarea, on essaie de le caler verticalement
+        // et on lui ajoute un resizehandle
+        jQuery("textarea.crayon-active", this)
+        .each(function(){
+          if (percent && this.scrollHeight > hauteur) {
+            this.scrollTop = this.scrollHeight * percent - hauteur;
+          }
+        })
+        .resizehandle();
       })
     .end();
   });

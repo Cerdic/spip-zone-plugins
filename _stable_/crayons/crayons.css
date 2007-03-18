@@ -47,14 +47,14 @@ img.crayon-edit, img.crayon-crayon {
 }
 
 /* resizer */
-.jstHandle {
+.resizehandle {
 	background:transparent url("images/resizer.png") no-repeat scroll 45%;
 	cursor:s-resize;
 	font-size:0.1em;
 	height:16px;
 	width:100%;
 }
-.jstHandle + .crayon-boutons {
+.resizehandle + .crayon-boutons {
     /* hack pas beau pour compenser la hauteur du div .jstHandle */
     position:relative;
     top:-16px;
