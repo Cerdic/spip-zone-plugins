@@ -10,6 +10,7 @@
 <script type='text/javascript'><!--
 var img_noeud_plus='#EVAL{_DIR_IMG_PACK}noeud_plus.gif';
 var img_noeud_moins='#EVAL{_DIR_IMG_PACK}noeud_moins.gif';
+var crayons_init_dynamique = true;
 //-->
 </script>
 </head>
@@ -20,7 +21,7 @@ var img_noeud_moins='#EVAL{_DIR_IMG_PACK}noeud_moins.gif';
 <B_titreh>
 <table class="outline donnees" id='donnees-#ENV{id_table}'>
 <BOUCLE_caption(FORMS){id_form=#ENV{id_table}}>
-<caption><div class='#EDIT{titre} titre'>#TITRE</div>
+<caption onmouseover='$(this).activeCrayons();'><div class='#EDIT{titre} titre'>#TITRE</div>
 <div class='#EDIT{descriptif} descrptif'>#DESCRIPTIF</div>
 </caption></BOUCLE_caption>
 <thead><tr class='row_first'>
@@ -41,7 +42,7 @@ var img_noeud_moins='#EVAL{_DIR_IMG_PACK}noeud_moins.gif';
 #SET{lien_supprow,#URL_ACTION_AUTEUR{outline_supp_row,#ID_FORM:#ID_DONNEE,(#SELF|urlencode)}}
 #SET{prev,#ID_DONNEE}#SET{niveau,1}
 	<BOUCLE_niveau(FORMS_CHAMPS){id_form}{champ=select_1}>#SET{niveau,#LESVALEURS}</BOUCLE_niveau>
-	<tr id='#ID_DONNEE' class='row [(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]' onclick='$(this).selectRow();' name='#GET{niveau}'>
+	<tr id='#ID_DONNEE' class='row [(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]' onclick='$(this).selectRow();' onmouseover='$(this).activeCrayons();' name='#GET{niveau}'>
 		<td>#ID_DONNEE</td>
 		<td class='ligne_1'>
 		<table><tr >
