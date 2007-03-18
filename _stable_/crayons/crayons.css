@@ -55,3 +55,6 @@ img.crayon-edit, img.crayon-crayon {
 	padding: 1px;
 	border: 1px inset;
 }
+.crayon-has + * .formulaire_spip {
+	max-width: 703px;
+}
