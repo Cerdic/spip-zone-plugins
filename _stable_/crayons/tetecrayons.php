@@ -79,7 +79,6 @@ function Crayons_preparer_page($page, $droits, $wdgcfg = array(), $mode='page') 
 	lang_select($GLOBALS['auteur_session']['lang']);
 
 	$jsFile = generer_url_public('crayons.js');
-	$resizeJS = generer_url_public('resize.js');
 	include_spip('inc/filtres'); // rien que pour direction_css() :(
 	$cssFile = direction_css(find_in_path('crayons.css'));
 
@@ -119,7 +118,6 @@ function Crayons_preparer_page($page, $droits, $wdgcfg = array(), $mode='page') 
 
 <link rel="stylesheet" href="{$cssFile}" type="text/css" media="all" />
 <script src="{$jsFile}" type="text/javascript"></script>
-<script src="{$resizeJS}" type="text/javascript"></script>
 <script type="text/javascript">
     var configCrayons = new cfgCrayons({$config});
 </script>

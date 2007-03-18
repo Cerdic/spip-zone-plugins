@@ -17,6 +17,9 @@
 [(#CHEMIN{js/crayons.js}|spip_file_get_contents
 	|replace{jQuery,cQuery,''})]
 
+[(#CHEMIN{js/resize.js}|spip_file_get_contents
+	|replace{jQuery,cQuery,''})]
+
 [(#CONFIG{crayons}|match{s:11:"yellow_fade";s:2:"on";}|?{' ',''})
 [(#CHEMIN{js/crayons-fade.js}|spip_file_get_contents
 	|replace{jQuery,cQuery,''})]

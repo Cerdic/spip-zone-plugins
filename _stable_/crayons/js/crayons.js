@@ -284,6 +284,7 @@ jQuery.fn.activatecrayon = function(percent) {
         if (percent && area && area.scrollHeight > hauteur) {
           area.scrollTop = area.scrollHeight * percent - hauteur;
         }
+        if (area && jsToolBar) new jsToolBar(area); // resize
       })
     .end();
   });
@@ -328,7 +329,11 @@ jQuery.fn.initcrayon = function(){
 
 /* une fonction pour initialiser les crayons dynamiquement */
 jQuery.fn.initcrayons = function(){
-	this.find('.crayon').not('.crayon-autorise').filter(configCrayons.droits).initcrayon();
+  this
+  .find('.crayon')
+  .not('.crayon-autorise')
+  .filter(configCrayons.droits)
+  .initcrayon();
 }
 
 // demarrage
@@ -346,7 +351,9 @@ jQuery(document).ready(function() {
   }
 
   /* on limite l'init auto aux 100 premiers crayons. les autres doivent etre init par un appel de initcrayons sur un onmouseover d'un parent */
-  jQuery(".crayon:lt(100)").filter(configCrayons.droits).initcrayon();
+  jQuery(".crayon:lt(100)")
+  .filter(configCrayons.droits)
+  .initcrayon();
 
   // fermer tous les crayons ouverts
   jQuery("html")

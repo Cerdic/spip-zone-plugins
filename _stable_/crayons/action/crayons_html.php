@@ -212,21 +212,11 @@ class Crayon {
         	$type = is_array($spec) ? $spec[$champ]['type'] : $spec;
             switch ($type) {
                 case 'texte':
-	 	    $random_id = rand();
                     $input = '
-<textarea style="width:100%;" id="c_content_'.$random_id.'" class="crayon-active resize"'
+<textarea style="width:100%;" class="crayon-active"'
                     . ' name="content_'.$this->key.'_'.$champ.'">'
                     . entites_html($val)
-                    . '</textarea>
-<script type="text/javascript">
-//<![CDATA[
-if (document.getElementById) { 
-	if (document.getElementById(\'c_content_'.$random_id.'\')) { 
-		var commentTb = new jsToolBar(document.getElementById(\'c_content_'.$random_id.'\')); 
-	}
-}
-//]]>
-</script>'."\n";
+                    . "</textarea>\n";
                     break;
                 case 'ligne':
                 default:
