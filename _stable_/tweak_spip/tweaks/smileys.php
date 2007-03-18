@@ -61,7 +61,7 @@ tweak_log(" -- abs. path = $path2");
 		$espace = strlen($smy)==2?' ':'';
 		$smileys2[0][] = $espace.$smy;
 		list(,,,$size) = @getimagesize("$path/$val");
-		$smileys2[1][] = $espace."<img alt=\"$alt\" title=\"$alt\" class=\"no_image_filtrer\" src=\"".$path2."/$val\" $size/>";
+		$smileys2[1][] = $espace."<img alt=\"$alt\" title=\"$alt\" class=\"format_png\" src=\"".$path2."/$val\" $size/>";
 	}
 	ecrire_meta('tweaks_smileys', serialize($smileys2));
 	ecrire_metas();
