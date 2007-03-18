@@ -22,6 +22,11 @@ img.crayon-edit, img.crayon-crayon {
 .crayon-boutons {
     width: 40px;
     display: none;
+
+    /* hack pas beau pour compenser la hauteur du div .jstHandle */
+    position:relative;
+    top:-16px;
+    /* fin hack */
 }
 .crayon-boutons div {
 	position: absolute;
