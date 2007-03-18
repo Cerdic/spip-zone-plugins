@@ -350,10 +350,11 @@ jQuery(document).ready(function() {
     });
   }
 
-  /* on limite l'init auto aux 100 premiers crayons. les autres doivent etre init par un appel de initcrayons sur un onmouseover d'un parent */
-  jQuery(".crayon:lt(100)")
-  .filter(configCrayons.droits)
-  .initcrayon();
+  /* on limite l'init auto aux 1000 premiers crayons. les autres doivent etre init par un appel de initcrayons sur un onmouseover d'un parent */
+  if ((typeof crayons_init_dynamique == 'undefined') || (crayons_init_dynamique==false))
+		jQuery(".crayon:lt(1000)")
+		.filter(configCrayons.droits)
+		.initcrayon();
 
   // fermer tous les crayons ouverts
   jQuery("html")
