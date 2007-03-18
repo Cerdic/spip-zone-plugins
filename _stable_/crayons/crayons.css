@@ -22,11 +22,6 @@ img.crayon-edit, img.crayon-crayon {
 .crayon-boutons {
     width: 40px;
     display: none;
-
-    /* hack pas beau pour compenser la hauteur du div .jstHandle */
-    position:relative;
-    top:-16px;
-    /* fin hack */
 }
 .crayon-boutons div {
 	position: absolute;
@@ -43,6 +38,15 @@ img.crayon-edit, img.crayon-crayon {
 .crayon-edit, .crayon-crayon, .crayon-img-changed {
 	cursor: pointer;
 } 
+.formulaire_spip .crayon-active {
+	padding: 1px;
+	border: 1px inset;
+}
+.crayon-has + * .formulaire_spip {
+	max-width: 703px;
+}
+
+/* resizer */
 .jstHandle {
 	background:transparent url("images/resizer.png") no-repeat scroll 45%;
 	cursor:s-resize;
@@ -50,11 +54,9 @@ img.crayon-edit, img.crayon-crayon {
 	height:16px;
 	width:100%;
 }
-
-.formulaire_spip .crayon-active {
-	padding: 1px;
-	border: 1px inset;
-}
-.crayon-has + * .formulaire_spip {
-	max-width: 703px;
+.jstHandle + .crayon-boutons {
+    /* hack pas beau pour compenser la hauteur du div .jstHandle */
+    position:relative;
+    top:-16px;
+    /* fin hack */
 }
