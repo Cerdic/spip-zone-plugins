@@ -358,15 +358,19 @@ function afficher_carte_interface($id_carte,$retour,$fichier,$callage, $id_img =
 
 function autoriser_carto_carte_administrer_dist($faire, $type, $id, $qui, $opt) {
 	//webmestre ?
-	$autorisation = autoriser_defaut($faire, $type, $id, $qui, $opt);
+	return autoriser('defaut', $type, $id, $qui, $opt);
 }
 function autoriser_carto_carte_modifier_dist($faire, $type, $id, $qui, $opt) {
 	//webmestre ?
-	$autorisation = autoriser_defaut($faire, $type, $id, $qui, $opt);
+	return autoriser('defaut', $type, $id, $qui, $opt);
+}
+function autoriser_carto_carte_joindredocument_dist($faire, $type, $id, $qui, $opt) {
+	//webmestre ?
+	return autoriser('defaut', $type, $id, $qui, $opt);
 }
 function autoriser_carto_carte_voir_dist($faire, $type, $id, $qui, $opt) {
 	//webmestre ?
-	$autorisation = autoriser_defaut($faire, $type, $id, $qui, $opt);
+	$autorisation = autoriser('defaut', $type, $id, $qui, $opt);
 	if (!$autorisation) {
 		$s = spip_query("SELECT carte.statut as statut, count(objets.id_carto_objet) as publie_objets " .
 				"FROM spip_carto_cartes AS carte LEFT JOIN spip_carto_objets AS objets " .
