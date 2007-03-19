@@ -50,6 +50,8 @@
 			<div class="clear"> </div>
 		</div>
 	<div id="barre_droite">
+			[(#MODELE*{sommaire}{id_article})]
+
 		<B_mots>
 		<!--affichage des mots-clés -->
 		<div id="groupesmots">
@@ -103,11 +105,11 @@
 
 		<!-- début du contenu -->
 		<div id="Contenu">
-			
+		[(#REM) Ce qui suit est nécessaire pour empêcher le recalcul des notes demandé par l'existence de deux balises #TEXTE][(#TEXTE|dummy)][(#NOTES|dummy)]
 			<!-- chapeau, texte, post-scriptum de l'article -->
 			[<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
-			[<div class="#EDIT{texte} texte">(#TEXTE)</div>]
-			
+			[<div class="#EDIT{texte} texte">(#TEXTE*|ancrer|propre)</div>]
+
 			[<div class="lien"><strong><:voir_en_ligne:> </strong><a href="#URL_SITE">(#NOM_SITE)</a></div>]
 			[<div class="#EDIT{ps} ps">
 			<h4>Post-scriptum</h4>
@@ -119,12 +121,13 @@
 				<div id="documents">
 					<h3 class="titre"><:documents:></h3>
 					<BOUCLE_documents(DOCUMENTS){id_article}{par num titre}{mode=document}{doublons}>
-					<dl>
-						<dt [class="(#EDIT{titre})"]><a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT)][<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)][, (#TYPE_DOCUMENT)][ (#TAILLE|taille_en_octets)][, (#LARGEUR) x #HAUTEUR pixels]</em></dt>
+					<dl[ (#COMPTEUR_BOUCLE|alterner{"style='border:none;'",''})]>
+						<dt [class="(#EDIT{titre})"]><a href="#URL_DOCUMENT" title="[(#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)][, (#TYPE_DOCUMENT|=={JPEG}|?{#LARGEUR x #HAUTEUR pixels, ''})][, (#TYPE_DOCUMENT|=={PNG}|?{#LARGEUR x #HAUTEUR pixels, ''})]">[(#LOGO_DOCUMENT)][<strong>(#TITRE|supprimer_numero)</strong>]</a> ([(#TYPE_DOCUMENT), ][(#TAILLE|taille_en_octets)])</dt>
 						[<dd [class="(#EDIT{descriptif})"]>(#DESCRIPTIF)</dd>]
 					</dl>
-					<br class="clear" />
 					</BOUCLE_documents>
+					<br class="clear" />
+
 				</div>
 			</B_documents>
 			
@@ -192,6 +195,8 @@
 			<div class="notes">
 			<h4><:notes_bas_page:></h4>
 			<div>(#NOTES)</div>
+
+
 			</div>]
 
 		</div>

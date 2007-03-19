@@ -1,3 +1,4 @@
+@charset "utf-8";
 /* Page */
 .spip_logos{
  behavior:url("win_png.htc");
@@ -292,6 +293,11 @@ div#barre_droite ul{
 	list-style-type:square;
 }
 
+div#barre_droite ul ul{
+	padding-left:4px;
+	list-style-type:disc;
+}
+
 div#barre_droite li.on, div#barre_droite li.on a{
 	color:#d37324;
 	font-weight:bold;
@@ -366,7 +372,7 @@ ul.liste_articles_menu{
 }
 
 .articles_menu:before{
-	content:"···";
+	content:"\00B7\00B7\00B7";
 	color:#ADC4D9;
 	font-weight:bold;
 }
@@ -476,12 +482,30 @@ div#articles, div#sites_syndiques,
 div#documents, div#petition,
 div#rubriques, div#secteur,
 div#edito, div#sites_web,
-div#breves, div#auteurs,
+div#breves, div#auteurs, div#sommaire_article,
 div#sites_recherche, div#groupesmots, div.groupesmots{
 	border:2px solid #adc4d9;
 	-moz-border-radius:8px;
 	margin-bottom:20px;
 	}
+
+div#sommaire_article{
+}
+a.sommaire_article{
+	text-decoration:inherit;
+	color:inherit;
+}
+
+a.sommaire_article:target{
+	color:#d37324;
+}
+
+a.haut{
+	text-decoration:inherit;
+	float:right;
+	color:inherit;
+	opacity:0.5;
+}
 
 .spip_doc_titre{
 	font-size:70% !important;
@@ -525,6 +549,10 @@ div#sites_recherche, div#groupesmots, div.groupesmots{
 	margin-left:15px;
 	text-align:center;
 }
+
+/*.spip_doc_descriptif{
+	text-align:left;
+}*/
 
 
 TD > DIV.spip_documents{
@@ -1104,4 +1132,32 @@ a.spip_blank{
 
 label{
 	text-align:left;
+}
+
+/* http://pompage.net/pompe/listesdefinitions/ */
+#documents dl{
+	border-left:1px dotted #ADC4D9;
+	width: 242px;
+	text-align:center;
+	padding:10px;
+	float:left;
+	margin-right:1em;
+}
+
+#documents dt strong{
+	font-size:12px !important;
+	}
+
+/* #documents dt img
+{
+border: 1px solid #000;
+width: 100px;
+height: 100px;
+} */
+
+#documents dd
+{
+font-size:11px !important;
+margin: 0;
+padding: 0;
 }

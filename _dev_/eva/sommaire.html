@@ -51,8 +51,8 @@
 		<div id="breves">
 			<h4 class="center"><:dernieres_breves:></h4>
 			<dl>
-				<BOUCLE_les_breves(BREVES){id_secteur != 1}{par date}{inverse}{0,5}{doublons}>
-				<dt[ class="(#EDIT{titre})"]>
+				<BOUCLE_les_breves(BREVES){id_secteur != 1}{par date}{inverse}{doublons}{pagination 5}>
+				<dt[ class="(#EDIT{titre})"]>#ANCRE_PAGINATION
 					[<strong>(#TITRE|supprimer_numero)</strong>]<em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em>
 				</dt>
 				<dd[ class="(#EDIT{texte})"]>[(#TEXTE)]
@@ -60,6 +60,9 @@
 				</dd>
 				</BOUCLE_les_breves>
 			</dl>
+			<div class="center">
+				#PAGINATION
+			</div>
 		</div>
 		</B_les_breves>
 
@@ -83,7 +86,7 @@
 				</dd>
 				</BOUCLE_les_derniers_sites>
 			</dl>
-			<div style="text-align:center">
+			<div class="center">
 				#PAGINATION
 			</div>
 		</div>
@@ -96,7 +99,7 @@
 		<B_edito>
 		<?php /*Éditorial du site*/ ?>
 		<div id="edito">
-			<BOUCLE_edito(ARTICLES){id_secteur != 1}{titre_mot=Éditorial}{par date}{inverse}{doublons}{0,1}>
+			<BOUCLE_edito(ARTICLES){id_secteur != 1}{titre_mot=Éditorial}{par date}{inverse}{0,1}{doublons}>
 			<h3 class="#EDIT{titre} titre">[(#TITRE|supprimer_numero)]</h3>
 			[<div class="#EDIT{descriptif} texte">
 				<a href="#URL_ARTICLE" style="padding:10px">#LOGO_ARTICLE_RUBRIQUE</a>
@@ -131,7 +134,7 @@
 			#ANCRE_PAGINATION
 			<dl class="suivants">
 				<div class="suite"><a href="javascript:afficher_resume('clic')"><span name="message_resumes" id="message_resumes">Afficher / masquer</span> les résumés</a></div>
-				<BOUCLE_les_articles_suivants(ARTICLES){id_secteur != 1}{titre_mot!=Éditorial}{par date}{inverse}{0,50}{pagination}>
+				<BOUCLE_les_articles_suivants(ARTICLES){id_secteur != 1}{par date}{inverse}{pagination}{doublons}>
 					<BOUCLE_les_rubriques_des_derniers_articles(RUBRIQUES){id_rubrique}>
 						#SET{titre_rubrique,#TITRE}
 						#SET{url_rubrique,#URL_RUBRIQUE}

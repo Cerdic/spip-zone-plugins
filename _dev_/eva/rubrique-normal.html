@@ -31,32 +31,30 @@
 		<h2 [class="(#EDIT{titre})"]>#LOGO_RUBRIQUE [(#TITRE|supprimer_numero)]</h2>
 		<br class="clear" />
 	</div>
-	
-	
-	<!-- début du menu-->
-	<div id="Menu">
-			
-		<INCLURE{fond=menu}{id_rubrique}>
-			
-		<B_breves_secteur>
+	<div id="barre_droite">
+		<B_les_breves>
 		<!--affichage des brèves -->
-		<div class="bloc">
-			<h4><:breves:></h4>
-			<ul>
-				<BOUCLE_breves_secteur(BREVES){id_secteur}{par date}{inverse}{0,5}>
-				<li><a href="#URL_BREVE">[<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)]</em></li>
-				</BOUCLE_breves_secteur>
-			</ul>
-		</div>
-		</B_breves_secteur>
+		<div id="breves">
+			<h4 class="center"><:breves:></h4>
+			<dl>
+				<BOUCLE_les_breves(BREVES){id_secteur}{par date}{inverse}{0,5}{doublons}>
+				<dt[ class="(#EDIT{titre})"]>
+					[<strong>(#TITRE|supprimer_numero)</strong>]<em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em>
+				</dt>
+				<dd[ class="(#EDIT{texte})"]>[(#TEXTE)]
+					<?php /*<div class="suite"><a href="#URL_BREVE"><:lire_suite:></a></div>]*/ ?>
+				</dd>
+ 				</BOUCLE_les_breves>
+			</dl>		</div>
+		</B_les_breves>
 			
 			
 		<BOUCLE_mots_exclure(MOTS){id_rubrique}{titre=bouton}{doublons}>
 		</BOUCLE_mots_exclure>
 		<B_mots>
 		<!--affichage des mots-clés -->
-		<div class="bloc">
-			<h4><:mots_clefs:></h4>
+		<div id="groupesmots">
+			<h4 class="center"><:mots_clefs:></h4>
 			<ul>
 				<BOUCLE_mots(MOTS){id_rubrique}{doublons}>
 				<li><a href="#URL_MOT">[<strong>(#TITRE|supprimer_numero)</strong>]</a></li>
@@ -64,7 +62,11 @@
 			</ul>
 		</div>
 		</B_mots>
-			
+	</div>
+	
+	<!-- début du menu-->
+	<div id="Menu">
+		<INCLURE{fond=menu}{id_rubrique}>
 		<!-- Affichage formulaire de proposition de site web -->
 		[<div class="formulaires">
 			<h4><:referencer_site:></h4>
