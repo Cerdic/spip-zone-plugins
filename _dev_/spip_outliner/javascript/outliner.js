@@ -1,5 +1,7 @@
 jQuery.fn.activeCrayons = function(){
-	cQuery(this).initcrayons();
+	if (typeof cQuery != 'undefined'){
+		cQuery(this).initcrayons();
+	}
 	return this.unbind('mouseover');
 }
 
@@ -206,9 +208,9 @@ $.addGridControl = function(t,p) {
 						h.el.style.width = newWidth+"px";
 						h.newWidth = newWidth; 
 						this.cols[this.resizing.idx].style.width = newWidth+"px";
-						this.newWidth = this.width+diff;
-						this.table.style.width = this.newWidth + "px"
-						this.hTable.style.width = this.newWidth + "px"
+						//this.newWidth = this.width+diff;
+						//this.table.style.width = this.newWidth + "px"
+						//this.hTable.style.width = this.newWidth + "px"
 						this.hDiv.scrollLeft = this.bDiv.scrollLeft;
 					}
 				}
@@ -319,7 +321,7 @@ $.addGridControl = function(t,p) {
 	thead = null;
 	grid.hDiv = document.createElement("div")
 	$(grid.hDiv)
-		.css({ width: grid.width+"px", overflow: "hidden"})
+		.css({ width: (grid.width+16)+"px",padding: "0 16px 0 0", overflow: "hidden"})
 		.append(grid.hTable)
 	/*	.prepend('<div class="loading">loading</div>')			*/
 		.bind("selectstart", function () { return false; });
@@ -341,9 +343,11 @@ $.addGridControl = function(t,p) {
 	$(t).wrap("<div></div>");	
 	grid.bDiv = $(t).parent();
 	//grid.bDiv = document.createElement("div")
+	h = $(window).height();
+	h = h - $(grid.bDiv).offset().top;
 	$(grid.bDiv)
 		.scroll(function (e) {grid.scroll()})
-		.css({ height: p.height/*+"px"*/, padding: "0px", margin: "0px", overflow: "auto", width: (grid.width+16)+"px"})
+		.css({ height: h+"px", padding: "0px", margin: "0px", overflow: "auto", width: (grid.width+16)+"px"})
 		//.append(t)
 	$(grid.hDiv).mousemove(function (e) {grid.dragMove(e.clientX);}).after(grid.bDiv)
 	
@@ -357,8 +361,6 @@ $.addGridControl = function(t,p) {
 			t.grid = null;			
 		}
 	);
-	
-	
 }
 
 $.fn.grid = function(p) {
@@ -372,5 +374,5 @@ $.fn.grid = function(p) {
 
 $(document).ready(function(){
 	init_events();
-	/*$("table.outline").grid({height: '600px', width: [10,150,150,150]});			*/
+	$("table.outline").grid({width: [20,150,150,150]});
 });

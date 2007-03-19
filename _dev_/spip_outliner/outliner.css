@@ -53,6 +53,7 @@ float:left;
 	-moz-opacity: 0.3;
 	background:none;
 }
+body.outliner {overflow:hidden;}
 
 body.outline_tous #toolbar .icones {margin:auto; width:610px;}
 body.outline_tous #toolbar a {padding:0 8px 0 8px; }
@@ -125,13 +126,16 @@ div.niveau-7{padding-left:65px;}
 div.niveau-8{padding-left:75px;}
 div.niveau-9{padding-left:85px;}
 
+
+div.spip_form_champ textarea {width:100%}
+
 /* selection ligne et colonne */
 table.outline tr.row_sel { background: #ffffcc; }
 table.outline td.col_sel,table.outline th.col_sel { background: #ffcc99; }
 
 
 table.outline {
-	/*table-layout: fixed;*/
+	table-layout: fixed;
 }
 
 table.outline tr.ghover  {		background: #E0E3EF;	}
@@ -140,7 +144,7 @@ table.outline tr.ghover td {		border-bottom: 1px solid #A4A0A8;	}
 table.outline td.ghover  {		background: #A8AFCF;	}
 table.outline tr.row_sel td.ghover  {		background: #ffcc99;	}
 table.outline th  {
-	padding: 2px;
+	padding: 2px 0 2px 0;
 	background-color: #EBEADB;
 	border-bottom: 1px solid #CBC7B8;
 	text-align: left;
@@ -148,7 +152,7 @@ table.outline th  {
 }
 table.outline th span.resize {
 	cursor: e-resize;
-	border-right: 1px solid #D6D2C2;
+	border-right: 3px solid #D6D2C2;
 	width: 15px;
 	float: right;
 	display: block;
