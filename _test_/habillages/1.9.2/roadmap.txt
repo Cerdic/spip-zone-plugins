@@ -46,7 +46,7 @@ a un autre sans demander a l'utilisateur ou l'utilisatrice de creer a chaque foi
 propres a tel ou tel jeu de squelettes. Dans tous les cas, cette problematique de mots-cles reste
 bloquante pour appliquer des "habillages" tout-prêt à un site...
 
-franck.ducas@free.fr
+f r a n c k . d u c a s at f r e e . f r
 
 Plugin "Habillages"
 &copy; 2006-2007 - Distribu&#233; sous licence GNU/GPL
