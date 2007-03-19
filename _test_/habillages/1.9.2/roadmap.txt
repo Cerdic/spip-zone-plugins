@@ -1,6 +1,6 @@
 "roadmap.txt", ca permet d'eviter de nommer ce fichier "feuille_de_route.txt"...
 
-Plusieurs pistes de developper pour le plugin "habillages" :
+Plusieurs pistes a developper pour le plugin "habillages" :
 
 -1)Inserer un choix sur la page d'accueil d'"habillages" qui permette de modifier
 le chemin des fichiers de squelettes et de themes sur une autre page de configuration,
@@ -10,17 +10,17 @@ afin de permettre un usage "bidouilleur/euse" du plugin.
 de personnalisation des squelettes, toujours pour permettre un usage "bidouilleur/euse" du 
 plugin. Attention, probleme de compatibilite avec des squelettes choisis, notamment dans le 
 cas ou l'utilisatrice/teur installe par exemple son jeu de squelettes perso dans le dossier
-"squelettes" et veut faire des modifs pour les squelettes proposes par le plugin "habillages" 
-(il ne peut donc pas mettre ces dernieres personnalisations dans le dossier "squelettes" qui
-contient lui le squelette perso original).
+"squelettes" mais veut faire aussi des modifs pour les squelettes proposes par le plugin 
+"habillages" (il ne peut donc pas mettre ces dernieres personnalisations dans le dossier 
+"squelettes" qui contient deja un squelette perso original independant du plugin "habillages").
 
 1) Integration du plugin "coloriage dist" (= definir le plugin "habillages" comme 
-étant dependant du plugin "coloriage dist")
+etant dependant du plugin "coloriage dist")
 -> Inserer (si l'auteur original est d'accord) le plugin "coloriage" a la gestion 
 des squelettes et themes en ajoutant un fichier theme.xml a la racine du plugin.
--> Voir pour permettre au plugin "coloriage" de donner une "capture" écran de la dist 
-avec une mise en relief des parties concernees par la changement de couleur quand on
-passe la souris sur le champs couleur d'une partie de la dist.
+-> Voir pour permettre au plugin "coloriage" de donner une sorte de capture écran de la dist 
+avec une mise en relief des parties concernees par le changement de couleur quand on passe 
+la souris sur le champs couleur d'une partie de la dist.
 
 2) Integration du plugin "cfg" (= definir le plugin "habillages" comme 
 étant dependant du plugin "cfg")
@@ -33,6 +33,18 @@ obstacle a une souplesse dans le passage d'un squelette a un autre sur un site e
 personnalisation des squelettes par mots cles qui serait ainsi automatisee (qui s'adapterait 
 a chaque squelette sans intervention humaine autre qu'assigner a des rubriques/articles des 
 mots cles de facon predefinie).
+--> Problematique des mots cles : action de lobbying aupres des developpeurs de spip pour 
+que SPIP puisse dans l'avenir integrer en natif des mots cles predefinis, courament utilises,
+et dont l'usage fait l'objet d'un consensus admis implicitement des bidouilleuses et bidouilleurs
+par l'usage qu'ils en font. Il semble en effet patent que beaucoup de developpeurs utilisent les 
+mots cles pour faire apparaitre certaines parties d'un site ici ou la (tels que "une", "menu", 
+etc.). Generaliser en natif au moins cinq mots cles permettrait de generaliser certains squelettes
+qui fonctionnent avec des mots cles au moins de base. Ceci permettrait egalement tout un tas de 
+traitements automatiques (sur la base de ces mots cles) dans les squelettes qui seraient benefiques 
+a plus d'un titre. Dans le plugin "habillages", ceci permettrait de passer d'un jeu de squelettes
+a un autre sans demander a l'utilisateur ou l'utilisatrice de creer a chaque fois des mots cles
+propres a tel ou tel jeu de squelettes. Dans tous les cas, cette problematique de mots-cles reste
+bloquante pour appliquer des "habillages" tout-prêt à un site...
 
 franck.ducas@free.fr
 
