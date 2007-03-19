@@ -159,7 +159,7 @@ function jeux_listes_compacte($texte, $alpha) {
 	foreach ($tableau as $i=>$valeur) if (($valeur=trim($valeur))!='') {
 		$c=$alpha?$a[$i]:$i+1;
 		if ($valeur[strlen($valeur)-1]!='.') $valeur.='.';
-		$tableau2[] = "<strong>$c.</strong>&nbsp;$valeur";
+		if ($valeur!='-.') $tableau2[] = "<strong>$c.</strong>&nbsp;$valeur";
 	}
 	return implode(' ', $tableau2);
 }
