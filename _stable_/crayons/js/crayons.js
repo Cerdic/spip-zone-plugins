@@ -57,6 +57,7 @@ function uniConfirm(txt)
   return confirm(entity2unicode(txt));
 }
 
+var crayon_has= new Array();
 // ouvre un crayon
 jQuery.fn.opencrayon = function(evt, percent) {
   if (evt.stopPropagation) {
@@ -70,6 +71,7 @@ jQuery.fn.opencrayon = function(evt, percent) {
 
     // voir si je dispose deja du crayon comme voisin
     if (jQuery(this).is('.crayon-has')) {
+    	crayon_has.unshift(this);
       jQuery(this)
       .hide()
       .next()
@@ -100,6 +102,7 @@ jQuery.fn.opencrayon = function(evt, percent) {
             uniAlert(c.$erreur);
             return false;
           }
+          crayon_has.unshift(me);
           jQuery(me)
           .hide()
           .addClass('crayon-has')
@@ -363,7 +366,8 @@ jQuery(document).ready(function() {
   // fermer tous les crayons ouverts
   jQuery("html")
   .click(function() {
-    jQuery(".crayon.crayon-has:hidden")
-    .hidecrayon();
+  	while (crayon_has.length)
+	  	jQuery(crayon_has.pop())
+	    .hidecrayon();
   });
 });
