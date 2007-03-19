@@ -5,13 +5,14 @@
 		$current_version = 0.0;
 		if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 				|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-			include_spip('base/acces_restreint');
 			if ($current_version==0.0){
-				include_spip('base/forms_base_api');
-				$f = find_in_path('base/Sigles.xml');
-				Forms_creer_table($f,'acronymes_sigles');
-				echo "Acronym Install<br/>";
-				ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
+				if (include_spip('base/forms_base_api')){
+					$f = find_in_path('base/Sigles.xml');
+					Forms_creer_table($f,'acronymes_sigles');
+					echo "Acronym Install<br/>";
+					ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
+				}
+				else return;
 			}
 			ecrire_metas();
 		}
