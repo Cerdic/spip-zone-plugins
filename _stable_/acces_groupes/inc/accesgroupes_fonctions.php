@@ -92,7 +92,7 @@
         			$where .= " OR " . calcul_mysql_in('id_article', join(",",$liste_art));
         			// rattaches aux breves
         			$liste_breves = accesgroupes_liste_breves_restreintes();
-        			$where .= " OR " . calcul_mysql_in('id_breve', join(",",$liste_art));
+        			$where .= " OR " . calcul_mysql_in('id_breve', join(",",$liste_breves));
         
         			$s = spip_query("SELECT id_forum FROM spip_forum WHERE $where");
         			while ($row = spip_fetch_array($s)){
