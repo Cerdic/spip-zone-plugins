@@ -707,7 +707,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 	if (substr($lien,0,1) == '#')
 		$class = 'spip_ancre';
 
-	return ($pour == 'url') ? $lien : array($lien, $class, $texte, $lang);
+	return ($pour == 'url') ? $lien : array($lien, $class, $texte, '');
 }
 
 // http://doc.spip.org/@calculer_url_article
@@ -1147,6 +1147,7 @@ function paragrapher($letexte, $forcer=true) {
 // http://doc.spip.org/@traiter_raccourci_lien
 function traiter_raccourci_lien($regs) {
 
+	$bulle = $hlang = '';
 	// title et hreflang donnes par le raccourci ?
 	if (preg_match(',^(.*?)([|]([^<>]*?))?([{]([a-z_]+)[}])?$,', $regs[1], $m)) {
 		// |infobulle ?
@@ -1161,7 +1162,7 @@ function traiter_raccourci_lien($regs) {
 			}
 			// sinon c'est un italique
 			else {
-				$m[1] .= '{'.$m[3].'}';
+				$m[1] .= $m[4];
 			}
 		}
 		// S'il n'y a pas de hreflang sous la forme {}, ce qui suit le |
@@ -1450,8 +1451,8 @@ function traiter_raccourcis($letexte) {
 		/* 8 */ 	"/[}][}]/S",
 		/* 9 */ 	"/[{]/S",
 		/* 10 */	"/[}]/S",
-		/* 11 */	"/(<br[[:space:]]*\/?".">){2,}/S",
-		/* 12 */	"/<p>([\n]*(<br[[:space:]]*\/?".">)*)*/S",
+		/* 11 */	"/(?:<br\b[^>]*?".">){2,}/S",
+		/* 12 */	"/<p>\n*(?:<br\b[^>]*?".">\n*)*/S",
 		/* 13 */	"/<quote>/S",
 		/* 14 */	"/<\/quote>/S",
 		/* 15 */	"/<\/?intro>/S"
