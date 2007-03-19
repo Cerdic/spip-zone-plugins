@@ -10,7 +10,6 @@
 *  
 **/
 include_spip('inc/presentation');
-include_spip('association_mes_options');
 
 function exec_banques(){
 global $connect_statut, $connect_toutes_rubriques;
@@ -51,7 +50,7 @@ echo '<td class ='.$class.'>'.$data['valeur'].'</td>';
 echo '<td class ='.$class.'>'.$data['intitule'].'</td>';
 echo '<td class ='.$class.'>'.$data['reference'].'</td>';
 echo '<td class ='.$class.' style="text-align:right;">'.$data['solde'].' &euro;</td>';
-echo '<td class ='.$class.'>'.datefr($data['date']).'</td>';
+echo '<td class ='.$class.'>'.association_datefr($data['date']).'</td>';
 echo '<td class ='.$class.' style="text-align:center;"><a href="'.$url_action_banques.'&action=supprime&id='.$data['id_banque'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/poubelle-12.gif" title="Supprimer"></a></td>';
 echo '<td class ='.$class.' style="text-align:center;"><a href="'.$url_edit_banque.'&id='.$data['id_banque'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Modifier"></a></td>';
 echo'  </tr>';

@@ -13,7 +13,7 @@ debut_cadre_formulaire();
 $link= generer_url_ecrire('adherents');
 $link1= generer_url_ecrire('ajout_adherent');
 $link2= generer_url_ecrire('dons');
-$link3= generer_url_ecrire('essai');
+$link3= generer_url_ecrire('edit_relances');
 $link4= generer_url_ecrire('ventes');
 $link5= generer_url_ecrire('comptes');
 $link6= generer_url_ecrire('activites');

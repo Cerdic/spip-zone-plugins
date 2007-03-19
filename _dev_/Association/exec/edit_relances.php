@@ -36,12 +36,10 @@ if ( isset ($_POST['statut'] )) {
 		
 		
 echo '<table width="70%" border="0">';
+
 echo '<tr>';
-echo '<td colspan="15">';
-
-echo '<td style="text-align:right;">';
-
 // Menu de sélection
+echo '<td style="text-align:right;">';
 echo '<form method="post" action="#">';
 echo '<input type="hidden" name="lettre" value="'.$lettre.'">';
 echo '<select name ="statut" class="fondl" onchange="form.submit()">';
@@ -59,7 +57,10 @@ echo '<option value = "prospect" ';
 	echo ' > Prospect';
 echo '</select>';
 echo '</form>';
+echo '</td></tr>';
+echo '</table>';
 
+echo '<table style="width:70%;text-align:center;" border="0">';
 echo '<form method="post" action="'.$url_action_relances.'">';
 echo '<tr bgcolor="#D9D7AA">';
 echo '<td><strong>ID</strong></td>';

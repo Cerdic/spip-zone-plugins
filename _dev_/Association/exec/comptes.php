@@ -124,7 +124,7 @@ $somme_depenses += $data['depense'];
 echo '<tr> ';
 echo '<td class ='.$class.' style="text-align:right;">'.$data['id_compte'].'</td>';
 //echo '<td class ='.$class.'>'.$jour.'-'.$mois. '-'.$annee.'</td>';
-echo '<td class ='.$class.' style="text-align:right;">'.datefr($data['date']).'</td>';
+echo '<td class ='.$class.' style="text-align:right;">'.association_datefr($data['date']).'</td>';
 echo '<td class ='.$class.' style="text-align:right;">'.number_format($data['recette'], 2, ',', ' ').'</td>';
 echo '<td class ='.$class.' style="text-align:right;">'.number_format($data['depense'], 2, ',', ' ').'</td>';
 echo '<td class ='.$class.'>'.$data['imputation'].'</td>';

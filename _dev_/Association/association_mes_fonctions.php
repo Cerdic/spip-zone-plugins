@@ -130,29 +130,9 @@ $tables_principales['spip_asso_banques']= array(
 						"commentaire" 	=> "text NOT NULL",
 						),
 					
-'key' => array("PRIMARY KEY" => "id_banque")
-);	
-
-$tables_principales['spip_asso_activites'] = array(
-'field' => array(
-					"id_activite"		=> "bigint(20) NOT NULL auto_increment",
-					"id_evenement"	=> "bigint(20) NOT NULL",
-					"nom"				=> "text NOT NULL",
-					"id_adherent"		=> "bigint(20) NOT NULL",
-					"accompagne"	=> "text NOT NULL",
-					"date"				=> "date NOT NULL default '0000-00-00'",
-					"telephone"		=> "text NOT NULL",
-					"adresse"			=> "text NOT NULL",
-					"email"			=> "text NOT NULL",
-					"commentaire"	=> "text NOT NULL",
-					"montant"			=> "float NOT NULL default '0'",
-					"date_paiement"	=> "date NOT NULL default '0000-00-00'",
-					"statut"			=> "text NOT NULL",
-					),	
-					
-'key' => array("PRIMARY KEY" => "id_activite");
-);
-
+	'key' => array("PRIMARY KEY" => "id_banque")
+	);	
+	
 //
 // JOINTURES
 //
@@ -197,7 +177,7 @@ function boucle_ASSO_COMPTES($id_boucle, &$boucles) {
         return calculer_boucle($id_boucle, $boucles);
 }
 //
-// <BOUCLE(banques)>
+// <BOUCLE(banqueS)>
 //
 function boucle_ASSO_banqueS($id_boucle, &$boucles) {
         $boucle = &$boucles[$id_boucle];
@@ -216,15 +196,6 @@ function boucle_ASSO_CATEGORIES($id_boucle, &$boucles) {
         return calculer_boucle($id_boucle, $boucles);
 }
 
-//
-// <BOUCLE(ACTIVITES)>
-//
-function boucle_ASSO_ACTIVITES($id_boucle, &$boucles) {
-        $boucle = &$boucles[$id_boucle];
-        $id_table = $boucle->id_table;
-        $boucle->from[$id_table] =  "spip_asso_activites";  
-        return calculer_boucle($id_boucle, $boucles);
-}
 	// Page blanche //include_spip('base/association');
 	//include_spip('inc/plugin');
 function association_header_prive($flux){
@@ -235,6 +206,14 @@ function association_rediriger_javascript($url) {
 		echo '<script language="javascript" type="text/javascript">window.location.replace("'.$url.'");</script>';
 		exit();
 	}
-
+	
+//Conversion de date
+function association_datefr($date) { 
+	$split = split('-',$date); 
+	$annee = $split[0]; 
+	$mois = $split[1]; 
+	$jour = $split[2]; 
+return $jour.'-'.$mois.'-'.$annee; 
+} 
 
 ?>

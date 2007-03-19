@@ -214,7 +214,7 @@ echo '<td class ='.$class.'>'.$data["ville"].'</td>';
 //echo '<td class ='.$class.'>'.$data["telephone"].'</td>';
 echo '<td class ='.$class.' style="text-align:right;">'.$data["id_asso"].'</td>'; //référence interne
 echo '<td class ='.$class.'>'.$data["categorie"].'</td>';
-echo '<td class ='.$class.'>'.datefr($data['validite']).'</td>';
+echo '<td class ='.$class.'>'.association_datefr($data['validite']).'</td>';
 //echo '<td class ='.$class.' style="text-align:center;"><img src="/ecrire/img_pack/'.$puce.'" title="'.$title.'"></td>';
 //echo '<td class ='.$class.'>'.$data["remarques"].'</td>';
 echo '<td class ='.$class.'>';

@@ -10,18 +10,6 @@
 *  
 **/
 include_spip('inc/presentation');
-include_spip('association_mes_options');
-
-$nbfeuille=4;
-$nomfeuille[1]= "style01.css";
-$nomfeuille[2]="style02.css";
-$nomfeuille[3]="style03.css";
-$nomfeuille[4]="style04.css";
-
-srand((double)microtime()*1000000);
-
-$feuille=rand(1,$nbfeuille);
-//fin choix aleatoire
 
 function exec_dons(){
 global $connect_statut, $connect_toutes_rubriques;
@@ -86,7 +74,7 @@ while ($data = mysql_fetch_assoc($val))
 $class="pair";
 echo '<tr>';
 echo '<td class ='.$class.'>'.$data['id_don'].'</td>';
-echo '<td class ='.$class.'>'.datefr($data["date_don"]).'</td>';
+echo '<td class ='.$class.'>'.association_datefr($data["date_don"]).'</td>';
 echo '<td class ='.$class.'>'.$data["bienfaiteur"].'</td>';
 // echo '   <td class ='.$class.'></td>';
 //echo '   <td class ='.$class.'>'.$data['adresse'].'</td>';

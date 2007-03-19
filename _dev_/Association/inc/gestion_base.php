@@ -47,11 +47,11 @@ function asso_verifier_base(){
 		
 		if ($current_version<0.30){
 		spip_query("CREATE TABLE spip_asso_dons (id_don bigint(21) NOT NULL auto_increment, date_don date NOT NULL default '0000-00-00',   bienfaiteur text NOT NULL, id_adherent int(11) NOT NULL default '0', argent tinytext, colis text, valeur text NOT NULL, contrepartie tinytext, commentaire text, maj timestamp(14) NOT NULL, PRIMARY KEY  (id_don) ) TYPE=MyISAM AUTO_INCREMENT=1");
-			spip_query("DROP TABLE spip_asso_bienfaiteurs");	
-			spip_query("RENAME TABLE spip_asso_financiers TO spip_asso_banques");
-			spip_query("ALTER TABLE spip_asso_banques CHANGE id_financier id_banque, ADD date date NOT NULL AFTER solde");
-			spip_query("DROP TABLE spip_asso_financiers");		
-			spip_query("INSERT INTO spip_asso_banques (code,intitule) VALUES ('caisse','Caisse de l'association'),('banque','Compte bancaire'");
+			spip_query("DROP TABLE spip_asso_bienfaiteurs");
+			spip_query("DROP TABLE spip_asso_financiers");			
+//			spip_query("RENAME TABLE spip_asso_financiers TO spip_asso_banques");
+//			spip_query("ALTER TABLE spip_asso_banques CHANGE id_financier id_banque, ADD date date NOT NULL AFTER solde");
+			spip_query("INSERT INTO spip_asso_banques (code) VALUES ('caisse')");
 			spip_query("CREATE TABLE spip_asso_livres (id_livre tinyint(4) NOT NULL auto_increment, valeur text NOT NULL, libelle text NOT NULL, maj timestamp(14) NOT NULL, PRIMARY KEY  (id_livre) ) TYPE=MyISAM AUTO_INCREMENT=1");
 			spip_query("INSERT INTO spip_asso_livres (valeur, libelle) VALUES ('cotisation', 'Cotisations'), ('vente', 'Ventes'), ('don', 'Dons'), ('achat', 'Achats'), ('divers', 'Divers'), ('activite', 'Activités')");
 			spip_query("ALTER TABLE spip_asso_profil ADD dons text NOT NULL AFTER mail, ADD ventes text NOT NULL, ADD comptes text NOT NULL, ADD activites text NOT NULL ");

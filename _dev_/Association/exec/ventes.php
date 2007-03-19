@@ -79,14 +79,14 @@ else
    
 echo '<tr> ';
 echo '<td class ='.$class.' style="text-align:right">'.$data['id_vente'].'</td>';
-echo '<td class ='.$class.' style="text-align:right">'.datefr($data['date_vente']).'</td>';
+echo '<td class ='.$class.' style="text-align:right">'.association_datefr($data['date_vente']).'</td>';
 echo '<td class ='.$class.'>'.$data['article'].'</td>';
 echo '<td class ='.$class.'>'.$data['code'].'</td>';
 echo '<td class ='.$class.'>'.$data['acheteur'].'</td>';
 echo '<td class ='.$class.' style="text-align:right">'.$data['quantite'].'</td>';
 //echo '<td class ='.$class.' style="text-align:right">'.$data['prix_vente'].'&nbsp;&euro;</td>';
 //echo '<td class ='.$class.'>'.$data['don'].'</td>';
-echo '<td class ='.$class.' style="text-align:right">'.datefr($data['date_envoi']).'</td>';
+echo '<td class ='.$class.' style="text-align:right">'.association_datefr($data['date_envoi']).'</td>';
 //echo '<td class ='.$class.' style="text-align:right">'.$data['frais_envoi'].'&nbsp;&euro;</td>';
 echo '<td class ='.$class.' style="text-align:center"><a href="'.$url_edit_vente.'&id='.$data['id_vente'].'"><img src="'._DIR_PLUGIN_ASSOCIATION.'/img_pack/edit-12.gif" title="Mettre &agrave; jour la vente"></a>';
 echo '<td class ='.$class.' style="text-align:center"><input name="delete[]" type="checkbox" value='.$data['id_vente'].'></td>';
