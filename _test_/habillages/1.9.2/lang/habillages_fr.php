@@ -51,6 +51,9 @@ Si vous ne voulez pas donner la possibilit&eacute; de personnaliser s&eacute;par
 'aide_infos' => 'S&eacute;lectionnez ci-contre les rubriques d\'aide qui correspondent le mieux &agrave; ce que vous voulez faire. ',
 'aide_infos_titre' => 'Consultez l\'aide en ligne ',
 
+// C
+'config_base' => 'configuration',
+'config_base_acc' => 'Configuration (utilitrices et utilisateurs avanc&eacute;(e)s)',
 
 // E
 'extras_base' => 'extras                                                                 ',

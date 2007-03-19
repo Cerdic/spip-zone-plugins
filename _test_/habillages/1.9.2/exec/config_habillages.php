@@ -21,6 +21,7 @@ function exec_config_habillages() {
 	$gestion_extras = trim(_T('habillages:extras_base'));
 	$gestion_logos = trim(_T('habillages:logos_base'));
 	$gestion_icones = trim(_T('habillages:icones_base'));
+	$gestion_config = trim(_T('habillages:config_base'));
 	
 	$surligne = "";
 
@@ -167,33 +168,8 @@ EOF;
 
 	global $couleur_foncee;
 	
-// 	lire_metas();
-// 	$habillages_squelettes = basename($GLOBALS['meta']['habillages_squelettes']);
-// 	$habillages_styles = basename($GLOBALS['meta']['habillages_couleurs']);
-// 	//$habillages_logos = basename($GLOBALS['meta']['habillages_logos']);
-// 	
  	echo gros_titre(_T('habillages:tdb_titre'));
 	echo _T('habillages:accueil_general')."<br /><br />";
-// 	if ($habillages_squelettes != "") {
-// 	echo "<br />";
-// 	echo "<br />";
-// 	echo _T('habillages:accueil_general_squelettes')." ".$habillages_squelettes." [Capture]";
-// 	echo "&nbsp;<a href='".generer_url_ecrire('habillages_squelettes')."'>Modifier</a>";
-// 	}
-// 	if ($habillages_styles != "") {
-// 	echo "<br />";
-// 	echo "<br />";
-// 	echo _T('habillages:accueil_general_styles')." ".$habillages_styles." [Capture]";
-// 	echo "&nbsp;<a href='".generer_url_ecrire('habillages_styles')."'>Modifier</a>";
-// 	}
-// 	echo "<br />";
-// 	echo "<br />";
-// 	echo _T('habillages:accueil_general_logos');
-// 	echo "<br />";
-// 	echo "<br />";
-// 	echo _T('habillages:accueil_general_maintenance');
-// 	echo "<br />";
-// 	echo "<br />";
 	
 	# Etablir les cases qui sont checkees.
 	lire_metas();
@@ -255,6 +231,9 @@ EOF;
 	echo "<div class='used'>";
 	echo "<input type='checkbox' name='".$gestion_logos."' value='".$gestion_logos."'$checked_logos disabled> "._T('habillages:logos_base_acc')."</div>";
 	echo "<input type='checkbox' name='".$gestion_icones."' value='".$gestion_icones."'$checked_icones> "._T('habillages:icones_base_acc')."<br />";
+	# Remonter le codage a partir de checked_skel...
+	echo "<input type='checkbox' name='".$gestion_config."' value='".$gestion_config."'$checked_skel> "._T('habillages:config_base_acc')."<br />";
+
 	fin_boite_info();
 	
 	echo "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />";
@@ -268,7 +247,6 @@ EOF;
 	echo "</div>";
 	echo "</form>";
 	
-	//echo "<a href='".generer_url_ecrire('admin_lang', 'module=habillages')."'>Modifier les textes</a><br /><br />";
 	fin_page();
 
 }
