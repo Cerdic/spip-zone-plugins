@@ -46,7 +46,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 		  ."', $champhelp)\"")
 		."><img src='"
 		.$img
-		."' height='16' width='16' alt=\"".$a."\" /></a>";
+		."' style=\"height: 16px; width: 16px; background-position: center center;\" alt=\"$a\"/></a>";
 }
 
 // sert a construire les sousbarre
@@ -238,6 +238,7 @@ $tableau_formulaire = '
 
 // construit un tableau de raccourcis pour un noeud de DOM
 
+// http://doc.spip.org/@afficher_barre
 function afficher_barre($champ, $forum=false, $lang='') {
 	global $spip_lang, $options, $spip_lang_right, $spip_lang_left, $spip_lang;
 	static $num_barre = 0;
@@ -259,6 +260,12 @@ function afficher_barre($champ, $forum=false, $lang='') {
     $toolbox .= afficher_gestion_lien($champ);
 	$toolbox .= afficher_gestion_ancre($champ);
     $toolbox .= afficher_gestion_remplacer($champ, $champhelp);
+//un pipeline pour ajouter une toolbox
+    $params=array($champ,$champhelp,$spip_lang);
+    $add=pipeline("BarreTypoEnrichie_toolbox",$params);
+    if ($params!=$add)
+		$toolbox .= $add;
+
 //
 
 	$ret .= "<table class='spip_barre' style='width:auto;' cellpadding='0' cellspacing='0' border='0' summary=''>";
