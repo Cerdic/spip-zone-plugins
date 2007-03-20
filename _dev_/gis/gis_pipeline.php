@@ -77,7 +77,8 @@ function gis_insertar_head($flux){
 					}
 				});
 			}
-			</script>';
+			</script>
+			<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/googlemap.js"></script>';
 		}
 
 	
@@ -95,10 +96,9 @@ function gis_insertarp_head($flux){
 		
 		$flux.='
 <!-- scripts head plugin gis _______________________.-->
-<script src="http://maps.google.com/maps?file=api&v=2&key='.$row['value'].'"></script>';
-// esta li–a non vai. no lugar de functions.js Ž functions.php, pero creo que non Ž necesaria____:<script src="http://www.escoitar.org/loudblog/custom/templates/berio/functions.js" type="text/javascript"></script>
-		$flux.='
-<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/swfobject.js"></script>';
+<script src="http://maps.google.com/maps?file=api&v=2&key='.$row['value'].'"></script>
+<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/swfobject.js"></script>
+<script type="text/javascript" src="'._DIR_PLUGIN_GIS.'js/googlemap.js"></script>';
 		
 	
 	return $flux;
