@@ -16,7 +16,7 @@ text-indent:0;
 border-bottom:1px dotted;
 }
 
-.letitre > h2, #EntetePage > h2{
+.letitre > h2, #EntetePage > h2, #EnteteArticle > h2{
 border:none;
 }
 
@@ -298,7 +298,7 @@ div#barre_droite ul ul{
 	list-style-type:disc;
 }
 
-div#barre_droite li.on, div#barre_droite li.on a{
+div#barre_droite li.on, div#barre_droite li.on a, div#barre_droite dt.on a{
 	color:#d37324;
 	font-weight:bold;
 }
@@ -976,7 +976,7 @@ div#forum dl dl dd{
 	background-color:#FFFF66;
 }
 .spip_puce{
-	list-style-position:inside;
+	/*list-style-position:inside;*/
 }
 blockquote.spip{
 	margin-left :5px 0 5px 20px;
@@ -1160,4 +1160,7 @@ height: 100px;
 font-size:11px !important;
 margin: 0;
 padding: 0;
+}
+
+#bloc_navigation{
 }
