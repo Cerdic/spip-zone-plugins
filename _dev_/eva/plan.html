@@ -5,42 +5,6 @@
 	<!-- Lien vers le backend pour navigateurs eclaires -->
 	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="spip.php?page=backend" />
 	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_breves:>" href="spip.php?page=backend-breves" />
-	
-	<?php      if(floor(phpversion()) < 4)	{
-		// La version de PHP est inférieure à 4,
-		// la fonction in_array n existe donc pas
-		function in_array($member, $array)
-		{
-			reset($array);
-			while (list($k, $v) = each($array)) {
-				if ($v == $member) return true;
-			}
-			return false;
-		}
-	}
-
-	// récupération de la hiérarchie courante
-	$hierarchie = array();
-	<BOUCLE_recup_rub(RUBRIQUES){id_rubrique}>
-		$le_secteur = #ID_SECTEUR; 
-		<BOUCLE_recup_hierarchie(HIERARCHIE){id_rubrique}>
-			$hierarchie[] = #ID_RUBRIQUE;
-		</BOUCLE_recup_hierarchie>
-		$hierarchie[] = #ID_RUBRIQUE;
-		$actuelle = rub#ID_RUBRIQUE;
-	</BOUCLE_recup_rub>
-	<BOUCLE_recup_art(ARTICLES){id_article}>
-		$actuelle = art#ID_ARTICLE;
-	</BOUCLE_recup_art>
-
-	// inclusion du script de gestion des layers
-	include(find_in_path('fonction_deplier.php'));
-	afficher_script_layer();
-	
-	$deplier = 0;
-	$sous_deplier = 0;
-	?>
-	
 </head>
 <body>
 	<div id="NoMenu">		
@@ -67,99 +31,16 @@
 				<:plan_site:>
 			</div>
 			<br class="clear" />
+		#FORMULAIRE_RECHERCHE
 		</div>
 
 		<!-- début du contenu -->
 
 		<div id="Contenu">
-			<BOUCLE_secteurs(RUBRIQUES){id_parent=0}{id_secteur!=1}{par num titre}>
-				
-			<!-- Secteurs -->
-			<div class="secteur">
-		
-				[<h3 class="titre">
-					<a href="#URL_RUBRIQUE"[ title="(#DESCRIPTIF|supprimer_tags)"]>(#TITRE|supprimer_numero)</a>
-				</h3>]
-						
-				<B_breves_secteur>
-				<div class="breves">
-					<h4><:breves:></h4>
-					<ul>
-						<BOUCLE_breves_secteur(BREVES){id_secteur}{par date}{inverse}{0,5}>
-						<li><a href="#URL_BREVE">[(#TITRE|supprimer_numero)]</a></li>
-						</BOUCLE_breves_secteur>
-					</ul>
-				</div>
-				</B_breves_secteur>
-				
-				<ul class="plan">
-				
-					<B_articles_secteur>
-					<!-- Articles publiés -->
-					<BOUCLE_articles_secteur(ARTICLES){id_rubrique}{par num titre}>
-					<li class="articles"><img src="plugins/eva/images/puceoff.gif" alt="-" /> <a href="#URL_ARTICLE"[ title="(#DESCRIPTIF|supprimer_tags)"]>[(#TITRE|supprimer_numero)]</a></li>
-					</BOUCLE_articles_secteur>
-					
-					<BOUCLE_rubriques(RUBRIQUES){id_parent}{par num titre}>
-					<?php $id = #ID_RUBRIQUE; ?>
-					<BOUCLE_nb_sous_rubriques(RUBRIQUES){id_parent}>
-					<?php ${'nb'.$id} = #TOTAL_BOUCLE;
-							$sous_deplier = 1; ?>
-					</BOUCLE_nb_sous_rubriques>
-					<BOUCLE_nb_sous_articles(ARTICLES){id_rubrique}>
-					<?php ${'nb'.$id} = #TOTAL_BOUCLE;
-							$sous_deplier = 1; ?>
-					</BOUCLE_nb_sous_articles>
-					<?php $sous_deplier = 0; ?>
-					<//B_nb_sous_articles>
-					<//B_nb_sous_rubriques>
-					
-					<li class="rubriques"><strong><?php
-						if ($sous_deplier == 1) {
-							if (in_array(#ID_RUBRIQUE, $hierarchie)) {
-								echo bouton_block_visible('rub#ID_RUBRIQUE');
-							} else {
-								echo bouton_block_invisible('rub#ID_RUBRIQUE');
-							}
-						} else {
-							echo '<img src="plugins/eva/images/puce'.(rub#ID_RUBRIQUE == $actuelle ? 'on' : 'off').'.gif" alt="-" /> ';
-						}?>[<a href="#URL_RUBRIQUE"[ title="(#DESCRIPTIF|supprimer_tags)"]>(#TITRE|supprimer_numero)</a>]</strong>
-
-						<?php if ($nb#ID_RUBRIQUE > 0) {
-								if (in_array(#ID_RUBRIQUE, $hierarchie)) {
-									echo debut_block_visible('rub#ID_RUBRIQUE');
-								} else {
-									echo debut_block_invisible('rub#ID_RUBRIQUE');
-								} ?>
-						
-						<ul>
-							<BOUCLE_articles_sous_rubriques(ARTICLES){id_rubrique}{par num titre}>
-							<li class="articles"><img src="plugins/eva/images/puceoff.gif" alt="-" /> <a href="#URL_ARTICLE"[ title="(#DESCRIPTIF|supprimer_tags)"]>[(#TITRE|supprimer_numero)]</a></li>
-							</BOUCLE_articles_sous_rubriques>
-							
-							<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
-						</ul>
-						
-						<?php echo fin_block('rub#ID_RUBRIQUE'); } ?>
-						
-					</li>
-					</BOUCLE_rubriques>
-					
-				</ul>
-			
-			</div>
-			</BOUCLE_secteurs>
-			
-			[<!-- Notes de bas de page -->
-			<div class="notes">
-				<h4><:notes_bas_page:></h4>
-				<div>(#NOTES)</div>
-			</div>]
-
+			<INCLURE{fond=menu}{tout="oui"}>
 		</div>
 		<br class="clear" />
 		<!-- fin du contenu -->
-		
 		<INCLURE{fond=pied}{skel=#SQUELETTE}>
 	</div>
 </body>

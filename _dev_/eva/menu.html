@@ -17,7 +17,7 @@ $hierarchie = array();
 <ul>
 	<li[ class="(#ENV{accueil}|=={'1'}|?{'on','off'})"]>
 		<img src="plugins/eva/images/[(#ENV{accueil}|=={'1'}|?{'ledlightblue.png','ledblue.png'})]" onclick="location.href('/')" style="cursor:pointer" align="absmiddle" alt="Retour à l’accueil" />
-		<a href="#URL_SITE_SPIP" class="petites_caps[ (#ENV{accueil}|=={'1'}|?{'on','off'})]">
+		<a href="#URL_SITE_SPIP" class="[(#ENV{accueil}|=={'1'}|?{'on','off'})]">
 			<:accueil_site:>
 		</a>
 	</li>
@@ -29,14 +29,14 @@ $hierarchie = array();
 		<script type="text/javascript">
 			liste_cache.push("#ID_RUBRIQUE");
 		</script>
-			<a href="#URL_RUBRIQUE" class="liens_secteur petites_caps[ (#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'on', ''})]">
+			<a href="#URL_RUBRIQUE"[ title="(#DESCRIPTIF|supprimer_tags)"] class="liens_secteur[ (#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'on', ''})]">
 				[(#TITRE|supprimer_numero)] <?php /* Titres des secteurs */ ?>
 			</a>
 	<B_articles>
 		<ul class="liste_articles_menu">
 		<BOUCLE_articles(ARTICLES){id_rubrique}{par num titre}>
 				<li class="articles_menu">
-					<a class="liens_articles[ (#EXPOSE)]" href="#URL_ARTICLE" name="art_#ID_ARTICLE">
+					<a class="liens_articles[ (#EXPOSE)]" href="#URL_ARTICLE"[ title="(#DESCRIPTIF|supprimer_tags)"] name="art_#ID_ARTICLE">
 						[(#TITRE|supprimer_numero)] <?php /*Titres des articles*/ ?>
 					</a>
 				</li> <?php /* A : ferme B */ ?>
@@ -49,7 +49,7 @@ $hierarchie = array();
 		<BOUCLE_rubriques(RUBRIQUES){id_parent}{par num titre}>
     			<li class="liste_rubriques_li [ (#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'on', ''})]" id="#ID_RUBRIQUE"> <?php /* B : ouvre A */ ?>
 					<img style="cursor:pointer" onclick="javascript:alterner_visibilite(#ID_RUBRIQUE, 'non')" src="plugins/eva/images/[(#EXPOSE{folder_blue_open.png,folder_blue.png})]"  alt="Déplier/Refermer la rubrique" name="puce_#ID_RUBRIQUE" align="absmiddle" />
-					<a class="liens_rubriques[ (#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'on', ''})]" href="#URL_RUBRIQUE">
+					<a class="liens_rubriques[ (#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'on', ''})]" href="#URL_RUBRIQUE"[ title="(#DESCRIPTIF|supprimer_tags)"]>
 						<strong>[(#TITRE|supprimer_numero)]</strong>
 					</a> <?php /* Titres des rubriques */ ?>
 					<script type="text/javascript">
@@ -84,10 +84,28 @@ echo "
 ";
 }
 ?>
+[(#ENV{tout}|=={'oui'}|?{'<script type="text/javascript">tout_ouvrir()</script>',''})]
+
 </ul>
 </div>
-<div class="bloc">
+<div class="sommaire[ (#ENV{tout}|=={'oui'}|?{'invisible',''})]" id="bloc_navigation">
+	<ul>
+		<li><img src="plugins/eva/images/[(#ENV{plan_mots}|=={'oui'}|?{'ledlightblue.png','ledblue.png'})]" onclick="location.href('/')" style="cursor:pointer" align="absmiddle" alt="Retour à l’accueil" />
+			<a class="navigation[ (#ENV{plan_mots}|=={'oui'}|?{'on', ''})]" href="?page=plan-mots" title="Navigation par mots-clés">
+				<:mots_clefs:>
+			</a>
+		</li>
+	</ul>
+	<ul>
+		<li><img src="plugins/eva/images/[(#ENV{tout}|=={'oui'}|?{'ledlightblue.png','ledblue.png'})]" onclick="location.href('/')" style="cursor:pointer" align="absmiddle" alt="Retour à l’accueil" />
+			<a class="navigation[ (#ENV{tout}|=={'oui'}|?{'on', ''})]" href="?page=plan" title="Plan du site">
+				<:plan_site:>
+			</a>
+		</li>
+	</ul>
+</div>
+<div class="bloc[ (#ENV{tout}|=={'oui'}|?{'invisible',''})]">
 	<h4 class="center">Chercher dans le site</h4>
-	<div style="text-align:center">#FORMULAIRE_RECHERCHE</div>
+	<div class="center">#FORMULAIRE_RECHERCHE</div>
 </div>
 <div class="clear"></div>

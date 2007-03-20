@@ -22,3 +22,15 @@ function alterner_visibilite(liste, onload){
 		}
 	}
 }
+
+function tout_ouvrir(){
+	var el  = document.getElementsByTagName("LI");
+	for(var g=0; g<el.length; g++){
+			el[g].style.display="block";
+			el[g].style.backgroundColor="#ffffff";
+			el[g].style.fontSize="15px";
+	}
+	document.getElementById("Contenu").style.width="80%";
+	document.getElementById("Contenu").style.left="10%";
+	
+}

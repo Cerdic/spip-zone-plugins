@@ -7,20 +7,22 @@
 	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="spip.php?page=backend" />
 	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_breves:>" href="spip.php?page=backend-breves" />
 </head>
-<body>
+<script type="text/javascript" src="plugins/eva/javascript/fonctions_afficher_resumes.js"></script>
+
+<body onload="afficher_resume('','articles'); afficher_resume('','sites'); afficher_resume('','breves')">
 
 <div id="Page">
 	<div id="EntetePage">
 		<?php /* affichage de la barre de boutons */ ?>
 		<ul class="boutons">
 			<BOUCLE_boutons_rubriques(RUBRIQUES){titre_mot = bouton}{par num titre}>
-			<li><a href="#URL_RUBRIQUE"  title="[(#TITRE|supprimer_numero)][ - (#DESCRIPTIF|supprimer_tags)]">[<span>(#TITRE|supprimer_numero)</span>]#LOGO_RUBRIQUE</a></li>
+			<li><a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)][ - (#DESCRIPTIF|supprimer_tags)]">[<span>(#TITRE|supprimer_numero)</span>]#LOGO_RUBRIQUE</a></li>
 			</BOUCLE_boutons_rubriques>
 			<BOUCLE_boutons_articles(ARTICLES){titre_mot = bouton}{par num titre}>
-			<li><a href="#URL_ARTICLE"  title="[(#TITRE|supprimer_numero)][ - (#DESCRIPTIF|supprimer_tags)]">[<span>(#TITRE|supprimer_numero)</span>]#LOGO_ARTICLE_RUBRIQUE</a></li>
+			<li><a href="#URL_ARTICLE" title="[(#TITRE|supprimer_numero)][ - (#DESCRIPTIF|supprimer_tags)]">[<span>(#TITRE|supprimer_numero)</span>]#LOGO_ARTICLE_RUBRIQUE</a></li>
 			</BOUCLE_boutons_articles>
 			<BOUCLE_boutons_sites(SITES){id_rubrique=2}{par nom_site}>
-			<li><a href="#URL_SITE"  title="[(#NOM_SITE|supprimer_numero)][ - (#DESCRIPTIF|supprimer_tags)]">[<span>(#NOM_SITE|supprimer_numero)</span>]#LOGO_SITE</a></li>
+			<li><a href="#URL_SITE" title="[(#NOM_SITE|supprimer_numero)][ - (#DESCRIPTIF|supprimer_tags)]">[<span>(#NOM_SITE|supprimer_numero)</span>]#LOGO_SITE</a></li>
 			</BOUCLE_boutons_sites>
 		</ul>
 		
@@ -51,12 +53,14 @@
 		<div id="breves">
 			<h4 class="center"><:dernieres_breves:></h4>
 			<dl>
-				<BOUCLE_les_breves(BREVES){id_secteur != 1}{par date}{inverse}{doublons}{pagination 5}>
+				<div class="suite"><a href="javascript:afficher_resume('clic','breves')"><span name="message_resumes_breves" id="message_resumes_breves">Afficher / masquer</span> les résumés</a>
+				</div>
+				<BOUCLE_les_breves(BREVES){id_secteur != 1}{par date}{inverse}{doublons}{pagination 10}>
 				<dt[ class="(#EDIT{titre})"]>#ANCRE_PAGINATION
-					[<strong>(#TITRE|supprimer_numero)</strong>]<em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em>
+					[<strong><a href="#URL_BREVE">(#TITRE|supprimer_numero)</a></strong>]<em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em>
 				</dt>
-				<dd[ class="(#EDIT{texte})"]>[(#TEXTE)]
-					<?php /*<div class="suite"><a href="#URL_BREVE"><:lire_suite:></a></div>]*/ ?>
+				<dd class="invisible[ (#EDIT{texte})"] name="introduction_opt_breves" id="introduction_opt_breves">
+					[(#TEXTE)]
 				</dd>
 				</BOUCLE_les_breves>
 			</dl>
@@ -71,7 +75,7 @@
 			#ANCRE_PAGINATION
 			<h4 class="center"><:nouveautes_web:></h4>
 			<dl>
-				<div class="suite"><a href="javascript:afficher_resume('clic')"><span name="message_resumes" id="message_resumes">Afficher / masquer</span> les résumés</a>
+				<div class="suite"><a href="javascript:afficher_resume('clic', 'sites')"><span name="message_resumes_sites" id="message_resumes_sites">Afficher / masquer</span> les résumés</a>
 				</div>
 				<BOUCLE_les_derniers_sites(SITES){id_secteur != 1}{par date}{inverse}{0,30}{doublons}{pagination}{pagination 5}>
 				<BOUCLE_rubriques_des_sites(RUBRIQUES){id_rubrique}>
@@ -79,9 +83,9 @@
 					#SET{url_rubrique_site,#URL_RUBRIQUE}
 				</BOUCLE_rubriques_des_sites>
 				<dt[ class="(#EDIT{nom_site})"]>
-					<a href="#URL_SITE">[<div class="invisible"  name="introduction_opt">(#LOGO_SITE||image_reduire{48})</div>][<strong>(#NOM_SITE|supprimer_numero)</strong>]</a> <em>(rubrique <a href="#GET{url_rubrique_site}">#GET{titre_rubrique_site}</a>)</em>
+					<a href="#URL_SITE">[<div class="invisible" name="introduction_opt_sites" id="introduction_opt_sites">(#LOGO_SITE||image_reduire{48})</div>][<strong>(#NOM_SITE|supprimer_numero)</strong>]</a> <em>(rubrique <a href="#GET{url_rubrique_site}">#GET{titre_rubrique_site}</a>)</em>
 				</dt>
-				<dd class="invisible[ (#EDIT{descriptif})]" id="introduction_opt" name="introduction_opt">
+				<dd class="invisible[ (#EDIT{descriptif})]" id="introduction_opt_sites" name="introduction_opt_sites">
 					[(#DESCRIPTIF)]<br class="clear" />
 				</dd>
 				</BOUCLE_les_derniers_sites>
@@ -122,9 +126,9 @@
 						#SET{url_rubrique,#URL_RUBRIQUE}
 					</BOUCLE_la_rubrique_du_dernier_article>
 				<dt [class="(#EDIT{titre})"]>
-					<a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE)][<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)], dans la rubrique <a href="#GET{url_rubrique}">#GET{titre_rubrique}</a></em>
+					<a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE||image_reduire{75})][<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)], dans la rubrique <a href="#GET{url_rubrique}">#GET{titre_rubrique}</a></em>
 				</dt>
-				<dd[  class="(#EDIT{descriptif})"]>[(#INTRODUCTION)
+				<dd[ class="(#EDIT{descriptif})"]>[(#INTRODUCTION)
 					<div class="suite"><a href="#URL_ARTICLE"><:lire_suite:></a></div>]
 					<br class="clear" />
 				</dd>
@@ -133,16 +137,16 @@
 			<B_les_articles_suivants>
 			#ANCRE_PAGINATION
 			<dl class="suivants">
-				<div class="suite"><a href="javascript:afficher_resume('clic')"><span name="message_resumes" id="message_resumes">Afficher / masquer</span> les résumés</a></div>
+				<div class="suite" id="pas_pour_ie"><a href="javascript:afficher_resume('clic','articles')"><span name="message_resumes_articles" id="message_resumes_articles">Afficher / masquer</span> les résumés</a></div>
 				<BOUCLE_les_articles_suivants(ARTICLES){id_secteur != 1}{par date}{inverse}{pagination}{doublons}>
 					<BOUCLE_les_rubriques_des_derniers_articles(RUBRIQUES){id_rubrique}>
 						#SET{titre_rubrique,#TITRE}
 						#SET{url_rubrique,#URL_RUBRIQUE}
 					</BOUCLE_les_rubriques_des_derniers_articles>
 				<dt[ class="(#EDIT{titre})"]>
-					<a href="#URL_ARTICLE">[<div class="invisible"  name="introduction_opt">(#LOGO_ARTICLE_RUBRIQUE||image_reduire{48})</div>][<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)], dans la rubrique <a href="#GET{url_rubrique}">[(#GET{titre_rubrique}|supprimer_numero)]</a></em>
+					<a href="#URL_ARTICLE">[<div class="invisible" id="introduction_opt_articles" name="introduction_opt_articles">(#LOGO_ARTICLE_RUBRIQUE||image_reduire{48})</div>][<strong>(#TITRE|supprimer_numero)</strong>]</a><em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)], dans la rubrique <a href="#GET{url_rubrique}">[(#GET{titre_rubrique}|supprimer_numero)]</a></em>
 				</dt>
-				[<dd class="invisible" id="introduction_opt" name="introduction_opt">(#INTRODUCTION)
+				[<dd class="invisible" id="introduction_opt_articles" name="introduction_opt_articles">(#INTRODUCTION)
 					<div class="suite"><a href="#URL_ARTICLE"><:lire_suite:></a></div><br class="clear" />
 				</dd>]
 				</BOUCLE_les_articles_suivants>
@@ -164,11 +168,7 @@ if(!isset($_GET["modifies"])){
 
 	</div>
 	<?php /* fin du contenu*/ ?>
-<script type="text/javascript" src="plugins/eva/javascript/fonctions_afficher_resumes.js"></script>
-<script type="text/javascript">afficher_resume();</script>
-	
 	<br class="clear" />
-
 	<?php /* Pied de page*/ ?>
 	<INCLURE{fond=pied}{skel=#SQUELETTE}>
 </div>

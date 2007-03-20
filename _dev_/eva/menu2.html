@@ -84,10 +84,28 @@ echo "
 ";
 }
 ?>
+[(#ENV{tout}|=={'oui'}|?{'<script type="text/javascript">tout_ouvrir()</script>',''})]
+
 </ul>
 </div>
-<div class="bloc">
+<div class="sommaire[ (#ENV{tout}|=={'oui'}|?{'invisible',''})]" id="bloc_navigation">
+	<ul>
+		<li>
+			<a class="navigation[ (#ENV{plan_mots}|=={'oui'}|?{'on', ''})]" href="?page=plan-mots">
+				<:mots_clefs:>
+			</a>
+		</li>
+	</ul>
+	<ul>
+		<li>
+			<a class="navigation[ (#ENV{tout}|=={'oui'}|?{'on', ''})]" href="?page=plan">
+				<:plan_site:>
+			</a>
+		</li>
+	</ul>
+</div>
+<div class="bloc[ (#ENV{tout}|=={'oui'}|?{'invisible',''})]">
 	<h4 class="center">Chercher dans le site</h4>
-	<div style="text-align:center">#FORMULAIRE_RECHERCHE</div>
+	<div class="center">#FORMULAIRE_RECHERCHE</div>
 </div>
 <div class="clear"></div>

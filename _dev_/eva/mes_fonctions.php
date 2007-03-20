@@ -29,10 +29,10 @@ if (preg_match('/\{\{\{/', $texte) || preg_match('/\{2\{/', $texte)){
 function ancrer($texte){
 $texte=preg_replace(
 	'/(\{\{\{)(.*?)(\}\}\})/',
-	'$1<a href="#haut" class="haut" title="Retour au sommaire"><img border="none" src="plugins/eva/images/2uparrow.png" /></a><a class="sommaire_article" name="sommaire_@num_ordre@">$2</a>$3',
+	'$1<a href="#haut" class="haut" title="Retour au sommaire"><img class="spip_logos" border="none" src="plugins/eva/images/2uparrow.png" /></a><a class="sommaire_article" name="sommaire_@num_ordre@">$2</a>$3',
 	preg_replace(
 		'/(\{2\{)(.*?)(\}2\})/',
-		'$1<a href="#haut" class="haut" title="Retour au sommaire"><img border="none" src="plugins/eva/images/2uparrow.png" /></a><a class="sommaire_article" name="sommaire_@num_ordre@">$2</a>$3',
+		'$1<a href="#haut" class="haut" title="Retour au sommaire"><img class="spip_logos" border="none" src="plugins/eva/images/2uparrow.png" /></a><a class="sommaire_article" name="sommaire_@num_ordre@">$2</a>$3',
 	$texte)
 	);
 

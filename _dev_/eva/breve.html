@@ -31,34 +31,37 @@
 			<br class="clear" />
 		</div>
 		
-
+	<div id="barre_droite">
+		<B_les_breves>
+		<!--affichage des brèves -->
+		<div id="breves">
+			<h4 class="center"><:breves:></h4>
+			<dl>
+				<BOUCLE_les_breves(BREVES){id_secteur}{par date}{inverse}{0,5}{doublons}>
+				<dt[ class="(#EDIT{titre}) (#EXPOSE)"]>
+					[<strong><a href="#URL_BREVE">(#TITRE|supprimer_numero)</a></strong>]<em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em>
+				</dt>
+ 				</BOUCLE_les_breves>
+			</dl>		</div>
+		</B_les_breves>
+			
+		<BOUCLE_mots_exclure(MOTS){id_breve}{titre=bouton}{doublons}>
+		</BOUCLE_mots_exclure>
+		<B_mots>
+		<!--affichage des mots-clés -->
+		<div id="groupesmots">
+			<h4 class="center"><:mots_clefs:></h4>
+			<ul>
+				<BOUCLE_mots(MOTS){id_breve}{doublons}>
+				<li><a href="#URL_MOT">[<strong>(#TITRE|supprimer_numero)</strong>]</a></li>
+				</BOUCLE_mots>
+			</ul>
+		</div>
+		</B_mots>
+	</div>
 		<!-- début du menu -->
 		<div id="Menu">
 			<INCLURE{fond=menu}{id_rubrique}>
-			
-			<B_breves>
-			<!--affichage des brèves de la même rubrique -->
-			<div class="bloc">
-				<h4><:autres_breves:></h4>
-				<ul>
-					<BOUCLE_breves(BREVES){id_secteur}{par date}{inverse}>
-					<li[ class="(#EXPOSER|on,off)"]><a href="#URL_BREVE">[<strong>(#TITRE|supprimer_numero)</strong>]</a></li>
-					</BOUCLE_breves>
-				</ul>
-			</div>
-			</B_breves>
-			
-			<B_mots>
-			<!--affichage des mots-clés -->
-			<div class="bloc">
-				<h4><:mots_clefs:></h4>
-				<ul>
-					<BOUCLE_mots(MOTS){id_breve}>
-					<li><a href="#URL_MOT">[<strong>(#TITRE|supprimer_numero)</strong>]</a></li>
-					</BOUCLE_mots>
-				</ul>
-			</div>
-			</B_mots>
 			
 			<B_forums_liens>
 			<!--affichage des messages du forum -->

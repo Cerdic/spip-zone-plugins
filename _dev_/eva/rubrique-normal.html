@@ -39,11 +39,8 @@
 			<dl>
 				<BOUCLE_les_breves(BREVES){id_secteur}{par date}{inverse}{0,5}{doublons}>
 				<dt[ class="(#EDIT{titre})"]>
-					[<strong>(#TITRE|supprimer_numero)</strong>]<em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em>
+					[<strong><a href="#URL_BREVE">(#TITRE|supprimer_numero)</a></strong>]<em>[, (#DATE|jour)][ (#DATE|nom_mois)][ (#DATE|annee)]</em>
 				</dt>
-				<dd[ class="(#EDIT{texte})"]>[(#TEXTE)]
-					<?php /*<div class="suite"><a href="#URL_BREVE"><:lire_suite:></a></div>]*/ ?>
-				</dd>
  				</BOUCLE_les_breves>
 			</dl>		</div>
 		</B_les_breves>
