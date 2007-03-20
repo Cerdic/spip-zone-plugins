@@ -221,7 +221,7 @@ EOF;
 	$checked_icones = " checked='checked'";
 	}
 	
-	if ($GLOBALS['meta']['habillages_config_on'] == "non") {
+	if ($GLOBALS['meta']['habillages_config_on'] == "non" OR $GLOBALS['meta']['habillages_config_on'] == "") {
 	$checked_config = "";
 	}
 	else {
